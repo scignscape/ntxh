@@ -1,0 +1,33 @@
+
+`documentclass ->> 10pt,twocolumn -> article ;;
+
+`input<nhvm/nhv-setup-commands>;
+`input<nhvm/nhv-sdi-commands>;
+`input<nhvm/nhv-deco-commands>;
+`input<nhvm/nhv-sdi-shell-commands>;
+
+`include<inc/commands>;
+
+`document,
+
+`title.hgxf`
+
+`p.
+The hgxf.
+`p`
+
+
+;;~~
+`addcontentsline -> toc -> section -> 
+From `dq.Naturalizing Phenomenology` ... ;;
+~~;;
+
+
+;;~~
+`input<man/intro/intro.ngml>;
+`input<man/section1/section1.ngml>;
+~~;;
+
+
+`document`
+

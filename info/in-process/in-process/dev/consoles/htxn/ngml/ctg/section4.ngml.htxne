@@ -1,0 +1,5593 @@
+## htxne
+#
+`[//]Cognitive and Computational ProcessesAny attempt to bridge Computational Linguistics and
+Cognitive Grammar or Phenomenology must solicit one or severalfounding analogies, linking phenomena on the
+formal/computational side with those on the
+cognitive/computational side.  Here, I will start from
+the analogy ofcognitiveandcomputationalprocess,
+or genericallyprocess(of either variety).
+Processes, per se, I will
+leave undefined, although acomputationalprocess
+can be considered roughly analogous to a single
+procedure implemented in a computer programming language.
+The story I want to tell goes something like this: understanding
+language involves many cognitive processes, many of
+which are subtly determined by each exact language artifact
+and the context where it is created.  Properly understanding a
+piece of language depends on correctly weaving together
+the various processes involved in understanding its
+component parts, and the structure of the
+multi-process integration is suggested by the grammar of
+the artifact.  Grammar, in a nutshell, uses relationships
+between words to evoke relationships between
+cognitive processes.My formal elaboration of this model will be inspired at an
+elementary level by processalgebrain the computational
+setting, as well as appliedtype theory.
+Inter-process relations are the core topic of Process
+Algebra, including sequentiality (one process followed by
+another) and concurrency (one process executing alongside
+another).  In practice, detailed research around Process Algebra
+seems to focus especially on concurrency, perhaps because
+this is the more complex area of application
+(designing computer systems which can run multiple threads in
+parallel).  It is likewise tempting to
+imagine that cognitive-linguistic processes exhibit some
+degree of parallelism, so that the various pieces of
+understandingfall into placetogether as we grasp
+the meaning of a sentence (henceforth usingsentenceas a
+representative example of a mid-size language artifact in general).
+Nevertheless, I will focus more onsequentialrelations between
+processes, suggesting a language model (even if rather idealized)
+where cognitive processes unfold in a temporal order.On both the cognitive and computational side, temporality is relative
+rather than quantitative: the significant detail is notbeforeandafterin the sense of measuring time but rather how
+one process logically precedes another in effects and prerequisites.
+No theoretical importance is attached tohow longit takes
+before processes finish, or how much time elapses between
+antecedent and subsequent processes (in contrast to subjects like
+optimization theory, where such details are often significant).
+We can set aside notions of a temporal continuum
+where subsequent processes occupy disjoint, extended time-regions;
+instead, one process follows another if anything affected by the first
+process reflects this effect at the onset of the second process.
+Time, in this sense, only exists as manifest in the variations
+of any state relevant to processes `{-} in the computational
+context, in the overall state of the computer (and potentially
+other computers on a network) where a computation is
+carried out.  Two times are different only insofar as the
+overall state at one time differs from the state at the second time.
+Time isdiscretebecause the relevant states are discrete, and
+because beneath a certain scale of time delta there is no
+possibility of state change.Analogously, in language, I suggest that we set aside notions of
+an unfolding process reflecting the temporality of expression.
+Of course, the fact that parts of a sentence are heard first
+biases understanding somewhat; and speakers often exploit
+temporality for rhetorical effect, elonging the pronunciation
+of words for emphasis, or pausing before words to
+signal an especially calculated word choice, for example.
+These data are not irrelevant, but, for core semantic and
+syntactic analysis, I will nonetheless treat a sentence as
+an integrated temporal unit, with no value attributed to
+temporal ordering amongst words except insofar as temporal
+order establishes word order and word order has grammatical
+significance in the relevant natural language/dialect.While antecedent/subsequent inter-process relations are among those
+formally recognized in Process Algebra, this specific genre
+of relation is implicit to other models important
+to computer science, such as Type Theory and Lambda Calculus.
+Ifis a type, then any computational process
+which produces a value of typehas a corresponding
+(functional) type (for sake of discussion, assume avalueis anything that can be encoded in a finite sequence of numbers
+and thattypesare classifications for values that introduce
+distinctions between functions `{-} e.g., the function to add two
+integers is different than the function to add two decimals; more
+rigorous definitions of primordial notions liketypeandvalueare possible but not needed for this paper).
+Similarly a process which takes asinputa value ofis its own type.  If two processes have these two
+types respectively `{-} one outputsand the other
+inputs`{-} then the two can be put in sequence, where
+the output from the antecedent becomes the input to the subsequent.
+In this manner inter-process sequential relations become
+subsumed intotype systemsand can be studied using
+type-theoretic machinery rather than Process Algebras or
+Process Calculi as such.The above comments apply to type theory applied in 
+constructed environments like computer programming 
+languages; but as I have discussed here 
+there exists a robust type-theoretic tradition
+in (Natural Language) semantics, which is disjoint from
+but not entirely irrelevant to the type systems of
+formal and programming languages.  Semantic types are
+recognized at several different levels of classification 
+`{-} I proposed the termsmacrotype,mesotype, 
+andmicrotype.  Some of the most 
+interesting type-theoretic effects
+involve medium-grained semantic criteria that are
+more general than lexical entries but more specific than
+Parts of Speech; this is the level where linguists have 
+seemed to find the most fertile applications of 
+sophisticated aspects to formal type theory, like 
+dependent types and type-coercion.  This perhaps 
+reflects the situation ofmesotypesas 
+intermediary between and therefore interconnecting 
+types in a mostly grammatic (Part of Speech) and 
+a mostly semantic (lexical) sense; and therefore 
+a topic or tool for both syntax and semantics.Here my argumentation is informed 
+particularly by the merged notion oftypedprocesses.  If we say that something (sticking with the 
+mesotype level) has thetypeof a physical-body noun `{-} thatPhysical Bodyis
+a type in the overall semantics of language `{-} then
+I propose a corresponding type of cognitive
+(perceptual and conceptual) processes characteristic
+of perceiving and reasoning about physical things.  A particular
+designatum `{-} a bag of rice, say `{-} is subsumed under
+the semantic type insofar as our perceptual encounters with that
+thing `{-} and/or our conceptual exercises pertaining to
+its properties and proclivities (like being difficult to carry)
+`{-} are roughly prototyped by a certain generic kind of
+cognitive process.  This assumes that there is a similitude among
+processes of perceiving and thinking about physical bodies
+(at least the mid-sized, quotidian physical things that tend
+to enter nonspecialist language) sufficient to subsume them under
+a common prototype, which I then argue forms the cognitive
+substratum for the semantic typePhysical Object.
+Moreover, I contend a similar cognitive substratum
+can be found for other mid-scale semantic types that underlie analyses
+of semantic acceptability and metaphoricality, likeLiving Thing,Sentient Living Thing(flowers want
+sunshineis metaphorical because it ascribes propositional
+attitudes to something whose type does not literally support them),
+andSocial Institutions(The newspaper you're reading
+fired its editorexhibits atype coercionwherenewspaperis read
+first as an object and then as a company).  One feature of semantic
+types is the lexical superposition of different types to produce what
+(in a slightly different context) Fauconnier calls ablend:
+inLiverpool, which is near the ocean, built new docks(see), the
+city is treated as both a geographic region and a body politic.Weighs, too, as a verb, can be given a typed-process
+interpretation.  In its least metaphoric sense,to weighconnotes a practical action of measuring some object's weight by
+using something like a scale; ascognitiveprocess the
+verb embodies are ability to plan, reflect upon, or contemplate
+this practice.  So anidea weighing 5 poundsis anomalous because
+it is hard to play out in our minds a form of this practical act
+where the thing being weighed is mental.  However, there are plenty
+of more figurative uses related toweighing ideas,heavy ideas,
+and so forth, so we are able to isolate the dimension ofjudgingandmeasuringwhich is explicit in literalweighing, and abstracting from the physical details useweighto meanmeasureorassessin general.
+The phraseweigh an ideatherefore connotes its own cognitive
+process `{-} imagining someone thinking about the idea in an
+evaluative way `{-} but this figurativescriptis closed off by5 poundswhich forces us to conceive the weighing literally
+with a scale, not figuratively as a kind of mental assessment.
+Once again, the type anomaly can be seen as a failure to
+map the linguistic senses evident in a sentence to an internally
+consistent set of cognitive procedures for dilating the semantic
+content seeded within each word.Notice that I am treating cognitive processes, in themselves,
+as semantic more than grammatical phenomena.  Literally,
+weighing something is a multi-step act
+(lifting it on the sale, reading the measurement), and even in
+our mental replay of hypothetical weighing-acts it seems impossible
+not to imagine distinct phases (just as it is impossible not
+to picture left and right sides of an imaginary cow).
+However, I assume that the cognitive script is figured by the
+lexemeweighsas a connotative unit: whatever internal structure
+our mental script ofweighing somethinghas,
+this structure is not alinguisticstructure that must be
+encoded grammatically.  Similarly, the conceptbuttered toastsuggests a confluence of
+perceptual, physical-operational, and conceptual aspects
+`{-} we are inclined to regard toast asbutteredif it
+looks a certain way and also if we have seen someone apply
+butter to it (or have done so ourselves) and also if
+we are in a context where we expect to find toast that may be
+buttered (we are not disposed to call a piece of bread in a
+grocery storebuttered toasteven if it has that appearance).
+So the adjectivebutteredintroduces multiple cross-modal
+parameters in addition to the underlying concepttoast; but I feel
+that the lexeme aggregates these parameters into a
+singlelinguisticunit.  In Langacker's terms, the various
+elements ofbuttereddo not suggestconstructive effort,
+as if deliberatelinguisticprocessing were needed to unpack the
+linguistic entity to its constituent parts.  Instead,butteredfunctionssemanticallyas a unit (and likewise syntactically
+as the unit entering relations with other words `{-} e.g. buttered-toast
+is an adjective/noun pair, not the nounbutterat the root of the
+adjective) `{-} even if its cognitive process
+is multi-faceted.  Indeed, this is precisely the signifying economy
+of language: it captures complex cognitive procedures by
+iconic, repeatable lexical units.On that theory, tieing specific word-senses to stereotyped
+cognitive processes is a matter of semantics, not grammar per se.
+Grammar, I contend, comes into play when multiple processes need to
+be integrated.  The conceptbuttered toast, for example, seems
+to start from a more generic concept (toast) and then add
+extra detail (the buttering, with all that implies conceptually,
+pragmatically, and sensorially).  This is suggested by the
+substitutability of justtoastforbuttered toast:I snacked on toast and coffee.I snacked on buttered toast and iced coffee.Because the first sentence is perfectly clear, it seems
+that the ideas expressed (at least in this context) bytoastandcoffeeare reasonably complete
+in themselves, so the adjectives have the effect of starting
+with a complete idea and adding on extra detail.  Procedurally,
+then, it seems like we have some process which takes us totoastandcoffeeand then, subsequent to that
+(logically if not temporally) we add the wrinkle of
+re-conceiving the toast as buttered and the coffee as iced.
+In short, the adjective-noun pairing is compelling us to
+run a pair of cognitive processes in sequence, one
+establishing the noun-concept as a baseline and one adding
+descriptive detail by anadjectival, a specificational
+process.Counter to that analysis, someone might judge that
+phrases likebuttered toastandiced coffeeare
+conventional enough that we don't interpret them through
+two meaningfully disjoint processes.  This is entirely possible,
+given how erstwhile aggregate expressions become established units.  
+Different phrases exhibit different levels of entrenchment:I snacked on toast and instant coffee.I snacked on toast and Eritrean coffee.Arguablyinstant coffeeis a de facto lexical unit, partly
+because reading it in terms of constituent parts is rather
+nonsensical (there's no non-oblique way to understandcoffeebeing qualified asinstant).  Surely, however,Eritrean coffeeis heard as a compound phrase
+(at least in 2019 `{-} it is unlikely, but not
+impossible, that future Eritrean coffee growers will be so
+successful that we hear the phrase as a brand name
+or culinary term of art, likeHershey's kissesorFrench toast).  The status oficed coffeeis probably
+somewhere between these two.  But to the degree that
+a language element (whether word or phrase) is entrenched and
+generally processed linguistically as a unit, I maintain,
+it tends to be governed by an integrally complete cognitive
+process `{-} not necessarily one without inner structure, but where the
+elements of this structure piece together perceptually and
+situationally, rather than seeming to belinguisticallydisjoint conceptualizations that are brought together
+by the shape of linguistic phrases.  Conversely, where a cognitive
+process has this integral character, discursive pressures nudge
+the language toward entrenching some descriptive phrase as a
+quasi-lexeme; what starts being heard as a compound designation
+evolves to the point where language users don't attend to
+constituent parts.Obviously, this theory presupposes that there is an available
+distinction to be drawn between aproceduralsynthesis of
+disparate cognitive processes and a perceptual and/or conceptual
+synthesis constitutive of individual cognitive episodes.
+Phenomonology seems to back this up `{-} there are some
+conceptual compounds that come across as more episodically fused than
+others.  Buttered toast may evoke a temporally
+not-quite-instantaneous conceptualization `{-} at the core of
+the concept is a practical activity that takes a few seconds to
+complete `{-} but we also can imagine the buttering-act
+apprehended in one sole episode.  On the other hand,Eritrean coffeeties together concepts of much more scattered
+provenance; the perceptual unity ofcoffee(in the sense
+of a specific liquid in a specific container) along with
+the geopoliticalbackground knowledgeimplicit in the adjectiveEritrean.  As a cognitive
+synthesisEritrean coffeeis conceptual rather than
+perceptual.  Provisionally we can treat this in the context ofbuttered toastbeing a partially-entrenched phraseology
+whileEritrean coffeeis undeniably a phrasal compound,
+something whose constructive form must be parsed linguistically
+rather than figuratively.This analysis, though, needs many caveats.  After all, many
+bonafidephrases(notquasi-lexemes) nevertheless
+exhibit significant phenomenological unity `{-} i.e., they
+evoke integral perceptual complexes:big dog;hot coffee;speeding car;red foliage.
+Linguistically these seem like an underlying concept
+acquiring perceptual specificity via adjectival
+modification:hotwas how the coffee came to my
+experience because I experienced it as hot (it wasn't like
+I experienced the coffee and then had to contemplate
+whether it is hot or cold).  Coffee can'tnotbe
+experienced as hot, cold, or lukewarm; it cannot be experienced
+without temperature (assuming I am coming into contact
+with it and not just looking at it).  Similarly a car must be
+seen as at rest, moving slowly, or speeding along; 
+foliage must be
+seen as having some color(s).I have argued, however, that
+unless entrenched as idiomatic phrases adjective-noun pairs
+likehot coffeeorbuttered toastshould be read
+as grammatical complexes and accordingly (in my theory) as junctures
+between distinct cognitive processes.  On the other hand, I argued
+thatinstant coffeewas effectively entrenchedbecausethere is no simplistic conceptual unity betweeninstantandcoffee, which makes it harder to hear the phrase as descriptive.
+Instead, the semantics of that particular adjective-noun
+connection are circuitous and a little hyperbolic:instantcoffee is coffee as a substance (not a drink, in that state)
+from which coffee the drink can be quickly (but not
+instantaneously) prepared.  There is a lot going on the seemingly
+simpleinstant coffee: the shift from coffee-as-substance
+to coffee-as-drink; theinstantexaggeration.  In this
+case, the adjectival modification hasso manymoving
+parts that, I'm inclined to argue, it is hard to cover the
+whole scenario with a descriptive phrase; which in turn
+creates selective pressures for some pseudo-lexical unit
+to emerge (which turned out to beinstant coffee)
+as a mnemonic for the whole conceptual multiplex.  Indeed
+conceptually intricate wholes tend to quickly acquire
+pithy conventional nominalizations simply
+for rhetorical convenience (Brexit;Quantum Gravity;International Transfer
+Window;#metoo).Notwithstanding these variations, I still find a certain logic
+in the relation between phenomenological unity and semantic
+entrenchment.  Perceptually integrated wholes may correlate
+with linguistically aggregate constructions insofar as there
+is a transparent logical destructuring in the perceptual
+unity: in the case of substance-attribute pairs (likehot coffee) `{-} deferring in the phenomenological
+context to Husserl's account ofdependent moments`{-} there
+is a basically unsubtle distinction between an underlying
+concept (like coffee) and the qualities which are its
+mode of appearance as well as conceptual predicates (like
+hot, cold,  black, or light, describing sensory properties
+innate to the experience of a coffee-token as well as
+state-reports that can be propositionally attributed to it).
+Although the minimal sensate intention of the coffee and
+the predicative disposition toward ascriptions likeblackandhotare consciously intertwined, surely I am aware of
+a logicality in experience that gives the sensate and predicative
+dimensions different epistemic status.  I don't think of
+my experience of the coffee's being hot as just a hot sensation
+qua medium of my sensorily apprehending the coffee, but rather as
+the sensate mechanism by which I observe the apparent fact that
+the coffee is hot, as a state of affairs and not just as
+subjective impression.  We are constantly extrapolating our perceptual
+encounters to propositional content along these lines.As such, I contend that such an (in some sense) innate
+perception-to-predication instinct grounds the procedural
+slicing of linguistic processes:hot coffeeretraces in a 
+linguistic construction the logical order of a coffee perception
+which on one level is a raw perceptual encounter but is simultaneously
+a predicative attribution.Hot coffeedenotes a substance that
+can be experienced in the mode of a base concept (coffee)
+which is given predicative qualification (the coffeeishot).
+The fact that there may be no noticed temporal gap
+inexperiencebetween the sensate perception and the
+epistemic posture does not preclude a certain logical
+antecedent-subsequent ordering: the conceptcoffeeis the
+predicative base for my propositional attitude that what I
+am dealing with here is hot coffee, not
+hot-sensations-disclosing-coffee or coffee-I-experience-as-hot
+(but who knows, maybe I'm hallucinating) or any other artificial
+skeptifying of my actual experience, which is of raw perception
+pregnant with propositional content.So I wish to justify claims that (non-entrenched) phrase 
+complexes likehot coffeeare unions of disjoint cognitive
+processes by noting that while such phrases evoke a certain perceptual
+unity, they evoke akindof unity
+which we habitually regardconceptuallyas divided into
+sensate givenness founding epistemic attitudes.  Cognitive
+processes are not exclusively perceptual; they are
+some mixture of perceptual and conceptual (and
+enactive/kinaesthetic/operational).  A perceptual unity can
+cover two conceptual aspects, like a sheet covering two
+mattresses.  So the perceptual unity of hot coffee can
+become the conceptual two-step of coffee as substance
+and hot as attribute; committing this unity to
+cognition as an overarching lifelong faculty involves registering
+a thought-process of coffee as a substance which can, in acts of
+logical predication, be believed to be hot or cold, black or
+light, etc.  The apprehension of the substance is a different
+cognitive process than the predication of the attribute, in terms of
+how these mental acts fit within our epistemic models, even if
+these two processes are experientially fused.  Typically we see the
+coffee before we touch or taste it, so already the coffee has a logical
+status apart from the heat we predicate in it.Likewise, even if the black color is inextricable
+from our perceiving (apart from
+odd situations where we drink the coffee without looking at it),
+we know the color will change if we add milk (even if just in
+principle because, preferring black coffee, I don't actually do so);
+so we know the coffee has a logical substrate apart from its color
+too.  All of this ideation is latent in the coffee-perceptions
+notwithstanding whatever perceptual unities we experience that
+cloak logical forms like substance/attribute under the inexorable
+togetherness of disclosure (the phenomenological impossibility of
+spatial expanse without color, say).  In short, disjoint
+cognitive processes can be required to reconstruct a perceptually
+unified situation or episode, insofar as we are not just living
+through the episode but prototyping, logically reconstructing,
+signifying it `{-} the perceptual unity in the moment does not
+propagate to procedural atomicity in absorbing the episode into
+rational exercises.Experience, then, presentsbothperceptual unities and
+cognitive-propositional multiplicity; language can inherit
+both holism on the perceptual side and compositionality
+on the rational side, even in a single enactive/perceptual
+episode.  Depending on how we via language want to
+figure and express experience, we can bring either unity
+or compositionality to the fore.  Our linguistic choices
+will evoke perceptual unity if they select entrenched word-senses
+or quasi-lexical forms; they will evoke compositionality
+if they gravitate toward compound phrases and complex,
+relatively rare lexicalizations and modes of expression.
+To the degree that we are interested in a
+cognitive-phenomenologicalsemantics, we can attend
+to the first part of this equation, to how the understood
+atomicity of a word sense or a conventionalized phrase often
+suggests an object or phenomenon consciously apprehended as
+an integral whole; we can trace phenomenologically the
+apperceptive unity that seems to drive the linguistic
+community's accepting lexical atoms in this sense.
+Conversely, to the degree that we are interested in a
+cognitive-phenomenologicalgrammar, we can attend to how
+logically composite predication emerges even within
+perceptual unity, because our encounter with phenomena is
+not (save for exotic artistic or meditative pursuits) thedaseinof irreflective sensory beings immersed in a
+world of pure experience but the deliberate action of
+epistemic beings carrying (modifiable but not random)
+propositional attitudes to perceptual encounters.Modeling grammar as a coordination between cognitive processes may
+be an idealization, precisely because the compositive and integrative
+faces of consciousness are two sides of the same
+coin: it's not as if we work through a thought ofcoffeeortoast, abstract and without sensory
+specificity, noticeably prelude to conceived/perceived
+attributes likehot,cold, orbuttered.
+But we can still ascribe to linguistic-understanding
+processes an idealized,as iftemporality, treating the
+elucidating of a sentence as a sequence of procedures leading from
+bare concepts to well-rendered logical tableau,
+suffused with some level of descriptive and situational
+particularity.  So we go fromcoffeetoiced coffeetobuttered toast and iced coffeetosnacking on
+buttered toast and iced coffee; each link in the chain
+stepping up toward propositional totality.My point is not that the logical form of the 
+sentence is composed from
+logically primitive and abstract parts, which is fairly trite;
+my point is that such logical composition is only apparent
+after a pattern of cognitive integration
+that is more subtle and exceptional.  Extra-mentally, buttered
+toast is just toast with butter on it, a fairly simplistic
+logical conjunction.  Read as a baton passed between
+two acts of mind, however `{-} conceiving toast and then conceiving
+it buttered `{-} the conjunction is more elaborate;
+the cognitive resources ofbutteredare not justsomething with butter on itbut the implication of a sensory
+summation (the flavor, color, scent) and operational narrative
+(we have seen or performed the deliberate act of applying the
+butter).  Similarly a person dressed up is not just
+someone whose torso is encircled by articles of clothing; a
+barking dog is not just an animal making random noises;
+a stray cat is different from a lost cat.  In their
+interpenetration, cognitive processes develop (in the
+photographer's sense) narrative
+and causative threads that are latent in worldly situations
+but reduced out of logical glosses; that is why it
+seems incomplete, lacking nuance, or
+beside the point to explicate semantic meanings in logical
+terms, likebachelorasunmarried man(we can
+certainly imagine a sentence likeMy best friend
+has been married for years but he's still a bachelor,
+to imply he still has the habits and
+attitudes of his single days).A theory of sentences building from conceptual
+underspecification to logical concreteness does
+not preclude there being different scales
+of specificity.I snacked on toast and coffeeis just as acceptable asI snacked on buttered toast
+and iced coffee.  The communication conveys as much
+situational detail as warranted in the conversational,
+pragmatic context.  Language always has thecapabilityto
+push further and further into specificity; how
+exhaustively the language user avails of this
+capability is a matter of choice.  As theorists of language we
+must then analyze how language possesses thelatentcapacity
+to draw ever finer pictures; the adjectivalbutteredtoast andicedcoffee takes the granularity of signifying at one
+level (the level of theI snacked on toast and coffeesentence)
+and layers on (or really layerswithin) a yet more
+specific level.  The architecture of how this happens is
+well addressed by type-theoretic methods (both coarse and mid-grained).The remainder of this section will try to expand on this type-theoretic intuition.
+My central thesis is that language understanding
+involves integrating diversecognitive procedures,
+each associated with specific words, word morphologies (plural
+forms, verb tense, etc) and sometimes phrases.
+The form of type theory appropriate in this context
+is therefore one closely associated with procedural typing
+and resolution: that is, assigning types to procedures,
+and differentiating procedures based on the types of
+theirargumentsorparameters(input and output data).Interpretive Processes and TriggersThe type-theory/procedural perspective I will mostly work from
+here contrasts with and adds nuance to
+a morelogicalortruth-theoreticparadigm which
+tends to interpret semantic phenomena via formal logic `{-}
+for example, singular/plural in Natural Language
+as a basically straightforward translation of the
+individual/set distinction in formal logic.  Such
+formal intuitions are limited in the sense that (to
+continue this example) the conceptual mapping from
+single to plural can reflect a wide range of
+residual details beyond just quantity and multitudes.
+Case in point are plurals: for each plural usage we have a conceptual
+transformation of an underlying singular to a collective, but
+how that collective is pictured varies in context.  One
+dimension of this variation lies with mass/count: the
+mass-pluralcoffee(as insome coffee) figures the
+plurality of coffee (as liquid, or maybe coffee grounds/beans)
+in spatial and/or physical/dynamic terms.  So we have:There's some coffee on your shirt.There's coffee all over the table.She poured coffee from an ornate beaker.There's too much coffee in the grinder.There's a lot of coffee left in the pot.There's a lot of coffee left in the pot
+`{-} should I pour it out?These sentences use phrases associated with plurality (all over,a lot,too much) but with referents that on perceptual and
+operational grounds can be treated as singular `{-} as in the
+appropriate pairing ofa lotanditin the last sentence.
+With count-plurals the collective is figured more as an
+aggregate of discrete individuals:There are coffees all over the far wall at the espresso bar.She poured coffees from an ornate beaker.There are a lot of coffees left on the table
+ `{-} shall I pour them out?So mass versus count `{-} the choice of which plural form to use `{-}
+triggers an interpretation shaping how the plurality is pictured and
+conceived (which is itself triggered by the use of a plural to
+begin with).  CompareI sampled some chocolates(where the count-plural
+suggestspiecesof chocolate) andI sampled some coffees(where the count-plural implies
+distinguishing coffees by virtue of grind, roast, and other
+differences in preparation) (note that both are contrasted
+to mass-plural forms likeI sampled some coffeewhere
+plural agreement points toward material continuity; there
+is no discrete unit of coffee qua liquid).  Or comparePeople love rescued dogswithPeople fed the rescued dogs`{-} the second, but not the first, points toward
+an interpretation that certainspecificpeople
+fed the dogs (and they did sobeforethe dogs
+were rescued).But if we restrict attention to just, say,
+count-plurals, there are still different schemata for intending
+collections.  This is one dimension I left unexamined 
+in the earlierNew Yorkexamples:New Yorkers live in one of five boroughs.New Yorkers reliably vote for Democratic presidential candidates.New Yorkers constantly complain about how long it takes to commute
+to New York City.The first sentence is consistent with a reading applied toallNew Yorkers `{-} the five boroughs encompass the whole
+extent of New York City.  The second sentence is only reasonable
+when applied exclusively to the city's registered voters `{-} not all
+residents `{-} and moreover there is no implication that the
+claim applies to all such voters, only a proportion north of one-half.
+And the final sentence, while perfectly reasonable, usesNew Yorkersto name a population completely distinct from the
+first sentence `{-} only residents from the metro
+area, but not the city itself, commutetothe city.The assumption that logical modeling can capture all the
+pertinent facets of Natural-Language meaning can
+lead us to miss the amount of situational reasoning
+requisite for commonplace understanding.  InPeople fed the rescued dogsthere is an exception to the
+usual pattern of how tense and adjectival modification
+interact: we readpeople fedinPeople fed the rescued dogsas occurringbeforethe rescue;
+because we assume thatafterbeing rescued the dogs would be
+fed by veterinarians and other professionals (who would
+probably not be designated with the genericpeople), and
+also we assume the feeding helped the dogs survive.  We also
+hear the verb as describing a recurring event; compare
+withI fed the dog a cheeseburger.To be sure, there are patterns and templates governing
+scope/quantity/tense interactions that help us build logical models
+of situations described in language.  ThusI fed the dogs a cheeseburgercan be read such that there
+are multiple cheeseburgers `{-} each dog gets one `{-}
+notwithstanding the singular form ona cheeseburger:
+the pluraldogscreates a scope that can elevate
+the singularcheeseburgerto an implied plural;
+the discourse creates multiple reference frames each
+with one cheeseburger.  Likewise the morphosyntax is
+quite correct in:All the rescued dogs are taken to an
+experienced vet; in fact, they all came from the same
+veterinary college`{-} the singular onvetis properly
+aligned with the pluraltheybecause of the scope-binding
+(from a syntactic perspective) and space-building
+(from a semantic perspective) effects of thedogsplural.
+Or, in the case ofI fed the dog a cheeseburger every daythere is an implicit plural becauseevery daybuilds
+multiple spaces: we can refer via the spaces collectively
+using a plural (I fed the dog a cheeseburger every day `{-}
+I made them at home with vegan cheese) or refer within
+one space more narrowly, switching to the singular
+(Except Tuesday, when it was a turkey burger).Layers of scope, tense, and adjectives interact in complex ways that
+leave room for common ambiguities:All the rescued dogs are [/were]
+taken to an experienced [/specialist] vetis consistent with a reading
+wherein there is exactly one vet, and she has or had treated every dog.
+It isalsoconsistent with a reading where there
+are multiple vets and each dog is or was treated
+by one or another.  Resolving such ambiguities
+tends to call for situational reasoning and afeelfor situations,
+rather than brute-force logic.  If a large dog shelter describes
+their operational procedures over many years, we might assume
+there are multiple vets they work or worked with.  If instead the
+conversation centers on one specific rescue we would be
+inclined to imagine just one veterinarian.  Lexical and tense
+variation also guides these impressions: the past-tense
+form (...the rescued dogs were taken...) nudges us
+toward assuming the discourse references one rescue (though it
+could also be a past-tense retrospective of general operations).
+Qualifying the vet asspecialistrather than the vaguerexperiencedalso nudges us toward a singular interpretation.What I am calling anudge, however, is based on situational
+models and arguably flows from a conceptual stratum outside
+of both semantics and grammar proper; maybe it is even prelinguistic.
+ConsiderPeople fed the rescued dogs.Vets examined the rescued dogs.There appears to be no explicit principle either in the semantics
+of the lexemeto feed, or in the relevant tense agreements,
+stipulating that the feeding in ()
+was prior to the rescue `{-} or conversely that
+() describes eventsafterthe rescue.  Instead, we interpret the discourse through
+a narrative framework that fills in details not provided by
+the language artifacts explicitly (that abandoned dogs are
+likely to be hungry; that veterinarians treat dogs in clinics, which
+dogs have to be physically brought to).  For a similar case-study,
+consider the sentences:Every singer performed two songs.Everyone performed two songs.Everyone sang along to two songs.Everyone in the audience sang along to two songs.The last of these examples strongly suggests that of potentially
+many songs in a concert, exactly two of them were popular and singable
+for the audience.  The first sentence, contrariwise, fairly strongly
+implies that there were multiple pairs of songs, each pair performed
+by a different singer.  The middle two sentences imply either
+the first or last reading, respectively (depending on how we
+interpreteveryone).  Technically, the
+first two sentences imply a multi-space reading and the latter two
+a single-space reading.  But the driving force
+behind these implications are the pragmatics ofperformversussing along: the latter verb is bound more tightly to
+its subject, so we hear it less likely thatmanysingers are performingonesong pair, or conversely that
+every audience membersings alongto one song pair, but
+each chooses adifferentsong pair.The competing interpretations forperformcompared tosing along, andfeedcompared totreat, are grounded
+in lexical differences between the verbs.  I contend, though, that
+the contrasts are not laid out in lexical specifications
+for any of the words, at least so that the implied readings
+follow just mechanically, or on logical considerations
+alone.  After all, in more exotic but not implausible
+scenarios the readings would be reversed:The rescued dogs had been treated by vets in the past
+(but were subsequently abandoned by their owners).Every singer performed (the last) two songs
+(for the grand finale).Everyone in the audience sang along to two songs
+(they were randomly handed lyrics to different songs when
+they came in, and we asked them to join in when the song being
+performed onstage matched the lyrics they had in hand).In short, it's not as if dictionary entries would specify thatto feedapplies to rescued dogs before they are rescued,
+andto treatapplies after they are rescued.  Or
+thatsing alongnudges scope interpretation in one direction
+andperformnudges in a different direction.
+These interpretations are driven by narrative
+construals narrowly specific to given expressions.  The
+appraisals would be very different for other uses of the verbs in
+(lexically) similar (but situationally different) cases:
+totreata wound or a sickness, toperforma gesture or a
+play.  We construct an interpretive scaffolding
+for resolving issues like scope-binding and space-building based
+on fine-tuned narrative construals that can vary alot
+even across small word-sense variance:
+As we follow along with these sentences, we have to build a narrative
+and situational picture which matches the speaker's intent,
+sufficiently well.And that requires prelinguistic background
+knowledge which is leveraged and activated (but not mechanically
+or logically constructed) by lexical, semantic, or grammatical
+rules and forms:rescued dogsall alone constructs a fairly
+detailed mental picture where we can fill in many details by
+default, unless something in the discourse tells otherwise
+(we can assume such dogs are in need of food, medical care,
+shelter, etc., or they would not be described asrescued).  Likewisesing alongcarries a rich mental
+picture of a performer and an audience and how they interact, one
+which we understand based on having attended concerts rather than
+by any rule governingalongas a modifier tosing`{-} compare the effects ofalonginwalk along,ride along,play along,go along.  Merely
+by understanding howalongmodifieswalk, say
+(which is basically straightforward; towalk alongis basically towalk alongside) we
+would not automatically generalize to more idiomatic
+and metaphorical uses likesing alongorplay along(as inI was skeptical but I played along (so as not to
+start an argument)).We have access to a robust collection ofmental scriptswhich
+represent hypothetical scenarios and social milieus where
+language plays out.  Language can activate various suchscripts(and semantic as well as grammatical formations
+try to ensure that therightscripts are selected).
+Nonetheless, we can argue that the conceptual and cognitive
+substance of the scripts comes not from language per se
+but from our overall social and cultural lives.
+We are disposed to make linguistic inferences `{-} like
+the timeframes implied byfed the rescued dogsor the scopes
+implied bysang along to two songs`{-} because of
+our enculturated familiarity with events like dog rescues
+(and dog rescue organizations) and concerts
+(plus places like concert halls).  These concepts are not
+produced by the English language, or even by any dialect
+thereof (a fluent English speaker from a different
+cultural background would not necessarily make the
+same inferences `{-} and even if we restrict attention to,
+say, American speakers, the commonality of disposition
+reflects a commonality of the relevant cultural
+anchors `{-} like dog rescues, and concerts `{-} rather than
+any homogenizing effects of anAmericandialect).
+For these reasons, I believe that trying to account for
+situational particulars via formal language models alone
+is a dead end.  This does not mean that formal language
+models are unimportant, only that we need to picture them
+resting on a fairly detailed prelinguistic
+world-disclosure.There are interesting parallels in this thesis to the role
+of phenomenological analysis, and the direct thematization
+of issues like attention and intentionality: analyses
+which are trulyto the things themselvesshould take for
+granted the extensive subconscious reasoning that undergirds
+what we consciously thematize and would be aware of, in terms of
+what we deliberately focus on and are conscious of
+believing (or not knowing), for a first-personal.
+Phenomenological analysis should not consider itself as
+thematizing every small quale, every little patch of
+color or haptic/kinasthetic sensation which by some subconscious
+process feeds into the logical picture of our surroundings that
+props up our conscious perception.  Analogously, linguistic
+analysis should not thematize every conceptual and inferential
+judgment that guides us when forming the mental, situational
+pictures we then consult to set the groundwork for linguistic
+understanding proper.These comments apply to both conceptualbackground knowledgeand
+to situational particulars of which we are cognizant in
+reference to our immediate surroundings and actions.  This
+is the perceptual and operational surrounding that gets
+linguistically embodied in deictic reference and other
+contextualgroundings.  Our situational awareness therefore
+has both a conceptual aspect `{-} while attending a concert,
+or dining at a restaurant, say, we exercise cultural background
+knowledge to interpret and participate in social events
+ `{-} and also our phenomenological construal of our locales,
+our immediate spatial and physical surroundings.
+Phenomenological philosophers have explored in detail how these
+two facets of situationality interconnect (David Woodruff Smith and
+Ronald McIntyre inHusserl and Intentionality:
+A Study of Mind, Meaning, and Language, for instance).
+Cognitive Linguistics covers similar territory; thecognitivein Cognitive Semantics and Cognitive Grammar generally tends
+to thematize the conception/perception interface and
+how both aspects are merged in situational understanding
+and situationally grounded linguistic activity (certainly
+more than anything involving Artificial Intelligence or
+Computational Models of Mind as are connoted by terms likeCognitive Computing).  Phenomenological and Cognitive
+Linguistic analyses of situationality and perceptual/conceptual
+cognition (cognition as the mental synthesis of
+perception and conceptualization) can certainly enhance and
+reinforce each other.But in addition, both point to a cognitive and situational
+substratum underpinning both first-person
+awareness and linguistic formalization proper `{-} in other words,
+they point to the thematic limits of
+phenomenology and Cognitive Grammar and
+the analytic boundary where they give way to
+an overarching Cognitive Science.  In the case of
+phenomenology, there are cognitive structures that suffuse
+consciousness without being directly objects of attention
+or intention(ality), just as sensate hyletic experience is
+part our consciousness but not, as explicit content,
+something we in the general case are consciousof.
+Analogously, conceptual and situational models
+permeate our interpretations of linguistic forms, but
+are not presented explicitlythroughthese
+forms: instead, they are solicited obliquely and
+particularly.What phenomenologyshouldexplicate is not background situational
+cognition but how attention, sensate awareness, and intentionality
+structure our orientationthis background: how variations
+in focus and affective intensity play strategic roles in our engaged
+interactions with the world around us.  Awareness is a scale, and
+the more conscious we are of a sense-quality, an attentional focus,
+or an epistemic attitude, reflects our estimation of the
+importance of that explicit content compared to a muted experiential
+background.  Hence when we describe consciousness as a stream
+ofintentionalrelations we mean not that the intended
+noemata (whether perceived objects or abstract thoughts)
+are sole objects of consciousness (even in the moment)
+but are that within conscious totality which we are most aware
+of, and our choice to direct attention here and there reflects our
+intelligent, proactive interacting with the life-world.
+Situational cognition forms the background,
+and phenomenology addresses the structure of intentional
+and attentional modulations constituting the conscious
+foreground.Analogously, the proper role for linguistic
+analysis is to represent how multiple layers or strands
+of prelinguistic understanding, orscripts, ormental spaces, are woven
+together by the compositional structures of language.
+For instance,The rescued dogs were treated by an experienced vetintegrates two significantly different narrative frames
+(and space-constructions, and so forth): the frame implied
+byrescued dogsis distinct from that implied
+bytreated by a veterinarian.  Note that both spaces are
+available for follow-up conversation:The rescued dogs were treated by an experienced vet.
+One needed surgery and one got a blood transfusion.  We went there
+yesterday and both looked much better.The rescued dogs were treated by an experienced vet.
+One had been struck by a car and needed surgery on his leg.  We
+went there yesterday and saw debris from another car crash
+`{-} it's a dangerous stretch of highway.In the first sentencetheredesignates the veterinary clinic, while in
+the second it designates the rescue site.  Both of these locales are
+involved in the original sentence (as locations and alsospaceswith their own environments and configurations:
+consider these final three examples).The rescued dogs were treated by an experienced vet.
+We saw a lot of other dogs getting medical attention.The rescued dogs were treated by an experienced vet.
+It looked very modern, like a human hospital.The rescued dogs were treated by an experienced vet.
+We looked around and realized how dangerous that road is `{-}
+for humans as well as dogs.What these double space-constructions reveal is that accurate
+language understanding does not only require
+the proper activatedscriptsaccompanying words and
+phrases, likerescued dogsandtreated by a vet.
+It also requires the correct integration of each script,
+or each mental space, tieing them together in accord with
+speaker intent.  So in the current example we should read that
+the dogscouldbe taken to the vetbecausethey were
+rescued, andneededto be taken to the vetbecausetheir
+needing rescued was associated with being injured or in poor 
+health.  Language structures guide us
+toward how we should tie the mental spaces, and the
+language segments where they are constructed, together: the
+phraserescueddogsbecomes the subject of the passive-voicewere treated by a vetcausing the two narrative strands of the
+sentence to encounter one another, creating a hybrid space
+(or perhaps more accurately a patterning between
+two spaces with a particular temporal and causal
+sequencing; a hybrid narration bridging the spaces).
+It is of course this hybrid space, this narrative
+recount, which the speaker intends via the sentence.  This
+idea is what the sentence is crafted to convey `{-} not just
+that the dogs were rescued, or that they were taken to a vet, but
+that a causal and narrative thread links the two events.I maintain, therefore, that the analyses which are proper to linguistics
+`{-} highlighting what linguistic reasoning contributes above and beyond
+background knowledge and situational cognition `{-} should focus on
+theintegrationof multiple mentalscripts,
+each triggered by different parts and properties of the linguistic
+artifact.  Thetriggersthemselves can be individual words, but
+also morphological details (like plurals or tense marking) and
+morphological agreement.  On this theory, analysis has two distinct
+areas of concerns: identification of grammatical, lexical, and
+morphosyntactic features which trigger (assumedly prelinguistic)
+interpretive scripts; and reconstructing how these scripts
+interoperate (and how language structure determines such integration).In the case of isolating triggers, a wide range of linguistic features
+can trigger interpretive reasoning `{-} including base lexical choice;
+word-senses carry prototypical narrative and situational templates that
+guide interpretation of how the word is used in any given context.Rescued, for example, brings on board a network of likely
+externalities: that there are rescuers, typically understood to be
+benevolent and intending to protect the rescuees from harm; that
+the rescuees are in danger prior to the rescue but safe afterward;
+that they need the rescuers and could not have reached safety themselves.
+Anyone using the wordrescueanticipates that their addressees will
+reason through some such interpretive frame, so the speaker's role is
+to fill in the details descriptively or deictically: who are the rescuees
+and why they are in danger; who are the rescuers and why they are benevolent
+and able to protect the rescuees.  The claim that
+the wordrescue, by virtue of its lexical properties, triggers an
+interpretivescript, is a proposal to the effect that when trying
+to faithfully reconstruct speaker intentions
+we will try to match the interpretive
+frame to the current situation.Thescripttriggered by word-choice is not just an interpretive
+frame in the abstract, but the interpretiveprocessthat matches
+the frame to the situation.  This process can be exploited for
+metaphorical and figurative effect, broadening the semantic scope
+of the underlying lexeme.  In the case ofrescuewe have less
+literal and more humorous or idiomatic examples like:The trade rescued a star athlete from a losing team.New mathematical models rescued her original research from obscurity.Discovery of nearby earth-like planets rescued that
+star from its reputation as ordinary and boring and revealed that its solar
+system may actually be extraordinary.Each of these cases subverts the conventionalrescuescript by
+varying some of the prototypical frame details:  maybe thedangerfaced by the rescuee is actually trivial (as in the
+first three), or the rescuee is not a living thing
+whose state we'd normally qualify in terms ofdangerorsafety,
+or by overturning the benevolence we typically attribute to
+rescue events.  
+But in these uses subverting the familiar script does not
+weaken the lexical merit of the word choice; instead, the interpretive
+act of matching the conventionalrescuescript to the matter at hand
+reveals details and opinions that the speaker wishes to convey.  The
+first sentence, for instance, usesrescueto connote
+that being stuck on a losing team is an unpleasant (even if not life-threatening)
+circumstance.  So one part of the frame (that the rescuee needs
+outside intervention) holds while the other (that
+the rescue is in danger) comes across as excessive but
+(by this very hyperbole) communicating speaker sentiment.  By
+both invoking therescuescript and exploiting mismatches between
+its template case and the current context, the speaker
+conveys both situational facts and personal opinions quite
+economically.  Similarly,rescue a paper from obscurityis
+an economical way of saying that research work has been rediscovered
+in light of new science; andrescued from a reputationis a 
+clever way of describing, with rhetorical force, 
+how opinions have changed about someone or something.All of these interpretive effects `{-} both conventional
+and unconventional usages `{-} stem from the interpretive
+scripts bound to words (and triggered by word-choice) at
+the underlying lexical level `{-} we can assess these by reference
+to lexical details alone, setting aside syntactic and morphological
+qualities.  When morphosyntactic detailsareconsidered 
+`{-} e.g. plurals, as in ()-() 
+`{-} we then have a spectrum of other linguistictriggers, 
+involving perceptual and enactive figurations (e.g. how 
+plurality/multiplicities are conceived), alongside interpretivescripts.  My essential point however is that language 
+needs to trigger a collection of interpretive, perceptual, and 
+enactive/operational processes, for complete understanding; 
+and moreover that that language structures need to signal 
+theroutingof information between such processes, 
+establishing patterns of priority/sequencing and 
+information-supplementation among them.  These patterns, 
+I believe, can be modeled to some approximation via 
+computational type and process theories.I contend, moreover, that these cognitive processes are notthemselveslinguistic: while they may overlap with 
+some language-relevant concerns (like conceptualization, and 
+doxic specificity) they are not woven from the cloth of 
+syntactic, semantic, or pragmatic elements internal to language.  
+It is not within the purview of linguistics then to analyze 
+interpretive scripts (except as a subsidiary case-study), or 
+perceptual understanding, or situationally-mediated action.  
+Whatcanbe left for linguistics proper is identifying thetriggersto these cognitive realities `{-} insofar as content or 
+formations in language, within our goal-directed attempt to 
+understand others' linguistic performances, compels us toward 
+these extra-linguistic registers.Linguistics on this perspective is necessarily and properly incomplete: 
+we should not look to linguistic analysis to materially or structurally 
+explain the cognitive processes triggered by language.  But wecananalyze the triggers themselves `{-} potentially via formal and 
+even computational methods.  So the formal models I reviewed 
+earlier `{-} such as the combination of Dependency graphs 
+with typed S-Expressions encoded via double-indices `{-} can be adopted 
+in a basically non-formalized, cognitive-linguistic paradigm, 
+insofar as we ascribe to the global picture of language as aninterfaceortriggerto extralinguistic cognition.Suppose, for instance, that morphosyntax confirms the 
+presence of a pluralizing operation, likeNew Yorkers.  Against this minimal linguisticinformation, we need
+to invoke narrative frames, interpretive scripts, and prelinguistic
+background knowledge to understand whatsortof plurality
+the speaker intends.  The phraseNew Yorkerscan refer 
+to those who live in New York City (,); 
+in the New York 
+are butoutsidethe city (,); 
+or some combination.  
+It can also meanall(,) or 
+justsomeNew Yorkers (,,).
+Usually these alternatives are not explicitly 
+spelled out, and have to be inferred from context 
+and via background knowledge about which readings 
+are plausible.    
+As I argued from multiple angles earlier,
+in the typical case `{-} i.e., stylistically
+neutral, day-to-day language `{-} syntactic
+composition does not neatly recapitulate logical form.My prior analysis demonstrated warrants for this idea by
+highlighting narrative and imagistic aspects
+of language used to convey ideas, likecome out againstproviding the verb-phrases in reports of people
+criticizing something.  TheNew Yorkexamples like
+()-() point to a similar
+conclusion, but from a more lexico-semantic orientation:
+words likeboroughandcommutecarry a space
+of logical details that tend to force logical
+interpretations one way or another
+(e.g., the detail that the territory of a city
+is fully partitioned by boroughs,so, it
+isallcitizens who live in a borough).  This part of the
+logic is however not reflected in sentence-structure; it is,
+rather, latent
+in lexical norms and assumed part of understanding
+relevant sentences only because linguistic
+competence is understood to include
+familiarity with the logical
+implications of the lexicalized concepts:
+e.g. that the quantification inNew Yorkers
+live in one of five boroughsisall,
+but the quantification inNew Yorkers
+vote democraticismost.Here I'll also add the
+following: the current examples show
+how if addresseeshavethe requisite background knowledge,
+linguistic structure does not have to replicate logical structure very
+closely to be understood.  The content which addressees understand may
+have a logical form, and language evokes this form `{-} guides
+addressees toward considering specific propositional content `{-} but
+this does not happen because linguistic structure in any precise way mimics,
+replicates, reconstructs, or is otherwise organized propositionally.  Instead,
+the relation of language to predicate structures is evidently
+oblique and indirect: language triggers interpretive processes
+which guide us toward propositional content, but the structure
+of language is shaped around fine-tuning the activation of
+this background cognitive dynamics more than around any need to model
+predicate organization architecturally.   In the case of plurals,
+the appearance of plural forms likeNew Yorkersorcoffeescompels us to find a reasonable cognitive model for the
+signified multitude, and this model will have a logical form
+`{-} but the linguistic structures themselves do not in general
+model this form for us, except to the limited degree needed to
+activate prelinguistic interpretive thought-processes.I make this point in terms of pluralforms, and earlier made
+similar claims in terms of lexical details (cf.(live in a) boroughvs.vote (Democratic).  A third group of triggers I
+outlined involved morphosyntacticagreement, which establishes
+inter-word connections that themselves trigger interpretive processing.
+Continuing the topic of plurals, how words agree with other words
+in singular or plural forms evokes schema which guide situational
+interpretations.  So for instance:My favorite band gave a free concert last night.
+They played some new songs.There was some pizza earlier, but it's all gone.There were some slices of pizza earlier, but it's all gone.There were some slices of toast earlier, but there's none left.There was some toast earlier, but they're all gone.That franchise had a core of talented young players, but it
+got eroded by trades and free agency.That franchise had a cohort of talented players, but they
+drifted away due to trades and free agency.Many star players were drafted by that franchise, but it
+has not won a title in decades.Many star players were drafted by that franchise, but they
+failed to surround them with enough depth.Many star players were drafted by that franchise, but they
+were not surrounded with enough depth.Many star players were drafted by that franchise, but they
+did not have enough depth (around them).Plurality here is introduced not only by isolated morphology (likeslices,players,songs), but via agreements marked by
+word-forms in syntactically significant pairings: was/were, it/they,
+there is/there are.  Framing all of these cases is how we can usually schematize
+collections both plurally and singularly: the same set can be cognized as a
+collection of discrete individuals one moment and as an integral whole the next.
+This allows language some flexibility when designating plurals
+(cf.Three times, students asked an interesting question).  A sentence
+discussingslices of pizzacan schematically shift to treating
+the pizza as a mass aggregate init's all gone.  Here the antecedent
+ofitisslices(of pizza).  In the opposite direction, the mass-pluraltoastcan be refigured as a set of individual pieces inthey're all gone.
+The singlebandbecomes the group of musicians in the band.
+In short, how agreements are executed invites the addressee to reconstruct
+the speaker's conceptualization of different referents discussed by
+a sentence, at different parts of the sentence: linkingittoslicesorcohort, ortheytothe bandorthe toast, evokes a conceptual interpretation shaped in
+part by how morphosyntactic agreement overlaps withsemanticagreement.  Matchingtheytothe bandpresents agreement
+in terms of how we conceive the aggregate (as a collection of
+musicians); usingitwould also present an agreement, but
+one schematizing other aspect of the band concept.In the last five above cases,itsimilarly binds (being singular) tothe franchiseseen as a single unit `{-} here basic grammar and
+conceptual schema coincide `{-} butitalso binds
+to thecore of young players.  The
+players on a team can be figured as a unit or a multiple.  The franchise itself
+can be treated as a multiple (the various team executives and decision-makers),
+as inthey failed to surround the stars with enough depth.  The last sentence
+is ambiguous between both readings:theycould designate either the players
+or the franchise.  Which reading we hear alters the sense ofhave: asserting
+that the starplayerslack enough depth implies that they cannot execute
+plays during the game as effectively as with better supporting players;
+asserting that thefranchiselacks depth makes the subtly different point
+that there is not enough talent over all.  The variant which would includearound themnudges toward the second reading; but it is
+still permissible to, according to speaker intent, parse the lasttheyas designating thefranchiseand the lastthemas
+theplayers`{-} i.e., that finalthey/thempair
+having different antecedents.The unifying theme across these cases is that when forming sentences we often
+have a choice of how we figure plurality, and moreover these choices can be
+expressed not only in individual word-forms but in patterns of agreement.
+Choosing to pronominalizeslices of pizzaorcohort of playersasit, or alternativelythey, draws attention to either the more
+singular or more multitudinal aspects of the aggregate in question.
+But this effect is not localized to the individualit/theychoice; it depends on
+tracing the pronoun to its antecedent and construing
+how the antecedent referent has both individuating and
+multiplicity-like aspects.
+Thus both individuation and plurality are latent in phrases likeslices oforcohort of, and this singular/plural co-conceiving
+is antecedently figured by how subsequent morphosyntax agrees
+with the singular or, alternatively, the plural.Moreover, these patterns of agreement invoke new layers of
+interpretation to identify the proper conceptual scope of plurals.
+InThe band planned a tour, where they debuted new songswe hear
+the scope oftheyas narrower than its antecedentthe band,
+because only the band'smusicians(not stage crew, managers, etc.)
+typically actually perform:The band planned a tour, where
+they debuted new songs.The team flew to
+New York and they played the Yankees.The city's largest theater company
+will performThe Flies.Likewise in (), only the athletes are referenced viathey played; but presumably many other people (trainers, coaches, staff)
+are encompassed bythe team flew.  And in ()
+we do not imply that the Board of Directors will
+actually take the stage (the President
+as Zeus, say).  Even in the course of one sentence, plurals
+are reinterpreted and redirected:The city's largest theater company
+performedThe Fliesin French, but everyone's accent
+sounded Quebecois.The city's largest theater company
+performedThe Flies; then they invited a professor
+to discuss Sartre's philosophy when the play was over.In the first sentence, thespacebuilt by the sentence is wider
+initially but narrows to encompass only the actual actors on stage.
+In the second, thespacenarrows in a different direction, since
+we hear a programming decision like pairing a performance with a
+lecture as made by a theater's administrators rather than its actors.
+I discussed similar modulation in conceptual schemas related to plurality
+and pluralization earlier; what is distinct in these last examples is how
+the interpretive processes for cognizing plurality are shaped by
+agreement-patterns (likeitortheyto a
+composite antecedent) as
+much as by lexical choice, or morphology, in isolation.I have accordingly outlined a theory where lexical, morphological, and
+morphosyntactic layers all introducetriggersfor cognitive processes,
+and it is these processes which (via substantially prelinguistic perception
+and conceptualization) ultimately deliver linguistic meaning.  What islinguisticabout these phenomena is how specifically linguistic
+formations `{-} word choice, word forms, inter-word agreements in form `{-}
+trigger these (in no small measure pre- or extra-linguistic) interpretations.
+But as I suggested this account is only preliminary to analysis of
+how multiple interpretive processes areintegrated.  Linguisticstructurecontributes the arrangements through which the
+crossing and intersecting between interpretivescriptsare orchestrated.  Hence at the higher linguistic scales and
+levels of complexity, the substance of linguistic research, on this view,
+should gravitate toward structural integration of interpretive
+processes, even more than individual interpretive triggers themselves.I have thus far emphasized types' structural role, on the 
+premise that type theory offers technical models that can 
+be applied to the study ofcognitive process integration.  
+Requirements on the transfer of information between 
+processes `{-} how processes complement one another and 
+take other's details as givens `{-} are suggestive analogies 
+to latent interactions between mentalscriptswe are 
+poised to apply to situations; and these interactions 
+are the essential cognitive targets which linguistic structures 
+have to trigger by semantic/lexical, and syntactic/morphosyntactic 
+means.  The point of analyzing process preconditions 
+type-theoretically is to leverage types as constructional  
+media for structural theories of inter-process integration.This approach is largely syntactic: while many lexical and semantic 
+details may be analytically relevant, the style of analysis I 
+just proposed is ultimately a form of grammar, identifying 
+how organizational patterns among language-elements 
+trigger (and are thereby explained by the intention of) 
+corresponding patterns among cognitive processes.  
+For sake of completeness, though, I will conclude by 
+offering a few thoughts on the moresemanticmanifestation 
+of types (and type theory) as premises of 
+organizing concepts.Types, Sets, and ConceptsIn formal/computational contexts, types can be defined as sets of both values andexpectations(meaning assumptions which may be made about
+all values covered by the type); alternatively, we can (perhaps better) consider types asspacesof values.  Types' extensions have internal structure; there
+can benullorinvalidvalues, default-constructed values, and
+so forth, which areregionsof the conceptual space spanned or 
+encompassing types.  
+There is definitional interdependence
+between types and functions: a function is defined in terms of the types it accepts as parameters and
+returns `{-} rather than its entire set of possible inputs and outputs, which can
+vary across computing environments.Moreover, expectations in a particular case
+may be more precise than what is implied by the type itself `{-} it is erroneous
+to assume that a proper type system will allow a correctset of valuesto
+be stipulated for each point in a computation (the kind of contract enforced via
+by documentation and unit testing).  So state-space in a given context may include manyunreasonablevalues, implying that within the overall space there is areasonablesubspace, except that this subspace may not be crisply defined.These are some reasons why in theoretical
+Computer Science types are notreducedto underlying sets; instead, extensions
+are sometimes complex spaces that model states of, or internal organization of comparisons
+among, type instances.Moreover, despite mathematical set theory's influence on 
+formal logic (and philosophy, by extension), 
+philosophers have long been troubled by 
+the seeming arbitrariness and minimal structure of 
+the essential notion ofsetsthemselves,
+and have explored other constructs to play 
+analogous intellectually foundational roles, 
+such as Michael Jubien's Property Theoryor Jiri Benovskymodal perdurants(here citing two treatments I find particularly 
+persuasive or thought-provoking).  
+This is onephilosophicalinterest in 
+type theory as types have more formal structure 
+and also, in a sense, more metaphysical coherence 
+thansets(in the classical sense allowing 
+set-composition from unrelated members).  
+In a certain intellectual role, however, types are 
+still somehowset-likein that we can 
+consider the totality of values that may inhabit 
+each type, and we need some theory or model 
+of that totality `{-} which in turn engenders 
+different versions of type theory.An obvious paradigm is organizing type-extensions around prototype/borderline
+cases `{-} there are instances which are clear examples of types and
+ones whose classification is dubious.  I contend, however, 
+that common resemblance is not always a good marker
+for types being well-conceived `{-} many useful concepts are common
+precisely because they cover many cases, which makes definingprototypesorcommon propertiesmisleading.  
+Also, sometimes the clearestrepresentativeexample of a type or concept is actually not atypicalexample: a sample latter or model home is actually not (in
+many cases) a real letter or home.  So resemblance-to-prototype is at
+best one kind ofinner organizationof concepts' and types' spaces
+of extension.Sets, concepts, and types represent three different primordial thought-vehicles for
+grounding notions of logic and meaning.  To organize systems aroundsetsis
+to forefront notions of inclusion, exclusion, extension, and intersection,
+which are also formally essential to mathematical logic and undergird the
+classical interdependence of sets, logic, and mathematics.
+To organize systems aroundconceptsis to forefront practical engagement
+and how we mold conceptual profiles, as collections of ideas and pragmas,
+to empirical situations.  To organize systems aroundtypesis to forefrontfunctionsor transformations which operate on typed values, the interrelationships
+between different types (like subtypes and inclusion `{-} a type can itself
+encompass multiple values of other types), and the conceptual abstraction
+of types themselves from the actual sets of values they may exhibit
+in different environments.  Sets and types are
+formal, abstract phenomena; whereas concepts are characterized by
+gradations of applicability, and play flexible roles in thought and language.
+The cognitive role of concepts can be discussed with some rigor, but there is a
+complex interplay of cognitive schema and practical engagements which
+would have to be meticulously sketched in many real-world scenarios, if
+our goal were to translate conceptual reasoning to formal structures
+on a case-by-case basis.  We can, however, consider in general
+terms how type-theoretic semantics can capture conceptual structures
+as part of the overall transitioning of thoughts to language.A concept does not merely package up a definition, likerestaurantasa place to order food; instead concepts link up with other concepts
+as tools for describing and participating in situations.  Concepts are
+associated withscriptsof discourse and action, and find their
+range of application through a variegated pragmatic scope.
+We should be careful not to overlook these pragmatics, and
+assume that conceptual structures can be simplistically
+translated to formal models.
+Cognitive Linguistics critiques
+Set-Theoretic or Modal Logic reductionism (where a concept is just a set
+of instances, or an extension across different possible worlds) `{-} George Lakoff and Mark Johnson,
+prominently, argue for concepts' organization around
+prototypes (;)
+and embodied/enactive patterns of interaction (;).
+
+Types, by contrast, at least in linguistic applications of type theory, are abstractions
+defined in large part by quasi-functional notions of phrase structure.
+Nevertheless, thepatternsof how types may inter-relate
+(mass-noun or count-noun, sentient or non-sentient, and so forth)
+provide an infrastructure for conceptual understandings to be
+encoded in language `{-} specifically, to be signaled by which typed
+articulations conversants choose to use.  A concept likerestaurantenters language with a collection of understood
+qualities (social phenomena, with some notion of spatial location and
+being aplace, etc.) that in turn can be marshaled by sets of
+allowed or disallowed phrasal combinations, whose parameters
+can be given type-like descriptions.  Types, in this sense,
+are not direct expressions of concepts but vehicles for
+introducing concepts into language.Concepts (and types also) are not cognitively the same as their
+extension `{-} the conceptrestaurant, I believe, is distinct from
+concepts likeall restaurantsorthe set of all restaurants.
+This is for several reasons.  First, concepts can be pairwise different
+not only through their instances, but because they highlight different
+sets of attributes or indicators.  The conceptsAmerican PresidentandCommander in Chiefrefer to the same person, but the latter foregrounds a military role.
+Formal Concept Analysis considersextensionsandproperties`{-} suggestive indicators that inhere in each
+instance `{-} as jointly (and co-dependently) determinate: concepts
+are formally a synthesis of instance-sets and property-sets,,.  Second,
+in language, clear evidence for the contrast betweenintensionandextensioncomes from phrase structure: certain constructions specifically
+refer to concept-extension, triggering a mental shift from thinking of the
+concept as a schema or prototype to thinking of its extension (maybe in some context).
+Compare:Rhinos in that park are threatened by poachers.Young rhinos are threatened by poachers.Both sentences focus a conceptual lens in greater detail thanrhinoin general, but
+the second does so more intensionally, by adding an extra indicative criterion; while
+the former does so extensionally, using a phrase-structure designed to operate on
+and narrow our mental construal ofthe set of all rhinos, in the sense ofexistingrhinos, their physical place and habitat, as opposed to
+theabstract(oruniversal) type.  So there is a familiar semantic
+pattern which mentally transitions from a lexical type to its extension and
+then extension-narrowing `{-} an interpretation that, if accepted, clearly
+shows a different mental role for concepts of concepts'extensionthan the
+concepts themselves.There is a type-theoretic correspondence between intension and
+extension `{-} for a typethere is a correspondinghigher-ordertype
+ofsetswhose members are(related constructions are the type ofordered sequencesof;
+unordered collections ofallowing repetition; and stacks, queues, and
+deques `{-} double-ended queues `{-} as-lists that can grow or shrink
+at their beginning and/or end).  If we take this (higher-order)
+type gloss seriously, the extension of a concept is not itsmeaning, but a
+different, albeit interrelated concept.  Extension is not definition.Rhinodoes not meanall rhinos(orall possible rhinos) `{-} though arguably
+there are conceptsall rhinosandall restaurants(etc.) along with the conceptsrhinoandrestaurant.Concepts, in short, do not mentally signify sets, or
+extensions, or sets-of-shared-properties.  Concepts, rather, are cognitive/dialogic tools.
+Each concept-choice, as presentation device,
+invites its own follow-up.Restaurantorhousehave meaning not via
+idealized mental pictures, or proto-schema, but via kinds of things
+we do (eat, live), of conversations we have, of qualities we deem relevant.  Concepts do not
+have to paint a complete picture, because we use them as part of ongoing situations
+`{-} in language, ongoing conversations.  Narrow concepts `{-} which may best exemplifylogicalmodels of concepts as resemblance-spaces or as rigid designators to
+natural kinds `{-} have, in practice, fewer use-casesbecausethere
+are fewer chances for elaboration.  Very broad concepts, on the other hand, can have,
+in context, toolittlebuilt-ina prioridetail.
+(We sayrestaurantmore often thaneatery, and
+more often thandiner,steakhouse, ortaqueria).  Concepts dynamically play
+against each other, makingspaceswhere different niches of meaning, including
+levels of precision, converge as site for one or another.  Speakers need freedom to choose
+finer or coarser grain, so concepts are profligate, but the most oft-used trend toward middle
+ground, neither too narrow nor too broad.Restaurantorhouseare useful because they are noncommittal, inviting more detail.
+These dynamics govern the flow of inter-concept relations (disjointness, subtypes, partonymy, etc.).Concepts are not rigid formulae (like instance-sets or even attributes fixing when
+they apply); they are mental gadgets to initiate and
+guide dialog.  Importantly, this
+contradicts the idea that concepts are unified around instances' similarity (to each other or
+to some hypothetical prototype): concepts have avenues for contrasting
+different examples, invoking ascriptfor further elaboration, or for building temporary filters.  
+In, say,Let's find a restaurant that's family-friendly.allowing such one-off narrowing is a feature
+of the concept's flexibility.In essence: no less important, than acknowledged similarities across all instances, are well-rehearsed wayseach concept to narrow scope by marshaling lines ofcontrast, ofdissimilarity.
+Ahouseis obviously different from askyscraperor atent, and better resembles other houses; but there are also more nontrivialcomparisonsbetween houses, than between a house and a skyscraper
+or a tent.  Concepts are not only spaces of similarity, but ofmeaningful kinds of differences.To this account of conceptual breadth we can add the conceptual matrix spanned by
+various (maybe overlapping) word-senses: tofly, for example, names
+not a single concept, but a family of concepts all related to airborn
+travel.  Variations highlight different features: the path of flight (fly to Korea,fly over the mountain);
+the means (fly Korean air,that model flew during World War II);
+the cause (sent flying (by an explosion),the bird flew away (after a loud noise),leaves flying in the wind).  Words allow different use-contexts
+to the degree that their varioussensesoffer an inventory of aspects for
+highlighting bymorphosyntacticconvention.  Someone who saysI hate to flyis not
+heard to dislike hand-gliding or jumping off mountains.People, unlike birds, do not fly `{-} so the verb, used intransitively
+(not flyingtosomewhere in particular orinsomething in particular),
+is understood to refer less to the physical motion and more to the socially
+sanctioned phenomenon of buying a seat on a scheduled flight on an airplane. The construction
+highlights the procedural and commercial dimension, not the physical mechanism and
+spatial path.  But it does sobecausewe know human flight is
+unnatural: we can poetically describe how the sky is filled with flying leaves or birds,
+but notflying people, even if we are nearby an airport.Accordant variations
+of cognitive construal (attending more to mode of action, or path, or motives, etc.),
+which are elsewhere signaled by grammatic choices, are also spanned by a conceptual
+space innate to a given word: senses are finer-grained meanings availing themselves to one construal or another.So situational construals can be signaled by word- and/or
+syntactic form choice (locative, benefactive, direct and indirect
+object constructions, and so forth).  Whereas conceptual organization
+often functions by establishing classifications, and/or invokingscriptsof dialogic elaboration, cognitive structure tends to apply more
+to our attention focusing on particular objects, sets of objects, events, or
+aspects of events or situations.  
+So the contrast between singular, mass-multiples, and count-multiples,
+among nouns, depends on cognitive
+construal of the behavior of the referent in question (if singular, its
+propensity to act or be conceived as an integral whole; if multiple, its
+disposition to either be divisible into discrete units, or not).
+Or, events can be construed in terms of their causes
+(their conditions at the outset), or their goals (their conditions at
+the conclusion), or their means (their conditions in the interim).
+Compareattachingsomething to a wall (means-focused) tohangingsomething on a wall (ends-focused);bakinga cake
+(cause-focus: putting a cake in the oven with deliberate intent to cook it)
+toburninga cake (accidentally overcooking it).We can express
+an intent to bake someone a cake, but not (well, maybe comedically) toburnsomeone a cake (burn, at least in this context, implies
+something not intended); however, wecansayI burnt your cake, while it is a little jarring to sayI baked your cake`{-} the possessive implies that some
+specific cake is being talked about, and there is less apparent reason
+to focus on one particular stage of its preparation (the baking) once
+it is done.  Iwillbake a cake, in the future, usesbaketo mean also other steps in preparation (likemake), while,
+in the present,the cakeisbakingemphasizes more its
+actual time in the oven.  Ibaked your cakeseems to focus
+(rather unexpectedly) on this specific stage even after it is completed,
+whereasI baked you a cake, which is worded as if the recipient
+did not know about the cake ahead of time, apparently usesbakein
+the broader sense ofmade, not justcooked in an oven.
+Words' senses mutate in relation to the kinds of situations where they are used
+`{-} why else wouldbakemeanmake/preparein the past or future tense butcook/heatin the present?These variations are not random assortments of polysemous words' senses:
+they are, instead, rather predictably distributed according
+to speakers' context-specific knowledge and motives.I claim therefore thatconceptsenter language complexly, influenced by
+conceptualspacesand multi-dimensional semantic and syntactic selection-spaces.
+Concepts are not simplisticallyencodedby types, as if for
+each concept there is a linguistic or lexical type that just
+disquotationally references it `{-} that the typerhinomeans the conceptrhino(typein the sense that type-theoretic semantics would model lexical
+data according to type-theoretic rules, such asrhinoas subtype ofanimalorliving thing).
+Cognitive schema, at least in the terms I just laid out, select particularly
+important gestalt principles (force dynamics, spatial frames, action-intention)
+and isolate these from a conceptual matrix.  On this basis, we can argue that
+these schemata form a precondition for concept-to-type association; or,
+in the opposite logical direction, that language users' choices to employ
+particular type articulations follow forth from their prelinguistic
+cognizing of practical scenarios as this emerges out of collections
+of concepts used to form a basic understanding of and self-positioning within them.In this sense I called typesvehiclesfor concepts: not that typesdenoteconcepts but that they (metaphorically)carryconcepts into language.Carryingis enabled by types' semi-formal rule-bound
+interactions with other types, which are positioned to capture concepts' variations and
+relations with other concepts.  
+This is the relationship I would propose for integrating 
+theories of concepts `{-} as cognitive and lexicosemantic 
+phenomena `{-} with applications of type theory which, 
+as I argued above, are fundamentally syntactic: 
+types as structural invariants patterning the integration 
+between processes operative in language understanding.To express a noun in the benefactive case, for example, which can be seen as attributing to
+it a linguistic type consistent with being the target of a benefactive,
+is to capture the concept in a type-theoretic gloss.
+It tells us, I'm thinking about this thing in such a way that itcantake a benefactive (the type formalism attempting to capture
+thatsuch a way).
+A concept-to-typemap, as I just
+suggested, is mediated (in experience and practical reasoning) by
+cognitive organizations; when (social, embodied) enactions take
+linguistic form, these organizing principles can be encoded in how
+speakers apply morphosyntactic rules.So the linguistic structures,
+which I propose can be formally modeled by a kind of type theory, work
+communicatively as carriers and thereby signifiers of cognitive
+attitudes. The type is a vehicle for the concept because it takes part in constructions
+which express conceptual details `{-} the details
+don't emerge merely by virtue of the type itself.
+I am not arguing for a neat concept-to-type correspondence; instead, a type system provides aformal substratethat models (with some abstraction and simplification) how
+properties of individual concepts translate
+(via cognitive-schematic intermediaries) to their
+manifestation in both semantics and syntax.Continuing with declension as a case study,
+consider how anontologyof word senses 
+can interrelate with the benefactive.
+A noun as a benefactive target most often is a person or some other
+sentient/animate being; an inanimate benefactive is most likely
+something artificial and constructed (cf.,I got the car new tires).
+How readily hearers accept a sentence `{-} and the path they
+take to construing its meaning so as to make it grammatically acceptable
+`{-} involves interlocking morphological and type-related considerations;
+in the current example, the mixture of benefactive case and which nountype(assuming a basic division of nouns into e.g.
+animate/constructed/natural) forces a broader or narrower
+interpretation.  A benefactive with anartifactnoun, for example,
+almost forces the thing to be heard as somehow disrepaired:I got glue for your daughter.I got glue for your coffee mug.We gather (in the second case) that the mug is broken `{-} but this is never spelled out
+by any lexical choice; it is implied indirectly by using benefactive case.  
+It is easy to design similar examples with other cases:
+a locative construction rarely targetssentientnouns, so in 
+(reprising ()-())We're going to Grandma!Let's go to him right now.Let's go to the lawyers.Let's go to the press.we mentally substitute the person with the place where they live or work.Morphosyntactic
+considerations are also at play:to the lawyersmakesgosound more likeconsult with,
+partly because of the definite article (thelawyers implies conversants have some prior involvement
+with specific lawyers or else are using the phrase metonymically, as ingo to courtorto the courts, for
+legal institutions generally; either reading draws attention away from literal spatial implications ofgo).Go to himimplies thatheneeds
+some kind of help, because if the speaker just meant going to wherever he's at, she probably would
+have said that instead.Similarly, the locative into the pressforces the mind to
+reconfigure the landmark/trajector structure, wheregoingis thought not as a literal
+spatial path andpressnot a literal destination `{-} in other words, the phrase must be
+read as a metaphor.  But themetaphorhere is notidiomaticor removed from linguistic rules
+(based on mental resemblance, not language structure); here it
+clearly works off of formal language patterns: the landmark/trajector
+relation is read abstracted from literal spatial movement because the locative is applied
+to an expression (the press) which does not (simplistically) meet
+the expected interpretation asdesignation of place.
+In short, there are two different levels ofgranularitywhere we 
+can look for agreement requirements: a more fine-grained level where e.g.locativedraws in a type-specification of aplaceorlocation; 
+and a coarser level oriented toward Parts of Speech, and typologies 
+of phrasal units.  The former analysis addresses the level I have calledmacrotypes, while the latter scale is at themacrotypelevel.I envision the unfolding that I have just sketched out as something Phenomenological
+`{-} it arises from a unified and subjective consciousness, one marked by
+embodied personal identity and social situation.  If there are structural stases
+that can be found in this temporality of experience, these are not constitutive
+of conscious reality but a mesh of rationality that supports it, like the veins in
+a leaf.  Stuctural configurations can be lifted from language insofar as it is a
+conscious, formally governed activity, and lifted from the ambient situations which
+lend language context and meaning intents.  So any analytic emphasis on
+structural fixpoints threaded through the lived temporality of consciousness is an
+abstraction, but one that is deliberate and necessary if we want to make scientific
+or in any other manner disputatable claims about how language and congition works.To return to the example ofStudent after student, I 
+commented that designating
+one word torepresentthe phrase seemed arbitrary.  
+If we consider functional-typing alone,afteris the only non-noun,
+the natural conclusion is thataftershould be typed(which implies thatafteris analogous to thefunctionalposition, and
+in a lambda-calculus style reconstruction would be considered thehead`{-} Figure ~is an example of how
+the sentence could be annotated, for sake of discussion).
+This particular idiom depends however
+on the two constituent nouns being the same word (a pattern I've also alluded to with
+idioms liketime after time).  
+Technically, this appears to be an example ofdependent types: 
+specifically, a type-theoretic model ofafterin this would seem 
+to require that thesignature be constrained so that the second 
+noun matches the first `{-} so the secondtype is actually constrained 
+to be a singleton type dependent on the first's value.  
+By way
+of illustration, Figure ~shows a
+destructuring with implicit type annotations.Earlier I opined that the repetition inis a 
+rhetorical effect emphasizing that the recurrence of some
+phenomenon is tedious or noteworthy `{-} in this one usageafterbecomes a pluralizing adjective that takes two arguments, but
+requires them to be the same.  This sense ofaftercan be
+given a function-likenotation as, say,(usingandto mean singular
+and count-plural nouns, respectively), but with a further 
+stipulation that the second argument duplicates the first.  
+Formally, then, the parameters
+forafterare a dependent type pair,satisfied by an identity comparison between
+the two nouns.  This analysis captures a type-theoretic gloss on the 
+structural contrast betweenStudent after studentandMany students, phrases which are similar but not identical 
+in meaning (so whose differences need explaining).I have offered a more cognitive account focusing on 
+the implicit temporality ofStudent after student; this later 
+type-oriented model is more formal, or at least leaves open the 
+possibility that language is organically taking in structures 
+engineered into artificial (e.g., computer programming) languages. 
+It is certainly possible to witness formalizable structures in 
+language patterns `{-} Zhaohui Luo finds strong evidence for
+dependent types being a good model for semantic norms in, for example.  Whether these kinds of 
+formalisms have important causal influence on 
+language acquiring its evident patterns, or are more like 
+just convenient representational tools, is perhaps an 
+open (and maybe case-by-case) question.Consider alternatives formany students.  The phrase as
+written suggests a type signature (withmanyas thefunction-likeor
+derivative type), yielding a syntactic interpretation of the phrase; this
+interpretation also suggests a semantic progression, an accretion of intended detail.
+Fromstudentstomany studentsis a conversion between two plural nouns
+(at the level of concepts and semantic roles); but it also implies relative size,
+so it implies someotherplural, some still larger group of students from whichmanyare selected.  While rather abstract and formal, therepresentation
+points toward a more cognitive grounding which considers thisfunctionas a form
+of thought-operation; a refinement of a situational model, descriptive resolution,
+and so forth.  If we are prepared to accept a cognitive underpinning to semantic
+classification, we can make the intuition of part of speech signatures asfunctionsmore concrete: in response to whatmany(for example) is a functionof,
+we can say a function of propositional attitude, cognitive schema, or attentional
+focus.The schema which usefully captures the sense and picture ofstudentsis
+distinct (but arguably a variation on) that formany students, and there is amental operationtriggered by themany studentsconstruction whichmapsthe first to the second.  Similarly,student after studenttriggers ascheme evolutionwhich involves a more explicit temporal unfolding
+(in contrast to howmany studentsinstead involves a more explicit
+quantitativemany/allrelation).  What these examples show is that
+associating parts of speech with type signatures is not just a formal
+fiat, whichworksrepresentationally but does not necessarily capture
+deeper patterns of meaning.  Instead, I would argue, type signatures
+and their resonance into linkage acceptability structures
+(like singular/plural and mass/count agreement)point towardthe
+effects of cognitive schema on what we consider meaningful.InStudent after student came out against the proposal,
+tocome out, for/against, lies in the semantic frame of attitude and expression
+(it requires a mental agent, for example), but, as per my prior analysis, its reception
+carries a trace of spatial form: to come outtoa public place, to
+go on record with an opinion.  Usuallycome out [for/against], in the context of a policy or idea, is similarly
+metaphorical.  But the concrete spatial interpretation remains latent, as a kind
+of residue on even this abstract rendition, and the spatial 
+undercurrent is poised to emerge
+as more literal, should the context warrant.  However literally or metaphorically
+thespaceof thecoming outis
+understood, however explicit or latent its cogitative figuration,
+is not something internal to the language; it is a potentiality which
+will present in different ways in different circumstances.  This is not to say that
+it is something apart from linguistic meaning, but it shows how linguistic meaning
+lies neither in abstract structure alone, nor contextual pragmatics, but in their cross-reference.`[/]
+
+`[//]sectionlabelpqitypeTrefsentenceListsentenceItemswlsubsectionexposevisavishspacethindecolinecitefootnotetextitTnoindexNNtoNNinputBlankAfterBlankPOSAfterNSingAndNSingToNPlNSingNPlNpltoNpl`[/]
+
+`[//]s4itm:Liverpool`{ }sem`{ }sem`{ }sem`{ }semitm:coffeeshirtref`{ }ref`{ }ref`{ }ref`{ }ref`{ }ref`{ }ref`{ }refitm:coffeetablerefitm:NYboroughsrefitm:NYDemrefitm:NYcommuterefitm:pfsemitm:vesemitm:pfitm:ve`{ }sem`{ }sem`{ }sem`{ }sem`{ }-`(>) semThe rescued dogs had been treated by vets in the past.`{ }-`(>) semEvery singer performed the last two songs for the grand finale.`{ }sem`{ }sem`{ }sem`{ }sem`{ }sem`{ }sem-3pt`{ }idi`{ }idi-3pt`{ }idiitm:coffeeshirtitm:coffeetableitm:NYboroughsitm:boroughsitm:NYcommuteitm:NYcommuteitm:NYboroughsitm:boroughsitm:NYcommuteitm:NYcommuteitm:NYDemitm:NYboroughsitm:NYcommute`{ }ref`{ }ref`{ }ref`{ }ref`{ }ref`{ }ref`{ }ref`{ }ref`{ }ref`{ }ref`{ }reftourrefitm:teamflewrefitm:thefliesrefitm:teamflewitm:thefliesMathieuBouchardMichaelJubienp. 8JiriBenovskyp. 18LakoffJohnsonp. 171, or p.xiJohnsonp. 90LakoffJohnsonp. 208JohnsonYiyuYaoBelohlavekWilleitm:rhinorsem`{ }sem`{ }sem`{ }sem`{ }semitm:grandmaitm:press`{ }sem`{ }sem`{ }sem`{ }semfig:ESAfig:ESAfigure2.texBernardyEtAlTanakaEtAlLuoSoloviev`[/]
+
+@@ ranges
+3
+=1
+2<1>38;1,
+39<2>0;2,1136;4,
+153<1>170;5,
+311<1>319;6,
+323<1>335;7,
+336<1>342;8,
+359<1>365;9,
+440<1>452;10,
+1137<1>2193;11,
+1223<1>1229;12,
+1278<1>1288;13,
+1853<1>1867;14,
+1932<1>1939;15,
+2047<1>2056;16,
+2194<1>3455;17,
+2319<1>2324;18,
+2328<1>2332;19,
+2488<1>2495;20,
+3316<1>3323;21,
+3456<1>4219;22,
+4220<1>5417;23,
+4462<1>0;24,
+4534<1>0;25,
+4555<1>4564;26,
+4605<1>4609;27,
+4682<1>4686;28,
+4909<1>4912;29,
+4916<1>4920;30,
+5000<1>5004;31,
+5015<1>0;32,
+5097<1>0;33,
+5117<1>0;34,
+5300<1>5311;35,
+5418<1>6489;36,
+5851<1>5859;37,
+5861<1>5868;38,
+5875<1>5883;39,
+6279<1>6287;40,
+6490<1>8341;41,
+6561<1>6565;42,
+6646<1>6649;43,
+6680<1>6692;44,
+7541<1>7555;45,
+7731<1>7742;46,
+7744<1>7764;47,
+7766<1>7786;48,
+7908<1>7926;49,
+7928<1>7972;50,
+7983<1>7995;51,
+8001<1>8009;52,
+8208<1>8212;53,
+8217<1>8267;54,
+8272<1>0;55,
+8342<2>9604;57,8347;58,
+8442<1>8449;59,
+8547<1>8555;60,
+8653<1>8674;61,
+8863<1>8876;62,
+8878<1>8888;63,
+8947<1>8953;64,
+8957<1>8965;65,
+8994<1>9001;66,
+9049<1>9053;67,
+9061<1>9067;68,
+9070<1>9075;69,
+9098<1>9110;70,
+9242<1>9247;71,
+9264<1>9271;72,
+9605<1>11520;73,
+10077<1>10082;74,
+10154<1>10171;75,
+10200<1>10209;76,
+10279<1>10292;77,
+10411<1>10418;78,
+10672<1>10685;79,
+10735<1>10742;80,
+10823<1>10827;81,
+10898<1>10907;82,
+10960<1>10967;83,
+10982<1>11000;84,
+11019<1>11028;85,
+11119<1>11126;86,
+11136<1>11147;87,
+11295<1>11300;88,
+11521<1>12793;89,
+11741<1>11754;90,
+11982<1>11986;91,
+11990<1>12003;92,
+12005<3>12078;93,0;94,0;95,
+12035<2>0;99,0;100,
+12189<1>12193;104,
+12197<1>12202;105,
+12410<1>12414;106,
+12418<1>12423;107,
+12756<1>12765;108,
+12794<1>14535;109,
+12857<1>12870;110,
+12874<1>12884;111,
+13140<3>13216;112,0;113,0;114,
+13178<2>0;118,0;119,
+13225<1>13238;123,
+13386<1>13391;124,
+13410<1>13416;125,
+13437<1>13451;126,
+13665<1>13680;127,
+13683<1>13694;128,
+13712<1>13722;129,
+14136<1>14149;130,
+14536<1>15743;131,
+14631<1>14640;132,
+15174<1>15188;133,
+15270<1>15275;134,
+15363<1>15382;135,
+15408<1>15415;136,
+15443<1>15457;137,
+15546<1>15559;138,
+15606<1>15620;139,
+15744<1>16571;140,
+15812<1>15818;141,
+15823<1>15835;142,
+15943<1>15949;143,
+15951<1>15960;144,
+15962<1>15973;145,
+15975<1>15985;146,
+16102<1>16104;147,
+16288<1>16290;148,
+16572<1>17932;149,
+16665<1>16674;150,
+16677<1>16690;151,
+16846<1>16859;152,
+16886<1>16892;153,
+16940<1>16946;154,
+16950<1>16955;155,
+17122<1>17128;156,
+17314<1>17327;157,
+17388<1>17394;158,
+17455<1>17461;159,
+17674<1>17687;160,
+17872<1>17877;161,
+17879<1>17893;162,
+17895<1>17923;163,
+17925<1>17930;164,
+17933<1>19402;165,
+18287<1>18296;166,
+18366<1>18382;167,
+18843<1>18847;168,
+18851<1>18853;169,
+19403<1>20426;170,
+19548<1>19557;171,
+19735<1>19744;172,
+19880<1>19881;173,
+19941<1>19950;174,
+20087<1>20092;175,
+20427<1>21699;176,
+20499<1>20508;177,
+20632<1>20635;178,
+20671<1>20682;179,
+21700<1>22695;180,
+22696<1>24239;181,
+22722<1>22725;182,
+23391<1>23399;183,
+23835<1>23841;184,
+24032<2>24037;185,24037;186,
+24240<1>25079;187,
+24475<1>24480;188,
+24483<1>24487;189,
+24589<1>24591;190,
+24593<1>24596;191,
+24601<1>24608;192,
+24687<1>24691;193,
+24918<1>24923;194,
+24926<1>24936;195,
+24939<1>24968;196,
+24971<1>25012;197,
+25080<1>26558;198,
+25630<1>25637;199,
+25650<1>25676;200,
+26359<1>26366;201,
+26369<1>26381;202,
+26423<1>26489;203,
+26559<1>27523;204,
+26711<1>26739;205,
+26764<1>26806;206,
+26942<1>26951;207,
+27155<1>27160;208,
+27213<1>27220;209,
+27230<1>27233;210,
+27307<1>27335;211,
+27377<1>27382;212,
+27524<1>28085;213,
+27684<1>27703;214,
+28041<1>28049;215,
+28052<1>28061;216,
+28086<1>28120;217,
+28121<1>29828;218,
+28229<1>28235;219,
+28238<1>28252;220,
+28929<1>28934;221,
+28941<1>28951;222,
+29083<3>29332;223,0;224,0;225,
+29117<2>0;229,0;230,
+29151<2>0;234,0;235,
+29191<2>0;239,0;240,
+29230<2>0;244,0;245,
+29270<2>0;249,0;250,
+29388<1>29395;254,
+29397<1>29401;255,
+29403<1>29410;256,
+29536<1>29540;257,
+29544<1>29545;258,
+29658<3>29828;259,0;260,0;261,
+29718<2>0;265,0;266,
+29759<2>0;270,0;271,
+29829<1>30667;275,
+30046<1>30070;276,
+30103<1>30108;277,
+30126<1>30147;278,
+30324<1>30344;279,
+30463<1>30486;280,
+30491<1>30517;281,
+30595<1>30602;282,
+30639<1>30644;283,
+30668<1>31637;284,
+30844<1>30851;285,
+30861<3>31050;286,0;287,0;288,
+30902<2>0;292,0;293,
+30967<2>0;297,0;298,
+31109<1>31111;302,
+31481<1>31491;303,
+31627<1>31628;304,
+31638<1>32356;305,
+31840<1>31866;306,
+31968<1>31977;307,
+31980<1>32006;308,
+32019<1>32024;309,
+32059<1>32063;310,
+32195<1>32200;311,
+32328<1>32355;312,
+32357<1>33572;313,
+32522<1>32550;314,
+32664<1>32677;315,
+32690<1>32693;316,
+32739<1>32750;317,
+32896<1>33004;318,
+33022<1>33024;319,
+33060<1>33063;320,
+33187<1>33190;321,
+33217<1>33254;322,
+33290<1>33298;323,
+33380<1>33457;324,
+33528<1>33570;325,
+33573<1>34716;326,
+33676<1>33749;327,
+33856<1>33859;328,
+34039<1>34042;329,
+34432<1>34464;330,
+34626<1>34635;331,
+34658<1>34668;332,
+34717<1>36531;333,
+34736<1>34740;334,
+34914<3>34972;335,0;336,0;337,
+34942<2>0;341,0;342,
+35052<1>35058;346,
+35131<1>0;347,
+35179<1>0;349,
+35197<1>35201;351,
+35537<3>35680;352,0;353,0;354,
+35570<2>0;358,0;359,
+35599<2>0;363,0;364,
+35632<2>0;368,0;369,
+36087<1>36094;373,
+36277<1>36283;374,
+36290<1>36299;375,
+36386<1>36389;376,
+36412<1>36414;377,
+36466<1>36476;378,
+36513<1>36521;379,
+36532<1>38262;380,
+36565<1>36571;381,
+36583<1>36592;382,
+36598<1>36601;383,
+36613<1>36617;384,
+36967<3>37362;385,0;386,0;387,
+37071<2>0;392,0;393,
+37138<2>0;398,0;399,
+37425<1>37431;403,
+37484<1>37491;404,
+37532<1>37541;405,
+37590<1>37596;406,
+37857<1>37861;407,
+37887<1>37893;408,
+38263<1>39332;409,
+38450<1>38461;410,
+38720<1>38726;411,
+38739<1>38748;412,
+38924<1>38928;413,
+38945<1>38948;414,
+38973<1>38977;415,
+38980<1>38989;416,
+38991<1>39000;417,
+39002<1>39011;418,
+39013<1>39020;419,
+39051<1>39055;420,
+39064<1>39067;421,
+39113<1>39122;422,
+39138<1>39151;423,
+39236<1>39245;424,
+39248<1>39257;425,
+39264<1>39330;426,
+39333<1>40800;427,
+39373<1>39386;428,
+39506<1>39512;429,
+39583<1>39587;430,
+39853<1>39872;431,
+39897<1>39919;432,
+40496<1>40503;433,
+40801<1>41759;434,
+40988<1>41011;435,
+41253<1>0;436,
+41760<1>43276;437,
+41799<1>41818;438,
+42059<1>42068;439,
+42544<1>42609;440,
+42678<1>42686;441,
+43030<1>43048;442,
+43277<1>44096;443,
+43889<1>43890;444,
+44022<1>44028;445,
+44097<1>45193;446,
+44115<1>44120;447,
+44253<2>44252;448,0;449,
+44678<1>44688;450,
+45194<1>46733;451,
+45328<1>45334;452,
+45339<1>45351;453,
+45431<1>45481;454,
+45599<1>45610;455,
+45643<1>45667;456,
+45734<3>46105;457,0;458,0;459,
+45892<2>0;463,0;464,
+46127<1>46131;468,
+46300<1>46305;469,
+46391<3>46733;470,0;471,0;472,
+46497<2>0;476,0;477,
+46595<2>0;481,0;482,
+46734<1>48046;486,
+46861<1>46867;487,
+46904<1>46915;488,
+46919<1>46934;489,
+47123<1>47127;490,
+47147<1>47153;491,
+47176<1>47181;492,
+47204<1>47210;493,
+47435<2>47445;494,47441;495,
+47486<1>47506;496,
+48047<1>48812;497,
+48258<1>48268;498,
+48287<1>48293;499,
+48377<1>48384;500,
+48813<1>50001;501,
+49090<1>49096;502,
+49442<1>49447;503,
+49766<1>49771;504,
+49835<1>49840;505,
+50002<1>52115;506,
+50005<1>50010;507,
+50107<1>50113;508,
+50297<1>50302;509,
+50369<4>50654;510,0;511,0;512,0;514,
+50421<2>0;518,0;519,
+50490<3>0;523,0;524,0;526,
+50700<1>50705;530,
+50774<1>50779;531,
+50928<1>50933;532,
+50936<1>50941;533,
+51182<1>51187;534,
+51320<1>51325;535,
+51667<1>51672;536,
+51853<1>51881;537,
+51982<1>52006;538,
+52116<1>53163;539,
+52454<1>52456;540,
+52492<1>0;541,
+52495<1>0;543,
+52543<1>52550;545,
+52674<1>52680;546,
+52916<1>52922;547,
+53164<1>53919;548,
+53223<1>53232;549,
+53649<1>53651;550,
+53701<1>53708;551,
+53920<1>54551;552,
+54128<1>54130;553,
+54505<1>54513;554,
+54516<1>54522;555,
+54552<2>0;556,55401;557,
+54648<1>54658;558,
+54693<1>54703;559,
+54821<1>54824;560,
+54870<1>54880;561,
+54928<1>0;562,
+54929<1>0;564,
+54957<1>54963;566,
+54974<1>0;567,
+54975<1>0;569,
+55018<1>55020;571,
+55022<1>0;572,
+55023<1>0;574,
+55033<1>55036;576,
+55050<1>0;577,
+55051<1>0;579,
+55052<1>0;581,
+55402<1>56415;583,
+55542<1>55557;584,
+55633<1>55640;585,
+55656<1>0;586,
+55659<1>0;588,
+55747<1>55753;590,
+55757<1>55763;591,
+55939<1>55940;592,
+55948<1>55950;593,
+56310<1>56349;594,
+56352<1>56354;595,
+56382<1>56408;596,
+56411<1>56414;597,
+56416<1>57690;598,
+56493<1>56496;599,
+57376<1>57386;600,
+57389<1>57395;601,
+57691<1>60503;602,
+57727<1>57731;603,
+57798<1>57816;604,
+57820<1>57836;605,
+57901<1>57909;606,
+58168<3>59047;607,0;608,0;609,
+58244<2>0;613,0;614,
+58292<2>0;618,0;619,
+58351<2>0;623,0;624,
+58414<2>0;628,0;629,
+58465<2>0;633,0;634,
+58562<2>0;638,0;639,
+58663<2>0;643,0;644,
+58751<2>0;648,0;649,
+58852<2>0;653,0;654,
+58949<2>0;658,0;659,
+59114<1>59119;663,
+59121<1>59127;664,
+59129<1>59133;665,
+59540<1>59590;666,
+59616<1>59630;667,
+59699<1>59711;668,
+59737<1>59738;669,
+59741<1>59746;670,
+59802<1>59806;671,
+59856<1>59871;672,
+59884<1>59887;673,
+60130<1>60131;674,
+60134<1>60139;675,
+60142<1>60147;676,
+60152<1>60155;677,
+60158<1>60165;678,
+60168<1>60176;679,
+60275<1>60282;680,
+60303<1>60306;681,
+60309<1>60316;682,
+60415<1>60416;683,
+60504<1>61625;684,
+60533<1>60534;685,
+60570<1>60582;686,
+60662<1>60663;687,
+60681<1>60701;688,
+60874<1>60924;689,
+60981<1>60984;690,
+61080<1>61083;691,
+61109<1>61115;692,
+61257<1>61265;693,
+61385<1>61395;694,
+61505<1>61508;695,
+61527<1>61535;696,
+61548<1>61551;697,
+61558<1>61564;698,
+61583<1>61586;699,
+61588<1>61591;700,
+61626<1>62492;701,
+61879<1>61893;702,
+61896<1>61912;703,
+61915<1>61916;704,
+61935<1>61938;705,
+62094<1>62095;706,
+62097<1>62100;707,
+62322<1>62330;708,
+62333<1>62341;709,
+62493<1>64246;710,
+62621<1>62673;711,
+62694<1>62697;712,
+62729<1>62736;713,
+62762<1>62770;714,
+62831<3>62995;715,0;716,0;717,
+62885<2>0;721,0;722,
+62939<2>0;726,0;727,
+62986<1>62994;729,
+63009<1>0;732,
+63048<1>63058;734,
+63139<1>63151;735,
+63163<1>0;736,
+63346<2>63588;738,0;739,
+63390<1>63398;740,
+63450<1>0;741,
+63494<1>63502;742,
+63615<1>63619;743,
+63737<1>63741;744,
+64154<1>64155;745,
+64158<1>64161;746,
+64247<1>65249;747,
+64354<1>64361;748,
+64533<1>64542;749,
+64850<1>64859;750,
+64873<1>64881;751,
+64975<1>64981;752,
+65250<1>66005;753,
+65394<1>65422;754,
+65630<1>65636;755,
+66006<1>66534;756,
+66449<1>66456;757,
+66535<1>66559;758,
+66560<1>67986;759,
+66641<1>66652;760,
+66653<1>0;761,
+66787<1>66792;763,
+66860<1>66863;764,
+66866<1>66872;765,
+66932<1>66938;766,
+67251<1>67754;767,
+67429<1>67441;768,
+67613<1>67624;769,
+67682<1>67691;770,
+67827<1>67833;771,
+67987<1>68953;772,
+68207<1>68210;773,
+68353<1>0;774,
+68369<1>68384;776,
+68385<1>0;777,
+68481<1>68493;780,
+68611<1>68614;781,
+68757<1>68764;782,
+68954<1>69680;783,
+69336<1>69345;784,
+69348<1>69364;785,
+69407<1>69420;786,
+69467<1>69473;787,
+69619<1>69636;788,
+69681<1>71235;789,
+69832<1>69835;790,
+70073<1>70080;791,
+70244<1>70248;792,
+70264<1>70272;793,
+71236<1>72895;794,
+71291<1>71300;795,
+71303<1>71323;796,
+71457<1>71463;797,
+71975<1>0;798,
+71976<1>0;801,
+72025<1>0;805,
+72026<1>0;808,
+72207<1>72214;811,
+72495<1>72504;812,
+72630<1>72634;813,
+72896<1>75414;814,
+72983<1>72992;815,
+73036<1>73050;816,
+73053<1>73078;817,
+73271<1>73288;818,
+73292<1>73309;819,
+73413<1>73422;820,
+73426<1>73435;821,
+73604<1>0;822,
+73605<1>0;824,
+73606<1>0;826,
+73669<1>73677;828,
+73681<1>73689;829,
+73924<3>74010;830,0;831,0;832,
+73971<2>0;836,0;837,
+74072<1>74076;841,
+74295<1>74315;842,
+74333<1>74340;843,
+74400<1>74407;844,
+74411<1>74419;845,
+74664<1>74672;846,
+74702<1>75414;847,
+74787<1>0;848,
+74811<1>74822;849,
+74830<1>74833;850,
+74851<1>0;851,
+74889<1>74905;852,
+74908<1>0;853,
+74934<1>0;854,
+75012<1>0;855,
+75166<1>75172;856,
+75250<1>75254;857,
+75268<1>75277;858,
+75281<1>75299;859,
+75338<1>75347;860,
+75351<1>75365;861,
+75396<1>75400;862,
+75404<1>75413;863,
+75415<1>76863;864,
+75630<1>75639;865,
+75642<1>75646;866,
+75994<1>76000;867,
+76119<1>76125;868,
+76233<1>76238;869,
+76247<1>76254;870,
+76270<1>76279;871,
+76295<1>76300;872,
+76322<1>76326;873,
+76328<1>76337;874,
+76342<1>76349;875,
+76406<1>76411;876,
+76683<1>76692;877,
+76695<1>76699;878,
+76864<1>77424;879,
+77228<1>77233;880,
+77304<3>77350;881,0;882,0;883,
+77425<1>77892;887,
+77532<1>0;888,
+77583<1>77590;889,
+77595<1>77607;890,
+77611<1>77615;891,
+77645<1>77654;892,
+77659<1>77662;893,
+77734<1>77744;894,
+77861<1>77891;895,
+77893<1>79528;896,
+78018<1>78020;897,
+78182<1>78193;898,
+78195<1>78215;899,
+78230<1>78243;900,
+78245<1>78279;901,
+78294<1>78322;902,
+78324<1>78362;903,
+78364<1>78388;904,
+78460<1>78465;905,
+78515<1>78529;906,
+78559<1>78571;907,
+78634<1>79225;908,
+78713<1>78714;909,
+78741<1>78742;910,
+79051<1>79057;911,
+79178<1>79190;912,
+79529<1>81971;913,
+79787<1>79793;914,
+80483<1>80491;915,
+80530<1>80536;916,
+80572<1>80577;917,
+80663<1>80669;918,
+80707<1>81786;919,
+80792<1>80795;920,
+80812<1>80815;921,
+80888<1>80890;922,
+80894<1>80910;923,
+80948<1>80964;924,
+81155<1>81158;925,
+81191<1>81194;926,
+81240<1>81243;927,
+81269<1>81284;928,
+81277<1>81278;929,
+81332<1>81346;930,
+81442<1>81459;931,
+81556<1>81559;932,
+81583<1>81586;933,
+81597<1>81613;934,
+81712<1>81715;935,
+81720<1>81723;936,
+81725<1>81731;937,
+81763<1>81766;938,
+81768<1>81771;939,
+81972<1>83068;940,
+81994<1>82001;941,
+82052<1>82057;942,
+82152<1>82158;943,
+82286<1>82290;944,
+82308<1>82312;945,
+82314<1>82317;946,
+82428<1>82432;947,
+82446<1>82451;948,
+82454<1>82465;949,
+83069<1>83707;950,
+83097<1>83104;951,
+83133<1>83138;952,
+83178<1>83182;953,
+83206<1>83213;954,
+83708<1>84335;955,
+83989<1>83991;956,
+84057<1>84066;957,
+84087<1>84089;958,
+84336<1>84990;959,
+84779<1>84794;960,
+84991<1>86339;961,
+85050<1>85057;962,
+85286<1>85308;963,
+85584<1>85587;964,
+85730<1>85737;965,
+85816<3>85875;966,0;967,0;968,
+85845<2>0;972,0;973,
+86133<1>86140;977,
+86167<1>0;978,
+86170<1>0;980,
+86172<3>86266;982,0;983,0;984,
+86195<2>0;988,0;989,
+86221<2>0;993,0;994,
+86245<2>0;998,0;999,
+86340<1>86896;1003,
+86388<1>86401;1004,
+86407<1>86408;1005,
+86424<1>86435;1006,
+86478<1>86480;1007,
+86608<1>86618;1008,
+86621<1>86633;1009,
+86742<1>86743;1010,
+86746<1>86754;1011,
+86767<1>86768;1012,
+86897<1>87948;1013,
+86923<1>86934;1014,
+87005<1>87009;1015,
+87054<1>87058;1016,
+87150<1>87157;1017,
+87169<1>87177;1018,
+87452<1>87460;1019,
+87530<1>87549;1020,
+87595<1>87605;1021,
+87689<1>87696;1022,
+87731<1>87735;1023,
+87738<1>87745;1024,
+87890<1>87899;1025,
+87934<1>87942;1026,
+87949<1>88834;1027,
+88835<1>90667;1028,
+88862<1>88882;1029,
+88926<1>88934;1030,
+89005<1>89009;1031,
+89062<1>89066;1032,
+89082<1>0;1033,
+89101<1>89105;1034,
+89125<1>89134;1035,
+89214<1>89217;1036,
+89228<1>0;1037,
+89442<1>89456;1039,
+89507<1>89521;1040,
+89564<1>89568;1041,
+89608<1>0;1042,
+89691<1>0;1043,
+89766<1>0;1044,
+89810<1>0;1045,
+89863<1>0;1047,
+89902<1>0;1049,
+90021<1>90025;1050,
+90132<1>90136;1051,
+90165<1>0;1052,
+90182<1>0;1053,
+90188<1>0;1054,
+90191<1>0;1055,
+90362<1>90366;1056,
+90392<1>0;1057,
+90393<1>0;1059,
+90534<1>90554;1061,
+90558<1>90570;1062,
+90668<1>91396;1063,
+90748<1>90768;1064,
+91157<1>0;1065,
+91397<1>92456;1067,
+91422<1>91434;1068,
+91491<1>91494;1069,
+91501<1>91513;1070,
+91533<1>0;1071,
+91681<1>91688;1072,
+91691<1>91703;1073,
+91845<1>91849;1074,
+91904<1>91907;1075,
+91960<1>0;1076,
+92036<1>92043;1077,
+92291<1>92299;1078,
+92334<1>92337;1079,
+92365<1>92366;1080,
+92457<1>93319;1081,
+92516<1>92523;1082,
+92574<1>92586;1083,
+92603<1>92618;1084,
+92635<1>92647;1085,
+92666<1>92669;1086,
+92706<1>92726;1087,
+92737<1>92752;1088,
+92822<1>92834;1089,
+92880<1>92887;1090,
+93014<1>93018;1091,
+93245<1>93256;1092,
+93320<1>94402;1093,
+93322<1>93372;1094,
+93377<1>93384;1095,
+93586<1>93587;1096,
+93645<1>93666;1097,
+93978<1>93982;1098,
+93989<1>93998;1099,
+94403<5>94402;1100,94402;1101,94402;1102,94402;1103,94402;1104,
+!
+=2
+!
+=3
+713<1>714;802,
+!
+ *
+@@ details
+1104
+1024;2:8
+1216;9:13
+0;2:3
+16384;14:14
+512;15:15
+6144;16:16
+6144;16:16
+0;16:16
+6144;15:15
+6144;15:15
+16384;14:14
+6144;16:16
+2048;16:16
+6144;15:15
+6144;16:16
+6144;16:16
+16384;14:14
+4608;15:15
+6144;15:15
+6144;16:16
+6144;16:16
+16384;14:14
+16384;14:14
+6144;17:21
+6144;17:21
+0;15:15
+3072;15:15
+6144;15:15
+6144;15:15
+4608;15:15
+6144;16:16
+4608;17:21
+6144;17:21
+6144;17:21
+6144;15:15
+16384;14:14
+2048;16:16
+2048;16:16
+2048;16:16
+6144;15:15
+16384;14:14
+3072;16:16
+3072;16:16
+6144;15:15
+2048;15:15
+512;15:15
+6144;15:15
+4096;16:16
+6144;15:15
+4096;16:16
+6144;15:15
+6144;16:16
+2048;15:15
+7168;16:16
+2240;22:24
+0;4:16
+16384;14:14
+8192;15:15
+3072;15:15
+6144;16:16
+6144;15:15
+2048;15:15
+2048;15:15
+4608;15:15
+6144;15:15
+512;15:15
+4608;15:15
+6144;15:15
+6144;15:15
+6144;16:16
+6144;15:15
+4608;15:15
+16384;14:14
+6144;15:15
+6144;15:15
+6144;16:16
+4608;16:16
+6144;16:16
+6144;15:15
+6144;16:16
+2048;16:16
+6144;16:16
+6144;15:15
+2048;16:16
+6144;16:16
+3072;15:15
+6144;16:16
+6144;16:16
+16384;14:14
+2048;15:15
+6144;16:16
+2048;16:16
+67133441;25:36
+12288;37:48
+1216;49:51
+1048576;17:17
+1048576;12005:12034
+1048576;18:20
+4096;37:48
+1216;49:51
+1048576;21:21
+1048576;12035:12078
+1048576;22:24
+4608;16:16
+6144;16:16
+4608;15:15
+6144;15:15
+2048;15:15
+16384;14:14
+6144;15:15
+6144;15:15
+67133441;25:36
+12288;37:48
+1216;49:51
+1048576;25:25
+1048576;13140:13177
+1048576;26:28
+4096;37:48
+1216;49:51
+1048576;29:29
+1048576;13178:13216
+1048576;30:32
+6144;15:15
+4608;15:15
+2048;15:15
+4608;16:16
+3072;15:15
+2048;15:15
+6144;16:16
+4608;16:16
+16384;14:14
+6144;15:15
+4608;15:15
+6144;16:16
+3072;15:15
+2048;16:16
+6144;16:16
+4608;16:16
+6144;16:16
+16384;14:14
+6144;16:16
+2048;15:15
+2048;16:16
+512;16:16
+2048;16:16
+2048;16:16
+6144;15:15
+6144;16:16
+16384;14:14
+6144;16:16
+6144;16:16
+6144;15:15
+3072;16:16
+6144;16:16
+512;16:16
+3072;15:15
+2048;15:15
+6144;15:15
+6144;16:16
+2048;16:16
+0;15:15
+512;15:15
+2048;15:15
+2048;15:15
+16384;14:14
+512;16:16
+6144;15:15
+3072;16:16
+6144;16:16
+16384;14:14
+6144;16:16
+6144;15:15
+6144;16:16
+6144;16:16
+6144;16:16
+16384;14:14
+6144;15:15
+6144;16:16
+6144;16:16
+16384;14:14
+16384;14:14
+6144;16:16
+2048;16:16
+2048;16:16
+4608;15:15
+2048;16:16
+16384;14:14
+4608;16:16
+2048;16:16
+2048;16:16
+2048;16:16
+2048;16:16
+6144;15:15
+6144;16:16
+6144;16:16
+4608;16:16
+2048;16:16
+16384;14:14
+6144;16:16
+4608;15:15
+6144;15:15
+6144;15:15
+2048;16:16
+16384;14:14
+3072;16:16
+2048;16:16
+6144;16:16
+6144;16:16
+6144;16:16
+4608;16:16
+6144;16:16
+2048;16:16
+16384;14:14
+2048;15:15
+6144;15:15
+6144;15:15
+16384;52:61
+16384;14:14
+6144;15:15
+6144;15:15
+6144;16:16
+2048;15:15
+67133441;25:36
+12288;37:48
+1216;49:51
+1048576;33:47
+1048576;29083:29116
+1048576;48:50
+4096;37:48
+1216;49:51
+1048576;51:51
+1048576;29117:29150
+1048576;52:54
+4096;37:48
+1216;49:51
+1048576;55:55
+1048576;29151:29190
+1048576;56:58
+4096;37:48
+1216;49:51
+1048576;59:59
+1048576;29191:29229
+1048576;60:62
+4096;37:48
+1216;49:51
+1048576;63:63
+1048576;29230:29269
+1048576;64:66
+4096;37:48
+1216;49:51
+1048576;67:67
+1048576;29270:29332
+1048576;68:70
+0;16:16
+512;16:16
+2048;16:16
+6144;16:16
+6144;16:16
+67118081;25:36
+4608;37:48
+1216;49:51
+1048576;71:71
+1048576;29658:29717
+1048576;72:74
+4096;37:48
+1216;49:51
+1048576;75:75
+1048576;29718:29758
+1048576;76:78
+4096;37:48
+1216;49:51
+1048576;79:93
+1048576;29759:29828
+1048576;94:96
+16384;14:14
+6144;16:16
+6144;16:16
+4608;16:16
+6144;16:16
+4608;16:16
+3072;16:16
+6144;16:16
+6144;16:16
+16384;14:14
+6144;15:15
+67135489;25:36
+12288;37:48
+1216;49:51
+1048576;97:110
+1048576;30861:30901
+1048576;111:113
+4096;37:48
+1216;49:51
+1048576;114:122
+1048576;30902:30966
+1048576;123:125
+4096;37:48
+1216;49:51
+1048576;126:138
+1048576;30967:31050
+1048576;139:141
+4608;16:16
+3072;15:15
+6144;16:16
+16384;14:14
+4608;16:16
+6144;15:15
+4608;16:16
+6144;16:16
+6144;16:16
+2048;15:15
+2048;16:16
+16384;14:14
+4608;16:16
+2048;16:16
+6144;16:16
+6144;16:16
+6144;16:16
+6144;16:16
+6144;16:16
+6144;15:15
+3072;16:16
+6144;15:15
+0;16:16
+0;16:16
+16384;14:14
+6144;16:16
+6144;16:16
+6144;15:15
+0;16:16
+6144;16:16
+4608;16:16
+16384;14:14
+2048;15:15
+67133441;25:36
+12288;37:48
+1216;49:51
+1048576;142:147
+1048576;34914:34941
+1048576;148:150
+4096;37:48
+1216;49:51
+1048576;151:156
+1048576;34942:34972
+1048576;157:159
+2048;16:16
+192;22:24
+0;160:165
+192;22:24
+0;166:171
+4608;16:16
+67133441;25:36
+12288;37:48
+1216;49:51
+1048576;172:172
+1048576;35537:35569
+1048576;173:175
+4096;37:48
+1216;49:51
+1048576;176:176
+1048576;35570:35598
+1048576;177:179
+4096;37:48
+1216;49:51
+1048576;180:180
+1048576;35599:35631
+1048576;181:183
+4096;37:48
+1216;49:51
+1048576;184:184
+1048576;35632:35680
+1048576;185:187
+2048;15:15
+6144;16:16
+512;16:16
+4608;16:16
+6144;16:16
+6144;16:16
+6144;16:16
+16384;14:14
+6144;16:16
+512;16:16
+6144;16:16
+2048;16:16
+67133441;25:36
+12288;37:48
+1216;49:51
+1048576;188:188
+1048576;36967:37070
+1048580;189:194
+1048580;195:248
+4096;37:48
+1216;49:51
+1048576;249:249
+1048576;37071:37137
+1048580;250:255
+1048580;256:318
+4096;37:48
+1216;49:51
+1048576;319:319
+1048576;37138:37362
+1048576;320:322
+4608;16:16
+6144;16:16
+6144;16:16
+6144;16:16
+6144;15:15
+6144;15:15
+16384;14:14
+6144;16:16
+512;15:15
+6144;16:16
+6144;16:16
+3072;15:15
+6144;16:16
+2048;16:16
+512;16:16
+2048;16:16
+2048;16:16
+6144;16:16
+2048;16:16
+4608;15:15
+2048;15:15
+6144;15:15
+3072;15:15
+2048;16:16
+16384;14:14
+6144;15:15
+4608;15:15
+6144;15:15
+6144;16:16
+6144;16:16
+6144;15:15
+16384;14:14
+6144;15:15
+2048;62:67
+16384;14:14
+6144;15:15
+2048;15:15
+2048;16:16
+3072;15:15
+512;15:15
+16384;14:14
+2048;16:16
+6144;16:16
+16384;14:14
+6144;16:16
+6144;16:16
+2048;68:74
+6144;16:16
+16384;14:14
+2048;15:15
+512;15:15
+3072;16:16
+6144;15:15
+2048;15:15
+67133441;25:36
+12288;37:48
+1216;49:51
+1048576;323:323
+1048576;45734:45891
+1048576;324:326
+4096;37:48
+1216;49:51
+1048576;327:327
+1048576;45892:46105
+1048576;328:330
+6144;16:16
+4608;15:15
+67118081;25:36
+4608;37:48
+1216;49:51
+1048576;331:331
+1048576;46391:46496
+1048576;332:334
+4096;37:48
+1216;49:51
+1048576;335:335
+1048576;46497:46594
+1048576;336:338
+4096;37:48
+1216;49:51
+1048576;339:339
+1048576;46595:46733
+1048576;340:342
+16384;14:14
+6144;15:15
+6144;15:15
+2048;15:15
+6144;16:16
+6144;16:16
+6144;16:16
+6144;16:16
+6144;15:15
+6144;16:16
+4608;16:16
+16384;14:14
+6144;16:16
+2048;15:15
+6144;16:16
+16384;14:14
+512;16:16
+6144;15:15
+2048;16:16
+2048;15:15
+16384;14:14
+6144;15:15
+6144;16:16
+6144;15:15
+67133441;25:36
+12288;37:48
+192;75:80
+0;343:346
+1216;49:51
+1048576;347:347
+1048576;50369:50420
+1048576;348:350
+4096;37:48
+1216;49:51
+1048576;351:351
+1048576;50421:50489
+1048576;352:354
+4096;37:48
+192;75:80
+0;355:358
+1216;49:51
+1048576;359:359
+1048576;50490:50654
+1048576;360:362
+6144;15:15
+4608;15:15
+6144;15:15
+2048;15:15
+6144;15:15
+6144;15:15
+6144;15:15
+6144;16:16
+6144;15:15
+16384;14:14
+6144;16:16
+192;22:24
+0;363:377
+192;22:24
+0;378:392
+2048;15:15
+2560;15:15
+6144;15:15
+16384;14:14
+6656;16:16
+6144;16:16
+6656;16:16
+16384;14:14
+7168;16:16
+6656;15:15
+6144;15:15
+16384;81:92
+16384;14:14
+2560;16:16
+2560;15:15
+6144;16:16
+6144;16:16
+192;22:24
+0;393:406
+2240;22:24
+0;407:418
+6144;16:16
+192;22:24
+0;419:431
+2240;22:24
+0;432:444
+6144;16:16
+192;22:24
+0;445:458
+2240;22:24
+0;459:470
+6144;16:16
+192;22:24
+0;471:483
+2240;22:24
+0;484:496
+2240;22:24
+0;497:505
+16384;14:14
+3072;15:15
+6144;15:15
+192;22:24
+0;506:519
+192;22:24
+0;520:532
+6144;16:16
+6144;16:16
+2048;16:16
+6144;16:16
+6144;15:15
+2048;16:16
+6144;15:15
+2048;16:16
+16384;14:14
+6144;16:16
+6144;16:16
+3072;16:16
+16384;14:14
+2048;16:16
+7168;16:16
+2048;16:16
+2048;16:16
+67133441;25:36
+12288;37:48
+1216;49:51
+1048576;533:533
+1048576;58168:58243
+1048576;534:536
+4096;37:48
+1216;49:51
+1048576;537:537
+1048576;58244:58291
+1048576;538:540
+4096;37:48
+1216;49:51
+1048576;541:541
+1048576;58292:58350
+1048576;542:544
+4096;37:48
+1216;49:51
+1048576;545:545
+1048576;58351:58413
+1048576;546:548
+4096;37:48
+1216;49:51
+1048576;549:549
+1048576;58414:58464
+1048576;550:552
+4096;37:48
+1216;49:51
+1048576;553:553
+1048576;58465:58561
+1048576;554:556
+4096;37:48
+1216;49:51
+1048576;557:557
+1048576;58562:58662
+1048576;558:560
+4096;37:48
+1216;49:51
+1048576;561:561
+1048576;58663:58750
+1048576;562:564
+4096;37:48
+1216;49:51
+1048576;565:565
+1048576;58751:58851
+1048576;566:568
+4096;37:48
+1216;49:51
+1048576;569:569
+1048576;58852:58948
+1048576;570:572
+4096;37:48
+1216;49:51
+1048576;573:573
+1048576;58949:59047
+1048576;574:576
+2048;16:16
+512;16:16
+2048;16:16
+2048;16:16
+6144;16:16
+2048;16:16
+6144;16:16
+6144;16:16
+4608;15:15
+2048;16:16
+6144;16:16
+4608;16:16
+6144;16:16
+2048;16:16
+6144;16:16
+6144;16:16
+512;16:16
+3072;15:15
+6144;16:16
+6144;16:16
+6144;15:15
+16384;14:14
+6144;16:16
+4608;16:16
+6144;16:16
+2048;16:16
+2048;16:16
+6144;15:15
+2048;15:15
+6144;16:16
+6144;16:16
+4608;15:15
+4608;16:16
+6144;16:16
+6144;16:16
+6144;16:16
+2048;16:16
+4096;16:16
+16384;14:14
+6144;16:16
+3072;16:16
+2048;16:16
+2048;16:16
+512;16:16
+4096;16:16
+4608;16:16
+2048;16:16
+16384;14:14
+6144;16:16
+6144;15:15
+2048;15:15
+6144;16:16
+67133441;25:36
+12288;37:48
+1216;49:51
+1048576;577:580
+1048576;62831:62884
+1048576;581:583
+4096;37:48
+1216;49:51
+1048576;584:595
+1048576;62885:62938
+1048576;596:598
+4096;37:48
+1216;49:51
+1048576;599:610
+2048;15:15
+1048576;62939:62995
+1048576;611:613
+192;22:24
+0;614:625
+512;16:16
+2048;15:15
+192;22:24
+0;626:637
+67133441;25:36
+12288;37:48
+6144;15:15
+4608;37:48
+2048;15:15
+6144;15:15
+6144;15:15
+6144;16:16
+6144;16:16
+16384;14:14
+6144;15:15
+4608;16:16
+2048;16:16
+4608;16:16
+4608;15:15
+16384;14:14
+2048;15:15
+6144;15:15
+16384;14:14
+6144;15:15
+1024;52:61
+16384;14:14
+4608;15:15
+4288;93:96
+0;638:652
+4608;16:16
+6144;15:15
+6144;15:15
+6144;15:15
+4096;97:104
+6144;15:15
+4608;15:15
+3072;15:15
+6144;15:15
+16384;14:14
+6144;16:16
+3776;93:96
+0;653:665
+6144;15:15
+5312;93:96
+1048580;666:669
+1048576;670:681
+6144;16:16
+6144;15:15
+6144;15:15
+16384;14:14
+4608;15:15
+6144;15:15
+4608;15:15
+4608;16:16
+6144;15:15
+16384;14:14
+6144;16:16
+6144;16:16
+6144;16:16
+4608;15:15
+16384;14:14
+6144;15:15
+512;15:15
+6144;15:15
+4288;93:96
+1048580;682:686
+1048576;687:699
+2240;93:96
+2048;105:110
+1048580;700:714
+1048576;715:721
+4288;93:96
+1048580;722:726
+1048576;727:739
+704;93:96
+1048580;740:745
+1048576;746:752
+6144;16:16
+4608;16:16
+2048;15:15
+16384;14:14
+2048;16:16
+6144;16:16
+2048;16:16
+6144;15:15
+3072;15:15
+6144;16:16
+3072;15:15
+2240;93:96
+0;753:759
+704;93:96
+0;760:769
+2240;93:96
+0;770:774
+6144;16:16
+4608;16:16
+67133441;25:36
+12288;37:48
+1216;49:51
+1048576;775:784
+1048576;73924:73970
+1048576;785:787
+4096;37:48
+1216;49:51
+1048576;788:788
+1048576;73971:74010
+1048576;789:791
+6144;16:16
+2048;15:15
+4608;16:16
+6144;15:15
+2048;15:15
+6144;16:16
+5120;97:104
+6144;111:118
+6144;15:15
+6144;16:16
+7168;111:118
+6144;16:16
+2048;111:118
+6144;111:118
+2048;111:118
+2048;16:16
+4608;16:16
+6144;16:16
+2048;16:16
+6144;16:16
+6144;16:16
+4608;16:16
+2048;16:16
+16384;14:14
+6144;16:16
+6144;16:16
+4608;15:15
+6144;16:16
+6144;16:16
+6144;16:16
+6144;15:15
+2048;16:16
+2048;16:16
+2048;16:16
+2048;16:16
+6144;15:15
+6144;16:16
+6144;16:16
+16384;14:14
+6144;15:15
+67135489;25:36
+12288;37:48
+1216;49:51
+1048576;792:792
+1048576;77304:77350
+1048576;793:795
+16384;14:14
+4608;68:74
+2048;16:16
+2048;16:16
+6144;16:16
+3072;16:16
+2048;16:16
+3072;16:16
+2048;16:16
+16384;14:14
+2048;16:16
+0;16:16
+2048;16:16
+0;16:16
+2048;16:16
+0;16:16
+2048;16:16
+512;16:16
+6144;16:16
+6144;16:16
+6144;16:16
+4096;97:104
+6144;16:16
+6144;16:16
+6144;16:16
+2048;15:15
+16384;14:14
+4608;15:15
+6144;16:16
+4608;16:16
+6144;16:16
+6144;16:16
+1024;97:104
+4608;16:16
+0;15:15
+6144;16:16
+512;15:15
+4608;15:15
+6144;16:16
+4608;15:15
+2048;15:15
+6144;15:15
+6144;16:16
+6144;16:16
+2048;16:16
+6144;15:15
+2048;15:15
+2048;15:15
+6144;16:16
+2048;15:15
+4096;15:15
+512;15:15
+4096;15:15
+16384;14:14
+6144;16:16
+6144;16:16
+6144;15:15
+6144;15:15
+4608;16:16
+4096;15:15
+6144;16:16
+6144;16:16
+512;16:16
+16384;14:14
+6144;15:15
+3072;16:16
+6144;15:15
+6656;15:15
+16384;14:14
+4608;16:16
+2048;15:15
+2048;15:15
+16384;14:14
+4608;15:15
+16384;14:14
+6144;15:15
+2048;16:16
+4608;15:15
+6144;15:15
+67133441;25:36
+12288;37:48
+1216;49:51
+1048576;796:796
+1048576;85816:85844
+1048576;797:799
+4096;37:48
+1216;49:51
+1048576;800:800
+1048576;85845:85875
+1048576;801:803
+6144;15:15
+192;22:24
+0;804:814
+192;22:24
+0;815:823
+67133441;25:36
+12288;37:48
+1216;49:51
+1048576;824:824
+1048576;86172:86194
+1048576;825:827
+4096;37:48
+1216;49:51
+1048576;828:828
+1048576;86195:86220
+1048576;829:831
+4096;37:48
+1216;49:51
+1048576;832:832
+1048576;86221:86244
+1048576;833:835
+4096;37:48
+1216;49:51
+1048576;836:836
+1048576;86245:86266
+1048576;837:839
+16384;14:14
+6144;16:16
+6144;15:15
+2048;15:15
+4096;16:16
+6144;15:15
+512;15:15
+512;15:15
+6144;16:16
+6144;15:15
+16384;14:14
+6144;16:16
+6144;16:16
+6144;16:16
+6144;15:15
+6144;15:15
+0;16:16
+2048;15:15
+6144;16:16
+6656;16:16
+6144;16:16
+2048;16:16
+2560;15:15
+6144;15:15
+16384;14:14
+16384;14:14
+2048;16:16
+6144;15:15
+6144;16:16
+6144;15:15
+3072;119:123
+6144;15:15
+6144;15:15
+3072;15:15
+4288;22:24
+0;840:846
+2048;16:16
+2048;16:16
+6144;16:16
+6144;119:123
+6144;124:124
+2048;124:124
+4288;22:24
+0;847:853
+3264;125:129
+0;854:864
+6144;130:144
+7168;16:16
+6144;16:16
+6144;145:147
+4608;148:170
+6144;171:175
+6144;176:178
+6144;16:16
+2752;93:96
+0;865:876
+6336;93:96
+0;877:886
+6144;16:16
+2560;16:16
+16384;14:14
+2048;16:16
+2752;93:96
+0;887:897
+16384;14:14
+2048;15:15
+6144;15:15
+6144;15:15
+2048;179:186
+6144;16:16
+6144;16:16
+6144;16:16
+4608;15:15
+6144;179:186
+6144;15:15
+3072;15:15
+6144;15:15
+2048;16:16
+16384;14:14
+6144;16:16
+2048;16:16
+4608;15:15
+6144;16:16
+4608;15:15
+6144;16:16
+4608;15:15
+6144;16:16
+6144;16:16
+6144;15:15
+6144;16:16
+16384;14:14
+2048;16:16
+2048;16:16
+6144;16:16
+512;15:15
+6144;15:15
+6144;15:15
+16384;14:14
+16384;14:14
+16384;14:14
+16384;14:14
+1024;14:14
+ *
+%% ties
+&!2
+!
+&&2
+3~
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+56~
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+96 97 98~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+101 102 103~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+115 116 117~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+120 121 122~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+226 227 228~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+231 232 233~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+236 237 238~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+241 242 243~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+246 247 248~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+251 252 253~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+262 263 264~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+267 268 269~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+272 273 274~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+289 290 291~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+294 295 296~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+299 300 301~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+338 339 340~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+343 344 345~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+348~
+!
+&!3
+!
+&&2
+350~
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+355 356 357~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+360 361 362~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+365 366 367~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+370 371 372~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+388 389 390 391~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!3
+!
+&!2
+!
+&&2
+394 395 396 397~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!3
+!
+&!2
+!
+&&2
+400 401 402~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+460 461 462~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+465 466 467~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+473 474 475~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+478 479 480~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+483 484 485~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+513~
+!
+&!3
+!
+&&2
+515 516 517~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+520 521 522~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+525~
+!
+&!3
+!
+&&2
+527 528 529~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+542~
+!
+&!3
+!
+&&2
+544~
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+563~
+!
+&!3
+!
+&&2
+565~
+!
+&!3
+!
+&!2
+!
+&&2
+568~
+!
+&!3
+!
+&&2
+570~
+!
+&!3
+!
+&!2
+!
+&&2
+573~
+!
+&!3
+!
+&&2
+575~
+!
+&!3
+!
+&!2
+!
+&&2
+578~
+!
+&!3
+!
+&&2
+580~
+!
+&!3
+!
+&&2
+582~
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+587~
+!
+&!3
+!
+&&2
+589~
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+610 611 612~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+615 616 617~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+620 621 622~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+625 626 627~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+630 631 632~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+635 636 637~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+640 641 642~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+645 646 647~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+650 651 652~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+655 656 657~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+660 661 662~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+718 719 720~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+723 724 725~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+728 730 731~
+!
+&!3
+!
+&!2
+!
+&!1
+!
+&!3
+!
+&&2
+733~
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&&2
+737~
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+762~
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+775~
+!
+&!3
+!
+&!2
+!
+&&2
+778 779~
+!
+&!3
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+799 800~
+!
+&!3
+!
+&!3
+!
+&&2
+803 804~
+!
+&!2
+!
+&!3
+!
+&!3
+!
+&&2
+806 807~
+!
+&!3
+!
+&!3
+!
+&&2
+809 810~
+!
+&!3
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+823~
+!
+&!3
+!
+&&2
+825~
+!
+&!3
+!
+&&2
+827~
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+833 834 835~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+838 839 840~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+884 885 886~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+969 970 971~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+974 975 976~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+979~
+!
+&!3
+!
+&&2
+981~
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&&2
+985 986 987~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+990 991 992~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+995 996 997~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&&2
+1000 1001 1002~
+!
+&!3
+!
+&!1
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+1038~
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+1046~
+!
+&!3
+!
+&&2
+1048~
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+1058~
+!
+&!3
+!
+&&2
+1060~
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&&2
+1066~
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!
+&!2
+!

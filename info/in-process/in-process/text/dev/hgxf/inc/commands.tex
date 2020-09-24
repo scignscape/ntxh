@@ -1,0 +1,77 @@
+
+\let\inodot\i
+\renewcommand{\i}[1]{\textit{#1}}
+
+\newcommand{\mdash}{---}
+
+\usepackage[letterpaper, left=.45in,right=.45in,top=1in,bottom=1in]{geometry}
+
+\usepackage{graphicx}
+\newcommand{\aDXTH}{%
+\resizebox{!}{7.5pt}{H}%
+\raisebox{2pt}{\rotatebox{-10}{\resizebox{!}{5pt}{\ensuremath{\times}}}}\hspace{-4pt}%
+\raisebox{1pt}{\rotatebox{10}{\resizebox{!}{5pt}{\ensuremath{\times}}}}%
+}
+
+\newcommand{\DXTH}{%
+\resizebox{!}{7.5pt}{H}\hspace{-2pt}%
+\raisebox{2pt}{\resizebox{!}{9pt}{\ddag}}%
+}
+
+
+\newcommand{\xDXTH}{%
+\resizebox{!}{7.5pt}{H}\hspace{-2pt}%
+\raisebox{2pt}{\resizebox{!}{5pt}{\ensuremath{\times}}}\hspace{-3pt}%
+\raisebox{2pt}{\resizebox{!}{5pt}{\ensuremath{\times}}}%
+}
+
+
+\newcommand{\eeeDXTH}{%
+\resizebox{!}{7pt}{\ensuremath{\varsigma}}%
+\resizebox{!}{7pt}{\ensuremath{\xi}}%
+\resizebox{!}{7.5pt}{TX}%
+\resizebox{!}{7pt}{H}%
+}
+
+
+\usepackage{ tipa }
+\newcommand{\eeDXTH}{%
+\resizebox{!}{7pt}{\ensuremath{\varsigma}}%
+\resizebox{!}{7.5pt}{\ensuremath{\xi}}%
+\resizebox{!}{7.5pt}{\textthorn}%
+}
+
+\newcommand{\eDXTH}{%
+\resizebox{!}{8pt}{\ensuremath{\varsigma}}%
+\resizebox{!}{7.5pt}{\ensuremath{\xi}}%
+\resizebox{!}{7.5pt}{T}%
+\resizebox{!}{6.5pt}{H}%
+}
+
+
+\colorlet{codegr}{black!80!blue}
+
+\setlength{\columnsep}{7mm}
+
+
+
+\usepackage{tcolorbox}
+\newenvironment{frquote}{%
+\begin{tcolorbox}[
+	colback=orange!6,
+	colframe=yellow!20!gray,
+	width=1.95\linewidth,
+	arc=3mm, auto outer arc,enhanced jigsaw,
+	]
+\begin{scriptsize}
+\begin{minipage}{57em}
+\begin{flushright}
+\begin{minipage}{58em}}{%
+\end{minipage}
+\end{flushright}
+\end{minipage}
+\end{scriptsize}
+\end{tcolorbox}
+}
+	
+

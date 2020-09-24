@@ -1,0 +1,1 @@
+Folder: /home/nlevisrael/hypergr/ntxh-ngml/ar/htxn/sdi-test/t8, File: t8.sdi.ntxh. RFile: t8.rev.txt

@@ -1,0 +1,21 @@
+%\usepackage{tikz-cd}
+%\usepackage{amsmath}
+%\usepackage{tgpagella}
+
+%\begin{document}
+\begin{tikzcd}
+ &  & \lambda\omega \arrow[rrr] &  &  & \lambda\Pi\omega \\
+ &  &  &  &  &  \\
+\lambda 2 \arrow[rruu] \arrow[rrr] &  &  & \lambda\Pi 2 \arrow[rruu] &  &  \\
+ &  & \lambda\underline{\omega} \arrow[rrr] \arrow[uuu] &  &  & \lambda\Pi\underline{\omega} \arrow[uuu] \\
+ &  &  &  &  &  \\
+\lambda\to
+  \arrow{rruu}[sloped,above]{\text{\tiny Types depending on types}}
+  \arrow{rruu}[sloped,below]{\text{\tiny Type operators}}
+  \arrow{uuu}[sloped,above]{\text{\tiny Values depending on types}}
+  \arrow{uuu}[sloped,below]{\text{\tiny Polymorphism}}
+  \arrow{rrr}[sloped,above]{\text{\tiny Types depending on values}}
+  \arrow{rrr}[sloped,below]{\text{\tiny Dependent types}}
+  &  &  & \lambda\Pi \arrow[rruu] \arrow[uuu] &  &
+\end{tikzcd}
+

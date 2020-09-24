@@ -1,0 +1,31 @@
+
+
+&type DgDb_Instance {2}
+  :folder:1 :cc:2 ;
+ 
+
+&type WDB_Instance {4}
+  :name:1 :created:2 :attached:3 :llff:4 ;
+ 
+
+&/
+
+!/ DgDb_Instance
+$folder: /home/nlevisrael/hypergr/pgvm/ar/dev/data/dgdb/instances/t1
+$cc: 1
+/!
+
+<+>
+
+ 
+!/ WDB_Instance
+$name: 
+$created: Fri May 8 01:23:08 2020
+$attached: 
+$llff: 
+/!
+
+<+>
+
+/&
+

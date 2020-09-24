@@ -1,0 +1,27 @@
+
+\usepackage{bashful}
+
+\bash
+git rev-parse --show-toplevel
+\END
+\let\ar\bashStdout
+
+\bash
+pwd
+\END
+\let\mywd\bashStdout
+
+
+\AtEndDocument{\write18{cd \expandafter\ar/code/cpp/qmake-console/projects/htxn/ngml-sdi-console; ./run-with-args.sh \mywd\space\mywd/\jobname.sdi.ntxh\space\mywd/\jobname.rev.txt\space\mywd/sdizip/\jobname.pages.zip; cd -;}
+}
+
+\usepackage{embedfile}
+
+\AtEndDocument{%
+{\message{^^J^^JSDI: Trying to embed sdizip/\jobname.pages.zip ...} 
+\IfFileExists{sdizip/\jobname.pages.zip}
+{\embedfile{sdizip/\jobname.pages.zip}\message{OK^^J^^J}}
+{\message{File not found^^J^^J}}}
+}
+
+

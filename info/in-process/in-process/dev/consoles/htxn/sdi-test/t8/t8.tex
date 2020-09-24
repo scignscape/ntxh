@@ -1,0 +1,42 @@
+\documentclass{article}
+
+%\include{nhv-commands}
+
+\input{nhvm/nhv-setup-commands}
+\input{nhvm/nhv-sdi-commands}
+\input{nhvm/nhv-deco-commands}
+
+%\newcommand{\cq}[1]{{\fontfamily{gar}\selectfont ``}#1{\fontfamily{gar}\selectfont "}}
+
+%\embedfile{t7.sdi.zip}
+
+\usepackage{bashful}
+
+\bash
+git rev-parse --show-toplevel
+\END
+\let\ar\bashStdout
+
+\bash
+pwd
+\END
+\let\mywd\bashStdout
+
+
+\AtEndDocument{\immediate\write18{cd \expandafter\ar/cpp/qmake-console/projects/htxn/ngml-sdi-console; ./run-with-args.sh \mywd\space\jobname.sdi.ntxh\space\jobname.rev.txt; cd -;}
+\embedfile{test-cpp.txt}}
+
+
+\begin{document}	
+
+\input{test-cpp.txt}
+
+\title{From \cq-tech{Naturalizing Phenomenology} to 
+Formalizing Cognitive Linguistics (I): Cognitive Transform Grammar}
+
+\maketitle{}
+
+\end{document}
+
+
+

@@ -1,0 +1,42 @@
+## htxne
+#
+`[//]Test sentence.  Another test sentence.`[/]
+
+`[//]documentclassincludedocumentp`[/]
+
+`[//]articlesdi-commands`[/]
+
+@@ ranges
+3
+=1
+2<4>0;1,0;3,39;5,39;6,
+!
+=2
+!
+=3
+!
+ *
+@@ details
+6
+1216;2:14
+0;2:8
+16576;15:21
+0;9:20
+67125249;22:29
+24576;30:30
+ *
+%% ties
+&&2
+2~
+!
+&!3
+!
+&&2
+4~
+!
+&!3
+!
+&!2
+!
+&!2
+!

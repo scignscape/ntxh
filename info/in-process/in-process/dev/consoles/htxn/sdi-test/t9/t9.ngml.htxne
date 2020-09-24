@@ -1,0 +1,79 @@
+## htxne
+#
+`[//]Fromto 
+Formalizing Cognitive Linguistics (I): Cognitive Transform GrammarThis is a test sentence.  And again.`[/]
+
+`[//]documentclassinputdocumenttitlecq-techmaketitlep`[/]
+
+`[//]articlenhvm/nhv-setup-commandsnhvm/nhv-sdi-commandsnhvm/nhv-deco-commandsnhvm/nhv-sdi-shell-commandsNaturalizing Phenomenology`[/]
+
+@@ ranges
+3
+=1
+2<7>0;1,0;3,0;5,0;7,0;9,111;11,75;12,
+6<1>0;13,
+76<2>0;15,111;16,
+!
+=2
+!
+=3
+!
+ *
+@@ details
+16
+17088;2:14
+0;2:8
+1216;15:19
+0;9:31
+1216;15:19
+0;32:52
+16576;15:19
+0;53:74
+16576;15:19
+0;75:101
+67108865;20:27
+0;28:32
+6336;33:39
+0;102:127
+16384;40:48
+16384;49:49
+ *
+%% ties
+&&2
+2~
+!
+&!3
+!
+&&2
+4~
+!
+&!3
+!
+&&2
+6~
+!
+&!3
+!
+&&2
+8~
+!
+&!3
+!
+&&2
+10~
+!
+&!3
+!
+&!2
+!
+&!2
+!
+&&2
+14~
+!
+&!3
+!
+&!2
+!
+&!2
+!

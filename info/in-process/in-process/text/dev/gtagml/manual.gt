@@ -1,0 +1,1809 @@
+
+[input <commands>]
+
+[document,
+
+[p.
+`lGTagML; is an extension to the `TAGML; ([q.Text as Graph]) 
+markup language, 
+originally developed by the KNAW 
+(Royal Netherlands Academy of Arts and Sciences) 
+Humanities Cluster.  In the context of this document, 
+`GTagML; also refers to a `Cpp; implementation of the 
+`GTagML; language, specifically a parser and a 
+generator for output languages such as `XML; and `LaTeX;.  
+.p] 
+
+[p.
+For the most part, `GTagML; seeks to provide an implementation 
+which comports with the documented features of `TAGML; 
+(note that the original `TAGML; parsers and technology were 
+coded in `Java;).  Most or all of the defined `TAGML; syntax 
+applies to `GTagML; as well.  In addition, `GTagML; recognizes 
+certain syntactic formations %-- and also certain 
+semantic principles %-- which are not present in `TAGML; proper.  
+The rationale for these extensions will be discussed in several 
+places in this manual.   
+.p]
+
+[p. 
+For a quick summary, there are essentially two areas where 
+`GTagML; finds it appropriate to add certain features and 
+logic to the core `TAGML; model.  The first of these 
+concerns character encoding: the original `TAGML; 
+specifications are somewhat noncommittal, or even 
+ambiguous, with regard to how `TAGML;'s approach to 
+`i.text` encoding interacts with the lower-level problems 
+of `i.character` encoding.  In one document introducing the 
+Text-as-Graph model (but not the specific `TAGML; markup 
+language) the `TAGML; developers assert that 
+[q.`TAG; Text nodes are made up of characters, but the 
+characters are not types in the `TAG; data model, and 
+`TAG; has no counterpart to `LMNL; atoms].  
+This comment implies that `q.characters` do not have a separate 
+semantic status apart from the semantics of `q.text` where 
+characters occur.  In a later document %-- once `TAGML; per se 
+had been implemented as a distinct markup language %-- the 
+same authors (joined now by other coauthors) `q.define 
+`b.written text` as a sequence of characters 
+(e.g., letters, digits, spaces, and punctuation in most alphabetic writing systems) inscribed in a document` and that 
+`q.`b.Textual content` in `TAG;, from an informational perspective, is a sequence of characters (including symbols, but excluding any type of formatting)`/.  
+Also `the text of a `TAGML; document is to be read in the order 
+in which it is transcribed ..%.  The value of the data is represented by the character sequence, and the order of the characters is therefore an inalienable part of the meaning`/.  Thus textual data contains a sequence of characters, 
+but there is no explicit discussion of the semantics of characters 
+themselves; the implication being that any rules for the 
+construction of individual characters are to be ascertained 
+from the semantics of text, qua character-sequence.  
+
+.p]
+
+[p. 
+This later document does assert that `q.A `TAGML; document consists of Unicode characters (encoded as `UTF;-8)`/, but it is not clear whether this 
+statement is intended to describe a rigorous semantics for the notion of 
+`q.character` or rather merely to comment on how `TAGML; code may be 
+digitally represented, for the sake of processing software.  In the former 
+case, one would conclude that `q.text` in the context of `TAGML; 
+is to be understood as anything which may be composed of Unicode 
+characters %-- but that seems unnecessarily restrictive, given 
+that `TAGML; elsewhere emphasizes a desire to be open-ended for 
+digitizing almost any textual content (`q.Encoding a historical text in 
+`TEIXML;, for instance, might subtly encourage us to ignore textual phenomena that are not part of the `TEIXML; encoding model`/).  
+It is not hard to anticipate situations where some text may wish to 
+treat as a character or symbol some glyph/representation which is 
+`i.not` part of Unicode (indeed, an important aspect of 
+`GTagML; involves non-Unicode glyphs, to be explained shortly).  
+It seems more likely, or appropriate, to interpret `UTFeight; in 
+the `TAGML; context as applying to the `q.input` characters, 
+the encoding seen by `TAGML; parsers %-- but this encoding may 
+indirectly represent (i.e., encode in turn) various kinds of 
+symbols (analogous to `XML; character entities).  However, the 
+`TAGML; specification does not anywhere introduce a mechanism 
+comparable to `XML; character entities (or `LMNL; atoms as in 
+the earlier quote).   
+
+.p]
+
+[p.
+For `GTagML;, these uncertainties are significant enough to 
+warrant a conscious departure from the `TAGML; model.  
+`lGTagML; formally describes a character-encoding protocol 
+as an intrinsic part of its sytnax and semantics.  This 
+protocol is not Unicode based (although it permits use of 
+Unicode characters) partly because it employs non-Unicode 
+binary encoding and paryly because it has glyphs which 
+do not map uniquely to Unicode.  More precisely, 
+`GTagML;'s character protocol in some cases has multiple 
+code points which map to the same Unicode (or Latin-1) character.  
+These are considered separate glyphs because they have 
+different textual significance despite similar visual/typesetting 
+appearance (although the possibility exists for some 
+modest visual discrimination between them in some environments).  
+For example, an end-of-sentence period is distinguished 
+from a period entered as part of an abbreviation; these are 
+digitally different (as far as how they are encoded) and 
+also may be visually distinct (the end-of-sentence period 
+will typically have extra space afterward, at least via 
+the `GTagML; `LaTeX; generators).  `lGTagML; is designed 
+with the idea that finer-grained character encoding for 
+certain textual details is conducive to more effective 
+text mining (and obviates the need for complex `NLP;-based 
+techniques, such as sentence-boundsry recognition).  
+The full details of `GTagML; character encoding will be 
+presented below.  Having said that, `GTagML;'s encoding 
+system is flexible and allows users to customize the 
+representation of individual characters; if desired, 
+this can involve reverting to traditional schemes 
+such as Latin-1 or UTF-16 (but it may just as 
+well be a matter of an entirely different character-set 
+of the user's design).    
+
+.p]
+
+[p. 
+Apart from character-encoding, the second principal area 
+where `GTagML; departs from `TAGML; is that `GTagML; is 
+more self-consciously designed as a `q.graph serialization` 
+language.  Of course, the `q.Text as Graph` paradigm implies 
+that `TAGML; represents textual data or structures in 
+graph-like (actually hypergraph) terms.  However, 
+`TAGML; was initially engineered in a humanities/text-encoding 
+context, with an emphasis on natural-language 
+data (particularly in academic contexts where texts require 
+annotations, scholarly commentary, or other structuration 
+that is not innately conducive to `XML;-like languages).  
+This means that `TAGML; was designed around the needs of 
+digitizing natural-language content, which is not 
+in any literal sense `q.graph-like` (one might, under the 
+influence of `NLP; paradigms, argue that natural language 
+is `q.graph-like` at some deeper level, i.e. that 
+the surface articulation of language translates via some 
+cognitive process, or some intermediate logical/cognitive 
+cogitation, to a graph-like `q.deep structure` %-- 
+but of course the goal of text digitizing is 
+to represent langauge, not to represent the deep structures 
+of language, unless one in explicitly serializing 
+data generated by `NLP; engines).  For `TAGML;, 
+representing text via hypergraphs is an engineering 
+choice motivated by a desire to have an effective 
+representation which is more expressive than 
+`XML; but conducive to software engineering %-- 
+the markup format being well-motivated in the context 
+of being a target for parsers, traversers, and 
+similar algorithmic treatments of the markup structure.  
+For these algorithmic purposes, in effect, it is 
+claimed (compellingly) by `TAGML; that hypergraph-based 
+behind-the-scenes representation of textual data 
+is an especially fortuitous approach.      
+.p]
+
+[p. 
+That representational paradigm, however, does not reflect a 
+notion that `TAGML; may be engineered to serialize 
+graph-like data itself, or data which explicitly 
+has a graph-like structure on its own, separate and 
+apart from how the data is encoded after `TAGML; parsing.  
+As a more expressive language than `XML;, `TAGML;  can 
+of course serialize graph structures just as well as 
+`XML;, but this does not appear to be a rationalte for `TAGML;'s 
+design.  If graph (or hypergraph) data were to be serialized 
+through `TAGML;, there would be no guarantee that the 
+internal graph structures to which `TAGML; compiles 
+would resemble or (except indirectly) encode the 
+graph structures of the input content.  By contrast, 
+`GTagML; deliberately introduces syntactic and 
+semantic constructions which are not present 
+in `TAGML; specifically for situations where it is 
+desired to serialize/encode (hyper-)graph structures 
+through `GTagML; as a serialization format.  
+These scenarios may involve `q.dumping` the contents 
+of a graph, property graph, or hypergraph database.  
+They may also/alternatively involve serializing 
+application data, or other information which 
+might be acquired from a software contexts and 
+where it is appropriate for the format 
+in which the data is serialized to reflect 
+certain structural or computational properties 
+about how the data is encoded/represented in 
+that (runtime) context.  `GTagML; is motivated 
+by the premise that hypergraphs are a good 
+medium for encoding application-level data 
+structures (e.g., Object-Oriented data in a 
+context like `Cpp;) for serialization, where 
+the serializing format in a sense describes 
+and document the data thereby conveyed, 
+not only enables its textual preservation 
+for subsequent reuse in a different environment.        
+.p]
+
+
+[p. 
+The idea of `q.self-describing` serialization is an 
+important contribution of `GTagML;, motivating the 
+name %-- wherein the initial `q.G` stands for `q.grounded`/.  
+That is to say, `GTagML; (at least in some contexts 
+related to data serializaton) is `q.grounded` in the 
+sense that the markup format has certain formulations 
+which allow the given markup code to indicate some 
+details about the data types and structures/organization 
+operating within the software component which generates 
+the markup.  In short, `GTagML; is (or at least can be) 
+`q.grounded` in the coding and runtime environment where 
+the `GTagML; is generated.  Of course, in many situations 
+there will be no need to make explicit reference to that 
+ambient context.  But it is possible to make the grounding 
+explicit in `GTagML; code, so that this code becomes in some 
+manner self-documenting.  For example, it is possible 
+to mark that some cluster of `GTagML; nodes serves the purpose 
+of serializing an instance of a specific (application-level) 
+data type.  Similarly, it is possible to notate that 
+one serialization encodes an object which is a data member 
+of a second (also serialized) object.  
+.p]
+
+[p.
+The presentation below will formally describe how `GTagML; 
+syntactically extends `TAGML;, and will pair these 
+descriptions with a discussion of the relevant semantics 
+for these extensions.  As indicated thus far, most of the 
+extensions are addressed either to characer encoding or 
+to `q.grounding` in the sense just outlined.  There are 
+several other, mostly superficial ways in which `GTagML; 
+adds to `TAGML;; one divergence is that `GTagML; is 
+explicitly designed to provide an input format for text 
+that will eventually be represented via `LaTeX;.`foonote.
+Actually, `GTagML; may not permit encoding of some 
+of the more esoteric features of `LaTeX; (or plain `TeX;) code %-- 
+such as constructions involving catcodes %-- and 
+in some contexts `GTagML; syntax may be more cumbersome 
+than `LaTeX; equivalents.  Where this is a serious 
+problem, users can always factor `LaTeX; or `TeX; 
+code into separate files loaded into a larger document 
+via `b.input` or `b.include` commands. 
+`footnote`  As such, 
+`GTagML; supports multiple `q.bodies` for tags/commands 
+(`GTagML; uses the mixed term `q.tag-command` to represent 
+the logical analog of `XML; tags and `LaTeX; commands) 
+%-- to accommodate how `LaTeX; recognizes commands which 
+may take a varying number of arguments.  Similarly, 
+`GTagML; allows tag-command `q.arguments` to be marked as 
+optional, and for tag-commands to be declared as `LaTeX; 
+`q.environments` (i.e., generating `LaTeX; code surrounded 
+by `b.begin{...}` and `b.end{...}` statements).     
+ .p]
+
+
+[p.
+One rationale for using `GTagML; would be a desire to generate 
+`LaTeX; files, but also to have a relatively tractable internal 
+textual model and/or to generate other output formats (e.g., 
+`XML;) alongside `LaTeX;.  `LaTeX; itself is notoriously 
+difficult to parse and traverse (in the sense of manipulating 
+any tree or graph generated by the parse step).  It is not 
+practical, as far as that goes, to do rigorous text mining 
+off of `LaTeX; files directly; and publishing-related tasks, 
+such as `LaTeX;-to-`HTML; conversion, are error-prone.  
+These are evidently among the reasons that publishing 
+technology is often based on `XML; rather than `LaTeX;: 
+an academic journal might internally encode articles via 
+an `XML; dialect (such as `JATS;, the Journal Article Tag Suite) 
+and then, off of that encoding, generate both `PDF; and 
+web/`HTML; versions for the public to read.  This 
+workflow, however, loses some of the power of `LaTeX;, which 
+can produce documents that are both more visually compelling 
+than markup alternatives and also more conducive to 
+enhanced reading technologies, as will be discussed below.  
+Given these considerations, `GTagML; provides an 
+environment where both `LaTeX; and `XML;-like outputs and/or 
+internal representations are available.
+.p]
+
+
+[p. 
+A typical environment for using `GTagML; might therefore be 
+as follows: `GTagML; input files are parsed to produce 
+two sorts of output.  On the one hand, `LaTeX; files 
+(typically a collection of interrelated `LaTeX; sources) 
+are generated directly; on the other hand, the parsed 
+`GTagML; code yield an in-memory hypergraph structure 
+which can be utilized for further digital analysis 
+or processing.  One option is to generate alternative 
+outputs (e.g., `HTML;) via this structure.  Another is 
+to output a machine-readable representation of the 
+document text which exposes the textual content for 
+external software %-- e.g., text-mining algorithms %-- 
+in a convenient package.  The idea for text mining is 
+to obviate the need for these algorithms to `q.scrape` 
+or interpret the text from a format which is optimized 
+for human viewing rather than machine readability.  Instead, 
+the text-mining-friendly output can be structured 
+to directly identify sentences, paragraphs, and other 
+prosodic elements; and to simplify the process of 
+denoting text ranges and asserting textual annotations 
+(mapping a text segment to a Named Entity, for instance).  
+As will be discussed below, these features oriented 
+toward text-mining can also be used to enhance 
+e-reader technology; for example, allowing `PDF; viewers 
+to locate sentences and annotations via on-screen (`q.viewport`/) 
+coordinates so that users may manipulate such content (copying the 
+text of one sentence, say, without manually selecting/dragging between 
+the start and end position) through `GUI; actions. 
+.p]
+
+[p.
+The following sections will present an overview of `GTagML;'s 
+syntactic and semantic conventions, both those which 
+replicate `TAGML; and those which extend or modify the 
+original `TAGML; model.  That presentation will then be 
+followed by a review of how `GTagML; may be used in certain 
+software contexts, such as special `LaTeX; packages 
+associated with `GTagML;; customized `PDF; viewers; 
+and graph database/serialization technologies. 
+.p]
+
+
+[section. -->
+ Basic GTagML Constructions ->> 
+ Basic `GTagML; Constructions
+.section]
+
+[p.
+The simplest example of `GTagML; (and `TAGML;) markup is 
+probably one `q.tag` (a `q.tag-command` in `GTagML; parlance) 
+with some associated text content (which is not broken 
+up or included in any other element).  The `q.Text-as-Graph` 
+model distinguishes `i.text` nodes from `i.markup` nodes; 
+the former hold textual content, while the latter provide 
+markup by containing one or more text nodes 
+(with the semantic interpretation being that the markup 
+%-- whatever its significance, whether semantic, 
+presentational, internal for softeare purposes, etc. %-- 
+applies to the corresonponding text).  The 
+`TAG; model, in short, functions akin to `q.standoff` annotation 
+where text nodes are gathered in one group and markup 
+nodes in a separate group %-- two or more (not 
+necessarily hierarchically related) markup nodes may contain 
+one single text node.  This is analogous to standoff markup 
+where nodes refer to ranges within an external body of text 
+(and there is no restriction on nodes designating 
+overlapping ranges).  `lGTagML; essentially embraces 
+this model (actually moving closer to explicit standoff 
+annotation than `TAGML;).  In `GTagML;, text nodes are 
+called `q.prenodes`/, and `q.nodes`/, without further 
+qualification, are assumed to be markup nodes which hold 
+one or more prenodes.
+.p]
+
+[p.
+So, given markup such as this: `b.[i>italicized text<i]`/, 
+the `GTagML; parser needs to do (broadly speaking) 
+two things %-- first, it needs to construct a prenode 
+containing the text `q.italicized text`/, and second 
+it needs to construct a node marking the tag-command 
+`q.`b.i`/`/.  In addition (or, if you will, in 
+the course of those steps) it needs to connect the 
+markup node to the prenode indicating the appropriate 
+relation between them %-- namely that the prenode 
+represents part of the markup node's text content 
+(in this example, its entire text content).  
+.p]
+
+
+[p.
+Although this brief gloss captures the basic formations of 
+`GTagML; and `TAGML;, there are some addition details 
+to consider in the former language.  In `GTagML;, prenodes 
+do not (for the most part) carry their own string data 
+internally; instead, `GTagML; uses `q.text blocks` 
+which hold encoded character strings.  The prenodes 
+then hold indices into those blocks.  Note that %-- at 
+least in simple scenarios %-- a matter of representational 
+optimization, not of any logically meaningful structure.  
+That is to say, barring extra coding, each prenode 
+should be treated as if it contained its own logically 
+unique textual content, which merely happens to be 
+stored qua binary data in some other object.  In some circumstances, 
+it is possible for two prenodes to hold overlapping indices 
+into the same text block; but this is not an example 
+of `q.overlapping markup`/, and does not imply any logical 
+relation between the prenodes.  Instead, it is merely a 
+representational optimization which permits each node 
+to have a logically unrelated copy of the same characters 
+as other nodes.  Sometimes text blocks have more structure 
+than this implies, as will be explained below; 
+but in the default case these blocks have no logical 
+significance apart from providing a binary stash for 
+prenodes' character data.   
+.p]
+
+[p. 
+With that clarification, then, note that in `GTagML; the 
+`b.[i>italicized text<i]` points to an additional processing 
+step: the text `q.italicized text` has to be added to a text 
+block, so that the corresponding prenode's data may be 
+established by identifying the start and end index of 
+the relevant character sequence in the block.  By default, 
+each `GTagML; document acquires several text blocks 
+`i.ab initio` (users can construct new/alternative blocks 
+as well; see below).  One of these is a `q.main text` block 
+which will, barring further modifications, hold most of the 
+document's character data %-- or at least, most of the 
+`q.visible` characters which will ultimately end up in 
+human-readable (e.g., `PDF;) versions.  A `GTagML; document 
+will also have a `q.tag-command` block which would be 
+used to represent character data comprising tags/commands 
+such as the `q.`b.i`/`/ in this example.  By default, this 
+tag-command block is `q.cached`/, meaning that entries are 
+memoized: if a given tag-command name is used more than once, 
+it is only stored in one place in the block, with those 
+indices reused for multiple nodes (again, this implies no 
+logical connection between such nodes, apart from that 
+their tag-command names are copies of one another's). 
+.p]
+
+[p.
+In sum, both the `q.`b.i`/`/ markup node and 
+the `q.italicized text` prenode are mapped to indices
+in text blocks, which establish their character 
+data (in the latter case) or tag-command name 
+(in the former).  The prenode is considered to be 
+the `q.main text` of the tag-command node.  `lGtagML; 
+introduces this terminology to support `LaTeX;-style 
+tag-commands with multiple `q.arguments` %-- actually, 
+in `GtagML;'s terms, prenode-sequences %-- allowing 
+for each tag-command to be associated with multiple 
+series of prenodes (each individual series yielding 
+its own text content).  This is separate and apart from 
+`TAGML;'s notion of attributes, which are likewise 
+(in the current terms) prenode-sequences but are 
+identified by a string key rather than by a numeric 
+position (attributes will be further considered below).  
+.p]
+
+
+[p.
+Before describing further syntactic details related to 
+tag-commands and prenodes, this is an appropriate 
+time to mention certain syntactic variations on 
+the basic tag-command pattern which are present 
+in `GTagML; (but not `TAGML;).  These are not 
+particularly significant from a semantic or 
+document-structure point of view but simply as a 
+device to optionally make the input test less cluttered.
+
+`enumerate,
+`item; Witholding end tags: `GTagML; recognizes a variant 
+construction where the angle brackets are replaced by 
+dots.  If there is no space between the tag-command name and 
+the text body, the close bracket by itself ends the 
+body: so the italics example could be written as 
+`b.[i.italicized text]`/.  As an alternative, if there 
+are no non-whitespace characters after the tag-command name 
+and the body, up to one newline, then the close-tag would 
+have a period rather than an angle bracket:
+
+`demo.
+[i.
+Italicized text
+.i]
+`demo`
+
+This second form is almost the same as the normal 
+`TAGML; `q.`b.[>...<]`/` pattern, but there are 
+some differences (to be addressed below). 
+  
+`item; `q.Regions`/: With the same basic pattern as using 
+dots in lieu of angle brackets, `GTagML; allows tag-commands 
+to be constructed which produce `LaTeX; environments 
+(called `q.regions` in `GTagML;).  Here, dots are 
+replaced by commas.  In `LaTeX; most of the overall 
+document is contained in a `q.`b.document`/`/ environment, 
+so the `GTagML; equivalent is to start the main part of 
+the text with the string `b.[document,`/, and then end it 
+with `b.,document]`/.     
+
+`item; Self-Closing tag commands:  For a tag-command with no body, 
+it is possible to use the dot variation with the 
+closing bracket immediately following the dot, as in 
+`b.[item.]`/, say, corresponding to an `q.`b.\item{}`/` 
+command in `LaTeX;.  It is theoretically possible to 
+do this with regions as well (e.g., `b.[document,]` 
+describes an empty document), although there may be 
+no occasions where an empty environment is meaningful in 
+`LaTeX; (potentially `GTagML; regions would map to 
+constructions in other languages in lieu of 
+`LaTeX; environments, where emptiness could be legitimate).  
+
+`pseudoIndent; Note that `GTagML; contradicts `TAGML; in 
+the syntax for empty tags: a string like `b.[item.]` 
+is only parsed as an empty tag when the dot is present 
+after the tag-command name.  `lGTagML; does not 
+recognize the `TAGML; syntax akin to `b.[item]`/, 
+which in `TAGML; produces an empty tag; in this 
+case `GTagML;, by contrast, will not parse the 
+opening square bracket as the start of a tag-command 
+at all, and will simply treat the entire string as 
+normal text.  
+
+`item;  Using backquotes in lieu of brackets: 
+`GTagML; also has an alternate notation where square 
+brackets are replaced by backquotes/ticks (i.e. `q.`b.%``/` 
+characters).  In this form the italics text could be 
+written as `b.%`i.italicized text%``/.  Note that the 
+same backtick character notates both the start of the 
+tag-command and the end of its body.  To disambiguate 
+nested tag-commands, the backtick is always treated 
+as the start of a `i.new` tag-command unless it is 
+followed by whitespace.  If that following whitespace is 
+not desired, one can use a slash instead: cf. 
+`b.%`i.italicized text%`/!`/.  The `q.`b./`/` immediately 
+after the second backtick is not entered as a character 
+in any prenode; it is just there to separate the 
+backtick from whichever non-whitespace character follows it.
+
+`item; Other variants with backtick: Commas, to 
+mark regions (`LaTeX; environments) work the same as 
+with brackets: `b.%`document,` can start a `q.document` 
+section, for instance.  One cannot, however, create 
+`q.empty` regions with this syntax.  An empty 
+tag-command is entered via backtick syntax with a 
+trailing semicolon, as in: `b.%`item;`/.  
+
+`pseudoIndent; `GTagML; commands are called `q.block form` 
+if the tag-command name occurs on its own line (or at 
+the end of a line).  As mentioned above (without using the 
+term), block form commands with bracket syntax are closed 
+by mirroring the open: `b.[i.` followed by whitespace and a 
+new line is closed by `b.%.i]`/, say.  With backtick 
+syntax the rule is slightly different: the closing sequence 
+is the tag-command name surrounded by a backtick on 
+either side:  /<< Alternatively, the close can be two consecutive 
+backticks (i.e. the ) >>/           
+
+`demo.
+%`i.
+Italicized text
+%`i%`!
+`demo`
+
+Note that in this context it is not necessary to add a slash 
+`b./` after the second backtick, because in a string like 
+`b.%`i%`` the second backtick is unambiguously parsed as 
+belonging to a tag-command closing rather than to a new tag-command.
+
+`enumerate`
+ .p]
+
+[subsection.Alternative Text Blocks and Multiple Prenode Sequences]
+
+[p. 
+As mentioned, an important consideration for `GTagML; is to 
+provide an input language that can output `LaTeX; code.  
+This means that `GTagML; needs a syntax that allows 
+for a tag-command to have multiple `q.arguments` 
+%-- meaning that a tag-command node can encompass 
+more than one sequence of prenodes, each sequence 
+being an `q.argument`/.  However, because `GTagML; 
+also seeks to be similar to `TAGML; and, more 
+indirectly, to `XML;-like languages, some consideration is 
+in order in terms of how multiple prenode-sequences are 
+handled.
+.p]
+
+[p.
+`lGTagML; recognizes one prenode-sequence within a tag-command 
+node as the node's `q.main text`/.  This is the sequence 
+which is populated by default by formations like the 
+`b.[i ...]` variants summarized above.  This sequence 
+also becomes the `q.tag body` in contexts where 
+`GTagML; is exported to outputs such as `XML; or `HTML;.  
+In many `LaTeX; situations where there are 
+multiple arguments, the final argument holds the important 
+or visible text content, while preceding arguments 
+are for some kind of behind-the-scenes layout or presentational 
+data.  For instance, red-background text can be 
+written in `LaTeX; as `b.\colorbox{red}{This is RED!}`/.  
+The first command (with the string `q.red`/) is not 
+logically part of the document, and would not be 
+present in an `XML; output (for `XML; the equivalent stylistic 
+effect would have to use attributes and/or `CSS;).  
+In `GTagML;, this situation is handled by 
+placing secondary content like the string `q.red` here 
+in a separate text block.      
+.p]
+
+
+[p. 
+In addition to the two `q.default` text blocks mentioned earlier 
+%-- for main text and tag-command names %-- `GTagML; automatically 
+assigns each document two additional text blocks by default, 
+for `LaTeX; command-arguments which are not part of the 
+`q.main text` (one for `q.optional` `LaTeX; arguments and 
+one for mandatory).  This language does not mean that such 
+blocks are exclusively for `LaTeX; output; but they 
+are designed with the anticipation that traversers 
+processing `GTagML; documents will usually treat prenode-sequences 
+which map into these text blocks differently than the main 
+text.  In particular, for languages like `HTML; or `XML;, 
+text in those blocks would either be ignored or mapped 
+to attributes.  Note that the roles implicitly assigned 
+to text content entered into blocks is determined by 
+the `q.kind` attributed to the block.  `q.Main-text`/, 
+`q.tag-command-name`/, `q.optional-argument`/, 
+and `q.mandatory-argument` are examples of block-kinds.  
+By default, `GTagML; assigns one block of each kind 
+to one document.  Users can allocate additional 
+blocks if desired (examples where this may be appropriate 
+are discussed below).  In any case, it is assumed 
+that each `GTagML; document, during parsing, has 
+one `q.default` block each of the four kinds 
+discussed here which is active at any point in time. 
+.p]
+
+[p.
+When composing tag-command nodes whose text content should 
+be spread over multiple blocks, then, `GTagML; input 
+uses arrows to cue which block is the target of the 
+provided characters.  The `b.colorbox` example above 
+could be written as follows: `b.%[colorbox%. -> red => This is 
+Red!]`/.  The first arrow (`q.`b.->`/`/) immediately after 
+the dot (after the tag-command name) signals that the 
+following text (ignoring whitespace) goes to the 
+`q.mandatory-argument` block.  There `i.must` be 
+whitespace surrounding the arrow in this context.  The second 
+`b.`q.=>`/`/-form arrow signals that `i.its` following text 
+goes to the `q.main-text` block.  Note that this syntax 
+is only possible if the tag-command is introduced by 
+following the name with a period (or a comma for 
+`q.regions`/, which again are mostly used to define 
+`LaTeX; environments).  The normal `TAGML; syntax 
+where the name is followed by an angle bracket will result 
+in subsequent `q.arrows` being parsed as normal text.  
+.p]
+
+[p.
+There are several additional details to the use of 
+arrows for multi-argument commands.  One point is that 
+the tag-command may be introduce by either a backtick 
+or a bracket (`b.%[colorbox%.` or `b.%`colorbox%.`/).  
+Also, the first arrow (apart from whitespace) must be 
+the `i.first` token present after the dot or comma 
+that marks the end of the tag-command head (the 
+`q.head` being the tag-command name plus any attributes).   
+In addition, several arrow variants are available, with 
+distinct interpretations:
+
+`itemize,
+`item; The simple `q.`b.->`/` arrow signals a mandatory argument 
+(but not main-text).
+
+`item; The double `q.`b.->>`/` arrow signals an optional argument. 
+
+`item; The thick `q.`b.=>`/` arrow signals a mandatory argument 
+which is to be considered the `q.main text` of the current tag-command  
+This arrow also signals that the main text is the `i.last` 
+argument in the list of arguments associated with the 
+tag-command.  This has consequences for subsequent parsing, 
+because it is assumed that any strings `i.within` the main-text 
+body that would otherwise match arrow tokens are instead 
+treated as normal text (at least until a new tag-command 
+is issued, which may have its own multiple arguments).  
+
+`item; The long `q.`b.-->`/` arrow signals a main-text argument, 
+but one intended for the (probably uncommon) case where the 
+main text is `i.not` the last argument in series.  
+A potential case where this might apply is something like 
+a quotation with attribution %-- this example borrows 
+from a discussion on a `TeX; mailing list: 
+`b.%`quoteattr. --> Seek not the favor of the multitude; it is seldom got by honest and lawful means.  But seek the testimony of few; 
+and number not voices, but weigh them. -> Immanuel Kant%``/.  
+The second arrow (the short one) breaks the main-text body 
+and introduces the following text as belonging to a 
+different argument to `b.quoteattr`/.  This would not 
+work if the main-text were introduced via `q.`b.=>`/`/, 
+because in that case it is semantically understood 
+that the main text is the last argument (and syntactically 
+the second arrow would not be parsed as a token). 
+
+`item; The thick double `q.`b.=>>`/` and 
+long double `q.`b.-->>`/` arrow signal main-text 
+content which in `LaTeX; output should be marked as 
+an `i.optional` argument.  A good example of 
+this scenario is with `b.item` tag-commands in a 
+`LaTeX; description environment.  Consider this `LaTeX; 
+source:
+
+`b.
+\begin{description}
+\item[Item 1]  This is item 1.
+\item[Item 2]  This is item 2.
+\end{description}
+`b`
+
+The equivalent in `GTagML; %-- assuming that the 
+item labels are intended to be treated as part of the main text 
+%-- would be 
+
+`b.
+%[description,
+[item. =>> Item 1]  This is item 1.
+[item. =>> Item 2]  This is item 2.
+,description]
+`b`
+
+Note that `q.`b.item`/` in `LaTeX; has (at most) only one 
+argument, so the use of arrows here is not to separate 
+multiple arrows.  It is, however, necessary to use an 
+arrow prior to that one argument in the (relatively rare) 
+case that main-text content should be treated as 
+an `i.optional` `LaTeX; argument.
+
+`pseudoIndent; The long-double arrow `q.`b.-->>`/` would 
+be used for the same purpose as `q.`b.=>>`/`/, except 
+that the former allows the provided argument to 
+be in a position other than last in the argument-series. 
+`itemize`
+.p]
+
+
+[p. 
+In addition to the arrow-forms presented above, `GTagML; 
+recognizes for convenience certain variatons which 
+neaten the input sources.  One example concerns cases 
+where the content of one tag-command argument would 
+itself be a single, argument-less command.  Consider 
+the `LaTeX; `b,parbox` command, whose first argument 
+is often a length, as in `b.\parbox{\textwidth}{...}`/.  
+The `GTagML; version of this could be as follows:
+`b.[parbox. -\> textwidth => ...]`/, where the 
+`q.`b.-\>`/` form of the arrow indicates that the 
+following content is actually a tag-command name 
+(it uses the tag-command block).  The `b.-\>` has 
+a corresponding `b.-\>>` form for optional arguments.
+.p]
+
+[p. 
+Furthermore, a tag-command with one single mandatory (not main-text) 
+argument can employ a simplified notation where that argument is 
+places in angle brackets, as in: `q.`b.%`vspace%<2em%>;`/`/.  
+Note that the tag-command ends with a semicolon, because it has 
+no `q.main` text (the `q.2em` string is not a visible output).  
+Similar syntax could also be used for the dot or comma forms 
+with a main-text argument which follows one mandatory argument.  
+For instance, a `LaTeX; `b.itemize` environment with a locally 
+defined `b.itemsep` length might be inputted as, for 
+the begin-environment: `q.`b.%`itemize%<itemsep=2em%>,`/`/.
+.p]
+
+[section.Comments, Escape Characters, and Special Character Sequences]
+[p.
+`lGTagML; recognizes several comment forms.  
+It also has several means of escaping symbols 
+which would otherwise be parsed as tokens 
+that alter the meaning of input text 
+(e.g., arrows like those presented in the 
+previous section).
+.p]
+
+[p.
+`lGTagML; comments may be surrounded by 
+the forms `b.{<<` and `b.>>}`/.  In this 
+form they are considered solely to 
+document the `GTagML; sources themselves; 
+they are not reproduced in any outputs.  
+It is also possible to employ `TAGML;-style 
+comments (`b.[! ... !]`/); these would  
+be included by default in outputs 
+`i.other than` `LaTeX;.  A double-percent 
+(`b.%%`/) followed by whitespace produces 
+a `LaTeX; comment to the end of the line, 
+placed at the corresponding point in `LaTeX; 
+output, but not other output formats 
+(the `b.%%` is normally outputted as-is %-- 
+note that a single `b.%` is the comment 
+character in `LaTeX; %-- `i.unless` 
+the first non-whitespace character after 
+the `b.%%` is also a `b.%`/, in which case 
+the first `b.%%` is stripped off and the subsequent 
+percent symbol or symbols is kept as the start of 
+the comment; this allows for cases where exactly 
+one, or if desired three or more, percent 
+tokens is preferred instead of exactly two; 
+or where, perhaps as part of some prepressor, 
+it is necessary to follow the percent sign or signs 
+with a non-whitespace character).  Finally, 
+the format `b.{% ... %}` is a `q.universal` 
+comment included in all output; for `LaTeX;, 
+if the comment body extends over multiple lines, 
+this material will be inserted in the output 
+with a single `b.%` at the start of each line %-- 
+`i.unless` a line starts (after whitespace) with its 
+own `b.%`/'s, in case it is desired to indent the percent tokens. 
+Note that `GTagML; considers comments to be a form of whitespace.
+
+.p]
+
+
+[p.
+With respect to escapes, `GTagML; recognizes several character-sequences 
+which prevent certain symbols from being parsed as if they 
+have special `GTagML; implications (in terms of how the 
+input text encodes processing instructions).  This is, 
+for the most part, unrelated to encoding special 
+characters (or glyph-interpretations) in terms of 
+text blocks' character sets: `GTagML; has a separate 
+syntax for entering most of these non-Unicode glyphs 
+(or in general non-Latin-1, or glyphs outside whatever 
+is a document's primary character set given its language 
+and locale).  However, certain escape sequences `i.do` 
+compile to special characters; the escape-sequence 
+notation in these cases is equivalent to but cleaner 
+than the regular special-character notation.  
+.p]
+
+[p.
+The most important `GTagML; escape sequences are as 
+follows:
+
+`description,
+
+[item. ->> %,%[ %,%] %,%` %,%{ %,%} %,%| ]  The 
+percent sign in most `GTagML; escape sequences 
+serves as a general-purpose device to cancel 
+any special encoding that would otherwise be 
+attributed to the following character.  For
+instance: `q.`b.100 %,%[good!%,%]`/` yields 
+the text `q.100 %[good%]`/.  
+
+[item. ->> %,% %%, ]  Given a pair of percent 
+signs `i.not followed by whitespace` or a precent 
+sign followed by a comma, the second symbol in 
+the pair is treated as a `q.canceler` that undoes 
+the effect wherein the first percent sign 
+would be parsed as modifying a following character; 
+as such, these patterns produce a single percent 
+sign as an ordinary character.   For
+instance: `q.`b.100%,%,!`/` yields 
+the text `q.100%%!`/; and `q.100%%,%[good!%%,%]` 
+yields the text `q.100%,%[good!%]`/. 
+
+[item. ->> %= ]  The pattern `q.`b.%,=`/` signals 
+that the character immediately after the equals 
+sign should be inserted into output text as is, 
+rather than escaped according to the output's 
+conventions.  For instance, `q.`b.%,=\`/` would 
+result in `i.one` backslash being generated in 
+`LaTeX;, whereas `GTagML; would ordinarily escape 
+the backslash (by doubling it) to `q.`b.\\`/` 
+(so as to produce what `LaTeX; would consider 
+an actual backslash character).  Of course, 
+this would normally (except in special circumstances, 
+such as a `q.verbatim` environment) result in `LaTeX; 
+treating the backslash as starting a command, so 
+the `q.`b.%,=\`/` could be used to enter `q.raw` 
+`LaTeX; commands into the output text in theory 
+(but `GTagML; has a neater mechanism for this 
+kind of case; see below).  Analogously, 
+`q.`b.%,=&` would enter a single bare ampersand 
+in `XML; or `HTML;, whereas `GTagML; would 
+ordinarily translate ampersand characters 
+to `q.`b.&amp;`/`/.  
+
+[item. ->> %%- %%-- ]  These tokens produce an 
+en-dash and em-dash, respectively.  They could 
+be analogous to the `LaTeX; strings `q.`doubledash;` and 
+`q.`tripledash;` respectively, but they function 
+by inserting a command (by default `q.ndash` or `q.mdash`/) 
+which users may redefine if they want to map 
+the tokens to something else.  Meanwhile, in the text 
+block the tokens are converted into one-character special 
+glyphs; both en-dashes and em-dashes have their own 
+character-code (or `q.glyph point`/. which is the 
+term that `GTagML; uses internally). 
+
+[item. ->> ..%%. %%.. .%%. ]  These tokens produce 
+different forms of ellipses.  The `q.`b...%%.` 
+pattern notates an end-of-sentence ellipsis, which 
+might be used when quoting from a text where 
+the ellipsis signals a gap, and the subsequent material 
+belongs to a later sentence in the quoted source.  
+The default `LaTeX; output would be constructed 
+so that the visual effect is of a shortened three-dot 
+ellipses followed by a period, but this may be 
+overridden.  The `q.`b.%%..`/` form produces an ellipses 
+as one single characer.  The `q.`b..%%.`/` form is similar to 
+an ordinary `q.`b....`/` but provides a different glyph-interpretation 
+(to be explained below).     
+`description`
+.p]
+
+[p.
+In addition to the above escape sequences, which assign a 
+special meaning to certain symbols for parsing purposes, 
+`GTagML; recognizes numerous sequences in input text 
+encoding special characters and symbols.  Most of these 
+are based on `LaTeX;, often involving a pair of charcters in 
+the input which produce one single character (one `q.glyph point`/) 
+in the post-parse representation of the document.  These sequences 
+are operationally distinct from `XML; character entities, in that 
+they are not treated as an `q.entity` separate and apart from 
+an ordinary character.  Nor are they analogous to Unicode glyphs 
+where (as in `UTFSixteen; encoding) two consecutive symbols 
+could potentially identify one `q.logical` character.  `lGTagML; 
+never, for its own internal model, treats more than one 
+glyph in sequence as something like a logical `q.compound` glyph, 
+or any kind of logical unit.  Instead, for `GTagML;, all 
+characters/glyphs/symbols are one element in a text block, and 
+vice-versa.  The text block's encoding is responsible for providing a 
+character-set which assigns a single code to every symbol that needs 
+to be represented, such that every such symbol can be designated 
+with one code-point.  This does not preclude users from employing 
+character sets where multiple individual symbols (from `GTagML;'s 
+perspective) are treated by some external processing software 
+as compound characters; but such an interpretation would be 
+opaque to `GTagML;. 
+.p]
+
+[p.
+Whereas the percent sign precedes most escape sequences, 
+all special character sequences in `GTagML; begin with 
+a pipe character (`q.`b.|`/`/).  The most common patterns 
+are duplicates of `LaTeX;, with the pipe replacing the 
+`LaTeX; backslach.  So a French `q.|'e|`/, which would 
+be entered in `LaTeX; as \'e (or \'%{e%}), becomes 
+in `GTagML; `q.%|'e%|`/.  Almost all two-character .
+(i.e., two input character) `LaTeX; diacritic marks 
+follow the same pattern in `GTagML;.  One exception is 
+that marks based on a non-dotted `q.i` use the normal 
+`q.i` (not the `LaTeX; \i command): `q.|^i|` for 
+instance would be written `q.`b.%|^i%|`/` whereas in 
+`LaTeX; the equivalent is `q.`b.\^\i`/` 
+(`GTagML; redefines `q.\i` to mean italics, 
+as in `HTML; `b.`i.%<i%>`/`).  The undotted i 
+letter itself (`q.`b.`inodot`/`/) in `GTagML; 
+is notated with the pattern: `q.`b.%|@i%|`/`/.      
+.p]
+
+
+[p.
+Apart from these general comments, full discussion 
+of `GTagML; accents and diacritics, and other special 
+characters, depends on a more complete review 
+of `GTagML; character coding, which occupies the next section.
+.p]
+
+ 
+[section.Diacritics, Glyph Points, and Character Interpretations]
+
+[p.
+This section will explain `GTagML;'s default character-encoding 
+system, which is used for `GTagML; documents if no 
+instructions indicating otherwise are provided.  
+This character encoding is weighted toward English-language text 
+in particular, and European languages in general (a more 
+internationalized implementation of the `GTagML; parser is 
+planned for the future).  `lGTagML; assumes that input sources 
+are encoded in Latin-1, although `GTagML;'s internal encoding 
+is significantly different from Latin-1 and from Unicode.   
+.p]
+
+[p.
+`lGTagML;'s default encoding scheme allocates exactly one 
+byte for each character/glyph.  The number in the 0-255 range 
+assigned to each glyph is called a `q.glyph point`/.  
+Some characters have different glyph points but are visually 
+identical, and/or may be mapped to the same character 
+in output text.  In these cases the characters have 
+different `q.interpretations`/.  Interpretations 
+are a concept specific to `GTagML; which concern 
+the semantic, textual, and/or punctuation significance 
+or role of a glyph.  Interpretations are 
+defined in terms of `q.roles`/; viz., the interpretation 
+of a glyph derives from the role it is assigned.  
+An example is a `q.punctuation` role: a `q.dot` or `q.period` 
+character is treated as an end-of-sentence indicator if 
+the glyph has the punctuation role.  A dot is instead 
+treated as part of an abbreviation if it has an `q.abbreviation` 
+role.  `lGTagML; currently represents 16 roles.  In 
+theory, any character can be joined with any role, but 
+to populate a one-byte-per-character encoding `GTagML; 
+assigns glyph-points only to certain combination which 
+are practically meaningful.  `lGTagML;'s encoding deliberately 
+leaves a few unassigned glyph-points for users to declare 
+with their own symbols that are not otherwise representable; 
+this could include, if desired, a role-plus-glyph 
+combination with an interpretation that `GTagML; does not recognize.
+.p]
+
+
+[p.
+`lGTagML;s encoding also includes all conventional `LaTeX;/`HTML; 
+diacritics, as well as some relatively obscure ones.  
+In `GTagML;, each diacritic combines a `q.base` character 
+with secondary/accent character.  There are roughly 43 
+possible secondary characters, although only a select 
+group of base/secondary pairings are a meaningful 
+combination (i.e., produce a recognized letter or 
+symbol in some alphabet or writing system).  `lGTagML; 
+treats certain special symbols, like `q.tm` for `q.trademark`/, 
+as if they were diacritic letters, which is linguistic 
+a little specious but makes sense implementation-wise.   
+.p]
+
+
+[p.
+Note that both glyph-interpretations and diacritics involve a 
+base character plus one supplemental indicator (either a 
+diacritic mark or an interpretation code).  With no 
+further compression, one could build a generic/general-purpose 
+character set by combining some collection of base 
+characters plus room for diacritics and/or interpretations.  
+Assuming at most 128 base characters, for instance, plus 
+at most 64 diacritics and 16 roles, free combinations of 
+these codes would require 17 bits per character.  
+Only a fraction of all possible 17-bit combinations, however, 
+would have a sensible interpretation.  `lGTagML; 
+therefore starts from an uncompressed 2 or 3 byte-per-character 
+encoding system but selects 256 combinations (actually, 
+somewhat less than that) to include in its default character-set.  
+Users cam tweak this selection to some degree. 
+.p]
+
+[p.
+Another consideration about character-encoding is that 
+proper encoding of individual characters or strings 
+often depends on context.  For instance, the `XML; 
+sequence `q.`b.&amp;`/` represents an ampersand.  
+In an `XML; node holds the title of a book, and 
+one wants to include this title in a `GTagML; document, 
+it would be reasonable to translate the ampersand 
+symbol to the numeric code with which `GTagML; 
+denotes that character.  However, it may be the 
+case that a `GTagML; document is serializing `XML; 
+`i.data`/, or, in effect, treating the `XML; per se  
+as a package of data to be repesented (what this 
+data itself is intended to represent thereby becomes 
+not directly consequential).  In that case, it might 
+be appropriate to leave the `q.`b.&amp;`/` as just 
+that string; after all, the `i.is` the data.  The 
+data includes the fact that the `XML; stream has the 
+characters `q.`b.&amp;`/` in that place.   
+.p]
+
+[p.
+There are no clear-cut rules to distinguish when 
+`q.`i.the`/` data is natural-language text that should be 
+encoded accordingly (in such a way that, as much as 
+possible, characters' linguistic/textual/rhetorical roles 
+are documented) or rather `i.the` data is a computational 
+or digital artifact, i.e., an object/data struucture 
+being serialized (including one which `q.holds` or 
+`q.designates` natural-language text, which is then 
+`q.the` data only indirectly/secondarily).  
+`lGTagML; does not definitively establish how these 
+alternative senses of `q.data` interact.  For example, 
+if the title of a book contains, as part of its text, 
+the title of a different book, there are variegated 
+ways of encoding this situation.  The inner title may 
+or may not be its own node; the outer title's content 
+could be a string which would construct a child node 
+in some contexts (such as `XML;) but not in `GTagML;.  
+Or, since `GTagML; supports overlapping markup, 
+the inner title could be a prenode which is both absorbed 
+into the outer title nodes' content and also is designated 
+with a separate node that overlaps with the outer title-node.  
+In any case, these issues do not only impinge on node-structure, 
+but also on character encoding.  If a book title contains 
+the string `q.`b.&amp;`/` in a context where the title 
+is taken as `XML; data (not primarily as natural-language 
+text), so that the `b.&amp;` should be encoded as is, `GTagML; 
+would typically assign the characters in the `b.&amp;` string 
+(particularly non-alphanumeric ones) a different interpretation 
+than the interepretation assigned to a `q.textual` ampersand 
+symbol. 
+.p]
+
+[p.
+In lieu of further generic discussion about `GTagML;'s 
+encoding system, 
+it is apropos to actually identify all the glyphs 
+and glyph-interpretations modeled via the default 
+system, before addressing how to modify it if 
+documents require special characters not representable 
+by default.  The glyph-points can be listed in several 
+groups:
+
+`description,
+
+[item. ->> Digits]  Glyph points 0-9 are the digits 0-9.  Note 
+that one rationale for this encoding choice is that 
+numeric values assigned to digits and lower-case letters 
+correspond with their numeric values in non-decimal bases 
+according to `Qt;s lexical cast methods (i.e., `b.QString::number`/).  
+Note that the character with the glyph-point code 0 is 
+the `i.numeral` `q.0` (Latin-1 number 48).  A different glyph-point 
+represents a `q.null`/, `q.void`/, or `q.non-existing` character.
+
+[item. ->> Lower-Case Letters]  Glyph points 10-35 are the letter 
+a-z.  As just mentioned, any string of numeral digits and lowercase 
+letters can be treated as a numeral in some base between 2 and 36; 
+the `GTagML; encoding means that the value of each character 
+in such a numeric literal will match its glyph-point code.
+
+[item. ->> Underscore]  Glyph point 36 is the underscore
+`q.`b._`/` character  This is commonly treated as an alphanumeric 
+character.  For certain lowercase/uppercase conversions, 
+`GTagML; treats the underscore as an upper-case version of 
+the hyphen (glyph-point 63).  The underscore also plays a 
+role (as a separator) in `GTagML;'s built-in base-32 encoding, which can 
+be used in some contexts to serialize binary data via 
+solely alphanumeric characters (see below). 
+
+[item. ->> Upper-Case Letters]  Glyph points 37-62 are the letters 
+A-Z.
+
+[item. ->> Hyphen]  Glyph point 63 is the hyphen.  `lGTagML;, 
+partly via convention and partly via how input sources are 
+parsed, recommends using this glyph-point only for hyphen 
+characters playing that specific role, as in the compound 
+word `q.tag-command`/.  Other uses of the `q.dash` or 
+`q.minus` character, which may be visually (and in output 
+text) identical to the hyphen, have their own codes.  
+In some contexts (e.g., tag-command names) `GTagML; treats the hyphen as a 
+lower-case quasi-alphanumeric character whose upper-case 
+version is the underscore.     
+ 
+[item. ->> Common Punctuation]  Glyph-points 64-70 represent 
+the most commonly used punctuation characters in ordinary 
+English text, presumably: period (`q`b..`/`/), comma 
+(`q.`b.,`/`/), semicolon (`q.`b,;`/`/), colon (`q.`b.:`/`/), 
+open parenthesis (`q.`b.(`/`/), closed parenthesis (`q.`b.)`/`/), 
+and the em- (long) dash (`q.`b.%--`/`/).  
+
+`pseudoIndent; Note that codd 64 (the period) is only 
+(intended to be) used for punctuation at the end of sentences (see 
+the disussion in the next item).  `GTagML; recommends 
+certain conventions to disambiguous this punctuation usage from 
+other interpretations that might be assigned to the period 
+character.  A period followed by `i.one single` space and 
+then some non-whitespace character is assumed to 
+be part of an abbreviation.  Likewise, a period which 
+is not followed by any whitespace at all is assumed 
+to be something other than a punctuation mark `i.unless` 
+the following character is a close paren, brace, or bracket 
+`i.or` the period comes at the end of a tag-command.    
+
+[item. ->> Common Spaces]  Glyph-points 71-73 represent 
+a normal space, a sentence-ending space, and a newline, 
+respectively.  A sentence-ending space (code 72) refers 
+to a space immediately after the last non-whitespace character 
+in a sentence (which may be punctuation to end a sentence, but 
+may also be a character such as a close-paren, if the entire 
+sentence is at the end of a parenthetical expression.
+
+`pseudoIndent; `lGTagML; adopts the convention of inserting 
+two spaces between sentences, of which the first space 
+is a sentence-ending space and the second is an ordinary 
+space or a newline.  Moreover, `GTagML; automatically represents 
+spaces in this manner for input sources that follow several 
+simple conventions.  First, sentences are assumed to end with a 
+period, question mark, or exclamation point (see the 
+above comments on when a period is interpreted as punctuation; 
+similar rules apply to question or exclamation symbols).  
+Once it is established that a period or question/exclamation mark 
+is indeed the end of a sentence, `GTagML; will scan for 
+the next space character (i.e. the regular simple space, 
+Latin-1 code 32) and encode that as a sentence-ending 
+space.  As described for the previous item, there are 
+usually (in `GTagML; input) `i.two consecutive` spaces, 
+the pattern which indicates a separation between two 
+sentences; `GTagML; will encode the `i.second` of 
+these two as a normal space.  If the `i.first` whitespace 
+character after the sentence is a newline, then `GTagML; 
+will `i.insert` a sentence-end space (glyph-point 72) 
+before the newline.  For any sequence of three 
+or more spaces/newlines, `GTagML; will strip the third 
+character and any subsequent characters.
+
+[!--
+`pseudoIndent; Note that `GTagML;'s default character set 
+does not include tab or carriage-return 
+codes (the elements typically represented by
+`q.`b.\t`/` and `q.`b.\r`/` respectively).  It 
+is not recommended to use these characters in input 
+text; use spaces instead.  --]
+
+
+`pseudoIndent; In short, any whitespace pattern following 
+the end of a sentence will be converted to a pair 
+of the glyph-points 72-71 or (if any character in the 
+original pattern is a newline) 72-73. 
+
+[item. ->> Symbols and Punctuation]  Glyph-points 74-117 represent 
+various symbol and punctuation marks.  Appendix I provides 
+a complete table.  Note that some of these distinct 
+points may be duplicates if interpretations are ignored %-- 
+that is, several numerically different codes may yield 
+the same output character, depending on the output 
+format.  Appendix I identifies the various interpretations 
+assigned to different glyph-points which designate 
+the same (in visual terms) character.
+
+[item. ->> Unused]  Glyph-points 118-127 are unassigned; 
+individual documents (or custom extensions to `GTagML; 
+may use these to hold %-- either globally throughout 
+a document or locally in some specific context 
+%-- special symbols that are not otherwise available
+ via the `GTagML; default encoding.  More information 
+on special symbols is included below.
+
+[item. ->> Literal Math and Code Symbols]  Glyph-points 
+128-159 represent non-alphanumeric characters that may 
+be encountered in computer source code, data serialization, 
+or certain mathematical contexts.  These codes are 
+intended to be used for characters that do not 
+represent natural language text (or at least, not directly), 
+but instead form the basis of parts of `GTagML; concerned 
+with serializing raw data.  These codes do not have or 
+imply any textual interpretation; their meaning is assumed 
+to be solely a matter of the computational context where 
+they are used.  
+
+`pseudoIndent; In addition to serialization, these codes 
+could be used for typesetting computer code printed 
+within a publication, e.g. via the `LaTeX; `b.listings` 
+package.  `GTagML; will by default parse certain tag-commands 
+as if their content contains mathematical symbols or computer 
+code rather than normal text, and will automatically 
+encode the relevant symbols using glyph-points 128-159, 
+assuming the corresponding symbols are present in the 
+input text as single characters.
+  
+[item. ->> Non-Latin-1 Diacritics and Accents]  Glyph-points 
+160-179 represent several rare European-language 
+letters which are available in `LaTeX; but are 
+not part of the Unicode Latin-1 block.  Appendix I 
+provides a table mapping these codes to 
+their corresponding `LaTeX; commands (and 
+`XML;/`HTML; representations if applicable).    
+ 
+[item. ->> Unused]  Glyph-points 
+180-189 are another sequence of unassigned codes.  
+`lGTagML; recommends using this group (in lieu of 
+118-127) for special symbols introduces via an 
+indexed-based lookup mechanism (explained below 
+and in the next item).
+
+[item. ->> Index-Based Lookup]  Glyph-points 
+190 and 191 `i.may` be used to support `q.index-based` 
+lookup, which however is not `i.necessarily` built in 
+to a `GTagML; parser.  If the parser is compiled 
+with index-based lookup, then text blocks maintain a 
+mapping from character indices to supplemental 
+symbols which are not otherwise part of the text 
+block's character set.  In this scenario, glyph-point 
+190 could be used to signal that the parser needs 
+to consult a mapping, whose key is the current character 
+index (the index holding the glyph-point) and whose 
+value is a `b.QChar` (a UTF-16 symbol), a 
+`b.QString` (encoding output text/content), or some 
+other data structure which should be 
+treated as notating or designating 
+the encoding-target for that specific index.  
+In essence, index-based lookup allows for special 
+symbols to be introduced locally such that `q.locally` 
+means `q.within the scope of one single index`/: 
+different occurances of glyph-point 190 could 
+map to entirely unrelated symbols.
+
+`pseudoIndent; Glyph-point 191 is an unused code 
+that is left open for use by index-based 
+lookup schemes that somehow differ from the 
+logic built in to `GTagML;.  Appendix II 
+discusses the default `GTagML; lookup implementation 
+and points to how it may potentially be 
+tweaked or customized.
+
+[item. ->> Latin-1 Diacritics and Accents]  Glyph-points 
+192-255 encompass the accented letters that occupy the 
+same numeric codes in Latin-1, excluding the 215 
+and 247 values (which are mathematical symbols in 
+Latin-1 that are not directly present in `GTagML;, 
+on the assumption that such symbols are more apprpriately 
+typeset as tag-commands).
+
+[item. ->> Null/Void and Separator Characters]  Glyph-point 
+215 is a pseudo-character intended to be used at the 
+beginning and end of each document and/or text block.  
+Glyph-point 247 is otherwise used as a signal for 
+a null, void, or non-existent character %-- for instance, 
+247 would be used as a return code when a procedure is 
+unable to return a `q.real` character; an example 
+would be the character at an out-of-range index in a 
+text block.  Note that code should not check for 
+the number 247 directly; instead, `GTagML; provides 
+an `b.is_null` procedure which affirms that a 
+glyph-point holds this null value.  (Every alternative 
+character set should provide exactly one glyph-point 
+for which `b.is_null` evaluates to `b.true`/).  The 
+separator code 215 (as does 247) 
+similarly yields `b.true` from the procedure `b.is_null`/, 
+meaning that this glyph-point encodes a non-character 
+which has no visual representation.  Character sets 
+may have multiple `b.is_void` glyph-points, but 
+only one `b.is_null`/.
+`description`
+.p]
+
+[p.
+Further discussion about character-encoding depends on an 
+explicit itemization of `q.roles` used to disambiguate 
+visually similar/identical glyphs, which is the 
+topic of the next section. 
+ 
+.p]
+
+[section.Roles and Interpretations] 
+
+[p.
+As outlines above, `GTagML; considers symbols 
+distinct even if they are visually identical, 
+but have incommensurate textual roles.  
+Often nultiple glyph-points may therefore 
+map to the same output character, though 
+sometimes it is possible to compose documents 
+where these outputs are visually differentiated.  
+For example, the version of parentheses 
+characters (`q.`b.( ... )`/`/) used to 
+group items together might sensibly be typeset 
+slightly larger than parentheses used 
+in their ordinary punctuation roles (to 
+surround parenthetical material written 
+in ordinary language/text).  Such typesetting 
+options will be discussed after the 
+roles themselves are detailed.  
+.p]
+
+[p.
+One complicating factor when introducing a system 
+for characterizing multiple `q.usages` of common 
+symbols (e.g. `ASCII;/typewriter symbols) is 
+that `GTagML; (or any text-oriented markup 
+language) may encode documents with varying 
+degrees of presentational sophistication 
+(as far as typesetting, presenting mathematical 
+formulae, notating computer code, and so forth).  
+One use case for `GTagML; is to output 
+documents in formats such as `LaTeX; or 
+`XML;, which offer (or can offer via suitable 
+packages/processing) advanced features for composing 
+tables, mathematics, special-purpose symbols, 
+and so forth.  However, we cannot rule out the 
+possibility that some authors may wish to achieve 
+similar effects with more rudimentary textual 
+materials %-- for instance, writing mathematical 
+expressions with normal `ASCII; symbols (rather 
+than, say, `LaTeX; math environments) or 
+creating visual layouts which approximate 
+tables via spaces, periods, pipe characters, 
+and so forth.  To be a truly general-purpose 
+textualization system, `GTagML; should be 
+able to notate such relatively informal 
+usages as well as more techical 
+(e.g., `LaTeX;) documents.   
+.p]
+
+[p.
+Moreover, certain interpretations may be rather subjective 
+or stylistic.  For instance, should the `q.st` and `q.nd` 
+in `q.1st` and `q.2nd` %-- or the `q.tm` in `q.trademark` %-- 
+be read as one or two characters?  If the text is typeset 
+such that these letters are elevated and/or condensed, 
+or (as in `tm;) somehow boxed or visually altered 
+to make the compound appear as a conventionalized 
+(single) symbol, does that impact whether we 
+read those cases as one letter or two?  Analogous 
+questions would apply to strings like `q.1/2`/, `q.1/3`/, 
+or `q.1/4`/.  With `LaTeX; commands or `XML; character 
+entities one can of course 
+
+
+.p]
+
+[p.
+`lGTagML; recognizes 16 different character-roles; the 
+combination of a role and a specific character (glyph) 
+results in an `i.interpretation`/, or an `i.interpretation 
+(of)` that glyph (informally, `q.role` could be used 
+interchangeably with `q.interpretation` when it is 
+clear which character is being interpreted).  
+This section will summarize the roles; see Table ? 
+below which maps all default `GTagML; glyph-points 
+to their understood roles.   
+The 16 roles are as follows:
+
+`description,
+
+[item ->> Normal/letter]  Applies to all English letters 
+and most accents/diacritics. 
+
+[item ->> Punctuation]  Applies to character such as 
+periods, commas, semicolons, colons, quotation marks, 
+apostrophes, parentheses, and question/exclamation marks, 
+in their ordinary testual/natural language interpretations.
+
+[item ->> Weak Punctuation]  This role is used for 
+occasional situations where a symbol plays a role 
+comparable to punctuation but without implying the 
+same sentence flow or strucuture.  An example would 
+be the use of an exclamation point or a question 
+mark within a sentence, which keeps part of 
+the symbol's rhetorical meaning %-- expressing 
+emphasis, surprise, skepticism, etc. %-- but 
+is not intended to actually end the surrounding 
+sentence.  Consider interjections like 
+`q.huh?` or `q.yay!` included as parenthetical 
+comments within a sentence, as a kind of commentary 
+on the sentence contents but logically detached 
+from the sentence, so that the interjection's 
+terminal question mark or exclamation point is 
+not logically indicative of the surrounding sentence 
+being complete.  
+
+`pseudoIndent; An even rarer, but possible situation occurs with 
+the period, which when used as a divider between words 
+sometimes connotes a kind of verbal elongation which 
+alludes to an end-of-sentence pause, but does not 
+actually signify an end of the surrounding sentence.  
+This is a punctuation-like use of the period 
+(it is not an abbreviation, say), but it should 
+not employ a glyph-point which marks the period 
+as an end-of-sentence.
+
+[item ->> Quasi-Word]  This role applies to symbols 
+such as `q.`b.#`/` to mean `q.number`/, `q.`b.~`/` 
+to mean `q.circa`/, `q.`b.$`/` for `q.dollars`/, 
+`q.`b.%%`/` for `q.percent`/, `q.`b.&`/` 
+for `q.and`/, `q.`b.'`/` for `q.feet`/, 
+`q.`b."`/` for `q.inches`/,   etc.
+
+[item ->> Quasi-Letter]  This role covers cases such as 
+the star/asterix (`q.`b.*`/`/) used to indirectly 
+spell out an offensive/curse word.  Another example 
+is the slash in `q.N/A`/, which often stands 
+for `q.Not Available`/: `GTagML; considers this 
+a different interpretation than the slash used 
+between `i.words`/, indicating a combination or 
+alternation between them (e.g., `q.and/or`/), 
+which is described as a `q.Punctuation` role.
+
+[item ->> Quasi-Math]  This role covers characters 
+used to informally write mathematical or math-like 
+contents in ordinary text.  The implication of 
+interpretations employing this role is that the 
+author is alluding to mathematical constructions 
+but is either doing so in an allegorical/metaphorical 
+manner or is asserting ideas with some explicit 
+numerical/magnitude-oriented content but does not 
+intend to produce text which is read as literal 
+mathematics, outside the flow of ordinary language.  
+Consider the slogan `q.U = U` (Undetectable equals 
+Untransmittable), which is associated with AIDS 
+advocacy; or using a plus sign to connote combinations 
+of two (non-quantity-like) ideas.  For an 
+example of quasi-mathematical usages which 
+`i.are` numerically oriented, but might still be 
+interpreted as something other than symbolic 
+mathematics, consider a statement 
+such as `q.Our success rate is > 95%`/.  
+
+[item ->> Pure Visual]  This interpretation is applied 
+when a symbol is used for some visual effect that has 
+no identifiable non-visual meaning, such as 
+a string of periods or underscores used to `q.fill space` 
+between words or strings (this might be a desired 
+effect if one were mimicking a table, say, without 
+employing a rigous tabular typesetting as in `LaTeX;).  
+A `q.pure visual` role would also be appropriate 
+when printing a certain character specifically 
+for the sake of discussing it as a visual or digital 
+artifact (as occurs often in this document, for instance). 
+
+[item ->> Surround]  This interpretation concerns 
+several punctuation characters which (apart from their 
+normal natural-language usages) are sometimes 
+used for grouping/aggregating effects.  For instance, 
+(square) brackets (`q.`b.[`/` and `q.`b.]`/`/) 
+are used in some texts for nested parenthetical 
+expressions (a parenthesis inside a parenthesis), which 
+can be considered a `q.punctuation` role.  
+In some texts, however, brackets are printed with 
+a rather different role of surrounding 
+lists/itemizations.  
+ 
+[item ->> Literal]  The `q.literal` role refers to 
+numeric (and in some situations string) literals 
+discussed in mostly natural-language text.  
+Aside from numbers, characters which might be 
+interpreted according to this role include 
+the period and comma (in the context of decimal 
+numbers), the forward-slash (in the context 
+of fractions and in `URL;s), the hyphen/minus (in the 
+context of negative numbers), and the at-sign 
+(e.g., within email addresses).  Non-mathematical 
+uses for the `q.literal` role include mentions of 
+computer files/folders, `URL;s, the names of 
+procedures in computer code, and so forth,
+
+`pseudoIndent;  There is some overlap between 
+the `q.literal` and the `q.serialization` role, 
+particularly in regards to computer-related 
+strings, such as `URL; and file/folder/procedure 
+names.  In general, the `i.literal` role is 
+designed to be used when such strings are 
+referenced in the context of natural-language 
+text, whereas the `i.serialization` interpretation 
+applies to extended passages/sequences reproducing 
+computer code or serializing digital data.  
+When `GTagML; is employed for graph serialization, 
+e.g., non-alphanumeric characters would normally 
+be encoded according to the serialization role, 
+not the literal role.
+
+[item ->> Subpunctuation]  This interpretation is 
+designed for cases where a glyph is part of a sequence which 
+collectively plays a punctuation role, but where that 
+role cannot be ascribed to a character individually.  For 
+example, consider a sentence which ends with (not one but) 
+two or more exclamation or question marks.  Only the last 
+mark in that series should be considered a sentence-ending 
+glyph-point (and flagged accordingly).  This is also 
+true for a `q.weak punctuation` series which alludes 
+to an end-of-sentence (e.g., a parenthetical comment 
+treated for purpose of rhetorical flourish as `i.like` 
+a sentence).  While the total sequence of marks may 
+collectively serve a sentence-ending role, it would 
+be misleading to flag consecutive characters as sentence 
+ends; in such a case the mark `i.other than` those at 
+the sequence-end would be interpreted as `q.subpunctuation`/.
+
+`pseudoIndent;  Another use-case for this role would be 
+texts which employ two consecutive hyphens/dashes 
+to mark a long dash.  Arguably, it is more professionally 
+stylistic to print long dashes as em-dashes (which typically 
+in `GTagML; are treated as one character), but a text 
+may have reasons to use double-hyphens instead %-- perhaps 
+because a less professional look is desired, or because 
+the text's purpose is to transcribe some more informal writing.  
+
+{<< ellipses? >>}
+
+   
+
+`description`
+  
+.p]
+
+[p.
+
+.p]
+
+[section. ->> Graph Serialization and ``Grounding'' 
+ => Graph Serialization and `q.Grounding`/]
+
+[p.
+The preceding sections have been focused on encoding 
+natural-language text.  However, as indicated near 
+the start of this overview, `GTagML; is also 
+engineered with an emphasis on serializing graphs, 
+and data structures in general insofar as they are 
+amenable to a graph model.  The subjects of text-encoding 
+and graph-serialization are not mutually exclusive 
+%-- after all, most digital information includes, amongst 
+other kinds of data, some pieces of natural-language 
+content (perhaps names, places, etc., in lieu of 
+extended textual passages; but text-encoding, orthographic, 
+and character-encoding issues are germane to such 
+small-scale textualization as well).  Nevertheless, 
+in many contexts a lot of data serialized from 
+graphs (and related digital/computational structures) 
+is `i.not` linguistic in character, but is more 
+numeric/quantitative or more oriented to internal 
+computing artifacts (file/folder names, `URL;s, etc).  
+Moreover, the purpose of such serializations is 
+often not to generate human-readable output 
+(e.g. to generate `LaTeX; files which get converted 
+to `PDF;), but to be parsed by some software component 
+so as to retrieve/extract/deserialize the serialized data.  
+.p]
+
+[p.
+These details point to issues which would be relevant to 
+any representation format like a markup language; but 
+they take on a distinct character in the context 
+of `TAGML; and the `q.Text as Graph` model in general.  
+Partcularly noteworthy is how this model distinguishes 
+`i.containment` from `i.dominance`/, a distinct which 
+acquires additional subtelties when we turn from 
+text-encoding to graph-serialization. 
+.p]
+
+
+[p.
+Suppose we intend to serialize a property-graph wherein a 
+`b.book` vertex has a `b.title` propety.  Let's say 
+this yields a `GTagML; document with a `b.book` node 
+and a `b.title` node.  Note that the property-graph 
+being serialized and the `GTagML; document (or the 
+infoset it encodes) are both graphs, but they are not 
+the same graphs (they are not `i.literally` the same 
+computational entites; most likely, nor are they structurally 
+the same).  In this context, according to how `TAG; 
+understands inter-node dominance and containment, 
+the `b.book` node `b.dominates` the `b.title` node.  
+This means that it is structurally or semantically 
+salient that the content of the latter node is 
+somehow `q.part` of the former %-- the pertinent 
+contrast to dominance in this sense is 
+`i.containment without dominance`/, such as how a 
+paragraph may be contained on a page; but there 
+is nothing about paragraphs which make them 
+necessarily `i.part` of (just one) page.     
+.p]
+
+[p.
+In some contexts the dominance/containment distinction may be 
+a little ambiguous, or subjective.  I gave the example of 
+paragraph, which ordinarily can run across page boundaries; 
+as such, in most texts, the page-to-paragraph relation 
+is one of containment (which is weaker than dominance).  
+Of course, many encodings for text documents (in `XML;, 
+for instance) do not represent pages at all.  `lXML; 
+does not have overlapping markup which would permit 
+situations like a cross-page paragraph being notated 
+via ordinary nested tags.  However, in some contexts 
+pages might be observed directly (consider digital archiving 
+of printed manuscripts, via cameras and maybe Optical Character 
+Recognition).  The purpose of such archiving is not 
+merely to transcribe text, but to treat graphical 
+media holding photographs/pictures of text as 
+data in its own right.  In such as scenario a 
+page would be a `q.first class` object (maybe having 
+its own image file or its own resource identifier).  
+To represent paragraphs it might then be decided to 
+utilize a notion of `q.subparagraphs`/, where each 
+subparagraph contains the portion of a paragraph 
+that belongs to one specific page.  Presumably 
+the page-to-`i.sub`/paragraph relation is %-- because 
+the `q.subparagraph` kind is explicitly introduced 
+so as to relate to surrounding pages %-- one of 
+`i.dominance`/; one that is structurally significant.
+.p]
+
+[p.
+Likewise, consider text being composed not by a word-processor 
+or an input language such as `LaTeX;, but by 
+graphic design software, where again the notion of 
+`q.page` may be an essential structuring element.  
+Most graphics software allows users to place text 
+blocks at desired locations in figures; an application, 
+when the text may be multi-line and of extended size, 
+might reasonably term the textual content contained in 
+such blocks `q.paragraphs`/.  But in this case the 
+software is set up in a manner that paragraphs 
+`i.are` necessarily contained on a single page.  
+If a `TAGML; or `GTagML; document is serializing graphics 
+created by software along these lines, the page-to-paragraph 
+relation would presumably be one of dominance, not mere 
+containment.  
+.p]
+
+[p.
+In short, the dominance/containment distinction is 
+sometimes a matter of context.  This means in particular 
+that whether an inter-node relation is or should be 
+classified as one or the other may not be 
+trivially obvious; there should be a rationale 
+for adopting one or the other.  Such rationales 
+may acquire greater specificity in the graph-serialization 
+context.
+.p]
+
+[p.
+With respect to a book-title relation, then, if `q.`b.title`/` 
+is a `i.property` of `b.book`/s (in a property-graph) 
+this is strong evidence that book-title is a 
+structurally significant and consistent relation, and therefore 
+a case of dominance.  But consider a scenario I alluded 
+to earlier, if the title has, as part of its content, 
+mention of `i.another` title.  Consider something like 
+
+`samp,
+[book>
+ [title>An ethical interpretation of Kant's 
+  [book-title>Critique of Pure Reason<book-title]
+ <title]
+<book]
+`samp`
+
+How should the inner title be visually separated 
+from the outer title %-- if we're in a context 
+where typesetting is relevant %-- and/or how 
+should software reading these nodes model 
+the fact that the title node contains its 
+pwn `q.inner` title node?  The above (hypothetical) 
+excerpt presumes (and enables) that the 
+two titles are treated differently (in terms of 
+their data types, their structural interpretations, 
+etc.) by using different tag-command names.  
+But we still have to make sense of the interrelationship 
+between the three nodes.   
+.p]
+
+
+[p.
+Of course, if the purpose of the `GTagML; document is 
+to hold data that is eventually output to a web 
+page or `PDF;, we could mark the inner title 
+just stylistically:
+
+`samp,
+[book>
+ [title>An ethical interpretation of Kant's 
+  <i>Critique of Pure Reason</i>
+ <title]
+<book]
+`samp`
+
+Here I'm wrapping the inner title in mundane `HTML; `b.<i>` 
+tags; for `GTagML; the inner title is not a separate node 
+at all.  This modeling is imperfect, partly because 
+one might want to support some kind of text-mining 
+where entities such as titles could be annotated.  
+A possible enhancement might be (approximately):
+
+`samp,
+[book>
+ [title>An ethical interpretation of Kant's 
+  <i>[ann:title>Critique of Pure Reason<ann:title]</i>
+ <title]
+<book]
+`samp`
+ 
+The idea here is that `q.`b.ann:`/` tags would be used 
+to mark `q.named entities` and other identifiable 
+`q.concepts` (in the text-mining sense) %-- one could 
+also surround `q.Kant` as, say, `q.%[ann:person>Kant<ann:person%]`/. 
+Moreover, this hypothetical example assumes that the 
+`q.`b.ann:`/` tags are parsed as unrelated to other markup; 
+their purpose is to identify segments of text that can be 
+annotated in terms of concepts from some Controlled Vocabulary.  
+In particular, in that scenario the `q.`b.[title>`/` 
+tag-command `i.contains` but does not `i.dominate` 
+the `q.`b.[ann:title>`/`/.   
+.p]
+
+[p.
+On the other hand, the hypothetical `GTagML; including theses 
+code samples might be targeted toward an environment 
+which `i.does` have some mechanism to handle `q.nested` 
+content inside, say, a book title.  Whatever datatype 
+represents `q.titles`/, and whatever code extracts 
+titles (and any other information) from parsed `GTagML;, 
+would then have structural comprehension of something like 
+a title-within-a-title scenario.  If that were the 
+case, the `i.outer` title node would he `q.dominating` 
+(not merely `q.containing`/) the outer title node.  
+.p]
+
+[p.
+But even in that case, what is the relation between 
+the `i.`b.book`/` node and the `i.inner` title?  
+Is dominance transitive?  Suppose that indeed 
+the `b.book`node dominates the `b.title` node, 
+which in turn dominates its component `b.book-title` node.  
+It nonetheless does not seems as if the `b.book` 
+node dominates the `b.book-title` node, at least in 
+the same manner that it dominates the outer 
+`b.title` node.  This example was set up where the 
+data comes from a property-graph, and `q.title` 
+is a property of `q.book`/; this means that the 
+contents of the (outer) `q.`b.title`/` node 
+are a `i.value` of this property.  So the inner 
+title node, along with all the other title text, 
+collectively form a value which is attached to 
+`b.book` insofar as it is the value of a property 
+associated with `b.book`/'s object.  Whatever internal 
+structure applies to this value is not directly 
+involved with the `b.book` node; the relation is simply 
+that the value as a unit, with all its inner content 
+(includng nested nodes) bundled in.
+.p]
+
+[p.
+
+.p]
+
+
+
+,document]
+

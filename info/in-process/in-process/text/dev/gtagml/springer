@@ -1,0 +1,25 @@
+
+Precis 
+
+LTS's goal is to curate a suite of software tools which can help both authors and publishers produce documents which can take advantage of modern technological capabilities such as interactive PDF viewers, text-mining software, and open-access data sets.  There are many innovative publishing-related technologies which have been implemented over the past decade but which have not been widely adopted in the publishing industry.  Therefore, LTS offers to unify and extend some of these solutions into an integrated toolset covering many aspects of the publishing pipeline.
+
+BMGF
+
+Publishers in recent years have begun to encourage authors to share their research data, and to incorporate "data availability" or "supplemental materials" sections as an intrinsic part of their journal and book publications.  The Bill and Melinda Gates Foundation makes open data-sharing a precondition for funding in most circumstances.  In so doing, the Gates Foundation provides guidelines for authors to prepare, describe, and deposit their data on popular scientific data-hosting platforms, when they publish their work on the Gates Open Research portal.  Initiatives such FAIRsharing, likewise, provide recommendations to help authors produce data sets which are Findable, Accessible, Interoperable, and Reusable (FAIR).  FAIR data has two dimensions: first, how data sets are encoded and organized; second, how data sets are connected to their corresponding scientific/academic publications.
+
+With respect to how scientific/research data is encoded and organized, several formats exist to encode both a data-set's metadata (information about the data set, such as its author, date, file types, size, folder organization, and software requirements) and its actual data.  We propose to unify these various formats into a single flexible hypergraph-based format which is expressive enough to encompass all other commonly-used scientific data formats.  This hypergraph model is based on the architecture of hypergraph database engines such as HyperGraphDB, and extends property-graph databases such as Neo4J.  
+
+BitGraph (Johns Hopkins University Applied Physics Laboratory), A C++ implementation of the "Gremlin Virtual Machine" -- which provides a mechanism for querying property-graphs -- is a good foundation for building a general-purpose engine for interoperating with open-access data sets.  Several publishing-related technologies, such as BioCoder (Microsoft Research India, which is used for documenting research protocols) and Pandore (GREYC lab, Caen, which is used for image processing) employ a "step-based" internal representation similar to Gremlin.  This opens the possibility for an enhanced step-based virtual machine which could be used to model both research data and research methodology as well as to extract information from published data sets.  The idea of a "step-based virtual machine" is a relatively new innovation in computer science, driven by the rise of property-graph models as an alternative to the traditional Semantic Web.  However, its potential has not yet been fully realized in the publishing environment.
+
+Unifying various formats into a single flexible hypergraph format as a generic data-sharing structure
+
+Limitations of Encoding
+
+In addition to describing/encoding data sets, it is also important to compose publications via technologies which can document the connections between publications and data sets.  Popular languages for encoding academic documents, such as JATS (Journal Article Tag Suite) are inadequate for notating how documents and data sets are interrelated.  For example, JATS has a "data title" element which documents an article reference that is also a data source (a file or a data set which is deposited somewhere on the web), but JATS has no way to insert annotations documenting when a sentence, paragraph, technical term, or figure/diagram within a publication is connected to a data set, such as a visualization of statistical distribution, the name of a table/column/data-type, the index/identifier for one data record, etc.  
+
+TAGML Section
+
+To redress these limitations, LTS has implemented a C++ parser for TAGML (the Text-As-Graph Markup Language), which was originally developed (in Java) by the KNAW (Royal Netherlands Academy of Arts and Sciences) Humanities Cluster (a consortium of several Dutch universities).  TAGML is an example of "going beyond XML" with support for concurrent/overlapping markup and an underlying hypergraph text representation which is conducive to text mining.  In short, LTS  extends TAGML with features allowing TAGML documents to be granularly linked to data sets.  In addition, LTS adds features allowing TAGML to produce LaTeX code optimized for interactive PDF viewers.  By so doing, LTS enhances TAGML with features allowing TAGML to be used as a general-purpose graph-serialization language.  What this means is that TAGML can then be used for encoding data sets, so that the same format could be used both for data sets and for the publications associated with them.
+
+         
+     

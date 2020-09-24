@@ -1,0 +1,29 @@
+## htxne
+#
+`[//]Test SectionThis is a test.  And another sentence.`[/]
+
+`[//]sectionp`[/]
+
+`[///]
+
+@@ ranges
+3
+=1
+2<1>13;1,
+14<1>51;2,
+!
+=2
+!
+=3
+!
+ *
+@@ details
+2
+1536;2:8
+1024;9:9
+ *
+%% ties
+&!2
+!
+&!2
+!

@@ -1,0 +1,9 @@
+
+<<gtagml: version='1.0.0'>>
+
+<<glyphdeck: object='default_glyphdeck' id='dg'>>
+
+<block: glyphdeck='dg'>>
+
+
+<<block>

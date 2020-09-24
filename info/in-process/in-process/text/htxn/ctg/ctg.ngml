@@ -1,0 +1,25 @@
+
+`documentclass<article>;
+
+`input<nhvm/nhv-setup-commands>;
+`input<nhvm/nhv-sdi-commands>;
+`input<nhvm/nhv-deco-commands>;
+
+`input<nhvm/nhv-sdi-shell-commands>;
+
+`document,	
+
+`title.From `cq-tech<Naturalizing Phenomenology>; to 
+Formalizing Cognitive Linguistics (I): Cognitive Transform Grammar`
+
+`maketitle;
+
+`p.
+This is a test sentence.  And again.
+`p`
+
+`document`
+
+
+
+

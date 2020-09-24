@@ -1,0 +1,25 @@
+\begin{tikzpicture}
+\matrix (m) [matrix of math nodes,
+row sep=3em, column sep=3em,
+text height=1.5ex,
+text depth=0.25ex]{
+            & \lambda\omega             &              & \lambda\Pi\omega             \\
+\lambda 2   &                           & \lambda\Pi 2                                \\
+            & \lambda\underline{\omega} &              & \lambda\Pi\underline{\omega} \\
+\lambda{\to}&                           & \lambda\Pi  \\
+};
+\path[-{Latex[length=2.5mm, width=1.5mm]}]
+(m-1-2) edge (m-1-4)
+(m-2-1) edge (m-2-3)
+        edge (m-1-2)
+(m-3-2) edge (m-1-2)
+        edge (m-3-4)
+(m-4-1) edge (m-2-1)
+        edge (m-3-2)
+        edge (m-4-3)
+(m-3-4) edge (m-1-4)
+(m-2-3) edge (m-1-4)
+(m-4-3) edge (m-3-4)
+        edge (m-2-3);
+\end{tikzpicture}
+
