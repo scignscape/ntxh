@@ -35,29 +35,67 @@ NGML_SDI_Document::NGML_SDI_Document(QString path, QString folder)
 {
 }
 
-void NGML_SDI_Document::load_review_file(QString path)
+void NGML_SDI_Document::load_prelatex_file(QString path)
 {
+ NTXH_Document doc(path);
+
+ doc.parse();
+
+ typedef NTXH_Graph::hypernode_type hypernode_type;
+
+ NTXH_Graph& g = *doc.graph();
+ const QVector<hypernode_type*>& v = g.hypernodes();
+
+ qDebug() << "Parse: " << path << " -- " << v.size() << " nodes ...";
+
+ u4 i = 0;
+
+// u8 bls = 12; // default ...
+
+ for(hypernode_type* h : v)
+ {
+  if(h->type_descriptor().first == "GH_SDI_Paragraph")
+    g.get_sfsr(h, {{1, 3}}, [this](QVector<QPair<QString, void*>>& prs)
+    {
+     u4 id = prs[0].first.toInt();
+     u4 s = prs[1].first.toInt();
+     u4 e = prs[2].first.toInt();
+     gh_sdi_paragraph_info_[id] = {s, e};
+    });
+  else if(h->type_descriptor().first == "GH_SDI_Sentence")
+    g.get_sfsr(h, {{1, 4}}, [this](QVector<QPair<QString, void*>>& prs)
+    {
+     u4 id = prs[0].first.toInt();
+     u4 p = prs[1].first.toInt();
+     u4 s = prs[2].first.toInt();
+     u4 e = prs[3].first.toInt();
+     gh_sdi_sentence_info_[id] = {p, {s, e}};
+    });
+ }
+
+#ifdef HIDE
  load_file(path, [this](QString& line)
  {
   if(line.isEmpty())
     return 0;
   if(!line.startsWith('\\'))
   {
-   review_lines_.push_back(line.simplified());
+   prelatex_lines_.push_back(line.simplified());
    return 0;
   }
   const QChar qc = line.at(1);
   if(qc == '>')
   {
-   review_[';'].push_back(line.mid(3).toInt() - 1);
-   review_['+'].push_back(line.mid(3).toInt() + 2);
+   prelatex_[';'].push_back(line.mid(3).toInt() - 1);
+   prelatex_['+'].push_back(line.mid(3).toInt() + 2);
   }
   else
-    review_[qc].push_back(line.mid(3).toInt());
+    prelatex_[qc].push_back(line.mid(3).toInt());
 //  QStringList qsl = line.simplified().split(' ');
-//  review_[qsl.first] = qsl.value(1).toInt();
+//  prelatex_[qsl.first] = qsl.value(1).toInt();
   return 0;
  }); 
+#endif //def HIDE
 }
 
 NGML_SDI_Page* NGML_SDI_Document::get_page(u4 page)
@@ -81,7 +119,7 @@ void NGML_SDI_Document::parse_element_start_hypernode(NTXH_Graph& g, hypernode_t
   //:n:1 :i:2 :o:3 :c:4 :r:5 :k:6 :p:8 :x:9 :y:10 :b:7 ;
   u4 id = prs[0].first.toInt();
   
-  QString line = review_lines_.value(id - 1);
+  QString line = prelatex_lines_.value(id - 1);
   QStringList qsl = line.split(' ');
 
   if(qsl.size() >= 2) // //  otherwise something's wrong
@@ -95,10 +133,10 @@ void NGML_SDI_Document::parse_element_start_hypernode(NTXH_Graph& g, hypernode_t
 //  QChar ccue = nsel->get_command_cue();
 //  if(ccue == '@')
 //  {
-//   review_lines_
+//   prelatex_lines_
 //  }
 //  else
-//    nsel->set_start_index(review_[ccue].value(id - 1));
+//    nsel->set_start_index(prelatex_[ccue].value(id - 1));
 
   nsel->set_id(id);
   this->open_elements_[{"NGML_SDI_Element", id}] = nsel;
@@ -155,7 +193,7 @@ void NGML_SDI_Document::parse_element_end_hypernode(NTXH_Graph& g, hypernode_typ
   NGML_SDI_Element* nsel = static_cast<NGML_SDI_Element*>(pv);
  
 //  QChar ccue = nsel->get_command_end_cue();
-//  nsel->set_end_index(review_[ccue].value(id - 1));
+//  nsel->set_end_index(prelatex_[ccue].value(id - 1));
 
   // //  assume that everything is in pts for now ...
   QString ex = prs[3].first;

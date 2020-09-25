@@ -1,11 +1,13 @@
 
-//           Copyright Nathaniel Christen 2019.
+//           Copyright Nathaniel Christen 2020.
 //  Distributed under the Boost Software License, Version 1.0.
 //     (See accompanying file LICENSE_1_0.txt or copy at
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
 #include <QDebug>
+
+#include <QFileInfo>
 
 #include "gtagml/kernel/document/gtagml-document.h"
 #include "get-cmdl.h"
@@ -19,9 +21,12 @@
 
 #include "sdi/gh-sdi-document.h"
 
+#include "textio.h"
+
 USING_KANS(GTagML)
 USING_KANS(Util)
 USING_KANS(SDI)
+USING_KANS(TextIO)
 
 void process_gtagml_file(QString path)
 {
@@ -52,7 +57,10 @@ void process_gtagml_file(QString path)
  gsi->export_infoset(path + ".info.txt"); // export_blocks(); //(path + ".");
 
  GH_SDI_Document* gsd = gsi->sdi_document();
- gsd->finalize_sentence_boundaries(*blw->current_main_text_block(), path + ".sdi.txt");
+
+ QString sdi_path = get_path_with_different_folder(path, DEFAULT_SDI_FOLDER);
+
+ gsd->finalize_sentence_boundaries(*blw->current_main_text_block(), sdi_path + ".sdi-prelatex.ntxh");
 
  GTagML_Output_Latex* gol = new GTagML_Output_Latex(*gdoc, gsd);
  gol->export_latex(path + ".tex");
@@ -68,8 +76,8 @@ int main(int argc, char *argv[])
  QString manfolder;
 
  QStringList cmdl = get_cmdl(argc, argv, 2, {
-   {&folder, DEFAULT_GTAGML_DIRECTORY},
-   {&file, DEFAULT_GTAGML_DIRECTORY "/t1/t1.gt"},
+   {&folder, DEFAULT_GTAGML_FOLDER},
+   {&file, DEFAULT_GTAGML_FOLDER "/t1/t1.gt"},
    {&manfolder, {}}
    });
 

@@ -39,15 +39,18 @@ class NGML_SDI_Document
 
  QString* unzip_folder_;
 
- QString review_file_path_;
+ QString prelatex_file_path_;
 
- QMap<QChar, QVector<u4>> review_;
+ QMap<QChar, QVector<u4>> prelatex_;
 
  QString zip_path_;
  QString copy_path_;
  QString unzip_test_path_;
 
- QStringList review_lines_;
+ QStringList prelatex_lines_;
+
+ QMap<u4, QPair<u4, QPair<u4, u4>>> gh_sdi_sentence_info_;
+ QMap<u4, QPair<u4, u4>> gh_sdi_paragraph_info_;
 
 
 public:
@@ -58,11 +61,11 @@ public:
  ACCESSORS(QString ,copy_path)
  ACCESSORS(QString ,unzip_test_path)
 
- QMap<QChar, QVector<u4>>& review() { return review_; }
+ QMap<QChar, QVector<u4>>& review() { return prelatex_; }
 
  ACCESSORS(u8 ,global_base_line_skip)
 
- void load_review_file(QString path);
+ void load_prelatex_file(QString path);
 
  void parse();
 

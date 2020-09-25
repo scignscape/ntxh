@@ -8,6 +8,10 @@ PROJECT_NAME = gtagml
 
 include(../build-group.pri)
 
+QT -= gui
+
+include($$ROOT_DIR/../preferred/sysr.pri)
+
 
 INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR $$SRC_ROOT_DIR
 
@@ -24,10 +28,6 @@ DEFINES += DEFAULT_WCM_FOLDER=\\\"$$DATA_ROOT_DIR/wcm\\\"
 
 DEFINES += DEFAULT_NTXH_FOLDER=\\\"$$DATA_ROOT_DIR/ntxh\\\"
 
-DEFINES += QT_REPROZIP_BIN_FOLDER=\\\"$$QT_REPROZIP_BIN_DIR\\\"
-
-#DEFINES += CLO43SD_ROOT_FOLDER=\\\"$$ROOT_DIR/../external/data/clo43sd/CLO-43SD\\\"
-
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
 DEFINES += CAON_DEBUG
@@ -37,7 +37,6 @@ CONFIG += no_keywords
 
 
 DEFINES += USE_KANS
-DEFINES += USE_RZNS
 
 
 HEADERS += \
@@ -67,7 +66,28 @@ HEADERS += \
   $$SRC_DIR/annotation/gtagml-annotation-tile.h \
   $$SRC_DIR/annotation/gtagml-annotation-filter.h \
   $$SRC_DIR/tag-command/gtagml-tag-command.h \
-  $$SRC_DIR/tag-command/gtagml-command-callback.h \
+  $$SRC_DIR/tag-command/gtagml-tag-command-callback.h \
+  $$SRC_DIR/gh/gh-block-base.h  \
+  $$SRC_DIR/gh/gh-block-parse-mode.h \
+  $$SRC_DIR/gh/gh-block-writer.h  \
+  $$SRC_DIR/gh/gh-block-standard-8bit.h \
+  $$SRC_DIR/gh/gh-prenode.h \
+  $$SRC_DIR/gh/gh-prenode-sequence.h \
+  $$SRC_DIR/gh/gh-prenode-sequence-list.h \
+  $$SRC_DIR/gh/gh-tag-command-node.h \
+  $$SRC_DIR/gh/glyphdeck/gh-glyphdeck-standard-8bit.h \
+  $$SRC_DIR/whitespace/gtagml-whitespace.h \
+  $$SRC_DIR/whitespace/gtagml-whitespace-holder.h \
+  $$SRC_DIR/output/gtagml-output-base.h \
+  $$SRC_DIR/output/gtagml-output-callbacks-common.h \
+  $$SRC_DIR/output/gtagml-output-event-generator.h \
+  $$SRC_DIR/output/gtagml-output-event-handler.h \
+  $$SRC_DIR/output/gtagml-output-latex.callbacks.h \
+  $$SRC_DIR/output/gtagml-output-latex.h \
+  $$SRC_DIR/output/gtagml-output-blocks.h \
+  $$SRC_DIR/output/gtagml-output-sdi-infoset.h \
+  $$SRC_DIR/output/gtagml-output-sdi-infoset.callbacks.h \
+  $$SRC_DIR/sdi/gh-sdi-document.h \
 
 
 SOURCES += \
@@ -93,7 +113,25 @@ SOURCES += \
   $$SRC_DIR/annotation/gtagml-annotation-tile.cpp \
   $$SRC_DIR/annotation/gtagml-annotation-filter.cpp \
   $$SRC_DIR/tag-command/gtagml-tag-command.cpp \
-  $$SRC_DIR/tag-command/gtagml-command-callback.cpp \
+  $$SRC_DIR/tag-command/gtagml-tag-command-callback.cpp \
+  $$SRC_DIR/gh/gh-block-base.cpp \
+  $$SRC_DIR/gh/gh-block-parse-mode.cpp \
+  $$SRC_DIR/gh/gh-block-writer.cpp \
+  $$SRC_DIR/gh/gh-block-standard-8bit.cpp \
+  $$SRC_DIR/gh/gh-prenode.cpp \
+  $$SRC_DIR/gh/gh-prenode-sequence.cpp \
+  $$SRC_DIR/gh/gh-prenode-sequence-list.cpp \
+  $$SRC_DIR/gh/gh-tag-command-node.cpp \
+  $$SRC_DIR/gh/glyphdeck/gh-glyphdeck-standard-8bit.cpp \
+  $$SRC_DIR/whitespace/gtagml-whitespace.cpp \
+  $$SRC_DIR/whitespace/gtagml-whitespace-holder.cpp \
+  $$SRC_DIR/output/gtagml-output-event-handler.cpp \
+  $$SRC_DIR/output/gtagml-output-event-generator.cpp \
+  $$SRC_DIR/output/gtagml-output-latex.cpp \
+  $$SRC_DIR/output/gtagml-output-base.cpp \
+  $$SRC_DIR/output/gtagml-output-blocks.cpp \
+  $$SRC_DIR/output/gtagml-output-sdi-infoset.cpp \
+  $$SRC_DIR/sdi/gh-sdi-document.cpp \
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

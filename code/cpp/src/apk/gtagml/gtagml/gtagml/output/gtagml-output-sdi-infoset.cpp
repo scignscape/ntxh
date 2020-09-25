@@ -192,7 +192,7 @@ u4 GTagML_Output_SDI_Infoset::write_ntxh_sentences(QTextStream& qts, u4 paragrap
   }
 
   qts << QString(R"(
-!/ GH_Sdi_Sentence
+!/ GH_SDI_Sentence
 $i: %1
 $p: %2
 $s: %3
@@ -200,8 +200,9 @@ $e: %4
 $g: %5
 /!
 <>>
-)").arg(sentence_id).arg(paragraph_id).arg(it.key()).arg(se).arg(seg);
+)").arg(result).arg(paragraph_id).arg(it.key()).arg(se).arg(seg);
  }
+ return result;
 }
 
 void GTagML_Output_SDI_Infoset::write_ntxh(QTextStream& qts)
@@ -216,7 +217,7 @@ void GTagML_Output_SDI_Infoset::write_ntxh(QTextStream& qts)
   u4 s = it.key();
   u4 e = it.value().second;
   qts << QString(R"(
-!/ GH_Sdi_Paragraph
+!/ GH_SDI_Paragraph
 $i: %1
 $s: %2
 $e: %3

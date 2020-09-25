@@ -32,10 +32,10 @@ void GH_SDI_Document::finalize_sentence_boundaries(GH_Block_Base& bl, QString pa
  QTextStream outstream(&outfile);
 
  outstream << R"(
-&type GH_Sdi_Sentence {4}
+&type GH_SDI_Sentence {4}
  :i:1 :p:2 :s:3 :e:4 ;
 
-&type GH_Sdi_Paragraph {3}
+&type GH_SDI_Paragraph {3}
  :i:1 :s:2 :e:3 ;
 
 &/

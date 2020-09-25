@@ -8,6 +8,10 @@ PROJECT_NAME = ntxh-builder
 
 include(../build-group.pri)
 
+QT -= gui
+
+include($$ROOT_DIR/../preferred/sysr.pri)
+
 
 INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR $$SRC_ROOT_DIR
 
