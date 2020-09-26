@@ -11,6 +11,12 @@
 
 #include <QFile>
 
+#include <QDir>
+#include <QDirIterator>
+
+#include "textio.h"
+
+USING_KANS(TextIO)
 
 USING_KANS(SDI)
 
@@ -20,6 +26,33 @@ GH_SDI_Document::GH_SDI_Document()
 {
 
 }
+
+void GH_SDI_Document::setup_folder_from_template(QString file_name, QString template_folder, QString folder)
+{
+ QDir qd(folder);
+ qd.mkdir("ngml");
+ qd.cd("ngml");
+ QDir tqd(template_folder);
+ tqd.cd("ngml");
+ QDirIterator qdi(tqd);
+ while(qdi.hasNext())
+ {
+  qdi.next();
+  QString fp = qdi.filePath();
+  if(fp.endsWith(".tex"))
+  {
+   copy_file_to_folder(fp, qd.path());
+  }
+ }
+
+ tqd.cdUp();
+ qd.cdUp();
+
+ QString pdfl = load_file(tqd.absoluteFilePath("run-pdflatex.sh"));
+ pdfl.replace("%%", file_name);
+ save_file(qd.absoluteFilePath("run-pdflatex.sh"), pdfl);
+}
+
 
 void GH_SDI_Document::finalize_sentence_boundaries(GH_Block_Base& bl, QString path)
 {

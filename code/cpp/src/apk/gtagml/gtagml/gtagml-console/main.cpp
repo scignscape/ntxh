@@ -58,12 +58,29 @@ void process_gtagml_file(QString path)
 
  GH_SDI_Document* gsd = gsi->sdi_document();
 
- QString sdi_path = get_path_with_different_folder(path, DEFAULT_SDI_FOLDER);
+ QString ffolder = make_folder_from_file_name(path, DEFAULT_SDI_FOLDER);
+
+ QString sdi_path = get_path_with_different_folder(path, ffolder);
 
  gsd->finalize_sentence_boundaries(*blw->current_main_text_block(), sdi_path + ".sdi-prelatex.ntxh");
 
  GTagML_Output_Latex* gol = new GTagML_Output_Latex(*gdoc, gsd);
  gol->export_latex(path + ".tex");
+
+ QString cp = copy_file_to_folder(path + ".tex", ffolder);
+
+ qDebug() << "Copied " << path + ".tex" << " to " << cp;
+
+ prepend_template_to_file(cp, DEFAULT_SDI_FOLDER "/prepend",
+ {
+  { "%CONSOLE", ROOT_FOLDER "/code/cpp/qmake-console/projects/gtagml/ngml-sdi-console"},
+  { "%FILE", cp },
+  { "%SDI-FILE", sdi_path + ".sdi.ntxh" },
+  { "%SDI-PFILE", sdi_path + ".sdi-prelatex.ntxh" }
+ });
+
+ gsd->setup_folder_from_template(gdoc->local_file_name() + ".tex",
+   DEFAULT_SDI_FOLDER "/template", ffolder);
 
 }
 

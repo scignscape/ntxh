@@ -252,6 +252,8 @@ void GTagML_Document::load_file(QString path)
  {
   raw_text_ = file.readAll();
   local_path_ = path;
+  QFileInfo qfi(path);
+  local_file_name_ = qfi.fileName();
  }
 }
 

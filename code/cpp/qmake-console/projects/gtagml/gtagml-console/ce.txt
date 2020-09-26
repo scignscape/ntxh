@@ -1,0 +1,16 @@
+In file included from /home/nlevisrael/mtr/mroot/upper/usr/include/errno.h:35:0,
+                 from /home/nlevisrael/mtr/mroot/upper/usr/include/c++/5/cerrno:41,
+                 from /home/nlevisrael/mtr/mroot/upper/usr/include/c++/5/ext/string_conversions.h:44,
+                 from /home/nlevisrael/mtr/mroot/upper/usr/include/c++/5/bits/basic_string.h:5249,
+                 from /home/nlevisrael/mtr/mroot/upper/usr/include/c++/5/string:52,
+                 from /home/nlevisrael/mtr/mroot/upper/usr/include/c++/5/random:40,
+                 from /home/nlevisrael/mtr/mroot/upper/usr/include/c++/5/bits/stl_algo.h:66,
+                 from /home/nlevisrael/mtr/mroot/upper/usr/include/c++/5/algorithm:62,
+                 from /home/nlevisrael/Qt5.12.9/5.12.9/gcc_64/include/QtCore/qglobal.h:142,
+                 from /home/nlevisrael/Qt5.12.9/5.12.9/gcc_64/include/QtCore/qalgorithms.h:43,
+                 from /home/nlevisrael/Qt5.12.9/5.12.9/gcc_64/include/QtCore/qdebug.h:44,
+                 from /home/nlevisrael/Qt5.12.9/5.12.9/gcc_64/include/QtCore/QDebug:1,
+                 from ../../../../src/apk/gtagml/gtagml/gtagml-console/main.cpp:1:
+/home/nlevisrael/mtr/mroot/upper/usr/include/x86_64-linux-gnu/bits/errno.h:24:26: fatal error: linux/errno.h: No such file or directory
+compilation terminated.
+make: *** [../../../targets/targets-5-12-9-qmake-console/PROJECT_OBJECTS/gtagml-console/release/main.o] Error 1
