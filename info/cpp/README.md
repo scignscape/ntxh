@@ -1,6 +1,4 @@
 
-# C++ 
-
 This file will hold C++ background and instructions.
 
 The current purpose of this repository is to demonstrate 
@@ -124,6 +122,7 @@ comprising both Qt project files (intended to be opened
 in Qt creator, building the projects -- **.so** libraries or 
 executables -- and then run from Qt creator), C++ projects 
 intended to be built and run from a command line, and LaTeX files.  
+
 Because this is "work in process," the current version will not 
 provide step-by-step instructions to execute this workflow.  
 Please contact the developers if you would like to 
