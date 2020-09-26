@@ -198,7 +198,7 @@ in the manner of MIBBI (Minimum Information for
 Biological and Biomedical Investigations).  More 
 generally, the unified step library -- which 
 as mentioned previously is envisioned as the 
-foundation for "THQL" -- would include extra  
+foundation for "THQL" -- would include extra 
 features oriented to using Property Hypergraphs 
 as representational media for various scientific 
 and data-sharing requirements.
