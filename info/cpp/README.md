@@ -1,4 +1,6 @@
 
+# C++ 
+
 This file will hold C++ background and instructions.
 
 The current purpose of this repository is to demonstrate 
@@ -16,7 +18,7 @@ instructions related to local variables, program stacks, and
 calling C++ functions (**PGVM**).  These technologies will be 
 outlined here.
 
-# NTXH
+## NTXH
 
 The "N" in NTXH stands for "non-constructive"; the "TX" stands for 
 "type-expression language", and the "H" for "Hypergraph Serialization".  
@@ -53,7 +55,7 @@ Cyber-Physical Context", chapter 3 of Amy Neustein, ed.,
 *Advances in Ubiquitous Computing: Cyber-Physical Systems, Smart Cities and Ecological Monitoring* (Elsevier, 2020); this book (and also the 
 chapter as a separate PDF file) are included in this repository.
 
-# Preparing Data Sets and Publications
+## Preparing Data Sets and Publications
 
 One use-case for NTXH is encoding research data published 
 as part of an open-access scientific data set.  
@@ -93,7 +95,7 @@ from inter-node relations (again in the TAGML context) which
 derive from textual details (e.g., italics) rather than from 
 datatype structures.  
 
-# A GTagML/NTXH Workflow
+## A GTagML/NTXH Workflow
 
 An example of using GTagML and NTXH in combination is the 
 following: a processor parses a GTagML document, yielding 
@@ -117,6 +119,19 @@ in terms of PDF page and viewport coordinates (e.g.,
 where a sentence begins and ends from the point of view 
 of mouse-coordinates within a page-view window). 
 
+An example of this workflow is included within this repository, 
+comprising both Qt project files (intended to be opened 
+in Qt creator, building the projects -- **.so** libraries or 
+executables -- and then run from Qt creator), C++ projects 
+intended to be built and run from a command line, and LaTeX files.  
+Because this is "work in process," the current version will not 
+provide step-by-step instructions to execute this workflow.  
+Please contact the developers if you would like to 
+compile and run these examples.
+
+## NTXH as a Virtual Machine 
+
+Todo ... 
  
 
 
