@@ -15,6 +15,7 @@ public:
 
  GH_Block_Base::SDI_Interpretation_Codes get_sdi_interpretation_code(u1 gp);
  GH_Block_Base::Evaluation_Codes check_confirm_sentence_end(u1 gp);
+ GH_Block_Base::Evaluation_Codes check_confirm_clear_inter_sentence_gap(u1 gp);
 
  u1 get_basic_char(u1 gp);
  u1 get_char_with_diacritic(u1 gp);
@@ -35,6 +36,7 @@ public:
  QString get_xml_representation(u1 gp);
  QChar get_qchar_representation(u1 gp, QString& alternate);
  QString get_qstring_representation(u1 gp);
+
 
 
 };

@@ -947,6 +947,7 @@ u1 GH_Glyphdeck_Standard_8bit::get_sentence_end_space_swap(u1 gp)
  return get_default_null();
 }
 
+
 u1 GH_Glyphdeck_Standard_8bit::get_sentence_end_swap(u1 gp)
 {
 if(gp == 64)
@@ -1269,6 +1270,16 @@ QString GH_Glyphdeck_Standard_8bit::get_latex_representation(u1 gp)
  else
    get_latex_192_to_255(gp, result);
  return result;
+}
+
+GH_Block_Base::Evaluation_Codes GH_Glyphdeck_Standard_8bit::check_confirm_clear_inter_sentence_gap(u1 gp)
+{
+  // //  currently no neutral ...
+ if(gp == 71)
+   return GH_Block_Base::Evaluation_Codes::Confirm;
+ if(gp == 73)
+   return GH_Block_Base::Evaluation_Codes::Confirm;
+ return GH_Block_Base::Evaluation_Codes::Refute;
 }
 
 GH_Block_Base::Evaluation_Codes GH_Glyphdeck_Standard_8bit::check_confirm_sentence_end(u1 gp)

@@ -59,6 +59,8 @@ void GH_SDI_Document::finalize_sentence_boundaries(GH_Block_Base& bl, QString pa
  sdi_infoset_output_->finalize_paragraph_boundaries(bl);
  sdi_infoset_output_->finalize_sentence_boundaries(bl);
 
+ sdi_infoset_output_->finalize_widowed_sentence_boundaries(bl);
+
  QFile outfile(path);
  if (!outfile.open(QIODevice::WriteOnly | QIODevice::Text))
    return;

@@ -39,24 +39,68 @@ u4 GH_Block_Standard_8bit::check_confirm_sentence_end(u4 i, u4 e)
  return 0;
 }
 
-QPair<u1, u1> GH_Block_Standard_8bit::flag_as_sentence_end(u4 se, u4 sse)
+u8 GH_Block_Standard_8bit::get_default_null()
 {
- u1 dn = glyphdeck_->get_default_null();
+ return (u8) glyphdeck_->get_default_null();
+}
+
+void GH_Block_Standard_8bit::swap_codes(u4 i, u8 oldc, u8 newc)
+{
+ if(chars_[i] == (u1) oldc)
+   chars_[i] = (u1) newc;
+}
+
+u4 GH_Block_Standard_8bit::clear_to_sentence_start(u4 pre, u4 start)
+{
+ // // stats at pre and checks that nothing but whitespace
+  //   goes until the start ...
+
+ u4 result = 0;
+ for(u4 u = pre; u < start; ++u)
+ {
+  ++result;
+  u8 uu = get_glyph_point_at_index(u);
+  GH_Block_Base::Evaluation_Codes ec =
+    glyphdeck_->check_confirm_clear_inter_sentence_gap(uu);
+  if(ec == GH_Block_Base::Evaluation_Codes::Refute)
+    return 0;
+ }
+ return result;
+}
+
+
+void GH_Block_Standard_8bit::flag_as_sentence_end(u4 se, u4 sse,
+  QPair<QPair<u8, u8>, QPair<u8, u8>>& r)
+{
+ // // the first pair holds the old value for the sentence end
+  //   and then the new value (if it changes otherwide default null).
+  //   The second pair holds the old value for the sentence
+  //   end space (or default null if there is none)
+  //   and the new value (or default null if there is no change).
+
+ u1 dn = get_default_null();
  u1 c1 = chars_[se];
  u4 swap = glyphdeck_->get_sentence_end_swap(c1);
  if(swap == dn)
-   return {dn, dn};
+ {
+  r = {{(u8) c1, (u8) dn}, {(u8) dn, (u8)dn}};
+  return;
+ }
  chars_[se] = swap;
  if(sse == 0)
  {
-  return {swap, dn};
+  r = {{(u8) c1, (u8) swap}, {(u8) dn, (u8)dn}};
+  return;
  }
  u1 c2 = chars_[sse];
  u4 sswap = glyphdeck_->get_sentence_end_space_swap(c2);
- if(sswap == glyphdeck_->get_default_null())
-   return {swap, dn};
+ if(sswap == dn)
+ {
+  r = {{(u8) c1, (u8) swap}, {(u8) c2, (u8)dn}};
+  return;
+ }
  chars_[sse] = sswap;
- return {swap, sswap};
+ r = {{(u8) c1, (u8) swap}, {(u8) c2, (u8)sswap}};
 }
 
 GH_Block_Base::SDI_Interpretation_Codes GH_Block_Standard_8bit::get_sdi_interpretation_code_at_index(u4 i)
@@ -89,7 +133,8 @@ QString GH_Block_Standard_8bit::get_latex_out(const QPair<u4, u4>& indices)
  for(u4 u = indices.first; u <= indices.second; ++u)
  {
   // first, inserts ...
-  if(QString* pre = get_pre_insert_as<QString>(u))
+  QList<QString*> pres = get_pre_insert_as<QString>(u);
+  for(QString* pre : pres)
     qts << *pre;
 
   qts << get_latex_representation(u);
@@ -97,7 +142,8 @@ QString GH_Block_Standard_8bit::get_latex_out(const QPair<u4, u4>& indices)
   if(!supl.isEmpty())
     qts << supl; // " " << supl << " ";
 
-  if(QString* post = get_insert_as<QString>(u))
+  QList<QString*> posts = get_insert_as<QString>(u);
+  for(QString* post : posts)
     qts << *post;
 
  }

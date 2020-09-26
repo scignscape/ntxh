@@ -240,7 +240,7 @@ void GTagML_Output_SDI_Infoset::finalize_paragraph_boundaries(GH_Block_Base& bl)
   {
    it.next();
    u4 i = it.key();
-   bl.set_pre_insert(i, ps);
+   bl.set_pre_insert_front(i, ps);
   }
  }
  {
@@ -249,24 +249,97 @@ void GTagML_Output_SDI_Infoset::finalize_paragraph_boundaries(GH_Block_Base& bl)
   {
    it.next();
    u4 i = it.key();
-   bl.set_insert(i, pe);
+   bl.set_insert_back(i, pe);
+  }
+ }
+}
+
+
+void GTagML_Output_SDI_Infoset::finalize_widowed_sentence_boundaries(GH_Block_Base& bl)
+{
+ static QString* ss = new QString("\\+");
+ static QString* se = new QString("\\;");
+ {
+  QMapIterator<caon_ptr<tNode>, u4> it(widowed_sentence_starts_);
+  while(it.hasNext())
+  {
+   it.next();
+   u4 i = it.value();
+   bl.set_pre_insert_back(i, ss);
+  }
+ }
+ {
+  QMapIterator<caon_ptr<tNode>, u4> it(widowed_sentence_ends_);
+  while(it.hasNext())
+  {
+   it.next();
+   u4 i = it.value();
+   bl.set_insert_front(i, se);
   }
  }
 }
 
 void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
 {
+ caon_ptr<tNode> current_paragraph_node = nullptr;
+ u4 srank_in_paragraph = 0;
  QMapIterator<u4, QPair<caon_ptr<tNode>, u4>> it(marked_sentence_starts_);
  while(it.hasNext())
  {
   it.next();
+
+  if(it.value().first != current_paragraph_node)
+  {
+   current_paragraph_node = it.value().first;
+   srank_in_paragraph = 0;
+   widowed_sentence_starts_.insertMulti(current_paragraph_node, it.key());
+  }
+  ++srank_in_paragraph;
+
   u4 send = it.value().second;
   auto it1 = marked_sentence_ends_.find(send);
   if(it1 != marked_sentence_ends_.end())
   {
-   bl.flag_as_sentence_end(send, it1.value().second);
+   u4 sse = it1.value().second;
+   QPair<QPair<u8, u8>, QPair<u8, u8>> oldnew;
+   bl.flag_as_sentence_end(send, sse, oldnew);
+   u8 dn = bl.get_default_null();
+   if(oldnew.first.second == dn)
+     continue;
+   // //  ok, so the se changed ...
+    //    did the sse (space after se) change too?
+   if(oldnew.second.first == dn)
+   {
+    // // this means the sse wasn't found ...
+     //   need to add a \;
+    widowed_sentence_ends_.insertMulti(it.value().first, send);
+    continue;
+   }
+   // try to get the next start ...
+   u4 ns = 0;
+   u4 gap = 0;
+   if(it.hasNext())
+   {
+    ns = it.peekNext().key();
+    u4 sse1 = sse + 1;
+    if(sse1 >= ns)
+      ns = 0;
+    else
+    {
+     gap = bl.clear_to_sentence_start(sse1, ns);
+    }
+   }
+   if(gap == 0)
+   {
+    // this means we have to undo the swap
+    widowed_sentence_ends_.insertMulti(it.value().first, send);
+    bl.swap_codes(sse, oldnew.second.second, oldnew.second.first);
+    if(ns != 0)
+    {
+     widowed_sentence_starts_.insertMulti(it.value().first, ns);
+    }
+   }
   }
-
  }
 }
 

@@ -28,13 +28,20 @@ public:
 
  GH_Block_Standard_8bit();
 
+ u8 get_default_null() Q_DECL_OVERRIDE;
+
+ u4 clear_to_sentence_start(u4 pre, u4 start) Q_DECL_OVERRIDE;
+
+ void swap_codes(u4 i, u8 oldc, u8 newc) Q_DECL_OVERRIDE;
+
  u8 get_glyph_point_at_index(u4 i) Q_DECL_OVERRIDE;
  SDI_Interpretation_Codes get_sdi_interpretation_code_at_index(u4 i) Q_DECL_OVERRIDE;
  QPair<u4, u4> get_effective_start_and_end_indices() Q_DECL_OVERRIDE;
 
  u4 check_confirm_sentence_end(u4 i, u4 e) Q_DECL_OVERRIDE;
 
- QPair<u1, u1> flag_as_sentence_end(u4 se, u4 sse) Q_DECL_OVERRIDE;
+ void flag_as_sentence_end(u4 se, u4 sse,
+   QPair<QPair<u8, u8>, QPair<u8, u8>>& r) Q_DECL_OVERRIDE;
 
  void write(QString text, QPair<u4, u4>& result) Q_DECL_OVERRIDE;
  void write(QByteArray& text, QPair<u4, u4>& result);

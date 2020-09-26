@@ -12,6 +12,8 @@
 #include <QTextStream>
 #include <QSet>
 
+#include <QMultiMap>
+
 #include "gtagml-output-base.h"
 #include "gtagml-output-event-handler.h"
 
@@ -52,7 +54,10 @@ class GTagML_Output_SDI_Infoset : public GTagML_Output_Base, private GTagML_Outp
  caon_ptr<tNode> suppress_node_;
 
  QMap<u4, QPair<caon_ptr<tNode>, u4>> marked_sentence_starts_;
- QMap<u4, QPair<caon_ptr<tNode>, u4>> marked_sentence_ends_;
+ QMap<u4, QPair<caon_ptr<tNode>, u4>> marked_sentence_ends_; // the other u4 is the space ...
+
+ QMultiMap<caon_ptr<tNode>, u4> widowed_sentence_starts_;
+ QMultiMap<caon_ptr<tNode>, u4> widowed_sentence_ends_;
 
  QMap<u4, QPair<caon_ptr<tNode>, u4>> marked_paragraph_starts_;
  QMap<u4, caon_ptr<tNode>> marked_paragraph_ends_;
@@ -104,6 +109,8 @@ public:
 
  void finalize_sentence_boundaries(GH_Block_Base& bl);
  void finalize_paragraph_boundaries(GH_Block_Base& bl);
+ void finalize_widowed_sentence_boundaries(GH_Block_Base& bl);
+
 
  u8 check_sdi_latex_insert(GH_Block_Base* bl, u4 index,
    QString& pre_result, QString& post_result);
