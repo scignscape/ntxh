@@ -1,5 +1,5 @@
 
-//           Copyright Nathaniel Christen 2019.
+//           Copyright Nathaniel Christen 2020.
 //  Distributed under the Boost Software License, Version 1.0.
 //     (See accompanying file LICENSE_1_0.txt or copy at
 //           http://www.boost.org/LICENSE_1_0.txt)
@@ -29,8 +29,8 @@ int main(int argc, char* argv[])
 
  QStringList cmdl = get_cmdl(argc, argv, 2, {
    {&folder, DEFAULT_SDI_FOLDER},
-   {&file, DEFAULT_SDI_FOLDER "/t1.gt.sdi.ntxh"},
-   {&pfile, DEFAULT_SDI_FOLDER "/t1.gt.sdi-prelatex.ntxh"},
+   {&file, DEFAULT_SDI_FOLDER "/t1/t1.gt.sdi.ntxh"},
+   {&pfile, DEFAULT_SDI_FOLDER "/t1/t1.gt.sdi-prelatex.ntxh"},
    {&czfile, {}}
    });
 

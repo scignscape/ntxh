@@ -1,5 +1,11 @@
 
-// licence_h
+
+//           Copyright Nathaniel Christen 2020.
+//  Distributed under the Boost Software License, Version 1.0.
+//     (See accompanying file LICENSE_1_0.txt or copy at
+//           http://www.boost.org/LICENSE_1_0.txt)
+
+
 
 #ifndef GH_BLOCK_STANDARD_8BIT__H
 #define GH_BLOCK_STANDARD_8BIT__H
