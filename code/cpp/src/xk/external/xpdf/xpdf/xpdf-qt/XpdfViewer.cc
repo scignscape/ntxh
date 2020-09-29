@@ -2944,7 +2944,7 @@ void XpdfViewer::createMainMenu() {
   Mosaic_Menubar::add_action_data(mosaic_submenu->menuAction(), 
     "QLinearGradient", qlg);
   mosaic_submenu->setObjectName("mosaic_submenu");
-  mosaic_submenu->addAction("ETS Plugin (active)");
+  mosaic_submenu->addAction("FACS Plugin (active)");
   mosaic_submenu->addAction("Springer Plugin (active)");
   mosaic_submenu->addAction("Manage Plugins ...", []
   {

@@ -10,18 +10,19 @@ INCLUDEPATH +=  $$SRC_DIR $$SRC_GROUP_DIR
 INCLUDEPATH +=  $$SRC_GROUP_DIR/pandore/include
 
 include($$ROOT_DIR/../preferred/sysr.pri)
-
 include($$ROOT_DIR/../preferred/gui.pri)
 
 
 LIBS += -L$$TARGETSDIR -lpandore
+
+DEFINES += MAIN
+
 
 HEADERS += \
   $$SRC_DIR/viewers/Qt/canvasview.h \
   $$SRC_DIR/viewers/Qt/colorselector.h \
   $$SRC_DIR/viewers/Qt/controller.h \
   $$SRC_DIR/viewers/Qt/dynamicselector.h \
-  $$SRC_DIR/viewers/Qt/frame.cpp \
   $$SRC_DIR/viewers/Qt/frame.h \
   $$SRC_DIR/viewers/Qt/histogramview.h \
   $$SRC_DIR/viewers/Qt/imagemodel.h \
@@ -53,7 +54,7 @@ SOURCES += \
   $$SRC_DIR/viewers/Qt/histogramview.cpp \
   $$SRC_DIR/viewers/Qt/dynamicselector.cpp \
   $$SRC_DIR/viewers/Qt/colorselector.cpp \
-
+  $$SRC_DIR/viewers/Qt/frame.cpp \
 
 
 

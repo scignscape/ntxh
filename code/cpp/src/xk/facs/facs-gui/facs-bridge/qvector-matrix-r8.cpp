@@ -65,7 +65,7 @@ void QVector_Matrix_R8::get_column_extrema(QVector<QPair<r8, r8>>& result)
  result.resize(n_cols());
  for(u4 c = 1; c <= n_cols(); ++c)
  {
-  result[c] = get_extrema_in_column(c);
+  result[c - 1] = get_extrema_in_column(c);
  }
 }
 
@@ -74,7 +74,7 @@ void QVector_Matrix_R8::get_row_extrema(QVector<QPair<r8, r8>>& result)
  result.resize(n_rows());
  for(u4 r = 1; r <= n_rows(); ++r)
  {
-  result[r] = get_extrema_in_row(r);
+  result[r - 1] = get_extrema_in_row(r);
  }
 }
 
@@ -83,7 +83,7 @@ void QVector_Matrix_R8::get_column_minima(QVector<r8>& result)
  result.resize(n_cols());
  for(u4 c = 1; c <= n_cols(); ++c)
  {
-  result[c] = get_minimum_in_column(c);
+  result[c - 1] = get_minimum_in_column(c);
  }
 }
 
@@ -92,7 +92,7 @@ void QVector_Matrix_R8::get_row_minima(QVector<r8>& result)
  result.resize(n_rows());
  for(u4 r = 1; r <= n_rows(); ++r)
  {
-  result[r] = get_minimum_in_column(r);
+  result[r - 1] = get_minimum_in_column(r);
  }
 }
 
@@ -101,7 +101,7 @@ void QVector_Matrix_R8::get_column_maxima(QVector<r8>& result)
  result.resize(n_cols());
  for(u4 c = 1; c <= n_cols(); ++c)
  {
-  result[c] = get_maximum_in_column(c);
+  result[c - 1] = get_maximum_in_column(c);
  }
 }
 
@@ -110,7 +110,7 @@ void QVector_Matrix_R8::get_row_maxima(QVector<r8>& result)
  result.resize(n_rows());
  for(u4 r = 1; r <= n_rows(); ++r)
  {
-  result[r] = get_maximum_in_column(r);
+  result[r - 1] = get_maximum_in_column(r);
  }
 }
 

@@ -197,13 +197,12 @@ MainWindow::MainWindow()
 
  QHBoxLayout* lay = new QHBoxLayout();
 
- QPushButton* b1 = new QPushButton("XXX", this);
+// QPushButton* b1 = new QPushButton("XXX", this);
+// QPushButton* b2 = new QPushButton("yyy", this);
 
- QPushButton* b2 = new QPushButton("yyy", this);
+// layLeft->addWidget(b2);
 
- layLeft->addWidget(b2);
-
- lay->addWidget(b1);
+// lay->addWidget(b1);
 
  lay->addLayout(layLeft);
  lay->addWidget(tabwidget_);
@@ -222,10 +221,6 @@ MainWindow::MainWindow()
 
 void MainWindow::load_selected_file(QString sf)
 {
- qDebug() << "sf: " << sf;
-
- sf = "/home/nlevisrael/hypergr/pgvm/ar/extra/facs/Live_cells.fcs";
-
  qDebug() << "sf: " << sf;
 
  QFileInfo qfi(sf);

@@ -35,12 +35,15 @@ INCLUDEPATH += $$HTXN_SRC_GROUP_DIR
 
 INCLUDEPATH += $$SRC_GROUP_DIR/gtagml
 
-DEFINES += DEFAULT_NTXH_FOLDER=\\\"$$DATA_ROOT_DIR/ntxh\\\"
+#DEFINES += DEFAULT_NTXH_FOLDER=\\\"$$DATA_ROOT_DIR/ntxh\\\"
 
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
-DEFINES += DEFAULT_GTAGML_FOLDER=\\\"$$ROOT_DIR/dev/consoles/gtagml/gt\\\"
-DEFINES += DEFAULT_SDI_FOLDER=\\\"$$ROOT_DIR/dev/consoles/gtagml/sdi\\\"
+#DEFINES += DEFAULT_GTAGML_FOLDER=\\\"$$ROOT_DIR/dev/consoles/gtagml/gt\\\"
+#DEFINES += DEFAULT_SDI_FOLDER=\\\"$$ROOT_DIR/dev/consoles/gtagml/sdi\\\"
+
+DEFINES += DEMO_FCS_FOLDER=\\\"$$ROOT_DIR/extra/facs/fcs\\\"
+
 
 DEFINES += CAON_DEBUG
 DEFINES += RELAE_LABEL_NODES
@@ -56,14 +59,21 @@ HEADERS += \
 SOURCES += \
   $$SRC_DIR/main.cpp \
 
-#LIBS += -L$$TARGETSDIR -lgtagml
-
 LIBS += -L$$TARGETSDIR -lcytolib -lfacs-bridge
 
-#LIBS += /home/nlevisrael/mtr/newstuff/hdf5/install/lib/libhdf5.a -lz
+LIBS +=  -lstdc++fs
 
-LIBS += -L/home/nlevisrael/mtr/newstuff/hdf5/install/lib/ -lhdf5
 
+include($$ROOT_DIR/../preferred/facs.pri)
+
+include($$ROOT_DIR/../preferred/proto.pri)
+
+
+
+## uncomment if these will be found.
+#  I have them in a non-standard location
+#  so I set the linker flag in facs.pri ...
+# LIBS += -llapack -lblas
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

@@ -117,7 +117,7 @@ void DatasetListWidget::actionSelectAllDatasets()
 void DatasetListWidget::actionAddDatasets()
 {
 //
-    mw_->load_selected_file("/home/nlevisrael/hypergr/pgvm/ar/extra/facs/Live_cells.fcs");
+    mw_->load_selected_file(DEMO_FCS_FOLDER "/Live_cells.fcs");
 // updateDatasetList();
 
 //mw_->load_selected_file("");

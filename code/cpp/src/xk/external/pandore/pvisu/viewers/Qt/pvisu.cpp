@@ -51,6 +51,9 @@
 #include <QStringListIterator>
 
 
+#include <QDebug>
+
+
 //#define DEBUG
 
 #ifdef DEBUG
@@ -1774,6 +1777,7 @@ int main( int argc, char *argv[]) {
 	    Long pid = fork();
 	    switch (pid) {
 	    case 0: // child
+      qDebug() << "execlp ..." << argvVisu[i] << " i= " << i;
 	       execlp(argv[0], argv[0], "-nofork", argvVisu[i], NULL);
 	       exit(0);
 	       break;
@@ -1889,7 +1893,8 @@ int main( int argc, char *argv[]) {
 #endif
    
    QApplication app(argcQt, argvQt);
-   
+//   QApplication app(argc, argv);
+
    Frame *frame;
    Model *visual = 0;
    

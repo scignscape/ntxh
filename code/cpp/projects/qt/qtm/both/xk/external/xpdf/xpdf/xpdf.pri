@@ -11,10 +11,15 @@ QT += widgets
 QT += network
 
 
+include($$ROOT_DIR/../preferred/sysr.pri)
+include($$ROOT_DIR/../preferred/gui.pri)
+
+
+
 RESOURCES += \
     $$SRC_DIR/xpdf-qt/icons.qrc
 
-LIBS +=  -lfreetype
+# LIBS +=  -lfreetype
 
 
 INCLUDEPATH += $$SRC_DIR
@@ -29,6 +34,10 @@ INCLUDEPATH += $$SRC_DIR/freetype/ft2build
 
 INCLUDEPATH += $$SRC_DIR/freetype
 INCLUDEPATH += $$SRC_DIR/ft2build
+
+MPF_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/htxn/mosaic
+
+INCLUDEPATH += $$MPF_SRC_GROUP_DIR
 
 # # mosaic
 HEADERS += \
@@ -47,8 +56,13 @@ SOURCES += \
 INCLUDEPATH += $$MPF_SRC_GROUP_DIR
 
 
-# # dsC
-DEFINES += DEFAULT_PDF_FILE=\\\"$$ROOT_DIR/main.pdf\\\"
+# # if there's one default ...
+#DEFINES += DEFAULT_PDF_FILE=\\\"$$ROOT_DIR/main.pdf\\\"
+
+
+DEFINES += DEFAULT_ICONS_FOLDER=\\\"$$ROOT_DIR/code/icons\\\"
+DEFINES += DEFAULT_SCREENSHOT_FOLDER=\\\"$$ROOT_DIR/code/screenshots\\\"
+
 
 DISTFILES += \
     $$SRC_DIR/xpdf-qt/back.svg \

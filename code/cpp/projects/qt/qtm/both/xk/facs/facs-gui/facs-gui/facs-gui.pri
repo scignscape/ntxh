@@ -11,13 +11,19 @@ QT += widgets core
 
 include($$ROOT_DIR/../preferred/sysr.pri)
 
+include($$ROOT_DIR/../preferred/boost.pri)
 include($$ROOT_DIR/../preferred/gui.pri)
 
 
 TEMPLATE = app
 
-INCLUDEPATH +=   $$SRC_GROUP_DIR  $$SRC_DIR/gui \
+INCLUDEPATH += $$SRC_GROUP_DIR  $$SRC_DIR/gui \
 
+INCLUDEPATH += $$SRC_PROSET_DIR/cytoLib
+INCLUDEPATH += $$SRC_PROSET_DIR/cytoLib/cytolib/include
+
+INCLUDEPATH += $$SRC_PROSET_DIR/cytoLib/cytolib/hdf5
+INCLUDEPATH += $$SRC_PROSET_DIR/cytoLib/cytolib/hdf5/c
 
 HEADERS += \
   $$SRC_DIR/gui/MainWindow.h  \
@@ -84,10 +90,28 @@ SOURCES +=  \
   $$SRC_DIR/gui/view/tool/ViewToolDrawPoly.cpp \
   $$SRC_DIR/main.cpp \
 
-DEFINES += DEFAULT_ICON_FOLDER=\\\"$$PWD/gui/resource\\\"
+#$$SRC_DIR/../facs-bridge/qvector-matrix-r8.cpp \
+
+DEFINES += DEFAULT_ICON_FOLDER=\\\"$$SRC_ROOT_DIR/code/icons\\\"
+
+DEFINES += DEMO_FCS_FOLDER=\\\"$$ROOT_DIR/extra/facs/fcs\\\"
+
 
 LIBS += -L$$TARGETSDIR  -lfacs-bridge
 
+LIBS += -L$$TARGETSDIR -lcytolib #-lfacs-bridge
+
+
+LIBS +=  -lstdc++fs
+
+
+include($$ROOT_DIR/../preferred/facs.pri)
+
+include($$ROOT_DIR/../preferred/proto.pri)
+
+
+#LIBS += /home/nlevisrael/mtr/newstuff/hdf5/install/lib/libhdf5.a -lz
+#LIBS += -L/home/nlevisrael/mtr/newstuff/hdf5/install/lib/ -lhdf5
 
 
 

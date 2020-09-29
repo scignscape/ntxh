@@ -85,8 +85,6 @@ void FacsanaduProject::addDataset(QFile& path) // throws IOException
  QVector_Matrix_R8* qvm = new QVector_Matrix_R8;
  qvm->load_from_file(file_name);
 
- //"/home/nlevisrael/hypergr/pgvm/ar/extra/facs/Live_cells.fcs";
-
 // cytolib::MemCytoFrame mcf(qfi.absoluteFilePath().toStdString(), rp);
 // mcf.read_fcs();
 // QVector_Matrix_R8* qvm = mcf.data_to_qvmatrix(); 

@@ -8,6 +8,10 @@ include(../build-group.pri)
 
 TEMPLATE = app
 
+
+include($$ROOT_DIR/../preferred/sysr.pri)
+include($$ROOT_DIR/../preferred/gui.pri)
+
 INCLUDEPATH += $$SRC_GROUP_DIR
 
 
@@ -22,7 +26,12 @@ SOURCES += \
 
 
 
-LIBS += -L$$TARGETSDIR -lxpdf -lfreetype #-lpdf-pull -ldsmain
+LIBS += -L$$TARGETSDIR -lxpdf # -lfreetype #-lpdf-pull -ldsmain
+
+LIBS += /home/nlevisrael/mtr/extras/gl/xcb/lib/x86_64-linux-gnu/libfreetype.so.6.12.1
+
+LIBS += /home/nlevisrael/mtr/extras/gl/xcb/lib/x86_64-linux-gnu/libpng12.so.0
+
 
 
 #?contains(CHOICE_FEATURES, "pdf-pull") \#/
