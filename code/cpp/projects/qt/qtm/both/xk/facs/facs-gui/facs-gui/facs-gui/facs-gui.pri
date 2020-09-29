@@ -83,11 +83,11 @@ SOURCES +=  \
   $$SRC_DIR/gui/view/tool/ViewToolDrawRect.cpp \
   $$SRC_DIR/gui/view/tool/ViewToolDrawPoly.cpp \
   $$SRC_DIR/main.cpp \
+  $$SRC_DIR/../facs-bridge/qvector-matrix-r8.cpp \
 
 DEFINES += DEFAULT_ICON_FOLDER=\\\"$$PWD/gui/resource\\\"
 
-LIBS += -L$$TARGETSDIR  -lfacs-bridge
-
+#LIBS += -L$$TARGETSDIR  -lfacs-bridge
 
 
 

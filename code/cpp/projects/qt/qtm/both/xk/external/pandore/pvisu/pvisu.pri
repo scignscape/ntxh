@@ -11,6 +11,8 @@ INCLUDEPATH +=  $$SRC_GROUP_DIR/pandore/include
 
 include($$ROOT_DIR/../preferred/sysr.pri)
 
+include($$ROOT_DIR/../preferred/gui.pri)
+
 
 LIBS += -L$$TARGETSDIR -lpandore
 
