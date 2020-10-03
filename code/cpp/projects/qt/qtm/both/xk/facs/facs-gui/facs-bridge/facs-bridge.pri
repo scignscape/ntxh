@@ -14,14 +14,19 @@ TEMPLATE = lib
 
 QT -= gui
 
+DEFINES += USE_KANS
+
 
 include($$ROOT_DIR/../preferred/sysr.pri)
 
 
 HEADERS += \
   $$SRC_DIR/qvector-matrix-r8.h  \
+  $$SRC_DIR/mpf-package.h \
+
 
 SOURCES +=  \
   $$SRC_DIR/qvector-matrix-r8.cpp \
+  $$SRC_DIR/mpf-package.cpp \
 
 

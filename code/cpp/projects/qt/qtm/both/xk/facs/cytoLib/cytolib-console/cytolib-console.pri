@@ -53,13 +53,20 @@ CONFIG += no_keywords
 
 DEFINES += USE_KANS
 
+
+INCLUDEPATH += $$CWL_SRC_GROUP_DIR/cwl/include
+
+#message($$CWL_SRC_GROUP_DIR)
+
 HEADERS += \
 
 
 SOURCES += \
   $$SRC_DIR/main.cpp \
 
-LIBS += -L$$TARGETSDIR -lcytolib -lfacs-bridge
+
+
+LIBS += -L$$TARGETSDIR -lcytolib -lfacs-bridge  -lcwl
 
 LIBS +=  -lstdc++fs
 
