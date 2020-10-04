@@ -376,6 +376,17 @@ QVector_Matrix_R8* QVector_Matrix_R8::new_from_dimensions()
  return new QVector_Matrix_R8(n_rows(), n_cols());
 }
 
+void QVector_Matrix_R8::save_to_datastream(QDataStream& qds)
+{
+ qds << n_rows_ << n_cols_ << *elems_;
+}
+
+void QVector_Matrix_R8::load_from_datastream(QDataStream& qds)
+{
+ elems_ = new QVector<r8>;
+ qds >> n_rows_ >> n_cols_ >> *elems_;
+}
+
 void QVector_Matrix_R8::save_to_file(QString path)
 {
  QFile qf(path);

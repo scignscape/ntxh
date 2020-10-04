@@ -7,6 +7,8 @@
 #include "Histogram.h"
 #include "ViewTransform.h"
 
+#include "MainWindow.h"
+
 #include "../data/ChannelInfo.h"
 #include "../data/Dataset.h"
 
@@ -16,6 +18,9 @@
 
 #include "gate/GateRenderer.h"
 #include "gate/GateRendererManager.h"
+
+#include "facs-bridge/mpf-package.h"
+USING_KANS(MPF)
 
 
 #include <QtMath>
@@ -34,14 +39,14 @@
  */
 int ViewRenderer::labelOffset = 15;
 
-void ViewRenderer::renderData(ViewSettings* viewsettings, Dataset* segment,
+void ViewRenderer::renderData(MainWindow* mw, ViewSettings* viewsettings, Dataset* segment,
   GatingResult* gr, ViewTransform* trans, QPainter& pm, int rendermax)
 {
  if(viewsettings->isHistogram())
   renderHistogram(viewsettings, segment, gr, trans, pm);
 
  else
-  renderXY(viewsettings, segment, gr, trans, pm, rendermax);
+  renderXY(mw, viewsettings, segment, gr, trans, pm, rendermax);
 }
  
 void ViewRenderer::renderGates(ViewSettings* viewsettings, Dataset* segment,
@@ -95,9 +100,39 @@ void ViewRenderer::renderHistogram(ViewSettings* viewsettings, Dataset* segment,
 }
 
 // // test by rendering everything ...
-void test_render_xy(ViewSettings* viewsettings, Dataset* ds,
+void test_render_xy(MainWindow* mw, ViewSettings* viewsettings, Dataset* ds,
   ViewTransform* trans, QPainter& pm, int rendermax)
 {
+
+ MPF_Package* mpf = mw->mpf_package();
+
+ int xsk = mpf->dimension_skews()[0];
+ int ysk = mpf->dimension_skews()[1];
+
+ int xsh = mpf->dimension_shifts()[0];
+ int ysh = mpf->dimension_shifts()[1];
+
+ // // override these from mpf ...
+  // int indexX = viewsettings->indexX();
+  // int indexY = viewsettings->indexY();
+
+ int indexX = mpf->columns()[0];
+ int indexY = mpf->columns()[1];
+
+
+ qDebug() << "Ind X: " << indexX;
+ qDebug() << "Ind Y: " << indexY;
+
+ QVector<QPair<double, double>>& extrema = ds->extrema();
+
+ double xmin = extrema[indexX].first;
+ double xmax = extrema[indexX].second;
+ double ymin = extrema[indexY].first;
+ double ymax = extrema[indexY].second;
+
+
+ // //  MPF ...
+
  qDebug() << "test_render_xy";
 
  QList<ChannelInfo*> chans = ds->getChannelInfo();
@@ -122,17 +157,6 @@ void test_render_xy(ViewSettings* viewsettings, Dataset* ds,
 
  if(! accepted.isEmpty())
  {
-  QVector<QPair<double, double>>& extrema = ds->extrema();  
-
-   int indexX = viewsettings->indexX();
-   int indexY = viewsettings->indexY();
-   qDebug() << "Ind X: " << indexX;
-   qDebug() << "Ind Y: " << indexY;
-  double xmin = extrema[indexX].first;
-  double xmax = extrema[indexX].second;
-  double ymin = extrema[indexY].first;
-  double ymax = extrema[indexY].second;
-
 
 //?  for(int i = 0; i < accepted.size() && i < rendermax; ++i)
   for(int i = 0; i < max; ++i)
@@ -148,6 +172,7 @@ void test_render_xy(ViewSettings* viewsettings, Dataset* ds,
 //  chanY=viewsettings->transformation.transform(ds, ind, viewsettings->indexY);
 
   
+
    chanX = ds->getAsFloatCompensated(ind, indexX );
    chanY = ds->getAsFloatCompensated(ind, indexY );
 
@@ -158,8 +183,8 @@ void test_render_xy(ViewSettings* viewsettings, Dataset* ds,
 //?   int y = trans->mapFcsToScreenY(chanY);
 
      
-   int x = ( (chanX - xmin) / (xmax - xmin) ) * 400;  
-   int y = ( (chanY - ymin) / (ymax - ymin) ) * 400;  
+   int x = ( ( (chanX - xmin) / (xmax - xmin) ) * xsk) + xsh;// 400;
+   int y = ( ( (chanY - ymin) / (ymax - ymin) ) * ysk) + ysh;//400;
 
    //mapFcsToScreenX
 
@@ -178,12 +203,12 @@ void test_render_xy(ViewSettings* viewsettings, Dataset* ds,
  /**
  * Draw scatter plot
  */
-void ViewRenderer::renderXY(ViewSettings* viewsettings, Dataset* ds,
+void ViewRenderer::renderXY(MainWindow* mw, ViewSettings* viewsettings, Dataset* ds,
   GatingResult* gr, ViewTransform* trans, QPainter& pm, int rendermax)
 {
  if(!gr)
  {
-  test_render_xy(viewsettings, ds, trans, pm, rendermax);
+  test_render_xy(mw, viewsettings, ds, trans, pm, rendermax);
   return;
  } 
 

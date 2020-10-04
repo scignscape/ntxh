@@ -103,7 +103,7 @@ void ViewWidget::updatePointImage()
 
   
 
-  ViewRenderer::renderData(viewsettings_, dataset_, gr, trans_, pm2, maxevents_); 
+  ViewRenderer::renderData(mainWindow_, viewsettings_, dataset_, gr, trans_, pm2, maxevents_);
 //?  pm2.end();
 
 

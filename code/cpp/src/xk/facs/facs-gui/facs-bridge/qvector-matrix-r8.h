@@ -168,6 +168,10 @@ public:
  void save_to_file(QString path);
  void load_from_file(QString path);
 
+ void save_to_datastream(QDataStream& qds);
+ void load_from_datastream(QDataStream& qds);
+
+
 
  u4 covers(u4 r, u4 c);
  u4 get_index(u4 r, u4 c);

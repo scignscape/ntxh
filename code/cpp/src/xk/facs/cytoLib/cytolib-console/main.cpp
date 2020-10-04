@@ -34,11 +34,15 @@ int main(int argc, char* argv[])
                              "x axis displacement");
  parser.addOptionalParameter("xskew", "xskew", cbica::Parameter::INTEGER, "x Skew",
                              "x axis rescaling");
+ parser.addOptionalParameter("xcolumn", "xcolumn", cbica::Parameter::INTEGER, "y Shift",
+                             "x column");
 
  parser.addOptionalParameter("yshift", "yshift", cbica::Parameter::INTEGER, "y Shift",
                              "y axis displacement");
  parser.addOptionalParameter("yskew", "yskew", cbica::Parameter::INTEGER, "y Skew",
                              "y axis rescaling");
+ parser.addOptionalParameter("ycolumn", "ycolumn", cbica::Parameter::INTEGER, "y Shift",
+                             "y column");
 
 
  QString fcs_file;
@@ -55,17 +59,18 @@ int main(int argc, char* argv[])
 
 
  s4 xshift = 0, yshift = 0, xskew = 0, yskew = 0;
- u1 xchoice = 1;
- u1 ychoice = 2;
+ u1 xcolumn = 0, ycolumn = 0;
 
 
  get_cmdl(parser, {
    { {&fcs_file, "f"}, {DEMO_FCS_FOLDER "/Live_cells.fcs"} },
-   { {&xshift, "s4:xshift"}, {} },
-   { {&xskew, "s4:xskew"}, {} },
-   { {&yshift, "s4:yshift"}, {} },
-   { {&yskew, "s4:yskew"}, {} },
-     });
+   { {&xshift, "s4:xshift"}, {"25"} },
+   { {&xskew, "s4:xskew"}, {"100"} },
+   { {&yshift, "s4:yshift"}, {"25"} },
+   { {&yskew, "s4:yskew"}, {"10"} },
+   { {&xcolumn, "u1:xcolumn"}, {"1"} },
+   { {&ycolumn, "u1:ycolumn"}, {"2"} },
+  });
 
 
  cytolib::FCS_READ_HEADER_PARAM hp;
@@ -83,22 +88,30 @@ int main(int argc, char* argv[])
  QVector_Matrix_R8* qvm = mcf.data_to_qvmatrix(); 
  MPF_Package* mpf = new MPF_Package(2);
 
- mpf->dimension_shifts() = {5, 5};
- mpf->dimension_skews() = {10, 100};
+ mpf->set_matrix(qvm);
 
+ mpf->dimension_skews()[0] = xskew;
+ mpf->dimension_skews()[1] = yskew;
 
-// r8 test = (*qvm)[2][3];
+ mpf->dimension_shifts()[0] = xshift;
+ mpf->dimension_shifts()[1] = yshift;
 
-// qDebug() << "R: " << qvm->n_rows();
-// qDebug() << "C: " << qvm->n_cols();
+ mpf->columns()[0] = xcolumn;
+ mpf->columns()[1] = ycolumn;
 
-// qDebug() << "T: " << test;
+ mpf->set_data_file_path(file_name + ".mpf.txt");
+ mpf->set_fcs_file_path(file_name);
 
- qvm->save_to_file(file_name + ".txt");
+// mpf->dimension_shifts() = {5, 5};
+// mpf->dimension_skews() = {10, 100};
+
+ mpf->save_to_file(file_name + ".mpf.txt");
  
- qDebug() << "OK ...";
+ qDebug() << "Saved: " << file_name + ".mpf.txt";
 
- 
+ // // double-check
+  // MPF_Package* mpf1 = new MPF_Package(2);
+  // mpf1->load_from_file(file_name + ".mpf.txt");
 
  return 0;
 }

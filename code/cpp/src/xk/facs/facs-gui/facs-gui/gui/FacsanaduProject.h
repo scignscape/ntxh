@@ -18,6 +18,8 @@
 #include <QMap>
 #include <QMutex>
 
+#include "accessors.h"
+
 
 class GateSet;
 class Dataset;
@@ -27,6 +29,8 @@ class GatingResult;
 class Compensation;
 
 class ChannelInfo;
+
+class MainWindow;
 
 //package facsanadu.gui;
 
@@ -46,9 +50,13 @@ class FacsanaduProject
 
  Compensation* compensation_; // =new Compensation();
 
+ MainWindow* main_window_;
+
 public: 
 
  FacsanaduProject();
+
+ ACCESSORS(MainWindow* ,main_window)
 
  Compensation* compensation()
  {

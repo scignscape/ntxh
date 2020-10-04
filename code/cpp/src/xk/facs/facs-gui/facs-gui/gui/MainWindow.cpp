@@ -45,6 +45,9 @@
 
 #include <functional>
 
+#include "facs-bridge/mpf-package.h"
+
+
 //#ifdef HIDE
 
 struct Facs_IOException {};
@@ -77,7 +80,8 @@ QList<Dataset*> _MainWindow_GateCalcThread::getCurrentDatasets()
    this, &MainWindow::z);
 
 MainWindow::MainWindow()
-{
+  : mpf_package_(nullptr)
+{ 
  tabwidget_ = new QTabWidget();
  menubar_ = new QMenuBar();
 
@@ -497,6 +501,7 @@ void MainWindow::actionExportCSV()
 // // Load one file
 void MainWindow::loadFile(QFile& path) // throws IOException
 {
+ project_->set_main_window(this);
  project_->addDataset(path);
  EventDatasetsChanged evd; // EventDatasetsChanged();
  handleEvent(evd);

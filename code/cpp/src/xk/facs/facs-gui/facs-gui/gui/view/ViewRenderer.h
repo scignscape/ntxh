@@ -24,6 +24,8 @@ class Gate;
 class GateHandle;
 class ViewTransform;
 
+class MainWindow;
+
 
 /**
  * 
@@ -45,7 +47,7 @@ class ViewRenderer
  /**
   * Draw scatter plot
   */
- static void renderXY(ViewSettings* viewsettings, Dataset* ds, 
+ static void renderXY(MainWindow* mw, ViewSettings* viewsettings, Dataset* ds,
    GatingResult* gr, ViewTransform* trans, QPainter& pm, int rendermax);
  
  /**
@@ -60,11 +62,13 @@ class ViewRenderer
  static void drawgatesRecursive(QPainter& pm, ViewTransform* trans, 
    Gate* parent, ViewSettings* viewsettings, LinkedList<GateHandle*> handles);
  
+ MainWindow* main_window_;
+
 public: 
  /**
   * Render view to device
   */
- static void renderData(ViewSettings* viewsettings, Dataset* segment,
+ static void renderData(MainWindow* mw, ViewSettings* viewsettings, Dataset* segment,
     GatingResult* gr, ViewTransform* trans, QPainter& pm, int rendermax);
  
  static void renderGates(ViewSettings* viewsettings, Dataset* segment,

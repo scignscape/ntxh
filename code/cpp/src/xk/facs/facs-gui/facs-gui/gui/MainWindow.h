@@ -9,6 +9,8 @@
 
 #include "events/FacsanaduEvent.h"
 
+#include "accessors.h"
+
 #include <QDialog>
 #include <QVBoxLayout>
 #include <QTableWidget>
@@ -55,6 +57,14 @@ class GateMeasure;
 class ProfChannel;
 
 
+//#define USE_KANS
+
+#include "kans.h"
+
+KANS_CLASS_DECLARE(MPF ,MPF_Package)
+
+USING_KANS(MPF)
+
 // // The main window
 
 //#ifdef HIDE
@@ -93,7 +103,9 @@ class MainWindow : public QMainWindow
 
  FacsanaduProject* project_; // = new FacsanaduProject();
 
- GateCalcThread* calcthread_; 
+ GateCalcThread* calcthread_;
+
+ MPF_Package* mpf_package_;
  
  // // Update all widgets
  void updateall();
@@ -119,6 +131,8 @@ public:
  
  //FacsanaduProject* project();
   // = new FacsanaduProject();
+
+ ACCESSORS(MPF_Package* ,mpf_package)
 
  FacsanaduProject* getProject();
  FacsanaduProject* project() 

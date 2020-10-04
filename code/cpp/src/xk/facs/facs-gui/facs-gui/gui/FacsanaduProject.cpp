@@ -8,6 +8,8 @@
 #include "../data/Compensation.h"
 
 #include "facs-bridge/qvector-matrix-r8.h"
+#include "facs-bridge/mpf-package.h"
+
 //#include "cytolib/MemCytoFrame.hpp"
 
 #include <QMutexLocker>
@@ -16,8 +18,15 @@
 
 //package facsanadu.gui;
 
+#include "MainWindow.h"
+
+#include "kans.h"
+
+USING_KANS(MPF)
+
 
 FacsanaduProject::FacsanaduProject()
+  :  main_window_(nullptr)
 {
 // gateset_ = new GateSet();
 // datasets_ = new LinkedList<Dataset*>();
@@ -80,10 +89,15 @@ void FacsanaduProject::addDataset(QFile& path) // throws IOException
  //
  //
 
- QString file_name = qfi.absoluteFilePath() + ".txt";
+ QString file_name = qfi.absoluteFilePath() + ".mpf.txt";
 
- QVector_Matrix_R8* qvm = new QVector_Matrix_R8;
- qvm->load_from_file(file_name);
+ MPF_Package* mpf = new MPF_Package();
+
+ main_window_->set_mpf_package(mpf);
+
+ mpf->load_from_file(file_name);
+
+ QVector_Matrix_R8* qvm = mpf->matrix();
 
 // cytolib::MemCytoFrame mcf(qfi.absoluteFilePath().toStdString(), rp);
 // mcf.read_fcs();
