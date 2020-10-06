@@ -13,6 +13,8 @@ QT -= gui
 include($$ROOT_DIR/../preferred/sysr.pri)
 include($$ROOT_DIR/../preferred/boost.pri)
 
+include($$ROOT_DIR/../preferred/proto.pri)
+
 
 INCLUDEPATH += $$SRC_DIR $$SRC_DIR/include \
   $$SRC_GROUP_DIR $$SRC_ROOT_DIR
@@ -41,6 +43,9 @@ DEFINES += DEFAULT_SDI_FOLDER=\\\"$$ROOT_DIR/dev/consoles/gtagml/sdi\\\"
 
 DEFINES += CAON_DEBUG
 DEFINES += RELAE_LABEL_NODES
+
+DEFINES += USE_KANS
+
 
 
 DEFINES += QT_CYTOLIB_VERSION=\\\"1.0\\\"

@@ -68,6 +68,9 @@ public:
   return gatingResult_.value(ds);
  }
 
+ GatingResult* check_get_gating_result(Dataset* ds);
+
+
  // // Get gating result for dataset
  GatingResult* getGatingResult(Dataset* ds);
 // {

@@ -10,6 +10,8 @@
 #include <QList>
 #include <QMap>
 
+#include "accessors.h"
+
 // // One data block - an FCS file can contain multiple but the standard encourages against
 
 // //  Note: should separate this from FCS parsing!
@@ -23,6 +25,10 @@ class ProfChannel;
 
 class QVector_Matrix_R8;
 
+namespace cytolib
+{
+ class MemCytoFrame;
+}
 
 class Dataset
 {
@@ -51,6 +57,8 @@ class Dataset
 
  QMap<QString, QString> metaKeyName_; //=new TreeMap<String, String>();
 
+ cytolib::MemCytoFrame* cyto_frame_;
+
  void do_preliminary_compensation();
 
 public:
@@ -58,6 +66,8 @@ public:
  Dataset(QVector_Matrix_R8* eventsFloat = nullptr);
  
  QList<ChannelInfo*> getChannelInfo();
+
+ ACCESSORS(cytolib::MemCytoFrame* ,cyto_frame)
 
  QVector<QPair<double, double>>& extrema()
  {

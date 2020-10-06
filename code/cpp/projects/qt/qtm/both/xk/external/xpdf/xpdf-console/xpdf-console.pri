@@ -26,21 +26,13 @@ SOURCES += \
 
 
 
-LIBS += -L$$TARGETSDIR -lxpdf # -lfreetype #-lpdf-pull -ldsmain
-
-LIBS += /home/nlevisrael/mtr/extras/gl/xcb/lib/x86_64-linux-gnu/libfreetype.so.6.12.1
-
-LIBS += /home/nlevisrael/mtr/extras/gl/xcb/lib/x86_64-linux-gnu/libpng12.so.0
+LIBS += -L$$TARGETSDIR -lxpdf
 
 
-
-#?contains(CHOICE_FEATURES, "pdf-pull") \#/
-#?{
-#? message(DEFINE\'ing USING_PDF_PULL)
-#? DEFINES += USING_PDF_PULL
-#? LIBS +=-L$$TARGETSDIR -lpdf-pull  \
-#?   -ldsmain -lntxh -lntxh-builder -lntxh-parser
-#?}
+include($$ROOT_DIR/../preferred/xpdf.pri)
+# -lfreetype -lpng
+# uncomment to use default versions of these libraries,
+# then you don't need a preferred/ ...
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

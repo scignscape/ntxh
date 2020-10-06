@@ -124,9 +124,16 @@ void ViewWidget::paintEvent(QPaintEvent* pe)
 {
  QWidget::paintEvent(pe);
   //? super.paintEvent(pe);
-  //? FacsanaduProject* project = mainWindow_->project();
+  //?
 
-  //? GatingResult* gr = project->get_GatingResult(dataset_);
+ FacsanaduProject* project = mainWindow_->project();
+
+  //?
+
+// GatingResult* gr = project->get_GatingResult(dataset_);
+
+  // // maybe have to do it ...
+ GatingResult* gr = project->check_get_gating_result(dataset_);
 
  trans_->setTotalHeight(contentsRect().height());
  trans_->setTotalWidth(contentsRect().width());

@@ -20,10 +20,10 @@ TEMPLATE = app
 INCLUDEPATH += $$SRC_GROUP_DIR  $$SRC_DIR/gui \
 
 INCLUDEPATH += $$SRC_PROSET_DIR/cytoLib
-INCLUDEPATH += $$SRC_PROSET_DIR/cytoLib/cytolib/include
+INCLUDEPATH += $$SRC_PROSET_DIR/cytoLib/qcytolib/include
 
-INCLUDEPATH += $$SRC_PROSET_DIR/cytoLib/cytolib/hdf5
-INCLUDEPATH += $$SRC_PROSET_DIR/cytoLib/cytolib/hdf5/c
+INCLUDEPATH += $$SRC_PROSET_DIR/cytoLib/qcytolib/hdf5
+INCLUDEPATH += $$SRC_PROSET_DIR/cytoLib/qcytolib/hdf5/c
 
 HEADERS += \
   $$SRC_DIR/gui/MainWindow.h  \
@@ -97,9 +97,12 @@ DEFINES += DEFAULT_ICON_FOLDER=\\\"$$SRC_ROOT_DIR/code/icons\\\"
 DEFINES += DEMO_FCS_FOLDER=\\\"$$ROOT_DIR/extra/facs/fcs\\\"
 
 
+DEFINES += USE_KANS
+
+
 LIBS += -L$$TARGETSDIR  -lfacs-bridge
 
-LIBS += -L$$TARGETSDIR -lcytolib #-lfacs-bridge
+LIBS += -L$$TARGETSDIR -lqcytolib #-lfacs-bridge
 
 
 LIBS +=  -lstdc++fs
@@ -107,7 +110,7 @@ LIBS +=  -lstdc++fs
 
 include($$ROOT_DIR/../preferred/facs.pri)
 
-include($$ROOT_DIR/../preferred/proto.pri)
+#? include($$ROOT_DIR/../preferred/proto.pri)
 
 
 #LIBS += /home/nlevisrael/mtr/newstuff/hdf5/install/lib/libhdf5.a -lz

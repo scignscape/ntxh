@@ -22,7 +22,8 @@ int test()
 
  QString file_name = DEMO_FCS_FOLDER "/Live_cells.fcs"; // "/home/nlevisrael/hypergr/pgvm/ar/extra/facs/Live_cells.fcs";
 
-// cytolib::MemCytoFrame mcf(file_name.toStdString(), rp);
+//?
+ cytolib::MemCytoFrame mcf(file_name.toStdString(), rp);
 
  return 0;
 }
@@ -58,6 +59,8 @@ int test()
 int main(int argc, char* argv[])
 {
  QApplication app(argc, argv);
+
+ test();
 
  MainWindow mw;
  

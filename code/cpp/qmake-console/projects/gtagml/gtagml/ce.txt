@@ -1,0 +1,45 @@
+In file included from ../../../../src/apk/htxn/ngml/rz-ngml/kernel/document/rz-ngml-folder.h:18:0,
+                 from ../../../../src/apk/htxn/ngml/rz-ngml/kernel/document/rz-ngml-folder.cpp:8:
+../../../../src/accessors.h:130:1: warning: multi-line comment [-Wcomment]
+ //#define ACCESSORS(type, name) \
+ ^
+In file included from ../../../../src/apk/htxn/ngml/rz-ngml/kernel/document/rz-ngml-folder.h:19:0,
+                 from ../../../../src/apk/htxn/ngml/rz-ngml/kernel/document/rz-ngml-folder.cpp:8:
+../../../../src/flags.h:204:1: warning: multi-line comment [-Wcomment]
+ //#define flags_(byte_count) \
+ ^
+In file included from ../../../../src/apk/htxn/ngml/rz-ngml/kernel/document/rz-ngml-document.h:13:0,
+                 from ../../../../src/apk/htxn/ngml/rz-ngml/kernel/document/rz-ngml-folder.cpp:10:
+../../../../src/apk/htxn/ngml/rz-ngml/kernel/rz-ngml-dominion.h: In member function ‘RZ::NGML::NGML_Dominion::Type_Codes RZ::NGML::NGML_Dominion::get_type_code()’:
+../../../../src/apk/htxn/ngml/rz-ngml/kernel/rz-ngml-dominion.h:51:2: warning: no return statement in function returning non-void [-Wreturn-type]
+  }
+  ^
+In file included from ../../../../src/apk/htxn/ngml/rz-ngml/kernel/document/rz-ngml-folder.cpp:8:0:
+../../../../src/apk/htxn/ngml/rz-ngml/kernel/document/rz-ngml-folder.h: In constructor ‘RZ::NGML::NGML_Folder::NGML_Folder(QString, QString, QString)’:
+../../../../src/apk/htxn/ngml/rz-ngml/kernel/document/rz-ngml-folder.h:38:10: warning: ‘RZ::NGML::NGML_Folder::local_path_’ will be initialized after [-Wreorder]
+  QString local_path_;
+          ^
+../../../../src/apk/htxn/ngml/rz-ngml/kernel/document/rz-ngml-folder.h:35:10: warning:   ‘QString RZ::NGML::NGML_Folder::first_file_path_’ [-Wreorder]
+  QString first_file_path_;
+          ^
+../../../../src/apk/htxn/ngml/rz-ngml/kernel/document/rz-ngml-folder.cpp:36:1: warning:   when initialized here [-Wreorder]
+ NGML_Folder::NGML_Folder(QString local_path, QString first_file_path, 
+ ^
+../../../../src/apk/htxn/ngml/rz-ngml/kernel/document/rz-ngml-folder.cpp: In member function ‘void RZ::NGML::NGML_Folder::convert_to_latex(std::function<void(QString)>)’:
+../../../../src/apk/htxn/ngml/rz-ngml/kernel/document/rz-ngml-folder.cpp:101:33: error: no matching function for call to ‘QDir::setNameFilters(const char [7])’
+     idir.setNameFilters("*.ngml");
+                                 ^
+In file included from /home/nlevisrael/Qt5123/qt/5.12.3/gcc_64/include/QtCore/QDir:1:0,
+                 from ../../../../src/apk/htxn/ngml/rz-ngml/kernel/document/rz-ngml-folder.cpp:22:
+/home/nlevisrael/Qt5123/qt/5.12.3/gcc_64/include/QtCore/qdir.h:139:10: note: candidate: void QDir::setNameFilters(const QStringList&)
+     void setNameFilters(const QStringList &nameFilters);
+          ^
+/home/nlevisrael/Qt5123/qt/5.12.3/gcc_64/include/QtCore/qdir.h:139:10: note:   no known conversion for argument 1 from ‘const char [7]’ to ‘const QStringList&’
+../../../../src/apk/htxn/ngml/rz-ngml/kernel/document/rz-ngml-folder.cpp: At global scope:
+../../../../src/apk/htxn/ngml/rz-ngml/kernel/document/rz-ngml-folder.cpp:57:65: warning: unused parameter ‘fn’ [-Wunused-parameter]
+ void NGML_Folder::convert_to_latex(std::function<void(QString)> fn)
+                                                                 ^
+../../../../src/apk/htxn/ngml/rz-ngml/kernel/document/rz-ngml-folder.cpp:280:66: warning: unused parameter ‘khif_path’ [-Wunused-parameter]
+ void NGML_Folder::convert_all_files(QString output_path, QString khif_path)
+                                                                  ^
+make: *** [../../../targets/targets-5-12-3-qmake-console/PROJECT_OBJECTS/rz-ngml/release/rz-ngml-folder.o] Error 1

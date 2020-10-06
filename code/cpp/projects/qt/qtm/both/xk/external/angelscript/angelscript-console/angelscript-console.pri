@@ -6,6 +6,9 @@
 
 include(../build-group.pri)
 
+include($$ROOT_DIR/../preferred/sysr.pri)
+include($$ROOT_DIR/../preferred/gui.pri)
+
 TEMPLATE = app
 
 INCLUDEPATH += $$SRC_GROUP_DIR
@@ -17,7 +20,7 @@ INCLUDEPATH += $$SRC_GROUP_DIR/angelscript/add_on
 DEFINES += CAON_DEBUG
 DEFINES += RELAE_LABEL_NODES
 
-DEFINES += AS_ROOT_DIR=\\\"$$ROOT_DIR/as\\\"
+DEFINES += AS_ROOT_DIR=\\\"$$ROOT_DIR/dev/consoles/angelscript\\\"
 
 
 CONFIG += no_keywords

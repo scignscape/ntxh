@@ -15,12 +15,34 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QTextStream>
+#include <QDir>
+#include <QDebug>
 
 #include <functional>
 
 
 KANS_(TextIO)
 
+
+inline QString make_folder_from_file_name(QString path, QString folder)
+{
+ QFileInfo qfi(path);
+ QString bfn = qfi.baseName();
+ QDir qd(folder);
+ if( qd.mkdir(bfn) )
+ {
+  qd.cd(bfn);
+  qDebug() << "Made folder: " << qd.path();
+  return qd.path();
+ }
+ if(qd.cd(bfn))
+ {
+  qDebug() << "Folder already exists: " << qd.path();
+  return qd.path();
+ }
+ qDebug() << "Cpuld not make folder ...";
+ return {};
+}
 
 inline QString get_path_with_different_folder(QString path, QString folder)
 {
@@ -80,7 +102,6 @@ inline void load_file(QString path, std::function<int(QString&)> fn)
  infile.close();
 }
 
-
 inline void save_file(QString path, QByteArray& contents)
 {
  QFile outfile(path);
@@ -100,6 +121,23 @@ inline void save_file(QString path, QString text)
  outfile.close();
 }
 
+inline void save_file(QString path, QStringList& texts)
+{
+ QFile outfile(path);
+ if (!outfile.open(QIODevice::WriteOnly | QIODevice::Text))
+   return;
+ QTextStream outstream(&outfile);
+ for(QString text : texts)
+ {
+  outstream << text;
+ }
+ outfile.close();
+}
+
+inline void save_file(QString path, QStringList&& texts)
+{
+ save_file(path, texts);
+}
 
 inline void save_file(QString path, std::function<int(QString&)> fn)
 {
@@ -118,6 +156,34 @@ inline void save_file(QString path, std::function<int(QString&)> fn)
 
  outfile.close();
 }
+
+inline void prepend_template_to_file(QString path, QString tpath,
+ const QMap<QString, QString>& qm)
+{
+ QString contents = load_file(path);
+ QString tmpl = load_file(tpath);
+ QMapIterator<QString, QString> it(qm);
+ while(it.hasNext())
+ {
+  it.next();
+  tmpl.replace(it.key(), it.value());
+ }
+ save_file(path, {tmpl, contents});
+}
+
+inline QString copy_file_to_folder(QString path, QString folder)
+{
+ QFileInfo qfi(path);
+ QString fn = qfi.fileName();
+ QDir qd(folder);
+ QString newpath = qd.filePath(fn);
+
+ QString contents;
+ load_file(path, contents);
+ save_file(newpath, contents);
+ return newpath;
+}
+
 
 _KANS(TextIO)
 

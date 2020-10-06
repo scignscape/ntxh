@@ -24,6 +24,7 @@ USING_KANS(Util)
 
 #include <string>
 
+
 int main(int argc, char* argv[])
 {
  cbica::CmdParser parser = cbica::CmdParser(argc, argv);

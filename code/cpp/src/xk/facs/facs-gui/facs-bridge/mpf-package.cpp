@@ -25,6 +25,15 @@ MPF_Package::MPF_Package(u4 number_of_dimensions)
  columns_ = QVector<u1>(number_of_dimensions_, 0);
 }
 
+void MPF_Package::init_dimensions(u4 number_of_dimensions)
+{
+ number_of_dimensions_ = number_of_dimensions;
+ dimension_shifts_ = QVector<s4>(number_of_dimensions_, 1);
+ dimension_skews_ = QVector<s4>(number_of_dimensions_, 1);
+ columns_ = QVector<u1>(number_of_dimensions_, 0);
+}
+
+
 void MPF_Package::save_to_file(QString path)
 {
  QFile qf(path);

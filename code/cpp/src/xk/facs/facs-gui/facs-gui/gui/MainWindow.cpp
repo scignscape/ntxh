@@ -555,7 +555,9 @@ LinkedList<Gate*> MainWindow::getSelectedGates()
 void MainWindow::dogating()
 {
  //For speed, only do selected ones
- //project.performGating(getSelectedDatasets());
+ //
+
+ project_->performGating(getSelectedDatasets());
  calcthread_->wakeup();
 }
  

@@ -1,0 +1,50 @@
+In file included from ../../../../src/apk/hgdm/relae-graph/relae-graph/relae-node-ptr.h:12:0,
+                 from ../../../../src/apk/hgdm/ntxh/ntxh-parser/ntxh-document.h:11,
+                 from ../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-document.h:17,
+                 from ../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-document.cpp:8:
+../../../../src/accessors.h:130:1: warning: multi-line comment [-Wcomment]
+ //#define ACCESSORS(type, name) \
+ ^
+In file included from ../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-document.cpp:10:0:
+../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-element.h:42:26: error: expected ‘;’ at end of member declaration
+  QString get_kind_string() Q_DECLARE_OVERRIDE
+                          ^
+../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-element.h:42:28: error: ‘Q_DECLARE_OVERRIDE’ does not name a type
+  QString get_kind_string() Q_DECLARE_OVERRIDE
+                            ^
+../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-document.cpp: In member function ‘NGML_SDI_Page* NGML_SDI_Document::get_page(u4)’:
+../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-document.cpp:53:11: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if(page >= pages_.size())
+           ^
+../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-document.cpp: At global scope:
+../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-document.cpp:138:69: warning: unused parameter ‘g’ [-Wunused-parameter]
+ void NGML_SDI_Document::parse_paragraph_start_hypernode(NTXH_Graph& g, hypernode_type* hn)
+                                                                     ^
+../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-document.cpp:138:88: warning: unused parameter ‘hn’ [-Wunused-parameter]
+ void NGML_SDI_Document::parse_paragraph_start_hypernode(NTXH_Graph& g, hypernode_type* hn)
+                                                                                        ^
+../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-document.cpp:143:67: warning: unused parameter ‘g’ [-Wunused-parameter]
+ void NGML_SDI_Document::parse_paragraph_end_hypernode(NTXH_Graph& g, hypernode_type* hn)
+                                                                   ^
+../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-document.cpp:143:86: warning: unused parameter ‘hn’ [-Wunused-parameter]
+ void NGML_SDI_Document::parse_paragraph_end_hypernode(NTXH_Graph& g, hypernode_type* hn)
+                                                                                      ^
+../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-document.cpp:148:58: warning: unused parameter ‘g’ [-Wunused-parameter]
+ void NGML_SDI_Document::parse_info_hypernode(NTXH_Graph& g, hypernode_type* hn)
+                                                          ^
+../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-document.cpp:148:77: warning: unused parameter ‘hn’ [-Wunused-parameter]
+ void NGML_SDI_Document::parse_info_hypernode(NTXH_Graph& g, hypernode_type* hn)
+                                                                             ^
+../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-document.cpp: In member function ‘void NGML_SDI_Document::parse()’:
+../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-document.cpp:187:5: warning: unused variable ‘i’ [-Wunused-variable]
+  u4 i = 0;
+     ^
+../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-document.cpp: In member function ‘void NGML_SDI_Document::output_pages()’:
+../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-document.cpp:260:6: warning: unused variable ‘j’ [-Wunused-variable]
+  int j = 0;
+      ^
+../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-document.cpp: In lambda function:
+../../../../src/apk/htxn/ngml/ngml-sdi/ngml-sdi-document.cpp:342:2: warning: control reaches end of non-void function [-Wreturn-type]
+  });
+  ^
+make: *** [../../../targets/targets-5-12-3-qmake-console/PROJECT_OBJECTS/ngml-sdi/release/ngml-sdi-document.o] Error 1

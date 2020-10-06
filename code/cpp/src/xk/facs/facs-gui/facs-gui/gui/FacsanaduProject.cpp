@@ -10,7 +10,7 @@
 #include "facs-bridge/qvector-matrix-r8.h"
 #include "facs-bridge/mpf-package.h"
 
-//#include "cytolib/MemCytoFrame.hpp"
+#include "cytolib/MemCytoFrame.hpp"
 
 #include <QMutexLocker>
 #include <QDebug>
@@ -72,47 +72,68 @@ void FacsanaduProject::performGating(LinkedList<Dataset*> listDatasets)
  }
 }
 
+GatingResult* FacsanaduProject::check_get_gating_result(Dataset* ds)
+{
+
+}
+
 
 void FacsanaduProject::addDataset(QFile& path) // throws IOException
 {
+ cytolib::FCS_READ_HEADER_PARAM hp;
+ cytolib::FCS_READ_DATA_PARAM dp;
+ cytolib::FCS_READ_PARAM rp;
+
+//?
+ QFileInfo qfi(path);
+ QString file_path = qfi.absoluteFilePath();
+ cytolib::MemCytoFrame* mcf = new cytolib::MemCytoFrame(file_path.toStdString(), rp);
+
+ mcf->read_fcs();
+ QVector_Matrix_R8* qvm = mcf->data_to_qvmatrix();
+
+//        toStdString(), rp);//
 /*
  cytolib::FCS_READ_HEADER_PARAM hp;
  cytolib::FCS_READ_DATA_PARAM dp;
  cytolib::FCS_READ_PARAM rp;
 */
-
- QFileInfo qfi(path);
- 
-
+// QFileInfo qfi(path);
 // test_cyto();
+// //
 
- //
- //
-
- QString file_name = qfi.absoluteFilePath() + ".mpf.txt";
+// QString file_name = qfi.absoluteFilePath() + ".mpf.txt";
 
  MPF_Package* mpf = new MPF_Package();
-
  main_window_->set_mpf_package(mpf);
 
- mpf->load_from_file(file_name);
+// QString file_name = qfi.absoluteFilePath() + ".mpf.txt";
+// mpf->load_from_file(file_name);
 
- QVector_Matrix_R8* qvm = mpf->matrix();
+ mpf->set_matrix(qvm);
+ mpf->set_fcs_file_path(file_path);
+ mpf->init_dimensions(2);
+ mpf->dimension_skews()[0] = 100;
+ mpf->dimension_skews()[1] = 10;
+ mpf->dimension_shifts()[0] = 25;
+ mpf->dimension_shifts()[1] = 25;
+ mpf->columns()[0] = 7;
+ mpf->columns()[1] = 6;
 
-// cytolib::MemCytoFrame mcf(qfi.absoluteFilePath().toStdString(), rp);
+ //qvm = mpf->matrix();
+
+ // cytolib::MemCytoFrame mcf(qfi.absoluteFilePath().toStdString(), rp);
 // mcf.read_fcs();
 // QVector_Matrix_R8* qvm = mcf.data_to_qvmatrix(); 
-
- r8 test = (*qvm)[2][3];
- qDebug() << "R: " << qvm->n_rows();
- qDebug() << "C: " << qvm->n_cols();
-
- qDebug() << "T: " << test;
- 
- qDebug() << "OK ...";
+// r8 test = (*qvm)[2][3];
+// qDebug() << "R: " << qvm->n_rows();
+// qDebug() << "C: " << qvm->n_cols();
+// qDebug() << "T: " << test;
+// qDebug() << "OK ...";
 
  Dataset* ds = new Dataset(qvm);
 
+ ds->set_cyto_frame(mcf);
  addDataset(ds);
  
 

@@ -53,6 +53,8 @@ public:
  void save_to_file(QString path);
  void load_from_file(QString path);
 
+ void init_dimensions(u4 number_of_dimensions);
+
 
 };
 

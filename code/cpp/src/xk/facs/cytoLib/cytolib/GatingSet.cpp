@@ -108,7 +108,7 @@ namespace cytolib
 					  throw(domain_error(errmsg + "No cytoframe file matched for sample " + sn + ".pb"));
 			}
 
-			GOOGLE_PROTOBUF_VERIFY_VERSION;
+   //?GOOGLE_PROTOBUF_VERIFY_VERSION;
 
 
 			auto buf = vfs.read_buf(gs_pb_file.string());
@@ -312,7 +312,7 @@ namespace cytolib
 
 		// Verify that the version of the library that we linked against is
 		// compatible with the version of the headers we compiled against.
-		GOOGLE_PROTOBUF_VERIFY_VERSION;
+  //?GOOGLE_PROTOBUF_VERIFY_VERSION;
 
 //		ofstream output(filename.c_str(), ios::out | ios::trunc | ios::binary);
 		string buf;
@@ -392,7 +392,7 @@ namespace cytolib
 	 */
 	GatingSet::GatingSet(string pb_file, const GatingSet & gs_data):GatingSet()
 	{
-		GOOGLE_PROTOBUF_VERIFY_VERSION;
+  //?GOOGLE_PROTOBUF_VERIFY_VERSION;
 		ifstream input(pb_file.c_str(), ios::in | ios::binary);
 		if (!input) {
 			throw(invalid_argument("File not found.." ));

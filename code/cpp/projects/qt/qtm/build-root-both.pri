@@ -107,19 +107,15 @@ RELAE_GRAPH_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/hgdm/relae-graph
 PHAON_GRAPH_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/hgdm/phaon-graph
 NTXH_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/hgdm/ntxh
 DSMAIN_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/dataset/dsmain
-SCIGNSTAGE_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/QScign/ScignStage
 XPDF_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/xpdf
 APPLICATION_MODEL_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/dataset/application-model
 CONFIG_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/dataset/config
-UDPIPE_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/udpipe
 PHR_GRAPH_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/hgdm/phr-graph
 RELAE_GRAPH_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/hgdm/relae-graph
 PHAONIR_SRC_GROUP_DIR = $$SRC_ROOT_DIR/sk/phaonir/PhaonIR
-RZ_KAUVIR_SRC_GROUP_DIR = $$SRC_ROOT_DIR/sk/rz/rz-kauvir
 PHAONLIB_SRC_GROUP_DIR = $$SRC_ROOT_DIR/sk/phaonir/PhaonLib
 PHR_RUNTIME_SRC_GROUP_DIR = $$SRC_ROOT_DIR/sk/phaonir/phr-runtime
 TESTS_PHR_SRC_GROUP_DIR = $$SRC_ROOT_DIR/sk/phaonir/tests-phr
-WCM_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/thql/wcm
 
 QUA_ZIP_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/quazip
 
@@ -127,6 +123,4 @@ ANGELSCRIPT_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/angelscript
 
 HTXN_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/htxn/htxn
 MPF_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/htxn/mosaic
-
-LEXPAIR_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/QScign/LexPair
-
+CWL_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/cwl

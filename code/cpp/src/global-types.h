@@ -16,12 +16,26 @@
 typedef quint8 u1;
 typedef quint16 u2;
 typedef quint32 u4;
-typedef quint64 u8;
+typedef quint64 n8;
 
 typedef qint8 s1;
 typedef qint16 s2;
 typedef qint32 s4;
 typedef qint64 s8;
+
+typedef qreal r8;
+
+
+typedef quint8 un1;
+typedef quint16 un2;
+typedef quint32 un4;
+typedef quint64 nn8;
+
+typedef qint8 si1;
+typedef qint16 si2;
+typedef qint32 si4;
+typedef qint64 si8;
+
 
 typedef char i1;
 
@@ -76,10 +90,10 @@ struct Defaulting_To_Zero
 // }
 };
 
-typedef Defaulting_To_Zero<u1> z1;
-typedef Defaulting_To_Zero<u2> z2;
-typedef Defaulting_To_Zero<u4> z4;
-typedef Defaulting_To_Zero<u8> z8;
+//typedef Defaulting_To_Zero<u1> z1;
+//typedef Defaulting_To_Zero<u2> z2;
+//typedef Defaulting_To_Zero<u4> z4;
+//typedef Defaulting_To_Zero<u8> z8;
 
 
 //#define until(x) return ({x}).inv;

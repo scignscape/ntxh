@@ -120,7 +120,7 @@ public:
 		  throw(domain_error(errmsg + "No .pb file found!"));
 
 
-		GOOGLE_PROTOBUF_VERIFY_VERSION;
+		//?GOOGLE_PROTOBUF_VERIFY_VERSION;
 		ifstream input(pb_file.string(), ios::in | ios::binary);
 		if (!input) {
 			throw(invalid_argument("File not found.." ));

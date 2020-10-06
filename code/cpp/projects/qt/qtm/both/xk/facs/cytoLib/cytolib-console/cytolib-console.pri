@@ -8,7 +8,7 @@ PROJECT_NAME = cytolib-console
 
 include(../build-group.pri)
 
-QT -= gui
+QT += core widgets
 
 TEMPLATE = app
 
@@ -53,6 +53,8 @@ CONFIG += no_keywords
 
 DEFINES += USE_KANS
 
+#/home/nlevisrael/boost:/home/nlevisrael/gits/ss/ntxh/wip/ar/code/cpp/targets/qt/qt-multiple/targets-5-12-9-Desktop_Qt_5_12_9_GCC_64bit:/home/nlevisrael/mtr/newstuff/hdf5/install/lib/:/home/nlevisrael/mtr/test:/home/nlevisrael/mtr/newstuff/protobuf/install/lib:/home/nlevisrael/mtr/extras/gl/xcb/lib/x86_64-linux-gnu:/home/nlevisrael/Qt5.12.9/5.12.9/gcc_64/lib
+#/home/nlevisrael/gits/ss/ntxh/wip/ar/code/cpp/targets/qt/qt-multiple/targets-5-12-9-Desktop_Qt_5_12_9_GCC_64bit:/home/nlevisrael/mtr/newstuff/hdf5/install/lib/:/home/nlevisrael/mtr/newstuff/protobuf/install/lib:/home/nlevisrael/mtr/test:$LD_LIBRARY_PATH
 
 INCLUDEPATH += $$CWL_SRC_GROUP_DIR/cwl/include
 
@@ -75,6 +77,7 @@ include($$ROOT_DIR/../preferred/facs.pri)
 
 include($$ROOT_DIR/../preferred/proto.pri)
 
+include($$ROOT_DIR/../preferred/gui.pri)
 
 
 ## uncomment if these will be found.
