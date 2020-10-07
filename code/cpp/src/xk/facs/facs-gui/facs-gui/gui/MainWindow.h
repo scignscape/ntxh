@@ -165,6 +165,15 @@ public:
 
  // // Update gating results
  void dogating();
+
+ void update_pane_views(int xcol, int ycol,
+   signed int xsk = 0, signed int ysk = 0,
+   signed int* xsh = nullptr, signed int* ysh = nullptr);
+
+ void get_pane_views_mpf_data(int& xcol, int& ycol,
+   signed int& xsk, signed int& ysk,
+   signed int& xsh, signed int& ysh);
+
  
 /*
  static void main(String[] args)

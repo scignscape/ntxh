@@ -73,10 +73,7 @@ void ViewsMatrix::test_one_view()
 
 // // Update the layout of everything
 void ViewsMatrix::updateViews()
-{
-
- qDebug() << "I: " << QString("%1/%2").arg("DEFAULT_ICON_FOLDER").arg("name");
- 
+{ 
 /*
  //FacsanaduProject project=mw.project;
  LinkedList<Dataset> selds=mw.getSelectedDatasets();

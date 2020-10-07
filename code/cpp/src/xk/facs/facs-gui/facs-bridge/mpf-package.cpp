@@ -18,7 +18,8 @@
 USING_KANS(MPF)
 
 MPF_Package::MPF_Package(u4 number_of_dimensions)
- : number_of_dimensions_(number_of_dimensions), matrix_(nullptr)
+ : number_of_dimensions_(number_of_dimensions),
+   matrix_(nullptr), raw_data_length_(0)
 {
  dimension_shifts_ = QVector<s4>(number_of_dimensions_, 1);
  dimension_skews_ = QVector<s4>(number_of_dimensions_, 1);
@@ -41,9 +42,14 @@ void MPF_Package::save_to_file(QString path)
    return;
  QDataStream qds(&qf);
  qds << data_file_path_ << fcs_file_path_ << number_of_dimensions_ <<
-   dimension_shifts_ << dimension_skews_ << columns_;
- if(matrix_)
-   matrix_->save_to_datastream(qds);
+   dimension_shifts_ << dimension_skews_ << columns_ << raw_data_length_;
+
+ if(raw_data_length_ > 0)
+ {
+  if(matrix_)
+    matrix_->save_to_datastream(qds);
+ }
+
  qf.close();
 }
 
@@ -54,11 +60,14 @@ void MPF_Package::load_from_file(QString path)
    return;
  QDataStream qds(&qf);
  qds >> data_file_path_ >> fcs_file_path_  >> number_of_dimensions_ >>
-   dimension_shifts_ >> dimension_skews_ >> columns_;
+   dimension_shifts_ >> dimension_skews_ >> columns_ >> raw_data_length_;
 
- if(!matrix_)
-   matrix_ = new QVector_Matrix_R8;
- matrix_->load_from_datastream(qds);
+ if(raw_data_length_ > 0)
+ {
+  if(!matrix_)
+    matrix_ = new QVector_Matrix_R8;
+  matrix_->load_from_datastream(qds);
+ }
 
  qf.close();
 }

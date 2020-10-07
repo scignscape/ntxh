@@ -244,6 +244,34 @@ void MainWindow::load_selected_file(QString sf)
  paneViews_->reset_index_data();
 }
 
+void MainWindow::get_pane_views_mpf_data(int& xcol, int& ycol,
+  signed int& xsk, signed int& ysk,
+  signed int& xsh, signed int& ysh)
+{
+ paneViews_->get_mpf_data(xcol, ycol, xsk, ysk, xsh, ysh);
+}
+
+
+void MainWindow::update_pane_views(int xcol, int ycol,
+  signed int xsk, signed int ysk, signed int* xsh, signed int* ysh)
+{
+ mpf_package_->columns()[0] = xcol;
+ mpf_package_->columns()[1] = ycol;
+
+ if(xsk != 0)
+   mpf_package_->dimension_skews()[0] = xsk;
+ if(ysk != 0)
+   mpf_package_->dimension_skews()[1] = ysk;
+
+ if(xsh)
+   mpf_package_->dimension_shifts()[0] = *xsh;
+ if(ysh)
+   mpf_package_->dimension_shifts()[1] = *ysh;
+
+ paneViews_->test_one_view();
+}
+
+
 FacsanaduProject* MainWindow::getProject()
 {
  return project_;

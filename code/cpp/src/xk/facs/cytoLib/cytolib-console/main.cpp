@@ -86,10 +86,10 @@ int main(int argc, char* argv[])
 
  mcf.read_fcs();
 
- QVector_Matrix_R8* qvm = mcf.data_to_qvmatrix(); 
+//? QVector_Matrix_R8* qvm = mcf.data_to_qvmatrix();
  MPF_Package* mpf = new MPF_Package(2);
 
- mpf->set_matrix(qvm);
+//? mpf->set_matrix(qvm);
 
  mpf->dimension_skews()[0] = xskew;
  mpf->dimension_skews()[1] = yskew;

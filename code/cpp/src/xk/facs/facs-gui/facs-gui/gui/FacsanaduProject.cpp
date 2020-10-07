@@ -74,7 +74,7 @@ void FacsanaduProject::performGating(LinkedList<Dataset*> listDatasets)
 
 GatingResult* FacsanaduProject::check_get_gating_result(Dataset* ds)
 {
-
+ return nullptr;
 }
 
 
@@ -84,10 +84,40 @@ void FacsanaduProject::addDataset(QFile& path) // throws IOException
  cytolib::FCS_READ_DATA_PARAM dp;
  cytolib::FCS_READ_PARAM rp;
 
+ QString fcs_file_path;
+
 //?
  QFileInfo qfi(path);
- QString file_path = qfi.absoluteFilePath();
- cytolib::MemCytoFrame* mcf = new cytolib::MemCytoFrame(file_path.toStdString(), rp);
+
+ MPF_Package* mpf = new MPF_Package();
+
+ QString cs = qfi.completeSuffix();
+ if(cs == "fcs.mpf.txt")
+ {
+  // this means we're dealing with an mpf package ...
+  mpf->load_from_file(qfi.absoluteFilePath());
+  fcs_file_path = mpf->fcs_file_path();
+ }
+ else
+ {
+  fcs_file_path = qfi.absoluteFilePath();
+  mpf->set_fcs_file_path(fcs_file_path);
+  mpf->init_dimensions(2);
+
+  int xcol, ycol;
+  signed int xsk, ysk, xsh, ysh;
+
+  main_window_->get_pane_views_mpf_data(xcol, ycol, xsk, ysk, xsh, ysh);
+
+  mpf->dimension_skews()[0] = xsk;
+  mpf->dimension_skews()[1] = ysk;
+  mpf->dimension_shifts()[0] = xsh;
+  mpf->dimension_shifts()[1] = ysh;
+  mpf->columns()[0] = xcol;
+  mpf->columns()[1] = ycol;
+ }
+
+ cytolib::MemCytoFrame* mcf = new cytolib::MemCytoFrame(fcs_file_path.toStdString(), rp);
 
  mcf->read_fcs();
  QVector_Matrix_R8* qvm = mcf->data_to_qvmatrix();
@@ -104,21 +134,12 @@ void FacsanaduProject::addDataset(QFile& path) // throws IOException
 
 // QString file_name = qfi.absoluteFilePath() + ".mpf.txt";
 
- MPF_Package* mpf = new MPF_Package();
  main_window_->set_mpf_package(mpf);
 
 // QString file_name = qfi.absoluteFilePath() + ".mpf.txt";
 // mpf->load_from_file(file_name);
 
  mpf->set_matrix(qvm);
- mpf->set_fcs_file_path(file_path);
- mpf->init_dimensions(2);
- mpf->dimension_skews()[0] = 100;
- mpf->dimension_skews()[1] = 10;
- mpf->dimension_shifts()[0] = 25;
- mpf->dimension_shifts()[1] = 25;
- mpf->columns()[0] = 7;
- mpf->columns()[1] = 6;
 
  //qvm = mpf->matrix();
 

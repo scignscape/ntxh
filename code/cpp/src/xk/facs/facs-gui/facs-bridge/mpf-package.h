@@ -37,6 +37,8 @@ class MPF_Package
 
  QVector_Matrix_R8* matrix_;
 
+ u4 raw_data_length_;
+
 public:
 
  MPF_Package(u4 number_of_dimensions = 0);
@@ -49,6 +51,8 @@ public:
  ACCESSORS__RGET(QVector<s4> ,dimension_skews)
  ACCESSORS__RGET(QVector<u1> ,columns)
  ACCESSORS(QVector_Matrix_R8* ,matrix)
+ ACCESSORS(u4 ,raw_data_length)
+
 
  void save_to_file(QString path);
  void load_from_file(QString path);

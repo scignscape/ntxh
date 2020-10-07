@@ -40,6 +40,12 @@ class ViewsPane : public QWidget
  QSpinBox* y_index_spin_box_;
  QLabel* x_index_label_;
  QLabel* y_index_label_;
+
+ QLabel* shifts_skews_label_;
+ QLineEdit* shifts_skews_line_edit_;
+
+ QPushButton* indices_go_;
+
  QLabel* total_index_label_;
 
  ViewsMatrix* matrix_;
@@ -65,6 +71,10 @@ public:
 
  void test_one_view();
 
+ void get_mpf_data(int& xcol, int& ycol,
+   signed int& xsk, signed int& ysk,
+   signed int& xsh, signed int& ysh);
+
  void reset_index_data(Dataset* ds = nullptr);
 
  void updateViews();
@@ -72,6 +82,10 @@ public:
  void actionSetTool();
  void setTool(ViewToolChoice::Enum t);
  void invalidateCache();
+
+public Q_SLOTS:
+
+ void update_draw_with_new_indices();
 };
 
 #endif // __H

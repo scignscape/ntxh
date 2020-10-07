@@ -117,7 +117,8 @@ void DatasetListWidget::actionSelectAllDatasets()
 void DatasetListWidget::actionAddDatasets()
 {
 //
-    mw_->load_selected_file(DEMO_FCS_FOLDER "/Live_cells.fcs");
+ mw_->load_selected_file(DEMO_FCS_FOLDER "/Live_cells.fcs.mpf.txt");
+
 // updateDatasetList();
 
 //mw_->load_selected_file("");

@@ -30,7 +30,7 @@ byte[] ImgResource::readStreamIntoArray(InputStream is) throws IOException
 
 QPixmap* ImgResource::getIcon(QString name)
 {
- //qDebug() << "I: " << QString("%1/%2").arg(DEFAULT_ICON_FOLDER).arg(name);
+ //?qDebug() << "I: " << QString("%1/%2").arg(DEFAULT_ICON_FOLDER).arg(name);
 
  QPixmap* pm = new QPixmap(QString("%1/%2").arg(DEFAULT_ICON_FOLDER).arg(name));  
  return pm;

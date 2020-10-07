@@ -8,6 +8,8 @@
 
 #include "facs-bridge/qvector-matrix-r8.h"
 
+#include "qcytolib/include/cytolib/MemCytoFrame.hpp"
+
 #include <algorithm>
 
 #include <QDebug>
@@ -24,6 +26,7 @@ Dataset::Dataset(QVector_Matrix_R8* eventsFloat)
 
  numCompensated_ = 0;
 
+  // //  skip doing any compensation!
  if(eventsFloat_)
    eventsFloatCompensated_ = eventsFloat_->new_from_dimensions();
  else
@@ -118,14 +121,7 @@ QString Dataset::get_file_source_name()
 
 double Dataset::getAsFloatCompensated(int obs, int indexChan)
 {
-   qDebug() << "Ef: " << eventsFloat_->at(obs, indexChan);
-
- //?
  return (*eventsFloatCompensated_)[obs](indexChan);
-
- //return eventsFloat_->at(obs, indexChan);
-
- //return eventsFloat.get(obs)[indexChan];
 }
 
 

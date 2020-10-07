@@ -165,7 +165,7 @@ void test_render_xy(MainWindow* mw, ViewSettings* viewsettings, Dataset* ds,
    double chanX;
    double chanY;
 
-   qDebug() << "ind = " << ind;
+//   qDebug() << "ind = " << ind;
 // qDebug() << "test_render_xy ...";
 
 //  chanX=viewsettings->transformation.transform(ds, ind, viewsettings->indexX);
@@ -176,8 +176,8 @@ void test_render_xy(MainWindow* mw, ViewSettings* viewsettings, Dataset* ds,
    chanX = ds->getAsFloatCompensated(ind, indexX );
    chanY = ds->getAsFloatCompensated(ind, indexY );
 
-   qDebug() << "Chan X: " << chanX;
-   qDebug() << "Chan Y: " << chanY;
+//   qDebug() << "Chan X: " << chanX;
+//   qDebug() << "Chan Y: " << chanY;
   
 //?   int x = trans->mapFcsToScreenX(chanX);
 //?   int y = trans->mapFcsToScreenY(chanY);
@@ -188,7 +188,7 @@ void test_render_xy(MainWindow* mw, ViewSettings* viewsettings, Dataset* ds,
 
    //mapFcsToScreenX
 
-   qDebug() << "x = " << x << ", y = " << y;
+//   qDebug() << "x = " << x << ", y = " << y;
 
    int colid = 0; //gr->getGateIntIDForObs(ind);
    thecol.setRgb(colr[colid], colg[colid], colb[colid]); 

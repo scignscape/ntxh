@@ -9,13 +9,21 @@
 
 #include "MainWindow.h"
 
+#include "facs-bridge/mpf-package.h"
+
+USING_KANS(MPF)
+
 #include "data/Dataset.h"
 
 #include <QHBoxLayout>
 #include <QDebug>
+#include <QLineEdit>
+
 
 // package facsanadu.gui.panes;
 
+#define connect_this(x, y, z) connect(y, &x, \
+   this, &ViewsPane::z);
 
 // //
 
@@ -33,6 +41,8 @@ ViewsPane::ViewsPane(MainWindow* mw)
 
  total_index_label_ = new QLabel(tr("indices (of 0)"), this);
 
+ indices_go_ = new QPushButton("go");
+ indices_go_->setMaximumWidth(30);
 
  matrix_ = new ViewsMatrix(mw);
  bgroup_ = new QButtonGroup(this);
@@ -88,6 +98,17 @@ ViewsPane::ViewsPane(MainWindow* mw)
 
  laytop->addWidget(y_index_label_);
  laytop->addWidget(y_index_spin_box_);
+ laytop->addWidget(indices_go_);
+
+ shifts_skews_label_ = new QLabel("skews/shifts:", this);
+ shifts_skews_line_edit_ = new QLineEdit("50:50:500:500", this);
+ shifts_skews_line_edit_->setMinimumWidth(120);
+ laytop->addWidget(shifts_skews_label_);
+ laytop->addWidget(shifts_skews_line_edit_);
+
+
+ connect_this(QPushButton ::clicked ,indices_go_ ,update_draw_with_new_indices)
+
 
  laytop->addStretch();
 
@@ -121,6 +142,62 @@ void ViewsPane::reset_index_data(Dataset* ds)
  int nc = ds->getNumChannels();
  qDebug() << "nc = " << nc;
  total_index_label_->setText(tr("indices (of %1)").arg(nc));
+
+ x_index_spin_box_->setRange(1, nc);
+ y_index_spin_box_->setRange(1, nc);
+
+ // // here, for indices?
+
+ MPF_Package* mpf = mw_->mpf_package();
+ x_index_spin_box_->setValue(mpf->columns()[0]);
+ y_index_spin_box_->setValue(mpf->columns()[1]);
+
+ shifts_skews_line_edit_->setText(QString("%1:%2:%3:%4")
+   .arg(mpf->dimension_skews()[0]).arg(mpf->dimension_skews()[1])
+   .arg(mpf->dimension_shifts()[0]).arg(mpf->dimension_shifts()[1]));
+}
+
+void ViewsPane::get_mpf_data(int& xcol, int& ycol,
+  signed int& xsk, signed int& ysk,
+  signed int& xsh, signed int& ysh)
+{
+ xcol = x_index_spin_box_->value();
+ ycol = y_index_spin_box_->value();
+
+ QStringList qsl = shifts_skews_line_edit_->text().split(':');
+
+ signed int skews[2];
+ signed int shifts[2];
+
+ int i = 0;
+ for(QString qs : qsl)
+ {
+  if(i < 2)
+    skews[i] = qs.toInt();
+  else
+    shifts[i - 2] = qs.toUInt();
+  ++i;
+ }
+
+ xsk = skews[0];
+ ysk = skews[1];
+
+ xsh = shifts[0];
+ ysh = shifts[1];
+}
+
+
+void ViewsPane::update_draw_with_new_indices()
+{
+ int xcol, ycol;
+ signed int xsk, ysk, xsh, ysh;
+
+ get_mpf_data(xcol, ycol, xsk, ysk, xsh, ysh);
+
+ mw_->update_pane_views(xcol, ycol, xsk, ysk,
+   &xsh, &ysh);
+
+ //qDebug() << "uuu " << xv << ", " << yv;
 }
 
 void ViewsPane::test_one_view()
