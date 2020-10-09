@@ -39,6 +39,11 @@ $cc: %2
 )").arg(db_root_folder_).arg(Config.Flags);
 }
 
+void DW_Instance::init()
+{
+
+}
+
 void DW_Instance::init_from_ntxh(QString fld, u1 code)
 {
  db_root_folder_ = fld;

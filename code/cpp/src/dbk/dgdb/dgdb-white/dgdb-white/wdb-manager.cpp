@@ -19,7 +19,15 @@
 //?#include "phaong/phaong.h"
 //?#include "phaong/phaong-types.h"
 
+//?
 #include "ntxh-parser/ntxh-document.h"
+
+USING_KANS(HGDMCore)
+
+//KA::HGDMCore::NTXH_Document::NTXH_Document(QString path)
+// : graph_(nullptr), grammar_(nullptr)
+//{
+//}
 
 
 USING_KANS(TextIO)
@@ -89,6 +97,8 @@ void WDB_Manager::init_from_ntxh()
  NTXH_Document doc(db_root_folder_ + "/" + "manager.ntxh");
  doc.parse();
 
+#ifdef HIDE
+
  typedef NTXH_Graph::hypernode_type hypernode_type;
 
  QVector<hypernode_type*>& hns = doc.top_level_hypernodes();
@@ -125,7 +135,7 @@ void WDB_Manager::init_from_ntxh()
   qDebug() << "Database Name: " << name;
   qDebug() << "Database Datetimes: " << dts;
  }
- 
+#endif //def HIDE 
 }
 
 

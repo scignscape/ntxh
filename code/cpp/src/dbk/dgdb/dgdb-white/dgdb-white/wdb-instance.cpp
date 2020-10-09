@@ -7,7 +7,9 @@
 
 #include "wdb-instance.h"
 
+extern "C" {
 #include "whitedb/_whitedb.h"
+}
 
 
 USING_KANS(DGDB)
@@ -23,9 +25,13 @@ WDB_Instance::WDB_Instance(void* w, QString n)
 
 void* WDB_Instance::new_wg_record(u4 col1, QString col2)
 {
- wg_create_record(white_, 3);
+ void* result = wg_create_record(white_, 3);
  wg_int c1val = wg_encode_int(white_, col1);
  wg_int c2val = wg_encode_str(white_, col2.toLatin1().data(), NULL);
+
+ wg_set_field(white_, result, 0, c1val);
+ wg_set_field(white_, result, 1, c2val);
+ return result;
 }
 
 

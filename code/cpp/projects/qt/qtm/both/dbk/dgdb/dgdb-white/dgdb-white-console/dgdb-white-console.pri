@@ -15,21 +15,22 @@ include($$ROOT_DIR/../preferred/sysr.pri)
 
 #include($$ROOT_DIR/../preferred/sysr-c.pri)
 
+DEFINES += DEFAULT_DEV_DGDB_FOLDER=\\\"$$ROOT_DIR/dev/consoles/dgdb\\\"
+
+DEFINES += USE_KANS
 
 
-INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR
+INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR $$WHITEDB_SRC_GROUP_DIR
 
 
 HEADERS += \
-#  $$SRC_GROUP_DIR/whitedb/_whitedb.h
-
 
 
 SOURCES += \
   $$SRC_DIR/main.cpp \
 
-#$$SRC_GROUP_DIR/whitedb/_whitedb.c
 
 
-LIBS += -L$$TARGETSDIR -lwhitedb
+LIBS += -L$$TARGETSDIR -lwhitedb -ldgdb-white \
+  -lntxh  -lntxh-parser
 
