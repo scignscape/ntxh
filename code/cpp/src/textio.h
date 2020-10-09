@@ -40,7 +40,7 @@ inline QString make_folder_from_file_name(QString path, QString folder)
   qDebug() << "Folder already exists: " << qd.path();
   return qd.path();
  }
- qDebug() << "Cpuld not make folder ...";
+ qDebug() << "Could not make folder ...";
  return {};
 }
 
@@ -89,7 +89,7 @@ inline void load_file(QString path, std::function<int(QString&)> fn)
  if (!infile.open(QIODevice::ReadOnly | QIODevice::Text))
    return;
  QTextStream instream(&infile);
- u8 i = 0;
+ n8 i = 0;
  QString line;
  while(i == 0) 
  {

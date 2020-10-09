@@ -116,6 +116,7 @@ PHAONIR_SRC_GROUP_DIR = $$SRC_ROOT_DIR/sk/phaonir/PhaonIR
 PHAONLIB_SRC_GROUP_DIR = $$SRC_ROOT_DIR/sk/phaonir/PhaonLib
 PHR_RUNTIME_SRC_GROUP_DIR = $$SRC_ROOT_DIR/sk/phaonir/phr-runtime
 TESTS_PHR_SRC_GROUP_DIR = $$SRC_ROOT_DIR/sk/phaonir/tests-phr
+WHITEDB_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/whitedb/whitedb
 
 QUA_ZIP_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/quazip
 
