@@ -46,6 +46,11 @@
 #include <iostream>
 #include <sstream>
 
+ // nc ...
+#include <unistd.h>
+#include <fcntl.h>
+
+
 using namespace tiledb::common;
 
 namespace tiledb {

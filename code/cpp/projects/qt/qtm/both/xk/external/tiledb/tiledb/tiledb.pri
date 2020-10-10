@@ -246,3 +246,27 @@ SOURCES += \
     $$SRC_DIR/sm/tile/generic_tile_io.cc \
     $$SRC_DIR/sm/tile/tile.cc
 
+
+SOURCES += \
+    $$SRC_DIR/sm/crypto/crypto_openssl.cc \
+    $$SRC_DIR/sm/global_state/openssl_state.cc \
+    $$SRC_DIR/sm/filesystem/posix.cc \
+    $$SRC_DIR/sm/compressors/lz4_compressor.cc \
+    $$SRC_DIR/sm/compressors/dd_compressor.cc \
+    $$SRC_DIR/sm/compressors/rle_compressor.cc \
+    $$SRC_DIR/sm/compressors/zstd_compressor.cc \
+    $$SRC_DIR/sm/compressors/bzip_compressor.cc \
+    $$SRC_DIR/sm/compressors/gzip_compressor.cc \
+
+#    $$SRC_DIR/common/logger.cc 
+
+
+ 
+#?   $$SRC_DIR/sm/filter/bitshuffle_filter.cc
+
+
+ #  maybe should go in a preferred ...
+#LIBS += -lopenssl
+
+
+

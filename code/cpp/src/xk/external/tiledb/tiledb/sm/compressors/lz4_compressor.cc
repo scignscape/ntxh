@@ -36,8 +36,10 @@
 #include "tiledb/sm/buffer/const_buffer.h"
 #include "tiledb/sm/buffer/preallocated_buffer.h"
 
+ // // nc ...
 #include <lz4.h>
 #include <limits>
+#include <cmath>
 
 using namespace tiledb::common;
 

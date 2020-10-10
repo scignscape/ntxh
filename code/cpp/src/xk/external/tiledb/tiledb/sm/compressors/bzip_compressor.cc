@@ -37,6 +37,7 @@
 #include "tiledb/sm/buffer/preallocated_buffer.h"
 
 #include <bzlib.h>
+#include <cmath>
 
 using namespace tiledb::common;
 

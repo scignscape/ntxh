@@ -49,7 +49,7 @@ Logger::Logger() {
 #else
  //   logger_ = spdlog::stdout_color_mt("tiledb");
 #endif
-  }
+  //}
   // Set the default logging format
   // [Year-month-day 24hr-min-second.microsecond]
   // [logger]
@@ -67,18 +67,18 @@ Logger::Logger() {
 #endif
 }
 
-//Logger::~Logger() {
+Logger::~Logger() {
  // spdlog::drop("tiledb");
-//}
+}
 
 /* ********************************* */
 /*              GLOBAL               */
 /* ********************************* */
 
-//Logger& global_logger() {
-//  static Logger l;
-//  return l;//
-//}
+Logger& global_logger() {
+  static Logger l;
+  return l;//
+}
 
 }  // namespace common
-//?}  // namespace tiledb
+}  // namespace tiledb

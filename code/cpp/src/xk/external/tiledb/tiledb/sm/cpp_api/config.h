@@ -36,6 +36,7 @@
 #define TILEDB_CPP_API_CONFIG_H
 
 #include "tiledb.h"
+
 #include "utils.h"
 
 #include <memory>

@@ -39,6 +39,9 @@
 #include <zstd.h>
 #include <iostream>
 
+// nc
+#include <memory>
+
 using namespace tiledb::common;
 
 namespace tiledb {

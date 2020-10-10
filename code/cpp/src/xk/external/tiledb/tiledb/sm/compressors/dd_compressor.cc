@@ -37,6 +37,8 @@
 #include "tiledb/sm/buffer/preallocated_buffer.h"
 #include "tiledb/sm/enums/datatype.h"
 
+#include <limits>
+
 /* ****************************** */
 /*             MACROS             */
 /* ****************************** */

@@ -45,6 +45,8 @@
 #include <openssl/rand.h>
 #include <openssl/sha.h>
 
+#include <limits>
+
 using namespace tiledb::common;
 
 namespace tiledb {
@@ -57,7 +59,7 @@ Status OpenSSL::get_random_bytes(unsigned num_bytes, Buffer* output) {
   int rc = RAND_bytes((unsigned char*)output->cur_data(), num_bytes);
   if (rc < 1) {
     char err_msg[256];
-    ERR_error_string_n(ERR_get_error(), err_msg, sizeof(err_msg));
+     //? ERR_error_string_n(ERR_get_error(), err_msg, sizeof(err_msg));
     return Status::EncryptionError(
         "Cannot generate random bytes with OpenSSL: " + std::string(err_msg));
   }

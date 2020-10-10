@@ -80,9 +80,9 @@ Filter* Filter::create(FilterType type) {
     case FilterType::FILTER_BIT_WIDTH_REDUCTION:
       return new (std::nothrow) BitWidthReductionFilter();
     case FilterType::FILTER_BITSHUFFLE:
-      return new (std::nothrow) BitshuffleFilter();
+      return nullptr; //? new (std::nothrow) BitshuffleFilter();
     case FilterType::FILTER_BYTESHUFFLE:
-      return new (std::nothrow) ByteshuffleFilter();
+      return nullptr; //? new (std::nothrow) ByteshuffleFilter();
     case FilterType::FILTER_POSITIVE_DELTA:
       return new (std::nothrow) PositiveDeltaFilter();
     case FilterType::INTERNAL_FILTER_AES_256_GCM:
