@@ -65,15 +65,18 @@ u4 DW_Instance::new_base_record_id()
 void* DW_Instance::new_wg_index_label_record(QString label)
 {
  u4 id = new_index_label_id();
- void* result = wdb_instance_->new_wg_record(id, label);
+
+  // // 3 columns?
+ void* result = wdb_instance_->new_wg_record(3, id, label);
  return result;
 }
 
 void* DW_Instance::new_wg_hypernode_record(QByteArray& qba)
 {
  u4 base_id = new_base_record_id();
-
- 
+ base_id <<= 13;
+ void* result = wdb_instance_->new_wg_record(5, base_id);
+ return result;
 }
 
 void* DW_Instance::new_wg_outedges_record(QByteArray& qba)

@@ -41,7 +41,9 @@ public:
  void set_creation_datetime(QDateTime dtm);
  void set_creation_datetime();
 
- void* new_wg_record(u4 col1, QString col2);
+ void* new_wg_record(u4 number_of_columns, u4 col1, QString col2);
+ void* new_wg_record(u4 number_of_columns);
+ void* new_wg_record(u4 number_of_columns, u4 col1);
 
 
  static QString static_to_ntxh(); 

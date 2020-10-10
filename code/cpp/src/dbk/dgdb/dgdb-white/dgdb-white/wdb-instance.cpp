@@ -22,10 +22,24 @@ WDB_Instance::WDB_Instance(void* w, QString n)
 
 }
 
-
-void* WDB_Instance::new_wg_record(u4 col1, QString col2)
+void* WDB_Instance::new_wg_record(u4 number_of_columns)
 {
- void* result = wg_create_record(white_, 3);
+ void* result = wg_create_record(white_, number_of_columns);
+ return result;
+}
+
+void* WDB_Instance::new_wg_record(u4 number_of_columns, u4 col1)
+{
+ void* result = wg_create_record(white_, number_of_columns);
+ wg_int c1val = wg_encode_int(white_, col1);
+
+ wg_set_field(white_, result, 0, c1val);
+ return result;
+}
+
+void* WDB_Instance::new_wg_record(u4 number_of_columns, u4 col1, QString col2)
+{
+ void* result = wg_create_record(white_, number_of_columns);
  wg_int c1val = wg_encode_int(white_, col1);
  wg_int c2val = wg_encode_str(white_, col2.toLatin1().data(), NULL);
 
