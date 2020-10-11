@@ -9,6 +9,8 @@
 #include "wdb-instance.h"
 #include "wdb-manager.h"
 
+#include <QDebug>
+
 
 
 USING_KANS(DGDB)
@@ -42,10 +44,15 @@ $cc: %2
 
 void DW_Instance::init()
 { 
+
+ // // temporary for testing ...
+ // Config.flags.local_scratch_mode = true;
+  
+
  wdb_manager_ = new WDB_Manager(this);
  wdb_manager_->set_db_root_folder(db_root_folder_);
  wdb_manager_->init_from_ntxh();
- wdb_manager_->get_current_white();
+ wdb_instance_ = wdb_manager_->get_current_white();
 }
 
 void DW_Instance::init_from_ntxh(QString fld, u1 code)

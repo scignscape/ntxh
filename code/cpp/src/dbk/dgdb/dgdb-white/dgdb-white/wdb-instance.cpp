@@ -32,9 +32,7 @@ void* WDB_Instance::new_wg_record(u4 number_of_columns)
 
 void* WDB_Instance::new_wg_record(u4 number_of_columns, u4 col1)
 {
- qDebug() << "nc: " << number_of_columns << ", col1: " << col1;
  void* result = wg_create_record(white_, number_of_columns);
-
  wg_int c1val = wg_encode_int(white_, col1);
  wg_set_field(white_, result, 0, c1val);
 

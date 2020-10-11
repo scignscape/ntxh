@@ -97,7 +97,7 @@ void WDB_Manager::init_from_ntxh()
  NTXH_Document doc(db_root_folder_ + "/" + "manager.ntxh");
  doc.parse();
 
-//#ifdef HIDE
+#ifdef HIDE
  typedef NTXH_Graph::hypernode_type hypernode_type;
 
  QVector<hypernode_type*>& hns = doc.top_level_hypernodes();
@@ -134,7 +134,7 @@ void WDB_Manager::init_from_ntxh()
   qDebug() << "Database Name: " << name;
   qDebug() << "Database Datetimes: " << dts;
  }
-//#endif //def HIDE 
+#endif //def HIDE 
 }
 
 
@@ -148,10 +148,16 @@ WDB_Instance* WDB_Manager::new_white(u2 num_code, n8 mem, QString name)
  if(mem == 0)
    mem = default_mem_size_;
 
- void* db;
+ void* db = nullptr;
 
  if(dw_instance_->Config.flags.local_scratch_mode)
-   db = wg_attach_local_database(mem); 
+ {
+  qDebug() << "Using local database ...";
+  db = wg_attach_local_database(mem); 
+
+  if(!db)
+    qDebug() << "Failed to attach local database ...";
+ }
  else if(dw_instance_->Config.flags.scratch_mode)
  {
   void* _db = wg_attach_existing_database(
@@ -169,6 +175,9 @@ WDB_Instance* WDB_Manager::new_white(u2 num_code, n8 mem, QString name)
  }
  else
    db = wg_attach_database(QString::number(num_code).toLatin1().data(), mem);
+
+ if(!db)
+   return nullptr;
 
  WDB_Instance* result = new WDB_Instance(db, name);
  result->set_creation_datetime();

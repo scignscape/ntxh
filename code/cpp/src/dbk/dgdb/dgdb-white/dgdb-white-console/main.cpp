@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
  DW_Instance* dw = DGEnvironment(
    DEFAULT_DEV_DGDB_FOLDER "/instances/t1");
 
- dw->Config.flags.scratch_mode = true;
+ dw->Config.flags.local_scratch_mode = true;
  dw->init();
  
 
