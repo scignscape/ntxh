@@ -15,8 +15,8 @@
  
 #include "accessors.h"
 
-typedef qreal r8;
-typedef quint32 u4;
+#include "global-types.h"
+
 
 class QVector_Matrix_R8
 {
@@ -132,7 +132,9 @@ public:
 
  QVector_Matrix_R8* new_from_dimensions();
 
- QVector_Matrix_R8* to_percentiles(u4 max = 100);
+ QVector_Matrix_R8* percentile_breakdown(u4 max = 100);
+ QVector_Matrix_R8* percentile_rescale(u4 max = 100);
+
  void fill(r8 value, r8 default_value);
  void fill(r8 value = 0)
  {
@@ -140,6 +142,31 @@ public:
  }
 
  void get_row(u4 r, QVector<r8>& row);
+
+ template<typename T>
+ void _show(T& tt, u1 digits = 8)
+ {
+  for(u4 r = 1; r <= n_rows(); ++r) 
+  {
+   for(u4 c = 1; c <= n_cols(); ++c) 
+   {
+    tt << QString("%1").arg(value(r, c), -digits);
+   }
+   tt << '\n'; 
+  }
+ }
+
+ template<typename T>
+ void show(T& tt, u1 digits = 8)
+ {
+  _show(tt, digits); 
+ }
+
+ template<typename T>
+ void show(T tt, u1 digits = 8)
+ {
+  _show(tt, digits); 
+ }
 
  r8 get_minimum_in_column(u4 c);
  r8 get_maximum_in_column(u4 c);
@@ -255,6 +282,26 @@ public:
 
  void multiply(const QVector<r8>& vec, QVector<r8>& result);
  void merge_row(const QVector<r8>& vec, u4 row);
+
+ void patterned_fill_row(u4 row)
+ {
+  QVector<r8> vec = QVector<r8>(n_cols());
+  u4 uu = 1;
+  for(r8& rr: vec)
+  {
+   rr = (10 * row) + uu;
+   ++uu;
+  }
+  merge_row(vec, row);
+ }
+
+ void patterned_fill()
+ {
+  for(u4 r = 1; r <= n_rows(); ++r)
+  {
+   patterned_fill_row(r);
+  }
+ }
 
  const r8& at(u4 r, u4 c);
  r8* get(u4 r, u4 c);

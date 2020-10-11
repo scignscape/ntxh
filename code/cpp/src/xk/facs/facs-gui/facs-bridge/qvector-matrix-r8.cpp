@@ -63,27 +63,53 @@ void QVector_Matrix_R8::get_extrema(QPair<r8, r8>& result)
 }
 
 
-QVector_Matrix_R8* QVector_Matrix_R8::to_percentiles(u4 max)
+QVector_Matrix_R8* QVector_Matrix_R8::percentile_breakdown(u4 max)
 {
  QPair<r8, r8> extrema;
  get_extrema(extrema);
  
- QVector_Matrix_R8* result = new QVector_Matrix_R8(n_rows());
- result->set_n_cols(max + 1);
+ QVector_Matrix_R8* result = new QVector_Matrix_R8;
+ result->set_n_rows(max + 1);
+ result->set_n_cols(n_cols());
+ result->fill();
+
   // // for each column, aggregate all entries into percentiles.
    //   Currently not optimized for data access at all ...
-
  for(u4 c = 1; c <= n_cols(); ++c)
  {
   for(u4 r = 1; r <= n_rows(); ++r)
   {
    r8 rr = get_at(r, c);
-   u4 percentile = (rr - extrema.first) / (extrema.second - extrema.first);
-   percentile *= max;
-   ;  
+   r8 _percentile = (rr - extrema.first) / (extrema.second - extrema.first);
+   u4 percentile = (_percentile * max) + 1;
+   ++(*result)[percentile][c];
   }
- } 
+ }
+ return result;
 }
+
+QVector_Matrix_R8* QVector_Matrix_R8::percentile_rescale(u4 max)
+{
+ QPair<r8, r8> extrema;
+ get_extrema(extrema);
+ 
+ QVector_Matrix_R8* result = new_from_dimensions();
+
+  // // for each column, aggregate all entries into percentiles.
+   //   Currently not optimized for data access at all ...
+ for(u4 c = 1; c <= n_cols(); ++c)
+ {
+  for(u4 r = 1; r <= n_rows(); ++r)
+  {
+   r8 rr = get_at(r, c);
+   r8 _percentile = (rr - extrema.first) / (extrema.second - extrema.first);
+   u4 percentile = (_percentile * max) + 1;
+   (*result)[r][c] = percentile;
+  }
+ }
+ return result;
+}
+
 
 
 void QVector_Matrix_R8::merge_row(const QVector<r8>& vec, u4 row)
