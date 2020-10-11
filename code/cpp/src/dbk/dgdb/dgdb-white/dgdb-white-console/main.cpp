@@ -12,6 +12,9 @@
 #include <QDate>
 
 #include "dgdb-white/dw-instance.h"
+#include "dgdb-white/dw-record.h"
+
+
 #include "dgdb-white/wdb-manager.h"
 #include "dgdb-white/dgenvironment.h"
 
@@ -33,6 +36,11 @@ int main(int argc, char* argv[])
  
 
  qDebug() << "DB root folder: " << dw->db_root_folder();
+
+ QString test_payload = "Test Payload";
+ QByteArray qba = test_payload.toLatin1();
+ DW_Record dwr = dw->new_wg_hypernode_record(qba);
+ qDebug() << "id: " << dwr.id();
 }
 
 

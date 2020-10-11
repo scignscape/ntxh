@@ -31,6 +31,7 @@ HEADERS += \
   $$SRC_DIR/wdb-manager.h  \
   $$SRC_DIR/wdb-instance.h  \
   $$SRC_DIR/dw-instance.h  \
+  $$SRC_DIR/dw-record.h  \
   $$SRC_DIR/dgenvironment.h  \
 
 
@@ -39,6 +40,7 @@ SOURCES += \
   $$SRC_DIR/wdb-manager.cpp  \
   $$SRC_DIR/wdb-instance.cpp  \
   $$SRC_DIR/dw-instance.cpp  \
+  $$SRC_DIR/dw-record.cpp  \
   $$SRC_DIR/dgenvironment.cpp  \
 
 

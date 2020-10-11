@@ -14,6 +14,8 @@
 
 #include "accessors.h"
 
+#include "dw-record.h"
+
 #include "global-types.h"
 
 #include "kans.h"
@@ -24,12 +26,13 @@
 KANS_(DGDB)
 
 class WDB_Instance;
-
+class WDB_Manager;
 
 class DW_Instance
 {
  QString db_root_folder_;
  WDB_Instance* wdb_instance_;
+ WDB_Manager* wdb_manager_;
 
  u4 startup_record_count_; 
  u4 current_record_count_;
@@ -68,11 +71,11 @@ public:
  void init_from_ntxh(QString fld, u1 code);
 
 
- void* new_wg_hypernode_record(QByteArray& qba);
- void* new_wg_outedges_record(QByteArray& qba);
- void* new_wg_inedges_record(QByteArray& qba);
- void* new_wg_findable_field_record(QByteArray& qba);
- void* new_wg_index_label_record(QString label);
+ DW_Record new_wg_hypernode_record(const QByteArray& qba);
+ DW_Record new_wg_outedges_record(const QByteArray& qba);
+ DW_Record new_wg_inedges_record(const QByteArray& qba);
+ DW_Record new_wg_findable_field_record(const QByteArray& qba);
+ DW_Record new_wg_index_label_record(QString label);
 
 };
 
