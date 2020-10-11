@@ -14,6 +14,8 @@
 #include <QtGlobal>
 #include <QDebug>
 
+#include <limits>
+
 
 QVector_Matrix_R8::QVector_Matrix_R8(u4 r, u4 c, r8 defaultv)
  : n_rows_(r << 1), n_cols_(c << 1), 
@@ -22,6 +24,67 @@ QVector_Matrix_R8::QVector_Matrix_R8(u4 r, u4 c, r8 defaultv)
  if(elems_)
    (*elems_)[0] = defaultv;
 }
+
+void QVector_Matrix_R8::fill(r8 value, r8 default_value)
+{
+ if(elems_)
+ {
+  u4 s = elems_->size();
+  elems_->resize(total_size() + 1);
+  if(value != 0)
+  {
+   for(u4 i = s; i < elems_->size(); ++i)
+   {
+    (*elems_)[s] = value;
+   }
+  }
+ }
+ else
+ {
+  elems_ = new QVector<r8>(total_size() + 1, value);
+  (*elems_)[0] = default_value;
+ } 
+}
+
+void QVector_Matrix_R8::get_extrema(QPair<r8, r8>& result)
+{
+ QVector<QPair<r8, r8>> extrema;
+ if(is_rmajor())
+   get_row_extrema(extrema);
+ else 
+   get_column_extrema(extrema);
+ 
+ result = std::accumulate(extrema.begin(), extrema.end(),
+   QPair<r8, r8> {std::numeric_limits<r8>::max(), std::numeric_limits<r8>::min()},
+   [](QPair<r8, r8> pr1, QPair<r8, r8> pr2) -> QPair<r8, r8>
+ {
+  return {qMin(pr1.first, pr2.first), qMax(pr2.second, pr2.second)};
+ });
+}
+
+
+QVector_Matrix_R8* QVector_Matrix_R8::to_percentiles(u4 max)
+{
+ QPair<r8, r8> extrema;
+ get_extrema(extrema);
+ 
+ QVector_Matrix_R8* result = new QVector_Matrix_R8(n_rows());
+ result->set_n_cols(max + 1);
+  // // for each column, aggregate all entries into percentiles.
+   //   Currently not optimized for data access at all ...
+
+ for(u4 c = 1; c <= n_cols(); ++c)
+ {
+  for(u4 r = 1; r <= n_rows(); ++r)
+  {
+   r8 rr = get_at(r, c);
+   u4 percentile = (rr - extrema.first) / (extrema.second - extrema.first);
+   percentile *= max;
+   ;  
+  }
+ } 
+}
+
 
 void QVector_Matrix_R8::merge_row(const QVector<r8>& vec, u4 row)
 {

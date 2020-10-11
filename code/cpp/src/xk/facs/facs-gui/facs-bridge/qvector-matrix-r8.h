@@ -132,10 +132,19 @@ public:
 
  QVector_Matrix_R8* new_from_dimensions();
 
+ QVector_Matrix_R8* to_percentiles(u4 max = 100);
+ void fill(r8 value, r8 default_value);
+ void fill(r8 value = 0)
+ {
+  fill(value, value);
+ }
+
  void get_row(u4 r, QVector<r8>& row);
 
  r8 get_minimum_in_column(u4 c);
  r8 get_maximum_in_column(u4 c);
+
+ void get_extrema(QPair<r8, r8>& result);
 
  void get_column_extrema(QVector<QPair<r8, r8>>& result);
  void get_row_extrema(QVector<QPair<r8, r8>>& result);
