@@ -77,6 +77,8 @@ public:
  DW_Record new_wg_findable_field_record(const QByteArray& qba);
  DW_Record new_wg_index_label_record(QString label);
 
+ void get_hypernode_payload(u4 id, QByteArray& qba);
+
 };
 
 

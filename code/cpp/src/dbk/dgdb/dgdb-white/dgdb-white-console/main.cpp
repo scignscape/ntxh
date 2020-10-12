@@ -41,6 +41,12 @@ int main(int argc, char* argv[])
  QByteArray qba = test_payload.toLatin1();
  DW_Record dwr = dw->new_wg_hypernode_record(qba);
  qDebug() << "id: " << dwr.id();
+
+ QByteArray qba1;
+ dw->get_hypernode_payload(dwr.id(), qba1);
+
+ qDebug() << "ok: " << qba1; 
+
 }
 
 

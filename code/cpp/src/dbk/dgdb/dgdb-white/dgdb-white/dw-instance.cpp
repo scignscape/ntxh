@@ -26,6 +26,14 @@ DW_Instance::DW_Instance()
 
 }
 
+void DW_Instance::get_hypernode_payload(u4 id, QByteArray& qba)
+{
+ void* rec = wdb_instance_->get_record_by_id(id);
+ if(rec)
+ {
+  wdb_instance_->get_record_field(rec, 1, qba);
+ }
+}
 
 void DW_Instance::to_ntxh(QString& ty, QString& result)
 {
@@ -87,6 +95,9 @@ DW_Record DW_Instance::new_wg_hypernode_record(const QByteArray& qba)
  u4 base_id = new_base_record_id();
  base_id <<= 13;
  void* result = wdb_instance_->new_wg_record(5, base_id);
+ 
+ wdb_instance_->set_record_field(result, 1, qba);
+
  return {base_id, result};
 }
 

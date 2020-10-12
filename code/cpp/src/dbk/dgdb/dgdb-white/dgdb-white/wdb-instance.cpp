@@ -30,6 +30,19 @@ void* WDB_Instance::new_wg_record(u4 number_of_columns)
  return result;
 }
 
+void* WDB_Instance::get_record_by_id(u4 id)
+{
+ return wg_find_record_int(white_, 0, WG_COND_EQUAL, id, NULL);
+}
+
+void WDB_Instance::get_record_field(void* rec, u4 field_number, QByteArray& qba)
+{
+ wg_int data = wg_get_field(white_, rec, field_number);
+ wg_int len = wg_decode_blob_len(white_, data);
+ qba.resize(len);
+ wg_int ok = wg_decode_blob_copy(white_, data, qba.data(), len);
+}
+
 void* WDB_Instance::new_wg_record(u4 number_of_columns, u4 col1)
 {
  void* result = wg_create_record(white_, number_of_columns);
@@ -37,6 +50,12 @@ void* WDB_Instance::new_wg_record(u4 number_of_columns, u4 col1)
  wg_set_field(white_, result, 0, c1val);
 
  return result;
+}
+
+void WDB_Instance::set_record_field(void* rec, u4 field_number, const QByteArray& qba)
+{
+ wg_int enc = wg_encode_blob(white_, const_cast<char*>(qba.data()), NULL, qba.length());
+ wg_set_field(white_, rec, field_number, enc);
 }
 
 void* WDB_Instance::new_wg_record(u4 number_of_columns, u4 col1, QString col2)
