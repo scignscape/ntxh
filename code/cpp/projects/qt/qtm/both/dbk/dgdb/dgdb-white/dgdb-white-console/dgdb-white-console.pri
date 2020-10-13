@@ -24,10 +24,13 @@ INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR $$WHITEDB_SRC_GROUP_DIR
 
 
 HEADERS += \
+  $$SRC_DIR/demo-class.h \
+
 
 
 SOURCES += \
   $$SRC_DIR/main.cpp \
+  $$SRC_DIR/demo-class.cpp \
 
 
 

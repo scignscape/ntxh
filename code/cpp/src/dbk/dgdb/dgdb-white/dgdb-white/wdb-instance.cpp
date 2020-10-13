@@ -186,11 +186,170 @@ wg_int _rec_encode(void* wh, DW_Stage_Value& dwsv)
  } 
 }
 
-void* WDB_Instance::new_wg_record(QMap<u4, DW_Stage_Value>& svs)
+void* new_wg_record(u4 id, QMap<u4, DW_Stage_Value>& svs)
+{
+ return new_wg_record(0, svs);
+}
+
+wg_int _wg_encode_query_param(void* wh, DW_Stage_Value& dwsv)
+{
+ u1 et = 0;
+ u1 ec = dwsv.get_prelim_encoding_code();
+ switch(ec)
+ {
+ case 0:  // same as char ...
+  et = WG_CHARTYPE; break;
+ case 1:  // uint; same as int in this context ...
+  et = WG_INTTYPE; break;
+ case 2:  // qstring
+  return 0; // what here? et = dwsv.get_dw_encoding_type();
+
+ default:
+  et = dwsv.get_dw_encoding_type();
+ }
+
+ switch(et)
+ {
+ case WG_NULLTYPE: 
+  {
+   wg_int wi = wg_encode_query_param_null(wh, nullptr);
+   return wi;
+  }
+  break; 
+
+ case WG_RECORDTYPE: 
+  {
+   wg_int wi = wg_encode_query_param_record(wh, (void*) dwsv.data());
+   return wi;
+  }
+  break; 
+
+ case WG_INTTYPE:
+  {
+   wg_int wi = wg_encode_query_param_int(wh, dwsv.data());
+   return wi;
+  }
+  break;
+
+ case WG_DOUBLETYPE:
+  {
+   double* dbl = (double*) dwsv.data();
+   wg_int wi = wg_encode_query_param_double(wh, *dbl);
+   dwsv.cleanup();
+   return wi;
+  }
+  break;
+
+ case WG_STRTYPE:
+  {
+   char* cs = (char*) dwsv.data();
+   wg_int wi = wg_encode_query_param_str(wh, cs, nullptr);
+   dwsv.cleanup();
+   return wi;
+  }
+  break;
+
+ case WG_XMLLITERALTYPE:
+  {
+   // // not implemented
+   return 0;
+  }
+  break;
+
+ case WG_URITYPE:
+  {
+   // // currently not implemented
+   return 0;
+  }
+  break;
+
+ case WG_BLOBTYPE:
+  {
+   // // not implemented
+   return 0;
+  }
+  break;
+
+ case WG_CHARTYPE:
+  {
+   wg_int wi = wg_encode_char(wh, dwsv.data());
+   return wi;
+  }
+  break;
+
+ case WG_FIXPOINTTYPE:
+  {
+   u4 rgt = dwsv.data() & 0xFFFFFFFF;
+   u4 lft = dwsv.data() >> 32;
+   double dbl = rgt + (lft/10000);
+   wg_int wi = wg_encode_query_param_double(wh, dbl);
+   return wi;
+  }
+  break;
+
+ case WG_DATETYPE:
+  {
+   QDate qd = QDate::fromJulianDay(dwsv.data());
+   int wdate = wg_ymd_to_date(wh, qd.year(), qd.month(), qd.day());
+   wg_int wi = wg_encode_query_param_date(wh, wdate);
+   return wi;   
+  }
+  break;
+
+ case WG_TIMETYPE:
+  {
+   // // data is msecsSinceStartOfDay(); 
+    //   WhiteDB uses 100ths of a second ...
+   wg_int wi = wg_encode_query_param_time(wh, dwsv.data() / 10);
+   return wi;
+  }
+  break;
+ default: 
+   break;
+ } 
+
+ return 0;
+}
+
+void* WDB_Instance::query_within_id_range(u4 range_col, u4 low, u4 high, 
+  u4 param_column, DW_Stage_Value& dwsv)
+{
+ wg_query_arg arglist[3];
+
+ arglist[0].column = range_col;
+ arglist[0].cond = WG_COND_LESSTHAN;
+ arglist[0].value = wg_encode_query_param_int(white_, high);
+
+ arglist[1].column = range_col;
+ arglist[1].cond = WG_COND_GREATER;
+ arglist[1].value = wg_encode_query_param_int(white_, low);
+
+ arglist[2].column = param_column;
+ arglist[2].cond = WG_COND_EQUAL;
+ arglist[2].value = _wg_encode_query_param(white_, dwsv);
+
+ wg_query* query = wg_make_query(white_, nullptr, 0, arglist, 3);
+
+ void* result = wg_fetch(white_, query);
+
+ wg_free_query(white_, query);
+ wg_free_query_param(white_, arglist[0].value);
+ wg_free_query_param(white_, arglist[1].value);
+ wg_free_query_param(white_, arglist[2].value);
+
+ return result;
+}
+
+void* WDB_Instance::new_wg_record(u4 id, QMap<u4, DW_Stage_Value>& svs)
 {
  QMutableMapIterator<u4, DW_Stage_Value> it(svs);
 
  QMap<u4, wg_int> wgim;
+
+ if(id)
+ {
+  wgim[0] = wg_encode_int(white_, id);
+ }
 
  u4 max = 0;
 
@@ -530,15 +689,28 @@ void* WDB_Instance::get_record_by_id(u4 id)
  return wg_find_record_int(white_, 0, WG_COND_EQUAL, id, NULL);
 }
 
-/*
-void WDB_Instance::get_record_field(void* rec, u4 field_number, QByteArray& qba)
+
+u4 WDB_Instance::get_record_id(void* rec)
 {
- wg_int data = wg_get_field(white_, rec, field_number);
- wg_int len = wg_decode_blob_len(white_, data);
- qba.resize(len);
- wg_int ok = wg_decode_blob_copy(white_, data, qba.data(), len);
+ wg_int data = wg_get_field(white_, rec, 0);
+ return wg_decode_int(white_, data);
 }
-*/
+
+void* WDB_Instance::get_record_ref_target(void* rec, u4* and_ref_id)
+{
+ wg_int data = wg_get_field(white_, rec, 1);
+ void* result = wg_decode_record(white_, data);
+ if(result) 
+ {
+  if(and_ref_id)
+  {
+   wg_int data1 = wg_get_field(white_, rec, 2);
+   *and_ref_id = wg_decode_int(white_, data1);
+  }
+ }
+ return result;
+}
+
 
 void* WDB_Instance::new_wg_record(u4 number_of_columns, u4 col1)
 {

@@ -40,8 +40,17 @@ public:
 
  ACCESSORS(void* ,white)
 
+ void* query_within_id_range(u4 range_col, u4 low, u4 high, 
+   u4 param_column, DW_Stage_Value& dwsv);
+
  void* new_wg_record(QMap<u4, DW_Stage_Value>& svs);
+ void* new_wg_record(u4 id, QMap<u4, DW_Stage_Value>& svs);
+
+//? void* new_wg_record(u4 id, const QVector<DW_Stage_Value>& svs);
+
  void decode_wg_record_value(void* rec, u4 index, DW_Stage_Value& dwsv);
+
+
 
  void get_qba_from_record(void* rec, u4 field_number, QByteArray& qba);
  void set_qba_record_field(void* rec, u4 field_number, QByteArray& qba);
@@ -51,7 +60,8 @@ public:
  void set_creation_datetime();
 
  void* get_record_by_id(u4 id);
-// void get_record_field(void* rec, u4 field_number, QByteArray& qba);
+ u4 get_record_id(void* rec);
+ void* get_record_ref_target(void* rec, u4* and_ref_id = nullptr);
 
  void* new_wg_record(u4 number_of_columns, u4 col1, QString col2);
  void* new_wg_record(u4 number_of_columns);

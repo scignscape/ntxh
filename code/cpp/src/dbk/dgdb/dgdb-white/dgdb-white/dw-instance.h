@@ -15,6 +15,7 @@
 #include "accessors.h"
 
 #include "dw-record.h"
+#include "dw-stage-value.h"
 
 #include "global-types.h"
 
@@ -34,13 +35,17 @@ class DW_Instance
  WDB_Instance* wdb_instance_;
  WDB_Manager* wdb_manager_;
 
- u4 startup_record_count_; 
- u4 current_record_count_;
+ u4 startup_hypernode_record_count_; 
+ u4 current_hypernode_record_count_;
+
+ u4 startup_index_record_count_; 
+ u4 current_index_record_count_;
 
  u4 startup_index_label_count_; 
  u4 current_index_label_count_;
 
- u4 new_base_record_id();
+ u4 new_hypernode_record_id();
+ u4 new_index_record_id();
  u4 new_index_label_id();
 
 
@@ -70,14 +75,19 @@ public:
  void to_ntxh(QString& ty, QString& result);
  void init_from_ntxh(QString fld, u1 code);
 
-
  DW_Record new_wg_hypernode_record(const QByteArray& qba);
  DW_Record new_wg_outedges_record(const QByteArray& qba);
  DW_Record new_wg_inedges_record(const QByteArray& qba);
  DW_Record new_wg_findable_field_record(const QByteArray& qba);
  DW_Record new_wg_index_label_record(QString label);
 
+ DW_Record new_wg_index_record(const DW_Record& ref, const DW_Stage_Value& dwsv);
+
  void get_hypernode_payload(u4 id, QByteArray& qba);
+ void get_hypernode_payload(const DW_Record& dwr, QByteArray& qba);
+
+ DW_Record query_by_index_record(DW_Stage_Value& dwsv);
+ 
 
 };
 

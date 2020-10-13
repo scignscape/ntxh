@@ -11,8 +11,12 @@
 
 #include <QDate>
 
+#include "demo-class.h"
+
 #include "dgdb-white/dw-instance.h"
 #include "dgdb-white/dw-record.h"
+
+#include "dgdb-white/dw-stage-value.h"
 
 
 #include "dgdb-white/wdb-manager.h"
@@ -37,15 +41,44 @@ int main(int argc, char* argv[])
 
  qDebug() << "DB root folder: " << dw->db_root_folder();
 
- QString test_payload = "Test Payload";
- QByteArray qba = test_payload.toLatin1();
+// QString test_payload = "Test Payload";
+ Demo_Class dc;
+ dc.set_a_string("Test Payload");
+ dc.set_a_number(77);
+
+ QByteArray qba; // = test_payload.toLatin1();
+ dc.supply_data(qba);
+
  DW_Record dwr = dw->new_wg_hypernode_record(qba);
- qDebug() << "id: " << dwr.id();
 
  QByteArray qba1;
  dw->get_hypernode_payload(dwr.id(), qba1);
 
- qDebug() << "ok: " << qba1; 
+ Demo_Class dc1;
+ dc1.absorb_data(qba1);
+
+ qDebug() << "ok: " << dc1.a_string() << dc1.a_number(); 
+
+ DW_Stage_Value dwsv;
+ dwsv.set_u4_data(dc.a_number());
+
+ u1 et = dwsv.get_dw_encoding_type();
+   
+ DW_Record dwr1 = dw->new_wg_index_record(dwr, dwsv);
+ 
+ DW_Stage_Value dwsv1;
+ dwsv1.set_u4_data(dc.a_number());
+ 
+ DW_Record dwr2 = dw->query_by_index_record(dwsv1);
+
+ QByteArray qba2;
+ dw->get_hypernode_payload(dwr2, qba2);
+ 
+ Demo_Class dc2;
+ dc2.absorb_data(qba2);
+ qDebug() << "ok: " << dc2.a_string() << dc2.a_number(); 
+
+
 
 }
 

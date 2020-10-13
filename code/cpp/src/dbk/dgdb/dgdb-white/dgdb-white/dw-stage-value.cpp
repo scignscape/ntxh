@@ -7,6 +7,8 @@
 
 #include "dw-stage-value.h"
 
+#include <QDebug>
+
 extern "C" {
 #include "whitedb/_whitedb.h"
 }
@@ -198,6 +200,7 @@ DW_Stage_Value& DW_Stage_Value::note_uint()
 {
  info_ &= 15;
  info_ |= (1 << 4);
+
  return *this;
 }
 
