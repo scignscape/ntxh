@@ -13,6 +13,8 @@
 
 #include "global-types.h"
 
+#include "dw-stage-value.h"
+
 #include "accessors.h"
 
 #include "kans.h"
@@ -38,17 +40,24 @@ public:
 
  ACCESSORS(void* ,white)
 
+ void* new_wg_record(QMap<u4, DW_Stage_Value>& svs);
+ void decode_wg_record_value(void* rec, u4 index, DW_Stage_Value& dwsv);
+
+ void get_qba_from_record(void* rec, u4 field_number, QByteArray& qba);
+ void set_qba_record_field(void* rec, u4 field_number, QByteArray& qba);
+ void set_qba_record_field(void* rec, u4 field_number, const QByteArray& qba);
+
  void set_creation_datetime(QDateTime dtm);
  void set_creation_datetime();
 
  void* get_record_by_id(u4 id);
- void get_record_field(void* rec, u4 field_number, QByteArray& qba);
+// void get_record_field(void* rec, u4 field_number, QByteArray& qba);
 
  void* new_wg_record(u4 number_of_columns, u4 col1, QString col2);
  void* new_wg_record(u4 number_of_columns);
  void* new_wg_record(u4 number_of_columns, u4 col1);
 
- void set_record_field(void* rec, u4 field_number, const QByteArray& qba);
+// void set_record_field(void* rec, u4 field_number, const QByteArray& qba);
 
 
  static QString static_to_ntxh(); 
