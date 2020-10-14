@@ -94,11 +94,6 @@ $cc: %2
 
 void DW_Instance::init()
 { 
-
- // // temporary for testing ...
- // Config.flags.local_scratch_mode = true;
-  
-
  wdb_manager_ = new WDB_Manager(this);
  wdb_manager_->set_db_root_folder(db_root_folder_);
  wdb_manager_->init_from_ntxh();

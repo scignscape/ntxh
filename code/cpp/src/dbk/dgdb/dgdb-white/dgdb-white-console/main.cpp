@@ -35,7 +35,13 @@ int main(int argc, char* argv[])
  DW_Instance* dw = DGEnvironment(
    DEFAULT_DEV_DGDB_FOLDER "/instances/t1");
 
- dw->Config.flags.local_scratch_mode = true;
+ // // local_scratch_mode has no persistence at all.
+  //   Scratch mode resents the database whenever it is 
+  //   opened by DigammaDB, but keeps the database in memory 
+  //   in between (so e.g. it can be examined via the wgdb utility). 
+ //dw->Config.flags.local_scratch_mode = true;
+
+ dw->Config.flags.scratch_mode = true;
  dw->init();
  
 

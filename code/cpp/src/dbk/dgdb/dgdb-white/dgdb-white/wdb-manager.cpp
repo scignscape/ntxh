@@ -164,17 +164,25 @@ WDB_Instance* WDB_Manager::new_white(u2 num_code, n8 mem, QString name)
     QString::number(num_code).toLatin1().data());
   if(_db)
   {
+   qDebug() << "Resetting database ...";
    int ok = wg_delete_database(QString::number(num_code).toLatin1().data());
    if(ok > 0)
    {
     qDebug() << "Failed to delete database: " << num_code;
     // // error ... throw something?
    }
+   qDebug() << "After reset attaching database ..." << num_code;
   } 
+  else 
+    qDebug() << "Attaching new database ..." << num_code;
+
   db = wg_attach_database(QString::number(num_code).toLatin1().data(), mem);    
  }
  else
-   db = wg_attach_database(QString::number(num_code).toLatin1().data(), mem);
+ {
+  qDebug() << "Attaching database ..." << num_code;
+  db = wg_attach_database(QString::number(num_code).toLatin1().data(), mem);
+ }
 
  if(!db)
    return nullptr;
