@@ -18,6 +18,8 @@
 
 #include "dgdb-white/dw-stage-value.h"
 
+#include "dgdb-white/dw-frame.h"
+
 
 #include "dgdb-white/wdb-manager.h"
 #include "dgdb-white/dgenvironment.h"
@@ -66,12 +68,21 @@ int main(int argc, char* argv[])
 
  DW_Record dwr2 = dw->new_wg_hypernode_record(qba2);
 
+ DW_Frame fr;
+
+ dwr1 << (fr/dw)["Demo.SomeRelation"];
+
+ //(fr/dw)
+
  //dw->new_wg_outedges_record(dwr1 "Demo.SomeRelation" 
- dw->add_hyperedge(dwr1, "Demo.SomeRelation", dwr2);
+
+//? dw->add_hyperedge(dwr1, "Demo.SomeRelation", dwr2);
+
+
 
  //? dwr1 << (fr/dw)["Demo.SomeRelation"] >> dwr2;   
 
- DW_Record dwr3 = 
+// DW_Record dwr3 = 
  
 }
 

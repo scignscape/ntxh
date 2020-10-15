@@ -51,7 +51,7 @@ DW_Record DW_Instance::new_wg_index_record(const DW_Record& ref, const DW_Stage_
 DW_Record DW_Instance::query_by_index_record(DW_Stage_Value& dwsv)
 {
  u4 param_column = 3;
- void* result = wdb_instance_->query_within_id_range(0, 2000, 20000, 
+ void* result = wdb_instance_->query_within_id_range(0, indexes_mask, max_mask, 
    param_column, dwsv);
 
  if(result)
@@ -119,19 +119,19 @@ u4 DW_Instance::new_index_label_id()
 u4 DW_Instance::new_index_record_id()
 {
  ++current_index_record_count_;
- return current_index_record_count_ + 2000;
+ return current_index_record_count_ + indexes_mask;
 }
 
 u4 DW_Instance::new_inedges_record_id()
 {
  ++current_inedges_record_count_;
- return current_inedges_record_count_ + 40000;
+ return current_inedges_record_count_ + inedges_mask;
 }
 
 u4 DW_Instance::new_outedges_record_id()
 {
  ++current_outedges_record_count_;
- return current_outedges_record_count_ + 60000;
+ return current_outedges_record_count_ + outedges_mask;
 }
 
 
@@ -139,7 +139,7 @@ u4 DW_Instance::new_outedges_record_id()
 u4 DW_Instance::new_hypernode_record_id()
 {
  ++current_hypernode_record_count_;
- return current_hypernode_record_count_ + 20000;
+ return current_hypernode_record_count_ + hypernodes_id_minimum;
 }
 
 DW_Record DW_Instance::new_wg_index_label_record(QString label)

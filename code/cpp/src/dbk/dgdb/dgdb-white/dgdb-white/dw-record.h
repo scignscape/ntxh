@@ -9,8 +9,10 @@
 #define DW_RECORD__H
 
 #include <QString>
-
+#include <QDebug>
 #include <QMap>
+
+#include "dw-frame.h"
 
 #include "accessors.h"
 
@@ -41,6 +43,11 @@ public:
  DW_Record();
 
 };
+
+inline void operator<<(const DW_Record& lhs, const _Frame_With_DW_QString& rhs)
+{
+ qDebug() << "rhs = " << rhs.connector;
+}
 
 
 _KANS(DGDB)

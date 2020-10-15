@@ -26,8 +26,21 @@
 
 KANS_(DGDB)
 
+
 class WDB_Instance;
 class WDB_Manager;
+
+//  
+//   
+//   11**   indexes      C0.00.00.00
+//   10**   inedges      80.00.00.00
+//   01**   outedges     40.00.00.00
+//   001    subvalues    20.00.00.00
+//   000    hypernodes   
+//
+//
+
+
 
 class DW_Instance
 {
@@ -55,6 +68,21 @@ class DW_Instance
  u4 new_index_label_id();
  u4 new_inedges_record_id();
  u4 new_outedges_record_id();
+
+ static constexpr u4 max_mask = 0x7FFFFFFF;
+
+ static constexpr u4 indexes_mask = 0x50000000;
+ static constexpr u4 inedges_mask = 0x40000000;
+ static constexpr u4 outedges_mask = 0x20000000;
+ static constexpr u4 subvalues_mask = 0x10000000;
+
+ static constexpr u4 hypernodes_id_minimum = 1024;
+
+//   011*   indexes      50.00.00.00
+//   010*   inedges      40.00.00.00
+//   001*   outedges     20.00.00.00
+//   0001   subvalues    10.00.00.00
+//   0000   hypernodes   
 
 
 public:
