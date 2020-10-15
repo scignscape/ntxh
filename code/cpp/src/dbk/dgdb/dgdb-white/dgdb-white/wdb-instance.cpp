@@ -755,7 +755,7 @@ void WDB_Instance::set_record_id_field(void* rec, u4 id)
 }
 
 void WDB_Instance::populate_edges_record(DW_Record& new_rec, DW_Record& ref, 
-  QVector<QPair<QString, DW_Record>>& targets)
+  QVector<QPair<QPair<QString, DW_Record>, DW_Record>>& targets)
 {
  void* vn = new_rec.wg_record();
  wg_int refenc = wg_encode_record(white_, ref.wg_record());
@@ -763,12 +763,25 @@ void WDB_Instance::populate_edges_record(DW_Record& new_rec, DW_Record& ref,
  wg_set_int_field(white_, vn, 2, ref.id());
  
  u4 rcol = 3;
- for(QPair<QString, DW_Record>& pr : targets)
+ for(QPair<QPair<QString, DW_Record>, DW_Record>& pr : targets)
  {
-  wg_set_str_field(white_, vn, rcol, pr.first.toLatin1().data());
+  wg_set_str_field(white_, vn, rcol, pr.first.first.toLatin1().data());
+  ++rcol;
+
+   // //  the edge-annotation column should be null before maybe setting it ...
+    //    but this code does not check that because it assumes the provided 
+    //    record is newly constructed ...  
+    //    If that assumptions proves unwarranted due to some change in the 
+    //    interface it's ok to explicitly null out the column if 
+    //    pr.first.second.wg_record() is null ... 
+  if(pr.first.second.wg_record())
+  {
+   wg_int target_enc = wg_encode_record(white_, pr.first.second.wg_record());
+   wg_set_field(white_, vn, rcol, target_enc);
+  }
   ++rcol; 
-  wg_int target_enc = wg_encode_record(white_, pr.second.wg_record());
-  wg_set_field(white_, vn, rcol, target_enc);
+  wg_int target_enc1 = wg_encode_record(white_, pr.second.wg_record());
+  wg_set_field(white_, vn, rcol, target_enc1);
  }
 }
 

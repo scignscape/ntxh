@@ -85,8 +85,17 @@ public:
 
  DW_Record new_wg_hypernode_record(const QByteArray& qba);
 
- DW_Record new_wg_outedges_record(DW_Record& ref, QVector<QPair<QString, DW_Record>>& targets);
+ DW_Record new_wg_outedges_record(DW_Record& ref, QVector<QPair<QPair<QString, DW_Record>, 
+   DW_Record>>& targets);
 // populate_edges_record(new_rec, ref, targets); 
+
+ DW_Record add_hyperedge(DW_Record& source, QString connector, const DW_Record* annotation, 
+   DW_Record& target);
+
+ DW_Record add_hyperedge(DW_Record& source, QString connector, const DW_Record& annotation, 
+   DW_Record& target);
+
+ DW_Record add_hyperedge(DW_Record& source, QString connector, DW_Record& target);
 
 
  DW_Record new_wg_inedges_record(const QByteArray& qba);

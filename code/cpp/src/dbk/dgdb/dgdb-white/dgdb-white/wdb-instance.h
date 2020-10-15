@@ -73,7 +73,7 @@ public:
  DW_Record check_reset_ref_field(DW_Record& ref, u4 col, u4 new_size); //, u4 (*fn)() );
 
  void populate_edges_record(DW_Record& new_rec, DW_Record& ref, 
-   QVector<QPair<QString, DW_Record>>& targets);
+   QVector<QPair<QPair<QString, DW_Record>, DW_Record>>& targets);
 
 // void set_record_field(void* rec, u4 field_number, const QByteAfrray& qba);
 

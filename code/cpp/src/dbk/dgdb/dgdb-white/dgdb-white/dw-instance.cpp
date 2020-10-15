@@ -162,9 +162,33 @@ DW_Record DW_Instance::new_wg_hypernode_record(const QByteArray& qba)
  return {base_id, result};
 }
 
+DW_Record DW_Instance::add_hyperedge(DW_Record& source, QString connector, const DW_Record* annotation, 
+  DW_Record& target)
+{
+ QPair<QPair<QString, DW_Record>, DW_Record> edge = annotation? 
+   QPair<QPair<QString, DW_Record>, DW_Record>{{connector, *annotation}, target}
+   : QPair<QPair<QString, DW_Record>, DW_Record>{{connector, {0, nullptr} }, target};
+
+ QVector<QPair<QPair<QString, DW_Record>, DW_Record>> targets {edge};
+
+ return new_wg_outedges_record(source, targets);
+}
+
+DW_Record DW_Instance::add_hyperedge(DW_Record& source, QString connector, const DW_Record& annotation, 
+  DW_Record& target)
+{
+ return add_hyperedge(source, connector, &annotation, target);
+}
+
+DW_Record DW_Instance::add_hyperedge(DW_Record& source, QString connector, DW_Record& target)
+{
+ return add_hyperedge(source, connector, nullptr, target);
+}
+
+
 
 DW_Record DW_Instance::new_wg_outedges_record(DW_Record& ref, 
-  QVector<QPair<QString, DW_Record>>& targets)
+  QVector<QPair<QPair<QString, DW_Record>, DW_Record>>& targets)
 {
  DW_Record result = wdb_instance_->check_reset_ref_field(ref, 3, targets.size() * 3);
   //, 
