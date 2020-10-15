@@ -38,6 +38,12 @@ class DW_Instance
  u4 startup_hypernode_record_count_; 
  u4 current_hypernode_record_count_;
 
+ u4 startup_outedges_record_count_; 
+ u4 current_outedges_record_count_;
+
+ u4 startup_inedges_record_count_; 
+ u4 current_inedges_record_count_;
+
  u4 startup_index_record_count_; 
  u4 current_index_record_count_;
 
@@ -47,6 +53,8 @@ class DW_Instance
  u4 new_hypernode_record_id();
  u4 new_index_record_id();
  u4 new_index_label_id();
+ u4 new_inedges_record_id();
+ u4 new_outedges_record_id();
 
 
 public:
@@ -76,8 +84,13 @@ public:
  void init_from_ntxh(QString fld, u1 code);
 
  DW_Record new_wg_hypernode_record(const QByteArray& qba);
- DW_Record new_wg_outedges_record(const QByteArray& qba);
+
+ DW_Record new_wg_outedges_record(DW_Record& ref, QVector<QPair<QString, DW_Record>>& targets);
+// populate_edges_record(new_rec, ref, targets); 
+
+
  DW_Record new_wg_inedges_record(const QByteArray& qba);
+
  DW_Record new_wg_findable_field_record(const QByteArray& qba);
  DW_Record new_wg_index_label_record(QString label);
 

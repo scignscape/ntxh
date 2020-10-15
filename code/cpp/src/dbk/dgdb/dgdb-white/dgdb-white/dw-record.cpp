@@ -15,6 +15,14 @@ DW_Record::DW_Record(u4 id, void* wg_record)
      wg_record_(wg_record) 
 {
 
+} 
+
+DW_Record::DW_Record()
+  :  id_(0), wg_record_(nullptr)
+{
+
 }
+
+
 
 

@@ -721,6 +721,58 @@ void* WDB_Instance::new_wg_record(u4 number_of_columns, u4 col1)
  return result;
 }
 
+DW_Record WDB_Instance::check_reset_ref_field(DW_Record& ref, u4 col, u4 new_size) //, u4 (*fn)() )
+{
+ void* old_ref = nullptr; 
+ wg_int ftype = wg_get_field_type(white_, ref.wg_record(), col);
+
+ if(ftype == WG_RECORDTYPE)
+ {
+  wg_int wgi = wg_get_field(white_, ref.wg_record(), col);
+  old_ref = wg_decode_record(white_, wgi);
+ }
+ void* result = wg_create_record(white_, new_size);
+ wg_int recenc = wg_encode_record(white_, result);
+ wg_set_field(white_, ref.wg_record(), col, recenc);
+ if(old_ref)
+ {
+  u4 old_id = get_record_id(old_ref);
+  wg_set_int_field(white_, result, 0, old_id); 
+  wg_delete_record(white_, old_ref);
+  return {old_id, result};
+ }
+ else
+ {
+  //u4 new_id = fn();
+  //wg_set_int_field(white_, result, 0, old_id);
+  return {0, result};
+ }
+}
+
+void WDB_Instance::set_record_id_field(void* rec, u4 id)
+{
+ wg_set_int_field(white_, rec, 0, id);
+}
+
+void WDB_Instance::populate_edges_record(DW_Record& new_rec, DW_Record& ref, 
+  QVector<QPair<QString, DW_Record>>& targets)
+{
+ void* vn = new_rec.wg_record();
+ wg_int refenc = wg_encode_record(white_, ref.wg_record());
+ wg_set_field(white_, vn, 1, refenc);
+ wg_set_int_field(white_, vn, 2, ref.id());
+ 
+ u4 rcol = 3;
+ for(QPair<QString, DW_Record>& pr : targets)
+ {
+  wg_set_str_field(white_, vn, rcol, pr.first.toLatin1().data());
+  ++rcol; 
+  wg_int target_enc = wg_encode_record(white_, pr.second.wg_record());
+  wg_set_field(white_, vn, rcol, target_enc);
+ }
+}
+
+
 void* WDB_Instance::new_wg_record(u4 number_of_columns, u4 col1, QString col2)
 {
  void* result = wg_create_record(white_, number_of_columns);

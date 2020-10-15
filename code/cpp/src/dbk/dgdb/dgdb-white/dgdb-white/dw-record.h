@@ -38,6 +38,7 @@ public:
  ACCESSORS(void* ,wg_record)
 
  DW_Record(u4 id, void* wg_record);
+ DW_Record();
 
 };
 

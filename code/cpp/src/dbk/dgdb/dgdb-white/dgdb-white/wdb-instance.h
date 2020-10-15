@@ -14,6 +14,7 @@
 #include "global-types.h"
 
 #include "dw-stage-value.h"
+#include "dw-record.h"
 
 #include "accessors.h"
 
@@ -63,11 +64,18 @@ public:
  u4 get_record_id(void* rec);
  void* get_record_ref_target(void* rec, u4* and_ref_id = nullptr);
 
+ void set_record_id_field(void* rec, u4 id);
+
  void* new_wg_record(u4 number_of_columns, u4 col1, QString col2);
  void* new_wg_record(u4 number_of_columns);
  void* new_wg_record(u4 number_of_columns, u4 col1);
 
-// void set_record_field(void* rec, u4 field_number, const QByteArray& qba);
+ DW_Record check_reset_ref_field(DW_Record& ref, u4 col, u4 new_size); //, u4 (*fn)() );
+
+ void populate_edges_record(DW_Record& new_rec, DW_Record& ref, 
+   QVector<QPair<QString, DW_Record>>& targets);
+
+// void set_record_field(void* rec, u4 field_number, const QByteAfrray& qba);
 
 
  static QString static_to_ntxh(); 

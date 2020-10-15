@@ -23,7 +23,11 @@ DW_Instance::DW_Instance()
      startup_index_record_count_(0), 
      current_index_record_count_(0),
      startup_index_label_count_(0),
-     current_index_label_count_(0)
+     current_index_label_count_(0),
+     startup_outedges_record_count_(0), 
+     current_outedges_record_count_(0),
+     startup_inedges_record_count_(0), 
+     current_inedges_record_count_(0)
 {
 
 }
@@ -118,6 +122,19 @@ u4 DW_Instance::new_index_record_id()
  return current_index_record_count_ + 2000;
 }
 
+u4 DW_Instance::new_inedges_record_id()
+{
+ ++current_inedges_record_count_;
+ return current_inedges_record_count_ + 40000;
+}
+
+u4 DW_Instance::new_outedges_record_id()
+{
+ ++current_outedges_record_count_;
+ return current_outedges_record_count_ + 60000;
+}
+
+
 
 u4 DW_Instance::new_hypernode_record_id()
 {
@@ -145,10 +162,21 @@ DW_Record DW_Instance::new_wg_hypernode_record(const QByteArray& qba)
  return {base_id, result};
 }
 
-DW_Record DW_Instance::new_wg_outedges_record(const QByteArray& qba)
-{
- u4 base_id = new_hypernode_record_id();
 
+DW_Record DW_Instance::new_wg_outedges_record(DW_Record& ref, 
+  QVector<QPair<QString, DW_Record>>& targets)
+{
+ DW_Record result = wdb_instance_->check_reset_ref_field(ref, 3, targets.size() * 3);
+  //, 
+  //[this]() { return new_outedges_record_id(); });
+
+ if(result.id() == 0)
+ {
+  u4 new_id = new_outedges_record_id();
+  wdb_instance_->set_record_id_field(result.wg_record(), new_id); 
+ }
+  
+ wdb_instance_->populate_edges_record(result, ref, targets); 
 }
 
 DW_Record DW_Instance::new_wg_inedges_record(const QByteArray& qba)
