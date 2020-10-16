@@ -35,6 +35,7 @@ HEADERS += \
   $$SRC_DIR/dw-stage-value.h  \
   $$SRC_DIR/dgenvironment.h  \
   $$SRC_DIR/dw-frame.h  \
+  $$SRC_DIR/dw-dominion.h  \
 
 
 
@@ -46,6 +47,7 @@ SOURCES += \
   $$SRC_DIR/dw-stage-value.cpp  \
   $$SRC_DIR/dgenvironment.cpp  \
   $$SRC_DIR/dw-frame.cpp  \
+  $$SRC_DIR/dw-dominion.cpp  \
 
 
 

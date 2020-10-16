@@ -19,6 +19,7 @@
 #include "dgdb-white/dw-stage-value.h"
 
 #include "dgdb-white/dw-frame.h"
+#include "dgdb-white/dw-dominion.h"
 
 
 #include "dgdb-white/wdb-manager.h"
@@ -68,9 +69,10 @@ int main(int argc, char* argv[])
 
  DW_Record dwr2 = dw->new_wg_hypernode_record(qba2);
 
- DW_Frame fr;
+ DW_Frame& fr = *dw->new_frame(); // new DW_Frame(dw);
+ DW_Dominion* dom = new DW_Dominion();
 
- dwr1 << (fr/dw)["Demo.SomeRelation"];
+ dwr1 << (fr/dom)["Demo.SomeRelation"];
 
  //(fr/dw)
 

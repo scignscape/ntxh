@@ -29,6 +29,7 @@ KANS_(DGDB)
 
 class WDB_Instance;
 class WDB_Manager;
+class DW_Frame;
 
 //  
 //   
@@ -105,6 +106,8 @@ public:
  ACCESSORS(WDB_Instance* ,wdb_instance)
 
  DW_Instance();
+
+ DW_Frame* new_frame();
 
  void init(); 
 

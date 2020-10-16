@@ -4,14 +4,13 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#include "dw-frame.h"
+#include "dw-dominion.h"
 
 
 USING_KANS(DGDB)
 
 
-DW_Frame::DW_Frame(DW_Instance* dw_instance, u4 id)
-  :  dw_instance_(dw_instance),  id_(id)
+DW_Dominion::DW_Dominion()
 {
 
 } 

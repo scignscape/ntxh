@@ -44,7 +44,8 @@ public:
 
 };
 
-inline void operator<<(const DW_Record& lhs, const _Frame_With_DW_QString& rhs)
+inline void operator<<(const DW_Record& lhs, 
+  const _Frame_With_Dominion_QString& rhs)
 {
  qDebug() << "rhs = " << rhs.connector;
 }

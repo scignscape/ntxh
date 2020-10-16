@@ -9,6 +9,8 @@
 #include "wdb-instance.h"
 #include "wdb-manager.h"
 
+#include "dw-frame.h"
+
 #include <QDebug>
 
 
@@ -30,6 +32,11 @@ DW_Instance::DW_Instance()
      current_inedges_record_count_(0)
 {
 
+}
+
+DW_Frame* DW_Instance::new_frame()
+{
+ return new DW_Frame(this);
 }
 
 DW_Record DW_Instance::new_wg_index_record(const DW_Record& ref, const DW_Stage_Value& dwsv)
