@@ -72,7 +72,8 @@ int main(int argc, char* argv[])
  DW_Frame& fr = *dw->new_frame(); // new DW_Frame(dw);
  DW_Dominion* dom = new DW_Dominion();
 
- dwr1 << (fr/dom)["Demo.SomeRelation"];
+ dwr1 << (fr/dom)["Demo.SomeRelation"] >> dwr2;
+ fr.commit();
 
  //(fr/dw)
 

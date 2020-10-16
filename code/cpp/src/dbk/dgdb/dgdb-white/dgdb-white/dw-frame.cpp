@@ -6,6 +6,8 @@
 
 #include "dw-frame.h"
 
+#include "dw-instance.h"
+
 
 USING_KANS(DGDB)
 
@@ -15,5 +17,18 @@ DW_Frame::DW_Frame(DW_Instance* dw_instance, u4 id)
 {
 
 } 
+
+u4 DW_Frame::commit()
+{
+ return dw_instance_->commit_new_triples(new_string_label_triples_);
+}
+
+DW_Record* DW_Frame::register_new_triple(DW_Record* source, QString connector, DW_Record* target, 
+ DW_Dominion* dom)
+{
+ // // don't use dom here ...
+ new_string_label_triples_.push_back({source, connector, target});
+ return source;
+}
 
 

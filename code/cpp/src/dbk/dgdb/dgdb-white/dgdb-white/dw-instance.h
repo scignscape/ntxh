@@ -31,6 +31,8 @@ class WDB_Instance;
 class WDB_Manager;
 class DW_Frame;
 
+class String_Label_Triple;
+
 //  
 //   
 //   11**   indexes      C0.00.00.00
@@ -128,6 +130,7 @@ public:
 
  DW_Record add_hyperedge(DW_Record& source, QString connector, DW_Record& target);
 
+ u4 commit_new_triples(QVector<String_Label_Triple>& triples);
 
  DW_Record new_wg_inedges_record(const QByteArray& qba);
 

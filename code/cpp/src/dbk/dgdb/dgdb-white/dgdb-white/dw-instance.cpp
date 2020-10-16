@@ -126,19 +126,19 @@ u4 DW_Instance::new_index_label_id()
 u4 DW_Instance::new_index_record_id()
 {
  ++current_index_record_count_;
- return current_index_record_count_ + indexes_mask;
+ return current_index_record_count_ | indexes_mask;
 }
 
 u4 DW_Instance::new_inedges_record_id()
 {
  ++current_inedges_record_count_;
- return current_inedges_record_count_ + inedges_mask;
+ return current_inedges_record_count_ | inedges_mask;
 }
 
 u4 DW_Instance::new_outedges_record_id()
 {
  ++current_outedges_record_count_;
- return current_outedges_record_count_ + outedges_mask;
+ return current_outedges_record_count_ | outedges_mask;
 }
 
 
@@ -146,7 +146,7 @@ u4 DW_Instance::new_outedges_record_id()
 u4 DW_Instance::new_hypernode_record_id()
 {
  ++current_hypernode_record_count_;
- return current_hypernode_record_count_ + hypernodes_id_minimum;
+ return current_hypernode_record_count_ | hypernodes_id_minimum;
 }
 
 DW_Record DW_Instance::new_wg_index_label_record(QString label)
@@ -192,7 +192,16 @@ DW_Record DW_Instance::add_hyperedge(DW_Record& source, QString connector, DW_Re
  return add_hyperedge(source, connector, nullptr, target);
 }
 
-
+u4 DW_Instance::commit_new_triples(QVector<String_Label_Triple>& triples)
+{
+ u4 result = 0;
+ for(String_Label_Triple& triple : triples)
+ {
+  ++result;
+  qDebug() << triple.connector_label;
+ }
+ return result;
+}
 
 DW_Record DW_Instance::new_wg_outedges_record(DW_Record& ref, 
   QVector<QPair<QPair<QString, DW_Record>, DW_Record>>& targets)
