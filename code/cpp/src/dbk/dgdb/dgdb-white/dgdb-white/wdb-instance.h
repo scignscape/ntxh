@@ -65,6 +65,8 @@ public:
  void* get_record_ref_target(void* rec, u4* and_ref_id = nullptr);
 
  void set_record_id_field(void* rec, u4 id);
+ n8 set_record_field(void* rec, u4 col, DW_Stage_Value& dwsv);
+
 
  void* new_wg_record(u4 number_of_columns, u4 col1, QString col2);
  void* new_wg_record(u4 number_of_columns);

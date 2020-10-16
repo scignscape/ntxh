@@ -35,6 +35,19 @@ struct String_Label_Triple
  DW_Dominion* dom;
 };
 
+class DW_Context
+{
+ u4 id_;
+
+public:
+ DW_Context(u4 id = 0)
+   :  id_(id)
+ {
+
+ } 
+
+};
+
 class DW_Frame
 {
  DW_Instance* dw_instance_;
@@ -53,6 +66,11 @@ public:
  DW_Record* register_new_triple(DW_Record* source, QString connector, DW_Record* target, 
  DW_Dominion* dom);
 
+ DW_Context* new_context()
+ {
+  return new DW_Context;
+ }
+
  u4 commit();
 
 };
@@ -61,6 +79,7 @@ struct _Frame_With_Source_and_Dominion_Connector
 {
  DW_Frame* fr;
  DW_Dominion* dom;
+ DW_Context* context;
  QString connector;
  DW_Record* source;
  DW_Record& operator>>(DW_Record* rhs)
@@ -78,6 +97,7 @@ struct _Frame_With_Dominion_Connector
 {
  DW_Frame* fr;
  DW_Dominion* dom;
+ DW_Context* context;
  QString connector;
 };
 
@@ -85,16 +105,24 @@ struct _Frame_With_Dominion
 {
  DW_Frame* fr;
  DW_Dominion* dom;
+ DW_Context* context;
  _Frame_With_Dominion_Connector operator[](QString qs)
  {
-  return {fr, dom, qs};
+  return {fr, dom, context, qs};
  }
 };
 
 inline _Frame_With_Dominion operator/(DW_Frame& fr, DW_Dominion* dom)
 {
- return {&fr, dom};
+ return {&fr, dom, nullptr};
 }
+
+inline _Frame_With_Dominion operator/(_Frame_With_Dominion fr, DW_Context* ctxt)
+{
+ fr.context = ctxt;
+ return fr;
+}
+
 
 _KANS(DGDB)
 

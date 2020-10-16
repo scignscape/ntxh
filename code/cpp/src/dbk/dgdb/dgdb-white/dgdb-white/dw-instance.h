@@ -87,6 +87,9 @@ class DW_Instance
 //   0001   subvalues    10.00.00.00
 //   0000   hypernodes   
 
+ void _set_raw_record_fields(void* rec, u4 start_col, QVector<DW_Stage_Value>& svs);
+ void* _add_raw_record(u4 number_of_columns, QVector<DW_Stage_Value>& svs);
+
 
 public:
 
@@ -121,6 +124,26 @@ public:
  DW_Record new_wg_outedges_record(DW_Record& ref, QVector<QPair<QPair<QString, DW_Record>, 
    DW_Record>>& targets);
 // populate_edges_record(new_rec, ref, targets); 
+
+ void* add_raw_record(u4 number_of_columns, QVector<DW_Stage_Value>& svs)
+ {
+  return _add_raw_record(number_of_columns, svs);
+ }
+
+ void* add_raw_record(u4 number_of_columns, QVector<DW_Stage_Value> svs)
+ {
+  return _add_raw_record(number_of_columns, svs);
+ }
+
+ void set_raw_record_fields(void* rec, u4 start_col, QVector<DW_Stage_Value>& svs)
+ {
+  _set_raw_record_fields(rec, start_col, svs);
+ }
+ void set_raw_record_fields(void* rec, u4 start_col, QVector<DW_Stage_Value> svs)
+ {
+  _set_raw_record_fields(rec, start_col, svs);
+ }
+
 
  DW_Record add_hyperedge(DW_Record& source, QString connector, const DW_Record* annotation, 
    DW_Record& target);

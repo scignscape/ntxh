@@ -47,14 +47,7 @@ public:
 inline _Frame_With_Source_and_Dominion_Connector operator<<(DW_Record& lhs, 
   const _Frame_With_Dominion_Connector& rhs)
 {
-// _Frame_With_Source_and_Dominion_Connector result;
-// result.fr = rhs.fr;
-// result.dom = rhs.dom;
-// result.connector = rhs.connector;
-// result.source = lhs;
-// return result;
- //qDebug() << "rhs = " << rhs.connector;
- return {rhs.fr, rhs.dom, rhs.connector, &lhs};
+ return {rhs.fr, rhs.dom, rhs.context, rhs.connector, &lhs};
 }
 
 

@@ -46,6 +46,36 @@ int main(int argc, char* argv[])
 
  dw->Config.flags.scratch_mode = true;
  dw->init();
+
+ DW_Stage_Value dwsv1;
+ //?
+ dwsv1.set_str_data("test", 5);
+ //dwsv1.set_u4_data(66);
+
+ void* rec = dw->add_raw_record(2, {dwsv1});
+
+ qDebug() << "rec = " << rec;
+
+ DW_Stage_Value dwsv2;
+ dwsv2.set_rec_data(rec);
+ dw->set_raw_record_fields(rec, 1, {dwsv2});
+ 
+ 
+}
+
+int main2(int argc, char* argv[])
+{
+ DW_Instance* dw = DGEnvironment(
+   DEFAULT_DEV_DGDB_FOLDER "/instances/t1");
+
+ // // local_scratch_mode has no persistence at all.
+  //   Scratch mode resents the database whenever it is 
+  //   opened by DigammaDB, but keeps the database in memory 
+  //   in between (so e.g. it can be examined via the wgdb utility). 
+ //dw->Config.flags.local_scratch_mode = true;
+
+ dw->Config.flags.scratch_mode = true;
+ dw->init();
  
 
  qDebug() << "DB root folder: " << dw->db_root_folder();
@@ -72,8 +102,12 @@ int main(int argc, char* argv[])
  DW_Frame& fr = *dw->new_frame(); // new DW_Frame(dw);
  DW_Dominion* dom = new DW_Dominion();
 
- dwr1 << (fr/dom)["Demo.SomeRelation"] >> dwr2;
-//? fr.commit();
+ DW_Context* ctxt = fr.new_context();
+
+
+ dwr1 << (fr/dom/ctxt)["Demo.SomeRelation"] >> dwr2;
+//?
+ fr.commit();
 
  //(fr/dw)
 

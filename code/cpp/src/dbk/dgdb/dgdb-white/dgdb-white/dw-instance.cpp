@@ -204,6 +204,29 @@ u4 DW_Instance::commit_new_triples(QVector<String_Label_Triple>& triples)
  return result;
 }
 
+void DW_Instance::_set_raw_record_fields(void* rec, u4 start_col, QVector<DW_Stage_Value>& svs)
+{
+ for(u4 u = 0; u < svs.size(); ++u)
+ {
+  wdb_instance_->set_record_field(rec, u + start_col, svs[u]); 
+ }
+}
+
+
+void* DW_Instance::_add_raw_record(u4 number_of_columns, QVector<DW_Stage_Value>& svs)
+{
+ void* result = wdb_instance_->new_wg_record(number_of_columns);
+ 
+ if(number_of_columns > svs.size())
+   number_of_columns = svs.size();
+ for(u4 u = 0; u < number_of_columns; ++u)
+ {
+  wdb_instance_->set_record_field(result, u, svs[u]); 
+ }
+ 
+ return result;
+}
+
 DW_Record DW_Instance::new_wg_outedges_record(DW_Record& ref, 
   QVector<QPair<QPair<QString, DW_Record>, DW_Record>>& targets)
 {

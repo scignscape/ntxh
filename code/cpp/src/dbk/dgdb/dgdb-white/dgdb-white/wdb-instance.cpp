@@ -340,6 +340,75 @@ void* WDB_Instance::query_within_id_range(u4 range_col, u4 low, u4 high,
  return result;
 }
 
+n8 WDB_Instance::set_record_field(void* rec, u4 col, DW_Stage_Value& dwsv)
+{
+ wg_int result = NULL;
+ u1 ec = dwsv.get_prelim_encoding_code();
+ switch(ec)
+ {
+ case 0:  // same as char ...
+  {
+   wg_int wi = wg_encode_char(white_, dwsv.data());
+   result = wg_set_field(white_, rec, col, wi);
+  }
+  break;
+ case 1:  // uint; same as int in this context ...
+  {
+   wg_int wi = wg_encode_char(white_, dwsv.data());
+   result = wg_set_field(white_, rec, col, wi);
+  }
+  break;
+ case 2:  // qstring
+  {
+   char* qdata, *xdata;
+   QByteArray qba1, qba2;  // //  prevents the toUtf8 temporaries 
+     // from going out of scope too soon ...
+
+   if(dwsv.check_data_has_type())
+   {
+    QPair<n8, QStringList*>* pr = (QPair<n8, QStringList*>*) dwsv.data();
+    if(pr->first)
+      break; // //  TODO: special types
+    if(pr->second->isEmpty())
+      break; // //  something's wrong ...
+    qba1 = pr->second->first().toUtf8();
+    qdata = qba1.data();
+    if(pr->second->size() > 1)
+    {
+     qba2 = pr->second->at(1).toUtf8();       
+     xdata = qba2.data();
+    }
+    else
+      xdata = nullptr;
+   }
+   else
+   {
+    QString* qs = (QString*) dwsv.data();
+    qdata = qs->toUtf8().data();
+    xdata = nullptr;
+   }
+
+   wg_int wi = wg_encode_str(white_, qdata, xdata);
+   result = wg_set_field(white_, rec, col, wi);
+   dwsv.cleanup();
+  }
+  break;
+ case 3:
+  {
+   wg_int wi = _rec_encode(white_, dwsv);
+   result = wg_set_field(white_, rec, col, wi);
+  }
+  break;
+ case 15:
+   // // unimplemented ...
+  break;
+ default:
+    // // error ...  
+  break;
+ }
+ return (n8) result;
+}
+
 void* WDB_Instance::new_wg_record(u4 id, QMap<u4, DW_Stage_Value>& svs)
 {
  QMutableMapIterator<u4, DW_Stage_Value> it(svs);
