@@ -199,6 +199,7 @@ u4 DW_Instance::commit_new_triples(QVector<String_Label_Triple>& triples)
  {
   ++result;
   qDebug() << triple.connector_label;
+  add_hyperedge(*triple.source, triple.connector_label, *triple.target);
  }
  return result;
 }
@@ -214,6 +215,7 @@ DW_Record DW_Instance::new_wg_outedges_record(DW_Record& ref,
  {
   u4 new_id = new_outedges_record_id();
   wdb_instance_->set_record_id_field(result.wg_record(), new_id); 
+  result.set_id(new_id);
  }
   
  wdb_instance_->populate_edges_record(result, ref, targets); 

@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
  DW_Dominion* dom = new DW_Dominion();
 
  dwr1 << (fr/dom)["Demo.SomeRelation"] >> dwr2;
- fr.commit();
+//? fr.commit();
 
  //(fr/dw)
 

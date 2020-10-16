@@ -731,7 +731,8 @@ DW_Record WDB_Instance::check_reset_ref_field(DW_Record& ref, u4 col, u4 new_siz
   wg_int wgi = wg_get_field(white_, ref.wg_record(), col);
   old_ref = wg_decode_record(white_, wgi);
  }
- void* result = wg_create_record(white_, new_size);
+
+ void* result = wg_create_record(white_, new_size + 3);
  wg_int recenc = wg_encode_record(white_, result);
  wg_set_field(white_, ref.wg_record(), col, recenc);
  if(old_ref)
@@ -758,8 +759,10 @@ void WDB_Instance::populate_edges_record(DW_Record& new_rec, DW_Record& ref,
   QVector<QPair<QPair<QString, DW_Record>, DW_Record>>& targets)
 {
  void* vn = new_rec.wg_record();
+
  wg_int refenc = wg_encode_record(white_, ref.wg_record());
  wg_set_field(white_, vn, 1, refenc);
+
  wg_set_int_field(white_, vn, 2, ref.id());
  
  u4 rcol = 3;
@@ -782,6 +785,7 @@ void WDB_Instance::populate_edges_record(DW_Record& new_rec, DW_Record& ref,
   ++rcol; 
   wg_int target_enc1 = wg_encode_record(white_, pr.second.wg_record());
   wg_set_field(white_, vn, rcol, target_enc1);
+
  }
 }
 
