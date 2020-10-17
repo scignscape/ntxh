@@ -47,19 +47,46 @@ int main(int argc, char* argv[])
  dw->Config.flags.scratch_mode = true;
  dw->init();
 
+
+
+
  DW_Stage_Value dwsv1;
  //?
- dwsv1.set_str_data("test", 5);
+// dwsv1.set_str_data("test", 5);
  //dwsv1.set_u4_data(66);
+
+ dwsv1.set_int_data(5);
 
  void* rec = dw->add_raw_record(2, {dwsv1});
 
  qDebug() << "rec = " << rec;
 
+
+ DW_Stage_Value dwsv0;
+ dwsv0.set_str_data("test", 5);
+ void* rec0 = dw->add_raw_record(2, {dwsv0});
+
+// DW_Stage_Value dwsv2;
+// dwsv2.set_rec_data(rec);
+// dw->set_raw_record_fields(rec, 1, {dwsv2});
+
+
  DW_Stage_Value dwsv2;
- dwsv2.set_rec_data(rec);
+ //dwsv2.set_str_data("rec");
+ dwsv2.set_rec_data(rec0);
  dw->set_raw_record_fields(rec, 1, {dwsv2});
- 
+
+// void* v1 = dw->query_leading_str(0); 
+//? 
+ void* v2 = dw->query_leading_int(0); 
+ qDebug() << "v2 = " << v2;
+
+ void* v1 = dw->query_leading_rec(1); 
+ qDebug() << "v1 = " << v1;
+
+ void* v3 = dw->query_leading_str(0); 
+ qDebug() << "v3 = " << v3;
+
  
 }
 

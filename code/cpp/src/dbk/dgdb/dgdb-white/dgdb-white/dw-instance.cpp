@@ -29,7 +29,11 @@ DW_Instance::DW_Instance()
      startup_outedges_record_count_(0), 
      current_outedges_record_count_(0),
      startup_inedges_record_count_(0), 
-     current_inedges_record_count_(0)
+     current_inedges_record_count_(0),
+     startup_multi_index_record_count_(0),
+     current_multi_index_record_count_(0),
+     startup_double_edges_record_count_(0), 
+     current_double_edges_record_count_(0)
 {
 
 }
@@ -129,6 +133,18 @@ u4 DW_Instance::new_index_record_id()
  return current_index_record_count_ | indexes_mask;
 }
 
+u4 DW_Instance::new_multi_index_record_id()
+{
+ ++current_multi_index_record_count_;
+ return current_multi_index_record_count_ | multi_indexes_mask;
+}
+
+u4 new_double_edges_record_id()
+{
+ ++current_double_edges_record_count_;
+ return current_double_edges_record_count_ | double_edges_mask;
+}
+
 u4 DW_Instance::new_inedges_record_id()
 {
  ++current_inedges_record_count_;
@@ -212,6 +228,20 @@ void DW_Instance::_set_raw_record_fields(void* rec, u4 start_col, QVector<DW_Sta
  }
 }
 
+void* DW_Instance::query_leading_rec(u4 col)
+{
+ return wdb_instance_->query_leading_rec(col);
+}
+
+void* DW_Instance::query_leading_str(u4 col)
+{
+ return wdb_instance_->query_leading_str(col);
+}
+
+void* DW_Instance::query_leading_int(u4 col)
+{
+ return wdb_instance_->query_leading_int(col);
+}
 
 void* DW_Instance::_add_raw_record(u4 number_of_columns, QVector<DW_Stage_Value>& svs)
 {

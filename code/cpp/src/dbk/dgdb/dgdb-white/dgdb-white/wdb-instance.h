@@ -60,6 +60,10 @@ public:
  void set_creation_datetime(QDateTime dtm);
  void set_creation_datetime();
 
+ void* query_leading_rec(u4 col);
+ void* query_leading_str(u4 col);
+ void* query_leading_int(u4 col);
+
  void* get_record_by_id(u4 id);
  u4 get_record_id(void* rec);
  void* get_record_ref_target(void* rec, u4* and_ref_id = nullptr);

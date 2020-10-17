@@ -57,34 +57,46 @@ class DW_Instance
  u4 startup_outedges_record_count_; 
  u4 current_outedges_record_count_;
 
+ u4 startup_double_edges_record_count_; 
+ u4 current_double_edges_record_count_;
+
  u4 startup_inedges_record_count_; 
  u4 current_inedges_record_count_;
 
  u4 startup_index_record_count_; 
  u4 current_index_record_count_;
 
+ u4 startup_multi_index_record_count_; 
+ u4 current_multi_index_record_count_;
+
  u4 startup_index_label_count_; 
  u4 current_index_label_count_;
 
  u4 new_hypernode_record_id();
+ u4 new_multi_index_record_id();
  u4 new_index_record_id();
  u4 new_index_label_id();
  u4 new_inedges_record_id();
  u4 new_outedges_record_id();
+ u4 new_double_edges_record_id();
 
  static constexpr u4 max_mask = 0x7FFFFFFF;
 
- static constexpr u4 indexes_mask = 0x50000000;
+ static constexpr u4 indexes_mask = 0x60000000;
+ static constexpr u4 double_edges_mask = 0x50000000;
  static constexpr u4 inedges_mask = 0x40000000;
+ static constexpr u4 multi_indexes_mask = 0x30000000;
  static constexpr u4 outedges_mask = 0x20000000;
  static constexpr u4 subvalues_mask = 0x10000000;
 
  static constexpr u4 hypernodes_id_minimum = 1024;
 
-//   011*   indexes      50.00.00.00
-//   010*   inedges      40.00.00.00
-//   001*   outedges     20.00.00.00
-//   0001   subvalues    10.00.00.00
+//   011*   indexes       60.00.00.00
+//   0101   double_edges  50.00.00.00
+//   0100   inedges       40.00.00.00
+//   0011   outedges      30.00.00.00
+//   0010   multi_indexes 20.00.00.00
+//   0001   subvalues     10.00.00.00
 //   0000   hypernodes   
 
  void _set_raw_record_fields(void* rec, u4 start_col, QVector<DW_Stage_Value>& svs);
@@ -118,6 +130,11 @@ public:
 
  void to_ntxh(QString& ty, QString& result);
  void init_from_ntxh(QString fld, u1 code);
+
+ void* query_leading_rec(u4 col);
+ void* query_leading_str(u4 col);
+ void* query_leading_int(u4 col);
+
 
  DW_Record new_wg_hypernode_record(const QByteArray& qba);
 

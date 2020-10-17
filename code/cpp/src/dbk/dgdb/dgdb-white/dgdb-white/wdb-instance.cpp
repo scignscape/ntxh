@@ -191,6 +191,74 @@ void* new_wg_record(u4 id, QMap<u4, DW_Stage_Value>& svs)
  return new_wg_record(0, svs);
 }
 
+void* WDB_Instance::query_leading_rec(u4 col)
+{
+ static void* dummy = wg_create_record(white_, 0);
+
+ return wg_find_record_record(white_, col, WG_COND_NOT_EQUAL, dummy, NULL);
+
+/*
+ wg_query_arg arglist[1];
+ arglist[0].column = col;
+ arglist[0].cond = WG_COND_NOT_EQUAL;
+ arglist[0].value = wg_encode_query_param_record(white_, dummy);
+ 
+ wg_query* wq = wg_make_query(white_, nullptr, 0, 
+   arglist, 1);
+
+ void* result = wg_fetch(white_, wq); 
+
+ wg_free_query(white_, wq);
+ wg_free_query_param(white_, arglist[0].value);
+
+ return result;
+*/
+}
+
+void* WDB_Instance::query_leading_str(u4 col)
+{
+ return wg_find_record_str(white_, col, WG_COND_NOT_EQUAL, "", NULL);
+
+/*
+ wg_query_arg arglist[1];
+ arglist[0].column = col;
+ arglist[0].cond = WG_COND_NOT_EQUAL;
+ arglist[0].value = wg_encode_query_param_str(white_, "te", nullptr); 
+
+ wg_query* wq = wg_make_query(white_, nullptr, 0, 
+   arglist, 1);
+
+ void* result = wg_fetch(white_, wq); 
+
+ wg_free_query(white_, wq);
+ wg_free_query_param(white_, arglist[0].value);
+
+ return result;
+*/
+}
+
+void* WDB_Instance::query_leading_int(u4 col)
+{
+ return wg_find_record_int(white_, col, WG_COND_NOT_EQUAL, 0, NULL);
+
+/*
+ wg_query_arg arglist[1];
+ arglist[0].column = col;
+ arglist[0].cond = WG_COND_NOT_EQUAL;
+ arglist[0].value = wg_encode_query_param_int(white_, 0); 
+
+ wg_query* wq = wg_make_query(white_, nullptr, 0, 
+   arglist, 1);
+
+ void* result = wg_fetch(white_, wq); 
+
+ wg_free_query(white_, wq);
+ wg_free_query_param(white_, arglist[0].value);
+
+ return result;
+*/
+}
+
 wg_int _wg_encode_query_param(void* wh, DW_Stage_Value& dwsv)
 {
  u1 et = 0;
