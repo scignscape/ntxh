@@ -36,7 +36,10 @@ HEADERS += \
   $$SRC_DIR/dgenvironment.h  \
   $$SRC_DIR/dw-frame.h  \
   $$SRC_DIR/dw-dominion.h  \
-
+  $$SRC_DIR/stage/dw-stage-queue.h  \
+  $$SRC_DIR/types/dw-type.h  \
+  $$SRC_DIR/types/dw-type-system.h  \
+  $$SRC_DIR/types/dw-type-builder.h  \
 
 
 SOURCES += \
@@ -48,6 +51,10 @@ SOURCES += \
   $$SRC_DIR/dgenvironment.cpp  \
   $$SRC_DIR/dw-frame.cpp  \
   $$SRC_DIR/dw-dominion.cpp  \
+  $$SRC_DIR/stage/dw-stage-queue.cpp  \
+  $$SRC_DIR/types/dw-type.cpp  \
+  $$SRC_DIR/types/dw-type-system.cpp  \
+  $$SRC_DIR/types/dw-type-builder.cpp  \
 
 
 

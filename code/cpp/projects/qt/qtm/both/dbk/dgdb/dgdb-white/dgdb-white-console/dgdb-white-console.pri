@@ -22,15 +22,19 @@ DEFINES += USE_KANS
 
 INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR $$WHITEDB_SRC_GROUP_DIR
 
+INCLUDEPATH += $$SRC_GROUP_DIR/dgdb-white
+
 
 HEADERS += \
   $$SRC_DIR/demo-class.h \
+  $$SRC_DIR/queue-demo-class.h \
 
 
 
 SOURCES += \
   $$SRC_DIR/main.cpp \
   $$SRC_DIR/demo-class.cpp \
+  $$SRC_DIR/queue-demo-class.cpp \
 
 
 

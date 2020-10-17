@@ -6,6 +6,9 @@
 
 #include "dw-instance.h"
 
+#include "types/dw-type-system.h"
+
+
 #include "wdb-instance.h"
 #include "wdb-manager.h"
 
@@ -21,6 +24,7 @@ USING_KANS(DGDB)
 
 DW_Instance::DW_Instance()
   :  wdb_instance_(nullptr), wdb_manager_(nullptr),
+     type_system_(nullptr),
      startup_hypernode_record_count_(0), 
      current_hypernode_record_count_(0),
      startup_index_record_count_(0), 
@@ -127,7 +131,8 @@ void DW_Instance::reinit()
 }
 
 void DW_Instance::init()
-{ 
+{
+ type_system_ = new DW_Type_System; 
  wdb_manager_ = new WDB_Manager(this);
  wdb_manager_->set_db_root_folder(db_root_folder_);
  wdb_manager_->init_from_ntxh();

@@ -32,6 +32,7 @@ class WDB_Manager;
 class DW_Frame;
 
 class String_Label_Triple;
+class DW_Type_System;
 
 //  
 //   
@@ -52,6 +53,8 @@ class DW_Instance
  WDB_Manager* wdb_manager_;
 
  QString file_name_;
+
+ DW_Type_System* type_system_;
 
  u4 startup_hypernode_record_count_; 
  u4 current_hypernode_record_count_;
@@ -125,6 +128,7 @@ public:
 
  ACCESSORS(QString ,db_root_folder)
  ACCESSORS(WDB_Instance* ,wdb_instance)
+ ACCESSORS(DW_Type_System* ,type_system)
 
  DW_Instance();
 

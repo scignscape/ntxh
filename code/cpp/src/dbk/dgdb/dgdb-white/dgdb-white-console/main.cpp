@@ -13,6 +13,9 @@
 
 #include "demo-class.h"
 
+#include "queue-demo-class.h"
+
+
 #include "dgdb-white/dw-instance.h"
 #include "dgdb-white/dw-record.h"
 
@@ -26,12 +29,55 @@
 #include "dgdb-white/dgenvironment.h"
 
 #include "dgdb-white/wdb-instance.h"
+#include "dgdb-white/types/dw-type-system.h"
+#include "dgdb-white/types/dw-type.h"
 
 #include "global-types.h"
 
 
 USING_KANS(DGDB)
 
+
+
+int main(int argc, char* argv[])
+{
+ DW_Instance* dw = DGEnvironment(
+   DEFAULT_DEV_DGDB_FOLDER "/instances/t1");
+
+ // // local_scratch_mode has no persistence at all.
+  //   Scratch mode resents the database whenever it is 
+  //   opened by DigammaDB, but keeps the database in memory 
+  //   in between (so e.g. it can be examined via the wgdb utility). 
+ dw->Config.flags.local_scratch_mode = true;
+
+ //dw->Config.flags.scratch_mode = true;
+ dw->init();
+
+ Queue_Demo_Class* qdc = new Queue_Demo_Class;
+ qdc->set_author("Immanuel Kant");
+ qdc->set_title("Critique of Pure Reason");
+ qdc->set_num(777);
+ qdc->set_publication_date(QDate(1787, 4, 23));
+ qdc->set_test_time(QTime(11,47,22,888));
+
+ DW_Type_System* dwt = dw->type_system();
+
+//? dwt->REGISTER_TYPE_NAME_RESOLUTION(QString);
+ dwt->REGISTER_TYPE_NAME_RESOLUTION(Queue_Demo_Class);
+
+ dwt->REGISTER_TYPE(Queue_Demo_Class)
+   .default_object_layout()
+   .set_stage_encoder(&Queue_Demo_Class::encode_stage_values);
+ 
+
+// std::function<void(void*, QByteArray& qba, 
+//   DW_Stage_Value::Callback_type cb)> fn =  ; //testt->stage_encoder();
+
+// QByteArray qba;
+// fn(test, qba, cb);
+
+
+}
 
 int main2(int argc, char* argv[])
 {
@@ -150,7 +196,7 @@ int main1(int argc, char* argv[])
  
 }
 
-int main(int argc, char* argv[])
+int main5(int argc, char* argv[])
 {
  DW_Instance* dw = DGEnvironment(
    DEFAULT_DEV_DGDB_FOLDER "/instances/t1");
