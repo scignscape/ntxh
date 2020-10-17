@@ -33,7 +33,7 @@
 USING_KANS(DGDB)
 
 
-int main(int argc, char* argv[])
+int main2(int argc, char* argv[])
 {
  DW_Instance* dw = DGEnvironment(
    DEFAULT_DEV_DGDB_FOLDER "/instances/t1");
@@ -90,7 +90,7 @@ int main(int argc, char* argv[])
  
 }
 
-int main2(int argc, char* argv[])
+int main1(int argc, char* argv[])
 {
  DW_Instance* dw = DGEnvironment(
    DEFAULT_DEV_DGDB_FOLDER "/instances/t1");
@@ -150,9 +150,7 @@ int main2(int argc, char* argv[])
  
 }
 
-
-
-int main1(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
  DW_Instance* dw = DGEnvironment(
    DEFAULT_DEV_DGDB_FOLDER "/instances/t1");
@@ -163,9 +161,39 @@ int main1(int argc, char* argv[])
   //   in between (so e.g. it can be examined via the wgdb utility). 
  //dw->Config.flags.local_scratch_mode = true;
 
- dw->Config.flags.scratch_mode = true;
+// dw->Config.flags.scratch_mode = true;
  dw->init();
- 
+
+ QString rf = dw->get_restore_file();
+
+ qDebug() << "RF = " << rf; 
+
+ if(!rf.isEmpty())
+ {
+  dw->restore_from_file(rf);
+  dw->reinit();
+ }
+
+
+}
+
+int main4(int argc, char* argv[])
+{
+ DW_Instance* dw = DGEnvironment(
+   DEFAULT_DEV_DGDB_FOLDER "/instances/t1");
+
+ // // local_scratch_mode has no persistence at all.
+  //   Scratch mode resents the database whenever it is 
+  //   opened by DigammaDB, but keeps the database in memory 
+  //   in between (so e.g. it can be examined via the wgdb utility). 
+ //dw->Config.flags.local_scratch_mode = true;
+
+// dw->Config.flags.scratch_mode = true;
+ dw->init();
+
+ QString rf = dw->get_restore_file();
+
+ qDebug() << "RF = " << rf; 
 
  qDebug() << "DB root folder: " << dw->db_root_folder();
 
@@ -205,7 +233,7 @@ int main1(int argc, char* argv[])
  dc2.absorb_data(qba2);
  qDebug() << "ok: " << dc2.a_string() << dc2.a_number(); 
 
-
+ dw->save_changes();
 
 }
 

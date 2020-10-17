@@ -52,6 +52,9 @@ public:
 
  void init_from_ntxh();
 
+ QString get_restore_file();
+
+ WDB_Instance* check_reinit();
  WDB_Instance* get_current_white();
  WDB_Instance* get_white(QString name);
 

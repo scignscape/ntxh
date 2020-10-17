@@ -12,6 +12,7 @@
 #include "dw-frame.h"
 
 #include <QDebug>
+#include <QFileInfo>
 
 
 
@@ -36,6 +37,17 @@ DW_Instance::DW_Instance()
      current_double_edges_record_count_(0)
 {
 
+}
+
+void DW_Instance::restore_from_file(QString rf)
+{
+ wdb_instance_->load_from_file(rf);
+}
+
+
+void DW_Instance::save_changes()
+{
+ wdb_instance_->save_to_local_file(db_root_folder_, file_name_);
 }
 
 DW_Frame* DW_Instance::new_frame()
@@ -107,6 +119,13 @@ $cc: %2
 )").arg(db_root_folder_).arg(Config.Flags);
 }
 
+void DW_Instance::reinit()
+{
+ Config.flags.temp_reinit = true;
+ wdb_instance_ = wdb_manager_->check_reinit();
+ Config.flags.temp_reinit = false;
+}
+
 void DW_Instance::init()
 { 
  wdb_manager_ = new WDB_Manager(this);
@@ -114,6 +133,19 @@ void DW_Instance::init()
  wdb_manager_->init_from_ntxh();
  wdb_instance_ = wdb_manager_->get_current_white();
 }
+
+QString DW_Instance::get_restore_file()
+{
+ QString result = wdb_instance_->get_local_file_name(db_root_folder_, file_name_);
+ if(!result.isEmpty())
+ {
+  QFileInfo qfi(result);
+  if(qfi.exists())
+    return result;
+ } 
+ return {};
+}
+
 
 void DW_Instance::init_from_ntxh(QString fld, u1 code)
 {
@@ -139,7 +171,7 @@ u4 DW_Instance::new_multi_index_record_id()
  return current_multi_index_record_count_ | multi_indexes_mask;
 }
 
-u4 new_double_edges_record_id()
+u4 DW_Instance::new_double_edges_record_id()
 {
  ++current_double_edges_record_count_;
  return current_double_edges_record_count_ | double_edges_mask;

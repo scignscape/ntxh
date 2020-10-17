@@ -51,6 +51,8 @@ class DW_Instance
  WDB_Instance* wdb_instance_;
  WDB_Manager* wdb_manager_;
 
+ QString file_name_;
+
  u4 startup_hypernode_record_count_; 
  u4 current_hypernode_record_count_;
 
@@ -112,6 +114,8 @@ public:
    bool local_scratch_mode:1;
    bool auto_stage:1;
    bool auto_commit:1;
+
+   bool temp_reinit:1;
   _flags
 
   _Config() : Flags(0) {}  
@@ -127,6 +131,8 @@ public:
  DW_Frame* new_frame();
 
  void init(); 
+ void reinit();
+
 
  void to_ntxh(QString& ty, QString& result);
  void init_from_ntxh(QString fld, u1 code);
@@ -134,6 +140,10 @@ public:
  void* query_leading_rec(u4 col);
  void* query_leading_str(u4 col);
  void* query_leading_int(u4 col);
+
+ QString get_restore_file();
+ void restore_from_file(QString rf);
+
 
 
  DW_Record new_wg_hypernode_record(const QByteArray& qba);
@@ -183,6 +193,9 @@ public:
  void get_hypernode_payload(const DW_Record& dwr, QByteArray& qba);
 
  DW_Record query_by_index_record(DW_Stage_Value& dwsv);
+
+ void save_changes();
+
  
 
 };

@@ -48,6 +48,11 @@ WDB_Manager::WDB_Manager(DW_Instance* dw_instance)
 
 }
 
+QString WDB_Manager::get_restore_file()
+{
+ return {}; //?current_white_->get_local_file_name();
+}
+
 WDB_Instance* WDB_Manager::get_current_white()
 {
  if(!current_white_)
@@ -138,11 +143,24 @@ void WDB_Manager::init_from_ntxh()
 }
 
 
+WDB_Instance* WDB_Manager::check_reinit()
+{
+ if(current_white_)
+ {
+  WDB_Instance* old_white = current_white_;
+  current_white_ = new_white();
+  delete old_white;
+  return current_white_;
+ }
+ return nullptr;
+}
+
 WDB_Instance* WDB_Manager::new_white(u2 num_code, n8 mem, QString name)
 {
  if( (num_code == 0) && !dw_instance_->Config.flags.local_scratch_mode )
  {
-  max_num_code_ += 100;
+  if(!dw_instance_->Config.flags.temp_reinit)
+    max_num_code_ += 100;
   num_code = max_num_code_;
  }
  if(mem == 0)
@@ -158,7 +176,7 @@ WDB_Instance* WDB_Manager::new_white(u2 num_code, n8 mem, QString name)
   if(!db)
     qDebug() << "Failed to attach local database ...";
  }
- else if(dw_instance_->Config.flags.scratch_mode)
+ else if(dw_instance_->Config.flags.scratch_mode | dw_instance_->Config.flags.temp_reinit)
  {
   void* _db = wg_attach_existing_database(
     QString::number(num_code).toLatin1().data());
@@ -189,6 +207,7 @@ WDB_Instance* WDB_Manager::new_white(u2 num_code, n8 mem, QString name)
 
  WDB_Instance* result = new WDB_Instance(db, name);
  result->set_creation_datetime();
+ result->set_num_code(num_code);
 
  whites_[num_code] = result;
 

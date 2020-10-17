@@ -27,6 +27,7 @@ class WDB_Instance
 {
  void* white_;
  QString name_;
+ u2 num_code_;
 
  enum DateTime_Codes {
    Recent_Create = 1, Recent_Load_From_File = 2,
@@ -40,6 +41,10 @@ public:
  WDB_Instance(void* w, QString n = {}); 
 
  ACCESSORS(void* ,white)
+ ACCESSORS(u2 ,num_code)
+
+ void save_to_local_file(QString folder, QString file_name);
+ QString get_local_file_name(QString folder, QString file_name);
 
  void* query_within_id_range(u4 range_col, u4 low, u4 high, 
    u4 param_column, DW_Stage_Value& dwsv);
@@ -50,6 +55,9 @@ public:
 //? void* new_wg_record(u4 id, const QVector<DW_Stage_Value>& svs);
 
  void decode_wg_record_value(void* rec, u4 index, DW_Stage_Value& dwsv);
+
+ void load_from_file(QString rf);
+
 
 
 

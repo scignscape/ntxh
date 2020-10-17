@@ -18,12 +18,32 @@ USING_KANS(DGDB)
 
 
 WDB_Instance::WDB_Instance(void* w, QString n)
-  :  white_(w), name_(n)
+  :  white_(w), name_(n), num_code_(0)
 {
 
 
 }
 
+void WDB_Instance::load_from_file(QString rf)
+{
+ wg_import_dump(white_, rf.toLatin1().data());
+}
+
+
+QString WDB_Instance::get_local_file_name(QString folder, QString file_name)
+{
+ if(file_name.isEmpty())
+   file_name = QString::number(num_code_);
+ return folder + "/" + file_name;
+}
+
+void WDB_Instance::save_to_local_file(QString folder, QString file_name)
+{
+ if(file_name.isEmpty())
+   file_name = QString::number(num_code_);
+ QString file = folder + "/" + file_name;
+ wg_dump(white_, file.toLatin1().data());
+}
 
 // // helper function for the method following it ...
 wg_int _rec_encode(void* wh, DW_Stage_Value& dwsv)
