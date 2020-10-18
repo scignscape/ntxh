@@ -18,6 +18,8 @@
 **/.qmake.stash
 **/ce.txt
 **/co.txt
+**/moc_*.cpp
+
 
 stash/
 cpp/src/qt-reprozip/bin/*
