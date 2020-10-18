@@ -53,12 +53,6 @@ int main(int argc, char* argv[])
  //dw->Config.flags.scratch_mode = true;
  dw->init();
 
- Queue_Demo_Class* qdc = new Queue_Demo_Class;
- qdc->set_author("Immanuel Kant");
- qdc->set_title("Critique of Pure Reason");
- qdc->set_num(777);
- qdc->set_publication_date(QDate(1787, 4, 23));
- qdc->set_test_time(QTime(11,47,22,888));
 
  DW_Type_System* dwt = dw->type_system();
 
@@ -68,7 +62,36 @@ int main(int argc, char* argv[])
  dwt->REGISTER_TYPE(Queue_Demo_Class)
    .default_object_layout()
    .set_stage_encoder(&Queue_Demo_Class::encode_stage_values);
+
+ DW_Type* Queue_Demo_Class_dw_type = dwt->get_type_by_name("Queue_Demo_Class");
+
+ qDebug() << "name: " << Queue_Demo_Class_dw_type->name();
  
+
+ QMap<u4, DW_Stage_Value> svals;
+
+ DW_Stage_Value::Callback_type cb = [dw, &svals](u4 u, QString col, DW_Stage_Value* v)
+ {
+  qDebug() << "u = " << u;
+  
+//  svals[u] = *v;
+ };
+
+
+ Queue_Demo_Class* qdc = new Queue_Demo_Class;
+ qdc->set_author("Immanuel Kant");
+ qdc->set_title("Critique of Pure Reason");
+ qdc->set_num(777);
+ qdc->set_publication_date(QDate(1787, 4, 23));
+ qdc->set_test_time(QTime(11,47,22,888));
+
+// dw->test_register_value(qdc, cb);
+ dw->test_register_value(qdc);
+
+// QByteArray demo_qba;
+// fn(qdc, demo_qba, cb);
+
+
 
 // std::function<void(void*, QByteArray& qba, 
 //   DW_Stage_Value::Callback_type cb)> fn =  ; //testt->stage_encoder();

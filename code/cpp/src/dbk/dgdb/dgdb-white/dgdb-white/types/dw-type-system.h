@@ -55,7 +55,7 @@ public:
 
  void build_default_types();
 
- DW_Type* get_type_by_name(QString tn);
+ DW_Type* get_type_by_name(QString tn, QString* res = nullptr);
  DW_Type& register_type(QString tn, QString ctn = QString());
 
  template<typename VERTEX_Type>

@@ -21,7 +21,7 @@ void Queue_Demo_Class::encode_stage_values(QByteArray& qba,
  QDataStream qds(&qba, QIODevice::WriteOnly);
  qds << DW_Stage_Value().new_qstring_pair(title_, "English").run[1](cb)
    << author_
-   << DW_Stage_Value().set_u2_data(num_).run[2](cb)
+   << DW_Stage_Value().set_u2_data(num_).run["Book.pages"](cb)
    << DW_Stage_Value().set_date_data(publication_date_).run[3](cb)
    << DW_Stage_Value().set_time_data(test_time_).run[4](cb)
 

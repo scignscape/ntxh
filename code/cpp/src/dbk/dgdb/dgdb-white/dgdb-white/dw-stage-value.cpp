@@ -30,7 +30,7 @@ DW_Stage_Value& DW_Stage_Value::set_ptr_data(void* ptr)
 DW_Stage_Value::_run_result 
 DW_Stage_Value::_run_hold::_run::operator()(DW_Stage_Value::Callback_type cb)
 {
- return _this->_run(cb, arg);
+ return _this->_run(cb, index, col);
 }
 
 DW_Stage_Value::_run_result 
@@ -40,9 +40,9 @@ DW_Stage_Value::_run_hold::operator()(DW_Stage_Value::Callback_type cb)
 }
 
 DW_Stage_Value::_run_result 
-DW_Stage_Value::_run(Callback_type cb, u4 field_index)
+DW_Stage_Value::_run(Callback_type cb, u4 field_index, QString col)
 {
- cb(field_index, this);
+ cb(field_index, col, this);
  return {info_, 0};
 }
 
@@ -55,7 +55,7 @@ DW_Stage_Value::_run_result::operator u1() const
 
 u1 DW_Stage_Value::_run_result::collapse_dw_encoding_type() const
 {
- u1 result = info >> 4;
+ u1 result = info >> 4; 
  if(result > 2)
    result = 3;
  return (info & 15) | (result << 4);

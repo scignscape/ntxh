@@ -7,6 +7,7 @@
 #include "dw-instance.h"
 
 #include "types/dw-type-system.h"
+#include "types/dw-type.h"
 
 
 #include "wdb-instance.h"
@@ -41,6 +42,37 @@ DW_Instance::DW_Instance()
      current_double_edges_record_count_(0)
 {
 
+}
+
+
+void DW_Instance::test_register_value(QString type_name, void* v)
+{
+ QMap<QString, DW_Stage_Value*> single_index_vals;
+ QMap<u4, DW_Stage_Value*> multi_index_vals;
+
+ DW_Stage_Value::Callback_type cb = [&single_index_vals, &multi_index_vals]
+   (u4 u, QString col, DW_Stage_Value* v)
+ {
+  if(u)
+    multi_index_vals[u] = v;
+  else
+    single_index_vals[col] = v;
+
+  qDebug() << "u = " << u << ", col = " << col; 
+ };
+
+ test_register_value(type_name, v, cb);
+}
+
+void DW_Instance::test_register_value(QString type_name, void* v, DW_Stage_Value::Callback_type cb)
+{
+ QString res;
+ DW_Type* dwt = type_system_->get_type_by_name(type_name, &res);
+ std::function<void(void*, QByteArray& qba, 
+   DW_Stage_Value::Callback_type cb)> fn = dwt->stage_encoder();
+
+ QByteArray qba;
+ fn(v, qba, cb);
 }
 
 void DW_Instance::restore_from_file(QString rf)

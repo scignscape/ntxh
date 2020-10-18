@@ -30,9 +30,10 @@ LIBS += -L$$TARGETSDIR -lxpdf
 
 
 include($$ROOT_DIR/../preferred/xpdf.pri)
-# -lfreetype -lpng
 # uncomment to use default versions of these libraries,
 # then you don't need a preferred/ ...
+# LIBS += -lfreetype  -lpng
+
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

@@ -27,8 +27,9 @@ static constexpr u1 C_STRING_DECODING_Flag = 64;
 static constexpr u1 XSD_TYPE_DECODING_Flag = 128;
 static constexpr u1 URI_PREFIX_DECODING_Flag = 128;
 
-class DgDb_Node;
+//class DgDb_Node;
 
+/*
 struct DW_Stage_Queue  
 {
  QQueue<void*> values;
@@ -50,6 +51,7 @@ std::function<void(QQueue<void*>&)> stage_queue_memfnptr(void (T::*fn)(QQueue<vo
   (((T*) qq.dequeue())->*fn)(qq);
  };
 }
+*/
 
 class DW_Stage_Value  
 {
@@ -58,7 +60,7 @@ class DW_Stage_Value
 
 public:
 
- typedef std::function<void(u4, DW_Stage_Value*)> Callback_type;
+ typedef std::function<void(u4, QString, DW_Stage_Value*)> Callback_type;
 
 private:
 
@@ -79,13 +81,18 @@ private:
   struct _run
   {
    DW_Stage_Value* _this;
-   u4 arg;
+   u4 index;
+   QString col;   
    _run_result operator()(DW_Stage_Value::Callback_type cb);
   };
   DW_Stage_Value* _this;
   _run operator[](u4 field_index)
   {
-   return {_this, field_index};
+   return {_this, field_index, {}};
+  }
+  _run operator[](QString col)
+  {
+   return {_this, 0, col};
   }
   _run_result operator()(DW_Stage_Value::Callback_type cb);
  };
@@ -117,7 +124,7 @@ public:
   return info_;
  }
 
- _run_result _run(Callback_type cb, u4 field_index = 0);
+ _run_result _run(Callback_type cb, u4 field_index = 0, QString col = {});
 
  _run_hold run;
 
