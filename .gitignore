@@ -19,6 +19,8 @@
 **/ce.txt
 **/co.txt
 **/moc_*.cpp
+**/moc_*.h
+**/qrc_*.cpp
 
 
 stash/
