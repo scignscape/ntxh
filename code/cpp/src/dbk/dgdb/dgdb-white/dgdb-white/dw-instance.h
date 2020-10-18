@@ -200,23 +200,45 @@ public:
 
  void save_changes();
 
- void test_register_value(QString type_name, void* v, DW_Stage_Value::Callback_type cb);
- void test_register_value(QString type_name, void* v);
+ void test_register_value(QString type_name, void* v, 
+   DW_Stage_Value::Callback_type cb, QByteArray* qba = nullptr);
+ void test_register_value(QString type_name, void* v, DW_Stage_Value::Package* pkg = nullptr);
 
  template<typename VALUE_Type>
- void test_register_value(VALUE_Type* v, DW_Stage_Value::Callback_type cb)
+ void test_register_value(VALUE_Type* v, DW_Stage_Value::Callback_type cb, 
+   QByteArray* qba = nullptr)
  {
   QString tn = QString::fromStdString(typeid(VALUE_Type).name());
-  test_register_value(tn, (void*) v, cb);
+  test_register_value(tn, (void*) v, cb, qba);
  }
 
  template<typename VALUE_Type>
- void test_register_value(VALUE_Type* v)
+ void test_register_value(VALUE_Type* v, DW_Stage_Value::Package* pkg = nullptr)
  {
   QString tn = QString::fromStdString(typeid(VALUE_Type).name());
-  test_register_value(tn, (void*) v);
+  test_register_value(tn, (void*) v, pkg);
  }
- 
+
+ void register_typed_value(QString type_name, void* v, 
+   DW_Stage_Value::Callback_type cb, DW_Stage_Value::Package* pkg);
+ void register_typed_value(QString type_name, void* v);
+
+ void register_typed_value(QString type_name, DW_Stage_Value::Package& pkg);
+
+ template<typename VALUE_Type>
+ void register_typed_value(VALUE_Type* v)
+ {
+  QString tn = QString::fromStdString(typeid(VALUE_Type).name());
+  register_typed_value(tn, (void*) v);
+ }
+
+ template<typename VALUE_Type>
+ void register_typed_value(VALUE_Type* v, 
+   DW_Stage_Value::Callback_type cb, DW_Stage_Value::Package* pkg)
+ {
+  QString tn = QString::fromStdString(typeid(VALUE_Type).name());
+  register_typed_value(tn, (void*) v, cb, pkg);
+ }
 
 };
 

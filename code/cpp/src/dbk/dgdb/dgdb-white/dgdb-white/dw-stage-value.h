@@ -62,6 +62,12 @@ public:
 
  typedef std::function<void(u4, QString, DW_Stage_Value*)> Callback_type;
 
+ struct Package {
+  QByteArray qba;
+  QMap<QString, DW_Stage_Value*> single_indexed;
+  QMap<u4, DW_Stage_Value*> multi_indexed;
+ };
+
 private:
 
  struct _run_result

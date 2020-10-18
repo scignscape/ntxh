@@ -38,8 +38,49 @@
 USING_KANS(DGDB)
 
 
-
 int main(int argc, char* argv[])
+{
+ DW_Instance* dw = DGEnvironment(
+   DEFAULT_DEV_DGDB_FOLDER "/instances/t1");
+
+ // // local_scratch_mode has no persistence at all.
+  //   Scratch mode resents the database whenever it is 
+  //   opened by DigammaDB, but keeps the database in memory 
+  //   in between (so e.g. it can be examined via the wgdb utility). 
+// dw->Config.flags.local_scratch_mode = true;
+
+ dw->Config.flags.scratch_mode = true;
+ dw->init();
+
+
+ DW_Type_System* dwt = dw->type_system();
+
+//? dwt->REGISTER_TYPE_NAME_RESOLUTION(QString);
+ dwt->REGISTER_TYPE_NAME_RESOLUTION(Queue_Demo_Class);
+
+ dwt->REGISTER_TYPE(Queue_Demo_Class)
+   .default_object_layout()
+   .set_stage_encoder(&Queue_Demo_Class::encode_stage_values);
+
+ DW_Type* Queue_Demo_Class_dw_type = dwt->get_type_by_name("Queue_Demo_Class");
+
+ qDebug() << "name: " << Queue_Demo_Class_dw_type->name();
+ 
+
+ Queue_Demo_Class* qdc = new Queue_Demo_Class;
+ qdc->set_author("Immanuel Kant");
+ qdc->set_title("Critique of Pure Reason");
+ qdc->set_num(777);
+ qdc->set_publication_date(QDate(1787, 4, 23));
+ qdc->set_test_time(QTime(11,47,22,888));
+
+ dw->register_typed_value(qdc);
+
+ return 0;
+}
+
+
+int main6(int argc, char* argv[])
 {
  DW_Instance* dw = DGEnvironment(
    DEFAULT_DEV_DGDB_FOLDER "/instances/t1");
@@ -70,7 +111,7 @@ int main(int argc, char* argv[])
 
  QMap<u4, DW_Stage_Value> svals;
 
- DW_Stage_Value::Callback_type cb = [dw, &svals](u4 u, QString col, DW_Stage_Value* v)
+ DW_Stage_Value::Callback_type cb1 = [dw, &svals](u4 u, QString col, DW_Stage_Value* v)
  {
   qDebug() << "u = " << u;
   
@@ -85,21 +126,29 @@ int main(int argc, char* argv[])
  qdc->set_publication_date(QDate(1787, 4, 23));
  qdc->set_test_time(QTime(11,47,22,888));
 
-// dw->test_register_value(qdc, cb);
- dw->test_register_value(qdc);
+ DW_Stage_Value::Callback_type cb = [] //&single_index_vals, &multi_index_vals]
+   (u4 u, QString col, DW_Stage_Value* v)
+ {
+/*
+  if(u)
+    multi_index_vals[u] = v;
+  else
+    single_index_vals[col] = v;
+*/
+  qDebug() << "1 u = " << u << ", col = " << col; 
+ };
 
-// QByteArray demo_qba;
-// fn(qdc, demo_qba, cb);
+ DW_Stage_Value::Package pkg;
 
+ dw->test_register_value(qdc, &pkg);
 
+ qDebug() << "pkg qba: " << pkg.qba;
+ qDebug() << "pkg si: " << pkg.single_indexed;
+ qDebug() << "pkg mi: " << pkg.multi_indexed;
 
-// std::function<void(void*, QByteArray& qba, 
-//   DW_Stage_Value::Callback_type cb)> fn =  ; //testt->stage_encoder();
-
-// QByteArray qba;
-// fn(test, qba, cb);
-
-
+ QByteArray demo_qba;
+ dw->test_register_value(qdc, cb, &demo_qba);
+ qDebug() << "demo qba: " << demo_qba;
 }
 
 int main2(int argc, char* argv[])

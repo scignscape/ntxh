@@ -50,7 +50,7 @@ public:
    u4 param_column, DW_Stage_Value& dwsv);
 
  void* new_wg_record(QMap<u4, DW_Stage_Value>& svs);
- void* new_wg_record(u4 id, QMap<u4, DW_Stage_Value>& svs);
+ void* new_wg_record(u4 id, QString col1, QMap<u4, DW_Stage_Value>& svs);
 
 //? void* new_wg_record(u4 id, const QVector<DW_Stage_Value>& svs);
 

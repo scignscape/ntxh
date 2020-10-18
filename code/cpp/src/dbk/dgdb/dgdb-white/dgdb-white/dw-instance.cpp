@@ -44,8 +44,43 @@ DW_Instance::DW_Instance()
 
 }
 
+void DW_Instance::register_typed_value(QString type_name, DW_Stage_Value::Package& pkg)
+{
+ DW_Record dr = new_wg_hypernode_record(pkg.qba);
 
-void DW_Instance::test_register_value(QString type_name, void* v)
+ if(!pkg.single_indexed.isEmpty())
+ {
+
+ }
+ 
+ if(!pkg.multi_indexed.isEmpty())
+ {
+  u4 miid = new_multi_index_record_id();
+  void* mi = wdb_instance_->new_wg_record(miid, type_name, pkg.multi_indexed);
+//  QMapIterator<u4, DW_Stage_Value*> it (pkg.multi_indexed);
+
+ }
+ 
+ //DW_Record dr1 = register_ 
+
+}
+
+void DW_Instance::register_typed_value(QString type_name, void* v, 
+  DW_Stage_Value::Callback_type cb, DW_Stage_Value::Package* pkg)
+{
+ test_register_value(type_name, v, cb);
+ register_typed_value(type_name, *pkg);
+}
+
+void DW_Instance::register_typed_value(QString type_name, void* v)
+{
+ DW_Stage_Value::Package pkg;
+ test_register_value(type_name, v, &pkg);
+ register_typed_value(type_name, pkg);
+}
+
+
+void DW_Instance::test_register_value(QString type_name, void* v, DW_Stage_Value::Package* pkg)
 {
  QMap<QString, DW_Stage_Value*> single_index_vals;
  QMap<u4, DW_Stage_Value*> multi_index_vals;
@@ -61,18 +96,31 @@ void DW_Instance::test_register_value(QString type_name, void* v)
   qDebug() << "u = " << u << ", col = " << col; 
  };
 
- test_register_value(type_name, v, cb);
+ if(pkg)
+ {
+  test_register_value(type_name, v, cb, &pkg->qba);
+  pkg->single_indexed = single_index_vals;
+  pkg->multi_indexed = multi_index_vals;
+ }
+ else
+   test_register_value(type_name, v, cb);
 }
 
-void DW_Instance::test_register_value(QString type_name, void* v, DW_Stage_Value::Callback_type cb)
+void DW_Instance::test_register_value(QString type_name, void* v, DW_Stage_Value::Callback_type cb, QByteArray* qba)
 {
  QString res;
  DW_Type* dwt = type_system_->get_type_by_name(type_name, &res);
  std::function<void(void*, QByteArray& qba, 
    DW_Stage_Value::Callback_type cb)> fn = dwt->stage_encoder();
-
- QByteArray qba;
- fn(v, qba, cb);
+ if(qba)
+ {
+  fn(v, *qba, cb);
+ }
+ else
+ {
+  QByteArray qba;
+  fn(v, qba, cb);
+ }
 }
 
 void DW_Instance::restore_from_file(QString rf)
