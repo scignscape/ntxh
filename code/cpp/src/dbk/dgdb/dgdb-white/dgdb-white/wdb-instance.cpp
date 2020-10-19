@@ -211,6 +211,13 @@ void* WDB_Instance::new_wg_record(QMap<u4, DW_Stage_Value>& svs)
  return new_wg_record(0, {}, svs);
 }
 
+void WDB_Instance::set_wg_record_field_rec(DW_Record dr, u4 col, void* rec)
+{
+ wg_int recenc = wg_encode_record(white_, rec);
+ wg_set_field(white_, dr.wg_record(), col, recenc);
+}
+
+
 void* WDB_Instance::query_leading_rec(u4 col)
 {
  static void* dummy = wg_create_record(white_, 0);
@@ -511,7 +518,7 @@ void* WDB_Instance::new_wg_record(u4 id, QString col1,
 
  if(!col1.isEmpty())
  {
-  wgim[1] = wg_encode_str(white_, col1.toLatin1().data, nullptr);
+  wgim[1] = wg_encode_str(white_, col1.toLatin1().data(), nullptr);
  }
 
  u4 max = 0;

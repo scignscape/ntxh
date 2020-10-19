@@ -57,6 +57,7 @@ void DW_Instance::register_typed_value(QString type_name, DW_Stage_Value::Packag
  {
   u4 miid = new_multi_index_record_id();
   void* mi = wdb_instance_->new_wg_record(miid, type_name, pkg.multi_indexed);
+  wdb_instance_->set_wg_record_field_rec(dr, 4, mi);
 //  QMapIterator<u4, DW_Stage_Value*> it (pkg.multi_indexed);
 
  }
@@ -68,48 +69,52 @@ void DW_Instance::register_typed_value(QString type_name, DW_Stage_Value::Packag
 void DW_Instance::register_typed_value(QString type_name, void* v, 
   DW_Stage_Value::Callback_type cb, DW_Stage_Value::Package* pkg)
 {
- test_register_value(type_name, v, cb);
- register_typed_value(type_name, *pkg);
+ QString tn = test_register_value(type_name, v, cb);
+ register_typed_value(tn, *pkg);
 }
 
 void DW_Instance::register_typed_value(QString type_name, void* v)
 {
  DW_Stage_Value::Package pkg;
- test_register_value(type_name, v, &pkg);
- register_typed_value(type_name, pkg);
+ QString tn = test_register_value(type_name, v, &pkg);
+ register_typed_value(tn, pkg);
 }
 
 
-void DW_Instance::test_register_value(QString type_name, void* v, DW_Stage_Value::Package* pkg)
+QString DW_Instance::test_register_value(QString type_name, void* v, DW_Stage_Value::Package* pkg)
 {
- QMap<QString, DW_Stage_Value*> single_index_vals;
- QMap<u4, DW_Stage_Value*> multi_index_vals;
+ QString result;
+
+ QMap<QString, DW_Stage_Value> single_index_vals;
+ QMap<u4, DW_Stage_Value> multi_index_vals;
 
  DW_Stage_Value::Callback_type cb = [&single_index_vals, &multi_index_vals]
    (u4 u, QString col, DW_Stage_Value* v)
  {
   if(u)
-    multi_index_vals[u] = v;
+    multi_index_vals[u] = *v;
   else
-    single_index_vals[col] = v;
+    single_index_vals[col] = *v;
 
   qDebug() << "u = " << u << ", col = " << col; 
  };
 
  if(pkg)
  {
-  test_register_value(type_name, v, cb, &pkg->qba);
+  result = test_register_value(type_name, v, cb, &pkg->qba);
   pkg->single_indexed = single_index_vals;
   pkg->multi_indexed = multi_index_vals;
  }
  else
-   test_register_value(type_name, v, cb);
+   result = test_register_value(type_name, v, cb);
+
+ return result;
 }
 
-void DW_Instance::test_register_value(QString type_name, void* v, DW_Stage_Value::Callback_type cb, QByteArray* qba)
+QString DW_Instance::test_register_value(QString type_name, void* v, DW_Stage_Value::Callback_type cb, QByteArray* qba)
 {
- QString res;
- DW_Type* dwt = type_system_->get_type_by_name(type_name, &res);
+ QString result;
+ DW_Type* dwt = type_system_->get_type_by_name(type_name, &result);
  std::function<void(void*, QByteArray& qba, 
    DW_Stage_Value::Callback_type cb)> fn = dwt->stage_encoder();
  if(qba)
@@ -121,6 +126,7 @@ void DW_Instance::test_register_value(QString type_name, void* v, DW_Stage_Value
   QByteArray qba;
   fn(v, qba, cb);
  }
+ return result;
 }
 
 void DW_Instance::restore_from_file(QString rf)
@@ -150,7 +156,7 @@ DW_Record DW_Instance::new_wg_index_record(const DW_Record& ref, const DW_Stage_
 
  QMap<u4, DW_Stage_Value> svs {{1, col_1}, {2, col_2}, {3, dwsv} };
 
- void* result = wdb_instance_->new_wg_record(id, svs);
+ void* result = wdb_instance_->new_wg_record(id, {}, svs);
 
  return {id, result};
 }

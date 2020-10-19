@@ -64,8 +64,8 @@ public:
 
  struct Package {
   QByteArray qba;
-  QMap<QString, DW_Stage_Value*> single_indexed;
-  QMap<u4, DW_Stage_Value*> multi_indexed;
+  QMap<QString, DW_Stage_Value> single_indexed;
+  QMap<u4, DW_Stage_Value> multi_indexed;
  };
 
 private:

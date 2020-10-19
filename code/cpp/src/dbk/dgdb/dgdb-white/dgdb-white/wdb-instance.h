@@ -58,7 +58,7 @@ public:
 
  void load_from_file(QString rf);
 
-
+ void set_wg_record_field_rec(DW_Record dr, u4 col, void* rec);
 
 
  void get_qba_from_record(void* rec, u4 field_number, QByteArray& qba);

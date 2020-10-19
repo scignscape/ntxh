@@ -143,8 +143,8 @@ int main6(int argc, char* argv[])
  dw->test_register_value(qdc, &pkg);
 
  qDebug() << "pkg qba: " << pkg.qba;
- qDebug() << "pkg si: " << pkg.single_indexed;
- qDebug() << "pkg mi: " << pkg.multi_indexed;
+ qDebug() << "pkg si: " << pkg.single_indexed.keys();
+ qDebug() << "pkg mi: " << pkg.multi_indexed.keys();
 
  QByteArray demo_qba;
  dw->test_register_value(qdc, cb, &demo_qba);

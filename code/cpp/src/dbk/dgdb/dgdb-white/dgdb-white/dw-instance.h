@@ -200,9 +200,9 @@ public:
 
  void save_changes();
 
- void test_register_value(QString type_name, void* v, 
+ QString test_register_value(QString type_name, void* v, 
    DW_Stage_Value::Callback_type cb, QByteArray* qba = nullptr);
- void test_register_value(QString type_name, void* v, DW_Stage_Value::Package* pkg = nullptr);
+ QString test_register_value(QString type_name, void* v, DW_Stage_Value::Package* pkg = nullptr);
 
  template<typename VALUE_Type>
  void test_register_value(VALUE_Type* v, DW_Stage_Value::Callback_type cb, 
