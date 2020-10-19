@@ -193,12 +193,13 @@ public:
  DW_Record new_wg_findable_field_record(const QByteArray& qba);
  DW_Record new_wg_index_label_record(QString label);
 
- DW_Record new_wg_index_record(const DW_Record& ref, const DW_Stage_Value& dwsv);
+ DW_Record new_wg_index_record(const DW_Record& ref, 
+   const DW_Stage_Value& dwsv, QString label = {});
 
  void get_hypernode_payload(u4 id, QByteArray& qba);
  void get_hypernode_payload(const DW_Record& dwr, QByteArray& qba);
 
- DW_Record query_by_index_record(DW_Stage_Value& dwsv);
+ DW_Record query_by_index_record(DW_Stage_Value& dwsv, QString label = {});
 
  void save_changes();
 
@@ -221,25 +222,26 @@ public:
   test_register_value(tn, (void*) v, pkg);
  }
 
- void register_typed_value(QString type_name, void* v, 
+ DW_Record register_typed_value(QString type_name, void* v, 
    DW_Stage_Value::Callback_type cb, DW_Stage_Value::Package* pkg);
- void register_typed_value(QString type_name, void* v);
 
- void register_typed_value(QString type_name, DW_Stage_Value::Package& pkg);
+ DW_Record register_typed_value(QString type_name, void* v);
+
+ DW_Record register_typed_value(QString type_name, DW_Stage_Value::Package& pkg);
 
  template<typename VALUE_Type>
- void register_typed_value(VALUE_Type* v)
+ DW_Record register_typed_value(VALUE_Type* v)
  {
   QString tn = QString::fromStdString(typeid(VALUE_Type).name());
-  register_typed_value(tn, (void*) v);
+  return register_typed_value(tn, (void*) v);
  }
 
  template<typename VALUE_Type>
- void register_typed_value(VALUE_Type* v, 
+ DW_Record register_typed_value(VALUE_Type* v, 
    DW_Stage_Value::Callback_type cb, DW_Stage_Value::Package* pkg)
  {
   QString tn = QString::fromStdString(typeid(VALUE_Type).name());
-  register_typed_value(tn, (void*) v, cb, pkg);
+  return register_typed_value(tn, (void*) v, cb, pkg);
  }
 
 };

@@ -76,7 +76,15 @@ int main(int argc, char* argv[])
  qdc->set_publication_date(QDate(1787, 4, 23));
  qdc->set_test_time(QTime(11,47,22,888));
 
- dw->register_typed_value(qdc);
+ DW_Record dwr1 = dw->register_typed_value(qdc);
+
+ DW_Stage_Value dwsv;
+ dwsv.set_u4_data(777);
+ 
+ DW_Record dwr2 = dw->query_by_index_record(dwsv, "Book.Pages");
+
+ qDebug() << "dwr2 id: " << dwr2.id();
+
 
  return 0;
 }

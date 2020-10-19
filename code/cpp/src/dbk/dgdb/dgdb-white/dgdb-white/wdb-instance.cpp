@@ -426,9 +426,11 @@ wg_int _wg_encode_query_param(void* wh, DW_Stage_Value& dwsv)
 }
 
 void* WDB_Instance::query_within_id_range(u4 range_col, u4 low, u4 high, 
-  u4 param_column, DW_Stage_Value& dwsv)
+  u4 param_column, DW_Stage_Value dwsv, QString label, u4 label_column)
 {
- wg_query_arg arglist[3];
+ u1 arglist_size = label.isEmpty()? 3 : 4;
+
+ wg_query_arg arglist[arglist_size];
 
  arglist[0].column = range_col;
  arglist[0].cond = WG_COND_LESSTHAN;
@@ -442,14 +444,23 @@ void* WDB_Instance::query_within_id_range(u4 range_col, u4 low, u4 high,
  arglist[2].cond = WG_COND_EQUAL;
  arglist[2].value = _wg_encode_query_param(white_, dwsv);
 
- wg_query* query = wg_make_query(white_, nullptr, 0, arglist, 3);
+ if(!label.isEmpty())
+ {
+  arglist[3].column = label_column;
+  arglist[3].cond = WG_COND_EQUAL;
+  arglist[3].value = wg_encode_query_param_str(white_, label.toLatin1().data(), nullptr);
+ }
+
+ wg_query* query = wg_make_query(white_, nullptr, 0, arglist, arglist_size);
 
  void* result = wg_fetch(white_, query);
 
  wg_free_query(white_, query);
- wg_free_query_param(white_, arglist[0].value);
- wg_free_query_param(white_, arglist[1].value);
- wg_free_query_param(white_, arglist[2].value);
+
+ for(u1 u = 0; u < arglist_size; ++u)
+ {
+  wg_free_query_param(white_, arglist[u].value);
+ }
 
  return result;
 }
@@ -898,15 +909,25 @@ u4 WDB_Instance::get_record_id(void* rec)
  return wg_decode_int(white_, data);
 }
 
-void* WDB_Instance::get_record_ref_target(void* rec, u4* and_ref_id)
+void* WDB_Instance::get_index_record_ref_target(void* rec, u4* and_ref_id)
 {
- wg_int data = wg_get_field(white_, rec, 1);
- void* result = wg_decode_record(white_, data);
+ void* result;
+ if(dw_instance_->Config.flags.avoid_record_pointers)
+ {
+  wg_int data = wg_get_field(white_, rec, 3);
+  u4 id = wg_decode_int(white_, data);
+  result = wg_find_record_int(white_, 0, WG_COND_EQUAL, id, nullptr);
+ }
+ else
+ {
+  wg_int data = wg_get_field(white_, rec, 2);
+  result = wg_decode_record(white_, data);
+ }
  if(result) 
  {
   if(and_ref_id)
   {
-   wg_int data1 = wg_get_field(white_, rec, 2);
+   wg_int data1 = wg_get_field(white_, rec, 3);
    *and_ref_id = wg_decode_int(white_, data1);
   }
  }

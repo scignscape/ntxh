@@ -52,7 +52,7 @@ public:
  QString get_local_file_name(QString folder, QString file_name);
 
  void* query_within_id_range(u4 range_col, u4 low, u4 high, 
-   u4 param_column, DW_Stage_Value& dwsv);
+   u4 param_column, DW_Stage_Value dwsv, QString label = {}, u4 label_column = 1);
 
  void* new_wg_record(QMap<u4, DW_Stage_Value>& svs);
  DW_Record new_wg_record(u4 id, QString col1, void* col2, QMap<u4, DW_Stage_Value>& svs);
@@ -83,7 +83,7 @@ public:
 
  void* get_record_by_id(u4 id);
  u4 get_record_id(void* rec);
- void* get_record_ref_target(void* rec, u4* and_ref_id = nullptr);
+ void* get_index_record_ref_target(void* rec, u4* and_ref_id = nullptr);
 
  void set_record_id_field(void* rec, u4 id);
  n8 set_record_field(void* rec, u4 col, DW_Stage_Value& dwsv);

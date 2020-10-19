@@ -44,41 +44,46 @@ DW_Instance::DW_Instance()
 
 }
 
-void DW_Instance::register_typed_value(QString type_name, DW_Stage_Value::Package& pkg)
+DW_Record DW_Instance::register_typed_value(QString type_name, DW_Stage_Value::Package& pkg)
 {
- DW_Record dr = new_wg_hypernode_record(pkg.qba);
+ DW_Record result = new_wg_hypernode_record(pkg.qba);
 
  if(!pkg.single_indexed.isEmpty())
  {
-  
+  QMapIterator<QString, DW_Stage_Value> it (pkg.single_indexed);
+  while(it.hasNext())
+  {
+   it.next();
+   DW_Record ir = new_wg_index_record(result, it.value(), it.key()); //const DW_Stage_Value& dwsv);
+  }
  }
  
  if(!pkg.multi_indexed.isEmpty())
  {
   u4 miid = new_multi_index_record_id();
   DW_Record mi = wdb_instance_->new_wg_record(miid, type_name, 
-    Config.flags.avoid_record_pointers? &dr : dr.wg_record(), pkg.multi_indexed);
-  wdb_instance_->set_wg_record_field_rec(dr, 4, mi);
+    Config.flags.avoid_record_pointers? &result : result.wg_record(), pkg.multi_indexed);
+  wdb_instance_->set_wg_record_field_rec(result, 4, mi);
 //  QMapIterator<u4, DW_Stage_Value*> it (pkg.multi_indexed);
 
  }
- 
- //DW_Record dr1 = register_ 
 
+ return result;
+ //DW_Record dr1 = register_ 
 }
 
-void DW_Instance::register_typed_value(QString type_name, void* v, 
+DW_Record DW_Instance::register_typed_value(QString type_name, void* v, 
   DW_Stage_Value::Callback_type cb, DW_Stage_Value::Package* pkg)
 {
  QString tn = test_register_value(type_name, v, cb);
- register_typed_value(tn, *pkg);
+ return register_typed_value(tn, *pkg);
 }
 
-void DW_Instance::register_typed_value(QString type_name, void* v)
+DW_Record DW_Instance::register_typed_value(QString type_name, void* v)
 {
  DW_Stage_Value::Package pkg;
  QString tn = test_register_value(type_name, v, &pkg);
- register_typed_value(tn, pkg);
+ return register_typed_value(tn, pkg);
 }
 
 
@@ -146,32 +151,36 @@ DW_Frame* DW_Instance::new_frame()
  return new DW_Frame(this);
 }
 
-DW_Record DW_Instance::new_wg_index_record(const DW_Record& ref, const DW_Stage_Value& dwsv)
+DW_Record DW_Instance::new_wg_index_record(const DW_Record& ref, const DW_Stage_Value& dwsv, 
+  QString label)
 {  
  u4 id = new_index_record_id();
- DW_Stage_Value col_1;
- col_1.set_rec_data(ref.wg_record());
 
+ DW_Stage_Value col_3;
+ col_3.set_u4_data(ref.id());
+
+ QMap<u4, DW_Stage_Value> svs {{3, col_3}, {4, dwsv} };
+
+ if(Config.flags.avoid_record_pointers)
+ {
+  return wdb_instance_->new_wg_record(id, label, nullptr, svs);
+ }
  DW_Stage_Value col_2;
- col_2.set_u4_data(ref.id());
-
- QMap<u4, DW_Stage_Value> svs {{1, col_1}, {2, col_2}, {3, dwsv} };
-
- DW_Record result = wdb_instance_->new_wg_record(id, {}, nullptr, svs);
-
- return result;
+ col_2.set_rec_data(ref.wg_record());
+ svs.insert(2, col_2);
+ return wdb_instance_->new_wg_record(id, label, nullptr, svs);
 }
 
-DW_Record DW_Instance::query_by_index_record(DW_Stage_Value& dwsv)
+DW_Record DW_Instance::query_by_index_record(DW_Stage_Value& dwsv, QString label)
 {
- u4 param_column = 3;
+ u4 param_column = 4;
  void* result = wdb_instance_->query_within_id_range(0, indexes_mask, max_mask, 
-   param_column, dwsv);
+   param_column, dwsv, label);
 
  if(result)
  {
   u4 refid = 0;
-  void* ref = wdb_instance_->get_record_ref_target(result, &refid);   
+  void* ref = wdb_instance_->get_index_record_ref_target(result, &refid);   
   return {refid, ref};
  }
 
