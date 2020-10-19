@@ -50,7 +50,7 @@ void DW_Instance::register_typed_value(QString type_name, DW_Stage_Value::Packag
 
  if(!pkg.single_indexed.isEmpty())
  {
-
+  
  }
  
  if(!pkg.multi_indexed.isEmpty())

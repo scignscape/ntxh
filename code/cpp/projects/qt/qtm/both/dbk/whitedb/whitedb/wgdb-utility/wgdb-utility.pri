@@ -24,7 +24,7 @@ HEADERS += \
 
 
 SOURCES += \
-  $$SRC_DIR/main.cpp \
+  $$SRC_DIR/Main/wgdb.c
 
 
 LIBS += -L$$TARGETSDIR -lwhitedb
