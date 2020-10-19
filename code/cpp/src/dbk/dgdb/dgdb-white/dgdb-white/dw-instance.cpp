@@ -56,7 +56,8 @@ void DW_Instance::register_typed_value(QString type_name, DW_Stage_Value::Packag
  if(!pkg.multi_indexed.isEmpty())
  {
   u4 miid = new_multi_index_record_id();
-  void* mi = wdb_instance_->new_wg_record(miid, type_name, pkg.multi_indexed);
+  DW_Record mi = wdb_instance_->new_wg_record(miid, type_name, 
+    Config.flags.avoid_record_pointers? &dr : dr.wg_record(), pkg.multi_indexed);
   wdb_instance_->set_wg_record_field_rec(dr, 4, mi);
 //  QMapIterator<u4, DW_Stage_Value*> it (pkg.multi_indexed);
 
@@ -156,9 +157,9 @@ DW_Record DW_Instance::new_wg_index_record(const DW_Record& ref, const DW_Stage_
 
  QMap<u4, DW_Stage_Value> svs {{1, col_1}, {2, col_2}, {3, dwsv} };
 
- void* result = wdb_instance_->new_wg_record(id, {}, svs);
+ DW_Record result = wdb_instance_->new_wg_record(id, {}, nullptr, svs);
 
- return {id, result};
+ return result;
 }
 
 DW_Record DW_Instance::query_by_index_record(DW_Stage_Value& dwsv)
@@ -301,7 +302,7 @@ DW_Record DW_Instance::new_wg_hypernode_record(const QByteArray& qba)
 {
  u4 base_id = new_hypernode_record_id();
  //base_id <<= 13;
- void* result = wdb_instance_->new_wg_record(5, base_id);
+ void* result = wdb_instance_->new_wg_record(7, base_id);
  
  wdb_instance_->set_qba_record_field(result, 1, qba);
 

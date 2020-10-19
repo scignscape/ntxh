@@ -22,9 +22,12 @@
 
 KANS_(DGDB)
 
+class DW_Instance;
 
 class WDB_Instance
 {
+ DW_Instance* dw_instance_;
+
  void* white_;
  QString name_;
  u2 num_code_;
@@ -36,9 +39,11 @@ class WDB_Instance
 
  QMap<u1, QDateTime> datetimes_; 
 
+ void* _new_wg_record(u4 id, QString col1, void* col2, QMap<u4, DW_Stage_Value>& svs);
+
 public:
 
- WDB_Instance(void* w, QString n = {}); 
+ WDB_Instance(DW_Instance* dw_instance, void* w, QString n = {}); 
 
  ACCESSORS(void* ,white)
  ACCESSORS(u2 ,num_code)
@@ -50,7 +55,7 @@ public:
    u4 param_column, DW_Stage_Value& dwsv);
 
  void* new_wg_record(QMap<u4, DW_Stage_Value>& svs);
- void* new_wg_record(u4 id, QString col1, QMap<u4, DW_Stage_Value>& svs);
+ DW_Record new_wg_record(u4 id, QString col1, void* col2, QMap<u4, DW_Stage_Value>& svs);
 
 //? void* new_wg_record(u4 id, const QVector<DW_Stage_Value>& svs);
 
@@ -58,7 +63,11 @@ public:
 
  void load_from_file(QString rf);
 
- void set_wg_record_field_rec(DW_Record dr, u4 col, void* rec);
+ void set_wg_record_field_rec(DW_Record& dr, u4 col, DW_Record& rec);
+ n8 wg_encode_dw_record(DW_Record& rec);
+ n8 check_wg_encode_dw_record(void* v);
+
+ //void avoid_record_pointers
 
 
  void get_qba_from_record(void* rec, u4 field_number, QByteArray& qba);

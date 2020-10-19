@@ -205,7 +205,7 @@ WDB_Instance* WDB_Manager::new_white(u2 num_code, n8 mem, QString name)
  if(!db)
    return nullptr;
 
- WDB_Instance* result = new WDB_Instance(db, name);
+ WDB_Instance* result = new WDB_Instance(dw_instance_, db, name);
  result->set_creation_datetime();
  result->set_num_code(num_code);
 

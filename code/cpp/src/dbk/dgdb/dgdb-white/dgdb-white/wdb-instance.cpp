@@ -7,6 +7,8 @@
 
 #include "wdb-instance.h"
 
+#include "dw-instance.h"
+
 extern "C" {
 #include "whitedb/_whitedb.h"
 }
@@ -17,8 +19,8 @@ extern "C" {
 USING_KANS(DGDB)
 
 
-WDB_Instance::WDB_Instance(void* w, QString n)
-  :  white_(w), name_(n), num_code_(0)
+WDB_Instance::WDB_Instance(DW_Instance* dw_instance, void* w, QString n)
+  :  dw_instance_(dw_instance), white_(w), name_(n), num_code_(0)
 {
 
 
@@ -208,12 +210,29 @@ wg_int _rec_encode(void* wh, DW_Stage_Value& dwsv)
 
 void* WDB_Instance::new_wg_record(QMap<u4, DW_Stage_Value>& svs)
 {
- return new_wg_record(0, {}, svs);
+ return _new_wg_record(0, {}, nullptr, svs);
 }
 
-void WDB_Instance::set_wg_record_field_rec(DW_Record dr, u4 col, void* rec)
+
+n8 WDB_Instance::wg_encode_dw_record(DW_Record& rec)
 {
- wg_int recenc = wg_encode_record(white_, rec);
+ if(dw_instance_->Config.flags.avoid_record_pointers)
+   return (n8) wg_encode_int(white_, rec.id());
+ else
+   return (n8) wg_encode_record(white_, rec.wg_record());
+}
+
+n8 WDB_Instance::check_wg_encode_dw_record(void* v)
+{
+ if(dw_instance_->Config.flags.avoid_record_pointers)
+   return (n8) wg_encode_int(white_, ((DW_Record*)v)->id());
+ else
+   return (n8) wg_encode_record(white_, v); 
+}
+
+void WDB_Instance::set_wg_record_field_rec(DW_Record& dr, u4 col, DW_Record& rec)
+{
+ wg_int recenc = wg_encode_dw_record(rec);
  wg_set_field(white_, dr.wg_record(), col, recenc);
 }
 
@@ -504,7 +523,15 @@ n8 WDB_Instance::set_record_field(void* rec, u4 col, DW_Stage_Value& dwsv)
  return (n8) result;
 }
 
-void* WDB_Instance::new_wg_record(u4 id, QString col1, 
+
+DW_Record WDB_Instance::new_wg_record(u4 id, QString col1, void* col2, QMap<u4, DW_Stage_Value>& svs)
+{
+ void* result = _new_wg_record(id, col1, col2, svs);
+ return {id, result};
+}
+
+
+void* WDB_Instance::_new_wg_record(u4 id, QString col1, void* col2, 
   QMap<u4, DW_Stage_Value>& svs)
 {
  QMutableMapIterator<u4, DW_Stage_Value> it(svs);
@@ -519,6 +546,11 @@ void* WDB_Instance::new_wg_record(u4 id, QString col1,
  if(!col1.isEmpty())
  {
   wgim[1] = wg_encode_str(white_, col1.toLatin1().data(), nullptr);
+ }
+
+ if(col2)
+ {
+  wgim[2] = check_wg_encode_dw_record(col2);
  }
 
  u4 max = 0;

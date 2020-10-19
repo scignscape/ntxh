@@ -118,6 +118,8 @@ public:
    bool auto_stage:1;
    bool auto_commit:1;
 
+   bool avoid_record_pointers:1;
+
    bool temp_reinit:1;
   _flags
 

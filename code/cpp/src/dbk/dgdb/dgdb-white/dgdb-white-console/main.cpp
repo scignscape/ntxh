@@ -50,6 +50,8 @@ int main(int argc, char* argv[])
 // dw->Config.flags.local_scratch_mode = true;
 
  dw->Config.flags.scratch_mode = true;
+ dw->Config.flags.avoid_record_pointers = true;
+
  dw->init();
 
 
