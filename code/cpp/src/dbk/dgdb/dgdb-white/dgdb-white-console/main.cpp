@@ -79,15 +79,13 @@ int main(int argc, char* argv[])
  DW_Record dwr1 = dw->register_typed_value(qdc);
 
  DW_Stage_Value dwsv;
- dwsv.set_u4_data(777);
+ dwsv.set_u2_data(777);
  
  DW_Record dwr2 = dw->query_by_index_record(dwsv, "Book.Pages");
  qDebug() << "dwr2 id: " << dwr2.id();
 
  DW_Stage_Value dwsv1;
- dwsv1.set_str_data("Critique of Pure Reason"); //new_qstring("title_");
- //dwsv1.new_qstring_pair("Critique of Pure Reason", "English");
- //dwsv1.set_u4_data(778);
+ dwsv1.set_str_data("Critique of Pure Reason"); //new_qstring("Critique of Pure Reason");
 
  DW_Record dwr3 = dw->query_by_multi_index_record(dwsv1, "Queue_Demo_Class", 3);
  qDebug() << "dwr3 id: " << dwr3.id();

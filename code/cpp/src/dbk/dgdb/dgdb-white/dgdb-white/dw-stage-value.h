@@ -358,6 +358,11 @@ public:
   return *this;
  }
 
+ DW_Stage_Value& set_str_data(QString qs)
+ {
+  return set_str_data(qs.toLatin1().data());
+ }
+
  DW_Stage_Value& set_xml_data(QString str, u4 len = 0) //, QString xsd = {})
  {
   const char* cs = str.toLatin1().constData();

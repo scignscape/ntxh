@@ -83,7 +83,8 @@ public:
 
  void* get_record_by_id(u4 id);
  u4 get_record_id(void* rec);
- void* get_index_record_ref_target(void* rec, u4* and_ref_id = nullptr);
+ void* get_index_record_ref_target(void* rec);
+ void* get_index_record_ref_target(void* rec, u4 ref_id_column, u4* and_ref_id);
 
  void set_record_id_field(void* rec, u4 id);
  n8 set_record_field(void* rec, u4 col, DW_Stage_Value& dwsv);

@@ -440,19 +440,12 @@ void* WDB_Instance::query_within_id_range(u4 range_col, u4 low, u4 high,
  arglist[1].cond = WG_COND_GREATER;
  arglist[1].value = wg_encode_query_param_int(white_, low);
 
-  qDebug() << "p c: " << param_column;
-
-
  arglist[2].column = param_column;
  arglist[2].cond = WG_COND_EQUAL;
  arglist[2].value = _wg_encode_query_param(white_, dwsv);
 
  if(!label.isEmpty())
  {
-  qDebug() << "label: " << label;
-  qDebug() << "label c: " << label_column;
-
-
   arglist[3].column = label_column;
   arglist[3].cond = WG_COND_EQUAL;
   arglist[3].value = wg_encode_query_param_str(white_, label.toLatin1().data(), nullptr);
@@ -461,8 +454,6 @@ void* WDB_Instance::query_within_id_range(u4 range_col, u4 low, u4 high,
  wg_query* query = wg_make_query(white_, nullptr, 0, arglist, arglist_size);
 
  void* result = wg_fetch(white_, query);
-
- qDebug() << "r: " << result;
 
  wg_free_query(white_, query);
 
@@ -918,12 +909,17 @@ u4 WDB_Instance::get_record_id(void* rec)
  return wg_decode_int(white_, data);
 }
 
-void* WDB_Instance::get_index_record_ref_target(void* rec, u4* and_ref_id)
+void* WDB_Instance::get_index_record_ref_target(void* rec)
+{
+ return get_index_record_ref_target(rec, 0, nullptr);
+}
+
+void* WDB_Instance::get_index_record_ref_target(void* rec, u4 ref_id_column, u4* and_ref_id)
 {
  void* result;
  if(dw_instance_->Config.flags.avoid_record_pointers)
  {
-  wg_int data = wg_get_field(white_, rec, 3);
+  wg_int data = wg_get_field(white_, rec, ref_id_column);
   u4 id = wg_decode_int(white_, data);
   result = wg_find_record_int(white_, 0, WG_COND_EQUAL, id, nullptr);
  }
@@ -936,7 +932,7 @@ void* WDB_Instance::get_index_record_ref_target(void* rec, u4* and_ref_id)
  {
   if(and_ref_id)
   {
-   wg_int data1 = wg_get_field(white_, rec, 3);
+   wg_int data1 = wg_get_field(white_, rec, ref_id_column);
    *and_ref_id = wg_decode_int(white_, data1);
   }
  }
