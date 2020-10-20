@@ -105,9 +105,12 @@ int main(int argc, char* argv[])
   QTime* qtm = new QTime;
   //QStringList* qsl = new QStringList;
 
+  u1 col4;
+
   u2* num = new u2;
   qds >> qm[3](str);
   qds >> *str1;
+  qds >> col4;
   qds >> qm[4](num);
   qds >> qm[5](qd);
   qds >> qm[6](qtm);
@@ -118,10 +121,14 @@ int main(int argc, char* argv[])
   sq = {qdc1, str, str1, num, qd, qtm};
   sq << stage_queue_memfnptr<Queue_Demo_Class>(&Queue_Demo_Class::read_stage_queue);
 
- qDebug() << "a: " << qdc1->author();
  });
 
+ qDebug() << "a: " << qdc1->author();
  qDebug() << "title: " << qdc1->title();
+ qDebug() << "num: " << qdc1->num();
+ qDebug() << "test_time: " << qdc1->test_time();
+ qDebug() << "publication_date: " << qdc1->publication_date();
+ 
 
  return 0;
 }

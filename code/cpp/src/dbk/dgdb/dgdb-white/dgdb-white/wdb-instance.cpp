@@ -247,7 +247,9 @@ DW_Record WDB_Instance::get_multi_index_record(DW_Record dr)
   void* result = wg_find_record_int(white_, 0, WG_COND_EQUAL, rid, nullptr);
   return {rid, result};
  }
-
+ void* result = wg_decode_record(white_, data);
+ u4 rid = get_record_id(result);
+ return {rid, result};
 }
 
 
