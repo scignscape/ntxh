@@ -440,12 +440,19 @@ void* WDB_Instance::query_within_id_range(u4 range_col, u4 low, u4 high,
  arglist[1].cond = WG_COND_GREATER;
  arglist[1].value = wg_encode_query_param_int(white_, low);
 
+  qDebug() << "p c: " << param_column;
+
+
  arglist[2].column = param_column;
  arglist[2].cond = WG_COND_EQUAL;
  arglist[2].value = _wg_encode_query_param(white_, dwsv);
 
  if(!label.isEmpty())
  {
+  qDebug() << "label: " << label;
+  qDebug() << "label c: " << label_column;
+
+
   arglist[3].column = label_column;
   arglist[3].cond = WG_COND_EQUAL;
   arglist[3].value = wg_encode_query_param_str(white_, label.toLatin1().data(), nullptr);
@@ -454,6 +461,8 @@ void* WDB_Instance::query_within_id_range(u4 range_col, u4 low, u4 high,
  wg_query* query = wg_make_query(white_, nullptr, 0, arglist, arglist_size);
 
  void* result = wg_fetch(white_, query);
+
+ qDebug() << "r: " << result;
 
  wg_free_query(white_, query);
 

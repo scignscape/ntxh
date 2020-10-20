@@ -200,6 +200,11 @@ public:
  void get_hypernode_payload(const DW_Record& dwr, QByteArray& qba);
 
  DW_Record query_by_index_record(DW_Stage_Value& dwsv, QString label = {});
+ DW_Record query_by_multi_index_record(DW_Stage_Value& dwsv, QString type_name, u4 col);
+ DW_Record query_by_index_record(DW_Stage_Value& dwsv, QString type_name, u4 param_col, 
+   u4 id_min, u4 id_max);
+
+
 
  void save_changes();
 

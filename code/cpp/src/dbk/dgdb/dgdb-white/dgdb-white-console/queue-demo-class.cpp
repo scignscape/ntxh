@@ -19,7 +19,10 @@ void Queue_Demo_Class::encode_stage_values(QByteArray& qba,
    DW_Stage_Value::Callback_type cb)
 {
  QDataStream qds(&qba, QIODevice::WriteOnly);
- qds << DW_Stage_Value().new_qstring_pair(title_, "English").run[3](cb)
+ qds << DW_Stage_Value().set_str_data(title_.toLatin1().data()).run[3](cb)
+   //set_str_data("title_").run[3](cb)
+   // DW_Stage_Value().new_qstring("title_").run[3](cb)
+   //<<  DW_Stage_Value().set_u2_data(778).run[3](cb)
    << author_
    << DW_Stage_Value().set_u2_data(num_).run["Book.Pages"](cb)
    << DW_Stage_Value().set_date_data(publication_date_).run[4](cb)

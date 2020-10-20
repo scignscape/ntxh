@@ -171,10 +171,22 @@ DW_Record DW_Instance::new_wg_index_record(const DW_Record& ref, const DW_Stage_
  return wdb_instance_->new_wg_record(id, label, nullptr, svs);
 }
 
+
+DW_Record DW_Instance::query_by_multi_index_record(DW_Stage_Value& dwsv, QString type_name, u4 col)
+{
+ return query_by_index_record(dwsv, type_name, col, 0, max_mask); // multi_indexes_mask, outedges_mask);
+}
+
+
 DW_Record DW_Instance::query_by_index_record(DW_Stage_Value& dwsv, QString label)
 {
- u4 param_column = 4;
- void* result = wdb_instance_->query_within_id_range(0, indexes_mask, max_mask, 
+ return query_by_index_record(dwsv, label, 4, indexes_mask, max_mask);
+}
+
+DW_Record DW_Instance::query_by_index_record(DW_Stage_Value& dwsv, QString label, 
+  u4 param_column, u4 id_min, u4 id_max)
+{
+ void* result = wdb_instance_->query_within_id_range(0, id_min, id_max,  
    param_column, dwsv, label);
 
  if(result)
