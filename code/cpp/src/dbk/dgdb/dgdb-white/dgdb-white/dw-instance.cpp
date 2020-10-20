@@ -9,6 +9,7 @@
 #include "types/dw-type-system.h"
 #include "types/dw-type.h"
 
+#include "stage/dw-stage-queue.h"
 
 #include "wdb-instance.h"
 #include "wdb-manager.h"
@@ -70,6 +71,71 @@ DW_Record DW_Instance::register_typed_value(QString type_name, DW_Stage_Value::P
 
  return result;
  //DW_Record dr1 = register_ 
+}
+
+DW_Record DW_Instance::get_multi_index_record(DW_Record dr)
+{
+ return wdb_instance_->get_multi_index_record(dr);
+}
+
+void DW_Instance::parse_dw_record(DW_Record dr, std::function<void(const QByteArray&, 
+  QMap<u4, DW_Stage_Value>&, DW_Stage_Queue& sq)> cb, u4 qba_index)
+{
+ QByteArray qba;
+
+ get_hypernode_payload(dr, qba, qba_index);
+
+ if(qba.isEmpty())
+   // // somehow the payload wasn't found
+   return;
+
+ // // get the multi_index_record ...
+ DW_Record mir = get_multi_index_record(dr);
+
+ void* mirv = mir.wg_record();
+
+ if(!mirv)
+   return;
+
+  qDebug() << "mir = " << mir.id();
+
+ QMap<u4, DW_Stage_Value> qm;
+
+ DW_Stage_Queue sq;
+ cb(qba, qm, sq); //, qv);
+
+ QMutableMapIterator<u4, DW_Stage_Value> it(qm);
+ while(it.hasNext())
+ {
+  it.next();
+  u4 index = it.key();
+
+  qDebug() << "index = " << index;
+
+  DW_Stage_Value dwsv = it.value();
+
+  wdb_instance_->decode_wg_record_value(mirv, index, dwsv);
+
+  
+  //wdb_manager_->decode_value(rec, index, it.value(), wdbi);
+
+ }
+
+ if(!sq.values.isEmpty())
+ {
+  if(sq.callback)
+    sq.callback(sq.values);
+ }
+
+ 
+}
+
+
+DW_Type* DW_Instance::get_type_by_name(QString ctn)
+{
+ QString tn;
+ DW_Type* result = type_system_->get_type_by_name(ctn, &tn);
+ return result;
 }
 
 DW_Record DW_Instance::register_typed_value(QString type_name, void* v, 
@@ -151,7 +217,7 @@ DW_Frame* DW_Instance::new_frame()
  return new DW_Frame(this);
 }
 
-DW_Record DW_Instance::new_wg_index_record(const DW_Record& ref, const DW_Stage_Value& dwsv, 
+DW_Record DW_Instance::new_wg_index_record(DW_Record ref, const DW_Stage_Value& dwsv, 
   QString label)
 {  
  u4 id = new_index_record_id();
@@ -174,7 +240,8 @@ DW_Record DW_Instance::new_wg_index_record(const DW_Record& ref, const DW_Stage_
 
 DW_Record DW_Instance::query_by_multi_index_record(DW_Stage_Value& dwsv, QString type_name, u4 col)
 {
- return query_by_index_record(dwsv, type_name, col, multi_indexes_mask, max_mask, 2); // ;
+ return query_by_index_record(dwsv, type_name, col, multi_indexes_mask, max_mask, 
+   Config.flags.avoid_record_pointers?2:0); // ;
   // multi_indexes_mask, outedges_mask, 2);
 }
 
@@ -201,19 +268,19 @@ DW_Record DW_Instance::query_by_index_record(DW_Stage_Value& dwsv, QString label
 }
 
 
-void DW_Instance::get_hypernode_payload(u4 id, QByteArray& qba)
+void DW_Instance::get_hypernode_payload(u4 id, QByteArray& qba, u4 qba_index)
 {
  void* rec = wdb_instance_->get_record_by_id(id);
  if(rec)
  {
-  wdb_instance_->get_qba_from_record(rec, 1, qba);
+  wdb_instance_->get_qba_from_record(rec, qba_index, qba);
  }
 }
 
-void DW_Instance::get_hypernode_payload(const DW_Record& dwr, QByteArray& qba)
+void DW_Instance::get_hypernode_payload(DW_Record dwr, QByteArray& qba, u4 qba_index)
 {
  if(dwr.wg_record())
-   wdb_instance_->get_qba_from_record(dwr.wg_record(), 1, qba);
+   wdb_instance_->get_qba_from_record(dwr.wg_record(), qba_index, qba);
 }
 
 

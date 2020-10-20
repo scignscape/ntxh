@@ -236,6 +236,21 @@ void WDB_Instance::set_wg_record_field_rec(DW_Record& dr, u4 col, DW_Record& rec
  wg_set_field(white_, dr.wg_record(), col, recenc);
 }
 
+DW_Record WDB_Instance::get_multi_index_record(DW_Record dr)
+{
+  // // column 4 is ref to multi_index_record ...
+ wg_int data = wg_get_field(white_, dr.wg_record(), 4);
+ 
+ if(dw_instance_->Config.flags.avoid_record_pointers)
+ {
+  wg_int rid = wg_decode_int(white_, data);
+  void* result = wg_find_record_int(white_, 0, WG_COND_EQUAL, rid, nullptr);
+  return {rid, result};
+ }
+
+}
+
+
 
 void* WDB_Instance::query_leading_rec(u4 col)
 {
@@ -932,8 +947,16 @@ void* WDB_Instance::get_index_record_ref_target(void* rec, u4 ref_id_column, u4*
  {
   if(and_ref_id)
   {
-   wg_int data1 = wg_get_field(white_, rec, ref_id_column);
-   *and_ref_id = wg_decode_int(white_, data1);
+   if(ref_id_column == 0)
+   {
+    wg_int data1 = wg_get_field(white_, result, 0);
+    *and_ref_id = wg_decode_int(white_, data1);
+   }
+   else
+   {
+    wg_int data1 = wg_get_field(white_, rec, ref_id_column);
+    *and_ref_id = wg_decode_int(white_, data1);
+   }
   }
  }
  return result;

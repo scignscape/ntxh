@@ -20,6 +20,7 @@
 #include "dgdb-white/dw-record.h"
 
 #include "dgdb-white/dw-stage-value.h"
+#include "dgdb-white/stage/dw-stage-queue.h"
 
 #include "dgdb-white/dw-frame.h"
 #include "dgdb-white/dw-dominion.h"
@@ -89,6 +90,38 @@ int main(int argc, char* argv[])
 
  DW_Record dwr3 = dw->query_by_multi_index_record(dwsv1, "Queue_Demo_Class", 3);
  qDebug() << "dwr3 id: " << dwr3.id();
+
+ Queue_Demo_Class* qdc1 = new Queue_Demo_Class; //;dw->new_typed_value<Queue_Demo_Class>(dwr3);
+
+ dw->parse_dw_record(dwr3, [&qdc1](const QByteArray& qba, 
+   QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq)
+ {
+  //dtest1 = new Test;
+
+  QDataStream qds(qba);
+  QString* str = new QString;
+  QString* str1 = new QString;
+  QDate* qd = new QDate;
+  QTime* qtm = new QTime;
+  //QStringList* qsl = new QStringList;
+
+  u2* num = new u2;
+  qds >> qm[3](str);
+  qds >> *str1;
+  qds >> qm[4](num);
+  qds >> qm[5](qd);
+  qds >> qm[6](qtm);
+  //qds >> qm[5](qsl);
+
+ qDebug() << "qd: " << *qd;
+
+  sq = {qdc1, str, str1, num, qd, qtm};
+  sq << stage_queue_memfnptr<Queue_Demo_Class>(&Queue_Demo_Class::read_stage_queue);
+
+ qDebug() << "a: " << qdc1->author();
+ });
+
+ qDebug() << "title: " << qdc1->title();
 
  return 0;
 }

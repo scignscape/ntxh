@@ -81,6 +81,8 @@ public:
  void* query_leading_str(u4 col);
  void* query_leading_int(u4 col);
 
+ DW_Record get_multi_index_record(DW_Record dr);
+
  void* get_record_by_id(u4 id);
  u4 get_record_id(void* rec);
  void* get_index_record_ref_target(void* rec);

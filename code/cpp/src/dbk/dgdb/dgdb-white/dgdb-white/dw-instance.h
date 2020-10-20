@@ -33,6 +33,9 @@ class DW_Frame;
 
 class String_Label_Triple;
 class DW_Type_System;
+class DW_Type;
+class DW_Stage_Queue;
+
 
 //  
 //   
@@ -193,18 +196,21 @@ public:
  DW_Record new_wg_findable_field_record(const QByteArray& qba);
  DW_Record new_wg_index_label_record(QString label);
 
- DW_Record new_wg_index_record(const DW_Record& ref, 
+ DW_Record new_wg_index_record(DW_Record ref, 
    const DW_Stage_Value& dwsv, QString label = {});
 
- void get_hypernode_payload(u4 id, QByteArray& qba);
- void get_hypernode_payload(const DW_Record& dwr, QByteArray& qba);
+ DW_Record get_multi_index_record(DW_Record dr);
+
+ void get_hypernode_payload(u4 id, QByteArray& qba, u4 qba_index = 1);
+ void get_hypernode_payload(DW_Record dwr, QByteArray& qba, u4 qba_index = 1);
 
  DW_Record query_by_index_record(DW_Stage_Value& dwsv, QString label = {});
  DW_Record query_by_multi_index_record(DW_Stage_Value& dwsv, QString type_name, u4 col);
  DW_Record query_by_index_record(DW_Stage_Value& dwsv, QString type_name, u4 param_col, 
    u4 id_min, u4 id_max, u4 ref_id_column);
 
-
+ void parse_dw_record(DW_Record dr, std::function<void(const QByteArray&, 
+   QMap<u4, DW_Stage_Value>&, DW_Stage_Queue& sq)> cb, u4 qba_index = 1);
 
  void save_changes();
 
@@ -249,6 +255,17 @@ public:
   return register_typed_value(tn, (void*) v, cb, pkg);
  }
 
+ DW_Type* get_type_by_name(QString ctn);
+
+ template<typename VALUE_Type>
+ VALUE_Type* new_typed_value()
+ {
+  QString tn = QString::fromStdString(typeid(VALUE_Type).name());
+  DW_Type* ty = get_type_by_name(tn); 
+  VALUE_Type* result = new VALUE_Type;
+
+  //return (VALUE_Type*) new_typed_value
+ }
 };
 
 
