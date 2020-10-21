@@ -63,7 +63,8 @@ int main(int argc, char* argv[])
 
  dwt->REGISTER_TYPE(Queue_Demo_Class)
    .default_object_layout()
-   .set_stage_encoder(&Queue_Demo_Class::encode_stage_values);
+   .set_stage_encoder(&Queue_Demo_Class::encode_stage_values)
+   .set_stage_queue_initializer(&Queue_Demo_Class::init_stage_queue);
 
  DW_Type* Queue_Demo_Class_dw_type = dwt->get_type_by_name("Queue_Demo_Class");
 
@@ -92,28 +93,14 @@ int main(int argc, char* argv[])
  DW_Record dwr3 = dw->query_by_multi_index_record(dwsv1, "Queue_Demo_Class", 3);
  qDebug() << "dwr3 id: " << dwr3.id();
 
- Queue_Demo_Class* qdc1 = new Queue_Demo_Class; //;dw->new_typed_value<Queue_Demo_Class>(dwr3);
+ //Queue_Demo_Class* qdc1 = new Queue_Demo_Class; //;dw->new_typed_value<Queue_Demo_Class>(dwr3);
 
- dw->parse_dw_record(dwr3, [&qdc1](const QByteArray& qba, 
-   QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq)
- {
-  QDataStream qds(qba);
+ Queue_Demo_Class* qdc1 = dw->parse_dw_record<Queue_Demo_Class>(dwr3);
+   //,
+   //&Queue_Demo_Class::init_stage_queue);
 
-  sq.enqueue(qdc1);
-
-  qds >>  (u1&) qm[3].queue<QString>(sq)
-   >> sq.enqueue_new<QString>()  //(QString&) *qs // sq.enqueue_new<QString>()
-   >> (u1&) sq.skip()
-   >> (u1&) qm[4].queue<u2>(sq)
-   >> (u1&) qm[5].queue<QDate>(sq)
-   >> (u1&) qm[6].queue<QTime>(sq)
-  ;
-
-  sq.reverse();
-
-  sq << stage_queue_memfnptr<Queue_Demo_Class>(&Queue_Demo_Class::read_stage_queue);
-
- });
+ //[&qdc1](const QByteArray& qba, 
+ //  QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq)
 
  qDebug() << "author: " << qdc1->author();
  qDebug() << "title: " << qdc1->title();
@@ -147,7 +134,9 @@ int main6(int argc, char* argv[])
 
  dwt->REGISTER_TYPE(Queue_Demo_Class)
    .default_object_layout()
-   .set_stage_encoder(&Queue_Demo_Class::encode_stage_values);
+   .set_stage_encoder(&Queue_Demo_Class::encode_stage_values)
+   .set_stage_queue_initializer(&Queue_Demo_Class::init_stage_queue)
+;
 
  DW_Type* Queue_Demo_Class_dw_type = dwt->get_type_by_name("Queue_Demo_Class");
 

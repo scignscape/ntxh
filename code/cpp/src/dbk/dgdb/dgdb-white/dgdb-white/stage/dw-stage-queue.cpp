@@ -18,6 +18,11 @@ DW_Stage_Queue::DW_Stage_Queue()
  
 }
 
+void* DW_Stage_Queue::head()
+{
+ return values.head();
+}
+
 void DW_Stage_Queue::reverse()
 { 
  void* obj = values.dequeue();

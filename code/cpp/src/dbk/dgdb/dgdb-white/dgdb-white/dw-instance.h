@@ -209,8 +209,17 @@ public:
  DW_Record query_by_index_record(DW_Stage_Value& dwsv, QString type_name, u4 param_col, 
    u4 id_min, u4 id_max, u4 ref_id_column);
 
- void parse_dw_record(DW_Record dr, std::function<void(const QByteArray&, 
+ void* parse_dw_record(DW_Record dr, std::function<void(const QByteArray&, 
    QMap<u4, DW_Stage_Value>&, DW_Stage_Queue& sq)> cb, u4 qba_index = 1);
+
+ void* parse_dw_record(DW_Record dr, QString tn, u4 qba_index = 1);
+
+ template<typename VALUE_Type>
+ VALUE_Type* parse_dw_record(DW_Record dr, u4 qba_index = 1)
+ {
+  QString tn = QString::fromStdString(typeid(VALUE_Type).name());
+  return (VALUE_Type*) parse_dw_record(dr, tn, qba_index);
+ }
 
  void save_changes();
 

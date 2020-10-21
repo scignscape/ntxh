@@ -19,7 +19,8 @@
 #include "kans.h"
 USING_KANS(DGDB)
 
-
+KANS_CLASS_DECLARE(DGDB ,DW_Stage_Value)
+KANS_CLASS_DECLARE(DGDB ,DW_Stage_Queue)
 
 class Queue_Demo_Class
 {
@@ -45,6 +46,8 @@ public:
    DW_Stage_Value::Callback_type cb);
 
  void read_stage_queue(QQueue<void*>& vals); 
+ static void init_stage_queue(const QByteArray& qba, 
+   QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq); 
 
 };
 

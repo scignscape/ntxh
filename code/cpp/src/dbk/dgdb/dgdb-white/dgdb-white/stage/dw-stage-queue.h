@@ -30,7 +30,10 @@ struct DW_Stage_Queue
 {
  QQueue<void*> values;
  std::function<void(QQueue<void*>&)> callback;
+
  DW_Stage_Queue();
+
+ void* head();
 
  void operator=(std::initializer_list<void*> vs) 
  { 

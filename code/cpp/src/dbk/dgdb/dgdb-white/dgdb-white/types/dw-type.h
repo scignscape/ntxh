@@ -9,6 +9,8 @@
 
 #include <functional>
 
+#include <QMap>
+
 #include "global-types.h"
 
 #include "dw-stage-value.h"
@@ -36,6 +38,10 @@ KANS_(DGDB)
 
 class DW_Node;
 
+class DW_Stage_Value;
+class DW_Stage_Queue;
+
+
 class DW_Type
 {
  QString name_;
@@ -46,6 +52,10 @@ class DW_Type
 
  std::function<void(void*, QByteArray& qba, 
    DW_Stage_Value::Callback_type cb)> stage_encoder_;
+
+ std::function<void(const QByteArray& qba, 
+  QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq)> stage_queue_initializer_;
+
 
  std::function<void*(DW_Node*, 
    std::function<void*(u4)> )> binary_encoder_;
@@ -61,13 +71,25 @@ public:
  ACCESSORS__GET(MACRO_PASTE(std::function<void(void*, QByteArray& qba, 
    DW_Stage_Value::Callback_type cb)>) ,stage_encoder)
 
+ ACCESSORS__GET(MACRO_PASTE(std::function<void(const QByteArray& qba, 
+  QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq)>) ,stage_queue_initializer)
+
+
  template<typename PROC_Type>
  DW_Type& set_stage_encoder(PROC_Type pt)
  {
   stage_encoder_ = (void(*)(void*, QByteArray& qba,
     DW_Stage_Value::Callback_type cb)) pt;
+  return *this;
  }  
 
+ template<typename PROC_Type>
+ DW_Type& set_stage_queue_initializer(PROC_Type pt)
+ {
+  stage_queue_initializer_ = (void(*)(const QByteArray& qba, 
+  QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq)) pt;
+  return *this;
+ }  
 
  ACCESSORS(MACRO_PASTE(std::function<void*(DW_Node*, 
    std::function<void*(n8)> )>) ,dw_record_encoder)

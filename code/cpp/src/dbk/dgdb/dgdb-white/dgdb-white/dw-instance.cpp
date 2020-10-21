@@ -78,7 +78,7 @@ DW_Record DW_Instance::get_multi_index_record(DW_Record dr)
  return wdb_instance_->get_multi_index_record(dr);
 }
 
-void DW_Instance::parse_dw_record(DW_Record dr, std::function<void(const QByteArray&, 
+void* DW_Instance::parse_dw_record(DW_Record dr, std::function<void(const QByteArray&, 
   QMap<u4, DW_Stage_Value>&, DW_Stage_Queue& sq)> cb, u4 qba_index)
 {
  QByteArray qba;
@@ -87,7 +87,7 @@ void DW_Instance::parse_dw_record(DW_Record dr, std::function<void(const QByteAr
 
  if(qba.isEmpty())
    // // somehow the payload wasn't found
-   return;
+   return nullptr;
 
  // // get the multi_index_record ...
  DW_Record mir = get_multi_index_record(dr);
@@ -95,7 +95,7 @@ void DW_Instance::parse_dw_record(DW_Record dr, std::function<void(const QByteAr
  void* mirv = mir.wg_record();
 
  if(!mirv)
-   return;
+   return nullptr;
 
  QMap<u4, DW_Stage_Value> qm;
 
@@ -113,11 +113,20 @@ void DW_Instance::parse_dw_record(DW_Record dr, std::function<void(const QByteAr
 
  if(!sq.values.isEmpty())
  {
+  void* result = sq.head();
   if(sq.callback)
     sq.callback(sq.values);
+  return result;
  }
 
+ return nullptr;
  
+}
+
+void* DW_Instance::parse_dw_record(DW_Record dr, QString ctn, u4 qba_index)
+{
+ DW_Type* dt = get_type_by_name(ctn);
+ return parse_dw_record(dr, dt->stage_queue_initializer(), qba_index);
 }
 
 
