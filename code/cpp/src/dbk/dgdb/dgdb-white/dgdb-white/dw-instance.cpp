@@ -97,8 +97,6 @@ void DW_Instance::parse_dw_record(DW_Record dr, std::function<void(const QByteAr
  if(!mirv)
    return;
 
-  qDebug() << "mir = " << mir.id();
-
  QMap<u4, DW_Stage_Value> qm;
 
  DW_Stage_Queue sq;
@@ -109,16 +107,8 @@ void DW_Instance::parse_dw_record(DW_Record dr, std::function<void(const QByteAr
  {
   it.next();
   u4 index = it.key();
-
-  qDebug() << "index = " << index;
-
   DW_Stage_Value dwsv = it.value();
-
   wdb_instance_->decode_wg_record_value(mirv, index, dwsv);
-
-  
-  //wdb_manager_->decode_value(rec, index, it.value(), wdbi);
-
  }
 
  if(!sq.values.isEmpty())

@@ -13,6 +13,8 @@
 #include <QDateTime>
 #include <QDate>
 
+#include <QDebug>
+
 #include <functional>
 
 #include "accessors.h"
@@ -24,13 +26,12 @@
 KANS_(DGDB)
 
 
-//class DgDb_Node;
-
 struct DW_Stage_Queue  
 {
  QQueue<void*> values;
  std::function<void(QQueue<void*>&)> callback;
- DW_Stage_Queue();// : callback(nullptr) {}
+ DW_Stage_Queue();
+
  void operator=(std::initializer_list<void*> vs) 
  { 
   values.append(QList<void*>(vs)); 
@@ -52,6 +53,8 @@ struct DW_Stage_Queue
   values.enqueue((void*) tt);
   return tt;
  }
+
+ void reverse();
 
  template<typename T>
  T& enqueue_new()

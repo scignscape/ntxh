@@ -138,6 +138,7 @@ public:
  DW_Stage_Value();
 
  ACCESSORS(n8 ,data)
+ ACCESSORS(u1 ,info)
 
  DW_Stage_Value& set_ptr_data(void* ptr);
 

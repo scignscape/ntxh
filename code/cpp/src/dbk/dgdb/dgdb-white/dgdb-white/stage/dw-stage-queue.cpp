@@ -10,13 +10,24 @@
 
 USING_KANS(DGDB)
 
+//QQueue<void*> DW_Stage_Queue::xvalues = QQueue<void*>();
+
 DW_Stage_Queue::DW_Stage_Queue()
   : callback(nullptr) 
 {
-
+ 
 }
+
+void DW_Stage_Queue::reverse()
+{ 
+ void* obj = values.dequeue();
+ std::reverse(std::begin(values), std::end(values));
+ values.prepend(obj);
+}
+
 
 void DW_Stage_Queue::enqueue_void(void* v)
 {
  values.enqueue(v);
 }
+
