@@ -15,10 +15,6 @@ DW_FCS_Column::DW_FCS_Column()
 
 }
 
-void DW_FCS_Column::static_supply_data(void* v, QByteArray& qba)
-{
- ((DW_FCS_Column*) v)->supply_data(qba);
-}
 
 void DW_FCS_Column::supply_data(QByteArray& qba)
 {

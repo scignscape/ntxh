@@ -124,14 +124,19 @@ class DW_Instance
  }
 
  std::function<void(void*, QByteArray&)> get_binary_encoder(DW_Type* dt);
+ std::function<void(void*, const QByteArray&)> get_binary_decoder(DW_Type* dt);
 
- //template<typename VALUE_Type>
  std::function<void(void*, QByteArray&)> get_binary_encoder(QString ctn)
  {
   DW_Type* dt = get_type_by_name(ctn);
   return get_binary_encoder(dt);
  }
 
+ std::function<void(void*, const QByteArray&)> get_binary_decoder(QString ctn)
+ {
+  DW_Type* dt = get_type_by_name(ctn);
+  return get_binary_decoder(dt);
+ }
 
 public:
 
@@ -245,22 +250,32 @@ public:
 
  void* parse_dw_record(DW_Record dr, std::function<void(const QByteArray&, 
    QMap<u4, DW_Stage_Value>&, DW_Stage_Queue& sq)> cb, u4 qba_index = 1,
-   //std::function<void(QQueue<void*>&)> qcb = nullptr); //, DW_Type* dt = nullptr);
    std::function<void(QQueue<void*>&)> qcb = nullptr); //, DW_Type* dt = nullptr);
 
  void* parse_dw_record(DW_Record dr, QString tn, u4 qba_index = 1,
    std::function<void(QQueue<void*>&)> qcb = nullptr);
  
-//   std::function<void(QQueue<void*>&)> qcb = nullptr);
-
  template<typename VALUE_Type>
  VALUE_Type* parse_dw_record(DW_Record dr, u4 qba_index = 1)
  {
   QString tn = QString::fromStdString(typeid(VALUE_Type).name());
   std::function<void(QQueue<void*>&)> qcb = get_stage_queue_callback<VALUE_Type>(tn);
-//  std::function<void(QQueue<void*>&)> qcb = get_stage_queue_callback<VALUE_Type>(tn);
   return (VALUE_Type*) parse_dw_record(dr, tn, qba_index, qcb);
  }
+
+ void parse_binary_record(DW_Record dr, 
+  void* v, std::function<void(void*, const QByteArray&)> cb, u4 qba_index = 1);
+
+ template<typename VALUE_Type>
+ VALUE_Type* parse_binary_record(DW_Record dr, u4 qba_index = 1)
+ {
+  VALUE_Type* result = new VALUE_Type;
+  QString tn = QString::fromStdString(typeid(VALUE_Type).name());
+  std::function<void(void*, const QByteArray&)> cb = get_binary_decoder(tn);
+  parse_binary_record(dr, (void*) result, cb, qba_index);
+  return result;
+ }
+
 
  void save_changes();
 

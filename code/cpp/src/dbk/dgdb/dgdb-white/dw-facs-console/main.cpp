@@ -59,6 +59,7 @@ int main(int argc, char* argv[])
  dwt->REGISTER_TYPE(DW_FCS_Column)
  //  .set_binary_encoder(&DW_FCS_Column::static_supply_data)
    .set_default_binary_encoder(&DW_FCS_Column::supply_data)
+   .set_default_binary_decoder(&DW_FCS_Column::absorb_data)
   ;
 
  DW_FCS_Column* dfc = new DW_FCS_Column;
@@ -71,11 +72,13 @@ int main(int argc, char* argv[])
 
  DW_Record dwr = dw->new_binary_hypernode_record(dfc);
 
+//*
  QByteArray qba1;
  dw->get_hypernode_payload(dwr.id(), qba1);
-
  DW_FCS_Column dfc1;
  dfc1.absorb_data(qba1);
+//*/
+
 
  qDebug() << "ok: " << dfc1.label() << dfc1.matrix_position(); 
 
@@ -91,12 +94,15 @@ int main(int argc, char* argv[])
  
  DW_Record dwr2 = dw->query_by_index_record(dwsv1);
 
+ DW_FCS_Column* dfc2 = dw->parse_binary_record<DW_FCS_Column>(dwr2);
+/*
  QByteArray qba2;
- dw->get_hypernode_payload(dwr2, qba2);
- 
+ dw->get_hypernode_payload(dwr2, qba2); 
  DW_FCS_Column dfc2;
  dfc2.absorb_data(qba2);
- qDebug() << "ok: " << dfc2.label() << dfc2.matrix_position(); 
+*/
+
+ qDebug() << "ok: " << dfc2->label() << dfc2->matrix_position(); 
 
 // dw->save_changes();
 

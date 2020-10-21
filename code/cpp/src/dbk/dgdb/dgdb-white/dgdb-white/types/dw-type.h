@@ -62,7 +62,7 @@ class DW_Type
    std::function<void*(u4)> )> raw_binary_encoder_;
 
  std::function<void(void*, QByteArray& qba)> binary_encoder_;
-
+ std::function<void(void*, const QByteArray& qba)> binary_decoder_;
 
  std::function<void*(DW_Node*, 
    std::function<void*(n8)> )> dw_record_encoder_;
@@ -89,20 +89,40 @@ public:
    std::function<void*(u4)> )>) ,raw_binary_encoder)
 
  ACCESSORS__GET(std::function<void(void*, QByteArray&)> ,binary_encoder)
+ ACCESSORS__GET(std::function<void(void*, const QByteArray&)> ,binary_decoder)
 
  ACCESSORS__GET(MACRO_PASTE(std::function<void(void*, QByteArray& qba, 
    DW_Stage_Value::Callback_type cb)>) ,stage_encoder)
 
  ACCESSORS__GET(std::function<void(QQueue<void*>& vals)> ,stage_queue_reader)
 
-
  ACCESSORS__GET(MACRO_PASTE(std::function<void(const QByteArray& qba, 
   QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq)>) ,stage_queue_initializer)
+
+ ACCESSORS(MACRO_PASTE(std::function<void*(DW_Node*, 
+   std::function<void*(n8)> )>) ,dw_record_encoder)
+
+ ACCESSORS(u4 ,byte_length)
+ ACCESSORS(u1 ,byte_length_code)
+ ACCESSORS(QString ,name)
+ ACCESSORS(QString ,cname)
+
 
  template<typename T>
  static std::function<void(void*, QByteArray&)> default_binary_encoder(void (T::*fn)(QByteArray&))
  {
   return [fn](void* v, QByteArray& qba)
+  {
+   (((T*) v)->*fn)(qba);
+  };
+ }
+
+
+ template<typename T>
+ static std::function<void(void*, const QByteArray&)> 
+   default_binary_decoder(void (T::*fn)(const QByteArray&))
+ {
+  return [fn](void* v, const QByteArray& qba)
   {
    (((T*) v)->*fn)(qba);
   };
@@ -152,7 +172,6 @@ public:
   return *this;
  }  
 
-
  template<typename VALUE_Type, typename PROC_Type>
  DW_Type& _set_default_binary_encoder(PROC_Type pt)
  {
@@ -168,14 +187,28 @@ public:
     Class_Of_Member_Function<PROC_Type>, PROC_Type>(pt);
  }  
 
+ template<typename PROC_Type>
+ DW_Type& set_binary_decoder(PROC_Type pt)
+ {
+  binary_decoder_ = pt;
+  return *this;
+ }  
 
- ACCESSORS(MACRO_PASTE(std::function<void*(DW_Node*, 
-   std::function<void*(n8)> )>) ,dw_record_encoder)
+ template<typename VALUE_Type, typename PROC_Type>
+ DW_Type& _set_default_binary_decoder(PROC_Type pt)
+ {
+  return set_binary_decoder(default_binary_decoder
+     <VALUE_Type>(pt) );
+  return *this;
+ }  
 
- ACCESSORS(u4 ,byte_length)
- ACCESSORS(u1 ,byte_length_code)
- ACCESSORS(QString ,name)
- ACCESSORS(QString ,cname)
+ template<typename PROC_Type>
+ DW_Type& set_default_binary_decoder(PROC_Type pt)
+ {
+  return _set_default_binary_decoder<
+    Class_Of_Member_Function<PROC_Type>, PROC_Type>(pt);
+ }  
+
 
  template<typename CType>
  void rtti_read(QString name)

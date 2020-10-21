@@ -31,8 +31,6 @@ public:
  void supply_data(QByteArray& qba);
  void absorb_data(const QByteArray& qba);
 
- static void static_supply_data(void* v, QByteArray& qba);
-
 };
 
 

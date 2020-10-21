@@ -78,6 +78,14 @@ DW_Record DW_Instance::get_multi_index_record(DW_Record dr)
  return wdb_instance_->get_multi_index_record(dr);
 }
 
+void DW_Instance::parse_binary_record(DW_Record dr, 
+  void* v, std::function<void(void*, const QByteArray&)> cb, u4 qba_index)
+{
+ QByteArray qba;
+ get_hypernode_payload(dr, qba, qba_index);
+ cb(v, qba); 
+}
+
 void* DW_Instance::parse_dw_record(DW_Record dr, std::function<void(const QByteArray&, 
   QMap<u4, DW_Stage_Value>&, DW_Stage_Queue& sq)> cb, u4 qba_index, 
   std::function<void(QQueue<void*>&)> qcb)
@@ -140,6 +148,10 @@ std::function<void(void*, QByteArray&)> DW_Instance::get_binary_encoder(DW_Type*
  return dt->binary_encoder();
 }
 
+std::function<void(void*, const QByteArray&)> DW_Instance::get_binary_decoder(DW_Type* dt)
+{
+ return dt->binary_decoder();
+}
 
 void* DW_Instance::parse_dw_record(DW_Record dr, QString ctn, u4 qba_index, 
   std::function<void(QQueue<void*>&)> qcb)
