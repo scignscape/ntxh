@@ -28,6 +28,8 @@ KANS_(DGDB)
 
 struct DW_Stage_Queue  
 {
+ //typedef void(*callback_type)(QQueue<void*>&);
+
  QQueue<void*> values;
  std::function<void(QQueue<void*>&)> callback;
 
@@ -70,7 +72,7 @@ struct DW_Stage_Queue
 };
 
 template<typename T>
-std::function<void(QQueue<void*>&)> stage_queue_memfnptr(void (T::*fn)(QQueue<void*>&))
+std::function<void(QQueue<void*>&)> default_stage_queue_reader(void (T::*fn)(QQueue<void*>&))
 {
  return [fn](QQueue<void*>& qq)
  {

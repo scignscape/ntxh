@@ -79,7 +79,8 @@ DW_Record DW_Instance::get_multi_index_record(DW_Record dr)
 }
 
 void* DW_Instance::parse_dw_record(DW_Record dr, std::function<void(const QByteArray&, 
-  QMap<u4, DW_Stage_Value>&, DW_Stage_Queue& sq)> cb, u4 qba_index)
+  QMap<u4, DW_Stage_Value>&, DW_Stage_Queue& sq)> cb, u4 qba_index, 
+  std::function<void(QQueue<void*>&)> qcb)
 {
  QByteArray qba;
 
@@ -116,6 +117,10 @@ void* DW_Instance::parse_dw_record(DW_Record dr, std::function<void(const QByteA
   void* result = sq.head();
   if(sq.callback)
     sq.callback(sq.values);
+  else if(qcb)
+  {   
+   qcb(sq.values);
+  }
   return result;
  }
 
@@ -123,10 +128,19 @@ void* DW_Instance::parse_dw_record(DW_Record dr, std::function<void(const QByteA
  
 }
 
-void* DW_Instance::parse_dw_record(DW_Record dr, QString ctn, u4 qba_index)
+//std::function<void(QQueue<void*>&)> DW_Instance::get_stage_queue_reader(DW_Type* dt)
+
+std::function<void(QQueue<void*>&)> DW_Instance::get_stage_queue_reader(DW_Type* dt)
+{
+ return dt->stage_queue_reader();
+}
+
+
+void* DW_Instance::parse_dw_record(DW_Record dr, QString ctn, u4 qba_index, 
+  std::function<void(QQueue<void*>&)> qcb)
 {
  DW_Type* dt = get_type_by_name(ctn);
- return parse_dw_record(dr, dt->stage_queue_initializer(), qba_index);
+ return parse_dw_record(dr, dt->stage_queue_initializer(), qba_index, qcb);
 }
 
 

@@ -14,6 +14,7 @@
 #include "global-types.h"
 
 #include "dw-stage-value.h"
+#include "stage/dw-stage-queue.h"
 
 // #include "_whitedb/_whitedb.h"
 
@@ -63,6 +64,22 @@ class DW_Type
  std::function<void*(DW_Node*, 
    std::function<void*(n8)> )> dw_record_encoder_;
 
+ //std::function<void(QQueue<void*>& vals)> stage_queue_reader_;
+
+ std::function<void(QQueue<void*>& vals)> stage_queue_reader_;
+
+ template<typename T> struct _Class_Of_Member_Function {};
+
+ template<typename RETURN_Type, typename CLASS_Type>
+ struct _Class_Of_Member_Function<RETURN_Type (CLASS_Type::*)>
+ {  
+  using type = CLASS_Type;    
+ };
+
+ template< typename T> 
+ using Class_Of_Member_Function = typename _Class_Of_Member_Function<T>::type;
+
+
 public:
 
  ACCESSORS(MACRO_PASTE(std::function<void*(DW_Node*, 
@@ -70,6 +87,9 @@ public:
 
  ACCESSORS__GET(MACRO_PASTE(std::function<void(void*, QByteArray& qba, 
    DW_Stage_Value::Callback_type cb)>) ,stage_encoder)
+
+ ACCESSORS__GET(std::function<void(QQueue<void*>& vals)> ,stage_queue_reader)
+
 
  ACCESSORS__GET(MACRO_PASTE(std::function<void(const QByteArray& qba, 
   QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq)>) ,stage_queue_initializer)
@@ -90,6 +110,30 @@ public:
   QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq)) pt;
   return *this;
  }  
+
+ template<typename PROC_Type>
+ DW_Type& set_stage_queue_reader(PROC_Type pt)
+ {
+  stage_queue_reader_ = (std::function<void(QQueue<void*>&)>) pt;
+  
+  //stage_queue_reader_ = (void(*)(QQueue<void*>& vals)) pt;
+  return *this;
+ }  
+
+ template<typename VALUE_Type, typename PROC_Type>
+ DW_Type& _set_default_stage_queue_reader(PROC_Type pt)
+ {
+  return set_stage_queue_reader(default_stage_queue_reader
+     <VALUE_Type>(pt) );
+ }  
+
+ template<typename PROC_Type>
+ DW_Type& set_default_stage_queue_reader(PROC_Type pt)
+ {
+  return _set_default_stage_queue_reader<
+    Class_Of_Member_Function<PROC_Type>, PROC_Type>(pt);
+ }  
+
 
  ACCESSORS(MACRO_PASTE(std::function<void*(DW_Node*, 
    std::function<void*(n8)> )>) ,dw_record_encoder)

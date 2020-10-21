@@ -17,6 +17,8 @@
 #include "dw-record.h"
 #include "dw-stage-value.h"
 
+#include "stage/dw-stage-queue.h"
+
 #include "global-types.h"
 
 #include "kans.h"
@@ -110,6 +112,20 @@ class DW_Instance
  void _set_raw_record_fields(void* rec, u4 start_col, QVector<DW_Stage_Value>& svs);
  void* _add_raw_record(u4 number_of_columns, QVector<DW_Stage_Value>& svs);
 
+ typedef void(*stage_queue_reader_type)(QQueue<void*>& vals);
+
+ //std::function<void(QQueue<void*>&)> get_stage_queue_reader(DW_Type* dt);
+ std::function<void(QQueue<void*>&)> get_stage_queue_reader(DW_Type* dt);
+
+ template<typename VALUE_Type>
+// std::function<void(QQueue<void*>&)> get_stage_queue_callback(QString ctn)
+ std::function<void(QQueue<void*>&)> get_stage_queue_callback(QString ctn)
+ {
+  DW_Type* dt = get_type_by_name(ctn);
+  //std::function<void(void*, QQueue<void*>&)> sr = get_stage_queue_reader(dt);
+  return get_stage_queue_reader(dt); // sr; // 
+   //default_stage_queue_reader<VALUE_Type>(sr);
+ }
 
 public:
 
@@ -210,15 +226,22 @@ public:
    u4 id_min, u4 id_max, u4 ref_id_column);
 
  void* parse_dw_record(DW_Record dr, std::function<void(const QByteArray&, 
-   QMap<u4, DW_Stage_Value>&, DW_Stage_Queue& sq)> cb, u4 qba_index = 1);
+   QMap<u4, DW_Stage_Value>&, DW_Stage_Queue& sq)> cb, u4 qba_index = 1,
+   //std::function<void(QQueue<void*>&)> qcb = nullptr); //, DW_Type* dt = nullptr);
+   std::function<void(QQueue<void*>&)> qcb = nullptr); //, DW_Type* dt = nullptr);
 
- void* parse_dw_record(DW_Record dr, QString tn, u4 qba_index = 1);
+ void* parse_dw_record(DW_Record dr, QString tn, u4 qba_index = 1,
+   std::function<void(QQueue<void*>&)> qcb = nullptr);
+ 
+//   std::function<void(QQueue<void*>&)> qcb = nullptr);
 
  template<typename VALUE_Type>
  VALUE_Type* parse_dw_record(DW_Record dr, u4 qba_index = 1)
  {
   QString tn = QString::fromStdString(typeid(VALUE_Type).name());
-  return (VALUE_Type*) parse_dw_record(dr, tn, qba_index);
+  std::function<void(QQueue<void*>&)> qcb = get_stage_queue_callback<VALUE_Type>(tn);
+//  std::function<void(QQueue<void*>&)> qcb = get_stage_queue_callback<VALUE_Type>(tn);
+  return (VALUE_Type*) parse_dw_record(dr, tn, qba_index, qcb);
  }
 
  void save_changes();
@@ -279,5 +302,13 @@ public:
 
 
 _KANS(DGDB)
+
+
+//template<typename VALUE_Type>
+//DW_Stage_Queue::callback_type DW_Instance::get_stage_queue_callback(QString ctn)
+//{
+// DW_Type* dt = get_type_by_name(ctn);
+// return default_stage_queue_reader<VALUE_Type>(dt->stage_queue_reader());
+//}
 
 #endif // DGDB_INSTANCE__H

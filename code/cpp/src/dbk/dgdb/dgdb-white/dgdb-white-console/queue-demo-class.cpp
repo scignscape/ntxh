@@ -51,7 +51,7 @@ void Queue_Demo_Class::init_stage_queue(const QByteArray& qba,
   ;
 
  sq.reverse();
- sq << stage_queue_memfnptr<Queue_Demo_Class>(&Queue_Demo_Class::read_stage_queue);
+ //sq << default_stage_queue_reader<Queue_Demo_Class>(&Queue_Demo_Class::read_stage_queue);
 }
 
 

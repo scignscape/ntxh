@@ -45,7 +45,8 @@ public:
  void encode_stage_values(QByteArray& qba,
    DW_Stage_Value::Callback_type cb);
 
- void read_stage_queue(QQueue<void*>& vals); 
+ void read_stage_queue(QQueue<void*>& vals);
+ 
  static void init_stage_queue(const QByteArray& qba, 
    QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq); 
 
