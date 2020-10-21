@@ -39,13 +39,19 @@ struct DW_Stage_Queue
    { callback = cb; }
 
  void enqueue_void(void* v);
+
+ u1& skip()
+ {
+  static u1 result = 0;
+  return result;
+ }
  
  template<typename T>
  T* enqueue(T* tt)
  {
   values.enqueue((void*) tt);
   return tt;
- } 
+ }
 
  template<typename T>
  T& enqueue_new()

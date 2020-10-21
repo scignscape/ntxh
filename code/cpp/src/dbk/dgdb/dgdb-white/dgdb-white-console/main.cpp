@@ -104,14 +104,24 @@ int main(int argc, char* argv[])
 
 //  QString* str = new QString;
 
+//  u1 col4;
+
+/*
+  qds >> qm[3].queue<QString>(sq)
+   >> sq.enqueue_new<QString>()
+   >> col4
+   >> qm[4].queue<u2>(sq)
+   >> qm[5].queue<QDate>(sq)
+   >> qm[6].queue<QTime>(sq);
+*/
+
   qds >> qm[3].queue<QString>(sq);
-
   qds >> sq.enqueue_new<QString>();
-
+  qds >> sq.skip();
   qds >> qm[4].queue<u2>(sq);
   qds >> qm[5].queue<QDate>(sq);
   qds >> qm[6].queue<QTime>(sq);
-  ;
+//  ;
 //  qds >> qm[3](str)(sq);
 //  sq.enqueue(str);
 
@@ -122,8 +132,8 @@ int main(int argc, char* argv[])
   QTime* qtm = new QTime;
   //QStringList* qsl = new QStringList;
 */
-  QString* str1 = new QString;
-  u1 col4;
+//  QString* str1 = new QString;
+//  u1 col4;
 /*
   u2* num = new u2;
   qds >> qm[3](str)
