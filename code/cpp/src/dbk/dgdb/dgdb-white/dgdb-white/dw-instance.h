@@ -114,18 +114,24 @@ class DW_Instance
 
  typedef void(*stage_queue_reader_type)(QQueue<void*>& vals);
 
- //std::function<void(QQueue<void*>&)> get_stage_queue_reader(DW_Type* dt);
  std::function<void(QQueue<void*>&)> get_stage_queue_reader(DW_Type* dt);
 
  template<typename VALUE_Type>
-// std::function<void(QQueue<void*>&)> get_stage_queue_callback(QString ctn)
  std::function<void(QQueue<void*>&)> get_stage_queue_callback(QString ctn)
  {
   DW_Type* dt = get_type_by_name(ctn);
-  //std::function<void(void*, QQueue<void*>&)> sr = get_stage_queue_reader(dt);
-  return get_stage_queue_reader(dt); // sr; // 
-   //default_stage_queue_reader<VALUE_Type>(sr);
+  return get_stage_queue_reader(dt);
  }
+
+ std::function<void(void*, QByteArray&)> get_binary_encoder(DW_Type* dt);
+
+ //template<typename VALUE_Type>
+ std::function<void(void*, QByteArray&)> get_binary_encoder(QString ctn)
+ {
+  DW_Type* dt = get_type_by_name(ctn);
+  return get_binary_encoder(dt);
+ }
+
 
 public:
 
@@ -169,12 +175,24 @@ public:
  QString get_restore_file();
  void restore_from_file(QString rf);
 
+ DW_Record new_binary_hypernode_record(const QByteArray& qba);
 
+ template<typename VALUE_Type>
+ DW_Record new_binary_hypernode_record(VALUE_Type* v)
+ {
+  QString tn = QString::fromStdString(typeid(VALUE_Type).name());
+  std::function<void(void*, QByteArray&)> encoder = get_binary_encoder(tn); //<VALUE_Type>();
+  QByteArray qba;
+  encoder(v, qba);
+  return new_binary_hypernode_record(qba);
+  //QString tn = QString::fromStdString(typeid(VALUE_Type).name());
+  //return _new_binary_hypernode_record(tn, v);
+ }
 
- DW_Record new_wg_hypernode_record(const QByteArray& qba);
 
  DW_Record new_wg_outedges_record(DW_Record& ref, QVector<QPair<QPair<QString, DW_Record>, 
    DW_Record>>& targets);
+
 // populate_edges_record(new_rec, ref, targets); 
 
  void* add_raw_record(u4 number_of_columns, QVector<DW_Stage_Value>& svs)

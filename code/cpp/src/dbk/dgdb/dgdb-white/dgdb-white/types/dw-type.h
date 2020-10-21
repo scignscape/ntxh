@@ -59,7 +59,10 @@ class DW_Type
 
 
  std::function<void*(DW_Node*, 
-   std::function<void*(u4)> )> binary_encoder_;
+   std::function<void*(u4)> )> raw_binary_encoder_;
+
+ std::function<void(void*, QByteArray& qba)> binary_encoder_;
+
 
  std::function<void*(DW_Node*, 
    std::function<void*(n8)> )> dw_record_encoder_;
@@ -83,7 +86,9 @@ class DW_Type
 public:
 
  ACCESSORS(MACRO_PASTE(std::function<void*(DW_Node*, 
-   std::function<void*(u4)> )>) ,binary_encoder)
+   std::function<void*(u4)> )>) ,raw_binary_encoder)
+
+ ACCESSORS__GET(std::function<void(void*, QByteArray&)> ,binary_encoder)
 
  ACCESSORS__GET(MACRO_PASTE(std::function<void(void*, QByteArray& qba, 
    DW_Stage_Value::Callback_type cb)>) ,stage_encoder)
@@ -94,6 +99,14 @@ public:
  ACCESSORS__GET(MACRO_PASTE(std::function<void(const QByteArray& qba, 
   QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq)>) ,stage_queue_initializer)
 
+ template<typename T>
+ static std::function<void(void*, QByteArray&)> default_binary_encoder(void (T::*fn)(QByteArray&))
+ {
+  return [fn](void* v, QByteArray& qba)
+  {
+   (((T*) v)->*fn)(qba);
+  };
+ }
 
  template<typename PROC_Type>
  DW_Type& set_stage_encoder(PROC_Type pt)
@@ -115,8 +128,6 @@ public:
  DW_Type& set_stage_queue_reader(PROC_Type pt)
  {
   stage_queue_reader_ = (std::function<void(QQueue<void*>&)>) pt;
-  
-  //stage_queue_reader_ = (void(*)(QQueue<void*>& vals)) pt;
   return *this;
  }  
 
@@ -131,6 +142,29 @@ public:
  DW_Type& set_default_stage_queue_reader(PROC_Type pt)
  {
   return _set_default_stage_queue_reader<
+    Class_Of_Member_Function<PROC_Type>, PROC_Type>(pt);
+ }  
+
+ template<typename PROC_Type>
+ DW_Type& set_binary_encoder(PROC_Type pt)
+ {
+  binary_encoder_ = pt;
+  return *this;
+ }  
+
+
+ template<typename VALUE_Type, typename PROC_Type>
+ DW_Type& _set_default_binary_encoder(PROC_Type pt)
+ {
+  return set_binary_encoder(default_binary_encoder
+     <VALUE_Type>(pt) );
+  return *this;
+ }  
+
+ template<typename PROC_Type>
+ DW_Type& set_default_binary_encoder(PROC_Type pt)
+ {
+  return _set_default_binary_encoder<
     Class_Of_Member_Function<PROC_Type>, PROC_Type>(pt);
  }  
 

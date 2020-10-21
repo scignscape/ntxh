@@ -45,25 +45,25 @@ void DW_Type_Builder::build(QMap<QString, DW_Type*>* type_map,
 {
  DW_Type* ty_u1 = new DW_Type;
  ty_u1->RTTI_READ(u1);
- ty_u1->set_binary_encoder(get_default_raw_binary_encoder<u1>(ty_u1->byte_length()));
+ ty_u1->set_raw_binary_encoder(get_default_raw_binary_encoder<u1>(ty_u1->byte_length()));
  if(cb) cb(ty_u1->name(), ty_u1);
  if(type_map) (*type_map)[ty_u1->name()] = ty_u1;
    
  DW_Type* ty_u2 = new DW_Type;
  ty_u2->RTTI_READ(u2);
- ty_u2->set_binary_encoder(get_default_raw_binary_encoder<u2>(ty_u2->byte_length()));
+ ty_u2->set_raw_binary_encoder(get_default_raw_binary_encoder<u2>(ty_u2->byte_length()));
  if(cb) cb(ty_u2->name(), ty_u2);
  if(type_map) (*type_map)[ty_u2->name()] = ty_u2;
 
  DW_Type* ty_u4 = new DW_Type;
  ty_u4->RTTI_READ(u4);
- ty_u4->set_binary_encoder(get_default_raw_binary_encoder<u4>(ty_u4->byte_length()));
+ ty_u4->set_raw_binary_encoder(get_default_raw_binary_encoder<u4>(ty_u4->byte_length()));
  if(cb) cb(ty_u4->name(), ty_u4);
  if(type_map) (*type_map)[ty_u4->name()] = ty_u4;
 
  DW_Type* ty_n8 = new DW_Type;
  ty_n8->RTTI_READ(n8);
- ty_n8->set_binary_encoder(get_default_raw_binary_encoder<n8>(ty_n8->byte_length()));
+ ty_n8->set_raw_binary_encoder(get_default_raw_binary_encoder<n8>(ty_n8->byte_length()));
  if(cb) cb(ty_n8->name(), ty_n8);
  if(type_map) (*type_map)[ty_n8->name()] = ty_n8;
 

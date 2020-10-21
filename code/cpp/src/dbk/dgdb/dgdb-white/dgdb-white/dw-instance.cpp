@@ -47,7 +47,7 @@ DW_Instance::DW_Instance()
 
 DW_Record DW_Instance::register_typed_value(QString type_name, DW_Stage_Value::Package& pkg)
 {
- DW_Record result = new_wg_hypernode_record(pkg.qba);
+ DW_Record result = new_binary_hypernode_record(pkg.qba);
 
  if(!pkg.single_indexed.isEmpty())
  {
@@ -133,6 +133,11 @@ void* DW_Instance::parse_dw_record(DW_Record dr, std::function<void(const QByteA
 std::function<void(QQueue<void*>&)> DW_Instance::get_stage_queue_reader(DW_Type* dt)
 {
  return dt->stage_queue_reader();
+}
+
+std::function<void(void*, QByteArray&)> DW_Instance::get_binary_encoder(DW_Type* dt)
+{
+ return dt->binary_encoder();
 }
 
 
@@ -400,7 +405,7 @@ DW_Record DW_Instance::new_wg_index_label_record(QString label)
  return {id, result};
 }
 
-DW_Record DW_Instance::new_wg_hypernode_record(const QByteArray& qba)
+DW_Record DW_Instance::new_binary_hypernode_record(const QByteArray& qba)
 {
  u4 base_id = new_hypernode_record_id();
  //base_id <<= 13;

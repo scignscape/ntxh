@@ -103,11 +103,7 @@ int main(int argc, char* argv[])
  //Queue_Demo_Class* qdc1 = new Queue_Demo_Class; //;dw->new_typed_value<Queue_Demo_Class>(dwr3);
 
  Queue_Demo_Class* qdc1 = dw->parse_dw_record<Queue_Demo_Class>(dwr3);
-   //,
-   //&Queue_Demo_Class::init_stage_queue);
 
- //[&qdc1](const QByteArray& qba, 
- //  QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq)
 
  qDebug() << "author: " << qdc1->author();
  qDebug() << "title: " << qdc1->title();
@@ -273,7 +269,7 @@ int main1(int argc, char* argv[])
  QByteArray qba1;
  dc1.supply_data(qba1);
 
- DW_Record dwr1 = dw->new_wg_hypernode_record(qba1);
+ DW_Record dwr1 = dw->new_binary_hypernode_record(qba1);
 
 
  Demo_Class dc2;
@@ -283,7 +279,7 @@ int main1(int argc, char* argv[])
  QByteArray qba2;
  dc2.supply_data(qba2);
 
- DW_Record dwr2 = dw->new_wg_hypernode_record(qba2);
+ DW_Record dwr2 = dw->new_binary_hypernode_record(qba2);
 
  DW_Frame& fr = *dw->new_frame(); // new DW_Frame(dw);
  DW_Dominion* dom = new DW_Dominion();
@@ -363,7 +359,7 @@ int main4(int argc, char* argv[])
  QByteArray qba;
  dc.supply_data(qba);
 
- DW_Record dwr = dw->new_wg_hypernode_record(qba);
+ DW_Record dwr = dw->new_binary_hypernode_record(qba);
 
  QByteArray qba1;
  dw->get_hypernode_payload(dwr.id(), qba1);
@@ -395,215 +391,6 @@ int main4(int argc, char* argv[])
  dw->save_changes();
 
 }
-
-
-/*
-
-
-//  u2* num = new u2;
-  qds >> qm[3].queue<QString>()(sq);
-//   >> *str1;
-
-  qds >> *str1;
-//  sq.enqueue(str1);
-
-  qds
-   >> col4;
-
-  qds 
-   >> qm[4].queue<u2>()(sq)
-   >> qm[5].queue<QDate>()(sq)
-   >> qm[6].queue<QTime>()(sq)
-  ;
-
-  //qds >> qm[5](qsl);
-
- // qDebug() << "qd: " << *qd;
-
-//  sq = {qdc1, str, str1, num, qd, qtm};
-  sq = {qdc1, qm[3], str1, qm[4], qm[5], qm[6]};
-  sq << stage_queue_memfnptr<Queue_Demo_Class>(&Queue_Demo_Class::read_stage_queue);
-
-*/
-
-
-
-
-/*
-
-
-//           Copyright Nathaniel Christen 2020.
-//  Distributed under the Boost Software License, Version 1.0.
-//     (See accompanying file LICENSE_1_0.txt or copy at
-//           http://www.boost.org/LICENSE_1_0.txt)
-
-#ifndef DW_TYPE__H
-#define DW_TYPE__H
-
-#include <functional>
-
-#include <QMap>
-
-#include "global-types.h"
-
-#include "dw-stage-value.h"
-#include "stage/dw-stage-queue.h"
-
-// #include "_whitedb/_whitedb.h"
-
-#include "accessors.h"
-
-#ifndef RTTI_READ
-#define RTTI_READ(tn) \
-rtti_read<tn>(#tn)
-#endif
-
-#ifndef RTTI_READ_2_1
-#define RTTI_READ_2_1(ho_tname ,tn) \
-rtti_read<ho_tname<tn>>("(" #ho_tname \
-  " " #tn ")")
-#endif
-
-#include "kans.h"
-
-KANS_(DGDB)
-
-//class DgDb_Node;
-
-class DW_Node;
-
-class DW_Stage_Value;
-class DW_Stage_Queue;
-
-
-class DW_Type
-{
- QString name_;
- QString cname_;
- u4 byte_length_;
- u1 byte_length_code_;
- void* meta_object_;
-
- std::function<void(void*, QByteArray& qba, 
-   DW_Stage_Value::Callback_type cb)> stage_encoder_;
-
- std::function<void(const QByteArray& qba, 
-  QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq)> stage_queue_initializer_;
-
-
- std::function<void*(DW_Node*, 
-   std::function<void*(u4)> )> binary_encoder_;
-
- std::function<void*(DW_Node*, 
-   std::function<void*(n8)> )> dw_record_encoder_;
-
- //std::function<void(QQueue<void*>& vals)> stage_queue_reader_;
-
- std::function<void(QQueue<void*>& vals)> stage_queue_reader_;
-
- template<typename T> struct _Class_Of_Member_Function {};
-
- template<typename RETURN_Type, typename CLASS_Type>
- struct _Class_Of_Member_Function<RETURN_Type (CLASS_Type::*)>
- {  
-  using type = CLASS_Type;    
- };
-
- template< typename T> 
- using _Class_Of_Member_Function_type = typename _Class_Of_Member_Function<T>::type;
-
-public:
-
- ACCESSORS(MACRO_PASTE(std::function<void*(DW_Node*, 
-   std::function<void*(u4)> )>) ,binary_encoder)
-
- ACCESSORS__GET(MACRO_PASTE(std::function<void(void*, QByteArray& qba, 
-   DW_Stage_Value::Callback_type cb)>) ,stage_encoder)
-
- ACCESSORS__GET(std::function<void(QQueue<void*>& vals)> ,stage_queue_reader)
-
-
- ACCESSORS__GET(MACRO_PASTE(std::function<void(const QByteArray& qba, 
-  QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq)>) ,stage_queue_initializer)
-
-
- template<typename PROC_Type>
- DW_Type& set_stage_encoder(PROC_Type pt)
- {
-  stage_encoder_ = (void(*)(void*, QByteArray& qba,
-    DW_Stage_Value::Callback_type cb)) pt;
-  return *this;
- }  
-
- template<typename PROC_Type>
- DW_Type& set_stage_queue_initializer(PROC_Type pt)
- {
-  stage_queue_initializer_ = (void(*)(const QByteArray& qba, 
-  QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq)) pt;
-  return *this;
- }  
-
- template<typename PROC_Type>
- DW_Type& set_stage_queue_reader(PROC_Type pt)
- {
-  stage_queue_reader_ = (std::function<void(QQueue<void*>&)>) pt;
-  
-  //stage_queue_reader_ = (void(*)(QQueue<void*>& vals)) pt;
-  return *this;
- }  
-
-
- template<typename VALUE_Type, typename PROC_Type>
- DW_Type& set_default_stage_queue_reader_(PROC_Type pt)
- {
-  return set_stage_queue_reader(default_stage_queue_reader
-     <VALUE_Type>(pt) );
- }  
-
- template<typename PROC_Type>
- DW_Type& set_default_stage_queue_reader(PROC_Type pt)
- {
-  return set_default_stage_queue_reader_<
-    _Class_Of_Member_Function_type<PROC_Type>, PROC_Type>();
- }  
-
-
- ACCESSORS(MACRO_PASTE(std::function<void*(DW_Node*, 
-   std::function<void*(n8)> )>) ,dw_record_encoder)
-
- ACCESSORS(u4 ,byte_length)
- ACCESSORS(u1 ,byte_length_code)
- ACCESSORS(QString ,name)
- ACCESSORS(QString ,cname)
-
- template<typename CType>
- void rtti_read(QString name)
- {
-  name_ = name;
-  cname_ = QString::fromStdString(typeid(CType).name());
-  byte_length_ = sizeof(CType);
-  if( (byte_length_ == 1) || (byte_length_ == 2)
-    || (byte_length_ == 4) || (byte_length_ == 8) )
-    byte_length_code_ = byte_length_; 
- } 
-
-
- DW_Type();
-
- DW_Type& default_object_layout();
- 
-
-};
-
-
-_KANS(DGDB)
-
-#endif // DW_TYPE__H
-
-
-*/
-
-
 
 
 
