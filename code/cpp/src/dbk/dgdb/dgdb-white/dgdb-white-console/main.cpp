@@ -96,29 +96,68 @@ int main(int argc, char* argv[])
  dw->parse_dw_record(dwr3, [&qdc1](const QByteArray& qba, 
    QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq)
  {
-  //dtest1 = new Test;
 
+  sq.enqueue(qdc1);
+
+  //dtest1 = new Test;
   QDataStream qds(qba);
+
+//  QString* str = new QString;
+
+  qds >> qm[3].queue<QString>(sq);
+
+  qds >> sq.enqueue_new<QString>();
+
+  qds >> qm[4].queue<u2>(sq);
+  qds >> qm[5].queue<QDate>(sq);
+  qds >> qm[6].queue<QTime>(sq);
+  ;
+//  qds >> qm[3](str)(sq);
+//  sq.enqueue(str);
+
+/*
   QString* str = new QString;
   QString* str1 = new QString;
   QDate* qd = new QDate;
   QTime* qtm = new QTime;
   //QStringList* qsl = new QStringList;
-
+*/
+  QString* str1 = new QString;
   u1 col4;
-
+/*
   u2* num = new u2;
-  qds >> qm[3](str);
-  qds >> *str1;
-  qds >> col4;
-  qds >> qm[4](num);
-  qds >> qm[5](qd);
-  qds >> qm[6](qtm);
+  qds >> qm[3](str)
+   >> *str1
+   >> col4
+   >> qm[4](num)
+   >> qm[5](qd)
+   >> qm[6](qtm)
+  ;
+*/
+
+//  u2* num = new u2;
+//  qds >> qm[3].queue<QString>()(sq);
+//   >> *str1;
+
+//  qds >> *str1;
+//  sq.enqueue(str1);
+
+//  qds
+//   >> col4;
+
+//  qds 
+ //  >> qm[4].queue<u2>()(sq)
+ //  >> qm[5].queue<QDate>()(sq)
+ //  >> qm[6].queue<QTime>()(sq)
+ // ;
+
   //qds >> qm[5](qsl);
 
- qDebug() << "qd: " << *qd;
+ // qDebug() << "qd: " << *qd;
 
-  sq = {qdc1, str, str1, num, qd, qtm};
+//  sq = {qdc1, str, str1, num, qd, qtm};
+//  sq = {qdc1, qm[3], str1, qm[4], qm[5], qm[6]};
+
   sq << stage_queue_memfnptr<Queue_Demo_Class>(&Queue_Demo_Class::read_stage_queue);
 
  });
@@ -409,4 +448,33 @@ int main4(int argc, char* argv[])
 
 }
 
+
+/*
+
+
+//  u2* num = new u2;
+  qds >> qm[3].queue<QString>()(sq);
+//   >> *str1;
+
+  qds >> *str1;
+//  sq.enqueue(str1);
+
+  qds
+   >> col4;
+
+  qds 
+   >> qm[4].queue<u2>()(sq)
+   >> qm[5].queue<QDate>()(sq)
+   >> qm[6].queue<QTime>()(sq)
+  ;
+
+  //qds >> qm[5](qsl);
+
+ // qDebug() << "qd: " << *qd;
+
+//  sq = {qdc1, str, str1, num, qd, qtm};
+  sq = {qdc1, qm[3], str1, qm[4], qm[5], qm[6]};
+  sq << stage_queue_memfnptr<Queue_Demo_Class>(&Queue_Demo_Class::read_stage_queue);
+
+*/
 

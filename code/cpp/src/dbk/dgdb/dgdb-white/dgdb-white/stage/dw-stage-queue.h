@@ -37,6 +37,24 @@ struct DW_Stage_Queue
  }
  void operator<<(std::function<void(QQueue<void*>&)> cb)
    { callback = cb; }
+
+ void enqueue_void(void* v);
+ 
+ template<typename T>
+ T* enqueue(T* tt)
+ {
+  values.enqueue((void*) tt);
+  return tt;
+ } 
+
+ template<typename T>
+ T& enqueue_new()
+ {
+  T* result = new T;
+  values.enqueue(result);
+  return *result;
+ } 
+
 };
 
 template<typename T>

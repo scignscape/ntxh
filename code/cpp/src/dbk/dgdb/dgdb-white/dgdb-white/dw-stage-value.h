@@ -13,6 +13,8 @@
 #include <QDateTime>
 #include <QDate>
 
+#include <QDebug>
+
 #include <functional>
 
 #include "accessors.h"
@@ -26,6 +28,8 @@ KANS_(DGDB)
 static constexpr u1 C_STRING_DECODING_Flag = 64;
 static constexpr u1 XSD_TYPE_DECODING_Flag = 128;
 static constexpr u1 URI_PREFIX_DECODING_Flag = 128;
+
+struct DW_Stage_Queue;
 
 //class DgDb_Node;
 
@@ -57,6 +61,8 @@ class DW_Stage_Value
 {
  u1 info_;
  n8 data_;
+
+ void enqueue_in(DW_Stage_Queue& sw);
 
 public:
 
@@ -103,6 +109,30 @@ private:
   _run_result operator()(DW_Stage_Value::Callback_type cb);
  };
 
+ struct _sq_hold
+ {
+  DW_Stage_Value& _this;
+
+
+  _sq_hold operator()(DW_Stage_Queue& sq)
+  {
+   _this.enqueue_in(sq);
+   return *this;
+  }
+
+//  u1& operator()(DW_Stage_Queue& sq)
+//  {
+//   _this.enqueue_in(sq);
+//   return _this.info_;
+//  }
+
+
+  operator u1&()
+  {
+   return _this.info_;
+  }
+ };
+
 public:
 
  DW_Stage_Value();
@@ -124,11 +154,29 @@ public:
   return info_ == 0;
  }
 
- u1& operator()(void* pv)
+ _sq_hold operator()(void* pv)
  {
+  //qDebug() << "pv = " << pv;
   data_ = (n8) pv;
-  return info_;
+  return {*this};
  }
+
+ template<typename PTR_Type>
+ _sq_hold queue()
+ {
+  PTR_Type* ptr = new PTR_Type;
+  return operator()(ptr);
+ } 
+
+ template<typename PTR_Type>
+ _sq_hold queue(DW_Stage_Queue& sq)
+ {
+  PTR_Type* ptr = new PTR_Type;
+  //return operator()(operator()(ptr))(sq);
+  return (*this)(ptr)(sq);
+ } 
+
+//DW_Stage_Queue& sq
 
  _run_result _run(Callback_type cb, u4 field_index = 0, QString col = {});
 
@@ -139,6 +187,12 @@ public:
  {
   return *((T*) data_);
  }
+
+ operator void*()
+ {
+  return (void*) data_;
+ }
+
 
  template<typename T>
  DW_Stage_Value& set_data(const T& data)

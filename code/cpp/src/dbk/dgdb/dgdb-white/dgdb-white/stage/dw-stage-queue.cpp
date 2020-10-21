@@ -16,4 +16,7 @@ DW_Stage_Queue::DW_Stage_Queue()
 
 }
 
-
+void DW_Stage_Queue::enqueue_void(void* v)
+{
+ values.enqueue(v);
+}

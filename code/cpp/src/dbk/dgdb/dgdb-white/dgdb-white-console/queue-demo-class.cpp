@@ -33,11 +33,16 @@ void Queue_Demo_Class::encode_stage_values(QByteArray& qba,
 
 void Queue_Demo_Class::read_stage_queue(QQueue<void*>& vals)
 {
+ qDebug() << "V sz: " << vals.size();
+
  title_ = *(QString*) vals.dequeue();
+
+ qDebug() << "title = " << title_;
+
  author_ = *(QString*) vals.dequeue();
  num_ = *(u2*) vals.dequeue();
  publication_date_ = *(QDate*) vals.dequeue();
- test_time_ = *(QTime*) vals.dequeue();
+//? test_time_ = *(QTime*) vals.dequeue();
   //?QStringList qsl = *(QStringList*) vals.dequeue();
 }
 

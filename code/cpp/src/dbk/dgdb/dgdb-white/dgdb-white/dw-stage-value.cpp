@@ -7,6 +7,8 @@
 
 #include "dw-stage-value.h"
 
+#include "stage/dw-stage-queue.h"
+
 #include <QDebug>
 
 extern "C" {
@@ -59,6 +61,11 @@ u1 DW_Stage_Value::_run_result::collapse_dw_encoding_type() const
  if(result > 2)
    result = 3;
  return (info & 15) | (result << 4);
+}
+
+void DW_Stage_Value::enqueue_in(DW_Stage_Queue& sw)
+{
+ sw.enqueue_void((void*)this->data_);
 }
 
 DW_Stage_Value& DW_Stage_Value::new_qstring(const QString& qs)
