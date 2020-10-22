@@ -200,7 +200,7 @@ public:
  }
 
 
- DW_Record new_wg_outedges_record(DW_Record& ref, QVector<QPair<QPair<QString, DW_Record>, 
+ DW_Record new_outedges_record(DW_Record base, QVector<QPair<QPair<QString, DW_Record>, 
    DW_Record>>& targets);
 
 // populate_edges_record(new_rec, ref, targets); 
@@ -280,6 +280,8 @@ public:
   parse_binary_record(dr, (void*) result, cb, qba_index);
   return result;
  }
+
+ DW_Record get_subvalues_record(DW_Record dr, QStringList& qsl);
 
  DW_Record add_subvalues_record(DW_Record dr, QStringList qsl);
  DW_Record add_subvalues_record(DW_Record dr, u4 len);

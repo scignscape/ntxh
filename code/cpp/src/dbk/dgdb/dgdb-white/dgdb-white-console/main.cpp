@@ -39,7 +39,7 @@
 USING_KANS(DGDB)
 
 
-int main(int argc, char* argv[])
+int main1(int argc, char* argv[])
 {
  DW_Instance* dw = DGEnvironment(
    DEFAULT_DEV_DGDB_FOLDER "/instances/t1");
@@ -245,7 +245,7 @@ int main2(int argc, char* argv[])
  
 }
 
-int main1(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
  DW_Instance* dw = DGEnvironment(
    DEFAULT_DEV_DGDB_FOLDER "/instances/t1");
@@ -257,6 +257,8 @@ int main1(int argc, char* argv[])
  //dw->Config.flags.local_scratch_mode = true;
 
  dw->Config.flags.scratch_mode = true;
+ dw->Config.flags.avoid_record_pointers = true;
+
  dw->init();
  
 
@@ -288,7 +290,7 @@ int main1(int argc, char* argv[])
 
 
  dwr1 << (fr/dom/ctxt)["Demo.SomeRelation"] >> dwr2;
-//?
+
  fr.commit();
 
  //(fr/dw)

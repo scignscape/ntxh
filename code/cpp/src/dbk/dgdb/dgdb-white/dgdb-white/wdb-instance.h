@@ -63,10 +63,12 @@ public:
 
  void load_from_file(QString rf);
 
- void set_wg_record_field_rec(DW_Record dr, u4 col, DW_Record rec);
+ void set_wg_record_field_rec(DW_Record base, u4 col, DW_Record rec);
  void set_wg_record_field_str(DW_Record dr, u4 col, QString str);
+ void set_wg_record_field_int(DW_Record dr, u4 col, u4 value);
 
- n8 wg_encode_dw_record(DW_Record& rec);
+ 
+ n8 wg_encode_dw_record(DW_Record rec);
 
  n8 check_wg_encode_dw_record(void* v);
 
@@ -85,7 +87,14 @@ public:
  void* query_leading_int(u4 col);
 
  void* init_subvalues_record(DW_Record dr, u4 len, u4 col, u4 new_id);
+
+ void read_subvalues_record(DW_Record dr, QStringList& qsl);
+
+ DW_Record get_subvalues_record(DW_Record dr, u4 col);
  DW_Record get_multi_index_record(DW_Record dr, u4 col);
+ DW_Record get_subsidiary_record(DW_Record dr, u4 col);
+
+ void read_subvalues(DW_Record dr, QStringList& qsl, u4 start_col);
 
  void* get_record_by_id(u4 id);
  u4 get_record_id(void* rec);
@@ -100,9 +109,9 @@ public:
  void* new_wg_record(u4 number_of_columns);
  void* new_wg_record(u4 number_of_columns, u4 col1);
 
- DW_Record check_reset_ref_field(DW_Record& ref, u4 col, u4 new_size); //, u4 (*fn)() );
+ DW_Record check_reset_ref_field(DW_Record base, u4 col, u4 new_size); //, u4 (*fn)() );
 
- void populate_edges_record(DW_Record& new_rec, DW_Record& ref, 
+ void populate_edges_record(DW_Record new_rec, DW_Record base, 
    QVector<QPair<QPair<QString, DW_Record>, DW_Record>>& targets);
 
 // void set_record_field(void* rec, u4 field_number, const QByteAfrray& qba);

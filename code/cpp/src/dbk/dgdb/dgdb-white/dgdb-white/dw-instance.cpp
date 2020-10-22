@@ -102,6 +102,19 @@ DW_Record DW_Instance::add_subvalues_record(DW_Record dr, QStringList qsl)
  return result;
 }
 
+DW_Record DW_Instance::get_subvalues_record(DW_Record dr, QStringList& qsl)
+{
+  // // col 3 is subvalues ...
+ DW_Record result = wdb_instance_->get_subvalues_record(dr, 3);
+
+ if(result.wg_record() == nullptr)
+   return {0, nullptr};
+
+  // // col 3 is start of actual values ...
+ wdb_instance_->read_subvalues(result, qsl, 3);
+ return result;
+}
+
 void DW_Instance::parse_binary_record(DW_Record dr, 
   void* v, std::function<void(void*, const QByteArray&)> cb, u4 qba_index)
 {
@@ -466,7 +479,7 @@ DW_Record DW_Instance::add_hyperedge(DW_Record& source, QString connector, const
 
  QVector<QPair<QPair<QString, DW_Record>, DW_Record>> targets {edge};
 
- return new_wg_outedges_record(source, targets);
+ return new_outedges_record(source, targets);
 }
 
 DW_Record DW_Instance::add_hyperedge(DW_Record& source, QString connector, const DW_Record& annotation, 
@@ -529,10 +542,11 @@ void* DW_Instance::_add_raw_record(u4 number_of_columns, QVector<DW_Stage_Value>
  return result;
 }
 
-DW_Record DW_Instance::new_wg_outedges_record(DW_Record& ref, 
+DW_Record DW_Instance::new_outedges_record(DW_Record base, 
   QVector<QPair<QPair<QString, DW_Record>, DW_Record>>& targets)
 {
- DW_Record result = wdb_instance_->check_reset_ref_field(ref, 3, targets.size() * 3);
+  // // col 5 is outedges ...
+ DW_Record result = wdb_instance_->check_reset_ref_field(base, 5, targets.size() * 3);
   //, 
   //[this]() { return new_outedges_record_id(); });
 
@@ -541,9 +555,14 @@ DW_Record DW_Instance::new_wg_outedges_record(DW_Record& ref,
   u4 new_id = new_outedges_record_id();
   wdb_instance_->set_record_id_field(result.wg_record(), new_id); 
   result.set_id(new_id);
+
+  if(Config.flags.avoid_record_pointers)
+    // //  need to swap 1024 with the valid id ...
+    wdb_instance_->set_wg_record_field_int(base, 5, new_id);
+
  }
   
- wdb_instance_->populate_edges_record(result, ref, targets); 
+ wdb_instance_->populate_edges_record(result, base, targets); 
 }
 
 DW_Record DW_Instance::new_wg_inedges_record(const QByteArray& qba)

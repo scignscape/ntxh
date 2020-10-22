@@ -213,8 +213,7 @@ void* WDB_Instance::new_wg_record(QMap<u4, DW_Stage_Value>& svs)
  return _new_wg_record(0, {}, nullptr, svs);
 }
 
-
-n8 WDB_Instance::wg_encode_dw_record(DW_Record& rec)
+n8 WDB_Instance::wg_encode_dw_record(DW_Record rec)
 {
  if(dw_instance_->Config.flags.avoid_record_pointers)
    return (n8) wg_encode_int(white_, rec.id());
@@ -230,10 +229,16 @@ n8 WDB_Instance::check_wg_encode_dw_record(void* v)
    return (n8) wg_encode_record(white_, v); 
 }
 
-void WDB_Instance::set_wg_record_field_rec(DW_Record dr, u4 col, DW_Record rec)
+void WDB_Instance::set_wg_record_field_int(DW_Record dr, u4 col, u4 value)
+{
+ wg_int recenc = wg_encode_int(white_, value);
+ wg_set_field(white_, dr.wg_record(), col, recenc);
+}
+
+void WDB_Instance::set_wg_record_field_rec(DW_Record base, u4 col, DW_Record rec)
 {
  wg_int recenc = wg_encode_dw_record(rec);
- wg_set_field(white_, dr.wg_record(), col, recenc);
+ wg_set_field(white_, base.wg_record(), col, recenc);
 }
 
 void WDB_Instance::set_wg_record_field_str(DW_Record dr, u4 col, QString str)
@@ -242,27 +247,51 @@ void WDB_Instance::set_wg_record_field_str(DW_Record dr, u4 col, QString str)
  wg_set_field(white_, dr.wg_record(), col, strenc);
 }
 
-
 void* WDB_Instance::init_subvalues_record(DW_Record dr, u4 len, u4 col, u4 new_id)
 {
  void* result = wg_create_record(white_, len);
+
  wg_int new_id_enc = wg_encode_int(white_, new_id);
  wg_int dr_id_enc = wg_encode_int(white_, dr.id());
  wg_set_field(white_, result, 0, new_id_enc);
  wg_set_field(white_, result, 2, dr_id_enc);
 
- if(!dw_instance_->Config.flags.avoid_record_pointers)
+ if(dw_instance_->Config.flags.avoid_record_pointers)
  {
+  wg_set_field(white_, dr.wg_record(), col, new_id_enc);
+ }
+ else
+ {
+  wg_int result_enc = wg_encode_record(white_, result);
+  wg_set_field(white_, dr.wg_record(), col, result_enc);
+
   wg_int dr_enc = wg_encode_record(white_, dr.wg_record());
   wg_set_field(white_, result, 1, dr_enc);
  }
+
  return result;
 }
 
-DW_Record WDB_Instance::get_multi_index_record(DW_Record dr, u4 col)
+void WDB_Instance::read_subvalues(DW_Record dr, QStringList& qsl, u4 start_col)
 {
-  // // column 4 is ref to multi_index_record ...
+ void* rec = dr.wg_record();
+ 
+ u4 end_col = (u4) wg_get_record_len(white_, rec);
+
+ for(u4 c = start_col; c < end_col; ++c)
+ {
+  wg_int data = wg_get_field(white_, dr.wg_record(), c);
+  char* cs = wg_decode_str(white_, data);
+  QString qs = QString::fromLatin1(cs);
+  qsl.push_back(qs);
+ }
+}
+
+DW_Record WDB_Instance::get_subsidiary_record(DW_Record dr, u4 col)
+{
  wg_int data = wg_get_field(white_, dr.wg_record(), col);
+ if(data == 0)
+   return {0, nullptr};
  
  if(dw_instance_->Config.flags.avoid_record_pointers)
  {
@@ -273,6 +302,18 @@ DW_Record WDB_Instance::get_multi_index_record(DW_Record dr, u4 col)
  void* result = wg_decode_record(white_, data);
  u4 rid = get_record_id(result);
  return {rid, result};
+}
+
+DW_Record WDB_Instance::get_subvalues_record(DW_Record dr, u4 col)
+{
+  // // perhaps default col 3?
+ return get_subsidiary_record(dr, col);
+}
+
+DW_Record WDB_Instance::get_multi_index_record(DW_Record dr, u4 col)
+{
+  // // perhaps default col 4?
+ return get_subsidiary_record(dr, col);
 }
 
 
@@ -997,20 +1038,43 @@ void* WDB_Instance::new_wg_record(u4 number_of_columns, u4 col1)
  return result;
 }
 
-DW_Record WDB_Instance::check_reset_ref_field(DW_Record& ref, u4 col, u4 new_size) //, u4 (*fn)() )
+DW_Record WDB_Instance::check_reset_ref_field(DW_Record base, u4 col, u4 new_size) //, u4 (*fn)() )
 {
  void* old_ref = nullptr; 
- wg_int ftype = wg_get_field_type(white_, ref.wg_record(), col);
-
- if(ftype == WG_RECORDTYPE)
+ wg_int ftype = wg_get_field_type(white_, base.wg_record(), col);
+ 
+ if(dw_instance_->Config.flags.avoid_record_pointers)
  {
-  wg_int wgi = wg_get_field(white_, ref.wg_record(), col);
-  old_ref = wg_decode_record(white_, wgi);
+  if(ftype == WG_INTTYPE)
+  {
+   wg_int wgi = wg_get_field(white_, base.wg_record(), col);
+   wg_int rid = wg_decode_int(white_, wgi);
+   old_ref = wg_find_record_int(white_, 0, WG_COND_EQUAL, rid, nullptr);
+  }
+ }
+ else
+ {
+  if(ftype == WG_RECORDTYPE)
+  {
+   wg_int wgi = wg_get_field(white_, base.wg_record(), col);
+   old_ref = wg_decode_record(white_, wgi);
+  }
  }
 
  void* result = wg_create_record(white_, new_size + 3);
- wg_int recenc = wg_encode_record(white_, result);
- wg_set_field(white_, ref.wg_record(), col, recenc);
+
+ if(dw_instance_->Config.flags.avoid_record_pointers)
+ {
+  // // 1024 is a "dummy" record ...
+  wg_int recenc = wg_encode_int(white_, 1024);
+  wg_set_field(white_, base.wg_record(), col, recenc);
+ }
+ else
+ { 
+  wg_int recenc = wg_encode_record(white_, result);
+  wg_set_field(white_, base.wg_record(), col, recenc);
+ }
+
  if(old_ref)
  {
   u4 old_id = get_record_id(old_ref);
@@ -1031,15 +1095,18 @@ void WDB_Instance::set_record_id_field(void* rec, u4 id)
  wg_set_int_field(white_, rec, 0, id);
 }
 
-void WDB_Instance::populate_edges_record(DW_Record& new_rec, DW_Record& ref, 
+void WDB_Instance::populate_edges_record(DW_Record new_rec, DW_Record base, 
   QVector<QPair<QPair<QString, DW_Record>, DW_Record>>& targets)
 {
  void* vn = new_rec.wg_record();
 
- wg_int refenc = wg_encode_record(white_, ref.wg_record());
- wg_set_field(white_, vn, 1, refenc);
+ wg_set_int_field(white_, vn, 2, base.id());
 
- wg_set_int_field(white_, vn, 2, ref.id());
+ if(!dw_instance_->Config.flags.avoid_record_pointers)
+ {
+  wg_int baseenc = wg_encode_record(white_, base.wg_record());
+  wg_set_field(white_, vn, 1, baseenc);
+ }
  
  u4 rcol = 3;
  for(QPair<QPair<QString, DW_Record>, DW_Record>& pr : targets)
@@ -1050,18 +1117,14 @@ void WDB_Instance::populate_edges_record(DW_Record& new_rec, DW_Record& ref,
    // //  the edge-annotation column should be null before maybe setting it ...
     //    but this code does not check that because it assumes the provided 
     //    record is newly constructed ...  
-    //    If that assumptions proves unwarranted due to some change in the 
+    //    If that assumption proves unwarranted due to some change in the 
     //    interface it's ok to explicitly null out the column if 
     //    pr.first.second.wg_record() is null ... 
   if(pr.first.second.wg_record())
-  {
-   wg_int target_enc = wg_encode_record(white_, pr.first.second.wg_record());
-   wg_set_field(white_, vn, rcol, target_enc);
-  }
-  ++rcol; 
-  wg_int target_enc1 = wg_encode_record(white_, pr.second.wg_record());
-  wg_set_field(white_, vn, rcol, target_enc1);
+    set_wg_record_field_rec(new_rec, rcol, pr.first.second);
 
+  ++rcol; 
+  set_wg_record_field_rec(new_rec, rcol, pr.second);
  }
 }
 

@@ -111,6 +111,11 @@ int main(int argc, char* argv[])
  
  DW_Record dwr4 = dw->add_subvalues_record(dwr, qsl);
 
+ QStringList qsl1;
+
+ DW_Record dwr5 = dw->get_subvalues_record(dwr, qsl1);
+
+ qDebug() << qsl1; 
 
 // dw->save_changes();
 
