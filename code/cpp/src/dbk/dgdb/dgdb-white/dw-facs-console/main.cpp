@@ -51,6 +51,9 @@ int main(int argc, char* argv[])
  //dw->Config.flags.local_scratch_mode = true;
 
  dw->Config.flags.scratch_mode = true;
+ dw->Config.flags.avoid_record_pointers = true;
+
+
  dw->init();
 
  DW_Type_System* dwt = dw->type_system();
@@ -103,6 +106,11 @@ int main(int argc, char* argv[])
 */
 
  qDebug() << "ok: " << dfc2->label() << dfc2->matrix_position(); 
+
+ QStringList qsl {"s1", "s2", "s3", "s4"};
+ 
+ DW_Record dwr4 = dw->add_subvalues_record(dwr, qsl);
+
 
 // dw->save_changes();
 

@@ -63,8 +63,11 @@ public:
 
  void load_from_file(QString rf);
 
- void set_wg_record_field_rec(DW_Record& dr, u4 col, DW_Record& rec);
+ void set_wg_record_field_rec(DW_Record dr, u4 col, DW_Record rec);
+ void set_wg_record_field_str(DW_Record dr, u4 col, QString str);
+
  n8 wg_encode_dw_record(DW_Record& rec);
+
  n8 check_wg_encode_dw_record(void* v);
 
  //void avoid_record_pointers
@@ -81,7 +84,8 @@ public:
  void* query_leading_str(u4 col);
  void* query_leading_int(u4 col);
 
- DW_Record get_multi_index_record(DW_Record dr);
+ void* init_subvalues_record(DW_Record dr, u4 len, u4 col, u4 new_id);
+ DW_Record get_multi_index_record(DW_Record dr, u4 col);
 
  void* get_record_by_id(u4 id);
  u4 get_record_id(void* rec);

@@ -64,6 +64,9 @@ class DW_Instance
  u4 startup_hypernode_record_count_; 
  u4 current_hypernode_record_count_;
 
+ u4 startup_subvalues_record_count_; 
+ u4 current_subvalues_record_count_;
+
  u4 startup_outedges_record_count_; 
  u4 current_outedges_record_count_;
 
@@ -89,6 +92,8 @@ class DW_Instance
  u4 new_inedges_record_id();
  u4 new_outedges_record_id();
  u4 new_double_edges_record_id();
+ u4 new_subvalues_record_id();
+
 
  static constexpr u4 max_mask = 0x7FFFFFFF;
 
@@ -276,6 +281,8 @@ public:
   return result;
  }
 
+ DW_Record add_subvalues_record(DW_Record dr, QStringList qsl);
+ DW_Record add_subvalues_record(DW_Record dr, u4 len);
 
  void save_changes();
 

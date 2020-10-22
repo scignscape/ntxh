@@ -29,6 +29,8 @@ DW_Instance::DW_Instance()
      type_system_(nullptr),
      startup_hypernode_record_count_(0), 
      current_hypernode_record_count_(0),
+     startup_subvalues_record_count_(0),
+     current_subvalues_record_count_(0),
      startup_index_record_count_(0), 
      current_index_record_count_(0),
      startup_index_label_count_(0),
@@ -75,7 +77,29 @@ DW_Record DW_Instance::register_typed_value(QString type_name, DW_Stage_Value::P
 
 DW_Record DW_Instance::get_multi_index_record(DW_Record dr)
 {
- return wdb_instance_->get_multi_index_record(dr);
+  //   column 4 is ref to multi_index_record ...
+ return wdb_instance_->get_multi_index_record(dr, 4);
+}
+
+DW_Record DW_Instance::add_subvalues_record(DW_Record dr, u4 len)
+{
+ u4 new_id = new_subvalues_record_id();
+  // //  column 3 is ref to subvalues record ...
+   //    len + 3 leaves room for the two id's and the base record ...
+ void* result = wdb_instance_->init_subvalues_record(dr, len + 3, 3, new_id);
+ return {new_id, result};
+}
+
+DW_Record DW_Instance::add_subvalues_record(DW_Record dr, QStringList qsl)
+{
+ DW_Record result = add_subvalues_record(dr, qsl.size());
+ u4 col = 3;
+ for(QString qs : qsl)
+ {
+  wdb_instance_->set_wg_record_field_str(result, col, qs);
+  ++col; 
+ }
+ return result;
 }
 
 void DW_Instance::parse_binary_record(DW_Record dr, 
@@ -400,6 +424,11 @@ u4 DW_Instance::new_outedges_record_id()
  return current_outedges_record_count_ | outedges_mask;
 }
 
+u4 DW_Instance::new_subvalues_record_id()
+{
+ ++current_subvalues_record_count_;
+ return current_subvalues_record_count_ | subvalues_mask;
+}
 
 
 u4 DW_Instance::new_hypernode_record_id()

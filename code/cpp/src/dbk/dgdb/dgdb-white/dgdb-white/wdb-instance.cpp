@@ -230,16 +230,39 @@ n8 WDB_Instance::check_wg_encode_dw_record(void* v)
    return (n8) wg_encode_record(white_, v); 
 }
 
-void WDB_Instance::set_wg_record_field_rec(DW_Record& dr, u4 col, DW_Record& rec)
+void WDB_Instance::set_wg_record_field_rec(DW_Record dr, u4 col, DW_Record rec)
 {
  wg_int recenc = wg_encode_dw_record(rec);
  wg_set_field(white_, dr.wg_record(), col, recenc);
 }
 
-DW_Record WDB_Instance::get_multi_index_record(DW_Record dr)
+void WDB_Instance::set_wg_record_field_str(DW_Record dr, u4 col, QString str)
+{
+ wg_int strenc = wg_encode_str(white_, str.toLatin1().data(), nullptr);
+ wg_set_field(white_, dr.wg_record(), col, strenc);
+}
+
+
+void* WDB_Instance::init_subvalues_record(DW_Record dr, u4 len, u4 col, u4 new_id)
+{
+ void* result = wg_create_record(white_, len);
+ wg_int new_id_enc = wg_encode_int(white_, new_id);
+ wg_int dr_id_enc = wg_encode_int(white_, dr.id());
+ wg_set_field(white_, result, 0, new_id_enc);
+ wg_set_field(white_, result, 2, dr_id_enc);
+
+ if(!dw_instance_->Config.flags.avoid_record_pointers)
+ {
+  wg_int dr_enc = wg_encode_record(white_, dr.wg_record());
+  wg_set_field(white_, result, 1, dr_enc);
+ }
+ return result;
+}
+
+DW_Record WDB_Instance::get_multi_index_record(DW_Record dr, u4 col)
 {
   // // column 4 is ref to multi_index_record ...
- wg_int data = wg_get_field(white_, dr.wg_record(), 4);
+ wg_int data = wg_get_field(white_, dr.wg_record(), col);
  
  if(dw_instance_->Config.flags.avoid_record_pointers)
  {
