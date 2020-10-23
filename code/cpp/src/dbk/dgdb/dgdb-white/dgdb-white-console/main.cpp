@@ -293,6 +293,11 @@ int main(int argc, char* argv[])
 
  fr.commit();
 
+ DW_Record dwr3 = dw->find_hyperedge(dwr1, "Demo.SomeRelation"); 
+
+ qDebug() << "dwr3 = " << dwr3.id();
+
+
  //(fr/dw)
 
  //dw->new_wg_outedges_record(dwr1 "Demo.SomeRelation" 

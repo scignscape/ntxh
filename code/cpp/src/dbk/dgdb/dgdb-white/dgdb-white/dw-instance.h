@@ -199,6 +199,8 @@ public:
   //return _new_binary_hypernode_record(tn, v);
  }
 
+ DW_Record find_hyperedge(DW_Record base, QString label); 
+ DW_Record get_outedges_record(DW_Record base);
 
  DW_Record new_outedges_record(DW_Record base, QVector<QPair<QPair<QString, DW_Record>, 
    DW_Record>>& targets);

@@ -565,6 +565,20 @@ DW_Record DW_Instance::new_outedges_record(DW_Record base,
  wdb_instance_->populate_edges_record(result, base, targets); 
 }
 
+DW_Record DW_Instance::get_outedges_record(DW_Record base)
+{
+ DW_Record result = wdb_instance_->get_outedges_record(base, 5);
+ return result;
+}
+
+DW_Record DW_Instance::find_hyperedge(DW_Record base, QString label)
+{
+ DW_Record outs = get_outedges_record(base);
+ DW_Record ann;
+ DW_Record result = wdb_instance_->match_edges_label(outs, label, ann, 3, 3);
+ return result;
+}
+
 DW_Record DW_Instance::new_wg_inedges_record(const QByteArray& qba)
 {
  u4 base_id = new_hypernode_record_id();

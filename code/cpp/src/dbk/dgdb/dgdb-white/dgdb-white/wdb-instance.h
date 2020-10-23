@@ -63,6 +63,8 @@ public:
 
  void load_from_file(QString rf);
 
+ DW_Record get_record_from_field(DW_Record dr, u4 col);
+
  void set_wg_record_field_rec(DW_Record base, u4 col, DW_Record rec);
  void set_wg_record_field_str(DW_Record dr, u4 col, QString str);
  void set_wg_record_field_int(DW_Record dr, u4 col, u4 value);
@@ -90,11 +92,17 @@ public:
 
  void read_subvalues_record(DW_Record dr, QStringList& qsl);
 
- DW_Record get_subvalues_record(DW_Record dr, u4 col);
- DW_Record get_multi_index_record(DW_Record dr, u4 col);
- DW_Record get_subsidiary_record(DW_Record dr, u4 col);
+ DW_Record match_edges_label(DW_Record dr, QString label, DW_Record& ann, 
+   u4 start_col, u4 offset);
+
+ DW_Record get_outedges_record(DW_Record base, u4 col);
+ DW_Record get_subvalues_record(DW_Record base, u4 col);
+ DW_Record get_multi_index_record(DW_Record base, u4 col);
+ DW_Record get_subsidiary_record(DW_Record base, u4 col);
 
  void read_subvalues(DW_Record dr, QStringList& qsl, u4 start_col);
+ u4 read_qstrings(DW_Record dr, QStringList& qsl, u4 start_col, u4 offset, 
+   QString filter = {}, QString stop_filter = {});
 
  void* get_record_by_id(u4 id);
  u4 get_record_id(void* rec);

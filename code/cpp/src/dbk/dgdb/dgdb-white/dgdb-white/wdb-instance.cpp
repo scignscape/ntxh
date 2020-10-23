@@ -229,6 +229,36 @@ n8 WDB_Instance::check_wg_encode_dw_record(void* v)
    return (n8) wg_encode_record(white_, v); 
 }
 
+DW_Record WDB_Instance::match_edges_label(DW_Record dr, QString label, DW_Record& ann, 
+  u4 start_col, u4 offset)
+{
+ QStringList qsl;
+ 
+ u4 match_col = read_qstrings(dr, qsl, start_col, 3, label, label);
+ 
+ ann = get_record_from_field(dr, match_col + 1);
+ return get_record_from_field(dr, match_col + 2); 
+}
+
+DW_Record WDB_Instance::get_record_from_field(DW_Record dr, u4 col)
+{
+ wg_int data = wg_get_field(white_, dr.wg_record(), col);
+ if(data == 0)
+   return {0, nullptr};
+ 
+ if(dw_instance_->Config.flags.avoid_record_pointers)
+ {
+  wg_int rid = wg_decode_int(white_, data);
+  void* result = wg_find_record_int(white_, 0, WG_COND_EQUAL, rid, nullptr);
+  return {rid, result};
+ }
+ void* result = wg_decode_record(white_, data);
+ u4 rid = get_record_id(result);
+ return {rid, result};
+
+}
+
+
 void WDB_Instance::set_wg_record_field_int(DW_Record dr, u4 col, u4 value)
 {
  wg_int recenc = wg_encode_int(white_, value);
@@ -274,22 +304,64 @@ void* WDB_Instance::init_subvalues_record(DW_Record dr, u4 len, u4 col, u4 new_i
 
 void WDB_Instance::read_subvalues(DW_Record dr, QStringList& qsl, u4 start_col)
 {
+ read_qstrings(dr, qsl, start_col, 1);
+}
+
+u4 WDB_Instance::read_qstrings(DW_Record dr, QStringList& qsl, 
+  u4 start_col, u4 offset, QString filter, QString stop_filter)
+{
  void* rec = dr.wg_record();
  
  u4 end_col = (u4) wg_get_record_len(white_, rec);
 
- for(u4 c = start_col; c < end_col; ++c)
+ bool fie = filter.isEmpty();
+ bool sfie = stop_filter.isEmpty();
+ bool get_all = fie && sfie;
+ 
+ bool filter_is_stop = ((filter == stop_filter) && !get_all);
+
+ for(u4 c = start_col; c < end_col; c += offset)
  {
   wg_int data = wg_get_field(white_, dr.wg_record(), c);
   char* cs = wg_decode_str(white_, data);
   QString qs = QString::fromLatin1(cs);
-  qsl.push_back(qs);
+
+  if(get_all)
+    qsl.push_back(qs);
+  else if(filter_is_stop)
+  {
+   if(qs == filter)
+   {
+    qsl.push_back(qs);
+    return c;
+   }
+  }
+  else if(sfie)
+  {
+   if(qs == filter)
+     qsl.push_back(qs);
+  }
+  else if(fie)
+  {
+   if(qs == stop_filter)
+     return c;
+  }
+  else
+  {
+   if(qs == filter)
+     qsl.push_back(qs);
+   if(qs == stop_filter)
+     return c;
+  }
  }
+ return 0;
 }
 
-DW_Record WDB_Instance::get_subsidiary_record(DW_Record dr, u4 col)
+DW_Record WDB_Instance::get_subsidiary_record(DW_Record base, u4 col)
 {
- wg_int data = wg_get_field(white_, dr.wg_record(), col);
+ return get_record_from_field(base, col);
+/*
+ wg_int data = wg_get_field(white_, base.wg_record(), col);
  if(data == 0)
    return {0, nullptr};
  
@@ -302,18 +374,26 @@ DW_Record WDB_Instance::get_subsidiary_record(DW_Record dr, u4 col)
  void* result = wg_decode_record(white_, data);
  u4 rid = get_record_id(result);
  return {rid, result};
+*/
 }
 
-DW_Record WDB_Instance::get_subvalues_record(DW_Record dr, u4 col)
+
+DW_Record WDB_Instance::get_subvalues_record(DW_Record base, u4 col)
 {
   // // perhaps default col 3?
- return get_subsidiary_record(dr, col);
+ return get_subsidiary_record(base, col);
 }
 
-DW_Record WDB_Instance::get_multi_index_record(DW_Record dr, u4 col)
+DW_Record WDB_Instance::get_multi_index_record(DW_Record base, u4 col)
 {
   // // perhaps default col 4?
- return get_subsidiary_record(dr, col);
+ return get_subsidiary_record(base, col);
+}
+
+DW_Record WDB_Instance::get_outedges_record(DW_Record base, u4 col)
+{
+  // // perhaps default col 5?
+ return get_subsidiary_record(base, col);
 }
 
 
