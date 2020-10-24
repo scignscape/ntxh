@@ -41,8 +41,8 @@ DW_Instance::DW_Instance()
      current_inedges_record_count_(0),
      startup_multi_index_record_count_(0),
      current_multi_index_record_count_(0),
-     startup_double_edges_record_count_(0), 
-     current_double_edges_record_count_(0)
+     startup_properties_record_count_(0), 
+     current_properties_record_count_(0)
 {
 
 }
@@ -419,10 +419,10 @@ u4 DW_Instance::new_multi_index_record_id()
  return current_multi_index_record_count_ | multi_indexes_mask;
 }
 
-u4 DW_Instance::new_double_edges_record_id()
+u4 DW_Instance::new_properties_record_id()
 {
- ++current_double_edges_record_count_;
- return current_double_edges_record_count_ | double_edges_mask;
+ ++current_properties_record_count_;
+ return current_properties_record_count_ | properties_mask;
 }
 
 u4 DW_Instance::new_inedges_record_id()
@@ -493,14 +493,21 @@ DW_Record DW_Instance::add_hyperedge(DW_Record& source, QString connector, DW_Re
  return add_hyperedge(source, connector, nullptr, target);
 }
 
-u4 DW_Instance::commit_new_triples(QVector<String_Label_Triple>& triples)
+QPair<u4, u4> DW_Instance::commit_new_triples(QVector<String_Label_Triple>& triples)
 {
- u4 result = 0;
+ QPair<u4, u4> result = {0, 0};
  for(String_Label_Triple& triple : triples)
  {
-  ++result;
   qDebug() << triple.connector_label;
-  add_hyperedge(*triple.source, triple.connector_label, *triple.target);
+  if(triple.property_kind > 0)
+  {
+   ++result.first;
+  }
+  else
+  {
+   ++result.second; 
+   add_hyperedge(*triple.source, triple.connector_label, *triple.target);
+  }
  }
  return result;
 }
@@ -546,19 +553,33 @@ DW_Record DW_Instance::new_outedges_record(DW_Record base,
   QVector<QPair<QPair<QString, DW_Record>, DW_Record>>& targets)
 {
   // // col 5 is outedges ...
- DW_Record result = wdb_instance_->check_reset_ref_field(base, 5, targets.size() * 3);
+ return new_outedges_or_property_record(base, 5, &DW_Instance::new_outedges_record_id, targets);
+}
+
+DW_Record DW_Instance::new_properties_record(DW_Record base, 
+  QVector<QPair<QPair<QString, DW_Record>, DW_Record>>& targets)
+{
+  // // col 6 is properties ...
+ return new_outedges_or_property_record(base, 6, &DW_Instance::new_properties_record_id, targets);
+}
+
+DW_Record DW_Instance::new_outedges_or_property_record(DW_Record base, 
+  u4 col, u4 (DW_Instance::*cb)(),
+  QVector<QPair<QPair<QString, DW_Record>, DW_Record>>& targets)
+{
+ DW_Record result = wdb_instance_->check_reset_ref_field(base, col, targets.size() * 3);
   //, 
   //[this]() { return new_outedges_record_id(); });
 
  if(result.id() == 0)
  {
-  u4 new_id = new_outedges_record_id();
+  u4 new_id = (this->*cb)();
   wdb_instance_->set_record_id_field(result.wg_record(), new_id); 
   result.set_id(new_id);
 
   if(Config.flags.avoid_record_pointers)
     // //  need to swap 1024 with the valid id ...
-    wdb_instance_->set_wg_record_field_int(base, 5, new_id);
+    wdb_instance_->set_wg_record_field_int(base, col, new_id);
 
  }
   

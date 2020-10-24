@@ -33,6 +33,7 @@ struct String_Label_Triple
  QString connector_label;
  DW_Record* target;
  DW_Dominion* dom;
+ u1 property_kind;
 };
 
 class DW_Context
@@ -64,14 +65,14 @@ public:
  DW_Frame(DW_Instance* dw_instance, u4 id = 0);
 
  DW_Record* register_new_triple(DW_Record* source, QString connector, DW_Record* target, 
- DW_Dominion* dom);
+   DW_Dominion* dom);
 
  DW_Context* new_context()
  {
   return new DW_Context;
  }
 
- u4 commit();
+ QPair<u4, u4> commit();
 
 };
 

@@ -98,6 +98,7 @@ public:
  DW_Record get_outedges_record(DW_Record base, u4 col);
  DW_Record get_subvalues_record(DW_Record base, u4 col);
  DW_Record get_multi_index_record(DW_Record base, u4 col);
+ DW_Record get_properties_record(DW_Record base, u4 col);
  DW_Record get_subsidiary_record(DW_Record base, u4 col);
 
  void read_subvalues(DW_Record dr, QStringList& qsl, u4 start_col);

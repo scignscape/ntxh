@@ -396,6 +396,12 @@ DW_Record WDB_Instance::get_outedges_record(DW_Record base, u4 col)
  return get_subsidiary_record(base, col);
 }
 
+DW_Record WDB_Instance::get_properties_record(DW_Record base, u4 col)
+{
+  // // perhaps default col 6?
+ return get_subsidiary_record(base, col);
+}
+
 
 
 void* WDB_Instance::query_leading_rec(u4 col)

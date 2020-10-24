@@ -70,8 +70,8 @@ class DW_Instance
  u4 startup_outedges_record_count_; 
  u4 current_outedges_record_count_;
 
- u4 startup_double_edges_record_count_; 
- u4 current_double_edges_record_count_;
+ u4 startup_properties_record_count_; 
+ u4 current_properties_record_count_;
 
  u4 startup_inedges_record_count_; 
  u4 current_inedges_record_count_;
@@ -91,14 +91,14 @@ class DW_Instance
  u4 new_index_label_id();
  u4 new_inedges_record_id();
  u4 new_outedges_record_id();
- u4 new_double_edges_record_id();
+ u4 new_properties_record_id();
  u4 new_subvalues_record_id();
 
 
  static constexpr u4 max_mask = 0x7FFFFFFF;
 
  static constexpr u4 indexes_mask = 0x60000000;
- static constexpr u4 double_edges_mask = 0x50000000;
+ static constexpr u4 properties_mask = 0x50000000;
  static constexpr u4 inedges_mask = 0x40000000;
  static constexpr u4 multi_indexes_mask = 0x30000000;
  static constexpr u4 outedges_mask = 0x20000000;
@@ -205,6 +205,14 @@ public:
  DW_Record new_outedges_record(DW_Record base, QVector<QPair<QPair<QString, DW_Record>, 
    DW_Record>>& targets);
 
+ DW_Record new_properties_record(DW_Record base, QVector<QPair<QPair<QString, DW_Record>, 
+   DW_Record>>& targets);
+
+ DW_Record new_outedges_or_property_record(DW_Record base, u4 col, 
+   u4 (DW_Instance::*cb)(),  
+   QVector<QPair<QPair<QString, DW_Record>, 
+   DW_Record>>& targets);
+
 // populate_edges_record(new_rec, ref, targets); 
 
  void* add_raw_record(u4 number_of_columns, QVector<DW_Stage_Value>& svs)
@@ -235,7 +243,7 @@ public:
 
  DW_Record add_hyperedge(DW_Record& source, QString connector, DW_Record& target);
 
- u4 commit_new_triples(QVector<String_Label_Triple>& triples);
+ QPair<u4, u4> commit_new_triples(QVector<String_Label_Triple>& triples);
 
  DW_Record new_wg_inedges_record(const QByteArray& qba);
 
@@ -342,7 +350,68 @@ public:
 
   //return (VALUE_Type*) new_typed_value
  }
+
+ template<typename VALUE_Type>
+ u4 get_id_code()
+ {
+  return 1000;
+ }
+
+/*
+#define TEMP_MACRO(type ,val) \
+ template<> \
+ u4 get_id_code<type>() { return val; }
+
+ TEMP_MACRO(u1 ,1001)
+ TEMP_MACRO(u2 ,1002)
+ TEMP_MACRO(u4 ,1003)
+ TEMP_MACRO(n8 ,1004)
+ TEMP_MACRO(s1 ,1005)
+ TEMP_MACRO(s2 ,1006)
+ TEMP_MACRO(s4 ,1007)
+ TEMP_MACRO(r4 ,1008)
+ TEMP_MACRO(r8 ,1009)
+ TEMP_MACRO(QString ,1010)
+
+  // //  and ...
+
+#undef TEMP_MACRO
+*/
+
+ template<typename VALUE_Type>
+ DW_Record new_property(const VALUE_Type& val)
+ {
+  return {get_id_code<VALUE_Type>(), new r8(val)};
+ }
+
 };
+
+
+#define TEMP_MACRO(type ,val) \
+ template<> \
+ inline u4 DW_Instance::get_id_code<type>() { return val; }
+
+ TEMP_MACRO(u1 ,1001)
+ TEMP_MACRO(u2 ,1002)
+ TEMP_MACRO(u4 ,1003)
+ TEMP_MACRO(n8 ,1004)
+ TEMP_MACRO(s1 ,1005)
+ TEMP_MACRO(s2 ,1006)
+ TEMP_MACRO(s4 ,1007)
+// TEMP_MACRO(r4 ,1008)
+ TEMP_MACRO(r8 ,1009)
+ TEMP_MACRO(QString ,1010)
+
+  // //  and ...
+
+#undef TEMP_MACRO
+
+
+template<>
+inline DW_Record DW_Instance::new_property<QString>(const QString& val)
+{
+ return {get_id_code<QString>(), new QString(val)};
+}
 
 
 _KANS(DGDB)

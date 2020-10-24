@@ -260,6 +260,14 @@ int main(int argc, char* argv[])
  dw->Config.flags.avoid_record_pointers = true;
 
  dw->init();
+
+ DW_Type_System* dwt = dw->type_system();
+
+ dwt->REGISTER_TYPE_NAME_RESOLUTION(Demo_Class);
+ dwt->REGISTER_TYPE(Demo_Class)
+   .set_default_binary_encoder(&Demo_Class::supply_data)
+   .set_default_binary_decoder(&Demo_Class::absorb_data)
+  ;
  
 
  qDebug() << "DB root folder: " << dw->db_root_folder();
@@ -291,11 +299,21 @@ int main(int argc, char* argv[])
 
  dwr1 << (fr/dom/ctxt)["Demo.SomeRelation"] >> dwr2;
 
+ DW_Record dwr3 = dw->new_property<QString>("Test Property");
+
+ dwr1 << (fr/dom/ctxt)["Demo.TestProperty"] >> dwr3;
+
  fr.commit();
 
- DW_Record dwr3 = dw->find_hyperedge(dwr1, "Demo.SomeRelation"); 
+ DW_Record dwr4 = dw->find_hyperedge(dwr1, "Demo.SomeRelation"); 
 
- qDebug() << "dwr3 = " << dwr3.id();
+ qDebug() << "dwr4 = " << dwr4.id();
+
+ Demo_Class* dc3 = dw->parse_binary_record<Demo_Class>(dwr3);
+
+ qDebug() << "dc3 string = " << dc3->a_string()
+   << "dc3 number = " << dc3->a_number();
+
 
 
  //(fr/dw)
