@@ -258,6 +258,25 @@ DW_Record WDB_Instance::get_record_from_field(DW_Record dr, u4 col)
 
 }
 
+ 
+void WDB_Instance::set_wg_record_field_property(DW_Record dr, u4 col, DW_Record pseudo_record)
+{
+ if(pseudo_record.id() < 1000)
+   return;
+
+ switch(pseudo_record.id() - 1000)
+ {
+ case 0: return;
+
+ case 10: 
+  {
+   QByteArray qba = pseudo_record.cast_to<QString>()->toUtf8();
+   set_qba_record_field(dr, col, qba);
+  }
+ }
+ //  qDebug() << "rec id = " << rec.id();
+}
+
 
 void WDB_Instance::set_wg_record_field_int(DW_Record dr, u4 col, u4 value)
 {
@@ -1058,6 +1077,18 @@ void WDB_Instance::set_qba_record_field(void* rec, u4 field_number, const QByteA
 }
 
 
+void WDB_Instance::set_qba_record_field(DW_Record dr, u4 field_number, QByteArray& qba)
+{
+ set_qba_record_field(dr.wg_record(), field_number, qba);
+}
+
+void WDB_Instance::set_qba_record_field(DW_Record dr, u4 field_number, const QByteArray& qba)
+{
+ set_qba_record_field(dr.wg_record(), field_number, qba);
+}
+
+
+
 void* WDB_Instance::new_wg_record(u4 number_of_columns)
 {
  void* result = wg_create_record(white_, number_of_columns);
@@ -1181,7 +1212,7 @@ void WDB_Instance::set_record_id_field(void* rec, u4 id)
  wg_set_int_field(white_, rec, 0, id);
 }
 
-void WDB_Instance::populate_edges_record(DW_Record new_rec, DW_Record base, 
+void WDB_Instance::populate_edges_or_property_record(DW_Record new_rec, DW_Record base, 
   QVector<QPair<QPair<QString, DW_Record>, DW_Record>>& targets)
 {
  void* vn = new_rec.wg_record();
@@ -1206,11 +1237,22 @@ void WDB_Instance::populate_edges_record(DW_Record new_rec, DW_Record base,
     //    If that assumption proves unwarranted due to some change in the 
     //    interface it's ok to explicitly null out the column if 
     //    pr.first.second.wg_record() is null ... 
+    //    If this is a property, the field would point to a separate property 
+    //    record if needed ...
   if(pr.first.second.wg_record())
     set_wg_record_field_rec(new_rec, rcol, pr.first.second);
 
   ++rcol; 
-  set_wg_record_field_rec(new_rec, rcol, pr.second);
+
+  if(pr.second.id() < 1024)
+  {
+   // //  a property ...
+   set_wg_record_field_property(new_rec, rcol, pr.second);
+  }
+  else
+  {
+   set_wg_record_field_rec(new_rec, rcol, pr.second);
+  }
  }
 }
 

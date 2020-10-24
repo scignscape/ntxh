@@ -307,9 +307,8 @@ DW_Record DW_Instance::new_wg_index_record(DW_Record ref, const DW_Stage_Value& 
 
 DW_Record DW_Instance::query_by_multi_index_record(DW_Stage_Value& dwsv, QString type_name, u4 col)
 {
- return query_by_index_record(dwsv, type_name, col, multi_indexes_mask, max_mask, 
-   Config.flags.avoid_record_pointers?2:0); // ;
-  // multi_indexes_mask, outedges_mask, 2);
+ return query_by_index_record(dwsv, type_name, col, multi_indexes_mask, properties_mask, 
+   Config.flags.avoid_record_pointers? 2 : 0);
 }
 
 
@@ -470,8 +469,8 @@ DW_Record DW_Instance::new_binary_hypernode_record(const QByteArray& qba)
  return {base_id, result};
 }
 
-DW_Record DW_Instance::add_hyperedge(DW_Record& source, QString connector, const DW_Record* annotation, 
-  DW_Record& target)
+DW_Record DW_Instance::add_hyperedge_or_property(DW_Record& source, QString connector, 
+  const DW_Record* annotation, DW_Record& target, u4 property_code)
 {
  QPair<QPair<QString, DW_Record>, DW_Record> edge = annotation? 
    QPair<QPair<QString, DW_Record>, DW_Record>{{connector, *annotation}, target}
@@ -479,33 +478,52 @@ DW_Record DW_Instance::add_hyperedge(DW_Record& source, QString connector, const
 
  QVector<QPair<QPair<QString, DW_Record>, DW_Record>> targets {edge};
 
- return new_outedges_record(source, targets);
+ if(property_code == 0)
+   return new_outedges_record(source, targets);
+ else
+   return new_properties_record(source, targets);
 }
 
 DW_Record DW_Instance::add_hyperedge(DW_Record& source, QString connector, const DW_Record& annotation, 
   DW_Record& target)
 {
- return add_hyperedge(source, connector, &annotation, target);
+ return add_hyperedge_or_property(source, connector, &annotation, target);
 }
 
 DW_Record DW_Instance::add_hyperedge(DW_Record& source, QString connector, DW_Record& target)
 {
- return add_hyperedge(source, connector, nullptr, target);
+ return add_hyperedge_or_property(source, connector, nullptr, target);
 }
+
+
+DW_Record DW_Instance::add_property(DW_Record& source, QString connector, const DW_Record& annotation, 
+  DW_Record& target, u4 property_code)
+{
+ return add_hyperedge_or_property(source, connector, &annotation, target, property_code);
+}
+
+DW_Record DW_Instance::add_property(DW_Record& source, QString connector, 
+  DW_Record& target, u4 property_code)
+{
+ return add_hyperedge_or_property(source, connector, nullptr, target, property_code);
+}
+
 
 QPair<u4, u4> DW_Instance::commit_new_triples(QVector<String_Label_Triple>& triples)
 {
  QPair<u4, u4> result = {0, 0};
  for(String_Label_Triple& triple : triples)
  {
-  qDebug() << triple.connector_label;
   if(triple.property_kind > 0)
   {
    ++result.first;
+   qDebug() << "adding property ..." << triple.connector_label;
+   add_property(*triple.source, triple.connector_label, *triple.target, triple.property_kind);
   }
   else
   {
    ++result.second; 
+   qDebug() << "adding hyperedge ..." << triple.connector_label;
    add_hyperedge(*triple.source, triple.connector_label, *triple.target);
   }
  }
@@ -583,7 +601,7 @@ DW_Record DW_Instance::new_outedges_or_property_record(DW_Record base,
 
  }
   
- wdb_instance_->populate_edges_record(result, base, targets); 
+ wdb_instance_->populate_edges_or_property_record(result, base, targets); 
 }
 
 DW_Record DW_Instance::get_outedges_record(DW_Record base)

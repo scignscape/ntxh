@@ -81,6 +81,9 @@ public:
  void set_qba_record_field(void* rec, u4 field_number, QByteArray& qba);
  void set_qba_record_field(void* rec, u4 field_number, const QByteArray& qba);
 
+ void set_qba_record_field(DW_Record dr, u4 field_number, QByteArray& qba);
+ void set_qba_record_field(DW_Record dr, u4 field_number, const QByteArray& qba);
+
  void set_creation_datetime(QDateTime dtm);
  void set_creation_datetime();
 
@@ -120,11 +123,12 @@ public:
 
  DW_Record check_reset_ref_field(DW_Record base, u4 col, u4 new_size); //, u4 (*fn)() );
 
- void populate_edges_record(DW_Record new_rec, DW_Record base, 
+ void populate_edges_or_property_record(DW_Record new_rec, DW_Record base, 
    QVector<QPair<QPair<QString, DW_Record>, DW_Record>>& targets);
 
 // void set_record_field(void* rec, u4 field_number, const QByteAfrray& qba);
 
+ void set_wg_record_field_property(DW_Record dr, u4 col, DW_Record pseudo_record);
 
  static QString static_to_ntxh(); 
  void to_ntxh(QString& result);

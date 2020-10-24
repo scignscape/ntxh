@@ -41,6 +41,12 @@ public:
 
  DW_Record(u4 id, void* wg_record);
  DW_Record();
+ 
+ template<typename VALUE_Type>
+ VALUE_Type* cast_to()
+ {
+  return static_cast<VALUE_Type*>(wg_record_);
+ }
 
 };
 

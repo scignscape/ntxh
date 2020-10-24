@@ -303,13 +303,14 @@ int main(int argc, char* argv[])
 
  dwr1 << (fr/dom/ctxt)["Demo.TestProperty"] >> dwr3;
 
- fr.commit();
+ QPair<u4, u4> pr = fr.commit();
+ qDebug() << "pr = " << pr;
 
  DW_Record dwr4 = dw->find_hyperedge(dwr1, "Demo.SomeRelation"); 
 
  qDebug() << "dwr4 = " << dwr4.id();
 
- Demo_Class* dc3 = dw->parse_binary_record<Demo_Class>(dwr3);
+ Demo_Class* dc3 = dw->parse_binary_record<Demo_Class>(dwr4);
 
  qDebug() << "dc3 string = " << dc3->a_string()
    << "dc3 number = " << dc3->a_number();

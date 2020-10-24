@@ -98,8 +98,8 @@ class DW_Instance
  static constexpr u4 max_mask = 0x7FFFFFFF;
 
  static constexpr u4 indexes_mask = 0x60000000;
- static constexpr u4 properties_mask = 0x50000000;
- static constexpr u4 inedges_mask = 0x40000000;
+ static constexpr u4 inedges_mask = 0x50000000;
+ static constexpr u4 properties_mask = 0x40000000;
  static constexpr u4 multi_indexes_mask = 0x30000000;
  static constexpr u4 outedges_mask = 0x20000000;
  static constexpr u4 subvalues_mask = 0x10000000;
@@ -107,10 +107,10 @@ class DW_Instance
  static constexpr u4 hypernodes_id_minimum = 1024;
 
 //   011*   indexes       60.00.00.00
-//   0101   double_edges  50.00.00.00
+//   0101   properties    50.00.00.00
 //   0100   inedges       40.00.00.00
-//   0011   outedges      30.00.00.00
-//   0010   multi_indexes 20.00.00.00
+//   0011   multi_indexes 30.00.00.00
+//   0010   outedges      20.00.00.00
 //   0001   subvalues     10.00.00.00
 //   0000   hypernodes   
 
@@ -235,13 +235,17 @@ public:
  }
 
 
- DW_Record add_hyperedge(DW_Record& source, QString connector, const DW_Record* annotation, 
-   DW_Record& target);
+ DW_Record add_hyperedge_or_property(DW_Record& source, QString connector, const DW_Record* annotation, 
+   DW_Record& target, u4 property_code = 0);
 
  DW_Record add_hyperedge(DW_Record& source, QString connector, const DW_Record& annotation, 
    DW_Record& target);
-
  DW_Record add_hyperedge(DW_Record& source, QString connector, DW_Record& target);
+
+ DW_Record add_property(DW_Record& source, QString connector, const DW_Record& annotation, 
+   DW_Record& target, u4 property_code);
+ DW_Record add_property(DW_Record& source, QString connector, DW_Record& target, u4 property_code);
+
 
  QPair<u4, u4> commit_new_triples(QVector<String_Label_Triple>& triples);
 
