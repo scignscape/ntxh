@@ -13,6 +13,11 @@
 
 #include <functional>
 
+inline char* q_to_std(const QString& qs)
+{
+ return const_cast<char*>( qs.toStdString().c_str() );
+}
+
 typedef quint8 u1;
 typedef quint16 u2;
 typedef quint32 u4;

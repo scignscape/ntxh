@@ -65,8 +65,12 @@ DW_Record DW_Instance::register_typed_value(QString type_name, DW_Stage_Value::P
  {
   u4 miid = new_multi_index_record_id();
   DW_Record mi = wdb_instance_->new_wg_record(miid, type_name, 
-    Config.flags.avoid_record_pointers? &result : result.wg_record(), pkg.multi_indexed);
-  wdb_instance_->set_wg_record_field_rec(result, 4, mi);
+    Config.flags.avoid_record_pointers? &result : result.wg_record(), 
+    {},
+    pkg.multi_indexed);
+
+   // // mi column is 5 ...
+  wdb_instance_->set_wg_record_field_rec(result, 5, mi);
 //  QMapIterator<u4, DW_Stage_Value*> it (pkg.multi_indexed);
 
  }
@@ -77,16 +81,16 @@ DW_Record DW_Instance::register_typed_value(QString type_name, DW_Stage_Value::P
 
 DW_Record DW_Instance::get_multi_index_record(DW_Record dr)
 {
-  //   column 4 is ref to multi_index_record ...
- return wdb_instance_->get_multi_index_record(dr, 4);
+  //   column 5 is ref to multi_index_record ...
+ return wdb_instance_->get_multi_index_record(dr, 5);
 }
 
 DW_Record DW_Instance::add_subvalues_record(DW_Record dr, u4 len)
 {
  u4 new_id = new_subvalues_record_id();
-  // //  column 3 is ref to subvalues record ...
+  // //  column 4 is ref to subvalues record ...
    //    len + 3 leaves room for the two id's and the base record ...
- void* result = wdb_instance_->init_subvalues_record(dr, len + 3, 3, new_id);
+ void* result = wdb_instance_->init_subvalues_record(dr, len + 3, 4, new_id);
  return {new_id, result};
 }
 
@@ -104,8 +108,8 @@ DW_Record DW_Instance::add_subvalues_record(DW_Record dr, QStringList qsl)
 
 DW_Record DW_Instance::get_subvalues_record(DW_Record dr, QStringList& qsl)
 {
-  // // col 3 is subvalues ...
- DW_Record result = wdb_instance_->get_subvalues_record(dr, 3);
+  // // col 4 is subvalues ...
+ DW_Record result = wdb_instance_->get_subvalues_record(dr, 4);
 
  if(result.wg_record() == nullptr)
    return {0, nullptr};
@@ -172,6 +176,17 @@ void* DW_Instance::parse_dw_record(DW_Record dr, std::function<void(const QByteA
  return nullptr;
  
 }
+
+void DW_Instance::set_tag_field(DW_Record dr, u4 col, QString str)
+{
+ wdb_instance_->set_tag_field(dr, col, str);
+}
+
+QString DW_Instance::get_tag_field(DW_Record dr, u4 col)
+{
+ return wdb_instance_->get_tag_field(dr, col);
+}
+
 
 //std::function<void(QQueue<void*>&)> DW_Instance::get_stage_queue_reader(DW_Type* dt)
 
@@ -289,19 +304,19 @@ DW_Record DW_Instance::new_wg_index_record(DW_Record ref, const DW_Stage_Value& 
 {  
  u4 id = new_index_record_id();
 
- DW_Stage_Value col_3;
- col_3.set_u4_data(ref.id());
+ DW_Stage_Value col_4;
+ col_4.set_u4_data(ref.id());
 
- QMap<u4, DW_Stage_Value> svs {{3, col_3}, {4, dwsv} };
+ QMap<u4, DW_Stage_Value> svs {{4, col_4}, {5, dwsv} };
 
  if(Config.flags.avoid_record_pointers)
  {
-  return wdb_instance_->new_wg_record(id, label, nullptr, svs);
+  return wdb_instance_->new_wg_record(id, {}, nullptr, label, svs);
  }
  DW_Stage_Value col_2;
  col_2.set_rec_data(ref.wg_record());
  svs.insert(2, col_2);
- return wdb_instance_->new_wg_record(id, label, nullptr, svs);
+ return wdb_instance_->new_wg_record(id, {}, nullptr, label, svs);
 }
 
 
@@ -462,7 +477,8 @@ DW_Record DW_Instance::new_binary_hypernode_record(const QByteArray& qba)
 {
  u4 base_id = new_hypernode_record_id();
  //base_id <<= 13;
- void* result = wdb_instance_->new_wg_record(7, base_id);
+  // //  8 columns ...
+ void* result = wdb_instance_->new_wg_record(8, base_id);
  
  wdb_instance_->set_qba_record_field(result, 1, qba);
 
@@ -570,15 +586,15 @@ void* DW_Instance::_add_raw_record(u4 number_of_columns, QVector<DW_Stage_Value>
 DW_Record DW_Instance::new_outedges_record(DW_Record base, 
   QVector<QPair<QPair<QString, DW_Record>, DW_Record>>& targets)
 {
-  // // col 5 is outedges ...
- return new_outedges_or_property_record(base, 5, &DW_Instance::new_outedges_record_id, targets);
+  // // col 6 is outedges ...
+ return new_outedges_or_property_record(base, 6, &DW_Instance::new_outedges_record_id, targets);
 }
 
 DW_Record DW_Instance::new_properties_record(DW_Record base, 
   QVector<QPair<QPair<QString, DW_Record>, DW_Record>>& targets)
 {
-  // // col 6 is properties ...
- return new_outedges_or_property_record(base, 6, &DW_Instance::new_properties_record_id, targets);
+  // // col 7 is properties ...
+ return new_outedges_or_property_record(base, 7, &DW_Instance::new_properties_record_id, targets);
 }
 
 DW_Record DW_Instance::new_outedges_or_property_record(DW_Record base, 
@@ -606,7 +622,7 @@ DW_Record DW_Instance::new_outedges_or_property_record(DW_Record base,
 
 DW_Record DW_Instance::get_outedges_record(DW_Record base)
 {
- DW_Record result = wdb_instance_->get_outedges_record(base, 5);
+ DW_Record result = wdb_instance_->get_outedges_record(base, 6);
  return result;
 }
 

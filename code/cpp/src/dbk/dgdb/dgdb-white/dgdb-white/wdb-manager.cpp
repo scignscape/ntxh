@@ -48,6 +48,41 @@ WDB_Manager::WDB_Manager(DW_Instance* dw_instance)
 
 }
 
+struct WDB_Manager::Query_Iterator
+{
+  wg_query* query;
+  void* last;
+  u4 count; 
+};
+
+WDB_Manager::Query_Iterator* WDB_Manager::new_query_iterator(QString criterion, 
+  u4 id_low, u4 id_high, u4 col, u4 id_col)
+{
+ WDB_Instance* white = get_current_white(); 
+
+ u1 arglist_size = 3;
+
+ wg_query_arg arglist[arglist_size];
+
+ arglist[0].column = id_col;
+ arglist[0].cond = WG_COND_LESSTHAN;
+ arglist[0].value = wg_encode_query_param_int(white, id_high);
+
+ arglist[1].column = id_col;
+ arglist[1].cond = WG_COND_GREATER;
+ arglist[1].value = wg_encode_query_param_int(white, id_low);
+
+ arglist[2].column = col;
+ arglist[2].cond = WG_COND_EQUAL;
+ arglist[2].value = wg_encode_query_param_str(white, 
+   q_to_std(criterion), nullptr);
+
+ wg_query* query = wg_make_query(white, nullptr, 0, arglist, arglist_size);
+ return new Query_Iterator {query, nullptr, 0};
+
+}
+
+
 QString WDB_Manager::get_restore_file()
 {
  return {}; //?current_white_->get_local_file_name();

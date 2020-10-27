@@ -15,8 +15,8 @@
 
 #include "accessors.h"
 
-
 #include "kans.h"
+
 
 KANS_(DGDB)
 
@@ -50,6 +50,13 @@ public:
  ACCESSORS(WDB_Instance* ,current_white)
  ACCESSORS(QString ,db_root_folder)
 
+ struct Query_Iterator;
+// {
+//  wg_query* query;
+//  void* last;
+//  u4 count; 
+// };
+
  void init_from_ntxh();
 
  QString get_restore_file();
@@ -67,6 +74,9 @@ public:
  {
   return new_white(num_code, 0, name);
  }
+
+ Query_Iterator* new_query_iterator(QString criterion, 
+   u4 id_start, u4 id_low, u4 id_high, u4 id_col = 0);
 
 };
 

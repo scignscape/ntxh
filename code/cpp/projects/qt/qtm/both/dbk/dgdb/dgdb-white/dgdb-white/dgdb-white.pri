@@ -29,6 +29,7 @@ INCLUDEPATH += $$PHAON_GRAPH_SRC_GROUP_DIR
 
 HEADERS += \
   $$SRC_DIR/wdb-manager.h  \
+  $$SRC_DIR/dw-manager.h  \
   $$SRC_DIR/wdb-instance.h  \
   $$SRC_DIR/dw-instance.h  \
   $$SRC_DIR/dw-record.h  \
@@ -44,6 +45,7 @@ HEADERS += \
 
 SOURCES += \
   $$SRC_DIR/wdb-manager.cpp  \
+  $$SRC_DIR/dw-manager.cpp  \
   $$SRC_DIR/wdb-instance.cpp  \
   $$SRC_DIR/dw-instance.cpp  \
   $$SRC_DIR/dw-record.cpp  \

@@ -39,7 +39,8 @@ class WDB_Instance
 
  QMap<u1, QDateTime> datetimes_; 
 
- void* _new_wg_record(u4 id, QString col1, void* col2, QMap<u4, DW_Stage_Value>& svs);
+ void* _new_wg_record(u4 id, QString col1, void* col2,  QString col3, 
+   QMap<u4, DW_Stage_Value>& svs);
 
 public:
 
@@ -55,7 +56,8 @@ public:
    u4 param_column, DW_Stage_Value dwsv, QString label = {}, u4 label_column = 1);
 
  void* new_wg_record(QMap<u4, DW_Stage_Value>& svs);
- DW_Record new_wg_record(u4 id, QString col1, void* col2, QMap<u4, DW_Stage_Value>& svs);
+ DW_Record new_wg_record(u4 id, QString col1, void* col2, 
+   QString col3, QMap<u4, DW_Stage_Value>& svs);
 
 //? void* new_wg_record(u4 id, const QVector<DW_Stage_Value>& svs);
 
@@ -117,9 +119,9 @@ public:
  n8 set_record_field(void* rec, u4 col, DW_Stage_Value& dwsv);
 
 
- void* new_wg_record(u4 number_of_columns, u4 col1, QString col2);
+ void* new_wg_record(u4 number_of_columns, u4 col0, QString col1);
  void* new_wg_record(u4 number_of_columns);
- void* new_wg_record(u4 number_of_columns, u4 col1);
+ void* new_wg_record(u4 number_of_columns, u4 col0);
 
  DW_Record check_reset_ref_field(DW_Record base, u4 col, u4 new_size); //, u4 (*fn)() );
 
@@ -129,6 +131,9 @@ public:
 // void set_record_field(void* rec, u4 field_number, const QByteAfrray& qba);
 
  void set_wg_record_field_property(DW_Record dr, u4 col, DW_Record pseudo_record);
+
+ void set_tag_field(DW_Record dr, u4 col, QString str);
+ QString get_tag_field(DW_Record dr, u4 col);
 
  static QString static_to_ntxh(); 
  void to_ntxh(QString& result);

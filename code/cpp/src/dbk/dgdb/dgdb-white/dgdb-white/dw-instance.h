@@ -185,6 +185,9 @@ public:
  QString get_restore_file();
  void restore_from_file(QString rf);
 
+ void set_tag_field(DW_Record dr, u4 col, QString str);
+ QString get_tag_field(DW_Record dr, u4 col);
+
  DW_Record new_binary_hypernode_record(const QByteArray& qba);
 
  template<typename VALUE_Type>

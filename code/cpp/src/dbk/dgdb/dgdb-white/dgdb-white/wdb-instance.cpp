@@ -210,7 +210,7 @@ wg_int _rec_encode(void* wh, DW_Stage_Value& dwsv)
 
 void* WDB_Instance::new_wg_record(QMap<u4, DW_Stage_Value>& svs)
 {
- return _new_wg_record(0, {}, nullptr, svs);
+ return _new_wg_record(0, {}, nullptr, {}, svs);
 }
 
 n8 WDB_Instance::wg_encode_dw_record(DW_Record rec)
@@ -399,25 +399,25 @@ DW_Record WDB_Instance::get_subsidiary_record(DW_Record base, u4 col)
 
 DW_Record WDB_Instance::get_subvalues_record(DW_Record base, u4 col)
 {
-  // // perhaps default col 3?
+  // // perhaps default col 4?
  return get_subsidiary_record(base, col);
 }
 
 DW_Record WDB_Instance::get_multi_index_record(DW_Record base, u4 col)
 {
-  // // perhaps default col 4?
+  // // perhaps default col 5?
  return get_subsidiary_record(base, col);
 }
 
 DW_Record WDB_Instance::get_outedges_record(DW_Record base, u4 col)
 {
-  // // perhaps default col 5?
+  // // perhaps default col 6?
  return get_subsidiary_record(base, col);
 }
 
 DW_Record WDB_Instance::get_properties_record(DW_Record base, u4 col)
 {
-  // // perhaps default col 6?
+  // // perhaps default col 7?
  return get_subsidiary_record(base, col);
 }
 
@@ -611,6 +611,7 @@ wg_int _wg_encode_query_param(void* wh, DW_Stage_Value& dwsv)
  return 0;
 }
 
+
 void* WDB_Instance::query_within_id_range(u4 range_col, u4 low, u4 high, 
   u4 param_column, DW_Stage_Value dwsv, QString label, u4 label_column)
 {
@@ -650,6 +651,26 @@ void* WDB_Instance::query_within_id_range(u4 range_col, u4 low, u4 high,
 
  return result;
 }
+
+void WDB_Instance::set_tag_field(DW_Record dr, u4 col, QString str)
+{
+ char* cc = q_to_std(str); //const_cast<char*>(str.toStdString().c_str());
+ wg_set_str_field(white_, dr.wg_record(), col, cc);
+}
+
+QString WDB_Instance::get_tag_field(DW_Record dr, u4 col)
+{
+ wg_int data = wg_get_field(white_, dr.wg_record(), col);
+ char* result = wg_decode_str(white_, data);
+ wg_int len = wg_decode_str_len(white_, data);
+ std::string ss = std::string(result, len);
+ return QString::fromStdString(ss);
+}
+
+//   wg_int wi = wg_get_field(wh, rec, index);
+//   char* ptr = wg_decode_str(wh, wi);
+//   dwsv.data_to_ref<QString>() = QString(QLatin1String(ptr));
+
 
 n8 WDB_Instance::set_record_field(void* rec, u4 col, DW_Stage_Value& dwsv)
 {
@@ -721,14 +742,16 @@ n8 WDB_Instance::set_record_field(void* rec, u4 col, DW_Stage_Value& dwsv)
 }
 
 
-DW_Record WDB_Instance::new_wg_record(u4 id, QString col1, void* col2, QMap<u4, DW_Stage_Value>& svs)
+DW_Record WDB_Instance::new_wg_record(u4 id, QString col1, void* col2, 
+  QString col3, QMap<u4, DW_Stage_Value>& svs)
 {
- void* result = _new_wg_record(id, col1, col2, svs);
+ void* result = _new_wg_record(id, col1, col2, col3, svs);
  return {id, result};
 }
 
 
 void* WDB_Instance::_new_wg_record(u4 id, QString col1, void* col2, 
+  QString col3, 
   QMap<u4, DW_Stage_Value>& svs)
 {
  QMutableMapIterator<u4, DW_Stage_Value> it(svs);
@@ -742,12 +765,17 @@ void* WDB_Instance::_new_wg_record(u4 id, QString col1, void* col2,
 
  if(!col1.isEmpty())
  {
-  wgim[1] = wg_encode_str(white_, col1.toLatin1().data(), nullptr);
+  wgim[1] = wg_encode_str(white_, q_to_std(col1), nullptr);
  }
 
  if(col2)
  {
   wgim[2] = check_wg_encode_dw_record(col2);
+ }
+
+ if(!col3.isEmpty())
+ {
+  wgim[1] = wg_encode_str(white_, q_to_std(col3), nullptr);
  }
 
  u4 max = 0;
@@ -1146,10 +1174,10 @@ void* WDB_Instance::get_index_record_ref_target(void* rec, u4 ref_id_column, u4*
 }
 
 
-void* WDB_Instance::new_wg_record(u4 number_of_columns, u4 col1)
+void* WDB_Instance::new_wg_record(u4 number_of_columns, u4 col0)
 {
  void* result = wg_create_record(white_, number_of_columns);
- wg_int c1val = wg_encode_int(white_, col1);
+ wg_int c1val = wg_encode_int(white_, col0);
  wg_set_field(white_, result, 0, c1val);
 
  return result;
@@ -1257,14 +1285,14 @@ void WDB_Instance::populate_edges_or_property_record(DW_Record new_rec, DW_Recor
 }
 
 
-void* WDB_Instance::new_wg_record(u4 number_of_columns, u4 col1, QString col2)
+void* WDB_Instance::new_wg_record(u4 number_of_columns, u4 col0, QString col1)
 {
  void* result = wg_create_record(white_, number_of_columns);
- wg_int c1val = wg_encode_int(white_, col1);
- wg_int c2val = wg_encode_str(white_, col2.toLatin1().data(), nullptr);
+ wg_int c0val = wg_encode_int(white_, col0);
+ wg_int c1val = wg_encode_str(white_, q_to_std(col1), nullptr);
 
- wg_set_field(white_, result, 0, c1val);
- wg_set_field(white_, result, 1, c2val);
+ wg_set_field(white_, result, 0, c0val);
+ wg_set_field(white_, result, 1, c1val);
  return result;
 }
 

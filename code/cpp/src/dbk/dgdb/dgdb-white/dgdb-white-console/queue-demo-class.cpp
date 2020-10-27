@@ -22,13 +22,13 @@ void Queue_Demo_Class::encode_stage_values(QByteArray& qba,
    DW_Stage_Value::Callback_type cb)
 {
  QDataStream qds(&qba, QIODevice::WriteOnly);
- qds << DW_Stage_Value().set_str_data(title_).run[3](cb)
-   // DW_Stage_Value().new_qstring("title_").run[3](cb)
+ qds << DW_Stage_Value().set_str_data(title_).run[4](cb)
+   // DW_Stage_Value().new_qstring("title_").run[4](cb)
    << author_
    << DW_Stage_Value().set_u2_data(num_).run["Book.Pages"](cb)
-   << DW_Stage_Value().set_u2_data(num_).run[4](cb)
-   << DW_Stage_Value().set_date_data(publication_date_).run[5](cb)
-   << DW_Stage_Value().set_time_data(test_time_).run[6](cb)
+   << DW_Stage_Value().set_u2_data(num_).run[5](cb)
+   << DW_Stage_Value().set_date_data(publication_date_).run[6](cb)
+   << DW_Stage_Value().set_time_data(test_time_).run[7](cb)
 //?   << DW_Stage_Value().set_xml_data(QString::number(num), "xs:integer")
 //?     .run[5](cb)[XSD_TYPE_DECODING_Flag];
  ;
@@ -42,12 +42,12 @@ void Queue_Demo_Class::init_stage_queue(const QByteArray& qba,
  QDataStream qds(qba);
 
 
- qds >> qm[3].queue<QString>(sq)
+ qds >> qm[4].queue<QString>(sq)
    >> sq.enqueue_new<QString>()
    >> sq.skip()
-   >> qm[4].queue<u2>(sq)
-   >> qm[5].queue<QDate>(sq)
-   >> qm[6].queue<QTime>(sq)
+   >> qm[5].queue<u2>(sq)
+   >> qm[6].queue<QDate>(sq)
+   >> qm[7].queue<QTime>(sq)
   ;
 
  sq.reverse();
