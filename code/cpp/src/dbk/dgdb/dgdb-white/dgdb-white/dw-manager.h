@@ -5,8 +5,8 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef WDB_MANAGER__H
-#define WDB_MANAGER__H
+#ifndef DW_MANAGER__H
+#define DW_MANAGER__H
 
 #include <QMap>
 #include <QString>
@@ -47,6 +47,13 @@ public:
 
  u4 get_tagged_record_count(QString tag);
 
+ void query_tagged_records(QString tag, 
+   std::function<void(QByteArray&)> fn);
+
+ void query_tagged_records(QString tag, 
+   std::function<void(QByteArray&, u4)> fn);
+
+
  With_All_Tagged_Records_Package with_all_tagged_records(QString tag)
  {
   return {this, tag};
@@ -57,6 +64,6 @@ public:
 _KANS(DGDB)
 
 
-#endif // WDB_MANAGER__H
+#endif // DW_MANAGER__H
 
 

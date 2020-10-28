@@ -106,6 +106,8 @@ class DW_Instance
 
  static constexpr u4 hypernodes_id_minimum = 1024;
 
+
+
 //   011*   indexes       60.00.00.00
 //   0101   properties    50.00.00.00
 //   0100   inedges       40.00.00.00
@@ -168,6 +170,11 @@ public:
  ACCESSORS(DW_Type_System* ,type_system)
 
  DW_Instance();
+
+ static constexpr QPair<u4, u4> hypernodes_id_range()
+ {
+  return {hypernodes_id_minimum, subvalues_mask};
+ } //minimum = 1024;
 
  DW_Frame* new_frame();
 

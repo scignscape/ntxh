@@ -51,11 +51,9 @@ public:
  ACCESSORS(QString ,db_root_folder)
 
  struct Query_Iterator;
-// {
-//  wg_query* query;
-//  void* last;
-//  u4 count; 
-// };
+
+ void* cycle_query(Query_Iterator* qi);
+ void get_hypernode_payload(Query_Iterator* qi, QByteArray& qba, u4 qba_index = 1);
 
  void init_from_ntxh();
 
@@ -76,7 +74,7 @@ public:
  }
 
  Query_Iterator* new_query_iterator(QString criterion, 
-   u4 id_start, u4 id_low, u4 id_high, u4 id_col = 0);
+   u4 id_low, u4 id_high, u4 col, u4 id_col = 0);
 
 };
 

@@ -50,15 +50,19 @@ WDB_Manager::WDB_Manager(DW_Instance* dw_instance)
 
 struct WDB_Manager::Query_Iterator
 {
-  wg_query* query;
-  void* last;
-  u4 count; 
+ WDB_Instance* wdb;
+ wg_query* query;
+ void* last;
+ void* next;
+ u4 count; 
 };
 
 WDB_Manager::Query_Iterator* WDB_Manager::new_query_iterator(QString criterion, 
   u4 id_low, u4 id_high, u4 col, u4 id_col)
 {
- WDB_Instance* white = get_current_white(); 
+ WDB_Instance* wdb = get_current_white(); 
+
+ void* white = wdb->white();
 
  u1 arglist_size = 3;
 
@@ -78,8 +82,27 @@ WDB_Manager::Query_Iterator* WDB_Manager::new_query_iterator(QString criterion,
    q_to_std(criterion), nullptr);
 
  wg_query* query = wg_make_query(white, nullptr, 0, arglist, arglist_size);
- return new Query_Iterator {query, nullptr, 0};
+ return new Query_Iterator {wdb, query, nullptr, nullptr, 0};
+}
 
+
+void WDB_Manager::get_hypernode_payload(Query_Iterator* qi, 
+  QByteArray& qba, u4 qba_index)
+{
+ qi->wdb->get_qba_from_record(qi->next, qba_index, qba);
+}
+
+
+void* WDB_Manager::cycle_query(Query_Iterator* qi)
+{
+ void* rec = wg_fetch(qi->wdb->white(), qi->query);
+ if(rec)
+ {
+  qi->last = qi->next;
+  qi->next = rec;
+  ++qi->count;
+ }
+ return rec;
 }
 
 

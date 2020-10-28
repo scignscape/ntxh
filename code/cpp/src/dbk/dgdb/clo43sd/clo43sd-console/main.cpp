@@ -54,10 +54,12 @@ void load_species(DW_Manager& dwm,
     &species_vec, &species_map]
    (QByteArray& qba, u4 i)
  {
-  WCM_Hypernode whn;
-  whn.set_indexed_column_map(&icm);
-  whn.absorb_data(qba, wcs);
-
+  CLO_Species* sp = new CLO_Species;
+  species_vec[i] = sp;
+  sp->absorb_data(qba);
+//  WCM_Hypernode whn;
+//  whn.set_indexed_column_map(&icm);
+//  whn.absorb_data(qba, wcs);
  }
 }
 

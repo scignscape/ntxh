@@ -364,6 +364,10 @@ void DW_Instance::get_hypernode_payload(DW_Record dwr, QByteArray& qba, u4 qba_i
    wdb_instance_->get_qba_from_record(dwr.wg_record(), qba_index, qba);
 }
 
+//void DW_Instance::get_hypernode_payload(void* rec, QByteArray& qba, u4 qba_index)/
+//{
+// wdb_instance_->get_qba_from_record(rec, qba_index, qba);/
+//}
 
 void DW_Instance::to_ntxh(QString& ty, QString& result)
 {
