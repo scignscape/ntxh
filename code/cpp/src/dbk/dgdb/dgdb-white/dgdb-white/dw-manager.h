@@ -47,11 +47,13 @@ public:
 
  u4 get_tagged_record_count(QString tag);
 
+ template<typename PROC_Type>
  void query_tagged_records(QString tag, 
-   std::function<void(QByteArray&)> fn);
+   PROC_Type fn);
 
- void query_tagged_records(QString tag, 
-   std::function<void(QByteArray&, u4)> fn);
+//   std::function<void(QByteArray&)> fn);
+// void query_tagged_records(QString tag, 
+//   std::function<void(QByteArray&, u4)> fn);
 
 
  With_All_Tagged_Records_Package with_all_tagged_records(QString tag)

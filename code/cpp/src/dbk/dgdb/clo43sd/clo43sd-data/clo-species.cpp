@@ -7,11 +7,23 @@
 
 #include "clo-species.h"
 
-//#include "wcm/wcm-hyponode.h"
+#include <QDataStream>
 
 CLO_Species::CLO_Species()
 {
 
+}
+
+void CLO_Species::supply_data(QByteArray& qba)
+{
+ QDataStream qds(&qba, QIODevice::WriteOnly);
+ qds << abbreviation_ << instances_ << name_;
+}
+
+void CLO_Species::absorb_data(const QByteArray& qba)
+{
+ QDataStream qds(qba);
+ qds >> abbreviation_ >> instances_ >> name_;
 }
 
 

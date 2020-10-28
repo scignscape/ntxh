@@ -30,12 +30,10 @@ INCLUDEPATH += $$SRC_PROSET_DIR/dgdb-white/dgdb-white
 
 
 HEADERS += \
-  $$SRC_DIR/clo-file.h \
 
 
 SOURCES += \
   $$SRC_DIR/main.cpp \
-  $$SRC_DIR/clo-file.cpp \
 
 
 

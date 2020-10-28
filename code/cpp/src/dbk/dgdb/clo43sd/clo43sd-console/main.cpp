@@ -16,6 +16,8 @@
 //#include "dw-fcs-document.h"
 //#include "dw-fcs-column.h"
 
+#include "clo43sd-data/clo-database.h"
+#include "clo43sd-data/clo-species.h"
 
 #include "dgdb-white/dw-instance.h"
 #include "dgdb-white/dw-record.h"
@@ -28,6 +30,8 @@
 
 
 #include "dgdb-white/wdb-manager.h"
+#include "dgdb-white/dw-manager.h"
+
 #include "dgdb-white/dgenvironment.h"
 
 #include "dgdb-white/wdb-instance.h"
@@ -36,6 +40,8 @@
 
 #include "global-types.h"
 
+class CLO_Database;
+class CLO_Species;
 
 USING_KANS(DGDB)
 
@@ -57,10 +63,7 @@ void load_species(DW_Manager& dwm,
   CLO_Species* sp = new CLO_Species;
   species_vec[i] = sp;
   sp->absorb_data(qba);
-//  WCM_Hypernode whn;
-//  whn.set_indexed_column_map(&icm);
-//  whn.absorb_data(qba, wcs);
- }
+ };
 }
 
 

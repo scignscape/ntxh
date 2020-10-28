@@ -38,7 +38,8 @@ public:
  ACCESSORS(u4 ,instances)
  ACCESSORS(QString ,name)
 
-
+ void supply_data(QByteArray& qba);
+ void absorb_data(const QByteArray& qba);
 };
 
 

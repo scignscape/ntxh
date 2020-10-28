@@ -34,6 +34,50 @@ DW_Manager::DW_Manager(WDB_Manager* wdb_manager)
 
 }
 
+template<typename PROC_Type>
+inline void _run_fn(PROC_Type fn, QByteArray& qba, u4 count);
+
+
+template<>
+void _run_fn<std::function<void(QByteArray&, u4)>>(
+  std::function<void(QByteArray&, u4)> fn, QByteArray& qba, u4 count)
+{
+ fn(qba, count);
+}
+
+template<>
+void _run_fn<std::function<void(QByteArray&)>>(
+  std::function<void(QByteArray&)> fn, QByteArray& qba, u4 count)
+{
+ fn(qba);
+}
+
+template<typename PROC_Type>
+void DW_Manager::query_tagged_records(QString tag, 
+  PROC_Type fn)
+{
+ QPair<u4, u4> range = DW_Instance::hypernodes_id_range();
+
+  // //  column 3 is the tag column ...
+ WDB_Manager::Query_Iterator* qi = wdb_manager_->new_query_iterator(tag, 
+   range.first, range.second, 3);
+
+ n8 brake = 0;
+
+ u4 count = 0;
+ while(brake == 0)
+ {
+  void* rec = wdb_manager_->cycle_query(qi);
+  if(rec)
+  {
+   ++count;
+   QByteArray qba;
+   wdb_manager_->get_hypernode_payload(qi, qba);
+   _run_fn(fn, qba, count);
+  }
+ }
+}
+
 
 void DW_Manager::With_All_Tagged_Records_Package::operator<<
   (std::function<void(QByteArray&)> fn)
@@ -42,6 +86,13 @@ void DW_Manager::With_All_Tagged_Records_Package::operator<<
 
 }
 
+void DW_Manager::With_All_Tagged_Records_Package::operator<<
+  (std::function<void(QByteArray&, u4)> fn)
+{
+ _this->query_tagged_records(tag, fn);
+}
+
+/*
 void DW_Manager::query_tagged_records(QString tag, 
   std::function<void(QByteArray&)> fn)
 {
@@ -88,6 +139,14 @@ void DW_Manager::query_tagged_records(QString tag,
    fn(qba, count);
   }
  }
+}
+
+
+*/
+
+u4 DW_Manager::get_tagged_record_count(QString tag)
+{
+ return 0;
 }
 
 
