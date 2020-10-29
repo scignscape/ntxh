@@ -110,11 +110,6 @@ LIBS +=  -lstdc++fs
 
 include($$ROOT_DIR/../preferred/facs.pri)
 
-#? include($$ROOT_DIR/../preferred/proto.pri)
-
-
-#LIBS += /home/nlevisrael/mtr/newstuff/hdf5/install/lib/libhdf5.a -lz
-#LIBS += -L/home/nlevisrael/mtr/newstuff/hdf5/install/lib/ -lhdf5
 
 
 

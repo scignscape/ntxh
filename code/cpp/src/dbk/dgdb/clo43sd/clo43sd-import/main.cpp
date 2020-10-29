@@ -6,28 +6,40 @@
 
 #include <QDebug>
 
-#include "wcm/wcm-database.h"
-#include "wcm/wcm-column.h"
-#include "wcm/wcm-column-set.h"
-
-//#include "patient.h"
-
-//#include "whitedb.h"
 
 #include <QCoreApplication>
 
-#include "wcm/wcm-hypernode.h"
-#include "wcm/wcm-hyponode.h"
-#include "withs.h"
 
 #include "clo43sd-data/clo-file.h"
 #include "clo43sd-data/clo-species.h"
 #include "clo43sd-data/clo-database.h"
 
-#include "ntxh-parser/ntxh-document.h"
+#include "dgdb-white/dw-instance.h"
+#include "dgdb-white/dw-record.h"
+
+#include "dgdb-white/dw-stage-value.h"
+#include "dgdb-white/stage/dw-stage-queue.h"
+
+#include "dgdb-white/dw-frame.h"
+#include "dgdb-white/dw-dominion.h"
+
+
+#include "dgdb-white/wdb-manager.h"
+#include "dgdb-white/dw-manager.h"
+
+#include "dgdb-white/dgenvironment.h"
+
+#include "dgdb-white/wdb-instance.h"
+#include "dgdb-white/types/dw-type-system.h"
+#include "dgdb-white/types/dw-type.h"
+
+#include "global-types.h"
+
+//#include "ntxh-parser/ntxh-document.h"
 
 #include "kans.h"
 
+/*
 void create(WCM_Database& wcmd)
 {
  wcmd.create_new_column("@Info");
@@ -42,16 +54,43 @@ void create(WCM_Database& wcmd)
  wcmd.create_new_column("Species::Abbreviation@CLO_File");
 
  wcmd.save();
-}
 
+}
+*/
+
+class CLO_Database;
+class CLO_Species;
+
+USING_KANS(DGDB)
 
 int main(int argc, char *argv[])
 {
- WCM_Database wcmd(CLO43SD_DB_CODE,
-   DEFAULT_WCM_FOLDER "/dbs/test-" CLO43SD_DB_CODE ".wdb");
+ DW_Instance* dw = DGEnvironment(
+   DEFAULT_DEV_DGDB_FOLDER "/instances/clo43sd/import");
 
-// wcmd.with_check_create() << &create;
+ // // local_scratch_mode has no persistence at all.
+  //   Scratch mode resents the database whenever it is 
+  //   opened by DigammaDB, but keeps the database in memory 
+  //   in between (so e.g. it can be examined via the wgdb utility). 
+ //dw->Config.flags.local_scratch_mode = true;
 
+ dw->Config.flags.scratch_mode = true;
+ dw->Config.flags.avoid_record_pointers = true;
+
+ DW_Manager& dwm = *dw->new_manager(); 
+
+
+ dwm.with_check_create() << [dw]()
+ {
+  dw->new_tag_record("Default@Info");
+ };
+
+ return 0;
+
+}
+
+
+#ifdef HIDE
  wcmd.with_check_create() << [&wcmd]()
  {
   wcmd.create_new_column("@Info");
@@ -163,4 +202,6 @@ int main(int argc, char *argv[])
 
  return 0;
 }
+
+#endif //def HIDE
 

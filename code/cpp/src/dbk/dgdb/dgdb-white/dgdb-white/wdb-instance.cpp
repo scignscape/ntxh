@@ -280,8 +280,14 @@ void WDB_Instance::set_wg_record_field_property(DW_Record dr, u4 col, DW_Record 
 
 void WDB_Instance::set_wg_record_field_int(DW_Record dr, u4 col, u4 value)
 {
- wg_int recenc = wg_encode_int(white_, value);
- wg_set_field(white_, dr.wg_record(), col, recenc);
+ wg_int enc = wg_encode_int(white_, value);
+ wg_set_field(white_, dr.wg_record(), col, enc);
+}
+
+void WDB_Instance::set_int_record_field(void* rec, u4 col, u4 value)
+{
+ wg_int enc = wg_encode_int(white_, value);
+ wg_set_field(white_, rec, col, enc);
 }
 
 void WDB_Instance::set_wg_record_field_rec(DW_Record base, u4 col, DW_Record rec)
@@ -294,6 +300,12 @@ void WDB_Instance::set_wg_record_field_str(DW_Record dr, u4 col, QString str)
 {
  wg_int strenc = wg_encode_str(white_, str.toLatin1().data(), nullptr);
  wg_set_field(white_, dr.wg_record(), col, strenc);
+}
+
+void WDB_Instance::set_str_record_field(void* rec, u4 col, QString str)
+{
+ wg_int strenc = wg_encode_str(white_, str.toLatin1().data(), nullptr);
+ wg_set_field(white_, rec, col, strenc);
 }
 
 void* WDB_Instance::init_subvalues_record(DW_Record dr, u4 len, u4 col, u4 new_id)

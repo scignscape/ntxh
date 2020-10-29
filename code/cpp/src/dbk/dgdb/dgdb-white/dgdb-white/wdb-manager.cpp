@@ -42,7 +42,9 @@ USING_KANS(DGDB)
 
 WDB_Manager::WDB_Manager(DW_Instance* dw_instance)
   :  dw_instance_(dw_instance), 
-     max_num_code_(1000), default_mem_size_(0), current_white_(0)
+     max_num_code_(1000), default_mem_size_(0), 
+     current_white_(0), first_new_white_(nullptr),
+     last_new_white_(nullptr)
 {
 
 
@@ -116,6 +118,8 @@ WDB_Instance* WDB_Manager::get_current_white()
  if(!current_white_)
  {
   current_white_ = new_white();
+  if(last_new_white_)
+    first_new_white_ = last_new_white_;
  }
  return current_white_;
 }
@@ -226,6 +230,8 @@ WDB_Instance* WDB_Manager::new_white(u2 num_code, n8 mem, QString name)
 
  void* db = nullptr;
 
+ WDB_Instance** maybe_new = nullptr;
+
  if(dw_instance_->Config.flags.local_scratch_mode)
  {
   qDebug() << "Using local database ...";
@@ -233,6 +239,8 @@ WDB_Instance* WDB_Manager::new_white(u2 num_code, n8 mem, QString name)
 
   if(!db)
     qDebug() << "Failed to attach local database ...";
+
+  maybe_new = &last_new_white_;
  }
  else if(dw_instance_->Config.flags.scratch_mode | dw_instance_->Config.flags.temp_reinit)
  {
@@ -249,9 +257,11 @@ WDB_Instance* WDB_Manager::new_white(u2 num_code, n8 mem, QString name)
    }
    qDebug() << "After reset attaching database ..." << num_code;
   } 
-  else 
-    qDebug() << "Attaching new database ..." << num_code;
-
+  else
+  { 
+   qDebug() << "Attaching new database ..." << num_code;
+   maybe_new = &last_new_white_;
+  }
   db = wg_attach_database(QString::number(num_code).toLatin1().data(), mem);    
  }
  else
@@ -273,6 +283,9 @@ WDB_Instance* WDB_Manager::new_white(u2 num_code, n8 mem, QString name)
  {
   whites_by_name_[name] = result;
  }
+
+ if(maybe_new)
+   *maybe_new = result;
 
  update_ntxh();
 

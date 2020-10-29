@@ -14,6 +14,8 @@
 #include "wdb-instance.h"
 #include "wdb-manager.h"
 
+#include "dw-manager.h"
+
 #include "dw-frame.h"
 
 #include <QDebug>
@@ -45,6 +47,32 @@ DW_Instance::DW_Instance()
      current_properties_record_count_(0)
 {
 
+}
+
+DW_Record DW_Instance::new_tag_record(QString tag)
+{
+ u4 base_id = new_index_record_id();
+  // //  5 columns ...
+ void* result = wdb_instance_->new_wg_record(5, base_id); 
+ wdb_instance_->set_str_record_field(result, 3, tag);
+ return {base_id, result}; 
+}
+
+DW_Record DW_Instance::new_tag_record(QString tag, const QByteArray& qba)
+{
+ u4 base_id = new_index_record_id();
+  // //  5 columns ...
+ void* result = wdb_instance_->new_wg_record(5, base_id); 
+ wdb_instance_->set_qba_record_field(result, 1, qba);
+ wdb_instance_->set_str_record_field(result, 3, tag);
+ return {base_id, result}; 
+}
+
+DW_Manager* DW_Instance::new_manager()
+{
+ check_init_wdb_manager();
+ //DW_Manager* result = new DW_Manager(wdb_manager_);
+ return new DW_Manager(this);
 }
 
 DW_Record DW_Instance::register_typed_value(QString type_name, DW_Stage_Value::Package& pkg)
@@ -391,10 +419,19 @@ void DW_Instance::reinit()
  Config.flags.temp_reinit = false;
 }
 
+void DW_Instance::check_init_wdb_manager()
+{
+ if(wdb_manager_)
+   return;
+ wdb_manager_ = new WDB_Manager(this);
+
+}
+
 void DW_Instance::init()
 {
+ check_init_wdb_manager();
+
  type_system_ = new DW_Type_System; 
- wdb_manager_ = new WDB_Manager(this);
  wdb_manager_->set_db_root_folder(db_root_folder_);
  wdb_manager_->init_from_ntxh();
  wdb_instance_ = wdb_manager_->get_current_white();

@@ -29,10 +29,17 @@ USING_KANS(DGDB)
 
 
 DW_Manager::DW_Manager(WDB_Manager* wdb_manager)
-  :  wdb_manager_(wdb_manager) 
+  :  dw_instance_(nullptr), wdb_manager_(wdb_manager) 
 {
 
 }
+
+DW_Manager::DW_Manager(DW_Instance* dw_instance)
+  :  dw_instance_(dw_instance), wdb_manager_(dw_instance->wdb_manager())
+{
+ 
+}
+
 
 template<typename PROC_Type>
 inline void _run_fn(PROC_Type fn, QByteArray& qba, u4 count);
@@ -92,6 +99,44 @@ void DW_Manager::With_All_Tagged_Records_Package::operator<<
  _this->query_tagged_records(tag, fn);
 }
 
+
+void DW_Manager::With_Check_Create_Package::operator<<
+  (std::function<void()> fn)
+{
+ _this->check_create(fn);
+}
+
+void DW_Manager::With_Check_Create_Package::operator<<
+  (std::function<void(QString)> fn)
+{
+ _this->check_create(fn);
+}
+
+
+void DW_Manager::check_create(std::function<void()> fn)
+{
+ dw_instance_->init();
+ WDB_Instance* wdbi = wdb_manager_->first_new_white();
+ if(wdbi)
+   fn();
+}
+
+void DW_Manager::check_create(std::function<void(QString)> fn)
+{
+ dw_instance_->init(); 
+ WDB_Instance* wdbi = wdb_manager_->first_new_white();
+ if(wdbi)
+   fn({});
+}
+
+u4 DW_Manager::get_tagged_record_count(QString tag)
+{
+ return 0;
+}
+
+
+
+
 /*
 void DW_Manager::query_tagged_records(QString tag, 
   std::function<void(QByteArray&)> fn)
@@ -143,12 +188,4 @@ void DW_Manager::query_tagged_records(QString tag,
 
 
 */
-
-u4 DW_Manager::get_tagged_record_count(QString tag)
-{
- return 0;
-}
-
-
-
 

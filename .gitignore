@@ -12,6 +12,7 @@
 
 **/dgdb/instances/*
 
+**/run-local.sh
 
 **/Makefile
 

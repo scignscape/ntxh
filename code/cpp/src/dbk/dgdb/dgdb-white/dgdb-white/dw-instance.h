@@ -33,6 +33,8 @@ class WDB_Instance;
 class WDB_Manager;
 class DW_Frame;
 
+class DW_Manager;
+
 class String_Label_Triple;
 class DW_Type_System;
 class DW_Type;
@@ -95,9 +97,13 @@ class DW_Instance
  u4 new_subvalues_record_id();
 
 
- static constexpr u4 max_mask = 0x7FFFFFFF;
+ static constexpr u4 max_mask = 0x80000000;
 
  static constexpr u4 indexes_mask = 0x60000000;
+ static constexpr u4 indexes_id_min = indexes_mask;
+ static constexpr u4 indexes_id_max = max_mask;
+
+
  static constexpr u4 inedges_mask = 0x50000000;
  static constexpr u4 properties_mask = 0x40000000;
  static constexpr u4 multi_indexes_mask = 0x30000000;
@@ -105,6 +111,8 @@ class DW_Instance
  static constexpr u4 subvalues_mask = 0x10000000;
 
  static constexpr u4 hypernodes_id_minimum = 1024;
+ static constexpr u4 hypernodes_id_min = 1024;
+ static constexpr u4 hypernodes_id_max = subvalues_mask;
 
 
 
@@ -120,6 +128,8 @@ class DW_Instance
  void* _add_raw_record(u4 number_of_columns, QVector<DW_Stage_Value>& svs);
 
  typedef void(*stage_queue_reader_type)(QQueue<void*>& vals);
+
+ void check_init_wdb_manager();
 
  std::function<void(QQueue<void*>&)> get_stage_queue_reader(DW_Type* dt);
 
@@ -168,15 +178,23 @@ public:
  ACCESSORS(QString ,db_root_folder)
  ACCESSORS(WDB_Instance* ,wdb_instance)
  ACCESSORS(DW_Type_System* ,type_system)
+ ACCESSORS(WDB_Manager* ,wdb_manager)
 
  DW_Instance();
 
  static constexpr QPair<u4, u4> hypernodes_id_range()
  {
-  return {hypernodes_id_minimum, subvalues_mask};
- } //minimum = 1024;
+  return {hypernodes_id_min, hypernodes_id_max};
+ } 
+
+ static constexpr QPair<u4, u4> indexes_id_range()
+ {
+  return {indexes_id_min, indexes_id_max};
+ } 
+
 
  DW_Frame* new_frame();
+ DW_Manager* new_manager();
 
  void init(); 
  void reinit();
@@ -196,6 +214,9 @@ public:
  QString get_tag_field(DW_Record dr, u4 col);
 
  DW_Record new_binary_hypernode_record(const QByteArray& qba);
+
+ DW_Record new_tag_record(QString tag);
+ DW_Record new_tag_record(QString tag, const QByteArray& qba);
 
  template<typename VALUE_Type>
  DW_Record new_binary_hypernode_record(VALUE_Type* v)

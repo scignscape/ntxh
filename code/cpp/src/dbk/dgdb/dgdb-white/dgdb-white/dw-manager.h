@@ -30,6 +30,16 @@ class DW_Manager
  WDB_Manager* wdb_manager_;
  DW_Instance* dw_instance_;
 
+ struct With_Check_Create_Package
+ {
+  DW_Manager* _this;
+  void operator <<
+    (std::function<void()> fn);
+  void operator <<
+    (std::function<void(QString reinit_path)> fn);
+
+ };
+
  struct With_All_Tagged_Records_Package
  {
   DW_Manager* _this;
@@ -44,6 +54,7 @@ class DW_Manager
 public:
 
  DW_Manager(WDB_Manager* wdb_manager);
+ DW_Manager(DW_Instance* dw_instance);
 
  u4 get_tagged_record_count(QString tag);
 
@@ -51,9 +62,17 @@ public:
  void query_tagged_records(QString tag, 
    PROC_Type fn);
 
+ void check_create(std::function<void()> fn);
+ void check_create(std::function<void(QString)> fn);
+
 //   std::function<void(QByteArray&)> fn);
 // void query_tagged_records(QString tag, 
 //   std::function<void(QByteArray&, u4)> fn);
+
+ With_Check_Create_Package with_check_create()
+ {
+  return {this};
+ }
 
 
  With_All_Tagged_Records_Package with_all_tagged_records(QString tag)

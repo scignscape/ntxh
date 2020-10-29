@@ -34,6 +34,9 @@ class WDB_Manager
  QMap<QString, WDB_Instance*> whites_by_name_;
 
  WDB_Instance* current_white_;  
+ 
+ WDB_Instance* first_new_white_;
+ WDB_Instance* last_new_white_;
 
  QString db_root_folder_;
 
@@ -49,6 +52,11 @@ public:
 
  ACCESSORS(WDB_Instance* ,current_white)
  ACCESSORS(QString ,db_root_folder)
+
+
+ ACCESSORS(WDB_Instance* ,first_new_white)
+ ACCESSORS(WDB_Instance* ,last_new_white)
+
 
  struct Query_Iterator;
 

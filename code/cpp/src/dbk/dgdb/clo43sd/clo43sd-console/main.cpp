@@ -81,10 +81,12 @@ int main(int argc, char* argv[])
  dw->Config.flags.scratch_mode = true;
  dw->Config.flags.avoid_record_pointers = true;
 
+ DW_Manager* dwm = dw->new_manager(); 
 
- dw->init();
 
- DW_Type_System* dwt = dw->type_system();
+// dw->init();
+
+// DW_Type_System* dwt = dw->type_system();
 
 
 }

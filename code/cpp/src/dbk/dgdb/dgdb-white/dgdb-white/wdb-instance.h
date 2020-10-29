@@ -71,6 +71,9 @@ public:
  void set_wg_record_field_str(DW_Record dr, u4 col, QString str);
  void set_wg_record_field_int(DW_Record dr, u4 col, u4 value);
 
+ void set_str_record_field(void* rec, u4 col, QString str);
+ void set_int_record_field(void* rec, u4 col, u4 value);
+
  
  n8 wg_encode_dw_record(DW_Record rec);
 
