@@ -96,6 +96,18 @@ QVector_Matrix_R8* MemCytoFrame::data_to_qvmatrix()
 	}
 
 	void MemCytoFrame::string_to_keywords(string txt, bool emptyValue){
+
+     QString qtxt = QString::fromStdString(txt);
+     QStringList qtxts = qtxt.split('\f');
+     QMap<QString, QString> qmap; 
+     QListIterator<QString> it(qtxts);
+     while(it.hasNext())
+     {
+      qmap[it.next()] = it.next();
+     }
+      
+     qDebug() << "qmap: " << qmap;
+
 		/*
 		 * get the first character as delimiter
 		 */

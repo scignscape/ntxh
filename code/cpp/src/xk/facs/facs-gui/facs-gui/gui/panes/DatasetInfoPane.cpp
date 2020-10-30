@@ -35,6 +35,29 @@ DatasetInfoPane::DatasetInfoPane(MainWindow* mw)
  updateForm();
 }
 
+void DatasetInfoPane::test()
+{
+  QStringList keyw({"c1", "c2", "c3", "c4"}); //=new ArrayList<String>(metaKeyName.keySet());
+ 
+ QMap<QString, QString> metaKeyName;
+
+
+  tableMatrix_->setRowCount(keyw.size());
+
+  for(int i = 0; i < keyw.size(); ++i)
+  {
+   QTableWidgetItem* it = new QTableWidgetItem(keyw.value(i));
+   //it->setFlags(new ItemFlags(ItemFlag.ItemIsSelectable, ItemFlag.ItemIsEnabled));
+   it->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);  
+   tableMatrix_->setItem(i, 0, it);
+
+   QTableWidgetItem* it1 = new QTableWidgetItem(metaKeyName.value(keyw.value(i), "x"));
+   it1->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+   tableMatrix_->setItem(i, 1, it1);
+  }
+
+}
+
  
 void DatasetInfoPane::updateForm()
 {

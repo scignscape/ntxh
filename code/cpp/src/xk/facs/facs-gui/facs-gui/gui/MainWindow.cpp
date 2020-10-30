@@ -162,6 +162,9 @@ MainWindow::MainWindow()
  layLeft->addWidget(datasetsw_);
 //?
  layLeft->addWidget(viewsw_);
+
+ layLeft->addWidget(gatesw_);
+
 //? layLeft->addWidget(gatesw_);
 //? layLeft->addWidget(pc_);
 
@@ -215,6 +218,7 @@ MainWindow::MainWindow()
  cent->setLayout(lay);
  setCentralWidget(cent);
 
+ paneMetadata_->test();
  
  updateall();
  setAcceptDrops(true);

@@ -26,6 +26,8 @@ class DatasetInfoPane : public QWidget
  
  void updateForm();
 
+ void test();
+
  void dataChanged(QTableWidgetItem* it);
 
 };

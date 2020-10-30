@@ -92,7 +92,7 @@ SOURCES +=  \
 
 #$$SRC_DIR/../facs-bridge/qvector-matrix-r8.cpp \
 
-DEFINES += DEFAULT_ICON_FOLDER=\\\"$$SRC_ROOT_DIR/code/icons\\\"
+DEFINES += DEFAULT_ICON_FOLDER=\\\"$$ROOT_DIR/code/icons\\\"
 
 DEFINES += DEMO_FCS_FOLDER=\\\"$$ROOT_DIR/extra/facs/fcs\\\"
 

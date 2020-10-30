@@ -59,11 +59,13 @@ GatesListWidget::GatesListWidget(MainWindow* mw)
 
  QPushButton* bSelectAllGates = new QPushButton(tr("Select all"), this);
  QPushButton* bRenameGate = new QPushButton(tr("Rename gate"), this);
- QPushButton* bRemoveGate = new QPushButton(QIcon(ImgResource::icon_delete()),
-   "", this);
- QPushButton* bMeasure = new QPushButton(tr("Measure"), this);
+ QPushButton* bRemoveGate = new QPushButton(tr("Remove gate"), this);
+  //QIcon(ImgResource::icon_delete()),
+  // "", this);
 
- connect_this(QPushButton ::clicked ,bMeasure ,actionAddMeasure) 
+// QPushButton* bMeasure = new QPushButton(tr("Measure"), this);
+// connect_this(QPushButton ::clicked ,bMeasure ,actionAddMeasure) 
+
  connect_this(QPushButton ::clicked ,bRenameGate ,actionRenameGate) 
  connect_this(QPushButton ::clicked ,bRemoveGate ,actionRemoveGates) 
  connect_this(QPushButton ::clicked ,bSelectAllGates ,actionSelectAllGates) 
@@ -76,7 +78,12 @@ GatesListWidget::GatesListWidget(MainWindow* mw)
  main_layout_->addWidget(treeGates_);
 
  main_layout_->addLayout(QTutil::layoutHorizontal(
-   { bMeasure, bSelectAllGates, bRenameGate, bRemoveGate } ));
+   { //bMeasure,   
+     bSelectAllGates, bRenameGate, bRemoveGate } ));
+
+ treeGates_->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+ setLayout(main_layout_);
 }
  
 void GatesListWidget::dothelayout()

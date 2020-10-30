@@ -53,22 +53,24 @@ DatasetListWidget::DatasetListWidget(MainWindow* mw)
 
  QPushButton* bAddDataset = new QPushButton(tr("Add dataset"), this);
  QPushButton* bSelectAllDataset = new QPushButton(tr("Select all"), this);
- QPushButton* bRemoveDataset = new QPushButton(
-   QIcon(ImgResource::icon_delete()), "", this);
+ QPushButton* bRemoveDataset = new QPushButton(tr("Remove dataset"), this);
+  // QIcon(ImgResource::icon_delete()), "", this);
   
- QPushButton* bMoveUp = new QPushButton(QIcon(ImgResource::moveUp()), "", this);
- QPushButton* bMoveDown = new QPushButton(QIcon(ImgResource::moveDown()), "", this);
+// QPushButton* bMoveUp = new QPushButton(QIcon(ImgResource::moveUp()), "", this);
+// QPushButton* bMoveDown = new QPushButton(QIcon(ImgResource::moveDown()), "", this);
   
  connect_this(QPushButton ::clicked ,bAddDataset ,actionAddDatasets) 
  connect_this(QPushButton ::clicked ,bRemoveDataset ,actionRemoveDataset) 
  connect_this(QPushButton ::clicked ,bSelectAllDataset ,actionSelectAllDatasets) 
- connect_this(QPushButton ::clicked ,bMoveUp ,actionMoveUp) 
- connect_this(QPushButton ::clicked ,bMoveDown ,actionMoveDown) 
+
+// connect_this(QPushButton ::clicked ,bMoveUp ,actionMoveUp) 
+// connect_this(QPushButton ::clicked ,bMoveDown ,actionMoveDown) 
 
  main_layout_->addWidget(tableDatasets_);
 
  main_layout_->addLayout(QTutil::layoutHorizontal({
-   bMoveUp, bMoveDown, bAddDataset, bSelectAllDataset, bRemoveDataset}));
+   //bMoveUp, bMoveDown, 
+   bAddDataset, bSelectAllDataset, bRemoveDataset}));
 
  tableDatasets_->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -117,7 +119,9 @@ void DatasetListWidget::actionSelectAllDatasets()
 void DatasetListWidget::actionAddDatasets()
 {
 //
- mw_->load_selected_file(DEMO_FCS_FOLDER "/Live_cells.fcs.mpf.txt");
+ mw_->load_selected_file(DEMO_FCS_FOLDER "/example/Specimen_001_C3_C03_001.fcs");
+
+  //"/Live_cells.fcs.mpf.txt");
 
 // updateDatasetList();
 
