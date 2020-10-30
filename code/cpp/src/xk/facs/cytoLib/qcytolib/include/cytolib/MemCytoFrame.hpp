@@ -15,8 +15,8 @@
 
 // // QScign
 class QVector_Matrix_R8;
-
-
+#include <QMap>
+#include <QString>
 
 
 namespace cytolib
@@ -40,6 +40,8 @@ class MemCytoFrame: public CytoFrame{
 	FCS_READ_PARAM config_;
 	FCS_Header header_;
 	ifstream in_;//because of this member, the class needs to explicitly define copy/assignment constructor
+
+    QMap<QString, QString> header_qmap_;
 
 	void parse_fcs_header(ifstream &in, int nOffset = 0);
 	void string_to_keywords(string txt, bool emptyValue);
@@ -71,6 +73,10 @@ public:
 	MemCytoFrame(const string &filename, const FCS_READ_PARAM & config);
 
     QVector_Matrix_R8* data_to_qvmatrix();
+    QMap<QString, QString>& header_qmap()
+    {
+     return header_qmap_;
+    }
 
 
 //	void convertToPb(pb::CytoFrame & fr_pb

@@ -10,6 +10,7 @@
 #include <QTableWidgetItem>
 
 class MainWindow;
+class Dataset;
 
 // package facsanadu.gui.panes;
 
@@ -26,7 +27,7 @@ class DatasetInfoPane : public QWidget
  
  void updateForm();
 
- void test();
+ void test(Dataset* ds);
 
  void dataChanged(QTableWidgetItem* it);
 

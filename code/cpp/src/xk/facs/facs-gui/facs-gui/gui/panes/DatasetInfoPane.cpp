@@ -7,10 +7,13 @@
 
 #include "../data/Dataset.h"
 
+#include "cytolib/MemCytoFrame.hpp"
+
 #include <QHeaderView>
 
 #include <QVBoxLayout>
 
+#include <QDebug>
 
 // package facsanadu.gui.panes;
 
@@ -35,26 +38,37 @@ DatasetInfoPane::DatasetInfoPane(MainWindow* mw)
  updateForm();
 }
 
-void DatasetInfoPane::test()
+void DatasetInfoPane::test(Dataset* ds)
 {
-  QStringList keyw({"c1", "c2", "c3", "c4"}); //=new ArrayList<String>(metaKeyName.keySet());
+ tableMatrix_->clear();
+ tableMatrix_->verticalHeader()->hide();
+ // QStringList keyw({"c1", "c2", "c3", "c4"}); //=new ArrayList<String>(metaKeyName.keySet());
  
- QMap<QString, QString> metaKeyName;
+ //QMap<QString, QString> metaKeyName;
 
 
-  tableMatrix_->setRowCount(keyw.size());
+ cytolib::MemCytoFrame* cyto_frame = ds->cyto_frame();
+ QMap<QString, QString>& qmap = cyto_frame->header_qmap(); 
 
-  for(int i = 0; i < keyw.size(); ++i)
-  {
-   QTableWidgetItem* it = new QTableWidgetItem(keyw.value(i));
-   //it->setFlags(new ItemFlags(ItemFlag.ItemIsSelectable, ItemFlag.ItemIsEnabled));
-   it->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);  
-   tableMatrix_->setItem(i, 0, it);
+ tableMatrix_->setRowCount(qmap.size());
 
-   QTableWidgetItem* it1 = new QTableWidgetItem(metaKeyName.value(keyw.value(i), "x"));
-   it1->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-   tableMatrix_->setItem(i, 1, it1);
-  }
+ int i = 0;
+
+ QMapIterator<QString, QString> it(qmap);
+
+ while(it.hasNext())
+ {
+  it.next();
+  QTableWidgetItem* qtwi = new QTableWidgetItem(it.key());
+  qtwi->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);  
+  tableMatrix_->setItem(i, 0, qtwi);
+
+  QTableWidgetItem* qtwi1 = new QTableWidgetItem(it.value());
+  qtwi1->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+  tableMatrix_->setItem(i, 1, qtwi1);
+
+  ++i;
+ }
 
 }
 

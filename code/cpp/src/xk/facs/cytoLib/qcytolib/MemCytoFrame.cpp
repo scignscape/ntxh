@@ -99,14 +99,14 @@ QVector_Matrix_R8* MemCytoFrame::data_to_qvmatrix()
 
      QString qtxt = QString::fromStdString(txt);
      QStringList qtxts = qtxt.split('\f');
-     QMap<QString, QString> qmap; 
+      
      QListIterator<QString> it(qtxts);
      while(it.hasNext())
      {
-      qmap[it.next()] = it.next();
+      header_qmap_[it.next()] = it.next();
      }
       
-     qDebug() << "qmap: " << qmap;
+     qDebug() << "header_qmap_: " << header_qmap_;
 
 		/*
 		 * get the first character as delimiter

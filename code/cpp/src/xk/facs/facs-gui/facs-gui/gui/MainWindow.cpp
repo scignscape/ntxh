@@ -218,7 +218,7 @@ MainWindow::MainWindow()
  cent->setLayout(lay);
  setCentralWidget(cent);
 
- paneMetadata_->test();
+ //paneMetadata_->test();
  
  updateall();
  setAcceptDrops(true);
@@ -236,16 +236,20 @@ void MainWindow::load_selected_file(QString sf)
  QFile qf(sf);
  loadFile(qf);
 
-
- //?    File f=new File(sf);
+//?    File f=new File(sf);
 //?    mw.lastDirectory=f.getParentFile();
 //?    mw.loadFile(f);
-
 //?
 
  paneViews_->test_one_view();
 
  paneViews_->reset_index_data();
+
+ Dataset* ds = get_last_dataset();
+
+ if(ds)
+   paneMetadata_->test(ds);
+
 }
 
 void MainWindow::get_pane_views_mpf_data(int& xcol, int& ycol,
