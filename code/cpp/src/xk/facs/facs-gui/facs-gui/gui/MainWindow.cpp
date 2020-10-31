@@ -26,8 +26,10 @@
 #include "../data/ExportFcsToCSV.h"
 #include "../data/Dataset.h"
 
-
 #include "QtProgramInfo.h"
+
+#include "cytolib/MemCytoFrame.hpp"
+
 
 #include <QMenu>
 #include <QMimeData>
@@ -241,14 +243,33 @@ void MainWindow::load_selected_file(QString sf)
 //?    mw.loadFile(f);
 //?
 
+ Dataset* ds = get_last_dataset();
+
+ if(ds)
+ {
+  paneMetadata_->test(ds);
+  cytolib::MemCytoFrame* cyto_frame = ds->cyto_frame();
+  QMap<QString, QString>& qmap = cyto_frame->header_qmap(); 
+  //n8 num = ds->getNumObservations();
+  
+  u1 nch = ds->getNumChannels();
+
+  current_column_names_.resize(nch);
+  for(u1 c = 1; c <= nch; ++c)
+  {
+   QString key = QString("$P%1N").arg(c);
+   auto it = qmap.find(key);
+   if(it != qmap.end())
+   {
+    current_column_names_[c - 1] = it.value();    
+   }
+  } 
+ }
+
  paneViews_->test_one_view();
 
  paneViews_->reset_index_data();
 
- Dataset* ds = get_last_dataset();
-
- if(ds)
-   paneMetadata_->test(ds);
 
 }
 

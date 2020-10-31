@@ -31,6 +31,8 @@ class Dataset;
 // //
 class ViewsPane : public QWidget
 {
+ Q_OBJECT
+
  MainWindow* mw_;
 
  QSpinBox* spMaxEvents_; // =new QSpinBox();
@@ -40,6 +42,9 @@ class ViewsPane : public QWidget
  QSpinBox* y_index_spin_box_;
  QLabel* x_index_label_;
  QLabel* y_index_label_;
+
+ QLabel* x_name_;
+ QLabel* y_name_;
 
  QLabel* shifts_skews_label_;
  QLineEdit* shifts_skews_line_edit_;
@@ -86,6 +91,9 @@ public:
 public Q_SLOTS:
 
  void update_draw_with_new_indices();
+
+ void update_x_name(int i);
+ void update_y_name(int i);
 };
 
 #endif // __H

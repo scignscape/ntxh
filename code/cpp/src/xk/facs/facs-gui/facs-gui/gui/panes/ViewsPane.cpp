@@ -98,6 +98,14 @@ ViewsPane::ViewsPane(MainWindow* mw)
 
  laytop->addWidget(y_index_label_);
  laytop->addWidget(y_index_spin_box_);
+
+ x_name_ = new QLabel("(x name)"); 
+ y_name_ = new QLabel("(y name)"); 
+
+ laytop->addWidget(x_name_);
+ laytop->addWidget(y_name_);
+
+
  laytop->addWidget(indices_go_);
 
  shifts_skews_label_ = new QLabel("skews/shifts:", this);
@@ -109,6 +117,10 @@ ViewsPane::ViewsPane(MainWindow* mw)
 
  connect_this(QPushButton ::clicked ,indices_go_ ,update_draw_with_new_indices)
 
+ connect(x_index_spin_box_, SIGNAL(valueChanged(int)), this, SLOT(update_x_name(int)));
+ connect(y_index_spin_box_, SIGNAL(valueChanged(int)), this, SLOT(update_y_name(int)));
+ 
+ //connect_this(QSpinBox ::valueChanged(int) ,y_index_spin_box_ ,update_y_name(int))
 
  laytop->addStretch();
 
@@ -135,6 +147,20 @@ ViewsPane::ViewsPane(MainWindow* mw)
  valuesupdated();
 }
 
+void ViewsPane::update_x_name(int i)
+{
+ QVector<QString>& cns = mw_->current_column_names();
+ x_name_->setText(cns.value(i));
+}
+
+void ViewsPane::update_y_name(int i)
+{
+ QVector<QString>& cns = mw_->current_column_names();
+ y_name_->setText(cns.value(i));
+}
+
+
+
 void ViewsPane::reset_index_data(Dataset* ds)
 {
  if(!ds) 
@@ -142,6 +168,9 @@ void ViewsPane::reset_index_data(Dataset* ds)
  int nc = ds->getNumChannels();
  qDebug() << "nc = " << nc;
  total_index_label_->setText(tr("indices (of %1)").arg(nc));
+
+ QVector<QString>& cns = mw_->current_column_names();
+ qDebug() << "cns = " << cns;
 
  x_index_spin_box_->setRange(1, nc);
  y_index_spin_box_->setRange(1, nc);

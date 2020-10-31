@@ -106,6 +106,8 @@ class MainWindow : public QMainWindow
  GateCalcThread* calcthread_;
 
  MPF_Package* mpf_package_;
+
+ QVector<QString> current_column_names_;
  
  // // Update all widgets
  void updateall();
@@ -133,6 +135,7 @@ public:
   // = new FacsanaduProject();
 
  ACCESSORS(MPF_Package* ,mpf_package)
+ ACCESSORS__RGET(QVector<QString> ,current_column_names)
 
  FacsanaduProject* getProject();
  FacsanaduProject* project() 

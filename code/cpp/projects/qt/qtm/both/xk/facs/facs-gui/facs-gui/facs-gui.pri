@@ -39,6 +39,7 @@ HEADERS += \
   $$SRC_DIR/gui/view/tool/ViewToolDrawRange.h \
   $$SRC_DIR/gui/view/tool/ViewToolDrawRect.h \
   $$SRC_DIR/gui/view/tool/ViewToolDrawPoly.h \
+  $$SRC_DIR/gui/panes/ViewsPane.h \
 
 
 
