@@ -154,6 +154,8 @@ void FacsanaduProject::addDataset(QFile& path) // throws IOException
 
  Dataset* ds = new Dataset(qvm);
 
+ ds->set_file_source_name(qfi.fileName());
+
  ds->set_cyto_frame(mcf);
  addDataset(ds);
  

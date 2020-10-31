@@ -40,8 +40,19 @@ DatasetInfoPane::DatasetInfoPane(MainWindow* mw)
 
 void DatasetInfoPane::test(Dataset* ds)
 {
+ updating_ = true;
+
  tableMatrix_->clear();
  tableMatrix_->verticalHeader()->hide();
+
+ //Columns
+ QStringList header; // = new LinkedList<String>();
+ header.push_back("Key");
+ header.push_back("Value");
+ tableMatrix_->setColumnCount(2);
+ tableMatrix_->setHorizontalHeaderLabels(header);
+
+
  // QStringList keyw({"c1", "c2", "c3", "c4"}); //=new ArrayList<String>(metaKeyName.keySet());
  
  //QMap<QString, QString> metaKeyName;
@@ -52,7 +63,19 @@ void DatasetInfoPane::test(Dataset* ds)
 
  tableMatrix_->setRowCount(qmap.size());
 
- int i = 0;
+
+ {
+  QTableWidgetItem* qtwi = new QTableWidgetItem("# observations");
+  qtwi->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);  
+  tableMatrix_->setItem(0, 0, qtwi);
+
+  QTableWidgetItem* qtwi1 = new QTableWidgetItem(QString::number(ds->getNumObservations()));
+  qtwi1->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+  tableMatrix_->setItem(0, 1, qtwi1);
+ }
+
+
+ int i = 1;
 
  QMapIterator<QString, QString> it(qmap);
 
@@ -70,11 +93,18 @@ void DatasetInfoPane::test(Dataset* ds)
   ++i;
  }
 
+ tableMatrix_->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+ tableMatrix_->horizontalHeader()->setStretchLastSection(true); 
+ tableMatrix_->resizeColumnsToContents();
+  
+ //tableMatrix_->itemChanged.connect(this,"dataChanged(QTableWidgetItem)");
+ updating_ = false;
 }
 
  
 void DatasetInfoPane::updateForm()
 {
+#ifdef HIDE
  updating_ = true;
  
  tableMatrix_->clear();
@@ -124,6 +154,7 @@ void DatasetInfoPane::updateForm()
   
  //tableMatrix_->itemChanged.connect(this,"dataChanged(QTableWidgetItem)");
  updating_ = false;
+#endif //def HIDE
 }
  
  

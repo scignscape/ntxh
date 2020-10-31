@@ -147,7 +147,7 @@ void GateStatsPane::updateStats()
    curcol++;
   }
 
-  QTableWidgetItem* it = QTutil::createReadOnlyItem(dataset->get_file_source_name());
+  QTableWidgetItem* it = QTutil::createReadOnlyItem(dataset->file_source_name());
   tableStats_->setItem(row, 0, it);
  }
 }

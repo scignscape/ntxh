@@ -109,14 +109,15 @@ int Dataset::getNumLengthProfiles()
 
 QString Dataset::getName()
 {
- return source_.fileName();
+ return file_source_name_;
 }
-
+/*
 QString Dataset::get_file_source_name()
 {
  // // ok?
  return source_.fileName();
 }
+*/
 
 
 double Dataset::getAsFloatCompensated(int obs, int indexChan)

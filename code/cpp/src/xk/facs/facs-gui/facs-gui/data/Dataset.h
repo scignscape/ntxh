@@ -50,7 +50,7 @@ class Dataset
  int numCompensated_; // = 0;
 
  QList<ChannelInfo*> channelInfo_; // =new ArrayList<ChannelInfo>();
- QFile source_;
+ //QFile source_;
  
  QList<LengthProfile*> lengthprofsInfo_; //=new ArrayList<LengthProfile>();
  QList<LengthProfileData*> lengthprofsData_; //=new ArrayList<LengthProfileData>();
@@ -58,6 +58,8 @@ class Dataset
  QMap<QString, QString> metaKeyName_; //=new TreeMap<String, String>();
 
  cytolib::MemCytoFrame* cyto_frame_;
+
+ QString file_source_name_; 
 
  void do_preliminary_compensation();
 
@@ -68,6 +70,7 @@ public:
  QList<ChannelInfo*> getChannelInfo();
 
  ACCESSORS(cytolib::MemCytoFrame* ,cyto_frame)
+ ACCESSORS(QString ,file_source_name)
 
  QVector<QPair<double, double>>& extrema()
  {
@@ -82,7 +85,7 @@ public:
 
  QString getName();
 
- QString get_file_source_name();
+// QString get_file_source_name();
 
  double getAsFloatCompensated(int obs, int indexChan);
 

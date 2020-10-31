@@ -94,7 +94,7 @@ void DatasetListWidget::updateDatasetList()
  int row = 0;
  for(Dataset* ds : project->datasets() )
  {
-  QTableWidgetItem* it = QTutil::createReadOnlyItem(ds->get_file_source_name());
+  QTableWidgetItem* it = QTutil::createReadOnlyItem(ds->file_source_name());
   it->setData(Qt::ItemDataRole::UserRole, 
     QVariant::fromValue( (void*) ds) );
 
@@ -118,8 +118,18 @@ void DatasetListWidget::actionSelectAllDatasets()
  
 void DatasetListWidget::actionAddDatasets()
 {
-//
- mw_->load_selected_file(DEMO_FCS_FOLDER "/example/Specimen_001_C3_C03_001.fcs");
+ QFileDialog dia; // =new QFileDialog();
+ dia.setFileMode(QFileDialog::FileMode::ExistingFiles);
+ dia.setDirectory(DEMO_FCS_FOLDER);
+ dia.setNameFilter(tr("FCS files") + " (*.fcs *.txt *.lmd)");
+ if( dia.exec() )
+ {
+  if(dia.selectedFiles().isEmpty()) 
+    return;
+  QString sf = dia.selectedFiles().first();
+  mw_->load_selected_file(sf);
+ }
+// mw_->load_selected_file(DEMO_FCS_FOLDER "/example/Specimen_001_C3_C03_001.fcs");
 
   //"/Live_cells.fcs.mpf.txt");
 

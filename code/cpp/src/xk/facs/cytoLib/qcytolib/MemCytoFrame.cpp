@@ -98,12 +98,42 @@ QVector_Matrix_R8* MemCytoFrame::data_to_qvmatrix()
 	void MemCytoFrame::string_to_keywords(string txt, bool emptyValue){
 
      QString qtxt = QString::fromStdString(txt);
+
+     qDebug() << "qtxt: " << qtxt;
+
+     if(qtxt.startsWith('\f'))
+       qtxt = qtxt.mid(1);
+     if(qtxt.endsWith('\f'))
+       qtxt.chop(1);
+
      QStringList qtxts = qtxt.split('\f');
+
+     qDebug() << "qtexts: " << qtxts;
+
       
      QListIterator<QString> it(qtxts);
      while(it.hasNext())
      {
-      header_qmap_[it.next()] = it.next();
+      QString key = it.next();
+      QString value;
+
+      if(it.hasNext())
+        value = it.next(); 
+
+//      if(key.isEmpty() && value.isEmpty())
+//        continue;
+
+      qDebug() << "key = " << key << " value = " << value;
+
+      header_qmap_[key] = value; 
+
+      if(key.startsWith("$P") && key.endsWith('R'))
+      {
+       qint64 v = value.toLongLong();
+       unsigned r = 0;
+       while (v >>= 1) { r++; }
+       header_qmap_[key + "(log2)"] = QString::number(r);
+      } 
      }
       
      qDebug() << "header_qmap_: " << header_qmap_;
