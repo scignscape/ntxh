@@ -13,7 +13,7 @@ INCLUDEPATH += $$SRC_GROUP_DIR
 
 INCLUDEPATH += $$SRC_DIR/include
 
-INCLUDEPATH += $$SRC_DIR/libijg8 $$SRC_DIR/libijg12 $$SRC_DIR/libijg16
+INCLUDEPATH += $$SRC_DIR/libijg8 $$SRC_GROUP_DIR/dcmjpeg-12/libijg12 $$SRC_GROUP_DIR/dcmjpeg-16/libijg16
 
 
 INCLUDEPATH += $$SRC_GROUP_DIR/ofstd/include
@@ -62,6 +62,21 @@ HEADERS += \
   $$SRC_DIR/include/dcmtk/dcmjpeg/djrplol.h \ 
   $$SRC_DIR/include/dcmtk/dcmjpeg/djrploss.h \ 
   $$SRC_DIR/include/dcmtk/dcmjpeg/djutils.h \ 
+  $$SRC_DIR/libijg8/jdct8.h \
+  $$SRC_DIR/libijg8/jmemsys8.h \
+  $$SRC_DIR/libijg8/jmorecfg8.h \
+  $$SRC_DIR/libijg8/jpegint8.h \
+  $$SRC_DIR/libijg8/jpeglib8.h \
+  $$SRC_DIR/libijg8/jchuff8.h \
+  $$SRC_DIR/libijg8/jconfig8.h \
+  $$SRC_DIR/libijg8/jdhuff8.h \
+  $$SRC_DIR/libijg8/jerror8.h \
+  $$SRC_DIR/libijg8/jinclude8.h \
+  $$SRC_DIR/libijg8/jlossls8.h \
+  $$SRC_DIR/libijg8/jlossy8.h \
+  $$SRC_DIR/libijg8/jversion8.h \
+
+
 
 
 SOURCES += \
@@ -94,7 +109,74 @@ SOURCES += \
   $$SRC_DIR/djrploss.cc \
   $$SRC_DIR/djutils.cc \
 
-#LIBS += -L$$TARGETSDIR
+SOURCES += \
+  $$SRC_DIR/libijg8/jaricom.c \
+  $$SRC_DIR/libijg8/jcapimin.c \
+  $$SRC_DIR/libijg8/jcapistd.c \
+  $$SRC_DIR/libijg8/jcarith.c \
+  $$SRC_DIR/libijg8/jccoefct.c \
+  $$SRC_DIR/libijg8/jccolor.c \
+  $$SRC_DIR/libijg8/jcdctmgr.c \
+  $$SRC_DIR/libijg8/jcdiffct.c \
+  $$SRC_DIR/libijg8/jchuff.c \
+  $$SRC_DIR/libijg8/jcinit.c \
+  $$SRC_DIR/libijg8/jclhuff.c \
+  $$SRC_DIR/libijg8/jclossls.c \
+  $$SRC_DIR/libijg8/jclossy.c \
+  $$SRC_DIR/libijg8/jcmainct.c \
+  $$SRC_DIR/libijg8/jcmarker.c \
+  $$SRC_DIR/libijg8/jcmaster.c \
+  $$SRC_DIR/libijg8/jcodec.c \
+  $$SRC_DIR/libijg8/jcomapi.c \
+  $$SRC_DIR/libijg8/jcparam.c \
+  $$SRC_DIR/libijg8/jcphuff.c \
+  $$SRC_DIR/libijg8/jcpred.c \
+  $$SRC_DIR/libijg8/jcprepct.c \
+  $$SRC_DIR/libijg8/jcsample.c \
+  $$SRC_DIR/libijg8/jcscale.c \
+  $$SRC_DIR/libijg8/jcshuff.c \
+  $$SRC_DIR/libijg8/jctrans.c \
+  $$SRC_DIR/libijg8/jdapimin.c \
+  $$SRC_DIR/libijg8/jdapistd.c \
+  $$SRC_DIR/libijg8/jdarith.c \
+  $$SRC_DIR/libijg8/jdatadst.c \
+  $$SRC_DIR/libijg8/jdatasrc.c \
+  $$SRC_DIR/libijg8/jdcoefct.c \
+  $$SRC_DIR/libijg8/jdcolor.c \
+  $$SRC_DIR/libijg8/jddctmgr.c \
+  $$SRC_DIR/libijg8/jddiffct.c \
+  $$SRC_DIR/libijg8/jdhuff.c \
+  $$SRC_DIR/libijg8/jdinput.c \
+  $$SRC_DIR/libijg8/jdlhuff.c \
+  $$SRC_DIR/libijg8/jdlossls.c \
+  $$SRC_DIR/libijg8/jdlossy.c \
+  $$SRC_DIR/libijg8/jdmainct.c \
+  $$SRC_DIR/libijg8/jdmarker.c \
+  $$SRC_DIR/libijg8/jdmaster.c \
+  $$SRC_DIR/libijg8/jdmerge.c \
+  $$SRC_DIR/libijg8/jdphuff.c \
+  $$SRC_DIR/libijg8/jdpostct.c \
+  $$SRC_DIR/libijg8/jdpred.c \
+  $$SRC_DIR/libijg8/jdsample.c \
+  $$SRC_DIR/libijg8/jdscale.c \
+  $$SRC_DIR/libijg8/jdshuff.c \
+  $$SRC_DIR/libijg8/jdtrans.c \
+  $$SRC_DIR/libijg8/jerror.c \
+  $$SRC_DIR/libijg8/jfdctflt.c \
+  $$SRC_DIR/libijg8/jfdctfst.c \
+  $$SRC_DIR/libijg8/jfdctint.c \
+  $$SRC_DIR/libijg8/jidctflt.c \
+  $$SRC_DIR/libijg8/jidctfst.c \
+  $$SRC_DIR/libijg8/jidctint.c \
+  $$SRC_DIR/libijg8/jidctred.c \
+  $$SRC_DIR/libijg8/jmemmgr.c \
+  $$SRC_DIR/libijg8/jmemnobs.c \
+  $$SRC_DIR/libijg8/jquant1.c \
+  $$SRC_DIR/libijg8/jquant2.c \
+  $$SRC_DIR/libijg8/jutils.c \
+
+
+LIBS += -L$$TARGETSDIR -ldcmimgle
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

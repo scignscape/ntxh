@@ -101,7 +101,7 @@ SOURCES += \
   $$SRC_DIR/diutils.cc \ 
 
 
-#LIBS += -L$$TARGETSDIR
+LIBS += -L$$TARGETSDIR -ldcmimgle
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

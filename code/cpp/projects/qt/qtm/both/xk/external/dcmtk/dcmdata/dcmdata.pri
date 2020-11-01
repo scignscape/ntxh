@@ -233,7 +233,7 @@ SOURCES += \
   $$SRC_DIR/libi2d/i2dplvlp.cc \
 
 
-#LIBS += -L$$TARGETSDIR
+LIBS += -L$$TARGETSDIR -loflog
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)
