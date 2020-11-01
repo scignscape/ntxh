@@ -225,9 +225,13 @@ SOURCES += \
   $$SRC_DIR/dcxfer.cc \
   $$SRC_DIR/vrscan.cc \
   $$SRC_DIR/vrscanl.c \
+  $$SRC_DIR/libi2d/i2d.cc \
+  $$SRC_DIR/libi2d/i2dbmps.cc \
+  $$SRC_DIR/libi2d/i2djpgs.cc \
+  $$SRC_DIR/libi2d/i2dplnsc.cc \
+  $$SRC_DIR/libi2d/i2dplsc.cc \
+  $$SRC_DIR/libi2d/i2dplvlp.cc \
 
-#?  $$SRC_DIR/mkdictbi.cc \
-#?  $$SRC_DIR/mkdeftag.cc \
 
 #LIBS += -L$$TARGETSDIR
 

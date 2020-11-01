@@ -98,6 +98,8 @@ SOURCES += \
   $$SRC_DIR/diyf2img.cc \ 
   $$SRC_DIR/diyp2img.cc \ 
 
+LIBS += -L$$TARGETSDIR -ldcmimgle
+
 #LIBS += -L$$TARGETSDIR
 
 
