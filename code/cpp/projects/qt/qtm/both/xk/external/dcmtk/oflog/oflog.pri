@@ -101,11 +101,14 @@ HEADERS += \
   $$SRC_DIR/include/dcmtk/oflog/thread/impl/tls.h \
 
 
+# don't need?
+#? $$SRC_DIR/clfsap.cc \
+
+
 SOURCES += \
   $$SRC_DIR/apndimpl.cc \
   $$SRC_DIR/appender.cc \
   $$SRC_DIR/asyncap.cc \
-  $$SRC_DIR/clfsap.cc \
   $$SRC_DIR/clogger.cc \
   $$SRC_DIR/config.cc \
   $$SRC_DIR/consap.cc \
