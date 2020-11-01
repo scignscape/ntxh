@@ -20,6 +20,7 @@
 #include "../data/ChannelInfo.h"
 
 
+#include <QDebug>
 
 #include <QHeaderView>
 
@@ -101,10 +102,45 @@ LinkedList<ViewSettings*> ViewsListWidget::getSelectedViews()
  return selviews;
 }
 
+void ViewsListWidget::test_update_views(Dataset* ds, u1 x_col, u1 y_col)
+{
+ qDebug() << "test_update_views ...";
+ if(ds->current_column_names())
+ {
+
+  tableViews_->setRowCount(1); 
+  tableViews_->setColumnCount(1);
+
+  QVector<QString>& current_column_names = *ds->current_column_names();
+  QString temp = "root";
+  QString showname;
+  if(x_col == y_col)
+  {
+   showname = QString("%1:%2").arg(temp).arg(current_column_names[x_col]);
+  }
+  else
+  {
+   showname = QString("%1:%2/%3").arg(temp).arg(current_column_names[x_col])
+     .arg(current_column_names[y_col]);
+  }
+  qDebug() << "showname = " << showname; 
+  QTableWidgetItem* qtwi = new QTableWidgetItem(showname);  //QTutil::createReadOnlyItem(showname);
+  //qtwi->setData(Qt::ItemDataRole::UserRole, QVariant::fromValue( (void*)vs ));
+  tableViews_->setItem(0, 0, qtwi);
+
+  QTableWidgetItem* qtwi1 = new QTableWidgetItem("showname");  //QTutil::createReadOnlyItem(showname);
+  //qtwi->setData(Qt::ItemDataRole::UserRole, QVariant::fromValue( (void*)vs ));
+  tableViews_->setItem(1, 0, qtwi1);
+
+ }
+}
+
 
 // // Update list with views
 void ViewsListWidget::updateViewsList()
 {
+ qDebug() << "updateViewsList()";
+
  LinkedList<ViewSettings*> selviews = getSelectedViews();
  
  FacsanaduProject* project = mw_->project();

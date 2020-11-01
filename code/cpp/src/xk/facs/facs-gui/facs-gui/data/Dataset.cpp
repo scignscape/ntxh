@@ -16,7 +16,7 @@
 
 
 Dataset::Dataset(QVector_Matrix_R8* eventsFloat)
- : eventsFloat_(eventsFloat), cyto_frame_(nullptr)
+  :  eventsFloat_(eventsFloat), cyto_frame_(nullptr), current_column_names_(nullptr)
 {
  if(eventsFloat_)
    numChannel_ = eventsFloat_->n_cols();

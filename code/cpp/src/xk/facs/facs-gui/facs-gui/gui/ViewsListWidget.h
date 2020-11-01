@@ -17,9 +17,12 @@
 #include<QList>
 #define LinkedList QList
 
+#include "global-types.h"
+
 
 class MainWindow;
 class ViewSettings;
+class Dataset;
 
 
 class ViewsListWidget : public QWidget //: QVBoxLayout
@@ -42,6 +45,10 @@ public:
 
  // // Get selected views
  LinkedList<ViewSettings*> getSelectedViews(); 
+
+ // // Update list with views
+ void test_update_views(Dataset* ds, u1 x_col, u1 y_col);
+
  
  // // Update list with views
  void updateViewsList();

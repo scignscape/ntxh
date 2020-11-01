@@ -264,6 +264,8 @@ void MainWindow::load_selected_file(QString sf)
     current_column_names_[c - 1] = it.value();    
    }
   } 
+
+  ds->set_current_column_names(&current_column_names_);
  }
 
  paneViews_->test_one_view();
@@ -298,6 +300,11 @@ void MainWindow::update_pane_views(int xcol, int ycol,
    mpf_package_->dimension_shifts()[1] = *ysh;
 
  paneViews_->test_one_view();
+
+
+ Dataset* ds = get_last_dataset();
+ viewsw_->test_update_views(ds, xcol, ycol);
+
 }
 
 

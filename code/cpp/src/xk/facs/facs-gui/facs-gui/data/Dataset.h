@@ -61,6 +61,8 @@ class Dataset
 
  QString file_source_name_; 
 
+ QVector<QString>* current_column_names_;
+
  void do_preliminary_compensation();
 
 public:
@@ -71,6 +73,8 @@ public:
 
  ACCESSORS(cytolib::MemCytoFrame* ,cyto_frame)
  ACCESSORS(QString ,file_source_name)
+ ACCESSORS(QVector<QString>* ,current_column_names)
+
 
  QVector<QPair<double, double>>& extrema()
  {

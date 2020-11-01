@@ -102,6 +102,9 @@ ViewsPane::ViewsPane(MainWindow* mw)
  x_name_ = new QLabel("(x name)"); 
  y_name_ = new QLabel("(y name)"); 
 
+ x_name_->setMinimumWidth(50);
+ y_name_->setMinimumWidth(50);
+
  laytop->addWidget(x_name_);
  laytop->addWidget(y_name_);
 
