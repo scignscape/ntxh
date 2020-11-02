@@ -19,6 +19,8 @@ INCLUDEPATH += $$SRC_GROUP_DIR/dcmdata/include
 INCLUDEPATH += $$SRC_GROUP_DIR/oflog/include
 
 
+
+
 DEFINES += CAON_DEBUG
 DEFINES += RELAE_LABEL_NODES
 
@@ -89,6 +91,8 @@ SOURCES += \
 
 #LIBS += -L$$TARGETSDIR
 
+ # in preferred? 
+LIBS += -lssl
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)
 mkpath($$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)
