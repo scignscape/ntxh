@@ -112,7 +112,7 @@ ViewsPane::ViewsPane(MainWindow* mw)
  laytop->addWidget(indices_go_);
 
  shifts_skews_label_ = new QLabel("skews/shifts:", this);
- shifts_skews_line_edit_ = new QLineEdit("50:50:500:500", this);
+ shifts_skews_line_edit_ = new QLineEdit("300:300:0:0", this);
  shifts_skews_line_edit_->setMinimumWidth(120);
  laytop->addWidget(shifts_skews_label_);
  laytop->addWidget(shifts_skews_line_edit_);

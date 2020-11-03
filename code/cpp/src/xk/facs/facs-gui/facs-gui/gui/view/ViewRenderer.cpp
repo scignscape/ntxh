@@ -182,20 +182,22 @@ void test_render_xy(MainWindow* mw, ViewSettings* viewsettings, Dataset* ds,
 //?   int x = trans->mapFcsToScreenX(chanX);
 //?   int y = trans->mapFcsToScreenY(chanY);
 
+   //?xsk = 1; ysk = 1; xsh = 0; ysh = 0;
+
      
-   int x = ( ( (chanX - xmin) / (xmax - xmin) ) * xsk) + xsh;// 400;
-   int y = ( ( (chanY - ymin) / (ymax - ymin) ) * ysk) + ysh;//400;
+   double x = ( ( (chanX - xmin) / (xmax - xmin) ) * xsk) + xsh;// 400;
+   double y = ( ( (chanY - ymin) / (ymax - ymin) ) * ysk) + ysh;//400;
 
    //mapFcsToScreenX
 
-//   qDebug() << "x = " << x << ", y = " << y;
+   //qDebug() << "x = " << x << ", y = " << y;
 
    int colid = 0; //gr->getGateIntIDForObs(ind);
    thecol.setRgb(colr[colid], colg[colid], colb[colid]); 
 
    pen.setColor(thecol);
    pm.setPen(pen);
-   pm.drawPoint(x, y);  
+   pm.drawPoint((int)x, (int)y);  
   }
  }
 }
