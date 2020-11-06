@@ -11,6 +11,13 @@ TEMPLATE = app
 
 include($$ROOT_DIR/../preferred/sysr.pri)
 
+ # need libxml ...  or comment out the DEFINE but get an error on startup ...
+DEFINES += WITH_LIBXML
+include($$ROOT_DIR/../preferred/xml.pri)
+
+
+
+
 DCMTKDIR = $$SRC_PROSET_DIR/dcmtk
 
 #INCLUDEPATH += $$SRC_PROSET_DIR/dcmtk
