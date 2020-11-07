@@ -1,0 +1,174 @@
+medInria 3.2:
+- Add some tooltips in view navigator
+- Avoid crashes if you try to open fibers data in some toolboxes
+- DICOM: keep more metadata
+- Remove the Generic Workspace, you can use the many existing workspaces, or create your own easily if needed
+- Fix a bug where, if there is a volume and a mesh in the 2D view, changing the LUT of the mesh would also change the LUT of the image
+- Fix a bug double-cliking in Polygon ROI
+- Scenes: add an import and export functionality, to save the view and your parameters
+- Video Export: add the export of a view as .ogv [or .mp4 possibility] or batch of .jpeg. By time, rotation of a mesh or slice
+
+medInria v3.1.1:
+- Viewer optimization: opening data is quicker, debug a window/level lag
+- The annotation cube can be hidden in 3D view
+- Solve some annotation text problems
+- DB: remove a bug in the creation of the series
+- Fix DICOM import bug with special characters
+- Solve SH data image, and 4D image bugs
+- PolygonROI segmentation labels enhanced
+- Tools button icon, allow opening data in fix views
+- Plugins from Asclepios in medInria repository
+- Fix Retina screen problems with segmentations
+- Registration - fix LCC Log Demons transformation crash
+- Registration - put back name in undo-redo tool
+- Improve 3D rendering behavior
+- Add a DICOM exporter
+
+medInria v3.1:
+- Switch ITK to version 5.0.0
+- Switch VTK to version 8.1.2
+- Create Meshing workspace with 5 toolboxes: Create Mesh from Mask, Mesh Manipulation, Mesh Mapping, Remeshing and Iterative Closest Point
+- Create Reformat workspace with 2 toolboxes: Cropping and Reslice
+- Filtering workspace becomes Filtering dtk2
+- Create Filtering workspace with 5 toolboxes: Binary Operation, ITK Basic Filters, Mask Application, Morphological Filters and N4 Bias Correction
+- Segmentation workspace, add new toolboxes: VOI Cutter, Variational Segmentation and Polygon ROI
+- Registration workspace, add a new toolbox: Manual Registration
+- Paint toolbox in Segmentation is updated, can do region growing algorithm
+- A log system has been added, you can find the log file on homepage -> Logs
+- Histogram in views Tools button
+- Possibility to open a study, dropping it in a view
+- Reset camera on layer double click
+- 3D orientation, change the color of the background
+- Browser -> File System, path saved each time you open a directory
+- Improve visibility of 2D meshes
+- Pop-up to validate application exit: avoid misclicks
+- Search toolbox tool in the quick access menu to find toolboxes
+- Standardize Selector workspaces (with a selector combobox of toolboxes)
+- Filter tool added on the top on database column in workspaces
+- Right-click on a data in the database: Metadata tool lists the data metadata
+- Possibility to rename data in database column with the OS shortcut (ex. F2 on Linux)
+- Clarify the use of Load/Import data which become Temporary Import/Import
+- Remove homepage animation, and update minimum size of the application
+- Splash screen design updated, and fix transparency problem on some computers
+- Improve Mouse Interaction/View settings/Layer settings ergonomy
+- Fix Tensor view crash, and mesh + data display in view
+- Fix save and load settings for PACS system
+- Fix Dicom import with non axial acquisition
+- Fix a synchronisation bug between views
+- Fix a 4-split bug with the slicing
+- Fix a 4-split views bug with scrolling, button in view Tools button
+- Fix command-line bugs
+- Fix import errors of DICOM and mha
+- Fix default database path
+- Fix hidden layer visibility when add a new data in a view
+- Fix Composer button, and Diffusion toolboxes sizes
+- Fix memory leak with meshes after view closing
+- Fix thumbnail size
+- Fix the slice number and location on the view when the orientation changes
+- Improve packaging
+
+medInria v3.0:
+- Switch Qt backend to Qt 5.x
+- Switch VTK to version 8.1, including a switch to OpenGL2 backend
+- new, experimental composer workspace to run pipelines
+- Introduce a new plugin framework for the previous purpose
+- A bunch of new image processing algorithms: ITK basic operations (morphology, arithmetic...), bias correction...
+- New data types for diffusion: multi-compartment models (view and estimation)
+- enable image drag and drop on the application
+- scale colormaps option for surface and fibers attributes
+- many more things under the hood !
+
+medInria v2.2.3:
+- Fix registration of images encoded in unsigned short
+- Add a colormap for label images
+- Fix rare window-level crash
+- Fix rare thumbnail creation crash
+- Various bugs corrections
+
+medInria v2.2.2:
+- Minimum CMake version is now 2.8.10, as it corrects problem with automoc
+- Window/Level sliders are now expressed as Min/Max for easier manipulation
+- Fixed a bug that was wasting disk space by saving non persistent items on disk
+- Restore split presets, ROI file loading, RGB(A) image support
+- Undo/Redo support in paint segmentation
+- Allow coloring of vector field by a single color for field comparisons
+- Fixed Depth-Peeling on NVidia cards, improved general performance a bit
+- Various bugs and crashes corrections
+
+medInria v2.2.1:
+- Presets for images are back
+- Reversed Loni Lut added
+- Diffusion workspace bug correction
+- File association on Mac corrected
+- Crashing bug in ITK basic filters solved
+- Various bugs corrections
+
+medInria v2.2.0:
+- Rubber band zoom
+- Add support for VTK vtp file format
+- New application design 
+- DICOM import robustness improved
+- Morphological filters (dilate, erode, open, close) added
+- ITK 4.6 and VTK5.10 migration
+- Vector field visualization
+- HighDPI support on OSX
+- New navigator to explore patients/studies/series
+- New view container management system
+- MPR feature added to visualize an image in all orientations 
+- Diffusion workspace refactored
+- View and Data Management API updated
+- View properties toolbox improved and a new system to link properties set up
+- Corrections in time line management
+- 2 new registration plugins are added : LCC log-Demons and non linear block-matching registration
+- Many bug corrections
+
+medInria v2.1.2:
+- Bug fixes on view/layer synchronisation in the registration workspace
+- Made image annotations more legible on any background by adding text shadows
+- Fixed a crash in medPluginGenerator as well as tests
+- DICOM import fixes
+- Added keyboard shortcuts for orientation buttons
+- Simplified paint segmentation toolbox
+- File browser settings are now saved
+- Mesh thumbnails are now properly rendered on Mac, no more popups on other platforms
+
+medInria v2.1.1:
+- Win64 package was using Qt 4.7 instead of 4.8
+- Unix packages were using a dynamic boost, instead of static
+- Temporarily disable mesh thumbnail generation on Mac due to crashes, will be fixed in 2.1.2
+
+medInria v2.1.0:
+
+- First open-source release, code available on github
+- Database edition
+- Undo-redo for registration algorithms
+- New registration algorithm: pyramidal block-matching registration
+- Experimental ODF visualization (for ODF in a spherical harmonics basis)
+- Inter-hemispheric symmetry plane computation
+- Rewritten NL-Means denoising, now includes DWI denoising
+- Improved paint segmentation tool: magic wand, multi-label segmentation, controls simplification
+- View orientation controls moved from right-click to the view properties toolbox
+- Remove, save data, double-click to view data from any workspace using patient navigator
+- Simplified ROI filtering of fiber tracts
+- Direct image file opening from command line, file type association (double click on a file in Finder to view it: Mac only)
+- Screenshot button and shortcut (Ctrl F)
+- "Alt-Tab" like shortcut to switch between workspaces (Ctrl Shift)
+- Many bug corrections and other improvements
+
+medInria v2.0.1-1:
+
+- Fix Dicom plugins load failures on Macos Mountain Lion
+
+medInria v2.0.1:
+
+- Improved UI
+- Added registration algorithms: Baloo, Super Baloo, iLogDemons
+- Registration always performed in float for now
+- Added Segmentation Configuration preview
+- Improved layer aware window level interactions
+- Added INRImage support
+
+
+medInria v2.0.0:
+
+Total rewrite of the code from v 1.9.0

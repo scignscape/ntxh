@@ -1,0 +1,10 @@
+{
+          "title" : "Directory",
+           "kind" : "atomic",
+           "type" : "fileDir",
+           "tags" : ["file", "atomic","directory"],
+    "description" : "<h3>Directory node</h3>  <p> You can either use the <strong>Browse</strong> button in the node editor, or set the input port as is a string that can be a local directory name. The output port is the name of the local directory name</p>",
+         "inputs" : ["dir"],
+        "outputs" : ["dir"],
+          "color" : "darkgoldenrod"
+}

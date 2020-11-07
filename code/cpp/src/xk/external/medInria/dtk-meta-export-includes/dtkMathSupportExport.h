@@ -1,0 +1,2 @@
+#define DTKMATHSUPPORT_EXPORT
+

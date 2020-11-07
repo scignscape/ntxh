@@ -1,0 +1,10 @@
+{
+          "title" : "Embedded Spawn",
+           "kind" : "composite",
+           "type" : "spawnEmbedded",
+           "tags" : ["spawn", "map"],
+    "description" : "<h3>Embedded Spawn Node</h3>
+                     <p>The <strong>spawn</strong> node used by the parallel map node.</p>",
+         "inputs" : ["np", "communicator", "rank"],
+        "outputs" : ["communicator"]
+}

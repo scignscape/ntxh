@@ -1,0 +1,10 @@
+{
+          "title" : "Spawn",
+           "kind" : "composite",
+           "type" : "spawn",
+           "tags" : ["spawn", "distributed", "threads", "communicator"],
+    "description" : "<h3>Spawn Node</h3>
+                     <p>The <strong>spawn</strong> will spanw multiples threads to run it's internal composition. It uses a qthread communicator to achieve this.</p>",
+         "inputs" : ["np", "communicator", "rank"],
+        "outputs" : [""]
+}

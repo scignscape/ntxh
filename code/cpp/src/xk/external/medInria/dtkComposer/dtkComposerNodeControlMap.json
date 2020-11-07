@@ -1,0 +1,28 @@
+{
+          "title" : "Map",
+           "kind" : "control",
+           "type" : "map",
+           "tags" : ["map", "control", "loop"],
+    "description" : "<p>High order function: the <strong>Map</strong> node takes a
+                     container and applies a set of functions (the
+                     subcomposition inside the node) to each of its
+                     element to generate a new container. If the
+                     output container elements are not of the same
+                     type, you can optionnaly use the input port of
+                     the footer (bottom left) to set the output
+                     container.  </p>
+
+                     <p>Inside the block node, the outputs (on the left) are:
+                     <dl>
+                       <dt>container:</dt> <dd>Input container</dd>
+                       <dt>size:</dt> <dd>Input container size</dd>
+                       <dt>index:</dt> <dd>Current index</dd>
+                       <dt>item:</dt> <dd>Current item </dd>
+                     </dl></p>
+                     <p>And the input (on the right) is:
+                     <dl>
+                       <dt>newitem:</dt> <dd> New item value at current <emph>index</emph></dd>
+                     </dl></p>",
+         "inputs" : [],
+        "outputs" : []
+}

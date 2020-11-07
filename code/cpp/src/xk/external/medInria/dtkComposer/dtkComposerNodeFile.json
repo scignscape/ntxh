@@ -1,0 +1,10 @@
+{
+          "title" : "File",
+           "kind" : "atomic",
+           "type" : "file",
+           "tags" : ["file", "atomic"],
+    "description" : "<h3>File node</h3> <p> You can either use the <strong>Browse</strong> button in the node editor, or set the input port as a string that can be a local filename or a URL. The output port is the name of the local filename (temporary file downloaded if the input was an http URL)</p>",
+         "inputs" : ["filename"],
+        "outputs" : ["file"],
+          "color" : "darkgoldenrod"
+}

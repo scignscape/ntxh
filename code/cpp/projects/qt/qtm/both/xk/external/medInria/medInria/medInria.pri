@@ -4,10 +4,8 @@
 #     (See accompanying file LICENSE_1_0.txt or copy at
 #           http://www.boost.org/LICENSE_1_0.txt)
 
-PROJECT_NAME = medInria
 
 include(../build-group.pri)
-
 
 QT += gui  opengl sql network xml testlib svg
 
@@ -32,6 +30,7 @@ DTK_META_SRC_DIR =   $$SRC_DIR/devdtk/dtk/src
 
 DTK_META_EXTRA_INCLUDES_DIR =   $$SRC_DIR/devdtk/extra-includes
 
+DTK_META_APP_DIR =   $$SRC_DIR/devdtk/dtk/app
 
 
 INCLUDEPATH += $$DTK_META_EXTRA_INCLUDES_DIR
@@ -689,8 +688,10 @@ HEADERS +=  \
 #  $$SRC_DIR_APP/medSplashScreen.h \
 
 
+#SOURCES +=  \
+#  $$SRC_DIR/main.cpp \
+
 SOURCES +=  \
-  $$SRC_DIR_APP/main.cpp \
   $$SRC_DIR_APP/medMainWindow.cpp \
 
 
@@ -907,13 +908,22 @@ LIBS += -L$$MEDINRIA_EXTERNAL_LIB_DIR -ldtkGuiSupport  -ldtkLog -ldtkCoreSupport
   -ldtkMeta 
 
 
+RESOURCES += $$SRC_DIR_APP/resources/medInria.qrc
 
+RESOURCES += $$SRC_DIR_LAYERS/legacy/medCoreLegacy/resources/medCoreLegacy.qrc
+RESOURCES += $$SRC_DIR_LAYERS/medCore/medCore.qrc
+RESOURCES += $$DTK_META_APP_DIR/dtkDistributedDashboard/dtkDashboard.qrc 
 
+RESOURCES += $$DTK_META_SRC_DIR/../doc/slides/dtkDistributed/dtkDistributedSlides.qrc
+RESOURCES += $$DTK_META_SRC_DIR/dtkComposer/dtkComposer.qrc
+RESOURCES += $$DTK_META_SRC_DIR/dtkComposer/dtkComposerNode.qrc
+RESOURCES += $$DTK_META_SRC_DIR/dtkComposerSupport/_dtkComposer.qrc
+RESOURCES += $$DTK_META_SRC_DIR/dtkComposerSupport/dtkComposerSupport.qrc
+RESOURCES += $$DTK_META_SRC_DIR/dtkGuiSupport/dtkGui.qrc
+RESOURCES += $$DTK_META_SRC_DIR/dtkPlotSupport/dtkPlot.qrc
+RESOURCES += $$DTK_META_SRC_DIR/dtkWidgets/dtkNotification.qrc
+RESOURCES += $$DTK_META_SRC_DIR/dtkWidgets/dtkWidgetsTagCloud.qrc
 
-HEADERS += \
-
-
-SOURCES += \
 
 
 
