@@ -18,7 +18,10 @@
 
 #include <dtkComposer/dtkComposerNodeFactory.h>
 
-class DTKCOMPOSERSUPPORT_EXPORT dtkComposerSupportFactoryExtension : public dtkComposerNodeFactoryExtension
+
+
+class DTKCOMPOSERSUPPORT_EXPORT dtkComposerSupportFactoryExtension : 
+  public dtkComposerNodeFactory  //?public dtkComposerNodeFactoryExtension
 {
 public:
     dtkComposerSupportFactoryExtension(void);

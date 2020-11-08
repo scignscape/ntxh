@@ -508,7 +508,7 @@ SOURCES +=  \
   $$SRC_DIR/dtkComposerStackCommand.cpp \
   $$SRC_DIR/dtkComposerStackUtils.cpp \
   $$SRC_DIR/dtkComposerStackView.cpp \
-  $$SRC_DIR/dtkComposerSupportFactoryExtension.cpp \
+  \#?  $$SRC_DIR/dtkComposerSupportFactoryExtension.cpp \
   $$SRC_DIR/dtkComposerTransmitter.cpp \
   $$SRC_DIR/dtkComposerTransmitterAbstractEmitter.cpp \
   $$SRC_DIR/dtkComposerTransmitterAbstractReceiver.cpp \
