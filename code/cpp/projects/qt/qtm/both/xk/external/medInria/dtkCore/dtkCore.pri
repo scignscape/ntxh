@@ -23,6 +23,7 @@ DTK_META_EXPORT_INCLUDES_DIR =   $$SRC_GROUP_DIR/dtk-meta-export-includes
 #DTK_META_APP_DIR =   $$SRC_DIR/devdtk/dtk/app
 
 INCLUDEPATH += $$SRC_DIR/inc/dtkCore
+INCLUDEPATH += $$SRC_DIR/inc
 
 
 INCLUDEPATH += $$DTK_META_EXPORT_INCLUDES_DIR

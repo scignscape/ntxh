@@ -27,17 +27,18 @@ DTK_META_EXPORT_INCLUDES_DIR =   $$SRC_GROUP_DIR/dtk-meta-export-includes
 #DTK_META_APP_DIR =   $$SRC_DIR/devdtk/dtk/app
 
 #
-INCLUDEPATH += $$SRC_DIR/inc/dtkContainerSupport
+INCLUDEPATH += $$SRC_DIR/inc/dtkMath
 
 
 INCLUDEPATH += $$DTK_META_EXPORT_INCLUDES_DIR
 
 #
-INCLUDEPATH += $$SRC_GROUP_DIR/dtkCoreSupport/inc
+INCLUDEPATH += $$SRC_GROUP_DIR/dtkMath/inc
+
 INCLUDEPATH += $$SRC_GROUP_DIR/dtkLog/inc/dtkLog
-INCLUDEPATH += $$SRC_GROUP_DIR/dtkCore/inc
+INCLUDEPATH += $$SRC_GROUP_DIR/dtkCore/inc/dtkCore
 INCLUDEPATH += $$SRC_GROUP_DIR/dtkMeta/inc
-INCLUDEPATH += $$SRC_GROUP_DIR/dtkMathSupport/inc
+INCLUDEPATH += $$SRC_GROUP_DIR/dtkMeta/inc/dtkMeta
 
 
 #INCLUDEPATH += $$DTK_META_EXTRA_INCLUDES_DIR/dtk/src/
@@ -53,28 +54,32 @@ INCLUDEPATH += $$SRC_GROUP_DIR/dtkMathSupport/inc
 
 
 HEADERS +=  \
-  $$SRC_DIR/inc/dtkContainerSupport/dtkAbstractContainer.h \
-  $$SRC_DIR/inc/dtkContainerSupport/dtkAbstractContainerOrdered.h \
-  $$SRC_DIR/inc/dtkContainerSupport/dtkAbstractContainerWrapper.h \
-  $$SRC_DIR/inc/dtkContainerSupport/dtkContainerVector.h \
-  $$SRC_DIR/inc/dtkContainerSupport/dtkContainerVectorWrapper.h \
-  $$SRC_DIR/inc/dtkContainerSupport/dtkAbstractContainer \
-  $$SRC_DIR/inc/dtkContainerSupport/dtkAbstractContainer.tpp \
-  $$SRC_DIR/inc/dtkContainerSupport/dtkAbstractContainerOrdered \
-  $$SRC_DIR/inc/dtkContainerSupport/dtkAbstractContainerOrdered.tpp \
-  $$SRC_DIR/inc/dtkContainerSupport/dtkAbstractContainerWrapper \
-  $$SRC_DIR/inc/dtkContainerSupport/dtkAbstractContainerWrapper.tpp \
-  $$SRC_DIR/inc/dtkContainerSupport/dtkContainerVector \
-  $$SRC_DIR/inc/dtkContainerSupport/dtkContainerVector.tpp \
-  $$SRC_DIR/inc/dtkContainerSupport/dtkContainerVectorWrapper \
-  $$SRC_DIR/inc/dtkContainerSupport/dtkContainerVectorWrapper.tpp \
+  $$SRC_DIR/inc/dtkMath/dtkGraph.h \
+  $$SRC_DIR/inc/dtkMath/dtkGraphEdge.h \
+  $$SRC_DIR/inc/dtkMath/dtkGraphTemplate.h \
+  $$SRC_DIR/inc/dtkMath/dtkGraphTemplateEdge.h \
+  $$SRC_DIR/inc/dtkMath/dtkMath.h \
+  $$SRC_DIR/inc/dtkMath/dtkMathArray.h \
+  $$SRC_DIR/inc/dtkMath/dtkMatrix.h \
+  $$SRC_DIR/inc/dtkMath/dtkMatrix_p.h \
+  $$SRC_DIR/inc/dtkMath/dtkGraph \
+  $$SRC_DIR/inc/dtkMath/dtkGraphEdge \
+  $$SRC_DIR/inc/dtkMath/dtkGraphTemplate \
+  $$SRC_DIR/inc/dtkMath/dtkGraphTemplate.tpp \
+  $$SRC_DIR/inc/dtkMath/dtkGraphTemplateEdge \
+  $$SRC_DIR/inc/dtkMath/dtkGraphTemplateEdge.tpp \
+  $$SRC_DIR/inc/dtkMath/dtkMath \
+  $$SRC_DIR/inc/dtkMath/dtkMathArray.tpp \
+  $$SRC_DIR/inc/dtkMath/dtkMatrix \
+  $$SRC_DIR/inc/dtkMath/dtkMatrix.tpp \
 
 
 SOURCES +=  \
-  $$SRC_DIR/dtkAbstractContainerWrapper.cpp \
-  $$SRC_DIR/dtkContainer.cpp \
-  $$SRC_DIR/dtkContainerVector.cpp \
-
+  $$SRC_DIR/dtkGraph.cpp \
+  $$SRC_DIR/dtkGraphEdge.cpp \
+  $$SRC_DIR/dtkMath.cpp \
+  $$SRC_DIR/dtkMathArray.cpp \
+  $$SRC_DIR/dtkMatrix.cpp \
 
 
 
