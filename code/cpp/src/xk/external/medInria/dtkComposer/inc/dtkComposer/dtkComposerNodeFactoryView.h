@@ -24,6 +24,11 @@ class dtkComposerSceneNode;
 class dtkWidgetsTagCloudScope;
 class dtkWidgetsTagCloudView;
 
+ // //? added
+class dtkComposerNodeFactory;
+
+
+
 class DTKCOMPOSER_EXPORT dtkComposerNodeFactoryView : public QWidget
 {
     Q_OBJECT

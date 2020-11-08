@@ -60,6 +60,9 @@ INCLUDEPATH += $$SRC_GROUP_DIR/dtkContainerSupport/inc
 INCLUDEPATH += $$SRC_GROUP_DIR/dtkCoreSupport/inc
 
 
+INCLUDEPATH += $$SRC_GROUP_DIR/dtkMathSupport/inc
+
+
 
 #INCLUDEPATH += $$DTK_META_EXTRA_INCLUDES_DIR/dtk/src/
 #INCLUDEPATH += $$DTK_META_EXTRA_INCLUDES_DIR/dtk/src/dtkLog

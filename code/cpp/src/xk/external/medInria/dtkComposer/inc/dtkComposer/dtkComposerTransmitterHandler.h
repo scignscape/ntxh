@@ -13,6 +13,7 @@
 // Code:
 
 
+#include <QVariant>
 
 #pragma once
 

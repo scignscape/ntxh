@@ -12,6 +12,10 @@
 
 #include <dtkMath/dtkMath.h>
 
+//? added ...
+#include <dtkMathSupport/dtkMath.h>
+
+
 //?#include <dtkPlot/dtkPlotCurve.h>
 #include <dtkPlotSupport/dtkPlotCurve.h>
 
@@ -171,9 +175,9 @@ void dtkComposerNodePlotCurveFile::run(void)
         return;
     }
 
-    if (!read(*d->receiver_file.data())) {
-        return;
-    }
+//?    if (!read(*d->receiver_file.data())) {
+//?        return;
+//?    }
 
     dtkContainerVectorReal vx, vy;
     int numberOfCurves = d->list_vector_x.count();
@@ -240,6 +244,6 @@ void dtkComposerNodePlotCurveFile::run(void)
         curve->setData(data);
     }
 
-    d->emitter_curves.setData(&d->curves);
+    //? d->emitter_curves.setData(&d->curves);
 }
 

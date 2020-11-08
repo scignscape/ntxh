@@ -14,13 +14,18 @@
 
 #include "dtkComposerTransmitterHandler.h"
 
-#include <dtkContainer>
+
+//? #include <dtkContainer>
 
 // /////////////////////////////////////////////////////////////////
 //
 // /////////////////////////////////////////////////////////////////
 
-void dtkComposerTransmitterVariantHandler<dtkComposerVariant>::setData(dtkComposerVariant& data, dtkComposerTransmitterVariant& t_variant)
+//?void dtkComposerTransmitterVariantHandler<dtkComposerVariant>::setData(dtkComposerVariant& data, dtkComposerTransmitterVariant& t_variant)
+
+/*
+void dtkComposerTransmitterHandler<dtkComposerVariant>::setData(dtkComposerVariant& data, dtkComposerTransmitterVariant& t_variant)
+
 {
     t_variant.d->variant = data;
 
@@ -29,3 +34,5 @@ void dtkComposerTransmitterVariantHandler<dtkComposerVariant>::setData(dtkCompos
         t_variant.d->container = NULL;
     }
 }
+*/
+

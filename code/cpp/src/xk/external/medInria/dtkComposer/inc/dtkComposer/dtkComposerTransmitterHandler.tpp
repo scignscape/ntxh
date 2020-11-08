@@ -16,6 +16,10 @@
 
 #include <dtkMeta/dtkMeta.h>
 
+ //? added ...
+#include <dtkComposer/dtkComposerTransmitter.h>
+#include <dtkComposer/dtkComposerTransmitter_p.h>
+
 // /////////////////////////////////////////////////////////////////
 // dtkComposerTransmitterHandler implementation
 // /////////////////////////////////////////////////////////////////
