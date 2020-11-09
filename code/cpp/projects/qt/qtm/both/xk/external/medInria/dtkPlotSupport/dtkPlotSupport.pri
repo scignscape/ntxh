@@ -9,10 +9,13 @@ include(../build-group.pri)
 
 QT += gui  widgets #opengl sql network xml testlib svg
 
-#INCLUDEPATH += $$SRC_GROUP_DIR
 
 include($$ROOT_DIR/../preferred/sysr.pri)
 include($$ROOT_DIR/../preferred/gui.pri)
+
+
+INCLUDEPATH += $$SRC_GROUP_DIR/qwt-plot  $$SRC_GROUP_DIR/qwt
+
 
 #include($$ROOT_DIR/../preferred/medInria-external.pri)
 
@@ -37,6 +40,12 @@ INCLUDEPATH += $$SRC_GROUP_DIR/dtkMath/inc
 INCLUDEPATH += $$SRC_GROUP_DIR/dtkCoreSupport/inc
 INCLUDEPATH += $$SRC_GROUP_DIR/dtkLog/inc/dtkLog
 INCLUDEPATH += $$SRC_GROUP_DIR/dtkMathSupport/inc
+
+INCLUDEPATH += $$SRC_GROUP_DIR/dtkWidgets/inc
+INCLUDEPATH += $$SRC_GROUP_DIR/dtkGuiSupport/inc
+
+
+
 
 
 
@@ -81,8 +90,8 @@ HEADERS +=  \
 
 
 SOURCES +=  \
-  \#? $$SRC_DIR/dtkPlotCurve.cpp \
-  \#? $$SRC_DIR/dtkPlotRenderer.cpp \
+  $$SRC_DIR/dtkPlotCurve.cpp \
+  $$SRC_DIR/dtkPlotRenderer.cpp \
   $$SRC_DIR/dtkPlotView.cpp \
   $$SRC_DIR/dtkPlotViewGrid.cpp \
   $$SRC_DIR/dtkPlotViewLegend.cpp \
