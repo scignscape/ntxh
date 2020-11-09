@@ -1,0 +1,29 @@
+<RCC>
+    <qresource prefix="/axlGui">
+        <file>pixmaps/video-camera.png</file>
+        <file>pixmaps/emblem-generic.png</file>
+        <file>pixmaps/applications-science.png</file>
+        <file>pixmaps/applications-games.png</file>
+        <file>pixmaps/applications-engineering.png</file>
+        <file>pixmaps/view-fullscreen.png</file>
+        <file>pixmaps/info2.png</file>
+        <file>pixmaps/axlCheckBox-normal.png</file>
+        <file>pixmaps/axlCheckBox-pressed.png</file>
+        <file>pixmaps/axlPushButton-normal.png</file>
+        <file>pixmaps/axlPushButton-pressed.png</file>
+        <file>pixmaps/axlRadioButton-normal.png</file>
+        <file>pixmaps/axlRadioButton-pressed.png</file>
+        <file>pixmaps/axlPushButton-dark-normal.png</file>
+        <file>pixmaps/axlPushButton-dark-pressed.png</file>
+        <file>pixmaps/axlSpinBox.png</file>
+        <file>pixmaps/axlLineEdit.png</file>
+        <file>pixmaps/axlFrame-bg.png</file>
+        <file>pixmaps/axlSlider-handle.png</file>
+        <file>axlInspector.qss</file>
+        <file>axlInspectorSidePane.qss</file>
+        <file>pixmaps/save_64.png</file>
+        <file>pixmaps/resize_64.png</file>
+        <file>pixmaps/document_empty_64.png</file>
+        <file>pixmaps/delete_64.png</file>
+    </qresource>
+</RCC>

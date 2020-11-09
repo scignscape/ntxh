@@ -14,7 +14,7 @@ QT += gui  opengl sql network xml testlib svg
 include($$ROOT_DIR/../preferred/sysr.pri)
 include($$ROOT_DIR/../preferred/gui.pri)
 
-include($$ROOT_DIR/../preferred/medInria-external.pri)
+#include($$ROOT_DIR/../preferred/medInria-external.pri)
 
 
 DEFINES += MEDINRIA_VERSION=\\\"0.0.0.0\\\"
@@ -903,9 +903,15 @@ SOURCES +=  \
 
 
 
-LIBS += -L$$MEDINRIA_EXTERNAL_LIB_DIR -ldtkGuiSupport  -ldtkLog -ldtkCoreSupport \
+#?LIBS += -L$$MEDINRIA_EXTERNAL_LIB_DIR -ldtkGuiSupport  -ldtkLog -ldtkCoreSupport \
+#?  -ldtkCore -ldtkComposer -ldtkDistributed -ldtkMath  -ldtkWidgets \
+#?  -ldtkMeta 
+
+
+LIBS += -L$$TARGETSDIR -ldtkGuiSupport  -ldtkLog -ldtkCoreSupport \
   -ldtkCore -ldtkComposer -ldtkDistributed -ldtkMath  -ldtkWidgets \
   -ldtkMeta 
+
 
 
 RESOURCES += $$SRC_DIR_APP/resources/medInria.qrc

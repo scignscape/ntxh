@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/axlShader">
+        <file>shader/BlackMetal_Isophote.fs</file>
+        <file>shader/BlackMetal_Isophote.vs</file>
+        <file>shader/BumpMappingWithoutTexture.fs</file>
+        <file>shader/BumpMappingWithoutTexture.vs</file>
+        <file>shader/checkerboard.fs</file>
+        <file>shader/checkerboard.vs</file>
+        <file>shader/glossy.fs</file>
+        <file>shader/glossy.vs</file>
+        <file>shader/GreyMetal_04_Isophote.fs</file>
+        <file>shader/GreyMetal_04_Isophote.vs</file>
+        <file>shader/normalColor.fs</file>
+        <file>shader/normalColor.vs</file>
+        <file>shader/OrangeMetal_Isophote.fs</file>
+        <file>shader/OrangeMetal_Isophote.vs</file>
+        <file>shader/PhongGreyMetalPlasticIsophote.fs</file>
+        <file>shader/PhongGreyMetalPlasticIsophote.vs</file>
+        <file>shader/PhongRedPlasticIsophote.fs</file>
+        <file>shader/PhongRedPlasticIsophote.vs</file>
+        <file>shader/normalColorWithLight.fs</file>
+        <file>shader/normalColorWithLight.vs</file>
+    </qresource>
+</RCC>

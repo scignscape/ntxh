@@ -1,0 +1,473 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'axlInspectorToolGeneric.cpp'
+**
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.0)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#include <QtCore/qbytearray.h>
+#include <QtCore/qmetatype.h>
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'axlInspectorToolGeneric.cpp' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 67
+#error "This file was generated using the moc from 5.12.0. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_DEPRECATED
+struct qt_meta_stringdata_axlInspectorToolGenericInputInteger_t {
+    QByteArrayData data[4];
+    char stringdata0[59];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_axlInspectorToolGenericInputInteger_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_axlInspectorToolGenericInputInteger_t qt_meta_stringdata_axlInspectorToolGenericInputInteger = {
+    {
+QT_MOC_LITERAL(0, 0, 35), // "axlInspectorToolGenericInputI..."
+QT_MOC_LITERAL(1, 36, 15), // "addParameterInt"
+QT_MOC_LITERAL(2, 52, 0), // ""
+QT_MOC_LITERAL(3, 53, 5) // "value"
+
+    },
+    "axlInspectorToolGenericInputInteger\0"
+    "addParameterInt\0\0value"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_axlInspectorToolGenericInputInteger[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,    1,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::Int,    3,
+
+       0        // eod
+};
+
+void axlInspectorToolGenericInputInteger::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        axlInspectorToolGenericInputInteger *_t = static_cast<axlInspectorToolGenericInputInteger *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->addParameterInt((*reinterpret_cast< int(*)>(_a[1]))); break;
+        default: ;
+        }
+    }
+}
+
+QT_INIT_METAOBJECT const QMetaObject axlInspectorToolGenericInputInteger::staticMetaObject = { {
+    &QSpinBox::staticMetaObject,
+    qt_meta_stringdata_axlInspectorToolGenericInputInteger.data,
+    qt_meta_data_axlInspectorToolGenericInputInteger,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *axlInspectorToolGenericInputInteger::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *axlInspectorToolGenericInputInteger::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_axlInspectorToolGenericInputInteger.stringdata0))
+        return static_cast<void*>(this);
+    return QSpinBox::qt_metacast(_clname);
+}
+
+int axlInspectorToolGenericInputInteger::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QSpinBox::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_axlInspectorToolGenericInputDouble_t {
+    QByteArrayData data[4];
+    char stringdata0[55];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_axlInspectorToolGenericInputDouble_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_axlInspectorToolGenericInputDouble_t qt_meta_stringdata_axlInspectorToolGenericInputDouble = {
+    {
+QT_MOC_LITERAL(0, 0, 34), // "axlInspectorToolGenericInputD..."
+QT_MOC_LITERAL(1, 35, 12), // "addParameter"
+QT_MOC_LITERAL(2, 48, 0), // ""
+QT_MOC_LITERAL(3, 49, 5) // "value"
+
+    },
+    "axlInspectorToolGenericInputDouble\0"
+    "addParameter\0\0value"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_axlInspectorToolGenericInputDouble[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,    1,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::Double,    3,
+
+       0        // eod
+};
+
+void axlInspectorToolGenericInputDouble::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        axlInspectorToolGenericInputDouble *_t = static_cast<axlInspectorToolGenericInputDouble *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->addParameter((*reinterpret_cast< double(*)>(_a[1]))); break;
+        default: ;
+        }
+    }
+}
+
+QT_INIT_METAOBJECT const QMetaObject axlInspectorToolGenericInputDouble::staticMetaObject = { {
+    &QDoubleSpinBox::staticMetaObject,
+    qt_meta_stringdata_axlInspectorToolGenericInputDouble.data,
+    qt_meta_data_axlInspectorToolGenericInputDouble,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *axlInspectorToolGenericInputDouble::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *axlInspectorToolGenericInputDouble::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_axlInspectorToolGenericInputDouble.stringdata0))
+        return static_cast<void*>(this);
+    return QDoubleSpinBox::qt_metacast(_clname);
+}
+
+int axlInspectorToolGenericInputDouble::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QDoubleSpinBox::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_axlInspectorToolGenericInputData_t {
+    QByteArrayData data[4];
+    char stringdata0[54];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_axlInspectorToolGenericInputData_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_axlInspectorToolGenericInputData_t qt_meta_stringdata_axlInspectorToolGenericInputData = {
+    {
+QT_MOC_LITERAL(0, 0, 32), // "axlInspectorToolGenericInputData"
+QT_MOC_LITERAL(1, 33, 14), // "OnFindingInput"
+QT_MOC_LITERAL(2, 48, 0), // ""
+QT_MOC_LITERAL(3, 49, 4) // "name"
+
+    },
+    "axlInspectorToolGenericInputData\0"
+    "OnFindingInput\0\0name"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_axlInspectorToolGenericInputData[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,    1,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QString,    3,
+
+       0        // eod
+};
+
+void axlInspectorToolGenericInputData::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        axlInspectorToolGenericInputData *_t = static_cast<axlInspectorToolGenericInputData *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->OnFindingInput((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        default: ;
+        }
+    }
+}
+
+QT_INIT_METAOBJECT const QMetaObject axlInspectorToolGenericInputData::staticMetaObject = { {
+    &QComboBox::staticMetaObject,
+    qt_meta_stringdata_axlInspectorToolGenericInputData.data,
+    qt_meta_data_axlInspectorToolGenericInputData,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *axlInspectorToolGenericInputData::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *axlInspectorToolGenericInputData::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_axlInspectorToolGenericInputData.stringdata0))
+        return static_cast<void*>(this);
+    return QComboBox::qt_metacast(_clname);
+}
+
+int axlInspectorToolGenericInputData::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QComboBox::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_axlInspectorToolGenericInputString_t {
+    QByteArrayData data[4];
+    char stringdata0[62];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_axlInspectorToolGenericInputString_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_axlInspectorToolGenericInputString_t qt_meta_stringdata_axlInspectorToolGenericInputString = {
+    {
+QT_MOC_LITERAL(0, 0, 34), // "axlInspectorToolGenericInputS..."
+QT_MOC_LITERAL(1, 35, 12), // "addParameter"
+QT_MOC_LITERAL(2, 48, 0), // ""
+QT_MOC_LITERAL(3, 49, 12) // "currentIndex"
+
+    },
+    "axlInspectorToolGenericInputString\0"
+    "addParameter\0\0currentIndex"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_axlInspectorToolGenericInputString[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,    1,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::Int,    3,
+
+       0        // eod
+};
+
+void axlInspectorToolGenericInputString::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        axlInspectorToolGenericInputString *_t = static_cast<axlInspectorToolGenericInputString *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->addParameter((*reinterpret_cast< int(*)>(_a[1]))); break;
+        default: ;
+        }
+    }
+}
+
+QT_INIT_METAOBJECT const QMetaObject axlInspectorToolGenericInputString::staticMetaObject = { {
+    &QComboBox::staticMetaObject,
+    qt_meta_stringdata_axlInspectorToolGenericInputString.data,
+    qt_meta_data_axlInspectorToolGenericInputString,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *axlInspectorToolGenericInputString::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *axlInspectorToolGenericInputString::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_axlInspectorToolGenericInputString.stringdata0))
+        return static_cast<void*>(this);
+    return QComboBox::qt_metacast(_clname);
+}
+
+int axlInspectorToolGenericInputString::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QComboBox::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_axlInspectorToolGenericInputDataList_t {
+    QByteArrayData data[1];
+    char stringdata0[37];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_axlInspectorToolGenericInputDataList_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_axlInspectorToolGenericInputDataList_t qt_meta_stringdata_axlInspectorToolGenericInputDataList = {
+    {
+QT_MOC_LITERAL(0, 0, 36) // "axlInspectorToolGenericInputD..."
+
+    },
+    "axlInspectorToolGenericInputDataList"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_axlInspectorToolGenericInputDataList[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void axlInspectorToolGenericInputDataList::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject axlInspectorToolGenericInputDataList::staticMetaObject = { {
+    &QWidget::staticMetaObject,
+    qt_meta_stringdata_axlInspectorToolGenericInputDataList.data,
+    qt_meta_data_axlInspectorToolGenericInputDataList,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *axlInspectorToolGenericInputDataList::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *axlInspectorToolGenericInputDataList::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_axlInspectorToolGenericInputDataList.stringdata0))
+        return static_cast<void*>(this);
+    return QWidget::qt_metacast(_clname);
+}
+
+int axlInspectorToolGenericInputDataList::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QWidget::qt_metacall(_c, _id, _a);
+    return _id;
+}
+QT_WARNING_POP
+QT_END_MOC_NAMESPACE

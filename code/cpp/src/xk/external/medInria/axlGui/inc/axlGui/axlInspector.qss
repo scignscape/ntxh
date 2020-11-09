@@ -1,0 +1,267 @@
+/* axlInspector.qss --- 
+   ;; 
+   ;; Author: Julien Wintz
+   ;; Copyright (C) 2008-2011 - Julien Wintz, Inria.
+   ;; Created: Wed Nov  9 11:04:06 2011 (+0100)
+   ;; Version: $Id$
+   ;; Last-Updated: Tue Dec 27 13:05:08 2011 (+0100)
+   ;;           By: Julien Wintz
+   ;;     Update #: 135
+   */
+
+/*Commentary: 
+  ;; 
+  */
+
+/*Change log:
+  ;; 
+  */
+
+QDockWidget {
+
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                            stop: 0.0 #ffffff,
+                            stop: 0.1 #fbfbfb,
+                            stop: 0.6 #f5f5f5,
+                            stop: 1.0 #ebebeb);
+
+    border: 0px;
+}
+QDockWidget::title {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0,
+                             stop: 0.0 #5a5a5a, stop: 0.2 #3a3a3a, stop: 0.6 #1a1a1a,
+                             stop: 1.0 #101010);
+    border: 0px;
+ }
+
+
+
+
+QFrame {
+    background-image: url(:axlGui/pixmaps/axlFrame-bg.png);
+    background-repeat: repeat-xy;
+
+    font-size: 11px;
+    color: #292929;
+}
+
+QToolBar {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0.0 #ffffff,
+                                stop: 0.1 #fbfbfb,
+                                stop: 0.6 #f5f5f5,
+                                stop: 1.0 #ebebeb);
+
+    border: none;
+    border-top: 1px solid #9b9b9b;
+}
+
+QCheckBox {
+    width: 17px;
+    height: 17px;
+}
+
+QCheckBox::indicator:unchecked {
+    image: url(:axlGui/pixmaps/axlCheckBox-normal.png);
+    
+}
+
+QCheckBox::indicator:checked {
+    image: url(:axlGui/pixmaps/axlCheckBox-pressed.png);
+}
+
+QRadioButton {
+    width: 17px;
+    height: 17px;
+}
+
+QRadioButton::indicator:unchecked {
+    image: url(:axlGui/pixmaps/axlRadioButton-normal.png);
+    
+}
+
+QRadioButton::indicator:checked {
+    image: url(:axlGui/pixmaps/axlRadioButton-pressed.png);
+}
+
+QPushButton {
+    border-image: url(:axlGui/pixmaps/axlPushButton-dark-normal.png) 5 5 5 5;
+    border-top: 5px transparent;
+    border-bottom: 5px transparent;
+    border-right: 5px transparent;
+    border-left: 5px transparent;
+    color: white;
+    height: 16px;
+    padding: 0px;
+}
+
+QPushButton:pressed {
+    border-image: url(:axlGui/pixmaps/axlPushButton-dark-pressed.png) 5 5 5 5;
+    border-top: 5px transparent;
+    border-bottom: 5px transparent;
+    border-right: 5px transparent;
+    border-left: 5px transparent;
+}
+
+QDialogButtonBox QPushButton {
+    min-width: 100px;
+}
+
+QSpinBox, QDoubleSpinBox {
+    border-image: url(:axlGui/pixmaps/axlSpinBox.png) 0 24 0 5;
+    border-top: 0px transparent;
+    border-bottom: 0px transparent;
+    border-right: 24px transparent;
+    border-left: 5px transparent;
+    color: black;
+    min-height: 26px;
+    max-height: 26px;
+}
+
+QSpinBox::up-button, QDoubleSpinBox::up-button {
+    background: none;
+    border: none;
+}
+
+QSpinBox::down-button, QDoubleSpinBox::down-button {
+    background: none;
+    border: none;
+}
+
+QLineEdit {
+    border-image: url(:axlGui/pixmaps/axlLineEdit.png) 0 5 0 5;
+    border-top: 0px transparent;
+    border-bottom: 0px transparent;
+    border-right: 5px transparent;
+    border-left: 5px transparent;
+    max-height: 26px;
+    min-height: 26px;
+}
+
+/*****************************************************************
+ * QScrollBar
+ *
+ * pseudo-state: horizontal
+ */
+
+QScrollBar:horizontal {
+    background: rgb(230, 230, 230);
+    height: 6px;
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #373737;
+    border: 1px solid #373737;
+    border-radius: 2px;
+    min-height: 20px;
+}
+
+QScrollBar::add-line:horizontal {
+    height: 0px;
+}
+
+QScrollBar::sub-line:horizontal {
+    height: 0px;
+}
+
+QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal {
+    width: 0px;
+    height: 0px;
+    background: none;
+}
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: none;
+}
+
+/*****************************************************************
+ * QScrollBar
+ *
+ * pseudo-state: vertical
+ */
+
+QScrollBar:vertical {
+    background: rgb(230, 230, 230);
+    width: 6px;
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:vertical {
+    background: #373737;
+    border: 1px solid #373737;
+    border-radius: 2px;
+    min-height: 20px;
+}
+
+QScrollBar::add-line:vertical {
+    height: 0px;
+}
+
+QScrollBar::sub-line:vertical {
+    height: 0px;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+    width: 0px;
+    height: 0px;
+    background: none;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+/* ***************************************************************
+ * QSlider
+ */
+
+QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    border-radius: 2px;
+    height: 4px;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #B1B1B1, stop:1 #c4c4c4);
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+QSlider::groove:vertical {
+    border: 1px solid #999999;
+    border-radius: 2px;
+    height: 4px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #B1B1B1, stop:1 #c4c4c4);
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+QSlider::handle {
+    background-image: url(:axlGui/pixmaps/axlSlider-handle.png);
+    background-repeat: none;
+    background-position: center center;
+    width: 16px;
+    height: 16px;
+    margin: -6px -6px -6px -6px;
+}
+
+/* ***************************************************************
+ *
+ */
+
+QHeaderView::section {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 #969696,
+                                      stop:1 #757575);
+    color: white;
+    padding-left: 4px;
+    border: none;
+    border-bottom: 1px solid #323232;
+    height: 24px;
+}
+
+QHeaderView::section::!last {
+    border-right: 1px solid #323232;
+}
+
+QLabel {
+    background: transparent;
+}

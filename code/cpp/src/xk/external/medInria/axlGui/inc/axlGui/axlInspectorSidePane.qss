@@ -1,0 +1,32 @@
+/* axlInspectorSidePane.qss ---
+;; 
+;; Author: Julien Wintz
+;; Copyright (C) 2008 - Julien Wintz, Inria.
+;; Created: Tue Mar 15 15:16:12 2011 (+0100)
+;; Version: $Id$
+;; Last-Updated: Tue Dec 27 13:05:49 2011 (+0100)
+;;           By: Julien Wintz
+;;     Update #: 79
+*/
+
+/* Commentary: 
+;; 
+*/
+
+/* Change log:
+;; 
+*/
+
+QToolBar {
+    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
+                                 stop: 0.0 #5a5a5a,
+                                 stop: 1.0 #414141);
+    border: none;
+    border-left: 1px solid #424242;
+    border-right: 1px solid #393939;
+}
+
+QToolButton {
+    background: none;
+    border: none;
+}

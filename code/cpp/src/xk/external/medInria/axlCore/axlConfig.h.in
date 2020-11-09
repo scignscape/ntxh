@@ -1,0 +1,29 @@
+/* axlConfig.h.in ---
+ *
+ * Author: Meriadeg Perrinel
+ * Copyright (C) 2008 - Meriadeg Perrinel, Inria.
+ * Created: Mon Jan 14 10:00:44 2013 (+0100)
+ * Version: $Id$
+ * Last-Updated: Mon Jan 14 10:00:44 2013 (+0100)
+ *           By: Meriadeg Perrinel
+ *     Update #: 19
+ */
+
+/* Commentary:
+ *
+ */
+
+/* Change log:
+ *
+ */
+
+
+#ifndef AXLCONFIG_H
+#define AXLCONFIG_H
+
+
+#define AXL_VERSION "@AXL_VERSION@"
+#define AXL_MODULE_PATH "@CMAKE_BINARY_DIR@/modules"
+#define AXL_MODULE_WIN_INSTALL_PATH "@MODULE_WIN_INSTALL_PATH@"
+
+#endif //AXLCONFIG_H
