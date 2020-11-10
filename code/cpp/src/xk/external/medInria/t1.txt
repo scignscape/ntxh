@@ -1,0 +1,87 @@
+dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitter.h:    template <typename T> class dtkMatrix;
+dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterEmitter.h:    template <typename T> class dtkMatrix;
+dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterReceiver.h:    template <typename T> class dtkMatrix;
+dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterVariant.h:    template <typename T> class dtkMatrix;
+dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitter_p.h:    template <typename T> class dtkMatrix;
+dtkCoreSupport/inc/dtkCoreSupport/dtkGlobal.h:template <typename T> class dtkMatrix;
+dtkCoreSupport/inc/dtkCoreSupport/dtkVariant.h://?template <typename T> class dtkMatrix;
+dtkCoreSupport/inc/dtkCoreSupport/dtkVariant.h:template <typename T> class dtkMatrix;
+dtkMath/inc/dtkMath/dtkMath.h:class dtkMatrixPluginFactory;
+dtkMath/inc/dtkMath/dtkMath.h:class dtkMatrixPluginManager;
+dtkMath/inc/dtkMath/dtkMatrix_p.h:template <typename T> class dtkMatrixPrivate
+dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h://! Template class dtkMatrix
+dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:     * Template class dtkMatrix provides a mathematical matrix with parameterised
+dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:    template <typename T = double> class dtkMatrix
+dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:// Implementation of the template class dtkMatrix's methods
+dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:    template <typename T = double> class dtkMatrixSquared : public dtkMatrix<T>
+dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:// Implementation of the template class dtkMatrixSquared's methods
+medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitter.h:    template <typename T> class dtkMatrix;
+medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterEmitter.h:    template <typename T> class dtkMatrix;
+medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterReceiver.h:    template <typename T> class dtkMatrix;
+medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.h:    template <typename T> class dtkMatrix;
+medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitter_p.h:    template <typename T> class dtkMatrix;
+medInria/devdtk/dtk/src/dtkCoreSupport/dtkGlobal.h:template <typename T> class dtkMatrix;
+medInria/devdtk/dtk/src/dtkCoreSupport/dtkVariant.h:template <typename T> class dtkMatrix;
+medInria/devdtk/dtk/src/dtkMath/dtkMath.h:class dtkMatrixPluginFactory;
+medInria/devdtk/dtk/src/dtkMath/dtkMath.h:class dtkMatrixPluginManager;
+medInria/devdtk/dtk/src/dtkMath/dtkMatrix_p.h:template <typename T> class dtkMatrixPrivate
+medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h://! Template class dtkMatrix
+medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:     * Template class dtkMatrix provides a mathematical matrix with parameterised
+medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:    template <typename T = double> class dtkMatrix
+medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:// Implementation of the template class dtkMatrix's methods
+medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:    template <typename T = double> class dtkMatrixSquared : public dtkMatrix<T>
+medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:// Implementation of the template class dtkMatrixSquared's methods
+medInria/devdtk/extra-includes/dtk/src/dtkCoreSupport/dtkGlobal.h:template <typename T> class dtkMatrix;
+medInria/devdtk/extra-includes/dtk/src/dtkCoreSupport/dtkVariant.h:template <typename T> class dtkMatrix;
+medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMath.h:class dtkMatrixPluginFactory;
+medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMath.h:class dtkMatrixPluginManager;
+medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix_p.h:template <typename T> class dtkMatrixPrivate
+medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h://! Template class dtkMatrix
+medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:     * Template class dtkMatrix provides a mathematical matrix with parameterised
+medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:    template <typename T = double> class dtkMatrix
+medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:// Implementation of the template class dtkMatrix's methods
+medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:    template <typename T = double> class dtkMatrixSquared : public dtkMatrix<T>
+medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:// Implementation of the template class dtkMatrixSquared's methods
+tmp.txt:./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitter.h:    template <typename T> class dtkMatrix;
+tmp.txt:./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterEmitter.h:    template <typename T> class dtkMatrix;
+tmp.txt:./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterReceiver.h:    template <typename T> class dtkMatrix;
+tmp.txt:./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterVariant.h:    template <typename T> class dtkMatrix;
+tmp.txt:./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitter_p.h:    template <typename T> class dtkMatrix;
+tmp.txt:./dtkCoreSupport/inc/dtkCoreSupport/dtkGlobal.h:template <typename T> class dtkMatrix;
+tmp.txt:./dtkCoreSupport/inc/dtkCoreSupport/dtkVariant.h:template <typename T> class dtkMatrix;
+tmp.txt:./dtkMath/inc/dtkMath/dtkMath.h:class dtkMatrixPluginFactory;
+tmp.txt:./dtkMath/inc/dtkMath/dtkMath.h:class dtkMatrixPluginManager;
+tmp.txt:./dtkMath/inc/dtkMath/dtkMatrix_p.h:template <typename T> class dtkMatrixPrivate
+tmp.txt:./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h://! Template class dtkMatrix
+tmp.txt:./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:     * Template class dtkMatrix provides a mathematical matrix with parameterised
+tmp.txt:./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:    template <typename T = double> class dtkMatrix
+tmp.txt:./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:// Implementation of the template class dtkMatrix's methods
+tmp.txt:./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:    template <typename T = double> class dtkMatrixSquared : public dtkMatrix<T>
+tmp.txt:./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:// Implementation of the template class dtkMatrixSquared's methods
+tmp.txt:./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitter.h:    template <typename T> class dtkMatrix;
+tmp.txt:./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterEmitter.h:    template <typename T> class dtkMatrix;
+tmp.txt:./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterReceiver.h:    template <typename T> class dtkMatrix;
+tmp.txt:./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.h:    template <typename T> class dtkMatrix;
+tmp.txt:./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitter_p.h:    template <typename T> class dtkMatrix;
+tmp.txt:./medInria/devdtk/dtk/src/dtkCoreSupport/dtkGlobal.h:template <typename T> class dtkMatrix;
+tmp.txt:./medInria/devdtk/dtk/src/dtkCoreSupport/dtkVariant.h:template <typename T> class dtkMatrix;
+tmp.txt:./medInria/devdtk/dtk/src/dtkMath/dtkMath.h:class dtkMatrixPluginFactory;
+tmp.txt:./medInria/devdtk/dtk/src/dtkMath/dtkMath.h:class dtkMatrixPluginManager;
+tmp.txt:./medInria/devdtk/dtk/src/dtkMath/dtkMatrix_p.h:template <typename T> class dtkMatrixPrivate
+tmp.txt:./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h://! Template class dtkMatrix
+tmp.txt:./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:     * Template class dtkMatrix provides a mathematical matrix with parameterised
+tmp.txt:./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:    template <typename T = double> class dtkMatrix
+tmp.txt:./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:// Implementation of the template class dtkMatrix's methods
+tmp.txt:./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:    template <typename T = double> class dtkMatrixSquared : public dtkMatrix<T>
+tmp.txt:./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:// Implementation of the template class dtkMatrixSquared's methods
+tmp.txt:./medInria/devdtk/extra-includes/dtk/src/dtkCoreSupport/dtkGlobal.h:template <typename T> class dtkMatrix;
+tmp.txt:./medInria/devdtk/extra-includes/dtk/src/dtkCoreSupport/dtkVariant.h:template <typename T> class dtkMatrix;
+tmp.txt:./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMath.h:class dtkMatrixPluginFactory;
+tmp.txt:./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMath.h:class dtkMatrixPluginManager;
+tmp.txt:./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix_p.h:template <typename T> class dtkMatrixPrivate
+tmp.txt:./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h://! Template class dtkMatrix
+tmp.txt:./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:     * Template class dtkMatrix provides a mathematical matrix with parameterised
+tmp.txt:./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:    template <typename T = double> class dtkMatrix
+tmp.txt:./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:// Implementation of the template class dtkMatrix's methods
+tmp.txt:./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:    template <typename T = double> class dtkMatrixSquared : public dtkMatrix<T>
+tmp.txt:./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:// Implementation of the template class dtkMatrixSquared's methods

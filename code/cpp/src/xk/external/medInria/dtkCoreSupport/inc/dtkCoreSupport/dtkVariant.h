@@ -17,7 +17,10 @@
 
 #include <dtkCoreSupportExport.h>
 #include "dtkGlobal.h"
-#include <dtkContainer/dtkAbstractContainerWrapper.h>
+
+//? #include <dtkContainer/dtkAbstractContainerWrapper.h>
+
+//? #include <dtkContainerSupport/dtkAbstractContainerWrapper.h>
 
 #include <QVariant>
 
@@ -26,7 +29,21 @@ class dtkAbstractData;
 class dtkAbstractProcess;
 class dtkAbstractView;
 
+class dtkAbstractContainerWrapper;
+
+
+//? added
+//?
+namespace dtkDeprecated {
+//?
 template <typename T> class dtkMatrix;
+//? added
+//?
+}
+//?using namespace dtkDeprecated;
+
+//?template <typename T> class dtkMatrix;
+
 template <typename T> class dtkVector;
 template <typename T> class dtkVector3D;
 template <typename T> class dtkQuaternion;
@@ -113,7 +130,9 @@ public:
 
 public:
     dtkAbstractObject *m_object;
-    dtkMatrix<double> *m_matrix;
+    //? added
+    dtkDeprecated::
+      dtkMatrix<double> *m_matrix;
     dtkAbstractContainerWrapper *m_container;
 
 private:

@@ -12,13 +12,23 @@
  *
  */
 
+//? added
+#include <dtkCoreExport.h>
+
 #include "dtkVariant.h"
 
 #include "dtkAbstractObject.h"
 
-#include <dtkMath>
+//? #include <dtkMath>
 
-#include <dtkContainer/dtkAbstractContainerWrapper.h>
+//? #include <dtkContainer/dtkAbstractContainerWrapper.h>
+
+//? #include <dtkContainerSupport/dtkAbstractContainerWrapper.h>
+
+//? added ...
+#include <dtkMathSupport/dtkMatrix.h>
+
+ #include <dtkGlobal>
 
 #include <dtkLog>
 

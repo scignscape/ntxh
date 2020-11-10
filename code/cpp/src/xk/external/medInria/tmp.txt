@@ -1,0 +1,1133 @@
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealExtractor.cpp:    dtkComposerTransmitterReceiver<dtkMatrixSquareReal> receiver_matrix;
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealExtractor.cpp:        dtkMatrixSquareReal *matrix = d->receiver_matrix.data();
+./dtkComposerSupport/dtkComposerNodeMatrixSquareReal.cpp:#include <dtkMathSupport/dtkMatrix.h>
+./dtkComposerSupport/dtkComposerNodeMatrixSquareReal.cpp:    dtkComposerTransmitterReceiver<dtkMatrixSquareReal> receiver_matrix;
+./dtkComposerSupport/dtkComposerNodeMatrixSquareReal.cpp:    dtkComposerTransmitterEmitter<dtkMatrixSquareReal> emitter_matrix;
+./dtkComposerSupport/dtkComposerNodeMatrixSquareReal.cpp:    dtkMatrixSquareReal *matrix;
+./dtkComposerSupport/dtkComposerNodeMatrixSquareReal.cpp:        dtkMatrixSquareReal *matrix = d->receiver_matrix.data();
+./dtkComposerSupport/dtkComposerNodeMatrixSquareReal.cpp:            d->matrix = new dtkMatrixSquareReal();
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:#include <dtkMathSupport/dtkMatrix.h>
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:    dtkComposerTransmitterReceiver<dtkMatrixSquareReal> receiver_lhs;
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:    dtkComposerTransmitterReceiver<dtkMatrixSquareReal> receiver_rhs;
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:    dtkComposerTransmitterEmitter<dtkMatrixSquareReal> emitter_matrix;
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:    dtkMatrixSquareReal *matrix;
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:    dtkComposerTransmitterReceiver<dtkMatrixSquareReal> receiver_matrix;
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:    dtkComposerTransmitterReceiver<dtkMatrixSquareReal> receiver_matrix;
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:    dtkComposerTransmitterEmitter<dtkMatrixSquareReal>   emitter_matrix;
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:            d->matrix = new dtkMatrixSquareReal();
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        const dtkMatrixSquareReal *m_lhs = d->receiver_lhs.constData();
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        const dtkMatrixSquareReal *m_rhs = d->receiver_rhs.constData();
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:            d->matrix = new dtkMatrixSquareReal();
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        const dtkMatrixSquareReal *m_lhs = d->receiver_lhs.constData();
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        const dtkMatrixSquareReal *m_rhs = d->receiver_rhs.constData();
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:            d->matrix = new dtkMatrixSquareReal();
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        const dtkMatrixSquareReal *m_lhs = d->receiver_lhs.constData();
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        const dtkMatrixSquareReal *m_rhs = d->receiver_rhs.constData();
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        const dtkMatrixSquareReal *matrix = d->receiver_matrix.constData();
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        const dtkMatrixSquareReal *matrix = d->receiver_matrix.constData();
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        dtkMatrixSquareReal *matrix = d->receiver_matrix.data();
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        dtkMatrixSquareReal *matrix = d->receiver_matrix.data();
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorUnary.cpp:#include <dtkMathSupport/dtkMatrix.h>
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorUnary.cpp:    dtkComposerTransmitterReceiver<dtkMatrixSquareReal> receiver_matrix;
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorUnary.cpp:    dtkComposerTransmitterEmitter<dtkMatrixSquareReal> emitter_matrix;
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorUnary.cpp:    dtkComposerTransmitterReceiver<dtkMatrixSquareReal> receiver_matrix;
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorUnary.cpp:        dtkMatrixSquareReal *matrix = d->receiver_matrix.data();
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorUnary.cpp:        dtkMatrixSquareReal *matrix = d->receiver_matrix.data();
+./dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorUnary.cpp:        d->value = dtkMatrixSquaredTrace(*d->receiver_matrix.data());
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:        } else if (data_type == e->dtkMatrixReal_Id) {
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:                    d->matrix = new dtkMatrixReal();
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:                this->setData<dtkMatrixReal>(d->matrix);
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:                dtkMatrixReal *m = new dtkMatrixReal();
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:        } else if (data_type == e->dtkMatrixSquareReal_Id) {
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:                    d->matrix = new dtkMatrixSquareReal();
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:                this->setData<dtkMatrixSquareReal>(reinterpret_cast<dtkMatrixSquareReal *>(d->matrix));
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:                dtkMatrixSquareReal *m = new dtkMatrixSquareReal();
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:        } else if (data_type == qMetaTypeId<dtkMatrixReal>() || data_type == qMetaTypeId<dtkMatrixReal *>()) {
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:            stream << e->dtkMatrixReal_Id;
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:            tmp_array =  (self) ? this->data<dtkMatrixReal>()->serialize() : v.value<dtkMatrixReal *>()->serialize();
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:        } else if (data_type == qMetaTypeId<dtkMatrixSquareReal>() || data_type == qMetaTypeId<dtkMatrixSquareReal *>()) {
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:            stream << e->dtkMatrixSquareReal_Id;
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:            tmp_array =  (self) ? this->data<dtkMatrixSquareReal>()->serialize() : v.value<dtkMatrixSquareReal *>()->serialize();
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:dtkMatrixReal *dtkComposerTransmitterVariant::matrix(void)
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:    } else if (data_type == qMetaTypeId<dtkMatrixReal>(0)) {
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:        return this->data<dtkMatrixReal>()->description();
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:    } else if (data_type == qMetaTypeId<dtkMatrixSquareReal>(0)) {
+./dtkComposerSupport/dtkComposerTransmitterVariant.cpp:        return this->data<dtkMatrixSquareReal>()->description();
+./dtkComposerSupport/dtkComposerTransmitter.cpp:dtkMatrixReal *dtkComposerTransmitter::matrix(void)
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterReceiver.tpp:template <typename T> dtkMatrixReal *dtkComposerTransmitterReceiver<T>::matrix(void)
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterReceiver.tpp:    if (data && dtkTypeInfo<T *>::dtkMatrixRealPointer)
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterReceiver.tpp:        return reinterpret_cast<dtkMatrixReal *>(data);
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitter.h:    template <typename T> class dtkMatrix;
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitter.h:    virtual dtkDeprecated::dtkMatrix<double> *matrix(void);
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterEmitter.h:    template <typename T> class dtkMatrix;
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterEmitter.h:    dtkDeprecated::dtkMatrix<double> *matrix(void);
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterEmitter.tpp:template <typename T> dtkMatrixReal *dtkComposerTransmitterEmitter<T>::matrix(void)
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterEmitter.tpp:    if (dtkTypeInfo<T *>::dtkMatrixRealPointer)
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterEmitter.tpp:        return reinterpret_cast<dtkMatrixReal *>(m_data);
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterEmitter.tpp:    if (dtkTypeInfo<T *>::dtkMatrixRealPointer)
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterEmitter.tpp:        return reinterpret_cast<dtkMatrixReal *>(m_data)->identifier();
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterEmitter.tpp:    if (dtkTypeInfo<T *>::dtkMatrixRealPointer)
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterEmitter.tpp:        return reinterpret_cast<dtkMatrixReal *>(m_data)->description();
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterReceiver.h:    template <typename T> class dtkMatrix;
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterReceiver.h:    dtkDeprecated::dtkMatrix<double> *matrix(void);
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterVariant.h:    template <typename T> class dtkMatrix;
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterVariant.h:    dtkDeprecated::dtkMatrix<double> *matrix(void);
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterVariant.tpp:    } else if (dtkTypeInfo<T *>::dtkMatrixRealPointer) {
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterVariant.tpp:        d->matrix = reinterpret_cast<dtkMatrixReal *>(data);
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterVariant_p.h:    static const qlonglong dtkMatrixReal_Id       = 515;
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitterVariant_p.h:    static const qlonglong dtkMatrixSquareReal_Id = 516;
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitter_p.h:    template <typename T> class dtkMatrix;
+./dtkComposerSupport/inc/dtkComposerSupport/dtkComposerTransmitter_p.h:    dtkDeprecated::dtkMatrix<double> *matrix;
+./dtkCoreSupport/inc/dtkCoreSupport/dtkGlobal.h:        dtkMatrixRealPointer = false
+./dtkCoreSupport/inc/dtkCoreSupport/dtkGlobal.h:        dtkMatrixRealPointer = false
+./dtkCoreSupport/inc/dtkCoreSupport/dtkGlobal.h:template <typename T> class dtkMatrix;
+./dtkCoreSupport/inc/dtkCoreSupport/dtkGlobal.h:    static yes_type checkObject(dtkMatrix<qreal> *);
+./dtkCoreSupport/inc/dtkCoreSupport/dtkGlobal.h:    static yes_type checkAbstractMatrix(dtkMatrix<qreal> *);
+./dtkCoreSupport/inc/dtkCoreSupport/dtkGlobal.h:        dtkMatrixRealPointer     = (sizeof(checkAbstractMatrix(static_cast<T *>(0))) == sizeof(yes_type))
+./dtkCoreSupport/inc/dtkCoreSupport/dtkVariant.h:template <typename T> class dtkMatrix;
+./dtkCoreSupport/inc/dtkCoreSupport/dtkVariant.h:    /* dtkVariant(const        dtkMatrix<double> *value); */
+./dtkCoreSupport/inc/dtkCoreSupport/dtkVariant.h:    /* dtkVariant(const dtkMatrixSquared<double> *value); */
+./dtkCoreSupport/inc/dtkCoreSupport/dtkVariant.h:    /*     dtkMatrix<double>              *toMatrixReal(void) const; */
+./dtkCoreSupport/inc/dtkCoreSupport/dtkVariant.h:    /*     dtkMatrixSquared<double> *toMatrixSquaedReal(void) const; */
+./dtkCoreSupport/inc/dtkCoreSupport/dtkVariant.h:    dtkMatrix<double> *m_matrix;
+./dtkCoreSupport/inc/dtkCoreSupport/dtkVariant.h:        dtkVariantPrivate<T, dtkTypeInfo<T>::dtkMatrixRealPointer>::setMatrixReal(variant, value);
+./dtkCoreSupport/inc/dtkCoreSupport/dtkVariant.h:        return dtkVariantPrivate<T, dtkTypeInfo<T>::dtkMatrixRealPointer>::matrixRealValue(variant);
+./dtkMath/dtkMath.cpp:#include "dtkMatrix.h"
+./dtkMath/dtkMath.cpp://             dtkMatrixPluginFactory factory;
+./dtkMath/dtkMath.cpp://             dtkMatrixPluginManager manager;
+./dtkMath/dtkMath.cpp://         dtkMatrixPluginFactory& pluginFactory(void)
+./dtkMath/dtkMath.cpp://         dtkMatrixPluginManager& pluginManager(void)
+./dtkMath/dtkMatrix.cpp:/* dtkMatrix.cpp ---
+./dtkMath/dtkMatrix.cpp:#include "dtkMatrix.h"
+./dtkMath/dtkMatrix.cpp:dtkMatrix::dtkMatrix(void)
+./dtkMath/dtkMatrix.cpp:dtkMatrix::~dtkMatrix(void)
+./dtkMath/dtkMatrix.cpp:dtkMatrix& dtkMatrix::operator=(const dtkMatrix& other)
+./dtkMath/dtkMatrix.cpp:        delete const_cast<dtkMatrix *>(&other);
+./dtkMath/dtkMatrix.cpp:dtkMatrix& dtkMatrix::operator+=(const dtkMatrix& other)
+./dtkMath/dtkMatrix.cpp:dtkMatrix& dtkMatrix::operator-=(const dtkMatrix& other)
+./dtkMath/dtkMatrix.cpp:dtkMatrix& dtkMatrix::operator*=(const dtkMatrix& other)
+./dtkMath/dtkMatrix.cpp:dtkMatrix& dtkMatrix::lazyClone(void)
+./dtkMath/dtkMatrix.cpp:dtkMatrix& operator+(const dtkMatrix& lhs, const dtkMatrix& rhs)
+./dtkMath/dtkMatrix.cpp:    dtkMatrix& r = const_cast<dtkMatrix&>(lhs).lazyClone();
+./dtkMath/dtkMatrix.cpp:        delete const_cast<dtkMatrix *>(&rhs);
+./dtkMath/dtkMatrix.cpp:dtkMatrix& operator-(const dtkMatrix& lhs, const dtkMatrix& rhs)
+./dtkMath/dtkMatrix.cpp:    dtkMatrix& r = const_cast<dtkMatrix&>(lhs).lazyClone();
+./dtkMath/dtkMatrix.cpp:        delete const_cast<dtkMatrix *>(&rhs);
+./dtkMath/dtkMatrix.cpp:dtkMatrix& operator*(const dtkMatrix& lhs, const dtkMatrix& rhs)
+./dtkMath/dtkMatrix.cpp:    dtkMatrix& r = const_cast<dtkMatrix&>(lhs).lazyClone();
+./dtkMath/dtkMatrix.cpp:        delete const_cast<dtkMatrix *>(&rhs);
+./dtkMath/dtkMatrix.cpp:QDebug operator<<(QDebug debug, const dtkMatrix *matrix)
+./dtkMath/dtkMatrix.cpp:QDebug operator<<(QDebug debug, const dtkMatrix& matrix)
+./dtkMath/inc/dtkMath/dtkMath:#include "dtkMatrix.h"
+./dtkMath/inc/dtkMath/dtkMath.h:class dtkMatrixPluginFactory;
+./dtkMath/inc/dtkMath/dtkMath.h:class dtkMatrixPluginManager;
+./dtkMath/inc/dtkMath/dtkMath.h:        DTKMATH_EXPORT dtkMatrixPluginFactory& pluginFactory(void);
+./dtkMath/inc/dtkMath/dtkMath.h:        DTKMATH_EXPORT dtkMatrixPluginManager& pluginManager(void);
+./dtkMath/inc/dtkMath/dtkMatrix:#include "dtkMatrix.h"
+./dtkMath/inc/dtkMath/dtkMatrix.h:#include "dtkMatrix_p.h"
+./dtkMath/inc/dtkMath/dtkMatrix.h:class DTKMATH_EXPORT dtkMatrix : public QObject
+./dtkMath/inc/dtkMath/dtkMatrix.h:             dtkMatrix(void);
+./dtkMath/inc/dtkMath/dtkMatrix.h:    virtual ~dtkMatrix(void);
+./dtkMath/inc/dtkMath/dtkMatrix.h:    virtual void       cpy(const dtkMatrix& other) = 0;
+./dtkMath/inc/dtkMath/dtkMatrix.h:    virtual dtkMatrix& cln(void) = 0;
+./dtkMath/inc/dtkMath/dtkMatrix.h:    virtual dtkMatrix& sum(const dtkMatrix& other) = 0;
+./dtkMath/inc/dtkMath/dtkMatrix.h:    virtual dtkMatrix& sub(const dtkMatrix& other) = 0;
+./dtkMath/inc/dtkMath/dtkMatrix.h:    virtual dtkMatrix& mul(const dtkMatrix& other) = 0;
+./dtkMath/inc/dtkMath/dtkMatrix.h:    dtkMatrix& operator =(const dtkMatrix& other);
+./dtkMath/inc/dtkMath/dtkMatrix.h:    dtkMatrix& operator+=(const dtkMatrix& other);
+./dtkMath/inc/dtkMath/dtkMatrix.h:    dtkMatrix& operator-=(const dtkMatrix& other);
+./dtkMath/inc/dtkMath/dtkMatrix.h:    dtkMatrix& operator*=(const dtkMatrix& other);
+./dtkMath/inc/dtkMath/dtkMatrix.h:    dtkMatrix& lazyClone(void);
+./dtkMath/inc/dtkMath/dtkMatrix.h:    friend DTKMATH_EXPORT dtkMatrix& operator+(const dtkMatrix& lhs, const dtkMatrix& rhs);
+./dtkMath/inc/dtkMath/dtkMatrix.h:    friend DTKMATH_EXPORT dtkMatrix& operator-(const dtkMatrix& lhs, const dtkMatrix& rhs);
+./dtkMath/inc/dtkMath/dtkMatrix.h:    friend DTKMATH_EXPORT dtkMatrix& operator*(const dtkMatrix& lhs, const dtkMatrix& rhs);
+./dtkMath/inc/dtkMath/dtkMatrix.h:DTKMATH_EXPORT dtkMatrix& operator+(const dtkMatrix& lhs, const dtkMatrix& rhs);
+./dtkMath/inc/dtkMath/dtkMatrix.h:DTKMATH_EXPORT dtkMatrix& operator-(const dtkMatrix& lhs, const dtkMatrix& rhs);
+./dtkMath/inc/dtkMath/dtkMatrix.h:DTKMATH_EXPORT dtkMatrix& operator*(const dtkMatrix& lhs, const dtkMatrix& rhs);
+./dtkMath/inc/dtkMath/dtkMatrix.h:DTKMATH_EXPORT QDebug operator<<(QDebug debug, const dtkMatrix *matrix);
+./dtkMath/inc/dtkMath/dtkMatrix.h:DTKMATH_EXPORT QDebug operator<<(QDebug debug, const dtkMatrix& matrix);
+./dtkMath/inc/dtkMath/dtkMatrix.h:// DTK_DECLARE_OBJECT(dtkMatrix *)
+./dtkMath/inc/dtkMath/dtkMatrix.h:// DTK_DECLARE_PLUGIN(dtkMatrix, DTKMATH_EXPORT)
+./dtkMath/inc/dtkMath/dtkMatrix.h:// DTK_DECLARE_PLUGIN_FACTORY(dtkMatrix, DTKMATH_EXPORT)
+./dtkMath/inc/dtkMath/dtkMatrix.h:// DTK_DECLARE_PLUGIN_MANAGER(dtkMatrix, DTKMATH_EXPORT)
+./dtkMath/inc/dtkMath/dtkMatrix.h:// dtkMatrix.h ends here
+./dtkMath/inc/dtkMath/dtkMatrix.tpp:/* dtkMatrix.tpp ---
+./dtkMath/inc/dtkMath/dtkMatrix.tpp:template <typename T> dtkMatrixPrivate<T>::dtkMatrixPrivate(void)
+./dtkMath/inc/dtkMath/dtkMatrix.tpp:template <typename T> dtkMatrixPrivate<T>::dtkMatrixPrivate(qulonglong r, qulonglong c)
+./dtkMath/inc/dtkMath/dtkMatrix.tpp:template <typename T> dtkMatrixPrivate<T>::~dtkMatrixPrivate(void)
+./dtkMath/inc/dtkMath/dtkMatrix.tpp:template <typename T> T dtkMatrixPrivate<T>::at(qulonglong i, qulonglong j)
+./dtkMath/inc/dtkMath/dtkMatrix.tpp:template <typename T> void dtkMatrixPrivate<T>::setAt(qulonglong i, qulonglong j, T value)
+./dtkMath/inc/dtkMath/dtkMatrix.tpp:template <typename T> void dtkMatrixPrivate<T>::allocate(qulonglong c, qulonglong r)
+./dtkMath/inc/dtkMath/dtkMatrix_p.h:/* dtkMatrix_p.h ---
+./dtkMath/inc/dtkMath/dtkMatrix_p.h:template <typename T> class dtkMatrixPrivate
+./dtkMath/inc/dtkMath/dtkMatrix_p.h:    dtkMatrixPrivate(void);
+./dtkMath/inc/dtkMath/dtkMatrix_p.h:    dtkMatrixPrivate(qulonglong r, qulonglong c);
+./dtkMath/inc/dtkMath/dtkMatrix_p.h:    virtual ~dtkMatrixPrivate(void);
+./dtkMath/inc/dtkMath/dtkMatrix_p.h:#include "dtkMatrix.tpp"
+./dtkMathSupport/dtkMatrix.cpp:/* dtkMatrix.cpp ---
+./dtkMathSupport/dtkMatrix.cpp:#include "dtkMatrix.h"
+./dtkMathSupport/dtkMatrix.cpp:template <> QByteArray *dtkDeprecated::dtkMatrix<double>::serialize(void)
+./dtkMathSupport/dtkMatrix.cpp:template <> void dtkDeprecated::dtkMatrix<double>::deserialize(const QByteArray& array)
+./dtkMathSupport/inc/dtkMathSupport/dtkMath.tpp:#include "dtkMatrixSquared.h"
+./dtkMathSupport/inc/dtkMathSupport/dtkMath.tpp://! dtkQuaternionFromMatSquared(const dtkMatrixSquared<T> &mat)
+./dtkMathSupport/inc/dtkMathSupport/dtkMath.tpp:template <class T> dtkDeprecated::dtkQuaternion<T> dtkQuaternionFromMatSquared(const dtkDeprecated::dtkMatrixSquared<T>& mat)
+./dtkMathSupport/inc/dtkMathSupport/dtkMath.tpp:    T sclrTmp = dtkDeprecated::dtkMatrixSquaredTrace(mat);
+./dtkMathSupport/inc/dtkMathSupport/dtkMath.tpp:template <class T> dtkDeprecated::dtkMatrixSquared<T> dtkChangeOfBasis(dtkDeprecated::dtkVector3D< dtkDeprecated::dtkVector3D<T> >& from,
+./dtkMathSupport/inc/dtkMathSupport/dtkMath.tpp:    dtkDeprecated::dtkMatrixSquared<T> A( 3 );
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix:#include "dtkMatrix.h"
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:/* dtkMatrix.h ---
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h://! Template class dtkMatrix
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:     * Template class dtkMatrix provides a mathematical matrix with parameterised
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:    template <typename T = double> class dtkMatrix
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        dtkMatrix(void);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        dtkMatrix(unsigned, unsigned);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        dtkMatrix(T *, unsigned, unsigned);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        dtkMatrix(const dtkMatrix&);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        dtkMatrix(const dtkMatrix&, unsigned, unsigned, unsigned, unsigned);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        virtual ~dtkMatrix(void);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        void mapInto(const dtkMatrix&, unsigned, unsigned, unsigned, unsigned);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        dtkMatrix operator +(const dtkMatrix&) const;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        dtkMatrix operator -(const dtkMatrix&) const;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        dtkMatrix operator -(void) const;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        dtkMatrix operator *(const T&) const;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        dtkMatrix operator *(const dtkMatrix&) const;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        dtkMatrix operator /(const T& value) const {
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        dtkMatrix& operator =(const dtkMatrix&);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        dtkMatrix& operator +=(const dtkMatrix&);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        dtkMatrix& operator -=(const dtkMatrix&);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        dtkMatrix& operator *=(const T&);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        dtkMatrix& operator /=(const T& value) {
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        int operator ==(const dtkMatrix&) const;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        int operator !=(const dtkMatrix& mat) const {
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        void storeSum(const dtkMatrix&, const dtkMatrix&);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        void storeProduct(const dtkMatrix&, const dtkMatrix&);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        void storeTranspose(const dtkMatrix&);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:        void storeAtPosition(unsigned, unsigned, const dtkMatrix&);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:     * Templates to create self-dimensioning dtkMatrix classes - or one
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:    template <typename T, unsigned crow, unsigned ccol> class dtkZero< dtkMat<dtkMatrix<T>, crow, ccol> >: public dtkMat<dtkMatrix<T>, crow, ccol>
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:// Implementation of the template class dtkMatrix's methods
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:#include "dtkMatrix.tpp"
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:typedef dtkDeprecated::dtkMatrix<qlonglong> dtkMatrixInteger;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:typedef dtkDeprecated::dtkMatrix<qreal> dtkMatrixReal;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:Q_DECLARE_METATYPE(dtkMatrixReal);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.h:Q_DECLARE_METATYPE(dtkMatrixReal *);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:/* dtkMatrix.tpp ---
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <> DTKMATHSUPPORT_EXPORT QByteArray *dtkMatrix<double>::serialize(void);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <> DTKMATHSUPPORT_EXPORT void dtkMatrix<double>::deserialize(const QByteArray& array);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:// dtkMatrix implementation
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T>::dtkMatrix(void)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T>::dtkMatrix(unsigned crow, unsigned ccol)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T>::dtkMatrix(T *array, unsigned crow, unsigned ccol)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T>::dtkMatrix(const dtkMatrix<T>& mat)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T>::dtkMatrix(const dtkMatrix<T>& mat,
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T>::~dtkMatrix(void)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline void dtkMatrix<T>::initialize(void)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> QString dtkMatrix<T>::identifier(void) const
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:        return QString("dtkMatrix<%1>").arg(typeid(T).name());
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> QString dtkMatrix<T>::description(void) const
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::allocate(unsigned crowInit, unsigned ccolInit)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::deallocate(void)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::fromRawData(T *array, unsigned crowInit, unsigned ccolInit)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::mapInto(const dtkMatrix<T>& mat,
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline int dtkMatrix<T>::getStatus(void) const
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline unsigned dtkMatrix<T>::getRows(void) const
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline unsigned dtkMatrix<T>::getCols(void) const
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T> dtkMatrix<T>::operator +(const dtkMatrix<T>& mat) const
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:        return dtkMatrix<T>( *this ) += mat;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T> dtkMatrix<T>::operator -(const dtkMatrix<T>& mat) const
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:        return dtkMatrix<T>( *this ) -= mat;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T> dtkMatrix<T>::operator -(void) const
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T> dtkMatrix<T>::operator *(const T& value) const
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:        return dtkMatrix<T>( *this ) *= value;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T> dtkMatrix<T>::operator *(const dtkMatrix<T>& mat) const
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:        dtkMatrix matResult( m_crow , mat.m_ccol );
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T>& dtkMatrix<T>::operator =(const dtkMatrix<T>& mat)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T>& dtkMatrix<T>::operator +=(const dtkMatrix<T>& mat)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T>& dtkMatrix<T>::operator -=(const dtkMatrix<T>& mat)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T>& dtkMatrix<T>::operator *=(const T& value)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> int dtkMatrix<T>::operator ==(const dtkMatrix<T>& mat) const
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::storeSum(const dtkMatrix<T>& mat1,
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:            const dtkMatrix<T>& mat2)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::storeProduct(const dtkMatrix<T>& mat1,
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:            const dtkMatrix<T>& mat2)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::storeAtPosition(unsigned irowStart,
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:            const dtkMatrix<T>& mat)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::storeTranspose(const dtkMatrix<T>& mat)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline void dtkMatrix<T>::fill(const T& elemFill)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline void dtkMatrix<T>::makeTranspose(void)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::interchangeRows(unsigned irow1, unsigned irow2)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::multiplyRow(unsigned irow, const T& value)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::addRowToRow(unsigned irowSrc,
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T> operator *(const T& value,
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:            const dtkMatrix<T>& mat)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T> dtkTranspose(const dtkMatrix<T>& mat)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:        dtkMatrix<T> matTranspose( mat.numberOfColumns(), mat.numberOfRows() );
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> std::ostream& operator <<(std::ostream& os, const dtkMatrix<T>& mat)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> QDebug operator<<(QDebug dbg, const dtkMatrix<T>& mat)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> QDebug operator<<(QDebug dbg, const dtkMatrix<T> *mat)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T> QByteArray *dtkMatrix<T>::serialize(void)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrix.tpp:    template <typename T>  void dtkMatrix<T>::deserialize(const QByteArray& array)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared:#include "dtkMatrixSquared.h"
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:/* dtkMatrixSquared.h ---
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:#include "dtkMatrix.h"
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:// dtkMatrixSquared interface
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:    template <typename T = double> class dtkMatrixSquared : public dtkMatrix<T>
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared(void): dtkMatrix<T>() {};
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared(unsigned crowInit): dtkMatrix<T>( crowInit, crowInit) {};
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared(T *array, unsigned crowInit): dtkMatrix<T>(array, crowInit, crowInit) {};
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared(const dtkMatrix<T>& mat): dtkMatrix<T>(mat) {};
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared(const dtkMatrixSquared& matSquared): dtkMatrix<T>(matSquared) {};
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared(const dtkMatrix<T>&, unsigned, unsigned, unsigned);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared(const dtkMatrixSquared<T>&, unsigned, unsigned, unsigned);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        ~dtkMatrixSquared(void) {};
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:            dtkMatrix<T>::allocate(crowInit, crowInit);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:            dtkMatrix<T>::fromRawData(array, crowInit, crowInit);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        void mapInto(const dtkMatrixSquared&, unsigned, unsigned, unsigned);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared operator +(const dtkMatrixSquared&) const;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared operator -(const dtkMatrixSquared&) const;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared operator -(void) const;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared operator *(const T&) const;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared operator *(const dtkMatrixSquared&) const;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared operator /(const T& value) const {
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared operator /(const dtkMatrixSquared&) const;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared& operator =(const dtkMatrixSquared& matSquared);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared& operator +=(const dtkMatrixSquared& matSquared);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared& operator -=(const dtkMatrixSquared& matSquared);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared& operator *=(const T& value);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared& operator *=(const dtkMatrixSquared&);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared& operator /=(const T& value);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared& operator /=(const dtkMatrixSquared&);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        void storeAdjoint(const dtkMatrixSquared&);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:        void storeInverse(const dtkMatrixSquared&);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:    template <typename T, unsigned crow> class dtkUnity< dtkMatSquared<dtkMatrixSquared<T>, crow> >: public dtkMatSquared<dtkMatrixSquared<T>, crow>
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:    template <typename T, unsigned crow> class dtkZero< dtkMatSquared<dtkMatrixSquared<T>, crow> >: public dtkMatSquared<dtkMatrixSquared<T>, crow>
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:// Implementation of the template class dtkMatrixSquared's methods
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:#include "dtkMatrixSquared.tpp"
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:typedef dtkDeprecated::dtkMatrixSquared<qreal> dtkMatrixSquareReal;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:Q_DECLARE_METATYPE(dtkMatrixSquareReal);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.h:Q_DECLARE_METATYPE(dtkMatrixSquareReal *);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:/* dtkMatrixSquared.tpp ---
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:#include "dtkMatrix.h"
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:// dtkMatrixSquared implementation
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>::dtkMatrixSquared(const dtkMatrix<T>& mat,
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:            unsigned irowEnd) : dtkMatrix<T>(mat,
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>::dtkMatrixSquared(const dtkMatrixSquared<T>& matSquared,
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:            unsigned irowEnd) : dtkMatrix<T>(matSquared,
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> QString dtkMatrixSquared<T>::identifier(void) const
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:        return QString("dtkMatrixSquared<%1>").arg(typeid(T).name());
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline void dtkMatrixSquared<T>::mapInto(const dtkMatrixSquared<T>& matSquared,
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:        dtkMatrix<T>::mapInto(matSquared,
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator =(const dtkMatrixSquared<T>& matSquared)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:        return static_cast<dtkMatrixSquared<T> &>(dtkMatrix<T>::operator=(matSquared));
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator +=(const dtkMatrixSquared<T>& matSquared)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:        return static_cast<dtkMatrixSquared<T> &>(dtkMatrix<T>::operator+=(matSquared));
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator -=(const dtkMatrixSquared& matSquared)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:        return static_cast<dtkMatrixSquared<T> &>(dtkMatrix<T>::operator-=(matSquared));
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator *=(const T& value)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:        return static_cast<dtkMatrixSquared<T> &>(dtkMatrix<T>::operator*=(value));
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator *=(const dtkMatrixSquared<T>& matSquared)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator /=(const T& value)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator /=(const dtkMatrixSquared<T>& matSquared)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkMatrixSquared<T>::operator +(const dtkMatrixSquared<T>& matSquared) const
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:        return dtkMatrixSquared<T>(*this) += matSquared;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkMatrixSquared<T>::operator -(const dtkMatrixSquared<T>& matSquared) const
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:        return dtkMatrixSquared<T>(*this) -= matSquared;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkMatrixSquared<T>::operator -(void) const
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkMatrixSquared<T>::operator *(const T& value) const
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:        return dtkMatrixSquared<T>(*this) *= value;
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkMatrixSquared<T>::operator *(const dtkMatrixSquared<T>& matSquared) const
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:        dtkMatrixSquared matSquaredResult(this->size());
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkMatrixSquared<T>::operator /(const dtkMatrixSquared<T>& matSquared) const
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> void dtkMatrixSquared<T>::storeInverse(const dtkMatrixSquared<T>& matSquared)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> void dtkMatrixSquared<T>::makeUnity(void)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> void dtkMatrixSquared<T>::makeAdjoint(void)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:        dtkMatrixSquared matSquaredCopy(*this);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> void dtkMatrixSquared<T>::storeAdjoint(const dtkMatrixSquared<T>& matSquared)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> void dtkMatrixSquared<T>::makeInverse(void)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:        dtkMatrixSquared matSquaredCopy(*this);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T> operator *(const T& value,
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:            const dtkMatrixSquared<T>& matSquared)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkTranspose(const dtkMatrixSquared<T>& matSquared)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:        dtkMatrixSquared<T> matSquaredResult(matSquared.size());
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkAdjoint(const dtkMatrixSquared<T>& matSquared)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:        dtkMatrixSquared<T> matSquaredResult(matSquared);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkInverse(const dtkMatrixSquared<T>& matSquared)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:        dtkMatrixSquared<T> matSquaredResult(matSquared);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> T dtkDeterminant(const dtkMatrixSquared<T>& matSquared)
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:        dtkMatrixSquared<T> matSquaredCopy(matSquared);
+./dtkMathSupport/inc/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> T dtkMatrixSquaredTrace(const dtkMatrixSquared<T>& matSquared)
+./dtkMathSupport/inc/dtkMathSupport/dtkQuaternion.h:        dtkQuaternion(const dtkMatrix<T>& mat): dtkVector<T>(mat) {};
+./dtkMathSupport/inc/dtkMathSupport/dtkQuaternion.h:        dtkQuaternion(const dtkMatrix<T>&, unsigned, unsigned);
+./dtkMathSupport/inc/dtkMathSupport/dtkQuaternion.h:        void mapInto(const dtkMatrix<T>& mat,
+./dtkMathSupport/inc/dtkMathSupport/dtkQuaternion.tpp:    template <class T> inline dtkQuaternion<T>::dtkQuaternion(const dtkMatrix<T>& mat,
+./dtkMathSupport/inc/dtkMathSupport/dtkQuaternion.tpp:    template <class T> inline void dtkQuaternion<T>::mapInto(const dtkMatrix<T>& mat,
+./dtkMathSupport/inc/dtkMathSupport/dtkQuaternion.tpp:        return static_cast<dtkQuaternion&>(dtkMatrix<T>::operator=(qtn));
+./dtkMathSupport/inc/dtkMathSupport/dtkQuaternion.tpp:        return static_cast<dtkQuaternion&>(dtkMatrix<T>::operator+=(qtn));
+./dtkMathSupport/inc/dtkMathSupport/dtkQuaternion.tpp:        return static_cast<dtkQuaternion&>(dtkMatrix<T>::operator-=(qtn));
+./dtkMathSupport/inc/dtkMathSupport/dtkQuaternion.tpp:        return static_cast<dtkQuaternion&>(dtkMatrix<T>::operator*=(value));
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.h:#include "dtkMatrix.h"
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.h:    template <class T = double> class dtkVector : public dtkMatrix<T>
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.h:        dtkVector(void): dtkMatrix<T>() {};
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.h:        dtkVector(unsigned crowInit): dtkMatrix<T>(crowInit, 1) {};
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.h:        dtkVector(T *array, unsigned crowInit): dtkMatrix<T>(array, crowInit, 1) {};
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.h:        dtkVector(const dtkMatrix<T>& mat): dtkMatrix<T>(mat) {};
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.h:        dtkVector(const dtkVector& vec): dtkMatrix<T>(vec) {};
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.h:        dtkVector(const dtkMatrix<T>&, unsigned, unsigned, unsigned);
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.h:            dtkMatrix<T>::allocate(crowInit, 1);
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.h:            dtkMatrix<T>::allocate(crowInit, 1, buffer);
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.h:            dtkMatrix<T>::fromRawData(array, crowInit, 1);
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.h:        void mapInto(const dtkMatrix<T>&, unsigned, unsigned, unsigned);
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.h:            return this->dtkMatrix<T>::operator[](irow)[0];
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.h:            return this->dtkMatrix<T>::operator[](irow)[0];
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.tpp:#include "dtkMatrix.h"
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.tpp:#include "dtkMatrixSquared.h"
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.tpp:            unsigned irowEnd) : dtkMatrix<T>(vec, irowStart, 0, irowEnd, 0)
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.tpp:    template <class T> inline dtkVector<T>::dtkVector(const dtkMatrix<T>& mat,
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.tpp:            unsigned irowEnd) : dtkMatrix<T>(mat, irowStart, icolStart, irowEnd, icolStart)
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.tpp:    template <class T> inline void dtkVector<T>::mapInto(const dtkMatrix<T>& mat,
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.tpp:        dtkMatrix<T>::mapInto(mat, irowStart, icol, irowEnd, icol);
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.tpp:        dtkMatrix<T>::mapInto(vec, irowStart, 0, irowEnd, 0);
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.tpp:        return static_cast<dtkVector&>(dtkMatrix<T>::operator=(vec));
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.tpp:        return static_cast<dtkVector&>(dtkMatrix<T>::operator+=(vec));
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.tpp:        return static_cast<dtkVector&>(dtkMatrix<T>::operator-=(vec));
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.tpp:        return static_cast<dtkVector&>(dtkMatrix<T>::operator*=(value));
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.tpp:        dtkMatrix<T>::storeAtPosition(irowStart, 0, vec);
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.tpp:    template <class T> dtkVector<T> operator *(const dtkMatrix<T>& mat, const dtkVector<T>& vec)
+./dtkMathSupport/inc/dtkMathSupport/dtkVector.tpp:    template <class T> dtkVector<T> operator *(const dtkMatrixSquared<T>& mat, const dtkVector<T>& vec)
+./dtkMathSupport/inc/dtkMathSupport/dtkVector3D.h:#include "dtkMatrixSquared.h"
+./dtkMathSupport/inc/dtkMathSupport/dtkVector3D.h:        dtkVector3D(const dtkMatrix<T>& mat): dtkVector<T>(mat) {};
+./dtkMathSupport/inc/dtkMathSupport/dtkVector3D.h:        dtkVector3D(const dtkMatrix<T>&, unsigned, unsigned);
+./dtkMathSupport/inc/dtkMathSupport/dtkVector3D.h:        void mapInto(const dtkMatrix<T>& mat, unsigned irowStart, unsigned icolStart);
+./dtkMathSupport/inc/dtkMathSupport/dtkVector3D.h:            dtkMatrix<T>::fill(dtkZero<T>());
+./dtkMathSupport/inc/dtkMathSupport/dtkVector3D.tpp:#include "dtkMatrixSquared.h"
+./dtkMathSupport/inc/dtkMathSupport/dtkVector3D.tpp:    template <class T> inline dtkVector3D<T>::dtkVector3D(const dtkMatrix<T>& mat,
+./dtkMathSupport/inc/dtkMathSupport/dtkVector3D.tpp:    template <class T> inline void dtkVector3D<T>::mapInto(const dtkMatrix<T>& mat,
+./dtkMathSupport/inc/dtkMathSupport/dtkVector3D.tpp:        return static_cast<dtkVector3D& >(dtkMatrix<T>::operator=(vec3D));
+./dtkMathSupport/inc/dtkMathSupport/dtkVector3D.tpp:        return static_cast<dtkVector3D& >(dtkMatrix<T>::operator+=(vec3D));
+./dtkMathSupport/inc/dtkMathSupport/dtkVector3D.tpp:        return static_cast<dtkVector3D& >(dtkMatrix<T>::operator-=(vec3D));
+./dtkMathSupport/inc/dtkMathSupport/dtkVector3D.tpp:        return static_cast<dtkVector3D& >(dtkMatrix<T>::operator*=(value));
+./dtkMathSupport/inc/dtkMathSupport/dtkVector3D.tpp:    template <class T> dtkVector3D<T> operator *(const dtkMatrixSquared<T>& mat,
+./dtkVrSupport/dtkVrGestureRecognizer.cpp:    dtkDeprecated::dtkMatrixSquared<double> cam_to_xtk = dtkChangeOfBasis(cam_in_xtk, xtk_in_xtk);
+./dtkVrSupport/dtkVrGestureRecognizer.cpp:    dtkDeprecated::dtkMatrixSquared<double> t = dtkChangeOfBasis(from, to);
+./dtkVrSupport/dtkVrGestureRecognizer.cpp:    // dtkMatrixSquared<double> t = dtkChangeOfBasis(cam_in_xtk, xtk_in_xtk);
+./dtkVrSupport/dtkVrHeadRecognizer.cpp:    dtkDeprecated::dtkMatrixSquared<double> cam_to_xtk = dtkChangeOfBasis(cam_in_xtk, xtk_in_xtk);
+./dtkVrSupport/dtkVrHeadRecognizer.cpp:    dtkDeprecated::dtkMatrixSquared<double> xtk_to_cam = dtkChangeOfBasis(xtk_in_xtk, cam_in_xtk);
+./dtkVrSupport/dtkVrTrackerKinect_p.cpp:                dtkMatrixSquared<double> matrix(3);
+Binary file ./medInria/devdtk/dtk/.git/index matches
+Binary file ./medInria/devdtk/dtk/.git/objects/pack/pack-b0c0c224e05d6b60f9adb45820d2dae0dfe977bc.pack matches
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareReal.cpp:#include <dtkMathSupport/dtkMatrix.h>
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareReal.cpp:    dtkComposerTransmitterReceiver<dtkMatrixSquareReal> receiver_matrix;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareReal.cpp:    dtkComposerTransmitterEmitter<dtkMatrixSquareReal> emitter_matrix;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareReal.cpp:    dtkMatrixSquareReal *matrix;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareReal.cpp:        dtkMatrixSquareReal *matrix = d->receiver_matrix.data();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareReal.cpp:            d->matrix = new dtkMatrixSquareReal();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealExtractor.cpp:    dtkComposerTransmitterReceiver<dtkMatrixSquareReal> receiver_matrix;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealExtractor.cpp:        dtkMatrixSquareReal *matrix = d->receiver_matrix.data();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:#include <dtkMathSupport/dtkMatrix.h>
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:    dtkComposerTransmitterReceiver<dtkMatrixSquareReal> receiver_lhs;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:    dtkComposerTransmitterReceiver<dtkMatrixSquareReal> receiver_rhs;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:    dtkComposerTransmitterEmitter<dtkMatrixSquareReal> emitter_matrix;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:    dtkMatrixSquareReal *matrix;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:    dtkComposerTransmitterReceiver<dtkMatrixSquareReal> receiver_matrix;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:    dtkComposerTransmitterReceiver<dtkMatrixSquareReal> receiver_matrix;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:    dtkComposerTransmitterEmitter<dtkMatrixSquareReal>   emitter_matrix;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:            d->matrix = new dtkMatrixSquareReal();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        const dtkMatrixSquareReal *m_lhs = d->receiver_lhs.constData();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        const dtkMatrixSquareReal *m_rhs = d->receiver_rhs.constData();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:            d->matrix = new dtkMatrixSquareReal();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        const dtkMatrixSquareReal *m_lhs = d->receiver_lhs.constData();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        const dtkMatrixSquareReal *m_rhs = d->receiver_rhs.constData();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:            d->matrix = new dtkMatrixSquareReal();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        const dtkMatrixSquareReal *m_lhs = d->receiver_lhs.constData();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        const dtkMatrixSquareReal *m_rhs = d->receiver_rhs.constData();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        const dtkMatrixSquareReal *matrix = d->receiver_matrix.constData();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        const dtkMatrixSquareReal *matrix = d->receiver_matrix.constData();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        dtkMatrixSquareReal *matrix = d->receiver_matrix.data();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorBinary.cpp:        dtkMatrixSquareReal *matrix = d->receiver_matrix.data();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorUnary.cpp:#include <dtkMathSupport/dtkMatrix.h>
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorUnary.cpp:    dtkComposerTransmitterReceiver<dtkMatrixSquareReal> receiver_matrix;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorUnary.cpp:    dtkComposerTransmitterEmitter<dtkMatrixSquareReal> emitter_matrix;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorUnary.cpp:    dtkComposerTransmitterReceiver<dtkMatrixSquareReal> receiver_matrix;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorUnary.cpp:        dtkMatrixSquareReal *matrix = d->receiver_matrix.data();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorUnary.cpp:        dtkMatrixSquareReal *matrix = d->receiver_matrix.data();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerNodeMatrixSquareRealOperatorUnary.cpp:        d->value = dtkMatrixSquaredTrace(*d->receiver_matrix.data());
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitter.cpp:dtkMatrixReal *dtkComposerTransmitter::matrix(void)
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitter.h:    template <typename T> class dtkMatrix;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitter.h:    virtual dtkDeprecated::dtkMatrix<double> *matrix(void);
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterEmitter.h:    template <typename T> class dtkMatrix;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterEmitter.h:    dtkDeprecated::dtkMatrix<double> *matrix(void);
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterEmitter.tpp:template <typename T> dtkMatrixReal *dtkComposerTransmitterEmitter<T>::matrix(void)
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterEmitter.tpp:    if (dtkTypeInfo<T *>::dtkMatrixRealPointer)
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterEmitter.tpp:        return reinterpret_cast<dtkMatrixReal *>(m_data);
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterEmitter.tpp:    if (dtkTypeInfo<T *>::dtkMatrixRealPointer)
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterEmitter.tpp:        return reinterpret_cast<dtkMatrixReal *>(m_data)->identifier();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterEmitter.tpp:    if (dtkTypeInfo<T *>::dtkMatrixRealPointer)
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterEmitter.tpp:        return reinterpret_cast<dtkMatrixReal *>(m_data)->description();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterReceiver.h:    template <typename T> class dtkMatrix;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterReceiver.h:    dtkDeprecated::dtkMatrix<double> *matrix(void);
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterReceiver.tpp:template <typename T> dtkMatrixReal *dtkComposerTransmitterReceiver<T>::matrix(void)
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterReceiver.tpp:    if (data && dtkTypeInfo<T *>::dtkMatrixRealPointer)
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterReceiver.tpp:        return reinterpret_cast<dtkMatrixReal *>(data);
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:        } else if (data_type == e->dtkMatrixReal_Id) {
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:                    d->matrix = new dtkMatrixReal();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:                this->setData<dtkMatrixReal>(d->matrix);
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:                dtkMatrixReal *m = new dtkMatrixReal();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:        } else if (data_type == e->dtkMatrixSquareReal_Id) {
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:                    d->matrix = new dtkMatrixSquareReal();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:                this->setData<dtkMatrixSquareReal>(reinterpret_cast<dtkMatrixSquareReal *>(d->matrix));
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:                dtkMatrixSquareReal *m = new dtkMatrixSquareReal();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:        } else if (data_type == qMetaTypeId<dtkMatrixReal>() || data_type == qMetaTypeId<dtkMatrixReal *>()) {
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:            stream << e->dtkMatrixReal_Id;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:            tmp_array =  (self) ? this->data<dtkMatrixReal>()->serialize() : v.value<dtkMatrixReal *>()->serialize();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:        } else if (data_type == qMetaTypeId<dtkMatrixSquareReal>() || data_type == qMetaTypeId<dtkMatrixSquareReal *>()) {
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:            stream << e->dtkMatrixSquareReal_Id;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:            tmp_array =  (self) ? this->data<dtkMatrixSquareReal>()->serialize() : v.value<dtkMatrixSquareReal *>()->serialize();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:dtkMatrixReal *dtkComposerTransmitterVariant::matrix(void)
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:    } else if (data_type == qMetaTypeId<dtkMatrixReal>(0)) {
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:        return this->data<dtkMatrixReal>()->description();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:    } else if (data_type == qMetaTypeId<dtkMatrixSquareReal>(0)) {
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.cpp:        return this->data<dtkMatrixSquareReal>()->description();
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.h:    template <typename T> class dtkMatrix;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.h:    dtkDeprecated::dtkMatrix<double> *matrix(void);
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.tpp:    } else if (dtkTypeInfo<T *>::dtkMatrixRealPointer) {
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant.tpp:        d->matrix = reinterpret_cast<dtkMatrixReal *>(data);
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant_p.h:    static const qlonglong dtkMatrixReal_Id       = 515;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitterVariant_p.h:    static const qlonglong dtkMatrixSquareReal_Id = 516;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitter_p.h:    template <typename T> class dtkMatrix;
+./medInria/devdtk/dtk/src/dtkComposerSupport/dtkComposerTransmitter_p.h:    dtkDeprecated::dtkMatrix<double> *matrix;
+./medInria/devdtk/dtk/src/dtkCoreSupport/dtkGlobal.h:        dtkMatrixRealPointer = false
+./medInria/devdtk/dtk/src/dtkCoreSupport/dtkGlobal.h:        dtkMatrixRealPointer = false
+./medInria/devdtk/dtk/src/dtkCoreSupport/dtkGlobal.h:template <typename T> class dtkMatrix;
+./medInria/devdtk/dtk/src/dtkCoreSupport/dtkGlobal.h:    static yes_type checkObject(dtkMatrix<qreal> *);
+./medInria/devdtk/dtk/src/dtkCoreSupport/dtkGlobal.h:    static yes_type checkAbstractMatrix(dtkMatrix<qreal> *);
+./medInria/devdtk/dtk/src/dtkCoreSupport/dtkGlobal.h:        dtkMatrixRealPointer     = (sizeof(checkAbstractMatrix(static_cast<T *>(0))) == sizeof(yes_type))
+./medInria/devdtk/dtk/src/dtkCoreSupport/dtkVariant.h:template <typename T> class dtkMatrix;
+./medInria/devdtk/dtk/src/dtkCoreSupport/dtkVariant.h:    /* dtkVariant(const        dtkMatrix<double> *value); */
+./medInria/devdtk/dtk/src/dtkCoreSupport/dtkVariant.h:    /* dtkVariant(const dtkMatrixSquared<double> *value); */
+./medInria/devdtk/dtk/src/dtkCoreSupport/dtkVariant.h:    /*     dtkMatrix<double>              *toMatrixReal(void) const; */
+./medInria/devdtk/dtk/src/dtkCoreSupport/dtkVariant.h:    /*     dtkMatrixSquared<double> *toMatrixSquaedReal(void) const; */
+./medInria/devdtk/dtk/src/dtkCoreSupport/dtkVariant.h:    dtkMatrix<double> *m_matrix;
+./medInria/devdtk/dtk/src/dtkCoreSupport/dtkVariant.h:        dtkVariantPrivate<T, dtkTypeInfo<T>::dtkMatrixRealPointer>::setMatrixReal(variant, value);
+./medInria/devdtk/dtk/src/dtkCoreSupport/dtkVariant.h:        return dtkVariantPrivate<T, dtkTypeInfo<T>::dtkMatrixRealPointer>::matrixRealValue(variant);
+./medInria/devdtk/dtk/src/dtkMath/CMakeLists.txt:  dtkMatrix
+./medInria/devdtk/dtk/src/dtkMath/CMakeLists.txt:  dtkMatrix.h
+./medInria/devdtk/dtk/src/dtkMath/CMakeLists.txt:  dtkMatrix_p.h
+./medInria/devdtk/dtk/src/dtkMath/CMakeLists.txt:  dtkMatrix.tpp)
+./medInria/devdtk/dtk/src/dtkMath/CMakeLists.txt:  dtkMatrix.cpp)
+./medInria/devdtk/dtk/src/dtkMath/dtkMath:#include "dtkMatrix.h"
+./medInria/devdtk/dtk/src/dtkMath/dtkMath.cpp:#include "dtkMatrix.h"
+./medInria/devdtk/dtk/src/dtkMath/dtkMath.cpp://             dtkMatrixPluginFactory factory;
+./medInria/devdtk/dtk/src/dtkMath/dtkMath.cpp://             dtkMatrixPluginManager manager;
+./medInria/devdtk/dtk/src/dtkMath/dtkMath.cpp://         dtkMatrixPluginFactory& pluginFactory(void)
+./medInria/devdtk/dtk/src/dtkMath/dtkMath.cpp://         dtkMatrixPluginManager& pluginManager(void)
+./medInria/devdtk/dtk/src/dtkMath/dtkMath.h:class dtkMatrixPluginFactory;
+./medInria/devdtk/dtk/src/dtkMath/dtkMath.h:class dtkMatrixPluginManager;
+./medInria/devdtk/dtk/src/dtkMath/dtkMath.h:        DTKMATH_EXPORT dtkMatrixPluginFactory& pluginFactory(void);
+./medInria/devdtk/dtk/src/dtkMath/dtkMath.h:        DTKMATH_EXPORT dtkMatrixPluginManager& pluginManager(void);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix:#include "dtkMatrix.h"
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:/* dtkMatrix.cpp ---
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:#include "dtkMatrix.h"
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:dtkMatrix::dtkMatrix(void)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:dtkMatrix::~dtkMatrix(void)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:dtkMatrix& dtkMatrix::operator=(const dtkMatrix& other)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:        delete const_cast<dtkMatrix *>(&other);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:dtkMatrix& dtkMatrix::operator+=(const dtkMatrix& other)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:dtkMatrix& dtkMatrix::operator-=(const dtkMatrix& other)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:dtkMatrix& dtkMatrix::operator*=(const dtkMatrix& other)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:dtkMatrix& dtkMatrix::lazyClone(void)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:dtkMatrix& operator+(const dtkMatrix& lhs, const dtkMatrix& rhs)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:    dtkMatrix& r = const_cast<dtkMatrix&>(lhs).lazyClone();
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:        delete const_cast<dtkMatrix *>(&rhs);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:dtkMatrix& operator-(const dtkMatrix& lhs, const dtkMatrix& rhs)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:    dtkMatrix& r = const_cast<dtkMatrix&>(lhs).lazyClone();
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:        delete const_cast<dtkMatrix *>(&rhs);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:dtkMatrix& operator*(const dtkMatrix& lhs, const dtkMatrix& rhs)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:    dtkMatrix& r = const_cast<dtkMatrix&>(lhs).lazyClone();
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:        delete const_cast<dtkMatrix *>(&rhs);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:QDebug operator<<(QDebug debug, const dtkMatrix *matrix)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.cpp:QDebug operator<<(QDebug debug, const dtkMatrix& matrix)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:#include "dtkMatrix_p.h"
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:class DTKMATH_EXPORT dtkMatrix : public QObject
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:             dtkMatrix(void);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:    virtual ~dtkMatrix(void);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:    virtual void       cpy(const dtkMatrix& other) = 0;
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:    virtual dtkMatrix& cln(void) = 0;
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:    virtual dtkMatrix& sum(const dtkMatrix& other) = 0;
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:    virtual dtkMatrix& sub(const dtkMatrix& other) = 0;
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:    virtual dtkMatrix& mul(const dtkMatrix& other) = 0;
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:    dtkMatrix& operator =(const dtkMatrix& other);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:    dtkMatrix& operator+=(const dtkMatrix& other);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:    dtkMatrix& operator-=(const dtkMatrix& other);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:    dtkMatrix& operator*=(const dtkMatrix& other);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:    dtkMatrix& lazyClone(void);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:    friend DTKMATH_EXPORT dtkMatrix& operator+(const dtkMatrix& lhs, const dtkMatrix& rhs);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:    friend DTKMATH_EXPORT dtkMatrix& operator-(const dtkMatrix& lhs, const dtkMatrix& rhs);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:    friend DTKMATH_EXPORT dtkMatrix& operator*(const dtkMatrix& lhs, const dtkMatrix& rhs);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:DTKMATH_EXPORT dtkMatrix& operator+(const dtkMatrix& lhs, const dtkMatrix& rhs);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:DTKMATH_EXPORT dtkMatrix& operator-(const dtkMatrix& lhs, const dtkMatrix& rhs);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:DTKMATH_EXPORT dtkMatrix& operator*(const dtkMatrix& lhs, const dtkMatrix& rhs);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:DTKMATH_EXPORT QDebug operator<<(QDebug debug, const dtkMatrix *matrix);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:DTKMATH_EXPORT QDebug operator<<(QDebug debug, const dtkMatrix& matrix);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:// DTK_DECLARE_OBJECT(dtkMatrix *)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:// DTK_DECLARE_PLUGIN(dtkMatrix, DTKMATH_EXPORT)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:// DTK_DECLARE_PLUGIN_FACTORY(dtkMatrix, DTKMATH_EXPORT)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:// DTK_DECLARE_PLUGIN_MANAGER(dtkMatrix, DTKMATH_EXPORT)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.h:// dtkMatrix.h ends here
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.tpp:/* dtkMatrix.tpp ---
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.tpp:template <typename T> dtkMatrixPrivate<T>::dtkMatrixPrivate(void)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.tpp:template <typename T> dtkMatrixPrivate<T>::dtkMatrixPrivate(qulonglong r, qulonglong c)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.tpp:template <typename T> dtkMatrixPrivate<T>::~dtkMatrixPrivate(void)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.tpp:template <typename T> T dtkMatrixPrivate<T>::at(qulonglong i, qulonglong j)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.tpp:template <typename T> void dtkMatrixPrivate<T>::setAt(qulonglong i, qulonglong j, T value)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix.tpp:template <typename T> void dtkMatrixPrivate<T>::allocate(qulonglong c, qulonglong r)
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix_p.h:/* dtkMatrix_p.h ---
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix_p.h:template <typename T> class dtkMatrixPrivate
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix_p.h:    dtkMatrixPrivate(void);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix_p.h:    dtkMatrixPrivate(qulonglong r, qulonglong c);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix_p.h:    virtual ~dtkMatrixPrivate(void);
+./medInria/devdtk/dtk/src/dtkMath/dtkMatrix_p.h:#include "dtkMatrix.tpp"
+./medInria/devdtk/dtk/src/dtkMathSupport/dtkMatrix.cpp:/* dtkMatrix.cpp ---
+./medInria/devdtk/dtk/src/dtkMathSupport/dtkMatrix.cpp:#include "dtkMatrix.h"
+./medInria/devdtk/dtk/src/dtkMathSupport/dtkMatrix.cpp:template <> QByteArray *dtkDeprecated::dtkMatrix<double>::serialize(void)
+./medInria/devdtk/dtk/src/dtkMathSupport/dtkMatrix.cpp:template <> void dtkDeprecated::dtkMatrix<double>::deserialize(const QByteArray& array)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/CMakeLists.txt:  dtkMatrix.h
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/CMakeLists.txt:  dtkMatrix.tpp
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/CMakeLists.txt:  dtkMatrixSquared.h
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/CMakeLists.txt:  dtkMatrixSquared.tpp
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/CMakeLists.txt:  dtkMatrix.cpp)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMath.tpp:#include "dtkMatrixSquared.h"
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMath.tpp://! dtkQuaternionFromMatSquared(const dtkMatrixSquared<T> &mat)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMath.tpp:template <class T> dtkDeprecated::dtkQuaternion<T> dtkQuaternionFromMatSquared(const dtkDeprecated::dtkMatrixSquared<T>& mat)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMath.tpp:    T sclrTmp = dtkDeprecated::dtkMatrixSquaredTrace(mat);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMath.tpp:template <class T> dtkDeprecated::dtkMatrixSquared<T> dtkChangeOfBasis(dtkDeprecated::dtkVector3D< dtkDeprecated::dtkVector3D<T> >& from,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMath.tpp:    dtkDeprecated::dtkMatrixSquared<T> A( 3 );
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix:#include "dtkMatrix.h"
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:/* dtkMatrix.h ---
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h://! Template class dtkMatrix
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:     * Template class dtkMatrix provides a mathematical matrix with parameterised
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:    template <typename T = double> class dtkMatrix
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        dtkMatrix(void);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        dtkMatrix(unsigned, unsigned);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        dtkMatrix(T *, unsigned, unsigned);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        dtkMatrix(const dtkMatrix&);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        dtkMatrix(const dtkMatrix&, unsigned, unsigned, unsigned, unsigned);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        virtual ~dtkMatrix(void);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        void mapInto(const dtkMatrix&, unsigned, unsigned, unsigned, unsigned);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        dtkMatrix operator +(const dtkMatrix&) const;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        dtkMatrix operator -(const dtkMatrix&) const;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        dtkMatrix operator -(void) const;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        dtkMatrix operator *(const T&) const;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        dtkMatrix operator *(const dtkMatrix&) const;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        dtkMatrix operator /(const T& value) const {
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        dtkMatrix& operator =(const dtkMatrix&);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        dtkMatrix& operator +=(const dtkMatrix&);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        dtkMatrix& operator -=(const dtkMatrix&);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        dtkMatrix& operator *=(const T&);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        dtkMatrix& operator /=(const T& value) {
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        int operator ==(const dtkMatrix&) const;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        int operator !=(const dtkMatrix& mat) const {
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        void storeSum(const dtkMatrix&, const dtkMatrix&);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        void storeProduct(const dtkMatrix&, const dtkMatrix&);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        void storeTranspose(const dtkMatrix&);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:        void storeAtPosition(unsigned, unsigned, const dtkMatrix&);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:     * Templates to create self-dimensioning dtkMatrix classes - or one
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:    template <typename T, unsigned crow, unsigned ccol> class dtkZero< dtkMat<dtkMatrix<T>, crow, ccol> >: public dtkMat<dtkMatrix<T>, crow, ccol>
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:// Implementation of the template class dtkMatrix's methods
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:#include "dtkMatrix.tpp"
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:typedef dtkDeprecated::dtkMatrix<qlonglong> dtkMatrixInteger;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:typedef dtkDeprecated::dtkMatrix<qreal> dtkMatrixReal;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:Q_DECLARE_METATYPE(dtkMatrixReal);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.h:Q_DECLARE_METATYPE(dtkMatrixReal *);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:/* dtkMatrix.tpp ---
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <> DTKMATHSUPPORT_EXPORT QByteArray *dtkMatrix<double>::serialize(void);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <> DTKMATHSUPPORT_EXPORT void dtkMatrix<double>::deserialize(const QByteArray& array);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:// dtkMatrix implementation
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T>::dtkMatrix(void)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T>::dtkMatrix(unsigned crow, unsigned ccol)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T>::dtkMatrix(T *array, unsigned crow, unsigned ccol)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T>::dtkMatrix(const dtkMatrix<T>& mat)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T>::dtkMatrix(const dtkMatrix<T>& mat,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T>::~dtkMatrix(void)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> inline void dtkMatrix<T>::initialize(void)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> QString dtkMatrix<T>::identifier(void) const
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:        return QString("dtkMatrix<%1>").arg(typeid(T).name());
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> QString dtkMatrix<T>::description(void) const
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::allocate(unsigned crowInit, unsigned ccolInit)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::deallocate(void)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::fromRawData(T *array, unsigned crowInit, unsigned ccolInit)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::mapInto(const dtkMatrix<T>& mat,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> inline int dtkMatrix<T>::getStatus(void) const
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> inline unsigned dtkMatrix<T>::getRows(void) const
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> inline unsigned dtkMatrix<T>::getCols(void) const
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> dtkMatrix<T> dtkMatrix<T>::operator +(const dtkMatrix<T>& mat) const
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:        return dtkMatrix<T>( *this ) += mat;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> dtkMatrix<T> dtkMatrix<T>::operator -(const dtkMatrix<T>& mat) const
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:        return dtkMatrix<T>( *this ) -= mat;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> dtkMatrix<T> dtkMatrix<T>::operator -(void) const
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> dtkMatrix<T> dtkMatrix<T>::operator *(const T& value) const
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:        return dtkMatrix<T>( *this ) *= value;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> dtkMatrix<T> dtkMatrix<T>::operator *(const dtkMatrix<T>& mat) const
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:        dtkMatrix matResult( m_crow , mat.m_ccol );
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> dtkMatrix<T>& dtkMatrix<T>::operator =(const dtkMatrix<T>& mat)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> dtkMatrix<T>& dtkMatrix<T>::operator +=(const dtkMatrix<T>& mat)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> dtkMatrix<T>& dtkMatrix<T>::operator -=(const dtkMatrix<T>& mat)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> dtkMatrix<T>& dtkMatrix<T>::operator *=(const T& value)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> int dtkMatrix<T>::operator ==(const dtkMatrix<T>& mat) const
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::storeSum(const dtkMatrix<T>& mat1,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:            const dtkMatrix<T>& mat2)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::storeProduct(const dtkMatrix<T>& mat1,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:            const dtkMatrix<T>& mat2)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::storeAtPosition(unsigned irowStart,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:            const dtkMatrix<T>& mat)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::storeTranspose(const dtkMatrix<T>& mat)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> inline void dtkMatrix<T>::fill(const T& elemFill)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> inline void dtkMatrix<T>::makeTranspose(void)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::interchangeRows(unsigned irow1, unsigned irow2)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::multiplyRow(unsigned irow, const T& value)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::addRowToRow(unsigned irowSrc,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T> operator *(const T& value,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:            const dtkMatrix<T>& mat)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> dtkMatrix<T> dtkTranspose(const dtkMatrix<T>& mat)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:        dtkMatrix<T> matTranspose( mat.numberOfColumns(), mat.numberOfRows() );
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> std::ostream& operator <<(std::ostream& os, const dtkMatrix<T>& mat)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> QDebug operator<<(QDebug dbg, const dtkMatrix<T>& mat)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> QDebug operator<<(QDebug dbg, const dtkMatrix<T> *mat)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T> QByteArray *dtkMatrix<T>::serialize(void)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrix.tpp:    template <typename T>  void dtkMatrix<T>::deserialize(const QByteArray& array)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared:#include "dtkMatrixSquared.h"
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:/* dtkMatrixSquared.h ---
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:#include "dtkMatrix.h"
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:// dtkMatrixSquared interface
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:    template <typename T = double> class dtkMatrixSquared : public dtkMatrix<T>
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared(void): dtkMatrix<T>() {};
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared(unsigned crowInit): dtkMatrix<T>( crowInit, crowInit) {};
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared(T *array, unsigned crowInit): dtkMatrix<T>(array, crowInit, crowInit) {};
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared(const dtkMatrix<T>& mat): dtkMatrix<T>(mat) {};
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared(const dtkMatrixSquared& matSquared): dtkMatrix<T>(matSquared) {};
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared(const dtkMatrix<T>&, unsigned, unsigned, unsigned);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared(const dtkMatrixSquared<T>&, unsigned, unsigned, unsigned);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        ~dtkMatrixSquared(void) {};
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:            dtkMatrix<T>::allocate(crowInit, crowInit);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:            dtkMatrix<T>::fromRawData(array, crowInit, crowInit);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        void mapInto(const dtkMatrixSquared&, unsigned, unsigned, unsigned);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared operator +(const dtkMatrixSquared&) const;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared operator -(const dtkMatrixSquared&) const;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared operator -(void) const;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared operator *(const T&) const;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared operator *(const dtkMatrixSquared&) const;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared operator /(const T& value) const {
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared operator /(const dtkMatrixSquared&) const;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared& operator =(const dtkMatrixSquared& matSquared);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared& operator +=(const dtkMatrixSquared& matSquared);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared& operator -=(const dtkMatrixSquared& matSquared);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared& operator *=(const T& value);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared& operator *=(const dtkMatrixSquared&);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared& operator /=(const T& value);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        dtkMatrixSquared& operator /=(const dtkMatrixSquared&);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        void storeAdjoint(const dtkMatrixSquared&);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:        void storeInverse(const dtkMatrixSquared&);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:    template <typename T, unsigned crow> class dtkUnity< dtkMatSquared<dtkMatrixSquared<T>, crow> >: public dtkMatSquared<dtkMatrixSquared<T>, crow>
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:    template <typename T, unsigned crow> class dtkZero< dtkMatSquared<dtkMatrixSquared<T>, crow> >: public dtkMatSquared<dtkMatrixSquared<T>, crow>
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:// Implementation of the template class dtkMatrixSquared's methods
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:#include "dtkMatrixSquared.tpp"
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:typedef dtkDeprecated::dtkMatrixSquared<qreal> dtkMatrixSquareReal;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:Q_DECLARE_METATYPE(dtkMatrixSquareReal);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.h:Q_DECLARE_METATYPE(dtkMatrixSquareReal *);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:/* dtkMatrixSquared.tpp ---
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:#include "dtkMatrix.h"
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:// dtkMatrixSquared implementation
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>::dtkMatrixSquared(const dtkMatrix<T>& mat,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:            unsigned irowEnd) : dtkMatrix<T>(mat,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>::dtkMatrixSquared(const dtkMatrixSquared<T>& matSquared,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:            unsigned irowEnd) : dtkMatrix<T>(matSquared,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> QString dtkMatrixSquared<T>::identifier(void) const
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:        return QString("dtkMatrixSquared<%1>").arg(typeid(T).name());
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> inline void dtkMatrixSquared<T>::mapInto(const dtkMatrixSquared<T>& matSquared,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:        dtkMatrix<T>::mapInto(matSquared,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator =(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:        return static_cast<dtkMatrixSquared<T> &>(dtkMatrix<T>::operator=(matSquared));
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator +=(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:        return static_cast<dtkMatrixSquared<T> &>(dtkMatrix<T>::operator+=(matSquared));
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator -=(const dtkMatrixSquared& matSquared)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:        return static_cast<dtkMatrixSquared<T> &>(dtkMatrix<T>::operator-=(matSquared));
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator *=(const T& value)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:        return static_cast<dtkMatrixSquared<T> &>(dtkMatrix<T>::operator*=(value));
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator *=(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator /=(const T& value)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator /=(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkMatrixSquared<T>::operator +(const dtkMatrixSquared<T>& matSquared) const
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:        return dtkMatrixSquared<T>(*this) += matSquared;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkMatrixSquared<T>::operator -(const dtkMatrixSquared<T>& matSquared) const
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:        return dtkMatrixSquared<T>(*this) -= matSquared;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkMatrixSquared<T>::operator -(void) const
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkMatrixSquared<T>::operator *(const T& value) const
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:        return dtkMatrixSquared<T>(*this) *= value;
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkMatrixSquared<T>::operator *(const dtkMatrixSquared<T>& matSquared) const
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:        dtkMatrixSquared matSquaredResult(this->size());
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkMatrixSquared<T>::operator /(const dtkMatrixSquared<T>& matSquared) const
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> void dtkMatrixSquared<T>::storeInverse(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> void dtkMatrixSquared<T>::makeUnity(void)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> void dtkMatrixSquared<T>::makeAdjoint(void)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:        dtkMatrixSquared matSquaredCopy(*this);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> void dtkMatrixSquared<T>::storeAdjoint(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> void dtkMatrixSquared<T>::makeInverse(void)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:        dtkMatrixSquared matSquaredCopy(*this);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T> operator *(const T& value,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:            const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkTranspose(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:        dtkMatrixSquared<T> matSquaredResult(matSquared.size());
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkAdjoint(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:        dtkMatrixSquared<T> matSquaredResult(matSquared);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkInverse(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:        dtkMatrixSquared<T> matSquaredResult(matSquared);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> T dtkDeterminant(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:        dtkMatrixSquared<T> matSquaredCopy(matSquared);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkMatrixSquared.tpp:    template <typename T> T dtkMatrixSquaredTrace(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkQuaternion.h:        dtkQuaternion(const dtkMatrix<T>& mat): dtkVector<T>(mat) {};
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkQuaternion.h:        dtkQuaternion(const dtkMatrix<T>&, unsigned, unsigned);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkQuaternion.h:        void mapInto(const dtkMatrix<T>& mat,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkQuaternion.tpp:    template <class T> inline dtkQuaternion<T>::dtkQuaternion(const dtkMatrix<T>& mat,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkQuaternion.tpp:    template <class T> inline void dtkQuaternion<T>::mapInto(const dtkMatrix<T>& mat,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkQuaternion.tpp:        return static_cast<dtkQuaternion&>(dtkMatrix<T>::operator=(qtn));
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkQuaternion.tpp:        return static_cast<dtkQuaternion&>(dtkMatrix<T>::operator+=(qtn));
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkQuaternion.tpp:        return static_cast<dtkQuaternion&>(dtkMatrix<T>::operator-=(qtn));
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkQuaternion.tpp:        return static_cast<dtkQuaternion&>(dtkMatrix<T>::operator*=(value));
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.h:#include "dtkMatrix.h"
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.h:    template <class T = double> class dtkVector : public dtkMatrix<T>
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.h:        dtkVector(void): dtkMatrix<T>() {};
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.h:        dtkVector(unsigned crowInit): dtkMatrix<T>(crowInit, 1) {};
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.h:        dtkVector(T *array, unsigned crowInit): dtkMatrix<T>(array, crowInit, 1) {};
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.h:        dtkVector(const dtkMatrix<T>& mat): dtkMatrix<T>(mat) {};
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.h:        dtkVector(const dtkVector& vec): dtkMatrix<T>(vec) {};
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.h:        dtkVector(const dtkMatrix<T>&, unsigned, unsigned, unsigned);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.h:            dtkMatrix<T>::allocate(crowInit, 1);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.h:            dtkMatrix<T>::allocate(crowInit, 1, buffer);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.h:            dtkMatrix<T>::fromRawData(array, crowInit, 1);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.h:        void mapInto(const dtkMatrix<T>&, unsigned, unsigned, unsigned);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.h:            return this->dtkMatrix<T>::operator[](irow)[0];
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.h:            return this->dtkMatrix<T>::operator[](irow)[0];
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.tpp:#include "dtkMatrix.h"
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.tpp:#include "dtkMatrixSquared.h"
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.tpp:            unsigned irowEnd) : dtkMatrix<T>(vec, irowStart, 0, irowEnd, 0)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.tpp:    template <class T> inline dtkVector<T>::dtkVector(const dtkMatrix<T>& mat,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.tpp:            unsigned irowEnd) : dtkMatrix<T>(mat, irowStart, icolStart, irowEnd, icolStart)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.tpp:    template <class T> inline void dtkVector<T>::mapInto(const dtkMatrix<T>& mat,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.tpp:        dtkMatrix<T>::mapInto(mat, irowStart, icol, irowEnd, icol);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.tpp:        dtkMatrix<T>::mapInto(vec, irowStart, 0, irowEnd, 0);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.tpp:        return static_cast<dtkVector&>(dtkMatrix<T>::operator=(vec));
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.tpp:        return static_cast<dtkVector&>(dtkMatrix<T>::operator+=(vec));
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.tpp:        return static_cast<dtkVector&>(dtkMatrix<T>::operator-=(vec));
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.tpp:        return static_cast<dtkVector&>(dtkMatrix<T>::operator*=(value));
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.tpp:        dtkMatrix<T>::storeAtPosition(irowStart, 0, vec);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.tpp:    template <class T> dtkVector<T> operator *(const dtkMatrix<T>& mat, const dtkVector<T>& vec)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector.tpp:    template <class T> dtkVector<T> operator *(const dtkMatrixSquared<T>& mat, const dtkVector<T>& vec)
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector3D.h:#include "dtkMatrixSquared.h"
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector3D.h:        dtkVector3D(const dtkMatrix<T>& mat): dtkVector<T>(mat) {};
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector3D.h:        dtkVector3D(const dtkMatrix<T>&, unsigned, unsigned);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector3D.h:        void mapInto(const dtkMatrix<T>& mat, unsigned irowStart, unsigned icolStart);
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector3D.h:            dtkMatrix<T>::fill(dtkZero<T>());
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector3D.tpp:#include "dtkMatrixSquared.h"
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector3D.tpp:    template <class T> inline dtkVector3D<T>::dtkVector3D(const dtkMatrix<T>& mat,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector3D.tpp:    template <class T> inline void dtkVector3D<T>::mapInto(const dtkMatrix<T>& mat,
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector3D.tpp:        return static_cast<dtkVector3D& >(dtkMatrix<T>::operator=(vec3D));
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector3D.tpp:        return static_cast<dtkVector3D& >(dtkMatrix<T>::operator+=(vec3D));
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector3D.tpp:        return static_cast<dtkVector3D& >(dtkMatrix<T>::operator-=(vec3D));
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector3D.tpp:        return static_cast<dtkVector3D& >(dtkMatrix<T>::operator*=(value));
+./medInria/devdtk/dtk/src/dtkMathSupport/inc/dtkVector3D.tpp:    template <class T> dtkVector3D<T> operator *(const dtkMatrixSquared<T>& mat,
+./medInria/devdtk/dtk/src/dtkVrSupport/dtkVrGestureRecognizer.cpp:    dtkDeprecated::dtkMatrixSquared<double> cam_to_xtk = dtkChangeOfBasis(cam_in_xtk, xtk_in_xtk);
+./medInria/devdtk/dtk/src/dtkVrSupport/dtkVrGestureRecognizer.cpp:    dtkDeprecated::dtkMatrixSquared<double> t = dtkChangeOfBasis(from, to);
+./medInria/devdtk/dtk/src/dtkVrSupport/dtkVrGestureRecognizer.cpp:    // dtkMatrixSquared<double> t = dtkChangeOfBasis(cam_in_xtk, xtk_in_xtk);
+./medInria/devdtk/dtk/src/dtkVrSupport/dtkVrHeadRecognizer.cpp:    dtkDeprecated::dtkMatrixSquared<double> cam_to_xtk = dtkChangeOfBasis(cam_in_xtk, xtk_in_xtk);
+./medInria/devdtk/dtk/src/dtkVrSupport/dtkVrHeadRecognizer.cpp:    dtkDeprecated::dtkMatrixSquared<double> xtk_to_cam = dtkChangeOfBasis(xtk_in_xtk, cam_in_xtk);
+./medInria/devdtk/dtk/src/dtkVrSupport/dtkVrTrackerKinect_p.cpp:                dtkMatrixSquared<double> matrix(3);
+./medInria/devdtk/extra-includes/dtk/src/dtkCoreSupport/dtkGlobal.h:        dtkMatrixRealPointer = false
+./medInria/devdtk/extra-includes/dtk/src/dtkCoreSupport/dtkGlobal.h:        dtkMatrixRealPointer = false
+./medInria/devdtk/extra-includes/dtk/src/dtkCoreSupport/dtkGlobal.h:template <typename T> class dtkMatrix;
+./medInria/devdtk/extra-includes/dtk/src/dtkCoreSupport/dtkGlobal.h:    static yes_type checkObject(dtkMatrix<qreal> *);
+./medInria/devdtk/extra-includes/dtk/src/dtkCoreSupport/dtkGlobal.h:    static yes_type checkAbstractMatrix(dtkMatrix<qreal> *);
+./medInria/devdtk/extra-includes/dtk/src/dtkCoreSupport/dtkGlobal.h:        dtkMatrixRealPointer     = (sizeof(checkAbstractMatrix(static_cast<T *>(0))) == sizeof(yes_type))
+./medInria/devdtk/extra-includes/dtk/src/dtkCoreSupport/dtkVariant.h:template <typename T> class dtkMatrix;
+./medInria/devdtk/extra-includes/dtk/src/dtkCoreSupport/dtkVariant.h:    /* dtkVariant(const        dtkMatrix<double> *value); */
+./medInria/devdtk/extra-includes/dtk/src/dtkCoreSupport/dtkVariant.h:    /* dtkVariant(const dtkMatrixSquared<double> *value); */
+./medInria/devdtk/extra-includes/dtk/src/dtkCoreSupport/dtkVariant.h:    /*     dtkMatrix<double>              *toMatrixReal(void) const; */
+./medInria/devdtk/extra-includes/dtk/src/dtkCoreSupport/dtkVariant.h:    /*     dtkMatrixSquared<double> *toMatrixSquaedReal(void) const; */
+./medInria/devdtk/extra-includes/dtk/src/dtkCoreSupport/dtkVariant.h:    dtkMatrix<double> *m_matrix;
+./medInria/devdtk/extra-includes/dtk/src/dtkCoreSupport/dtkVariant.h:        dtkVariantPrivate<T, dtkTypeInfo<T>::dtkMatrixRealPointer>::setMatrixReal(variant, value);
+./medInria/devdtk/extra-includes/dtk/src/dtkCoreSupport/dtkVariant.h:        return dtkVariantPrivate<T, dtkTypeInfo<T>::dtkMatrixRealPointer>::matrixRealValue(variant);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMath:#include "dtkMatrix.h"
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMath.h:class dtkMatrixPluginFactory;
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMath.h:class dtkMatrixPluginManager;
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMath.h:        DTKMATH_EXPORT dtkMatrixPluginFactory& pluginFactory(void);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMath.h:        DTKMATH_EXPORT dtkMatrixPluginManager& pluginManager(void);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix:#include "dtkMatrix.h"
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:#include "dtkMatrix_p.h"
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:class DTKMATH_EXPORT dtkMatrix : public QObject
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:             dtkMatrix(void);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:    virtual ~dtkMatrix(void);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:    virtual void       cpy(const dtkMatrix& other) = 0;
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:    virtual dtkMatrix& cln(void) = 0;
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:    virtual dtkMatrix& sum(const dtkMatrix& other) = 0;
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:    virtual dtkMatrix& sub(const dtkMatrix& other) = 0;
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:    virtual dtkMatrix& mul(const dtkMatrix& other) = 0;
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:    dtkMatrix& operator =(const dtkMatrix& other);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:    dtkMatrix& operator+=(const dtkMatrix& other);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:    dtkMatrix& operator-=(const dtkMatrix& other);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:    dtkMatrix& operator*=(const dtkMatrix& other);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:    dtkMatrix& lazyClone(void);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:    friend DTKMATH_EXPORT dtkMatrix& operator+(const dtkMatrix& lhs, const dtkMatrix& rhs);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:    friend DTKMATH_EXPORT dtkMatrix& operator-(const dtkMatrix& lhs, const dtkMatrix& rhs);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:    friend DTKMATH_EXPORT dtkMatrix& operator*(const dtkMatrix& lhs, const dtkMatrix& rhs);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:DTKMATH_EXPORT dtkMatrix& operator+(const dtkMatrix& lhs, const dtkMatrix& rhs);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:DTKMATH_EXPORT dtkMatrix& operator-(const dtkMatrix& lhs, const dtkMatrix& rhs);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:DTKMATH_EXPORT dtkMatrix& operator*(const dtkMatrix& lhs, const dtkMatrix& rhs);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:DTKMATH_EXPORT QDebug operator<<(QDebug debug, const dtkMatrix *matrix);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:DTKMATH_EXPORT QDebug operator<<(QDebug debug, const dtkMatrix& matrix);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:// DTK_DECLARE_OBJECT(dtkMatrix *)
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:// DTK_DECLARE_PLUGIN(dtkMatrix, DTKMATH_EXPORT)
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:// DTK_DECLARE_PLUGIN_FACTORY(dtkMatrix, DTKMATH_EXPORT)
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:// DTK_DECLARE_PLUGIN_MANAGER(dtkMatrix, DTKMATH_EXPORT)
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.h:// dtkMatrix.h ends here
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.tpp:/* dtkMatrix.tpp ---
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.tpp:template <typename T> dtkMatrixPrivate<T>::dtkMatrixPrivate(void)
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.tpp:template <typename T> dtkMatrixPrivate<T>::dtkMatrixPrivate(qulonglong r, qulonglong c)
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.tpp:template <typename T> dtkMatrixPrivate<T>::~dtkMatrixPrivate(void)
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.tpp:template <typename T> T dtkMatrixPrivate<T>::at(qulonglong i, qulonglong j)
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.tpp:template <typename T> void dtkMatrixPrivate<T>::setAt(qulonglong i, qulonglong j, T value)
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix.tpp:template <typename T> void dtkMatrixPrivate<T>::allocate(qulonglong c, qulonglong r)
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix_p.h:/* dtkMatrix_p.h ---
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix_p.h:template <typename T> class dtkMatrixPrivate
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix_p.h:    dtkMatrixPrivate(void);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix_p.h:    dtkMatrixPrivate(qulonglong r, qulonglong c);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix_p.h:    virtual ~dtkMatrixPrivate(void);
+./medInria/devdtk/extra-includes/dtk/src/dtkMath/dtkMatrix_p.h:#include "dtkMatrix.tpp"
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:/* dtkMatrix.h ---
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h://! Template class dtkMatrix
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:     * Template class dtkMatrix provides a mathematical matrix with parameterised
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:    template <typename T = double> class dtkMatrix
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        dtkMatrix(void);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        dtkMatrix(unsigned, unsigned);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        dtkMatrix(T *, unsigned, unsigned);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        dtkMatrix(const dtkMatrix&);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        dtkMatrix(const dtkMatrix&, unsigned, unsigned, unsigned, unsigned);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        virtual ~dtkMatrix(void);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        void mapInto(const dtkMatrix&, unsigned, unsigned, unsigned, unsigned);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        dtkMatrix operator +(const dtkMatrix&) const;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        dtkMatrix operator -(const dtkMatrix&) const;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        dtkMatrix operator -(void) const;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        dtkMatrix operator *(const T&) const;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        dtkMatrix operator *(const dtkMatrix&) const;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        dtkMatrix operator /(const T& value) const {
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        dtkMatrix& operator =(const dtkMatrix&);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        dtkMatrix& operator +=(const dtkMatrix&);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        dtkMatrix& operator -=(const dtkMatrix&);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        dtkMatrix& operator *=(const T&);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        dtkMatrix& operator /=(const T& value) {
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        int operator ==(const dtkMatrix&) const;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        int operator !=(const dtkMatrix& mat) const {
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        void storeSum(const dtkMatrix&, const dtkMatrix&);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        void storeProduct(const dtkMatrix&, const dtkMatrix&);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        void storeTranspose(const dtkMatrix&);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:        void storeAtPosition(unsigned, unsigned, const dtkMatrix&);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:     * Templates to create self-dimensioning dtkMatrix classes - or one
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:    template <typename T, unsigned crow, unsigned ccol> class dtkZero< dtkMat<dtkMatrix<T>, crow, ccol> >: public dtkMat<dtkMatrix<T>, crow, ccol>
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:// Implementation of the template class dtkMatrix's methods
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:#include "dtkMatrix.tpp"
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:typedef dtkDeprecated::dtkMatrix<qlonglong> dtkMatrixInteger;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:typedef dtkDeprecated::dtkMatrix<qreal> dtkMatrixReal;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:Q_DECLARE_METATYPE(dtkMatrixReal);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.h:Q_DECLARE_METATYPE(dtkMatrixReal *);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:/* dtkMatrix.tpp ---
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <> DTKMATHSUPPORT_EXPORT QByteArray *dtkMatrix<double>::serialize(void);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <> DTKMATHSUPPORT_EXPORT void dtkMatrix<double>::deserialize(const QByteArray& array);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:// dtkMatrix implementation
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T>::dtkMatrix(void)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T>::dtkMatrix(unsigned crow, unsigned ccol)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T>::dtkMatrix(T *array, unsigned crow, unsigned ccol)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T>::dtkMatrix(const dtkMatrix<T>& mat)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T>::dtkMatrix(const dtkMatrix<T>& mat,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T>::~dtkMatrix(void)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline void dtkMatrix<T>::initialize(void)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> QString dtkMatrix<T>::identifier(void) const
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:        return QString("dtkMatrix<%1>").arg(typeid(T).name());
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> QString dtkMatrix<T>::description(void) const
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::allocate(unsigned crowInit, unsigned ccolInit)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::deallocate(void)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::fromRawData(T *array, unsigned crowInit, unsigned ccolInit)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::mapInto(const dtkMatrix<T>& mat,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline int dtkMatrix<T>::getStatus(void) const
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline unsigned dtkMatrix<T>::getRows(void) const
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline unsigned dtkMatrix<T>::getCols(void) const
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T> dtkMatrix<T>::operator +(const dtkMatrix<T>& mat) const
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:        return dtkMatrix<T>( *this ) += mat;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T> dtkMatrix<T>::operator -(const dtkMatrix<T>& mat) const
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:        return dtkMatrix<T>( *this ) -= mat;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T> dtkMatrix<T>::operator -(void) const
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T> dtkMatrix<T>::operator *(const T& value) const
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:        return dtkMatrix<T>( *this ) *= value;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T> dtkMatrix<T>::operator *(const dtkMatrix<T>& mat) const
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:        dtkMatrix matResult( m_crow , mat.m_ccol );
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T>& dtkMatrix<T>::operator =(const dtkMatrix<T>& mat)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T>& dtkMatrix<T>::operator +=(const dtkMatrix<T>& mat)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T>& dtkMatrix<T>::operator -=(const dtkMatrix<T>& mat)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T>& dtkMatrix<T>::operator *=(const T& value)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> int dtkMatrix<T>::operator ==(const dtkMatrix<T>& mat) const
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::storeSum(const dtkMatrix<T>& mat1,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:            const dtkMatrix<T>& mat2)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::storeProduct(const dtkMatrix<T>& mat1,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:            const dtkMatrix<T>& mat2)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::storeAtPosition(unsigned irowStart,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:            const dtkMatrix<T>& mat)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::storeTranspose(const dtkMatrix<T>& mat)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline void dtkMatrix<T>::fill(const T& elemFill)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline void dtkMatrix<T>::makeTranspose(void)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::interchangeRows(unsigned irow1, unsigned irow2)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::multiplyRow(unsigned irow, const T& value)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> void dtkMatrix<T>::addRowToRow(unsigned irowSrc,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> inline dtkMatrix<T> operator *(const T& value,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:            const dtkMatrix<T>& mat)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> dtkMatrix<T> dtkTranspose(const dtkMatrix<T>& mat)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:        dtkMatrix<T> matTranspose( mat.numberOfColumns(), mat.numberOfRows() );
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> std::ostream& operator <<(std::ostream& os, const dtkMatrix<T>& mat)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> QDebug operator<<(QDebug dbg, const dtkMatrix<T>& mat)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> QDebug operator<<(QDebug dbg, const dtkMatrix<T> *mat)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T> QByteArray *dtkMatrix<T>::serialize(void)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrix.tpp:    template <typename T>  void dtkMatrix<T>::deserialize(const QByteArray& array)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:/* dtkMatrixSquared.h ---
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:#include "dtkMatrix.h"
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:// dtkMatrixSquared interface
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:    template <typename T = double> class dtkMatrixSquared : public dtkMatrix<T>
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared(void): dtkMatrix<T>() {};
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared(unsigned crowInit): dtkMatrix<T>( crowInit, crowInit) {};
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared(T *array, unsigned crowInit): dtkMatrix<T>(array, crowInit, crowInit) {};
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared(const dtkMatrix<T>& mat): dtkMatrix<T>(mat) {};
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared(const dtkMatrixSquared& matSquared): dtkMatrix<T>(matSquared) {};
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared(const dtkMatrix<T>&, unsigned, unsigned, unsigned);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared(const dtkMatrixSquared<T>&, unsigned, unsigned, unsigned);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        ~dtkMatrixSquared(void) {};
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:            dtkMatrix<T>::allocate(crowInit, crowInit);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:            dtkMatrix<T>::fromRawData(array, crowInit, crowInit);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        void mapInto(const dtkMatrixSquared&, unsigned, unsigned, unsigned);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared operator +(const dtkMatrixSquared&) const;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared operator -(const dtkMatrixSquared&) const;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared operator -(void) const;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared operator *(const T&) const;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared operator *(const dtkMatrixSquared&) const;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared operator /(const T& value) const {
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared operator /(const dtkMatrixSquared&) const;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared& operator =(const dtkMatrixSquared& matSquared);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared& operator +=(const dtkMatrixSquared& matSquared);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared& operator -=(const dtkMatrixSquared& matSquared);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared& operator *=(const T& value);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared& operator *=(const dtkMatrixSquared&);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared& operator /=(const T& value);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        dtkMatrixSquared& operator /=(const dtkMatrixSquared&);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        void storeAdjoint(const dtkMatrixSquared&);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:        void storeInverse(const dtkMatrixSquared&);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:    template <typename T, unsigned crow> class dtkUnity< dtkMatSquared<dtkMatrixSquared<T>, crow> >: public dtkMatSquared<dtkMatrixSquared<T>, crow>
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:    template <typename T, unsigned crow> class dtkZero< dtkMatSquared<dtkMatrixSquared<T>, crow> >: public dtkMatSquared<dtkMatrixSquared<T>, crow>
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:// Implementation of the template class dtkMatrixSquared's methods
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:#include "dtkMatrixSquared.tpp"
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:typedef dtkDeprecated::dtkMatrixSquared<qreal> dtkMatrixSquareReal;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:Q_DECLARE_METATYPE(dtkMatrixSquareReal);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.h:Q_DECLARE_METATYPE(dtkMatrixSquareReal *);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:/* dtkMatrixSquared.tpp ---
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:#include "dtkMatrix.h"
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:// dtkMatrixSquared implementation
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>::dtkMatrixSquared(const dtkMatrix<T>& mat,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:            unsigned irowEnd) : dtkMatrix<T>(mat,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>::dtkMatrixSquared(const dtkMatrixSquared<T>& matSquared,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:            unsigned irowEnd) : dtkMatrix<T>(matSquared,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> QString dtkMatrixSquared<T>::identifier(void) const
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:        return QString("dtkMatrixSquared<%1>").arg(typeid(T).name());
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline void dtkMatrixSquared<T>::mapInto(const dtkMatrixSquared<T>& matSquared,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:        dtkMatrix<T>::mapInto(matSquared,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator =(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:        return static_cast<dtkMatrixSquared<T> &>(dtkMatrix<T>::operator=(matSquared));
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator +=(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:        return static_cast<dtkMatrixSquared<T> &>(dtkMatrix<T>::operator+=(matSquared));
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator -=(const dtkMatrixSquared& matSquared)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:        return static_cast<dtkMatrixSquared<T> &>(dtkMatrix<T>::operator-=(matSquared));
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator *=(const T& value)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:        return static_cast<dtkMatrixSquared<T> &>(dtkMatrix<T>::operator*=(value));
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator *=(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator /=(const T& value)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T>& dtkMatrixSquared<T>::operator /=(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkMatrixSquared<T>::operator +(const dtkMatrixSquared<T>& matSquared) const
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:        return dtkMatrixSquared<T>(*this) += matSquared;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkMatrixSquared<T>::operator -(const dtkMatrixSquared<T>& matSquared) const
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:        return dtkMatrixSquared<T>(*this) -= matSquared;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkMatrixSquared<T>::operator -(void) const
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkMatrixSquared<T>::operator *(const T& value) const
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:        return dtkMatrixSquared<T>(*this) *= value;
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkMatrixSquared<T>::operator *(const dtkMatrixSquared<T>& matSquared) const
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:        dtkMatrixSquared matSquaredResult(this->size());
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkMatrixSquared<T>::operator /(const dtkMatrixSquared<T>& matSquared) const
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> void dtkMatrixSquared<T>::storeInverse(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> void dtkMatrixSquared<T>::makeUnity(void)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> void dtkMatrixSquared<T>::makeAdjoint(void)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:        dtkMatrixSquared matSquaredCopy(*this);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> void dtkMatrixSquared<T>::storeAdjoint(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> void dtkMatrixSquared<T>::makeInverse(void)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:        dtkMatrixSquared matSquaredCopy(*this);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> inline dtkMatrixSquared<T> operator *(const T& value,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:            const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkTranspose(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:        dtkMatrixSquared<T> matSquaredResult(matSquared.size());
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkAdjoint(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:        dtkMatrixSquared<T> matSquaredResult(matSquared);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> dtkMatrixSquared<T> dtkInverse(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:        dtkMatrixSquared<T> matSquaredResult(matSquared);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> T dtkDeterminant(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:        dtkMatrixSquared<T> matSquaredCopy(matSquared);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkMatrixSquared.tpp:    template <typename T> T dtkMatrixSquaredTrace(const dtkMatrixSquared<T>& matSquared)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkQuaternion.h:        dtkQuaternion(const dtkMatrix<T>& mat): dtkVector<T>(mat) {};
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkQuaternion.h:        dtkQuaternion(const dtkMatrix<T>&, unsigned, unsigned);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkQuaternion.h:        void mapInto(const dtkMatrix<T>& mat,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkQuaternion.tpp:    template <class T> inline dtkQuaternion<T>::dtkQuaternion(const dtkMatrix<T>& mat,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkQuaternion.tpp:    template <class T> inline void dtkQuaternion<T>::mapInto(const dtkMatrix<T>& mat,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkQuaternion.tpp:        return static_cast<dtkQuaternion&>(dtkMatrix<T>::operator=(qtn));
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkQuaternion.tpp:        return static_cast<dtkQuaternion&>(dtkMatrix<T>::operator+=(qtn));
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkQuaternion.tpp:        return static_cast<dtkQuaternion&>(dtkMatrix<T>::operator-=(qtn));
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkQuaternion.tpp:        return static_cast<dtkQuaternion&>(dtkMatrix<T>::operator*=(value));
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.h:#include "dtkMatrix.h"
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.h:    template <class T = double> class dtkVector : public dtkMatrix<T>
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.h:        dtkVector(void): dtkMatrix<T>() {};
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.h:        dtkVector(unsigned crowInit): dtkMatrix<T>(crowInit, 1) {};
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.h:        dtkVector(T *array, unsigned crowInit): dtkMatrix<T>(array, crowInit, 1) {};
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.h:        dtkVector(const dtkMatrix<T>& mat): dtkMatrix<T>(mat) {};
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.h:        dtkVector(const dtkVector& vec): dtkMatrix<T>(vec) {};
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.h:        dtkVector(const dtkMatrix<T>&, unsigned, unsigned, unsigned);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.h:            dtkMatrix<T>::allocate(crowInit, 1);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.h:            dtkMatrix<T>::allocate(crowInit, 1, buffer);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.h:            dtkMatrix<T>::fromRawData(array, crowInit, 1);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.h:        void mapInto(const dtkMatrix<T>&, unsigned, unsigned, unsigned);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.h:            return this->dtkMatrix<T>::operator[](irow)[0];
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.h:            return this->dtkMatrix<T>::operator[](irow)[0];
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.tpp:#include "dtkMatrix.h"
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.tpp:#include "dtkMatrixSquared.h"
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.tpp:            unsigned irowEnd) : dtkMatrix<T>(vec, irowStart, 0, irowEnd, 0)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.tpp:    template <class T> inline dtkVector<T>::dtkVector(const dtkMatrix<T>& mat,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.tpp:            unsigned irowEnd) : dtkMatrix<T>(mat, irowStart, icolStart, irowEnd, icolStart)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.tpp:    template <class T> inline void dtkVector<T>::mapInto(const dtkMatrix<T>& mat,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.tpp:        dtkMatrix<T>::mapInto(mat, irowStart, icol, irowEnd, icol);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.tpp:        dtkMatrix<T>::mapInto(vec, irowStart, 0, irowEnd, 0);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.tpp:        return static_cast<dtkVector&>(dtkMatrix<T>::operator=(vec));
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.tpp:        return static_cast<dtkVector&>(dtkMatrix<T>::operator+=(vec));
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.tpp:        return static_cast<dtkVector&>(dtkMatrix<T>::operator-=(vec));
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.tpp:        return static_cast<dtkVector&>(dtkMatrix<T>::operator*=(value));
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.tpp:        dtkMatrix<T>::storeAtPosition(irowStart, 0, vec);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.tpp:    template <class T> dtkVector<T> operator *(const dtkMatrix<T>& mat, const dtkVector<T>& vec)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector.tpp:    template <class T> dtkVector<T> operator *(const dtkMatrixSquared<T>& mat, const dtkVector<T>& vec)
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector3D.h:#include "dtkMatrixSquared.h"
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector3D.h:        dtkVector3D(const dtkMatrix<T>& mat): dtkVector<T>(mat) {};
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector3D.h:        dtkVector3D(const dtkMatrix<T>&, unsigned, unsigned);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector3D.h:        void mapInto(const dtkMatrix<T>& mat, unsigned irowStart, unsigned icolStart);
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector3D.h:            dtkMatrix<T>::fill(dtkZero<T>());
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector3D.tpp:#include "dtkMatrixSquared.h"
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector3D.tpp:    template <class T> inline dtkVector3D<T>::dtkVector3D(const dtkMatrix<T>& mat,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector3D.tpp:    template <class T> inline void dtkVector3D<T>::mapInto(const dtkMatrix<T>& mat,
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector3D.tpp:        return static_cast<dtkVector3D& >(dtkMatrix<T>::operator=(vec3D));
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector3D.tpp:        return static_cast<dtkVector3D& >(dtkMatrix<T>::operator+=(vec3D));
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector3D.tpp:        return static_cast<dtkVector3D& >(dtkMatrix<T>::operator-=(vec3D));
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector3D.tpp:        return static_cast<dtkVector3D& >(dtkMatrix<T>::operator*=(value));
+./medInria/devdtk/extra-includes/dtk/src/dtkMathSupport/dtkVector3D.tpp:    template <class T> dtkVector3D<T> operator *(const dtkMatrixSquared<T>& mat,
