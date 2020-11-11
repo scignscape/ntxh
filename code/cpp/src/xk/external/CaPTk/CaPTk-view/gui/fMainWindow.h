@@ -14,6 +14,22 @@ See COPYING file or https://www.med.upenn.edu/cbica/software-agreement.html
 #ifndef _fMainWindow_h_
 #define _fMainWindow_h_
 
+
+//? added ...
+//?#include "../vcl/vcl_legacy_aliases.h"
+
+#define vnl_math_sqr vnl_math::sqr
+#define vnl_math_floor vnl_math::floor
+#define vcl_log std::log
+#define vcl_pow std::pow
+#define vcl_complex std::complex
+#define vcl_ceil std::ceil
+#define vcl_sqrt std::sqrt
+#define vcl_exp std::exp
+#define vnl_math_max vnl_math::max
+
+
+
 #include "NiftiDataManager.h"
 #include "RecurrenceEstimator.h"
 #include "PseudoProgressionEstimator.h"
@@ -81,6 +97,7 @@ See COPYING file or https://www.med.upenn.edu/cbica/software-agreement.html
 #include "fBottomImageInfoTip.h"
 
 #include "yaml-cpp/node/node.h"
+
 
 class SlicerManager;
 class Slicer;
@@ -178,7 +195,10 @@ typename itk::Image<OutputPixelType, VImageDimension>::Pointer convertVtkToItk(v
   outputImage->Update();
   if (outputImage.IsNull()) {
     std::cerr << "inputImage is invalid." << std::endl;
-    return NULL;
+ 
+   // //? added 
+  return nullptr;   
+   //?return NULL;
   }
 
   return outputImage;
@@ -224,7 +244,9 @@ typename itk::Image<OutputPixelType, VImageDimension>::Pointer convertVtkToItk(v
   else {
     std::cerr << "Error, input pixel type : " << InputPixelType << " unknown !" << std::endl;
   }
-  return NULL;
+
+  return nullptr;
+ //? return NULL;
 }
 
 /**
@@ -1381,6 +1403,7 @@ public slots:
 
   //! GUI control for Directionality Analysis
   void ApplicationDirectionality();
+
 #ifdef BUILD_FETALBRAIN
   //! GUI control for Fetal Brain
   void ApplicationFetalBrain();
@@ -1390,46 +1413,59 @@ public slots:
   //! GUI control for EGFRvIII PHI
   void ApplicationEGFR();
 #endif
+
 #ifdef BUILD_RECURRENCE
   //! GUI control for Recurrence
   void ApplicationRecurrence();
 #endif
+
 #ifdef BUILD_PSEUDOPROGRESSION
   //! GUI control for Pseudo Progression
   void ApplicationPseudoProgression();
 #endif
+
 #ifdef BUILD_ATLAS
   //! GUI control for Population Atlas
   void ApplicationPopulationAtlas();
 #endif
+
 #ifdef BUILD_ISUBTYPE
   //! GUI control for Imaging Subtype
   void ApplicationImagingSubtype();
 #endif
+
+#ifdef BUILD_MSUBTYPE //?  added this #ifdef ...
   //! GUI control for Molecular Subtype
   void ApplicationMolecularSubtype();
 #endif
+
 #ifdef BUILD_SURVIVAL
   //! GUI control for Survival
   void ApplicationSurvival();
-#ifdef BUILD_EGFRvIIISVM
+#endif
+
+#ifdef BUILD_EGFRvIIISVM 
   //! GUI control for EGFRvIII SVM
   void ApplicationEGFRvIIISVM();
 #endif
+
 #ifdef BUILD_GEODESIC
   //! GUI control for Geodesic Segmentation
   void ApplicationGeodesic();
 #endif
+
 #ifdef BUILD_GEODESICTRAINING
   //! GUI control for Geodesic Training
   void ApplicationGeodesicTraining();
 #endif
+
   //! GUI control for Geodesic Threshold - TBD
   void ApplicationGeodesicTreshold();
 #ifdef BUILD_ITKSNAP
   //! GUI control for ITKSNAP
   void ApplicationITKSNAP();
 #endif
+
 #ifdef BUILD_WHITESTRIPE
   //! GUI control for WhiteStripe
   void ApplicationWhiteStripe();

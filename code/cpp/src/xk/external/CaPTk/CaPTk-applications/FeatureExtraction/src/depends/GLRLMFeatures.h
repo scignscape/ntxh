@@ -86,18 +86,21 @@ public:
       //TBD
       typename RunLengthFilterType::FeatureNameVectorPointer requestedFeatures = RunLengthFilterType::FeatureNameVector::New();
       typedef typename RunLengthFilterType::RunLengthFeaturesFilterType TextureFilterType;
-      requestedFeatures->push_back(TextureFilterType::ShortRunEmphasis);
-      requestedFeatures->push_back(TextureFilterType::LongRunEmphasis);
-      requestedFeatures->push_back(TextureFilterType::GreyLevelNonuniformity);
+
+
+//? added casts ...
+      requestedFeatures->push_back( (unsigned char) TextureFilterType::ShortRunEmphasis);
+      requestedFeatures->push_back( (unsigned char) TextureFilterType::LongRunEmphasis);
+      requestedFeatures->push_back( (unsigned char) TextureFilterType::GreyLevelNonuniformity);
       //requestedFeatures->push_back(TextureFilterType::GreyLevelNonuniformityNormalized);
-      requestedFeatures->push_back(TextureFilterType::RunLengthNonuniformity);
+      requestedFeatures->push_back( (unsigned char) TextureFilterType::RunLengthNonuniformity);
       //requestedFeatures->push_back(TextureFilterType::RunLengthNonuniformityNormalized);
-      requestedFeatures->push_back(TextureFilterType::LowGreyLevelRunEmphasis);
-      requestedFeatures->push_back(TextureFilterType::HighGreyLevelRunEmphasis);
-      requestedFeatures->push_back(TextureFilterType::ShortRunLowGreyLevelEmphasis);
-      requestedFeatures->push_back(TextureFilterType::ShortRunHighGreyLevelEmphasis);
-      requestedFeatures->push_back(TextureFilterType::LongRunLowGreyLevelEmphasis);
-      requestedFeatures->push_back(TextureFilterType::LongRunHighGreyLevelEmphasis);
+      requestedFeatures->push_back( (unsigned char) TextureFilterType::LowGreyLevelRunEmphasis);
+      requestedFeatures->push_back( (unsigned char) TextureFilterType::HighGreyLevelRunEmphasis);
+      requestedFeatures->push_back( (unsigned char) TextureFilterType::ShortRunLowGreyLevelEmphasis);
+      requestedFeatures->push_back( (unsigned char) TextureFilterType::ShortRunHighGreyLevelEmphasis);
+      requestedFeatures->push_back( (unsigned char) TextureFilterType::LongRunLowGreyLevelEmphasis);
+      requestedFeatures->push_back( (unsigned char) TextureFilterType::LongRunHighGreyLevelEmphasis);
       //requestedFeatures->push_back(TextureFilterType::RunPercentage);
       //requestedFeatures->push_back(TextureFilterType::NumberOfRuns);
       //requestedFeatures->push_back(TextureFilterType::GreyLevelVariance);

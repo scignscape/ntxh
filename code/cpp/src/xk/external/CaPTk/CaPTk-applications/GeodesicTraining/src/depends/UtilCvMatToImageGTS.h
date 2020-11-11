@@ -4,7 +4,11 @@
 #include "itkImage.h"
 #include "itkImageFileWriter.h"
 #include "itkImageFileReader.h"
-#include "itkExceptionObject.h"
+
+//? this gives an error ...
+//?#include "itkExceptionObject.h"
+#include "itkMacro.h"
+
 #include "itkCastImageFilter.h"
 #include "itkRescaleIntensityImageFilter.h"
 #include "itkNeighborhoodIterator.h"

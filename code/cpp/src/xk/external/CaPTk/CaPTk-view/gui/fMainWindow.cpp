@@ -6853,14 +6853,16 @@ void fMainWindow::ApplicationImagingSubtype()
 }
 #endif
 
+//? moved this here ...
+#ifdef BUILD_MSUBTYPE
+//
 void fMainWindow::ApplicationMolecularSubtype()
 {
-#ifdef BUILD_MSUBTYPE
   msubtypePanel.SetCurrentImagePath(mInputPathName);
   msubtypePanel.SetTrainedModelLink(m_downloadLinks["inputs"]["MolecularSubtypePredictor"]["Model"].as<std::string>());
   msubtypePanel.exec();
-#endif
 }
+#endif
 
 
 #ifdef BUILD_SURVIVAL
