@@ -12,6 +12,8 @@ QT += gui
 include($$ROOT_DIR/../preferred/sysr.pri)
 include($$ROOT_DIR/../preferred/gui.pri)
 
+include($$ROOT_DIR/../preferred/itk.pri)
+
 
 QT += network
 
@@ -26,120 +28,94 @@ DEFINES += _OPENMP
 
 
 INCLUDEPATH += \
-  ../cbica_toolkit/src \
-  ../cbica_toolkit/src/IO/inc \
+  $$SRC_DIR/IO/inc \
 
 
+INCLUDEPATH += $$SRC_GROUP_DIR/yaml-cpp/include \
 
+
+ # if this doesn't work, set the correct path in itk.pri
 INCLUDEPATH += \
-  ../../../ITKSkullStrip-master/include
+  $$ITK_SRC_DIR/../ITKSkullStrip-master/include \
 
 
-#   configs
-
-# 
-
-INCLUDEPATH += ../../../ITK-build/Modules/Core/Common
-INCLUDEPATH += ../../../ITK-build/Modules/ThirdParty/VNL/src/vxl/core
-INCLUDEPATH += ../../../ITK-build/Modules/ThirdParty/VNL/src/vxl/vcl
-INCLUDEPATH += ../../../ITK-build/Modules/IO/ImageBase
-INCLUDEPATH += ../../../ITK-build/Modules/ThirdParty/Eigen3/src
-INCLUDEPATH += ../../../ITK-build/Modules/ThirdParty/KWSys/src
-INCLUDEPATH += ../../../ITK-build/Modules/ThirdParty/GDCM/src/gdcm/Source/Common
-INCLUDEPATH += 
-INCLUDEPATH += 
-INCLUDEPATH += 
+INCLUDEPATH +=  \
+  $$ITK_BUILD_DIR/Modules/Core/Common \
+  $$ITK_BUILD_DIR/Modules/ThirdParty/VNL/src/vxl/core \
+  $$ITK_BUILD_DIR/Modules/ThirdParty/VNL/src/vxl/vcl \
+  $$ITK_BUILD_DIR/Modules/IO/ImageBase \
+  $$ITK_BUILD_DIR/Modules/ThirdParty/Eigen3/src \
+  $$ITK_BUILD_DIR/Modules/ThirdParty/KWSys/src \
+  $$ITK_BUILD_DIR/Modules/ThirdParty/GDCM/src/gdcm/Source/Common \
 
 
+INCLUDEPATH +=  \
+  $$ITK_SRC_DIR/Modules/ThirdParty/VNL/src/vxl/vcl \
+  $$ITK_SRC_DIR/Modules/IO/ImageBase/include \
+  $$ITK_SRC_DIR/Modules/ThirdParty/Eigen3/src \
+  $$ITK_SRC_DIR/Modules/Filtering/ImageFilterBase/include \
+  $$ITK_SRC_DIR/Modules/IO/GDCM/include \
+  $$ITK_SRC_DIR/Modules/Filtering/DiffusionTensorImage/include \
+  $$ITK_SRC_DIR/Modules/Core/SpatialObjects/include \
+  $$ITK_SRC_DIR/Modules/Core/Transform/include \
+  $$ITK_SRC_DIR/Modules/Core/ImageFunction/include \
+  $$ITK_SRC_DIR/Modules/Filtering/Thresholding/include \
+  $$ITK_SRC_DIR/Modules/ThirdParty/GDCM/src/gdcm/Source/DataDictionary \
+  $$ITK_SRC_DIR/Modules/ThirdParty/GDCM/src/gdcm/Source/DataStructureAndEncodingDefinition \
+  $$ITK_SRC_DIR/Modules/ThirdParty/GDCM/src/gdcm/Source/Common \
+  $$ITK_SRC_DIR/Modules/ThirdParty/GDCM/src/gdcm/Source/MediaStorageAndFileFormat \
+  $$ITK_SRC_DIR/Modules/Filtering/ImageIntensity/include \
+  $$ITK_SRC_DIR/Modules/Filtering/Smoothing/include \
+  $$ITK_SRC_DIR/Modules/Numerics/Statistics/include \
+  $$ITK_SRC_DIR/Modules/Filtering/ImageStatistics/include \
+  $$ITK_SRC_DIR/Modules/Segmentation/RegionGrowing/include \
+  $$ITK_SRC_DIR/Modules/Filtering/ImageGrid/include \
+  $$ITK_SRC_DIR/Modules/Core/TestKernel/include \
+  $$ITK_SRC_DIR/Modules/Registration/Common/include \
+  $$ITK_SRC_DIR/Modules/Numerics/Optimizers/include \
+  $$ITK_SRC_DIR/Modules/Filtering/ImageGradient/include \
+  $$ITK_SRC_DIR/Modules/Core/ImageAdaptors/include \
+  $$ITK_SRC_DIR/Modules/Filtering/MathematicalMorphology/include \
+  $$ITK_SRC_DIR/Modules/Filtering/BinaryMathematicalMorphology/include \
+  $$ITK_SRC_DIR/Modules/Filtering/AnisotropicSmoothing/include \
+  $$ITK_SRC_DIR/Modules/Core/FiniteDifference/include \
+  $$ITK_SRC_DIR/Modules/Segmentation/LevelSets/include \
+  $$ITK_SRC_DIR/Modules/Filtering/ImageFeature/include \
+  $$ITK_SRC_DIR/Modules/Filtering/DistanceMap/include \
+  $$ITK_SRC_DIR/Modules/Filtering/ImageLabel/include \
+  $$ITK_SRC_DIR/Modules/Filtering/ImageCompose/include \
+  $$ITK_SRC_DIR/Modules/Core/Common/include \
+  $$ITK_SRC_DIR/Modules/ThirdParty/VNL/src/vxl/core \
+  $$ITK_SRC_DIR/Modules/IO/NRRD/include \
 
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/ThirdParty/VNL/src/vxl/vcl
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/IO/ImageBase/include/
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/ThirdParty/Eigen3/src
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Filtering/ImageFilterBase/include/
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/IO/GDCM/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Filtering/DiffusionTensorImage/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Core/SpatialObjects/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Core/Transform/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Core/ImageFunction/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Filtering/Thresholding/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/ThirdParty/GDCM/src/gdcm/Source/DataDictionary
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/ThirdParty/GDCM/src/gdcm/Source/DataStructureAndEncodingDefinition
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/ThirdParty/GDCM/src/gdcm/Source/Common
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/ThirdParty/GDCM/src/gdcm/Source/MediaStorageAndFileFormat
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Filtering/ImageIntensity/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Filtering/Smoothing/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Numerics/Statistics/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Filtering/ImageStatistics/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Segmentation/RegionGrowing/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Filtering/ImageGrid/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Core/TestKernel/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Registration/Common/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Numerics/Optimizers/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Filtering/ImageGradient/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Core/ImageAdaptors/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Filtering/MathematicalMorphology/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Filtering/BinaryMathematicalMorphology/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Filtering/AnisotropicSmoothing/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Core/FiniteDifference/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Segmentation/LevelSets/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Filtering/ImageFeature/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Filtering/DistanceMap/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Filtering/ImageLabel/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Filtering/ImageCompose/include
-INCLUDEPATH += 
-INCLUDEPATH += 
-INCLUDEPATH += 
-INCLUDEPATH += 
-INCLUDEPATH += 
-INCLUDEPATH += 
-
-
-
-
-
-
-
-
-
-
-
-
-
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Core/Common/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/ThirdParty/VNL/src/vxl/core
-
-INCLUDEPATH += ../thirdparty/yaml-cpp/include
-
-
-# cbicaUtilities.h
 
 HEADERS += \
-  ../cbica_toolkit/src/IO/inc/DicomImageReader.h \
-  ../cbica_toolkit/src/IO/inc/DicomIOManager.h \
-  ../cbica_toolkit/src/IO/inc/DicomIOManager.hxx \
-  ../cbica_toolkit/src/IO/inc/DicomMetadataReader.h \
-  ../cbica_toolkit/src/IO/inc/DicomSeriesReader.h \
-  ../cbica_toolkit/src/cbicaCmdParser.h \
-  ../cbica_toolkit/src/cbicaDTIProcessingManager.h \
-  ../cbica_toolkit/src/cbicaITKImageInfo.h \
-  ../cbica_toolkit/src/cbicaITKSafeImageIO.h \
-  ../cbica_toolkit/src/cbicaITKUtilities.h \
-  ../cbica_toolkit/src/cbicaLogging.h \
-  ../cbica_toolkit/src/cbicaProgressBar.h \
-  ../cbica_toolkit/src/cbicaStatistics.h \
-  ../cbica_toolkit/src/cbicaUtilities.h \
-  ../cbica_toolkit/src/HausdorffDistance.h \
-  ../cbica_toolkit/src/HausdorffDistance.txx \
+  $$SRC_DIR/IO/inc/DicomImageReader.h \
+  $$SRC_DIR/IO/inc/DicomIOManager.h \
+  $$SRC_DIR/IO/inc/DicomIOManager.hxx \
+  $$SRC_DIR/IO/inc/DicomMetadataReader.h \
+  $$SRC_DIR/IO/inc/DicomSeriesReader.h \
+  $$SRC_DIR/cbicaCmdParser.h \
+  $$SRC_DIR/cbicaDTIProcessingManager.h \
+  $$SRC_DIR/cbicaITKImageInfo.h \
+  $$SRC_DIR/cbicaITKSafeImageIO.h \
+  $$SRC_DIR/cbicaITKUtilities.h \
+  $$SRC_DIR/cbicaLogging.h \
+  $$SRC_DIR/cbicaProgressBar.h \
+  $$SRC_DIR/cbicaStatistics.h \
+  $$SRC_DIR/cbicaUtilities.h \
+  $$SRC_DIR/HausdorffDistance.h \
+  $$SRC_DIR/HausdorffDistance.txx \
 
 
 SOURCES += \
-  ../cbica_toolkit/src/IO/src/DicomImageReader.cpp \
-  ../cbica_toolkit/src/IO/src/DicomMetadataReader.cpp \
-  ../cbica_toolkit/src/IO/src/DicomSeriesReader.cpp \
-  ../cbica_toolkit/src/cbicaCmdParser.cpp \
-  ../cbica_toolkit/src/cbicaDTIProcessingManager.cpp \
-  ../cbica_toolkit/src/cbicaITKImageInfo.cpp \
-  ../cbica_toolkit/src/cbicaLogging.cpp \
-  ../cbica_toolkit/src/cbicaUtilities.cpp \
+  $$SRC_DIR/IO/src/DicomImageReader.cpp \
+  $$SRC_DIR/IO/src/DicomMetadataReader.cpp \
+  $$SRC_DIR/IO/src/DicomSeriesReader.cpp \
+  $$SRC_DIR/cbicaCmdParser.cpp \
+  $$SRC_DIR/cbicaDTIProcessingManager.cpp \
+  $$SRC_DIR/cbicaITKImageInfo.cpp \
+  $$SRC_DIR/cbicaLogging.cpp \
+  $$SRC_DIR/cbicaUtilities.cpp \
 
 

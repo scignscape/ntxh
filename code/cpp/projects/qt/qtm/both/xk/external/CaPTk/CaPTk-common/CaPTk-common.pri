@@ -13,6 +13,9 @@ include($$ROOT_DIR/../preferred/sysr.pri)
 include($$ROOT_DIR/../preferred/gui.pri)
 
 
+include($$ROOT_DIR/../preferred/itk.pri)
+
+
 QT += network
 
 TEMPLATE = lib
@@ -23,32 +26,24 @@ DEFINES += PROJECT_VERSION=\\\"PROJECT_VERSION\\\"
 
 
 INCLUDEPATH += \
-  ../common/inc \
-  ../cbica_toolkit/src \
-
-#   configs
-
-# 
-
-INCLUDEPATH += ../../../ITK-build/Modules/Core/Common
-INCLUDEPATH += ../../../ITK-build/Modules/ThirdParty/VNL/src/vxl/core
-INCLUDEPATH += ../../../ITK-build/Modules/ThirdParty/VNL/src/vxl/vcl
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/ThirdParty/VNL/src/vxl/vcl
-INCLUDEPATH += 
-INCLUDEPATH += 
+  $$SRC_DIR/inc \
+  $$SRC_GROUP_DIR/cbica-toolkit \
 
 
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/Core/Common/include
-INCLUDEPATH += ../../../InsightToolkit-5.1.1/Modules/ThirdParty/VNL/src/vxl/core
+INCLUDEPATH += \
+  $$ITK_BUILD_DIR/Modules/Core/Common \
+  $$ITK_BUILD_DIR/Modules/ThirdParty/VNL/src/vxl/core \
+  $$ITK_BUILD_DIR/Modules/ThirdParty/VNL/src/vxl/vcl \
 
-
-# cbicaUtilities.h
-
+INCLUDEPATH += \
+  $$ITK_SRC_DIR/Modules/ThirdParty/VNL/src/vxl/vcl \
+  $$ITK_SRC_DIR/Modules/Core/Common/include \
+  $$ITK_SRC_DIR/Modules/ThirdParty/VNL/src/vxl/core \
 
 
 SOURCES += \
-  ../common/src/CaPTkGUIUtils.cpp \
-  ../common/src/DownloadManager.cpp \
+  $$SRC_DIR/CaPTkGUIUtils.cpp \
+  $$SRC_DIR/DownloadManager.cpp \
 
 
 
