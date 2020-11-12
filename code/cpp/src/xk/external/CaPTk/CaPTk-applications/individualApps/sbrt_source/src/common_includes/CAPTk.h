@@ -217,6 +217,7 @@
 //{
 //  UNDEFINED, T1, T1CE, T2, T2FLAIR, PERFUSION, DTI, RECURRENCE_OUTPUT
 //};
+#ifdef HIDE // this is now an enum? ... 
 #define IMAGE_TYPE_UNDEFINED			0 // [TBD] - convert to enum
 #define IMAGE_TYPE_T1					1
 #define IMAGE_TYPE_T1CE					2
@@ -226,7 +227,7 @@
 #define IMAGE_TYPE_DTI					6
 #define IMAGE_TYPE_RECURRENCE_OUTPUT	7
 #define IMAGE_TYPE_PP			8
-
+#endif // HIDE
 
 //enum NV_Image
 //{

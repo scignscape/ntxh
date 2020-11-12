@@ -197,9 +197,12 @@ std::vector<typename ImageType::Pointer> PerfusionDerivatives::Run(std::string p
   }
   std::cout << "Perfusion curve validated!!!" << std::endl;
 
-  perfusionDerivatives.push_back(NULL);
-  perfusionDerivatives.push_back(NULL);
-  perfusionDerivatives.push_back(NULL);
+//?  perfusionDerivatives.push_back(NULL);
+//?  perfusionDerivatives.push_back(NULL);
+//?  perfusionDerivatives.push_back(NULL);
+  perfusionDerivatives.push_back(nullptr);
+  perfusionDerivatives.push_back(nullptr);
+  perfusionDerivatives.push_back(nullptr);
 
   typedef itk::ImageDuplicator< PerfusionImageType > DuplicatorType;
   typename DuplicatorType::Pointer duplicator = DuplicatorType::New();

@@ -18,6 +18,10 @@ See COPYING file or https://www.med.upenn.edu/cbica/software-agreement.html
 #include "qthread.h"
 #include "qfuture.h"
 
+//? added ...
+#include <QtConcurrent/QtConcurrent>
+
+
 //#include "CAPTk.h"
 #include "ApplicationBase.h" // used for conherence between different applications and the sync manager
 
@@ -47,9 +51,13 @@ public:
 
   }
 
-  inline void SetLongRunning(bool m_application.m_longRunning) :
-    m_longRunning(m_application.m_longRunning)
+//?  inline void SetLongRunning(bool m_application.m_longRunning) :
+//?    m_longRunning(m_application.m_longRunning)
+
+  inline void SetLongRunning(bool m_application_m_longRunning)
   {
+   //? what's up with this?
+   //?  m_longRunning = m_application_m_longRunning;
     // nothing to do here because the single parameter of interest has already been set
   }
 

@@ -148,7 +148,7 @@ public:
 
 
     HelpButton = new QPushButton();
-    std::string iconDir = getCaPTkDataDir() + "/icons/";
+    std::string iconDir; //? = getCaPTkDataDir() + "/icons/";
 //#ifndef CAPTK_PACKAGE_PROJECT
 //    iconDir = captk_currentApplicationPath + "/../../data/icons/";
 //#else

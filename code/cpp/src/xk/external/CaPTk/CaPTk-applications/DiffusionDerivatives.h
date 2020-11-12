@@ -963,12 +963,12 @@ std::vector<itk::Image<float, 3>::Pointer>  DiffusionDerivatives::dtiRecon(std::
 	if (writeFA)
 		vectorOfDTIScalars.push_back(faIm);
 	else
-		vectorOfDTIScalars.push_back(NULL);
+		vectorOfDTIScalars.push_back(nullptr); //?vectorOfDTIScalars.push_back(NULL);
 
     if (writeTR)
       vectorOfDTIScalars.push_back(trIm);
 	else
-		vectorOfDTIScalars.push_back(NULL);
+	  vectorOfDTIScalars.push_back(nullptr);	//?vectorOfDTIScalars.push_back(NULL);
 
     if (writeRadAx)
     {
@@ -977,8 +977,10 @@ std::vector<itk::Image<float, 3>::Pointer>  DiffusionDerivatives::dtiRecon(std::
     }
 	else
 	{
-	vectorOfDTIScalars.push_back(NULL);
-	vectorOfDTIScalars.push_back(NULL);
+     vectorOfDTIScalars.push_back(nullptr);
+     vectorOfDTIScalars.push_back(nullptr);
+	//?vectorOfDTIScalars.push_back(NULL);
+	//?vectorOfDTIScalars.push_back(NULL);
 	}
   }
   catch (itk::ExceptionObject & excp)

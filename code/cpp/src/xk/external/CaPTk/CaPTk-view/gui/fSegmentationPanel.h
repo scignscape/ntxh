@@ -21,7 +21,10 @@
 #include "Landmarks.h"
 #include "ui_fSegmentationPanel.h"
 #include "fFeatureDialog.h"
-#include "FeatureExtraction.h"
+
+ //  this is causing problems ...
+//? #include "FeatureExtraction.h"
+
 /**
 \class fSegmentationPanel
 

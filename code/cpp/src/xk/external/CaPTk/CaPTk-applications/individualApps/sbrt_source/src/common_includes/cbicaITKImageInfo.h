@@ -12,6 +12,14 @@ Copyright (c) 2016 University of Pennsylvania. All rights reserved. <br>
 See COPYING file or https://www.med.upenn.edu/cbica/captk/license.html
 
 */
+
+
+//? added guard ...
+
+#ifndef CBICA_ITK_IMAGE_INFO__H
+#define CBICA_ITK_IMAGE_INFO__H
+
+
 #pragma once
 
 #include <algorithm>
@@ -137,3 +145,7 @@ namespace cbica
     itk::ImageIOBase::IOPixelType m_pixelType;
   };
 }
+
+
+#endif //  CBICA_ITK_IMAGE_INFO__H
+

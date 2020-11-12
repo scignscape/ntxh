@@ -22,6 +22,14 @@ See COPYING file or https://www.med.upenn.edu/cbica/software-agreement.html
 #include "itkVariableSizeMatrix.h"
 #include "itkOffset.h"
 
+
+//? added 
+#include "vnl/vnl_math.h"
+#define vnl_math_isinf vnl_math::isinf
+#define vnl_math_isnan vnl_math::isnan
+#include "cbicaUtilities.h"
+
+
 //#include "Eigen/src/Core/Matrix.h"
 //#include "Eigen/src/Core/Array.h"
 #include "Eigen/Dense"

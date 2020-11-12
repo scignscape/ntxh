@@ -38,6 +38,11 @@ year={1997},
 organization={Springer}
 }
 */
+
+//? there are two of these class SusanDenoisings ... I'm going to add a namespace
+
+namespace _Preprocessing_{
+
 class SusanDenoising /*: public ApplicationBase*/
 {
 
@@ -156,3 +161,7 @@ typename ImageType::Pointer SusanDenoising::Run(const typename ImageType::Pointe
   //progressUpdate(100);
   return outputImageFilter->GetOutput();
 }
+
+
+} // end namespace _Preprocessing_
+

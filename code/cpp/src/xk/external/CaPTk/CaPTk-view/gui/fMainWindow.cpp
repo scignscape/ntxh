@@ -3245,7 +3245,7 @@ void fMainWindow::StartEGFREstimate()
 
 ImageTypeFloat3D::Pointer fMainWindow::getMaskImage()
 {
-  ImageTypeFloat3D::Pointer img = NULL;
+  ImageTypeFloat3D::Pointer img = nullptr; //NULL;
   if (mSlicerManagers[0]->mMask != NULL)
   {
     img = convertVtkToItk<float, 3>(mSlicerManagers[0]->mMask);

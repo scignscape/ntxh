@@ -240,14 +240,16 @@ void SBRT_Analysis< TPixelType, TDimension >::CalcGlcmFeature()
 	}
 
 	typename GlcmType::FeatureNameVectorPointer requestedFeatures = GlcmType::FeatureNameVector::New();
-  	requestedFeatures->push_back(GlcmType::TextureFeaturesFilterType::Energy);
-  	requestedFeatures->push_back(GlcmType::TextureFeaturesFilterType::Entropy);
-  	requestedFeatures->push_back(GlcmType::TextureFeaturesFilterType::InverseDifferenceMoment);
-  	requestedFeatures->push_back(GlcmType::TextureFeaturesFilterType::Inertia);
-  	requestedFeatures->push_back(GlcmType::TextureFeaturesFilterType::ClusterShade);
-  	requestedFeatures->push_back(GlcmType::TextureFeaturesFilterType::ClusterProminence);
-  	requestedFeatures->push_back(GlcmType::TextureFeaturesFilterType::Correlation);
-  	requestedFeatures->push_back(GlcmType::TextureFeaturesFilterType::HaralickCorrelation);
+
+//? added casts ...
+  	requestedFeatures->push_back( (unsigned char) GlcmType::TextureFeaturesFilterType::Energy);
+  	requestedFeatures->push_back( (unsigned char) GlcmType::TextureFeaturesFilterType::Entropy);
+  	requestedFeatures->push_back( (unsigned char) GlcmType::TextureFeaturesFilterType::InverseDifferenceMoment);
+  	requestedFeatures->push_back( (unsigned char) GlcmType::TextureFeaturesFilterType::Inertia);
+  	requestedFeatures->push_back( (unsigned char) GlcmType::TextureFeaturesFilterType::ClusterShade);
+  	requestedFeatures->push_back( (unsigned char) GlcmType::TextureFeaturesFilterType::ClusterProminence);
+  	requestedFeatures->push_back( (unsigned char) GlcmType::TextureFeaturesFilterType::Correlation);
+  	requestedFeatures->push_back( (unsigned char) GlcmType::TextureFeaturesFilterType::HaralickCorrelation);
   	
 	typename GlcmType::Pointer Texture = GlcmType::New();
 	Texture->SetInput( m_inputImage );

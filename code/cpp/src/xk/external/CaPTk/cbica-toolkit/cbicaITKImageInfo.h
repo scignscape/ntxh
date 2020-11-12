@@ -12,6 +12,14 @@ Copyright (c) 2018 University of Pennsylvania. All rights reserved. <br>
 See COPYING file or https://www.med.upenn.edu/cbica/software-agreement.html
 
 */
+
+
+//? added guard ...
+
+#ifndef CBICA_ITK_IMAGE_INFO__H
+#define CBICA_ITK_IMAGE_INFO__H
+
+
 #pragma once
 
 #include <algorithm>
@@ -157,3 +165,8 @@ namespace cbica
     std::vector< std::string > m_uids; // only for DICOM
   };
 }
+
+
+#endif //  CBICA_ITK_IMAGE_INFO__H
+
+

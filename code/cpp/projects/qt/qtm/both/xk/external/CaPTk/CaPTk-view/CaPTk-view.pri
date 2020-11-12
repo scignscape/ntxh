@@ -38,6 +38,11 @@ DEFINES += CAPTK_STYLESHEET_FILE=\\\"CAPTK_STYLESHEET_FILE\\\"
 DEFINES += FeatureDefinitions=\\\"FeatureDefinitions\\\"  # =\\\"? ?\\\"
 
 
+DEFINES += CAPTK_APP_LIST_PY_GUI=\\\"CAPTK_APP_LIST_PY_GUI\\\"
+DEFINES += CAPTK_APP_LIST_PY_CLI=\\\"CAPTK_APP_LIST_PY_CLI\\\"
+DEFINES += EXE_NAME=\\\"EXE_NAME\\\"
+DEFINES += PROJECT_VARIANT=\\\"PROJECT_VARIANT\\\"
+
 
 DEFINES += _OPENMP
 
@@ -334,10 +339,10 @@ SOURCES += \
   $$SRC_DIR/gui/AppearancePage.cpp \
   $$SRC_DIR/gui/ApplicationBase.cpp \
   $$SRC_DIR/gui/ApplicationPreferences.cpp \
-  \# ../view/gui/ASyncAppManager.cpp \
+  $$SRC_DIR/gui/ASyncAppManager.cpp \
   $$SRC_DIR/gui/CaPTkDockWidget.cpp \
   $$SRC_DIR/gui/CheckOpenGLVersion.cpp \
-  \# ../view/gui/ComparisonViewerCommand.cpp \
+  $$SRC_DIR/gui/ComparisonViewerCommand.cpp \
   $$SRC_DIR/gui/DicomReader.cpp \
   $$SRC_DIR/gui/fBiasCorrectionDialog.cpp \
   $$SRC_DIR/gui/fBottomImageInfoTip.cpp \

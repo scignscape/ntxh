@@ -293,7 +293,7 @@ typename ImageType::Pointer PreprocessingPipelineClass::N4BiasCorrectionMethodCa
   shrinker->SetInput(inputimage);
   shrinker->SetShrinkFactors(4);
 
-  typename MaskImageType::Pointer maskImage = NULL;
+  typename MaskImageType::Pointer maskImage = nullptr ;//?NULL;
   if (!maskImage)
   {
     typedef itk::OtsuThresholdImageFilter<ImageType, MaskImageType> ThresholderType;
