@@ -17,7 +17,6 @@ See COPYING file or https://www.med.upenn.edu/cbica/software-agreement.html
 
 //? added ...
 //?#include "../vcl/vcl_legacy_aliases.h"
-
 #define vnl_math_sqr vnl_math::sqr
 #define vnl_math_floor vnl_math::floor
 #define vcl_log std::log

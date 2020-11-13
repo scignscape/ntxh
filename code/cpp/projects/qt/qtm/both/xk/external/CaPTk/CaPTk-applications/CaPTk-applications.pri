@@ -40,7 +40,18 @@ DEFINES += _OPENMP
 
 
 INCLUDEPATH += \
-  $$SRC_DIR/gui \
+  $$SRC_DIR/Preprocessing/src/depends \
+  $$SRC_DIR/common_includes \
+  $$SRC_DIR/GeodesicTraining/src \
+  $$SRC_DIR/GeodesicTraining/src/depends \
+  $$SRC_DIR/WhiteStripe_includes
+
+
+INCLUDEPATH += \
+  $$SRC_GROUP_DIR/inc \
+  $$SRC_GROUP_DIR/CaPTk-view/gui \
+  $$SRC_GROUP_DIR/CaPTk-view/extra \
+
 
 
 INCLUDEPATH += $$SRC_GROUP_DIR/yaml-cpp/include \
@@ -255,44 +266,44 @@ HEADERS += \
 
 
 SOURCES += \
-  $$SRC_DIR/BraTSPipeline.cxx \
-  $$SRC_DIR/DeepMedic.cxx \
+  \# $$SRC_DIR/BraTSPipeline.cxx \
+  \# $$SRC_DIR/DeepMedic.cxx \
   $$SRC_DIR/DiffusionDerivatives.cpp \
-  $$SRC_DIR/DiffusionDerivatives.cxx \
+  \# $$SRC_DIR/DiffusionDerivatives.cxx \
   $$SRC_DIR/DirectionalityEstimate.cpp \
-  $$SRC_DIR/DirectionalityEstimate.cxx \
+  \# $$SRC_DIR/DirectionalityEstimate.cxx \
   $$SRC_DIR/EGFRvIIIIndexPredictor.cpp \
-  $$SRC_DIR/EGFRvIIIIndexPredictor.cxx \
+  \# $$SRC_DIR/EGFRvIIIIndexPredictor.cxx \
   $$SRC_DIR/EGFRvIIISurrogateIndex.cpp \
-  $$SRC_DIR/EGFRvIIISurrogateIndex.cxx \
+  \# $$SRC_DIR/EGFRvIIISurrogateIndex.cxx \
   $$SRC_DIR/GeodesicSegmentation.cpp \
-  $$SRC_DIR/GeodesicSegmentation.cxx \
+  \# $$SRC_DIR/GeodesicSegmentation.cxx \
   $$SRC_DIR/GreedyRegistration.cxx \
   $$SRC_DIR/ImagingSubtypePredictor.cpp \
-  $$SRC_DIR/ImagingSubtypePredictor.cxx \
+  \# $$SRC_DIR/ImagingSubtypePredictor.cxx \
   $$SRC_DIR/MolecularSubtypePredictor.cpp \
-  $$SRC_DIR/MolecularSubtypePredictor.cxx \
+  \# $$SRC_DIR/MolecularSubtypePredictor.cxx \
   $$SRC_DIR/PerfusionAlignment.cpp \
-  $$SRC_DIR/PerfusionAlignment.cxx \
+  \# $$SRC_DIR/PerfusionAlignment.cxx \
   $$SRC_DIR/PerfusionDerivatives.cpp \
-  $$SRC_DIR/PerfusionDerivatives.cxx \
+  \# $$SRC_DIR/PerfusionDerivatives.cxx \
   $$SRC_DIR/PerfusionPCA.cpp \
-  $$SRC_DIR/PerfusionPCA.cxx \
+  \# $$SRC_DIR/PerfusionPCA.cxx \
   $$SRC_DIR/PopulationAtlases.cpp \
-  $$SRC_DIR/PopulationAtlases.cxx \
+  \# $$SRC_DIR/PopulationAtlases.cxx \
   $$SRC_DIR/PseudoProgressionEstimator.cpp \
-  $$SRC_DIR/PseudoProgressionEstimator.cxx \
+  \# $$SRC_DIR/PseudoProgressionEstimator.cxx \
   $$SRC_DIR/RecurrenceEstimator.cpp \
-  $$SRC_DIR/RecurrenceEstimator.cxx \
-  $$SRC_DIR/SBRT_Analysis.cxx \
-  $$SRC_DIR/SBRT_LungField.cxx \
-  $$SRC_DIR/SBRT_Nodule.cxx \
+  \# $$SRC_DIR/RecurrenceEstimator.cxx \
+  \# $$SRC_DIR/SBRT_Analysis.cxx \
+  \# $$SRC_DIR/SBRT_LungField.cxx \
+  \# $$SRC_DIR/SBRT_Nodule.cxx \
   $$SRC_DIR/SurvivalPredictor.cpp \
-  $$SRC_DIR/SurvivalPredictor.cxx \
+  \# $$SRC_DIR/SurvivalPredictor.cxx \
   $$SRC_DIR/TrainingModule.cpp \
-  $$SRC_DIR/TrainingModule.cxx \
+  \# $$SRC_DIR/TrainingModule.cxx \
   $$SRC_DIR/WhiteStripe.cpp \
-  $$SRC_DIR/WhiteStripe.cxx \
+  \# $$SRC_DIR/WhiteStripe.cxx \
   $$SRC_DIR/FetalBrain.cpp \
 
 

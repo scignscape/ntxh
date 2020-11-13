@@ -26,6 +26,12 @@ See COPYING file or https://www.med.upenn.edu/cbica/captk/license.html
 #include "itkRegionOfInterestImageFilter.h"
 #include "itkHistogramToTextureFeaturesFilter.h"
 
+//? added ...
+#include "itkCSVArray2DFileReader.h"
+#include "CaPTkEnums.h"
+
+
+
 #ifdef APP_BASE_CAPTK_H
 #include "ApplicationBase.h"
 #endif

@@ -62,6 +62,11 @@ publisher={Radiological Society of North America}
 #endif
 
 
+//? added ...
+#include "vnl/vnl_math.h"
+#include "../vcl/vcl_legacy_aliases.h"
+
+
 class DiffusionDerivatives
 #ifdef APP_BASE_CaPTk_H
 	: public ApplicationBase

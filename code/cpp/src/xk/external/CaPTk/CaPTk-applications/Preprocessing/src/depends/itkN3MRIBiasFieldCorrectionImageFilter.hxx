@@ -28,6 +28,13 @@
 #include <cmath>
 
 
+//? added 
+#include "vnl/vnl_math.h"
+#include "../vcl/vcl_legacy_aliases.h"
+//?#define vnl_math_sqr vnl_math::sqr
+
+
+
 namespace itk
 {
 /**
