@@ -1,0 +1,31 @@
+./CaPTk-applications/BreastTexturePipeline/src/BreastTexturePipeline.cxx:  auto currentApplicationPath = cbica::normPath(cbica::getExecutablePath()) + "/";
+./CaPTk-applications/BreastTexturePipeline/src/BreastTexturePipeline.cxx:  auto captk_currentApplicationPath = cbica::normPath(cbica::getExecutablePath());
+./CaPTk-applications/FeatureExtraction/src/FeatureExtraction.cxx:    auto temp = cbica::normPath(cbica::getExecutablePath() + "/../data/" + baseParamFile);
+./CaPTk-applications/FeatureExtraction/src/FeatureExtraction.cxx:        dataDir = cbica::normPath(cbica::getExecutablePath() + "/../../data/");
+./CaPTk-applications/FeatureExtraction/src/FeatureExtraction.cxx:        dataDir = cbica::normPath(cbica::getExecutablePath() + "/../Resources/data/features/";
+./CaPTk-applications/FeatureExtraction/src/FeatureExtraction.hxx:  auto collage_cli = cbica::getExecutablePath() + "/collageradiomics"
+./CaPTk-applications/GeodesicTraining/src/depends/GeodesicTrainingSegmentation.h:                        m_file_extension = DEFAULT_FILE_EXTENSION, m_output_folder = cbica::getExecutablePath();
+./CaPTk-applications/GeodesicTraining/src/depends/Processing.h:		std::string m_output_folder = cbica::getExecutablePath();
+./CaPTk-applications/GreedyRegistration.cxx:    auto commandToRun = cbica::getExecutablePath() + "/Preprocessing" +
+./CaPTk-applications/individualApps/sbrt_source/src/common_includes/cbicaUtilities.cpp:  std::string getExecutablePath()
+./CaPTk-applications/individualApps/sbrt_source/src/common_includes/cbicaUtilities.h:  std::string getExecutablePath();
+./CaPTk-applications/Preprocessing/src/Preprocessing.cxx:      std::string greedyPathAndDim = cbica::getExecutablePath() + "greedy" +
+./CaPTk-applications/Utilities/src/Utilities.cxx:		m_exe = cbica::getExecutablePath() + "/dcm2niix.exe";
+./CaPTk-applications/Utilities/src/Utilities.cxx:		m_exe = cbica::getExecutablePath() + "/dcm2niix";
+./CaPTk-applications/Utilities/src/Utilities.cxx:		m_exe = cbica::getExecutablePath() + "../../src/applications/individualApps/dcm2niix" + "/dcm2niix.exe";
+./CaPTk-applications/Utilities/src/Utilities.cxx:		m_exe = cbica::getExecutablePath() + "../../src/applications/individualApps/dcm2niix" + "/dcm2niix";
+./CaPTk-common/inc/CaPTkDefines.h:  const std::string captk_currentApplicationPath = cbica::getExecutablePath();
+./CaPTk-view/gui/ComparisonViewerCommand.cpp:  cbica::WriteImage< MaskImageType >(maskItk, cbica::getExecutablePath() + "/tempMask_1.nii.gz");
+./CaPTk-view/gui/ComparisonViewerCommand.cpp:    //cbica::WriteImage< MaskImageType >(maskItk, cbica::getExecutablePath() + "/tempMask_1.nii.gz");
+./CaPTk-view/gui/ComparisonViewerCommand.cpp:    //cbica::WriteImage<MaskSliceType>(extractFilter->GetOutput(), cbica::getExecutablePath() + "/captk_outputMask_" + std::to_string(orientation) + "_extracted.nii.gz");
+./CaPTk-view/gui/ComparisonViewerCommand.cpp:    //cbica::WriteImage<MaskSliceType>(connectedFilter->GetOutput(), cbica::getExecutablePath() + "/captk_outputMask_" + std::to_string(orientation) + "_connected.nii.gz");
+./CaPTk-view/gui/SlicerManagerCommand.cpp:  cbica::WriteImage< MaskImageType >(maskItk, cbica::getExecutablePath() + "/tempMask_1.nii.gz");
+./CaPTk-view/gui/SlicerManagerCommand.cpp:    //cbica::WriteImage< MaskImageType >(maskItk, cbica::getExecutablePath() + "/tempMask_1.nii.gz");
+./CaPTk-view/gui/SlicerManagerCommand.cpp:    //cbica::WriteImage<MaskSliceType>(extractFilter->GetOutput(), cbica::getExecutablePath() + "/captk_outputMask_" + std::to_string(orientation) + "_extracted.nii.gz");
+./CaPTk-view/gui/SlicerManagerCommand.cpp:    //cbica::WriteImage<MaskSliceType>(connectedFilter->GetOutput(), cbica::getExecutablePath() + "/captk_outputMask_" + std::to_string(orientation) + "_connected.nii.gz");
+./cbica-toolkit/cbicaCmdParser.cpp:  std::string _getExecutablePath()
+./cbica-toolkit/cbicaCmdParser.cpp:        // writeCWLFile(_getExecutablePath(), false);
+./cbica-toolkit/cbicaITKUtilities.h:        std::string hausdorffExe = cbica::getExecutablePath() + "/Hausdorff95"
+./cbica-toolkit/cbicaITKUtilities.h:          hausdorffExe = cbica::getExecutablePath() + "../hausdorff95/Hausdorff95"
+./cbica-toolkit/cbicaUtilities.cpp:  std::string getExecutablePath()
+./cbica-toolkit/cbicaUtilities.h:  std::string getExecutablePath();

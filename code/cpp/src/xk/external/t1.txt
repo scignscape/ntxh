@@ -1,0 +1,55 @@
+./CaPTk/CaPTk-applications/common_includes/GreedyAPI.cxx:    vnl_vector_fixed<TVNL,TITKVector::Dimension> &vvec)
+./CaPTk/CaPTk-applications/common_includes/GreedyAPI.cxx:  typedef vnl_vector_fixed<double, 3> Vec3;
+./CaPTk/CaPTk-applications/common_includes/GreedyAPI.h:  typedef vnl_vector_fixed<TReal, VDim> VecFx;
+./CaPTk/CaPTk-applications/common_includes/GreedyAPI.h:    typedef vnl_vector_fixed<double, VDim> Vec;
+./CaPTk/CaPTk-applications/common_includes/GreedyAPI.h:    typedef vnl_vector_fixed<double, VDim> Vec3;
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:#include "vnl/vnl_vector_fixed.h"
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:class iris_vector_fixed : public vnl_vector_fixed<T,VSize> {
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:  typedef vnl_vector_fixed<T,VSize> Parent;
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:to_int(const vnl_vector_fixed<T, VSize> &x)
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:to_unsigned_int(const vnl_vector_fixed<T, VSize> &x)
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:to_long(const vnl_vector_fixed<T, VSize> &x)
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:to_unsigned_long(const vnl_vector_fixed<T, VSize> &x)
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:to_float(const vnl_vector_fixed<T, VSize> &x)
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:to_double(const vnl_vector_fixed<T, VSize> &x)
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:vector_min(const vnl_vector_fixed<T, VSize> &x,
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:const vnl_vector_fixed<T, VSize> &y)
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:vector_max(const vnl_vector_fixed<T, VSize> &x,
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:const vnl_vector_fixed<T, VSize> &y)
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:vector_multiply(const vnl_vector_fixed<T, VSize> &x,
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:const vnl_vector_fixed<T, VSize> &y)
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:vector_multiply_mixed(const vnl_vector_fixed<T1, VSize> &x,
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:const vnl_vector_fixed<T2, VSize> &y)
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:const vnl_vector_fixed<TAny, VSize> &x)
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:const vnl_vector_fixed<TAny, VSize> &x)
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:vector_multiply_add_mixed(const vnl_vector_fixed<T1, VSize> &x,
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:const vnl_vector_fixed<T2, VSize> &y,
+./CaPTk/CaPTk-applications/common_includes/IRISVectorTypes.h:const vnl_vector_fixed<T3, VSize> &z)
+./CaPTk/CaPTk-applications/common_includes/itkGaussianInterpolateImageFunction.h:      vnl_vector_fixed<double, VDim> dsum_me(0.0), dsum_m(0.0), dw;
+./CaPTk/CaPTk-applications/common_includes/LinearTransformToWarpFilter.txx:  vnl_vector_fixed<double, ImageDimension> off =
+./CaPTk/CaPTk-applications/common_includes/MultiComponentImageMetricBase.h:    const vnl_vector_fixed<TFloat, VDim> &offset,
+./CaPTk/CaPTk-applications/common_includes/MultiComponentImageMetricBase.h:    vnl_vector_fixed<TFloat, VDim> &offset,
+./CaPTk/CaPTk-applications/common_includes/MultiComponentImageMetricBase.h:    const vnl_vector_fixed<TFloat, VDim> &offset,
+./CaPTk/CaPTk-applications/common_includes/MultiImageAffineMSDMetricFilter.txx:  vnl_vector_fixed<double, ImageDimension> grad, gradM;
+./CaPTk/CaPTk-applications/common_includes/MultiImageSimpleWarpImageFilter.txx:  vnl_vector_fixed<float, ImageDimension> cix;
+./CaPTk/CaPTk-applications/common_includes/MultiImageSimpleWarpImageFilter.txx:  vnl_vector_fixed<float, ImageDimension> t_b;
+./CaPTk/CaPTk-applications/common_includes/MultiImageSimpleWarpImageFilter.txx:  vnl_vector_fixed<float, ImageDimension> cix;
+./CaPTk/CaPTk-applications/common_includes/MultiImageSimpleWarpImageFilter.txx:  vnl_vector_fixed<float, ImageDimension> cix;
+./CaPTk/CaPTk-applications/common_includes/MultiImageSimpleWarpImageFilter.txx:  vnl_vector_fixed<double, ImageDimension> off =
+./CaPTk/CaPTk-applications/common_includes/MultiImageSimpleWarpImageFilter.txx:  vnl_vector_fixed<double, ImageDimension> grad, gradM;
+./CaPTk/CaPTk-applications/individualApps/sbrt_source/src/common_includes/cbicaDTIProcessingManager.cpp:    std::vector< vnl_vector_fixed<double, 3> > DiffusionVectors;
+./CaPTk/CaPTk-applications/individualApps/sbrt_source/src/common_includes/cbicaDTIProcessingManager.cpp:    std::vector< vnl_vector_fixed<double, 3> > DiffusionVectorsWrite;
+./CaPTk/CaPTk-applications/individualApps/sbrt_source/src/common_includes/cbicaDTIProcessingManager.cpp:      vnl_vector_fixed<double, Dimensions> vect3d;
+./CaPTk/CaPTk-applications/individualApps/sbrt_source/src/common_includes/cbicaDTIProcessingManager.cpp:      vnl_vector_fixed<double, Dimensions> vect3d;
+./CaPTk/CaPTk-applications/individualApps/sbrt_source/src/common_includes/cbicaDTIProcessingManager.cpp:    //  vnl_vector_fixed<double, Dimensions> vecTemp = DiffusionVectors[k];
+./CaPTk/CaPTk-applications/individualApps/sbrt_source/src/common_includes/cbicaDTIProcessingManager.h:    std::vector<ImageTypeFloat3D::Pointer> dtiRecon(VectorImageType::Pointer inputImage, std::string maskFile, int verbose, int inputIsVectorImage, std::vector< vnl_vector_fixed<double, 3> > diffuionVector, double bValue);
+./CaPTk/CaPTk-applications/individualApps/sbrt_source/src/common_includes/cbicaDTIProcessingManager.h:  std::vector<itk::Image<float, Dimensions>::Pointer> DTIProcessingManager::dtiRecon(VectorImageType::Pointer inputImage, std::string maskFile, int verbose, int inputIsVectorImage, std::vector< vnl_vector_fixed<double, 3> > DiffusionVectorWrite, double bValue)
+./CaPTk/CaPTk-applications/individualApps/sbrt_source/src/common_includes/cbicaDTIProcessingManager.h:      vnl_vector_fixed<double, 3> val = DiffusionVectorWrite[index1];
+./CaPTk/cbica-toolkit/cbicaDTIProcessingManager.cpp:    std::vector< vnl_vector_fixed<double, 3> > DiffusionVectors;
+./CaPTk/cbica-toolkit/cbicaDTIProcessingManager.cpp:    std::vector< vnl_vector_fixed<double, 3> > DiffusionVectorsWrite;
+./CaPTk/cbica-toolkit/cbicaDTIProcessingManager.cpp:      vnl_vector_fixed<double, Dimensions> vect3d;
+./CaPTk/cbica-toolkit/cbicaDTIProcessingManager.cpp:      vnl_vector_fixed<double, Dimensions> vect3d;
+./CaPTk/cbica-toolkit/cbicaDTIProcessingManager.cpp:    //  vnl_vector_fixed<double, Dimensions> vecTemp = DiffusionVectors[k];
+./CaPTk/cbica-toolkit/cbicaDTIProcessingManager.h:    std::vector<ImageTypeScalar3D::Pointer> dtiRecon(VectorImageType::Pointer inputImage, std::string maskFile, int verbose, int inputIsVectorImage, std::vector< vnl_vector_fixed<double, 3> > diffuionVector, double bValue);
+./CaPTk/cbica-toolkit/cbicaDTIProcessingManager.h:  std::vector<itk::Image<ImageTypeScalar3D::PixelType, Dimensions>::Pointer> DTIProcessingManager::dtiRecon(VectorImageType::Pointer inputImage, std::string maskFile, int verbose, int inputIsVectorImage, std::vector< vnl_vector_fixed<double, 3> > DiffusionVectorWrite, double bValue)
+./CaPTk/cbica-toolkit/cbicaDTIProcessingManager.h:      vnl_vector_fixed<double, 3> val = DiffusionVectorWrite[index1];

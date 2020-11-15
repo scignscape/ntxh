@@ -237,6 +237,10 @@ INCLUDEPATH += \
 INCLUDEPATH +=   $$SRC_DIR/extra
 
 
+INCLUDEPATH +=   $$SRC_PROSET_DIR/vxl/vxl-v3p
+
+
+
 HEADERS += \
 
 
@@ -246,12 +250,32 @@ SOURCES += \
 
 
 
+SOURCES += \
+#  $$SRC_GROUP_DIR/mangled.cpp \
+
+
+
 #LIBS += -L$${ITK_LIB_DIR} -lITKBioCell-$$ITK_VERSION_NUMBER
 #LIBS += -L$${ITK_LIB_DIR} -lITKFEM-$$ITK_VERSION_NUMBER
 #LIBS += -L$${ITK_LIB_DIR} -lITKIOMesh-$$ITK_VERSION_NUMBER
 #LIBS += -L$${ITK_LIB_DIR} -litknetlib-$$ITK_VERSION_NUMBER
 #LIBS += -L$${ITK_LIB_DIR} -lhdf5
 #LIBS += -L$${ITK_LIB_DIR} -litkgdcmopenjpeg-$$ITK_VERSION_NUMBER
+
+
+
+
+#LIBS += /media/mint/MainVolume/medInria/VXL-build/lib/libvnl.a
+#LIBS += /media/mint/MainVolume/medInria/VXL-build/lib/libvnl_algo.a
+#LIBS += /media/mint/MainVolume/medInria/VXL-build/lib/libv3p_netlib.a
+
+
+LIBS += -L$$TARGETSDIR  -lgdcm-common -lgdcm-dict -lgdcm-dsed -lgdcm-iod -lgdcm-mexd -lgdcm-msff -lgdcm-openjp2 \
+  -lcbica-toolkit -lyaml-cpp
+
+
+#LIBS += -L$${ITK_LIB_DIR} -lITKSpatialObjects-$$ITK_VERSION_NUMBER
+#LIBS += -L$${ITK_LIB_DIR} -lITKTransform-$$ITK_VERSION_NUMBER
 
 
 # ITK Libs
@@ -287,7 +311,7 @@ LIBS += -L$${ITK_LIB_DIR} -lITKOptimizersv4-$$ITK_VERSION_NUMBER
 LIBS += -L$${ITK_LIB_DIR} -lITKPath-$$ITK_VERSION_NUMBER
 LIBS += -L$${ITK_LIB_DIR} -lITKPolynomials-$$ITK_VERSION_NUMBER
 LIBS += -L$${ITK_LIB_DIR} -lITKQuadEdgeMesh-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKSpatialObjects-$$ITK_VERSION_NUMBER
+
 LIBS += -L$${ITK_LIB_DIR} -lITKStatistics-$$ITK_VERSION_NUMBER
 LIBS += -L$${ITK_LIB_DIR} -lITKTransform-$$ITK_VERSION_NUMBER
 LIBS += -L$${ITK_LIB_DIR} -lITKVNLInstantiation-$$ITK_VERSION_NUMBER
@@ -334,23 +358,35 @@ LIBS += -L$${ITK_LIB_DIR} -lITKEXPAT-$$ITK_VERSION_NUMBER
 LIBS += -L$${ITK_LIB_DIR} -litkgdcmCommon-$$ITK_VERSION_NUMBER
 LIBS += -L$${ITK_LIB_DIR} -litkzlib-$$ITK_VERSION_NUMBER
 
-#LIBS += -L/media/mint/MainVolume/medInria/gdcm/libgdcm3.0_3.0.7-3+b2_amd64/usr/lib/x86_64-linux-gnu \
-# -lgdcmCommon -lgdcmDICT -lgdcmDSED -lgdcmIOD -lgdcmjpeg8 -lgdcmjpeg12 -lgdcmjpeg16 -lgdcmMEXD -lgdcmMSFF
+
+LIBS += -L$$TARGETSDIR -lvxl-vnl
 
 
-LIBS += /media/mint/MainVolume/medInria/gdcm/libgdcm3.0_3.0.7-3+b2_amd64/usr/lib/x86_64-linux-gnu/libgdcmCommon.so.3.0.7
-LIBS += /media/mint/MainVolume/medInria/gdcm/libgdcm3.0_3.0.7-3+b2_amd64/usr/lib/x86_64-linux-gnu/libgdcmDICT.so.3.0.7
-LIBS += /media/mint/MainVolume/medInria/gdcm/libgdcm3.0_3.0.7-3+b2_amd64/usr/lib/x86_64-linux-gnu/libgdcmDSED.so.3.0.7
-LIBS += /media/mint/MainVolume/medInria/gdcm/libgdcm3.0_3.0.7-3+b2_amd64/usr/lib/x86_64-linux-gnu/libgdcmIOD.so.3.0.7
-LIBS += /media/mint/MainVolume/medInria/gdcm/libgdcm3.0_3.0.7-3+b2_amd64/usr/lib/x86_64-linux-gnu/libgdcmjpeg8.so.3.0.7
-LIBS += /media/mint/MainVolume/medInria/gdcm/libgdcm3.0_3.0.7-3+b2_amd64/usr/lib/x86_64-linux-gnu/libgdcmjpeg12.so.3.0.7
-LIBS += /media/mint/MainVolume/medInria/gdcm/libgdcm3.0_3.0.7-3+b2_amd64/usr/lib/x86_64-linux-gnu/libgdcmjpeg16.so.3.0.7
-LIBS += /media/mint/MainVolume/medInria/gdcm/libgdcm3.0_3.0.7-3+b2_amd64/usr/lib/x86_64-linux-gnu/libgdcmMEXD.so.3.0.7
-LIBS += /media/mint/MainVolume/medInria/gdcm/libgdcm3.0_3.0.7-3+b2_amd64/usr/lib/x86_64-linux-gnu/libgdcmMSFF.so.3.0.7
+LIBS += -L$$TARGETSDIR -lgdcmopenjp2
 
 
+LIBS += -ldl 
 
-LIBS += -ldl
+LIBS += \
+  -lnetlib \
+  -lv3p_netlib \
+  -lvbl \
+  -lvcl \
+  -lvgl \
+  -lvgl_algo \
+  -lvil \
+  -lvnl \
+  -lvnl_algo \
+  -lvpl \
+  -lvul \
+
+LIBS += -lgomp
+
+# LIBS += -lf2c
+# -lvnl -lvnl_algo -lv3p_netlib -lf2c
+#  -lopenjpeg2 \
+#  -lrply \
+
 
 
 
