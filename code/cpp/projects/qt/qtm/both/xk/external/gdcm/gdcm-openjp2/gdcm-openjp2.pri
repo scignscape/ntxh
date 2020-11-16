@@ -13,6 +13,9 @@ INCLUDEPATH += $$SRC_GROUP_DIR
 
 DEFINES += USE_JPIP
 
+CONFIG += staticlib
+
+
 
 #INCLUDEPATH += $$SRC_GROUP_DIR/Utilities \
 #  $$SRC_GROUP_DIR/gdcm-common \

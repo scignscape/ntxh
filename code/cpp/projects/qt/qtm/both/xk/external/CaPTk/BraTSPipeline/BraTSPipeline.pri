@@ -17,6 +17,8 @@ include($$ROOT_DIR/../preferred/itk.pri)
 include($$ROOT_DIR/../preferred/vtk.pri)
 include($$ROOT_DIR/../preferred/opencv.pri)
 
+include($$ROOT_DIR/../preferred/vxl.pri)
+
 
 QT += gui  widgets 
 
@@ -76,11 +78,6 @@ INCLUDEPATH += \
   $$SRC_GROUP_DIR/applications/WhiteStripe_includes \
   $$SRC_GROUP_DIR/applications/BreastTexturePipeline/src/depends \
   $$SRC_GROUP_DIR/applications/FeatureExtraction/src
-
-
-
-#INCLUDEPATH += \
-#  ../../../ITKSkullStrip-master/include
 
 
 INCLUDEPATH += \
@@ -231,8 +228,6 @@ INCLUDEPATH += \
   $$ITK_SRC_DIR/Modules/ThirdParty/VNL/src/vxl/core \
 
 
-#INCLUDEPATH += ../thirdparty/yaml-cpp/include
-
 
 INCLUDEPATH +=   $$SRC_DIR/extra
 
@@ -249,125 +244,99 @@ SOURCES += \
   $$SRC_GROUP_DIR/CaPTk-applications/BraTSPipeline.cxx \
 
 
-
-SOURCES += \
-#  $$SRC_GROUP_DIR/mangled.cpp \
-
-
-
-#LIBS += -L$${ITK_LIB_DIR} -lITKBioCell-$$ITK_VERSION_NUMBER
-#LIBS += -L$${ITK_LIB_DIR} -lITKFEM-$$ITK_VERSION_NUMBER
-#LIBS += -L$${ITK_LIB_DIR} -lITKIOMesh-$$ITK_VERSION_NUMBER
-#LIBS += -L$${ITK_LIB_DIR} -litknetlib-$$ITK_VERSION_NUMBER
-#LIBS += -L$${ITK_LIB_DIR} -lhdf5
-#LIBS += -L$${ITK_LIB_DIR} -litkgdcmopenjpeg-$$ITK_VERSION_NUMBER
-
-
-
-
-#LIBS += /media/mint/MainVolume/medInria/VXL-build/lib/libvnl.a
-#LIBS += /media/mint/MainVolume/medInria/VXL-build/lib/libvnl_algo.a
-#LIBS += /media/mint/MainVolume/medInria/VXL-build/lib/libv3p_netlib.a
-
-
 LIBS += -L$$TARGETSDIR  -lgdcm-common -lgdcm-dict -lgdcm-dsed -lgdcm-iod -lgdcm-mexd -lgdcm-msff -lgdcm-openjp2 \
   -lcbica-toolkit -lyaml-cpp
 
 
-#LIBS += -L$${ITK_LIB_DIR} -lITKSpatialObjects-$$ITK_VERSION_NUMBER
-#LIBS += -L$${ITK_LIB_DIR} -lITKTransform-$$ITK_VERSION_NUMBER
-
-
 # ITK Libs
-LIBS += -L$${ITK_LIB_DIR} -lITKBiasCorrection-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKDICOMParser-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOBMP-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOBioRad-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOCSV-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOGDCM-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOGE-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOGIPL-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOHDF5-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOJPEG-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOLSM-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOMRC-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOMeta-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIONIFTI-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIONRRD-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOPNG-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOSiemens-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOSpatialObjects-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOStimulate-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOTransformBase-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOTransformHDF5-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOTransformInsightLegacy-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOTransformMatlab-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOVTK-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKKLMRegionGrowing-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKLabelMap-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKMesh-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKOptimizers-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKOptimizersv4-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKPath-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKPolynomials-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKQuadEdgeMesh-$$ITK_VERSION_NUMBER
+LIBS += -L$${ITK_LIB_DIR} \
+  -lITKBiasCorrection-$$ITK_VERSION_NUMBER  \ 
+  -lITKDICOMParser-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOBMP-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOBioRad-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOCSV-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOGDCM-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOGE-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOGIPL-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOHDF5-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOJPEG-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOLSM-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOMRC-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOMeta-$$ITK_VERSION_NUMBER  \ 
+  -lITKIONIFTI-$$ITK_VERSION_NUMBER  \ 
+  -lITKIONRRD-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOPNG-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOSiemens-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOSpatialObjects-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOStimulate-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOTransformBase-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOTransformHDF5-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOTransformInsightLegacy-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOTransformMatlab-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOVTK-$$ITK_VERSION_NUMBER  \ 
+  -lITKKLMRegionGrowing-$$ITK_VERSION_NUMBER  \ 
+  -lITKLabelMap-$$ITK_VERSION_NUMBER  \ 
+  -lITKMesh-$$ITK_VERSION_NUMBER  \ 
+  -lITKOptimizers-$$ITK_VERSION_NUMBER  \ 
+  -lITKOptimizersv4-$$ITK_VERSION_NUMBER  \ 
+  -lITKPath-$$ITK_VERSION_NUMBER  \ 
+  -lITKPolynomials-$$ITK_VERSION_NUMBER  \ 
+  -lITKQuadEdgeMesh-$$ITK_VERSION_NUMBER  \ 
+  -lITKStatistics-$$ITK_VERSION_NUMBER  \ 
+  -lITKTransform-$$ITK_VERSION_NUMBER  \ 
+  -lITKVNLInstantiation-$$ITK_VERSION_NUMBER  \ 
+  -lITKVTK-$$ITK_VERSION_NUMBER  \ 
+  -lITKVideoCore-$$ITK_VERSION_NUMBER  \ 
+  -lITKVideoIO-$$ITK_VERSION_NUMBER  \ 
+  -lITKWatersheds-$$ITK_VERSION_NUMBER  \ 
+  -litkgdcmMEXD-$$ITK_VERSION_NUMBER  \ 
+  -litktestlib-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOTIFF-$$ITK_VERSION_NUMBER  \ 
+  -lITKgiftiio-$$ITK_VERSION_NUMBER  \ 
+  -lITKMetaIO-$$ITK_VERSION_NUMBER  \ 
+  -lITKNrrdIO-$$ITK_VERSION_NUMBER  \ 
+  -litkpng-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOIPL-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOXML-$$ITK_VERSION_NUMBER  \ 
+  -lITKTransformFactory-$$ITK_VERSION_NUMBER  \ 
+  -litkhdf5_cpp \
+  -litkNetlibSlatec-$$ITK_VERSION_NUMBER  \ 
+  -litkvnl_algo-$$ITK_VERSION_NUMBER  \ 
+  -litkgdcmMSFF-$$ITK_VERSION_NUMBER  \ 
+  -litkgdcmsocketxx-$$ITK_VERSION_NUMBER  \ 
+  -litktiff-$$ITK_VERSION_NUMBER  \ 
+  -lITKniftiio-$$ITK_VERSION_NUMBER  \ 
+  -lITKIOImageBase-$$ITK_VERSION_NUMBER  \ 
+  -litkhdf5 \
+  -litkvnl-$$ITK_VERSION_NUMBER  \ 
+  -litkv3p_netlib-$$ITK_VERSION_NUMBER  \ 
+  -litkgdcmDICT-$$ITK_VERSION_NUMBER  \ 
+  -litkgdcmcharls-$$ITK_VERSION_NUMBER  \ 
+  -litkgdcmuuid-$$ITK_VERSION_NUMBER  \ 
+  -litkgdcmjpeg8-$$ITK_VERSION_NUMBER  \ 
+  -litkgdcmjpeg16-$$ITK_VERSION_NUMBER  \ 
+  -litkgdcmjpeg12-$$ITK_VERSION_NUMBER  \ 
+  -litkjpeg-$$ITK_VERSION_NUMBER  \ 
+  -lITKznz-$$ITK_VERSION_NUMBER  \ 
+  -lITKCommon-$$ITK_VERSION_NUMBER  \ 
+  -litkvcl-$$ITK_VERSION_NUMBER  \ 
+  -litkgdcmIOD-$$ITK_VERSION_NUMBER  \ 
+  -litksys-$$ITK_VERSION_NUMBER  \ 
+  -litkdouble-conversion-$$ITK_VERSION_NUMBER  \ 
+  -litkgdcmDSED-$$ITK_VERSION_NUMBER  \ 
+  -lITKEXPAT-$$ITK_VERSION_NUMBER  \ 
+  -litkgdcmCommon-$$ITK_VERSION_NUMBER  \ 
+  -litkzlib-$$ITK_VERSION_NUMBER  \
+  -lITKSpatialObjects-$$ITK_VERSION_NUMBER  \
+  -lITKTransform-$$ITK_VERSION_NUMBER  \
 
-LIBS += -L$${ITK_LIB_DIR} -lITKStatistics-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKTransform-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKVNLInstantiation-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKVTK-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKVideoCore-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKVideoIO-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKWatersheds-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkgdcmMEXD-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litktestlib-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOTIFF-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKgiftiio-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKMetaIO-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKNrrdIO-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkpng-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOIPL-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOXML-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKTransformFactory-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkhdf5_cpp
-LIBS += -L$${ITK_LIB_DIR} -litkNetlibSlatec-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkvnl_algo-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkgdcmMSFF-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkgdcmsocketxx-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litktiff-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKniftiio-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKIOImageBase-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkhdf5
-LIBS += -L$${ITK_LIB_DIR} -litkvnl-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkv3p_netlib-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkgdcmDICT-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkgdcmcharls-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkgdcmuuid-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkgdcmjpeg8-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkgdcmjpeg16-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkgdcmjpeg12-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkjpeg-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKznz-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKCommon-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkvcl-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkgdcmIOD-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litksys-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkdouble-conversion-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkgdcmDSED-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -lITKEXPAT-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkgdcmCommon-$$ITK_VERSION_NUMBER
-LIBS += -L$${ITK_LIB_DIR} -litkzlib-$$ITK_VERSION_NUMBER
 
-
-LIBS += -L$$TARGETSDIR -lvxl-vnl
-
-
-LIBS += -L$$TARGETSDIR -lgdcmopenjp2
-
+LIBS += $$TARGETSDIR/libgdcm-openjp2.a
 
 LIBS += -ldl 
 
-LIBS += \
+
+LIBS += -L$$VXL_LIB_DIR \
   -lnetlib \
   -lv3p_netlib \
   -lvbl \
@@ -380,13 +349,6 @@ LIBS += \
   -lvpl \
   -lvul \
 
+
 LIBS += -lgomp
-
-# LIBS += -lf2c
-# -lvnl -lvnl_algo -lv3p_netlib -lf2c
-#  -lopenjpeg2 \
-#  -lrply \
-
-
-
 
