@@ -46,7 +46,10 @@ INCLUDEPATH += \
   $$SRC_GROUP_DIR/CaPTk-applications/common_includes \
   $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src \
   $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends \
-  $$SRC_GROUP_DIR/CaPTk-applications/WhiteStripe_includes
+  $$SRC_GROUP_DIR/CaPTk-applications/WhiteStripe_includes \
+  $$SRC_GROUP_DIR/CaPTk-applications/FeatureExtraction/src/depends \
+
+
 
 
 INCLUDEPATH += \
@@ -241,7 +244,7 @@ HEADERS += \
 
 
 SOURCES += \
-  $$SRC_GROUP_DIR/CaPTk-applications/BraTSPipeline.cxx \
+  $$SRC_GROUP_DIR/CaPTk-applications/FeatureExtraction/src/FeatureExtraction.cxx \
 
 
 LIBS += -L$$TARGETSDIR  -lgdcm-common -lgdcm-dict -lgdcm-dsed -lgdcm-iod -lgdcm-mexd -lgdcm-msff -lgdcm-openjp2 \
@@ -329,6 +332,10 @@ LIBS += -L$${ITK_LIB_DIR} \
   -litkzlib-$$ITK_VERSION_NUMBER  \
   -lITKSpatialObjects-$$ITK_VERSION_NUMBER  \
   -lITKTransform-$$ITK_VERSION_NUMBER  \
+  -lITKSmoothing-$$ITK_VERSION_NUMBER  \
+
+
+LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_imgproc
 
 
 LIBS += $$TARGETSDIR/libgdcm-openjp2.a

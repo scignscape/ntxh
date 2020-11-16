@@ -46,7 +46,12 @@ INCLUDEPATH += \
   $$SRC_GROUP_DIR/CaPTk-applications/common_includes \
   $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src \
   $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends \
-  $$SRC_GROUP_DIR/CaPTk-applications/WhiteStripe_includes
+  $$SRC_GROUP_DIR/CaPTk-applications/WhiteStripe_includes \
+
+
+#  $$SRC_GROUP_DIR/CaPTk-applications/FeatureExtraction/src/depends \
+
+
 
 
 INCLUDEPATH += \
@@ -237,11 +242,30 @@ INCLUDEPATH +=   $$SRC_PROSET_DIR/vxl/vxl-v3p
 
 
 HEADERS += \
-
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/GeodesicTrainingCaPTkApp.h \
 
 
 SOURCES += \
-  $$SRC_GROUP_DIR/CaPTk-applications/BraTSPipeline.cxx \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/GeodesicTraining.cxx \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/GeodesicTrainingCaPTkApp.cpp \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends/AdaptiveGeodesicDistance.cpp \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends/ConfigParserRF.cpp \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends/ConvertionsOpenCV.cpp \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends/ConvertionsYAML.cpp \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends/GeodesicTrainingSegmentation.cpp \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends/OperationsSvmGTS.cpp \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends/RandomForestSuite.cpp \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends/RFPrepareTrainData.cpp \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends/RFSuiteManager.cpp \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends/SvmSuite.cpp \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends/SvmSuiteDescription.cpp \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends/SvmSuiteManager.cpp \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends/SvmSuiteOperations.cpp \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends/SvmSuiteUtil.cpp \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends/UtilCvMatToImageGTS.cpp \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends/UtilGTS.cpp \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends/UtilImageToCvMatGTS.cpp \
+  $$SRC_GROUP_DIR/CaPTk-applications/GeodesicTraining/src/depends/UtilItkGTS.cpp \
 
 
 LIBS += -L$$TARGETSDIR  -lgdcm-common -lgdcm-dict -lgdcm-dsed -lgdcm-iod -lgdcm-mexd -lgdcm-msff -lgdcm-openjp2 \
@@ -329,6 +353,9 @@ LIBS += -L$${ITK_LIB_DIR} \
   -litkzlib-$$ITK_VERSION_NUMBER  \
   -lITKSpatialObjects-$$ITK_VERSION_NUMBER  \
   -lITKTransform-$$ITK_VERSION_NUMBER  \
+
+
+LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_ml 
 
 
 LIBS += $$TARGETSDIR/libgdcm-openjp2.a

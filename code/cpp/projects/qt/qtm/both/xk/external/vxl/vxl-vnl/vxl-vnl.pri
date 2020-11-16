@@ -8,6 +8,9 @@ include(../build-group.pri)
 
 include($$ROOT_DIR/../preferred/sysr.pri)
 
+CONFIG += staticlib
+
+
 INCLUDEPATH += $$SRC_GROUP_DIR  \
   $$SRC_GROUP_DIR/configs \
   $$SRC_GROUP_DIR/configs/vcl \

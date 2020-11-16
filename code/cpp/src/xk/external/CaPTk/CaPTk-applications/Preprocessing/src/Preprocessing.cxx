@@ -11,6 +11,9 @@
 #include "itkN4BiasFieldCorrectionImageFilter.h"
 #include "SusanDenoising.h"
 
+//? I added the namespace ...
+using namespace _Preprocessing_;
+
 #include "itkBoundingBox.h"
 #include "itkPointSet.h"
 #include "itkBinaryThresholdImageFilter.h"
