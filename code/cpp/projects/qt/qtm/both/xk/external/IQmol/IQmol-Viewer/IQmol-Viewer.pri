@@ -13,20 +13,25 @@ include($$ROOT_DIR/../preferred/sysr.pri)
 
 #
 include($$ROOT_DIR/../preferred/boost.pri)
-#include($$ROOT_DIR/../preferred/openbabel.pri)
+include($$ROOT_DIR/../preferred/openbabel.pri)
 
-#include($$ROOT_DIR/../preferred/libssh2.pri)
+include($$ROOT_DIR/../preferred/libssh2.pri)
 
 
 INCLUDEPATH += $$SRC_GROUP_DIR  \
 
-INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Viewer/Viewer
-#
+
+INCLUDEPATH += $$SRC_DIR/Viewer   $$SRC_DIR/extras
+
+
+# 
 INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Util/Util
 #
 INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Data/Data
-#INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Parser/Parser
+INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Parser/Parser
+INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Process/Process
 #
+INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Network/Network
 
 INCLUDEPATH += $$SRC_GROUP_DIR/OpenMesh-Core
 
@@ -38,6 +43,9 @@ INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Layer/Layer
 
 INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Configurator/Configurator \
   $$SRC_GROUP_DIR/IQmol-Configurator/extras
+
+
+INCLUDEPATH += $$SRC_PROSET_DIR/CaPTk/yaml-cpp/include
 
 
 HEADERS += \
