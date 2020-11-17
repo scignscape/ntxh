@@ -21,17 +21,23 @@ INCLUDEPATH += $$SRC_GROUP_DIR  \
 
 
 INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Util/Util
-
 INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Data/Data
-
 INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Parser/Parser
-
 
 
 INCLUDEPATH += $$SRC_GROUP_DIR/OpenMesh-Core
 
 
 HEADERS += \
+  $$SRC_DIR/Network/Connection.h \
+  $$SRC_DIR/Network/HttpConnection.h \
+  $$SRC_DIR/Network/HttpReply.h \
+  $$SRC_DIR/Network/LocalConnection.h \
+  $$SRC_DIR/Network/LocalReply.h \
+  $$SRC_DIR/Network/Reply.h \
+  $$SRC_DIR/Network/SshConnection.h \
+  $$SRC_DIR/Network/SshReply.h \
+
 
 
 SOURCES += \

@@ -27,8 +27,6 @@ INCLUDEPATH += $$SRC_DIR/Main  $$SRC_DIR/extras
 
 UI_DIR = $$SRC_DIR/uis-gen/any-build
 
-#INCLUDEPATH += $$SRC_GROUP_DIR/uis-gen/qmake-console
-
 
 INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Viewer/Viewer
 #
@@ -89,4 +87,12 @@ FORMS += \
   $$SRC_DIR/Main/PeriodicTableMac.ui \
   $$SRC_DIR/Main/PreferencesBrowser.ui \
   $$SRC_DIR/Main/ToolBar.ui \
+
+
+LIBS += -L$$TARGETSDIR -lIQmol-Viewer  -lQGLViewer  \
+  -lIQmol-Layer -lIQmol-Configurator -lIQmol-Data  \
+  -lIQmol-Grid -lIQmol-Network -lIQmol-Old -lIQmol-Parser  \
+  -lIQmol-Plot -lIQmol-Process -lIQmol-Qui -lIQmol-Util  \
+  -lOpenMesh-Core -lOpenMesh-Tools
+
 

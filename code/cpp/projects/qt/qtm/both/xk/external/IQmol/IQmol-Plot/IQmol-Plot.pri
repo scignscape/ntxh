@@ -25,6 +25,8 @@ INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Util/Util
 
 
 HEADERS += \
+  $$SRC_DIR/Plot/CustomPlot.h \
+  $$SRC_DIR/Plot/qcustomplot.h \
 
 
 SOURCES += \

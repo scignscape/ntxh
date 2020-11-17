@@ -14,6 +14,8 @@ include($$ROOT_DIR/../preferred/sysr.pri)
 include($$ROOT_DIR/../preferred/boost.pri)
 include($$ROOT_DIR/../preferred/libssh2.pri)
 
+UI_DIR = $$SRC_DIR/uis-gen/any-build
+
 
 INCLUDEPATH += $$SRC_GROUP_DIR  \
 
@@ -29,13 +31,20 @@ INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Old/Old \
   $$SRC_GROUP_DIR/IQmol-Old/extras
 
 
-#INCLUDEPATH += $$SRC_GROUP_DIR/OpenMesh-Core
-
 INCLUDEPATH += $$SRC_PROSET_DIR/CaPTk/yaml-cpp/include
 
 
 
 HEADERS += \
+  $$SRC_DIR/Process/QueueResourcesDialog.h \
+  $$SRC_DIR/Process/Job.h \
+  $$SRC_DIR/Process/JobMonitor.h \
+  $$SRC_DIR/Process/QueueOptionsDialog.h \
+  $$SRC_DIR/Process/Server.h \
+  $$SRC_DIR/Process/ServerConfigurationDialog.h \
+  $$SRC_DIR/Process/ServerConfigurationListDialog.h \
+  $$SRC_DIR/Process/SshFileDialog.h \
+
 
 
 SOURCES += \

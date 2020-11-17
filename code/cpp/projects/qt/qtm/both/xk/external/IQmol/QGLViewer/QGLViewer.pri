@@ -8,6 +8,8 @@ include(../build-group.pri)
 
 QT += opengl xml
 
+UI_DIR = $$SRC_DIR/uis-gen/any-build
+
 
 include($$ROOT_DIR/../preferred/sysr.pri)
 
@@ -16,6 +18,13 @@ INCLUDEPATH += $$SRC_GROUP_DIR  \
 
 
 HEADERS += \
+  $$SRC_DIR/camera.h \
+  $$SRC_DIR/frame.h \
+  $$SRC_DIR/keyFrameInterpolator.h \
+  $$SRC_DIR/manipulatedCameraFrame.h \
+  $$SRC_DIR/manipulatedFrame.h \
+  $$SRC_DIR/qglviewer.h \
+	
 
 
 SOURCES += \
@@ -47,10 +56,9 @@ SOURCES += \
   $$SRC_DIR/vec.cpp \
 
 
-FORMS += 
-  $$SRC_DIR//ImageInterface.ui \
-  $$SRC_DIR//VRenderInterface.ui \
-
+FORMS += \
+  $$SRC_DIR/ImageInterface.ui \
+  $$SRC_DIR/VRenderInterface.ui \
 
 
 

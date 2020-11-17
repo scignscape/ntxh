@@ -4,7 +4,7 @@
 #     (See accompanying file LICENSE_1_0.txt or copy at
 #           http://www.boost.org/LICENSE_1_0.txt)
 
-include(../build-group.pri)
+include(  $$SRC_DIR/build-group.pri)
 
 QT += opengl xml
 
@@ -13,13 +13,16 @@ include($$ROOT_DIR/../preferred/sysr.pri)
 
 include($$ROOT_DIR/../preferred/boost.pri)
 
+UI_DIR = $$SRC_DIR/uis-gen/any-build
 
 INCLUDEPATH += $$SRC_GROUP_DIR  \
 
-#INCLUDEPATH += $$SRC_GROUP_DIR/OpenMesh-Core  \
-
 
 HEADERS += \
+  $$SRC_DIR/Util/ColorGradientDialog.h \
+  $$SRC_DIR/Util/QMsgBox.h \
+  $$SRC_DIR/Util/Task.h \
+  $$SRC_DIR/Util/Timer.h \
 
 
 SOURCES += \

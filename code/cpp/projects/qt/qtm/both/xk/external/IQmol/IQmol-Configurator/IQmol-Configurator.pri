@@ -12,8 +12,9 @@ QT += opengl xml sql
 include($$ROOT_DIR/../preferred/sysr.pri)
 
 include($$ROOT_DIR/../preferred/boost.pri)
-
 include($$ROOT_DIR/../preferred/openbabel.pri)
+
+UI_DIR = $$SRC_DIR/uis-gen/any-build
 
 
 INCLUDEPATH += $$SRC_GROUP_DIR  \
@@ -33,9 +34,31 @@ INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Plot/Plot
 INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Viewer/Viewer  
 
 
-
-
 HEADERS += \
+  $$SRC_DIR/Configurator/AxesConfigurator.h \
+  $$SRC_DIR/Configurator/AxesMeshConfigurator.h \
+  $$SRC_DIR/Configurator/BackgroundConfigurator.h \
+  $$SRC_DIR/Configurator/ClippingPlaneConfigurator.h \
+  $$SRC_DIR/Configurator/Configurator.h \
+  $$SRC_DIR/Configurator/CubeDataConfigurator.h \
+  $$SRC_DIR/Configurator/DipoleConfigurator.h \
+  $$SRC_DIR/Configurator/EfpFragmentListConfigurator.h \
+  $$SRC_DIR/Configurator/ExcitedStatesConfigurator.h \
+  $$SRC_DIR/Configurator/FileConfigurator.h \
+  $$SRC_DIR/Configurator/FrequenciesConfigurator.h \
+  $$SRC_DIR/Configurator/GeminalOrbitalsConfigurator.h \
+  $$SRC_DIR/Configurator/GeometryListConfigurator.h \
+  $$SRC_DIR/Configurator/InfoConfigurator.h \
+  $$SRC_DIR/Configurator/IsotopesConfigurator.h \
+  $$SRC_DIR/Configurator/MoleculeConfigurator.h \
+  $$SRC_DIR/Configurator/MullikenDecompositionsDialog.h \
+  $$SRC_DIR/Configurator/NmrConfigurator.h \
+  $$SRC_DIR/Configurator/OrbitalsConfigurator.h \
+  $$SRC_DIR/Configurator/SurfaceConfigurator.h \
+  $$SRC_DIR/Configurator/SymmetryConfigurator.h \
+  $$SRC_DIR/Configurator/ConstraintConfigurator.h \
+  $$SRC_DIR/Configurator/MolecularSurfacesConfigurator.h \
+
 
 
 SOURCES += \

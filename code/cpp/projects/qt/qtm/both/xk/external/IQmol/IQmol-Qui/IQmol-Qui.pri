@@ -14,21 +14,38 @@ include($$ROOT_DIR/../preferred/sysr.pri)
 include($$ROOT_DIR/../preferred/boost.pri)
 include($$ROOT_DIR/../preferred/openbabel.pri)
 
+UI_DIR = $$SRC_DIR/uis-gen/any-build
+
 
 INCLUDEPATH += $$SRC_GROUP_DIR  \
 
 
-INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Util/Util  \
-
-INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Data/Data  \
-
-INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Process/Process  \
-
-INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Parser/Parser  \
+INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Util/Util
+INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Data/Data
+INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Process/Process
+INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Parser/Parser
 
 
 
 HEADERS += \
+  $$SRC_DIR/Qui/AdcTab.h \
+  $$SRC_DIR/Qui/AimdTab.h \
+  $$SRC_DIR/Qui/AttenuationParameterTab.h \
+  $$SRC_DIR/Qui/AuxiliaryBasisTab.h \
+  $$SRC_DIR/Qui/CisTab.h \
+  $$SRC_DIR/Qui/EomTab.h \
+  $$SRC_DIR/Qui/FrequenciesTab.h \
+  $$SRC_DIR/Qui/GeometryConstraint.h \
+  $$SRC_DIR/Qui/InputDialog.h \
+  $$SRC_DIR/Qui/OptionDatabaseForm.h \
+  $$SRC_DIR/Qui/OptionEditors.h \
+  $$SRC_DIR/Qui/PrimaryBasisTab.h \
+  $$SRC_DIR/Qui/PropertiesTab.h \
+  $$SRC_DIR/Qui/QtNode.h \
+  $$SRC_DIR/Qui/QuiMolecule.h \
+  $$SRC_DIR/Qui/ReactionPathTab.h \
+  $$SRC_DIR/Qui/TransitionStateTab.h \
+  $$SRC_DIR/Qui/FreezingStringTab.h \
 
 
 SOURCES += \

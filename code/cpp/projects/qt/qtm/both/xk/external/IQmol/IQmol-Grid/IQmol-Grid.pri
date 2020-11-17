@@ -13,6 +13,8 @@ include($$ROOT_DIR/../preferred/sysr.pri)
 
 include($$ROOT_DIR/../preferred/boost.pri)
 
+UI_DIR = $$SRC_DIR/uis-gen/any-build
+
 
 INCLUDEPATH += $$SRC_GROUP_DIR  \
 
@@ -25,6 +27,18 @@ INCLUDEPATH += $$SRC_GROUP_DIR/OpenMesh-Tools
 
 
 HEADERS += \
+  $$SRC_DIR/Grid/BasisEvaluator.h \
+  $$SRC_DIR/Grid/BoundingBoxDialog.h \
+  $$SRC_DIR/Grid/DensityEvaluator.h \
+  $$SRC_DIR/Grid/GridEvaluator.h \
+  $$SRC_DIR/Grid/GridInfoDialog.h \
+  $$SRC_DIR/Grid/GridProduct.h \
+  $$SRC_DIR/Grid/MarchingCubes.h \
+  $$SRC_DIR/Grid/MeshDecimator.h \
+  $$SRC_DIR/Grid/MolecularGridEvaluator.h \
+  $$SRC_DIR/Grid/OrbitalEvaluator.h \
+  $$SRC_DIR/Grid/SurfaceGenerator.h \
+
 
 
 SOURCES += \

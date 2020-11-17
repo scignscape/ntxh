@@ -14,6 +14,8 @@ include($$ROOT_DIR/../preferred/sysr.pri)
 include($$ROOT_DIR/../preferred/boost.pri)
 include($$ROOT_DIR/../preferred/openbabel.pri)
 
+UI_DIR = $$SRC_DIR/uis-gen/any-build
+
 
 INCLUDEPATH += $$SRC_GROUP_DIR  \
 
@@ -35,8 +37,12 @@ INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Configurator/Configurator \
 
 
 
-
 HEADERS += \
+  $$SRC_DIR/Old/LogMessageDialog.h \
+  $$SRC_DIR/Old/ParseJobFiles.h \ 
+  $$SRC_DIR/Old/ProgressDialog.h \
+  $$SRC_DIR/Old/SurfaceAnimatorDialog.h \
+  $$SRC_DIR/Old/SymmetryToleranceDialog.h \
 
 
 SOURCES += \

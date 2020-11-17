@@ -37,6 +37,43 @@ INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Process/Process
 
 
 HEADERS += \
+  $$SRC_DIR/Layer/AtomLayer.h \
+  $$SRC_DIR/Layer/AxesLayer.h \
+  $$SRC_DIR/Layer/AxesMeshLayer.h \
+  $$SRC_DIR/Layer/BackgroundLayer.h \
+  $$SRC_DIR/Layer/BondLayer.h \
+  $$SRC_DIR/Layer/CanonicalOrbitalsLayer.h \
+  $$SRC_DIR/Layer/ChargeLayer.h \
+  $$SRC_DIR/Layer/ClippingPlaneLayer.h \
+  $$SRC_DIR/Layer/ContainerLayer.h \
+  $$SRC_DIR/Layer/CubeDataLayer.h \
+  $$SRC_DIR/Layer/DipoleLayer.h \
+  $$SRC_DIR/Layer/DysonOrbitalsLayer.h \
+  $$SRC_DIR/Layer/EfpFragmentLayer.h \
+  $$SRC_DIR/Layer/EfpFragmentListLayer.h \
+  $$SRC_DIR/Layer/ExcitedStatesLayer.h \ 
+  $$SRC_DIR/Layer/FileLayer.h \
+  $$SRC_DIR/Layer/GeminalOrbitalsLayer.h \
+  $$SRC_DIR/Layer/GeometryLayer.h \
+  $$SRC_DIR/Layer/GeometryListLayer.h \
+  $$SRC_DIR/Layer/GlobalLayer.h \
+  $$SRC_DIR/Layer/GLObjectLayer.h \
+  $$SRC_DIR/Layer/GroupLayer.h \
+  $$SRC_DIR/Layer/InfoLayer.h \
+  $$SRC_DIR/Layer/IsotopesLayer.h \
+  $$SRC_DIR/Layer/Layer.h \
+  $$SRC_DIR/Layer/MolecularSurfacesLayer.h \
+  $$SRC_DIR/Layer/MoleculeLayer.h \
+  $$SRC_DIR/Layer/NaturalBondOrbitalsLayer.h \
+  $$SRC_DIR/Layer/NaturalTransitionOrbitalsLayer.h \
+  $$SRC_DIR/Layer/NmrLayer.h \ 
+  $$SRC_DIR/Layer/OrbitalsLayer.h \
+  $$SRC_DIR/Layer/PrimitiveLayer.h \
+  $$SRC_DIR/Layer/RemLayer.h \
+  $$SRC_DIR/Layer/SurfaceLayer.h \
+  $$SRC_DIR/Layer/SymmetryLayer.h \
+  $$SRC_DIR/Layer/ConstraintLayer.h \
+  $$SRC_DIR/Layer/FrequenciesLayer.h \ 
 
 
 SOURCES += \

@@ -31,6 +31,7 @@ INCLUDEPATH += $$SRC_PROSET_DIR/CaPTk/yaml-cpp/include
 
 
 HEADERS += \
+  $$SRC_DIR/Parser/ParseFile.h \
 
 
 SOURCES += \

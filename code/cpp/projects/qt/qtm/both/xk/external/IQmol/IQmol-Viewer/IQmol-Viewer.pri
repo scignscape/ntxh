@@ -17,6 +17,8 @@ include($$ROOT_DIR/../preferred/openbabel.pri)
 
 include($$ROOT_DIR/../preferred/libssh2.pri)
 
+UI_DIR = $$SRC_DIR/uis-gen/any-build
+
 
 INCLUDEPATH += $$SRC_GROUP_DIR  \
 
@@ -49,6 +51,14 @@ INCLUDEPATH += $$SRC_PROSET_DIR/CaPTk/yaml-cpp/include
 
 
 HEADERS += \
+  $$SRC_DIR/Viewer/Animator.h \
+  $$SRC_DIR/Viewer/CameraDialog.h \
+  $$SRC_DIR/Viewer/ShaderDialog.h \
+  $$SRC_DIR/Viewer/Snapshot.h \
+  $$SRC_DIR/Viewer/Viewer.h \
+  $$SRC_DIR/Viewer/ViewerModel.h \
+  $$SRC_DIR/Viewer/ViewerModelView.h \
+
 
 
 SOURCES += \
