@@ -8,7 +8,7 @@ include(../build-group.pri)
 
 TEMPLATE = app
 
-QT += xml widgets opengl
+QT += xml widgets opengl printsupport
 
 
 include($$ROOT_DIR/../preferred/sysr.pri)
@@ -94,5 +94,27 @@ LIBS += -L$$TARGETSDIR -lIQmol-Viewer  -lQGLViewer  \
   -lIQmol-Grid -lIQmol-Network -lIQmol-Old -lIQmol-Parser  \
   -lIQmol-Plot -lIQmol-Process -lIQmol-Qui -lIQmol-Util  \
   -lOpenMesh-Core -lOpenMesh-Tools
+
+#LIBS += $$LIBSSH2_STATIC_LIB
+
+LIBS += -L$$TARGETSDIR -lopenbabel -lyaml-cpp
+
+
+LIBS += -L/media/mint/MainVolume/IQmol/libssh2-master/bin/src/ -lssh2
+
+LIBS += -lGLU
+
+
+defined(BOOST_LIB_DIR, var) {
+ LIBS += -L$$BOOST_LIB_DIR -lboost_serialization -lboost_system
+} else {
+ LIBS += -lboost_serialization -lboost_system
+}
+
+
+LIBS += -lGL
+
+LIBS += -lssl -lcrypto
+
 
 
