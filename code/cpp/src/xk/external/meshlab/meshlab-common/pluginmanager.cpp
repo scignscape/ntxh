@@ -215,7 +215,16 @@ QString PluginManager::getBaseDirPath()
 
 QString PluginManager::getDefaultPluginDirPath()
 {
-	QDir pluginsDir(getBaseDirPath());
+ // // added ...
+#ifdef FORCE_PLUGINS_DIR
+ QString fpd = FORCE_PLUGINS_DIR;
+ if(fpd.isEmpty())
+   fpd = getBaseDirPath();
+#else
+ QString fpd = getBaseDirPath();
+#endif
+
+	QDir pluginsDir(fpd) ; //getBaseDirPath());
 #if defined(Q_OS_WIN)
 	QString d = pluginsDir.dirName();
 	QString dLower = d.toLower();
@@ -227,6 +236,8 @@ QString PluginManager::getDefaultPluginDirPath()
 		d.clear();
 	}
 #endif
+    // // added ...
+    qDebug() << "Plugins Dir: " << pluginsDir;
 	if (pluginsDir.exists("plugins")) {
 		pluginsDir.cd("plugins");
 		

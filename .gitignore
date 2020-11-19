@@ -24,6 +24,10 @@
 **/qrc_*.cpp
 
 **/*.o
+**/_plugins/
+**/*.so
+**/*.so.*
+
 
 stash/
 cpp/src/qt-reprozip/bin/*

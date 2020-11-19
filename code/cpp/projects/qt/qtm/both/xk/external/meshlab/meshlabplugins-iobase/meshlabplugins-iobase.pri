@@ -58,4 +58,4 @@ SOURCES += \
   $$VCGDIR/wrap/openfbx/src/miniz.c
 
 
-
+DESTDIR = $$SRC_GROUP_DIR/_plugins/plugins

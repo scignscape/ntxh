@@ -1,3 +1,3 @@
-cd ../../.. && ./run.sh meshlab-mini ; cd -
+cd ../../.. && ./run-with-rest-args.sh meshlab-mini $@ ; cd -
 
 

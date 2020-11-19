@@ -16,6 +16,10 @@ include($$ROOT_DIR/../preferred/sysr.pri)
 DEFINES += MESHLAB_SCALAR=float
 
 
+DEFINES += FORCE_PLUGINS_DIR=\\\"$$SRC_GROUP_DIR/_plugins/\\\"
+
+
+
 INCLUDEPATH += $$SRC_GROUP_DIR  
 
 INCLUDEPATH += $$SRC_GROUP_DIR/external/easyexif  

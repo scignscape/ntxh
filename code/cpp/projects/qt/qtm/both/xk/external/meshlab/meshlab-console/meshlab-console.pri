@@ -13,8 +13,6 @@ QT += xml opengl network
 
 include($$ROOT_DIR/../preferred/sysr.pri)
 
-CONFIG += meshlab_mini
-
 
 DEFINES += MESHLAB_SCALAR=float
 
@@ -36,10 +34,8 @@ HEADERS += \
 
 
 SOURCES = \
-  $$SRC_GROUP_DIR/external/easyexif/exif.cpp \
   $$SRC_DIR/main.cpp \
-
-#  $$SRC_GROUP_DIR/external/easyexif/demo.cpp \
+  $$SRC_GROUP_DIR/external/easyexif/exif.cpp \
 
 
 
@@ -48,9 +44,6 @@ LIBS += -L$$TARGETSDIR -lmeshlab-core  \
 
 
 LIBS += -lGL -lGLU -lGLEW 
-
-
-
 
 
 

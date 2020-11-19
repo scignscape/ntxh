@@ -6,6 +6,7 @@
 
 include(../build-group.pri)
 
+#TEMPLATE = app
 
 QT += xml widgets opengl network
 
@@ -85,6 +86,11 @@ SOURCES += \
   $$SRC_DIR/rich_parameter_gui/richparameterlistdialog.cpp \
   $$SRC_DIR/rich_parameter_gui/richparameterlistframe.cpp \
   $$SRC_DIR/rich_parameter_gui/richparameterwidgets.cpp 
+
+
+SOURCES += \
+  $$SRC_DIR/main.cpp \
+
 
 FORMS += \
   $$SRC_DIR/ui/layerDialog.ui \
