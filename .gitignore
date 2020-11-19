@@ -23,6 +23,7 @@
 **/moc_*.h
 **/qrc_*.cpp
 
+**/*.o
 
 stash/
 cpp/src/qt-reprozip/bin/*

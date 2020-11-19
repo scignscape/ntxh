@@ -89,6 +89,12 @@ FORMS += \
   $$SRC_DIR/Main/ToolBar.ui \
 
 
+RESOURCES += \
+  $$SRC_DIR/Main/IQmol.qrc
+
+
+
+
 LIBS += -L$$TARGETSDIR -lIQmol-Viewer  -lQGLViewer  \
   -lIQmol-Layer -lIQmol-Configurator -lIQmol-Data  \
   -lIQmol-Grid -lIQmol-Network -lIQmol-Old -lIQmol-Parser  \
@@ -98,6 +104,12 @@ LIBS += -L$$TARGETSDIR -lIQmol-Viewer  -lQGLViewer  \
 #LIBS += $$LIBSSH2_STATIC_LIB
 
 LIBS += -L$$TARGETSDIR -lopenbabel -lyaml-cpp
+
+#LIBS += $$SRC_DIR/Main/symmol.o
+
+QMAKE_LFLAGS += $$SRC_DIR/Main/symmol.o
+
+LIBS += -lgfortran
 
 
 LIBS += -L/media/mint/MainVolume/IQmol/libssh2-master/bin/src/ -lssh2
