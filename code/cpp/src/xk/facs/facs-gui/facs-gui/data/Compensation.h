@@ -10,16 +10,20 @@
 #include <QMap>
 #include <QStringList>
 
+#include "facs-bridge/qvector-matrix-r8.h"
+
+
 class FacsanaduProject;
 class Dataset;
 
-
 class Compensation
 {
- QList<QList<double>> matrix_; // =0;
+ //QList<QList<double>>
+ QVector_Matrix_R8 matrix_; // =0;
  QStringList cnames_;
 
- static QList<double> multiply(QList<QList<double>> m, 
+ static QList<double> multiply( //?QList<QList<double>>
+   QVector_Matrix_R8 m, 
    QList<double> v);
 
 public:
@@ -38,12 +42,13 @@ public:
  double get(int to, int from);
  void set(int to, int from, double v);
 
- QList<QList<double>> getMatrix()
+ //?QList<QList<double>>
+ QVector_Matrix_R8 getMatrix()
  {
   return matrix_;
  }
 
- void setMatrix(QList<QList<double>> m)
+ void setMatrix(QVector_Matrix_R8 m) //QList<QList<double>> m)
  {
   matrix_ =  m;
  }

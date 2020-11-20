@@ -136,10 +136,16 @@ public:
  QVector_Matrix_R8* percentile_rescale(u4 max = 100);
 
  void fill(r8 value, r8 default_value);
+ 
  void fill(r8 value = 0)
  {
   fill(value, value);
  }
+
+ void retire();
+ void reset_no_retire(const QVector_Matrix_R8& rhs);
+ void reset(const QVector_Matrix_R8& rhs);
+
 
  void get_row(u4 r, QVector<r8>& row);
 
@@ -273,7 +279,8 @@ public:
  void from_raw_data_with_encoded_default(const QByteArray& qba);
  void from_raw_data_with_encoded_default(const QByteArray& qba, QPair<u4, u4> dims);
 
- void fill_diagonal(r8 val = 1);
+ void fill_diagonal_only(r8 val = 1);
+ void fill_diagonal(r8 diag_value = 1, r8 other_value = 0, r8 default_value = 0);
 
  _from_raw_data_special from_raw_data()
  {

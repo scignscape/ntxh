@@ -221,7 +221,40 @@ void QVector_Matrix_R8::multiply(const QVector<r8>& vec, QVector<r8>& result)
 }
 
 
-void QVector_Matrix_R8::fill_diagonal(r8 val)
+void QVector_Matrix_R8::retire()
+{
+ delete elems_;
+ elems_ = nullptr;
+}
+
+void QVector_Matrix_R8::reset_no_retire(const QVector_Matrix_R8& rhs)
+{
+ n_rows_ = rhs.n_rows_;
+ n_cols_ = rhs.n_cols_;
+ elems_ = rhs.elems_;
+}
+
+void QVector_Matrix_R8::reset(const QVector_Matrix_R8& rhs)
+{
+ delete elems_;
+ n_rows_ = rhs.n_rows_;
+ n_cols_ = rhs.n_cols_;
+ elems_ = rhs.elems_;
+}
+
+
+
+void QVector_Matrix_R8::fill_diagonal(r8 diag_value, r8 other_value, r8 default_value)
+{
+ fill(other_value, default_value);
+ u4 qm = qMin(n_rows(), n_cols());
+ for(u4 u = 1; u <= qm; ++u)
+ {
+  (*this)[u][u] = diag_value;
+ }
+}
+
+void QVector_Matrix_R8::fill_diagonal_only(r8 val)
 {
  u4 len = qMin(n_rows(), n_cols());
  u4 elen = 1 + (len * len);

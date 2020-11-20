@@ -75,6 +75,12 @@ public:
  ACCESSORS(QString ,file_source_name)
  ACCESSORS(QVector<QString>* ,current_column_names)
 
+ ACCESSORS(QVector_Matrix_R8* ,eventsFloat)
+ ACCESSORS(QVector_Matrix_R8* ,eventsFloatCompensated)
+
+ ACCESSORS(int ,numCompensated)
+
+
 
  QVector<QPair<double, double>>& extrema()
  {
