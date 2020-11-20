@@ -190,7 +190,7 @@ void GateCalcThread::TaskDS::exec()
  }
 }
 
-void GateCalcThread::TaskDS::exec(GatingResult gr, Gate g)
+void GateCalcThread::TaskDS::exec(GatingResult& gr, Gate& g)
 {
  gr.doOneGate(g, ds, false);
  for(Gate child:g.children)

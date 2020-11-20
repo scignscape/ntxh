@@ -20,13 +20,28 @@
  */
 class GateEllipse : Gate
 {
+ int indexX_;
+ int indexY_;
+
+ double x_;
+ double y_;
+
+ double rx_;
+ double ry_;
+
+
 public:
 
- int indexX, indexY;
+ GateEllipse();
 
- double x, y;
+ ACCESSORS(int ,indexX)
+ ACCESSORS(int ,indexY)
 
- double rx, ry;
+ ACCESSORS(double ,x)
+ ACCESSORS(double ,y)
+
+ ACCESSORS(double ,rx)
+ ACCESSORS(double ,ry)
 
  void updateInternal()
  {
@@ -35,8 +50,8 @@ public:
  
  bool classify(QList<double> obs)
  {
-  double dx=(obs[indexX] - x) / rx;
-  double dy=(obs[indexY] - y) / ry;
+  double dx = (obs[indexX_] - x_) / rx_;
+  double dy = (obs[indexY_] - y_) / ry_;
   return (dx*dx) + (dy*dy) <= 1;
  }
 

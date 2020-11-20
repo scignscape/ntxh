@@ -26,9 +26,9 @@ public:
 
  void move2(MainWindow* w, double dx, double dy) Q_DECL_OVERRIDE;
  /*  {
-   if(viewsettings->indexX()==cg->indexX)
+   if(viewsettings->indexX()==cg->indexX())
    cg->x1=dx;
-   else if(viewsettings->indexY()==cg->indexX)
+   else if(viewsettings->indexY()==cg->indexX())
    cg->y1=dx;
    
    if(viewsettings->indexX()==cg->indexY)
@@ -71,9 +71,9 @@ public:
  void move2(MainWindow* w, double dx, double dy) Q_DECL_OVERRIDE;
  /*  public void move2(MainWindow w, double dx, double dy)
    {
-   if(viewsettings->indexX()==cg->indexX)
+   if(viewsettings->indexX()==cg->indexX())
      cg->x2=dx;
-   else if(viewsettings->indexY()==cg->indexX)
+   else if(viewsettings->indexY()==cg->indexX())
      cg->y2=dx;
    
    if(viewsettings->indexX()==cg->indexY)
@@ -110,32 +110,32 @@ void GateRendererRect::render(const Gate* gate, QPainter& p, ViewTransform* w,
 {
  const GateRect* cg = (GateRect*) gate;
  
- if(viewsettings->coversXandY( cg->indexX, cg->indexY ))
+ if(viewsettings->coversXandY( cg->indexX(), cg->indexY() ))
  {
   //Figure out which dimension is what
   QList<double> x {0, 0};
   QList<double> y {0, 0};
 
-  if(viewsettings->indexX() == cg->indexX)
+  if(viewsettings->indexX() == cg->indexX())
   {
-   x[0] = cg->x1;
-   x[1] = cg->x2;
+   x[0] = cg->x1();
+   x[1] = cg->x2();
   }
-  if(viewsettings->indexY() == cg->indexX)
+  if(viewsettings->indexY() == cg->indexX())
   {
-   y[0] = cg->x1;
-   y[1] = cg->x2;
+   y[0] = cg->x1();
+   y[1] = cg->x2();
   }
   
-  if(viewsettings->indexX()==cg->indexY)
+  if(viewsettings->indexX()==cg->indexY())
   {
-   x[0] = cg->y1;
-   x[1] = cg->y2;
+   x[0] = cg->y1();
+   x[1] = cg->y2();
   }
-  if(viewsettings->indexY()==cg->indexY)
+  if(viewsettings->indexY()==cg->indexY())
   {
-   y[0] = cg->y1;
-   y[1] = cg->y2;
+   y[0] = cg->y1();
+   y[1] = cg->y2();
   }
 
   QPointF p1 = w->mapFcsToScreen( QPointF(x[0], y[0]) );

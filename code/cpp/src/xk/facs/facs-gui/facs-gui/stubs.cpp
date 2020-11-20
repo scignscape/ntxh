@@ -32,10 +32,10 @@ class FacsanaduProject;
 class Dataset; 
 class ViewSettings;
 
-QList<int> GatingResult::getAcceptedFromGate(Gate*)
-{
- return {};
-}
+//QList<int> GatingResult::getAcceptedFromGate(Gate*)
+//{
+// return {};
+//}
 
 /*
 ViewToolDrawEllipse::ViewToolDrawEllipse(ViewWidget*){}
@@ -76,20 +76,20 @@ QList<Gate*> GateSet::getGates()
  return {};
 }
 
-QList<Gate*> GatingResult::getIdGates()
-{
- return {};
-}
+//QList<Gate*> GatingResult::getIdGates()
+//{
+// return {};
+//}
 
-int GatingResult::getGateIntIDForObs(int)
-{
- return 0;
-}
+//int GatingResult::getGateIntIDForObs(int)
+//{
+// return 0;
+//}
 
-double GatingResult::getCalcResult(GateMeasure*)
-{
- return 0;
-}
+//double GatingResult::getCalcResult(GateMeasure*)
+//{
+// return 0;
+//}
 
 
 

@@ -94,6 +94,7 @@ public:
  double getAsFloatCompensated(int obs, int indexChan);
 
  QVector<double> getAsFloatCompensated(int obs);
+ void getAsFloatCompensated(int obs, QVector<double>& row);
  
  // // Compute profile channels. or only one if not null
  void computeProfChannel(FacsanaduProject* proj, ProfChannel* forPc);

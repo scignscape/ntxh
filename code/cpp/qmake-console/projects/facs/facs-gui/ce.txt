@@ -1,37 +1,6 @@
-In file included from ../../../../src/xk/facs/facs-gui/facs-gui/gui/MainWindow.h:12:0,
-                 from ../../../../src/xk/facs/facs-gui/facs-gui/gui/MainWindow.cpp:3:
+In file included from ../../../../src/xk/facs/facs-gui/facs-gui/gates/gate-info.h:9:0,
+                 from ../../../../src/xk/facs/facs-gui/facs-gui/gates/GateEllipse.h:8,
+                 from ../../../../src/xk/facs/facs-gui/facs-gui/gates/GateEllipse.cpp:5:
 ../../../../src/accessors.h:130:1: warning: multi-line comment [-Wcomment]
  //#define ACCESSORS(type, name) \
  ^
-In file included from ../../../../src/xk/facs/facs-gui/facs-gui/gui/MainWindow.cpp:8:0:
-../../../../src/xk/facs/facs-gui/facs-gui/gui/ViewsListWidget.h:47:38: error: ‘u1’ has not been declared
-  void test_update_views(Dataset* ds, u1 x_col, u1 y_col);
-                                      ^
-../../../../src/xk/facs/facs-gui/facs-gui/gui/ViewsListWidget.h:47:48: error: ‘u1’ has not been declared
-  void test_update_views(Dataset* ds, u1 x_col, u1 y_col);
-                                                ^
-In file included from ../../../../src/xk/facs/cytoLib/qcytolib/include/cytolib/MemCytoFrame.hpp:12:0,
-                 from ../../../../src/xk/facs/facs-gui/facs-gui/gui/MainWindow.cpp:31:
-../../../../src/xk/facs/cytoLib/qcytolib/include/cytolib/CytoFrame.hpp:115:33: warning: unused parameter ‘flag’ [-Wunused-parameter]
-  virtual void set_readonly(bool flag){
-                                 ^
-In file included from ../../../../src/xk/facs/facs-gui/facs-gui/gui/MainWindow.cpp:31:0:
-../../../../src/xk/facs/cytoLib/qcytolib/include/cytolib/MemCytoFrame.hpp:112:49: warning: unused parameter ‘h5_filename’ [-Wunused-parameter]
-  CytoFramePtr copy(const string & h5_filename = "", bool overwrite = false) const
-                                                 ^
-../../../../src/xk/facs/cytoLib/qcytolib/include/cytolib/MemCytoFrame.hpp:112:70: warning: unused parameter ‘overwrite’ [-Wunused-parameter]
-  CytoFramePtr copy(const string & h5_filename = "", bool overwrite = false) const
-                                                                      ^
-../../../../src/xk/facs/cytoLib/qcytolib/include/cytolib/MemCytoFrame.hpp:118:80: warning: unused parameter ‘h5_filename’ [-Wunused-parameter]
-  CytoFramePtr copy(uvec idx, bool is_row_indexed, const string & h5_filename = "", bool overwrite = false) const
-                                                                                ^
-../../../../src/xk/facs/cytoLib/qcytolib/include/cytolib/MemCytoFrame.hpp:118:101: warning: unused parameter ‘overwrite’ [-Wunused-parameter]
-  CytoFramePtr copy(uvec idx, bool is_row_indexed, const string & h5_filename = "", bool overwrite = false) const
-                                                                                                     ^
-../../../../src/xk/facs/cytoLib/qcytolib/include/cytolib/MemCytoFrame.hpp:127:77: warning: unused parameter ‘h5_filename’ [-Wunused-parameter]
-  CytoFramePtr copy(uvec row_idx, uvec col_idx, const string & h5_filename = "", bool overwrite = false) const
-                                                                             ^
-../../../../src/xk/facs/cytoLib/qcytolib/include/cytolib/MemCytoFrame.hpp:127:98: warning: unused parameter ‘overwrite’ [-Wunused-parameter]
-  CytoFramePtr copy(uvec row_idx, uvec col_idx, const string & h5_filename = "", bool overwrite = false) const
-                                                                                                  ^
-make: *** [../../../targets/targets-5-12-0-qmake-console/PROJECT_OBJECTS/facs-gui/release/MainWindow.o] Error 1

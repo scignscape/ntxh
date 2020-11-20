@@ -6,6 +6,10 @@
 #ifndef GatingResult__H
 #define GatingResult__H
 
+#include <QList>
+#include <QMap>
+#include <QVector>
+
 
 // package facsanadu.gates;
 
@@ -15,24 +19,20 @@ class GateSet;
 class GateMeasure;
 
 
-/**
- * 
- * 
- * @author Johan Henriksson
- *
- */
+// original author Johan Henriksson
+
 class GatingResult
 {
- QMap<Gate*, QList<int> > acceptedFromGate_; //=new HashMap<Gate, QList<int>>();
+ QMap<Gate*, QVector<int>* > acceptedFromGate_; //=new HashMap<Gate, QList<int>>();
  QMap<GateMeasure*, double> gatecalc_;//=new HashMap<GateMeasure, Double>();
- QList<int> globalGateRes_; //=new QList<int>();
+ QVector<int>* globalGateRes_; //=new QList<int>();
 
  /**
   * Do gating for a gate with a parent
   */
  void dogateRec(Gate* g, Dataset* ds);
  
- void classifyobs(Gate* g, Dataset* ds, QList<int> passedGateRes, int id); 
+ void classifyobs(Gate* g, Dataset* ds, QVector<int>& passedGateRes, int id); 
  long lastGatingCalculationTime_; // =0;
  GateSet* gating_; //=new GateSet();
 
@@ -54,7 +54,7 @@ public:
  /**
   * Set accepted result from a gate
   */
- void setAcceptedFromGate(Gate* g, QList<int> res, long lastMod);
+ void setAcceptedFromGate(Gate* g, QVector<int>* res, long lastMod);
  
  QList<Gate*> getIdGates();
 

@@ -58,14 +58,14 @@ public:
 
  void move2(MainWindow* w, double dx, double dy) Q_DECL_OVERRIDE;
  /*  {
-   if(viewsettings->indexX()==cg->indexX)
+   if(viewsettings->indexX()==cg->indexX())
    cg->x1=dx;
-   else if(viewsettings->indexY()==cg->indexX)
+   else if(viewsettings->indexY()==cg->indexX())
    cg->y1=dx;
    
-   if(viewsettings->indexX()==cg->indexY)
+   if(viewsettings->indexX()==cg->indexY())
    cg->x1=dy;
-   else if(viewsettings->indexY()==cg->indexY)
+   else if(viewsettings->indexY()==cg->indexY())
    cg->y1=dy;
    
    gate->updateInternal();
@@ -129,14 +129,14 @@ public:
  void move2(MainWindow* w, double dx, double dy) Q_DECL_OVERRIDE;
  /*  public void move2(MainWindow w, double dx, double dy)
    {
-   if(viewsettings->indexX()==cg->indexX)
+   if(viewsettings->indexX()==cg->indexX())
      cg->x2=dx;
-   else if(viewsettings->indexY()==cg->indexX)
+   else if(viewsettings->indexY()==cg->indexX())
      cg->y2=dx;
    
-   if(viewsettings->indexX()==cg->indexY)
+   if(viewsettings->indexX()==cg->indexY())
      cg->x2=dy;
-   else if(viewsettings->indexY()==cg->indexY)
+   else if(viewsettings->indexY()==cg->indexY())
      cg->y2=dy;
    
    gate->updateInternal();
@@ -177,14 +177,14 @@ public:
  void move2(MainWindow* w, double dx, double dy) Q_DECL_OVERRIDE;
  /*  public void move2(MainWindow w, double dx, double dy)
    {
-   if(viewsettings->indexX()==cg->indexX)
+   if(viewsettings->indexX()==cg->indexX())
      cg->x2=dx;
-   else if(viewsettings->indexY()==cg->indexX)
+   else if(viewsettings->indexY()==cg->indexX())
      cg->y2=dx;
    
-   if(viewsettings->indexX()==cg->indexY)
+   if(viewsettings->indexX()==cg->indexY())
      cg->x2=dy;
-   else if(viewsettings->indexY()==cg->indexY)
+   else if(viewsettings->indexY()==cg->indexY())
      cg->y2=dy;
    
    gate->updateInternal();
@@ -217,32 +217,32 @@ void GateRendererEllipse::render(const Gate* gate, QPainter& p, ViewTransform* w
 {
  const GateEllipse* cg = (GateEllipse*) gate;
  
- if(viewsettings->coversXandY( cg->indexX, cg->indexY ))
+ if(viewsettings->coversXandY( cg->indexX(), cg->indexY() ))
  {
   //Figure out which dimension is what
   QList<double> x {0, 0};
   QList<double> y {0, 0};
 
-  if(viewsettings->indexX() == cg->indexX)
+  if(viewsettings->indexX() == cg->indexX())
   {
-   x[0] = cg->x;
-   x[1] = cg->rx;
+   x[0] = cg->x();
+   x[1] = cg->rx();
   }
-  if(viewsettings->indexY() == cg->indexX)
+  if(viewsettings->indexY() == cg->indexX())
   {
-   y[0] = cg->x;
-   y[1] = cg->rx;
+   y[0] = cg->x();
+   y[1] = cg->rx();
   }
   
-  if(viewsettings->indexX()==cg->indexY)
+  if(viewsettings->indexX()==cg->indexY())
   {
-   x[0] = cg->y;
-   x[1] = cg->ry;
+   x[0] = cg->y();
+   x[1] = cg->ry();
   }
-  if(viewsettings->indexY()==cg->indexY)
+  if(viewsettings->indexY()==cg->indexY())
   {
-   y[0] = cg->y;
-   y[1] = cg->ry;
+   y[0] = cg->y();
+   y[1] = cg->ry();
   }
 
   QPointF pHm = w->mapFcsToScreen( QPointF(x[0], y[0]) );

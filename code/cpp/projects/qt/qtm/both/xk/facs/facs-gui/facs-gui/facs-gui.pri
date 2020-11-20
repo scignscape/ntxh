@@ -89,6 +89,9 @@ SOURCES +=  \
   $$SRC_DIR/gui/view/tool/ViewToolDrawRange.cpp \
   $$SRC_DIR/gui/view/tool/ViewToolDrawRect.cpp \
   $$SRC_DIR/gui/view/tool/ViewToolDrawPoly.cpp \
+  $$SRC_DIR/gates/GatingResult.cpp \
+  $$SRC_DIR/gates/GateRect.cpp \
+  $$SRC_DIR/gates/GateEllipse.cpp \
   $$SRC_DIR/main.cpp \
 
 #$$SRC_DIR/../facs-bridge/qvector-matrix-r8.cpp \

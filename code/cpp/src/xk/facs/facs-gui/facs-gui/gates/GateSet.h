@@ -47,7 +47,7 @@ public:
  // // Get a free name for a gate
  QString getFreeName();
 
- Gate getGate(QString name);
+ Gate* getGate(QString name);
 
  QList<Gate*> getIdGates();
 

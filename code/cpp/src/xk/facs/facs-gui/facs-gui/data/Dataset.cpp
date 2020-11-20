@@ -133,7 +133,11 @@ QVector<double> Dataset::getAsFloatCompensated(int obs)
  return result;
 //  return eventsFloat.get(obs);
 }
- 
+
+void Dataset::getAsFloatCompensated(int obs, QVector<double>& row)
+{
+ eventsFloatCompensated_->get_row(obs, row);
+}
 
 // // Compute profile channels. or only one if not null
 void Dataset::computeProfChannel(FacsanaduProject* proj, ProfChannel* forPc)

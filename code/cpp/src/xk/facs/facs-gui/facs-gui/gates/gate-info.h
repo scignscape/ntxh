@@ -6,6 +6,8 @@
 #ifndef GATE_INFO__H
 #define GATE_INFO__H
 
+#include "accessors.h"
+
 #include <QString>
 
 #include <QColor>
@@ -17,20 +19,45 @@ class GateMeasure;
 // //  just a minimal wrapper to bridge Facsanadu and cytoLib ...
 class Gate : public QObject
 {
-Q_OBJECT
+ Q_OBJECT
 
  QString name_;
  void* oc_gate_;
+ long last_modified_;
+
+ Gate* parent_;
+
+ int int_id_;
+
+ static int new_id()
+ {
+  static int result = 0;
+  return ++result;
+ }
 
 public:
 
  Gate(QString name)
-  : name_(name), oc_gate_(nullptr)
+  : name_(name), oc_gate_(nullptr), 
+    last_modified_(0), 
+    parent_(nullptr),
+    int_id_(new_id())
  {
  }
 
+ ACCESSORS(long ,last_modified)
+ ACCESSORS(Gate* ,parent)
+ ACCESSORS(int ,int_id)
+
+
+
  Gate(const Gate&);
- Gate();
+ 
+ Gate()
+ {
+ }
+
+ virtual bool classify(QVector<double>& obs) = 0;
 
  QList<GateMeasure*> getMeasures() const
  {
@@ -68,7 +95,7 @@ public:
 
 };
 
-Q_DECLARE_METATYPE(Gate)
+//Q_DECLARE_METATYPE(Gate)
 Q_DECLARE_METATYPE(Gate*)
 Q_DECLARE_METATYPE(const Gate*)
 

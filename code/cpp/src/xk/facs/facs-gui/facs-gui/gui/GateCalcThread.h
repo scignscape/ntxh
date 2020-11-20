@@ -103,7 +103,7 @@ public:
  int hashCode();
  void exec();
 
- void exec(GatingResult gr, Gate g);
+ void exec(GatingResult& gr, Gate& g);
   
  QString toString(); // Q_DECL_OVERRIDE;
   
