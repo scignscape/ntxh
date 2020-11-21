@@ -82,7 +82,7 @@ QList<Dataset*> _MainWindow_GateCalcThread::getCurrentDatasets()
    this, &MainWindow::z);
 
 MainWindow::MainWindow()
-  : mpf_package_(nullptr)
+  //?: mpf_package_(nullptr)
 { 
  tabwidget_ = new QTabWidget();
  menubar_ = new QMenuBar();
@@ -238,6 +238,8 @@ void MainWindow::load_selected_file(QString sf)
  QFile qf(sf);
  loadFile(qf);
 
+/*
+
 //?    File f=new File(sf);
 //?    mw.lastDirectory=f.getParentFile();
 //?    mw.loadFile(f);
@@ -271,7 +273,7 @@ void MainWindow::load_selected_file(QString sf)
  paneViews_->test_one_view();
 
  paneViews_->reset_index_data();
-
+*/
 
 }
 
@@ -286,23 +288,23 @@ void MainWindow::get_pane_views_mpf_data(int& xcol, int& ycol,
 void MainWindow::update_pane_views(int xcol, int ycol,
   signed int xsk, signed int ysk, signed int* xsh, signed int* ysh)
 {
- mpf_package_->columns()[0] = xcol;
- mpf_package_->columns()[1] = ycol;
+ Dataset* ds = get_last_dataset();
+ MPF_Package* mpfp = ds->mpf_package();
+
+ mpfp->columns()[0] = xcol;
+ mpfp->columns()[1] = ycol;
 
  if(xsk != 0)
-   mpf_package_->dimension_skews()[0] = xsk;
+   mpfp->dimension_skews()[0] = xsk;
  if(ysk != 0)
-   mpf_package_->dimension_skews()[1] = ysk;
+   mpfp->dimension_skews()[1] = ysk;
 
  if(xsh)
-   mpf_package_->dimension_shifts()[0] = *xsh;
+   mpfp->dimension_shifts()[0] = *xsh;
  if(ysh)
-   mpf_package_->dimension_shifts()[1] = *ysh;
+   mpfp->dimension_shifts()[1] = *ysh;
 
  paneViews_->test_one_view();
-
-
- Dataset* ds = get_last_dataset();
  viewsw_->test_update_views(ds, xcol, ycol);
 
 }
@@ -621,7 +623,12 @@ void MainWindow::dogating()
  //For speed, only do selected ones
  //
 
- project_->performGating(getSelectedDatasets());
+ QList<Dataset*> dss;
+ dss.push_back(get_last_dataset());
+
+ project_->performGating(dss);
+
+ //?project_->performGating(getSelectedDatasets());
  calcthread_->wakeup();
 }
  
@@ -673,6 +680,7 @@ void MainWindow::handleEvent(FacsanaduEvent* event)
 
   //else if(event instanceof EventDatasetsChanged)
  case FacsanaduEvent::Description::EventDatasetsChanged:
+  qDebug() << "EDC ...";
   datasetsw_->updateDatasetList();
   paneViews_->invalidateCache();
   dogating();

@@ -103,7 +103,7 @@ void ViewRenderer::renderHistogram(ViewSettings* viewsettings, Dataset* segment,
 void test_render_xy(MainWindow* mw, ViewSettings* viewsettings, Dataset* ds,
   ViewTransform* trans, QPainter& pm, int rendermax)
 {
-
+#ifdef HIDE
  MPF_Package* mpf = mw->mpf_package();
 
  int xsk = mpf->dimension_skews()[0];
@@ -200,6 +200,7 @@ void test_render_xy(MainWindow* mw, ViewSettings* viewsettings, Dataset* ds,
    pm.drawPoint((int)x, (int)y);  
   }
  }
+#endif //def HIDE
 }
 
  /**

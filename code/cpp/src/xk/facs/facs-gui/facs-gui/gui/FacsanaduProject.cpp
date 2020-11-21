@@ -7,6 +7,9 @@
 
 #include "../data/Compensation.h"
 
+#include "../gates/GatingResult.h"
+#include "../gates/GateSet.h"
+
 #include "facs-bridge/qvector-matrix-r8.h"
 #include "facs-bridge/mpf-package.h"
 
@@ -28,7 +31,7 @@ USING_KANS(MPF)
 FacsanaduProject::FacsanaduProject()
   :  main_window_(nullptr)
 {
-// gateset_ = new GateSet();
+ gateset_ = new GateSet();
 // datasets_ = new LinkedList<Dataset*>();
 // views_ = new LinkedList<ViewSettings>();
 // profchan_ = new LinkedList<ProfChannel>();
@@ -53,7 +56,7 @@ GatingResult* FacsanaduProject::getCreateGatingResult(Dataset* ds)
 
  if(gr == nullptr) 
  {
-    // gr = new GatingResult(gateset);
+  gr = new GatingResult(gateset_);
   gatingResult_.insert(ds, gr);
  }
 
@@ -63,6 +66,8 @@ GatingResult* FacsanaduProject::getCreateGatingResult(Dataset* ds)
 
 void FacsanaduProject::performGating(LinkedList<Dataset*> listDatasets)
 {
+ //qDebug() << "ld siae" << listDatasets.size();
+
  gatingResult_.clear();
  for(Dataset* ds : listDatasets)
  {
@@ -134,7 +139,7 @@ void FacsanaduProject::addDataset(QFile& path) // throws IOException
 
 // QString file_name = qfi.absoluteFilePath() + ".mpf.txt";
 
- main_window_->set_mpf_package(mpf);
+// main_window_->set_mpf_package(mpf);
 
 // QString file_name = qfi.absoluteFilePath() + ".mpf.txt";
 // mpf->load_from_file(file_name);
@@ -153,6 +158,8 @@ void FacsanaduProject::addDataset(QFile& path) // throws IOException
 // qDebug() << "OK ...";
 
  Dataset* ds = new Dataset(qvm);
+
+ ds->set_mpf_package(mpf);
 
  ds->set_file_source_name(qfi.fileName());
 
@@ -179,8 +186,10 @@ void FacsanaduProject::addDataset(QFile& path) // throws IOException
 
 void FacsanaduProject::updateCompensation()
 {
- //? compensation_->updateMatrix(this);
- //? compensation_->apply(this);
+ //? 
+ compensation_->updateMatrix(this);
+ //? 
+ compensation_->apply(this);
 }
 
 

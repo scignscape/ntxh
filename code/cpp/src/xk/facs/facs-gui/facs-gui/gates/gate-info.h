@@ -95,6 +95,21 @@ public:
 
 };
 
+class GateRoot : Gate
+{
+public:
+
+ bool classify(QVector<double>& obs) 
+ {
+  return true;
+ }
+
+ void updateInternal()
+ {
+  setUpdated();
+ }
+};
+
 //Q_DECLARE_METATYPE(Gate)
 Q_DECLARE_METATYPE(Gate*)
 Q_DECLARE_METATYPE(const Gate*)

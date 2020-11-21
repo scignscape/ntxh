@@ -12,6 +12,9 @@
 
 #include "accessors.h"
 
+#include "kans.h"
+
+
 // // One data block - an FCS file can contain multiple but the standard encourages against
 
 // //  Note: should separate this from FCS parsing!
@@ -24,6 +27,10 @@ class FacsanaduProject;
 class ProfChannel;
 
 class QVector_Matrix_R8;
+
+KANS_CLASS_DECLARE(MPF ,MPF_Package)
+USING_KANS(MPF)
+
 
 namespace cytolib
 {
@@ -63,6 +70,9 @@ class Dataset
 
  QVector<QString>* current_column_names_;
 
+ MPF_Package* mpf_package_;
+
+
  void do_preliminary_compensation();
 
 public:
@@ -80,6 +90,7 @@ public:
 
  ACCESSORS(int ,numCompensated)
 
+ ACCESSORS(MPF_Package* ,mpf_package)
 
 
  QVector<QPair<double, double>>& extrema()

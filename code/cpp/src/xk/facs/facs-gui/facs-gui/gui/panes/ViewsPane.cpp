@@ -179,7 +179,7 @@ void ViewsPane::reset_index_data(Dataset* ds)
  y_index_spin_box_->setRange(1, nc);
 
  // // here, for indices?
-
+#ifdef HIDE
  MPF_Package* mpf = mw_->mpf_package();
  x_index_spin_box_->setValue(mpf->columns()[0]);
  y_index_spin_box_->setValue(mpf->columns()[1]);
@@ -187,6 +187,7 @@ void ViewsPane::reset_index_data(Dataset* ds)
  shifts_skews_line_edit_->setText(QString("%1:%2:%3:%4")
    .arg(mpf->dimension_skews()[0]).arg(mpf->dimension_skews()[1])
    .arg(mpf->dimension_shifts()[0]).arg(mpf->dimension_shifts()[1]));
+#endif // HIDE
 }
 
 void ViewsPane::get_mpf_data(int& xcol, int& ycol,

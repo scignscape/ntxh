@@ -92,6 +92,7 @@ SOURCES +=  \
   $$SRC_DIR/gates/GatingResult.cpp \
   $$SRC_DIR/gates/GateRect.cpp \
   $$SRC_DIR/gates/GateEllipse.cpp \
+  $$SRC_DIR/gates/GateSet.cpp \
   $$SRC_DIR/main.cpp \
 
 #$$SRC_DIR/../facs-bridge/qvector-matrix-r8.cpp \

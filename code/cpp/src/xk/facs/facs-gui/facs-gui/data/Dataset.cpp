@@ -7,6 +7,8 @@
 
 
 #include "facs-bridge/qvector-matrix-r8.h"
+#include "facs-bridge/mpf-package.h"
+
 
 #include "qcytolib/include/cytolib/MemCytoFrame.hpp"
 
