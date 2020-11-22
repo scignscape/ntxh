@@ -66,13 +66,15 @@ GatingResult* FacsanaduProject::getCreateGatingResult(Dataset* ds)
 
 void FacsanaduProject::performGating(LinkedList<Dataset*> listDatasets)
 {
- //qDebug() << "ld siae" << listDatasets.size();
+ //
+ qDebug() << "ld siae" << listDatasets.size();
 
  gatingResult_.clear();
  for(Dataset* ds : listDatasets)
  {
   GatingResult* gr = getCreateGatingResult(ds);//new GatingResult();
-   // gr->perform(gateset, ds);
+  qDebug() << "Performing gating ...";
+  gr->perform(gateset_, ds);
   gatingResult_.insert(ds, gr);
  }
 }

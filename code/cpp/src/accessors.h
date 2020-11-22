@@ -64,10 +64,24 @@
  type& name() { return name##_; }
 #endif
 
+#ifndef ACCESSORS__RGET_CONST
+#define ACCESSORS__RGET_CONST(type, name) \
+ type& name() const { return (type&) name##_; }
+#endif
 
 #ifndef ACCESSORS__CONST_RGET
 #define ACCESSORS__CONST_RGET(type, name) \
  const type& name() const { return name##_; }
+#endif
+
+#ifndef ACCESSORS__CONST_RGET_NONCONST
+#define ACCESSORS__CONST_RGET_NONCONST(type, name) \
+ const type& name() { return name##_; }
+#endif
+
+#ifndef ACCESSORS__NONCONST_RGET_CONST
+#define ACCESSORS__NONCONST_RGET_CONST(type, name) \
+ type& name() const { return (type&) name##_; }
 #endif
 
 #ifndef ACCESSORS__RGET_DEREF

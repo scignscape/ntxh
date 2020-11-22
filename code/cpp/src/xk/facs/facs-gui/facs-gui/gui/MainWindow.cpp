@@ -583,6 +583,8 @@ LinkedList<ViewSettings*> MainWindow::getSelectedViews()
 
 Dataset* MainWindow::get_last_dataset()
 {
+ if(project_->datasets().isEmpty())
+   return nullptr;
  return project_->datasets().first();
 }
 
@@ -623,8 +625,13 @@ void MainWindow::dogating()
  //For speed, only do selected ones
  //
 
+ Dataset* ds = get_last_dataset();
+
+ if(!ds)
+   return;
+
  QList<Dataset*> dss;
- dss.push_back(get_last_dataset());
+ dss.push_back(ds);
 
  project_->performGating(dss);
 

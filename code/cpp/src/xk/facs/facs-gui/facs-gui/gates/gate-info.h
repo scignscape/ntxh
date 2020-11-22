@@ -11,19 +11,24 @@
 #include <QString>
 
 #include <QColor>
+#include <QDateTime>
 #include <QObject>
+#include <QList>
+#include <QDebug>
+
+#include "measure/GateMeasure.h"
 
 
 class GateMeasure; 
 
-// //  just a minimal wrapper to bridge Facsanadu and cytoLib ...
+// //  a wrapper to bridge Facsanadu and cytoLib ...
 class Gate : public QObject
 {
  Q_OBJECT
 
  QString name_;
  void* oc_gate_;
- long last_modified_;
+ quint64 last_modified_;
 
  Gate* parent_;
 
@@ -35,6 +40,10 @@ class Gate : public QObject
   return ++result;
  }
 
+ QList<Gate*> children_;
+ QList<GateMeasure*> calculations_;
+ 
+
 public:
 
  Gate(QString name)
@@ -45,15 +54,14 @@ public:
  {
  }
 
- ACCESSORS(long ,last_modified)
+ ACCESSORS(quint64 ,last_modified)
  ACCESSORS(Gate* ,parent)
  ACCESSORS(int ,int_id)
+ ACCESSORS__NONCONST_RGET_CONST(QList<Gate*> ,children)
 
-
-
- Gate(const Gate&);
+ //?Gate(const Gate&);
  
- Gate()
+ Gate() : parent_(nullptr), name_("?")
  {
  }
 
@@ -61,12 +69,22 @@ public:
 
  QList<GateMeasure*> getMeasures() const
  {
-  return {};
+  return calculations_;
  }
 
- QList<Gate*> children() const;
+ void attachMeasure(GateMeasure* calc)
+ {
+  calc->set_gate(this);
+  calculations_.push_back(calc);
+ }
 
- void attachChild(Gate* g); 
+ //QList<Gate*> children() const;
+
+ void attachChild(Gate* g)
+ {
+  children_.push_back(g);
+  g->set_parent(this);
+ }
 
  QString name() const
  {
@@ -83,19 +101,54 @@ public:
   name_ = name;
  }
 
- void setUpdated();
- void detachParent();
+ void setUpdated()
+ {
+  quint64 qdt = QDateTime::currentMSecsSinceEpoch();
+  Gate* pc = this;
+  while(pc->parent())
+    pc = pc->parent();
+  pc->setUpdatedRecursive(qdt);
+ }
+
+ void setUpdatedRecursive(quint64 qdt)
+ {
+  last_modified_ = qdt;
+  for(Gate* g : children_)
+  {
+   g->setUpdatedRecursive(qdt);
+  }
+ }
+
+ Gate* getRootGate()
+ {
+  Gate* g = this;
+  while(g->class_name() != "GateRoot")
+  {
+   g = g->parent();
+   if(!g)
+   {
+    // // this shouldn't happen
+    qDebug() << "Gate parent not found!";
+    return nullptr;
+   }
+  }
+  return g;
+ }
+
+ void detachParent()
+ {
+  parent_->children().removeOne(this);
+  parent_ = nullptr;
+ }
                    
  QColor color() const
  {
   return QColor();
  }
 
- void attachMeasure(GateMeasure* calc);
-
 };
 
-class GateRoot : Gate
+class GateRoot : public Gate
 {
 public:
 
@@ -107,6 +160,11 @@ public:
  void updateInternal()
  {
   setUpdated();
+ }
+
+ QString class_name() const
+ {
+  return "GateRoot";
  }
 };
 

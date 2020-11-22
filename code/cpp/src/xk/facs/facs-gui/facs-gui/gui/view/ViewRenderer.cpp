@@ -244,12 +244,12 @@ void ViewRenderer::renderXY(MainWindow* mw, ViewSettings* viewsettings, Dataset*
  pm.setPen(pen);
 
  QColor thecol; //=new QColor();
- QList<int> accepted = gr->getAcceptedFromGate(viewsettings->gate() );
- if(! accepted.isEmpty())
+ QVector<int>* accepted = gr->getAcceptedFromGate(viewsettings->gate() );
+ if(accepted &&  !(accepted->isEmpty()) )
  {
-  for(int i=0; i<accepted.size() && i < rendermax; ++i)
+  for(int i=0; i < accepted->size() && i < rendermax; ++i)
   {
-   int ind = accepted.at(i);
+   int ind = accepted->at(i);
    double chanX;
    double chanY;
 

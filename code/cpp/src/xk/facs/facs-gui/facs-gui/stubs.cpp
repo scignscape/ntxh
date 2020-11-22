@@ -46,21 +46,21 @@ ViewToolDrawRect::ViewToolDrawRect(ViewWidget*){}
 */
 
 
-QList<Gate*> Gate::children() const
-{
- return {};
-}
+//QList<Gate*> Gate::children() const
+//{
+// return {};
+//}
 
-void Gate::attachChild(Gate* g)
-{
- Q_UNUSED(g)
-}
+//void Gate::attachChild(Gate* g)
+//{
+// Q_UNUSED(g)
+//}
 
-void Gate::setUpdated() {}
-void Gate::detachParent() {}
+//void Gate::setUpdated() {}
+//void Gate::detachParent() {}
 
 void GateMeasure::detachFromGate() {}
-void Gate::attachMeasure(GateMeasure*) {}
+//void Gate::attachMeasure(GateMeasure*) {}
 
 GateMeasure::GateMeasure()
 {
@@ -71,10 +71,10 @@ QString GateMeasure::getDesc(FacsanaduProject*)
  return {};
 }
 
-QList<Gate*> GateSet::getGates()
-{
- return {};
-}
+//QList<Gate*> GateSet::getGates()
+//{
+// return {};
+//}
 
 //QList<Gate*> GatingResult::getIdGates()
 //{
@@ -104,15 +104,15 @@ QString Dataset::get_file_source_name()
 }
 */
 
-QSet<QString> GateSet::getGateNames()
-{
- return {};
-}
+//QSet<QString> GateSet::getGateNames()
+//{
+// return {};
+//}
 
-QString GateSet::getFreeName()
-{
- return {};
-}
+//QString GateSet::getFreeName()
+//{
+// return {};
+//}
 
 /*
 QList<ChannelInfo*> Dataset::getChannelInfo()

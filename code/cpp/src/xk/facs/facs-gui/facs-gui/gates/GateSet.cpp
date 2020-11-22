@@ -5,10 +5,12 @@
 
 #include "GateSet.h"
 
+#include "gate-info.h"
+
 class Gate;
 
 // // A set of gates
-GateSet::GateSet
+GateSet::GateSet()
  :  rootgate_(new GateRoot)
 {
  rootgate_->set_name("root");
@@ -25,10 +27,10 @@ void GateSet::getGatesRecursively(Gate* parent, LinkedList<Gate*> list)
 
 void GateSet::getIdGates(Gate* g, QList<Gate*> list)
 {
- while(list.size() <= g.getIntID())
-   list.add(nullptr);
+ while(list.size() <= g->int_id())
+   list.push_back(nullptr);
   //Set this particular gate in the list
- list.replace(g.getIntID(), g);
+ list.replace(g->int_id(), g);
 		//Recurse to child gates
  for(Gate* child : g->children())
  {
@@ -36,10 +38,10 @@ void GateSet::getIdGates(Gate* g, QList<Gate*> list)
  }
 }
 
-Gate* GateSet::getRootGate()
-{
- return rootgate_;
-}
+//Gate* GateSet::getRootGate()
+//{
+// return rootgate_;
+//}
 
 void GateSet::addNewGate(Gate* g)
 {
@@ -49,7 +51,7 @@ void GateSet::addNewGate(Gate* g)
 
 QList<Gate*> GateSet::getGates()
 {
- QList<Gate*> result = new QList<Gate*>();
+ QList<Gate*> result;// = new QList<Gate*>();
  getGatesRecursively(rootgate_, result);
  return result;
 }
@@ -58,7 +60,7 @@ QSet<QString> GateSet::getGateNames()
 {
  QSet<QString> prevnames; //=new HashSet<String>();
  for(Gate* otherGate : getGates())
-   prevnames.add(otherGate->name());
+   prevnames.insert(otherGate->name());
  return prevnames;
 }
 
@@ -81,21 +83,23 @@ Gate* GateSet::getGate(QString name, Gate* parent)
 {
  if(parent->name() == name)
    return parent;
+
  for(Gate* g : parent->children())
  {
   Gate* got = getGate(name, g);
   if(got)
     return got;
  }
+
  return nullptr;
 }
 
 
 QList<Gate*> GateSet::getIdGates()
 {
- QList<Gate*> result = new QList<Gate*>();
- getIdGates(getRootGate(), list);
- return list;
+ QList<Gate*> result;// = new QList<Gate*>();
+ getIdGates(getRootGate(), result);
+ return result;
 }
 
 

@@ -203,14 +203,17 @@ Histogram* ViewSettings::computeHistogram(Dataset* data, GatingResult* gr)
 {
  Histogram* h = new Histogram();
  h->setup(0, 1.0/scaleX_, numHistBins_);
- QList<int> accepted = gr->getAcceptedFromGate(gate_);
- if(! accepted.isEmpty() )
+ QVector<int>* accepted = gr->getAcceptedFromGate(gate_);
+ if(accepted)
  {
-  for(int i=0;i<accepted.size();i++)
+  if(! accepted->isEmpty() )
   {
-   int ind=accepted.at(i);
-   double x=transformation_->perform(data->getAsFloatCompensated(ind, indexX_ ), indexX_ );
-   h->countEvent(x);
+   for(int i=0; i < accepted->size(); i++)
+   {
+    int ind = accepted->at(i);
+    double x = transformation_->perform(data->getAsFloatCompensated(ind, indexX_ ), indexX_ );
+    h->countEvent(x);
+   }
   }
  }
  return h;

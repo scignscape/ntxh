@@ -12,6 +12,7 @@
 #include "gate-info.h"
 
 #include <QDebug>
+#include <QDateTime>
 
 
 
@@ -25,6 +26,7 @@ GatingResult::GatingResult(GateSet* gating)
 
 void GatingResult::dogateRec(Gate* g, Dataset* ds)
 {
+ qDebug() << "1 gate = " << g;
  doOneGate(g, ds, true);
  for(Gate* child : g->children() )
  {
@@ -60,20 +62,52 @@ void GatingResult::perform(GateSet* gating, Dataset* ds)
 {
  gating_ = gating;
  Gate* gRoot = gating_->getRootGate();
- dogateRec(gRoot, ds);
+ if(gRoot)
+ {
+  qDebug() << "Got root gate: " << gRoot->name();
+  dogateRec(gRoot, ds);
+ }
+ else
+ {
+  qDebug() << "No root gate";
+ }
 }
 
  // //Calculate for one gate
 void GatingResult::doOneGate(Gate* g, Dataset* ds, bool approximate)
 {
- long gLastModified = g->last_modified(); //g.lastModified
+ qDebug() << "gate = " << g;
+ qDebug() << "gate parent = " << g->parent();
+
+ quint64 gLastModified = g->last_modified(); //g.lastModified
  int n;
  QVector<int>* res = new QVector<int>;
+
+ if(!g)
+ {
+  qDebug() << "Null gate"; 
+  return;
+ }
+
+ qDebug() << "parent? = " << g->parent();
+
  if(g->parent() == nullptr) //This is the root
  {
   n = ds->getNumObservations();
   globalGateRes_ = new QVector<int>(n);
-  res->resize(n);
+
+   // //  allocates more space than needed because many events 
+    //    will be gated out ...
+  res->reserve(n);
+
+  qDebug() << "n = " << n;
+   
+    // for testing ...
+  n = 1000;
+
+  qDebug() << "n = " << n;
+
+
   for(int i = 0; i < n; ++i)
   {
    classifyobs(g, ds, *res, i);
@@ -107,7 +141,7 @@ void GatingResult::doOneGate(Gate* g, Dataset* ds, bool approximate)
  //}
 }
  
-void GatingResult::setAcceptedFromGate(Gate* g, QVector<int>* res, long lastMod)
+void GatingResult::setAcceptedFromGate(Gate* g, QVector<int>* res, quint64 lastMod)
 {
  acceptedFromGate_.insert(g, res);
  lastUpdateGate_ = lastMod;
@@ -115,42 +149,46 @@ void GatingResult::setAcceptedFromGate(Gate* g, QVector<int>* res, long lastMod)
 
 QList<Gate*> GatingResult::getIdGates()
 {
-
+ return gating_->getIdGates();
 }
 
 int GatingResult::getTotalCount()
 {
-
+ Gate* root = getRootGate();
+ if(root)
+ {
+  QVector<int>* acc = acceptedFromGate_.value(root);
+  if(acc)
+    return acc->size();
+ }
+ qDebug() << "No root gate array yet";
+ return 0;
 }
 
 Gate* GatingResult::getRootGate()
 {
-
+ return gating_->getRootGate();
 }
 
 double GatingResult::getCalcResult(GateMeasure* calc)
 {
-
+ return gatecalc_.value(calc);
 }
 
 bool GatingResult::gateNeedsUpdate()
 {
-
+ Gate* g = getRootGate();
+ return g->last_modified() > lastUpdateGate_;
 }
 
-QList<int> GatingResult::getAcceptedFromGate(Gate* g)
+QVector<int>* GatingResult::getAcceptedFromGate(Gate* g)
 {
-
-}
-
-long GatingResult::lastGatingCalculationTime()
-{
-
+ return acceptedFromGate_.value(g);
 }
 
 void GatingResult::setLastUpdateTime()
 {
-
+ lastGatingCalculationTime_ = QDateTime::currentMSecsSinceEpoch();
 }
 
 

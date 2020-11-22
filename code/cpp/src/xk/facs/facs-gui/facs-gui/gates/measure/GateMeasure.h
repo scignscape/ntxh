@@ -10,6 +10,8 @@
 #include <QString>
 #include <QObject>
 
+#include "accessors.h"
+
 class Gate;
 class Dataset;
 class GatingResult;
@@ -26,10 +28,7 @@ public:
 
  GateMeasure();
 
- Gate* gate()
- {
-  return gate_;
- }
+ ACCESSORS(Gate* ,gate)
  
  double calc(Dataset* ds, Gate* g, GatingResult* res);
  //QString getDesc(FacsanaduProject* proj);

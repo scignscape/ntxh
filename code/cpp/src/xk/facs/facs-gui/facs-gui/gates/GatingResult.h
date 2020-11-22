@@ -6,6 +6,9 @@
 #ifndef GatingResult__H
 #define GatingResult__H
 
+
+#include "accessors.h"
+
 #include <QList>
 #include <QMap>
 #include <QVector>
@@ -33,16 +36,23 @@ class GatingResult
  void dogateRec(Gate* g, Dataset* ds);
  
  void classifyobs(Gate* g, Dataset* ds, QVector<int>& passedGateRes, int id); 
- long lastGatingCalculationTime_; // =0;
+ quint64 lastGatingCalculationTime_; // =0;
  GateSet* gating_; //=new GateSet();
+
+ quint64 lastUpdateGate_;
 
  
 public:
 
- long lastUpdateGate_; //=0;
+ ACCESSORS(quint64 ,lastUpdateGate)
+ ACCESSORS(quint64 ,lastGatingCalculationTime)
+
+  //=0;
+ GatingResult(GateSet* gating);
+
  void setUpdated(Gate* g);
 
- GatingResult(GateSet* gating);
+
  int getGateIntIDForObs(int obs);
  
  // // Perform gating for all gates
@@ -54,7 +64,7 @@ public:
  /**
   * Set accepted result from a gate
   */
- void setAcceptedFromGate(Gate* g, QVector<int>* res, long lastMod);
+ void setAcceptedFromGate(Gate* g, QVector<int>* res, quint64 lastMod);
  
  QList<Gate*> getIdGates();
 
@@ -70,9 +80,9 @@ public:
   */
  bool gateNeedsUpdate();
 
- QList<int> getAcceptedFromGate(Gate* g);
+ QVector<int>* getAcceptedFromGate(Gate* g);
 
- long lastGatingCalculationTime();
+ //long lastGatingCalculationTime();
 
  void setLastUpdateTime();
 
