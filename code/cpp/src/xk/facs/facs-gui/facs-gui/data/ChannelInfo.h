@@ -4,6 +4,8 @@
 #ifndef ChannelInfo__H
 #define ChannelInfo__H
 
+#include "accessors.h"
+
 #include <QString>
 
 // // package facsanadu.data;
@@ -22,10 +24,11 @@ public:
 
  ChannelInfo(QString label, QString name);
 
- ProfChannel* pc()
- {
-  return pc_;
- }
+ ChannelInfo();
+
+ ACCESSORS(ProfChannel* ,pc)
+ ACCESSORS(QString ,label)
+ ACCESSORS(QString ,name)
  
  QString formatName();
 

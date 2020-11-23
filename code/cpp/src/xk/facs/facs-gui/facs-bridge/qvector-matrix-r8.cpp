@@ -208,12 +208,12 @@ void QVector_Matrix_R8::multiply(const QVector<r8>& vec, QVector<r8>& result)
 {
  result.resize(vec.size());
  u4 r = 1;
- std::transform(vec.begin(), vec.end(), result.begin(), [&r, &vec, this](r8) -> r8
+ std::transform(vec.begin(), vec.end(), result.begin(), [&r, &vec, this](r8 rr) -> r8
  {
   r8 result = 0;
   for(u4 c = 1; c <= (u4) vec.size(); ++c)
   {
-   result += get_at(r, c);
+   result += (rr * get_at(r, c));
   }
   ++r;
   return result;

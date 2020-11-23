@@ -15,6 +15,8 @@
 #include <QHeaderView>
 
 
+#include <QDebug>
+
 // package facsanadu.gui.panes;
 
 
@@ -43,6 +45,8 @@ void CompensationPane::updateForm()
  tableMatrix_->horizontalHeader()->setStretchLastSection(true);  
 
  Compensation* comp = mw_->project()->compensation();
+
+ qDebug() << "c cnames: " << comp->cnames();
   
 // LinkedList<String> header = new LinkedList<String>();
 // LinkedList<String> headerFrom=new LinkedList<String>();
@@ -50,7 +54,7 @@ void CompensationPane::updateForm()
  QStringList header;
  QStringList headerFrom;
 
- for(QString s : comp->cnames() )
+ for( QString s : comp->cnames() )
  {
   header.push_back(s);
   headerFrom.push_back(tr("To: ") + s);

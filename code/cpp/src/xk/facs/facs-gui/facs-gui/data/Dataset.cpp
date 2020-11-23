@@ -5,6 +5,10 @@
 
 #include "ChannelInfo.h"
 
+#include "FacsanaduProject.h"
+
+#include "ProfChannel.h"
+
 
 #include "facs-bridge/qvector-matrix-r8.h"
 #include "facs-bridge/mpf-package.h"
@@ -18,7 +22,8 @@
 
 
 Dataset::Dataset(QVector_Matrix_R8* eventsFloat)
-  :  eventsFloat_(eventsFloat), cyto_frame_(nullptr), current_column_names_(nullptr)
+  :  eventsFloat_(eventsFloat), cyto_frame_(nullptr), 
+     current_column_names_(nullptr),eventsFloatCompensated_(nullptr)
 {
  if(eventsFloat_)
    numChannel_ = eventsFloat_->n_cols();
@@ -47,6 +52,7 @@ Dataset::Dataset(QVector_Matrix_R8* eventsFloat)
 
 void Dataset::do_preliminary_compensation()
 {
+ qDebug() << "prelim ...";
  for(u4 r = 1; r <= eventsFloat_->n_rows(); ++r)
  {
   QVector<r8> row;
@@ -84,9 +90,23 @@ void Dataset::do_preliminary_compensation()
  numCompensated_ = numChannel_;
 }
 
+void Dataset::read_channel_info()
+{
+ // // in lieu of the code in FCSFile.java ...
+ for(int id = 1; id <= numChannel_; ++id)
+ {
+  ChannelInfo* ch = new ChannelInfo();
+  QString label = QString("Label%1").arg(id); //nameForPar.get(id);
+  QString name = QString("Name%1").arg(id); // shortNameForPar.get(id);
+  ch->set_label(label);
+  ch->set_name(name);
+  channelInfo_.push_back(ch);
+ }
+}
 
 QList<ChannelInfo*> Dataset::getChannelInfo()
 {
+ qDebug() << "get Channel Info: " << channelInfo_.size();
  return channelInfo_;
 }
 
@@ -126,29 +146,91 @@ QString Dataset::get_file_source_name()
 
 double Dataset::getAsFloatCompensated(int obs, int indexChan)
 {
- return (*eventsFloatCompensated_)[obs](indexChan);
+ return (*eventsFloatCompensated_)[obs + 1](indexChan);
 }
 
 
 QVector<double> Dataset::getAsFloatCompensated(int obs)
 {
  QVector<double> result;
- eventsFloatCompensated_->get_row(obs, result);
+ eventsFloatCompensated_->get_row(obs + 1, result);
  return result;
 //  return eventsFloat.get(obs);
 }
 
 void Dataset::getAsFloatCompensated(int obs, QVector<double>& row)
 {
- eventsFloatCompensated_->get_row(obs, row);
+ if(!eventsFloatCompensated_)
+   return; 
+
+ eventsFloatCompensated_->get_row(obs + 1, row);
 }
 
 // // Compute profile channels. or only one if not null
 void Dataset::computeProfChannel(FacsanaduProject* proj, ProfChannel* forPc)
 {
- Q_UNUSED(proj)
- Q_UNUSED(forPc)
+// Q_UNUSED(proj)
+// Q_UNUSED(forPc)
 
+ QSet<ProfChannel*> oldPc; //=new HashSet<ProfChannel>();
+ 
+ for(ChannelInfo* ci : channelInfo_)
+ {
+  if(ci->pc())
+    oldPc.insert(ci->pc());
+ }
+
+ if(oldPc != QSet<ProfChannel*>::fromList(proj->profchan()) ) 
+   //equals(new HashSet<ProfChannel>(proj.profchan)))
+ {
+  //Recompute all channels
+  for(ChannelInfo* ci : channelInfo_)
+  {
+   if(ci->pc())
+     channelInfo_.removeOne(ci);
+   // //? and delete ci?
+  }
+
+
+  qDebug() << "prof channel length: " << proj->profchan(); 
+  for(ProfChannel* pc : proj->profchan() )
+  {
+   ChannelInfo* ci = new ChannelInfo();
+   ci->set_label(pc->getName());
+   ci->set_pc(pc);
+   channelInfo_.push_back(ci);
+  }
+
+  //Add new channels
+  numPc_ = proj->profchan().size();
+  resizeEvents(numChannel_ + numPc_);
+  for(int i = 0; i < numPc_; ++i)
+  {
+   int toi = numChannel_ + i;
+   ChannelInfo* ci = channelInfo_.at(toi);
+   for(int j=0;j<getNumObservations();j++)
+   {
+//?    double[] d=eventsFloat.get(j);
+//?    d[toi] = ci.pc.calc(lengthprofsData.get(j));
+   }
+  }
+ }
+
+ else if(forPc)
+ {
+   //Update only one channel
+  ChannelInfo* ci = getChannelInfoForProf(forPc);
+  int toi = channelInfo_.indexOf(ci);
+  for(int j=0; j < getNumObservations(); ++j)
+  {
+   // double[] d=eventsFloat.get(j);
+   // d[toi]=forPc.calc(lengthprofsData.get(j));
+  }
+ }
+ else
+ {
+  qDebug() << "hmmm. prof chan nothing to do";
+ }
 
  /*
   //If deleting or adding a channel... I find it fine enough to recompute everything. But this should

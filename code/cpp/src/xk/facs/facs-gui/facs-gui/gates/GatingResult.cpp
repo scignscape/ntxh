@@ -54,6 +54,7 @@ int GatingResult::getGateIntIDForObs(int obs)
 {
  if(globalGateRes_)
    return globalGateRes_->value(obs);
+
  return 0;
 }
  
@@ -103,7 +104,7 @@ void GatingResult::doOneGate(Gate* g, Dataset* ds, bool approximate)
   qDebug() << "n = " << n;
    
     // for testing ...
-  n = 1000;
+  n = 50;
 
   qDebug() << "n = " << n;
 
@@ -112,6 +113,8 @@ void GatingResult::doOneGate(Gate* g, Dataset* ds, bool approximate)
   {
    classifyobs(g, ds, *res, i);
   }
+
+  qDebug() << "After classify, accepted: " << res->size(); 
  }
  else
  {

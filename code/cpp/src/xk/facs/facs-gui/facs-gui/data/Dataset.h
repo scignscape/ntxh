@@ -98,6 +98,8 @@ public:
   return extrema_;
  }
  
+ void read_channel_info();
+ 
  int getNumObservations();
 
  int getNumChannels();

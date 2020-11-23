@@ -7,7 +7,12 @@
 
 // // Information about one channel
 ChannelInfo::ChannelInfo(QString label, QString name)
- :  label_(label), name_(name)
+ :  label_(label), name_(name), pc_(nullptr)
+{
+}
+
+ChannelInfo::ChannelInfo()
+ :  pc_(nullptr)
 {
 }
 

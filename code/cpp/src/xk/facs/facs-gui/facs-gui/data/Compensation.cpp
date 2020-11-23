@@ -8,6 +8,8 @@
 #include "FacsanaduProject.h"
 #include "ChannelInfo.h"
 
+#include <QDebug>
+
 
 
 Compensation::Compensation()
@@ -23,11 +25,18 @@ int Compensation::getSize()
 void Compensation::updateMatrix(FacsanaduProject* p)
 {
  QList<ChannelInfo*> chaninfo = p->getChannelInfo();
+
+ qDebug() << "update matrix, channels: " << chaninfo.size();
+
  QStringList new_cnames;
+
  for(ChannelInfo* ci : chaninfo)
  {
-  new_cnames.push_back(ci->formatName());
+  QString fn = ci->formatName();
+  qDebug() << "fn = " << fn;
+  new_cnames.push_back(fn);
  }
+
  if(new_cnames != cnames_)
  {
   int n = new_cnames.size();
@@ -46,7 +55,7 @@ void Compensation::updateMatrix(FacsanaduProject* p)
   }
   cnames_ = new_cnames;
   matrix_.reset(new_matrix);
-  new_matrix.retire();
+  //? new_matrix.retire();
  }
 }
 
@@ -67,6 +76,7 @@ void Compensation::apply(Dataset* ds)
  QVector_Matrix_R8* ef = ds->eventsFloat();
 
  int rows = ef->n_rows();
+
  //Multiply each event with the unmixing matrix
  //ArrayList<double[]> out=new ArrayList<double[]>(ds.eventsFloat.size());
  QVector_Matrix_R8* comp = new QVector_Matrix_R8(rows, n);
@@ -76,6 +86,7 @@ void Compensation::apply(Dataset* ds)
   ds->eventsFloat()->get_row(oi, from_row);
   QVector<r8> to_row;
   matrix_.multiply(from_row, to_row);
+
   comp->merge_row(to_row, oi);
  }
  ds->set_eventsFloatCompensated(comp);

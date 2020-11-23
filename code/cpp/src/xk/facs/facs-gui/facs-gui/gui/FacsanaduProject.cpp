@@ -166,6 +166,9 @@ void FacsanaduProject::addDataset(QFile& path) // throws IOException
  ds->set_file_source_name(qfi.fileName());
 
  ds->set_cyto_frame(mcf);
+
+ ds->read_channel_info();
+
  addDataset(ds);
  
 
@@ -197,7 +200,8 @@ void FacsanaduProject::updateCompensation()
 
 void FacsanaduProject::addDataset(Dataset* ds)
 {
-  //? ds->computeProfChannel(this, nullptr);
+  //? 
+ ds->computeProfChannel(this, nullptr);
  
  datasets_.append(ds);
  //recalcProfChan();

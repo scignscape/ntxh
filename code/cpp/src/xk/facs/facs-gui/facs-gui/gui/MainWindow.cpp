@@ -688,10 +688,15 @@ void MainWindow::handleEvent(FacsanaduEvent* event)
   //else if(event instanceof EventDatasetsChanged)
  case FacsanaduEvent::Description::EventDatasetsChanged:
   qDebug() << "EDC ...";
+
+  //? here? ...
+  paneCompensation_->updateForm();
+
   datasetsw_->updateDatasetList();
   paneViews_->invalidateCache();
   dogating();
   paneMetadata_->updateForm();
+
   break;
   //else if(event instanceof EventSetViewTool)
   //{
