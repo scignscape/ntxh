@@ -178,7 +178,8 @@ MainWindow::MainWindow()
 
 
 
-//? viewsw.actionNewView();
+//? 
+ viewsw_->actionNewView();
 
  
  /// Load all files from directory
@@ -667,10 +668,12 @@ void MainWindow::handleEvent(FacsanaduEvent* event)
 
   //else if(event instanceof EventViewsChanged) 
  case FacsanaduEvent::Description::EventViewsChanged:
-  viewsw_->updateViewsList(); //just added. problem?
+  //?  viewsw_->updateViewsList(); //just added. problem?
+  qDebug() << "return 1";
   paneViews_->invalidateCache();
   dogating();
   dothelayout();
+  qDebug() << "return 2";
   break;
 
  //else if(event instanceof EventCompensationChanged)
@@ -695,7 +698,16 @@ void MainWindow::handleEvent(FacsanaduEvent* event)
   datasetsw_->updateDatasetList();
   paneViews_->invalidateCache();
   dogating();
-  paneMetadata_->updateForm();
+
+  //Dataset* ds = get_last_dataset();
+  paneMetadata_->test(get_last_dataset());
+  //?paneMetadata_->updateForm();
+
+  //? here?
+  viewsw_->updateViewsList();
+  paneViews_->updateViews();
+
+
 
   break;
   //else if(event instanceof EventSetViewTool)

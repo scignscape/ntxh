@@ -59,7 +59,16 @@ void DatasetInfoPane::test(Dataset* ds)
 
 
  cytolib::MemCytoFrame* cyto_frame = ds->cyto_frame();
+
+ if(!cyto_frame)
+ {
+  qDebug() << "missing cyto frame ...";
+  return;
+ }
+ 
  QMap<QString, QString>& qmap = cyto_frame->header_qmap(); 
+
+ qDebug() << "qmap: ";
 
  tableMatrix_->setRowCount(qmap.size());
 
@@ -104,6 +113,14 @@ void DatasetInfoPane::test(Dataset* ds)
  
 void DatasetInfoPane::updateForm()
 {
+ if(mw_->getSelectedDatasets().isEmpty())
+   return;
+
+ Dataset* ds = mw_->getSelectedDatasets().first();
+
+ if(ds)
+   test(ds);
+
 #ifdef HIDE
  updating_ = true;
  

@@ -39,7 +39,7 @@ QList<double> TransformationStack::perform(QList<double> v)
 
 QVector<double> TransformationStack::perform(QVector<double> v)
 {
- qDebug() << "v TS size: " << list_.size();
+// qDebug() << "v TS size: " << list_.size();
 
  if(list_.isEmpty())
    return v;

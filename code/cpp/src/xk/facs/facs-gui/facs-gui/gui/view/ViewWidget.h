@@ -17,6 +17,8 @@
 
 #include "../events/FacsanaduEvent.h"
 
+#include "accessors.h"
+
 #include "ViewTransform.h"
 #include "tool/ViewToolChoice.h"
 
@@ -95,6 +97,8 @@ public:
  ViewWidget(MainWindow* mw);
  void setDataset(Dataset* ds);
  void render();
+
+ ACCESSORS(int ,maxevents)
  
  void set_trans(ViewTransform* trans)
  {

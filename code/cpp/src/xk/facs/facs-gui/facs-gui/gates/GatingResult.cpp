@@ -101,12 +101,10 @@ void GatingResult::doOneGate(Gate* g, Dataset* ds, bool approximate)
     //    will be gated out ...
   res->reserve(n);
 
-  qDebug() << "n = " << n;
-   
+//  qDebug() << "n = " << n;   
     // for testing ...
   n = 50;
-
-  qDebug() << "n = " << n;
+//  qDebug() << "n = " << n;
 
 
   for(int i = 0; i < n; ++i)

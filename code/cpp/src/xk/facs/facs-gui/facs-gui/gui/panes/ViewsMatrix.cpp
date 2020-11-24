@@ -5,6 +5,10 @@
 
 #include "view/ViewWidget.h"
 
+#include "view/ViewSettings.h"
+
+#include "gates/gate-info.h"
+
 #include "MainWindow.h"
 
 #include "data/Dataset.h"
@@ -73,7 +77,200 @@ void ViewsMatrix::test_one_view()
 
 // // Update the layout of everything
 void ViewsMatrix::updateViews()
-{ 
+{
+ qDebug() << "update views ...";
+
+ // // just one dataset for now ...
+ Dataset* ds = mw_->get_last_dataset();
+
+ if(!ds)
+   return;
+ 
+ FacsanaduProject* project = mw_->project();
+
+ QList<ViewSettings*> selviews = mw_->getSelectedViews();
+
+ qDebug() << "selviews length: " << selviews.length();
+
+ QList<Dataset*> selds = {ds};
+ 
+ ViewSettings::autoscale(selds, selviews);
+
+ //int numrow = selds.size();
+ //int numcol = selviews.size();
+
+ qDebug() << "selviews length: " << selviews.length();
+
+ int numrow; int numcol;
+
+ if(orderDataset_)
+ {
+  numrow = selds.size();
+  numcol = selviews.size();
+ }
+ else
+ {
+  numcol = selds.size();
+  numrow = selviews.size();
+ }
+
+ for(; headerHorizontal_.size() < numcol; )
+ {
+  int i = headerHorizontal_.size();
+  QLabel* lab = new QLabel(this);
+  lab->setAlignment(Qt::AlignHCenter);
+  //?QFont font=new QFont();
+  //?font.setBold(true);
+  //?lab.setFont(font);
+  headerHorizontal_.push_back(lab);
+  layViews_->addWidget(lab, 0, i+1);
+ }
+
+ //Remove columns
+ for(; headerHorizontal_.size() > numcol; )
+ {
+  int i = headerHorizontal_.size() - 1;
+  QLabel* lab = headerHorizontal_.at(i);
+  lab->setVisible(false);
+  layViews_->removeWidget(lab);
+  headerHorizontal_.takeAt(i);
+ }
+
+ //Adjust vertical header size
+ //Add rows
+ for(; headerVertical_.size() < numrow; )
+ {
+  int i = headerVertical_.size();
+  QLabel* lab = new QLabel(this);
+  headerVertical_.push_back(lab);
+  layViews_->addWidget(lab, i+1, 0);
+ }
+ //Remove rows
+ for(; headerVertical_.size() > numrow; )
+ {
+  int col = headerVertical_.size() - 1;
+  QLabel* lab = headerVertical_.at(col);
+  lab->setVisible(false);
+  layViews_->removeWidget(lab);
+  headerVertical_.takeAt(col);
+ }
+
+ qDebug() << "numrow: " << numrow;
+ qDebug() << "numcol: " << numcol;
+
+ //Adjust number of view rows
+ while(prevChanWidget_.size() < numrow)
+ {
+  prevChanWidget_.append(QList<ViewWidget*>());
+ }
+
+ qDebug() << "prevChanWidget_.size(): " << prevChanWidget_.size();
+
+ while(prevChanWidget_.size() > numrow)
+ {
+  int row = prevChanWidget_.size()-1;
+  QList<ViewWidget*>& onerow = prevChanWidget_[row];
+  for(; onerow.size() > 0; )
+  {
+   int col = onerow.size() - 1;
+   ViewWidget* lab = onerow.at(col);
+   lab->setVisible(false);
+   layViews_->removeWidget(lab);
+   onerow.takeAt(col);
+  }
+  prevChanWidget_.takeAt(row);
+ }
+
+ //Fix number of columns
+ for(int row = 0; row < prevChanWidget_.size(); ++row)
+ {
+  //Add columns
+  QList<ViewWidget*>& onerow = prevChanWidget_[row];
+  for(; onerow.size() < numcol; )
+  {
+   int col = onerow.size();
+   ViewWidget* lab = new ViewWidget(mw_);
+   lab->setTool(currentTool_);
+   lab->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+   lab->setMinimumHeight(200);
+   lab->setMinimumWidth(200);
+   onerow.push_back(lab);
+   layViews_->addWidget(lab, row + 1, col + 1);
+  }
+
+  //Remove columns
+  for(;onerow.size()>numcol;)
+  {
+   int col = onerow.size() - 1;
+   ViewWidget* lab = onerow.at(col);
+   lab->setVisible(false);
+   layViews_->removeWidget(lab);
+   onerow.takeAt(col);
+  }
+ }
+
+ int indexA = 0;
+
+ qDebug() << "selviews length0: " << selviews.length();
+
+ for(Dataset* ds : selds)
+ {
+  for(int indexB = 0; indexB < selviews.size(); ++indexB)
+  {
+   ViewSettings* vs = selviews.at(indexB);
+
+   int posRow, posCol;
+   if(orderDataset_)
+   {
+    posRow = indexA;
+    posCol = indexB;
+   }
+   else
+   {
+    posCol = indexA;
+    posRow = indexB;
+   }
+
+ qDebug() << "posRow: " << posRow << " , posCol: " << posCol;
+      
+   ViewWidget* lab = prevChanWidget_.at(posRow).at(posCol);
+
+   lab->setSettings(vs);
+   lab->setDataset(ds);
+  }
+  ++indexA;
+ }
+
+ //Update headers
+ for(int i = 0; i < selds.size(); ++i)
+ {
+  QString name = selds.at(i)->getName();
+  if(orderDataset_)
+    headerVertical_.at(i)->setText(name);
+  else
+    headerHorizontal_.at(i)->setText(name);
+ }
+
+ for(int i = 0; i < selviews.size(); ++i )
+ {
+  Gate* g = selviews.at(i)->gate();
+  if(orderDataset_)
+    headerHorizontal_.at(i)->setText(g->name());
+  else
+    headerVertical_.at(i)->setText(g->name());
+ }
+  
+ //Get the size of one. rescale. then rerender all
+ for(QList<ViewWidget*> row : prevChanWidget_)
+ {
+  for(ViewWidget* w : row)
+  {
+   w->set_maxevents(maxevents_);
+   w->render();
+  }
+ }
+
+
 /*
  //FacsanaduProject project=mw.project;
  LinkedList<Dataset> selds=mw.getSelectedDatasets();

@@ -92,12 +92,14 @@ void Dataset::do_preliminary_compensation()
 
 void Dataset::read_channel_info()
 {
+ std::vector<std::string> cyto_channels = cyto_frame_->get_channels();
+
  // // in lieu of the code in FCSFile.java ...
  for(int id = 1; id <= numChannel_; ++id)
  {
   ChannelInfo* ch = new ChannelInfo();
-  QString label = QString("Label%1").arg(id); //nameForPar.get(id);
-  QString name = QString("Name%1").arg(id); // shortNameForPar.get(id);
+  QString label = QString::fromStdString(cyto_channels[id - 1]); //nameForPar.get(id);
+  QString name;// = QString("Name%1").arg(id); // shortNameForPar.get(id);
   ch->set_label(label);
   ch->set_name(name);
   channelInfo_.push_back(ch);
@@ -190,7 +192,6 @@ void Dataset::computeProfChannel(FacsanaduProject* proj, ProfChannel* forPc)
      channelInfo_.removeOne(ci);
    // //? and delete ci?
   }
-
 
   qDebug() << "prof channel length: " << proj->profchan(); 
   for(ProfChannel* pc : proj->profchan() )

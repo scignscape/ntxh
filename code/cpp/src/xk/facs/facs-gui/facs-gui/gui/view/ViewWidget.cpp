@@ -71,6 +71,7 @@ void ViewWidget::setDataset(Dataset* ds)
 
 void ViewWidget::render()
 {
+ qDebug() << "ViewWidget::render ...";
  update();
 }
 

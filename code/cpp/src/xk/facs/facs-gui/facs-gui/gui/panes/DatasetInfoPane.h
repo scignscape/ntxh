@@ -22,8 +22,8 @@ class DatasetInfoPane : public QWidget
  MainWindow* mw_;
  bool updating_; // =false;
   
- public: 
-  DatasetInfoPane(MainWindow* mw);
+public: 
+ DatasetInfoPane(MainWindow* mw);
  
  void updateForm();
 

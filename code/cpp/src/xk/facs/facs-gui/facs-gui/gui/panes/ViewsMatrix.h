@@ -21,8 +21,9 @@ class ViewsMatrix : public QWidget
  QGridLayout* layViews_;// = new QGridLayout();
  MainWindow* mw_;
 
- QList<QLabel> headerHorizontal_; //=new LinkedList<QLabel>();
- QList<QLabel> headerVertical_; //=new LinkedList<QVLabel>();
+ QList<QLabel*> headerHorizontal_; //=new LinkedList<QLabel>();
+ QList<QLabel*> headerVertical_; //=new LinkedList<QVLabel>();
+
  QList<QList<ViewWidget*>> prevChanWidget_; // = new ArrayList<ArrayList<ViewWidget>>();
  bool orderDataset_; // = false;
  int maxevents_;

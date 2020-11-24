@@ -99,7 +99,7 @@ QVector_Matrix_R8* MemCytoFrame::data_to_qvmatrix()
 
      QString qtxt = QString::fromStdString(txt);
 
-     qDebug() << "qtxt: " << qtxt;
+    //? qDebug() << "qtxt: " << qtxt;
 
      if(qtxt.startsWith('\f'))
        qtxt = qtxt.mid(1);
@@ -108,7 +108,7 @@ QVector_Matrix_R8* MemCytoFrame::data_to_qvmatrix()
 
      QStringList qtxts = qtxt.split('\f');
 
-     qDebug() << "qtexts: " << qtxts;
+    //? qDebug() << "qtexts: " << qtxts;
 
       
      QListIterator<QString> it(qtxts);
@@ -123,7 +123,7 @@ QVector_Matrix_R8* MemCytoFrame::data_to_qvmatrix()
 //      if(key.isEmpty() && value.isEmpty())
 //        continue;
 
-      qDebug() << "key = " << key << " value = " << value;
+     //? qDebug() << "key = " << key << " value = " << value;
 
       header_qmap_[key] = value; 
 
@@ -136,7 +136,7 @@ QVector_Matrix_R8* MemCytoFrame::data_to_qvmatrix()
       } 
      }
       
-     qDebug() << "header_qmap_: " << header_qmap_;
+    //? qDebug() << "header_qmap_: " << header_qmap_;
 
 		/*
 		 * get the first character as delimiter

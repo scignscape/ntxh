@@ -15,9 +15,11 @@
 
 #include "FacsanaduProject.h"
 
-#include "../gates/gate-info.h"
-#include "../data/Dataset.h"
-#include "../data/ChannelInfo.h"
+#include "gates/gate-info.h"
+#include "data/Dataset.h"
+#include "data/ChannelInfo.h"
+
+#include "gates/GateSet.h"
 
 
 #include <QDebug>
@@ -95,10 +97,19 @@ void ViewsListWidget::actionSelectAllViews()
 LinkedList<ViewSettings*> ViewsListWidget::getSelectedViews()
 {
  LinkedList<ViewSettings*> selviews; // =new LinkedList<ViewSettings>();
- for(QModelIndex in : tableViews_->selectionModel()->selectedRows())
+ 
+ if(tableViews_->rowCount() == 0)
+   return selviews;
+
+/* for(QModelIndex in : tableViews_->selectionModel()->selectedRows())
  {
   selviews.append((ViewSettings*) tableViews_->item(in.row(), 0)->data(Qt::ItemDataRole::UserRole).value<void*>());
  }
+*/
+
+ // for testing, always select first row ...
+
+ selviews.append((ViewSettings*) tableViews_->item(0, 0)->data(Qt::ItemDataRole::UserRole).value<void*>());
  return selviews;
 }
 
@@ -170,6 +181,9 @@ void ViewsListWidget::updateViewsList()
   }
   
   QTableWidgetItem* qtwi = QTutil::createReadOnlyItem(showname);
+
+  qDebug() << "show name: " << showname;  
+
   qtwi->setData(Qt::ItemDataRole::UserRole, QVariant::fromValue( (void*)vs ));
   tableViews_->setItem(row, 0, qtwi);
   if(selviews.contains(vs))
@@ -203,7 +217,8 @@ void ViewsListWidget::actionNewView()
  FacsanaduProject* project = mw_->project();
  ViewSettings* vs = new ViewSettings();
 
-   //? vs->set_gate( project->gateset() -> getRootGate();
+   //? 
+ vs->set_gate( project->gateset()->getRootGate() );
 
  vs->set_indexX(0);
  vs->set_indexY(1);                                                    
