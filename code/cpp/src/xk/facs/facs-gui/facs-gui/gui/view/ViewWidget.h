@@ -47,6 +47,11 @@ class ViewWidget_Callback : public QObject
  Q_OBJECT
 public:
 
+ ViewWidget_Callback(ViewWidget* _this)
+ {
+  vw = _this;
+ }
+
  ViewWidget* vw;
  virtual void actionSet() {};
 };
@@ -137,6 +142,14 @@ public:
 //  Q_OBJECT
 
  public:
+
+  CallbackSetChannel(ViewWidget* _this, // TransformationType* t, 
+    bool i, int c)
+   : Callback(_this), forx(i), chanid(c)
+  {
+ 
+  }
+
   bool forx;
   int chanid;
   void actionSet() Q_DECL_OVERRIDE;
@@ -146,6 +159,14 @@ public:
  class CallbackSetHistogram : public Callback // implements Callback
  {
  public:
+
+  CallbackSetHistogram(ViewWidget* _this, // TransformationType* t, 
+    int c)
+   : Callback(_this), chanid(c)
+  {
+ 
+  }
+
   int chanid;
   void actionSet() Q_DECL_OVERRIDE;
  };
@@ -154,6 +175,14 @@ public:
  class CallbackSetGate : public Callback // implements Callback
  {
  public:
+
+  CallbackSetGate(ViewWidget* _this, // TransformationType* t, 
+    Gate* gate)
+   : Callback(_this), g(gate)
+  {
+ 
+  }
+
   Gate* g;
   void actionSet() Q_DECL_OVERRIDE;
  };
@@ -165,7 +194,7 @@ public:
   QString ttype;  // TransformationType* t;
   bool forx;
   
-  CallbackSetTransformation(QString ttype, // TransformationType* t, 
+  CallbackSetTransformation(ViewWidget* _this, QString ttype, // TransformationType* t, 
     bool forx);
   
   void actionSet() Q_DECL_OVERRIDE;
@@ -175,6 +204,14 @@ public:
  class CallbackSetZoom : public Callback //implements Callback
  {
  public:
+
+  CallbackSetZoom(ViewWidget* _this, double s, // TransformationType* t, 
+    bool i)
+   : Callback(_this), scale(s), isx(i)
+  {
+ 
+  }
+
   double scale;
   bool isx;
   void actionSet() Q_DECL_OVERRIDE;
@@ -183,6 +220,14 @@ public:
  class CallbackSetBins : public Callback  // implements Callback
  {
  public:
+
+  CallbackSetBins(ViewWidget* _this, int b) // TransformationType* t, 
+   : Callback(_this), bins(b)
+  {
+ 
+  }
+
+
   int bins;
   void actionSet() Q_DECL_OVERRIDE;
  };

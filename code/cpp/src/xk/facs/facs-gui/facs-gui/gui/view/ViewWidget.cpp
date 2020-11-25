@@ -24,6 +24,8 @@
 
 #include "transformations/Transformation.h"
 #include "transformations/TransformationStack.h"
+#include "transformations/TransformationLog.h"
+#include "transformations/TransformationLinear.h"
 
 #include <limits>
 
@@ -46,7 +48,6 @@ ViewWidget::ViewWidget(MainWindow* mw)
  viewsettings_ = new ViewSettings();
 
  // handles_ = new LinkedList<GateHandle>();
-
  curhandle_ = nullptr;
 
  // pointLast_; // = new QPointF();
@@ -198,17 +199,27 @@ void ViewWidget::mousePressEvent(QMouseEvent* event)
 {
  pointLast_ = event->localPos(); //posF();
 
+ qDebug() << "point last: " << pointLast_;
+
   // super.mousePressEvent(event);
  QWidget::mousePressEvent(event);
 
- if(event->buttons() == Qt::LeftButton)
+ bool lbtn = event->buttons() == Qt::LeftButton;
+ bool rbtn = event->buttons() == Qt::RightButton;
+
+ if(lbtn || rbtn)
  {
-  curhandle_ = nullptr;
-  GateHandle* handle = getClosestHandle(event->localPos(), 10);
-  if(handle != nullptr)
+  GateHandle* handle = nullptr;
+  if(lbtn)
+  {
+   curhandle_ = nullptr;
+   GateHandle* handle = getClosestHandle(event->localPos(), 10);
+  }
+
+  if(handle)
   {
    //Move a handle
-   curhandle_ = handle; 
+   curhandle_ = handle;
   }
   else if(mousePosInBoundary(event->pos()))
   {
@@ -234,16 +245,24 @@ void ViewWidget::mousePressEvent(QMouseEvent* event)
    for(int i=0; i < chans.size(); i++)
    {
     ChannelInfo* ci = chans.at(i);
-    CallbackSetChannel* set = new CallbackSetChannel();
-    set->chanid = i;
-    set->forx = lastwasx;
+    CallbackSetChannel* set = new CallbackSetChannel(this, i, lastwasx);
+    //?set->chanid = i;
+    //?set->forx = lastwasx;
+
     menuAxis->addAction(ci->formatName(), set, &CallbackSetChannel::actionSet); 
+
+//    menuAxis->addAction(ci->formatName(), [set]()
+//    {
+//     qDebug() << "set: " << &CallbackSetChannel::actionSet;
+//     set->actionSet();
+//    });
+
       //this //&set
       //, Q_SLOT("actionSet()") );
     setchans_.append(set);
 
-    CallbackSetHistogram* sethist = new CallbackSetHistogram();
-    sethist->chanid = i;
+    CallbackSetHistogram* sethist = new CallbackSetHistogram(this, i);
+    //?sethist->chanid = i;
     menuHist->addAction(ci->formatName(), sethist,
       &CallbackSetHistogram::actionSet);
       //sethist, "actionSet()");
@@ -254,8 +273,8 @@ void ViewWidget::mousePressEvent(QMouseEvent* event)
    QMenu* mSetSource = menu->addMenu(tr("Set source population"));
    for(Gate* g : project->gateset()->getGates())
    {
-    CallbackSetGate* sg = new CallbackSetGate();
-    sg->g = g;
+    CallbackSetGate* sg = new CallbackSetGate(this, g);
+    //?sg->g = g;
     setchans_.append(sg);
       // 
     mSetSource->addAction("g->name", sg, &CallbackSetGate::actionSet); 
@@ -266,9 +285,9 @@ void ViewWidget::mousePressEvent(QMouseEvent* event)
    QMenu* mSetScaling = menu->addMenu(tr("Set zoom"));
    for(double d : QList<double> {0.1,0.5,1,2,5,10,20,50})
    {
-    CallbackSetZoom* sg = new CallbackSetZoom();
-    sg->scale = d;
-    sg->isx = lastwasx;
+    CallbackSetZoom* sg = new CallbackSetZoom(this, d, lastwasx);
+    //? sg->scale = d;
+    //? sg->isx = lastwasx;
     setchans_.append(sg);
     mSetScaling->addAction(QString::number(d), sg, &CallbackSetZoom::actionSet); 
       //"actionSet()");
@@ -277,26 +296,26 @@ void ViewWidget::mousePressEvent(QMouseEvent* event)
    QMenu* menuTrans = menu->addMenu(tr("Set transform"));
 
    CallbackSetTransformation* tLin = new CallbackSetTransformation
-     ( "Linear" , //TransformationType::LINEAR, 
+     (this, "Linear" , //TransformationType::LINEAR, 
       lastwasx); 
    CallbackSetTransformation* tLog = new CallbackSetTransformation
-     (  "Log" ,  // TransformationType::LOG,
+     (this,  "Log" ,  // TransformationType::LOG,
       lastwasx);
 
 
    menuTrans->addAction("Linear", tLin, &CallbackSetTransformation::actionSet);
       // tlin, "actionSet()");
 
-   menuTrans->addAction("Log", tLog, &CallbackSetTransformation::actionSet); 
-      // tLog, "actionSet()");
+//?   menuTrans->addAction("Log", tLog, &CallbackSetTransformation::actionSet); 
 
+   menuTrans->addAction("Log", tLog, &CallbackSetTransformation::actionSet); 
 
    QMenu* mHistBins = new QMenu(tr("Set histogram bins"));
 
    for(int d : QList<int>{5,10,15,20,30,40,50,100,200,300})
    {
-    CallbackSetBins* sg = new CallbackSetBins();
-    sg->bins=d;
+    CallbackSetBins* sg = new CallbackSetBins(this, d);
+    //? sg->bins=d;
     setchans_.append(sg);
     mHistBins->addAction(QString::number(d), sg, &CallbackSetBins::actionSet); 
       //sg, "actionSet()");
@@ -381,6 +400,9 @@ void ViewWidget::CallbackSetChannel::actionSet()
  else
    vw->viewsettings_->set_indexY(chanid);
 
+ qDebug() << "ix: " << vw->viewsettings_->indexX();
+ qDebug() << "iy: " << vw->viewsettings_->indexY();
+
  EventViewsChanged ev;
  vw->mainWindow_->handleEvent(ev);
 }
@@ -402,37 +424,45 @@ void ViewWidget::CallbackSetGate::actionSet()
 }
 
 ViewWidget::CallbackSetTransformation::CallbackSetTransformation(
-  QString tt, // TransformationType t, 
-  bool forx)
+  ViewWidget* _this, QString tt, // TransformationType t, 
+  bool f)
+ :  Callback(_this), ttype(tt), forx(f)
 {
- ttype = tt;
- forx = forx;
 }
 
 void ViewWidget::CallbackSetTransformation::actionSet()
 {
+  qDebug() << " ... ... FacsanaduEvent::Description::EventViewsChanged ...";
+
  int index;
 
  if(forx)
-   index=vw->viewsettings()->indexX();
+   index = vw->viewsettings()->indexX();
  else
-   index=vw->viewsettings()->indexY();
+   index = vw->viewsettings()->indexY();
 
 // Q_UNUSED(index)
 
 
+  qDebug() << "index = " << index;
+
  Transformation* trans = nullptr;
 
-//? if(ttype == "Log")
-//?   trans = new TransformationLog();
+//?
+ if(ttype == "Log")
+//?
+   trans = new TransformationLog();
 
-// else if(ttype == "Linear")
-//?   trans = new TransformationLinear();
+// 
+ else if(ttype == "Linear")
+//?
+   trans = new TransformationLinear();
 
 // else if(t==TransformationType.LOG)
  if(trans)
-   vw->viewsettings()->transformation()->set(index, trans);
+   vw->viewsettings()->transformation()->set_for_index(index, trans);
 
+  qDebug() << "... FacsanaduEvent::Description::EventViewsChanged ...";
 
  EventViewsChanged ev;
  vw->mainWindow_->handleEvent(ev);

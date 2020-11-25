@@ -90,7 +90,7 @@ void Compensation::apply(Dataset* ds)
   comp->merge_row(to_row, oi);
  }
  ds->set_eventsFloatCompensated(comp);
- ds->set_numCompensated(rows);
+ ds->set_numCompensated(n);
 }
 
 double Compensation::get(int to, int from)

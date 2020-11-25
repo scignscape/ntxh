@@ -45,7 +45,7 @@ public:
   */
  QList<double> invert(QList<double> v);
 
- void set(int index, Transformation* trans);
+ void set_for_index(int index, Transformation* trans);
 
  double perform(double x, int indexX);
 

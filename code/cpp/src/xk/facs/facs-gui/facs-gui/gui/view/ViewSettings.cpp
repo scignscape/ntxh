@@ -58,6 +58,11 @@ void ViewSettings::autoscale(QVector<double> max, QVector<double> min)
  //Currently min values are not used
  Q_UNUSED(min)
 
+ qDebug() << "max = " << max.size();
+ qDebug() << "zoomX = " << zoomX_;
+ qDebug() << "zoomY = " << zoomY_;
+
+
  double maxx = max[indexX_];
  double maxy = max[indexY_];
  scaleX_ = 1.0 / (maxx * zoomX_);
@@ -85,7 +90,15 @@ QVector<double> ViewSettings::getMaxForChannel(Dataset* dataset)
    val[j] = qMax(val[j], dataset->getAsFloatCompensated(i,j) );
   }
  }
+
+ qDebug() << "vals max = " << val;
+
+ // //? 
  val = transformation_->perform(val);
+
+ qDebug() << "vals max 1 = " << val;
+
+
  return val;
 }
 
@@ -94,21 +107,28 @@ QVector<double> ViewSettings::getMaxForChannel(Dataset* dataset)
   */
 QVector<double> ViewSettings::getMinForChannel(Dataset* dataset)
 {
- QVector<double> vals(dataset->getNumChannels());
+ QVector<double> val(dataset->getNumChannels());
    // = new QVector<double>; //[dataset->getNumChannels()];
 
- for(int i = 0; i < vals.length(); ++i)
-   vals[i] = std::numeric_limits<double>::max();
+ for(int i = 0; i < val.length(); ++i)
+   val[i] = std::numeric_limits<double>::max();
 
  for(int i = 0; i < dataset->getNumObservations(); ++i)
  {
-  for(int j=0;j<vals.length();j++)
+  for(int j=0; j < val.length(); ++j)
   {
-   vals[j] = qMin(vals[j], dataset->getAsFloatCompensated(i,j) );
+   val[j] = qMin(val[j], dataset->getAsFloatCompensated(i,j) );
   }
  }
- vals = transformation_->perform(vals); //this is kind of cheating
- return vals;
+
+ qDebug() << "vals min = " << val;
+ 
+ //?
+ val = transformation_->perform(val); //this is kind of cheating
+
+ qDebug() << "vals min 1 = " << val;
+
+ return val;
 }
 
  /**

@@ -6,6 +6,9 @@
 
 #include "Transformation.h"
 
+#include "TransformationLog.h"
+#include "TransformationLinear.h"
+
 #include <QDebug>
 #include <QtMath>
 
@@ -16,7 +19,14 @@
 // // A set of transformations
 TransformationStack::TransformationStack()
 {
- 
+ // test by adding one log trans ...
+//? Transformation* trans = new TransformationLinear(-20000);
+
+ //Transformation* trans = new TransformationLog(1000); 
+//? 
+
+ //set_for_index(0, trans);
+ //set_for_index(1, trans);
 }
 
 
@@ -39,7 +49,8 @@ QList<double> TransformationStack::perform(QList<double> v)
 
 QVector<double> TransformationStack::perform(QVector<double> v)
 {
-// qDebug() << "v TS size: " << list_.size();
+//
+ qDebug() << "v TS size: " << list_.size();
 
  if(list_.isEmpty())
    return v;
@@ -48,7 +59,7 @@ QVector<double> TransformationStack::perform(QVector<double> v)
   QVector<double> n(v); // new double[v.length];
   // System.arraycopy(v, 0, n, 0, v.length);
   for(Transformation* one : list_)
-    one->transform(n.toList());
+    one->transform(n);
   return n;
  }
 
@@ -71,12 +82,12 @@ QList<double> TransformationStack::invert(QList<double> v)
  }
 }
 
-void TransformationStack::set(int index, Transformation* trans)
+void TransformationStack::set_for_index(int index, Transformation* trans)
 {
  for(Transformation* t : list_) // new LinkedList<Transformation>(list))
  { 
   if(t->channel() == index)
-    list_.removeAll(t); //? all?
+    list_.removeOne(t); //? all?
  }
 
  //Add new one
@@ -91,9 +102,10 @@ double TransformationStack::perform(double x, int indexX)
 {
  if(list_.size() == 0)
  {
-  qDebug() << "ln: " << x << " = " << qLn(x);
+  //?qDebug() << "ln: " << x << " = " << qLn(x);
   // default ... just log everything ...
-  return qLn(x);
+  //?return qLn(x);
+  return x;
  }
 
  for(Transformation* t : list_)

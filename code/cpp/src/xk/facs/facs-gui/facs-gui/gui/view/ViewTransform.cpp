@@ -17,6 +17,7 @@
 // //
 
 ViewTransform::ViewTransform()
+ :  viewsettings_(nullptr)
 {
  //How far the graph is pushed from the boundary (where labels are placed)
  graphOffsetXY_ = 30;
@@ -96,19 +97,31 @@ QPointF ViewTransform::mapFcsToScreen(const QPointF& pos)
 int ViewTransform::mapFcsToScreenX(double x)
 {
  x = viewsettings_->transformation()->perform(x, viewsettings_->indexX() );
- qDebug() << "do trans ... x = " << x;
+   //?qDebug() << "do trans ... x = " << x << " , internalWidth_ = " << internalWidth_;
 
-  return x;
- //? return mapGeneralToScreenX(viewsettings_->scaleX() * x);
+ //? return x;
+ //? 
+ int result = mapGeneralToScreenX(viewsettings_->scaleX() * x);
+   //?qDebug() << "do trans ... x r = " << result;
+ return result; 
+
+
+// return mapGeneralToScreenX(viewsettings_->scaleX() * x);
 }
 
 int ViewTransform::mapFcsToScreenY(double y)
 {
  y = viewsettings_->transformation()->perform(y, viewsettings_->indexY() );
- qDebug() << "do trans ... y = " << y;
+  //?qDebug() << "do trans ... y = " << y  << " , internalHeight_ = " << internalHeight_;
 
- return y;
-  //? return mapGeneralToScreenY(viewsettings_->scaleY() * y); 
+ //?return y;
+  //? 
+
+   //? qDebug() << "vsy: " << viewsettings_->scaleY();
+ 
+ int result = mapGeneralToScreenY(viewsettings_->scaleY() * y);
+   //? qDebug() << "do trans ... y r = " << result;
+ return result; 
 }
 
  

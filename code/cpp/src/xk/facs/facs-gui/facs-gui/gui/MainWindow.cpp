@@ -660,32 +660,42 @@ void MainWindow::handleEvent(FacsanaduEvent* event)
  // if(event instanceof EventGatesChanged)
  {
  case FacsanaduEvent::Description::EventGatesChanged:
+/*
   gatesw_->updateGatesList();
   paneViews_->invalidateCache();
   dogating();
   dothelayout();
+*/
   break;
 
   //else if(event instanceof EventViewsChanged) 
  case FacsanaduEvent::Description::EventViewsChanged:
+
+  qDebug() << "FacsanaduEvent::Description::EventViewsChanged ...";
+  dogating();
+  dothelayout();
+
+
   //?  viewsw_->updateViewsList(); //just added. problem?
-  qDebug() << "return 1";
+/*
   paneViews_->invalidateCache();
   dogating();
   dothelayout();
-  qDebug() << "return 2";
+*/
   break;
 
  //else if(event instanceof EventCompensationChanged)
  case FacsanaduEvent::Description::EventCompensationChanged:
+/*
   project_->updateCompensation();
   dogating();
   dothelayout();
+*/
   break;
  
   //else if(event instanceof EventGatesMoved)
  case FacsanaduEvent::Description::EventGatesMoved:
-  dothelayout();
+//?  dothelayout();
   break;
 
   //else if(event instanceof EventDatasetsChanged)

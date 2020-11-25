@@ -103,7 +103,7 @@ void GatingResult::doOneGate(Gate* g, Dataset* ds, bool approximate)
 
 //  qDebug() << "n = " << n;   
     // for testing ...
-  n = 50;
+ // n = 50;
 //  qDebug() << "n = " << n;
 
 

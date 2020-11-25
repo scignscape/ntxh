@@ -7,6 +7,9 @@
 
 QT += widgets core
 
+CONFIG += debug
+
+
 #QT -= gui
 
 include($$ROOT_DIR/../preferred/sysr.pri)
@@ -40,6 +43,7 @@ HEADERS += \
   $$SRC_DIR/gui/view/tool/ViewToolDrawRect.h \
   $$SRC_DIR/gui/view/tool/ViewToolDrawPoly.h \
   $$SRC_DIR/gui/panes/ViewsPane.h \
+  $$SRC_DIR/transformations/TransformationLog.h \
 
 
 
@@ -80,6 +84,8 @@ SOURCES +=  \
   $$SRC_DIR/gui/colors/QColorCombo.cpp \
   $$SRC_DIR/gui/colors/ColorSet.cpp \
   $$SRC_DIR/transformations/TransformationStack.cpp \
+  $$SRC_DIR/transformations/TransformationLog.cpp \
+  $$SRC_DIR/transformations/TransformationLinear.cpp \
   $$SRC_DIR/data/Dataset.cpp  \
   $$SRC_DIR/data/Compensation.cpp  \
   $$SRC_DIR/gui/panes/ViewsMatrix.cpp \

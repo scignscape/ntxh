@@ -4,16 +4,27 @@
 #ifndef Transformation__H
 #define Transformation__H
 
+#include <QList>
+
+#include <QVector>
+
+
 // package facsanadu.transformations;
 
 // // Transformation
 
 class Transformation
 {
+protected:
  int channel_; //=-1;
 
 
 public:
+
+ Transformation()
+  : channel_(-1)
+ {
+ }
 
  int channel()
  {
@@ -24,16 +35,20 @@ public:
   channel_ = i;
  }
 
- virtual void transform(QList<double> v) = 0;
- virtual void invert(QList<double> v) = 0;
- virtual double transform(double x, int index);
- virtual double invert(double x, int index);
+ virtual void transform(QList<double>& v) = 0;
+ virtual void invert(QList<double>& v) = 0;
+
+ virtual void transform(QVector<double>& v) = 0;
+ virtual void invert(QVector<double>& v) = 0;
+
+ virtual double transform(double x, int index) = 0;
+ virtual double invert(double x, int index) = 0;
 };
 
-class TransformationLog : Transformation
-{
+//class TransformationLog : Transformation
+//{
 
-};
+//};
 
 #endif //  Transformation__H
 

@@ -13,6 +13,8 @@
 **/dgdb/instances/*
 
 **/run-local.sh
+**/run-gdb.sh
+**/run-local*.sh
 
 **/Makefile
 
