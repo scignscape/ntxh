@@ -78,6 +78,13 @@ private:
 
  long lastGatingTime_;  // =0;
  QImage* img_; // = nullptr;
+
+ QImage* blank_img_;
+ QImage* paint_img_;
+
+ int lastChannelX_;
+ int lastChannelY_;
+
  void updatePointImage();
 
  bool mousePosInBoundary(const QPoint& pos);
@@ -86,6 +93,8 @@ private:
  ViewTransform* trans_; // =new ViewTransform();
  ViewSettings* viewsettings_; // =new ViewSettings();
  int maxevents_;
+
+ void clear_image();
 
 
 protected:

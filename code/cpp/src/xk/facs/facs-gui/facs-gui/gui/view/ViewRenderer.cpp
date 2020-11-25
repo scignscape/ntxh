@@ -209,6 +209,10 @@ void test_render_xy(MainWindow* mw, ViewSettings* viewsettings, Dataset* ds,
 void ViewRenderer::renderXY(MainWindow* mw, ViewSettings* viewsettings, Dataset* ds,
   GatingResult* gr, ViewTransform* trans, QPainter& pm, int rendermax)
 {
+
+ qDebug() << "1 viewsettings->indexX() = " << viewsettings->indexX();
+ qDebug() << "1 viewsettings->indexY() = " << viewsettings->indexY();
+
  if(!gr)
  {
   test_render_xy(mw, viewsettings, ds, trans, pm, rendermax);
@@ -242,6 +246,9 @@ void ViewRenderer::renderXY(MainWindow* mw, ViewSettings* viewsettings, Dataset*
  QPen pen(QColor::fromRgb(0,0,255));
  pen.setWidth(2);
  pm.setPen(pen);
+
+ qDebug() << "viewsettings->indexX() = " << viewsettings->indexX();
+ qDebug() << "viewsettings->indexY() = " << viewsettings->indexY();
 
  QColor thecol; //=new QColor();
  QVector<int>* accepted = gr->getAcceptedFromGate(viewsettings->gate() );

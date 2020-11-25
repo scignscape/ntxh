@@ -27,6 +27,8 @@
 #include "transformations/TransformationLog.h"
 #include "transformations/TransformationLinear.h"
 
+#include "gates/GatingResult.h"
+
 #include <limits>
 
 
@@ -38,6 +40,9 @@
 
 
 ViewWidget::ViewWidget(MainWindow* mw)
+ :  blank_img_(nullptr), paint_img_(nullptr),
+    lastChannelX_(-1), lastChannelY_(-1)
+
 {
  //Dataset dataset;
 
@@ -74,6 +79,7 @@ void ViewWidget::render()
 {
  qDebug() << "ViewWidget::render ...";
  update();
+ repaint();
 }
 
 
@@ -87,14 +93,30 @@ void ViewWidget::updatePointImage()
  //GatingResult* gr = nullptr;
 
   // // GatingResult not yet impl ...
- long newGatingTime = 0; //gr->lastGatingCalculationTime();
+ long newGatingTime = gr->lastGatingCalculationTime();
 
 // System.out.println("last view "+lastGatingTime+"   last g "+newGatingTime+ "    "+(lastGatingTime<newGatingTime));
 
- if(img_ == nullptr || lastGatingTime_ < newGatingTime 
+ bool channels_updated = false;
+
+  qDebug() << "updating point image? ...";
+
+ if(viewsettings_->indexX() != lastChannelX_)
+ {
+  lastChannelX_ = viewsettings_->indexX();
+  channels_updated = true;
+ }  
+ if(viewsettings_->indexY() != lastChannelY_)
+ {
+  lastChannelY_ = viewsettings_->indexY();
+  channels_updated = true;
+ }  
+
+
+ if(channels_updated || img_ == nullptr || lastGatingTime_ < newGatingTime 
    || img_->width() != width() || img_->height() != height())
  {
- qDebug() << "updating ...";
+  qDebug() << "updating point image ...";
 
   img_ = new QImage(width(), height(), QImage::Format_RGB32); //, Format.Format_RGB32);
 
@@ -103,7 +125,11 @@ void ViewWidget::updatePointImage()
   pm2.setBrush(QBrush(QColor(225, 210, 200)));
   pm2.drawRect(-5,-5,10000,10000);
 
-  
+  if(!blank_img_)
+  {
+   blank_img_ = new QImage;
+   *blank_img_ = img_->copy();
+  }
 
   ViewRenderer::renderData(mainWindow_, viewsettings_, dataset_, gr, trans_, pm2, maxevents_);
 //?  pm2.end();
@@ -122,8 +148,28 @@ pm2.end();
  }
 }
 
+void ViewWidget::clear_image()
+{
+ if(!blank_img_)
+   return;
+
+ paint_img_ = blank_img_;
+ repaint();
+}
+
+
 void ViewWidget::paintEvent(QPaintEvent* pe)
 {
+ if( paint_img_ && (paint_img_ == blank_img_) )
+ {
+  paint_img_ = nullptr;
+  QPainter pm; //=new QPainter(this);
+  pm.begin(this);
+  pm.drawImage(QPoint {0, 0}, *blank_img_);
+  pm.end();
+  return;
+ }
+
  QWidget::paintEvent(pe);
   //? super.paintEvent(pe);
   //?
@@ -144,7 +190,14 @@ void ViewWidget::paintEvent(QPaintEvent* pe)
  LinkedList<GateHandle*> handles; // =new LinkedList<GateHandle>();
  QPainter pm; //=new QPainter(this);
 
+ qDebug() << "ix1: " << viewsettings_->indexX();
+ qDebug() << "iy1: " << viewsettings_->indexY();
+
  updatePointImage();
+
+ qDebug() << "ix2: " << viewsettings_->indexX();
+ qDebug() << "iy2: " << viewsettings_->indexY();
+
 
  qDebug() << "drawing ...";
 
@@ -245,7 +298,7 @@ void ViewWidget::mousePressEvent(QMouseEvent* event)
    for(int i=0; i < chans.size(); i++)
    {
     ChannelInfo* ci = chans.at(i);
-    CallbackSetChannel* set = new CallbackSetChannel(this, i, lastwasx);
+    CallbackSetChannel* set = new CallbackSetChannel(this, lastwasx, i);
     //?set->chanid = i;
     //?set->forx = lastwasx;
 
@@ -263,8 +316,10 @@ void ViewWidget::mousePressEvent(QMouseEvent* event)
 
     CallbackSetHistogram* sethist = new CallbackSetHistogram(this, i);
     //?sethist->chanid = i;
+
     menuHist->addAction(ci->formatName(), sethist,
       &CallbackSetHistogram::actionSet);
+
       //sethist, "actionSet()");
     setchans_.append(sethist);
    }
@@ -394,6 +449,12 @@ void ViewWidget::setSettings(ViewSettings* vs)
 
 void ViewWidget::CallbackSetChannel::actionSet()
 {
+
+ vw->clear_image();
+
+ qDebug() << "chanid = " << chanid;
+
+
  if(forx)
    vw->viewsettings_->set_indexX(chanid);
  
@@ -405,6 +466,7 @@ void ViewWidget::CallbackSetChannel::actionSet()
 
  EventViewsChanged ev;
  vw->mainWindow_->handleEvent(ev);
+
 }
 
 
