@@ -65,6 +65,7 @@ void ViewSettings::autoscale(QVector<double> max, QVector<double> min)
 
  double maxx = max[indexX_];
  double maxy = max[indexY_];
+
  scaleX_ = 1.0 / (maxx * zoomX_);
  scaleY_ = 1.0 / (maxy * zoomY_);
 } 

@@ -97,8 +97,8 @@ void GatingResult::doOneGate(Gate* g, Dataset* ds, bool approximate)
   n = ds->getNumObservations();
   globalGateRes_ = new QVector<int>(n);
 
-   // //  allocates more space than needed because many events 
-    //    will be gated out ...
+   // //  may allocate more space than needed because events 
+    //    might be gated out ...
   res->reserve(n);
 
 //  qDebug() << "n = " << n;   

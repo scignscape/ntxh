@@ -231,7 +231,7 @@ void ViewRenderer::renderXY(MainWindow* mw, ViewSettings* viewsettings, Dataset*
 // int colg[]=new int[listgates.size()];
 // int colb[]=new int[listgates.size()];
 
- for(int i=0; i<listgates.size(); i++)
+ for(int i = 0; i < listgates.size(); ++i)
  {
   Gate* g = listgates.at(i);
   if(g != nullptr)
@@ -332,6 +332,14 @@ void ViewRenderer::drawHeaderLines(QPainter& pm, ViewTransform* trans,
 void ViewRenderer::drawgatesRecursive(QPainter& pm, ViewTransform* trans, 
   Gate* parent, ViewSettings* viewsettings, LinkedList<GateHandle*> handles)
 {
+ qDebug() << "g = " << parent;
+ qDebug() << "g->class_name() = " << parent->class_name();
+
+//  pm.setPen(QColor::fromRgb(255,0,0));
+//  pm.setBrush(QBrush(Qt::transparent));
+//  GateRenderer* rend = GateRendererManager::getGateRenderer(parent);
+//  rend->render(parent, pm, trans, viewsettings, handles);
+
  for(Gate* g : parent->children() )
  {
   pm.setPen(QColor::fromRgb(255,0,0));
@@ -340,6 +348,7 @@ void ViewRenderer::drawgatesRecursive(QPainter& pm, ViewTransform* trans,
   rend->render(g, pm, trans, viewsettings, handles);
   drawgatesRecursive(pm, trans, g, viewsettings, handles);
  }
+
 }
 
 

@@ -12,11 +12,13 @@
 
 #include <QtGlobal>
 
+class QRectF;
+
 // package facsanadu.gates;
 
 // author Johan Henriksson
 
-class GateRect : Gate
+class GateRect : public Gate
 {
  int indexX_;
  int indexY_;
@@ -33,10 +35,12 @@ class GateRect : Gate
  double iy1_;
  double iy2_;
 
+ QRectF* force_;
+
 
 public:
 
- GateRect();
+ GateRect(QRectF* force = nullptr);
 
  ACCESSORS(int ,indexX)
  ACCESSORS(int ,indexY)
@@ -53,6 +57,8 @@ public:
  ACCESSORS(double ,iy1)
  ACCESSORS(double ,iy2)
 
+ ACCESSORS(QRectF* ,force)
+
 
  void updateInternal()
  {
@@ -64,11 +70,23 @@ public:
   setUpdated();
  }
  
- bool classify(QList<double> obs)
+ bool classify(QList<double>& obs)
  {
   return
     obs[indexX_] >= ix1_ && obs[indexX_] <= ix2_ &&
     obs[indexY_] >= iy1_ && obs[indexY_] <= iy2_;
+ }
+
+ bool classify(QVector<double>& obs)
+ {
+  return
+    obs[indexX_] >= ix1_ && obs[indexX_] <= ix2_ &&
+    obs[indexY_] >= iy1_ && obs[indexY_] <= iy2_;
+ }
+
+ QString class_name() const
+ {
+  return "GateRect";
  }
 
 };

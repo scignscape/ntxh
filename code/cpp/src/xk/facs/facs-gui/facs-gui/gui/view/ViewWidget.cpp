@@ -28,6 +28,8 @@
 #include "transformations/TransformationLinear.h"
 
 #include "gates/GatingResult.h"
+#include "gates/GateRect.h"
+
 
 #include <limits>
 
@@ -204,22 +206,89 @@ void ViewWidget::paintEvent(QPaintEvent* pe)
  pm.begin(this);
  pm.drawImage(QPoint {0, 0}, *img_);
 
-/*
- ViewRenderer.renderGates(viewsettings, dataset, gr, trans, pm, handles, maxevents); 
+
+ ViewRenderer::renderGates(viewsettings_, dataset_, gr, trans_, pm, handles_, maxevents_); 
+
+ qDebug() << "HS: "  << handles_.size();
 
  //Now render handles?
- for(GateHandle h:handles)
+ for(GateHandle* h : handles_)
  {
-  pm.setBrush(new QBrush(QColor.transparent));
-  pm.setPen(QColor.red);
+  pm.setBrush(QBrush(QColor(Qt::transparent)));
+  pm.setPen(QColor(Qt::red));
+
+  qDebug() << "HX: " << h->getX();
+  qDebug() << "HY: " << h->getY();
+
 
   int size = 2;
-  pm.drawRect(new QRectF(h.getX()-size, h.getY()-size,2*size,2*size));
+  pm.drawRect(QRectF(h->getX() - size, h->getY() - size, 2*size, 2*size));
  }
-*/
 
  pm.end();
 }
+
+
+void ViewWidget::add_proportionate_gate(u1 x1, u1 x2, u1 y1, u1 y2)
+{
+ r8 rx1 = ( (r8)x1 / 100);
+ r8 rx2 = ( (r8)x2 / 100);
+
+ r8 ry1 = ( (r8)y1 / 100);
+ r8 ry2 = ( (r8)y2 / 100);
+
+ qDebug() << "rx1 = " << rx1;
+ qDebug() << "rx2 = " << rx2;
+
+ qDebug() << "ry1 = " << ry1;
+ qDebug() << "ry2 = " << ry2;
+
+  // // get viewing area ...
+ int off2 = 5;
+
+// QPointF tl (trans_->graphOffsetXY(), off2);
+// QPointF br (trans_->getTotalWidth() - off2, 
+//   trans_->getTotalHeight() - trans_->graphOffsetXY());
+
+ r8 width = ( trans_->getTotalWidth() - off2 ) - trans_->graphOffsetXY();  
+ r8 height = ( trans_->getTotalHeight() - trans_->graphOffsetXY() ) - off2;  
+
+ r8 width_adjusted_1 = width * rx1;
+ r8 width_adjusted_2 = width * rx2;
+
+ r8 height_adjusted_1 = height * ry1;
+ r8 height_adjusted_2 = height * ry2; 
+
+ r8 fx1 = trans_->graphOffsetXY() + width_adjusted_1;
+ r8 fx2 = trans_->graphOffsetXY() + width_adjusted_2;
+
+ r8 fy1 = off2 + height_adjusted_1;
+ r8 fy2 = off2 + height_adjusted_2;
+
+// pm.drawLine(
+//  trans_->graphOffsetXY(), off2, 
+//  trans->graphOffsetXY(), trans->getTotalHeight() - trans->graphOffsetXY() );
+
+// pm.drawLine(
+//  trans->graphOffsetXY(), trans->getTotalHeight() - trans->graphOffsetXY(), 
+//  trans->getTotalWidth() - off2, 
+//  trans->getTotalHeight() - trans->graphOffsetXY() );
+
+
+ qDebug() << "x1 = " << fx1;
+ qDebug() << "x2 = " << fx2;
+
+ qDebug() << "y1 = " << fy1;
+ qDebug() << "y2 = " << fy2;
+ 
+ QRectF* qrf = new QRectF(fx1, fy1, fx2 - fx1, fy2 - fy1);
+ 
+ GateRect* gate = new GateRect(qrf);
+
+ addGate(gate);
+
+}
+
 
 
 GateHandle* ViewWidget::getClosestHandle(const QPointF& pos, double cutoff)
@@ -236,6 +305,7 @@ GateHandle* ViewWidget::getClosestHandle(const QPointF& pos, double cutoff)
   double dx = pos.x() - h->getX();
   double dy = pos.y() - h->getY();
   double d2 = (dx * dx) + (dy * dy);
+
   if(d2 < cd)
   {
    cd = d2;
@@ -251,8 +321,6 @@ GateHandle* ViewWidget::getClosestHandle(const QPointF& pos, double cutoff)
 void ViewWidget::mousePressEvent(QMouseEvent* event)
 {
  pointLast_ = event->localPos(); //posF();
-
- qDebug() << "point last: " << pointLast_;
 
   // super.mousePressEvent(event);
  QWidget::mousePressEvent(event);
@@ -463,6 +531,21 @@ void ViewWidget::CallbackSetChannel::actionSet()
 
  qDebug() << "ix: " << vw->viewsettings_->indexX();
  qDebug() << "iy: " << vw->viewsettings_->indexY();
+
+ if(vw->viewsettings_->indexX() == 4)
+ {
+  vw->add_proportionate_gate(4, 30, 45, 78);
+/*
+  GateRect* g = new GateRect();
+  g->set_indexX(vw->viewsettings_->indexX());
+  g->set_indexY(vw->viewsettings_->indexY());
+  g->set_x1(100);
+  g->set_x2(5000);
+  g->set_y1(20);
+  g->set_y2(80000);
+  vw->addGate(g);
+*/
+ }
 
  EventViewsChanged ev;
  vw->mainWindow_->handleEvent(ev);

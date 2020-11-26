@@ -7,7 +7,6 @@
 
 #include <QVector>
 
-
 // package facsanadu.gui.view;
 
 // // Johan Henriksson
@@ -63,6 +62,8 @@ public:
 
  double zoomX() const { return zoomX_; }
  double zoomY() const { return zoomY_; }
+
+
 
  TransformationStack* transformation() const { return transformation_; }
 

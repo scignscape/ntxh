@@ -7,6 +7,8 @@
 
 #include "view/tool/ViewToolChoice.h"
 
+#include "global-types.h"
+
 
 #include <QWidget>
 #include <QCheckBox>
@@ -43,13 +45,25 @@ class ViewsPane : public QWidget
  QLabel* x_index_label_;
  QLabel* y_index_label_;
 
+ QSpinBox* x1_percent_spin_box_;
+ QSpinBox* x2_percent_spin_box_;
+ QLabel* x1_percent_label_;
+ QLabel* x2_percent_label_;
+
+ QSpinBox* y1_percent_spin_box_;
+ QSpinBox* y2_percent_spin_box_;
+ QLabel* y1_percent_label_;
+ QLabel* y2_percent_label_;
+
+/*
  QLabel* x_name_;
  QLabel* y_name_;
-
  QLabel* shifts_skews_label_;
  QLineEdit* shifts_skews_line_edit_;
-
  QPushButton* indices_go_;
+*/
+
+ QPushButton* gate_go_;
 
  QLabel* total_index_label_;
 
@@ -80,6 +94,12 @@ public:
    signed int& xsk, signed int& ysk,
    signed int& xsh, signed int& ysh);
 
+
+ void get_proportionate_gate_data(int& xcol, int& ycol,
+   u1& x1, u1& x2, u1& y1, u1& y2);
+
+
+
  void reset_index_data(Dataset* ds = nullptr);
 
  void updateViews();
@@ -91,6 +111,8 @@ public:
 public Q_SLOTS:
 
  void update_draw_with_new_indices();
+
+ void add_proportionate_gate();
 
  void update_x_name(int i);
  void update_y_name(int i);

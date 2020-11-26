@@ -36,13 +36,13 @@ ViewsPane::ViewsPane(MainWindow* mw)
  x_index_spin_box_ = new QSpinBox();
  y_index_spin_box_ = new QSpinBox();
 
- x_index_label_ = new QLabel("x:", this);
- y_index_label_ = new QLabel("y:", this);
+ x_index_label_ = new QLabel("x", this);
+ y_index_label_ = new QLabel("y", this);
 
- total_index_label_ = new QLabel(tr("indices (of 0)"), this);
+ total_index_label_ = new QLabel(tr("channel:"), this);
 
- indices_go_ = new QPushButton("go");
- indices_go_->setMaximumWidth(30);
+// indices_go_ = new QPushButton("go");
+// indices_go_->setMaximumWidth(30);
 
  matrix_ = new ViewsMatrix(mw);
  bgroup_ = new QButtonGroup(this);
@@ -67,10 +67,11 @@ ViewsPane::ViewsPane(MainWindow* mw)
 
  bGateSelect_->setChecked(true);
  
-// for(QPushButton* t : tb)
-// {
+ for(QPushButton* t : tb)
+ {
+  connect_this(QPushButton ::toggled ,t ,actionSetTool)
   //t.toggled.connect(this,"actionSetTool()");
-// }
+ }
   
  spMaxEvents_->setMinimum(100);
  spMaxEvents_->setMaximum(10000000);
@@ -99,6 +100,57 @@ ViewsPane::ViewsPane(MainWindow* mw)
  laytop->addWidget(y_index_label_);
  laytop->addWidget(y_index_spin_box_);
 
+ x1_percent_label_ = new QLabel("% x1", this);
+ x1_percent_spin_box_ = new QSpinBox(this);
+ x1_percent_spin_box_->setMinimum(0);
+ x1_percent_spin_box_->setMaximum(100);
+ x1_percent_spin_box_->setMinimum(0);
+ x1_percent_spin_box_->setValue(0);
+ x1_percent_spin_box_->setMaximumWidth(45);
+
+ x2_percent_label_ = new QLabel("x2", this);
+ x2_percent_spin_box_ = new QSpinBox(this);
+ x2_percent_spin_box_->setMinimum(0);
+ x2_percent_spin_box_->setMaximum(100);
+ x2_percent_spin_box_->setValue(100);
+ x2_percent_spin_box_->setMaximumWidth(45);
+
+ y1_percent_label_ = new QLabel("y1", this);
+ y1_percent_spin_box_ = new QSpinBox(this);
+ y1_percent_spin_box_->setMinimum(0);
+ y1_percent_spin_box_->setMaximum(100);
+ y1_percent_spin_box_->setValue(0);
+ y1_percent_spin_box_->setMaximumWidth(45);
+
+ y2_percent_label_ = new QLabel("y2", this);
+ y2_percent_spin_box_ = new QSpinBox(this);
+ y2_percent_spin_box_->setMinimum(0);
+ y2_percent_spin_box_->setMaximum(100);
+ y2_percent_spin_box_->setValue(100);
+ y2_percent_spin_box_->setMaximumWidth(45);
+
+ laytop->addSpacing(5);
+ laytop->addStretch();
+
+ laytop->addWidget(x1_percent_label_);
+ laytop->addWidget(x1_percent_spin_box_);
+
+ laytop->addWidget(x2_percent_label_);
+ laytop->addWidget(x2_percent_spin_box_);
+
+ laytop->addSpacing(5);
+ laytop->addStretch();
+
+ laytop->addWidget(y1_percent_label_);
+ laytop->addWidget(y1_percent_spin_box_);
+
+ laytop->addWidget(y2_percent_label_);
+ laytop->addWidget(y2_percent_spin_box_);
+
+ laytop->addSpacing(5);
+ laytop->addStretch();
+
+/*
  x_name_ = new QLabel("(x name)"); 
  y_name_ = new QLabel("(y name)"); 
 
@@ -116,15 +168,20 @@ ViewsPane::ViewsPane(MainWindow* mw)
  shifts_skews_line_edit_->setMinimumWidth(120);
  laytop->addWidget(shifts_skews_label_);
  laytop->addWidget(shifts_skews_line_edit_);
+*/
 
+ gate_go_ = new QPushButton("add", this);
+ gate_go_->setMaximumWidth(30);
 
- connect_this(QPushButton ::clicked ,indices_go_ ,update_draw_with_new_indices)
+ //connect_this(QPushButton ::clicked ,indices_go_ ,update_draw_with_new_indices)
+ connect_this(QPushButton ::clicked ,gate_go_ ,add_proportionate_gate)
 
- connect(x_index_spin_box_, SIGNAL(valueChanged(int)), this, SLOT(update_x_name(int)));
- connect(y_index_spin_box_, SIGNAL(valueChanged(int)), this, SLOT(update_y_name(int)));
+//? connect(x_index_spin_box_, SIGNAL(valueChanged(int)), this, SLOT(update_x_name(int)));
+//? connect(y_index_spin_box_, SIGNAL(valueChanged(int)), this, SLOT(update_y_name(int)));
  
  //connect_this(QSpinBox ::valueChanged(int) ,y_index_spin_box_ ,update_y_name(int))
 
+ laytop->addSpacing(10);
  laytop->addStretch();
 
  laytop->addWidget(cbMaxEvents_);
@@ -153,13 +210,13 @@ ViewsPane::ViewsPane(MainWindow* mw)
 void ViewsPane::update_x_name(int i)
 {
  QVector<QString>& cns = mw_->current_column_names();
- x_name_->setText(cns.value(i));
+ //? x_name_->setText(cns.value(i));
 }
 
 void ViewsPane::update_y_name(int i)
 {
  QVector<QString>& cns = mw_->current_column_names();
- y_name_->setText(cns.value(i));
+ //? y_name_->setText(cns.value(i));
 }
 
 
@@ -190,6 +247,20 @@ void ViewsPane::reset_index_data(Dataset* ds)
 #endif // HIDE
 }
 
+void ViewsPane::get_proportionate_gate_data(int& xcol, int& ycol,
+  u1& x1, u1& x2, u1& y1, u1& y2)
+{
+ xcol = x_index_spin_box_->value();
+ ycol = y_index_spin_box_->value();
+
+ x1 = x1_percent_spin_box_->value();
+ x2 = x2_percent_spin_box_->value();
+
+ y1 = y1_percent_spin_box_->value();
+ y2 = y2_percent_spin_box_->value();
+
+}
+
 void ViewsPane::get_mpf_data(int& xcol, int& ycol,
   signed int& xsk, signed int& ysk,
   signed int& xsh, signed int& ysh)
@@ -197,6 +268,8 @@ void ViewsPane::get_mpf_data(int& xcol, int& ycol,
  xcol = x_index_spin_box_->value();
  ycol = y_index_spin_box_->value();
 
+
+/*
  QStringList qsl = shifts_skews_line_edit_->text().split(':');
 
  signed int skews[2];
@@ -217,8 +290,16 @@ void ViewsPane::get_mpf_data(int& xcol, int& ycol,
 
  xsh = shifts[0];
  ysh = shifts[1];
+*/
 }
 
+void ViewsPane::add_proportionate_gate()
+{
+ int xcol, ycol;
+ u1 x1, x2, y1, y2;
+ 
+ get_proportionate_gate_data(xcol, ycol, x1, x2, y1, y2);
+}
 
 void ViewsPane::update_draw_with_new_indices()
 {

@@ -23,6 +23,8 @@
 #include "tool/ViewToolChoice.h"
 
 
+#include "global-types.h"
+
 
 // // temp
 #include<QList>
@@ -45,6 +47,7 @@ class TransformationType;
 class ViewWidget_Callback : public QObject
 {
  Q_OBJECT
+
 public:
 
  ViewWidget_Callback(ViewWidget* _this)
@@ -113,6 +116,8 @@ public:
  void render();
 
  ACCESSORS(int ,maxevents)
+
+ void add_proportionate_gate(u1 x1, u1 x2, u1 y1, u1 y2);
  
  void set_trans(ViewTransform* trans)
  {

@@ -109,6 +109,19 @@ void GateRendererRect::render(const Gate* gate, QPainter& p, ViewTransform* w,
    const ViewSettings* viewsettings, QList<GateHandle*> handles)
 {
  const GateRect* cg = (GateRect*) gate;
+
+ if(QRectF* qrf = cg->force())
+ {
+  p.drawRect(*qrf);
+  p.drawText(qrf->topLeft(), gate->name() );
+  
+  //Upper left handle
+  handles.append(new GateHandle_1(qrf->topLeft()));
+
+  //Lower right
+  handles.append(new GateHandle_2(qrf->bottomRight()));
+
+ }
  
  if(viewsettings->coversXandY( cg->indexX(), cg->indexY() ))
  {
@@ -138,8 +151,21 @@ void GateRendererRect::render(const Gate* gate, QPainter& p, ViewTransform* w,
    y[1] = cg->y2();
   }
 
+  qDebug() << "p1 = " << QPointF(x[0], y[0]);
+  qDebug() << "p2 = " << QPointF(x[1], y[1]);
+
   QPointF p1 = w->mapFcsToScreen( QPointF(x[0], y[0]) );
   QPointF p2 = w->mapFcsToScreen( QPointF(x[1], y[1]) );
+
+  qDebug() << "p1 = " << p1;
+  qDebug() << "p2 = " << p2;
+
+//  p1 = QPointF(30, 30);
+//  p2 = QPointF(230, 230);
+
+//  p1 = w->mapFcsToScreen( QPointF(10, 1000) );
+//  p2 = w->mapFcsToScreen( QPointF(10, 1000) );
+
   
   p.drawRect( QRectF(p1, p2) );
   p.drawText(p1, gate->name() );
