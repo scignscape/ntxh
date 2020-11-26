@@ -121,9 +121,10 @@ LIBS += -L$$TARGETSDIR -lmedInria
 
 LIBS +=  -L$$TARGETSDIR  \
   -ldtkGuiSupport  -ldtkLog -ldtkCoreSupport \
-  -ldtkCore  -ldtkMathSupport  -ldtkPlotSupport \
+  -ldtkCore  -ldtkMathSupport  \
   -ldtkComposer -ldtkDistributed -ldtkMath  -ldtkWidgets \
-  -ldtkMeta 
+  -ldtkMeta   \
+   -lqwt-plot  -lqwt  $$TARGETSDIR/libdtkPlotSupport.so
 
           # -L$$MEDINRIA_EXTERNAL_LIB_DIR
 

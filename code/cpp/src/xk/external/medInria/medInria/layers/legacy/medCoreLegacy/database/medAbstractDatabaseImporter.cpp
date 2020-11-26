@@ -25,6 +25,9 @@
 
 #include "textio.h"
 
+#include <QFileInfo>
+
+
 class medAbstractDatabaseImporterPrivate
 {
 public:
@@ -231,11 +234,23 @@ if(fp.endsWith(".fcs"))
 #endif
 
 //? 
- QProcess* process = new QProcess();
+// QProcess* process = new QProcess();
 //? 
 
- QString fpp = QString("/bin/sh %1").arg(FCS_QPROCESS_PATH);
- process->start(fpp);
+// QFileInfo qfi(FCS_QPROCESS_PATH);
+// QStringList args {FCS_QPROCESS_PATH};
+// QString wd = qfi.absolutePath();
+
+ QStringList args {"/media/mint/MainVolume/gits/brtest/ntxh/wip-facs/ar/code/cpp/qmake-console/projects/facs/demo-facs.sh"};
+ QString wd = "/media/mint/MainVolume/gits/brtest/ntxh/wip-facs/ar/code/cpp/qmake-console/projects/facs/";
+
+ QProcess::startDetached("/bin/sh", args, wd);
+
+ 
+
+ //QString fpp = QString("/bin/sh %1").arg(FCS_QPROCESS_PATH);
+// QString fpp = QString("/bin/sh");//.arg(FCS_QPROCESS_PATH);
+// process->start(fpp);
 
 }
 else

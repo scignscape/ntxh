@@ -139,3 +139,8 @@ SOURCES += \
   $$SRC_DIR/qwt_plot_glcanvas.cpp
 
 
+LIBS += -L$$TARGETSDIR -lqwt
+
+
+
+

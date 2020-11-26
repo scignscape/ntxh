@@ -1,0 +1,1 @@
+LD_LIBRARY_PATH=/media/mint/MainVolume/mtr/hdf5/install/lib:$LD_LIBRARY_PATH:/media/mint/MainVolume/gits/brtest/ntxh/wip-facs/ar/code/cpp/qmake-console/targets/targets-5-12-0-qmake-console /media/mint/MainVolume/gits/brtest/ntxh/wip-facs/ar/code/cpp/qmake-console/targets/targets-5-12-0-qmake-console/facs-gui 

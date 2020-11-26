@@ -7,6 +7,7 @@
  * modify it under the terms of the Qwt License, Version 1.0
  *****************************************************************************/
 
+
 #include "qwt_plot.h"
 #include "qwt_plot_dict.h"
 #include "qwt_plot_layout.h"

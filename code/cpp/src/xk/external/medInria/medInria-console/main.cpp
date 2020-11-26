@@ -281,6 +281,7 @@ int main(int argc,char* argv[])
     return status;
 }
 
+
 /*
 #include "dtkPlotCurve.h"
 dtkPlotCurve::dtkPlotCurve(const QString&)
@@ -302,7 +303,5 @@ bool dtkIsNan(double)
 {
  return true;
 }
-
-
 */
 

@@ -700,6 +700,7 @@ HEADERS +=  \
 #SOURCES +=  \
 #  $$SRC_DIR/main.cpp \
 
+
 SOURCES +=  \
   $$SRC_DIR_APP/medMainWindow.cpp \
 
