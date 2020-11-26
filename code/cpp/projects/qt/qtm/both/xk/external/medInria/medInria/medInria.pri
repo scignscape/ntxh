@@ -21,6 +21,9 @@ DEFINES += MEDINRIA_VERSION=\\\"0.0.0.0\\\"
 DEFINES += MEDINRIA_BUILD_DATE=\\\"??\\\"
 
 
+DEFINES += MEDINRIA_PLUGIN_ROOT_DIR=\\\"$$CPP_ROOT_DIR/plugins/medInria\\\"
+
+
 
 SRC_DIR_APP =  $$SRC_DIR/app/medInria
 
