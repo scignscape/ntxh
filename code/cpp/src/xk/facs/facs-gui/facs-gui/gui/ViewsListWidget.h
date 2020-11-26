@@ -34,7 +34,7 @@ class ViewsListWidget : public QWidget //: QVBoxLayout
  QTableWidget* tableViews_; // =new QTableWidget(); 
 
  MainWindow* mw_;
- 
+
 public:
  
  ViewsListWidget(MainWindow* mw);
@@ -42,6 +42,8 @@ public:
  void dothelayout();
  
  void actionSelectAllViews();
+
+ void update_view_names();
 
  // // Get selected views
  LinkedList<ViewSettings*> getSelectedViews(); 

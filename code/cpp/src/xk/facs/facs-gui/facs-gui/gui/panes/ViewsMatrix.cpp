@@ -441,6 +441,17 @@ void ViewsMatrix::updateViews()
 */
 }
 
+ViewWidget* ViewsMatrix::get_current_view()
+{
+  // //  for now just get top left ...
+ if(prevChanWidget_.isEmpty())
+   return nullptr;
+ if(prevChanWidget_.first().isEmpty())
+   return nullptr;
+ return prevChanWidget_.first().first();
+}
+
+
 void ViewsMatrix::setMaxEvents(int maxevents)
 {
  maxevents_ = maxevents;

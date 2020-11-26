@@ -5,6 +5,8 @@
 
 #include "ViewsMatrix.h"
 
+#include "view/ViewWidget.h"
+
 #include "../resource/ImgResource.h"
 
 #include "MainWindow.h"
@@ -39,7 +41,8 @@ ViewsPane::ViewsPane(MainWindow* mw)
  x_index_label_ = new QLabel("x", this);
  y_index_label_ = new QLabel("y", this);
 
- total_index_label_ = new QLabel(tr("channel:"), this);
+ total_index_label_ = new QLabel(tr("channels  (of 0):"), this);
+
 
 // indices_go_ = new QPushButton("go");
 // indices_go_->setMaximumWidth(30);
@@ -85,6 +88,7 @@ ViewsPane::ViewsPane(MainWindow* mw)
   laytop->addWidget(t);
  }
 
+ laytop->addSpacing(10);
  laytop->addStretch();
 
  laytop->addWidget(total_index_label_);
@@ -100,7 +104,7 @@ ViewsPane::ViewsPane(MainWindow* mw)
  laytop->addWidget(y_index_label_);
  laytop->addWidget(y_index_spin_box_);
 
- x1_percent_label_ = new QLabel("% x1", this);
+ x1_percent_label_ = new QLabel("%(gate): x1", this);
  x1_percent_spin_box_ = new QSpinBox(this);
  x1_percent_spin_box_->setMinimum(0);
  x1_percent_spin_box_->setMaximum(100);
@@ -150,6 +154,18 @@ ViewsPane::ViewsPane(MainWindow* mw)
  laytop->addSpacing(5);
  laytop->addStretch();
 
+ gate_go_ = new QPushButton("add", this);
+ gate_go_->setMaximumWidth(30);
+
+ laytop->addSpacing(5);
+ laytop->addWidget(gate_go_);
+
+ //connect_this(QPushButton ::clicked ,indices_go_ ,update_draw_with_new_indices)
+ connect_this(QPushButton ::clicked ,gate_go_ ,add_proportionate_gate)
+
+ laytop->addSpacing(5);
+ laytop->addStretch();
+
 /*
  x_name_ = new QLabel("(x name)"); 
  y_name_ = new QLabel("(y name)"); 
@@ -170,11 +186,6 @@ ViewsPane::ViewsPane(MainWindow* mw)
  laytop->addWidget(shifts_skews_line_edit_);
 */
 
- gate_go_ = new QPushButton("add", this);
- gate_go_->setMaximumWidth(30);
-
- //connect_this(QPushButton ::clicked ,indices_go_ ,update_draw_with_new_indices)
- connect_this(QPushButton ::clicked ,gate_go_ ,add_proportionate_gate)
 
 //? connect(x_index_spin_box_, SIGNAL(valueChanged(int)), this, SLOT(update_x_name(int)));
 //? connect(y_index_spin_box_, SIGNAL(valueChanged(int)), this, SLOT(update_y_name(int)));
@@ -219,18 +230,23 @@ void ViewsPane::update_y_name(int i)
  //? y_name_->setText(cns.value(i));
 }
 
-
+void ViewsPane::reset_current_index_data(u4 x, u4 y)
+{
+ x_index_spin_box_->setValue(x + 1);
+ y_index_spin_box_->setValue(y + 1);
+}
 
 void ViewsPane::reset_index_data(Dataset* ds)
 {
  if(!ds) 
    ds = mw_->get_last_dataset();
- int nc = ds->getNumChannels();
- qDebug() << "nc = " << nc;
- total_index_label_->setText(tr("indices (of %1)").arg(nc));
 
- QVector<QString>& cns = mw_->current_column_names();
- qDebug() << "cns = " << cns;
+ int nc = ds->getNumChannels();
+// qDebug() << "nc = " << nc;
+ total_index_label_->setText(tr("channels (of %1):").arg(nc));
+
+// QVector<QString>& cns = mw_->current_column_names();
+// qDebug() << "cns = " << cns;
 
  x_index_spin_box_->setRange(1, nc);
  y_index_spin_box_->setRange(1, nc);
@@ -299,6 +315,13 @@ void ViewsPane::add_proportionate_gate()
  u1 x1, x2, y1, y2;
  
  get_proportionate_gate_data(xcol, ycol, x1, x2, y1, y2);
+ 
+ if(ViewWidget* vw = matrix_->get_current_view()) 
+   vw->add_proportionate_gate(x1, x2, y1, y2);
+
+ EventViewsChanged ev;
+ mw_->handleEvent(ev);
+
 }
 
 void ViewsPane::update_draw_with_new_indices()

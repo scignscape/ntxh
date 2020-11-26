@@ -99,7 +99,7 @@ public:
    u1& x1, u1& x2, u1& y1, u1& y2);
 
 
-
+ void reset_current_index_data(u4 x, u4 y);
  void reset_index_data(Dataset* ds = nullptr);
 
  void updateViews();

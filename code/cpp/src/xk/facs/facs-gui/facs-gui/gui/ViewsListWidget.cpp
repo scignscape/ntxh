@@ -146,6 +146,37 @@ void ViewsListWidget::test_update_views(Dataset* ds, u1 x_col, u1 y_col)
  }
 }
 
+void ViewsListWidget::update_view_names()
+{
+ FacsanaduProject* project = mw_->project();
+
+ for(int row = 0; row < tableViews_->rowCount(); ++row) 
+ {
+  for(int col = 0; col < tableViews_->columnCount(); ++col) 
+  {
+   QTableWidgetItem* qtwi = tableViews_->item(row, col);
+   ViewSettings* vs = (ViewSettings*) qtwi->data(Qt::ItemDataRole::UserRole)
+     .value<void*>();
+
+   QString showname = vs->gate()->name() + ": ";
+   if( !project->datasets().isEmpty() )
+   {
+    Dataset* ds = project->datasets().first();
+
+    if(vs->indexX() == vs->indexY() )
+      showname += ds->getChannelInfo().value( vs->indexX() )->getShortestName();
+    else
+      showname += ds->getChannelInfo().value( vs->indexX() )->getShortestName() + 
+      " / " + ds->getChannelInfo().value( vs->indexY() )->getShortestName();
+   }
+
+   qtwi->setText(showname);
+   
+  }
+ }
+
+ 
+}
 
 // // Update list with views
 void ViewsListWidget::updateViewsList()

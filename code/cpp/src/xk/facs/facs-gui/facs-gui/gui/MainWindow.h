@@ -146,6 +146,8 @@ public:
  void load_selected_file(QString sf);
  Dataset* get_last_dataset();
 
+ void reset_pane_views_current_index_data(int x, int y);
+
  // // Constructor
  MainWindow();
 

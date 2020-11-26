@@ -34,6 +34,8 @@ public:
  
  ViewsMatrix(MainWindow* mw); 
 
+ ViewWidget* get_current_view();
+
  void test_one_view();
  
  // // Update the layout of everything

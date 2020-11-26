@@ -230,6 +230,15 @@ MainWindow::MainWindow()
  show();
 }
 
+
+void MainWindow::reset_pane_views_current_index_data(int x, int y)
+{
+ paneViews_->reset_current_index_data(x, y);
+
+ viewsw_->update_view_names();
+}
+
+
 void MainWindow::load_selected_file(QString sf)
 {
  qDebug() << "sf: " << sf;
@@ -238,6 +247,9 @@ void MainWindow::load_selected_file(QString sf)
  lastDirectory_ = qfi.absoluteDir();
  QFile qf(sf);
  loadFile(qf);
+
+ paneViews_->reset_index_data();
+ paneViews_->reset_current_index_data(0, 1);
 
 /*
 
@@ -273,7 +285,7 @@ void MainWindow::load_selected_file(QString sf)
 
  paneViews_->test_one_view();
 
- paneViews_->reset_index_data();
+ paneViews_->reset_index_data();reset_current_index_data(
 */
 
 }

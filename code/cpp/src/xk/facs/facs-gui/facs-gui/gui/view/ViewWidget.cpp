@@ -508,6 +508,15 @@ void ViewWidget::setSettings(ViewSettings* vs)
  viewsettings_ = vs;
 }
 
+
+void ViewWidget::reset_pane_current_index_data()
+{
+ mainWindow_->reset_pane_views_current_index_data(viewsettings_->indexX(), 
+   viewsettings_->indexY());
+}
+
+
+
 //interface Callback
 //{
 // void actionSet();
@@ -532,9 +541,12 @@ void ViewWidget::CallbackSetChannel::actionSet()
  qDebug() << "ix: " << vw->viewsettings_->indexX();
  qDebug() << "iy: " << vw->viewsettings_->indexY();
 
+ vw->reset_pane_current_index_data();
+
+
  if(vw->viewsettings_->indexX() == 4)
  {
-  vw->add_proportionate_gate(4, 30, 45, 78);
+//?  vw->add_proportionate_gate(4, 30, 45, 78);
 /*
   GateRect* g = new GateRect();
   g->set_indexX(vw->viewsettings_->indexX());

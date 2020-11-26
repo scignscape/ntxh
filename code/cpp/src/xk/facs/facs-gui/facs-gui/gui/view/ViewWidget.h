@@ -141,6 +141,10 @@ public:
 
  void setSettings(ViewSettings* vs);
 
+ void reset_pane_current_index_data();
+
+
+
 // interface Callback
 //  {
 //  void actionSet();
