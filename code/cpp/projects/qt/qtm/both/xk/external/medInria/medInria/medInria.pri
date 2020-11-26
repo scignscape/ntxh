@@ -917,6 +917,8 @@ LIBS += -L$$TARGETSDIR -ldtkGuiSupport  -ldtkLog -ldtkCoreSupport \
   -ldtkMeta 
 
 
+RESOURCES += $$SRC_DIR/_stylesheet.qss
+
 
 RESOURCES += $$SRC_DIR_APP/resources/medInria.qrc
 

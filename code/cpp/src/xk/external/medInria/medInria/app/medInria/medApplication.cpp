@@ -63,7 +63,12 @@ medApplication::medApplication(int & argc, char**argv) :
     qInfo() << "Build Date: " << MEDINRIA_BUILD_DATE;
 
     QApplication::setStyle(QStyleFactory::create("fusion"));
+
+#ifdef MEDINRIA_MAIN_STYLESHEET
+    medStyleSheetParser parser(dtkReadFile(MEDINRIA_MAIN_STYLESHEET));
+#else
     medStyleSheetParser parser(dtkReadFile(":/medInria.qss"));
+#endif
     this->setStyleSheet(parser.result());
 
     this->initialize();

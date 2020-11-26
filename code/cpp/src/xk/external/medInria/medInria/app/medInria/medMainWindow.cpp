@@ -37,6 +37,7 @@
 #include <medWorkspaceArea.h>
 #include <medWorkspaceFactory.h>
 
+#include <medStyleSheetParser.h>
 
 #include <QtGui>
 #include <QtWidgets>
@@ -290,14 +291,19 @@ medMainWindow::medMainWindow ( QWidget *parent ) : QMainWindow ( parent ), d ( n
     this->setAcceptDrops(true);
 
 #ifdef MEDINRIA_MAIN_STYLESHEET
- QFile infile(MEDINRIA_MAIN_STYLESHEET);
- if (infile.open(QIODevice::ReadOnly | QIODevice::Text))
- {
-  QTextStream in_ts(&infile);
-  setStyleSheet(in_ts.readAll());
-  infile.close();
- }
+//medStyleSheetParser parser(MEDINRIA_MAIN_STYLESHEET);
+//QString ss = parser.result();
+//qDebug() << "ss = " << ss;
+//setStyleSheet(ss);
+// QFile infile(MEDINRIA_MAIN_STYLESHEET);
+// if (infile.open(QIODevice::ReadOnly | QIODevice::Text))
+// {
+//  QTextStream in_ts(&infile);
+//  setStyleSheet(in_ts.readAll());
+//  infile.close();
+// }
 #endif
+
 //? added 
 // this->setStyleSheet("QMainWindow{background:rgb(100,120,100);}"
 //  "QToolButton{background:rgb(100,100,120);}"
