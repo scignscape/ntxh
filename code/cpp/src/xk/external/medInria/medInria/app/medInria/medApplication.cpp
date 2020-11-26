@@ -158,15 +158,10 @@ void medApplication::initialize()
     defaultPath = plugins_dir.absolutePath();
 
 // // added ...
-
-qDebug() << "pluginsPath = " << pluginsPath;
-
 #ifdef MEDINRIA_PLUGIN_ROOT_DIR
 if ( pluginsPath.isEmpty() )
 {
  pluginsPath = MEDINRIA_PLUGIN_ROOT_DIR;
-
-qDebug() << "pluginsPath = " << pluginsPath;
 }
 #endif
 

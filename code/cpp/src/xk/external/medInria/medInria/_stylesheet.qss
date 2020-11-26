@@ -1,0 +1,2 @@
+QMainWindow{background:rgb(70,72,74);}
+QToolButton{background:rgb(90,90,192);}
