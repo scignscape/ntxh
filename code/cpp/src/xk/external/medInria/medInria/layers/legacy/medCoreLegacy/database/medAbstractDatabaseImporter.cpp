@@ -23,6 +23,8 @@
 #include <medMetaDataKeys.h>
 #include <medStorage.h>
 
+#include "textio.h"
+
 class medAbstractDatabaseImporterPrivate
 {
 public:
@@ -212,7 +214,38 @@ void medAbstractDatabaseImporter::importFile ( void )
             {
                 if (!atLeastOneImportError)
                 {
+#ifdef FCS_QPROCESS_PATH
+QString fp = fileInfo.filePath();
+if(fp.endsWith(".fcs"))
+{
+ qWarning() << "FCS File: " << fp;
+ qWarning() << "FCS_QPROCESS_PATH: " << FCS_QPROCESS_PATH;
+
+#ifdef FCS_QPROCESS_TEMP_FILE
+ QString tf = FCS_QPROCESS_TEMP_FILE;
+ if(!tf.isEmpty())
+ {
+  qWarning() << "FCS_QPROCESS_TEMP_FILE: " << tf;
+  KA::TextIO::save_file(tf, fp);
+ }
+#endif
+
+//? 
+ QProcess* process = new QProcess();
+//? 
+
+ QString fpp = QString("/bin/sh %1").arg(FCS_QPROCESS_PATH);
+ process->start(fpp);
+
+}
+else
+{
                     qWarning() << "Reader was unable to read at least: " << fileInfo.filePath();
+}
+#else
+                    qWarning() << "Reader was unable to read at least: " << fileInfo.filePath();
+#endif //def FCS_QPROCESS_PATH
+
                     atLeastOneImportError = true;
                 }
                 continue;

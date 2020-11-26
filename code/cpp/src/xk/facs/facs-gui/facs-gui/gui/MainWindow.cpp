@@ -49,6 +49,8 @@
 
 #include "facs-bridge/mpf-package.h"
 
+#include "textio.h"
+
 
 //#ifdef HIDE
 
@@ -137,6 +139,9 @@ MainWindow::MainWindow()
  mFile->addAction(tr("Open project"), this, SLOT(actionOpenProject()) );
  mFile->addAction(tr("Save project"), this, SLOT(actionSaveProject()) );
  mFile->addAction(tr("Save project as"), this, SLOT(actionSaveProjectAs()) );
+
+ mFile->addAction( tr("Save view"), this, SLOT(action_save_view()) );
+
  mFile->addSeparator();
  mFile->addAction(tr("Exit"), this, "close()");
 
@@ -228,6 +233,22 @@ MainWindow::MainWindow()
  adjustSize();
  resize(1000, size().height());
  show();
+
+#ifdef FCS_QPROCESS_TEMP_FILE
+
+ QString tmp_file_contents;
+ KA::TextIO::load_file(FCS_QPROCESS_TEMP_FILE, tmp_file_contents);
+ qDebug() << "FCS_QPROCESS_TEMP_FILE: " << tmp_file_contents;
+
+ if(!tmp_file_contents.isEmpty())
+ {
+  QString tf = FCS_QPROCESS_TEMP_FILE;
+  KA::TextIO::save_file(tf, "");
+  KA::TextIO::save_file(tf + ".bak.txt", tmp_file_contents);
+  load_selected_file(tmp_file_contents.trimmed());
+ }
+
+#endif // def FCS_QPROCESS_TEMP_FILE
 }
 
 
@@ -390,6 +411,13 @@ void _MainWindow_GateCalcThread::callbackDoneCalc(Dataset* dataset)
 
 //#endif // def HIDE_THREAD
  
+
+void MainWindow::action_save_view()
+{
+ qDebug() << "action_save_view() ...";
+}
+
+
 // // Action: New project
 void MainWindow::actionNewProject()
 {

@@ -258,9 +258,9 @@ int main(int argc,char* argv[])
         splash.finish(mainwindow);
 
     if (medPluginManager::instance()->plugins().isEmpty()) {
-        QMessageBox::warning(mainwindow,
-                             QObject::tr("No plugin loaded"),
-                             QObject::tr("Warning : no plugin loaded successfully."));
+      //  QMessageBox::warning(mainwindow,
+      //                       QObject::tr("No plugin loaded"),
+      //                       QObject::tr("Warning : no plugin loaded successfully."));
     }
 
     // Handle file associations open requests that were not handled in the application
@@ -280,3 +280,29 @@ int main(int argc,char* argv[])
 
     return status;
 }
+
+/*
+#include "dtkPlotCurve.h"
+dtkPlotCurve::dtkPlotCurve(const QString&)
+{
+
+}
+
+void dtkPlotCurve::clear()
+{
+
+}
+
+dtkPlotCurve::dtkPlotCurve(dtkPlotCurve const&)
+{
+
+}
+
+bool dtkIsNan(double)
+{
+ return true;
+}
+
+
+*/
+

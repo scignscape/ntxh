@@ -394,6 +394,11 @@ SOURCES +=  \
   $$SRC_DIR/dtkComposerWriterNoScene.cpp \
 
 
+LIBS +=  -L$$TARGETSDIR  \
+  -ldtkMathSupport  -ldtkPlotSupport 
+
+
+
 #    $$SRC_DIR/dtkComposerNodeAnySource.json
 #    $$SRC_DIR/dtkComposerNodeAnyTag.json
 #    $$SRC_DIR/dtkComposerNodeBoolean.json

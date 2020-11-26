@@ -37,6 +37,11 @@ DTK_META_EXTRA_INCLUDES_DIR =   $$SRC_DIR/devdtk/extra-includes
 DTK_META_APP_DIR =   $$SRC_DIR/devdtk/dtk/app
 
 
+DEFINES += USE_KANS
+
+DEFINES += FCS_QPROCESS_PATH=\\\"$$CPP_ROOT_DIR/qmake-console/projects/facs/facs-gui/run-local.sh\\\"
+DEFINES += FCS_QPROCESS_TEMP_FILE=\\\"$$SRC_ROOT_DIR/xk/facs-tmp.txt\\\"
+
 INCLUDEPATH += $$DTK_META_EXTRA_INCLUDES_DIR
 
 INCLUDEPATH += $$DTK_META_EXTRA_INCLUDES_DIR/dtk/src/
@@ -908,16 +913,13 @@ SOURCES +=  \
 
 
 #?LIBS += -L$$MEDINRIA_EXTERNAL_LIB_DIR -ldtkGuiSupport  -ldtkLog -ldtkCoreSupport \
-#?  -ldtkCore -ldtkComposer -ldtkDistributed -ldtkMath  -ldtkWidgets \
+#?  -ldtkCore  -ldtkComposer -ldtkDistributed -ldtkMath  -ldtkWidgets \
 #?  -ldtkMeta 
 
 
 LIBS += -L$$TARGETSDIR -ldtkGuiSupport  -ldtkLog -ldtkCoreSupport \
   -ldtkCore -ldtkComposer -ldtkDistributed -ldtkMath  -ldtkWidgets \
   -ldtkMeta 
-
-
-RESOURCES += $$SRC_DIR/_stylesheet.qss
 
 
 RESOURCES += $$SRC_DIR_APP/resources/medInria.qrc

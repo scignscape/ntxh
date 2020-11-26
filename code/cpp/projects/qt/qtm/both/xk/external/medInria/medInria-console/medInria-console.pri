@@ -48,6 +48,11 @@ INCLUDEPATH += $$DTK_META_EXTRA_INCLUDES_DIR/dtk/src/dtkDistributed
 INCLUDEPATH += $$DTK_META_EXTRA_INCLUDES_DIR/dtk/src/dtkMath
 
 
+INCLUDEPATH += $$SRC_GROUP_DIR/dtk-meta-export-includes
+INCLUDEPATH += $$DTK_META_EXTRA_INCLUDES_DIR/dtk/src/dtkPlotSupport
+
+message($$SRC_GROUP_DIR/dtk-meta-export-includes)
+
 
 
 INCLUDEPATH += $$SRC_DIR_APP  $$SRC_DIR_APP/QSingleApplication \
@@ -113,9 +118,11 @@ SOURCES +=  \
 
 LIBS += -L$$TARGETSDIR -lmedInria
 
-LIBS += \
+
+LIBS +=  -L$$TARGETSDIR  \
   -ldtkGuiSupport  -ldtkLog -ldtkCoreSupport \
-  -ldtkCore -ldtkComposer -ldtkDistributed -ldtkMath  -ldtkWidgets \
+  -ldtkCore  -ldtkMathSupport  -ldtkPlotSupport \
+  -ldtkComposer -ldtkDistributed -ldtkMath  -ldtkWidgets \
   -ldtkMeta 
 
           # -L$$MEDINRIA_EXTERNAL_LIB_DIR
