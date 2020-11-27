@@ -39,8 +39,10 @@ DTK_META_APP_DIR =   $$SRC_DIR/devdtk/dtk/app
 
 DEFINES += USE_KANS
 
-DEFINES += FCS_QPROCESS_PATH=\\\"$$CPP_ROOT_DIR/qmake-console/projects/facs/facs-gui/run-local.sh\\\"
+DEFINES += FCS_QPROCESS_PATH=\\\"$$CPP_ROOT_DIR/qmake-console/projects/facs/_demo-facs.sh\\\"
 DEFINES += FCS_QPROCESS_TEMP_FILE=\\\"$$SRC_ROOT_DIR/xk/facs-tmp.txt\\\"
+
+DEFINES += TARGETS_DESTDIR=\\\"$$TARGETSDIR\\\"
 
 INCLUDEPATH += $$DTK_META_EXTRA_INCLUDES_DIR
 

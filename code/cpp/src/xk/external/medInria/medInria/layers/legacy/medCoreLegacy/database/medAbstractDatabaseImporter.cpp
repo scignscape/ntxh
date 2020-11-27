@@ -237,16 +237,19 @@ if(fp.endsWith(".fcs"))
 // QProcess* process = new QProcess();
 //? 
 
-// QFileInfo qfi(FCS_QPROCESS_PATH);
-// QStringList args {FCS_QPROCESS_PATH};
-// QString wd = qfi.absolutePath();
+ QFileInfo qfi(FCS_QPROCESS_PATH);
+ QString wd = qfi.absolutePath();
+ QString fn = qfi.fileName();
+ fn.prepend("/_");
+ fn.prepend(wd);
+ QString text;
+ KA::TextIO::load_file(FCS_QPROCESS_PATH, text);
+ text.replace("@TARGETS_DESTDIR", TARGETS_DESTDIR);
+ KA::TextIO::save_file(fn, text);
 
- QStringList args {"/media/mint/MainVolume/gits/brtest/ntxh/wip-facs/ar/code/cpp/qmake-console/projects/facs/demo-facs.sh"};
- QString wd = "/media/mint/MainVolume/gits/brtest/ntxh/wip-facs/ar/code/cpp/qmake-console/projects/facs/";
+ QStringList args {fn};
 
  QProcess::startDetached("/bin/sh", args, wd);
-
- 
 
  //QString fpp = QString("/bin/sh %1").arg(FCS_QPROCESS_PATH);
 // QString fpp = QString("/bin/sh");//.arg(FCS_QPROCESS_PATH);
