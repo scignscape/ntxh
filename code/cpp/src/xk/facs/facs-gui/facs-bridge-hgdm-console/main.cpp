@@ -99,7 +99,7 @@ int main(int argc, char* argv[])
   });
 
  qDebug() << "AS File: " << as_file;
- qDebug() << "AS File: " << mpf_file;
+ qDebug() << "MPF File: " << mpf_file;
 
  AS_Runner asr;
 

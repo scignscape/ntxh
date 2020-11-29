@@ -44,6 +44,7 @@
 #include <QDesktopServices>
 #include <QDebug>
 
+#include <QProcess>
 
 #include <functional>
 
@@ -142,6 +143,7 @@ MainWindow::MainWindow()
 
  mFile->addAction( tr("Save view"), this, SLOT(action_save_view()) );
  mFile->addAction( tr("Load view"), this, SLOT(action_load_view()) );
+ mFile->addAction( tr("Angelscript"), this, SLOT(action_angelscript()) );
 
  mFile->addSeparator();
  mFile->addAction(tr("Exit"), this, "close()");
@@ -412,6 +414,71 @@ void _MainWindow_GateCalcThread::callbackDoneCalc(Dataset* dataset)
 
 //#endif // def HIDE_THREAD
  
+void MainWindow::action_angelscript()
+{
+ Dataset* ds = get_last_dataset();
+ 
+ //qDebug() << "ds path: " << ds->file_source_name();
+
+ QString path = QString("%1/%2.mpf.txt")
+   .arg(FCS_MPF_FOLDER).arg(ds->file_source_name());
+
+/*
+ QString asfile = QString("%1/t2.as")
+   .arg(AS_ROOT_DIR);
+
+ QFileInfo qfi(ANGELSCRIPT_FILE);
+
+ qDebug() << "as ... " << ANGELSCRIPT_FILE << "-f" << asfile << "-m" 
+   << path << qfi.absolutePath();
+ QFileInfo qfi(FCS_QPROCESS_PATH);
+ QString wd = qfi.absolutePath();
+ QString fn = qfi.fileName();
+ fn.prepend("/_");
+ fn.prepend(wd);
+ QString text;
+ KA::TextIO::load_file(FCS_QPROCESS_PATH, text);
+ text.replace("@TARGETS_DESTDIR", TARGETS_DESTDIR);
+ KA::TextIO::save_file(fn, text);
+
+ QStringList args {fn};
+*/
+
+// QString program = ANGELSCRIPT_SHELL_TMPL; // QString("%1/facs-bridge-hgdm-console").arg(TARGETS_DESTDIR);
+
+ QString base = ANGELSCRIPT_SHELL_BASE;
+ QString tmpl = base + ".tmpl";
+ QString text;
+ KA::TextIO::load_file(tmpl, text);
+ text.replace("@TARGETS_DESTDIR", TARGETS_DESTDIR);
+ text.replace("@f", base);
+ text.replace("@m", path);
+ KA::TextIO::save_file(tmpl + ".sh", text);
+
+
+ qDebug() << "program = " << "/bin/sh";
+ qDebug() << "arguments = " << QStringList{tmpl + ".sh"};
+
+ QProcess proc; 
+
+ proc.setProgram("/bin/sh");
+ proc.setArguments({tmpl + ".sh"});
+
+ //proc.setArguments({"-f", asfile, "-m", path}); //, qfi.absolutePath());
+ //proc.setWorkingDirectory(qfi.absolutePath());
+ proc.start();
+
+ proc.waitForFinished();
+
+// QByteArray qba = proc.readAllStandardOutput();
+ qDebug() << "\nProcess Output\n\n==============\n";
+
+ qDebug() << 
+   qPrintable(proc.readAllStandardError());
+
+ proc.close();
+}
+
 
 void MainWindow::action_save_view()
 {

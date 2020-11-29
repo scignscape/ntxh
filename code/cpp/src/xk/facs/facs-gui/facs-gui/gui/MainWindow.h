@@ -245,6 +245,9 @@ public Q_SLOTS:
  void action_save_view();
  void action_load_view();
 
+ void action_angelscript();
+
+
  // // Ensure proper exit
 // @Override
 // protected void closeEvent(QCloseEvent arg)

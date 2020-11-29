@@ -23,6 +23,12 @@ TEMPLATE = app
 DEFINES += FCS_QPROCESS_TEMP_FILE=\\\"$$SRC_ROOT_DIR/xk/facs-tmp.txt\\\"
 DEFINES += FCS_MPF_FOLDER=\\\"$$SRC_ROOT_DIR/xk/facs-mpf\\\"
 
+DEFINES += AS_ROOT_DIR=\\\"$$ROOT_DIR/dev/consoles/angelscript\\\"
+
+DEFINES += ANGELSCRIPT_SHELL_BASE=\\\"$$ROOT_DIR/dev/consoles/angelscript/hgdm/t2.as\\\"
+
+
+DEFINES += TARGETS_DESTDIR=\\\"$$TARGETSDIR\\\"
 
 INCLUDEPATH += $$SRC_GROUP_DIR  $$SRC_DIR/gui \
 
