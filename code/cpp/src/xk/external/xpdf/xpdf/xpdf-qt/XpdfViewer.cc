@@ -67,6 +67,11 @@
 #include <QWidgetAction>
 #include <QPainter>
 
+#include "qconsole.h"
+#include "qimplconsole.h"
+#include "qconsole-dialog.h"
+
+
 #include "textio.h"
 
 USING_KANS(TextIO)
@@ -3233,6 +3238,18 @@ void XpdfViewer::addTab() {
     QString file = QString("%1/../%2").arg(AR_ROOT_DIR).arg(chems[chem_name]);
 
     QProcess::startDetached("/bin/sh", {proc, "--args", file});
+   });
+
+   qm->addAction(QString("Select (repl)"),
+     [this, pdf]
+   {
+    //int page;
+    QString qs = pdf->getSelectedText(nullptr);
+
+    QImplConsole* qc = QImplConsole::getInstance();// new QImplConsole(this, "REPL");
+    qc->setPrompt(">");
+    QConsole_Dialog* qcd = new QConsole_Dialog(qs, qc, this);
+    qcd->exec();
    });
 
 

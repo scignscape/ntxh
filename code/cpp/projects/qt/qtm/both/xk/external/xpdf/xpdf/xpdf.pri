@@ -101,6 +101,7 @@ DISTFILES += \
     $$SRC_DIR/xpdf-qt/xpdf.rc \
     $$SRC_DIR/xpdf-qt/CMakeLists.txt
 
+
 HEADERS += \
     $$SRC_DIR/fofi/FoFiBase.h \
     $$SRC_DIR/fofi/FoFiEncodings.h \
@@ -204,6 +205,19 @@ HEADERS += \
     $$SRC_DIR/xpdf-qt/XpdfWidget.h \
     $$SRC_DIR/xpdf-qt/XpdfWidgetPrint.h \
     $$SRC_DIR/xpdf-qt/xpdf-component.h \
+
+
+
+HEADERS += \
+  $$SRC_DIR/qconsole.h \
+  $$SRC_DIR/qimplconsole.h \
+  $$SRC_DIR/qconsole-dialog.h \
+  
+
+SOURCES += \
+  $$SRC_DIR/qconsole.cpp \
+  $$SRC_DIR/qimplconsole.cpp \
+  $$SRC_DIR/qconsole-dialog.cpp \
 
 
 SOURCES += \
