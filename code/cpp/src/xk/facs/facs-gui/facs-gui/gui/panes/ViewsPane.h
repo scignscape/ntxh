@@ -29,6 +29,11 @@ class ViewToolChoice;
 class MainWindow;
 class Dataset;
 
+#include "kans.h"
+
+KANS_CLASS_DECLARE(MPF ,MPF_Package)
+USING_KANS(MPF)
+
 
 // //
 class ViewsPane : public QWidget
@@ -94,9 +99,15 @@ public:
    signed int& xsk, signed int& ysk,
    signed int& xsh, signed int& ysh);
 
+ MPF_Package* view_to_mpf();
+
+ void load_view_from_mpf(MPF_Package* mpfp);
 
  void get_proportionate_gate_data(int& xcol, int& ycol,
    u1& x1, u1& x2, u1& y1, u1& y2);
+
+ void reset_proportionate_gate_data(int xcol, int ycol, u1 x1, u1 x2, u1 y1, u1 y2);
+ void reset_proportionate_gate_data(u1 x1, u1 x2, u1 y1, u1 y2);
 
 
  void reset_current_index_data(u4 x, u4 y);

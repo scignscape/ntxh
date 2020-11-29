@@ -35,6 +35,8 @@ class MPF_Package
 
  QVector<u1> columns_;
 
+ QMap<QPair<u1, u1>, QVector<QPair<u1, u1>>> prop_points_;
+
  QVector_Matrix_R8* matrix_;
 
  u4 raw_data_length_;
@@ -52,6 +54,10 @@ public:
  ACCESSORS__RGET(QVector<u1> ,columns)
  ACCESSORS(QVector_Matrix_R8* ,matrix)
  ACCESSORS(u4 ,raw_data_length)
+
+ ACCESSORS__RGET(MACRO_PASTE(QMap<QPair<u1, u1>, QVector<QPair<u1, u1>>>) ,prop_points)
+
+ void add_prop_point(u1 xaxis, u1 yaxis, u1 x_prop, u1 y_prop);
 
 
  void save_to_file(QString path);

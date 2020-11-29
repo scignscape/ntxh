@@ -97,6 +97,8 @@ private:
  ViewSettings* viewsettings_; // =new ViewSettings();
  int maxevents_;
 
+ QVector<u1> proportionate_gate_points_; 
+
  void clear_image();
 
 
@@ -116,6 +118,10 @@ public:
  void render();
 
  ACCESSORS(int ,maxevents)
+
+
+ ACCESSORS__RGET(QVector<u1> ,proportionate_gate_points)
+
 
  void add_proportionate_gate(u1 x1, u1 x2, u1 y1, u1 y2);
  

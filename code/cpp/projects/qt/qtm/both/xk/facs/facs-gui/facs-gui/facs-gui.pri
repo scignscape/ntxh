@@ -21,6 +21,7 @@ include($$ROOT_DIR/../preferred/gui.pri)
 TEMPLATE = app
 
 DEFINES += FCS_QPROCESS_TEMP_FILE=\\\"$$SRC_ROOT_DIR/xk/facs-tmp.txt\\\"
+DEFINES += FCS_MPF_FOLDER=\\\"$$SRC_ROOT_DIR/xk/facs-mpf\\\"
 
 
 INCLUDEPATH += $$SRC_GROUP_DIR  $$SRC_DIR/gui \

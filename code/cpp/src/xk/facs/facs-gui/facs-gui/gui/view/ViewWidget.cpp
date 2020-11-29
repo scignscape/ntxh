@@ -230,7 +230,11 @@ void ViewWidget::paintEvent(QPaintEvent* pe)
 
 
 void ViewWidget::add_proportionate_gate(u1 x1, u1 x2, u1 y1, u1 y2)
-{
+{ 
+ proportionate_gate_points_ << viewsettings_->indexX()
+   << viewsettings_->indexY() << x1 << x2 << y1 << y2;
+
+
  r8 rx1 = ( (r8)x1 / 100);
  r8 rx2 = ( (r8)x2 / 100);
 

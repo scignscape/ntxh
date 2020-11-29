@@ -141,6 +141,7 @@ MainWindow::MainWindow()
  mFile->addAction(tr("Save project as"), this, SLOT(actionSaveProjectAs()) );
 
  mFile->addAction( tr("Save view"), this, SLOT(action_save_view()) );
+ mFile->addAction( tr("Load view"), this, SLOT(action_load_view()) );
 
  mFile->addSeparator();
  mFile->addAction(tr("Exit"), this, "close()");
@@ -414,8 +415,39 @@ void _MainWindow_GateCalcThread::callbackDoneCalc(Dataset* dataset)
 
 void MainWindow::action_save_view()
 {
- qDebug() << "action_save_view() ...";
+ MPF_Package* mpfp = paneViews_->view_to_mpf();
+ 
+ Dataset* ds = get_last_dataset();
+ 
+ //qDebug() << "ds path: " << ds->file_source_name();
+
+ QString path = QString("%1/%2.mpf.txt")
+   .arg(FCS_MPF_FOLDER).arg(ds->file_source_name());
+
+ mpfp->save_to_file(path);
+ //paneViews_ viewspane ViewWidget 
 }
+
+void MainWindow::action_load_view()
+{ 
+ Dataset* ds = get_last_dataset();
+ 
+ //qDebug() << "ds path: " << ds->file_source_name();
+
+ QString path = QString("%1/%2.mpf.txt")
+   .arg(FCS_MPF_FOLDER).arg(ds->file_source_name());
+
+ MPF_Package* mpfp = new MPF_Package;
+
+ mpfp->load_from_file(path);
+
+ paneViews_->load_view_from_mpf(mpfp); 
+
+ //?viewsw_->updateViewsList();
+ //?paneViews_->updateViews();
+
+}
+
 
 
 // // Action: New project

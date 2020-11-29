@@ -7,7 +7,11 @@
 
 #include "view/ViewWidget.h"
 
+#include "view/ViewSettings.h"
+
 #include "../resource/ImgResource.h"
+
+#include "facs-bridge/mpf-package.h"
 
 #include "MainWindow.h"
 
@@ -263,6 +267,23 @@ void ViewsPane::reset_index_data(Dataset* ds)
 #endif // HIDE
 }
 
+void ViewsPane::reset_proportionate_gate_data(int xcol, int ycol, 
+  u1 x1, u1 x2, u1 y1, u1 y2)
+{
+ x_index_spin_box_->setValue(xcol);
+ y_index_spin_box_->setValue(ycol);
+ reset_proportionate_gate_data(x1, x2, y1, y2);
+}
+
+void ViewsPane::reset_proportionate_gate_data(u1 x1, u1 x2, u1 y1, u1 y2)
+{
+ x1_percent_spin_box_->setValue(x1);
+ x2_percent_spin_box_->setValue(x2);
+
+ y1_percent_spin_box_->setValue(y1);
+ y2_percent_spin_box_->setValue(y2);
+}
+
 void ViewsPane::get_proportionate_gate_data(int& xcol, int& ycol,
   u1& x1, u1& x2, u1& y1, u1& y2)
 {
@@ -335,6 +356,64 @@ void ViewsPane::update_draw_with_new_indices()
    &xsh, &ysh);
 
  //qDebug() << "uuu " << xv << ", " << yv;
+}
+
+void ViewsPane::load_view_from_mpf(MPF_Package* mpfp)
+{
+ if(ViewWidget* vw = matrix_->get_current_view())
+ {
+  u1 ix = mpfp->columns()[0];
+  u1 iy = mpfp->columns()[1]; 
+
+  //?vw->setChannels(ix, iy);
+
+  vw->setChannels(ix, iy);
+  vw->reset_pane_current_index_data();
+
+  updateViews();
+
+  auto it = mpfp->prop_points().find({ix, iy});
+  
+  if(it != mpfp->prop_points().end())
+  {
+   QVector<QPair<u1, u1>>& vp = *it;
+   if(vp.size() < 2)
+     return;
+   
+   vw->add_proportionate_gate(vp[0].first, vp[1].first, vp[0].second, vp[1].second); 
+   reset_proportionate_gate_data(vp[0].first, vp[1].first, vp[0].second, vp[1].second);
+
+   EventViewsChanged ev;
+   mw_->handleEvent(ev);
+  }
+ 
+ }
+ 
+}
+
+
+MPF_Package* ViewsPane::view_to_mpf()
+{
+ ViewWidget* vw = matrix_->get_current_view();
+
+ QVector<u1>& pgs = vw->proportionate_gate_points();
+ 
+ if(pgs.size() < 6)
+   return nullptr;
+
+ QVector<u1> one_gate = pgs.mid(0, 6);
+
+ qDebug() << "one gate = " << one_gate;
+
+ MPF_Package* result = new MPF_Package(2);
+ 
+ result->add_prop_point(one_gate[0], one_gate[1], one_gate[2], one_gate[4]);
+ result->add_prop_point(one_gate[0], one_gate[1], one_gate[3], one_gate[5]);
+
+ result->columns()[0] = vw->viewsettings()->indexX();
+ result->columns()[1] = vw->viewsettings()->indexY();
+
+ return result;
 }
 
 void ViewsPane::test_one_view()

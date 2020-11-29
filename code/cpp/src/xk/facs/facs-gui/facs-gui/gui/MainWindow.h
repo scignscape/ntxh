@@ -243,6 +243,7 @@ public Q_SLOTS:
  void actionExportCSV();
  
  void action_save_view();
+ void action_load_view();
 
  // // Ensure proper exit
 // @Override
