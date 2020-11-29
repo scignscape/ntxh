@@ -44,6 +44,13 @@
 #include "QGLViewer/vec.h"
 #include <fstream>
 
+// // mosaic
+#include "mosaic-menubar.cpp"
+
+#include "mpf/mpf-plugin-info-dialog.cpp"
+
+#include <QLinearGradient>
+
 
 namespace IQmol {
 
@@ -706,6 +713,59 @@ void MainWindow::createMenus()
       name = "Show Help";
       action = menu->addAction(name);
       connect(action, SIGNAL(triggered()), this, SLOT(showHelp()));
+
+
+  QWidgetAction* sep = ((Mosaic_Menubar*) menuBar())->add_text_separator();
+  QMenu* mosaic_submenu = menuBar()->addMenu("&MPF");
+  mosaic_submenu->menuAction()->setProperty("mosaic", true);
+  QLinearGradient* qlg = new QLinearGradient(0,0,0,400);
+  qlg->setColorAt(0.0, QColor(250,255,245));
+  qlg->setColorAt(0.1, QColor(125,0,120));
+  Mosaic_Menubar::add_action_data(mosaic_submenu->menuAction(), 
+    "QLinearGradient", qlg);
+  mosaic_submenu->setObjectName("mosaic_submenu");
+  mosaic_submenu->addAction("Test-Prep Plugin (active)");
+  mosaic_submenu->addAction("AngelScript Plugin (active)");
+  mosaic_submenu->addAction("Manage Plugins ...", []
+  {
+   MPF_Plugin_Info_Dialog* mid = new MPF_Plugin_Info_Dialog(nullptr);
+   mid->show();
+  });
+  mosaic_submenu->addAction("Take ScreenShot", [this]
+  {
+   Mosaic_Menubar::handle_screenshot(this->winId());
+  });
+
+
+  menuBar()->setStyleSheet(R"(#the_Mosaic_Menubar{
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 white, stop:1 darkgray);
+    spacing: 3px; /* spacing between menu bar items */
+   }
+
+  #mosaic_submenu::item {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 pink, stop:1 lightgray);
+  }
+
+  #mosaic_submenu::item:selected {
+    color:blue;
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 pink, stop:1 darkgray);
+  }
+
+  #the_Mosaic_Menubar::item:selected {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 yellow, stop:1 darkgray);
+  }
+
+  #the_Mosaic_Menubar::separator {
+     height: 2px;
+    background: lightblue;
+    margin-left: 10px;
+    margin-right: 5px;  }
+  )");
+
 }
 
 

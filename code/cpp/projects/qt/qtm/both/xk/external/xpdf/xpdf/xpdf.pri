@@ -63,6 +63,8 @@ INCLUDEPATH += $$MPF_SRC_GROUP_DIR
 DEFINES += DEFAULT_ICONS_FOLDER=\\\"$$ROOT_DIR/code/icons\\\"
 DEFINES += DEFAULT_SCREENSHOT_FOLDER=\\\"$$ROOT_DIR/code/screenshots\\\"
 
+DEFINES += AR_ROOT_DIR=\\\"$$ROOT_DIR\\\"
+
 
 DISTFILES += \
     $$SRC_DIR/xpdf-qt/back.svg \

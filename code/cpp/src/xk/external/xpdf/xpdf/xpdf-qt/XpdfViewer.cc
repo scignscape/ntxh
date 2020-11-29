@@ -55,6 +55,8 @@
 #include <QDebug>
 #include <QClipboard>
 
+#include <QProcess>
+
 #include "Annot.h"
 
 
@@ -3220,14 +3222,23 @@ void XpdfViewer::addTab() {
    });
 
    qm->addAction(QString("3D %1 Viewer (launch IQmol)").arg(chem_name),
-     []
+     [chem_name]
    {
+
+    static QMap<QString, QString> chems {{"thionyl chloride", "7719-09-7.mol"},
+      {"lactose", "14641-93-1.mol"} };
+
+    QString proc = QString("%1/../run-iqmol.sh").arg(AR_ROOT_DIR);
+
+    QString file = QString("%1/../%2").arg(AR_ROOT_DIR).arg(chems[chem_name]);
+
+    QProcess::startDetached("/bin/sh", {proc, "--args", file});
    });
 
 
    if(figname.startsWith("lst"))
    {
-    qm->addAction(QString("Open PGVM Project and Files for %1 %2")
+    qm->addAction(QString("Open GTagML Project and Files for %1 %2")
                   .arg(figk).arg(fignum), [figname, fign, this]
     {
      this->app->run_fig_msg("run-fig", fign);

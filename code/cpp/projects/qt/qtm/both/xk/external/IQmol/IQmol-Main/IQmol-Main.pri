@@ -93,6 +93,28 @@ RESOURCES += \
   $$SRC_DIR/Main/IQmol.qrc
 
 
+DEFINES += DEFAULT_SCREENSHOT_FOLDER=\\\"$$ROOT_DIR/code/screenshots\\\"
+
+
+MPF_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/htxn/mosaic
+
+DEFINES += DEFAULT_ICONS_FOLDER=\\\"$$ROOT_DIR/code/icons\\\"
+
+INCLUDEPATH += $$MPF_SRC_GROUP_DIR
+
+HEADERS += \
+  $$MPF_SRC_GROUP_DIR/mpf/mpf-plugin-info.h \
+  $$MPF_SRC_GROUP_DIR/mpf/mpf-plugin-info-dialog.h \
+  $$MPF_SRC_GROUP_DIR/mpf/mpf-test-dialog.h \
+
+SOURCES += \
+  $$MPF_SRC_GROUP_DIR/mpf/mpf-plugin-info.cpp \
+  $$MPF_SRC_GROUP_DIR/mpf/mpf-plugin-info-dialog.cpp \
+  $$MPF_SRC_GROUP_DIR/mpf/mpf-test-dialog.cpp \
+
+SOURCES += \
+  $$SRC_ROOT_DIR/add-minimize-frame.cpp \
+
 
 
 LIBS += -L$$TARGETSDIR -lIQmol-Viewer  -lQGLViewer  \
