@@ -21,7 +21,7 @@
 
 MPF_Plugin_Info_Dialog::MPF_Plugin_Info_Dialog(MPF_Plugin_Info* info)
 {
- setWindowTitle("IQmol");
+ setWindowTitle("Plugin Info");
 
  button_box_ = new QDialogButtonBox(this);
 
@@ -72,9 +72,9 @@ MPF_Plugin_Info_Dialog::MPF_Plugin_Info_Dialog(MPF_Plugin_Info* info)
  basic_info_layout_ = new QVBoxLayout;
 
  basic_form_layout_ = new QFormLayout;
- basic_form_layout_->addRow("Plugin Name: ", new QLabel("Springer", basic_info_frame_));
+ basic_form_layout_->addRow("Plugin Name: ", new QLabel("Test-Prep", basic_info_frame_));
  basic_form_layout_->addRow("Plugin Version: ", new QLabel("1.0.0", basic_info_frame_));
- basic_form_layout_->addRow("Plugin Provider: ", new QLabel("Springer-Verlag", basic_info_frame_));
+ basic_form_layout_->addRow("Plugin Provider: ", new QLabel("LTS", basic_info_frame_));
 
  plugin_active_layout_ = new QHBoxLayout;
  plugin_active_ckb_ = new QCheckBox("Active", basic_info_frame_);
@@ -106,7 +106,7 @@ MPF_Plugin_Info_Dialog::MPF_Plugin_Info_Dialog(MPF_Plugin_Info* info)
  can_group_box_->setLayout(can_layout_);
  basic_info_layout_->addWidget(can_group_box_);
 
- basic_list_group_box_ = new QGroupBox("View Springer Plugin Applications", basic_info_frame_);
+ basic_list_group_box_ = new QGroupBox("View Test-Prep Plugin Applications", basic_info_frame_);
  basic_list_layout_ = new QGridLayout;
  basic_list_layout_->setColumnStretch(0, 1);
  basic_list_layout_->setColumnStretch(2, 1);
@@ -130,8 +130,8 @@ MPF_Plugin_Info_Dialog::MPF_Plugin_Info_Dialog(MPF_Plugin_Info* info)
  basic_view_layout_->setColumnStretch(0, 1);
  basic_view_layout_->setColumnStretch(2, 1);
 
- view_mosaic_documentation_ = new QPushButton("View Mosaic Documentation", basic_info_frame_);
- view_plugin_documentation_ = new QPushButton("View Springer Plugin Documentation", basic_info_frame_);
+ view_mosaic_documentation_ = new QPushButton("View MPF Documentation", basic_info_frame_);
+ view_plugin_documentation_ = new QPushButton("View Test-Prep Plugin Documentation", basic_info_frame_);
 
  view_mosaic_documentation_->setStyleSheet(colorful_small_button_style_sheet_());
  view_plugin_documentation_->setStyleSheet(colorful_small_button_style_sheet_());

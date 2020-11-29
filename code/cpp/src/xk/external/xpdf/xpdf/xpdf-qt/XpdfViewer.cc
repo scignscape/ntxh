@@ -2936,7 +2936,7 @@ void XpdfViewer::createMainMenu() {
   helpSubmenu->addAction("About XpdfReader...", this, SLOT(aboutMenuAction()));
 
   QWidgetAction* sep = mainMenu->add_text_separator();
-  QMenu* mosaic_submenu = mainMenu->addMenu("&Mosaic");
+  QMenu* mosaic_submenu = mainMenu->addMenu("&MPF");
   mosaic_submenu->menuAction()->setProperty("mosaic", true);
   QLinearGradient* qlg = new QLinearGradient(0,0,0,400);
   qlg->setColorAt(0.0, QColor(250,255,245));
@@ -2944,8 +2944,7 @@ void XpdfViewer::createMainMenu() {
   Mosaic_Menubar::add_action_data(mosaic_submenu->menuAction(), 
     "QLinearGradient", qlg);
   mosaic_submenu->setObjectName("mosaic_submenu");
-  mosaic_submenu->addAction("FACS Plugin (active)");
-  mosaic_submenu->addAction("Springer Plugin (active)");
+  mosaic_submenu->addAction("MPF Plugin (active)");
   mosaic_submenu->addAction("Manage Plugins ...", []
   {
    MPF_Plugin_Info_Dialog* mid = new MPF_Plugin_Info_Dialog(nullptr);
