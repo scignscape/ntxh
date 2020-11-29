@@ -23,6 +23,13 @@
 
 USING_KANS(MPF)
 
+#include "cbicaCmdParser.h"
+#include <string>
+
+#include "get-cmdl.h"
+USING_KANS(Util)
+
+
 
 void _test_hgdm(HGDM_Traverser* ht)
 {
@@ -38,13 +45,13 @@ void test_hgdm(n8 nn)
    _test_hgdm( the_traverser );
 }
 
-MPF_Package_HGDM* the_pkg(MPF_Package* mpf = nullptr)
+MPF_Package_HGDM* the_pkg(MPF_Package* mpfp = nullptr)
 {
  static MPF_Package_HGDM* result = nullptr;
  if(!result)
  {
-  if(mpf)
-    result = new MPF_Package_HGDM(*mpf);
+  if(mpfp)
+    result = new MPF_Package_HGDM(*mpfp);
  }
  return result;
 }
@@ -60,17 +67,42 @@ HGDM_Angel_Runtime_Context* new_rt_context()
 
 void hQDebug(hQVariant& hqv)
 {
- qDebug() << hqv.value();
+ QVariant qv = hqv.value();
+ qDebug() << qv;
+
+ QString ty = QString::fromLatin1(qv.typeName());
+
+ if(ty == "QVector<uchar>")
+ {
+  qDebug() << qv.value<QVector<u1>>();
+ }
+ 
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+ cbica::CmdParser parser = cbica::CmdParser(argc, argv);
+
+ parser.addOptionalParameter("f", "asfile", cbica::Parameter::FILE, "AngelScript File", "Script query file");
+
+ parser.addOptionalParameter("m", "mpffile", cbica::Parameter::FILE, "MPF File", "MPF serialization file");
+
+ parser.ignoreArgc1();
+
+
+ QString as_file;
+ QString mpf_file;
+
+ get_cmdl(parser, {
+   { {&as_file, "f"}, {AS_ROOT_DIR "/hgdm/t1.as"} },
+   { {&mpf_file, "m"}, QStringList{} },
+  });
+
+ qDebug() << "AS File: " << as_file;
+ qDebug() << "AS File: " << mpf_file;
+
  AS_Runner asr;
-// ([] (asIScriptEngine* e)
-// {
-//  //engine = e;
-//  //int r = engine->RegisterGlobalFunction("void test_hgdm(uint64)", asFUNCTION(test_hgdm), asCALL_CDECL);
-// });
+
  asIScriptEngine* engine = asr.engine();
  int r = engine->RegisterGlobalFunction("void test_hgdm(uint64)", asFUNCTION(test_hgdm), asCALL_CDECL);
 
@@ -110,34 +142,29 @@ int main()
 
  r = engine->RegisterGlobalFunction("void hQDebug(hQVariant&)", asFUNCTION(hQDebug), asCALL_CDECL);
 
+ MPF_Package* mpfp = new MPF_Package;
+ MPF_Package_HGDM* hg = the_pkg(mpfp);
 
-
- MPF_Package* mpf = new MPF_Package;
- MPF_Package_HGDM* hg = the_pkg(mpf);
-
-// test_hgdm( (n8) hg);
-
-
-// asIScriptEngine* engine = asr.engine();
-
-// int r = engine->RegisterGlobalFunction("void test_hgdm(uint64)", asFUNCTION(test_hgdm),
-//   asCALL_CDECL); //assert( r >= 0 );
-
-// r = engine->RegisterGlobalFunction("void ttpr(const string &in)", asFUNCTION(ttpr), asCALL_CDECL);
-
- QVector_Matrix_R8* matrix = new QVector_Matrix_R8(4, 3);
-
- for(u1 r = 1; r <= 4; ++r )
+ if(mpf_file.isEmpty())
  {
-  for(u1 c = 1; c <= 3; ++c )
+  QVector_Matrix_R8* matrix = new QVector_Matrix_R8(4, 3);
+
+  for(u1 r = 1; r <= 4; ++r )
   {
-   (*matrix)[r][c] = (10 * r) + c;
+   for(u1 c = 1; c <= 3; ++c )
+   {
+    (*matrix)[r][c] = (10 * r) + c;
+   }
   }
+
+  mpfp->set_matrix(matrix);
+ }
+ else
+ {
+  mpfp->load_from_file(mpf_file);
  }
 
- mpf->set_matrix(matrix);
-
- asr.run_script(AS_ROOT_DIR "/hgdm/t1.as");
+ asr.run_script(as_file);
 
 // hg->selto("column-count");
 
@@ -147,7 +174,7 @@ int main()
 
 // qDebug() << QString("Rows = %1, Cols = %2").arg(nr).arg(nc);
 
- qDebug() << "OK";
+// qDebug() << "OK";
 
  return 0;
 }

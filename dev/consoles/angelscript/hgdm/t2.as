@@ -1,8 +1,7 @@
 
 void test_fn(HGDM_Angel_Runtime_Context& harc)
 {
- hQVariant@ hqv = harc.selto("column-count").pval().read();
-  // selto("row-count").pval().read();
+ hQVariant@ hqv = harc.selto("prop-gate-params").pval().read();
  hQDebug(hqv);
 }
 

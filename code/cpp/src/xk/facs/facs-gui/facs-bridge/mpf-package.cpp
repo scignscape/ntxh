@@ -39,6 +39,15 @@ void MPF_Package::add_prop_point(u1 xaxis, u1 yaxis, u1 x_prop, u1 y_prop)
  prop_points_[{xaxis, yaxis}].push_back({x_prop, y_prop});
 }
 
+QVector<u1> MPF_Package::prop_gate_params()
+{
+ if(prop_points_.isEmpty())
+   return {};
+ return {prop_points_.firstKey().first, prop_points_.firstKey().second,
+   prop_points_.first()[0].first, prop_points_.first()[0].second, 
+   prop_points_.first()[1].first, prop_points_.first()[1].second};   
+}
+
 void MPF_Package::save_to_file(QString path)
 {
  QFile qf(path);

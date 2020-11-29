@@ -52,6 +52,7 @@ MPF_Package_HGDM::selto_Options MPF_Package_HGDM::parse_selto(QString key)
  static QMap<QString, selto_Options> static_map {{
    {"column-count", selto_Options::Column_Count },
    {"row-count", selto_Options::Row_Count },
+   {"prop-gate-params", selto_Options::Prop_Gate_Params },
   }};
 
  return static_map.value(key, selto_Options::N_A);
@@ -82,6 +83,9 @@ QVariant MPF_Package_HGDM::_read()
     return QVariant::fromValue(pkg_.matrix()->n_cols());
   case selto_Options::Row_Count:
     return QVariant::fromValue(pkg_.matrix()->n_rows());
+  case selto_Options::Prop_Gate_Params:
+    return QVariant::fromValue(pkg_.prop_gate_params());
+
   }
  }
  return  {};

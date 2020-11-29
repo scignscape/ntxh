@@ -8,6 +8,9 @@
 
 include(../build-group.pri)
 
+CONFIG += debug
+
+
 include($$ROOT_DIR/../preferred/sysr.pri)
 include($$ROOT_DIR/../preferred/gui.pri)
 

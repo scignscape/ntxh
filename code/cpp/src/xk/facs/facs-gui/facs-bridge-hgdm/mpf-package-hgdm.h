@@ -43,7 +43,7 @@ class MPF_Package_HGDM : public HGDM_Traverser
 
  enum class selto_Options
  {
-  N_A, Column_Count, Row_Count
+  N_A, Column_Count, Row_Count, Prop_Gate_Params
  };
 
  enum class Cue_Codes

@@ -11,6 +11,8 @@ TEMPLATE = lib
 
 INCLUDEPATH += $$SRC_GROUP_DIR
 
+CONFIG += debug
+
 QT -= gui
 
 DEFINES += USE_KANS

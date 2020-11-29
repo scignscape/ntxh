@@ -24,12 +24,14 @@ void print(std::string &msg)
 
 void AS_Runner::message_callback(const asSMessageInfo* msg, void* param)
 {
+/*
  const char *type = "ERR ";
  if( msg->type == asMSGTYPE_WARNING ) 
    type = "WARN";
  else if( msg->type == asMSGTYPE_INFORMATION ) 
    type = "INFO";
  printf("%s (%d, %d) : %s : %s\n", msg->section, msg->row, msg->col, type, msg->message); 
+*/
 }
 
 AS_Runner::AS_Runner(engcb cb)
@@ -55,15 +57,15 @@ AS_Runner::AS_Runner(engcb cb)
 
 void AS_Runner::run_script(QString path)
 {
- CScriptBuilder builder;
- int r1 = builder.StartNewModule(engine_, "MyModule"); 
+ CScriptBuilder* builder = new CScriptBuilder;
+ int r1 = builder->StartNewModule(engine_, "MyModule"); 
  if( r1 < 0 ) 
  {
   // If the code fails here it is usually because there
   // is no more memory to allocate the module
   printf("Unrecoverable error while starting a new module.\n");
  }
- r1 = builder.AddSectionFromFile(path.toStdString().c_str()); //AS_ROOT_DIR "/test.as");
+ r1 = builder->AddSectionFromFile(path.toStdString().c_str()); //AS_ROOT_DIR "/test.as");
  if( r1 < 0 )
  {
   // The builder wasn't able to load the file. Maybe the file
@@ -71,7 +73,7 @@ void AS_Runner::run_script(QString path)
   // preprocessing commands are incorrectly written.
   std::printf("Please correct the errors in the script and try again.\n");
  }
- r1 = builder.BuildModule();
+ r1 = builder->BuildModule();
  if( r1 < 0 )
  {
   // An error occurred. Instruct the script writer to fix the 
@@ -93,6 +95,7 @@ void AS_Runner::run_script(QString path)
  asIScriptContext *ctx = engine_->CreateContext();
  ctx->Prepare(func);
  int rr = ctx->Execute();
+ 
  if( rr != asEXECUTION_FINISHED )
  {
   // The execution didn't complete as expected. Determine what happened.
@@ -102,7 +105,7 @@ void AS_Runner::run_script(QString path)
    std::printf("An exception '%s' occurred. Please correct the code and try again.\n", ctx->GetExceptionString());
   }
  }
- ctx->Release();
+ //? ctx->Release();
 }
 
 AS_Runner::~AS_Runner()
@@ -137,6 +140,7 @@ void MessageCallback(const asSMessageInfo *msg, void *param)
   printf("%s (%d, %d) : %s : %s\n", msg->section, msg->row, msg->col, type, msg->message);
 }
 
+/*
 int main(int argc, char* argv[])
 {
  // Create the script engine
@@ -216,6 +220,7 @@ int main(int argc, char* argv[])
  return 0; 
 }
 
+*/
 
 // Print the script string to the standard output stream
 void print(std::string &msg)

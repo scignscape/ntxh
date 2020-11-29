@@ -59,6 +59,8 @@ public:
 
  void add_prop_point(u1 xaxis, u1 yaxis, u1 x_prop, u1 y_prop);
 
+ QVector<u1> prop_gate_params();
+
 
  void save_to_file(QString path);
  void load_from_file(QString path);

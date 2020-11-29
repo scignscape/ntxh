@@ -1,0 +1,1 @@
+./run.sh -f /media/mint/MainVolume/gits/brtest/ntxh/wip-facs/ar/dev/consoles/angelscript/hgdm/t2.as -m /media/mint/MainVolume/gits/brtest/ntxh/wip-facs/ar/code/cpp/src/xk/facs-mpf/Specimen_001_C3_C03_001.fcs.mpf.txt

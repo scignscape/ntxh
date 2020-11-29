@@ -9,6 +9,8 @@ QT += core
 
 TEMPLATE = app
 
+CONFIG += debug
+
 INCLUDEPATH += $$SRC_GROUP_DIR  \
   $$ANGELSCRIPT_SRC_GROUP_DIR/include  \
   $$ANGELSCRIPT_SRC_GROUP_DIR
@@ -25,6 +27,10 @@ include($$ROOT_DIR/../preferred/sysr.pri)
 DEFINES += AS_ROOT_DIR=\\\"$$ROOT_DIR/dev/consoles/angelscript\\\"
 
 
+INCLUDEPATH += $$CWL_SRC_GROUP_DIR/cwl/include
+
+
+
 HEADERS += \
 
 
@@ -33,6 +39,6 @@ SOURCES +=  \
 
 
 LIBS += -L$$TARGETSDIR -lfacs-bridge -lfacs-bridge-hgdm \
-   -langelscript  -las-runner
+   -langelscript  -las-runner  -lcwl
 
 
