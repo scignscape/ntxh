@@ -221,7 +221,7 @@ void OpenBabel::buildFrom2D(::OpenBabel::OBMol& obMol)
    }
 
    if (!forceField->Setup(obMol)) {
-      m_errors.append("Force field setup failed");
+      //?m_errors.append("Force field setup failed");
       return;
    }
 
