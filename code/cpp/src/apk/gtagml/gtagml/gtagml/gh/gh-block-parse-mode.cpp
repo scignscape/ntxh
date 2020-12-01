@@ -96,7 +96,7 @@ void GH_Block_Parse_Mode::release_cancel_or_alt_char(QPair<u1, u1>& result)
  result = cancel_or_alt_chars_.dequeue();
 }
 
-u8 GH_Block_Parse_Mode::release_glyph_point()
+n8 GH_Block_Parse_Mode::release_glyph_point()
 {
  return ready_glyph_points_.dequeue();
 }

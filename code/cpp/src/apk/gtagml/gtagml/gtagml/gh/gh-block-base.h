@@ -20,13 +20,13 @@ class GH_Block_Base
 protected:
 
  QMap<QString, QPair<u4, u4>>* cache_;
- QMap<QPair<u4, u4>, QList<QPair<u8, QString>>>* inserts_;
+ QMap<QPair<u4, u4>, QList<QPair<n8, QString>>>* inserts_;
 
 public:
 
  GH_Block_Base();
 
- virtual u8 get_default_null() = 0;
+ virtual n8 get_default_null() = 0;
 
  enum class SDI_Interpretation_Codes
  {
@@ -49,7 +49,7 @@ public:
    if(it != inserts_->end())
    {
     QList<T*> result;
-    for(const QPair<u8, QString>& pr : it.value())
+    for(const QPair<n8, QString>& pr : it.value())
     {
      result.push_back(reinterpret_cast<T*>(pr.first));
     }
@@ -76,7 +76,7 @@ public:
  {
   if(inserts_)
   {
-   (*inserts_)[QPair<u4, u4>({index, index})].push_back({(u8) tt, context});
+   (*inserts_)[QPair<u4, u4>({index, index})].push_back({(n8) tt, context});
   }
  }
 
@@ -85,7 +85,7 @@ public:
  {
   if(inserts_)
   {
-   (*inserts_)[QPair<u4, u4>({index, index})].push_front({(u8) tt, context});
+   (*inserts_)[QPair<u4, u4>({index, index})].push_front({(n8) tt, context});
   }
  }
 
@@ -94,7 +94,7 @@ public:
  {
   if(inserts_)
   {
-   (*inserts_)[indexes].push_back({(u8) tt, context});
+   (*inserts_)[indexes].push_back({(n8) tt, context});
   }
  }
 
@@ -103,7 +103,7 @@ public:
  {
   if(inserts_)
   {
-   (*inserts_)[indexes].push_front({(u8) tt, context});
+   (*inserts_)[indexes].push_front({(n8) tt, context});
   }
  }
 
@@ -128,7 +128,7 @@ public:
    if(it != inserts_->end())
    {
     QList<T*> result;
-    for(const QPair<u8, QString>& pr : it.value())
+    for(const QPair<n8, QString>& pr : it.value())
     {
      if(pr.second == context)
        result.push_back(reinterpret_cast<T*>(pr.first));
@@ -167,20 +167,20 @@ public:
  virtual void check_cached(QString key, QPair<u4, u4>& result);
  virtual void write(QString text, QPair<u4, u4>& result) = 0;
 
- virtual void flag_as_sentence_end(u4 ii1, u4 ii2, QPair<QPair<u8, u8>, QPair<u8, u8>>& r) = 0;
+ virtual void flag_as_sentence_end(u4 ii1, u4 ii2, QPair<QPair<n8, n8>, QPair<n8, n8>>& r) = 0;
 
  virtual void activate_cache();
  virtual void activate_inserts();
 
  virtual QPair<u4, u4> get_effective_start_and_end_indices() = 0;
 
- virtual u8 get_glyph_point_at_index(u4 i) = 0;
+ virtual n8 get_glyph_point_at_index(u4 i) = 0;
  virtual u4 clear_to_sentence_start(u4 pre, u4 start) = 0;
  virtual SDI_Interpretation_Codes get_sdi_interpretation_code_at_index(u4 i) = 0;
 
  virtual u4 check_confirm_sentence_end(u4 i, u4 e) = 0;
 
- virtual void swap_codes(u4 i, u8 oldc, u8 newc) = 0;
+ virtual void swap_codes(u4 i, n8 oldc, n8 newc) = 0;
 
 
  virtual QString get_latex_out(const QPair<u4, u4>& indices) = 0;

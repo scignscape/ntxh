@@ -25,7 +25,7 @@ class GH_Block_Parse_Mode
  u1 held_diacritic_cue_;
  u1 held_diacritic_code_;
 
- QQueue<u8> ready_glyph_points_;
+ QQueue<n8> ready_glyph_points_;
  QQueue<QPair<u1, u1>> cancel_or_alt_chars_;
 
  u1 null_code_;
@@ -42,7 +42,7 @@ public:
  u1 finalize_glyph_points(u1 cue);
  u1 finalize_glyph_points_1(u1 cue);
 
- u8 release_glyph_point();
+ n8 release_glyph_point();
  void release_cancel_or_alt_char(QPair<u1, u1>& pr);
 };
 

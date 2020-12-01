@@ -31,7 +31,7 @@ class NGML_SDI_Document
 {
  QString path_;
  QString folder_;
- u8 global_base_line_skip_;// = 12
+ n8 global_base_line_skip_;// = 12
 
  QVector<NGML_SDI_Page*> pages_;
 
@@ -63,7 +63,7 @@ public:
 
  QMap<QChar, QVector<u4>>& review() { return prelatex_; }
 
- ACCESSORS(u8 ,global_base_line_skip)
+ ACCESSORS(n8 ,global_base_line_skip)
 
  void load_prelatex_file(QString path);
 

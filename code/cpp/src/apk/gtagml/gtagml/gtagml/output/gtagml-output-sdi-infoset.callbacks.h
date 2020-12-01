@@ -13,30 +13,19 @@ GTagML_CALLBACK_(p)
  _WHEN
 _GTagML_CALLBACK
 
-
-//GTagML_CALLBACK_()
-// WHEN_(around)
-// {
-//  check_sentence_boundaries(qts, node);
-// }
-// _WHEN
-//_GTagML_CALLBACK
-
-
-// WHEN_(pre)
-// {
-// }
-// _WHEN_(post)
-// {
-//  check_
-// }
-// _WHEN
-
-
-
-
 GTagML_CALLBACK_SUPPRESS(documentclass)
 GTagML_CALLBACK_NOACTION(include)
+
+GTagML_CALLBACK_(document)
+ WHEN_(pre)
+ {
+ }
+ _WHEN_(post)
+ {
+ }
+ _WHEN
+_GTagML_CALLBACK
+
 
 GTagML_CALLBACK_(noxml_)
  WHEN_(around)
@@ -64,17 +53,6 @@ GTagML_CALLBACK_(dclass)
  _WHEN_(post)
  {
   // suppress_node_ = nullptr;
- }
- _WHEN
-_GTagML_CALLBACK
-
-
-GTagML_CALLBACK_(document)
- WHEN_(pre)
- {
- }
- _WHEN_(post)
- {
  }
  _WHEN
 _GTagML_CALLBACK

@@ -50,7 +50,7 @@ void NGML_SDI_Document::load_prelatex_file(QString path)
 
  u4 i = 0;
 
-// u8 bls = 12; // default ...
+// n8 bls = 12; // default ...
 
  for(hypernode_type* h : v)
  {
@@ -391,7 +391,7 @@ void NGML_SDI_Document::parse()
 
  u4 i = 0;
 
-// u8 bls = 12; // default ... 
+// n8 bls = 12; // default ... 
 
  for(hypernode_type* h : v)
  {
@@ -545,7 +545,7 @@ NGML_SDI_Page* NGML_SDI_Document::check_read_page(QString zip_file_path,
  QDir dir(*unzip_folder_);
  QString path = dir.absoluteFilePath(QString("p%1.txt").arg(page_number));
  NGML_SDI_Page* result = new NGML_SDI_Page(page_number);
- load_file(path, [result](QString& line) -> u8
+ load_file(path, [result](QString& line) -> n8
  {
   if(line.isEmpty())
     return 0;

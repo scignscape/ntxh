@@ -4,14 +4,66 @@
 \input{ngml/ngml-sdi-commands}
 \input{ngml/ngml-deco-commands}
 
-\AtEndDocument{\immediate\write18{cd /home/nlevisrael/gits/ss/ntxh/wip/ar/code/cpp/qmake-console/projects/gtagml/ngml-sdi-console; ./run-with-args.sh /home/nlevisrael/gits/ss/ntxh/wip/ar/dev/consoles/gtagml/sdi/t1/t1.gt.tex /home/nlevisrael/gits/ss/ntxh/wip/ar/dev/consoles/gtagml/sdi/t1/t1.gt.sdi.ntxh /home/nlevisrael/gits/ss/ntxh/wip/ar/dev/consoles/gtagml/sdi/t1/t1.gt.sdi-prelatex.ntxh; cd -;}}
+\AtEndDocument{\immediate\write18{cd /media/mint/MainVolume/gits/brtest/ntxh/wip-facs/ar/code/cpp/qmake-console/projects/gtagml/ngml-sdi-console; ./run-with-args.sh /media/mint/MainVolume/gits/brtest/ntxh/wip-facs/ar/dev/consoles/gtagml/sdi/t1/t1.gt.tex /media/mint/MainVolume/gits/brtest/ntxh/wip-facs/ar/dev/consoles/gtagml/sdi/t1/t1.gt.sdi.ntxh /media/mint/MainVolume/gits/brtest/ntxh/wip-facs/ar/dev/consoles/gtagml/sdi/t1/t1.gt.sdi-prelatex.ntxh; cd -;}}
 
 
 
-\begin{document}
-
-\p{\:\+This test sentence. \> Another test.\;\< 
+\p{\:\+Taking this further, we can define a \i{channel} as a list of carriers which, by
+inter-carrier transfers, signify (or orchestrate) the passage of data into and out
+of function bodies (note that this usage varies somewhat from process calculi,
+where a channel would correspond roughly to what is here called a single carrier\svoid{}
+I assume channels in the general case are composed of multiple carriers).\;
+I'll use the notation \opTransfer{} to represent inter-carrier transfer\svoid{} let
+\carrOne{} and \carrTwo{} be carriers, then \carrOneOpTransferTwo{} is a
+transfer \q{operator} (note that \opTransfer{} is non-commutative\svoid{} the
+\q{transfer} happens in a fixed direction), marking the
+logical moment when a value is moved from code-point to code-point.\;
+The \opTransfer{} is intended to model several 
+scenarios, including \q{forced coercions} where the associated
+value is modified.\; Meanwhile, without further details a \q{transfer} can be
+generalized to \i{channels} in multiple ways.\;
+If \carrOne{} and \carrTwo{} are carriers which belong to two channels
+(\chanOne{}, \chanTwo{}), then \carrOneOpTransferTwo{} elevates to
+a transfer between the channels
+\ndash{} but this needs two indices to be concrete\svoid{} the notation has to
+specify which carrier in \chanOne{} transfers to which carrier in \chanTwo{}.\;
+For example, consider the basic function-composition \fofg{}\svoid{}
+\fDotOfGX{} \svoid{} \fOfGx{}. \> The analogous \q{transfer} notation
+would be, say, \gOpTransferOneOneF{}\svoid{}
+here the first carrier in the \returnch{} channel
+of \funG{} transfers to the first carrier in the \lambdach{} channel of \funF{}
+(the subscripts indicate the respective positions).\;\<
 }
 
-\end{document}
+\p{\:\+Most symbols in a function body (and corresponding nodes in a
+semantic graph) accordingly represent carriers, which
+are either passed in to a function or lexically declared
+in a function body. \> Assume each function body corresponds
+with one lexical scope which can have subscopes
+(the nature of these scopes and how they fit in
+graph representation will be addressed later in this section).\;
+The \i{declared} carriers are initialized with
+values returned from other functions (perhaps the
+current function called recursively), which can
+include constructors that work on literals (so, the
+carrier-binding in source code can look like
+a simple assignment to a literal, as in \intieqzero{}).\;
+In sum, whether they are passed \i{to} a  function or
+declared \i{in} a function, carriers are only initialized
+\ndash{} and only participate in the overall semantics
+of a program \ndash{} insofar as they are passed to other functions
+or bound to their return values.\;\<
+}
 
+\p{\:\+Furthermore, both of these cases introduce associations between
+different carriers in different areas of source code. \> When a carrier
+is passed \i{to} a function, there is a corresponding carrier
+(declared in the callee's signature) that receives the
+former's value\svoid{} \q{calling a function} means
+transferring values between carriers present at the site of
+the function call to those present in the function's
+implementation. \> Sometimes this works in reverse\svoid{} a function's
+return may cause the value of one of its carriers to be
+transferred to a carrier in the caller (whatever
+carrier is bound to the caller's return value).\;\<
+}

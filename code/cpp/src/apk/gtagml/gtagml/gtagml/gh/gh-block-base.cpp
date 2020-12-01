@@ -24,7 +24,7 @@ void GH_Block_Base::check_cached(QString key, QPair<u4, u4>& result)
 
 void GH_Block_Base::activate_inserts()
 {
- inserts_ = new QMap<QPair<u4, u4>, QList<QPair<u8, QString>>>;
+ inserts_ = new QMap<QPair<u4, u4>, QList<QPair<n8, QString>>>;
 }
 
 void GH_Block_Base::activate_cache()

@@ -23,7 +23,7 @@ GH_Block_Standard_8bit::GH_Block_Standard_8bit()
  chars_.push_back(glyphdeck_->get_default_void_separator());
 }
 
-u8 GH_Block_Standard_8bit::get_glyph_point_at_index(u4 i)
+n8 GH_Block_Standard_8bit::get_glyph_point_at_index(u4 i)
 {
  if(i > chars_.size())
    return chars_.value(0, glyphdeck_->get_default_null());
@@ -34,7 +34,7 @@ u4 GH_Block_Standard_8bit::check_confirm_sentence_end(u4 i, u4 e)
 {
  for(u4 u = i; u <= e; ++u)
  {
-  u8 uu = get_glyph_point_at_index(u);
+  n8 uu = get_glyph_point_at_index(u);
   GH_Block_Base::Evaluation_Codes ec = glyphdeck_->check_confirm_sentence_end(uu);
   if(ec == GH_Block_Base::Evaluation_Codes::Confirm)
     return i;
@@ -44,12 +44,12 @@ u4 GH_Block_Standard_8bit::check_confirm_sentence_end(u4 i, u4 e)
  return 0;
 }
 
-u8 GH_Block_Standard_8bit::get_default_null()
+n8 GH_Block_Standard_8bit::get_default_null()
 {
- return (u8) glyphdeck_->get_default_null();
+ return (n8) glyphdeck_->get_default_null();
 }
 
-void GH_Block_Standard_8bit::swap_codes(u4 i, u8 oldc, u8 newc)
+void GH_Block_Standard_8bit::swap_codes(u4 i, n8 oldc, n8 newc)
 {
  if(chars_[i] == (u1) oldc)
    chars_[i] = (u1) newc;
@@ -64,7 +64,7 @@ u4 GH_Block_Standard_8bit::clear_to_sentence_start(u4 pre, u4 start)
  for(u4 u = pre; u < start; ++u)
  {
   ++result;
-  u8 uu = get_glyph_point_at_index(u);
+  n8 uu = get_glyph_point_at_index(u);
   GH_Block_Base::Evaluation_Codes ec =
     glyphdeck_->check_confirm_clear_inter_sentence_gap(uu);
   if(ec == GH_Block_Base::Evaluation_Codes::Refute)
@@ -75,7 +75,7 @@ u4 GH_Block_Standard_8bit::clear_to_sentence_start(u4 pre, u4 start)
 
 
 void GH_Block_Standard_8bit::flag_as_sentence_end(u4 se, u4 sse,
-  QPair<QPair<u8, u8>, QPair<u8, u8>>& r)
+  QPair<QPair<n8, n8>, QPair<n8, n8>>& r)
 {
  // // the first pair holds the old value for the sentence end
   //   and then the new value (if it changes otherwide default null).
@@ -88,29 +88,29 @@ void GH_Block_Standard_8bit::flag_as_sentence_end(u4 se, u4 sse,
  u4 swap = glyphdeck_->get_sentence_end_swap(c1);
  if(swap == dn)
  {
-  r = {{(u8) c1, (u8) dn}, {(u8) dn, (u8)dn}};
+  r = {{(n8) c1, (n8) dn}, {(n8) dn, (n8)dn}};
   return;
  }
  chars_[se] = swap;
  if(sse == 0)
  {
-  r = {{(u8) c1, (u8) swap}, {(u8) dn, (u8)dn}};
+  r = {{(n8) c1, (n8) swap}, {(n8) dn, (n8)dn}};
   return;
  }
  u1 c2 = chars_[sse];
  u4 sswap = glyphdeck_->get_sentence_end_space_swap(c2);
  if(sswap == dn)
  {
-  r = {{(u8) c1, (u8) swap}, {(u8) c2, (u8)dn}};
+  r = {{(n8) c1, (n8) swap}, {(n8) c2, (n8)dn}};
   return;
  }
  chars_[sse] = sswap;
- r = {{(u8) c1, (u8) swap}, {(u8) c2, (u8)sswap}};
+ r = {{(n8) c1, (n8) swap}, {(n8) c2, (n8)sswap}};
 }
 
 GH_Block_Base::SDI_Interpretation_Codes GH_Block_Standard_8bit::get_sdi_interpretation_code_at_index(u4 i)
 {
- u8 u = get_glyph_point_at_index(i);
+ n8 u = get_glyph_point_at_index(i);
  return glyphdeck_->get_sdi_interpretation_code((u1) u);
 }
 

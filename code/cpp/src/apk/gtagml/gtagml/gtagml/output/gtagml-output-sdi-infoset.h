@@ -112,7 +112,7 @@ public:
  void finalize_widowed_sentence_boundaries(GH_Block_Base& bl);
 
 
- u8 check_sdi_latex_insert(GH_Block_Base* bl, u4 index,
+ n8 check_sdi_latex_insert(GH_Block_Base* bl, u4 index,
    QString& pre_result, QString& post_result);
 
  QVector<caon_ptr<tNode>> get_sdi_latex_insert_nodes(GH_Block_Base* bl, u4 index, QString& pre_result, QString& post_result);

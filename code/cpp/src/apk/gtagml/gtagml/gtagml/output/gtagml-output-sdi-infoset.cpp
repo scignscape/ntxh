@@ -75,7 +75,7 @@ void GTagML_Output_SDI_Infoset::init_callbacks()
 
 // // common functionality for both insert methods ...
 
-void _insert_start(QTextStream& qts, u8* u, QVector<caon_ptr<GTagML_Node>>* vec, u4 index, QString& pre_result, caon_ptr<GTagML_Node> n,
+void _insert_start(QTextStream& qts, n8* u, QVector<caon_ptr<GTagML_Node>>* vec, u4 index, QString& pre_result, caon_ptr<GTagML_Node> n,
   u4& canceled_sdi_sentence_start_index)
 {
  if(index == canceled_sdi_sentence_start_index)
@@ -94,7 +94,7 @@ void _insert_start(QTextStream& qts, u8* u, QVector<caon_ptr<GTagML_Node>>* vec,
  }
 }
 
-void _insert_end(QTextStream& qts, u8* u, QVector<caon_ptr<GTagML_Node>>* vec, u4 index,
+void _insert_end(QTextStream& qts, n8* u, QVector<caon_ptr<GTagML_Node>>* vec, u4 index,
   u4 new_index, QString& post_result,
   QMap<u4, QPair<caon_ptr<GTagML_Node>, u4>>& marked_sentence_starts,
   caon_ptr<GTagML_Node> n,
@@ -134,7 +134,7 @@ void _insert_end(QTextStream& qts, u8* u, QVector<caon_ptr<GTagML_Node>>* vec, u
  }
 }
 
-void _insert_start(QTextStream& qts, u8* u, u4 index, QString& pre_result, u4& canceled_sdi_sentence_start_index)
+void _insert_start(QTextStream& qts, n8* u, u4 index, QString& pre_result, u4& canceled_sdi_sentence_start_index)
 {
  _insert_start(qts, u, nullptr, index, pre_result, nullptr, canceled_sdi_sentence_start_index);
 }
@@ -145,7 +145,7 @@ void _insert_start(QTextStream& qts, QVector<caon_ptr<GTagML_Node>>* vec, u4 ind
  _insert_start(qts, nullptr, vec, index, pre_result, n, canceled_sdi_sentence_start_index);
 }
 
-void _insert_end(QTextStream& qts, u8* u, u4 index, u4 new_index,
+void _insert_end(QTextStream& qts, n8* u, u4 index, u4 new_index,
   QString& post_result, QMap<u4, QPair<caon_ptr<GTagML_Node>, u4>>& marked_sentence_starts,
   u4& held_sdi_sentence_end_index,
   u4& canceled_sdi_sentence_start_index)
@@ -301,9 +301,9 @@ void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
   if(it1 != marked_sentence_ends_.end())
   {
    u4 sse = it1.value().second;
-   QPair<QPair<u8, u8>, QPair<u8, u8>> oldnew;
+   QPair<QPair<n8, n8>, QPair<n8, n8>> oldnew;
    bl.flag_as_sentence_end(send, sse, oldnew);
-   u8 dn = bl.get_default_null();
+   n8 dn = bl.get_default_null();
    if(oldnew.first.second == dn)
      continue;
    // //  ok, so the se changed ...
@@ -344,9 +344,9 @@ void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
 }
 
 
-u8 GTagML_Output_SDI_Infoset::check_sdi_latex_insert(GH_Block_Base* bl, u4 index, QString& pre_result, QString& post_result)
+n8 GTagML_Output_SDI_Infoset::check_sdi_latex_insert(GH_Block_Base* bl, u4 index, QString& pre_result, QString& post_result)
 {
- u8 count = 0;
+ n8 count = 0;
  if(index == held_sdi_sentence_end_index_)
  {
   ++count;

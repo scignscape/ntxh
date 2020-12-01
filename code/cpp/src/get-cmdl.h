@@ -19,7 +19,10 @@
 #include <QPair>
 #include <QtGlobal>
 
+#ifdef USE_CWL
 #include "cbicaCmdParser.h"
+#endif //def USE_CWL
+
 
 KANS_(Util)
 
@@ -32,6 +35,7 @@ inline QStringList get_cmdl(int argc, char* argv[])
  return result;
 }
 
+#ifdef USE_CWL
 inline void get_cmdl(cbica::CmdParser& parser,
   const QVector< QPair< QPair<QString*, const QString&>,  const QString&> >& vec)
 {
@@ -202,6 +206,7 @@ inline void get_cmdl(cbica::CmdParser& parser,
   }
  }
 }
+#endif //def USE_CWL
 
 
 inline QStringList get_cmdl(int argc, char* argv[], 
@@ -238,3 +243,4 @@ _KANS(Util)
 
 
 #endif // GET_CMDL__H
+
