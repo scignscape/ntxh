@@ -2956,10 +2956,13 @@ void XpdfViewer::createMainMenu() {
   {
    MPF_Plugin_Info_Dialog* mid = new MPF_Plugin_Info_Dialog(nullptr);
    mid->show();
-
+  });
+  mosaic_submenu->addAction("Test Question Demo ...", []
+  {
    MPF_Test_Dialog* mtd = new MPF_Test_Dialog;
    mtd->show();
   });
+
   mosaic_submenu->addAction("Take ScreenShot", [this]
   {
    Mosaic_Menubar::handle_screenshot(this->winId());
