@@ -2,6 +2,7 @@
 
 #include "MainWindow.h"
 
+#include <QMessageBox>
 
 #include "GatesListWidget.h"
 #include "ProfileChannelWidget.h"
@@ -470,11 +471,44 @@ void MainWindow::action_angelscript()
 
  proc.waitForFinished();
 
+ QString resp = qPrintable(proc.readAllStandardError());
+
 // QByteArray qba = proc.readAllStandardOutput();
  qDebug() << "\nProcess Output\n\n==============\n";
 
- qDebug() << 
-   qPrintable(proc.readAllStandardError());
+ qDebug() << resp;
+
+ QString det = qPrintable(proc.readAllStandardOutput());
+
+
+ //QMessageBox::information(this, "AngelScript Response", resp);
+
+ QMessageBox qmb;
+
+ qmb.setWindowTitle("AngelScript Response");
+ qmb.setText(resp);
+ qmb.setDetailedText(det.prepend("AngelScript Source\n----------------\n"));
+
+ qmb.setInformativeText("(Click \"Show Details\" to view code)");
+
+ qmb.addButton("Ok", QMessageBox::YesRole);
+
+ auto buttons = qmb.buttons();
+ auto it = std::find_if(buttons.begin(), buttons.end(), [&](QAbstractButton* btn){
+    return qmb.buttonRole(btn) == QMessageBox::ActionRole;
+ });
+ if(it != buttons.end())
+ {
+  qDebug() << "Found " << (*it)->text();
+  (*it)->setText("Show Code ...");
+  qDebug() << "Found " << (*it)->text();
+ }
+
+ qmb.setIcon(QMessageBox::Information);
+
+ //QAbstractButton* yes = qmb.addButton(QString("More (PDF) ..."), QMessageBox::YesRole);
+
+ qmb.exec();
 
  proc.close();
 }

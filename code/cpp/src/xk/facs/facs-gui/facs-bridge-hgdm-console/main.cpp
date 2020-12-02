@@ -23,11 +23,16 @@
 
 USING_KANS(MPF)
 
+#define USE_CWL
+
 #include "cbicaCmdParser.h"
 #include <string>
 
 #include "get-cmdl.h"
 USING_KANS(Util)
+
+#include "textio.h"
+USING_KANS(TextIO)
 
 
 
@@ -100,6 +105,11 @@ int main(int argc, char* argv[])
 
  qDebug() << "AS File: " << as_file;
  qDebug() << "MPF File: " << mpf_file;
+
+ QString script_text;
+ load_file(as_file, script_text);
+
+ QTextStream(stdout) << script_text;
 
  AS_Runner asr;
 
