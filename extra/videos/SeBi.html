@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Semantic Bioimaging Toolkit (Demonstration)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<style>
+html, body {
+	background: black;
+	color: white;
+}
+html, body, video {
+	padding: 0;
+	margin: 0;
+}
+
+.ovcontainer{
+	position: absolute;
+	top: 4%;
+	left: 0;
+    border-left:solid rgba(05, 92, 92, 0.3) 13px;
+    border-right:solid rgba(05, 92, 92, 0.3) 13px;
+	bottom: 0;
+	right: 0;
+}
+
+.vcontainer{
+	position: relative;
+    top:1px;
+    left:-3px;
+	margin-left: 0;
+	width: 1250px;
+	height: 520px;
+    overflow:hidden;
+    border-top:ridge rgba(210, 80, 110, 0.5) 3px;
+    border-left:outset rgba(210, 80, 110, 0.34) 2px;
+    padding-left:3px;
+
+}
+
+
+video {
+	width: 1200px;
+	height: 533px;
+}
+
+video::cue {
+ color: rgb(210, 80, 110);
+ padding-bottom:40px;
+ font-weight:900;font-size:26pt;
+ background-color: transparent;
+ text-shadow: rgb(40, 50, 10) 10px 10px 13px;
+}
+
+span{color:black}
+
+</style>
+</head>
+<body>
+
+<div class="ovcontainer">
+<div class="vcontainer">
+<video controls>
+<source src="http://raw.githubusercontent.com/ScignScape/ntxh/wip-facs/extra/video/vid1-19.mp4" type="video/mp4">
+</video>
+</div>
+</div>
+
+<!-- Check https://quuz.org/webvtt/ for validation. -->
+<script type="text/vtt" id="subtitle" data-label="English" data-lang="en">
+WEBVTT
+
+
+00:02.000 --> 00:13.000 
+Working in medInria (a DICOM workstation), I will begin to open
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+00:13.001 --> 00:19.000
+an .fcs (Flow Cytometry Standard) file, 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+00:19.001 --> 00:24.000  
+a format medInria does not traditionally recognize.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+00:24.001 --> 00:29.000
+To Compensate for this FCS/DICOM incompatibility  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+00:29.001 --> 00:35.000
+the medInria sources have been modified within the SeBi demo to launch 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+00:35.001 --> 00:40.000
+another application as an alternative viewer,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+00:40.001 --> 00:47.000
+when medInria has no viewer for the selected file type.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+00:47.500 --> 00:52.000
+Here I will select FCS channels to plot comparatively ...
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+00:52.001 --> 01:00.500
+(there is a delay while the software calculates screen coordinates from FCS events)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+01:02.001 --> 01:09.000
+and then I define an FCS-style "gate."
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+01:12.001 --> 01:17.000
+Next, I save view info (the current gate/axis data)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+01:17.001 --> 01:22.000
+so that it can be restored later
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+01:22.001 --> 01:30.000
+along with the conventional FCS parameters.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+01:33.001 --> 01:40.000
+Now I am starting the FCS application on its own,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+01:40.001 --> 01:48.000
+and opening the prior .fcs file,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+01:50.001 --> 01:58.000
+to then reload the view that was saved earlier.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+02:04.001 --> 02:13.000
+Next, to demonstrate an AngelScript plugin
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+02:13.001 --> 02:20.000
+I run a simple Gremlin-like query script against the save/restore data package.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+02:20.001 --> 02:28.000
+For this demo I just examine the script sources/output.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+02:30.001 --> 02:38.000
+Another example of launching external applications
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+02:39.001 --> 02:50.000
+to view special files:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+02:53.001 --> 02:58.000
+here a PDF viewer has been extended to serve as an interactive test-prep tool.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+02:58.001 --> 03:08.000
+While studying for the GRE Chemistry exam  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+03:08.001 --> 03:14.000
+readers may find it helpful sometimes  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+03:15.001 --> 03:21.000
+to view 3D molecule displays.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+03:21.001 --> 03:30.000
+In this demo the XPDF viewer is linked to IQmol (a molecular-visualization application).  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+03:30.001 --> 03:43.000
+The 3D model can be examined side-by-side with the test questions.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+03:43.001 --> 04:05.000
+Test questions may also be implemented in a separate window where students 
+browse through the questions one at a time ...  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+04:08.001 --> 04:19.000
+Plugin info dialogs may be embedded in both applications 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+04:19.001 --> 04:30.000
+that interoperate via the plugin.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+04:44.001 --> 04:51.000
+Another interactive PDF features which may be implemented  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+04:51.001 --> 04:58.000
+is a "REPL" dialog box, joined to PDF clipboard selections. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+04:58.001 --> 05:04.000
+The top text-edit in the dialog holds selected text 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+05:04.001 --> 05:09.000
+which the user can correct/edit ... 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+05:09.001 --> 05:16.000
+And the bottom holds a command evaluator 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+05:16.001 --> 05:22.000
+where the user can 
+type an instruction to process the text copied/edited on top. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+</script>
+
+<script>
+function parse_timestamp(s) {
+	//var match = s.match(/^(?:([0-9]{2,}):)?([0-5][0-9]):([0-5][0-9][.,][0-9]{0,3})/);
+	// Relaxing the timestamp format:
+	var match = s.match(/^(?:([0-9]+):)?([0-5][0-9]):([0-5][0-9](?:[.,][0-9]{0,3})?)/);
+	if (match == null) {
+		throw 'Invalid timestamp format: ' + s;
+	}
+	var hours = parseInt(match[1] || "0", 10);
+	var minutes = parseInt(match[2], 10);
+	var seconds = parseFloat(match[3].replace(',', '.'));
+	return seconds + 60 * minutes + 60 * 60 * hours;
+}
+
+// https://w3c.github.io/webvtt/
+// https://developer.mozilla.org/en/docs/Web/API/Web_Video_Text_Tracks_Format
+// https://en.wikipedia.org/wiki/WebVTT
+//
+// For better parsers, look at:
+// https://github.com/annevk/webvtt
+// https://github.com/mozilla/vtt.js
+function quick_and_dirty_vtt_or_srt_parser(vtt) {
+	var lines = vtt.trim().replace('\r\n', '\n').split(/[\r\n]/).map(function(line) {
+		return line.trim();
+	});
+	var cues = [];
+	var start = null;
+	var end = null;
+	var payload = null;
+	for (var i = 0; i < lines.length; i++) {
+		if (lines[i].indexOf('-->') >= 0) {
+			var splitted = lines[i].split(/[ \t]+-->[ \t]+/);
+			if (splitted.length != 2) {
+				throw 'Error when splitting "-->": ' + lines[i];
+			}
+
+			// Already ignoring anything past the "end" timestamp (i.e. cue settings).
+			start = parse_timestamp(splitted[0]);
+			end = parse_timestamp(splitted[1]);
+		} else if (lines[i] == '') {
+			if (start && end) {
+				var cue = new VTTCue(start, end, payload);
+				cues.push(cue);
+				start = null;
+				end = null;
+				payload = null;
+			}
+		} else if(start && end) {
+			if (payload == null) {
+				payload = lines[i];
+			} else {
+				payload += '\n' + lines[i];
+			}
+		}
+	}
+	if (start && end) {
+		var cue = new VTTCue(start, end, payload);
+		cues.push(cue);
+	}
+
+	return cues;
+}
+
+function init() {
+	// http://www.html5rocks.com/en/tutorials/track/basics/
+	// https://www.iandevlin.com/blog/2015/02/javascript/dynamically-adding-text-tracks-to-html5-video
+	var video = document.querySelector('video');
+	var subtitle = document.getElementById('subtitle');
+	var track = video.addTextTrack('subtitles', subtitle.dataset.label, subtitle.dataset.lang);
+	track.mode = "showing";
+	quick_and_dirty_vtt_or_srt_parser(subtitle.innerHTML).map(function(cue) {
+		track.addCue(cue);
+	});
+}
+init();
+</script>
+
+</body>
+</html>
+
+
