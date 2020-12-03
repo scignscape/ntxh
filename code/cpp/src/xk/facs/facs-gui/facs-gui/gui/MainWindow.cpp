@@ -487,7 +487,7 @@ void MainWindow::action_angelscript()
 
  qmb.setWindowTitle("AngelScript Response");
  qmb.setText(resp);
- qmb.setDetailedText(det.prepend("AngelScript Source\n----------------\n"));
+ qmb.setDetailedText(det.prepend("AngelScript Source\n---------------------------\n"));
 
  qmb.setInformativeText("(Click \"Show Details\" to view code)");
 
