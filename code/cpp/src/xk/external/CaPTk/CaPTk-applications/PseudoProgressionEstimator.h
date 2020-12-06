@@ -566,8 +566,12 @@ VectorDouble PseudoProgressionEstimator::GetRunLengthFeatures(typename ImageType
   using RunLengthFeatures = typename RunLengthFilterType::RunLengthFeaturesFilterType;
 
   //? using InternalRunLengthFeatureName = typename RunLengthFeatures::RunLengthFeatureName;
-  //? will a #define work for this?
+  //? will a #define work for this?  If there ends up being a compiler error here ...
+#ifdef NEED_InternalRunLengthFeatureName_DEFINE
   #define InternalRunLengthFeatureName RunLengthFeatures::RunLengthFeatureName
+#else
+  using InternalRunLengthFeatureName = typename RunLengthFeatures::RunLengthFeatureName;
+#endif
 
   typename  RunLengthMatrixGenerator::Pointer matrix_generator = RunLengthMatrixGenerator::New();
   matrix_generator->SetMaskImage(mask);

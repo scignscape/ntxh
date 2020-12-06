@@ -45,6 +45,11 @@ INCLUDEPATH += \
 INCLUDEPATH += $$SRC_GROUP_DIR/yaml-cpp/include \
 
 
+INCLUDEPATH += $$SRC_GROUP_DIR/CaPTk-applications/BreastTexturePipeline/src/depends
+INCLUDEPATH += $$SRC_GROUP_DIR/CaPTk-applications/Preprocessing/src/depends
+INCLUDEPATH += $$SRC_GROUP_DIR/CaPTk-applications/FeatureExtraction/src
+INCLUDEPATH += $$SRC_GROUP_DIR/CaPTk-applications/FeatureExtraction/src/depends
+
  # if this doesn't work, set the correct path in itk.pri
 INCLUDEPATH += \
   $$ITK_SRC_DIR/../ITKSkullStrip-master/include \

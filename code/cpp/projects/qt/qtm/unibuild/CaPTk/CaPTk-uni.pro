@@ -8,6 +8,7 @@
 TEMPLATE = subdirs
 
 
+
 SUBDIRS = \
   ../xk/external/CaPTk/BraTSPipeline  \
   ../xk/external/CaPTk/CaPTk-applications  \

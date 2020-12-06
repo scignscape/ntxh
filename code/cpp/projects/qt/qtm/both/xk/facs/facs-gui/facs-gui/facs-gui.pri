@@ -17,6 +17,9 @@ include($$ROOT_DIR/../preferred/sysr.pri)
 include($$ROOT_DIR/../preferred/boost.pri)
 include($$ROOT_DIR/../preferred/gui.pri)
 
+include($$ROOT_DIR/../preferred/hdf5.pri)
+
+
 
 TEMPLATE = app
 

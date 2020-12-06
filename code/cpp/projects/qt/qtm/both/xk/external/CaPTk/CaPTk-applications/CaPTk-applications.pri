@@ -18,6 +18,9 @@ include($$ROOT_DIR/../preferred/vtk.pri)
 include($$ROOT_DIR/../preferred/opencv.pri)
 
 
+INCLUDEPATH += $$ITK_SRC_DIR/Modules/Bridge/VtkGlue/include
+
+
 QT += gui  widgets 
 
 QT += webenginewidgets
@@ -33,6 +36,9 @@ DEFINES += PROJECT_VERSION=\\\"PROJECT_VERSION\\\"
 DEFINES += PROJECT_SOURCE_DIR=\\\"PROJECT_SOURCE_DIR\\\"
 DEFINES += PROJECT_BINARY_DIR=\\\"PROJECT_BINARY_DIR\\\"
 DEFINES += CAPTK_STYLESHEET_FILE=\\\"CAPTK_STYLESHEET_FILE\\\"
+
+
+DEFINES += NEED_InternalRunLengthFeatureName_DEFINE
 
 
 

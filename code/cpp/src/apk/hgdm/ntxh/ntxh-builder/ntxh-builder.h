@@ -16,6 +16,8 @@
 
 #include <QVector>
 #include <QString>
+#include <QStringList>
+
 
 class QTextStream;
 

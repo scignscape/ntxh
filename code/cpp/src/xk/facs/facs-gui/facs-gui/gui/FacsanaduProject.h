@@ -17,6 +17,8 @@
 
 #include <QMap>
 #include <QMutex>
+#include <QFile>
+
 
 #include "accessors.h"
 

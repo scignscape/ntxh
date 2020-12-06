@@ -29,6 +29,6 @@ HEADERS += \
 SOURCES +=  \
   $$SRC_DIR/main.cpp
 
-LIBS += -lOpenCL
+#LIBS += -lOpenCL
 
 

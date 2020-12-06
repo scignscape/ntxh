@@ -15,6 +15,7 @@ include($$ROOT_DIR/../preferred/gui.pri)
 
 include($$ROOT_DIR/../preferred/itk.pri)
 include($$ROOT_DIR/../preferred/vtk.pri)
+
 include($$ROOT_DIR/../preferred/opencv.pri)
 
 # include($$ROOT_DIR/../preferred/vxl.pri)
@@ -164,7 +165,9 @@ INCLUDEPATH += \
 
 
 INCLUDEPATH += \ 
-  $$OPENCV_BUILD_DIR
+  $$OPENCV_BUILD_DIR \
+
+message(OPENCV_BUILD_DIR: $$OPENCV_BUILD_DIR)
 
 
 INCLUDEPATH += \ 

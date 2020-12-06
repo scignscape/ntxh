@@ -110,10 +110,12 @@ class DW_Instance
  static constexpr u4 outedges_mask = 0x20000000;
  static constexpr u4 subvalues_mask = 0x10000000;
 
- static constexpr u4 hypernodes_id_minimum = 1024;
- static constexpr u4 hypernodes_id_min = 1024;
- static constexpr u4 hypernodes_id_max = subvalues_mask;
+// static constexpr u4 hypernodes_id_minimum = 1024;
+// static constexpr u4 hypernodes_id_min = 1024;
+// static constexpr u4 hypernodes_id_maximum = 0x10000000; // =subvalues_mask;
 
+#define hypernodes_id_minimum 1024
+#define hypernodes_id_maximum 0x10000000
 
 
 //   011*   indexes       60.00.00.00
@@ -184,7 +186,7 @@ public:
 
  static constexpr QPair<u4, u4> hypernodes_id_range()
  {
-  return {hypernodes_id_min, hypernodes_id_max};
+  return {hypernodes_id_minimum, hypernodes_id_maximum};
  } 
 
  static constexpr QPair<u4, u4> indexes_id_range()

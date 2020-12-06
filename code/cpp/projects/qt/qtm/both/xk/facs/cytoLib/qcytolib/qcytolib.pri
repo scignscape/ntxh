@@ -13,6 +13,8 @@ QT -= gui
 include($$ROOT_DIR/../preferred/sysr.pri)
 include($$ROOT_DIR/../preferred/boost.pri)
 
+include($$ROOT_DIR/../preferred/hdf5.pri)
+
 
 INCLUDEPATH += $$SRC_DIR $$SRC_DIR/include \
   $$SRC_GROUP_DIR $$SRC_ROOT_DIR

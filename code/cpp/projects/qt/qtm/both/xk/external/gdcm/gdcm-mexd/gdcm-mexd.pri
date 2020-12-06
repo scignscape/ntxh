@@ -8,13 +8,21 @@ include(../build-group.pri)
 
 include($$ROOT_DIR/../preferred/sysr.pri)
 
+include($$ROOT_DIR/../preferred/gdcm.pri)
+
 INCLUDEPATH += $$SRC_GROUP_DIR
 
 
-INCLUDEPATH += 
+INCLUDEPATH += $$SRC_GROUP_DIR/gdcm-common
+INCLUDEPATH += $$SRC_GROUP_DIR/gdcm-dsed
+INCLUDEPATH += $$SRC_GROUP_DIR/gdcm-dict
+INCLUDEPATH += $$SRC_GROUP_DIR/gdcm-msff
+INCLUDEPATH += $$SRC_GROUP_DIR/Utilities/socketxx
+INCLUDEPATH += $$SRC_GROUP_DIR/Utilities/socketxx/socket++
 
-$$SRC_GROUP_DIR/Utilities \
-  $$SRC_GROUP_DIR/gdcm-common \
+
+#$$SRC_GROUP_DIR/Utilities \
+#  $$SRC_GROUP_DIR/gdcm-common \
 
 #  $$SRC_GROUP_DIR/gdcm-dsed \
 #  $$SRC_GROUP_DIR/Testing/Source/Data \

@@ -15,6 +15,7 @@ include($$ROOT_DIR/../preferred/gui.pri)
 
 include($$ROOT_DIR/../preferred/itk.pri)
 include($$ROOT_DIR/../preferred/vtk.pri)
+
 include($$ROOT_DIR/../preferred/opencv.pri)
 
 # include($$ROOT_DIR/../preferred/vxl.pri)
