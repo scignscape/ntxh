@@ -19,6 +19,11 @@ UI_DIR = $$SRC_DIR/uis-gen/any-build
 
 INCLUDEPATH += $$SRC_GROUP_DIR  \
 
+
+INCLUDEPATH += $$SRC_GROUP_DIR/openbabel/include/
+INCLUDEPATH += $$SRC_GROUP_DIR/openbabel/include-config/
+
+
 INCLUDEPATH += $$SRC_DIR/Old  $$SRC_DIR/extras  
 
 

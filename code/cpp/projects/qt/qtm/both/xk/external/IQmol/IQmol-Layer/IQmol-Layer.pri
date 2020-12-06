@@ -15,6 +15,9 @@ include($$ROOT_DIR/../preferred/boost.pri)
 include($$ROOT_DIR/../preferred/openbabel.pri)
 
 
+INCLUDEPATH += $$SRC_GROUP_DIR/openbabel/include/
+INCLUDEPATH += $$SRC_GROUP_DIR/openbabel/include-config/
+
 INCLUDEPATH += $$SRC_DIR/Layer  $$SRC_DIR/extras
 
 INCLUDEPATH += $$SRC_GROUP_DIR  \

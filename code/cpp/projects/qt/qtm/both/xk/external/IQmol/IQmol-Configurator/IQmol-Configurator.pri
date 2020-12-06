@@ -26,6 +26,10 @@ INCLUDEPATH += $$SRC_DIR/Configurator   $$SRC_DIR/extras
 INCLUDEPATH += $$SRC_GROUP_DIR/OpenMesh-Core 
 
 
+INCLUDEPATH += $$SRC_GROUP_DIR/openbabel/include/
+INCLUDEPATH += $$SRC_GROUP_DIR/openbabel/include-config/
+
+
 INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Layer/Layer  
 INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Old/Old  
 INCLUDEPATH += $$SRC_GROUP_DIR/IQmol-Util/Util

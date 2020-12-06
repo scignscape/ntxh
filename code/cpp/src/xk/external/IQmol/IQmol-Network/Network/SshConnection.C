@@ -51,6 +51,10 @@
 #include "openssl/md5.h"
 
 
+//? added:
+#define LIBSSH2_HOSTKEY_HASH_SHA256 3
+
+
 namespace IQmol {
 namespace Network {
 

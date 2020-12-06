@@ -16,6 +16,11 @@ include($$ROOT_DIR/../preferred/boost.pri)
 UI_DIR = $$SRC_DIR/uis-gen/any-build
 
 
+INCLUDEPATH += $$SRC_GROUP_DIR/openbabel/include/
+INCLUDEPATH += $$SRC_GROUP_DIR/openbabel/include-config/
+
+
+
 INCLUDEPATH += $$SRC_GROUP_DIR  \
 
 

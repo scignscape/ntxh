@@ -103,5 +103,6 @@ SOURCES +=  \
 
 
 
+LIBS += -L$$TARGETSDIR  -lqwt -lqwt-plot
 
 

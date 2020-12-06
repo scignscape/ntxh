@@ -13,6 +13,10 @@ include($$ROOT_DIR/../preferred/sysr.pri)
 
 include($$ROOT_DIR/../preferred/boost.pri)
 
+
+
+
+
 UI_DIR = $$SRC_DIR/uis-gen/any-build
 
 INCLUDEPATH += $$SRC_GROUP_DIR  \

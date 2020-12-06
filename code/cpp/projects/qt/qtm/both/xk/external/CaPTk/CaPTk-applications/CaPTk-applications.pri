@@ -7,11 +7,11 @@
 
 include(../build-group.pri)
 
-QT += gui  
+QT += gui
+
 
 include($$ROOT_DIR/../preferred/sysr.pri)
 include($$ROOT_DIR/../preferred/gui.pri)
-
 
 include($$ROOT_DIR/../preferred/itk.pri)
 include($$ROOT_DIR/../preferred/vtk.pri)

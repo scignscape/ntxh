@@ -30,6 +30,13 @@
 #include <medSettingsManager.h>
 #include <medStorage.h>
 
+
+// // temporary ...
+void qInitResources_dtkGui()
+{
+
+}
+
 void forceShow(medMainWindow& mainwindow )
 {
     //Idea and code taken from the OpenCOR project, Thanks Allan for the code!

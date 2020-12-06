@@ -25,12 +25,12 @@ DTK_META_EXPORT_INCLUDES_DIR =   $$SRC_GROUP_DIR/dtk-meta-export-includes
 INCLUDEPATH += $$SRC_DIR/inc/dtkCore
 INCLUDEPATH += $$SRC_DIR/inc
 
+#/home/nlevisrael/gits/ntxh/wip-sebi/ar/code/cpp/src/xk/external/medInria/dtkLog/inc
 
 INCLUDEPATH += $$DTK_META_EXPORT_INCLUDES_DIR
 
-INCLUDEPATH += $$SRC_GROUP_DIR/dtkLog/inc
+INCLUDEPATH += $$SRC_GROUP_DIR/dtkLog/inc/dtkLog
 INCLUDEPATH += $$SRC_GROUP_DIR/dtkMeta/inc/dtkMeta
-
 
 
 #INCLUDEPATH += $$DTK_META_EXTRA_INCLUDES_DIR/dtk/src/

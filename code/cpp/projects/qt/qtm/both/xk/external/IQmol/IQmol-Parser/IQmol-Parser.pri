@@ -16,6 +16,10 @@ include($$ROOT_DIR/../preferred/boost.pri)
 include($$ROOT_DIR/../preferred/openbabel.pri)
 
 
+INCLUDEPATH += $$SRC_ROOT_DIR/xk/external/IQmol/openbabel/include/
+INCLUDEPATH += $$SRC_ROOT_DIR/xk/external/IQmol/openbabel/include-config/
+
+
 INCLUDEPATH += $$SRC_GROUP_DIR  \
 
 INCLUDEPATH += $$SRC_GROUP_DIR/OpenMesh-Core 

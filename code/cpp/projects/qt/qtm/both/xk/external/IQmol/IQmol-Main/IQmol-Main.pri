@@ -11,6 +11,9 @@ TEMPLATE = app
 QT += xml widgets opengl printsupport
 
 
+INCLUDEPATH += $$SRC_ROOT_DIR/xk/external/IQmol/openbabel/include/
+INCLUDEPATH += $$SRC_ROOT_DIR/xk/external/IQmol/openbabel/include-config/
+
 include($$ROOT_DIR/../preferred/sysr.pri)
 
 #

@@ -27,6 +27,7 @@ TEMPLATE = lib
 ROOT_DIR = $$_PRO_FILE_PWD_
 ROOT_DIR ~= s!/code/cpp/projects/qt/.*!!
 
+
 CODE_ROOT_DIR = $$ROOT_DIR/code 
 CPP_ROOT_DIR = $$CODE_ROOT_DIR/cpp
 DATA_ROOT_DIR = $$ROOT_DIR/data
@@ -34,15 +35,16 @@ TEXT_ROOT_DIR = $$ROOT_DIR/text
 DATA_ROOT_DIR = $$ROOT_DIR/dev
 
 
-message(Root Directory: $$ROOT_DIR)
-
 defined(QMAKE_CONSOLE_TARGET_DIR, var){
   TARGETS_ROOT_DIR = $$QMAKE_CONSOLE_TARGET_DIR
   TARGETS_ROOT_DIR ~= s!@!$$ROOT_DIR!
 } else {
-  TARGETS_ROOT_DIR = $$CPP_ROOT_DIR/targets/qt/qt-multiple
+defined(UNIBUILD_TARGET_DIR, var) {
+  TARGETS_ROOT_DIR = $$CPP_ROOT_DIR/targets/qt/qt-multiple/$$UNIBUILD_TARGET_DIR
+} else {
+  TARGETS_ROOT_DIR = $$CPP_ROOT_DIR/targets/qt/qt-multiple/nomark
 }
-
+}
 
 DEFINES += WHICH_DEFINES=\\\"./_defines/$${WHICH_BUILD_DIR_CODE}_defines.h\\\"
 
@@ -80,6 +82,7 @@ SRC_GROUP_DIR = $$SRC_PROSET_DIR/$$PROJECT_GROUP
 SRC_DIR = $$SRC_GROUP_DIR/$$PROJECT_NAME
 
 TARGET = $$PROJECT_NAME
+
 
 TARGETSDIR = $$TARGETS_ROOT_DIR/$$TARGET_NUM
 

@@ -922,24 +922,26 @@ SOURCES +=  \
 
 LIBS += -L$$TARGETSDIR -ldtkGuiSupport  -ldtkLog -ldtkCoreSupport \
   -ldtkCore -ldtkComposer -ldtkDistributed -ldtkMath  -ldtkWidgets \
-  -ldtkMeta 
+  -ldtkMeta -ldtkPlotSupport -lqwt
 
 
 RESOURCES += $$SRC_DIR_APP/resources/medInria.qrc
 
 RESOURCES += $$SRC_DIR_LAYERS/legacy/medCoreLegacy/resources/medCoreLegacy.qrc
 RESOURCES += $$SRC_DIR_LAYERS/medCore/medCore.qrc
-RESOURCES += $$DTK_META_APP_DIR/dtkDistributedDashboard/dtkDashboard.qrc 
 
-RESOURCES += $$DTK_META_SRC_DIR/../doc/slides/dtkDistributed/dtkDistributedSlides.qrc
-RESOURCES += $$DTK_META_SRC_DIR/dtkComposer/dtkComposer.qrc
-RESOURCES += $$DTK_META_SRC_DIR/dtkComposer/dtkComposerNode.qrc
-RESOURCES += $$DTK_META_SRC_DIR/dtkComposerSupport/_dtkComposer.qrc
-RESOURCES += $$DTK_META_SRC_DIR/dtkComposerSupport/dtkComposerSupport.qrc
-RESOURCES += $$DTK_META_SRC_DIR/dtkGuiSupport/dtkGui.qrc
-RESOURCES += $$DTK_META_SRC_DIR/dtkPlotSupport/dtkPlot.qrc
-RESOURCES += $$DTK_META_SRC_DIR/dtkWidgets/dtkNotification.qrc
-RESOURCES += $$DTK_META_SRC_DIR/dtkWidgets/dtkWidgetsTagCloud.qrc
+
+#RESOURCES += $$DTK_META_APP_DIR/dtkDistributedDashboard/dtkDashboard.qrc
+
+#RESOURCES += $$DTK_META_SRC_DIR/../doc/slides/dtkDistributed/dtkDistributedSlides.qrc
+#RESOURCES += $$DTK_META_SRC_DIR/dtkComposer/dtkComposer.qrc
+#RESOURCES += $$DTK_META_SRC_DIR/dtkComposer/dtkComposerNode.qrc
+#RESOURCES += $$DTK_META_SRC_DIR/dtkComposerSupport/_dtkComposer.qrc
+#RESOURCES += $$DTK_META_SRC_DIR/dtkComposerSupport/dtkComposerSupport.qrc
+#RESOURCES += $$DTK_META_SRC_DIR/dtkGuiSupport/dtkGui.qrc
+#RESOURCES += $$DTK_META_SRC_DIR/dtkPlotSupport/dtkPlot.qrc
+#RESOURCES += $$DTK_META_SRC_DIR/dtkWidgets/dtkNotification.qrc
+#RESOURCES += $$DTK_META_SRC_DIR/dtkWidgets/dtkWidgetsTagCloud.qrc
 
 
 

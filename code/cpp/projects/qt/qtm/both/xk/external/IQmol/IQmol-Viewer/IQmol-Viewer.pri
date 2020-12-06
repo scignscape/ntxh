@@ -17,6 +17,12 @@ include($$ROOT_DIR/../preferred/openbabel.pri)
 
 include($$ROOT_DIR/../preferred/libssh2.pri)
 
+
+INCLUDEPATH += $$SRC_GROUP_DIR/openbabel/include/
+INCLUDEPATH += $$SRC_GROUP_DIR/openbabel/include-config/
+
+
+
 UI_DIR = $$SRC_DIR/uis-gen/any-build
 
 
