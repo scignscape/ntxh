@@ -4,7 +4,10 @@
 #     (See accompanying file LICENSE_1_0.txt or copy at
 #           http://www.boost.org/LICENSE_1_0.txt)
 
-QT += widgets
+QT += widgets network
+
+QT += help
+
 
 include(../build-group.pri)
 
@@ -13,12 +16,148 @@ include($$ROOT_DIR/../preferred/sysr.pri)
 
 
 INCLUDEPATH += $$SRC_GROUP_DIR  \
-  $$SRC_GROUP_DIR/ParaView-Remoting/ServerManager \
-  $$SRC_GROUP_DIR/ParaView-Remoting/Core \
-  $$SRC_GROUP_DIR/ParaView-Remoting/ClientServerStream \
+  $$SRC_GROUP_DIR/zoattestingctk \
+  $$SRC_GROUP_DIR/Paraview-Remoting/ServerManager \
+  $$SRC_GROUP_DIR/Paraview-Remoting/Core \
+  $$SRC_GROUP_DIR/Paraview-Remoting/ClientServerStream \
+  $$SRC_GROUP_DIR/Paraview-Remoting/Settings \
+  $$SRC_GROUP_DIR/Paraview-Remoting/Views \
+  $$SRC_GROUP_DIR/Paraview-Remoting/Animation \
+  $$SRC_GROUP_DIR/Paraview-Remoting/Live \
+  $$SRC_GROUP_DIR/Paraview-Remoting/Misc \
+  $$SRC_GROUP_DIR/Paraview-Remoting/Export \
 
 
-INCLUDEPATH += $$SRC_DIR/Components $$SRC_DIR/Core
+
+
+FORMS += \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqColorOpacityEditorWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqResetScalarRangeToDataOverTime.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqEditMenuBuilder.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqOMETransferFunctionsPropertyWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqOMETransferFunctionsPropertyWidgetPage.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqColorAnnotationsWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqTransferFunctionWidgetPropertyDialog.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqSpherePropertyWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqColorToolbar.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqMoleculePropertyWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqCameraToolbar.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqHandlePropertyWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqLightPropertyWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqDataAssemblyPropertyWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqExampleVisualizationsDialog.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqCustomResolutionDialog.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqWelcomeDialog.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqTransferFunctionWidgetPropertyWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqFileMenuBuilder.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqSeriesEditorPropertyWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqSplinePropertyWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqVCRToolbar.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqColorEditorPropertyWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqCameraManipulatorWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqYoungsMaterialPropertyWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqTimeInspectorWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqMainControlsToolbar.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqSavePresetOptions.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqLinePropertyWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqCustomizeShortcutsDialog.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqPropertyCollectionWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqAxesToolbar.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqSpreadSheetViewDecorator.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqBackgroundEditorWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqFontPropertyWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqImplicitPlanePropertyWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqCylinderPropertyWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqImageCompressorWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqDoubleRangeSliderPropertyWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqBoxPropertyWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqTextLocationWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqDefaultMainWindow.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqColorMapEditor.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqViewResolutionPropertyWidget.ui \
+  $$SRC_DIR/ApplicationComponents/Resources/UI/pqEmptyView.ui \
+  $$SRC_DIR/Widgets/Resources/UI/pqSeriesGeneratorDialog.ui \
+  $$SRC_DIR/Widgets/Resources/UI/pqExpanderButton.ui \
+  $$SRC_DIR/Widgets/Resources/UI/pqHelpWindow.ui \
+  $$SRC_DIR/Widgets/Resources/UI/pqQuickLaunchDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqLockViewSizeCustomDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqFindDataCreateSelectionFrame.ui \
+  $$SRC_DIR/Components/Resources/UI/pqProxyInformationWidget.ui \
+  $$SRC_DIR/Components/Resources/UI/pqPresetDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqServerConnectDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqSampleScalarWidget.ui \
+  $$SRC_DIR/Components/Resources/UI/pqDisplayRepresentationWidget.ui \
+  $$SRC_DIR/Components/Resources/UI/pqSettingsDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqComparativeVisPanel.ui \
+  $$SRC_DIR/Components/Resources/UI/pqMemoryInspectorPanelForm.ui \
+  $$SRC_DIR/Components/Resources/UI/pqFindDataDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqQueryCompositeTreeDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqPopoutPlaceholder.ui \
+  $$SRC_DIR/Components/Resources/UI/pqConnectIdDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqCameraKeyFrameWidget.ui \
+  $$SRC_DIR/Components/Resources/UI/pqServerLauncherDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqMultiBlockInspectorWidget.ui \
+  $$SRC_DIR/Components/Resources/UI/pqLogViewerDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqScalarValueListPropertyWidget.ui \
+  $$SRC_DIR/Components/Resources/UI/pqLinksEditor.ui \
+  $$SRC_DIR/Components/Resources/UI/pqRemoteCommandDialogForm.ui \
+  $$SRC_DIR/Components/Resources/UI/pqKeyFrameEditor.ui \
+  $$SRC_DIR/Components/Resources/UI/pqPluginDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqCustomViewpointButtonDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqCustomFilterManager.ui \
+  $$SRC_DIR/Components/Resources/UI/pqKeyFrameTypeWidget.ui \
+  $$SRC_DIR/Components/Resources/UI/pqAbortAnimation.ui \
+  $$SRC_DIR/Components/Resources/UI/pqSelectionLinkDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqSetBreakpointDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqLightsInspector.ui \
+  $$SRC_DIR/Components/Resources/UI/pqSelectReaderDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqCustomFilterDefinitionWizard.ui \
+  $$SRC_DIR/Components/Resources/UI/pqRemoteCommandTemplateDialogForm.ui \
+  $$SRC_DIR/Components/Resources/UI/pqQueryClauseWidget.ui \
+  $$SRC_DIR/Components/Resources/UI/pqCollaborationPanel.ui \
+  $$SRC_DIR/Components/Resources/UI/pqLinksManager.ui \
+  $$SRC_DIR/Components/Resources/UI/pqCalculatorWidget.ui \
+  $$SRC_DIR/Components/Resources/UI/pqAnimationTimeWidget.ui \
+  $$SRC_DIR/Components/Resources/UI/pqViewFrame.ui \
+  $$SRC_DIR/Components/Resources/UI/pqTimerLogDisplay.ui \
+  $$SRC_DIR/Components/Resources/UI/pqProxySelectionWidget.ui \
+  $$SRC_DIR/Components/Resources/UI/pqOrbitCreatorDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqContourControls.ui \
+  $$SRC_DIR/Components/Resources/UI/pqSampleScalarAddRangeDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqPipelineTimeKeyFrameEditor.ui \
+  $$SRC_DIR/Components/Resources/UI/pqFindDataCurrentSelectionFrame.ui \
+  $$SRC_DIR/Components/Resources/UI/pqAboutDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqLightsEditor.ui \
+  $$SRC_DIR/Components/Resources/UI/pqProxyWidgetDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqChangeInputDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqSelectionInputWidget.ui \
+  $$SRC_DIR/Components/Resources/UI/pqRescaleRangeDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqSearchBox.ui \
+  $$SRC_DIR/Components/Resources/UI/pqFindDataSelectionDisplayFrame.ui \
+  $$SRC_DIR/Components/Resources/UI/pqPropertiesPanel.ui \
+  $$SRC_DIR/Components/Resources/UI/pqComparativeParameterRangeDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqCameraDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqItemViewSearchWidget.ui \
+  $$SRC_DIR/Components/Resources/UI/pqFavoritesDialog.ui \
+  $$SRC_DIR/Components/Resources/UI/pqPythonAnimationCue.ui \
+  $$SRC_DIR/Core/Resources/UI/pqPluginEULADialog.ui \
+  $$SRC_DIR/Core/Resources/UI/pqOutputWidget.ui \
+  $$SRC_DIR/Core/Resources/UI/pqFileDialog.ui \
+  $$SRC_DIR/Core/Resources/UI/pqLogViewerWidget.ui \
+
+
+
+INCLUDEPATH += $$SRC_GROUP_DIR/Paraview-VTKExtensions
+INCLUDEPATH += $$SRC_GROUP_DIR/Paraview-VTKExtensions/Core
+INCLUDEPATH += $$SRC_GROUP_DIR/Paraview-VTKExtensions/FiltersRendering
+
+
+
+
+INCLUDEPATH += $$SRC_DIR/Components  $$SRC_DIR/Core \
+  $$SRC_DIR/Widgets \
+
+
 
 
 #include($$ROOT_DIR/../preferred/itk.pri)
@@ -30,22 +169,54 @@ include($$ROOT_DIR/../preferred/vtk.pri)
 INCLUDEPATH += $$VTK_BUILD_DIR/Interaction/Style
 INCLUDEPATH += $$VTK_BUILD_DIR/Rendering/Core
 INCLUDEPATH += $$VTK_BUILD_DIR/Filters/Core
+INCLUDEPATH += $$VTK_BUILD_DIR/Rendering/OpenGL2
+INCLUDEPATH += $$VTK_BUILD_DIR/Rendering/UI
+INCLUDEPATH += $$VTK_BUILD_DIR/Charts/Core
+INCLUDEPATH += $$VTK_BUILD_DIR/Rendering/Context2D
+INCLUDEPATH += $$VTK_BUILD_DIR/ThirdParty/jsoncpp
 
+
+DEFINES += VTK_LEGACY\\(x\\)=x
 
 #INCLUDEPATH += /home/nlevisrael/sebi-libs/VTK-Build/Interaction/Style
 
 
+INCLUDEPATH += $$VTK_SRC_DIR/Common/Core
+INCLUDEPATH += $$VTK_SRC_DIR/Common/Math
+INCLUDEPATH += $$VTK_SRC_DIR/Common/ExecutionModel
+INCLUDEPATH += $$VTK_SRC_DIR/Common/DataModel
+INCLUDEPATH += $$VTK_SRC_DIR/Common/Misc
+INCLUDEPATH += $$VTK_SRC_DIR/Charts/Core
+INCLUDEPATH += $$VTK_SRC_DIR/Rendering/Core
+INCLUDEPATH += $$VTK_SRC_DIR/Rendering/Context2D
+INCLUDEPATH += $$VTK_SRC_DIR/Views/Context2D
+INCLUDEPATH += $$VTK_SRC_DIR/Views/Core
+INCLUDEPATH += $$VTK_SRC_DIR/ThirdParty/jsoncpp
+INCLUDEPATH += $$VTK_SRC_DIR/IO/Core
+INCLUDEPATH += $$VTK_SRC_DIR/Filters/Core
+INCLUDEPATH += $$VTK_SRC_DIR/IO/XMLParser
+INCLUDEPATH += $$VTK_SRC_DIR/Utilities/KWIML
+INCLUDEPATH += $$VTK_SRC_DIR/GUISupport/Qt
 
 
 
-INCLUDEPATH += $$VTK_SRC_DIR/Common/Core/
-INCLUDEPATH += $$VTK_BUILD_DIR/Common/Core/
+INCLUDEPATH += $$VTK_BUILD_DIR/Common/Core
+INCLUDEPATH += $$VTK_BUILD_DIR/Common/DataModel
+INCLUDEPATH += $$VTK_BUILD_DIR/ThirdParty/jsoncpp/vtkjsoncpp/json
+INCLUDEPATH += $$VTK_BUILD_DIR/Views/Core
+INCLUDEPATH += $$VTK_BUILD_DIR/IO/Core
+INCLUDEPATH += $$VTK_BUILD_DIR/Views/Context2D
+INCLUDEPATH += $$VTK_BUILD_DIR/Utilities/KWSys/
+INCLUDEPATH += $$VTK_BUILD_DIR/Common/ExecutionModel
+INCLUDEPATH += $$VTK_BUILD_DIR/IO/XMLParser
+INCLUDEPATH += $$VTK_BUILD_DIR/Common/Misc
+
+INCLUDEPATH += $$SRC_GROUP_DIR/Paraview-Remoting/Export
+INCLUDEPATH += $$SRC_GROUP_DIR/Paraview-Remoting/Application
 
 
-INCLUDEPATH += $$VTK_SRC_DIR/Utilities/KWIML  \
-  $$VTK_SRC_DIR/GUISupport/Qt  \
-
-
+INCLUDEPATH += $$SRC_DIR/ApplicationComponents
+INCLUDEPATH += $$SRC_DIR/Python
 
 
 

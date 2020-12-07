@@ -34,7 +34,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "pqComponentsModule.h"
 #include "pqDoubleLineEdit.h" // for pqDoubleLineEdit::RealNumberNotation.
-#include "vtkLegacy.h"        // for VTK_LEGACY
+//?#include "vtkLegacy.h"        // for VTK_LEGACY
 
 #include <QList>
 #include <QScopedPointer>

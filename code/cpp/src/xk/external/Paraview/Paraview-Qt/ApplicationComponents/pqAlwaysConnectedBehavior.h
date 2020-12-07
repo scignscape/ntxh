@@ -37,7 +37,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "pqApplicationComponentsModule.h"
 #include "pqServerResource.h"
 
-//?#include "pqTimer.h"
+#include "pqTimer.h"
 
 /**
 * @ingroup Behaviors

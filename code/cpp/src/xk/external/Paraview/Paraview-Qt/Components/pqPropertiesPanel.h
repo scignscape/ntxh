@@ -33,7 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define pqPropertiesPanel_h
 
 #include "pqComponentsModule.h"
-#include "vtkLegacy.h" // for legacy macros
+//?#include "vtkLegacy.h" // for legacy macros
 #include <QWidget>
 
 class pqDataRepresentation;

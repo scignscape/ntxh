@@ -59,6 +59,9 @@ class PQAPPLICATIONCOMPONENTS_EXPORT pqPluginPathBehavior : public QObject
 public:
   pqPluginPathBehavior(const QString& environment_variable, QObject* parent = 0);
 
+  //? added ...
+  pqPluginPathBehavior(QObject* parentObject);
+
 protected Q_SLOTS:
   void loadDefaultPlugins(pqServer*);
 
