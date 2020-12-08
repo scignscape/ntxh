@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'GridInfoDialog.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,7 +10,9 @@
 #define UI_GRIDINFODIALOG_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -33,14 +35,14 @@ public:
     void setupUi(QDialog *GridInfoDialog)
     {
         if (GridInfoDialog->objectName().isEmpty())
-            GridInfoDialog->setObjectName(QString::fromUtf8("GridInfoDialog"));
+            GridInfoDialog->setObjectName(QStringLiteral("GridInfoDialog"));
         GridInfoDialog->resize(665, 285);
         QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(GridInfoDialog->sizePolicy().hasHeightForWidth());
         GridInfoDialog->setSizePolicy(sizePolicy);
-        GridInfoDialog->setStyleSheet(QString::fromUtf8("QToolButton {\n"
+        GridInfoDialog->setStyleSheet(QLatin1String("QToolButton {\n"
 "   color: #333;\n"
 "   background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, \n"
 "          stop: 0 #fff,\n"
@@ -89,7 +91,7 @@ public:
 "   font-size: 12px;\n"
 "}"));
         verticalLayout = new QVBoxLayout(GridInfoDialog);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         gridTable = new QTableWidget(GridInfoDialog);
         if (gridTable->columnCount() < 4)
             gridTable->setColumnCount(4);
@@ -101,7 +103,7 @@ public:
         gridTable->setHorizontalHeaderItem(2, __qtablewidgetitem2);
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
         gridTable->setHorizontalHeaderItem(3, __qtablewidgetitem3);
-        gridTable->setObjectName(QString::fromUtf8("gridTable"));
+        gridTable->setObjectName(QStringLiteral("gridTable"));
         gridTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
         gridTable->setSelectionBehavior(QAbstractItemView::SelectRows);
         gridTable->setShowGrid(false);
@@ -109,13 +111,13 @@ public:
         verticalLayout->addWidget(gridTable);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
 
         closeButton = new QPushButton(GridInfoDialog);
-        closeButton->setObjectName(QString::fromUtf8("closeButton"));
+        closeButton->setObjectName(QStringLiteral("closeButton"));
         closeButton->setAutoDefault(false);
 
         horizontalLayout->addWidget(closeButton);
@@ -132,16 +134,16 @@ public:
 
     void retranslateUi(QDialog *GridInfoDialog)
     {
-        GridInfoDialog->setWindowTitle(QApplication::translate("GridInfoDialog", "Grid Information", nullptr));
+        GridInfoDialog->setWindowTitle(QApplication::translate("GridInfoDialog", "Grid Information", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem = gridTable->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("GridInfoDialog", "Type", nullptr));
+        ___qtablewidgetitem->setText(QApplication::translate("GridInfoDialog", "Type", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem1 = gridTable->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("GridInfoDialog", "Data Size (kB)", nullptr));
+        ___qtablewidgetitem1->setText(QApplication::translate("GridInfoDialog", "Data Size (kB)", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem2 = gridTable->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("GridInfoDialog", "Step Size", nullptr));
+        ___qtablewidgetitem2->setText(QApplication::translate("GridInfoDialog", "Step Size", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem3 = gridTable->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("GridInfoDialog", "Bounding Box", nullptr));
-        closeButton->setText(QApplication::translate("GridInfoDialog", "Close", nullptr));
+        ___qtablewidgetitem3->setText(QApplication::translate("GridInfoDialog", "Bounding Box", Q_NULLPTR));
+        closeButton->setText(QApplication::translate("GridInfoDialog", "Close", Q_NULLPTR));
     } // retranslateUi
 
 };

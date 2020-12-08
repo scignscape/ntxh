@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'MullikenDecompositionsDialog.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,7 +10,9 @@
 #define UI_MULLIKENDECOMPOSITIONSDIALOG_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QHeaderView>
@@ -31,22 +33,22 @@ public:
     void setupUi(QDialog *MullikenDecompositionsDialog)
     {
         if (MullikenDecompositionsDialog->objectName().isEmpty())
-            MullikenDecompositionsDialog->setObjectName(QString::fromUtf8("MullikenDecompositionsDialog"));
+            MullikenDecompositionsDialog->setObjectName(QStringLiteral("MullikenDecompositionsDialog"));
         MullikenDecompositionsDialog->resize(643, 485);
         verticalLayout = new QVBoxLayout(MullikenDecompositionsDialog);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         label = new QLabel(MullikenDecompositionsDialog);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         verticalLayout->addWidget(label);
 
         decompositionTable = new QTableWidget(MullikenDecompositionsDialog);
-        decompositionTable->setObjectName(QString::fromUtf8("decompositionTable"));
+        decompositionTable->setObjectName(QStringLiteral("decompositionTable"));
 
         verticalLayout->addWidget(decompositionTable);
 
         buttonBox = new QDialogButtonBox(MullikenDecompositionsDialog);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setObjectName(QStringLiteral("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
@@ -62,8 +64,8 @@ public:
 
     void retranslateUi(QDialog *MullikenDecompositionsDialog)
     {
-        MullikenDecompositionsDialog->setWindowTitle(QApplication::translate("MullikenDecompositionsDialog", "Dialog", nullptr));
-        label->setText(QApplication::translate("MullikenDecompositionsDialog", "Decompositions", nullptr));
+        MullikenDecompositionsDialog->setWindowTitle(QApplication::translate("MullikenDecompositionsDialog", "Dialog", Q_NULLPTR));
+        label->setText(QApplication::translate("MullikenDecompositionsDialog", "Decompositions", Q_NULLPTR));
     } // retranslateUi
 
 };

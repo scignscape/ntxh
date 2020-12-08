@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'PreferencesBrowser.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,13 +10,16 @@
 #define UI_PREFERENCESBROWSER_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
@@ -64,9 +67,9 @@ public:
     void setupUi(QDialog *PreferencesBrowser)
     {
         if (PreferencesBrowser->objectName().isEmpty())
-            PreferencesBrowser->setObjectName(QString::fromUtf8("PreferencesBrowser"));
+            PreferencesBrowser->setObjectName(QStringLiteral("PreferencesBrowser"));
         PreferencesBrowser->resize(661, 299);
-        PreferencesBrowser->setStyleSheet(QString::fromUtf8("QToolButton {\n"
+        PreferencesBrowser->setStyleSheet(QLatin1String("QToolButton {\n"
 "   color: #333;\n"
 "   background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, \n"
 "          stop: 0 #fff,\n"
@@ -113,23 +116,23 @@ public:
                         " #EEE;\n"
 "}"));
         verticalLayout = new QVBoxLayout(PreferencesBrowser);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         gridLayout_2 = new QGridLayout();
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         label_3 = new QLabel(PreferencesBrowser);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName(QStringLiteral("label_3"));
 
         gridLayout_2->addWidget(label_3, 3, 0, 1, 1);
 
         logFileLineEdit = new QLineEdit(PreferencesBrowser);
-        logFileLineEdit->setObjectName(QString::fromUtf8("logFileLineEdit"));
+        logFileLineEdit->setObjectName(QStringLiteral("logFileLineEdit"));
 
         gridLayout_2->addWidget(logFileLineEdit, 4, 1, 1, 1);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         undoLimit = new QSpinBox(PreferencesBrowser);
-        undoLimit->setObjectName(QString::fromUtf8("undoLimit"));
+        undoLimit->setObjectName(QStringLiteral("undoLimit"));
         undoLimit->setValue(5);
 
         horizontalLayout->addWidget(undoLimit);
@@ -139,12 +142,12 @@ public:
         horizontalLayout->addItem(horizontalSpacer_2);
 
         label_5 = new QLabel(PreferencesBrowser);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setObjectName(QStringLiteral("label_5"));
 
         horizontalLayout->addWidget(label_5);
 
         labelFontSize = new QSpinBox(PreferencesBrowser);
-        labelFontSize->setObjectName(QString::fromUtf8("labelFontSize"));
+        labelFontSize->setObjectName(QStringLiteral("labelFontSize"));
         labelFontSize->setMinimum(6);
         labelFontSize->setMaximum(36);
         labelFontSize->setValue(14);
@@ -159,19 +162,14 @@ public:
         gridLayout_2->addLayout(horizontalLayout, 1, 1, 1, 1);
 
         label = new QLabel(PreferencesBrowser);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         gridLayout_2->addWidget(label, 0, 0, 1, 1);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         forceFieldCombo = new QComboBox(PreferencesBrowser);
-        forceFieldCombo->addItem(QString());
-        forceFieldCombo->addItem(QString());
-        forceFieldCombo->addItem(QString());
-        forceFieldCombo->addItem(QString());
-        forceFieldCombo->addItem(QString());
-        forceFieldCombo->setObjectName(QString::fromUtf8("forceFieldCombo"));
+        forceFieldCombo->setObjectName(QStringLiteral("forceFieldCombo"));
 
         horizontalLayout_2->addWidget(forceFieldCombo);
 
@@ -183,37 +181,37 @@ public:
         gridLayout_2->addLayout(horizontalLayout_2, 0, 1, 1, 1);
 
         fragmentDirectoryLineEdit = new QLineEdit(PreferencesBrowser);
-        fragmentDirectoryLineEdit->setObjectName(QString::fromUtf8("fragmentDirectoryLineEdit"));
+        fragmentDirectoryLineEdit->setObjectName(QStringLiteral("fragmentDirectoryLineEdit"));
 
         gridLayout_2->addWidget(fragmentDirectoryLineEdit, 2, 1, 1, 1);
 
         label_6 = new QLabel(PreferencesBrowser);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
+        label_6->setObjectName(QStringLiteral("label_6"));
 
         gridLayout_2->addWidget(label_6, 4, 0, 1, 1);
 
         label_4 = new QLabel(PreferencesBrowser);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setObjectName(QStringLiteral("label_4"));
 
         gridLayout_2->addWidget(label_4, 1, 0, 1, 1);
 
         label_2 = new QLabel(PreferencesBrowser);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         gridLayout_2->addWidget(label_2, 2, 0, 1, 1);
 
         browseQChemDatabaseFileButton = new QPushButton(PreferencesBrowser);
-        browseQChemDatabaseFileButton->setObjectName(QString::fromUtf8("browseQChemDatabaseFileButton"));
+        browseQChemDatabaseFileButton->setObjectName(QStringLiteral("browseQChemDatabaseFileButton"));
 
         gridLayout_2->addWidget(browseQChemDatabaseFileButton, 3, 2, 1, 1);
 
         qchemDatabaseFileLineEdit = new QLineEdit(PreferencesBrowser);
-        qchemDatabaseFileLineEdit->setObjectName(QString::fromUtf8("qchemDatabaseFileLineEdit"));
+        qchemDatabaseFileLineEdit->setObjectName(QStringLiteral("qchemDatabaseFileLineEdit"));
 
         gridLayout_2->addWidget(qchemDatabaseFileLineEdit, 3, 1, 1, 1);
 
         label_7 = new QLabel(PreferencesBrowser);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
+        label_7->setObjectName(QStringLiteral("label_7"));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -226,14 +224,14 @@ public:
         gridLayout_2->addWidget(label_7, 6, 1, 1, 1);
 
         horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         logFileHiddenCheckBox = new QCheckBox(PreferencesBrowser);
-        logFileHiddenCheckBox->setObjectName(QString::fromUtf8("logFileHiddenCheckBox"));
+        logFileHiddenCheckBox->setObjectName(QStringLiteral("logFileHiddenCheckBox"));
 
         horizontalLayout_3->addWidget(logFileHiddenCheckBox);
 
         loggingEnabledCheckBox = new QCheckBox(PreferencesBrowser);
-        loggingEnabledCheckBox->setObjectName(QString::fromUtf8("loggingEnabledCheckBox"));
+        loggingEnabledCheckBox->setObjectName(QStringLiteral("loggingEnabledCheckBox"));
 
         horizontalLayout_3->addWidget(loggingEnabledCheckBox);
 
@@ -245,12 +243,12 @@ public:
         gridLayout_2->addLayout(horizontalLayout_3, 5, 1, 1, 1);
 
         browseLogFileButton = new QPushButton(PreferencesBrowser);
-        browseLogFileButton->setObjectName(QString::fromUtf8("browseLogFileButton"));
+        browseLogFileButton->setObjectName(QStringLiteral("browseLogFileButton"));
 
         gridLayout_2->addWidget(browseLogFileButton, 4, 2, 1, 1);
 
         browseFragmentDirectoryButton = new QPushButton(PreferencesBrowser);
-        browseFragmentDirectoryButton->setObjectName(QString::fromUtf8("browseFragmentDirectoryButton"));
+        browseFragmentDirectoryButton->setObjectName(QStringLiteral("browseFragmentDirectoryButton"));
 
         gridLayout_2->addWidget(browseFragmentDirectoryButton, 2, 2, 1, 1);
 
@@ -258,9 +256,9 @@ public:
         verticalLayout->addLayout(gridLayout_2);
 
         horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         resetButton = new QPushButton(PreferencesBrowser);
-        resetButton->setObjectName(QString::fromUtf8("resetButton"));
+        resetButton->setObjectName(QStringLiteral("resetButton"));
 
         horizontalLayout_4->addWidget(resetButton);
 
@@ -269,7 +267,7 @@ public:
         horizontalLayout_4->addItem(horizontalSpacer_5);
 
         buttonBox = new QDialogButtonBox(PreferencesBrowser);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setObjectName(QStringLiteral("buttonBox"));
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
         horizontalLayout_4->addWidget(buttonBox);
@@ -286,30 +284,32 @@ public:
 
     void retranslateUi(QDialog *PreferencesBrowser)
     {
-        PreferencesBrowser->setWindowTitle(QApplication::translate("PreferencesBrowser", "IQmol Preferences", nullptr));
-        label_3->setText(QApplication::translate("PreferencesBrowser", "QChem Database File", nullptr));
+        PreferencesBrowser->setWindowTitle(QApplication::translate("PreferencesBrowser", "IQmol Preferences", Q_NULLPTR));
+        label_3->setText(QApplication::translate("PreferencesBrowser", "QChem Database File", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        logFileLineEdit->setToolTip(QApplication::translate("PreferencesBrowser", "Changes to the log file location require IQmol to be restarted", nullptr));
+        logFileLineEdit->setToolTip(QApplication::translate("PreferencesBrowser", "Changes to the log file location require IQmol to be restarted", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        label_5->setText(QApplication::translate("PreferencesBrowser", "Label Font Size", nullptr));
-        labelFontSize->setSuffix(QApplication::translate("PreferencesBrowser", " pt", nullptr));
-        label->setText(QApplication::translate("PreferencesBrowser", "Default Force Field:", nullptr));
-        forceFieldCombo->setItemText(0, QApplication::translate("PreferencesBrowser", "MMFF94", nullptr));
-        forceFieldCombo->setItemText(1, QApplication::translate("PreferencesBrowser", "MMFF94s", nullptr));
-        forceFieldCombo->setItemText(2, QApplication::translate("PreferencesBrowser", "UFF", nullptr));
-        forceFieldCombo->setItemText(3, QApplication::translate("PreferencesBrowser", "Ghemical", nullptr));
-        forceFieldCombo->setItemText(4, QApplication::translate("PreferencesBrowser", "Gaff", nullptr));
-
-        label_6->setText(QApplication::translate("PreferencesBrowser", "Log File:", nullptr));
-        label_4->setText(QApplication::translate("PreferencesBrowser", "Maximum Undo Level:", nullptr));
-        label_2->setText(QApplication::translate("PreferencesBrowser", "Fragment Directory:", nullptr));
-        browseQChemDatabaseFileButton->setText(QApplication::translate("PreferencesBrowser", "Browse", nullptr));
-        label_7->setText(QApplication::translate("PreferencesBrowser", "Log file changes will not take effect until restart", nullptr));
-        logFileHiddenCheckBox->setText(QApplication::translate("PreferencesBrowser", "Hide Log File", nullptr));
-        loggingEnabledCheckBox->setText(QApplication::translate("PreferencesBrowser", "Logging Enabled", nullptr));
-        browseLogFileButton->setText(QApplication::translate("PreferencesBrowser", "Browse", nullptr));
-        browseFragmentDirectoryButton->setText(QApplication::translate("PreferencesBrowser", "Browse", nullptr));
-        resetButton->setText(QApplication::translate("PreferencesBrowser", "Reset", nullptr));
+        label_5->setText(QApplication::translate("PreferencesBrowser", "Label Font Size", Q_NULLPTR));
+        labelFontSize->setSuffix(QApplication::translate("PreferencesBrowser", " pt", Q_NULLPTR));
+        label->setText(QApplication::translate("PreferencesBrowser", "Default Force Field:", Q_NULLPTR));
+        forceFieldCombo->clear();
+        forceFieldCombo->insertItems(0, QStringList()
+         << QApplication::translate("PreferencesBrowser", "MMFF94", Q_NULLPTR)
+         << QApplication::translate("PreferencesBrowser", "MMFF94s", Q_NULLPTR)
+         << QApplication::translate("PreferencesBrowser", "UFF", Q_NULLPTR)
+         << QApplication::translate("PreferencesBrowser", "Ghemical", Q_NULLPTR)
+         << QApplication::translate("PreferencesBrowser", "Gaff", Q_NULLPTR)
+        );
+        label_6->setText(QApplication::translate("PreferencesBrowser", "Log File:", Q_NULLPTR));
+        label_4->setText(QApplication::translate("PreferencesBrowser", "Maximum Undo Level:", Q_NULLPTR));
+        label_2->setText(QApplication::translate("PreferencesBrowser", "Fragment Directory:", Q_NULLPTR));
+        browseQChemDatabaseFileButton->setText(QApplication::translate("PreferencesBrowser", "Browse", Q_NULLPTR));
+        label_7->setText(QApplication::translate("PreferencesBrowser", "Log file changes will not take effect until restart", Q_NULLPTR));
+        logFileHiddenCheckBox->setText(QApplication::translate("PreferencesBrowser", "Hide Log File", Q_NULLPTR));
+        loggingEnabledCheckBox->setText(QApplication::translate("PreferencesBrowser", "Logging Enabled", Q_NULLPTR));
+        browseLogFileButton->setText(QApplication::translate("PreferencesBrowser", "Browse", Q_NULLPTR));
+        browseFragmentDirectoryButton->setText(QApplication::translate("PreferencesBrowser", "Browse", Q_NULLPTR));
+        resetButton->setText(QApplication::translate("PreferencesBrowser", "Reset", Q_NULLPTR));
     } // retranslateUi
 
 };

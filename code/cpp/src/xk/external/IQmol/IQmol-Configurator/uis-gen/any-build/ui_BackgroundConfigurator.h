@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'BackgroundConfigurator.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,11 +10,14 @@
 #define UI_BACKGROUNDCONFIGURATOR_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
@@ -41,7 +44,7 @@ public:
     void setupUi(QDialog *BackgroundConfigurator)
     {
         if (BackgroundConfigurator->objectName().isEmpty())
-            BackgroundConfigurator->setObjectName(QString::fromUtf8("BackgroundConfigurator"));
+            BackgroundConfigurator->setObjectName(QStringLiteral("BackgroundConfigurator"));
         BackgroundConfigurator->resize(317, 149);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
@@ -50,31 +53,31 @@ public:
         BackgroundConfigurator->setSizePolicy(sizePolicy);
         BackgroundConfigurator->setSizeGripEnabled(false);
         verticalLayout = new QVBoxLayout(BackgroundConfigurator);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         label_2 = new QLabel(BackgroundConfigurator);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         gridLayout->addWidget(label_2, 1, 0, 1, 1);
 
         label = new QLabel(BackgroundConfigurator);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         gridLayout->addWidget(label, 0, 0, 1, 1);
 
         backgroundColorButton = new QToolButton(BackgroundConfigurator);
-        backgroundColorButton->setObjectName(QString::fromUtf8("backgroundColorButton"));
+        backgroundColorButton->setObjectName(QStringLiteral("backgroundColorButton"));
 
         gridLayout->addWidget(backgroundColorButton, 0, 1, 1, 1);
 
         foregroundColorButton = new QToolButton(BackgroundConfigurator);
-        foregroundColorButton->setObjectName(QString::fromUtf8("foregroundColorButton"));
+        foregroundColorButton->setObjectName(QStringLiteral("foregroundColorButton"));
 
         gridLayout->addWidget(foregroundColorButton, 1, 1, 1, 1);
 
         makeDefaultButton = new QCheckBox(BackgroundConfigurator);
-        makeDefaultButton->setObjectName(QString::fromUtf8("makeDefaultButton"));
+        makeDefaultButton->setObjectName(QStringLiteral("makeDefaultButton"));
 
         gridLayout->addWidget(makeDefaultButton, 1, 2, 1, 1);
 
@@ -82,19 +85,19 @@ public:
         verticalLayout->addLayout(gridLayout);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_2);
 
         applyButton = new QPushButton(BackgroundConfigurator);
-        applyButton->setObjectName(QString::fromUtf8("applyButton"));
+        applyButton->setObjectName(QStringLiteral("applyButton"));
         applyButton->setAutoDefault(false);
 
         horizontalLayout_2->addWidget(applyButton);
 
         okButton = new QPushButton(BackgroundConfigurator);
-        okButton->setObjectName(QString::fromUtf8("okButton"));
+        okButton->setObjectName(QStringLiteral("okButton"));
         okButton->setAutoDefault(false);
 
         horizontalLayout_2->addWidget(okButton);
@@ -113,7 +116,7 @@ public:
 
     void retranslateUi(QDialog *BackgroundConfigurator)
     {
-        BackgroundConfigurator->setWindowTitle(QApplication::translate("BackgroundConfigurator", "Configure Background", nullptr));
+        BackgroundConfigurator->setWindowTitle(QApplication::translate("BackgroundConfigurator", "Configure Background", Q_NULLPTR));
         BackgroundConfigurator->setStyleSheet(QApplication::translate("BackgroundConfigurator", "QToolButton {\n"
 "   color: #333;\n"
 "   background-color: #666;\n"
@@ -131,16 +134,16 @@ public:
 "QToolButton:pressed {\n"
 "   border-color: #222;\n"
 "}\n"
-"", nullptr));
-        label_2->setText(QApplication::translate("BackgroundConfigurator", "Foreground Color", nullptr));
-        label->setText(QApplication::translate("BackgroundConfigurator", "Background Color", nullptr));
+"", Q_NULLPTR));
+        label_2->setText(QApplication::translate("BackgroundConfigurator", "Foreground Color", Q_NULLPTR));
+        label->setText(QApplication::translate("BackgroundConfigurator", "Background Color", Q_NULLPTR));
         backgroundColorButton->setStyleSheet(QString());
         backgroundColorButton->setText(QString());
         foregroundColorButton->setStyleSheet(QString());
         foregroundColorButton->setText(QString());
-        makeDefaultButton->setText(QApplication::translate("BackgroundConfigurator", "Make Default", nullptr));
-        applyButton->setText(QApplication::translate("BackgroundConfigurator", "Apply", nullptr));
-        okButton->setText(QApplication::translate("BackgroundConfigurator", "OK", nullptr));
+        makeDefaultButton->setText(QApplication::translate("BackgroundConfigurator", "Make Default", Q_NULLPTR));
+        applyButton->setText(QApplication::translate("BackgroundConfigurator", "Apply", Q_NULLPTR));
+        okButton->setText(QApplication::translate("BackgroundConfigurator", "OK", Q_NULLPTR));
     } // retranslateUi
 
 };

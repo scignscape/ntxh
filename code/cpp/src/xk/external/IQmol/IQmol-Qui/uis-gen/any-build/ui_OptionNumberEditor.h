@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'OptionNumberEditor.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,10 +10,13 @@
 #define UI_OPTIONNUMBEREDITOR_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
@@ -48,7 +51,7 @@ public:
     void setupUi(QDialog *OptionNumberEditor)
     {
         if (OptionNumberEditor->objectName().isEmpty())
-            OptionNumberEditor->setObjectName(QString::fromUtf8("OptionNumberEditor"));
+            OptionNumberEditor->setObjectName(QStringLiteral("OptionNumberEditor"));
         OptionNumberEditor->resize(248, 217);
         QSizePolicy sizePolicy(static_cast<QSizePolicy::Policy>(0), static_cast<QSizePolicy::Policy>(0));
         sizePolicy.setHorizontalStretch(0);
@@ -62,9 +65,9 @@ public:
 #ifndef Q_OS_MAC
         vboxLayout->setContentsMargins(9, 9, 9, 9);
 #endif
-        vboxLayout->setObjectName(QString::fromUtf8("vboxLayout"));
+        vboxLayout->setObjectName(QStringLiteral("vboxLayout"));
         frame = new QFrame(OptionNumberEditor);
-        frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setObjectName(QStringLiteral("frame"));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Sunken);
         vboxLayout1 = new QVBoxLayout(frame);
@@ -74,9 +77,9 @@ public:
 #ifndef Q_OS_MAC
         vboxLayout1->setContentsMargins(9, 9, 9, 9);
 #endif
-        vboxLayout1->setObjectName(QString::fromUtf8("vboxLayout1"));
+        vboxLayout1->setObjectName(QStringLiteral("vboxLayout1"));
         label = new QLabel(frame);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         vboxLayout1->addWidget(label);
 
@@ -85,7 +88,7 @@ public:
         hboxLayout->setSpacing(6);
 #endif
         hboxLayout->setContentsMargins(0, 0, 0, 0);
-        hboxLayout->setObjectName(QString::fromUtf8("hboxLayout"));
+        hboxLayout->setObjectName(QStringLiteral("hboxLayout"));
         vboxLayout2 = new QVBoxLayout();
 #ifndef Q_OS_MAC
         vboxLayout2->setSpacing(6);
@@ -93,24 +96,24 @@ public:
 #ifndef Q_OS_MAC
         vboxLayout2->setContentsMargins(0, 0, 0, 0);
 #endif
-        vboxLayout2->setObjectName(QString::fromUtf8("vboxLayout2"));
+        vboxLayout2->setObjectName(QStringLiteral("vboxLayout2"));
         label_2 = new QLabel(frame);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         vboxLayout2->addWidget(label_2);
 
         label_3 = new QLabel(frame);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName(QStringLiteral("label_3"));
 
         vboxLayout2->addWidget(label_3);
 
         label_5 = new QLabel(frame);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setObjectName(QStringLiteral("label_5"));
 
         vboxLayout2->addWidget(label_5);
 
         label_4 = new QLabel(frame);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setObjectName(QStringLiteral("label_4"));
 
         vboxLayout2->addWidget(label_4);
 
@@ -122,24 +125,24 @@ public:
         vboxLayout3->setSpacing(6);
 #endif
         vboxLayout3->setContentsMargins(0, 0, 0, 0);
-        vboxLayout3->setObjectName(QString::fromUtf8("vboxLayout3"));
+        vboxLayout3->setObjectName(QStringLiteral("vboxLayout3"));
         minEdit = new QLineEdit(frame);
-        minEdit->setObjectName(QString::fromUtf8("minEdit"));
+        minEdit->setObjectName(QStringLiteral("minEdit"));
 
         vboxLayout3->addWidget(minEdit);
 
         maxEdit = new QLineEdit(frame);
-        maxEdit->setObjectName(QString::fromUtf8("maxEdit"));
+        maxEdit->setObjectName(QStringLiteral("maxEdit"));
 
         vboxLayout3->addWidget(maxEdit);
 
         defaultEdit = new QLineEdit(frame);
-        defaultEdit->setObjectName(QString::fromUtf8("defaultEdit"));
+        defaultEdit->setObjectName(QStringLiteral("defaultEdit"));
 
         vboxLayout3->addWidget(defaultEdit);
 
         stepEdit = new QLineEdit(frame);
-        stepEdit->setObjectName(QString::fromUtf8("stepEdit"));
+        stepEdit->setObjectName(QStringLiteral("stepEdit"));
 
         vboxLayout3->addWidget(stepEdit);
 
@@ -154,18 +157,18 @@ public:
         hboxLayout1->setSpacing(6);
 #endif
         hboxLayout1->setContentsMargins(0, 0, 0, 0);
-        hboxLayout1->setObjectName(QString::fromUtf8("hboxLayout1"));
+        hboxLayout1->setObjectName(QStringLiteral("hboxLayout1"));
         spacerItem = new QSpacerItem(131, 31, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         hboxLayout1->addItem(spacerItem);
 
         okButton = new QPushButton(frame);
-        okButton->setObjectName(QString::fromUtf8("okButton"));
+        okButton->setObjectName(QStringLiteral("okButton"));
 
         hboxLayout1->addWidget(okButton);
 
         cancelButton = new QPushButton(frame);
-        cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
+        cancelButton->setObjectName(QStringLiteral("cancelButton"));
 
         hboxLayout1->addWidget(cancelButton);
 
@@ -185,14 +188,14 @@ public:
 
     void retranslateUi(QDialog *OptionNumberEditor)
     {
-        OptionNumberEditor->setWindowTitle(QApplication::translate("OptionNumberEditor", "Dialog", nullptr));
-        label->setText(QApplication::translate("OptionNumberEditor", "Edit variable parameters:", nullptr));
-        label_2->setText(QApplication::translate("OptionNumberEditor", "Minimum", nullptr));
-        label_3->setText(QApplication::translate("OptionNumberEditor", "Maximum", nullptr));
-        label_5->setText(QApplication::translate("OptionNumberEditor", "Default value", nullptr));
-        label_4->setText(QApplication::translate("OptionNumberEditor", "Step size", nullptr));
-        okButton->setText(QApplication::translate("OptionNumberEditor", "OK", nullptr));
-        cancelButton->setText(QApplication::translate("OptionNumberEditor", "Cancel", nullptr));
+        OptionNumberEditor->setWindowTitle(QApplication::translate("OptionNumberEditor", "Dialog", Q_NULLPTR));
+        label->setText(QApplication::translate("OptionNumberEditor", "Edit variable parameters:", Q_NULLPTR));
+        label_2->setText(QApplication::translate("OptionNumberEditor", "Minimum", Q_NULLPTR));
+        label_3->setText(QApplication::translate("OptionNumberEditor", "Maximum", Q_NULLPTR));
+        label_5->setText(QApplication::translate("OptionNumberEditor", "Default value", Q_NULLPTR));
+        label_4->setText(QApplication::translate("OptionNumberEditor", "Step size", Q_NULLPTR));
+        okButton->setText(QApplication::translate("OptionNumberEditor", "OK", Q_NULLPTR));
+        cancelButton->setText(QApplication::translate("OptionNumberEditor", "Cancel", Q_NULLPTR));
     } // retranslateUi
 
 };

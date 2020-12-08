@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'SymmetryToleranceDialog.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,10 +10,13 @@
 #define UI_SYMMETRYTOLERANCEDIALOG_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
@@ -39,21 +42,21 @@ public:
     void setupUi(QDialog *SymmetryToleranceDialog)
     {
         if (SymmetryToleranceDialog->objectName().isEmpty())
-            SymmetryToleranceDialog->setObjectName(QString::fromUtf8("SymmetryToleranceDialog"));
+            SymmetryToleranceDialog->setObjectName(QStringLiteral("SymmetryToleranceDialog"));
         SymmetryToleranceDialog->resize(403, 169);
         verticalLayout = new QVBoxLayout(SymmetryToleranceDialog);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         label = new QLabel(SymmetryToleranceDialog);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
         label->setTextFormat(Qt::RichText);
         label->setWordWrap(true);
 
         verticalLayout->addWidget(label);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         toleranceSlider = new QSlider(SymmetryToleranceDialog);
-        toleranceSlider->setObjectName(QString::fromUtf8("toleranceSlider"));
+        toleranceSlider->setObjectName(QStringLiteral("toleranceSlider"));
         toleranceSlider->setMaximum(100);
         toleranceSlider->setPageStep(10);
         toleranceSlider->setValue(10);
@@ -64,7 +67,7 @@ public:
         horizontalLayout->addWidget(toleranceSlider);
 
         symmetryToleranceLabel = new QLabel(SymmetryToleranceDialog);
-        symmetryToleranceLabel->setObjectName(QString::fromUtf8("symmetryToleranceLabel"));
+        symmetryToleranceLabel->setObjectName(QStringLiteral("symmetryToleranceLabel"));
 
         horizontalLayout->addWidget(symmetryToleranceLabel);
 
@@ -72,14 +75,14 @@ public:
         verticalLayout->addLayout(horizontalLayout);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         applyButton = new QPushButton(SymmetryToleranceDialog);
-        applyButton->setObjectName(QString::fromUtf8("applyButton"));
+        applyButton->setObjectName(QStringLiteral("applyButton"));
 
         horizontalLayout_2->addWidget(applyButton);
 
         resetButton = new QPushButton(SymmetryToleranceDialog);
-        resetButton->setObjectName(QString::fromUtf8("resetButton"));
+        resetButton->setObjectName(QStringLiteral("resetButton"));
 
         horizontalLayout_2->addWidget(resetButton);
 
@@ -88,7 +91,7 @@ public:
         horizontalLayout_2->addItem(horizontalSpacer);
 
         buttonBox = new QDialogButtonBox(SymmetryToleranceDialog);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setObjectName(QStringLiteral("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
@@ -107,15 +110,15 @@ public:
 
     void retranslateUi(QDialog *SymmetryToleranceDialog)
     {
-        SymmetryToleranceDialog->setWindowTitle(QApplication::translate("SymmetryToleranceDialog", "Symmetry Tolerance", nullptr));
+        SymmetryToleranceDialog->setWindowTitle(QApplication::translate("SymmetryToleranceDialog", "Symmetry Tolerance", Q_NULLPTR));
         label->setText(QApplication::translate("SymmetryToleranceDialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Lucida Grande'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Higher values will find more symmetric structures, but may lead to undesired changes in the geometry.</p></body></html>", nullptr));
-        symmetryToleranceLabel->setText(QApplication::translate("SymmetryToleranceDialog", "0.10", nullptr));
-        applyButton->setText(QApplication::translate("SymmetryToleranceDialog", "Apply", nullptr));
-        resetButton->setText(QApplication::translate("SymmetryToleranceDialog", "Reset", nullptr));
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Higher values will find more symmetric structures, but may lead to undesired changes in the geometry.</p></body></html>", Q_NULLPTR));
+        symmetryToleranceLabel->setText(QApplication::translate("SymmetryToleranceDialog", "0.10", Q_NULLPTR));
+        applyButton->setText(QApplication::translate("SymmetryToleranceDialog", "Apply", Q_NULLPTR));
+        resetButton->setText(QApplication::translate("SymmetryToleranceDialog", "Reset", Q_NULLPTR));
     } // retranslateUi
 
 };

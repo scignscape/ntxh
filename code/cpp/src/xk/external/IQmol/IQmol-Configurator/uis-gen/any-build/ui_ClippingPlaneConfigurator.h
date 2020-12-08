@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ClippingPlaneConfigurator.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,11 +10,14 @@
 #define UI_CLIPPINGPLANECONFIGURATOR_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
@@ -47,74 +50,74 @@ public:
     void setupUi(QDialog *ClippingPlaneConfigurator)
     {
         if (ClippingPlaneConfigurator->objectName().isEmpty())
-            ClippingPlaneConfigurator->setObjectName(QString::fromUtf8("ClippingPlaneConfigurator"));
+            ClippingPlaneConfigurator->setObjectName(QStringLiteral("ClippingPlaneConfigurator"));
         ClippingPlaneConfigurator->resize(358, 126);
         verticalLayout = new QVBoxLayout(ClippingPlaneConfigurator);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         label_6 = new QLabel(ClippingPlaneConfigurator);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
+        label_6->setObjectName(QStringLiteral("label_6"));
 
         gridLayout->addWidget(label_6, 0, 3, 1, 1);
 
         xValue = new QDoubleSpinBox(ClippingPlaneConfigurator);
-        xValue->setObjectName(QString::fromUtf8("xValue"));
-        xValue->setMinimum(-99.989999999999995);
+        xValue->setObjectName(QStringLiteral("xValue"));
+        xValue->setMinimum(-99.99);
 
         gridLayout->addWidget(xValue, 0, 2, 1, 1);
 
         label_5 = new QLabel(ClippingPlaneConfigurator);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setObjectName(QStringLiteral("label_5"));
 
         gridLayout->addWidget(label_5, 0, 1, 1, 1);
 
         label = new QLabel(ClippingPlaneConfigurator);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         gridLayout->addWidget(label, 0, 0, 1, 1);
 
         yValue = new QDoubleSpinBox(ClippingPlaneConfigurator);
-        yValue->setObjectName(QString::fromUtf8("yValue"));
-        yValue->setMinimum(-99.989999999999995);
+        yValue->setObjectName(QStringLiteral("yValue"));
+        yValue->setMinimum(-99.99);
 
         gridLayout->addWidget(yValue, 0, 4, 1, 1);
 
         label_7 = new QLabel(ClippingPlaneConfigurator);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
+        label_7->setObjectName(QStringLiteral("label_7"));
 
         gridLayout->addWidget(label_7, 0, 5, 1, 1);
 
         zValue = new QDoubleSpinBox(ClippingPlaneConfigurator);
-        zValue->setObjectName(QString::fromUtf8("zValue"));
-        zValue->setMinimum(-99.989999999999995);
+        zValue->setObjectName(QStringLiteral("zValue"));
+        zValue->setMinimum(-99.99);
 
         gridLayout->addWidget(zValue, 0, 6, 1, 1);
 
         phiLabel = new QLabel(ClippingPlaneConfigurator);
-        phiLabel->setObjectName(QString::fromUtf8("phiLabel"));
+        phiLabel->setObjectName(QStringLiteral("phiLabel"));
 
         gridLayout->addWidget(phiLabel, 1, 5, 1, 1);
 
         thetaLabel = new QLabel(ClippingPlaneConfigurator);
-        thetaLabel->setObjectName(QString::fromUtf8("thetaLabel"));
+        thetaLabel->setObjectName(QStringLiteral("thetaLabel"));
 
         gridLayout->addWidget(thetaLabel, 1, 3, 1, 1);
 
         label_2 = new QLabel(ClippingPlaneConfigurator);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         gridLayout->addWidget(label_2, 1, 0, 1, 3);
 
         thetaValue = new QSpinBox(ClippingPlaneConfigurator);
-        thetaValue->setObjectName(QString::fromUtf8("thetaValue"));
+        thetaValue->setObjectName(QStringLiteral("thetaValue"));
         thetaValue->setMaximum(180);
         thetaValue->setSingleStep(15);
 
         gridLayout->addWidget(thetaValue, 1, 4, 1, 1);
 
         phiValue = new QSpinBox(ClippingPlaneConfigurator);
-        phiValue->setObjectName(QString::fromUtf8("phiValue"));
+        phiValue->setObjectName(QStringLiteral("phiValue"));
         phiValue->setMaximum(360);
         phiValue->setSingleStep(15);
 
@@ -124,13 +127,13 @@ public:
         verticalLayout->addLayout(gridLayout);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_2);
 
         okButton = new QPushButton(ClippingPlaneConfigurator);
-        okButton->setObjectName(QString::fromUtf8("okButton"));
+        okButton->setObjectName(QStringLiteral("okButton"));
 
         horizontalLayout_2->addWidget(okButton);
 
@@ -148,15 +151,15 @@ public:
 
     void retranslateUi(QDialog *ClippingPlaneConfigurator)
     {
-        ClippingPlaneConfigurator->setWindowTitle(QApplication::translate("ClippingPlaneConfigurator", "Configure Clipping Plane", nullptr));
-        label_6->setText(QApplication::translate("ClippingPlaneConfigurator", "Y", nullptr));
-        label_5->setText(QApplication::translate("ClippingPlaneConfigurator", "X", nullptr));
-        label->setText(QApplication::translate("ClippingPlaneConfigurator", "Origin", nullptr));
-        label_7->setText(QApplication::translate("ClippingPlaneConfigurator", "Z", nullptr));
-        phiLabel->setText(QApplication::translate("ClippingPlaneConfigurator", "<html><head/><body><p>p</p></body></html>", nullptr));
-        thetaLabel->setText(QApplication::translate("ClippingPlaneConfigurator", "<html><head/><body><p>t</p></body></html>", nullptr));
-        label_2->setText(QApplication::translate("ClippingPlaneConfigurator", "Normal Direction", nullptr));
-        okButton->setText(QApplication::translate("ClippingPlaneConfigurator", "OK", nullptr));
+        ClippingPlaneConfigurator->setWindowTitle(QApplication::translate("ClippingPlaneConfigurator", "Configure Clipping Plane", Q_NULLPTR));
+        label_6->setText(QApplication::translate("ClippingPlaneConfigurator", "Y", Q_NULLPTR));
+        label_5->setText(QApplication::translate("ClippingPlaneConfigurator", "X", Q_NULLPTR));
+        label->setText(QApplication::translate("ClippingPlaneConfigurator", "Origin", Q_NULLPTR));
+        label_7->setText(QApplication::translate("ClippingPlaneConfigurator", "Z", Q_NULLPTR));
+        phiLabel->setText(QApplication::translate("ClippingPlaneConfigurator", "<html><head/><body><p>p</p></body></html>", Q_NULLPTR));
+        thetaLabel->setText(QApplication::translate("ClippingPlaneConfigurator", "<html><head/><body><p>t</p></body></html>", Q_NULLPTR));
+        label_2->setText(QApplication::translate("ClippingPlaneConfigurator", "Normal Direction", Q_NULLPTR));
+        okButton->setText(QApplication::translate("ClippingPlaneConfigurator", "OK", Q_NULLPTR));
     } // retranslateUi
 
 };

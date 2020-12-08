@@ -1,1 +1,1 @@
-LD_LIBRARY_PATH=/media/mint/MainVolume/mtr/hdf5/install/lib:$LD_LIBRARY_PATH:@TARGETS_DESTDIR @TARGETS_DESTDIR/facs-gui 
+LD_LIBRARY_PATH=/home/nlevisrael/mtr/hdf5/install/lib:/home/nlevisrael/gits/ntxh/wip-sebi/ar/code/cpp/targets/qt/qt-multiple/uni/targets-5-15-2-uni-nomark:/home/nlevisrael/Qt/5.15.2/gcc_64/lib @TARGETS_DESTDIR/facs-gui 

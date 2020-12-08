@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'MolecularSurfacesConfigurator.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,13 +10,16 @@
 #define UI_MOLECULARSURFACESCONFIGURATOR_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
@@ -63,7 +66,7 @@ public:
     void setupUi(QDialog *MolecularSurfacesConfigurator)
     {
         if (MolecularSurfacesConfigurator->objectName().isEmpty())
-            MolecularSurfacesConfigurator->setObjectName(QString::fromUtf8("MolecularSurfacesConfigurator"));
+            MolecularSurfacesConfigurator->setObjectName(QStringLiteral("MolecularSurfacesConfigurator"));
         MolecularSurfacesConfigurator->resize(356, 261);
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
@@ -71,14 +74,14 @@ public:
         sizePolicy.setHeightForWidth(MolecularSurfacesConfigurator->sizePolicy().hasHeightForWidth());
         MolecularSurfacesConfigurator->setSizePolicy(sizePolicy);
         horizontalLayout_5 = new QHBoxLayout(MolecularSurfacesConfigurator);
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         gridLayout_2 = new QGridLayout();
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         negativeColorButton = new QToolButton(MolecularSurfacesConfigurator);
-        negativeColorButton->setObjectName(QString::fromUtf8("negativeColorButton"));
-        negativeColorButton->setStyleSheet(QString::fromUtf8("QToolButton {\n"
+        negativeColorButton->setObjectName(QStringLiteral("negativeColorButton"));
+        negativeColorButton->setStyleSheet(QLatin1String("QToolButton {\n"
 "   background-color: rgb(255, 0, 0);\n"
 "}"));
         negativeColorButton->setIconSize(QSize(32, 16));
@@ -86,13 +89,13 @@ public:
         horizontalLayout_4->addWidget(negativeColorButton);
 
         negativeLabel = new QLabel(MolecularSurfacesConfigurator);
-        negativeLabel->setObjectName(QString::fromUtf8("negativeLabel"));
+        negativeLabel->setObjectName(QStringLiteral("negativeLabel"));
 
         horizontalLayout_4->addWidget(negativeLabel);
 
         positiveColorButton = new QToolButton(MolecularSurfacesConfigurator);
-        positiveColorButton->setObjectName(QString::fromUtf8("positiveColorButton"));
-        positiveColorButton->setStyleSheet(QString::fromUtf8("QToolButton {\n"
+        positiveColorButton->setObjectName(QStringLiteral("positiveColorButton"));
+        positiveColorButton->setStyleSheet(QLatin1String("QToolButton {\n"
 "   background-color: rgb(0, 0, 255);\n"
 "}"));
         positiveColorButton->setIconSize(QSize(32, 16));
@@ -100,7 +103,7 @@ public:
         horizontalLayout_4->addWidget(positiveColorButton);
 
         label_9 = new QLabel(MolecularSurfacesConfigurator);
-        label_9->setObjectName(QString::fromUtf8("label_9"));
+        label_9->setObjectName(QStringLiteral("label_9"));
 
         horizontalLayout_4->addWidget(label_9);
 
@@ -112,19 +115,19 @@ public:
         gridLayout_2->addLayout(horizontalLayout_4, 3, 1, 1, 1);
 
         horizontalLayout_8 = new QHBoxLayout();
-        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
+        horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
         horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_8->addItem(horizontalSpacer_6);
 
         cancelButton = new QPushButton(MolecularSurfacesConfigurator);
-        cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
+        cancelButton->setObjectName(QStringLiteral("cancelButton"));
         cancelButton->setAutoDefault(false);
 
         horizontalLayout_8->addWidget(cancelButton);
 
         calculateButton = new QPushButton(MolecularSurfacesConfigurator);
-        calculateButton->setObjectName(QString::fromUtf8("calculateButton"));
+        calculateButton->setObjectName(QStringLiteral("calculateButton"));
 
         horizontalLayout_8->addWidget(calculateButton);
 
@@ -132,24 +135,24 @@ public:
         gridLayout_2->addLayout(horizontalLayout_8, 6, 0, 1, 2);
 
         label_4 = new QLabel(MolecularSurfacesConfigurator);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setObjectName(QStringLiteral("label_4"));
 
         gridLayout_2->addWidget(label_4, 2, 0, 1, 1);
 
         label = new QLabel(MolecularSurfacesConfigurator);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         gridLayout_2->addWidget(label, 4, 0, 1, 1);
 
         label_12 = new QLabel(MolecularSurfacesConfigurator);
-        label_12->setObjectName(QString::fromUtf8("label_12"));
+        label_12->setObjectName(QStringLiteral("label_12"));
 
         gridLayout_2->addWidget(label_12, 3, 0, 1, 1);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         surfaceType = new QComboBox(MolecularSurfacesConfigurator);
-        surfaceType->setObjectName(QString::fromUtf8("surfaceType"));
+        surfaceType->setObjectName(QStringLiteral("surfaceType"));
 
         horizontalLayout->addWidget(surfaceType);
 
@@ -161,9 +164,9 @@ public:
         gridLayout_2->addLayout(horizontalLayout, 0, 1, 1, 1);
 
         horizontalLayout_7 = new QHBoxLayout();
-        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
         opacity = new QSlider(MolecularSurfacesConfigurator);
-        opacity->setObjectName(QString::fromUtf8("opacity"));
+        opacity->setObjectName(QStringLiteral("opacity"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Maximum);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -180,19 +183,19 @@ public:
         gridLayout_2->addLayout(horizontalLayout_7, 4, 1, 1, 1);
 
         horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         isovalue = new QDoubleSpinBox(MolecularSurfacesConfigurator);
-        isovalue->setObjectName(QString::fromUtf8("isovalue"));
+        isovalue->setObjectName(QStringLiteral("isovalue"));
         isovalue->setDecimals(4);
-        isovalue->setMinimum(0.000400000000000);
-        isovalue->setMaximum(99.998999999999995);
-        isovalue->setSingleStep(0.001000000000000);
-        isovalue->setValue(0.020000000000000);
+        isovalue->setMinimum(0.0004);
+        isovalue->setMaximum(99.999);
+        isovalue->setSingleStep(0.001);
+        isovalue->setValue(0.02);
 
         horizontalLayout_3->addWidget(isovalue);
 
         simplifyMeshCheckBox = new QCheckBox(MolecularSurfacesConfigurator);
-        simplifyMeshCheckBox->setObjectName(QString::fromUtf8("simplifyMeshCheckBox"));
+        simplifyMeshCheckBox->setObjectName(QStringLiteral("simplifyMeshCheckBox"));
         simplifyMeshCheckBox->setChecked(true);
 
         horizontalLayout_3->addWidget(simplifyMeshCheckBox);
@@ -209,14 +212,14 @@ public:
         gridLayout_2->addItem(verticalSpacer, 5, 1, 1, 1);
 
         horizontalLayout_6 = new QHBoxLayout();
-        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
         label_5 = new QLabel(MolecularSurfacesConfigurator);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setObjectName(QStringLiteral("label_5"));
 
         horizontalLayout_6->addWidget(label_5);
 
         quality = new QSlider(MolecularSurfacesConfigurator);
-        quality->setObjectName(QString::fromUtf8("quality"));
+        quality->setObjectName(QStringLiteral("quality"));
         sizePolicy1.setHeightForWidth(quality->sizePolicy().hasHeightForWidth());
         quality->setSizePolicy(sizePolicy1);
         quality->setMinimum(1);
@@ -231,7 +234,7 @@ public:
         horizontalLayout_6->addWidget(quality);
 
         label_6 = new QLabel(MolecularSurfacesConfigurator);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
+        label_6->setObjectName(QStringLiteral("label_6"));
 
         horizontalLayout_6->addWidget(label_6);
 
@@ -239,12 +242,12 @@ public:
         gridLayout_2->addLayout(horizontalLayout_6, 2, 1, 1, 1);
 
         isovalueLabel = new QLabel(MolecularSurfacesConfigurator);
-        isovalueLabel->setObjectName(QString::fromUtf8("isovalueLabel"));
+        isovalueLabel->setObjectName(QStringLiteral("isovalueLabel"));
 
         gridLayout_2->addWidget(isovalueLabel, 1, 0, 1, 1);
 
         label_7 = new QLabel(MolecularSurfacesConfigurator);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
+        label_7->setObjectName(QStringLiteral("label_7"));
         QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
@@ -268,7 +271,7 @@ public:
 
     void retranslateUi(QDialog *MolecularSurfacesConfigurator)
     {
-        MolecularSurfacesConfigurator->setWindowTitle(QApplication::translate("MolecularSurfacesConfigurator", "Add Surface", nullptr));
+        MolecularSurfacesConfigurator->setWindowTitle(QApplication::translate("MolecularSurfacesConfigurator", "Add Surface", Q_NULLPTR));
         MolecularSurfacesConfigurator->setStyleSheet(QApplication::translate("MolecularSurfacesConfigurator", "QToolButton {\n"
 "   color: #333;\n"
 "   background-color: #666;\n"
@@ -286,21 +289,21 @@ public:
 "QToolButton:pressed {\n"
 "   border-color: #222;\n"
 "}\n"
-"", nullptr));
+"", Q_NULLPTR));
         negativeColorButton->setText(QString());
-        negativeLabel->setText(QApplication::translate("MolecularSurfacesConfigurator", "Negative", nullptr));
+        negativeLabel->setText(QApplication::translate("MolecularSurfacesConfigurator", "Negative", Q_NULLPTR));
         positiveColorButton->setText(QString());
-        label_9->setText(QApplication::translate("MolecularSurfacesConfigurator", "Positive", nullptr));
-        cancelButton->setText(QApplication::translate("MolecularSurfacesConfigurator", "Cancel", nullptr));
-        calculateButton->setText(QApplication::translate("MolecularSurfacesConfigurator", "Calculate", nullptr));
-        label_4->setText(QApplication::translate("MolecularSurfacesConfigurator", "Quality:", nullptr));
-        label->setText(QApplication::translate("MolecularSurfacesConfigurator", "Opacity:", nullptr));
-        label_12->setText(QApplication::translate("MolecularSurfacesConfigurator", "Colors: ", nullptr));
-        simplifyMeshCheckBox->setText(QApplication::translate("MolecularSurfacesConfigurator", "Simplify Mesh", nullptr));
-        label_5->setText(QApplication::translate("MolecularSurfacesConfigurator", "Low", nullptr));
-        label_6->setText(QApplication::translate("MolecularSurfacesConfigurator", "High", nullptr));
-        isovalueLabel->setText(QApplication::translate("MolecularSurfacesConfigurator", "Isovalue:", nullptr));
-        label_7->setText(QApplication::translate("MolecularSurfacesConfigurator", "Type:", nullptr));
+        label_9->setText(QApplication::translate("MolecularSurfacesConfigurator", "Positive", Q_NULLPTR));
+        cancelButton->setText(QApplication::translate("MolecularSurfacesConfigurator", "Cancel", Q_NULLPTR));
+        calculateButton->setText(QApplication::translate("MolecularSurfacesConfigurator", "Calculate", Q_NULLPTR));
+        label_4->setText(QApplication::translate("MolecularSurfacesConfigurator", "Quality:", Q_NULLPTR));
+        label->setText(QApplication::translate("MolecularSurfacesConfigurator", "Opacity:", Q_NULLPTR));
+        label_12->setText(QApplication::translate("MolecularSurfacesConfigurator", "Colors: ", Q_NULLPTR));
+        simplifyMeshCheckBox->setText(QApplication::translate("MolecularSurfacesConfigurator", "Simplify Mesh", Q_NULLPTR));
+        label_5->setText(QApplication::translate("MolecularSurfacesConfigurator", "Low", Q_NULLPTR));
+        label_6->setText(QApplication::translate("MolecularSurfacesConfigurator", "High", Q_NULLPTR));
+        isovalueLabel->setText(QApplication::translate("MolecularSurfacesConfigurator", "Isovalue:", Q_NULLPTR));
+        label_7->setText(QApplication::translate("MolecularSurfacesConfigurator", "Type:", Q_NULLPTR));
     } // retranslateUi
 
 };

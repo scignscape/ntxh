@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ProgressDialog.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,9 +10,12 @@
 #define UI_PROGRESSDIALOG_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
@@ -36,14 +39,14 @@ public:
     void setupUi(QDialog *ProgressDialog)
     {
         if (ProgressDialog->objectName().isEmpty())
-            ProgressDialog->setObjectName(QString::fromUtf8("ProgressDialog"));
+            ProgressDialog->setObjectName(QStringLiteral("ProgressDialog"));
         ProgressDialog->resize(347, 114);
         verticalLayout = new QVBoxLayout(ProgressDialog);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         label = new QLabel(ProgressDialog);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         horizontalLayout->addWidget(label);
 
@@ -55,19 +58,19 @@ public:
         verticalLayout->addLayout(horizontalLayout);
 
         progressBar = new QProgressBar(ProgressDialog);
-        progressBar->setObjectName(QString::fromUtf8("progressBar"));
+        progressBar->setObjectName(QStringLiteral("progressBar"));
         progressBar->setValue(0);
 
         verticalLayout->addWidget(progressBar);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer);
 
         abortButton = new QPushButton(ProgressDialog);
-        abortButton->setObjectName(QString::fromUtf8("abortButton"));
+        abortButton->setObjectName(QStringLiteral("abortButton"));
 
         horizontalLayout_2->addWidget(abortButton);
 
@@ -82,9 +85,9 @@ public:
 
     void retranslateUi(QDialog *ProgressDialog)
     {
-        ProgressDialog->setWindowTitle(QApplication::translate("ProgressDialog", "Dialog", nullptr));
-        label->setText(QApplication::translate("ProgressDialog", "TextLabel", nullptr));
-        abortButton->setText(QApplication::translate("ProgressDialog", "Abort", nullptr));
+        ProgressDialog->setWindowTitle(QApplication::translate("ProgressDialog", "Dialog", Q_NULLPTR));
+        label->setText(QApplication::translate("ProgressDialog", "TextLabel", Q_NULLPTR));
+        abortButton->setText(QApplication::translate("ProgressDialog", "Abort", Q_NULLPTR));
     } // retranslateUi
 
 };

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'OptionListEditor.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,11 +10,14 @@
 #define UI_OPTIONLISTEDITOR_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
@@ -45,27 +48,27 @@ public:
     void setupUi(QDialog *OptionListEditor)
     {
         if (OptionListEditor->objectName().isEmpty())
-            OptionListEditor->setObjectName(QString::fromUtf8("OptionListEditor"));
+            OptionListEditor->setObjectName(QStringLiteral("OptionListEditor"));
         OptionListEditor->resize(366, 352);
         vboxLayout = new QVBoxLayout(OptionListEditor);
-        vboxLayout->setObjectName(QString::fromUtf8("vboxLayout"));
+        vboxLayout->setObjectName(QStringLiteral("vboxLayout"));
         frame = new QFrame(OptionListEditor);
-        frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setObjectName(QStringLiteral("frame"));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Sunken);
         hboxLayout = new QHBoxLayout(frame);
-        hboxLayout->setObjectName(QString::fromUtf8("hboxLayout"));
+        hboxLayout->setObjectName(QStringLiteral("hboxLayout"));
         groupBox = new QGroupBox(frame);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setObjectName(QStringLiteral("groupBox"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(1);
         sizePolicy.setVerticalStretch(1);
         sizePolicy.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
         groupBox->setSizePolicy(sizePolicy);
         vboxLayout1 = new QVBoxLayout(groupBox);
-        vboxLayout1->setObjectName(QString::fromUtf8("vboxLayout1"));
+        vboxLayout1->setObjectName(QStringLiteral("vboxLayout1"));
         optionList = new QListWidget(groupBox);
-        optionList->setObjectName(QString::fromUtf8("optionList"));
+        optionList->setObjectName(QStringLiteral("optionList"));
 
         vboxLayout1->addWidget(optionList);
 
@@ -73,13 +76,13 @@ public:
         hboxLayout->addWidget(groupBox);
 
         vboxLayout2 = new QVBoxLayout();
-        vboxLayout2->setObjectName(QString::fromUtf8("vboxLayout2"));
+        vboxLayout2->setObjectName(QStringLiteral("vboxLayout2"));
         spacerItem = new QSpacerItem(20, 10, QSizePolicy::Minimum, QSizePolicy::Fixed);
 
         vboxLayout2->addItem(spacerItem);
 
         addButton = new QPushButton(frame);
-        addButton->setObjectName(QString::fromUtf8("addButton"));
+        addButton->setObjectName(QStringLiteral("addButton"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -89,7 +92,7 @@ public:
         vboxLayout2->addWidget(addButton);
 
         deleteButton = new QPushButton(frame);
-        deleteButton->setObjectName(QString::fromUtf8("deleteButton"));
+        deleteButton->setObjectName(QStringLiteral("deleteButton"));
         sizePolicy1.setHeightForWidth(deleteButton->sizePolicy().hasHeightForWidth());
         deleteButton->setSizePolicy(sizePolicy1);
 
@@ -100,14 +103,14 @@ public:
         vboxLayout2->addItem(spacerItem1);
 
         upButton = new QPushButton(frame);
-        upButton->setObjectName(QString::fromUtf8("upButton"));
+        upButton->setObjectName(QStringLiteral("upButton"));
         sizePolicy1.setHeightForWidth(upButton->sizePolicy().hasHeightForWidth());
         upButton->setSizePolicy(sizePolicy1);
 
         vboxLayout2->addWidget(upButton);
 
         downButton = new QPushButton(frame);
-        downButton->setObjectName(QString::fromUtf8("downButton"));
+        downButton->setObjectName(QStringLiteral("downButton"));
         sizePolicy1.setHeightForWidth(downButton->sizePolicy().hasHeightForWidth());
         downButton->setSizePolicy(sizePolicy1);
 
@@ -118,14 +121,14 @@ public:
         vboxLayout2->addItem(spacerItem2);
 
         okButton = new QPushButton(frame);
-        okButton->setObjectName(QString::fromUtf8("okButton"));
+        okButton->setObjectName(QStringLiteral("okButton"));
         sizePolicy1.setHeightForWidth(okButton->sizePolicy().hasHeightForWidth());
         okButton->setSizePolicy(sizePolicy1);
 
         vboxLayout2->addWidget(okButton);
 
         cancelButton = new QPushButton(frame);
-        cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
+        cancelButton->setObjectName(QStringLiteral("cancelButton"));
         sizePolicy1.setHeightForWidth(cancelButton->sizePolicy().hasHeightForWidth());
         cancelButton->setSizePolicy(sizePolicy1);
 
@@ -147,14 +150,14 @@ public:
 
     void retranslateUi(QDialog *OptionListEditor)
     {
-        OptionListEditor->setWindowTitle(QApplication::translate("OptionListEditor", "Dialog", nullptr));
-        groupBox->setTitle(QApplication::translate("OptionListEditor", "Options", nullptr));
-        addButton->setText(QApplication::translate("OptionListEditor", "Add", nullptr));
-        deleteButton->setText(QApplication::translate("OptionListEditor", "Delete", nullptr));
-        upButton->setText(QApplication::translate("OptionListEditor", "Move Up", nullptr));
-        downButton->setText(QApplication::translate("OptionListEditor", "Move Down", nullptr));
-        okButton->setText(QApplication::translate("OptionListEditor", "OK", nullptr));
-        cancelButton->setText(QApplication::translate("OptionListEditor", "Cancel", nullptr));
+        OptionListEditor->setWindowTitle(QApplication::translate("OptionListEditor", "Dialog", Q_NULLPTR));
+        groupBox->setTitle(QApplication::translate("OptionListEditor", "Options", Q_NULLPTR));
+        addButton->setText(QApplication::translate("OptionListEditor", "Add", Q_NULLPTR));
+        deleteButton->setText(QApplication::translate("OptionListEditor", "Delete", Q_NULLPTR));
+        upButton->setText(QApplication::translate("OptionListEditor", "Move Up", Q_NULLPTR));
+        downButton->setText(QApplication::translate("OptionListEditor", "Move Down", Q_NULLPTR));
+        okButton->setText(QApplication::translate("OptionListEditor", "OK", Q_NULLPTR));
+        cancelButton->setText(QApplication::translate("OptionListEditor", "Cancel", Q_NULLPTR));
     } // retranslateUi
 
 };

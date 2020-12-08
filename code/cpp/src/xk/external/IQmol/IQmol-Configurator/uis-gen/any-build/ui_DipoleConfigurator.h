@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'DipoleConfigurator.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,10 +10,13 @@
 #define UI_DIPOLECONFIGURATOR_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
@@ -44,14 +47,14 @@ public:
     void setupUi(QDialog *DipoleConfigurator)
     {
         if (DipoleConfigurator->objectName().isEmpty())
-            DipoleConfigurator->setObjectName(QString::fromUtf8("DipoleConfigurator"));
+            DipoleConfigurator->setObjectName(QStringLiteral("DipoleConfigurator"));
         DipoleConfigurator->resize(386, 169);
         QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(DipoleConfigurator->sizePolicy().hasHeightForWidth());
         DipoleConfigurator->setSizePolicy(sizePolicy);
-        DipoleConfigurator->setStyleSheet(QString::fromUtf8("QToolButton {\n"
+        DipoleConfigurator->setStyleSheet(QLatin1String("QToolButton {\n"
 "   color: #333;\n"
 "   background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, \n"
 "          stop: 0 #fff,\n"
@@ -98,16 +101,16 @@ public:
 "   font-size: 12px;\n"
 "}"));
         verticalLayout = new QVBoxLayout(DipoleConfigurator);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         dipoleLabel = new QLabel(DipoleConfigurator);
-        dipoleLabel->setObjectName(QString::fromUtf8("dipoleLabel"));
+        dipoleLabel->setObjectName(QStringLiteral("dipoleLabel"));
 
         gridLayout->addWidget(dipoleLabel, 0, 1, 1, 1);
 
         label_2 = new QLabel(DipoleConfigurator);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         gridLayout->addWidget(label_2, 0, 0, 1, 1);
 
@@ -116,7 +119,7 @@ public:
         gridLayout->addItem(horizontalSpacer_2, 0, 2, 1, 1);
 
         dipoleVector = new QLabel(DipoleConfigurator);
-        dipoleVector->setObjectName(QString::fromUtf8("dipoleVector"));
+        dipoleVector->setObjectName(QStringLiteral("dipoleVector"));
 
         gridLayout->addWidget(dipoleVector, 1, 1, 1, 1);
 
@@ -124,14 +127,14 @@ public:
         verticalLayout->addLayout(gridLayout);
 
         horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         label = new QLabel(DipoleConfigurator);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         horizontalLayout_3->addWidget(label);
 
         scaleSlider = new QSlider(DipoleConfigurator);
-        scaleSlider->setObjectName(QString::fromUtf8("scaleSlider"));
+        scaleSlider->setObjectName(QStringLiteral("scaleSlider"));
         scaleSlider->setMinimum(1);
         scaleSlider->setMaximum(100);
         scaleSlider->setValue(25);
@@ -140,12 +143,12 @@ public:
         horizontalLayout_3->addWidget(scaleSlider);
 
         label_4 = new QLabel(DipoleConfigurator);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setObjectName(QStringLiteral("label_4"));
 
         horizontalLayout_3->addWidget(label_4);
 
         colorButton = new QToolButton(DipoleConfigurator);
-        colorButton->setObjectName(QString::fromUtf8("colorButton"));
+        colorButton->setObjectName(QStringLiteral("colorButton"));
 
         horizontalLayout_3->addWidget(colorButton);
 
@@ -153,13 +156,13 @@ public:
         verticalLayout->addLayout(horizontalLayout_3);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
 
         closeButton = new QPushButton(DipoleConfigurator);
-        closeButton->setObjectName(QString::fromUtf8("closeButton"));
+        closeButton->setObjectName(QStringLiteral("closeButton"));
         closeButton->setAutoDefault(false);
 
         horizontalLayout->addWidget(closeButton);
@@ -176,20 +179,20 @@ public:
 
     void retranslateUi(QDialog *DipoleConfigurator)
     {
-        DipoleConfigurator->setWindowTitle(QApplication::translate("DipoleConfigurator", "Dipole Options", nullptr));
-        dipoleLabel->setText(QApplication::translate("DipoleConfigurator", "value", nullptr));
-        label_2->setText(QApplication::translate("DipoleConfigurator", "Dipole:   ", nullptr));
-        dipoleVector->setText(QApplication::translate("DipoleConfigurator", "vector", nullptr));
-        label->setText(QApplication::translate("DipoleConfigurator", "Scale", nullptr));
+        DipoleConfigurator->setWindowTitle(QApplication::translate("DipoleConfigurator", "Dipole Options", Q_NULLPTR));
+        dipoleLabel->setText(QApplication::translate("DipoleConfigurator", "value", Q_NULLPTR));
+        label_2->setText(QApplication::translate("DipoleConfigurator", "Dipole:   ", Q_NULLPTR));
+        dipoleVector->setText(QApplication::translate("DipoleConfigurator", "vector", Q_NULLPTR));
+        label->setText(QApplication::translate("DipoleConfigurator", "Scale", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
         scaleSlider->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
-        label_4->setText(QApplication::translate("DipoleConfigurator", "Color", nullptr));
+        label_4->setText(QApplication::translate("DipoleConfigurator", "Color", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
         colorButton->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
         colorButton->setText(QString());
-        closeButton->setText(QApplication::translate("DipoleConfigurator", "Close", nullptr));
+        closeButton->setText(QApplication::translate("DipoleConfigurator", "Close", Q_NULLPTR));
     } // retranslateUi
 
 };

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'TransitionStateTab.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,8 +10,11 @@
 #define UI_TRANSITIONSTATETAB_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSpinBox>
@@ -33,19 +36,19 @@ public:
     void setupUi(QWidget *TransitionStateTab)
     {
         if (TransitionStateTab->objectName().isEmpty())
-            TransitionStateTab->setObjectName(QString::fromUtf8("TransitionStateTab"));
+            TransitionStateTab->setObjectName(QStringLiteral("TransitionStateTab"));
         TransitionStateTab->resize(298, 74);
         verticalLayout = new QVBoxLayout(TransitionStateTab);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout_27 = new QHBoxLayout();
-        horizontalLayout_27->setObjectName(QString::fromUtf8("horizontalLayout_27"));
+        horizontalLayout_27->setObjectName(QStringLiteral("horizontalLayout_27"));
         label_212 = new QLabel(TransitionStateTab);
-        label_212->setObjectName(QString::fromUtf8("label_212"));
+        label_212->setObjectName(QStringLiteral("label_212"));
 
         horizontalLayout_27->addWidget(label_212);
 
         geom_opt_mode = new QSpinBox(TransitionStateTab);
-        geom_opt_mode->setObjectName(QString::fromUtf8("geom_opt_mode"));
+        geom_opt_mode->setObjectName(QStringLiteral("geom_opt_mode"));
 
         horizontalLayout_27->addWidget(geom_opt_mode);
 
@@ -68,8 +71,8 @@ public:
 
     void retranslateUi(QWidget *TransitionStateTab)
     {
-        TransitionStateTab->setWindowTitle(QApplication::translate("TransitionStateTab", "Form", nullptr));
-        label_212->setText(QApplication::translate("TransitionStateTab", "Follow Mode", nullptr));
+        TransitionStateTab->setWindowTitle(QApplication::translate("TransitionStateTab", "Form", Q_NULLPTR));
+        label_212->setText(QApplication::translate("TransitionStateTab", "Follow Mode", Q_NULLPTR));
     } // retranslateUi
 
 };

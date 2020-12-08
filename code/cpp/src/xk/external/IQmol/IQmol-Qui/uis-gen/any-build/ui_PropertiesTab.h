@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'PropertiesTab.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,10 +10,13 @@
 #define UI_PROPERTIESTAB_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
@@ -35,24 +38,24 @@ public:
     void setupUi(QWidget *PropertiesTab)
     {
         if (PropertiesTab->objectName().isEmpty())
-            PropertiesTab->setObjectName(QString::fromUtf8("PropertiesTab"));
+            PropertiesTab->setObjectName(QStringLiteral("PropertiesTab"));
         PropertiesTab->resize(332, 75);
         verticalLayout = new QVBoxLayout(PropertiesTab);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         _7 = new QHBoxLayout();
-        _7->setObjectName(QString::fromUtf8("_7"));
+        _7->setObjectName(QStringLiteral("_7"));
         label_169 = new QLabel(PropertiesTab);
-        label_169->setObjectName(QString::fromUtf8("label_169"));
+        label_169->setObjectName(QStringLiteral("label_169"));
 
         _7->addWidget(label_169);
 
         moprop = new QComboBox(PropertiesTab);
-        moprop->setObjectName(QString::fromUtf8("moprop"));
+        moprop->setObjectName(QStringLiteral("moprop"));
 
         _7->addWidget(moprop);
 
         moprop_save_last_gpx = new QCheckBox(PropertiesTab);
-        moprop_save_last_gpx->setObjectName(QString::fromUtf8("moprop_save_last_gpx"));
+        moprop_save_last_gpx->setObjectName(QStringLiteral("moprop_save_last_gpx"));
 
         _7->addWidget(moprop_save_last_gpx);
 
@@ -75,9 +78,9 @@ public:
 
     void retranslateUi(QWidget *PropertiesTab)
     {
-        PropertiesTab->setWindowTitle(QApplication::translate("PropertiesTab", "Form", nullptr));
-        label_169->setText(QApplication::translate("PropertiesTab", "Property", nullptr));
-        moprop_save_last_gpx->setText(QApplication::translate("PropertiesTab", "Save G[Px] Data", nullptr));
+        PropertiesTab->setWindowTitle(QApplication::translate("PropertiesTab", "Form", Q_NULLPTR));
+        label_169->setText(QApplication::translate("PropertiesTab", "Property", Q_NULLPTR));
+        moprop_save_last_gpx->setText(QApplication::translate("PropertiesTab", "Save G[Px] Data", Q_NULLPTR));
     } // retranslateUi
 
 };

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'NmrConfigurator.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,7 +10,9 @@
 #define UI_NMRCONFIGURATOR_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QFrame>
@@ -53,7 +55,7 @@ public:
     void setupUi(QDialog *NmrConfigurator)
     {
         if (NmrConfigurator->objectName().isEmpty())
-            NmrConfigurator->setObjectName(QString::fromUtf8("NmrConfigurator"));
+            NmrConfigurator->setObjectName(QStringLiteral("NmrConfigurator"));
         NmrConfigurator->resize(935, 438);
         QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
         sizePolicy.setHorizontalStretch(0);
@@ -61,7 +63,7 @@ public:
         sizePolicy.setHeightForWidth(NmrConfigurator->sizePolicy().hasHeightForWidth());
         NmrConfigurator->setSizePolicy(sizePolicy);
         NmrConfigurator->setToolTipDuration(0);
-        NmrConfigurator->setStyleSheet(QString::fromUtf8("QToolButton {\n"
+        NmrConfigurator->setStyleSheet(QLatin1String("QToolButton {\n"
 "   color: #333;\n"
 "   background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, \n"
 "          stop: 0 #fff,\n"
@@ -108,9 +110,9 @@ public:
 "   font-size: 12px;\n"
 "}"));
         horizontalLayout_2 = new QHBoxLayout(NmrConfigurator);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         shieldingsTable = new QTableWidget(NmrConfigurator);
         if (shieldingsTable->columnCount() < 3)
             shieldingsTable->setColumnCount(3);
@@ -120,7 +122,7 @@ public:
         shieldingsTable->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
         shieldingsTable->setHorizontalHeaderItem(2, __qtablewidgetitem2);
-        shieldingsTable->setObjectName(QString::fromUtf8("shieldingsTable"));
+        shieldingsTable->setObjectName(QStringLiteral("shieldingsTable"));
         QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Expanding);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -140,42 +142,34 @@ public:
         verticalLayout->addWidget(shieldingsTable);
 
         gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         systemCombo = new QComboBox(NmrConfigurator);
-        systemCombo->setObjectName(QString::fromUtf8("systemCombo"));
+        systemCombo->setObjectName(QStringLiteral("systemCombo"));
 
         gridLayout->addWidget(systemCombo, 1, 1, 1, 1);
 
         label = new QLabel(NmrConfigurator);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         gridLayout->addWidget(label, 0, 0, 1, 1);
 
         label_3 = new QLabel(NmrConfigurator);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName(QStringLiteral("label_3"));
 
         gridLayout->addWidget(label_3, 1, 0, 1, 1);
 
         isotopeCombo = new QComboBox(NmrConfigurator);
-        isotopeCombo->addItem(QString());
-        isotopeCombo->addItem(QString());
-        isotopeCombo->addItem(QString());
-        isotopeCombo->addItem(QString());
-        isotopeCombo->addItem(QString());
-        isotopeCombo->addItem(QString());
-        isotopeCombo->addItem(QString());
-        isotopeCombo->addItem(QString());
-        isotopeCombo->setObjectName(QString::fromUtf8("isotopeCombo"));
+        isotopeCombo->setObjectName(QStringLiteral("isotopeCombo"));
 
         gridLayout->addWidget(isotopeCombo, 0, 1, 1, 1);
 
         label_2 = new QLabel(NmrConfigurator);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         gridLayout->addWidget(label_2, 2, 0, 1, 1);
 
         methodCombo = new QComboBox(NmrConfigurator);
-        methodCombo->setObjectName(QString::fromUtf8("methodCombo"));
+        methodCombo->setObjectName(QStringLiteral("methodCombo"));
 
         gridLayout->addWidget(methodCombo, 2, 1, 1, 1);
 
@@ -186,9 +180,9 @@ public:
         horizontalLayout_2->addLayout(verticalLayout);
 
         verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         spectrumFrame = new QFrame(NmrConfigurator);
-        spectrumFrame->setObjectName(QString::fromUtf8("spectrumFrame"));
+        spectrumFrame->setObjectName(QStringLiteral("spectrumFrame"));
         QSizePolicy sizePolicy2(QSizePolicy::MinimumExpanding, QSizePolicy::Expanding);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
@@ -202,25 +196,25 @@ public:
         verticalLayout_2->addWidget(spectrumFrame);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         impulseButton = new QRadioButton(NmrConfigurator);
-        impulseButton->setObjectName(QString::fromUtf8("impulseButton"));
+        impulseButton->setObjectName(QStringLiteral("impulseButton"));
         impulseButton->setChecked(true);
 
         horizontalLayout->addWidget(impulseButton);
 
         lorentzianButton = new QRadioButton(NmrConfigurator);
-        lorentzianButton->setObjectName(QString::fromUtf8("lorentzianButton"));
+        lorentzianButton->setObjectName(QStringLiteral("lorentzianButton"));
 
         horizontalLayout->addWidget(lorentzianButton);
 
         widthLabel = new QLabel(NmrConfigurator);
-        widthLabel->setObjectName(QString::fromUtf8("widthLabel"));
+        widthLabel->setObjectName(QStringLiteral("widthLabel"));
 
         horizontalLayout->addWidget(widthLabel);
 
         widthSlider = new QSlider(NmrConfigurator);
-        widthSlider->setObjectName(QString::fromUtf8("widthSlider"));
+        widthSlider->setObjectName(QStringLiteral("widthSlider"));
         widthSlider->setMinimum(1);
         widthSlider->setMaximum(100);
         widthSlider->setValue(30);
@@ -233,7 +227,7 @@ public:
         horizontalLayout->addItem(horizontalSpacer);
 
         closeButton = new QPushButton(NmrConfigurator);
-        closeButton->setObjectName(QString::fromUtf8("closeButton"));
+        closeButton->setObjectName(QStringLiteral("closeButton"));
         closeButton->setAutoDefault(false);
 
         horizontalLayout->addWidget(closeButton);
@@ -254,29 +248,31 @@ public:
 
     void retranslateUi(QDialog *NmrConfigurator)
     {
-        NmrConfigurator->setWindowTitle(QApplication::translate("NmrConfigurator", "NMR Spectrum", nullptr));
+        NmrConfigurator->setWindowTitle(QApplication::translate("NmrConfigurator", "NMR Spectrum", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem = shieldingsTable->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("NmrConfigurator", "Atom", nullptr));
+        ___qtablewidgetitem->setText(QApplication::translate("NmrConfigurator", "Atom", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem1 = shieldingsTable->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("NmrConfigurator", "Shielding", nullptr));
+        ___qtablewidgetitem1->setText(QApplication::translate("NmrConfigurator", "Shielding", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem2 = shieldingsTable->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("NmrConfigurator", "Chem. Shift", nullptr));
-        label->setText(QApplication::translate("NmrConfigurator", "Spectrum", nullptr));
-        label_3->setText(QApplication::translate("NmrConfigurator", "Reference", nullptr));
-        isotopeCombo->setItemText(0, QApplication::translate("NmrConfigurator", "Shieldings", nullptr));
-        isotopeCombo->setItemText(1, QApplication::translate("NmrConfigurator", "Proton (1H)", nullptr));
-        isotopeCombo->setItemText(2, QApplication::translate("NmrConfigurator", "Boron (11B)", nullptr));
-        isotopeCombo->setItemText(3, QApplication::translate("NmrConfigurator", "Carbon (13C)", nullptr));
-        isotopeCombo->setItemText(4, QApplication::translate("NmrConfigurator", "Nitrogen (15N)", nullptr));
-        isotopeCombo->setItemText(5, QApplication::translate("NmrConfigurator", "Flourine (19F)", nullptr));
-        isotopeCombo->setItemText(6, QApplication::translate("NmrConfigurator", "Silicon (29Si)", nullptr));
-        isotopeCombo->setItemText(7, QApplication::translate("NmrConfigurator", "Phosphorous (31P)", nullptr));
-
-        label_2->setText(QApplication::translate("NmrConfigurator", "Method", nullptr));
-        impulseButton->setText(QApplication::translate("NmrConfigurator", "Impulse", nullptr));
-        lorentzianButton->setText(QApplication::translate("NmrConfigurator", "Spectrum", nullptr));
-        widthLabel->setText(QApplication::translate("NmrConfigurator", "Width", nullptr));
-        closeButton->setText(QApplication::translate("NmrConfigurator", "Close", nullptr));
+        ___qtablewidgetitem2->setText(QApplication::translate("NmrConfigurator", "Chem. Shift", Q_NULLPTR));
+        label->setText(QApplication::translate("NmrConfigurator", "Spectrum", Q_NULLPTR));
+        label_3->setText(QApplication::translate("NmrConfigurator", "Reference", Q_NULLPTR));
+        isotopeCombo->clear();
+        isotopeCombo->insertItems(0, QStringList()
+         << QApplication::translate("NmrConfigurator", "Shieldings", Q_NULLPTR)
+         << QApplication::translate("NmrConfigurator", "Proton (1H)", Q_NULLPTR)
+         << QApplication::translate("NmrConfigurator", "Boron (11B)", Q_NULLPTR)
+         << QApplication::translate("NmrConfigurator", "Carbon (13C)", Q_NULLPTR)
+         << QApplication::translate("NmrConfigurator", "Nitrogen (15N)", Q_NULLPTR)
+         << QApplication::translate("NmrConfigurator", "Flourine (19F)", Q_NULLPTR)
+         << QApplication::translate("NmrConfigurator", "Silicon (29Si)", Q_NULLPTR)
+         << QApplication::translate("NmrConfigurator", "Phosphorous (31P)", Q_NULLPTR)
+        );
+        label_2->setText(QApplication::translate("NmrConfigurator", "Method", Q_NULLPTR));
+        impulseButton->setText(QApplication::translate("NmrConfigurator", "Impulse", Q_NULLPTR));
+        lorentzianButton->setText(QApplication::translate("NmrConfigurator", "Spectrum", Q_NULLPTR));
+        widthLabel->setText(QApplication::translate("NmrConfigurator", "Width", Q_NULLPTR));
+        closeButton->setText(QApplication::translate("NmrConfigurator", "Close", Q_NULLPTR));
     } // retranslateUi
 
 };

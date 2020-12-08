@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'AttenuationParameterTab.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,9 +10,12 @@
 #define UI_ATTENUATIONPARAMETERTAB_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
@@ -33,19 +36,19 @@ public:
     void setupUi(QWidget *AttenuationParameterTab)
     {
         if (AttenuationParameterTab->objectName().isEmpty())
-            AttenuationParameterTab->setObjectName(QString::fromUtf8("AttenuationParameterTab"));
+            AttenuationParameterTab->setObjectName(QStringLiteral("AttenuationParameterTab"));
         AttenuationParameterTab->resize(302, 84);
         verticalLayout = new QVBoxLayout(AttenuationParameterTab);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         label_test = new QLabel(AttenuationParameterTab);
-        label_test->setObjectName(QString::fromUtf8("label_test"));
+        label_test->setObjectName(QStringLiteral("label_test"));
 
         horizontalLayout->addWidget(label_test);
 
         omega = new QDoubleSpinBox(AttenuationParameterTab);
-        omega->setObjectName(QString::fromUtf8("omega"));
+        omega->setObjectName(QStringLiteral("omega"));
         omega->setDecimals(3);
 
         horizontalLayout->addWidget(omega);
@@ -69,8 +72,8 @@ public:
 
     void retranslateUi(QWidget *AttenuationParameterTab)
     {
-        AttenuationParameterTab->setWindowTitle(QApplication::translate("AttenuationParameterTab", "Form", nullptr));
-        label_test->setText(QApplication::translate("AttenuationParameterTab", "Omega", nullptr));
+        AttenuationParameterTab->setWindowTitle(QApplication::translate("AttenuationParameterTab", "Form", Q_NULLPTR));
+        label_test->setText(QApplication::translate("AttenuationParameterTab", "Omega", Q_NULLPTR));
     } // retranslateUi
 
 };

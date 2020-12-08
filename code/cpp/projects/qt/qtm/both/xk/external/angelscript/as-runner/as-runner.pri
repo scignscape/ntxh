@@ -15,6 +15,8 @@ include($$ROOT_DIR/../preferred/sysr.pri)
 include($$ROOT_DIR/../preferred/gui.pri)
 
 
+DEFINES += assert\\(x\\)
+
 
 INCLUDEPATH += $$SRC_DIR
 INCLUDEPATH += $$SRC_GROUP_DIR

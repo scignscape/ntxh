@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'EfpFragmentListConfigurator.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,11 +10,14 @@
 #define UI_EFPFRAGMENTLISTCONFIGURATOR_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
@@ -48,34 +51,34 @@ public:
     void setupUi(QDialog *EFPFragmentListConfigurator)
     {
         if (EFPFragmentListConfigurator->objectName().isEmpty())
-            EFPFragmentListConfigurator->setObjectName(QString::fromUtf8("EFPFragmentListConfigurator"));
+            EFPFragmentListConfigurator->setObjectName(QStringLiteral("EFPFragmentListConfigurator"));
         EFPFragmentListConfigurator->resize(279, 250);
         EFPFragmentListConfigurator->setSizeGripEnabled(false);
         verticalLayout = new QVBoxLayout(EFPFragmentListConfigurator);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         groupBox = new QGroupBox(EFPFragmentListConfigurator);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setObjectName(QStringLiteral("groupBox"));
         gridLayout_2 = new QGridLayout(groupBox);
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         ballsAndSticks = new QRadioButton(groupBox);
-        ballsAndSticks->setObjectName(QString::fromUtf8("ballsAndSticks"));
+        ballsAndSticks->setObjectName(QStringLiteral("ballsAndSticks"));
         ballsAndSticks->setChecked(false);
 
         gridLayout_2->addWidget(ballsAndSticks, 0, 0, 1, 1);
 
         tubes = new QRadioButton(groupBox);
-        tubes->setObjectName(QString::fromUtf8("tubes"));
+        tubes->setObjectName(QStringLiteral("tubes"));
         tubes->setChecked(true);
 
         gridLayout_2->addWidget(tubes, 0, 1, 1, 1);
 
         spaceFilling = new QRadioButton(groupBox);
-        spaceFilling->setObjectName(QString::fromUtf8("spaceFilling"));
+        spaceFilling->setObjectName(QStringLiteral("spaceFilling"));
 
         gridLayout_2->addWidget(spaceFilling, 1, 0, 1, 1);
 
         wireFrame = new QRadioButton(groupBox);
-        wireFrame->setObjectName(QString::fromUtf8("wireFrame"));
+        wireFrame->setObjectName(QStringLiteral("wireFrame"));
 
         gridLayout_2->addWidget(wireFrame, 1, 1, 1, 1);
 
@@ -83,16 +86,16 @@ public:
         verticalLayout->addWidget(groupBox);
 
         groupBox_2 = new QGroupBox(EFPFragmentListConfigurator);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
         gridLayout = new QGridLayout(groupBox_2);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         label_12 = new QLabel(groupBox_2);
-        label_12->setObjectName(QString::fromUtf8("label_12"));
+        label_12->setObjectName(QStringLiteral("label_12"));
 
         gridLayout->addWidget(label_12, 0, 0, 1, 1);
 
         atomRadiusScale = new QSlider(groupBox_2);
-        atomRadiusScale->setObjectName(QString::fromUtf8("atomRadiusScale"));
+        atomRadiusScale->setObjectName(QStringLiteral("atomRadiusScale"));
         atomRadiusScale->setMinimum(1);
         atomRadiusScale->setMaximum(20);
         atomRadiusScale->setPageStep(1);
@@ -102,12 +105,12 @@ public:
         gridLayout->addWidget(atomRadiusScale, 0, 1, 1, 1);
 
         label_13 = new QLabel(groupBox_2);
-        label_13->setObjectName(QString::fromUtf8("label_13"));
+        label_13->setObjectName(QStringLiteral("label_13"));
 
         gridLayout->addWidget(label_13, 1, 0, 1, 1);
 
         bondRadiusScale = new QSlider(groupBox_2);
-        bondRadiusScale->setObjectName(QString::fromUtf8("bondRadiusScale"));
+        bondRadiusScale->setObjectName(QStringLiteral("bondRadiusScale"));
         bondRadiusScale->setMinimum(1);
         bondRadiusScale->setMaximum(20);
         bondRadiusScale->setPageStep(1);
@@ -120,18 +123,18 @@ public:
         verticalLayout->addWidget(groupBox_2);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_2);
 
         resetButton = new QPushButton(EFPFragmentListConfigurator);
-        resetButton->setObjectName(QString::fromUtf8("resetButton"));
+        resetButton->setObjectName(QStringLiteral("resetButton"));
 
         horizontalLayout_2->addWidget(resetButton);
 
         okButton = new QPushButton(EFPFragmentListConfigurator);
-        okButton->setObjectName(QString::fromUtf8("okButton"));
+        okButton->setObjectName(QStringLiteral("okButton"));
 
         horizontalLayout_2->addWidget(okButton);
 
@@ -150,17 +153,17 @@ public:
 
     void retranslateUi(QDialog *EFPFragmentListConfigurator)
     {
-        EFPFragmentListConfigurator->setWindowTitle(QApplication::translate("EfpFragmentListConfigurator", "Configure EFP Fragments", nullptr));
-        groupBox->setTitle(QApplication::translate("EfpFragmentListConfigurator", "Render", nullptr));
-        ballsAndSticks->setText(QApplication::translate("EfpFragmentListConfigurator", "Balls and Sticks", nullptr));
-        tubes->setText(QApplication::translate("EfpFragmentListConfigurator", "Tubes", nullptr));
-        spaceFilling->setText(QApplication::translate("EfpFragmentListConfigurator", "Space Filling", nullptr));
-        wireFrame->setText(QApplication::translate("EfpFragmentListConfigurator", "Wire Frame", nullptr));
-        groupBox_2->setTitle(QApplication::translate("EfpFragmentListConfigurator", "Scaling", nullptr));
-        label_12->setText(QApplication::translate("EfpFragmentListConfigurator", "Atom Radius", nullptr));
-        label_13->setText(QApplication::translate("EfpFragmentListConfigurator", "Bond Radius", nullptr));
-        resetButton->setText(QApplication::translate("EfpFragmentListConfigurator", "Reset", nullptr));
-        okButton->setText(QApplication::translate("EfpFragmentListConfigurator", "OK", nullptr));
+        EFPFragmentListConfigurator->setWindowTitle(QApplication::translate("EfpFragmentListConfigurator", "Configure EFP Fragments", Q_NULLPTR));
+        groupBox->setTitle(QApplication::translate("EfpFragmentListConfigurator", "Render", Q_NULLPTR));
+        ballsAndSticks->setText(QApplication::translate("EfpFragmentListConfigurator", "Balls and Sticks", Q_NULLPTR));
+        tubes->setText(QApplication::translate("EfpFragmentListConfigurator", "Tubes", Q_NULLPTR));
+        spaceFilling->setText(QApplication::translate("EfpFragmentListConfigurator", "Space Filling", Q_NULLPTR));
+        wireFrame->setText(QApplication::translate("EfpFragmentListConfigurator", "Wire Frame", Q_NULLPTR));
+        groupBox_2->setTitle(QApplication::translate("EfpFragmentListConfigurator", "Scaling", Q_NULLPTR));
+        label_12->setText(QApplication::translate("EfpFragmentListConfigurator", "Atom Radius", Q_NULLPTR));
+        label_13->setText(QApplication::translate("EfpFragmentListConfigurator", "Bond Radius", Q_NULLPTR));
+        resetButton->setText(QApplication::translate("EfpFragmentListConfigurator", "Reset", Q_NULLPTR));
+        okButton->setText(QApplication::translate("EfpFragmentListConfigurator", "OK", Q_NULLPTR));
     } // retranslateUi
 
 };

@@ -137,7 +137,7 @@ QMAKE_LFLAGS += $$SRC_DIR/Main/symmol.o
 LIBS += -lgfortran
 
 
-LIBS += -L/media/mint/MainVolume/IQmol/libssh2-master/bin/src/ -lssh2
+LIBS += -lssh2
 
 LIBS += -lGLU
 

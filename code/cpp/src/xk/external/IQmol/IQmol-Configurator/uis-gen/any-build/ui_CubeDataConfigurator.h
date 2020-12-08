@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'CubeDataConfigurator.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,11 +10,14 @@
 #define UI_CUBEDATACONFIGURATOR_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
@@ -50,7 +53,7 @@ public:
     void setupUi(QDialog *CubeDataConfigurator)
     {
         if (CubeDataConfigurator->objectName().isEmpty())
-            CubeDataConfigurator->setObjectName(QString::fromUtf8("CubeDataConfigurator"));
+            CubeDataConfigurator->setObjectName(QStringLiteral("CubeDataConfigurator"));
         CubeDataConfigurator->resize(331, 184);
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
@@ -58,21 +61,21 @@ public:
         sizePolicy.setHeightForWidth(CubeDataConfigurator->sizePolicy().hasHeightForWidth());
         CubeDataConfigurator->setSizePolicy(sizePolicy);
         verticalLayout = new QVBoxLayout(CubeDataConfigurator);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         label_3 = new QLabel(CubeDataConfigurator);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName(QStringLiteral("label_3"));
 
         horizontalLayout_5->addWidget(label_3);
 
         isovalue = new QDoubleSpinBox(CubeDataConfigurator);
-        isovalue->setObjectName(QString::fromUtf8("isovalue"));
+        isovalue->setObjectName(QStringLiteral("isovalue"));
         isovalue->setDecimals(3);
-        isovalue->setMinimum(0.001000000000000);
-        isovalue->setMaximum(99.998999999999995);
-        isovalue->setSingleStep(0.001000000000000);
-        isovalue->setValue(0.020000000000000);
+        isovalue->setMinimum(0.001);
+        isovalue->setMaximum(99.999);
+        isovalue->setSingleStep(0.001);
+        isovalue->setValue(0.02);
 
         horizontalLayout_5->addWidget(isovalue);
 
@@ -84,15 +87,15 @@ public:
         verticalLayout->addLayout(horizontalLayout_5);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         signedButton = new QCheckBox(CubeDataConfigurator);
-        signedButton->setObjectName(QString::fromUtf8("signedButton"));
+        signedButton->setObjectName(QStringLiteral("signedButton"));
         signedButton->setChecked(true);
 
         horizontalLayout->addWidget(signedButton);
 
         simplifyMeshCheckBox = new QCheckBox(CubeDataConfigurator);
-        simplifyMeshCheckBox->setObjectName(QString::fromUtf8("simplifyMeshCheckBox"));
+        simplifyMeshCheckBox->setObjectName(QStringLiteral("simplifyMeshCheckBox"));
         simplifyMeshCheckBox->setChecked(true);
 
         horizontalLayout->addWidget(simplifyMeshCheckBox);
@@ -105,15 +108,15 @@ public:
         verticalLayout->addLayout(horizontalLayout);
 
         horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         label_12 = new QLabel(CubeDataConfigurator);
-        label_12->setObjectName(QString::fromUtf8("label_12"));
+        label_12->setObjectName(QStringLiteral("label_12"));
 
         horizontalLayout_4->addWidget(label_12);
 
         negativeColorButton = new QToolButton(CubeDataConfigurator);
-        negativeColorButton->setObjectName(QString::fromUtf8("negativeColorButton"));
-        negativeColorButton->setStyleSheet(QString::fromUtf8("QToolButton {\n"
+        negativeColorButton->setObjectName(QStringLiteral("negativeColorButton"));
+        negativeColorButton->setStyleSheet(QLatin1String("QToolButton {\n"
 "   background-color: rgb(255, 0, 0);\n"
 "}"));
         negativeColorButton->setIconSize(QSize(32, 16));
@@ -121,13 +124,13 @@ public:
         horizontalLayout_4->addWidget(negativeColorButton);
 
         negativeLabel = new QLabel(CubeDataConfigurator);
-        negativeLabel->setObjectName(QString::fromUtf8("negativeLabel"));
+        negativeLabel->setObjectName(QStringLiteral("negativeLabel"));
 
         horizontalLayout_4->addWidget(negativeLabel);
 
         positiveColorButton = new QToolButton(CubeDataConfigurator);
-        positiveColorButton->setObjectName(QString::fromUtf8("positiveColorButton"));
-        positiveColorButton->setStyleSheet(QString::fromUtf8("QToolButton {\n"
+        positiveColorButton->setObjectName(QStringLiteral("positiveColorButton"));
+        positiveColorButton->setStyleSheet(QLatin1String("QToolButton {\n"
 "   background-color: rgb(0, 0, 255);\n"
 "}"));
         positiveColorButton->setIconSize(QSize(32, 16));
@@ -135,7 +138,7 @@ public:
         horizontalLayout_4->addWidget(positiveColorButton);
 
         positiveLabel = new QLabel(CubeDataConfigurator);
-        positiveLabel->setObjectName(QString::fromUtf8("positiveLabel"));
+        positiveLabel->setObjectName(QStringLiteral("positiveLabel"));
 
         horizontalLayout_4->addWidget(positiveLabel);
 
@@ -147,19 +150,19 @@ public:
         verticalLayout->addLayout(horizontalLayout_4);
 
         horizontalLayout_8 = new QHBoxLayout();
-        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
+        horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_8->addItem(horizontalSpacer_3);
 
         cancelButton = new QPushButton(CubeDataConfigurator);
-        cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
+        cancelButton->setObjectName(QStringLiteral("cancelButton"));
         cancelButton->setAutoDefault(false);
 
         horizontalLayout_8->addWidget(cancelButton);
 
         calculateButton = new QPushButton(CubeDataConfigurator);
-        calculateButton->setObjectName(QString::fromUtf8("calculateButton"));
+        calculateButton->setObjectName(QStringLiteral("calculateButton"));
 
         horizontalLayout_8->addWidget(calculateButton);
 
@@ -178,7 +181,7 @@ public:
 
     void retranslateUi(QDialog *CubeDataConfigurator)
     {
-        CubeDataConfigurator->setWindowTitle(QApplication::translate("CubeDataConfigurator", "Add Surface", nullptr));
+        CubeDataConfigurator->setWindowTitle(QApplication::translate("CubeDataConfigurator", "Add Surface", Q_NULLPTR));
         CubeDataConfigurator->setStyleSheet(QApplication::translate("CubeDataConfigurator", "QToolButton {\n"
 "   color: #333;\n"
 "   background-color: #666;\n"
@@ -196,22 +199,22 @@ public:
 "QToolButton:pressed {\n"
 "   border-color: #222;\n"
 "}\n"
-"", nullptr));
-        label_3->setText(QApplication::translate("CubeDataConfigurator", "Isosurface Value:", nullptr));
+"", Q_NULLPTR));
+        label_3->setText(QApplication::translate("CubeDataConfigurator", "Isosurface Value:", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
         signedButton->setToolTip(QApplication::translate("CubeDataConfigurator", "A signed surface will disply both the \n"
 "positive and negative isosurfaces.  \n"
-"Uncheck if only one surface is desired.", nullptr));
+"Uncheck if only one surface is desired.", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        signedButton->setText(QApplication::translate("CubeDataConfigurator", "Signed", nullptr));
-        simplifyMeshCheckBox->setText(QApplication::translate("CubeDataConfigurator", "Simplify Mesh", nullptr));
-        label_12->setText(QApplication::translate("CubeDataConfigurator", "Colors: ", nullptr));
+        signedButton->setText(QApplication::translate("CubeDataConfigurator", "Signed", Q_NULLPTR));
+        simplifyMeshCheckBox->setText(QApplication::translate("CubeDataConfigurator", "Simplify Mesh", Q_NULLPTR));
+        label_12->setText(QApplication::translate("CubeDataConfigurator", "Colors: ", Q_NULLPTR));
         negativeColorButton->setText(QString());
-        negativeLabel->setText(QApplication::translate("CubeDataConfigurator", "Negative", nullptr));
+        negativeLabel->setText(QApplication::translate("CubeDataConfigurator", "Negative", Q_NULLPTR));
         positiveColorButton->setText(QString());
-        positiveLabel->setText(QApplication::translate("CubeDataConfigurator", "Positive", nullptr));
-        cancelButton->setText(QApplication::translate("CubeDataConfigurator", "Cancel", nullptr));
-        calculateButton->setText(QApplication::translate("CubeDataConfigurator", "Calculate", nullptr));
+        positiveLabel->setText(QApplication::translate("CubeDataConfigurator", "Positive", Q_NULLPTR));
+        cancelButton->setText(QApplication::translate("CubeDataConfigurator", "Cancel", Q_NULLPTR));
+        calculateButton->setText(QApplication::translate("CubeDataConfigurator", "Calculate", Q_NULLPTR));
     } // retranslateUi
 
 };

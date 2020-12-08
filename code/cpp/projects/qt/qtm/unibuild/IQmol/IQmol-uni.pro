@@ -30,6 +30,5 @@ SUBDIRS = \
     ../xk/external/IQmol/IQmol-Main \
 
 
-
 CONFIG += ordered
 

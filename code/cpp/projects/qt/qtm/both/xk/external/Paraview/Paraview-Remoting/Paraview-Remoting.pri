@@ -14,6 +14,7 @@ include(../build-group.pri)
 
 include($$ROOT_DIR/../preferred/sysr.pri)
 
+#?QMAKE_CXXFLAGS += mpic++
 
 include($$ROOT_DIR/../preferred/vtk.pri)
 
@@ -24,8 +25,10 @@ INCLUDEPATH += $$SRC_GROUP_DIR
 INCLUDEPATH += $$SRC_DIR/Animation
 INCLUDEPATH += $$SRC_DIR/Application
 
+INCLUDEPATH += $$SRC_GROUP_DIR/icet/src/include
 
 
+INCLUDEPATH += $$VTK_SRC_DIR/Rendering/FreeType
 INCLUDEPATH += $$VTK_SRC_DIR/Common/Core
 INCLUDEPATH += $$VTK_SRC_DIR/IO/Legacy
 INCLUDEPATH += $$VTK_SRC_DIR/IO/ExportGL2PS
@@ -41,9 +44,18 @@ INCLUDEPATH += $$VTK_SRC_DIR/Rendering/Parallel
 INCLUDEPATH += $$VTK_SRC_DIR/Filters/General
 INCLUDEPATH += $$VTK_SRC_DIR/Rendering/Label
 INCLUDEPATH += $$VTK_SRC_DIR/Rendering/ContextOpenGL2
+INCLUDEPATH += $$VTK_SRC_DIR/Parallel/MPI
+INCLUDEPATH += $$VTK_SRC_DIR/Utilities/MPI
+INCLUDEPATH += $$VTK_SRC_DIR/Rendering/VolumeOpenGL2
+INCLUDEPATH += $$VTK_SRC_DIR/Rendering/Volume
+INCLUDEPATH += $$VTK_SRC_DIR/Domains/Chemistry
+INCLUDEPATH += $$VTK_SRC_DIR/Filters/Parallel
 
 
 
+INCLUDEPATH += $$VTK_BUILD_DIR/Domains/Chemistry
+INCLUDEPATH += $$VTK_BUILD_DIR/Rendering/Volume
+INCLUDEPATH += $$VTK_BUILD_DIR/Rendering/VolumeOpenGL2
 INCLUDEPATH += $$VTK_BUILD_DIR/Filters/General
 INCLUDEPATH += $$VTK_BUILD_DIR/Rendering/Parallel
 INCLUDEPATH += $$VTK_BUILD_DIR/Interaction/Widgets
@@ -87,6 +99,7 @@ INCLUDEPATH += $$VTK_SRC_DIR/Utilities/PythonInterpreter
 
 
 INCLUDEPATH += $$VTK_SRC_DIR/Common/Core
+INCLUDEPATH += $$VTK_SRC_DIR/Interaction/Style
 INCLUDEPATH += $$VTK_SRC_DIR/Common/Math
 INCLUDEPATH += $$VTK_SRC_DIR/Common/ExecutionModel
 INCLUDEPATH += $$VTK_SRC_DIR/Common/DataModel
@@ -104,10 +117,11 @@ INCLUDEPATH += $$VTK_SRC_DIR/IO/Image
 INCLUDEPATH += $$VTK_SRC_DIR/Parallel/Core
 INCLUDEPATH += $$VTK_SRC_DIR/Testing/Core
 INCLUDEPATH += $$VTK_SRC_DIR/Testing/Rendering
+INCLUDEPATH += $$VTK_SRC_DIR/Filters/ParallelDIY2
+INCLUDEPATH += $$VTK_SRC_DIR/Parallel/DIY
 
 
-
-
+INCLUDEPATH += $$VTK_BUILD_DIR/Parallel/DIY
 INCLUDEPATH += $$VTK_BUILD_DIR/Common/Core
 INCLUDEPATH += $$VTK_BUILD_DIR/Common/DataModel
 INCLUDEPATH += $$VTK_BUILD_DIR/ThirdParty/jsoncpp/vtkjsoncpp/json
@@ -123,10 +137,12 @@ INCLUDEPATH += $$VTK_BUILD_DIR/Common/System
 INCLUDEPATH += $$VTK_BUILD_DIR/IO/Movie
 INCLUDEPATH += $$VTK_BUILD_DIR/Filters/Sources
 INCLUDEPATH += $$VTK_BUILD_DIR/Testing/Rendering
+INCLUDEPATH += $$VTK_BUILD_DIR/ThirdParty/diy2
+INCLUDEPATH += $$VTK_BUILD_DIR/Filters/Parallel
 
 
 
-
+INCLUDEPATH += $$VTK_SRC_DIR/ThirdParty/diy2
 INCLUDEPATH += $$VTK_SRC_DIR/Utilities/KWIML
 INCLUDEPATH += $$VTK_SRC_DIR/GUISupport/Qt
 INCLUDEPATH += $$VTK_SRC_DIR/IO/XML
@@ -143,7 +159,11 @@ INCLUDEPATH += $$VTK_SRC_DIR/Common/ComputationalGeometry
 INCLUDEPATH += $$VTK_SRC_DIR/Wrapping/PythonCore
 INCLUDEPATH += $$VTK_SRC_DIR/Filters/Sources
 INCLUDEPATH += $$VTK_SRC_DIR/Filters/Extraction
+INCLUDEPATH += $$VTK_SRC_DIR/Filters/Modeling
+INCLUDEPATH += $$VTK_SRC_DIR/Rendering/UI
 
+
+INCLUDEPATH += $$VTK_BUILD_DIR/Filters/Modeling
 INCLUDEPATH += $$VTK_BUILD_DIR/Filters/Extraction
 INCLUDEPATH += $$VTK_BUILD_DIR/ThirdParty/pugixml
 
@@ -157,6 +177,7 @@ INCLUDEPATH += $$SRC_GROUP_DIR/Paraview-VTKExtensions/IOCore
 INCLUDEPATH += $$SRC_GROUP_DIR/Paraview-VTKExtensions/Misc
 INCLUDEPATH += $$SRC_GROUP_DIR/Paraview-VTKExtensions/IOGeneral
 INCLUDEPATH += $$SRC_GROUP_DIR/Paraview-VTKExtensions/Extraction
+INCLUDEPATH += $$SRC_GROUP_DIR/Paraview-VTKExtensions/InteractionStyle/
 
 
 INCLUDEPATH += $$SRC_GROUP_DIR  \
@@ -1207,19 +1228,19 @@ SOURCES += \
   $$SRC_DIR/Views/vtkGeometryRepresentationWithFaces.cxx \
   $$SRC_DIR/Views/vtkGeometrySliceRepresentation.cxx \
   $$SRC_DIR/Views/vtkGlyph3DRepresentation.cxx \
-  $$SRC_DIR/Views/vtkGridAxes2DActor.cxx \
+  \# $$SRC_DIR/Views/vtkGridAxes2DActor.cxx \
   $$SRC_DIR/Views/vtkGridAxes3DActor.cxx \
   $$SRC_DIR/Views/vtkGridAxesHelper.cxx \
   $$SRC_DIR/Views/vtkGridAxesPlane2DActor.cxx \
-  $$SRC_DIR/Views/vtkIceTCompositePass.cxx \
-  $$SRC_DIR/Views/vtkIceTContext.cxx \
+  \# $$SRC_DIR/Views/vtkIceTCompositePass.cxx \
+  \# $$SRC_DIR/Views/vtkIceTContext.cxx \
   $$SRC_DIR/Views/vtkIceTSynchronizedRenderers.cxx \
   $$SRC_DIR/Views/vtkImageSliceRepresentation.cxx \
   $$SRC_DIR/Views/vtkImageVolumeRepresentation.cxx \
   $$SRC_DIR/Views/vtkLogoSourceRepresentation.cxx \
   $$SRC_DIR/Views/vtkMoleculeRepresentation.cxx \
   $$SRC_DIR/Views/vtkMultiSliceContextItem.cxx \
-  $$SRC_DIR/Views/vtkOrderedCompositingHelper.cxx \
+  \# $$SRC_DIR/Views/vtkOrderedCompositingHelper.cxx \
   $$SRC_DIR/Views/vtkOutlineRepresentation.cxx \
   $$SRC_DIR/Views/vtkPVAxesActor.cxx \
   $$SRC_DIR/Views/vtkPVAxesWidget.cxx \
@@ -1265,8 +1286,8 @@ SOURCES += \
   $$SRC_DIR/Views/vtkPVProcessWindow.cxx \
   $$SRC_DIR/Views/vtkPVProminentValuesInformation.cxx \
   $$SRC_DIR/Views/vtkPVRayCastPickingHelper.cxx \
-  $$SRC_DIR/Views/vtkPVRenderView.cxx \
-  $$SRC_DIR/Views/vtkPVRenderViewDataDeliveryManager.cxx \
+  \# $$SRC_DIR/Views/vtkPVRenderView.cxx \
+  \# $$SRC_DIR/Views/vtkPVRenderViewDataDeliveryManager.cxx \
   $$SRC_DIR/Views/vtkPVRenderViewSettings.cxx \
   $$SRC_DIR/Views/vtkPVRenderViewWithEDL.cxx \
   $$SRC_DIR/Views/vtkPVRenderingCapabilitiesInformation.cxx \
@@ -1288,7 +1309,7 @@ SOURCES += \
   $$SRC_DIR/Views/vtkSIPVRepresentationProxy.cxx \
   $$SRC_DIR/Views/vtkSIUnstructuredGridVolumeRepresentationProxy.cxx \
   $$SRC_DIR/Views/vtkSMBoxRepresentationProxy.cxx \
-  $$SRC_DIR/Views/vtkSMCameraLink.cxx \
+  \# $$SRC_DIR/Views/vtkSMCameraLink.cxx \
   $$SRC_DIR/Views/vtkSMCameraProxy.cxx \
   $$SRC_DIR/Views/vtkSMChartRepresentationProxy.cxx \
   $$SRC_DIR/Views/vtkSMChartSeriesListDomain.cxx \
@@ -1321,7 +1342,7 @@ SOURCES += \
   $$SRC_DIR/Views/vtkSMSaveScreenshotProxy.cxx \
   $$SRC_DIR/Views/vtkSMScalarBarWidgetRepresentationProxy.cxx \
   $$SRC_DIR/Views/vtkSMSelectionHelper.cxx \
-  $$SRC_DIR/Views/vtkSMSelectionLink.cxx \
+  \# $$SRC_DIR/Views/vtkSMSelectionLink.cxx \
   $$SRC_DIR/Views/vtkSMSpreadSheetRepresentationInitializationHelper.cxx \
   $$SRC_DIR/Views/vtkSMSpreadSheetRepresentationProxy.cxx \
   $$SRC_DIR/Views/vtkSMSpreadSheetViewProxy.cxx \
@@ -1330,7 +1351,7 @@ SOURCES += \
   $$SRC_DIR/Views/vtkSMTransferFunctionPresets.cxx \
   $$SRC_DIR/Views/vtkSMTransferFunctionProxy.cxx \
   $$SRC_DIR/Views/vtkSMUtilities.cxx \
-  $$SRC_DIR/Views/vtkSMViewLayoutProxy.cxx \
+  \# $$SRC_DIR/Views/vtkSMViewLayoutProxy.cxx \
   $$SRC_DIR/Views/vtkSMViewProxy.cxx \
   $$SRC_DIR/Views/vtkSMViewProxyInteractorHelper.cxx \
   $$SRC_DIR/Views/vtkSMViewResolutionDomain.cxx \
@@ -1344,7 +1365,7 @@ SOURCES += \
   $$SRC_DIR/Views/vtkThreeSliceFilter.cxx \
   $$SRC_DIR/Views/vtkTilesHelper.cxx \
   $$SRC_DIR/Views/vtkUnstructuredGridVolumeRepresentation.cxx \
-  $$SRC_DIR/Views/vtkViewLayout.cxx \
+  \# $$SRC_DIR/Views/vtkViewLayout.cxx \
   $$SRC_DIR/Views/vtkVolumeRepresentation.cxx \
   $$SRC_DIR/Views/vtkXYChartRepresentation.cxx \
   $$SRC_DIR/ViewsPython/vtkPythonRepresentation.cxx \

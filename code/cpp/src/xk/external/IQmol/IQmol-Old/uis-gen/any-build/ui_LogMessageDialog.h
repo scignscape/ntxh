@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'LogMessageDialog.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,9 +10,12 @@
 #define UI_LOGMESSAGEDIALOG_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
@@ -36,30 +39,24 @@ public:
     void setupUi(QWidget *LogMessageDialog)
     {
         if (LogMessageDialog->objectName().isEmpty())
-            LogMessageDialog->setObjectName(QString::fromUtf8("LogMessageDialog"));
+            LogMessageDialog->setObjectName(QStringLiteral("LogMessageDialog"));
         LogMessageDialog->resize(742, 268);
         verticalLayout = new QVBoxLayout(LogMessageDialog);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         logTextBrowser = new QTextBrowser(LogMessageDialog);
-        logTextBrowser->setObjectName(QString::fromUtf8("logTextBrowser"));
+        logTextBrowser->setObjectName(QStringLiteral("logTextBrowser"));
 
         verticalLayout->addWidget(logTextBrowser);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         label = new QLabel(LogMessageDialog);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         horizontalLayout->addWidget(label);
 
         filterCombo = new QComboBox(LogMessageDialog);
-        filterCombo->addItem(QString());
-        filterCombo->addItem(QString());
-        filterCombo->addItem(QString());
-        filterCombo->addItem(QString());
-        filterCombo->addItem(QString());
-        filterCombo->addItem(QString());
-        filterCombo->setObjectName(QString::fromUtf8("filterCombo"));
+        filterCombo->setObjectName(QStringLiteral("filterCombo"));
 
         horizontalLayout->addWidget(filterCombo);
 
@@ -68,7 +65,7 @@ public:
         horizontalLayout->addItem(horizontalSpacer);
 
         closeButton = new QPushButton(LogMessageDialog);
-        closeButton->setObjectName(QString::fromUtf8("closeButton"));
+        closeButton->setObjectName(QStringLiteral("closeButton"));
 
         horizontalLayout->addWidget(closeButton);
 
@@ -87,16 +84,18 @@ public:
 
     void retranslateUi(QWidget *LogMessageDialog)
     {
-        LogMessageDialog->setWindowTitle(QApplication::translate("LogMessageDialog", "IQmol Log Messages", nullptr));
-        label->setText(QApplication::translate("LogMessageDialog", "Filter", nullptr));
-        filterCombo->setItemText(0, QApplication::translate("LogMessageDialog", "Trace", nullptr));
-        filterCombo->setItemText(1, QApplication::translate("LogMessageDialog", "Debug", nullptr));
-        filterCombo->setItemText(2, QApplication::translate("LogMessageDialog", "Info", nullptr));
-        filterCombo->setItemText(3, QApplication::translate("LogMessageDialog", "Warn", nullptr));
-        filterCombo->setItemText(4, QApplication::translate("LogMessageDialog", "Error", nullptr));
-        filterCombo->setItemText(5, QApplication::translate("LogMessageDialog", "Fatal", nullptr));
-
-        closeButton->setText(QApplication::translate("LogMessageDialog", "Close", nullptr));
+        LogMessageDialog->setWindowTitle(QApplication::translate("LogMessageDialog", "IQmol Log Messages", Q_NULLPTR));
+        label->setText(QApplication::translate("LogMessageDialog", "Filter", Q_NULLPTR));
+        filterCombo->clear();
+        filterCombo->insertItems(0, QStringList()
+         << QApplication::translate("LogMessageDialog", "Trace", Q_NULLPTR)
+         << QApplication::translate("LogMessageDialog", "Debug", Q_NULLPTR)
+         << QApplication::translate("LogMessageDialog", "Info", Q_NULLPTR)
+         << QApplication::translate("LogMessageDialog", "Warn", Q_NULLPTR)
+         << QApplication::translate("LogMessageDialog", "Error", Q_NULLPTR)
+         << QApplication::translate("LogMessageDialog", "Fatal", Q_NULLPTR)
+        );
+        closeButton->setText(QApplication::translate("LogMessageDialog", "Close", Q_NULLPTR));
     } // retranslateUi
 
 };

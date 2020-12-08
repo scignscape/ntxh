@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'PrimaryBasisTab.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,9 +10,12 @@
 #define UI_PRIMARYBASISTAB_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -31,14 +34,14 @@ public:
     void setupUi(QWidget *PrimaryBasisTab)
     {
         if (PrimaryBasisTab->objectName().isEmpty())
-            PrimaryBasisTab->setObjectName(QString::fromUtf8("PrimaryBasisTab"));
+            PrimaryBasisTab->setObjectName(QStringLiteral("PrimaryBasisTab"));
         PrimaryBasisTab->resize(302, 84);
         verticalLayout = new QVBoxLayout(PrimaryBasisTab);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         qui_primary_basis = new QComboBox(PrimaryBasisTab);
-        qui_primary_basis->setObjectName(QString::fromUtf8("qui_primary_basis"));
+        qui_primary_basis->setObjectName(QStringLiteral("qui_primary_basis"));
 
         horizontalLayout->addWidget(qui_primary_basis);
 
@@ -61,7 +64,7 @@ public:
 
     void retranslateUi(QWidget *PrimaryBasisTab)
     {
-        PrimaryBasisTab->setWindowTitle(QApplication::translate("PrimaryBasisTab", "Form", nullptr));
+        PrimaryBasisTab->setWindowTitle(QApplication::translate("PrimaryBasisTab", "Form", Q_NULLPTR));
     } // retranslateUi
 
 };

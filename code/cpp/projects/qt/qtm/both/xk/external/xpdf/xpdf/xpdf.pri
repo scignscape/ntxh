@@ -14,12 +14,12 @@ QT += network
 include($$ROOT_DIR/../preferred/sysr.pri)
 include($$ROOT_DIR/../preferred/gui.pri)
 
+include($$ROOT_DIR/../preferred/xpdf.pri)
 
 
 RESOURCES += \
     $$SRC_DIR/xpdf-qt/icons.qrc
 
-# LIBS +=  -lfreetype
 
 
 INCLUDEPATH += $$SRC_DIR

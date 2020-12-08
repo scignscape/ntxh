@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'FreezingStringTab.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,9 +10,12 @@
 #define UI_FREEZINGSTRINGTAB_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSpinBox>
@@ -40,49 +43,49 @@ public:
     void setupUi(QWidget *FreezingStringTab)
     {
         if (FreezingStringTab->objectName().isEmpty())
-            FreezingStringTab->setObjectName(QString::fromUtf8("FreezingStringTab"));
+            FreezingStringTab->setObjectName(QStringLiteral("FreezingStringTab"));
         FreezingStringTab->resize(396, 99);
         verticalLayout = new QVBoxLayout(FreezingStringTab);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         fsm_opt_mode = new QComboBox(FreezingStringTab);
-        fsm_opt_mode->setObjectName(QString::fromUtf8("fsm_opt_mode"));
+        fsm_opt_mode->setObjectName(QStringLiteral("fsm_opt_mode"));
 
         gridLayout->addWidget(fsm_opt_mode, 1, 3, 1, 1);
 
         label_67 = new QLabel(FreezingStringTab);
-        label_67->setObjectName(QString::fromUtf8("label_67"));
+        label_67->setObjectName(QStringLiteral("label_67"));
 
         gridLayout->addWidget(label_67, 0, 0, 1, 1);
 
         label_78 = new QLabel(FreezingStringTab);
-        label_78->setObjectName(QString::fromUtf8("label_78"));
+        label_78->setObjectName(QStringLiteral("label_78"));
 
         gridLayout->addWidget(label_78, 1, 2, 1, 1);
 
         label_77 = new QLabel(FreezingStringTab);
-        label_77->setObjectName(QString::fromUtf8("label_77"));
+        label_77->setObjectName(QStringLiteral("label_77"));
 
         gridLayout->addWidget(label_77, 0, 2, 1, 1);
 
         label_69 = new QLabel(FreezingStringTab);
-        label_69->setObjectName(QString::fromUtf8("label_69"));
+        label_69->setObjectName(QStringLiteral("label_69"));
 
         gridLayout->addWidget(label_69, 1, 0, 1, 1);
 
         fsm_mode = new QComboBox(FreezingStringTab);
-        fsm_mode->setObjectName(QString::fromUtf8("fsm_mode"));
+        fsm_mode->setObjectName(QStringLiteral("fsm_mode"));
 
         gridLayout->addWidget(fsm_mode, 0, 3, 1, 1);
 
         fsm_nnode = new QSpinBox(FreezingStringTab);
-        fsm_nnode->setObjectName(QString::fromUtf8("fsm_nnode"));
+        fsm_nnode->setObjectName(QStringLiteral("fsm_nnode"));
 
         gridLayout->addWidget(fsm_nnode, 0, 1, 1, 1);
 
         fsm_ngrad = new QSpinBox(FreezingStringTab);
-        fsm_ngrad->setObjectName(QString::fromUtf8("fsm_ngrad"));
+        fsm_ngrad->setObjectName(QStringLiteral("fsm_ngrad"));
 
         gridLayout->addWidget(fsm_ngrad, 1, 1, 1, 1);
 
@@ -105,11 +108,11 @@ public:
 
     void retranslateUi(QWidget *FreezingStringTab)
     {
-        FreezingStringTab->setWindowTitle(QApplication::translate("FreezingStringTab", "Form", nullptr));
-        label_67->setText(QApplication::translate("FreezingStringTab", "Nodes", nullptr));
-        label_78->setText(QApplication::translate("FreezingStringTab", "Opt Method", nullptr));
-        label_77->setText(QApplication::translate("FreezingStringTab", "Interpolation", nullptr));
-        label_69->setText(QApplication::translate("FreezingStringTab", "Gradient Steps", nullptr));
+        FreezingStringTab->setWindowTitle(QApplication::translate("FreezingStringTab", "Form", Q_NULLPTR));
+        label_67->setText(QApplication::translate("FreezingStringTab", "Nodes", Q_NULLPTR));
+        label_78->setText(QApplication::translate("FreezingStringTab", "Opt Method", Q_NULLPTR));
+        label_77->setText(QApplication::translate("FreezingStringTab", "Interpolation", Q_NULLPTR));
+        label_69->setText(QApplication::translate("FreezingStringTab", "Gradient Steps", Q_NULLPTR));
     } // retranslateUi
 
 };

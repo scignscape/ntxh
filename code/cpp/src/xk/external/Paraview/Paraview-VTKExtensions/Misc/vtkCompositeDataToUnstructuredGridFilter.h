@@ -29,7 +29,7 @@
 #ifndef vtkCompositeDataToUnstructuredGridFilter_h
 #define vtkCompositeDataToUnstructuredGridFilter_h
 
-#include "vtkLegacy.h"                    // for legacy
+//?#include "vtkLegacy.h"                    // for legacy
 #include "vtkPVVTKExtensionsMiscModule.h" // needed for export macro
 #include "vtkUnstructuredGridAlgorithm.h"
 

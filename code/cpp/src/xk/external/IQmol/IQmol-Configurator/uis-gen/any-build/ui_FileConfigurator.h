@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'FileConfigurator.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,11 +10,13 @@
 #define UI_FILECONFIGURATOR_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QIcon>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
@@ -43,14 +45,14 @@ public:
     void setupUi(QDialog *FileConfigurator)
     {
         if (FileConfigurator->objectName().isEmpty())
-            FileConfigurator->setObjectName(QString::fromUtf8("FileConfigurator"));
+            FileConfigurator->setObjectName(QStringLiteral("FileConfigurator"));
         FileConfigurator->resize(650, 576);
         QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(FileConfigurator->sizePolicy().hasHeightForWidth());
         FileConfigurator->setSizePolicy(sizePolicy);
-        FileConfigurator->setStyleSheet(QString::fromUtf8("QToolButton {\n"
+        FileConfigurator->setStyleSheet(QLatin1String("QToolButton {\n"
 "   color: #333;\n"
 "   background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, \n"
 "          stop: 0 #fff,\n"
@@ -99,39 +101,39 @@ public:
 "   font-size: 12px;\n"
 "}"));
         verticalLayout = new QVBoxLayout(FileConfigurator);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         textLargerButton = new QToolButton(FileConfigurator);
-        textLargerButton->setObjectName(QString::fromUtf8("textLargerButton"));
+        textLargerButton->setObjectName(QStringLiteral("textLargerButton"));
         QFont font;
         textLargerButton->setFont(font);
         QIcon icon;
-        icon.addFile(QString::fromUtf8(":/resources/icons/T24.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/resources/icons/T24.png"), QSize(), QIcon::Normal, QIcon::Off);
         textLargerButton->setIcon(icon);
         textLargerButton->setIconSize(QSize(24, 24));
 
         horizontalLayout_2->addWidget(textLargerButton);
 
         textSmallerButton = new QToolButton(FileConfigurator);
-        textSmallerButton->setObjectName(QString::fromUtf8("textSmallerButton"));
+        textSmallerButton->setObjectName(QStringLiteral("textSmallerButton"));
         textSmallerButton->setFont(font);
         QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/resources/icons/T14.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QStringLiteral(":/resources/icons/T14.png"), QSize(), QIcon::Normal, QIcon::Off);
         textSmallerButton->setIcon(icon1);
         textSmallerButton->setIconSize(QSize(24, 24));
 
         horizontalLayout_2->addWidget(textSmallerButton);
 
         searchBox = new QLineEdit(FileConfigurator);
-        searchBox->setObjectName(QString::fromUtf8("searchBox"));
+        searchBox->setObjectName(QStringLiteral("searchBox"));
 
         horizontalLayout_2->addWidget(searchBox);
 
         searchButton = new QToolButton(FileConfigurator);
-        searchButton->setObjectName(QString::fromUtf8("searchButton"));
+        searchButton->setObjectName(QStringLiteral("searchButton"));
         QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/resources/icons/Search.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon2.addFile(QStringLiteral(":/resources/icons/Search.png"), QSize(), QIcon::Normal, QIcon::Off);
         searchButton->setIcon(icon2);
         searchButton->setIconSize(QSize(18, 18));
 
@@ -141,17 +143,17 @@ public:
         verticalLayout->addLayout(horizontalLayout_2);
 
         frame = new QFrame(FileConfigurator);
-        frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setObjectName(QStringLiteral("frame"));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Sunken);
         _2 = new QVBoxLayout(frame);
         _2->setSpacing(4);
         _2->setContentsMargins(6, 6, 6, 6);
-        _2->setObjectName(QString::fromUtf8("_2"));
+        _2->setObjectName(QStringLiteral("_2"));
         textDisplay = new QTextBrowser(frame);
-        textDisplay->setObjectName(QString::fromUtf8("textDisplay"));
+        textDisplay->setObjectName(QStringLiteral("textDisplay"));
         QFont font1;
-        font1.setFamily(QString::fromUtf8("Courier New"));
+        font1.setFamily(QStringLiteral("Courier New"));
         font1.setPointSize(11);
         font1.setBold(false);
         font1.setItalic(false);
@@ -166,13 +168,13 @@ public:
         verticalLayout->addWidget(frame);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
 
         closeButton = new QPushButton(FileConfigurator);
-        closeButton->setObjectName(QString::fromUtf8("closeButton"));
+        closeButton->setObjectName(QStringLiteral("closeButton"));
         closeButton->setAutoDefault(false);
 
         horizontalLayout->addWidget(closeButton);
@@ -189,20 +191,20 @@ public:
 
     void retranslateUi(QDialog *FileConfigurator)
     {
-        FileConfigurator->setWindowTitle(QApplication::translate("FileConfigurator", "View File", nullptr));
+        FileConfigurator->setWindowTitle(QApplication::translate("FileConfigurator", "View File", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        textLargerButton->setToolTip(QApplication::translate("FileConfigurator", "Bigger text", nullptr));
+        textLargerButton->setToolTip(QApplication::translate("FileConfigurator", "Bigger text", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         textLargerButton->setText(QString());
 #ifndef QT_NO_TOOLTIP
-        textSmallerButton->setToolTip(QApplication::translate("FileConfigurator", "Smaller text", nullptr));
+        textSmallerButton->setToolTip(QApplication::translate("FileConfigurator", "Smaller text", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         textSmallerButton->setText(QString());
 #ifndef QT_NO_TOOLTIP
-        searchButton->setToolTip(QApplication::translate("FileConfigurator", "Search", nullptr));
+        searchButton->setToolTip(QApplication::translate("FileConfigurator", "Search", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        searchButton->setText(QApplication::translate("FileConfigurator", "...", nullptr));
-        closeButton->setText(QApplication::translate("FileConfigurator", "Close", nullptr));
+        searchButton->setText(QApplication::translate("FileConfigurator", "...", Q_NULLPTR));
+        closeButton->setText(QApplication::translate("FileConfigurator", "Close", Q_NULLPTR));
     } // retranslateUi
 
 };

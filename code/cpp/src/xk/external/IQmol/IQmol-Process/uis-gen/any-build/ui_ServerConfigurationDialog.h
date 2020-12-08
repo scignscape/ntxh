@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ServerConfigurationDialog.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,13 +10,16 @@
 #define UI_SERVERCONFIGURATIONDIALOG_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
@@ -78,7 +81,7 @@ public:
     void setupUi(QDialog *ServerConfigurationDialog)
     {
         if (ServerConfigurationDialog->objectName().isEmpty())
-            ServerConfigurationDialog->setObjectName(QString::fromUtf8("ServerConfigurationDialog"));
+            ServerConfigurationDialog->setObjectName(QStringLiteral("ServerConfigurationDialog"));
         ServerConfigurationDialog->setEnabled(true);
         ServerConfigurationDialog->resize(607, 422);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
@@ -86,7 +89,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(ServerConfigurationDialog->sizePolicy().hasHeightForWidth());
         ServerConfigurationDialog->setSizePolicy(sizePolicy);
-        ServerConfigurationDialog->setStyleSheet(QString::fromUtf8("QToolButton {\n"
+        ServerConfigurationDialog->setStyleSheet(QLatin1String("QToolButton {\n"
 "   color: #333;\n"
 "   background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, \n"
 "          stop: 0 #fff,\n"
@@ -140,24 +143,18 @@ public:
 "    background-color: #EEE;\n"
 "}"));
         verticalLayout_2 = new QVBoxLayout(ServerConfigurationDialog);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         typeLabel = new QLabel(ServerConfigurationDialog);
-        typeLabel->setObjectName(QString::fromUtf8("typeLabel"));
+        typeLabel->setObjectName(QStringLiteral("typeLabel"));
 
         gridLayout->addWidget(typeLabel, 2, 0, 1, 1);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         queueSystem = new QComboBox(ServerConfigurationDialog);
-        queueSystem->addItem(QString());
-        queueSystem->addItem(QString());
-        queueSystem->addItem(QString());
-        queueSystem->addItem(QString());
-        queueSystem->addItem(QString());
-        queueSystem->addItem(QString());
-        queueSystem->setObjectName(QString::fromUtf8("queueSystem"));
+        queueSystem->setObjectName(QStringLiteral("queueSystem"));
         QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -169,7 +166,7 @@ public:
         horizontalLayout->addWidget(queueSystem);
 
         configureQueueButton = new QPushButton(ServerConfigurationDialog);
-        configureQueueButton->setObjectName(QString::fromUtf8("configureQueueButton"));
+        configureQueueButton->setObjectName(QStringLiteral("configureQueueButton"));
 
         horizontalLayout->addWidget(configureQueueButton);
 
@@ -181,35 +178,35 @@ public:
         gridLayout->addLayout(horizontalLayout, 2, 1, 1, 1);
 
         label_2 = new QLabel(ServerConfigurationDialog);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         gridLayout->addWidget(label_2, 0, 0, 1, 1);
 
         horizontalLayout_7 = new QHBoxLayout();
-        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
         localRadioButton = new QRadioButton(ServerConfigurationDialog);
-        localRadioButton->setObjectName(QString::fromUtf8("localRadioButton"));
+        localRadioButton->setObjectName(QStringLiteral("localRadioButton"));
         localRadioButton->setChecked(true);
 
         horizontalLayout_7->addWidget(localRadioButton);
 
         sshRadioButton = new QRadioButton(ServerConfigurationDialog);
-        sshRadioButton->setObjectName(QString::fromUtf8("sshRadioButton"));
+        sshRadioButton->setObjectName(QStringLiteral("sshRadioButton"));
 
         horizontalLayout_7->addWidget(sshRadioButton);
 
         sftpRadioButton = new QRadioButton(ServerConfigurationDialog);
-        sftpRadioButton->setObjectName(QString::fromUtf8("sftpRadioButton"));
+        sftpRadioButton->setObjectName(QStringLiteral("sftpRadioButton"));
 
         horizontalLayout_7->addWidget(sftpRadioButton);
 
         httpRadioButton = new QRadioButton(ServerConfigurationDialog);
-        httpRadioButton->setObjectName(QString::fromUtf8("httpRadioButton"));
+        httpRadioButton->setObjectName(QStringLiteral("httpRadioButton"));
 
         horizontalLayout_7->addWidget(httpRadioButton);
 
         httpsRadioButton = new QRadioButton(ServerConfigurationDialog);
-        httpsRadioButton->setObjectName(QString::fromUtf8("httpsRadioButton"));
+        httpsRadioButton->setObjectName(QStringLiteral("httpsRadioButton"));
 
         horizontalLayout_7->addWidget(httpsRadioButton);
 
@@ -218,7 +215,7 @@ public:
         horizontalLayout_7->addItem(horizontalSpacer_2);
 
         configureSshButton = new QPushButton(ServerConfigurationDialog);
-        configureSshButton->setObjectName(QString::fromUtf8("configureSshButton"));
+        configureSshButton->setObjectName(QStringLiteral("configureSshButton"));
         configureSshButton->setEnabled(false);
 
         horizontalLayout_7->addWidget(configureSshButton);
@@ -227,12 +224,12 @@ public:
         gridLayout->addLayout(horizontalLayout_7, 0, 1, 1, 1);
 
         serverName = new QLineEdit(ServerConfigurationDialog);
-        serverName->setObjectName(QString::fromUtf8("serverName"));
+        serverName->setObjectName(QStringLiteral("serverName"));
 
         gridLayout->addWidget(serverName, 1, 1, 1, 1);
 
         label = new QLabel(ServerConfigurationDialog);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         gridLayout->addWidget(label, 1, 0, 1, 1);
 
@@ -240,46 +237,46 @@ public:
         verticalLayout_2->addLayout(gridLayout);
 
         remoteHostGroupBox = new QGroupBox(ServerConfigurationDialog);
-        remoteHostGroupBox->setObjectName(QString::fromUtf8("remoteHostGroupBox"));
+        remoteHostGroupBox->setObjectName(QStringLiteral("remoteHostGroupBox"));
         remoteHostGroupBox->setEnabled(false);
         verticalLayout = new QVBoxLayout(remoteHostGroupBox);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         gridLayout_3 = new QGridLayout();
-        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         label_4 = new QLabel(remoteHostGroupBox);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setObjectName(QStringLiteral("label_4"));
 
         gridLayout_3->addWidget(label_4, 0, 0, 1, 1);
 
         userNameLabel = new QLabel(remoteHostGroupBox);
-        userNameLabel->setObjectName(QString::fromUtf8("userNameLabel"));
+        userNameLabel->setObjectName(QStringLiteral("userNameLabel"));
 
         gridLayout_3->addWidget(userNameLabel, 2, 0, 1, 1);
 
         workingDirectoryLabel = new QLabel(remoteHostGroupBox);
-        workingDirectoryLabel->setObjectName(QString::fromUtf8("workingDirectoryLabel"));
+        workingDirectoryLabel->setObjectName(QStringLiteral("workingDirectoryLabel"));
 
         gridLayout_3->addWidget(workingDirectoryLabel, 3, 0, 1, 1);
 
         authenticationLabel = new QLabel(remoteHostGroupBox);
-        authenticationLabel->setObjectName(QString::fromUtf8("authenticationLabel"));
+        authenticationLabel->setObjectName(QStringLiteral("authenticationLabel"));
 
         gridLayout_3->addWidget(authenticationLabel, 1, 0, 1, 1);
 
         horizontalLayout_6 = new QHBoxLayout();
-        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
         hostAddress = new QLineEdit(remoteHostGroupBox);
-        hostAddress->setObjectName(QString::fromUtf8("hostAddress"));
+        hostAddress->setObjectName(QStringLiteral("hostAddress"));
 
         horizontalLayout_6->addWidget(hostAddress);
 
         label_3 = new QLabel(remoteHostGroupBox);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName(QStringLiteral("label_3"));
 
         horizontalLayout_6->addWidget(label_3);
 
         port = new QSpinBox(remoteHostGroupBox);
-        port->setObjectName(QString::fromUtf8("port"));
+        port->setObjectName(QStringLiteral("port"));
         port->setMinimum(0);
         port->setMaximum(65535);
         port->setValue(22);
@@ -290,14 +287,9 @@ public:
         gridLayout_3->addLayout(horizontalLayout_6, 0, 1, 1, 1);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         authentication = new QComboBox(remoteHostGroupBox);
-        authentication->addItem(QString());
-        authentication->addItem(QString());
-        authentication->addItem(QString());
-        authentication->addItem(QString());
-        authentication->addItem(QString());
-        authentication->setObjectName(QString::fromUtf8("authentication"));
+        authentication->setObjectName(QStringLiteral("authentication"));
         sizePolicy1.setHeightForWidth(authentication->sizePolicy().hasHeightForWidth());
         authentication->setSizePolicy(sizePolicy1);
         authentication->setSizeAdjustPolicy(QComboBox::AdjustToContents);
@@ -309,12 +301,12 @@ public:
         horizontalLayout_2->addItem(horizontalSpacer_3);
 
         authenticationPortLabel = new QLabel(remoteHostGroupBox);
-        authenticationPortLabel->setObjectName(QString::fromUtf8("authenticationPortLabel"));
+        authenticationPortLabel->setObjectName(QStringLiteral("authenticationPortLabel"));
 
         horizontalLayout_2->addWidget(authenticationPortLabel);
 
         authenticationPort = new QSpinBox(remoteHostGroupBox);
-        authenticationPort->setObjectName(QString::fromUtf8("authenticationPort"));
+        authenticationPort->setObjectName(QStringLiteral("authenticationPort"));
         authenticationPort->setMaximum(65535);
         authenticationPort->setValue(8882);
 
@@ -324,23 +316,23 @@ public:
         gridLayout_3->addLayout(horizontalLayout_2, 1, 1, 1, 1);
 
         userName = new QLineEdit(remoteHostGroupBox);
-        userName->setObjectName(QString::fromUtf8("userName"));
+        userName->setObjectName(QStringLiteral("userName"));
 
         gridLayout_3->addWidget(userName, 2, 1, 1, 1);
 
         workingDirectory = new QLineEdit(remoteHostGroupBox);
-        workingDirectory->setObjectName(QString::fromUtf8("workingDirectory"));
+        workingDirectory->setObjectName(QStringLiteral("workingDirectory"));
 
         gridLayout_3->addWidget(workingDirectory, 3, 1, 1, 1);
 
         horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_3->addItem(horizontalSpacer_4);
 
         testConnectionButton = new QPushButton(remoteHostGroupBox);
-        testConnectionButton->setObjectName(QString::fromUtf8("testConnectionButton"));
+        testConnectionButton->setObjectName(QStringLiteral("testConnectionButton"));
 
         horizontalLayout_3->addWidget(testConnectionButton);
 
@@ -354,14 +346,14 @@ public:
         verticalLayout_2->addWidget(remoteHostGroupBox);
 
         horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         loadButton = new QPushButton(ServerConfigurationDialog);
-        loadButton->setObjectName(QString::fromUtf8("loadButton"));
+        loadButton->setObjectName(QStringLiteral("loadButton"));
 
         horizontalLayout_4->addWidget(loadButton);
 
         exportButton = new QPushButton(ServerConfigurationDialog);
-        exportButton->setObjectName(QString::fromUtf8("exportButton"));
+        exportButton->setObjectName(QStringLiteral("exportButton"));
 
         horizontalLayout_4->addWidget(exportButton);
 
@@ -370,7 +362,7 @@ public:
         horizontalLayout_4->addItem(horizontalSpacer);
 
         buttonBox = new QDialogButtonBox(ServerConfigurationDialog);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setObjectName(QStringLiteral("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
@@ -406,15 +398,17 @@ public:
 
     void retranslateUi(QDialog *ServerConfigurationDialog)
     {
-        ServerConfigurationDialog->setWindowTitle(QApplication::translate("ServerConfigurationDialog", "Edit Server", nullptr));
-        typeLabel->setText(QApplication::translate("ServerConfigurationDialog", "Queue System", nullptr));
-        queueSystem->setItemText(0, QApplication::translate("ServerConfigurationDialog", "Basic", nullptr));
-        queueSystem->setItemText(1, QApplication::translate("ServerConfigurationDialog", "PBS", nullptr));
-        queueSystem->setItemText(2, QApplication::translate("ServerConfigurationDialog", "SGE", nullptr));
-        queueSystem->setItemText(3, QApplication::translate("ServerConfigurationDialog", "SLURM", nullptr));
-        queueSystem->setItemText(4, QApplication::translate("ServerConfigurationDialog", "Web", nullptr));
-        queueSystem->setItemText(5, QApplication::translate("ServerConfigurationDialog", "Web - Anonymous", nullptr));
-
+        ServerConfigurationDialog->setWindowTitle(QApplication::translate("ServerConfigurationDialog", "Edit Server", Q_NULLPTR));
+        typeLabel->setText(QApplication::translate("ServerConfigurationDialog", "Queue System", Q_NULLPTR));
+        queueSystem->clear();
+        queueSystem->insertItems(0, QStringList()
+         << QApplication::translate("ServerConfigurationDialog", "Basic", Q_NULLPTR)
+         << QApplication::translate("ServerConfigurationDialog", "PBS", Q_NULLPTR)
+         << QApplication::translate("ServerConfigurationDialog", "SGE", Q_NULLPTR)
+         << QApplication::translate("ServerConfigurationDialog", "SLURM", Q_NULLPTR)
+         << QApplication::translate("ServerConfigurationDialog", "Web", Q_NULLPTR)
+         << QApplication::translate("ServerConfigurationDialog", "Web - Anonymous", Q_NULLPTR)
+        );
 #ifndef QT_NO_TOOLTIP
         queueSystem->setToolTip(QApplication::translate("ServerConfigurationDialog", "Basic simply runs the qchem command on the server.  \n"
 "\n"
@@ -422,46 +416,48 @@ public:
 "You will be prompted for additional resource limits when \n"
 "submitting a job.\n"
 "\n"
-"Use Web for HTTP/HTTPS servers", nullptr));
+"Use Web for HTTP/HTTPS servers", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        configureQueueButton->setText(QApplication::translate("ServerConfigurationDialog", "Configure", nullptr));
-        label_2->setText(QApplication::translate("ServerConfigurationDialog", "Connection", nullptr));
-        localRadioButton->setText(QApplication::translate("ServerConfigurationDialog", "Local", nullptr));
-        sshRadioButton->setText(QApplication::translate("ServerConfigurationDialog", "SSH", nullptr));
-        sftpRadioButton->setText(QApplication::translate("ServerConfigurationDialog", "SFTP", nullptr));
-        httpRadioButton->setText(QApplication::translate("ServerConfigurationDialog", "HTTP", nullptr));
-        httpsRadioButton->setText(QApplication::translate("ServerConfigurationDialog", "HTTPS", nullptr));
-        configureSshButton->setText(QApplication::translate("ServerConfigurationDialog", "Configure SSH", nullptr));
+        configureQueueButton->setText(QApplication::translate("ServerConfigurationDialog", "Configure", Q_NULLPTR));
+        label_2->setText(QApplication::translate("ServerConfigurationDialog", "Connection", Q_NULLPTR));
+        localRadioButton->setText(QApplication::translate("ServerConfigurationDialog", "Local", Q_NULLPTR));
+        sshRadioButton->setText(QApplication::translate("ServerConfigurationDialog", "SSH", Q_NULLPTR));
+        sftpRadioButton->setText(QApplication::translate("ServerConfigurationDialog", "SFTP", Q_NULLPTR));
+        httpRadioButton->setText(QApplication::translate("ServerConfigurationDialog", "HTTP", Q_NULLPTR));
+        httpsRadioButton->setText(QApplication::translate("ServerConfigurationDialog", "HTTPS", Q_NULLPTR));
+        configureSshButton->setText(QApplication::translate("ServerConfigurationDialog", "Configure SSH", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        serverName->setToolTip(QApplication::translate("ServerConfigurationDialog", "Server mnemonic (does not have to match actual server name)", nullptr));
+        serverName->setToolTip(QApplication::translate("ServerConfigurationDialog", "Server mnemonic (does not have to match actual server name)", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        serverName->setText(QApplication::translate("ServerConfigurationDialog", "Server", nullptr));
-        label->setText(QApplication::translate("ServerConfigurationDialog", "Server Name", nullptr));
-        remoteHostGroupBox->setTitle(QApplication::translate("ServerConfigurationDialog", "Remote Host", nullptr));
-        label_4->setText(QApplication::translate("ServerConfigurationDialog", "Host Address", nullptr));
-        userNameLabel->setText(QApplication::translate("ServerConfigurationDialog", "User Name", nullptr));
-        workingDirectoryLabel->setText(QApplication::translate("ServerConfigurationDialog", "Working Directory", nullptr));
-        authenticationLabel->setText(QApplication::translate("ServerConfigurationDialog", "Authentication", nullptr));
+        serverName->setText(QApplication::translate("ServerConfigurationDialog", "Server", Q_NULLPTR));
+        label->setText(QApplication::translate("ServerConfigurationDialog", "Server Name", Q_NULLPTR));
+        remoteHostGroupBox->setTitle(QApplication::translate("ServerConfigurationDialog", "Remote Host", Q_NULLPTR));
+        label_4->setText(QApplication::translate("ServerConfigurationDialog", "Host Address", Q_NULLPTR));
+        userNameLabel->setText(QApplication::translate("ServerConfigurationDialog", "User Name", Q_NULLPTR));
+        workingDirectoryLabel->setText(QApplication::translate("ServerConfigurationDialog", "Working Directory", Q_NULLPTR));
+        authenticationLabel->setText(QApplication::translate("ServerConfigurationDialog", "Authentication", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        hostAddress->setToolTip(QApplication::translate("ServerConfigurationDialog", "Server name or IP address", nullptr));
+        hostAddress->setToolTip(QApplication::translate("ServerConfigurationDialog", "Server name or IP address", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        label_3->setText(QApplication::translate("ServerConfigurationDialog", "Port", nullptr));
-        authentication->setItemText(0, QApplication::translate("ServerConfigurationDialog", "SSH Agent", nullptr));
-        authentication->setItemText(1, QApplication::translate("ServerConfigurationDialog", "SSH Public Key", nullptr));
-        authentication->setItemText(2, QApplication::translate("ServerConfigurationDialog", "SSH Host Based", nullptr));
-        authentication->setItemText(3, QApplication::translate("ServerConfigurationDialog", "SSH Keyboard Interactive", nullptr));
-        authentication->setItemText(4, QApplication::translate("ServerConfigurationDialog", "SSH Prompt", nullptr));
-
-        authenticationPortLabel->setText(QApplication::translate("ServerConfigurationDialog", "Port", nullptr));
+        label_3->setText(QApplication::translate("ServerConfigurationDialog", "Port", Q_NULLPTR));
+        authentication->clear();
+        authentication->insertItems(0, QStringList()
+         << QApplication::translate("ServerConfigurationDialog", "SSH Agent", Q_NULLPTR)
+         << QApplication::translate("ServerConfigurationDialog", "SSH Public Key", Q_NULLPTR)
+         << QApplication::translate("ServerConfigurationDialog", "SSH Host Based", Q_NULLPTR)
+         << QApplication::translate("ServerConfigurationDialog", "SSH Keyboard Interactive", Q_NULLPTR)
+         << QApplication::translate("ServerConfigurationDialog", "SSH Prompt", Q_NULLPTR)
+        );
+        authenticationPortLabel->setText(QApplication::translate("ServerConfigurationDialog", "Port", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        userName->setToolTip(QApplication::translate("ServerConfigurationDialog", "Account name on the server", nullptr));
+        userName->setToolTip(QApplication::translate("ServerConfigurationDialog", "Account name on the server", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
-        workingDirectory->setToolTip(QApplication::translate("ServerConfigurationDialog", "This is the directory on the server where calculations will be run", nullptr));
+        workingDirectory->setToolTip(QApplication::translate("ServerConfigurationDialog", "This is the directory on the server where calculations will be run", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        testConnectionButton->setText(QApplication::translate("ServerConfigurationDialog", "Test Connection", nullptr));
-        loadButton->setText(QApplication::translate("ServerConfigurationDialog", "Load", nullptr));
-        exportButton->setText(QApplication::translate("ServerConfigurationDialog", "Export", nullptr));
+        testConnectionButton->setText(QApplication::translate("ServerConfigurationDialog", "Test Connection", Q_NULLPTR));
+        loadButton->setText(QApplication::translate("ServerConfigurationDialog", "Load", Q_NULLPTR));
+        exportButton->setText(QApplication::translate("ServerConfigurationDialog", "Export", Q_NULLPTR));
     } // retranslateUi
 
 };

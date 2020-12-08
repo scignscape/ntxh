@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'SymmetryConfigurator.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,7 +10,9 @@
 #define UI_SYMMETRYCONFIGURATOR_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -35,17 +37,17 @@ public:
     void setupUi(QWidget *SymmetryConfigurator)
     {
         if (SymmetryConfigurator->objectName().isEmpty())
-            SymmetryConfigurator->setObjectName(QString::fromUtf8("SymmetryConfigurator"));
+            SymmetryConfigurator->setObjectName(QStringLiteral("SymmetryConfigurator"));
         SymmetryConfigurator->resize(351, 272);
         verticalLayout = new QVBoxLayout(SymmetryConfigurator);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         characterTable = new QTableView(SymmetryConfigurator);
-        characterTable->setObjectName(QString::fromUtf8("characterTable"));
+        characterTable->setObjectName(QStringLiteral("characterTable"));
 
         verticalLayout->addWidget(characterTable);
 
         notesLabel = new QLabel(SymmetryConfigurator);
-        notesLabel->setObjectName(QString::fromUtf8("notesLabel"));
+        notesLabel->setObjectName(QStringLiteral("notesLabel"));
         QFont font;
         font.setPointSize(11);
         notesLabel->setFont(font);
@@ -53,13 +55,13 @@ public:
         verticalLayout->addWidget(notesLabel);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
 
         closeButton = new QPushButton(SymmetryConfigurator);
-        closeButton->setObjectName(QString::fromUtf8("closeButton"));
+        closeButton->setObjectName(QStringLiteral("closeButton"));
 
         horizontalLayout->addWidget(closeButton);
 
@@ -75,9 +77,9 @@ public:
 
     void retranslateUi(QWidget *SymmetryConfigurator)
     {
-        SymmetryConfigurator->setWindowTitle(QApplication::translate("SymmetryConfigurator", "Form", nullptr));
-        notesLabel->setText(QApplication::translate("SymmetryConfigurator", "Notes:", nullptr));
-        closeButton->setText(QApplication::translate("SymmetryConfigurator", "Close", nullptr));
+        SymmetryConfigurator->setWindowTitle(QApplication::translate("SymmetryConfigurator", "Form", Q_NULLPTR));
+        notesLabel->setText(QApplication::translate("SymmetryConfigurator", "Notes:", Q_NULLPTR));
+        closeButton->setText(QApplication::translate("SymmetryConfigurator", "Close", Q_NULLPTR));
     } // retranslateUi
 
 };

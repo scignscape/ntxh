@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'SurfaceConfigurator.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,13 +10,16 @@
 #define UI_SURFACECONFIGURATOR_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
@@ -71,9 +74,9 @@ public:
     void setupUi(QDialog *SurfaceConfigurator)
     {
         if (SurfaceConfigurator->objectName().isEmpty())
-            SurfaceConfigurator->setObjectName(QString::fromUtf8("SurfaceConfigurator"));
+            SurfaceConfigurator->setObjectName(QStringLiteral("SurfaceConfigurator"));
         SurfaceConfigurator->resize(523, 248);
-        SurfaceConfigurator->setStyleSheet(QString::fromUtf8("QToolButton {\n"
+        SurfaceConfigurator->setStyleSheet(QLatin1String("QToolButton {\n"
 "   color: #333;\n"
 "   background-color: #666;\n"
 "   border-width: 2px;\n"
@@ -102,19 +105,19 @@ public:
 "}\n"
 ""));
         verticalLayout = new QVBoxLayout(SurfaceConfigurator);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         label_9 = new QLabel(SurfaceConfigurator);
-        label_9->setObjectName(QString::fromUtf8("label_9"));
+        label_9->setObjectName(QStringLiteral("label_9"));
 
         gridLayout->addWidget(label_9, 0, 0, 1, 1);
 
         horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         negativeColorButton = new QToolButton(SurfaceConfigurator);
-        negativeColorButton->setObjectName(QString::fromUtf8("negativeColorButton"));
-        negativeColorButton->setStyleSheet(QString::fromUtf8("QToolButton {\n"
+        negativeColorButton->setObjectName(QStringLiteral("negativeColorButton"));
+        negativeColorButton->setStyleSheet(QLatin1String("QToolButton {\n"
 "   background-color: rgb(255, 0, 0);\n"
 "}"));
         negativeColorButton->setIconSize(QSize(32, 16));
@@ -122,21 +125,21 @@ public:
         horizontalLayout_4->addWidget(negativeColorButton);
 
         negativeLabel = new QLabel(SurfaceConfigurator);
-        negativeLabel->setObjectName(QString::fromUtf8("negativeLabel"));
+        negativeLabel->setObjectName(QStringLiteral("negativeLabel"));
 
         horizontalLayout_4->addWidget(negativeLabel);
 
         minValue = new QDoubleSpinBox(SurfaceConfigurator);
-        minValue->setObjectName(QString::fromUtf8("minValue"));
+        minValue->setObjectName(QStringLiteral("minValue"));
         minValue->setDecimals(4);
-        minValue->setMinimum(-99.989999999999995);
-        minValue->setSingleStep(0.010000000000000);
+        minValue->setMinimum(-99.99);
+        minValue->setSingleStep(0.01);
 
         horizontalLayout_4->addWidget(minValue);
 
         positiveColorButton = new QToolButton(SurfaceConfigurator);
-        positiveColorButton->setObjectName(QString::fromUtf8("positiveColorButton"));
-        positiveColorButton->setStyleSheet(QString::fromUtf8("QToolButton {\n"
+        positiveColorButton->setObjectName(QStringLiteral("positiveColorButton"));
+        positiveColorButton->setStyleSheet(QLatin1String("QToolButton {\n"
 "   background-color: rgb(0, 0, 255);\n"
 "}"));
         positiveColorButton->setIconSize(QSize(32, 16));
@@ -144,14 +147,14 @@ public:
         horizontalLayout_4->addWidget(positiveColorButton);
 
         positiveLabel = new QLabel(SurfaceConfigurator);
-        positiveLabel->setObjectName(QString::fromUtf8("positiveLabel"));
+        positiveLabel->setObjectName(QStringLiteral("positiveLabel"));
 
         horizontalLayout_4->addWidget(positiveLabel);
 
         maxValue = new QDoubleSpinBox(SurfaceConfigurator);
-        maxValue->setObjectName(QString::fromUtf8("maxValue"));
+        maxValue->setObjectName(QStringLiteral("maxValue"));
         maxValue->setDecimals(4);
-        maxValue->setSingleStep(0.010000000000000);
+        maxValue->setSingleStep(0.01);
 
         horizontalLayout_4->addWidget(maxValue);
 
@@ -163,10 +166,9 @@ public:
         gridLayout->addLayout(horizontalLayout_4, 0, 1, 1, 1);
 
         horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         propertyCombo = new QComboBox(SurfaceConfigurator);
-        propertyCombo->addItem(QString());
-        propertyCombo->setObjectName(QString::fromUtf8("propertyCombo"));
+        propertyCombo->setObjectName(QStringLiteral("propertyCombo"));
 
         horizontalLayout_3->addWidget(propertyCombo);
 
@@ -175,12 +177,12 @@ public:
         horizontalLayout_3->addItem(horizontalSpacer_4);
 
         label_3 = new QLabel(SurfaceConfigurator);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName(QStringLiteral("label_3"));
 
         horizontalLayout_3->addWidget(label_3);
 
         areaLabel = new QLabel(SurfaceConfigurator);
-        areaLabel->setObjectName(QString::fromUtf8("areaLabel"));
+        areaLabel->setObjectName(QStringLiteral("areaLabel"));
 
         horizontalLayout_3->addWidget(areaLabel);
 
@@ -192,25 +194,25 @@ public:
         gridLayout->addLayout(horizontalLayout_3, 2, 1, 1, 1);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         fillButton = new QRadioButton(SurfaceConfigurator);
-        fillButton->setObjectName(QString::fromUtf8("fillButton"));
+        fillButton->setObjectName(QStringLiteral("fillButton"));
         fillButton->setChecked(true);
 
         horizontalLayout->addWidget(fillButton);
 
         linesButton = new QRadioButton(SurfaceConfigurator);
-        linesButton->setObjectName(QString::fromUtf8("linesButton"));
+        linesButton->setObjectName(QStringLiteral("linesButton"));
 
         horizontalLayout->addWidget(linesButton);
 
         dotsButton = new QRadioButton(SurfaceConfigurator);
-        dotsButton->setObjectName(QString::fromUtf8("dotsButton"));
+        dotsButton->setObjectName(QStringLiteral("dotsButton"));
 
         horizontalLayout->addWidget(dotsButton);
 
         ambientOcclusionCheckBox = new QCheckBox(SurfaceConfigurator);
-        ambientOcclusionCheckBox->setObjectName(QString::fromUtf8("ambientOcclusionCheckBox"));
+        ambientOcclusionCheckBox->setObjectName(QStringLiteral("ambientOcclusionCheckBox"));
         ambientOcclusionCheckBox->setEnabled(false);
 
         horizontalLayout->addWidget(ambientOcclusionCheckBox);
@@ -220,7 +222,7 @@ public:
         horizontalLayout->addItem(horizontalSpacer_6);
 
         clipCheckBox = new QCheckBox(SurfaceConfigurator);
-        clipCheckBox->setObjectName(QString::fromUtf8("clipCheckBox"));
+        clipCheckBox->setObjectName(QStringLiteral("clipCheckBox"));
 
         horizontalLayout->addWidget(clipCheckBox);
 
@@ -232,29 +234,29 @@ public:
         gridLayout->addLayout(horizontalLayout, 3, 1, 1, 1);
 
         label_2 = new QLabel(SurfaceConfigurator);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         gridLayout->addWidget(label_2, 3, 0, 1, 1);
 
         label_10 = new QLabel(SurfaceConfigurator);
-        label_10->setObjectName(QString::fromUtf8("label_10"));
+        label_10->setObjectName(QStringLiteral("label_10"));
 
         gridLayout->addWidget(label_10, 2, 0, 1, 1);
 
         label_8 = new QLabel(SurfaceConfigurator);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
+        label_8->setObjectName(QStringLiteral("label_8"));
 
         gridLayout->addWidget(label_8, 4, 0, 1, 1);
 
         horizontalLayout_6 = new QHBoxLayout();
-        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
         swapColorsButton = new QCheckBox(SurfaceConfigurator);
-        swapColorsButton->setObjectName(QString::fromUtf8("swapColorsButton"));
+        swapColorsButton->setObjectName(QStringLiteral("swapColorsButton"));
 
         horizontalLayout_6->addWidget(swapColorsButton);
 
         centerButton = new QCheckBox(SurfaceConfigurator);
-        centerButton->setObjectName(QString::fromUtf8("centerButton"));
+        centerButton->setObjectName(QStringLiteral("centerButton"));
 
         horizontalLayout_6->addWidget(centerButton);
 
@@ -266,9 +268,9 @@ public:
         gridLayout->addLayout(horizontalLayout_6, 1, 1, 1, 1);
 
         horizontalLayout_7 = new QHBoxLayout();
-        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
         transparencySlider = new QSlider(SurfaceConfigurator);
-        transparencySlider->setObjectName(QString::fromUtf8("transparencySlider"));
+        transparencySlider->setObjectName(QStringLiteral("transparencySlider"));
         transparencySlider->setMaximum(100);
         transparencySlider->setValue(99);
         transparencySlider->setSliderPosition(99);
@@ -283,13 +285,13 @@ public:
         verticalLayout->addLayout(gridLayout);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_2);
 
         okButton = new QPushButton(SurfaceConfigurator);
-        okButton->setObjectName(QString::fromUtf8("okButton"));
+        okButton->setObjectName(QStringLiteral("okButton"));
         okButton->setAutoDefault(false);
 
         horizontalLayout_2->addWidget(okButton);
@@ -306,27 +308,29 @@ public:
 
     void retranslateUi(QDialog *SurfaceConfigurator)
     {
-        SurfaceConfigurator->setWindowTitle(QApplication::translate("SurfaceConfigurator", "Configure Surface", nullptr));
-        label_9->setText(QApplication::translate("SurfaceConfigurator", "Colors:", nullptr));
+        SurfaceConfigurator->setWindowTitle(QApplication::translate("SurfaceConfigurator", "Configure Surface", Q_NULLPTR));
+        label_9->setText(QApplication::translate("SurfaceConfigurator", "Colors:", Q_NULLPTR));
         negativeColorButton->setText(QString());
-        negativeLabel->setText(QApplication::translate("SurfaceConfigurator", "Negative", nullptr));
+        negativeLabel->setText(QApplication::translate("SurfaceConfigurator", "Negative", Q_NULLPTR));
         positiveColorButton->setText(QString());
-        positiveLabel->setText(QApplication::translate("SurfaceConfigurator", "Positive", nullptr));
-        propertyCombo->setItemText(0, QApplication::translate("SurfaceConfigurator", "None", nullptr));
-
-        label_3->setText(QApplication::translate("SurfaceConfigurator", "Surface Area:", nullptr));
-        areaLabel->setText(QApplication::translate("SurfaceConfigurator", "area", nullptr));
-        fillButton->setText(QApplication::translate("SurfaceConfigurator", "Fill", nullptr));
-        linesButton->setText(QApplication::translate("SurfaceConfigurator", "Lines", nullptr));
-        dotsButton->setText(QApplication::translate("SurfaceConfigurator", "Dots", nullptr));
-        ambientOcclusionCheckBox->setText(QApplication::translate("SurfaceConfigurator", "AO", nullptr));
-        clipCheckBox->setText(QApplication::translate("SurfaceConfigurator", "Clip", nullptr));
-        label_2->setText(QApplication::translate("SurfaceConfigurator", "Render", nullptr));
-        label_10->setText(QApplication::translate("SurfaceConfigurator", "Property", nullptr));
-        label_8->setText(QApplication::translate("SurfaceConfigurator", "Opacity", nullptr));
-        swapColorsButton->setText(QApplication::translate("SurfaceConfigurator", "Swap Colors", nullptr));
-        centerButton->setText(QApplication::translate("SurfaceConfigurator", "Center Gradient", nullptr));
-        okButton->setText(QApplication::translate("SurfaceConfigurator", "OK", nullptr));
+        positiveLabel->setText(QApplication::translate("SurfaceConfigurator", "Positive", Q_NULLPTR));
+        propertyCombo->clear();
+        propertyCombo->insertItems(0, QStringList()
+         << QApplication::translate("SurfaceConfigurator", "None", Q_NULLPTR)
+        );
+        label_3->setText(QApplication::translate("SurfaceConfigurator", "Surface Area:", Q_NULLPTR));
+        areaLabel->setText(QApplication::translate("SurfaceConfigurator", "area", Q_NULLPTR));
+        fillButton->setText(QApplication::translate("SurfaceConfigurator", "Fill", Q_NULLPTR));
+        linesButton->setText(QApplication::translate("SurfaceConfigurator", "Lines", Q_NULLPTR));
+        dotsButton->setText(QApplication::translate("SurfaceConfigurator", "Dots", Q_NULLPTR));
+        ambientOcclusionCheckBox->setText(QApplication::translate("SurfaceConfigurator", "AO", Q_NULLPTR));
+        clipCheckBox->setText(QApplication::translate("SurfaceConfigurator", "Clip", Q_NULLPTR));
+        label_2->setText(QApplication::translate("SurfaceConfigurator", "Render", Q_NULLPTR));
+        label_10->setText(QApplication::translate("SurfaceConfigurator", "Property", Q_NULLPTR));
+        label_8->setText(QApplication::translate("SurfaceConfigurator", "Opacity", Q_NULLPTR));
+        swapColorsButton->setText(QApplication::translate("SurfaceConfigurator", "Swap Colors", Q_NULLPTR));
+        centerButton->setText(QApplication::translate("SurfaceConfigurator", "Center Gradient", Q_NULLPTR));
+        okButton->setText(QApplication::translate("SurfaceConfigurator", "OK", Q_NULLPTR));
     } // retranslateUi
 
 };

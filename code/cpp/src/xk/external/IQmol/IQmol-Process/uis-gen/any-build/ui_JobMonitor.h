@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'JobMonitor.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,7 +10,9 @@
 #define UI_JOBMONITOR_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
@@ -40,9 +42,9 @@ public:
     void setupUi(QMainWindow *JobMonitor)
     {
         if (JobMonitor->objectName().isEmpty())
-            JobMonitor->setObjectName(QString::fromUtf8("JobMonitor"));
+            JobMonitor->setObjectName(QStringLiteral("JobMonitor"));
         JobMonitor->resize(589, 298);
-        JobMonitor->setStyleSheet(QString::fromUtf8(" QToolTip {\n"
+        JobMonitor->setStyleSheet(QLatin1String(" QToolTip {\n"
 "    border: 2px solid darkkhaki;\n"
 "    padding: 2px;\n"
 "    border-radius: 3px;\n"
@@ -52,9 +54,9 @@ public:
 "    background-color: #EEE;\n"
 "}"));
         centralwidget = new QWidget(JobMonitor);
-        centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
+        centralwidget->setObjectName(QStringLiteral("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         processTable = new QTableWidget(centralwidget);
         if (processTable->columnCount() < 5)
             processTable->setColumnCount(5);
@@ -68,7 +70,7 @@ public:
         processTable->setHorizontalHeaderItem(3, __qtablewidgetitem3);
         QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
         processTable->setHorizontalHeaderItem(4, __qtablewidgetitem4);
-        processTable->setObjectName(QString::fromUtf8("processTable"));
+        processTable->setObjectName(QStringLiteral("processTable"));
         processTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
         processTable->setSelectionMode(QAbstractItemView::SingleSelection);
         processTable->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -82,9 +84,9 @@ public:
         verticalLayout->addWidget(processTable);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         clearListButton = new QPushButton(centralwidget);
-        clearListButton->setObjectName(QString::fromUtf8("clearListButton"));
+        clearListButton->setObjectName(QStringLiteral("clearListButton"));
 
         horizontalLayout->addWidget(clearListButton);
 
@@ -93,7 +95,7 @@ public:
         horizontalLayout->addItem(horizontalSpacer);
 
         closeButton = new QPushButton(centralwidget);
-        closeButton->setObjectName(QString::fromUtf8("closeButton"));
+        closeButton->setObjectName(QStringLiteral("closeButton"));
 
         horizontalLayout->addWidget(closeButton);
 
@@ -102,11 +104,11 @@ public:
 
         JobMonitor->setCentralWidget(centralwidget);
         menubar = new QMenuBar(JobMonitor);
-        menubar->setObjectName(QString::fromUtf8("menubar"));
+        menubar->setObjectName(QStringLiteral("menubar"));
         menubar->setGeometry(QRect(0, 0, 589, 22));
         JobMonitor->setMenuBar(menubar);
         statusbar = new QStatusBar(JobMonitor);
-        statusbar->setObjectName(QString::fromUtf8("statusbar"));
+        statusbar->setObjectName(QStringLiteral("statusbar"));
         JobMonitor->setStatusBar(statusbar);
 
         retranslateUi(JobMonitor);
@@ -117,22 +119,22 @@ public:
 
     void retranslateUi(QMainWindow *JobMonitor)
     {
-        JobMonitor->setWindowTitle(QApplication::translate("JobMonitor", "Job Monitor", nullptr));
+        JobMonitor->setWindowTitle(QApplication::translate("JobMonitor", "Job Monitor", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem = processTable->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("JobMonitor", "Job", nullptr));
+        ___qtablewidgetitem->setText(QApplication::translate("JobMonitor", "Job", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem1 = processTable->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("JobMonitor", "Server", nullptr));
+        ___qtablewidgetitem1->setText(QApplication::translate("JobMonitor", "Server", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem2 = processTable->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("JobMonitor", "Submit Time", nullptr));
+        ___qtablewidgetitem2->setText(QApplication::translate("JobMonitor", "Submit Time", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem3 = processTable->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("JobMonitor", "Run Time", nullptr));
+        ___qtablewidgetitem3->setText(QApplication::translate("JobMonitor", "Run Time", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem4 = processTable->horizontalHeaderItem(4);
-        ___qtablewidgetitem4->setText(QApplication::translate("JobMonitor", "Status", nullptr));
+        ___qtablewidgetitem4->setText(QApplication::translate("JobMonitor", "Status", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        clearListButton->setToolTip(QApplication::translate("JobMonitor", "Removes finished and killed jobs from the list", nullptr));
+        clearListButton->setToolTip(QApplication::translate("JobMonitor", "Removes finished and killed jobs from the list", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        clearListButton->setText(QApplication::translate("JobMonitor", "Clear List", nullptr));
-        closeButton->setText(QApplication::translate("JobMonitor", "Close", nullptr));
+        clearListButton->setText(QApplication::translate("JobMonitor", "Clear List", Q_NULLPTR));
+        closeButton->setText(QApplication::translate("JobMonitor", "Close", Q_NULLPTR));
     } // retranslateUi
 
 };

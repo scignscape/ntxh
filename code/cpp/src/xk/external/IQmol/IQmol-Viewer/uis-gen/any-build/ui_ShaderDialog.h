@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ShaderDialog.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,7 +10,9 @@
 #define UI_SHADERDIALOG_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
@@ -18,6 +20,7 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
@@ -118,9 +121,9 @@ public:
     void setupUi(QDialog *ShaderDialog)
     {
         if (ShaderDialog->objectName().isEmpty())
-            ShaderDialog->setObjectName(QString::fromUtf8("ShaderDialog"));
+            ShaderDialog->setObjectName(QStringLiteral("ShaderDialog"));
         ShaderDialog->resize(516, 607);
-        ShaderDialog->setStyleSheet(QString::fromUtf8("QToolButton {\n"
+        ShaderDialog->setStyleSheet(QLatin1String("QToolButton {\n"
 "   color: #333;\n"
 "   background-color: #666;\n"
 "   border-width: 2px;\n"
@@ -149,22 +152,22 @@ public:
 "}\n"
 ""));
         verticalLayout_4 = new QVBoxLayout(ShaderDialog);
-        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         shaderFilterTabWidget = new QTabWidget(ShaderDialog);
-        shaderFilterTabWidget->setObjectName(QString::fromUtf8("shaderFilterTabWidget"));
+        shaderFilterTabWidget->setObjectName(QStringLiteral("shaderFilterTabWidget"));
         tab = new QWidget();
-        tab->setObjectName(QString::fromUtf8("tab"));
+        tab->setObjectName(QStringLiteral("tab"));
         verticalLayout = new QVBoxLayout(tab);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         label_10 = new QLabel(tab);
-        label_10->setObjectName(QString::fromUtf8("label_10"));
+        label_10->setObjectName(QStringLiteral("label_10"));
 
         horizontalLayout_5->addWidget(label_10);
 
         shaderCombo = new QComboBox(tab);
-        shaderCombo->setObjectName(QString::fromUtf8("shaderCombo"));
+        shaderCombo->setObjectName(QStringLiteral("shaderCombo"));
 
         horizontalLayout_5->addWidget(shaderCombo);
 
@@ -176,29 +179,29 @@ public:
         verticalLayout->addLayout(horizontalLayout_5);
 
         gridLayout_2 = new QGridLayout();
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         label0 = new QLabel(tab);
-        label0->setObjectName(QString::fromUtf8("label0"));
+        label0->setObjectName(QStringLiteral("label0"));
 
         gridLayout_2->addWidget(label0, 0, 0, 1, 1);
 
         label1 = new QLabel(tab);
-        label1->setObjectName(QString::fromUtf8("label1"));
+        label1->setObjectName(QStringLiteral("label1"));
 
         gridLayout_2->addWidget(label1, 1, 0, 1, 1);
 
         label2 = new QLabel(tab);
-        label2->setObjectName(QString::fromUtf8("label2"));
+        label2->setObjectName(QStringLiteral("label2"));
 
         gridLayout_2->addWidget(label2, 2, 0, 1, 1);
 
         label3 = new QLabel(tab);
-        label3->setObjectName(QString::fromUtf8("label3"));
+        label3->setObjectName(QStringLiteral("label3"));
 
         gridLayout_2->addWidget(label3, 3, 0, 1, 1);
 
         slider0 = new QSlider(tab);
-        slider0->setObjectName(QString::fromUtf8("slider0"));
+        slider0->setObjectName(QStringLiteral("slider0"));
         slider0->setMaximum(100);
         slider0->setValue(50);
         slider0->setSliderPosition(50);
@@ -207,7 +210,7 @@ public:
         gridLayout_2->addWidget(slider0, 0, 1, 1, 1);
 
         slider1 = new QSlider(tab);
-        slider1->setObjectName(QString::fromUtf8("slider1"));
+        slider1->setObjectName(QStringLiteral("slider1"));
         slider1->setMaximum(100);
         slider1->setValue(50);
         slider1->setOrientation(Qt::Horizontal);
@@ -215,7 +218,7 @@ public:
         gridLayout_2->addWidget(slider1, 1, 1, 1, 1);
 
         slider2 = new QSlider(tab);
-        slider2->setObjectName(QString::fromUtf8("slider2"));
+        slider2->setObjectName(QStringLiteral("slider2"));
         slider2->setMaximum(100);
         slider2->setValue(50);
         slider2->setOrientation(Qt::Horizontal);
@@ -223,12 +226,12 @@ public:
         gridLayout_2->addWidget(slider2, 2, 1, 1, 1);
 
         label4 = new QLabel(tab);
-        label4->setObjectName(QString::fromUtf8("label4"));
+        label4->setObjectName(QStringLiteral("label4"));
 
         gridLayout_2->addWidget(label4, 4, 0, 1, 1);
 
         slider4 = new QSlider(tab);
-        slider4->setObjectName(QString::fromUtf8("slider4"));
+        slider4->setObjectName(QStringLiteral("slider4"));
         slider4->setMaximum(100);
         slider4->setValue(50);
         slider4->setOrientation(Qt::Horizontal);
@@ -236,12 +239,12 @@ public:
         gridLayout_2->addWidget(slider4, 4, 1, 1, 1);
 
         label5 = new QLabel(tab);
-        label5->setObjectName(QString::fromUtf8("label5"));
+        label5->setObjectName(QStringLiteral("label5"));
 
         gridLayout_2->addWidget(label5, 5, 0, 1, 1);
 
         slider5 = new QSlider(tab);
-        slider5->setObjectName(QString::fromUtf8("slider5"));
+        slider5->setObjectName(QStringLiteral("slider5"));
         slider5->setMaximum(100);
         slider5->setValue(50);
         slider5->setOrientation(Qt::Horizontal);
@@ -249,7 +252,7 @@ public:
         gridLayout_2->addWidget(slider5, 5, 1, 1, 1);
 
         slider3 = new QSlider(tab);
-        slider3->setObjectName(QString::fromUtf8("slider3"));
+        slider3->setObjectName(QStringLiteral("slider3"));
         slider3->setMaximum(100);
         slider3->setValue(50);
         slider3->setOrientation(Qt::Horizontal);
@@ -260,36 +263,36 @@ public:
         verticalLayout->addLayout(gridLayout_2);
 
         optionBox = new QGroupBox(tab);
-        optionBox->setObjectName(QString::fromUtf8("optionBox"));
+        optionBox->setObjectName(QStringLiteral("optionBox"));
         gridLayout_5 = new QGridLayout(optionBox);
-        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+        gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
         checkBox0 = new QCheckBox(optionBox);
-        checkBox0->setObjectName(QString::fromUtf8("checkBox0"));
+        checkBox0->setObjectName(QStringLiteral("checkBox0"));
 
         gridLayout_5->addWidget(checkBox0, 0, 0, 1, 1);
 
         checkBox1 = new QCheckBox(optionBox);
-        checkBox1->setObjectName(QString::fromUtf8("checkBox1"));
+        checkBox1->setObjectName(QStringLiteral("checkBox1"));
 
         gridLayout_5->addWidget(checkBox1, 0, 1, 1, 1);
 
         checkBox2 = new QCheckBox(optionBox);
-        checkBox2->setObjectName(QString::fromUtf8("checkBox2"));
+        checkBox2->setObjectName(QStringLiteral("checkBox2"));
 
         gridLayout_5->addWidget(checkBox2, 1, 0, 1, 1);
 
         checkBox3 = new QCheckBox(optionBox);
-        checkBox3->setObjectName(QString::fromUtf8("checkBox3"));
+        checkBox3->setObjectName(QStringLiteral("checkBox3"));
 
         gridLayout_5->addWidget(checkBox3, 1, 1, 1, 1);
 
         checkBox4 = new QCheckBox(optionBox);
-        checkBox4->setObjectName(QString::fromUtf8("checkBox4"));
+        checkBox4->setObjectName(QStringLiteral("checkBox4"));
 
         gridLayout_5->addWidget(checkBox4, 2, 0, 1, 1);
 
         checkBox5 = new QCheckBox(optionBox);
-        checkBox5->setObjectName(QString::fromUtf8("checkBox5"));
+        checkBox5->setObjectName(QStringLiteral("checkBox5"));
 
         gridLayout_5->addWidget(checkBox5, 2, 1, 1, 1);
 
@@ -297,36 +300,36 @@ public:
         verticalLayout->addWidget(optionBox);
 
         lightBox = new QGroupBox(tab);
-        lightBox->setObjectName(QString::fromUtf8("lightBox"));
+        lightBox->setObjectName(QStringLiteral("lightBox"));
         gridLayout_4 = new QGridLayout(lightBox);
-        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
         lightBox0 = new QCheckBox(lightBox);
-        lightBox0->setObjectName(QString::fromUtf8("lightBox0"));
+        lightBox0->setObjectName(QStringLiteral("lightBox0"));
 
         gridLayout_4->addWidget(lightBox0, 0, 0, 1, 1);
 
         lightBox1 = new QCheckBox(lightBox);
-        lightBox1->setObjectName(QString::fromUtf8("lightBox1"));
+        lightBox1->setObjectName(QStringLiteral("lightBox1"));
 
         gridLayout_4->addWidget(lightBox1, 0, 1, 1, 1);
 
         lightBox2 = new QCheckBox(lightBox);
-        lightBox2->setObjectName(QString::fromUtf8("lightBox2"));
+        lightBox2->setObjectName(QStringLiteral("lightBox2"));
 
         gridLayout_4->addWidget(lightBox2, 0, 2, 1, 1);
 
         lightBox3 = new QCheckBox(lightBox);
-        lightBox3->setObjectName(QString::fromUtf8("lightBox3"));
+        lightBox3->setObjectName(QStringLiteral("lightBox3"));
 
         gridLayout_4->addWidget(lightBox3, 1, 0, 1, 1);
 
         lightBox5 = new QCheckBox(lightBox);
-        lightBox5->setObjectName(QString::fromUtf8("lightBox5"));
+        lightBox5->setObjectName(QStringLiteral("lightBox5"));
 
         gridLayout_4->addWidget(lightBox5, 1, 2, 1, 1);
 
         lightBox4 = new QCheckBox(lightBox);
-        lightBox4->setObjectName(QString::fromUtf8("lightBox4"));
+        lightBox4->setObjectName(QStringLiteral("lightBox4"));
 
         gridLayout_4->addWidget(lightBox4, 1, 1, 1, 1);
 
@@ -339,60 +342,60 @@ public:
 
         shaderFilterTabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
-        tab_2->setObjectName(QString::fromUtf8("tab_2"));
+        tab_2->setObjectName(QStringLiteral("tab_2"));
         verticalLayout_3 = new QVBoxLayout(tab_2);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         antialias = new QCheckBox(tab_2);
-        antialias->setObjectName(QString::fromUtf8("antialias"));
+        antialias->setObjectName(QStringLiteral("antialias"));
 
         verticalLayout_3->addWidget(antialias);
 
         border = new QCheckBox(tab_2);
-        border->setObjectName(QString::fromUtf8("border"));
+        border->setObjectName(QStringLiteral("border"));
 
         verticalLayout_3->addWidget(border);
 
         ambientOcclusion = new QCheckBox(tab_2);
-        ambientOcclusion->setObjectName(QString::fromUtf8("ambientOcclusion"));
+        ambientOcclusion->setObjectName(QStringLiteral("ambientOcclusion"));
 
         verticalLayout_3->addWidget(ambientOcclusion);
 
         aoOptionsGroupBox = new QGroupBox(tab_2);
-        aoOptionsGroupBox->setObjectName(QString::fromUtf8("aoOptionsGroupBox"));
+        aoOptionsGroupBox->setObjectName(QStringLiteral("aoOptionsGroupBox"));
         aoOptionsGroupBox->setEnabled(false);
         verticalLayout_2 = new QVBoxLayout(aoOptionsGroupBox);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         label = new QLabel(aoOptionsGroupBox);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         gridLayout->addWidget(label, 0, 0, 1, 1);
 
         aoRadius = new QSlider(aoOptionsGroupBox);
-        aoRadius->setObjectName(QString::fromUtf8("aoRadius"));
+        aoRadius->setObjectName(QStringLiteral("aoRadius"));
         aoRadius->setOrientation(Qt::Horizontal);
 
         gridLayout->addWidget(aoRadius, 0, 1, 1, 1);
 
         label_2 = new QLabel(aoOptionsGroupBox);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         gridLayout->addWidget(label_2, 1, 0, 1, 1);
 
         aoStrength = new QSlider(aoOptionsGroupBox);
-        aoStrength->setObjectName(QString::fromUtf8("aoStrength"));
+        aoStrength->setObjectName(QStringLiteral("aoStrength"));
         aoStrength->setOrientation(Qt::Horizontal);
 
         gridLayout->addWidget(aoStrength, 1, 1, 1, 1);
 
         label_3 = new QLabel(aoOptionsGroupBox);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName(QStringLiteral("label_3"));
 
         gridLayout->addWidget(label_3, 2, 0, 1, 1);
 
         aoTotal = new QSlider(aoOptionsGroupBox);
-        aoTotal->setObjectName(QString::fromUtf8("aoTotal"));
+        aoTotal->setObjectName(QStringLiteral("aoTotal"));
         aoTotal->setOrientation(Qt::Horizontal);
 
         gridLayout->addWidget(aoTotal, 2, 1, 1, 1);
@@ -409,35 +412,35 @@ public:
 
         shaderFilterTabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
-        tab_3->setObjectName(QString::fromUtf8("tab_3"));
+        tab_3->setObjectName(QStringLiteral("tab_3"));
         verticalLayout_5 = new QVBoxLayout(tab_3);
-        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
         groupBox_2 = new QGroupBox(tab_3);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
         gridLayout_3 = new QGridLayout(groupBox_2);
-        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         label_9 = new QLabel(groupBox_2);
-        label_9->setObjectName(QString::fromUtf8("label_9"));
+        label_9->setObjectName(QStringLiteral("label_9"));
 
         gridLayout_3->addWidget(label_9, 2, 0, 1, 1);
 
         bondTexture = new QComboBox(groupBox_2);
-        bondTexture->setObjectName(QString::fromUtf8("bondTexture"));
+        bondTexture->setObjectName(QStringLiteral("bondTexture"));
 
         gridLayout_3->addWidget(bondTexture, 2, 1, 1, 1);
 
         label_8 = new QLabel(groupBox_2);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
+        label_8->setObjectName(QStringLiteral("label_8"));
 
         gridLayout_3->addWidget(label_8, 1, 0, 1, 1);
 
         label_13 = new QLabel(groupBox_2);
-        label_13->setObjectName(QString::fromUtf8("label_13"));
+        label_13->setObjectName(QStringLiteral("label_13"));
 
         gridLayout_3->addWidget(label_13, 3, 0, 1, 1);
 
         surfaceTexture = new QComboBox(groupBox_2);
-        surfaceTexture->setObjectName(QString::fromUtf8("surfaceTexture"));
+        surfaceTexture->setObjectName(QStringLiteral("surfaceTexture"));
 
         gridLayout_3->addWidget(surfaceTexture, 3, 1, 1, 1);
 
@@ -446,21 +449,17 @@ public:
         gridLayout_3->addItem(horizontalSpacer, 1, 2, 1, 1);
 
         atomTexture = new QComboBox(groupBox_2);
-        atomTexture->setObjectName(QString::fromUtf8("atomTexture"));
+        atomTexture->setObjectName(QStringLiteral("atomTexture"));
 
         gridLayout_3->addWidget(atomTexture, 1, 1, 1, 1);
 
         background = new QComboBox(groupBox_2);
-        background->addItem(QString());
-        background->addItem(QString());
-        background->addItem(QString());
-        background->addItem(QString());
-        background->setObjectName(QString::fromUtf8("background"));
+        background->setObjectName(QStringLiteral("background"));
 
         gridLayout_3->addWidget(background, 0, 1, 1, 1);
 
         label_7 = new QLabel(groupBox_2);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
+        label_7->setObjectName(QStringLiteral("label_7"));
 
         gridLayout_3->addWidget(label_7, 0, 0, 1, 1);
 
@@ -468,11 +467,11 @@ public:
         verticalLayout_5->addWidget(groupBox_2);
 
         groupBox_3 = new QGroupBox(tab_3);
-        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
+        groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
         gridLayout_7 = new QGridLayout(groupBox_3);
-        gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
+        gridLayout_7->setObjectName(QStringLiteral("gridLayout_7"));
         atomSampleFrame = new QFrame(groupBox_3);
-        atomSampleFrame->setObjectName(QString::fromUtf8("atomSampleFrame"));
+        atomSampleFrame->setObjectName(QStringLiteral("atomSampleFrame"));
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(1);
@@ -485,7 +484,7 @@ public:
         gridLayout_7->addWidget(atomSampleFrame, 0, 2, 1, 1);
 
         surfaceSampleFrame = new QFrame(groupBox_3);
-        surfaceSampleFrame->setObjectName(QString::fromUtf8("surfaceSampleFrame"));
+        surfaceSampleFrame->setObjectName(QStringLiteral("surfaceSampleFrame"));
         QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -501,28 +500,28 @@ public:
         verticalLayout_5->addWidget(groupBox_3);
 
         lightBox_2 = new QGroupBox(tab_3);
-        lightBox_2->setObjectName(QString::fromUtf8("lightBox_2"));
+        lightBox_2->setObjectName(QStringLiteral("lightBox_2"));
         gridLayout_6 = new QGridLayout(lightBox_2);
-        gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
+        gridLayout_6->setObjectName(QStringLiteral("gridLayout_6"));
         povLightFront = new QCheckBox(lightBox_2);
-        povLightFront->setObjectName(QString::fromUtf8("povLightFront"));
+        povLightFront->setObjectName(QStringLiteral("povLightFront"));
         povLightFront->setChecked(true);
 
         gridLayout_6->addWidget(povLightFront, 0, 0, 1, 1);
 
         povLightHighlight = new QCheckBox(lightBox_2);
-        povLightHighlight->setObjectName(QString::fromUtf8("povLightHighlight"));
+        povLightHighlight->setObjectName(QStringLiteral("povLightHighlight"));
 
         gridLayout_6->addWidget(povLightHighlight, 0, 1, 1, 1);
 
         povLightLeft = new QCheckBox(lightBox_2);
-        povLightLeft->setObjectName(QString::fromUtf8("povLightLeft"));
+        povLightLeft->setObjectName(QStringLiteral("povLightLeft"));
         povLightLeft->setChecked(true);
 
         gridLayout_6->addWidget(povLightLeft, 0, 2, 1, 1);
 
         povLightLower = new QCheckBox(lightBox_2);
-        povLightLower->setObjectName(QString::fromUtf8("povLightLower"));
+        povLightLower->setObjectName(QStringLiteral("povLightLower"));
 
         gridLayout_6->addWidget(povLightLower, 1, 0, 1, 1);
 
@@ -530,13 +529,13 @@ public:
         verticalLayout_5->addWidget(lightBox_2);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer_3);
 
         generatePovRay = new QPushButton(tab_3);
-        generatePovRay->setObjectName(QString::fromUtf8("generatePovRay"));
+        generatePovRay->setObjectName(QStringLiteral("generatePovRay"));
 
         horizontalLayout->addWidget(generatePovRay);
 
@@ -548,9 +547,9 @@ public:
         verticalLayout_4->addWidget(shaderFilterTabWidget);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         saveAsDefault = new QPushButton(ShaderDialog);
-        saveAsDefault->setObjectName(QString::fromUtf8("saveAsDefault"));
+        saveAsDefault->setObjectName(QStringLiteral("saveAsDefault"));
 
         horizontalLayout_2->addWidget(saveAsDefault);
 
@@ -559,7 +558,7 @@ public:
         horizontalLayout_2->addItem(horizontalSpacer_2);
 
         okButton = new QPushButton(ShaderDialog);
-        okButton->setObjectName(QString::fromUtf8("okButton"));
+        okButton->setObjectName(QStringLiteral("okButton"));
 
         horizontalLayout_2->addWidget(okButton);
 
@@ -605,57 +604,59 @@ public:
 
     void retranslateUi(QDialog *ShaderDialog)
     {
-        ShaderDialog->setWindowTitle(QApplication::translate("ShaderDialog", "Appearance", nullptr));
-        label_10->setText(QApplication::translate("ShaderDialog", "Shader", nullptr));
-        label0->setText(QApplication::translate("ShaderDialog", "Label0", nullptr));
-        label1->setText(QApplication::translate("ShaderDialog", "Label1", nullptr));
-        label2->setText(QApplication::translate("ShaderDialog", "Label2", nullptr));
-        label3->setText(QApplication::translate("ShaderDialog", "Label3", nullptr));
-        label4->setText(QApplication::translate("ShaderDialog", "Label4", nullptr));
-        label5->setText(QApplication::translate("ShaderDialog", "Lable6", nullptr));
-        optionBox->setTitle(QApplication::translate("ShaderDialog", "Options", nullptr));
-        checkBox0->setText(QApplication::translate("ShaderDialog", "checkBox0", nullptr));
-        checkBox1->setText(QApplication::translate("ShaderDialog", "checkBox1", nullptr));
-        checkBox2->setText(QApplication::translate("ShaderDialog", "checkBox2", nullptr));
-        checkBox3->setText(QApplication::translate("ShaderDialog", "checkBox3", nullptr));
-        checkBox4->setText(QApplication::translate("ShaderDialog", "checkBox4", nullptr));
-        checkBox5->setText(QApplication::translate("ShaderDialog", "checkBox5", nullptr));
-        lightBox->setTitle(QApplication::translate("ShaderDialog", "Lights", nullptr));
-        lightBox0->setText(QApplication::translate("ShaderDialog", "Backlight", nullptr));
-        lightBox1->setText(QApplication::translate("ShaderDialog", "Top", nullptr));
-        lightBox2->setText(QApplication::translate("ShaderDialog", "Highlight", nullptr));
-        lightBox3->setText(QApplication::translate("ShaderDialog", "Left", nullptr));
-        lightBox5->setText(QApplication::translate("ShaderDialog", "Right", nullptr));
-        lightBox4->setText(QApplication::translate("ShaderDialog", "Center", nullptr));
-        shaderFilterTabWidget->setTabText(shaderFilterTabWidget->indexOf(tab), QApplication::translate("ShaderDialog", "Shader", nullptr));
-        antialias->setText(QApplication::translate("ShaderDialog", "Antialias Edges", nullptr));
-        border->setText(QApplication::translate("ShaderDialog", "Border", nullptr));
-        ambientOcclusion->setText(QApplication::translate("ShaderDialog", "Ambient Occlusion", nullptr));
-        aoOptionsGroupBox->setTitle(QApplication::translate("ShaderDialog", "Options", nullptr));
-        label->setText(QApplication::translate("ShaderDialog", "Radius", nullptr));
-        label_2->setText(QApplication::translate("ShaderDialog", "Strength", nullptr));
-        label_3->setText(QApplication::translate("ShaderDialog", "Total", nullptr));
-        shaderFilterTabWidget->setTabText(shaderFilterTabWidget->indexOf(tab_2), QApplication::translate("ShaderDialog", "Effects", nullptr));
-        groupBox_2->setTitle(QApplication::translate("ShaderDialog", "Textures", nullptr));
-        label_9->setText(QApplication::translate("ShaderDialog", "Bond", nullptr));
-        label_8->setText(QApplication::translate("ShaderDialog", "Atom", nullptr));
-        label_13->setText(QApplication::translate("ShaderDialog", "Surface", nullptr));
-        background->setItemText(0, QApplication::translate("ShaderDialog", "None", nullptr));
-        background->setItemText(1, QApplication::translate("ShaderDialog", "Default", nullptr));
-        background->setItemText(2, QApplication::translate("ShaderDialog", "Black", nullptr));
-        background->setItemText(3, QApplication::translate("ShaderDialog", "White", nullptr));
-
-        label_7->setText(QApplication::translate("ShaderDialog", "Background", nullptr));
-        groupBox_3->setTitle(QApplication::translate("ShaderDialog", "Sample", nullptr));
-        lightBox_2->setTitle(QApplication::translate("ShaderDialog", "Lights", nullptr));
-        povLightFront->setText(QApplication::translate("ShaderDialog", "Front", nullptr));
-        povLightHighlight->setText(QApplication::translate("ShaderDialog", "Highlight", nullptr));
-        povLightLeft->setText(QApplication::translate("ShaderDialog", "Left", nullptr));
-        povLightLower->setText(QApplication::translate("ShaderDialog", "Lower", nullptr));
-        generatePovRay->setText(QApplication::translate("ShaderDialog", "Generate POV-Ray File", nullptr));
-        shaderFilterTabWidget->setTabText(shaderFilterTabWidget->indexOf(tab_3), QApplication::translate("ShaderDialog", "POV-Ray", nullptr));
-        saveAsDefault->setText(QApplication::translate("ShaderDialog", "Save As Default", nullptr));
-        okButton->setText(QApplication::translate("ShaderDialog", "OK", nullptr));
+        ShaderDialog->setWindowTitle(QApplication::translate("ShaderDialog", "Appearance", Q_NULLPTR));
+        label_10->setText(QApplication::translate("ShaderDialog", "Shader", Q_NULLPTR));
+        label0->setText(QApplication::translate("ShaderDialog", "Label0", Q_NULLPTR));
+        label1->setText(QApplication::translate("ShaderDialog", "Label1", Q_NULLPTR));
+        label2->setText(QApplication::translate("ShaderDialog", "Label2", Q_NULLPTR));
+        label3->setText(QApplication::translate("ShaderDialog", "Label3", Q_NULLPTR));
+        label4->setText(QApplication::translate("ShaderDialog", "Label4", Q_NULLPTR));
+        label5->setText(QApplication::translate("ShaderDialog", "Lable6", Q_NULLPTR));
+        optionBox->setTitle(QApplication::translate("ShaderDialog", "Options", Q_NULLPTR));
+        checkBox0->setText(QApplication::translate("ShaderDialog", "checkBox0", Q_NULLPTR));
+        checkBox1->setText(QApplication::translate("ShaderDialog", "checkBox1", Q_NULLPTR));
+        checkBox2->setText(QApplication::translate("ShaderDialog", "checkBox2", Q_NULLPTR));
+        checkBox3->setText(QApplication::translate("ShaderDialog", "checkBox3", Q_NULLPTR));
+        checkBox4->setText(QApplication::translate("ShaderDialog", "checkBox4", Q_NULLPTR));
+        checkBox5->setText(QApplication::translate("ShaderDialog", "checkBox5", Q_NULLPTR));
+        lightBox->setTitle(QApplication::translate("ShaderDialog", "Lights", Q_NULLPTR));
+        lightBox0->setText(QApplication::translate("ShaderDialog", "Backlight", Q_NULLPTR));
+        lightBox1->setText(QApplication::translate("ShaderDialog", "Top", Q_NULLPTR));
+        lightBox2->setText(QApplication::translate("ShaderDialog", "Highlight", Q_NULLPTR));
+        lightBox3->setText(QApplication::translate("ShaderDialog", "Left", Q_NULLPTR));
+        lightBox5->setText(QApplication::translate("ShaderDialog", "Right", Q_NULLPTR));
+        lightBox4->setText(QApplication::translate("ShaderDialog", "Center", Q_NULLPTR));
+        shaderFilterTabWidget->setTabText(shaderFilterTabWidget->indexOf(tab), QApplication::translate("ShaderDialog", "Shader", Q_NULLPTR));
+        antialias->setText(QApplication::translate("ShaderDialog", "Antialias Edges", Q_NULLPTR));
+        border->setText(QApplication::translate("ShaderDialog", "Border", Q_NULLPTR));
+        ambientOcclusion->setText(QApplication::translate("ShaderDialog", "Ambient Occlusion", Q_NULLPTR));
+        aoOptionsGroupBox->setTitle(QApplication::translate("ShaderDialog", "Options", Q_NULLPTR));
+        label->setText(QApplication::translate("ShaderDialog", "Radius", Q_NULLPTR));
+        label_2->setText(QApplication::translate("ShaderDialog", "Strength", Q_NULLPTR));
+        label_3->setText(QApplication::translate("ShaderDialog", "Total", Q_NULLPTR));
+        shaderFilterTabWidget->setTabText(shaderFilterTabWidget->indexOf(tab_2), QApplication::translate("ShaderDialog", "Effects", Q_NULLPTR));
+        groupBox_2->setTitle(QApplication::translate("ShaderDialog", "Textures", Q_NULLPTR));
+        label_9->setText(QApplication::translate("ShaderDialog", "Bond", Q_NULLPTR));
+        label_8->setText(QApplication::translate("ShaderDialog", "Atom", Q_NULLPTR));
+        label_13->setText(QApplication::translate("ShaderDialog", "Surface", Q_NULLPTR));
+        background->clear();
+        background->insertItems(0, QStringList()
+         << QApplication::translate("ShaderDialog", "None", Q_NULLPTR)
+         << QApplication::translate("ShaderDialog", "Default", Q_NULLPTR)
+         << QApplication::translate("ShaderDialog", "Black", Q_NULLPTR)
+         << QApplication::translate("ShaderDialog", "White", Q_NULLPTR)
+        );
+        label_7->setText(QApplication::translate("ShaderDialog", "Background", Q_NULLPTR));
+        groupBox_3->setTitle(QApplication::translate("ShaderDialog", "Sample", Q_NULLPTR));
+        lightBox_2->setTitle(QApplication::translate("ShaderDialog", "Lights", Q_NULLPTR));
+        povLightFront->setText(QApplication::translate("ShaderDialog", "Front", Q_NULLPTR));
+        povLightHighlight->setText(QApplication::translate("ShaderDialog", "Highlight", Q_NULLPTR));
+        povLightLeft->setText(QApplication::translate("ShaderDialog", "Left", Q_NULLPTR));
+        povLightLower->setText(QApplication::translate("ShaderDialog", "Lower", Q_NULLPTR));
+        generatePovRay->setText(QApplication::translate("ShaderDialog", "Generate POV-Ray File", Q_NULLPTR));
+        shaderFilterTabWidget->setTabText(shaderFilterTabWidget->indexOf(tab_3), QApplication::translate("ShaderDialog", "POV-Ray", Q_NULLPTR));
+        saveAsDefault->setText(QApplication::translate("ShaderDialog", "Save As Default", Q_NULLPTR));
+        okButton->setText(QApplication::translate("ShaderDialog", "OK", Q_NULLPTR));
     } // retranslateUi
 
 };

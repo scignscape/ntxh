@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'FragmentTable.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,7 +10,9 @@
 #define UI_FRAGMENTTABLE_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -44,28 +46,28 @@ public:
     void setupUi(QFrame *FragmentTable)
     {
         if (FragmentTable->objectName().isEmpty())
-            FragmentTable->setObjectName(QString::fromUtf8("FragmentTable"));
+            FragmentTable->setObjectName(QStringLiteral("FragmentTable"));
         FragmentTable->resize(412, 306);
         FragmentTable->setFrameShape(QFrame::StyledPanel);
         FragmentTable->setFrameShadow(QFrame::Raised);
         verticalLayout_2 = new QVBoxLayout(FragmentTable);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         functionalGroupsButton = new QRadioButton(FragmentTable);
-        functionalGroupsButton->setObjectName(QString::fromUtf8("functionalGroupsButton"));
+        functionalGroupsButton->setObjectName(QStringLiteral("functionalGroupsButton"));
         functionalGroupsButton->setChecked(true);
 
         horizontalLayout_4->addWidget(functionalGroupsButton);
 
         efpButton = new QRadioButton(FragmentTable);
-        efpButton->setObjectName(QString::fromUtf8("efpButton"));
+        efpButton->setObjectName(QStringLiteral("efpButton"));
         efpButton->setChecked(false);
 
         horizontalLayout_4->addWidget(efpButton);
 
         moleculesButton = new QRadioButton(FragmentTable);
-        moleculesButton->setObjectName(QString::fromUtf8("moleculesButton"));
+        moleculesButton->setObjectName(QStringLiteral("moleculesButton"));
 
         horizontalLayout_4->addWidget(moleculesButton);
 
@@ -77,10 +79,10 @@ public:
         verticalLayout_2->addLayout(horizontalLayout_4);
 
         horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         fragmentList = new QTreeWidget(FragmentTable);
         QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem();
-        __qtreewidgetitem->setText(0, QString::fromUtf8("1"));
+        __qtreewidgetitem->setText(0, QStringLiteral("1"));
         fragmentList->setHeaderItem(__qtreewidgetitem);
         QTreeWidgetItem *__qtreewidgetitem1 = new QTreeWidgetItem(fragmentList);
         new QTreeWidgetItem(__qtreewidgetitem1);
@@ -93,7 +95,7 @@ public:
         new QTreeWidgetItem(__qtreewidgetitem2);
         new QTreeWidgetItem(__qtreewidgetitem2);
         new QTreeWidgetItem(fragmentList);
-        fragmentList->setObjectName(QString::fromUtf8("fragmentList"));
+        fragmentList->setObjectName(QStringLiteral("fragmentList"));
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -111,9 +113,9 @@ public:
         horizontalLayout_3->addWidget(fragmentList);
 
         verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         viewWidget = new QFrame(FragmentTable);
-        viewWidget->setObjectName(QString::fromUtf8("viewWidget"));
+        viewWidget->setObjectName(QStringLiteral("viewWidget"));
         QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -128,13 +130,13 @@ public:
         verticalLayout->addWidget(viewWidget);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalSpacer_2 = new QSpacerItem(48, 17, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer_2);
 
         selectButton = new QPushButton(FragmentTable);
-        selectButton->setObjectName(QString::fromUtf8("selectButton"));
+        selectButton->setObjectName(QStringLiteral("selectButton"));
 
         horizontalLayout->addWidget(selectButton);
 
@@ -163,39 +165,39 @@ public:
 
     void retranslateUi(QFrame *FragmentTable)
     {
-        FragmentTable->setWindowTitle(QApplication::translate("FragmentTable", "Frame", nullptr));
-        functionalGroupsButton->setText(QApplication::translate("FragmentTable", "Functional Group", nullptr));
-        efpButton->setText(QApplication::translate("FragmentTable", "EFP", nullptr));
-        moleculesButton->setText(QApplication::translate("FragmentTable", "Molecules", nullptr));
+        FragmentTable->setWindowTitle(QApplication::translate("FragmentTable", "Frame", Q_NULLPTR));
+        functionalGroupsButton->setText(QApplication::translate("FragmentTable", "Functional Group", Q_NULLPTR));
+        efpButton->setText(QApplication::translate("FragmentTable", "EFP", Q_NULLPTR));
+        moleculesButton->setText(QApplication::translate("FragmentTable", "Molecules", Q_NULLPTR));
 
         const bool __sortingEnabled = fragmentList->isSortingEnabled();
         fragmentList->setSortingEnabled(false);
         QTreeWidgetItem *___qtreewidgetitem = fragmentList->topLevelItem(0);
-        ___qtreewidgetitem->setText(0, QApplication::translate("FragmentTable", "Solvents", nullptr));
+        ___qtreewidgetitem->setText(0, QApplication::translate("FragmentTable", "Solvents", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem1 = ___qtreewidgetitem->child(0);
-        ___qtreewidgetitem1->setText(0, QApplication::translate("FragmentTable", "Acetone", nullptr));
+        ___qtreewidgetitem1->setText(0, QApplication::translate("FragmentTable", "Acetone", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem2 = ___qtreewidgetitem->child(1);
-        ___qtreewidgetitem2->setText(0, QApplication::translate("FragmentTable", "Acetonitrile", nullptr));
+        ___qtreewidgetitem2->setText(0, QApplication::translate("FragmentTable", "Acetonitrile", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem3 = ___qtreewidgetitem->child(2);
-        ___qtreewidgetitem3->setText(0, QApplication::translate("FragmentTable", "Benzene", nullptr));
+        ___qtreewidgetitem3->setText(0, QApplication::translate("FragmentTable", "Benzene", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem4 = ___qtreewidgetitem->child(3);
-        ___qtreewidgetitem4->setText(0, QApplication::translate("FragmentTable", "Carbon Tetracholoride", nullptr));
+        ___qtreewidgetitem4->setText(0, QApplication::translate("FragmentTable", "Carbon Tetracholoride", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem5 = ___qtreewidgetitem->child(4);
-        ___qtreewidgetitem5->setText(0, QApplication::translate("FragmentTable", "Water", nullptr));
+        ___qtreewidgetitem5->setText(0, QApplication::translate("FragmentTable", "Water", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem6 = fragmentList->topLevelItem(1);
-        ___qtreewidgetitem6->setText(0, QApplication::translate("FragmentTable", "Gases", nullptr));
+        ___qtreewidgetitem6->setText(0, QApplication::translate("FragmentTable", "Gases", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem7 = ___qtreewidgetitem6->child(0);
-        ___qtreewidgetitem7->setText(0, QApplication::translate("FragmentTable", "Ammonia", nullptr));
+        ___qtreewidgetitem7->setText(0, QApplication::translate("FragmentTable", "Ammonia", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem8 = ___qtreewidgetitem6->child(1);
-        ___qtreewidgetitem8->setText(0, QApplication::translate("FragmentTable", "Methane", nullptr));
+        ___qtreewidgetitem8->setText(0, QApplication::translate("FragmentTable", "Methane", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem9 = ___qtreewidgetitem6->child(2);
-        ___qtreewidgetitem9->setText(0, QApplication::translate("FragmentTable", "Oxygen (O2)", nullptr));
+        ___qtreewidgetitem9->setText(0, QApplication::translate("FragmentTable", "Oxygen (O2)", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem10 = fragmentList->topLevelItem(2);
-        ___qtreewidgetitem10->setText(0, QApplication::translate("FragmentTable", "Bases", nullptr));
+        ___qtreewidgetitem10->setText(0, QApplication::translate("FragmentTable", "Bases", Q_NULLPTR));
         fragmentList->setSortingEnabled(__sortingEnabled);
 
-        viewWidget->setStyleSheet(QApplication::translate("FragmentTable", "background: white", nullptr));
-        selectButton->setText(QApplication::translate("FragmentTable", "Select", nullptr));
+        viewWidget->setStyleSheet(QApplication::translate("FragmentTable", "background: white", Q_NULLPTR));
+        selectButton->setText(QApplication::translate("FragmentTable", "Select", Q_NULLPTR));
     } // retranslateUi
 
 };

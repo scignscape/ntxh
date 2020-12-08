@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ReactionPathTab.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,9 +10,12 @@
 #define UI_REACTIONPATHTAB_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSpinBox>
@@ -36,29 +39,29 @@ public:
     void setupUi(QWidget *ReactionPathTab)
     {
         if (ReactionPathTab->objectName().isEmpty())
-            ReactionPathTab->setObjectName(QString::fromUtf8("ReactionPathTab"));
+            ReactionPathTab->setObjectName(QStringLiteral("ReactionPathTab"));
         ReactionPathTab->resize(363, 89);
         verticalLayout = new QVBoxLayout(ReactionPathTab);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         label_55 = new QLabel(ReactionPathTab);
-        label_55->setObjectName(QString::fromUtf8("label_55"));
+        label_55->setObjectName(QStringLiteral("label_55"));
 
         horizontalLayout_3->addWidget(label_55);
 
         rpath_direction = new QComboBox(ReactionPathTab);
-        rpath_direction->setObjectName(QString::fromUtf8("rpath_direction"));
+        rpath_direction->setObjectName(QStringLiteral("rpath_direction"));
 
         horizontalLayout_3->addWidget(rpath_direction);
 
         label_57 = new QLabel(ReactionPathTab);
-        label_57->setObjectName(QString::fromUtf8("label_57"));
+        label_57->setObjectName(QStringLiteral("label_57"));
 
         horizontalLayout_3->addWidget(label_57);
 
         rpath_max_cycles = new QSpinBox(ReactionPathTab);
-        rpath_max_cycles->setObjectName(QString::fromUtf8("rpath_max_cycles"));
+        rpath_max_cycles->setObjectName(QStringLiteral("rpath_max_cycles"));
 
         horizontalLayout_3->addWidget(rpath_max_cycles);
 
@@ -81,9 +84,9 @@ public:
 
     void retranslateUi(QWidget *ReactionPathTab)
     {
-        ReactionPathTab->setWindowTitle(QApplication::translate("ReactionPathTab", "Form", nullptr));
-        label_55->setText(QApplication::translate("ReactionPathTab", "Direction", nullptr));
-        label_57->setText(QApplication::translate("ReactionPathTab", "Max Cycles", nullptr));
+        ReactionPathTab->setWindowTitle(QApplication::translate("ReactionPathTab", "Form", Q_NULLPTR));
+        label_55->setText(QApplication::translate("ReactionPathTab", "Direction", Q_NULLPTR));
+        label_57->setText(QApplication::translate("ReactionPathTab", "Max Cycles", Q_NULLPTR));
     } // retranslateUi
 
 };

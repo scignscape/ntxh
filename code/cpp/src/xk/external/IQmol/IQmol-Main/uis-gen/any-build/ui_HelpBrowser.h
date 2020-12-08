@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'HelpBrowser.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,10 +10,12 @@
 #define UI_HELPBROWSER_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QIcon>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
@@ -42,34 +44,34 @@ public:
     void setupUi(QDialog *HelpBrowser)
     {
         if (HelpBrowser->objectName().isEmpty())
-            HelpBrowser->setObjectName(QString::fromUtf8("HelpBrowser"));
+            HelpBrowser->setObjectName(QStringLiteral("HelpBrowser"));
         HelpBrowser->resize(546, 684);
         verticalLayout = new QVBoxLayout(HelpBrowser);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         backButton = new QToolButton(HelpBrowser);
-        backButton->setObjectName(QString::fromUtf8("backButton"));
+        backButton->setObjectName(QStringLiteral("backButton"));
         QIcon icon;
-        icon.addFile(QString::fromUtf8(":/resources/icons/Back.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/resources/icons/Back.png"), QSize(), QIcon::Normal, QIcon::Off);
         backButton->setIcon(icon);
         backButton->setIconSize(QSize(24, 24));
 
         horizontalLayout->addWidget(backButton);
 
         forwardButton = new QToolButton(HelpBrowser);
-        forwardButton->setObjectName(QString::fromUtf8("forwardButton"));
+        forwardButton->setObjectName(QStringLiteral("forwardButton"));
         QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/resources/icons/Forward.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QStringLiteral(":/resources/icons/Forward.png"), QSize(), QIcon::Normal, QIcon::Off);
         forwardButton->setIcon(icon1);
         forwardButton->setIconSize(QSize(24, 24));
 
         horizontalLayout->addWidget(forwardButton);
 
         homeButton = new QToolButton(HelpBrowser);
-        homeButton->setObjectName(QString::fromUtf8("homeButton"));
+        homeButton->setObjectName(QStringLiteral("homeButton"));
         QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/resources/icons/Home.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon2.addFile(QStringLiteral(":/resources/icons/Home.png"), QSize(), QIcon::Normal, QIcon::Off);
         homeButton->setIcon(icon2);
         homeButton->setIconSize(QSize(24, 24));
 
@@ -80,14 +82,14 @@ public:
         horizontalLayout->addItem(horizontalSpacer);
 
         searchLineEdit = new QLineEdit(HelpBrowser);
-        searchLineEdit->setObjectName(QString::fromUtf8("searchLineEdit"));
+        searchLineEdit->setObjectName(QStringLiteral("searchLineEdit"));
 
         horizontalLayout->addWidget(searchLineEdit);
 
         searchButton = new QToolButton(HelpBrowser);
-        searchButton->setObjectName(QString::fromUtf8("searchButton"));
+        searchButton->setObjectName(QStringLiteral("searchButton"));
         QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/resources/icons/Search.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon3.addFile(QStringLiteral(":/resources/icons/Search.png"), QSize(), QIcon::Normal, QIcon::Off);
         searchButton->setIcon(icon3);
         searchButton->setIconSize(QSize(24, 24));
 
@@ -97,19 +99,19 @@ public:
         verticalLayout->addLayout(horizontalLayout);
 
         textBrowser = new QTextBrowser(HelpBrowser);
-        textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
+        textBrowser->setObjectName(QStringLiteral("textBrowser"));
         textBrowser->setFrameShape(QFrame::StyledPanel);
 
         verticalLayout->addWidget(textBrowser);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_2);
 
         doneButton = new QPushButton(HelpBrowser);
-        doneButton->setObjectName(QString::fromUtf8("doneButton"));
+        doneButton->setObjectName(QStringLiteral("doneButton"));
         doneButton->setAutoDefault(false);
 
         horizontalLayout_2->addWidget(doneButton);
@@ -126,7 +128,7 @@ public:
 
     void retranslateUi(QDialog *HelpBrowser)
     {
-        HelpBrowser->setWindowTitle(QApplication::translate("HelpBrowser", "Help Browser", nullptr));
+        HelpBrowser->setWindowTitle(QApplication::translate("HelpBrowser", "Help Browser", Q_NULLPTR));
         HelpBrowser->setStyleSheet(QApplication::translate("HelpBrowser", "QToolButton {\n"
 "   color: #333;\n"
 "   background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, \n"
@@ -174,25 +176,25 @@ public:
 "QTextBrowser#content { \n"
 "   paddin"
                         "g: 20px;\n"
-"}", nullptr));
+"}", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        backButton->setToolTip(QApplication::translate("HelpBrowser", "Back", nullptr));
+        backButton->setToolTip(QApplication::translate("HelpBrowser", "Back", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        backButton->setText(QApplication::translate("HelpBrowser", "...", nullptr));
+        backButton->setText(QApplication::translate("HelpBrowser", "...", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        forwardButton->setToolTip(QApplication::translate("HelpBrowser", "Forward", nullptr));
+        forwardButton->setToolTip(QApplication::translate("HelpBrowser", "Forward", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        forwardButton->setText(QApplication::translate("HelpBrowser", "...", nullptr));
+        forwardButton->setText(QApplication::translate("HelpBrowser", "...", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        homeButton->setToolTip(QApplication::translate("HelpBrowser", "Index page", nullptr));
+        homeButton->setToolTip(QApplication::translate("HelpBrowser", "Index page", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        homeButton->setText(QApplication::translate("HelpBrowser", "...", nullptr));
+        homeButton->setText(QApplication::translate("HelpBrowser", "...", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        searchButton->setToolTip(QApplication::translate("HelpBrowser", "Search", nullptr));
+        searchButton->setToolTip(QApplication::translate("HelpBrowser", "Search", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        searchButton->setText(QApplication::translate("HelpBrowser", "...", nullptr));
+        searchButton->setText(QApplication::translate("HelpBrowser", "...", Q_NULLPTR));
         textBrowser->setStyleSheet(QString());
-        doneButton->setText(QApplication::translate("HelpBrowser", "Done", nullptr));
+        doneButton->setText(QApplication::translate("HelpBrowser", "Done", Q_NULLPTR));
     } // retranslateUi
 
 };

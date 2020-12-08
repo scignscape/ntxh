@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ImageInterface.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,11 +10,14 @@
 #define UI_IMAGEINTERFACE_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
@@ -52,7 +55,7 @@ public:
     void setupUi(QDialog *ImageInterface)
     {
         if (ImageInterface->objectName().isEmpty())
-            ImageInterface->setObjectName(QString::fromUtf8("ImageInterface"));
+            ImageInterface->setObjectName(QStringLiteral("ImageInterface"));
         ImageInterface->resize(298, 204);
         vboxLayout = new QVBoxLayout(ImageInterface);
 #ifndef Q_OS_MAC
@@ -61,7 +64,7 @@ public:
 #ifndef Q_OS_MAC
         vboxLayout->setContentsMargins(9, 9, 9, 9);
 #endif
-        vboxLayout->setObjectName(QString::fromUtf8("vboxLayout"));
+        vboxLayout->setObjectName(QStringLiteral("vboxLayout"));
         hboxLayout = new QHBoxLayout();
 #ifndef Q_OS_MAC
         hboxLayout->setSpacing(6);
@@ -69,14 +72,14 @@ public:
 #ifndef Q_OS_MAC
         hboxLayout->setContentsMargins(0, 0, 0, 0);
 #endif
-        hboxLayout->setObjectName(QString::fromUtf8("hboxLayout"));
+        hboxLayout->setObjectName(QStringLiteral("hboxLayout"));
         label_2 = new QLabel(ImageInterface);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         hboxLayout->addWidget(label_2);
 
         imgWidth = new QSpinBox(ImageInterface);
-        imgWidth->setObjectName(QString::fromUtf8("imgWidth"));
+        imgWidth->setObjectName(QStringLiteral("imgWidth"));
         imgWidth->setMinimum(1);
         imgWidth->setMaximum(32000);
 
@@ -87,12 +90,12 @@ public:
         hboxLayout->addItem(spacerItem);
 
         label_3 = new QLabel(ImageInterface);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName(QStringLiteral("label_3"));
 
         hboxLayout->addWidget(label_3);
 
         imgHeight = new QSpinBox(ImageInterface);
-        imgHeight->setObjectName(QString::fromUtf8("imgHeight"));
+        imgHeight->setObjectName(QStringLiteral("imgHeight"));
         imgHeight->setMinimum(1);
         imgHeight->setMaximum(32000);
 
@@ -106,14 +109,14 @@ public:
         hboxLayout1->setSpacing(6);
 #endif
         hboxLayout1->setContentsMargins(0, 0, 0, 0);
-        hboxLayout1->setObjectName(QString::fromUtf8("hboxLayout1"));
+        hboxLayout1->setObjectName(QStringLiteral("hboxLayout1"));
         label_4 = new QLabel(ImageInterface);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setObjectName(QStringLiteral("label_4"));
 
         hboxLayout1->addWidget(label_4);
 
         imgQuality = new QSpinBox(ImageInterface);
-        imgQuality->setObjectName(QString::fromUtf8("imgQuality"));
+        imgQuality->setObjectName(QStringLiteral("imgQuality"));
         imgQuality->setMinimum(0);
         imgQuality->setMaximum(100);
 
@@ -131,19 +134,19 @@ public:
         hboxLayout2->setSpacing(6);
 #endif
         hboxLayout2->setContentsMargins(0, 0, 0, 0);
-        hboxLayout2->setObjectName(QString::fromUtf8("hboxLayout2"));
+        hboxLayout2->setObjectName(QStringLiteral("hboxLayout2"));
         label = new QLabel(ImageInterface);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         hboxLayout2->addWidget(label);
 
         oversampling = new QDoubleSpinBox(ImageInterface);
-        oversampling->setObjectName(QString::fromUtf8("oversampling"));
+        oversampling->setObjectName(QStringLiteral("oversampling"));
         oversampling->setDecimals(1);
-        oversampling->setMinimum(0.100000000000000);
-        oversampling->setMaximum(64.000000000000000);
-        oversampling->setSingleStep(1.000000000000000);
-        oversampling->setValue(1.000000000000000);
+        oversampling->setMinimum(0.1);
+        oversampling->setMaximum(64);
+        oversampling->setSingleStep(1);
+        oversampling->setValue(1);
 
         hboxLayout2->addWidget(oversampling);
 
@@ -155,12 +158,12 @@ public:
         vboxLayout->addLayout(hboxLayout2);
 
         whiteBackground = new QCheckBox(ImageInterface);
-        whiteBackground->setObjectName(QString::fromUtf8("whiteBackground"));
+        whiteBackground->setObjectName(QStringLiteral("whiteBackground"));
 
         vboxLayout->addWidget(whiteBackground);
 
         expandFrustum = new QCheckBox(ImageInterface);
-        expandFrustum->setObjectName(QString::fromUtf8("expandFrustum"));
+        expandFrustum->setObjectName(QStringLiteral("expandFrustum"));
 
         vboxLayout->addWidget(expandFrustum);
 
@@ -173,18 +176,18 @@ public:
         hboxLayout3->setSpacing(6);
 #endif
         hboxLayout3->setContentsMargins(0, 0, 0, 0);
-        hboxLayout3->setObjectName(QString::fromUtf8("hboxLayout3"));
+        hboxLayout3->setObjectName(QStringLiteral("hboxLayout3"));
         spacerItem4 = new QSpacerItem(131, 31, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         hboxLayout3->addItem(spacerItem4);
 
         okButton = new QPushButton(ImageInterface);
-        okButton->setObjectName(QString::fromUtf8("okButton"));
+        okButton->setObjectName(QStringLiteral("okButton"));
 
         hboxLayout3->addWidget(okButton);
 
         cancelButton = new QPushButton(ImageInterface);
-        cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
+        cancelButton->setObjectName(QStringLiteral("cancelButton"));
 
         hboxLayout3->addWidget(cancelButton);
 
@@ -201,36 +204,36 @@ public:
 
     void retranslateUi(QDialog *ImageInterface)
     {
-        ImageInterface->setWindowTitle(QApplication::translate("ImageInterface", "Image settings", nullptr));
-        label_2->setText(QApplication::translate("ImageInterface", "Width", nullptr));
+        ImageInterface->setWindowTitle(QApplication::translate("ImageInterface", "Image settings", Q_NULLPTR));
+        label_2->setText(QApplication::translate("ImageInterface", "Width", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        imgWidth->setToolTip(QApplication::translate("ImageInterface", "Width of the image (in pixels)", nullptr));
+        imgWidth->setToolTip(QApplication::translate("ImageInterface", "Width of the image (in pixels)", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        imgWidth->setSuffix(QApplication::translate("ImageInterface", " px", nullptr));
-        label_3->setText(QApplication::translate("ImageInterface", "Height", nullptr));
+        imgWidth->setSuffix(QApplication::translate("ImageInterface", " px", Q_NULLPTR));
+        label_3->setText(QApplication::translate("ImageInterface", "Height", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        imgHeight->setToolTip(QApplication::translate("ImageInterface", "Height of the image (in pixels)", nullptr));
+        imgHeight->setToolTip(QApplication::translate("ImageInterface", "Height of the image (in pixels)", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        imgHeight->setSuffix(QApplication::translate("ImageInterface", " px", nullptr));
-        label_4->setText(QApplication::translate("ImageInterface", "Image quality", nullptr));
+        imgHeight->setSuffix(QApplication::translate("ImageInterface", " px", Q_NULLPTR));
+        label_4->setText(QApplication::translate("ImageInterface", "Image quality", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        imgQuality->setToolTip(QApplication::translate("ImageInterface", "Between 0 (smallest files) and 100 (highest quality)", nullptr));
+        imgQuality->setToolTip(QApplication::translate("ImageInterface", "Between 0 (smallest files) and 100 (highest quality)", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        label->setText(QApplication::translate("ImageInterface", "Oversampling", nullptr));
+        label->setText(QApplication::translate("ImageInterface", "Oversampling", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        oversampling->setToolTip(QApplication::translate("ImageInterface", "Antialiases image (when larger then 1.0)", nullptr));
+        oversampling->setToolTip(QApplication::translate("ImageInterface", "Antialiases image (when larger then 1.0)", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        oversampling->setPrefix(QApplication::translate("ImageInterface", "x ", nullptr));
+        oversampling->setPrefix(QApplication::translate("ImageInterface", "x ", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        whiteBackground->setToolTip(QApplication::translate("ImageInterface", "Use white as background color", nullptr));
+        whiteBackground->setToolTip(QApplication::translate("ImageInterface", "Use white as background color", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        whiteBackground->setText(QApplication::translate("ImageInterface", "Use white background", nullptr));
+        whiteBackground->setText(QApplication::translate("ImageInterface", "Use white background", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        expandFrustum->setToolTip(QApplication::translate("ImageInterface", "When image aspect ratio differs from viewer's one, expand frustum as needed. Fits inside current frustum otherwise.", nullptr));
+        expandFrustum->setToolTip(QApplication::translate("ImageInterface", "When image aspect ratio differs from viewer's one, expand frustum as needed. Fits inside current frustum otherwise.", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        expandFrustum->setText(QApplication::translate("ImageInterface", "Expand frustum if needed", nullptr));
-        okButton->setText(QApplication::translate("ImageInterface", "OK", nullptr));
-        cancelButton->setText(QApplication::translate("ImageInterface", "Cancel", nullptr));
+        expandFrustum->setText(QApplication::translate("ImageInterface", "Expand frustum if needed", Q_NULLPTR));
+        okButton->setText(QApplication::translate("ImageInterface", "OK", Q_NULLPTR));
+        cancelButton->setText(QApplication::translate("ImageInterface", "Cancel", Q_NULLPTR));
     } // retranslateUi
 
 };

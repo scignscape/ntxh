@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'AuxiliaryBasisTab.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,9 +10,12 @@
 #define UI_AUXILIARYBASISTAB_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
@@ -33,19 +36,19 @@ public:
     void setupUi(QWidget *AuxiliaryBasisTab)
     {
         if (AuxiliaryBasisTab->objectName().isEmpty())
-            AuxiliaryBasisTab->setObjectName(QString::fromUtf8("AuxiliaryBasisTab"));
+            AuxiliaryBasisTab->setObjectName(QStringLiteral("AuxiliaryBasisTab"));
         AuxiliaryBasisTab->resize(302, 84);
         verticalLayout = new QVBoxLayout(AuxiliaryBasisTab);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         label_test = new QLabel(AuxiliaryBasisTab);
-        label_test->setObjectName(QString::fromUtf8("label_test"));
+        label_test->setObjectName(QStringLiteral("label_test"));
 
         horizontalLayout->addWidget(label_test);
 
         auxiliary_basis = new QComboBox(AuxiliaryBasisTab);
-        auxiliary_basis->setObjectName(QString::fromUtf8("auxiliary_basis"));
+        auxiliary_basis->setObjectName(QStringLiteral("auxiliary_basis"));
 
         horizontalLayout->addWidget(auxiliary_basis);
 
@@ -68,8 +71,8 @@ public:
 
     void retranslateUi(QWidget *AuxiliaryBasisTab)
     {
-        AuxiliaryBasisTab->setWindowTitle(QApplication::translate("AuxiliaryBasisTab", "Form", nullptr));
-        label_test->setText(QApplication::translate("AuxiliaryBasisTab", "RI Fitting Basis", nullptr));
+        AuxiliaryBasisTab->setWindowTitle(QApplication::translate("AuxiliaryBasisTab", "Form", Q_NULLPTR));
+        label_test->setText(QApplication::translate("AuxiliaryBasisTab", "RI Fitting Basis", Q_NULLPTR));
     } // retranslateUi
 
 };

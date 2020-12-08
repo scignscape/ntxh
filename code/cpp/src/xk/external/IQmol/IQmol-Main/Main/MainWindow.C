@@ -342,6 +342,9 @@ void MainWindow::splitterMoved(int pos, int)
  *
  ******************/
 
+//#define MENUBAR menuBar()
+#define MENUBAR menuBar
+
 void MainWindow::createMenus()
 {
    QAction* action;
@@ -349,8 +352,10 @@ void MainWindow::createMenus()
    QMenu*   menu;
    QMenu*   subMenu;
 
+   QMenuBar *menuBar = new QMenuBar(nullptr);
+
    // ----- File Menu -----
-   menu = menuBar()->addMenu("File");
+   menu = MENUBAR->addMenu("File");
 
       name = "About";
       action = menu->addAction(name);
@@ -429,7 +434,7 @@ void MainWindow::createMenus()
 
 
    // ----- Edit Menu -----
-   menu = menuBar()->addMenu("Edit");
+   menu = MENUBAR->addMenu("Edit");
   
       name = "Undo";
       action = menu->addAction(name);
@@ -492,7 +497,7 @@ void MainWindow::createMenus()
 
 
    // ----- Display Menu -----
-   menu = menuBar()->addMenu("Display");
+   menu = MENUBAR->addMenu("Display");
 
       name = "Full Screen";
       action = menu->addAction(name);
@@ -581,7 +586,7 @@ void MainWindow::createMenus()
 
 
    // ----- Build Menu -----
-   menu = menuBar()->addMenu("Build");
+   menu = MENUBAR->addMenu("Build");
 
       name = "Insert Molecule by ID";
       action = menu->addAction(name);
@@ -685,7 +690,7 @@ void MainWindow::createMenus()
 
 
    // ----- Calculation Menu -----
-   menu = menuBar()->addMenu("Calculation");
+   menu = MENUBAR->addMenu("Calculation");
 
       name = "Q-Chem Setup";
       action = menu->addAction(name);
@@ -708,15 +713,15 @@ void MainWindow::createMenus()
 
 
    // ----- Help Menu -----
-   menu = menuBar()->addMenu("Help");
+   menu = MENUBAR->addMenu("Help");
 
       name = "Show Help";
       action = menu->addAction(name);
       connect(action, SIGNAL(triggered()), this, SLOT(showHelp()));
 
 
-  QWidgetAction* sep = ((Mosaic_Menubar*) menuBar())->add_text_separator();
-  QMenu* mosaic_submenu = menuBar()->addMenu("&MPF");
+  QWidgetAction* sep = ((Mosaic_Menubar*) MENUBAR)->add_text_separator();
+  QMenu* mosaic_submenu = MENUBAR->addMenu("&MPF");
   mosaic_submenu->menuAction()->setProperty("mosaic", true);
   QLinearGradient* qlg = new QLinearGradient(0,0,0,400);
   qlg->setColorAt(0.0, QColor(250,255,245));
@@ -737,10 +742,10 @@ void MainWindow::createMenus()
   });
 
 
-  menuBar()->setStyleSheet(R"(#the_Mosaic_Menubar{
+  MENUBAR->setStyleSheet(R"(#the_Mosaic_Menubar{
     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
                                       stop:0 white, stop:1 darkgray);
-    spacing: 3px; /* spacing between menu bar items */
+    spacing: 3px;
    }
 
   #mosaic_submenu::item {
@@ -765,6 +770,9 @@ void MainWindow::createMenus()
     margin-left: 10px;
     margin-right: 5px;  }
   )");
+
+
+ setMenuBar(menuBar);
 
 }
 

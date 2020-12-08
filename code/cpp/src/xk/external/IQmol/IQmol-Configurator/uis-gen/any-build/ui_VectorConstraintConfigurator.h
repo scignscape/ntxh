@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'VectorConstraintConfigurator.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,10 +10,13 @@
 #define UI_VECTORCONSTRAINTCONFIGURATOR_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
@@ -49,14 +52,14 @@ public:
     void setupUi(QDialog *VectorConstraintConfigurator)
     {
         if (VectorConstraintConfigurator->objectName().isEmpty())
-            VectorConstraintConfigurator->setObjectName(QString::fromUtf8("VectorConstraintConfigurator"));
+            VectorConstraintConfigurator->setObjectName(QStringLiteral("VectorConstraintConfigurator"));
         VectorConstraintConfigurator->resize(389, 158);
         verticalLayout_2 = new QVBoxLayout(VectorConstraintConfigurator);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         label = new QLabel(VectorConstraintConfigurator);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         verticalLayout->addWidget(label);
 
@@ -64,46 +67,46 @@ public:
         verticalLayout_2->addLayout(verticalLayout);
 
         horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         xLabel = new QLabel(VectorConstraintConfigurator);
-        xLabel->setObjectName(QString::fromUtf8("xLabel"));
+        xLabel->setObjectName(QStringLiteral("xLabel"));
 
         horizontalLayout_3->addWidget(xLabel);
 
         xValue = new QDoubleSpinBox(VectorConstraintConfigurator);
-        xValue->setObjectName(QString::fromUtf8("xValue"));
+        xValue->setObjectName(QStringLiteral("xValue"));
         xValue->setDecimals(3);
-        xValue->setMinimum(-100.000000000000000);
-        xValue->setMaximum(100.000000000000000);
-        xValue->setSingleStep(0.010000000000000);
+        xValue->setMinimum(-100);
+        xValue->setMaximum(100);
+        xValue->setSingleStep(0.01);
 
         horizontalLayout_3->addWidget(xValue);
 
         yLabel = new QLabel(VectorConstraintConfigurator);
-        yLabel->setObjectName(QString::fromUtf8("yLabel"));
+        yLabel->setObjectName(QStringLiteral("yLabel"));
 
         horizontalLayout_3->addWidget(yLabel);
 
         yValue = new QDoubleSpinBox(VectorConstraintConfigurator);
-        yValue->setObjectName(QString::fromUtf8("yValue"));
+        yValue->setObjectName(QStringLiteral("yValue"));
         yValue->setDecimals(3);
-        yValue->setMinimum(-100.000000000000000);
-        yValue->setMaximum(100.000000000000000);
-        yValue->setSingleStep(0.010000000000000);
+        yValue->setMinimum(-100);
+        yValue->setMaximum(100);
+        yValue->setSingleStep(0.01);
 
         horizontalLayout_3->addWidget(yValue);
 
         zLabel = new QLabel(VectorConstraintConfigurator);
-        zLabel->setObjectName(QString::fromUtf8("zLabel"));
+        zLabel->setObjectName(QStringLiteral("zLabel"));
 
         horizontalLayout_3->addWidget(zLabel);
 
         zValue = new QDoubleSpinBox(VectorConstraintConfigurator);
-        zValue->setObjectName(QString::fromUtf8("zValue"));
+        zValue->setObjectName(QStringLiteral("zValue"));
         zValue->setDecimals(3);
-        zValue->setMinimum(-100.000000000000000);
-        zValue->setMaximum(100.000000000000000);
-        zValue->setSingleStep(0.010000000000000);
+        zValue->setMinimum(-100);
+        zValue->setMaximum(100);
+        zValue->setSingleStep(0.01);
 
         horizontalLayout_3->addWidget(zValue);
 
@@ -115,14 +118,14 @@ public:
         verticalLayout_2->addLayout(horizontalLayout_3);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         radioButton = new QRadioButton(VectorConstraintConfigurator);
-        radioButton->setObjectName(QString::fromUtf8("radioButton"));
+        radioButton->setObjectName(QStringLiteral("radioButton"));
 
         horizontalLayout_2->addWidget(radioButton);
 
         constrainButton = new QRadioButton(VectorConstraintConfigurator);
-        constrainButton->setObjectName(QString::fromUtf8("constrainButton"));
+        constrainButton->setObjectName(QStringLiteral("constrainButton"));
 
         horizontalLayout_2->addWidget(constrainButton);
 
@@ -134,9 +137,9 @@ public:
         verticalLayout_2->addLayout(horizontalLayout_2);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         deleteButton = new QPushButton(VectorConstraintConfigurator);
-        deleteButton->setObjectName(QString::fromUtf8("deleteButton"));
+        deleteButton->setObjectName(QStringLiteral("deleteButton"));
 
         horizontalLayout->addWidget(deleteButton);
 
@@ -145,12 +148,12 @@ public:
         horizontalLayout->addItem(horizontalSpacer_2);
 
         cancelButton = new QPushButton(VectorConstraintConfigurator);
-        cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
+        cancelButton->setObjectName(QStringLiteral("cancelButton"));
 
         horizontalLayout->addWidget(cancelButton);
 
         applyButton = new QPushButton(VectorConstraintConfigurator);
-        applyButton->setObjectName(QString::fromUtf8("applyButton"));
+        applyButton->setObjectName(QStringLiteral("applyButton"));
 
         horizontalLayout->addWidget(applyButton);
 
@@ -170,22 +173,22 @@ public:
 
     void retranslateUi(QDialog *VectorConstraintConfigurator)
     {
-        VectorConstraintConfigurator->setWindowTitle(QApplication::translate("VectorConstraintConfigurator", "Set Position", nullptr));
+        VectorConstraintConfigurator->setWindowTitle(QApplication::translate("VectorConstraintConfigurator", "Set Position", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
         VectorConstraintConfigurator->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
-        label->setText(QApplication::translate("VectorConstraintConfigurator", "Set position of atom 1:", nullptr));
-        xLabel->setText(QApplication::translate("VectorConstraintConfigurator", "X", nullptr));
+        label->setText(QApplication::translate("VectorConstraintConfigurator", "Set position of atom 1:", Q_NULLPTR));
+        xLabel->setText(QApplication::translate("VectorConstraintConfigurator", "X", Q_NULLPTR));
         xValue->setSuffix(QString());
-        yLabel->setText(QApplication::translate("VectorConstraintConfigurator", "Y", nullptr));
+        yLabel->setText(QApplication::translate("VectorConstraintConfigurator", "Y", Q_NULLPTR));
         yValue->setSuffix(QString());
-        zLabel->setText(QApplication::translate("VectorConstraintConfigurator", "Z", nullptr));
+        zLabel->setText(QApplication::translate("VectorConstraintConfigurator", "Z", Q_NULLPTR));
         zValue->setSuffix(QString());
-        radioButton->setText(QApplication::translate("VectorConstraintConfigurator", "Set", nullptr));
-        constrainButton->setText(QApplication::translate("VectorConstraintConfigurator", "Constrain", nullptr));
-        deleteButton->setText(QApplication::translate("VectorConstraintConfigurator", "Delete", nullptr));
-        cancelButton->setText(QApplication::translate("VectorConstraintConfigurator", "Cancel", nullptr));
-        applyButton->setText(QApplication::translate("VectorConstraintConfigurator", "Set", nullptr));
+        radioButton->setText(QApplication::translate("VectorConstraintConfigurator", "Set", Q_NULLPTR));
+        constrainButton->setText(QApplication::translate("VectorConstraintConfigurator", "Constrain", Q_NULLPTR));
+        deleteButton->setText(QApplication::translate("VectorConstraintConfigurator", "Delete", Q_NULLPTR));
+        cancelButton->setText(QApplication::translate("VectorConstraintConfigurator", "Cancel", Q_NULLPTR));
+        applyButton->setText(QApplication::translate("VectorConstraintConfigurator", "Set", Q_NULLPTR));
     } // retranslateUi
 
 };

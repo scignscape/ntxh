@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'AboutDialog.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,9 +10,12 @@
 #define UI_ABOUTDIALOG_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
@@ -50,19 +53,19 @@ public:
     void setupUi(QDialog *AboutDialog)
     {
         if (AboutDialog->objectName().isEmpty())
-            AboutDialog->setObjectName(QString::fromUtf8("AboutDialog"));
+            AboutDialog->setObjectName(QStringLiteral("AboutDialog"));
         AboutDialog->resize(524, 715);
         AboutDialog->setMinimumSize(QSize(360, 450));
         verticalLayout = new QVBoxLayout(AboutDialog);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
 
         label = new QLabel(AboutDialog);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
         label->setPixmap(QPixmap(QString::fromUtf8(":/resources/icons/iqmol.png")));
 
         horizontalLayout->addWidget(label);
@@ -75,15 +78,15 @@ public:
         verticalLayout->addLayout(horizontalLayout);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_3);
 
         label_2 = new QLabel(AboutDialog);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
         QFont font;
-        font.setFamily(QString::fromUtf8("Arial Bold"));
+        font.setFamily(QStringLiteral("Arial Bold"));
         font.setPointSize(22);
         font.setBold(true);
         font.setWeight(75);
@@ -99,18 +102,18 @@ public:
         verticalLayout->addLayout(horizontalLayout_2);
 
         horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_3->addItem(horizontalSpacer_5);
 
         label_12 = new QLabel(AboutDialog);
-        label_12->setObjectName(QString::fromUtf8("label_12"));
+        label_12->setObjectName(QStringLiteral("label_12"));
 
         horizontalLayout_3->addWidget(label_12);
 
         versionLabel = new QLabel(AboutDialog);
-        versionLabel->setObjectName(QString::fromUtf8("versionLabel"));
+        versionLabel->setObjectName(QStringLiteral("versionLabel"));
 
         horizontalLayout_3->addWidget(versionLabel);
 
@@ -122,13 +125,13 @@ public:
         verticalLayout->addLayout(horizontalLayout_3);
 
         horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_4->addItem(horizontalSpacer_7);
 
         label_3 = new QLabel(AboutDialog);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName(QStringLiteral("label_3"));
         QFont font1;
         font1.setPointSize(11);
         label_3->setFont(font1);
@@ -136,7 +139,7 @@ public:
         horizontalLayout_4->addWidget(label_3);
 
         yearLabel = new QLabel(AboutDialog);
-        yearLabel->setObjectName(QString::fromUtf8("yearLabel"));
+        yearLabel->setObjectName(QStringLiteral("yearLabel"));
 
         horizontalLayout_4->addWidget(yearLabel);
 
@@ -148,13 +151,13 @@ public:
         verticalLayout->addLayout(horizontalLayout_4);
 
         horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         horizontalSpacer_9 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_5->addItem(horizontalSpacer_9);
 
         label_4 = new QLabel(AboutDialog);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setObjectName(QStringLiteral("label_4"));
         label_4->setFont(font1);
 
         horizontalLayout_5->addWidget(label_4);
@@ -167,7 +170,7 @@ public:
         verticalLayout->addLayout(horizontalLayout_5);
 
         label_5 = new QLabel(AboutDialog);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setObjectName(QStringLiteral("label_5"));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -186,14 +189,14 @@ public:
 
     void retranslateUi(QDialog *AboutDialog)
     {
-        AboutDialog->setWindowTitle(QApplication::translate("AboutDialog", "About IQmol", nullptr));
+        AboutDialog->setWindowTitle(QApplication::translate("AboutDialog", "About IQmol", Q_NULLPTR));
         label->setText(QString());
-        label_2->setText(QApplication::translate("AboutDialog", "IQmol", nullptr));
-        label_12->setText(QApplication::translate("AboutDialog", "Version", nullptr));
-        versionLabel->setText(QApplication::translate("AboutDialog", "versionString", nullptr));
-        label_3->setText(QApplication::translate("AboutDialog", "Copyright \302\251", nullptr));
-        yearLabel->setText(QApplication::translate("AboutDialog", "YEAR", nullptr));
-        label_4->setText(QApplication::translate("AboutDialog", "Andrew Gilbert", nullptr));
+        label_2->setText(QApplication::translate("AboutDialog", "IQmol", Q_NULLPTR));
+        label_12->setText(QApplication::translate("AboutDialog", "Version", Q_NULLPTR));
+        versionLabel->setText(QApplication::translate("AboutDialog", "versionString", Q_NULLPTR));
+        label_3->setText(QApplication::translate("AboutDialog", "Copyright \302\251", Q_NULLPTR));
+        yearLabel->setText(QApplication::translate("AboutDialog", "YEAR", Q_NULLPTR));
+        label_4->setText(QApplication::translate("AboutDialog", "Andrew Gilbert", Q_NULLPTR));
         label_5->setText(QApplication::translate("AboutDialog", "IQmol is a simple molecular builder and visualizer written using the Qt libraries.  The following were also \n"
 "        used or incorporated into IQmol:\n"
 "      <ul>\n"
@@ -204,7 +207,7 @@ public:
 "      </ul>\n"
 "          Marching cubes code is based on the algorithm by \n"
 "      <a href=\"http://paulbourke.net/geometry/polygonise/\">Paul Bourke</a>, adapted by Dr. Klaus Miltenberger.\n"
-"", nullptr));
+"", Q_NULLPTR));
     } // retranslateUi
 
 };

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'QuiMainWindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,9 +10,9 @@
 #define UI_QUIMAINWINDOW_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QIcon>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDoubleSpinBox>
@@ -893,9 +893,9 @@ public:
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
-            MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
+            MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(1306, 855);
-        MainWindow->setStyleSheet(QString::fromUtf8(" QToolTip {\n"
+        MainWindow->setStyleSheet(QLatin1String(" QToolTip {\n"
 "    border: 2px solid darkkhaki;\n"
 "    padding: 2px;\n"
 "    border-radius: 3px;\n"
@@ -905,25 +905,25 @@ public:
 "    background-color: #EEE;\n"
 "}"));
         actionAbout_QUI = new QAction(MainWindow);
-        actionAbout_QUI->setObjectName(QString::fromUtf8("actionAbout_QUI"));
+        actionAbout_QUI->setObjectName(QStringLiteral("actionAbout_QUI"));
         action = new QAction(MainWindow);
-        action->setObjectName(QString::fromUtf8("action"));
+        action->setObjectName(QStringLiteral("action"));
         actionNew_Input_Section = new QAction(MainWindow);
-        actionNew_Input_Section->setObjectName(QString::fromUtf8("actionNew_Input_Section"));
+        actionNew_Input_Section->setObjectName(QStringLiteral("actionNew_Input_Section"));
         actionRead_Input = new QAction(MainWindow);
-        actionRead_Input->setObjectName(QString::fromUtf8("actionRead_Input"));
+        actionRead_Input->setObjectName(QStringLiteral("actionRead_Input"));
         actionSave = new QAction(MainWindow);
-        actionSave->setObjectName(QString::fromUtf8("actionSave"));
+        actionSave->setObjectName(QStringLiteral("actionSave"));
         actionSave_As = new QAction(MainWindow);
-        actionSave_As->setObjectName(QString::fromUtf8("actionSave_As"));
+        actionSave_As->setObjectName(QStringLiteral("actionSave_As"));
         actionEdit_Preferences = new QAction(MainWindow);
-        actionEdit_Preferences->setObjectName(QString::fromUtf8("actionEdit_Preferences"));
+        actionEdit_Preferences->setObjectName(QStringLiteral("actionEdit_Preferences"));
         centralwidget = new QWidget(MainWindow);
-        centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
+        centralwidget->setObjectName(QStringLiteral("centralwidget"));
         horizontalLayout_3 = new QHBoxLayout(centralwidget);
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         setupTabWidget = new QTabWidget(centralwidget);
-        setupTabWidget->setObjectName(QString::fromUtf8("setupTabWidget"));
+        setupTabWidget->setObjectName(QStringLiteral("setupTabWidget"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -931,11 +931,11 @@ public:
         setupTabWidget->setSizePolicy(sizePolicy);
         setupTabWidget->setMaximumSize(QSize(900, 16777215));
         SetupTab = new QWidget();
-        SetupTab->setObjectName(QString::fromUtf8("SetupTab"));
+        SetupTab->setObjectName(QStringLiteral("SetupTab"));
         verticalLayout_10 = new QVBoxLayout(SetupTab);
-        verticalLayout_10->setObjectName(QString::fromUtf8("verticalLayout_10"));
+        verticalLayout_10->setObjectName(QStringLiteral("verticalLayout_10"));
         frame = new QFrame(SetupTab);
-        frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setObjectName(QStringLiteral("frame"));
         QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -944,29 +944,29 @@ public:
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Sunken);
         horizontalLayout_25 = new QHBoxLayout(frame);
-        horizontalLayout_25->setObjectName(QString::fromUtf8("horizontalLayout_25"));
+        horizontalLayout_25->setObjectName(QStringLiteral("horizontalLayout_25"));
         gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         exchange = new QComboBox(frame);
-        exchange->setObjectName(QString::fromUtf8("exchange"));
+        exchange->setObjectName(QStringLiteral("exchange"));
         exchange->setEditable(true);
 
         gridLayout->addWidget(exchange, 4, 1, 1, 1);
 
         label_exchange = new QLabel(frame);
-        label_exchange->setObjectName(QString::fromUtf8("label_exchange"));
+        label_exchange->setObjectName(QStringLiteral("label_exchange"));
 
         gridLayout->addWidget(label_exchange, 4, 0, 1, 1);
 
         hboxLayout = new QHBoxLayout();
-        hboxLayout->setObjectName(QString::fromUtf8("hboxLayout"));
+        hboxLayout->setObjectName(QStringLiteral("hboxLayout"));
         label_106 = new QLabel(frame);
-        label_106->setObjectName(QString::fromUtf8("label_106"));
+        label_106->setObjectName(QStringLiteral("label_106"));
 
         hboxLayout->addWidget(label_106);
 
         jobList = new QComboBox(frame);
-        jobList->setObjectName(QString::fromUtf8("jobList"));
+        jobList->setObjectName(QStringLiteral("jobList"));
         QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
@@ -980,71 +980,71 @@ public:
         gridLayout->addLayout(hboxLayout, 0, 0, 1, 2);
 
         label_job_type = new QLabel(frame);
-        label_job_type->setObjectName(QString::fromUtf8("label_job_type"));
+        label_job_type->setObjectName(QStringLiteral("label_job_type"));
         label_job_type->setMinimumSize(QSize(71, 0));
 
         gridLayout->addWidget(label_job_type, 1, 0, 1, 1);
 
         job_type = new QComboBox(frame);
-        job_type->setObjectName(QString::fromUtf8("job_type"));
+        job_type->setObjectName(QStringLiteral("job_type"));
         sizePolicy2.setHeightForWidth(job_type->sizePolicy().hasHeightForWidth());
         job_type->setSizePolicy(sizePolicy2);
 
         gridLayout->addWidget(job_type, 1, 1, 1, 1);
 
         label_method = new QLabel(frame);
-        label_method->setObjectName(QString::fromUtf8("label_method"));
+        label_method->setObjectName(QStringLiteral("label_method"));
 
         gridLayout->addWidget(label_method, 2, 0, 1, 1);
 
         method = new QComboBox(frame);
-        method->setObjectName(QString::fromUtf8("method"));
+        method->setObjectName(QStringLiteral("method"));
         method->setEditable(true);
 
         gridLayout->addWidget(method, 2, 1, 1, 1);
 
         label_basis = new QLabel(frame);
-        label_basis->setObjectName(QString::fromUtf8("label_basis"));
+        label_basis->setObjectName(QStringLiteral("label_basis"));
 
         gridLayout->addWidget(label_basis, 3, 0, 1, 1);
 
         basis = new QComboBox(frame);
-        basis->setObjectName(QString::fromUtf8("basis"));
+        basis->setObjectName(QStringLiteral("basis"));
         basis->setEditable(true);
         basis->setMaxVisibleItems(15);
 
         gridLayout->addWidget(basis, 3, 1, 1, 1);
 
         label_ecp = new QLabel(frame);
-        label_ecp->setObjectName(QString::fromUtf8("label_ecp"));
+        label_ecp->setObjectName(QStringLiteral("label_ecp"));
 
         gridLayout->addWidget(label_ecp, 3, 2, 1, 1);
 
         label_correlation = new QLabel(frame);
-        label_correlation->setObjectName(QString::fromUtf8("label_correlation"));
+        label_correlation->setObjectName(QStringLiteral("label_correlation"));
 
         gridLayout->addWidget(label_correlation, 4, 2, 1, 1);
 
         correlation = new QComboBox(frame);
-        correlation->setObjectName(QString::fromUtf8("correlation"));
+        correlation->setObjectName(QStringLiteral("correlation"));
         correlation->setEditable(true);
 
         gridLayout->addWidget(correlation, 4, 3, 1, 1);
 
         label_qui_multiplicity = new QLabel(frame);
-        label_qui_multiplicity->setObjectName(QString::fromUtf8("label_qui_multiplicity"));
+        label_qui_multiplicity->setObjectName(QStringLiteral("label_qui_multiplicity"));
 
         gridLayout->addWidget(label_qui_multiplicity, 2, 2, 1, 1);
 
         label_qui_charge = new QLabel(frame);
-        label_qui_charge->setObjectName(QString::fromUtf8("label_qui_charge"));
+        label_qui_charge->setObjectName(QStringLiteral("label_qui_charge"));
 
         gridLayout->addWidget(label_qui_charge, 1, 2, 1, 1);
 
         hboxLayout1 = new QHBoxLayout();
-        hboxLayout1->setObjectName(QString::fromUtf8("hboxLayout1"));
+        hboxLayout1->setObjectName(QStringLiteral("hboxLayout1"));
         qui_charge = new QSpinBox(frame);
-        qui_charge->setObjectName(QString::fromUtf8("qui_charge"));
+        qui_charge->setObjectName(QStringLiteral("qui_charge"));
 
         hboxLayout1->addWidget(qui_charge);
 
@@ -1056,9 +1056,9 @@ public:
         gridLayout->addLayout(hboxLayout1, 1, 3, 1, 2);
 
         horizontalLayout_22 = new QHBoxLayout();
-        horizontalLayout_22->setObjectName(QString::fromUtf8("horizontalLayout_22"));
+        horizontalLayout_22->setObjectName(QStringLiteral("horizontalLayout_22"));
         qui_multiplicity = new QSpinBox(frame);
-        qui_multiplicity->setObjectName(QString::fromUtf8("qui_multiplicity"));
+        qui_multiplicity->setObjectName(QStringLiteral("qui_multiplicity"));
         qui_multiplicity->setMinimum(1);
         qui_multiplicity->setSingleStep(2);
 
@@ -1072,7 +1072,7 @@ public:
         gridLayout->addLayout(horizontalLayout_22, 2, 3, 1, 2);
 
         ecp = new QComboBox(frame);
-        ecp->setObjectName(QString::fromUtf8("ecp"));
+        ecp->setObjectName(QStringLiteral("ecp"));
         QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Fixed);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
@@ -1082,19 +1082,19 @@ public:
         gridLayout->addWidget(ecp, 3, 3, 1, 1);
 
         hboxLayout2 = new QHBoxLayout();
-        hboxLayout2->setObjectName(QString::fromUtf8("hboxLayout2"));
+        hboxLayout2->setObjectName(QStringLiteral("hboxLayout2"));
         addJobButton = new QToolButton(frame);
-        addJobButton->setObjectName(QString::fromUtf8("addJobButton"));
+        addJobButton->setObjectName(QStringLiteral("addJobButton"));
         QIcon icon;
-        icon.addFile(QString::fromUtf8(":/resources/icons/Add.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/resources/icons/Add.png"), QSize(), QIcon::Normal, QIcon::Off);
         addJobButton->setIcon(icon);
 
         hboxLayout2->addWidget(addJobButton);
 
         deleteJobButton = new QToolButton(frame);
-        deleteJobButton->setObjectName(QString::fromUtf8("deleteJobButton"));
+        deleteJobButton->setObjectName(QStringLiteral("deleteJobButton"));
         QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/resources/icons/Remove.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QStringLiteral(":/resources/icons/Remove.png"), QSize(), QIcon::Normal, QIcon::Off);
         deleteJobButton->setIcon(icon1);
 
         hboxLayout2->addWidget(deleteJobButton);
@@ -1107,9 +1107,9 @@ public:
         gridLayout->addLayout(hboxLayout2, 0, 3, 1, 2);
 
         horizontalLayout_26 = new QHBoxLayout();
-        horizontalLayout_26->setObjectName(QString::fromUtf8("horizontalLayout_26"));
+        horizontalLayout_26->setObjectName(QStringLiteral("horizontalLayout_26"));
         editJobSectionButton = new QPushButton(frame);
-        editJobSectionButton->setObjectName(QString::fromUtf8("editJobSectionButton"));
+        editJobSectionButton->setObjectName(QStringLiteral("editJobSectionButton"));
 
         horizontalLayout_26->addWidget(editJobSectionButton);
 
@@ -1131,107 +1131,107 @@ public:
         verticalLayout_10->addWidget(frame);
 
         scrollArea = new QScrollArea(SetupTab);
-        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
+        scrollArea->setObjectName(QStringLiteral("scrollArea"));
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
         scrollAreaWidgetContents->setGeometry(QRect(0, 0, 617, 573));
         verticalLayout_7 = new QVBoxLayout(scrollAreaWidgetContents);
-        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
+        verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
         toolBoxOptions = new QToolBox(scrollAreaWidgetContents);
-        toolBoxOptions->setObjectName(QString::fromUtf8("toolBoxOptions"));
+        toolBoxOptions->setObjectName(QStringLiteral("toolBoxOptions"));
         toolBoxOptions->setEnabled(true);
         pageScfControl = new QWidget();
-        pageScfControl->setObjectName(QString::fromUtf8("pageScfControl"));
+        pageScfControl->setObjectName(QStringLiteral("pageScfControl"));
         pageScfControl->setGeometry(QRect(0, 0, 599, 489));
         verticalLayout_34 = new QVBoxLayout(pageScfControl);
-        verticalLayout_34->setObjectName(QString::fromUtf8("verticalLayout_34"));
+        verticalLayout_34->setObjectName(QStringLiteral("verticalLayout_34"));
         _8 = new QGridLayout();
-        _8->setObjectName(QString::fromUtf8("_8"));
+        _8->setObjectName(QStringLiteral("_8"));
         scf_guess_mix = new QSpinBox(pageScfControl);
-        scf_guess_mix->setObjectName(QString::fromUtf8("scf_guess_mix"));
+        scf_guess_mix->setObjectName(QStringLiteral("scf_guess_mix"));
 
         _8->addWidget(scf_guess_mix, 2, 3, 1, 1);
 
         label_209 = new QLabel(pageScfControl);
-        label_209->setObjectName(QString::fromUtf8("label_209"));
+        label_209->setObjectName(QStringLiteral("label_209"));
 
         _8->addWidget(label_209, 1, 0, 1, 1);
 
         scf_convergence = new QSpinBox(pageScfControl);
-        scf_convergence->setObjectName(QString::fromUtf8("scf_convergence"));
+        scf_convergence->setObjectName(QStringLiteral("scf_convergence"));
         scf_convergence->setMinimum(-1);
         scf_convergence->setMaximum(20);
 
         _8->addWidget(scf_convergence, 0, 3, 1, 1);
 
         scf_guess = new QComboBox(pageScfControl);
-        scf_guess->setObjectName(QString::fromUtf8("scf_guess"));
+        scf_guess->setObjectName(QStringLiteral("scf_guess"));
 
         _8->addWidget(scf_guess, 1, 1, 1, 1);
 
         scf_algorithm = new QComboBox(pageScfControl);
-        scf_algorithm->setObjectName(QString::fromUtf8("scf_algorithm"));
+        scf_algorithm->setObjectName(QStringLiteral("scf_algorithm"));
 
         _8->addWidget(scf_algorithm, 0, 1, 1, 1);
 
         label_39 = new QLabel(pageScfControl);
-        label_39->setObjectName(QString::fromUtf8("label_39"));
+        label_39->setObjectName(QStringLiteral("label_39"));
 
         _8->addWidget(label_39, 0, 2, 1, 1);
 
         complex = new QCheckBox(pageScfControl);
-        complex->setObjectName(QString::fromUtf8("complex"));
+        complex->setObjectName(QStringLiteral("complex"));
 
         _8->addWidget(complex, 6, 0, 1, 2);
 
         label_scf_guess_mix = new QLabel(pageScfControl);
-        label_scf_guess_mix->setObjectName(QString::fromUtf8("label_scf_guess_mix"));
+        label_scf_guess_mix->setObjectName(QStringLiteral("label_scf_guess_mix"));
 
         _8->addWidget(label_scf_guess_mix, 2, 2, 1, 1);
 
         scf_max_cycles = new QSpinBox(pageScfControl);
-        scf_max_cycles->setObjectName(QString::fromUtf8("scf_max_cycles"));
+        scf_max_cycles->setObjectName(QStringLiteral("scf_max_cycles"));
 
         _8->addWidget(scf_max_cycles, 1, 3, 1, 1);
 
         label_145 = new QLabel(pageScfControl);
-        label_145->setObjectName(QString::fromUtf8("label_145"));
+        label_145->setObjectName(QStringLiteral("label_145"));
 
         _8->addWidget(label_145, 2, 0, 1, 1);
 
         ghf = new QCheckBox(pageScfControl);
-        ghf->setObjectName(QString::fromUtf8("ghf"));
+        ghf->setObjectName(QStringLiteral("ghf"));
 
         _8->addWidget(ghf, 5, 2, 1, 3);
 
         label_210 = new QLabel(pageScfControl);
-        label_210->setObjectName(QString::fromUtf8("label_210"));
+        label_210->setObjectName(QStringLiteral("label_210"));
 
         _8->addWidget(label_210, 0, 0, 1, 1);
 
         os_roscf = new QCheckBox(pageScfControl);
-        os_roscf->setObjectName(QString::fromUtf8("os_roscf"));
+        os_roscf->setObjectName(QStringLiteral("os_roscf"));
 
         _8->addWidget(os_roscf, 5, 0, 1, 2);
 
         dual_basis_energy = new QCheckBox(pageScfControl);
-        dual_basis_energy->setObjectName(QString::fromUtf8("dual_basis_energy"));
+        dual_basis_energy->setObjectName(QStringLiteral("dual_basis_energy"));
 
         _8->addWidget(dual_basis_energy, 3, 2, 1, 2);
 
         label_18 = new QLabel(pageScfControl);
-        label_18->setObjectName(QString::fromUtf8("label_18"));
+        label_18->setObjectName(QStringLiteral("label_18"));
 
         _8->addWidget(label_18, 1, 2, 1, 1);
 
         gen_scfman = new QCheckBox(pageScfControl);
-        gen_scfman->setObjectName(QString::fromUtf8("gen_scfman"));
+        gen_scfman->setObjectName(QStringLiteral("gen_scfman"));
 
         _8->addWidget(gen_scfman, 4, 0, 1, 2);
 
         basis2 = new QComboBox(pageScfControl);
-        basis2->setObjectName(QString::fromUtf8("basis2"));
+        basis2->setObjectName(QStringLiteral("basis2"));
         basis2->setEditable(false);
 
         _8->addWidget(basis2, 2, 1, 1, 1);
@@ -1241,24 +1241,24 @@ public:
         _8->addItem(spacerItem, 0, 4, 1, 1);
 
         complex_mix = new QSpinBox(pageScfControl);
-        complex_mix->setObjectName(QString::fromUtf8("complex_mix"));
+        complex_mix->setObjectName(QStringLiteral("complex_mix"));
         complex_mix->setMinimum(0);
         complex_mix->setValue(0);
 
         _8->addWidget(complex_mix, 6, 3, 1, 1);
 
         label_complex_mix = new QLabel(pageScfControl);
-        label_complex_mix->setObjectName(QString::fromUtf8("label_complex_mix"));
+        label_complex_mix->setObjectName(QStringLiteral("label_complex_mix"));
 
         _8->addWidget(label_complex_mix, 6, 2, 1, 1);
 
         internal_stability = new QCheckBox(pageScfControl);
-        internal_stability->setObjectName(QString::fromUtf8("internal_stability"));
+        internal_stability->setObjectName(QStringLiteral("internal_stability"));
 
         _8->addWidget(internal_stability, 4, 2, 1, 2);
 
         unrestricted = new QCheckBox(pageScfControl);
-        unrestricted->setObjectName(QString::fromUtf8("unrestricted"));
+        unrestricted->setObjectName(QStringLiteral("unrestricted"));
 
         _8->addWidget(unrestricted, 3, 0, 1, 2);
 
@@ -1269,26 +1269,26 @@ public:
 
         verticalLayout_34->addItem(verticalSpacer_19);
 
-        toolBoxOptions->addItem(pageScfControl, QString::fromUtf8("SCF Control"));
+        toolBoxOptions->addItem(pageScfControl, QStringLiteral("SCF Control"));
         pageWavefunctionAnalysis = new QWidget();
-        pageWavefunctionAnalysis->setObjectName(QString::fromUtf8("pageWavefunctionAnalysis"));
+        pageWavefunctionAnalysis->setObjectName(QStringLiteral("pageWavefunctionAnalysis"));
         pageWavefunctionAnalysis->setGeometry(QRect(0, 0, 599, 489));
         verticalLayout_25 = new QVBoxLayout(pageWavefunctionAnalysis);
-        verticalLayout_25->setObjectName(QString::fromUtf8("verticalLayout_25"));
+        verticalLayout_25->setObjectName(QStringLiteral("verticalLayout_25"));
         gridLayout_13 = new QGridLayout();
-        gridLayout_13->setObjectName(QString::fromUtf8("gridLayout_13"));
+        gridLayout_13->setObjectName(QStringLiteral("gridLayout_13"));
         gui = new QCheckBox(pageWavefunctionAnalysis);
-        gui->setObjectName(QString::fromUtf8("gui"));
+        gui->setObjectName(QStringLiteral("gui"));
 
         gridLayout_13->addWidget(gui, 0, 0, 1, 1);
 
         chelpg = new QCheckBox(pageWavefunctionAnalysis);
-        chelpg->setObjectName(QString::fromUtf8("chelpg"));
+        chelpg->setObjectName(QStringLiteral("chelpg"));
 
         gridLayout_13->addWidget(chelpg, 0, 1, 1, 1);
 
         nbo = new QCheckBox(pageWavefunctionAnalysis);
-        nbo->setObjectName(QString::fromUtf8("nbo"));
+        nbo->setObjectName(QStringLiteral("nbo"));
 
         gridLayout_13->addWidget(nbo, 1, 0, 1, 1);
 
@@ -1299,7 +1299,7 @@ public:
 
         verticalLayout_25->addItem(verticalSpacer_24);
 
-        toolBoxOptions->addItem(pageWavefunctionAnalysis, QString::fromUtf8("Wavefunction Analysis"));
+        toolBoxOptions->addItem(pageWavefunctionAnalysis, QStringLiteral("Wavefunction Analysis"));
 
         verticalLayout_7->addWidget(toolBoxOptions);
 
@@ -1309,9 +1309,9 @@ public:
 
         setupTabWidget->addTab(SetupTab, QString());
         AdvancedTab = new QWidget();
-        AdvancedTab->setObjectName(QString::fromUtf8("AdvancedTab"));
+        AdvancedTab->setObjectName(QStringLiteral("AdvancedTab"));
         horizontalLayout_17 = new QHBoxLayout(AdvancedTab);
-        horizontalLayout_17->setObjectName(QString::fromUtf8("horizontalLayout_17"));
+        horizontalLayout_17->setObjectName(QStringLiteral("horizontalLayout_17"));
         advancedOptionsTree = new QTreeWidget(AdvancedTab);
         QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem(advancedOptionsTree);
         new QTreeWidgetItem(__qtreewidgetitem);
@@ -1347,7 +1347,7 @@ public:
         new QTreeWidgetItem(advancedOptionsTree);
         new QTreeWidgetItem(advancedOptionsTree);
         new QTreeWidgetItem(advancedOptionsTree);
-        advancedOptionsTree->setObjectName(QString::fromUtf8("advancedOptionsTree"));
+        advancedOptionsTree->setObjectName(QStringLiteral("advancedOptionsTree"));
         QSizePolicy sizePolicy4(QSizePolicy::Minimum, QSizePolicy::Preferred);
         sizePolicy4.setHorizontalStretch(0);
         sizePolicy4.setVerticalStretch(0);
@@ -1359,55 +1359,55 @@ public:
         horizontalLayout_17->addWidget(advancedOptionsTree);
 
         advancedOptionsStack = new QStackedWidget(AdvancedTab);
-        advancedOptionsStack->setObjectName(QString::fromUtf8("advancedOptionsStack"));
+        advancedOptionsStack->setObjectName(QStringLiteral("advancedOptionsStack"));
         sizePolicy4.setHeightForWidth(advancedOptionsStack->sizePolicy().hasHeightForWidth());
         advancedOptionsStack->setSizePolicy(sizePolicy4);
         advancedOptionsStack->setMinimumSize(QSize(220, 0));
         advancedOptionsStack->setFrameShape(QFrame::Box);
         advancedOptionsStack->setFrameShadow(QFrame::Sunken);
         AdvancedSCFControl = new QWidget();
-        AdvancedSCFControl->setObjectName(QString::fromUtf8("AdvancedSCFControl"));
+        AdvancedSCFControl->setObjectName(QStringLiteral("AdvancedSCFControl"));
         verticalLayout_12 = new QVBoxLayout(AdvancedSCFControl);
-        verticalLayout_12->setObjectName(QString::fromUtf8("verticalLayout_12"));
+        verticalLayout_12->setObjectName(QStringLiteral("verticalLayout_12"));
         gridLayout_24 = new QGridLayout();
-        gridLayout_24->setObjectName(QString::fromUtf8("gridLayout_24"));
+        gridLayout_24->setObjectName(QStringLiteral("gridLayout_24"));
         purecart = new QComboBox(AdvancedSCFControl);
-        purecart->setObjectName(QString::fromUtf8("purecart"));
+        purecart->setObjectName(QStringLiteral("purecart"));
 
         gridLayout_24->addWidget(purecart, 0, 1, 1, 2);
 
         label_203 = new QLabel(AdvancedSCFControl);
-        label_203->setObjectName(QString::fromUtf8("label_203"));
+        label_203->setObjectName(QStringLiteral("label_203"));
 
         gridLayout_24->addWidget(label_203, 1, 0, 1, 1);
 
         mom_start = new QSpinBox(AdvancedSCFControl);
-        mom_start->setObjectName(QString::fromUtf8("mom_start"));
+        mom_start->setObjectName(QStringLiteral("mom_start"));
 
         gridLayout_24->addWidget(mom_start, 4, 1, 1, 1);
 
         mom_method = new QComboBox(AdvancedSCFControl);
-        mom_method->setObjectName(QString::fromUtf8("mom_method"));
+        mom_method->setObjectName(QStringLiteral("mom_method"));
 
         gridLayout_24->addWidget(mom_method, 5, 1, 1, 2);
 
         qui_section_swap_occupied_virtual = new QCheckBox(AdvancedSCFControl);
-        qui_section_swap_occupied_virtual->setObjectName(QString::fromUtf8("qui_section_swap_occupied_virtual"));
+        qui_section_swap_occupied_virtual->setObjectName(QStringLiteral("qui_section_swap_occupied_virtual"));
 
         gridLayout_24->addWidget(qui_section_swap_occupied_virtual, 6, 0, 1, 1);
 
         basis_projection_type = new QComboBox(AdvancedSCFControl);
-        basis_projection_type->setObjectName(QString::fromUtf8("basis_projection_type"));
+        basis_projection_type->setObjectName(QStringLiteral("basis_projection_type"));
 
         gridLayout_24->addWidget(basis_projection_type, 1, 1, 1, 2);
 
         rca_max_cycles = new QSpinBox(AdvancedSCFControl);
-        rca_max_cycles->setObjectName(QString::fromUtf8("rca_max_cycles"));
+        rca_max_cycles->setObjectName(QStringLiteral("rca_max_cycles"));
 
         gridLayout_24->addWidget(rca_max_cycles, 8, 1, 1, 1);
 
         label_199 = new QLabel(AdvancedSCFControl);
-        label_199->setObjectName(QString::fromUtf8("label_199"));
+        label_199->setObjectName(QStringLiteral("label_199"));
 
         gridLayout_24->addWidget(label_199, 2, 0, 1, 1);
 
@@ -1416,61 +1416,61 @@ public:
         gridLayout_24->addItem(horizontalSpacer_3, 4, 2, 1, 1);
 
         incfock = new QSpinBox(AdvancedSCFControl);
-        incfock->setObjectName(QString::fromUtf8("incfock"));
+        incfock->setObjectName(QStringLiteral("incfock"));
 
         gridLayout_24->addWidget(incfock, 2, 1, 1, 1);
 
         line = new QFrame(AdvancedSCFControl);
-        line->setObjectName(QString::fromUtf8("line"));
+        line->setObjectName(QStringLiteral("line"));
         line->setFrameShape(QFrame::HLine);
         line->setFrameShadow(QFrame::Sunken);
 
         gridLayout_24->addWidget(line, 3, 0, 1, 3);
 
         label_85 = new QLabel(AdvancedSCFControl);
-        label_85->setObjectName(QString::fromUtf8("label_85"));
+        label_85->setObjectName(QStringLiteral("label_85"));
 
         gridLayout_24->addWidget(label_85, 10, 0, 1, 1);
 
         label_101 = new QLabel(AdvancedSCFControl);
-        label_101->setObjectName(QString::fromUtf8("label_101"));
+        label_101->setObjectName(QStringLiteral("label_101"));
 
         gridLayout_24->addWidget(label_101, 9, 0, 1, 1);
 
         rca_print = new QSpinBox(AdvancedSCFControl);
-        rca_print->setObjectName(QString::fromUtf8("rca_print"));
+        rca_print->setObjectName(QStringLiteral("rca_print"));
 
         gridLayout_24->addWidget(rca_print, 10, 1, 1, 1);
 
         rca_switch_thresh = new QSpinBox(AdvancedSCFControl);
-        rca_switch_thresh->setObjectName(QString::fromUtf8("rca_switch_thresh"));
+        rca_switch_thresh->setObjectName(QStringLiteral("rca_switch_thresh"));
 
         gridLayout_24->addWidget(rca_switch_thresh, 9, 1, 1, 1);
 
         label_202 = new QLabel(AdvancedSCFControl);
-        label_202->setObjectName(QString::fromUtf8("label_202"));
+        label_202->setObjectName(QStringLiteral("label_202"));
 
         gridLayout_24->addWidget(label_202, 0, 0, 1, 1);
 
         label_200 = new QLabel(AdvancedSCFControl);
-        label_200->setObjectName(QString::fromUtf8("label_200"));
+        label_200->setObjectName(QStringLiteral("label_200"));
         sizePolicy4.setHeightForWidth(label_200->sizePolicy().hasHeightForWidth());
         label_200->setSizePolicy(sizePolicy4);
 
         gridLayout_24->addWidget(label_200, 4, 0, 1, 1);
 
         label_117 = new QLabel(AdvancedSCFControl);
-        label_117->setObjectName(QString::fromUtf8("label_117"));
+        label_117->setObjectName(QStringLiteral("label_117"));
 
         gridLayout_24->addWidget(label_117, 5, 0, 1, 1);
 
         label_201 = new QLabel(AdvancedSCFControl);
-        label_201->setObjectName(QString::fromUtf8("label_201"));
+        label_201->setObjectName(QStringLiteral("label_201"));
 
         gridLayout_24->addWidget(label_201, 8, 0, 1, 1);
 
         line_3 = new QFrame(AdvancedSCFControl);
-        line_3->setObjectName(QString::fromUtf8("line_3"));
+        line_3->setObjectName(QStringLiteral("line_3"));
         line_3->setFrameShape(QFrame::HLine);
         line_3->setFrameShadow(QFrame::Sunken);
 
@@ -1480,12 +1480,12 @@ public:
         verticalLayout_12->addLayout(gridLayout_24);
 
         pseudo_canonical = new QCheckBox(AdvancedSCFControl);
-        pseudo_canonical->setObjectName(QString::fromUtf8("pseudo_canonical"));
+        pseudo_canonical->setObjectName(QStringLiteral("pseudo_canonical"));
 
         verticalLayout_12->addWidget(pseudo_canonical);
 
         direct_scf = new QCheckBox(AdvancedSCFControl);
-        direct_scf->setObjectName(QString::fromUtf8("direct_scf"));
+        direct_scf->setObjectName(QStringLiteral("direct_scf"));
 
         verticalLayout_12->addWidget(direct_scf);
 
@@ -1495,48 +1495,48 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedSCFControl);
         AdvancedDIIS = new QWidget();
-        AdvancedDIIS->setObjectName(QString::fromUtf8("AdvancedDIIS"));
+        AdvancedDIIS->setObjectName(QStringLiteral("AdvancedDIIS"));
         vboxLayout = new QVBoxLayout(AdvancedDIIS);
-        vboxLayout->setObjectName(QString::fromUtf8("vboxLayout"));
+        vboxLayout->setObjectName(QStringLiteral("vboxLayout"));
         gridLayout1 = new QGridLayout();
-        gridLayout1->setObjectName(QString::fromUtf8("gridLayout1"));
+        gridLayout1->setObjectName(QStringLiteral("gridLayout1"));
         label_34 = new QLabel(AdvancedDIIS);
-        label_34->setObjectName(QString::fromUtf8("label_34"));
+        label_34->setObjectName(QStringLiteral("label_34"));
 
         gridLayout1->addWidget(label_34, 0, 0, 1, 1);
 
         label_41 = new QLabel(AdvancedDIIS);
-        label_41->setObjectName(QString::fromUtf8("label_41"));
+        label_41->setObjectName(QStringLiteral("label_41"));
 
         gridLayout1->addWidget(label_41, 3, 0, 1, 1);
 
         label_94 = new QLabel(AdvancedDIIS);
-        label_94->setObjectName(QString::fromUtf8("label_94"));
+        label_94->setObjectName(QStringLiteral("label_94"));
 
         gridLayout1->addWidget(label_94, 4, 0, 1, 1);
 
         diis_print = new QSpinBox(AdvancedDIIS);
-        diis_print->setObjectName(QString::fromUtf8("diis_print"));
+        diis_print->setObjectName(QStringLiteral("diis_print"));
 
         gridLayout1->addWidget(diis_print, 1, 1, 1, 1);
 
         diis_switch_thresh = new QSpinBox(AdvancedDIIS);
-        diis_switch_thresh->setObjectName(QString::fromUtf8("diis_switch_thresh"));
+        diis_switch_thresh->setObjectName(QStringLiteral("diis_switch_thresh"));
 
         gridLayout1->addWidget(diis_switch_thresh, 2, 1, 1, 1);
 
         label_35 = new QLabel(AdvancedDIIS);
-        label_35->setObjectName(QString::fromUtf8("label_35"));
+        label_35->setObjectName(QStringLiteral("label_35"));
 
         gridLayout1->addWidget(label_35, 1, 0, 1, 1);
 
         diis_max_cycles = new QSpinBox(AdvancedDIIS);
-        diis_max_cycles->setObjectName(QString::fromUtf8("diis_max_cycles"));
+        diis_max_cycles->setObjectName(QStringLiteral("diis_max_cycles"));
 
         gridLayout1->addWidget(diis_max_cycles, 3, 1, 1, 1);
 
         label_36 = new QLabel(AdvancedDIIS);
-        label_36->setObjectName(QString::fromUtf8("label_36"));
+        label_36->setObjectName(QStringLiteral("label_36"));
 
         gridLayout1->addWidget(label_36, 2, 0, 1, 1);
 
@@ -1545,9 +1545,9 @@ public:
         gridLayout1->addItem(spacerItem2, 0, 2, 1, 1);
 
         hboxLayout3 = new QHBoxLayout();
-        hboxLayout3->setObjectName(QString::fromUtf8("hboxLayout3"));
+        hboxLayout3->setObjectName(QStringLiteral("hboxLayout3"));
         diis_error_metric = new QComboBox(AdvancedDIIS);
-        diis_error_metric->setObjectName(QString::fromUtf8("diis_error_metric"));
+        diis_error_metric->setObjectName(QStringLiteral("diis_error_metric"));
 
         hboxLayout3->addWidget(diis_error_metric);
 
@@ -1559,7 +1559,7 @@ public:
         gridLayout1->addLayout(hboxLayout3, 4, 1, 1, 2);
 
         diis_subspace_size = new QSpinBox(AdvancedDIIS);
-        diis_subspace_size->setObjectName(QString::fromUtf8("diis_subspace_size"));
+        diis_subspace_size->setObjectName(QStringLiteral("diis_subspace_size"));
 
         gridLayout1->addWidget(diis_subspace_size, 0, 1, 1, 1);
 
@@ -1572,43 +1572,43 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedDIIS);
         AdvancedPrintOptions = new QWidget();
-        AdvancedPrintOptions->setObjectName(QString::fromUtf8("AdvancedPrintOptions"));
+        AdvancedPrintOptions->setObjectName(QStringLiteral("AdvancedPrintOptions"));
         vboxLayout1 = new QVBoxLayout(AdvancedPrintOptions);
-        vboxLayout1->setObjectName(QString::fromUtf8("vboxLayout1"));
+        vboxLayout1->setObjectName(QStringLiteral("vboxLayout1"));
         gridLayout2 = new QGridLayout();
-        gridLayout2->setObjectName(QString::fromUtf8("gridLayout2"));
+        gridLayout2->setObjectName(QStringLiteral("gridLayout2"));
         scf_final_print = new QSpinBox(AdvancedPrintOptions);
-        scf_final_print->setObjectName(QString::fromUtf8("scf_final_print"));
+        scf_final_print->setObjectName(QStringLiteral("scf_final_print"));
 
         gridLayout2->addWidget(scf_final_print, 2, 2, 1, 1);
 
         label_print_orbitals = new QLabel(AdvancedPrintOptions);
-        label_print_orbitals->setObjectName(QString::fromUtf8("label_print_orbitals"));
+        label_print_orbitals->setObjectName(QStringLiteral("label_print_orbitals"));
 
         gridLayout2->addWidget(label_print_orbitals, 4, 1, 1, 1);
 
         qui_print_orbitals = new QCheckBox(AdvancedPrintOptions);
-        qui_print_orbitals->setObjectName(QString::fromUtf8("qui_print_orbitals"));
+        qui_print_orbitals->setObjectName(QStringLiteral("qui_print_orbitals"));
 
         gridLayout2->addWidget(qui_print_orbitals, 3, 0, 1, 2);
 
         label_30 = new QLabel(AdvancedPrintOptions);
-        label_30->setObjectName(QString::fromUtf8("label_30"));
+        label_30->setObjectName(QStringLiteral("label_30"));
 
         gridLayout2->addWidget(label_30, 1, 0, 1, 2);
 
         label_29 = new QLabel(AdvancedPrintOptions);
-        label_29->setObjectName(QString::fromUtf8("label_29"));
+        label_29->setObjectName(QStringLiteral("label_29"));
 
         gridLayout2->addWidget(label_29, 0, 0, 1, 2);
 
         label_43 = new QLabel(AdvancedPrintOptions);
-        label_43->setObjectName(QString::fromUtf8("label_43"));
+        label_43->setObjectName(QStringLiteral("label_43"));
 
         gridLayout2->addWidget(label_43, 2, 0, 1, 2);
 
         label_105 = new QLabel(AdvancedPrintOptions);
-        label_105->setObjectName(QString::fromUtf8("label_105"));
+        label_105->setObjectName(QStringLiteral("label_105"));
 
         gridLayout2->addWidget(label_105, 5, 0, 1, 2);
 
@@ -1617,7 +1617,7 @@ public:
         gridLayout2->addItem(spacerItem5, 4, 0, 1, 1);
 
         scf_print = new QSpinBox(AdvancedPrintOptions);
-        scf_print->setObjectName(QString::fromUtf8("scf_print"));
+        scf_print->setObjectName(QStringLiteral("scf_print"));
 
         gridLayout2->addWidget(scf_print, 0, 2, 1, 1);
 
@@ -1626,27 +1626,27 @@ public:
         gridLayout2->addItem(spacerItem6, 0, 3, 1, 1);
 
         print_orbitals = new QSpinBox(AdvancedPrintOptions);
-        print_orbitals->setObjectName(QString::fromUtf8("print_orbitals"));
+        print_orbitals->setObjectName(QStringLiteral("print_orbitals"));
 
         gridLayout2->addWidget(print_orbitals, 4, 2, 1, 1);
 
         scf_guess_print = new QSpinBox(AdvancedPrintOptions);
-        scf_guess_print->setObjectName(QString::fromUtf8("scf_guess_print"));
+        scf_guess_print->setObjectName(QStringLiteral("scf_guess_print"));
 
         gridLayout2->addWidget(scf_guess_print, 1, 2, 1, 1);
 
         print_distance_matrix = new QSpinBox(AdvancedPrintOptions);
-        print_distance_matrix->setObjectName(QString::fromUtf8("print_distance_matrix"));
+        print_distance_matrix->setObjectName(QStringLiteral("print_distance_matrix"));
 
         gridLayout2->addWidget(print_distance_matrix, 5, 2, 1, 1);
 
         label_21 = new QLabel(AdvancedPrintOptions);
-        label_21->setObjectName(QString::fromUtf8("label_21"));
+        label_21->setObjectName(QStringLiteral("label_21"));
 
         gridLayout2->addWidget(label_21, 6, 0, 1, 2);
 
         pdb_print = new QSpinBox(AdvancedPrintOptions);
-        pdb_print->setObjectName(QString::fromUtf8("pdb_print"));
+        pdb_print->setObjectName(QStringLiteral("pdb_print"));
 
         gridLayout2->addWidget(pdb_print, 6, 2, 1, 1);
 
@@ -1654,22 +1654,22 @@ public:
         vboxLayout1->addLayout(gridLayout2);
 
         print_general_basis = new QCheckBox(AdvancedPrintOptions);
-        print_general_basis->setObjectName(QString::fromUtf8("print_general_basis"));
+        print_general_basis->setObjectName(QStringLiteral("print_general_basis"));
 
         vboxLayout1->addWidget(print_general_basis);
 
         scf_print_frgm = new QCheckBox(AdvancedPrintOptions);
-        scf_print_frgm->setObjectName(QString::fromUtf8("scf_print_frgm"));
+        scf_print_frgm->setObjectName(QStringLiteral("scf_print_frgm"));
 
         vboxLayout1->addWidget(scf_print_frgm);
 
         label_89 = new QLabel(AdvancedPrintOptions);
-        label_89->setObjectName(QString::fromUtf8("label_89"));
+        label_89->setObjectName(QStringLiteral("label_89"));
 
         vboxLayout1->addWidget(label_89);
 
         write_wfn = new QLineEdit(AdvancedPrintOptions);
-        write_wfn->setObjectName(QString::fromUtf8("write_wfn"));
+        write_wfn->setObjectName(QStringLiteral("write_wfn"));
 
         vboxLayout1->addWidget(write_wfn);
 
@@ -1679,36 +1679,36 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedPrintOptions);
         AdvancedLargeMoleculeMethods = new QWidget();
-        AdvancedLargeMoleculeMethods->setObjectName(QString::fromUtf8("AdvancedLargeMoleculeMethods"));
+        AdvancedLargeMoleculeMethods->setObjectName(QStringLiteral("AdvancedLargeMoleculeMethods"));
         verticalLayout_16 = new QVBoxLayout(AdvancedLargeMoleculeMethods);
-        verticalLayout_16->setObjectName(QString::fromUtf8("verticalLayout_16"));
+        verticalLayout_16->setObjectName(QStringLiteral("verticalLayout_16"));
         groupBox_0 = new QGroupBox(AdvancedLargeMoleculeMethods);
-        groupBox_0->setObjectName(QString::fromUtf8("groupBox_0"));
+        groupBox_0->setObjectName(QStringLiteral("groupBox_0"));
         gridLayout_25 = new QGridLayout(groupBox_0);
-        gridLayout_25->setObjectName(QString::fromUtf8("gridLayout_25"));
+        gridLayout_25->setObjectName(QStringLiteral("gridLayout_25"));
         qui_use_case = new QRadioButton(groupBox_0);
-        qui_use_case->setObjectName(QString::fromUtf8("qui_use_case"));
+        qui_use_case->setObjectName(QStringLiteral("qui_use_case"));
 
         gridLayout_25->addWidget(qui_use_case, 0, 2, 1, 1);
 
         qui_cfmm = new QRadioButton(groupBox_0);
-        qui_cfmm->setObjectName(QString::fromUtf8("qui_cfmm"));
+        qui_cfmm->setObjectName(QStringLiteral("qui_cfmm"));
         qui_cfmm->setChecked(true);
 
         gridLayout_25->addWidget(qui_cfmm, 0, 1, 1, 1);
 
         qui_none = new QRadioButton(groupBox_0);
-        qui_none->setObjectName(QString::fromUtf8("qui_none"));
+        qui_none->setObjectName(QStringLiteral("qui_none"));
 
         gridLayout_25->addWidget(qui_none, 0, 0, 1, 1);
 
         qui_use_ri = new QRadioButton(groupBox_0);
-        qui_use_ri->setObjectName(QString::fromUtf8("qui_use_ri"));
+        qui_use_ri->setObjectName(QStringLiteral("qui_use_ri"));
 
         gridLayout_25->addWidget(qui_use_ri, 1, 1, 1, 1);
 
         ftc = new QRadioButton(groupBox_0);
-        ftc->setObjectName(QString::fromUtf8("ftc"));
+        ftc->setObjectName(QStringLiteral("ftc"));
 
         gridLayout_25->addWidget(ftc, 1, 0, 1, 1);
 
@@ -1716,7 +1716,7 @@ public:
         verticalLayout_16->addWidget(groupBox_0);
 
         largeMoleculesStack = new QStackedWidget(AdvancedLargeMoleculeMethods);
-        largeMoleculesStack->setObjectName(QString::fromUtf8("largeMoleculesStack"));
+        largeMoleculesStack->setObjectName(QStringLiteral("largeMoleculesStack"));
         QSizePolicy sizePolicy5(QSizePolicy::Preferred, QSizePolicy::Maximum);
         sizePolicy5.setHorizontalStretch(0);
         sizePolicy5.setVerticalStretch(0);
@@ -1724,37 +1724,37 @@ public:
         largeMoleculesStack->setSizePolicy(sizePolicy5);
         largeMoleculesStack->setMinimumSize(QSize(0, 100));
         LargeMoleculesNone = new QWidget();
-        LargeMoleculesNone->setObjectName(QString::fromUtf8("LargeMoleculesNone"));
+        LargeMoleculesNone->setObjectName(QStringLiteral("LargeMoleculesNone"));
         largeMoleculesStack->addWidget(LargeMoleculesNone);
         LargeMoleculesCFMM = new QWidget();
-        LargeMoleculesCFMM->setObjectName(QString::fromUtf8("LargeMoleculesCFMM"));
+        LargeMoleculesCFMM->setObjectName(QStringLiteral("LargeMoleculesCFMM"));
         verticalLayout_24 = new QVBoxLayout(LargeMoleculesCFMM);
-        verticalLayout_24->setObjectName(QString::fromUtf8("verticalLayout_24"));
+        verticalLayout_24->setObjectName(QStringLiteral("verticalLayout_24"));
         gridLayout_4 = new QGridLayout();
-        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
         label_47 = new QLabel(LargeMoleculesCFMM);
-        label_47->setObjectName(QString::fromUtf8("label_47"));
+        label_47->setObjectName(QStringLiteral("label_47"));
 
         gridLayout_4->addWidget(label_47, 0, 0, 1, 1);
 
         cfmm_grain = new QComboBox(LargeMoleculesCFMM);
-        cfmm_grain->setObjectName(QString::fromUtf8("cfmm_grain"));
+        cfmm_grain->setObjectName(QStringLiteral("cfmm_grain"));
         cfmm_grain->setEditable(false);
 
         gridLayout_4->addWidget(cfmm_grain, 0, 1, 1, 1);
 
         label_46 = new QLabel(LargeMoleculesCFMM);
-        label_46->setObjectName(QString::fromUtf8("label_46"));
+        label_46->setObjectName(QStringLiteral("label_46"));
 
         gridLayout_4->addWidget(label_46, 1, 0, 1, 1);
 
         lin_k = new QCheckBox(LargeMoleculesCFMM);
-        lin_k->setObjectName(QString::fromUtf8("lin_k"));
+        lin_k->setObjectName(QStringLiteral("lin_k"));
 
         gridLayout_4->addWidget(lin_k, 2, 0, 1, 1);
 
         cfmm_order = new QSpinBox(LargeMoleculesCFMM);
-        cfmm_order->setObjectName(QString::fromUtf8("cfmm_order"));
+        cfmm_order->setObjectName(QStringLiteral("cfmm_order"));
         QSizePolicy sizePolicy6(QSizePolicy::Maximum, QSizePolicy::Fixed);
         sizePolicy6.setHorizontalStretch(0);
         sizePolicy6.setVerticalStretch(0);
@@ -1772,23 +1772,23 @@ public:
 
         largeMoleculesStack->addWidget(LargeMoleculesCFMM);
         LargeMoleculesFTC = new QWidget();
-        LargeMoleculesFTC->setObjectName(QString::fromUtf8("LargeMoleculesFTC"));
+        LargeMoleculesFTC->setObjectName(QStringLiteral("LargeMoleculesFTC"));
         vboxLayout2 = new QVBoxLayout(LargeMoleculesFTC);
-        vboxLayout2->setObjectName(QString::fromUtf8("vboxLayout2"));
+        vboxLayout2->setObjectName(QStringLiteral("vboxLayout2"));
         ftc_fast = new QCheckBox(LargeMoleculesFTC);
-        ftc_fast->setObjectName(QString::fromUtf8("ftc_fast"));
+        ftc_fast->setObjectName(QStringLiteral("ftc_fast"));
 
         vboxLayout2->addWidget(ftc_fast);
 
         label_99 = new QLabel(LargeMoleculesFTC);
-        label_99->setObjectName(QString::fromUtf8("label_99"));
+        label_99->setObjectName(QStringLiteral("label_99"));
 
         vboxLayout2->addWidget(label_99);
 
         hboxLayout4 = new QHBoxLayout();
-        hboxLayout4->setObjectName(QString::fromUtf8("hboxLayout4"));
+        hboxLayout4->setObjectName(QStringLiteral("hboxLayout4"));
         ftc_class_thresh_mult = new QSpinBox(LargeMoleculesFTC);
-        ftc_class_thresh_mult->setObjectName(QString::fromUtf8("ftc_class_thresh_mult"));
+        ftc_class_thresh_mult->setObjectName(QStringLiteral("ftc_class_thresh_mult"));
         QSizePolicy sizePolicy7(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy7.setHorizontalStretch(0);
         sizePolicy7.setVerticalStretch(0);
@@ -1799,12 +1799,12 @@ public:
         hboxLayout4->addWidget(ftc_class_thresh_mult);
 
         label_100 = new QLabel(LargeMoleculesFTC);
-        label_100->setObjectName(QString::fromUtf8("label_100"));
+        label_100->setObjectName(QStringLiteral("label_100"));
 
         hboxLayout4->addWidget(label_100);
 
         ftc_class_thresh_order = new QSpinBox(LargeMoleculesFTC);
-        ftc_class_thresh_order->setObjectName(QString::fromUtf8("ftc_class_thresh_order"));
+        ftc_class_thresh_order->setObjectName(QStringLiteral("ftc_class_thresh_order"));
         sizePolicy7.setHeightForWidth(ftc_class_thresh_order->sizePolicy().hasHeightForWidth());
         ftc_class_thresh_order->setSizePolicy(sizePolicy7);
         ftc_class_thresh_order->setMaximum(9);
@@ -1824,52 +1824,52 @@ public:
 
         largeMoleculesStack->addWidget(LargeMoleculesFTC);
         LargeMoleculesCASE = new QWidget();
-        LargeMoleculesCASE->setObjectName(QString::fromUtf8("LargeMoleculesCASE"));
+        LargeMoleculesCASE->setObjectName(QStringLiteral("LargeMoleculesCASE"));
         vboxLayout3 = new QVBoxLayout(LargeMoleculesCASE);
-        vboxLayout3->setObjectName(QString::fromUtf8("vboxLayout3"));
+        vboxLayout3->setObjectName(QStringLiteral("vboxLayout3"));
         spacerItem10 = new QSpacerItem(20, 100, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         vboxLayout3->addItem(spacerItem10);
 
         largeMoleculesStack->addWidget(LargeMoleculesCASE);
         LargeMoleculesRI = new QWidget();
-        LargeMoleculesRI->setObjectName(QString::fromUtf8("LargeMoleculesRI"));
+        LargeMoleculesRI->setObjectName(QStringLiteral("LargeMoleculesRI"));
         verticalLayout_15 = new QVBoxLayout(LargeMoleculesRI);
-        verticalLayout_15->setObjectName(QString::fromUtf8("verticalLayout_15"));
+        verticalLayout_15->setObjectName(QStringLiteral("verticalLayout_15"));
         gridLayout_12 = new QGridLayout();
-        gridLayout_12->setObjectName(QString::fromUtf8("gridLayout_12"));
+        gridLayout_12->setObjectName(QStringLiteral("gridLayout_12"));
         ari_r0 = new QSpinBox(LargeMoleculesRI);
-        ari_r0->setObjectName(QString::fromUtf8("ari_r0"));
+        ari_r0->setObjectName(QStringLiteral("ari_r0"));
 
         gridLayout_12->addWidget(ari_r0, 1, 2, 1, 1);
 
         checkBox_3 = new QCheckBox(LargeMoleculesRI);
-        checkBox_3->setObjectName(QString::fromUtf8("checkBox_3"));
+        checkBox_3->setObjectName(QStringLiteral("checkBox_3"));
 
         gridLayout_12->addWidget(checkBox_3, 1, 0, 1, 1);
 
         label_77 = new QLabel(LargeMoleculesRI);
-        label_77->setObjectName(QString::fromUtf8("label_77"));
+        label_77->setObjectName(QStringLiteral("label_77"));
 
         gridLayout_12->addWidget(label_77, 2, 1, 1, 1);
 
         ari_r1 = new QSpinBox(LargeMoleculesRI);
-        ari_r1->setObjectName(QString::fromUtf8("ari_r1"));
+        ari_r1->setObjectName(QStringLiteral("ari_r1"));
 
         gridLayout_12->addWidget(ari_r1, 2, 2, 1, 1);
 
         checkBox_2 = new QCheckBox(LargeMoleculesRI);
-        checkBox_2->setObjectName(QString::fromUtf8("checkBox_2"));
+        checkBox_2->setObjectName(QStringLiteral("checkBox_2"));
 
         gridLayout_12->addWidget(checkBox_2, 0, 1, 1, 1);
 
         label_55 = new QLabel(LargeMoleculesRI);
-        label_55->setObjectName(QString::fromUtf8("label_55"));
+        label_55->setObjectName(QStringLiteral("label_55"));
 
         gridLayout_12->addWidget(label_55, 1, 1, 1, 1);
 
         checkBox = new QCheckBox(LargeMoleculesRI);
-        checkBox->setObjectName(QString::fromUtf8("checkBox"));
+        checkBox->setObjectName(QStringLiteral("checkBox"));
 
         gridLayout_12->addWidget(checkBox, 0, 0, 1, 1);
 
@@ -1894,41 +1894,41 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedLargeMoleculeMethods);
         AdvancedHFPT = new QWidget();
-        AdvancedHFPT->setObjectName(QString::fromUtf8("AdvancedHFPT"));
+        AdvancedHFPT->setObjectName(QStringLiteral("AdvancedHFPT"));
         verticalLayout_13 = new QVBoxLayout(AdvancedHFPT);
-        verticalLayout_13->setObjectName(QString::fromUtf8("verticalLayout_13"));
+        verticalLayout_13->setObjectName(QStringLiteral("verticalLayout_13"));
         gridLayout_21 = new QGridLayout();
-        gridLayout_21->setObjectName(QString::fromUtf8("gridLayout_21"));
+        gridLayout_21->setObjectName(QStringLiteral("gridLayout_21"));
         label_3 = new QLabel(AdvancedHFPT);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName(QStringLiteral("label_3"));
 
         gridLayout_21->addWidget(label_3, 0, 0, 1, 1);
 
         label_dfpt_xc_grid = new QLabel(AdvancedHFPT);
-        label_dfpt_xc_grid->setObjectName(QString::fromUtf8("label_dfpt_xc_grid"));
+        label_dfpt_xc_grid->setObjectName(QStringLiteral("label_dfpt_xc_grid"));
 
         gridLayout_21->addWidget(label_dfpt_xc_grid, 1, 0, 1, 1);
 
         dfpt_exchange = new QComboBox(AdvancedHFPT);
-        dfpt_exchange->setObjectName(QString::fromUtf8("dfpt_exchange"));
+        dfpt_exchange->setObjectName(QStringLiteral("dfpt_exchange"));
         dfpt_exchange->setEditable(true);
 
         gridLayout_21->addWidget(dfpt_exchange, 2, 1, 1, 1);
 
         dfpt_xc_grid = new QComboBox(AdvancedHFPT);
-        dfpt_xc_grid->setObjectName(QString::fromUtf8("dfpt_xc_grid"));
+        dfpt_xc_grid->setObjectName(QStringLiteral("dfpt_xc_grid"));
         dfpt_xc_grid->setEditable(true);
 
         gridLayout_21->addWidget(dfpt_xc_grid, 1, 1, 1, 1);
 
         hfpt_basis = new QComboBox(AdvancedHFPT);
-        hfpt_basis->setObjectName(QString::fromUtf8("hfpt_basis"));
+        hfpt_basis->setObjectName(QStringLiteral("hfpt_basis"));
         hfpt_basis->setEditable(true);
 
         gridLayout_21->addWidget(hfpt_basis, 0, 1, 1, 1);
 
         label_dfpt_exchange = new QLabel(AdvancedHFPT);
-        label_dfpt_exchange->setObjectName(QString::fromUtf8("label_dfpt_exchange"));
+        label_dfpt_exchange->setObjectName(QStringLiteral("label_dfpt_exchange"));
 
         gridLayout_21->addWidget(label_dfpt_exchange, 2, 0, 1, 1);
 
@@ -1945,40 +1945,40 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedHFPT);
         AdvancedPAO = new QWidget();
-        AdvancedPAO->setObjectName(QString::fromUtf8("AdvancedPAO"));
+        AdvancedPAO->setObjectName(QStringLiteral("AdvancedPAO"));
         vboxLayout4 = new QVBoxLayout(AdvancedPAO);
-        vboxLayout4->setObjectName(QString::fromUtf8("vboxLayout4"));
+        vboxLayout4->setObjectName(QStringLiteral("vboxLayout4"));
         gridLayout3 = new QGridLayout();
-        gridLayout3->setObjectName(QString::fromUtf8("gridLayout3"));
+        gridLayout3->setObjectName(QStringLiteral("gridLayout3"));
         label_49 = new QLabel(AdvancedPAO);
-        label_49->setObjectName(QString::fromUtf8("label_49"));
+        label_49->setObjectName(QStringLiteral("label_49"));
 
         gridLayout3->addWidget(label_49, 2, 0, 1, 1);
 
         epao_weights = new QComboBox(AdvancedPAO);
-        epao_weights->setObjectName(QString::fromUtf8("epao_weights"));
+        epao_weights->setObjectName(QStringLiteral("epao_weights"));
 
         gridLayout3->addWidget(epao_weights, 2, 1, 1, 1);
 
         label_50 = new QLabel(AdvancedPAO);
-        label_50->setObjectName(QString::fromUtf8("label_50"));
+        label_50->setObjectName(QStringLiteral("label_50"));
 
         gridLayout3->addWidget(label_50, 1, 0, 1, 1);
 
         pao_method = new QComboBox(AdvancedPAO);
-        pao_method->setObjectName(QString::fromUtf8("pao_method"));
+        pao_method->setObjectName(QStringLiteral("pao_method"));
 
         gridLayout3->addWidget(pao_method, 0, 1, 1, 1);
 
         pao_algorithm = new QComboBox(AdvancedPAO);
-        pao_algorithm->setObjectName(QString::fromUtf8("pao_algorithm"));
+        pao_algorithm->setObjectName(QStringLiteral("pao_algorithm"));
 
         gridLayout3->addWidget(pao_algorithm, 1, 1, 1, 1);
 
         hboxLayout5 = new QHBoxLayout();
-        hboxLayout5->setObjectName(QString::fromUtf8("hboxLayout5"));
+        hboxLayout5->setObjectName(QStringLiteral("hboxLayout5"));
         epao_iterate = new QSpinBox(AdvancedPAO);
-        epao_iterate->setObjectName(QString::fromUtf8("epao_iterate"));
+        epao_iterate->setObjectName(QStringLiteral("epao_iterate"));
 
         hboxLayout5->addWidget(epao_iterate);
 
@@ -1990,12 +1990,12 @@ public:
         gridLayout3->addLayout(hboxLayout5, 3, 1, 1, 2);
 
         label_48 = new QLabel(AdvancedPAO);
-        label_48->setObjectName(QString::fromUtf8("label_48"));
+        label_48->setObjectName(QStringLiteral("label_48"));
 
         gridLayout3->addWidget(label_48, 3, 0, 1, 1);
 
         label_51 = new QLabel(AdvancedPAO);
-        label_51->setObjectName(QString::fromUtf8("label_51"));
+        label_51->setObjectName(QStringLiteral("label_51"));
 
         gridLayout3->addWidget(label_51, 0, 0, 1, 1);
 
@@ -2012,48 +2012,48 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedPAO);
         AdvancedInternalStability = new QWidget();
-        AdvancedInternalStability->setObjectName(QString::fromUtf8("AdvancedInternalStability"));
+        AdvancedInternalStability->setObjectName(QStringLiteral("AdvancedInternalStability"));
         verticalLayout_6 = new QVBoxLayout(AdvancedInternalStability);
-        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
         gridLayout_7 = new QGridLayout();
-        gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
+        gridLayout_7->setObjectName(QStringLiteral("gridLayout_7"));
         internal_stability_conv = new QSpinBox(AdvancedInternalStability);
-        internal_stability_conv->setObjectName(QString::fromUtf8("internal_stability_conv"));
+        internal_stability_conv->setObjectName(QStringLiteral("internal_stability_conv"));
 
         gridLayout_7->addWidget(internal_stability_conv, 2, 1, 1, 1);
 
         label_67 = new QLabel(AdvancedInternalStability);
-        label_67->setObjectName(QString::fromUtf8("label_67"));
+        label_67->setObjectName(QStringLiteral("label_67"));
 
         gridLayout_7->addWidget(label_67, 2, 0, 1, 1);
 
         internal_stability_roots = new QSpinBox(AdvancedInternalStability);
-        internal_stability_roots->setObjectName(QString::fromUtf8("internal_stability_roots"));
+        internal_stability_roots->setObjectName(QStringLiteral("internal_stability_roots"));
 
         gridLayout_7->addWidget(internal_stability_roots, 3, 1, 1, 1);
 
         label_61 = new QLabel(AdvancedInternalStability);
-        label_61->setObjectName(QString::fromUtf8("label_61"));
+        label_61->setObjectName(QStringLiteral("label_61"));
 
         gridLayout_7->addWidget(label_61, 1, 0, 1, 1);
 
         internal_stability_iter = new QSpinBox(AdvancedInternalStability);
-        internal_stability_iter->setObjectName(QString::fromUtf8("internal_stability_iter"));
+        internal_stability_iter->setObjectName(QStringLiteral("internal_stability_iter"));
 
         gridLayout_7->addWidget(internal_stability_iter, 0, 1, 1, 1);
 
         label_57 = new QLabel(AdvancedInternalStability);
-        label_57->setObjectName(QString::fromUtf8("label_57"));
+        label_57->setObjectName(QStringLiteral("label_57"));
 
         gridLayout_7->addWidget(label_57, 0, 0, 1, 1);
 
         internal_stability_davidson_iter = new QSpinBox(AdvancedInternalStability);
-        internal_stability_davidson_iter->setObjectName(QString::fromUtf8("internal_stability_davidson_iter"));
+        internal_stability_davidson_iter->setObjectName(QStringLiteral("internal_stability_davidson_iter"));
 
         gridLayout_7->addWidget(internal_stability_davidson_iter, 1, 1, 1, 1);
 
         label_69 = new QLabel(AdvancedInternalStability);
-        label_69->setObjectName(QString::fromUtf8("label_69"));
+        label_69->setObjectName(QStringLiteral("label_69"));
 
         gridLayout_7->addWidget(label_69, 3, 0, 1, 1);
 
@@ -2062,7 +2062,7 @@ public:
         gridLayout_7->addItem(horizontalSpacer_5, 0, 2, 1, 1);
 
         fd_mat_vec_prod = new QRadioButton(AdvancedInternalStability);
-        fd_mat_vec_prod->setObjectName(QString::fromUtf8("fd_mat_vec_prod"));
+        fd_mat_vec_prod->setObjectName(QStringLiteral("fd_mat_vec_prod"));
 
         gridLayout_7->addWidget(fd_mat_vec_prod, 4, 0, 1, 3);
 
@@ -2075,28 +2075,28 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedInternalStability);
         AdvancedThresholds = new QWidget();
-        AdvancedThresholds->setObjectName(QString::fromUtf8("AdvancedThresholds"));
+        AdvancedThresholds->setObjectName(QStringLiteral("AdvancedThresholds"));
         vboxLayout5 = new QVBoxLayout(AdvancedThresholds);
-        vboxLayout5->setObjectName(QString::fromUtf8("vboxLayout5"));
+        vboxLayout5->setObjectName(QStringLiteral("vboxLayout5"));
         gridLayout4 = new QGridLayout();
-        gridLayout4->setObjectName(QString::fromUtf8("gridLayout4"));
+        gridLayout4->setObjectName(QStringLiteral("gridLayout4"));
         label_32 = new QLabel(AdvancedThresholds);
-        label_32->setObjectName(QString::fromUtf8("label_32"));
+        label_32->setObjectName(QStringLiteral("label_32"));
 
         gridLayout4->addWidget(label_32, 2, 0, 1, 1);
 
         basis_linear_dependence_thresh = new QSpinBox(AdvancedThresholds);
-        basis_linear_dependence_thresh->setObjectName(QString::fromUtf8("basis_linear_dependence_thresh"));
+        basis_linear_dependence_thresh->setObjectName(QStringLiteral("basis_linear_dependence_thresh"));
 
         gridLayout4->addWidget(basis_linear_dependence_thresh, 2, 1, 1, 1);
 
         thresh = new QSpinBox(AdvancedThresholds);
-        thresh->setObjectName(QString::fromUtf8("thresh"));
+        thresh->setObjectName(QStringLiteral("thresh"));
 
         gridLayout4->addWidget(thresh, 0, 1, 1, 1);
 
         label_40 = new QLabel(AdvancedThresholds);
-        label_40->setObjectName(QString::fromUtf8("label_40"));
+        label_40->setObjectName(QStringLiteral("label_40"));
 
         gridLayout4->addWidget(label_40, 0, 0, 1, 1);
 
@@ -2105,14 +2105,14 @@ public:
         gridLayout4->addItem(spacerItem14, 0, 2, 1, 1);
 
         label_211 = new QLabel(AdvancedThresholds);
-        label_211->setObjectName(QString::fromUtf8("label_211"));
+        label_211->setObjectName(QStringLiteral("label_211"));
 
         gridLayout4->addWidget(label_211, 3, 0, 1, 1);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         meteco = new QComboBox(AdvancedThresholds);
-        meteco->setObjectName(QString::fromUtf8("meteco"));
+        meteco->setObjectName(QStringLiteral("meteco"));
 
         horizontalLayout_2->addWidget(meteco);
 
@@ -2124,12 +2124,12 @@ public:
         gridLayout4->addLayout(horizontalLayout_2, 4, 0, 1, 3);
 
         label_198 = new QLabel(AdvancedThresholds);
-        label_198->setObjectName(QString::fromUtf8("label_198"));
+        label_198->setObjectName(QStringLiteral("label_198"));
 
         gridLayout4->addWidget(label_198, 1, 0, 1, 1);
 
         varthresh = new QSpinBox(AdvancedThresholds);
-        varthresh->setObjectName(QString::fromUtf8("varthresh"));
+        varthresh->setObjectName(QStringLiteral("varthresh"));
 
         gridLayout4->addWidget(varthresh, 1, 1, 1, 1);
 
@@ -2142,18 +2142,18 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedThresholds);
         AdvancedDFT = new QWidget();
-        AdvancedDFT->setObjectName(QString::fromUtf8("AdvancedDFT"));
+        AdvancedDFT->setObjectName(QStringLiteral("AdvancedDFT"));
         verticalLayout_49 = new QVBoxLayout(AdvancedDFT);
-        verticalLayout_49->setObjectName(QString::fromUtf8("verticalLayout_49"));
+        verticalLayout_49->setObjectName(QStringLiteral("verticalLayout_49"));
         horizontalLayout_32 = new QHBoxLayout();
-        horizontalLayout_32->setObjectName(QString::fromUtf8("horizontalLayout_32"));
+        horizontalLayout_32->setObjectName(QStringLiteral("horizontalLayout_32"));
         label_2 = new QLabel(AdvancedDFT);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         horizontalLayout_32->addWidget(label_2);
 
         xc_grid = new QComboBox(AdvancedDFT);
-        xc_grid->setObjectName(QString::fromUtf8("xc_grid"));
+        xc_grid->setObjectName(QStringLiteral("xc_grid"));
         xc_grid->setEditable(true);
 
         horizontalLayout_32->addWidget(xc_grid);
@@ -2166,38 +2166,38 @@ public:
         verticalLayout_49->addLayout(horizontalLayout_32);
 
         xc_smart_grid = new QCheckBox(AdvancedDFT);
-        xc_smart_grid->setObjectName(QString::fromUtf8("xc_smart_grid"));
+        xc_smart_grid->setObjectName(QStringLiteral("xc_smart_grid"));
 
         verticalLayout_49->addWidget(xc_smart_grid);
 
         fast_xc = new QCheckBox(AdvancedDFT);
-        fast_xc->setObjectName(QString::fromUtf8("fast_xc"));
+        fast_xc->setObjectName(QStringLiteral("fast_xc"));
 
         verticalLayout_49->addWidget(fast_xc);
 
         incdft = new QCheckBox(AdvancedDFT);
-        incdft->setObjectName(QString::fromUtf8("incdft"));
+        incdft->setObjectName(QStringLiteral("incdft"));
 
         verticalLayout_49->addWidget(incdft);
 
         mrxc = new QCheckBox(AdvancedDFT);
-        mrxc->setObjectName(QString::fromUtf8("mrxc"));
+        mrxc->setObjectName(QStringLiteral("mrxc"));
 
         verticalLayout_49->addWidget(mrxc);
 
         groupBox_mrxc = new QGroupBox(AdvancedDFT);
-        groupBox_mrxc->setObjectName(QString::fromUtf8("groupBox_mrxc"));
+        groupBox_mrxc->setObjectName(QStringLiteral("groupBox_mrxc"));
         verticalLayout_48 = new QVBoxLayout(groupBox_mrxc);
-        verticalLayout_48->setObjectName(QString::fromUtf8("verticalLayout_48"));
+        verticalLayout_48->setObjectName(QStringLiteral("verticalLayout_48"));
         label_8 = new QLabel(groupBox_mrxc);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
+        label_8->setObjectName(QStringLiteral("label_8"));
 
         verticalLayout_48->addWidget(label_8);
 
         _5 = new QHBoxLayout();
-        _5->setObjectName(QString::fromUtf8("_5"));
+        _5->setObjectName(QStringLiteral("_5"));
         mrxc_class_thresh_mult = new QSpinBox(groupBox_mrxc);
-        mrxc_class_thresh_mult->setObjectName(QString::fromUtf8("mrxc_class_thresh_mult"));
+        mrxc_class_thresh_mult->setObjectName(QStringLiteral("mrxc_class_thresh_mult"));
         sizePolicy7.setHeightForWidth(mrxc_class_thresh_mult->sizePolicy().hasHeightForWidth());
         mrxc_class_thresh_mult->setSizePolicy(sizePolicy7);
         mrxc_class_thresh_mult->setMaximum(9);
@@ -2205,12 +2205,12 @@ public:
         _5->addWidget(mrxc_class_thresh_mult);
 
         label_102 = new QLabel(groupBox_mrxc);
-        label_102->setObjectName(QString::fromUtf8("label_102"));
+        label_102->setObjectName(QStringLiteral("label_102"));
 
         _5->addWidget(label_102);
 
         mrxc_class_thresh_order = new QSpinBox(groupBox_mrxc);
-        mrxc_class_thresh_order->setObjectName(QString::fromUtf8("mrxc_class_thresh_order"));
+        mrxc_class_thresh_order->setObjectName(QStringLiteral("mrxc_class_thresh_order"));
         sizePolicy7.setHeightForWidth(mrxc_class_thresh_order->sizePolicy().hasHeightForWidth());
         mrxc_class_thresh_order->setSizePolicy(sizePolicy7);
         mrxc_class_thresh_order->setMaximum(9);
@@ -2225,14 +2225,14 @@ public:
         verticalLayout_48->addLayout(_5);
 
         horizontalLayout_34 = new QHBoxLayout();
-        horizontalLayout_34->setObjectName(QString::fromUtf8("horizontalLayout_34"));
+        horizontalLayout_34->setObjectName(QStringLiteral("horizontalLayout_34"));
         label_7 = new QLabel(groupBox_mrxc);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
+        label_7->setObjectName(QStringLiteral("label_7"));
 
         horizontalLayout_34->addWidget(label_7);
 
         local_interp_order = new QSpinBox(groupBox_mrxc);
-        local_interp_order->setObjectName(QString::fromUtf8("local_interp_order"));
+        local_interp_order->setObjectName(QStringLiteral("local_interp_order"));
 
         horizontalLayout_34->addWidget(local_interp_order);
 
@@ -2252,31 +2252,31 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedDFT);
         AdvancedDispersionCorrection = new QWidget();
-        AdvancedDispersionCorrection->setObjectName(QString::fromUtf8("AdvancedDispersionCorrection"));
+        AdvancedDispersionCorrection->setObjectName(QStringLiteral("AdvancedDispersionCorrection"));
         verticalLayout_39 = new QVBoxLayout(AdvancedDispersionCorrection);
-        verticalLayout_39->setObjectName(QString::fromUtf8("verticalLayout_39"));
+        verticalLayout_39->setObjectName(QStringLiteral("verticalLayout_39"));
         gridLayout_14 = new QGridLayout();
-        gridLayout_14->setObjectName(QString::fromUtf8("gridLayout_14"));
+        gridLayout_14->setObjectName(QStringLiteral("gridLayout_14"));
         label_76 = new QLabel(AdvancedDispersionCorrection);
-        label_76->setObjectName(QString::fromUtf8("label_76"));
+        label_76->setObjectName(QStringLiteral("label_76"));
 
         gridLayout_14->addWidget(label_76, 0, 0, 1, 1);
 
         label_98 = new QLabel(AdvancedDispersionCorrection);
-        label_98->setObjectName(QString::fromUtf8("label_98"));
+        label_98->setObjectName(QStringLiteral("label_98"));
 
         gridLayout_14->addWidget(label_98, 1, 0, 1, 1);
 
         dft_d = new QComboBox(AdvancedDispersionCorrection);
-        dft_d->setObjectName(QString::fromUtf8("dft_d"));
+        dft_d->setObjectName(QStringLiteral("dft_d"));
 
         gridLayout_14->addWidget(dft_d, 0, 1, 1, 1);
 
         horizontalLayout_19 = new QHBoxLayout();
-        horizontalLayout_19->setObjectName(QString::fromUtf8("horizontalLayout_19"));
+        horizontalLayout_19->setObjectName(QStringLiteral("horizontalLayout_19"));
         dft_d_a = new QDoubleSpinBox(AdvancedDispersionCorrection);
-        dft_d_a->setObjectName(QString::fromUtf8("dft_d_a"));
-        dft_d_a->setSingleStep(0.010000000000000);
+        dft_d_a->setObjectName(QStringLiteral("dft_d_a"));
+        dft_d_a->setSingleStep(0.01);
 
         horizontalLayout_19->addWidget(dft_d_a);
 
@@ -2291,29 +2291,29 @@ public:
         verticalLayout_39->addLayout(gridLayout_14);
 
         groupBox_dft_d = new QGroupBox(AdvancedDispersionCorrection);
-        groupBox_dft_d->setObjectName(QString::fromUtf8("groupBox_dft_d"));
+        groupBox_dft_d->setObjectName(QStringLiteral("groupBox_dft_d"));
         gridLayout_17 = new QGridLayout(groupBox_dft_d);
-        gridLayout_17->setObjectName(QString::fromUtf8("gridLayout_17"));
+        gridLayout_17->setObjectName(QStringLiteral("gridLayout_17"));
         label_9 = new QLabel(groupBox_dft_d);
-        label_9->setObjectName(QString::fromUtf8("label_9"));
+        label_9->setObjectName(QStringLiteral("label_9"));
         label_9->setTextFormat(Qt::RichText);
 
         gridLayout_17->addWidget(label_9, 0, 0, 1, 1);
 
         label_19 = new QLabel(groupBox_dft_d);
-        label_19->setObjectName(QString::fromUtf8("label_19"));
+        label_19->setObjectName(QStringLiteral("label_19"));
         label_19->setTextFormat(Qt::RichText);
 
         gridLayout_17->addWidget(label_19, 1, 0, 1, 1);
 
         label_20 = new QLabel(groupBox_dft_d);
-        label_20->setObjectName(QString::fromUtf8("label_20"));
+        label_20->setObjectName(QStringLiteral("label_20"));
         label_20->setTextFormat(Qt::RichText);
 
         gridLayout_17->addWidget(label_20, 2, 0, 1, 1);
 
         dft_d3_3body = new QCheckBox(groupBox_dft_d);
-        dft_d3_3body->setObjectName(QString::fromUtf8("dft_d3_3body"));
+        dft_d3_3body->setObjectName(QStringLiteral("dft_d3_3body"));
 
         gridLayout_17->addWidget(dft_d3_3body, 3, 0, 1, 4);
 
@@ -2322,19 +2322,19 @@ public:
         gridLayout_17->addItem(horizontalSpacer_34, 0, 2, 1, 1);
 
         dft_d3_s6 = new QDoubleSpinBox(groupBox_dft_d);
-        dft_d3_s6->setObjectName(QString::fromUtf8("dft_d3_s6"));
+        dft_d3_s6->setObjectName(QStringLiteral("dft_d3_s6"));
         dft_d3_s6->setDecimals(3);
 
         gridLayout_17->addWidget(dft_d3_s6, 0, 1, 1, 1);
 
         dft_d3_sr6 = new QDoubleSpinBox(groupBox_dft_d);
-        dft_d3_sr6->setObjectName(QString::fromUtf8("dft_d3_sr6"));
+        dft_d3_sr6->setObjectName(QStringLiteral("dft_d3_sr6"));
         dft_d3_sr6->setDecimals(3);
 
         gridLayout_17->addWidget(dft_d3_sr6, 1, 1, 1, 1);
 
         dft_d3_s8 = new QDoubleSpinBox(groupBox_dft_d);
-        dft_d3_s8->setObjectName(QString::fromUtf8("dft_d3_s8"));
+        dft_d3_s8->setObjectName(QStringLiteral("dft_d3_s8"));
         dft_d3_s8->setDecimals(3);
 
         gridLayout_17->addWidget(dft_d3_s8, 2, 1, 1, 1);
@@ -2348,45 +2348,45 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedDispersionCorrection);
         AdvancedXDM = new QWidget();
-        AdvancedXDM->setObjectName(QString::fromUtf8("AdvancedXDM"));
+        AdvancedXDM->setObjectName(QStringLiteral("AdvancedXDM"));
         verticalLayout_46 = new QVBoxLayout(AdvancedXDM);
-        verticalLayout_46->setObjectName(QString::fromUtf8("verticalLayout_46"));
+        verticalLayout_46->setObjectName(QStringLiteral("verticalLayout_46"));
         gridLayout_15 = new QGridLayout();
-        gridLayout_15->setObjectName(QString::fromUtf8("gridLayout_15"));
+        gridLayout_15->setObjectName(QStringLiteral("gridLayout_15"));
         label = new QLabel(AdvancedXDM);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         gridLayout_15->addWidget(label, 0, 0, 1, 1);
 
         dftvdw_jobnumber = new QComboBox(AdvancedXDM);
-        dftvdw_jobnumber->setObjectName(QString::fromUtf8("dftvdw_jobnumber"));
+        dftvdw_jobnumber->setObjectName(QStringLiteral("dftvdw_jobnumber"));
 
         gridLayout_15->addWidget(dftvdw_jobnumber, 0, 1, 1, 1);
 
         label_dftvdw_method = new QLabel(AdvancedXDM);
-        label_dftvdw_method->setObjectName(QString::fromUtf8("label_dftvdw_method"));
+        label_dftvdw_method->setObjectName(QStringLiteral("label_dftvdw_method"));
 
         gridLayout_15->addWidget(label_dftvdw_method, 1, 0, 1, 1);
 
         dftvdw_method = new QComboBox(AdvancedXDM);
-        dftvdw_method->setObjectName(QString::fromUtf8("dftvdw_method"));
+        dftvdw_method->setObjectName(QStringLiteral("dftvdw_method"));
 
         gridLayout_15->addWidget(dftvdw_method, 1, 1, 1, 1);
 
         label_dftvdw_print = new QLabel(AdvancedXDM);
-        label_dftvdw_print->setObjectName(QString::fromUtf8("label_dftvdw_print"));
+        label_dftvdw_print->setObjectName(QStringLiteral("label_dftvdw_print"));
 
         gridLayout_15->addWidget(label_dftvdw_print, 2, 0, 1, 1);
 
         dftvdw_print = new QComboBox(AdvancedXDM);
-        dftvdw_print->setObjectName(QString::fromUtf8("dftvdw_print"));
+        dftvdw_print->setObjectName(QStringLiteral("dftvdw_print"));
 
         gridLayout_15->addWidget(dftvdw_print, 2, 1, 1, 1);
 
         horizontalLayout_28 = new QHBoxLayout();
-        horizontalLayout_28->setObjectName(QString::fromUtf8("horizontalLayout_28"));
+        horizontalLayout_28->setObjectName(QStringLiteral("horizontalLayout_28"));
         dftvdw_mol1natoms = new QSpinBox(AdvancedXDM);
-        dftvdw_mol1natoms->setObjectName(QString::fromUtf8("dftvdw_mol1natoms"));
+        dftvdw_mol1natoms->setObjectName(QStringLiteral("dftvdw_mol1natoms"));
 
         horizontalLayout_28->addWidget(dftvdw_mol1natoms);
 
@@ -2398,19 +2398,19 @@ public:
         gridLayout_15->addLayout(horizontalLayout_28, 3, 1, 1, 1);
 
         label_dftvdw_mol1natoms = new QLabel(AdvancedXDM);
-        label_dftvdw_mol1natoms->setObjectName(QString::fromUtf8("label_dftvdw_mol1natoms"));
+        label_dftvdw_mol1natoms->setObjectName(QStringLiteral("label_dftvdw_mol1natoms"));
 
         gridLayout_15->addWidget(label_dftvdw_mol1natoms, 3, 0, 1, 1);
 
         label_dftvdw_kai = new QLabel(AdvancedXDM);
-        label_dftvdw_kai->setObjectName(QString::fromUtf8("label_dftvdw_kai"));
+        label_dftvdw_kai->setObjectName(QStringLiteral("label_dftvdw_kai"));
 
         gridLayout_15->addWidget(label_dftvdw_kai, 4, 0, 1, 1);
 
         horizontalLayout_29 = new QHBoxLayout();
-        horizontalLayout_29->setObjectName(QString::fromUtf8("horizontalLayout_29"));
+        horizontalLayout_29->setObjectName(QStringLiteral("horizontalLayout_29"));
         dftvdw_kai = new QSpinBox(AdvancedXDM);
-        dftvdw_kai->setObjectName(QString::fromUtf8("dftvdw_kai"));
+        dftvdw_kai->setObjectName(QStringLiteral("dftvdw_kai"));
 
         horizontalLayout_29->addWidget(dftvdw_kai);
 
@@ -2422,23 +2422,23 @@ public:
         gridLayout_15->addLayout(horizontalLayout_29, 4, 1, 1, 1);
 
         label_dftvdw_alpha1 = new QLabel(AdvancedXDM);
-        label_dftvdw_alpha1->setObjectName(QString::fromUtf8("label_dftvdw_alpha1"));
+        label_dftvdw_alpha1->setObjectName(QStringLiteral("label_dftvdw_alpha1"));
         label_dftvdw_alpha1->setEnabled(true);
         label_dftvdw_alpha1->setTextFormat(Qt::RichText);
 
         gridLayout_15->addWidget(label_dftvdw_alpha1, 5, 0, 1, 1);
 
         label_dftvdw_alpha2 = new QLabel(AdvancedXDM);
-        label_dftvdw_alpha2->setObjectName(QString::fromUtf8("label_dftvdw_alpha2"));
+        label_dftvdw_alpha2->setObjectName(QStringLiteral("label_dftvdw_alpha2"));
         label_dftvdw_alpha2->setEnabled(true);
         label_dftvdw_alpha2->setTextFormat(Qt::RichText);
 
         gridLayout_15->addWidget(label_dftvdw_alpha2, 6, 0, 1, 1);
 
         horizontalLayout_30 = new QHBoxLayout();
-        horizontalLayout_30->setObjectName(QString::fromUtf8("horizontalLayout_30"));
+        horizontalLayout_30->setObjectName(QStringLiteral("horizontalLayout_30"));
         dftvdw_alpha1 = new QSpinBox(AdvancedXDM);
-        dftvdw_alpha1->setObjectName(QString::fromUtf8("dftvdw_alpha1"));
+        dftvdw_alpha1->setObjectName(QStringLiteral("dftvdw_alpha1"));
         dftvdw_alpha1->setEnabled(true);
 
         horizontalLayout_30->addWidget(dftvdw_alpha1);
@@ -2451,9 +2451,9 @@ public:
         gridLayout_15->addLayout(horizontalLayout_30, 5, 1, 1, 1);
 
         horizontalLayout_31 = new QHBoxLayout();
-        horizontalLayout_31->setObjectName(QString::fromUtf8("horizontalLayout_31"));
+        horizontalLayout_31->setObjectName(QStringLiteral("horizontalLayout_31"));
         dftvdw_alpha2 = new QSpinBox(AdvancedXDM);
-        dftvdw_alpha2->setObjectName(QString::fromUtf8("dftvdw_alpha2"));
+        dftvdw_alpha2->setObjectName(QStringLiteral("dftvdw_alpha2"));
         dftvdw_alpha2->setEnabled(true);
 
         horizontalLayout_31->addWidget(dftvdw_alpha2);
@@ -2478,28 +2478,28 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedXDM);
         AdvancedNonlocalCorrelation = new QWidget();
-        AdvancedNonlocalCorrelation->setObjectName(QString::fromUtf8("AdvancedNonlocalCorrelation"));
+        AdvancedNonlocalCorrelation->setObjectName(QStringLiteral("AdvancedNonlocalCorrelation"));
         verticalLayout_47 = new QVBoxLayout(AdvancedNonlocalCorrelation);
-        verticalLayout_47->setObjectName(QString::fromUtf8("verticalLayout_47"));
+        verticalLayout_47->setObjectName(QStringLiteral("verticalLayout_47"));
         gridLayout_16 = new QGridLayout();
-        gridLayout_16->setObjectName(QString::fromUtf8("gridLayout_16"));
+        gridLayout_16->setObjectName(QStringLiteral("gridLayout_16"));
         label_6 = new QLabel(AdvancedNonlocalCorrelation);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
+        label_6->setObjectName(QStringLiteral("label_6"));
 
         gridLayout_16->addWidget(label_6, 1, 0, 1, 1);
 
         label_4 = new QLabel(AdvancedNonlocalCorrelation);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setObjectName(QStringLiteral("label_4"));
 
         gridLayout_16->addWidget(label_4, 0, 0, 1, 1);
 
         nl_correlation = new QComboBox(AdvancedNonlocalCorrelation);
-        nl_correlation->setObjectName(QString::fromUtf8("nl_correlation"));
+        nl_correlation->setObjectName(QStringLiteral("nl_correlation"));
 
         gridLayout_16->addWidget(nl_correlation, 0, 1, 1, 1);
 
         nl_grid = new QComboBox(AdvancedNonlocalCorrelation);
-        nl_grid->setObjectName(QString::fromUtf8("nl_grid"));
+        nl_grid->setObjectName(QStringLiteral("nl_grid"));
         nl_grid->setEditable(true);
 
         gridLayout_16->addWidget(nl_grid, 1, 1, 1, 1);
@@ -2517,57 +2517,57 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedNonlocalCorrelation);
         AdvancedPostHartreeFock = new QWidget();
-        AdvancedPostHartreeFock->setObjectName(QString::fromUtf8("AdvancedPostHartreeFock"));
+        AdvancedPostHartreeFock->setObjectName(QStringLiteral("AdvancedPostHartreeFock"));
         verticalLayout_19 = new QVBoxLayout(AdvancedPostHartreeFock);
-        verticalLayout_19->setObjectName(QString::fromUtf8("verticalLayout_19"));
+        verticalLayout_19->setObjectName(QStringLiteral("verticalLayout_19"));
         groupBox_3 = new QGroupBox(AdvancedPostHartreeFock);
-        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
+        groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
         verticalLayout_17 = new QVBoxLayout(groupBox_3);
-        verticalLayout_17->setObjectName(QString::fromUtf8("verticalLayout_17"));
+        verticalLayout_17->setObjectName(QStringLiteral("verticalLayout_17"));
         qui_frozen_core = new QCheckBox(groupBox_3);
-        qui_frozen_core->setObjectName(QString::fromUtf8("qui_frozen_core"));
+        qui_frozen_core->setObjectName(QStringLiteral("qui_frozen_core"));
 
         verticalLayout_17->addWidget(qui_frozen_core);
 
         gridLayout5 = new QGridLayout();
-        gridLayout5->setObjectName(QString::fromUtf8("gridLayout5"));
+        gridLayout5->setObjectName(QStringLiteral("gridLayout5"));
         label_93 = new QLabel(groupBox_3);
-        label_93->setObjectName(QString::fromUtf8("label_93"));
+        label_93->setObjectName(QStringLiteral("label_93"));
 
         gridLayout5->addWidget(label_93, 3, 0, 1, 1);
 
         core_character_print = new QComboBox(groupBox_3);
-        core_character_print->setObjectName(QString::fromUtf8("core_character_print"));
+        core_character_print->setObjectName(QStringLiteral("core_character_print"));
 
         gridLayout5->addWidget(core_character_print, 3, 1, 1, 2);
 
         core_character = new QSpinBox(groupBox_3);
-        core_character->setObjectName(QString::fromUtf8("core_character"));
+        core_character->setObjectName(QStringLiteral("core_character"));
 
         gridLayout5->addWidget(core_character, 2, 2, 1, 1);
 
         n_frozen_virtual = new QSpinBox(groupBox_3);
-        n_frozen_virtual->setObjectName(QString::fromUtf8("n_frozen_virtual"));
+        n_frozen_virtual->setObjectName(QStringLiteral("n_frozen_virtual"));
 
         gridLayout5->addWidget(n_frozen_virtual, 1, 2, 1, 1);
 
         n_frozen_core = new QSpinBox(groupBox_3);
-        n_frozen_core->setObjectName(QString::fromUtf8("n_frozen_core"));
+        n_frozen_core->setObjectName(QStringLiteral("n_frozen_core"));
 
         gridLayout5->addWidget(n_frozen_core, 0, 2, 1, 1);
 
         label_234 = new QLabel(groupBox_3);
-        label_234->setObjectName(QString::fromUtf8("label_234"));
+        label_234->setObjectName(QStringLiteral("label_234"));
 
         gridLayout5->addWidget(label_234, 1, 0, 1, 2);
 
         label_123 = new QLabel(groupBox_3);
-        label_123->setObjectName(QString::fromUtf8("label_123"));
+        label_123->setObjectName(QStringLiteral("label_123"));
 
         gridLayout5->addWidget(label_123, 0, 0, 1, 2);
 
         label_92 = new QLabel(groupBox_3);
-        label_92->setObjectName(QString::fromUtf8("label_92"));
+        label_92->setObjectName(QStringLiteral("label_92"));
 
         gridLayout5->addWidget(label_92, 2, 0, 1, 2);
 
@@ -2578,24 +2578,24 @@ public:
         verticalLayout_19->addWidget(groupBox_3);
 
         ssg = new QCheckBox(AdvancedPostHartreeFock);
-        ssg->setObjectName(QString::fromUtf8("ssg"));
+        ssg->setObjectName(QStringLiteral("ssg"));
 
         verticalLayout_19->addWidget(ssg);
 
         mp2v = new QCheckBox(AdvancedPostHartreeFock);
-        mp2v->setObjectName(QString::fromUtf8("mp2v"));
+        mp2v->setObjectName(QStringLiteral("mp2v"));
 
         verticalLayout_19->addWidget(mp2v);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         label_28 = new QLabel(AdvancedPostHartreeFock);
-        label_28->setObjectName(QString::fromUtf8("label_28"));
+        label_28->setObjectName(QStringLiteral("label_28"));
 
         horizontalLayout->addWidget(label_28);
 
         cd_algorithm = new QComboBox(AdvancedPostHartreeFock);
-        cd_algorithm->setObjectName(QString::fromUtf8("cd_algorithm"));
+        cd_algorithm->setObjectName(QStringLiteral("cd_algorithm"));
 
         horizontalLayout->addWidget(cd_algorithm);
 
@@ -2608,98 +2608,98 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedPostHartreeFock);
         AdvancedCoupledCluster = new QWidget();
-        AdvancedCoupledCluster->setObjectName(QString::fromUtf8("AdvancedCoupledCluster"));
+        AdvancedCoupledCluster->setObjectName(QStringLiteral("AdvancedCoupledCluster"));
         verticalLayout = new QVBoxLayout(AdvancedCoupledCluster);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         gridLayout_8 = new QGridLayout();
-        gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
+        gridLayout_8->setObjectName(QStringLiteral("gridLayout_8"));
         label_133 = new QLabel(AdvancedCoupledCluster);
-        label_133->setObjectName(QString::fromUtf8("label_133"));
+        label_133->setObjectName(QStringLiteral("label_133"));
 
         gridLayout_8->addWidget(label_133, 7, 0, 1, 1);
 
         label_224 = new QLabel(AdvancedCoupledCluster);
-        label_224->setObjectName(QString::fromUtf8("label_224"));
+        label_224->setObjectName(QStringLiteral("label_224"));
 
         gridLayout_8->addWidget(label_224, 8, 0, 1, 1);
 
         label_151 = new QLabel(AdvancedCoupledCluster);
-        label_151->setObjectName(QString::fromUtf8("label_151"));
+        label_151->setObjectName(QStringLiteral("label_151"));
 
         gridLayout_8->addWidget(label_151, 9, 0, 1, 1);
 
         label_155 = new QLabel(AdvancedCoupledCluster);
-        label_155->setObjectName(QString::fromUtf8("label_155"));
+        label_155->setObjectName(QStringLiteral("label_155"));
 
         gridLayout_8->addWidget(label_155, 10, 0, 1, 1);
 
         label_152 = new QLabel(AdvancedCoupledCluster);
-        label_152->setObjectName(QString::fromUtf8("label_152"));
+        label_152->setObjectName(QStringLiteral("label_152"));
 
         gridLayout_8->addWidget(label_152, 13, 0, 1, 1);
 
         cc_dov_thresh = new QLineEdit(AdvancedCoupledCluster);
-        cc_dov_thresh->setObjectName(QString::fromUtf8("cc_dov_thresh"));
+        cc_dov_thresh->setObjectName(QStringLiteral("cc_dov_thresh"));
 
         gridLayout_8->addWidget(cc_dov_thresh, 13, 1, 1, 2);
 
         cc_max_iter = new QSpinBox(AdvancedCoupledCluster);
-        cc_max_iter->setObjectName(QString::fromUtf8("cc_max_iter"));
+        cc_max_iter->setObjectName(QStringLiteral("cc_max_iter"));
 
         gridLayout_8->addWidget(cc_max_iter, 7, 1, 1, 1);
 
         cc_convergence = new QSpinBox(AdvancedCoupledCluster);
-        cc_convergence->setObjectName(QString::fromUtf8("cc_convergence"));
+        cc_convergence->setObjectName(QStringLiteral("cc_convergence"));
 
         gridLayout_8->addWidget(cc_convergence, 8, 1, 1, 1);
 
         cc_diis = new QSpinBox(AdvancedCoupledCluster);
-        cc_diis->setObjectName(QString::fromUtf8("cc_diis"));
+        cc_diis->setObjectName(QStringLiteral("cc_diis"));
 
         gridLayout_8->addWidget(cc_diis, 9, 1, 1, 1);
 
         cc_diis_start = new QSpinBox(AdvancedCoupledCluster);
-        cc_diis_start->setObjectName(QString::fromUtf8("cc_diis_start"));
+        cc_diis_start->setObjectName(QStringLiteral("cc_diis_start"));
 
         gridLayout_8->addWidget(cc_diis_start, 10, 1, 1, 1);
 
         label_227 = new QLabel(AdvancedCoupledCluster);
-        label_227->setObjectName(QString::fromUtf8("label_227"));
+        label_227->setObjectName(QStringLiteral("label_227"));
 
         gridLayout_8->addWidget(label_227, 6, 0, 1, 1);
 
         cc_print = new QSpinBox(AdvancedCoupledCluster);
-        cc_print->setObjectName(QString::fromUtf8("cc_print"));
+        cc_print->setObjectName(QStringLiteral("cc_print"));
 
         gridLayout_8->addWidget(cc_print, 6, 1, 1, 1);
 
         label_104 = new QLabel(AdvancedCoupledCluster);
-        label_104->setObjectName(QString::fromUtf8("label_104"));
+        label_104->setObjectName(QStringLiteral("label_104"));
 
         gridLayout_8->addWidget(label_104, 11, 0, 1, 1);
 
         cholesky_tol = new QSpinBox(AdvancedCoupledCluster);
-        cholesky_tol->setObjectName(QString::fromUtf8("cholesky_tol"));
+        cholesky_tol->setObjectName(QStringLiteral("cholesky_tol"));
 
         gridLayout_8->addWidget(cholesky_tol, 11, 1, 1, 1);
 
         ccman2 = new QCheckBox(AdvancedCoupledCluster);
-        ccman2->setObjectName(QString::fromUtf8("ccman2"));
+        ccman2->setObjectName(QStringLiteral("ccman2"));
 
         gridLayout_8->addWidget(ccman2, 0, 0, 1, 1);
 
         cc_ref_prop = new QCheckBox(AdvancedCoupledCluster);
-        cc_ref_prop->setObjectName(QString::fromUtf8("cc_ref_prop"));
+        cc_ref_prop->setObjectName(QStringLiteral("cc_ref_prop"));
 
         gridLayout_8->addWidget(cc_ref_prop, 1, 0, 1, 2);
 
         cc_ref_prop_te = new QCheckBox(AdvancedCoupledCluster);
-        cc_ref_prop_te->setObjectName(QString::fromUtf8("cc_ref_prop_te"));
+        cc_ref_prop_te->setObjectName(QStringLiteral("cc_ref_prop_te"));
 
         gridLayout_8->addWidget(cc_ref_prop_te, 2, 0, 1, 2);
 
         cc_fullresponse = new QCheckBox(AdvancedCoupledCluster);
-        cc_fullresponse->setObjectName(QString::fromUtf8("cc_fullresponse"));
+        cc_fullresponse->setObjectName(QStringLiteral("cc_fullresponse"));
 
         gridLayout_8->addWidget(cc_fullresponse, 3, 0, 1, 2);
 
@@ -2708,33 +2708,33 @@ public:
         gridLayout_8->addItem(spacerItem19, 6, 2, 1, 1);
 
         direct_ri = new QCheckBox(AdvancedCoupledCluster);
-        direct_ri->setObjectName(QString::fromUtf8("direct_ri"));
+        direct_ri->setObjectName(QStringLiteral("direct_ri"));
 
         gridLayout_8->addWidget(direct_ri, 12, 0, 1, 1);
 
         label_226 = new QLabel(AdvancedCoupledCluster);
-        label_226->setObjectName(QString::fromUtf8("label_226"));
+        label_226->setObjectName(QStringLiteral("label_226"));
 
         gridLayout_8->addWidget(label_226, 4, 0, 1, 1);
 
         cc_memory = new QSpinBox(AdvancedCoupledCluster);
-        cc_memory->setObjectName(QString::fromUtf8("cc_memory"));
+        cc_memory->setObjectName(QStringLiteral("cc_memory"));
 
         gridLayout_8->addWidget(cc_memory, 4, 1, 1, 1);
 
         label_115 = new QLabel(AdvancedCoupledCluster);
-        label_115->setObjectName(QString::fromUtf8("label_115"));
+        label_115->setObjectName(QStringLiteral("label_115"));
 
         gridLayout_8->addWidget(label_115, 5, 0, 1, 1);
 
         threads = new QSpinBox(AdvancedCoupledCluster);
-        threads->setObjectName(QString::fromUtf8("threads"));
+        threads->setObjectName(QStringLiteral("threads"));
         threads->setMaximum(10000);
 
         gridLayout_8->addWidget(threads, 5, 1, 1, 1);
 
         cc_symmetry = new QCheckBox(AdvancedCoupledCluster);
-        cc_symmetry->setObjectName(QString::fromUtf8("cc_symmetry"));
+        cc_symmetry->setObjectName(QStringLiteral("cc_symmetry"));
 
         gridLayout_8->addWidget(cc_symmetry, 0, 1, 1, 2);
 
@@ -2747,37 +2747,37 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedCoupledCluster);
         AdvancedCIS = new QWidget();
-        AdvancedCIS->setObjectName(QString::fromUtf8("AdvancedCIS"));
+        AdvancedCIS->setObjectName(QStringLiteral("AdvancedCIS"));
         verticalLayout_11 = new QVBoxLayout(AdvancedCIS);
-        verticalLayout_11->setObjectName(QString::fromUtf8("verticalLayout_11"));
+        verticalLayout_11->setObjectName(QStringLiteral("verticalLayout_11"));
         groupBox_2 = new QGroupBox(AdvancedCIS);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
         verticalLayout_9 = new QVBoxLayout(groupBox_2);
-        verticalLayout_9->setObjectName(QString::fromUtf8("verticalLayout_9"));
+        verticalLayout_9->setObjectName(QStringLiteral("verticalLayout_9"));
         gridLayout6 = new QGridLayout();
-        gridLayout6->setObjectName(QString::fromUtf8("gridLayout6"));
+        gridLayout6->setObjectName(QStringLiteral("gridLayout6"));
         cis_convergence = new QSpinBox(groupBox_2);
-        cis_convergence->setObjectName(QString::fromUtf8("cis_convergence"));
+        cis_convergence->setObjectName(QStringLiteral("cis_convergence"));
 
         gridLayout6->addWidget(cis_convergence, 1, 1, 1, 1);
 
         max_cis_subspace = new QSpinBox(groupBox_2);
-        max_cis_subspace->setObjectName(QString::fromUtf8("max_cis_subspace"));
+        max_cis_subspace->setObjectName(QStringLiteral("max_cis_subspace"));
 
         gridLayout6->addWidget(max_cis_subspace, 2, 1, 1, 1);
 
         label_166 = new QLabel(groupBox_2);
-        label_166->setObjectName(QString::fromUtf8("label_166"));
+        label_166->setObjectName(QStringLiteral("label_166"));
 
         gridLayout6->addWidget(label_166, 0, 0, 1, 1);
 
         label_22 = new QLabel(groupBox_2);
-        label_22->setObjectName(QString::fromUtf8("label_22"));
+        label_22->setObjectName(QStringLiteral("label_22"));
 
         gridLayout6->addWidget(label_22, 2, 0, 1, 1);
 
         cis_max_cycles = new QSpinBox(groupBox_2);
-        cis_max_cycles->setObjectName(QString::fromUtf8("cis_max_cycles"));
+        cis_max_cycles->setObjectName(QStringLiteral("cis_max_cycles"));
 
         gridLayout6->addWidget(cis_max_cycles, 0, 1, 1, 1);
 
@@ -2786,17 +2786,17 @@ public:
         gridLayout6->addItem(spacerItem20, 0, 2, 1, 1);
 
         label_66 = new QLabel(groupBox_2);
-        label_66->setObjectName(QString::fromUtf8("label_66"));
+        label_66->setObjectName(QStringLiteral("label_66"));
 
         gridLayout6->addWidget(label_66, 1, 0, 1, 1);
 
         label_90 = new QLabel(groupBox_2);
-        label_90->setObjectName(QString::fromUtf8("label_90"));
+        label_90->setObjectName(QStringLiteral("label_90"));
 
         gridLayout6->addWidget(label_90, 3, 0, 1, 1);
 
         qui_cis_guess = new QComboBox(groupBox_2);
-        qui_cis_guess->setObjectName(QString::fromUtf8("qui_cis_guess"));
+        qui_cis_guess->setObjectName(QStringLiteral("qui_cis_guess"));
 
         gridLayout6->addWidget(qui_cis_guess, 3, 1, 1, 2);
 
@@ -2804,7 +2804,7 @@ public:
         verticalLayout_9->addLayout(gridLayout6);
 
         cis_dynamic_mem = new QCheckBox(groupBox_2);
-        cis_dynamic_mem->setObjectName(QString::fromUtf8("cis_dynamic_mem"));
+        cis_dynamic_mem->setObjectName(QStringLiteral("cis_dynamic_mem"));
 
         verticalLayout_9->addWidget(cis_dynamic_mem);
 
@@ -2812,33 +2812,33 @@ public:
         verticalLayout_11->addWidget(groupBox_2);
 
         groupBox_10 = new QGroupBox(AdvancedCIS);
-        groupBox_10->setObjectName(QString::fromUtf8("groupBox_10"));
+        groupBox_10->setObjectName(QStringLiteral("groupBox_10"));
         verticalLayout_14 = new QVBoxLayout(groupBox_10);
-        verticalLayout_14->setObjectName(QString::fromUtf8("verticalLayout_14"));
+        verticalLayout_14->setObjectName(QStringLiteral("verticalLayout_14"));
         gridLayout_22 = new QGridLayout();
-        gridLayout_22->setObjectName(QString::fromUtf8("gridLayout_22"));
+        gridLayout_22->setObjectName(QStringLiteral("gridLayout_22"));
         label_cis_ras_cutoff_virtual = new QLabel(groupBox_10);
-        label_cis_ras_cutoff_virtual->setObjectName(QString::fromUtf8("label_cis_ras_cutoff_virtual"));
+        label_cis_ras_cutoff_virtual->setObjectName(QStringLiteral("label_cis_ras_cutoff_virtual"));
 
         gridLayout_22->addWidget(label_cis_ras_cutoff_virtual, 3, 0, 1, 1);
 
         label_cis_ras_cutoff_occupied = new QLabel(groupBox_10);
-        label_cis_ras_cutoff_occupied->setObjectName(QString::fromUtf8("label_cis_ras_cutoff_occupied"));
+        label_cis_ras_cutoff_occupied->setObjectName(QStringLiteral("label_cis_ras_cutoff_occupied"));
 
         gridLayout_22->addWidget(label_cis_ras_cutoff_occupied, 2, 0, 1, 1);
 
         cis_ras_cutoff_occupied = new QDoubleSpinBox(groupBox_10);
-        cis_ras_cutoff_occupied->setObjectName(QString::fromUtf8("cis_ras_cutoff_occupied"));
+        cis_ras_cutoff_occupied->setObjectName(QStringLiteral("cis_ras_cutoff_occupied"));
 
         gridLayout_22->addWidget(cis_ras_cutoff_occupied, 2, 1, 1, 1);
 
         label_cis_ras_type = new QLabel(groupBox_10);
-        label_cis_ras_type->setObjectName(QString::fromUtf8("label_cis_ras_type"));
+        label_cis_ras_type->setObjectName(QStringLiteral("label_cis_ras_type"));
 
         gridLayout_22->addWidget(label_cis_ras_type, 4, 0, 1, 1);
 
         cis_ras_cutoff_virtual = new QDoubleSpinBox(groupBox_10);
-        cis_ras_cutoff_virtual->setObjectName(QString::fromUtf8("cis_ras_cutoff_virtual"));
+        cis_ras_cutoff_virtual->setObjectName(QStringLiteral("cis_ras_cutoff_virtual"));
 
         gridLayout_22->addWidget(cis_ras_cutoff_virtual, 3, 1, 1, 1);
 
@@ -2847,17 +2847,17 @@ public:
         gridLayout_22->addItem(horizontalSpacer_11, 2, 2, 1, 1);
 
         cis_ras = new QCheckBox(groupBox_10);
-        cis_ras->setObjectName(QString::fromUtf8("cis_ras"));
+        cis_ras->setObjectName(QStringLiteral("cis_ras"));
 
         gridLayout_22->addWidget(cis_ras, 0, 0, 1, 3);
 
         cis_ras_print = new QCheckBox(groupBox_10);
-        cis_ras_print->setObjectName(QString::fromUtf8("cis_ras_print"));
+        cis_ras_print->setObjectName(QStringLiteral("cis_ras_print"));
 
         gridLayout_22->addWidget(cis_ras_print, 1, 0, 1, 3);
 
         cis_ras_type = new QComboBox(groupBox_10);
-        cis_ras_type->setObjectName(QString::fromUtf8("cis_ras_type"));
+        cis_ras_type->setObjectName(QStringLiteral("cis_ras_type"));
 
         gridLayout_22->addWidget(cis_ras_type, 4, 1, 1, 2);
 
@@ -2873,25 +2873,25 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedCIS);
         AdvancedROKS = new QWidget();
-        AdvancedROKS->setObjectName(QString::fromUtf8("AdvancedROKS"));
+        AdvancedROKS->setObjectName(QStringLiteral("AdvancedROKS"));
         verticalLayout_21 = new QVBoxLayout(AdvancedROKS);
-        verticalLayout_21->setObjectName(QString::fromUtf8("verticalLayout_21"));
+        verticalLayout_21->setObjectName(QStringLiteral("verticalLayout_21"));
         roks = new QCheckBox(AdvancedROKS);
-        roks->setObjectName(QString::fromUtf8("roks"));
+        roks->setObjectName(QStringLiteral("roks"));
 
         verticalLayout_21->addWidget(roks);
 
         horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         label_27 = new QLabel(AdvancedROKS);
-        label_27->setObjectName(QString::fromUtf8("label_27"));
+        label_27->setObjectName(QStringLiteral("label_27"));
 
         horizontalLayout_4->addWidget(label_27);
 
         roks_level_shift = new QDoubleSpinBox(AdvancedROKS);
-        roks_level_shift->setObjectName(QString::fromUtf8("roks_level_shift"));
-        roks_level_shift->setMaximum(9.990000000000000);
-        roks_level_shift->setSingleStep(0.010000000000000);
+        roks_level_shift->setObjectName(QStringLiteral("roks_level_shift"));
+        roks_level_shift->setMaximum(9.99);
+        roks_level_shift->setSingleStep(0.01);
 
         horizontalLayout_4->addWidget(roks_level_shift);
 
@@ -2908,22 +2908,22 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedROKS);
         AdvancedEOM = new QWidget();
-        AdvancedEOM->setObjectName(QString::fromUtf8("AdvancedEOM"));
+        AdvancedEOM->setObjectName(QStringLiteral("AdvancedEOM"));
         verticalLayout_4 = new QVBoxLayout(AdvancedEOM);
-        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         gridLayout_2 = new QGridLayout();
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         spacerItem22 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         gridLayout_2->addItem(spacerItem22, 0, 2, 1, 1);
 
         label_188 = new QLabel(AdvancedEOM);
-        label_188->setObjectName(QString::fromUtf8("label_188"));
+        label_188->setObjectName(QStringLiteral("label_188"));
 
         gridLayout_2->addWidget(label_188, 0, 0, 1, 1);
 
         eom_corr = new QComboBox(AdvancedEOM);
-        eom_corr->setObjectName(QString::fromUtf8("eom_corr"));
+        eom_corr->setObjectName(QStringLiteral("eom_corr"));
 
         gridLayout_2->addWidget(eom_corr, 0, 1, 1, 1);
 
@@ -2931,26 +2931,26 @@ public:
         verticalLayout_4->addLayout(gridLayout_2);
 
         groupBox_17 = new QGroupBox(AdvancedEOM);
-        groupBox_17->setObjectName(QString::fromUtf8("groupBox_17"));
+        groupBox_17->setObjectName(QStringLiteral("groupBox_17"));
         gridLayout_3 = new QGridLayout(groupBox_17);
-        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         label_195 = new QLabel(groupBox_17);
-        label_195->setObjectName(QString::fromUtf8("label_195"));
+        label_195->setObjectName(QStringLiteral("label_195"));
 
         gridLayout_3->addWidget(label_195, 0, 0, 1, 1);
 
         eom_nguess_singles = new QSpinBox(groupBox_17);
-        eom_nguess_singles->setObjectName(QString::fromUtf8("eom_nguess_singles"));
+        eom_nguess_singles->setObjectName(QStringLiteral("eom_nguess_singles"));
 
         gridLayout_3->addWidget(eom_nguess_singles, 0, 1, 1, 1);
 
         label_196 = new QLabel(groupBox_17);
-        label_196->setObjectName(QString::fromUtf8("label_196"));
+        label_196->setObjectName(QStringLiteral("label_196"));
 
         gridLayout_3->addWidget(label_196, 1, 0, 1, 1);
 
         eom_nguess_doubles = new QSpinBox(groupBox_17);
-        eom_nguess_doubles->setObjectName(QString::fromUtf8("eom_nguess_doubles"));
+        eom_nguess_doubles->setObjectName(QStringLiteral("eom_nguess_doubles"));
 
         gridLayout_3->addWidget(eom_nguess_doubles, 1, 1, 1, 1);
 
@@ -2958,23 +2958,23 @@ public:
         verticalLayout_4->addWidget(groupBox_17);
 
         groupBox_14 = new QGroupBox(AdvancedEOM);
-        groupBox_14->setObjectName(QString::fromUtf8("groupBox_14"));
+        groupBox_14->setObjectName(QStringLiteral("groupBox_14"));
         verticalLayout_2 = new QVBoxLayout(groupBox_14);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         gridLayout_9 = new QGridLayout();
-        gridLayout_9->setObjectName(QString::fromUtf8("gridLayout_9"));
+        gridLayout_9->setObjectName(QStringLiteral("gridLayout_9"));
         label_215 = new QLabel(groupBox_14);
-        label_215->setObjectName(QString::fromUtf8("label_215"));
+        label_215->setObjectName(QStringLiteral("label_215"));
 
         gridLayout_9->addWidget(label_215, 0, 0, 1, 1);
 
         label_162 = new QLabel(groupBox_14);
-        label_162->setObjectName(QString::fromUtf8("label_162"));
+        label_162->setObjectName(QStringLiteral("label_162"));
 
         gridLayout_9->addWidget(label_162, 1, 0, 1, 1);
 
         label_167 = new QLabel(groupBox_14);
-        label_167->setObjectName(QString::fromUtf8("label_167"));
+        label_167->setObjectName(QStringLiteral("label_167"));
 
         gridLayout_9->addWidget(label_167, 2, 0, 1, 1);
 
@@ -2983,27 +2983,27 @@ public:
         gridLayout_9->addItem(horizontalSpacer_8, 0, 2, 1, 1);
 
         eom_davidson_convergence = new QSpinBox(groupBox_14);
-        eom_davidson_convergence->setObjectName(QString::fromUtf8("eom_davidson_convergence"));
+        eom_davidson_convergence->setObjectName(QStringLiteral("eom_davidson_convergence"));
 
         gridLayout_9->addWidget(eom_davidson_convergence, 0, 1, 1, 1);
 
         eom_davidson_maxvectors = new QSpinBox(groupBox_14);
-        eom_davidson_maxvectors->setObjectName(QString::fromUtf8("eom_davidson_maxvectors"));
+        eom_davidson_maxvectors->setObjectName(QStringLiteral("eom_davidson_maxvectors"));
 
         gridLayout_9->addWidget(eom_davidson_maxvectors, 1, 1, 1, 1);
 
         eom_davidson_max_iter = new QSpinBox(groupBox_14);
-        eom_davidson_max_iter->setObjectName(QString::fromUtf8("eom_davidson_max_iter"));
+        eom_davidson_max_iter->setObjectName(QStringLiteral("eom_davidson_max_iter"));
 
         gridLayout_9->addWidget(eom_davidson_max_iter, 2, 1, 1, 1);
 
         eom_davidson_threshold = new QLineEdit(groupBox_14);
-        eom_davidson_threshold->setObjectName(QString::fromUtf8("eom_davidson_threshold"));
+        eom_davidson_threshold->setObjectName(QStringLiteral("eom_davidson_threshold"));
 
         gridLayout_9->addWidget(eom_davidson_threshold, 3, 1, 1, 2);
 
         label_216 = new QLabel(groupBox_14);
-        label_216->setObjectName(QString::fromUtf8("label_216"));
+        label_216->setObjectName(QStringLiteral("label_216"));
 
         gridLayout_9->addWidget(label_216, 3, 0, 1, 1);
 
@@ -3019,30 +3019,30 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedEOM);
         AdvancedADC = new QWidget();
-        AdvancedADC->setObjectName(QString::fromUtf8("AdvancedADC"));
+        AdvancedADC->setObjectName(QStringLiteral("AdvancedADC"));
         verticalLayout_29 = new QVBoxLayout(AdvancedADC);
-        verticalLayout_29->setObjectName(QString::fromUtf8("verticalLayout_29"));
+        verticalLayout_29->setObjectName(QStringLiteral("verticalLayout_29"));
         adc_guess = new QGroupBox(AdvancedADC);
-        adc_guess->setObjectName(QString::fromUtf8("adc_guess"));
+        adc_guess->setObjectName(QStringLiteral("adc_guess"));
         gridLayout_19 = new QGridLayout(adc_guess);
-        gridLayout_19->setObjectName(QString::fromUtf8("gridLayout_19"));
+        gridLayout_19->setObjectName(QStringLiteral("gridLayout_19"));
         label_197 = new QLabel(adc_guess);
-        label_197->setObjectName(QString::fromUtf8("label_197"));
+        label_197->setObjectName(QStringLiteral("label_197"));
 
         gridLayout_19->addWidget(label_197, 0, 0, 1, 1);
 
         adc_nguess_singles = new QSpinBox(adc_guess);
-        adc_nguess_singles->setObjectName(QString::fromUtf8("adc_nguess_singles"));
+        adc_nguess_singles->setObjectName(QStringLiteral("adc_nguess_singles"));
 
         gridLayout_19->addWidget(adc_nguess_singles, 0, 1, 1, 1);
 
         label_204 = new QLabel(adc_guess);
-        label_204->setObjectName(QString::fromUtf8("label_204"));
+        label_204->setObjectName(QStringLiteral("label_204"));
 
         gridLayout_19->addWidget(label_204, 1, 0, 1, 1);
 
         adc_nguess_doubles = new QSpinBox(adc_guess);
-        adc_nguess_doubles->setObjectName(QString::fromUtf8("adc_nguess_doubles"));
+        adc_nguess_doubles->setObjectName(QStringLiteral("adc_nguess_doubles"));
 
         gridLayout_19->addWidget(adc_nguess_doubles, 1, 1, 1, 1);
 
@@ -3050,23 +3050,23 @@ public:
         verticalLayout_29->addWidget(adc_guess);
 
         adc_davidson = new QGroupBox(AdvancedADC);
-        adc_davidson->setObjectName(QString::fromUtf8("adc_davidson"));
+        adc_davidson->setObjectName(QStringLiteral("adc_davidson"));
         verticalLayout_20 = new QVBoxLayout(adc_davidson);
-        verticalLayout_20->setObjectName(QString::fromUtf8("verticalLayout_20"));
+        verticalLayout_20->setObjectName(QStringLiteral("verticalLayout_20"));
         gridLayout_adc_davidson = new QGridLayout();
-        gridLayout_adc_davidson->setObjectName(QString::fromUtf8("gridLayout_adc_davidson"));
+        gridLayout_adc_davidson->setObjectName(QStringLiteral("gridLayout_adc_davidson"));
         label_217 = new QLabel(adc_davidson);
-        label_217->setObjectName(QString::fromUtf8("label_217"));
+        label_217->setObjectName(QStringLiteral("label_217"));
 
         gridLayout_adc_davidson->addWidget(label_217, 0, 0, 1, 1);
 
         label_163 = new QLabel(adc_davidson);
-        label_163->setObjectName(QString::fromUtf8("label_163"));
+        label_163->setObjectName(QStringLiteral("label_163"));
 
         gridLayout_adc_davidson->addWidget(label_163, 1, 0, 1, 1);
 
         label_168 = new QLabel(adc_davidson);
-        label_168->setObjectName(QString::fromUtf8("label_168"));
+        label_168->setObjectName(QStringLiteral("label_168"));
 
         gridLayout_adc_davidson->addWidget(label_168, 2, 0, 1, 1);
 
@@ -3075,27 +3075,27 @@ public:
         gridLayout_adc_davidson->addItem(horizontalSpacer_37, 0, 2, 1, 1);
 
         adc_davidson_conv = new QSpinBox(adc_davidson);
-        adc_davidson_conv->setObjectName(QString::fromUtf8("adc_davidson_conv"));
+        adc_davidson_conv->setObjectName(QStringLiteral("adc_davidson_conv"));
 
         gridLayout_adc_davidson->addWidget(adc_davidson_conv, 0, 1, 1, 1);
 
         adc_davidson_maxsubspace = new QSpinBox(adc_davidson);
-        adc_davidson_maxsubspace->setObjectName(QString::fromUtf8("adc_davidson_maxsubspace"));
+        adc_davidson_maxsubspace->setObjectName(QStringLiteral("adc_davidson_maxsubspace"));
 
         gridLayout_adc_davidson->addWidget(adc_davidson_maxsubspace, 1, 1, 1, 1);
 
         adc_davidson_maxiter = new QSpinBox(adc_davidson);
-        adc_davidson_maxiter->setObjectName(QString::fromUtf8("adc_davidson_maxiter"));
+        adc_davidson_maxiter->setObjectName(QStringLiteral("adc_davidson_maxiter"));
 
         gridLayout_adc_davidson->addWidget(adc_davidson_maxiter, 2, 1, 1, 1);
 
         label_218 = new QLabel(adc_davidson);
-        label_218->setObjectName(QString::fromUtf8("label_218"));
+        label_218->setObjectName(QStringLiteral("label_218"));
 
         gridLayout_adc_davidson->addWidget(label_218, 3, 0, 1, 1);
 
         adc_davidson_thresh = new QSpinBox(adc_davidson);
-        adc_davidson_thresh->setObjectName(QString::fromUtf8("adc_davidson_thresh"));
+        adc_davidson_thresh->setObjectName(QStringLiteral("adc_davidson_thresh"));
 
         gridLayout_adc_davidson->addWidget(adc_davidson_thresh, 3, 1, 1, 1);
 
@@ -3106,48 +3106,48 @@ public:
         verticalLayout_29->addWidget(adc_davidson);
 
         adc_diis = new QGroupBox(AdvancedADC);
-        adc_diis->setObjectName(QString::fromUtf8("adc_diis"));
+        adc_diis->setObjectName(QStringLiteral("adc_diis"));
         verticalLayout_26 = new QVBoxLayout(adc_diis);
-        verticalLayout_26->setObjectName(QString::fromUtf8("verticalLayout_26"));
+        verticalLayout_26->setObjectName(QStringLiteral("verticalLayout_26"));
         gridLayout_adc_diis = new QGridLayout();
-        gridLayout_adc_diis->setObjectName(QString::fromUtf8("gridLayout_adc_diis"));
+        gridLayout_adc_diis->setObjectName(QStringLiteral("gridLayout_adc_diis"));
         label_42 = new QLabel(adc_diis);
-        label_42->setObjectName(QString::fromUtf8("label_42"));
+        label_42->setObjectName(QStringLiteral("label_42"));
 
         gridLayout_adc_diis->addWidget(label_42, 1, 0, 1, 1);
 
         adc_diis_start = new QSpinBox(adc_diis);
-        adc_diis_start->setObjectName(QString::fromUtf8("adc_diis_start"));
+        adc_diis_start->setObjectName(QStringLiteral("adc_diis_start"));
 
         gridLayout_adc_diis->addWidget(adc_diis_start, 2, 1, 1, 1);
 
         adc_diis_econv = new QSpinBox(adc_diis);
-        adc_diis_econv->setObjectName(QString::fromUtf8("adc_diis_econv"));
+        adc_diis_econv->setObjectName(QStringLiteral("adc_diis_econv"));
 
         gridLayout_adc_diis->addWidget(adc_diis_econv, 0, 1, 1, 1);
 
         label_177 = new QLabel(adc_diis);
-        label_177->setObjectName(QString::fromUtf8("label_177"));
+        label_177->setObjectName(QStringLiteral("label_177"));
 
         gridLayout_adc_diis->addWidget(label_177, 4, 0, 1, 1);
 
         adc_diis_rconv = new QSpinBox(adc_diis);
-        adc_diis_rconv->setObjectName(QString::fromUtf8("adc_diis_rconv"));
+        adc_diis_rconv->setObjectName(QStringLiteral("adc_diis_rconv"));
 
         gridLayout_adc_diis->addWidget(adc_diis_rconv, 1, 1, 1, 1);
 
         label_219 = new QLabel(adc_diis);
-        label_219->setObjectName(QString::fromUtf8("label_219"));
+        label_219->setObjectName(QStringLiteral("label_219"));
 
         gridLayout_adc_diis->addWidget(label_219, 0, 0, 1, 1);
 
         label_164 = new QLabel(adc_diis);
-        label_164->setObjectName(QString::fromUtf8("label_164"));
+        label_164->setObjectName(QStringLiteral("label_164"));
 
         gridLayout_adc_diis->addWidget(label_164, 2, 0, 1, 1);
 
         adc_diis_maxiter = new QSpinBox(adc_diis);
-        adc_diis_maxiter->setObjectName(QString::fromUtf8("adc_diis_maxiter"));
+        adc_diis_maxiter->setObjectName(QStringLiteral("adc_diis_maxiter"));
 
         gridLayout_adc_diis->addWidget(adc_diis_maxiter, 4, 1, 1, 1);
 
@@ -3156,12 +3156,12 @@ public:
         gridLayout_adc_diis->addItem(horizontalSpacer_38, 0, 2, 1, 1);
 
         label_52 = new QLabel(adc_diis);
-        label_52->setObjectName(QString::fromUtf8("label_52"));
+        label_52->setObjectName(QStringLiteral("label_52"));
 
         gridLayout_adc_diis->addWidget(label_52, 3, 0, 1, 1);
 
         adc_diis_size = new QSpinBox(adc_diis);
-        adc_diis_size->setObjectName(QString::fromUtf8("adc_diis_size"));
+        adc_diis_size->setObjectName(QStringLiteral("adc_diis_size"));
 
         gridLayout_adc_diis->addWidget(adc_diis_size, 3, 1, 1, 1);
 
@@ -3177,83 +3177,83 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedADC);
         AdvancedEOMStates = new QWidget();
-        AdvancedEOMStates->setObjectName(QString::fromUtf8("AdvancedEOMStates"));
+        AdvancedEOMStates->setObjectName(QStringLiteral("AdvancedEOMStates"));
         verticalLayout_3 = new QVBoxLayout(AdvancedEOMStates);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         label_38 = new QLabel(AdvancedEOMStates);
-        label_38->setObjectName(QString::fromUtf8("label_38"));
+        label_38->setObjectName(QStringLiteral("label_38"));
 
         verticalLayout_3->addWidget(label_38);
 
         gridLayout_10 = new QGridLayout();
-        gridLayout_10->setObjectName(QString::fromUtf8("gridLayout_10"));
+        gridLayout_10->setObjectName(QStringLiteral("gridLayout_10"));
         ee_states = new QLineEdit(AdvancedEOMStates);
-        ee_states->setObjectName(QString::fromUtf8("ee_states"));
+        ee_states->setObjectName(QStringLiteral("ee_states"));
 
         gridLayout_10->addWidget(ee_states, 0, 0, 1, 1);
 
         ee_singlets = new QLineEdit(AdvancedEOMStates);
-        ee_singlets->setObjectName(QString::fromUtf8("ee_singlets"));
+        ee_singlets->setObjectName(QStringLiteral("ee_singlets"));
 
         gridLayout_10->addWidget(ee_singlets, 0, 1, 1, 1);
 
         ee_triplets = new QLineEdit(AdvancedEOMStates);
-        ee_triplets->setObjectName(QString::fromUtf8("ee_triplets"));
+        ee_triplets->setObjectName(QStringLiteral("ee_triplets"));
 
         gridLayout_10->addWidget(ee_triplets, 1, 0, 1, 1);
 
         sf_states = new QLineEdit(AdvancedEOMStates);
-        sf_states->setObjectName(QString::fromUtf8("sf_states"));
+        sf_states->setObjectName(QStringLiteral("sf_states"));
 
         gridLayout_10->addWidget(sf_states, 1, 1, 1, 1);
 
         dsf_states = new QLineEdit(AdvancedEOMStates);
-        dsf_states->setObjectName(QString::fromUtf8("dsf_states"));
+        dsf_states->setObjectName(QStringLiteral("dsf_states"));
 
         gridLayout_10->addWidget(dsf_states, 2, 0, 1, 1);
 
         dip_states = new QLineEdit(AdvancedEOMStates);
-        dip_states->setObjectName(QString::fromUtf8("dip_states"));
+        dip_states->setObjectName(QStringLiteral("dip_states"));
 
         gridLayout_10->addWidget(dip_states, 2, 1, 1, 1);
 
         dip_singlets = new QLineEdit(AdvancedEOMStates);
-        dip_singlets->setObjectName(QString::fromUtf8("dip_singlets"));
+        dip_singlets->setObjectName(QStringLiteral("dip_singlets"));
 
         gridLayout_10->addWidget(dip_singlets, 3, 0, 1, 1);
 
         dip_triplets = new QLineEdit(AdvancedEOMStates);
-        dip_triplets->setObjectName(QString::fromUtf8("dip_triplets"));
+        dip_triplets->setObjectName(QStringLiteral("dip_triplets"));
 
         gridLayout_10->addWidget(dip_triplets, 3, 1, 1, 1);
 
         ea_states = new QLineEdit(AdvancedEOMStates);
-        ea_states->setObjectName(QString::fromUtf8("ea_states"));
+        ea_states->setObjectName(QStringLiteral("ea_states"));
 
         gridLayout_10->addWidget(ea_states, 4, 0, 1, 1);
 
         eom_ea_alpha = new QLineEdit(AdvancedEOMStates);
-        eom_ea_alpha->setObjectName(QString::fromUtf8("eom_ea_alpha"));
+        eom_ea_alpha->setObjectName(QStringLiteral("eom_ea_alpha"));
 
         gridLayout_10->addWidget(eom_ea_alpha, 4, 1, 1, 1);
 
         eom_ea_beta = new QLineEdit(AdvancedEOMStates);
-        eom_ea_beta->setObjectName(QString::fromUtf8("eom_ea_beta"));
+        eom_ea_beta->setObjectName(QStringLiteral("eom_ea_beta"));
 
         gridLayout_10->addWidget(eom_ea_beta, 5, 0, 1, 1);
 
         ip_states = new QLineEdit(AdvancedEOMStates);
-        ip_states->setObjectName(QString::fromUtf8("ip_states"));
+        ip_states->setObjectName(QStringLiteral("ip_states"));
 
         gridLayout_10->addWidget(ip_states, 5, 1, 1, 1);
 
         eom_ip_alpha = new QLineEdit(AdvancedEOMStates);
-        eom_ip_alpha->setObjectName(QString::fromUtf8("eom_ip_alpha"));
+        eom_ip_alpha->setObjectName(QStringLiteral("eom_ip_alpha"));
 
         gridLayout_10->addWidget(eom_ip_alpha, 6, 0, 1, 1);
 
         eom_ip_beta = new QLineEdit(AdvancedEOMStates);
-        eom_ip_beta->setObjectName(QString::fromUtf8("eom_ip_beta"));
+        eom_ip_beta->setObjectName(QStringLiteral("eom_ip_beta"));
 
         gridLayout_10->addWidget(eom_ip_beta, 6, 1, 1, 1);
 
@@ -3261,24 +3261,24 @@ public:
         verticalLayout_3->addLayout(gridLayout_10);
 
         horizontalLayout_8 = new QHBoxLayout();
-        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
+        horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
         cc_frzn_core = new QSpinBox(AdvancedEOMStates);
-        cc_frzn_core->setObjectName(QString::fromUtf8("cc_frzn_core"));
+        cc_frzn_core->setObjectName(QStringLiteral("cc_frzn_core"));
 
         horizontalLayout_8->addWidget(cc_frzn_core);
 
         cc_rest_occ = new QSpinBox(AdvancedEOMStates);
-        cc_rest_occ->setObjectName(QString::fromUtf8("cc_rest_occ"));
+        cc_rest_occ->setObjectName(QStringLiteral("cc_rest_occ"));
 
         horizontalLayout_8->addWidget(cc_rest_occ);
 
         cc_rest_vir = new QSpinBox(AdvancedEOMStates);
-        cc_rest_vir->setObjectName(QString::fromUtf8("cc_rest_vir"));
+        cc_rest_vir->setObjectName(QStringLiteral("cc_rest_vir"));
 
         horizontalLayout_8->addWidget(cc_rest_vir);
 
         cc_frzn_virt = new QSpinBox(AdvancedEOMStates);
-        cc_frzn_virt->setObjectName(QString::fromUtf8("cc_frzn_virt"));
+        cc_frzn_virt->setObjectName(QStringLiteral("cc_frzn_virt"));
 
         horizontalLayout_8->addWidget(cc_frzn_virt);
 
@@ -3291,35 +3291,35 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedEOMStates);
         AdvancedSurfaceCrossing = new QWidget();
-        AdvancedSurfaceCrossing->setObjectName(QString::fromUtf8("AdvancedSurfaceCrossing"));
+        AdvancedSurfaceCrossing->setObjectName(QStringLiteral("AdvancedSurfaceCrossing"));
         verticalLayout_8 = new QVBoxLayout(AdvancedSurfaceCrossing);
-        verticalLayout_8->setObjectName(QString::fromUtf8("verticalLayout_8"));
+        verticalLayout_8->setObjectName(QStringLiteral("verticalLayout_8"));
         gridLayout7 = new QGridLayout();
-        gridLayout7->setObjectName(QString::fromUtf8("gridLayout7"));
+        gridLayout7->setObjectName(QStringLiteral("gridLayout7"));
         label_33 = new QLabel(AdvancedSurfaceCrossing);
-        label_33->setObjectName(QString::fromUtf8("label_33"));
+        label_33->setObjectName(QStringLiteral("label_33"));
 
         gridLayout7->addWidget(label_33, 0, 0, 1, 1);
 
         xopt_state_1 = new QLineEdit(AdvancedSurfaceCrossing);
-        xopt_state_1->setObjectName(QString::fromUtf8("xopt_state_1"));
+        xopt_state_1->setObjectName(QStringLiteral("xopt_state_1"));
         xopt_state_1->setMaximumSize(QSize(106, 16777215));
 
         gridLayout7->addWidget(xopt_state_1, 0, 1, 1, 1);
 
         label_73 = new QLabel(AdvancedSurfaceCrossing);
-        label_73->setObjectName(QString::fromUtf8("label_73"));
+        label_73->setObjectName(QStringLiteral("label_73"));
 
         gridLayout7->addWidget(label_73, 1, 0, 1, 1);
 
         xopt_state_2 = new QLineEdit(AdvancedSurfaceCrossing);
-        xopt_state_2->setObjectName(QString::fromUtf8("xopt_state_2"));
+        xopt_state_2->setObjectName(QStringLiteral("xopt_state_2"));
         xopt_state_2->setMaximumSize(QSize(106, 16777215));
 
         gridLayout7->addWidget(xopt_state_2, 1, 1, 1, 1);
 
         xopt_seam_only = new QCheckBox(AdvancedSurfaceCrossing);
-        xopt_seam_only->setObjectName(QString::fromUtf8("xopt_seam_only"));
+        xopt_seam_only->setObjectName(QStringLiteral("xopt_seam_only"));
 
         gridLayout7->addWidget(xopt_seam_only, 2, 0, 1, 2);
 
@@ -3332,33 +3332,33 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedSurfaceCrossing);
         AdvancedWavefunctionAnalysis = new QWidget();
-        AdvancedWavefunctionAnalysis->setObjectName(QString::fromUtf8("AdvancedWavefunctionAnalysis"));
+        AdvancedWavefunctionAnalysis->setObjectName(QStringLiteral("AdvancedWavefunctionAnalysis"));
         vboxLayout6 = new QVBoxLayout(AdvancedWavefunctionAnalysis);
-        vboxLayout6->setObjectName(QString::fromUtf8("vboxLayout6"));
+        vboxLayout6->setObjectName(QStringLiteral("vboxLayout6"));
         wavefunction_analysis = new QCheckBox(AdvancedWavefunctionAnalysis);
-        wavefunction_analysis->setObjectName(QString::fromUtf8("wavefunction_analysis"));
+        wavefunction_analysis->setObjectName(QStringLiteral("wavefunction_analysis"));
 
         vboxLayout6->addWidget(wavefunction_analysis);
 
         molden_format = new QCheckBox(AdvancedWavefunctionAnalysis);
-        molden_format->setObjectName(QString::fromUtf8("molden_format"));
+        molden_format->setObjectName(QStringLiteral("molden_format"));
 
         vboxLayout6->addWidget(molden_format);
 
         mm_charges = new QCheckBox(AdvancedWavefunctionAnalysis);
-        mm_charges->setObjectName(QString::fromUtf8("mm_charges"));
+        mm_charges->setObjectName(QStringLiteral("mm_charges"));
 
         vboxLayout6->addWidget(mm_charges);
 
         hirshfeld = new QCheckBox(AdvancedWavefunctionAnalysis);
-        hirshfeld->setObjectName(QString::fromUtf8("hirshfeld"));
+        hirshfeld->setObjectName(QStringLiteral("hirshfeld"));
 
         vboxLayout6->addWidget(hirshfeld);
 
         hboxLayout6 = new QHBoxLayout();
-        hboxLayout6->setObjectName(QString::fromUtf8("hboxLayout6"));
+        hboxLayout6->setObjectName(QStringLiteral("hboxLayout6"));
         label_176 = new QLabel(AdvancedWavefunctionAnalysis);
-        label_176->setObjectName(QString::fromUtf8("label_176"));
+        label_176->setObjectName(QStringLiteral("label_176"));
 
         hboxLayout6->addWidget(label_176);
 
@@ -3367,7 +3367,7 @@ public:
         hboxLayout6->addItem(spacerItem24);
 
         multipole_order = new QSpinBox(AdvancedWavefunctionAnalysis);
-        multipole_order->setObjectName(QString::fromUtf8("multipole_order"));
+        multipole_order->setObjectName(QStringLiteral("multipole_order"));
 
         hboxLayout6->addWidget(multipole_order);
 
@@ -3375,14 +3375,14 @@ public:
         vboxLayout6->addLayout(hboxLayout6);
 
         label_114 = new QLabel(AdvancedWavefunctionAnalysis);
-        label_114->setObjectName(QString::fromUtf8("label_114"));
+        label_114->setObjectName(QStringLiteral("label_114"));
 
         vboxLayout6->addWidget(label_114);
 
         hboxLayout7 = new QHBoxLayout();
-        hboxLayout7->setObjectName(QString::fromUtf8("hboxLayout7"));
+        hboxLayout7->setObjectName(QStringLiteral("hboxLayout7"));
         mulliken = new QComboBox(AdvancedWavefunctionAnalysis);
-        mulliken->setObjectName(QString::fromUtf8("mulliken"));
+        mulliken->setObjectName(QStringLiteral("mulliken"));
 
         hboxLayout7->addWidget(mulliken);
 
@@ -3399,15 +3399,15 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedWavefunctionAnalysis);
         AdvancedPlots = new QWidget();
-        AdvancedPlots->setObjectName(QString::fromUtf8("AdvancedPlots"));
+        AdvancedPlots->setObjectName(QStringLiteral("AdvancedPlots"));
         vboxLayout7 = new QVBoxLayout(AdvancedPlots);
-        vboxLayout7->setObjectName(QString::fromUtf8("vboxLayout7"));
+        vboxLayout7->setObjectName(QStringLiteral("vboxLayout7"));
         gridLayout8 = new QGridLayout();
-        gridLayout8->setObjectName(QString::fromUtf8("gridLayout8"));
+        gridLayout8->setObjectName(QStringLiteral("gridLayout8"));
         gridLayout9 = new QGridLayout();
-        gridLayout9->setObjectName(QString::fromUtf8("gridLayout9"));
+        gridLayout9->setObjectName(QStringLiteral("gridLayout9"));
         qui_plots_points = new QSpinBox(AdvancedPlots);
-        qui_plots_points->setObjectName(QString::fromUtf8("qui_plots_points"));
+        qui_plots_points->setObjectName(QStringLiteral("qui_plots_points"));
 
         gridLayout9->addWidget(qui_plots_points, 0, 0, 1, 1);
 
@@ -3419,7 +3419,7 @@ public:
         gridLayout8->addLayout(gridLayout9, 2, 1, 1, 1);
 
         label_149 = new QLabel(AdvancedPlots);
-        label_149->setObjectName(QString::fromUtf8("label_149"));
+        label_149->setObjectName(QStringLiteral("label_149"));
 
         gridLayout8->addWidget(label_149, 2, 0, 1, 1);
 
@@ -3428,22 +3428,22 @@ public:
         gridLayout8->addItem(spacerItem27, 1, 2, 1, 1);
 
         plots_grid = new QComboBox(AdvancedPlots);
-        plots_grid->setObjectName(QString::fromUtf8("plots_grid"));
+        plots_grid->setObjectName(QStringLiteral("plots_grid"));
 
         gridLayout8->addWidget(plots_grid, 0, 1, 1, 1);
 
         plots_property = new QComboBox(AdvancedPlots);
-        plots_property->setObjectName(QString::fromUtf8("plots_property"));
+        plots_property->setObjectName(QStringLiteral("plots_property"));
 
         gridLayout8->addWidget(plots_property, 1, 1, 1, 1);
 
         label_147 = new QLabel(AdvancedPlots);
-        label_147->setObjectName(QString::fromUtf8("label_147"));
+        label_147->setObjectName(QStringLiteral("label_147"));
 
         gridLayout8->addWidget(label_147, 1, 0, 1, 1);
 
         label_148 = new QLabel(AdvancedPlots);
-        label_148->setObjectName(QString::fromUtf8("label_148"));
+        label_148->setObjectName(QStringLiteral("label_148"));
 
         gridLayout8->addWidget(label_148, 0, 0, 1, 1);
 
@@ -3451,7 +3451,7 @@ public:
         vboxLayout7->addLayout(gridLayout8);
 
         skip_cis_rpa = new QCheckBox(AdvancedPlots);
-        skip_cis_rpa->setObjectName(QString::fromUtf8("skip_cis_rpa"));
+        skip_cis_rpa->setObjectName(QStringLiteral("skip_cis_rpa"));
 
         vboxLayout7->addWidget(skip_cis_rpa);
 
@@ -3461,73 +3461,73 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedPlots);
         AdvancedMolecularProperties = new QWidget();
-        AdvancedMolecularProperties->setObjectName(QString::fromUtf8("AdvancedMolecularProperties"));
+        AdvancedMolecularProperties->setObjectName(QStringLiteral("AdvancedMolecularProperties"));
         verticalLayout_35 = new QVBoxLayout(AdvancedMolecularProperties);
-        verticalLayout_35->setObjectName(QString::fromUtf8("verticalLayout_35"));
+        verticalLayout_35->setObjectName(QStringLiteral("verticalLayout_35"));
         gridLayout10 = new QGridLayout();
-        gridLayout10->setObjectName(QString::fromUtf8("gridLayout10"));
+        gridLayout10->setObjectName(QStringLiteral("gridLayout10"));
         label_172 = new QLabel(AdvancedMolecularProperties);
-        label_172->setObjectName(QString::fromUtf8("label_172"));
+        label_172->setObjectName(QStringLiteral("label_172"));
 
         gridLayout10->addWidget(label_172, 4, 0, 1, 1);
 
         label_171 = new QLabel(AdvancedMolecularProperties);
-        label_171->setObjectName(QString::fromUtf8("label_171"));
+        label_171->setObjectName(QStringLiteral("label_171"));
 
         gridLayout10->addWidget(label_171, 3, 0, 1, 1);
 
         moprop_max_cycles_level_1 = new QSpinBox(AdvancedMolecularProperties);
-        moprop_max_cycles_level_1->setObjectName(QString::fromUtf8("moprop_max_cycles_level_1"));
+        moprop_max_cycles_level_1->setObjectName(QStringLiteral("moprop_max_cycles_level_1"));
 
         gridLayout10->addWidget(moprop_max_cycles_level_1, 3, 2, 1, 1);
 
         label_170 = new QLabel(AdvancedMolecularProperties);
-        label_170->setObjectName(QString::fromUtf8("label_170"));
+        label_170->setObjectName(QStringLiteral("label_170"));
 
         gridLayout10->addWidget(label_170, 2, 0, 1, 1);
 
         label_173 = new QLabel(AdvancedMolecularProperties);
-        label_173->setObjectName(QString::fromUtf8("label_173"));
+        label_173->setObjectName(QStringLiteral("label_173"));
 
         gridLayout10->addWidget(label_173, 2, 1, 1, 1);
 
         moprop_max_cycles_level_2 = new QSpinBox(AdvancedMolecularProperties);
-        moprop_max_cycles_level_2->setObjectName(QString::fromUtf8("moprop_max_cycles_level_2"));
+        moprop_max_cycles_level_2->setObjectName(QStringLiteral("moprop_max_cycles_level_2"));
 
         gridLayout10->addWidget(moprop_max_cycles_level_2, 4, 2, 1, 1);
 
         moprop_convergence_level_1 = new QSpinBox(AdvancedMolecularProperties);
-        moprop_convergence_level_1->setObjectName(QString::fromUtf8("moprop_convergence_level_1"));
+        moprop_convergence_level_1->setObjectName(QStringLiteral("moprop_convergence_level_1"));
 
         gridLayout10->addWidget(moprop_convergence_level_1, 3, 1, 1, 1);
 
         moprop_convergence_level_2 = new QSpinBox(AdvancedMolecularProperties);
-        moprop_convergence_level_2->setObjectName(QString::fromUtf8("moprop_convergence_level_2"));
+        moprop_convergence_level_2->setObjectName(QStringLiteral("moprop_convergence_level_2"));
 
         gridLayout10->addWidget(moprop_convergence_level_2, 4, 1, 1, 1);
 
         label_174 = new QLabel(AdvancedMolecularProperties);
-        label_174->setObjectName(QString::fromUtf8("label_174"));
+        label_174->setObjectName(QStringLiteral("label_174"));
 
         gridLayout10->addWidget(label_174, 2, 2, 1, 1);
 
         moprop_diis_subspace = new QSpinBox(AdvancedMolecularProperties);
-        moprop_diis_subspace->setObjectName(QString::fromUtf8("moprop_diis_subspace"));
+        moprop_diis_subspace->setObjectName(QStringLiteral("moprop_diis_subspace"));
 
         gridLayout10->addWidget(moprop_diis_subspace, 1, 2, 1, 1);
 
         moprop_perturbations = new QSpinBox(AdvancedMolecularProperties);
-        moprop_perturbations->setObjectName(QString::fromUtf8("moprop_perturbations"));
+        moprop_perturbations->setObjectName(QStringLiteral("moprop_perturbations"));
 
         gridLayout10->addWidget(moprop_perturbations, 0, 2, 1, 1);
 
         label_79 = new QLabel(AdvancedMolecularProperties);
-        label_79->setObjectName(QString::fromUtf8("label_79"));
+        label_79->setObjectName(QStringLiteral("label_79"));
 
         gridLayout10->addWidget(label_79, 0, 0, 1, 2);
 
         label_175 = new QLabel(AdvancedMolecularProperties);
-        label_175->setObjectName(QString::fromUtf8("label_175"));
+        label_175->setObjectName(QStringLiteral("label_175"));
 
         gridLayout10->addWidget(label_175, 1, 0, 1, 2);
 
@@ -3544,38 +3544,38 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedMolecularProperties);
         AdvancedGeometryOptimization = new QWidget();
-        AdvancedGeometryOptimization->setObjectName(QString::fromUtf8("AdvancedGeometryOptimization"));
+        AdvancedGeometryOptimization->setObjectName(QStringLiteral("AdvancedGeometryOptimization"));
         verticalLayout_37 = new QVBoxLayout(AdvancedGeometryOptimization);
-        verticalLayout_37->setObjectName(QString::fromUtf8("verticalLayout_37"));
+        verticalLayout_37->setObjectName(QStringLiteral("verticalLayout_37"));
         gridLayout11 = new QGridLayout();
-        gridLayout11->setObjectName(QString::fromUtf8("gridLayout11"));
+        gridLayout11->setObjectName(QStringLiteral("gridLayout11"));
         label_44 = new QLabel(AdvancedGeometryOptimization);
-        label_44->setObjectName(QString::fromUtf8("label_44"));
+        label_44->setObjectName(QStringLiteral("label_44"));
 
         gridLayout11->addWidget(label_44, 1, 0, 1, 1);
 
         geom_opt_hessian_update = new QComboBox(AdvancedGeometryOptimization);
-        geom_opt_hessian_update->setObjectName(QString::fromUtf8("geom_opt_hessian_update"));
+        geom_opt_hessian_update->setObjectName(QStringLiteral("geom_opt_hessian_update"));
 
         gridLayout11->addWidget(geom_opt_hessian_update, 1, 1, 1, 1);
 
         label_72 = new QLabel(AdvancedGeometryOptimization);
-        label_72->setObjectName(QString::fromUtf8("label_72"));
+        label_72->setObjectName(QStringLiteral("label_72"));
 
         gridLayout11->addWidget(label_72, 0, 0, 1, 1);
 
         geom_opt_coordinates = new QComboBox(AdvancedGeometryOptimization);
-        geom_opt_coordinates->setObjectName(QString::fromUtf8("geom_opt_coordinates"));
+        geom_opt_coordinates->setObjectName(QStringLiteral("geom_opt_coordinates"));
 
         gridLayout11->addWidget(geom_opt_coordinates, 2, 1, 1, 1);
 
         geom_opt_hessian = new QComboBox(AdvancedGeometryOptimization);
-        geom_opt_hessian->setObjectName(QString::fromUtf8("geom_opt_hessian"));
+        geom_opt_hessian->setObjectName(QStringLiteral("geom_opt_hessian"));
 
         gridLayout11->addWidget(geom_opt_hessian, 0, 1, 1, 1);
 
         label_14 = new QLabel(AdvancedGeometryOptimization);
-        label_14->setObjectName(QString::fromUtf8("label_14"));
+        label_14->setObjectName(QStringLiteral("label_14"));
 
         gridLayout11->addWidget(label_14, 2, 0, 1, 1);
 
@@ -3584,13 +3584,13 @@ public:
         gridLayout11->addItem(spacerItem30, 0, 2, 1, 1);
 
         hboxLayout8 = new QHBoxLayout();
-        hboxLayout8->setObjectName(QString::fromUtf8("hboxLayout8"));
+        hboxLayout8->setObjectName(QStringLiteral("hboxLayout8"));
         spacerItem31 = new QSpacerItem(10, 10, QSizePolicy::Fixed, QSizePolicy::Minimum);
 
         hboxLayout8->addItem(spacerItem31);
 
         qui_geom_opt_fallback = new QCheckBox(AdvancedGeometryOptimization);
-        qui_geom_opt_fallback->setObjectName(QString::fromUtf8("qui_geom_opt_fallback"));
+        qui_geom_opt_fallback->setObjectName(QStringLiteral("qui_geom_opt_fallback"));
 
         hboxLayout8->addWidget(qui_geom_opt_fallback);
 
@@ -3601,34 +3601,34 @@ public:
         verticalLayout_37->addLayout(gridLayout11);
 
         gridLayout12 = new QGridLayout();
-        gridLayout12->setObjectName(QString::fromUtf8("gridLayout12"));
+        gridLayout12->setObjectName(QStringLiteral("gridLayout12"));
         geom_opt_diis_subspace = new QSpinBox(AdvancedGeometryOptimization);
-        geom_opt_diis_subspace->setObjectName(QString::fromUtf8("geom_opt_diis_subspace"));
+        geom_opt_diis_subspace->setObjectName(QStringLiteral("geom_opt_diis_subspace"));
 
         gridLayout12->addWidget(geom_opt_diis_subspace, 2, 1, 1, 1);
 
         label_70 = new QLabel(AdvancedGeometryOptimization);
-        label_70->setObjectName(QString::fromUtf8("label_70"));
+        label_70->setObjectName(QStringLiteral("label_70"));
 
         gridLayout12->addWidget(label_70, 2, 0, 1, 1);
 
         label_45 = new QLabel(AdvancedGeometryOptimization);
-        label_45->setObjectName(QString::fromUtf8("label_45"));
+        label_45->setObjectName(QStringLiteral("label_45"));
 
         gridLayout12->addWidget(label_45, 1, 0, 1, 1);
 
         geom_opt_print = new QSpinBox(AdvancedGeometryOptimization);
-        geom_opt_print->setObjectName(QString::fromUtf8("geom_opt_print"));
+        geom_opt_print->setObjectName(QStringLiteral("geom_opt_print"));
 
         gridLayout12->addWidget(geom_opt_print, 1, 1, 1, 1);
 
         label_17 = new QLabel(AdvancedGeometryOptimization);
-        label_17->setObjectName(QString::fromUtf8("label_17"));
+        label_17->setObjectName(QStringLiteral("label_17"));
 
         gridLayout12->addWidget(label_17, 0, 0, 1, 1);
 
         geom_opt_max_cycles = new QSpinBox(AdvancedGeometryOptimization);
-        geom_opt_max_cycles->setObjectName(QString::fromUtf8("geom_opt_max_cycles"));
+        geom_opt_max_cycles->setObjectName(QStringLiteral("geom_opt_max_cycles"));
 
         gridLayout12->addWidget(geom_opt_max_cycles, 0, 1, 1, 1);
 
@@ -3640,22 +3640,22 @@ public:
         verticalLayout_37->addLayout(gridLayout12);
 
         geom_opt_scf_guess_always = new QCheckBox(AdvancedGeometryOptimization);
-        geom_opt_scf_guess_always->setObjectName(QString::fromUtf8("geom_opt_scf_guess_always"));
+        geom_opt_scf_guess_always->setObjectName(QStringLiteral("geom_opt_scf_guess_always"));
 
         verticalLayout_37->addWidget(geom_opt_scf_guess_always);
 
         geom_print = new QCheckBox(AdvancedGeometryOptimization);
-        geom_print->setObjectName(QString::fromUtf8("geom_print"));
+        geom_print->setObjectName(QStringLiteral("geom_print"));
 
         verticalLayout_37->addWidget(geom_print);
 
         geom_opt_iproj = new QCheckBox(AdvancedGeometryOptimization);
-        geom_opt_iproj->setObjectName(QString::fromUtf8("geom_opt_iproj"));
+        geom_opt_iproj->setObjectName(QStringLiteral("geom_opt_iproj"));
 
         verticalLayout_37->addWidget(geom_opt_iproj);
 
         geom_opt_symmetry = new QCheckBox(AdvancedGeometryOptimization);
-        geom_opt_symmetry->setObjectName(QString::fromUtf8("geom_opt_symmetry"));
+        geom_opt_symmetry->setObjectName(QStringLiteral("geom_opt_symmetry"));
 
         verticalLayout_37->addWidget(geom_opt_symmetry);
 
@@ -3665,63 +3665,63 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedGeometryOptimization);
         AdvancedOptThresholds = new QWidget();
-        AdvancedOptThresholds->setObjectName(QString::fromUtf8("AdvancedOptThresholds"));
+        AdvancedOptThresholds->setObjectName(QStringLiteral("AdvancedOptThresholds"));
         verticalLayout_36 = new QVBoxLayout(AdvancedOptThresholds);
-        verticalLayout_36->setObjectName(QString::fromUtf8("verticalLayout_36"));
+        verticalLayout_36->setObjectName(QStringLiteral("verticalLayout_36"));
         gridLayout13 = new QGridLayout();
-        gridLayout13->setObjectName(QString::fromUtf8("gridLayout13"));
+        gridLayout13->setObjectName(QStringLiteral("gridLayout13"));
         label_11 = new QLabel(AdvancedOptThresholds);
-        label_11->setObjectName(QString::fromUtf8("label_11"));
+        label_11->setObjectName(QStringLiteral("label_11"));
 
         gridLayout13->addWidget(label_11, 2, 2, 1, 1);
 
         geom_opt_tol_energy = new QSpinBox(AdvancedOptThresholds);
-        geom_opt_tol_energy->setObjectName(QString::fromUtf8("geom_opt_tol_energy"));
+        geom_opt_tol_energy->setObjectName(QStringLiteral("geom_opt_tol_energy"));
 
         gridLayout13->addWidget(geom_opt_tol_energy, 2, 1, 1, 1);
 
         label_10 = new QLabel(AdvancedOptThresholds);
-        label_10->setObjectName(QString::fromUtf8("label_10"));
+        label_10->setObjectName(QStringLiteral("label_10"));
 
         gridLayout13->addWidget(label_10, 1, 0, 1, 1);
 
         label_113 = new QLabel(AdvancedOptThresholds);
-        label_113->setObjectName(QString::fromUtf8("label_113"));
+        label_113->setObjectName(QStringLiteral("label_113"));
 
         gridLayout13->addWidget(label_113, 1, 2, 1, 1);
 
         geom_opt_tol_displacement = new QSpinBox(AdvancedOptThresholds);
-        geom_opt_tol_displacement->setObjectName(QString::fromUtf8("geom_opt_tol_displacement"));
+        geom_opt_tol_displacement->setObjectName(QStringLiteral("geom_opt_tol_displacement"));
 
         gridLayout13->addWidget(geom_opt_tol_displacement, 1, 1, 1, 1);
 
         label_13 = new QLabel(AdvancedOptThresholds);
-        label_13->setObjectName(QString::fromUtf8("label_13"));
+        label_13->setObjectName(QStringLiteral("label_13"));
 
         gridLayout13->addWidget(label_13, 0, 0, 1, 1);
 
         geom_opt_tol_gradient = new QSpinBox(AdvancedOptThresholds);
-        geom_opt_tol_gradient->setObjectName(QString::fromUtf8("geom_opt_tol_gradient"));
+        geom_opt_tol_gradient->setObjectName(QStringLiteral("geom_opt_tol_gradient"));
 
         gridLayout13->addWidget(geom_opt_tol_gradient, 0, 1, 1, 1);
 
         label_15 = new QLabel(AdvancedOptThresholds);
-        label_15->setObjectName(QString::fromUtf8("label_15"));
+        label_15->setObjectName(QStringLiteral("label_15"));
 
         gridLayout13->addWidget(label_15, 0, 2, 1, 1);
 
         label_12 = new QLabel(AdvancedOptThresholds);
-        label_12->setObjectName(QString::fromUtf8("label_12"));
+        label_12->setObjectName(QStringLiteral("label_12"));
 
         gridLayout13->addWidget(label_12, 2, 0, 1, 1);
 
         label_68 = new QLabel(AdvancedOptThresholds);
-        label_68->setObjectName(QString::fromUtf8("label_68"));
+        label_68->setObjectName(QStringLiteral("label_68"));
 
         gridLayout13->addWidget(label_68, 3, 0, 1, 1);
 
         geom_opt_linear_angle = new QSpinBox(AdvancedOptThresholds);
-        geom_opt_linear_angle->setObjectName(QString::fromUtf8("geom_opt_linear_angle"));
+        geom_opt_linear_angle->setObjectName(QStringLiteral("geom_opt_linear_angle"));
 
         gridLayout13->addWidget(geom_opt_linear_angle, 3, 1, 1, 1);
 
@@ -3730,14 +3730,14 @@ public:
         gridLayout13->addItem(horizontalSpacer_15, 0, 3, 1, 1);
 
         label_71 = new QLabel(AdvancedOptThresholds);
-        label_71->setObjectName(QString::fromUtf8("label_71"));
+        label_71->setObjectName(QStringLiteral("label_71"));
 
         gridLayout13->addWidget(label_71, 4, 0, 1, 1);
 
         geom_opt_max_step_size = new QDoubleSpinBox(AdvancedOptThresholds);
-        geom_opt_max_step_size->setObjectName(QString::fromUtf8("geom_opt_max_step_size"));
+        geom_opt_max_step_size->setObjectName(QStringLiteral("geom_opt_max_step_size"));
         geom_opt_max_step_size->setDecimals(3);
-        geom_opt_max_step_size->setMaximum(9.990000000000000);
+        geom_opt_max_step_size->setMaximum(9.99);
 
         gridLayout13->addWidget(geom_opt_max_step_size, 4, 1, 1, 1);
 
@@ -3750,56 +3750,56 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedOptThresholds);
         AdvancedReactionPathway = new QWidget();
-        AdvancedReactionPathway->setObjectName(QString::fromUtf8("AdvancedReactionPathway"));
+        AdvancedReactionPathway->setObjectName(QStringLiteral("AdvancedReactionPathway"));
         verticalLayout_40 = new QVBoxLayout(AdvancedReactionPathway);
-        verticalLayout_40->setObjectName(QString::fromUtf8("verticalLayout_40"));
+        verticalLayout_40->setObjectName(QStringLiteral("verticalLayout_40"));
         gridLayout_11 = new QGridLayout();
-        gridLayout_11->setObjectName(QString::fromUtf8("gridLayout_11"));
+        gridLayout_11->setObjectName(QStringLiteral("gridLayout_11"));
         label_56 = new QLabel(AdvancedReactionPathway);
-        label_56->setObjectName(QString::fromUtf8("label_56"));
+        label_56->setObjectName(QStringLiteral("label_56"));
 
         gridLayout_11->addWidget(label_56, 0, 0, 1, 1);
 
         label_58 = new QLabel(AdvancedReactionPathway);
-        label_58->setObjectName(QString::fromUtf8("label_58"));
+        label_58->setObjectName(QStringLiteral("label_58"));
 
         gridLayout_11->addWidget(label_58, 1, 0, 1, 1);
 
         label_60 = new QLabel(AdvancedReactionPathway);
-        label_60->setObjectName(QString::fromUtf8("label_60"));
+        label_60->setObjectName(QStringLiteral("label_60"));
 
         gridLayout_11->addWidget(label_60, 2, 0, 1, 1);
 
         rpath_max_stepsize = new QDoubleSpinBox(AdvancedReactionPathway);
-        rpath_max_stepsize->setObjectName(QString::fromUtf8("rpath_max_stepsize"));
+        rpath_max_stepsize->setObjectName(QStringLiteral("rpath_max_stepsize"));
         rpath_max_stepsize->setDecimals(3);
-        rpath_max_stepsize->setMaximum(0.999000000000000);
-        rpath_max_stepsize->setSingleStep(0.001000000000000);
+        rpath_max_stepsize->setMaximum(0.999);
+        rpath_max_stepsize->setSingleStep(0.001);
 
         gridLayout_11->addWidget(rpath_max_stepsize, 1, 1, 1, 1);
 
         rpath_tol_displacement = new QDoubleSpinBox(AdvancedReactionPathway);
-        rpath_tol_displacement->setObjectName(QString::fromUtf8("rpath_tol_displacement"));
+        rpath_tol_displacement->setObjectName(QStringLiteral("rpath_tol_displacement"));
         rpath_tol_displacement->setDecimals(4);
-        rpath_tol_displacement->setMaximum(0.999900000000000);
-        rpath_tol_displacement->setSingleStep(0.000100000000000);
+        rpath_tol_displacement->setMaximum(0.9999);
+        rpath_tol_displacement->setSingleStep(0.0001);
 
         gridLayout_11->addWidget(rpath_tol_displacement, 2, 1, 1, 1);
 
         label_59 = new QLabel(AdvancedReactionPathway);
-        label_59->setObjectName(QString::fromUtf8("label_59"));
+        label_59->setObjectName(QStringLiteral("label_59"));
 
         gridLayout_11->addWidget(label_59, 3, 0, 1, 1);
 
         rpath_print = new QSpinBox(AdvancedReactionPathway);
-        rpath_print->setObjectName(QString::fromUtf8("rpath_print"));
+        rpath_print->setObjectName(QStringLiteral("rpath_print"));
 
         gridLayout_11->addWidget(rpath_print, 3, 1, 1, 1);
 
         hboxLayout9 = new QHBoxLayout();
-        hboxLayout9->setObjectName(QString::fromUtf8("hboxLayout9"));
+        hboxLayout9->setObjectName(QStringLiteral("hboxLayout9"));
         rpath_coordinates = new QComboBox(AdvancedReactionPathway);
-        rpath_coordinates->setObjectName(QString::fromUtf8("rpath_coordinates"));
+        rpath_coordinates->setObjectName(QStringLiteral("rpath_coordinates"));
 
         hboxLayout9->addWidget(rpath_coordinates);
 
@@ -3823,38 +3823,38 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedReactionPathway);
         AdvancedMolecularDynamics = new QWidget();
-        AdvancedMolecularDynamics->setObjectName(QString::fromUtf8("AdvancedMolecularDynamics"));
+        AdvancedMolecularDynamics->setObjectName(QStringLiteral("AdvancedMolecularDynamics"));
         vboxLayout8 = new QVBoxLayout(AdvancedMolecularDynamics);
-        vboxLayout8->setObjectName(QString::fromUtf8("vboxLayout8"));
+        vboxLayout8->setObjectName(QStringLiteral("vboxLayout8"));
         gridLayout14 = new QGridLayout();
-        gridLayout14->setObjectName(QString::fromUtf8("gridLayout14"));
+        gridLayout14->setObjectName(QStringLiteral("gridLayout14"));
         aimd_moments = new QSpinBox(AdvancedMolecularDynamics);
-        aimd_moments->setObjectName(QString::fromUtf8("aimd_moments"));
+        aimd_moments->setObjectName(QStringLiteral("aimd_moments"));
 
         gridLayout14->addWidget(aimd_moments, 0, 1, 1, 1);
 
         label_103 = new QLabel(AdvancedMolecularDynamics);
-        label_103->setObjectName(QString::fromUtf8("label_103"));
+        label_103->setObjectName(QStringLiteral("label_103"));
 
         gridLayout14->addWidget(label_103, 0, 0, 1, 1);
 
         aimd_fock_extrapolation_order = new QSpinBox(AdvancedMolecularDynamics);
-        aimd_fock_extrapolation_order->setObjectName(QString::fromUtf8("aimd_fock_extrapolation_order"));
+        aimd_fock_extrapolation_order->setObjectName(QStringLiteral("aimd_fock_extrapolation_order"));
 
         gridLayout14->addWidget(aimd_fock_extrapolation_order, 1, 1, 1, 1);
 
         label_140 = new QLabel(AdvancedMolecularDynamics);
-        label_140->setObjectName(QString::fromUtf8("label_140"));
+        label_140->setObjectName(QStringLiteral("label_140"));
 
         gridLayout14->addWidget(label_140, 2, 0, 1, 1);
 
         label_116 = new QLabel(AdvancedMolecularDynamics);
-        label_116->setObjectName(QString::fromUtf8("label_116"));
+        label_116->setObjectName(QStringLiteral("label_116"));
 
         gridLayout14->addWidget(label_116, 1, 0, 1, 1);
 
         aimd_fock_extrapolation_points = new QSpinBox(AdvancedMolecularDynamics);
-        aimd_fock_extrapolation_points->setObjectName(QString::fromUtf8("aimd_fock_extrapolation_points"));
+        aimd_fock_extrapolation_points->setObjectName(QStringLiteral("aimd_fock_extrapolation_points"));
 
         gridLayout14->addWidget(aimd_fock_extrapolation_points, 2, 1, 1, 1);
 
@@ -3871,21 +3871,21 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedMolecularDynamics);
         AdvancedEFPOptions = new QWidget();
-        AdvancedEFPOptions->setObjectName(QString::fromUtf8("AdvancedEFPOptions"));
+        AdvancedEFPOptions->setObjectName(QStringLiteral("AdvancedEFPOptions"));
         verticalLayout_5 = new QVBoxLayout(AdvancedEFPOptions);
-        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
         efp = new QCheckBox(AdvancedEFPOptions);
-        efp->setObjectName(QString::fromUtf8("efp"));
+        efp->setObjectName(QStringLiteral("efp"));
 
         verticalLayout_5->addWidget(efp);
 
         efp_fragments_only = new QCheckBox(AdvancedEFPOptions);
-        efp_fragments_only->setObjectName(QString::fromUtf8("efp_fragments_only"));
+        efp_fragments_only->setObjectName(QStringLiteral("efp_fragments_only"));
 
         verticalLayout_5->addWidget(efp_fragments_only);
 
         efp_input = new QCheckBox(AdvancedEFPOptions);
-        efp_input->setObjectName(QString::fromUtf8("efp_input"));
+        efp_input->setObjectName(QStringLiteral("efp_input"));
 
         verticalLayout_5->addWidget(efp_input);
 
@@ -3895,67 +3895,67 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedEFPOptions);
         AdvancedNMRChemicalShifts = new QWidget();
-        AdvancedNMRChemicalShifts->setObjectName(QString::fromUtf8("AdvancedNMRChemicalShifts"));
+        AdvancedNMRChemicalShifts->setObjectName(QStringLiteral("AdvancedNMRChemicalShifts"));
         verticalLayout_41 = new QVBoxLayout(AdvancedNMRChemicalShifts);
-        verticalLayout_41->setObjectName(QString::fromUtf8("verticalLayout_41"));
+        verticalLayout_41->setObjectName(QStringLiteral("verticalLayout_41"));
         gridLayout15 = new QGridLayout();
-        gridLayout15->setObjectName(QString::fromUtf8("gridLayout15"));
+        gridLayout15->setObjectName(QStringLiteral("gridLayout15"));
         spacerItem37 = new QSpacerItem(91, 22, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         gridLayout15->addItem(spacerItem37, 1, 3, 1, 1);
 
         label_110 = new QLabel(AdvancedNMRChemicalShifts);
-        label_110->setObjectName(QString::fromUtf8("label_110"));
+        label_110->setObjectName(QStringLiteral("label_110"));
 
         gridLayout15->addWidget(label_110, 1, 2, 1, 1);
 
         dscf_convergence_level_2 = new QSpinBox(AdvancedNMRChemicalShifts);
-        dscf_convergence_level_2->setObjectName(QString::fromUtf8("dscf_convergence_level_2"));
+        dscf_convergence_level_2->setObjectName(QStringLiteral("dscf_convergence_level_2"));
 
         gridLayout15->addWidget(dscf_convergence_level_2, 3, 1, 1, 1);
 
         dscf_max_cycles_level_2 = new QSpinBox(AdvancedNMRChemicalShifts);
-        dscf_max_cycles_level_2->setObjectName(QString::fromUtf8("dscf_max_cycles_level_2"));
+        dscf_max_cycles_level_2->setObjectName(QStringLiteral("dscf_max_cycles_level_2"));
 
         gridLayout15->addWidget(dscf_max_cycles_level_2, 3, 2, 1, 1);
 
         dscf_max_cycles_level_1 = new QSpinBox(AdvancedNMRChemicalShifts);
-        dscf_max_cycles_level_1->setObjectName(QString::fromUtf8("dscf_max_cycles_level_1"));
+        dscf_max_cycles_level_1->setObjectName(QStringLiteral("dscf_max_cycles_level_1"));
 
         gridLayout15->addWidget(dscf_max_cycles_level_1, 2, 2, 1, 1);
 
         label_109 = new QLabel(AdvancedNMRChemicalShifts);
-        label_109->setObjectName(QString::fromUtf8("label_109"));
+        label_109->setObjectName(QStringLiteral("label_109"));
 
         gridLayout15->addWidget(label_109, 1, 1, 1, 1);
 
         dscf_convergence_level_1 = new QSpinBox(AdvancedNMRChemicalShifts);
-        dscf_convergence_level_1->setObjectName(QString::fromUtf8("dscf_convergence_level_1"));
+        dscf_convergence_level_1->setObjectName(QStringLiteral("dscf_convergence_level_1"));
 
         gridLayout15->addWidget(dscf_convergence_level_1, 2, 1, 1, 1);
 
         label_111 = new QLabel(AdvancedNMRChemicalShifts);
-        label_111->setObjectName(QString::fromUtf8("label_111"));
+        label_111->setObjectName(QStringLiteral("label_111"));
 
         gridLayout15->addWidget(label_111, 1, 0, 1, 1);
 
         label_112 = new QLabel(AdvancedNMRChemicalShifts);
-        label_112->setObjectName(QString::fromUtf8("label_112"));
+        label_112->setObjectName(QStringLiteral("label_112"));
 
         gridLayout15->addWidget(label_112, 0, 0, 1, 2);
 
         dscf_diis_subspace = new QSpinBox(AdvancedNMRChemicalShifts);
-        dscf_diis_subspace->setObjectName(QString::fromUtf8("dscf_diis_subspace"));
+        dscf_diis_subspace->setObjectName(QStringLiteral("dscf_diis_subspace"));
 
         gridLayout15->addWidget(dscf_diis_subspace, 0, 2, 1, 1);
 
         label_107 = new QLabel(AdvancedNMRChemicalShifts);
-        label_107->setObjectName(QString::fromUtf8("label_107"));
+        label_107->setObjectName(QStringLiteral("label_107"));
 
         gridLayout15->addWidget(label_107, 2, 0, 1, 1);
 
         label_108 = new QLabel(AdvancedNMRChemicalShifts);
-        label_108->setObjectName(QString::fromUtf8("label_108"));
+        label_108->setObjectName(QStringLiteral("label_108"));
 
         gridLayout15->addWidget(label_108, 3, 0, 1, 1);
 
@@ -3963,7 +3963,7 @@ public:
         verticalLayout_41->addLayout(gridLayout15);
 
         dcpscf_perturbations = new QCheckBox(AdvancedNMRChemicalShifts);
-        dcpscf_perturbations->setObjectName(QString::fromUtf8("dcpscf_perturbations"));
+        dcpscf_perturbations->setObjectName(QStringLiteral("dcpscf_perturbations"));
 
         verticalLayout_41->addWidget(dcpscf_perturbations);
 
@@ -3973,35 +3973,35 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedNMRChemicalShifts);
         AdvancedFrequencies = new QWidget();
-        AdvancedFrequencies->setObjectName(QString::fromUtf8("AdvancedFrequencies"));
+        AdvancedFrequencies->setObjectName(QStringLiteral("AdvancedFrequencies"));
         verticalLayout_42 = new QVBoxLayout(AdvancedFrequencies);
-        verticalLayout_42->setObjectName(QString::fromUtf8("verticalLayout_42"));
+        verticalLayout_42->setObjectName(QStringLiteral("verticalLayout_42"));
         gridLayout16 = new QGridLayout();
-        gridLayout16->setObjectName(QString::fromUtf8("gridLayout16"));
+        gridLayout16->setObjectName(QStringLiteral("gridLayout16"));
         label_150 = new QLabel(AdvancedFrequencies);
-        label_150->setObjectName(QString::fromUtf8("label_150"));
+        label_150->setObjectName(QStringLiteral("label_150"));
 
         gridLayout16->addWidget(label_150, 2, 0, 1, 1);
 
         label_88 = new QLabel(AdvancedFrequencies);
-        label_88->setObjectName(QString::fromUtf8("label_88"));
+        label_88->setObjectName(QStringLiteral("label_88"));
 
         gridLayout16->addWidget(label_88, 3, 0, 1, 1);
 
         label_74 = new QLabel(AdvancedFrequencies);
-        label_74->setObjectName(QString::fromUtf8("label_74"));
+        label_74->setObjectName(QStringLiteral("label_74"));
 
         gridLayout16->addWidget(label_74, 1, 0, 1, 1);
 
         label_vp = new QLabel(AdvancedFrequencies);
-        label_vp->setObjectName(QString::fromUtf8("label_vp"));
+        label_vp->setObjectName(QStringLiteral("label_vp"));
 
         gridLayout16->addWidget(label_vp, 0, 0, 1, 1);
 
         hboxLayout10 = new QHBoxLayout();
-        hboxLayout10->setObjectName(QString::fromUtf8("hboxLayout10"));
+        hboxLayout10->setObjectName(QStringLiteral("hboxLayout10"));
         cpscf_nseg = new QSpinBox(AdvancedFrequencies);
-        cpscf_nseg->setObjectName(QString::fromUtf8("cpscf_nseg"));
+        cpscf_nseg->setObjectName(QStringLiteral("cpscf_nseg"));
         QSizePolicy sizePolicy8(QSizePolicy::Minimum, QSizePolicy::Fixed);
         sizePolicy8.setHorizontalStretch(0);
         sizePolicy8.setVerticalStretch(0);
@@ -4018,9 +4018,9 @@ public:
         gridLayout16->addLayout(hboxLayout10, 1, 1, 1, 1);
 
         hboxLayout11 = new QHBoxLayout();
-        hboxLayout11->setObjectName(QString::fromUtf8("hboxLayout11"));
+        hboxLayout11->setObjectName(QStringLiteral("hboxLayout11"));
         vibman_print = new QSpinBox(AdvancedFrequencies);
-        vibman_print->setObjectName(QString::fromUtf8("vibman_print"));
+        vibman_print->setObjectName(QStringLiteral("vibman_print"));
 
         hboxLayout11->addWidget(vibman_print);
 
@@ -4032,9 +4032,9 @@ public:
         gridLayout16->addLayout(hboxLayout11, 0, 1, 1, 1);
 
         hboxLayout12 = new QHBoxLayout();
-        hboxLayout12->setObjectName(QString::fromUtf8("hboxLayout12"));
+        hboxLayout12->setObjectName(QStringLiteral("hboxLayout12"));
         analytic_derivative_order = new QSpinBox(AdvancedFrequencies);
-        analytic_derivative_order->setObjectName(QString::fromUtf8("analytic_derivative_order"));
+        analytic_derivative_order->setObjectName(QStringLiteral("analytic_derivative_order"));
 
         hboxLayout12->addWidget(analytic_derivative_order);
 
@@ -4046,7 +4046,7 @@ public:
         gridLayout16->addLayout(hboxLayout12, 2, 1, 1, 1);
 
         fd_step_size = new QDoubleSpinBox(AdvancedFrequencies);
-        fd_step_size->setObjectName(QString::fromUtf8("fd_step_size"));
+        fd_step_size->setObjectName(QStringLiteral("fd_step_size"));
         fd_step_size->setDecimals(5);
 
         gridLayout16->addWidget(fd_step_size, 3, 1, 1, 1);
@@ -4055,18 +4055,18 @@ public:
         verticalLayout_42->addLayout(gridLayout16);
 
         label_95 = new QLabel(AdvancedFrequencies);
-        label_95->setObjectName(QString::fromUtf8("label_95"));
+        label_95->setObjectName(QStringLiteral("label_95"));
 
         verticalLayout_42->addWidget(label_95);
 
         horizontalLayout_21 = new QHBoxLayout();
-        horizontalLayout_21->setObjectName(QString::fromUtf8("horizontalLayout_21"));
+        horizontalLayout_21->setObjectName(QStringLiteral("horizontalLayout_21"));
         horizontalSpacer_36 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_21->addItem(horizontalSpacer_36);
 
         fd_derivative_type = new QComboBox(AdvancedFrequencies);
-        fd_derivative_type->setObjectName(QString::fromUtf8("fd_derivative_type"));
+        fd_derivative_type->setObjectName(QStringLiteral("fd_derivative_type"));
 
         horizontalLayout_21->addWidget(fd_derivative_type);
 
@@ -4079,13 +4079,13 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedFrequencies);
         AdvancedQMMM = new QWidget();
-        AdvancedQMMM->setObjectName(QString::fromUtf8("AdvancedQMMM"));
+        AdvancedQMMM->setObjectName(QStringLiteral("AdvancedQMMM"));
         vboxLayout9 = new QVBoxLayout(AdvancedQMMM);
-        vboxLayout9->setObjectName(QString::fromUtf8("vboxLayout9"));
+        vboxLayout9->setObjectName(QStringLiteral("vboxLayout9"));
         hboxLayout13 = new QHBoxLayout();
-        hboxLayout13->setObjectName(QString::fromUtf8("hboxLayout13"));
+        hboxLayout13->setObjectName(QStringLiteral("hboxLayout13"));
         readChargesButton = new QPushButton(AdvancedQMMM);
-        readChargesButton->setObjectName(QString::fromUtf8("readChargesButton"));
+        readChargesButton->setObjectName(QStringLiteral("readChargesButton"));
 
         hboxLayout13->addWidget(readChargesButton);
 
@@ -4097,27 +4097,27 @@ public:
         vboxLayout9->addLayout(hboxLayout13);
 
         gaussian_blur = new QCheckBox(AdvancedQMMM);
-        gaussian_blur->setObjectName(QString::fromUtf8("gaussian_blur"));
+        gaussian_blur->setObjectName(QStringLiteral("gaussian_blur"));
 
         vboxLayout9->addWidget(gaussian_blur);
 
         qmmm = new QCheckBox(AdvancedQMMM);
-        qmmm->setObjectName(QString::fromUtf8("qmmm"));
+        qmmm->setObjectName(QStringLiteral("qmmm"));
 
         vboxLayout9->addWidget(qmmm);
 
         qmmm_charges = new QCheckBox(AdvancedQMMM);
-        qmmm_charges->setObjectName(QString::fromUtf8("qmmm_charges"));
+        qmmm_charges->setObjectName(QStringLiteral("qmmm_charges"));
 
         vboxLayout9->addWidget(qmmm_charges);
 
         link_atom_projection = new QCheckBox(AdvancedQMMM);
-        link_atom_projection->setObjectName(QString::fromUtf8("link_atom_projection"));
+        link_atom_projection->setObjectName(QStringLiteral("link_atom_projection"));
 
         vboxLayout9->addWidget(link_atom_projection);
 
         qmmm_full_hessian = new QCheckBox(AdvancedQMMM);
-        qmmm_full_hessian->setObjectName(QString::fromUtf8("qmmm_full_hessian"));
+        qmmm_full_hessian->setObjectName(QStringLiteral("qmmm_full_hessian"));
 
         vboxLayout9->addWidget(qmmm_full_hessian);
 
@@ -4127,18 +4127,18 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedQMMM);
         AdvancedSolventModel = new QWidget();
-        AdvancedSolventModel->setObjectName(QString::fromUtf8("AdvancedSolventModel"));
+        AdvancedSolventModel->setObjectName(QStringLiteral("AdvancedSolventModel"));
         verticalLayout_51 = new QVBoxLayout(AdvancedSolventModel);
-        verticalLayout_51->setObjectName(QString::fromUtf8("verticalLayout_51"));
+        verticalLayout_51->setObjectName(QStringLiteral("verticalLayout_51"));
         gridLayout_5 = new QGridLayout();
-        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+        gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
         label_64 = new QLabel(AdvancedSolventModel);
-        label_64->setObjectName(QString::fromUtf8("label_64"));
+        label_64->setObjectName(QStringLiteral("label_64"));
 
         gridLayout_5->addWidget(label_64, 0, 0, 1, 1);
 
         solvent_method = new QComboBox(AdvancedSolventModel);
-        solvent_method->setObjectName(QString::fromUtf8("solvent_method"));
+        solvent_method->setObjectName(QStringLiteral("solvent_method"));
 
         gridLayout_5->addWidget(solvent_method, 0, 1, 1, 1);
 
@@ -4146,43 +4146,43 @@ public:
         verticalLayout_51->addLayout(gridLayout_5);
 
         solventGroupBox = new QGroupBox(AdvancedSolventModel);
-        solventGroupBox->setObjectName(QString::fromUtf8("solventGroupBox"));
+        solventGroupBox->setObjectName(QStringLiteral("solventGroupBox"));
         gridLayout_23 = new QGridLayout(solventGroupBox);
-        gridLayout_23->setObjectName(QString::fromUtf8("gridLayout_23"));
+        gridLayout_23->setObjectName(QStringLiteral("gridLayout_23"));
         label_b160_3 = new QLabel(solventGroupBox);
-        label_b160_3->setObjectName(QString::fromUtf8("label_b160_3"));
+        label_b160_3->setObjectName(QStringLiteral("label_b160_3"));
 
         gridLayout_23->addWidget(label_b160_3, 0, 0, 1, 1);
 
         label_a160 = new QLabel(solventGroupBox);
-        label_a160->setObjectName(QString::fromUtf8("label_a160"));
+        label_a160->setObjectName(QStringLiteral("label_a160"));
 
         gridLayout_23->addWidget(label_a160, 2, 0, 1, 1);
 
         qui_solvent_cavityradius = new QDoubleSpinBox(solventGroupBox);
-        qui_solvent_cavityradius->setObjectName(QString::fromUtf8("qui_solvent_cavityradius"));
+        qui_solvent_cavityradius->setObjectName(QStringLiteral("qui_solvent_cavityradius"));
         qui_solvent_cavityradius->setDecimals(4);
-        qui_solvent_cavityradius->setMaximum(99.999899999999997);
-        qui_solvent_cavityradius->setSingleStep(0.000100000000000);
+        qui_solvent_cavityradius->setMaximum(99.9999);
+        qui_solvent_cavityradius->setSingleStep(0.0001);
 
         gridLayout_23->addWidget(qui_solvent_cavityradius, 2, 1, 1, 1);
 
         qui_solvent_opticaldielectric = new QDoubleSpinBox(solventGroupBox);
-        qui_solvent_opticaldielectric->setObjectName(QString::fromUtf8("qui_solvent_opticaldielectric"));
+        qui_solvent_opticaldielectric->setObjectName(QStringLiteral("qui_solvent_opticaldielectric"));
         qui_solvent_opticaldielectric->setDecimals(4);
 
         gridLayout_23->addWidget(qui_solvent_opticaldielectric, 1, 1, 1, 1);
 
         qui_solvent_dielectric = new QDoubleSpinBox(solventGroupBox);
-        qui_solvent_dielectric->setObjectName(QString::fromUtf8("qui_solvent_dielectric"));
+        qui_solvent_dielectric->setObjectName(QStringLiteral("qui_solvent_dielectric"));
         qui_solvent_dielectric->setDecimals(4);
-        qui_solvent_dielectric->setMaximum(99.999899999999997);
-        qui_solvent_dielectric->setSingleStep(0.000100000000000);
+        qui_solvent_dielectric->setMaximum(99.9999);
+        qui_solvent_dielectric->setSingleStep(0.0001);
 
         gridLayout_23->addWidget(qui_solvent_dielectric, 0, 1, 1, 1);
 
         label_97 = new QLabel(solventGroupBox);
-        label_97->setObjectName(QString::fromUtf8("label_97"));
+        label_97->setObjectName(QStringLiteral("label_97"));
 
         gridLayout_23->addWidget(label_97, 1, 0, 1, 1);
 
@@ -4190,29 +4190,29 @@ public:
         verticalLayout_51->addWidget(solventGroupBox);
 
         groupBox_4 = new QGroupBox(AdvancedSolventModel);
-        groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
+        groupBox_4->setObjectName(QStringLiteral("groupBox_4"));
         verticalLayout_23 = new QVBoxLayout(groupBox_4);
-        verticalLayout_23->setObjectName(QString::fromUtf8("verticalLayout_23"));
+        verticalLayout_23->setObjectName(QStringLiteral("verticalLayout_23"));
         solventStack = new QStackedWidget(groupBox_4);
-        solventStack->setObjectName(QString::fromUtf8("solventStack"));
+        solventStack->setObjectName(QStringLiteral("solventStack"));
         sizePolicy1.setHeightForWidth(solventStack->sizePolicy().hasHeightForWidth());
         solventStack->setSizePolicy(sizePolicy1);
         SolventNone = new QWidget();
-        SolventNone->setObjectName(QString::fromUtf8("SolventNone"));
+        SolventNone->setObjectName(QStringLiteral("SolventNone"));
         solventStack->addWidget(SolventNone);
         SolventOnsager = new QWidget();
-        SolventOnsager->setObjectName(QString::fromUtf8("SolventOnsager"));
+        SolventOnsager->setObjectName(QStringLiteral("SolventOnsager"));
         verticalLayout_27 = new QVBoxLayout(SolventOnsager);
-        verticalLayout_27->setObjectName(QString::fromUtf8("verticalLayout_27"));
+        verticalLayout_27->setObjectName(QStringLiteral("verticalLayout_27"));
         horizontalLayout_10 = new QHBoxLayout();
-        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
+        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
         label_37 = new QLabel(SolventOnsager);
-        label_37->setObjectName(QString::fromUtf8("label_37"));
+        label_37->setObjectName(QStringLiteral("label_37"));
 
         horizontalLayout_10->addWidget(label_37);
 
         qui_solvent_multipoleorder = new QSpinBox(SolventOnsager);
-        qui_solvent_multipoleorder->setObjectName(QString::fromUtf8("qui_solvent_multipoleorder"));
+        qui_solvent_multipoleorder->setObjectName(QStringLiteral("qui_solvent_multipoleorder"));
 
         horizontalLayout_10->addWidget(qui_solvent_multipoleorder);
 
@@ -4229,15 +4229,15 @@ public:
 
         solventStack->addWidget(SolventOnsager);
         SolventPCM = new QWidget();
-        SolventPCM->setObjectName(QString::fromUtf8("SolventPCM"));
+        SolventPCM->setObjectName(QStringLiteral("SolventPCM"));
         verticalLayout_22 = new QVBoxLayout(SolventPCM);
-        verticalLayout_22->setObjectName(QString::fromUtf8("verticalLayout_22"));
+        verticalLayout_22->setObjectName(QStringLiteral("verticalLayout_22"));
         gridLayout_20 = new QGridLayout();
-        gridLayout_20->setObjectName(QString::fromUtf8("gridLayout_20"));
+        gridLayout_20->setObjectName(QStringLiteral("gridLayout_20"));
         horizontalLayout_13 = new QHBoxLayout();
-        horizontalLayout_13->setObjectName(QString::fromUtf8("horizontalLayout_13"));
+        horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
         qui_pcm_printlevel = new QSpinBox(SolventPCM);
-        qui_pcm_printlevel->setObjectName(QString::fromUtf8("qui_pcm_printlevel"));
+        qui_pcm_printlevel->setObjectName(QStringLiteral("qui_pcm_printlevel"));
 
         horizontalLayout_13->addWidget(qui_pcm_printlevel);
 
@@ -4249,37 +4249,37 @@ public:
         gridLayout_20->addLayout(horizontalLayout_13, 3, 1, 1, 1);
 
         label_75 = new QLabel(SolventPCM);
-        label_75->setObjectName(QString::fromUtf8("label_75"));
+        label_75->setObjectName(QStringLiteral("label_75"));
 
         gridLayout_20->addWidget(label_75, 3, 0, 1, 1);
 
         qui_pcm_theory = new QComboBox(SolventPCM);
-        qui_pcm_theory->setObjectName(QString::fromUtf8("qui_pcm_theory"));
+        qui_pcm_theory->setObjectName(QStringLiteral("qui_pcm_theory"));
 
         gridLayout_20->addWidget(qui_pcm_theory, 0, 1, 1, 1);
 
         label_80 = new QLabel(SolventPCM);
-        label_80->setObjectName(QString::fromUtf8("label_80"));
+        label_80->setObjectName(QStringLiteral("label_80"));
 
         gridLayout_20->addWidget(label_80, 0, 0, 1, 1);
 
         label_81 = new QLabel(SolventPCM);
-        label_81->setObjectName(QString::fromUtf8("label_81"));
+        label_81->setObjectName(QStringLiteral("label_81"));
 
         gridLayout_20->addWidget(label_81, 1, 0, 1, 1);
 
         qui_pcm_method = new QComboBox(SolventPCM);
-        qui_pcm_method->setObjectName(QString::fromUtf8("qui_pcm_method"));
+        qui_pcm_method->setObjectName(QStringLiteral("qui_pcm_method"));
 
         gridLayout_20->addWidget(qui_pcm_method, 1, 1, 1, 1);
 
         label_96 = new QLabel(SolventPCM);
-        label_96->setObjectName(QString::fromUtf8("label_96"));
+        label_96->setObjectName(QStringLiteral("label_96"));
 
         gridLayout_20->addWidget(label_96, 2, 0, 1, 1);
 
         qui_pcm_radii = new QComboBox(SolventPCM);
-        qui_pcm_radii->setObjectName(QString::fromUtf8("qui_pcm_radii"));
+        qui_pcm_radii->setObjectName(QStringLiteral("qui_pcm_radii"));
 
         gridLayout_20->addWidget(qui_pcm_radii, 2, 1, 1, 1);
 
@@ -4292,23 +4292,23 @@ public:
 
         solventStack->addWidget(SolventPCM);
         SolventSVP = new QWidget();
-        SolventSVP->setObjectName(QString::fromUtf8("SolventSVP"));
+        SolventSVP->setObjectName(QStringLiteral("SolventSVP"));
         vboxLayout10 = new QVBoxLayout(SolventSVP);
-        vboxLayout10->setObjectName(QString::fromUtf8("vboxLayout10"));
+        vboxLayout10->setObjectName(QStringLiteral("vboxLayout10"));
         gridLayout_6 = new QGridLayout();
-        gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
+        gridLayout_6->setObjectName(QStringLiteral("gridLayout_6"));
         label_f161 = new QLabel(SolventSVP);
-        label_f161->setObjectName(QString::fromUtf8("label_f161"));
+        label_f161->setObjectName(QStringLiteral("label_f161"));
 
         gridLayout_6->addWidget(label_f161, 0, 0, 1, 1);
 
         qui_svp_memory = new QSpinBox(SolventSVP);
-        qui_svp_memory->setObjectName(QString::fromUtf8("qui_svp_memory"));
+        qui_svp_memory->setObjectName(QStringLiteral("qui_svp_memory"));
 
         gridLayout_6->addWidget(qui_svp_memory, 0, 1, 1, 1);
 
         label_d161 = new QLabel(SolventSVP);
-        label_d161->setObjectName(QString::fromUtf8("label_d161"));
+        label_d161->setObjectName(QStringLiteral("label_d161"));
         QSizePolicy sizePolicy9(QSizePolicy::Maximum, QSizePolicy::Preferred);
         sizePolicy9.setHorizontalStretch(0);
         sizePolicy9.setVerticalStretch(0);
@@ -4318,26 +4318,26 @@ public:
         gridLayout_6->addWidget(label_d161, 1, 0, 1, 1);
 
         qui_svp_cavity_conv = new QSpinBox(SolventSVP);
-        qui_svp_cavity_conv->setObjectName(QString::fromUtf8("qui_svp_cavity_conv"));
+        qui_svp_cavity_conv->setObjectName(QStringLiteral("qui_svp_cavity_conv"));
 
         gridLayout_6->addWidget(qui_svp_cavity_conv, 1, 1, 1, 1);
 
         label_e161 = new QLabel(SolventSVP);
-        label_e161->setObjectName(QString::fromUtf8("label_e161"));
+        label_e161->setObjectName(QStringLiteral("label_e161"));
         sizePolicy9.setHeightForWidth(label_e161->sizePolicy().hasHeightForWidth());
         label_e161->setSizePolicy(sizePolicy9);
 
         gridLayout_6->addWidget(label_e161, 2, 0, 1, 1);
 
         qui_svp_charge_conv = new QSpinBox(SolventSVP);
-        qui_svp_charge_conv->setObjectName(QString::fromUtf8("qui_svp_charge_conv"));
+        qui_svp_charge_conv->setObjectName(QStringLiteral("qui_svp_charge_conv"));
 
         gridLayout_6->addWidget(qui_svp_charge_conv, 2, 1, 1, 1);
 
         horizontalLayout_12 = new QHBoxLayout();
-        horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
+        horizontalLayout_12->setObjectName(QStringLiteral("horizontalLayout_12"));
         label_c161 = new QLabel(SolventSVP);
-        label_c161->setObjectName(QString::fromUtf8("label_c161"));
+        label_c161->setObjectName(QStringLiteral("label_c161"));
 
         horizontalLayout_12->addWidget(label_c161);
 
@@ -4346,7 +4346,7 @@ public:
         horizontalLayout_12->addItem(spacer_2);
 
         qui_svp_guess = new QComboBox(SolventSVP);
-        qui_svp_guess->setObjectName(QString::fromUtf8("qui_svp_guess"));
+        qui_svp_guess->setObjectName(QStringLiteral("qui_svp_guess"));
 
         horizontalLayout_12->addWidget(qui_svp_guess);
 
@@ -4354,7 +4354,7 @@ public:
         gridLayout_6->addLayout(horizontalLayout_12, 3, 0, 1, 2);
 
         qui_svp_path = new QCheckBox(SolventSVP);
-        qui_svp_path->setObjectName(QString::fromUtf8("qui_svp_path"));
+        qui_svp_path->setObjectName(QStringLiteral("qui_svp_path"));
 
         gridLayout_6->addWidget(qui_svp_path, 4, 0, 1, 1);
 
@@ -4367,23 +4367,23 @@ public:
 
         solventStack->addWidget(SolventSVP);
         SolventCosmo = new QWidget();
-        SolventCosmo->setObjectName(QString::fromUtf8("SolventCosmo"));
+        SolventCosmo->setObjectName(QStringLiteral("SolventCosmo"));
         verticalLayout_28 = new QVBoxLayout(SolventCosmo);
-        verticalLayout_28->setObjectName(QString::fromUtf8("verticalLayout_28"));
+        verticalLayout_28->setObjectName(QStringLiteral("verticalLayout_28"));
         solventStack->addWidget(SolventCosmo);
         SolventChemSol = new QWidget();
-        SolventChemSol->setObjectName(QString::fromUtf8("SolventChemSol"));
+        SolventChemSol->setObjectName(QStringLiteral("SolventChemSol"));
         verticalLayout_53 = new QVBoxLayout(SolventChemSol);
-        verticalLayout_53->setObjectName(QString::fromUtf8("verticalLayout_53"));
+        verticalLayout_53->setObjectName(QStringLiteral("verticalLayout_53"));
         horizontalLayout_11 = new QHBoxLayout();
-        horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
+        horizontalLayout_11->setObjectName(QStringLiteral("horizontalLayout_11"));
         label_162b = new QLabel(SolventChemSol);
-        label_162b->setObjectName(QString::fromUtf8("label_162b"));
+        label_162b->setObjectName(QStringLiteral("label_162b"));
 
         horizontalLayout_11->addWidget(label_162b);
 
         qui_chemsol_efield = new QComboBox(SolventChemSol);
-        qui_chemsol_efield->setObjectName(QString::fromUtf8("qui_chemsol_efield"));
+        qui_chemsol_efield->setObjectName(QStringLiteral("qui_chemsol_efield"));
 
         horizontalLayout_11->addWidget(qui_chemsol_efield);
 
@@ -4391,9 +4391,9 @@ public:
         verticalLayout_53->addLayout(horizontalLayout_11);
 
         hboxLayout14 = new QHBoxLayout();
-        hboxLayout14->setObjectName(QString::fromUtf8("hboxLayout14"));
+        hboxLayout14->setObjectName(QStringLiteral("hboxLayout14"));
         label_162a = new QLabel(SolventChemSol);
-        label_162a->setObjectName(QString::fromUtf8("label_162a"));
+        label_162a->setObjectName(QStringLiteral("label_162a"));
 
         hboxLayout14->addWidget(label_162a);
 
@@ -4402,7 +4402,7 @@ public:
         hboxLayout14->addItem(spacerItem47);
 
         qui_chemsol_ngrids = new QSpinBox(SolventChemSol);
-        qui_chemsol_ngrids->setObjectName(QString::fromUtf8("qui_chemsol_ngrids"));
+        qui_chemsol_ngrids->setObjectName(QStringLiteral("qui_chemsol_ngrids"));
 
         hboxLayout14->addWidget(qui_chemsol_ngrids);
 
@@ -4410,9 +4410,9 @@ public:
         verticalLayout_53->addLayout(hboxLayout14);
 
         hboxLayout15 = new QHBoxLayout();
-        hboxLayout15->setObjectName(QString::fromUtf8("hboxLayout15"));
+        hboxLayout15->setObjectName(QStringLiteral("hboxLayout15"));
         qui_chemsol_print = new QCheckBox(SolventChemSol);
-        qui_chemsol_print->setObjectName(QString::fromUtf8("qui_chemsol_print"));
+        qui_chemsol_print->setObjectName(QStringLiteral("qui_chemsol_print"));
 
         hboxLayout15->addWidget(qui_chemsol_print);
 
@@ -4429,28 +4429,28 @@ public:
 
         solventStack->addWidget(SolventChemSol);
         SolventSMx = new QWidget();
-        SolventSMx->setObjectName(QString::fromUtf8("SolventSMx"));
+        SolventSMx->setObjectName(QStringLiteral("SolventSMx"));
         verticalLayout_52 = new QVBoxLayout(SolventSMx);
-        verticalLayout_52->setObjectName(QString::fromUtf8("verticalLayout_52"));
+        verticalLayout_52->setObjectName(QStringLiteral("verticalLayout_52"));
         gridLayout_18 = new QGridLayout();
-        gridLayout_18->setObjectName(QString::fromUtf8("gridLayout_18"));
+        gridLayout_18->setObjectName(QStringLiteral("gridLayout_18"));
         label_65 = new QLabel(SolventSMx);
-        label_65->setObjectName(QString::fromUtf8("label_65"));
+        label_65->setObjectName(QStringLiteral("label_65"));
 
         gridLayout_18->addWidget(label_65, 0, 0, 1, 1);
 
         qui_smx_solvent = new QComboBox(SolventSMx);
-        qui_smx_solvent->setObjectName(QString::fromUtf8("qui_smx_solvent"));
+        qui_smx_solvent->setObjectName(QStringLiteral("qui_smx_solvent"));
 
         gridLayout_18->addWidget(qui_smx_solvent, 0, 1, 1, 1);
 
         label_54 = new QLabel(SolventSMx);
-        label_54->setObjectName(QString::fromUtf8("label_54"));
+        label_54->setObjectName(QStringLiteral("label_54"));
 
         gridLayout_18->addWidget(label_54, 1, 0, 1, 1);
 
         qui_smx_charges = new QComboBox(SolventSMx);
-        qui_smx_charges->setObjectName(QString::fromUtf8("qui_smx_charges"));
+        qui_smx_charges->setObjectName(QStringLiteral("qui_smx_charges"));
 
         gridLayout_18->addWidget(qui_smx_charges, 1, 1, 1, 1);
 
@@ -4470,24 +4470,24 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedSolventModel);
         AdvancedSVPGrid = new QWidget();
-        AdvancedSVPGrid->setObjectName(QString::fromUtf8("AdvancedSVPGrid"));
+        AdvancedSVPGrid->setObjectName(QStringLiteral("AdvancedSVPGrid"));
         vboxLayout11 = new QVBoxLayout(AdvancedSVPGrid);
-        vboxLayout11->setObjectName(QString::fromUtf8("vboxLayout11"));
+        vboxLayout11->setObjectName(QStringLiteral("vboxLayout11"));
         groupBox = new QGroupBox(AdvancedSVPGrid);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setObjectName(QStringLiteral("groupBox"));
         sizePolicy1.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
         groupBox->setSizePolicy(sizePolicy1);
         vboxLayout12 = new QVBoxLayout(groupBox);
-        vboxLayout12->setObjectName(QString::fromUtf8("vboxLayout12"));
+        vboxLayout12->setObjectName(QStringLiteral("vboxLayout12"));
         hboxLayout16 = new QHBoxLayout();
-        hboxLayout16->setObjectName(QString::fromUtf8("hboxLayout16"));
+        hboxLayout16->setObjectName(QStringLiteral("hboxLayout16"));
         label_128 = new QLabel(groupBox);
-        label_128->setObjectName(QString::fromUtf8("label_128"));
+        label_128->setObjectName(QStringLiteral("label_128"));
 
         hboxLayout16->addWidget(label_128);
 
         qui_svp_nptleb = new QComboBox(groupBox);
-        qui_svp_nptleb->setObjectName(QString::fromUtf8("qui_svp_nptleb"));
+        qui_svp_nptleb->setObjectName(QStringLiteral("qui_svp_nptleb"));
 
         hboxLayout16->addWidget(qui_svp_nptleb);
 
@@ -4495,29 +4495,29 @@ public:
         vboxLayout12->addLayout(hboxLayout16);
 
         qui_svp_intcav = new QCheckBox(groupBox);
-        qui_svp_intcav->setObjectName(QString::fromUtf8("qui_svp_intcav"));
+        qui_svp_intcav->setObjectName(QStringLiteral("qui_svp_intcav"));
 
         vboxLayout12->addWidget(qui_svp_intcav);
 
         hboxLayout17 = new QHBoxLayout();
-        hboxLayout17->setObjectName(QString::fromUtf8("hboxLayout17"));
+        hboxLayout17->setObjectName(QStringLiteral("hboxLayout17"));
         label_129 = new QLabel(groupBox);
-        label_129->setObjectName(QString::fromUtf8("label_129"));
+        label_129->setObjectName(QStringLiteral("label_129"));
 
         hboxLayout17->addWidget(label_129);
 
         qui_svp_nptthe = new QSpinBox(groupBox);
-        qui_svp_nptthe->setObjectName(QString::fromUtf8("qui_svp_nptthe"));
+        qui_svp_nptthe->setObjectName(QStringLiteral("qui_svp_nptthe"));
 
         hboxLayout17->addWidget(qui_svp_nptthe);
 
         label_130 = new QLabel(groupBox);
-        label_130->setObjectName(QString::fromUtf8("label_130"));
+        label_130->setObjectName(QStringLiteral("label_130"));
 
         hboxLayout17->addWidget(label_130);
 
         qui_svp_nptphi = new QSpinBox(groupBox);
-        qui_svp_nptphi->setObjectName(QString::fromUtf8("qui_svp_nptphi"));
+        qui_svp_nptphi->setObjectName(QStringLiteral("qui_svp_nptphi"));
 
         hboxLayout17->addWidget(qui_svp_nptphi);
 
@@ -4528,52 +4528,52 @@ public:
         vboxLayout11->addWidget(groupBox);
 
         groupBox_6 = new QGroupBox(AdvancedSVPGrid);
-        groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
+        groupBox_6->setObjectName(QStringLiteral("groupBox_6"));
         vboxLayout13 = new QVBoxLayout(groupBox_6);
-        vboxLayout13->setObjectName(QString::fromUtf8("vboxLayout13"));
+        vboxLayout13->setObjectName(QStringLiteral("vboxLayout13"));
         label_131 = new QLabel(groupBox_6);
-        label_131->setObjectName(QString::fromUtf8("label_131"));
+        label_131->setObjectName(QStringLiteral("label_131"));
 
         vboxLayout13->addWidget(label_131);
 
         qui_svp_itrngr = new QComboBox(groupBox_6);
-        qui_svp_itrngr->setObjectName(QString::fromUtf8("qui_svp_itrngr"));
+        qui_svp_itrngr->setObjectName(QStringLiteral("qui_svp_itrngr"));
 
         vboxLayout13->addWidget(qui_svp_itrngr);
 
         gridLayout17 = new QGridLayout();
-        gridLayout17->setObjectName(QString::fromUtf8("gridLayout17"));
+        gridLayout17->setObjectName(QStringLiteral("gridLayout17"));
         label_134 = new QLabel(groupBox_6);
-        label_134->setObjectName(QString::fromUtf8("label_134"));
+        label_134->setObjectName(QStringLiteral("label_134"));
 
         gridLayout17->addWidget(label_134, 0, 0, 1, 1);
 
         label_135 = new QLabel(groupBox_6);
-        label_135->setObjectName(QString::fromUtf8("label_135"));
+        label_135->setObjectName(QStringLiteral("label_135"));
 
         gridLayout17->addWidget(label_135, 0, 1, 1, 1);
 
         qui_svp_tranx = new QDoubleSpinBox(groupBox_6);
-        qui_svp_tranx->setObjectName(QString::fromUtf8("qui_svp_tranx"));
+        qui_svp_tranx->setObjectName(QStringLiteral("qui_svp_tranx"));
         sizePolicy6.setHeightForWidth(qui_svp_tranx->sizePolicy().hasHeightForWidth());
         qui_svp_tranx->setSizePolicy(sizePolicy6);
 
         gridLayout17->addWidget(qui_svp_tranx, 1, 0, 1, 1);
 
         qui_svp_tranz = new QDoubleSpinBox(groupBox_6);
-        qui_svp_tranz->setObjectName(QString::fromUtf8("qui_svp_tranz"));
+        qui_svp_tranz->setObjectName(QStringLiteral("qui_svp_tranz"));
         sizePolicy6.setHeightForWidth(qui_svp_tranz->sizePolicy().hasHeightForWidth());
         qui_svp_tranz->setSizePolicy(sizePolicy6);
 
         gridLayout17->addWidget(qui_svp_tranz, 1, 2, 1, 1);
 
         label_136 = new QLabel(groupBox_6);
-        label_136->setObjectName(QString::fromUtf8("label_136"));
+        label_136->setObjectName(QStringLiteral("label_136"));
 
         gridLayout17->addWidget(label_136, 0, 2, 1, 1);
 
         qui_svp_trany = new QDoubleSpinBox(groupBox_6);
-        qui_svp_trany->setObjectName(QString::fromUtf8("qui_svp_trany"));
+        qui_svp_trany->setObjectName(QStringLiteral("qui_svp_trany"));
         sizePolicy6.setHeightForWidth(qui_svp_trany->sizePolicy().hasHeightForWidth());
         qui_svp_trany->setSizePolicy(sizePolicy6);
 
@@ -4583,50 +4583,50 @@ public:
         vboxLayout13->addLayout(gridLayout17);
 
         label_132 = new QLabel(groupBox_6);
-        label_132->setObjectName(QString::fromUtf8("label_132"));
+        label_132->setObjectName(QStringLiteral("label_132"));
 
         vboxLayout13->addWidget(label_132);
 
         qui_svp_irotgr = new QComboBox(groupBox_6);
-        qui_svp_irotgr->setObjectName(QString::fromUtf8("qui_svp_irotgr"));
+        qui_svp_irotgr->setObjectName(QStringLiteral("qui_svp_irotgr"));
 
         vboxLayout13->addWidget(qui_svp_irotgr);
 
         gridLayout18 = new QGridLayout();
-        gridLayout18->setObjectName(QString::fromUtf8("gridLayout18"));
+        gridLayout18->setObjectName(QStringLiteral("gridLayout18"));
         qui_svp_rotchi = new QDoubleSpinBox(groupBox_6);
-        qui_svp_rotchi->setObjectName(QString::fromUtf8("qui_svp_rotchi"));
+        qui_svp_rotchi->setObjectName(QStringLiteral("qui_svp_rotchi"));
         sizePolicy6.setHeightForWidth(qui_svp_rotchi->sizePolicy().hasHeightForWidth());
         qui_svp_rotchi->setSizePolicy(sizePolicy6);
 
         gridLayout18->addWidget(qui_svp_rotchi, 1, 2, 1, 1);
 
         label_137 = new QLabel(groupBox_6);
-        label_137->setObjectName(QString::fromUtf8("label_137"));
+        label_137->setObjectName(QStringLiteral("label_137"));
 
         gridLayout18->addWidget(label_137, 0, 0, 1, 1);
 
         qui_svp_rotphi = new QDoubleSpinBox(groupBox_6);
-        qui_svp_rotphi->setObjectName(QString::fromUtf8("qui_svp_rotphi"));
+        qui_svp_rotphi->setObjectName(QStringLiteral("qui_svp_rotphi"));
         sizePolicy6.setHeightForWidth(qui_svp_rotphi->sizePolicy().hasHeightForWidth());
         qui_svp_rotphi->setSizePolicy(sizePolicy6);
 
         gridLayout18->addWidget(qui_svp_rotphi, 1, 1, 1, 1);
 
         qui_svp_rotthe = new QDoubleSpinBox(groupBox_6);
-        qui_svp_rotthe->setObjectName(QString::fromUtf8("qui_svp_rotthe"));
+        qui_svp_rotthe->setObjectName(QStringLiteral("qui_svp_rotthe"));
         sizePolicy6.setHeightForWidth(qui_svp_rotthe->sizePolicy().hasHeightForWidth());
         qui_svp_rotthe->setSizePolicy(sizePolicy6);
 
         gridLayout18->addWidget(qui_svp_rotthe, 1, 0, 1, 1);
 
         label_138 = new QLabel(groupBox_6);
-        label_138->setObjectName(QString::fromUtf8("label_138"));
+        label_138->setObjectName(QStringLiteral("label_138"));
 
         gridLayout18->addWidget(label_138, 0, 1, 1, 1);
 
         label_139 = new QLabel(groupBox_6);
-        label_139->setObjectName(QString::fromUtf8("label_139"));
+        label_139->setObjectName(QStringLiteral("label_139"));
 
         gridLayout18->addWidget(label_139, 0, 2, 1, 1);
 
@@ -4642,28 +4642,28 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedSVPGrid);
         AdvancedSymmetry = new QWidget();
-        AdvancedSymmetry->setObjectName(QString::fromUtf8("AdvancedSymmetry"));
+        AdvancedSymmetry->setObjectName(QStringLiteral("AdvancedSymmetry"));
         vboxLayout14 = new QVBoxLayout(AdvancedSymmetry);
-        vboxLayout14->setObjectName(QString::fromUtf8("vboxLayout14"));
+        vboxLayout14->setObjectName(QStringLiteral("vboxLayout14"));
         symmetry_ignore = new QCheckBox(AdvancedSymmetry);
-        symmetry_ignore->setObjectName(QString::fromUtf8("symmetry_ignore"));
+        symmetry_ignore->setObjectName(QStringLiteral("symmetry_ignore"));
 
         vboxLayout14->addWidget(symmetry_ignore);
 
         symmetry_integral = new QCheckBox(AdvancedSymmetry);
-        symmetry_integral->setObjectName(QString::fromUtf8("symmetry_integral"));
+        symmetry_integral->setObjectName(QStringLiteral("symmetry_integral"));
 
         vboxLayout14->addWidget(symmetry_integral);
 
         hboxLayout18 = new QHBoxLayout();
-        hboxLayout18->setObjectName(QString::fromUtf8("hboxLayout18"));
+        hboxLayout18->setObjectName(QStringLiteral("hboxLayout18"));
         label_62 = new QLabel(AdvancedSymmetry);
-        label_62->setObjectName(QString::fromUtf8("label_62"));
+        label_62->setObjectName(QStringLiteral("label_62"));
 
         hboxLayout18->addWidget(label_62);
 
         symmetry_tolerance = new QSpinBox(AdvancedSymmetry);
-        symmetry_tolerance->setObjectName(QString::fromUtf8("symmetry_tolerance"));
+        symmetry_tolerance->setObjectName(QStringLiteral("symmetry_tolerance"));
 
         hboxLayout18->addWidget(symmetry_tolerance);
 
@@ -4675,14 +4675,14 @@ public:
         vboxLayout14->addLayout(hboxLayout18);
 
         label_63 = new QLabel(AdvancedSymmetry);
-        label_63->setObjectName(QString::fromUtf8("label_63"));
+        label_63->setObjectName(QStringLiteral("label_63"));
 
         vboxLayout14->addWidget(label_63);
 
         hboxLayout19 = new QHBoxLayout();
-        hboxLayout19->setObjectName(QString::fromUtf8("hboxLayout19"));
+        hboxLayout19->setObjectName(QStringLiteral("hboxLayout19"));
         symmetry_decomposition = new QComboBox(AdvancedSymmetry);
-        symmetry_decomposition->setObjectName(QString::fromUtf8("symmetry_decomposition"));
+        symmetry_decomposition->setObjectName(QStringLiteral("symmetry_decomposition"));
 
         hboxLayout19->addWidget(symmetry_decomposition);
 
@@ -4699,58 +4699,58 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedSymmetry);
         AdvancedResources = new QWidget();
-        AdvancedResources->setObjectName(QString::fromUtf8("AdvancedResources"));
+        AdvancedResources->setObjectName(QStringLiteral("AdvancedResources"));
         vboxLayout15 = new QVBoxLayout(AdvancedResources);
-        vboxLayout15->setObjectName(QString::fromUtf8("vboxLayout15"));
+        vboxLayout15->setObjectName(QStringLiteral("vboxLayout15"));
         gridLayout19 = new QGridLayout();
-        gridLayout19->setObjectName(QString::fromUtf8("gridLayout19"));
+        gridLayout19->setObjectName(QStringLiteral("gridLayout19"));
         label_26 = new QLabel(AdvancedResources);
-        label_26->setObjectName(QString::fromUtf8("label_26"));
+        label_26->setObjectName(QStringLiteral("label_26"));
 
         gridLayout19->addWidget(label_26, 3, 0, 1, 1);
 
         label_24 = new QLabel(AdvancedResources);
-        label_24->setObjectName(QString::fromUtf8("label_24"));
+        label_24->setObjectName(QStringLiteral("label_24"));
 
         gridLayout19->addWidget(label_24, 1, 0, 1, 1);
 
         max_sub_file_num = new QSpinBox(AdvancedResources);
-        max_sub_file_num->setObjectName(QString::fromUtf8("max_sub_file_num"));
+        max_sub_file_num->setObjectName(QStringLiteral("max_sub_file_num"));
 
         gridLayout19->addWidget(max_sub_file_num, 4, 1, 1, 1);
 
         label_25 = new QLabel(AdvancedResources);
-        label_25->setObjectName(QString::fromUtf8("label_25"));
+        label_25->setObjectName(QStringLiteral("label_25"));
 
         gridLayout19->addWidget(label_25, 2, 0, 1, 1);
 
         mem_static = new QSpinBox(AdvancedResources);
-        mem_static->setObjectName(QString::fromUtf8("mem_static"));
+        mem_static->setObjectName(QStringLiteral("mem_static"));
 
         gridLayout19->addWidget(mem_static, 2, 1, 1, 1);
 
         ao2mo_disk = new QSpinBox(AdvancedResources);
-        ao2mo_disk->setObjectName(QString::fromUtf8("ao2mo_disk"));
+        ao2mo_disk->setObjectName(QStringLiteral("ao2mo_disk"));
 
         gridLayout19->addWidget(ao2mo_disk, 3, 1, 1, 1);
 
         label_31 = new QLabel(AdvancedResources);
-        label_31->setObjectName(QString::fromUtf8("label_31"));
+        label_31->setObjectName(QStringLiteral("label_31"));
 
         gridLayout19->addWidget(label_31, 4, 0, 1, 1);
 
         label_23 = new QLabel(AdvancedResources);
-        label_23->setObjectName(QString::fromUtf8("label_23"));
+        label_23->setObjectName(QStringLiteral("label_23"));
 
         gridLayout19->addWidget(label_23, 0, 0, 1, 1);
 
         integrals_buffer = new QSpinBox(AdvancedResources);
-        integrals_buffer->setObjectName(QString::fromUtf8("integrals_buffer"));
+        integrals_buffer->setObjectName(QStringLiteral("integrals_buffer"));
 
         gridLayout19->addWidget(integrals_buffer, 0, 1, 1, 1);
 
         mem_total = new QSpinBox(AdvancedResources);
-        mem_total->setObjectName(QString::fromUtf8("mem_total"));
+        mem_total->setObjectName(QStringLiteral("mem_total"));
         mem_total->setMaximum(9999);
 
         gridLayout19->addWidget(mem_total, 1, 1, 1, 1);
@@ -4768,21 +4768,21 @@ public:
 
         advancedOptionsStack->addWidget(AdvancedResources);
         page = new QWidget();
-        page->setObjectName(QString::fromUtf8("page"));
+        page->setObjectName(QStringLiteral("page"));
         verticalLayout_50 = new QVBoxLayout(page);
-        verticalLayout_50->setObjectName(QString::fromUtf8("verticalLayout_50"));
+        verticalLayout_50->setObjectName(QStringLiteral("verticalLayout_50"));
         label_16 = new QLabel(page);
-        label_16->setObjectName(QString::fromUtf8("label_16"));
+        label_16->setObjectName(QStringLiteral("label_16"));
 
         verticalLayout_50->addWidget(label_16);
 
         cis_guess_disk = new QCheckBox(page);
-        cis_guess_disk->setObjectName(QString::fromUtf8("cis_guess_disk"));
+        cis_guess_disk->setObjectName(QStringLiteral("cis_guess_disk"));
 
         verticalLayout_50->addWidget(cis_guess_disk);
 
         cis_guess_disk_type = new QSpinBox(page);
-        cis_guess_disk_type->setObjectName(QString::fromUtf8("cis_guess_disk_type"));
+        cis_guess_disk_type->setObjectName(QStringLiteral("cis_guess_disk_type"));
 
         verticalLayout_50->addWidget(cis_guess_disk_type);
 
@@ -4799,19 +4799,19 @@ public:
         horizontalLayout_3->addWidget(setupTabWidget);
 
         previewOutput = new QGroupBox(centralwidget);
-        previewOutput->setObjectName(QString::fromUtf8("previewOutput"));
+        previewOutput->setObjectName(QStringLiteral("previewOutput"));
         sizePolicy.setHeightForWidth(previewOutput->sizePolicy().hasHeightForWidth());
         previewOutput->setSizePolicy(sizePolicy);
         previewOutput->setMinimumSize(QSize(0, 0));
         verticalLayout_18 = new QVBoxLayout(previewOutput);
-        verticalLayout_18->setObjectName(QString::fromUtf8("verticalLayout_18"));
+        verticalLayout_18->setObjectName(QStringLiteral("verticalLayout_18"));
         previewText = new QTextEdit(previewOutput);
-        previewText->setObjectName(QString::fromUtf8("previewText"));
+        previewText->setObjectName(QStringLiteral("previewText"));
         sizePolicy.setHeightForWidth(previewText->sizePolicy().hasHeightForWidth());
         previewText->setSizePolicy(sizePolicy);
         previewText->setMinimumSize(QSize(0, 0));
         QFont font;
-        font.setFamily(QString::fromUtf8("Courier New"));
+        font.setFamily(QStringLiteral("Courier New"));
         font.setPointSize(12);
         font.setBold(false);
         font.setItalic(false);
@@ -4823,18 +4823,18 @@ public:
         verticalLayout_18->addWidget(previewText);
 
         hboxLayout20 = new QHBoxLayout();
-        hboxLayout20->setObjectName(QString::fromUtf8("hboxLayout20"));
+        hboxLayout20->setObjectName(QStringLiteral("hboxLayout20"));
         spacerItem57 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         hboxLayout20->addItem(spacerItem57);
 
         label_5 = new QLabel(previewOutput);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setObjectName(QStringLiteral("label_5"));
 
         hboxLayout20->addWidget(label_5);
 
         serverCombo = new QComboBox(previewOutput);
-        serverCombo->setObjectName(QString::fromUtf8("serverCombo"));
+        serverCombo->setObjectName(QStringLiteral("serverCombo"));
 
         hboxLayout20->addWidget(serverCombo);
 
@@ -4842,9 +4842,9 @@ public:
         verticalLayout_18->addLayout(hboxLayout20);
 
         hboxLayout21 = new QHBoxLayout();
-        hboxLayout21->setObjectName(QString::fromUtf8("hboxLayout21"));
+        hboxLayout21->setObjectName(QStringLiteral("hboxLayout21"));
         resetButton = new QPushButton(previewOutput);
-        resetButton->setObjectName(QString::fromUtf8("resetButton"));
+        resetButton->setObjectName(QStringLiteral("resetButton"));
 
         hboxLayout21->addWidget(resetButton);
 
@@ -4853,12 +4853,12 @@ public:
         hboxLayout21->addItem(spacerItem58);
 
         cancelButton = new QPushButton(previewOutput);
-        cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
+        cancelButton->setObjectName(QStringLiteral("cancelButton"));
 
         hboxLayout21->addWidget(cancelButton);
 
         submitButton = new QPushButton(previewOutput);
-        submitButton->setObjectName(QString::fromUtf8("submitButton"));
+        submitButton->setObjectName(QStringLiteral("submitButton"));
         submitButton->setAutoDefault(true);
 
         hboxLayout21->addWidget(submitButton);
@@ -4871,13 +4871,13 @@ public:
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
-        menubar->setObjectName(QString::fromUtf8("menubar"));
+        menubar->setObjectName(QStringLiteral("menubar"));
         menubar->setGeometry(QRect(0, 0, 1306, 21));
         menuFile = new QMenu(menubar);
-        menuFile->setObjectName(QString::fromUtf8("menuFile"));
+        menuFile->setObjectName(QStringLiteral("menuFile"));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
-        statusbar->setObjectName(QString::fromUtf8("statusbar"));
+        statusbar->setObjectName(QStringLiteral("statusbar"));
         MainWindow->setStatusBar(statusbar);
 #ifndef QT_NO_SHORTCUT
         label_exchange->setBuddy(exchange);
@@ -5026,25 +5026,25 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
-        actionAbout_QUI->setText(QApplication::translate("MainWindow", "New input section", nullptr));
-        action->setText(QApplication::translate("MainWindow", "Read XYZ Input", nullptr));
-        actionNew_Input_Section->setText(QApplication::translate("MainWindow", "New Input Section", nullptr));
-        actionRead_Input->setText(QApplication::translate("MainWindow", "Read Input", nullptr));
-        actionSave->setText(QApplication::translate("MainWindow", "Save", nullptr));
-        actionSave_As->setText(QApplication::translate("MainWindow", "Save As", nullptr));
-        actionEdit_Preferences->setText(QApplication::translate("MainWindow", "Edit Preferences", nullptr));
-        label_exchange->setText(QApplication::translate("MainWindow", "Exchange", nullptr));
-        label_106->setText(QApplication::translate("MainWindow", "Job Section", nullptr));
-        label_job_type->setText(QApplication::translate("MainWindow", "Calculate", nullptr));
-        label_method->setText(QApplication::translate("MainWindow", "Method", nullptr));
-        label_basis->setText(QApplication::translate("MainWindow", "Basis", nullptr));
-        label_ecp->setText(QApplication::translate("MainWindow", "ECP", nullptr));
-        label_correlation->setText(QApplication::translate("MainWindow", "Correlation", nullptr));
-        label_qui_multiplicity->setText(QApplication::translate("MainWindow", "Multiplicity", nullptr));
-        label_qui_charge->setText(QApplication::translate("MainWindow", "Charge", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
+        actionAbout_QUI->setText(QApplication::translate("MainWindow", "New input section", Q_NULLPTR));
+        action->setText(QApplication::translate("MainWindow", "Read XYZ Input", Q_NULLPTR));
+        actionNew_Input_Section->setText(QApplication::translate("MainWindow", "New Input Section", Q_NULLPTR));
+        actionRead_Input->setText(QApplication::translate("MainWindow", "Read Input", Q_NULLPTR));
+        actionSave->setText(QApplication::translate("MainWindow", "Save", Q_NULLPTR));
+        actionSave_As->setText(QApplication::translate("MainWindow", "Save As", Q_NULLPTR));
+        actionEdit_Preferences->setText(QApplication::translate("MainWindow", "Edit Preferences", Q_NULLPTR));
+        label_exchange->setText(QApplication::translate("MainWindow", "Exchange", Q_NULLPTR));
+        label_106->setText(QApplication::translate("MainWindow", "Job Section", Q_NULLPTR));
+        label_job_type->setText(QApplication::translate("MainWindow", "Calculate", Q_NULLPTR));
+        label_method->setText(QApplication::translate("MainWindow", "Method", Q_NULLPTR));
+        label_basis->setText(QApplication::translate("MainWindow", "Basis", Q_NULLPTR));
+        label_ecp->setText(QApplication::translate("MainWindow", "ECP", Q_NULLPTR));
+        label_correlation->setText(QApplication::translate("MainWindow", "Correlation", Q_NULLPTR));
+        label_qui_multiplicity->setText(QApplication::translate("MainWindow", "Multiplicity", Q_NULLPTR));
+        label_qui_charge->setText(QApplication::translate("MainWindow", "Charge", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        addJobButton->setToolTip(QApplication::translate("MainWindow", "Add section to input file", nullptr));
+        addJobButton->setToolTip(QApplication::translate("MainWindow", "Add section to input file", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         addJobButton->setStyleSheet(QApplication::translate("MainWindow", "QToolButton {\n"
 "   color: #333;\n"
@@ -5079,10 +5079,10 @@ public:
 "\n"
 "QToolButton:checked {\n"
 "   border-color: #b00;\n"
-"}", nullptr));
+"}", Q_NULLPTR));
         addJobButton->setText(QString());
 #ifndef QT_NO_TOOLTIP
-        deleteJobButton->setToolTip(QApplication::translate("MainWindow", "Remove current section from input file", nullptr));
+        deleteJobButton->setToolTip(QApplication::translate("MainWindow", "Remove current section from input file", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         deleteJobButton->setStyleSheet(QApplication::translate("MainWindow", "QToolButton {\n"
 "   color: #333;\n"
@@ -5118,386 +5118,386 @@ public:
 "\n"
 "QToolButton:checked {\n"
 "   border-color: #b00;\n"
-"}", nullptr));
+"}", Q_NULLPTR));
         deleteJobButton->setText(QString());
-        editJobSectionButton->setText(QApplication::translate("MainWindow", "Edit", nullptr));
-        scf_guess_mix->setSuffix(QApplication::translate("MainWindow", " %", nullptr));
-        label_209->setText(QApplication::translate("MainWindow", "Guess", nullptr));
-        label_39->setText(QApplication::translate("MainWindow", "Convergence", nullptr));
-        complex->setText(QApplication::translate("MainWindow", "Complex SCF", nullptr));
-        label_scf_guess_mix->setText(QApplication::translate("MainWindow", "Guess Mix", nullptr));
-        label_145->setText(QApplication::translate("MainWindow", "Second Basis", nullptr));
-        ghf->setText(QApplication::translate("MainWindow", "Generalized Hartree-Fock", nullptr));
-        label_210->setText(QApplication::translate("MainWindow", "Algorithm", nullptr));
-        os_roscf->setText(QApplication::translate("MainWindow", "Open-shell Singlet ROSCF", nullptr));
-        dual_basis_energy->setText(QApplication::translate("MainWindow", "Dual Basis Energy", nullptr));
-        label_18->setText(QApplication::translate("MainWindow", "Max Cycles", nullptr));
-        gen_scfman->setText(QApplication::translate("MainWindow", "Use GEN_SCFMAN", nullptr));
-        complex_mix->setSuffix(QApplication::translate("MainWindow", " %", nullptr));
-        label_complex_mix->setText(QApplication::translate("MainWindow", "Complex Mix", nullptr));
-        internal_stability->setText(QApplication::translate("MainWindow", "Stability Analysis", nullptr));
-        unrestricted->setText(QApplication::translate("MainWindow", "Unrestricted", nullptr));
-        toolBoxOptions->setItemText(toolBoxOptions->indexOf(pageScfControl), QApplication::translate("MainWindow", "SCF Control", nullptr));
-        gui->setText(QApplication::translate("MainWindow", "Generate Checkpoint File", nullptr));
-        chelpg->setText(QApplication::translate("MainWindow", "CHELPG Charges", nullptr));
-        nbo->setText(QApplication::translate("MainWindow", "NBO Analysis", nullptr));
-        toolBoxOptions->setItemText(toolBoxOptions->indexOf(pageWavefunctionAnalysis), QApplication::translate("MainWindow", "Wavefunction Analysis", nullptr));
-        setupTabWidget->setTabText(setupTabWidget->indexOf(SetupTab), QApplication::translate("MainWindow", "Setup", nullptr));
+        editJobSectionButton->setText(QApplication::translate("MainWindow", "Edit", Q_NULLPTR));
+        scf_guess_mix->setSuffix(QApplication::translate("MainWindow", " %", Q_NULLPTR));
+        label_209->setText(QApplication::translate("MainWindow", "Guess", Q_NULLPTR));
+        label_39->setText(QApplication::translate("MainWindow", "Convergence", Q_NULLPTR));
+        complex->setText(QApplication::translate("MainWindow", "Complex SCF", Q_NULLPTR));
+        label_scf_guess_mix->setText(QApplication::translate("MainWindow", "Guess Mix", Q_NULLPTR));
+        label_145->setText(QApplication::translate("MainWindow", "Second Basis", Q_NULLPTR));
+        ghf->setText(QApplication::translate("MainWindow", "Generalized Hartree-Fock", Q_NULLPTR));
+        label_210->setText(QApplication::translate("MainWindow", "Algorithm", Q_NULLPTR));
+        os_roscf->setText(QApplication::translate("MainWindow", "Open-shell Singlet ROSCF", Q_NULLPTR));
+        dual_basis_energy->setText(QApplication::translate("MainWindow", "Dual Basis Energy", Q_NULLPTR));
+        label_18->setText(QApplication::translate("MainWindow", "Max Cycles", Q_NULLPTR));
+        gen_scfman->setText(QApplication::translate("MainWindow", "Use GEN_SCFMAN", Q_NULLPTR));
+        complex_mix->setSuffix(QApplication::translate("MainWindow", " %", Q_NULLPTR));
+        label_complex_mix->setText(QApplication::translate("MainWindow", "Complex Mix", Q_NULLPTR));
+        internal_stability->setText(QApplication::translate("MainWindow", "Stability Analysis", Q_NULLPTR));
+        unrestricted->setText(QApplication::translate("MainWindow", "Unrestricted", Q_NULLPTR));
+        toolBoxOptions->setItemText(toolBoxOptions->indexOf(pageScfControl), QApplication::translate("MainWindow", "SCF Control", Q_NULLPTR));
+        gui->setText(QApplication::translate("MainWindow", "Generate Checkpoint File", Q_NULLPTR));
+        chelpg->setText(QApplication::translate("MainWindow", "CHELPG Charges", Q_NULLPTR));
+        nbo->setText(QApplication::translate("MainWindow", "NBO Analysis", Q_NULLPTR));
+        toolBoxOptions->setItemText(toolBoxOptions->indexOf(pageWavefunctionAnalysis), QApplication::translate("MainWindow", "Wavefunction Analysis", Q_NULLPTR));
+        setupTabWidget->setTabText(setupTabWidget->indexOf(SetupTab), QApplication::translate("MainWindow", "Setup", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem = advancedOptionsTree->headerItem();
-        ___qtreewidgetitem->setText(0, QApplication::translate("MainWindow", "Category", nullptr));
+        ___qtreewidgetitem->setText(0, QApplication::translate("MainWindow", "Category", Q_NULLPTR));
 
         const bool __sortingEnabled = advancedOptionsTree->isSortingEnabled();
         advancedOptionsTree->setSortingEnabled(false);
         QTreeWidgetItem *___qtreewidgetitem1 = advancedOptionsTree->topLevelItem(0);
-        ___qtreewidgetitem1->setText(0, QApplication::translate("MainWindow", "SCF Control", nullptr));
+        ___qtreewidgetitem1->setText(0, QApplication::translate("MainWindow", "SCF Control", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem2 = ___qtreewidgetitem1->child(0);
-        ___qtreewidgetitem2->setText(0, QApplication::translate("MainWindow", "DIIS", nullptr));
+        ___qtreewidgetitem2->setText(0, QApplication::translate("MainWindow", "DIIS", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem3 = ___qtreewidgetitem1->child(1);
-        ___qtreewidgetitem3->setText(0, QApplication::translate("MainWindow", "Large Molecule Methods", nullptr));
+        ___qtreewidgetitem3->setText(0, QApplication::translate("MainWindow", "Large Molecule Methods", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem4 = ___qtreewidgetitem1->child(2);
-        ___qtreewidgetitem4->setText(0, QApplication::translate("MainWindow", "Print Options", nullptr));
+        ___qtreewidgetitem4->setText(0, QApplication::translate("MainWindow", "Print Options", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem5 = ___qtreewidgetitem1->child(3);
-        ___qtreewidgetitem5->setText(0, QApplication::translate("MainWindow", "HFPT", nullptr));
+        ___qtreewidgetitem5->setText(0, QApplication::translate("MainWindow", "HFPT", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem6 = ___qtreewidgetitem1->child(4);
-        ___qtreewidgetitem6->setText(0, QApplication::translate("MainWindow", "PAO", nullptr));
+        ___qtreewidgetitem6->setText(0, QApplication::translate("MainWindow", "PAO", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem7 = ___qtreewidgetitem1->child(5);
-        ___qtreewidgetitem7->setText(0, QApplication::translate("MainWindow", "Internal Stability", nullptr));
+        ___qtreewidgetitem7->setText(0, QApplication::translate("MainWindow", "Internal Stability", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem8 = ___qtreewidgetitem1->child(6);
-        ___qtreewidgetitem8->setText(0, QApplication::translate("MainWindow", "Thresholds", nullptr));
+        ___qtreewidgetitem8->setText(0, QApplication::translate("MainWindow", "Thresholds", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem9 = advancedOptionsTree->topLevelItem(1);
-        ___qtreewidgetitem9->setText(0, QApplication::translate("MainWindow", "DFT", nullptr));
+        ___qtreewidgetitem9->setText(0, QApplication::translate("MainWindow", "DFT", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem10 = ___qtreewidgetitem9->child(0);
-        ___qtreewidgetitem10->setText(0, QApplication::translate("MainWindow", "Dispersion Correction", nullptr));
+        ___qtreewidgetitem10->setText(0, QApplication::translate("MainWindow", "Dispersion Correction", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem11 = ___qtreewidgetitem9->child(1);
-        ___qtreewidgetitem11->setText(0, QApplication::translate("MainWindow", "XDM", nullptr));
+        ___qtreewidgetitem11->setText(0, QApplication::translate("MainWindow", "XDM", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem12 = ___qtreewidgetitem9->child(2);
-        ___qtreewidgetitem12->setText(0, QApplication::translate("MainWindow", "Nonlocal Correlation", nullptr));
+        ___qtreewidgetitem12->setText(0, QApplication::translate("MainWindow", "Nonlocal Correlation", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem13 = advancedOptionsTree->topLevelItem(2);
-        ___qtreewidgetitem13->setText(0, QApplication::translate("MainWindow", "Post Hartree Fock", nullptr));
+        ___qtreewidgetitem13->setText(0, QApplication::translate("MainWindow", "Post Hartree Fock", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem14 = ___qtreewidgetitem13->child(0);
-        ___qtreewidgetitem14->setText(0, QApplication::translate("MainWindow", "Coupled Cluster", nullptr));
+        ___qtreewidgetitem14->setText(0, QApplication::translate("MainWindow", "Coupled Cluster", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem15 = advancedOptionsTree->topLevelItem(3);
-        ___qtreewidgetitem15->setText(0, QApplication::translate("MainWindow", "Excited States", nullptr));
+        ___qtreewidgetitem15->setText(0, QApplication::translate("MainWindow", "Excited States", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem16 = ___qtreewidgetitem15->child(0);
-        ___qtreewidgetitem16->setText(0, QApplication::translate("MainWindow", "CIS", nullptr));
+        ___qtreewidgetitem16->setText(0, QApplication::translate("MainWindow", "CIS", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem17 = ___qtreewidgetitem15->child(1);
-        ___qtreewidgetitem17->setText(0, QApplication::translate("MainWindow", "ROKS", nullptr));
+        ___qtreewidgetitem17->setText(0, QApplication::translate("MainWindow", "ROKS", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem18 = ___qtreewidgetitem15->child(2);
-        ___qtreewidgetitem18->setText(0, QApplication::translate("MainWindow", "EOM", nullptr));
+        ___qtreewidgetitem18->setText(0, QApplication::translate("MainWindow", "EOM", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem19 = ___qtreewidgetitem18->child(0);
-        ___qtreewidgetitem19->setText(0, QApplication::translate("MainWindow", "Surface Crossing", nullptr));
+        ___qtreewidgetitem19->setText(0, QApplication::translate("MainWindow", "Surface Crossing", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem20 = ___qtreewidgetitem15->child(3);
-        ___qtreewidgetitem20->setText(0, QApplication::translate("MainWindow", "ADC", nullptr));
+        ___qtreewidgetitem20->setText(0, QApplication::translate("MainWindow", "ADC", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem21 = advancedOptionsTree->topLevelItem(4);
-        ___qtreewidgetitem21->setText(0, QApplication::translate("MainWindow", "Wavefunction Analysis", nullptr));
+        ___qtreewidgetitem21->setText(0, QApplication::translate("MainWindow", "Wavefunction Analysis", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem22 = ___qtreewidgetitem21->child(0);
-        ___qtreewidgetitem22->setText(0, QApplication::translate("MainWindow", "Plots", nullptr));
+        ___qtreewidgetitem22->setText(0, QApplication::translate("MainWindow", "Plots", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem23 = ___qtreewidgetitem21->child(1);
-        ___qtreewidgetitem23->setText(0, QApplication::translate("MainWindow", "Molecular Properties", nullptr));
+        ___qtreewidgetitem23->setText(0, QApplication::translate("MainWindow", "Molecular Properties", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem24 = advancedOptionsTree->topLevelItem(5);
-        ___qtreewidgetitem24->setText(0, QApplication::translate("MainWindow", "Geometry Optimization", nullptr));
+        ___qtreewidgetitem24->setText(0, QApplication::translate("MainWindow", "Geometry Optimization", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem25 = ___qtreewidgetitem24->child(0);
-        ___qtreewidgetitem25->setText(0, QApplication::translate("MainWindow", "Opt Thresholds", nullptr));
+        ___qtreewidgetitem25->setText(0, QApplication::translate("MainWindow", "Opt Thresholds", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem26 = advancedOptionsTree->topLevelItem(6);
-        ___qtreewidgetitem26->setText(0, QApplication::translate("MainWindow", "Reaction Pathway", nullptr));
+        ___qtreewidgetitem26->setText(0, QApplication::translate("MainWindow", "Reaction Pathway", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem27 = advancedOptionsTree->topLevelItem(7);
-        ___qtreewidgetitem27->setText(0, QApplication::translate("MainWindow", "Frequencies", nullptr));
+        ___qtreewidgetitem27->setText(0, QApplication::translate("MainWindow", "Frequencies", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem28 = advancedOptionsTree->topLevelItem(8);
-        ___qtreewidgetitem28->setText(0, QApplication::translate("MainWindow", "Molecular Dynamics", nullptr));
+        ___qtreewidgetitem28->setText(0, QApplication::translate("MainWindow", "Molecular Dynamics", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem29 = advancedOptionsTree->topLevelItem(9);
-        ___qtreewidgetitem29->setText(0, QApplication::translate("MainWindow", "EFP Options", nullptr));
+        ___qtreewidgetitem29->setText(0, QApplication::translate("MainWindow", "EFP Options", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem30 = advancedOptionsTree->topLevelItem(10);
-        ___qtreewidgetitem30->setText(0, QApplication::translate("MainWindow", "QMMM", nullptr));
+        ___qtreewidgetitem30->setText(0, QApplication::translate("MainWindow", "QMMM", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem31 = advancedOptionsTree->topLevelItem(11);
-        ___qtreewidgetitem31->setText(0, QApplication::translate("MainWindow", "NMR Chemical Shifts", nullptr));
+        ___qtreewidgetitem31->setText(0, QApplication::translate("MainWindow", "NMR Chemical Shifts", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem32 = advancedOptionsTree->topLevelItem(12);
-        ___qtreewidgetitem32->setText(0, QApplication::translate("MainWindow", "Solvent Model", nullptr));
+        ___qtreewidgetitem32->setText(0, QApplication::translate("MainWindow", "Solvent Model", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem33 = advancedOptionsTree->topLevelItem(13);
-        ___qtreewidgetitem33->setText(0, QApplication::translate("MainWindow", "Symmetry", nullptr));
+        ___qtreewidgetitem33->setText(0, QApplication::translate("MainWindow", "Symmetry", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem34 = advancedOptionsTree->topLevelItem(14);
-        ___qtreewidgetitem34->setText(0, QApplication::translate("MainWindow", "Resources", nullptr));
+        ___qtreewidgetitem34->setText(0, QApplication::translate("MainWindow", "Resources", Q_NULLPTR));
         advancedOptionsTree->setSortingEnabled(__sortingEnabled);
 
-        label_203->setText(QApplication::translate("MainWindow", "Basis Projection", nullptr));
-        qui_section_swap_occupied_virtual->setText(QApplication::translate("MainWindow", "Swap Orbitals", nullptr));
-        label_199->setText(QApplication::translate("MainWindow", "Incremental Fock", nullptr));
-        label_85->setText(QApplication::translate("MainWindow", "RCA Print Level", nullptr));
-        label_101->setText(QApplication::translate("MainWindow", "RCA Switch Thresh", nullptr));
-        label_202->setText(QApplication::translate("MainWindow", "Pure/Cartesian", nullptr));
-        label_200->setText(QApplication::translate("MainWindow", "MOM Start Cycle", nullptr));
-        label_117->setText(QApplication::translate("MainWindow", "MOM Method", nullptr));
-        label_201->setText(QApplication::translate("MainWindow", "Max RCA Cycles", nullptr));
-        pseudo_canonical->setText(QApplication::translate("MainWindow", "Use Canonical Steps", nullptr));
-        direct_scf->setText(QApplication::translate("MainWindow", "Direct SCF", nullptr));
-        label_34->setText(QApplication::translate("MainWindow", "Subspace", nullptr));
-        label_41->setText(QApplication::translate("MainWindow", "Max DIIS Cycles", nullptr));
-        label_94->setText(QApplication::translate("MainWindow", "DIIS Metric", nullptr));
-        label_35->setText(QApplication::translate("MainWindow", "Print Level", nullptr));
-        label_36->setText(QApplication::translate("MainWindow", "Threshold", nullptr));
-        label_print_orbitals->setText(QApplication::translate("MainWindow", "Number of Virtuals", nullptr));
-        qui_print_orbitals->setText(QApplication::translate("MainWindow", "Print Orbitals", nullptr));
-        label_30->setText(QApplication::translate("MainWindow", "SCF Guess Print", nullptr));
-        label_29->setText(QApplication::translate("MainWindow", "SCF Print", nullptr));
-        label_43->setText(QApplication::translate("MainWindow", "SCF Final Print", nullptr));
-        label_105->setText(QApplication::translate("MainWindow", "Distance Matrix", nullptr));
-        label_21->setText(QApplication::translate("MainWindow", "PDB Coordinates", nullptr));
-        print_general_basis->setText(QApplication::translate("MainWindow", "Print General Basis", nullptr));
-        scf_print_frgm->setText(QApplication::translate("MainWindow", "Print Fragments", nullptr));
-        label_89->setText(QApplication::translate("MainWindow", "WFN filename:", nullptr));
-        groupBox_0->setTitle(QApplication::translate("MainWindow", "Method", nullptr));
-        qui_use_case->setText(QApplication::translate("MainWindow", "CASE", nullptr));
-        qui_cfmm->setText(QApplication::translate("MainWindow", "CFMM", nullptr));
-        qui_none->setText(QApplication::translate("MainWindow", "None", nullptr));
-        qui_use_ri->setText(QApplication::translate("MainWindow", "RI", nullptr));
-        ftc->setText(QApplication::translate("MainWindow", "FTC", nullptr));
-        label_47->setText(QApplication::translate("MainWindow", "CFMM Grain", nullptr));
-        label_46->setText(QApplication::translate("MainWindow", "Multipole Order", nullptr));
-        lin_k->setText(QApplication::translate("MainWindow", "Use Lin K", nullptr));
-        ftc_fast->setText(QApplication::translate("MainWindow", "Increase Speed (and memory)", nullptr));
-        label_99->setText(QApplication::translate("MainWindow", "Cutoff Threshold:", nullptr));
-        label_100->setText(QApplication::translate("MainWindow", "x10 e-", nullptr));
-        checkBox_3->setText(QApplication::translate("MainWindow", "ARI", nullptr));
-        label_77->setText(QApplication::translate("MainWindow", "Outer Radius", nullptr));
-        checkBox_2->setText(QApplication::translate("MainWindow", "RI-K", nullptr));
-        label_55->setText(QApplication::translate("MainWindow", "Inner Radius", nullptr));
-        checkBox->setText(QApplication::translate("MainWindow", "RI-J", nullptr));
-        label_3->setText(QApplication::translate("MainWindow", "HFPT Basis", nullptr));
-        label_dfpt_xc_grid->setText(QApplication::translate("MainWindow", "DFPT Grid", nullptr));
-        label_dfpt_exchange->setText(QApplication::translate("MainWindow", "DFPT Exchange", nullptr));
-        label_49->setText(QApplication::translate("MainWindow", "EPAO Weights", nullptr));
-        label_50->setText(QApplication::translate("MainWindow", "PAO Algorithm", nullptr));
-        label_48->setText(QApplication::translate("MainWindow", "Iterations", nullptr));
-        label_51->setText(QApplication::translate("MainWindow", "PAO Method", nullptr));
-        label_67->setText(QApplication::translate("MainWindow", "Convergence", nullptr));
-        label_61->setText(QApplication::translate("MainWindow", "Davidson Iterations", nullptr));
-        label_57->setText(QApplication::translate("MainWindow", "Max SCFs", nullptr));
-        label_69->setText(QApplication::translate("MainWindow", "Number of Roots", nullptr));
-        fd_mat_vec_prod->setText(QApplication::translate("MainWindow", "Compute Vec-Mat Poduct By FD", nullptr));
-        label_32->setText(QApplication::translate("MainWindow", "Linear Dependence", nullptr));
-        label_40->setText(QApplication::translate("MainWindow", "Integrals Thresh", nullptr));
-        label_211->setText(QApplication::translate("MainWindow", "Shell Pair Criterion:", nullptr));
-        label_198->setText(QApplication::translate("MainWindow", "Variable Thresh", nullptr));
-        label_2->setText(QApplication::translate("MainWindow", "Grid", nullptr));
-        xc_smart_grid->setText(QApplication::translate("MainWindow", "Use Smart Grid", nullptr));
-        fast_xc->setText(QApplication::translate("MainWindow", "Fast XC", nullptr));
-        incdft->setText(QApplication::translate("MainWindow", "Incremental DFT", nullptr));
-        mrxc->setText(QApplication::translate("MainWindow", "Multi-resolution XC", nullptr));
-        groupBox_mrxc->setTitle(QApplication::translate("MainWindow", "MRXC Options", nullptr));
-        label_8->setText(QApplication::translate("MainWindow", "Smoothness Precision:", nullptr));
-        label_102->setText(QApplication::translate("MainWindow", "x10 e-", nullptr));
-        label_7->setText(QApplication::translate("MainWindow", "Interpolation Order", nullptr));
-        label_76->setText(QApplication::translate("MainWindow", "Model", nullptr));
-        label_98->setText(QApplication::translate("MainWindow", "Strength", nullptr));
-        groupBox_dft_d->setTitle(QApplication::translate("MainWindow", "DFT-D3", nullptr));
-        label_9->setText(QApplication::translate("MainWindow", "S<sub>6</sub>", nullptr));
-        label_19->setText(QApplication::translate("MainWindow", "S<sub>r6</sub>", nullptr));
-        label_20->setText(QApplication::translate("MainWindow", "S<sub>8</sub>", nullptr));
-        dft_d3_3body->setText(QApplication::translate("MainWindow", "3-Body interactions", nullptr));
-        label->setText(QApplication::translate("MainWindow", "XDM", nullptr));
-        label_dftvdw_method->setText(QApplication::translate("MainWindow", "Method", nullptr));
-        label_dftvdw_print->setText(QApplication::translate("MainWindow", "Print", nullptr));
-        label_dftvdw_mol1natoms->setText(QApplication::translate("MainWindow", "Atoms", nullptr));
-        label_dftvdw_kai->setText(QApplication::translate("MainWindow", "K", nullptr));
-        label_dftvdw_alpha1->setText(QApplication::translate("MainWindow", "&alpha;1", nullptr));
-        label_dftvdw_alpha2->setText(QApplication::translate("MainWindow", "&alpha;2", nullptr));
-        label_6->setText(QApplication::translate("MainWindow", "Grid", nullptr));
-        label_4->setText(QApplication::translate("MainWindow", "Functional", nullptr));
-        groupBox_3->setTitle(QApplication::translate("MainWindow", "Frozen Core", nullptr));
-        qui_frozen_core->setText(QApplication::translate("MainWindow", "Use Frozen Core", nullptr));
-        label_93->setText(QApplication::translate("MainWindow", "Core Print", nullptr));
-        label_234->setText(QApplication::translate("MainWindow", "Frozen Virtual Orbs", nullptr));
-        label_123->setText(QApplication::translate("MainWindow", "Frozen Core Orbs", nullptr));
-        label_92->setText(QApplication::translate("MainWindow", "Core Character", nullptr));
-        ssg->setText(QApplication::translate("MainWindow", "Compute SSG Wavefunction", nullptr));
-        mp2v->setText(QApplication::translate("MainWindow", "MP2[V]", nullptr));
-        label_28->setText(QApplication::translate("MainWindow", "MP2 Algorithm", nullptr));
-        label_133->setText(QApplication::translate("MainWindow", "Max Iterations", nullptr));
-        label_224->setText(QApplication::translate("MainWindow", "Convergence", nullptr));
-        label_151->setText(QApplication::translate("MainWindow", "DIIS Method", nullptr));
-        label_155->setText(QApplication::translate("MainWindow", "DIIS Start", nullptr));
-        label_152->setText(QApplication::translate("MainWindow", "Denominator Thresh", nullptr));
-        label_227->setText(QApplication::translate("MainWindow", "Print Level", nullptr));
-        label_104->setText(QApplication::translate("MainWindow", "Cholesky Tolerance", nullptr));
-        ccman2->setText(QApplication::translate("MainWindow", "CCMAN2", nullptr));
-        cc_ref_prop->setText(QApplication::translate("MainWindow", "Reference properties", nullptr));
-        cc_ref_prop_te->setText(QApplication::translate("MainWindow", "Two-electron properties", nullptr));
-        cc_fullresponse->setText(QApplication::translate("MainWindow", "Include Orbital Relaxation", nullptr));
-        direct_ri->setText(QApplication::translate("MainWindow", "Direct RI", nullptr));
-        label_226->setText(QApplication::translate("MainWindow", "CC Memory", nullptr));
-        label_115->setText(QApplication::translate("MainWindow", "Threads", nullptr));
-        cc_symmetry->setText(QApplication::translate("MainWindow", "Symmetry", nullptr));
-        groupBox_2->setTitle(QApplication::translate("MainWindow", "CIS", nullptr));
-        label_166->setText(QApplication::translate("MainWindow", "Max Cycles", nullptr));
-        label_22->setText(QApplication::translate("MainWindow", "Max Subspace", nullptr));
-        label_66->setText(QApplication::translate("MainWindow", "Convergence", nullptr));
-        label_90->setText(QApplication::translate("MainWindow", "Guess Type", nullptr));
-        cis_dynamic_mem->setText(QApplication::translate("MainWindow", "Use Dynamic Memory", nullptr));
-        groupBox_10->setTitle(QApplication::translate("MainWindow", "Reduced Active Space", nullptr));
-        label_cis_ras_cutoff_virtual->setText(QApplication::translate("MainWindow", "Virtual Cutoff", nullptr));
-        label_cis_ras_cutoff_occupied->setText(QApplication::translate("MainWindow", "Occupied Cutoff", nullptr));
-        label_cis_ras_type->setText(QApplication::translate("MainWindow", "Subspace", nullptr));
-        cis_ras->setText(QApplication::translate("MainWindow", "Use Reduced Active Space", nullptr));
-        cis_ras_print->setText(QApplication::translate("MainWindow", "Increase Printout", nullptr));
-        roks->setText(QApplication::translate("MainWindow", "Restricted Open-Shell Kohn-Sham", nullptr));
-        label_27->setText(QApplication::translate("MainWindow", "Level Shift", nullptr));
-        label_188->setText(QApplication::translate("MainWindow", "Correlation", nullptr));
-        groupBox_17->setTitle(QApplication::translate("MainWindow", "Guess Options", nullptr));
-        label_195->setText(QApplication::translate("MainWindow", "Singles Guess Vectors", nullptr));
-        label_196->setText(QApplication::translate("MainWindow", "Doubles Guess Vectors", nullptr));
-        groupBox_14->setTitle(QApplication::translate("MainWindow", "Davidson Options", nullptr));
-        label_215->setText(QApplication::translate("MainWindow", "Convergence", nullptr));
-        label_162->setText(QApplication::translate("MainWindow", "Max Vectors", nullptr));
-        label_167->setText(QApplication::translate("MainWindow", "Max iterations", nullptr));
-        label_216->setText(QApplication::translate("MainWindow", "Threshold", nullptr));
-        adc_guess->setTitle(QApplication::translate("MainWindow", "Guess Options", nullptr));
-        label_197->setText(QApplication::translate("MainWindow", "Singles Guess Vectors", nullptr));
-        label_204->setText(QApplication::translate("MainWindow", "Doubles Guess Vectors", nullptr));
-        adc_davidson->setTitle(QApplication::translate("MainWindow", "Davidson Options", nullptr));
-        label_217->setText(QApplication::translate("MainWindow", "Convergence", nullptr));
-        label_163->setText(QApplication::translate("MainWindow", "Max. Subspace", nullptr));
-        label_168->setText(QApplication::translate("MainWindow", "Max. Iterations", nullptr));
-        label_218->setText(QApplication::translate("MainWindow", "Threshold", nullptr));
-        adc_diis->setTitle(QApplication::translate("MainWindow", "DIIS Options", nullptr));
-        label_42->setText(QApplication::translate("MainWindow", "Res. Convergence", nullptr));
-        label_177->setText(QApplication::translate("MainWindow", "Max. Iterations", nullptr));
-        label_219->setText(QApplication::translate("MainWindow", "Energy Convergence", nullptr));
-        label_164->setText(QApplication::translate("MainWindow", "DIIS Start", nullptr));
-        label_52->setText(QApplication::translate("MainWindow", "DIIS Size", nullptr));
+        label_203->setText(QApplication::translate("MainWindow", "Basis Projection", Q_NULLPTR));
+        qui_section_swap_occupied_virtual->setText(QApplication::translate("MainWindow", "Swap Orbitals", Q_NULLPTR));
+        label_199->setText(QApplication::translate("MainWindow", "Incremental Fock", Q_NULLPTR));
+        label_85->setText(QApplication::translate("MainWindow", "RCA Print Level", Q_NULLPTR));
+        label_101->setText(QApplication::translate("MainWindow", "RCA Switch Thresh", Q_NULLPTR));
+        label_202->setText(QApplication::translate("MainWindow", "Pure/Cartesian", Q_NULLPTR));
+        label_200->setText(QApplication::translate("MainWindow", "MOM Start Cycle", Q_NULLPTR));
+        label_117->setText(QApplication::translate("MainWindow", "MOM Method", Q_NULLPTR));
+        label_201->setText(QApplication::translate("MainWindow", "Max RCA Cycles", Q_NULLPTR));
+        pseudo_canonical->setText(QApplication::translate("MainWindow", "Use Canonical Steps", Q_NULLPTR));
+        direct_scf->setText(QApplication::translate("MainWindow", "Direct SCF", Q_NULLPTR));
+        label_34->setText(QApplication::translate("MainWindow", "Subspace", Q_NULLPTR));
+        label_41->setText(QApplication::translate("MainWindow", "Max DIIS Cycles", Q_NULLPTR));
+        label_94->setText(QApplication::translate("MainWindow", "DIIS Metric", Q_NULLPTR));
+        label_35->setText(QApplication::translate("MainWindow", "Print Level", Q_NULLPTR));
+        label_36->setText(QApplication::translate("MainWindow", "Threshold", Q_NULLPTR));
+        label_print_orbitals->setText(QApplication::translate("MainWindow", "Number of Virtuals", Q_NULLPTR));
+        qui_print_orbitals->setText(QApplication::translate("MainWindow", "Print Orbitals", Q_NULLPTR));
+        label_30->setText(QApplication::translate("MainWindow", "SCF Guess Print", Q_NULLPTR));
+        label_29->setText(QApplication::translate("MainWindow", "SCF Print", Q_NULLPTR));
+        label_43->setText(QApplication::translate("MainWindow", "SCF Final Print", Q_NULLPTR));
+        label_105->setText(QApplication::translate("MainWindow", "Distance Matrix", Q_NULLPTR));
+        label_21->setText(QApplication::translate("MainWindow", "PDB Coordinates", Q_NULLPTR));
+        print_general_basis->setText(QApplication::translate("MainWindow", "Print General Basis", Q_NULLPTR));
+        scf_print_frgm->setText(QApplication::translate("MainWindow", "Print Fragments", Q_NULLPTR));
+        label_89->setText(QApplication::translate("MainWindow", "WFN filename:", Q_NULLPTR));
+        groupBox_0->setTitle(QApplication::translate("MainWindow", "Method", Q_NULLPTR));
+        qui_use_case->setText(QApplication::translate("MainWindow", "CASE", Q_NULLPTR));
+        qui_cfmm->setText(QApplication::translate("MainWindow", "CFMM", Q_NULLPTR));
+        qui_none->setText(QApplication::translate("MainWindow", "None", Q_NULLPTR));
+        qui_use_ri->setText(QApplication::translate("MainWindow", "RI", Q_NULLPTR));
+        ftc->setText(QApplication::translate("MainWindow", "FTC", Q_NULLPTR));
+        label_47->setText(QApplication::translate("MainWindow", "CFMM Grain", Q_NULLPTR));
+        label_46->setText(QApplication::translate("MainWindow", "Multipole Order", Q_NULLPTR));
+        lin_k->setText(QApplication::translate("MainWindow", "Use Lin K", Q_NULLPTR));
+        ftc_fast->setText(QApplication::translate("MainWindow", "Increase Speed (and memory)", Q_NULLPTR));
+        label_99->setText(QApplication::translate("MainWindow", "Cutoff Threshold:", Q_NULLPTR));
+        label_100->setText(QApplication::translate("MainWindow", "x10 e-", Q_NULLPTR));
+        checkBox_3->setText(QApplication::translate("MainWindow", "ARI", Q_NULLPTR));
+        label_77->setText(QApplication::translate("MainWindow", "Outer Radius", Q_NULLPTR));
+        checkBox_2->setText(QApplication::translate("MainWindow", "RI-K", Q_NULLPTR));
+        label_55->setText(QApplication::translate("MainWindow", "Inner Radius", Q_NULLPTR));
+        checkBox->setText(QApplication::translate("MainWindow", "RI-J", Q_NULLPTR));
+        label_3->setText(QApplication::translate("MainWindow", "HFPT Basis", Q_NULLPTR));
+        label_dfpt_xc_grid->setText(QApplication::translate("MainWindow", "DFPT Grid", Q_NULLPTR));
+        label_dfpt_exchange->setText(QApplication::translate("MainWindow", "DFPT Exchange", Q_NULLPTR));
+        label_49->setText(QApplication::translate("MainWindow", "EPAO Weights", Q_NULLPTR));
+        label_50->setText(QApplication::translate("MainWindow", "PAO Algorithm", Q_NULLPTR));
+        label_48->setText(QApplication::translate("MainWindow", "Iterations", Q_NULLPTR));
+        label_51->setText(QApplication::translate("MainWindow", "PAO Method", Q_NULLPTR));
+        label_67->setText(QApplication::translate("MainWindow", "Convergence", Q_NULLPTR));
+        label_61->setText(QApplication::translate("MainWindow", "Davidson Iterations", Q_NULLPTR));
+        label_57->setText(QApplication::translate("MainWindow", "Max SCFs", Q_NULLPTR));
+        label_69->setText(QApplication::translate("MainWindow", "Number of Roots", Q_NULLPTR));
+        fd_mat_vec_prod->setText(QApplication::translate("MainWindow", "Compute Vec-Mat Poduct By FD", Q_NULLPTR));
+        label_32->setText(QApplication::translate("MainWindow", "Linear Dependence", Q_NULLPTR));
+        label_40->setText(QApplication::translate("MainWindow", "Integrals Thresh", Q_NULLPTR));
+        label_211->setText(QApplication::translate("MainWindow", "Shell Pair Criterion:", Q_NULLPTR));
+        label_198->setText(QApplication::translate("MainWindow", "Variable Thresh", Q_NULLPTR));
+        label_2->setText(QApplication::translate("MainWindow", "Grid", Q_NULLPTR));
+        xc_smart_grid->setText(QApplication::translate("MainWindow", "Use Smart Grid", Q_NULLPTR));
+        fast_xc->setText(QApplication::translate("MainWindow", "Fast XC", Q_NULLPTR));
+        incdft->setText(QApplication::translate("MainWindow", "Incremental DFT", Q_NULLPTR));
+        mrxc->setText(QApplication::translate("MainWindow", "Multi-resolution XC", Q_NULLPTR));
+        groupBox_mrxc->setTitle(QApplication::translate("MainWindow", "MRXC Options", Q_NULLPTR));
+        label_8->setText(QApplication::translate("MainWindow", "Smoothness Precision:", Q_NULLPTR));
+        label_102->setText(QApplication::translate("MainWindow", "x10 e-", Q_NULLPTR));
+        label_7->setText(QApplication::translate("MainWindow", "Interpolation Order", Q_NULLPTR));
+        label_76->setText(QApplication::translate("MainWindow", "Model", Q_NULLPTR));
+        label_98->setText(QApplication::translate("MainWindow", "Strength", Q_NULLPTR));
+        groupBox_dft_d->setTitle(QApplication::translate("MainWindow", "DFT-D3", Q_NULLPTR));
+        label_9->setText(QApplication::translate("MainWindow", "S<sub>6</sub>", Q_NULLPTR));
+        label_19->setText(QApplication::translate("MainWindow", "S<sub>r6</sub>", Q_NULLPTR));
+        label_20->setText(QApplication::translate("MainWindow", "S<sub>8</sub>", Q_NULLPTR));
+        dft_d3_3body->setText(QApplication::translate("MainWindow", "3-Body interactions", Q_NULLPTR));
+        label->setText(QApplication::translate("MainWindow", "XDM", Q_NULLPTR));
+        label_dftvdw_method->setText(QApplication::translate("MainWindow", "Method", Q_NULLPTR));
+        label_dftvdw_print->setText(QApplication::translate("MainWindow", "Print", Q_NULLPTR));
+        label_dftvdw_mol1natoms->setText(QApplication::translate("MainWindow", "Atoms", Q_NULLPTR));
+        label_dftvdw_kai->setText(QApplication::translate("MainWindow", "K", Q_NULLPTR));
+        label_dftvdw_alpha1->setText(QApplication::translate("MainWindow", "&alpha;1", Q_NULLPTR));
+        label_dftvdw_alpha2->setText(QApplication::translate("MainWindow", "&alpha;2", Q_NULLPTR));
+        label_6->setText(QApplication::translate("MainWindow", "Grid", Q_NULLPTR));
+        label_4->setText(QApplication::translate("MainWindow", "Functional", Q_NULLPTR));
+        groupBox_3->setTitle(QApplication::translate("MainWindow", "Frozen Core", Q_NULLPTR));
+        qui_frozen_core->setText(QApplication::translate("MainWindow", "Use Frozen Core", Q_NULLPTR));
+        label_93->setText(QApplication::translate("MainWindow", "Core Print", Q_NULLPTR));
+        label_234->setText(QApplication::translate("MainWindow", "Frozen Virtual Orbs", Q_NULLPTR));
+        label_123->setText(QApplication::translate("MainWindow", "Frozen Core Orbs", Q_NULLPTR));
+        label_92->setText(QApplication::translate("MainWindow", "Core Character", Q_NULLPTR));
+        ssg->setText(QApplication::translate("MainWindow", "Compute SSG Wavefunction", Q_NULLPTR));
+        mp2v->setText(QApplication::translate("MainWindow", "MP2[V]", Q_NULLPTR));
+        label_28->setText(QApplication::translate("MainWindow", "MP2 Algorithm", Q_NULLPTR));
+        label_133->setText(QApplication::translate("MainWindow", "Max Iterations", Q_NULLPTR));
+        label_224->setText(QApplication::translate("MainWindow", "Convergence", Q_NULLPTR));
+        label_151->setText(QApplication::translate("MainWindow", "DIIS Method", Q_NULLPTR));
+        label_155->setText(QApplication::translate("MainWindow", "DIIS Start", Q_NULLPTR));
+        label_152->setText(QApplication::translate("MainWindow", "Denominator Thresh", Q_NULLPTR));
+        label_227->setText(QApplication::translate("MainWindow", "Print Level", Q_NULLPTR));
+        label_104->setText(QApplication::translate("MainWindow", "Cholesky Tolerance", Q_NULLPTR));
+        ccman2->setText(QApplication::translate("MainWindow", "CCMAN2", Q_NULLPTR));
+        cc_ref_prop->setText(QApplication::translate("MainWindow", "Reference properties", Q_NULLPTR));
+        cc_ref_prop_te->setText(QApplication::translate("MainWindow", "Two-electron properties", Q_NULLPTR));
+        cc_fullresponse->setText(QApplication::translate("MainWindow", "Include Orbital Relaxation", Q_NULLPTR));
+        direct_ri->setText(QApplication::translate("MainWindow", "Direct RI", Q_NULLPTR));
+        label_226->setText(QApplication::translate("MainWindow", "CC Memory", Q_NULLPTR));
+        label_115->setText(QApplication::translate("MainWindow", "Threads", Q_NULLPTR));
+        cc_symmetry->setText(QApplication::translate("MainWindow", "Symmetry", Q_NULLPTR));
+        groupBox_2->setTitle(QApplication::translate("MainWindow", "CIS", Q_NULLPTR));
+        label_166->setText(QApplication::translate("MainWindow", "Max Cycles", Q_NULLPTR));
+        label_22->setText(QApplication::translate("MainWindow", "Max Subspace", Q_NULLPTR));
+        label_66->setText(QApplication::translate("MainWindow", "Convergence", Q_NULLPTR));
+        label_90->setText(QApplication::translate("MainWindow", "Guess Type", Q_NULLPTR));
+        cis_dynamic_mem->setText(QApplication::translate("MainWindow", "Use Dynamic Memory", Q_NULLPTR));
+        groupBox_10->setTitle(QApplication::translate("MainWindow", "Reduced Active Space", Q_NULLPTR));
+        label_cis_ras_cutoff_virtual->setText(QApplication::translate("MainWindow", "Virtual Cutoff", Q_NULLPTR));
+        label_cis_ras_cutoff_occupied->setText(QApplication::translate("MainWindow", "Occupied Cutoff", Q_NULLPTR));
+        label_cis_ras_type->setText(QApplication::translate("MainWindow", "Subspace", Q_NULLPTR));
+        cis_ras->setText(QApplication::translate("MainWindow", "Use Reduced Active Space", Q_NULLPTR));
+        cis_ras_print->setText(QApplication::translate("MainWindow", "Increase Printout", Q_NULLPTR));
+        roks->setText(QApplication::translate("MainWindow", "Restricted Open-Shell Kohn-Sham", Q_NULLPTR));
+        label_27->setText(QApplication::translate("MainWindow", "Level Shift", Q_NULLPTR));
+        label_188->setText(QApplication::translate("MainWindow", "Correlation", Q_NULLPTR));
+        groupBox_17->setTitle(QApplication::translate("MainWindow", "Guess Options", Q_NULLPTR));
+        label_195->setText(QApplication::translate("MainWindow", "Singles Guess Vectors", Q_NULLPTR));
+        label_196->setText(QApplication::translate("MainWindow", "Doubles Guess Vectors", Q_NULLPTR));
+        groupBox_14->setTitle(QApplication::translate("MainWindow", "Davidson Options", Q_NULLPTR));
+        label_215->setText(QApplication::translate("MainWindow", "Convergence", Q_NULLPTR));
+        label_162->setText(QApplication::translate("MainWindow", "Max Vectors", Q_NULLPTR));
+        label_167->setText(QApplication::translate("MainWindow", "Max iterations", Q_NULLPTR));
+        label_216->setText(QApplication::translate("MainWindow", "Threshold", Q_NULLPTR));
+        adc_guess->setTitle(QApplication::translate("MainWindow", "Guess Options", Q_NULLPTR));
+        label_197->setText(QApplication::translate("MainWindow", "Singles Guess Vectors", Q_NULLPTR));
+        label_204->setText(QApplication::translate("MainWindow", "Doubles Guess Vectors", Q_NULLPTR));
+        adc_davidson->setTitle(QApplication::translate("MainWindow", "Davidson Options", Q_NULLPTR));
+        label_217->setText(QApplication::translate("MainWindow", "Convergence", Q_NULLPTR));
+        label_163->setText(QApplication::translate("MainWindow", "Max. Subspace", Q_NULLPTR));
+        label_168->setText(QApplication::translate("MainWindow", "Max. Iterations", Q_NULLPTR));
+        label_218->setText(QApplication::translate("MainWindow", "Threshold", Q_NULLPTR));
+        adc_diis->setTitle(QApplication::translate("MainWindow", "DIIS Options", Q_NULLPTR));
+        label_42->setText(QApplication::translate("MainWindow", "Res. Convergence", Q_NULLPTR));
+        label_177->setText(QApplication::translate("MainWindow", "Max. Iterations", Q_NULLPTR));
+        label_219->setText(QApplication::translate("MainWindow", "Energy Convergence", Q_NULLPTR));
+        label_164->setText(QApplication::translate("MainWindow", "DIIS Start", Q_NULLPTR));
+        label_52->setText(QApplication::translate("MainWindow", "DIIS Size", Q_NULLPTR));
         label_38->setText(QApplication::translate("MainWindow", "This panel is never displayed, it \n"
 "just forms a container for the \n"
 "various EOM state specification \n"
-"widgets.", nullptr));
-        label_33->setText(QApplication::translate("MainWindow", "First electronic state", nullptr));
-        label_73->setText(QApplication::translate("MainWindow", "Second electronic state", nullptr));
-        xopt_seam_only->setText(QApplication::translate("MainWindow", "Search for Seam Only", nullptr));
-        wavefunction_analysis->setText(QApplication::translate("MainWindow", "Wavefunction Analysis", nullptr));
-        molden_format->setText(QApplication::translate("MainWindow", "Generate MOLDEN Input", nullptr));
-        mm_charges->setText(QApplication::translate("MainWindow", "Multipole Derived Charges", nullptr));
-        hirshfeld->setText(QApplication::translate("MainWindow", "Hirshfeld populations", nullptr));
-        label_176->setText(QApplication::translate("MainWindow", "Multipole Order", nullptr));
-        label_114->setText(QApplication::translate("MainWindow", "Mulliken Populations:", nullptr));
-        label_149->setText(QApplication::translate("MainWindow", "Points", nullptr));
-        label_147->setText(QApplication::translate("MainWindow", "Property", nullptr));
-        label_148->setText(QApplication::translate("MainWindow", "Grid", nullptr));
-        skip_cis_rpa->setText(QApplication::translate("MainWindow", "Skip CIS/RPA Calculation", nullptr));
-        label_172->setText(QApplication::translate("MainWindow", "Second Order", nullptr));
-        label_171->setText(QApplication::translate("MainWindow", "First Order", nullptr));
-        label_170->setText(QApplication::translate("MainWindow", "Convergence:", nullptr));
-        label_173->setText(QApplication::translate("MainWindow", "Threshold", nullptr));
-        label_174->setText(QApplication::translate("MainWindow", "Iterations", nullptr));
-        label_79->setText(QApplication::translate("MainWindow", "Perturbation Batch Size", nullptr));
-        label_175->setText(QApplication::translate("MainWindow", "DIIS Subspace", nullptr));
-        label_44->setText(QApplication::translate("MainWindow", "Hessian Update", nullptr));
-        label_72->setText(QApplication::translate("MainWindow", "Initial Hessian", nullptr));
-        label_14->setText(QApplication::translate("MainWindow", "Coordinates", nullptr));
-        qui_geom_opt_fallback->setText(QApplication::translate("MainWindow", "Use Cartesians on Failure", nullptr));
-        label_70->setText(QApplication::translate("MainWindow", "GDIIS Subspace", nullptr));
-        label_45->setText(QApplication::translate("MainWindow", "Print Level", nullptr));
-        label_17->setText(QApplication::translate("MainWindow", "Max Cycles", nullptr));
-        geom_opt_scf_guess_always->setText(QApplication::translate("MainWindow", "Re-generate SCF Guess at Each Step", nullptr));
-        geom_print->setText(QApplication::translate("MainWindow", "Print Geometry at Each Step", nullptr));
-        geom_opt_iproj->setText(QApplication::translate("MainWindow", "Allow Moleculear Re-orientation", nullptr));
-        geom_opt_symmetry->setText(QApplication::translate("MainWindow", "Use Point Group Symmetry", nullptr));
-        label_11->setText(QApplication::translate("MainWindow", "x10<sup>-8</sup>", nullptr));
-        label_10->setText(QApplication::translate("MainWindow", "Displacement", nullptr));
-        label_113->setText(QApplication::translate("MainWindow", "x10<sup>-6</sup>", nullptr));
-        label_13->setText(QApplication::translate("MainWindow", "Gradient", nullptr));
-        label_15->setText(QApplication::translate("MainWindow", "x10<sup>-6</sup>", nullptr));
-        label_12->setText(QApplication::translate("MainWindow", "Energy", nullptr));
-        label_68->setText(QApplication::translate("MainWindow", "Linear Angle", nullptr));
-        label_71->setText(QApplication::translate("MainWindow", "Max Stepsize", nullptr));
+"widgets.", Q_NULLPTR));
+        label_33->setText(QApplication::translate("MainWindow", "First electronic state", Q_NULLPTR));
+        label_73->setText(QApplication::translate("MainWindow", "Second electronic state", Q_NULLPTR));
+        xopt_seam_only->setText(QApplication::translate("MainWindow", "Search for Seam Only", Q_NULLPTR));
+        wavefunction_analysis->setText(QApplication::translate("MainWindow", "Wavefunction Analysis", Q_NULLPTR));
+        molden_format->setText(QApplication::translate("MainWindow", "Generate MOLDEN Input", Q_NULLPTR));
+        mm_charges->setText(QApplication::translate("MainWindow", "Multipole Derived Charges", Q_NULLPTR));
+        hirshfeld->setText(QApplication::translate("MainWindow", "Hirshfeld populations", Q_NULLPTR));
+        label_176->setText(QApplication::translate("MainWindow", "Multipole Order", Q_NULLPTR));
+        label_114->setText(QApplication::translate("MainWindow", "Mulliken Populations:", Q_NULLPTR));
+        label_149->setText(QApplication::translate("MainWindow", "Points", Q_NULLPTR));
+        label_147->setText(QApplication::translate("MainWindow", "Property", Q_NULLPTR));
+        label_148->setText(QApplication::translate("MainWindow", "Grid", Q_NULLPTR));
+        skip_cis_rpa->setText(QApplication::translate("MainWindow", "Skip CIS/RPA Calculation", Q_NULLPTR));
+        label_172->setText(QApplication::translate("MainWindow", "Second Order", Q_NULLPTR));
+        label_171->setText(QApplication::translate("MainWindow", "First Order", Q_NULLPTR));
+        label_170->setText(QApplication::translate("MainWindow", "Convergence:", Q_NULLPTR));
+        label_173->setText(QApplication::translate("MainWindow", "Threshold", Q_NULLPTR));
+        label_174->setText(QApplication::translate("MainWindow", "Iterations", Q_NULLPTR));
+        label_79->setText(QApplication::translate("MainWindow", "Perturbation Batch Size", Q_NULLPTR));
+        label_175->setText(QApplication::translate("MainWindow", "DIIS Subspace", Q_NULLPTR));
+        label_44->setText(QApplication::translate("MainWindow", "Hessian Update", Q_NULLPTR));
+        label_72->setText(QApplication::translate("MainWindow", "Initial Hessian", Q_NULLPTR));
+        label_14->setText(QApplication::translate("MainWindow", "Coordinates", Q_NULLPTR));
+        qui_geom_opt_fallback->setText(QApplication::translate("MainWindow", "Use Cartesians on Failure", Q_NULLPTR));
+        label_70->setText(QApplication::translate("MainWindow", "GDIIS Subspace", Q_NULLPTR));
+        label_45->setText(QApplication::translate("MainWindow", "Print Level", Q_NULLPTR));
+        label_17->setText(QApplication::translate("MainWindow", "Max Cycles", Q_NULLPTR));
+        geom_opt_scf_guess_always->setText(QApplication::translate("MainWindow", "Re-generate SCF Guess at Each Step", Q_NULLPTR));
+        geom_print->setText(QApplication::translate("MainWindow", "Print Geometry at Each Step", Q_NULLPTR));
+        geom_opt_iproj->setText(QApplication::translate("MainWindow", "Allow Moleculear Re-orientation", Q_NULLPTR));
+        geom_opt_symmetry->setText(QApplication::translate("MainWindow", "Use Point Group Symmetry", Q_NULLPTR));
+        label_11->setText(QApplication::translate("MainWindow", "x10<sup>-8</sup>", Q_NULLPTR));
+        label_10->setText(QApplication::translate("MainWindow", "Displacement", Q_NULLPTR));
+        label_113->setText(QApplication::translate("MainWindow", "x10<sup>-6</sup>", Q_NULLPTR));
+        label_13->setText(QApplication::translate("MainWindow", "Gradient", Q_NULLPTR));
+        label_15->setText(QApplication::translate("MainWindow", "x10<sup>-6</sup>", Q_NULLPTR));
+        label_12->setText(QApplication::translate("MainWindow", "Energy", Q_NULLPTR));
+        label_68->setText(QApplication::translate("MainWindow", "Linear Angle", Q_NULLPTR));
+        label_71->setText(QApplication::translate("MainWindow", "Max Stepsize", Q_NULLPTR));
         geom_opt_max_step_size->setPrefix(QString());
         geom_opt_max_step_size->setSuffix(QString());
-        label_56->setText(QApplication::translate("MainWindow", "Coordinates", nullptr));
-        label_58->setText(QApplication::translate("MainWindow", "Max Stepsize", nullptr));
-        label_60->setText(QApplication::translate("MainWindow", "Convergence", nullptr));
+        label_56->setText(QApplication::translate("MainWindow", "Coordinates", Q_NULLPTR));
+        label_58->setText(QApplication::translate("MainWindow", "Max Stepsize", Q_NULLPTR));
+        label_60->setText(QApplication::translate("MainWindow", "Convergence", Q_NULLPTR));
         rpath_max_stepsize->setSuffix(QString());
         rpath_tol_displacement->setSuffix(QString());
-        label_59->setText(QApplication::translate("MainWindow", "Print Level", nullptr));
-        label_103->setText(QApplication::translate("MainWindow", "Print Multipole Order", nullptr));
-        label_140->setText(QApplication::translate("MainWindow", "Number of Points", nullptr));
-        label_116->setText(QApplication::translate("MainWindow", "Fock Extrapolation Order", nullptr));
-        efp->setText(QApplication::translate("MainWindow", "EFP Calculation", nullptr));
-        efp_fragments_only->setText(QApplication::translate("MainWindow", "EFP Only Calculation (No QM)", nullptr));
-        efp_input->setText(QApplication::translate("MainWindow", "Use new EFP input format", nullptr));
-        label_110->setText(QApplication::translate("MainWindow", "Iterations", nullptr));
-        label_109->setText(QApplication::translate("MainWindow", "Threshold", nullptr));
-        label_111->setText(QApplication::translate("MainWindow", "Convergence:", nullptr));
-        label_112->setText(QApplication::translate("MainWindow", "DIIS Subspace", nullptr));
-        label_107->setText(QApplication::translate("MainWindow", "Level 1", nullptr));
-        label_108->setText(QApplication::translate("MainWindow", "Level 2", nullptr));
-        dcpscf_perturbations->setText(QApplication::translate("MainWindow", "Compute Perturbations Singly", nullptr));
-        label_150->setText(QApplication::translate("MainWindow", "Analytic Derivative Order", nullptr));
-        label_88->setText(QApplication::translate("MainWindow", "Finite Difference Stepsize", nullptr));
-        label_74->setText(QApplication::translate("MainWindow", "CPSCF Segments", nullptr));
-        label_vp->setText(QApplication::translate("MainWindow", "Print Level", nullptr));
-        label_95->setText(QApplication::translate("MainWindow", "Derivative Information:", nullptr));
-        readChargesButton->setText(QApplication::translate("MainWindow", "Read Charges", nullptr));
-        gaussian_blur->setText(QApplication::translate("MainWindow", "Use Gaussian-Blurred Charges", nullptr));
-        qmmm->setText(QApplication::translate("MainWindow", "Use QChem/CHARMM Interface", nullptr));
-        qmmm_charges->setText(QApplication::translate("MainWindow", "Print Charges", nullptr));
-        link_atom_projection->setText(QApplication::translate("MainWindow", "Perform Link-Atom Projection", nullptr));
-        qmmm_full_hessian->setText(QApplication::translate("MainWindow", "Compute Full QM/MM Hessian", nullptr));
-        label_64->setText(QApplication::translate("MainWindow", "Solvent Method", nullptr));
-        solventGroupBox->setTitle(QApplication::translate("MainWindow", "Solvent", nullptr));
-        label_b160_3->setText(QApplication::translate("MainWindow", "Dielectric", nullptr));
-        label_a160->setText(QApplication::translate("MainWindow", "Cavity Radius", nullptr));
-        label_97->setText(QApplication::translate("MainWindow", "Optical Dielectric", nullptr));
-        groupBox_4->setTitle(QApplication::translate("MainWindow", "Options", nullptr));
-        label_37->setText(QApplication::translate("MainWindow", "Multipole Order", nullptr));
-        label_75->setText(QApplication::translate("MainWindow", "Print Level", nullptr));
-        label_80->setText(QApplication::translate("MainWindow", "Model", nullptr));
-        label_81->setText(QApplication::translate("MainWindow", "Boundary", nullptr));
-        label_96->setText(QApplication::translate("MainWindow", "Radii", nullptr));
-        label_f161->setText(QApplication::translate("MainWindow", "Memory", nullptr));
-        label_d161->setText(QApplication::translate("MainWindow", "Cavity Convergence", nullptr));
-        label_e161->setText(QApplication::translate("MainWindow", "Charge Convergence", nullptr));
-        label_c161->setText(QApplication::translate("MainWindow", "Guess", nullptr));
-        qui_svp_path->setText(QApplication::translate("MainWindow", "Run gas phase", nullptr));
-        label_162b->setText(QApplication::translate("MainWindow", "Electric Field", nullptr));
-        label_162a->setText(QApplication::translate("MainWindow", "Number of Grids", nullptr));
-        qui_chemsol_print->setText(QApplication::translate("MainWindow", "Increase Printout", nullptr));
-        label_65->setText(QApplication::translate("MainWindow", "Solvent", nullptr));
-        label_54->setText(QApplication::translate("MainWindow", "Charges", nullptr));
-        groupBox->setTitle(QApplication::translate("MainWindow", "Integration Grid", nullptr));
-        label_128->setText(QApplication::translate("MainWindow", "Lebedev Grid", nullptr));
-        qui_svp_intcav->setText(QApplication::translate("MainWindow", "Use Sperical Polar Grid", nullptr));
-        label_129->setText(QApplication::translate("MainWindow", "Points: \316\270", nullptr));
-        label_130->setText(QApplication::translate("MainWindow", "\317\206", nullptr));
-        groupBox_6->setTitle(QApplication::translate("MainWindow", "Grid Transformation", nullptr));
-        label_131->setText(QApplication::translate("MainWindow", "Translation", nullptr));
-        label_134->setText(QApplication::translate("MainWindow", "\316\264X", nullptr));
-        label_135->setText(QApplication::translate("MainWindow", "\316\264Y", nullptr));
-        label_136->setText(QApplication::translate("MainWindow", "\316\264Z", nullptr));
-        label_132->setText(QApplication::translate("MainWindow", "Rotation", nullptr));
-        label_137->setText(QApplication::translate("MainWindow", "\316\270", nullptr));
-        label_138->setText(QApplication::translate("MainWindow", "\317\206", nullptr));
-        label_139->setText(QApplication::translate("MainWindow", "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style=\" white-space: pre-wrap; font-family:Lucida Grande; font-size:13pt; font-weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:italic;\">\317\207</span></p></body></html>", nullptr));
-        symmetry_ignore->setText(QApplication::translate("MainWindow", "Ignore Point Group Symmetry", nullptr));
-        symmetry_integral->setText(QApplication::translate("MainWindow", "Use Integral Symmetry", nullptr));
-        label_62->setText(QApplication::translate("MainWindow", "Symmetry Tolerance", nullptr));
-        label_63->setText(QApplication::translate("MainWindow", "Symmetry Decompositions:", nullptr));
-        label_26->setText(QApplication::translate("MainWindow", "AO2MO Disk", nullptr));
-        label_24->setText(QApplication::translate("MainWindow", "Total Memory", nullptr));
-        label_25->setText(QApplication::translate("MainWindow", "Static Memory", nullptr));
-        mem_static->setSuffix(QApplication::translate("MainWindow", " Mb", nullptr));
-        ao2mo_disk->setSuffix(QApplication::translate("MainWindow", " Mb", nullptr));
-        label_31->setText(QApplication::translate("MainWindow", "Max File Number", nullptr));
-        label_23->setText(QApplication::translate("MainWindow", "Integrals Buffer", nullptr));
-        integrals_buffer->setSuffix(QApplication::translate("MainWindow", " Mb", nullptr));
-        mem_total->setSuffix(QApplication::translate("MainWindow", " Mb", nullptr));
+        label_59->setText(QApplication::translate("MainWindow", "Print Level", Q_NULLPTR));
+        label_103->setText(QApplication::translate("MainWindow", "Print Multipole Order", Q_NULLPTR));
+        label_140->setText(QApplication::translate("MainWindow", "Number of Points", Q_NULLPTR));
+        label_116->setText(QApplication::translate("MainWindow", "Fock Extrapolation Order", Q_NULLPTR));
+        efp->setText(QApplication::translate("MainWindow", "EFP Calculation", Q_NULLPTR));
+        efp_fragments_only->setText(QApplication::translate("MainWindow", "EFP Only Calculation (No QM)", Q_NULLPTR));
+        efp_input->setText(QApplication::translate("MainWindow", "Use new EFP input format", Q_NULLPTR));
+        label_110->setText(QApplication::translate("MainWindow", "Iterations", Q_NULLPTR));
+        label_109->setText(QApplication::translate("MainWindow", "Threshold", Q_NULLPTR));
+        label_111->setText(QApplication::translate("MainWindow", "Convergence:", Q_NULLPTR));
+        label_112->setText(QApplication::translate("MainWindow", "DIIS Subspace", Q_NULLPTR));
+        label_107->setText(QApplication::translate("MainWindow", "Level 1", Q_NULLPTR));
+        label_108->setText(QApplication::translate("MainWindow", "Level 2", Q_NULLPTR));
+        dcpscf_perturbations->setText(QApplication::translate("MainWindow", "Compute Perturbations Singly", Q_NULLPTR));
+        label_150->setText(QApplication::translate("MainWindow", "Analytic Derivative Order", Q_NULLPTR));
+        label_88->setText(QApplication::translate("MainWindow", "Finite Difference Stepsize", Q_NULLPTR));
+        label_74->setText(QApplication::translate("MainWindow", "CPSCF Segments", Q_NULLPTR));
+        label_vp->setText(QApplication::translate("MainWindow", "Print Level", Q_NULLPTR));
+        label_95->setText(QApplication::translate("MainWindow", "Derivative Information:", Q_NULLPTR));
+        readChargesButton->setText(QApplication::translate("MainWindow", "Read Charges", Q_NULLPTR));
+        gaussian_blur->setText(QApplication::translate("MainWindow", "Use Gaussian-Blurred Charges", Q_NULLPTR));
+        qmmm->setText(QApplication::translate("MainWindow", "Use QChem/CHARMM Interface", Q_NULLPTR));
+        qmmm_charges->setText(QApplication::translate("MainWindow", "Print Charges", Q_NULLPTR));
+        link_atom_projection->setText(QApplication::translate("MainWindow", "Perform Link-Atom Projection", Q_NULLPTR));
+        qmmm_full_hessian->setText(QApplication::translate("MainWindow", "Compute Full QM/MM Hessian", Q_NULLPTR));
+        label_64->setText(QApplication::translate("MainWindow", "Solvent Method", Q_NULLPTR));
+        solventGroupBox->setTitle(QApplication::translate("MainWindow", "Solvent", Q_NULLPTR));
+        label_b160_3->setText(QApplication::translate("MainWindow", "Dielectric", Q_NULLPTR));
+        label_a160->setText(QApplication::translate("MainWindow", "Cavity Radius", Q_NULLPTR));
+        label_97->setText(QApplication::translate("MainWindow", "Optical Dielectric", Q_NULLPTR));
+        groupBox_4->setTitle(QApplication::translate("MainWindow", "Options", Q_NULLPTR));
+        label_37->setText(QApplication::translate("MainWindow", "Multipole Order", Q_NULLPTR));
+        label_75->setText(QApplication::translate("MainWindow", "Print Level", Q_NULLPTR));
+        label_80->setText(QApplication::translate("MainWindow", "Model", Q_NULLPTR));
+        label_81->setText(QApplication::translate("MainWindow", "Boundary", Q_NULLPTR));
+        label_96->setText(QApplication::translate("MainWindow", "Radii", Q_NULLPTR));
+        label_f161->setText(QApplication::translate("MainWindow", "Memory", Q_NULLPTR));
+        label_d161->setText(QApplication::translate("MainWindow", "Cavity Convergence", Q_NULLPTR));
+        label_e161->setText(QApplication::translate("MainWindow", "Charge Convergence", Q_NULLPTR));
+        label_c161->setText(QApplication::translate("MainWindow", "Guess", Q_NULLPTR));
+        qui_svp_path->setText(QApplication::translate("MainWindow", "Run gas phase", Q_NULLPTR));
+        label_162b->setText(QApplication::translate("MainWindow", "Electric Field", Q_NULLPTR));
+        label_162a->setText(QApplication::translate("MainWindow", "Number of Grids", Q_NULLPTR));
+        qui_chemsol_print->setText(QApplication::translate("MainWindow", "Increase Printout", Q_NULLPTR));
+        label_65->setText(QApplication::translate("MainWindow", "Solvent", Q_NULLPTR));
+        label_54->setText(QApplication::translate("MainWindow", "Charges", Q_NULLPTR));
+        groupBox->setTitle(QApplication::translate("MainWindow", "Integration Grid", Q_NULLPTR));
+        label_128->setText(QApplication::translate("MainWindow", "Lebedev Grid", Q_NULLPTR));
+        qui_svp_intcav->setText(QApplication::translate("MainWindow", "Use Sperical Polar Grid", Q_NULLPTR));
+        label_129->setText(QApplication::translate("MainWindow", "Points: \316\270", Q_NULLPTR));
+        label_130->setText(QApplication::translate("MainWindow", "\317\206", Q_NULLPTR));
+        groupBox_6->setTitle(QApplication::translate("MainWindow", "Grid Transformation", Q_NULLPTR));
+        label_131->setText(QApplication::translate("MainWindow", "Translation", Q_NULLPTR));
+        label_134->setText(QApplication::translate("MainWindow", "\316\264X", Q_NULLPTR));
+        label_135->setText(QApplication::translate("MainWindow", "\316\264Y", Q_NULLPTR));
+        label_136->setText(QApplication::translate("MainWindow", "\316\264Z", Q_NULLPTR));
+        label_132->setText(QApplication::translate("MainWindow", "Rotation", Q_NULLPTR));
+        label_137->setText(QApplication::translate("MainWindow", "\316\270", Q_NULLPTR));
+        label_138->setText(QApplication::translate("MainWindow", "\317\206", Q_NULLPTR));
+        label_139->setText(QApplication::translate("MainWindow", "<html><head><meta name=\"qrichtext\" content=\"1\" /></head><body style=\" white-space: pre-wrap; font-family:Lucida Grande; font-size:13pt; font-weight:400; font-style:normal; text-decoration:none;\"><p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:italic;\">\317\207</span></p></body></html>", Q_NULLPTR));
+        symmetry_ignore->setText(QApplication::translate("MainWindow", "Ignore Point Group Symmetry", Q_NULLPTR));
+        symmetry_integral->setText(QApplication::translate("MainWindow", "Use Integral Symmetry", Q_NULLPTR));
+        label_62->setText(QApplication::translate("MainWindow", "Symmetry Tolerance", Q_NULLPTR));
+        label_63->setText(QApplication::translate("MainWindow", "Symmetry Decompositions:", Q_NULLPTR));
+        label_26->setText(QApplication::translate("MainWindow", "AO2MO Disk", Q_NULLPTR));
+        label_24->setText(QApplication::translate("MainWindow", "Total Memory", Q_NULLPTR));
+        label_25->setText(QApplication::translate("MainWindow", "Static Memory", Q_NULLPTR));
+        mem_static->setSuffix(QApplication::translate("MainWindow", " Mb", Q_NULLPTR));
+        ao2mo_disk->setSuffix(QApplication::translate("MainWindow", " Mb", Q_NULLPTR));
+        label_31->setText(QApplication::translate("MainWindow", "Max File Number", Q_NULLPTR));
+        label_23->setText(QApplication::translate("MainWindow", "Integrals Buffer", Q_NULLPTR));
+        integrals_buffer->setSuffix(QApplication::translate("MainWindow", " Mb", Q_NULLPTR));
+        mem_total->setSuffix(QApplication::translate("MainWindow", " Mb", Q_NULLPTR));
         label_16->setText(QApplication::translate("MainWindow", "This page is inaccessible to the user\n"
 "and is included as a container for \n"
 "controls that are set by other rems.\n"
-"Eventually this should go.", nullptr));
-        cis_guess_disk->setText(QApplication::translate("MainWindow", "CIS_GUESS_DISK", nullptr));
-        setupTabWidget->setTabText(setupTabWidget->indexOf(AdvancedTab), QApplication::translate("MainWindow", "Advanced", nullptr));
-        previewOutput->setTitle(QApplication::translate("MainWindow", "Generated Input File:", nullptr));
-        label_5->setText(QApplication::translate("MainWindow", "Server", nullptr));
-        resetButton->setText(QApplication::translate("MainWindow", "Reset", nullptr));
-        cancelButton->setText(QApplication::translate("MainWindow", "Cancel", nullptr));
-        submitButton->setText(QApplication::translate("MainWindow", "Submit", nullptr));
-        menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
+"Eventually this should go.", Q_NULLPTR));
+        cis_guess_disk->setText(QApplication::translate("MainWindow", "CIS_GUESS_DISK", Q_NULLPTR));
+        setupTabWidget->setTabText(setupTabWidget->indexOf(AdvancedTab), QApplication::translate("MainWindow", "Advanced", Q_NULLPTR));
+        previewOutput->setTitle(QApplication::translate("MainWindow", "Generated Input File:", Q_NULLPTR));
+        label_5->setText(QApplication::translate("MainWindow", "Server", Q_NULLPTR));
+        resetButton->setText(QApplication::translate("MainWindow", "Reset", Q_NULLPTR));
+        cancelButton->setText(QApplication::translate("MainWindow", "Cancel", Q_NULLPTR));
+        submitButton->setText(QApplication::translate("MainWindow", "Submit", Q_NULLPTR));
+        menuFile->setTitle(QApplication::translate("MainWindow", "File", Q_NULLPTR));
     } // retranslateUi
 
 };

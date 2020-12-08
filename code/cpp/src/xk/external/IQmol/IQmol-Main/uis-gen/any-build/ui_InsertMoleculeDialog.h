@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'InsertMoleculeDialog.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,10 +10,13 @@
 #define UI_INSERTMOLECULEDIALOG_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QRadioButton>
@@ -39,19 +42,19 @@ public:
     void setupUi(QDialog *InsertMoleculeDialog)
     {
         if (InsertMoleculeDialog->objectName().isEmpty())
-            InsertMoleculeDialog->setObjectName(QString::fromUtf8("InsertMoleculeDialog"));
+            InsertMoleculeDialog->setObjectName(QStringLiteral("InsertMoleculeDialog"));
         InsertMoleculeDialog->resize(431, 146);
         verticalLayout = new QVBoxLayout(InsertMoleculeDialog);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         label = new QLabel(InsertMoleculeDialog);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         horizontalLayout->addWidget(label);
 
         identifier = new QLineEdit(InsertMoleculeDialog);
-        identifier->setObjectName(QString::fromUtf8("identifier"));
+        identifier->setObjectName(QStringLiteral("identifier"));
 
         horizontalLayout->addWidget(identifier);
 
@@ -59,15 +62,15 @@ public:
         verticalLayout->addLayout(horizontalLayout);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         smiles = new QRadioButton(InsertMoleculeDialog);
-        smiles->setObjectName(QString::fromUtf8("smiles"));
+        smiles->setObjectName(QStringLiteral("smiles"));
         smiles->setChecked(true);
 
         horizontalLayout_2->addWidget(smiles);
 
         inchi = new QRadioButton(InsertMoleculeDialog);
-        inchi->setObjectName(QString::fromUtf8("inchi"));
+        inchi->setObjectName(QStringLiteral("inchi"));
 
         horizontalLayout_2->addWidget(inchi);
 
@@ -79,7 +82,7 @@ public:
         verticalLayout->addLayout(horizontalLayout_2);
 
         label_2 = new QLabel(InsertMoleculeDialog);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
         QFont font;
         font.setPointSize(11);
         label_2->setFont(font);
@@ -87,7 +90,7 @@ public:
         verticalLayout->addWidget(label_2);
 
         buttonBox = new QDialogButtonBox(InsertMoleculeDialog);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setObjectName(QStringLiteral("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
@@ -103,11 +106,11 @@ public:
 
     void retranslateUi(QDialog *InsertMoleculeDialog)
     {
-        InsertMoleculeDialog->setWindowTitle(QApplication::translate("InsertMoleculeDialog", "Insert Molecule", nullptr));
-        label->setText(QApplication::translate("InsertMoleculeDialog", "Identifier:", nullptr));
-        smiles->setText(QApplication::translate("InsertMoleculeDialog", "SMILES", nullptr));
-        inchi->setText(QApplication::translate("InsertMoleculeDialog", "InChi", nullptr));
-        label_2->setText(QApplication::translate("InsertMoleculeDialog", "Note: Some structures may not be built correctly.", nullptr));
+        InsertMoleculeDialog->setWindowTitle(QApplication::translate("InsertMoleculeDialog", "Insert Molecule", Q_NULLPTR));
+        label->setText(QApplication::translate("InsertMoleculeDialog", "Identifier:", Q_NULLPTR));
+        smiles->setText(QApplication::translate("InsertMoleculeDialog", "SMILES", Q_NULLPTR));
+        inchi->setText(QApplication::translate("InsertMoleculeDialog", "InChi", Q_NULLPTR));
+        label_2->setText(QApplication::translate("InsertMoleculeDialog", "Note: Some structures may not be built correctly.", Q_NULLPTR));
     } // retranslateUi
 
 };

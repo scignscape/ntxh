@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'GetVaultKeyDialog.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,9 +10,12 @@
 #define UI_GETVAULTKEYDIALOG_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QVBoxLayout>
@@ -30,23 +33,23 @@ public:
     void setupUi(QDialog *GetVaultKeyDialog)
     {
         if (GetVaultKeyDialog->objectName().isEmpty())
-            GetVaultKeyDialog->setObjectName(QString::fromUtf8("GetVaultKeyDialog"));
+            GetVaultKeyDialog->setObjectName(QStringLiteral("GetVaultKeyDialog"));
         GetVaultKeyDialog->resize(226, 123);
         verticalLayout = new QVBoxLayout(GetVaultKeyDialog);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         infoLabel = new QLabel(GetVaultKeyDialog);
-        infoLabel->setObjectName(QString::fromUtf8("infoLabel"));
+        infoLabel->setObjectName(QStringLiteral("infoLabel"));
 
         verticalLayout->addWidget(infoLabel);
 
         password = new QLineEdit(GetVaultKeyDialog);
-        password->setObjectName(QString::fromUtf8("password"));
+        password->setObjectName(QStringLiteral("password"));
         password->setEchoMode(QLineEdit::Password);
 
         verticalLayout->addWidget(password);
 
         buttonBox = new QDialogButtonBox(GetVaultKeyDialog);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setObjectName(QStringLiteral("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
@@ -61,8 +64,8 @@ public:
 
     void retranslateUi(QDialog *GetVaultKeyDialog)
     {
-        GetVaultKeyDialog->setWindowTitle(QApplication::translate("GetVaultKeyDialog", "Enter Key", nullptr));
-        infoLabel->setText(QApplication::translate("GetVaultKeyDialog", "Enter Password Vault key:", nullptr));
+        GetVaultKeyDialog->setWindowTitle(QApplication::translate("GetVaultKeyDialog", "Enter Key", Q_NULLPTR));
+        infoLabel->setText(QApplication::translate("GetVaultKeyDialog", "Enter Password Vault key:", Q_NULLPTR));
     } // retranslateUi
 
 };

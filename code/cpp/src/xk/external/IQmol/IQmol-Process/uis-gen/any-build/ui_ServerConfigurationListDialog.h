@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ServerConfigurationListDialog.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,8 +10,9 @@
 #define UI_SERVERCONFIGURATIONLISTDIALOG_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QIcon>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -43,9 +44,9 @@ public:
     void setupUi(QDialog *ServerConfigurationListDialog)
     {
         if (ServerConfigurationListDialog->objectName().isEmpty())
-            ServerConfigurationListDialog->setObjectName(QString::fromUtf8("ServerConfigurationListDialog"));
+            ServerConfigurationListDialog->setObjectName(QStringLiteral("ServerConfigurationListDialog"));
         ServerConfigurationListDialog->resize(583, 304);
-        ServerConfigurationListDialog->setStyleSheet(QString::fromUtf8("QToolButton {\n"
+        ServerConfigurationListDialog->setStyleSheet(QLatin1String("QToolButton {\n"
 "   color: #333;\n"
 "   background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, \n"
 "          stop: 0 #fff,\n"
@@ -99,9 +100,9 @@ public:
 "    background-color: #EEE;\n"
 "}"));
         verticalLayout_2 = new QVBoxLayout(ServerConfigurationListDialog);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         serverListTable = new QTableWidget(ServerConfigurationListDialog);
         if (serverListTable->columnCount() < 4)
             serverListTable->setColumnCount(4);
@@ -113,7 +114,7 @@ public:
         serverListTable->setHorizontalHeaderItem(2, __qtablewidgetitem2);
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
         serverListTable->setHorizontalHeaderItem(3, __qtablewidgetitem3);
-        serverListTable->setObjectName(QString::fromUtf8("serverListTable"));
+        serverListTable->setObjectName(QStringLiteral("serverListTable"));
         serverListTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
         serverListTable->setSelectionMode(QAbstractItemView::SingleSelection);
         serverListTable->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -124,47 +125,47 @@ public:
         horizontalLayout_2->addWidget(serverListTable);
 
         verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         addServerButton = new QToolButton(ServerConfigurationListDialog);
-        addServerButton->setObjectName(QString::fromUtf8("addServerButton"));
+        addServerButton->setObjectName(QStringLiteral("addServerButton"));
         QIcon icon;
-        icon.addFile(QString::fromUtf8(":/resources/icons/Add.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/resources/icons/Add.png"), QSize(), QIcon::Normal, QIcon::Off);
         addServerButton->setIcon(icon);
         addServerButton->setIconSize(QSize(24, 24));
 
         verticalLayout->addWidget(addServerButton);
 
         configureServerButton = new QToolButton(ServerConfigurationListDialog);
-        configureServerButton->setObjectName(QString::fromUtf8("configureServerButton"));
+        configureServerButton->setObjectName(QStringLiteral("configureServerButton"));
         QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/resources/icons/Configure.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QStringLiteral(":/resources/icons/Configure.png"), QSize(), QIcon::Normal, QIcon::Off);
         configureServerButton->setIcon(icon1);
         configureServerButton->setIconSize(QSize(24, 24));
 
         verticalLayout->addWidget(configureServerButton);
 
         removeServerButton = new QToolButton(ServerConfigurationListDialog);
-        removeServerButton->setObjectName(QString::fromUtf8("removeServerButton"));
+        removeServerButton->setObjectName(QStringLiteral("removeServerButton"));
         QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/resources/icons/Remove.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon2.addFile(QStringLiteral(":/resources/icons/Remove.png"), QSize(), QIcon::Normal, QIcon::Off);
         removeServerButton->setIcon(icon2);
         removeServerButton->setIconSize(QSize(24, 24));
 
         verticalLayout->addWidget(removeServerButton);
 
         upButton = new QToolButton(ServerConfigurationListDialog);
-        upButton->setObjectName(QString::fromUtf8("upButton"));
+        upButton->setObjectName(QStringLiteral("upButton"));
         QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/resources/icons/Up.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon3.addFile(QStringLiteral(":/resources/icons/Up.png"), QSize(), QIcon::Normal, QIcon::Off);
         upButton->setIcon(icon3);
         upButton->setIconSize(QSize(24, 24));
 
         verticalLayout->addWidget(upButton);
 
         downButton = new QToolButton(ServerConfigurationListDialog);
-        downButton->setObjectName(QString::fromUtf8("downButton"));
+        downButton->setObjectName(QStringLiteral("downButton"));
         QIcon icon4;
-        icon4.addFile(QString::fromUtf8(":/resources/icons/Down.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon4.addFile(QStringLiteral(":/resources/icons/Down.png"), QSize(), QIcon::Normal, QIcon::Off);
         downButton->setIcon(icon4);
         downButton->setIconSize(QSize(24, 24));
 
@@ -181,13 +182,13 @@ public:
         verticalLayout_2->addLayout(horizontalLayout_2);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
 
         closeButton = new QPushButton(ServerConfigurationListDialog);
-        closeButton->setObjectName(QString::fromUtf8("closeButton"));
+        closeButton->setObjectName(QStringLiteral("closeButton"));
 
         horizontalLayout->addWidget(closeButton);
 
@@ -203,36 +204,36 @@ public:
 
     void retranslateUi(QDialog *ServerConfigurationListDialog)
     {
-        ServerConfigurationListDialog->setWindowTitle(QApplication::translate("ServerConfigurationListDialog", "Server List", nullptr));
+        ServerConfigurationListDialog->setWindowTitle(QApplication::translate("ServerConfigurationListDialog", "Server List", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem = serverListTable->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("ServerConfigurationListDialog", "Name", nullptr));
+        ___qtablewidgetitem->setText(QApplication::translate("ServerConfigurationListDialog", "Name", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem1 = serverListTable->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("ServerConfigurationListDialog", "Address", nullptr));
+        ___qtablewidgetitem1->setText(QApplication::translate("ServerConfigurationListDialog", "Address", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem2 = serverListTable->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("ServerConfigurationListDialog", "Type", nullptr));
+        ___qtablewidgetitem2->setText(QApplication::translate("ServerConfigurationListDialog", "Type", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem3 = serverListTable->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("ServerConfigurationListDialog", "User", nullptr));
+        ___qtablewidgetitem3->setText(QApplication::translate("ServerConfigurationListDialog", "User", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        addServerButton->setToolTip(QApplication::translate("ServerConfigurationListDialog", "Add new server", nullptr));
+        addServerButton->setToolTip(QApplication::translate("ServerConfigurationListDialog", "Add new server", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        addServerButton->setText(QApplication::translate("ServerConfigurationListDialog", "...", nullptr));
+        addServerButton->setText(QApplication::translate("ServerConfigurationListDialog", "...", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        configureServerButton->setToolTip(QApplication::translate("ServerConfigurationListDialog", "Configure selected server", nullptr));
+        configureServerButton->setToolTip(QApplication::translate("ServerConfigurationListDialog", "Configure selected server", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        configureServerButton->setText(QApplication::translate("ServerConfigurationListDialog", "...", nullptr));
+        configureServerButton->setText(QApplication::translate("ServerConfigurationListDialog", "...", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        removeServerButton->setToolTip(QApplication::translate("ServerConfigurationListDialog", "Remove slected server", nullptr));
+        removeServerButton->setToolTip(QApplication::translate("ServerConfigurationListDialog", "Remove slected server", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        removeServerButton->setText(QApplication::translate("ServerConfigurationListDialog", "...", nullptr));
+        removeServerButton->setText(QApplication::translate("ServerConfigurationListDialog", "...", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        upButton->setToolTip(QApplication::translate("ServerConfigurationListDialog", "Move server up", nullptr));
+        upButton->setToolTip(QApplication::translate("ServerConfigurationListDialog", "Move server up", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        upButton->setText(QApplication::translate("ServerConfigurationListDialog", "...", nullptr));
+        upButton->setText(QApplication::translate("ServerConfigurationListDialog", "...", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        downButton->setToolTip(QApplication::translate("ServerConfigurationListDialog", "Move server down", nullptr));
+        downButton->setToolTip(QApplication::translate("ServerConfigurationListDialog", "Move server down", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        downButton->setText(QApplication::translate("ServerConfigurationListDialog", "...", nullptr));
-        closeButton->setText(QApplication::translate("ServerConfigurationListDialog", "Close", nullptr));
+        downButton->setText(QApplication::translate("ServerConfigurationListDialog", "...", Q_NULLPTR));
+        closeButton->setText(QApplication::translate("ServerConfigurationListDialog", "Close", Q_NULLPTR));
     } // retranslateUi
 
 };

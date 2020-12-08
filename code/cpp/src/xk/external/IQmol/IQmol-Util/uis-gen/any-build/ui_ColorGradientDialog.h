@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ColorGradientDialog.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,13 +10,16 @@
 #define UI_COLORGRADIENTDIALOG_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSpinBox>
@@ -48,14 +51,14 @@ public:
     void setupUi(QDialog *ColorGradientDialog)
     {
         if (ColorGradientDialog->objectName().isEmpty())
-            ColorGradientDialog->setObjectName(QString::fromUtf8("ColorGradientDialog"));
+            ColorGradientDialog->setObjectName(QStringLiteral("ColorGradientDialog"));
         ColorGradientDialog->resize(354, 208);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(ColorGradientDialog->sizePolicy().hasHeightForWidth());
         ColorGradientDialog->setSizePolicy(sizePolicy);
-        ColorGradientDialog->setStyleSheet(QString::fromUtf8("QToolButton {\n"
+        ColorGradientDialog->setStyleSheet(QLatin1String("QToolButton {\n"
 "   color: #333;\n"
 "   border-width: 1px;\n"
 "   border-color: #333;\n"
@@ -81,22 +84,22 @@ public:
 "   max-height: 35px;\n"
 "}"));
         verticalLayout = new QVBoxLayout(ColorGradientDialog);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         frame = new QFrame(ColorGradientDialog);
-        frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setObjectName(QStringLiteral("frame"));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Sunken);
         verticalLayout_2 = new QVBoxLayout(frame);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         gradientView = new QGraphicsView(frame);
-        gradientView->setObjectName(QString::fromUtf8("gradientView"));
+        gradientView->setObjectName(QStringLiteral("gradientView"));
 
         verticalLayout_2->addWidget(gradientView);
 
         buttonLayout = new QHBoxLayout();
-        buttonLayout->setObjectName(QString::fromUtf8("buttonLayout"));
+        buttonLayout->setObjectName(QStringLiteral("buttonLayout"));
         color31 = new QToolButton(frame);
-        color31->setObjectName(QString::fromUtf8("color31"));
+        color31->setObjectName(QStringLiteral("color31"));
 
         buttonLayout->addWidget(color31);
 
@@ -105,7 +108,7 @@ public:
         buttonLayout->addItem(horizontalSpacer);
 
         color32 = new QToolButton(frame);
-        color32->setObjectName(QString::fromUtf8("color32"));
+        color32->setObjectName(QStringLiteral("color32"));
 
         buttonLayout->addWidget(color32);
 
@@ -114,7 +117,7 @@ public:
         buttonLayout->addItem(horizontalSpacer_2);
 
         color33 = new QToolButton(frame);
-        color33->setObjectName(QString::fromUtf8("color33"));
+        color33->setObjectName(QStringLiteral("color33"));
 
         buttonLayout->addWidget(color33);
 
@@ -125,12 +128,9 @@ public:
         verticalLayout->addWidget(frame);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         gradientCombo = new QComboBox(ColorGradientDialog);
-        gradientCombo->addItem(QString());
-        gradientCombo->addItem(QString());
-        gradientCombo->addItem(QString());
-        gradientCombo->setObjectName(QString::fromUtf8("gradientCombo"));
+        gradientCombo->setObjectName(QStringLiteral("gradientCombo"));
 
         horizontalLayout_2->addWidget(gradientCombo);
 
@@ -139,13 +139,13 @@ public:
         horizontalLayout_2->addItem(horizontalSpacer_7);
 
         stopsLabel = new QLabel(ColorGradientDialog);
-        stopsLabel->setObjectName(QString::fromUtf8("stopsLabel"));
+        stopsLabel->setObjectName(QStringLiteral("stopsLabel"));
         stopsLabel->setEnabled(true);
 
         horizontalLayout_2->addWidget(stopsLabel);
 
         stopsSpin = new QSpinBox(ColorGradientDialog);
-        stopsSpin->setObjectName(QString::fromUtf8("stopsSpin"));
+        stopsSpin->setObjectName(QStringLiteral("stopsSpin"));
         stopsSpin->setEnabled(true);
         stopsSpin->setKeyboardTracking(false);
         stopsSpin->setMinimum(1);
@@ -159,7 +159,7 @@ public:
         verticalLayout->addLayout(horizontalLayout_2);
 
         buttonBox = new QDialogButtonBox(ColorGradientDialog);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setObjectName(QStringLiteral("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
@@ -178,30 +178,32 @@ public:
 
     void retranslateUi(QDialog *ColorGradientDialog)
     {
-        ColorGradientDialog->setWindowTitle(QApplication::translate("ColorGradientDialog", "Color Gradient Editor", nullptr));
+        ColorGradientDialog->setWindowTitle(QApplication::translate("ColorGradientDialog", "Color Gradient Editor", Q_NULLPTR));
         gradientView->setStyleSheet(QApplication::translate("ColorGradientDialog", "QGraphicsView {\n"
 "   background-color: QLinearGradient( x1: 0, y1: 1, x2: 1, y2: 1, \n"
 "          stop: 0 #f00,\n"
 "          stop: 0.5 #fff, \n"
 "          stop: 1 #00f);\n"
-"}", nullptr));
+"}", Q_NULLPTR));
         color31->setStyleSheet(QApplication::translate("ColorGradientDialog", "QToolButton {\n"
 "   background-color: #f00;\n"
-"}", nullptr));
+"}", Q_NULLPTR));
         color31->setText(QString());
         color32->setStyleSheet(QApplication::translate("ColorGradientDialog", "QToolButton {\n"
 "   background-color: #fff;\n"
-"}", nullptr));
+"}", Q_NULLPTR));
         color32->setText(QString());
         color33->setStyleSheet(QApplication::translate("ColorGradientDialog", "QToolButton {\n"
 "   background-color: #00f;\n"
-"}", nullptr));
+"}", Q_NULLPTR));
         color33->setText(QString());
-        gradientCombo->setItemText(0, QApplication::translate("ColorGradientDialog", "Default", nullptr));
-        gradientCombo->setItemText(1, QApplication::translate("ColorGradientDialog", "Spectrum", nullptr));
-        gradientCombo->setItemText(2, QApplication::translate("ColorGradientDialog", "Custom", nullptr));
-
-        stopsLabel->setText(QApplication::translate("ColorGradientDialog", "Stops", nullptr));
+        gradientCombo->clear();
+        gradientCombo->insertItems(0, QStringList()
+         << QApplication::translate("ColorGradientDialog", "Default", Q_NULLPTR)
+         << QApplication::translate("ColorGradientDialog", "Spectrum", Q_NULLPTR)
+         << QApplication::translate("ColorGradientDialog", "Custom", Q_NULLPTR)
+        );
+        stopsLabel->setText(QApplication::translate("ColorGradientDialog", "Stops", Q_NULLPTR));
         buttonBox->setStyleSheet(QApplication::translate("ColorGradientDialog", "QToolButton {\n"
 "   color: #333;\n"
 "   border-width: 1px;\n"
@@ -213,7 +215,7 @@ public:
 "   max-width: 15px;\n"
 "   min-height: 15px;\n"
 "   max-height: 15px;\n"
-"}", nullptr));
+"}", Q_NULLPTR));
     } // retranslateUi
 
 };

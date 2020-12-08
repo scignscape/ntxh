@@ -237,7 +237,12 @@ if(fp.endsWith(".fcs"))
 // QProcess* process = new QProcess();
 //? 
 
+ //QFileInfo qfi(FCS_QPROCESS_PATH);
+
+ //FCS_QPROCESS_PATH
  QFileInfo qfi(FCS_QPROCESS_PATH);
+
+
  QString wd = qfi.absolutePath();
  QString fn = qfi.fileName();
  fn.prepend("/_");

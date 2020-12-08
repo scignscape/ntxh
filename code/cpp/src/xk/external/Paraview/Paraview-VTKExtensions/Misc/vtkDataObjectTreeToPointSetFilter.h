@@ -27,7 +27,7 @@
 #ifndef vtkDataObjectTreeToPointSetFilter_h
 #define vtkDataObjectTreeToPointSetFilter_h
 
-#include "vtkLegacy.h"                    // for legacy
+//?#include "vtkLegacy.h"                    // for legacy
 #include "vtkPVVTKExtensionsMiscModule.h" // For export macro
 #include "vtkPointSetAlgorithm.h"
 

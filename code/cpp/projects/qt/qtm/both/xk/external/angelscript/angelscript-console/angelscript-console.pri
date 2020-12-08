@@ -23,6 +23,9 @@ DEFINES += RELAE_LABEL_NODES
 DEFINES += AS_ROOT_DIR=\\\"$$ROOT_DIR/dev/consoles/angelscript\\\"
 
 
+DEFINES += assert\\(x\\)
+
+
 CONFIG += no_keywords
 
 SOURCES += \

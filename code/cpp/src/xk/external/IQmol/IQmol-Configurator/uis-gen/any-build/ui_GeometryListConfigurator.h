@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'GeometryListConfigurator.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,8 +10,9 @@
 #define UI_GEOMETRYLISTCONFIGURATOR_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QIcon>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QFrame>
@@ -55,14 +56,14 @@ public:
     void setupUi(QDialog *GeometryListConfigurator)
     {
         if (GeometryListConfigurator->objectName().isEmpty())
-            GeometryListConfigurator->setObjectName(QString::fromUtf8("GeometryListConfigurator"));
+            GeometryListConfigurator->setObjectName(QStringLiteral("GeometryListConfigurator"));
         GeometryListConfigurator->resize(862, 441);
         QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(GeometryListConfigurator->sizePolicy().hasHeightForWidth());
         GeometryListConfigurator->setSizePolicy(sizePolicy);
-        GeometryListConfigurator->setStyleSheet(QString::fromUtf8("QToolButton {\n"
+        GeometryListConfigurator->setStyleSheet(QLatin1String("QToolButton {\n"
 "   color: #333;\n"
 "   background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, \n"
 "          stop: 0 #fff,\n"
@@ -111,15 +112,15 @@ public:
 "   font-size: 12px;\n"
 "}"));
         horizontalLayout_3 = new QHBoxLayout(GeometryListConfigurator);
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         energyTable = new QTableWidget(GeometryListConfigurator);
         if (energyTable->columnCount() < 1)
             energyTable->setColumnCount(1);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
         energyTable->setHorizontalHeaderItem(0, __qtablewidgetitem);
-        energyTable->setObjectName(QString::fromUtf8("energyTable"));
+        energyTable->setObjectName(QStringLiteral("energyTable"));
         QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Expanding);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -133,21 +134,21 @@ public:
         verticalLayout_2->addWidget(energyTable);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         backButton = new QToolButton(GeometryListConfigurator);
-        backButton->setObjectName(QString::fromUtf8("backButton"));
+        backButton->setObjectName(QStringLiteral("backButton"));
         QIcon icon;
-        icon.addFile(QString::fromUtf8(":/resources/icons/GoBack.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/resources/icons/GoBack.png"), QSize(), QIcon::Normal, QIcon::Off);
         backButton->setIcon(icon);
         backButton->setIconSize(QSize(24, 24));
 
         horizontalLayout_2->addWidget(backButton);
 
         playButton = new QToolButton(GeometryListConfigurator);
-        playButton->setObjectName(QString::fromUtf8("playButton"));
+        playButton->setObjectName(QStringLiteral("playButton"));
         QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/resources/icons/Play.png"), QSize(), QIcon::Normal, QIcon::Off);
-        icon1.addFile(QString::fromUtf8(":/resources/icons/Stop.png"), QSize(), QIcon::Normal, QIcon::On);
+        icon1.addFile(QStringLiteral(":/resources/icons/Play.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QStringLiteral(":/resources/icons/Stop.png"), QSize(), QIcon::Normal, QIcon::On);
         playButton->setIcon(icon1);
         playButton->setIconSize(QSize(24, 24));
         playButton->setCheckable(true);
@@ -155,9 +156,9 @@ public:
         horizontalLayout_2->addWidget(playButton);
 
         forwardButton = new QToolButton(GeometryListConfigurator);
-        forwardButton->setObjectName(QString::fromUtf8("forwardButton"));
+        forwardButton->setObjectName(QStringLiteral("forwardButton"));
         QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/resources/icons/GoForward.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon2.addFile(QStringLiteral(":/resources/icons/GoForward.png"), QSize(), QIcon::Normal, QIcon::Off);
         forwardButton->setIcon(icon2);
         forwardButton->setIconSize(QSize(24, 24));
 
@@ -171,20 +172,20 @@ public:
         verticalLayout_2->addLayout(horizontalLayout_2);
 
         horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         loopButton = new QCheckBox(GeometryListConfigurator);
-        loopButton->setObjectName(QString::fromUtf8("loopButton"));
+        loopButton->setObjectName(QStringLiteral("loopButton"));
         loopButton->setChecked(false);
 
         horizontalLayout_5->addWidget(loopButton);
 
         bounceButton = new QCheckBox(GeometryListConfigurator);
-        bounceButton->setObjectName(QString::fromUtf8("bounceButton"));
+        bounceButton->setObjectName(QStringLiteral("bounceButton"));
 
         horizontalLayout_5->addWidget(bounceButton);
 
         updateBondsButton = new QCheckBox(GeometryListConfigurator);
-        updateBondsButton->setObjectName(QString::fromUtf8("updateBondsButton"));
+        updateBondsButton->setObjectName(QStringLiteral("updateBondsButton"));
 
         horizontalLayout_5->addWidget(updateBondsButton);
 
@@ -192,9 +193,9 @@ public:
         verticalLayout_2->addLayout(horizontalLayout_5);
 
         horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         speedLabel = new QLabel(GeometryListConfigurator);
-        speedLabel->setObjectName(QString::fromUtf8("speedLabel"));
+        speedLabel->setObjectName(QStringLiteral("speedLabel"));
         QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
@@ -204,7 +205,7 @@ public:
         horizontalLayout_4->addWidget(speedLabel);
 
         speedSlider = new QSlider(GeometryListConfigurator);
-        speedSlider->setObjectName(QString::fromUtf8("speedSlider"));
+        speedSlider->setObjectName(QStringLiteral("speedSlider"));
         QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
@@ -225,9 +226,9 @@ public:
         horizontalLayout_3->addLayout(verticalLayout_2);
 
         verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         plotFrame = new QFrame(GeometryListConfigurator);
-        plotFrame->setObjectName(QString::fromUtf8("plotFrame"));
+        plotFrame->setObjectName(QStringLiteral("plotFrame"));
         QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy4.setHorizontalStretch(0);
         sizePolicy4.setVerticalStretch(0);
@@ -240,18 +241,18 @@ public:
         verticalLayout->addWidget(plotFrame);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
 
         resetViewButton = new QPushButton(GeometryListConfigurator);
-        resetViewButton->setObjectName(QString::fromUtf8("resetViewButton"));
+        resetViewButton->setObjectName(QStringLiteral("resetViewButton"));
 
         horizontalLayout->addWidget(resetViewButton);
 
         closeButton = new QPushButton(GeometryListConfigurator);
-        closeButton->setObjectName(QString::fromUtf8("closeButton"));
+        closeButton->setObjectName(QStringLiteral("closeButton"));
         closeButton->setAutoDefault(false);
 
         horizontalLayout->addWidget(closeButton);
@@ -271,39 +272,39 @@ public:
 
     void retranslateUi(QDialog *GeometryListConfigurator)
     {
-        GeometryListConfigurator->setWindowTitle(QApplication::translate("GeometryListConfigurator", "Geometries", nullptr));
+        GeometryListConfigurator->setWindowTitle(QApplication::translate("GeometryListConfigurator", "Geometries", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem = energyTable->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("GeometryListConfigurator", "Energy", nullptr));
+        ___qtablewidgetitem->setText(QApplication::translate("GeometryListConfigurator", "Energy", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        backButton->setToolTip(QApplication::translate("GeometryListConfigurator", "Show previous conformer", nullptr));
+        backButton->setToolTip(QApplication::translate("GeometryListConfigurator", "Show previous conformer", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        backButton->setText(QApplication::translate("GeometryListConfigurator", "...", nullptr));
+        backButton->setText(QApplication::translate("GeometryListConfigurator", "...", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        playButton->setToolTip(QApplication::translate("GeometryListConfigurator", "Start and stop animation", nullptr));
+        playButton->setToolTip(QApplication::translate("GeometryListConfigurator", "Start and stop animation", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         playButton->setStyleSheet(QApplication::translate("GeometryListConfigurator", "QToolButton:checked {\n"
 "   border-color: #333;\n"
-"}", nullptr));
-        playButton->setText(QApplication::translate("GeometryListConfigurator", "...", nullptr));
+"}", Q_NULLPTR));
+        playButton->setText(QApplication::translate("GeometryListConfigurator", "...", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        forwardButton->setToolTip(QApplication::translate("GeometryListConfigurator", "Show next conformer", nullptr));
+        forwardButton->setToolTip(QApplication::translate("GeometryListConfigurator", "Show next conformer", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        forwardButton->setText(QApplication::translate("GeometryListConfigurator", "...", nullptr));
-        loopButton->setText(QApplication::translate("GeometryListConfigurator", "Loop", nullptr));
+        forwardButton->setText(QApplication::translate("GeometryListConfigurator", "...", Q_NULLPTR));
+        loopButton->setText(QApplication::translate("GeometryListConfigurator", "Loop", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        bounceButton->setToolTip(QApplication::translate("GeometryListConfigurator", "Reverses the loop at the end", nullptr));
+        bounceButton->setToolTip(QApplication::translate("GeometryListConfigurator", "Reverses the loop at the end", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        bounceButton->setText(QApplication::translate("GeometryListConfigurator", "Bounce", nullptr));
+        bounceButton->setText(QApplication::translate("GeometryListConfigurator", "Bounce", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        updateBondsButton->setToolTip(QApplication::translate("GeometryListConfigurator", "Reperceive bond for each conformer", nullptr));
+        updateBondsButton->setToolTip(QApplication::translate("GeometryListConfigurator", "Reperceive bond for each conformer", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        updateBondsButton->setText(QApplication::translate("GeometryListConfigurator", "Update Bonds", nullptr));
-        speedLabel->setText(QApplication::translate("GeometryListConfigurator", "Speed", nullptr));
+        updateBondsButton->setText(QApplication::translate("GeometryListConfigurator", "Update Bonds", Q_NULLPTR));
+        speedLabel->setText(QApplication::translate("GeometryListConfigurator", "Speed", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        speedSlider->setToolTip(QApplication::translate("GeometryListConfigurator", "Controls the speed of animation", nullptr));
+        speedSlider->setToolTip(QApplication::translate("GeometryListConfigurator", "Controls the speed of animation", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        resetViewButton->setText(QApplication::translate("GeometryListConfigurator", "Reset View", nullptr));
-        closeButton->setText(QApplication::translate("GeometryListConfigurator", "Close", nullptr));
+        resetViewButton->setText(QApplication::translate("GeometryListConfigurator", "Reset View", Q_NULLPTR));
+        closeButton->setText(QApplication::translate("GeometryListConfigurator", "Close", Q_NULLPTR));
     } // retranslateUi
 
 };
