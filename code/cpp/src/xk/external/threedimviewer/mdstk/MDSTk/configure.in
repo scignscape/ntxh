@@ -1,0 +1,83 @@
+//==============================================================================
+/*! \file
+ * Medical Data Segmentation Toolkit (MDSTk)    \n
+ * Copyright (c) 2007-2010 by Michal Spanel     \n
+ *
+ * Author:  Michal Spanel, spanel@fit.vutbr.cz  \n
+ * Date:    2007/09/26                          \n
+ *
+ * $Id: configure.in 2049 2012-01-09 13:04:08Z spanel $
+ *
+ * Description:
+ * - General compilation settings and options.
+ * - NOTE: The 'configure.in' file is only a template for the CMake build
+ *   system which creates the final 'configure.h' file during its configuration
+ *   phase in the concrete build directory.
+ */
+
+#ifndef MDS_CONFIGURE_H
+#define MDS_CONFIGURE_H
+
+
+//==============================================================================
+/*
+ * MDSTk settings.
+ */
+
+//! Current MDSTk version.
+#define MDS_MAJOR_VERSION @MDSTk_MAJOR_VERSION@
+#define MDS_MINOR_VERSION @MDSTk_MINOR_VERSION@
+#define MDS_PATCH_VERSION @MDSTk_PATCH_VERSION@
+
+//! Macro completely disables logging.
+#cmakedefine MDS_LOGGING_DISABLED
+
+//! Macro enables support for multithreaded applications.
+#cmakedefine MDS_MULTITHREADED
+
+//! Macro enables explicit template instantiation.
+#cmakedefine MDS_EXPLICIT_TEMPLATE_INSTANTIATION
+
+//! Macro enables OpenMP support.
+#cmakedefine MDS_OPENMP_ENABLED
+
+
+//==============================================================================
+/*
+ * Optional 3rd party libraries.
+ */
+
+//! Enables the FFTW library (see its license).
+#cmakedefine MDS_FFTW_ENABLED
+
+//! Enables XML support via the TinyXML library.
+#cmakedefine MDS_XML_ENABLED
+
+//! Should the TinyXML use the STL library?
+#cmakedefine TIXML_USE_STL
+
+//! Enables the UMFPACK library.
+#cmakedefine MDS_UMFPACK_ENABLED
+
+//! Disables explicit vectorization within the Eigen library.
+#cmakedefine EIGEN_DONT_VECTORIZE
+
+//! Disables alignment within the Eigen library completely.
+//! This will turn off vectorization.
+#cmakedefine EIGEN_DONT_ALIGN
+
+//! Enables some optimizations which might affect the accuracy of the result.
+#cmakedefine EIGEN_FAST_MATH
+
+
+//==============================================================================
+/*
+ * Experimental options.
+ */
+
+//! Enables support for the OpenCV library.
+#cmakedefine MDS_OPENCV_ENABLED
+
+
+#endif // MDS_CONFIGURE_H
+
