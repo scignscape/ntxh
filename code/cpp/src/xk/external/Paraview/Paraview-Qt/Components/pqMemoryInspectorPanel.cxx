@@ -405,11 +405,11 @@ void RankData::InitializeMemoryUseWidget()
   this->WidgetContainer->setAutoFillBackground(true);
 
   QFontMetrics fontMet(font);
-  int rankWid = fontMet.horizontalAdvance("555555");
+  int rankWid = fontMet.FONT_METRICS_WIDTH_OR_HORIZONTAL_ADVANCE("555555");
   rank->setMinimumWidth(rankWid);
   rank->setMaximumWidth(rankWid);
 
-  int pidWid = fontMet.horizontalAdvance("555555555");
+  int pidWid = fontMet.FONT_METRICS_WIDTH_OR_HORIZONTAL_ADVANCE("555555555");
   pid->setMinimumWidth(pidWid);
   pid->setMaximumWidth(pidWid);
 

@@ -52,7 +52,7 @@ public:
   ~pqQVTKWidgetEventTranslator() override;
 
   using Superclass::translateEvent;
-  bool translateEvent(QObject* Object, QEvent* Event, int eventType, bool& Error) override;
+  bool translateEvent(QObject* Object, QEvent* Event, int eventType, bool& Error);//? override;
 
 private:
   pqQVTKWidgetEventTranslator(const pqQVTKWidgetEventTranslator&);

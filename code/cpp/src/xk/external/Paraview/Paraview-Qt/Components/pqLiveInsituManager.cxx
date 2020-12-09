@@ -454,7 +454,7 @@ void pqLiveInsituManager::removeBreakpoint()
 //-----------------------------------------------------------------------------
 void pqLiveInsituManager::waitTimestep(vtkIdType ts)
 {
-  pqEventDispatcher::deferEventsIfBlocked(true);
+  //?pqEventDispatcher::deferEventsIfBlocked(true);
   pqLiveInsituVisualizationManager* visManager =
     this->managerFromInsitu(this->selectedInsituServer());
   pqLiveInsituManagerDebugMacro("===== start waitTimestep(" << ts << ")"
@@ -469,17 +469,17 @@ void pqLiveInsituManager::waitTimestep(vtkIdType ts)
   }
   pqLiveInsituManagerDebugMacro("===== end waitTimestep(" << ts << ")"
                                                           << " ===== " << this->timeStep());
-  pqEventDispatcher::deferEventsIfBlocked(false);
+  //?pqEventDispatcher::deferEventsIfBlocked(false);
 }
 
 //-----------------------------------------------------------------------------
 void pqLiveInsituManager::waitBreakpointHit()
 {
-  pqEventDispatcher::deferEventsIfBlocked(true);
+  //?pqEventDispatcher::deferEventsIfBlocked(true);
   pqLiveInsituManagerDebugMacro("=== begin waitConnected ===");
   QEventLoop loop;
   QObject::connect(this, SIGNAL(breakpointHit(pqServer*)), &loop, SLOT(quit()));
   loop.exec();
   pqLiveInsituManagerDebugMacro("=== end waitConnected ===");
-  pqEventDispatcher::deferEventsIfBlocked(false);
+  //?pqEventDispatcher::deferEventsIfBlocked(false);
 }

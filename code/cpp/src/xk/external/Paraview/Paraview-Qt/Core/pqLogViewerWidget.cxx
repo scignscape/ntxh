@@ -207,7 +207,7 @@ pqLogViewerWidget::pqLogViewerWidget(QWidget* parentObject)
   auto& internals = (*this->Internals);
   internals.Ui.setupUi(this);
   internals.Ui.splitter->setSizes(QList<int>{ 800, 200 });
-  internals.FilterModel.setRecursiveFilteringEnabled(true);
+  //?internals.FilterModel.setRecursiveFilteringEnabled(true);
   internals.FilterModel.setSourceModel(&internals.Model);
   internals.Ui.treeView->setModel(&internals.FilterModel);
 

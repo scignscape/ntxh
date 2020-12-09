@@ -237,13 +237,17 @@ HEADERS +=  \
   $$SRC_DIR/ParaView/pqparaviewInitializer.h
 
 
-LIBS += -L$$TARGETSDIR  -lParaview-Clients  #-lParaview-Qt
+LIBS += -L$$TARGETSDIR  -lParaview-Clients  -lParaview-Qt
 
+#LIBS += -L$$TARGETSDIR
 
 LIBS +=  $$PV_ALT_LIB_DIR/libpqApplicationComponents-pv5.7.so.5.7
 LIBS +=  $$PV_ALT_LIB_DIR/libpqComponents-pv5.7.so.5.7
 LIBS +=  $$PV_ALT_LIB_DIR/libpqCore-pv5.7.so.5.7
-LIBS +=  $$PV_ALT_LIB_DIR/libpqWidgets-pv5.7.so.5.7
+
+#LIBS +=  $$PV_ALT_LIB_DIR/libpqWidgets-pv5.7.so.5.7
+
+
 
 
 LIBS +=  $$PV_ALT_LIB_DIR/libvtkcgns-pv5.7.so.5.7

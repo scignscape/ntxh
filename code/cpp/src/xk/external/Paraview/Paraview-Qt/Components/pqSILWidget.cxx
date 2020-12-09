@@ -87,7 +87,7 @@ pqSILWidget::pqSILWidget(const QString& activeCategory, QWidget* parentObject)
   // setup model
   this->ActiveModel = new pqProxySILModel(activeCategory, this);
   this->SortModel = new QSortFilterProxyModel(this);
-  this->SortModel->setRecursiveFilteringEnabled(true);
+  //?this->SortModel->setRecursiveFilteringEnabled(true);
   this->SortModel->setSourceModel(this->ActiveModel);
 }
 
@@ -160,7 +160,7 @@ void pqSILWidget::onModelReset()
     proxyModel->setSourceModel(this->Model);
 
     QSortFilterProxyModel* sortModel = new QSortFilterProxyModel(tree);
-    sortModel->setRecursiveFilteringEnabled(true);
+    //?sortModel->setRecursiveFilteringEnabled(true);
     sortModel->setSourceModel(proxyModel);
     tree->setModel(sortModel);
     tree->expandAll();

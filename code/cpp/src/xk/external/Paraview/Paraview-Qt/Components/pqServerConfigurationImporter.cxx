@@ -174,7 +174,7 @@ void pqServerConfigurationImporter::fetchConfigurations()
   this->Internals->AbortFetch = false;
 
   // Block test events until all configurations are downloaded.
-  pqEventDispatcher::deferEventsIfBlocked(true);
+  //?pqEventDispatcher::deferEventsIfBlocked(true);
 
   for (QMapIterator<QString, QUrl> iter(this->Internals->SourceURLs); iter.hasNext();)
   {
@@ -200,7 +200,7 @@ void pqServerConfigurationImporter::fetchConfigurations()
   }
 
   // Unblock test events
-  pqEventDispatcher::deferEventsIfBlocked(false);
+  //?pqEventDispatcher::deferEventsIfBlocked(false);
 
   Q_EMIT this->configurationsUpdated();
 }

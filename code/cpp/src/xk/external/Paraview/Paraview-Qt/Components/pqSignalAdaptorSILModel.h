@@ -35,6 +35,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "pqComponentsModule.h"
 #include <QObject>
 
+
+//? added
+#include <QVariant>
+
+
 class pqSILModel;
 
 /**
@@ -52,7 +57,10 @@ public:
   virtual ~pqSignalAdaptorSILModel();
 
   QList<QVariant> values() const;
-  Q_SLOTS:
+
+  //? added public
+
+public  Q_SLOTS:
   void setValues(const QList<QVariant>&);
 
 private:

@@ -396,10 +396,10 @@ pqFileDialog::pqFileDialog(pqServer* server, QWidget* p, const QString& title,
   // This code is similar to QFileDialog code
   // It positions different columns and orders in a standard way
   QFontMetrics fm(this->font());
-  header->resizeSection(0, fm.horizontalAdvance(QLatin1String("wwwwwwwwwwwwwwwwwwwwwwwwww")));
-  header->resizeSection(1, fm.horizontalAdvance(QLatin1String("mp3Folder")));
-  header->resizeSection(2, fm.horizontalAdvance(QLatin1String("128.88 GB")));
-  header->resizeSection(3, fm.horizontalAdvance(QLatin1String("10/29/81 02:02PM")));
+  header->resizeSection(0, fm.FONT_METRICS_WIDTH_OR_HORIZONTAL_ADVANCE(QLatin1String("wwwwwwwwwwwwwwwwwwwwwwwwww")));
+  header->resizeSection(1, fm.FONT_METRICS_WIDTH_OR_HORIZONTAL_ADVANCE(QLatin1String("mp3Folder")));
+  header->resizeSection(2, fm.FONT_METRICS_WIDTH_OR_HORIZONTAL_ADVANCE(QLatin1String("128.88 GB")));
+  header->resizeSection(3, fm.FONT_METRICS_WIDTH_OR_HORIZONTAL_ADVANCE(QLatin1String("10/29/81 02:02PM")));
   impl.Ui.Files->setSortingEnabled(true);
   impl.Ui.Files->header()->setSortIndicator(0, Qt::AscendingOrder);
 

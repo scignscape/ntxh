@@ -63,7 +63,7 @@ public Q_SLOTS:
   * Record on event in xml file
   */
   void onRecordEvent(const QString& Widget, const QString& Command, const QString& Arguments,
-    const int& eventType) override;
+    const int& eventType);//? override;
 
 private:
 };

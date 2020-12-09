@@ -52,7 +52,7 @@ public:
   /**
   * Get the next event from the event source
   */
-  int getNextEvent(QString& object, QString& command, QString& arguments, int& eventType) override;
+  int getNextEvent(QString& object, QString& command, QString& arguments, int& eventType);//? override;
 
 private:
   class pqImplementation;

@@ -133,7 +133,7 @@ void pqAboutDialog::AddClientInformation()
   QTreeWidget* tree = this->Ui->ClientInformation;
 
   ::addItem(tree, "Version", QString(PARAVIEW_VERSION_FULL));
-  ::addItem(tree, "VTK Version", QString(vtkVersion::GetVTKVersionFull()));
+  //? ::addItem(tree, "VTK Version", QString(vtkVersion::GetVTKVersionFull()));
   ::addItem(tree, "Qt Version", QT_VERSION_STR);
 
   ::addItem(tree, "vtkIdType size", QString("%1bits").arg(8 * sizeof(vtkIdType)));

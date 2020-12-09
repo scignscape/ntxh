@@ -160,7 +160,7 @@ QSize pqCollapsedGroup::minimumSizeHint() const
 {
   QStyleOptionGroupBox option = pqCollapseGroupGetStyleOption(this);
 
-  int baseWidth = fontMetrics().horizontalAdvance(this->title() + QLatin1Char(' '));
+  int baseWidth = fontMetrics().FONT_METRICS_WIDTH_OR_HORIZONTAL_ADVANCE(this->title() + QLatin1Char(' '));
   int baseHeight = fontMetrics().height();
 
   baseWidth += this->style()->pixelMetric(QStyle::PM_IndicatorWidth);

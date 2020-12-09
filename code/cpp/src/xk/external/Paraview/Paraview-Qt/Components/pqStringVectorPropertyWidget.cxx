@@ -369,7 +369,7 @@ pqStringVectorPropertyWidget::pqStringVectorPropertyWidget(
     textEdit->setObjectName(smProxy->GetPropertyName(smProperty));
     textEdit->setAcceptRichText(false);
     // tab is 2 spaces
-    textEdit->setTabStopDistance(this->fontMetrics().horizontalAdvance("  "));
+    //?textEdit->setTabStopDistance(this->fontMetrics().FONT_METRICS_WIDTH_OR_HORIZONTAL_ADVANCE("  "));
     textEdit->setLineWrapMode(QTextEdit::NoWrap);
 
     this->setChangeAvailableAsChangeFinished(false);

@@ -800,7 +800,7 @@ bool pqServerLauncher::processCommand(
   else
   {
     // wait for delay before attempting to connect to the server.
-    pqEventDispatcher::processEventsAndWait(static_cast<int>(delay * 1000));
+    //?pqEventDispatcher::processEventsAndWait(static_cast<int>(delay * 1000));
   }
 
   // Check process state
@@ -863,7 +863,7 @@ void pqServerLauncher::readStandardOutput()
   if (process)
   {
     this->handleProcessStandardOutput(process->readAllStandardOutput());
-    pqEventDispatcher::processEvents();
+    //?pqEventDispatcher::processEvents();
   }
 }
 
@@ -874,7 +874,7 @@ void pqServerLauncher::readStandardError()
   if (process)
   {
     this->handleProcessErrorOutput(process->readAllStandardError());
-    pqEventDispatcher::processEvents();
+    //?pqEventDispatcher::processEvents();
   }
 }
 

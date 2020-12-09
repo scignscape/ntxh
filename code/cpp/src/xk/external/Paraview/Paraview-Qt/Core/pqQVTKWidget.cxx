@@ -357,11 +357,11 @@ void pqQVTKWidget::setCustomDevicePixelRatio(double cdpr)
   // disable HiDPI if we are running tests
   if (this->useStereo)
   {
-    baseClass.value<pqQVTKWidgetBase*>()->setCustomDevicePixelRatio(cdpr);
+    //?baseClass.value<pqQVTKWidgetBase*>()->setCustomDevicePixelRatio(cdpr);
   }
   else
   {
-    baseClass.value<QVTKOpenGLNativeWidget*>()->setCustomDevicePixelRatio(cdpr);
+    //?baseClass.value<QVTKOpenGLNativeWidget*>()->setCustomDevicePixelRatio(cdpr);
   }
 }
 //----------------------------------------------------------------------------
@@ -370,11 +370,11 @@ double pqQVTKWidget::effectiveDevicePixelRatio() const
   // disable HiDPI if we are running tests
   if (this->useStereo)
   {
-    return baseClass.value<pqQVTKWidgetBase*>()->effectiveDevicePixelRatio();
+    //?return baseClass.value<pqQVTKWidgetBase*>()->effectiveDevicePixelRatio();
   }
   else
   {
-    return baseClass.value<QVTKOpenGLNativeWidget*>()->effectiveDevicePixelRatio();
+    //?return baseClass.value<QVTKOpenGLNativeWidget*>()->effectiveDevicePixelRatio();
   }
 }
 //----------------------------------------------------------------------------

@@ -11,3 +11,4 @@ PROJECT_NAME = Paraview-Qt
 include(../build-group.pri)
 
 include(../../../../../both/$$PROJECT_KERNEL/$$PROJECT_SET/$$PROJECT_GROUP/$$PROJECT_NAME/$${PROJECT_NAME}.pri)
+
