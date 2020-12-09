@@ -86,17 +86,47 @@ pqparaviewInitializer::Status pqparaviewInitializer::Initialize(int argc, char* 
   // Attach custom event filter
   QApplication::instance()->installEventFilter(this->PVApp);
 
-  if (this->PVApp->getOptions()->GetUnknownArgument() ||
-      this->PVApp->getOptions()->GetErrorMessage())
+  char* unknown = this->PVApp->getOptions()->GetUnknownArgument();
+  char* errormsg = this->PVApp->getOptions()->GetErrorMessage();
+
+  //? added ...
+  char* _errormsg = this->PVApp->getOptions()->_GetErrorMessage();
+
+
+  int tv =  this->PVApp->getOptions()->GetTellVersion();
+  int hs =  this->PVApp->getOptions()->GetHelpSelected();
+
+  if(tv == -1)
   {
-    return ExitFailure;
+   qDebug() << "Command line GetTellVersion() returned -1 ...";
+   tv = 0;
   }
 
-  if (this->PVApp->getOptions()->GetHelpSelected() ||
-      this->PVApp->getOptions()->GetTellVersion())
+  if(unknown)
+    qDebug() << "Unknown argument passed ..." << unknown;
+
+  if(errormsg)
   {
-    return ExitSuccess;
+   if(_errormsg)
+     return ExitFailure;
+   qDebug() << "Macro version of GetErrorMessage returned non-false but alt version did not.";
   }
+  if(hs || tv)
+  {
+   return ExitSuccess;
+  }
+
+//  if (this->PVApp->getOptions()->GetUnknownArgument()
+//      || this->PVApp->getOptions()->GetErrorMessage())
+//  {
+//   return ExitFailure;
+//  }
+
+//  if (this->PVApp->getOptions()->GetHelpSelected()
+//      || this->PVApp->getOptions()->GetTellVersion())
+//  {
+//   return ExitSuccess;
+//  }
 
 #if !_paraview_client_built_shared
   Q_INIT_RESOURCE(paraview_configuration);

@@ -75,8 +75,14 @@ public:
   /**
    * Get the error message if Parse returned 0.
    */
+  //?
   vtkGetStringMacro(ErrorMessage);
   //@}
+
+  char* _GetErrorMessage()
+  {
+   return this->ErrorMessage;
+  }
 
   /**
    * Get argv[0]

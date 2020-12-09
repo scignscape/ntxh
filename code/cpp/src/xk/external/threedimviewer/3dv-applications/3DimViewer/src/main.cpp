@@ -148,6 +148,7 @@ void setErrorHandlers()
 
 int main(int argc, char *argv[])
 {
+    //? do we need this?
     Q_INIT_RESOURCE(resources); // param is filename of resource file
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)) // issue #1848 - EGL_EXT_device_query missing 

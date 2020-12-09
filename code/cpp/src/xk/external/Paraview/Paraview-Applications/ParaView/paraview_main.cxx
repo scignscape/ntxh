@@ -106,7 +106,7 @@ int main(int argc, char* argv[])
     case InitializerT::ExitSuccess:
       return EXIT_SUCCESS;
     case InitializerT::ExitFailure:
-      return  qtapp.exec();//?EXIT_FAILURE;
+      return EXIT_FAILURE;
     case InitializerT::RunApplication:
       return qtapp.exec();
   }

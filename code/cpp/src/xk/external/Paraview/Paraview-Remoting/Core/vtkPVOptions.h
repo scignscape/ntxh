@@ -159,6 +159,12 @@ public:
    */
   vtkGetMacro(TellVersion, int);
   //@}
+//  int GetTellVersion()
+//  {
+//      vtkDebugMacro(<< this->GetClassName() << " (" << this << "): returning " << TellVersion << " of "
+//                    << this->TellVersion);
+//      return this->TellVersion;
+//  }
 
   /// Provides access to server-url if specified on the command line.
   vtkGetStringMacro(ServerURL);
@@ -363,7 +369,12 @@ private:
   int UseRenderingGroup;
   int Timeout;
   char* LogFileName;
+
+// temp ...
+public:
   int TellVersion;
+
+private:
   char* StereoType;
   int EnableStreaming;
   int SatelliteMessageIds;

@@ -41,6 +41,10 @@ include($$ROOT_DIR/../preferred/openctm.pri)
 
 INCLUDEPATH += $$SRC_DIR/3DimViewer/include
 
+INCLUDEPATH += $$SRC_GROUP_DIR/openctm/lib
+
+INCLUDEPATH += $$SRC_GROUP_DIR/openmesh/src
+
 
 INCLUDEPATH += $$SRC_GROUP_DIR/threedimviewer/include/3dim/coremedi_viewer
 INCLUDEPATH += $$SRC_GROUP_DIR/threedimviewer/include/3dim/core
@@ -71,6 +75,10 @@ INCLUDEPATH += $$SRC_PROSET_DIR/dcmtk/dcmimgle/include
 INCLUDEPATH += $$SRC_PROSET_DIR/dcmtk/oflog/include
 INCLUDEPATH += $$SRC_PROSET_DIR/dcmtk/dcmjpeg/include
 INCLUDEPATH += $$SRC_PROSET_DIR/dcmtk/dcmnet/include
+
+
+RESOURCES += $$SRC_DIR/3DimViewer/resources.qrc
+
 
 
 FORMS += \
@@ -158,15 +166,18 @@ SOURCES += \
 
 LIBS += -L$$TARGETSDIR -lthreedimviewer
 
+LIBS += -L$$TARGETSDIR  -lopenmesh  -lopenctm
+
+
 LIBS += -L$$TARGETSDIR -lvpl
 
 message(t: $$TARGETSDIR)
 LIBS += -L/home/nlevisrael/gits/ntxh/wip-sebi/ar/code/cpp/targets/qt/qt-multiple/uni/targets-5-15-2-uni-nomark \
-  -ldcmdata -lofstd
+  -ldcmdata -lofstd -loflog
 
 
-LIBS += $$OPENMESH_LIB_DIR/libOpenMeshCore.a
-LIBS += $$OPENMESH_LIB_DIR/libOpenMeshTools.a
+#LIBS += $$OPENMESH_LIB_DIR/libOpenMeshCore.a
+#LIBS += $$OPENMESH_LIB_DIR/libOpenMeshTools.a
 
 
 message($$OSG_LIB_DIR)
@@ -194,6 +205,6 @@ LIBS += -L$$OSG_LIB_DIR \
   -losgWidget \
 
 
-
+LIBS += -llz4
 
 LIBS += -lz

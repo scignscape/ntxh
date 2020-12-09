@@ -7,7 +7,7 @@
 include(../build-group.pri)
 
 
-QT += widgets gui printsupport network
+QT += widgets gui printsupport network  opengl
 
 CONFIG += c++14
 
