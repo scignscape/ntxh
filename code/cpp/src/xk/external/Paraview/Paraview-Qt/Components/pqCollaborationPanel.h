@@ -33,6 +33,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define pqCollaborationPanel_h
 
 #include "pqComponentsModule.h"
+
+
+
+
 #include "vtkSMMessageMinimal.h"
 #include <QWidget>
 

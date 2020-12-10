@@ -55,19 +55,21 @@ pqUndoRedoBehavior::pqUndoRedoBehavior(QObject* parentObject)
   }
 
   // setup Undo Stack.
-  pqUndoStackBuilder* builder = pqUndoStackBuilder::New();
-  pqUndoStack* stack = new pqUndoStack(builder, this);
-  vtkSMProxyManager::GetProxyManager()->SetUndoStackBuilder(builder);
-  builder->Delete();
-  core->setUndoStack(stack);
+//?
+//  pqUndoStackBuilder* builder = pqUndoStackBuilder::New();
+//  pqUndoStack* stack = new pqUndoStack(builder, this);
+//  vtkSMProxyManager::GetProxyManager()->SetUndoStackBuilder(builder);
+//  builder->Delete();
+//  core->setUndoStack(stack);
 
   // clear undo stack when state is loaded.
-  QObject::connect(
-    core, SIGNAL(stateLoaded(vtkPVXMLElement*, vtkSMProxyLocator*)), stack, SLOT(clear()));
+//?
+//  QObject::connect(
+//    core, SIGNAL(stateLoaded(vtkPVXMLElement*, vtkSMProxyLocator*)), stack, SLOT(clear()));
 
-  // clear stack when server connects/disconnects.
-  QObject::connect(
-    core->getServerManagerModel(), SIGNAL(serverAdded(pqServer*)), stack, SLOT(clear()));
-  QObject::connect(
-    core->getServerManagerModel(), SIGNAL(finishedRemovingServer()), stack, SLOT(clear()));
+//  // clear stack when server connects/disconnects.
+//  QObject::connect(
+//    core->getServerManagerModel(), SIGNAL(serverAdded(pqServer*)), stack, SLOT(clear()));
+//  QObject::connect(
+//    core->getServerManagerModel(), SIGNAL(finishedRemovingServer()), stack, SLOT(clear()));
 }

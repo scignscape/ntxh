@@ -136,8 +136,11 @@ pqPluginManager::pqPluginManager(QObject* parentObject)
 
   // observer plugin loaded events from PluginManager to detect plugins loaded
   // from Python or otherwise.
-  vtkSMPluginManager* mgr = vtkSMProxyManager::GetProxyManager()->GetPluginManager();
-  mgr->AddObserver(
+  vtkSMPluginManager* mgr = nullptr;//vtkSMProxyManager::GetProxyManager()->GetPluginManager();
+
+  //? added
+  if(mgr)
+    mgr->AddObserver(
     vtkSMPluginManager::PluginLoadedEvent, this, &pqPluginManager::updatePluginLists);
 }
 

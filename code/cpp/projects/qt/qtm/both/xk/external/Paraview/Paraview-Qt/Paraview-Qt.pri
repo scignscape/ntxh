@@ -11,8 +11,9 @@ QT += help
 
 include(../build-group.pri)
 
-
 include($$ROOT_DIR/../preferred/sysr.pri)
+
+
 
 
 INCLUDEPATH += $$SRC_GROUP_DIR  \
@@ -151,6 +152,7 @@ INCLUDEPATH += $$SRC_GROUP_DIR/Paraview-VTKExtensions
 INCLUDEPATH += $$SRC_GROUP_DIR/Paraview-VTKExtensions/Core
 INCLUDEPATH += $$SRC_GROUP_DIR/Paraview-VTKExtensions/FiltersRendering
 
+INCLUDEPATH += $$SRC_GROUP_DIR/Paraview-Remoting/ViewsPython
 
 
 
@@ -164,6 +166,11 @@ INCLUDEPATH += $$SRC_DIR/Components  $$SRC_DIR/Core \
 include($$ROOT_DIR/../preferred/vtk.pri)
 
 #include($$ROOT_DIR/../preferred/opencv.pri)
+
+INCLUDEPATH += $$ALT_DIR/vtkqttesting
+
+#INCLUDEPATH += /home/nlevisrael/pv/pvsbb/install/include/paraview-5.7/vtkqttesting
+
 
 
 INCLUDEPATH += $$VTK_BUILD_DIR/Interaction/Style
@@ -199,7 +206,7 @@ INCLUDEPATH += $$VTK_SRC_DIR/Utilities/KWIML
 INCLUDEPATH += $$VTK_SRC_DIR/GUISupport/Qt
 INCLUDEPATH += $$VTK_SRC_DIR/Rendering/OpenGL2
 INCLUDEPATH += $$VTK_SRC_DIR/Filters/General
-
+INCLUDEPATH += $$VTK_SRC_DIR/Rendering/VtkJS
 
 
 INCLUDEPATH += $$VTK_SRC_DIR/Common/Transforms
@@ -211,6 +218,7 @@ INCLUDEPATH += $$VTK_SRC_DIR/Testing/Rendering
 INCLUDEPATH += $$VTK_SRC_DIR/Interaction/Widgets
 
 
+INCLUDEPATH += $$VTK_BUILD_DIR/Rendering/VtkJS
 INCLUDEPATH += $$VTK_BUILD_DIR/Interaction/Widgets
 INCLUDEPATH += $$VTK_BUILD_DIR/Testing/Rendering
 INCLUDEPATH += $$VTK_BUILD_DIR/Imaging/Core
@@ -246,6 +254,19 @@ INCLUDEPATH += $$SRC_DIR/Python
 
 DEFINES += FONT_METRICS_WIDTH_OR_HORIZONTAL_ADVANCE=width
 #DEFINES += FONT_METRICS_WIDTH_OR_HORIZONTAL_ADVANCE=horizontalAdvance
+
+
+HEADERS += \
+  $$SRC_GROUP_DIR/QVTKOpenGLStereoWidget.h \
+  $$SRC_GROUP_DIR/zoattestingctk/pqPythonEventSource.h
+
+
+SOURCES += \
+  $$SRC_GROUP_DIR/zoattestingctk/pqPythonEventSource.cxx
+
+
+INCLUDEPATH += /usr/include/python2.7/
+
 
 HEADERS += \
   $$SRC_DIR/ApplicationComponents/pqAboutDialogReaction.h \
@@ -757,7 +778,7 @@ HEADERS += \
   $$SRC_DIR/Components/pqSubsetInclusionLatticeTreeModel.h \
   $$SRC_DIR/Components/pqSubsetInclusionLatticeWidget.h \
   $$SRC_DIR/Components/pqTabbedMultiViewWidget.h \
-  \# ?$$SRC_DIR/Components/pqTextureComboBox.h \
+  $$SRC_DIR/Components/pqTextureComboBox.h \
   $$SRC_DIR/Components/pqTextureSelectorPropertyWidget.h \
   $$SRC_DIR/Components/pqTimerLogDisplay.h \
   $$SRC_DIR/Components/pqToolBarInterface.h \
@@ -912,7 +933,7 @@ SOURCES += \
   $$SRC_DIR/Components/pqSubsetInclusionLatticeTreeModel.cxx \
   $$SRC_DIR/Components/pqSubsetInclusionLatticeWidget.cxx \
   $$SRC_DIR/Components/pqTabbedMultiViewWidget.cxx \
-  \# $$SRC_DIR/Components/pqTextureComboBox.cxx \
+  $$SRC_DIR/Components/pqTextureComboBox.cxx \
   $$SRC_DIR/Components/pqTextureSelectorPropertyWidget.cxx \
   $$SRC_DIR/Components/pqTimerLogDisplay.cxx \
   $$SRC_DIR/Components/pqToolBarInterface.cxx \
@@ -1086,16 +1107,16 @@ SOURCES += \
   $$SRC_DIR/Core/pqProxyModifiedStateUndoElement.cxx \
   $$SRC_DIR/Core/pqProxySelection.cxx \
   \# $$SRC_DIR/Core/pqPythonEventSourceImage.cxx \
-  \# $$SRC_DIR/Core/pqPythonView.cxx \
+  $$SRC_DIR/Core/pqPythonView.cxx \
   $$SRC_DIR/Core/pqQVTKWidget.cxx \
   $$SRC_DIR/Core/pqQVTKWidgetEventPlayer.cxx \
-  \# $$SRC_DIR/Core/pqQVTKWidgetEventTranslator.cxx \
+  $$SRC_DIR/Core/pqQVTKWidgetEventTranslator.cxx \
   $$SRC_DIR/Core/pqRecentlyUsedResourceLoaderInterface.cxx \
   $$SRC_DIR/Core/pqRecentlyUsedResourcesList.cxx \
   $$SRC_DIR/Core/pqRenderView.cxx \
   $$SRC_DIR/Core/pqRenderViewBase.cxx \
   $$SRC_DIR/Core/pqRepresentation.cxx \
-  \# $$SRC_DIR/Core/pqSMAdaptor.cxx \
+  $$SRC_DIR/Core/pqSMAdaptor.cxx \
   $$SRC_DIR/Core/pqSMProxy.cxx \
   $$SRC_DIR/Core/pqScalarBarRepresentation.cxx \
   $$SRC_DIR/Core/pqScalarsToColors.cxx \
@@ -1250,5 +1271,7 @@ SOURCES += \
   $$SRC_DIR/Widgets/pqWaitCursor.cxx
 
 
+SOURCES += \
+  $$SRC_DIR/stubs.cpp
 
-
+LIBS += -lpython2.7

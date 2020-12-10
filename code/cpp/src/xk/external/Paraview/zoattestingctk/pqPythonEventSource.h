@@ -53,6 +53,15 @@ public:
   static QStringList getChildren(QString& object);
   static QString invokeMethod(QString& object, QString& method);
 
+  //? added
+  int getNextEvent(
+      QString& object,
+      QString& command,
+      QString& arguments) Q_DECL_OVERRIDE
+  {
+
+  }
+
 protected:
   virtual void run();
   virtual void start();

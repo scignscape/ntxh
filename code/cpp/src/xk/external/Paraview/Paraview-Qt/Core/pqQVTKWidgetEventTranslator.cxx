@@ -199,13 +199,13 @@ bool pqQVTKWidgetEventTranslator::translateEvent(
 
       // Pause recording whilie selecting file to save
       pqTestUtility* testUtil = pqApplicationCore::instance()->testUtility();
-      testUtil->pauseRecords(true);
+      //?testUtil->pauseRecords(true);
 
       // Execute file save dialog
       if (file_dialog.exec() != QDialog::Accepted)
       {
         error = false;
-        testUtil->pauseRecords(false);
+        //?testUtil->pauseRecords(false);
         widget->setMaximumSize(oldMaxSize);
         widget->resize(oldSize);
         return true;
@@ -222,15 +222,15 @@ bool pqQVTKWidgetEventTranslator::translateEvent(
       QString relPathFile = baselineDir.relativeFilePath(file);
 
       // Restore recording
-      testUtil->pauseRecords(false);
+      //?testUtil->pauseRecords(false);
 
       // Restore widget size
       widget->setMaximumSize(oldMaxSize);
       widget->resize(oldSize);
 
       // Emit record signal
-      Q_EMIT recordEvent(Object, pqCoreTestUtility::PQ_COMPAREVIEW_PROPERTY_NAME,
-        "$PARAVIEW_TEST_BASELINE_DIR/" + relPathFile, pqEventTypes::CHECK_EVENT);
+      //?Q_EMIT recordEvent(Object, pqCoreTestUtility::PQ_COMPAREVIEW_PROPERTY_NAME,
+      //?  "$PARAVIEW_TEST_BASELINE_DIR/" + relPathFile, pqEventTypes::CHECK_EVENT);
       return true;
     }
     if (Event->type() == QEvent::MouseMove)
@@ -238,5 +238,5 @@ bool pqQVTKWidgetEventTranslator::translateEvent(
       return true;
     }
   }
-  return this->Superclass::translateEvent(Object, Event, eventType, error);
+  //?return this->Superclass::translateEvent(Object, Event, eventType, error);
 }

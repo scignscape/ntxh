@@ -67,6 +67,8 @@ pqServerConfiguration::pqServerConfiguration(vtkPVXMLElement* xml, int connectio
 //-----------------------------------------------------------------------------
 void pqServerConfiguration::constructor(vtkPVXMLElement* xml, int connectionTimeout)
 {
+ // added
+ if(!xml) return;
   assert(xml && xml->GetName() && strcmp(xml->GetName(), "Server") == 0);
   this->XML = xml;
   this->ConnectionTimeout = connectionTimeout;

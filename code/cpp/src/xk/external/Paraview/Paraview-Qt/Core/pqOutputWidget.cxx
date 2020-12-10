@@ -418,7 +418,7 @@ pqOutputWidget::pqOutputWidget(QWidget* parentObject, Qt::WindowFlags f)
   this->connect(internals.Ui.copyButton, SIGNAL(clicked()), SLOT(copyToClipboard()));
 
   // Tell VTK to forward all messages.
-  vtkOutputWindow::SetInstance(internals.VTKOutputWindow.Get());
+  //?vtkOutputWindow::SetInstance(internals.VTKOutputWindow.Get());
 
   // Install the message handler
   MessageHandler::install(this);

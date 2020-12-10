@@ -105,8 +105,11 @@ public:
   int SetLastTestBaseline(const char*);
   int SetLastTestImageThreshold(int);
 
+public:
+   pqOptions();
+
 protected:
-  pqOptions();
+//? hacl to make public ...  pqOptions();
   ~pqOptions() override;
 
   void Initialize() override;

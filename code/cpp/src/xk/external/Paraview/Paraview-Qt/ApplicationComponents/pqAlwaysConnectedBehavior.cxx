@@ -81,5 +81,5 @@ void pqAlwaysConnectedBehavior::serverCheck()
     return;
   }
 
-  core->getObjectBuilder()->createServer(this->DefaultServer);
+//?  core->getObjectBuilder()->createServer(this->DefaultServer);
 }

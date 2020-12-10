@@ -33,7 +33,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define pqTextureComboBox_h
 
 #include "pqComponentsModule.h"
+
+//? added
+#include "vtkEventQtSlotConnect.h"
+
 #include "vtkNew.h"
+
 
 #include <QComboBox>
 

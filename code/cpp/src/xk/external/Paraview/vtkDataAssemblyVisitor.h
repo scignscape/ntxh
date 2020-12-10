@@ -52,9 +52,14 @@
    vtkDataAssemblyVisitor(const vtkDataAssemblyVisitor&) = delete;
    void operator=(const vtkDataAssemblyVisitor&) = delete;
   
-   class vtkInternals;
+ // //? have to hack this ...
+//   class vtkInternals;
+//   std::unique_ptr<vtkInternals> Internals;
+
+   class vtkInternals {};
    std::unique_ptr<vtkInternals> Internals;
-  
+
+
    const vtkDataAssembly* Assembly;
    int TraversalOrder;
    friend class vtkDataAssembly;

@@ -70,19 +70,20 @@ pqUndoStack::pqUndoStack(vtkSMUndoStackBuilder* builder, QObject* _parent /*=nul
   this->Implementation = new pqImplementation();
   this->Implementation->UndoStack = vtkSmartPointer<vtkSMUndoStack>::New();
 
-  if (builder)
-  {
-    this->Implementation->UndoStackBuilder = builder;
-  }
-  else
-  {
-    // create default builder.
-    builder = vtkSMUndoStackBuilder::New();
-    this->Implementation->UndoStackBuilder = builder;
-    builder->Delete();
-  }
+//?
+//  if (builder)
+//  {
+//    this->Implementation->UndoStackBuilder = builder;
+//  }
+//  else
+//  {
+//    // create default builder.
+//    builder = vtkSMUndoStackBuilder::New();
+//    this->Implementation->UndoStackBuilder = builder;
+//    builder->Delete();
+//  }
 
-  builder->SetUndoStack(this->Implementation->UndoStack);
+//  builder->SetUndoStack(this->Implementation->UndoStack);
 
   this->Implementation->VTKConnector = vtkSmartPointer<vtkEventQtSlotConnect>::New();
   this->Implementation->VTKConnector->Connect(this->Implementation->UndoStack,

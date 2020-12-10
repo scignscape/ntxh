@@ -122,14 +122,16 @@ pqApplicationCore::pqApplicationCore(
   vtkSmartPointer<pqOptions> defaultOptions;
   if (!options)
   {
-    defaultOptions = vtkSmartPointer<pqOptions>::New();
-    options = defaultOptions;
+   //? added
+    pqOptions* default_options = new pqOptions;
+     //?defaultOptions = vtkSmartPointer<pqOptions>::New();
+    options =  default_options; // defaultOptions;
   }
   this->Options = options;
 
   vtkInitializationHelper::SetOrganizationName(QApplication::organizationName().toStdString());
   vtkInitializationHelper::SetApplicationName(QApplication::applicationName().toStdString());
-  vtkInitializationHelper::Initialize(argc, argv, vtkProcessModule::PROCESS_CLIENT, options);
+  //?vtkInitializationHelper::Initialize(argc, argv, vtkProcessModule::PROCESS_CLIENT, options);
   this->constructor();
 }
 
@@ -497,8 +499,11 @@ pqSettings* pqApplicationCore::settings()
 {
   if (!this->Settings)
   {
-    auto options = pqOptions::SafeDownCast(vtkProcessModule::GetProcessModule()->GetOptions());
-    bool disable_settings = (options && options->GetDisableRegistry());
+//?
+//    auto options = pqOptions::SafeDownCast(vtkProcessModule::GetProcessModule()->GetOptions());
+//    bool disable_settings = (options && options->GetDisableRegistry());
+   bool disable_settings = false;
+
 
     const QString settingsOrg = QApplication::organizationName();
     const QString settingsApp =

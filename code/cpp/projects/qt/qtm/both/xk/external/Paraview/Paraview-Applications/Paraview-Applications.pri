@@ -237,7 +237,7 @@ HEADERS +=  \
   $$SRC_DIR/ParaView/pqparaviewInitializer.h
 
 
-LIBS += -L$$TARGETSDIR  -lParaview-Clients  -lParaview-Qt
+LIBS += -L$$TARGETSDIR  -lParaview-Clients  #-lParaview-Qt
 
 #LIBS += -L$$TARGETSDIR
 
@@ -245,7 +245,7 @@ LIBS +=  $$PV_ALT_LIB_DIR/libpqApplicationComponents-pv5.7.so.5.7
 LIBS +=  $$PV_ALT_LIB_DIR/libpqComponents-pv5.7.so.5.7
 LIBS +=  $$PV_ALT_LIB_DIR/libpqCore-pv5.7.so.5.7
 
-#LIBS +=  $$PV_ALT_LIB_DIR/libpqWidgets-pv5.7.so.5.7
+LIBS +=  $$PV_ALT_LIB_DIR/libpqWidgets-pv5.7.so.5.7
 
 
 
@@ -388,3 +388,4 @@ LIBS +=  $$PV_ALT_LIB_DIR/libvtkxdmf2-pv5.7.so.5.7
 
 LIBS += /usr/lib/x86_64-linux-gnu/libpng16.so.16
 
+LIBS += -lpython2.7

@@ -585,7 +585,7 @@ void pqPropertiesPanel::updateDisplayPanel(pqDataRepresentation* repr)
       this->Internals->DisplayWidgets->hide();
       delete this->Internals->DisplayWidgets;
     }
-    this->Internals->RepresentationEventConnect->Disconnect();
+    //? this->Internals->RepresentationEventConnect->Disconnect();
     this->Internals->Representation = repr;
     if (repr)
     {
