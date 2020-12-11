@@ -99,7 +99,6 @@ int main(int argc, char* argv[])
 
   using InitializerT = pqparaviewInitializer;
 
-
   InitializerT pvInitializer;
   InitializerT::Status status = pvInitializer.Initialize(argc, argv);
   switch (status)

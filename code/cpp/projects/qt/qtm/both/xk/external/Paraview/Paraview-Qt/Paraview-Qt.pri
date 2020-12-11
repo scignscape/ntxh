@@ -1271,7 +1271,8 @@ SOURCES += \
   $$SRC_DIR/Widgets/pqWaitCursor.cxx
 
 
-SOURCES += \
-  $$SRC_DIR/stubs.cpp
+
+#SOURCES += \
+#  $$SRC_DIR/stubs.cpp
 
 LIBS += -lpython2.7
