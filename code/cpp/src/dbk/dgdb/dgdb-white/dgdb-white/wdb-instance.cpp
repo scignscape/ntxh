@@ -777,7 +777,12 @@ void* WDB_Instance::_new_wg_record(u4 id, QString col1, void* col2,
 
  if(!col1.isEmpty())
  {
-  wgim[1] = wg_encode_str(white_, q_to_std(col1), nullptr);
+#ifdef USE_LATIN1_THROUGHOUT
+  const char* cs = col1.toLatin1().constData();// q_to_std(col1);
+#else
+  char* cs = q_to_std(col1);
+#endif
+  wgim[1] = wg_encode_str(white_, (char*) cs, nullptr); // q_to_std(col1), nullptr);
  }
 
  if(col2)
@@ -787,7 +792,7 @@ void* WDB_Instance::_new_wg_record(u4 id, QString col1, void* col2,
 
  if(!col3.isEmpty())
  {
-  wgim[1] = wg_encode_str(white_, q_to_std(col3), nullptr);
+  wgim[3] = wg_encode_str(white_, q_to_std(col3), nullptr);
  }
 
  u4 max = 0;

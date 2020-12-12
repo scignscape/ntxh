@@ -114,11 +114,25 @@ void GTagML_Output_Blocks::load_marks(QString path)
  u4 last_index = 0;
  u1 last_mode = 0;
 
- TextIO::load_file(path, [this, &current_index,
+ QMultiMap<QString, QString> info_params;
+
+ TextIO::load_file(path, [this, &info_params, &current_index,
    &current_mode, &last_index, &last_mode](QString& line) -> int
  {
   if(line.isEmpty())
     return 0;
+
+  if(line.startsWith("$ "))
+  {
+   if(line.endsWith(';'))
+     line.chop(1);
+   QStringList qsl = line.mid(2).trimmed().split(" := ", Qt::KeepEmptyParts);
+   QString key = qsl.takeFirst();
+   for(QString v : qsl)
+     info_params.insert(key, v);
+   return 0;
+  }
+
   if(line.startsWith("= "))
   {
    line = line.mid(2).trimmed();
@@ -148,7 +162,8 @@ void GTagML_Output_Blocks::load_marks(QString path)
 
 QString GTagML_Output_Blocks::export_marks(QString path)
 {
- QVector<QStringList> marks = document_.document_info().marks();
+ QVector<QStringList>& marks = document_.document_info().marks();
+ QMap<QString, QString>& params = document_.document_info().info_params();
 
  u4 indices [5] {0,0,0,0,0};
 
@@ -167,6 +182,14 @@ QString GTagML_Output_Blocks::export_marks(QString path)
  if(outfile.open(QFile::WriteOnly | QIODevice::Text))
  {
   QTextStream qts(&outfile);
+
+  QMapIterator<QString, QString> it(params);
+  while(it.hasNext())
+  {
+   it.next();
+   qts << QString("$ %1 := %2\n").arg(it.key()).arg(it.value());
+  }
+
   for(u4 uu : special_flag_marks_)
   {
    if( (uu & 0x80000000) > 0 )

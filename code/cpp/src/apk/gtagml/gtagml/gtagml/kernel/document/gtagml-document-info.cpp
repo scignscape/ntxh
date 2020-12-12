@@ -138,6 +138,15 @@ void GTagML_Document_Info::save_light_xml(QString file)
 // }
 }
 
+void GTagML_Document_Info::set_info_param(QString key, QString value)
+{
+ if(info_params_.contains(key))
+   info_params_[key] += " := " + value;
+ else
+   info_params_[key] = value;
+}
+
+
 void GTagML_Document_Info::save_file(QString path, QString contents)
 {
  QFile file(path);

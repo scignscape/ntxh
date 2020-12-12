@@ -34,6 +34,8 @@ class GTagML_Document_Info
  GTagML_Document_Light_Xml* light_xml_;
 
  QVector<QStringList> marks_;
+ QMap<QString, QString> info_params_;
+
 
 public:
 
@@ -43,6 +45,7 @@ public:
  ACCESSORS(GTagML_Document_Light_Xml* ,light_xml)
 
  ACCESSORS__RGET(QVector<QStringList> ,marks)
+ ACCESSORS__RGET(MACRO_PASTE(QMap<QString, QString>) ,info_params)
 
  GTagML_Document_Info();
 
@@ -50,6 +53,9 @@ public:
  void add_word(QString word);
 
  void add_href(QString tagname, QString url);
+
+ void set_info_param(QString key, QString value);
+
 
  void save_word_count(QString file);
  void save_word_stream(QString file);

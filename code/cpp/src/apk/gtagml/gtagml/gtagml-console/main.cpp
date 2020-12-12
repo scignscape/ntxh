@@ -52,12 +52,13 @@ void process_gtagml_file(QString path)
  gob->init_standard_8bit();
  gob->export_blocks(); //(path + ".");
 
- QString mark_path = gob->export_marks(); //(path + ".");
-
-// gob->load_marks(mark_path);
  GTagML_Output_SDI_Infoset* gsi = new GTagML_Output_SDI_Infoset(*gdoc, blw);
  //goi->init_standard_8bit();
  gsi->export_infoset(path + ".info.txt"); // export_blocks(); //(path + ".");
+
+ QString mark_path = gob->export_marks(); //(path + ".");
+ gob->load_marks(mark_path);
+
 
  QString cpy = gsi->copy_path();
 

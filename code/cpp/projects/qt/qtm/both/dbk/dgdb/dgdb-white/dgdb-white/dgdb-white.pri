@@ -17,6 +17,8 @@ include($$ROOT_DIR/../preferred/sysr-c.pri)
 DEFINES += USE_KANS
 
 
+DEFINES += USE_LATIN1_THROUGHOUT
+
 INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR
 
 #? INCLUDEPATH += $$SRC_KERNEL_DIR/whitedb/whitedb 

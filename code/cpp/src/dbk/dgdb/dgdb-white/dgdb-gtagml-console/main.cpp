@@ -11,10 +11,9 @@
 
 #include <QDate>
 
+
 #include "gtagml-document-info.h"
-
-#include "queue-demo-class.h"
-
+#include "gtagml-document-mark.h"
 
 #include "dgdb-white/dw-instance.h"
 #include "dgdb-white/dw-record.h"
@@ -51,7 +50,7 @@ int main(int argc, char* argv[])
 
  // dw->Config.flags.local_scratch_mode = true;
  dw->Config.flags.scratch_mode = true;
-// dw->Config.flags.avoid_record_pointers = true;
+ dw->Config.flags.avoid_record_pointers = true;
 
  dw->init();
 
@@ -86,11 +85,30 @@ int main(int argc, char* argv[])
 // qdc->set_test_time(QTime(11,47,22,888));
 
 
-// DW_Record dwr1 = dw->register_typed_value(qdc);
+ DW_Record dwr = dw->register_typed_value(gdi);
+ qDebug() << "dwr id: " << dwr.id();
+
+ DW_Stage_Value dwsv;
+ dwsv.set_str_data("Cognitive Transform Grammar"); //new_qstring("Critique of Pure Reason");
+
+ DW_Record dwr1 = dw->query_by_multi_index_record(dwsv, "GTagML_Document_Info", 4);
+ qDebug() << "dwr1 id: " << dwr1.id();
+
+ //Queue_Demo_Class* qdc1 = new Queue_Demo_Class; //;dw->new_typed_value<Queue_Demo_Class>(dwr3);
+
+ GTagML_Document_Info* gdi1 = dw->parse_dw_record<GTagML_Document_Info>(dwr1);
+
+ qDebug() << "dwr1 id: " << gdi1->document_title();
+
+ return 0;
+}
+
+#ifdef HIDE
+
 
 // DW_Stage_Value dwsv;
 // dwsv.set_u2_data(777);
- 
+
 // DW_Record dwr2 = dw->query_by_index_record(dwsv, "Book.Pages");
 // qDebug() << "dwr2 id: " << dwr2.id();
 
@@ -110,11 +128,9 @@ int main(int argc, char* argv[])
 // qDebug() << "num: " << qdc1->num();
 // qDebug() << "test_time: " << qdc1->test_time();
 // qDebug() << "publication_date: " << qdc1->publication_date();
- 
- return 0;
-}
 
-#ifdef HIDE
+
+
 int main6(int argc, char* argv[])
 {
  DW_Instance* dw = DGEnvironment(

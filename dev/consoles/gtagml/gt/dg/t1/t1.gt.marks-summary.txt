@@ -1,3 +1,5 @@
+$ document-title := Cognitive Transform Grammar
+$ local-title := info
 
 = 4:
 = 3

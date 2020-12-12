@@ -38,6 +38,25 @@ GTagML_CALLBACK_(copy)
 _GTagML_CALLBACK
 
 
+GTagML_CALLBACK_(document-title)
+ WHEN_(around)
+ {
+  set_info_param(qts, "document-title", node);
+ }
+ _WHEN
+_GTagML_CALLBACK
+
+GTagML_CALLBACK_(local-title)
+ WHEN_(around)
+ {
+  set_info_param(qts, "local-title", node);
+ }
+ _WHEN
+_GTagML_CALLBACK
+
+
+
+
 
 GTagML_CALLBACK_(noxml_)
  WHEN_(around)

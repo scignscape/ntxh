@@ -50,8 +50,6 @@ class GTagML_Document
 
  QMap<QString, caon_ptr<GTagML_Annotation_Tile> > local_annotations_;
 
-
-
  GTagML_Parsing_Modes parsing_mode_;
 
  GTagML_Document_Info document_info_;

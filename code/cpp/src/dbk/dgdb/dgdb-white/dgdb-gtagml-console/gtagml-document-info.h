@@ -25,6 +25,8 @@ KANS_CLASS_DECLARE(DGDB ,DW_Stage_Queue)
 
 class GTagML_Document_Info
 {
+ QString document_title_;
+
  typedef QMap<u4, QPair<QString, u4>> mark_map_type;
 
  mark_map_type main_mark_map_;
@@ -35,9 +37,13 @@ class GTagML_Document_Info
  QDateTime created_;
  QDateTime modified_;
 
+ QMultiMap<QString, QString> info_params_;
+
 public:
 
  GTagML_Document_Info();
+
+ ACCESSORS(QString ,document_title)
 
  void load_marks(QString path);
 
@@ -54,8 +60,8 @@ public:
  static void init_stage_queue(const QByteArray& qba,
    QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq);
 
-// void supply_data(QByteArray& qba);
-// void absorb_data(const QByteArray& qba);
+ void supply_data(QByteArray& qba);
+ void absorb_data(const QByteArray& qba);
 
 
 };

@@ -22,12 +22,12 @@ void GTagML_Document_Mark::encode_stage_values(QByteArray& qba,
    DW_Stage_Value::Callback_type cb)
 {
  QDataStream qds(&qba, QIODevice::WriteOnly);
-// qds << DW_Stage_Value().set_str_data(title_).run[4](cb)
-//   << author_
-//   << DW_Stage_Value().set_u2_data(num_).run["Book.Pages"](cb)
-//   << DW_Stage_Value().set_u2_data(num_).run[5](cb)
-//   << DW_Stage_Value().set_date_data(publication_date_).run[6](cb)
-//   << DW_Stage_Value().set_time_data(test_time_).run[7](cb)
+ qds
+   << DW_Stage_Value().set_str_data(text_).run[4](cb)
+   << DW_Stage_Value().set_str_data(annotation_).run[5](cb)
+   << start_
+   << end_
+   << layer_
  ;
 }
 
@@ -38,7 +38,8 @@ void GTagML_Document_Mark::init_stage_queue(const QByteArray& qba,
 
  QDataStream qds(qba);
 
- qds >> qm[4].queue<QString>(sq)
+ qds
+   >> qm[4].queue<QString>(sq)
    >> sq.enqueue_new<QString>()
    >> sq.skip()
    >> qm[5].queue<u2>(sq)

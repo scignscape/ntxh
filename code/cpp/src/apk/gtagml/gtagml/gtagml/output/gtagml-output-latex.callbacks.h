@@ -13,6 +13,8 @@ GTagML_CALLBACK_NOACTION(_xml-save)
 GTagML_CALLBACK_SUPPRESS(saved-xml)
 
 GTagML_CALLBACK_NOACTION(copy)
+GTagML_CALLBACK_NOACTION(document-title)
+GTagML_CALLBACK_NOACTION(local-title)
 
 GTagML_CALLBACK_(body)
  WHEN_(pre)

@@ -103,6 +103,8 @@ class GTagML_Output_SDI_Infoset : public GTagML_Output_Base, private GTagML_Outp
 
  void set_copy(QTextStream& qts, caon_ptr<tNode> node);
 
+ void set_info_param(QTextStream& qts, QString key, caon_ptr<tNode> node);
+
 public:
 
  GTagML_Output_SDI_Infoset(GTagML_Document& document, GH_Block_Writer* block_writer);//, HTXN_Infoset_8b* infoset);
