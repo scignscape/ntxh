@@ -90,6 +90,8 @@ void GTagML_Document_Info::encode_stage_values(QByteArray& qba,
    << DW_Stage_Value().set_n8_data(modified_.currentMSecsSinceEpoch()).run[6](cb)   << DW_Stage_Value().set_n8_data(created_.currentMSecsSinceEpoch()).run[5](cb)
    << DW_Stage_Value().set_date_data(created_.date()).run[7](cb)
    << DW_Stage_Value().set_date_data(created_.date()).run[8](cb)
+
+   << info_params_
   ;
 }
 
@@ -98,6 +100,19 @@ void GTagML_Document_Info::read_stage_queue(QQueue<void*>& vals)
 // n8
 // created_ = *(QDateTime*) vals.dequeue();
 // modified_ = *(QDateTime*) vals.dequeue();
+
+ document_title_ = *(QString*) vals.dequeue();
+
+ n8 cre = *(n8*) vals.dequeue();
+ created_ = QDateTime::fromMSecsSinceEpoch(cre);
+ n8 mod = *(n8*) vals.dequeue();
+ modified_ = QDateTime::fromMSecsSinceEpoch(mod);
+
+ info_params_ = *(QMap<QString, QString>*) vals.dequeue();
+// annotation_ = *(QString*) vals.dequeue();
+// start_ = *(u4*) vals.dequeue();
+// end_ = *(u4*) vals.dequeue();
+// layer_ = *(u4*) vals.dequeue();
 }
 
 void GTagML_Document_Info::init_stage_queue(const QByteArray& qba,
@@ -111,11 +126,15 @@ void GTagML_Document_Info::init_stage_queue(const QByteArray& qba,
    >> qm[4].queue<QString>(sq)
    >> qm[5].queue<n8>(sq)
    >> qm[6].queue<n8>(sq)
-   >> qm[7].queue<QDate>(sq)
-   >> qm[8].queue<QDate>(sq)
+
+   >> sq.enqueue_new<QMap<QString, QString>>()
+   >> sq.skip()
+
+//   >> qm[7].queue<QDate>(sq)
+//   >> qm[8].queue<QDate>(sq)
   ;
 
-
+ sq.reverse();
 }
 
 
