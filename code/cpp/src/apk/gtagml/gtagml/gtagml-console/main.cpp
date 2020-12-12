@@ -54,9 +54,7 @@ void process_gtagml_file(QString path)
 
  QString mark_path = gob->export_marks(); //(path + ".");
 
- gob->load_marks(mark_path);
-
-
+// gob->load_marks(mark_path);
  GTagML_Output_SDI_Infoset* gsi = new GTagML_Output_SDI_Infoset(*gdoc, blw);
  //goi->init_standard_8bit();
  gsi->export_infoset(path + ".info.txt"); // export_blocks(); //(path + ".");
@@ -82,6 +80,9 @@ void process_gtagml_file(QString path)
  {
   QString cp = copy_file_to_folder(path + ".tex", cpy);
   qDebug() << "Copied " << path + ".tex" << " to " << cp;
+
+  cp = copy_file_to_folder(mark_path, cpy);
+  qDebug() << "Copied " << mark_path << " to " << cp;
  }
 
  prepend_template_to_file(cp, DEFAULT_SDI_FOLDER "/prepend",

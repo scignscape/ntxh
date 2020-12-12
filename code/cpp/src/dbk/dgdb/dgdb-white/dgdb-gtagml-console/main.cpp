@@ -11,7 +11,7 @@
 
 #include <QDate>
 
-#include "demo-class.h"
+#include "gtagml-document-info.h"
 
 #include "queue-demo-class.h"
 
@@ -39,82 +39,82 @@
 USING_KANS(DGDB)
 
 
-int main1(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
  DW_Instance* dw = DGEnvironment(
-   DEFAULT_DEV_DGDB_FOLDER "/instances/t1");
+   DEFAULT_DEV_DGDB_NGML_FOLDER "/instances/t1");
 
  // // local_scratch_mode has no persistence at all.
   //   Scratch mode resets the database whenever it is
   //   opened by DigammaDB, but keeps the database in memory 
   //   in between (so e.g. it can be examined via the wgdb utility). 
-// dw->Config.flags.local_scratch_mode = true;
 
+ // dw->Config.flags.local_scratch_mode = true;
  dw->Config.flags.scratch_mode = true;
- dw->Config.flags.avoid_record_pointers = true;
+// dw->Config.flags.avoid_record_pointers = true;
 
  dw->init();
 
-
  DW_Type_System* dwt = dw->type_system();
 
-//? dwt->REGISTER_TYPE_NAME_RESOLUTION(QString);
- dwt->REGISTER_TYPE_NAME_RESOLUTION(Queue_Demo_Class);
+ dwt->REGISTER_TYPE_NAME_RESOLUTION(GTagML_Document_Info);
 
- dwt->REGISTER_TYPE(Queue_Demo_Class)
+ dwt->REGISTER_TYPE(GTagML_Document_Info)
    .default_object_layout()
-   .set_stage_encoder(&Queue_Demo_Class::encode_stage_values)
-   .set_stage_queue_initializer(&Queue_Demo_Class::init_stage_queue)
-   .set_default_stage_queue_reader(&Queue_Demo_Class::read_stage_queue)
+   .set_stage_encoder(&GTagML_Document_Info::encode_stage_values)
+   .set_stage_queue_initializer(&GTagML_Document_Info::init_stage_queue)
+   .set_default_stage_queue_reader(&GTagML_Document_Info::read_stage_queue)
   ;
-   //.set_stage_queue_reader(&Queue_Demo_Class::read_stage_queue)
 
+   //.set_stage_queue_reader(&Queue_Demo_Class::read_stage_queue)
    //.set_stage_queue_reader( default_stage_queue_reader
    //  <Queue_Demo_Class>( &Queue_Demo_Class::read_stage_queue ));
 
+ DW_Type* GTagML_Document_Info_dw_type = dwt->get_type_by_name("GTagML_Document_Info");
 
- DW_Type* Queue_Demo_Class_dw_type = dwt->get_type_by_name("Queue_Demo_Class");
-
- qDebug() << "name: " << Queue_Demo_Class_dw_type->name();
+ qDebug() << "name: " << GTagML_Document_Info_dw_type->name();
  
 
- Queue_Demo_Class* qdc = new Queue_Demo_Class;
- qdc->set_author("Immanuel Kant");
- qdc->set_title("Critique of Pure Reason");
- qdc->set_num(777);
- qdc->set_publication_date(QDate(1787, 4, 23));
- qdc->set_test_time(QTime(11,47,22,888));
+ GTagML_Document_Info* gdi = new GTagML_Document_Info;
+
+ gdi->load_marks(DEFAULT_DEV_DGDB_NGML_FOLDER "/ctg/ngml/gen/t1.gt.marks-summary.txt");
+
+// qdc->set_author("Immanuel Kant");
+// qdc->set_title("Critique of Pure Reason");
+// qdc->set_num(777);
+// qdc->set_publication_date(QDate(1787, 4, 23));
+// qdc->set_test_time(QTime(11,47,22,888));
 
 
- DW_Record dwr1 = dw->register_typed_value(qdc);
+// DW_Record dwr1 = dw->register_typed_value(qdc);
 
- DW_Stage_Value dwsv;
- dwsv.set_u2_data(777);
+// DW_Stage_Value dwsv;
+// dwsv.set_u2_data(777);
  
- DW_Record dwr2 = dw->query_by_index_record(dwsv, "Book.Pages");
- qDebug() << "dwr2 id: " << dwr2.id();
+// DW_Record dwr2 = dw->query_by_index_record(dwsv, "Book.Pages");
+// qDebug() << "dwr2 id: " << dwr2.id();
 
- DW_Stage_Value dwsv1;
- dwsv1.set_str_data("Critique of Pure Reason"); //new_qstring("Critique of Pure Reason");
+// DW_Stage_Value dwsv1;
+// dwsv1.set_str_data("Critique of Pure Reason"); //new_qstring("Critique of Pure Reason");
 
- DW_Record dwr3 = dw->query_by_multi_index_record(dwsv1, "Queue_Demo_Class", 3);
- qDebug() << "dwr3 id: " << dwr3.id();
+// DW_Record dwr3 = dw->query_by_multi_index_record(dwsv1, "Queue_Demo_Class", 3);
+// qDebug() << "dwr3 id: " << dwr3.id();
 
- //Queue_Demo_Class* qdc1 = new Queue_Demo_Class; //;dw->new_typed_value<Queue_Demo_Class>(dwr3);
+// //Queue_Demo_Class* qdc1 = new Queue_Demo_Class; //;dw->new_typed_value<Queue_Demo_Class>(dwr3);
 
- Queue_Demo_Class* qdc1 = dw->parse_dw_record<Queue_Demo_Class>(dwr3);
+// Queue_Demo_Class* qdc1 = dw->parse_dw_record<Queue_Demo_Class>(dwr3);
 
 
- qDebug() << "author: " << qdc1->author();
- qDebug() << "title: " << qdc1->title();
- qDebug() << "num: " << qdc1->num();
- qDebug() << "test_time: " << qdc1->test_time();
- qDebug() << "publication_date: " << qdc1->publication_date();
+// qDebug() << "author: " << qdc1->author();
+// qDebug() << "title: " << qdc1->title();
+// qDebug() << "num: " << qdc1->num();
+// qDebug() << "test_time: " << qdc1->test_time();
+// qDebug() << "publication_date: " << qdc1->publication_date();
  
  return 0;
 }
 
-
+#ifdef HIDE
 int main6(int argc, char* argv[])
 {
  DW_Instance* dw = DGEnvironment(
@@ -418,5 +418,5 @@ int main4(int argc, char* argv[])
 
 }
 
-
+#endif
 

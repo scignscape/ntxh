@@ -29,7 +29,7 @@ static constexpr u1 C_STRING_DECODING_Flag = 64;
 static constexpr u1 XSD_TYPE_DECODING_Flag = 128;
 static constexpr u1 URI_PREFIX_DECODING_Flag = 128;
 
-struct DW_Stage_Queue;
+class DW_Stage_Queue;
 
 //class DgDb_Node;
 
