@@ -12,8 +12,14 @@
 #include "dgdb-white/stage/dw-stage-queue.h"
 
 
+GTagML_Document_Mark::GTagML_Document_Mark(u4 document_id, QString text)
+ : document_id_(document_id), text_(text), start_(0), end_(0), layer_(0)
+{
+
+}
+
 GTagML_Document_Mark::GTagML_Document_Mark()
- : start_(0), end_(0), layer_(0)
+ : document_id_(0), start_(0), end_(0), layer_(0)
 {
 
 }
@@ -23,6 +29,7 @@ void GTagML_Document_Mark::encode_stage_values(QByteArray& qba,
 {
  QDataStream qds(&qba, QIODevice::WriteOnly);
  qds
+   << DW_Stage_Value().set_u4_data(document_id_).run["Doc.Id"](cb)
    << DW_Stage_Value().set_str_data(text_).run[4](cb)
    << DW_Stage_Value().set_str_data(annotation_).run[5](cb)
    << start_
@@ -39,9 +46,8 @@ void GTagML_Document_Mark::init_stage_queue(const QByteArray& qba,
  QDataStream qds(qba);
 
  qds
-   >> qm[4].queue<QString>(sq)
-   >> sq.enqueue_new<QString>()
    >> sq.skip()
+   >> qm[4].queue<QString>(sq)
    >> qm[5].queue<u2>(sq)
    >> qm[6].queue<QDate>(sq)
    >> qm[7].queue<QTime>(sq)

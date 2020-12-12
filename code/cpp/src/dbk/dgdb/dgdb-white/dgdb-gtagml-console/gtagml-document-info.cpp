@@ -4,7 +4,10 @@
 //     (See accompanying file LICENSE_1_0.txt or copy at
 //           http://www.boost.org/LICENSE_1_0.txt)
 
+
 #include "gtagml-document-info.h"
+
+#include "gtagml-document-mark.h"
 
 #include "dgdb-white/dw-stage-value.h"
 #include "dgdb-white/stage/dw-stage-queue.h"
@@ -15,7 +18,10 @@
 #include "textio.h"
 USING_KANS(TextIO)
 
+
 GTagML_Document_Info::GTagML_Document_Info()
+ : in_database_id_(0), mark_register_fn_(nullptr),
+   FN_VIA_OP(GTagML_Document_Info ,mark_register_fn)
 {
 
 }
@@ -75,6 +81,53 @@ void GTagML_Document_Info::load_marks(QString path)
  });
 
  document_title_ = info_params_.value("document-title");
+}
+
+void GTagML_Document_Info::register_marks()
+{
+ QVector<GTagML_Document_Mark*> ms;
+ if(!main_mark_map_.isEmpty())
+   register_marks(ms, 1, main_mark_map_);
+
+ if(!optional_argument_mark_map_.isEmpty())
+   register_marks(ms, 2, optional_argument_mark_map_);
+
+ if(!mandatory_argument_mark_map_.isEmpty())
+   register_marks(ms, 3, mandatory_argument_mark_map_);
+
+ if(!auxiliary_mark_map_.isEmpty())
+   register_marks(ms, 4, auxiliary_mark_map_);
+
+ if(ms.isEmpty())
+   return;
+
+ if(!mark_register_fn_)
+   return;
+
+ //std::for_each(ms.back(), ms.end(), mark_register_fn_)
+
+ for(GTagML_Document_Mark* gdm : ms)
+ {
+  u4 gdm_id = mark_register_fn_(*gdm);
+  if(gdm_id == 0)
+    break;
+ }
+}
+
+
+void GTagML_Document_Info::register_marks(QVector<GTagML_Document_Mark*>& ms,
+  u4 layer, mark_map_type& mark_map)
+{
+ QMapIterator<u4, QPair<QString, u4>> it(mark_map);
+ while(it.hasNext())
+ {
+  it.next();
+  GTagML_Document_Mark* gdm = new GTagML_Document_Mark(in_database_id_, it.value().first);
+  gdm->set_start(it.key());
+  gdm->set_end(it.value().second);
+  gdm->set_layer(layer);
+  ms.push_back(gdm);
+ }
 }
 
 void GTagML_Document_Info::encode_stage_values(QByteArray& qba,

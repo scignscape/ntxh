@@ -17,14 +17,22 @@
 #include <QByteArray>
 
 
+#include <functional>
+
+
 #include "kans.h"
 USING_KANS(DGDB)
 
 KANS_CLASS_DECLARE(DGDB ,DW_Stage_Value)
 KANS_CLASS_DECLARE(DGDB ,DW_Stage_Queue)
 
+
+class GTagML_Document_Mark;
+
+
 class GTagML_Document_Info
 {
+ u4 in_database_id_;
  QString document_title_;
 
  typedef QMap<u4, QPair<QString, u4>> mark_map_type;
@@ -39,13 +47,40 @@ class GTagML_Document_Info
 
  QMultiMap<QString, QString> info_params_;
 
+ std::function<u4(GTagML_Document_Mark&)> mark_register_fn_;
+
+ void register_marks(QVector<GTagML_Document_Mark*>& ms,
+   u4 layer, mark_map_type& mark_map);
+
+// static void static_set_mark_register_fn(GTagML_Document_Info& _this,
+//   std::function<u4(GTagML_Document_Mark&)> fn)
+// {
+//  _this.set_mark_register_fn(fn);
+// }
+// fn_setter<GTagML_Document_Info, std::function<u4(GTagML_Document_Mark&)>>
+//   set_mark_register_fn_;
+// ACCESSORS_FN_SETTER_DECLARE(GTagML_Document_Info
+//   ,u4 (GTagML_Document_Mark&)
+//   ,mark_register_fn)
+
+
 public:
 
  GTagML_Document_Info();
 
  ACCESSORS(QString ,document_title)
 
+ ACCESSORS(u4 ,in_database_id)
+
+ //ACCESSORS_FN_SET(u4(GTagML_Document_Mark&) ,mark_register_fn)
+
+ ACCESSORS_FN_VIA_OP(GTagML_Document_Info
+   ,u4 (GTagML_Document_Mark&)
+   ,mark_register_fn)
+
+
  void load_marks(QString path);
+ void register_marks();
 
 
 // ACCESSORS(QString ,a_string)

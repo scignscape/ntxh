@@ -24,6 +24,8 @@ KANS_CLASS_DECLARE(DGDB ,DW_Stage_Queue)
 
 class GTagML_Document_Mark
 {
+ u4 document_id_;
+
  QString text_;
  QString annotation_;
  u4 start_;
@@ -32,10 +34,13 @@ class GTagML_Document_Mark
  
 public:
 
+ GTagML_Document_Mark(u4 document_id, QString text);
  GTagML_Document_Mark();
 
  ACCESSORS(QString ,text)
  ACCESSORS(QString ,annotation)
+
+ ACCESSORS(u4 ,document_id)
 
  ACCESSORS(u4 ,start)
  ACCESSORS(u4 ,end)

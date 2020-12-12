@@ -140,11 +140,56 @@
 #endif
 
 
-//#ifndef ACCESSORS
-//#define ACCESSORS(type, name) \
-// ACCESSORS__GET(type, name) \
-// ACCESSORS__SET(type, name)
-//#endif
+// // this all implements the set_fn() << ... syntax
+template<typename OBJECT_Type, typename FN_Type>
+struct fn_setter
+{
+ OBJECT_Type& _this;
+ void(*setter)(OBJECT_Type&, FN_Type);
+ void operator << (FN_Type fn)
+ {
+  setter(_this, fn);
+ }
+};
+
+
+#ifndef FN_VIA_OP
+#define FN_VIA_OP(typ ,x) \
+  set_##x##_{*this, &typ::static_set_##x}
+#endif
+
+
+#ifndef ACCESSORS_FN_SETTER_VIA_OP_DECLARE
+#define ACCESSORS_FN_SETTER_VIA_OP_DECLARE(typ, ret_args, fname) \
+ private: static void static_set_##fname(typ& _this, std::function<ret_args> fn) \
+ { \
+  _this.set_##fname(fn); \
+ } \
+ fn_setter<typ, std::function<ret_args>> set_##fname##_; public:
+#endif
+
+
+#ifndef ACCESSORS_FN_SET
+#define ACCESSORS_FN_SET(ret_args ,x) \
+  ACCESSORS__SET(std::function<ret_args> ,x)
+#endif
+
+
+
+#ifndef ACCESSORS_FN_SET_VIA_OP
+#define ACCESSORS_FN_SET_VIA_OP(typ, ret_args ,x) \
+ ACCESSORS_FN_SET(ret_args ,x) \
+ ACCESSORS_FN_SETTER_VIA_OP_DECLARE(typ, ret_args ,x) \
+ fn_setter<typ, std::function<ret_args>> set_##x() { return set_##x##_; }
+#endif
+
+
+
+#ifndef ACCESSORS_FN_VIA_OP
+#define ACCESSORS_FN_VIA_OP(typ, ret_args ,x) \
+  ACCESSORS__GET(std::function<ret_args> ,x) \
+  ACCESSORS_FN_SET_VIA_OP(typ, ret_args ,x)
+#endif
 
 
 

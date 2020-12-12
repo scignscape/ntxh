@@ -88,6 +88,20 @@ int main(int argc, char* argv[])
  DW_Record dwr = dw->register_typed_value(gdi);
  qDebug() << "dwr id: " << dwr.id();
 
+// gdi->set_mark_register_fn([] (GTagML_Document_Mark& gdm)
+// {
+//  qDebug() << gdm.text();
+//  return 1;
+// });
+
+ gdi->set_mark_register_fn() << [] (GTagML_Document_Mark& gdm)
+ {
+  qDebug() << gdm.text();
+  return 1;
+ };
+
+ gdi->register_marks();
+
  DW_Stage_Value dwsv;
  dwsv.set_str_data("Cognitive Transform Grammar"); //new_qstring("Critique of Pure Reason");
 
