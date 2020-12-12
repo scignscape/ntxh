@@ -12,9 +12,9 @@
 USING_KANS(GTagML)
 
 
-GTagML_Document_Info::GTagML_Document_Info() : light_xml_(nullptr)
+GTagML_Document_Info::GTagML_Document_Info() : light_xml_(nullptr),
+  marks_{{},{},{},{},{}}
 {
-
 }
 
 

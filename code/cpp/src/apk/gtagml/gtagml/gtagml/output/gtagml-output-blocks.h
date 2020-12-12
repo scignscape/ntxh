@@ -70,6 +70,12 @@ class GTagML_Output_Blocks : public GTagML_Output_Base, private GTagML_Output_Ev
  u4 last_ref_enter_;
  u4 last_ref_leave_;
 
+ QVector<u4> special_flag_marks_;
+
+ QVector<QMap<u4, QPair<QString, u4>>*> marks_by_mode_;
+
+
+
 public:
 
 
@@ -81,6 +87,10 @@ public:
 
  void export_blocks(QString path = "..blocks-summary.txt");
  void write_block_output(QMap<QString, QString>& block_output);
+
+ QString export_marks(QString path = "..marks-summary.txt");
+
+ void load_marks(QString path);
 
  void generate(QTextStream& qts) Q_DECL_OVERRIDE;
 

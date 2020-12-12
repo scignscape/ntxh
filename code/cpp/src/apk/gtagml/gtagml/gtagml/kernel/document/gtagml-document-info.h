@@ -33,12 +33,16 @@ class GTagML_Document_Info
 
  GTagML_Document_Light_Xml* light_xml_;
 
+ QVector<QStringList> marks_;
+
 public:
 
  ACCESSORS(word_count_type ,word_count)
  ACCESSORS(QString ,word_stream)
  ACCESSORS(hrefs_type ,hrefs)
  ACCESSORS(GTagML_Document_Light_Xml* ,light_xml)
+
+ ACCESSORS__RGET(QVector<QStringList> ,marks)
 
  GTagML_Document_Info();
 

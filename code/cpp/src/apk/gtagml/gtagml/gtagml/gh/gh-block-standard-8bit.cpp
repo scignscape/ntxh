@@ -114,10 +114,11 @@ GH_Block_Base::SDI_Interpretation_Codes GH_Block_Standard_8bit::get_sdi_interpre
  return glyphdeck_->get_sdi_interpretation_code((u1) u);
 }
 
-void GH_Block_Standard_8bit::write(QString text, QPair<u4, u4>& result)
+void GH_Block_Standard_8bit::write(QString text,
+  QPair<u4, u4>& result, QVector<u4>* special_flag_marks)
 {
  QByteArray qba = text.toLatin1();
- write(qba, result);
+ write(qba, result, special_flag_marks);
 }
 
 QPair<u4, u4> GH_Block_Standard_8bit::get_effective_start_and_end_indices()
@@ -155,8 +156,10 @@ QString GH_Block_Standard_8bit::get_latex_out(const QPair<u4, u4>& indices)
  return result;
 }
 
-void GH_Block_Standard_8bit::write(QByteArray& text, QPair<u4, u4>& result)
+void GH_Block_Standard_8bit::write(QByteArray& text,
+  QPair<u4, u4>& result, QVector<u4>* special_flag_marks)
 {
+
 
  if(text.isEmpty())
  {
@@ -172,6 +175,8 @@ void GH_Block_Standard_8bit::write(QByteArray& text, QPair<u4, u4>& result)
   {
    // // todo fewer raw numbers ...
    if(check == 200)
+     continue;
+   if(check == 80)
      continue;
    if(check > 200)
    {
@@ -193,9 +198,55 @@ void GH_Block_Standard_8bit::write(QByteArray& text, QPair<u4, u4>& result)
      chars_.push_back(glyphdeck_->encode_alt_pair(pr));
     }
    }
+   if(check > 90)
+   {
+    if(special_flag_marks)
+    {
+     if(special_flag_marks->isEmpty())
+     {
+      special_flag_marks->push_back(current_index_ | 0x80000000);
+      special_flag_marks->push_back(check - 90);
+     }
+     else
+     {
+      u4 sf_index = 0;
+      // find sf which is a position
+      u4 index_from_end = special_flag_marks->size();
+      while(index_from_end > 0)
+      {
+       --index_from_end;
+       u4 sf = special_flag_marks->at(index_from_end);
+       if( (sf & 0x80000000) > 0 )
+       {
+        sf_index = sf & 0x7FFFFFFF;
+        break;
+       }
+      }
+      if(sf_index)
+      {
+       // we've found an index.  Is it current?
+       if(sf_index == current_index_)
+         special_flag_marks->push_back(check - 90);
+       else
+       {
+        special_flag_marks->push_back(current_index_ | 0x80000000);
+        special_flag_marks->push_back(check - 90);
+       }
+      }
+     }
+    }
+   }
+   if(check == 89)
+   {
+    ++current_index_;
+    u1 uu = glyphdeck_->encode_latin1('^');
+    chars_.push_back(uu);
+    goto skip_continue;
+   }
    continue;
   }
 //  parse_mode_->
+skip_continue:
 
   //  switch(parse_mode_)
 //  {

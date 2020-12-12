@@ -517,6 +517,29 @@ QVector<caon_ptr<GTagML_Node>> GTagML_Output_SDI_Infoset::get_sdi_latex_insert_n
  return rvec;
 }
 
+void GTagML_Output_SDI_Infoset::set_copy(QTextStream& qts, caon_ptr<tNode> node)
+{
+ CAON_PTR_DEBUG(tNode ,node)
+ if(caon_ptr<GTagML_Tag_Command> ntc = node->GTagML_tag_command())
+ {
+  CAON_PTR_DEBUG(GTagML_Tag_Command ,ntc)
+  QString path = ntc->argument();
+  if(path.isEmpty())
+    return;
+  raw_copy_path_ = path;
+  if(path == "!")
+  {
+   copy_path_.clear();
+   return;
+  }
+  if(path.startsWith('@'))
+  {
+   QString pr = document_.get_path_root();
+   pr += path.mid(1);
+   copy_path_ = pr;
+  }
+ }
+}
 
 void GTagML_Output_SDI_Infoset::write_infoset_output(QString& output)
 {

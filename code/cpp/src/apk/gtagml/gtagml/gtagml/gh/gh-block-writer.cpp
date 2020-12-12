@@ -42,9 +42,10 @@ GH_Block_Base* GH_Block_Writer::write_tag_command_name(QString name, QPair<u4, u
  return current_tag_command_name_block_;
 }
 
-GH_Block_Base* GH_Block_Writer::write_tile(QString text, QPair<u4, u4>& result)
+GH_Block_Base* GH_Block_Writer::write_tile(QString text,
+  QPair<u4, u4>& result, QVector<u4>* special_flag_marks)
 {
- current_main_text_block_->write(text, result);
+ current_main_text_block_->write(text, result, special_flag_marks);
  return current_main_text_block_;
 }
 

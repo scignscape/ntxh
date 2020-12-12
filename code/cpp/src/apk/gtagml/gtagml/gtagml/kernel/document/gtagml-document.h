@@ -66,6 +66,8 @@ public:
  ACCESSORS(caon_ptr<GTagML_Graph> ,graph)
  ACCESSORS__GET(caon_ptr<GTagML_Grammar> ,grammar)
 
+ ACCESSORS__RGET(GTagML_Document_Info ,document_info)
+
  ACCESSORS(annotations_type ,annotations)
 
  ACCESSORS(QString ,khi_info)
@@ -76,6 +78,8 @@ public:
  GTagML_Document();
 
  ~GTagML_Document();
+
+ QString get_path_root();
 
  void check_sdi_tag_command_info();
 

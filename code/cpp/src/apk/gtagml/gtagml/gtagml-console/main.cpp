@@ -52,9 +52,16 @@ void process_gtagml_file(QString path)
  gob->init_standard_8bit();
  gob->export_blocks(); //(path + ".");
 
+ QString mark_path = gob->export_marks(); //(path + ".");
+
+ gob->load_marks(mark_path);
+
+
  GTagML_Output_SDI_Infoset* gsi = new GTagML_Output_SDI_Infoset(*gdoc, blw);
  //goi->init_standard_8bit();
  gsi->export_infoset(path + ".info.txt"); // export_blocks(); //(path + ".");
+
+ QString cpy = gsi->copy_path();
 
  GH_SDI_Document* gsd = gsi->sdi_document();
 
@@ -70,6 +77,12 @@ void process_gtagml_file(QString path)
  QString cp = copy_file_to_folder(path + ".tex", ffolder);
 
  qDebug() << "Copied " << path + ".tex" << " to " << cp;
+
+ if(!cpy.isEmpty())
+ {
+  QString cp = copy_file_to_folder(path + ".tex", cpy);
+  qDebug() << "Copied " << path + ".tex" << " to " << cp;
+ }
 
  prepend_template_to_file(cp, DEFAULT_SDI_FOLDER "/prepend",
  {
@@ -93,13 +106,13 @@ int main(int argc, char *argv[])
  QString manfolder;
 
  QStringList cmdl = get_cmdl(argc, argv, 2, {
-   {&folder, DEFAULT_GTAGML_FOLDER},
-   {&file, DEFAULT_GTAGML_FOLDER "/t1/t1.gt"},
+   {&folder, DEFAULT_GTAGML_FOLDER "/dg"},
+   {&file, DEFAULT_GTAGML_FOLDER "/dg/t1/t1.gt"},
    {&manfolder, {}}
    });
 
-//? folder = "/home/nlevisrael/hypergr/ntxh-ngml/ar/htxn/sdi-test/t9";
-//? file = "/home/nlevisrael/hypergr/ntxh-ngml/ar/htxn/sdi-test/t9/t9.ngml";
+//? folder = "/home/.../ntxh-ngml/ar/htxn/sdi-test/t9";
+//? file = "/home/.../ntxh-ngml/ar/htxn/sdi-test/t9/t9.ngml";
 
  qDebug() << "Folder: " << folder << ", File: " << file;
  qDebug() << "ManFolder: " << manfolder;

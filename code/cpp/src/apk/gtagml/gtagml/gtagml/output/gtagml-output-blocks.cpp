@@ -21,6 +21,8 @@
 
 #include "gh/gh-block-writer.h"
 
+#include "textio.h"
+
 //?#include "ngml-htxn/ngml-htxn-node.h"
 
 
@@ -67,6 +69,12 @@ GTagML_Output_Blocks::GTagML_Output_Blocks(GTagML_Document& document, GH_Block_W
  htxn_qts_.setString(&htxn_acc_);
  ws_qts_.setString(&ws_acc_);
  init_callbacks();
+ marks_by_mode_.push_back(new QMap<u4, QPair<QString, u4>>);
+ marks_by_mode_.push_back(marks_by_mode_.first());
+
+ marks_by_mode_.push_back(new QMap<u4, QPair<QString, u4>>);
+ marks_by_mode_.push_back(new QMap<u4, QPair<QString, u4>>);
+ marks_by_mode_.push_back(new QMap<u4, QPair<QString, u4>>);
 }
 
 void GTagML_Output_Blocks::init_standard_8bit()
@@ -98,6 +106,90 @@ void GTagML_Output_Blocks::generate(QTextStream& qts)
  GTagML_Output_Event_Generator events(*this, *this);
  events.generate(qts);
 }
+
+void GTagML_Output_Blocks::load_marks(QString path)
+{
+ u4 current_index = 0;
+ u1 current_mode = 0;
+ u4 last_index = 0;
+ u1 last_mode = 0;
+
+ TextIO::load_file(path, [this, &current_index,
+   &current_mode, &last_index, &last_mode](QString& line) -> int
+ {
+  if(line.isEmpty())
+    return 0;
+  if(line.startsWith("= "))
+  {
+   line = line.mid(2).trimmed();
+   if(line.endsWith(':'))
+   {
+    line.chop(1);
+    last_index = current_index;
+    current_index = line.toUInt();
+   }
+   else
+   {
+    last_mode = current_mode;
+    current_mode = line.toUInt();
+    if(current_mode == 9)
+    {
+     (*marks_by_mode_[last_mode])[last_index].second = current_index;
+    }
+   }
+  }
+  else
+  {
+   (*marks_by_mode_[current_mode])[current_index] = {line, 0};
+  }
+  return 0;
+ });
+}
+
+QString GTagML_Output_Blocks::export_marks(QString path)
+{
+ QVector<QStringList> marks = document_.document_info().marks();
+
+ u4 indices [5] {0,0,0,0,0};
+
+ if(path.startsWith(".."))
+ {
+  path.remove(0, 1);
+  path.prepend(document_.local_path());
+ }
+ else if(path.startsWith('.'))
+ {
+  QFileInfo qfi(document_.local_path());
+  path.prepend(qfi.absolutePath() + '/' + qfi.completeBaseName());
+ }
+
+ QFile outfile(path);
+ if(outfile.open(QFile::WriteOnly | QIODevice::Text))
+ {
+  QTextStream qts(&outfile);
+  for(u4 uu : special_flag_marks_)
+  {
+   if( (uu & 0x80000000) > 0 )
+   {
+    qts << QString("\n= %1:\n").arg(uu & 0x7FFFFFFF);
+   }
+   else
+   {
+    qts << QString("= %1\n").arg(uu);
+    if(uu < 5)
+    {
+     qts << marks[uu][indices[uu]] << "\n";
+     ++indices[uu];
+    }
+   }
+  }
+  return path;
+ }
+
+ return {};
+}
+
+
 
 void GTagML_Output_Blocks::export_blocks(QString path)
 {
@@ -332,7 +424,7 @@ void GTagML_Output_Blocks::generate_tile(const GTagML_Output_Bundle& b, caon_ptr
  QString rt = tile->raw_text();
  QPair<u4, u4> pr;
 
- GH_Block_Base* bl =  block_writer_->write_tile(rt, pr);//  write
+ GH_Block_Base* bl =  block_writer_->write_tile(rt, pr, &special_flag_marks_);//  write
  GH_Prenode* ghp = tile->init_prenode(bl, pr.first, pr.second);
 
  QMutableMapIterator<caon_ptr<GTagML_Tag_Command>, QPair<u4, u4>> it (ref_ranges_);

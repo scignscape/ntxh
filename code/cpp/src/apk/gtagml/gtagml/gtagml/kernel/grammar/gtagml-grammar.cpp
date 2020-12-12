@@ -306,10 +306,46 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
 //  graph_build.special_character_sequence(m);
 // });
 
+  add_rule( GTagML_context, "semantic-mark",
+   " (?: ` (?<pre> [`']?) (?: "
+   "  \\( (?<sem1> [^)]+ ) \\) ) "
+   "  | (?: ` { (?<sem2> [^}]+ ) } ) "
+   "  | (?: ` \\[ (?<sem3> [^]]+ ) \\] ) "
+   "  | (?: ` < (?<sem4> [^>]+ ) \\> ) "
+   " ) " ,[&]
+  {
+   int which = 1;
+   QString sem = p.matched("sem1");
+   if(sem.isEmpty())
+   {
+    sem = p.matched("sem2");
+    ++which;
+   }
+   if(sem.isEmpty())
+   {
+    sem = p.matched("sem3");
+    ++which;
+   }
+   if(sem.isEmpty())
+   {
+    sem = p.matched("sem4");
+    ++which;
+   }
+   if(sem.isEmpty())
+   {
+    which = 0;
+   }
+
+   QString m = p.match_text();
+
+   graph_build.semantic_mark(m, sem, which);
+
+
+  });
 
   add_rule( GTagML_context, "special-character-sequence",
    " (?: %-- ) | (?: ->- ) | (?: %\\.,{2,3} ) "
-   "  | (?: ` \\( (?<bq-esc1> [^]]+ ) \\) ) "
+   "  | (?: ` \\( (?<bq-esc1> [^)]+ ) \\) ) "
    "  | (?: ` { (?<bq-esc2> [^}]+ ) } ) "
    "  | (?: ` \\[ (?<bq-esc3> [^]]+ ) \\] ) "
    "  | (?: ` < (?<bq-esc4> [^>]+ ) \\> ) "

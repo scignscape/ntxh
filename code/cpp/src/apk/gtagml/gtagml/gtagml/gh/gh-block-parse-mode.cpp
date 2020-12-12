@@ -188,6 +188,8 @@ u1 GH_Block_Parse_Mode::check_hold(u1 cue)
  // returns
  //  0 = nothing special
  //  1 - 9 = length expected
+ //  80 = possible special flag
+ //  90 = special flag confirmed
  //  101-109 = holding cancel ...
  //  10 = waiting to see if alt ...
  //  200 = waiting to determine length
@@ -209,6 +211,11 @@ u1 GH_Block_Parse_Mode::check_hold(u1 cue)
  switch(hold_state_)
  {
  case 0:
+  if(cue == '^')
+  {
+   hold_state_ = 80;
+   return 80;
+  }
   if(cue == '|')
   {
    hold_state_ = 20;
@@ -323,45 +330,6 @@ u1 GH_Block_Parse_Mode::check_hold(u1 cue)
   cancel_or_alt_chars_.enqueue({0, cue});
   return 102;
 
-// case 11:
-//  if(cue == '~')
-//  {
-//   // //  we'll keep length_with_hold_state_
-//   //    for future reference
-//   hold_state_ = 12;
-//   return 0;
-//  }
-//  length_with_hold_state_ = 0;
-//  hold_state_ = 0;
-//  break;
-// case 12:
-//  if(cue == '(')
-//  {
-//   // //  Again, we'll keep length_with_hold_state_
-//   //    for future reference
-//   hold_state_ = 13;
-//   //continue;
-//  }
-//  length_with_hold_state_ = 0;
-//  hold_state_ = 0;
-//  break;
-// case 13:
-//  if(cue == ')')
-//  {
-//   // // store the acc;
-//   for(u2 i = 0; i < length_with_hold_state_; ++i)
-//   {
-//    //?flags_strings[index - i] = flags_acc;
-//   }
-//   //?flags_acc.clear();
-//   length_with_hold_state_ = 0;
-//   hold_state_ = 0;
-//  }
-//  else
-//   ;//?flags_acc.append(QChar::fromLatin1(cue));
-//   //continue;
-//  break;
-
   // //  part of a diacritic ...
 
   //    20 -- diacritic start
@@ -407,6 +375,22 @@ u1 GH_Block_Parse_Mode::check_hold(u1 cue)
    held_diacritic_code_ = get_diacritic_code(cue, 3);
    hold_state_ = 203;
    return 0; // overall loop
+  }
+ case 80:
+  {
+   if(cue == '%')
+   {
+    hold_state_ = 90;
+    return 90;
+   }
+   hold_state_ = 0;
+   return 89;
+  }
+ case 90:
+  {
+   u1 digit = cue - 48; // 1 - 9
+   hold_state_ = 0;
+   return 90 + digit;
   }
  case 201:
   {

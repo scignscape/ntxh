@@ -28,6 +28,11 @@
 
 #include <QtAlgorithms>
 
+#include "textio.h"
+
+#include <QDir>
+
+
 #include "kans.h"
 USING_KANS(GTagML)
 
@@ -38,6 +43,24 @@ GTagML_Document::GTagML_Document()
 {
 
 }
+
+
+QString GTagML_Document::get_path_root()
+{
+ if(local_path_.isEmpty())
+   return {};
+ QDir qd(local_path_);
+ if(qd.exists(".gt-copy"))
+ {
+  QString text = TextIO::load_file(qd.absoluteFilePath(".gt-copy")).trimmed();
+  if(!text.isEmpty())
+    return text;
+ }
+ qd.cd(ROOT_FOLDER);
+ qd.cdUp();
+ return qd.absolutePath();
+}
+
 
 void GTagML_Document::write_annotations(QString path, QMap<QString, caon_ptr<GTagML_Annotation_Tile>>& annotations)
 {

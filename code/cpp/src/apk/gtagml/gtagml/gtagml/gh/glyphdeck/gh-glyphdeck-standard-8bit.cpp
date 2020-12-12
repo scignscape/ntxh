@@ -712,9 +712,15 @@ u1 GH_Glyphdeck_Standard_8bit::encode_latin1(u1 chr)
   // // (48 - 57):  a digit
   return chr - 48;
  }
+// else if(chr == 63)
+// {
+//  // question mark (?)
+//  return 103;
+// }
  else if(chr < 65)
  {
-  return get_default_null();
+  goto MainSwitch;
+  //return get_default_null();
  }
  else if(chr < 91)
  {
@@ -735,12 +741,21 @@ MainSwitch:
  switch (chr)
  {
   //?
+ case ':': return 67;   //ascii 58
+ case ';': return 66;   //ascii 59
+
+ case '<': return 99;   //ascii 60
+ case '=': return 86;   //ascii 61
+ case '>': return 101;   //ascii 62
+
+ case '?': return 103;   //ascii 63
+
  case ' ': return 71;//
  case '\n': return 73;//
  case '`': return 74; //64
- case '~': return 74; //64
+ case '~': return 128; //64  //?
  case '!': return 75;
- case '@': return 76; //65
+ case '@': return 76; //ascii 64
  case '#': return 77; //66
  case '$': return 78; //67
  case '%': return 79; //68  // hyphen
@@ -751,7 +766,6 @@ MainSwitch:
  case ')': return 69; //73
 
  case '-': return 63; //74  // NpMinus
- case '=': return 86; //75
  case '+': return 87; //76  // NpDot
 
  case '{': return 88; //77
@@ -763,20 +777,12 @@ MainSwitch:
  //? case '|': return ; //86
  //?case '\\': return ; //87
 
- case ';': return 66; //88  // NsPer
- case ':': return 67; //89  // NsQm
  case '\'': return 98; //90  // NsExc
  case '"': return 97; //91  // SnSp
 
  case ',': return 65; //92 // Boundary
-
- case '<': return 99; //93 // SpaceX
-
  case '.': return 64; //94  // DashX
- case '>': return 101; //95  // FslX
-
  case '/': return 94; //96  // OSqBrX
- case '?': return 103; //97  // CSqBrX
 
 
  default:
@@ -957,6 +963,10 @@ u1 GH_Glyphdeck_Standard_8bit::get_sentence_end_swap(u1 gp)
 {
 if(gp == 64)
   return 70;
+
+if( (gp == 103) || (gp == 75) || (gp == 70) )
+  return gp;
+
  return get_default_null();
 }
 

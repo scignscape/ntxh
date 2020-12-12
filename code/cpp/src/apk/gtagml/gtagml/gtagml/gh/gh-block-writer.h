@@ -43,7 +43,8 @@ public:
 
  void init_standard_8bit();
  GH_Block_Base* write_tag_command_name(QString name, QPair<u4, u4>& result);
- GH_Block_Base* write_tile(QString name, QPair<u4, u4>& result);
+ GH_Block_Base* write_tile(QString name, QPair<u4, u4>& result,
+   QVector<u4>* special_flag_marks = nullptr);
  GH_Block_Base* write_mandatory_argument(QString name, QPair<u4, u4>& result);
  GH_Block_Base* write_optional_argument(QString name, QPair<u4, u4>& result);
 

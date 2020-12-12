@@ -967,6 +967,24 @@ void GTagML_Graph_Build::check_nonstandard_special_character_sequence
  }
 }
 
+void GTagML_Graph_Build::semantic_mark(QString match_text, QString sem, u1 mode)
+{
+ int ix = match_text.indexOf('.');
+ if(ix == -1)
+   match_text.clear();
+ else
+ {
+  match_text = match_text.mid(ix);
+ }
+ if(match_text.isEmpty())
+   match_text = sem;
+ QString text = QString("^%%1%2^").arg(mode).arg(sem) + "%9";
+ tile_acc(text);
+ document_info_.marks()[mode].push_back(sem);
+}
+
+
+
 void GTagML_Graph_Build::special_character_sequence(QString match_text, 
   QString esc, u1 mode)
 {

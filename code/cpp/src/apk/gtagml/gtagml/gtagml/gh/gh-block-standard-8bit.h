@@ -49,8 +49,10 @@ public:
  void flag_as_sentence_end(u4 se, u4 sse,
    QPair<QPair<n8, n8>, QPair<n8, n8>>& r) Q_DECL_OVERRIDE;
 
- void write(QString text, QPair<u4, u4>& result) Q_DECL_OVERRIDE;
- void write(QByteArray& text, QPair<u4, u4>& result);
+ void write(QString text, QPair<u4, u4>& result,
+   QVector<u4>* special_flag_marks = nullptr) Q_DECL_OVERRIDE;
+ void write(QByteArray& text, QPair<u4, u4>& result,
+   QVector<u4>* special_flag_marks = nullptr);
 
  QString get_latex_out(const QPair<u4, u4>& indices) Q_DECL_OVERRIDE;
 

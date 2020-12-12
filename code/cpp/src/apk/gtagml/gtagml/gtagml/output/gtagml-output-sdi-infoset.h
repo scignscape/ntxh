@@ -79,6 +79,9 @@ class GTagML_Output_SDI_Infoset : public GTagML_Output_Base, private GTagML_Outp
  GH_Block_Writer* block_writer_;
  GH_SDI_Document* sdi_document_;
 
+ QString copy_path_;
+ QString raw_copy_path_;
+
  void generate_sdi_mark(caon_ptr<GTagML_Tag_Command> ntc,
    const GTagML_Output_Bundle& b,  GH_Prenode& ghp);
  
@@ -98,12 +101,18 @@ class GTagML_Output_SDI_Infoset : public GTagML_Output_Base, private GTagML_Outp
  u4 write_ntxh_sentences(QTextStream& qts, u4 id,  u4 s, u4 e, u4 sentence_id);
 
 
+ void set_copy(QTextStream& qts, caon_ptr<tNode> node);
+
 public:
 
  GTagML_Output_SDI_Infoset(GTagML_Document& document, GH_Block_Writer* block_writer);//, HTXN_Infoset_8b* infoset);
 
  //ACCESSORS(GTagML_Output_HTXN* ,GTagML_output_htxn)
  ACCESSORS(GH_SDI_Document* ,sdi_document)
+
+ ACCESSORS(QString ,copy_path)
+ ACCESSORS(QString ,raw_copy_path)
+
 
  void write_ntxh(QTextStream& qts);
 
