@@ -18,6 +18,8 @@
 #include "dgdb-white/dw-instance.h"
 #include "dgdb-white/dw-record.h"
 
+#include "dgdb-white/dw-query-layer.h"
+
 #include "dgdb-white/dw-stage-value.h"
 #include "dgdb-white/stage/dw-stage-queue.h"
 
@@ -65,6 +67,15 @@ int main(int argc, char* argv[])
    .set_default_stage_queue_reader(&GTagML_Document_Info::read_stage_queue)
   ;
 
+ dwt->REGISTER_TYPE_NAME_RESOLUTION(GTagML_Document_Mark);
+
+ dwt->REGISTER_TYPE(GTagML_Document_Mark)
+   .default_object_layout()
+   .set_stage_encoder(&GTagML_Document_Mark::encode_stage_values)
+   .set_stage_queue_initializer(&GTagML_Document_Mark::init_stage_queue)
+   .set_default_stage_queue_reader(&GTagML_Document_Mark::read_stage_queue)
+  ;
+
    //.set_stage_queue_reader(&Queue_Demo_Class::read_stage_queue)
    //.set_stage_queue_reader( default_stage_queue_reader
    //  <Queue_Demo_Class>( &Queue_Demo_Class::read_stage_queue ));
@@ -86,17 +97,22 @@ int main(int argc, char* argv[])
 
 
  DW_Record dwr = dw->register_typed_value(gdi);
+
  qDebug() << "dwr id: " << dwr.id();
 
-// gdi->set_mark_register_fn([] (GTagML_Document_Mark& gdm)
-// {
-//  qDebug() << gdm.text();
-//  return 1;
-// });
-
- gdi->set_mark_register_fn() << [] (GTagML_Document_Mark& gdm)
+ gdi->set_mark_register_fn() << [dw, dwr] (GTagML_Document_Mark& gdm)  //?(GTagML_Document_Mark& gdm)
  {
+  gdm.set_document_id(dwr.id());
+  DW_Record mark_dwr = dw->register_typed_value(&gdm);
+  qDebug() << "mark_dwr id: " << mark_dwr.id();
+
+  //?mark_dwr.set_ref_field(dwr);
   qDebug() << gdm.text();
+
+
+  GTagML_Document_Mark* gdm1 = dw->parse_dw_record<GTagML_Document_Mark>(mark_dwr);
+
+  qDebug() << gdm1->text();
   return 1;
  };
 
@@ -113,6 +129,23 @@ int main(int argc, char* argv[])
  GTagML_Document_Info* gdi1 = dw->parse_dw_record<GTagML_Document_Info>(dwr1);
 
  qDebug() << "dwr1 id: " << gdi1->document_title();
+
+ // // find all marks whose id is associcated with dwr1
+
+ DW_Query_Layer dql(*dw);
+
+
+ DW_Stage_Value dwsv1;
+ dwsv1.set_u4_data(dwr1.id());
+
+
+// dql.single_field_query("Doc.Id", dwsv1) << [dw]
+// (DW_Record mark_dwr)
+// {
+//  GTagML_Document_Mark* gdm1 = dw->parse_dw_record<GTagML_Document_Mark>(mark_dwr);
+//  qDebug() << gdm1->text();
+//  return 0;
+// };
 
  return 0;
 }

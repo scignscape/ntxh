@@ -17,11 +17,15 @@
 
 #include "kans.h"
 
+#include "dw-record.h"
+
 
 KANS_(DGDB)
 
 class WDB_Instance;
 class DW_Instance;
+
+class DW_Stage_Value;
 
 class WDB_Manager
 {
@@ -83,6 +87,12 @@ public:
 
  Query_Iterator* new_query_iterator(QString criterion, 
    u4 id_low, u4 id_high, u4 col, u4 id_col = 0);
+
+ DW_Record resolve_ref(Query_Iterator* qi);
+
+ Query_Iterator* new_single_index_query_iterator(QString key,
+   u4 id_low, u4 id_high, u4 key_col, u4 val_col,
+   DW_Stage_Value& dwsv, u4 ref_col, u4 id_col = 0);
 
 };
 

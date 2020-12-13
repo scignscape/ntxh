@@ -57,7 +57,71 @@ struct WDB_Manager::Query_Iterator
  void* last;
  void* next;
  u4 count; 
+
+ u1 ref_col;
+
 };
+
+// // duplicate from wdb-instance.cpp
+extern wg_int _wg_encode_query_param(void* wh, DW_Stage_Value& dwsv);
+
+
+DW_Record WDB_Manager::resolve_ref(Query_Iterator* qi)
+{
+ WDB_Instance* wdb = get_current_white();
+
+ void* white = wdb->white();
+
+ wg_int f = wg_get_field(white, qi->next, qi->ref_col);
+
+ void* rec = nullptr;
+ if(dw_instance_->Config.flags.avoid_record_pointers)
+ {
+  u4 refid = wg_decode_int(white, f);
+  rec = wg_find_record_int(white, 0, WG_COND_EQUAL, refid, nullptr);
+ }
+ else
+   rec = wg_decode_record(white, f);
+ wg_int id = wg_get_field(white, rec, 0);
+ return {wg_decode_int(white, id), rec};
+}
+
+WDB_Manager::Query_Iterator* WDB_Manager::new_single_index_query_iterator(QString key,
+  u4 id_low, u4 id_high, u4 key_col, u4 val_col,
+  DW_Stage_Value& dwsv, u4 ref_col, u4 id_col)
+{
+ WDB_Instance* wdb = get_current_white();
+
+ void* white = wdb->white();
+
+ u1 arglist_size = 4;
+
+ wg_query_arg arglist[arglist_size];
+
+ arglist[0].column = id_col;
+ arglist[0].cond = WG_COND_LESSTHAN;
+ arglist[0].value = wg_encode_query_param_int(white, id_high);
+
+ arglist[1].column = id_col;
+ arglist[1].cond = WG_COND_GREATER;
+ arglist[1].value = wg_encode_query_param_int(white, id_low);
+
+ arglist[2].column = key_col;
+ arglist[2].cond = WG_COND_EQUAL;
+ arglist[2].value = wg_encode_query_param_str(white,
+   Q_TO_STD(key), nullptr);
+
+
+ arglist[3].column = val_col;
+ arglist[3].cond = WG_COND_EQUAL;
+ arglist[3].value = _wg_encode_query_param(white, dwsv);
+
+ wg_query* query = wg_make_query(white, nullptr, 0, arglist, arglist_size);
+ return new Query_Iterator {wdb, query, nullptr, nullptr, 0,
+   (u1) ref_col};
+
+}
+
 
 WDB_Manager::Query_Iterator* WDB_Manager::new_query_iterator(QString criterion, 
   u4 id_low, u4 id_high, u4 col, u4 id_col)
@@ -81,10 +145,10 @@ WDB_Manager::Query_Iterator* WDB_Manager::new_query_iterator(QString criterion,
  arglist[2].column = col;
  arglist[2].cond = WG_COND_EQUAL;
  arglist[2].value = wg_encode_query_param_str(white, 
-   q_to_std(criterion), nullptr);
+   Q_TO_STD(criterion), nullptr);
 
  wg_query* query = wg_make_query(white, nullptr, 0, arglist, arglist_size);
- return new Query_Iterator {wdb, query, nullptr, nullptr, 0};
+ return new Query_Iterator {wdb, query, nullptr, nullptr, 0, 0};
 }
 
 

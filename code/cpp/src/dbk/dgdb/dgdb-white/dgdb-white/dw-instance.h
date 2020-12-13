@@ -98,11 +98,14 @@ class DW_Instance
 
 
  static constexpr u4 max_mask = 0x80000000;
-
  static constexpr u4 indexes_mask = 0x60000000;
- static constexpr u4 indexes_id_min = indexes_mask;
- static constexpr u4 indexes_id_max = max_mask;
 
+//?
+// static constexpr u4 indexes_id_min = 0x80000000; //indexes_mask;
+// static constexpr u4 indexes_id_max = 0x60000000; //max_mask;
+
+ #define indexes_id_max  0x80000000
+ #define indexes_id_min  0x60000000
 
  static constexpr u4 inedges_mask = 0x50000000;
  static constexpr u4 properties_mask = 0x40000000;
@@ -201,6 +204,9 @@ public:
  void init(); 
  void reinit();
 
+
+ WDB_Manager* make_single_indexed_query_basis(
+   QPair<u4, u4>& range, u1& key_col, u1& val_col, u1& ref_col);
 
  void to_ntxh(QString& ty, QString& result);
  void init_from_ntxh(QString fld, u1 code);

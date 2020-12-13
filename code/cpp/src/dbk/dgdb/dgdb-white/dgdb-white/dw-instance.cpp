@@ -327,6 +327,14 @@ DW_Frame* DW_Instance::new_frame()
  return new DW_Frame(this);
 }
 
+WDB_Manager* DW_Instance::make_single_indexed_query_basis(
+  QPair<u4, u4>& range, u1& key_col, u1& val_col, u1& ref_col)
+{
+ range = indexes_id_range();
+ key_col = 3; val_col = 5; ref_col = 4;
+ return wdb_manager_;
+}
+
 DW_Record DW_Instance::new_wg_index_record(DW_Record ref, const DW_Stage_Value& dwsv, 
   QString label)
 {  

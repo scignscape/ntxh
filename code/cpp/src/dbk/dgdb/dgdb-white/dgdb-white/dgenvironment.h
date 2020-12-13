@@ -5,6 +5,12 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
+#ifndef DG_ENVIRONMENT__H
+#define DG_ENVIRONMENT__H
+
+
+#include <QString>
+
 #include "kans.h"
 
 #include <QString>
@@ -18,3 +24,7 @@ DW_Instance* DGEnvironment(QString path);
 
 
 _KANS(DGDB)
+
+
+
+#endif // DG_ENVIRONMENT__H

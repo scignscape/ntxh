@@ -43,6 +43,6 @@ public:
 _KANS(DGDB)
 
 
-#endif // DW_FRAME__H
+#endif // DW_DOMINION__H
 
 

@@ -16,7 +16,19 @@
 inline char* q_to_std(const QString& qs)
 {
  return const_cast<char*>( qs.toStdString().c_str() );
+ //return qs.toStdString().c_str();
 }
+
+inline char* q_to_std_(QString qs)
+{
+ return const_cast<char*>( qs.toStdString().c_str() );
+ //return qs.toStdString().c_str();
+}
+
+
+#define Q_TO_STD(qs) const_cast<char*>( qs.toStdString().c_str() )
+
+
 
 typedef quint8 u1;
 typedef quint16 u2;

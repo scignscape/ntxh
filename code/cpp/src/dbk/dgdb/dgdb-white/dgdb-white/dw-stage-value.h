@@ -76,6 +76,8 @@ public:
 
 private:
 
+//temp
+public:
  struct _run_result
  {
   u1 info;

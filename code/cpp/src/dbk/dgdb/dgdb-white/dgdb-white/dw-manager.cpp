@@ -67,7 +67,7 @@ void DW_Manager::query_tagged_records(QString tag,
 
   // //  column 3 is the tag column ...
  WDB_Manager::Query_Iterator* qi = wdb_manager_->new_query_iterator(tag, 
-   range.first, range.second, 3);
+   range.first, range.second, 3, 0);
 
  n8 brake = 0;
 

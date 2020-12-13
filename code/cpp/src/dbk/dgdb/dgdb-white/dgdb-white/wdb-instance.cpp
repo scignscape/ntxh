@@ -503,6 +503,7 @@ void* WDB_Instance::query_leading_int(u4 col)
 */
 }
 
+
 wg_int _wg_encode_query_param(void* wh, DW_Stage_Value& dwsv)
 {
  u1 et = 0;
@@ -777,12 +778,7 @@ void* WDB_Instance::_new_wg_record(u4 id, QString col1, void* col2,
 
  if(!col1.isEmpty())
  {
-#ifdef USE_LATIN1_THROUGHOUT
-  const char* cs = col1.toLatin1().constData();// q_to_std(col1);
-#else
-  char* cs = q_to_std(col1);
-#endif
-  wgim[1] = wg_encode_str(white_, (char*) cs, nullptr); // q_to_std(col1), nullptr);
+  wgim[1] = wg_encode_str(white_, Q_TO_STD(col1), nullptr);
  }
 
  if(col2)
@@ -792,7 +788,7 @@ void* WDB_Instance::_new_wg_record(u4 id, QString col1, void* col2,
 
  if(!col3.isEmpty())
  {
-  wgim[3] = wg_encode_str(white_, q_to_std(col3), nullptr);
+  wgim[3] = wg_encode_str(white_, Q_TO_STD(col3), nullptr);
  }
 
  u4 max = 0;
@@ -948,6 +944,7 @@ void _rec_decode(void* wh, void* rec, u4 index,
   {
    wg_int wi = wg_get_field(wh, rec, index);
    char* ptr = wg_decode_str(wh, wi);
+     //? QLatin1String?
    dwsv.data_to_ref<QString>() = QString(QLatin1String(ptr));
   }
   break;
@@ -1306,7 +1303,7 @@ void* WDB_Instance::new_wg_record(u4 number_of_columns, u4 col0, QString col1)
 {
  void* result = wg_create_record(white_, number_of_columns);
  wg_int c0val = wg_encode_int(white_, col0);
- wg_int c1val = wg_encode_str(white_, q_to_std(col1), nullptr);
+ wg_int c1val = wg_encode_str(white_, Q_TO_STD(col1), nullptr);
 
  wg_set_field(white_, result, 0, c0val);
  wg_set_field(white_, result, 1, c1val);
