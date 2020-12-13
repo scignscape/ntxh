@@ -85,6 +85,7 @@ HEADERS += \
   $$SRC_DIR/output/gtagml-output-latex.callbacks.h \
   $$SRC_DIR/output/gtagml-output-latex.h \
   $$SRC_DIR/output/gtagml-output-blocks.h \
+  $$SRC_DIR/output/gtagml-output-blocks.callbacks.h \
   $$SRC_DIR/output/gtagml-output-sdi-infoset.h \
   $$SRC_DIR/output/gtagml-output-sdi-infoset.callbacks.h \
   $$SRC_DIR/sdi/gh-sdi-document.h \

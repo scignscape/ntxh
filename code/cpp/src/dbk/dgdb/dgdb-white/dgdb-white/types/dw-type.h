@@ -40,7 +40,7 @@ KANS_(DGDB)
 class DW_Node;
 
 class DW_Stage_Value;
-class DW_Stage_Queue;
+struct DW_Stage_Queue;
 
 
 class DW_Type

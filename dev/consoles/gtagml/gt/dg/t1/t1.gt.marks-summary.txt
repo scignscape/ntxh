@@ -1,9 +1,17 @@
-$ document-title := Cognitive Transform Grammar
-$ local-title := info
+$$ document-title := Cognitive Transform Grammar
+$$ local-title := info
 
-= 4:
-= 3
-Matt Selway
+$& BittnerSmithDonnelly (1:main) 2804 3097
+$& HolmqvistDiss (1:main) 2394 2394
+$& InteractingConceptualSpaces (1:main) 2694 2803
+$& JeanPetitot (1:main) 3098 3121
+$& JordanZlatev (1:main) 3305 3326
+$& KennethHolmqvist (1:main) 2374 2393
+$& MattSelway (1:main) 2289 2373
+$& OlavKWiegand (1:main) 3122 3303
+$& RaubalAdams (1:main) 2526 2691
+$& RaubalAdamsCSML (1:main) 2692 2692
+$& TerryRegier (1:main) 2395 2472
+$& WiegandGestalts (1:main) 3304 3304
+$& Zenker (1:main) 2693 2693
 
-= 15:
-= 9

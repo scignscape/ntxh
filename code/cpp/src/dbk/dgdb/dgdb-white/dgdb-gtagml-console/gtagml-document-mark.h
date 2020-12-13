@@ -22,6 +22,7 @@ USING_KANS(DGDB)
 KANS_CLASS_DECLARE(DGDB ,DW_Stage_Value)
 KANS_CLASS_DECLARE(DGDB ,DW_Stage_Queue)
 
+
 class GTagML_Document_Mark
 {
  u4 document_id_;

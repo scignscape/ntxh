@@ -35,6 +35,9 @@ class GTagML_Document_Info
  u4 in_database_id_;
  QString document_title_;
 
+ QMap<QString, QStringList> citations_;
+
+
  typedef QMap<u4, QPair<QString, u4>> mark_map_type;
 
  mark_map_type main_mark_map_;
@@ -47,7 +50,7 @@ class GTagML_Document_Info
 
  QMultiMap<QString, QString> info_params_;
 
- std::function<u4(GTagML_Document_Mark&)> mark_register_fn_;
+ std::function<n8 (GTagML_Document_Mark&)> mark_register_fn_;
 
  void register_marks(QVector<GTagML_Document_Mark*>& ms,
    u4 layer, mark_map_type& mark_map);
@@ -75,7 +78,7 @@ public:
  //ACCESSORS_FN_SET(u4(GTagML_Document_Mark&) ,mark_register_fn)
 
  ACCESSORS_FN_VIA_OP(GTagML_Document_Info
-   ,u4 (GTagML_Document_Mark&)
+   ,n8 (GTagML_Document_Mark&)
    ,mark_register_fn)
 
 

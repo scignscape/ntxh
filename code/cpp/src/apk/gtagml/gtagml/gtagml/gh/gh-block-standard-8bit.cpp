@@ -32,10 +32,16 @@ n8 GH_Block_Standard_8bit::get_glyph_point_at_index(u4 i)
 
 u4 GH_Block_Standard_8bit::check_confirm_sentence_end(u4 i, u4 e)
 {
+ bool have_space = false;
  for(u4 u = i; u <= e; ++u)
  {
   n8 uu = get_glyph_point_at_index(u);
-  GH_Block_Base::Evaluation_Codes ec = glyphdeck_->check_confirm_sentence_end(uu);
+  GH_Block_Base::Evaluation_Codes ec = glyphdeck_->check_confirm_sentence_end(uu, have_space);
+  if(ec == GH_Block_Base::Evaluation_Codes::Space)
+  {
+   have_space = true;
+   continue;
+  }
   if(ec == GH_Block_Base::Evaluation_Codes::Confirm)
     return i;
   if(ec == GH_Block_Base::Evaluation_Codes::Refute)
@@ -198,6 +204,8 @@ void GH_Block_Standard_8bit::write(QByteArray& text,
      chars_.push_back(glyphdeck_->encode_alt_pair(pr));
     }
    }
+   if(check == 100)
+     continue;
    if(check > 90)
    {
     if(special_flag_marks)

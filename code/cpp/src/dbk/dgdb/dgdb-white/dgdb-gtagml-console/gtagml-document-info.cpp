@@ -40,19 +40,36 @@ void GTagML_Document_Info::load_marks(QString path)
  load_file(path, [this, marks_by_mode, &current_index,
    &current_mode, &last_index, &last_mode](QString& line) -> int
  {
-  if(line.isEmpty())
+  if(line.trimmed().isEmpty())
     return 0;
 
-  if(line.startsWith("$ "))
+  if(line.startsWith("$$ "))
   {
    if(line.endsWith(';'))
      line.chop(1);
-   QStringList qsl = line.mid(2).trimmed().split(" := ", Qt::KeepEmptyParts);
+   QStringList qsl = line.mid(3).trimmed().split(" := ", Qt::KeepEmptyParts);
    QString key = qsl.takeFirst();
    for(QString v : qsl)
      info_params_.insert(key, v);
    return 0;
   }
+
+  if(line.startsWith("$& "))
+  {
+   QStringList qsl = line.mid(3).trimmed().split(' ', Qt::SkipEmptyParts);
+   QString citation_text = qsl.takeFirst();
+   QString optarg = "[]"; // until we parse the actual oarg for cite ...
+   if(qsl.size() >= 3)
+   {
+    QString layer_code = qsl.takeFirst();
+    int index = layer_code.startsWith('(')? 1 : 0;
+    QString summary = QString("%1=%2:%3-%4").arg(optarg)
+      .arg(layer_code.mid(index, 1)).arg(qsl.takeFirst()).arg(qsl.takeFirst());
+    citations_[citation_text].push_back(summary);
+   }
+   return 0;
+  }
+
 
   if(line.startsWith("= "))
   {
@@ -109,7 +126,7 @@ void GTagML_Document_Info::register_marks()
  for(GTagML_Document_Mark* gdm : ms)
  {
   u4 gdm_id = mark_register_fn_(*gdm);
-  if(gdm_id == 0)
+  if(gdm_id != 0)
     break;
  }
 }

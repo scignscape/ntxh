@@ -8,6 +8,8 @@
 
 #include "gh-prenode.h"
 
+#include "gh-block-base.h"
+
 
 USING_KANS(GTagML)
 
@@ -22,6 +24,23 @@ GH_Prenode::GH_Prenode(QString text)
  : range_({1, 1}), raw_text_(new QString(text))
 {
 
+}
+
+QString GH_Prenode::get_summary()
+{
+ static QPair<u4, u4> signal = {1,1};
+ QString result;
+ if(range_ == signal)
+ {
+  result = *raw_text_;
+  result.prepend('?');
+ }
+ else
+ {
+  result = block_->layer_summary();
+  result.append(QString(" %1 %2").arg(range_.first).arg(range_.second));
+ }
+ return result;
 }
 
 GH_Block_Base* GH_Prenode::get_block()

@@ -74,6 +74,9 @@ class GTagML_Output_Blocks : public GTagML_Output_Base, private GTagML_Output_Ev
 
  QVector<QMap<u4, QPair<QString, u4>>*> marks_by_mode_;
 
+ void mark_citation(QTextStream& qts,
+   caon_ptr<tNode> node, caon_ptr<tNode> prior_node,
+   caon_ptr<tNode> parent_of_siblings);
 
 
 public:

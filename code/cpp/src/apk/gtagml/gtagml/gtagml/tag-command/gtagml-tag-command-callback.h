@@ -41,13 +41,20 @@ public:
   bool has_rename_style_class:1;
  _flags
 
+//? enum class Connection_Contexts { N_A, Parent, Sibling, Child, Unrelated };
+
 private:
 
  QString command_name_trigger_;
 
- std::function<void(QTextStream&, caon_ptr<GTagML_Node> node, u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb)> pre_callback_;
- std::function<void(QTextStream&, caon_ptr<GTagML_Node> node, u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb)> post_callback_;
- std::function<void(QTextStream&, caon_ptr<GTagML_Node> node, u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb)> around_callback_;
+ std::function<void(QTextStream&, caon_ptr<GTagML_Node> node, caon_ptr<GTagML_Node> prior_node,
+   caon_ptr<GTagML_Node> parent_of_siblings, u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb)> pre_callback_;
+
+ std::function<void(QTextStream&, caon_ptr<GTagML_Node> node, caon_ptr<GTagML_Node> prior_node,
+   caon_ptr<GTagML_Node> parent_of_siblings, u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb)> post_callback_;
+
+ std::function<void(QTextStream&, caon_ptr<GTagML_Node> node, caon_ptr<GTagML_Node> prior_node,
+   caon_ptr<GTagML_Node> parent_of_siblings, u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb)> around_callback_;
 
  QString rename_tag_;
  QString rename_style_class_;
@@ -63,8 +70,9 @@ public:
   flags.has_rename_style_class = true;
  }
 
- typedef QMap<QString, std::function<void(QTextStream&, caon_ptr<GTagML_Node>, u4 index,
-   caon_ptr<GTagML_Tag_Command_Callback> cb)> >
+ typedef QMap<QString, std::function<void(QTextStream&, caon_ptr<GTagML_Node>,
+   caon_ptr<GTagML_Node>, caon_ptr<GTagML_Node>, u4,
+   caon_ptr<GTagML_Tag_Command_Callback>)> >
    Callback_Map_type;
 
  GTagML_Tag_Command_Callback(QString command_name);
@@ -77,12 +85,17 @@ public:
  GTagML_Tag_Command_Callback(QString command_name, QString tag);
  GTagML_Tag_Command_Callback(QString command_name, QString tag, QString style_class);
 
+ void pre_callback(QTextStream& qts, caon_ptr<GTagML_Node> node,
+   caon_ptr<GTagML_Node> prior_node, caon_ptr<GTagML_Node> parent_of_siblings,
+   u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb) const;
 
+ void post_callback(QTextStream& qts, caon_ptr<GTagML_Node> node,
+   caon_ptr<GTagML_Node> prior_node, caon_ptr<GTagML_Node> parent_of_siblings,
+   u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb) const;
 
-
- void pre_callback(QTextStream& qts, caon_ptr<GTagML_Node> node, u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb) const;
- void post_callback(QTextStream& qts, caon_ptr<GTagML_Node> node, u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb) const;
- void around_callback(QTextStream& qts, caon_ptr<GTagML_Node> node, u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb) const;
+ void around_callback(QTextStream& qts, caon_ptr<GTagML_Node> node,
+   caon_ptr<GTagML_Node> prior_node, caon_ptr<GTagML_Node> parent_of_siblings,
+   u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb) const;
 
 
 };

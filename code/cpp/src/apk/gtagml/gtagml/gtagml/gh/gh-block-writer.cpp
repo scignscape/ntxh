@@ -65,5 +65,10 @@ void GH_Block_Writer::init_standard_8bit()
  current_main_text_block_ = new GH_Block_Standard_8bit;
  current_main_text_block_->activate_inserts();
  current_blocks_[Block_Roles::Main_Text] = current_main_text_block_;
+
+ current_main_text_block_->set_layer_summary("(1:main)");
+ current_mandatory_argument_block_->set_layer_summary("(2:oarg)");
+ current_mandatory_argument_block_->set_layer_summary("(3:marg)");
+ current_tag_command_name_block_->set_layer_summary("(5:tcmd)");
 }
 

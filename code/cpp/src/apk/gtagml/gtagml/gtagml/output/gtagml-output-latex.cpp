@@ -359,23 +359,29 @@ void GTagML_Output_Latex::generate_tag_command_entry(const GTagML_Output_Bundle&
  else
    ntc->write_inherited_whitespace(b.qts);
 
+ caon_ptr<GTagML_Node> parent_of_siblings = nullptr;
+
  switch(b.connection_descriptor)
  {
  case GTagML_Connection_Descriptor::Tag_Command_Cross_From_Blank:
  case GTagML_Connection_Descriptor::Tag_Command_Cross:
+  // maybe set parent_of_siblings?
+
  case GTagML_Connection_Descriptor::Tag_Command_Entry:
   if(cb)
   {
    CAON_PTR_DEBUG(GTagML_Tag_Command_Callback ,cb)
 
+   // if its Tag_Command_Entry definitely parent_of_siblings == nullptr
+
    if(cb->flags.has_around_callback)
    {
-    cb->around_callback(b.qts, b.node, b.index, b.cb);
+    cb->around_callback(b.qts, b.node, b.prior_node, parent_of_siblings, b.index, b.cb);
     break;
    }
 
    if(cb->flags.has_pre_callback)
-    cb->pre_callback(b.qts, b.node, b.index, b.cb);
+    cb->pre_callback(b.qts, b.node, b.prior_node, parent_of_siblings, b.index, b.cb);
    if(!cb->flags.pre_fallthrough)
     break;
   }
@@ -497,7 +503,9 @@ void GTagML_Output_Latex::generate_tag_command_leave(const GTagML_Output_Bundle&
  {
   if(b.cb->flags.has_post_callback)
   {
-   b.cb->post_callback(b.qts, b.node, b.index, b.cb);
+   b.cb->post_callback(b.qts, b.node,
+     // // is b.prior_node different than before?
+     b.prior_node, nullptr, b.index, b.cb);
   }
   if(!b.cb->flags.post_fallthrough)
    return;

@@ -63,9 +63,24 @@ void GTagML_Document_Mark::init_stage_queue(const QByteArray& qba,
  sq.reverse();
 }
 
+#define stage_dequeue_copy(v) \
+  QQueue<void*> _##v = v;
+
+#define stage_dequeue(v ,typ) \
+  *(typ*) v.dequeue(); delete (typ*) _##v.dequeue()
+
 
 void GTagML_Document_Mark::read_stage_queue(QQueue<void*>& vals)
 {
+ stage_dequeue_copy(vals);
+
+// document_id_ = stage_dequeue(vals ,u4);
+// text_ = stage_dequeue(vals ,QString);
+// annotation_ = stage_dequeue(vals ,QString);
+// start_ = stage_dequeue(vals ,u4);
+// end_ = stage_dequeue(vals ,u4);
+// layer_ = stage_dequeue(vals ,u4);
+
  document_id_ = *(u4*) vals.dequeue();
  text_ = *(QString*) vals.dequeue();
  annotation_ = *(QString*) vals.dequeue();

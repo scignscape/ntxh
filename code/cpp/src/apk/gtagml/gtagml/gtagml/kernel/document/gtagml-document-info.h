@@ -37,6 +37,10 @@ class GTagML_Document_Info
  QMap<QString, QString> info_params_;
 
 
+ QMap<QString, QVector<void*>> citations_;
+
+
+
 public:
 
  ACCESSORS(word_count_type ,word_count)
@@ -46,6 +50,7 @@ public:
 
  ACCESSORS__RGET(QVector<QStringList> ,marks)
  ACCESSORS__RGET(MACRO_PASTE(QMap<QString, QString>) ,info_params)
+ ACCESSORS__RGET(MACRO_PASTE(QMap<QString, QVector<void*>>) ,citations)
 
  GTagML_Document_Info();
 

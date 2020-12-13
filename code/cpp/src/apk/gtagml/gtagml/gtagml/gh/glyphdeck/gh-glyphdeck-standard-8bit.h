@@ -20,7 +20,7 @@ public:
  GH_Glyphdeck_Standard_8bit();
 
  GH_Block_Base::SDI_Interpretation_Codes get_sdi_interpretation_code(u1 gp);
- GH_Block_Base::Evaluation_Codes check_confirm_sentence_end(u1 gp);
+ GH_Block_Base::Evaluation_Codes check_confirm_sentence_end(u1 gp, bool have_space);
  GH_Block_Base::Evaluation_Codes check_confirm_clear_inter_sentence_gap(u1 gp);
 
  u1 get_basic_char(u1 gp);

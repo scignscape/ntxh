@@ -109,11 +109,9 @@ int main(int argc, char* argv[])
   //?mark_dwr.set_ref_field(dwr);
   qDebug() << gdm.text();
 
-
-  GTagML_Document_Mark* gdm1 = dw->parse_dw_record<GTagML_Document_Mark>(mark_dwr);
-
-  qDebug() << gdm1->text();
-  return 1;
+//  GTagML_Document_Mark* gdm1 = dw->parse_dw_record<GTagML_Document_Mark>(mark_dwr);
+//  qDebug() << gdm1->text();
+  return 0;
  };
 
  gdi->register_marks();
@@ -139,13 +137,12 @@ int main(int argc, char* argv[])
  dwsv1.set_u4_data(dwr1.id());
 
 
-// dql.single_field_query("Doc.Id", dwsv1) << [dw]
-// (DW_Record mark_dwr)
-// {
-//  GTagML_Document_Mark* gdm1 = dw->parse_dw_record<GTagML_Document_Mark>(mark_dwr);
-//  qDebug() << gdm1->text();
-//  return 0;
-// };
+ dql.single_field_query("Doc.Id", dwsv1) << [dw] (DW_Record mark_dwr)
+ {
+  GTagML_Document_Mark* gdm1 = dw->parse_dw_record<GTagML_Document_Mark>(mark_dwr);
+  qDebug() << gdm1->text();
+  return 0;
+ };
 
  return 0;
 }

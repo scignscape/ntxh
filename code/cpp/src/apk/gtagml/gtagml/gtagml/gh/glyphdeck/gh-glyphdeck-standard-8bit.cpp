@@ -752,7 +752,7 @@ MainSwitch:
 
  case ' ': return 71;//
  case '\n': return 73;//
- case '`': return 74; //64
+//? case '`': return 74; //64
  case '~': return 128; //64  //?
  case '!': return 75;
  case '@': return 76; //ascii 64
@@ -948,6 +948,8 @@ QString GH_Glyphdeck_Standard_8bit::get_latex_supplement(u1 gp)
 {
  if(gp == 72)
    return "\\>";
+ if(gp == 74)
+   return "\\> ";
  return {};
 }
 
@@ -955,6 +957,8 @@ u1 GH_Glyphdeck_Standard_8bit::get_sentence_end_space_swap(u1 gp)
 {
  if(gp == 71)
    return 72;
+ if(gp == 73)
+   return 74;
  return get_default_null();
 }
 
@@ -983,7 +987,7 @@ void get_latex_64_to_117(u1 gp, QString& result)
    " ", // 71
    " ", // 72    se
    "\n", // 73
-   "~", // 74 // circa    (word-repl)
+   "\n", // 74 // se
    "!", // 75 // punc
    "@", // 76 // email, handles ...  (lit)
    "#", // 77 // number   (lit) or (word-repl)
@@ -1022,7 +1026,7 @@ void get_latex_64_to_117(u1 gp, QString& result)
    ".", // 108 // weak punc
    "\\ndash{}", // 109 // -- (quasi-letter)
 
-   "-", // 110 // subpunc
+   "~", // 110 // word-repl
    "-", // 111 // quasi-math (neg)
    "-", // 112 // quasi-math (minus)
    ",", // 113 // quasi-math (lit)
@@ -1297,13 +1301,15 @@ GH_Block_Base::Evaluation_Codes GH_Glyphdeck_Standard_8bit::check_confirm_clear_
  return GH_Block_Base::Evaluation_Codes::Refute;
 }
 
-GH_Block_Base::Evaluation_Codes GH_Glyphdeck_Standard_8bit::check_confirm_sentence_end(u1 gp)
+GH_Block_Base::Evaluation_Codes GH_Glyphdeck_Standard_8bit::check_confirm_sentence_end(u1 gp, bool have_space)
 {
  // //  currently only use ')' as neutral
  if(gp == 69)
    return GH_Block_Base::Evaluation_Codes::Neutral;
  if(gp == 71)
-   return GH_Block_Base::Evaluation_Codes::Confirm;
+   return have_space?
+     GH_Block_Base::Evaluation_Codes::Confirm
+     : GH_Block_Base::Evaluation_Codes::Space;
  if(gp == 72)
    return GH_Block_Base::Evaluation_Codes::Confirm;
  if(gp == 73)

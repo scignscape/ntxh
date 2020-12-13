@@ -56,10 +56,6 @@ void process_gtagml_file(QString path)
  //goi->init_standard_8bit();
  gsi->export_infoset(path + ".info.txt"); // export_blocks(); //(path + ".");
 
- QString mark_path = gob->export_marks(); //(path + ".");
- gob->load_marks(mark_path);
-
-
  QString cpy = gsi->copy_path();
 
  GH_SDI_Document* gsd = gsi->sdi_document();
@@ -69,6 +65,10 @@ void process_gtagml_file(QString path)
  QString sdi_path = get_path_with_different_folder(path, ffolder);
 
  gsd->finalize_sentence_boundaries(*blw->current_main_text_block(), sdi_path + ".sdi-prelatex.ntxh");
+
+ QString mark_path = gob->export_marks(); //(path + ".");
+ gob->load_marks(mark_path);
+
 
  GTagML_Output_Latex* gol = new GTagML_Output_Latex(*gdoc, gsd);
  gol->export_latex(path + ".tex");

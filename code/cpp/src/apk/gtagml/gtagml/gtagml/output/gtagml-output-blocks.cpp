@@ -21,6 +21,10 @@
 
 #include "gh/gh-block-writer.h"
 
+#include "gh/gh-prenode.h"
+
+
+
 #include "textio.h"
 
 //?#include "ngml-htxn/ngml-htxn-node.h"
@@ -86,8 +90,42 @@ void GTagML_Output_Blocks::init_callbacks()
 {
  #include "gtagml-output-callbacks-common.h"
 
- #include "gtagml-output-latex.callbacks.h"
+ #include "gtagml-output-blocks.callbacks.h"
 }
+
+
+void GTagML_Output_Blocks::mark_citation(QTextStream& qts, caon_ptr<tNode> node,
+  caon_ptr<tNode> prior_node, caon_ptr<tNode> parent_of_siblings)
+{
+ CAON_PTR_DEBUG(tNode ,prior_node)
+
+// if(parent_of_siblings)
+// {
+//  //? what
+// }
+// else
+
+ QString citation_text;
+
+ if(caon_ptr<GTagML_Tag_Command> ntc = node->GTagML_tag_command())
+ {
+  CAON_PTR_DEBUG(GTagML_Tag_Command ,ntc)
+  citation_text = ntc->argument();
+  if(citation_text.isEmpty())
+    return;
+ }
+
+ if(caon_ptr<GTagML_Tile> tile = prior_node->GTagML_tile())
+ {
+  CAON_PTR_DEBUG(GTagML_Tile ,tile)
+  GH_Prenode* pre = tile->prenode();
+  document_.document_info().citations()[citation_text].push_back(pre);
+ }
+
+
+}
+
+
 
 void GTagML_Output_Blocks::generate_tile(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Attribute_Tile> tile)
 {
@@ -116,22 +154,41 @@ void GTagML_Output_Blocks::load_marks(QString path)
 
  QMultiMap<QString, QString> info_params;
 
- TextIO::load_file(path, [this, &info_params, &current_index,
+ QMap<QString, QStringList> citations;
+
+ TextIO::load_file(path, [this, &info_params, &citations, &current_index,
    &current_mode, &last_index, &last_mode](QString& line) -> int
  {
   if(line.isEmpty())
     return 0;
 
-  if(line.startsWith("$ "))
+  if(line.startsWith("$$ "))
   {
    if(line.endsWith(';'))
      line.chop(1);
-   QStringList qsl = line.mid(2).trimmed().split(" := ", Qt::KeepEmptyParts);
+   QStringList qsl = line.mid(3).trimmed().split(" := ", Qt::KeepEmptyParts);
    QString key = qsl.takeFirst();
    for(QString v : qsl)
      info_params.insert(key, v);
    return 0;
   }
+
+  if(line.startsWith("$& "))
+  {
+   QStringList qsl = line.mid(3).trimmed().split(' ', Qt::SkipEmptyParts);
+   QString citation_text = qsl.takeFirst();
+   QString optarg = "[]"; // until we parse the actual oarg for cite ...
+   if(qsl.size() >= 3)
+   {
+    QString layer_code = qsl.takeFirst();
+    int index = layer_code.startsWith('(')? 1 : 0;
+    QString summary = QString("%1=%2:%3-%4").arg(optarg)
+      .arg(layer_code.mid(index, 1)).arg(qsl.takeFirst()).arg(qsl.takeFirst());
+    citations[citation_text].push_back(summary);
+   }
+   return 0;
+  }
+
 
   if(line.startsWith("= "))
   {
@@ -165,6 +222,8 @@ QString GTagML_Output_Blocks::export_marks(QString path)
  QVector<QStringList>& marks = document_.document_info().marks();
  QMap<QString, QString>& params = document_.document_info().info_params();
 
+ QMap<QString, QVector<void*>>& citations = document_.document_info().citations();
+
  u4 indices [5] {0,0,0,0,0};
 
  if(path.startsWith(".."))
@@ -183,13 +242,30 @@ QString GTagML_Output_Blocks::export_marks(QString path)
  {
   QTextStream qts(&outfile);
 
-  QMapIterator<QString, QString> it(params);
-  while(it.hasNext())
   {
-   it.next();
-   qts << QString("$ %1 := %2\n").arg(it.key()).arg(it.value());
+   QMapIterator<QString, QString> it(params);
+   while(it.hasNext())
+   {
+    it.next();
+    qts << QString("$$ %1 := %2\n").arg(it.key()).arg(it.value());
+   }
   }
+  qts << "\n";
+  {
+   QMapIterator<QString, QVector<void*>> it(citations);
+   while(it.hasNext())
+   {
+    it.next();
+    for(void* pv : it.value())
+    {
+     GH_Prenode* pre = (GH_Prenode*) pv;
+     qts << QString("$& %1 %2\n").arg(it.key()).
+       arg(pre->get_summary());
 
+    }
+   }
+  }
+  qts << "\n";
   for(u4 uu : special_flag_marks_)
   {
    if( (uu & 0x80000000) > 0 )
@@ -473,24 +549,29 @@ void GTagML_Output_Blocks::generate_tag_command_entry(const GTagML_Output_Bundle
 
  caon_ptr<GTagML_Tag_Command_Callback> cb = b.cb;
 
+ caon_ptr<GTagML_Node> parent_of_siblings = nullptr;
 
  switch(b.connection_descriptor)
  {
  case GTagML_Connection_Descriptor::Tag_Command_Cross_From_Blank:
  case GTagML_Connection_Descriptor::Tag_Command_Cross:
+  // maybe set parent_of_siblings?
+
  case GTagML_Connection_Descriptor::Tag_Command_Entry:
   if(cb)
   {
    CAON_PTR_DEBUG(GTagML_Tag_Command_Callback ,cb)
 
+   // if its Tag_Command_Entry definitely parent_of_siblings == nullptr
+
    if(cb->flags.has_around_callback)
    {
-    cb->around_callback(b.qts, b.node, b.index, b.cb);
+    cb->around_callback(b.qts, b.node, b.prior_node, parent_of_siblings, b.index, b.cb);
     break;
    }
 
    if(cb->flags.has_pre_callback)
-    cb->pre_callback(b.qts, b.node, b.index, b.cb);
+    cb->pre_callback(b.qts, b.node, b.prior_node, parent_of_siblings, b.index, b.cb);
    if(!cb->flags.pre_fallthrough)
     break;
   }
@@ -613,7 +694,8 @@ void GTagML_Output_Blocks::generate_tag_command_leave(const GTagML_Output_Bundle
  {
   if(b.cb->flags.has_post_callback)
   {
-   b.cb->post_callback(b.qts, b.node, b.index, b.cb);
+   // prior_node changed?
+   b.cb->post_callback(b.qts, b.node, b.prior_node, nullptr, b.index, b.cb);
   }
   if(!b.cb->flags.post_fallthrough)
    return;

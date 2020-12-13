@@ -44,6 +44,8 @@ public:
 
  QString get_string_content();
 
+ QString get_summary();
+
 
 };
 

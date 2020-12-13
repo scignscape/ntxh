@@ -139,6 +139,8 @@ public:
 
  DW_Stage_Value();
 
+ ~DW_Stage_Value();
+
  ACCESSORS(n8 ,data)
  ACCESSORS(u1 ,info)
 
@@ -211,11 +213,12 @@ public:
   return *this;
  }
 
+ template<typename T>
  void cleanup()
  {
   if(check_no_delete())
     return;
-  delete (void*) data_;
+  delete (T*) data_;
   data_ = 0;
  }
 

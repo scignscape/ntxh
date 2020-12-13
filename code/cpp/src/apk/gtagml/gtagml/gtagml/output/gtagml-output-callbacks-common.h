@@ -25,8 +25,10 @@
 // //  Should b be captured, or an argument?
 
 #define WHEN_(kind) \
- {#kind, [this](QTextStream& qts, caon_ptr<tNode> node, \
- u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb)
+  {#kind, [this](QTextStream& qts, caon_ptr<tNode> node, \
+  caon_ptr<tNode> prior_node, \
+  caon_ptr<GTagML_Node> parent_of_siblings, \
+  u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb)
 
 #define _WHEN },
 

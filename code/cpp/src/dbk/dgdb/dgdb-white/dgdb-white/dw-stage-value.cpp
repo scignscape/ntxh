@@ -68,7 +68,10 @@ void DW_Stage_Value::enqueue_in(DW_Stage_Queue& sw)
  sw.enqueue_void((void*)this->data_);
 }
 
+DW_Stage_Value::~DW_Stage_Value()
+{
 
+}
 
 DW_Stage_Value& DW_Stage_Value::new_qstring(const QString& qs)
 {

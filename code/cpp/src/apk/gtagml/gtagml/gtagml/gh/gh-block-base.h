@@ -10,6 +10,8 @@
 
 #include "global-types.h"
 
+#include "accessors.h"
+
 #include <QPair>
 #include <QMap>
 #include <QString>
@@ -22,9 +24,13 @@ protected:
  QMap<QString, QPair<u4, u4>>* cache_;
  QMap<QPair<u4, u4>, QList<QPair<n8, QString>>>* inserts_;
 
+ QString layer_summary_;
+
 public:
 
  GH_Block_Base();
+
+ ACCESSORS(QString ,layer_summary)
 
  virtual n8 get_default_null() = 0;
 
@@ -37,7 +43,7 @@ public:
 
  enum class Evaluation_Codes
  {
-  Confirm, Refute, Neutral
+  Confirm, Refute, Neutral, Space
  };
 
  template<typename T>

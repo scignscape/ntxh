@@ -37,8 +37,9 @@ GTagML_Tag_Command_Callback::GTagML_Tag_Command_Callback(QString command_name,
 
 
 GTagML_Tag_Command_Callback::GTagML_Tag_Command_Callback(QString command_name,
-  QMap<QString, std::function<void(QTextStream&, caon_ptr<GTagML_Node> node,
-u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb)> > callbacks)
+  QMap<QString, std::function<void(QTextStream&, caon_ptr<GTagML_Node>,
+  caon_ptr<GTagML_Node>, caon_ptr<GTagML_Node>,
+  u4, caon_ptr<GTagML_Tag_Command_Callback>)> > callbacks)
  : Flags(0), command_name_trigger_(command_name)
 {
  absorb(callbacks);
@@ -50,22 +51,26 @@ GTagML_Tag_Command_Callback::GTagML_Tag_Command_Callback(QString command_name)
 }
 
 void GTagML_Tag_Command_Callback::pre_callback(QTextStream& qts, caon_ptr<GTagML_Node> node,
- u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb) const
+  caon_ptr<GTagML_Node> prior_node, caon_ptr<GTagML_Node> parent_of_siblings,
+  u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb) const
 {
- pre_callback_(qts, node, index, cb);
+ pre_callback_(qts, node, prior_node, parent_of_siblings, index, cb);
 }
 
-void GTagML_Tag_Command_Callback::post_callback(QTextStream& qts,
- caon_ptr<GTagML_Node> node, u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb) const
+void GTagML_Tag_Command_Callback::post_callback(QTextStream& qts, caon_ptr<GTagML_Node> node,
+  caon_ptr<GTagML_Node> prior_node, caon_ptr<GTagML_Node> parent_of_siblings,
+  u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb) const
 {
- post_callback_(qts, node, index, cb);
+ post_callback_(qts, node, prior_node, parent_of_siblings, index, cb);
 }
 
-void GTagML_Tag_Command_Callback::around_callback(QTextStream& qts,
- caon_ptr<GTagML_Node> node, u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb) const
+void GTagML_Tag_Command_Callback::around_callback(QTextStream& qts, caon_ptr<GTagML_Node> node,
+  caon_ptr<GTagML_Node> prior_node, caon_ptr<GTagML_Node> parent_of_siblings,
+  u4 index, caon_ptr<GTagML_Tag_Command_Callback> cb) const
 {
- around_callback_(qts, node, index, cb);
+ around_callback_(qts, node, prior_node, parent_of_siblings, index, cb);
 }
+
 
 void GTagML_Tag_Command_Callback::absorb(Callback_Map_type callbacks)
 {

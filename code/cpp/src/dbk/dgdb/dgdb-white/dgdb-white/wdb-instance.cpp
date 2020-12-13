@@ -78,7 +78,7 @@ wg_int _rec_encode(void* wh, DW_Stage_Value& dwsv)
   {
    double* dbl = (double*) dwsv.data();
    wg_int wi = wg_encode_double(wh, *dbl);
-   dwsv.cleanup();
+   dwsv.cleanup<double>();
    return wi;
   }
   break;
@@ -87,7 +87,7 @@ wg_int _rec_encode(void* wh, DW_Stage_Value& dwsv)
   {
    char* cs = (char*) dwsv.data();
    wg_int wi = wg_encode_str(wh, cs, nullptr);
-   dwsv.cleanup();
+   //?dwsv.cleanup<double>();
    return wi;
   }
   break;
@@ -121,7 +121,7 @@ wg_int _rec_encode(void* wh, DW_Stage_Value& dwsv)
     xsdt = nullptr;
    }
    wg_int wi = wg_encode_xmlliteral(wh, lit, xsdt);
-   dwsv.cleanup();   
+   //?dwsv.cleanup();
    return wi;
   }
   break;
@@ -155,7 +155,7 @@ wg_int _rec_encode(void* wh, DW_Stage_Value& dwsv)
     prefix = nullptr;
    }
    wg_int wi = wg_encode_uri(wh, uri, prefix);
-   dwsv.cleanup();
+   //?dwsv.cleanup();
    return wi;
   }
   break;
@@ -164,7 +164,7 @@ wg_int _rec_encode(void* wh, DW_Stage_Value& dwsv)
   {
    QPair<u4, char*>* pr = (QPair<u4, char*>*) dwsv.data();
    wg_int wi = wg_encode_blob(wh, pr->second, nullptr, pr->first);
-   dwsv.cleanup();
+   //?dwsv.cleanup();
    return wi;
   }
   break;
@@ -548,7 +548,7 @@ wg_int _wg_encode_query_param(void* wh, DW_Stage_Value& dwsv)
   {
    double* dbl = (double*) dwsv.data();
    wg_int wi = wg_encode_query_param_double(wh, *dbl);
-   dwsv.cleanup();
+   dwsv.cleanup<double>();
    return wi;
   }
   break;
@@ -557,7 +557,7 @@ wg_int _wg_encode_query_param(void* wh, DW_Stage_Value& dwsv)
   {
    char* cs = (char*) dwsv.data();
    wg_int wi = wg_encode_query_param_str(wh, cs, nullptr);
-   dwsv.cleanup();
+   //?dwsv.cleanup();
    return wi;
   }
   break;
@@ -735,7 +735,7 @@ n8 WDB_Instance::set_record_field(void* rec, u4 col, DW_Stage_Value& dwsv)
 
    wg_int wi = wg_encode_str(white_, qdata, xdata);
    result = wg_set_field(white_, rec, col, wi);
-   dwsv.cleanup();
+   //? dwsv.cleanup();
   }
   break;
  case 3:
@@ -850,7 +850,7 @@ void* WDB_Instance::_new_wg_record(u4 id, QString col1, void* col2,
 
     wg_int wi = wg_encode_str(white_, qdata, xdata);
     wgim[index] = wi;
-    dwsv.cleanup();
+    //? dwsv.cleanup();
    }
    break;
   case 3:

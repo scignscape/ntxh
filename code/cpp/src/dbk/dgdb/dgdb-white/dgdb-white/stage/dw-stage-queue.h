@@ -25,6 +25,10 @@
 
 KANS_(DGDB)
 
+//struct void*
+//{
+// void* value;
+//};
 
 struct DW_Stage_Queue  
 {
@@ -36,6 +40,11 @@ struct DW_Stage_Queue
  DW_Stage_Queue();
 
  void* head();
+
+// void* dequeue()
+// {
+//  return values.dequeue();
+// }
 
  void operator=(std::initializer_list<void*> vs) 
  { 

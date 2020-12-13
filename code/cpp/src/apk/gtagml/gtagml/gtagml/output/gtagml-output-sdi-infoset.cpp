@@ -281,7 +281,12 @@ void GTagML_Output_SDI_Infoset::finalize_widowed_sentence_boundaries(GH_Block_Ba
 
 void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
 {
+ // // if we're in a paragraph there's still time to
+  //   find a start to match an end.  But now this code is
+  //   called after processing only so we're never "in a paragraph"
  caon_ptr<tNode> current_paragraph_node = nullptr;
+
+
  u4 srank_in_paragraph = 0;
  QMapIterator<u4, QPair<caon_ptr<tNode>, u4>> it(marked_sentence_starts_);
  while(it.hasNext())
@@ -322,8 +327,14 @@ void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
    {
     ns = it.peekNext().key();
     u4 sse1 = sse + 1;
-    if(sse1 >= ns)
+    if(sse1 > ns)
       ns = 0;
+    else if(sse1 == ns)
+    {
+     // // this should mean the sse is a newline.
+      //   Should that be confirmed?
+     gap = 1;
+    }
     else
     {
      gap = bl.clear_to_sentence_start(sse1, ns);
@@ -640,7 +651,8 @@ void GTagML_Output_SDI_Infoset::check_post_callback
 {
  if(cb->flags.has_post_callback)
  {
-  cb->post_callback(qts, node, index, cb);
+  // prior, parent_of_siblinges?
+  cb->post_callback(qts, node, nullptr, nullptr, index, cb);
  }
 }
 
@@ -737,11 +749,14 @@ void GTagML_Output_SDI_Infoset::generate_tag_command_entry(const GTagML_Output_B
 {
  CAON_PTR_B_DEBUG(GTagML_Node ,node)
  chiefs_.push(b.node);
+
+ caon_ptr<GTagML_Node> parent_of_siblings = nullptr;
+
  switch(b.connection_descriptor)
  {
  case GTagML_Connection_Descriptor::Tag_Command_Cross:
  case GTagML_Connection_Descriptor::Tag_Command_Cross_From_Blank:
-  //?
+  //? maybe set parent_of_siblings ...
  case GTagML_Connection_Descriptor::Tag_Command_Entry:
 
   caon_ptr<GTagML_Tag_Command_Callback> cb = b.cb;
@@ -752,12 +767,12 @@ void GTagML_Output_SDI_Infoset::generate_tag_command_entry(const GTagML_Output_B
 
    if(cb->flags.has_around_callback)
    {
-    cb->around_callback(b.qts, b.node, b.index, b.cb);
+    cb->around_callback(b.qts, b.node, b.prior_node, parent_of_siblings, b.index, b.cb);
     break;
    }
 
    if(cb->flags.has_pre_callback)
-    cb->pre_callback(b.qts, b.node, b.index, b.cb);
+    cb->pre_callback(b.qts, b.node, b.prior_node, parent_of_siblings, b.index, b.cb);
    if(!cb->flags.pre_fallthrough)
     break;
   }
@@ -906,7 +921,8 @@ void GTagML_Output_SDI_Infoset::generate_tag_command_leave(const GTagML_Output_B
  {
   if(b.cb->flags.has_post_callback)
   {
-   b.cb->post_callback(b.qts, b.node, b.index, b.cb);
+   // prior, parent_of_siblings?
+   b.cb->post_callback(b.qts, b.node, nullptr, nullptr, b.index, b.cb);
   }
   if(!b.cb->flags.post_fallthrough)
    return;
