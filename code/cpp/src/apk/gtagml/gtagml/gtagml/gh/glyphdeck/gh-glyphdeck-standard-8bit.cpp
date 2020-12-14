@@ -944,12 +944,18 @@ u1 GH_Glyphdeck_Standard_8bit::get_non_alphanumeric_char(u1 gp)
  }
 }
 
-QString GH_Glyphdeck_Standard_8bit::get_latex_supplement(u1 gp)
+QString GH_Glyphdeck_Standard_8bit::get_latex_supplement(u1 gp, GH_Block_Base::Divert_Mode dm)
 {
  if(gp == 72)
-   return "\\>";
+ {
+  if(dm != GH_Block_Base::Divert_Sentence_Boundaries)
+    return "\\>";
+ }
  if(gp == 74)
-   return "\\> ";
+ {
+  if(dm != GH_Block_Base::Divert_Sentence_Boundaries)
+    return "\\> ";
+ }
  return {};
 }
 

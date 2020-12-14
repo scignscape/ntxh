@@ -19,6 +19,13 @@
 
 class GH_Block_Base
 {
+public:
+
+ enum Divert_Mode
+ {
+  N_A, Divert_Sentence_Boundaries
+ };
+
 protected:
 
  QMap<QString, QPair<u4, u4>>* cache_;
@@ -28,12 +35,18 @@ protected:
 
  u4 layer_code_;
 
+ Divert_Mode divert_mode_;
+
 public:
 
  GH_Block_Base();
 
  ACCESSORS(QString ,layer_summary)
  ACCESSORS(u4 ,layer_code)
+
+ ACCESSORS(Divert_Mode ,divert_mode)
+
+
 
  virtual n8 get_default_null() = 0;
 

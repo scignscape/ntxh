@@ -9,7 +9,8 @@
 #include "gh-block-base.h"
 
 GH_Block_Base::GH_Block_Base()
- : cache_(nullptr), inserts_(nullptr), layer_code_(0)
+ : cache_(nullptr), inserts_(nullptr), layer_code_(0),
+   divert_mode_(Divert_Mode::N_A)
 {
 
 }

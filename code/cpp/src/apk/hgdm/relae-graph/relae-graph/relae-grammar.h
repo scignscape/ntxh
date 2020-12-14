@@ -164,14 +164,14 @@ public:
  {
   for(Context* c : clist)
   {
-   context_ptr_vector_[c->index] = c;
+   context_ptr_vector_[c->index] = new Context(*c);//c;
   }
  }
 
  void cancel_context_ptr(unsigned short index, float w = 0)
  {
   if(Context* c = context_ptr_vector_[index] )
-   c->weight = w;
+    c->weight = w;
  }
 
  Context add_context(QString s, std::initializer_list<Context> clist)
@@ -217,8 +217,20 @@ public:
   c.weight = w;
   activate_context(c.index);
   active_context_index_ = c.index;
-
  }
+
+ void activate(const Context& c, float w = 1)
+ {
+  Context* pc = context_ptr_vector_[c.index];
+  if(pc)
+    activate(*pc, w);
+  else
+  {
+   activate_context(c.index);
+   active_context_index_ = c.index;
+  }
+ }
+
 
  void cancel_context(QString s, float w = 0)
  {

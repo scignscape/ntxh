@@ -31,12 +31,12 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
 
  pre_rule( "tag-command-wrap-mode-indicator", ": :? \\.?" );
 
- static Context gtagml_context = add_context("gtaml-context");
+ Context gtagml_context = add_context("gtaml-context");
  //Context* raw_context = new Context( add_context("raw-context") );
- static Context raw_context = add_context("raw-context");
- static Context html_context = add_context("html-context");
+ Context raw_context = add_context("raw-context");
+ Context html_context = add_context("html-context");
 
- static Context gtagml_or_html_context = add_context("gtaml-or-html",
+ Context gtagml_or_html_context = add_context("gtaml-or-html",
    {gtagml_context, html_context});
 
 
@@ -65,10 +65,10 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
 
 
  add_rule( gtagml_context, "enter-special-parse-mode",
-   " <  "
+   " \\{  "
    " (?<spm> .valid-tag-command-name. ) "
    " >> "
-   ,[&raw_context, &graph_build, this, &p]
+   ,[raw_context, &graph_build, this, &p]
  {
   QString spm = p.matched("spm");
   graph_build.enter_special_parse_mode(spm);
@@ -76,11 +76,14 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
     activate(raw_context);
  });
 
- add_rule( raw_context, "leave-raw_context",
-   " <<raw>  "
-   ,[&]
+ add_rule( raw_context, "leave-special-parse-mode",
+   " << (?<spm> .valid-tag-command-name. )? \\}  "
+   ,[gtagml_context, &graph_build, this, &p]
  {
-  graph_build.leave_special_parse_mode("raw");
+  QString spm = p.matched("spm");
+  if(spm.isEmpty())
+    spm = "raw";
+  graph_build.leave_special_parse_mode(spm);
   if(graph_build.current_parsing_mode() == GTagML_Parsing_Modes::NGML)
     activate(gtagml_context);
  });
@@ -423,6 +426,14 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
    graph_build.special_character_sequence(m, esc, which);
   });
 
+
+ // // do we always want this?
+ add_rule( gtagml_context, "tile-acc-newline",
+  " .single-space.+ \\n "
+           ,[&]
+ {
+  graph_build.tile_acc("\n");
+ });
 
  add_rule( gtagml_context, "tile-acc",
   " . "

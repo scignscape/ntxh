@@ -22,6 +22,8 @@
 
 #include "kans.h"
 
+#include <QTextStream>
+
 KANS_(GTagML)
 
 class GTagML_Parser;
@@ -56,6 +58,9 @@ class GTagML_Document
 
  QString sdi_tag_command_info_path_;
 
+ QTextStream* divert_;
+
+
 public:
 
 
@@ -71,6 +76,8 @@ public:
  ACCESSORS(QString ,khi_info)
  ACCESSORS(GTagML_Parsing_Modes ,parsing_mode)
  ACCESSORS(QString ,local_file_name)
+
+ ACCESSORS(QTextStream*, divert)
 
 
  GTagML_Document();

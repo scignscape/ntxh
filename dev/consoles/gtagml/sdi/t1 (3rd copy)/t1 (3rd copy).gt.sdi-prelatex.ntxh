@@ -1,0 +1,170 @@
+
+&type GH_SDI_Sentence {4}
+ :i:1 :p:2 :s:3 :e:4 ;
+
+&type GH_SDI_Paragraph {3}
+ :i:1 :s:2 :e:3 ;
+
+&/
+ 
+!/ GH_SDI_Paragraph
+$i: 1
+$s: 2
+$e: 1284
+/!
+<<>
+
+
+!/ GH_SDI_Sentence
+$i: 1
+$p: 1
+$s: 2
+$e: 252
+$g: 253
+/!
+<>>
+
+!/ GH_SDI_Sentence
+$i: 2
+$p: 1
+$s: 255
+$e: 513
+$g: 514
+/!
+<>>
+
+!/ GH_SDI_Sentence
+$i: 3
+$p: 1
+$s: 516
+$e: 604
+$g: 605
+/!
+<>>
+
+!/ GH_SDI_Sentence
+$i: 4
+$p: 1
+$s: 607
+$e: 714
+$g: 715
+/!
+<>>
+
+!/ GH_SDI_Sentence
+$i: 5
+$p: 1
+$s: 716
+$e: 881
+$g: 882
+/!
+<>>
+
+!/ GH_SDI_Sentence
+$i: 6
+$p: 1
+$s: 884
+$e: 1106
+$g: 1107
+/!
+<>>
+
+!/ GH_SDI_Sentence
+$i: 7
+$p: 1
+$s: 1109
+$e: 1284
+$g: 0
+/!
+<>>
+
+!/ GH_SDI_Paragraph
+$i: 2
+$s: 1285
+$e: 2255
+/!
+<<>
+
+
+!/ GH_SDI_Sentence
+$i: 8
+$p: 2
+$s: 1285
+$e: 1339
+$g: 1340
+/!
+<>>
+
+!/ GH_SDI_Sentence
+$i: 9
+$p: 2
+$s: 1342
+$e: 1628
+$g: 1629
+/!
+<>>
+
+!/ GH_SDI_Sentence
+$i: 10
+$p: 2
+$s: 1630
+$e: 1702
+$g: 1703
+/!
+<>>
+
+!/ GH_SDI_Sentence
+$i: 11
+$p: 2
+$s: 1705
+$e: 1944
+$g: 1945
+/!
+<>>
+
+!/ GH_SDI_Sentence
+$i: 12
+$p: 2
+$s: 1947
+$e: 2255
+$g: 0
+/!
+<>>
+
+!/ GH_SDI_Paragraph
+$i: 3
+$s: 2256
+$e: 3543
+/!
+<<>
+
+
+!/ GH_SDI_Sentence
+$i: 13
+$p: 3
+$s: 2256
+$e: 2762
+$g: 2763
+/!
+<>>
+
+!/ GH_SDI_Sentence
+$i: 14
+$p: 3
+$s: 2764
+$e: 3272
+$g: 3273
+/!
+<>>
+
+!/ GH_SDI_Sentence
+$i: 15
+$p: 3
+$s: 3274
+$e: 3543
+$g: 0
+/!
+<>>
+
+
+/&

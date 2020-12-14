@@ -41,11 +41,20 @@ struct GTagML_Output_Bundle
  caon_ptr<tNode> prior_node;
  GTagML_Connection_Descriptor connection_descriptor;
  caon_ptr<GTagML_Tag_Command_Callback> cb;
+ caon_ptr<tNode> prior_cross_node;
 
  GTagML_Output_Bundle with(QTextStream& new_qts) const;
+
  GTagML_Output_Bundle with(caon_ptr<tNode> n, GTagML_Connection_Descriptor descriptor) const;
  GTagML_Output_Bundle with(caon_ptr<tNode> sn,
    caon_ptr<tNode> n, GTagML_Connection_Descriptor descriptor) const;
+
+ GTagML_Output_Bundle with(caon_ptr<tNode> n,
+   GTagML_Connection_Descriptor descriptor, caon_ptr<tNode> pcn) const;
+
+ GTagML_Output_Bundle with(caon_ptr<tNode> sn,
+   caon_ptr<tNode> n, GTagML_Connection_Descriptor descriptor, caon_ptr<tNode> pcn) const;
+
  GTagML_Output_Bundle with(GTagML_Connection_Descriptor descriptor) const;
  GTagML_Output_Bundle with_node(caon_ptr<tNode> n) const;
  GTagML_Output_Bundle with_nodes(caon_ptr<tNode> sn, caon_ptr<tNode> n) const;

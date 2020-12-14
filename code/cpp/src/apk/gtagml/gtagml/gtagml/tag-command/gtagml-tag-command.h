@@ -114,6 +114,8 @@ private:
  QList<GH_Prenode*> arg_prenodes_;
  GH_Prenode* name_prenode_;
 
+ GH_Prenode* last_tile_prenode_;
+
  QString opt_argument_;
 
  static std::function<bool(QString)> needs_sdi_mark_check_;
@@ -137,7 +139,10 @@ public:
  ACCESSORS(GTagML_HTXN_Node* ,gh_node)
  ACCESSORS(GTagML_HTXN_Node* ,arg_gh_node)
 
- ACCESSORS(GH_Prenode* ,name_prenode);
+ ACCESSORS(GH_Prenode* ,name_prenode)
+
+ ACCESSORS(GH_Prenode* ,last_tile_prenode)
+
 
  static void set_needs_sdi_mark_check(std::function<bool(QString)> fn);
 

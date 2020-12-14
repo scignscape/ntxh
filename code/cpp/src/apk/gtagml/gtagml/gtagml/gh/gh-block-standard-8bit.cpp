@@ -135,7 +135,7 @@ QPair<u4, u4> GH_Block_Standard_8bit::get_effective_start_and_end_indices()
 QString GH_Block_Standard_8bit::get_latex_supplement(u4 index)
 {
  u1 code = chars_[index];
- return glyphdeck_->get_latex_supplement(code);
+ return glyphdeck_->get_latex_supplement(code, divert_mode_);
 }
 
 QString GH_Block_Standard_8bit::get_latex_out(const QPair<u4, u4>& indices)

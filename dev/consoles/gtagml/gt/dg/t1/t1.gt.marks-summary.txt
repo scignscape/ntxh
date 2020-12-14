@@ -1,4 +1,5 @@
 $$ document-title := Cognitive Transform Grammar
 $$ local-title := info
 
+$& BlackwellPragmatics %% (1:main) 5 26
 

@@ -31,7 +31,7 @@ GTagML_Tag_Command::GTagML_Tag_Command(QString name,
    ref_position_(0), ref_order_(0),
    ref_enter_(0), ref_leave_(0),
    gh_node_(nullptr), arg_gh_node_(nullptr),
-   name_prenode_(nullptr)
+   name_prenode_(nullptr), last_tile_prenode_(nullptr)
 {
  //if(name_.contains('-'))
  //  flags.needs_sdi_mark = true;

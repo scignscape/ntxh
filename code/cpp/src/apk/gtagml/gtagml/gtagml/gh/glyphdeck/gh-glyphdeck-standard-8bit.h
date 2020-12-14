@@ -37,7 +37,7 @@ public:
  u1 get_default_null();
 
  QString get_latex_representation(u1 gp);
- QString get_latex_supplement(u1 gp);
+ QString get_latex_supplement(u1 gp, GH_Block_Base::Divert_Mode dm);
 
  QString get_xml_representation(u1 gp);
  QChar get_qchar_representation(u1 gp, QString& alternate);

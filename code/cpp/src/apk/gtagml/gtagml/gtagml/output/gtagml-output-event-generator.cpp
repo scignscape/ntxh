@@ -186,9 +186,12 @@ void GTagML_Output_Event_Generator::check_tag_command_cross_connectors(//?const
  {
   CAON_PTR_DEBUG(tNode ,target_node)
   if(node_was_blank)
-   generate_tag_command_entry(b.with(target_node, GTagML_Connection_Descriptor::Tag_Command_Cross_From_Blank));
+    generate_tag_command_entry(b.with(target_node, GTagML_Connection_Descriptor::Tag_Command_Cross_From_Blank));
   else
-   generate_tag_command_entry(b.with(target_node, GTagML_Connection_Descriptor::Tag_Command_Cross));
+  {
+   caon_ptr<tNode> pcn = b.node;
+   generate_tag_command_entry(b.with(target_node, GTagML_Connection_Descriptor::Tag_Command_Cross, pcn));
+  }
  }
  else if(target_node = qry_.Tag_Command_Continue(b.node))
  {

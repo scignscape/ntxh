@@ -266,7 +266,7 @@ QString GTagML_Folder::partials_codes_to_lisp()
  return result;
 }
 
-void GTagML_Folder::get_GTagML_files(QStringList& result)
+void GTagML_Folder::get_gtagml_files(QStringList& result)
 {
  QDir dir(local_path_);
  dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
@@ -279,11 +279,24 @@ void GTagML_Folder::get_GTagML_files(QStringList& result)
  while(it.hasNext())
  {
   QFileInfo qfi = it.next();
-  if(qfi.suffix() == "ngml")
+  if(qfi.suffix() == "gt")
     result << qfi.absoluteFilePath();
+  else if(qfi.suffix() == "gtagml")
+    result << qfi.absoluteFilePath();
+
  }
 }
 
+
+void GTagML_Folder::convert_all_files(void(*fn)(QString))
+{
+ QStringList files;
+ get_gtagml_files(files);
+ for(QString f: files)
+ {
+  fn(f);
+ }
+}
 
 void GTagML_Folder::convert_all_files(QString output_path, QString khif_path)
 {

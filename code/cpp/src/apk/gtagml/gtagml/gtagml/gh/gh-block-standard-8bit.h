@@ -30,9 +30,12 @@ class GH_Block_Standard_8bit : public GH_Block_Base
  GH_Block_Parse_Mode* parse_mode_;
 
 
+
+
 public:
 
  GH_Block_Standard_8bit();
+
 
  n8 get_default_null() Q_DECL_OVERRIDE;
 
@@ -51,6 +54,7 @@ public:
 
  void write(QString text, QPair<u4, u4>& result,
    QVector<u4>* special_flag_marks = nullptr) Q_DECL_OVERRIDE;
+
  void write(QByteArray& text, QPair<u4, u4>& result,
    QVector<u4>* special_flag_marks = nullptr);
 

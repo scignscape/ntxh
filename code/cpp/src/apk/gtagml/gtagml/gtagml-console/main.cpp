@@ -9,12 +9,19 @@
 
 #include <QFileInfo>
 
+//#include <QFileDialog>
+
+
 #include "gtagml/kernel/document/gtagml-document.h"
 #include "get-cmdl.h"
 
 #include "gtagml/output/gtagml-output-latex.h"
 #include "gtagml/output/gtagml-output-blocks.h"
 #include "gtagml/output/gtagml-output-sdi-infoset.h"
+
+
+#include "gtagml/kernel/document/gtagml-folder.h"
+
 
 
 #include "gh/gh-block-writer.h"
@@ -48,11 +55,17 @@ void process_gtagml_file(QString path)
 
  GH_Block_Writer* blw = new GH_Block_Writer;
 
+ QString divert;
+ QTextStream qts(&divert);
+ gdoc->set_divert(&qts);
+
  GTagML_Output_Blocks* gob = new GTagML_Output_Blocks(*gdoc, blw);
  gob->init_standard_8bit();
  gob->export_blocks(); //(path + ".");
 
  GTagML_Output_SDI_Infoset* gsi = new GTagML_Output_SDI_Infoset(*gdoc, blw);
+
+
  //goi->init_standard_8bit();
  gsi->export_infoset(path + ".info.txt"); // export_blocks(); //(path + ".");
 
@@ -108,7 +121,7 @@ int main(int argc, char *argv[])
  QString manfolder;
 
  QStringList cmdl = get_cmdl(argc, argv, 2, {
-   {&folder, DEFAULT_GTAGML_FOLDER "/dg"},
+   {&folder, DEFAULT_GTAGML_FOLDER "/dg/t1/src"},
    {&file, DEFAULT_GTAGML_FOLDER "/dg/t1/t1.gt"},
    {&manfolder, {}}
    });
@@ -119,10 +132,15 @@ int main(int argc, char *argv[])
  qDebug() << "Folder: " << folder << ", File: " << file;
  qDebug() << "ManFolder: " << manfolder;
 
+ file.clear();
+
  if(manfolder.isEmpty())
  {
   if(file.isEmpty())
   {
+   GTagML_Folder fld(folder);
+   fld.convert_all_files( &process_gtagml_file );
+
    // process whole folder ...
 //   NGML_Folder fld(folder);
 //   fld.convert_to_latex();

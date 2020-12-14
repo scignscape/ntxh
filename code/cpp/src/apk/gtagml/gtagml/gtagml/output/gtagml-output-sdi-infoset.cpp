@@ -76,7 +76,7 @@ void GTagML_Output_SDI_Infoset::init_callbacks()
 // // common functionality for both insert methods ...
 
 void _insert_start(QTextStream& qts, n8* u, QVector<caon_ptr<GTagML_Node>>* vec, u4 index, QString& pre_result, caon_ptr<GTagML_Node> n,
-  u4& canceled_sdi_sentence_start_index)
+  u4& canceled_sdi_sentence_start_index, QTextStream* divert)
 {
  if(index == canceled_sdi_sentence_start_index)
  {
@@ -85,7 +85,10 @@ void _insert_start(QTextStream& qts, n8* u, QVector<caon_ptr<GTagML_Node>>* vec,
  }
  else
  {
-  qts << "\\+ " << index << '\n';
+  if(divert)
+    ;
+  else
+    qts << "\\+ " << index << '\n';
   pre_result.append("\\+");
   if(u)
     ++*u;
@@ -100,12 +103,15 @@ void _insert_end(QTextStream& qts, n8* u, QVector<caon_ptr<GTagML_Node>>* vec, u
   caon_ptr<GTagML_Node> n,
   u4& held_sdi_sentence_end_index,
   u4& canceled_sdi_sentence_start_index,
-  caon_ptr<GTagML_Node>* held_sdi_sentence_end_node)
+  caon_ptr<GTagML_Node>* held_sdi_sentence_end_node, QTextStream* divert)
 {
  if(new_index == index)
  {
   qts << "\\; " << index << '\n';
-  post_result.append("\\;");
+  if(divert)
+    ;
+  else
+    post_result.append("\\;");
   if(u)
     ++*u;
   if(vec)
@@ -124,7 +130,10 @@ void _insert_end(QTextStream& qts, n8* u, QVector<caon_ptr<GTagML_Node>>* vec, u
   }
   else
   {
-   qts << "\\; " << index << '\n';
+   if(divert)
+     ;
+   else
+     qts << "\\; " << index << '\n';
    post_result.append("\\;");
    if(u)
      ++*u;
@@ -134,26 +143,26 @@ void _insert_end(QTextStream& qts, n8* u, QVector<caon_ptr<GTagML_Node>>* vec, u
  }
 }
 
-void _insert_start(QTextStream& qts, n8* u, u4 index, QString& pre_result, u4& canceled_sdi_sentence_start_index)
+void _insert_start(QTextStream& qts, n8* u, u4 index, QString& pre_result, u4& canceled_sdi_sentence_start_index, QTextStream* divert)
 {
- _insert_start(qts, u, nullptr, index, pre_result, nullptr, canceled_sdi_sentence_start_index);
+ _insert_start(qts, u, nullptr, index, pre_result, nullptr, canceled_sdi_sentence_start_index, divert);
 }
 
 void _insert_start(QTextStream& qts, QVector<caon_ptr<GTagML_Node>>* vec, u4 index,
-  QString& pre_result, caon_ptr<GTagML_Node> n, u4& canceled_sdi_sentence_start_index)
+  QString& pre_result, caon_ptr<GTagML_Node> n, u4& canceled_sdi_sentence_start_index, QTextStream* divert)
 {
- _insert_start(qts, nullptr, vec, index, pre_result, n, canceled_sdi_sentence_start_index);
+ _insert_start(qts, nullptr, vec, index, pre_result, n, canceled_sdi_sentence_start_index, divert);
 }
 
 void _insert_end(QTextStream& qts, n8* u, u4 index, u4 new_index,
   QString& post_result, QMap<u4, QPair<caon_ptr<GTagML_Node>, u4>>& marked_sentence_starts,
   u4& held_sdi_sentence_end_index,
-  u4& canceled_sdi_sentence_start_index)
+  u4& canceled_sdi_sentence_start_index, QTextStream* divert)
 {
  _insert_end(qts, u, nullptr, index, new_index, post_result,
    marked_sentence_starts, nullptr,
    held_sdi_sentence_end_index, canceled_sdi_sentence_start_index,
-   nullptr);
+   nullptr, divert);
 }
 
 void _insert_end(QTextStream& qts,
@@ -163,12 +172,12 @@ void _insert_end(QTextStream& qts,
   QMap<u4, QPair<caon_ptr<GTagML_Node>, u4>>& marked_sentence_starts, caon_ptr<GTagML_Node> n,
   u4& held_sdi_sentence_end_index,
   u4& canceled_sdi_sentence_start_index,
-  caon_ptr<GTagML_Node>* held_sdi_sentence_end_node)
+  caon_ptr<GTagML_Node>* held_sdi_sentence_end_node, QTextStream* divert)
 {
  _insert_end(qts, nullptr, vec, index, new_index, post_result,
    marked_sentence_starts, n,
    held_sdi_sentence_end_index, canceled_sdi_sentence_start_index,
-   held_sdi_sentence_end_node);
+   held_sdi_sentence_end_node, divert);
 }
 
 u4 GTagML_Output_SDI_Infoset::write_ntxh_sentences(QTextStream& qts, u4 paragraph_id,  u4 s, u4 e, u4 sentence_id)
@@ -232,6 +241,9 @@ $e: %3
 
 void GTagML_Output_SDI_Infoset::finalize_paragraph_boundaries(GH_Block_Base& bl)
 {
+ if(document_.divert())
+   return;
+
  static QString* ps = new QString("\\:");
  static QString* pe = new QString("\\<");
  {
@@ -240,7 +252,10 @@ void GTagML_Output_SDI_Infoset::finalize_paragraph_boundaries(GH_Block_Base& bl)
   {
    it.next();
    u4 i = it.key();
-   bl.set_pre_insert_front(i, ps);
+   if(document_.divert())
+     ;
+   else
+     bl.set_pre_insert_front(i, ps);
   }
  }
  {
@@ -257,6 +272,9 @@ void GTagML_Output_SDI_Infoset::finalize_paragraph_boundaries(GH_Block_Base& bl)
 
 void GTagML_Output_SDI_Infoset::finalize_widowed_sentence_boundaries(GH_Block_Base& bl)
 {
+ if(document_.divert())
+   return;
+
  static QString* ss = new QString("\\+");
  static QString* se = new QString("\\;");
  {
@@ -363,14 +381,20 @@ n8 GTagML_Output_SDI_Infoset::check_sdi_latex_insert(GH_Block_Base* bl, u4 index
   ++count;
   held_sdi_sentence_end_index_ = 0;
   review_qts_ << "\\> " << index << '\n';
-  post_result.append("\\>");
+  if(document_.divert())
+    ;
+  else
+    post_result.append("\\>");
  }
  {
   auto it = marked_paragraph_starts_.find(index);
   if(it != marked_paragraph_starts_.end())
   {
    review_qts_ << "\\: " << index << '\n';
-   pre_result.append("\\:");
+   if(document_.divert())
+     ;
+   else
+     pre_result.append("\\:");
    ++count;
   }
  }
@@ -378,7 +402,8 @@ n8 GTagML_Output_SDI_Infoset::check_sdi_latex_insert(GH_Block_Base* bl, u4 index
   auto it = marked_sentence_starts_.find(index);
   if(it != marked_sentence_starts_.end())
   {
-   _insert_start(review_qts_, &count, index, pre_result, canceled_sdi_sentence_start_index_);
+   _insert_start(review_qts_, &count, index, pre_result,
+    canceled_sdi_sentence_start_index_, document_.divert());
 //   if(index == canceled_sdi_sentence_start_index_)
 //   {
 //    // //  the \> supplants the \+ ...
@@ -425,7 +450,7 @@ n8 GTagML_Output_SDI_Infoset::check_sdi_latex_insert(GH_Block_Base* bl, u4 index
    _insert_end(review_qts_, &count, index, new_index, post_result,
      marked_sentence_starts_,
      held_sdi_sentence_end_index_,
-     canceled_sdi_sentence_start_index_);
+     canceled_sdi_sentence_start_index_, document_.divert());
 
   }
  }
@@ -447,7 +472,10 @@ QVector<caon_ptr<GTagML_Node>> GTagML_Output_SDI_Infoset::get_sdi_latex_insert_n
  {
   rvec.push_back(held_sdi_sentence_end_node_);
   held_sdi_sentence_end_index_ = 0;
-  post_result.append("\\>");
+  if(document_.divert())
+    ;
+  else
+    post_result.append("\\>");
   review_qts_ << "\\> " << index << '\n';
  }
  {
@@ -455,7 +483,10 @@ QVector<caon_ptr<GTagML_Node>> GTagML_Output_SDI_Infoset::get_sdi_latex_insert_n
   if(it != marked_paragraph_starts_.end())
   {
    review_qts_ << "\\: " << index << '\n';
-   pre_result.append("\\:");
+   if(document_.divert())
+     ;
+   else
+     pre_result.append("\\:");
    rvec.push_back(it.value().first);
   }
  }
@@ -463,7 +494,8 @@ QVector<caon_ptr<GTagML_Node>> GTagML_Output_SDI_Infoset::get_sdi_latex_insert_n
   auto it = marked_sentence_starts_.find(index);
   if(it != marked_sentence_starts_.end())
   {
-   _insert_start(review_qts_, &rvec, index, pre_result, it.value().first, canceled_sdi_sentence_start_index_);
+   _insert_start(review_qts_, &rvec, index, pre_result, it.value().first,
+     canceled_sdi_sentence_start_index_, document_.divert());
 //   pre_result.append("\\+");
 //   rvec.push_back(it.value());
   }
@@ -504,7 +536,7 @@ QVector<caon_ptr<GTagML_Node>> GTagML_Output_SDI_Infoset::get_sdi_latex_insert_n
       it.value().first,
       held_sdi_sentence_end_index_,
       canceled_sdi_sentence_start_index_,
-      &held_sdi_sentence_end_node_);
+      &held_sdi_sentence_end_node_, document_.divert());
 
 //   u4 new_index = htxn_document_->
 //     check_advance_to_sentence_end_space(bl, index);
