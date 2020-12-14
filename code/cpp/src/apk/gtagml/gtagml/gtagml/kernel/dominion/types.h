@@ -31,3 +31,4 @@ DOMINION_TYPE(GTagML_annotation_tile, GTagML_Annotation_Tile, GTagML_Annotation_
 DOMINION_TYPE(GTagML_tag_command, GTagML_Tag_Command, GTagML_Tag_Command)
 DOMINION_TYPE(GTagML_attribute_tile, GTagML_Attribute_Tile, GTagML_Attribute_Tile)
 DOMINION_TYPE(GTagML_paralex_tile, GTagML_Paralex_Tile, GTagML_Paralex_Tile)
+DOMINION_TYPE(GTagML_raw_tile, GTagML_Raw_Tile, GTagML_Raw_Tile)

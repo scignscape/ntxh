@@ -11,8 +11,11 @@
 #include "kernel/graph/gtagml-node.h"
 #include "tile/gtagml-token.h"
 #include "kernel/output/gtagml-output-bundle.h"
+
 #include "tile/gtagml-tile.h"
 #include "tile/gtagml-attribute-tile.h"
+#include "tile/gtagml-raw-tile.h"
+
 #include "tag-command/gtagml-tag-command.h"
 #include "tile/gtagml-paralex-tile.h"
 
@@ -147,6 +150,11 @@ void GTagML_Output_Event_Handler::generate_tile(const GTagML_Output_Bundle& b)
  {
   generate_tile(b, tile);
  }
+ else if(caon_ptr<GTagML_Raw_Tile> tile = b.node->GTagML_raw_tile())
+ {
+  generate_tile(b, tile);
+ }
+
 }
 
 void GTagML_Output_Event_Handler::check_update_index(const GTagML_Output_Bundle& b,
@@ -178,6 +186,14 @@ void GTagML_Output_Event_Handler::check_update_index(const GTagML_Output_Bundle&
 void GTagML_Output_Event_Handler::generate_tile_via_gh(const GTagML_Output_Bundle& b, GH_Prenode& ghn)
 {
 
+}
+
+void GTagML_Output_Event_Handler::generate_tile(const GTagML_Output_Bundle& b,
+  caon_ptr<GTagML_Raw_Tile> tile)
+{
+ CAON_PTR_DEBUG(GTagML_Raw_Tile ,tile)
+
+ b.qts << tile->text();
 }
 
 void GTagML_Output_Event_Handler::generate_tile(const GTagML_Output_Bundle& b,
@@ -229,9 +245,7 @@ void GTagML_Output_Event_Handler::handle_annotation(caon_ptr<GTagML_Tile> tile, 
 void GTagML_Output_Event_Handler::generate_tile(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Paralex_Tile> tile)
 {
  tile->write_html(b.qts);
-
  check_generate_whitespace(b, tile);
-
 }
 
 //void GTagML_Output_Event_Handler::check_generate_whitespace(const GTagML_Output_Bundle& b, GTagML_HTXN_Node& nhn)

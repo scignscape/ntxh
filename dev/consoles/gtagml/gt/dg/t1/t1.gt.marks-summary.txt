@@ -1,5 +1,4 @@
 $$ document-title := Cognitive Transform Grammar
 $$ local-title := info
 
-$& MattSelway (7) (1:main) 2 3
 

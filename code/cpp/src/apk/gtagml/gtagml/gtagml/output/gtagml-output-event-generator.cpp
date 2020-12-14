@@ -235,7 +235,7 @@ void GTagML_Output_Event_Generator::check_tile_follow(//?const
   const GTagML_Output_Bundle& b)
 {
  CAON_PTR_B_DEBUG(tNode ,node)
-  b.node->debug_connectors();
+   b.node->debug_connectors();
  if(caon_ptr<tNode> target_node = check_tag_command_entry_connectors(b, true))
  {
   CAON_PTR_DEBUG(tNode ,target_node)
@@ -275,6 +275,11 @@ void GTagML_Output_Event_Generator::generate_tile_sequence(const GTagML_Output_B
  else if(caon_ptr<GTagML_Annotation_Tile> tile = b.node->GTagML_annotation_tile())
  {
   CAON_PTR_DEBUG(GTagML_Annotation_Tile ,tile)
+  handler_.generate_tile(b, tile);
+ }
+ else if(caon_ptr<GTagML_Raw_Tile> tile = b.node->GTagML_raw_tile())
+ {
+  CAON_PTR_DEBUG(GTagML_Raw_Tile ,tile)
   handler_.generate_tile(b, tile);
  }
 

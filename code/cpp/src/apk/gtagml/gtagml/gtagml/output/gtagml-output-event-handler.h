@@ -64,6 +64,7 @@ public:
  virtual void generate_tile(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Attribute_Tile> tile);
  virtual void generate_tile(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Paralex_Tile> tile);
  virtual void generate_tile(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Annotation_Tile> tile);
+ virtual void generate_tile(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Raw_Tile> tile);
 
  virtual void generate_tile_via_gh(const GTagML_Output_Bundle& b, GH_Prenode& ghp);
 

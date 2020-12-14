@@ -14,6 +14,7 @@
 #include "kernel/gtagml-root.h"
 #include "tile/gtagml-attribute-tile.h"
 #include "tile/gtagml-paralex-tile.h"
+#include "tile/gtagml-raw-tile.h"
 
 #include "annotation/gtagml-annotation-tile.h"
 
@@ -28,10 +29,11 @@
 USING_KANS(GTagML)
 
 GTagML_Graph_Build::GTagML_Graph_Build(GTagML_Graph& g, GTagML_Document_Info& document_info)
- : Flags(0), markup_position_(g.root_node()), acc_mode_(Main_Tile), document_info_(document_info),
+ : Flags(0), markup_position_(g.root_node()), acc_mode_(Acc_Mode::Main_Tile), document_info_(document_info),
    current_parsing_mode_(GTagML_Parsing_Modes::NGML), //?current_annotation_tile_(nullptr),
    tile_acc_length_adjustment_(0),
-   tile_acc_qts_(&tile_acc_), qts_string_literal_acc_(&string_literal_acc_)
+   tile_acc_qts_(&tile_acc_), string_literal_acc_qts_(&string_literal_acc_),
+   current_raw_format_("latex")
 {
 
 }
@@ -60,6 +62,11 @@ void GTagML_Graph_Build::tile_acc(QString str)
 {
  tile_acc_qts_ << str;
 }
+
+//void GTagML_Graph_Build::spm_acc(QString str)
+//{
+// spm_acc_qts_ << str;
+//}
 
 
 void GTagML_Graph_Build::tag_command_annotation(QString annotation)
@@ -140,17 +147,26 @@ void GTagML_Graph_Build::check_tile_acc(Acc_Mode new_mode)
  }
  switch(acc_mode_)
  {
- case Main_Tile:
+ case Acc_Mode::Main_Tile:
   attach_left_whitespace();
   check_add_words();
-  add_tile(tile_acc_.trimmed());
-  attach_right_whitespace();
+  if(new_mode == Acc_Mode::Raw)
+  {
+   QString trim = tile_acc_.trimmed() + "\n";
+   add_tile(trim);
+  }
+  else
+  {
+   add_tile(tile_acc_.trimmed());
+   attach_right_whitespace();
+  }
   tile_acc_length_adjustment_ = 0;
   tile_acc_qts_.reset();
   tile_acc_.clear();
+
   break;
 
- case Arg_Tile:
+ case Acc_Mode::Arg_Tile:
   attach_left_whitespace();
   add_tile(tile_acc_.trimmed());
   attach_right_whitespace();
@@ -159,12 +175,20 @@ void GTagML_Graph_Build::check_tile_acc(Acc_Mode new_mode)
   tile_acc_.clear();
   break;
 
- case Attribute:
+ case Acc_Mode::Attribute:
   add_attribute_tile(tile_acc_);
   tile_acc_length_adjustment_ = 0;
   tile_acc_qts_.reset();
   tile_acc_.clear();
   break;
+
+ case Acc_Mode::Raw:
+  add_raw_tile(tile_acc_);
+  tile_acc_length_adjustment_ = 0;
+  tile_acc_qts_.reset();
+  tile_acc_.clear();
+  break;
+
 
  default: break;
  }
@@ -233,7 +257,7 @@ void GTagML_Graph_Build::check_add_words()
 
 void GTagML_Graph_Build::mark_attribute_tile()
 {
- check_tile_acc(Attribute);
+ check_tile_acc(Acc_Mode::Attribute);
 }
 
 
@@ -581,28 +605,28 @@ void GTagML_Graph_Build::tag_command_entry_inside_multi(QString wmi, QString fia
   ntc->flags.is_multi_optional = true;
   ntc->flags.multi_arg_layer = true;
   markup_position_.await_optional(node);
-  acc_mode_ = Arg_Tile;
+  acc_mode_ = Acc_Mode::Arg_Tile;
  }
  else if(arg_marker == "-->")
  {
   ntc->flags.is_multi_mandatory = true;
   ntc->flags.multi_main_layer = true;
   markup_position_.await_mandatory(node);
-  acc_mode_ = Main_Tile;
+  acc_mode_ = Acc_Mode::Main_Tile;
  }
  else if(arg_marker == "->")
  {
   ntc->flags.is_multi_mandatory = true;
   ntc->flags.multi_arg_layer = true;
   markup_position_.await_mandatory(node);
-  acc_mode_ = Arg_Tile;
+  acc_mode_ = Acc_Mode::Arg_Tile;
  }
  else if(arg_marker == "-->>")
  {
   ntc->flags.is_multi_optional = true;
   ntc->flags.multi_main_layer = true;
   markup_position_.await_optional(node);
-  acc_mode_ = Main_Tile;
+  acc_mode_ = Acc_Mode::Main_Tile;
  }
 }
 
@@ -632,7 +656,7 @@ void GTagML_Graph_Build::tag_command_entry_multi(QString wmi, QString tag_comman
   parse_context_.flags.inside_attribute_sequence = true;
   parse_context_.flags.inside_multi_generic = true;
   flags.active_attribute_sequence = true;
-  acc_mode_ = Attribute;
+  acc_mode_ = Acc_Mode::Attribute;
  }
  else
  {
@@ -756,6 +780,16 @@ caon_ptr<GTagML_Tile> GTagML_Graph_Build::add_tile(QString tile_str)
  caon_ptr<tNode> node = make_new_node(tile);
  //?
  markup_position_.add_tile_node(node);
+ return tile;
+}
+
+caon_ptr<GTagML_Raw_Tile> GTagML_Graph_Build::add_raw_tile(QString tile_str)
+{
+  // // current latex is the only raw format ...
+ caon_ptr<GTagML_Raw_Tile> tile = make_new_raw_tile(current_raw_format_, tile_str);
+ CAON_PTR_DEBUG(GTagML_Raw_Tile ,tile)
+ caon_ptr<tNode> node = make_new_node(tile);
+ markup_position_.add_raw_tile_node(node);
  return tile;
 }
 
@@ -942,7 +976,13 @@ caon_ptr<GTagML_Attribute_Tile> GTagML_Graph_Build::make_new_attribute_tile(QStr
 caon_ptr<GTagML_Attribute_Tile> GTagML_Graph_Build::make_new_attribute_tile(QString key, QString value)
 {
  return caon_ptr<GTagML_Attribute_Tile>(
- new GTagML_Attribute_Tile(key, value) );
+   new GTagML_Attribute_Tile(key, value) );
+}
+
+caon_ptr<GTagML_Raw_Tile> GTagML_Graph_Build::make_new_raw_tile(QString format, QString value)
+{
+ return caon_ptr<GTagML_Raw_Tile>(
+   new GTagML_Raw_Tile(format, value) );
 }
 
 caon_ptr<GTagML_Tile> GTagML_Graph_Build::make_new_tile(QString tile)
@@ -962,6 +1002,16 @@ caon_ptr<GTagML_Paralex_Tile> GTagML_Graph_Build::make_new_paralex_tile(QString 
 caon_ptr<GTagML_Graph_Build::tNode> GTagML_Graph_Build::make_new_node(caon_ptr<GTagML_Tile> tile)
 {
  CAON_PTR_DEBUG(GTagML_Tile ,tile)
+ caon_ptr<tNode> result = caon_ptr<tNode>( new tNode(tile) );
+ #ifdef RELAE_LABEL_NODES
+ result->set_label(tile->thumbnail());
+ #endif
+ return result;
+}
+
+caon_ptr<GTagML_Graph_Build::tNode> GTagML_Graph_Build::make_new_node(caon_ptr<GTagML_Raw_Tile> tile)
+{
+ CAON_PTR_DEBUG(GTagML_Raw_Tile ,tile)
  caon_ptr<tNode> result = caon_ptr<tNode>( new tNode(tile) );
  #ifdef RELAE_LABEL_NODES
  result->set_label(tile->thumbnail());
@@ -1151,6 +1201,39 @@ void GTagML_Graph_Build::tag_body_leave(QString match)
  parse_context_.flags.inside_tag_body = false;
  if(match == "/>")
   tag_command_leave();
+}
+
+void GTagML_Graph_Build::enter_special_parse_mode(QString spm)
+{
+ if(spm.startsWith("raw-"))
+ {
+  current_raw_format_ = spm.mid(4);
+ }
+ else if(spm != "raw")
+ {
+  // // no other spm current recognized ...
+  return;
+ }
+
+ prior_parsing_modes_.push({current_parsing_mode_, acc_mode_});
+ check_tile_acc(Acc_Mode::Raw);
+ current_parsing_mode_ = GTagML_Parsing_Modes::Raw;
+}
+
+void GTagML_Graph_Build::leave_special_parse_mode(QString spm)
+{
+ if(prior_parsing_modes_.isEmpty())
+   current_parsing_mode_ = GTagML_Parsing_Modes::Parse_Error;
+ else
+ {
+  current_parsing_mode_ = prior_parsing_modes_.top().first;
+  check_tile_acc(prior_parsing_modes_.pop().second);
+ }
+}
+
+void GTagML_Graph_Build::special_parse_mode_acc(QString text)
+{
+ tile_acc(text);
 }
 
 void GTagML_Graph_Build::html_tag_body_leave(QString prefix)

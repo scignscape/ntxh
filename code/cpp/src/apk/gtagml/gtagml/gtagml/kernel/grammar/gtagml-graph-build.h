@@ -27,6 +27,7 @@ class GTagML_Parser;
 class GTagML_Tag_Command;
 class GTagML_Attribute_Tile;
 class GTagML_Paralex_Tile;
+class GTagML_Raw_Tile;
 class GTagML_Document_Info;
 class GTagML_Annotation_Tile;
 
@@ -43,8 +44,8 @@ class GTagML_Graph_Build
   bool active_attribute_sequence:1;
  _flags
 
- enum Acc_Mode {
-  Main_Tile, Attribute, Math, Arg_Tile
+ enum class Acc_Mode {
+  Main_Tile, Attribute, Math, Arg_Tile, Raw
  };
 
  Acc_Mode acc_mode_;
@@ -65,10 +66,13 @@ class GTagML_Graph_Build
 
  GTagML_Parsing_Modes current_parsing_mode_;
 
+ QStack<QPair<GTagML_Parsing_Modes, Acc_Mode>> prior_parsing_modes_;
 
  GTagML_Parse_Context parse_context_;
 
  GTagML_Markup_Position markup_position_;
+
+ QString current_raw_format_;
 
 
  static inline int cutmax(int x)
@@ -85,7 +89,7 @@ class GTagML_Graph_Build
  QTextStream tile_acc_qts_;
 
  QString string_literal_acc_;
- QTextStream qts_string_literal_acc_;
+ QTextStream string_literal_acc_qts_;
 
  QString current_html_attribute_;
 
@@ -95,6 +99,7 @@ class GTagML_Graph_Build
 
  caon_ptr<GTagML_Tile> add_tile(QString tile_str);
  caon_ptr<GTagML_Attribute_Tile> add_attribute_tile(QString tile_str);
+ caon_ptr<GTagML_Raw_Tile> add_raw_tile(QString tile_str);
 
  void add_string_literal_tile();
 
@@ -130,12 +135,17 @@ public:
  void tag_body_leave(QString match = QString());
 
  void call_leave();
+
  void tile_acc(QString str);
- void check_tile_acc(Acc_Mode new_mode = Main_Tile);
+ void check_tile_acc(Acc_Mode new_mode = Acc_Mode::Main_Tile);
 
  void check_non_or_left_wrapped(QString wmi, caon_ptr<GTagML_Tag_Command> ntc);
 
  void html_tag_body_leave(QString prefix);
+
+ void enter_special_parse_mode(QString spm);
+ void leave_special_parse_mode(QString spm);
+ void special_parse_mode_acc(QString spm);
 
 //? void khif_tile_acc(QString m);
 
@@ -183,6 +193,8 @@ public:
 
  caon_ptr<GTagML_Attribute_Tile> make_new_attribute_tile(QString key, QString value);
 
+ caon_ptr<GTagML_Raw_Tile> make_new_raw_tile(QString format, QString value);
+
  void tag_command_entry_multi(QString wmi, QString tag_command,
    QString tag_body_follow, QString fiat, QString first_arg_wmi, QString first_arg_marker);
 
@@ -216,6 +228,9 @@ QString argument, QString parent_tag_type = QString());
    u1 kind, u1 w_or_a);
 
  caon_ptr<tNode> make_new_node(caon_ptr<GTagML_Attribute_Tile> tile);
+
+ caon_ptr<tNode> make_new_node(caon_ptr<GTagML_Raw_Tile> tile);
+
  caon_ptr<tNode> make_new_node(caon_ptr<GTagML_Tile> tile);
  caon_ptr<tNode> make_new_node(caon_ptr<GTagML_Tag_Command> ntc);
  caon_ptr<tNode> make_new_node(caon_ptr<GTagML_Paralex_Tile> tile);

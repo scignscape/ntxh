@@ -124,8 +124,11 @@ public:
 
  void enter_multiline_comment(int semis, int tildes);
  bool check_leave_multiline_comment(int semis, int tildes);
+
  void add_tile_node(caon_ptr<GTagML_Node> node);
  void add_attribute_tile_node(caon_ptr<GTagML_Node> node);
+ void add_raw_tile_node(caon_ptr<GTagML_Node> node);
+
  void tag_command_entry(caon_ptr<tNode> node);
  void restore_current_node(caon_ptr<tNode> node);
  caon_ptr<tNode> tag_command_instruction(caon_ptr<tNode> node);

@@ -557,6 +557,9 @@ void GTagML_Markup_Position::add_attribute_tile_node(caon_ptr<GTagML_Node> node)
  position_state_ = Tile_Sequence;
 }
 
+
+
+
 caon_ptr<GTagML_Markup_Position::tNode> GTagML_Markup_Position::tag_command_instruction(caon_ptr<tNode> node)
 {
  held_position_state_ = position_state_;
@@ -611,3 +614,23 @@ void GTagML_Markup_Position::add_tile_node(caon_ptr<GTagML_Node> node)
  position_state_ = Tile_Sequence;
 }
 
+void GTagML_Markup_Position::add_raw_tile_node(caon_ptr<GTagML_Node> node)
+{
+ add_tile_node(node);
+// CAON_PTR_DEBUG(GTagML_Node ,node)
+// CAON_PTR_DEBUG(GTagML_Node ,current_node_)
+
+// switch(position_state_)
+// {
+// case Tag_Command_Entry:
+// case Tag_Body_Leave:
+//   current_node_ << fr_/qry_.Tag_Command_Raw_Tile >> node;
+//  }
+//  break;
+// case Tag_Command_Leave:
+//  current_attribute_node_ << fr_/qry_.Tile_Sequence >> node;
+//  break;
+// }
+//? current_attribute_node_ = node;
+//? position_state_ = Tile_Sequence;
+}

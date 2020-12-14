@@ -34,7 +34,10 @@ public:
   unsigned short index;
   float weight;
   Context(unsigned short i = 0, float w = 0):index(i),weight(w){}
-  Context(const Context& lhs):index(lhs.index),weight(lhs.weight){}
+  Context(const Context& lhs):index(lhs.index),weight(lhs.weight)
+  {
+
+  }
 
   template<typename T>
   inline bool above(const T& t = 0) const
@@ -147,10 +150,10 @@ public:
  {
   if(context_names_.find(s) != context_names_.end())
 //   return context_names.at(s);
-   return context_names_[s];
+    return context_names_[s];
   Context result = Context(context_vector_.size());
   context_vector_.push_back(result);
-  context_ptr_vector_.push_back(0);
+  context_ptr_vector_.push_back(nullptr);
   context_triggers_.push_back( QVector<unsigned short>() );
 // context_names.insert({s, result});
   context_names_[s] = result.index;

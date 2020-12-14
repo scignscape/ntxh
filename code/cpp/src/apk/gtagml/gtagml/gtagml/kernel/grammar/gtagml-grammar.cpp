@@ -31,29 +31,30 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
 
  pre_rule( "tag-command-wrap-mode-indicator", ": :? \\.?" );
 
- Context GTagML_context = add_context("gtaml-context");
- Context html_context = add_context("html-context");
+ static Context gtagml_context = add_context("gtaml-context");
+ //Context* raw_context = new Context( add_context("raw-context") );
+ static Context raw_context = add_context("raw-context");
+ static Context html_context = add_context("html-context");
 
- Context GTagML_or_html_context = add_context("gtaml-or-html",
-  {GTagML_context, html_context});
+ static Context gtagml_or_html_context = add_context("gtaml-or-html",
+   {gtagml_context, html_context});
 
- Context cxml_context = add_context("cxml-context");
 
- track_context({&GTagML_context, &html_context,
-   &GTagML_or_html_context, &cxml_context });
+ track_context({&gtagml_context, &raw_context,
+   &gtagml_or_html_context, &html_context});
 
  switch(graph_build.current_parsing_mode())
  {
  case GTagML_Parsing_Modes::HTML:
-  activate(GTagML_or_html_context);
+  activate(gtagml_or_html_context);
   break;
 
- case GTagML_Parsing_Modes::CXML:
-  activate(cxml_context);
+ case GTagML_Parsing_Modes::Raw:
+  activate(raw_context);
   break;
 
  case GTagML_Parsing_Modes::NGML:
-  activate(GTagML_context);
+  activate(gtagml_context);
   break;
  }
 
@@ -63,7 +64,43 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
 // size_t test;
 
 
- add_rule( GTagML_context, "gtag-command-entry-inline",
+ add_rule( gtagml_context, "enter-special-parse-mode",
+   " <  "
+   " (?<spm> .valid-tag-command-name. ) "
+   " >> "
+   ,[&raw_context, &graph_build, this, &p]
+ {
+  QString spm = p.matched("spm");
+  graph_build.enter_special_parse_mode(spm);
+  if(graph_build.current_parsing_mode() == GTagML_Parsing_Modes::Raw)
+    activate(raw_context);
+ });
+
+ add_rule( raw_context, "leave-raw_context",
+   " <<raw>  "
+   ,[&]
+ {
+  graph_build.leave_special_parse_mode("raw");
+  if(graph_build.current_parsing_mode() == GTagML_Parsing_Modes::NGML)
+    activate(gtagml_context);
+ });
+
+ add_rule( raw_context, "spm-long-acc",
+   " [^<]+  "
+   ,[&]
+ {
+  graph_build.special_parse_mode_acc(p.match_text());
+ });
+
+ add_rule( raw_context, "spm-short-acc",
+   " < "
+   ,[&]
+ {
+  graph_build.special_parse_mode_acc(p.match_text());
+ });
+
+
+ add_rule( gtagml_context, "gtag-command-entry-inline",
    " \\[  "
    " (?<tag-command> .valid-tag-command-name. ) "
    " (?<tag-body-follow> [,>;.] ) "
@@ -76,7 +113,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
   //graph_build.tag_body_leave();
  });
 
- add_rule( GTagML_context, "block-gtag-command-leave",
+ add_rule( gtagml_context, "block-gtag-command-leave",
   " < (?<tag-command> .valid-tag-command-name. ) \\]  "
            ,[&]
  {
@@ -84,7 +121,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
  });
 
  add_rule( flags_all_(parse_context ,inside_attribute_sequence),
-   GTagML_context, "attribute-sequence-leave",
+   gtagml_context, "attribute-sequence-leave",
    " \\s+ => \\s+ "
    //" [/-]? "
    //" > "
@@ -96,7 +133,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
  });
 
  add_rule( flags_all_(parse_context ,inside_attribute_sequence),
-   GTagML_context, "mark-attribute-tile",
+   gtagml_context, "mark-attribute-tile",
    " \\s+ @ \\s+ "
    ,[&]
  {
@@ -108,7 +145,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
  // //  these should be for graph_build the equivalent
   //    of ->> (etc.) then `::some_cmd;
  add_rule( flags_all_(parse_context ,inside_multi_generic),
-   GTagML_context,
+   gtagml_context,
    "cmd-multi-arg-transition",
    " (?<fiat-or-cmd> (?: (?: :: ) | = ) ) (?<main> -{1,2}>{1,2}) "
    " \\s+ (?<cmd> .valid-tag-command-name. ) "
@@ -125,7 +162,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
  });
 
  add_rule( flags_all_(parse_context ,inside_multi_generic),
-   GTagML_context,
+   gtagml_context,
    "multi-arg-transition-to-main-tile",
    " \\s+ => \\s+ "
    ,[&]
@@ -134,7 +171,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
  });
 
  add_rule( flags_all_(parse_context ,inside_multi_generic),
-   GTagML_context, 
+   gtagml_context,
    "multi-arg-transition",
    " \\s+ (?<wmi> .tag-command-wrap-mode-indicator.? ) "
    " (?<fiat> =?)  "
@@ -148,7 +185,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
  });
 
  add_rule( flags_all_(parse_context ,inside_multi_parent_semis),
-   GTagML_context, "tag-command-leave-multi",
+   gtagml_context, "tag-command-leave-multi",
    "  \\s+ ;; "
    ,[&]
  {
@@ -158,7 +195,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
  });
 
  add_rule( flags_all_(parse_context ,inside_multi_parent),
-   GTagML_context, "tag-command-leave-multi",
+   gtagml_context, "tag-command-leave-multi",
    "  ` (?<tag-command> .valid-tag-command-name.? ) ` "
    ,[&]
  {
@@ -168,7 +205,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
  });
 
 
- add_rule( GTagML_context, "cmd-tag-command-entry-multi",
+ add_rule( gtagml_context, "cmd-tag-command-entry-multi",
    " ` (?<wmi> .tag-command-wrap-mode-indicator.? ) "
    " (?<tag-command> .valid-tag-command-name. ) "
    " (?<tag-body-follow> [,.]?) "
@@ -194,7 +231,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
  });
 
 
- add_rule( GTagML_context, "tag-command-entry-multi",
+ add_rule( gtagml_context, "tag-command-entry-multi",
   " ` (?<wmi> .tag-command-wrap-mode-indicator.? ) " 
   " (?<tag-command> .valid-tag-command-name. ) "
   " (?<tag-body-follow> [,.]?) \\s+  "
@@ -212,7 +249,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
     //graph_build.tag_body_leave();
  });
 
- add_rule( GTagML_context, "tag-command-entry-inline",
+ add_rule( gtagml_context, "tag-command-entry-inline",
    " ` (?<wmi> .tag-command-wrap-mode-indicator.? ) "
    " (?<tag-command> .valid-tag-command-name. ) "
    " (?: < (?<argument> [^>]+ ) >)?  (?<tag-body-follow> [,;.] ) "
@@ -226,7 +263,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
   //graph_build.tag_body_leave();
  });
 
- add_rule( GTagML_context, "alt-tag-command-entry-inline",
+ add_rule( gtagml_context, "alt-tag-command-entry-inline",
    " ` (?<wmi> .tag-command-wrap-mode-indicator.? ) "
    " (?<tag-command> .valid-tag-command-name. ) "
    " <> (?<argument> [^;]* ) ;"
@@ -256,7 +293,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
   graph_build.check_html_tag_command_leave(tag_command, p.match_text());
  });
 
- add_rule( GTagML_context, "tag-command-leave",
+ add_rule( gtagml_context, "tag-command-leave",
   " < (?<load-connector> .valid-tag-command-name. )? "
   "  < (?<tag-command> .valid-tag-command-name. ) "
   " /? "  // this really needs to be set to check for matching env's
@@ -272,7 +309,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
  });
 #endif //def HIDE
 
- add_rule( GTagML_context, "tag-block-command-leave",
+ add_rule( gtagml_context, "tag-block-command-leave",
   "  ` (?<tag-command> .valid-tag-command-name. ) ` "
   ,[&]
  {
@@ -280,7 +317,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
   graph_build.check_tag_command_leave(tag_command, p.match_text());
  });
 
- add_rule( GTagML_context, "inline-tag-command-leave",
+ add_rule( gtagml_context, "inline-tag-command-leave",
   " ` (?: / | (?= \\s))  "
            ,[&]
  {
@@ -289,7 +326,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
 
 
 #ifdef HIDE
- add_rule( GTagML_context, "generic-tag-command-leave",
+ add_rule( gtagml_context, "generic-tag-command-leave",
   " </>  "
            ,[&]
  {
@@ -298,7 +335,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
 #endif //def HIDE
 
 //?
-// add_rule( GTagML_context, "special-character-sequence",
+// add_rule( gtagml_context, "special-character-sequence",
 //  " (?: %-- ) | (?: %[<>$'] ) | (&-\\S>\\w) | (&#\\w+;) | (&:\\w+;) "
 //           ,[&]
 // {
@@ -306,7 +343,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
 //  graph_build.special_character_sequence(m);
 // });
 
-  add_rule( GTagML_context, "semantic-mark",
+  add_rule( gtagml_context, "semantic-mark",
    " (?: ` (?<pre> [`']?) (?: "
    "  \\( (?<sem1> [^)]+ ) \\) ) "
    "  | (?: ` { (?<sem2> [^}]+ ) } ) "
@@ -343,7 +380,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
 
   });
 
-  add_rule( GTagML_context, "special-character-sequence",
+  add_rule( gtagml_context, "special-character-sequence",
    " (?: %-- ) | (?: ->- ) | (?: %\\.,{2,3} ) "
    "  | (?: ` \\( (?<bq-esc1> [^)]+ ) \\) ) "
    "  | (?: ` { (?<bq-esc2> [^}]+ ) } ) "
@@ -387,7 +424,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
   });
 
 
- add_rule( GTagML_context, "tile-acc",
+ add_rule( gtagml_context, "tile-acc",
   " . "
            ,[&]
  {

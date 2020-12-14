@@ -61,6 +61,7 @@ HEADERS += \
   $$SRC_DIR/kernel/output/gtagml-output-bundle.h \
   $$SRC_DIR/tile/gtagml-token.h \
   $$SRC_DIR/tile/gtagml-tile.h \
+  $$SRC_DIR/tile/gtagml-raw-tile.h \
   $$SRC_DIR/tile/gtagml-attribute-tile.h \
   $$SRC_DIR/tile/gtagml-paralex-tile.h \
   $$SRC_DIR/annotation/gtagml-annotation-tile.h \
@@ -111,6 +112,7 @@ SOURCES += \
   $$SRC_DIR/tile/gtagml-tile.cpp \
   $$SRC_DIR/tile/gtagml-attribute-tile.cpp \
   $$SRC_DIR/tile/gtagml-paralex-tile.cpp \
+  $$SRC_DIR/tile/gtagml-raw-tile.cpp \
   $$SRC_DIR/annotation/gtagml-annotation-tile.cpp \
   $$SRC_DIR/annotation/gtagml-annotation-filter.cpp \
   $$SRC_DIR/tag-command/gtagml-tag-command.cpp \

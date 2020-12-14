@@ -3,15 +3,19 @@
 `document-title<Cognitive Transform Grammar>;
 `local-title<info>;
 
-
 `p.
-Au `cite<(7) MattSelway>; wrote.
+In the middle of a paragraph.  Still.
 `p`
 
 
-`p.
-`p`
+<raw>>
+
+test ...
+
+<<raw>
+
 
 `p.
+Between paragraph.  Still.
 `p`
 
