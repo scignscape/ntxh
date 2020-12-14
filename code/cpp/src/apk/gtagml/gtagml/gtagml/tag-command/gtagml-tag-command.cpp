@@ -30,7 +30,7 @@ GTagML_Tag_Command::GTagML_Tag_Command(QString name,
    parent_tag_type_(parent_tag_type),
    ref_position_(0), ref_order_(0),
    ref_enter_(0), ref_leave_(0),
-   GTagML_htxn_node_(nullptr), arg_GTagML_htxn_node_(nullptr),
+   gh_node_(nullptr), arg_gh_node_(nullptr),
    name_prenode_(nullptr)
 {
  //if(name_.contains('-'))
@@ -38,6 +38,14 @@ GTagML_Tag_Command::GTagML_Tag_Command(QString name,
  if(needs_sdi_mark_check_(name))
    flags.needs_sdi_mark = true;
 }
+
+
+void GTagML_Tag_Command::set_opt_argument(QString arg)
+{
+ opt_argument_ = arg;
+ flags.force_opt_split = true;
+}
+
 
 void GTagML_Tag_Command::each_arg_prenode(std::function<void(GH_Prenode*)> fn)
 {
@@ -69,15 +77,15 @@ void GTagML_Tag_Command::init_name_prenode(GH_Block_Base* block, u4 enter, u4 le
 
 
 
-void GTagML_Tag_Command::each_arg_GTagML_htxn_node(std::function<void(GTagML_HTXN_Node*)> fn)
+void GTagML_Tag_Command::each_arg_gh_node(std::function<void(GTagML_HTXN_Node*)> fn)
 {
- for(GTagML_HTXN_Node* nhn : arg_GTagML_htxn_nodes_)
+ for(GTagML_HTXN_Node* nhn : arg_gh_nodes_)
    fn(nhn);
 }
 
-void GTagML_Tag_Command::add_arg_GTagML_htxn_node(GTagML_HTXN_Node* nhn)
+void GTagML_Tag_Command::add_arg_gh_node(GTagML_HTXN_Node* nhn)
 {
- arg_GTagML_htxn_nodes_.append(nhn);
+ arg_gh_nodes_.append(nhn);
 }
 
 u2 GTagML_Tag_Command::get_whitespace_code()

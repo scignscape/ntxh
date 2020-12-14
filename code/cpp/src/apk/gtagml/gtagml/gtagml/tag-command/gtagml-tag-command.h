@@ -33,7 +33,7 @@ class GTagML_Tag_Command : public GTagML_Whitespace_Holder
 {
 public:
 
- flags_(5)
+ flags_(6)
 
   bool is_region:1;
   bool is_closed:1;
@@ -86,6 +86,8 @@ public:
   bool marked_main:1;
 
   bool needs_sdi_mark:1;
+
+  bool force_opt_split:1;
 //?  bool is_provisional_multi_parent_semis:1;
 
  _flags
@@ -103,14 +105,16 @@ private:
  u4 ref_enter_;
  u4 ref_leave_;
 
- GTagML_HTXN_Node* GTagML_htxn_node_;
+ GTagML_HTXN_Node* gh_node_;
 
- GTagML_HTXN_Node* arg_GTagML_htxn_node_;
+ GTagML_HTXN_Node* arg_gh_node_;
 
- QList<GTagML_HTXN_Node*> arg_GTagML_htxn_nodes_;
+ QList<GTagML_HTXN_Node*> arg_gh_nodes_;
 
  QList<GH_Prenode*> arg_prenodes_;
  GH_Prenode* name_prenode_;
+
+ QString opt_argument_;
 
  static std::function<bool(QString)> needs_sdi_mark_check_;
 
@@ -120,6 +124,9 @@ public:
  ACCESSORS(QString ,parent_tag_type)
  ACCESSORS(QString ,argument)
 
+ ACCESSORS__GET(QString ,opt_argument)
+ ACCESSORS__SDECLARE(QString ,opt_argument)
+
  ACCESSORS(u4 ,ref_position)
  ACCESSORS(u4 ,ref_order)
 
@@ -127,8 +134,8 @@ public:
  ACCESSORS(u4 ,ref_leave)
 
 
- ACCESSORS(GTagML_HTXN_Node* ,GTagML_htxn_node)
- ACCESSORS(GTagML_HTXN_Node* ,arg_GTagML_htxn_node)
+ ACCESSORS(GTagML_HTXN_Node* ,gh_node)
+ ACCESSORS(GTagML_HTXN_Node* ,arg_gh_node)
 
  ACCESSORS(GH_Prenode* ,name_prenode);
 
@@ -145,9 +152,9 @@ public:
 
  QString latex_name();
 
- void add_arg_GTagML_htxn_node(GTagML_HTXN_Node* nhn);
+ void add_arg_gh_node(GTagML_HTXN_Node* nhn);
 
- void each_arg_GTagML_htxn_node(std::function<void(GTagML_HTXN_Node*)> fn);
+ void each_arg_gh_node(std::function<void(GTagML_HTXN_Node*)> fn);
 
  void each_arg_prenode(std::function<void(GH_Prenode*)> fn);
 

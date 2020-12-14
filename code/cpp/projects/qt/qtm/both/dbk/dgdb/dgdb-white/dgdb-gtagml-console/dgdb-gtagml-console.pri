@@ -32,12 +32,14 @@ INCLUDEPATH += $$SRC_GROUP_DIR/dgdb-white
 HEADERS += \
   $$SRC_DIR/gtagml-document-info.h \
   $$SRC_DIR/gtagml-document-mark.h \
+  $$SRC_DIR/gtagml-document-citation.h \
 
 
 SOURCES += \
   $$SRC_DIR/main.cpp \
   $$SRC_DIR/gtagml-document-info.cpp \
   $$SRC_DIR/gtagml-document-mark.cpp \
+  $$SRC_DIR/gtagml-document-citation.cpp \
 
 
 LIBS += -L$$TARGETSDIR -lwhitedb -ldgdb-white \

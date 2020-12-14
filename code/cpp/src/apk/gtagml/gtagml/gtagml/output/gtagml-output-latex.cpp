@@ -321,9 +321,13 @@ void GTagML_Output_Latex::check_generate_tag_command_argument(const GTagML_Outpu
 //  generate_tag_command_argument(b, *nhn);
 // });
 
- ntc.each_arg_prenode([&b, this](GH_Prenode* ghp)
+ ntc.each_arg_prenode([&b, this, ntc](GH_Prenode* ghp)
  {
+  if(ntc.flags.force_opt_split)
+    b.qts << ((ghp->get_block()->layer_code() == 2) ? '[' : '{');
   generate_tag_command_argument(b, *ghp);
+  if(ntc.flags.force_opt_split)
+    b.qts << ((ghp->get_block()->layer_code() == 2) ? ']' : '}');
  });
 
  // {
@@ -520,7 +524,9 @@ void GTagML_Output_Latex::generate_tag_command_leave(const GTagML_Output_Bundle&
 //  }
 // }
 
- if(ntc->flags.is_multi_optional)
+ if(ntc->flags.force_opt_split)
+   ;
+ else if(ntc->flags.is_multi_optional)
    b.qts << ']';
  else if(ntc->flags.is_multi_mandatory)
    b.qts << '}';
@@ -708,7 +714,9 @@ void GTagML_Output_Latex::generate_tag_body_leave(const GTagML_Output_Bundle& b,
 //  }
 // }
 
- if(ntc->flags.is_multi_optional)
+ if(ntc->flags.force_opt_split)
+   ;
+ else if(ntc->flags.is_multi_optional)
    b.qts << '[';
  else if(ntc->flags.is_multi_mandatory)
    b.qts << '{';

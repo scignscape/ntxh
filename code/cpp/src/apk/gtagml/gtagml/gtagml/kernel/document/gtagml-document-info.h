@@ -37,7 +37,7 @@ class GTagML_Document_Info
  QMap<QString, QString> info_params_;
 
 
- QMap<QString, QVector<void*>> citations_;
+ QMap<QString, QVector<QPair<QString, void*>>> citations_;
 
 
 
@@ -50,7 +50,7 @@ public:
 
  ACCESSORS__RGET(QVector<QStringList> ,marks)
  ACCESSORS__RGET(MACRO_PASTE(QMap<QString, QString>) ,info_params)
- ACCESSORS__RGET(MACRO_PASTE(QMap<QString, QVector<void*>>) ,citations)
+ ACCESSORS__RGET(MACRO_PASTE(QMap<QString, QVector<QPair<QString, void*>>>) ,citations)
 
  GTagML_Document_Info();
 

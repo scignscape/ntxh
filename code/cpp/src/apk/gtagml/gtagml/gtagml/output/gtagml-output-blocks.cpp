@@ -106,6 +106,7 @@ void GTagML_Output_Blocks::mark_citation(QTextStream& qts, caon_ptr<tNode> node,
 // else
 
  QString citation_text;
+ QString opt_text;
 
  if(caon_ptr<GTagML_Tag_Command> ntc = node->GTagML_tag_command())
  {
@@ -113,13 +114,15 @@ void GTagML_Output_Blocks::mark_citation(QTextStream& qts, caon_ptr<tNode> node,
   citation_text = ntc->argument();
   if(citation_text.isEmpty())
     return;
+
+  opt_text = ntc->opt_argument();
  }
 
  if(caon_ptr<GTagML_Tile> tile = prior_node->GTagML_tile())
  {
   CAON_PTR_DEBUG(GTagML_Tile ,tile)
   GH_Prenode* pre = tile->prenode();
-  document_.document_info().citations()[citation_text].push_back(pre);
+  document_.document_info().citations()[citation_text].push_back({opt_text, pre});
  }
 
 
@@ -177,12 +180,17 @@ void GTagML_Output_Blocks::load_marks(QString path)
   {
    QStringList qsl = line.mid(3).trimmed().split(' ', Qt::SkipEmptyParts);
    QString citation_text = qsl.takeFirst();
-   QString optarg = "[]"; // until we parse the actual oarg for cite ...
+   citation_text.replace("%%", " ");
+   QString optarg = qsl.takeFirst();
+   if(optarg == "%%")
+     optarg.clear();
+   optarg.prepend('[');
+   optarg.append(']');
    if(qsl.size() >= 3)
    {
     QString layer_code = qsl.takeFirst();
     int index = layer_code.startsWith('(')? 1 : 0;
-    QString summary = QString("%1=%2:%3-%4").arg(optarg)
+    QString summary = QString("%1=%2:%4-%3").arg(optarg)
       .arg(layer_code.mid(index, 1)).arg(qsl.takeFirst()).arg(qsl.takeFirst());
     citations[citation_text].push_back(summary);
    }
@@ -222,7 +230,7 @@ QString GTagML_Output_Blocks::export_marks(QString path)
  QVector<QStringList>& marks = document_.document_info().marks();
  QMap<QString, QString>& params = document_.document_info().info_params();
 
- QMap<QString, QVector<void*>>& citations = document_.document_info().citations();
+ QMap<QString, QVector<QPair<QString, void*>>>& citations = document_.document_info().citations();
 
  u4 indices [5] {0,0,0,0,0};
 
@@ -252,15 +260,23 @@ QString GTagML_Output_Blocks::export_marks(QString path)
   }
   qts << "\n";
   {
-   QMapIterator<QString, QVector<void*>> it(citations);
+   QMapIterator<QString, QVector<QPair<QString, void*>>> it(citations);
    while(it.hasNext())
    {
     it.next();
-    for(void* pv : it.value())
+    for(QPair<QString, void*> pr : it.value())
     {
-     GH_Prenode* pre = (GH_Prenode*) pv;
-     qts << QString("$& %1 %2\n").arg(it.key()).
-       arg(pre->get_summary());
+     GH_Prenode* pre = (GH_Prenode*) pr.second;
+     QString k = it.key();
+     k.replace(' ', "%%");
+     QString opt = pr.first;
+     if(opt.isEmpty())
+       opt = "%%";
+     else
+       opt.replace(' ', "%%");
+
+     qts << QString("$& %1 %2 %3\n").arg(k).arg(opt)
+       .arg(pre->get_summary());
 
     }
    }
@@ -495,6 +511,12 @@ void GTagML_Output_Blocks::generate_tile(const GTagML_Output_Bundle& b, caon_ptr
 void GTagML_Output_Blocks::check_generate_tag_command_argument(const GTagML_Output_Bundle& b,
   GTagML_Tag_Command& ntc)
 {
+ if(!ntc.opt_argument().isEmpty())
+ {
+  QPair<u4, u4> pr;
+  GH_Block_Base* bl =  block_writer_->write_optional_argument(ntc.opt_argument(), pr);//  write
+  ntc.add_arg_prenode(bl, pr.first, pr.second);
+ }
  if(!ntc.argument().isEmpty())
  {
   QPair<u4, u4> pr;
@@ -571,9 +593,9 @@ void GTagML_Output_Blocks::generate_tag_command_entry(const GTagML_Output_Bundle
    }
 
    if(cb->flags.has_pre_callback)
-    cb->pre_callback(b.qts, b.node, b.prior_node, parent_of_siblings, b.index, b.cb);
+     cb->pre_callback(b.qts, b.node, b.prior_node, parent_of_siblings, b.index, b.cb);
    if(!cb->flags.pre_fallthrough)
-    break;
+     break;
   }
 
 //  if(htxn_document_)

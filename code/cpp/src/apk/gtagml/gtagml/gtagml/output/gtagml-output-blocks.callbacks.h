@@ -18,9 +18,10 @@ GTagML_CALLBACK_NOACTION(local-title)
 
 
 GTagML_CALLBACK_(cite)
- WHEN_(around)
+ WHEN_(pre)
  {
   mark_citation(qts, node, prior_node, parent_of_siblings);
+  cb->flags.pre_fallthrough = true;
  }
  _WHEN
 _GTagML_CALLBACK

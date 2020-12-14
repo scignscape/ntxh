@@ -26,11 +26,14 @@ protected:
 
  QString layer_summary_;
 
+ u4 layer_code_;
+
 public:
 
  GH_Block_Base();
 
  ACCESSORS(QString ,layer_summary)
+ ACCESSORS(u4 ,layer_code)
 
  virtual n8 get_default_null() = 0;
 

@@ -28,6 +28,7 @@ KANS_CLASS_DECLARE(DGDB ,DW_Stage_Queue)
 
 
 class GTagML_Document_Mark;
+class GTagML_Document_Citation;
 
 
 class GTagML_Document_Info
@@ -51,6 +52,9 @@ class GTagML_Document_Info
  QMultiMap<QString, QString> info_params_;
 
  std::function<n8 (GTagML_Document_Mark&)> mark_register_fn_;
+ std::function<n8 (GTagML_Document_Citation&)> citation_register_fn_;
+
+ QString citation_page_indicator_;
 
  void register_marks(QVector<GTagML_Document_Mark*>& ms,
    u4 layer, mark_map_type& mark_map);
@@ -74,6 +78,7 @@ public:
  ACCESSORS(QString ,document_title)
 
  ACCESSORS(u4 ,in_database_id)
+ ACCESSORS(QString ,citation_page_indicator)
 
  //ACCESSORS_FN_SET(u4(GTagML_Document_Mark&) ,mark_register_fn)
 
@@ -81,10 +86,13 @@ public:
    ,n8 (GTagML_Document_Mark&)
    ,mark_register_fn)
 
+ ACCESSORS_FN_VIA_OP(GTagML_Document_Info
+   ,n8 (GTagML_Document_Citation&)
+   ,citation_register_fn)
+
 
  void load_marks(QString path);
  void register_marks();
-
 
 // ACCESSORS(QString ,a_string)
 // ACCESSORS(u4 ,a_number)

@@ -14,6 +14,7 @@
 
 #include "gtagml-document-info.h"
 #include "gtagml-document-mark.h"
+#include "gtagml-document-citation.h"
 
 #include "dgdb-white/dw-instance.h"
 #include "dgdb-white/dw-record.h"
@@ -59,7 +60,6 @@ int main(int argc, char* argv[])
  DW_Type_System* dwt = dw->type_system();
 
  dwt->REGISTER_TYPE_NAME_RESOLUTION(GTagML_Document_Info);
-
  dwt->REGISTER_TYPE(GTagML_Document_Info)
    .default_object_layout()
    .set_stage_encoder(&GTagML_Document_Info::encode_stage_values)
@@ -68,12 +68,19 @@ int main(int argc, char* argv[])
   ;
 
  dwt->REGISTER_TYPE_NAME_RESOLUTION(GTagML_Document_Mark);
-
  dwt->REGISTER_TYPE(GTagML_Document_Mark)
    .default_object_layout()
    .set_stage_encoder(&GTagML_Document_Mark::encode_stage_values)
    .set_stage_queue_initializer(&GTagML_Document_Mark::init_stage_queue)
    .set_default_stage_queue_reader(&GTagML_Document_Mark::read_stage_queue)
+  ;
+
+ dwt->REGISTER_TYPE_NAME_RESOLUTION(GTagML_Document_Citation);
+ dwt->REGISTER_TYPE(GTagML_Document_Citation)
+   .default_object_layout()
+   .set_stage_encoder(&GTagML_Document_Citation::encode_stage_values)
+   .set_stage_queue_initializer(&GTagML_Document_Citation::init_stage_queue)
+   .set_default_stage_queue_reader(&GTagML_Document_Citation::read_stage_queue)
   ;
 
    //.set_stage_queue_reader(&Queue_Demo_Class::read_stage_queue)
@@ -103,16 +110,17 @@ int main(int argc, char* argv[])
  gdi->set_mark_register_fn() << [dw, dwr] (GTagML_Document_Mark& gdm)  //?(GTagML_Document_Mark& gdm)
  {
   gdm.set_document_id(dwr.id());
-  DW_Record mark_dwr = dw->register_typed_value(&gdm);
-  qDebug() << "mark_dwr id: " << mark_dwr.id();
-
-  //?mark_dwr.set_ref_field(dwr);
-  qDebug() << gdm.text();
-
-//  GTagML_Document_Mark* gdm1 = dw->parse_dw_record<GTagML_Document_Mark>(mark_dwr);
-//  qDebug() << gdm1->text();
-  return 0;
+  dw->register_typed_value(&gdm);
+  return !dwr.id();
  };
+
+ gdi->set_citation_register_fn() << [dw, dwr] (GTagML_Document_Citation& gdc)  //?(GTagML_Document_Mark& gdm)
+ {
+  gdc.set_document_id(dwr.id());
+  dw->register_typed_value(&gdc);
+  return !dwr.id();
+ };
+
 
  gdi->register_marks();
 

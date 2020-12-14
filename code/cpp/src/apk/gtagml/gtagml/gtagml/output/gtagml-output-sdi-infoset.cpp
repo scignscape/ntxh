@@ -676,10 +676,10 @@ void GTagML_Output_SDI_Infoset::check_generate_tag_command_argument(const GTagML
   GTagML_Tag_Command& ntc)
 {
  CHECK_SUPPRESS_NODE
- if(GTagML_HTXN_Node* nhn = ntc.arg_GTagML_htxn_node())
+ if(GTagML_HTXN_Node* nhn = ntc.arg_gh_node())
    generate_tag_command_argument(b, *nhn);
 
- ntc.each_arg_GTagML_htxn_node([&b, this](GTagML_HTXN_Node* nhn)
+ ntc.each_arg_gh_node([&b, this](GTagML_HTXN_Node* nhn)
  {
   generate_tag_command_argument(b, *nhn);
  });
@@ -931,7 +931,7 @@ void GTagML_Output_SDI_Infoset::generate_tag_command_leave(const GTagML_Output_B
  CHECK_SUPPRESS_NODE
  if(htxn_document_)
  {
-  if(GTagML_HTXN_Node* nhn = ntc->GTagML_htxn_node())
+  if(GTagML_HTXN_Node* nhn = ntc->gh_node())
   {
    generate_tag_command_leave(b, *nhn);
    return;
@@ -996,7 +996,7 @@ void GTagML_Output_SDI_Infoset::generate_tag_body_leave(const GTagML_Output_Bund
 
  if(htxn_document_)
  {
-  if(GTagML_HTXN_Node* nhn = ntc->GTagML_htxn_node())
+  if(GTagML_HTXN_Node* nhn = ntc->gh_node())
   {
    generate_tag_body_leave(b, *nhn);
    return;

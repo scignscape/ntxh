@@ -704,6 +704,29 @@ void GTagML_Graph_Build::gtag_command_entry_inline(QString tag_command,
 caon_ptr<GTagML_Tag_Command> GTagML_Graph_Build::make_new_tag_command(QString name, QString argument, QString parent_tag_type)
 {
  GTagML_Tag_Command* result;
+
+ QString opt;
+ if(argument.startsWith('%'))
+   argument = argument.mid(1);
+ else
+ {
+  argument = argument.trimmed();
+  if(argument.startsWith('['))
+  {
+   int be = argument.indexOf(']');
+   opt = argument.mid(1, be - 1).trimmed();
+   argument = argument.mid(be + 1).trimmed();
+  }
+  else if(argument.startsWith('('))
+  {
+   int be = argument.indexOf(')');
+   opt = argument.mid(1, be - 1).trimmed();
+   opt.prepend('(');
+   opt.append(')');
+   argument = argument.mid(be + 1).trimmed();
+  }
+ }
+
  if(name.startsWith('='))
  {
   result = new GTagML_Tag_Command(name.mid(1), argument, parent_tag_type);
@@ -712,6 +735,9 @@ caon_ptr<GTagML_Tag_Command> GTagML_Graph_Build::make_new_tag_command(QString na
  }
  else
    result = new GTagML_Tag_Command(name, argument, parent_tag_type);
+
+ if(!opt.isEmpty())
+   result->set_opt_argument(opt);
    
  return result;
 }
