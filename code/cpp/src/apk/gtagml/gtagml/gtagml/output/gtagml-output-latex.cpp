@@ -13,6 +13,8 @@
 #include "tag-command/gtagml-tag-command.h"
 #include "tile/gtagml-paralex-tile.h"
 
+#include "tile/gtagml-tile.h"
+
 #include "tag-command/gtagml-tag-command-callback.h"
 
 #include "kernel/graph/gtagml-node.h"
@@ -201,7 +203,6 @@ void GTagML_Output_Latex::generate_tile_via_gh(const GTagML_Output_Bundle& b, GH
  if(GH_Block_Base* ghb = ghp.get_block())
  {
   b.qts << ghb->get_latex_out(ghp.range());
-
  }
 }
 
@@ -311,22 +312,22 @@ void GTagML_Output_Latex::generate_tile(const GTagML_Output_Bundle& b, caon_ptr<
 //}
 
 void GTagML_Output_Latex::check_generate_tag_command_argument(const GTagML_Output_Bundle& b,
-  GTagML_Tag_Command& ntc)
+  GTagML_Tag_Command& gtc)
 {
-// if(GTagML_HTXN_Node* nhn = ntc.arg_GTagML_htxn_node())
+// if(GTagML_HTXN_Node* nhn = gtc.arg_GTagML_htxn_node())
 //   generate_tag_command_argument(b, *nhn);
 
-// ntc.each_arg_GTagML_htxn_node([&b, this](GTagML_HTXN_Node* nhn)
+// gtc.each_arg_GTagML_htxn_node([&b, this](GTagML_HTXN_Node* nhn)
 // {
 //  generate_tag_command_argument(b, *nhn);
 // });
 
- ntc.each_arg_prenode([&b, this, ntc](GH_Prenode* ghp)
+ gtc.each_arg_prenode([&b, this, gtc](GH_Prenode* ghp)
  {
-  if(ntc.flags.force_opt_split)
+  if(gtc.flags.force_opt_split)
     b.qts << ((ghp->get_block()->layer_code() == 2) ? '[' : '{');
   generate_tag_command_argument(b, *ghp);
-  if(ntc.flags.force_opt_split)
+  if(gtc.flags.force_opt_split)
     b.qts << ((ghp->get_block()->layer_code() == 2) ? ']' : '}');
  });
 
@@ -347,10 +348,10 @@ void GTagML_Output_Latex::generate_tag_command_argument(const GTagML_Output_Bund
 
 
 
-void GTagML_Output_Latex::generate_tag_command_entry(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Tag_Command> ntc)
+void GTagML_Output_Latex::generate_tag_command_entry(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Tag_Command> gtc)
 {
  CAON_PTR_B_DEBUG(GTagML_Node ,node)
- CAON_PTR_DEBUG(GTagML_Tag_Command ,ntc)
+ CAON_PTR_DEBUG(GTagML_Tag_Command ,gtc)
 
  caon_ptr<GTagML_Tag_Command_Callback> cb = b.cb;
 
@@ -358,10 +359,10 @@ void GTagML_Output_Latex::generate_tag_command_entry(const GTagML_Output_Bundle&
  if(caon_ptr<GTagML_Node> pn = b.prior_node)
  {
   if(pn->type_code() != GTagML_Dominion::Type_Codes::GTagML_Tile)
-    ntc->write_inherited_whitespace(b.qts);
+    gtc->write_inherited_whitespace(b.qts);
  }
  else
-   ntc->write_inherited_whitespace(b.qts);
+   gtc->write_inherited_whitespace(b.qts);
 
  caon_ptr<GTagML_Node> parent_of_siblings = nullptr;
 
@@ -392,27 +393,27 @@ void GTagML_Output_Latex::generate_tag_command_entry(const GTagML_Output_Bundle&
 
 //  if(htxn_document_)
 //  {
-//   if(GTagML_HTXN_Node* nhn = ntc->GTagML_htxn_node())
+//   if(GTagML_HTXN_Node* nhn = gtc->GTagML_htxn_node())
 //   {
 //    generate_tag_command_entry(b, *nhn);
-//    check_generate_tag_command_argument(b, *ntc);
+//    check_generate_tag_command_argument(b, *gtc);
 //    reset_active_gap_code();
 //    break;
 //   }
 //  }
 
-  if(ntc->flags.is_multi_mandatory)
+  if(gtc->flags.is_multi_mandatory)
   {
 
   }
-  else if(ntc->flags.is_multi_optional)
+  else if(gtc->flags.is_multi_optional)
   {
 
   }
   else
   {
    QString name;
-   if(GH_Prenode* ghp = ntc->name_prenode())
+   if(GH_Prenode* ghp = gtc->name_prenode())
    {
     if(GH_Block_Base* ghb = ghp->get_block())
     {
@@ -424,8 +425,8 @@ void GTagML_Output_Latex::generate_tag_command_entry(const GTagML_Output_Bundle&
     }
    }
    else
-     name = ntc->latex_name();
-   if(ntc->flags.is_region)
+     name = gtc->latex_name();
+   if(gtc->flags.is_region)
     b.qts << "\\begin{" << name;
    else
      b.qts << '\\' << name;
@@ -443,7 +444,7 @@ void GTagML_Output_Latex::generate_tag_command_entry(const GTagML_Output_Bundle&
   }
  }
 
-// check_generate_tag_command_argument(b, *ntc);
+// check_generate_tag_command_argument(b, *gtc);
 }
 
 //void GTagML_Output_Latex::generate_tag_command_leave(const GTagML_Output_Bundle& b, GTagML_HTXN_Node& nhn)
@@ -499,9 +500,9 @@ void GTagML_Output_Latex::generate_tag_command_entry(const GTagML_Output_Bundle&
 //}
 
 
-void GTagML_Output_Latex::generate_tag_command_leave(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Tag_Command> ntc)
+void GTagML_Output_Latex::generate_tag_command_leave(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Tag_Command> gtc)
 {
- CAON_PTR_DEBUG(GTagML_Tag_Command ,ntc)
+ CAON_PTR_DEBUG(GTagML_Tag_Command ,gtc)
 
  if(b.cb)
  {
@@ -517,32 +518,48 @@ void GTagML_Output_Latex::generate_tag_command_leave(const GTagML_Output_Bundle&
 
 // if(htxn_document_)
 // {
-//  if(GTagML_HTXN_Node* nhn = ntc->GTagML_htxn_node())
+//  if(GTagML_HTXN_Node* nhn = gtc->GTagML_htxn_node())
 //  {
 //   generate_tag_command_leave(b, *nhn);
 //   return;
 //  }
 // }
 
- if(ntc->flags.force_opt_split)
+ if(gtc->flags.force_opt_split)
    ;
- else if(ntc->flags.is_multi_optional)
+ else if(gtc->flags.is_multi_optional)
    b.qts << ']';
- else if(ntc->flags.is_multi_mandatory)
+ else if(gtc->flags.is_multi_mandatory)
    b.qts << '}';
- else if(ntc->flags.is_multi_parent)
+ else if(gtc->flags.is_multi_parent)
    ;
- else if(ntc->flags.is_region)
-   b.qts << "\\end{" << ntc->latex_name() << '}';
+ else if(gtc->flags.is_region)
+   b.qts << "\\end{" << gtc->latex_name() << '}';
  else
    b.qts << '}';
+
+ if(tile_whitespace_defers_.contains(gtc))
+ {
+  b.qts << tile_whitespace_defers_.take(gtc);
+ }
 
  reset_active_gap_code();
 }
 
 void GTagML_Output_Latex::check_generate_whitespace(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Tile> tile)
 {
- GTagML_Output_Event_Handler::check_generate_whitespace(b, tile);
+ if(caon_ptr<tNode> wd = (tNode*) tile->whitespace_defer())
+ {
+  if(caon_ptr<GTagML_Tag_Command> gtc = wd->GTagML_tag_command())
+  {
+   GTagML_Output_Event_Handler::check_generate_whitespace(b.with(ws_qts_), tile);
+   tile_whitespace_defers_[gtc] += ws_acc_;
+   ws_acc_.clear();
+   ws_qts_.reset();
+  }
+ }
+ else
+   GTagML_Output_Event_Handler::check_generate_whitespace(b, tile);
 }
 
 void GTagML_Output_Latex::check_generate_whitespace(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Paralex_Tile> tile)
@@ -648,19 +665,19 @@ u1 GTagML_Output_Latex::get_ws_gap_code(const QString& str)
 // ws_qts_.reset();
 //}
 
-void GTagML_Output_Latex::check_generate_whitespace(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Tag_Command> ntc)
+void GTagML_Output_Latex::check_generate_whitespace(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Tag_Command> gtc)
 {
- CAON_PTR_DEBUG(GTagML_Tag_Command ,ntc)
+ CAON_PTR_DEBUG(GTagML_Tag_Command ,gtc)
 // if(htxn_document_)
 // {
-//  if(GTagML_HTXN_Node* nhn = ntc->GTagML_htxn_node())
+//  if(GTagML_HTXN_Node* nhn = gtc->GTagML_htxn_node())
 //  {
 //   check_generate_whitespace(b, *nhn);
 //   return;
 //  }
 // }
- GTagML_Output_Event_Handler::check_generate_whitespace(b, ntc);
- //ntc->write_whitespace(b.qts);
+ GTagML_Output_Event_Handler::check_generate_whitespace(b, gtc);
+ //gtc->write_whitespace(b.qts);
 }
 
 //void GTagML_Output_Latex::generate_tag_body_leave(const GTagML_Output_Bundle& b, GTagML_HTXN_Node& nhn)
@@ -701,41 +718,41 @@ void GTagML_Output_Latex::check_generate_whitespace(const GTagML_Output_Bundle& 
 // }
 //}
 
-void GTagML_Output_Latex::generate_tag_body_leave(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Tag_Command> ntc)
+void GTagML_Output_Latex::generate_tag_body_leave(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Tag_Command> gtc)
 {
- CAON_PTR_DEBUG(GTagML_Tag_Command ,ntc)
+ CAON_PTR_DEBUG(GTagML_Tag_Command ,gtc)
 
 // if(htxn_document_)
 // {
-//  if(GTagML_HTXN_Node* nhn = ntc->GTagML_htxn_node())
+//  if(GTagML_HTXN_Node* nhn = gtc->GTagML_htxn_node())
 //  {
 //   generate_tag_body_leave(b, *nhn);
 //   return;
 //  }
 // }
 
- if(ntc->flags.force_opt_split)
+ if(gtc->flags.force_opt_split)
    ;
- else if(ntc->flags.is_multi_optional)
+ else if(gtc->flags.is_multi_optional)
    b.qts << '[';
- else if(ntc->flags.is_multi_mandatory)
+ else if(gtc->flags.is_multi_mandatory)
    b.qts << '{';
- else if(ntc->flags.is_multi_parent)
+ else if(gtc->flags.is_multi_parent)
    ;
- else if(ntc->flags.is_region)
+ else if(gtc->flags.is_region)
    b.qts << '}';
  else
    b.qts << '{';
 
   // here?
- check_generate_tag_command_argument(b, *ntc);
+ check_generate_tag_command_argument(b, *gtc);
 
  reset_active_gap_code();
 }
 
-caon_ptr<GTagML_Tag_Command_Callback> GTagML_Output_Latex::check_command_callback(caon_ptr<GTagML_Tag_Command> ntc)
+caon_ptr<GTagML_Tag_Command_Callback> GTagML_Output_Latex::check_command_callback(caon_ptr<GTagML_Tag_Command> gtc)
 {
- QString name = ntc->name();
+ QString name = gtc->name();
  return callbacks_.value(name, caon_ptr<GTagML_Tag_Command_Callback> ( nullptr ));
 }
 

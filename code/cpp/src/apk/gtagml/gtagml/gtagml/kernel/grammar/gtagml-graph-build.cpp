@@ -148,8 +148,21 @@ void GTagML_Graph_Build::check_tile_acc(Acc_Mode new_mode)
   acc_mode_ = new_mode;
   return;
  }
+
+ caon_ptr<tNode> ws_defer_node = nullptr;
+
  if(trim == "%-%")
    trim.clear();
+
+ else if(trim.endsWith("-."))
+ {
+  trim.chop(2);
+  trim = trim.trimmed();
+  ws_defer_node = markup_position_.current_tag_command_node();
+
+ }
+
+ caon_ptr<GTagML_Tile> new_tile = nullptr;
 
  switch(acc_mode_)
  {
@@ -158,11 +171,11 @@ void GTagML_Graph_Build::check_tile_acc(Acc_Mode new_mode)
   check_add_words();
   if(new_mode == Acc_Mode::Raw)
   {
-   add_tile(trim + "\n");
+   new_tile = add_tile(trim + "\n");
   }
   else
   {
-   add_tile(trim);
+   new_tile = add_tile(trim);
    attach_right_whitespace();
   }
   tile_acc_length_adjustment_ = 0;
@@ -173,7 +186,7 @@ void GTagML_Graph_Build::check_tile_acc(Acc_Mode new_mode)
 
  case Acc_Mode::Arg_Tile:
   attach_left_whitespace();
-  add_tile(trim);
+  new_tile = add_tile(trim);
   attach_right_whitespace();
   tile_acc_length_adjustment_ = 0;
   tile_acc_qts_.reset();
@@ -197,6 +210,10 @@ void GTagML_Graph_Build::check_tile_acc(Acc_Mode new_mode)
 
  default: break;
  }
+
+ if(new_tile)
+   new_tile->set_whitespace_defer(ws_defer_node.raw_pointer());
+
  acc_mode_ = new_mode;
 }
 

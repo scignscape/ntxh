@@ -121,6 +121,8 @@ public:
 
  void attribute_sequence_leave();
 
+ caon_ptr<GTagML_Markup_Position::tNode>
+   current_tag_command_node();
 
  void enter_multiline_comment(int semis, int tildes);
  bool check_leave_multiline_comment(int semis, int tildes);

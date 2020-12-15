@@ -37,6 +37,7 @@ class GTagML_Document;
 
 class GTagML_Attribute_Tile;
 class GTagML_Tile;
+class GTagML_Tag_Command;
 
 class GH_Prenode;
 
@@ -62,6 +63,8 @@ class GTagML_Output_Latex : public GTagML_Output_Base, private GTagML_Output_Eve
 
  //GTagML_Output_Infoset* infoset_;
  GH_SDI_Document* sdi_document_;
+
+ QMap<caon_ptr<GTagML_Tag_Command>, QString> tile_whitespace_defers_;
 
 public:
 

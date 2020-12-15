@@ -34,13 +34,15 @@ class GTagML_Tile : public GTagML_Whitespace_Holder
 
  GH_Prenode* prenode_;
 
+ void* whitespace_defer_;
+
 public:
 
  ACCESSORS(QString ,raw_text)
  ACCESSORS(GH_Prenode* ,prenode)
 
  ACCESSORS(u4 ,length_adjustment)
-
+ ACCESSORS(void* ,whitespace_defer)
 
  GTagML_Tile(QString raw_text);
 

@@ -9,7 +9,7 @@ USING_KANS(GTagML)
 
 
 GTagML_Tile::GTagML_Tile(QString raw_text)
-  :  raw_text_(raw_text), 
+  :  raw_text_(raw_text), whitespace_defer_(nullptr),
      prenode_(nullptr), length_adjustment_(0)
 {
 

@@ -1,5 +1,5 @@
 $$ document-title := Cognitive Transform Grammar
-$$ local-title := info
+$$ local-title := intro
 
 $& BittnerSmithDonnelly %% (1:main) 2761 3047
 $& BlackwellPragmatics %% (1:main) 13501 13522

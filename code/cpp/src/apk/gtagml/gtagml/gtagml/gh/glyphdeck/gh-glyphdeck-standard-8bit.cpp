@@ -661,9 +661,9 @@ u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
  static QMap<QPair<u4, u4>, u1> static_map {{
 
    {{1, '-'}, 111}, // neg
-   {{2, '-'}, 109}, // ndash
+   {{2, '-'}, 74}, // mdash
    {{3, '-'}, 112}, // minus
-   {{4, '-'}, 85}, // mdash
+   {{4, '-'}, 101}, // ndash
 
    {{1, '\''}, 113}, // osquote
    {{2, '\''}, 114}, // csquote
@@ -692,7 +692,7 @@ u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
    {{1, '?'}, 103}, // wp
    {{1, '!'}, 104}, // wp
 
-   {{1, '*'}, 82}, // quasi let
+   {{1, '*'}, 95}, // quasi let
 
    {{1, '>'}, 101}, // quasi math
 
@@ -729,7 +729,7 @@ u1 GH_Glyphdeck_Standard_8bit::encode_latin1(u1 chr)
  }
  else if(chr < 97)
  {
-  return get_default_null();
+  goto MainSwitch;
  }
  else if(chr < 123)
  {
@@ -753,7 +753,7 @@ MainSwitch:
  case ' ': return 71;//
  case '\n': return 73;//
 //? case '`': return 74; //64
- case '~': return 128; //64  //?
+ case '~': return 99; //64  //?
  case '!': return 75;
  case '@': return 76; //ascii 64
  case '#': return 77; //66
@@ -761,28 +761,32 @@ MainSwitch:
  case '%': return 79; //68  // hyphen
   //? case '^': return 80; //69
  case '&': return 80; //70
- case '*': return 82; //71
+ case '*': return 95; //71
  case '(': return 68; //72
  case ')': return 69; //73
 
  case '-': return 63; //74  // NpMinus
  case '+': return 87; //76  // NpDot
 
- case '{': return 88; //77
- case '}': return 89; //78
+ case '[': return 88; //77
+ case ']': return 89; //78
 
- case '[': return 90; //84
- case ']': return 91; //85
+ case '{': return 90; //84
+ case '}': return 91; //85
+
+ case '_': return 36;
+ case '`': return 128;
+ case '^': return 135;
 
  //? case '|': return ; //86
- //?case '\\': return ; //87
+ case '\\': return 92; //87
 
  case '\'': return 98; //90  // NsExc
  case '"': return 97; //91  // SnSp
 
  case ',': return 65; //92 // Boundary
  case '.': return 64; //94  // DashX
- case '/': return 94; //96  // OSqBrX
+ case '/': return 92; //96  // OSqBrX
 
 
  default:
@@ -951,7 +955,7 @@ QString GH_Glyphdeck_Standard_8bit::get_latex_supplement(u1 gp, GH_Block_Base::D
   if(dm != GH_Block_Base::Divert_Sentence_Boundaries)
     return "\\>";
  }
- if(gp == 74)
+ if(gp == 100)
  {
   if(dm != GH_Block_Base::Divert_Sentence_Boundaries)
     return "\\> ";
@@ -964,7 +968,7 @@ u1 GH_Glyphdeck_Standard_8bit::get_sentence_end_space_swap(u1 gp)
  if(gp == 71)
    return 72;
  if(gp == 73)
-   return 74;
+   return 100;
  return get_default_null();
 }
 
@@ -993,7 +997,7 @@ void get_latex_64_to_117(u1 gp, QString& result)
    " ", // 71
    " ", // 72    se
    "\n", // 73
-   "\n", // 74 // se
+   "\\mdash{}", // 74 // se
    "!", // 75 // punc
    "@", // 76 // email, handles ...  (lit)
    "#", // 77 // number   (lit) or (word-repl)
@@ -1001,10 +1005,10 @@ void get_latex_64_to_117(u1 gp, QString& result)
    "%", // 79 // percent  (lit) or (word-repl)
    "&", // 80 // part of name  (word-repl)
    "&", // 81 // not part of name  (colloq/subpunctuation)
-   "*", // 82 // polite    (quasi-letter)
+   "/", // 82 // polite    (quasi-letter)
    "(", // 83 // surround
    ")", // 84 // surround
-   "\\mdash{}", // 85 // ---
+   "*", // 85 // polite
    "=", // 86 // (quasi math)
    "+", // 87 // (quasi math)
    "[", // 88 // (punc)
@@ -1012,16 +1016,16 @@ void get_latex_64_to_117(u1 gp, QString& result)
 
    "{", // 90 // surround
    "}", // 91 // surround
-   "[", // 92 // surround
-   "]", // 93 // surround
-   "/", // 94 // punc
-   "/", // 95 // non-punc
+   "\\", // 92 // non-punc
+   "[", // 93 // surround
+   "]", // 94 // surround
+   "*", // 95 // quasi math
    "\\ssquote", // 96 // ' feet
    "\\sdquote", // 97 // " inches
    "'", // 98 // (apos) punc
-   "<", // 99 // (quasi math)
+   "~", // 99 // (word-repl)
    "\n", // 100 //  se  64+36
-   ">", // 101 // (quasi math)
+   "\\ndash{}", // 101 // (quasi math)
 
    ".", // 102 // num literal
    "?", // 103 // punc
@@ -1030,9 +1034,8 @@ void get_latex_64_to_117(u1 gp, QString& result)
    ".", // 106 // ellipses (1 char)
    ".", // 107 // ellipses part (subpunc)
    ".", // 108 // weak punc
-   "\\ndash{}", // 109 // -- (quasi-letter)
-
-   "~", // 110 // word-repl
+   "<", // 109 // (quasi-math)
+   ">", // 110 // (quasi-math)
    "-", // 111 // quasi-math (neg)
    "-", // 112 // quasi-math (minus)
    ",", // 113 // quasi-math (lit)
@@ -1054,38 +1057,38 @@ void get_latex_118_to_127(u1 gp, QString& result)
 void get_latex_128_to_159(u1 gp, QString& result)
 {
  static QVector<QString> static_vec {{
-   "~", // 128
-   "!", // 129
-   "@", // 130
-   "#", // 131
-   "$", // 132
-   "%", // 133
-   "^", // 134
-   "&", // 135
-   "*", // 136
-   "(", // 137
-   ")", // 138
-   "-", // 139
-   "=", // 140
-   "+", // 141
-   "[", // 142
-   "]", // 143
-   "{", // 144
-   "}", // 145
-   "\\", // 146
-   "|", // 147
-   ";", // 148
-   ":", // 149
-   "'", // 150
-   "\"", // 151
-   ",", // 152
-   "<", // 153
-   ".", // 154
-   ">", // 155
-   "/", // 156
-   "?", // 157
-   "\\t", // 158
-   "\\r", // 159
+   "`"  // 128
+   "~", // 129
+   "!", // 130
+   "@", // 131
+   "#", // 132
+   "$", // 133
+   "%", // 134
+   "^", // 135
+   "&", // 136
+   "*", // 137
+   "(", // 138
+   ")", // 139
+   "-", // 140
+   "=", // 141
+   "+", // 142
+   "[", // 143
+   "]", // 144
+   "{", // 145
+   "}", // 146
+   "\\", // 147
+   "|", // 148
+   ";", // 149
+   ":", // 150
+   "'", // 151
+   "\"", // 152
+   ",", // 153
+   "<", // 154
+   ".", // 155
+   ">", // 156
+   "/", // 157
+   "?", // 158
+   "\\t", // 159
    }};
 
  result = static_vec.value(gp - 128);

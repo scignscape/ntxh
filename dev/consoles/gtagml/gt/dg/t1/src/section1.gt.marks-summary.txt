@@ -1,0 +1,5 @@
+$$ document-title := Cognitive Transform Grammar
+$$ local-title := section1
+
+$& BiskriDescles %% (1:main) 5974 6264
+

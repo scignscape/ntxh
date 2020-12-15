@@ -32,6 +32,15 @@ void GTagML_Markup_Position::prepare_attribute_sequence()
  position_state_ = Tag_Body_Leave_Awaiting_Attributes;
 }
 
+caon_ptr<GTagML_Markup_Position::tNode>
+  GTagML_Markup_Position::current_tag_command_node()
+{
+ if(tag_commands_.isEmpty())
+   return nullptr;
+
+ return tag_commands_.top();
+}
+
 QString GTagML_Markup_Position::current_tag_command_name()
 {
  QString result;
