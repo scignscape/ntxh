@@ -778,7 +778,7 @@ MainSwitch:
  case '`': return 128;
  case '^': return 135;
 
- //? case '|': return ; //86
+ case '|': return 148; //86
  case '\\': return 92; //87
 
  case '\'': return 98; //90  // NsExc
@@ -786,7 +786,7 @@ MainSwitch:
 
  case ',': return 65; //92 // Boundary
  case '.': return 64; //94  // DashX
- case '/': return 92; //96  // OSqBrX
+ case '/': return 82; //96  // OSqBrX
 
 
  default:
@@ -1005,7 +1005,7 @@ void get_latex_64_to_117(u1 gp, QString& result)
    "%", // 79 // percent  (lit) or (word-repl)
    "&", // 80 // part of name  (word-repl)
    "&", // 81 // not part of name  (colloq/subpunctuation)
-   "/", // 82 // polite    (quasi-letter)
+   "/", // 82 // punc
    "(", // 83 // surround
    ")", // 84 // surround
    "*", // 85 // polite

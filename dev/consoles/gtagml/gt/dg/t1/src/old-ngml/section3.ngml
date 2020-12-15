@@ -1935,7 +1935,7 @@ the `q.Liverpool` examples for city qua architecture and qua locale)
 parse-graph.  And in, say, 
 
 `sentenceList,
-`sentenceItem; `swl -> itm:pipe -> We understand that the pipe fitters are also planning to picket the Lake Worth, Florida project as well. -> sco}
+`sentenceItem; `swl -> itm:pipe -> We understand that the pipe fitters are also planning to picket the Lake Worth, Florida project as well. -> sco ;;
 \udref{en_gum-ud-train -> email-enronsent03_01-0143}
 `sentenceList`
 

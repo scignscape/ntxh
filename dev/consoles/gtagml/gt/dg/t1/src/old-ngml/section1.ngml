@@ -791,14 +791,14 @@ Cognitive Grammar literature.
 In Ronald Langacker's `i.Foundations of Cognitive Grammar`/, the sentence
 
 `sentenceList,
-`sentenceItem; `swl -> itm:threetimes -> Three times, students asked an interesting question. -> sco}
+`sentenceItem; `swl -> itm:threetimes -> Three times, students asked an interesting question. -> sco ;;
 `sentenceList`
 
 is used to demonstrate how
 grammatical principles follow from cognitive `q.construals` of the relevant situations,
 those which language seeks to describe or takes as presupposed context.`footnote.
-For example, \cite[pp. 119 and 128]{LangackerFoundations},
-discussed by \cite[p. 189]{LineBrandt}, and \cite[p. 9]{EstherPascual}.
+For example, `cite<[pp. 119 and 128] LangackerFoundations>;,
+discussed by `cite<[p. 189] LineBrandt>;, and `cite<[p. 9] EstherPascual>;.
 `footnote`
 In particular, Langacker argues that `q.students` and `q.question` can both be either singular or
 plural: syntax is open-ended here, with neither form more evidently correct.  Langacker uses this
@@ -866,22 +866,22 @@ phrase-structure complications, particularly with respect to singular/plural agr
 
 `sentenceList,
 `sentenceItem; `swl ->  -> Time after time, tourists (a tourist) walk(s) by this building
-with no idea of its history.}[]{sco}%
+with no idea of its history.}[]{sco ;;%
 [Time after time, tourists walk by this building
 with no idea of its history.]
 
 `sentenceItem; `swl ->  -> The streets around here are confusing; often people (someone)
-will ask me for directions.}[]{sco}%
+will ask me for directions.}[]{sco ;;%
 [The streets around here are confusing; often someone
 will ask me for directions.]
 
 `sentenceItem; `swl -> itm:students -> Student after student came with their (his/her)
-paper to complain about my grade(s).}[]{sco}%
+paper to complain about my grade(s).}[]{sco ;;%
 [Student after student came with their
 paper to complain about my grades.]
 
 `sentenceItem; `swl -> itm:parents -> Student after student %-- and their (his/her) parents
-%-- complained about the tuition increase.}[]{sco}%
+%-- complained about the tuition increase.}[]{sco ;;%
 [Student after student %-- and their parents
 %-- complained about the tuition increase.]
 `sentenceList`

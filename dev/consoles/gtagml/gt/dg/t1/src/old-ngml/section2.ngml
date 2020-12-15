@@ -407,11 +407,11 @@ autonomous:
 
 `sentenceList,
 `sentenceItem; `swl -> students -> Many students and their parents 
-came to complain about the tuition hikes. -> sco}
-`sentenceItem; `swl -> office -> Many students came by my office to complain about their grades. -> sco}
-`sentenceItem; `swl -> after -> Student after student complained about the tuition hikes. -> sco}
+came to complain about the tuition hikes. -> sco ;;
+`sentenceItem; `swl -> office -> Many students came by my office to complain about their grades. -> sco ;;
+`sentenceItem; `swl -> after -> Student after student complained about the tuition hikes. -> sco ;;
 `sentenceItem; `swl -> parents -> Student after student came with their parents to complain 
-about the tuition hikes. -> sco}
+about the tuition hikes. -> sco ;;
 `sentenceList`
 
 In (`ref<students>;) and (`ref<office>;), we read `i.Many students` as topicalizing a multitude, 
@@ -428,8 +428,8 @@ context; consider Langacker's example:
 \end{lrbox}
 `sentenceList,
 `sentenceItem; `swl ->  -> Three times, students asked an interesting question.}
-[\usebox{\Langackerboxi}]{sco}
-`sentenceItem; `swl ->  -> Three times, a student asked an interesting question. -> sco}
+[\usebox{\Langackerboxi}]{sco ;;
+`sentenceItem; `swl ->  -> Three times, a student asked an interesting question. -> sco ;;
 `sentenceList`
 
 Meanwhile, in (`ref<after>;) and (`ref<parents>;) the phrase 

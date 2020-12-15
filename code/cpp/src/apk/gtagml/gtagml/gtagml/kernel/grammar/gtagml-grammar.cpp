@@ -383,6 +383,14 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
 
   });
 
+  add_rule( gtagml_context, "deleted-visual-line",
+    "\\n* \\s* \\|[.]\\| \\s* ",
+    [&]
+  {
+   QString m = p.match_text();
+   graph_build.tile_acc("\n");
+  });
+
   add_rule( gtagml_context, "special-character-sequence",
    " (?: %-- ) | (?: ->- ) | (?: %\\.,{2,3} ) "
    "  | (?: ` \\\\ \\( (?<bq-esc1> [^)]+ ) \\) ) "

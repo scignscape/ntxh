@@ -604,6 +604,8 @@ complain about how long it takes to commute to New York City. -> log ;;
 `sentenceItem; `swl -> itm:leafshabs -> For the first time this year, the Leafs failed to beat 
 the Habs. -> log ;;
 `sentenceList`
+ 
+ |.|
 
 These versions are more logically transparent, in that their propositional 
 content is more directly modeled by the structure of the sentences. 
@@ -612,6 +614,662 @@ or with hockey might find these
 versions easier to understand; more context-neutral and journalistic.  
 But perhaps for this reason the `q.journalistic` versions actually 
 sound stilted or non-idiomatic for everyday discourse.
+`p`
+
+
+`p.
+Geoffrey Nunberg's chapter (15) in the 
+`i.Handbook` also has interesting examples that point to extralinguistic 
+factors determining proxies and substitutions in referential contexts: 
+
+`sentenceList,
+`sentenceItem; `swl -> itm:parked -> I am parked out back. ->> (example 3, page 371) -> ref ;;
+`sentenceItem; `swl -> itm:waiting -> I am parked out back and have been waiting for 15 minutes. 
+->> (example 3) -> ref ;;
+`sentenceItem; `swl -> itm:start -> I am parked out back and may not start. ->> (example 6, page 371) -> ref ;;
+`sentenceItem; `swl -> itm:Whitney -> I'm in the Whitney Museum. ->> (page 375) -> ref ;;
+`sentenceItem; `swl -> itm:beers -> I drank two beers. ->> (page 375) -> ref ;;
+`sentenceItem; `swl -> itm:Michelobs -> I drank two Michelobs. ->> (page 375) -> ref ;;
+`sentenceItem; `swl -> itm:Sauternes -> I drank two Sauternes last night. ->> (page 375) -> ref ;;
+`sentenceList`  
+
+ |.|
+
+Someone says `q.I am parked` as proxy for their car, or `q.in the Whitney` as 
+proxy for their art work.  Nunberg questions the acceptability of 
+(`ref<itm:start>;) on the premise that once we establish talking of 
+people as an oblique reference to their cars, it sounds awkward to switch 
+to content that can `i.only` apply to the car, like `i.may not start`/.  
+He also argues that we interpret (`ref<itm:beers>;) and (`ref<itm:Michelobs>;) 
+as references, quite possibly, two glasses or bottles of `i.the same` 
+beverage, while (`ref<itm:Sauternes>;) implies two samples of
+`i.different` wines.  The analysis turns on conventions for 
+creating referring expressions; in particular, he argues, 
+extralinguistic factors (albeit not using this term) 
+regulate when referential substitutions as exemplified in 
+(`ref<itm:parked>;)-(`ref<itm:Sauternes>;) are comfortable.
+We accept an artist proxying her work in a museum, but 
+(`ref<itm:Whitney>;) arguably does not generalize to a case like 
+(`ref<itm:library>;), and (`ref<itm:waiting>;) does not generalize to 
+(`ref<itm:autoshop>;) 
+
+`sentenceList,
+`sentenceItem; `swl -> itm:library -> I'm in the library. ->> (said by an author whose books are there) -> ref ;;
+`sentenceItem; `swl -> itm:autoshop -> I've been in the auto shop for the 
+last 15 days. -> ref ;;
+`sentenceList`  
+
+ |.|
+
+Nunberg attributes these discrepancies to cultural conventions, like the
+difference in prestige between having a painting in a museum compared to 
+having one copy of one's book in a library; or chugging a cheap beer 
+versus savoring a celebrated wine.  Here too there are 
+logically transparent alternatives: 
+
+`sentenceList,
+`sentenceItem; `swl -> --- -> My car is parked out back and have been waiting for 15 minutes. -> log ;;
+`sentenceItem; `swl -> --- -> I drank two pints of beer last night. -> log ;;
+`sentenceItem; `swl -> --- -> I tried two different Sauternes last night. -> log ;;
+`sentenceList`
+
+ |.|
+
+Again, though, the seemingly simpler versions %-- whose forms 
+generalize more readily to variant cases %-- seem `i.less` natural 
+or fluent, as if their very generalizability makes them sound 
+awkward compared to logically more opaque, but idiomatically 
+more sociable, renderings.  Impersonal, journalistic 
+language can sound rather cold or unfriendly in contexts 
+where speakers expect a dialect register characteristic 
+of conversations among peers.
+`p`
+
+`p.
+In short, even if sentences have a basically transparent 
+logical content, `i.how` sentences holistically signify this 
+content does not always emerge straightforwardly from semantic 
+or syntactic structures on their own.  I think this weakens the 
+case for semantic paradigms that concentrate on logically-structured 
+content which appears to be signified through sentences 
+%-- even if we grant that this propositional ground of meaning 
+is real, it does not follow that propositional contents are 
+designated by purely linguistic means, rather than by 
+a cohort of cognitive processes many of which are extra-linguistic.  
+This is the basis of my proposing `q.logicomorphic` qualities 
+as one axis for evaluating sentences, which I will now discuss further.
+`p`
+
+
+`spsubsectiontwoline.Gaps in Logical Phrase-Models`
+`p.
+Assume we have a baseline lambda-calculus-like 
+functional summary of sentences and derived types.  That is, 
+any sentence can be rewritten as if a sequence of `q.function calls`/, 
+assuming an underlying representational vocabulary of a typed 
+Lambda Calculus, with sentences having overall `q.proposition` types 
+(I will present this model in detail next section).
+`p`
+
+`p.
+My overall goal is to embrace a hybrid methodology %-- 
+accepting formal analyses when they shed light on linguistic 
+processes, but not going so far as to treat logical, mathematical, 
+or computational models as full explanations for linguistic 
+rationality qua scientific phenomenon.  
+Cognitive Grammar, in particular, challenges our assumption that 
+grammar and semantics are methodologically separate.  Received 
+wisdom suggests that grammar concerns the `q.form` of sentences 
+whereas semantics considers the meaning of words %-- implicitly 
+assuming that `i.word combinations` produce new meanings, and 
+that the `i.order` by which words are combines determines how 
+new meanings are produced.  This notion, in turn, is allied 
+with the essentially logical or propositional picture of 
+signifying via doxa: the idea that inter-word relations cue up 
+different logically salient transformations of an underlying 
+predicate model.  Thus %-- to initiate a case-study I will 
+return to several times %-- `i.many students` as a phrase is 
+more significatorily precise than `i.students` as a word, because 
+the phrase (with intimations of quantitative comparison) has 
+more logical detail.  Similarly `i.many students complained` 
+is more logically complete because, provisioning both a verb-idea 
+and a noun-idea, it represents a whole proposition. 
+`p`
+
+`p.
+In general, then, phrases are more complete than words because 
+they pack together more elements which have some logical role, 
+establishing individuals, sets, spatiotemporal setting, and 
+predicates which collectively establish sufficiently 
+completed propositional attitudes.  On this account the 
+key role of phrase-structure is to establish phrases as 
+signifying units on a logical level analogous to 
+how lexemes are signifying units on a referential or conceptual 
+level.  Moreover, phrases' internal structure are understood 
+to be governed by rule defining `i.how` word-combinations 
+draw in extra logical detail.  A link between words is not a 
+random synthesis of concepts, but rather implies a certain 
+logical connective which acts as a de facto `q.third party` in 
+a double-word link, proscribing with orientation to predicate 
+structures `i.how` the words' semantic concepts are to be 
+joined.  In `i.many students` the implied connector is 
+the propositional act of conceiving a certain quantitative 
+scale to a conceptualized set; in `i.students complained` the 
+implied connector is a subject-plus-verb-equals-proposition 
+assertiveness.  Phrases acquire logical specificity by 
+building up word-to-word connections into 
+more complex aggregates.
+`p`
+
+`p.
+One implication of this model is that phrases are semantically 
+substitutable with individual lexemes that carry similar meanings, 
+having been entrenched by convention to capture a multipart concept 
+which would otherwise be conveyed with the aggregation of a 
+phrase: consider `q.MP` for `i.member of parliament`/, or 
+`q.primaried` for `i.subject without your own party to a primary 
+challenge`/.  Conversely, phrases can be repeatedly used in a 
+specific context until they function as quasi lexical units in 
+their own right.  These patterns of entrenchment imply that we 
+hear language in term of phrases bearing semantic content; and 
+insofar as we are comfortable with how we parse a sentence, each 
+word sited in its specific phrasal hierarchy, we do not tend to 
+consider individual words semantically outside of their 
+constituent phrases.
+`p`
+
+`p.
+This theory of the syntax-to-semantic relationship is a paradigmatic 
+partner, at the grammatic level, to the belief that meanings are 
+fixed by `q.truth makers`/: that is a sentence asserts a true fact, 
+this fact is its first and foremost meaning, and if not, the meaning 
+is somehow the description of a possible world where it `i.is` true.  
+One of my projects here is to criticize (to some extent) these 
+`q.truth-theoretic` paradigms.  At present I want to point out 
+how this philosophical paradigm can influence our 
+appraisal of phrase-structure.  Simplistic `q.logic-based` conceptions of 
+phrases can be based on two concerns: first, the idea that lexemes retain some 
+syntactic and semantic autonomy even within clearly defined phrases 
+where they are included; and, second, that the shape of phrases 
+insofar as they are perceived as holistic signifying units 
+is often driven by figurative or `q.gestalt` principles rather than 
+neat logical structuration.  I'll call the former the issue of 
+`q.phrasal isolation` (or lack thereof): syntactic and semantic effect 
+often cross phrasal boundaries, even outside the overarching hierarchy 
+whose apex is the whole sentence.  Both of these lines of reasoning 
+%-- arguably especially the second %-- are developed in 
+Cognitive Grammar literature.   
+`p`
+
+`p.
+In Ronald Langacker's `i.Foundations of Cognitive Grammar`/, the sentence
+
+`sentenceList,
+`sentenceItem; `swl -> itm:threetimes -> Three times, students asked an interesting question. -> sco ;;
+`sentenceList`
+
+is used to demonstrate how
+grammatical principles follow from cognitive `q.construals` of the relevant situations,
+those which language seeks to describe or takes as presupposed context.`footnote.
+For example, `cite<[pp. 119 and 128] LangackerFoundations>;,
+discussed by `cite<[p. 189] LineBrandt>;, and `cite<[p. 9] EstherPascual>;.
+`footnote`
+In particular, Langacker argues that `q.students` and `q.question` can both be either singular or
+plural: syntax is open-ended here, with neither form more evidently correct.  Langacker uses this
+example to make the Cognitive-Linguistic point that
+we assess syntactic propriety relative to cognitive frames and conversational context.  In this
+specific case, we are actually working with two different cognitive frames which are interlinked
+%-- on the one hand, we recognize distinct events consisting of a student asking a question, but
+the speaker calls attention, too, to their recurrence, so the events can also be understood
+as part of a single, larger pattern.  There are therefore two different cognitive foci, at two
+different scales of time and attention, a `q.split focus` which makes both singular and plural
+invocations of `q.student` and `q.question` acceptable.
+`p`
+
+`p.
+Supplementing this analysis, however, we can additionally focus attention directly on
+grammatical relations.  The words `i.student` and `i.question` are clearly linked as the subject and
+object of the verb `i.asked`/; yet, contrary to any simple presentation of rules,
+no agreement of singular or plural is required between them (they can be singular and/or plural in
+any combination).  Moreover, this anomaly is only in force due to the context established
+by an initial phrase like `i.three times`/; absent some such framing, the singular/plural
+relation would be more rigid.  For example, `q.A student asked interesting questions` would
+(in isolation) strongly imply `i.one` student asking `i.several` questions.  So the initial
+`q.Three times` phrase alters how the subsequent phrase-structure is understood while remaining
+structurally isolated from the rest of the sentence.  Semantically, it suggests a
+`q.space builder` in the manner of Gilles Fauconnier or Per Aage Brandt
+`cite<Fauconnier>;; `cite<PerAageBrandt>;, but we
+need to supplement Mental Space analysis with a theory of how these spaces
+influence syntactic acceptability, which would seem to be logically prior to the stage where Mental Spaces
+would come in play.
+`p`
+
+`p.
+The mapping of (`ref<itm:threetimes>;) to a logical
+substratum would be more transparent with a case like: 
+
+`sentenceList,
+`sentenceItem; `swl -> itm:threes -> Three students asked interesting questions. -> log ;;
+`sentenceList`
+
+(`ref<itm:threes>;) is a more direct translation of the facts
+which the original sentence conveys.  But this `q.more logical` example has different
+connotations than the sentence Langacker cites; (`ref<itm:threetimes>;) places the emphasis
+elsewhere, calling attention more to the idea of something temporally drawn-out,
+of a recurrence of events and a sense of time-scale.  The `q.more logical` sentence
+lacks this direct invocation of time scale and temporal progression.
+`p`
+
+`p.
+We can say that the `q.Three students` version is a more direct statement of fact, whereas
+Langacker's version is more speaker-relative, in the sense that it elaborates more
+on the speaker's own acknowledgment of belief.  The speaker retraces the steps of her
+coming to appreciate the fact %-- of coming to realize that the `q.interesting questions`
+were a recurrent phenomenon and therefore worthy of mention.  By situating expressions
+relative to cognitive processes rather than to the facts themselves, the sentence
+takes on a structure which models the cognition rather than the states of affairs.
+But this shift of semantic grounding from the factual to the cognitive also apparently
+breaks down the logical orderliness of the phrase structure.  `q.Three times`/, compared
+to `q.three students`/, leads to a morphosyntactic choice-space which is
+`q.underdetermined` and leaves room for speakers' shades of emphasis.
+`p`
+
+`p.
+This is not an isolated example.  Many sentences can be provided with similar
+phrase-structure complications, particularly with respect to singular/plural agreement.
+
+`sentenceList,
+`sentenceItem; `swl -> --- -> Time after time, tourists (a tourist) walk(s) by this building
+with no idea of its history. ->> --- -> sco ->> 
+Time after time, tourists walk by this building
+with no idea of its history. ;;
+
+`sentenceItem; `swl -> --- -> The streets around here are confusing; often people (someone)
+will ask me for directions. ->> --- -> sco ;;%
+[The streets around here are confusing; often someone
+will ask me for directions.]
+
+`sentenceItem; `swl -> itm:students -> Student after student came with their (his/her)
+paper to complain about my grade(s). ->> --- -> sco ->> 
+Student after student came with their
+paper to complain about my grades. ;;
+
+`sentenceItem; `swl -> itm:parents -> Student after student %-- and their (his/her) parents
+%-- complained about the tuition increase. ->> --- -> sco ->> 
+Student after student %-- and their parents
+%-- complained about the tuition increase. ;;
+`sentenceList`
+
+On a straightforward phrase-structure reading, `i.student after student` reduces to an
+elegant equivalent of `i.many students`/, with the rhetorical flourish abstracted away
+to a logical form.  But our willingness to accept both singular and plural agreements
+(his/her/their parents, grades, papers) shows that clearly we don't simply substitute
+`i.many students`/; we recognize the plural as a logical gloss on the situation but
+engage the sentence in a more cogntively complex way, recognizing connotations of temporal
+unfolding and juxtapositions of cognitive frames.  The singular/plural underdeterminism
+is actually a signification in its own right, a signal to the listener that the
+sentence in question demands a layered cognitive attitude.  Here again, syntactic
+structure (morphosyntactic, in that syntactic allowances are linked with
+variations in the morphology of individual words, such as singular or plural form)
+serves to corroborate conversants' cognitive frames rather than to model logical
+form.
+`p`
+
+
+`p.
+The contrast between the phrases `i.Student after student` and `i.Many students`
+cannot be based on `q.abstract` semantics alone %-- how the evident temporal implications of the
+first form, for example, are concretely understood, depends on conversants' mutual recognition
+of a relevant time frame.  The dialog may concern a single day, a school year, many
+years.  We assume that the speakers share a similar choice of time `q.scale`
+(or can converge on one through subsequent conversation).  `i.Some` time-frame
+is therefore presupposed in the discursive context, and the first phrase invokes
+this presumed but unstated framing.  The semantics of the phrase are therefore somewhat open-ended:
+the phrase `q.hooks into` shared understanding of a temporal cognitive framing without referring
+to it directly.  By contrast, the second phrase is less open-ended: it is consistent with both
+a more and less temporally protracted understanding of `i.many`/, but leaves such details (whatever
+they may be) unsignified.  The factual circumstance is designated with a level of abstraction that sets
+temporal considerations outside the focus of concern.  The second (`q.`i.Many students`/`/) phrase 
+is therefore both
+less open-ended and also less expressive: it carries less detail but accordingly also relies
+less on speaker's contextual understanding to fill in detail.`footnote.
+The examples I have used so far may also imply that a choice of phrase structure is
+always driven by semantic connotations of one structure or another;
+but seemingly the reverse can happen as
+well %-- speakers choose a semantic variant because its grammatic realization lends a useful
+organization to the larger expression.  There are many ways to say `q.many`/,
+for example: `i.a lot of`/,
+`i.quite a few`/, not to mention `q.time after time` style constructions.  Whatever their
+subtle semantic variations, these phrases also have different syntactic properties:
+`i.Quite a few` is legitimate as standalone (like an answer to a question);
+`i.A lot of` is not, and `i.A lot` on its own is awkward.  On the other hand the `q.of` in
+`i.A lot of` can `q.float` to be replicated further on: `q.A lot of students, of citizens,
+believe education must be our top priority` sounds more decorous than the equivalent sentence with the
+second `q.of` replaced by `q.and`/.  If the cadence of that sentence appeals to the speaker, then
+such stylistic preference will influence taking `q.A lot of` as the `q.many` variant of choice.
+So speakers have leeway in choosing grammatic forms that highlight one or another aspect of
+situations; but they also have leeway in choosing rhetorical and stylistic pitch.  Both cognitive
+framings and stylistic performance can be factored when reconstructing what compels the
+choice of one sentence over alternatives.
+`footnote`
+`p`
+
+`p.
+One consequence of these analyses is that grammar
+needs to be approached holistically: the grammatic structure of phrases cannot,
+except when deliberate oversimplification is warranted, be isolated from
+surrounded sentences and still larger discourse units.  Semantic roles
+of phrases have some effect on their syntax, but phrases are nonetheless chosen
+from sets of options, whose variations reflect subtle semantic and syntactic
+maneuvers manifest at super-phrasal scales.  The constituent words of phrases retain some
+autonomy, and can enter into inter-word and phrasal structures with other words outside their
+immediate phrase-context.  We can still apply formal models to phrase
+structure %-- for example, Applicative and Cognitive Grammar (`ACG;) considers phrases
+as `q.applications` of (something like) linguistic or cognitive functions,
+with (say) an adjective modeled as a function applied to a noun,
+to yield a different noun (viz., something playing a noun's conceptual role)
+`cite<Descles2010>; %-- but we should not read these transformations
+too hastily as a purely semantic correlation within a space of denotable concepts
+`i.such that` the new concept wholly replaces the
+contained parts, which then cease to have further linguistic role and effect.
+Instead, applicative structures represent shifts or evolutions in
+mental construal, which proceed in stages as conversants form
+cognitive models of each others' discourse.  Even if phrase structure
+sets landmarks in this unfolding, phrases do not wholly subsume their
+constituents; the parts within phrases do not `q.vanish` on the higher scale,
+but remain latent and may be `q.hooked` by other, overlapping phrases.
+`p`
+
+`p.
+Consider the effect of `q.Many students complained`/.  Propositionally, this appears
+to say essentially that `i.students` complained; but, on hermeneutic charity, the
+speaker had `i.some` reason to say `q.many`/.  The familiar analysis is that
+`q.many` suggests relative size; but this
+is only half the story.  If the speaker chose merely `i.students complained`/, we would hear an assertion
+that more than one student did, but we would also understand that there were several
+occasions when complaints happened.  Adding `q.many` does not just
+imply `q.more` students, but suggests a mental shift away from the particular episodes.
+In the other direction, saying `i.a student complained` is not just
+asserting how at least one student did so, but
+apparently reports one specific occasion (which perhaps the speaker wishes to
+elaborate on).  In other words, we cannot really capture the singular/plural semantics,
+or different varieties of plural, just by looking at the relative size of implied
+sets; we need to track how representations of singleness or multitude imply
+temporal and event-situational details.
+`p`
+
+`p.
+Against this backdrop, `i.Student after student complained` captures both dimensions,
+implying both a widespread unrest among the student body and also
+temporal recurrence of complainings.
+The `BlankAfterBlank; idiom is a special case `visavis; `q.after`/, where 
+the `q.argument` to
+`i.after` is repeated in both positions, suggesting an unusual degree of repetition,
+something frustratingly recurrent: `i.He went on and on`/; `i.Car after car passed
+us by`/; `i.Time after time I got turned down`/.
+Although I have no problem
+treating these constructions as idiomatic plurals, I also contend (on the
+premise of phrase-overlap) that the dependent constituents in the `BlankAfterBlank;
+construction can be hooked to other phrases as well (which is why
+`q.and [their/his/her] parents` can also be singular, in this case).  I dwell on
+this example because it shows how type-theoretic accounts of phrase structure, 
+which I will explore next section, 
+can be useful even if we treat phrases more as frames which overlay linguistic
+structure, not as rigid compositional isolates.  Each `q.students` variation uses
+morphology to nudge cognitive attention in one direction or another, toward events or the
+degree to which events are representative of some global property (here of
+a student body), or both.  The pluralizing transformation %-- from 
+one student to many students %-- is not `i.the`
+morphosyntactic meaning, but instead the skeleton on which the full meaning
+(via cognitive schema) is designed.
+`p`
+
+
+`p.
+If this analysis has merit, it suggests that a Combinatory Grammar or type-logical
+approach to phrases like `i.many students` or `i.student after student`
+(singular-to-plural or plural-to-plural mappings) should be understood not just
+as functions among Part of Speech (`POS;) types but as adding cognitive shading, foregrounding
+or backgrounding cognitive elements like events or typicality in some context.
+In other words, `i.many students` is type-theoretically a pluralizing action, 
+but, in more detail, it adds a kind of cognitive rider attached to the mapping which focuses
+cognition in the subsequent discourse onto events (their recurrence and temporal distribution);
+similarly `q.student after student` has a `q.rider` suggesting more of a temporal
+unfolding.  The second form implies not only that many students complained, but that
+the events of these complainings were spread out over some stretch of time.
+Each such functional application (mappings between `POS; understood as linguistic types)
+produces not only a resulting `POS; `q.type`/, but also a reconfiguration of cognitive
+attitudes toward the relevant situation and context.
+Language users have many ways to craft a sentence with similar meanings, and arguably one
+task for linguistic analysis is to model the space of choices which are available in a
+given situation and represent what specific ideas and effects are invoked by one
+choice over others.
+`p`
+
+`whdecoline;
+`p.
+Logical semantic models build up propositional representations from the 
+word level to phrase and sentence levels.  Even when we find that a logical 
+`i.telos` is in effect, however, at each of these levels we can 
+find interpretive and situational details which may complicate, flesh out, 
+or cognitively supersede a more transparent logical meaning.
+So at the word-pair level, there is more going on in 
+a transform like `i.rescued dog` than simply applying the 
+predicate `q.rescue` to the ground `q.dog`/.  The construction 
+drafts a complex backstory that influences our cognizing both 
+component words.  Scaling up, as I argued in the last several 
+paragraphs, a phrase like `i.student after student` carries 
+conceptual effects beyond just effectuating a logical 
+operation of pluralization.  I will argue that similar 
+effects can be identified at the sentence level %-- so 
+there are certain lacunae in narrowly logically-based 
+reconstructions of language components at the 
+distinct levels of word (transform) pairs, phrases, 
+and whole sentences.  I'll sketch my arguments 
+here and give a more thorough analysis later in 
+Section `ref<sec:Gaps>;.
+`p`
+
+
+`spsubsectiontwoline.Logical Structure versus Sentence Structure`
+`p.
+Let us grant in general that particular sentences can be 
+mapped to distinct, relatively transparent propositional 
+contents.  In some cases sentences expresses propositional 
+attitudes to such content (requests, commands, questioning) 
+rather than unadorned locutionary assertions.  To 
+properly respond to speech-acts, however (even ones with 
+illocutionary force) conversants need to derive the 
+content which is logically conjured via the discourse,
+either as the speaker's primary intent or as a condition 
+for that intent.  In effect, a proposition like `i.the window 
+is closed` furnishes logical content to assertions like 
+`i.The window is closed now` but also statements of 
+belief (`i.I think the window is closed`/) or 
+requests or opinions (`i.The window should be closed`/; 
+`i.Please close the window`/). 
+`p`
+
+`p.
+Philosophical `q.truth-theoretic` paradigms imply that such 
+propositional contents are the `i.essential` meanings within 
+language; that analyzing semantic forms via logical 
+structure is the core of a rigorous theory of semantics.  
+It is certainly true that many elements of language 
+can be translated, or deemed as conventionalized encodings 
+for, structures in predicate logic %-- invocations of 
+multiplicity and quantification; logical connectives between 
+propositions; negations, modalities, and possibilia.  
+This provides an analytic matrix wherein `i.some` 
+sentences' structures may be analyzed.  I will argue, 
+however, that in typical cases logical forms are 
+invoked only indirectly %-- which calls into question 
+the applicability of logical analysis as explanatory 
+vehicles for `i.linguistic` analysis in itself 
+(as opposed to more general cognitive/extralinguistic 
+processing). 
+`p`
+
+`p.
+There are several cognitive operations requisite for grasping 
+sentence-meanings as a logical gestalt: figuring individuals 
+or multiplicities as conceptual foci (verb subjects or objects); 
+establishing relationships between individuals and multiplicities 
+or among multiplicities (member/part of, larger/smaller, 
+overlap/disjoint); predicating properties to individuals 
+or multiplicities; quantification; logical conjunction or disjunction, 
+between predicates (also negation).  In some cases we can find 
+these operations fairly directly encoded in explicit language form 
+%-- sentences which are precise in figuring multiplicities numerically, 
+or through unambiguous use of determiners like `i.all` and `i.every`/; 
+which are structured to avoid scope ambiguities; which use transparent
+semantic resources to describe verb subjects and objects; and 
+so forth.  In the most recent Universal Dependencies Shared Task corpus 
+we can find examples like:  
+
+`sentenceList,
+`sentenceItem; `swl -> itm:tumour -> It is the most common tumour found in babies, occurring in one of every 35,000 births. -> log ;;
+`udref -> en_pud -> n01051007 ;;
+`sentenceItem; `swl -> itm:Dengue -> Dengue fever is a leading cause of illness and death in the tropics and subtropics, with as many as 100 million people infected each year. -> log ;;
+`udref -> en_partut-ud-train -> en_partut-ud-1498 ;;
+`sentenceItem; `swl -> itm:TalibanKarzai -> Many Taliban living in Afghanistan voted for President Karzai. -> log ;;
+`udref -> en_ewt-ud-train -> w03002048 ;;
+`sentenceItem; `swl -> itm:Ashraf -> Most of the girls I was meeting had grown up in Mujahedeen schools in Ashraf, where they lived separated from their parents. -> log ;;
+`udref -> en_ewt-ud-train -> weblog-blogspot.com_rigorousintuition_20060511134300_ENG_20060511_134300-0112 ;;
+`sentenceItem; `swl -> itm:ChinaSpace -> Most experts believe China intends to develop a small space station of its own over the next several years. -> log ;;
+`udref -> en_ewt-ud-train -> newsgroup-groups.google.com_FOOLED_7554c5ce34a5a49e_ENG_20051012_144800-0020 ;;
+`sentenceItem; `swl -> itm:tastings -> Check out their wine tastings every Friday night! -> log ;;
+`udref -> en_ewt-ud-train -> reviews-322225-0005 ;;
+`sentenceItem; `swl -> itm:tag -> For each start tag , there is a corresponding end tag. -> log ;;
+`udref -> en_lines-ud-train -> 166 ;;
+`sentenceItem; `swl -> itm:Warhol -> Each collection donated by the Andy Warhol Photographic Legacy Program holds Polaroids of well-known celebrities. -> log ;;
+`udref -> en_gum-ud-train -> GUM_news_warhol-35 ;;
+`sentenceList`
+
+These sentences have straightforward logical structure, in terms of 
+how they establish topical foci (`i.one of every 35,000 births`/; 
+`i.as many as 100 million people`/; 
+`i.Many Taliban`/; `i.every Friday night`/; `i.For each start tag`/), 
+and how predicates or references are bound together to create more 
+precise significations (`i.the tropics and subtropics`/; 
+`i.in Mujahedeen schools in Ashraf`/; `i.a corresponding end tag`/).
+Properties ascribed to subject foci are neatly drawn, both in 
+conveying the property intended and its bearer, according to 
+the sentence's terms: `i.the most common tumour found in babies`/; 
+`i.a leading cause of illness and death`/; 
+`i.China intends to develop a small space station`/; 
+`i.holds Polaroids of well-known celebrities`/.  With 
+aggregate foci and/or quantification, there is an unambiguous 
+framing of predication and quantifier scope %-- Each collection 
+has its set of Polaroids; the set of Karzai voters, Dengue infections, 
+birth tumours, etc., are crisply figured.
+`p`
+
+`p.
+For many philosophers of language, identifying similar 
+logical structuration is an intrinsic aspect of 
+coming to terms with human language in general.  This paradigm 
+also reinforces the goal of Artificial Intelligent Natural Language Processing, 
+because computers can certainly engage in the kind of 
+symbolic-logical reasoning outlining signified meanings in cases 
+where language reciprocates propositional morphology very clearly.  
+The problem is that language artifacts very often cloak their 
+logical core, such that examples like (`ref<itm:tumour>;)-(`ref<itm:Warhol>;) 
+are not representative of language as a whole.  Logical patterns
+may certainly be present, but they are not necessarily 
+structurally reproduced in surface-level formations; rather a 
+sentences' propositional content may depend on a subtle 
+interpretive trajectory.  I will present examples throughout this 
+paper, but a few further corpus items are reasonable 
+case-studies: 
+
+
+`sentenceList,
+`sentenceItem; `swl -> itm:ants -> A furry black band of ants led up a cupboard door to some scrap that had flicked from a plate. -> sem ;;
+`udref -> en_lines-ud-train -> 2157 ;;
+`sentenceItem; `swl -> itm:current-waiting-period -> The current waiting period is eight weeks. -> sem ;;
+`udref -> en_pud -> n01050009 ;;
+`sentenceItem; `swl -> itm:immersed -> I think that's why they immersed themselves in pattern and colour. -> sem ;;
+`udref -> en_pud -> n01087018 ;;
+`sentenceItem; `swl -> itm:princess -> With her appearance finalized, Jasmine became Disney's first non-white princess as opposed to being of European heritage. -> sem ;;
+`udref -> en_pud -> w01119076vs
+`sentenceList`
+
+It requires a certain cognitive flexibility to understand a band of ants as `q.flurry`/, or 
+to parse the disjoint timeframes in `i.current waiting period`/.  In (`ref<itm:immersed>;), 
+the presumed sense of `q.immerse` transcends any immediate, perceptual immersion, 
+instead involving scholarship or engagement with artistic form; and (`ref<itm:princess>;) 
+depends on us understanding the meaning of temporality in Jasmine's appearance being 
+`i.finalized`/, and also her `i.becoming` non-white.  As a fictional character, 
+discourse about Jasmine can be evaluated in the time-frame of her artistic 
+creation, distinct from the fictional time of her narrated world.   
+`p`
+
+`p.
+I think the intended propositional content in (`ref<itm:ants>;)-(`ref<itm:princess>;) 
+is no less evident than in (`ref<itm:tumour>;)-(`ref<itm:Warhol>;); however, interpreting 
+the topical foci and predicate attributions constituting such 
+propositional content requires a holistic reading whose compositional 
+structure is not recapitulated in the sentence-forms themselves.  
+In the latter examples, then, merely notating propositional 
+content in logical fashion does not yield a very informative 
+`i.linguistic` analysis, since it does not address the key question 
+of `i.how` the sentences signify those propositions. 
+`p`
+
+`p.
+I propose to use the term `q.logicomorphic` for sentence in the former vein; 
+in such cases, pointing out propositional content is linguistically 
+useful because we can treat that content as a prototype for 
+sentence organization.  That is, propositional content is not only 
+`i.holistically` signified but, in its logical structure, sheds 
+light on pattern in the language.  The purpose of phraseology 
+like `i.most common tumour`/, `i.Many Taliban living in Afghanistan`/, 
+`i.Most of the girls I was meeting`/, etc., is to circumscribe 
+a focus or a property suitable for predication, and we can 
+logically model the tools used to do so: logical superlative (`i.most common`/), 
+assertions of magnitude (`i.Many`/, `i.Most of`/), refining an multiplicity 
+with some further criteria (`i.the girls I was meeting`/, 
+`i.Taliban living in Afghanistan`/), and so forth.  These are 
+`q.logicomorphic` constructions in that we can read the logical 
+structure of signified propositional content as a direct cause 
+of the given phrasal morpholgy.
+`p`
+
+`p.
+On the other hand, I call examples like (`ref<itm:ants>;)-(`ref<itm:princess>;) 
+`q.interpretive` because the sentences' propositional content, with 
+its logical structure, does not explain the compositional 
+rationale for the explicit linguistic form: we cannot read any 
+pattern in the logic as a direct motivation for how the 
+sentence is pieced together.  The spectrum between 
+`i.logicomorphic` and `i.interpretive` represents different 
+strategies by which language is composed in anticipation of 
+its cognitive reception, with the eventual goal of 
+establishing a signified propositional content, but in different ways.  
+On the logicomorphic side, logical form informs language directly; 
+on the interpretive side, the actual rationale for 
+compositional structures transcends exact predicative structure 
+%-- a more perceptual or indirect figuring of topical 
+focus, for instance, or a more elliptical construal of 
+predicate attributes, leaving the hearer to piece together the 
+final propositional via some pragmatic or extralinguistic calculation.   
+`p`
+
+`p.
+Accordingly, the `i.logicomorphic`//`i.interpretive` distinction %-- along with the 
+overall contrast between linguistic and extralinguistic 
+aspects of meaning %-- are contrasts between sentences that become manifest 
+in the compositional maxims evident at subsentence (phrasal and 
+inter-word) scales.  We can apply all four criteria to 
+estimate the cognitive as well as syntactic and semantic 
+paradigms in effect for given inter-word pairs and phrasal structure; 
+identifying sentences as logicomorphic or interpretive propagates down 
+to how phrasal and interword patterns should be analyzed.  
+With this in mind, having presented certain claims as to the 
+holistic nature of sentences `visavis; propositional content, 
+I will now switch attention to the composition of 
+sentences from the interword level upward. 
 `p`
 
 

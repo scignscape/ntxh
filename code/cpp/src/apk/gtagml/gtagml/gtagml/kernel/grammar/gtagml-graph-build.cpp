@@ -151,7 +151,7 @@ void GTagML_Graph_Build::check_tile_acc(Acc_Mode new_mode)
 
  caon_ptr<tNode> ws_defer_node = nullptr;
 
- if(trim == "%-%")
+ if(trim == "%-%" || trim == "---")
    trim.clear();
 
  else if(trim.endsWith("-."))
