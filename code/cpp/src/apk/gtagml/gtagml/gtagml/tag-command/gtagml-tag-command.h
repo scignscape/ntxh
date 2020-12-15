@@ -83,6 +83,8 @@ public:
   bool is_provisional_multi_parent:1;
 
   bool is_fiat:1;
+  bool tile_is_quasi_fiat:1;
+
   bool marked_main:1;
 
   bool needs_sdi_mark:1;

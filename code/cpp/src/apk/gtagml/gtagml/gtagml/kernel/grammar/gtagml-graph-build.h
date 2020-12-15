@@ -186,7 +186,7 @@ public:
 
  void multi_arg_transition_to_main_tile();
 
- void multi_arg_transition(QString wmi, QString fiat, 
+ void multi_arg_transition(QString wmi, QString inner_wmi, QString fiat,
    QString arg_marker, QString carried_arg_marker = {});
 
  caon_ptr<GTagML_Attribute_Tile> complete_html_tag_command_attribute();
@@ -195,13 +195,16 @@ public:
 
  caon_ptr<GTagML_Raw_Tile> make_new_raw_tile(QString format, QString value);
 
- void tag_command_entry_multi(QString wmi, QString tag_command,
+ void tag_command_entry_multi(QString wmi,
+   QString inner_wmi, QString tag_command,
    QString tag_body_follow, QString fiat, QString first_arg_wmi, QString first_arg_marker);
 
- void tag_command_entry_inside_multi(QString wmi, QString fiat,  QString tag_command, QString arg_marker, 
-QString* carried_arg_marker = nullptr, QString argument = QString(), QString name = QString());
+ void tag_command_entry_inside_multi(QString wmi, QString inner_wmi,
+   QString fiat,  QString tag_command, QString arg_marker,
+   QString* carried_arg_marker = nullptr, QString argument = QString(), QString name = QString());
 
- void tag_command_entry_inline(QString wmi, QString fiat, QString tag_command,
+ void tag_command_entry_inline(QString wmi, QString inner_wmi,
+   QString fiat, QString tag_command,
    QString tag_body_follow, QString argument = QString());
 
  void gtag_command_entry_inline(QString tag_command,

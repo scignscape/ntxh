@@ -404,11 +404,9 @@ void GTagML_Output_Latex::generate_tag_command_entry(const GTagML_Output_Bundle&
 
   if(gtc->flags.is_multi_mandatory)
   {
-
   }
   else if(gtc->flags.is_multi_optional)
   {
-
   }
   else
   {
@@ -526,6 +524,8 @@ void GTagML_Output_Latex::generate_tag_command_leave(const GTagML_Output_Bundle&
 // }
 
  if(gtc->flags.force_opt_split)
+   ;
+ else if(gtc->flags.is_non_wrapped)
    ;
  else if(gtc->flags.is_multi_optional)
    b.qts << ']';
@@ -733,6 +733,8 @@ void GTagML_Output_Latex::generate_tag_body_leave(const GTagML_Output_Bundle& b,
 
  if(gtc->flags.force_opt_split)
    ;
+ else if(gtc->flags.is_non_wrapped)
+   ;
  else if(gtc->flags.is_multi_optional)
    b.qts << '[';
  else if(gtc->flags.is_multi_mandatory)
@@ -743,6 +745,10 @@ void GTagML_Output_Latex::generate_tag_body_leave(const GTagML_Output_Bundle& b,
    b.qts << '}';
  else
    b.qts << '{';
+
+//?
+ if(gtc->flags.tile_is_quasi_fiat)
+   b.qts << '\\';
 
   // here?
  check_generate_tag_command_argument(b, *gtc);

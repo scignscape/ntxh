@@ -1,0 +1,24 @@
+$$ document-title := Cognitive Transform Grammar
+$$ local-title := section2
+
+$& AnneVilnat %% (1:main) 33081 33167
+$& AsherPustejovsky example%(1:main) 29022 29050,%%p.%%5 %3
+$& AsherPustejovsky %% (1:main) 61128 61129
+$& BarkerShanTG %% (1:main) 3139 3265
+$& ChoeCharniak %% (1:main) 7482 7482
+$& Gardenfors p.%%4 (1:main) 43813 43986
+$& JamesPustejovsky %% (1:main) 61117 61127
+$& JanVanEijck %% (1:main) 10182 10371
+$& KitFine %% (1:main) 46455 46464
+$& KiyoshiSudo %% (1:main) 7481 7481
+$& KubotaLevine %% (1:main) 3266 3267
+$& MeryMootRetore p.%%4 (1:main) 34452 34463
+$& OsborneMaxwell %% (1:main) 20956 21113
+$& Pinker %% (1:main) 33003 33080
+$& Ramstead p.%%38 (1:main) 44974 45199
+$& RikVanNoord %% (1:main) 10372 10374
+$& Rossi p.%(1:main) 4636 4847 %3
+$& SivaReddy %% (1:main) 7329 7480
+$& ZhaohuiLuo %% (1:main) 34674 34682
+$& ZhaohuiLuoSignatures %% (1:main) 34683 34685
+

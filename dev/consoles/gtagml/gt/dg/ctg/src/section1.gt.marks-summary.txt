@@ -1,0 +1,11 @@
+$$ document-title := Cognitive Transform Grammar
+$$ local-title := section1
+
+$& BiskriDescles %% (1:main) 5974 6264
+$& Descles2010 %% (1:main) 46290 46485
+$& EstherPascual p.%%9 (1:main) 37555 37559
+$& Fauconnier %% (1:main) 39278 39330
+$& LangackerFoundations pp.%%119%%and%%128 (1:main) 37529 37540
+$& LineBrandt p.%%189 (1:main) 37541 37554
+$& PerAageBrandt %% (1:main) 39331 39331
+

@@ -150,19 +150,32 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
  add_rule( flags_all_(parse_context ,inside_multi_generic),
    gtagml_context,
    "cmd-multi-arg-transition",
-   " (?<fiat-or-cmd> (?: (?: :: ) | = ) ) (?<main> -{1,2}>{1,2}) "
+   " (?<fiat-or-wmi> (?: (?: :: ) | [.] | = ) ) (?<main> -{1,2}>{1,2}) "
    " \\s+ (?<cmd> .valid-tag-command-name. ) "
     ,[&]
  {
   QString m = p.matched("main");
   QString cmd = p.matched("cmd");
-  QString fiat = p.matched("fiat-or-cmd");
-  graph_build.multi_arg_transition({}, {}, m);
-  if(fiat == "=")
-    graph_build.tag_command_entry_inline("::", fiat, cmd, ";", {});
+  QString fiat_or_wmi = p.matched("fiat-or-wmi");
+
+  if(fiat_or_wmi == ".")
+  {
+   graph_build.multi_arg_transition({}, {}, {}, m);
+//   graph_build.tag_command_entry_inline({}, {}, //fiat_or_wmi,
+//                                        {}, {}, {});
+//?   graph_build.tile_acc(cmd);
+  }
   else
-    graph_build.tag_command_entry_inline(fiat, {}, cmd, ";", {});
+  {
+   graph_build.multi_arg_transition({}, {}, {}, m);
+
+   if(fiat_or_wmi == "=")
+     graph_build.tag_command_entry_inline("::", {}, "==", cmd, ";", {});
+   else
+     graph_build.tag_command_entry_inline(fiat_or_wmi, {}, {}, cmd, ";", {});
+  }
  });
+
 
  add_rule( flags_all_(parse_context ,inside_multi_generic),
    gtagml_context,
@@ -177,14 +190,14 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
    gtagml_context,
    "multi-arg-transition",
    " \\s+ (?<wmi> .tag-command-wrap-mode-indicator.? ) "
-   " (?<fiat> =?)  "
+   " (?<fiat> [=,]?)  "
    " (?<main> -{1,2}>{1,2} ) \\s+ "
    ,[&]
  {
   QString wmi = p.matched("wmi");  
   QString fiat = p.matched("fiat");  
   QString m = p.matched("main");
-  graph_build.multi_arg_transition(wmi, fiat, m);
+  graph_build.multi_arg_transition(wmi, {}, fiat, m);
  });
 
  add_rule( flags_all_(parse_context ,inside_multi_parent_semis),
@@ -212,25 +225,36 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
    " ` (?<wmi> .tag-command-wrap-mode-indicator.? ) "
    " (?<tag-command> .valid-tag-command-name. ) "
    " (?<tag-body-follow> [,.]?) "
-   " \\s+ (?<fiat-or-cmd> (?: (?: :: ) | = ) ) "
+   " \\s+ (?<fiat-or-wmi> (?: (?: :: ) | [.] | = ) ) "
    " (?<first-arg-marker> -{1,2} >{1,2} ) \\s+ (?<cmd> .valid-tag-command-name. )"
    ,[&]
  {
   QString wmi = p.matched("wmi");
+
   QString tag_command = p.matched("tag-command");
   QString tag_body_follow = p.matched("tag-body-follow");
-  QString fiat = p.matched("fiat-or-cmd");
+
+  QString fiat_or_wmi = p.matched("fiat-or-wmi");
   QString first_arg_marker = p.matched("first-arg-marker");
-  graph_build.tag_command_entry_multi(wmi, tag_command,
-    tag_body_follow, {}, {}, first_arg_marker);
+
   QString cmd = p.matched("cmd");
 
-  if(fiat == "=")
-    graph_build.tag_command_entry_inline("::", fiat, cmd, ";", {});
+  if(fiat_or_wmi == ".")
+  {
+   graph_build.tag_command_entry_multi(wmi, fiat_or_wmi, tag_command,
+     tag_body_follow, {}, {}, first_arg_marker);
+   graph_build.tile_acc(cmd);
+  }
   else
-    graph_build.tag_command_entry_inline(fiat, {}, cmd, ";", {});
+  {
+   graph_build.tag_command_entry_multi(wmi, {}, tag_command,
+     tag_body_follow, {}, {}, first_arg_marker);
 
-  //graph_build.tag_body_leave();
+   if(fiat_or_wmi == "=")
+     graph_build.tag_command_entry_inline("::",  {}, fiat_or_wmi, cmd, ";", {});
+   else
+     graph_build.tag_command_entry_inline(fiat_or_wmi, {}, {}, cmd, ";", {});
+  }
  });
 
 
@@ -247,7 +271,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
   QString tag_command = p.matched("tag-command");
   QString tag_body_follow = p.matched("tag-body-follow");
   QString first_arg_marker = p.matched("first-arg-marker");
-  graph_build.tag_command_entry_multi(wmi, tag_command, 
+  graph_build.tag_command_entry_multi(wmi, {}, tag_command,
     tag_body_follow, {}, fwmi, first_arg_marker);
     //graph_build.tag_body_leave();
  });
@@ -262,7 +286,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
   QString tag_command = p.matched("tag-command");
   QString tag_body_follow = p.matched("tag-body-follow");
   QString argument = p.matched("argument");
-  graph_build.tag_command_entry_inline(wmi, {}, tag_command, tag_body_follow, argument);
+  graph_build.tag_command_entry_inline(wmi,  {}, {}, tag_command, tag_body_follow, argument);
   //graph_build.tag_body_leave();
  });
 
@@ -281,7 +305,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
   argument.replace('}', " ");
   argument.replace(']', " ");
 
-  graph_build.tag_command_entry_inline(wmi, {}, tag_command, ";", argument);
+  graph_build.tag_command_entry_inline(wmi, {}, {}, tag_command, ";", argument);
   //graph_build.tag_body_leave();
  });
 

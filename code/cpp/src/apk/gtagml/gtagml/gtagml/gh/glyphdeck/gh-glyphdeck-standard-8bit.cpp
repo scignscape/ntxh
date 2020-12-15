@@ -1275,6 +1275,8 @@ void get_latex_192_to_255(u1 gp, QString& result)
 
 QString GH_Glyphdeck_Standard_8bit::get_latex_representation(u1 gp)
 {
+ if(gp == 36)
+   return "\\_";
  static char the_char = '?';
  if(gp < 64)
  {

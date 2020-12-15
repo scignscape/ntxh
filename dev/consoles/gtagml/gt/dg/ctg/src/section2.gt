@@ -1,4 +1,9 @@
 
+`copy<@/gtagml/dgdb/ctg/ngml/gen>;
+`document-title<Cognitive Transform Grammar>;
+`local-title<section2>;
+
+
 `section.Functional Type Theory in Cognitive and Dependency Grammars`
 `label<s2>;
 `p.
@@ -111,8 +116,10 @@ operand.  The result is a new operand or a new operator.
 This operation can be repeated as many times as necessary 
 to construct the linguistic expressions' functional semantic 
 representation.
-\cite[p. 1]{Rossi}
+`cite<[p. 1] Rossi>;
 `quote`
+
+ |.|
 
 So, e.g., an adverb becomes a function which takes a verb and produces another verb; 
 an adjective takes a noun and produces another noun; 
@@ -130,7 +137,7 @@ unique precedence ordering on its terminal elements
 tree, or its nodes when viewed as a graph), which 
 can be uncovered via a straightforward algorithm 
 (one implementation is part of this paper's data set; 
-see the `q.parse\_sxp` method in file ntxh-udp-sentence.cpp).
+see the `q.parse_sxp` method in file `textbf.ntxh-udp-sentence.cpp`/).
 `p`
 
 `p.
@@ -352,10 +359,12 @@ assuming we are using type-theoretic principles).  I will
 use some extra markings (in diagrams below) for more specific versions of 
 nouns.
 `footnote`
+ |.|
 The notation is consistent so long as each constituent of a verb 
 phrase has a fixed index number.`footnote.The subject at position one, for instance; 
 direct object at position two; and indirect object at position three.
-`footnote`    
+`footnote`  
+ |.|  
 Transforms (potentially with two or more arguments) then combine lexemes 
 %-- having the right signatures %-- with one or more words or phrases. 
 Type analysis recognizes criteria on these combinations, insofar 
@@ -430,7 +439,7 @@ context; consider Langacker's example:
 
 `sentenceList,
 `sentenceItem; `swl -> --- -> Three times, students asked an interesting question.
-->> `usebox<[\Langackerboxi]>; -> sco ;;
+->> `usebox =-> Langackerboxi ;; -> sco ;;
 `sentenceItem; `swl -> --- -> Three times, a student asked an interesting question. -> sco ;;
 `sentenceList`
 
@@ -442,6 +451,7 @@ a gender-neutral singular reading) with, say, `i.his parents` (at a
 boy's school), a valid substitution in (`ref<after>;)-(`ref<parents>;)
 but not (`ref<students>;)-(`ref<office>;).  
 `p`
+
 
 `p.
 Cases like `i.Student after student` (or consider `i.time after time`/, 
@@ -618,9 +628,8 @@ semantics, because its primary manifestation in language is via agreement
 from Bordeaux).  But what about distinctions between natural and constructed objects,
 or animate and inanimate kinds, or social institutions and natural
 systems, matters more of grammar or of lexicon?  
-
-
 `p`
+
 
 `p.
 For example, the template `i.I believed
@@ -630,7 +639,7 @@ certain `i.type` of noun, something that can be interpreted
 as an idea or proposition of some kind (`qmarkdubious;`i.I believed flower`/).
 Asher and Pustejovsky point out the anomaly in a sentence
 like `q.Bob's idea weighs five pounds`
-\cite[example 2, p. 5]{AsherPustejovsky}, which
+`cite<[example 2, p. 5] AsherPustejovsky>;, which
 possesses a flavor of unacceptability that feels akin to
 Part of Speech errors but are not in fact syntactic
 errors.  The object of `i.weigh` is `q.five pounds` and
@@ -657,6 +666,7 @@ idioms (see `i.flowers want sunshine`/, `i.my computer died`/,
 by assigning sentient states to inert things).  This is one way of
 reading the type-theoretic semantic project.
 `p`
+
 
 `p.
 Certainly `q.Ontological` qualities of signifieds engender
@@ -727,14 +737,17 @@ Type-theoretic semantics can also apply Ontological tropes to unpack the overlap
 like `i.material object` or `i.place` or `i.institution`/.
 This mode of analysis is especially well illustrated when competing senses
 collide in the same sentence.  Slightly modifying two examples:`footnote.
-\cite[p. 40]{ChatzikyriakidisLuo} (former) and
-\cite[p. 4]{MeryMootRetore} (latter).
+`cite<[p. 40] ChatzikyriakidisLuo>; (former) and
+`cite<[p. 4] MeryMootRetore>; (latter).
 `footnote`
 
+ 
 `sentenceList,
-`sentenceItem; `swl ->  -> The newspaper you are reading is being sued. -> lex}
-`sentenceItem; `swl -> itm:Liverpool -> Liverpool, an important harbor, built new docks. -> lex}
+`sentenceItem; `swl -> --- -> The newspaper you are reading is being sued. -> lex ;;
+`sentenceItem; `swl -> itm:Liverpool -> Liverpool, an important harbor, built new docks. -> lex  ;;
 `sentenceList`
+
+ |.|
 
 Both have a mid-sentence shift between senses, which is analyzed
 in terms of `q.type coercions` (see also `cite<ZhaohuiLuo>;
@@ -744,10 +757,12 @@ is how it correctly predicts that such coercions are not guaranteed to
 be accepted:
 
 `sentenceList,
-`sentenceItem; `swl ->  -> The newspaper fired a reporter and fell off
-the table.}[(?)]{lex}
-`sentenceItem; `swl ->  -> Liverpool beat Tottenham and built new docks.}[(?)]{lex}
+`sentenceItem; `swl -> --- -> The newspaper fired a reporter and fell off
+the table. ->> (?) -> lex ;;
+`sentenceItem; `swl -> --- -> Liverpool beat Tottenham and built new docks. ->> (?) -> lex ;;
 `sentenceList`
+ 
+ |.|
 
 (again, slightly modifying the counter-examples).  Type coercions are
 `i.possible` but not `i.inevitable`/.  Some word-senses `q.block` certain coercions
@@ -768,9 +783,11 @@ attributing mental states forces us to conceive of their referents
 in those terms:
 
 `sentenceList,
-`sentenceItem; `swl ->  -> Liverpool wants to sign a left-footed striker. -> ont ;;
-`sentenceItem; `swl ->  -> That newspaper plans to fire its editorial staff. -> ont ;;
+`sentenceItem; `swl -> --- -> Liverpool wants to sign a left-footed striker. -> ont ;;
+`sentenceItem; `swl -> --- -> That newspaper plans to fire its editorial staff. -> ont ;;
 `sentenceList`
+
+ |.|
 
 This `i.can` be analyzed as `q.type coercions`/; but the type-theoretic machinery should contribute
 more than just obliquely stating linguistic wisdom, such as
@@ -793,6 +810,7 @@ new striker` %-- purporting to switch from the city to the Football Club).  The 
 such juxtapositions appear to reveal a system of types with some parallels to
 those in formal settings, like computer languages.
 `p`
+
 
 `p.
 In short, `q.Ontological` types like `i.institution` or `i.place` serve in some
@@ -907,7 +925,7 @@ Ronald Langacker, and Peter `Gardenfors; %-- along with, as
 and others alongside `q.a French semiotic tradition, 
 exemplified by [Jean-Pierre] Descl\'es ... and 
 [Jean] Petitot-Cocorda ... which shares many features with the 
-American (mainly Californian) group` \cite[p. 4]{Gardenfors}.  
+American (mainly Californian) group` `cite<[p. 4] Gardenfors>;.  
 `footnote`  At the same time, Petitot also links with a 
 tradition that combines elements of phenomenology and 
 Analytic Philosophy, represented by philosophers like 
@@ -932,7 +950,7 @@ words, the `q.constitution` of objects).
 Petitot employs differential geometry and morphodynamics
 to model phenomenal experience, and Smith uses formal structures from
 mereotopology (the theory of parts, wholes, and their boundaries)
-to a similar effect. \cite[p. 38]{Ramstead}
+to a similar effect. `cite<[p. 38] Ramstead>;
 `quote`
 `footnote` 
 `q.Cognitive` in these contexts 
@@ -951,6 +969,7 @@ exists `i.some` computable core of cognition, which scientists
 can unlock to build powerful `q.Artificial General Intelligence`/.
 `footnote`   
 `p`
+
 
 `p.
 Cognitive linguistics can be called `q.speculative` because its 
@@ -1093,6 +1112,7 @@ includes language.  We are not robots experiencing the
 world as a tableau of simply discrete, integral object-`q.things`/.
 `p`
 
+
 `p.
 Language serves as a guide to negotiating the complexities of 
 perceptual foci in inter-personal environments.  
@@ -1220,6 +1240,7 @@ location in first-personal terms; that is, in terms
 of the actions the speaker is taking or anticipates 
 taking.   
 `p`
+
 
 `p.
 This analysis then implies that (`ref<itm:start>;) is 
@@ -1455,7 +1476,7 @@ of the painting directly relevant to the present conversation?
 `p.
 A statement like (`ref<itm:crate>;) (the speaker being
 `q.in the crate on the right`/) does not have the more
-`q.autobiographical` reading, since (absent some bizarry
+`q.autobiographical` reading, since (absent some bizarre
 imaginary scene) there is no status or reputation attached
 to which crate is carrying your paintings.  But the second kind of reading,
 where specific location is operationally relevant,
@@ -1545,3 +1566,5 @@ from both semantic and reference-theoretic angles.
 I will focus on this issue of logicality %-- both its applicability 
 and its limits %-- in the next section.
 `p`
+
+

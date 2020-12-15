@@ -387,8 +387,8 @@ void GTagML_Graph_Build::enter_tag_command_with_predicate_vector(QString tag_com
  bool string_follow = (connector_prefix.startsWith('+'));
  bool subject_claim = (connector_prefix.endsWith('['));
 
- caon_ptr<GTagML_Tag_Command> ntc = make_new_tag_command(tag_command, {});
- caon_ptr<tNode> node = make_new_node(ntc);
+ caon_ptr<GTagML_Tag_Command> gtc = make_new_tag_command(tag_command, {});
+ caon_ptr<tNode> node = make_new_node(gtc);
 
  markup_position_.tag_command_entry(node);
 
@@ -418,16 +418,16 @@ caon_ptr<GTagML_Tag_Command> GTagML_Graph_Build::html_tag_instruction(QString pr
 {
  check_tile_acc();
 
- caon_ptr<GTagML_Tag_Command> ntc = make_new_tag_command(tag_command, {});
+ caon_ptr<GTagML_Tag_Command> gtc = make_new_tag_command(tag_command, {});
  if(prefix == "!")
-  ntc->flags.is_tag_assertion = true;
+  gtc->flags.is_tag_assertion = true;
  else if(prefix == "?")
-  ntc->flags.is_tag_query = true;
+  gtc->flags.is_tag_query = true;
 
- ntc->flags.is_html = true;
- ntc->flags.is_understood_auto_closed = true;
+ gtc->flags.is_html = true;
+ gtc->flags.is_understood_auto_closed = true;
 
- caon_ptr<tNode> node = make_new_node(ntc);
+ caon_ptr<tNode> node = make_new_node(gtc);
 
  caon_ptr<tNode> current_node = markup_position_.tag_command_instruction(node);
  tag_body_leave();
@@ -435,7 +435,7 @@ caon_ptr<GTagML_Tag_Command> GTagML_Graph_Build::html_tag_instruction(QString pr
  check_tile_acc();
  markup_position_.restore_current_node(current_node);
 
- return ntc;
+ return gtc;
 
 }
 
@@ -452,29 +452,29 @@ caon_ptr<GTagML_Tag_Command> GTagML_Graph_Build::html_tag_command_entry(QString 
   return nullptr;
  }
 
- caon_ptr<GTagML_Tag_Command> ntc = make_new_tag_command(tag_command, {});
- caon_ptr<tNode> node = make_new_node(ntc);
+ caon_ptr<GTagML_Tag_Command> gtc = make_new_tag_command(tag_command, {});
+ caon_ptr<tNode> node = make_new_node(gtc);
 
  markup_position_.tag_command_entry(node);
  parse_context_.flags.inside_html_tag_body = true;
- ntc->flags.is_html = true;
+ gtc->flags.is_html = true;
 
- return ntc;
+ return gtc;
 
 }
 
-void GTagML_Graph_Build::check_non_or_left_wrapped(QString wmi, caon_ptr<GTagML_Tag_Command> ntc)
+void GTagML_Graph_Build::check_non_or_left_wrapped(QString wmi, caon_ptr<GTagML_Tag_Command> gtc)
 {
  if(wmi.startsWith(':'))
  {
   if(wmi.startsWith("::"))
-    ntc->flags.is_non_wrapped = true;
+    gtc->flags.is_non_wrapped = true;
   else
-    ntc->flags.is_left_wrapped = true;
+    gtc->flags.is_left_wrapped = true;
  }
  if(wmi.endsWith('.'))
  {
-  ntc->flags.has_non_wrapped_space = true;
+  gtc->flags.has_non_wrapped_space = true;
  } 
 }
 
@@ -482,22 +482,22 @@ caon_ptr<GTagML_Tag_Command> GTagML_Graph_Build::tag_command_entry(QString wmi,
   QString prefix, QString tag_command, QString argument, QString parent_tag_type)
 {
  check_tile_acc();
- caon_ptr<GTagML_Tag_Command> ntc = make_new_tag_command(tag_command, 
+ caon_ptr<GTagML_Tag_Command> gtc = make_new_tag_command(tag_command,
    argument, parent_tag_type);
 
- check_non_or_left_wrapped(wmi, ntc);
+ check_non_or_left_wrapped(wmi, gtc);
 
 //?
 // if(prefix == "/")
-//   ntc->flags.is_environment = true;
+//   gtc->flags.is_environment = true;
 
- caon_ptr<tNode> node = make_new_node(ntc);
+ caon_ptr<tNode> node = make_new_node(gtc);
 
  RELAE_SET_NODE_LABEL(node, tag_command);
  markup_position_.tag_command_entry(node);
  parse_context_.flags.inside_tag_body = true;
 
- return ntc;
+ return gtc;
 }
 
 
@@ -557,11 +557,11 @@ GTagML_Document_Light_Xml* GTagML_Graph_Build::get_light_xml()
 
 void GTagML_Graph_Build::multi_arg_transition_to_main_tile()
 {
- multi_arg_transition({}, {}, "-->", "=>");
+ multi_arg_transition({}, {}, {}, "-->", "=>");
   // // need to mark as main tile somehow ...
 }
 
-void GTagML_Graph_Build::multi_arg_transition(QString wmi, 
+void GTagML_Graph_Build::multi_arg_transition(QString wmi, QString inner_wmi,
   QString fiat, QString arg_marker, QString carried_arg_marker)
 {
  if(flags.active_attribute_sequence)
@@ -569,20 +569,20 @@ void GTagML_Graph_Build::multi_arg_transition(QString wmi,
   flags.active_attribute_sequence = false;
   if(caon_ptr<tNode> cn = markup_position_.current_node())
   {
-   if(caon_ptr<GTagML_Tag_Command> ntc = cn->GTagML_tag_command())
+   if(caon_ptr<GTagML_Tag_Command> gtc = cn->GTagML_tag_command())
    {
-    CAON_PTR_DEBUG(GTagML_Tag_Command ,ntc)
+    CAON_PTR_DEBUG(GTagML_Tag_Command ,gtc)
     check_tile_acc();
     markup_position_.attribute_sequence_leave();
-    ntc->flags.is_multi_parent = true;
+    gtc->flags.is_multi_parent = true;
 
-    //if(ntc->flags.is_provisional_multi_parent_semis)
-    //?ntc->flags.is_multi_parent_semis = true;
-    if(ntc->flags.anticipate_semis)
+    //if(gtc->flags.is_provisional_multi_parent_semis)
+    //?gtc->flags.is_multi_parent_semis = true;
+    if(gtc->flags.anticipate_semis)
       parse_context_.flags.inside_multi_parent_semis = true;
     else
       parse_context_.flags.inside_multi_parent = true;
-    tag_command_entry_inside_multi(wmi, fiat, ntc->name(), 
+    tag_command_entry_inside_multi(wmi, {}, fiat, gtc->name(),
       arg_marker);
     return;
    }
@@ -590,11 +590,13 @@ void GTagML_Graph_Build::multi_arg_transition(QString wmi,
  }
  tag_command_leave();
  QString tag_command = markup_position_.current_tag_command_name();
- tag_command_entry_inside_multi(wmi, fiat, tag_command, 
+ tag_command_entry_inside_multi(wmi, {}, fiat, tag_command,
    arg_marker, &carried_arg_marker);
 }
 
-void GTagML_Graph_Build::tag_command_entry_inside_multi(QString wmi, QString fiat, 
+void GTagML_Graph_Build::tag_command_entry_inside_multi(QString wmi,
+  QString inner_wmi,
+  QString fiat,
   QString tag_command, QString arg_marker, 
   QString* carried_arg_marker, QString argument, QString name)
 {
@@ -604,76 +606,81 @@ void GTagML_Graph_Build::tag_command_entry_inside_multi(QString wmi, QString fia
     //    for debugging ...
    nn = QString("%1 %2").arg(tag_command).arg(arg_marker);
 
- caon_ptr<GTagML_Tag_Command> ntc = make_new_tag_command(nn, argument);
+ caon_ptr<GTagML_Tag_Command> gtc = make_new_tag_command(nn, argument);
  if(name.isEmpty())
-   ntc->flags.autogen_multi_name = true;
+   gtc->flags.autogen_multi_name = true;
 
  if(carried_arg_marker && (*carried_arg_marker == "=>"))
-   ntc->flags.marked_main = true;
+   gtc->flags.marked_main = true;
 
- check_non_or_left_wrapped(wmi, ntc);
+ check_non_or_left_wrapped(wmi, gtc);
 
  if(fiat == '=')
  {
-  ntc->flags.is_fiat = true;
-  if(!ntc->flags.is_left_wrapped)
-    ntc->flags.is_non_wrapped = true;
+  gtc->flags.is_fiat = true;
+  if(!gtc->flags.is_left_wrapped)
+    gtc->flags.is_non_wrapped = true;
  }
 
- caon_ptr<tNode> node = make_new_node(ntc);
+ if(inner_wmi == ".")
+   gtc->flags.tile_is_quasi_fiat = true;
+
+ caon_ptr<tNode> node = make_new_node(gtc);
 
  if(arg_marker == "->>")
  {
-  ntc->flags.is_multi_optional = true;
-  ntc->flags.multi_arg_layer = true;
+  gtc->flags.is_multi_optional = true;
+  gtc->flags.multi_arg_layer = true;
   markup_position_.await_optional(node);
   acc_mode_ = Acc_Mode::Arg_Tile;
  }
  else if(arg_marker == "-->")
  {
-  ntc->flags.is_multi_mandatory = true;
-  ntc->flags.multi_main_layer = true;
+  gtc->flags.is_multi_mandatory = true;
+  gtc->flags.multi_main_layer = true;
   markup_position_.await_mandatory(node);
   acc_mode_ = Acc_Mode::Main_Tile;
  }
  else if(arg_marker == "->")
  {
-  ntc->flags.is_multi_mandatory = true;
-  ntc->flags.multi_arg_layer = true;
+  gtc->flags.is_multi_mandatory = true;
+  gtc->flags.multi_arg_layer = true;
   markup_position_.await_mandatory(node);
   acc_mode_ = Acc_Mode::Arg_Tile;
  }
  else if(arg_marker == "-->>")
  {
-  ntc->flags.is_multi_optional = true;
-  ntc->flags.multi_main_layer = true;
+  gtc->flags.is_multi_optional = true;
+  gtc->flags.multi_main_layer = true;
   markup_position_.await_optional(node);
   acc_mode_ = Acc_Mode::Main_Tile;
  }
 }
 
-void GTagML_Graph_Build::tag_command_entry_multi(QString wmi, QString tag_command,
+void GTagML_Graph_Build::tag_command_entry_multi(QString wmi,
+  QString inner_wmi, QString tag_command,
   QString tag_body_follow, QString fiat, QString first_arg_wmi, QString first_arg_marker)
 {
  Tag_Body_Follow_Mode m = tag_body_follow.isEmpty() ? Normal
    : parse_tag_body_follow(tag_body_follow);
 
- caon_ptr<GTagML_Tag_Command> ntc = tag_command_entry(wmi, {}, 
+ caon_ptr<GTagML_Tag_Command> gtc = tag_command_entry(wmi, {},
    tag_command, {});
 
  if(m == Region)
-   ntc->flags.is_region = true;
+   gtc->flags.is_region = true;
 
- ntc->flags.has_entry = true;
+ gtc->flags.has_entry = true;
+
 
  tag_body_leave();
 
  if(tag_body_follow.isEmpty())
-   ntc->flags.anticipate_semis = true;
+   gtc->flags.anticipate_semis = true;
 
  if(first_arg_marker == "@")
  {
-  ntc->flags.is_provisional_multi_parent = true;
+  gtc->flags.is_provisional_multi_parent = true;
   markup_position_.prepare_attribute_sequence();
   parse_context_.flags.inside_attribute_sequence = true;
   parse_context_.flags.inside_multi_generic = true;
@@ -682,8 +689,8 @@ void GTagML_Graph_Build::tag_command_entry_multi(QString wmi, QString tag_comman
  }
  else
  {
-  ntc->flags.is_multi_parent = true;
-  tag_command_entry_inside_multi(first_arg_wmi, fiat, tag_command, first_arg_marker);
+  gtc->flags.is_multi_parent = true;
+  tag_command_entry_inside_multi(first_arg_wmi, inner_wmi, fiat, tag_command, first_arg_marker);
 
   parse_context_.flags.inside_multi_generic = true;
   if(tag_body_follow.isEmpty())
@@ -693,17 +700,28 @@ void GTagML_Graph_Build::tag_command_entry_multi(QString wmi, QString tag_comman
  }
 }
 
-void GTagML_Graph_Build::tag_command_entry_inline(QString wmi, QString fiat, QString tag_command,
- QString tag_body_follow, QString argument)
+void GTagML_Graph_Build::tag_command_entry_inline(QString wmi,
+  QString inner_wmi, QString fiat, QString tag_command,
+  QString tag_body_follow, QString argument)
 {
  Tag_Body_Follow_Mode m = parse_tag_body_follow(tag_body_follow);
  QString prefix;
 
- caon_ptr<GTagML_Tag_Command> ntc = tag_command_entry(wmi, prefix,
+ caon_ptr<GTagML_Tag_Command> gtc = tag_command_entry(wmi, prefix,
    tag_command, argument);
 
+ CAON_PTR_DEBUG(GTagML_Tag_Command ,gtc)
+
  if(fiat == "=")
-   ntc->flags.is_fiat = true;
+   gtc->flags.is_fiat = true;
+
+// if(inner_wmi == ".")
+//   gtc->flags.tile_is_quasi_fiat = true;
+
+
+//?
+// else if(fiat == "==")
+//   gtc->flags.is_fiat_inherited = true;
 
  switch(m)
  {
@@ -711,11 +729,11 @@ void GTagML_Graph_Build::tag_command_entry_inline(QString wmi, QString fiat, QSt
   tag_body_leave();
   break;
  case Region:
-  ntc->flags.is_region = true;
+  gtc->flags.is_region = true;
   tag_body_leave();
   break;
  case Empty:
-  ntc->flags.is_self_closed = true;
+  gtc->flags.is_self_closed = true;
   tag_body_leave();
   tag_command_leave(); break;
  }
@@ -727,7 +745,7 @@ void GTagML_Graph_Build::gtag_command_entry_inline(QString tag_command,
  Tag_Body_Follow_Mode m = parse_tag_body_follow(tag_body_follow);
  QString prefix;
 
- caon_ptr<GTagML_Tag_Command> ntc = tag_command_entry({}, prefix,
+ caon_ptr<GTagML_Tag_Command> gtc = tag_command_entry({}, prefix,
    tag_command, {});
 
  switch(m)
@@ -736,11 +754,11 @@ void GTagML_Graph_Build::gtag_command_entry_inline(QString tag_command,
   tag_body_leave();
   break;
  case Region:
-  ntc->flags.is_region = true;
+  gtc->flags.is_region = true;
   tag_body_leave();
   break;
  case Empty:
-  ntc->flags.is_self_closed = true;
+  gtc->flags.is_self_closed = true;
   tag_body_leave();
   tag_command_leave(); break;
  }
@@ -872,11 +890,11 @@ void GTagML_Graph_Build::tag_command_leave_multi(QString tag_command)
   check_tile_acc();
   markup_position_.confirm_tag_command_leave(node);
 
-  if(caon_ptr<GTagML_Tag_Command> ntc = node->GTagML_tag_command())
+  if(caon_ptr<GTagML_Tag_Command> gtc = node->GTagML_tag_command())
   {
-   CAON_PTR_DEBUG(GTagML_Tag_Command ,ntc)
+   CAON_PTR_DEBUG(GTagML_Tag_Command ,gtc)
 
-   if( (ntc->flags.is_multi_optional) || (ntc->flags.is_multi_mandatory) )
+   if( (gtc->flags.is_multi_optional) || (gtc->flags.is_multi_mandatory) )
    {
      // //  two leaves here because the first is an arg ...
     if(caon_ptr<tNode> node1 = markup_position_.tag_command_leave())
@@ -924,13 +942,13 @@ void GTagML_Graph_Build::check_html_tag_command_leave(QString tag_command, QStri
 
 void GTagML_Graph_Build::check_multi_parent_reset()
 {
- if(caon_ptr<GTagML_Tag_Command> ntc = markup_position_.get_current_tag_command())
+ if(caon_ptr<GTagML_Tag_Command> gtc = markup_position_.get_current_tag_command())
  {
-  CAON_PTR_DEBUG(GTagML_Tag_Command ,ntc)
-  if(ntc->flags.is_multi_parent || ntc->flags.is_multi_parent_inherited)
+  CAON_PTR_DEBUG(GTagML_Tag_Command ,gtc)
+  if(gtc->flags.is_multi_parent || gtc->flags.is_multi_parent_inherited)
   {
    parse_context_.flags.inside_multi_generic = true;
-   if(ntc->flags.anticipate_semis)
+   if(gtc->flags.anticipate_semis)
      parse_context_.flags.inside_multi_parent_semis = true;
    else
      parse_context_.flags.inside_multi_parent = true;
@@ -1198,12 +1216,12 @@ caon_ptr<GTagML_Graph_Build::tNode> GTagML_Graph_Build::make_new_node(caon_ptr<G
  return result;
 }
 
-caon_ptr<GTagML_Graph_Build::tNode> GTagML_Graph_Build::make_new_node(caon_ptr<GTagML_Tag_Command> ntc)
+caon_ptr<GTagML_Graph_Build::tNode> GTagML_Graph_Build::make_new_node(caon_ptr<GTagML_Tag_Command> gtc)
 {
- CAON_PTR_DEBUG(GTagML_Tag_Command ,ntc)
- caon_ptr<tNode> result = caon_ptr<tNode>( new tNode(ntc) );
+ CAON_PTR_DEBUG(GTagML_Tag_Command ,gtc)
+ caon_ptr<tNode> result = caon_ptr<tNode>( new tNode(gtc) );
  #ifdef RELAE_LABEL_NODES
- result->set_label(ntc->name());
+ result->set_label(gtc->name());
  #endif
  return result;
 }

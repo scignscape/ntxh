@@ -121,7 +121,7 @@ int main(int argc, char *argv[])
  QString manfolder;
 
  QStringList cmdl = get_cmdl(argc, argv, 2, {
-   {&folder, DEFAULT_GTAGML_FOLDER "/dg/t1/src"},
+   {&folder, DEFAULT_GTAGML_FOLDER "/dg/ctg/src"},
    {&file, DEFAULT_GTAGML_FOLDER "/dg/t1/t1.gt"},
    {&manfolder, {}}
    });
@@ -132,7 +132,7 @@ int main(int argc, char *argv[])
  qDebug() << "Folder: " << folder << ", File: " << file;
  qDebug() << "ManFolder: " << manfolder;
 
- file.clear();
+ // file.clear();
 
  if(manfolder.isEmpty())
  {
