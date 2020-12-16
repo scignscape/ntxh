@@ -1,9 +1,9 @@
 #ifndef VERTEX_H
 #define VERTEX_H
 
-#include <string>
+#include <QString>
 #include <vector>
-#include <boost/any.hpp>
+#include <QVariant>
 #include "structure/VertexProperty.h"
 #include "structure/Element.h"
 #include "structure/Direction.h"
@@ -27,14 +27,14 @@ public:
 		Return a pointer to the Graph's unique 
 		Vertex id for this Vertex.
 	*/
-	virtual boost::any id() = 0;
+	virtual QVariant id() = 0;
 
 	/*
 		Return a pointer to the Graph's label
 		for this Vertex.  If this Vertex does
 		not have a label, return NULL.
 	*/
-	virtual std::string label() = 0;
+	virtual QString label() = 0;
 
 	/*
 		Get the edges for this Vertex in the given direction.
@@ -45,19 +45,19 @@ public:
 		Get the property corresponding to the given
 		key.
 	*/
-	virtual VertexProperty<boost::any>* property(std::string key) = 0;
+	virtual VertexProperty<QVariant>* property(QString key) = 0;
 
 	/*
 		Set the property corresponding to the given
 		key assuming the given cardinality.
 	*/
-	virtual VertexProperty<boost::any>* property(Cardinality cardinality, std::string key, boost::any& value) = 0;
+	virtual VertexProperty<QVariant>* property(Cardinality cardinality, QString key, QVariant& value) = 0;
 
 	/*
 		Set the property corresponding to the given
 		key.
 	*/
-	virtual VertexProperty<boost::any>* property(std::string key, boost::any& value) = 0;
+	virtual VertexProperty<QVariant>* property(QString key, QVariant& value) = 0;
 };
 
 #include "structure/Graph.h"

@@ -4,17 +4,17 @@
 #include "step/TraversalStep.h"
 #include "traversal/Traverser.h"
 #include "traversal/GraphTraversal.h"
-#include <string>
+#include <QString>
 #include <vector>
 
 #define ADD_VERTEX_STEP 0x71
 
 class AddVertexStep: public TraversalStep {
 	private:
-		std::string label;
+		QString label;
 		bool has_label;
 	public:
-		AddVertexStep(std::string label_arg)
+		AddVertexStep(QString label_arg)
 		: TraversalStep(MAP, ADD_VERTEX_STEP) {
 			label = label_arg;
 			has_label = true;
@@ -25,8 +25,8 @@ class AddVertexStep: public TraversalStep {
 			has_label = false;
 		}
 
-		virtual std::string getInfo() {
-			std::string info = "AddVertexStep(";
+		virtual QString getInfo() {
+			QString info = "AddVertexStep(";
 			info += has_label ? label : "";
 			info += ")";
 			return info;
@@ -36,7 +36,7 @@ class AddVertexStep: public TraversalStep {
 			// For each traverser, a new Vertex should be created and replace the original traverser
 			std::for_each(traversers.begin(), traversers.end(), [&, this](Traverser* trv) {
 				Vertex* v = this->has_label ? traversal->getGraph()->add_vertex(this->label) : traversal->getGraph()->add_vertex();
-				trv->replace_data(v);
+    trv->replace_data(QVariant::fromValue(v));
 			});
 		}
 };

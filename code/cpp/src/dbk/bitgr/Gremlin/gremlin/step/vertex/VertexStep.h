@@ -1,6 +1,6 @@
 #ifndef VERTEX_STEP_H
 #define VERTEX_STEP_H
-#include <string>
+#include <QString>
 #include <vector>
 #include <set>
 #include <algorithm>
@@ -17,13 +17,13 @@
 class VertexStep : public TraversalStep {
 	private:
 		Direction direction;
-		std::set<std::string> edge_labels;
+		std::set<QString> edge_labels;
 		GraphStepType gsType;
 	public:
-		VertexStep(Direction dir, std::vector<std::string> edge_labels_arg, GraphStepType gsType_arg)
+		VertexStep(Direction dir, std::vector<QString> edge_labels_arg, GraphStepType gsType_arg)
 		: TraversalStep(MAP, VERTEX_STEP) {
 			direction = dir;
-			std::for_each(edge_labels_arg.begin(), edge_labels_arg.end(), [&](std::string str){ this->edge_labels.insert(str); });
+			std::for_each(edge_labels_arg.begin(), edge_labels_arg.end(), [&](QString str){ this->edge_labels.insert(str); });
 			this->gsType = gsType_arg;
 		}
 
@@ -37,12 +37,12 @@ class VertexStep : public TraversalStep {
 			return this->direction;
 		}
 
-		std::set<std::string> get_labels() {
+		std::set<QString> get_labels() {
 			return this->edge_labels;
 		}
 
-		virtual std::string getInfo() {
-			std::string info = "VertexStep(";
+		virtual QString getInfo() {
+			QString info = "VertexStep(";
 			info += (direction == IN ? "IN" : direction == OUT ? "OUT" : "BOTH");
 			info += ", ";
 			if(!edge_labels.empty()) {
@@ -63,7 +63,7 @@ class VertexStep : public TraversalStep {
 			
 			//boost::lockfree::stack<Traverser*> new_traversers(8);
 			std::for_each(traversers.begin(), traversers.end(), [&, this](Traverser* trv) {
-				Vertex* v = boost::any_cast<Vertex*>(trv->get());
+				Vertex* v = QVariant_cast<Vertex*>(trv->get());
 				std::vector<Edge*> edges = v->edges(direction);
 				//#pragma omp for
 				for(size_t k = 0; k < edges.size(); ++k) {
@@ -73,18 +73,18 @@ class VertexStep : public TraversalStep {
 					switch(direction) {
 						case IN: {
 							Vertex* w = e->outV();
-							new_traversers.push_back(new Traverser(w));
+       new_traversers.push_back(new Traverser(QVariant::fromValue(w)));
 							break;
 						}
 						case OUT: {
 							Vertex* w = e->inV();
-							new_traversers.push_back(new Traverser(w));
+       new_traversers.push_back(new Traverser(QVariant::fromValue(w)));
 							break;
 						}
 						case BOTH: {
 							Vertex* u = e->outV();
 							Vertex* w = u == v ? e->inV() : u;
-							new_traversers.push_back(new Traverser(w));
+       new_traversers.push_back(new Traverser(QVariant::fromValue(w)));
 							break;
 						}
 					}

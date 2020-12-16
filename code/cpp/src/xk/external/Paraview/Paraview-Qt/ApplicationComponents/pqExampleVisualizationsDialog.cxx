@@ -49,12 +49,12 @@ void pqExampleVisualizationsDialog::onButtonPressed()
     if (button == this->ui->CanExampleButton)
     {
       stateFile = ":/pqApplicationComponents/ExampleVisualizations/CanExample.pvsm";
-      needsData = true;
+      needsData = false;
     }
     else if (button == this->ui->DiskOutRefExampleButton)
     {
       stateFile = ":/pqApplicationComponents/ExampleVisualizations/DiskOutRefExample.pvsm";
-      needsData = true;
+      needsData = false;
     }
     else if (button == this->ui->WaveletExampleButton)
     {
@@ -64,7 +64,7 @@ void pqExampleVisualizationsDialog::onButtonPressed()
     else if (button == this->ui->HotGasAnalysisExampleButton)
     {
       stateFile = ":/pqApplicationComponents/ExampleVisualizations/HotGasAnalysisExample.pvsm";
-      needsData = true;
+      needsData = false;
     }
     else
     {

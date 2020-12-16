@@ -37,14 +37,14 @@ void CoalesceStep::apply(GraphTraversal* parent_traversal, TraverserSet& travers
             for(auto it = this->traversals.begin(); it != this->traversals.end(); ++it) {
                 GraphTraversal* current_coalesce_traversal = *it;
                 
-                std::vector<boost::any> objects(num_traversers);
+                std::vector<QVariant> objects(num_traversers);
                 for(size_t k = 0; k < num_traversers; ++k) objects[k] = traversers[k]->get();
 
                 GraphTraversal executing_traversal(parent_traversal->getTraversalSource(), current_coalesce_traversal);
                 InjectStep inject_step(objects);
                 executing_traversal.insertStep(0, &inject_step);
                 
-                executing_traversal.forEachRemaining([&](boost::any& obj){
+                executing_traversal.forEachRemaining([&](QVariant& obj){
                     new_traversers.push_back(new Traverser(obj));
                 });
 

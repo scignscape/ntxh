@@ -72,8 +72,8 @@ class MinStep : public TraversalStep {
 
                 min_value = it % 2 == 0 ? values2[0] : values[0];
                 /*
-                for(Traverser* trv : traversers) std::cout << boost::any_cast<uint64_t>(trv->get()) << ", ";
-                std::cout << "\nmin = " << boost::any_cast<uint64_t>(min->get()) << std::endl;
+                for(Traverser* trv : traversers) std::cout << QVariant_cast<uint64_t>(trv->get()) << ", ";
+                std::cout << "\nmin = " << QVariant_cast<uint64_t>(min->get()) << std::endl;
                 */
             }
             else {

@@ -7,7 +7,7 @@
 #include <vector>
 #include <algorithm>
 #include <functional>
-#include <boost/any.hpp>
+#include <QVariant>
 #include "structure/Property.h"
 
 enum Cardinality {SINGLE, LIST, SET};
@@ -15,10 +15,10 @@ enum Cardinality {SINGLE, LIST, SET};
 template<typename T>
 class VertexProperty {
 	private:
-		std::string my_key;
+		QString my_key;
 		std::vector<T>* my_values;
 	public:
-		VertexProperty(Cardinality card, std::string new_key, std::vector<T> new_values) {
+		VertexProperty(Cardinality card, QString new_key, std::vector<T> new_values) {
 			this->my_key = new_key;
 
 			// sets are weird in general, and the default comparator won't work in this method
@@ -36,7 +36,7 @@ class VertexProperty {
 			}
 		}
 
-		std::string key() {
+		QString key() {
 			return my_key;
 		}
 

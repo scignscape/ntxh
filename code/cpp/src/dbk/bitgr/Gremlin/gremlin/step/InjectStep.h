@@ -4,21 +4,21 @@
 #define INJECT_STEP 0x74
 
 #include "traversal/Traverser.h"
-#include <boost/any.hpp>
+#include <QVariant>
 #include <vector>
 #include <algorithm>
 
 class InjectStep : public TraversalStep {
     private:
-        std::vector<boost::any> objects;
+        std::vector<QVariant> objects;
         
     public:
-        InjectStep(std::vector<boost::any>& injects) : TraversalStep(SIDE_EFFECT, INJECT_STEP) {
+        InjectStep(std::vector<QVariant>& injects) : TraversalStep(SIDE_EFFECT, INJECT_STEP) {
             std::copy(injects.begin(), injects.end(), std::back_inserter(objects));
         }
 
         virtual void apply(GraphTraversal* trv, TraverserSet& traversers) {
-            std::for_each(objects.begin(), objects.end(), [&](boost::any obj){
+            std::for_each(objects.begin(), objects.end(), [&](QVariant obj){
                 traversers.push_back(new Traverser(obj));
             });
         }

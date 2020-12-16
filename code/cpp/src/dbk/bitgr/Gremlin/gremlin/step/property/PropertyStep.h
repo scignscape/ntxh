@@ -4,8 +4,8 @@
 #include "step/TraversalStep.h"
 #include "structure/Property.h"
 #include <vector>
-#include <string>
-#include <boost/any.hpp>
+#include <QString>
+#include <QVariant>
 
 #define PROPERTY_STEP 0x67
 
@@ -13,17 +13,17 @@ enum PropertyStepType { VALUE, PROPERTY };
 
 class PropertyStep: public TraversalStep {
     private:
-        std::vector<std::string> keys; //duplicates are allowed, per api
+        std::vector<QString> keys; //duplicates are allowed, per api
         PropertyStepType ps_type;
 
     public:
-        PropertyStep(PropertyStepType type, std::vector<std::string> property_keys)
+        PropertyStep(PropertyStepType type, std::vector<QString> property_keys)
         : TraversalStep(MAP, PROPERTY_STEP) {
             this->keys = property_keys;
             this->ps_type = type;
         }
 
-        std::vector<std::string>& get_keys() { return keys; }
+        std::vector<QString>& get_keys() { return keys; }
 
         PropertyStepType get_type() { return ps_type; }
 
@@ -32,19 +32,19 @@ class PropertyStep: public TraversalStep {
             bool get_value = this->ps_type == VALUE;
 
             for(Traverser* trv : traversers) {
-                for(std::string key : keys) {
-                    boost::any x = trv->get();
+                for(QString key : keys) {
+                    QVariant x = trv->get();
                     /*
                     if(x.type() != typeid(Vertex*)) {
                         throw std::runtime_error("Error: Traverser does not appear to contain a Vertex.");
                     }
                     */
 
-                    Vertex* v = boost::any_cast<Vertex*>(x);
-                    VertexProperty<boost::any>* p = v->property(key); //TODO multiproperties?
-                    if(p == nullptr) new_traversers.push_back(new Traverser(boost::any()));
-                    else if(get_value && !p->value().empty()) new_traversers.push_back(new Traverser(p->value()));
-                    else if(!get_value) new_traversers.push_back(new Traverser(boost::any(p)));
+                    Vertex* v = QVariant_cast<Vertex*>(x);
+                    VertexProperty<QVariant>* p = v->property(key); //TODO multiproperties?
+                    if(p == nullptr) new_traversers.push_back(new Traverser(QVariant()));
+                    else if(get_value && !p->value().isNull()) new_traversers.push_back(new Traverser(p->value()));
+                    else if(!get_value) new_traversers.push_back(new Traverser(QVariant::fromValue(p)));
                 }
             }
 

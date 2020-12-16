@@ -3,7 +3,7 @@
 
 #define ADD_EDGE_START_STEP 0x72
 
-#include <string>
+#include <QString>
 #include <vector>
 
 class GraphTraversalSource;
@@ -14,14 +14,14 @@ typedef std::vector<Traverser*> TraverserSet;
 
 class AddEdgeStartStep: public TraversalStep {
 	private:
-		std::string label;
+		QString label;
 		GraphTraversal* out_vertex_traversal; // filled in at runtime
 		GraphTraversal* in_vertex_traversal; // filled in at runtime
 	public:
-		AddEdgeStartStep(std::string label_arg);
+		AddEdgeStartStep(QString label_arg);
 		
-		virtual std::string getInfo() {
-			std::string info = "AddEdgeStartStep(";
+		virtual QString getInfo() {
+			QString info = "AddEdgeStartStep(";
 			info += label + ")";
 			return info;
 		}
@@ -31,7 +31,7 @@ class AddEdgeStartStep: public TraversalStep {
 		GraphTraversal* get_in_traversal();
 		void set_out_traversal(GraphTraversal* new_traversal);
 		void set_in_traversal(GraphTraversal* new_traversal);
-		std::string get_label() { return this->label; }
+		QString get_label() { return this->label; }
 
 		virtual void apply(GraphTraversal* trv, TraverserSet& traversers);
 };
@@ -43,7 +43,7 @@ class AddEdgeStartStep: public TraversalStep {
 #include "structure/Vertex.h"
 #include "structure/Edge.h"
 
-AddEdgeStartStep::AddEdgeStartStep(std::string label_arg)
+AddEdgeStartStep::AddEdgeStartStep(QString label_arg)
 : TraversalStep(MAP, ADD_EDGE_START_STEP) {
 	this->label = label_arg;
 	this->out_vertex_traversal = NULL;
@@ -65,11 +65,11 @@ void AddEdgeStartStep::apply(GraphTraversal* trv, TraverserSet& traversers) {
 	GraphTraversal from_traversal(my_traversal_source, this->out_vertex_traversal);
 	GraphTraversal to_traversal(my_traversal_source, this->in_vertex_traversal);
 
-	Vertex* from_vertex = boost::any_cast<Vertex*>(from_traversal.next());
-	Vertex* to_vertex = boost::any_cast<Vertex*>(to_traversal.next());
+	Vertex* from_vertex = QVariant_cast<Vertex*>(from_traversal.next());
+	Vertex* to_vertex = QVariant_cast<Vertex*>(to_traversal.next());
 
 	Edge* new_edge = trv->getGraph()->add_edge(from_vertex, to_vertex, label);
-	traversers.push_back(new Traverser(new_edge));
+ traversers.push_back(new Traverser(QVariant::fromValue(new_edge)));
 }
 
 #endif

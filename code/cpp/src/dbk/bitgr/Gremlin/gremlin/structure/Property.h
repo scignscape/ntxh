@@ -1,12 +1,12 @@
 #ifndef PROPERTY_H
 #define PROPERTY_H
 
-#include <string>
+#include <QString>
 
 template<typename T>
 class Property {
 	public:		
-		std::string key();
+		QString key();
 
 		T value();
 };

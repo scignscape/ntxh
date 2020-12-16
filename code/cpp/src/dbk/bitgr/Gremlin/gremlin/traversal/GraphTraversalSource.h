@@ -1,7 +1,7 @@
 #ifndef GRAPH_TRAVERSAL_SOURCE_H
 #define GRAPH_TRAVERSAL_SOURCE_H
 
-#include <string>
+#include <QString>
 #include <vector>
 #include <functional>
 
@@ -32,8 +32,8 @@ public:
 	virtual GraphTraversal* V(Vertex* v) = 0;
 	virtual GraphTraversal* E() = 0;
 	virtual GraphTraversal* addV() = 0;
-	virtual GraphTraversal* addV(std::string label) = 0;
-	virtual GraphTraversal* addE(std::string label) = 0;
+	virtual GraphTraversal* addV(QString label) = 0;
+	virtual GraphTraversal* addE(QString label) = 0;
 };
 
 #include "traversal/GraphTraversal.h"

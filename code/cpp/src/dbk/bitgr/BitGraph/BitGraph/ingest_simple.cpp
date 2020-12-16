@@ -3,9 +3,11 @@
 
 #include "structure/CPUGraph.h"
 #include "traversal/GraphTraversal.h"
-#include "Q.h"
+
+//?#include "Q.h"
 #include "util/C.h"
-#include "GPUGraphTraversal.h"
+
+//?#include "GPUGraphTraversal.h"
 
 #define LABEL_V "basic_vertex"
 #define LABEL_E "basic_edge"
@@ -29,7 +31,8 @@ int main(int argc, char* argv[]) {
         Vertex* v1;
         Vertex* v2;
 
-        if(0 == names.count(std::string(id1))) v1 = boost::any_cast<Vertex*>(g->addV(LABEL_V)->property(NAME, std::string(id1))->next());
+        if(0 == names.count(std::string(id1)))
+          v1 = boost::any_cast<Vertex*>(g->addV(LABEL_V)->property(NAME, std::string(id1))->next());
         else v1 = boost::any_cast<Vertex*>(g->V()->has(NAME, std::string(id1))->next());
         names.insert(std::string(id1));
         std::cout << boost::any_cast<uint64_t>(v1->id()) << " " << boost::any_cast<std::string>(v1->property(NAME)->value()) << "\n";
@@ -71,21 +74,22 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
-    try {
-        GPUGraphTraversal* gpu_trv = dynamic_cast<GPUGraphTraversal*>(dynamic_cast<CPUGraphTraversalSource*>(graph.traversal())->withGPU()->V()->id());
-        gpu_trv->filter(Q<uint64_t>::eq((uint64_t)1, gpu_trv))->iterate();
-    } catch(const std::exception& err) {
-        std::cout << err.what() << "\n";
-        return -1;
-    }
+//    try {
+////?
+////        GPUGraphTraversal* gpu_trv = dynamic_cast<GPUGraphTraversal*>(dynamic_cast<CPUGraphTraversalSource*>(graph.traversal())->withGPU()->V()->id());
+////        gpu_trv->filter(Q<uint64_t>::eq((uint64_t)1, gpu_trv))->iterate();
+//    } catch(const std::exception& err) {
+//        std::cout << err.what() << "\n";
+//        return -1;
+//    }
 
-    try {
-        std::cout << "min id: " << boost::any_cast<uint64_t>(graph.traversal()->V()->id()->min(C<uint64_t>::compare())->next()) << "\n";
-        dynamic_cast<CPUGraphTraversalSource*>(graph.traversal())->withGPU()->V()->id()->min(C<uint64_t>::compare())->iterate();
-    } catch(const std::exception& err) {
-        std::cout << err.what() << "\n";
-        return -1;
-    }
+//    try {
+//        std::cout << "min id: " << boost::any_cast<uint64_t>(graph.traversal()->V()->id()->min(C<uint64_t>::compare())->next()) << "\n";
+//        dynamic_cast<CPUGraphTraversalSource*>(graph.traversal())->withGPU()->V()->id()->min(C<uint64_t>::compare())->iterate();
+//    } catch(const std::exception& err) {
+//        std::cout << err.what() << "\n";
+//        return -1;
+//    }
 
     try {
         std::cout << "coalesce:" << std::endl;

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <string>
+#include <QString>
 #include <vector>
 #include <list>
 #include <functional>
@@ -62,22 +62,22 @@ public:
 	}
 
 	// Steps
-	GraphTraversal* addE(std::string label);
+	GraphTraversal* addE(QString label);
 
-	GraphTraversal* addV(std::string label);
+	GraphTraversal* addV(QString label);
 
 	GraphTraversal* addV();
 
-	GraphTraversal* property(std::string property_key, boost::any value);
+	GraphTraversal* property(QString property_key, QVariant value);
 
-	//GraphTraversal<auto n> aggregate(std::string sideEffectLabel);
+	//GraphTraversal<auto n> aggregate(QString sideEffectLabel);
 	//GraphTraversal<auto n> _and();
 	//GraphTraversal<auto n> _and(std::vector<GraphTraversal<auto m>> traversals);
-	//GraphTraversal* as(std::string sideEffectLabel);
+	//GraphTraversal* as(QString sideEffectLabel);
 	//GraphTraversal* barrier();
 	//GraphTraversal* by(GraphTraversal* byTraversal);
-	//GraphTraversal* by(std::string label);
-	//GraphTraversal* cap(std::vector<std::string> sideEffectLabels);
+	//GraphTraversal* by(QString label);
+	//GraphTraversal* cap(std::vector<QString> sideEffectLabels);
 	//GraphTraversal<auto n> choose(GraphTraversal<A> ifTraversal, GraphTraversal<B> trueTraversal, GraphTraversal<C> falseTraversal);
 	//GraphTraversal<auto n> choose(GraphTraversal<A> withOptionTraversal);
 	
@@ -94,7 +94,7 @@ public:
 	//GraphTraversal* fold();
 	//GraphTraversal* from(GraphTraversal* fromTraversal);
 
-	GraphTraversal* from(std::string sideEffectLabel);
+	GraphTraversal* from(QString sideEffectLabel);
 
 	GraphTraversal* from(Vertex* fromVertex);
 
@@ -106,26 +106,26 @@ public:
 
 	//GraphTraversal* V(void* objects, size_t sizeOfEach, int length);
 	//GraphTraversal group();
-	//GraphTraversal group(std::string sideEffectLabel);
+	//GraphTraversal group(QString sideEffectLabel);
 	//GraphTraversal groupCount();
-	//GraphTraversal groupCount(std::string sideEffectLabel);
-	//GraphTraversal has(std::string key, void* value, size_t size); // dangerous operation
-	//GraphTraversal has(std::string label, std::string key, void* value, size_t size); // dangerous operation
+	//GraphTraversal groupCount(QString sideEffectLabel);
+	//GraphTraversal has(QString key, void* value, size_t size); // dangerous operation
+	//GraphTraversal has(QString label, QString key, void* value, size_t size); // dangerous operation
 
 	template<typename T>
-	GraphTraversal* has(std::string key, std::function<bool(boost::any)> pred);
+	GraphTraversal* has(QString key, std::function<bool(QVariant)> pred);
 
 	template<typename T>
-	GraphTraversal* has(std::string key, T value);
+	GraphTraversal* has(QString key, T value);
 
 	template<typename T>
-	GraphTraversal* has(std::string key);
+	GraphTraversal* has(QString key);
 
-	//GraphTraversal* has(std::string key, GraphTraversal* valueTraversal);
-	//GraphTraversal* has(std::string key);
-	//GraphTraversal* hasNot(std::string key);
-	//GraphTraversal* hasLabel(std::vector<std::string> labels);
-	//GraphTraversal* hasLabel(std::string label);
+	//GraphTraversal* has(QString key, GraphTraversal* valueTraversal);
+	//GraphTraversal* has(QString key);
+	//GraphTraversal* hasNot(QString key);
+	//GraphTraversal* hasLabel(std::vector<QString> labels);
+	//GraphTraversal* hasLabel(QString label);
 	//GraphTraversal* hasId(void* ids, size_t sizeOfEach, int length); // dangerous operation
 	//GraphTraversal* hasValue(void* values, size_t* sizesOfEach, int length); // dangerous operation
 	
@@ -142,7 +142,7 @@ public:
 	//GraphTraversal* local(GraphTraversal* localTraversal);
 	//GraphTraversal* loops();
 	//GraphTraversal match(std::vector<GraphTraversal> matchTraversals);
-	//GraphTraversal* math(std::string equation);
+	//GraphTraversal* math(QString equation);
 	//GraphTraversal* max();
 	//GraphTraversal max(Scope scope);
 	//GraphTraversal* mean();
@@ -161,12 +161,12 @@ public:
 	// pagerank step not supported
 	//GraphTraversal* path();
 	// peerpressure step not supported
-	//std::string profile();
-	//GraphTraversal project(std::vector<std::string> sideEffectLabels);
+	//QString profile();
+	//GraphTraversal project(std::vector<QString> sideEffectLabels);
 	// program step not supported
-	//GraphTraversal properties(std::vector<std::string> labels);
+	//GraphTraversal properties(std::vector<QString> labels);
 	//GraphTraversal properties();
-	//GraphTraversal propertyMap(std::vector<std::string> labels);
+	//GraphTraversal propertyMap(std::vector<QString> labels);
 	//GraphTraversal propertyMap();
 	//GraphTraversal range(long low, long high);
 	//GraphTraversal repeat(GraphTraversal repeatTraversal);
@@ -174,16 +174,16 @@ public:
 	//GraphTraversal* sample(int sampleSize);
 	//GraphTraversal sample(Scope scope, int sampleSize);
 	// single-label select is special
-	GraphTraversal* select(std::string sideEffectLabel) {
+	GraphTraversal* select(QString sideEffectLabel) {
 		//TODO write this
 	}
-	//GraphTraversal select(std::vector<std::string> sideEffectLabels);
+	//GraphTraversal select(std::vector<QString> sideEffectLabels);
 	//GraphTraversal select(GraphTraversal selectTraversal);
 	//GraphTraversal* simplePath();
 	//GraphTraversal* skip(unsigned long toSkip);
 	//GraphTraversal skip(Scope scope, unsigned long toSkip);
-	//GraphTraversal* store(std::string sideEffectLabel);
-	//GraphTraversal subgraph(std::string sideEffectLabel);
+	//GraphTraversal* store(QString sideEffectLabel);
+	//GraphTraversal subgraph(QString sideEffectLabel);
 	//GraphTraversal* sum();
 	//GraphTraversal sum(Scope scope);
 	//GraphTraversal tail();
@@ -191,19 +191,19 @@ public:
 	//GraphTraversal tail(Scope scope);
 	//GraphTraversal tail(Scope scope, unsigned long theLimit);
 	//GraphTraversal* timeLimit(long time);
-	//GraphTraversal* to(Direction direction, std::vector<std::string> labels);
+	//GraphTraversal* to(Direction direction, std::vector<QString> labels);
 	//GraphTraversal* to(Direction direction);
-	//GraphTraversal* to(Direction direction, std::string label);
+	//GraphTraversal* to(Direction direction, QString label);
 	//GraphTraversal* to(GraphTraversal* toTraversal); //MODULATOR for addE
 
 	// MODULATOR for addE
-	GraphTraversal* to(std::string sideEffectLabel);
+	GraphTraversal* to(QString sideEffectLabel);
 
 	// MODULATOR for addE
 	GraphTraversal* to(Vertex* toVertex);
 
 	//GraphTraversal* toV(Direction direction);
-	//GraphTraversal tree(std::string sideEffectLabel);
+	//GraphTraversal tree(QString sideEffectLabel);
 	//GraphTraversal tree();
 	//GraphTraversal unfold();
 	//GraphTraversal _union(std::vector<GraphTraversal> unionTraversals);
@@ -211,32 +211,32 @@ public:
 	//GraphTraversal until(GraphTraversal untilTraversal);
 	//GraphTraversal value();
 	//GraphTraversal valueMap();
-	//GraphTraversal valueMap(std::vector<std::string> labels);
+	//GraphTraversal valueMap(std::vector<QString> labels);
 	//GraphTraversal valueMap(bool includeIdLabelKeyValue);
-	//GraphTraversal valueMap(bool includeIdLabelKeyValue, std::vector<std::string> labels);
+	//GraphTraversal valueMap(bool includeIdLabelKeyValue, std::vector<QString> labels);
 	//GraphTraversal values();
-	GraphTraversal* values(std::vector<std::string> labels);
+	GraphTraversal* values(std::vector<QString> labels);
 
-	GraphTraversal* values(std::string label);
+	GraphTraversal* values(QString label);
 
 	GraphTraversal* both();
-	GraphTraversal* both(std::vector<std::string> labels);
+	GraphTraversal* both(std::vector<QString> labels);
 	GraphTraversal* bothE();
-	GraphTraversal* bothE(std::vector<std::string> labels);
+	GraphTraversal* bothE(std::vector<QString> labels);
 	//GraphTraversal* bothV();
 	//GraphTraversal* inV();
 	//GraphTraversal* otherV();
 	GraphTraversal* out();
-	GraphTraversal* out(std::vector<std::string> labels);
+	GraphTraversal* out(std::vector<QString> labels);
 	GraphTraversal* in();
-	GraphTraversal* in(std::vector<std::string> labels);
+	GraphTraversal* in(std::vector<QString> labels);
 	GraphTraversal* outE();
-	GraphTraversal* outE(std::vector<std::string> labels);
+	GraphTraversal* outE(std::vector<QString> labels);
 	GraphTraversal* inE();
-	GraphTraversal* inE(std::vector<std::string> labels);
+	GraphTraversal* inE(std::vector<QString> labels);
 
 	//GraphTraversal where(Predicate predicate);
-	//GraphTraversal where(std::string label, Predicate predicate);
+	//GraphTraversal where(QString label, Predicate predicate);
 	//GraphTraversal where(GraphTraversal<auto n> whereTraversal);
 
 	// These may replace predicates...
@@ -245,36 +245,36 @@ public:
 	//GraphTraversal eq(double equal, double tolerance);
 	//GraphTraversal eq(long equal);
 	//GraphTraversal eq(int equal);
-	//GraphTraversal eq(std::string equal);
+	//GraphTraversal eq(QString equal);
 	//GraphTraversal
 
 	void getInitialTraversal();
 
 	// The explain finalizer which works in anonymous GraphTraversals
-	std::string explain();
+	QString explain();
 
 	// Finalizing steps
 	//boolean hasNext();
 
-	std::vector<boost::any> toVector() {
-		std::vector<boost::any> results;
-		this->forEachRemaining([&](boost::any& a){results.push_back(a);});
+	std::vector<QVariant> toVector() {
+		std::vector<QVariant> results;
+		this->forEachRemaining([&](QVariant& a){results.push_back(a);});
 		return results;
 	}
 
-	std::list<boost::any> toList() {
-		std::list<boost::any> results;
-		this->forEachRemaining([&](boost::any& a) {
+	std::list<QVariant> toList() {
+		std::list<QVariant> results;
+		this->forEachRemaining([&](QVariant& a) {
 			results.push_back(a);
 		});
 		return results;
 	}
 
-	boost::any next() { 
+	QVariant next() { 
 		return this->toVector()[0];
 	}
 
-	void forEachRemaining(std::function<void(boost::any&)> func);
+	void forEachRemaining(std::function<void(QVariant&)> func);
 
 	void iterate();
 
@@ -354,11 +354,11 @@ void GraphTraversal::getInitialTraversal() {
 #include "step/math/CountStep.h"
 #include "step/math/MinStep.h"
 
-GraphTraversal* GraphTraversal::addE(std::string label){
+GraphTraversal* GraphTraversal::addE(QString label){
 	return this->appendStep(new AddEdgeStep(label));
 }
 
-GraphTraversal* GraphTraversal::addV(std::string label) {
+GraphTraversal* GraphTraversal::addV(QString label) {
 	return this->appendStep(new AddVertexStep(label));
 }
 
@@ -370,7 +370,7 @@ GraphTraversal* GraphTraversal::coalesce(std::vector<GraphTraversal*> traversals
 	return this->appendStep(new CoalesceStep(traversals));
 }
 
-GraphTraversal* GraphTraversal::property(std::string property_key, boost::any value) {
+GraphTraversal* GraphTraversal::property(QString property_key, QVariant value) {
 	return this->appendStep(new AddPropertyStep(property_key, value));
 }
 
@@ -383,12 +383,12 @@ GraphTraversal* GraphTraversal::V(Vertex* vertex) {
 }
 
 GraphTraversal* GraphTraversal::V(std::vector<Vertex*> vertices) {
-	std::vector<boost::any> ids;
+	std::vector<QVariant> ids;
 	for(Vertex* v : vertices) ids.push_back(v->id());
 	return this->appendStep(new GraphStep(VERTEX, ids));
 }
 
-GraphTraversal* GraphTraversal::from(std::string sideEffectLabel) {
+GraphTraversal* GraphTraversal::from(QString sideEffectLabel) {
 	// Because from() uses void* (sigh) this awkward memory copy is necessary.
 	const char* base_string = sideEffectLabel.c_str();
 	size_t size = (1 + strlen(base_string));
@@ -404,7 +404,7 @@ GraphTraversal* GraphTraversal::from(Vertex* fromVertex) {
 }
 
 // MODULATOR for addE
-GraphTraversal* GraphTraversal::to(std::string sideEffectLabel) {
+GraphTraversal* GraphTraversal::to(QString sideEffectLabel) {
 	// Because to() uses void* (sigh) this awkward memory copy is necessary.
 	const char* base_string = sideEffectLabel.c_str();
 	size_t size = (1 + strlen(base_string));
@@ -424,7 +424,7 @@ GraphTraversal* GraphTraversal::both() {
 	return this->appendStep(new VertexStep(BOTH, {}, VERTEX));
 }
 
-GraphTraversal* GraphTraversal::both(std::vector<std::string> labels) {
+GraphTraversal* GraphTraversal::both(std::vector<QString> labels) {
 	return this->appendStep(new VertexStep(BOTH, labels, VERTEX));
 }
 
@@ -432,7 +432,7 @@ GraphTraversal* GraphTraversal::bothE() {
 	return this->appendStep(new VertexStep(BOTH, {}, EDGE));
 }
 
-GraphTraversal* GraphTraversal::bothE(std::vector<std::string> labels) {
+GraphTraversal* GraphTraversal::bothE(std::vector<QString> labels) {
 	return this->appendStep(new VertexStep(BOTH, labels, EDGE));
 }
 
@@ -444,7 +444,7 @@ GraphTraversal* GraphTraversal::out() {
 	return this->appendStep(new VertexStep(OUT, VERTEX));
 }
 
-GraphTraversal* GraphTraversal::out(std::vector<std::string> labels) {
+GraphTraversal* GraphTraversal::out(std::vector<QString> labels) {
 	return this->appendStep(new VertexStep(OUT, labels, VERTEX));
 }
 
@@ -452,7 +452,7 @@ GraphTraversal* GraphTraversal::in() {
 	return this->appendStep(new VertexStep(IN, VERTEX));
 }
 
-GraphTraversal* GraphTraversal::in(std::vector<std::string> labels) {
+GraphTraversal* GraphTraversal::in(std::vector<QString> labels) {
 	return this->appendStep(new VertexStep(IN, labels, VERTEX));
 }
 
@@ -460,7 +460,7 @@ GraphTraversal* GraphTraversal::outE() {
 	return this->appendStep(new VertexStep(OUT, EDGE));
 }
 
-GraphTraversal* GraphTraversal::outE(std::vector<std::string> labels) {
+GraphTraversal* GraphTraversal::outE(std::vector<QString> labels) {
 	return this->appendStep(new VertexStep(OUT, labels, EDGE));
 }
 
@@ -468,7 +468,7 @@ GraphTraversal* GraphTraversal::inE() {
 	return this->appendStep(new VertexStep(IN, EDGE));
 }
 
-GraphTraversal* GraphTraversal::inE(std::vector<std::string> labels) {
+GraphTraversal* GraphTraversal::inE(std::vector<QString> labels) {
 	return this->appendStep(new VertexStep(IN, labels, EDGE));
 }
 
@@ -493,32 +493,32 @@ GraphTraversal* GraphTraversal::count() {
 }
 
 template<typename T>
-GraphTraversal* GraphTraversal::has(std::string key, std::function<bool(boost::any)> pred) {
+GraphTraversal* GraphTraversal::has(QString key, std::function<bool(QVariant)> pred) {
 	return this->appendStep(new HasStep(key, pred));
 }
 
 template<typename T>
-GraphTraversal* GraphTraversal::has(std::string key, T value) {
+GraphTraversal* GraphTraversal::has(QString key, T value) {
 	return this->appendStep(new HasStep(key, value, P<T>::eq(value)));
 }
 
 template<typename T>
-GraphTraversal* GraphTraversal::has(std::string key) {
+GraphTraversal* GraphTraversal::has(QString key) {
 	return this->appendStep(new HasStep(key, nullptr));
 }
 
-GraphTraversal* GraphTraversal::values(std::vector<std::string> labels) {
+GraphTraversal* GraphTraversal::values(std::vector<QString> labels) {
 	return this->appendStep(new PropertyStep(VALUE, labels));
 }
 
-GraphTraversal* GraphTraversal::values(std::string label) {
+GraphTraversal* GraphTraversal::values(QString label) {
 	return this->appendStep(new PropertyStep(VALUE, {label}));
 }
 
-std::string GraphTraversal::explain() {
+QString GraphTraversal::explain() {
 	this->getInitialTraversal();
 
-	std::string explanation = "GraphTraversal {\n";
+	QString explanation = "GraphTraversal {\n";
 	for(int k = 0; k < this->steps.size(); k++) explanation += this->steps[k]->getInfo() + "\n";
 
 	return explanation + "}";
@@ -528,7 +528,7 @@ std::string GraphTraversal::explain() {
 #include <omp.h>
 
 /*
-void GraphTraversal::forEachRemaining(std::function<void(boost::any&)> func) {
+void GraphTraversal::forEachRemaining(std::function<void(QVariant&)> func) {
 	this->getInitialTraversal();
 	
 	TraverserSet traversers;
@@ -537,14 +537,14 @@ void GraphTraversal::forEachRemaining(std::function<void(boost::any&)> func) {
 	});
 
 	std::for_each(traversers.begin(), traversers.end(), [&](Traverser* trv){
-		boost::any obj = trv->get();
+		QVariant obj = trv->get();
 		func(obj);
 	});
 }
 */
 
 
-void GraphTraversal::forEachRemaining(std::function<void(boost::any&)> func) {
+void GraphTraversal::forEachRemaining(std::function<void(QVariant&)> func) {
 	this->getInitialTraversal();
 	
 	TraverserSet traversers;
@@ -580,7 +580,7 @@ void GraphTraversal::forEachRemaining(std::function<void(boost::any&)> func) {
 	}
 
 	std::for_each(traversers.begin(), traversers.end(), [&](Traverser* trv){
-		boost::any obj = trv->get();
+		QVariant obj = trv->get();
 		func(obj);
 	});
 }

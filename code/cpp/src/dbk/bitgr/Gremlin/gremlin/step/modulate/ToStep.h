@@ -2,7 +2,7 @@
 #define TO_STEP_H
 
 #include "step/TraversalStep.h"
-#include <string>
+#include <QString>
 class GraphTraversal;
 class Vertex;
 
@@ -12,7 +12,7 @@ class ToStep : public TraversalStep {
 	private:
 		GraphTraversal* to_traversal;
 	public:
-		ToStep(std::string side_effect_label);
+		ToStep(QString side_effect_label);
 
 		ToStep(Vertex* to_vertex);
 
@@ -25,12 +25,12 @@ class ToStep : public TraversalStep {
 			return to_traversal;
 		}
 
-		virtual std::string getInfo();
+		virtual QString getInfo();
 };
 
 #include "traversal/GraphTraversal.h"
 
-ToStep::ToStep(std::string side_effect_label)
+ToStep::ToStep(QString side_effect_label)
 : TraversalStep(MODULATOR, TO_STEP) {
 	to_traversal = (GraphTraversal*)__->select(side_effect_label);
 }
@@ -40,7 +40,7 @@ ToStep::ToStep(Vertex* to_vertex)
 	to_traversal = __->V(to_vertex);
 }
 
-std::string ToStep::getInfo() {
+QString ToStep::getInfo() {
 	return "ToStep {\n" + this->to_traversal->explain() + "\n}";
 }
 

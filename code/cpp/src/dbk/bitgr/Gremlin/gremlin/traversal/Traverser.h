@@ -4,24 +4,24 @@
 #include <list>
 #include <map>
 #include <string.h>
-#include <boost/any.hpp>
+#include <QVariant>
 
 class Traverser {
 	private:
-		boost::any my_data;
-		std::list<boost::any> path;
-		std::map<std::string, boost::any> side_effects;
+		QVariant my_data;
+		std::list<QVariant> path;
+		std::map<QString, QVariant> side_effects;
 
 	public:
-		Traverser(boost::any t) {
-			my_data = boost::any(t);
+		Traverser(QVariant t) {
+			my_data = QVariant(t);
 		}
 
-		virtual boost::any get() {
+		virtual QVariant get() {
 			return my_data;
 		}
 
-		virtual void replace_data(boost::any t) {
+		virtual void replace_data(QVariant t) {
 			my_data = t;
 		}
 };

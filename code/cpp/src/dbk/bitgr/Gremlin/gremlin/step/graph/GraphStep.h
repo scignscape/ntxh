@@ -1,8 +1,8 @@
 #ifndef GRAPH_STEP_H
 #define GRAPH_STEP_H
-#include <string>
+#include <QString>
 #include <vector>
-#include <boost/any.hpp>
+#include <QVariant>
 #include "step/TraversalStep.h"
 #include "traversal/Traverser.h"
 
@@ -13,16 +13,16 @@ enum GraphStepType {VERTEX, EDGE};
 class GraphStep : public TraversalStep {
 	protected:
 		GraphStepType gs_type;
-		std::vector<boost::any> element_ids;
+		std::vector<QVariant> element_ids;
 	public:
-		GraphStep(GraphStepType gsType_arg, std::vector<boost::any> eids)
+		GraphStep(GraphStepType gsType_arg, std::vector<QVariant> eids)
 		: TraversalStep(MAP, GRAPH_STEP) {
 			this->gs_type = gsType_arg;
-			for(boost::any id_ctr : eids) this->element_ids.push_back(id_ctr);
+			for(QVariant id_ctr : eids) this->element_ids.push_back(id_ctr);
 		}
 
-		virtual std::string	getInfo() {
-			std::string info = "GraphStep(";
+		virtual QString	getInfo() {
+			QString info = "GraphStep(";
 			info += this->gs_type == VERTEX ? "VERTEX" : "EDGE";
 			info = info + ", " + (element_ids.size() > 0 ? "{...}" : "{}");
 			return info + ")";
@@ -30,7 +30,7 @@ class GraphStep : public TraversalStep {
 
 		GraphStepType getType() { return this->gs_type; }
 
-		std::vector<boost::any>& get_element_ids() { return this->element_ids; }
+		std::vector<QVariant>& get_element_ids() { return this->element_ids; }
 
 		virtual void apply(GraphTraversal* trv, TraverserSet& traversers) {
 			throw std::runtime_error("Unsupported operation!");

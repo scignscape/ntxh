@@ -5,57 +5,58 @@
 #include "step/TraversalStep.h"
 #include "step/InjectStep.h"
 #include "structure/Vertex.h"
-#include <boost/any.hpp>
+#include <QVariant>
 
 // Edge properties currently not supported.
 class AddPropertyStep : public TraversalStep {
 	private:
 		Cardinality cardinality;
-		std::string key;
-		boost::any value;
+		QString key;
+		QVariant value;
 	public:
-		AddPropertyStep(std::string property_key, boost::any& value)
+		AddPropertyStep(QString property_key, QVariant& value)
 		: TraversalStep(MAP, ADD_PROPERTY_STEP) {
 			this->cardinality = SINGLE;
-			this->key = std::string(property_key);
-			this->value = boost::any(value);
+			this->key = QString(property_key);
+			this->value = QVariant(value);
 		}
 
-		AddPropertyStep(Cardinality card, std::string property_key, boost::any& value)
+		AddPropertyStep(Cardinality card, QString property_key, QVariant& value)
 		: TraversalStep(MAP, ADD_PROPERTY_STEP) {
 			this->cardinality = card;
-			this->key = std::string(property_key);
-			this->value = boost::any(value);
+			this->key = QString(property_key);
+			this->value = QVariant(value);
 		}
 
-		std::string get_key() { return this->key; }
+		QString get_key() { return this->key; }
 
-		boost::any get_value() { return this->value; };
+		QVariant get_value() { return this->value; };
 
-		inline Element* get_element(boost::any& e) {
-			const std::type_info& t = e.type();
-			if(t == typeid(Vertex*)) return static_cast<Element*>(boost::any_cast<Vertex*>(e));
-			else if(t == typeid(Edge*)) return static_cast<Element*>(boost::any_cast<Edge*>(e));
-			else throw std::runtime_error("Add Property Step Error: Not an element!");
+		inline Element* get_element(QVariant& e) {
+//			const std::type_info& t = e.type();
+//			if(t == typeid(Vertex*)) return static_cast<Element*>(QVariant_cast<Vertex*>(e));
+//			else if(t == typeid(Edge*)) return static_cast<Element*>(QVariant_cast<Edge*>(e));
+//			else throw std::runtime_error("Add Property Step Error: Not an element!");
 		}
 		
 		virtual void apply(GraphTraversal* current_traversal, TraverserSet& traversers) {
-			if(this->value.type() == typeid(GraphTraversal*)) {
-				GraphTraversal* ap_anonymous_trv = boost::any_cast<GraphTraversal*>(value);
+   if(false)//this->value.type() == typeid(GraphTraversal*))
+   {
+				GraphTraversal* ap_anonymous_trv = QVariant_cast<GraphTraversal*>(value);
 				
 				#pragma omp for
 				//std::for_each(traversers.begin(), traversers.end(), [&](Traverser* trv) {
 				for(int k = 0; k < traversers.size(); ++k) {
 					Traverser* trv = traversers[k];
 					//Element* e = get_element(trv->get());
-					Vertex* e = boost::any_cast<Vertex*>(trv->get());
+					Vertex* e = QVariant_cast<Vertex*>(trv->get());
 					GraphTraversal new_trv(current_traversal->getTraversalSource(), ap_anonymous_trv);
 					
 					// Execute traversal
-					std::vector<boost::any> inj; inj.push_back(trv->get());
+					std::vector<QVariant> inj; inj.push_back(trv->get());
 					InjectStep inject_step(inj);
-					new_trv.insertStep(0, &inject_step);
-					boost::any prop_value = new_trv.next();
+      //? new_trv.insertStep(0, &inject_step);
+					QVariant prop_value = new_trv.next();
 
 					// Store the property; TODO deal w/ edges
 					e->property(this->cardinality, this->key, prop_value);
@@ -66,7 +67,7 @@ class AddPropertyStep : public TraversalStep {
 			else {
 				// Store the propety; TODO deal w/ edges
 				std::for_each(traversers.begin(), traversers.end(), [&](Traverser* trv){
-					Vertex* e = boost::any_cast<Vertex*>(trv->get());
+					Vertex* e = QVariant_cast<Vertex*>(trv->get());
 					e->property(this->cardinality, this->key, this->value);	
 				});
 				//std::cout << "property stored!\n";

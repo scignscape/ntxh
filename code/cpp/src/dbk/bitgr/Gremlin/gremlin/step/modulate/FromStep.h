@@ -5,7 +5,7 @@ class GraphTraversal;
 class TraversalStep;
 class Vertex;
 
-#include <string>
+#include <QString>
 
 #define FROM_STEP 0x90
 
@@ -13,7 +13,7 @@ class FromStep : public TraversalStep {
 	private:
 		GraphTraversal* from_traversal;
 	public:
-		FromStep(std::string side_effect_label);
+		FromStep(QString side_effect_label);
 
 		FromStep(Vertex* to_vertex);
 
@@ -21,7 +21,7 @@ class FromStep : public TraversalStep {
 
 		GraphTraversal* getTraversal();
 
-		virtual std::string getInfo();
+		virtual QString getInfo();
 };
 
 #include "traversal/GraphTraversal.h"
@@ -32,7 +32,7 @@ FromStep::FromStep(GraphTraversal* from_vertex_traversal)
 	from_traversal = from_vertex_traversal;
 }
 
-FromStep::FromStep(std::string side_effect_label)
+FromStep::FromStep(QString side_effect_label)
 : TraversalStep(MODULATOR, FROM_STEP) {
 	this->from_traversal = (GraphTraversal*)__->select(side_effect_label);
 }
@@ -46,7 +46,7 @@ GraphTraversal* FromStep::getTraversal() {
 	return this->from_traversal;
 }
 
-std::string FromStep::getInfo() {
+QString FromStep::getInfo() {
 	return "FromStep {\n" + this->from_traversal->explain() + "\n}";
 }
 

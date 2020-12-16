@@ -2,7 +2,7 @@
 #define TRAVERSAL_STEP_H
 
 #include <vector>
-#include <string>
+#include <QString>
 
 #include "traversal/GraphTraversal.h"
 
@@ -19,7 +19,7 @@ public:
 	bool is_barrier;
 	TraversalStep(TraversalStepType tsType, unsigned int id);
 	TraversalStep(bool is_barrier, TraversalStepType tsType, unsigned int id);
-	virtual std::string getInfo();
+	virtual QString getInfo();
 	virtual void apply(GraphTraversal* trv, std::vector<Traverser*>& traversers);
 
 };
@@ -34,7 +34,7 @@ TraversalStep::TraversalStep(bool is_barrier, TraversalStepType tsType, unsigned
 
 TraversalStep::TraversalStep(TraversalStepType tsType, unsigned int id) : TraversalStep(false, tsType, id){}
 
-std::string TraversalStep::getInfo() {
+QString TraversalStep::getInfo() {
 	return "UnknownTraversalStep{}";
 }
 
