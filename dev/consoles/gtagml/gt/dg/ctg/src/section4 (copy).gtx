@@ -1,5 +1,12 @@
+
+`copy<@/gtagml/dgdb/ctg/ngml/gen>;
+`document-title<Cognitive Transform Grammar>;
+`local-title<section4>;
+
+
 `section.Cognitive and Computational Processes`
 `label<s4>;
+
 `p.
 Any attempt to bridge Computational Linguistics and
 Cognitive Grammar or Phenomenology must solicit one or several
@@ -250,6 +257,8 @@ substitutability of just `i.toast` for `i.buttered toast`/:
 `sentenceItem; `swl -> --- -> I snacked on toast and coffee. -> sem ;;
 `sentenceItem; `swl -> --- -> I snacked on buttered toast and iced coffee. -> sem ;;
 `sentenceList`
+
+ |.|
 
 Because the first sentence is perfectly clear, it seems
 that the ideas expressed (at least in this context) by
@@ -806,11 +815,11 @@ scenarios the readings would be reversed:
 
 `sentenceList,
 `sentenceItem; `swl -> --- -> The rescued dogs had been treated by vets in the past
-(but were subsequently abandoned by their owners).}[]{sem}%
-[The rescued dogs had been treated by vets in the past.]
+(but were subsequently abandoned by their owners). ->> --- -> sem ->> 
+The rescued dogs had been treated by vets in the past. ;;
 `sentenceItem; `swl -> --- -> Every singer performed (the last) two songs
-(for the grand finale).}[]{sem}%
-[Every singer performed the last two songs for the grand finale.]
+(for the grand finale). ->> --- -> sem ->> 
+Every singer performed the last two songs for the grand finale. ;;
 `sentenceItem; `swl -> --- -> Everyone in the audience sang along to two songs
 (they were randomly handed lyrics to different songs when
 they came in, and we asked them to join in when the song being
@@ -1510,7 +1519,7 @@ precisely because they cover many cases, which makes defining
 `q.prototypes` or `q.common properties` misleading.  
 Also, sometimes the clearest
 `q.representative` example of a type or concept is actually not a
-`i.typical` example: a sample latter or model home is actually not (in
+`i.typical` example: a sample letter or model home is actually not (in
 many cases) a real letter or home.  So resemblance-to-prototype is at
 best one kind of `q.inner organization` of concepts' and types' spaces
 of extension.  
@@ -1555,8 +1564,8 @@ Set-Theoretic or Modal Logic reductionism (where a concept is just a set
 of instances, or an extension across different possible worlds) %-- George Lakoff and Mark Johnson,
 prominently, argue for concepts' organization around
 prototypes (`cite<[p. 18] LakoffJohnson>; `cite<[p. 171, or p. \textit{xi}]> Johnson)
-and embodied/enactive patterns of interaction (\cite[p. 90]{LakoffJohnson};
-`cite<[p. 208] Johnson>).
+and embodied/enactive patterns of interaction (`cite<[p. 90] LakoffJohnson>;, 
+`cite<[p. 208] Johnson>;).
 Types, by contrast, at least in linguistic applications of type theory, are abstractions
 defined in large part by quasi-functional notions of phrase structure.
 Nevertheless, the `i.patterns` of how types may inter-relate
@@ -1837,6 +1846,8 @@ a locative construction rarely targets `q.sentient` nouns, so in
 `sentenceItem; `swl -> --- -> Let's go to the lawyers. -> sem ;;
 `sentenceItem; `swl -> --- -> Let's go to the press. -> sem ;;
 `sentenceList`
+
+ |.|
 
 we mentally substitute the person with the place where they live or work.
 `p`

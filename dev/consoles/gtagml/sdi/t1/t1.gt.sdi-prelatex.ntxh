@@ -10,10 +10,19 @@
 !/ GH_SDI_Paragraph
 $i: 1
 $s: 2
-$e: 17
+$e: 4
 /!
 <<>
 
+
+!/ GH_SDI_Sentence
+$i: 1
+$p: 1
+$s: 2
+$e: 4
+$g: 0
+/!
+<>>
 
 
 /&

@@ -150,20 +150,19 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
  add_rule( flags_all_(parse_context ,inside_multi_generic),
    gtagml_context,
    "cmd-multi-arg-transition",
-   " (?<fiat-or-wmi> (?: (?: :: ) | [.] | = ) ) (?<main> -{1,2}>{1,2}) "
+   " \\s+ (?<fiat-or-wmi> (?: (?: :: ) | [.] | = ) ) (?<main> -{1,2}>{1,2}) "
    " \\s+ (?<cmd> .valid-tag-command-name. ) "
     ,[&]
  {
-  QString m = p.matched("main");
   QString cmd = p.matched("cmd");
+
+  QString m = p.matched("main");
   QString fiat_or_wmi = p.matched("fiat-or-wmi");
 
   if(fiat_or_wmi == ".")
   {
-   graph_build.multi_arg_transition({}, {}, {}, m);
-//   graph_build.tag_command_entry_inline({}, {}, //fiat_or_wmi,
-//                                        {}, {}, {});
-//?   graph_build.tile_acc(cmd);
+   graph_build.multi_arg_transition({}, fiat_or_wmi, {}, "->");
+   graph_build.tile_acc(cmd);
   }
   else
   {
@@ -194,8 +193,8 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
    " (?<main> -{1,2}>{1,2} ) \\s+ "
    ,[&]
  {
-  QString wmi = p.matched("wmi");  
-  QString fiat = p.matched("fiat");  
+  QString wmi = p.matched("wmi");
+  QString fiat = p.matched("fiat");
   QString m = p.matched("main");
   graph_build.multi_arg_transition(wmi, {}, fiat, m);
  });
@@ -416,7 +415,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
   });
 
   add_rule( gtagml_context, "special-character-sequence",
-   " (?: %-- ) | (?: ->- ) | (?: %\\.,{2,3} ) "
+   " (?: %-- ) | (?: %_) | (?: ->- ) | (?: %\\.,{2,3} ) "
    "  | (?: ` \\\\ \\( (?<bq-esc1> [^)]+ ) \\) ) "
    "  | (?: ` \\\\ { (?<bq-esc2> [^}]+ ) } ) "
    "  | (?: ` \\\\ \\[ (?<bq-esc3> [^]]+ ) \\] ) "

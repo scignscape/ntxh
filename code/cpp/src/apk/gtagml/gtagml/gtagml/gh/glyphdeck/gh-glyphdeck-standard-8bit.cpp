@@ -665,6 +665,9 @@ u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
    {{3, '-'}, 112}, // minus
    {{4, '-'}, 101}, // ndash
 
+   {{1, '_'}, 108}, // _ no escape
+
+
    {{1, '\''}, 113}, // osquote
    {{2, '\''}, 114}, // csquote
    {{3, '\''}, 96}, // ssquote
@@ -1033,7 +1036,7 @@ void get_latex_64_to_117(u1 gp, QString& result)
    ".", // 105 // abbr
    ".", // 106 // ellipses (1 char)
    ".", // 107 // ellipses part (subpunc)
-   ".", // 108 // weak punc
+   "_", // 108 // lit
    "<", // 109 // (quasi-math)
    ">", // 110 // (quasi-math)
    "-", // 111 // quasi-math (neg)

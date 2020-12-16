@@ -132,7 +132,7 @@ int main(int argc, char *argv[])
  qDebug() << "Folder: " << folder << ", File: " << file;
  qDebug() << "ManFolder: " << manfolder;
 
- // file.clear();
+ file.clear();
 
  if(manfolder.isEmpty())
  {

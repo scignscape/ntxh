@@ -590,7 +590,7 @@ void GTagML_Graph_Build::multi_arg_transition(QString wmi, QString inner_wmi,
  }
  tag_command_leave();
  QString tag_command = markup_position_.current_tag_command_name();
- tag_command_entry_inside_multi(wmi, {}, fiat, tag_command,
+ tag_command_entry_inside_multi(wmi, inner_wmi, fiat, tag_command,
    arg_marker, &carried_arg_marker);
 }
 
@@ -1064,6 +1064,7 @@ void GTagML_Graph_Build::check_nonstandard_special_character_sequence
 {
  static QMap<QString, std::pair<QString, u1>> static_map {
   {"%--", {"-", 2}},
+  {"%_", {"_", 1}},
   {"->-", {"/", 2}},
   {"%..", {"...", 2}},
   {"%...", {"...", 2}},

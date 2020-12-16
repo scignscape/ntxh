@@ -1,3 +1,8 @@
+
+`copy<@/gtagml/dgdb/ctg/ngml/gen>;
+`document-title<Cognitive Transform Grammar>;
+`local-title<section3>;
+
 `section.Gaps in Truth-Theoretic Semantics`
 `label<s3>;
 `label<sec:Gaps>;
@@ -74,9 +79,11 @@ overlap:
 
 `sentenceList,
 `sentenceItem; `swl -> itm:almond -> Do you have almond milk? -> pra ;;
-`sentenceItem; `swl ->  -> Can you get MsNBC on your TV? -> pra ;;
+`sentenceItem; `swl -> --- -> Can you get MsNBC on your TV? -> pra ;;
 `sentenceItem; `swl -> itm:needcorkscrew -> This isn't a screw-cap bottle: I need a corkscrew. -> pra ;;
 `sentenceList`
+
+ |.|
 
 These `i.can` be read as bare directives, and would
 be interpreted as such if the hearer believed the
@@ -95,10 +102,10 @@ two, as if people expressed themselves like this:
 
 
 `sentenceList,
-`sentenceItem; `swl ->  -> I think the window is open, can you close it? -> pra ;;
-`sentenceItem; `swl ->  -> I see you have almond milk, can I have some? -> pra ;;
-`sentenceItem; `swl ->  -> If you get MsNBC, can you turn on Rachel Maddow? -> pra ;;
-`sentenceItem; `swl ->  -> If there is a corkscrew in the house, can you get it? -> pra ;;
+`sentenceItem; `swl -> --- -> I think the window is open, can you close it? -> pra ;;
+`sentenceItem; `swl -> --- -> I see you have almond milk, can I have some? -> pra ;;
+`sentenceItem; `swl -> --- -> If you get MsNBC, can you turn on Rachel Maddow? -> pra ;;
+`sentenceItem; `swl -> --- -> If there is a corkscrew in the house, can you get it? -> pra ;;
 `sentenceList`
 `p`
 
@@ -159,12 +166,14 @@ pattern is to use `i.I believe` or `i.I believe that` as an
 implicature analogous to interrogatives:
 
 `sentenceList,
-`sentenceItem; `swl ->  -> I believe you have a reservation for Jones? -> pra ;;
-`sentenceItem; `swl ->  -> I believe this is the customer service desk? -> pra ;;
-`sentenceItem; `swl ->  -> I believe we ordered a second basket of garlic bread? -> pra ;;
-`sentenceItem; `swl ->  -> I believe you can help me find computer
+`sentenceItem; `swl -> --- -> I believe you have a reservation for Jones? -> pra ;;
+`sentenceItem; `swl -> --- -> I believe this is the customer service desk? -> pra ;;
+`sentenceItem; `swl -> --- -> I believe we ordered a second basket of garlic bread? -> pra ;;
+`sentenceItem; `swl -> --- -> I believe you can help me find computer
 accessories in this section? -> pra ;;
 `sentenceList`
+
+ |.|
 
 These speakers are indirectly signaling what they want
 someone to do by openly stating the requisite
@@ -197,10 +206,12 @@ content in light of contexts and implicatures.
 Note that both of these are possible:
 
 `sentenceList,
-`sentenceItem; `swl ->  -> Do you have any milk? -> pra ;;
-`sentenceItem; `swl ->  -> Yes, we have almond milk. -> pra ;;
-`sentenceItem; `swl ->  -> No, we have almond milk. -> pra ;;
+`sentenceItem; `swl -> --- -> Do you have any milk? -> pra ;;
+`sentenceItem; `swl -> --- -> Yes, we have almond milk. -> pra ;;
+`sentenceItem; `swl -> --- -> No, we have almond milk. -> pra ;;
 `sentenceList`
+
+ |.|
 
 A request for milk in a vegan restaurant could plausibly be
 interpreted as a request for a vegan milk-substitute.
@@ -224,6 +235,8 @@ Suppose my friend says this, before and after:
 `sentenceItem; `swl -> itm:put -> Can you put some almond milk in my coffee? -> pra ;;
 `sentenceItem; `swl -> itm:after -> Is there milk in this coffee? -> pra ;;
 `sentenceList`
+
+ |.|
 
 Between (`ref<itm:put>;) and (`ref<itm:after>;) I do put almond milk
 in his coffee and affirm `q.yes` to (`ref<itm:after>;).  I feel it
@@ -255,12 +268,14 @@ kitchen window.  Each of these are plausible and
 basically polite responses:
 
 `sentenceList,
-`sentenceItem; `swl ->  -> It's not open, but there's still some
+`sentenceItem; `swl -> --- -> It's not open, but there's still some
 cold air coming through the cracks. -> pra ;;
-`sentenceItem; `swl ->  -> It's not open, but I closed the window in
+`sentenceItem; `swl -> --- -> It's not open, but I closed the window in
 the bedroom. -> pra ;;
-`sentenceItem; `swl ->  -> I can't %-- it's stuck. -> pra ;;
+`sentenceItem; `swl -> --- -> I can't %-- it's stuck. -> pra ;;
 `sentenceList`
+
+ |.|
 
 In each case I have not fulfilled her request `visavis;
 its literal meaning, but I `i.have` acted benevolently
@@ -272,6 +287,8 @@ the `i.Handbook` has this case (example 12, p. 203, chapter 8):
 `sentenceItem; `swl -> itm:AWindow -> A window, it's still open. -> pra ;;
 `sentenceList`
 
+ |.|
+
 Chapter authors Jeanette K. Gundel and Thorstein Fretheim 
 suggest that (`ref<itm:AWindow>;) is dubious, but in context 
 it may make perfect sense %-- particularly if it follows 
@@ -280,10 +297,12 @@ closed (whichever window was causing a draft); even if that
 wish was `i.expressed` via a `i.close the window`/.`footnote.
 Consider also the case of (`i.Handbook`/, example 9, 
 page 132, chapter 6):
+
 `sentenceList,
 `sentenceItem; `swl -> itm:scribbled -> He scribbled on a living-room wall. -> sem ;;
-%\udref{HandbookCh.}{}
 `sentenceList`
+
+ |.|
 
 Barbara Abbott (chapter author) finds the indefinite article 
 in (`ref<itm:scribbled>;) awkward.  Here, like in (`ref<itm:AWindow>;), 
@@ -395,11 +414,13 @@ So the grandkids should reason as if translating
 between these two implied meanings:
 
 `sentenceList,
-`sentenceItem; `swl ->  -> I believe the kitchen window
+`sentenceItem; `swl -> --- -> I believe the kitchen window
 is open %-- please close it! -> pra ;;
-`sentenceItem; `swl ->  -> I believe some window
+`sentenceItem; `swl -> --- -> I believe some window
 is open %-- please close it! -> pra ;;
 `sentenceList`
+
+ |.|
 
 They have to revise the simplest reading of
 the implicit propositional content of grandma's
@@ -419,18 +440,22 @@ thinking to ourselves (or even saying to others) things
 like
 
 `sentenceList,
-`sentenceItem; `swl ->  -> Grandma wants us to close the window. -> pra ;;
-`sentenceItem; `swl ->  -> He wants a bottle opener. -> pra ;;
+`sentenceItem; `swl -> --- -> Grandma wants us to close the window. -> pra ;;
+`sentenceItem; `swl -> --- -> He wants a bottle opener. -> pra ;;
 `sentenceList`
+
+ |.|
 
 But to respond politely we need to modify
 the parse of their requests to capture the
 `q.essential` content:
 
 `sentenceList,
-`sentenceItem; `swl ->  -> Grandma wants us to eliminate the cold draft. -> pra ;;
-`sentenceItem; `swl ->  -> He wants something to open that bottle. -> pra ;;
+`sentenceItem; `swl -> --- -> Grandma wants us to eliminate the cold draft. -> pra ;;
+`sentenceItem; `swl -> --- -> He wants something to open that bottle. -> pra ;;
 `sentenceList`
+
+ |.|
 
 We have to read outside the literal interpretation
 of what they are saying.  This re-reading is something
@@ -462,6 +487,8 @@ that is open:
 `sentenceItem; `swl -> itm:can -> Can I have some milk? -> pra ;;
 `sentenceItem; `swl -> itm:close -> Can you close the kitchen window? -> pra ;;
 `sentenceList`
+
+ |.|
 
 The point of these `q.mappings` is that they
 preserve the possibility of
@@ -519,6 +546,8 @@ local liquor store? -> pra ;;
 `sentenceItem; `swl -> itm:varietal -> Remember that wine we tasted on the Niagara 
 Peninsula last summer?  What varietal was that again? -> pra ;;
 `sentenceList`
+
+ |.|
 
 The first sentence in each pair attempts to 
 establish a common frame of reference between 
@@ -639,10 +668,12 @@ speech-acts from the relevant cognitive, linguistic, and
 real-world situational contexts:
 
 `sentenceList,
-`sentenceItem; `swl ->  -> That wine was a Cabernet Franc. -> ref ;;
-`sentenceItem; `swl ->  -> Those dogs are my neighbor's.  
+`sentenceItem; `swl -> --- -> That wine was a Cabernet Franc. -> ref ;;
+`sentenceItem; `swl -> --- -> Those dogs are my neighbor's.  
 They are very sweet. -> ref ;;
 `sentenceList`
+
+ |.|
 
 Although there is a determinate propositional content being 
 asserted and although there is no propositional attitude 
@@ -773,11 +804,13 @@ pit bulls), I would be fuzzier about observational warrants
 and could end up in a conversation like:
 
 `sentenceList,
-`sentenceItem; `swl ->  -> Those dogs are Staffordshires. -> pra ;;
-`sentenceItem; `swl ->  -> What's a Staffordshire? -> pra ;;
-`sentenceItem; `swl ->  -> It's a breed of dog. -> pra ;;
+`sentenceItem; `swl -> --- -> Those dogs are Staffordshires. -> pra ;;
+`sentenceItem; `swl -> --- -> What's a Staffordshire? -> pra ;;
+`sentenceItem; `swl -> --- -> It's a breed of dog. -> pra ;;
 `sentenceList`
  
+ |.|
+
 `noindent;Here I still don't really have a picture of what it is 
 like to tell observationally that a dog is a Staffordshire.  
 There may not be any visual cues %-- at least none I 
@@ -928,11 +961,13 @@ constituents in the service of pragmatic ends.
 Consider:
 
 `sentenceList,
-`sentenceItem; `swl ->  -> My colleague Ms. O'Shea would like to interview
+`sentenceItem; `swl -> --- -> My colleague Ms. O'Shea would like to interview
 Mr. Jones, who's an old friend of mine.  Can he take this call? -> pra ;;
 `sentenceItem; `swl -> itm:Jones -> I'm sorry, this is his secretary.  Mr. Jones
 is not available at the moment. -> pra ;;
 `sentenceList`
+
+ |.|
 
 It sounds like Ms. O'Shea is trying to use personal
 connections to score an interview with Mr. Jones.  Hence
@@ -949,13 +984,15 @@ Or:
 
 
 `sentenceList,
-`sentenceItem; `swl ->  -> Mr. Jones, were you present at a meeting where
+`sentenceItem; `swl -> --- -> Mr. Jones, were you present at a meeting where
 the governor promised your employer
 a contract in exchange for campaign contributions? -> pra ;;
-`sentenceItem; `swl ->  -> After consulting with my lawyers, I decline
+`sentenceItem; `swl -> --- -> After consulting with my lawyers, I decline
 to answer that question on the grounds that it
 may incriminate me. -> pra ;;
 `sentenceList`
+
+ |.|
 
 Here Mr. Jones neither confirms nor denies his
 presence at a corrupt meeting.
@@ -972,6 +1009,8 @@ a complete breakdown of language:
 `sentenceItem; `swl -> itm:isJones -> Is Jones there? -> pra ;;
 `sentenceItem; `swl -> itm:not -> He is not available. -> pra ;;
 `sentenceList`
+
+ |.|
 
 The speaker of (`ref<itm:not>;) does not
 provide any prima facie logical content: it neither affirms
@@ -1128,13 +1167,15 @@ of logical possibilities:
 
 
 `sentenceList,
-`sentenceItem; `swl ->  -> If the kitchen window is closed,
+`sentenceItem; `swl -> --- -> If the kitchen window is closed,
 we can see if other windows are open. -> pra ;;
-`sentenceItem; `swl ->  -> If no windows are open,
+`sentenceItem; `swl -> --- -> If no windows are open,
 we can see if there is a draft through the window-cracks. -> pra ;;
-`sentenceItem; `swl ->  -> If there is no draft, we can
+`sentenceItem; `swl -> --- -> If there is no draft, we can
 ask if she wants a sweater. -> pra ;;
 `sentenceList`
+
+ |.|
 
 This is still a logical process: starting from an
 acknowledged proposition (grandma is cold) we
@@ -1250,9 +1291,11 @@ compounds, etc.  It would be the kind of theory motivated
 by cases like
 
 `sentenceList,
-`sentenceItem; `swl ->  -> This wine is a young Syrah. -> log ;;
-`sentenceItem; `swl ->  -> My cousin adopted one of my neighbor's dog's puppies. -> log ;;
+`sentenceItem; `swl -> --- -> This wine is a young Syrah. -> log ;;
+`sentenceItem; `swl -> --- -> My cousin adopted one of my neighbor's dog's puppies. -> log ;;
 `sentenceList`
+
+ |.|
 
 where morphosyntactic form %-- possessives, adjective/noun
 links %-- seems to transparently recapitulate predicate
@@ -1428,9 +1471,11 @@ logical structures can be considered by subtly varying
 the discourse, like:
 
 `sentenceList,
-`sentenceItem; `swl ->  -> Most students oppose the tuition increase. -> sem ;;
+`sentenceItem; `swl -> --- -> Most students oppose the tuition increase. -> sem ;;
 `sentenceItem; `swl -> itm:indef -> Most students oppose a tuition increase. -> sem ;;
 `sentenceList`
+
+ |.|
 
 These show the possibility of `i.increase` being singular
 (which would tend to imply it refers to a concrete
@@ -1450,6 +1495,8 @@ at least 10\%.  Most students oppose a tuition increase. -> sem ;;
 rising costs, have had to raise tuition, but
 most students oppose a tuition increase. -> sem ;;
 `sentenceList`
+
+ |.|
 
 In (`ref<itm:today>;) the definite article could also be used, but saying
 `q.`i.a` tuition increase` seems to reinforce the
@@ -1566,6 +1613,8 @@ may soon reach a critical mass. -> sem ;;
 `sentenceItem; `swl -> itm:tipping -> Protests against the tuition hikes
 may have reached a tipping point. -> sem ;;
 `sentenceList`
+
+ |.|
 
 Each of these sentences says something about a large number
 of students opposing the hikes.  But in each
@@ -1937,8 +1986,10 @@ parse-graph.  And in, say,
 
 `sentenceList,
 `sentenceItem; `swl -> itm:pipe -> We understand that the pipe fitters are also planning to picket the Lake Worth, Florida project as well. -> sco ;;
-\udref{en_gum-ud-train -> email-enronsent03_01-0143}
+`udref -> en%_gum-ud-train -> email-enronsent03_01-0143 ;;
 `sentenceList`
+
+ |.|
 
 there is a two-layer scope implication: given `i.also` we read the hearer as knowing that 
 they are picketing some `i.other` project.  But we also hear `i.the pipe fitters` 
@@ -2121,4 +2172,5 @@ point to topics in computer science that could be
 placed alongside predicate logic as formalizing 
 intuitions for the study of natural language. 
 `p`
+
 
