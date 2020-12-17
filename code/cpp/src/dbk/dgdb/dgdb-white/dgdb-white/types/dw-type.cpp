@@ -10,7 +10,9 @@
 USING_KANS(DGDB)
 
 DW_Type::DW_Type()
-  :  byte_length_(0), meta_object_(nullptr),
+  :  byte_length_(0),
+     byte_length_code_(0), stash_id_(0),
+     meta_object_(nullptr),
      stage_encoder_(nullptr)
 {
 

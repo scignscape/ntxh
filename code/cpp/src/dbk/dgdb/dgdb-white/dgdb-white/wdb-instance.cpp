@@ -1187,6 +1187,17 @@ void* WDB_Instance::get_index_record_ref_target(void* rec, u4 ref_id_column, u4*
  return result;
 }
 
+void* WDB_Instance::new_wg_record(u4 number_of_columns, u4 col0,
+  const QByteArray& col1, u4 qba_field)
+{
+ void* result = wg_create_record(white_, number_of_columns);
+ wg_int c0val = wg_encode_int(white_, col0);
+ wg_set_field(white_, result, 0, c0val);
+
+ set_qba_record_field(result, qba_field, col1);
+ return result;
+}
+
 
 void* WDB_Instance::new_wg_record(u4 number_of_columns, u4 col0)
 {

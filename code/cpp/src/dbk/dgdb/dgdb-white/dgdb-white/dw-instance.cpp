@@ -233,6 +233,59 @@ std::function<void(void*, const QByteArray&)> DW_Instance::get_binary_decoder(DW
  return dt->binary_decoder();
 }
 
+std::function<void(void*, const QByteArray&)> DW_Instance::get_opaque_decoder(DW_Type* dt)
+{
+ return dt->opaque_decoder();
+}
+
+std::function<void(void*, QByteArray&)> DW_Instance::get_opaque_encoder(DW_Type* dt)
+{
+ return dt->opaque_encoder();
+}
+
+s2 DW_Instance::get_stash_id(DW_Type* dt)
+{
+ return dt->stash_id();
+}
+
+u4 DW_Instance::save_typed_value(void* obj, s4 id, u4 qba_index,
+  u4 n_cols,
+  std::function<void(void*, QByteArray&)> qcb)
+{
+ if(qcb)
+ {
+  QByteArray qba;
+  qcb(obj, qba);
+  void* rec = wdb_instance_->new_wg_record(n_cols, id, qba, qba_index);
+  if(rec)
+    return id;
+ }
+ // // TODO: otherwise save a regular record ...
+
+ return 0;
+}
+
+
+u4 DW_Instance::load_typed_value(void* obj, s4 id, u4 qba_index,
+  std::function<void(void*, const QByteArray&)> qcb)
+{
+ if(qcb)
+ {
+  void** rec;
+  QByteArray qba;
+  get_hypernode_payload(id, qba, qba_index, rec);
+  if(*rec)
+  {
+   qcb(obj, qba);
+   return id;
+  }
+ }
+ // // TODO: otherwise load a regular record ...
+
+ return 0;
+}
+
+
 void* DW_Instance::parse_dw_record(DW_Record dr, QString ctn, u4 qba_index, 
   std::function<void(QQueue<void*>&)> qcb)
 {
@@ -385,13 +438,18 @@ DW_Record DW_Instance::query_by_index_record(DW_Stage_Value& dwsv, QString label
 }
 
 
-void DW_Instance::get_hypernode_payload(u4 id, QByteArray& qba, u4 qba_index)
+void DW_Instance::get_hypernode_payload(s4 id, QByteArray& qba,
+  u4 qba_index, void** _rec)
 {
  void* rec = wdb_instance_->get_record_by_id(id);
  if(rec)
  {
   wdb_instance_->get_qba_from_record(rec, qba_index, qba);
+  if(_rec)
+    *_rec = rec;
  }
+ else if(_rec)
+   *_rec = nullptr;
 }
 
 void DW_Instance::get_hypernode_payload(DW_Record dwr, QByteArray& qba, u4 qba_index)

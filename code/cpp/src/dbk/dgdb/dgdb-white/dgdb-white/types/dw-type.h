@@ -47,8 +47,12 @@ class DW_Type
 {
  QString name_;
  QString cname_;
+
  u4 byte_length_;
  u1 byte_length_code_;
+
+ s2 stash_id_;
+
  void* meta_object_;
 
  std::function<void(void*, QByteArray& qba, 
@@ -56,6 +60,10 @@ class DW_Type
 
  std::function<void(const QByteArray& qba, 
   QMap<u4, DW_Stage_Value>& qm, DW_Stage_Queue& sq)> stage_queue_initializer_;
+
+
+ std::function<void(void*, QByteArray& qba)> opaque_encoder_;
+ std::function<void(void*, const QByteArray& qba)> opaque_decoder_;
 
 
  std::function<void*(DW_Node*, 
@@ -91,6 +99,10 @@ public:
  ACCESSORS__GET(std::function<void(void*, QByteArray&)> ,binary_encoder)
  ACCESSORS__GET(std::function<void(void*, const QByteArray&)> ,binary_decoder)
 
+ ACCESSORS__GET(std::function<void(void*, QByteArray&)> ,opaque_encoder)
+ ACCESSORS__GET(std::function<void(void*, const QByteArray&)> ,opaque_decoder)
+
+
  ACCESSORS__GET(MACRO_PASTE(std::function<void(void*, QByteArray& qba, 
    DW_Stage_Value::Callback_type cb)>) ,stage_encoder)
 
@@ -104,6 +116,9 @@ public:
 
  ACCESSORS(u4 ,byte_length)
  ACCESSORS(u1 ,byte_length_code)
+
+ ACCESSORS(s2 ,stash_id)
+
  ACCESSORS(QString ,name)
  ACCESSORS(QString ,cname)
 
@@ -187,6 +202,42 @@ public:
     Class_Of_Member_Function<PROC_Type>, PROC_Type>(pt);
  }  
 
+
+ template<typename PROC_Type>
+ DW_Type& _set_static_opaque_encoder(PROC_Type pt)
+ {
+  opaque_encoder_ = pt;
+  return *this;
+ }
+
+ template<typename PROC_Type>
+ DW_Type& set_static_opaque_encoder(PROC_Type pt)
+ {
+  static s2 stash_id = 0;
+  --stash_id;
+  opaque_encoder_ = pt;
+  stash_id_ = stash_id;
+  return *this;
+ }
+
+ template<typename VALUE_Type, typename PROC_Type>
+ DW_Type& _set_opaque_encoder(PROC_Type pt)
+ {
+  return set_static_opaque_encoder(default_binary_encoder
+     <VALUE_Type>(pt) );
+  return *this;
+ }
+
+
+ template<typename PROC_Type>
+ DW_Type& set_opaque_encoder(PROC_Type pt)
+ {
+  return _set_opaque_encoder<
+    Class_Of_Member_Function<PROC_Type>, PROC_Type>(pt);
+ }
+
+
+
  template<typename PROC_Type>
  DW_Type& set_binary_decoder(PROC_Type pt)
  {
@@ -208,6 +259,29 @@ public:
   return _set_default_binary_decoder<
     Class_Of_Member_Function<PROC_Type>, PROC_Type>(pt);
  }  
+
+
+ template<typename PROC_Type>
+ DW_Type& set_static_opaque_decoder(PROC_Type pt)
+ {
+  opaque_decoder_ = pt;
+  return *this;
+ }
+
+ template<typename VALUE_Type, typename PROC_Type>
+ DW_Type& _set_opaque_decoder(PROC_Type pt)
+ {
+  return set_static_opaque_decoder(default_binary_decoder
+     <VALUE_Type>(pt) );
+  return *this;
+ }
+
+ template<typename PROC_Type>
+ DW_Type& set_opaque_decoder(PROC_Type pt)
+ {
+  return _set_opaque_decoder<
+    Class_Of_Member_Function<PROC_Type>, PROC_Type>(pt);
+ }
 
 
  template<typename CType>

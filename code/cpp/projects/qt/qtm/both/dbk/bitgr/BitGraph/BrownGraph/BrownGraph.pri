@@ -19,6 +19,9 @@ include($$ROOT_DIR/../preferred/boost.pri)
 
 #INCLUDEPATH += $$SRC_PROSET_DIR/BitGraph
 
+INCLUDEPATH += $$SRC_KERNEL_DIR/dgdb/dgdb-white
+
+
 INCLUDEPATH += $$SRC_PROSET_DIR/Brownie/brownie
 # .. \
 
@@ -41,8 +44,19 @@ HEADERS += \
   $$SRC_DIR/qmetas.h
 
 
+HEADERS += \
+  $$SRC_DIR/dgdb/browngraph-info.h \
+
+
+
 SOURCES += \
   $$SRC_DIR/structure/BrownGraph.cpp \
+
+
+SOURCES += \
+  $$SRC_DIR/dgdb/browngraph-info.cpp \
+
+
 
 
 HEADERS += \
@@ -86,6 +100,11 @@ HEADERS += \
 QMAKE_CXXFLAGS += -fopenmp
 
 LIBS += -fopenmp
+
+
+
+LIBS += -L$$TARGETSDIR -lwhitedb -ldgdb-white \
+  -lntxh  -lntxh-parser
 
 
 #LIBS += -lOpenCL

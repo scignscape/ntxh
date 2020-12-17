@@ -122,6 +122,8 @@ public:
  n8 set_record_field(void* rec, u4 col, DW_Stage_Value& dwsv);
 
 
+ void* new_wg_record(u4 number_of_columns, u4 col0,
+   const QByteArray& col1, u4 qba_field = 1);
  void* new_wg_record(u4 number_of_columns, u4 col0, QString col1);
  void* new_wg_record(u4 number_of_columns);
  void* new_wg_record(u4 number_of_columns, u4 col0);

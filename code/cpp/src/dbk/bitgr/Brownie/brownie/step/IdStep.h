@@ -17,12 +17,13 @@ public:
  {
   std::for_each(traversers.begin(), traversers.end(), [](Traverser* trv)
   {
-   QByteArray tn = trv->get().typeName();
+   //QByteArray tn = trv->get().typeName();
+   //if(tn == "Vertex*")
 
-   if(tn == "Vertex*")
+   if(trv->get().userType() == qMetaTypeId<Vertex*>())
      trv->replace_data(QVariant_cast<Vertex*>(trv->get())->id());
 
-   else if(tn == "Edge*")
+   else if(trv->get().userType() == qMetaTypeId<Edge*>())
      trv->replace_data(QVariant_cast<Edge*>(trv->get())->id());
 
    else

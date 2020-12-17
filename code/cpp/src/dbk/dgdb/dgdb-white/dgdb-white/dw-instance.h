@@ -138,12 +138,37 @@ class DW_Instance
 
  std::function<void(QQueue<void*>&)> get_stage_queue_reader(DW_Type* dt);
 
- template<typename VALUE_Type>
+ //?template<typename VALUE_Type>
+
  std::function<void(QQueue<void*>&)> get_stage_queue_callback(QString ctn)
  {
   DW_Type* dt = get_type_by_name(ctn);
   return get_stage_queue_reader(dt);
  }
+
+ std::function<void(void*, const QByteArray&)> get_opaque_decoder(DW_Type* dt);
+
+ std::function<void(void*, const QByteArray&)> get_opaque_decoder_callback(QString ctn)
+ {
+  DW_Type* dt = get_type_by_name(ctn);
+  return get_opaque_decoder(dt);
+ }
+
+ std::function<void(void*, QByteArray&)> get_opaque_encoder(DW_Type* dt);
+
+ std::function<void(void*, QByteArray&)> get_opaque_encoder_callback(QString ctn)
+ {
+  DW_Type* dt = get_type_by_name(ctn);
+  return get_opaque_encoder(dt);
+ }
+
+ s2 get_stash_id(DW_Type* dt);
+ s2 get_stash_id(QString ctn)
+ {
+  DW_Type* dt = get_type_by_name(ctn);
+  return get_stash_id(dt);
+ }
+
 
  std::function<void(void*, QByteArray&)> get_binary_encoder(DW_Type* dt);
  std::function<void(void*, const QByteArray&)> get_binary_decoder(DW_Type* dt);
@@ -298,7 +323,7 @@ public:
 
  DW_Record get_multi_index_record(DW_Record dr);
 
- void get_hypernode_payload(u4 id, QByteArray& qba, u4 qba_index = 1);
+ void get_hypernode_payload(s4 id, QByteArray& qba, u4 qba_index = 1, void** _rec = nullptr);
  void get_hypernode_payload(DW_Record dwr, QByteArray& qba, u4 qba_index = 1);
 
  DW_Record query_by_index_record(DW_Stage_Value& dwsv, QString label = {});
@@ -317,9 +342,41 @@ public:
  VALUE_Type* parse_dw_record(DW_Record dr, u4 qba_index = 1)
  {
   QString tn = QString::fromStdString(typeid(VALUE_Type).name());
-  std::function<void(QQueue<void*>&)> qcb = get_stage_queue_callback<VALUE_Type>(tn);
+  std::function<void(QQueue<void*>&)> qcb = get_stage_queue_callback(tn);
   return (VALUE_Type*) parse_dw_record(dr, tn, qba_index, qcb);
  }
+
+
+ u4 load_typed_value(void* obj, s4 id = 0, u4 qba_index = 1,
+   std::function<void(void*, const QByteArray&)> qcb = nullptr);
+
+ template<typename VALUE_Type>
+ u4 load_typed_value(VALUE_Type* obj, s4 id = 0, u4 qba_index = 1)
+ {
+  QString tn = QString::fromStdString(typeid(VALUE_Type).name());
+  std::function<void(void*, const QByteArray&)> qcb =
+    get_opaque_decoder_callback(tn);
+  if(id == 0)
+    id = get_stash_id(tn);
+  return load_typed_value(obj, id, qba_index, qcb);
+ }
+
+ u4 save_typed_value(void* obj, s4 id = 0, u4 qba_index = 1,
+   u4 n_cols = 2,
+   std::function<void(void*, QByteArray&)> qcb = nullptr);
+
+ template<typename VALUE_Type>
+ u4 save_typed_value(VALUE_Type* obj, s4 id = 0, u4 qba_index = 1,
+   u4 n_cols = 2)
+ {
+  QString tn = QString::fromStdString(typeid(VALUE_Type).name());
+  std::function<void(void*, QByteArray&)> qcb =
+    get_opaque_encoder_callback(tn);
+  if(id == 0)
+    id = get_stash_id(tn);
+  return save_typed_value(obj, id, qba_index, n_cols, qcb);
+ }
+
 
  void parse_binary_record(DW_Record dr, 
   void* v, std::function<void(void*, const QByteArray&)> cb, u4 qba_index = 1);

@@ -57,10 +57,11 @@ class AddPropertyStep : public TraversalStep
 
   inline Element* get_element(QVariant& e)
   {
-   QString tn = QString::fromLatin1(e.typeName());
-   if(tn == "Vertex*")
+//   QString tn = QString::fromLatin1(e.typeName());
+//   if(tn == "Vertex*")
+   if(e.userType() == qMetaTypeId<Vertex*>())
      return static_cast<Element*>(QVariant_cast<Vertex*>(e));
-   else if(tn == "Edge*")
+   else if(e.userType() == qMetaTypeId<Edge*>())
      return static_cast<Element*>(QVariant_cast<Edge*>(e));
    else
      throw std::runtime_error("Add Property Step Error: Not an element!");

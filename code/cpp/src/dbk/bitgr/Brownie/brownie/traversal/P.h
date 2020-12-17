@@ -28,7 +28,7 @@ uint64_t QVariant_cast(QVariant qvar)
 template<>
 Vertex* QVariant_cast(QVariant qvar)
 {
- QString tn = QString::fromLatin1( qvar.typeName() );
+ //QString tn = QString::fromLatin1( qvar.typeName() );
  Vertex* result = qvar.value<Vertex*>();
 // return (Vertex*) qvar.value<void*>();
  return result;
@@ -37,7 +37,7 @@ Vertex* QVariant_cast(QVariant qvar)
 template<>
 Edge* QVariant_cast(QVariant qvar)
 {
- QString tn = QString::fromLatin1( qvar.typeName() );
+ //QString tn = QString::fromLatin1( qvar.typeName() );
  Edge* result = qvar.value<Edge*>();
 // return (Vertex*) qvar.value<void*>();
  return result;

@@ -4,12 +4,22 @@
 #include "structure/BrownGraph.h"
 #include "traversal/GraphTraversal.h"
 
-//?#include "Q.h"
+#include "dgdb/browngraph-info.h"
+
 #include "util/C.h"
 
 #include <QDebug>
 
-//?#include "GPUGraphTraversal.h"
+
+#include "dgdb-white/dw-instance.h"
+#include "dgdb-white/dw-record.h"
+#include "dgdb-white/dgenvironment.h"
+#include "dgdb-white/types/dw-type-system.h"
+#include "dgdb-white/types/dw-type.h"
+
+
+USING_KANS(DGDB)
+
 
 #define LABEL_V "basic_vertex"
 #define LABEL_E "basic_edge"
@@ -20,7 +30,59 @@
 #include "qmetas.h"
 
 
-int main(int argc, char* argv[])
+int main()
+{
+// BrownGraph_Info bgi(DEFAULT_DEV_DGDB_FOLDER "/browngraph/t1");
+
+ QString save_path = DEFAULT_DEV_DGDB_FOLDER "/browngraph/t1";
+
+ DW_Instance* dw = DGEnvironment(
+   save_path);
+
+ // // local_scratch_mode has no persistence at all.
+  //   Scratch mode resets the database whenever it is
+  //   opened by DigammaDB, but keeps the database in memory
+  //   in between (so e.g. it can be examined via the wgdb utility).
+ // dw->Config.flags.local_scratch_mode = true;
+
+ dw->Config.flags.scratch_mode = true;
+ dw->Config.flags.avoid_record_pointers = true;
+
+ dw->init();
+
+ DW_Type_System* dwt = dw->type_system();
+
+ dwt->REGISTER_TYPE_NAME_RESOLUTION(BrownGraph_Info);
+
+ dwt->REGISTER_TYPE(BrownGraph_Info)
+   .default_object_layout()
+   .set_opaque_encoder(&BrownGraph_Info::supply_data)
+   .set_opaque_decoder(&BrownGraph_Info::absorb_data);
+
+//   .set_opaque_encoder(&BrownGraph_Info::supply_data)
+//   .set_opaque_decoder(&BrownGraph_Info::absorb_data);
+
+// dwt->REGISTER_TYPE(Queue_Demo_Class)
+//   .default_object_layout()
+//   .set_stage_encoder(&Queue_Demo_Class::encode_stage_values)
+//   .set_stage_queue_initializer(&Queue_Demo_Class::init_stage_queue)
+//   .set_default_stage_queue_reader(&Queue_Demo_Class::read_stage_queue)
+//  ;
+
+ BrownGraph_Info* bgi = new BrownGraph_Info();
+ if(! dw->load_typed_value(bgi) )
+ {
+  bgi->set_save_path(save_path);
+  dw->save_typed_value(bgi);
+ }
+
+
+// dw->
+
+
+}
+
+int main1(int argc, char* argv[])
 {
  BrownGraph graph;
  GraphTraversalSource* g = graph.traversal();
