@@ -1,18 +1,20 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-#include <list>
+#include <QVector>
 
 class Edge;
 class Vertex;
 class GraphTraversalSource;
 
-class Graph {
+class Graph
+{
 public:
-	Graph(){}
+
+ Graph(){}
 	virtual GraphTraversalSource* traversal() = 0;
-	virtual std::list<Vertex*> vertices() = 0;
-	virtual std::list<Edge*>& edges() = 0;
+ virtual QVector<Vertex*> vertices() = 0;
+ virtual QVector<Edge*>& edges() = 0;
 	virtual Vertex* add_vertex(QString label) = 0;
 	virtual Vertex* add_vertex() = 0;
 	virtual Edge* add_edge(Vertex* from_vertex, Vertex* to_vertex, QString label) = 0;

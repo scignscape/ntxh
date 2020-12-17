@@ -15,7 +15,7 @@
 #include "structure/Direction.h"
 
 #include "structure/BrownEdge.h"
-#include "structure/CPUGraph.h"
+#include "structure/BrownGraph.h"
 
 /*
 Vertex type that uses a uint64_t for identifiers,
@@ -33,7 +33,7 @@ private:
  uint64_t vertex_id_;
 
  // The Graph this BrownVertex belongs to
- CPUGraph* graph_;
+ BrownGraph* graph_;
 
  // The outgoing edges
  QVector<BrownEdge*> edges_out_;
@@ -60,14 +60,14 @@ private:
  //std::mutex add_prop_mutex;
 
 public:
- BrownVertex(CPUGraph* graph, uint64_t vid) {
+ BrownVertex(BrownGraph* graph, uint64_t vid) {
   this->graph_ = graph;
   this->vertex_id_ = vid;
   //this->has_label = false;
   this->magic = VERTEX_MAGIC_NUMBER;
  }
 
- BrownVertex(CPUGraph* graph, uint64_t vid, QString v_label) {
+ BrownVertex(BrownGraph* graph, uint64_t vid, QString v_label) {
   this->graph_ = graph;
   this->vertex_id_ = vid;
   //this->has_label = true;
@@ -84,12 +84,12 @@ public:
 
  /*
                         Get the unique id of the Vertex.
-                        In CPUGraph this is indirectly
+                        In BrownGraph this is indirectly
                         derived from its initial position
                         in the list of Vertices.
                 */
  virtual QVariant id() {
-  return QVariant::fromValue(vertex_id_);
+   return QVariant::fromValue(vertex_id_);
  }
 
  /*

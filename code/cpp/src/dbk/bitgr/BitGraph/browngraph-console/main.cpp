@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdio>
 
-#include "structure/CPUGraph.h"
+#include "structure/BrownGraph.h"
 #include "traversal/GraphTraversal.h"
 
 //?#include "Q.h"
@@ -15,6 +15,8 @@
 #define LABEL_E "basic_edge"
 #define NAME "name"
 
+#define brownv value<Vertex*>
+
 Q_DECLARE_METATYPE(GraphTraversal*)
 Q_DECLARE_METATYPE(Edge*)
 Q_DECLARE_METATYPE(Vertex*)
@@ -23,19 +25,59 @@ Q_DECLARE_METATYPE(VertexProperty<QVariant>*)
 
 int main(int argc, char* argv[])
 {
- CPUGraph graph;
+ BrownGraph graph;
  GraphTraversalSource* g = graph.traversal();
 
- g
-   ->addV(LABEL_V)
-   ->property(NAME, "n1")
-   ->next();
+ Vertex* v1 = g->addV(LABEL_V)->property(NAME ,"n1")->next().brownv();
+ Vertex* v2 = g->addV(LABEL_V)->property(NAME ,"n2")->next().brownv();
+
+ Vertex* v3 = g->addV(LABEL_V)->property(NAME ,"n3")->next().brownv();
+ Vertex* v4 = g->addV(LABEL_V)->property(NAME ,"n4")->next().brownv();
+
+
+ qDebug() << v1->id().toULongLong();
+ qDebug() << v2->id().toULongLong();
+
+
+// Vertex* v11 = g->V()->has(NAME ,"n1")->next().brownv();
+// qDebug() << v11->id().toULongLong();
+
+ try
+ {
+  g->V(v1)->addE(LABEL_E)->to(v2)->iterate();
+  g->V(v1)->addE(LABEL_E)->to(v4)->iterate();
+  g->V(v3)->addE(LABEL_E)->to(v4)->iterate();
+ }
+ catch(const std::exception& err)
+ {
+  qDebug() << err.what() << "\n";
+  return -1;
+ }
+
+ g->V()->in()->forEachRemaining([](QVariant& v)
+ {
+  Vertex* vtx = QVariant_cast<Vertex*>(v);
+  qDebug() << "in id: " << QVariant_cast<QString>(vtx->property(NAME)->value()) << "\n";
+ });
+
+ g->V()->out()->forEachRemaining([](QVariant& v)
+ {
+  Vertex* vtx = QVariant_cast<Vertex*>(v);
+  qDebug() << "out id: " << QVariant_cast<QString>(vtx->property(NAME)->value()) << "\n";
+ });
+
+
+ qDebug() << "count: " << graph.edges().size() << "\n";
+ for(Edge* e : graph.edges())
+   qDebug() << QVariant_cast<QString>(e->outV()->property(NAME)->value()) << " -> " << QVariant_cast<QString>(e->inV()->property(NAME)->value()) << "\n";
+
+ return 0;
 }
 
 
-int main1(int argc, char* argv[])
+int main2(int argc, char* argv[])
 {
- CPUGraph graph;
+ BrownGraph graph;
  GraphTraversalSource* g = graph.traversal();
 
  QString filename = QString(argv[1]);
@@ -113,7 +155,7 @@ int main1(int argc, char* argv[])
 
  //    try {
  ////?
- ////        GPUGraphTraversal* gpu_trv = dynamic_cast<GPUGraphTraversal*>(dynamic_cast<CPUGraphTraversalSource*>(graph.traversal())->withGPU()->V()->id());
+ ////        GPUGraphTraversal* gpu_trv = dynamic_cast<GPUGraphTraversal*>(dynamic_cast<BrownGraphTraversalSource*>(graph.traversal())->withGPU()->V()->id());
  ////        gpu_trv->filter(Q<uint64_t>::eq((uint64_t)1, gpu_trv))->iterate();
  //    } catch(const std::exception& err) {
  //        qDebug() << err.what() << "\n";
@@ -122,7 +164,7 @@ int main1(int argc, char* argv[])
 
  //    try {
  //        qDebug() << "min id: " << QVariant_cast<uint64_t>(graph.traversal()->V()->id()->min(C<uint64_t>::compare())->next()) << "\n";
- //        dynamic_cast<CPUGraphTraversalSource*>(graph.traversal())->withGPU()->V()->id()->min(C<uint64_t>::compare())->iterate();
+ //        dynamic_cast<BrownGraphTraversalSource*>(graph.traversal())->withGPU()->V()->id()->min(C<uint64_t>::compare())->iterate();
  //    } catch(const std::exception& err) {
  //        qDebug() << err.what() << "\n";
  //        return -1;

@@ -8,7 +8,8 @@
 
 class Vertex;
 
-class Edge : public Element {
+class Edge : public Element
+{
 public:
 	/*
 		Create a new Edge; does nothing
@@ -56,7 +57,8 @@ public:
 	Return the pair of Vertices related
 	to this edge as an (outV, inV) pair.
 */
-Vertex** Edge::bothV() {
+Vertex** Edge::bothV()
+{
 	Vertex** vertices = (Vertex**)malloc(sizeof(Vertex*) * 2);
 	vertices[0] = outV();
 	vertices[1] = inV();

@@ -8,20 +8,23 @@
 #include <QVector>
 #include <algorithm>
 
-class InjectStep : public TraversalStep {
-    private:
-        QVector<QVariant> objects;
-        
-    public:
-        InjectStep(QVector<QVariant>& injects) : TraversalStep(SIDE_EFFECT, INJECT_STEP) {
-            std::copy(injects.begin(), injects.end(), std::back_inserter(objects));
-        }
+class InjectStep : public TraversalStep
+{
+ QVector<QVariant> objects_;
 
-        virtual void apply(GraphTraversal* trv, TraverserSet& traversers) {
-            std::for_each(objects.begin(), objects.end(), [&](QVariant obj){
-                traversers.push_back(new Traverser(obj));
-            });
-        }
+public:
+ InjectStep(QVector<QVariant>& injects) : TraversalStep(SIDE_EFFECT, INJECT_STEP)
+ {
+  std::copy(injects.begin(), injects.end(), std::back_inserter(objects_));
+ }
+
+ virtual void apply(GraphTraversal* trv, TraverserSet& traversers)
+ {
+  std::for_each(objects_.begin(), objects_.end(), [&](QVariant obj)
+  {
+   traversers.push_back(new Traverser(obj));
+  });
+ }
 };
 
 #endif

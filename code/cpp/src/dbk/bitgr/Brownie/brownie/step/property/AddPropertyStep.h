@@ -12,55 +12,79 @@
 
 
 // Edge properties currently not supported.
-class AddPropertyStep : public TraversalStep {
+class AddPropertyStep : public TraversalStep
+{
 	private:
-		Cardinality cardinality;
-		QString key;
-		QVariant value;
+  Cardinality cardinality_;
+  QString key_;
+  QVariant value_;
+
 	public:
+
 		AddPropertyStep(QString property_key, QVariant& value)
-		: TraversalStep(MAP, ADD_PROPERTY_STEP) {
-			this->cardinality = SINGLE;
-			this->key = QString(property_key);
-			this->value = QVariant(value);
+    : TraversalStep(MAP, ADD_PROPERTY_STEP)
+  {
+   this->cardinality_ = SINGLE;
+   this->key_ = QString(property_key);
+   this->value_ = QVariant(value);
+
+   SET_HINT
 		}
 
 		AddPropertyStep(Cardinality card, QString property_key, QVariant& value)
-		: TraversalStep(MAP, ADD_PROPERTY_STEP) {
-			this->cardinality = card;
-			this->key = QString(property_key);
-			this->value = QVariant(value);
+    : TraversalStep(MAP, ADD_PROPERTY_STEP)
+  {
+   this->cardinality_ = card;
+   this->key_ = QString(property_key);
+   this->value_ = QVariant(value);
+
+   SET_HINT
 		}
 
-		QString get_key() { return this->key; }
+  QString get_key() { return this->key_; }
 
-		QVariant get_value() { return this->value; };
+  QVariant get_value() { return this->value_; };
 
-		inline Element* get_element(QVariant& e) {
+  virtual QString getInfo()
+  {
+   QString info = "AddPropertyStep(";
+   info += cardinality_ == Cardinality::SINGLE?
+    "single" : cardinality_ == Cardinality::LIST? "list" : "set";// has_label ? label : "";
+   info += ")";
+   return info;
+  }
+
+
+  inline Element* get_element(QVariant& e)
+  {
+   QString tn = QString::fromLatin1(e.typeName());
+   if(tn == "Vertex*")
+     return static_cast<Element*>(QVariant_cast<Vertex*>(e));
+   else if(tn == "Edge*")
+     return static_cast<Element*>(QVariant_cast<Edge*>(e));
+   else
+     throw std::runtime_error("Add Property Step Error: Not an element!");
+
 //			const std::type_info& t = e.type();
 //			if(t == typeid(Vertex*)) return static_cast<Element*>(QVariant_cast<Vertex*>(e));
 //			else if(t == typeid(Edge*)) return static_cast<Element*>(QVariant_cast<Edge*>(e));
 //			else throw std::runtime_error("Add Property Step Error: Not an element!");
 		}
 		
-		virtual void apply(GraphTraversal* current_traversal, TraverserSet& traversers) {
-
-   QVariant qvar = this->value;
-   QString tn = QString::fromLatin1( qvar.typeName() );
-   qDebug() << "TN = " << tn;
-
-   QVariant qvar1 = QVariant::fromValue(new GraphTraversal);
-   QString tn1 = QString::fromLatin1( qvar1.typeName() );
-   qDebug() << "TN1 = " << tn1;
+  virtual void apply(GraphTraversal* current_traversal, TraverserSet& traversers)
+  {
+   QVariant qvar = this->value_;
+   QByteArray tn = qvar.typeName();
 
    if(tn == "GraphTraversal*")
    //if(false)//this->value.type() == typeid(GraphTraversal*))
    {
-				GraphTraversal* ap_anonymous_trv = QVariant_cast<GraphTraversal*>(value);
+    GraphTraversal* ap_anonymous_trv = QVariant_cast<GraphTraversal*>(value_);
 				
 				#pragma omp for
 				//std::for_each(traversers.begin(), traversers.end(), [&](Traverser* trv) {
-				for(int k = 0; k < traversers.size(); ++k) {
+    for(int k = 0; k < traversers.size(); ++k)
+    {
 					Traverser* trv = traversers[k];
 					//Element* e = get_element(trv->get());
 					Vertex* e = QVariant_cast<Vertex*>(trv->get());
@@ -73,16 +97,18 @@ class AddPropertyStep : public TraversalStep {
 					QVariant prop_value = new_trv.next();
 
 					// Store the property; TODO deal w/ edges
-					e->property(this->cardinality, this->key, prop_value);
+     e->property(this->cardinality_, this->key_, prop_value);
 					//std::cout << "property stored!\n";
 				}
 				//});
 			} 
-			else {
+   else
+   {
 				// Store the propety; TODO deal w/ edges
-				std::for_each(traversers.begin(), traversers.end(), [&](Traverser* trv){
+    std::for_each(traversers.begin(), traversers.end(), [&](Traverser* trv)
+    {
 					Vertex* e = QVariant_cast<Vertex*>(trv->get());
-					e->property(this->cardinality, this->key, this->value);	
+     e->property(this->cardinality_, this->key_, this->value_);
 				});
 				//std::cout << "property stored!\n";
 			}

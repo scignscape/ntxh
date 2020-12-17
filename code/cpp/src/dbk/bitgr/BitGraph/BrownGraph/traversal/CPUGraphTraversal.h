@@ -8,13 +8,15 @@
 #include "traversal/GraphTraversal.h"
 #include "traversal/GraphTraversalSource.h"
 
-class CPUGraphTraversal : public GraphTraversal {
-	public:
-		CPUGraphTraversal(GraphTraversalSource* src);
+class CPUGraphTraversal : public GraphTraversal
+{
+
+public:
+ CPUGraphTraversal(GraphTraversalSource* src);
 
 };
 
-#include "structure/CPUGraph.h"
+#include "structure/BrownGraph.h"
 
 CPUGraphTraversal::CPUGraphTraversal(GraphTraversalSource* src)
 	: GraphTraversal(src) {}

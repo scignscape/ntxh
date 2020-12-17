@@ -9,33 +9,47 @@
 
 #define ADD_VERTEX_START_STEP 0x70
 
-class AddVertexStartStep: public TraversalStep {
-	private:
-		QString label;
-		bool has_label;
-	public:
-		AddVertexStartStep(QString label_arg)
-		: TraversalStep(MAP, ADD_VERTEX_START_STEP) {
-			label = label_arg;
-			has_label = true;
-		}
+class AddVertexStartStep: public TraversalStep
+{
+private:
 
-		AddVertexStartStep()
-		: TraversalStep(MAP, ADD_VERTEX_START_STEP) {
-			has_label = false;
-		}
-		
-		virtual QString getInfo() {
-			QString info = "AddVertexStartStep(";
-			info += has_label ? label : "";
-			info += ")";
-			return info;
-		}
+ QString label_;
 
-		virtual void apply(GraphTraversal* trv, TraverserSet& traversers) {
-			Vertex* v = this->has_label ? trv->getGraph()->add_vertex(this->label) : trv->getGraph()->add_vertex();
-   traversers.push_back(new Traverser(QVariant::fromValue(v)));
-		}
+ bool has_label()
+ {
+  return !label_.isNull();
+ }
+
+public:
+ AddVertexStartStep(QString label_arg)
+   : TraversalStep(MAP, ADD_VERTEX_START_STEP)
+ {
+  label_ = label_arg;
+  SET_HINT
+  //has_label = true;
+ }
+
+ AddVertexStartStep()
+   : TraversalStep(MAP, ADD_VERTEX_START_STEP)
+ {
+  //has_label = false;
+ }
+
+ virtual QString getInfo()
+ {
+  QString info = "AddVertexStartStep(";
+  info += label_;// has_label ? label : "";
+  info += ")";
+  return info;
+ }
+
+ virtual void apply(GraphTraversal* trv, TraverserSet& traversers)
+ {
+  Vertex* v = this->has_label()
+    ? trv->getGraph()->add_vertex(this->label_)
+    : trv->getGraph()->add_vertex();
+  traversers.push_back(new Traverser(QVariant::fromValue(v)));
+ }
 };
 
 #endif

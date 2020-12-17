@@ -6,24 +6,27 @@
 #include <string.h>
 #include <QVariant>
 
-class Traverser {
-	private:
-		QVariant my_data;
-		std::list<QVariant> path;
-		std::map<QString, QVariant> side_effects;
+class Traverser
+{
+ QVariant my_data_;
+ std::list<QVariant> path_;
+ std::map<QString, QVariant> side_effects_;
 
-	public:
-		Traverser(QVariant t) {
-			my_data = QVariant(t);
-		}
+public:
+ Traverser(QVariant t)
+ {
+  my_data_ = QVariant(t);
+ }
 
-		virtual QVariant get() {
-			return my_data;
-		}
+ virtual QVariant get()
+ {
+  return my_data_;
+ }
 
-		virtual void replace_data(QVariant t) {
-			my_data = t;
-		}
+ virtual void replace_data(QVariant t)
+ {
+  my_data_ = t;
+ }
 };
 
 typedef QVector<Traverser*> TraverserSet;

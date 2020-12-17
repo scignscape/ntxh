@@ -29,11 +29,11 @@ class Traverser;
 class GraphTraversal
 {
 protected:
-  QVector<TraversalStep*> steps;
+  QVector<TraversalStep*> steps_;
 
 
 private:
-  GraphTraversalSource* source;
+  GraphTraversalSource* source_;
 
 public:
 
@@ -54,18 +54,18 @@ public:
 
  QVector<TraversalStep*>& getSteps()
  {
-		return this->steps;
+  return this->steps_;
 	}
 
  GraphTraversal* appendStep(TraversalStep* step)
  {
-		this->steps.push_back(step);
+  this->steps_.push_back(step);
 		return this;
 	}
 
  GraphTraversal* insertStep(size_t k, TraversalStep* step)
  {
-		this->steps.insert(steps.begin() + k, step);
+  this->steps_.insert(steps_.begin() + k, step);
 		return this;
 	}
 
@@ -268,19 +268,25 @@ public:
  QVector<QVariant> toVector()
  {
   QVector<QVariant> results;
-		this->forEachRemaining([&](QVariant& a){results.push_back(a);});
+  this->forEachRemaining([&](QVariant& a)
+   {
+    results.push_back(a);
+   });
 		return results;
 	}
 
- QList<QVariant> toList() {
+ QList<QVariant> toList()
+ {
   QList<QVariant> results;
-		this->forEachRemaining([&](QVariant& a) {
-			results.push_back(a);
-		});
+  this->forEachRemaining([&](QVariant& a)
+   {
+    results.push_back(a);
+   });
 		return results;
 	}
 
-	QVariant next() { 
+ QVariant next()
+ {
 		return this->toVector()[0];
 	}
 
@@ -304,7 +310,7 @@ public:
 */
 GraphTraversal::GraphTraversal()
 {
- source = nullptr;
+ source_ = nullptr;
 }
 
 #include "traversal/GraphTraversalSource.h"
@@ -315,31 +321,31 @@ GraphTraversal::GraphTraversal()
 */
 GraphTraversal::GraphTraversal(GraphTraversalSource* src) : GraphTraversal()
 {
-	source = src;
+ source_ = src;
 }
 
 #include "step/TraversalStep.h"
 GraphTraversal::GraphTraversal(GraphTraversal* trv) : GraphTraversal()
 {
-	this->steps = trv->getSteps();
-	this->source = trv->getTraversalSource();
+ this->steps_ = trv->getSteps();
+ this->source_ = trv->getTraversalSource();
 }
 
 GraphTraversal::GraphTraversal(GraphTraversalSource* src, GraphTraversal* trv)
 {
-	this->steps = trv->getSteps();
-	this->source = src;
+ this->steps_ = trv->getSteps();
+ this->source_ = src;
 }
 
 Graph* GraphTraversal::getGraph()
 {
-	return (*source).getGraph();
+ return (*source_).getGraph();
 }
 
 
 GraphTraversalSource* GraphTraversal::getTraversalSource()
 {
-	return source;
+ return source_;
 }
 
 /*
@@ -349,9 +355,9 @@ GraphTraversalSource* GraphTraversal::getTraversalSource()
 void GraphTraversal::getInitialTraversal()
 {
 	// Apply each strategy to this traversal's traversers.
- std::for_each(this->source->getStrategies().begin(), this->source->getStrategies().end(), [this](TraversalStrategy strategy)
+ std::for_each(this->source_->getStrategies().begin(), this->source_->getStrategies().end(), [this](TraversalStrategy strategy)
  {
-		strategy(this->steps);
+  strategy(this->steps_);
 	});
 }
 
@@ -373,41 +379,50 @@ void GraphTraversal::getInitialTraversal()
 #include "step/math/CountStep.h"
 #include "step/math/MinStep.h"
 
-GraphTraversal* GraphTraversal::addE(QString label){
+GraphTraversal* GraphTraversal::addE(QString label)
+{
 	return this->appendStep(new AddEdgeStep(label));
 }
 
-GraphTraversal* GraphTraversal::addV(QString label) {
+GraphTraversal* GraphTraversal::addV(QString label)
+{
 	return this->appendStep(new AddVertexStep(label));
 }
 
-GraphTraversal* GraphTraversal::addV() {
+GraphTraversal* GraphTraversal::addV()
+{
 	return this->appendStep(new AddVertexStep());
 }
 
-GraphTraversal* GraphTraversal::coalesce(QVector<GraphTraversal*> traversals) {
+GraphTraversal* GraphTraversal::coalesce(QVector<GraphTraversal*> traversals)
+{
 	return this->appendStep(new CoalesceStep(traversals));
 }
 
-GraphTraversal* GraphTraversal::property(QString property_key, QVariant value) {
+GraphTraversal* GraphTraversal::property(QString property_key, QVariant value)
+{
 	return this->appendStep(new AddPropertyStep(property_key, value));
 }
 
-GraphTraversal* GraphTraversal::V() {
+GraphTraversal* GraphTraversal::V()
+{
 	return this->appendStep(new GraphStep(VERTEX, {}));
 }
 
-GraphTraversal* GraphTraversal::V(Vertex* vertex) {
+GraphTraversal* GraphTraversal::V(Vertex* vertex)
+{
 	return this->appendStep(new GraphStep(VERTEX, {vertex->id()}));
 }
 
-GraphTraversal* GraphTraversal::V(QVector<Vertex*> vertices) {
+GraphTraversal* GraphTraversal::V(QVector<Vertex*> vertices)
+{
  QVector<QVariant> ids;
 	for(Vertex* v : vertices) ids.push_back(v->id());
 	return this->appendStep(new GraphStep(VERTEX, ids));
 }
 
-GraphTraversal* GraphTraversal::from(QString sideEffectLabel) {
+GraphTraversal* GraphTraversal::from(QString sideEffectLabel)
+{
 	// Because from() uses void* (sigh) this awkward memory copy is necessary.
 	const char* base_string = sideEffectLabel.c_str();
 	size_t size = (1 + strlen(base_string));
@@ -418,12 +433,14 @@ GraphTraversal* GraphTraversal::from(QString sideEffectLabel) {
 	return this->appendStep(new FromStep(sideEffectLabel_cpy));
 }
 
-GraphTraversal* GraphTraversal::from(Vertex* fromVertex) {
+GraphTraversal* GraphTraversal::from(Vertex* fromVertex)
+{
 	return this->appendStep(new FromStep(fromVertex));
 }
 
 // MODULATOR for addE
-GraphTraversal* GraphTraversal::to(QString sideEffectLabel) {
+GraphTraversal* GraphTraversal::to(QString sideEffectLabel)
+{
 	// Because to() uses void* (sigh) this awkward memory copy is necessary.
 	const char* base_string = sideEffectLabel.c_str();
 	size_t size = (1 + strlen(base_string));
@@ -435,23 +452,28 @@ GraphTraversal* GraphTraversal::to(QString sideEffectLabel) {
 }
 
 // MODULATOR for addE
-GraphTraversal* GraphTraversal::to(Vertex* toVertex) {
+GraphTraversal* GraphTraversal::to(Vertex* toVertex)
+{
 	return this->appendStep(new ToStep(toVertex));
 }
 
-GraphTraversal* GraphTraversal::both() {
+GraphTraversal* GraphTraversal::both()
+{
 	return this->appendStep(new VertexStep(BOTH, {}, VERTEX));
 }
 
-GraphTraversal* GraphTraversal::both(QVector<QString> labels) {
+GraphTraversal* GraphTraversal::both(QVector<QString> labels)
+{
 	return this->appendStep(new VertexStep(BOTH, labels, VERTEX));
 }
 
-GraphTraversal* GraphTraversal::bothE() {
+GraphTraversal* GraphTraversal::bothE()
+{
 	return this->appendStep(new VertexStep(BOTH, {}, EDGE));
 }
 
-GraphTraversal* GraphTraversal::bothE(QVector<QString> labels) {
+GraphTraversal* GraphTraversal::bothE(QVector<QString> labels)
+{
 	return this->appendStep(new VertexStep(BOTH, labels, EDGE));
 }
 
@@ -459,91 +481,112 @@ GraphTraversal* GraphTraversal::bothE(QVector<QString> labels) {
 //GraphTraversal* inV();
 //GraphTraversal* otherV();
 
-GraphTraversal* GraphTraversal::out() {
+GraphTraversal* GraphTraversal::out()
+{
 	return this->appendStep(new VertexStep(OUT, VERTEX));
 }
 
-GraphTraversal* GraphTraversal::out(QVector<QString> labels) {
+GraphTraversal* GraphTraversal::out(QVector<QString> labels)
+{
 	return this->appendStep(new VertexStep(OUT, labels, VERTEX));
 }
 
-GraphTraversal* GraphTraversal::in() {
+GraphTraversal* GraphTraversal::in()
+{
 	return this->appendStep(new VertexStep(IN, VERTEX));
 }
 
-GraphTraversal* GraphTraversal::in(QVector<QString> labels) {
+GraphTraversal* GraphTraversal::in(QVector<QString> labels)
+{
 	return this->appendStep(new VertexStep(IN, labels, VERTEX));
 }
 
-GraphTraversal* GraphTraversal::outE() {
+GraphTraversal* GraphTraversal::outE()
+{
 	return this->appendStep(new VertexStep(OUT, EDGE));
 }
 
-GraphTraversal* GraphTraversal::outE(QVector<QString> labels) {
+GraphTraversal* GraphTraversal::outE(QVector<QString> labels)
+{
 	return this->appendStep(new VertexStep(OUT, labels, EDGE));
 }
 
-GraphTraversal* GraphTraversal::inE() {
+GraphTraversal* GraphTraversal::inE()
+{
 	return this->appendStep(new VertexStep(IN, EDGE));
 }
 
-GraphTraversal* GraphTraversal::inE(QVector<QString> labels) {
+GraphTraversal* GraphTraversal::inE(QVector<QString> labels)
+{
 	return this->appendStep(new VertexStep(IN, labels, EDGE));
 }
 
-GraphTraversal* GraphTraversal::id() {
+GraphTraversal* GraphTraversal::id()
+{
 	return this->appendStep(new IdStep());
 }
 
-GraphTraversal* GraphTraversal::identity() {
+GraphTraversal* GraphTraversal::identity()
+{
 	return this->appendStep(new IdentityStep());
 }
 
-GraphTraversal* GraphTraversal::min(std::function<int(Traverser*, Traverser*)> c) {
+GraphTraversal* GraphTraversal::min(std::function<int(Traverser*, Traverser*)> c)
+{
 	return this->appendStep(new MinStep(c));
 }
 
-GraphTraversal* GraphTraversal::min() {
+GraphTraversal* GraphTraversal::min()
+{
 	return this->appendStep(new MinStep(nullptr));
 }
 
-GraphTraversal* GraphTraversal::count() {
+GraphTraversal* GraphTraversal::count()
+{
 	return this->appendStep(new CountStep());
 }
 
 template<typename T>
-GraphTraversal* GraphTraversal::has(QString key, std::function<bool(QVariant)> pred) {
+GraphTraversal* GraphTraversal::has(QString key, std::function<bool(QVariant)> pred)
+{
 	return this->appendStep(new HasStep(key, pred));
 }
 
 template<typename T>
-GraphTraversal* GraphTraversal::has(QString key, T value) {
+GraphTraversal* GraphTraversal::has(QString key, T value)
+{
 	return this->appendStep(new HasStep(key, value, P<T>::eq(value)));
 }
 
 template<typename T>
-GraphTraversal* GraphTraversal::has(QString key) {
+GraphTraversal* GraphTraversal::has(QString key)
+{
 	return this->appendStep(new HasStep(key, nullptr));
 }
 
-GraphTraversal* GraphTraversal::values(QVector<QString> labels) {
+GraphTraversal* GraphTraversal::values(QVector<QString> labels)
+{
 	return this->appendStep(new PropertyStep(VALUE, labels));
 }
 
-GraphTraversal* GraphTraversal::values(QString label) {
+GraphTraversal* GraphTraversal::values(QString label)
+{
 	return this->appendStep(new PropertyStep(VALUE, {label}));
 }
 
-QString GraphTraversal::explain() {
+QString GraphTraversal::explain()
+{
 	this->getInitialTraversal();
 
 	QString explanation = "GraphTraversal {\n";
-	for(int k = 0; k < this->steps.size(); k++) explanation += this->steps[k]->getInfo() + "\n";
+ for(int k = 0; k < this->steps_.size(); k++) explanation += this->steps_[k]->getInfo() + "\n";
 
 	return explanation + "}";
 }
 
 #include "traversal/Traverser.h"
+
+//?
 #include <omp.h>
 
 /*
@@ -563,16 +606,17 @@ void GraphTraversal::forEachRemaining(std::function<void(QVariant&)> func) {
 */
 
 
-void GraphTraversal::forEachRemaining(std::function<void(QVariant&)> func) {
+void GraphTraversal::forEachRemaining(std::function<void(QVariant&)> func)
+{
 	this->getInitialTraversal();
 	
 	TraverserSet traversers;
 	size_t current_step = 0;
-	size_t num_steps = steps.size();
+ size_t num_steps = steps_.size();
 	
  while(current_step < num_steps)
  {
-		steps[current_step++]->apply(this, traversers);
+  steps_[current_step++]->apply(this, traversers);
 		TraverserSet new_traversers;
 
 		size_t step = current_step;
@@ -583,13 +627,14 @@ void GraphTraversal::forEachRemaining(std::function<void(QVariant&)> func) {
   #pragma omp for private(step, k, thread)
   for(size_t k = 0; k < sz; ++k)
   {
-			thread = 0; //? omp_get_thread_num();
+   thread = omp_get_thread_num();
 			TraverserSet local_traversers(traversers.begin() + k, traversers.begin() + k + 1);
-   while(step < num_steps && !steps[step]->is_barrier)
+   while(step < num_steps && !steps_[step]->is_barrier())
    {
-				steps[step]->apply(this, local_traversers);
+    steps_[step]->apply(this, local_traversers);
 				step++;
-				if(thread == 0) current_step = step;
+    if(thread == 0)
+      current_step = step;
 			}
 
 			#pragma omp critical 
@@ -604,6 +649,7 @@ void GraphTraversal::forEachRemaining(std::function<void(QVariant&)> func) {
 
  std::for_each(traversers.begin(), traversers.end(), [&](Traverser* trv)
  {
+  TraverserSet traversers1 = traversers;
 		QVariant obj = trv->get();
 		func(obj);
 	});
@@ -615,7 +661,7 @@ void GraphTraversal::iterate()
 	this->getInitialTraversal();
 
 	TraverserSet traversers;
- std::for_each(this->steps.begin(), this->steps.end(), [&](TraversalStep* step)
+ std::for_each(this->steps_.begin(), this->steps_.end(), [&](TraversalStep* step)
  {
 		step->apply(this, traversers);
 	});

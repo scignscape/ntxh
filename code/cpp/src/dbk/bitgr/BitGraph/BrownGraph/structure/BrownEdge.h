@@ -11,7 +11,7 @@ class BrownEdge : public Edge
 private:
 
  // The Graph this Edge belongs to
- CPUGraph* graph_;
+ BrownGraph* graph_;
 
  // The unique id of this BrownEdge
  uint64_t edge_id_;
@@ -31,7 +31,7 @@ public:
                         out vertices and the given label.  Per TP3
                         standard, all Edges must have a label.
                 */
- BrownEdge(CPUGraph* graph, uint64_t id, Vertex* out, Vertex* in, QString label)
+ BrownEdge(BrownGraph* graph, uint64_t id, Vertex* out, Vertex* in, QString label)
  {
   this->graph_ = graph;
   this->edge_id_ = id;

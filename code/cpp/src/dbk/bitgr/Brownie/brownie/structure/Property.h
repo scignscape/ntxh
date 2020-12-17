@@ -4,11 +4,12 @@
 #include <QString>
 
 template<typename T>
-class Property {
-	public:		
-		QString key();
+class Property
+{
+public:
 
-		T value();
+ QString key();
+ T value();
 };
 
 #endif

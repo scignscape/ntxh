@@ -35,6 +35,15 @@ Vertex* QVariant_cast(QVariant qvar)
 }
 
 template<>
+Edge* QVariant_cast(QVariant qvar)
+{
+ QString tn = QString::fromLatin1( qvar.typeName() );
+ Edge* result = qvar.value<Edge*>();
+// return (Vertex*) qvar.value<void*>();
+ return result;
+}
+
+template<>
 GraphTraversal* QVariant_cast(QVariant qvar)
 {
  return (GraphTraversal*) qvar.value<void*>();
@@ -45,6 +54,8 @@ QString QVariant_cast(QVariant qvar)
 {
  return qvar.value<QString>();
 }
+
+
 
 
 

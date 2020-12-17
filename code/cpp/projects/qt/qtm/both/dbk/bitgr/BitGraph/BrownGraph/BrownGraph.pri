@@ -15,9 +15,9 @@ include($$ROOT_DIR/../preferred/sysr.pri)
 include($$ROOT_DIR/../preferred/boost.pri)
 
 
-TEMPLATE = app
+#TEMPLATE = app
 
-INCLUDEPATH += $$SRC_PROSET_DIR/BitGraph
+#INCLUDEPATH += $$SRC_PROSET_DIR/BitGraph
 
 INCLUDEPATH += $$SRC_PROSET_DIR/Brownie/brownie
 # .. \
@@ -32,12 +32,15 @@ HEADERS += \
   $$SRC_DIR/step/HasWithIndexStep.h \
   $$SRC_DIR/step/IndexStep.h \
   $$SRC_DIR/strategy/BrownGraphStrategy.h \
-  $$SRC_DIR/structure/BitEdge.h \
-  $$SRC_DIR/structure/BitVertex.h \
-  $$SRC_DIR/structure/CPUGraph.h \
+  $$SRC_DIR/structure/BrownEdge.h \
+  $$SRC_DIR/structure/BrownVertex.h \
+  $$SRC_DIR/structure/BrownGraph.h \
   $$SRC_DIR/traversal/CPUGraphTraversal.h \
   $$SRC_DIR/traversal/CPUGraphTraversalSource.h \
 
+
+SOURCES += \
+  $$SRC_DIR/structure/BrownGraph.cpp \
 
 
 HEADERS += \
@@ -77,16 +80,10 @@ HEADERS += \
   $$SRC_PROSET_DIR/Brownie/brownie/util/C.h
 
 
-#SOURCES += \
-#  $$SRC_DIR/components.cpp \
 
+QMAKE_CXXFLAGS += -fopenmp
 
-#SOURCES += \
-#  $$SRC_DIR/ingest_simple.cpp \
-
-
-SOURCES += \
-  $$SRC_DIR/main.cpp \
+LIBS += -fopenmp
 
 
 #LIBS += -lOpenCL

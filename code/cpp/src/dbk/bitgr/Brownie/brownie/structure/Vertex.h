@@ -10,7 +10,8 @@
 
 class Graph;
 
-class Vertex : public Element {
+class Vertex : public Element
+{
 public:
 	/*
 		Create a new Vertex; does nothing since

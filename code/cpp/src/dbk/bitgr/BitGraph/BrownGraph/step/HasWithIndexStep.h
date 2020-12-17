@@ -6,7 +6,7 @@
 #include <QVariant>
 #include "step/TraversalStep.h"
 #include "traversal/Traverser.h"
-#include "structure/CPUGraph.h"
+#include "structure/BrownGraph.h"
 
 class HasWithIndexStep : public TraversalStep {
     private:
@@ -19,7 +19,7 @@ class HasWithIndexStep : public TraversalStep {
         }
 
         virtual void apply(GraphTraversal* trv, TraverserSet& traversers) {
-            Index* idx = static_cast<CPUGraph*>(trv->getGraph())->get_index(this->key);
+            Index* idx = static_cast<BrownGraph*>(trv->getGraph())->get_index(this->key);
             std::unordered_set<Element*> elements = idx->get_elements(this->value);
             
             TraverserSet new_traversers;

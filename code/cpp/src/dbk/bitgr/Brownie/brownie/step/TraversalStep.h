@@ -10,34 +10,58 @@ class Traverser;
 
 enum TraversalStepType {MAP, FILTER, BARRIER, MODULATOR, SIDE_EFFECT};
 
-class TraversalStep {
+class TraversalStep
+{
 private:
-	TraversalStepType type;
+
+ TraversalStepType type_;
+
+ unsigned int uid_;
+ bool is_barrier_;
 
 public:
-	unsigned int uid;
-	bool is_barrier;
-	TraversalStep(TraversalStepType tsType, unsigned int id);
-	TraversalStep(bool is_barrier, TraversalStepType tsType, unsigned int id);
-	virtual QString getInfo();
+
+ QString hint;
+
+ unsigned int uid(){ return uid_; }
+ bool is_barrier(){ return is_barrier_; }
+
+ TraversalStep(TraversalStepType tsType, unsigned int id);
+
+ TraversalStep(bool is_barrier, TraversalStepType tsType, unsigned int id);
+
+
+
+ virtual QString getInfo();
 	virtual void apply(GraphTraversal* trv, QVector<Traverser*>& traversers);
 
 };
 
 #include "traversal/Traverser.h"
 
-TraversalStep::TraversalStep(bool is_barrier, TraversalStepType tsType, unsigned int id) {
-		this->type = tsType;
-		this->uid = id;
-		this->is_barrier = is_barrier;
+#define SET_HINT  hint = this->getInfo();
+
+
+TraversalStep::TraversalStep(bool is_barrier, TraversalStepType tsType, unsigned int id)
+{
+  this->type_ = tsType;
+  this->uid_ = id;
+  this->is_barrier_ = is_barrier;
 }
 
-TraversalStep::TraversalStep(TraversalStepType tsType, unsigned int id) : TraversalStep(false, tsType, id){}
+TraversalStep::TraversalStep(TraversalStepType tsType, unsigned int id)
+  : TraversalStep(false, tsType, id)
+{
+}
 
-QString TraversalStep::getInfo() {
+QString TraversalStep::getInfo()
+{
 	return "UnknownTraversalStep{}";
 }
 
-void TraversalStep::apply(GraphTraversal* trv, TraverserSet& traversers) {};
+void TraversalStep::apply(GraphTraversal* trv, TraverserSet& traversers)
+{
+
+}
 
 #endif
