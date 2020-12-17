@@ -13,6 +13,7 @@ class Traverser
  std::map<QString, QVariant> side_effects_;
 
 public:
+
  Traverser(QVariant t)
  {
   my_data_ = QVariant(t);

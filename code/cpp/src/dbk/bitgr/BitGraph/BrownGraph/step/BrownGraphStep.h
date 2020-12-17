@@ -24,7 +24,7 @@ public:
  virtual void apply(GraphTraversal* trv, TraverserSet& traversers)
  {
   if(start_)
-    traversers.push_back(new Traverser(QVariant())); // add an empty traverser when this is being used as a start step.
+    traversers.push_back(new BrownTraverser(QVariant())); // add an empty traverser when this is being used as a start step.
 
   // For each traverser, a traverser should be created for each Vertex and passed to the next step
   BrownGraph* bg = static_cast<BrownGraph*>(trv->getGraph());
@@ -36,13 +36,14 @@ public:
   // Gets ALL elements.
   if(element_ids.empty())
   {
-   QVector<Vertex*>& vertices = bg->access_vertices();
+   QVector< caon_ptr<Vertex> >& vertices = bg->access_vertices();
    TraverserSet new_traversers;
    std::for_each(traversers.begin(), traversers.end(), [&](Traverser* t)
    {
     for(int k = 0; k < bg->numVertices(); ++k)
     {
-     Traverser* tr = new Traverser(QVariant::fromValue(vertices[k]));
+     Vertex* v = bg->resolve_vertex(vertices[k]);
+     Traverser* tr = new BrownTraverser(QVariant::fromValue(vertices[k]));
      new_traversers.push_back(tr);
     }
    });
@@ -77,7 +78,7 @@ public:
     uint64_t id = QVariant_cast<uint64_t>(id_ctr);
 
     for(auto k = 0; k < element_id_counts[id]; k++)
-      new_traversers.push_back(new Traverser(QVariant::fromValue(v)));
+      new_traversers.push_back(new BrownTraverser(QVariant::fromValue(v)));
 
     //TODO retain side effects, path
    });

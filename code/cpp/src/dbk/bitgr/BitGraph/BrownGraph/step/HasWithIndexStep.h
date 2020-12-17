@@ -5,7 +5,7 @@
 
 #include <QVariant>
 #include "step/TraversalStep.h"
-#include "traversal/Traverser.h"
+#include "traversal/BrownTraverser.h"
 #include "structure/BrownGraph.h"
 
 class HasWithIndexStep : public TraversalStep {

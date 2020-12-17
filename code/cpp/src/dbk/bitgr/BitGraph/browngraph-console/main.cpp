@@ -17,10 +17,7 @@
 
 #define brownv value<Vertex*>
 
-Q_DECLARE_METATYPE(GraphTraversal*)
-Q_DECLARE_METATYPE(Edge*)
-Q_DECLARE_METATYPE(Vertex*)
-Q_DECLARE_METATYPE(VertexProperty<QVariant>*)
+#include "qmetas.h"
 
 
 int main(int argc, char* argv[])
@@ -66,9 +63,8 @@ int main(int argc, char* argv[])
   qDebug() << "out id: " << QVariant_cast<QString>(vtx->property(NAME)->value()) << "\n";
  });
 
-
- qDebug() << "count: " << graph.edges().size() << "\n";
- for(Edge* e : graph.edges())
+ qDebug() << "count: " << graph.all_edges().size() << "\n";
+ for(Edge* e : graph.all_edges())
    qDebug() << QVariant_cast<QString>(e->outV()->property(NAME)->value()) << " -> " << QVariant_cast<QString>(e->inV()->property(NAME)->value()) << "\n";
 
  return 0;
@@ -81,7 +77,7 @@ int main2(int argc, char* argv[])
  GraphTraversalSource* g = graph.traversal();
 
  QString filename = QString(argv[1]);
- FILE* f = fopen(filename.c_str(), "r");
+ FILE* f = fopen(filename.to_c_str(), "r");
 
  char id1[10];
  char id2[10];
@@ -130,8 +126,8 @@ int main2(int argc, char* argv[])
   qDebug() << "id: " << QVariant_cast<QString>(vtx->property(NAME)->value()) << "\n";
  });
 
- qDebug() << "count: " << graph.edges().size() << "\n";
- for(Edge* e : graph.edges()) qDebug() << QVariant_cast<QString>(e->outV()->property(NAME)->value()) << " -> " << QVariant_cast<QString>(e->inV()->property(NAME)->value()) << "\n";
+ qDebug() << "count: " << graph.all_edges().size() << "\n";
+ for(Edge* e : graph.all_edges()) qDebug() << QVariant_cast<QString>(e->outV()->property(NAME)->value()) << " -> " << QVariant_cast<QString>(e->inV()->property(NAME)->value()) << "\n";
 
  try {
   //        __->both()->id()->forEachRemaining([](QVariant& w) {

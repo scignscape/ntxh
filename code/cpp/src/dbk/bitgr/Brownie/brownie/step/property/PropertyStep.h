@@ -42,9 +42,9 @@ class PropertyStep: public TraversalStep {
 
                     Vertex* v = QVariant_cast<Vertex*>(x);
                     VertexProperty<QVariant>* p = v->property(key); //TODO multiproperties?
-                    if(p == nullptr) new_traversers.push_back(new Traverser(QVariant()));
-                    else if(get_value && !p->value().isNull()) new_traversers.push_back(new Traverser(p->value()));
-                    else if(!get_value) new_traversers.push_back(new Traverser(QVariant::fromValue(p)));
+                    if(p == nullptr) new_traversers.push_back(new BrownTraverser(QVariant()));
+                    else if(get_value && !p->value().isNull()) new_traversers.push_back(new BrownTraverser(p->value()));
+                    else if(!get_value) new_traversers.push_back(new BrownTraverser(QVariant::fromValue(p)));
                 }
             }
 

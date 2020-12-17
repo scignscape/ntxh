@@ -1,111 +1,79 @@
 
 #include "BrownGraph.h"
 
-#define NEXT_VERTEX_ID_CPU() ( (uint64_t)( next_vertex_id++ ))
-#define NEXT_EDGE_ID_CPU() ((uint64_t)( next_edge_id++ ))
 
-#include "traversal/CPUGraphTraversalSource.h"
-#include "structure/BrownVertex.h"
-
-
-
-Q_DECLARE_METATYPE(GraphTraversal*)
-Q_DECLARE_METATYPE(Edge*)
-Q_DECLARE_METATYPE(Vertex*)
-Q_DECLARE_METATYPE(VertexProperty<QVariant>*)
-
-
-
-
-/*
- Get a traversal source for this BrownGraph.
-*/
-GraphTraversalSource* BrownGraph::traversal()
+Edge* BrownGraph::resolve_edge(caon_ptr<Edge> pv)
 {
- BrownGraph* ref = this;
-	return new CPUGraphTraversalSource(ref);
+ if(pv.is_fixnum())
+ {
+  return resolve_edge(pv.get_fixnum());
+ }
+ if(pv.is_array())
+ {
+  // // TODO
+  return nullptr;
+ }
+ return pv.raw_pointer();
+
 }
 
-/*
- Adds a new Vertex (w/label) to this BrownGraph.
-	Currently not part of the higher-level api.
-*/
-Vertex* BrownGraph::add_vertex(QString label)
+Edge* BrownGraph::resolve_edge(n8 key)
 {
-// if(this->vertex_vector_.size() == this->num_vertices_)
-//   this->vertex_vector_.resize(2*num_vertices_);
-
- Vertex* v = new BrownVertex(this, NEXT_VERTEX_ID_CPU(), label);
-	uint64_t id_val = QVariant_cast<uint64_t>(v->id());
-
- vertex_vector_.push_back(v); //  [this->num_vertices_++] = v;
- ++this->num_vertices_;
-
- vertex_id_map_.insert(id_val, v); //.insert(std::pair<uint64_t, Vertex*>{id_val, v});
-
- return v;
+ Q_UNUSED(key)
+ return nullptr;
 }
 
-/*
- Adds a new Vertex (w/o label) to this BrownGraph.
-*/
-Vertex* BrownGraph::add_vertex()
+
+Vertex* BrownGraph::resolve_vertex(caon_ptr<Vertex> pv)
 {
- //if(this->vertex_vector_.size() == this->num_vertices_) this->vertex_vector_.resize(2*num_vertices_);
-
- Vertex* v = new BrownVertex(this, NEXT_VERTEX_ID_CPU());
-	uint64_t id_val = QVariant_cast<uint64_t>(v->id());
-
- vertex_vector_.push_back(v); //  [this->num_vertices_++] = v;
- ++this->num_vertices_;
-
- //vertex_vector_[this->num_vertices_++] = v;
- vertex_id_map_.insert(id_val, v); //insert(std::pair<uint64_t, Vertex*>{id_val, v});
-	return v;
+ if(pv.is_fixnum())
+ {
+  return resolve_vertex(pv.get_fixnum());
+ }
+ if(pv.is_array())
+ {
+  // // TODO
+  return nullptr;
+ }
+ return pv.raw_pointer();
 }
 
-Vertex* BrownGraph::get_vertex(QVariant& id)
+Vertex* BrownGraph::resolve_vertex(n8 key)
 {
-	uint64_t id_val = QVariant_cast<uint64_t>(id);
- return vertex_id_map_.value(id_val); //.find(id_val)->second;
+ Q_UNUSED(key)
+ return nullptr;
 }
 
-/*
- Adds a new Edge to this BrownGraph.
-*/
-Edge* BrownGraph::add_edge(Vertex* out, Vertex* in, QString label)
+void BrownGraph::all_edges(QVector<Edge*>& result)
 {
- BrownEdge* new_edge = new BrownEdge(this, NEXT_EDGE_ID_CPU(), out, in, label);
- static_cast<BrownVertex*>(out)->addEdge(new_edge, OUT);
- static_cast<BrownVertex*>(in)->addEdge(new_edge, IN);
- edge_vector_.push_back(new_edge);
-	return new_edge;
+ for(caon_ptr<Edge> pe : edge_vector_)
+ {
+  if(Edge* e = resolve_edge(pe))
+    result.push_back(e);
+ }
 }
 
-void BrownGraph::clear_index(BrownVertex* v, QString property_key, QVariant value)
+void BrownGraph::all_vertices(QVector<Vertex*>& result)
 {
- auto it = vertex_index_.find(property_key);
- if(it == vertex_index_.end())
-   throw std::runtime_error("Property not indexed!\n");
- it.value()->remove(v, value);
-// auto f = vertex_index_.find(property_key);
-// if(f == vertex_index_.end()) throw std::runtime_error("Property not indexed!\n");
-//	f->second->remove(v, value);
+ for(caon_ptr<Vertex> pv : vertex_vector_)
+ {
+  if(Vertex* v = resolve_vertex(pv))
+    result.push_back(v);
+ }
 }
 
-void BrownGraph::update_index(BrownVertex* v, QString property_key, QVariant value)
+
+QVector<Edge*> BrownGraph::all_edges()
 {
- auto it = vertex_index_.find(property_key);
- if(it == vertex_index_.end())
-   throw std::runtime_error("Property not indexed!\n");
- it.value()->insert(v, value);
- //vertex_index_.insert(it, value);
- //
- //it.insert(v, value);
+ QVector<Edge*> result;
+ all_edges(result);
+ return result;
 }
 
-void BrownGraph::create_index(IndexType type, QString property_key, std::function<int64_t(QVariant&)> hash_func, std::function<bool(QVariant&, QVariant&)> equals_func)
+QVector<Vertex*> BrownGraph::all_vertices()
 {
-	Index* idx = new Index(hash_func, equals_func);
- vertex_index_.insert(property_key, idx); // .insert(std::pair<QString, Index*>(property_key, idx));
+ QVector<Vertex*> result;
+ all_vertices(result);
+ return result;
 }
+

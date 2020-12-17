@@ -4,8 +4,8 @@
 //     (See accompanying file LICENSE_1_0.txt or copy at
 //           http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef RZ_CAON_PTR__H
-#define RZ_CAON_PTR__H
+#ifndef RELAE_CAON_PTR__H
+#define RELAE_CAON_PTR__H
 
 
 #include <memory>
@@ -349,4 +349,4 @@ static caon_ptr<TO_Type> caon_reinterpret_cast(FROM_Type* ptr)
 #endif
 
 
-#endif //RZ_CAON_PTR__H
+#endif //RELAE_CAON_PTR__H

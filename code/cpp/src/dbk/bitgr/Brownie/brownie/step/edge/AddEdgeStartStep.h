@@ -78,7 +78,7 @@ void AddEdgeStartStep::apply(GraphTraversal* trv, TraverserSet& traversers) {
 	Vertex* to_vertex = QVariant_cast<Vertex*>(to_traversal.next());
 
  Edge* new_edge = trv->getGraph()->add_edge(from_vertex, to_vertex, label_);
- traversers.push_back(new Traverser(QVariant::fromValue(new_edge)));
+ traversers.push_back(new BrownTraverser(QVariant::fromValue(new_edge)));
 }
 
 #endif

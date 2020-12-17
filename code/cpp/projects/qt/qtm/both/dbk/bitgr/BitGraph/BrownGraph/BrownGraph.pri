@@ -22,8 +22,8 @@ include($$ROOT_DIR/../preferred/boost.pri)
 INCLUDEPATH += $$SRC_PROSET_DIR/Brownie/brownie
 # .. \
 
+INCLUDEPATH += $$RELAE_GRAPH_SRC_GROUP_DIR
 
-#DEFINES += c_str=toStdString\\(\\).c_str
 
 HEADERS += \
   $$SRC_DIR/index/Index.h \
@@ -37,6 +37,8 @@ HEADERS += \
   $$SRC_DIR/structure/BrownGraph.h \
   $$SRC_DIR/traversal/CPUGraphTraversal.h \
   $$SRC_DIR/traversal/CPUGraphTraversalSource.h \
+  $$SRC_DIR/traversal/BrownTraverser.h \
+  $$SRC_DIR/qmetas.h
 
 
 SOURCES += \

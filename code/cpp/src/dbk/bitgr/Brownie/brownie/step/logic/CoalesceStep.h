@@ -55,7 +55,7 @@ void CoalesceStep::apply(GraphTraversal* parent_traversal, TraverserSet& travers
 
   executing_traversal.forEachRemaining([&](QVariant& obj)
   {
-   new_traversers.push_back(new Traverser(obj));
+   new_traversers.push_back(new BrownTraverser(obj));
   });
 
   if(new_traversers.size() > 0) break;

@@ -3,7 +3,8 @@
 
 #define INJECT_STEP 0x74
 
-#include "traversal/Traverser.h"
+#include "traversal/BrownTraverser.h"
+
 #include <QVariant>
 #include <QVector>
 #include <algorithm>
@@ -22,7 +23,7 @@ public:
  {
   std::for_each(objects_.begin(), objects_.end(), [&](QVariant obj)
   {
-   traversers.push_back(new Traverser(obj));
+   traversers.push_back(new BrownTraverser(obj));
   });
  }
 };

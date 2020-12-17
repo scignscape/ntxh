@@ -8,7 +8,7 @@
 #include <functional>
 
 
-#define c_str toStdString().c_str
+#define to_c_str toStdString().c_str
 
 template<typename T>
 T QVariant_cast(QVariant qvar);
@@ -136,7 +136,7 @@ class P<char*> {
 				std::cout << "char array method selected\n";
 				#endif
     QString a_str = QVariant_cast<QString>(a);
-				return strncmp(a_str.c_str(), b, a_str.length()) == 0;
+    return strncmp(a_str.to_c_str(), b, a_str.length()) == 0;
 			};
 		}
 };

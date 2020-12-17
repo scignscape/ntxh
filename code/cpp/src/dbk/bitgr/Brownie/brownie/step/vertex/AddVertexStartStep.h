@@ -48,7 +48,7 @@ public:
   Vertex* v = this->has_label()
     ? trv->getGraph()->add_vertex(this->label_)
     : trv->getGraph()->add_vertex();
-  traversers.push_back(new Traverser(QVariant::fromValue(v)));
+  traversers.push_back(new BrownTraverser(QVariant::fromValue(v)));
  }
 };
 

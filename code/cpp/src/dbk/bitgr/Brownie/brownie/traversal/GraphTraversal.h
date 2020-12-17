@@ -424,7 +424,7 @@ GraphTraversal* GraphTraversal::V(QVector<Vertex*> vertices)
 GraphTraversal* GraphTraversal::from(QString sideEffectLabel)
 {
 	// Because from() uses void* (sigh) this awkward memory copy is necessary.
-	const char* base_string = sideEffectLabel.c_str();
+ const char* base_string = sideEffectLabel.to_c_str();
 	size_t size = (1 + strlen(base_string));
 
 	char* sideEffectLabel_cpy = (char*)malloc(sizeof(char) * size);
@@ -442,7 +442,7 @@ GraphTraversal* GraphTraversal::from(Vertex* fromVertex)
 GraphTraversal* GraphTraversal::to(QString sideEffectLabel)
 {
 	// Because to() uses void* (sigh) this awkward memory copy is necessary.
-	const char* base_string = sideEffectLabel.c_str();
+ const char* base_string = sideEffectLabel.to_c_str();
 	size_t size = (1 + strlen(base_string));
 
 	char* sideEffectLabel_cpy = (char*)malloc(sizeof(char) * size);

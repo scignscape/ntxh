@@ -7,7 +7,7 @@
 #include "step/TraversalStep.h"
 #include "structure/Direction.h"
 #include "step/graph/GraphStep.h"
-#include "traversal/Traverser.h"
+#include "traversal/BrownTraverser.h"
 #include "traversal/GraphTraversal.h"
 
 #include <boost/lockfree/stack.hpp>
@@ -78,7 +78,7 @@ public:
 			//boost::lockfree::stack<Traverser*> new_traversers(8);
    std::for_each(traversers.begin(), traversers.end(), [&, this](Traverser* trv)
    {
-				Vertex* v = QVariant_cast<Vertex*>(trv->get());
+    Vertex* v = QVariant_cast<Vertex*>(trv->get());
     QVector<Edge*> edges = v->edges(direction_);
 				//#pragma omp for
     for(size_t k = 0; k < edges.size(); ++k)
@@ -92,20 +92,20 @@ public:
       case IN:
       {
        Vertex* w = e->inV();
-       new_traversers.push_back(new Traverser(QVariant::fromValue(w)));
+       new_traversers.push_back(new BrownTraverser(QVariant::fromValue(w)));
 							break;
 						}
       case OUT:
       {
        Vertex* w = e->outV();
-       new_traversers.push_back(new Traverser(QVariant::fromValue(w)));
+       new_traversers.push_back(new BrownTraverser(QVariant::fromValue(w)));
 							break;
 						}
       case BOTH:
       {
 							Vertex* u = e->outV();
 							Vertex* w = u == v ? e->inV() : u;
-       new_traversers.push_back(new Traverser(QVariant::fromValue(w)));
+       new_traversers.push_back(new BrownTraverser(QVariant::fromValue(w)));
 							break;
 						}
 					}
