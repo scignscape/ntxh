@@ -35,13 +35,47 @@
 #include "dgdb-white/types/dw-type-system.h"
 #include "dgdb-white/types/dw-type.h"
 
+#include "get-cmdl.h"
+
 #include "global-types.h"
 
 
+#include "ngml-sdi/ngml-sdi-document.h"
+
 USING_KANS(DGDB)
+USING_KANS(Util)
 
 
 int main(int argc, char* argv[])
+{
+ QString folder, file, pfile, czfile;
+
+ QStringList cmdl = get_cmdl(argc, argv, 2, {
+   {&folder, DEFAULT_SDI_FOLDER},
+   {&file, DEFAULT_SDI_FOLDER "/intro/intro.gt.sdi.ntxh"},
+   {&pfile, DEFAULT_SDI_FOLDER "/intro/intro.gt.sdi-prelatex.ntxh"},
+   {&czfile, {}}
+  });
+
+
+ qDebug() << QString(R"(
+Folder: %1
+File: %2
+PFile: %3
+czFile: %4
+   )").arg(folder).arg(file).arg(pfile).arg(czfile);
+
+ NGML_SDI_Document nsd(file, folder);
+ nsd.load_prelatex_file(pfile);
+
+ nsd.parse();
+
+
+}
+// /home/nlevisrael/gits/ntxh/wip-sebi/ar/dev/consoles/gtagml/sdi/intro
+
+
+int main1(int argc, char* argv[])
 {
  DW_Instance* dw = DGEnvironment(
    DEFAULT_DEV_DGDB_NGML_FOLDER "/instances/t1");
