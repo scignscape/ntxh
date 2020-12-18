@@ -30,6 +30,22 @@ n8 GH_Block_Standard_8bit::get_glyph_point_at_index(u4 i)
  return chars_.at(i);
 }
 
+u4 GH_Block_Standard_8bit::check_declared(u1 gp)
+{
+ return glyphdeck_->check_declared(gp);
+}
+
+u4 GH_Block_Standard_8bit::get_declared_sentence_end_space(u4 i, u4 e)
+{
+ for(u4 u = i; u <= e; ++u)
+ {
+  n8 uu = get_glyph_point_at_index(u);
+  GH_Block_Base::Evaluation_Codes ec = glyphdeck_->check_confirm_sentence_end(uu, false);
+  if(ec == GH_Block_Base::Evaluation_Codes::Confirm_Via_Declared)
+    return i;
+ }
+}
+
 u4 GH_Block_Standard_8bit::check_confirm_sentence_end(u4 i, u4 e)
 {
  bool have_space = false;
@@ -79,6 +95,11 @@ u4 GH_Block_Standard_8bit::clear_to_sentence_start(u4 pre, u4 start)
  return result;
 }
 
+
+//bool GH_Block_Standard_8bit::check_declared(u1 cue)
+//{
+// return
+//}
 
 void GH_Block_Standard_8bit::flag_as_sentence_end(u4 se, u4 sse,
   QPair<QPair<n8, n8>, QPair<n8, n8>>& r)

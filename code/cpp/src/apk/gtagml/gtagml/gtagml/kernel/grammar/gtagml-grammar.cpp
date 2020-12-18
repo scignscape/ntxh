@@ -414,6 +414,43 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
    graph_build.tile_acc("\n");
   });
 
+  add_rule( gtagml_context, "declare-sentence-end",
+    " (?<se> [?!;:-] | [.]) (?<mid> [\\])]*)"
+    " \\s* \\|\\+\\| \\s* ",
+    [&]
+  {
+   QString se = p.matched("se");
+   QString mid = p.matched("mid");
+   QString m, m1, esc, esc1;
+   u1 which = 3; // = "`\\[.]" QString esc = "." u1 which = 3
+   if(se == ".")
+   {
+    m = "`\\[.]";
+    m1 = "`\\[,]";
+    esc = ".";
+    esc1 = ",";
+   }
+   else if(se == ":")
+   {
+    m = "`\\[:]";
+    m1 = "`\\[,]";
+    esc = ":";
+    esc1 = ",";
+   }
+
+   else
+     return;
+   // else others?
+
+   graph_build.special_character_sequence(m, esc, which);
+
+   if(!mid.isEmpty())
+     graph_build.tile_acc(mid);
+
+   graph_build.special_character_sequence(m1, esc1, which);
+
+  });
+
   add_rule( gtagml_context, "special-character-sequence",
    " (?: %-- ) | (?: %_) | (?: ->- ) | (?: %\\.,{2,3} ) "
    "  | (?: ` \\\\ \\( (?<bq-esc1> [^)]+ ) \\) ) "
@@ -425,7 +462,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
           //? "| (?: %[<>$'] ) | (&-\\S>\\w) | (&#\\w+;) | (&:\\w+;) "
             ,[&]
   {
-   int which = 1;
+   u1 which = 1;
    QString esc = p.matched("bq-esc1");
    if(esc.isEmpty())
    {

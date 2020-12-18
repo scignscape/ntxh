@@ -48,6 +48,9 @@ public:
  QPair<u4, u4> get_effective_start_and_end_indices() Q_DECL_OVERRIDE;
 
  u4 check_confirm_sentence_end(u4 i, u4 e) Q_DECL_OVERRIDE;
+ u4 get_declared_sentence_end_space(u4 i, u4 e) Q_DECL_OVERRIDE;
+
+ u4 check_declared(u1 gp) Q_DECL_OVERRIDE;
 
  void flag_as_sentence_end(u4 se, u4 sse,
    QPair<QPair<n8, n8>, QPair<n8, n8>>& r) Q_DECL_OVERRIDE;

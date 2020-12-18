@@ -286,8 +286,28 @@ void GTagML_Output_SDI_Infoset::finalize_widowed_sentence_boundaries(GH_Block_Ba
    bl.set_pre_insert_back(i, ss);
   }
  }
+
+ {
+  QMapIterator<caon_ptr<tNode>, u4> it(declared_sentence_starts_);
+  while(it.hasNext())
+  {
+   it.next();
+   u4 i = it.value();
+   bl.set_pre_insert_back(i, ss);
+  }
+ }
+
  {
   QMapIterator<caon_ptr<tNode>, u4> it(widowed_sentence_ends_);
+  while(it.hasNext())
+  {
+   it.next();
+   u4 i = it.value();
+   bl.set_insert_front(i, se);
+  }
+ }
+ {
+  QMapIterator<caon_ptr<tNode>, u4> it(declared_sentence_ends_);
   while(it.hasNext())
   {
    it.next();
@@ -299,11 +319,9 @@ void GTagML_Output_SDI_Infoset::finalize_widowed_sentence_boundaries(GH_Block_Ba
 
 void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
 {
- // // if we're in a paragraph there's still time to
-  //   find a start to match an end.  But now this code is
-  //   called after processing only so we're never "in a paragraph"
  caon_ptr<tNode> current_paragraph_node = nullptr;
 
+ u4 held_declared_status = 0;
 
  u4 srank_in_paragraph = 0;
  QMapIterator<u4, QPair<caon_ptr<tNode>, u4>> it(marked_sentence_starts_);
@@ -311,12 +329,21 @@ void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
  {
   it.next();
 
-  if(it.value().first != current_paragraph_node)
+  if(held_declared_status == 1)
   {
+   declared_sentence_starts_.insertMulti(current_paragraph_node, it.key());
+   held_declared_status = 0;
+  }
+  else if(it.value().first != current_paragraph_node)
+  {
+   held_declared_status = 0;
    current_paragraph_node = it.value().first;
    srank_in_paragraph = 0;
    widowed_sentence_starts_.insertMulti(current_paragraph_node, it.key());
   }
+  else if(held_declared_status == 2)
+    continue;
+
   ++srank_in_paragraph;
 
   u4 send = it.value().second;
@@ -330,14 +357,36 @@ void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
    if(oldnew.first.second == dn)
      continue;
    // //  ok, so the se changed ...
-    //    did the sse (space after se) change too?
-   if(oldnew.second.first == dn)
+
+    //   First, was it declared or inferred?
+
+   u4 was_declared = bl.check_declared(oldnew.first.first);
+   bool was_declared_lone_widow = false;
+   if(was_declared)
+   {
+    declared_sentence_ends_.insertMulti(it.value().first, send);
+     // // see if the ses was declared as a lone widow ...
+      //   i.e. don't mark subsequent sentence start ...
+    was_declared_lone_widow = bl.check_declared(oldnew.second.first) > 1;
+   }
+    //   Next, did the sse (space after se) change too?
+   else if(oldnew.second.first == dn)
    {
     // // this means the sse wasn't found ...
      //   need to add a \;
     widowed_sentence_ends_.insertMulti(it.value().first, send);
     continue;
    }
+
+   if(was_declared)
+   {
+    if(was_declared_lone_widow)
+      held_declared_status = 2;
+
+    else
+      held_declared_status = 1;
+   }
+
    // try to get the next start ...
    u4 ns = 0;
    u4 gap = 0;

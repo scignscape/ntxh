@@ -537,13 +537,13 @@ something to change in our environment (with the
 help of our addressees), but similar implications 
 of pragmatic desire are evident even when sentences 
 are more directly assertorial, or less directly 
-illocutionary.  Compare between:
+illocutionary.  Compare between: |+|
 
 `sentenceList,
-`sentenceItem; `swl -> itm:store -> Remember that wine we tasted on the Niagara 
+`sentenceItem; `swl -> itm:store -> Remember that wine we tasted on the Niagara
 Peninsula last summer?  Can you find it in our 
 local liquor store? -> pra ;;
-`sentenceItem; `swl -> itm:varietal -> Remember that wine we tasted on the Niagara 
+`sentenceItem; `swl -> itm:varietal -> Remember that wine we tasted on the Niagara
 Peninsula last summer?  What varietal was that again? -> pra ;;
 `sentenceList`
 

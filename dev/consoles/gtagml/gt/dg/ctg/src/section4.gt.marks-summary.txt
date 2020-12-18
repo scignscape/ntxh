@@ -1,16 +1,16 @@
 $$ document-title := Cognitive Transform Grammar
 $$ local-title := section4
 
-$& Belohlavek %% (1:main) 73849 73849
-$& BernardyEtAl %% (1:main) 90618 90642
-$& JiriBenovsky p.%%8 (1:main) 68626 68641
-$& Johnson p.%%208 (1:main) 72271 72271
-$& LakoffJohnson p.%%18 (1:main) 71704 72214
-$& LakoffJohnson p.%%90 (1:main) 72215 72270
-$& LuoSoloviev %% (1:main) 91017 91399
-$& MathieuBouchard %% (1:main) 66907 66918
-$& MichaelJubien %% (1:main) 68470 68609
-$& TanakaEtAl %% (1:main) 90643 90643
-$& Wille %% (1:main) 73850 73850
-$& YiyuYao %% (1:main) 73681 73848
+$& Belohlavek %% (1:main) 70078 70078
+$& BernardyEtAl %% (1:main) 86521 86545
+$& JiriBenovsky p.%%8 (1:main) 64855 64870
+$& Johnson p.%%208 (1:main) 68500 68500
+$& LakoffJohnson p.%%18 (1:main) 67933 68443
+$& LakoffJohnson p.%%90 (1:main) 68444 68499
+$& LuoSoloviev %% (1:main) 86920 87302
+$& MathieuBouchard %% (1:main) 63136 63147
+$& MichaelJubien %% (1:main) 64699 64838
+$& TanakaEtAl %% (1:main) 86546 86546
+$& Wille %% (1:main) 70079 70079
+$& YiyuYao %% (1:main) 69910 70077
 

@@ -65,8 +65,8 @@ class GTagML_Output_Blocks : public GTagML_Output_Base, private GTagML_Output_Ev
 
  //caon_ptr<GTagML_Tag_Command>
 
- QMap<caon_ptr<GTagML_Tag_Command>,
-   QPair<GH_Prenode*, QPair<u4, u4>>> ref_ranges_;
+ QMap<u4, QMap<caon_ptr<GTagML_Tag_Command>,
+   QPair<GH_Prenode*, QPair<u4, u4>>>> ref_ranges_;
 
  u4 last_ref_enter_;
  u4 last_ref_leave_;

@@ -23,6 +23,8 @@ public:
  GH_Block_Base::Evaluation_Codes check_confirm_sentence_end(u1 gp, bool have_space);
  GH_Block_Base::Evaluation_Codes check_confirm_clear_inter_sentence_gap(u1 gp);
 
+ u4 check_declared(u1 gp);
+
  u1 get_basic_char(u1 gp);
  u1 get_char_with_diacritic(u1 gp);
  u1 get_non_alphanumeric_char(u1 gp);

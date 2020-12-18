@@ -148,6 +148,12 @@ u1 GH_SDI_Document::scan_for_sentence_end(GH_Block_Base& bl,
     return gap;
    }
   }
+  else if(sic == GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_End)
+  {
+   result = i;
+   space = bl.get_declared_sentence_end_space(i + 1, end);
+   return gap;
+  }
   ++gap;
  }
  result = 0;

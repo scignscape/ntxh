@@ -59,6 +59,10 @@ class GTagML_Output_SDI_Infoset : public GTagML_Output_Base, private GTagML_Outp
  QMultiMap<caon_ptr<tNode>, u4> widowed_sentence_starts_;
  QMultiMap<caon_ptr<tNode>, u4> widowed_sentence_ends_;
 
+ QMultiMap<caon_ptr<tNode>, u4> declared_sentence_starts_;
+ QMultiMap<caon_ptr<tNode>, u4> declared_sentence_ends_;
+
+
  QMap<u4, QPair<caon_ptr<tNode>, u4>> marked_paragraph_starts_;
  QMap<u4, caon_ptr<tNode>> marked_paragraph_ends_;
 

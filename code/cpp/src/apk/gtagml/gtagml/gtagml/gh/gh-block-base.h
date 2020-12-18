@@ -54,12 +54,13 @@ public:
  {
   N_A, Letter, Potential_Sentence_End, Sentence_End,
   Potential_Sentence_End_Space, Sentence_End_Space,
-  GH_Interpretation, Void_Null
+  GH_Interpretation, Void_Null,
+  Declared_Sentence_End, Declared_Sentence_End_Space
  };
 
  enum class Evaluation_Codes
  {
-  Confirm, Refute, Neutral, Space
+  Confirm, Refute, Neutral, Space, Confirm_Via_Declared
  };
 
  template<typename T>
@@ -195,6 +196,9 @@ public:
  virtual void activate_cache();
  virtual void activate_inserts();
 
+ virtual u4 check_declared(u1 gp) = 0;
+
+
  virtual QPair<u4, u4> get_effective_start_and_end_indices() = 0;
 
  virtual n8 get_glyph_point_at_index(u4 i) = 0;
@@ -202,6 +206,8 @@ public:
  virtual SDI_Interpretation_Codes get_sdi_interpretation_code_at_index(u4 i) = 0;
 
  virtual u4 check_confirm_sentence_end(u4 i, u4 e) = 0;
+ virtual u4 get_declared_sentence_end_space(u4 i, u4 e) = 0;
+
 
  virtual void swap_codes(u4 i, n8 oldc, n8 newc) = 0;
 

@@ -188,7 +188,7 @@ Given, say,
 
 `sentenceList,
 `sentenceItem; `swl -> itm:ambience -> The city's ambience is colonial and the climate is tropical. -> sem ;;
-`udref -> en%_gum-ud-train -> GUM_voyage_merida-20 ;;
+`udref -> en%_gum-ud-train -> GUM%_voyage_merida-20 ;;
 `sentenceList`
 
 the gloss `gl.(and (is ((The ('s city)) ambience) colonial) (is (the climate) tropical))`
@@ -267,7 +267,7 @@ For a concrete example, consider
 
 `sentenceList,
 `sentenceItem; `swl -> itm:actually -> The most popular lodging is actually camping on the beaches. -> sem ;;
-`udref -> en%_gum-ud-train -> GUM_voyage_socotra-16 ;;
+`udref -> en%_gum-ud-train -> GUM%_voyage_socotra-16 ;;
 `sentenceList`
 
  |.|
@@ -1165,7 +1165,7 @@ background, reflected in lexical conventions:
 `sentenceItem; `swl -> itm:ink -> There are ink stains on the pages of this book. -> ref ;;
 `sentenceItem; `swl -> itm:sunset -> There is a pretty sunset over the river. -> ref ;;
 `sentenceItem; `swl -> itm:cicada -> In some neighborhoods, cicada insects make loud sounds from sunset to sunrise. -> ref ;;
-`udref -> en%_gum-ud-train -> GUM_voyage_phoenix-30 ;;
+`udref -> en%_gum-ud-train -> GUM%_voyage_phoenix-30 ;;
 `sentenceItem; `swl -> itm:applause -> The audience rose to give thundering applause. -> ref ;;
 `sentenceList`  
 

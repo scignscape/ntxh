@@ -654,6 +654,19 @@ u1 GH_Glyphdeck_Standard_8bit::get_default_null()
  return 247;
 }
 
+u4 GH_Glyphdeck_Standard_8bit::check_declared(u1 gp)
+{
+ if ( (gp >= 118) && (gp <= 126) )
+ {
+  return 1;
+ }
+
+ if(gp == 127)
+   return 2;
+
+ return 0;
+}
+
 u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
 {
  if(pr.first == 0)
@@ -666,7 +679,9 @@ u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
    {{4, '-'}, 101}, // ndash
 
    {{1, '_'}, 108}, // _ no escape
-
+   {{2, '_'}, 106}, // ell (one ch se)
+   {{3, '_'}, 118}, // _ decl s e
+   {{4, '_'}, 106}, // ell (one ch)
 
    {{1, '\''}, 113}, // osquote
    {{2, '\''}, 114}, // csquote
@@ -680,10 +695,11 @@ u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
 
    {{1, '.'}, 102}, // n lit
    {{2, '.'}, 105}, // abbr
-   {{3, '.'}, 106}, // ell (one char)
-   {{4, '.'}, 107}, // ell (part)
+   {{3, '.'}, 120}, // declare s end
+   {{4, '.'}, 106}, // ell (part)
 
    {{1, ','}, 113}, // n lit
+   {{3, ','}, 119}, // _ decl s e
 
    {{4, '('}, 83}, // group
    {{4, ')'}, 84}, // group
@@ -692,6 +708,7 @@ u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
    {{4, '['}, 92}, // group
    {{4, ']'}, 93}, // group
 
+
    {{1, '?'}, 103}, // wp
    {{1, '!'}, 104}, // wp
 
@@ -699,11 +716,14 @@ u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
 
    {{1, '>'}, 101}, // quasi math
 
+   {{3, ':'}, 123}, // _ decl s e
 
 
    }};
 
- return static_map.value(pr, get_default_null());
+ u1 result = static_map.value(pr, get_default_null());
+
+ return result;
 }
 
 u1 GH_Glyphdeck_Standard_8bit::encode_latin1(u1 chr)
@@ -968,21 +988,29 @@ QString GH_Glyphdeck_Standard_8bit::get_latex_supplement(u1 gp, GH_Block_Base::D
 
 u1 GH_Glyphdeck_Standard_8bit::get_sentence_end_space_swap(u1 gp)
 {
- if(gp == 71)
+ if( (gp == 71) || (gp == 72) )
    return 72;
- if(gp == 73)
+
+ if( (gp == 73) || (gp == 100) )
    return 100;
+
+ if( (gp == 118) || (gp == 119) )
+   return gp;
+
  return get_default_null();
 }
 
 
 u1 GH_Glyphdeck_Standard_8bit::get_sentence_end_swap(u1 gp)
 {
-if(gp == 64)
-  return 70;
+ if(gp == 64)
+   return 70;
 
-if( (gp == 103) || (gp == 75) || (gp == 70) )
-  return gp;
+ if( (gp == 103) || (gp == 75) || (gp == 70) )
+   return gp;
+
+ if( (gp >= 120) && (gp <= 124) )
+   return gp;
 
  return get_default_null();
 }
@@ -1054,7 +1082,26 @@ void get_latex_64_to_117(u1 gp, QString& result)
 
 void get_latex_118_to_127(u1 gp, QString& result)
 {
- // unused
+ // 118 = space se declare
+ // 119 = \n se declare
+ // 120 = . se declare
+ // 121 = ? se declare
+ // 122 = ! se declare
+
+ static QVector<QString> static_vec {{
+   " ", // 118
+   "\n", // 119
+   ".", // 120
+   "?", // 121
+   "!", // 122
+   ":", // 123
+   "&sedash;", // 124   se
+   ";", // 125
+   ",", // 126
+   "\n"  // 127   se widow
+  }};
+
+ result = static_vec.value(gp - 118);
 }
 
 void get_latex_128_to_159(u1 gp, QString& result)
@@ -1317,6 +1364,11 @@ GH_Block_Base::Evaluation_Codes GH_Glyphdeck_Standard_8bit::check_confirm_clear_
 
 GH_Block_Base::Evaluation_Codes GH_Glyphdeck_Standard_8bit::check_confirm_sentence_end(u1 gp, bool have_space)
 {
+ if(gp == 118)
+   return GH_Block_Base::Evaluation_Codes::Confirm_Via_Declared;
+ if(gp == 119)
+   return GH_Block_Base::Evaluation_Codes::Confirm_Via_Declared;
+
  // //  currently only use ')' as neutral
  if(gp == 69)
    return GH_Block_Base::Evaluation_Codes::Neutral;
@@ -1350,6 +1402,23 @@ GH_Block_Base::SDI_Interpretation_Codes GH_Glyphdeck_Standard_8bit::get_sdi_inte
 
   default:
    return GH_Block_Base::SDI_Interpretation_Codes::GH_Interpretation;
+  }
+ }
+ if(gp < 127)
+ {
+  switch (gp)
+  {
+  case 118:
+  case 119:
+   return GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_End_Space;
+  case 120:
+  case 121:
+  case 122:
+  case 123:
+  case 124:
+  case 125:
+  case 126:
+   return GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_End;
   }
  }
  if(gp < 159)

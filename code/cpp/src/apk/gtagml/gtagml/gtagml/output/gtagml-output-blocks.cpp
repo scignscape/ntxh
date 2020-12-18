@@ -562,8 +562,11 @@ void GTagML_Output_Blocks::generate_tile(const GTagML_Output_Bundle& b, caon_ptr
  GH_Block_Base* bl =  block_writer_->write_tile(rt, pr, &special_flag_marks_);//  write
  GH_Prenode* ghp = tile->init_prenode(bl, pr.first, pr.second);
 
+ u4 layer_code = bl->layer_code();
+
  QMutableMapIterator<caon_ptr<GTagML_Tag_Command>,
-   QPair<GH_Prenode*, QPair<u4, u4>>> it (ref_ranges_);
+   QPair<GH_Prenode*, QPair<u4, u4>>> it (ref_ranges_[layer_code]);
+
  while (it.hasNext())
  {
   it.next();
@@ -636,16 +639,22 @@ void GTagML_Output_Blocks::generate_tag_command_entry(const GTagML_Output_Bundle
 //   }
 //  }
 
+  u4 layer_code = 0;
+
   if(gtc->flags.is_multi_mandatory)
   {
-
+   if(gtc->flags.multi_main_layer)
+     layer_code = block_writer_->push_main();
+   else
+     block_writer_->push_mandatory();
   }
   else if(gtc->flags.is_multi_optional)
   {
-
+   layer_code = block_writer_->push_optional();
   }
   else
   {
+   layer_code = block_writer_->current_main_text_block()->layer_code();
    QPair<u4, u4> pr;
    GH_Block_Base* bl =  block_writer_->write_tag_command_name(gtc->name(), pr);//  write
    gtc->init_name_prenode(bl, pr);
@@ -654,7 +663,7 @@ void GTagML_Output_Blocks::generate_tag_command_entry(const GTagML_Output_Bundle
   check_generate_tag_command_argument(b, *gtc);
 
   if(!gtc->flags.is_self_closed)
-    ref_ranges_.insert(gtc, {nullptr, {0, 0}});
+    ref_ranges_[layer_code].insert(gtc, {nullptr, {0, 0}});
 
 //  if(gtc->flags.is_region)
 //    b.qts << "\\begin{" << gtc->latex_name();
@@ -732,13 +741,24 @@ void GTagML_Output_Blocks::generate_tag_command_leave(const GTagML_Output_Bundle
 {
  CAON_PTR_DEBUG(GTagML_Tag_Command ,gtc)
 
- if(ref_ranges_.contains(gtc))
+ if(ref_ranges_[1].contains(gtc))
  {
-  QPair<GH_Prenode*, QPair<u4, u4>> pr = ref_ranges_.take(gtc);
+  QPair<GH_Prenode*, QPair<u4, u4>> pr = ref_ranges_[1].take(gtc);
   gtc->set_ref_enter(pr.second.first);
   gtc->set_ref_leave(pr.second.second);
   gtc->set_last_tile_prenode(pr.first);
  }
+
+ if(gtc->flags.is_multi_optional)
+   block_writer_->pop_optional();
+ else if(gtc->flags.is_multi_mandatory)
+ {
+  if(gtc->flags.multi_main_layer)
+    block_writer_->pop_main();
+  else
+    block_writer_->pop_mandatory();
+ }
+
 
  if(b.cb)
  {

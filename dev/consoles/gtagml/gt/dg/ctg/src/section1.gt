@@ -1143,7 +1143,7 @@ we can find examples like:
 `sentenceItem; `swl -> itm:tag -> For each start tag , there is a corresponding end tag. -> log ;;
 `udref -> en%_lines-ud-train -> 166 ;;
 `sentenceItem; `swl -> itm:Warhol -> Each collection donated by the Andy Warhol Photographic Legacy Program holds Polaroids of well-known celebrities. -> log ;;
-`udref -> en%_gum-ud-train -> GUM_news_warhol-35 ;;
+`udref -> en%_gum-ud-train -> GUM%_news_warhol-35 ;;
 `sentenceList`
 
  |.|

@@ -16,8 +16,10 @@
 
 #include <QPair>
 #include <QString>
- 
+#include <QStack>
+
 class GH_Block_Base;
+
 
 class GH_Block_Writer
 {
@@ -33,6 +35,9 @@ class GH_Block_Writer
  GH_Block_Base* current_mandatory_argument_block_;
  GH_Block_Base* current_optional_argument_block_;
 
+ QStack<GH_Block_Base*> held_blocks_;
+
+
 public:
 
  GH_Block_Writer();
@@ -42,6 +47,17 @@ public:
 
 
  void init_standard_8bit();
+
+ u4 push_optional();
+ u4 pop_optional();
+
+ u4 push_mandatory();
+ u4 pop_mandatory();
+
+ u4 push_main();
+ u4 pop_main();
+
+
  GH_Block_Base* write_tag_command_name(QString name, QPair<u4, u4>& result);
  GH_Block_Base* write_tile(QString name, QPair<u4, u4>& result,
    QVector<u4>* special_flag_marks = nullptr);

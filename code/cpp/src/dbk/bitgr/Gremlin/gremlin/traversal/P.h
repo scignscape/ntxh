@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <functional>
 
-#include "BrownVertex.h"
+#include "Vertex.h"
 
 #define c_str toStdString().c_str
 
