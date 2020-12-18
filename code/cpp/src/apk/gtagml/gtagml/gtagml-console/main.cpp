@@ -55,9 +55,9 @@ void process_gtagml_file(QString path)
 
  GH_Block_Writer* blw = new GH_Block_Writer;
 
- QString divert;
- QTextStream qts(&divert);
- gdoc->set_divert(&qts);
+// QString divert;
+// QTextStream qts(&divert);
+// gdoc->set_divert(&qts);
 
  GTagML_Output_Blocks* gob = new GTagML_Output_Blocks(*gdoc, blw);
  gob->init_standard_8bit();
