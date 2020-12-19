@@ -63,13 +63,13 @@ public:
  void convert_all_files();
  void convert_all_files(QString output_path, QString khif_path = QString());
 
- void convert_all_files(void(*fn)(QString));
+ void convert_all_files(void(*fn)(QString, QString&, GTagML_Folder*));
 
 
  void read_output_path(QString document_file);
  void display_user_highlights();
 
- void get_gtagml_files(QStringList& result);
+ void get_gtagml_files(QStringList& result, QString first_file);
 
  void convert_to_latex(std::function<void(QString)> fn);
 

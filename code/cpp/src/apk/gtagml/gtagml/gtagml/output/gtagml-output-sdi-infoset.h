@@ -86,6 +86,10 @@ class GTagML_Output_SDI_Infoset : public GTagML_Output_Base, private GTagML_Outp
  QString copy_path_;
  QString raw_copy_path_;
 
+ QString setup_path_;
+ QString raw_setup_path_;
+
+
  void generate_sdi_mark(caon_ptr<GTagML_Tag_Command> ntc,
    const GTagML_Output_Bundle& b,  GH_Prenode& ghp);
  
@@ -106,6 +110,9 @@ class GTagML_Output_SDI_Infoset : public GTagML_Output_Base, private GTagML_Outp
 
 
  void set_copy(QTextStream& qts, caon_ptr<tNode> node);
+ void set_setup(QTextStream& qts, caon_ptr<tNode> node);
+
+ void set_path(QTextStream& qts, caon_ptr<tNode> node, QString* path, QString* raw);
 
  void set_info_param(QTextStream& qts, QString key, caon_ptr<tNode> node);
 
@@ -119,6 +126,8 @@ public:
  ACCESSORS(QString ,copy_path)
  ACCESSORS(QString ,raw_copy_path)
 
+ ACCESSORS(QString ,setup_path)
+ ACCESSORS(QString ,raw_setup_path)
 
  void write_ntxh(QTextStream& qts);
 

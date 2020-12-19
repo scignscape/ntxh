@@ -47,6 +47,9 @@ GTagML_Document::GTagML_Document()
 
 QString GTagML_Document::get_path_root()
 {
+ if(!man_folder_path_.isEmpty())
+   return man_folder_path_;
+
  if(local_path_.isEmpty())
    return {};
  QDir qd(local_path_);

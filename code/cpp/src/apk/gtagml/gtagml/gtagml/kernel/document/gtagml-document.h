@@ -60,6 +60,7 @@ class GTagML_Document
 
  QTextStream* divert_;
 
+ QString man_folder_path_;
 
 public:
 
@@ -76,6 +77,8 @@ public:
  ACCESSORS(QString ,khi_info)
  ACCESSORS(GTagML_Parsing_Modes ,parsing_mode)
  ACCESSORS(QString ,local_file_name)
+
+ ACCESSORS(QString ,man_folder_path)
 
  ACCESSORS(QTextStream*, divert)
 

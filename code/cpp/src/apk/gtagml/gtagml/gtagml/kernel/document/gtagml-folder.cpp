@@ -266,11 +266,13 @@ QString GTagML_Folder::partials_codes_to_lisp()
  return result;
 }
 
-void GTagML_Folder::get_gtagml_files(QStringList& result)
+void GTagML_Folder::get_gtagml_files(QStringList& result, QString first_file)
 {
  QDir dir(local_path_);
  dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
  dir.setSorting(QDir::Size | QDir::Reversed);
+
+ QFileInfo qfia(first_file);
 
  QFileInfoList qfil = dir.entryInfoList();
 
@@ -279,7 +281,9 @@ void GTagML_Folder::get_gtagml_files(QStringList& result)
  while(it.hasNext())
  {
   QFileInfo qfi = it.next();
-  if(qfi.suffix() == "gt")
+  if(qfi == qfia)
+    result.push_front(qfi.absoluteFilePath());
+  else if(qfi.suffix() == "gt")
     result << qfi.absoluteFilePath();
   else if(qfi.suffix() == "gtagml")
     result << qfi.absoluteFilePath();
@@ -288,13 +292,26 @@ void GTagML_Folder::get_gtagml_files(QStringList& result)
 }
 
 
-void GTagML_Folder::convert_all_files(void(*fn)(QString))
+void GTagML_Folder::convert_all_files(void(*fn)(QString, QString&, GTagML_Folder*))
 {
+ QString first_file;
+ if(!first_file_path_.isEmpty())
+ {
+  QString suffix;
+  QFileInfo qfi(first_file_path_);
+  if(qfi.suffix().isEmpty())
+    suffix = ".gt";
+  if(qfi.isAbsolute())
+    first_file = qfi.absoluteFilePath() + suffix;
+  else
+    first_file = QString("%1/%2%3").arg(local_path_).arg(first_file_path_).arg(suffix);
+ }
  QStringList files;
- get_gtagml_files(files);
+ get_gtagml_files(files, first_file);
+ QString setup;
  for(QString f: files)
  {
-  fn(f);
+  fn(f, setup, this);
  }
 }
 

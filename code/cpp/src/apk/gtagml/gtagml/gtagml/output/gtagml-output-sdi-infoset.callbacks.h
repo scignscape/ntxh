@@ -33,7 +33,14 @@ GTagML_CALLBACK_(copy)
  WHEN_(around)
  {
   set_copy(qts, node);
-  // suppress_node_ = node;
+ }
+ _WHEN
+_GTagML_CALLBACK
+
+GTagML_CALLBACK_(setup)
+ WHEN_(around)
+ {
+  set_setup(qts, node);
  }
  _WHEN
 _GTagML_CALLBACK

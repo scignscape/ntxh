@@ -35,7 +35,8 @@ USING_KANS(Util)
 USING_KANS(SDI)
 USING_KANS(TextIO)
 
-void process_gtagml_file(QString path)
+
+void process_gtagml_file(QString path, QString& carried_setup, GTagML_Folder* fld)
 {
  qDebug() << "Processing file: " << path;
 
@@ -51,6 +52,10 @@ void process_gtagml_file(QString path)
 // gol.export_latex(path + ".tex");
 
  GTagML_Document* gdoc = new GTagML_Document;
+
+ if(fld)
+   gdoc->set_man_folder_path(fld->man_path());
+
  gdoc->load_and_parse(path);
 
  GH_Block_Writer* blw = new GH_Block_Writer;
@@ -70,10 +75,25 @@ void process_gtagml_file(QString path)
  gsi->export_infoset(path + ".info.txt"); // export_blocks(); //(path + ".");
 
  QString cpy = gsi->copy_path();
+ QString setup = gsi->setup_path();
+
+ if(!setup.isEmpty())
+ {
+  carried_setup = setup;
+  if(cpy.isEmpty())
+    cpy = setup;
+ }
+
+ QString ffolder;
+
+ if(carried_setup.isEmpty())
+   ffolder = make_folder_from_file_name(path, DEFAULT_SDI_FOLDER);
+ else
+   ffolder = make_folder_from_file_name(path, carried_setup);
+
 
  GH_SDI_Document* gsd = gsi->sdi_document();
 
- QString ffolder = make_folder_from_file_name(path, DEFAULT_SDI_FOLDER);
 
  QString sdi_path = get_path_with_different_folder(path, ffolder);
 
@@ -95,8 +115,13 @@ void process_gtagml_file(QString path)
   QString cp = copy_file_to_folder(path + ".tex", cpy);
   qDebug() << "Copied " << path + ".tex" << " to " << cp;
 
+  cpy += "/sdi";
+
   cp = copy_file_to_folder(mark_path, cpy);
   qDebug() << "Copied " << mark_path << " to " << cp;
+
+  cp = copy_file_to_folder(sdi_path + ".sdi-prelatex.ntxh", cpy);
+  qDebug() << "Copied " << sdi_path + ".sdi-prelatex.ntxh" << " to " << cp;
  }
 
  prepend_template_to_file(cp, DEFAULT_SDI_FOLDER "/prepend",
@@ -120,7 +145,7 @@ int main(int argc, char *argv[])
  QString file;// = cmdl.size() > 3? cmdl[3]: DEFAULT_SDI_FOLDER
  QString manfolder;
 
- QStringList cmdl = get_cmdl(argc, argv, 2, {
+ QStringList cmdl = get_cmdl(argc, argv, 1, {
    {&folder, DEFAULT_GTAGML_FOLDER "/dg/ctg/src"},
    {&file, DEFAULT_GTAGML_FOLDER "/dg/t1/t1.gt"},
    {&manfolder, {}}
@@ -132,7 +157,7 @@ int main(int argc, char *argv[])
  qDebug() << "Folder: " << folder << ", File: " << file;
  qDebug() << "ManFolder: " << manfolder;
 
- file.clear();
+ // file.clear();
 
  if(manfolder.isEmpty())
  {
@@ -140,18 +165,17 @@ int main(int argc, char *argv[])
   {
    GTagML_Folder fld(folder);
    fld.convert_all_files( &process_gtagml_file );
-
-   // process whole folder ...
-//   NGML_Folder fld(folder);
-//   fld.convert_to_latex();
   }
   else
-    process_gtagml_file(file);
+  {
+   QString setup;
+   process_gtagml_file(file, setup, nullptr);
+  }
  }
  else
  {
-//  NGML_Folder fld(folder, file, manfolder);
-//  fld.convert_to_latex(&process_ngml_file);
+  GTagML_Folder fld(folder, file, manfolder);
+  fld.convert_all_files( &process_gtagml_file );
  }
  return 0;
 }

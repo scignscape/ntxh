@@ -1,0 +1,4 @@
+$$ document-title := Cognitive Transform Grammar
+$$ local-title := ctg
+
+

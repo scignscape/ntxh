@@ -623,24 +623,46 @@ void GTagML_Output_SDI_Infoset::set_info_param(QTextStream& qts, QString key, ca
 
 void GTagML_Output_SDI_Infoset::set_copy(QTextStream& qts, caon_ptr<tNode> node)
 {
+ set_path(qts, node, &copy_path_, &raw_copy_path_);
+}
+
+void GTagML_Output_SDI_Infoset::set_setup(QTextStream& qts, caon_ptr<tNode> node)
+{
+ set_path(qts, node, &setup_path_, &raw_setup_path_);
+}
+
+void GTagML_Output_SDI_Infoset::set_path(QTextStream& qts, caon_ptr<tNode> node, QString* path, QString* raw)
+{
  CAON_PTR_DEBUG(tNode ,node)
  if(caon_ptr<GTagML_Tag_Command> ntc = node->GTagML_tag_command())
  {
   CAON_PTR_DEBUG(GTagML_Tag_Command ,ntc)
-  QString path = ntc->argument();
-  if(path.isEmpty())
+  QString patharg = ntc->argument();
+  if(patharg.isEmpty())
     return;
-  raw_copy_path_ = path;
-  if(path == "!")
+  *raw = patharg;
+  if(patharg == "!")
   {
-   copy_path_.clear();
+   path->clear();
    return;
   }
-  if(path.startsWith('@'))
+  if(patharg.startsWith("@("))
+  {
+   int index = patharg.indexOf(')');
+   if(index != -1)
+   {
+    QString mid = patharg.mid(2, index - 2);
+    if(mid == document_.get_path_root())
+      patharg.replace(1, index, mid);
+    else
+      patharg.replace(1, index, QString{});
+   }
+  }
+  if(patharg.startsWith('@'))
   {
    QString pr = document_.get_path_root();
-   pr += path.mid(1);
-   copy_path_ = pr;
+   pr += patharg.mid(1);
+   *path = pr;
   }
  }
 }
