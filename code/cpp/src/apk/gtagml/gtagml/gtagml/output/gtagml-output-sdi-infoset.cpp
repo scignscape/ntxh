@@ -54,7 +54,7 @@ GTagML_Output_SDI_Infoset::GTagML_Output_SDI_Infoset(GTagML_Document& document,
  :  GTagML_Output_Base(document), GTagML_Output_Event_Handler(),
     //infoset_(infoset),
     suppress_node_(nullptr),
-    GTagML_output_htxn_(nullptr),
+    gh_output_htxn_(nullptr),
     held_sdi_sentence_end_index_(0),
     canceled_sdi_sentence_start_index_(0),
     held_sdi_sentence_end_node_(nullptr), block_writer_(block_writer),
@@ -934,7 +934,7 @@ void GTagML_Output_SDI_Infoset::check_sentence_boundaries(QTextStream& qts,
  CAON_PTR_DEBUG(tNode ,node)
 
  QMap<u4, QString> notes;
-// Glyph_Layer_8b* bl = GTagML_output_htxn_->main_bl();
+// Glyph_Layer_8b* bl = gh_output_htxn_->main_bl();
 // htxn_document_->check_sentence_boundaries(bl,
 //   enter, leave, notes);
  u4 i = enter;

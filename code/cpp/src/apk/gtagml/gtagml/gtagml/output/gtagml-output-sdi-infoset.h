@@ -75,7 +75,7 @@ class GTagML_Output_SDI_Infoset : public GTagML_Output_Base, private GTagML_Outp
  QMap<QString, caon_ptr<GTagML_Tag_Command_Callback>> callbacks_;
  void init_callbacks();
 
- GTagML_Output_HTXN* GTagML_output_htxn_;
+ GTagML_Output_HTXN* gh_output_htxn_;
 
  QString review_;
  QTextStream review_qts_;
@@ -120,7 +120,7 @@ public:
 
  GTagML_Output_SDI_Infoset(GTagML_Document& document, GH_Block_Writer* block_writer);//, HTXN_Infoset_8b* infoset);
 
- //ACCESSORS(GTagML_Output_HTXN* ,GTagML_output_htxn)
+ //ACCESSORS(GTagML_Output_HTXN* ,gh_output_htxn)
  ACCESSORS(GH_SDI_Document* ,sdi_document)
 
  ACCESSORS(QString ,copy_path)

@@ -5,7 +5,7 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-GTagML_CALLBACK_(p)
+GTAGML_CALLBACK_(p)
  WHEN_(around)
  {
   check_sentence_boundaries(qts, node);
@@ -15,10 +15,10 @@ _GTagML_CALLBACK
 
 
 
-GTagML_CALLBACK_SUPPRESS(documentclass)
-GTagML_CALLBACK_NOACTION(include)
+GTAGML_CALLBACK_SUPPRESS(documentclass)
+GTAGML_CALLBACK_NOACTION(include)
 
-GTagML_CALLBACK_(document)
+GTAGML_CALLBACK_(document)
  WHEN_(pre)
  {
  }
@@ -29,7 +29,7 @@ GTagML_CALLBACK_(document)
 _GTagML_CALLBACK
 
 
-GTagML_CALLBACK_(copy)
+GTAGML_CALLBACK_(copy)
  WHEN_(around)
  {
   set_copy(qts, node);
@@ -37,7 +37,7 @@ GTagML_CALLBACK_(copy)
  _WHEN
 _GTagML_CALLBACK
 
-GTagML_CALLBACK_(setup)
+GTAGML_CALLBACK_(setup)
  WHEN_(around)
  {
   set_setup(qts, node);
@@ -46,7 +46,7 @@ GTagML_CALLBACK_(setup)
 _GTagML_CALLBACK
 
 
-GTagML_CALLBACK_(document-title)
+GTAGML_CALLBACK_(document-title)
  WHEN_(around)
  {
   set_info_param(qts, "document-title", node);
@@ -54,7 +54,7 @@ GTagML_CALLBACK_(document-title)
  _WHEN
 _GTagML_CALLBACK
 
-GTagML_CALLBACK_(local-title)
+GTAGML_CALLBACK_(local-title)
  WHEN_(around)
  {
   set_info_param(qts, "local-title", node);
@@ -66,7 +66,7 @@ _GTagML_CALLBACK
 
 
 
-GTagML_CALLBACK_(noxml_)
+GTAGML_CALLBACK_(noxml_)
  WHEN_(around)
  {
   // suppress_node_ = node;
@@ -75,7 +75,7 @@ GTagML_CALLBACK_(noxml_)
 _GTagML_CALLBACK
 
 
-GTagML_CALLBACK_(_noxml)
+GTAGML_CALLBACK_(_noxml)
  WHEN_(around)
  {
   // suppress_node_ = nullptr;
@@ -84,7 +84,7 @@ GTagML_CALLBACK_(_noxml)
 _GTagML_CALLBACK
 
 
-GTagML_CALLBACK_(dclass)
+GTAGML_CALLBACK_(dclass)
  WHEN_(pre)
  {
   // suppress_node_ = node;
@@ -97,7 +97,7 @@ GTagML_CALLBACK_(dclass)
 _GTagML_CALLBACK
 
 
-GTagML_CALLBACK_(inc)
+GTAGML_CALLBACK_(inc)
  WHEN_(around)
  {
  }
@@ -106,7 +106,7 @@ _GTagML_CALLBACK
 
 
 
- GTagML_CALLBACK_(fnl)
+ GTAGML_CALLBACK_(fnl)
   WHEN_(around)
   {
    qts << '\n';
@@ -125,7 +125,7 @@ RENAME_TAG(pdf-ref, span)
 RENAME_(latex-only, span, latex-only)
 
 
-GTagML_CALLBACK_(code)
+GTAGML_CALLBACK_(code)
  WHEN_(pre)
   {
 //   flags.code_display_mode = true;

@@ -17,7 +17,7 @@
  callbacks_[#name] = caon_ptr<GTagML_Tag_Command_Callback>( new GTagML_Tag_Command_Callback(#name, #tag) ); \
 
 
-#define GTagML_CALLBACK_(name) \
+#define GTAGML_CALLBACK_(name) \
  callbacks_[#name] = caon_ptr<GTagML_Tag_Command_Callback>( new GTagML_Tag_Command_Callback(#name, \
   GTagML_Tag_Command_Callback::Callback_Map_type{{ \
 
@@ -36,8 +36,8 @@
 
 #define _GTagML_CALLBACK }}) );
 
-#define GTagML_CALLBACK_SUPPRESS(name) \
- GTagML_CALLBACK_(name) \
+#define GTAGML_CALLBACK_SUPPRESS(name) \
+ GTAGML_CALLBACK_(name) \
  WHEN_(pre) \
  { \
   suppress_node_ = node; \
@@ -49,8 +49,8 @@
  _WHEN \
 _GTagML_CALLBACK \
 
-#define GTagML_CALLBACK_NOACTION(name) \
- GTagML_CALLBACK_(name) \
+#define GTAGML_CALLBACK_NOACTION(name) \
+ GTAGML_CALLBACK_(name) \
   WHEN_(around) \
   { \
   } \

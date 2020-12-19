@@ -41,11 +41,13 @@ CONFIG += no_keywords
 
 DEFINES += USE_KANS
 
+
 HEADERS += \
 
 
 SOURCES += \
   $$SRC_DIR/main.cpp \
+
 
 LIBS += -L$$TARGETSDIR -lgtagml
 

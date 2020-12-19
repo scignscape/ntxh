@@ -35,6 +35,7 @@ GH_SDI_Document::GH_SDI_Document()
 void GH_SDI_Document::setup_folder_from_template(QString file_name, QString template_folder, QString folder)
 {
  QDir qd(folder);
+ qd.mkdir("out");
  qd.mkdir("ngml");
  qd.cd("ngml");
  QDir tqd(template_folder);
@@ -54,7 +55,10 @@ void GH_SDI_Document::setup_folder_from_template(QString file_name, QString temp
  qd.cdUp();
 
  QString pdfl = load_file(tqd.absoluteFilePath("run-pdflatex.sh"));
- pdfl.replace("%%", file_name);
+
+ pdfl.replace("%R%", ROOT_FOLDER);
+
+ pdfl.replace("%F%", file_name);
  save_file(qd.absoluteFilePath("run-pdflatex.sh"), pdfl);
 }
 

@@ -1,3 +1,27 @@
 
-\setup{@(/gtagml/stash/ctg)/gt/gen}
+
+\begin{document}
+
+\AddToShipoutPicture{%
+  \AtPageLowerLeft{%
+    \hspace*{3pt}
+ \rotatebox{90}{%
+        \begin{minipage}{\paperheight}
+   \centering
+   {\color{codegr!65}\textcopyright ~\today{} Nathaniel Christen}
+        \end{minipage} %
+      }
+    } %
+  }%
+
+\input{ctg}
+\input{intro.gt}
+
+\input{section1.gt}
+\input{section2.gt}
+
+\input{section3.gt}
+\input{section4.gt}
+
+\end{document}
 

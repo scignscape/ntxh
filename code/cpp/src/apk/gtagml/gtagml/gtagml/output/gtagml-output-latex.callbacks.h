@@ -5,18 +5,19 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-GTagML_CALLBACK_NOACTION(noxml_)
-GTagML_CALLBACK_NOACTION(_noxml)
+GTAGML_CALLBACK_NOACTION(noxml_)
+GTAGML_CALLBACK_NOACTION(_noxml)
 
-GTagML_CALLBACK_SUPPRESS(xml-save_)
-GTagML_CALLBACK_NOACTION(_xml-save)
-GTagML_CALLBACK_SUPPRESS(saved-xml)
+GTAGML_CALLBACK_SUPPRESS(xml-save_)
+GTAGML_CALLBACK_NOACTION(_xml-save)
+GTAGML_CALLBACK_SUPPRESS(saved-xml)
 
-GTagML_CALLBACK_NOACTION(copy)
-GTagML_CALLBACK_NOACTION(document-title)
-GTagML_CALLBACK_NOACTION(local-title)
+GTAGML_CALLBACK_NOACTION(copy)
+GTAGML_CALLBACK_NOACTION(setup)
+GTAGML_CALLBACK_NOACTION(document-title)
+GTAGML_CALLBACK_NOACTION(local-title)
 
-GTagML_CALLBACK_(body)
+GTAGML_CALLBACK_(body)
  WHEN_(pre)
  {
  }
@@ -27,7 +28,7 @@ GTagML_CALLBACK_(body)
 _GTagML_CALLBACK
 
 
- GTagML_CALLBACK_(kf-link)
+ GTAGML_CALLBACK_(kf-link)
   WHEN_(around)
   {
   }
@@ -35,7 +36,7 @@ _GTagML_CALLBACK
  _GTagML_CALLBACK
 
 
- GTagML_CALLBACK_(div)
+ GTAGML_CALLBACK_(div)
   WHEN_(pre)
   {
   }
@@ -46,7 +47,7 @@ _GTagML_CALLBACK
  _GTagML_CALLBACK
 
 
- GTagML_CALLBACK_(html)
+ GTAGML_CALLBACK_(html)
   WHEN_(pre)
   {
   }
@@ -57,7 +58,7 @@ _GTagML_CALLBACK
  _GTagML_CALLBACK
 
 
- GTagML_CALLBACK_(head)
+ GTAGML_CALLBACK_(head)
   WHEN_(around)
   {
   }
@@ -68,7 +69,7 @@ _GTagML_CALLBACK
 RENAME_TAG(u, underline)
 RENAME_TAG(a, anchor)
 
-//  GTagML_CALLBACK_(p)
+//  GTAGML_CALLBACK_(p)
 //   WHEN_(pre)
 //    {
 //     flags.paragraph_mode = true;
@@ -87,7 +88,7 @@ RENAME_TAG(a, anchor)
 //  _GTagML_CALLBACK
 
 
-//GTagML_CALLBACK_(analysis-package)
+//GTAGML_CALLBACK_(analysis-package)
 // WHEN_(around)
 // {
 //  //report_analysis_package(qts, node);
@@ -96,7 +97,7 @@ RENAME_TAG(a, anchor)
 //_GTagML_CALLBACK
 
 
-// GTagML_CALLBACK_(fnl)
+// GTAGML_CALLBACK_(fnl)
 //  WHEN_(around)
 //  {
 //   qts << '\n';
@@ -115,7 +116,7 @@ RENAME_TAG(a, anchor)
 //RENAME_(latex-only, span, latex-only)
 
 
-//GTagML_CALLBACK_(body)
+//GTAGML_CALLBACK_(body)
 // WHEN_(pre)
 // {
 // }
@@ -127,7 +128,7 @@ RENAME_TAG(a, anchor)
 
 
 
-//GTagML_CALLBACK_(code)
+//GTAGML_CALLBACK_(code)
 // WHEN_(pre)
 //  {
 ////   flags.code_display_mode = true;
@@ -142,7 +143,7 @@ RENAME_TAG(a, anchor)
 //_GTagML_CALLBACK
 
 
-//GTagML_CALLBACK_(bq)
+//GTAGML_CALLBACK_(bq)
 // WHEN_(around)
 // {
 //  qts << "`";
@@ -151,7 +152,7 @@ RENAME_TAG(a, anchor)
 //_GTagML_CALLBACK
 
 
-//GTagML_CALLBACK_(sq)
+//GTAGML_CALLBACK_(sq)
 // WHEN_(pre)
 // {
 //  qts << "'";
@@ -166,7 +167,7 @@ RENAME_TAG(a, anchor)
 
 
 
-//GTagML_CALLBACK_(kf-link)
+//GTAGML_CALLBACK_(kf-link)
 // WHEN_(around)
 // {
 ////?  insert_kf_link(qts);
@@ -176,7 +177,7 @@ RENAME_TAG(a, anchor)
 //_GTagML_CALLBACK
 
 
-//GTagML_CALLBACK_(show-annotations)
+//GTAGML_CALLBACK_(show-annotations)
 // WHEN_(around)
 // {
 ////  html_show_annotations(qts);
@@ -185,7 +186,7 @@ RENAME_TAG(a, anchor)
 //_GTagML_CALLBACK
 
 
-//GTagML_CALLBACK_(show-local-annotations)
+//GTAGML_CALLBACK_(show-local-annotations)
 // WHEN_(around)
 // {
 ////  html_show_local_annotations(qts, node);
@@ -194,7 +195,7 @@ RENAME_TAG(a, anchor)
 //_GTagML_CALLBACK
 
 
-//GTagML_CALLBACK_(srow)
+//GTAGML_CALLBACK_(srow)
 // WHEN_(around)
 // {
 ////  insert_semantic_row(qts, node);

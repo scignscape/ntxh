@@ -66,7 +66,7 @@ void process_gtagml_file(QString path, QString& carried_setup, GTagML_Folder* fl
 
  GTagML_Output_Blocks* gob = new GTagML_Output_Blocks(*gdoc, blw);
  gob->init_standard_8bit();
- gob->export_blocks(); //(path + ".");
+ gob->export_blocks();
 
  GTagML_Output_SDI_Infoset* gsi = new GTagML_Output_SDI_Infoset(*gdoc, blw);
 
@@ -112,10 +112,20 @@ void process_gtagml_file(QString path, QString& carried_setup, GTagML_Folder* fl
 
  if(!cpy.isEmpty())
  {
-  QString cp = copy_file_to_folder(path + ".tex", cpy);
-  qDebug() << "Copied " << path + ".tex" << " to " << cp;
+  QString cp;
+
+  if(setup.isEmpty())
+  {
+   cp = copy_file_to_folder(path + ".tex", cpy);
+   qDebug() << "Copied " << path + ".tex" << " to " << cp;
+  }
 
   cpy += "/sdi";
+
+  QDir sdi_dir(cpy);
+  if(!sdi_dir.exists())
+    if(sdi_dir.mkpath("."))
+      qDebug() << "Made path: " << sdi_dir;
 
   cp = copy_file_to_folder(mark_path, cpy);
   qDebug() << "Copied " << mark_path << " to " << cp;
@@ -132,7 +142,8 @@ void process_gtagml_file(QString path, QString& carried_setup, GTagML_Folder* fl
   { "%SDI-PFILE", sdi_path + ".sdi-prelatex.ntxh" }
  });
 
- gsd->setup_folder_from_template(gdoc->local_file_name() + ".tex",
+ if(!setup.isEmpty())
+   gsd->setup_folder_from_template(gdoc->local_file_name() + ".tex",
    DEFAULT_SDI_FOLDER "/template", ffolder);
 
 }
@@ -145,7 +156,7 @@ int main(int argc, char *argv[])
  QString file;// = cmdl.size() > 3? cmdl[3]: DEFAULT_SDI_FOLDER
  QString manfolder;
 
- QStringList cmdl = get_cmdl(argc, argv, 1, {
+ QStringList cmdl = get_cmdl(argc, argv, 2, {
    {&folder, DEFAULT_GTAGML_FOLDER "/dg/ctg/src"},
    {&file, DEFAULT_GTAGML_FOLDER "/dg/t1/t1.gt"},
    {&manfolder, {}}

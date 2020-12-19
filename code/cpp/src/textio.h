@@ -29,17 +29,24 @@ inline QString make_folder_from_file_name(QString path, QString folder)
  QFileInfo qfi(path);
  QString bfn = qfi.baseName();
  QDir qd(folder);
+ if(qd.cd(bfn))
+ {
+  qDebug() << "Folder already exists: " << qd.path();
+  return qd.path();
+ }
  if( qd.mkdir(bfn) )
  {
   qd.cd(bfn);
   qDebug() << "Made folder: " << qd.path();
   return qd.path();
  }
- if(qd.cd(bfn))
+ if( qd.mkpath(bfn) )
  {
-  qDebug() << "Folder already exists: " << qd.path();
+  qd.cd(bfn);
+  qDebug() << "Made folder (recursive): " << qd.path();
   return qd.path();
  }
+
  qDebug() << "Could not make folder ...";
  return {};
 }
