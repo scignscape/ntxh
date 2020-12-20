@@ -1065,6 +1065,7 @@ void GTagML_Graph_Build::check_nonstandard_special_character_sequence
  static QMap<QString, std::pair<QString, u1>> static_map {
   {"%--", {"-", 2}},
   {"%_", {"_", 1}},
+  {"%#", {"#", 1}},
   {"->-", {"/", 2}},
   {"%..", {"...", 2}},
   {"%...", {"...", 2}},

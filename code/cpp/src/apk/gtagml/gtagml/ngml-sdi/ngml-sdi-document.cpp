@@ -31,8 +31,19 @@ USING_KANS(TextIO)
 typedef NTXH_Graph::hypernode_type hypernode_type;
 
 NGML_SDI_Document::NGML_SDI_Document(QString path, QString folder)
-  :  path_(path), folder_(folder), global_base_line_skip_(12)
+  :  path_(path), folder_(folder), global_base_line_skip_(12),
+     carried_paragraph_id_(0), carried_sentence_id_(0)
 {
+}
+
+
+void NGML_SDI_Document::load_prelatex_files(QStringList paths)
+{
+ for(QString p : paths)
+ {
+  qDebug() << "Loading prelatex file: " << p;
+  load_prelatex_file(p);
+ }
 }
 
 void NGML_SDI_Document::load_prelatex_file(QString path)
@@ -50,26 +61,29 @@ void NGML_SDI_Document::load_prelatex_file(QString path)
 
  u4 i = 0;
 
+ prelatex_files_.push_back(path);
+ u4 file_id = prelatex_files_.size();
+
 // n8 bls = 12; // default ...
 
  for(hypernode_type* h : v)
  {
   if(h->type_descriptor().first == "GH_SDI_Paragraph")
-    g.get_sfsr(h, {{1, 3}}, [this](QVector<QPair<QString, void*>>& prs)
+    g.get_sfsr(h, {{1, 3}}, [this, file_id](QVector<QPair<QString, void*>>& prs)
     {
      u4 id = prs[0].first.toInt();
      u4 s = prs[1].first.toInt();
      u4 e = prs[2].first.toInt();
-     gh_sdi_paragraph_info_[id] = {s, e};
+     gh_sdi_paragraph_info_[{file_id, id}] = {s, e};
     });
   else if(h->type_descriptor().first == "GH_SDI_Sentence")
-    g.get_sfsr(h, {{1, 4}}, [this](QVector<QPair<QString, void*>>& prs)
+    g.get_sfsr(h, {{1, 4}}, [this, file_id](QVector<QPair<QString, void*>>& prs)
     {
      u4 id = prs[0].first.toInt();
      u4 p = prs[1].first.toInt();
      u4 s = prs[2].first.toInt();
      u4 e = prs[3].first.toInt();
-     gh_sdi_sentence_info_[id] = {p, {s, e}};
+     gh_sdi_sentence_info_[{file_id, id}] = {p, {s, e}};
     });
  }
 

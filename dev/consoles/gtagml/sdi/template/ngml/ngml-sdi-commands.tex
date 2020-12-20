@@ -5,6 +5,11 @@
 \vspace{1em}#1}
 %%
 
+\makeatletter
+\def\currentjobname{\jobname}% 
+\newcommand{\sdiinput}[1]{\def\currentjobname{#1}\input{#1}}
+\makeatother
+
 
 \usepackage{datetime}
 \usepackage{etoolbox}
@@ -273,9 +278,9 @@ $y: \topt\pdflastypos}%
 &type SDI_Sentence_End {6}^^J%
   :n:1 :i:2 :o:3 :p:4 :x:5 :y:6 ;^^J%
 ^^J%
-&type SDI_Paragraph_Start {7}^^J%
-  :n:1 :i:2 :o:3 :p:5 :x:6 :y:7 :b:4 ;^^J%
-^^J%
+&type SDI_Paragraph_Start {8}^^J%
+  :n:1 :i:2 :o:3 :p:5 :j:6 :x:7 :y:8 :b:4 ;^^J%
+^^J%^^J%
 &type SDI_Paragraph_End {6}^^J%
   :n:1 :i:2 :o:3 :p:4 :x:5 :y:6 ;^^J%
 ^^J%

@@ -683,12 +683,14 @@ u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
    {{3, '_'}, 118}, // _ decl s e
    {{4, '_'}, 106}, // ell (one ch)
 
-   {{1, '\''}, 113}, // osquote
-   {{2, '\''}, 114}, // csquote
+   {{1, '#'}, 109}, // # no escape
+
+   {{1, '\''}, 180}, // osquote
+   {{2, '\''}, 181}, // csquote
    {{3, '\''}, 96}, // ssquote
 
-   {{1, '"'}, 115}, // odquote
-   {{2, '"'}, 116}, // cdquote
+   {{1, '"'}, 182}, // odquote
+   {{2, '"'}, 183}, // cdquote
    {{3, '"'}, 97}, // sdquote
 
    //?{{4, '.'}, 109}, // mdash
@@ -701,20 +703,25 @@ u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
    {{1, ','}, 113}, // n lit
    {{3, ','}, 119}, // _ decl s e
 
-   {{4, '('}, 83}, // group
-   {{4, ')'}, 84}, // group
-   {{4, '{'}, 90}, // group
-   {{4, '}'}, 91}, // group
-   {{4, '['}, 92}, // group
-   {{4, ']'}, 93}, // group
+   {{4, '('}, 184}, // group
+   {{4, ')'}, 185}, // group
 
+   {{3, '{'}, 145}, // group
+   {{3, '}'}, 146}, // group
+
+   {{4, '['}, 186}, // group
+   {{4, ']'}, 187}, // group
+
+   {{2, '{'}, 188}, // group
+   {{2, '}'}, 189}, // group
+
+   {{4, '<'}, 188}, // group
+   {{4, '>'}, 189}, // group
 
    {{1, '?'}, 103}, // wp
    {{1, '!'}, 104}, // wp
 
    {{1, '*'}, 95}, // quasi let
-
-   {{1, '>'}, 101}, // quasi math
 
    {{3, ':'}, 123}, // _ decl s e
 
@@ -767,9 +774,9 @@ MainSwitch:
  case ':': return 67;   //ascii 58
  case ';': return 66;   //ascii 59
 
- case '<': return 99;   //ascii 60
+ case '<': return 93;   //ascii 60
  case '=': return 86;   //ascii 61
- case '>': return 101;   //ascii 62
+ case '>': return 94;   //ascii 62
 
  case '?': return 103;   //ascii 63
 
@@ -794,8 +801,8 @@ MainSwitch:
  case '[': return 88; //77
  case ']': return 89; //78
 
- case '{': return 90; //84
- case '}': return 91; //85
+ case '{': return 90; // no esc
+ case '}': return 91; // no esc
 
  case '_': return 36;
  case '`': return 128;
@@ -1031,32 +1038,36 @@ void get_latex_64_to_117(u1 gp, QString& result)
    "\\mdash{}", // 74 // se
    "!", // 75 // punc
    "@", // 76 // email, handles ...  (lit)
-   "#", // 77 // number   (lit) or (word-repl)
+   "\\#", // 77 // number   (lit) or (word-repl)
    "$", // 78 // dollars  (lit) or (word-repl)
    "%", // 79 // percent  (lit) or (word-repl)
    "&", // 80 // part of name  (word-repl)
    "&", // 81 // not part of name  (colloq/subpunctuation)
    "/", // 82 // punc
+
    "(", // 83 // surround
    ")", // 84 // surround
+
    "*", // 85 // polite
    "=", // 86 // (quasi math)
    "+", // 87 // (quasi math)
+
    "[", // 88 // (punc)
    "]", // 89 // (punc)
 
-   "{", // 90 // surround
-   "}", // 91 // surround
+   "{", // 90 // lit
+   "}", // 91 // lit
+
    "\\", // 92 // non-punc
-   "[", // 93 // surround
-   "]", // 94 // surround
+   "<", // 93 // quasi-math
+   ">", // 94 // quasi-math
    "*", // 95 // quasi math
    "\\ssquote", // 96 // ' feet
    "\\sdquote", // 97 // " inches
    "'", // 98 // (apos) punc
    "~", // 99 // (word-repl)
    "\n", // 100 //  se  64+36
-   "\\ndash{}", // 101 // (quasi math)
+   "\\ndash{}", // 101
 
    ".", // 102 // num literal
    "?", // 103 // punc
@@ -1064,17 +1075,16 @@ void get_latex_64_to_117(u1 gp, QString& result)
    ".", // 105 // abbr
    ".", // 106 // ellipses (1 char)
    ".", // 107 // ellipses part (subpunc)
-   "_", // 108 // lit
-   "<", // 109 // (quasi-math)
-   ">", // 110 // (quasi-math)
-   "-", // 111 // quasi-math (neg)
-   "-", // 112 // quasi-math (minus)
-   ",", // 113 // quasi-math (lit)
-   "\\osquote{}", // 114 // punc
-   "\\csquote{}", // 115 // punc
-   "\\odquote{}", // 116 // punc
-   "\\cdquote{}", // 117 // punc
-
+   "_", // 108 // no esc
+   "#", // 109 // no esc
+   "%", // 110 // no esc
+   "$", // 111 // no esc
+   "-", // 112 // quasi-math (neg)
+   "-", // 113 // quasi-math (minus)
+   ",", // 114 // quasi-math (lit)
+   "^", // 115 // quasi-math
+   "[", // 116 // surround
+   "]", // 117 // surround
    }};
 
  result = static_vec.value(gp - 64);
@@ -1174,6 +1184,23 @@ void get_latex_160_to_179(u1 gp, QString& result)
 
 void get_latex_180_to_189(u1 gp, QString& result)
 {
+ static QVector<QString> static_vec {{
+   "\\osquote{}", // 180 // punc
+   "\\csquote{}", // 181 // punc
+   "\\odquote{}", // 182 // punc
+   "\\cdquote{}", // 183 // punc
+
+   "(", // 184 // surround
+   ")", // 185 // surround
+
+   "[", // 186 // surround
+   "]", // 187 // surround
+
+   "<", // 188 // surround
+   ">", // 189 // surround
+ }};
+
+ result = static_vec.value(gp - 180);
  // unused
 }
 

@@ -16,6 +16,8 @@
 
 #include <QCommandLineParser>
 
+#include <QDirIterator>
+
 
 #include "textio.h"
 #include "get-cmdl.h"
@@ -34,17 +36,37 @@ int main(int argc, char* argv[])
    {&czfile, {}}
    });
 
- qDebug() << QString(R"(
-Folder: %1
-File: %2
-PFile: %3
-czFile: %4
-   )").arg(folder).arg(file).arg(pfile).arg(czfile);
+// qDebug() << QString(R"(
+//Folder: %1
+//File: %2
+//PFile: %3
+//czFile: %4
+//   )").arg(folder).arg(file).arg(pfile).arg(czfile);
+
+ folder = "/home/nlevisrael/gits/ntxh/wip-sebi/gtagml/ctg/gen/ctg";
+// file = "/home/nlevisrael/gits/ntxh/wip-sebi/gtagml/ctg/gen/ctg/out/ctg.gt.sdi.ntxh";
+
+ QStringList prelatex_files;
+ QStringList marks_files;
+
+ QString cs;
+
+ QDir qd(folder);
+ qd.cd("sdi");
+ QStringList qsl = qd.entryList(QDir::Files);
+ for(QString file : qsl)
+ {
+  if(file.endsWith("sdi-prelatex.ntxh"))
+    prelatex_files.push_back(qd.absoluteFilePath(file));
+  else if(file.endsWith("marks-summay.txt"))
+    marks_files.push_back(qd.absoluteFilePath(file));
+ }
 
  NGML_SDI_Document nsd(file, folder);
- nsd.load_prelatex_file(pfile);
 
- nsd.parse();
+ nsd.load_prelatex_files(prelatex_files);
+
+// nsd.parse();
 
 #ifdef HIDE
 

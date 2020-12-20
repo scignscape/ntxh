@@ -49,9 +49,13 @@ class NGML_SDI_Document
 
  QStringList prelatex_lines_;
 
- QMap<u4, QPair<u4, QPair<u4, u4>>> gh_sdi_sentence_info_;
- QMap<u4, QPair<u4, u4>> gh_sdi_paragraph_info_;
+ QMap<QPair<u4, u4>, QPair<u4, QPair<u4, u4>>> gh_sdi_sentence_info_;
+ QMap<QPair<u4, u4>, QPair<u4, u4>> gh_sdi_paragraph_info_;
 
+ u4 carried_paragraph_id_;
+ u4 carried_sentence_id_;
+
+ QStringList prelatex_files_;
 
 public:
  
@@ -66,6 +70,8 @@ public:
  ACCESSORS(n8 ,global_base_line_skip)
 
  void load_prelatex_file(QString path);
+
+ void load_prelatex_files(QStringList path);
 
  void parse();
 
