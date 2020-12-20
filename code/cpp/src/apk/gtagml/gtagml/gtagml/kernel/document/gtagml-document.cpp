@@ -280,6 +280,7 @@ void GTagML_Document::load_file(QString path)
   local_path_ = path;
   QFileInfo qfi(path);
   local_file_name_ = qfi.fileName();
+  file_job_name_ = qfi.fileName();
  }
 }
 

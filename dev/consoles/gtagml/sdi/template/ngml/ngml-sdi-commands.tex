@@ -5,10 +5,8 @@
 \vspace{1em}#1}
 %%
 
-\makeatletter
-\def\currentjobname{\jobname}% 
-\newcommand{\sdiinput}[1]{\def\currentjobname{#1}\input{#1}}
-\makeatother
+%\newcounter{pcurrentjobname}
+
 
 
 \usepackage{datetime}
@@ -87,6 +85,21 @@
 \newcounter{sdi-counter-P}
 \newcounter{sdi-counter-PO}[page]
 
+\newcounter{sdi-counter-FJ}
+\newcounter{sdi-counter-F}[sdi-counter-FJ]
+
+\setcounter{sdi-counter-FJ}{0}
+
+\makeatletter
+\def\currentjobname{\jobname}% 
+\newcommand{\sdiinput}[1]{%\def\currentjobname{#1}
+\stepcounter{sdi-counter-FJ}
+\def\currentjobname{#1}
+%\setcounter{sdi-counter-F}{0}
+\input{#1}}
+\makeatother
+
+
 \newcounter{sdi-counter-C}[sdi-counter-P]
 
 \newcounter{sdi-element}
@@ -117,6 +130,11 @@
 \newcommand{\field-mark@c}{\field-mark{c}}
 \newcommand{\field-mark@b}{\field-mark{b}}
 \newcommand{\field-mark@k}{\field-mark{k}}
+\newcommand{\field-mark@f}{\field-mark{f}}
+\newcommand{\field-mark@x}{\field-mark{x}}
+\newcommand{\field-mark@y}{\field-mark{y}}
+\newcommand{\field-mark@j}{\field-mark{j}}
+
 
 \newcommand{\sdi@check-write-bls}{%
 \ifthenelse{\lengthtest{\orig-basels=\baselineskip}}{}%
@@ -234,6 +252,7 @@ $y: \topt\pdflastypos}%
 \write-sdi-val-end}
 
 \newcommand{\sps}{%
+\stepcounter{sdi-counter-F}%
 \stepcounter{sdi-counter-P}%
 \stepcounter{sdi-counter-PO}%
 \pdfsavepos\write-sdi-start{Paragraph}%
@@ -243,7 +262,11 @@ $y: \topt\pdflastypos}%
 \the\c@sdi-counter-PO}%
 \sdi@check-write-bls%
 \write\sdi-file\expandafter{\expandafter\field-mark@p%
-\thepage^^J%
+\thepage}
+\write\sdi-file\expandafter{\expandafter\field-mark@f%
+\the\c@sdi-counter-F}
+\write\sdi-file\expandafter{\expandafter\field-mark@j%
+\currentjobname^^J%
 $x: \topt\pdflastxpos^^J%
 $y: \topt\pdflastypos}%
 \write-sdi-val-end}%
@@ -268,8 +291,8 @@ $y: \topt\pdflastypos}%
   \the\day/\the\month/\the\year, \the\currenthour:\the\currentminute ^^J%
 .^^J%
 ^^J%
-- i=id n=name (entity kind) k=element kind p=page r=paragraph o=order (on page)^^J%
-  s=size c=count (in paragraph) x,y=pdf coords b=baselineskip^^J%
+- i=id n=name (entity kind) k=element kind p=page r=paragraph o=order (on page) s=size^^J%
+  c=count (in paragraph) j=current jobname f=in-file id  x,y=pdf coords b=baselineskip^^J%
 .^^J%
 ^^J%
 &type SDI_Sentence_Start {9}^^J%
@@ -278,8 +301,8 @@ $y: \topt\pdflastypos}%
 &type SDI_Sentence_End {6}^^J%
   :n:1 :i:2 :o:3 :p:4 :x:5 :y:6 ;^^J%
 ^^J%
-&type SDI_Paragraph_Start {8}^^J%
-  :n:1 :i:2 :o:3 :p:5 :j:6 :x:7 :y:8 :b:4 ;^^J%
+&type SDI_Paragraph_Start {9}^^J%
+  :n:1 :i:2 :o:3 :p:5 :j:6 :f:7 :x:8 :y:9 :b:4 ;^^J%
 ^^J%^^J%
 &type SDI_Paragraph_End {6}^^J%
   :n:1 :i:2 :o:3 :p:4 :x:5 :y:6 ;^^J%
@@ -331,3 +354,4 @@ $global-baseline-skip: \the\orig-basels^^J%
 \message{File}
 
 \oldCCforEXC\oldCCforDASH
+

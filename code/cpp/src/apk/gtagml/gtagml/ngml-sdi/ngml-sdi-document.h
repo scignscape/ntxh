@@ -16,11 +16,16 @@
 
 #include "ntxh-parser/ntxh-document.h"
 
+
+
 #include "kans.h"
 
 KANS_CLASS_DECLARE(HGDMCore ,NTXH_Graph)
-
 USING_KANS(HGDMCore)
+
+KANS_CLASS_DECLARE(DGH ,DGH_SDI_Paragraph)
+USING_KANS(DGH)
+
 
 #include "rzns.h"
 
@@ -50,12 +55,21 @@ class NGML_SDI_Document
  QStringList prelatex_lines_;
 
  QMap<QPair<u4, u4>, QPair<u4, QPair<u4, u4>>> gh_sdi_sentence_info_;
- QMap<QPair<u4, u4>, QPair<u4, u4>> gh_sdi_paragraph_info_;
+
+ QMap<DGH_SDI_Paragraph*, QPair<u4, u4>> gh_sdi_paragraph_info_;
+
+ QMap<QString, QMap<u4, DGH_SDI_Paragraph*>> dgh_paragraphs_;
+
+ QMap<QString, QVector<u4>> counts_by_file_job_name_;
 
  u4 carried_paragraph_id_;
  u4 carried_sentence_id_;
 
  QStringList prelatex_files_;
+
+// QVector<DGH_SDI_Paragraph*> dgh_paragraphs_;
+
+ QMap<QString, u4> prelatex_file_ids_;
 
 public:
  
@@ -74,6 +88,9 @@ public:
  void load_prelatex_files(QStringList path);
 
  void parse();
+
+ void review_dgh();
+ void merge_dgh();
 
  void parse_paragraph_start_hypernode(NTXH_Graph& g, NTXH_Graph::hypernode_type* hn);
  void parse_paragraph_end_hypernode(NTXH_Graph& g, NTXH_Graph::hypernode_type* hn);

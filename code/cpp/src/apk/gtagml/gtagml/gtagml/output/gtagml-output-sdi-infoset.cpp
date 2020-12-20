@@ -228,12 +228,13 @@ void GTagML_Output_SDI_Infoset::write_ntxh(QTextStream& qts)
   qts << QString(R"(
 !/ GH_SDI_Paragraph
 $i: %1
-$s: %2
-$e: %3
+$j: %2
+$s: %3
+$e: %4
 /!
 <<>
 
-)").arg(id).arg(s).arg(e);
+)").arg(id).arg(file_job_name_).arg(s).arg(e);
 
   sid = write_ntxh_sentences(qts, id, s, e, sid);
  }

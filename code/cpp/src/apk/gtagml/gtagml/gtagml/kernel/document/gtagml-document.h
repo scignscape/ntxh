@@ -45,6 +45,8 @@ class GTagML_Document
 
  QString khi_info_;
  QString local_file_name_;
+ QString file_job_name_;
+
 
  QMap<QString, caon_ptr<GTagML_Annotation_Tile> >* annotations_;
 
@@ -77,6 +79,7 @@ public:
  ACCESSORS(QString ,khi_info)
  ACCESSORS(GTagML_Parsing_Modes ,parsing_mode)
  ACCESSORS(QString ,local_file_name)
+ ACCESSORS(QString ,file_job_name)
 
  ACCESSORS(QString ,man_folder_path)
 

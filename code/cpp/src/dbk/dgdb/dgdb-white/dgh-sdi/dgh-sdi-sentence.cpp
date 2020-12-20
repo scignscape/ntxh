@@ -5,17 +5,17 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#include "sdi-sentence.h"
+#include "dgh-sdi-sentence.h"
 
 
 #include <QDebug>
 
 
 
-USING_KANS(GHL)
+USING_KANS(DGH)
 
 
-SDI_Sentence::SDI_Sentence(u4 id, u4 page, u4 start, u4 end)
+DGH_SDI_Sentence::DGH_SDI_Sentence(u4 id, u4 page, u4 start, u4 end)
   :  id_(id), page_(0), start_(0), end_(0)
 {
 

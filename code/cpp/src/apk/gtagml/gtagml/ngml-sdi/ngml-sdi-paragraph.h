@@ -31,10 +31,13 @@
 
 class NGML_SDI_Paragraph : public NGML_SDI_Mark_Base
 {
+ QString current_jobname_;
 
 public:
  
  NGML_SDI_Paragraph();
+
+ ACCESSORS(QString ,current_jobname)
 
  QChar get_command_cue()
  {

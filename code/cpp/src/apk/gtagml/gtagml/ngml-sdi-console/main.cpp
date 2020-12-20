@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 //   )").arg(folder).arg(file).arg(pfile).arg(czfile);
 
  folder = "/home/nlevisrael/gits/ntxh/wip-sebi/gtagml/ctg/gen/ctg";
-// file = "/home/nlevisrael/gits/ntxh/wip-sebi/gtagml/ctg/gen/ctg/out/ctg.gt.sdi.ntxh";
+ file = "/home/nlevisrael/gits/ntxh/wip-sebi/gtagml/ctg/gen/ctg/out/ctg.gt.sdi.ntxh";
 
  QStringList prelatex_files;
  QStringList marks_files;
@@ -66,7 +66,11 @@ int main(int argc, char* argv[])
 
  nsd.load_prelatex_files(prelatex_files);
 
-// nsd.parse();
+ nsd.parse();
+
+ nsd.merge_dgh();
+
+ nsd.review_dgh();
 
 #ifdef HIDE
 

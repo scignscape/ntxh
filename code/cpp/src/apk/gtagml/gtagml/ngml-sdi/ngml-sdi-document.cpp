@@ -15,6 +15,7 @@
 
 #include "ntxh-parser/ntxh-document.h"
 
+
 #include "global-types.h"
 
 #include "textio.h"
@@ -25,6 +26,10 @@
 #endif // def USING_ZIP
 
 USING_KANS(TextIO)
+
+#include "dgh-sdi/dgh-sdi-paragraph.h"
+
+USING_KANS(DGH)
 
 #include <QDir>
 
@@ -64,18 +69,40 @@ void NGML_SDI_Document::load_prelatex_file(QString path)
  prelatex_files_.push_back(path);
  u4 file_id = prelatex_files_.size();
 
+ QFileInfo qfi(path);
+
+ QString bn = qfi.completeBaseName();
+
+ if(bn.endsWith(".sdi-prelatex"))
+   bn.chop(13);
+
+ prelatex_file_ids_[bn] = file_id;
+
+ counts_by_file_job_name_[bn] = {0, 0, 0};
+
 // n8 bls = 12; // default ...
 
  for(hypernode_type* h : v)
  {
   if(h->type_descriptor().first == "GH_SDI_Paragraph")
-    g.get_sfsr(h, {{1, 3}}, [this, file_id](QVector<QPair<QString, void*>>& prs)
+    g.get_sfsr(h, {{1, 4}}, [this, file_id](QVector<QPair<QString, void*>>& prs)
     {
      u4 id = prs[0].first.toInt();
-     u4 s = prs[1].first.toInt();
-     u4 e = prs[2].first.toInt();
-     gh_sdi_paragraph_info_[{file_id, id}] = {s, e};
+     QString j = prs[1].first;
+     u4 s = prs[2].first.toInt();
+     u4 e = prs[3].first.toInt();
+
+     u4 fid = prelatex_file_ids_[j];
+//     int ix = j.indexOf('-');
+//     int jid = j.mid(ix).toInt();
+//     j = j.left(ix);
+
+     DGH_SDI_Paragraph* dsp = new DGH_SDI_Paragraph(fid, id);
+
+     gh_sdi_paragraph_info_[dsp] = {s, e};
+     dgh_paragraphs_[j][id] = dsp;
     });
+
   else if(h->type_descriptor().first == "GH_SDI_Sentence")
     g.get_sfsr(h, {{1, 4}}, [this, file_id](QVector<QPair<QString, void*>>& prs)
     {
@@ -259,21 +286,97 @@ void generic_start(NGML_SDI_Document& nsd, T& obj,
  obj.set_start_y(start_y);
 }
 
+void NGML_SDI_Document::review_dgh()
+{
+ QMapIterator<QString, QMap<u4, DGH_SDI_Paragraph*>> it (dgh_paragraphs_);
+ while(it.hasNext())
+ {
+  it.next();
+  QMapIterator<u4, DGH_SDI_Paragraph*> it1(it.value());
+  while(it1.hasNext())
+  {
+   it1.next();
+   qDebug() << it.key() << " (" << it1.key() << "):";
+   qDebug() << " " << it1.value()->get_summary();
+  }
+ }
+
+// for(DGH_SDI_Paragraph* dsp : dgh_paragraphs_)
+// {
+//  qDebug() << dsp->get_summary();
+// }
+}
+
+void NGML_SDI_Document::merge_dgh()
+{
+ QMapIterator<DGH_SDI_Paragraph*, QPair<u4, u4>> it(gh_sdi_paragraph_info_);
+
+ u4 par_order = 0;
+ while(it.hasNext())
+ {
+  it.next();
+
+  DGH_SDI_Paragraph* dsp = it.key();
+
+  NGML_SDI_Paragraph* nsp = dsp->ngml();
+
+  if(nsp)
+  {
+   nsp->set_start_index(it.value().first);
+   nsp->set_end_index(it.value().second);
+  }
+
+  ++par_order;
+ }
+
+// for(DGH_SDI_Paragraph* dsp : dgh_paragraphs_)
+// {
+//  qDebug() << dsp->get_summary();
+// }
+}
+
+
 void NGML_SDI_Document::parse_paragraph_start_hypernode(NTXH_Graph& g, hypernode_type* hn)
 {
  NGML_SDI_Paragraph* nsp = new NGML_SDI_Paragraph();
- g.get_sfsr(hn, {{2,7}}, [this, nsp](QVector<QPair<QString, void*>>& prs)
+// DGH_SDI_Paragraph* dsp = new DGH_SDI_Paragraph(nsp);
+// this->dgh_paragraphs_.push_back(dsp);
+
+ g.get_sfsr(hn, {{2,9}}, [this, nsp](QVector<QPair<QString, void*>>& prs)
  {
-  // :n:1 :i:2 :o:3 :p:5 :x:6 :y:7 :b:4 ;
+  // :n:1 :i:2 :o:3 :p:5 :j:6 :x:7 :y:8 :b:4 ;
   u4 id = prs[0].first.toInt();
   nsp->set_id(id);
   this->open_elements_[{"NGML_SDI_Paragraph", id}] = nsp;
 
-  generic_start(*this, *nsp, prs, 4, 2);
- 
-  u4 pg = prs[3].first.toInt();
+  generic_start(*this, *nsp, prs, 6, 2);
+
+  u4 pg = prs[3].first.toInt(); // prs[3] or [4] ?
+
+  QString cj = prs[4].first; // prs[3] or [4] ?
+
+  nsp->set_current_jobname(cj);
+
+  int jid = prs[5].first.toInt();
+
+  u4 file_id = prelatex_file_ids_.value(cj);
+
+  //u4 jid = ++counts_by_file_job_name_[cj][0];
+
+  DGH_SDI_Paragraph* dsp = dgh_paragraphs_[cj][jid];
+
+  if(dsp)
+  {
+   dsp->set_ngml(nsp);
+  }
+  else
+  {
+   qDebug() << "Failed to propertly find dsp ...";
+  }
+
   NGML_SDI_Page* page = this->get_page(pg);
-  page->add_page_element(nsp);   
+  page->add_page_element(nsp);
+
  });
  // // qDebug() << "parse_paragraph_start_hypernode()";
 }

@@ -5,8 +5,8 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef SDI_PARAGRAPH__H
-#define SDI_PARAGRAPH__H
+#ifndef DGH_SDI_SENTENCE__H
+#define DGH_SDI_SENTENCE__H
 
 #include "kans.h"
 #include "accessors.h"
@@ -16,34 +16,30 @@
 
 #include "global-types.h"
 
-KANS_(GHL)
+KANS_(DGH)
+
+class DGH_SDI_Paragraph;
 
 
-class SDI_Sentence;
-
-
-class SDI_Paragraph
+class DGH_SDI_Sentence
 {
  u4 id_;
+
+ u4 page_;
+
  u4 start_;
  u4 end_;
-
- SDI_Sentence* first_sentence_;
- SDI_Sentence* last_sentence_;
 
 
 public:
 
- SDI_Paragraph(u4 id, u4 start, u4 end);
+ DGH_SDI_Sentence(u4 id, u4 page, u4 start, u4 end);
 
 
  ACCESSORS(u4 ,id)
+ ACCESSORS(u4 ,page)
  ACCESSORS(u4 ,start)
  ACCESSORS(u4 ,end)
-
- ACCESSORS(SDI_Sentence* ,first_sentence)
- ACCESSORS(SDI_Sentence* ,last_sentence)
-
 
 };
 

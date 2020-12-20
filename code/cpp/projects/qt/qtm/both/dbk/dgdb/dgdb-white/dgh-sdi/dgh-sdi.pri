@@ -7,7 +7,6 @@
 
 include(../build-group.pri)
 
-TEMPLATE = app
 
 QT -= gui
 
@@ -34,30 +33,28 @@ INCLUDEPATH += $$SRC_ROOT_DIR/apk/gtagml/gtagml
 INCLUDEPATH += $$SRC_ROOT_DIR/apk/hgdm/ntxh
 INCLUDEPATH += $$SRC_ROOT_DIR/apk/hgdm/ntxh/ntxh
 
+#/home/nlevisrael/gits/ntxh/wip-sebi/ar/code/cpp/src/apk/gtagml/gtagml/ngml-sdi/ngml-sdi-paragraph.h
+#INCLUDEPATH +=
+
+
 
 INCLUDEPATH += $$RELAE_GRAPH_SRC_GROUP_DIR
 INCLUDEPATH += $$PHAON_GRAPH_SRC_GROUP_DIR
 
 
+
 HEADERS += \
-  $$SRC_DIR/gtagml-document-info.h \
-  $$SRC_DIR/gtagml-document-mark.h \
-  $$SRC_DIR/gtagml-document-citation.h \
-  $$SRC_DIR/sdi/language-sample.h \
-  $$SRC_DIR/sdi/language-sample-group.h \
+  $$SRC_DIR/dgh-sdi-sentence.h \
+  $$SRC_DIR/dgh-sdi-paragraph.h \
 
 
 
 SOURCES += \
-  $$SRC_DIR/main.cpp \
-  $$SRC_DIR/gtagml-document-info.cpp \
-  $$SRC_DIR/gtagml-document-mark.cpp \
-  $$SRC_DIR/gtagml-document-citation.cpp \
-  $$SRC_DIR/sdi/language-sample.cpp \
-  $$SRC_DIR/sdi/language-sample-group.cpp \
+  $$SRC_DIR/dgh-sdi-sentence.cpp \
+  $$SRC_DIR/dgh-sdi-paragraph.cpp \
 
 
 
 LIBS += -L$$TARGETSDIR -lwhitedb -ldgdb-white \
-  -lntxh  -lntxh-parser -lngml-sdi  -ldgh-sdi
+  -lntxh  -lntxh-parser -lngml-sdi
 

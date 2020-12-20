@@ -42,7 +42,11 @@ SOURCES += \
   $$SRC_DIR/main.cpp \
 
 
-LIBS += -L$$TARGETSDIR -lngml-sdi -lntxh-parser -lntxh # -lquazip
+LIBS += -L$$TARGETSDIR -lngml-sdi -lntxh-parser -lntxh \
+  -ldgh-sdi
+
+
+# -lquazip
 
 
 

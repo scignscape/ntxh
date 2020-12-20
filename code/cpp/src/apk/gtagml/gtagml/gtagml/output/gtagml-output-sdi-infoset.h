@@ -89,6 +89,7 @@ class GTagML_Output_SDI_Infoset : public GTagML_Output_Base, private GTagML_Outp
  QString setup_path_;
  QString raw_setup_path_;
 
+ QString file_job_name_;
 
  void generate_sdi_mark(caon_ptr<GTagML_Tag_Command> ntc,
    const GTagML_Output_Bundle& b,  GH_Prenode& ghp);
@@ -128,6 +129,8 @@ public:
 
  ACCESSORS(QString ,setup_path)
  ACCESSORS(QString ,raw_setup_path)
+
+ ACCESSORS(QString ,file_job_name)
 
  void write_ntxh(QTextStream& qts);
 

@@ -70,6 +70,8 @@ void process_gtagml_file(QString path, QString& carried_setup, GTagML_Folder* fl
 
  GTagML_Output_SDI_Infoset* gsi = new GTagML_Output_SDI_Infoset(*gdoc, blw);
 
+ QString fnc = gdoc->file_job_name();
+ gsi->set_file_job_name(fnc);
 
  //goi->init_standard_8bit();
  gsi->export_infoset(path + ".info.txt"); // export_blocks(); //(path + ".");
