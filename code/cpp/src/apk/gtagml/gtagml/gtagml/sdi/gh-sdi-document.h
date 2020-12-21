@@ -42,7 +42,11 @@ public:
  u1 scan_for_sentence_start(GH_Block_Base& bl, u4 start, u4 end, u4& result);
  u1 scan_for_sentence_end(GH_Block_Base& bl, u4 start, u4 end, u4& result, u4& space);
 
+ u4 scan_for_sentence_start_resume(GH_Block_Base& bl, u4 start, u4 end);
+
  bool check_letter(GH_Block_Base& bl, u4 pos);
+ bool check_sentence_start_resume(GH_Block_Base& bl, u4 pos);
+ bool check_sentence_end_suspend(GH_Block_Base& bl, u4 pos);
 
  void setup_folder_from_template(QString file_name, QString template_folder, QString folder);
 };

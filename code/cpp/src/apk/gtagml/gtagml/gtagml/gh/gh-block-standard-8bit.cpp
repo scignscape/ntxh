@@ -30,9 +30,26 @@ n8 GH_Block_Standard_8bit::get_glyph_point_at_index(u4 i)
  return chars_.at(i);
 }
 
+
 u4 GH_Block_Standard_8bit::check_declared(u1 gp)
 {
  return glyphdeck_->check_declared(gp);
+}
+
+
+u4 GH_Block_Standard_8bit::find_sentence_start_resume(u4 i, u4 e)
+{
+ if(e == 0)
+   e = chars_.size();
+
+ for(u4 u = i; u <= e; ++u)
+ {
+  n8 uu = get_glyph_point_at_index(u);
+  GH_Block_Base::Evaluation_Codes ec = glyphdeck_->check_confirm_sentence_resume(uu);
+  if(ec == GH_Block_Base::Evaluation_Codes::Confirm)
+    return i;
+ }
+ return 0;
 }
 
 u4 GH_Block_Standard_8bit::get_declared_sentence_end_space(u4 i, u4 e)
@@ -62,6 +79,8 @@ u4 GH_Block_Standard_8bit::check_confirm_sentence_end(u4 i, u4 e)
     return i;
   if(ec == GH_Block_Base::Evaluation_Codes::Refute)
     return 0;
+  if(ec == GH_Block_Base::Evaluation_Codes::Confirm_Via_Declared_Suspend)
+    return i;
  }
  return 0;
 }

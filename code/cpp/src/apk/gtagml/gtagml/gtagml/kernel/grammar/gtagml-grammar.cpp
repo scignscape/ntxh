@@ -451,6 +451,17 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
 
   });
 
+  add_rule( gtagml_context, "special-special-character-sequence",
+    " \\s* \\| (?<cue> [=@]) \\| \\s* ",
+    [&]
+  {
+   QString cue = p.matched("cue");
+   QString esc = cue;
+   QString m = QString("`\\[%1]").arg(cue);
+   u1 which = 3;
+   graph_build.special_character_sequence(m, esc, which);
+  });
+
   add_rule( gtagml_context, "special-character-sequence",
    " (?: %-- ) | (?: %_) | (?: ->- ) | (?: %\\.,{2,3} ) "
    "  | (?: ` \\\\ \\( (?<bq-esc1> [^)]+ ) \\) ) "

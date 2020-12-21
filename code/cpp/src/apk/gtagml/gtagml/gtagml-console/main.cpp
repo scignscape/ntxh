@@ -170,7 +170,11 @@ int main(int argc, char *argv[])
  qDebug() << "Folder: " << folder << ", File: " << file;
  qDebug() << "ManFolder: " << manfolder;
 
+ // file = "/home/nlevisrael/gits/ntxh/wip-sebi/ar/dev/consoles/gtagml/gt/dg/ctg/src/t1.gt";
+
  // file.clear();
+
+  //manfolder.clear();
 
  if(manfolder.isEmpty())
  {

@@ -1,0 +1,38 @@
+
+&type GH_SDI_Sentence {4}
+ :i:1 :p:2 :s:3 :e:4 ;
+
+&type GH_SDI_Paragraph {4}
+ :i:1 :j:2 :s:3 :e:4 ;
+
+&/
+ 
+!/ GH_SDI_Paragraph
+$i: 1
+$j: t1.gt
+$s: 2
+$e: 28
+/!
+<<>
+
+
+!/ GH_SDI_Sentence
+$i: 1
+$p: 1
+$s: 2
+$e: 5
+$g: 6
+/!
+<>>
+
+!/ GH_SDI_Sentence
+$i: 2
+$p: 1
+$s: 22
+$e: 28
+$g: 0
+/!
+<>>
+
+
+/&

@@ -22,6 +22,7 @@ public:
  GH_Block_Base::SDI_Interpretation_Codes get_sdi_interpretation_code(u1 gp);
  GH_Block_Base::Evaluation_Codes check_confirm_sentence_end(u1 gp, bool have_space);
  GH_Block_Base::Evaluation_Codes check_confirm_clear_inter_sentence_gap(u1 gp);
+ GH_Block_Base::Evaluation_Codes check_confirm_sentence_resume(u1 gp);
 
  u4 check_declared(u1 gp);
 

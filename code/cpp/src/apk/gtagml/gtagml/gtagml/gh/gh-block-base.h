@@ -55,12 +55,16 @@ public:
   N_A, Letter, Potential_Sentence_End, Sentence_End,
   Potential_Sentence_End_Space, Sentence_End_Space,
   GH_Interpretation, Void_Null,
-  Declared_Sentence_End, Declared_Sentence_End_Space
+  Declared_Sentence_End,
+  Declared_Sentence_End_Space,
+  Declared_Sentence_End_Suspend_Space,
+  Declared_Sentence_Resume_Space,
  };
 
  enum class Evaluation_Codes
  {
-  Confirm, Refute, Neutral, Space, Confirm_Via_Declared
+  Confirm, Refute, Neutral, Space,
+  Confirm_Via_Declared, Confirm_Via_Declared_Suspend
  };
 
  template<typename T>
@@ -208,6 +212,7 @@ public:
  virtual u4 check_confirm_sentence_end(u4 i, u4 e) = 0;
  virtual u4 get_declared_sentence_end_space(u4 i, u4 e) = 0;
 
+ virtual u4 find_sentence_start_resume(u4 i, u4 e) = 0;
 
  virtual void swap_codes(u4 i, n8 oldc, n8 newc) = 0;
 

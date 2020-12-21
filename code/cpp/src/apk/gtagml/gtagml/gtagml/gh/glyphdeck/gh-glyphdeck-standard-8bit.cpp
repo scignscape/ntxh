@@ -656,13 +656,17 @@ u1 GH_Glyphdeck_Standard_8bit::get_default_null()
 
 u4 GH_Glyphdeck_Standard_8bit::check_declared(u1 gp)
 {
- if ( (gp >= 118) && (gp <= 126) )
+ if ( (gp >= 118) && (gp <= 124) )
  {
   return 1;
  }
 
  if(gp == 127)
    return 2;
+
+ if(gp == 125)
+   return 3;
+
 
  return 0;
 }
@@ -682,6 +686,11 @@ u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
    {{2, '_'}, 106}, // ell (one ch se)
    {{3, '_'}, 118}, // _ decl s e
    {{4, '_'}, 106}, // ell (one ch)
+
+
+   {{3, '='}, 125}, // _ decl s e
+   {{3, '@'}, 126}, // _ decl s s
+
 
    {{1, '#'}, 109}, // # no escape
 
@@ -1001,7 +1010,7 @@ u1 GH_Glyphdeck_Standard_8bit::get_sentence_end_space_swap(u1 gp)
  if( (gp == 73) || (gp == 100) )
    return 100;
 
- if( (gp == 118) || (gp == 119) )
+ if( (gp == 118) || (gp == 119) || (gp == 125) )
    return gp;
 
  return get_default_null();
@@ -1105,9 +1114,16 @@ void get_latex_118_to_127(u1 gp, QString& result)
    "?", // 121
    "!", // 122
    ":", // 123
-   "&sedash;", // 124   se
-   ";", // 125
-   ",", // 126
+
+   " ", // 124 se post declare
+   "{\\sssg}", // 125 se suspend
+   "{\\srsg}", // 126 ss resume
+
+
+//   "&sedash;", // 124   se
+//   ";", // 125
+//   ",", // 126
+
    "\n"  // 127   se widow
   }};
 
@@ -1389,12 +1405,26 @@ GH_Block_Base::Evaluation_Codes GH_Glyphdeck_Standard_8bit::check_confirm_clear_
  return GH_Block_Base::Evaluation_Codes::Refute;
 }
 
+GH_Block_Base::Evaluation_Codes GH_Glyphdeck_Standard_8bit::check_confirm_sentence_resume(u1 gp)
+{
+ if(gp == 126)
+   return GH_Block_Base::Evaluation_Codes::Confirm;
+
+ return
+   GH_Block_Base::Evaluation_Codes::Refute;
+}
+
+
 GH_Block_Base::Evaluation_Codes GH_Glyphdeck_Standard_8bit::check_confirm_sentence_end(u1 gp, bool have_space)
 {
  if(gp == 118)
    return GH_Block_Base::Evaluation_Codes::Confirm_Via_Declared;
  if(gp == 119)
    return GH_Block_Base::Evaluation_Codes::Confirm_Via_Declared;
+
+ if(gp == 125)
+   return GH_Block_Base::Evaluation_Codes::Confirm_Via_Declared_Suspend;
+
 
  // //  currently only use ')' as neutral
  if(gp == 69)
@@ -1438,13 +1468,16 @@ GH_Block_Base::SDI_Interpretation_Codes GH_Glyphdeck_Standard_8bit::get_sdi_inte
   case 118:
   case 119:
    return GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_End_Space;
+  case 125:
+   return GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_End_Suspend_Space;
+  case 126:
+   return GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_Resume_Space;
+
   case 120:
   case 121:
   case 122:
   case 123:
   case 124:
-  case 125:
-  case 126:
    return GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_End;
   }
  }

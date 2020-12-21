@@ -323,14 +323,27 @@ void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
  caon_ptr<tNode> current_paragraph_node = nullptr;
 
  u4 held_declared_status = 0;
+ u4 held_resume = 0;
 
  u4 srank_in_paragraph = 0;
+
  QMapIterator<u4, QPair<caon_ptr<tNode>, u4>> it(marked_sentence_starts_);
  while(it.hasNext())
  {
   it.next();
 
-  if(held_declared_status == 1)
+  if(held_declared_status == 3)
+  {
+   if(it.key() <= held_resume)
+     continue;
+   else
+   {
+    declared_sentence_starts_.insertMulti(current_paragraph_node, it.key());
+    held_declared_status = 0;
+   }
+  }
+
+  else if(held_declared_status == 1)
   {
    declared_sentence_starts_.insertMulti(current_paragraph_node, it.key());
    held_declared_status = 0;
@@ -362,14 +375,27 @@ void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
     //   First, was it declared or inferred?
 
    u4 was_declared = bl.check_declared(oldnew.first.first);
+   u4 space_was_declared = bl.check_declared(oldnew.second.first);
+   u4 resume = 0;
+
    bool was_declared_lone_widow = false;
    if(was_declared)
    {
     declared_sentence_ends_.insertMulti(it.value().first, send);
      // // see if the ses was declared as a lone widow ...
       //   i.e. don't mark subsequent sentence start ...
-    was_declared_lone_widow = bl.check_declared(oldnew.second.first) > 1;
+    was_declared_lone_widow = bl.check_declared(oldnew.second.first) == 2;
    }
+   else if(space_was_declared == 3)
+   {
+    declared_sentence_ends_.insertMulti(it.value().first, send);
+    u4 _resume = bl.find_sentence_start_resume(sse, 0);
+    if(_resume)
+      resume = _resume;
+    else
+      resume = 1;
+   }
+
     //   Next, did the sse (space after se) change too?
    else if(oldnew.second.first == dn)
    {
@@ -378,6 +404,18 @@ void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
     widowed_sentence_ends_.insertMulti(it.value().first, send);
     continue;
    }
+
+   if(resume)
+   {
+    if(resume == 1)
+      // nothing more to do
+      return;
+
+    held_declared_status = 3;
+    held_resume = resume;
+    continue;
+   }
+
 
    if(was_declared)
    {
@@ -389,6 +427,7 @@ void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
    }
 
    // try to get the next start ...
+
    u4 ns = 0;
    u4 gap = 0;
    if(it.hasNext())
@@ -953,8 +992,17 @@ void GTagML_Output_SDI_Infoset::check_sentence_boundaries(QTextStream& qts,
 //    break;
 
   mark_sentence(qts, node, ss, se, ses);
+
   if(ses == 0)
     i = se + 1;
+
+  else if(u4 resume = sdi_document_->scan_for_sentence_start_resume(bl, ses, leave))
+  {
+   if(resume == 1)
+     return;
+   i = resume + 1;
+  }
+
   else
     i = ses + 1;
  }

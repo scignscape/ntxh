@@ -110,6 +110,30 @@ bool GH_SDI_Document::check_letter(GH_Block_Base& bl, u4 pos)
  return sic == GH_Block_Base::SDI_Interpretation_Codes::Letter;
 }
 
+bool GH_SDI_Document::check_sentence_start_resume(GH_Block_Base& bl, u4 pos)
+{
+ GH_Block_Base::SDI_Interpretation_Codes sic = bl.get_sdi_interpretation_code_at_index(pos);
+ return sic == GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_Resume_Space;
+}
+
+bool GH_SDI_Document::check_sentence_end_suspend(GH_Block_Base& bl, u4 pos)
+{
+ GH_Block_Base::SDI_Interpretation_Codes sic = bl.get_sdi_interpretation_code_at_index(pos);
+ return sic == GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_End_Suspend_Space;
+}
+
+u4 GH_SDI_Document::scan_for_sentence_start_resume(GH_Block_Base& bl, u4 start, u4 end)
+{
+ u4 i = start;
+ if(!check_sentence_end_suspend(bl, i))
+   return 0;
+ for(++i; i <= end; ++i)
+ {
+  if(check_sentence_start_resume(bl, i))
+    return i;
+ }
+ return 1;
+}
 
 u1 GH_SDI_Document::scan_for_sentence_start(GH_Block_Base& bl, u4 start, u4 end, u4& result)
 {
