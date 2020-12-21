@@ -87,8 +87,7 @@
 
 \newcounter{sdi-counter-FJ}
 \newcounter{sdi-counter-F}[sdi-counter-FJ]
-
-\setcounter{sdi-counter-FJ}{0}
+\newcounter{sdi-counter-FS}[sdi-counter-FJ]
 
 \makeatletter
 \def\currentjobname{\jobname}% 
@@ -221,6 +220,7 @@ $y: \topt\pdflastypos}%
 \ifsdi-no-ss-flag\sdi-no-ss-flagfalse\else%
 \stepcounter{sdi-counter-O}%
 \stepcounter{sdi-counter-C}%
+\stepcounter{sdi-counter-FS}%
 \stepcounter{sdi-counter}%
 \pdfsavepos\write-sdi-start{Sentence}%
 \write\sdi-file\expandafter{\expandafter\field-mark@i%
@@ -233,7 +233,9 @@ $y: \topt\pdflastypos}%
 \the\c@sdi-counter-O}%
 \sdi@check-write-bls%
 \write\sdi-file\expandafter{\expandafter\field-mark@p%
-\thepage^^J%
+\thepage}
+\write\sdi-file\expandafter{\expandafter\field-mark@f%
+\the\c@sdi-counter-FS^^J%
 $x: \topt\pdflastxpos^^J%
 $y: \topt\pdflastypos}%
 \write-sdi-val-end%
@@ -271,6 +273,7 @@ $x: \topt\pdflastxpos^^J%
 $y: \topt\pdflastypos}%
 \write-sdi-val-end}%
 
+
 \newcommand{\spe}{%
 \active-sdi-markfalse%
 \pdfsavepos\write-sdi-end{Paragraph}%
@@ -295,8 +298,8 @@ $y: \topt\pdflastypos}%
   c=count (in paragraph) j=current jobname f=in-file id  x,y=pdf coords b=baselineskip^^J%
 .^^J%
 ^^J%
-&type SDI_Sentence_Start {9}^^J%
-  :n:1 :i:2 :r:3 :c:4 :o:5 :p:7 :x:8 :y:9 :b:6 ;^^J%
+&type SDI_Sentence_Start {10}^^J%
+  :n:1 :i:2 :r:3 :c:4 :o:5 :p:7 :f:8 :x:9 :y:10 :b:6 ;^^J%
 ^^J%
 &type SDI_Sentence_End {6}^^J%
   :n:1 :i:2 :o:3 :p:4 :x:5 :y:6 ;^^J%

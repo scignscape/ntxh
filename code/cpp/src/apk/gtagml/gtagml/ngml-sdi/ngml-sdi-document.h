@@ -24,6 +24,8 @@
 //USING_KANS(HGDMCore)
 
 KANS_CLASS_DECLARE(DGH ,DGH_SDI_Paragraph)
+KANS_CLASS_DECLARE(DGH ,DGH_SDI_Sentence)
+
 USING_KANS(DGH)
 
 
@@ -54,7 +56,7 @@ class NGML_SDI_Document
 
  QStringList prelatex_lines_;
 
- QMap<QPair<u4, u4>, QPair<u4, QPair<u4, u4>>> gh_sdi_sentence_info_;
+ QMap<QPair<u4, u4>, QPair<QPair<DGH_SDI_Paragraph*, u4>, QPair<u4, u4>>> gh_sdi_sentence_info_;
 
  QMap<DGH_SDI_Paragraph*, QPair<u4, u4>> gh_sdi_paragraph_info_;
 
@@ -67,9 +69,11 @@ class NGML_SDI_Document
 
  QStringList prelatex_files_;
 
-// QVector<DGH_SDI_Paragraph*> dgh_paragraphs_;
+ DGH_SDI_Paragraph* current_parse_paragraph_;
 
  QMap<QString, u4> prelatex_file_ids_;
+
+ QMap<DGH_SDI_Paragraph*, QVector<DGH_SDI_Sentence*>> sentences_;
 
 public:
  

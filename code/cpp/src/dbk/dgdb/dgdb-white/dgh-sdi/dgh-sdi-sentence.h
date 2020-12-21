@@ -16,30 +16,35 @@
 
 #include "global-types.h"
 
+
+class NGML_SDI_Sentence;
+
+
 KANS_(DGH)
 
 class DGH_SDI_Paragraph;
 
-
 class DGH_SDI_Sentence
 {
- u4 id_;
+ u4 in_file_id_;
+ u4 file_id_;
 
  u4 page_;
 
- u4 start_;
- u4 end_;
-
+ NGML_SDI_Sentence* ngml_;
 
 public:
 
- DGH_SDI_Sentence(u4 id, u4 page, u4 start, u4 end);
+ DGH_SDI_Sentence(u4 in_file_id, u4 file_id, u4 page = 0);
 
+ DGH_SDI_Sentence(NGML_SDI_Sentence* ngml, u4 in_file_id = 0, u4 file_id = 0, u4 page = 0);
 
- ACCESSORS(u4 ,id)
+ ACCESSORS(u4 ,in_file_id)
+ ACCESSORS(u4 ,file_id)
  ACCESSORS(u4 ,page)
- ACCESSORS(u4 ,start)
- ACCESSORS(u4 ,end)
+ ACCESSORS(NGML_SDI_Sentence* ,ngml)
+
+ QString get_summary();
 
 };
 

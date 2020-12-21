@@ -2,9 +2,9 @@ $$ document-title := Cognitive Transform Grammar
 $$ local-title := intro
 
 $& BittnerSmithDonnelly %% (1:main) 2761 3047
-$& BlackwellPragmatics %% (1:main) 13501 13522
-$& ErwanMoreau %% (1:main) 12027 12027
-$& GoertzelPLN %% (1:main) 12026 12026
+$& BlackwellPragmatics %% (1:main) 13500 13521
+$& ErwanMoreau %% (1:main) 12026 12026
+$& GoertzelPLN %% (1:main) 12025 12025
 $& HolmqvistDiss %% (1:main) 2359 2359
 $& InteractingConceptualSpaces %% (1:main) 2653 2760
 $& JeanPetitot %% (1:main) 3048 3070
@@ -14,8 +14,8 @@ $& MattSelway %% (1:main) 2256 2339
 $& OlavKWiegand %% (1:main) 3071 3248
 $& RaubalAdams %% (1:main) 2488 2650
 $& RaubalAdamsCSML %% (1:main) 2651 2651
-$& Schneider %% (1:main) 11883 12024
-$& SleatorTamperley %% (1:main) 12025 12025
+$& Schneider %% (1:main) 11882 12023
+$& SleatorTamperley %% (1:main) 12024 12024
 $& TerryRegier %% (1:main) 2360 2436
 $& WiegandGestalts %% (1:main) 3249 3249
 $& Zenker %% (1:main) 2652 2652

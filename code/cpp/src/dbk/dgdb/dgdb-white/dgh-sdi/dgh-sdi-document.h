@@ -34,12 +34,13 @@ class DGH_SDI_Paragraph;
 class DGH_SDI_Document
 {
  QVector<DGH_SDI_Paragraph*> paragraphs_;
+ QVector<DGH_SDI_Sentence*> sentences_;
 
 public:
 
  DGH_SDI_Document();
 
- //void parse_sentence_start_hypernode(NTXH_Graph& g, NTXH_Graph::hypernode_type* hn);
+ void parse_sentence_hypernode(NTXH_Graph& g, NTXH_Graph::hypernode_type* hn);
  void parse_paragraph_hypernode(NTXH_Graph& g, NTXH_Graph::hypernode_type* hn);
 
  void load_from_ntxh(QString path);

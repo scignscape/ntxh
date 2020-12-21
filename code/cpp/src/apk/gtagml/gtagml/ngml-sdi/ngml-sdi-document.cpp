@@ -28,6 +28,8 @@
 USING_KANS(TextIO)
 
 #include "dgh-sdi/dgh-sdi-paragraph.h"
+#include "dgh-sdi/dgh-sdi-sentence.h"
+
 
 USING_KANS(DGH)
 
@@ -37,7 +39,7 @@ typedef NTXH_Graph::hypernode_type hypernode_type;
 
 NGML_SDI_Document::NGML_SDI_Document(QString path, QString folder)
   :  path_(path), folder_(folder), global_base_line_skip_(12),
-     carried_paragraph_id_(0), carried_sentence_id_(0)
+     carried_paragraph_id_(0), carried_sentence_id_(0), current_parse_paragraph_(nullptr)
 {
 }
 
@@ -82,10 +84,12 @@ void NGML_SDI_Document::load_prelatex_file(QString path)
 
 // n8 bls = 12; // default ...
 
+ DGH_SDI_Paragraph* dsp;
+
  for(hypernode_type* h : v)
  {
   if(h->type_descriptor().first == "GH_SDI_Paragraph")
-    g.get_sfsr(h, {{1, 4}}, [this, file_id](QVector<QPair<QString, void*>>& prs)
+    g.get_sfsr(h, {{1, 4}}, [this, &dsp](QVector<QPair<QString, void*>>& prs)
     {
      u4 id = prs[0].first.toInt();
      QString j = prs[1].first;
@@ -97,20 +101,20 @@ void NGML_SDI_Document::load_prelatex_file(QString path)
 //     int jid = j.mid(ix).toInt();
 //     j = j.left(ix);
 
-     DGH_SDI_Paragraph* dsp = new DGH_SDI_Paragraph(fid, id);
+     dsp = new DGH_SDI_Paragraph(fid, id);
 
      gh_sdi_paragraph_info_[dsp] = {s, e};
      dgh_paragraphs_[j][id] = dsp;
     });
 
   else if(h->type_descriptor().first == "GH_SDI_Sentence")
-    g.get_sfsr(h, {{1, 4}}, [this, file_id](QVector<QPair<QString, void*>>& prs)
+    g.get_sfsr(h, {{1, 4}}, [this, dsp](QVector<QPair<QString, void*>>& prs)
     {
      u4 id = prs[0].first.toInt();
      u4 p = prs[1].first.toInt();
      u4 s = prs[2].first.toInt();
      u4 e = prs[3].first.toInt();
-     gh_sdi_sentence_info_[{file_id, id}] = {p, {s, e}};
+     gh_sdi_sentence_info_[{dsp->file_id(), id}] = {{dsp, p}, {s, e}};
     });
  }
 
@@ -317,8 +321,12 @@ void NGML_SDI_Document::output_dgh(QString path)
  outstream << R"(
 
 &type DGH_SDI_Paragraph {13}
-  :n:1 :i:2 :j:3 :p:4 :s:5 :e:6 :x:7 :y:8
-  :ex:9 :ey:10 :o:11 :f:12 :d:13 ;
+  :i:1 :j:2 :p:3 :s:4 :e:5 :x:6 :y:7
+  :ex:8 :ey:9 :o:10 :f:11 :d:12 ;
+
+&type DGH_SDI_Sentence {10}
+  :i:1 :p:2 :s:3 :e:4 :x:5 :y:6
+  :ex:7 :ey:8 :f:9 :d:10 ;
 
 &/
  )";
@@ -342,7 +350,6 @@ void NGML_SDI_Document::output_dgh(QString path)
 
    outstream << QString(R"(
 !/ DGH_SDI_Paragraph
-$n: paragraph
 $i: %1
 $j: %2
 $p: %3
@@ -372,7 +379,43 @@ $d: %3
 
 )").arg(dsp->order_in_page()).arg(dsp->in_file_id()).arg(dsp->file_id());
 
-  }
+
+   QVector<DGH_SDI_Sentence*>& ss = sentences_[dsp];
+
+   for(DGH_SDI_Sentence* dss : ss)
+   {
+    NGML_SDI_Sentence* nss = dss->ngml();
+    outstream << QString(R"(
+!/ DGH_SDI_Sentence
+$i: %1
+$p: %2
+$s: %3
+$e: %4
+$x: %5
+$y: %6
+$ex: %7
+$ey: %8)")
+    .arg(nss->id())
+    .arg(dss->page())
+    .arg(nss->start_index())
+    .arg(nss->end_index())
+    .arg(nss->start_x())
+    .arg(nss->start_y())
+    .arg(nss->end_x())
+    .arg(nss->end_y())
+   ;
+
+ outstream << QString(R"(
+$f: %1
+$d: %2
+/!
+<+>
+
+)").arg(dss->in_file_id()).arg(dss->file_id());
+
+   }
+
+  } 
  }
 
  outstream << R"(
@@ -386,7 +429,7 @@ void NGML_SDI_Document::merge_dgh()
 {
  QMapIterator<DGH_SDI_Paragraph*, QPair<u4, u4>> it(gh_sdi_paragraph_info_);
 
- u4 par_order = 0;
+// u4 par_order = 0;
  while(it.hasNext())
  {
   it.next();
@@ -401,9 +444,26 @@ void NGML_SDI_Document::merge_dgh()
    nsp->set_end_index(it.value().second);
   }
 
-  ++par_order;
- }
+  QVector<DGH_SDI_Sentence*> ss = sentences_.value(dsp);
 
+  for(DGH_SDI_Sentence* dss : ss)
+  {
+   NGML_SDI_Sentence* nss = dss->ngml();
+
+   const QPair<QPair<DGH_SDI_Paragraph*, u4>, QPair<u4, u4>>& prpr =
+     gh_sdi_sentence_info_.value({dss->file_id(), dss->in_file_id()});
+
+//   if(prpr.first.first != current_parse_paragraph_)
+//   {
+//    qDebug() << "Mismatched paragraphs ...";
+//    return;
+//   }
+
+   nss->set_start_index(prpr.second.first);
+   nss->set_end_index(prpr.second.second);
+  }
+//  ++par_order;
+ }
 // for(DGH_SDI_Paragraph* dsp : dgh_paragraphs_)
 // {
 //  qDebug() << dsp->get_summary();
@@ -436,17 +496,17 @@ void NGML_SDI_Document::parse_paragraph_start_hypernode(NTXH_Graph& g, hypernode
 
   int jid = prs[5].first.toInt();
 
-  u4 file_id = prelatex_file_ids_.value(cj);
+  //u4 file_id = prelatex_file_ids_.value(cj);
 
   //u4 jid = ++counts_by_file_job_name_[cj][0];
 
-  DGH_SDI_Paragraph* dsp = dgh_paragraphs_[cj][jid];
+  current_parse_paragraph_ = dgh_paragraphs_[cj][jid];
 
-  if(dsp)
+  if(current_parse_paragraph_)
   {
-   dsp->set_ngml(nsp);
-   dsp->set_page(pg);
-   dsp->set_order_in_page(rank_in_pg);
+   current_parse_paragraph_->set_ngml(nsp);
+   current_parse_paragraph_->set_page(pg);
+   current_parse_paragraph_->set_order_in_page(rank_in_pg);
   }
   else
   {
@@ -463,16 +523,25 @@ void NGML_SDI_Document::parse_paragraph_start_hypernode(NTXH_Graph& g, hypernode
 void NGML_SDI_Document::parse_sentence_start_hypernode(NTXH_Graph& g, NTXH_Graph::hypernode_type* hn)
 {
  NGML_SDI_Sentence* nss = new NGML_SDI_Sentence();
- g.get_sfsr(hn, {{2,9}}, [this, nss](QVector<QPair<QString, void*>>& prs)
+ g.get_sfsr(hn, {{2,10}}, [this, nss](QVector<QPair<QString, void*>>& prs)
  {
-  // :n:1 :i:2 :r:3 :c:4 :o:5 :p:7 :x:8 :y:9 :b:6 ;
+  // :n:1 :i:2 :r:3 :c:4 :o:5 :p:7 :f:8 :x:9 :y:10 :b:6 ;
   u4 id = prs[0].first.toInt();
   nss->set_id(id);
   this->open_elements_[{"NGML_SDI_Sentence", id}] = nss;
 
-  generic_start(*this, *nss, prs, 6, 4);
- 
+  generic_start(*this, *nss, prs, 7, 4);
+
+  u4 in_f_id = prs[6].first.toInt();
+  u4 f_id = current_parse_paragraph_->file_id();
+
+
   u4 pg = prs[5].first.toInt();
+
+  DGH_SDI_Sentence* dss = new DGH_SDI_Sentence(nss, in_f_id, f_id, pg);
+
+  sentences_[current_parse_paragraph_].push_back(dss);
+
   NGML_SDI_Page* page = this->get_page(pg);
   page->add_page_element(nss);   
  });
@@ -508,12 +577,12 @@ void NGML_SDI_Document::parse_sentence_end_hypernode(NTXH_Graph& g, NTXH_Graph::
   // :n:1 :i:2 :o:3 :p:4 :x:5 :y:6 ;
   u4 id = prs[0].first.toInt();
 
-  void* pv = this->open_elements_.value({"NGML_SDI_Paragraph", id});
+  void* pv = this->open_elements_.value({"NGML_SDI_Sentence", id});
   if(!pv)
     return;
-  NGML_SDI_Paragraph* nsp = static_cast<NGML_SDI_Paragraph*>(pv);
+  NGML_SDI_Sentence* nss = static_cast<NGML_SDI_Sentence*>(pv);
 
-  generic_end(*this, *nsp, prs, 3);//  QChar ccue = nsel->get_command_end_cue();
+  generic_end(*this, *nss, prs, 3);//  QChar ccue = nsel->get_command_end_cue();
  });
 }
 

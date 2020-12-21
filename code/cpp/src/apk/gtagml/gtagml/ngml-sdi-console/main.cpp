@@ -58,28 +58,28 @@ int main(int argc, char* argv[])
 
  QString cs;
 
-// QDir qd(folder);
-// qd.cd("sdi");
-// QStringList qsl = qd.entryList(QDir::Files);
-// for(QString file : qsl)
-// {
-//  if(file.endsWith("sdi-prelatex.ntxh"))
-//    prelatex_files.push_back(qd.absoluteFilePath(file));
-//  else if(file.endsWith("marks-summay.txt"))
-//    marks_files.push_back(qd.absoluteFilePath(file));
-// }
+ QDir qd(folder);
+ qd.cd("sdi");
+ QStringList qsl = qd.entryList(QDir::Files);
+ for(QString file : qsl)
+ {
+  if(file.endsWith("sdi-prelatex.ntxh"))
+    prelatex_files.push_back(qd.absoluteFilePath(file));
+  else if(file.endsWith("marks-summay.txt"))
+    marks_files.push_back(qd.absoluteFilePath(file));
+ }
 
-// NGML_SDI_Document nsd(file, folder);
+ NGML_SDI_Document nsd(file, folder);
 
-// nsd.load_prelatex_files(prelatex_files);
+ nsd.load_prelatex_files(prelatex_files);
 
-// nsd.parse();
+ nsd.parse();
 
-// nsd.merge_dgh();
+ nsd.merge_dgh();
 
-// nsd.review_dgh();
+ nsd.review_dgh();
 
-// nsd.output_dgh(outfile);
+ nsd.output_dgh(outfile);
 
  DGH_SDI_Document dsd;
  dsd.load_from_ntxh(outfile);
