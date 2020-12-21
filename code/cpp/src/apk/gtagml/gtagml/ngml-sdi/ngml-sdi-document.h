@@ -20,8 +20,8 @@
 
 #include "kans.h"
 
-KANS_CLASS_DECLARE(HGDMCore ,NTXH_Graph)
-USING_KANS(HGDMCore)
+//KANS_CLASS_DECLARE(HGDMCore ,NTXH_Graph)
+//USING_KANS(HGDMCore)
 
 KANS_CLASS_DECLARE(DGH ,DGH_SDI_Paragraph)
 USING_KANS(DGH)
@@ -60,7 +60,7 @@ class NGML_SDI_Document
 
  QMap<QString, QMap<u4, DGH_SDI_Paragraph*>> dgh_paragraphs_;
 
- QMap<QString, QVector<u4>> counts_by_file_job_name_;
+ QMap<u4, QString> file_job_name_by_file_id_;
 
  u4 carried_paragraph_id_;
  u4 carried_sentence_id_;
@@ -91,6 +91,7 @@ public:
 
  void review_dgh();
  void merge_dgh();
+ void output_dgh(QString path);
 
  void parse_paragraph_start_hypernode(NTXH_Graph& g, NTXH_Graph::hypernode_type* hn);
  void parse_paragraph_end_hypernode(NTXH_Graph& g, NTXH_Graph::hypernode_type* hn);

@@ -13,7 +13,7 @@
 #include "ngml-sdi-paragraph.h"
 #include "ngml-sdi-sentence.h"
 
-#include "ntxh-parser/ntxh-document.h"
+//#include "ntxh-parser/ntxh-document.h"
 
 
 #include "global-types.h"
@@ -78,7 +78,7 @@ void NGML_SDI_Document::load_prelatex_file(QString path)
 
  prelatex_file_ids_[bn] = file_id;
 
- counts_by_file_job_name_[bn] = {0, 0, 0};
+ file_job_name_by_file_id_[file_id] = bn;
 
 // n8 bls = 12; // default ...
 
@@ -307,6 +307,81 @@ void NGML_SDI_Document::review_dgh()
 // }
 }
 
+void NGML_SDI_Document::output_dgh(QString path)
+{
+ QFile outfile(path);
+ if (!outfile.open(QIODevice::WriteOnly | QIODevice::Text))
+   return;
+ QTextStream outstream(&outfile);
+
+ outstream << R"(
+
+&type DGH_SDI_Paragraph {13}
+  :n:1 :i:2 :j:3 :p:4 :s:5 :e:6 :x:7 :y:8
+  :ex:9 :ey:10 :o:11 :f:12 :d:13 ;
+
+&/
+ )";
+
+ QMapIterator<QString, QMap<u4, DGH_SDI_Paragraph*>> it (dgh_paragraphs_);
+ while(it.hasNext())
+ {
+  it.next();
+  QMapIterator<u4, DGH_SDI_Paragraph*> it1(it.value());
+  while(it1.hasNext())
+  {
+   it1.next();
+
+   DGH_SDI_Paragraph* dsp = it1.value();
+   NGML_SDI_Paragraph* nsp = dsp->ngml();
+
+   if(!nsp)
+     continue;
+
+   QString pf = file_job_name_by_file_id_.value(dsp->file_id());
+
+   outstream << QString(R"(
+!/ DGH_SDI_Paragraph
+$n: paragraph
+$i: %1
+$j: %2
+$p: %3
+$s: %4
+$e: %5
+$x: %6
+$y: %7
+$ex: %8
+$ey: %9)")
+   .arg(nsp->id())
+   .arg(pf)
+   .arg(dsp->page())
+   .arg(nsp->start_index())
+   .arg(nsp->end_index())
+   .arg(nsp->start_x())
+   .arg(nsp->start_y())
+   .arg(nsp->end_x())
+   .arg(nsp->end_y())
+  ;
+
+  outstream << QString(R"(
+$o: %1
+$f: %2
+$d: %3
+/!
+<+>
+
+)").arg(dsp->order_in_page()).arg(dsp->in_file_id()).arg(dsp->file_id());
+
+  }
+ }
+
+ outstream << R"(
+
+/&
+)";
+
+}
+
 void NGML_SDI_Document::merge_dgh()
 {
  QMapIterator<DGH_SDI_Paragraph*, QPair<u4, u4>> it(gh_sdi_paragraph_info_);
@@ -351,11 +426,13 @@ void NGML_SDI_Document::parse_paragraph_start_hypernode(NTXH_Graph& g, hypernode
 
   generic_start(*this, *nsp, prs, 6, 2);
 
+  u4 rank_in_pg = prs[1].first.toInt(); // prs[3] or [4] ?
   u4 pg = prs[3].first.toInt(); // prs[3] or [4] ?
 
   QString cj = prs[4].first; // prs[3] or [4] ?
 
   nsp->set_current_jobname(cj);
+  //dsp->set_page()
 
   int jid = prs[5].first.toInt();
 
@@ -368,10 +445,12 @@ void NGML_SDI_Document::parse_paragraph_start_hypernode(NTXH_Graph& g, hypernode
   if(dsp)
   {
    dsp->set_ngml(nsp);
+   dsp->set_page(pg);
+   dsp->set_order_in_page(rank_in_pg);
   }
   else
   {
-   qDebug() << "Failed to propertly find dsp ...";
+   qDebug() << "Failed to properly find dsp ...";
   }
 
   NGML_SDI_Page* page = this->get_page(pg);

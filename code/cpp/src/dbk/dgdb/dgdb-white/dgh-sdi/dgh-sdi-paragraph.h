@@ -16,7 +16,14 @@
 
 #include "global-types.h"
 
+#include "ntxh-parser/ntxh-document.h"
+
+
 class NGML_SDI_Paragraph;
+
+//KANS_CLASS_DECLARE(HGDMCore ,NTXH_Graph)
+//USING_KANS(HGDMCore)
+
 
 KANS_(DGH)
 
@@ -30,6 +37,9 @@ class DGH_SDI_Paragraph
  u4 in_file_id_;
  u4 file_id_;
 
+ u2 page_;
+ u2 order_in_page_;
+
 // u4 start_;
 // u4 end_;
 // DGH_SDI_Sentence* first_sentence_;
@@ -42,11 +52,16 @@ public:
 
  DGH_SDI_Paragraph(u4 id);
 
+ DGH_SDI_Paragraph(NGML_SDI_Paragraph* ngml);
+
  DGH_SDI_Paragraph(u4 file_id, u4 in_file_id);
 
 
  ACCESSORS(u4 ,in_database_id)
  ACCESSORS(u4 ,file_id)
+ ACCESSORS(u4 ,in_file_id)
+ ACCESSORS(u2 ,page)
+ ACCESSORS(u2 ,order_in_page)
 
 // ACCESSORS(u4 ,start)
 // ACCESSORS(u4 ,end)
@@ -62,4 +77,4 @@ public:
 
 _KANS(GHL)
 
-#endif // LANGUAGE_SAMPLE_GROUP__H
+#endif // DGH_SDI_PARAGRAPH__H

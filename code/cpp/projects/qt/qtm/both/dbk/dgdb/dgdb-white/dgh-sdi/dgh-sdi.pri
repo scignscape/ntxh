@@ -44,12 +44,14 @@ INCLUDEPATH += $$PHAON_GRAPH_SRC_GROUP_DIR
 
 
 HEADERS += \
+  $$SRC_DIR/dgh-sdi-document.h \
   $$SRC_DIR/dgh-sdi-sentence.h \
   $$SRC_DIR/dgh-sdi-paragraph.h \
 
 
 
 SOURCES += \
+  $$SRC_DIR/dgh-sdi-document.cpp \
   $$SRC_DIR/dgh-sdi-sentence.cpp \
   $$SRC_DIR/dgh-sdi-paragraph.cpp \
 
