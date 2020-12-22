@@ -1,5 +1,6 @@
 
-`copy<@/gtagml/dgdb/ctg/ngml/gen>;
+`copy<@/gen/ctg>;
+
 `document-title<Cognitive Transform Grammar>;
 `local-title<section1>;
 

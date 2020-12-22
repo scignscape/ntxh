@@ -268,7 +268,7 @@ amenable to both more formal and more philophical/interpretive
 development.  On the one hand, transform-pairs can sometimes 
 be mapped explicitly to dependency or link-grammar pairs, 
 so the theory can be treated as a philosophical preliminary 
-or motivation for Dependency or Link Grammar.`footnote.
+or motivation for Dependency or Link Grammar. |=| `footnote.
 Dependency and Link Grammar both build syntactic structures
 from inter-word pairs (rather than larger phrasal units), 
 so the latter is at least in part a species of the former.  
@@ -285,7 +285,7 @@ which get fused into a single link; linkage capacities become rooted
 in the lexicon arguably more so than in (conventional) Dependency Grammar 
 `cite<Schneider>;, `cite<SleatorTamperley>;, 
 `cite<GoertzelPLN>;, `cite<ErwanMoreau>;.   
-`footnote`  Relatedly,  
+`footnote` |@|  Relatedly,
 transforms themselves can be integrated into type systems 
 (e.g., the kinds of transforms associated with adjectives 
 depend on their ground being typed as a noun), so 

@@ -336,6 +336,13 @@ void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
   {
    if(it.key() <= held_resume)
      continue;
+   else if(it.value().first != current_paragraph_node)
+   {
+    held_declared_status = 0;
+    current_paragraph_node = it.value().first;
+    srank_in_paragraph = 0;
+    widowed_sentence_starts_.insertMulti(current_paragraph_node, it.key());
+   }
    else
    {
     declared_sentence_starts_.insertMulti(current_paragraph_node, it.key());
@@ -424,6 +431,8 @@ void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
 
     else
       held_declared_status = 1;
+
+    continue; //???
    }
 
    // try to get the next start ...
@@ -985,7 +994,7 @@ void GTagML_Output_SDI_Infoset::check_sentence_boundaries(QTextStream& qts,
     break;
   u4 se = 0;
   u4 ses = 0;
-  if(!sdi_document_->scan_for_sentence_end(bl, i, leave, se, ses))
+  if(!sdi_document_->scan_for_sentence_end(bl, ss, leave, se, ses)) //? (bl, i, leave, se, ses)
     break;
 
 //  if(!htxn_document_->scan_for_sentence_end(bl, ss, leave, se))

@@ -1469,7 +1469,7 @@ encompassing types.
 There is definitional interdependence
 between types and functions: a function is defined in terms of the types it accepts as parameters and
 returns %-- rather than its entire set of possible inputs and outputs, which can
-vary across computing environments.`footnote.
+vary across computing environments. |=| `footnote.
 Moreover, expectations in a particular case
 may be more precise than what is implied by the type itself %-- it is erroneous
 to assume that a proper type system will allow a correct `q.set of values` to
@@ -1477,7 +1477,7 @@ be stipulated for each point in a computation (the kind of contract enforced via
 by documentation and unit testing).  So state-space in a given context may include many
 `q.unreasonable` values, implying that within the overall space there is a `q.reasonable`
 subspace, except that this subspace may not be crisply defined.
-`footnote`  These are some reasons why in theoretical
+`footnote` |@|  These are some reasons why in theoretical
 Computer Science types are not `q.reduced` to underlying sets; instead, extensions
 are sometimes complex spaces that model states of, or internal organization of comparisons
 among, type instances.
@@ -1615,7 +1615,7 @@ the `q.abstract` (or `q.universal`/) type.  So there is a familiar semantic
 pattern which mentally transitions from a lexical type to its extension and
 then extension-narrowing %-- an interpretation that, if accepted, clearly
 shows a different mental role for concepts of concepts' `i.extension` than the
-concepts themselves.`footnote.
+concepts themselves. |=| `footnote.
 There is a type-theoretic correspondence between intension and
 extension %-- for a type `Tnoindex; there is a corresponding `q.higher-order` type
 of `i.sets` whose members are `Tnoindex; 
@@ -1628,7 +1628,7 @@ different, albeit interrelated concept.  Extension is not definition.
 `i.Rhino` does not mean `i.all rhinos` (or `i.all possible rhinos`/) %-- though arguably
 there are concepts `i.all rhinos` and `i.all restaurants` (etc.) along with the concepts
 `i.rhino` and `i.restaurant`/.
-`footnote`  
+`footnote` |@|  
 `p`
 
 `p.
@@ -1691,7 +1691,7 @@ the cause (`i.sent flying (by an explosion)`/, `i.the bird flew away (after a lo
 `i.leaves flying in the wind`/).  Words allow different use-contexts
 to the degree that their various `i.senses` offer an inventory of aspects for
 highlighting by `i.morphosyntactic` convention.  Someone who says `i.I hate to fly` is not
-heard to dislike hand-gliding or jumping off mountains.`footnote.
+heard to dislike hand-gliding or jumping off mountains. |=| `footnote.
 People, unlike birds, do not fly %-- so the verb, used intransitively
 (not flying `i.to` somewhere in particular or `i.in` something in particular),
 is understood to refer less to the physical motion and more to the socially
@@ -1700,7 +1700,7 @@ highlights the procedural and commercial dimension, not the physical mechanism a
 spatial path.  But it does so `i.because` we know human flight is
 unnatural: we can poetically describe how the sky is filled with flying leaves or birds,
 but not `q.flying people`/, even if we are nearby an airport.
-`footnote`  Accordant variations
+`footnote` |@|  Accordant variations
 of cognitive construal (attending more to mode of action, or path, or motives, etc.),
 which are elsewhere signaled by grammatic choices, are also spanned by a conceptual
 space innate to a given word: senses are finer-grained meanings availing themselves to one construal or another.
@@ -1725,7 +1725,7 @@ the conclusion), or their means (their conditions in the interim).
 Compare `i.attaching` something to a wall (means-focused) to
 `i.hanging` something on a wall (ends-focused); `i.baking` a cake
 (cause-focus: putting a cake in the oven with deliberate intent to cook it)
-to `i.burning` a cake (accidentally overcooking it).`footnote.
+to `i.burning` a cake (accidentally overcooking it). |=| `footnote.
 We can express
 an intent to bake someone a cake, but not (well, maybe comedically) to
 `i.burn` someone a cake (`q.burn`/, at least in this context, implies
@@ -1745,7 +1745,7 @@ the broader sense of `q.made`/, not just `q.cooked in an oven`/.
 Words' senses mutate in relation to the kinds of situations where they are used
 %-- why else would `i.bake` mean `q.make`//`q.prepare` in the past or future tense but
 `q.cook`//`q.heat` in the present?
-`footnote`
+`footnote` |@|
 These variations are not random assortments of polysemous words' senses:
 they are, instead, rather predictably distributed according
 to speakers' context-specific knowledge and motives.

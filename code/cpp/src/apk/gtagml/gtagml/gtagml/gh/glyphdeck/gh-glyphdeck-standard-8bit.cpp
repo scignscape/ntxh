@@ -732,6 +732,7 @@ u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
 
    {{1, '*'}, 95}, // quasi let
 
+   {{1, ':'}, 116}, // _ s e
    {{3, ':'}, 123}, // _ decl s e
 
 
@@ -1022,6 +1023,9 @@ u1 GH_Glyphdeck_Standard_8bit::get_sentence_end_swap(u1 gp)
  if(gp == 64)
    return 70;
 
+ if( gp == 116 )
+   return gp;
+
  if( (gp == 103) || (gp == 75) || (gp == 70) )
    return gp;
 
@@ -1092,8 +1096,11 @@ void get_latex_64_to_117(u1 gp, QString& result)
    "-", // 113 // quasi-math (minus)
    ",", // 114 // quasi-math (lit)
    "^", // 115 // quasi-math
-   "[", // 116 // surround
-   "]", // 117 // surround
+
+   ":", // 116 // se
+
+//   "[", // 116 // surround
+//   "]", // 117 // surround
    }};
 
  result = static_vec.value(gp - 64);
@@ -1115,7 +1122,10 @@ void get_latex_118_to_127(u1 gp, QString& result)
    "!", // 122
    ":", // 123
 
-   " ", // 124 se post declare
+//   " ", // 124 se post declare
+
+   "{\\spsg}", // 124 se suspend to par
+
    "{\\sssg}", // 125 se suspend
    "{\\srsg}", // 126 ss resume
 
@@ -1451,6 +1461,10 @@ GH_Block_Base::SDI_Interpretation_Codes GH_Glyphdeck_Standard_8bit::get_sdi_inte
   case 64: // .
   case 75:
   case 103: return GH_Block_Base::SDI_Interpretation_Codes::Potential_Sentence_End;
+
+   //?
+  case 116: return GH_Block_Base::SDI_Interpretation_Codes::Potential_Sentence_End;
+
   case 72:
    return GH_Block_Base::SDI_Interpretation_Codes::Sentence_End_Space;
   case 71:

@@ -25,14 +25,7 @@
 
 `input<ctg>;
 
-`sdiinput<intro.gt>;
-
-`sdiinput<section1.gt>;
-`sdiinput<section2.gt>;
-
 `sdiinput<section3.gt>;
-`sdiinput<section4.gt>;
-
 
 
 `document`

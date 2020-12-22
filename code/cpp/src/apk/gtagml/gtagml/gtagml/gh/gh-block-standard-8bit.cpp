@@ -40,7 +40,7 @@ u4 GH_Block_Standard_8bit::check_declared(u1 gp)
 u4 GH_Block_Standard_8bit::find_sentence_start_resume(u4 i, u4 e)
 {
  if(e == 0)
-   e = chars_.size();
+   e = chars_.size() - 1;
 
  for(u4 u = i; u <= e; ++u)
  {

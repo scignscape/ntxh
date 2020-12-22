@@ -39,8 +39,8 @@ public:
 
  void finalize_sentence_boundaries(GH_Block_Base& bl, QString path);
 
- u1 scan_for_sentence_start(GH_Block_Base& bl, u4 start, u4 end, u4& result);
- u1 scan_for_sentence_end(GH_Block_Base& bl, u4 start, u4 end, u4& result, u4& space);
+ u4 scan_for_sentence_start(GH_Block_Base& bl, u4 start, u4 end, u4& result);
+ u4 scan_for_sentence_end(GH_Block_Base& bl, u4 start, u4 end, u4& result, u4& space);
 
  u4 scan_for_sentence_start_resume(GH_Block_Base& bl, u4 start, u4 end);
 

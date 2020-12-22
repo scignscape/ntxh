@@ -7,6 +7,7 @@
 
 `section.Functional Type Theory in Cognitive and Dependency Grammars`
 `label<s2>;
+
 `p.
 My discussion so far has focused on 
 characterizing sentences' holistic meaning.  On the face of 
@@ -204,9 +205,9 @@ nested expressions captures primitive but significant syntactic details.
 `p.
 Nested-expression models also give rise directly to two other representations: 
 a precedence ordering among lexemes automatically follows by taking 
-function inputs as precedent to function (words) themselves`footnote.But 
+function inputs as precedent to function (words) themselves`footnote -> But
 note that using `q.function-words` as terminology here generalizes 
-this term beyond its conventional meaning in grammar.`/; 
+this term beyond its conventional meaning in grammar ;;;
 moreover, S-Expression formats can be rewritten as sets of 
 word-pairs, borrowing the representational paradigms (if not 
 identical structures) of Dependency Graphs.  This allows Dependency Graphs 
@@ -296,7 +297,7 @@ as an aggregate focus.  Then `i.on` modifies the outcome of that first transform
 re-inscribing the focus as a place-designation.  Then `i.that` transform's output 
 becomes a modifier for `i.camping`/, wherein the locative construction becomes 
 a de-facto adverb, adding detail to the verb `i.camping` (camping on the 
-beach as a kind of camping, in effect).`footnote.
+beach as a kind of camping, in effect). |=| `footnote.
 If it seems better to read camping as a `i.noun` %-- the act or phenomenon 
 of camping %-- then we could treat the locative 
 as an `i.adjective`/, with the stipulation that the operation 
@@ -305,7 +306,7 @@ state of `i.X`/-ing)
 propagates to any modifiers on the verb: modifying constructions that 
 refine `i.X` as verb are implicitly mapped to be adjectives likewise 
 modifying `i.X` in the nominal sense of `q.the phenomenon of `i.X`/-ing`/.  
-`footnote`    
+`footnote` |@|    
 `p`
 
 `p.
@@ -350,7 +351,7 @@ As a natural corollary to this notation,
 parts of speech can have `q.type signatures`
 notionally similar to the signatures of function types in programming languages: a verb
 needing a direct object, for example, `q.transforms` two nouns (Subject and Object)
-to a proposition, which could be notated with something like `NNtoProp;.`footnote.
+to a proposition, which could be notated with something like `NNtoProp;. |=| `footnote.
 A note on notation: I adopt the Haskell convention (referring to the Haskell
 programming language and other functional languages) of using arrows both between
 parameters and before output notation, but for visual cue I add one dot above the
@@ -361,12 +362,12 @@ noun type, respectively type of sentences,
 assuming we are using type-theoretic principles).  I will 
 use some extra markings (in diagrams below) for more specific versions of 
 nouns.
-`footnote`
+`footnote` |@|
  |.|
 The notation is consistent so long as each constituent of a verb 
-phrase has a fixed index number.`footnote.The subject at position one, for instance; 
+phrase has a fixed index number. |=| `footnote.The subject at position one, for instance;
 direct object at position two; and indirect object at position three.
-`footnote`  
+`footnote` |@|  
  |.|  
 Transforms (potentially with two or more arguments) then combine lexemes 
 %-- having the right signatures %-- with one or more words or phrases. 
@@ -385,14 +386,14 @@ A resulting phrase can then be included, like a nested expression,
 in other phrases; for instance a `Prop; joined to 
 `i.that` so as to create a noun-phrase (recall my 
 analysis of `i.question whether` last section); notationally   
-`PropToNYieldsN;.`footnote.
+`PropToNYieldsN;. |=| `footnote.
 Numeric indices take the place of left and right adjacency
 %-- `q.looking forward` or backward %-- in Combinatory Categorial 
 Grammar; the type-theoretic perspective abstracts from word order.  
 The theory of result types `q.falling out` from a 
 type-checked phrase structure, however, carries over to this 
 more abstract analysis.
-`footnote`
+`footnote` |@|
 `p`
 
 `p.
@@ -483,7 +484,7 @@ phrase is the most useful stand-in for the whole
 controversy in Dependency Grammar).
 `p`
 
-\input{figure.tex} 
+`input<figure.tex>; 
 `p.
 Incorporating 
 type theory, we can skirt these issues by modeling phrases through the perspective of
@@ -554,8 +555,8 @@ synthesis-toward-proposition: these words are not necessarily
 pivotal in term of meaning, but they are the core skeleton of
 the schematic type-based model which we attach to a 
 sentence while modeling the constraints on its synthesizing 
-process.  (There is a further dimension in the `i.student after student` 
-phrase %-- the repetition of `q.student` %-- which I will discuss later.)
+process (there is a further dimension in the `i.student after student` 
+phrase %-- the repetition of `q.student` %-- which I will discuss later).
 `p`
 
 `p.
@@ -715,13 +716,13 @@ constructions they participate in (such as, different cases), and
 especially how through this they compel various spatial and
 force-dynamic readings; their morphosyntactic resources for describing states
 of affairs; and, within semantics, when we look toward even more fine-grained classifications
-of particular word-senses, to reason through contrasts in usage.`footnote.
+of particular word-senses, to reason through contrasts in usage. |=| `footnote.
 So, conceiving microclasses similar in spirit to Steven Pinker in
 Chapter 2 of `cite<Pinker>;, though I'm not committing to using the
 term only in the way Pinker uses it.  Cf. also `cite<AnneVilnat>;, which
 combines a microclass theory I find reminiscent of `i.The Stuff of Thought` with
 formal strategies like Unification Grammar.
-`footnote`  Microclasses can point out similarities
+`footnote` |@|  Microclasses can point out similarities
 in mental `q.pictures` that explain words' similar behaviors, or
 study why different senses of one word succeed or fail to be acceptable in particular phrases.
 There are `i.stains all over the tablecloth` and `i.paint splattered all over the tablecloth`/,
@@ -739,10 +740,10 @@ spatial/dynamic/configuration criteria.
 Type-theoretic semantics can also apply Ontological tropes to unpack the overlapping mesh of word-senses,
 like `i.material object` or `i.place` or `i.institution`/.
 This mode of analysis is especially well illustrated when competing senses
-collide in the same sentence.  Slightly modifying two examples:`footnote.
+collide in the same sentence.  Slightly modifying two examples: |=| `footnote.
 `cite<[p. 40] ChatzikyriakidisLuo>; (former) and
 `cite<[p. 4] MeryMootRetore>; (latter).
-`footnote`
+`footnote` |@|
 
  
 `sentenceList,
@@ -923,18 +924,18 @@ picture of `q.cognitive` linguistics, grammar, or indeed
 speculative project we associate with linguists/philosophers 
 like George Lakoff, Mark Johnson, Leonard Talmy, 
 Ronald Langacker, and Peter `Gardenfors; %-- along with, as 
-`Gardenfors; points out, phenomenologists like Jean Petitot.`footnote.
+`Gardenfors; points out, phenomenologists like Jean Petitot. |=| `footnote.
 `Gardenfors; mentions Lakoff, Langacker, Talmy, Fauconnier, 
 and others alongside `q.a French semiotic tradition, 
 exemplified by [Jean-Pierre] Descl\'es ... and 
 [Jean] Petitot-Cocorda ... which shares many features with the 
 American (mainly Californian) group` `cite<[p. 4] Gardenfors>;.  
-`footnote`  At the same time, Petitot also links with a 
+`footnote` |@|  At the same time, Petitot also links with a 
 tradition that combines elements of phenomenology and 
 Analytic Philosophy, represented by philosophers like 
 Barry Smith and David Woodruff Smith and by `q.Analytic Phenomenology` 
 or `q.Naturalizing Phenomenology` projects, the latter also being 
-a large volumes Petitot co-edited.`footnote.
+a large volumes Petitot co-edited. |=| `footnote.
 Petitot's and Barry Smith's formalizing projects were parallel
 and collaborative to some extent.  Maxwell James Ramstead
 in a 2015 master's thesis reviews the history elegantly:
@@ -955,11 +956,11 @@ to model phenomenal experience, and Smith uses formal structures from
 mereotopology (the theory of parts, wholes, and their boundaries)
 to a similar effect. `cite<[p. 38] Ramstead>;
 `quote`
-`footnote` 
+`footnote` |@| 
 `q.Cognitive` in these contexts 
 tends to imply desire to ground analyses on holistic
 human experience, in its experiential, embodied, pragmatically-oriented, 
-first-personal, and intersubjective dimensions.`footnote.
+first-personal, and intersubjective dimensions. |=| `footnote.
 Note that in this sense 
 `q.Cognitive` connotes a very different perspective than this same 
 term in `AI; research, for example; on the one side we have a 
@@ -970,7 +971,7 @@ on the other there is a paradigm where, in effect
 reducible to low-level biological processes), there 
 exists `i.some` computable core of cognition, which scientists 
 can unlock to build powerful `q.Artificial General Intelligence`/.
-`footnote`   
+`footnote` |@|   
 `p`
 
 
@@ -1007,7 +1008,7 @@ sense that produce new insight onto cognitive processes,
 rather than just describing cognition as an experienced
 givenness %-- plus both faithfulness to each person's 
 conscious experience and also generality to many 
-people's experience.`footnote.
+people's experience. |=| `footnote.
 So for instance, Husserl's examination of 
 protention and retention in sensing spatial form during 
 perceptual episodes focused on discrete, extended objects 
@@ -1019,7 +1020,7 @@ considered classic phenomenological analyses because they
 have been deemed both experientially accurate and 
 theoretically insightful by subsequent generations' worth of 
 public review.
-`footnote`
+`footnote` |@|
 `p`
 
 `p.
@@ -1369,7 +1370,7 @@ In other words, Nunberg's analysis turns on theorizing various
 `q.I am in...` constructions as a kind of referential transfer 
 or (as I would say) proxying, and then seeking the logical rules 
 behind how and when such proxying works in a first-person
-(morphosyntactic) context.`footnote.
+(morphosyntactic) context. |=| `footnote.
 Obviously `q.first person` in this setting concerns
 verb tense and other linguistic cues linking to
 the speaker/enunciator of a piece of language; the
@@ -1379,7 +1380,7 @@ in this paper) in the phenomenological
 conscious, intentional experience (in contrast
 to experience, or thoughts and feelings, we
 attribute to others based on their behavior).
-`footnote`
+`footnote` |@|
 `p`
 
 `p.
@@ -1529,7 +1530,7 @@ acceptability: the more that we incorporate
 multiple layers of posssible context, the wider becomes
 the circle of sentences that feel reasonable
 (cf. the reasonableness, in my estimation, of
-(`ref<itm:crate>;) and (`ref<itm:Sauternes>;)).`footnote.
+(`ref<itm:crate>;) and (`ref<itm:Sauternes>;)). |=| `footnote.
 Granted that, perhaps, with a lot of imagination
 almost any construction could be deemed
 plausible in `i.some` context.  Accordingly,
@@ -1557,7 +1558,7 @@ unusual contexts that (`ref<itm:crate>;) has
 essentially different plausibility than
 (`ref<itm:Whitney>;), or (`ref<itm:Sauternes>;)
 compared to (`ref<itm:beers>;) and (`ref<itm:Michelobs>;).
-`footnote`  Failure to identify these
+`footnote` |@|  Failure to identify these
 layers' workings can lead analysis toward searches 
 for reproducible logical rules governing which constructions  
 are accepted by a language-community as recurring patterns, 
@@ -1569,5 +1570,6 @@ from both semantic and reference-theoretic angles.
 I will focus on this issue of logicality %-- both its applicability 
 and its limits %-- in the next section.
 `p`
+
 
 

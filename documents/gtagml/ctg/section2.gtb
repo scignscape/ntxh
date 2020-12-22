@@ -1,5 +1,6 @@
 
-`copy<@/gtagml/dgdb/ctg/ngml/gen>;
+`copy<@/gen/ctg>;
+
 `document-title<Cognitive Transform Grammar>;
 `local-title<section2>;
 
@@ -203,9 +204,9 @@ nested expressions captures primitive but significant syntactic details.
 `p.
 Nested-expression models also give rise directly to two other representations: 
 a precedence ordering among lexemes automatically follows by taking 
-function inputs as precedent to function (words) themselves |=| `footnote.But
+function inputs as precedent to function (words) themselves`footnote -> But
 note that using `q.function-words` as terminology here generalizes 
-this term beyond its conventional meaning in grammar.`/; 
+this term beyond its conventional meaning in grammar ;;;
 moreover, S-Expression formats can be rewritten as sets of 
 word-pairs, borrowing the representational paradigms (if not 
 identical structures) of Dependency Graphs.  This allows Dependency Graphs 

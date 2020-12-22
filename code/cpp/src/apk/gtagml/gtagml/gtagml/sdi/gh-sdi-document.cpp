@@ -135,7 +135,7 @@ u4 GH_SDI_Document::scan_for_sentence_start_resume(GH_Block_Base& bl, u4 start, 
  return 1;
 }
 
-u1 GH_SDI_Document::scan_for_sentence_start(GH_Block_Base& bl, u4 start, u4 end, u4& result)
+u4 GH_SDI_Document::scan_for_sentence_start(GH_Block_Base& bl, u4 start, u4 end, u4& result)
 {
  u1 gap = 1;
  for(u4 i = start; i <= end; ++i)
@@ -150,11 +150,11 @@ u1 GH_SDI_Document::scan_for_sentence_start(GH_Block_Base& bl, u4 start, u4 end,
  return false;
 }
 
-u1 GH_SDI_Document::scan_for_sentence_end(GH_Block_Base& bl,
+u4 GH_SDI_Document::scan_for_sentence_end(GH_Block_Base& bl,
   u4 start, u4 end, u4& result, u4& space)
 {
  u4 _space = 0;
- u1 gap = 1;
+ u4 gap = 1;
  for(u4 i = start; i <= end; ++i)
  {
   GH_Block_Base::SDI_Interpretation_Codes sic = bl.get_sdi_interpretation_code_at_index(i);

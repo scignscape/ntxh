@@ -1032,7 +1032,6 @@ while nonetheless avoiding a response at the
 conversational maxims but is still rather obtuse.
 `p`
 
-
 `p.
 So one problem for theories that read meanings in terms
 of logically structured content %-- something like, the
@@ -1190,7 +1189,6 @@ possibilities against fact, but strategically
 acting to modify some facts in our environment.
 `p`
 
-
 `p.
 But the kind of reasoning involved here is not logical
 reasoning per se: abstract logic does not tell us
@@ -1291,7 +1289,7 @@ This would be a theory of how linguistic
 connectives reciprocate logical connectives,
 phrase hierarchies reconstruct propositional
 compounds, etc.  It would be the kind of theory motivated
-by cases like:
+by cases like: |+|
 
 `sentenceList,
 `sentenceItem; `swl -> --- -> This wine is a young Syrah. -> log ;;
@@ -1313,7 +1311,6 @@ of husband and `q.former, of a prior time` yields ex-husband;
 a parent's sibling's daughter is a cousin.
 `p`
 
-
 `p.
 The interesting question is to what extent `q.morphosyntax
 recapitulates predicate structure` holds in general
@@ -1322,7 +1319,7 @@ structure of reported assertions and then the structures
 via which they are expressed in language.  I'll
 carry out this exercise `visavis; several sentences,
 such as these (supplementing my earlier, more preliminary discussion of 
-(`ref<itm:ants>;)-(`ref<itm:princess>;))`\(:) |=|
+(`ref<itm:ants>;)-(`ref<itm:princess>;)): |+|
 
 `sentenceList,
 `sentenceItem; `swl -> itm:maj -> The majority of students polled were
@@ -1393,8 +1390,6 @@ hikes.  The `i.absence` of an article on
 that the students are not opining on some specific policy, but on
 the idea of hikes in general.
 `p`
-
-
 
 `p.
 Such full details are not explicitly laid out in the sentences,

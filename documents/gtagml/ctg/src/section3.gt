@@ -294,7 +294,7 @@ suggest that (`ref<itm:AWindow>;) is dubious, but in context
 it may make perfect sense %-- particularly if it follows 
 a discourse where a requester wanted `i.whatever` window 
 closed (whichever window was causing a draft); even if that 
-wish was `i.expressed` via a `i.close the window`/.`footnote.
+wish was `i.expressed` via a `i.close the window`/. |=| `footnote.
 Consider also the case of (`i.Handbook`/, example 9, 
 page 132, chapter 6):
 
@@ -335,7 +335,7 @@ so all four walls of a room are collectively `q.the` wall
 `visavis; such a niche, even while on sensory grounds we 
 can switch to treating them as separate (warranting the (`ref<itm:scribbled>;) 
 version).     
-`footnote`   
+`footnote` |@|   
 `p`
 
 `p.
