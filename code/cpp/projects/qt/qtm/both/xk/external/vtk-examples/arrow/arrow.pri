@@ -63,6 +63,12 @@ HEADERS += \
 SOURCES += \
   $$SRC_DIR/Arrow.cxx \
 
+# $$SRC_DIR/MedicalDemo1.cxx \
+
+
+
+# $$SRC_DIR/Arrow.cxx \
+
 
 #   $$SRC_DIR/Mace3.cxx \
 #  $$SRC_DIR/CamBlur.cxx \

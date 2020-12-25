@@ -164,6 +164,24 @@ inline void save_file(QString path, std::function<int(QString&)> fn)
  outfile.close();
 }
 
+inline void save_file(QString path, std::function<int(QTextStream&, int)> fn)
+{
+ QFile outfile(path);
+ if (!outfile.open(QIODevice::WriteOnly | QIODevice::Text))
+   return;
+ QTextStream outstream(&outfile);
+ int i = 0;
+ int c = 0;
+ do
+ {
+  ++c;
+  i = fn(outstream, c);
+ }
+ while(i > 0);
+
+ outfile.close();
+}
+
 inline void prepend_template_to_file(QString path, QString tpath,
  const QMap<QString, QString>& qm)
 {

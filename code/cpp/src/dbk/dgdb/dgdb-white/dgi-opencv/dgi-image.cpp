@@ -11,8 +11,11 @@
 
 #include "dgi-contour.h"
 
+#include "textio.h"
+
 
 USING_KANS(DGI)
+USING_KANS(TextIO)
 
 
 DGI_Image::DGI_Image(cv::Mat matrix)
@@ -337,6 +340,32 @@ void DGI_Image::init_demo_transform_group(Demo_Transform_Group& dtg)
 }
 
 
+void DGI_Image::to_csv(QString path)
+{
+ save_file(path, [this](QTextStream& qts, int count)
+ {
+  if(count == 1)
+  {
+   qts << "area,rrar,conv,i2ecr,c2oc,c2ec,i2ec,nest,child\n";
+   return 1;
+  }
+  const DGI_Contour& dgc = *at(count - 2);
+  qts << QString(R"(
+    %1 ,%2, %3, %4, %5, %6, %7, %8, %9
+                 )")
+    .arg(dgc.area())
+    .arg(dgc.rotated_rectangle_aspect_ratio())
+    .arg(dgc.convexity())
+    .arg(dgc.inner_to_encosing_circle_ratio())
+    .arg(dgc.center_to_inner_circle_norm())
+    .arg(dgc.center_to_enclosing_circle_norm())
+    .arg(dgc.inner_to_enclosing_circle_norm())
+    .arg(dgc.nesting_depth())
+    .arg(dgc.child_contours_count()).simplified().replace(' ',"").append('\n');
+
+  return size() - count + 1;
+ });
+}
 
 
 #ifdef HIDE

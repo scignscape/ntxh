@@ -34,12 +34,15 @@
 #include "kans.h"
 
 
-KANS_(DGI)
+//?KANS_(DGI)
 
+namespace KA { namespace DGI {
 struct Demo_Transform_Group;
 
 class DGI_Demo_Frame : public QFrame
 {
+ Q_OBJECT
+
  QButtonGroup* left_buttons_;
 
  QPushButton* src_button_;
@@ -83,8 +86,8 @@ public:
 
 };
 
-
-_KANS(DGI)
+} }
+//? _KANS(DGI)
 
 
 

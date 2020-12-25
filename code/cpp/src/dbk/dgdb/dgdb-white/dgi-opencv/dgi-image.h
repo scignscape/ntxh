@@ -84,6 +84,8 @@ public:
 
  void init_demo_transform_group(Demo_Transform_Group& dtg);
 
+ void to_csv(QString path);
+
 };
 
 _KANS(DGI)
