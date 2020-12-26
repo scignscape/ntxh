@@ -9,23 +9,35 @@
 
 #include "qh-bundle-code.h"
 
+#include "qh-node-data.h"
+
 
 Qh_Pack_Builder::Qh_Pack_Builder(Qh_Bundle_Code& bundle_code)
   :  bundle_code_(bundle_code), current_bit_index_(0),
      current_byte_index_(0), current_array_value_index_(0),
      current_structure_value_index_(0),
      declared_structure_value_boundary_(0),
-     current_structure_value_boundary_(0)
+     current_structure_value_boundary_(0),
+     node_data_(nullptr),
+     current_node_data_byte_index_(0),
+     current_node_data_field_index_(0)
+
 {
 
 }
 
 
-void Qh_Pack_Builder::add_structure_value(QVariant qvar, u1 bytes_req, Qh_Bundle_Code::Type_Hints th)
+void Qh_Pack_Builder::check_resize(u2 bytes_req)
 {
  u4 end = current_byte_index_ + bytes_req;
  if(data_.size() < (s4) end)
    data_.resize(end);
+}
+
+
+void Qh_Pack_Builder::add_structure_value(QVariant qvar, u1 bytes_req, Qh_Bundle_Code::Type_Hints th)
+{
+ check_resize(bytes_req);
 
  n8 nn = 0;
 
@@ -58,8 +70,8 @@ void Qh_Pack_Builder::add_structure_value(QVariant qvar, u1 bytes_req, Qh_Bundle
  {
  case 1: data_[current_byte_index_] = (u1) nn; break;
  case 2:
-  data_[current_byte_index_] = (u1) (nn & 255);
-  data_[current_byte_index_ + 1] = (u1) (nn >> 8);
+  data_[current_byte_index_] = (u1) (nn >> 8);
+  data_[current_byte_index_ + 1] = (u1) (nn & 255);
   break;
  case 4:
   data_[current_byte_index_] = (u1) (nn >> 24);
@@ -83,6 +95,31 @@ void Qh_Pack_Builder::add_structure_value(QVariant qvar, u1 bytes_req, Qh_Bundle
  current_byte_index_ += bytes_req;
 }
 
+void Qh_Pack_Builder::init_node_data()
+{
+ node_data_ = new Qh_Node_Data;
+}
+
+
+void Qh_Pack_Builder::add_structure_value_str(QString str, u1 bytes_req)
+{
+ if(bytes_req == 0)
+ {
+  check_resize(8);
+
+  QPair<u4, u4> pr = node_data_->add_str(str);
+  data_[current_byte_index_] = (u1) (pr.first >> 24);
+  data_[current_byte_index_ + 1] = (u1) ((pr.first >> 16) & 255);
+  data_[current_byte_index_ + 2] = (u1) ((pr.first >> 8) & 255);
+  data_[current_byte_index_ + 3] = (u1) (pr.first & 255);
+
+  data_[current_byte_index_ + 4] = (u1) (pr.second >> 24);
+  data_[current_byte_index_ + 5] = (u1) ((pr.second >> 16) & 255);
+  data_[current_byte_index_ + 6] = (u1) ((pr.second >> 8) & 255);
+  data_[current_byte_index_ + 7] = (u1) (pr.second & 255);
+ }
+}
+
 
 u2 Qh_Pack_Builder::add_structure_value(QVariant qvar)
 {
@@ -91,8 +128,9 @@ u2 Qh_Pack_Builder::add_structure_value(QVariant qvar)
 
  switch (pr.second)
  {
-// case Qh_Bundle_Code::
-
+ case Qh_Bundle_Code::Type_Hints::Chars_QString:
+  add_structure_value_str(qvar.toString(), pr.first);
+  break;
  case Qh_Bundle_Code::Type_Hints::Signed:
  case Qh_Bundle_Code::Type_Hints::Unsigned:
   add_structure_value(qvar, pr.first, pr.second);

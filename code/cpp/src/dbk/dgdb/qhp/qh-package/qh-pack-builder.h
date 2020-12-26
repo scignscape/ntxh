@@ -20,8 +20,9 @@
 
 //class Qh_Bundle_Code;
 
-
 #include "qh-bundle-code.h"
+
+class Qh_Node_Data;
 
 class Qh_Pack_Builder
 {
@@ -36,16 +37,26 @@ class Qh_Pack_Builder
 
  QVector<u1> data_;
 
+ Qh_Node_Data* node_data_;
+ u4 current_node_data_byte_index_;
+ u4 current_node_data_field_index_;
+
 public:
 
  Qh_Pack_Builder(Qh_Bundle_Code& bundle_code);
 
  ACCESSORS__CONST_RGET(QVector<u1> ,data)
+ ACCESSORS(Qh_Node_Data* ,node_data)
+
 
  u2 add_structure_value(QVariant qvar);
 
  void add_structure_value(QVariant qvar, u1 bytes_req, Qh_Bundle_Code::Type_Hints th);
+ void add_structure_value_str(QString str, u1 bytes_req);
 
+ void init_node_data();
+
+ void check_resize(u2 bytes_req);
 
 };
 

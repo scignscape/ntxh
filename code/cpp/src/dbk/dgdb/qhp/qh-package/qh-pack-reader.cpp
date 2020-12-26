@@ -7,35 +7,85 @@
 
 #include "qh-pack-reader.h"
 
+#include "qh-node-data.h"
 
-Qh_Pack_Reader::Qh_Pack_Reader(Qh_Bundle_Code& bundle_code, const QVector<u1>& data)
-  :  bundle_code_(bundle_code), data_(data),
+Qh_Pack_Reader::Qh_Pack_Reader(Qh_Bundle_Code& bundle_code, const QVector<u1>& data,
+  Qh_Node_Data* node_data)
+  :  bundle_code_(bundle_code), node_data_(node_data), data_(data),
      current_index_(0), current_byte_index_(0)
 {
 
 }
 
+u1 Qh_Pack_Reader::read_data_1(u4 index)
+{
+ return data_[index];
+}
+
+u2 Qh_Pack_Reader::read_data_2(u4 index)
+{
+ return (((u2) data_[index]) << 8) |
+   (data_[index + 1]);
+
+}
+
+u4 Qh_Pack_Reader::read_data_4(u4 index)
+{
+ return (((u4) data_[index]) << 24) |
+   (((u4) data_[index + 1]) << 16) |
+   (((u4) data_[index + 2]) << 8) |
+   (data_[index + 3]);
+}
+
+n8 Qh_Pack_Reader::read_data_8(u4 index)
+{
+ return (((n8) data_[index]) << 56) |
+   (((n8) data_[index + 1]) << 48) |
+   (((n8) data_[index + 2]) << 40) |
+   (((n8) data_[index + 3]) << 32) |
+   (((n8) data_[index + 4]) << 24) |
+   (((n8) data_[index + 5]) << 16) |
+   (((n8) data_[index + 6]) << 8) |
+   (data_[index + 7]);
+}
+
+
 QVariant Qh_Pack_Reader::read_value()
 {
- QPair<u1, Qh_Bundle_Code::Type_Hints> pr = bundle_code_.get_requirements(current_index_);
+ // //  skip over array ...
+ QPair<u1, Qh_Bundle_Code::Type_Hints> pr = bundle_code_.get_requirements(current_index_ + 1);
 
  ++current_index_;
  u4 cbi = current_byte_index_;
- current_byte_index_ += pr.first;
 
  switch (pr.second)
  {
  case Qh_Bundle_Code::Type_Hints::Unsigned:
   {
+   current_byte_index_ += pr.first;
    switch(pr.first)
    {
-   case 1: return QVariant::fromValue( (u1) data_[cbi] );
-   case 2: return QVariant::fromValue( (u2) (
-     (data_[cbi] << 8) |
-     (data_[cbi + 1])
-     ));
+   case 1: return QVariant::fromValue( read_data_1(cbi) );
+   case 2: return QVariant::fromValue( read_data_2(cbi) );
+   case 4: return QVariant::fromValue( read_data_4(cbi) );
+   case 8: return QVariant::fromValue( read_data_8(cbi) );
    }
   }
+  break;
+
+ case Qh_Bundle_Code::Type_Hints::Chars_QString:
+  {
+   switch(pr.first)
+   {
+   case 0:
+    current_byte_index_ += 8;
+    u4 start = read_data_4(cbi);
+    u4 end = read_data_4(cbi + 4);
+    return node_data_->read_str(start, end);
+   }
+  }
+  break;
+
  }
 
 

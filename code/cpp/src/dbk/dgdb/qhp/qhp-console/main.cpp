@@ -19,23 +19,30 @@ int main(int argc, char* argv[])
 
  qbc.add_u2();
  qbc.add_u1();
+ qbc.add_str();
 
  Qh_Pack_Builder qpb(qbc);
 
+ // // need node data for the string ...
+ qpb.init_node_data();
+
  qpb.add_structure_value(QVariant::fromValue(77));
  qpb.add_structure_value(QVariant::fromValue(78));
+ qpb.add_structure_value(QVariant::fromValue(QString("String")));
 
- Qh_Pack_Reader qpr(qbc, qpb.data());
+ Qh_Pack_Reader qpr(qbc, qpb.data(), qpb.node_data());
 
  QVariant qvar1 = qpr.read_value();
  QVariant qvar2 = qpr.read_value();
+ QVariant qvar3 = qpr.read_value();
 
  u1 uu1 = qvar1.toUInt();
  u2 uu2 = qvar2.toUInt();
-
+ QString str = qvar3.toString();
 
  qDebug() << "uu1 = " << uu1;
  qDebug() << "uu2 = " << uu2;
+ qDebug() << "str = " << str;
 
 
 // qbc.each([](u1 code, Qh_Bundle_Code::Type_Hints th, u2 c)

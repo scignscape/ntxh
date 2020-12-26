@@ -47,12 +47,13 @@ QPair<u1, Qh_Bundle_Code::Type_Hints> Qh_Bundle_Code::get_requirements(u2 index)
 
  switch (th)
  {
+ case Type_Hints::Chars_QString:
+  return {(field_codes_[index] & 3), th};
  case Type_Hints::N_A:
  case Type_Hints::Unsigned:
  default:
   break;
  }
-
 
  return {1 << (field_codes_[index] & 3), th};
 

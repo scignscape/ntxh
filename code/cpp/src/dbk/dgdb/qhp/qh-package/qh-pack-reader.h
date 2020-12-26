@@ -16,14 +16,15 @@
 
 #include "global-types.h"
 
-//class Qh_Bundle_Code;
-
-
 #include "qh-bundle-code.h"
+
+
+class Qh_Node_Data;
 
 class Qh_Pack_Reader
 {
  Qh_Bundle_Code& bundle_code_;
+ Qh_Node_Data* node_data_;
 
  QVector<u1> data_;
 
@@ -32,10 +33,14 @@ class Qh_Pack_Reader
 
 public:
 
- Qh_Pack_Reader(Qh_Bundle_Code& bundle_code, const QVector<u1>& data);
+ Qh_Pack_Reader(Qh_Bundle_Code& bundle_code, const QVector<u1>& data, Qh_Node_Data* node_data = nullptr);
 
  QVariant read_value();
 
+ u1 read_data_1(u4 index);
+ u2 read_data_2(u4 index);
+ u4 read_data_4(u4 index);
+ n8 read_data_8(u4 index);
 };
 
 

@@ -20,12 +20,15 @@ HEADERS += \
   $$SRC_DIR/qh-bundle-code.h  \
   $$SRC_DIR/qh-pack-builder.h  \
   $$SRC_DIR/qh-pack-reader.h  \
+  $$SRC_DIR/qh-node-data.h  \
 
 
 SOURCES += \
   $$SRC_DIR/qh-bundle-code.cpp  \
   $$SRC_DIR/qh-pack-builder.cpp  \
   $$SRC_DIR/qh-pack-reader.cpp  \
+  $$SRC_DIR/qh-node-data.cpp  \
+
 
 
 #LIBS += -L$$TARGETSDIR -lwhitedb  \
