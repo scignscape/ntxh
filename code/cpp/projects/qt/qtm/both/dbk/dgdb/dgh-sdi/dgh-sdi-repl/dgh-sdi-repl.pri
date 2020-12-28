@@ -21,6 +21,8 @@ DEFINES += DEFAULT_DEV_DGDB_NGML_FOLDER=\\\"$$ROOT_DIR/../gtagml/dgdb\\\"
 
 DEFINES += DEFAULT_SDI_FOLDER=\\\"$$ROOT_DIR/dev/consoles/gtagml/sdi\\\"
 
+DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
+
 DEFINES += USE_KANS
 
 
@@ -57,3 +59,7 @@ LIBS += -L$$TARGETSDIR -lwhitedb -ldgdb-white \
 
 LIBS += -L$$TARGETSDIR -ldgh-sdi-repl-mw
 
+LIBS += -L$$TARGETSDIR -lgtagml
+
+
+LIBS += -L$$TARGETSDIR -ldgh-module-ir

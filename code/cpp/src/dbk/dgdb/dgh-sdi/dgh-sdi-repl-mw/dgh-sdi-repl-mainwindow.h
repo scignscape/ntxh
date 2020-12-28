@@ -24,9 +24,18 @@
 
 #include "global-types.h"
 
+KANS_CLASS_DECLARE(GTagML ,GTagML_Folder)
+
+USING_KANS(GTagML)
+
+
+
 // KANS_(DGH)
 
 namespace KA {  namespace DGH {
+
+class Module_IR;
+
 
 class DGH_SDI_REPL_MainWindow : public QMainWindow
 {
@@ -43,7 +52,15 @@ class DGH_SDI_REPL_MainWindow : public QMainWindow
  QTextEdit* http_log_text_edit_;
 
  void init_command_list();
- void run_command(u2 cmd_code);
+ void run_command(u2 cmd_code, const QStringList& qsl);
+
+ QString gtagml_setup_;
+
+ Module_IR* mir_;
+
+ QString lines_acc_;
+
+ void process_gtagml_file(QString path, GTagML_Folder* fld);
 
 // QVBoxLayout* main_layout_;
 

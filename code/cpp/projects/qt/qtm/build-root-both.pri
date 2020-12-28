@@ -128,3 +128,4 @@ ANGELSCRIPT_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/angelscript
 HTXN_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/htxn/htxn
 MPF_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/htxn/mosaic
 CWL_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/cwl
+GTAGML_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/gtagml/gtagml

@@ -7,7 +7,6 @@
 
 include(../build-group.pri)
 
-
 QT += gui widgets
 
 include($$ROOT_DIR/../preferred/sysr.pri)
@@ -20,9 +19,9 @@ DEFINES += DEFAULT_DEV_DGDB_NGML_FOLDER=\\\"$$ROOT_DIR/../gtagml/dgdb\\\"
 
 DEFINES += DEFAULT_SDI_FOLDER=\\\"$$ROOT_DIR/dev/consoles/gtagml/sdi\\\"
 
-DEFINES += USE_KANS
-
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
+
+DEFINES += USE_KANS
 
 
 INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR $$WHITEDB_SRC_GROUP_DIR
@@ -35,13 +34,6 @@ INCLUDEPATH += $$SRC_ROOT_DIR/apk/gtagml/gtagml
 INCLUDEPATH += $$SRC_ROOT_DIR/apk/hgdm/ntxh
 INCLUDEPATH += $$SRC_ROOT_DIR/apk/hgdm/ntxh/ntxh
 
-#/home/nlevisrael/gits/ntxh/wip-sebi/ar/code/cpp/src/apk/gtagml/gtagml/ngml-sdi/ngml-sdi-paragraph.h
-#INCLUDEPATH +=
-
-INCLUDEPATH += $$GTAGML_SRC_GROUP_DIR/gtagml
-
-message(gt: $$GTAGML_SRC_GROUP_DIR)
-
 
 INCLUDEPATH += $$RELAE_GRAPH_SRC_GROUP_DIR
 INCLUDEPATH += $$PHAON_GRAPH_SRC_GROUP_DIR
@@ -49,18 +41,21 @@ INCLUDEPATH += $$PHAON_GRAPH_SRC_GROUP_DIR
 
 
 HEADERS += \
-  $$SRC_DIR/dgh-sdi-repl-mainwindow.h \
-  $$SRC_DIR/qconsole.h \
-  $$SRC_DIR/qimplconsole.h \
+  $$SRC_DIR/module-ir.h \
+  $$SRC_DIR/gtagml-module.h \
 
 
 SOURCES += \
-  $$SRC_DIR/dgh-sdi-repl-mainwindow.cpp \
-  $$SRC_DIR/qconsole.cpp \
-  $$SRC_DIR/qimplconsole.cpp \
+  $$SRC_DIR/module-ir.cpp \
+  $$SRC_DIR/gtagml-module.cpp \
 
 
 
 LIBS += -L$$TARGETSDIR -lwhitedb -ldgdb-white \
   -lntxh  -lntxh-parser -lngml-sdi
+
+
+LIBS += -L$$TARGETSDIR -ldgh-sdi-repl-mw
+
+LIBS += -L$$TARGETSDIR -lgtagml
 
