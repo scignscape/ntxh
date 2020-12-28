@@ -1,0 +1,155 @@
+
+\noindent{}\textbf{[Proposed New Section:]}
+\raggedRightTitle{Identifying Acoustical Transforms for Greater Audio/Speech Clarity}
+
+\p{\:\+Speech data may be represented at several different levels. \> In the most direct
+form, speech data may be an explicit digitization of the original audio
+input \mdash{} that is to say, an audio file in formats such as \textbf{.wav} or
+\textbf{.aiff} which stores audio data directly and allows it to be
+replayed. \> At a higher level of abstraction, speech data may be modeled
+by performing quantitative analyses which isolate
+mathematical profiles of the input audio and its wave forms; encoded representations of
+such quantitative data may then be stored in lieu of sound data itself.
+\> Important speech-processing tasks \mdash{} such as speaker identification,
+or audio segmentation to isolate individual words
+\mdash{} are typically performed on quantitative encodings of audio
+input data, rather than on audio input itself.
+\> A conventional workflow will isolate \q{feature vectors} from
+mathematical audio encodings and then search for patterns in these
+vectors which signal, to some degree of probability, high-level
+facts about the audio. \> For instance, sudden quantitative shifts across
+multiple dimensions in a feature vector (tracked through time) suggests
+word boundaries; and grouping feature vectors by certain similarity
+metrics permits the isolation of individual speaking voices, or the
+separation of speech content from background noise. \> Such analyses
+then permit the audio signal to be recorded at a still higher level of
+abstraction and processing: here audio
+data may be represented linguistically, in terms of words, sentences,
+speakers, and prosodic features of spoken language.\;\<
+}
+
+\p{\:\+Having thus identified three levels of abstraction for speech encoding
+\mdash{} in terms of raw audio, of quantitative wave-form profiles, and
+natural language and prosody, respectively \mdash{} we can also
+observe that these levels apply not only to encoding audio as it is
+presented, but also modifying audio for the benefit of the hearing-impaired.
+\> Given the recording of a lecture or a conversation, for example,
+computer software could potentially generate an altered audio file
+which manipulates and clarifies the input data so as to generate an
+optimized version of the original speech data.
+\> In order to implement such alterations, it would then be necessary
+to identify how audio wave-forms should be transformed, which
+corresponds to the second level of abstraction: given the
+mathematical encoding of the original audio data, notate
+desired transformations such as modifying the pitch and/or sound level
+of certain audio segments (corresponding, for example, to
+individual words), elongating certain words, or creating the
+effect of an individual speaker's voice being amplified, modulated,
+or figuratively moved in space (see the Schneider et. al. citation on
+page 12).\;  [\+I also recommend https://www.aes.org/tmpFiles/elib/20201226/16830.pdf]
+Finally, at the natural-language level, the implementation
+of audio-manipulation technology may be aided by a representation
+of desired audio-transform effects as they are manifest in the abstract
+register of language and discourse, where we may notate that a
+given word, for instance, should be emphasized via changes in pitch,
+amplitude, and/or segment length.\;\<
+}
+
+\p{\:\+Phonetic qualities such as intonation,
+stress, and tempo are intrinsically bound to language
+\mdash{} when we speak of individual words or syllables being stressed, we are
+working in the conceptual framework afforded by language and its
+manifestation in human speech. \> However, this high-level conceptual
+layer provides the scaffolding wherein lower-level audio phenomena
+are generated.  \q{Speech,} as the enunciation of
+linguistic units (e.g., words and sentences) is an emergent phenomenon
+whose substrate is audible vocalizations, by analogy to how consciousness
+itself is an emergent property of the nervous system. \> As
+with any emergent phenomenon, the supervening register
+(whatever its material dependency on a subvening substratum)
+can only be scientifically understood, in full detail, within
+a conceptual framework whose theoretical posits quantify over
+concepts ontologically bound to the emergent register.
+\> In normal human speech, it is the brain which
+translates vocal intentions to audible sounds; in other
+words, the explanatory gap between the subvening and supervening
+registers can be closed, in principle, by examining how the
+brain formulates vocalizations in the presence of abstract linguistic
+intentions (sentences as immaterial structures). \> In the technological
+context, audio-enhancement software must replicate at least
+some of this neurocognitive activity: it must generate and/or
+manipulate audio data by emulating how the humans mind formulates speech.\;\<
+}
+
+\p{\:\+Given this overview, we see that representing transformations of
+speech-audio content should be
+distributed across several levels, retracing the levels
+of representation for speech itself. \> Each of these
+levels requires its own computational and representation models.
+\> A full description of representations at the audio and
+mathematical levels is outside the scope of this paper,
+but in this section I will discuss transform-representations
+at the more abstract language/discourse level. \> Specifically, I will
+examine how we can identify modulations in optimal
+speech patterns (\visavis{} understandability for the hearing-impaired)
+insofar as they may be observed and notated through the conceptual
+framework of language and prosody. \> Describing prosodic \textit{modifications}
+is a different process than notating the \texit{existing} speech patterns
+which are present in audio and/or transcribed records of speech occurances.
+\> For transcribing speech \textit{as is}, there are well-established formats
+such as SSML (Speech Synthesis Markup Language),
+Stem-ML (Soft Template Markup Language) and ToBI (this
+term derives from the acronym \q{tones and break indices}).
+\> While these formats achieve a detailed annotation of prosodic
+information supplemental to speech transcription (viz., annotated
+transcriptions do not merely record what was said as written
+text, but mark changes in pitch or tone, speaker alternation/overlap,
+sentence-boundary tones, and so forth) they are not intended for
+the further task of notating how a given speech artifact may be
+\textit{modified} to generate a new audio resources optimized, relative to
+the original, for persons who are hearing-impaired.\;\<
+}
+
+\p{\:\+Notating desired features of optimized/altered audio files is only the
+first step toward implementing \q{cognitive} hearing enhancement, but it is
+an important step, because effective audio manipulation can only be
+achieved within the context of analyzing which alterations are
+appropriate to improve understandability. \> Existing literature in speech
+technology has identified certain obvious alterations that
+can improve the quality of speech recordings (e.g., minimizing
+background noise or isolating individual speakers), but more
+subtle manipulation requires a
+more through understanding of the cognitive and linguistic background
+for speech processing. \> Our framework for investigating these more
+subtle enhancements
+cannot be developed primarily at the acoustical level (the
+register of speech as a quantitative wave-form) but rather
+must be conceptualized initially at the level of language and discourse.\;\<
+}
+
+\p{\:\+In order to demonstrate how prosodic markup may be extended to notate
+audio \textit{modifications}, I will present here several suggestions for
+extending prosodic encoding. \> This paper is accompanied by a code
+library which demonstrates these extensions by implementing a
+parser for prosody markup thereby enhanced. \> This library
+also includes features for constructing a research environment
+where audio enhancements may be empirically tested. \> Specifically,
+given a prior audio sample and an alternative rendering of the
+audio constructed according to notated modifications, the library
+may be used to process empirical data reflecting how well the
+modified version promotes understandability compared to the
+original version. \> The code is designed to be compatible with
+existing formats for testing audio/acoustic quality in the
+speech context, such as the Perceptual Objective Listening Quality
+Assessment (POLQA), Perceptual Evaluation of Speech Quality (PESQ),
+and Mean Opinion Scale (MOS) standards,
+which measure multiple facets of subjectively-experienced
+audio quality (including voice clarity, intrusiveness of
+background noise, clarity of individual words, etc.).\;\<
+}
+
+\vspace{2em}
+[Perhaps the markup could be demonstrated by annotating a 
+short audio sample.  We could use a program like Praaline to 
+create a small corpus that would be appended as Supplemental Material 
+to the main paper.]
