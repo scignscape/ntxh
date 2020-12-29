@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 
  mir.read_lines(R"(
 .; comment ... ;.
-gt-compile-file $ /home/nlevisrael/lgt/src/ideas.gt ;.
+gt-compile-file $ :archive /home/nlevisrael/lgt/src/ideas.gt ;.
                 )");
 
  mir.run_lines();

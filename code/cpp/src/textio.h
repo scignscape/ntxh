@@ -24,6 +24,34 @@
 KANS_(TextIO)
 
 
+inline QString make_inner_folder_from_file_name(QString folder_name, QString path)
+{
+ QFileInfo qfi(path);
+ QDir qd = qfi.absoluteDir();
+ if(qd.cd(folder_name))
+ {
+  qDebug() << "Folder already exists: " << qd.path();
+  return qd.path();
+ }
+ //QString new_path = qd.absolutePath() + "/" + folder_name;
+ if( qd.mkdir(folder_name) )
+ {
+  qd.cd(folder_name);
+  qDebug() << "Made folder: " << qd.path();
+  return qd.path();
+ }
+ if( qd.mkpath(folder_name) )
+ {
+  qd.cd(folder_name);
+  qDebug() << "Made folder (recursive): " << qd.path();
+  return qd.path();
+ }
+
+ qDebug() << "Could not make folder ...";
+ return {};
+}
+
+
 inline QString make_folder_from_file_name(QString path, QString folder)
 {
  QFileInfo qfi(path);

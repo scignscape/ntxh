@@ -12,27 +12,35 @@
 #include <QMultiMap>
 #include <QStack>
 
+#include <QSet>
+
 #include <functional>
 
 #include "accessors.h"
 
 #include "kans.h"
 
+KANS_CLASS_DECLARE(GTagML ,GTagML_Folder)
 
+USING_KANS(GTagML)
 //?#define MACRO_PASTE(...) __VA_ARGS__
 
 KANS_(DGH)
 
 class GTagML_Module
 {
+ QString gtagml_setup_;
 
- public:
+ void process_gtagml_file(QString path, QSet<QString> flagset, GTagML_Folder* fld);
 
-  GTagML_Module();
+public:
 
-  void compile_gt_file(QString args);
-  void compile_gt_folder(QString args);
-  void compile_gt_manuscript(QString args);
+ GTagML_Module();
+
+ void compile_gt_file(QString args);
+ void compile_gt_folder(QString args);
+ void compile_gt_manuscript(QString args);
+ void compile_gt_manuscript_file(QString args);
 
 
 };

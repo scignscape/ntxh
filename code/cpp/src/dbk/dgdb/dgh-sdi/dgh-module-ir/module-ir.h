@@ -15,6 +15,7 @@
 #include <functional>
 
 #include "accessors.h"
+#include "global-types.h"
 
 #include "kans.h"
 
@@ -55,6 +56,10 @@ public:
 
  ACCESSORS(std::function<void(QString&)> ,line_translate_fn)
  ACCESSORS(std::function<void(QString&)> ,cmd_translate_fn)
+
+ static QString first_non_flag_arg(const QStringList& qsl, QVector<QChar>& firsts, QMap<QString, u1>* flagset = nullptr);
+ static QString first_non_flag_arg(const QStringList& qsl, QString firsts, QMap<QString, u1>* flagset = nullptr);
+ static QString first_non_flag_arg(const QStringList& qsl, QMap<QString, u1>* flagset = nullptr);
 
 
 // void read_local_program(QString path);

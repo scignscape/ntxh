@@ -22,8 +22,56 @@ Module_IR::Module_IR()
   :  line_translate_fn_(nullptr),
      cmd_translate_fn_(nullptr)
 {
-
+ gtagml_module_ = new GTagML_Module;
 }
+
+QString Module_IR::first_non_flag_arg(const QStringList& qsl, QVector<QChar>& firsts, QMap<QString, u1>* flagset)
+{
+ u1 pos = 0;
+ for(QString qs : qsl)
+ {
+  if(qs.isEmpty())
+    continue;
+  ++pos;
+  int which = 0;
+  int count = 0;
+  for(QChar qc : firsts)
+  {
+   ++count;
+   if(qs.at(0) == qc)
+   {
+    which = count;
+    break;
+   }
+  }
+  if(which)
+  {
+   if(flagset)
+     (*flagset)[qs] = pos;
+   continue;
+  }
+  return qs;
+ }
+ return {};
+}
+
+QString Module_IR::first_non_flag_arg(const QStringList& qsl, QString firsts, QMap<QString, u1>* flagset)
+{
+ if(firsts.isEmpty())
+   return {};
+ QVector<QChar> qchars;
+ qchars.resize(firsts.length());
+// for(QChar qc : firsts)
+//   qchars << qc;
+ std::copy(firsts.begin(), firsts.end(), qchars.begin());
+ return first_non_flag_arg(qsl, qchars, flagset);
+}
+
+QString Module_IR::first_non_flag_arg(const QStringList& qsl, QMap<QString, u1>* flagset)
+{
+ return first_non_flag_arg(qsl, ":-", flagset);
+}
+
 
 void Module_IR::check_translate_line(QString& l)
 {

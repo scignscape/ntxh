@@ -54,13 +54,10 @@ class DGH_SDI_REPL_MainWindow : public QMainWindow
  void init_command_list();
  void run_command(u2 cmd_code, const QStringList& qsl);
 
- QString gtagml_setup_;
-
  Module_IR* mir_;
 
  QString lines_acc_;
 
- void process_gtagml_file(QString path, GTagML_Folder* fld);
 
 // QVBoxLayout* main_layout_;
 
