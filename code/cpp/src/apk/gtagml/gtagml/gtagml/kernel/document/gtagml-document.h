@@ -16,6 +16,7 @@
 
 #include "kernel/grammar/gtagml-parsing-mode.h"
 
+
 #include "gtagml-document-info.h"
 
 #include "accessors.h"
@@ -30,6 +31,8 @@ class GTagML_Parser;
 class GTagML_Grammar;
 class GTagML_Graph_Build;
 class GTagML_Word_Entry_List;
+
+class GTagML_Project_Info;
 
 class GTagML_Annotation_Tile;
 
@@ -57,12 +60,15 @@ class GTagML_Document
  GTagML_Parsing_Modes parsing_mode_;
 
  GTagML_Document_Info document_info_;
+ GTagML_Project_Info* project_info_;
 
  QString sdi_tag_command_info_path_;
 
  QTextStream* divert_;
 
  QString man_folder_path_;
+
+ QString top_level_path_;
 
 public:
 
@@ -73,6 +79,8 @@ public:
  ACCESSORS__GET(caon_ptr<GTagML_Grammar> ,grammar)
 
  ACCESSORS__RGET(GTagML_Document_Info ,document_info)
+ ACCESSORS(GTagML_Project_Info* ,project_info)
+
 
  ACCESSORS(annotations_type ,annotations)
 
@@ -83,14 +91,20 @@ public:
 
  ACCESSORS(QString ,man_folder_path)
 
+ ACCESSORS(QString ,top_level_path)
+
  ACCESSORS(QTextStream*, divert)
 
 
  GTagML_Document();
 
+ GTagML_Document(GTagML_Project_Info* gpi);
+
  ~GTagML_Document();
 
  QString get_path_root();
+
+ GTagML_Project_Info* init_project_info(QString folder = {});
 
  void check_sdi_tag_command_info();
 
@@ -104,6 +118,9 @@ public:
  void use_light_xml();
 
  QString file_name();
+
+ QString get_full_top_level_path();
+
 
  QString save_word_count();
  QString save_word_stream();

@@ -34,7 +34,8 @@ GTagML_Folder::GTagML_Folder(QString local_path)
 GTagML_Folder::GTagML_Folder(QString local_path, QString first_file_path, 
    QString man_path)
   : local_path_(local_path), 
-    first_file_path_(first_file_path), man_path_(man_path)
+    first_file_path_(first_file_path), man_path_(man_path),
+    project_info_(nullptr)
 {
 
 }
@@ -292,7 +293,8 @@ void GTagML_Folder::get_gtagml_files(QStringList& result, QString first_file)
 }
 
 
-void GTagML_Folder::convert_all_files(void(*fn)(QString, QString&, GTagML_Folder*))
+void GTagML_Folder::convert_all_files(void(*fn)(QString,
+  GTagML_Project_Info*, GTagML_Folder*))
 {
  QString first_file;
  if(!first_file_path_.isEmpty())
@@ -308,10 +310,10 @@ void GTagML_Folder::convert_all_files(void(*fn)(QString, QString&, GTagML_Folder
  }
  QStringList files;
  get_gtagml_files(files, first_file);
- QString setup;
+ //QString setup;
  for(QString f: files)
  {
-  fn(f, setup, this);
+  fn(f, project_info_, this);
  }
 }
 

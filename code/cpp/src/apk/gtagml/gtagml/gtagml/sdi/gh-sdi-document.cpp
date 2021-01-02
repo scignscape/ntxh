@@ -32,7 +32,8 @@ GH_SDI_Document::GH_SDI_Document()
 
 }
 
-void GH_SDI_Document::setup_folder_from_template(QString file_name, QString template_folder, QString folder)
+void GH_SDI_Document::setup_folder_from_template(QString file_name,
+  QString template_folder, QString folder, QString topl)
 {
  QDir qd(folder);
  qd.mkdir("out");
@@ -58,7 +59,10 @@ void GH_SDI_Document::setup_folder_from_template(QString file_name, QString temp
 
  pdfl.replace("%R%", ROOT_FOLDER);
 
- pdfl.replace("%F%", file_name);
+ if(topl.isEmpty())
+   pdfl.replace("%F%", file_name);
+ else
+   pdfl.replace("%F%", topl);
  save_file(qd.absoluteFilePath("run-pdflatex.sh"), pdfl);
 }
 

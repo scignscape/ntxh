@@ -9,6 +9,9 @@
 
 #include "qh-node-data.h"
 
+#include "qh-hypernode.h"
+
+
 Qh_Pack_Reader::Qh_Pack_Reader(Qh_Bundle_Code& bundle_code, const QVector<u1>& data,
   Qh_Node_Data* node_data)
   :  bundle_code_(bundle_code), node_data_(node_data), data_(data),
@@ -16,6 +19,14 @@ Qh_Pack_Reader::Qh_Pack_Reader(Qh_Bundle_Code& bundle_code, const QVector<u1>& d
 {
 
 }
+
+Qh_Pack_Reader::Qh_Pack_Reader(Qh_Bundle_Code& bundle_code, const Qh_Hypernode& qhn)
+  :  Qh_Pack_Reader(bundle_code, qhn.data(), qhn.node_data())
+{
+
+}
+
+
 
 u1 Qh_Pack_Reader::read_data_1(u4 index)
 {
@@ -52,10 +63,11 @@ n8 Qh_Pack_Reader::read_data_8(u4 index)
 
 QVariant Qh_Pack_Reader::read_value()
 {
- // //  skip over array ...
- QPair<u1, Qh_Bundle_Code::Type_Hints> pr = bundle_code_.get_requirements(current_index_ + 1);
-
  ++current_index_;
+ u2 ci = bundle_code_.check_index_to_array(current_index_);
+
+ QPair<u1, Qh_Bundle_Code::Type_Hints> pr = bundle_code_.get_requirements(ci);
+
  u4 cbi = current_byte_index_;
 
  switch (pr.second)

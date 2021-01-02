@@ -11,6 +11,8 @@
 
 #include "qh-node-data.h"
 
+#include "qh-hypernode.h"
+
 
 Qh_Pack_Builder::Qh_Pack_Builder(Qh_Bundle_Code& bundle_code)
   :  bundle_code_(bundle_code), current_bit_index_(0),
@@ -21,9 +23,15 @@ Qh_Pack_Builder::Qh_Pack_Builder(Qh_Bundle_Code& bundle_code)
      node_data_(nullptr),
      current_node_data_byte_index_(0),
      current_node_data_field_index_(0)
-
 {
 
+}
+
+
+Qh_Hypernode* Qh_Pack_Builder::as_hypernode()
+{
+ Qh_Hypernode* result = new Qh_Hypernode(data_, node_data_);
+ return result;
 }
 
 
@@ -35,7 +43,7 @@ void Qh_Pack_Builder::check_resize(u2 bytes_req)
 }
 
 
-void Qh_Pack_Builder::add_structure_value(QVariant qvar, u1 bytes_req, Qh_Bundle_Code::Type_Hints th)
+void Qh_Pack_Builder::add_structure_or_array_value(QVariant qvar, u1 bytes_req, Qh_Bundle_Code::Type_Hints th)
 {
  check_resize(bytes_req);
 
@@ -101,7 +109,7 @@ void Qh_Pack_Builder::init_node_data()
 }
 
 
-void Qh_Pack_Builder::add_structure_value_str(QString str, u1 bytes_req)
+void Qh_Pack_Builder::add_structure_or_array_value_str(QString str, u1 bytes_req)
 {
  if(bytes_req == 0)
  {
@@ -120,22 +128,38 @@ void Qh_Pack_Builder::add_structure_value_str(QString str, u1 bytes_req)
  }
 }
 
+void Qh_Pack_Builder::add_structure_or_array_value(QVariant qvar,
+  QPair<u1, Qh_Bundle_Code::Type_Hints> pr)
+{
+ switch (pr.second)
+ {
+ case Qh_Bundle_Code::Type_Hints::Chars_QString:
+  add_structure_or_array_value_str(qvar.toString(), pr.first);
+  break;
+ case Qh_Bundle_Code::Type_Hints::Signed:
+ case Qh_Bundle_Code::Type_Hints::Unsigned:
+  add_structure_or_array_value(qvar, pr.first, pr.second);
+  break;
+ }
+}
+
 
 u2 Qh_Pack_Builder::add_structure_value(QVariant qvar)
 {
  ++current_structure_value_index_;
  QPair<u1, Qh_Bundle_Code::Type_Hints> pr = bundle_code_.get_requirements(current_structure_value_index_);
-
- switch (pr.second)
- {
- case Qh_Bundle_Code::Type_Hints::Chars_QString:
-  add_structure_value_str(qvar.toString(), pr.first);
-  break;
- case Qh_Bundle_Code::Type_Hints::Signed:
- case Qh_Bundle_Code::Type_Hints::Unsigned:
-  add_structure_value(qvar, pr.first, pr.second);
-  break;
- }
-
+ add_structure_or_array_value(qvar, pr);
  return current_structure_value_index_;
 }
+
+
+u2 Qh_Pack_Builder::add_array_value(QVariant qvar)
+{
+ if(current_array_value_index_ == 0)
+   current_structure_value_boundary_ = current_byte_index_;
+ ++current_array_value_index_;
+ QPair<u1, Qh_Bundle_Code::Type_Hints> pr = bundle_code_.get_requirements(0);
+ add_structure_or_array_value(qvar, pr);
+ return current_array_value_index_;
+}
+

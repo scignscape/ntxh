@@ -10,8 +10,12 @@
 #include "qh-package/qh-pack-builder.h"
 #include "qh-package/qh-pack-reader.h"
 
+#include "qh-package/qh-hypernode.h"
+#include "qh-package/qh-hyperedge.h"
+
 
 #include <QDebug>
+
 
 int main(int argc, char* argv[])
 {
@@ -30,19 +34,60 @@ int main(int argc, char* argv[])
  qpb.add_structure_value(QVariant::fromValue(78));
  qpb.add_structure_value(QVariant::fromValue(QString("String")));
 
- Qh_Pack_Reader qpr(qbc, qpb.data(), qpb.node_data());
+ Qh_Hypernode* qhn = qpb.as_hypernode();
 
- QVariant qvar1 = qpr.read_value();
- QVariant qvar2 = qpr.read_value();
- QVariant qvar3 = qpr.read_value();
+ Qh_Bundle_Code qbc1;
+ qbc1.add_u4();
+ qbc1.add_n8();
+ qbc1.add_u4(1);
 
- u1 uu1 = qvar1.toUInt();
- u2 uu2 = qvar2.toUInt();
- QString str = qvar3.toString();
+ Qh_Pack_Builder qpb1(qbc1);
+ qpb1.add_structure_value(QVariant::fromValue(77));
+ qpb1.add_structure_value(QVariant::fromValue(78));
+ qpb1.add_array_value(QVariant::fromValue(177));
+ qpb1.add_array_value(QVariant::fromValue(278));
 
- qDebug() << "uu1 = " << uu1;
- qDebug() << "uu2 = " << uu2;
- qDebug() << "str = " << str;
+ Qh_Hypernode* qhn1 = qpb1.as_hypernode();
+
+// Qh_Hyperedge* qhe = new Qh_Hyperedge("generic-connection");
+// qhe->set_source(qhn);
+// qhe->set_source(qhn1);
+
+
+ qhn << *new Qh_Hyperedge("generic-connection") >> qhn1;
+
+
+// Qh_Pack_Reader qpr1(qbc1, *qhn1);
+
+// QVariant qvar1a = qpr1.read_value();
+// QVariant qvar2a = qpr1.read_value();
+// QVariant qvar3a = qpr1.read_value();
+// QVariant qvar4a = qpr1.read_value();
+
+// u1 uu1a = qvar1a.toUInt();
+// u2 uu2a = qvar2a.toUInt();
+// u1 uu3a = qvar3a.toUInt();
+// u2 uu4a = qvar4a.toUInt();
+
+// qDebug() << "uu1a = " << uu1a;
+// qDebug() << "uu2a = " << uu2a;
+// qDebug() << "uu3a = " << uu3a;
+// qDebug() << "uu4a = " << uu4a;
+
+
+// Qh_Pack_Reader qpr(qbc, *qhn);
+
+// QVariant qvar1 = qpr.read_value();
+// QVariant qvar2 = qpr.read_value();
+// QVariant qvar3 = qpr.read_value();
+
+// u1 uu1 = qvar1.toUInt();
+// u2 uu2 = qvar2.toUInt();
+// QString str = qvar3.toString();
+
+// qDebug() << "uu1 = " << uu1;
+// qDebug() << "uu2 = " << uu2;
+// qDebug() << "str = " << str;
 
 
 // qbc.each([](u1 code, Qh_Bundle_Code::Type_Hints th, u2 c)

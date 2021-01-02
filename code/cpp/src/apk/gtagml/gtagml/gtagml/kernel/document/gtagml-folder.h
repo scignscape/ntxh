@@ -29,6 +29,8 @@ class GTagML_Parser;
 class GTagML_Graph_Build;
 class GTagML_Grammar;
 class GTagML_Annotation_Tile;
+class GTagML_Project_Info;
+
 
 class GTagML_Folder
 {
@@ -49,6 +51,8 @@ class GTagML_Folder
  QMap<QString, QString> partials_codes_;
  QMap<QString, QString> non_partials_codes_;
 
+ GTagML_Project_Info* project_info_;
+
 public:
 
  GTagML_Folder(QString local_path = QString());
@@ -59,11 +63,13 @@ public:
  ACCESSORS(QString ,local_path)
  ACCESSORS(QString ,first_file_path)
  ACCESSORS(QString ,man_path)
+ ACCESSORS(GTagML_Project_Info* ,project_info)
 
  void convert_all_files();
  void convert_all_files(QString output_path, QString khif_path = QString());
 
- void convert_all_files(void(*fn)(QString, QString&, GTagML_Folder*));
+ void convert_all_files(void(*fn)(QString,
+   GTagML_Project_Info*, GTagML_Folder*));
 
 
  void read_output_path(QString document_file);

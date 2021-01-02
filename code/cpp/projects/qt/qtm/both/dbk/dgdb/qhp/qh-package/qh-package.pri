@@ -21,6 +21,8 @@ HEADERS += \
   $$SRC_DIR/qh-pack-builder.h  \
   $$SRC_DIR/qh-pack-reader.h  \
   $$SRC_DIR/qh-node-data.h  \
+  $$SRC_DIR/qh-hypernode.h  \
+  $$SRC_DIR/qh-hyperedge.h  \
 
 
 SOURCES += \
@@ -28,7 +30,8 @@ SOURCES += \
   $$SRC_DIR/qh-pack-builder.cpp  \
   $$SRC_DIR/qh-pack-reader.cpp  \
   $$SRC_DIR/qh-node-data.cpp  \
-
+  $$SRC_DIR/qh-hypernode.cpp  \
+  $$SRC_DIR/qh-hyperedge.cpp  \
 
 
 #LIBS += -L$$TARGETSDIR -lwhitedb  \

@@ -140,7 +140,7 @@ void Qh_Bundle_Code::add_u4(u2 array)
 
 void Qh_Bundle_Code::add_n8(u2 array)
 {
- u1 code = with_type_hint(2, Type_Hints::Unsigned);
+ u1 code = with_type_hint(3, Type_Hints::Unsigned);
 
  if(array)
    field_codes_[0] = code;

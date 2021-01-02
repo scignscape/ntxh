@@ -45,6 +45,7 @@ HEADERS += \
   $$SRC_DIR/kernel/document/gtagml-document.h \
   $$SRC_DIR/kernel/document/gtagml-document-info.h \
   $$SRC_DIR/kernel/document/gtagml-folder.h \
+  $$SRC_DIR/kernel/document/gtagml-project-info.h \
   $$SRC_DIR/kernel/dominion/connectors.h \
   $$SRC_DIR/kernel/dominion/types.h \
   $$SRC_DIR/kernel/frame/gtagml-frame.h \
@@ -97,6 +98,7 @@ SOURCES += \
   $$SRC_DIR/kernel/document/gtagml-document.cpp \
   $$SRC_DIR/kernel/document/gtagml-document-info.cpp \
   $$SRC_DIR/kernel/document/gtagml-folder.cpp \
+  $$SRC_DIR/kernel/document/gtagml-project-info.cpp \
   $$SRC_DIR/kernel/frame/gtagml-frame.cpp \
   $$SRC_DIR/kernel/grammar/gtagml-grammar.cpp \
   $$SRC_DIR/kernel/grammar/gtagml-graph-build.cpp \

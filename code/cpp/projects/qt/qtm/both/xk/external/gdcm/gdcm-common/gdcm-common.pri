@@ -106,3 +106,4 @@ SOURCES += \
   $$SRC_DIR/gdcmUnpacker12Bits.cxx \
   $$SRC_DIR/gdcmVersion.cxx \
 
+message(DD: $$DESTDIR)

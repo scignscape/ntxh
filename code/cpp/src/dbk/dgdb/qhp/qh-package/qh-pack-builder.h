@@ -23,6 +23,7 @@
 #include "qh-bundle-code.h"
 
 class Qh_Node_Data;
+class Qh_Hypernode;
 
 class Qh_Pack_Builder
 {
@@ -48,11 +49,17 @@ public:
  ACCESSORS__CONST_RGET(QVector<u1> ,data)
  ACCESSORS(Qh_Node_Data* ,node_data)
 
+ Qh_Hypernode* as_hypernode();
 
  u2 add_structure_value(QVariant qvar);
+ u2 add_array_value(QVariant qvar);
 
- void add_structure_value(QVariant qvar, u1 bytes_req, Qh_Bundle_Code::Type_Hints th);
- void add_structure_value_str(QString str, u1 bytes_req);
+ void add_structure_or_array_value(QVariant qvar,
+   QPair<u1, Qh_Bundle_Code::Type_Hints> pr);
+
+
+ void add_structure_or_array_value(QVariant qvar, u1 bytes_req, Qh_Bundle_Code::Type_Hints th);
+ void add_structure_or_array_value_str(QString str, u1 bytes_req);
 
  void init_node_data();
 

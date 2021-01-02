@@ -65,6 +65,11 @@ public:
 
  QPair<u1, Type_Hints> get_requirements(u2 index);
 
+ u2 check_index_to_array(u2 ix)
+ {
+  return (ix < field_codes_.size())? ix : 0;
+ }
+
 
 };
 

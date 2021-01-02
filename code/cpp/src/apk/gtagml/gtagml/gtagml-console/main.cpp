@@ -178,8 +178,8 @@ int main(int argc, char *argv[])
 
  // file.clear();
 
- manfolder.clear();
- file = "/home/nlevisrael/lehmann/gtagml/lehmann/ideas.gt";
+// manfolder.clear();
+// file = "/home/nlevisrael/lehmann/gtagml/lehmann/ideas.gt";
 
  if(manfolder.isEmpty())
  {

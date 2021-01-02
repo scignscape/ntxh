@@ -18,9 +18,13 @@
 
 #include "accessors.h"
 
+#include "global-types.h"
+
 #include "kans.h"
 
 KANS_CLASS_DECLARE(GTagML ,GTagML_Folder)
+KANS_CLASS_DECLARE(GTagML ,GTagML_Project_Info)
+
 
 USING_KANS(GTagML)
 //?#define MACRO_PASTE(...) __VA_ARGS__
@@ -29,9 +33,16 @@ KANS_(DGH)
 
 class GTagML_Module
 {
- QString gtagml_setup_;
 
- void process_gtagml_file(QString path, QSet<QString> flagset, GTagML_Folder* fld);
+ static void process_gtagml_file(QString path,
+   GTagML_Project_Info* gpi, GTagML_Folder* fld);
+
+ QString read_args(QString args); //, QMap<QString, u1>& flagset,
+  // QMap<QString, QString>& flagpairs, QSet<QString>& fs);
+
+ QSet<QString> current_flagset_;
+ QMap<QString, QString> current_flagpairs_;
+ QMap<QString, u1> current_flagset_pos_;
 
 public:
 
@@ -45,6 +56,6 @@ public:
 
 };
 
-_KANS(Phaon)
+_KANS(DGH)
 
-#endif // PHAON_IR__H
+#endif // GTAGML_MODULE__H

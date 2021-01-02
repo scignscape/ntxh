@@ -21,10 +21,19 @@ int main(int argc, char *argv[])
 {
  Module_IR mir;
 
+// mir.read_lines(R"(
+//gt-compile-manuscript $ /home/nlevisrael/gits/ntxh/wip-sebi/ctg/src/ctg.tex
+//  :manuscript /home/nlevisrael/gits/ntxh/wip-sebi/ctg/manuscript
+//                ;.
+//                )");
+
+
  mir.read_lines(R"(
 .; comment ... ;.
-gt-compile-file $ :archive /home/nlevisrael/lgt/src/ideas.gt ;.
+gt-compile-file $ :setup /home/nlevisrael/lgt/champs/src/proposal.gt
+  :top-level champs.tex ;.
                 )");
+
 
  mir.run_lines();
  return 0;

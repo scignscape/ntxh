@@ -24,6 +24,8 @@
 
 #include "tag-command/gtagml-tag-command.h"
 
+#include "gtagml-project-info.h"
+
 #include <QFileInfo>
 
 #include <QtAlgorithms>
@@ -39,9 +41,35 @@ USING_KANS(GTagML)
 
 GTagML_Document::GTagML_Document()
  : parsing_mode_(GTagML_Parsing_Modes::NGML),
-   graph_(nullptr), grammar_(nullptr), annotations_(nullptr), divert_(nullptr)
+   graph_(nullptr), grammar_(nullptr),
+   annotations_(nullptr), divert_(nullptr),
+   project_info_(nullptr)
 {
 
+}
+
+GTagML_Document::GTagML_Document(GTagML_Project_Info* gpi)
+ : parsing_mode_(GTagML_Parsing_Modes::NGML),
+   graph_(nullptr), grammar_(nullptr),
+   annotations_(nullptr), divert_(nullptr),
+   project_info_(gpi)
+{
+
+}
+
+
+GTagML_Project_Info* GTagML_Document::init_project_info(QString folder)
+{
+ project_info_ = new GTagML_Project_Info(folder);
+ return project_info_;
+}
+
+
+QString GTagML_Document::get_full_top_level_path()
+{
+ QFileInfo qfi(local_path_);
+
+ return qfi.absolutePath() + "/" + top_level_path_;
 }
 
 

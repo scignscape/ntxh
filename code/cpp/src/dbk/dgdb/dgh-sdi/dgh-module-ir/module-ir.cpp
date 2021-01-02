@@ -25,16 +25,23 @@ Module_IR::Module_IR()
  gtagml_module_ = new GTagML_Module;
 }
 
-QString Module_IR::first_non_flag_arg(const QStringList& qsl, QVector<QChar>& firsts, QMap<QString, u1>* flagset)
+
+QString Module_IR::first_non_flag_arg(const QStringList& qsl, QVector<QChar>& firsts,
+  QMap<QString, u1>* flagset, QMap<QString, QString>* flagpairs)
 {
  u1 pos = 0;
+ QString result;
+ bool have_result = false;
+ QString held_flag;
  for(QString qs : qsl)
  {
   if(qs.isEmpty())
     continue;
+
   ++pos;
   int which = 0;
   int count = 0;
+
   for(QChar qc : firsts)
   {
    ++count;
@@ -47,15 +54,42 @@ QString Module_IR::first_non_flag_arg(const QStringList& qsl, QVector<QChar>& fi
   if(which)
   {
    if(flagset)
-     (*flagset)[qs] = pos;
+   {
+    if(have_result)
+    {
+      // // have_result will only be true is flagpairs is non-null
+     if(!held_flag.isEmpty())
+       (*flagpairs)[held_flag] = QString{};
+     held_flag = qs;
+    }
+    else
+      (*flagset)[qs] = pos;
+   }
    continue;
   }
-  return qs;
+  if(flagpairs)
+  {
+   if(have_result)
+   {
+    if(flagpairs->contains(held_flag))
+      (*flagpairs)[held_flag] += "$$";
+    (*flagpairs)[held_flag] += qs;
+   }
+   else
+   {
+    have_result = true;
+    result = qs;
+   }
+  }
+  else
+    return qs;
  }
- return {};
+ return result;
 }
 
-QString Module_IR::first_non_flag_arg(const QStringList& qsl, QString firsts, QMap<QString, u1>* flagset)
+
+QString Module_IR::first_non_flag_arg(const QStringList& qsl, QString firsts,
+  QMap<QString, u1>* flagset, QMap<QString, QString>* flagpairs)
 {
  if(firsts.isEmpty())
    return {};
@@ -64,12 +98,13 @@ QString Module_IR::first_non_flag_arg(const QStringList& qsl, QString firsts, QM
 // for(QChar qc : firsts)
 //   qchars << qc;
  std::copy(firsts.begin(), firsts.end(), qchars.begin());
- return first_non_flag_arg(qsl, qchars, flagset);
+ return first_non_flag_arg(qsl, qchars, flagset, flagpairs);
 }
 
-QString Module_IR::first_non_flag_arg(const QStringList& qsl, QMap<QString, u1>* flagset)
+QString Module_IR::first_non_flag_arg(const QStringList& qsl,
+  QMap<QString, u1>* flagset, QMap<QString, QString>* flagpairs)
 {
- return first_non_flag_arg(qsl, ":-", flagset);
+ return first_non_flag_arg(qsl, ":-", flagset, flagpairs);
 }
 
 

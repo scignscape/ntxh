@@ -24,9 +24,16 @@
 \newcommand{\oldCCforCOL}{\catcode`:=\oldCCofCOL}
 \newcommand{\newCCforCOL}{\catcode`:=\newCCofCOL}
 
-\AtBeginDocument{\newCCforEXC\newCCforDASH}
+%\AtBeginDocument{\newCCforEXC\newCCforDASH}
 
 \oldCCforEXC\oldCCforDASH
 
-%\oldCCforCOL
+
+\usepackage{xparse}
+\NewDocumentCommand\vnegspace{s m}{%
+  \IfBooleanTF#1%
+    {\vspace*{-#2}} % star
+    {\vspace{-#2}} % no star
+}
+
 
