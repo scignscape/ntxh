@@ -70,12 +70,25 @@ QVariant Qh_Pack_Reader::read_value()
 
  u4 cbi = current_byte_index_;
 
+ u1 cue = pr.first;
+
+ if(cue > 20)
+ {
+  if(cue < 30)
+  {
+   current_byte_index_ += 4;
+   u4 start = read_data_4(cbi);
+   u4 end = start + 8;
+   return QVariant::fromValue(proxy_data_->read_pointer(start, end));
+  }
+ }
+
  switch (pr.second)
  {
  case Qh_Bundle_Code::Type_Hints::Unsigned:
   {
    current_byte_index_ += pr.first;
-   switch(pr.first)
+   switch(cue)
    {
    case 1: return QVariant::fromValue( read_data_1(cbi) );
    case 2: return QVariant::fromValue( read_data_2(cbi) );

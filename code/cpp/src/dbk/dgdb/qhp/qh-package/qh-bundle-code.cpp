@@ -18,7 +18,7 @@ Qh_Bundle_Code::Qh_Bundle_Code()
 // byte 3 = proxy
 // byte 4 = flag // interpert as enum (2, 4, 5 or 6 bits)
 // byte 5-7 = signed/unsigned/blob/text etc.
-// byte 8 = special return flag
+// byte 8 = special return/coproxy flag
 
 Qh_Bundle_Code::Type_Hints Qh_Bundle_Code::get_type_hint(u2 index)
 {
@@ -40,7 +40,26 @@ QPair<u1, Qh_Bundle_Code::Type_Hints> Qh_Bundle_Code::get_requirements(u2 index)
 {
  Type_Hints th = get_type_hint(index);
 
- u1 special = field_codes_[index] & 12;
+ u1 addon = 0;
+
+ u1 fc = field_codes_[index];
+
+ u1 special = fc & 12;
+
+ if(special & 4)
+ {
+  if(fc == 4)
+  {
+   addon = 20;
+   // // defauts to 4 bytes
+   fc |= 2;
+  }
+ }
+//  if(fc == 4)
+//  {
+//   return {20, Type_Hints::N_A};
+//  }
+// }
 
  if( (th == Type_Hints::N_A) && (special == 0) )
    th = Type_Hints::Unsigned;
@@ -48,15 +67,14 @@ QPair<u1, Qh_Bundle_Code::Type_Hints> Qh_Bundle_Code::get_requirements(u2 index)
  switch (th)
  {
  case Type_Hints::Chars_QString:
-  return {(field_codes_[index] & 3), th};
+  return {addon + (fc & 3), th};
  case Type_Hints::N_A:
  case Type_Hints::Unsigned:
  default:
   break;
  }
 
- return {1 << (field_codes_[index] & 3), th};
-
+ return {addon + (1 << (fc & 3)), th};
 }
 
 
@@ -96,9 +114,13 @@ QString Qh_Bundle_Code::get_type_hint_string(Type_Hints th)
 
 u1 Qh_Bundle_Code::with_type_hint(u1 cue, Type_Hints th)
 {
- return cue + (get_type_hint_code(th) << 4);
+ return cue | (get_type_hint_code(th) << 4);
 }
 
+u1 Qh_Bundle_Code::with_proxy_hint(u1 cue)
+{
+ return cue | 4;
+}
 
 
 QByteArray Qh_Bundle_Code::as_qba()
@@ -223,6 +245,17 @@ void Qh_Bundle_Code::add_r4(u2 array)
 void Qh_Bundle_Code::add_r8(u2 array)
 {
  u1 code = with_type_hint(3, Type_Hints::Real);
+
+ if(array)
+   field_codes_[0] = code;
+ else
+   field_codes_.push_back(code);
+}
+
+
+void Qh_Bundle_Code::add_proxy(u2 array)
+{
+ u1 code = with_proxy_hint(0);
 
  if(array)
    field_codes_[0] = code;

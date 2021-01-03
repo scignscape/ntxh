@@ -47,7 +47,9 @@ public:
  void add_str(u2 array = 0);
  void add_txn(u2 array = 0);
 
+ void add_proxy(u2 array = 0);
 
+ u1 with_proxy_hint(u1 cue);
  u1 with_type_hint(u1 cue, Type_Hints th);
 
  static u1 get_type_hint_code(Type_Hints th);

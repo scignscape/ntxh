@@ -39,11 +39,16 @@ int main(int argc, char* argv[])
  Qh_Bundle_Code qbc1;
  qbc1.add_u4();
  qbc1.add_n8();
+ qbc1.add_proxy();
  qbc1.add_u4(1);
 
  Qh_Pack_Builder qpb1(qbc1);
  qpb1.add_structure_value(QVariant::fromValue(77));
  qpb1.add_structure_value(QVariant::fromValue(78));
+
+ qpb1.init_proxy_data();
+ qpb1.add_structure_proxy_value(qhn);
+
  qpb1.add_array_value(QVariant::fromValue(177));
  qpb1.add_array_value(QVariant::fromValue(278));
 
@@ -57,15 +62,22 @@ int main(int argc, char* argv[])
  qhn << *new Qh_Hyperedge("generic-connection") >> qhn1;
 
 
-// Qh_Pack_Reader qpr1(qbc1, *qhn1);
+ Qh_Pack_Reader qpr1(qbc1, *qhn1);
 
-// QVariant qvar1a = qpr1.read_value();
-// QVariant qvar2a = qpr1.read_value();
-// QVariant qvar3a = qpr1.read_value();
-// QVariant qvar4a = qpr1.read_value();
+ qpr1.set_proxy_data(qpb1.proxy_data());
 
-// u1 uu1a = qvar1a.toUInt();
-// u2 uu2a = qvar2a.toUInt();
+ QVariant qvar1a = qpr1.read_value();
+ QVariant qvar2a = qpr1.read_value();
+ QVariant qvar3a = qpr1.read_value();
+ QVariant qvar4a = qpr1.read_value();
+
+ u1 uu1a = qvar1a.toUInt();
+ u2 uu2a = qvar2a.toUInt();
+
+ Qh_Hypernode* qhn2 = (Qh_Hypernode*) qvar3a.value<void*>();
+
+ qDebug() << ((qhn2 == qhn)? "yeah" : "nay");
+
 // u1 uu3a = qvar3a.toUInt();
 // u2 uu4a = qvar4a.toUInt();
 

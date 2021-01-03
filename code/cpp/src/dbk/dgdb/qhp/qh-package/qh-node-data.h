@@ -16,6 +16,7 @@
 
 #include "global-types.h"
 
+
 //class Qh_Bundle_Code;
 
 
@@ -34,6 +35,12 @@ public:
  QPair<u4, u4> add_str(const QString& str);
 
  QString read_str(u4 start, u4 end);
+
+ QPair<u4, u4> add_pointer(void* ptr);
+
+ void* read_pointer(u4 start, u4 end);
+
+ u4 check_resize(u4 start, u4 amount);
 
 };
 

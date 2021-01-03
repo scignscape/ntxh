@@ -22,7 +22,9 @@ Qh_Pack_Builder::Qh_Pack_Builder(Qh_Bundle_Code& bundle_code)
      current_structure_value_boundary_(0),
      node_data_(nullptr),
      current_node_data_byte_index_(0),
-     current_node_data_field_index_(0)
+     current_node_data_field_index_(0),
+     current_proxy_data_byte_index_(0),
+     current_proxy_data_field_index_(0)
 {
 
 }
@@ -108,6 +110,10 @@ void Qh_Pack_Builder::init_node_data()
  node_data_ = new Qh_Node_Data;
 }
 
+void Qh_Pack_Builder::init_proxy_data()
+{
+ proxy_data_ = new Qh_Node_Data;
+}
 
 void Qh_Pack_Builder::add_structure_or_array_value_str(QString str, u1 bytes_req)
 {
@@ -143,6 +149,31 @@ void Qh_Pack_Builder::add_structure_or_array_value(QVariant qvar,
  }
 }
 
+
+u2 Qh_Pack_Builder::add_structure_proxy_value(Qh_Hypernode* qhn)
+{
+ ++current_structure_value_index_;
+ QPair<u1, Qh_Bundle_Code::Type_Hints> pr = bundle_code_.get_requirements(current_structure_value_index_);
+ //add_structure_or_array_value(qvar, pr);
+ u1 precue = pr.first;
+ u1 cue = 0;
+ if(precue > 20)
+ {
+  if(precue < 30)
+    cue = precue - 20;
+ }
+ switch(cue)
+ {
+ case 4:
+   // store in proxy_data_ as just a pointer
+  {
+   QPair<u4, u4> se = proxy_data_->add_pointer(qhn);
+   add_structure_or_array_value(QVariant::fromValue(se.first), 4);
+  }
+ }
+
+ return current_structure_value_index_;
+}
 
 u2 Qh_Pack_Builder::add_structure_value(QVariant qvar)
 {
