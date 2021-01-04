@@ -5,8 +5,8 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef QH_BUNDLE_CODE__H
-#define QH_BUNDLE_CODE__H
+#ifndef QH_PACK_CODE__H
+#define QH_PACK_CODE__H
 
 #include <QByteArray>
 
@@ -15,7 +15,7 @@
 #include "global-types.h"
 
 
-class Qh_Bundle_Code
+class Qh_Pack_Code
 {
  QVector<u1> field_codes_;
 
@@ -27,27 +27,27 @@ public:
    Chars_Encoded, Blob, Opaque, Enum, Unsigned
  };
 
- Qh_Bundle_Code();
+ Qh_Pack_Code();
 
- void add_u1(u2 array = 0);
- void add_u2(u2 array = 0);
- void add_u4(u2 array = 0);
- void add_n8(u2 array = 0);
+ Qh_Pack_Code& add_u1(u2 array = 0);
+ Qh_Pack_Code& add_u2(u2 array = 0);
+ Qh_Pack_Code& add_u4(u2 array = 0);
+ Qh_Pack_Code& add_n8(u2 array = 0);
 
- void add_s1(u2 array = 0);
- void add_s2(u2 array = 0);
- void add_s4(u2 array = 0);
- void add_s8(u2 array = 0);
+ Qh_Pack_Code& add_s1(u2 array = 0);
+ Qh_Pack_Code& add_s2(u2 array = 0);
+ Qh_Pack_Code& add_s4(u2 array = 0);
+ Qh_Pack_Code& add_s8(u2 array = 0);
 
- void add_ratio(u2 array = 0);
- void add_posit(u2 array = 0);
- void add_r4(u2 array = 0);
- void add_r8(u2 array = 0);
+ Qh_Pack_Code& add_ratio(u2 array = 0);
+ Qh_Pack_Code& add_posit(u2 array = 0);
+ Qh_Pack_Code& add_r4(u2 array = 0);
+ Qh_Pack_Code& add_r8(u2 array = 0);
 
- void add_str(u2 array = 0);
- void add_txn(u2 array = 0);
+ Qh_Pack_Code& add_str(u2 array = 0);
+ Qh_Pack_Code& add_txn(u2 array = 0);
 
- void add_proxy(u2 array = 0);
+ Qh_Pack_Code& add_proxy(u2 array = 0);
 
  u1 with_proxy_hint(u1 cue);
  u1 with_type_hint(u1 cue, Type_Hints th);
@@ -76,6 +76,6 @@ public:
 };
 
 
-#endif // QH_BUNDLE_CODE__H
+#endif // QH_PACK_CODE__H
 
 

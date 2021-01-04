@@ -20,14 +20,14 @@
 
 //class Qh_Bundle_Code;
 
-#include "qh-bundle-code.h"
+#include "qh-pack-code.h"
 
 class Qh_Node_Data;
 class Qh_Hypernode;
 
 class Qh_Pack_Builder
 {
- Qh_Bundle_Code& bundle_code_;
+ Qh_Pack_Code& pack_code_;
 
  u1 current_bit_index_;
  u4 current_byte_index_;
@@ -49,7 +49,7 @@ class Qh_Pack_Builder
 
 public:
 
- Qh_Pack_Builder(Qh_Bundle_Code& bundle_code);
+ Qh_Pack_Builder(Qh_Pack_Code& pack_code);
 
  ACCESSORS__CONST_RGET(QVector<u1> ,data)
  ACCESSORS(Qh_Node_Data* ,node_data)
@@ -58,17 +58,42 @@ public:
 
  Qh_Hypernode* as_hypernode();
 
- u2 add_structure_proxy_value(Qh_Hypernode* qhn);
+ Qh_Pack_Builder& add_structure_proxy_value(Qh_Hypernode* qhn);
+ Qh_Pack_Builder& add_array_proxy_value(Qh_Hypernode* qhn);
 
- u2 add_structure_value(QVariant qvar);
- u2 add_array_value(QVariant qvar);
+ Qh_Pack_Builder& add_sv_proxy(Qh_Hypernode* qhn)
+ {
+  return add_structure_proxy_value(qhn);
+ }
+ Qh_Pack_Builder& add_av_proxy(Qh_Hypernode* qhn)
+ {
+  return add_array_proxy_value(qhn);
+ }
+
+ void add_structure_or_array_proxy_value(Qh_Hypernode* qhn, u2 index);
+
+ Qh_Pack_Builder& add_structure_value(QVariant qvar);
+ Qh_Pack_Builder& add_array_value(QVariant qvar);
+
+ template<typename VARIANT_Type>
+ Qh_Pack_Builder& add_sv(const VARIANT_Type& var)
+ {
+  return add_structure_value(QVariant::fromValue(var));
+ }
+
+ template<typename VARIANT_Type>
+ Qh_Pack_Builder& add_av(const VARIANT_Type& var)
+ {
+  return add_array_value(QVariant::fromValue(var));
+ }
+
 
  void add_structure_or_array_value(QVariant qvar,
-   QPair<u1, Qh_Bundle_Code::Type_Hints> pr);
+   QPair<u1, Qh_Pack_Code::Type_Hints> pr);
 
 
  void add_structure_or_array_value(QVariant qvar, u1 bytes_req,
-   Qh_Bundle_Code::Type_Hints th = Qh_Bundle_Code::Type_Hints::N_A);
+   Qh_Pack_Code::Type_Hints th = Qh_Pack_Code::Type_Hints::N_A);
  void add_structure_or_array_value_str(QString str, u1 bytes_req);
 
  void init_node_data();

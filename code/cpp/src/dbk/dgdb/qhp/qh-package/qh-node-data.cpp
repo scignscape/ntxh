@@ -39,6 +39,12 @@ QPair<u4, u4> Qh_Node_Data::add_str(const QString& str)
 }
 
 
+void Qh_Node_Data::add_array_proxy_value(u4 data_start, u4 data_end)
+{
+
+}
+
+
 QPair<u4, u4> Qh_Node_Data::add_pointer(void* ptr)
 {
  u4 start = (u4) data_.size();

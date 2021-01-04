@@ -16,11 +16,7 @@
 
 #include "global-types.h"
 
-
-//class Qh_Bundle_Code;
-
-
-#include "qh-bundle-code.h"
+#include "qh-pack-code.h"
 
 class Qh_Node_Data
 {
@@ -41,6 +37,13 @@ public:
  void* read_pointer(u4 start, u4 end);
 
  u4 check_resize(u4 start, u4 amount);
+
+ QPair<u4, u4> get_last_offset()
+ {
+  return offsets_.last();
+ }
+
+ void add_array_proxy_value(u4 data_start, u4 data_end);
 
 };
 

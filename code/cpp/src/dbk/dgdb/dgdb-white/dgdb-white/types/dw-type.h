@@ -225,7 +225,7 @@ public:
  {
   return set_static_opaque_encoder(default_binary_encoder
      <VALUE_Type>(pt) );
-  return *this;
+  //return *this;
  }
 
 

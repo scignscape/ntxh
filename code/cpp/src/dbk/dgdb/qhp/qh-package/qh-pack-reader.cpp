@@ -12,16 +12,16 @@
 #include "qh-hypernode.h"
 
 
-Qh_Pack_Reader::Qh_Pack_Reader(Qh_Bundle_Code& bundle_code, const QVector<u1>& data,
+Qh_Pack_Reader::Qh_Pack_Reader(Qh_Pack_Code& pack_code, const QVector<u1>& data,
   Qh_Node_Data* node_data)
-  :  bundle_code_(bundle_code), node_data_(node_data), data_(data),
+  :  pack_code_(pack_code), node_data_(node_data), data_(data),
      current_index_(0), current_byte_index_(0)
 {
 
 }
 
-Qh_Pack_Reader::Qh_Pack_Reader(Qh_Bundle_Code& bundle_code, const Qh_Hypernode& qhn)
-  :  Qh_Pack_Reader(bundle_code, qhn.data(), qhn.node_data())
+Qh_Pack_Reader::Qh_Pack_Reader(Qh_Pack_Code& pack_code, const Qh_Hypernode& qhn)
+  :  Qh_Pack_Reader(pack_code, qhn.data(), qhn.node_data())
 {
 
 }
@@ -64,9 +64,9 @@ n8 Qh_Pack_Reader::read_data_8(u4 index)
 QVariant Qh_Pack_Reader::read_value()
 {
  ++current_index_;
- u2 ci = bundle_code_.check_index_to_array(current_index_);
+ u2 ci = pack_code_.check_index_to_array(current_index_);
 
- QPair<u1, Qh_Bundle_Code::Type_Hints> pr = bundle_code_.get_requirements(ci);
+ QPair<u1, Qh_Pack_Code::Type_Hints> pr = pack_code_.get_requirements(ci);
 
  u4 cbi = current_byte_index_;
 
@@ -85,7 +85,7 @@ QVariant Qh_Pack_Reader::read_value()
 
  switch (pr.second)
  {
- case Qh_Bundle_Code::Type_Hints::Unsigned:
+ case Qh_Pack_Code::Type_Hints::Unsigned:
   {
    current_byte_index_ += pr.first;
    switch(cue)
@@ -98,7 +98,7 @@ QVariant Qh_Pack_Reader::read_value()
   }
   break;
 
- case Qh_Bundle_Code::Type_Hints::Chars_QString:
+ case Qh_Pack_Code::Type_Hints::Chars_QString:
   {
    switch(pr.first)
    {

@@ -5,7 +5,7 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#include "qh-package/qh-bundle-code.h"
+#include "qh-package/qh-pack-code.h"
 
 #include "qh-package/qh-pack-builder.h"
 #include "qh-package/qh-pack-reader.h"
@@ -13,30 +13,41 @@
 #include "qh-package/qh-hypernode.h"
 #include "qh-package/qh-hyperedge.h"
 
+#include "qh-package/qh-hyperedge-dominion.h"
+
+#include "qh-package/qh-node-frame.h"
+
+#include "qh-package/qh-class-object.h"
+
+#include "qh-package/runtime/qh-runtime.h"
+#include "qh-package/runtime/qh-type-system.h"
+#include "qh-package/runtime/qh-type.h"
+
 
 #include <QDebug>
+
+#include "test-class.h"
 
 
 int main(int argc, char* argv[])
 {
- Qh_Bundle_Code qbc;
+ Qh_Runtime qhr;
+ Qh_Type_System* qht = qhr.type_system();
 
- qbc.add_u2();
- qbc.add_u1();
- qbc.add_str();
 
- Qh_Pack_Builder qpb(qbc);
+// Qh_Class_Object qco("Test_Class");
+// qco.pack_code() = qbc;
 
- // // need node data for the string ...
- qpb.init_node_data();
+ qht->REGISTER_TYPE(Test_Class)
+   .defpack(&Test_Class::init_pack_code)
+   .set_pack_encoder(&Test_Class::supply_pack);
+//   .set_qh_class_object(&qco);
 
- qpb.add_structure_value(QVariant::fromValue(77));
- qpb.add_structure_value(QVariant::fromValue(78));
- qpb.add_structure_value(QVariant::fromValue(QString("String")));
 
- Qh_Hypernode* qhn = qpb.as_hypernode();
 
- Qh_Bundle_Code qbc1;
+ Qh_Hypernode* qhn;// = qpb.as_hypernode();
+
+ Qh_Pack_Code qbc1;
  qbc1.add_u4();
  qbc1.add_n8();
  qbc1.add_proxy();
@@ -58,8 +69,12 @@ int main(int argc, char* argv[])
 // qhe->set_source(qhn);
 // qhe->set_source(qhn1);
 
+ Qh_Node_Frame& qnf = *new Qh_Node_Frame;
 
- qhn << *new Qh_Hyperedge("generic-connection") >> qhn1;
+ Qh_Hyperedge_Dominion qhd; //("generic-connection");
+ qhd.add_label("generic-connection", "gen");
+
+ qhn << qnf/qhd("gen") >> qhn1;
 
 
  Qh_Pack_Reader qpr1(qbc1, *qhn1);
@@ -102,9 +117,9 @@ int main(int argc, char* argv[])
 // qDebug() << "str = " << str;
 
 
-// qbc.each([](u1 code, Qh_Bundle_Code::Type_Hints th, u2 c)
+// qbc.each([](u1 code, Qh_Pack_Code::Type_Hints th, u2 c)
 // {
-//  qDebug() << "code = " << '(' << Qh_Bundle_Code::get_type_hint_string(th) << ") " << code;
+//  qDebug() << "code = " << '(' << Qh_Pack_Code::get_type_hint_string(th) << ") " << code;
 //  return c;
 // });
 

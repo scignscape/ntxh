@@ -20,10 +20,13 @@ DEFINES += USE_KANS
 
 
 HEADERS += \
+  $$SRC_DIR/test-class.h  \
 
 
 SOURCES += \
   $$SRC_DIR/main.cpp  \
+  $$SRC_DIR/test-class.cpp  \
+
 
 
 LIBS += -L$$TARGETSDIR -lqh-package

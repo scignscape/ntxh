@@ -19,9 +19,11 @@
 #include "accessors.h"
 //class Qh_Bundle_Code;
 
-#include "qh-bundle-code.h"
+#include "qh-pack-code.h"
 
 class Qh_Hypernode;
+class Qh_Node_Frame;
+class Qh_Node_Data;
 
 class Qh_Hyperedge
 {
@@ -44,15 +46,18 @@ public:
 
  ACCESSORS(n8 ,supplement)
 
+ static QPair<Qh_Hypernode*, Qh_Node_Data*> new_hypernode_from_proxy(Qh_Hypernode* proxied);
+ static Qh_Node_Frame* new_node_frame(Qh_Hypernode* start_node, Qh_Node_Data* proxy_data);
+
 };
 
-Qh_Hyperedge& operator << (Qh_Hypernode* lhs, Qh_Hyperedge& rhs)
+inline Qh_Hyperedge& operator << (Qh_Hypernode* lhs, Qh_Hyperedge& rhs)
 {
  rhs.set_source(lhs);
  return rhs;
 }
 
-Qh_Hyperedge& operator >> (Qh_Hyperedge& lhs, Qh_Hypernode* rhs)
+inline Qh_Hyperedge& operator >> (Qh_Hyperedge& lhs, Qh_Hypernode* rhs)
 {
  if(lhs.target())
  {
@@ -65,7 +70,20 @@ Qh_Hyperedge& operator >> (Qh_Hyperedge& lhs, Qh_Hypernode* rhs)
  return lhs;
 }
 
-
+inline Qh_Node_Frame& operator >>= (Qh_Hyperedge& lhs, Qh_Hypernode* rhs)
+{
+ if(lhs.target())
+ {
+  //lhs.target()
+ }
+ else
+ {
+  QPair<Qh_Hypernode*, Qh_Node_Data*> target = Qh_Hyperedge::new_hypernode_from_proxy(rhs);
+  return *Qh_Hyperedge::new_node_frame(target.first, target.second);
+ }
+ //lhs.set_target(rhs);
+ // return lhs;
+}
 
 #endif // QH_HYPEREDGE__H
 

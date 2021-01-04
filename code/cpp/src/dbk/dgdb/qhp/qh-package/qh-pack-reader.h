@@ -16,7 +16,7 @@
 
 #include "global-types.h"
 
-#include "qh-bundle-code.h"
+#include "qh-pack-code.h"
 
 #include "accessors.h"
 
@@ -26,7 +26,7 @@ class Qh_Hypernode;
 
 class Qh_Pack_Reader
 {
- Qh_Bundle_Code& bundle_code_;
+ Qh_Pack_Code& pack_code_;
  Qh_Node_Data* node_data_;
  Qh_Node_Data* proxy_data_;
 
@@ -37,10 +37,10 @@ class Qh_Pack_Reader
 
 public:
 
- Qh_Pack_Reader(Qh_Bundle_Code& bundle_code, const QVector<u1>& data,
+ Qh_Pack_Reader(Qh_Pack_Code& pack_code, const QVector<u1>& data,
    Qh_Node_Data* node_data = nullptr);
 
- Qh_Pack_Reader(Qh_Bundle_Code& bundle_code, const Qh_Hypernode& qhn);
+ Qh_Pack_Reader(Qh_Pack_Code& pack_code, const Qh_Hypernode& qhn);
 
  ACCESSORS(Qh_Node_Data* ,proxy_data)
 
