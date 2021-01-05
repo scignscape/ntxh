@@ -16,11 +16,17 @@
 
 #include "accessors.h"
 
+#include "qh-type-system.h"
+#include "qh-type.h"
+
 class Qh_Type_System;
+class Qh_Hypernode;
 
 class Qh_Runtime
 {
  Qh_Type_System* type_system_;
+
+ Qh_Hypernode* new_hypernode(void* pv, Qh_Type* qht);
 
 public:
 
@@ -28,6 +34,16 @@ public:
 
 
  ACCESSORS(Qh_Type_System* ,type_system)
+
+ template<typename VERTEX_Type>
+ Qh_Hypernode* new_hypernode(VERTEX_Type* v)
+ {
+  QString ctn = QString::fromStdString(typeid(VERTEX_Type).name());
+  QString res;
+  Qh_Type* qht = type_system_->get_type_by_name(ctn, &res);
+  return new_hypernode(v, qht);
+  //Qh_Hypernode* new_hypernode
+ }
 
 };
 

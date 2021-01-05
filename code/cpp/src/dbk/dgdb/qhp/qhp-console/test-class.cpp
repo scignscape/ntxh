@@ -14,7 +14,7 @@
 
 
 Test_Class::Test_Class()
- : a_number_(0)
+ : a_number_(0), as_hypernode(nullptr)
 {
 
 }

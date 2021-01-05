@@ -43,9 +43,13 @@ int main(int argc, char* argv[])
    .set_pack_encoder(&Test_Class::supply_pack);
 //   .set_qh_class_object(&qco);
 
+ Test_Class tc;
+ tc.set_a_number(33);
+ tc.set_a_string("xxx");
 
+ Qh_Hypernode* qhn = qhr.new_hypernode(&tc);
 
- Qh_Hypernode* qhn;// = qpb.as_hypernode();
+   //;// = qpb.as_hypernode();
 
  Qh_Pack_Code qbc1;
  qbc1.add_u4();

@@ -18,6 +18,7 @@
 class Qh_Pack_Builder;
 class Qh_Pack_Reader;
 class Qh_Pack_Code;
+class Qh_Hypernode;
 
 
 class Test_Class
@@ -31,6 +32,8 @@ public:
 
  ACCESSORS(QString ,a_string)
  ACCESSORS(u4 ,a_number)
+
+ Qh_Hypernode* (*as_hypernode)();
 
  static void init_pack_code(Qh_Pack_Code& qpc);
 
