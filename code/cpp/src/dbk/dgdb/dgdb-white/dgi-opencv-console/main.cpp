@@ -19,11 +19,11 @@ int main(int argc, char *argv[])
 
  QApplication qapp(argc, argv);
 
-// DGI_Image dgi(DEFAULT_DGI_FOLDER "/img.jpg");
+ DGI_Image dgi(DEFAULT_DGI_FOLDER "/img.jpg");
 
 // DGI_Image dgi(DEFAULT_DGI_FOLDER "/img1.jpg");
 
- DGI_Image dgi(DEFAULT_DGI_FOLDER "/AT20-0131A111.png");
+// DGI_Image dgi(DEFAULT_DGI_FOLDER "/AT20-0131A111.png");
 
  dgi.load();
 

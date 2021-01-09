@@ -2,6 +2,8 @@
 #include "itkImageFileWriter.h"
 #include "itkValuedRegionalMaximaImageFilter.h"
 
+#include "itkPNGImageIOFactory.h"
+
 
 using ImageType = itk::Image<unsigned char, 2>;
 
@@ -11,6 +13,8 @@ CreateImage(ImageType::Pointer image);
 int
 main(int, char *[])
 {
+  itk::PNGImageIOFactory::RegisterOneFactory();
+
   ImageType::Pointer image = ImageType::New();
   CreateImage(image);
 
@@ -26,7 +30,7 @@ main(int, char *[])
   writer->SetInput(image);
   writer->Update();
 
-  writer->SetFileName("maximal.png");
+  writer->SetFileName(SRC_FOLDER "/maximal.png");
   writer->SetInput(filter->GetOutput());
   writer->Update();
 

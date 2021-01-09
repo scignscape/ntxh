@@ -5,10 +5,10 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#include "qh-class-object.h"
+#include "qh-field-info.h"
 
 
-Qh_Class_Object::Qh_Class_Object(QString name)
+Qh_Field_Info::Qh_Field_Info(QString name)
   :  name_(name)
 {
 

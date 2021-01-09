@@ -16,6 +16,14 @@ DGI_Demo_Frame::DGI_Demo_Frame(Demo_Transform_Group& dtg,
      image_height_(image_height),
      large_image_height_(large_image_height)
 {
+
+// DGI_Image*
+
+//     DGI_Image* circles;
+// DGI_Image* approx_poly;
+// DGI_Image* hull_poly;
+// DGI_Image* hull_poly_color_mean;
+
  main_layout_ = new QHBoxLayout;
  left_layout_ = new QGridLayout;
 
@@ -76,6 +84,20 @@ DGI_Demo_Frame::DGI_Demo_Frame(Demo_Transform_Group& dtg,
  {
   large_images_->setCurrentIndex(-i - 2);
  });
+
+
+ QString p = dtg.src->path();
+
+ qDebug() << "Path = " << p;
+
+ QImage* i1 = dtg.draw_contours->image;
+ i1->save("/home/nlevisrael/gits/ntxh/wip-sebi/ar/dev/consoles/dgi/images/i1.jpg");
+ QImage* i2 = dtg.circles->image;
+ i2->save("/home/nlevisrael/gits/ntxh/wip-sebi/ar/dev/consoles/dgi/images/i2.jpg");
+ QImage* i3 = dtg.hull_poly->image;
+ i3->save("/home/nlevisrael/gits/ntxh/wip-sebi/ar/dev/consoles/dgi/images/i3.jpg");
+ QImage* i4 = dtg.hull_poly_color_mean->image;
+ i4->save("/home/nlevisrael/gits/ntxh/wip-sebi/ar/dev/consoles/dgi/images/i4.jpg");
 
  main_layout_->addLayout(left_layout_);
 

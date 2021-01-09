@@ -22,6 +22,7 @@ HEADERS += \
   $$SRC_DIR/qh-pack-reader.h  \
   $$SRC_DIR/qh-node-data.h  \
   $$SRC_DIR/qh-class-object.h  \
+  $$SRC_DIR/qh-field-info.h  \
   $$SRC_DIR/qh-node-frame.h  \
   $$SRC_DIR/qh-hypernode.h  \
   $$SRC_DIR/qh-hyperedge.h  \
@@ -37,6 +38,7 @@ SOURCES += \
   $$SRC_DIR/qh-pack-reader.cpp  \
   $$SRC_DIR/qh-node-data.cpp  \
   $$SRC_DIR/qh-class-object.cpp  \
+  $$SRC_DIR/qh-field-info.cpp  \
   $$SRC_DIR/qh-node-frame.cpp  \
   $$SRC_DIR/qh-hypernode.cpp  \
   $$SRC_DIR/qh-hyperedge.cpp  \

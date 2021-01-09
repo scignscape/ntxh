@@ -48,6 +48,8 @@ public:
  Qh_Pack_Code& add_txn(u2 array = 0);
 
  Qh_Pack_Code& add_proxy(u2 array = 0);
+ Qh_Pack_Code& add_opaque(u2 array = 0);
+
 
  u1 with_proxy_hint(u1 cue);
  u1 with_type_hint(u1 cue, Type_Hints th);

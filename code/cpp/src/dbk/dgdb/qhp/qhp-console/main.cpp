@@ -28,20 +28,50 @@
 
 #include "test-class.h"
 
+#include "sdi/language-sample.h"
+
+#include "qh/local.h"
+
+USING_KANS(GHL)
 
 int main(int argc, char* argv[])
 {
  Qh_Runtime qhr;
  Qh_Type_System* qht = qhr.type_system();
 
+ Qh_Local* lcl = new Qh_Local("demo");
+
 
 // Qh_Class_Object qco("Test_Class");
 // qco.pack_code() = qbc;
 
- qht->REGISTER_TYPE(Test_Class)
-   .defpack(&Test_Class::init_pack_code)
-   .set_pack_encoder(&Test_Class::supply_pack);
+ //Qh_Class_Object& qco =
+ qht->REGISTER_TYPE(Language_Sample)
+   .qh_local(lcl)
+   .set_pack_encoder(&Qh_Local::_supply_pack<Language_Sample>)
+   .defpack(&Qh_Local::init_pack_code<Language_Sample>)
+   .qh_class()
+   .deffields(&Qh_Local::deffields<Language_Sample>);
+
+
+ //    .set_pack_encoder(&Language_Sample::supply_pack)
+
+
+ //    .defpack(&Language_Sample::init_pack_code)
+ //     .set_pack_encoder(&Test_Class::supply_pack)
+
+
+// qco.register_field_info("")
+
 //   .set_qh_class_object(&qco);
+
+// QString res;
+// Qh_Type* tt = qht->get_type_by_name("Language_Sample", &res);
+// tt->runb();
+
+ Language_Sample ls("xxx");
+
+ Qh_Pack_Builder* qpb = qhr.serialize(&ls);
 
  Test_Class tc;
  tc.set_a_number(33);

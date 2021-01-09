@@ -50,7 +50,7 @@ QLabel* DGI_Image::as_qlabel(int w, int h)
  cv::Mat rgb_matrix;
  cv::cvtColor(matrix_, rgb_matrix, cv::COLOR_BGR2RGB);
 
- QImage* image = new QImage(rgb_matrix.size().width, rgb_matrix.size().height, QImage::Format_RGB888);
+ image = new QImage(rgb_matrix.size().width, rgb_matrix.size().height, QImage::Format_RGB888);
  memcpy(image->scanLine(0), rgb_matrix.data, static_cast<size_t>(image->width() * image->height() * rgb_matrix.channels()));
  QLabel* label = new QLabel;
 
@@ -130,10 +130,10 @@ void DGI_Image::init_demo_transform_group(Demo_Transform_Group& dtg)
 
  dtg.draw_contours = new DGI_Image(cv::Mat::zeros( canny_output.size(), CV_8UC3 ) );
  dtg.hull_poly = new DGI_Image(cv::Mat::zeros( canny_output.size(), CV_8UC3 ) );
- dtg.hull_poly_color_mean = new DGI_Image(cv::Mat::zeros( canny_output.size(), CV_8UC3 ) );
- dtg.approx_poly = new DGI_Image(cv::Mat::zeros( canny_output.size(), CV_8UC3 ) );
- dtg.circles = new DGI_Image(cv::Mat::zeros( canny_output.size(), CV_8UC3 ) );
- dtg.draw_contours = new DGI_Image(cv::Mat::zeros( canny_output.size(), CV_8UC3 ) );
+ dtg.hull_poly_color_mean = new DGI_Image( cv::Mat::zeros( canny_output.size(), CV_8UC3 ) );
+ dtg.approx_poly = new DGI_Image( cv::Mat::zeros( canny_output.size(), CV_8UC3 ) );
+ dtg.circles = new DGI_Image( cv::Mat::zeros( canny_output.size(), CV_8UC3 ) );
+ dtg.draw_contours = new DGI_Image( cv::Mat::zeros( canny_output.size(), CV_8UC3 ) );
 
  std::vector<std::vector<cv::Point> > hcontours;
  std::vector<std::vector<cv::Point> > acontours;

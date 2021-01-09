@@ -32,6 +32,21 @@ INCLUDEPATH += $$ITK_BUILD_DIR/Modules/ThirdParty/Eigen3/src
 INCLUDEPATH += $$ITK_SRC_DIR/Modules/ThirdParty/Eigen3/src
 INCLUDEPATH += $$ITK_SRC_DIR/Modules/Filtering/MathematicalMorphology/include
 
+INCLUDEPATH += $$ITK_SRC_DIR/Modules/Filtering/Path/include
+INCLUDEPATH += $$ITK_SRC_DIR/Modules/Filtering/DistanceMap/include
+INCLUDEPATH += $$ITK_SRC_DIR/Modules/Numerics/NarrowBand/include
+
+INCLUDEPATH += $$ITK_BUILD_DIR/Modules/ThirdParty/KWSys/src
+
+INCLUDEPATH += $$ITK_SRC_DIR/Modules/IO/JPEG/include
+INCLUDEPATH += $$ITK_SRC_DIR/Modules/Filtering/ImageIntensity/include
+
+INCLUDEPATH += $$ITK_SRC_DIR/Modules/Filtering/ImageFilterBase/include
+
+
+#?INCLUDEPATH += $$ITK_SRC_DIR/Modules/IO/JPEG/include
+
+
 #INCLUDEPATH += $$ITK_SRC_DIR/Modules/itkValuedRegionalMaximaImageFilter.h
 #INCLUDEPATH += $$ITK_SRC_DIR/Modules/itkValuedRegionalMaximaImageFilter.h
 #itkImageFileWriter.h
@@ -74,6 +89,9 @@ INCLUDEPATH += $$VTK_BUILD_DIR/Common/Color
 INCLUDEPATH += $$ITK_SRC_DIR/Modules/Core/QuadEdgeMesh/include
 INCLUDEPATH += $$ITK_SRC_DIR/Modules/Core/Mesh/include
 
+INCLUDEPATH += $$ITK_SRC_DIR//Modules/IO/PNG/include
+
+
 
 INCLUDEPATH += $$SRC_GROUP_DIR
 
@@ -82,9 +100,17 @@ HEADERS += \
 
 
 SOURCES += \
-  $$SRC_DIR/main.cpp \
+  $$SRC_DIR/contours.cpp \
+
+# $$SRC_DIR/vm.cpp \
+
+# $$SRC_DIR/main.cpp
 
 
+# $$SRC_DIR/contours.cpp \
+
+
+# $$SRC_DIR/main.cpp \
 # $$SRC_DIR/vm.cpp \
 
 

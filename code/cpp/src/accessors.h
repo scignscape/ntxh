@@ -13,6 +13,20 @@
 #define MACRO_PASTE(...) __VA_ARGS__
 #endif
 
+
+#ifndef ACCESSORS__DECLARATIVE__SET
+#define ACCESSORS__DECLARATIVE__SET(cl, type, name) \
+ cl& name(const type& _val) { name##_ = _val; return *this; }
+#endif
+
+
+#ifndef ACCESSORS__DECLARATIVE
+#define ACCESSORS__DECLARATIVE(cl, type, name) \
+ACCESSORS__DECLARATIVE__SET(cl, type, name) \
+ACCESSORS__GET(type, name)
+#endif
+
+
 #ifndef ACCESSORS__GET
 #define ACCESSORS__GET(type, name) \
  type name() const { return name##_; }

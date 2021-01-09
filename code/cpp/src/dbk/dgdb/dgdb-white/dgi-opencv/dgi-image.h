@@ -80,6 +80,8 @@ public:
  QLabel* as_qlabel(int w = 0, int h = 0);
  QPushButton* as_qbutton(int w = 0, int h = 0);
 
+ QImage* image;
+
  void load();
 
  void init_demo_transform_group(Demo_Transform_Group& dtg);

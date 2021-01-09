@@ -19,12 +19,18 @@ Qh_Runtime::Qh_Runtime()
 
 }
 
+
+Qh_Pack_Builder* Qh_Runtime::serialize(Qh_Type* qht, void* obj)
+{
+ return qht->serialize(obj);
+}
+
 Qh_Hypernode* Qh_Runtime::new_hypernode(void* pv, Qh_Type* qht)
 {
  if(Qh_Class_Object* qco = qht->qh_class_object())
  {
   Qh_Pack_Builder qpb(qco->pack_code());
-  qht->static_pack_encoder()(pv, qpb);
+  qht->serialize(qpb, pv); //static_pack_encoder()(pv, qpb);
   return qpb.as_hypernode();
  }
  return nullptr;

@@ -45,6 +45,19 @@ public:
   //Qh_Hypernode* new_hypernode
  }
 
+
+ Qh_Pack_Builder* serialize(Qh_Type* qht, void* obj);
+
+ template<typename OBJ_Type>
+ Qh_Pack_Builder* serialize(OBJ_Type* obj)
+ {
+  QString res;
+  QString tn = QString::fromStdString(typeid(OBJ_Type).name());
+  Qh_Type* qht = type_system_->get_type_by_name(tn, &res);
+  return serialize(qht, obj);
+ }
+
+
 };
 
 

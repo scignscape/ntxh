@@ -313,6 +313,20 @@ Qh_Pack_Code& Qh_Pack_Code::add_txn(u2 array)
  return *this;
 }
 
+Qh_Pack_Code& Qh_Pack_Code::add_opaque(u2 array)
+{
+ u1 code = with_type_hint(0, Type_Hints::Opaque);
+
+ if(array)
+   field_codes_[0] = code;
+ else
+   field_codes_.push_back(code);
+
+ return *this;
+}
+
+
+
 
 
 void Qh_Pack_Code::each(std::function<u2(u1, u2)> fn)

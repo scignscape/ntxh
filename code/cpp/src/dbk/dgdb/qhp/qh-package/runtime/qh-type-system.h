@@ -18,6 +18,9 @@
 
 #include "kans.h"
 
+class Qh_Pack_Builder;
+
+
 #ifndef REGISTER_TYPE_NAME_RESOLUTION
 #define REGISTER_TYPE_NAME_RESOLUTION(tn) \
 register_type_name_resolution<tn>(#tn)
@@ -62,6 +65,7 @@ public:
   QString ctn = register_type_name_resolution<VERTEX_Type>(desired);
   return register_type(desired, ctn);
  }
+
 
 };
 
