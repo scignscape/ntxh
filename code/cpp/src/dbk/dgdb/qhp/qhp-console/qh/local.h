@@ -37,8 +37,10 @@ public:
  template<typename OBJ_Type>
  void deffields(Qh_Class_Object& qco);
 
+ void init_pack_code(QString tn, Qh_Pack_Code& qpc);
+
  template<typename OBJ_Type>
- void init_pack_code(Qh_Pack_Code& qpc);
+ void _init_pack_code(Qh_Pack_Code& qpc);
 
  template<typename OBJ_Type>
  void _supply_pack(OBJ_Type& _this, Qh_Pack_Builder& qpb);

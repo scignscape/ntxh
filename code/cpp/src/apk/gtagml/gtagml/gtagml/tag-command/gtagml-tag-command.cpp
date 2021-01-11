@@ -136,11 +136,15 @@ void GTagML_Tag_Command::normalize_whitespace()
    flags.left_space_gap = true;
 }
 
+QString GTagML_Tag_Command::latex_name(const QString& name)
+{
+ QString result = name;
+ result.remove('-');
+ return result;
+}
 
 QString GTagML_Tag_Command::latex_name()
 {
- QString result = name_;
- result.remove('-');
- return result;
+ return latex_name(name_);
 }
 

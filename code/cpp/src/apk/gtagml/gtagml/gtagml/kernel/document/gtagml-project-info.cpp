@@ -23,3 +23,18 @@ GTagML_Project_Info::GTagML_Project_Info(QString root_folder)
 {
 }
 
+
+void GTagML_Project_Info::finalize_post_processing_codes(QString path, QStringList& qsl)
+{
+ post_processing_codes_[path].append(qsl);
+}
+
+
+void GTagML_Project_Info::add_blocks(QString path, GTagML_Output_Blocks* gob)
+{
+ blocks_by_path_[path] = gob;
+}
+
+
+
+

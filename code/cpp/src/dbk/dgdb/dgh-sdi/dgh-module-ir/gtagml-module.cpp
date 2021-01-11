@@ -17,10 +17,15 @@
 #include "gtagml/output/gtagml-output-blocks.h"
 #include "gtagml/output/gtagml-output-sdi-infoset.h"
 #include "gtagml/kernel/document/gtagml-folder.h"
+
 #include "gtagml/gh/gh-block-writer.h"
+#include "gtagml/gh/gh-block-base.h"
+
+
 #include "gtagml/sdi/gh-sdi-document.h"
 
 #include "gtagml/kernel/document/gtagml-project-info.h"
+#include "gtagml/output/gtagml-output-blocks.h"
 
 
 #include "textio.h"
@@ -66,6 +71,8 @@ void GTagML_Module::process_gtagml_file(QString path,
  gob->init_standard_8bit();
  gob->export_blocks();
 
+ gpi->add_blocks(path, gob);
+
  GTagML_Output_SDI_Infoset* gsi = new GTagML_Output_SDI_Infoset(*gdoc, blw);
 
  QString fnc = gdoc->file_job_name();
@@ -73,6 +80,7 @@ void GTagML_Module::process_gtagml_file(QString path,
 
  //goi->init_standard_8bit();
  gsi->export_infoset(path + ".info.txt"); // export_blocks(); //(path + ".");
+
 
  QString cpy = gsi->copy_path();
  QString setup = gsi->setup_path();
@@ -175,9 +183,42 @@ void GTagML_Module::process_gtagml_file(QString path,
 
   gsd->setup_folder_from_template(gdoc->local_file_name() + ".tex",
     DEFAULT_SDI_FOLDER "/template", ffolder);
-
  }
+
+ gpi->finalize_post_processing_codes(path, gsi->post_processing_codes());
 }
+
+
+void GTagML_Module::read_prosodic_markup(GTagML_Project_Info& gpi,
+  QString path, QString code)
+{
+ s4 index = code.indexOf(':');
+ if(index == -1)
+   return;
+
+ u4 layer_code = code.mid(0, index).toUInt();
+
+ s4 index1 = code.indexOf('-', index);
+ if(index1 == -1)
+   return;
+
+ //QString ss = code.mid(index + 1, index1 - index - 1);
+ u4 start = code.mid(index + 1, index1 - index - 1).toUInt();
+
+ u4 end = code.mid(index1 + 1).toUInt();
+
+ QString arg = code.mid(index1 + 1);
+
+ GTagML_Output_Blocks* gob = gpi.blocks_by_path()[path];
+
+ GH_Block_Base* gbb = gob->get_current_mandatory_argument_block();
+
+ QString text = gbb->get_latex_out({start, end});
+
+ QString tex1t = text;
+
+}
+
 
 void GTagML_Module::compile_gt_file(QString args)
 {
@@ -196,6 +237,33 @@ void GTagML_Module::compile_gt_file(QString args)
  gpi.set_user_data(this);
 
  process_gtagml_file(file_path, &gpi, nullptr);
+
+ QMap<QString, QStringList>& ppc = gpi.post_processing_codes();
+
+ QMapIterator<QString, QStringList> it(ppc);
+
+ while(it.hasNext())
+ {
+  it.next();
+  QString path = it.key();
+
+  QStringList codes = it.value();
+
+  for(QString code : codes)
+  {
+   s4 index = code.indexOf(':');
+   if(index == -1)
+     continue;
+
+   QString cat = code.mid(0, index);
+   QString arg = code.mid(index + 1);
+   if(cat == "Prosody-Markup")
+   {
+    read_prosodic_markup(gpi, path, arg);
+    // only category of post-processing used here ...
+   }
+  }
+ }
 }
 
 void GTagML_Module::compile_gt_folder(QString args)

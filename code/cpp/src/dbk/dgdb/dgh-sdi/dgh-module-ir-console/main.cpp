@@ -28,11 +28,19 @@ int main(int argc, char *argv[])
 //                )");
 
 
- mir.read_lines(R"(
-.; comment ... ;.
-gt-compile-file $ :setup /home/nlevisrael/lgt/champs/src/proposal.gt
-  :top-level champs.tex ;.
-                )");
+
+  mir.read_lines(QString(R"(
+   .; comment ... ;.
+   gt-compile-file $ %1/ctg/src/intro.gt
+     ;.
+                   )").arg(DEMO_DOCUMENT_FOLDER) );
+
+
+// mir.read_lines(R"(
+//.; comment ... ;.
+//gt-compile-file $ :setup /home/nlevisrael/lgt/champs/src/proposal.gt
+//  :top-level champs.tex ;.
+//                )");
 
 
  mir.run_lines();

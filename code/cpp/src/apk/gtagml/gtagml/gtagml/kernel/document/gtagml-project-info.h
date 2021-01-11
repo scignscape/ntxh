@@ -20,7 +20,10 @@
 
 KANS_(GTagML)
 
+
 class GTagML_Parser;
+class GTagML_Output_Blocks;
+
 
 class GTagML_Project_Info
 {
@@ -39,6 +42,10 @@ private:
  QString gtagml_setup_;
  void* user_data_;
 
+ QMap<QString, QStringList> post_processing_codes_;
+
+ QMap<QString, GTagML_Output_Blocks*> blocks_by_path_;
+
 
 public:
 
@@ -46,6 +53,16 @@ public:
 
  ACCESSORS(QString ,gtagml_setup)
  ACCESSORS(void* ,user_data)
+
+
+ ACCESSORS__RGET(MACRO_PASTE(QMap<QString, QStringList>) ,post_processing_codes)
+
+ ACCESSORS__RGET(MACRO_PASTE(QMap<QString, GTagML_Output_Blocks*>) ,blocks_by_path)
+
+
+ void finalize_post_processing_codes(QString path, QStringList& qsl);
+ void add_blocks(QString path, GTagML_Output_Blocks* gob);
+
 
 };
 

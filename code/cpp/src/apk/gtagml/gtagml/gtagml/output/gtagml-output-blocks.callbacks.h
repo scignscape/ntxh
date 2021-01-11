@@ -5,6 +5,10 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
+
+RENAME_TAG(prosody-markup, prosodyMarkup)
+
+
 GTAGML_CALLBACK_NOACTION(noxml_)
 GTAGML_CALLBACK_NOACTION(_noxml)
 

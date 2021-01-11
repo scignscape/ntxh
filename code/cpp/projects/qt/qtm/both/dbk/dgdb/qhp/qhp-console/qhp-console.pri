@@ -23,6 +23,8 @@ HEADERS += \
   $$SRC_DIR/test-class.h  \
   $$SRC_DIR/sdi/language-sample.h  \
   $$SRC_DIR/sdi/language-sample-group.h  \
+  $$SRC_DIR/sdi/prosodic-annotation.h  \
+  $$SRC_DIR/sdi/prosodic-annotation-element.h  \
   $$SRC_DIR/qh/local.h  \
 
 
@@ -31,6 +33,8 @@ SOURCES += \
   $$SRC_DIR/test-class.cpp  \
   $$SRC_DIR/sdi/language-sample.cpp  \
   $$SRC_DIR/sdi/language-sample-group.cpp  \
+  $$SRC_DIR/sdi/prosodic-annotation.cpp  \
+  $$SRC_DIR/sdi/prosodic-annotation-element.cpp  \
   $$SRC_DIR/qh/local.cpp  \
 
 

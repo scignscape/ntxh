@@ -45,10 +45,12 @@ GH_Block_Base* GH_Block_Writer::write_tag_command_name(QString name, QPair<u4, u
 
 u4 GH_Block_Writer::push_optional()
 {
- if(held_blocks_.isEmpty())
-   held_blocks_.push(current_optional_argument_block_);
- else if(held_blocks_.top() != current_optional_argument_block_)
-   held_blocks_.push(current_optional_argument_block_);
+ //?
+// if(held_blocks_.isEmpty())
+//   held_blocks_.push(current_optional_argument_block_);
+// else if(held_blocks_.top() != current_optional_argument_block_)
+
+ held_blocks_.push(current_optional_argument_block_);
 
  return held_blocks_.top()->layer_code();
 
@@ -70,10 +72,11 @@ u4 GH_Block_Writer::pop_optional()
 
 u4 GH_Block_Writer::push_mandatory()
 {
- if(held_blocks_.isEmpty())
-   held_blocks_.push(current_mandatory_argument_block_);
+ //?
+// if(held_blocks_.isEmpty())
+//   held_blocks_.push(current_mandatory_argument_block_);
 
- else if(held_blocks_.top() != current_mandatory_argument_block_)
+// else if(held_blocks_.top() != current_mandatory_argument_block_)
    held_blocks_.push(current_mandatory_argument_block_);
 
  return current_mandatory_argument_block_->layer_code();
@@ -97,11 +100,13 @@ u4 GH_Block_Writer::pop_mandatory()
 
 u4 GH_Block_Writer::push_main()
 {
- if(held_blocks_.isEmpty())
-   return current_main_text_block_->layer_code();
+ //?
+// if(held_blocks_.isEmpty())
+//   return current_main_text_block_->layer_code();
 
- if(held_blocks_.top() != current_main_text_block_)
-    held_blocks_.push(current_main_text_block_);
+// if(held_blocks_.top() != current_main_text_block_)
+
+ held_blocks_.push(current_main_text_block_);
 
  return current_main_text_block_->layer_code();
 }

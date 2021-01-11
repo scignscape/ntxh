@@ -23,6 +23,11 @@
 
 #include "gh/gh-block-base.h"
 
+#include "sdi/gh-sdi-document.h"
+#include "gtagml-output-sdi-infoset.h"
+
+#include "gh/gh-block-writer.h"
+
 //?#include "ngml-htxn/ngml-htxn-node.h"
 
 
@@ -59,6 +64,34 @@ USING_KANS(GTagML)
 //{
 
 //}
+
+
+
+void GTagML_Output_Latex::check_prosody_markup(QTextStream& qts, caon_ptr<tNode> node)
+{
+ CAON_PTR_DEBUG(tNode ,node)
+ if(caon_ptr<GTagML_Tag_Command> ntc = node->GTagML_tag_command())
+ {
+  CAON_PTR_DEBUG(GTagML_Tag_Command ,ntc)
+  //
+
+  GTagML_Output_SDI_Infoset* gsi = sdi_document_->sdi_infoset_output(); //sdi_document_->block_writer();
+
+  GH_Block_Base* bl = gsi->block_writer()->current_mandatory_argument_block();
+
+  QString post_processing_code = QString("Prosody-Markup:%1:%2-%3")
+    .arg(bl->layer_code()).arg(ntc->ref_enter()).arg(ntc->ref_leave());
+
+  gsi->add_post_processing_code(post_processing_code);
+  //  block_writer_->current_mandatory_argument_block();
+
+  ntc->each_arg_prenode([](GH_Prenode* ghp)
+  {
+
+  });
+ }
+}
+
 
 
 GTagML_Output_Latex::GTagML_Output_Latex(GTagML_Document& document,
@@ -416,6 +449,7 @@ void GTagML_Output_Latex::generate_tag_command_entry(const GTagML_Output_Bundle&
     if(GH_Block_Base* ghb = ghp->get_block())
     {
      name = ghb->get_latex_out(ghp->range());
+     name = GTagML_Tag_Command::latex_name(name);
     }
     else
     {
@@ -527,7 +561,8 @@ void GTagML_Output_Latex::generate_tag_command_leave(const GTagML_Output_Bundle&
    ;
  else if(gtc->flags.is_non_wrapped)
    ;
- else if(gtc->flags.is_multi_optional)
+ else if(gtc->flags.is_multi_optional
+   || gtc->flags.is_layer_optional || gtc->flags.is_layer_main_optional)
    b.qts << ']';
  else if(gtc->flags.is_multi_mandatory)
    b.qts << '}';
@@ -735,7 +770,8 @@ void GTagML_Output_Latex::generate_tag_body_leave(const GTagML_Output_Bundle& b,
    ;
  else if(gtc->flags.is_non_wrapped)
    ;
- else if(gtc->flags.is_multi_optional)
+ else if(gtc->flags.is_multi_optional ||
+   gtc->flags.is_layer_optional || gtc->flags.is_layer_main_optional)
    b.qts << '[';
  else if(gtc->flags.is_multi_mandatory)
    b.qts << '{';

@@ -594,6 +594,31 @@ void GTagML_Graph_Build::multi_arg_transition(QString wmi, QString inner_wmi,
    arg_marker, &carried_arg_marker);
 }
 
+void GTagML_Graph_Build::tag_command_entry_with_layer(QString tag_command, QString layer_marker)
+{
+ caon_ptr<GTagML_Tag_Command> gtc = tag_command_entry({}, {}, tag_command, {});
+   //make_new_tag_command(tag_command, {});
+
+ if(layer_marker == "->>")
+ {
+  gtc->flags.is_layer_optional = true;
+ }
+ else if(layer_marker == "-->")
+ {
+  gtc->flags.is_layer_mandatory = true;
+ }
+ else if(layer_marker == "->")
+ {
+  gtc->flags.is_layer_main_mandatory = true;
+ }
+ else if(layer_marker == "-->>")
+ {
+  gtc->flags.is_layer_main_optional = true;
+ }
+
+ tag_body_leave();
+}
+
 void GTagML_Graph_Build::tag_command_entry_inside_multi(QString wmi,
   QString inner_wmi,
   QString fiat,

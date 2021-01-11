@@ -275,6 +275,21 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
     //graph_build.tag_body_leave();
  });
 
+
+
+ add_rule( gtagml_context, "tag-command-entry-with-layer",
+   " ` " //?(?<wmi> .tag-command-wrap-mode-indicator.? ) "
+   " (?<tag-command> .valid-tag-command-name. ) / "
+   " (?: .single-space.+ )  (?<layer-marker> -{1,2} >{1,2} ) "
+   ,[&]
+ {
+  QString tag_command = p.matched("tag-command");
+  QString layer_marker = p.matched("layer-marker");
+  graph_build.tag_command_entry_with_layer(tag_command, layer_marker);
+  //graph_build.tag_body_leave();
+ });
+
+
  add_rule( gtagml_context, "tag-command-entry-inline",
    " ` (?<wmi> .tag-command-wrap-mode-indicator.? ) "
    " (?<tag-command> .valid-tag-command-name. ) "

@@ -44,6 +44,8 @@ public:
 
  ACCESSORS(GH_Block_Base* ,current_main_text_block)
  ACCESSORS(GH_Block_Base* ,current_tag_command_name_block)
+ ACCESSORS(GH_Block_Base* ,current_mandatory_argument_block)
+ ACCESSORS(GH_Block_Base* ,current_optional_argument_block)
 
 
  void init_standard_8bit();

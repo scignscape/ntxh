@@ -716,6 +716,7 @@ void GTagML_Output_SDI_Infoset::set_path(QTextStream& qts, caon_ptr<tNode> node,
  }
 }
 
+
 void GTagML_Output_SDI_Infoset::write_infoset_output(QString& output)
 {
  QTextStream qts(&output);
@@ -945,6 +946,11 @@ void GTagML_Output_SDI_Infoset::generate_tag_command_entry(const GTagML_Output_B
  }
 }
 
+void GTagML_Output_SDI_Infoset::add_post_processing_code(QString ppc)
+{
+ post_processing_codes_.push_back(ppc);
+}
+
 void GTagML_Output_SDI_Infoset::check_sentence_boundaries(QTextStream& qts, caon_ptr<tNode> node)
 {
  CAON_PTR_DEBUG(tNode ,node)
@@ -1078,33 +1084,33 @@ void GTagML_Output_SDI_Infoset::generate_tag_command_leave(const GTagML_Output_B
 void GTagML_Output_SDI_Infoset::generate_tag_command_leave(const GTagML_Output_Bundle& b,
  caon_ptr<GTagML_Tag_Command> ntc)
 {
- if(b.cb)
- {
-  if(b.cb->flags.has_post_callback)
-  {
-   // prior, parent_of_siblings?
-   b.cb->post_callback(b.qts, b.node, nullptr, nullptr, b.index, b.cb);
-  }
-  if(!b.cb->flags.post_fallthrough)
-   return;
- }
+// if(b.cb)
+// {
+//  if(b.cb->flags.has_post_callback)
+//  {
+//   // prior, parent_of_siblings?
+//   b.cb->post_callback(b.qts, b.node, nullptr, nullptr, b.index, b.cb);
+//  }
+//  if(!b.cb->flags.post_fallthrough)
+//   return;
+// }
 
- CHECK_SUPPRESS_NODE
- if(htxn_document_)
- {
-  if(GTagML_HTXN_Node* nhn = ntc->gh_node())
-  {
-   generate_tag_command_leave(b, *nhn);
-   return;
-  }
- }
+// CHECK_SUPPRESS_NODE
+// if(htxn_document_)
+// {
+//  if(GTagML_HTXN_Node* nhn = ntc->gh_node())
+//  {
+//   generate_tag_command_leave(b, *nhn);
+//   return;
+//  }
+// }
 
- QString command_print_name;
- if(b.cb && b.cb->flags.has_rename)
-  command_print_name = b.cb->rename_tag();
- else
-  command_print_name = ntc->name();
- b.qts << "</" << ntc->name() << '>';
+// QString command_print_name;
+// if(b.cb && b.cb->flags.has_rename)
+//  command_print_name = b.cb->rename_tag();
+// else
+//  command_print_name = ntc->name();
+// b.qts << "</" << ntc->name() << '>';
 }
 
 void GTagML_Output_SDI_Infoset::generate_tag_body_leave(const GTagML_Output_Bundle& b, GTagML_HTXN_Node& nhn)
@@ -1147,25 +1153,25 @@ void GTagML_Output_SDI_Infoset::generate_tag_body_leave(const GTagML_Output_Bund
  }
 #endif // HIDE
 
- b.qts << '>';
+// b.qts << '>';
 }
 
 void GTagML_Output_SDI_Infoset::generate_tag_body_leave(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Tag_Command> ntc)
 {
- CHECK_SUPPRESS_NODE
- CAON_PTR_DEBUG(GTagML_Tag_Command ,ntc)
+// CHECK_SUPPRESS_NODE
+// CAON_PTR_DEBUG(GTagML_Tag_Command ,ntc)
 
- if(htxn_document_)
- {
-  if(GTagML_HTXN_Node* nhn = ntc->gh_node())
-  {
-   generate_tag_body_leave(b, *nhn);
-   return;
-  }
- }
+// if(htxn_document_)
+// {
+//  if(GTagML_HTXN_Node* nhn = ntc->gh_node())
+//  {
+//   generate_tag_body_leave(b, *nhn);
+//   return;
+//  }
+// }
 
- b.qts << '>';
- ntc->write_whitespace(b.qts);
+// b.qts << '>';
+// ntc->write_whitespace(b.qts);
 }
 
 //void GTagML_Output_SDI_Infoset::generate_tile_via_htxn(const GTagML_Output_Bundle& b, GTagML_HTXN_Node& nhn)

@@ -48,11 +48,18 @@ int main(int argc, char* argv[])
  //Qh_Class_Object& qco =
  qht->REGISTER_TYPE(Language_Sample)
    .qh_local(lcl)
-   .set_pack_encoder(&Qh_Local::_supply_pack<Language_Sample>)
-   .defpack(&Qh_Local::init_pack_code<Language_Sample>)
+   .set_pack_encoder(&Language_Sample::supply_pack)
+   .defpack(&Qh_Local::init_pack_code)
    .qh_class()
-   .deffields(&Qh_Local::deffields<Language_Sample>);
+   .deffields(&Qh_Local::deffields<Language_Sample>)
+   ;
 
+
+ /*   Marianna  L*
+  *
+  *
+  *
+  */
 
  //    .set_pack_encoder(&Language_Sample::supply_pack)
 

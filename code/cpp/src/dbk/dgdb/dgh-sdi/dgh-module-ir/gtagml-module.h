@@ -44,6 +44,9 @@ class GTagML_Module
  QMap<QString, QString> current_flagpairs_;
  QMap<QString, u1> current_flagset_pos_;
 
+ void read_prosodic_markup(GTagML_Project_Info& gpi,
+   QString path, QString code);
+
 public:
 
  GTagML_Module();

@@ -53,6 +53,15 @@ class Qh_Type
  template< typename T>
  using Class_Of_Member_Function = typename _Class_Of_Member_Function<T>::type;
 
+ template <class R, class O, class... ARGS>
+ struct count_args {
+     static constexpr size_t n_args = sizeof...(ARGS);
+ };
+
+ template <class R, class O, class... ARGS>
+ count_args<R, O, ARGS ...> constexpr make_count_args(R (O::*) (ARGS...) ) {
+   return count_args<R, O, ARGS...>();
+ }
 
 public:
 
@@ -91,6 +100,17 @@ public:
   init_qh_class(qpc);
   return *this;
  }
+
+ template<typename PROV_Type>
+ Qh_Type& defpack(void(PROV_Type::*fn)(QString tn, Qh_Pack_Code&))
+ {
+  Qh_Pack_Code qpc;
+  (((PROV_Type*) local_)->*fn)(name_, qpc);
+  init_qh_class(qpc);
+  return *this;
+ }
+
+
 
  template<typename T>
  static std::function<void(void*, Qh_Pack_Builder&)> default_pack_encoder(void (T::*fn)(Qh_Pack_Builder&))
@@ -140,7 +160,7 @@ public:
  template<typename VALUE_Type, typename PROC_Type>
  Qh_Type& _set_pack_encoder(PROC_Type pt)
  {
-  set_static_pack_encoder(default_pack_encoder
+  set_static_pack_encoder_1(default_pack_encoder
     <VALUE_Type>(pt) );
   return *this;
  }
@@ -148,7 +168,7 @@ public:
  template<typename PROV_Type, typename PROC_Type>
  Qh_Type& _set_pack_encoder_loc(PROC_Type pt)
  {
-  set_static_pack_encoder_loc(default_pack_encoder_loc
+  set_static_pack_encoder_3(default_pack_encoder_loc
     <PROV_Type>(pt) );
   return *this;
  }
@@ -163,15 +183,7 @@ public:
   return *this;
  }
 
- template <class R, class O, class... ARGS>
- struct count_args {
-     static constexpr size_t n_args = sizeof...(ARGS);
- };
 
- template <class R, class O, class... ARGS>
- count_args<R, O, ARGS ...> constexpr make_count_args(R (O::*) (ARGS...) ) {
-   return count_args<R, O, ARGS...>();
- }
 
  template<typename PROC_Type>
  Qh_Type& set_pack_encoder_loc(PROC_Type pt)

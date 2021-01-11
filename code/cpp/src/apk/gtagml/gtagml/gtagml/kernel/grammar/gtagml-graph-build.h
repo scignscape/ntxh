@@ -195,6 +195,8 @@ public:
 
  caon_ptr<GTagML_Raw_Tile> make_new_raw_tile(QString format, QString value);
 
+ void tag_command_entry_with_layer(QString tag_command, QString layer_marker);
+
  void tag_command_entry_multi(QString wmi,
    QString inner_wmi, QString tag_command,
    QString tag_body_follow, QString fiat, QString first_arg_wmi, QString first_arg_marker);

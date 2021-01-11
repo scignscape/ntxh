@@ -127,6 +127,8 @@ public:
  void generate_tag_command_argument(const GTagML_Output_Bundle& b,
    GH_Prenode& ghp);
  
+ void check_prosody_markup(QTextStream& qts, caon_ptr<tNode> node);
+
 };
 
 _KANS(GTagML)

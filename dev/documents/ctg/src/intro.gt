@@ -1,0 +1,16 @@
+
+`p.
+Test inserting prosody. 
+
+`prosody-markup/ -->
+
+This        
+sentence
+should      l-
+be          l-
+emphasized  l*  
+
+`prosody-markup`
+
+`p`
+

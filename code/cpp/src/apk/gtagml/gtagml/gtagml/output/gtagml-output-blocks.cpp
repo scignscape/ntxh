@@ -97,6 +97,12 @@ void GTagML_Output_Blocks::init_callbacks()
 }
 
 
+
+GH_Block_Base* GTagML_Output_Blocks::get_current_mandatory_argument_block()
+{
+ return block_writer_->current_mandatory_argument_block();
+}
+
 void GTagML_Output_Blocks::mark_citation(QTextStream& qts, caon_ptr<tNode> node,
   caon_ptr<tNode> prior_node, caon_ptr<tNode> parent_of_siblings)
 {
@@ -654,9 +660,16 @@ void GTagML_Output_Blocks::generate_tag_command_entry(const GTagML_Output_Bundle
   }
   else
   {
-   layer_code = block_writer_->current_main_text_block()->layer_code();
+   if(gtc->flags.is_layer_mandatory)
+     layer_code = block_writer_->current_mandatory_argument_block()->layer_code();
+   else if(gtc->flags.is_layer_optional)
+     layer_code = block_writer_->current_optional_argument_block()->layer_code();
+   else
+     layer_code = block_writer_->current_main_text_block()->layer_code();
+
    QPair<u4, u4> pr;
-   GH_Block_Base* bl =  block_writer_->write_tag_command_name(gtc->name(), pr);//  write
+   QString name = (cb && !cb->rename_tag().isEmpty())? cb->rename_tag() : gtc->name();
+   GH_Block_Base* bl =  block_writer_->write_tag_command_name(name, pr);//  write
    gtc->init_name_prenode(bl, pr);
   }
 
@@ -671,6 +684,12 @@ void GTagML_Output_Blocks::generate_tag_command_entry(const GTagML_Output_Bundle
 //    b.qts << '\\' << gtc->latex_name();
 
   reset_active_gap_code();
+
+  if(gtc->flags.is_layer_optional)
+    block_writer_->push_optional();
+  else if(gtc->flags.is_layer_mandatory)
+    block_writer_->push_mandatory();
+
   break;
  }
 
@@ -737,13 +756,24 @@ void GTagML_Output_Blocks::generate_tag_command_entry(const GTagML_Output_Bundle
 //}
 
 
+//?
+//else if(gtc->flags.is_layer_mandatory)
+//  layer_code = block_writer_->push_mandatory();
 void GTagML_Output_Blocks::generate_tag_command_leave(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Tag_Command> gtc)
 {
  CAON_PTR_DEBUG(GTagML_Tag_Command ,gtc)
 
- if(ref_ranges_[1].contains(gtc))
+ u4 expected_layer_code = 1;
+
+ if(gtc->flags.is_layer_optional)
+   expected_layer_code = 2;
+
+ else if(gtc->flags.is_layer_mandatory)
+   expected_layer_code = 3;
+
+ if(ref_ranges_[expected_layer_code].contains(gtc))
  {
-  QPair<GH_Prenode*, QPair<u4, u4>> pr = ref_ranges_[1].take(gtc);
+  QPair<GH_Prenode*, QPair<u4, u4>> pr = ref_ranges_[expected_layer_code].take(gtc);
   gtc->set_ref_enter(pr.second.first);
   gtc->set_ref_leave(pr.second.second);
   gtc->set_last_tile_prenode(pr.first);
@@ -758,6 +788,12 @@ void GTagML_Output_Blocks::generate_tag_command_leave(const GTagML_Output_Bundle
   else
     block_writer_->pop_mandatory();
  }
+
+ if(gtc->flags.is_layer_optional)
+   block_writer_->pop_optional();
+
+ else if(gtc->flags.is_layer_mandatory)
+   block_writer_->pop_mandatory();
 
 
  if(b.cb)

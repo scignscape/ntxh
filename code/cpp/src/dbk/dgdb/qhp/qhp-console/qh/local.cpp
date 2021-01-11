@@ -12,6 +12,10 @@
 #include "qh-package/qh-class-object.h"
 
 #include "sdi/language-sample.h"
+#include "sdi/language-sample-group.h"
+
+#include <typeindex>
+
 
 USING_KANS(GHL)
 
@@ -46,7 +50,7 @@ void Qh_Local::deffields<Language_Sample>(Qh_Class_Object& qco)
 }
 
 template<>
-void Qh_Local::init_pack_code<Language_Sample>(Qh_Pack_Code& qpc)
+void Qh_Local::_init_pack_code<Language_Sample>(Qh_Pack_Code& qpc)
 {
  qpc.add_str() // text
    .add_u4() // database_id
@@ -58,6 +62,23 @@ void Qh_Local::init_pack_code<Language_Sample>(Qh_Pack_Code& qpc)
    ;
 }
 
+void Qh_Local::init_pack_code(QString tn, Qh_Pack_Code& qpc)
+{
+// static QMap<QString, std::type_info*> static_map {{
+//   {"Language_Sample", &typeid(Language_Sample)},
+//   {"Language_Sample_Group", &typeid(Language_Sample_Group)},
+//                                      }};
+
+// std::type_info* sti = static_map.value(tn);
+
+// switch ((n8) sti)
+// {
+// case typeid(Language_Sample) : _init_pack_code<Language_Sample>(qpc); break;
+// case typeid(Language_Sample_Group) : _init_pack_code<Language_Sample_Group>(qpc); break;
+// default: break;
+// }
+
+}
 
 
 //void Qh_Local::deffields(Qh_Class_Object& qco)

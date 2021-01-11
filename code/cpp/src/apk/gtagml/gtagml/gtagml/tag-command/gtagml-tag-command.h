@@ -33,7 +33,7 @@ class GTagML_Tag_Command : public GTagML_Whitespace_Holder
 {
 public:
 
- flags_(6)
+ flags_(7)
 
   bool is_region:1;
   bool is_closed:1;
@@ -49,7 +49,12 @@ public:
   bool is_multi_parent:1;
   bool is_multi_optional:1;
   bool is_multi_mandatory:1;
- 
+
+  bool is_layer_optional:1;
+  bool is_layer_mandatory:1;
+  bool is_layer_main_optional:1;
+  bool is_layer_main_mandatory:1;
+
   //bool is_multi_parent_semis:1;
   bool anticipate_semis:1;
 
@@ -158,6 +163,8 @@ public:
    QString parent_tag_type = QString());
 
  QString latex_name();
+
+ static QString latex_name(const QString& name);
 
  void add_arg_gh_node(GTagML_HTXN_Node* nhn);
 

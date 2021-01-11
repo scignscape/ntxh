@@ -91,6 +91,8 @@ class GTagML_Output_SDI_Infoset : public GTagML_Output_Base, private GTagML_Outp
 
  QString file_job_name_;
 
+ QStringList post_processing_codes_;
+
  void generate_sdi_mark(caon_ptr<GTagML_Tag_Command> ntc,
    const GTagML_Output_Bundle& b,  GH_Prenode& ghp);
  
@@ -132,11 +134,19 @@ public:
 
  ACCESSORS(QString ,file_job_name)
 
+ ACCESSORS(GH_Block_Writer* ,block_writer)
+
+ ACCESSORS__RGET(QStringList ,post_processing_codes)
+
+ void add_post_processing_code(QString ppc);
+
  void write_ntxh(QTextStream& qts);
 
  void finalize_sentence_boundaries(GH_Block_Base& bl);
  void finalize_paragraph_boundaries(GH_Block_Base& bl);
  void finalize_widowed_sentence_boundaries(GH_Block_Base& bl);
+
+ void finalize_post_processing_codes();
 
 
  n8 check_sdi_latex_insert(GH_Block_Base* bl, u4 index,

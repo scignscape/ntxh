@@ -26,7 +26,7 @@
 #include "kans.h"
 
 class GH_Block_Writer;
-
+class GH_Block_Base;
 
 KANS_(GTagML)
 
@@ -39,6 +39,8 @@ class GTagML_Attribute_Tile;
 class GTagML_Tile;
 
 class GTagML_Output_Infoset;
+
+
 
 class GTagML_Output_Blocks : public GTagML_Output_Base, private GTagML_Output_Event_Handler
 {
@@ -101,6 +103,7 @@ public:
 
  void generate(QTextStream& qts) Q_DECL_OVERRIDE;
 
+ GH_Block_Base* get_current_mandatory_argument_block();
 
  void init_standard_8bit();
 
