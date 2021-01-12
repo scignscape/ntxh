@@ -47,6 +47,8 @@ class GTagML_Module
  void read_prosodic_markup(GTagML_Project_Info& gpi,
    QString path, QString code);
 
+ void check_post_processing_codes(GTagML_Project_Info& gpi);
+
 public:
 
  GTagML_Module();

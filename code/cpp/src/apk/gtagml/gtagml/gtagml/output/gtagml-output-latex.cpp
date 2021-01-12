@@ -140,11 +140,11 @@ void GTagML_Output_Latex::export_latex(QString path)
  if(path.startsWith(".."))
  {
   path.remove(0, 1);
-  path.prepend(document_.local_path());
+  path.prepend(document_.local_or_info_path());
  }
  else if(path.startsWith('.'))
  {
-  QFileInfo qfi(document_.local_path());
+  QFileInfo qfi(document_.local_or_info_path());
   path.prepend(qfi.absolutePath() + '/' + qfi.completeBaseName());
  }
  QString latex_output;

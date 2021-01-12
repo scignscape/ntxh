@@ -57,7 +57,7 @@ QString Module_IR::first_non_flag_arg(const QStringList& qsl, QVector<QChar>& fi
    {
     if(have_result)
     {
-      // // have_result will only be true is flagpairs is non-null
+      // // have_result will only be true if flagpairs is non-null
      if(!held_flag.isEmpty())
        (*flagpairs)[held_flag] = QString{};
      held_flag = qs;

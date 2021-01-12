@@ -39,6 +39,8 @@ private:
  QString sdi_template_file_;
  QString sdi_template_target_;
 
+ QString gt_copy_folder_;
+
  QString gtagml_setup_;
  void* user_data_;
 
@@ -53,6 +55,8 @@ public:
 
  ACCESSORS(QString ,gtagml_setup)
  ACCESSORS(void* ,user_data)
+
+ ACCESSORS(QString ,gt_copy_folder)
 
 
  ACCESSORS__RGET(MACRO_PASTE(QMap<QString, QStringList>) ,post_processing_codes)

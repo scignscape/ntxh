@@ -65,6 +65,21 @@ GTagML_Project_Info* GTagML_Document::init_project_info(QString folder)
 }
 
 
+QString GTagML_Document::use_info_path()
+{
+ QFileInfo qfi(local_path_);
+
+ info_path_ = qfi.absolutePath() + "/info/" + qfi.fileName();
+
+ return qfi.absolutePath() + "/info";
+}
+
+QString GTagML_Document::local_or_info_path()
+{
+ return info_path_.isEmpty()? local_path_ : info_path_;
+}
+
+
 QString GTagML_Document::get_full_top_level_path()
 {
  QFileInfo qfi(local_path_);

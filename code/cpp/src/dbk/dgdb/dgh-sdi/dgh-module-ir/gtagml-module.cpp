@@ -61,6 +61,15 @@ void GTagML_Module::process_gtagml_file(QString path,
 
  gdoc->load_and_parse(path);
 
+ if(flagset.contains(":info-path"))
+ {
+  QString info_fldr = gdoc->use_info_path();
+  QDir ip_qdir(info_fldr);
+  if(!ip_qdir.exists())
+    if(ip_qdir.mkpath("."))
+      qDebug() << "Made path: " << ip_qdir;
+ }
+
  GH_Block_Writer* blw = new GH_Block_Writer;
 
 // QString divert;
@@ -79,7 +88,8 @@ void GTagML_Module::process_gtagml_file(QString path,
  gsi->set_file_job_name(fnc);
 
  //goi->init_standard_8bit();
- gsi->export_infoset(path + ".info.txt"); // export_blocks(); //(path + ".");
+
+ gsi->export_infoset(gdoc->local_or_info_path() + ".info.txt"); // export_blocks(); //(path + ".");
 
 
  QString cpy = gsi->copy_path();
@@ -148,6 +158,17 @@ void GTagML_Module::process_gtagml_file(QString path,
   qDebug() << "Copied " << sdi_path + ".sdi-prelatex.ntxh" << " to " << cp;
  }
 
+ QString gcf = gpi->gt_copy_folder();
+
+ if(!gcf.isEmpty())
+ {
+  QDir gcf_dir(gcf);
+  if(!gcf_dir.exists())
+    if(gcf_dir.mkpath("."))
+      qDebug() << "Made path: " << gcf;
+  copy_file_to_folder(path, gcf);
+ }
+
  if(flagset.contains(":setup"))
  {
   if(gdoc->top_level_path().isEmpty())
@@ -161,7 +182,7 @@ void GTagML_Module::process_gtagml_file(QString path,
    });
   }
 
-  gsd->setup_folder_from_template(gdoc->local_file_name() + ".tex",
+  GH_SDI_Document::setup_folder_from_template(gdoc->local_file_name() + ".tex",
     DEFAULT_SDI_FOLDER "/template", ffolder, gdoc->top_level_path());
 
   if(!gdoc->top_level_path().isEmpty())
@@ -238,6 +259,11 @@ void GTagML_Module::compile_gt_file(QString args)
 
  process_gtagml_file(file_path, &gpi, nullptr);
 
+ check_post_processing_codes(gpi);
+}
+
+void GTagML_Module::check_post_processing_codes(GTagML_Project_Info& gpi)
+{
  QMap<QString, QStringList>& ppc = gpi.post_processing_codes();
 
  QMapIterator<QString, QStringList> it(ppc);
@@ -264,7 +290,9 @@ void GTagML_Module::compile_gt_file(QString args)
    }
   }
  }
+
 }
+
 
 void GTagML_Module::compile_gt_folder(QString args)
 {
@@ -311,13 +339,39 @@ void GTagML_Module::compile_gt_manuscript(QString args)
 
  QString mt = current_flagpairs_.value(":manuscript");
 
- GTagML_Folder fld(folder, file_path, mt);
+ auto it = current_flagpairs_.find(":gt-copy-folder");
+ if(it != current_flagpairs_.end())
+   gpi->set_gt_copy_folder(it.value());
+
+// if(current_flagset_.contains(":setup-once"))
+// {
+//  prepend_template_to_file(cp, DEFAULT_SDI_FOLDER "/prepend",
+//  {
+//   { "%CONSOLE", ROOT_FOLDER "/code/cpp/qmake-console/projects/gtagml/ngml-sdi-console"},
+//   { "%FILE", cp },
+//   { "%SDI-FILE", sdi_path + ".sdi.ntxh" },
+//   { "%SDI-PFILE", sdi_path + ".sdi-prelatex.ntxh" }
+//  });
+
+//  gsd->setup_folder_from_template(gdoc->local_file_name() + ".tex",
+//    DEFAULT_SDI_FOLDER "/template", ffolder);
+// }
+
+ GTagML_Folder fld(folder); //, file_path, mt);
+
+ if(!mt.isEmpty())
+   fld.set_man_path(mt);
+
+ if(!current_flagset_.contains(":no-first"))
+   fld.set_first_file_path(file_path);
 
  fld.set_project_info(gpi);
 
  gpi->set_user_data(this);
 
  fld.convert_all_files( &GTagML_Module::process_gtagml_file );
+
+ check_post_processing_codes(*gpi);
 
  //qDebug() << "args = " << args;
 }

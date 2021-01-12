@@ -257,11 +257,11 @@ QString GTagML_Output_Blocks::export_marks(QString path)
  if(path.startsWith(".."))
  {
   path.remove(0, 1);
-  path.prepend(document_.local_path());
+  path.prepend(document_.local_or_info_path());
  }
  else if(path.startsWith('.'))
  {
-  QFileInfo qfi(document_.local_path());
+  QFileInfo qfi(document_.local_or_info_path());
   path.prepend(qfi.absolutePath() + '/' + qfi.completeBaseName());
  }
 
@@ -331,11 +331,11 @@ void GTagML_Output_Blocks::export_blocks(QString path)
  if(path.startsWith(".."))
  {
   path.remove(0, 1);
-  path.prepend(document_.local_path());
+  path.prepend(document_.local_or_info_path());
  }
  else if(path.startsWith('.'))
  {
-  QFileInfo qfi(document_.local_path());
+  QFileInfo qfi(document_.local_or_info_path());
   path.prepend(qfi.absolutePath() + '/' + qfi.completeBaseName());
  }
 

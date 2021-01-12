@@ -21,7 +21,7 @@ DEFINES += DEFAULT_DEV_DGDB_NGML_FOLDER=\\\"$$ROOT_DIR/../gtagml/dgdb\\\"
 
 DEFINES += DEFAULT_SDI_FOLDER=\\\"$$ROOT_DIR/dev/consoles/gtagml/sdi\\\"
 
-DEFINES += DEMO_DOCUMENT_FOLDER=\\\"$$ROOT_DIR/dev/documents\\\"
+DEFINES += DEMO_DOCUMENT_FOLDER=\\\"$$ROOT_DIR/../dev/documents\\\"
 
 
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"

@@ -70,6 +70,8 @@ class GTagML_Document
 
  QString top_level_path_;
 
+ QString info_path_;
+
 public:
 
 
@@ -92,6 +94,7 @@ public:
  ACCESSORS(QString ,man_folder_path)
 
  ACCESSORS(QString ,top_level_path)
+ ACCESSORS(QString ,info_path)
 
  ACCESSORS(QTextStream*, divert)
 
@@ -103,6 +106,8 @@ public:
  ~GTagML_Document();
 
  QString get_path_root();
+
+ QString use_info_path();
 
  GTagML_Project_Info* init_project_info(QString folder = {});
 
@@ -128,6 +133,8 @@ public:
  QString save_light_xml();
 
  QString save_quotes();
+
+ QString local_or_info_path();
 
  static void save_file(QString path, QString contents);
 
