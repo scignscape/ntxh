@@ -65,6 +65,7 @@ int main(int argc, char* argv[])
  {
   if(file.endsWith("sdi-prelatex.ntxh"))
     prelatex_files.push_back(qd.absoluteFilePath(file));
+
   else if(file.endsWith("marks-summay.txt"))
     marks_files.push_back(qd.absoluteFilePath(file));
  }

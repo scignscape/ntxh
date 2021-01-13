@@ -1,0 +1,11 @@
+\documentclass[11pt,twocolumn]{article}
+
+\input{commands}
+
+\input{ngml/ngml-setup-commands}
+\input{ngml/ngml-sdi-commands}
+\input{ngml/ngml-deco-commands}
+
+\AtEndDocument{\immediate\write18{cd %CONSOLE; ./run-with-args.sh %FILE %SDI-FOLDER %SDI-PFOLDER; cd -;}}
+
+

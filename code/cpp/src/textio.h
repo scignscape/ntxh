@@ -51,7 +51,6 @@ inline QString make_inner_folder_from_file_name(QString folder_name, QString pat
  return {};
 }
 
-
 inline QString make_folder_from_file_name(QString path, QString folder)
 {
  QFileInfo qfi(path);
@@ -231,6 +230,20 @@ inline QString copy_file_to_folder(QString path, QString folder)
  QDir qd(folder);
  QString newpath = qd.filePath(fn);
 
+ QString contents;
+ load_file(path, contents);
+ save_file(newpath, contents);
+ return newpath;
+}
+
+inline QString copy_file_with_preliminary_suffix(QString path, QString preliminary_suffix)
+{
+ QFileInfo qfi(path);
+ QString cbn = qfi.completeBaseName();
+ QString suffix = qfi.suffix();
+ QString ap = qfi.absolutePath();
+
+ QString newpath = QString("%1/%2.%3.%4").arg(ap).arg(cbn).arg(preliminary_suffix).arg(suffix);
  QString contents;
  load_file(path, contents);
  save_file(newpath, contents);

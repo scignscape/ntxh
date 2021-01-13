@@ -22,6 +22,8 @@
 
 #include "gtagml/kernel/document/gtagml-folder.h"
 
+#include "gtagml/kernel/document/gtagml-project-info.h"
+
 
 
 #include "gh/gh-block-writer.h"
@@ -36,8 +38,10 @@ USING_KANS(SDI)
 USING_KANS(TextIO)
 
 
-void process_gtagml_file(QString path, QString& carried_setup, GTagML_Folder* fld)
+void process_gtagml_file(QString path, GTagML_Project_Info* gpi, GTagML_Folder* fld)
 {
+ //QString& carried_setup,
+
  qDebug() << "Processing file: " << path;
 
 // GTagML_Document gdoc;
@@ -81,17 +85,17 @@ void process_gtagml_file(QString path, QString& carried_setup, GTagML_Folder* fl
 
  if(!setup.isEmpty())
  {
-  carried_setup = setup;
+  gpi->set_gtagml_setup(setup);
   if(cpy.isEmpty())
     cpy = setup;
  }
 
  QString ffolder;
 
- if(carried_setup.isEmpty())
+ if(gpi->gtagml_setup().isEmpty())
    ffolder = make_folder_from_file_name(path, DEFAULT_SDI_FOLDER);
  else
-   ffolder = make_folder_from_file_name(path, carried_setup);
+   ffolder = make_folder_from_file_name(path, gpi->gtagml_setup());
 
 
  GH_SDI_Document* gsd = gsi->sdi_document();
@@ -147,8 +151,10 @@ void process_gtagml_file(QString path, QString& carried_setup, GTagML_Folder* fl
    { "%SDI-PFILE", sdi_path + ".sdi-prelatex.ntxh" }
   });
 
-  gsd->setup_folder_from_template(gdoc->local_file_name() + ".tex",
-  DEFAULT_SDI_FOLDER "/template", ffolder);
+  QFileInfo qfi(gdoc->local_file_name());
+
+  GH_SDI_Document::setup_folder_from_template(gdoc->local_file_name() + ".tex",
+    DEFAULT_SDI_FOLDER "/template", qfi.absolutePath(), ffolder);
 
  }
 
@@ -190,8 +196,9 @@ int main(int argc, char *argv[])
   }
   else
   {
-   QString setup;
-   process_gtagml_file(file, setup, nullptr);
+   GTagML_Project_Info gpi(folder);
+
+   process_gtagml_file(file, &gpi, nullptr);
   }
  }
  else

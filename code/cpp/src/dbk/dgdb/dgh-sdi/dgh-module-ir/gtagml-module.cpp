@@ -169,6 +169,19 @@ void GTagML_Module::process_gtagml_file(QString path,
   copy_file_to_folder(path, gcf);
  }
 
+
+// if(flagset.contains(":setup-sdi"))
+// {
+//   prepend_template_to_file(cp, DEFAULT_SDI_FOLDER "/prepend",
+//   {
+//    { "%CONSOLE", ROOT_FOLDER "/code/cpp/qmake-console/projects/gtagml/ngml-sdi-console"},
+//    { "%FILE", cp },
+//    { "%SDI-FILE", sdi_path + ".sdi.ntxh" },
+//    { "%SDI-PFILE", sdi_path + ".sdi-prelatex.ntxh" }
+//   });
+// }
+
+
  if(flagset.contains(":setup"))
  {
   if(gdoc->top_level_path().isEmpty())
@@ -202,8 +215,10 @@ void GTagML_Module::process_gtagml_file(QString path,
    { "%SDI-PFILE", sdi_path + ".sdi-prelatex.ntxh" }
   });
 
-  gsd->setup_folder_from_template(gdoc->local_file_name() + ".tex",
-    DEFAULT_SDI_FOLDER "/template", ffolder);
+  QFileInfo qfi(gdoc->local_file_name());
+
+  GH_SDI_Document::setup_folder_from_template(gdoc->local_file_name() + ".tex",
+    DEFAULT_SDI_FOLDER "/template", qfi.absolutePath(), ffolder);
  }
 
  gpi->finalize_post_processing_codes(path, gsi->post_processing_codes());
@@ -343,19 +358,6 @@ void GTagML_Module::compile_gt_manuscript(QString args)
  if(it != current_flagpairs_.end())
    gpi->set_gt_copy_folder(it.value());
 
-// if(current_flagset_.contains(":setup-once"))
-// {
-//  prepend_template_to_file(cp, DEFAULT_SDI_FOLDER "/prepend",
-//  {
-//   { "%CONSOLE", ROOT_FOLDER "/code/cpp/qmake-console/projects/gtagml/ngml-sdi-console"},
-//   { "%FILE", cp },
-//   { "%SDI-FILE", sdi_path + ".sdi.ntxh" },
-//   { "%SDI-PFILE", sdi_path + ".sdi-prelatex.ntxh" }
-//  });
-
-//  gsd->setup_folder_from_template(gdoc->local_file_name() + ".tex",
-//    DEFAULT_SDI_FOLDER "/template", ffolder);
-// }
 
  GTagML_Folder fld(folder); //, file_path, mt);
 
@@ -372,6 +374,41 @@ void GTagML_Module::compile_gt_manuscript(QString args)
  fld.convert_all_files( &GTagML_Module::process_gtagml_file );
 
  check_post_processing_codes(*gpi);
+
+ if(current_flagset_.contains(":setup-once"))
+ {
+  QString newfolder = make_inner_folder_from_file_name("setup", file_path);
+
+  QString cp = copy_file_with_preliminary_suffix(file_path, "prep");
+
+  GH_SDI_Document::setup_folder_from_template(cp,
+    DEFAULT_SDI_FOLDER "/template", folder, newfolder);
+
+  if(current_flagset_.contains(":setup-sdi"))
+  {
+   QDir new_sdi_dir(newfolder + "/sdi-prelatex");
+   if(!new_sdi_dir.exists())
+     if(new_sdi_dir.mkpath("."))
+       qDebug() << "Made path: " << new_sdi_dir.absolutePath();
+
+   QDir old_sdi_dir(newfolder + "/../sdi");
+   QFileInfoList qfil = old_sdi_dir.entryInfoList({"*.sdi-prelatex.ntxh"});
+
+   for(QFileInfo qfi : qfil)
+   {
+    copy_file_to_folder(qfi.absoluteFilePath(), new_sdi_dir.absolutePath());
+   }
+
+   prepend_template_to_file(cp, DEFAULT_SDI_FOLDER "/prepend-once",
+   {
+    { "%CONSOLE", ROOT_FOLDER "/code/cpp/qmake-console/projects/gtagml/ngml-sdi-console"},
+    { "%FILE", cp },
+    { "%SDI-FOLDER", newfolder + "/sdi" },
+    { "%SDI-PFOLDER", newfolder + "/sdi-prelatex" }
+   });
+  }
+ }
+
 
  //qDebug() << "args = " << args;
 }
