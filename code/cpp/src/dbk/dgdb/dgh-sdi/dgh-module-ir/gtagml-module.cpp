@@ -392,12 +392,23 @@ void GTagML_Module::compile_gt_manuscript(QString args)
        qDebug() << "Made path: " << new_sdi_dir.absolutePath();
 
    QDir old_sdi_dir(newfolder + "/../sdi");
-   QFileInfoList qfil = old_sdi_dir.entryInfoList({"*.sdi-prelatex.ntxh"});
-
-   for(QFileInfo qfi : qfil)
    {
-    copy_file_to_folder(qfi.absoluteFilePath(), new_sdi_dir.absolutePath());
+    QFileInfoList qfil = old_sdi_dir.entryInfoList({"*.sdi-prelatex.ntxh"});
+    for(QFileInfo qfi : qfil)
+    {
+     copy_file_to_folder(qfi.absoluteFilePath(), new_sdi_dir.absolutePath());
+    }
    }
+
+   QDir old_info_dir(newfolder + "/../info");
+   {
+    QFileInfoList qfil = old_info_dir.entryInfoList({"*.marks-summary.txt"});
+    for(QFileInfo qfi : qfil)
+    {
+     copy_file_to_folder(qfi.absoluteFilePath(), new_sdi_dir.absolutePath());
+    }
+   }
+
 
    prepend_template_to_file(cp, DEFAULT_SDI_FOLDER "/prepend-once",
    {

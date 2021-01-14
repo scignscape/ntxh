@@ -32,26 +32,27 @@ USING_KANS(Util)
 
 int main(int argc, char* argv[])
 {
- QString folder, file, pfile, czfile;
+ QString folder, file, outfile, pfile, czfile;
+
+// QStringList cmdl = get_cmdl(argc, argv, 2, {
+//   {&folder, DEFAULT_SDI_FOLDER},
+//   {&file, DEFAULT_SDI_FOLDER "/t1/t1.gt.sdi.ntxh"},
+//   {&pfile, DEFAULT_SDI_FOLDER "/t1/t1.gt.sdi-prelatex.ntxh"},
+//   {&czfile, {}}
+//   });
 
  QStringList cmdl = get_cmdl(argc, argv, 2, {
-   {&folder, DEFAULT_SDI_FOLDER},
-   {&file, DEFAULT_SDI_FOLDER "/t1/t1.gt.sdi.ntxh"},
-   {&pfile, DEFAULT_SDI_FOLDER "/t1/t1.gt.sdi-prelatex.ntxh"},
+   {&folder, DEFAULT_SDI_FOLDER "/src/setup"},
+   {&file, DEFAULT_SDI_FOLDER "/src/setup/out/ctg.prep.sdi.ntxh"},
+   {&outfile, DEFAULT_SDI_FOLDER "/sdi-merge.ntxh"},
+   {&pfile, {}},
    {&czfile, {}}
    });
 
-// qDebug() << QString(R"(
-//Folder: %1
-//File: %2
-//PFile: %3
-//czFile: %4
-//   )").arg(folder).arg(file).arg(pfile).arg(czfile);
+// folder = "/home/nlevisrael/gits/ntxh/wip-sebi/dev/documents/ctg/src/setup";
+// file = "/home/nlevisrael/gits/ntxh/wip-sebi/dev/documents/ctg/src/setup/out/ctg.prep.sdi.ntxh";
 
- folder = "/home/nlevisrael/gits/ntxh/wip-sebi/gtagml/ctg/gen/ctg";
- file = "/home/nlevisrael/gits/ntxh/wip-sebi/gtagml/ctg/gen/ctg/out/ctg.gt.sdi.ntxh";
-
- QString outfile = "/home/nlevisrael/gits/ntxh/wip-sebi/gtagml/ctg/gen/sdi-merge.ntxh";
+// QString outfile = "/home/nlevisrael/gits/ntxh/wip-sebi/dev/documents/ctg/sdi-merge.ntxh";
 
  QStringList prelatex_files;
  QStringList marks_files;
@@ -59,14 +60,15 @@ int main(int argc, char* argv[])
  QString cs;
 
  QDir qd(folder);
- qd.cd("sdi");
+ if(!qd.cd("sdi"))
+   qd.cd("sdi-prelatex");
  QStringList qsl = qd.entryList(QDir::Files);
  for(QString file : qsl)
  {
   if(file.endsWith("sdi-prelatex.ntxh"))
     prelatex_files.push_back(qd.absoluteFilePath(file));
 
-  else if(file.endsWith("marks-summay.txt"))
+  else if(file.endsWith("marks-summary.txt"))
     marks_files.push_back(qd.absoluteFilePath(file));
  }
 

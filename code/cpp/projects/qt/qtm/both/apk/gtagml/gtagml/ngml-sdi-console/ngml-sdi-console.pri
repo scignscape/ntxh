@@ -28,7 +28,10 @@ INCLUDEPATH += $$RELAE_GRAPH_SRC_GROUP_DIR
 INCLUDEPATH += $$PHAON_GRAPH_SRC_GROUP_DIR
 
 DEFINES += DEFAULT_GTAGML_FOLDER=\\\"$$ROOT_DIR/dev/consoles/gtagml/gt\\\"
-DEFINES += DEFAULT_SDI_FOLDER=\\\"$$ROOT_DIR/dev/consoles/gtagml/sdi\\\"
+
+#DEFINES += DEFAULT_SDI_FOLDER=\\\"$$ROOT_DIR/dev/consoles/gtagml/sdi\\\"
+
+DEFINES += DEFAULT_SDI_FOLDER=\\\"$$ROOT_DIR/../dev/documents/ctg\\\"
 
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
