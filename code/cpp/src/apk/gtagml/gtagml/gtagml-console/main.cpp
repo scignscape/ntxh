@@ -154,7 +154,7 @@ void process_gtagml_file(QString path, GTagML_Project_Info* gpi, GTagML_Folder* 
   QFileInfo qfi(gdoc->local_file_name());
 
   GH_SDI_Document::setup_folder_from_template(gdoc->local_file_name() + ".tex",
-    DEFAULT_SDI_FOLDER "/template", qfi.absolutePath(), ffolder);
+    {}, DEFAULT_SDI_FOLDER "/template", qfi.absolutePath(), ffolder);
 
  }
 

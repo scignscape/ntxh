@@ -32,11 +32,11 @@ GH_SDI_Document::GH_SDI_Document()
 
 }
 
-void GH_SDI_Document::setup_folder_from_template(QString file_name,
+void GH_SDI_Document::setup_folder_from_template(QString file_name, QString job_name,
   QString template_folder, QString input_folder, QString setup_folder, QString topl)
 {
  QDir qd(setup_folder);
- qd.mkdir("out");
+
  qd.mkdir("ngml");
  qd.cd("ngml");
  QDir tqd(template_folder);
@@ -66,11 +66,33 @@ void GH_SDI_Document::setup_folder_from_template(QString file_name,
 
 
  if(topl.isEmpty())
-   pdfl.replace("%F%", file_name);
+ {
+  if(job_name.isEmpty())
+  {
+   QFileInfo qfi(file_name);
+   job_name = qfi.completeBaseName();
+  }
+
+  pdfl.replace("%F%", file_name);
+  pdfl.replace("%J%", job_name);
+ }
  else
-   pdfl.replace("%F%", topl);
+ {
+  if(job_name.isEmpty())
+  {
+   QFileInfo qfi(topl);
+   job_name = qfi.completeBaseName();
+  }
+
+  pdfl.replace("%F%", topl);
+  pdfl.replace("%J%", job_name);
+ }
 
  save_file(qd.absoluteFilePath("run-pdflatex.sh"), pdfl);
+
+ qd.cdUp();
+ qd.cdUp();
+ qd.mkdir("out");
 }
 
 

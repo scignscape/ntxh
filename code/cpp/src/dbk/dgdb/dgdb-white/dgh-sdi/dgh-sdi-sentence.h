@@ -49,6 +49,6 @@ public:
 };
 
 
-_KANS(GHL)
+_KANS(DGH)
 
-#endif // LANGUAGE_SAMPLE_GROUP__H
+#endif // DGH_SDI_SENTENCE__H

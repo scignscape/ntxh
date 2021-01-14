@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
 
  QStringList cmdl = get_cmdl(argc, argv, 2, {
    {&folder, DEFAULT_SDI_FOLDER "/src/setup"},
-   {&file, DEFAULT_SDI_FOLDER "/src/setup/out/ctg.prep.sdi.ntxh"},
+   {&file, DEFAULT_SDI_FOLDER "/src/setup/out/ctg.sdi.ntxh"},
    {&outfile, DEFAULT_SDI_FOLDER "/sdi-merge.ntxh"},
    {&pfile, {}},
    {&czfile, {}}

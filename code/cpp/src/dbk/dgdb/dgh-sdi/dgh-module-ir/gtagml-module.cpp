@@ -196,6 +196,7 @@ void GTagML_Module::process_gtagml_file(QString path,
   }
 
   GH_SDI_Document::setup_folder_from_template(gdoc->local_file_name() + ".tex",
+    {},
     DEFAULT_SDI_FOLDER "/template", ffolder, gdoc->top_level_path());
 
   if(!gdoc->top_level_path().isEmpty())
@@ -218,7 +219,7 @@ void GTagML_Module::process_gtagml_file(QString path,
   QFileInfo qfi(gdoc->local_file_name());
 
   GH_SDI_Document::setup_folder_from_template(gdoc->local_file_name() + ".tex",
-    DEFAULT_SDI_FOLDER "/template", qfi.absolutePath(), ffolder);
+    {}, DEFAULT_SDI_FOLDER "/template", qfi.absolutePath(), ffolder);
  }
 
  gpi->finalize_post_processing_codes(path, gsi->post_processing_codes());
@@ -381,7 +382,7 @@ void GTagML_Module::compile_gt_manuscript(QString args)
 
   QString cp = copy_file_with_preliminary_suffix(file_path, "prep");
 
-  GH_SDI_Document::setup_folder_from_template(cp,
+  GH_SDI_Document::setup_folder_from_template(cp, qfi.completeBaseName(),
     DEFAULT_SDI_FOLDER "/template", folder, newfolder);
 
   if(current_flagset_.contains(":setup-sdi"))

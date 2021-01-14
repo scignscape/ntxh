@@ -48,7 +48,7 @@ public:
  bool check_sentence_start_resume(GH_Block_Base& bl, u4 pos);
  bool check_sentence_end_suspend(GH_Block_Base& bl, u4 pos);
 
- static void setup_folder_from_template(QString file_name, QString template_folder,
+ static void setup_folder_from_template(QString file_name, QString job_name, QString template_folder,
    QString input_folder, QString setup_folder, QString topl = {});
 };
 

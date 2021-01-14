@@ -5,8 +5,8 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef DGH_SDI_PARAGRAPH__H
-#define DGH_SDI_PARAGRAPH__H
+#ifndef LANGUAGE_SAMPLE_GROUP__H
+#define LANGUAGE_SAMPLE_GROUP__H
 
 #include "kans.h"
 #include "accessors.h"
@@ -19,62 +19,54 @@
 #include "ntxh-parser/ntxh-document.h"
 
 
-class NGML_SDI_Paragraph;
-
-//KANS_CLASS_DECLARE(HGDMCore ,NTXH_Graph)
-//USING_KANS(HGDMCore)
+KANS_CLASS_DECLARE(DGH ,DGH_SDI_Paragraph)
+USING_KANS(HGDMCore)
 
 
-KANS_(DGH)
+KANS_(DSM)
 
-class DGH_SDI_Sentence;
-
-
-class DGH_SDI_Paragraph
+class Language_Sample_Group
 {
  u4 in_database_id_;
 
- u4 in_file_id_;
- u4 file_id_;
-
+ u2 id_;
  u2 page_;
  u2 order_in_page_;
+
+ u2 section_;
 
 // u4 start_;
 // u4 end_;
 // DGH_SDI_Sentence* first_sentence_;
 // DGH_SDI_Sentence* last_sentence_;
 
- NGML_SDI_Paragraph* ngml_;
-
 
 public:
 
- DGH_SDI_Paragraph(u4 id);
+ Language_Sample_Group(u2 id = 0);
 
- DGH_SDI_Paragraph(NGML_SDI_Paragraph* ngml);
+// Language_Sample_Group(NGML_SDI_Paragraph* ngml);
 
- DGH_SDI_Paragraph(u4 file_id, u4 in_file_id);
+// Language_Sample_Group(u4 file_id, u4 in_file_id);
 
 
  ACCESSORS(u4 ,in_database_id)
- ACCESSORS(u4 ,file_id)
- ACCESSORS(u4 ,in_file_id)
+ ACCESSORS(u2 ,id)
  ACCESSORS(u2 ,page)
  ACCESSORS(u2 ,order_in_page)
+
+ ACCESSORS(u2 ,section)
 
 // ACCESSORS(u4 ,start)
 // ACCESSORS(u4 ,end)
 // ACCESSORS(DGH_SDI_Sentence* ,first_sentence)
 // ACCESSORS(DGH_SDI_Sentence* ,last_sentence)
 
- ACCESSORS(NGML_SDI_Paragraph* ,ngml)
-
  QString get_summary();
 
 };
 
 
-_KANS(DGH)
+_KANS(DSM)
 
-#endif // DGH_SDI_PARAGRAPH__H
+#endif // LANGUAGE_SAMPLE_GROUP__H
