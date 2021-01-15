@@ -892,12 +892,12 @@ with no idea of its history. ;;
 `sentenceItem; `swl -> --- -> The streets around here are confusing; often people (someone)
 will ask me for directions. ->> --- -> sco ;;
 
-`sentenceItem; `swl -> itm:students -> Student after student came with their (his/her)
+`sentenceItem; `swl -> itm:studentsgrades -> Student after student came with their (his/her)
 paper to complain about my grade(s). ->> --- -> sco ->> 
 Student after student came with their
 paper to complain about my grades. ;;
 
-`sentenceItem; `swl -> itm:parents -> Student after student %-- and their (his/her) parents
+`sentenceItem; `swl -> itm:parentscomplain -> Student after student %-- and their (his/her) parents
 %-- complained about the tuition increase. ->> --- -> sco ->> 
 Student after student %-- and their parents
 %-- complained about the tuition increase. ;;

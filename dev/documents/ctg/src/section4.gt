@@ -674,8 +674,8 @@ were rescued).
 But if we restrict attention to just, say,
 count-plurals, there are still different schemata for intending
 collections.  This is one dimension I left unexamined 
-in the earlier `q.New York` examples (see `ref<itm:boroughs> 
-and `ref<itm:commute>): |+| 
+in the earlier `q.New York` examples (see `ref<itm:boroughs>;
+and `ref<itm:commute>;): |+| 
 
 `sentenceList,
 `sentenceItem; `swl -> itm:NYboroughs -> New Yorkers live in one of five boroughs. -> ref ;;

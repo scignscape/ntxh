@@ -16,9 +16,7 @@ TEMPLATE = app
 
 INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR $$SRC_ROOT_DIR
 
-INCLUDEPATH += $$SRC_ROOT_DIR/dbk/dgdb/dgdb-white
-
-
+INCLUDEPATH += $$DGH_SDI_SRC_GROUP_DIR
 
 INCLUDEPATH += $$NTXH_SRC_GROUP_DIR
 
@@ -49,12 +47,12 @@ SOURCES += \
   $$SRC_DIR/main.cpp \
 
 
-LIBS += -L$$TARGETSDIR -lngml-sdi -lntxh-parser -lntxh \
-  -ldgh-sdi
+LIBS += -L$$TARGETSDIR -lngml-sdi -lntxh-parser -lntxh  \
+  -ldgh-sdi  -lquazip
 
 
-# -lquazip
-
+QUA_ZIP_LIB_DIR = $$TARGETSDIR
+defined(QUA_ZIP_LIB_DIR, var) { LIBS += -L$$QUA_ZIP_LIB_DIR  -lquazip }
 
 
 

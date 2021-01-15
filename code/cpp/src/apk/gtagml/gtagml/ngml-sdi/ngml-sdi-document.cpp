@@ -696,7 +696,7 @@ void NGML_SDI_Document::parse()
 //? output_pages();
 }
 
-void NGML_SDI_Document::output_pages()
+void NGML_SDI_Document::output_pages(QString mergefile)
 {
  QDir qd(folder_);
 
@@ -704,6 +704,7 @@ void NGML_SDI_Document::output_pages()
  {
   qd.mkdir("pages");
   qd.cd("pages");
+  pages_folder_ = qd.absolutePath();
  }
  else
  {
@@ -720,7 +721,7 @@ void NGML_SDI_Document::output_pages()
   fn.prepend('p');
   fn.append(".txt");
   QString ffn = qd.absoluteFilePath(fn);
-  qDebug() << "FFN: " << ffn;
+  qDebug() << "Page file: " << ffn;
   QString contents;
   page->write(contents);
   save_file(ffn, contents);
@@ -729,9 +730,15 @@ void NGML_SDI_Document::output_pages()
 
 #ifdef USING_ZIP
  if(zip_path_.isEmpty())
-   zip_path_ = folder_ + ".sdi.zip";
+   zip_path_ = pages_folder_ + ".sdi.zip";
+
+ QFileInfo qfi(zip_path_);
+ zip_path_ = qfi.absoluteFilePath();
 
  qDebug() << "Using zip path: " << zip_path_;
+
+ if(!mergefile.isEmpty())
+   files.push_back({mergefile, {"pages/sdi-merge.ntxh", "sdi-merge.ntxh"}});
 
  QuaZip zip(zip_path_);
  zip.setFileNameCodec("IBM866");
@@ -749,7 +756,7 @@ void NGML_SDI_Document::output_pages()
  
  for(QPair<QString, QPair<QString, QString>> pr : files)
  {
-  qDebug() << "PR: " << pr;
+//  qDebug() << "PR: " << pr;
 
   inFile.setFileName(pr.first);
   if (!inFile.open(QIODevice::ReadOnly))
@@ -759,7 +766,6 @@ void NGML_SDI_Document::output_pages()
   }
 
   QuaZipNewInfo qni = QuaZipNewInfo(pr.second.first, pr.second.second);
-  //qni.setPermissions(QFileDevice::ReadOther);
   qni.setFilePermissions(pr.first);
 
   if (!outFile.open(QIODevice::WriteOnly, qni))
@@ -768,9 +774,6 @@ void NGML_SDI_Document::output_pages()
    continue; 
   }
  
-//  qni.setPermissions(QFileDevice::ReadOther);
-  //qni.setFilePermissions(pr.first);
-
   while (inFile.getChar(&c))
     outFile.putChar(c);
  
@@ -795,6 +798,7 @@ void NGML_SDI_Document::output_pages()
  if (zip.getZipError() != 0)
    qDebug() << "Zip failed ...";
 
+#ifdef HIDE
  //QString copy_path_;// = folder_ + "/../../test/" + qd.dirName() + ".sdi.zip";
  QString unzip_path = folder_ + "/../../test/test";
 
@@ -812,6 +816,7 @@ void NGML_SDI_Document::output_pages()
   if(!unzip_test_path_.isEmpty())
     check_read_page(copy_path_, unzip_test_path_, qd.dirName(), 1);
  }
+#endif // HIDE
 #endif //def USING_ZIP
 }
 

@@ -132,3 +132,6 @@ GTAGML_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/gtagml/gtagml
 
 DGDB_WHITE_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/dgdb-white
 
+DGH_SDI_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/dgh-sdi
+
+

@@ -53,6 +53,6 @@ void NGML_SDI_Page::write(QString& contents)
     << ' ' << mark.end_y() << '\n'; 
  }
 
- qDebug() << "Contents " << contents;
+ // qDebug() << "Contents " << contents;
 }
 

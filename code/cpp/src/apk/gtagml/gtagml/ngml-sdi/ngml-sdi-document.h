@@ -114,7 +114,8 @@ public:
  void parse_info_hypernode(NTXH_Graph& g, NTXH_Graph::hypernode_type* hn);
 
  NGML_SDI_Page* get_page(u4 page);
- void output_pages();
+
+ void output_pages(QString mergefile = {});
 
  NGML_SDI_Page* check_read_page(QString zip_file_path, 
    QString unzip_path, QString unzip_folder_name, u4 page_number);

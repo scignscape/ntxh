@@ -131,7 +131,7 @@ void process_gtagml_file(QString path, GTagML_Project_Info* gpi, GTagML_Folder* 
   QDir sdi_dir(cpy);
   if(!sdi_dir.exists())
     if(sdi_dir.mkpath("."))
-      qDebug() << "Made path: " << sdi_dir;
+      qDebug() << "Made path: " << sdi_dir.absolutePath();
 
   cp = copy_file_to_folder(mark_path, cpy);
   qDebug() << "Copied " << mark_path << " to " << cp;

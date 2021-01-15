@@ -354,6 +354,11 @@ $global-baseline-skip: \the\orig-basels^^J%
 {\embedfile{\jobname.sdi.zip}\message{OK^^J^^J}}
 {\message{File not found^^J^^J}}}
 
+{\message{^^J^^JSDI: Trying to embed pages.sdi.zip ...} 
+\IfFileExists{pages.sdi.zip}
+{\embedfile{pages.sdi.zip}\message{OK^^J^^J}}
+{\message{File not found^^J^^J}}}
+
 \message{File}
 
 \oldCCforEXC\oldCCforDASH

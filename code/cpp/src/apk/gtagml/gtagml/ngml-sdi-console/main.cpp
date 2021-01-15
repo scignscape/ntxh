@@ -63,7 +63,9 @@ int main(int argc, char* argv[])
  QDir qd(folder);
  if(!qd.cd("sdi"))
    qd.cd("sdi-prelatex");
+
  QStringList qsl = qd.entryList(QDir::Files);
+
  for(QString file : qsl)
  {
   if(file.endsWith("sdi-prelatex.ntxh"))
@@ -75,9 +77,7 @@ int main(int argc, char* argv[])
 
  NGML_SDI_Document nsd(file, folder);
 
- //nsd.set_pages_folder(pagesf);
-
-  nsd.set_pages_folder("../oo");
+ nsd.set_pages_folder(pagesf);
 
  nsd.load_prelatex_files(prelatex_files);
 
@@ -94,7 +94,16 @@ int main(int argc, char* argv[])
 
  dsd.review_dgh();
 
- nsd.output_pages();
+ nsd.output_pages(outfile);
+
+ QString zp = nsd.zip_path();
+
+ if(!zp.isEmpty())
+ {
+  // // we've generated the zip file, now
+   //   copy it for embedding ...
+  copy_file_to_folder(zp, folder);
+ }
 
 #ifdef HIDE
 
@@ -104,6 +113,7 @@ int main(int argc, char* argv[])
 
  nsd.output_pages();
 #endif // HIDE
+
  return 0;
 }
 

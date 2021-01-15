@@ -232,21 +232,21 @@ Suppose my friend says this, before and after: |+|
 
 `sentenceList,
 `sentenceItem; `swl -> itm:put -> Can you put some almond milk in my coffee? -> pra ;;
-`sentenceItem; `swl -> itm:after -> Is there milk in this coffee? -> pra ;;
+`sentenceItem; `swl -> itm:milkafter -> Is there milk in this coffee? -> pra ;;
 `sentenceList`
 
  |.|
 
-Between (`ref<itm:put>;) and (`ref<itm:after>;) I do put almond milk
-in his coffee and affirm `q.yes` to (`ref<itm:after>;).  I feel it
-proper to read (`ref<itm:after>;)'s `q.milk` as really meaning
+Between (`ref<itm:put>;) and (`ref<itm:milkafter>;) I do put almond milk
+in his coffee and affirm `q.yes` to (`ref<itm:milkafter>;).  I feel it
+proper to read (`ref<itm:milkafter>;)'s `q.milk` as really meaning
 `q.almond milk`/, in light of (`ref<itm:put>;).  Actually
 I should be `i.less` inclined to say `q.yes`
 if (maybe as a prank) someone had instead
 put real (animal) milk in the coffee.  In responding
 to his question I mentally substitute what
 he almost certainly `i.meant` for how
-(taken out of context) (`ref<itm:after>;) would usually
+(taken out of context) (`ref<itm:milkafter>;) would usually
 be interpreted.  In this current
 dialog, the `i.milk` concept not only
 includes vegan milks, apparently, but
