@@ -35,25 +35,26 @@ INCLUDEPATH += $$SRC_DIR/freetype/ft2build
 INCLUDEPATH += $$SRC_DIR/freetype
 INCLUDEPATH += $$SRC_DIR/ft2build
 
-MPF_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/htxn/mosaic
+INCLUDEPATH += $$SRC_ROOT_DIR/apk/QScign/
 
-INCLUDEPATH += $$MPF_SRC_GROUP_DIR
 
-# # mosaic
-HEADERS += \
-  $$MPF_SRC_GROUP_DIR/mpf/mpf-plugin-info.h \
-  $$MPF_SRC_GROUP_DIR/mpf/mpf-plugin-info-dialog.h \
-  $$MPF_SRC_GROUP_DIR/mpf/mpf-test-dialog.h \
+#INCLUDEPATH += $$MPF_SRC_GROUP_DIR
+#MPF_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/htxn/mosaic
+#INCLUDEPATH += $$MPF_SRC_GROUP_DIR
+## # mosaic
+#HEADERS += \
+#  $$MPF_SRC_GROUP_DIR/mpf/mpf-plugin-info.h \
+#  $$MPF_SRC_GROUP_DIR/mpf/mpf-plugin-info-dialog.h \
+#  $$MPF_SRC_GROUP_DIR/mpf/mpf-test-dialog.h \
+#SOURCES += \
+#  $$MPF_SRC_GROUP_DIR/mpf/mpf-plugin-info.cpp \
+#  $$MPF_SRC_GROUP_DIR/mpf/mpf-plugin-info-dialog.cpp \
+#  $$MPF_SRC_GROUP_DIR/mpf/mpf-test-dialog.cpp \
 
-SOURCES += \
-  $$MPF_SRC_GROUP_DIR/mpf/mpf-plugin-info.cpp \
-  $$MPF_SRC_GROUP_DIR/mpf/mpf-plugin-info-dialog.cpp \
-  $$MPF_SRC_GROUP_DIR/mpf/mpf-test-dialog.cpp \
 
 SOURCES += \
   $$SRC_ROOT_DIR/add-minimize-frame.cpp \
 
-INCLUDEPATH += $$MPF_SRC_GROUP_DIR
 
 
 # # if there's one default ...

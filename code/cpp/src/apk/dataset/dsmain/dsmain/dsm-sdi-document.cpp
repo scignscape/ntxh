@@ -73,8 +73,6 @@ void DSM_SDI_Document::parse_sample_hypernode(NTXH_Graph& g, NTXH_Graph::hyperno
   QString alt = prs[13].first;
   ls->set_alternate_text(alt);
 
-
-  .0
   // :n:1 :i:2 :o:3 :p:5 :j:6 :x:7 :y:8 :b:4 ;
 //  nss->set_id(prs[0].first.toInt());
 //  dss->set_page(prs[1].first.toInt());

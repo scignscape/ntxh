@@ -19,11 +19,14 @@
 #include "ntxh-parser/ntxh-document.h"
 
 
+
 KANS_CLASS_DECLARE(DGH ,DGH_SDI_Paragraph)
 USING_KANS(HGDMCore)
 
 
 KANS_(DSM)
+
+class Language_Sample;
 
 class Language_Sample_Group
 {
@@ -39,6 +42,8 @@ class Language_Sample_Group
 // u4 end_;
 // DGH_SDI_Sentence* first_sentence_;
 // DGH_SDI_Sentence* last_sentence_;
+
+ QVector<Language_Sample*> samples_;
 
 
 public:
@@ -56,6 +61,8 @@ public:
  ACCESSORS(u2 ,order_in_page)
 
  ACCESSORS(u2 ,section)
+
+ ACCESSORS(QVector<Language_Sample*> ,samples)
 
 // ACCESSORS(u4 ,start)
 // ACCESSORS(u4 ,end)

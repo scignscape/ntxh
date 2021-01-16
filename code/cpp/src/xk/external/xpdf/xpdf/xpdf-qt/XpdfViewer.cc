@@ -55,22 +55,15 @@
 #include <QDebug>
 #include <QClipboard>
 
-#include <QProcess>
-
 #include "Annot.h"
 
 
 // // mosaic //////////////////////////////
-#include "mpf/mpf-plugin-info-dialog.h"
-#include "mpf/mpf-test-dialog.h"
-#include "mosaic-menubar.cpp"
+//#include "mpf/mpf-plugin-info-dialog.h"
+//#include "mpf/mpf-test-dialog.h"
+#include "mosaic/mosaic-menubar.cpp"
 #include <QWidgetAction>
 #include <QPainter>
-
-#include "qconsole.h"
-#include "qimplconsole.h"
-#include "qconsole-dialog.h"
-
 
 #include "textio.h"
 
@@ -2943,7 +2936,7 @@ void XpdfViewer::createMainMenu() {
   helpSubmenu->addAction("About XpdfReader...", this, SLOT(aboutMenuAction()));
 
   QWidgetAction* sep = mainMenu->add_text_separator();
-  QMenu* mosaic_submenu = mainMenu->addMenu("&MPF");
+  QMenu* mosaic_submenu = mainMenu->addMenu("&Mosaic");
   mosaic_submenu->menuAction()->setProperty("mosaic", true);
   QLinearGradient* qlg = new QLinearGradient(0,0,0,400);
   qlg->setColorAt(0.0, QColor(250,255,245));
@@ -2951,22 +2944,7 @@ void XpdfViewer::createMainMenu() {
   Mosaic_Menubar::add_action_data(mosaic_submenu->menuAction(), 
     "QLinearGradient", qlg);
   mosaic_submenu->setObjectName("mosaic_submenu");
-  mosaic_submenu->addAction("MPF Plugin (active)");
-  mosaic_submenu->addAction("Manage Plugins ...", []
-  {
-   MPF_Plugin_Info_Dialog* mid = new MPF_Plugin_Info_Dialog(nullptr);
-   mid->show();
-  });
-  mosaic_submenu->addAction("Test Question Demo ...", []
-  {
-   MPF_Test_Dialog* mtd = new MPF_Test_Dialog;
-   mtd->show();
-  });
-
-  mosaic_submenu->addAction("Take ScreenShot", [this]
-  {
-   Mosaic_Menubar::handle_screenshot(this->winId());
-  });
+  mosaic_submenu->addAction("Show Dataset ...");
 
   mainMenu->use_default_stylesheet("the_Mosaic_Menubar");
 
@@ -3230,35 +3208,14 @@ void XpdfViewer::addTab() {
    });
 
    qm->addAction(QString("3D %1 Viewer (launch IQmol)").arg(chem_name),
-     [chem_name]
+     []
    {
-
-    static QMap<QString, QString> chems {{"thionyl chloride", "7719-09-7.mol"},
-      {"lactose", "14641-93-1.mol"} };
-
-    QString proc = QString("%1/../run-iqmol.sh").arg(AR_ROOT_DIR);
-
-    QString file = QString("%1/../%2").arg(AR_ROOT_DIR).arg(chems[chem_name]);
-
-    QProcess::startDetached("/bin/sh", {proc, "--args", file});
-   });
-
-   qm->addAction(QString("Select (repl)"),
-     [this, pdf]
-   {
-    //int page;
-    QString qs = pdf->getSelectedText(nullptr);
-
-    QImplConsole* qc = QImplConsole::getInstance();// new QImplConsole(this, "REPL");
-    qc->setPrompt(">");
-    QConsole_Dialog* qcd = new QConsole_Dialog(qs, qc, this);
-    qcd->exec();
    });
 
 
    if(figname.startsWith("lst"))
    {
-    qm->addAction(QString("Open GTagML Project and Files for %1 %2")
+    qm->addAction(QString("Open PGVM Project and Files for %1 %2")
                   .arg(figk).arg(fignum), [figname, fign, this]
     {
      this->app->run_fig_msg("run-fig", fign);

@@ -125,6 +125,10 @@ QUA_ZIP_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/quazip
 
 ANGELSCRIPT_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/angelscript
 
+SCIGNSTAGE_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/QScign/ScignStage
+
+
+
 HTXN_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/htxn/htxn
 MPF_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/htxn/mosaic
 CWL_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/cwl

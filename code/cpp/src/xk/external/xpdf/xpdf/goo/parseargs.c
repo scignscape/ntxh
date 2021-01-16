@@ -6,11 +6,11 @@
  * Copyright 1996-2003 Glyph & Cog, LLC
  */
 
-//?#include <stdio.h>
+#include <stdio.h>
 #include <stddef.h>
-//?#include <string.h>
-//?#include <stdlib.h>
-//?#include <ctype.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
 #include "parseargs.h"
 
 static ArgDesc *findArg(ArgDesc *args, char *arg);
@@ -55,13 +55,13 @@ void printUsage(const char *program, const char *otherArgs, ArgDesc *args) {
       w = w1;
   }
 
- //? fprintf(stderr, "Usage: %s [options]", program);
+  fprintf(stderr, "Usage: %s [options]", program);
   if (otherArgs)
-    ; //? fprintf(stderr, " %s", otherArgs);
- //? fprintf(stderr, "\n");
+    fprintf(stderr, " %s", otherArgs);
+  fprintf(stderr, "\n");
 
   for (arg = args; arg->arg; ++arg) {
- //?   fprintf(stderr, "  %s", arg->arg);
+    fprintf(stderr, "  %s", arg->arg);
     w1 = 9 + w - (int)strlen(arg->arg);
     switch (arg->kind) {
     case argInt:
@@ -82,10 +82,10 @@ void printUsage(const char *program, const char *otherArgs, ArgDesc *args) {
       typ = "";
       break;
     }
-    //?fprintf(stderr, "%-*s", w1, typ);
+    fprintf(stderr, "%-*s", w1, typ);
     if (arg->usage)
-      ;// fprintf(stderr, ": %s", arg->usage);
-    //fprintf(stderr, "\n");
+      fprintf(stderr, ": %s", arg->usage);
+    fprintf(stderr, "\n");
   }
 }
 
@@ -140,7 +140,7 @@ static GBool grabArg(ArgDesc *arg, int i, int *argc, char *argv[]) {
     }
     break;
   default:
-    //?fprintf(stderr, "Internal error in arg table\n");
+    fprintf(stderr, "Internal error in arg table\n");
     n = 1;
     break;
   }

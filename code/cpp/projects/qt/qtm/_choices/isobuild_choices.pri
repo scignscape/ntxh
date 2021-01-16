@@ -1,0 +1,1 @@
+CHOICE_FEATURES = xpdf 

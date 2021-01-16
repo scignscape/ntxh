@@ -23,6 +23,9 @@ INCLUDEPATH += $$RELAE_GRAPH_SRC_GROUP_DIR
 
 INCLUDEPATH += $$HTXN_SRC_GROUP_DIR
 
+INCLUDEPATH += $$QRING_SRC_GROUP_DIR
+
+
 
 DEFINES += DEFAULT_WCM_FOLDER=\\\"$$DATA_ROOT_DIR/wcm\\\"
 
@@ -40,12 +43,14 @@ DEFINES += USE_KANS
 
 
 HEADERS +=  \
+  $$SRC_DIR/dataset.h  \
   $$SRC_DIR/dsm-sdi-document.h  \
   $$SRC_DIR/language-sample.h  \
   $$SRC_DIR/language-sample-group.h  \
 
 
 SOURCES += \
+  $$SRC_DIR/dataset.cpp  \
   $$SRC_DIR/dsm-sdi-document.cpp  \
   $$SRC_DIR/language-sample.cpp  \
   $$SRC_DIR/language-sample-group.cpp  \
