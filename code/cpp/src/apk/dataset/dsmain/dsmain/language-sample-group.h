@@ -45,6 +45,8 @@ class Language_Sample_Group
 
  QVector<Language_Sample*> samples_;
 
+ QStringList issues_;
+
 
 public:
 
@@ -62,6 +64,8 @@ public:
 
  ACCESSORS(u2 ,section)
 
+ QString get_issue();
+
  ACCESSORS(QVector<Language_Sample*> ,samples)
 
 // ACCESSORS(u4 ,start)
@@ -70,6 +74,12 @@ public:
 // ACCESSORS(DGH_SDI_Sentence* ,last_sentence)
 
  QString get_summary();
+
+ QString get_main_text();
+
+ QString get_example_form();
+
+ void add_sample(Language_Sample* sample);
 
 };
 

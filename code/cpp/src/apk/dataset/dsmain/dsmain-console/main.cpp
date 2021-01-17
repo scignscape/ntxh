@@ -33,6 +33,9 @@
 
 #include "ScignStage-ling/xpdf-bridge.h"
 
+#ifdef USING_LEXPAIR
+#include "lexpair/lexpair-dialog.h"
+#endif // USING_LEXPAIR
 
 #include "textio.h"
 //?#include "get-cmdl.h"
@@ -56,7 +59,7 @@ int main1(int argc, char* argv[])
 
 // dsd.review_dgh();
 
-
+ QString mergefile = DEFAULT_SDI_FOLDER "/sdi-merge.ntxh";
  QString samplesfile = DEFAULT_SDI_FOLDER "/out/ctg.ntxh";
 
  DSM_SDI_Document dsd;
@@ -73,7 +76,27 @@ int main(int argc, char **argv)
  QApplication qapp(argc, argv);
  qapp.setWindowIcon(QIcon(DEFAULT_ICON_FOLDER "/app-icon.png"));
 
- Dataset ds;
+ // // put these in the dataset folder if they're not already ...
+ QString _mergefile = DEFAULT_SDI_FOLDER "/sdi-merge.ntxh";
+ QString _samplesfile = DEFAULT_SDI_FOLDER "/out/ctg.ntxh";
+ QString _pdffile = DEFAULT_SDI_FOLDER "/out/ctg.pdf";
+
+ QDir qd(DEFAULT_DATASET_FOLDER);
+
+ if(!qd.exists("sdi-merge.ntxh"))
+   copy_file_to_folder(_mergefile, DEFAULT_DATASET_FOLDER);
+
+ if(!qd.exists("samples.ntxh"))
+   copy_file_to_folder_with_rename(_samplesfile, DEFAULT_DATASET_FOLDER, "samples");
+
+ if(!qd.exists("main.pdf"))
+   copy_binary_file_to_folder_with_rename(_pdffile, DEFAULT_DATASET_FOLDER, "main");
+
+
+ Dataset ds(DEFAULT_DATASET_FOLDER);
+
+ ds.load_from_folder();
+
  //?ds.load_from_file()DEFAULT_NTXH_FOLDER  "/ctg.ngml.ntxh");
 
  //?ds.set_pdf_path(DEFAULT_NTXH_FOLDER  "/main.pdf");
@@ -86,14 +109,14 @@ int main(int argc, char **argv)
  ScignStage_Ling_Dialog dlg (nullptr, &ds);
 #endif
 
- dlg.set_replace_dataset_function([](QString path) -> Dataset*
- {
-  Dataset* result = new Dataset;
-  result->load_from_file(path);
-  if(result->groups().isEmpty())
-    return nullptr;
-  return result;
- });
+// dlg.set_replace_dataset_function([](QString path) -> Dataset*
+// {
+////  Dataset* result = new Dataset;
+////  result->load_from_file(path);
+////  if(result->groups().isEmpty())
+////    return nullptr;
+////  return result;
+// });
 
 #ifdef USING_KPH
  dlg.set_phr_init_function([&dlg](PHR_Runner& phr, PHR_Symbol_Scope*& pss)

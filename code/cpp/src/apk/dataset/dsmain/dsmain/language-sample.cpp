@@ -11,7 +11,7 @@
 
 
 
-#include <QDebug>
+#include <QRegularExpression>
 
 
 
@@ -23,6 +23,40 @@ Language_Sample::Language_Sample(u2 id)
 {
 
 }
+
+
+void Language_Sample::check_alternate_text(QString text)
+{
+ if(text == "(!)")
+ {
+  QString txt = text_;
+  txt.replace(QRegularExpression(QStringLiteral("\\(.*\\)")),{});
+  text = txt.simplified();
+ }
+
+ alternate_text_ = text;
+}
+
+
+QString Language_Sample::archival_or_text()
+{
+ return alternate_text_.isEmpty()? text_ : alternate_text_;
+}
+
+void Language_Sample::parse_classification(QString text)
+{
+ s4 index = text.indexOf(';');
+ if(index == -1)
+   set_issue(text);
+ else
+ {
+  QString q1 = text.mid(0, index);
+  QString q2 = text.mid(index + 1);
+  set_issue(q1);
+  set_example_form(q2);
+ }
+}
+
 
 //SDI_Sentence::SDI_Sentence(//NGML_SDI_Sentence* ngml,
 //    u4 in_file_id, u4 file_id, u4 page)

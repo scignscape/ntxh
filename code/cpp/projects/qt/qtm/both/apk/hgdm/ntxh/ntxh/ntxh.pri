@@ -12,8 +12,6 @@ QT -= gui
 
 include($$ROOT_DIR/../preferred/sysr.pri)
 
-message(dd: $$DESTDIR)
-
 INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR $$SRC_ROOT_DIR
 
 INCLUDEPATH += $$RELAE_GRAPH_SRC_GROUP_DIR

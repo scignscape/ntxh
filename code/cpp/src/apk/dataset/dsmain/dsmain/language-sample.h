@@ -36,10 +36,16 @@ class Language_Sample
  QString external_source_;
 
  QString text_;
- QString classification_;
+ QString issue_;
 
  QString alternate_text_;
-//? NGML_Language_Sample* ngml_;
+
+ QString example_form_;
+
+ QString pre_;
+ QString post_;
+
+ //? NGML_Language_Sample* ngml_;
 
 public:
 
@@ -58,9 +64,20 @@ public:
 
  ACCESSORS(QString ,page_string)
  ACCESSORS(QString ,text)
- ACCESSORS(QString ,classification)
+ ACCESSORS(QString ,issue)
 
- ACCESSORS(QString ,alternate_text)
+// ACCESSORS(QString ,alternate_text)
+
+ ACCESSORS(QString ,example_form)
+
+ ACCESSORS(QString ,pre)
+ ACCESSORS(QString ,post)
+
+ void check_alternate_text(QString text);
+
+ QString archival_or_text();
+
+ void parse_classification(QString text);
 
 //? ACCESSORS(NGML_SDI_Sentence* ,ngml)
 

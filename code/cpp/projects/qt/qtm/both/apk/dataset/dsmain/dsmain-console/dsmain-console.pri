@@ -33,7 +33,7 @@ INCLUDEPATH += $$HTXN_SRC_GROUP_DIR
 
 DEFINES += DEFAULT_ICON_FOLDER=\\\"$$ROOT_DIR/code/assets/icons\\\"
 
-DEFINES += DEFAULT_WCM_FOLDER=\\\"$$DATA_ROOT_DIR/wcm\\\"
+DEFINES += DEFAULT_DATASET_FOLDER=\\\"$$ROOT_DIR/data/dataset\\\"
 
 DEFINES += DEFAULT_NTXH_FOLDER=\\\"$$DATA_ROOT_DIR/ntxh\\\"
 
@@ -77,6 +77,17 @@ contains(CHOICE_FEATURES, "xpdf") \#/
  LIBS += -L$$TARGETSDIR -lxpdf
 
  include($$ROOT_DIR/../preferred/xpdf.pri)
+}
+
+
+contains(CHOICE_FEATURES, "lex-pair") \#/
+{
+ message(DEFINE\'ing USING_LEXPAIR)
+ DEFINES += USING_LEXPAIR
+
+ INCLUDEPATH += $$LEXPAIR_SRC_GROUP_DIR
+
+ LIBS += -L$$TARGETSDIR -llexpair
 }
 
 

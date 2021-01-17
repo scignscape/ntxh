@@ -9,6 +9,8 @@
 
 //#include "ngml-sdi/ngml-sdi-paragraph.h"
 
+#include "language-sample.h"
+
 
 #include <QDebug>
 
@@ -37,6 +39,43 @@ Language_Sample_Group::Language_Sample_Group(u2 id)
      page_(0), order_in_page_(0), section_(0)
 {
 
+}
+
+
+QString Language_Sample_Group::get_example_form()
+{
+ for(Language_Sample* ls : samples_)
+ {
+  if(!ls->example_form().isEmpty())
+    return ls->example_form();
+ }
+ return "txt";
+}
+
+QString Language_Sample_Group::get_issue()
+{
+ return issues_.join(';');
+}
+
+
+void Language_Sample_Group::add_sample(Language_Sample* sample)
+{
+ samples_.push_back(sample);
+
+ QString issue = sample->issue();
+ if(issue.isEmpty())
+   return;
+ if(!issues_.contains(issue))
+   issues_.push_back(issue);
+}
+
+
+QString Language_Sample_Group::get_main_text()
+{
+ if(samples_.isEmpty())
+   return {};
+ Language_Sample* sample = samples_.first();
+ return sample->archival_or_text();
 }
 
 

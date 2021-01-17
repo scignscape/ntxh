@@ -236,6 +236,49 @@ inline QString copy_file_to_folder(QString path, QString folder)
  return newpath;
 }
 
+inline QString copy_binary_file_to_folder(QString path, QString folder)
+{
+ QFileInfo qfi(path);
+ QString fn = qfi.fileName();
+ QDir qd(folder);
+ QString newpath = qd.filePath(fn);
+
+ if( QFile::copy(path, newpath) )
+   return newpath;
+
+ return {};
+}
+
+inline QString copy_file_to_folder_with_rename(QString path, QString folder, QString name)
+{
+ QFileInfo qfi(path);
+
+ QString suffix = qfi.completeSuffix();
+
+ QDir qd(folder);
+ QString newpath = qd.filePath(name + "." + suffix);
+
+ QString contents;
+ load_file(path, contents);
+ save_file(newpath, contents);
+ return newpath;
+}
+
+inline QString copy_binary_file_to_folder_with_rename(QString path, QString folder, QString name)
+{
+ QFileInfo qfi(path);
+
+ QString suffix = qfi.completeSuffix();
+
+ QDir qd(folder);
+ QString newpath = qd.filePath(name + "." + suffix);
+
+ if( QFile::copy(path, newpath) )
+   return newpath;
+
+ return {};
+}
+
 inline QString copy_file_with_preliminary_suffix(QString path, QString preliminary_suffix)
 {
  QFileInfo qfi(path);

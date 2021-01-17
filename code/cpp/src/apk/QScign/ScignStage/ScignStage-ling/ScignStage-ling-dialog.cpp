@@ -251,8 +251,8 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
  ds_path_line_edit_ = new QLineEdit(this);
 
  ds_path_open_button_ = new QPushButton("Open", this);
- pdf_path_label_ = new QLabel("PDF Path:", this);
- pdf_path_line_edit_ = new QLineEdit(this);
+ pdf_file_label_ = new QLabel("PDF Path:", this);
+ pdf_file_line_edit_ = new QLineEdit(this);
 
  connect(ds_path_open_button_, SIGNAL(clicked()),
    this, SLOT(get_replacement_dataset_path()));
@@ -264,8 +264,8 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
 
  paths_layout_->addStretch();
 
- paths_layout_->addWidget(pdf_path_label_);
- paths_layout_->addWidget(pdf_path_line_edit_);
+ paths_layout_->addWidget(pdf_file_label_);
+ paths_layout_->addWidget(pdf_file_line_edit_);
 
  set_paths_from_dataset(*ds);
 
@@ -332,9 +332,7 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
    show_archival_version_button_->setText("ON");
    show_archival_version_button_->setToolTip("Set to OFF");
    if(current_sample_)
-     ; //? full_sentence_plain_text_edit_->setPlainText(current_sample_->archival_or_text());
-   else if(current_open_group_)
-     ; //? full_sentence_plain_text_edit_->setPlainText(current_open_group_->get_main_archival_or_text());
+     full_sentence_plain_text_edit_->setPlainText(current_sample_->archival_or_text());
   }
   else
   {
@@ -343,10 +341,6 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
 
    if(current_sample_)
      full_sentence_plain_text_edit_->setPlainText(current_sample_->text());
-
-   else if(current_open_group_)
-     ; //?full_sentence_plain_text_edit_->setPlainText(current_open_group_->get_main_text());
-
   }
 
  });
@@ -489,7 +483,7 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
       twi = twi->parent();
     Language_Sample* ls
       = twi->data(0, Qt::UserRole).value<Language_Sample*>();
-    page = 1;//ls->page();
+    page = ls->page();
     text = ls->text().simplified();
    }
    else
@@ -497,7 +491,7 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
     Language_Sample_Group* lsg
       = twi->data(0, Qt::UserRole).value<Language_Sample_Group*>();
     page = lsg->page();
- //?   text = lsg->get_main_text().simplified();
+    text = lsg->get_main_text().simplified();
    }
    if(qsl.isEmpty())
    {
@@ -565,10 +559,10 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
    this, SLOT(handle_filtered_down()));
 
  connect(nav_panel_, SIGNAL(sample_up_requested()),
-   this, SLOT(handle_sample_up()));
+   this, SLOT(handle_group_up()));
 
  connect(nav_panel_, SIGNAL(sample_down_requested()),
-   this, SLOT(handle_sample_down()));
+   this, SLOT(handle_group_down()));
 
  connect(nav_panel_, SIGNAL(peer_up_requested()),
    this, SLOT(handle_peer_up()));
@@ -646,10 +640,10 @@ void ScignStage_Ling_Dialog::get_replacement_dataset_path()
 
 void ScignStage_Ling_Dialog::set_paths_from_dataset(Dataset& ds)
 {
- ds_path_line_edit_->setText(ds.file());
+ ds_path_line_edit_->setText(ds.samples_file());
  ds_path_line_edit_->setCursorPosition(0);
- pdf_path_line_edit_->setText(ds.pdf_path());
- pdf_path_line_edit_->setCursorPosition(0);
+ pdf_file_line_edit_->setText(ds.pdf_file());
+ pdf_file_line_edit_->setCursorPosition(0);
 }
 
 
@@ -660,29 +654,38 @@ void ScignStage_Ling_Dialog::absorb_dataset(Dataset& ds)
  for(auto& it : sd)
    section_pages_first_last_[it.first.second] = it.second;
 
- pdf_file_ = ds.pdf_path();
+ pdf_file_ = ds.pdf_file();
 
- subdocument_kind_ = ds.subdocument_kind();
+ //?subdocument_kind_ = ds.subdocument_kind();
 
- samples_ = &ds.samples();
- groups_ = &ds.groups();
+ samples_ = ds.samples();
+ groups_ = ds.groups();
 
  int c = 0;
  for(Language_Sample_Group* group : *groups_)
  {
   ++c;
-  QString mt; //? = group->get_main_text().simplified();
+  QString mt = group->get_main_text().simplified();
+
   if(mt.isEmpty())
     continue;
+
+  mt.replace("---{}", "--");
 
   QStringList qsl;
 
   qsl.push_back(mt);
 
-//?  qsl.push_back(group->first()->get_form());
+//?
+  qsl.push_back(group->get_example_form());
+
   int id = group->id();
   qsl.push_back(QString::number(id));
-//?  qsl.push_back(group->get_issue());
+
+//  qsl.push_back({}); // issue
+
+//?
+  qsl.push_back(group->get_issue());
   qsl.push_back(QString::number(group->page()));
   int sn = group->section();
   qsl.push_back(QString::number(sn));
@@ -703,10 +706,7 @@ void ScignStage_Ling_Dialog::absorb_dataset(Dataset& ds)
   twi_by_group_[group] = twi;
   twi->setData(0, Qt::UserRole, QVariant::fromValue(group));
 
-  QString gf; //? = group->get_form();
-
-  for(auto //Language_Sample
-      samp: group->samples())
+  for(Language_Sample* samp: group->samples())
   {
    QStringList qsl;
 
@@ -717,36 +717,57 @@ void ScignStage_Ling_Dialog::absorb_dataset(Dataset& ds)
    else if(sp == "I2")
       sp = "2";
 
+   QString st = samp->text().simplified();
+   st.replace("---{}", "--");
+
    if(sp.isEmpty())
-     qsl.push_back(samp->text().simplified());
+     qsl.push_back(st);
    else
      qsl.push_back(QString("Speaker %1:").arg(sp));
 
-   QString sf; //? = samp->get_form();
+   QString ef = samp->example_form();
 
-   if(sf != gf)
-     qsl.push_back(sf);
+   if(ef != group->get_example_form())
+     qsl.push_back(ef);
    else
-     qsl.push_back(QString());
+     qsl.push_back({});
 
-   QString si;
+   qsl.push_back(QString("  (%1)").arg(samp->id()));
+
+   QString si = samp->issue();
+
+   if(si != group->get_issue())
+     qsl.push_back(si);
+   else
+    qsl.push_back({});
+
+   if(samp->page_string().isEmpty())
+   {
+    if(samp->page() != group->page())
+      qsl.push_back(QString::number(samp->page()));
+    else
+      qsl.push_back({});
+   }
+   else
+     qsl.push_back(QString(" %1(%1)").arg(samp->page()).arg(samp->page_string()));
+
    QString sbi; //? = samp->sub_index();
 
-   if(sbi.endsWith('\''))
-   {
-    si = "(none)";
-   }
-   else
-   {
-    sbi.replace('/', '\'');
-    sbi.replace('_', "");
-   }
+//   if(sbi.endsWith('\''))
+//   {
+//    si = "(none)";
+//   }
+//   else
+//   {
+//    sbi.replace('/', '\'');
+//    sbi.replace('_', "");
+//   }
 
-   qsl.push_back(si);
+//   qsl.push_back(si);
 
-   qsl.push_back(QString());
-   qsl.push_back("");
-   qsl.push_back("");
+//   qsl.push_back(QString());
+//   qsl.push_back("");
+//   qsl.push_back("");
 
    QTreeWidgetItem* stwi = new QTreeWidgetItem((QTreeWidget*) nullptr,
      qsl);
@@ -755,7 +776,7 @@ void ScignStage_Ling_Dialog::absorb_dataset(Dataset& ds)
    if(!sp.isEmpty())
    {
     QStringList qsl; //? = group->all_sample_text();
-    qsl.push_back(samp->text().simplified());
+    qsl.push_back(sp);
     QTreeWidgetItem* sstwi = new QTreeWidgetItem((QTreeWidget*) nullptr,
       qsl);
     stwi->addChild(sstwi);
@@ -844,17 +865,17 @@ void ScignStage_Ling_Dialog::checked_label_change(QAbstractButton* qab, bool che
 void ScignStage_Ling_Dialog::handle_filtered_down()
 {
  if(current_open_group_)
-   find_sample_down(current_open_group_, &current_filters_);
+   find_group_down(current_open_group_, &current_filters_);
  else
-   find_sample_down(groups_->constLast(), &current_filters_);
+   find_group_down(groups_->constLast(), &current_filters_);
 }
 
 void ScignStage_Ling_Dialog::handle_filtered_up()
 {
  if(current_open_group_)
-   find_sample_up(current_open_group_, &current_filters_);
+   find_group_up(current_open_group_, &current_filters_);
  else
-   find_sample_up(groups_->first(), &current_filters_);
+   find_group_up(groups_->first(), &current_filters_);
 }
 
 void ScignStage_Ling_Dialog::set_group_foreground(QTreeWidgetItem* twi)
@@ -872,7 +893,7 @@ void ScignStage_Ling_Dialog::clear_group_foreground(QTreeWidgetItem* twi)
 void ScignStage_Ling_Dialog::set_full_sentence_from_child(QTreeWidgetItem* twi)
 {
  QTreeWidgetItem* stwi = twi->child(current_peer_index_ - 1);
- Language_Sample* samp; // = stwi->data(0, Qt::UserRole).value<Language_Sample*>();
+ Language_Sample* samp = stwi->data(0, Qt::UserRole).value<Language_Sample*>();
  show_full_sentence(samp);
  current_sample_ = samp;
 }
@@ -903,34 +924,48 @@ void ScignStage_Ling_Dialog::handle_section_start()
  if(!current_section_number_)
    current_section_number_ = 1;
  current_group_index_ = section_groups_first_last_[current_section_number_].first - 2;
- handle_sample_down();
+ handle_group_down();
 }
 
-void ScignStage_Ling_Dialog::handle_sample_down()
+void ScignStage_Ling_Dialog::handle_group_down()
 {
- find_sample_down(nullptr, nullptr);
+ // // here?
+ current_sample_ = nullptr;
+
+ find_group_down(nullptr, nullptr);
 }
 
 void ScignStage_Ling_Dialog::show_full_sentence(Language_Sample_Group* g)
 {
-// full_sentence_pre_label_->setText(g->get_main_pre());
-// if(show_archival_version_button_->isChecked())
-//   full_sentence_plain_text_edit_->setPlainText(g->get_main_archival_or_text());
-// else
-//   full_sentence_plain_text_edit_->setPlainText(g->get_main_text());
-// full_sentence_post_label_->setText(g->get_main_post());
+ if(no_auto_expand_)
+ {
+  QString gt = current_open_group_->get_main_text();
+  full_sentence_plain_text_edit_->setPlainText(gt);
+  return;
+ }
+
+ // // here we just clear the display ...
+ full_sentence_pre_label_->setText({});
+ full_sentence_post_label_->setText({});
+ full_sentence_plain_text_edit_->setPlainText({});
 }
 
 void ScignStage_Ling_Dialog::show_full_sentence(Language_Sample* samp)
 {
-// full_sentence_pre_label_->setText(samp->pre());
+ full_sentence_pre_label_->setText(samp->pre());
 
-// if(show_archival_version_button_->isChecked())
-//   full_sentence_plain_text_edit_->setPlainText(samp->archival_or_text());
-// else
-//   full_sentence_plain_text_edit_->setPlainText(samp->text());
+ QString text;
 
-// full_sentence_post_label_->setText(samp->post());
+ if(show_archival_version_button_->isChecked())
+   text = samp->archival_or_text();
+ else
+   text = samp->text();
+
+ text.replace("---{}", "--");
+
+ full_sentence_plain_text_edit_->setPlainText(text);
+
+ full_sentence_post_label_->setText(samp->post());
 }
 
 void ScignStage_Ling_Dialog::expand_sample(int index)
@@ -946,7 +981,7 @@ void ScignStage_Ling_Dialog::expand_sample(int index)
 }
 
 
-void ScignStage_Ling_Dialog::find_sample_down(Language_Sample_Group* start,
+void ScignStage_Ling_Dialog::find_group_down(Language_Sample_Group* start,
   QSet<QString>* temp_filters)
 {
  while(true)
@@ -981,10 +1016,21 @@ void ScignStage_Ling_Dialog::find_sample_down(Language_Sample_Group* start,
 
 void ScignStage_Ling_Dialog::handle_user_expand(QTreeWidgetItem* twi)
 {
- twi->setExpanded(true);
 
  if(Language_Sample_Group* g = twi->data(0, Qt::UserRole).value<Language_Sample_Group*>())
-   show_full_sentence(g);
+ {
+  // // first need to see if the twi represents a group or a sample ...
+  twi->setExpanded(true);
+
+ }
+
+//?  show_full_sentence(g);
+
+ else if(Language_Sample* ls = twi->data(0, Qt::UserRole).value<Language_Sample*>())
+ {
+  show_full_sentence(ls);
+  //QString txt = ls->archival_or_text();
+ }
 }
 
 void ScignStage_Ling_Dialog::expand(QTreeWidgetItem* twi)
@@ -1025,15 +1071,18 @@ void ScignStage_Ling_Dialog::handle_section_end()
  if(!current_section_number_)
    current_section_number_ = 1;
  current_group_index_ = section_groups_first_last_[current_section_number_].second - 2;
- handle_sample_down();
+ handle_group_down();
 }
 
-void ScignStage_Ling_Dialog::handle_sample_up()
+void ScignStage_Ling_Dialog::handle_group_up()
 {
- find_sample_up(nullptr, nullptr);
+ // // here?
+ current_sample_ = nullptr;
+
+ find_group_up(nullptr, nullptr);
 }
 
-void ScignStage_Ling_Dialog::find_sample_up(Language_Sample_Group* start,
+void ScignStage_Ling_Dialog::find_group_up(Language_Sample_Group* start,
   QSet<QString>* temp_filters)
 {
  while(true)
@@ -1069,7 +1118,8 @@ void ScignStage_Ling_Dialog::find_sample_up(Language_Sample_Group* start,
 void ScignStage_Ling_Dialog::handle_peer_down()
 {
  if(!current_open_group_)
-   handle_sample_down();
+   handle_group_down();
+
  QTreeWidgetItem* twi = twi_by_group_.value(current_open_group_);
  if(current_peer_index_ == 0)
  {
@@ -1093,7 +1143,8 @@ void ScignStage_Ling_Dialog::handle_peer_down()
 void ScignStage_Ling_Dialog::handle_peer_up()
 {
  if(!current_open_group_)
-   handle_sample_down();
+   handle_group_down();
+
  QTreeWidgetItem* twi = twi_by_group_.value(current_open_group_);
  if(current_peer_index_ == 0)
  {
@@ -1160,7 +1211,7 @@ void ScignStage_Ling_Dialog::handle_section_up()
 void ScignStage_Ling_Dialog::handle_sample_first()
 {
  current_group_index_ = groups_->size() - 1;
- handle_sample_down();
+ handle_group_down();
 }
 
 
@@ -1406,6 +1457,7 @@ void ScignStage_Ling_Dialog::handle_xpdf_is_ready()
  {
   send_xpdf_msg(held_xpdf_msg_);
   held_xpdf_msg_.clear();
+  setWindowState(Qt::WindowMinimized);
  }
 }
 

@@ -1,1 +1,1 @@
-CHOICE_FEATURES = xpdf 
+CHOICE_FEATURES = xpdf lex-pair

@@ -47,7 +47,9 @@ void DSM_SDI_Document::parse_sample_hypernode(NTXH_Graph& g, NTXH_Graph::hyperno
  Language_Sample* ls = new Language_Sample; //(0, 0);//nss);
  language_samples_.push_back(ls);
 
- g.get_sfsr(hn, {{1,14}}, [this, ls](QVector<QPair<QString, void*>>& prs)
+ Language_Sample_Group* lsg = language_sample_groups_.last();
+
+ g.get_sfsr(hn, {{1,14}}, [lsg, ls](QVector<QPair<QString, void*>>& prs)
  {
   u2 id = prs[0].first.toUShort();
   ls->set_id(id);
@@ -68,10 +70,13 @@ void DSM_SDI_Document::parse_sample_hypernode(NTXH_Graph& g, NTXH_Graph::hyperno
   ls->set_external_label(xlbl);
 
   QString cl = prs[9].first;
-  ls->set_classification(cl);
+  ls->parse_classification(cl);
 
-  QString alt = prs[13].first;
-  ls->set_alternate_text(alt);
+  // // now there's enough info to do the add ...
+  lsg->add_sample(ls);
+
+  QString alt = prs[8].first;
+  ls->check_alternate_text(alt);
 
   // :n:1 :i:2 :o:3 :p:5 :j:6 :x:7 :y:8 :b:4 ;
 //  nss->set_id(prs[0].first.toInt());
@@ -94,6 +99,7 @@ void DSM_SDI_Document::parse_group_hypernode(NTXH_Graph& g, NTXH_Graph::hypernod
 // NGML_SDI_Paragraph* nsp = new NGML_SDI_Paragraph;
  Language_Sample_Group* lsg = new Language_Sample_Group;
 
+ language_sample_groups_.push_back(lsg);
 
  g.get_sfsr(hn, {{1,3}}, [this, lsg](QVector<QPair<QString, void*>>& prs)
  {

@@ -24,10 +24,8 @@
 USING_KANS(DSM)
 USING_KANS(TextIO)
 
-Dataset::Dataset(QString root_folder) : QRing_File_Structure
-                                        (root_folder
- //?  root_folder.isEmpty()? AR_ROOT_DIR : root_folder
-                         )
+Dataset::Dataset(QString root_folder)
+  : QRing_File_Structure(root_folder), samples_(nullptr), groups_(nullptr)
 {
  forms_ = QStringList{{"Text", "Dialog", "Intonation", "Fragment", "Paragraph"}};
  issues_ = QStringList{{"Ambiguity", "Context", "Logic",
@@ -36,6 +34,25 @@ Dataset::Dataset(QString root_folder) : QRing_File_Structure
  "Ontological", //?"Rhetoric"
  }};
 }
+
+void Dataset::load_from_folder()
+{
+ load_from_folder(root_folder_);
+}
+
+
+void Dataset::load_from_folder(QString path)
+{
+ QDir qd(path);
+ merge_file_ = qd.absoluteFilePath("sdi-merge.ntxh");
+ samples_file_ = qd.absoluteFilePath("samples.ntxh");
+ pdf_file_ = qd.absoluteFilePath("main.pdf");
+
+ sdi_document_.load_from_ntxh(samples_file_);
+ groups_ = &sdi_document_.language_sample_groups();
+ samples_ = &sdi_document_.language_samples();
+}
+
 
 bool check(QPair<QString, void*>& pr)
 {
@@ -51,12 +68,12 @@ void Dataset::save_to_file(QString path)
 
 void Dataset::save_to_file()
 {
- save_to_file(file_ + ".out.txt");
+ save_to_file(samples_file_ + ".out.txt");
 }
 
 void Dataset::save_to_file_udp()
 {
- save_to_file_udp(file_ + ".udp.ntxh", file_ + ".conllu", file_ + ".pre.txt");
+ //? save_to_file_udp(file_ + ".udp.ntxh", file_ + ".conllu", file_ + ".pre.txt");
 }
 
 void Dataset::save_to_file_udp(QString path, QString upath, QString ppath)
@@ -76,7 +93,7 @@ void Dataset::save_to_file_udp(QString path, QString upath, QString ppath)
    return;
  QTextStream pos(&po);
 
- for(Language_Sample_Group* g : groups_)
+ for(Language_Sample_Group* g : *groups_)
  {
   for(Language_Sample* ls : g->samples())
   {
@@ -95,6 +112,9 @@ void Dataset::save_to_file_udp(QString path, QString upath, QString ppath)
  po.close();
 }
 
+
+
+#ifdef HIDE
 void Dataset::load_from_file(QString path)
 {
  file_ = path;
@@ -238,25 +258,25 @@ void Dataset::load_from_file(QString path)
   return result;
  });
 }
-
+#endif // HIDE
 
 void Dataset::save_raw_file(QString text, int page, int num)
 {
  QString dt = QDateTime::currentDateTime().toString("dd-MM-yy--hh-mm");
- QString path = QString("%1.%2.%3.%4.txt").arg(file_)
+ QString path = QString("%1.%2.%3.%4.txt").arg(samples_file_)
    .arg(page).arg(num).arg(dt);
  save_file(path, text);
 }
 
 void Dataset::get_serialization(QString& text, QString& gtext)
 {
- for(Language_Sample* samp : samples_)
+ for(Language_Sample* samp : *samples_)
  {
   //?text += samp->get_serialization() + "\n";
  }
 
  int rgc = 0;
- for(Language_Sample_Group* g : groups_)
+ for(Language_Sample_Group* g : *groups_)
  {
   //?gtext += g->get_serialization(rgc);
  }

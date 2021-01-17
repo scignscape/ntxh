@@ -104,8 +104,8 @@ class ScignStage_Ling_Dialog : public QDialog
  QLabel* ds_path_label_;
  QLineEdit* ds_path_line_edit_;
  QPushButton* ds_path_open_button_;
- QLabel* pdf_path_label_;
- QLineEdit* pdf_path_line_edit_;
+ QLabel* pdf_file_label_;
+ QLineEdit* pdf_file_line_edit_;
 
 
  QHBoxLayout* filters_layout_;
@@ -319,10 +319,10 @@ public:
  void launch_lexpair_dialog(QString s);
 #endif // USING_LEXPAIR
 
- void find_sample_down(Language_Sample_Group* start,
+ void find_group_down(Language_Sample_Group* start,
    QSet<QString>* temp_filters);
 
- void find_sample_up(Language_Sample_Group* start,
+ void find_group_up(Language_Sample_Group* start,
    QSet<QString>* temp_filters);
 
 
@@ -347,8 +347,8 @@ public Q_SLOTS:
 
  void activate_tcp_requested();
 
- void handle_sample_down();
- void handle_sample_up();
+ void handle_group_down();
+ void handle_group_up();
 
  void handle_sample_first();
 
