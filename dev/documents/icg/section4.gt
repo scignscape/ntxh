@@ -1,0 +1,2075 @@
+`section.Hypegraph Grammar and Conceptual Spaces`
+`p.
+I think the motivation behind Coecke `i.et. al.`/'s syntactic
+model based on Hypergraph Categories is comparable to 
+my focus on `i.cognitive transforms`/.  In particular, 
+their Hypergraph structure invokes the Category Theoretic 
+sense of `i.morphisms`/, which are taken as the 
+foundation of semantics: each word is construed as a 
+morphism in some semantic Category (using this term 
+in a mathematical sense, not related to `q.lexical` 
+categories).  This applies also to nouns 
+(and `i.sentences`/, analogous to what I call 
+`i.propositions`/, embodied in finite clauses rather 
+than words).  The Coecke `i.et. al.` model 
+marshals a feature of hypergraphs wherein we can 
+define (direct) edges which are not (on one side 
+or another) connected to any nodes.  In conventional 
+graphs, each edge connects exactly one node on eiher 
+side; for hypergraphs, however, the `i.head set` 
+and `i.tail set` of edges' nodes can be of varying sizes 
+(including empty).
+`p`
+
+`p.
+When applied to morphisms in Category Theory, this means 
+that hypergraphs can model morphisms with outputs 
+but no imputs, and vice versa.  Applied to linguistic 
+data, input-less morphisms become nouns, and 
+output-less morphisms become propositions 
+(qua macrotype, using my terms).  There is a 
+good cognitive rationale for this approach, at 
+least if we want to treat words not only as 
+linguistic artifacts but as, in some sense, 
+names or triggers for certain intellectual processes.  
+A noun, we might say, enters into the discursive 
+space the `q.output` of a cognitive process 
+%-- an act of recall and situating whereby we 
+consult the word's lexical meaning and figure out 
+how it applies in the current context.  
+Parallelwise, a proposition can be treated as 
+the final integration of linguistic data, 
+which are `q.input` into our cerebral faculties.  
+The point is that nouns have no `i.linguistically manifest` 
+inputs %-- and propositions no manifest outputs in surface 
+language, usually (except for cases like `i.I told you so`/, 
+in resolving the `i.so` referent) %-- but we can 
+still plausibly treat these as cognitive 
+processes which generate outputs or take inputs, 
+respectively.
+`p`
+
+`p.
+With this added structure, all linguistic elements 
+can be treated as interconnected via 
+crossovers between inputs and outputs: when 
+nouns are modifier targets, we can envision 
+them as mental procedures that `q.output` their 
+nominal content; when propositions are 
+tranform outcomes, they are `i.inputs` to 
+our cognitive machinery for synthesizing and 
+contextualizing language artifacts.  
+So the output-to-input link becomes common to 
+all inter-word relations regardless of their 
+lexical category.  The resulting architecture, 
+then, is similar to the notion of parse-graphs 
+which I have developed under the guise of 
+`q.Cognitive Transform Grammar`/.  A sentence 
+is a space of linguistic and conceptual 
+`q.transforms` or `q.morphisms`/, which 
+are interwoven via input/output connections: 
+the output of one transform is the input to another.  
+The network structure of these connections 
+defines an flow of `q.information` or construal 
+between different sentence elements.  
+An example of `q.flow` in this sense would 
+be specification propagation as analyzed in 
+the last section: mesotype requirements 
+tranferring from `i.dogs` to `i.neighbor's dogs` 
+or singular/plural specification carrying over 
+from `i.beer(s)` to `i.beer(s) on tap` to 
+`i.a lot of beer(s) on tap`/.   
+`p`
+
+`p.
+In contrast to Coecke `i.et. al.`/, my orientation 
+here is more explicitly cognitive: I see 
+formal models as suggestive, summarial views on 
+the structural articulation of mental language-understanding 
+processes, rather than as logical distillations of 
+semantic machinery.  The linguistic literature on 
+Hypegraph Categories (and similar mathematically-inspired 
+methodology) has a tendency, in my opinion, to 
+gravitate toward relatively context neutral 
+semantic constructions, and ones which do not require 
+a lot of interpretive finesse.  One of the aforementioned 
+authors' more expansive examples, for instance, is the 
+phrase `i.yellow bananas`/, which they read in terms 
+of (effectively) objective qualities of bananas 
+(their taste, color, texture, and classification as a kind 
+of fruit) in combination with the predicate 
+`i.yellow` (also treated `q.objectively` as a region 
+of color space).  They argue that the conjunction of 
+the two concepts yields a more specific concept analyzable, 
+in some formal sense, as an intersection of the two 
+%-- specifically, narrowing the set of bananas to 
+those which are yellow (and not green) in color.  
+They moreover set out mathematical formulae 
+defining this concept-pairing in quantitative 
+terms (not to imply that mathematical reasoning 
+is part of semantics, I assume, but rather as 
+merely a demonstration that certain mathematical 
+principles in the superposition of spaces, 
+suitably understood, have analogs in the 
+scoping of semanticized concepts). 
+`p`
+
+`p.
+I question how far these quantitative models can go, 
+since all but the most trivial concept-combinations 
+seem to represent `i.selective` blending which 
+is hard to picture mathematically.  For instanse, 
+`i.fried green bananas` are not particularly green, 
+and I am not sure how to `q.quantify` `i.fried` 
+the way that we can assign `i.yellow` to a mathematically 
+well-defined color-space (`i.hot`/, `i.sliced`/, and `i.crispy` 
+are all concepts I vaguely feel are applicable to 
+`i.fried bananas`/; but I would dispute that 
+`i.fried` is somehow a conjoined predicate of 
+those three %-- instead the adjective seems 
+to stand in for a complete idea, a clause, 
+like `i.the bananas have been fried`/).  With this 
+caveat, however, the Hypergraph model of the 
+structural `q.network` at play in a sentence 
+does seem to remain a valuable paradigm, 
+however we wish to model the concepts 
+circulating through the structure.  
+Given `i.imported yellow bananas`/, say, 
+there is certainly a sense that our 
+conceptualization undergoes an accretion which 
+blends the predication of `i.yellow` and 
+of `i.imported`/, and that output-to-input 
+connections %-- the outcome of `i.yellow` 
+qua modifier is input to `i.imported` %-- 
+serve to suture the conceptualizations 
+confirming that one specific ground-concept is 
+being declared as `i.yellow` `i.and` as 
+`i.imported` (instead of one yellow thing 
+and another imported thing).   
+`p`
+
+`p.
+In hypergraph grammar, sentences' syntactic form 
+defines paths which lead (in semantically 
+meaningful ways) between words, so that 
+paths are formed by output-input connections.  
+Along these paths we find some conceptual content 
+which gets progressively modified and elaborated.  
+Coecke `i.et. al.` turns to Peter `Gardenfors;'s 
+Conceptual Space theory for a semantic 
+framework adequate for, in effect, how inter-word 
+`q.paths` produce aggregate conceptual meanings.  
+At the same time %-- perhaps to reiterate 
+that this is a structurally organized process 
+%-- they endeavor to define the transformations 
+along such `q.paths` (in my terms) in mathematical 
+terms.  This is probably a good account of 
+grammar's role in relation to semantics: 
+syntax is constrained by the need, for 
+each utterance, to impress on the hearer 
+`i.the right path` to combine concepts appropriately.  
+For instance, a path must join `i.imported` to 
+`i.yellow` so as to fix that the yellow 
+things (bananas) are also the imported things.  
+So the broad outline of the Hypergraph-plus-Conceptual 
+Space `q.project` is to use Conceptual Spaces 
+as the conceptual terrain on which progressively 
+more determinate significations can be defined, 
+such that the need to convey that specific 
+accretion of concetual details defines the 
+parameters and telos which engenders syntactic 
+form.  For each grammatically specified 
+path among words on the syntactic side, there 
+is a corresponding path within (a suitably 
+expansive) set of Conceptual Spaces on 
+the semantic side.     
+`p`
+
+`p.
+Intuitionwise, I believe this perspective aligns with 
+(what I call) Cognitive Transforms; my point of 
+contention, however, lies with (I believe) 
+narrowly quantitative models of Conceptual Spaces.  
+To make the syntactic-path-to-conceptual-accretion 
+concordance applicable to the broad spectrum 
+of linguistic phenomena, we need a more 
+general, context-sensitive and nuanced 
+picture of Conceptual Spaces, which can perhaps 
+draw on the diverse literature varying Conceptual Space 
+models as one branch of Cognitive Linguistics.  
+I will now consider some potential features of 
+such an expanded Conceptual Space Theory. 
+`p`
+
+`subsection.Conceptual Spaces and Cognitive Grammar`
+`p.
+Spaces like color and taste, which have convenient representations 
+in terms of axes and quantities, are recurring examples 
+in Conceptual Space Theory.  However, this theory has 
+been applied to conceptualizations in many domains, 
+including verbs and movement-patterns; 
+spatial paths and configurations; scientific theories; 
+and structural parameters in the context of 
+computer modeling, such as markup languages 
+(a specific `q.Conceptual Space Markup Language` 
+has been formulated which allows conceptual details, 
+according to tenets of the theory, to be 
+asserted with respect to fields and 
+dimensions within digital/computational data structures). 
+As such, we should not be discinclined to 
+consider possible Conceptual Space formulations 
+even if, in some domain of semantic relevance, 
+we have trouble finding quantitative 
+parameters as clear-cut as, say, `i.hue`/, 
+`i.saturation`/, and `i.value` in color space.
+`p`
+
+`p.
+On the other hand, even in its branching directions 
+Conceptual Space Theory does foreground 
+the (minimally quantitative) notion of 
+`q.convexivity`/, and show a preference  
+for concepts which can be paired (or gathered 
+into sets more generally) on grounds of 
+magnitude in `i.some` sense: tall/short; 
+around/across (see Gardenfors, 
+Geometry of Preposition Meanings, p. 13 
+[http://newprairiepress.org/cgi/viewcontent.cgi?article=1098&context=biyclc]); 
+ancestor/descendent (or more generally defining the 
+domain of kinship relations by degrees of relation and 
+forward or backward in generation; see 
+What is a domain? Dimensional structures
+versus meronomic relations p. 449).  
+The cumulative effect is a system of 
+analysis which foregrounds comparative 
+boundaries between `q.competing` concepts 
+(in the sense that borderline cases may 
+be ambiguous between them) and/or concepts 
+whose differences can be accounted for 
+numerically in some property or domain.
+`p`
+
+`p.
+I intend to extend this conception of 
+Conceptual Spaces to place more emphasis on 
+concepts' situational interconnectedness.  
+Concepts are often paired up not in the 
+sense of competing or dimensionally 
+contrastive (e.g. tall/short) prototypes 
+within some larger space, but rather in 
+terms of `i.functional` connections: 
+in general, for any given concept there is a 
+family of interrelated concepts linked via 
+co-operation in some situation.  The concept 
+`i.knife`/, say, is inextricable from both 
+a substance cut and a person doing the action; 
+the concept `i.fried` inextricable from a foodstuff 
+cooked as such and also a pan or pot where 
+the food is placed while frying.    
+`p`
+
+`p.
+When highlighting functional interactions, 
+several factors come to the fore.  First, 
+concepts are often delimited by their 
+relation to `i.verbs`/: functional relations 
+are usually established on the basis of 
+actions or events in which different 
+constituents play different roles: 
+the action of `i.carving` links the knife 
+to the duck, or the chisel to the wood.  
+Second, functional relations such as 
+nouns to verbs (and by extension to other nouns) 
+are dependent on situational context: 
+for example,  
+the culinary role of knives comes to 
+the fore in kitchens and dining rooms; 
+so our most common knife-conceptualization 
+becomes properly `q.activated` in these 
+settings.  There are other 
+contexts where we sometimes encounter knives 
+(as weapons; as cutting tools for 
+non-kitchen chores), and the 
+knife `q.prototype` (to the degree that 
+such a thing exists) is different in these 
+contexts than the table knife for dining 
+or the kitchen knife for cooking.  
+So the first step in reviewing the conceptual 
+`q.space` in which knives, say 
+(continuing the example) are mentally situated, 
+is to determine which context is appropriate.    
+`p`
+
+`p.
+A third observation is that, even when we can 
+identify groups of interrelated and 
+overlapping concepts, the contextual and 
+functionalizing aspects seem more 
+esssential to assessing concepts' proper use 
+than assessing boundaries between concepts 
+which are `q.peers` in a sense.  So 
+`i.knife` can be contrasted with 
+`i.axe`/, `i.dagger`/, `i.sword`/, `i.saw`/, 
+`i.cleaver`/, and `i.reamer`/.  We can find 
+certain quantitative measures which 
+help define the relevant conceptual 
+differences: knives are shorter than 
+swords, narrower than cleavers, 
+with smooth or serrated rather than
+saw-tooth blades, and so on.  Perhaps 
+these comparisons are relevant to visual 
+cues which condition us to recognize when 
+some implement is a knife rather than, say, 
+a saw (but context surely also factors in, 
+because we `i.expect` to find a knife in a 
+kitchen and a saw in a woodshop, not vice-versa).  
+But our inclination to construe an object 
+as a knife (or, by contrast, a fork, spoon, 
+glass, or plate) is surely driven more by 
+an anticipatory sense of how situations will 
+be functionally organized.  As we sit down 
+to dinner, say, our mental map of the 
+circumstance encompasses a matrix of 
+expected components (the food, our place-settings, 
+the different kinds of utencils).  
+We are thus primed to anticipate certain 
+specific objects, and perceived things 
+in our surroundings fill in these preconceived 
+slots.  We recognize something as a knife 
+because our situational intuitions up to 
+that point prompt us to assume that knives 
+will be among the objects present.     
+`p`
+
+`p.
+One question then is to consider how these 
+contextualizing effects can be modeled 
+in terms of Conceptual Spaces.  One option is 
+to consider different `i.times` of relations 
+which a concept may entertain with a verb 
+%-- directed perhaps by declension cases.  
+A knife's predominant conceptual role 
+is instrumental %-- the tool involved 
+in situations where someone is cutting something.  
+Occasionally `i.knife` may be in `q.patientive` 
+relation to a verb (`i.I sharpened the knife`/), 
+or the subject of a verb, as in `i.This knife 
+costs a hundred dollars`/.  A knife could 
+be `i.locative` (`i.Nervously I fixed my gaze on 
+the knife I was holding`/, 
+`i.A marble rolled on the table toward a someone's knife`/); but only in the generic 
+sense that `i.any` physical object could potentially 
+be the endpoint of a spatial path (there is no special 
+conceptualization available via the locative analogous 
+to `i.give` a gift `i.to` someone, or `i.avoid` some 
+unwelcome outcome, or `i.skirt around` a question or topic).  
+`p`
+
+`p.
+We can repeat this exercise for many concepts: 
+define contexts where they are often functionally 
+relevant, and, for each context, identify 
+typical actions and events (lending themselves 
+to verb constructions) and the 
+conceptual roles the concept in question may 
+entertain relative to these, grouping roles 
+according to construals not unlike grammatic 
+cases (nominative, instrumental, agentive, 
+patientive, benfactive, locative, `i.distributive`/, etc.).  This point 
+is tangential to cases themselves, and morphology; 
+however we can consider conceptually in what 
+sense, interpretation, or circunstance something 
+could be an `i.agent`/, `i.patient`/, `i.location`/, etc.  
+We might observe, for example, that instances 
+of `i.nominative` or `i.distributive` 
+conceptualizations for nouns seem most plausible 
+when construing knives in the sense of 
+commercial products (`i.Twenty dollars per knife 
+(in a set)`/).     
+`p`
+
+`p.
+A related (and somewhat overlapping) classification 
+could be to consider concepts in light of 
+different Ontological registers, or `q.modes 
+of existing` %-- what earlier I referenced 
+in terms of `q.mesotypes`/.  For example, a 
+knife is not usually construed as a `i.social 
+institution`/, but a particularly famous 
+line of knives might be cited as a proxy 
+for its maker (analogous to `i.This watch is a prestigious 
+Swiss brand`/).  A knife would rarely or 
+ever be deemed living, or sentient.  Other 
+noun-concepts, however, are more flexible: 
+a newspaper, say, can be figured as object, place, 
+or institution; also as a commercial item 
+(`i.Sunday's paper costs five dollars`/), 
+a stretch of time (`i.The paper takes less 
+time than watching the news`/), 
+an abstract textual content printed in each copy 
+(`i.Today's paper has an error on page four`/), 
+an information source (`i.The paper has all the
+movie times`/), something sentient 
+(`i.This paper believes Warren is the strongest 
+candidate`/), or even metaphorically as a 
+living being (`i.That paper has swallowed many 
+small local papers`/).
+`p`
+
+`p.
+How a noun-concept fits in to a particular context 
+can depend simultaneously on the sort of 
+relationship it has to a verb `i.and` on the 
+Ontologial regiseter through which the concept is 
+construed.  The newspaper example shows a locative 
+conceptualization in different registers: 
+
+`sentenceList,
+`sentenceItem; His commute started an hour ago at the paper.
+`sentenceItem; Her career started at the paper.
+`sentenceItem; Start your weekend with Sunday's paper.
+`sentenceItem; Socioeconomic research starts with your local paper.
+`sentenceList`
+
+I'll propose the term `i.meso-form` to capture the 
+ideo of `q.Ontological register` as a factor in 
+conceptualization %-- which facet of something's 
+being-in-the-world, e.g. as place, object, or 
+institution, is highlighted in a certain profiling.  
+Meso-forms are then the conceptual parallels to 
+mesotypes: a mesotype-level grade of classification 
+brings together word-senses which derive from applying 
+the same meso-form to numerous different lexemes 
+or lexically entrenched concepts.  Meso-forms and 
+mesotypes thereby share the same order of granuarity; 
+mesoforms are conceptual attitudes more specific than 
+the uppermost conception of nouns profiling 
+`q.obects` or verbs profiling `q.processes` 
+(LangIntro p. 104), but coarser than the lexically 
+established conceptualizations we learn for 
+each sense of each word.   
+`p`
+
+`p.
+Aiming at a comparable spectrum of conceptual specificty/generality, 
+I'll propose the term `i.case-form` to express the mode of 
+conceptualization involved in treating a noun-concept 
+in a specific relational role `visavis; a verb concept, 
+with the idea that many of these `q.relational roles` 
+reciprocate noun-cases.  I contend that meso-forms and 
+case-forms combine to supply a conceptualizing system, 
+which fills in details readied for completion 
+within the aegis of a given verb (establishing the 
+functional nexus through which concepts are construed) 
+in a given (empirical) context.  That is, I envision 
+a framework where contexts, verbs, case-forms, and 
+meso-forms combine (in order of insreasing determinateness) 
+to zoom in on specific conceptual senses and interpretations 
+called for in a given linguistic context.  I'll dub 
+this the `q.`CVCM;` model.
+`p`
+
+`p.
+The interpretations engendered by `CVCM; 
+construe situations via networks of functional 
+relations; and I assume that a large part of 
+conceptual semantics lies in `i.which` relation 
+a given concept is understood to fill.  
+For example, a construction like 
+`i.drive over the bridge` does not merely 
+construe a spatial configuration; we understand 
+`i.the bridge` to allowing crossing over some 
+obstacle which otherwise could make the 
+described path impossible.  So the foundational 
+belonging of `i.the bridge` in this signification 
+is the functional one of supporting/enabling 
+the verb-subject to do the verb; the specific 
+spatial arrangement connoted by `i.over the bridge` is 
+a matter of detail, but not the crux of the concept.  
+Anlogously, `i.I walked around the parked cars` 
+figures the cars not only as a reference point 
+for portrayal of movement, but as a functional 
+impediment which creates a situation where 
+a subject has to functionally compensate against 
+the obstacle.  
+`p`
+
+`p.
+Taking this last example further, I would say 
+that functional `q.attitudes` inform even 
+the most straightforward-seeming spatialized language.  
+Consider: 
+
+`sentenceList,
+`sentenceItem; I walk past the paper on my way to work.
+`sentenceItem; I walked from the library straight to class.
+`sentenceItem; I spend time around that sculpture every weekend.
+`sentenceItem; I walked through the door, which was unlocked.
+`sentenceItem; It took us an hour to cross the border.
+`sentenceList`
+ 
+I read (1) as implying that the newspaper's building is in 
+some sense an `q.aide` to the speaker's walking %-- it 
+may help orient her, or perhaps walking the sidewalk 
+beside an office building is more convenient 
+than walking other routes (past stores or transport 
+stops or whatever where the streets are more crowded).  
+In (2) `i.the library` is presented as a spatial origin, 
+but the larger point seems to be that the speaker 
+transitioned between two activities (e.g., studying at 
+the library and attending class), and the spatial 
+movement was the concrete implementation of 
+this functional transition.  The functional framing 
+predominates, I think, more than the spatial: 
+if the library is fronted by a lion sculpture 
+we would not expect `i.I walked from the sculpture 
+straight to class` even if this describes 
+essentially the same trajectory.  In (3), though, 
+we interpret `i.the sculpture` as a site of 
+activity (I'm thinking of those landmarks where people 
+congregate, play music, drink booze disguised in 
+coffee cups, and so forth).  Both (2) and (3) feature 
+their landmarks not only as places but as sites of 
+activity, which lends them a functional (not merely 
+spatial) role.  In (4), the most likely interpretation 
+is that the speaker both `i.opened` and `i.walked through` 
+to door, the latter playing the functional role of 
+abetting access into a building (not just the 
+spatial status of a boundary between inside and outside).  
+Likewise in (5) we understand `i.the border` not 
+just as a geographical divider but as a functional 
+barrier where nations can deny entry, thereby 
+framing the border as a `i.process` since 
+peoples' entry has to be authorized.  See: 
+
+`sentenceList,
+`sentenceItem; The border took an hour.
+`sentenceItem; The border is closed.
+`sentenceList`
+
+Neither construction makes sense for `i.border` 
+qua one-dimensional spatial boundary.
+`p`
+
+`p.
+I believe we should emphasize the functional-network 
+dimension of concepts when applying both `Gardenfors;'s 
+Conceptual Space Theory and Langacker's theories of 
+domains and of spatial schema.  Functional considerations 
+are relevant even in what may seem like the most 
+phenomenologically elemental domains, like space 
+(as the preceding examples suggest) or color.  I 
+will expand on this later in the section.  
+`p`
+
+`subsection.Case-Forms and the Semantics of Verbs`
+`p.
+In his `i.Geometry of Meaning`/, `Gardenfors; 
+suggests that Conceptual Space Theory `q.can be seen 
+as combining frames with prototype theory` (p. 49), 
+referring to `q.semantic frames` in the sense of 
+Charles Fillmore's case grammar.  `Gardenfors; 
+suggests however that `q.by highlighting the geometric 
+structure of the relevant domains, one obtains a richer 
+way of modeling various semantic aspects`/.  So 
+`q.ideas similar to frame theory turn up in the 
+conceptual space analysis of the meanings of verbs`/, 
+but `Gardenfors; suggests that by identifying `q.geometric 
+structure` operative in verb semantics, his theory adds 
+greater detail to an underlying case grammar framework.
+`p`
+
+`p.
+It is true that merely notating which situational roles 
+are played by various objects %-- by various `i.participants` 
+in a focal `i.process`/, to use terminology aligned with
+Langacker's %-- does not get very far toward a thorough 
+semantic analysis.  Expressing `i.cut with a knife`/, say, 
+introduces the knife as an instrumentive participant, but 
+we still need to account for how conversants ascribe `i.meaning` 
+to the clause once the instrumental (plus nomitative and 
+accusative) roles are marked.  `Gardenfors; fills in some analysis 
+via his analysis of the `q.structure of events` which then 
+engenders a theory of verb-meanings; in particular, `Gardenfors; 
+focuses on the agent/patient relationship and the structure 
+of the agent's effect on the patient.  His theory 
+concentrates on two parameters structuring verbs' 
+applicability to situations: a contrast between 
+`q.force` and `q.result` and a proposal that verbs profile 
+changes in `q.single domains`/.  The force/result 
+contrast can be seen in `i.cut with a knife`/, say, 
+where the `i.force` vector is signified as applying pressure 
+against the patient, through the sharp part of the 
+knife (the blade-edge); and the `i.result` vector is a 
+path through a `q.state space` which is the rationale 
+for the cutting.  If, say, we cut a whole baker's 
+chocolate block into smaller pieces, the state-change 
+corresponds to the size of each piece being smaller 
+(while the number of pieces increases).   
+`p`
+
+`p.
+The force/result distinction certainly seems 
+relevant to how many processes (and so the 
+verbs that profile them) are construed.  
+`Gardenfors;'s `q.single domain` thesis seems 
+plausible but not without counter-examples: 
+for me, say, `i.explode`/, `i.collapse`/, or 
+`i.melt` each suggest several dimensions of 
+change.  If something `i.explodes`/, we tend 
+to expect an `i.upward` and `i.outward` force 
+and also something like fire, heat, or igniting.  
+If a car bursts into flames but stays mostly 
+intact, we would say that it `i.caught fire` 
+more readily than `i.exploded`/.  If, conversely, 
+a car is broken apart (in an accident, say), we 
+might say it `i.was destroyed`/, not that it 
+`i.exploded`/.  Granted, `q.explode` implies an 
+internal force breaking something apart and 
+pushing the parts outward; but `i.usually` the 
+force is also driven by `q.fire` of some part; 
+the verb seems less apropos in the case of a 
+bottle broken apart by the internal pressure 
+of `i.freezing`/, as when someone accidentally 
+leaves a glass water bottle in the freezer.    
+`p`
+
+`p.
+Likewise, `i.collapse` implies a trajectory both 
+outward and downward: an explosion `i.upward` would 
+not be desribed as a `i.collapse`/.  But an orderly 
+descent, without the effect of breaking apart and 
+parts scattering, would not be a `i.collapse` 
+either; we would say `i.the elevator descended 
+to the lobby`/, not `i.the elevator collapsed 
+on the lobby`/.  Similarly, `i.melt` implies 
+both that something (chocolate, say) is both being 
+heated and changing shape; melted chocolate is 
+both warm (while it is melted) and liquid.  Relatedly, 
+if I say that liquid in a pan has `i.cooked away` 
+or `i.cooked off` I imply both that the liquid was 
+heated and that the amount of liquid has diminished. 
+There is of course a `i.physical` connection between 
+these phenomena: heat turns solids into liquids, and 
+causes liquids to evaporate; but I question whether 
+this physicalistic correlation automatically 
+drives the verb to encompasss both aspects of the 
+change.  After all, other verbs seem to profile 
+one dimension and sideline the other: I could say 
+that a sauce `i.boils`/, foregrounding its temperature 
+increase and leaving implicit, if anything, the fact 
+that some liquid might evaporate; or conversely that 
+a sauce `i.reduced` or `i.thickened` without thematizing 
+that heat and evaporation was the power behind that 
+process.  In that case `i.cook away`/, `i.cook down`/, 
+or `i.cook off` appears to merge two dimensions of 
+change which are separable insofar as other verbs 
+profile one or the other.
+`p`
+
+`p.
+Along the same lines, the force behind a bridge 
+(say) could be seen as a vector pushing both down 
+and outward, so the two facets of the bridge 
+`i.falling` and `i.breaking apart` are manifestations 
+of one underlying impetus.  Here again, though, 
+I am more convinced by the analysis that we hear 
+the verb profiling two aspects of change which 
+are independently construed and assessed: the 
+fact of the bridge being no longer elevated and 
+the fact of its being ruptured or broken apart; 
+these carry distinct consequences and visual 
+schema.  The case for verbs in these examples 
+profiling a process split across at least two 
+dimensions, instead of one hybrid dimension, 
+seems stronger than the converse.  Such arguments 
+do not refute `Gardenfors;'s point that 
+verbs `i.most often` profile one single dimension 
+of change; but they do reveal this as a tendency 
+rather than a a structural invariant in verb meanings. 
+`p`
+
+`p.
+The motivation behind `Gardenfors;'s `q.geometric` 
+elucidation of verb meanings appears to be 
+one of isolating a matrix of paramaters by 
+which individual verbs may be classified.  
+Insofar as verbs profile changes which can be 
+rigorously modeled as changes in some state-space, 
+we can give a formal representation of verb 
+meanings.  On the other hand, if we consider 
+the full spectrum of participants 
+to verb-profiled processes %-- not only 
+agents and patients but instruments, benefactors, 
+locations, and so forth %-- it seems plausible 
+that certain prototypical roles are simply 
+entrenched as lexical features in normal usages.  
+For example, most people first become acquainted 
+with knives through cutting food at a dinner 
+table (or a kitchen).  Hypothetically, 
+then, the `i.instrumental` role of a 
+knife in certain specific cutting scenarios 
+%-- in terms of where and to what ends it occurs, 
+and what substance is cut %-- is a paradigm 
+which dominates other contexts.  Therefore, 
+pairing `i.knife` as as intrument with 
+`i.cut` as a verb activates a lexically 
+entrenched notion of `q.cut` (and of 
+`i.knife`/).  To the degree that this 
+pairing serves as a kind of para-lexical 
+gestalt, our automatic activation of 
+the relevant situational `q.frame` 
+arguably precludes our cognitively 
+attending to the force-dynamics 
+involved in the curring process.
+`p`
+
+`p.
+Recall my proposal that in expressions like 
+`i.cut ... with a knife` I consider 
+`i.with` a two-stage modifier, which both 
+modifies `i.knife` (signaling that we should 
+construe the knife in its guise as an instrument, 
+and not, say, an accusative like 
+`i.sharpened/polished/bought the knife`/) 
+and then modifies `i.cut` (adding the detail 
+of the instrument used for the cutting).  
+The `i.with`/`i.knife` relation (along with 
+`i.cut`/`i.knife` for context) is then a 
+transform which concretizes how the concept 
+`i.knife` fits in to the relevant expression: 
+we have to `q.activate` a proper sense 
+of knife as `i.instrument`/; not agent or patient, 
+or even location or benefactor, 
+etc. (cf. `i.a bug crawling on the knife`/, 
+`i.my gaze was drawn to the knife in her hand`/, 
+`i.a sheath for the knife`/).  In general, a 
+verb's relation to an process participant 
+triggers a reconceptualization of that 
+participant, depending on its participatory role.       
+`p`
+
+`p.
+`Gardenfors;'s Conceptual Space theory of verbs 
+provides us with a structural framework for 
+modeling the logical (or `q.geometrical`/) 
+parameters of such participatory roles.  I would 
+question, however, to what degree lexical 
+conventions simply preempt our cognitively 
+exploiting such logical structure as a 
+vehicle for elucidating verb meanings 
+(through the network of process-participant 
+relations forming a complete clause).  
+A further complication is that we often 
+conceptualize processes in relation to 
+other processes: we cut food, for example, 
+so as to more conveniently eat it.  
+Or, we open a bottle of beer so as to 
+drink it.  If I open a bottle, or see someone 
+else doing so, I am usually only dimly aware 
+of the actual direction of force and 
+movement whereby the cap is extricated 
+from the bottle.  I am more engrossed 
+in the anticipitory protention of grasping 
+the opened bottle and drinking from it.  
+`p`
+
+`p.
+It is possible to open a beer bottle without a 
+normal bottle opener %-- with a hammer, say 
+(using the head, on its side as a pivot).  
+When someone does so, they have not 
+suddenly expanded the lexical network 
+for `i.hammer` such that the sense `i.bottle 
+opener` is now one usage.  But nor are 
+they applying force-dynamic rules to 
+authorize the applicability of the verb 
+`i.open`/.  The more proper gloss on the situation 
+is that there is not very much going on linguistically 
+at all, especially if the action occurs 
+without social interaction.  If I am alone, 
+thirsty for beer, wanting a bottle opener 
+but not a hammer, and open the beer with the 
+hammer, almost all my reasoning is 
+extra-linguistic (although my deliberations 
+might be spurred by inner dialog %-- 
+`i.hmm, where's the bottle opener ... I can't 
+find it ... what could I use to open the beer`/?).  
+I certainly am not attending to the semantics 
+of `q.open` while I endeavor to open the beer 
+with the hammer.  
+`p`
+
+`p.
+The force/result vector distinct has some relevance 
+here, too, but I find it mostly an extralinguistic 
+relevance.  I need to apply force to the cap 
+to pry it away from the bottle, and the result 
+of that action is the bottle's state 
+changing.  I am not necessarily `i.thinking` 
+about this process with any rigor, but more likely 
+`q.feeling` it kinaesthetically %-- I have to 
+position the hammer-head at the right angle and 
+then pull upward in the right way, so the process 
+demands a proper manual gesture executed with the 
+right fine-motor maneuvering, so it is an 
+`q.embodied` faculty more than a cognitive one.  
+To be sure, once I succeed %-- and also 
+before I even attempt to gesture %-- the 
+situation falls into certain linguistic 
+glosses: `i.I need a way to open this bottle`/; 
+`i.This bottle is now open`/.  The force-dynamic 
+and result-vector specifics of the process 
+through which the bottle `i.was` opened 
+presumably influences my proclivity 
+to mentally summarize the situation as 
+`i.the bottle is now open`/.
+`p`
+
+`p.
+Still, the significance of the verb `i.open` here 
+seems mostly to summarize, or provide mental 
+access to, a fundamentally extralinguistic 
+plane of reasoning/experience.  In this 
+sense I think we need to be careful about 
+how we posit Conceptual Spaces as 
+building blocks of `i.semantic` analyses, 
+in which we pursue the `i.linguistic` derivation 
+of compound meanings from conventionalized 
+smaller units.  Semantics is distinct 
+from merely inventorying a lexicon, because 
+the assumption is that lexical elements are 
+arranged in novel combinations to signify 
+non-conventionalized ideas.  A good example 
+of `q.novel combinations`/, of course, 
+is finite clauses where a verb is paired 
+with multiple participants and roles 
+%-- agent and patient, along with various 
+other roles exposed via `q.case-forms`/.
+`p`
+
+`p.
+We should concede, however, that sometimes 
+the situational details of participants' 
+roles is established mostly 
+`i.extra`/linguistically.  If I cut a 
+piece of meat, my attention is perhaps 
+occupied by anticipation of the subsequent 
+process, eating the bite-size pieces: 
+the flesh out the meaning of `i.cut` 
+in terms of the force and result vectors 
+can distort the play of conscious awareness, 
+where the parameters of one current process 
+are mentally subsumed under the pragmatic links 
+tieing one process to another.  In this 
+case, I consider the act of cutting most 
+specifically as an operational precursor 
+to the act of eating.  Conceptually, 
+then, `i.cut` as a verb profiles this 
+point in a multi-process practical 
+chain more than it profiles the precise 
+mechanics behind its process per se.  
+Likewise, `i.open` in the sense of 
+opening beer with a hammer essentially 
+(on my reading) provides mental access 
+through one lexeme to an almost entirely 
+extralinguistic form of reasoning.  And, 
+perhaps in an opposite direction, certain 
+usages (like `i.cut` when the instrument is 
+a knife, the patient is food, and the agent 
+is someone cooking or eating) are so 
+conventionalized in word-meanings as to 
+be lexical phenomena more than semantic ones. 
+`p`
+
+`p.
+In short, I would argue that in many 
+cases the `q.semantics` of verbs is 
+preempted: either our construal of 
+verb-to-process-participant relations is 
+lexically entrenched and, as such, not a 
+matter of semantic construction; 
+or, the verb merely proxies for extralinguistic 
+modes of awareness; or, we reason through 
+individual processes in networks 
+of functionally related processes rather than 
+through granular awareness of the parameters 
+of one process in particular.  What this means 
+is that a potential Conceptual Space analysis 
+of verbs is only a `i.semantic` analysis in 
+certain circumstances, where lexical, 
+functional/pragmatic, or extralinguistic considerations 
+do not `i.pre-empt` an actual `i.semantic` integration 
+of multiple verb/participant relations.  If we 
+suggest that verbs are modeled via Conceptual 
+Spaces through an agent/patient connection 
+%-- that the agent and patient are `q.points in` 
+or somehow semantically grounded within their 
+respective Conceptual Spaces, and the agent/patient 
+connection merges these space %-- then this 
+`q.double-space` theory is only a `i.semantic` analysis 
+of verbs to the degree that the juxtaposition 
+of the two spaces is a `i.linguistic` construction, 
+one that bears its meaning through a logical 
+interconnection between spaces that yields a point 
+or a path in a hybrid space.
+`p`
+
+`p.
+The idea of using Conceptual Spaces to model 
+linguistic `i.constructions` is perhaps more 
+simply illustrated not with verbs but with, 
+say, adjective/noun constructions.  To say 
+`i.red apple` is of course to combine two 
+different predications, one that something 
+is an apple and the second that it is red.  
+As a `i.semantic` theory, moreover, we would 
+want to say that this combination is 
+`q.generative`/; that it allows for the 
+expression of novel ideas.  Arguably `i.red apple` 
+is semi-entrenched as a phrase in its own 
+right (like `i.red hair` or `i.green apple`/), 
+but we could readily vary the example, to, 
+say, `i.purplish apple`/.  This is `i.not` a 
+lexically-entrenched usage.  As such, its 
+meaning is somehow compositional: it derives 
+from a structured combination of the meaning 
+of its parts, in some rule-governed manner.
+`p`
+
+`p.
+Conceptual Space Theory would like to offer an 
+account of `i.how` compositional meanings like 
+`i.purplish apple` are synthesized, by 
+considering the compound expression as a 
+juxtaposition of distinct conceptual 
+spaces.  This means that compound meanings 
+can be derived from semantics alone 
+%-- `i.semantics` in the sense of a 
+theory for how compound meanings derive 
+from combinations of lexically-entrenched 
+minimal units via the application of linguistic 
+(syntactic and semantic) rules.
+`p`
+
+`p.
+But even if we grant that compound meanings 
+can involve the pairing of distinct 
+conceptual spaces, we do not necessarily 
+have a `i.compositional` theory of this 
+`q.merging` of spaces.  Note first that 
+some combinations are entrenched in different 
+ways.  Even if we do not have specific 
+conventionalized phrases like `i.red hair`/, 
+we may have a case like `i.cut`/`i.knife`/, 
+where the space-doubling %-- here the agent/patient 
+relation and then the relation of the overall 
+process to its enabling instrument %-- reflects 
+a kind of originary scenario that grounds the 
+lexical conventions of the words involved.  
+The food/dining context is certainly the 
+central pole of `i.knife` and arguable the 
+central meaning, or one of then, for `i.cut`/.  
+And in other cases the integration of 
+two conceptual spaces triggers extralinguistic 
+reasoning entirely, or is driven by an 
+anticipatory and/or retrospective account of 
+functionally connected processes, where the 
+granular details of one process recede into 
+the mental background.  If we experience 
+`i.cut` as preparatory for eating, then 
+we tend to think of the process solely in terms 
+of the end result of yielding bite-size 
+pieces %-- the force-dynamics of the cutting 
+process is not, in such cases, in the 
+`q.zone` of semantic connotations we actively 
+associated with verb.  (In other scenarios, 
+though, e.g. when we are stuggling to cut 
+through something, the force dynamic 
+may be foregrounded at the `i.expense` of 
+other facets).   
+`p`
+
+`p.
+None of this is to dispute that force and 
+result vectors, or Conceptual Space 
+`q.merging`/, is a salient dimension of 
+situations which are approached linguistically.  
+My point is rather that space-juxtapositions 
+marked via grammar are not necessarily semantic 
+`i.constructions` whose `i.meaning` is extrapolated 
+from some logical derivation on the spaces insofar 
+as they are juxtaposed.  Again, adjective/noun 
+is a useful example.  When we use color words 
+(`i.purplish apple`/), the usual implication is that 
+the color names how an object `i.appears`/, and typically 
+describes the surface, or visible exterior 
+(an apple is white or very light yellow `i.inside`/).
+This is not a hard-and-fast rule.  Of a white chocolate 
+truffle dipped in dark chocolate, I might say 
+`i.this is white (chocolate)`/; I might say 
+that a red velvet cake with white frosting 
+(or a clear glass covered lamp with a reddish bulb inside) 
+is `i.red`/.  In short, we `i.occasionally` 
+use color words to describe the `i.inside` 
+of an object, not its surface.
+`p`
+
+`p.
+In short, even fairly straightforward 
+`q.juxtapositions` of conceptual spaces are 
+`i.mediated` by a play of lexical, situational, 
+and extralinguistic conventions.  The co-presence 
+of two conceptual spaces may trigger 
+extralinguistic associations, or may trigger 
+entrenched lexical patterns.  And even when 
+we allow that a compound meaning emerges 
+from the structural interplay of two spaces, 
+we tend to follow some conventional outlining 
+`i.how` one space is to be thought or predicated 
+alongside another %-- in what 
+`i.sense` an object is red, say (usually 
+but not always a red `i.surface`/).   
+`p`
+
+`p.
+This discussion I think comlicates the 
+idea of using Conceptual Spaces as a theory 
+of semantic `i.constructions`/: as a theory 
+wherein the precursors to semantic meanings 
+are `q.plugged in` to some Conceptual Space 
+combiner and the `q.output`/, of a more 
+complete meaning, falls out logically 
+via some intra-linguistic process.  Just 
+as often, I claim, any word-pairing 
+which may be theorized as a conceptual-space 
+juxtaposition `i.triggers` some mental operation 
+which is not strictly semantic %-- it may 
+be lexical, or pragmatic, or extralinguistic, 
+or some combination.  I will explore this 
+further by continuing to look at simple 
+adjective/noun juxtapositions.  
+Continuing an earlier thread, I will 
+present some arguments that even 
+simple-seeming domains like color 
+have hidden complexities that prevent 
+even the straightforward application of a 
+color-modifier to a noun target can be 
+read as a purely `q.semantic`/, 
+`i.intra`/-linguistic composition of meanings.
+`p`
+
+
+`subsection.Functional Relations and Elementary Domains`
+`p.
+Color may seem like a prime example of what Langacker 
+calls a `q.locational` domain and of `Gardenfors;'s 
+quantifiable structuration of domains: we have a 
+total, finite, dimensionalizable space including 
+all colors, and color-concepts refer to regions 
+(maybe `q.convex` regions) in this space.  However, I 
+am going to argue that even color is more complex 
+than it seems, and that we need to approach 
+color-concepts on functional terms.   
+`p`
+
+`p.
+Consider real-world situations where color concepts 
+are situationally meaningful (and potentially 
+then expressed linguistically).  The most 
+prototypical such situation, perhaps, is using 
+color to help identify something: 
+
+`sentenceList,
+`sentenceItem; Please hand me the red scarf?
+`sentenceItem; Have you seen my orange coffee mug?
+`sentenceItem; Your keys are on the blue table.
+`sentenceItem; My purse is the black one.
+`sentenceItem; The yellow column shows last year's data.
+`sentenceItem; On the mantle was a purple vase.
+`sentenceList`
+
+Color words have a functional purpose, in these 
+cases, of selecting one object from its 
+peers (assuming there are multiple purses in 
+(4), multiple scarves in (1), and that the 
+speaker has different mugs in (2)).  
+It is also possible that the color designation 
+helps the addressee to pick out a designated 
+object in a cluttered visual field, even if there 
+is only one scarf in (1) or one table in (3).  
+In either case, color terms fashion a succinct 
+description of some focal object's surface 
+appearance to help the conversants syncronize 
+their visual attention.  The functional purpose of 
+the color-concept is to guide listeners to 
+`i.that particular` object which the 
+speaker is emphasizing.
+`p`
+
+`p.
+In that vein, there are many different descriptive 
+strategies which a speaker might choose to similar 
+ends: maybe `i.wool scarf` in (1), 
+`i.glass table` in (2), `i.chipped mug` in (3), 
+`i.gift purse` or `i.strapless purse` in (4), 
+`i.middle column` in (5), or `i.antique vase` in (6).
+These obviously involve concepts distinct 
+from color, because they address fundamentally 
+different facets of the object's composition 
+or provenance.  However, even if we construct 
+`i.color` conceptually as a device for 
+individuating objects through the visual properties 
+of their surface, there are still a spectrum 
+of color `i.patterns` which play an analogous role: 
+
+`sentenceList,
+`sentenceItem; Please hand me the plaid scarf?
+`sentenceItem; Have you seen my green-white-orange coffee mug?
+`sentenceItem; Your keys are on the checkerboard table.
+`sentenceItem; My purse is the striped one.
+`sentenceItem; The cross-hatch column shows last year's data.
+`sentenceItem; On the mantle was a spiral-pattern vase.
+`sentenceList`
+
+I am not convinced that there are functionally viable 
+reasons for treating colors as a separate domain 
+from `q.patterns` in this sense.  Is true that we have 
+a larger inventory of color-words than pattern-words, but 
+this may be due to difficulties in `q.stabilizing` pattern 
+concepts %-- to identify which patterns are 
+sufficiently similar or dissimilar enough to warrant 
+being subsumed under one concept (or not).  
+Not that there isn't a certain `q.language` of 
+visual pattern forms, in terms of symmetries 
+and displacements (`i.striped` and 
+`i.checkerboard` patterns have 
+translational symmetry along one or two spatial axis 
+respectively; other patterns have radial or 
+reflectional symmetry %-- a `q.polka dot` pattern 
+has double-translational symmetry holistically 
+but radial symmetry for each `q.dot`/).  We could conceivably 
+quantify a certain pattern-space by identifying 
+the relevant symmetry modes and their geometric 
+measure (as in, the width of the stripes in a striped 
+pattern measures the amounts of translation where 
+the symmetry is effective).  However, this 
+putative space does not seem to capture all 
+visually meaningful patterns, nor lend itself 
+to obvious partitions into convex regions that 
+would undergird distinct pattern-concepts.  
+`p`
+
+`p.
+We could nevertheless present something like 
+this analysis to explain the pattern-words 
+which `i.do` exist, which appear to describe 
+patterns that are readily recognizable and 
+also readily distinguished from others.  
+This suggests how lexical entrenchment 
+depends not only on some plausible conceptual 
+ground for a distinct lexicalized concept, 
+but also on the practical facility for 
+this concept to play against the dynamics 
+of usage-selection: we favor concepts which 
+drive selective pressures to choose 
+their lexeme in `i.some` contexts and 
+equally to pass it over in `i.others`/.  
+Only certain pattern concepts appear to 
+be very useful once such dynamics are 
+taken into account (`i.striped` is 
+perhaps the only spatial-pattern word in frequent 
+English usage).  By contrast, several common 
+color words are valuable within this dynamics, 
+and more precise color words work similarly 
+on the assumption that speakers, in the 
+contexts where such words are used, 
+face selective pressures to name hues more 
+exactly.    
+`p`
+
+`p.
+I think, then, that the dynamics of usage-selection 
+and the merits of words having clear usage 
+criteria can explain the proliferation of 
+color words (as well as their relative 
+popularity), and also the paucity of 
+words for visual patterns.  On the other 
+hand, I find this analysis pointing 
+toward an account where colors and patterns 
+are both part of a larger domain which is 
+functionally active in the context of 
+distinguishing objects by their surface 
+appearance.  Within this larger domain, 
+colors more than patterns have in general 
+become entrenched via individual words 
+(although we can profile a wider inventory of 
+patterns with descriptive phrases).  
+Indeed, `Gardenfors; point about concepts 
+typically being grounded in `q.convex regions` 
+within a domain seems apropos and explanatorily 
+useful for comparing entrenchment in the 
+context of colors versus patterns.  But 
+I find this more an analysis of its lexical 
+entrenchment than of the domain itself; 
+and the tendency of color-concepts to be 
+`q.lexicalized` more readily than pattern-concepts 
+does not strike me as a compelling reason 
+to separate colors and patterns as `i.different` 
+domains.  Indeed, we can see solid colors as 
+one sort of pattern, differentiated not 
+by geometric structure but by the phenomenal 
+distinctness of their color qualia.
+`p`
+
+`p.
+These arguments notwithstanding, there 
+are conceptual context (not just singling 
+out objects of interest) where color-concepts 
+are functionally salient.  Sometimes we do 
+want to focus attention on a specific 
+color hue for aesthetic reasons.  But here 
+also I believe the color domain co-exists 
+with other sensate qualities that become 
+conceptualized %-- in particular, optical attributes 
+like `i.shiny`/, `i.sparkling`/, `i.glittery`/, 
+`i.polished`/, `i.lustrous`/, `i.glistening`/, 
+`i.glowing`/, `i.iridescent`/, `i.opalescent`/, 
+`i.translucent`/, etc.  
+When we focus in on the aesthetic feature of a 
+specific color, it is usually not only the 
+given hua that creates an experientially resonant 
+effect; instead we appreciate how light plays 
+with or saturates the colored extent, creating 
+visually pleasing effects.  Unlike patterns, 
+our descriptive focus in these situations lies 
+with optical virtues borne even by small 
+spatial regions, so we can focus in on one 
+colored region even if the larger object's 
+surface has different colors on it.  We do not, 
+that is, normally profile larger patterns in 
+the conceptual attitude of aesthetically 
+foregrounding the visual pleasure evinced 
+by a particular interaction between color and light.  
+But these aesthetic qualities are still not, 
+in my mind, born by color alone, but rather 
+by color in combination with optical properties: 
+the beauty of a vase's purple cannot be 
+phenomenologically separated from how 
+its glaze reflects light; or the beauty 
+of a glass's red from its semi-transparency.     
+`p`
+
+`p.
+To marshal color-words as naming concepts in this 
+aesthetic-optical sense, then, I believe we need 
+to extend colors into a larger domain also 
+comprising optical concepts like `i.shiny` or 
+`i.translucent`/.  The color-plus-optical domain 
+is different than color-plus-pattern, but 
+this differents reflects the functional 
+divergence in their use-contexts.  It is 
+also true that optical attributes could be used to 
+indivuate objects (`i.the shiny handbag`/), 
+I think this is a departure from the functional 
+`i.rule` in force for the color-plus-pattern 
+domain for object-selection: in `i.shiny handbag` 
+we are using a visual quality as a discrimating 
+feature, but so too in `i.large handbag` or 
+`i.round handbag`/; the point of 
+`i.red handbag` or `i.striped handbag` is 
+to promote as discriminant a concept 
+instantiated by the object's surface, figured 
+mostly as a whole %-- we are less likely to say 
+`i.striped handbag` if actually only one small 
+patch or logo is striped.  But `i.striped` 
+is also a property that is naturally predicated 
+of the whole, so being a general characterization 
+of something's `i.whole` surface seems conceptually 
+intrinsic to `i.striped`/; whereas `i.shiny` 
+is predicated of surface regions on multiple 
+scales, so that `q.holistic` element is not 
+essential to the concept.   
+`p`
+
+`p.
+Another way to say this, using Langacker's terms, 
+is that `i.striped` is a `q.configurational` 
+property whereas `i.shiny` is not.  But in this 
+sense color concepts, when used to generally 
+classify objects by their surface appearance, 
+is `i.also` configurational, because using 
+`i.red` as a discriminator in `i.red scarf` 
+only makes sense if most of the surface is 
+red.  The implicit rules of using color-concepts 
+to identify objects, then, involve the named 
+color being extend completely (or almost so) 
+over their surface; we create an expectation 
+of the configurational relation between the color 
+and the boundaries of the relevant surface.  
+So the color domain, at least in this 
+anticipatory sense, is configurational in the 
+color-plus-pattern case but not in the 
+color-plus-optical one %-- which makes sense 
+if we agree that `i.patterns` are configurational 
+whereas `i.optical qualities` are not.  
+`p`
+
+`p.
+Meanwhile, there is a third common use-case 
+for color words as selectors among some restricted 
+set: red and yellow cards in some football 
+codes, say, or `i.black` and `i.white` in chess.  
+Here the actual colors are only cues to 
+conceptualization which may not even match 
+actual appearances: with a chess set whose black 
+piece were rendered as red we would still say 
+`i.black queen`/, not `i.red queen`/.  Here the 
+functionally relevant domain is not colors 
+`q.plus` anything, but a small enumeration 
+selected `i.from` colors.  In these smaller 
+domains, most of the quantitative structure 
+available in the larger domain comes out 
+of focus: we do not really think about 
+colors as more or less similar, or darker 
+and lighter, when we are using a choice-space 
+of colors as a fiat grouping device.
+`p`
+
+`p.
+In the spirit of these treatments, then, there 
+really is not `i.one single` color domains; 
+instead there are numerous domains which involve 
+(but are larger and smaller than) colors, each 
+domain applicable in distinct functional contexts.  
+I also believe that color concepts `q.migrate` 
+across these domains: I do not think that 
+`i.red` is a different concept when it can 
+contrast with `i.striped`/, as compared to 
+with `i.shiny` or only with `i.yellow`/.  
+Instead, I think that their ability to 
+manifest via one or another domain is part of 
+the conceptual specificity of colors.  To be 
+sure, this means that concepts belong to 
+both the color-plus-pattern and color-plus-optical 
+domains; as a result, the `q.dimensional` structure 
+of the color pyramid (treated as a domain in its 
+own right) has some analytic value.  It windows 
+onto features of color-space which allow colors to 
+`q.migrate between` domains in their particular 
+ways.  But I do not see this domain as a defining 
+parametrization of color-concepts; instead, we 
+need to characterize concepts across all domains 
+where they may be situated in one context or another.  
+`p`
+
+`p.
+From this perspective a `i.domain` is not the ultimate 
+origin of concepts but a specification which 
+fleshes out context in specific functional contexts.  
+We should characterize color-concepts, for instance, 
+in light of the `CVCM; model I proposed earlier: 
+where does a color attribution fit into the 
+interplay of noun-roles, verbs, context, and 
+construals which define the functional network 
+relevant to each situation?  Note that in the 
+color-plus-pattern domain concepts are usually 
+adjectives, so they tend to be characteristic 
+or supplemental details posited of their accompanying 
+nouns.  In their more aesthetic, color-plus-optical 
+guise colors are more likely to be subjects 
+(`i.This brown would be perfect for the living room`/).
+But the specific domains through which color words 
+have information-bearing content depends on 
+their `q.functional-network` context.  What makes 
+a concept communicationally effective is an understanding 
+of what propositional content inheres in 
+citing specifically that color: `i.red card` in 
+football endows the `i.red` with a different 
+propositional specificty than in `i.red scarf`/.  
+To recognize the information being suggested 
+via a color-word it is necessary to overview 
+the spectrum of concepts which `i.could` 
+be invoked %-- not necessarily just by a single word 
+%-- from its relevant domain.  And that 
+space of variation depends on `i.which` domain 
+is `q.activated` in the presence of a given 
+`CVCM; structure in the surrounding discourse.  
+`p`
+
+`p.
+This notion of domains being `i.activated` suggests 
+how I am treating domains as emergent specifications 
+dependent on a given functional/context background, 
+not as the paleo germination of concepts.  This 
+appears to deviate from the tenets (if not 
+as much the formal models) of conventional Conceptual 
+Space Theory, but it is also a point I would 
+emphasize as an addendum to Langacker's 
+theory of domains.  With respect to `q.meronomic` 
+domains, for example, Langacker sees part/whole 
+relations as bases for domains wherein the 
+domain of a finger, say, is a hand; that of a 
+hand, an arm; etc.  In these mereological 
+orderings, Langacker seems to argue, one 
+level of scale provides a conceptual `q.scope` 
+for its immediate successor (in the whole-to-part 
+direction); so `i.hand` is a scope for `i.finger`/, 
+which is a scope for `i.knuckle`/, while 
+`i.arm` is a scope for `i.hand`/.  
+
+`cite,
+To some substantial (though undetermined) extent, 
+therefore, concepts form hierarchies of complexity, 
+such that concepts at one level are presupposed by those 
+at the next higher level.  To properly characterize a 
+particular notion, one must invoke appropriate levels 
+in the relevant hierarchies, i.e. whichever 
+levels make available those concepts by means of which a characterization 
+is easily and naturally achieved.  Foundations I page 148 
+`cite`
+
+`cite,       
+For a given expression, degree of embedding correlates with degree of foregrounding and directness
+of mental access.  `i.Knuckle`/, for instance, provides direct mental access to FINGER
+(its immediate scope), which in turn evokes HAND, and so on. The conception of a
+finger, a hand, an arm, and the body as a whole all figure in the meaning of
+`i.knuckle` but lie progressively farther in the background. [para]
+This layering has various linguistic manifestations. To take just one, a part can
+often be labeled by a compound: `i.fingertip`/, `i.ear lobe`/, `i.eyeball`/,
+`i.toenail`/, `i.bellybutton`/,
+`i.kneecap`/, `i.thigh bone`/, `i.door knob`/, `i.window pane`/, `i.toilet seat`/,
+`i.piston ring`/, and so on.
+A noteworthy feature of these compounds is that the component nouns represent
+adjacent levels in a whole-part hierarchy. ... 
+We can therefore speak of a `i.door
+hinge` or a `i.hinge screw`/, but the same entities could hardly be referred to as a 
+`i.*house hinge` or `i.*door screw`/. LangIntro p. 65 
+`cite`
+
+This theory of `q.meronymic domains` therefore is centered on the 
+thesis of mereological parts providing `q.direct mental access` to 
+their hierarchically `q.adjacent` wholes (but less so to 
+more distant wholes).
+`p`
+
+`p.
+Without disputing this analysis as a point of fact, I would 
+add more of a functional focus: we tend to conceive situations 
+at a level of scale appropriate for our immediate concerns.  
+If we are bandaging a cut knuckle, we focus on that 
+layer of anatomical partonomy; if we are putting a ring on 
+someone, we focus more on the finger that will hold the ring.  
+We do not `q.put a ring on her arm`/.  We may be 
+cognizant of the finger as a whole to which the 
+knuckle belongs if we have to maneuver the 
+finger somewhat to apply the bandage, in the first
+case; and we may be aware of the hand if 
+we need to lift it in a certain way to slip on the 
+ring.  So the whole provides a certain contextual 
+framework for the part (while `q.still larger` 
+wholes, like the arm, less so).  However, these 
+are not just economies of conceptualization: 
+in practical tasks the immediate wholes are 
+kinaesthetically, operationally, and so forth, 
+more likely to be enactively relevant.  
+So the patterns by which conceptual focus distributes 
+largely in accord with mereological ordering has, 
+I believe, a functional origin: we build 
+conceptual blueprints for situations in 
+anticipation of, or with feedback from, 
+our enactive purposes.
+`p`
+
+`p.
+In Coecke `i.et. al.`/'s `i.yellow banana` example, the noun 
+`i.banana` is characterized via a conjunction of quantitative 
+domains %-- particularly color, texture, and sweetness.  
+Since this is a demonstrative example, we should not read 
+too much into its simplicity; however, one open question is 
+whether the dimensional predicates are simply properties asserted 
+`i.of` (say) bananas, or are a `i.definition` of bananas.  
+The authors actually say: 
+
+`cite.
+The subsets of points representing tastes are explained as follows using the case of banana
+as an example.  Bananas are not at all salty ... and therefore 
+[a `q.salt` parameter] is set to 0.  Bananas are sweet, 
+and therefore the [maximum] sweet is chosen as an extremal point in 
+the set of banana tastes. Bananas
+can also be somewhat but not totally bitter, and therefore the point
+[1/4] sweet [and 3/4] bitter is chosen as an extremal point.  
+Similarly bananas can be a little sour, and therefore
+[7/10] sweet [and 3/10] sour is also chosen as an extremal point.  
+Finally the convex hull of these points is formed
+giving a set of points corresponding to banana taste.
+
+Note that here, we are using `i.banana` and `i.apple` as 
+shorthand for specifications of convex areas of the conceptual space.  
+These could be written out in longhand as sets of inequalities within
+the colour and taste spaces.  [p. 16, 18]
+`cite`
+
+The first passage here is based on a `q.taste pyramid` whose extremum 
+points are salt, sweet, sour, bitter.  Thus the taste and color 
+of a typical banana can be mapped to points in both color and 
+taste space (via such dimensionalizations); and plausibly 
+the spectrum of possible banana colors and tastes defined 
+via `i.regions` in these spaces.  However, there are 
+probably other fruits with similar flavor and color 
+profiles which are not bananas.  Defining `q.banana` 
+and `q.apple` as `q.specifications of convex areas of the conceptual 
+space` would seem too broad, because it implies that 
+fruits which overlap in these profiles are conceptually identical.   
+`p`
+
+`p.
+Granted, though, the point of that example is a compact 
+exposition; perhaps we can add further dimensions 
+(shape, size, etc.) which more rigorously single 
+out the `i.banana` and `i.apple` concept.  This still 
+raises the question of how well a concept (even if 
+sufficiently detailed) encapsulating `q.banana-like` 
+qualities is actually a concept of `i.banana`/; I think 
+most people would agree that bananas are ultimately defined 
+through taxonomy and (in light of modern biology) genetics 
+(although conversely most people fluent in the `q.banana` 
+concept do not know the relevant scientific details).  
+In any case, we should not proceed from the fact that 
+certain dimensional structures inform predicates which 
+are often `i.attributes` of concept-instances, to 
+the assumption that we can `i.define` the concept 
+by a sufficiently detailed admixture of dimensions.  
+`p`
+
+`p.
+By way of illustration, one dimension we associate with bananas 
+in some context is cost.  By analogy, when viewing an old 
+vase in an antique store we can appraise it through a matrix 
+of dimensions, including width, height, color (or pattern and/or 
+optical properties), age, price, and perhaps `q.condition` 
+(on a scale from damaged to `q.like-new`/).  It is not clear which 
+of these dimensions should be deemed intinsic to the 
+vase-concept (or equivalently the banana-concept) and which 
+are relational properties relevant only in some contexts 
+(like being `i.on the mantle`/).  Presumably bananas were 
+the same fruit before there were people with monetized 
+economies where every product has a point on a `q.price` 
+axis %-- so cost would not seem to be an `i.intrinsic` 
+dimension of bananas.  But almost every dimension seems 
+context-sensitive somehow: bananas have a different color when 
+peeled, a different texture when dried or pureed, 
+a different flavor when spiced, and so forth.  So any 
+`q.quality-matrix` itemized to capture the banana concept would 
+need contextualizing caveats: consider the flavor, texture, and 
+color of `i.unpeeled`/, `i.raw`/, `i.unseasoned` bananas 
+(the fruit in the condition where you might buy it in a store).  
+But in that case we could argue that in a `i.store` context, 
+the price dimension `i.is` intrinsic.  If there is no 
+way to define dimensional parameters without providing contexts 
+where those dimensions (with their relevant bounding regions) 
+are applicable, then we undermine the premise that some 
+dimensions and not others are conceptually intrinsic.
+`p`
+
+`p.
+For such reasons, I believe that we should treat 
+dimensional structures as context-specific predicates 
+`i.of` concept-instances (thereby associated with concepts), 
+rather than bases for defining concepts in the first place.  
+Various domains pertaining to a concept can be `q.loaded` 
+as contextually relevant insofar as we apply the concept 
+within a given situation.  For sake of discussion, I will 
+use the term `i.variational domain` to indicate 
+domains which have some quantitative or enumerative structure 
+%-- similar to a `q.Quality Dimension` in Conceptual Space 
+Theory (RaubalAdams p. 5).  The `q.space of variation` in 
+these domains is responsible for the information content 
+borne by a concept %-- the red card is meaningful 
+because it is `i.not yellow`/, so the red/yellow 
+contrast (not overall color space) provides the parameters 
+which gives the predication its facticity.  When we buy a 
+banana from a store, the domain of `i.price` 
+(which has a variational structure involving dollars and 
+cents, say, among positive decimals to two places) becomes 
+an active participant in our construal of the circumstances.  
+Whether or not this domain is intrinsic to bananas in 
+general, it `i.is` an intrinsic feature of bananas 
+that, as a food commodity, they `i.do` invoke the 
+`i.price` domain in the requisite commercial settings.    
+`p`
+
+`p.
+I think `i.variational domains` can play a theoretical 
+role analogous, at least in many analyses, to 
+Conceptual Spaces; however, I see variational domains not 
+as conceptual backgrounds where linguistic operations 
+occur, but as localized specifications attached to 
+specific `i.points` in linguistic constructions.  
+The Coecke `i.et. al.` model appears to render all 
+linguistic transformations as morphisms against a 
+preexisting (presumably very large) stack of domains: 
+
+`cite.
+Consider again the sentence `sq.`i.chickens cross roads`/`/.
+The nouns `i.chickens` and roads have type $n$ and so are 
+represented in some vector space $N$ of nouns.  
+The transitive verb `i.cross` ... 
+is represented by a vector in the vector space 
+N $\bigotimes$ S $\bigotimes$ N, where S
+is a vector space modelling sentence meaning. (pp. 8-9) 
+`cite`
+
+In other words, this framework assumes `q.a vector space 
+modeling sentence meaning`/, so that each noun and 
+verb within the sentences are smaller vector spaces 
+which, in combination, aggregate to the specific 
+sentence (a `i.point` in that overall vector space).  
+Their overall picture of how sentence composition 
+relates to `i.meaning` is summarized as:  
+
+`cite.
+Organize (conceptual) spaces into a category, the
+`textbf.semantics` category,  with the same
+abstract structure as the grammar category [then] 
+Interpret the compositional structure of the grammar 
+category in the semantics category
+via a functor preserving the type reduction structure ... 
+This functor maps type reductions in the grammar category onto algorithms for
+composing meanings in the semantics category. 
+`cite`
+
+Here, `q.type reduction` reflects the idea that a verb transforms 
+a noun to a sentence, so that the pair of a verb and a noun, 
+were it typed as a unit, `q.reduces` to the sentence-type 
+(they express this in terms of `q.pregroups`/, which reflects 
+the Categorial Grammar distinction between modifiers appearing 
+to the `q.left` or `q.right` of their target; but abstracting 
+this word-order detail we can generically talk of a modifier 
+as akin to a `q.function` mapping one type to another).  
+In general, though, the key notion is `i.pairing`/, or in 
+a mathematical sense `q.product`/: an intransitive verb forms 
+a `i.product` with a noun, and the result `q.reduces` as a 
+type (or in my terms a macrotype) to a sentence or proposition.  
+`p`
+
+`p.
+Coecke `i.et. al.` then envision products in `q.meaning space` 
+which reciprocate the pattern of word-pairing defined 
+grammatically.  Note that the specific proposal is only 
+that `q.type reductions in the grammar` map `i.onto algorithms for
+composing meanings in the semantics`/: in other words, from 
+this language in isolation, the establishment of a word-pair 
+via syntactic structure only triggers an `q.algorithm for 
+composing meaning`/.  Given `i.barking dog`/, say, 
+syntactically deducing that the first word is intended 
+to modify the second yields an `i.algorithm` for 
+us to conceive the dog as barking.  Saying the syntactic construction 
+`q.maps onto` the algorithm implies that, once we grasp the 
+syntactic construction (with its relevant ordering and component roles) 
+we come up with a corresponding algorithm %-- that the 
+construction `i.barking dog` somehow `q.triggers` the algorithm 
+not unlike how just the word `q.dog` triggers our conceptualizing 
+a friendly canine. 
+`p`
+
+`p.
+This basic picture of syntactic forms `q.mapping onto algorithms` 
+is compatible with a cognitive paradigm according to which 
+we have entrenched `q.compound` concepts alongside `q.singular` 
+ones %-- barking dog, green banana, presidential candidate, etc.  
+However, their subsequent discussions such as `q.yellow banana` 
+imply that we can impose some mathematical machinery on 
+the `q.composition of meanings` %-- in particular, 
+as mappings within a suitably expansive Conceptual Space.  
+The `q.algorithms` for composing meanings are, by 
+implication, not so much `q.selected` from a mental 
+inventory but are rather extramental logical operations 
+preformed within the parameters of the relevant conceptual 
+spaces %-- `i.yellow banana`/, for instance, logically 
+dilating the overall `i.banana` region to something 
+more determinate.  
+`p`
+
+`p.
+This analysis, then, works best if we can somehow 
+`q.quantify` the composition of meanings.  In that 
+case the `q.type reduction` of word-pair 
+`q.products` directly `q.maps to` a corresponding 
+maneuver in a quantifiable domain.  The type reduction 
+for `i.yellow banana` is, in this spirit, the 
+derivation of a noun from an adjective-noun 
+product; the corresponding `q.algorithm` 
+is quantitatively modeled by restricting the 
+banana space to yellow colors.  Similarly, 
+an intransitive verb in `q.product` with a noun 
+would collide an (in some sense) quantifiable 
+`q.verb space` with an (also in some sense) quantifiable 
+`q.noun space`/, resulting in a `q.sentence space`/.   
+`p`
+
+`p.
+The notion that something so general as `q.sentence space` 
+can be `i.quantified` may be dubious; but it is also 
+true that Conceptual Space Theory has revealed quantitative 
+patterns in non-obvious settings, so we should not 
+prejudge that a larger exent of semantics than we 
+might expect, at least, has some quantitative form.  
+Within thix extent it is plausible that quantitative 
+interactions between elements in a word-pair correspond 
+to products in a mathematized grammar `q.Category`/.  
+The more immediate concern I would raise emerges 
+from my contention that variational domains come into 
+effect `i.as a result of` linguistic construction, 
+not antecedent to them.   
+`p`
+
+`p.
+Suppose, for instance, I have bought a banana from a 
+cashier for fifty cents.  The verb `i.buy` automatically 
+invites four conceptual components: the seller, buyer, 
+product, and the money exchanged in the opposite direction 
+(actually this last component has two dimensions 
+%-- the `i.quantity` of money and also its physical 
+form, as when I hand over a dollar bill expecting change).  
+In a sense `i.buy` appears to invoke a `q.configurational 
+domain` in that the event which the verb profiles 
+creates a `q.scope` of which the components of buyer, seller, 
+product, and money are `i.parts`/.  This event %-- 
+a `i.purchase`/ %-- is the domain for these components rather 
+as an arm is a domain for a hand; except that the partonomy 
+here involves abstract situational schema rather than 
+physical composition.  I'll specifically propose the 
+term `i.functional-configurational domain` for a case 
+like `i.to buy` (or `i.a purchase`/) to highlight 
+that the configured relations are functional, as opposed 
+to, say, spatial (as in Langacker's example of a triangle).  
+Most of the connections between the verb and other 
+words (or phrases, like `i.for fifty cents`/) 
+are then preoccupied with profiling the 
+things which end up, in the talked-about 
+situation, occupying the roles defined by the domain.  
+`p`
+
+`p.
+It is true that in the course of completing the 
+`i.functional-configurational` domain, we also 
+have one component whose conceptual specificity 
+involves a `q.variational` domain %-- specifically, we 
+can associate an `i.amount` with the money transferred.  
+So, `i.this` quantifiable dimension is conceptually 
+part of the overall functional network %-- but only 
+as a specification joined to one `i.part` of the 
+network, or one `i.point` in the functional-configurational 
+domain.  I believe that domains with quantitative dimensions 
+most often acquire semoitic relevance in this general 
+manner %-- the `i.overarching` domain is 
+functional-configurational, whereas specific occupants 
+of functional `q.slots` may play this role in 
+such a way that we need we need to conceptualize 
+a variational dimension to achieve full specificity.   
+`p`
+
+`p.
+What Coecke `i.et. al.` term an `q.algorithm for composing 
+meanings` often amounts, in the context of 
+functional networks, simply to assigning a role to a concept: 
+`i.buying bananas` elaborates the `i.buy` schema with 
+`i.bananas` in the role of the commodity.  This genre 
+of word-pairing fits into the hypegraph-categorial framework 
+to the extent that we can assess `q.filling a 
+functional-configurational slot` as a kind of 
+`i.algorithm`/.  Less obvious, however, is whether 
+a concept `q.slotting in` to a situational role can be 
+analyzed in the kind of quantitative, dimensional 
+terms germane to `Gardenfors; Conceptual Spaces.  
+The Category-Theoretic intuition that syntactic 
+pairings (qua `i.products`/) can be rendered isomorphic 
+(in a syntax-to-semantic translation) to semantic `q.products` 
+can only be reconciled with a functional/situational sense 
+of semantic connections if we have a proper sense of 
+a functional-configurational domain and its components 
+as both `q.spaces`/, such that the residence of a 
+concept in one components' place is in some sense 
+within a `q.product space`/.  For example, 
+the purchase-to-commodity relation established 
+via `i.bought a banana` certainly situates 
+the fruit in the `i.purchase` schema, but there 
+are no obvious candidates to `q.dimensionalize` 
+this situating in a fashion comparable to how 
+applying `i.yellow` to `i.banana` tapers the 
+concept of `q.banana-likeness` into something stricter.   
+`p`
+
+`p.
+Having said that, once a concept is registered 
+within a functional schema, it `q.carries` the 
+potential for subsequent discussion of its 
+properties, including those conceptualized 
+in quantifiable terms.  The banana's color, taste, 
+texture, etc., are all potentially `q.accessible` from 
+the domain of the purchase insofar as the bananas 
+was what was purchased; we might conceivably focus our 
+conceptual attention onto one or another of 
+those dimensions.  In this sense a verb like 
+`i.by` does `q.act on` certain quantitative dimensions, 
+but the relevant effect is not modeled as a transformation 
+`i.within` the dimensions but as a kind of `q.indexing`/: 
+from the verb we can `i.access` numerous dimensions, 
+including `q.variational` domains, across functionally 
+specified chains of conceptual relation.  
+Assuming we can itemize all the variational domains 
+conceptually relevant to all components in a 
+functional-configurational domain, the multi-domain 
+structure evinced through the verb is a kind of 
+`q.product` over all those domains; but a product formed 
+in such a way that the domains do not usually 
+interact with one another %-- instead, they are 
+latently present and may be activated in subsequent 
+thought or discourse (an exception being dimensions 
+expressly relevant for the functional context, such 
+as the `i.amount` of money which the good costs, when 
+in the `i.purchase` schema).      
+`p`
+
+`p.
+Such a `q.non-interfering` collation of domains to some 
+degree reflects `Gardenfors;'s notion of `i.separable` 
+domains, but the substance of this theory is rather 
+different.  One constrast is that the `q.accessible` 
+domains are not (again excepting intrinsic specifications 
+like `i.buy`/-`i.cost`/) predetermined from the 
+overall situation.  For instance, `i.buy` does not 
+expressly imply a `i.taste` domain (unlike, say, 
+`i.eat`/); such a dimension is only accessible 
+when the item purchased is food or drink.  If you 
+buy a phone card or a transit pass, the `i.number 
+of minutes` or `i.number of days` are quantities relevant 
+to the affairs in that scenario, but have no 
+correlates when buying bananas or batteries.  
+With subordinate clauses, moreover extra domains 
+can come into play via more elongated chains: we buy 
+something `i.for` someone else, or `i.for` some event, which 
+happens at some time in the future (these options 
+adding extra spatial or temporal potentials for 
+elaboration).  We buy a wine which someone else 
+recommended because they tasted it in some prior place and time.  
+The syntax does not just line up dimensional 
+`q.spaces` (using Coecke `i.et. al.`/'s metaphor 
+of vector spaces) as collated tuples of 
+independent axes, like the basis vectors in a vector space.  
+Instead, the accessible spaces are integrated in 
+an organized fashion, so that the `i.chain` leading from 
+the root verb (of a clause documenting a situation) 
+to the specific concept (where a `q.Conceptual Space`/-like
+domain is relevant) via fixed sorts of connections 
+(verb-to-subject, verb-to-locative-phrase, or benefactive, 
+instrumental, and so forth).      
+`p`
+
+`p.
+A verb does not, then, predetermine what `i.kinds` of 
+domains which may be accessed through its conceptual 
+nexus (the situation which it profiles by focusing on 
+a given event, action, or process).  However, 
+it `i.does` predetermine a form of `q.indexing scheme` 
+which orders the accessible domains against the 
+verb via specific patterns of chain-steps: the 
+adjectival modifier to the noun in the benefactive 
+relation to the verb; the adverbial modifier to the 
+verb in the clause modifying the locative; etc.  
+This kind of admixture of domains is, depending on 
+one's perspective, both more and less structured 
+than the compound conceptualizations `Gardenfors; 
+would call `i.separable`/: on the one hand, 
+the totality of domains accessible from a verb 
+are not just (in the general case) mututally 
+independent, but (with suitable modifiers and 
+clauses) unconstrained by the verb itself: 
+a given verb (such as `i.bought`/) can be
+anchored in a situation where many different 
+unforeseen domains become relevant for 
+situational specificity.  A verb does 
+not unify only predefined set of domains; 
+instead it forms a conceptual root where 
+practically any kind of domain may become 
+accessible, if it has conceptual bearing on 
+those things which the verb affects 
+(the verb's subject, objects, case-form 
+modifiers, etc.).  In this sense the 
+accretion of domains around verbs is less 
+structured than a fixed set of `i.separable` domains.  
+`p`
+
+`p.
+On the other hand, though, the verb does not just 
+juxtapose domains; it also provides access to 
+them `i.through functional chains`/, which correspond 
+to syntactic relations such as verb/subject, 
+verb/object, adjective/noun, adverb/verb, and 
+their phrasal variants through subordinate clauses.  
+Via these syntactic patterns, the verb's access to 
+associated conceptual spaces is more structured than a mere 
+collation of separable domains, because we have 
+functionally inflected `q.paths` from the verb to 
+the concept which a domain supports (i.e., gives 
+informational content to).  If I buy a wine rated 
+90 out of 100 for a party upcoming in six days, 
+the domains of the `i.90` and the `i.six` are 
+coexisting in the situational complex, but 
+`i.buy` isn't just passively tupling them like 
+a cross-product.  The two domains lie on 
+separate `q.functional paths` emanating out from the 
+verb, and so they coexist in our minds only 
+in the context of our holistic appraisal of 
+the situation with its specific functional organization.       
+`p`
+
+`p.
+To capture the idea of these functionally orchestrated 
+`q.collations` of domains, I propose the term 
+`i.hyperseparable`/, meaning not only separable 
+(in the sense of the domains being, in the more general 
+case, independent of one another) but also 
+indiscrimately `q.piled on`/.  A verb's (or clause's 
+or situation's) family of `q.conceptually accessible` 
+domains can grow arbitrarily, so long as each 
+`q.new` domain is linked to the verb (and `visavis; a clause  
+to its root verb) via functionally meaningful chains.  
+Each verb and each clause, then, is on this theory 
+associated with a space of `q.hyperseparable` domains, 
+and this cognitive repertoire could perhaps be 
+characterized as the Conceptual Space associated with the 
+verb (and clause or sentence).    
+`p`
+
+`p.
+I believe this kind of analysis is the best way to 
+leverage Coecke `i.et. al.`/'s merger of 
+Hypegraph Grammar with Conceptual Space Theory in a 
+manner that is linguistically realistic 
+%-- in particular, that accommodates how a significant 
+part of linguistic meaning is tied up in 
+explicating functional schema.  When quantifiable 
+dimensions do play a significatory role, it is because 
+they ground concepts which are linked to situations 
+via chains of functional organization.  Thus 
+`i.quantifiable dimensions`/, or as I've proposed 
+`i.variational domains`/, are one sort of 
+conceptual gestalt `q.carried along` the mesh of 
+functional networks which are anchored in verbs, 
+and specifically clause-roots.  I would say the 
+same, however, for deictic reference, 
+anaphora, metaphor, narratively inflected 
+language, and any other semantic lode 
+`i.apart from` variational domains (like 
+color, price, size, etc.).  That is, I am not 
+convinced there is something dialogically 
+special about quantitative dimensions; 
+they are one genre of specificatory 
+predication, certainly important but no more 
+so than other builders of propositional content.
+`p`
+
+`p.
+Once I tell a listener that I have bought a banana, 
+say, they may have no particular reason to 
+attend to any of its properties.  Instead, their 
+natural response may be more functional: if 
+I intend to eat the banana, I have to peel it, 
+and my hands will thereby be occupied.  
+While I eat it I probably won't be able to talk.  
+I will have to find somewhere to discard the peel.  
+My listener will probably make the slight 
+anticipatory adjustments, factoring in the 
+new detail of my banana-acquisition into his 
+vague protentions `visavis; my immediate future 
+behavior.  The fact of my now possessing 
+said banana does not necessarily become 
+relevant to him in any fashion which calls 
+for quantitative models.  Likewise my 
+interest in said procurement (and said 
+eating) only briefly or quietly has quantitative 
+content (the episode where I actually 
+exchange the fifty cents and then, 
+assuming we can dimensionalize tase, the 
+quale of the banana's flavor, which I may only 
+dimly notice).        
+`p`
+
+`p.
+Usually these sorts of functional deliberations 
+%-- to take the banana I must pay for it; 
+to eat it I must peel it; to avoid carrying around 
+a banana peel I must trash it %-- are at the 
+foreground of our conceptual attention.  Each of 
+these operational scenarios, in turn, have their 
+own functional nexus, their own verb-anchors.  
+Thus, merely the act of setting up a 
+functional-configurational domain is often 
+the whole significance of a conceptualization 
+(and of the language which expresses it).  
+So in many contexts we should say not that the 
+functional-configurational domain is a kind of 
+recipe for assembling the meaning; often it `i.is` 
+the meaning.   
+`p`
+
+`p.
+Still, consider cases where some added specificity 
+`i.does` come into play.  Perhaps my companion 
+asked me if the banana tasted good.  That 
+linguistic gesture does bring the `q.latent` 
+domain of the banana's taste into the foreground.  
+This domain becomes a `i.potential` for activation 
+as a consequence of the sentence (and/or the fact 
+which the sentence describes) `i.I bought a banana`/, 
+or some such variation.  The taste domain is 
+not part of that sentence's `i.meaning`/, but 
+the configurational domain which `i.is` part 
+of its meaning creates a route to access 
+the taste domain as contextually salient, a route 
+which hovers for a while over our conversation 
+(I would be puzzled though if my friend asked me a month 
+later through whether the banana tasted good).  
+So we can see certain quantitative dimensions or 
+variational domains as potentialities that get 
+activated along routes created by other meanings 
+already in the discourse.    
+`p`
+
+`p.
+Conceptual spaces may have a secondary role in this 
+analysis, but the same would be said for many other 
+cognitive factors which are doubtlessly important 
+for linguistic understanding.  For instance, 
+any sentence uttered which includes the name 
+`q.John` relies on listeners to know or infer 
+what person is being named.  This can be a cognitively 
+intricate process, but it is sutured to the containing 
+sentence via specific functional chains.  
+Analogous comments could be made about resolving 
+pronoun references, or designations made 
+with the aid of extralinguistic gestures 
+(like pointing at `i.this wine`/), or descriptive
+phases (`i.this wine` as a phrase grounded in 
+discursive context).  We can build various theories about 
+the forms of cognition appopriate for different aspects 
+of semantics, but all of these interpretive faculties 
+are situated in the overall dynamics of linguistic 
+understanding via the functional organization 
+of situations, as linguistically embodied in verbs, 
+clauses, and case-forms.     
+`p`
+
+`p.
+Conceptual Space Theory can in this sense be one of a federation 
+of theories filling out our picture of semantic detailing 
+`i.around` the verb/clause nexus, but none of these 
+thematics %-- conceptual spaces, anaphora, referring expressions, 
+etc. %-- profile the central backbone of linguistic 
+structure. 
+`p`
+
+
+

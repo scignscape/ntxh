@@ -1629,9 +1629,10 @@ articulation of sentences.  As a specific example, consider sentences
 such as: |+|
 
 `sentenceList,
-`sentenceItem; `swl -> itm:booksheread -> The book she read was very interesting. -> pro ;;
-`sentenceItem; `swl -> itm:bookrecommend -> I recommended a book that she read immediately. -> pro ;;
-`sentenceItem; `swl -> itm:bookjustappeared -> A book just appeared that she read immediately. -> pro ;;
+`sentenceItem; `swl ->> `slsep; `textbf.The book she read` `slsep; was very interesting. `slsep; -> itm:booksheread -> The book she read was very interesting. -> pro ;;
+`sentenceItem; `swl ->> `slsep; I recommended `textbf.a book` `slsep; `textbf.that 
+she read immediately`/. `slsep; -> itm:bookrecommend -> I recommended a book that she read immediately.  `slsep; -> pro ;;
+`sentenceItem; `swl ->> `slsep; `textbf.A book` just appeared `slsep; `textbf.that she read immediately`  `slsep; -> itm:bookjustappeared -> A book just appeared that she read immediately. -> pro ;;
 `sentenceItem; `swl -> itm:bookrecommendalt -> I recommended a book I read years ago to her. -> pro ;;
 `sentenceItem; `swl -> itm:harrycause -> This time Harry didn't cause our defeat. -> pro ;;
 `sentenceList`
@@ -1845,8 +1846,8 @@ prosodically into chunks, separate and apart from formal
 syntactic boundaries.  This engenders examples like (from page 111): |+| 
 
 `sentenceList,
-`sentenceItem; `swl -> itm:seedress -> If you see a dress and you really like it you should buy it while you can. -> pro ;;
-`sentenceItem; `swl -> itm:atleastdress -> At least for Alice that wonderful dress is just too expensive. -> pro ;;
+`sentenceItem; `swl ->> `slsep; If you see a dress `slsep; and you really like it `slsep; you should buy it `slsep; while you can. `slsep; -> itm:seedress -> If you see a dress and you really like it you should buy it while you can. -> pro ;;
+`sentenceItem; `swl ->> `slsep; At least for Alice `slsep; that wonderful dress `slsep; is just too expensive. `slsep; -> itm:atleastdress -> At least for Alice that wonderful dress is just too expensive. -> pro ;;
 `sentenceList`
 
 |.|

@@ -21,6 +21,17 @@ int main(int argc, char *argv[])
 {
  GT_Module_IR mir;
 
+// mir.read_lines(QString(R"(
+//   .; the folder is just outside the archive
+//      but it is copied in @/dev/documents/ctg ...
+//    ;.
+
+//  gt-compile-file  $  %1/test/src/t1.gt
+//    ;.
+//    )").arg(DEMO_DOCUMENT_FOLDER) );
+
+
+
  mir.read_lines(QString(R"(
   .; the folder is just outside the archive
      but it is copied in @/dev/documents/ctg ...
@@ -33,6 +44,21 @@ int main(int argc, char *argv[])
     :gt-copy-folder  %1/ctg/gt-copy
    ;.
    )").arg(DEMO_DOCUMENT_FOLDER) );
+
+
+// mir.read_lines(QString(R"(
+//  .; the folder is just outside the archive
+//     but it is copied in @/dev/documents/ctg ...
+//   ;.
+
+//  gt-compile-manuscript  $  :no-first  :info-path
+//    :setup-once  :setup-sdi
+//      %1/icg/src/icg.tex
+//    :manuscript  %1/icg/manuscript
+//    :gt-copy-folder  %1/icg/gt-copy
+//   ;.
+//   )").arg(DEMO_DOCUMENT_FOLDER) );
+
 
  mir.run_lines();
  return 0;

@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-16/1/2021, 23:8
+18/1/2021, 11:38
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -57,7 +57,7 @@ $end: 51
 !/ Subdocument 
 $au: Nathaniel Christen
 $start: 51 
-$end: 70 
+$end: 75 
 /!
 <+>
 
@@ -2310,6 +2310,24 @@ $i: 83
 $p: 64
 $s: 4
 
+!/ SentenceItem
+$i: 190
+$p: 64
+$x: itm:fliesquebecois
+$t: The city's largest theater company performed ``The Flies" in French, but everyone's accent sounded Quebecois.
+$c: ref
+/!
+<>>
+
+!/ SentenceItem
+$i: 191
+$p: 64
+$x: itm:fliesinvited
+$t: The city's largest theater company performed ``The Flies"; then they invited a professor to discuss Sartre's philosophy when the play was over.
+$c: ref
+/!
+<>>
+
 /!
 <+>
 
@@ -2319,8 +2337,170 @@ $p: 66
 $s: 4
 
 !/ SentenceItem
-$i: 190
+$i: 192
 $p: 66
+$x: itm:booksheread
+$t: The book she read was very interesting.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 193
+$p: 66
+$x: itm:bookrecommend
+$t: I recommended a book that she read immediately.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 194
+$p: 66
+$x: itm:bookjustappeared
+$t: A book just appeared that she read immediately.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 195
+$p: 66
+$x: itm:bookrecommendalt
+$t: I recommended a book I read years ago to her.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 196
+$p: 66
+$x: itm:harrycause
+$t: This time Harry didn't cause our defeat.
+$c: pro
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 85
+$p: 67
+$s: 4
+
+!/ SentenceItem
+$i: 197
+$p: 67
+$x: itm:clydebertha
+$t: It's odd that Clyde married Bertha.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 198
+$p: 67
+$x: itm:Brighton
+$t: Londoners most often go to Brighton.
+$c: pro
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 86
+$p: 67
+$s: 4
+
+!/ SentenceItem
+$i: 199
+$p: 67
+$x: itm:BillDrink
+$t: Bill doesn't drink because he's unhappy.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 200
+$p: 67
+$x: itm:ricewine
+$t: Stir in rice wine and seasonings.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 201
+$p: 67
+$x: itm:poodle
+$t: Alice bought a dog. A poodle.
+$c: pro
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 87
+$p: 67
+$s: 4
+
+!/ SentenceItem
+$i: 202
+$p: 67
+$x: itm:roof
+$t: The roof leaks if a building hasn't been maintained.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 203
+$p: 67
+$x: itm:coach
+$t: The team is unsuccessful because the coach is so incompetent.
+$c: pro
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 88
+$p: 68
+$s: 4
+
+!/ SentenceItem
+$i: 204
+$p: 68
+$x: itm:seedress
+$t: \protect \unhbox \voidb@x \let \reserved@d =[\def {\@@par }
+!/ SentenceItem
+$i: 205
+$p: 68
+$x: itm:atleastdress
+$t: At least for Alice that wonderful dress is just too expensive.
+$c: pro
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 89
+$p: 71
+$s: 4
+
+!/ SentenceItem
+$i: 206
+$p: 71
 $x: itm:rhinor
 $t: Rhinos in that park are threatened by poachers.
 $c: sem
@@ -2328,8 +2508,8 @@ $c: sem
 <>>
 
 !/ SentenceItem
-$i: 191
-$p: 66
+$i: 207
+$p: 71
 $t: Young rhinos are threatened by poachers.
 $c: sem
 /!
@@ -2339,13 +2519,13 @@ $c: sem
 <+>
 
 !/ SentenceList
-$i: 85
-$p: 66
+$i: 90
+$p: 71
 $s: 4
 
 !/ SentenceItem
-$i: 192
-$p: 66
+$i: 208
+$p: 71
 $t: Let's find a restaurant that's family-friendly.
 $c: sem
 /!
@@ -2355,21 +2535,21 @@ $c: sem
 <+>
 
 !/ SentenceList
-$i: 86
-$p: 68
+$i: 91
+$p: 73
 $s: 4
 
 !/ SentenceItem
-$i: 193
-$p: 68
+$i: 209
+$p: 73
 $t: I got glue for your daughter.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 194
-$p: 68
+$i: 210
+$p: 73
 $t: I got glue for your coffee mug.
 $c: sem
 /!
@@ -2379,37 +2559,37 @@ $c: sem
 <+>
 
 !/ SentenceList
-$i: 87
-$p: 68
+$i: 92
+$p: 73
 $s: 4
 
 !/ SentenceItem
-$i: 195
-$p: 68
+$i: 211
+$p: 73
 $t: We're going to Grandma!
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 196
-$p: 68
+$i: 212
+$p: 73
 $t: Let's go to him right now.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 197
-$p: 68
+$i: 213
+$p: 73
 $t: Let's go to the lawyers.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 198
-$p: 68
+$i: 214
+$p: 73
 $t: Let's go to the press.
 $c: sem
 /!

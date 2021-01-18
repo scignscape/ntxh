@@ -1,0 +1,1707 @@
+`section.Grounding and Formalization`
+`p.
+A significant part of linguistic theorizing is 
+classificatory %-- itemizing lexical categories, 
+say, or inte-word `q.link kinds` (in Link Grammar) or 
+relations (in general Dependency Grammar), or 
+declension cases (extended to classifications of 
+participants' roles in situations).  
+Such theoretical list-building, however, raises questions of 
+the explanatory merits of the actual lists which 
+a theory is based on, and/or proposes.  
+The `q.Universal Dependencies` project, for example, 
+recognizes 37 `q.universal syntactic relations` 
+across all languages; sentences from any language can be 
+annotated via expository parse-graphs, documenting their 
+apparent syntactic composition, whose edges are labeled 
+with one of the 37 relations.  What philosophical 
+status should we ascribe to `i.those particular` 37 relations, 
+however?  Do they reveal some deep structure of cognition, or 
+of semiotic processes in general, or some combination?  
+Are they explanatory windows onto language at some profound 
+level or more like analyitic tools refined over time by the 
+requirements of cross-linguistic annotation?  
+`p`
+
+`p.
+One can find rationales for the specific group of 
+Universal Dependencies currently recognized.`footnote.
+See `bhref<https://nlp.stanford.edu/pubs/USD_LREC14_paper_camera_ready.pdf>;
+`footnote`  In particular, these relations are themselves interrelated;
+there is a certain theoretical structure to the 
+inventory of 37 which motivates that particular group of 
+relations being accorded canonical status.  On the other 
+hand, literature about Universal Dependencies also 
+takes leaves the impression of engineering a practical 
+toolkit, not just pursuing theoretical analysis wherever it 
+leads.  Explication of how a particular `q.Universal` relation 
+appears in a given language (English, say) often describes 
+diverse cases (implying that there are actually different 
+word-pairing phenomena subsumed under one relation).
+The `q.oblique nominal` (`i.obl`/), for example, 
+is identified as connecting 
+`i.give` and `i.children` in `i.give the toys to the children`/; 
+`i.swam` to both `i.night` and `i.pool` in 
+`i.Last night, I swam in the pool`/; and 
+`i.chased` to `i.dog` in `i.the cat was chased by the dog`/.  
+Or, describing the `q.nominal subject` relation: 
+
+`quote,
+A nominal subject ... is [normally] the syntactic subject and the proto-agent of a clause.  
+The `textbf.nsubj` relation is also used for the nominal subject of a passive verb or verb group, even though the subject is then not typically the proto-agent argument due to valency changing operations. For languages that have a grammaticalized passive transformation, it is strongly recommended to use the subtype `textbf.nsubj:pass` in such cases.
+`quote`
+
+The `i.nsubj` is not just a verb-to-subject relation, because it 
+also connects `i.red` to `i.car` in `i.The car is red`/; 
+`i.barn` to `i.We` in `i.We are in the barn`/; and 
+`i.is` to `i.ghost` in `i.There is a ghost in the room`/.   
+`p`
+
+`p.
+In short, Universal Dependencies employ one relation-kind 
+to annotate multiple construction contexts; the framework 
+also prioritizes relations that are applicable to many 
+different languages.  There may certainly be theoretical 
+motivations for which dependencies are recognized as 
+`q.universal` and also for the different contexts 
+where each is used; however the evolution of the 
+framework also reflects practical feedback from 
+annotating multi-language corpora.  Numerous comments 
+on the web pages about individual relations 
+(like `i.nsubj` or `i.obl`/), maintained by the 
+Universal Dependencies project, describe changes between 
+different `q.versions`/, resulting either in one relation 
+subsuming new cases or conversely a new relation 
+being introduced for special contexts.  The 
+impetus behind these changes appears to be 
+observations of the framework's effectiveness 
+as an annotational tool, rather than more abstract 
+linguistic research or theorizing.
+`p`
+
+`p.
+Multi-lingual annotated corpora are valuable resources, 
+of course, so these forces shaping the `q.theory` behind 
+Universal Dependencies are well-motivated.  But we still 
+should ponder the theoretical import of the system that 
+emerges from this process, in particular the 37 
+relations and their `q.subtypes`/.  Insofar as these 
+specific relations have proven useful across many languages, 
+does this confer on them a different, perhaps deeper status, 
+compared to hypothetical dependency relations itemized 
+solely for one language?  More generally, are these 
+relations canonized by virtue of modeling most accurately 
+linguistic phenomena themselves; or is another 
+consideration their utility from the viewpoint of 
+manual annotators, which may not be the same thing?  
+To cite one more example, `q.advcl` (adverbial clause 
+modifier) is used to connect both 
+`i.happened`/`i.falling` in 
+`i.The accident happened as night was falling`/, 
+and `i.upset`/`i.talked` in 
+`i.He was upset when I talked to him`/.  
+Does this reflect a significant underlying similarity 
+between the two cases, or rather a surface-level 
+resemblance which makes it easier for us to 
+transfer the annotation pattern from one case to 
+another, even if this correspondance in annotation 
+does not reflect a comparable parallel in the 
+underlying linguistic principles?
+`p`
+
+`p.
+I raise these issues specifically to motivate the 
+question of whether `i.inventories` of relation-kinds, 
+lexical categories, and so forth, are the be considered 
+the bedrock of theories against which given linguistic 
+phenomena should be measured, or rather as suggestive 
+products of theories that can themselves be stretched 
+in their role of explanantia to explananda.  
+If, say, we have cross-linguistic, cognitive, or 
+even neurological evidence that the 37 Universal Dependencies 
+have some special status, then analyzing a specific 
+English sentence in terms of those 37 would carry a 
+corresponding scientific weight.  On the other hand, 
+if the crux of Dependency Grammar is more on the rationale 
+for recognizing certain relations as canonical, 
+rather than commitment to a particular fixed glossary of 
+relations, then analyses would not be losing scientific 
+rigor by proposing new relations, particularly if 
+they appear to apply, in linguistically parallel 
+ways, to a variety of word-pairs. 
+`p`
+
+`p.
+Any attempt to be truly linguistically `i.scientific` is 
+bound to stumble against the inherently anarchic 
+nature of linguistic acceptability: while speakers 
+collectively shape language by assenting to novel 
+constructions or not, there is no central authority 
+designing the rules.  Novel uses may be accepted 
+if they break the rules, at least in a manner which 
+is still recognizably structured and communicatively 
+productive.  To take one example, the compound 
+transitive verb `i.wine and dine` is derived from a 
+noun and an intransitive verb, neither of which work 
+in the same construction: we do not say `i.The team 
+wined the free agent and dined him`/.  The pattern of 
+treating a noun as a verb does give rise to novel usages, 
+like both `i.gifted` and `i.primaried` in 
+`i.He gifted money to candidates being primaried by radicals`/.  
+We also even have prepositions recycled as verbs 
+(`i.They outed her on national television`/), or pronouns 
+(as in French `i.tutoyer`/).  
+`p`
+
+`p.
+As I opined earlier, simply using nouns in a verb 
+role (like `i.health scratch him into accepting a trade`/) 
+is rare and exotic-sounding in English, at least outside 
+`q.domain-specific` contexts where there is a natural lexical 
+correspondance between a verb and a noun, like `i.to bat` and 
+`i.baseball bat`/.  A recurring pattern is to identify the 
+instrument or, alternatively, the result of an action as a 
+`i.noun` lexically mimicking the verb: 
+`i.a/to club/kick/shout/gallop`/, etc.  This framework appears 
+absent in `i.to primary`/, where the connection between the 
+noun `i.primary` and the verb is more complex and indirect.  
+It is not the case the `i.primarying` someone `i.results in` 
+a primary occuring (contrast `i.kick`/), or that you `i.use` 
+a `i.primary` (noun) for the act of primarying (contrast 
+`i.club`/).  Even `i.gifted` is not as clear-cut 
+in the noun-to-verb rationale as `i.club` or `i.kick`/. 
+`p`
+
+`p.
+The exceptionality of `i.primaried`/, to be sure, 
+is probably `i.why` the word became popular: its 
+abnormality stretches an accepted pattern, 
+but not unrecognizabley; meanwhile that abnormality 
+also gives it a jargony, context-specific sense of precision.  
+Since noun-to-verb re-interpretations are not automatically 
+accepted, the stability of a usage like 
+`i.primaried` reflects a self-conscious commitment of 
+a particular subgroup of English speakers (those who 
+often discuss American politics) to include that 
+word-sense in their terms of art.  Analogous comments 
+might apply to `i.wine and dine`/, in that the first 
+part reflects the same noun-to-verb pattern; but here 
+the alliteration gives the compound word an 
+informal mien which befefits it in `i.its` 
+sphere of usage.  Probably `i.wine and dine` would 
+not have caught on if not for its rhyming 
+beats, which make it feel proper in the kind of casual but 
+flowery speech register we might find on talk radio, 
+or at parties, and so forth, e.g. where people are 
+themselves wining and dining. 
+`p`
+
+`p.
+Arguably novel uses become entrenched as idioms or 
+special-purpose word-senses precisely `i.when` they 
+`q.break the rules`/, because it is that deviation from 
+expected norms that make them stand out as a unit, 
+subject to copycat effects, rather than just dissolve 
+into the expanse of normal language.  A phrase like 
+`i.faced a primary challenge` %-- together with some 
+elucidation that the incumbant is more moderate than 
+the challenger %-- is probably as commonplace 
+as `i.primaried`/; but it is also so normal-sounding 
+that it fails to become a distinct usage 
+which people adopt self-consciously.  After enough time, 
+of course, an entrenched usage may simply be taken as 
+an alternate word-sense (like `i.bat` for `i.baseball bat`/), 
+and the jargony or flowery elan which a 
+not-quite-rule-abiding construction carries, early on, 
+erodes into a more pedantic polysemy.  But such 
+conventionalization only happens when people 
+use an expression often, and `i.that` often happens 
+`i.because` prople like its whiff of disrepute.       
+`p`
+
+`p.
+In effect, if we want to understand the dynamics driving 
+which word-meanings and syntactic patterns become accepted 
+in the language, we have to analyze when and why 
+speakers are willing to suspend the language's rules, 
+not just the rules themselves.  The noun-to-verb 
+recycling in `i.primaried` %-- or say the preposition-to-verb 
+in `i.outed` %-- are not automatically acceptable 
+patterns, but they do allude to patterns like 
+noun-to-adjective in `i.baseball bat` or 
+`i.dance music`/; or adjective-to-noun 
+(note `i.primary` derives from `i.primary election`/).  
+Thus noun-to-verb is enough on people's radar 
+that they can recognize the pattern when it is 
+applied; but this pattern is also recognized as an 
+exception, not a rule of English grammar, so it is not 
+up to the speaker's discretion to apply it 
+unilaterally.  Of course, a community of 
+speakers may also aggree to accept a previously 
+dubious pattern `i.en masse`/: consider the 
+French `q.passe composee` subsuming (in many contexts) 
+the simple past, or English present progressive subsuming 
+the simple present; or the emergence of `i.her` and 
+`i.they` as gender-neutral pronouns, in some Anglophone circles.  
+Or, Langacker cites the example of 
+`i.shall`/`i.should` and `i.can/could` losing their status as a present/past 
+pair, so that modern English speakers rarely say 
+`i.shall` and often say `i.could` even in the present tense.  
+`p`
+
+`p.
+The process of entrenchment does not only play out on 
+the lexical level; it can be both broader or narrower, 
+covering an entire category of patterns or 
+individual words in specific circumstances.  
+New words (like `i.grok`/, say, which 
+tends to mean `q.understand` when applied  
+to reasoning through technical, especially 
+computer-related ideas, but may be 
+evolving into a broader ornamental 
+alternative to `i.understand` and `i.grasp`/) 
+come into the lexicon via new technologies 
+or specific event (consider the origin of 
+`i.gerrymander`/), but the cycle 
+of novelty and entrenchment is not always 
+focused on single words, particularly 
+if we consider that many pronouns and 
+auxiliaries are systematic anchors for 
+larger constructions, so idiomatic 
+usages of `q.low-level` words in that 
+sense are really alternate patterns 
+for complex constructions.   
+In American English we have idiomatic but 
+essentially standardized parlance even at a core 
+linguistic level, such as pronouns: 
+
+`sentenceList,
+`sentenceItem; How are we doing today?
+`sentenceItem; Your new car is waiting!
+`sentenceItem; You guys coming with?
+`sentenceItem; You all gonna love this!
+`sentenceList`   
+
+We recognize `i.you all` (or `i.y'all`/) as a de facto 
+second-person plural, but only informally %-- and 
+particularly in contexts where one speaker addresses 
+a large number of listeners, such as onstage to an audience.  
+We hear `i.you all` also in more intimate settings, but in a 
+small group its territory is oftened covered instead by 
+`i.you guys` (even when the guys are gals); () also 
+(I'll mention parenthetically) has the trendy intransitive form  
+`i.come with`/.`footnote.
+For completeness, I sketch an analysis of why `i.that` 
+usage is popular: the significance of 
+`i.come with` is essentially akin to `i.come with us`/, 
+but posing the verb as intransitive implies that 
+it profiles a kind of indefinately extending 
+process or a state, like the `i.party` in 
+`i.party on`/.  Compared to `i.come with us`/, 
+dropping the direct object connotes less of a 
+an action whose conclusion the speaker foresees, 
+which, by extension, implies the speaker is 
+attending less to its practical premise.  
+We might say `i.come with us` in the context 
+of a mundane trip to the store, say, 
+conceived in functional terms.  Saying 
+`i.come with` instead implies that the 
+proposed action (that is, the group's going 
+to wherever) has something beyond just 
+utilitarian ends, which ends up coming across 
+as invitational, establishing group 
+solidarity: if you `i.come with` our group 
+will be larger and the 
+shared good time amplified.
+`footnote`  Meanwhile, (1) shows a rather formal but (in some people's 
+mind) potentially condescending figure where 
+`i.we` hovers between first-person singular and second-person: 
+the question is understood as addressed to `i.you`/, but 
+the speaker also implies (in a kind of pro forma show 
+of empathy) that the addressee's well-being affects 
+her too.  In the case of (2), the second-person possessive 
+is not used lawfully (in the contexts I have in mind, 
+e.g. ads) because `q.you` are not understood to 
+`i.have` a new car.  Instead, the formulation 
+triggers your imagining that you `i.do` have a 
+new car, enticing you to want one.  Semantically, 
+though, the new car only exists in a hypothetical 
+and discource-novel register appropriate for 
+an indefinite article; as such, `i.your` is 
+a possessive functioning as a variant on 
+`i.a` or `i.some`/, which clearly violates 
+a foundational architecture of English.  
+As with second-person `i.we`/, though, 
+English speakers normalize these idiocyncratic 
+uses because they are conservative enough 
+to make sense, and because we grok 
+(even if with a wiff of feeling manipulated) 
+their rhetorical inspiration.
+`p`
+
+
+`p.
+Because the progressive revision of rules and norms 
+is as much a part of language as the rules themselves, 
+the analysis of a particular sentence cannot just assume that 
+it is meaningful `i.because` it instances linguistic 
+rules.  It may also violate those norms to some degree, 
+and be successful if the discrepancy is well-motivated 
+and structurally identifiable enough for listeners 
+to both understand and appreciate.  Moreover, even 
+if a sentence `i.is` law-abiding, it may not be 
+completely transparent `i.which` laws are being 
+followed: recall my questioning whether `i.head out` 
+should be read as a compound verb or a separate 
+verb and preposition which just happen to be adjacent 
+in word-order. 
+`p`
+
+`p.
+Given a sentence, in short, we can do a 
+`i.retroactive` analysis, of why it (seems) to 
+be meaningful; or, if ambiguous, why so; 
+if clear but unconventional, why listeners 
+accept it.  We can retroactively analyze 
+why `i.to primary` or `i.to wine and dine` have 
+entered the vocabulary of modern American 
+English.  We can retroactively 
+articulate `q.how` we think a sentence works; 
+we can speculate on whether a hypothetical 
+hearer of `i.I heading out to lunch` hears 
+`i.heading out` as a compound unit or `i.out` as a 
+path-constructor.  Such `q.retroactive` analysis 
+then takes sentences to be, in effect, a kind 
+of social interaction, where after the fact 
+we may look back on the participants 
+motivations and thought processes.  But this 
+retroactiveness also implies that analyses 
+are not definitive; that the parameters of 
+linguistic acceptance are in some degree 
+subjective and may vary from one instance of a 
+usage to another; and that sentences are 
+not mechanically produced from an 
+impersonal formal template.   
+`p`
+
+`p.
+Insofar as the primary mode of linguistic 
+analysis is in this sense `i.retroactive`/, 
+the status of theoretical frameworks 
+(like Universal Dependencies, say) 
+is essentially provisional.  Canonized 
+lexical or word-pair categories are 
+esssentially theoretical props which 
+can be applied in the analysis of a 
+given sentence %-- they help us identify 
+the patterns which govern why `i.this sentence` 
+works as it does.  But this is still the theoretical status 
+of technical concepts made available to a researchers 
+retroactively interpreting some sentence 
+(possibly a hypothetical one) in its specific 
+context.  This is a different kind of 
+theoretical status than the mathematical 
+models of physics or economics, say; more 
+akin to the interpretive affordances of 
+sociology or `q.humanities theory`/. 
+We can retroactively analyze why Trump 
+won or why redistributionist social policies 
+are often deemed elitist, or why concern for 
+the environment is considered quintessentially 
+secular.  Sholars can deploy an arsenal of 
+theoretical constructs to explain such phenomena, 
+from race, class, and 
+gender to theories of cultural representation 
+and the politicization of group identity.  
+But any theory is showing just one window onto 
+complex phenomena; and we sense an active role 
+on the scholars' part in choosing which 
+theoretical tradition to highlight and how 
+to exposit the theory in the context of her 
+specific analysis.  
+`p`
+
+`p.
+In this analytic spirit, the purpose of a theory is 
+to bequeath a set of theoretical constructs to 
+a theoretician to apply to given case-studies as 
+she sees fit.  The theoretical apparatus is 
+part of the scholarly background, but it 
+requires the interpretive instincts and acuity of a 
+an individual person to apply the theory to 
+the phenomena which it might explain.  This epistemic 
+setup presupposes a definitive, active, 
+interpretive role for the researcher who applies 
+a theory.  I would argue that this `q.meta-methodology` 
+is different from that of normal physical science, 
+for instance, where %-- even if new mathematical 
+models or scientific paradigms call for creative, 
+innovative reasoning %-- an established theory is 
+understood to apply to its explananda with 
+an impetus that derives from the phenomena themselves, 
+without an active, interpretive analytic role.  
+In other words, scientific models are not just 
+tools which analysts deploy for interpretive 
+maneuvers; the scientist is more passively observing 
+the fit of data to model, seeing explanatory progress 
+as a structural feature of the theory rather than 
+a leveraging of her own creativity in applying 
+and restaging a theory against a concrete set of facts.  
+`p`
+
+`p.
+Given these two modes of theorizing, then, where does linguistics 
+fit?  Are theoretical posits like the 37 Universal Dependencies 
+fixed paradigms that we should try to dispassionately apply 
+to linguistic phenomena?  Or are they more like 
+investigatory devices that sketch out a mode of 
+scientifically-aspirational analysis, but which we 
+should take as basically a rough draft, an outline 
+of theoreticity that may be expanded and reshaped 
+in the pursuit of each theorist's particular interpretation? 
+`p`
+
+`p.
+I have no `i.a priori` commitments to one or another 
+vision of theorizing; overall I believe `i.language` 
+straddles both features of loosely-regulated 
+social phenomena that can only be theorized 
+roughly and hermeneutically, and of formal 
+systems amenable to something like mathematical 
+analysis.  Formal rules are only partially 
+generative because novel constructions can be communicationally 
+efficacious precisely because they violate some norms; 
+on the other hand, this rhetorical effect works 
+`i.because` hearers recognize and rationalize that 
+departure, so a comprehensive survery of linguistic 
+meaning should retroactively model the structural 
+contrast between unexpected constructions and 
+those which conversants would not mark as 
+`q.unusual`/; which in turn calls for models 
+of which constructions `i.are` `q.expected`/.  
+Linguistic theory can embrace the formalization 
+of `q.normal` sentences precisely to theorize 
+the frisson evoked by performances that stretch 
+the language to communicative effect. 
+`p`
+
+`p.
+In general then I believe the practical core of linguistic 
+theory should be to retroactively identify why 
+sentences are experienced as structurally unremarkable 
+or alternatively as meaninfully, productively, 
+constructively nonstandard.  Theoretical posits like 
+lexical and bilexical categories are tools to effectuate 
+such analyses by supplying building-blocks for models of 
+standardized linguistic constructions.  Rather than 
+working to established a fixed categorial inventory, 
+I prefer to argue for the underlying processes 
+through which both lexical and (as I call it) bilexical 
+categories are posited.  I indeed claim that the 
+parameters of a theory of lexical and bilexical categories 
+are to some measure subjective and intepretive, 
+affected by our analysis of individual cases.
+`p`
+
+`p.
+As a case in point, consider the question of whether 
+bonafide verbs (qua macrotype of elements which 
+yield a finite clause in the presence of 
+between one and three nouns) should always be 
+analyzed in those terms.  A case like 
+`i.I believe Warren will win` suggests that 
+the object of `i.believe` can be a proposition 
+%-- so either we should posit that the 
+proposition gets re-interpreted as a noun 
+(the `i.fact` of such-and-such being the case) 
+or else that some specific class of verbs 
+has a nonstand `q.signature` wherein the 
+direct object is seen as a proposition, not a noun.  
+Note that in apparently all candidates for 
+such treatment, the subject has to be understood 
+as something `q.sentient`/, so there are 
+`q.mesotype`/-level parameters on the acceptability 
+of the object-as-proposition interpretation.   
+`p`
+
+`p.
+I will return to those semantic issues below, but 
+first consider the syntactic motivation for 
+plausibly differentiating object-as-proposition 
+from normal verb `q.macro-typing`/.  Consider 
+examples like: 
+
+`sentenceList,
+`sentenceItem; I expect them to win.
+`sentenceItem; I expect for them to win.
+`sentenceItem; I expect that they will win.
+`sentenceItem; I expect that of them.
+`sentenceItem; I ask alot of them.
+`sentenceItem; I ask that of you.
+`sentenceItem; I ask that to you.
+`sentenceItem; I ask you that.
+`sentenceItem; I ask for you to be in good health.
+`sentenceItem; I ask you to stay in good health.
+`sentenceList`
+
+Note we cannot comfortably say `i.I expect to win of them` 
+or `i.I ask you to be in good health` %-- the latter is 
+more awkward than (), because () recognizes a certain agency 
+in `i.you` which befits the relevant sense of `i.ask`/.  
+Conversely, () is more poetic or ritualistic, `q.asking` fate or 
+karma, etc., play an agent-like role.  So one point here is 
+that the indirect object paired with `i.ask`/, as in 
+`i.ask you`/, appears to compress either `i.ask to you` 
+(some specific question) or `i.ask of you` (some action or behavior), 
+but not `i.ask for you` (in the sense of desiring some outcome 
+relating to `q.you` apart from `q.your` purposeful action).   
+`p`
+
+
+`p.
+Contrast, then, `i.expect`/, for which the ditransitive indirect object 
+seems shorthand for either `i.of` or `i.for`/.  It is plausible to 
+model `i.expect` around `i.ask`/, as in `i.I expect (of) them to 
+play hard and win`/; but the more common meaning if `i.expect` seems to 
+be more like `i.anticipate` or `i.prognosticate`/.  If a sportscaster 
+predicts an underperforming team to beat an inferior opponent, 
+she might `i.expect them to play poorly but win anyhow`/, but this 
+is expecting an overall outcome; it is not a personal interaction 
+with the team itself expecting something `i.of` them.  Still, the 
+ditransitive indirect object works for `i.expect`/, but not 
+in apparently similar contexts: `i.predict them to win` is 
+dubious, `i.predict them to beat Toronto` still more so, 
+and `i.anticipate them to win` sounds just wrong.  
+This evidence implies that anything after `i.expect` could 
+uniformly be treated as a clause (`i.them to win` meaning 
+essentially `i.that they will win`/).  
+`p`
+
+`p.
+In that case `i.them to beat Toronto` could be read as a finite clause, 
+so that `i.to beat Toronto` drops out as an intransitive verb 
+(in the sense of needing only one noun to arrive at a proposition); 
+then `i.to beat` becomes transitive and `q.verb-like` except that 
+the resulting phrase, with direct object (but not subject), results in a 
+verb.  That is, `i.to beat` is of a macrotype which yields a 
+`i.verb` when paired with a noun which is semantically the direct 
+object of `i.beat`/: a clause-construction with `q.subject gap` and 
+`i.verb` outcome.  Ergo `i.to` maps `i.beat` to such a 
+`q.2V(V/1)` type %-- a quasi transitive verb yielding a verb-role 
+clause gapped in the `q.1` (subject) position.  
+`p`
+
+`p.
+However, I am not sure this is a completely formal, or non-subjective, 
+analysis.  An alternative reading is that `i.to beat Toronto` is just a 
+phrase playing a nominal role, the direct object for `i.expect` just as 
+`i.them` is its indirect object.  Under this alternative, `i.to beat Toronto` 
+does not connect with `i.them` to yield a proposition; instead 
+`i.to beat Toronto` and `i.them` are both objects of `i.expect`/.  One 
+indicator for this formulation is that `i.them` needs the morphology 
+of a direct object.  One counter-argument, though, is that 
+such a ditransitive model elides the semantic contrast between 
+`i.expect` and `i.ask`/, or, say, `i.want`/.`footnote.
+Langacker, see LangIntro pp. 432-433, analyzes 
+`i.expect` as taking complements which may be nominals, 
+clauses, or both, as in 
+`i.We expect this movie to make a lot of money`/.  
+This is consistent but tangential to the discussion I 
+present here, because identifying the `q.expected` parameter 
+as a `i.complement` side-steps the specification that 
+such complement is also `i.expect`/'s direct object.
+`footnote`   
+`p`
+
+`p.
+In short, while I believe relevant analyses exist which make no reference to a 
+`q.2V(V/1)` macrotype, there are parallel analyses of the same 
+cases in which proposing such a type may have some merit.  
+I use this example to motivate the idea that the macrotypes of 
+a language %-- or, analogously, perhaps by extension, its 
+taxonomy of inter-word relations/links %-- are not necessarily 
+fixed as if by some governing body (along the lines of 
+the Alliance `Francaise;).  They may not even be fixed in the 
+context of one theoretical framework.  Instead, once a 
+methodological paradigm specifies the `i.role` afforded 
+both to macrotypes and to interword relation-kinds, 
+with the stipulation that an inventory of these types and 
+relations should allow syntactic phenomena in a language 
+to be studied, particular analyses might pull or stretch 
+the inventory somewhat %-- introducing new macrotypes or 
+relations when these seem well-motivated as retroactive 
+vehicles for interpreting sentences.    
+`p`
+
+`p.
+Near the beginning of this paper I mentioned the 
+contrast in acceptability between () 
+`i.That she will graduate in June is expected by her mother`/, 
+() `i.That they would encounter problems was expected by everybody`/, 
+and ()
+`i.That they will finish on time is expected by the painters`/.
+Despite similar constructions, there are some variations 
+between these examples.  One point is that in () and (), 
+the subject of the subordinate clause is also the 
+subject of the main clause (`i.everybody` is who would 
+encounter problems; `i.the painers` are who will 
+finish on time).  Also, () and () have a `i.future tense` 
+subordinate clause with a `i.present` main clause; 
+by contrast, in () both clauses are in the past.  
+The most anomalous sentence here, in my mind, is 
+(), and perhaps these two points offer an explanation: 
+in () both clauses have the same subject `i.and` the 
+main clause desribes a `i.present` mental act 
+relating to a `i.future` condition.  In this 
+situation, it seems as if the two conceptualizations 
+are actually bundled together: the painters, in the 
+course of planning or reviewing their project, 
+are inclined to believe that they will finish 
+on time.  The length of time a project will take 
+going forward seems like a natural component 
+of the conceptual package forming our holistic 
+sense of a project (alongside its current state, 
+what has been accompished, what is still needed, 
+etc.).  In effect, in this one case 
+`i.expect` and `i.finish on time` seem, just 
+by typical conceptual organization, to be two facets 
+of an overall ideation, which perhaps is a 
+`i.semantic` reason why the architecture 
+of () %-- separating these conceptual 
+processes into two clauses %-- feels strained.
+`p`
+
+`p.
+As I pointed out earlier, though, in the context 
+of a sketchier reading, anomalies %-- as in () 
+%-- may only be apparent given a holistic 
+integration of all sentence elements, in light of 
+their unified conceptual picture.  We should not, 
+then, assume that underlying constructional 
+patterns are `i.syntactically` anomalous, at 
+least to such a degree that they impede 
+proper interpretation and integration.  Instead, 
+there is something about the overall conceptual 
+gestalt which makes the chosen syntactic 
+form seem anomalous or subotimal for 
+`i.that particular` linguistic act.
+`p`
+
+`p.
+Returning to the `q.mesotype` issues pertaining to 
+`i.expect` or `i.ask`/, these belong to a class of 
+verbs whose subjects are `q.sentient` and whose 
+objects profile some thought, belief, or proposition; 
+in the latter case the proposition is understood 
+as an article of belief or potential belief 
+entertained by some thinking agent.  One could 
+plausibly hold that the apparent theoretical 
+contrast between different syntactic models for 
+these verbs is an artifact of the gap between 
+semantic specifications and syntactic formalization.  
+That is, the actual phenomenon to be described 
+concerns semantic requirements on when using 
+verbs like `i.believe` or `i.expect` is appropriate: 
+the subject must be `q.sentient` and the 
+direct object must conceptually profile some 
+thought or proposition.  The essential point 
+is that the object `i.profiles` a proposition.  
+Whether it does so by `i.being` (by macrotype) 
+a proposition %-- or by being a `i.noun` 
+which `i.signifies` a proposition  %-- may be a 
+distinction without a salient difference.  
+`p`
+
+`p.
+I would say more precisely that there are different 
+strategies for modeling usage requirements, 
+and we have some theoretical latitude in 
+deciding that criteria of normal usage 
+should be introduced at the coarsest level 
+of lexical categorization (i.e., macrotypes) 
+or at some other level.  Consider anomalous 
+cases like `i.I expect turkey`/, which superficially 
+violates the maxim that the object of `i.expect` is 
+proposition-like.  To resolve the anomaly, 
+hearers have to construe how `i.turkey` conveys a 
+proposition in the current discource context, 
+perhaps intimating that the speakers expects 
+`i.there to be` turkey (on Thanksgiving, say), 
+or `i.to eat` turkey.  The signifying logic 
+here clearly involves an anomaly which gets 
+resolved (the anomaly is not particularly 
+innotative usage, in this case, but a common 
+pattern whereby speakers allow situational contexts 
+to fill in details that get unspoken; 
+surface-level norm-violations occur because the 
+discourse as manifest strategically elides 
+certain inferred content).  In short, the 
+analysis depends on identifying linguistic 
+sites of `q.missing` information and on how 
+this very absence triggers conversants to 
+defer to context, thereby indirectly 
+sigfiying the material (such as the speaker's 
+intention to `i.eat` the turkey) which is 
+strategically missing.       
+`p`
+
+`p.
+In short, `i.absence of content` plays a sigfifying 
+role in `i.I expect turkey` (say), but we need 
+to analyze `i.why` there is something missing; 
+why, that is, hearers `i.perceive` something missing 
+so that they are compelled to infer it from context.  
+In this case the anomaly is sited in `i.expect`/'s 
+direct object, which `i.should` be proposition-like; 
+because it's not, we experience the anomaly 
+as a `i.gap`/.  Specifically, we feel that some 
+verb is conceptually missing; the turkey has 
+to be profiled in the context of some action or 
+process (like serving, or eating).  
+The signifying economy of `i.expect turkey` 
+depends on `i.expect` raising the expectation, 
+so to speak, of a proposition-like direct object.  
+We therefore should represent how that expectation 
+is created and then only obliquely resolved.  
+`p`
+
+`p.
+I would emphasize, however, that such an 
+account of `i.expect`/'s expectations may be
+described at different levels.  We could notate 
+at the macrotype level that `i.expect` by its 
+very macrotyped nature demands a proposition 
+in direct-object place.  Thence the anomaly is 
+apparent, but it also classifies `i.expect` 
+as something other than a normal verb.  
+If we skip over the requirements at the `i.macrotype` 
+level, then we `i.on that level` simply assert 
+that `i.expect`/, as a verb, pairs with 
+a direct-object noun.  The actual `i.expect turkey` 
+anomaly, then, is not apparent `i.at that level`/.  
+We could instead say that `i.expect` has a 
+`q.mesotype` requiring a sentient subject 
+and a proposition-like direct object.  Or we 
+could say that `i.expect` has microtype-level 
+specifications %-- lexical norms for when that 
+word should be used %-- which register 
+`i.expect turkey` as abnormal. 
+`p`
+
+`p.
+Insofar as anomaly-modeling can work at all three 
+levels (macrotype, mesotype, microtype), the 
+decision how to apply the analysis `visavis; any 
+one sentence may be arbitrary.  The ultimate 
+choice of what sort of analysis to 
+conduct with an emphasis on the macrotype, mesotype, 
+and microtype may be guided more rigorously by 
+a more holistic survey of analyses.  The level 
+of categorization most suitable for modeling 
+different kinds of norms and anomalies 
+may emerge from sketching these analyses 
+over numerous examples, observing how the 
+different levels play off one another. 
+`p`
+
+`p.
+In this spirit, then, I want to consider here how 
+`q.requirements` are expressed and operative 
+across macrotype, mesotype, microtype.  For 
+an overarching framework of conceptual organization 
+where our models of these distinct levels 
+can be situated, I will orient my 
+discussion to Langacker's concept of `i.grounding`/, 
+and the progression from ungrounded to grounded 
+noun-concepts as enforced by phrase-construction. 
+`p`
+
+`section.Grounding and Transform Dogmas`
+`p.
+Considering (along with Langacker) `i.nouns` broadly enough to 
+encompass both `i.lexical nouns` and `i.nominal phrases` 
+(see LangIntro p. 10), there is an essential 
+bifurcation between `i.grounded` and 
+`i.ungrounded` nouns.  A grounded nominal has a definitive 
+conceptual, representational, and epistemic status 
+relative to the speaker.  Note that this applies 
+even via `q.indefinite` articles, like `i.a dog (is barking)`/.  
+A nominal grounded by `i.a` could refer to a specific 
+thing; the significance of the indefinite is to mark 
+that said item has not previously been referenced in 
+the discourse.  Conversely, a grounded nominal 
+need not profile specific individuals, as in 
+`i.every dog likes peanut butter` or 
+`i.she wants a dog`/.  In normal circumstances 
+we do not hear her wanting a `i.specific` dog, 
+but the referential status of `i.a dog` is 
+still grounded in the epistemic attitudes 
+of the speaker: we specifically construe 
+that there is `i.not` a specific dog in 
+the speaker's mind, but for sake of discourse 
+we `q.conjure` a hypothetical concept of a 
+dog as a conceptual proxy for `q.any dog whatsoever`/.      
+`p`
+
+`p.
+Grounding, in short, does not specifically address 
+whether a grounded nominal profiles a real, fictive, 
+imaginary, generic, or otherwise abstract and 
+`q.conceptual` entity; it merely establishes that 
+the real and/or mental status of that thing is 
+`i.specified` and signified.  Grounding is 
+complete when we `i.know`/, perhaps inferentially, 
+whether the grounded noun is something real or 
+just a figment of intellect, and then 
+its mental status in either case: if real, 
+how does the speaker and addressees 
+encounter the referent %-- by direct perception, hearsay, 
+memory?  If existing only in the mind, is it imaginary 
+for just one person, or a fiction that has some 
+worldy status (Snoopy is not a `q.real` dog but he 
+has some objective specificity as a collectively 
+recognized narrative character %-- it is `i.true`/, 
+say, that Snoopy is a beagle), or something 
+nonconcrete because underspecified (as in 
+`i.She wants a dog`/)?     
+`p`
+
+`p.
+Some lexical nouns, like pronouns and proper names, 
+are understood as grounded without further 
+modification.  Unmarked plurals can also be 
+grounded automatically in the sense of an 
+almost-maximal reference to the noun construed 
+as a collection of instances: so `i.dogs like 
+peanut butter` implicitly grounds `i.dogs` with 
+the sense of `i.most`/, `i.all`/, or `i.typical` 
+dogs.  Much more common, however, is for 
+nouns to be externally grounded by a transformation 
+effectuated by modifiers such as 
+`i.the/this/that/those/these`/, 
+`i.many/all/some/each/every`/, possessives, 
+magnitudes (`i.five dogs`/, `i.a lot of fish`/), 
+and adjectives in a plural context 
+(`i.Democratic candidates`/, `i.Macron supporters`/, 
+`i.baseball teams`/, etc.).
+`p`
+
+`p.
+Langacker points out that the grounding element is 
+often the `q.outermost` step in a phrase-construction, 
+where a noun has `i.several` modifiers, as in 
+`i.those two lazy cats` (LangIntro p. 311).  
+Langacker also contrasts the role of the 
+grounding element from other sorts of modifiers, 
+such as `q.a nongrounding quantifier (three), 
+an adjective (broken), or the lexical noun (chairs)` 
+in `i.the three broken chairs` (LangIntro p. 275).  
+
+`quote,
+There is thus a strong tendency for a grounding element
+to occupy a peripheral position in the structure of a nominal.   
+[It] provides the least information concerning 
+the nominal referent per se ... the 
+definite article tells us nothing at all about the chairs themselves.  
+It merely indicates their status as a discourse referent 
+(a matter of how the interlocutors direct their
+attention to it).  A grounding element can thus 
+be thought of (at least in functional terms) as
+the final step in putting together a nominal or a finite clause.  
+As the most peripheral component, it specifies an 
+epistemic relationship between the ground and
+the profiled thing or process, as characterized by the remainder of the nominal or
+clausal expression.   
+`quote`
+
+At the beginning of this essay I pointed out Langacker's 
+implicit suggestion in this specific analysis that 
+modifiers tend to occur in a regulated sequence: 
+a `i.non-grounding quantifier`/, say, `i.precedes` 
+the grounding, but `i.follows` descriptive adjectives 
+(such as `i.lazy` in `i.the three lazy cats`/)
+%-- of course, precedence here refers to a 
+sequence of conceptual transforms, not to 
+sentence word-order (which is often inverse 
+to transform-order).  I argued before that the 
+standardization of this sequence is a fact, if 
+it is relatively entrenched in English usage, 
+which is challenging for both Constituency 
+and Dependency grammars.  In the current 
+discussion I want to emphasize the contextual 
+requirements that these patterns impose, 
+particularly on grounding elements 
+themselves %-- we hear these modifiers 
+as operating in an environment where the 
+noun-concepts they modify are `i.not` 
+grounded, but the nominal which is their 
+`q.outcome` `i.is` grounded; and so 
+these modifiers provide the 
+ungrounded-to-grounded transition.  
+`p`
+
+`p.
+Without further specification, a grounding element 
+(construed by analogy to a `q.function`/) 
+both `q.inputs` and `q.outputs` a noun (in 
+`q.compact` notation, N:N).  To capture the 
+specific effect where an `i.ungrounded` 
+noun becomes a `i.grounded` one, we 
+have to decide on what aspect of linguistic 
+structure this specification should be 
+identified.  For example, we could 
+introduce `i.grounded` and `i.ungrounded` 
+as narrower subtypes of the `i.noun` macrotype 
+(`Ng; and `Nu;, say), and assign grounding 
+modifiers like `i.this` a macrotype built on 
+these subtypes, e.g. `NutoNg;).  My 
+hesitation on such a system is similar to 
+comments I made earlier with respect 
+to plurals.  There are actually several 
+different large-scale subtypes of nouns, 
+including `i.mass`/, `i.count`/, `i.singular`/, 
+`i.plural`/, `i.grounded`/, and `i.ungrounded`/.  
+These criteria may inersect in complex ways.  
+The full details may be difficult to 
+capture solely within a system that 
+tries to narrow microtypes on the `q.inputs` 
+or `q.outputs` to and from transformations: 
+that some modifier only accepts pluaral 
+nouns, say, or only ungrounded nouns.  
+We arguably are better some mechanism 
+other than type-signatures to represent 
+these requirements.
+`p`
+
+`p.
+The problem of stating and enforcing requirements 
+on function-like types is not specific to 
+natural language; in fact, it is also significant 
+in programming language implementations, and 
+the sort of applied type theory which applies 
+to computer languages.  Requirements on computational 
+procedures are generally orthogonal to a type 
+system, but has some similarities to type attribution 
+as a mechanism for stating conditions on when and 
+whether a given procedure is executed.  Consider 
+an algorithm which compares two lists, and 
+is optimized for the case where the two lists are 
+the same size.  This requirement %-- the lists 
+being equal in length %-- is a precondition on 
+the algorithm being used properly.  A list-comparison 
+procedure might actually be split into three 
+different routines, one for same-size lists, and one 
+each for where the first or second is longer.  
+Each procedure then has a different set of requirements, 
+and it is clear which procedure should be selected 
+in each situation.  The process by which 
+requirements dictate which version of a procedure 
+to execute resembles how procedures are 
+distinguished on the basis of `i.types`/: 
+a procedure's signature indicates which set of 
+input types are required for it to be called.  
+However, expressing conditions such as 
+`i.two lists must be the same size` is not 
+usually a restriction which can be 
+modeled by a programming language's type system.   
+`p` 
+
+`p.
+In general, type systems are not sufficiently 
+`i.expressive` enough to indicate all pre- and post-conditions 
+which are specified and/or guaranteed by a procedure.  
+Programming language theory has developed various 
+techniques for managing this limitation (including 
+human-readable but not machine-enforced 
+documentation, relying on programmers to use 
+procedures according to their indications but 
+not automatically confirming proper compliance).  
+More rigorous `i.requirements engineering` concepts 
+include `i.dependent types`/, `i.typestate`/, 
+and `i.effect systems`/, which each augment 
+conventional type systems so that more fine-grained 
+requirements, particularly on function-like types 
+(those assigned to distinct procedures) can be 
+directly modeled through type attribution.  
+While discussion of these various formalisms 
+is outside the scope of this paper, I will 
+propose some minimal terms and concepts which 
+are applicable to formal/programming languages 
+as well as, potentially, for `q.natural` linguistics.       
+`p`
+
+`p.
+First of all, I will call a `i.tenet` some 
+predicate that may be asserted on instances of a 
+given type; in computational terms, a tenet 
+on a type is a boolean-valued function whose inputs 
+include at least one instance of that type.  
+Tenets on input types are then potential 
+preconditions for function-like types: 
+it may be required that a procedure only be 
+executed if a tenet on one of its inputs evaluates 
+to `i.true`/.  In the context of mathematical 
+calculations, certain operations (like division) 
+cannot be performed on the number `i.zero`/: 
+a precondition on a division function, then, 
+for instance, can be expressed via the 
+`i.tenet` that the second argument to such 
+a function is non-zero.  Likewise, tenets on `i.output` 
+types are potential postconditions or guarantees: 
+a function may always produce an output which 
+satisfies some condition.  For instance, a 
+`i.square` function on most numeric types 
+(excluding complex numbers) is guaranteed 
+to produce a non-negative outcome.  This 
+postcondition can be expressed via a 
+tenet, applicable to all normal numeric 
+types (including signed integers or signed 
+floating-point numbers) that the number is non-negative. 
+`p`
+
+`p.
+Although tenets are different from types, the 
+two ideas overlap somewhat.  On the one hand, 
+the instances of a type for which a tenet 
+applies, taken as a collective, is 
+potentially a subtype: for a given tenet `ttenet; on a 
+type `Ty;, we have a potential `Tyttenet; which 
+is the portion of `Ty;'s extension where 
+`ttenet; holds (this is a potential but not 
+necessarily an actual type %-- in a programming 
+language context potential types are only 
+`q.actualized` when certain intrinsic 
+procedures associated with that type are implemented).  
+Conversely, the fact of a type instance being 
+reinterpretable as another type can become a 
+tenet on the former type.  To return to the 
+example of non-negative numbers, from 
+the type of `i.signed integers`/, say, 
+non-negative numbers can be `q.cast` to 
+the type `i.unsigned integer` without modification; 
+thus being castable to the unsigned type is 
+a tenet on the signed type.
+`p`
+
+`p.
+I will call the `q.potential` type induced 
+by a tenet `ttenet; on a type `Ty; a 
+`i.pseudotype`/, one `q.based on` 
+(or just `i.on`/) `Ty;.  
+A pseudotype on `Ty; is a `i.potential` 
+subtype, which (extensionally) comprises 
+`Ty; resitricted to instances where 
+some tenet (or combination of tenets) 
+holds.  By extension, a `q.pseudosignature` 
+of a function-like type can then be a 
+variant of the signature which 
+replaces input or output types with pseudotypes on 
+them, in cases where the function's pre- and/or 
+postconditions are modeled by the corresponding 
+tenets.  A `i.square` function on double-precision 
+floats, say, can be `q.pseudosigned` such 
+that its output pseudotype is `i.unsigned double` 
+with the `q.non-negative` tenet.   
+`p`
+
+`p.
+These ideas are acceptable in the context 
+of natural language types also.  In particular, 
+the stipulation that a grounding element 
+`i.inputs` non-grounded nouns, and `i.outputs` 
+gounded ones, corresponds to a 
+pseudosignature where the input is `Nu; and 
+the output is `Ng;; this is the same 
+`NutoNg; formulation I considered earlier, 
+except that `Nu; and `Ng; are now considered 
+pseudotypes rather than macrotypes.  The 
+concept of pseudosignatures, however, is 
+more flexible insofar as a given 
+function-like value (or a given lexeme, in 
+the linguistic context) can have multiple 
+pseudosignatures, whereas its actual type can 
+have only one signature.  For instance, 
+apart from grounding effects `i.these` and 
+`i.those` both input and output 
+count-plural nouns, so they also have a 
+pseudosignature stipulating that this 
+input and output is `i.count-plural noun` 
+taking that as a noun-based pseudotype. 
+`p`
+
+`p.
+Pseudosignatures also have applications outside of 
+the macrotype `q.level`/.  Consider nominals 
+which are formed from propositions, 
+e.g. via `i.that`/.  Semantically, 
+these nouns profile facts or potential 
+truths construed as objects of conception, 
+and therefore as (abstract) `q.things`/.  
+Syntactically, they are often formed 
+by modifying a finite clause to turn it 
+back into a noun (`i.I believe that Toronto 
+will beat Detroit`/; 
+`i.I understand how Toronto beat Detroit`/).  
+In these cases, the modifier (`i.that`/, say, 
+or `i.how`/) has a P:N signature, meaning that the 
+outcome noun has the specific feature of 
+`i.being` the result of a P:N transform; 
+that is, of `i.being` the modification of 
+a proposition.  We can take this 
+construction-history as a possible tenet on 
+nouns: some nouns, in short, are outcomes 
+of a P:N transform.  A `q.pseudosignature` 
+for `i.believe` would then indicate 
+that the direct object to believe has to 
+be an instance of that noun-pseudotype.  
+`p`
+
+`p.
+More accurately, this formation applies 
+to one sense of `i.believe` 
+(a different model appears in 
+`i.I believe you` or `i.I believe everything 
+you are saying`/); these various senses 
+may have their own pseudosignatures, 
+and the lexical `i.believe` treated as the 
+synthesis of the narrower senses.  In each 
+case the `i.subject` of believe has to be 
+sentient, which (in my proposal) is 
+mesotype-level; but this too can be constructed 
+as a noun pseudotype for purposes of 
+pseudosignatures.  In 
+`i.believe/understand/know that` 
+(or `i.understand/know how/why` or `i.know when/where/whether`/) 
+the common requirement is sentience on the subject 
+`q.column` and something proposition-like on the direct object
+(the more general case would allow 
+this propositional sense to be indirect, as in `i.what you just said`/, 
+but I'll focus on explicit P:N examples).  For 
+`i.believe that`/, say, the subject must have `q.mesotype`
+`i.sentient` (just for the moment label 
+this `Ns; for `q.sentient noun`/), and the direct object
+the `i.pseudotype` of a noun created via P:N 
+(for the moment label this `Npton;).  
+We can then express `i.believe`/'s preconditions 
+via the pseudosignature `NsdotNptontoP; or 
+(without compact notation) `NsdotNptontoPnoncompact;.  
+The pseudosignature combined pseudotypes 
+originating at a mesotype level (`Ns;) and a
+macrotype level (`Npton;), so it demonstrates 
+how these levels can be convoluted in 
+preconditions or postconditions.  Given 
+cases like these, I propose using 
+pseudotypes as refinements orthogonal to 
+the striation between `i.macrotype`/, 
+`i.mesotype`/, and `i.microtype`/, so as 
+to sustain the idea that the latter three 
+levels are cognitively distinct 
+while also permitting them to be co-determinative  
+when more than one such level is consequential 
+for defining the propriety of a given 
+word-usage or constructional pattern. 
+`p`
+
+`p.
+With this framework, macrotypes, mesotypes, 
+microtypes, and pseudotypes are different 
+scales of ideational breadth (or potentially 
+cross-cutting scales for pseudotypes) 
+where linguistic requirements may be asserted.  
+I am not convinced that it is nessessary 
+to define `i.a prior` what sorts of conditions 
+should be recognized at what scale.  When 
+analyzing any one sentence we can retroactively 
+decide to notate its patterns of conformance 
+to standards %-- or more pertinantly its 
+strategic abnormalities %-- at one or another 
+(or a combination of) scales, depending 
+on what seems most explanatorily revealing 
+about `i.that particular` sentence.
+`p`
+
+`p.
+Having argued for this methodology at the 
+macrotype (and then finer-grained) levels, 
+I will now consider the extension of these 
+ideas to `q.bilexical` categories or 
+inter-word relations.
+`p`
+
+`subsection.A Generative Theory of Bilexical Categories`
+`p.
+I use the term `q.bilexical category` as a replacement 
+for `i.relation kinds` or `i.link types` in Dependency or 
+Link Grammar.  My rationale for this nonstandard 
+jargon is to highlight the parallels between 
+bilexical categories and macrotypes (which in turn 
+are akin to `i.lexical` categories).  In particular, 
+rather than a fixed inventory of lexical categories 
+I advocate a system of macrotypes where some 
+macrotypes are derived from others, in terms 
+of the type associated with `i.modifiers` whose 
+inputs and outcomes are other types.  The 
+space of macrotypes is therefore in some sense 
+`q.generative` (although the proliferation of 
+macrotypes should be seen as bounded by 
+the relatively small size of linguistic
+constructions, once we treat clauses and 
+nominals as singular components from a higher-level 
+vantage point).  Potentially we can 
+usefully see the system of bilexical categories 
+as comparably generative, but within reason. 
+`p`
+
+`p.
+Note that we can posit a closely association 
+between macrotypes and (at least some) bilexical 
+categories.  Many macrotypes %-- to begin 
+with, modifiers which transform one target %-- 
+can also usefully be seen as a bilexical 
+category pairing the modifier and that 
+which it modifies.  The `i.adjective` macrotype, 
+say, is closely associated with the Universal 
+Dependencies `q.amod` relation: the adjective 
+modifies a noun, which can be modeled as the 
+adjective `i.transforming` a noun-concept, like 
+a `q.function` in some conceptual space, and 
+simultaneously as one inter-word connection in a 
+parse-graph.  The same general principle applies 
+for verbs, though here we have to distinguish 
+verbs' relations to subjects, direct objects, 
+and indirect objects.
+`p`
+
+`p.
+We can, in any case, begin to develop a system of 
+bilexical categories directly from any system 
+of macrotypes.  For macrotypes which are 
+simple (one-`q.input`/) modifiers, there is 
+(we may stipulate) one corresponding bilexical category.  
+Most non-simple modifiers involve verbs and 
+clauses (the main exception here being conjunctions 
+like `i.and`/).  Clauses take on diverse forms, 
+which affects both macrotypes and bilexical categories. 
+`p`
+
+`p.
+The first differentiation among clauses is whether 
+they produce actual propositions (finite clauses) 
+or else nouns or adjectives.  Compare: 
+
+`sentenceList,
+`sentenceItem; She failed to hold the groceries.
+`sentenceItem; She asked me to hold the groceries.
+`sentenceItem; She asked that I hold the groceries.
+`sentenceItem; Where is a bag to hold the groceries?
+`sentenceList`
+
+Here I read `i.(to/that I) hold the groceries` as a noun 
+which is a direct object in (1) and indirect 
+in (2); a proposition in (3); and an adjective in (4).  
+If we define the `i.verb` macrotype as intrinsically 
+a transform yielding a proposition, then we 
+should categorize the verb component (`i.(to) hold`/) 
+in the non-finite cases as not exactly a verb 
+%-- instead a transform `i.like` a verb 
+but yielding a noun or adjective.  For sake of 
+discussion, I'll notate such a `q.substitution` 
+by parenthesizing the non-proposition outcome 
+after the `q.V`/: `VparaN; for a `q.noun-clause` 
+verb, and `VparaJ; for an `q.adjective-clause` 
+verb.  Separately, another feature of 
+the above examples (apart from (3)) is that 
+the `i.subject` is missing from the clause 
+itself (so that it gets picked up from the 
+surrounding linguistic material, e.g. the 
+`i.direct` object in (2)).  For each 
+verb-alternative, then, we can identify 
+which element is `q.missing`/: say, 
+`VparaNOne; for a noun-clause verb `q.gapped` 
+in the subject position (notated `q.1` for 
+the `q.first column` in the verb's signature), 
+and similarly `VparaJOne;.  
+It is possible for gaps to occur against 
+objects also: consider `i.the person that 
+I consulted` (`VparaJTwo;: direct object gap, 
+adjectival clause) or `i.Tell me who to send 
+the letter to` (`VparaNThree;: indirect object gap).    
+`p`
+
+`p.
+On the premise that verb/subject and 
+verb/object (direct and indirect) are bilexical 
+categories, we can introduce variants for each 
+of these where the verb becomes a verb-like 
+clausal head for different kinds of 
+clauses.  Contrast the verb/object relations 
+in `i.This poll favors Warren` and 
+`i.the polls favoring Warren`/; in the latter 
+case `i.favors` relates to `i.Warren` as a 
+direct object, but in a context where the 
+two words form an incomplete clause that 
+adjectivally modifies a nominal (`i.the polls`/) 
+which ultimately grounds the process 
+(`q.favoring`/).  Conceptually the two relations are 
+subtlety different: `i.favoring Warren` connects 
+the verb to the object as more of a generic, 
+repeatable situation, whereas `i.favors Warren` 
+creates the expectation that the verb will 
+be grounded in one specific circumstance.  
+(Not to mention the differences in grammatical 
+behavior: one case calls for the morphological 
+present participle and another for the 
+third-person present).  It is plausible, then, 
+to distinguish verb/direct-object relations 
+for actual macrotype verbs (`VTwo;, say, 
+using `q.2` for `q.second column`/) from 
+variations propagated off of verb-alternatives 
+`visavis; clause-kinds: a macrotype 
+`VparaJOne; for `i.following` yielding a 
+bilexical `VparaJOneTwo; for its connection 
+with the direct object (`q.second` column).     
+`p`
+
+`p.
+In addition to deriving bilexical categories 
+from macrotypes with no further specification, 
+we can plausible introduce refinements 
+(perhaps via `q.pseudotypes`/).  Consider 
+prepositions.  While most basically they 
+have the same synonyms as adjectives (`NtoN;), 
+they can also transform nouns `i.into` 
+adjectives (`i.stereo with speakers`/, 
+`i.road by the river`/, `i.hike up the mountain`/) 
+or adverbs (`i.cut with a knife`/, 
+`i.hike by the river`/, 
+`i.(It will/there is) snow up the mountain`/).  
+Strictly, then, prepositions span distinct 
+macrotypes (`NtoN;, `NtoJ;, `NtoA;).  
+These signature, however, do not capture 
+the actual usage patterns of prepositions 
+(not every `NtoN; modifier is a preposition).  
+In their `q.adjectival` guise, 
+prepositions usually slot in as an indirect 
+object; as adverbs, they tend to 
+supply specific sorts of verb-detail 
+(suitable to a `q.case-form` analysis).  
+In their relation to verbs, then 
+(whether within adverb or indirect object 
+phrases) prepositions tend to identify 
+verbs' relation to participants in the 
+verb's profiled process which 
+elucidate the `i.situational configuration` 
+of the process %-- where, how, why, for 
+whom, with what %-- rather than express 
+qualities of the performing of 
+that process (contrast non-prepositional 
+adverbs like `i.cut effortlessly`/, 
+`i.hike quickly`/, `i.thank profusely`/, etc.).     
+`p`
+
+`p.
+Prepositions can therefore be classified in 
+terms of what sort of detail they add.  
+For instance, `i.toward` seems always to 
+figure its target as some sort of location 
+or point in space (even if an abstract 
+space, as in `i.turning toward ...` 
+to announce a shift in topic).   
+Noun-concepts which profile a spatial 
+location, or the end of a spatial path, 
+are one genre of noun: I believe this is a 
+level of generality appropriate for a mesotype, 
+which (imperfectly) I'll label as 
+`i.locations` (we need to be clear that 
+in different contexts locations may be 
+figured as points, regions, or as 
+path-segments; see `i.highway into Philadelphia`/).  
+Then `i.toward` `q.converts` a grounded 
+noun into location, which may or may not 
+require some conceptual interpretation 
+(e.g. `i.toward John` or `i.toward the TV` 
+proxies the noun to the rough spatial area where he 
+or it are situated).  The fact that 
+`i.toward`/'s outcome is mesotypically a 
+`i.location` can be modeled as a postcondition: 
+if we read `Nloc; as a pseudotype of nouns 
+with the tenet of being constued locationwise, 
+`i.toward` then has a pseudosignature 
+`NtoNloc;.  This postcondition then 
+carries over to the bilexical category we 
+would recognize as categorizing `i.toward`/'s 
+relation to its target, extending to other 
+spatial prepositions like `q.near`/, 
+`i.around`/, (often) `i.to`/, and so on.    
+`p`
+
+`p.
+In sum, mesotype and pseudotype specifications, 
+among them pre- and postconditions, 
+can adjoin to macrotype-level bilexical 
+categories, yielding potential new bilexicals.  
+We therefore have a `q.recipe` for identifying 
+bilexical categories emerging from, but 
+possibly narrowing, those induced directly 
+from macrotypes (viz., modifier/target 
+relations given the modifier's macrotype).  
+Although bilexicals can conceivably in 
+this system be formulated in a rather 
+ad-hoc fashion, those which seem to 
+represent patterns reappearing in numerous 
+case-studies may emerge as a theoretically 
+privileged collection, analogous 
+to the arsenal of Universal Dependencies.  
+Indeed, some bilexicals constructed via 
+macrotypes and (potentially) pseudotypes 
+are likely to match one of the 37 
+`q.Universal` relations (obvious 
+candidates are adjective-to-noun, 
+verb-to-subject, and verb-to-direct-object).  
+Here, however, I am more concerned with the 
+theoretical architecture for proposing 
+bilexical categories as analytic 
+utilities than in fixing any canonical listing. 
+`p`
+
+`subsection.Composition Revisited`
+`p.
+At the most theoretically noncommittal level, 
+we should accept that syntactic and 
+conceptual composition are interrelated: 
+smaller-scale linguistic elements have distinct 
+conceptual implications, and the purpose of 
+syntax is to define for addressees how 
+such concepts or conceptualizations should be 
+combined, to reproduce the speaker's own 
+intentions.  Moreover, we often have a clear 
+sense that a given sentence has one specific 
+construction pattern %-- that only one 
+decomposition of the sentence into its 
+component parts is realistic in light of its 
+meaning. 
+`p`
+
+`p.
+However, our appraisal of sentence composition is 
+holistic and retroactive: `i.after` grasping 
+its overall meaning we can reconstruct 
+how a sentence is put together.  The problem 
+is that such ex-post-facto analysis seems to 
+leave something out, because compositional patterns 
+obviously have some bearing on how we process 
+the linguistic givens `i.before` we ascertain 
+sentences' full meaning.  At the very least, 
+these issues complicate theories according to 
+which smaller-scale linguistic elements have 
+conceptual autonomy (even if their 
+conceptualizations are incomplete or 
+underdetermined), and are pieced together 
+like building blocks in a complete sentence.
+`p`
+
+
+`p.
+The extent to which a certain 
+inter-operation between syntax and 
+semantics is a `i.problem of compositionality` 
+is determined in part by the linguistic scale on 
+which the interdependence arises.  Consider, 
+first, syntactic `q.context-dependence` 
+on a lexical level, as in the contrast between 
+`i.I expected him to come` and 
+`i.I persuaded him to come` (see also 
+Langacker's sample sentences (39), 
+LangIntro p. 435).  The compositional 
+contrast is based on `i.him to come` grouping 
+into a clause in the former, whereas in the 
+latter only `i.him` is the direct object of 
+`i.persuade`/.  These also have conflicting 
+grammatical behaviors: we can rearrange 
+into `i.I expected that he would come`/, 
+but not `i.I presuaded that he would come`/.  
+The superficial similarity in the sentences' 
+construction does not preclude their having 
+parse structures.
+`p`
+
+`p.
+In this specific comparison, the divergent 
+parse routes is relatively routinely 
+rooted in `i.persuade`/, but not `i.expect`/, being 
+ditransitive.  This still illustrates 
+that we have to be sensitive to word's lexical 
+properties and the structural expectations 
+that they raise, when identifying the correct 
+parsing strategy: the parse of `i.him to come` is 
+context-dependent on the transitivity or 
+ditransitivity, along with the lexical meaning, 
+of the preceding verb.  We can nevertheless potentially 
+see this as a straightforward check against a 
+lexicon.  A more complex circumstance arises 
+when the verb's lexical profile permits both 
+transitive and ditransitive forms, or different 
+genres of objects (`i.ask a question` vs. 
+`i.ask him to come`/).  With these 
+more multifaceted verbs, reading a potential 
+subordinate clause as a phrase 
+%-- or conversely as two different objects, 
+direct and indirect %-- can be ambiguous.
+`p`
+
+`p.
+One response to that problem is to simply tolerate 
+the acceptability of divergent parses.  If two 
+superficially different compositions yield the 
+same meaning, perhaps we should just relegate 
+their differences to a theoretical artifact, a 
+kind of formalistic `q.noise`/.  The problem however 
+is that additional context may reveal `i.semantic` 
+divergence which is nonconsequential at a simpler 
+level.  Consider, for example, that 
+`i.authorize` (or `i.encourage`/, `i.`/, etc.) 
+seems to accept a reading like 
+`i.expect` or like `i.persuade`/: 
+
+`sentenceList,
+`sentenceItem; I authorized him to attend the conference, 
+and I'm expecting him to give a lecture.
+`sentenceItem; I authorized him to attend the conference, 
+and I'm persuading him to give a lecture.
+`sentenceList`
+
+If `i.him to come` is not decidedly `i.either` a single 
+direct object clause `i.or` a direct object pronoun with 
+a nonfinite indirect object clause, we might argue that 
+the proper model simply should allow a sentence to 
+be intermediate between disparate parses if the 
+produce equivalent meanings.  But surrounding context 
+may intervene and push one structure as the more 
+likely reading, as in: 
+
+`sentenceList,
+`sentenceItem; I authorized him to attend the conference, 
+but I was overruled.
+`sentenceItem; I authorized him to attend the conference, 
+but he refused.
+`sentenceItem; I authorized him to attend the conference, 
+but our school said he is just too controversial.
+`sentenceItem; I authorized him to attend the conference, 
+but his school said he is just too busy.
+`sentenceList`
+      
+The first and third examples imply that an 
+invitation was extended but then revoked, 
+so that the cause of his non-attendance was 
+unrelated to `i.his` actions.  Conversely, 
+the other two make `i.him` the agent of a decision 
+not to come (explicitly in (), and by implication 
+in ()).  The latter scenario is more in keeping 
+with reading `i.authorize`/'s direct object
+as just `i.him`/, which then becomes (or at 
+least whose referent becomes) subject 
+of the next clause, as in `i.I invited him, 
+but he declined`/.  Conversely, making 
+`i.him to come` as a whole phrase the object 
+of `i.authorize` focuses attention not on 
+`i.him` personally but on the overall circumstance 
+(or possibility) of his coming, which can then be 
+discussed as a potential state of affairs 
+in its entirety, without specific focus on 
+`i.him` as subject %-- cf. 
+`i.I authorized {that he be/him to be} allowed to attend,
+but that prospect proved wildly unpopular`/.  
+`p`
+
+`p.
+We can still allow a sentence to have two different, 
+equally viable parses.  However, instead of 
+considering the choice between them to be 
+arbitrary, a more exact appraisal is that 
+we (as addressees) can be aware of 
+multiple parse options, and are prepared to 
+deem them equally plausible if they produce 
+essentially the same meanings.  
+At the same time, we can simultaneously 
+recognize that two inconsequentially different 
+parses may be more significantly contrasting 
+in a more detailed context (or in light 
+of further discourse).  The point is not 
+then to theoretically ignore parse differences, 
+but neither to posit one `q.correct` parse.  
+Instead, alternate parses point to `i.potential` 
+semantic differences which may (but may not) 
+arise.   
+`p`
+
+`p.
+It is appropriate in this sense to reconsturct 
+parses holistically and retroactively, because 
+a sentence may have two or more `i.plausible` 
+parses such that only emerges as most 
+accurate `i.after` the sentences' holistic 
+meaning is resolved.  This is, then, a general 
+paradign which addresses the apparent problem 
+of holistic meaning being a precondition for 
+parsing sentences to begin with.  We might 
+address this paradox as follows: sentences 
+do have compositional patterns, which allow 
+holistic meaning to be built up from provisional 
+elements.  However, sometimes these patterns 
+are not exact: we can be aware of several 
+different candidate models for how precisely 
+the overall meaning should be synthesized.  
+We entertain a certain superposition of such 
+possibilities, enough to derive the most 
+plausible overall meaning; at that point, 
+one or another finer-grained parse may 
+appear retroactively to be the most 
+salient, while other structures are marginalized.  
+So there `i.is` something retroactive about 
+recognizing parses `i.in full detail`/, but 
+this does not preclude coarser, more noncommittal 
+sketches of sentence structure from serving a 
+compositional role when piecing together 
+sentences' meaning in the first place.
+`p`
+
+`p.
+This perspective may possibly reconcile 
+Cognitive Grammar with other, more formalistic 
+paradigms.  To consider one example, the 
+`q.Hypegraph`/Conceptual-Space-oriented model 
+I discussed earlier construes syntax 
+%-- speaking at a very general level %-- as 
+dictating the order and parameters of 
+how multiple conceptual spaces (associated 
+with different linguistic elemets) are 
+fused together.  What exactly the 
+`q.fusing` of conceptual spaces entails is a 
+more complex question %-- a full analaysis of 
+conceptual synthesis may need to extend 
+underlying Conceptual Space theory in many 
+ways.  But leaving such detailed theory 
+aside, the idea of retroactive convergence on 
+one (of several) parses translates, in this 
+`q.Hypegraph/Conceptual-Space` model, to an 
+ovearching metatheory wherein sentences' 
+surface form often permits several different 
+schema of conceptual space synthesis.  
+Considering each such synthesis as candidates, 
+we grasp a holistic meaning which is most appropriate 
+given the ambient extra-linguistic situation as 
+well as the specific connotations and lexical 
+profiles of the sentences' words.  With that 
+overall meaning we can then retroactively 
+identify one parse as correctly modeling 
+the synthesis pattern yielding the composite 
+conceptual space which corresponds to 
+the meaning, intention, and propositional 
+content of the sentence itself.
+`p`
+
+
+`p.
+
+`p`
+

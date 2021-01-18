@@ -1,0 +1,1556 @@
+`section.Cognitive Transforms and the Accretion of Detail`
+`p.
+Thus far, I have argued modifier-transform pairs 
+form grammatic building blocks which, according to 
+combination via certain rules, reconstruct the 
+syntactic forms of sentences while also revealing 
+their conceptual provenance.  Adequate parse representations 
+require distinguishing `i.stages` and `i.columns`/, 
+with notation marking each parse-graph edge 
+(modeling a transform) via a unique stage/column 
+duo.  I also mentioned that parge-graphs have 
+the extra organizational structure of `i.channels`/, 
+aggregating columns and distinguishing `q.input` 
+and `q.output` edges (for networking where a modifier 
+in one transform is a target in a second).  The 
+`q.channelized` graphs are then `i.hypergraph`/, 
+and their use as representational targets 
+for structural morphism according to grammatic 
+rules becomes an example of `i.hypergraph grammar`/. 
+`p`
+
+`p.
+The specific category of structures definable as 
+hypergraphs via stages and channels (where stages are 
+formally an ordering on channels) is more 
+general than (natural) linguistics.  Elsewhere 
+I have used similar formalisms to analyze 
+computer source code; and the data accompanying 
+this paper illustrates how Channelized Hypergraphs 
+can be an intermediate representation for 
+computer languages %-- specifically, a 
+`i.hypergraph virtual machine` can translate 
+these structures into executable instructions which 
+are mapped to predefined software procedures, indexed 
+in computer memory.  Hypergraphs with these properties 
+are, accordingly, systematic enough to coordinate 
+the interactions among computational processes in a general 
+sense; they can be the foundation of rigid, formal languages, 
+e.g. for computer programming.   
+`p`
+
+`p.
+I have proposed that constructional rules for 
+Channelized Hypergraphs can be specified according 
+to a `i.channel algebra`/.  Technical details on 
+how such algebras are defined (not that they are 
+terribly mathematically sophisticated) is outside 
+the scope of this paper, but in overview each 
+channel algebra establishes criteria according to 
+which parse graphs (or as I more generally call 
+them `i.source graphs`/) are computationally 
+well-formed; that is, they model feasible orchestrations 
+of how multiple procedures are to be sequentially 
+ranked and then evaluated.  Honing allowable 
+structures for natural language parse graphs also 
+produces a channel algebra.  The range of structures 
+acceptable as models of natural language are actually 
+simpler and more restricted than for programming 
+languages.   
+`p`
+
+`p.
+In sum, among the Category of Channelized Hypegraphs 
+constructionally regulated by a `q.channel algebra`/, 
+those capturing linguistic patterns are actually tightly 
+constrained.  This implies that there are processual 
+and/or conceptual dynamics generating language 
+structure.  The hypegraph mechanism is not only a summarial 
+restaging of language artifacts, but is pointing us 
+toward insights about which forces shape the 
+coordinative instincts among language elements that 
+become syntactic conventions.  I will try to 
+elucidate these dynamics through several lines of argument.
+`p`
+
+`subsection.Propositions and Transform Dynamics`
+`p.
+In general, sentences yield complete ideas; 
+in this sense, all the transforms which collectively 
+lead to the sentence root are oriented to 
+eventually yield a proposition.  Here again I 
+treat proposition as a grammatic category, albeit 
+one rarely occupied by individual lexemes 
+(although see `i.He said so` or 
+`i.I didn't know that`/).  The decisive transform, then, 
+is one which yields a %-- which usually means 
+a verb is the decisive modifier (the sentence's 
+`q.root verb`/), although one might argue that the 
+transform `q.signatures` like conversion `i.between` 
+propositions is also possible (e.g.,  
+`i.Really, Sanders would have been a better candidate in 2016`/).  
+The subject of the root verb can then be called 
+the `i.root subject` of the sentence; all tranforms 
+evinced by the sentence are, accordingly, 
+structurally situated in a dynamic whose core axis 
+leads from the root subject to the final proposition.  
+`p`
+
+`p.
+As outlined earlier, Cognitive Transform Grammar is amenable 
+to a type theory based on the fundamental notion that 
+procedures, processes, or functions `q.mapping` between 
+types yields additional types (in mathematics this 
+multiplying aspect of type systems is identified as 
+type Categories being `q.Cartesian Closed`/).  
+I have used the terminology that a type system is 
+`i.Channelized` when a specific form of 
+`q.summation` among channels (as abstractly specified, 
+e.g. in a procedural signature) yields a distinct type.  
+Analogously, under the premise that in broad 
+surveys of syntactic norms grammatical `i.categories` 
+are analogs of procedural `i.types` (in the 
+computer-programming sense), we can identify 
+grammatical categories as formed from other 
+categories via transform-pairs, perhaps aggregates 
+of transform-pairs combined as columns within one channel.  
+A ditransitive verb, let's say, is a `q.type` 
+defined by the requirement that (construed as a modifier) 
+the verb has three distinct grounds to be modified 
+%-- subject, direct, and indirect object 
+%-- each of which is (categorially) a noun.     
+`p`
+
+`p.
+Last section I defended the model wherein verbs are 
+analyzed as (conceptually) modifying their direct 
+objects.  Similar arguments apply to `i.indirect` objects: 
+the effect of a noun-concept being registeres in an 
+indirect object `q.slot` is to conceptualize that 
+concept in a distinct register, often in a quasi-spatial 
+or processual fashion:
+
+`sentenceList,
+`sentenceItem; I brought you some wine.  
+`sentenceItem; We bought him some school supplies.  
+`sentenceItem; I carved Grandma some duck.  
+`sentenceItem; The coach hit the infielders some ground balls.  
+`sentenceList`
+
+Each of these constructions posits the indirect object 
+as the endpoint of a spatial trajectory, although the 
+path is profiled more in terms of the subject's motivations 
+than the specific spatial coordinates.  Literaly, (1) and (2) 
+(even (3), on reflection) profile a spatial movement 
+between the subject and indirect object (the `i.direct` object 
+being the mover), but the conceptual emphasis is on someone 
+being the `i.recipient` of that object.  (Likewise 
+in (4), the implication is to emphasize not that the baseballs are 
+hit `i.toward` the fielders, but that their path is deliberately 
+induced so for them to practice fielding).  In a typical 
+ditransitive construction, that is, there is a conceptual 
+overlay of spatial and `q.benefactive` dimensions: the 
+indirect object is both a path end-point and one part of 
+a giver/receiver coordination.  Insofar as use-cases 
+for these verbs tend to align along familiar conceptual 
+patterns, e.g. this locative/benefactive overly, 
+the appearance of a noun-concept `i.as` indirect object 
+tends to foreground the sense in which it can fit 
+into such a conceptual matrix (e.g., to be a `q.receiver` 
+of something as well as a spatial endpoint).  A person 
+can be a `i.receiver` and `i.destination` insofar as 
+taking physical possession of something (literally or 
+symbolically it becomes `i.on your person`/, in your 
+spatial proximity) stands for becoming its `q.owner` or 
+`q.possessor`/; meanwhile, we also have social customs 
+of giving, receiving, buying, selling, and in general 
+recognizing each others' right to our possessions 
+(plus ritualized transfers of such right).  These 
+spatial and social senses conceptually overlap, 
+creating a hybrid locative/benefactive prototype, 
+and a verb's taking a noun as indirect object 
+reconceptualizes the latter according to this kind of 
+framing (or some other recurring ditransitive patterns).   
+`p`
+
+`p.
+So a ditransitive verb effectuates new cognitive 
+construals `visavis; its three modified grounds, 
+and only in the context of these three 
+transforms does the verb produce something 
+that should be interpreted as a complete idea.  
+We can formally notate this template by arguing 
+that the ditransitive verb's `q.signature` 
+combines three nouns and a proposition 
+%-- e.g., `NNNP; %-- where I use arrows 
+between the distinct columns `i.and` the 
+eventual proposition to indicate that the 
+intermediate transforms can be logically 
+ordered.  I do introduce a visual cue 
+%-- one or two dots above the arrow 
+%-- to distinguish sequencing 
+`i.between columns` vs. `i.between channels`/: 
+the three nouns are all columns within 
+`i.one` channel; whereas the final proposition 
+is a different channel, representing the 
+`q.outcome` of the verb's transformations 
+taken in combination. 
+`p`
+
+`p.
+I will discuss the `q.sequencing` among columns below; 
+but here I want to conceptually examine these 
+type-theoretic `q.signatures`/, or how the type-construction 
+modeling the grammatic categories which modifiers 
+expect as their grounds (and also what kind of 
+aggregate is required, such as three distinct 
+nouns in the ditransitive case) convey modifiers' 
+cognitive attributes.  
+`p`
+
+`p.
+Applications of type theory in linguistics can 
+address different concerns, across syntax 
+and semantics.  To avoid confusion, I propose 
+the term `i.macrotypes` to mean large-scale 
+classifications such as grammatic categories, 
+as opposed to finer-grained units like 
+the senses of one lexeme (which I would call 
+`i.microtypes`/).  Here `i.macrotype` can be 
+seen as essentially a renaming of `i.grammatic category`/, 
+which avoids using the term `i.category` that in 
+turn has numerous unrelated meanings across 
+fields which, ideally, a multi-disciplinary 
+linguistic methodology will integrate.  
+In short, then, verbs, nouns, propositions, 
+adjectives, advers, and so forth, are 
+`i.macrotypes`/, or more precisely name 
+collations of related macrotypes 
+(e.g., intransitive, transitive, and ditransitive verbs).  
+We can assume that all macrotypes other 
+than nouns and propositions are `i.derived`/, 
+and so they have a `i.signature` describing 
+the patterns whereby they produce `q.concepts` 
+classifiable as some macrotype upon moifying 
+`i.grounds` with their own macrotypes.  
+I use `i.macrotype` to characterize both 
+specific words and also phrases and concepts; 
+to say that a `i.concept` is a noun, for 
+example, is to say that it would be 
+linguistically rendered via a word or 
+phrase categorially classified as a noun.  
+In general, though, I try to minimize 
+talk about `i.phrases`/, in favor of 
+`i.conceptual outcomes` associated with 
+the modifier at the `q.head` of a phrase.  
+That is, to classify a phrase as a noun, 
+for example, is to say that the 
+final transform producing the phrase's 
+associated concept is one linguistically 
+represented by a modifier which `i.yields` 
+a noun, so that the `i.concept` is governed 
+by the `i.noun` macrotype.
+`p`
+
+`p.
+In principle, any collection of types can 
+yield a new type (since any tuple of types 
+can be functional `i.inputs` and `i.outputs`/).   
+Only a few possible type-signatures, however, 
+actually correspond to linguistic macrotypes.  
+Here again we find that natural language is 
+restricted compared, say, to programming languages, 
+in this context with respect to the range of 
+derivative macrotypes which are systematically 
+recognized as grammatic categories.  Again too, 
+this may reflect the dynamics of sentences building 
+up to a propositional conclusion, with all sentence-components 
+attached to a central root-subject/root-verb connection. 
+`p`
+
+`p.
+To elaborate, I will make some observations about 
+which macrotypes seem to have categorial status 
+in natural language (i.e., to be incorporated 
+into grammatic norms, as grammatic categories). 
+Note that, within the linguistic type system, 
+the `i.proposition` macrotype is singled 
+out as the root of all complete sentences 
+(`q.proposition` here referring to the grammatic 
+category; I use `i.propositional content` to 
+designate the `i.idea` carried by a proposition-typed 
+phrase).  This also means that macrotypes are 
+more or less `q.close` to propositions in terms 
+of how many transforms, among recognized macrotypes, 
+are needed as intermediaries before a complete 
+proposition: adjectives, for example, yield nouns, 
+which then need a further transform.  I will 
+say that adjectives (and for similar reasons adverbs) 
+are more `q.peripheral`/, as a macrotype, compared to 
+nouns and verbs.      
+`p`
+
+`p.
+Observe also that derived macrotypes tend to 
+operate between macrotypes which are equally 
+`q.peripheral` in this sense (often `i.the same` 
+type), or `i.less` peripheral, but rarely `i.more` 
+so.  Macrotypes' transforms tend to take us 
+`i.toward` propositions, not `q.away` from them 
+(in the `q.space` of macrotypes).  For adjectives 
+and some adverbs, the `i.input` and `i.output` 
+types are the same, at least if we construe 
+macrotypes most broadly.  With a more 
+complex type system %-- e.g., distinguishing 
+nouns with determinate content (`i.Elizabeth 
+Warren`/, `i.this book`/, `i.the dogs`/) 
+from abstract concepts (`i.book`/, `i.dog`/) %-- 
+transforms seem to trend toward more 
+logical specificity even within one 
+macrotype (e.g. we have demonstratives to 
+transition from abstract concepts to determinate 
+content, but few lexemes to go in the opposite 
+direction.  I will consider these more 
+refined categorizations `i.within` macrotypes later.
+`p`
+
+`p.
+Sticking just with macrotypes most broadly laid 
+out, though, note that there are very few cases 
+of a modifier transforming from one to a different 
+`i.more peripheral` macrotype.  In place of 
+phrasal units that would effectuate such 
+`q.peripheralizing` transforms, we tend 
+to have lexemes doing double duty: 
+in particular, verbs or nouns reassigned 
+roles as adjectives (`i.hockey stick` and 
+`i.bowling alley` rather than `i.stick for hockey` 
+or `i.alley for bowling`/).  So when some 
+grammatical mutation is desired that would 
+reinterpret a lexeme normally used as a macrotype 
+like noun or verb, so that it become a more 
+`q.peripheral` macrotype like an adjective, 
+conventions are to just preserve the lexeme as a single 
+word (which the hearer presumably grants its new 
+role from context) rather than to embed the 
+word in a phrasal transform (like how `i.that` nominalizing 
+a proposition, which is in turn `q.peripheralizing`/, 
+a counter-example to the tendency for transforms 
+to move `i.away` from more peripheral types, or as I'll 
+put it `i.counter-peripheral`/).  
+`p`
+
+`p.
+In short, peripheralizing transforms tend to occur through 
+mental substitutions at the lexical level rather than 
+peripheralizing modifiers which head a phrasal construction.  
+Moreover, patterns like noun-to-adjective or verb-to-adjective 
+are more common when there is a simple (particularly one-word) 
+target for the newly minted adjective (`i.score sheet`/, 
+not `i.score piece of paper`/).  Noun-to-verb 
+reassignments are exotic-sounding, perhaps deliberately 
+received as bending the rules of English.  I have 
+in mind cases like: 
+
+`sentenceList,
+`sentenceItem; Don't think you can Champagne me into forgiving you.
+`sentenceItem; If they healthy scratch him enough he might accept a trade. 
+`sentenceList`
+
+Perhaps such verb-producing shifts are rarer than adjective-producing 
+equivalents because to `q.resolve` the peripheralizing 
+transform then requires multiple further transforms (considering 
+the transitive or ditransitive case), as opposed to 
+one compact counter-peripheral step.  The less idiosyncratic 
+approach to sentences like (1) and (2) would be to just 
+factor the complex expressions into separate clauses: 
+
+`sentenceList,
+`sentenceItem; Don't think you can just buy me Champagne and I'll forgive you.
+`sentenceItem; If they make him a `q.healthy scratch` enough times 
+(i.e., leave a player off a sport team's active roster even 
+if he is not injured), he might accept a trade. 
+`sentenceList`
+
+On this evidence, peripheralizing changes in categorial 
+roles are rare, and especially in cases where the 
+`q.counterperipheral` ground that would `q.resolve` the 
+resulting expectation is phrasal or multi-part 
+(e.g., multi-column).  Still more rare are 
+peripheralizing `i.transforms` wherein some function 
+word forces a categorial reassignment to a 
+more peripheral macrotype.  Earlier (without using 
+this specific terminology) I analyzed `i.for` 
+as a counter-peripheral transform acting on a verb 
+and noun to yield an adjective, e.g. `i.for holding 
+the groceries`/.  In this case the verb/noun combination 
+is a kind of incomplete proposition, missing a subject; 
+the noun then modified by the adjectival outcome 
+(of `i.for`/'s transform) can then `q.slot in` and 
+complete the proposition (`i.This bag holds the 
+groceries`/).  So we can speculate that 
+peripheralizing transforms are more acceptable 
+when they yield a construction which is 
+`q.almost` proposition-yielding. 
+`p`
+
+`p.
+In general, though, we can observe certain patterns 
+in the system of recognized macrotypes: 
+most transforms are counter-peripheral, 
+either transforming between two conceptualizations 
+within one macrotype or in a step closer to 
+a propositional outcome; contrary re-conceptualizations 
+(such as a noun-to-verb) are more likely expressed 
+via subordinate, often propositionally complete 
+clauses; and peripheralizing modifications 
+are more likely to occur at the lexical than 
+the phrasal (or word-pair) level.     
+`p`
+
+`p.
+Ultimately, I believe these oberservations are reasonable 
+if we consider the epistemic dynamics informing sentence 
+structure, which I will now consider further. 
+`p`
+
+`subsection.The Epistemic Dynamics of Columns and Stages`
+`p.
+As I pointed out earlier, verbs can be expounded upon 
+with many added details, but only a few of these 
+can be `i.columns` for which the verb itself is a 
+modifier (rather than its being the target of an 
+adverbial modifier).  The question of 
+`i.which` content is treated as direct or indirect 
+object, rather than a secondary detail, seems 
+to be a matter of context.  Material which is an 
+object in one sentence can be an added detail in another: 
+
+`sentenceList,
+`sentenceItem; This bus drops passengers off downtown.
+`sentenceItem; This bus drops passengers off along Queen street.
+`sentenceItem; This bus drops passengers off downtown along Queen street.
+`sentenceItem; This bus will take you downtown via Queen street.
+`sentenceList`
+  
+These sentences differ in the extent to which `i.along Queen street` 
+is factored as an intrinsic part of the bus's destination 
+or rather a supplemental detail of the route taken to get there.   
+If we endow a passenger's `i.destination` with particular 
+conceptual focus, the focus would exclude the intermediate route 
+if her interest is simply on getting `q.downtown` generically, 
+or to a prominant landmark (say, a bus terminal).  
+On the other hand, if she were heading toward a specific 
+address along Queen street, she might be concerned about 
+the bus's path `i.within` downtown, so the description 
+`q.along Queen street` becomes part of the construal 
+of the destination. 
+`p`
+
+`p.
+This situation should be interpreted functionally as 
+well as spatially: someone interested in a sentence 
+like (2) presumably intends to travel downtown, 
+and thinks of the bus as a vehicle to serve 
+that purpose.  Accordingly, the bus's destination 
+is functionally salient, because it directly 
+impacts on her purposeful assessment of the 
+situation, whereas details like the intermediate 
+route are functionally peripheral.  If 
+`i.along main streat` is in fact salient 
+for her in this sense %-- or more precisely if 
+the speaker believe it could be %-- it would be appropriate 
+to consider `i.downtown along Queen street` as an 
+indirect object phrase; if not, `i.along Queen street` is 
+more of a supplementing modifier to `i.drops off`/.  
+As with `i.heading out to the store`/, it is permissable 
+to identify alternative parses which suggest 
+slightly different sentence-meanings (at least, 
+different in light off all contextual details).  
+The meaning we should attribute to (2) depends 
+subtly on whether the speaker believes that 
+`i.along Queen street` is functionally important 
+for the addressee %-- whether it is thereby central 
+to (2)'s information content or is just an 
+aside, introduced perhaps in a spirit of 
+conversational casualness (in that, for instance, 
+conducting a dialog with enunciations appearing 
+as brief as possible to be informative can 
+come across as brusque or unfriendly).  
+But we can accept that the conversants may not 
+consciously register this difference, so 
+the received and/or intended meaning may be suitable for a 
+`q.superposition` of competing parses.      
+`p`
+
+`p.
+This example suggests that whether a verb-affecting detail 
+is aggregated within the expected subject, direct, or 
+indirect object `q.colums` depends on whether 
+it has `i.functional` bearing on the verb in question.  
+That is, in a general case verbs represent 
+actions with particular functional intent or 
+precondition (wherein a functionally ordered 
+situation is the backdrop wherein the action 
+may occur).  Some details are intrinsic to 
+the basic functional framing of the action, while 
+other profile secondary functional relationships, 
+such as those which are instrumental, spatializing, 
+or rationalizing:  
+
+`sentenceList,
+`sentenceItem; I opened the wine with an antique corkscrew.
+`sentenceItem; I opened the wine in the kitchen.
+`sentenceItem; I opened the wine to aerate.
+`sentenceItem; I opened the wine for John.
+`sentenceItem; I opened the wine because John asked me to.
+`sentenceItem; I opened the wine in the kitchen for John 
+so it could aerate because he asked me to.
+`sentenceList`
+
+As the final sample in this group suggests, extra 
+details can be added in a chain stretching over 
+multiple clauses.  Addressees, as such, need 
+to figuratively draw a line between the span within 
+discource marking verbs' objects and a potential 
+following segment providing verb-modifying details. 
+`p`
+
+`p.
+As I have argued, at least in the model I propose here, 
+verbs modify their subject and direct objects, while 
+they are `i.modified by` adverbs (including adverbial 
+clauses trailing the objects).  This means that 
+the `q.boundary` the direct or indirect object 
+(or their phrases) and subsequent phrases (attached 
+to the same verb) partitions this content into 
+segments `i.modified by` and `i.modifying` the verb.  
+Obviously, some of the latter is heard later, 
+implying that we `i.project` supplemental details 
+`q.backward` across the sentence structure, and 
+against processing time, mentally grouping the addenda 
+with the verb itself (analogous to non-clausal adverbs 
+specifically placed `i.before` the verb).  In particular, 
+I model all adverbial content (regardless of its 
+sentence position) via stages `i.prior` to the 
+`q.columnal` channel where the verb yields a resulting 
+proposition.     
+`p` 
+
+`p.
+As I have suggested, each parse-graphs implies that 
+all formally intrinsic word-pairs can be given a 
+distinguished ordering.  More specifically, 
+transforms can be ordered via the stage in 
+which they occur and then, within one stage, 
+via their column.  The verb-to-subject transform, 
+say, precedes verb-to-object (i.e., direct object, 
+and then in turn the indirect object if 
+applicable) and is preceded by all adverb-to-verb 
+stages.  This is obviously not the same as 
+word-order or how the sentence is processed; 
+nor does it necessarily reflect the most 
+mechanical logical tableu of the sentence's 
+propositional content.  However, I would 
+present as a thesis to investigate that 
+the transform ordering, mandated by 
+the specific hypergraph `q.cognitive transform` 
+model, captures some of the mental organization 
+through which we assemble a reading of the 
+sentence, in between the initial surface 
+reception and our eventual interpretation of 
+its logical significance.  
+`p`
+
+`p.
+The representational transform-ordering, then, 
+is not just an artifact of a particular 
+diagrammatic convention, but a possible 
+insight into how the cognitive processes 
+triggered by each sentence are organized.  
+Insofar as the verb is the key juncture 
+yielding determinate propositional content, 
+it serves as a nexus for variegated 
+details and significations.  Each sentence's 
+meaning, in large part, can be read in terms 
+of all the qualifications placed on its 
+root verb (albeit that some of these qualifications 
+are expressed in isolated clauses with their 
+own verb-heads and therefore a nested version 
+of this same structure).  We can isolate the 
+subject, and (when warranted) objects, as 
+the culminative stage of an accretion of 
+verb-details, with all tangential content 
+theorized via preparatory stages.  
+Here I am not suggesting that we experience 
+residual addenda like `i.for Grandma` and 
+`i.via Queen street` as logically anterior 
+to the verb's focal action, as if we have 
+to pretend that we form a complete mental 
+image of what the verb signifies before 
+ever incorporating its subject and objects.  
+Obviously, upon hearing that someone carved 
+the duck `i.for Grandma`/, our reception 
+of the last phrases is influence by 
+our prior knowing the foretold propositional 
+context.  But, plausibly, we perform a mental 
+restaging once we confirm that the sentence is 
+complete, and `q.slot` information appertaining 
+to the verb in a structured package which 
+partitions all the details into subject 
+and objects, on the one hand, and 
+supplemental data, on the other.   
+`p`
+
+`p.
+Presumably this archetype exists because it is a 
+convenient mechanism for making sense of 
+the propositional content which the 
+verb, in proper context, eventually signifies.  
+The `q.trail` of secondary details allows 
+the relevant state of affairs to be described 
+as rigorously as the situation warrants 
+(see ( ... wine for ... ) and ( ... for GM ... )).  
+On the other hand, the more tightly coupled 
+verb/subject and verb/object connections allow 
+the focal information in the verb construction to 
+be packaged up, depending on surrounding context: 
+
+`sentenceList,
+`sentenceItem; Giving John advice is impossible.
+`sentenceItem; You promised to make us pancakes!
+`sentenceList`
+
+For instance, the coexistance of ditransitive 
+patterns with and without prepositions allows 
+the sentence to be restructured according to whether 
+the expression comprising the direct or indirect 
+object is more complex: 
+
+`sentenceList,
+`sentenceItem; I gave John a Cabernet Franc from the winery he visited 
+during a trip along the Niagara escarpment last summer.
+`sentenceItem; We'll award a prize to the first caller who correctly 
+identifies who scored the game-winning goal last night.
+`sentenceList`
+  
+The choice of which object to place first or second, 
+in these cases, is obviously motivated by one 
+object (and not the other) requiring a lengthy nested clause. 
+`p`
+
+`p.
+Of course, verbs also form clauses which modify other verbs.  
+This means that stating the core verb/subject/object construction 
+compactly helps orient a non-root verb's clause in its 
+larger context.  
+
+  Compare:
+
+`sentenceList,
+`sentenceItem; The instructor hit them ground balls to practice fielding and 
+throwing in one motion.
+`sentenceItem; The instructor hit ground balls toward 
+the infieldsers so that they could practice fielding and 
+throwing in one motion.
+`sentenceList`
+
+Moreover, suppressing one or another 
+object (or even the subject) allows a nested clause to be 
+transformed into a modifier: 
+
+`sentenceList,
+`sentenceItem; I found the wine that John recommended.
+`sentenceItem; Please use brown rice when making the pilaf.
+`sentenceList`
+
+My point is that the verb/subject and verb/object 
+combinations have a kind of combinatorial 
+flexibility, allowing word-order variations for 
+the most fluid discourse, plus various 
+deferments or elisions which allow a nested clause 
+to join its context in a variety of ways 
+(e.g., a subjectless infinitive verb 
+with its own otherwise complete clause 
+in (..1), or similarly `i.when`/`lingplus;gerund 
+in (..2)).  
+`p`
+
+`p.
+Adverbial clauses, by contrast, do not have 
+the same level of flexibility.  They can 
+be predicated as addenda on a verb, but 
+not `q.gapped out` to form an incomplete 
+idea needing resolution, or repositioned 
+outside conventions that adverbial 
+clauses that lead with a preposition go 
+at the end of a verb construction, while 
+adverbs proper go at the beginning.  
+Given these limitations, we need 
+more complex structures to model 
+signifying intent when we `i.do` want 
+to focus on details that would be 
+functionally tangential to a verb-construction 
+as usually interpreted: 
+
+`sentenceList,
+`sentenceItem; What was it that you used to open the wine?
+`sentenceItem; Which avenue does this bus go down when it drops off passengers?
+`sentenceList`
+
+This brings me to the overarching point that 
+%-- at least in English %-- many of the conceptual 
+details we would intend to insert into a sentence 
+have to be presented via subordinate clauses.  
+The kind of compact transforms offered 
+by adjectives or adverbs paired directly 
+with their targets %-- and by the 
+verb/subject/object column %-- are often 
+insufficient mechanisms to fully transform 
+how a language-act signifies its content, 
+enough to render the expression a 
+complete encoding of the idea the speaker 
+endeavors to convey.  I will discuss 
+this organizational tendency further 
+in the next subsection.
+`p`
+
+`p.
+An additional consideration when analyzing verb-modifiers 
+concerns the relations between bonafide adverbs (asserting 
+details and secondary information) and transforms 
+associated with more central syntactic markers, such as 
+mood and tense.  Adverbs within a gerund construction, 
+let's say, can migrate to different spots: 
+
+`sentenceList,
+`sentenceItem; Those dogs are barking loudly.
+`sentenceItem; Those dogs really keep barking.
+`sentenceItem; Those dogs are really barking.
+`sentenceItem; Those dogs are really barking loudly.
+`sentenceItem; Those dogs are barking %-- really loudly.
+`sentenceList`
+
+If we hear the gerund pair as just English's idiomatic 
+progressive tense, then the most logical transform 
+order, at least for analysis, is to treat 
+`i.loudly` in (1) as modifying couple `i.are barking`/, 
+just as it would modify the past tense `i.barked`/.  
+However, one might also hear `i.bark loudly` as a 
+compound verb, like (in many circumstances) `i.heading out`/: 
+
+`sentenceList,
+`sentenceItem; She is heading out early.
+`sentenceItem; She is heading out with the dogs.
+`sentenceList`
+
+In one, say, I find the most natural analysis 
+forms the transform `i.heading out` (in effect 
+creating a gerund for the two-part verb), 
+`i.then` the `i.is` (to form a present progressive), 
+and finally `i.early` supplements the verb-profile.  
+This analysis would probably not run the same way 
+for (..1)-(5) because `i.bark loudly` does not have 
+the same lexical entrenchment as `i.head out`/.  
+Nevertheless, these cases argue against assigning 
+fixed rules for the `q.order` in which 
+modifiers act on verbs %-- here meaning not 
+`q.processing` order, but the kind of 
+organizational, reconstructed order I alluded 
+to several paragraphs ago, in terms of 
+mentally assembling our interpretation of a verb-clause.
+`p`
+
+`p.
+This does not mean, however, that this order is 
+semiotically arbitrary.  We should lean toward 
+grouping a modifier most tightly with a verb 
+when the pair forms a lexically recurring phrase; 
+while acknowleging that there are gradations between 
+highly standardized compound verbs 
+(`i.reach base`/, `i.catch up`/, `i.take off`/, `i.let go`/, 
+`i.walk around`/, `i.watch television`/) and verb/adverb combinations 
+which just happen to be 
+used often (`i.score a goal`/, `i.land safely`/, 
+`i.eat well`/, `i.graduate with honors`/).  
+In the context of a multiword conjugation (like a 
+progressive tense), whether we model the modifier 
+which often pairs with the verb as a transform 
+(logically) `i.before` or `i.after` the tense-forming 
+depends on how tightly the pair is perceived as 
+a phrasal unit, which is often semantically 
+significant through the lens of compositionality.  
+As a compound verb gets lexically entrenched, its 
+meaning tends to depart from a more literal 
+reading of its components (in `i.catch up` one is 
+not literally catching anything; in `i.watch television` 
+it is not like we're watching the TV qua object).  
+`p`
+
+`p.
+Meanwhile, in the case of an intensifier like 
+`i.really`/, we could perceive it as adding 
+emphasis to different parts of the construction 
+%-- either `i.loudly` itself, `i.or` the 
+phrasal `i.were barking loudly` as a more 
+holistic emphasis.  In (2)-(4) above I am 
+actually inclined to connect `i.really` 
+with the auxiliary `i.are` or `i.keep`/, 
+the idea being that the very notion of 
+a `i.progressive tense` can acquire multiple 
+cognitive refinements.  So amending 
+`i.are` to `i.are really` signals that 
+the speaker is trying to emphasize the 
+perpetuation of the action (this continuity is 
+intrinsic to the progressive tense) in a 
+particular way.  Potentially, 
+`i.are really` implies that the action's 
+continuance is in itself surprising, noteworthy, 
+or exaggerated.    
+`p`
+
+`section.Clausal Organization`
+`p.
+The simplest example of clauses nesting into 
+other constructions derives from propositionally
+complete clauses, which are `q.transformed` to 
+nouns with a subordinator such as `i.that`/: 
+
+`sentenceList,
+`sentenceItem; We know that Warren and Sanders appeal to the same cohort of voters.
+`sentenceItem; I know that Szechuan recipes call for hot pepper, but John can't eat 
+spicy food.
+`sentenceList`
+
+It is commonly asserted that the subordinator is unnecessary, and 
+so its presence or absence has no real semantic import 
+(except perhaps in making long subordinate clauses less awkward, or 
+for stylistic reasons; using `i.that` sounds less informal).  
+I would venture, however, that we are more likely to 
+(even subconsciously) drop `i.that` when we believe the addressee 
+already is familiar with the propositional content of the 
+following clause: 
+
+`sentenceList,
+`sentenceItem; I told you Toronto would win!
+`sentenceItem; I know you like hot pepper, but John can't eat 
+spicy food.
+`sentenceList`
+
+That is, we are more disposed to `i.include` the subordinator if 
+we perceive that the audience is not necessarily expecting a 
+propositional phrase at that point, or if the referenced 
+proposition has not been previously entertained in the 
+dialog.  In a sense, this reprises with respect to 
+propositional clauses the case for using determinative 
+forms (like `i.the`/) to reference nouns.  We would 
+readily drop `i.that` if we are citing a proposition 
+very similar to one the addressee has already enunciated 
+(e.g. `i.Can I add hot pepper?` for (2)).  By extension, 
+then, even if the clause is not entirely unoriginal 
+in this sense, we are inclined to drop 
+the subordinator if the prior conversational context 
+makes the content of the subsequent clause 
+not unexpected; it fits comfortably into the 
+current state of the dialog (two people talking about 
+a recipe in (2), or talking about the 2019 Basketball finals 
+in (1)).  The `q.dropped` version sounds less informal, 
+then, because informal discourse is more likely 
+when the conversants have this degree of shared 
+anticipation of the contours of the dialog, more so 
+than formal or technical writing or, say, expert discussions.      
+But with that said, the two versions are not then 
+semantically identical, even if the differentiating 
+effect is not always in play %-- the choice to 
+include leave out a subordinator can signify an assessment, 
+on the speaker's part, of the relative novelty (or lack 
+thereof) of the topics broached in the subsequent clause.   
+`p` 
+
+`p.
+In terms of macrotype, a clausal verb can be typed as a 
+normal proposition-yielding verb to the degree that the 
+clause is propositionally complete.  For nonfinite clauses, 
+the corresponding nonfinite verbs would not have a conventional 
+verb signature where a proposition is produced from one, two, 
+or three nouns.  For discussion, I will use the term 
+`i.protoverb` in lieu of `q.nonfinite`/, assuming the 
+protoverbs are fundamentally a different macrotype 
+(although most or all lexemes categorized as 
+verbs can, according to context, be used as 
+protoverbs %-- this perhaps being an example 
+of how one lexical category can span numerous macrotypes).
+`p`
+
+`p.  
+Protoverbs mirror the columnar structure of verbs, 
+except for one column being deleted from their 
+signature; and they exchange the propositional 
+outcome-type for a noun or adjective (or perhaps 
+other macrotype).  In (..1), `i.giving` is then a 
+protoverb yielding a noun, and for (..2) 
+the infinitive `i.to make` can be modeled as 
+`i.to` transfoming `i.make` `i.from` a verb 
+`i.to` a protoverb.  Protoverbs would actually 
+comprise multiple macrotypes depending on 
+whether the `q.elided` column is subject, direct 
+object, or indirect object; on whether the transform 
+result is a noun, adjective, or something else; 
+and whether the lexeme in its normal verb form is 
+transitive or ditransitive.  (I assume intransitive cases 
+like `i.Swimming is fun` and `i.To err is human` 
+are not protoverbs but rather verbs lexically 
+re-typed to nouns or, in the latter, mapped to a noun 
+by the infinitive).  The same nonfinite clause (reflected in 
+its protoverb's macrotype) may serve as a noun, 
+adjective, or perhaps otherwise, varying with context: 
+
+`sentenceList,
+`sentenceItem; He is struggling to hold the groceries.
+`sentenceItem; We need a bag to hold to groceries.
+`sentenceItem; She is trying to get our attention.
+`sentenceItem; She is shouting to get our attention.
+`sentenceList`
+
+I assume here that `i.struggle` and `i.try` are normal 
+transitive verbs whose object is a noun, albeit often 
+one which (for semantic reasons) we expect to be based 
+on a verb %-- semantically, a verb refigured as a noun, 
+to conceptually profile the abstract essence of the verb 
+rather than one specific instantiation.  In simple cases 
+(`i.I want to win`/) this mapping can be done without 
+any clause, but (1) and (3) involve transitive 
+verbs which need to be elaborated with a corresponding 
+object.  With that detail, the subordinate verb 
+(re-typed as a protoverb) transforms `q.into` a noun 
+(cognitively, at least), which then becomes the 
+object of a different verb.  In (4), on the other 
+hand, it seems correct to read `i.to get our attention` 
+as an `i.adverb`/, not a verb, because it modifies 
+(by ascribing a rationale to) her shouting.  And (2) 
+is a case of a protoverb mapping to an adjective, because 
+the clause modifies `i.a bag`/.
+`p`
+
+`p.
+Assuming this analysis, nonfinite clauses can be structured 
+or interpreted to fill the roles of most key lexical categories, 
+including nouns, adjectives, and adverbs; this means that 
+in any context where such an expression is needed, a 
+subordinate-clause construction is a viable fallback.  
+We can then treat this as a dynamic in English 
+syntax: the grammar makes available certain constructions, 
+such as `AdjectiveNoun;, `AdverbVerb;, and `NounNoun; 
+pairs (the last for cases where the first noun 
+is re-typed to an adjective), which signal 
+cognitive transforms concisely, and within brief 
+phrasal units that can be elegantly embedded in 
+larger phrases.  However, these same sorts of 
+transforms can be realized with subordinate clauses.  
+This places selective pressures working against 
+non-clausal constructions that would yield complex 
+and unyieldy phrases, because English speakers 
+will deem their clausal analogs to be more 
+acceptable.  We have, say, a `i.bag to hold 
+the groceries` rather than a `i.hold-the-groceries 
+bag`/, or a `i.drill to practice fielding` 
+rather than a `i.fielding-practice drill` 
+(unless in this case we hear `i.fielding practice` 
+as a lexical compound noun, which is plausible 
+in the specialized language of baseball).  
+Clauses may themselves be complex, but they have a 
+rigorous quasi-propositional organization, and 
+a systematic range of subordinators, which helps 
+`i.orchestra` clause's internal structure and 
+the relation of clauses to one another.
+`p`
+
+`p.
+Alongside these grammatical tendencies, though, 
+we should consider their consequences for 
+cognitive processing of sentences.  According 
+to my overarching paradigm, sentence-understanding 
+involves co-ordinating a series of cognitive 
+transforms (signaled by modifier-words whose 
+effects can be marked in purely syntactic terms, 
+e.g. the input and output macrotypes, as well 
+as analyzed conceptually/semantically).  
+The transforms collectively build up detail 
+to arrive at a complete idea; a rendering of 
+propositional content which describes states 
+of affairs as seen by the speaker, to a level 
+of detail relevant to her communicative intent.  
+In particular, each sentence element or component 
+is ultimately meaningful in terms of a detail 
+it adds to a holistic situational picture; 
+adjectives and adverbs, for instance, add 
+detail by conceptually refining are sense of 
+their target nouns and verbs. 
+`p`
+
+`p.
+In the context of discussing subordinate clauses, 
+this perspective yields the observation that 
+conceptual details are often inserted via 
+clauses, which are themselves internally organized 
+and often complex components.  At the conceptual level, 
+clauses then induce a kind of split-level focus 
+when interpreting a sentence: on the one hand, 
+the clause has to be anchored in a sense of supplying 
+supplemental information about some concept which lies 
+outside it, connecting it to the larger sentence; 
+but on the other hand each clause has its own 
+quase-propositional structure, so that `i.internally` 
+it has its own pattern of cognitive focus, its 
+own schematics (landmark/tranjector gestalts, for 
+instance).
+`p`
+
+`p.
+On this basis, we have an avenue for studying subordinate 
+clauses in terms of the spatial, temporal, and logical 
+form of their `i.internal` conceptualizations:
+
+`sentenceList,
+`sentenceItem; We should look for the wine that John recommended last summer.
+`sentenceItem; I have to shout because the cars are making a lot of noise outside.
+`sentenceItem; At each of the debates, Warren presented more detailed policy 
+proposals than Sanders.
+`sentenceList`
+
+Each of these subordinate clauses has a spatial, temporal, or 
+contextual framework which deviates from the surrounding 
+sentence (`i.last summer`/, `i.outside`/).  The third is the 
+more elaborate, because the speaker is taking a holistic 
+view, where each of the debates referenced could, potentially, 
+be a separate topic that gets exclusive focus in subsequent 
+conversation.  In (3) then speaker (and presumably all 
+conversants) work from a summarial vantage encompassing, 
+in their thoughts, a series of more specific contexts 
+(viz., each debate) which could form their own discursive 
+space (not just in terms of their actual spatial environs, 
+but their abstract space of facticity and themes).  So in 
+(3) the contrast between the setting for the enunciation and 
+the clausal alternate space is more abstract than the 
+`i.inside`/`i.outside`/, or `i.now`/`i.last summer` contrast.    
+`p`
+
+`p.
+Nevertheless, we can argue that every linguistis construction 
+which, at the semantic level, serves as a `q.space builder` 
+(a la Fauconnier) may have a corresponding clausal manifestation.  
+The fact that clauses do need to set up their own space, 
+time, and context, deviating from the main sentence, may 
+explain why they occupy their own phrasal nexus rather 
+than serve to modify their eventual target more directly.
+`p`
+
+`p.
+Often, on the other hand, clausal constructions can be 
+bypassed if there is a pithier designation, which 
+may depend on context, or on the presence of some 
+entrenched idiomatic conventions.  We clearly recognize 
+the pattern behind the verb `i.try` preceding a noun for 
+food, drink, or something critically experienced 
+(in the sense that we can assess the experience's 
+pleasurability %-- `i.try this bubble bath`/; 
+`i.try that cologne`/).  But `i.try`/'s object 
+appears to typically be shorthand for an implicit 
+clause: 
+
+`sentenceList,
+`sentenceItem; I'd like to try this restaurant.
+`sentenceItem; I'd like to try that mountain.
+`sentenceItem; The city is trying ranked-choice voting next election.
+`sentenceItem; I'm going to try binoculars at the next game.
+`sentenceList`
+
+By convention we understand (1) to mean desire to 
+`i.eat at` the restaurant (although there may be 
+special circumstances where (1) could be utterred 
+with a completely different sense, e.g. 
+someone visiting numerous restaurants 
+trying to `i.use the bathroom` or `i.apply for 
+a job` or `i.hang a flyer`/).  We hear (2) as 
+intent to `i.climb` the mountain, and would probably 
+be puzzled if it were used in a context other 
+than mountain-climbing.  So (1)-(4) could be rephrased 
+with clauses which explicate a specific verb: 
+`i.eat at` this restaurant, `i.climb` that mountain, 
+`i.use` ranked-choice voting, `i.bring` binoculars.  The speaker may choose a 
+shorter form %-- e.g., a single noun or simpler noun-phrase 
+%-- if it seems obvious from context how 
+the noun relates to `i.try`/; i.e., how to 
+extrapolate from the noun to an activity usually 
+associated with that word-sense (`i.climb` a mountain, 
+etc.).  These cases again show, however, the dynamic 
+role which clausal constructions can play in shaping 
+discourse: we always have the option of reverted 
+to lengthier clauses when a stripped-down 
+alternative proves enigmatic for hearers.  
+The fact that speakers `i.can` adopt subordinate clauses 
+rather than short forms like `i.try binoculars` 
+%-- which need more interpretative effort 
+%-- exerts pressure on speakers to select clausal 
+forms beyond some threshold of complexity.   
+`p`
+
+`subsection.Transform, Constituency, and Dependency Grammar`
+`p.
+The fact that subordinate clauses form self-contained 
+units, serving as nouns, adectives, or adverbs in 
+a larger context, may seem like evidence for the 
+usefulness of Constituency grammars, since we 
+have a whole phrasal complex serving a unitary 
+role at a higher scale.  On the other hand, 
+the internal organization of clauses may seem 
+like a case for Dependency grammars, since 
+the semantically most sigficant lexemes 
+(e.g. verbs and nouns) get centralized.  
+The verb as clause-head `q.dominates` over 
+secondary details, such as adverbs and 
+adverbial phrases, which in terms of semantic 
+importance are tangental.  As a nexus for 
+gathering, potentially, multiple such tangents, 
+the verb packages the contents of its phrase 
+and then connects qua dependent with a root verb 
+(or another verb `q.closer` to the root).  
+`p`
+
+`p.
+In contract to conventional Dependency Grammar, 
+Cognitive Transform Grammar does not try to 
+estimate semantic `q.importance`/, or use 
+this notion as a criterion for defining head/dependent 
+relations.  Philosophically, even if we are committed 
+to the general idea of Dependency Graphs modeling 
+syntax via ordered inter-word relations, it is not 
+obvious as to which word in a pair `q.depends on` 
+the other.  We might say that an adverb `q.needs` a 
+verb to have any concrete significance, but in 
+(what I have called) a verb-to-preverb 
+transform, like `i.to make`/, the verb itself in 
+some syntactic sense `q.needs` `i.to` because 
+there is no accepted automatic lexical retyping, 
+without some auxiliary word, which induces a 
+verb-to-preverb `q.type-cast` (unlike, say, 
+noun-to-adjective in `i.hockey stick`/).   
+`p`
+
+
+`p.
+Via Cognitive Transform Grammar, I propose to sideline 
+judgements about relative significance entirely 
+(at least for underlying parse-graphs) and 
+consider modifier-target relations instead of 
+(the more loaded) `q.head`/`q.dependent` contrast.  
+A formal ordering on transform-pairs, as well 
+as the stage/column structure, allows modifiers 
+to be ranked as closer or further from the 
+sentence root, and the more `q.central` 
+modifier plays the role of `q.head` in any word-pair, 
+even if it is `i.semantically` tangential.  
+This means that seemingly insignificant lexemes, 
+like adverbs, prepositions, or auxiliary words, 
+may become the root of a sentence (or a subordinate 
+clause).  I believe this is acceptable because 
+the purpose of a parse-graph is not to summarize 
+overall conceptualization, but to formally 
+organize the steps which conceptualizations take 
+en route to an overall propositional understanding.  
+On `i.top` of the parse-graph we can add further 
+analysis, including further word-pair connections 
+(e.g., pronoun to antecedent), which fill in 
+semantic details.  
+`p`
+
+`p.
+One potential weakness of this approach %-- although I 
+will argue it actually demonstrates its rationale 
+%-- is that `q.root` modifiers (both clausal and 
+sentence roots) would seem to abstract away 
+type-level specifications established for 
+their ground.  To see what I mean, consider 
+again sentences involving `i.try`/, like 
+
+`sentenceList,
+`sentenceItem; He reluctantly tried Champagne for the first time.
+`sentenceItem; She will try hard to ski during our vacation.
+`sentenceList`
+
+As I have discussed, `i.try` is only understood when 
+its direct object is a noun that profiles an 
+action or activity %-- in particular, a noun 
+derived from a subordinate clause.  Forms 
+like (1) can be analyzed as variants on 
+more elaborate versions where a clause is 
+explicit (e.g., tried `i.tasting Champagne`/).  So 
+`i.try`/'s object has to be interpreted so that it
+ mentally converts either to a clause or to 
+some abstract conception of a verb (as in `i.try skiing`/).  
+Moreover, `i.try`/'s `i.subject` generally has to be 
+interpreted as something sentient, capable of 
+purposeful action (we don't usually accept 
+constructions like `i.the applied tried to fall` or 
+`i.the tree tried growing`/).  These specifications 
+on `i.try` are narrower than can be represented 
+simply by naming a macrotype as transitive 
+verb, which takes two nouns and yields a proposition.  
+The two nouns cannot be random; they have to 
+be specific `i.kinds` of nouns, to be of some 
+type less `q.macro` than just `i.noun` full stop.    
+`p`
+
+`p.
+However we wish to actually represent these extra 
+requirements, the key point for now is that such  
+requirements apply not only to `i.try` as one 
+word, but to any phrase formed by modifying `i.try`/, 
+e.g. `i.try during our vacation` or `i.try for the 
+first time`/.  This might seem to be an argument 
+for treating `i.try` as a `i.head`/, because there 
+the one word encapsulates a suite of specifications.  
+In the format I propose, those specifications instead 
+have to be seen as duplicated across nodes, from the 
+`i.try` node to those of its modifiers 
+(`i.hard`/, `i.eagerly`/, plus `i.for` and 
+`i.during` as roots of the adverbial phrases, referring 
+back to the last two examples).   
+`p`
+
+`p.
+For a simpler example involving similar issues, 
+consider plurals: 
+
+`sentenceList,
+`sentenceItem; They have a lot of regional beers on tap, and I've tried most of them.
+`sentenceItem; They have a lot of regional beer on tap, and I order some whenever I come here.
+`sentenceList`
+
+Beer can be a mass, count singular, or count plural noun; and 
+the modifiers here (`i.regional`/, `i.on tap`/, `i.a lot of`/) 
+are neutral between mass and count plural.  On the other hand, 
+the choice between `i.them` and `i.some` later in the sentences 
+must agree on the mass/plural alternative; the only 
+word which marks the relevant phrase
+(`i.a lot of regional beer(s) on tap`/) one way or the other 
+is `i.beer(s)` itself.  There is, then, a particularly 
+salient connection between `i.them` and `i.beers` 
+(and `i.some` and `i.beer`/), because singular or plural 
+marking on the second word of the pair determines the 
+first word.  In a traditional Dependency Grammar, 
+`i.beer` would indeed be the `q.nexus` to which 
+the supplemental `i.on tap` (and etc.) connect 
+(on which they `q.depend`/), so that the semantically 
+crucial lexeme also marks the appropriate registers 
+in need of morphosyntactic align (e.g., singular/plural).      
+`p`
+
+`p.
+In the models for Cognitive Transform Grammar, on the 
+other hand, specifications %-- e.g., mass vs. count-plural 
+on `i.beer(s)` %-- `q.propagate` across nodes; here, 
+from `i.beer` and `i.beers` to the phrases identifying 
+the noun in its full concept (`i.a lot of regional beer(s) on 
+tap`/).  Cognitively, this is quite plausible: 
+surely we hear the phrase `i.regional beers` as plural 
+in the same manner as `i.beer`/.  In this sense 
+it is reasonable to stipulate that specifications 
+more specific than coarse macrotypes alone would 
+represent %-- a noun being plural, a verb needing 
+a `q.sentient` subject %-- likewise propagate 
+from targets to modifiers in a parse graph.
+`p`
+
+`p.
+Another illustration of related `q.propagation` 
+comes from alternative `q.Ontological` construals of a 
+noun; e.g., a `i.newspaper` can be an object, a place, 
+or an institution: 
+
+`sentenceList,
+`sentenceItem; My favorite newspaper is on the table.
+`sentenceItem; My favorite newspaper hired a new editor.
+`sentenceItem; I walk past my favorite newspaper everyday.
+`sentenceList`
+
+We have to infer from context which sense of `q.newspaper` applies 
+in which use-case.  But once we have clarity on whether 
+the intended conception profiles the newspaper in the 
+`q.Ontological register` as a bouded object, a geospatial 
+location, or a social institution, this classification 
+clearly propagates outward to containing phrases, 
+such as (in (1)-(3)) `i.my favorite newspaper`/.
+`p`
+
+`p.
+I propose the term `q.mesotype` to represent a 
+level of classification between individual words 
+and macrotypes, including `q.top-level` macrotypes 
+like noun, proposition, verb, adjective, adverb, and 
+preverb.  More specifically, I propose a type 
+hierarchy where those aforementioned macrotypes 
+(with no further qualifications) are the least 
+granular, followed by subdivisions which 
+tend to be morpholically marked: mass, count singular, 
+and count plural nouns; intransitive, transitive, and 
+ditransitive verbs; propositions in different performative 
+registers (assertions, commands, requests); 
+and the adjective and adverb modifiers typed correspondingly 
+(e.g. how `i.many` both inputs and outputs count plural nouns).
+At a finer type level, `i.mesotypes` introduce 
+semantic and `q.Ontological` criteria not syntactically 
+marked: nouns of abstract, inanimate, artifactual, 
+sentient, human, sociocultural entities, for example, or 
+perfective vs. imperfective verbs 
+(cf. LangIntro p. 148).  Finally, `i.microtypes` 
+are at the most granular semantic pole, representing 
+individual lexical entries or closely related 
+lexical groups, like `i.apple` or `i.fruit`/. 
+`p`
+
+`p.
+I do not intend the `q.layers` of this hierarchy to 
+be completely defined `i.a priori`/; arguably 
+there are fuzzy cases amenable to competing 
+interpretations on the meso-to-macrotype 
+axis or the meso-to-microtype.  For instance, 
+a locative construction implies that the object 
+is a noun designating location, and it has grammatical 
+marking at least in some sence %-- locative interpretations 
+are endemic to indirect objects, and prepositions such 
+as `i.toward` and `i.over`/, introducing adverbial phrases, 
+require location-like targets.  One might on this basis 
+claim that locations, as a special grammatical category, 
+are built in to the English syntactic system, rather 
+then being overlaid semantic specifications.  Moreover, 
+locations do not seem to fit the conventional 
+mass/count distinction: they typically function as 
+both a `i.mass` of smaller locations and as 
+`i.singular` integral regions, depending on context: 
+
+`sentenceList,
+`sentenceItem; We are driving across Pennsylvania.
+`sentenceItem; We are driving within Pennsylvania.
+`sentenceItem; We are driving toward Pennsylvania.
+`sentenceItem; We are driving to Pennsylvania.
+`sentenceList`
+
+Note that (4) implies a path originating `i.outside` 
+the state and terminating `i.inside`/, which thereby 
+has two different portions separated by the location's 
+boundary.
+`p`
+
+`p.
+On such evidence it is plausible to treat locations as a 
+separate macrotype of nouns, on roughly the same 
+`q.conceptual granularity` scale as mass, count singular, 
+and count plural.  A counter-argument, however, might 
+note that many nouns become interpreted as locations 
+in the proper context: 
+
+`sentenceList,
+`sentenceItem; I passed a glass of Champagne to John.
+`sentenceItem; I send good wishes to the children.
+`sentenceItem; I hung a leaflet on the whiteboard.
+`sentenceItem; Their best player was traded to the Lakers.
+`sentenceItem; Turning now to hockey, the Leafs just fired their coach.
+`sentenceItem; He will get another job: it's not like they sent him into retirement.
+`sentenceList`
+ 
+This flexibility implies that locative marking is a cue to 
+influence how we semantically construe the `q.location`/, 
+rather than a specific lexical category.  The nominal 
+concepts interpreted as locations cover a spectrum of 
+number %-- plurals (`i.the childern`/), mass 
+(`i.hockey` and `i.retirement` in these contexts; 
+e.g. `i.hockey` qua the space of topics relevant to 
+reporting on that sport), singular (`i.John`/) %-- 
+and also of Ontological status (John is a person; 
+the Lakers a `q.social institution`/; hockey 
+an `q.idea` or topic; retirement a stretch of 
+time; a whiteboard is an inanimate object).  
+These patterns of semantic construals complicate 
+the idea that `q.locations` can be reified as 
+some specific subtype of nouns %-- although 
+plausibly one could isolate a specific class of 
+nouns which designate locations in the most 
+direct sense (spatial, temporal, or geographic 
+regions), distinguishing cases where a locative 
+framing is internal to a noun's meaning as opposed 
+to requiring some context-specific reinterpretation.  
+In either case, there seems to be no fixed 
+analysis that would rank the theoretical 
+value of placing location-nouns more in the 
+`q.macrotype` or `q.mesotype` region in the 
+`q.space` of linguistic types' granularity.
+`p`
+
+`p.
+Moving in the opposite meso-to-micro direction in 
+this `q.space`/, consider specifications such that 
+`i.cook` or `i.dine on` (save for a few specific 
+idioms) only make sense in relation to food.  
+This restriction seems somewhat analogous 
+to patterns which would be identified 
+on the mesotype scale: for instance, only 
+social institutions can `i.hire` or `i.fire` someone 
+(and only people can be hired and fired).  
+Conversely, we could argue that any word's 
+lexical sense constrains the contexts where 
+it should be used, not for any linguistic 
+reasons but simply because some proper 
+linguistic constructions do not make 
+empirical sense: we say `i.orange juice` but 
+not `i.coffee juice`/.  The meaning of 
+`i.juice` is roughly a liquid derived from a 
+foodstuff (usually fruit or vegetable) by squeezing or 
+pressing.  This inevitably places restrictions on 
+how the word is used, but it is not clear 
+that we can connect such restriction to any 
+larger `q.Ontological` pattern (compare to the 
+similarities in analysis of where `i.hire` and 
+`i.fire` may be used).  The restrictions on 
+`i.juice`/, then, I would associate with the 
+`q.microtype` scale.  But `i.food` %-- as 
+involved in being cooked, tasted, eaten, foraged, 
+etc. %-- seems more general than `i.juice` 
+but less general than `i.sentient thing` or 
+`i.social institution`/.  
+`p`
+
+`p.
+One motivation for distinguishing different 
+`q.layers of granularity` for a linguistic 
+type system is to identify principles of 
+acceptability %-- including by 
+defining triggers for `i.rejecting` 
+acceptability.  We clearly deem `i.many beer` 
+as full-out wrong (rather than just an enigmatic 
+usage that may have some context-specific interpretation).  
+I would say that this is a `i.syntactic` anomaly; 
+it would be evidently programmatic even within a  
+parse-graph representation, anterior to semantic 
+or interpretive considerations.  I would 
+say that %-- say %-- `i.idea powder` is a 
+`i.semantic` anomaly: we construe `i.powder` as 
+a substance made from grinding some object, 
+so we have an Ontological basis for rejecting 
+the adjectival `i.idea` as a `q.kind` of powder 
+(but the phrase is not `i.primia facie` malformed 
+`i.grammatically`/).`footnote.There is a website of 
+puzzling Chinese-English culinary translations which 
+presents the name of one dish as `i.Napoleon fried 
+the idea powder`/.`  And I would say that 
+`i.coffee juice` is `i.lexically` anomalous 
+for reasons just articulated. 
+`p`
+
+`p.
+Corresponding, then, to the contrast between 
+`i.syntactic`/, `i.semantic`/, and `i.lexical` 
+anomalies, the overall partition of linguistic 
+types into `i.macrotypes`/, `i.mesotypes`/, 
+and `i.microtypes` allows us to classify 
+the nature of the anomalies.  Since speakers 
+are motivated to `i.avoid` anomalies, this 
+helps expose selective pressures which 
+guide use to choose particular words and 
+phrases.  We can roughly classify these 
+pressures into, most generally, a desire 
+to be grammatically correct; then, a desire 
+to integrate concepts in ways that are 
+conceptually coherent, such as recognizing 
+what facts can only be predicated of a 
+person or a group of people; finally, 
+a desire to use words according to lexical 
+conventions that match conversants' expectations 
+enough to not impede conversation.  
+The macro-, meso-, and micro-type distinction, 
+then, provides a kind of holistic classification 
+of the spectrum of considerations which factor into 
+speakers' model of selection principles 
+setting boundaries on acceptable usage.
+`p`
+
+`p.
+According to this analysis, then, we tend to approach  
+each word at three distinct levels.  Concerning 
+`i.dogs`/, say, we are simultaneously aware of the 
+macrotype status as a plural noun; of the mesotype 
+status as sentient animals; and of the microtype 
+status as canines that are (or could be) pets.  
+We try to ensure that any usage of `i.dogs` 
+`q.checks each of those boxes` %-- that it 
+would agree with addressees' sense of propriety 
+on all three levels.  In light of my earlier 
+discussion of `q.propagation`/, moreover, 
+these considerations propagate outward 
+to phrases (and also to pronouns, say).  
+All of the usage rules we instinctively 
+apply to `i.dogs` we would by default transfer 
+to `i.black dogs`/, `i.neighbor's dogs`/, 
+`i.barking dogs`/, and so forth.  
+`p`
+
+`p.
+This last point indicates that we need to track 
+the provenance of type-expressed specifications 
+across a parse graph.  I have in mind cases like: 
+
+`sentenceList,
+`sentenceItem; My neighbor fired her dog-walker.
+`sentenceItem; My neighbor's dogs fired their dog-walker.
+`sentenceList`
+
+The second reveals a `q.mesotype-level` anomaly 
+(since dogs do not fire people in any not serioously 
+metaphorical sense).  In a Dependency Grammar 
+wherein `i.dogs` (that specific lexeme) is the 
+subject for `i.fired`/, this specification 
+%-- `i.fire`/'s subject must be a person or people 
+(a multi-person institution) %-- would 
+be directly manifest in the verb/subject relation.  
+The verb, as the head, establish syntactic 
+and semantic requirements which the dependent 
+must obey, on pain of anomaly.  In my proposed 
+representation, however, the actual word-relations 
+formally modeled depend on transform order: 
+so in (1) the noun-phrase `i.neighbor's dogs` 
+results from the transform `i.neighbor's`/, 
+so that becomes the node connected to `i.fired`/.  
+The dog's-can't-fire anomaly therefore is not 
+expressly visible in the diagrammed word-pair, 
+but must instead be inferred from how specifications on 
+`i.dogs` propagate to `i.neighbor's` insofar as 
+the latter modifies the former.   
+`p`
+
+`p.
+I think this analytic indirection is actually 
+more theoretically warranted than the alternative: 
+type-expressed (i.e., macro-, meso-, or microtype-level) 
+specifications are more properly seen as concepual 
+patterns which traverse parse-graphs (to the degree 
+that they model, with some analytic restructuring, the 
+conceptual processes of sentence-understanding) 
+rather than as localized rules tested in isolation 
+(e.g., with respect to one word-pair).  This point 
+leans toward broad themes of how 
+parse-graphs model the holistic integration of 
+conceptual features of different varieties 
+%-- usage requirements but also extralinguistic context, 
+illocutionary intent, anaphora resolution, etc. 
+%-- and how our dispositions and 
+beliefs about the current discourse state 
+propagate across linguistic structures 
+(as modeled by parse graphs).  I will 
+turn attention toward these more holistic issues 
+in the next section.
+`p`
+
+`p.
+
+`p`
+
