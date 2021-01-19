@@ -1629,12 +1629,28 @@ articulation of sentences.  As a specific example, consider sentences
 such as: |+|
 
 `sentenceList,
-`sentenceItem; `swl ->> `slsep; `textbf.The book she read` `slsep; was very interesting. `slsep; -> itm:booksheread -> The book she read was very interesting. -> pro ;;
+`sentenceItem; 
+
+`discourse-markup/ -->
+= midsep
+The =em_ 
+book 
+she 
+read =_em
+= midsep
+was
+very
+interesting
+= midsep
+`discourse-markup`
+
+`swl ->> `slsep; `textbf.The book she read` `slsep; was very interesting. `slsep; -> itm:booksheread -> The book she read was very interesting. -> pro ;;
 `sentenceItem; `swl ->> `slsep; I recommended `textbf.a book` `slsep; `textbf.that 
-she read immediately`/. `slsep; -> itm:bookrecommend -> I recommended a book that she read immediately.  `slsep; -> pro ;;
+she read immediately`/. `slsep; -> itm:bookrecommend -> I recommended a book that she read immediately.  -> pro ;;
 `sentenceItem; `swl ->> `slsep; `textbf.A book` just appeared `slsep; `textbf.that she read immediately`  `slsep; -> itm:bookjustappeared -> A book just appeared that she read immediately. -> pro ;;
 `sentenceItem; `swl -> itm:bookrecommendalt -> I recommended a book I read years ago to her. -> pro ;;
-`sentenceItem; `swl -> itm:harrycause -> This time Harry didn't cause our defeat. -> pro ;;
+`sentenceItem; `swl ->> This time `textbf.Harry` didn't cause our defeat.
+  -> itm:harrycause -> This time Harry didn't cause our defeat. -> pro ;;
 `sentenceList`
 
 |.|
@@ -1668,7 +1684,7 @@ phrase, with the speaker aware that her expressed thought will
 not reach any level of completeness until concluding with 
 `q.to her`/, so the vocal modulations are suggesting to the 
 listener certain contours in primary and secondary phrasing.  
-The (`ref<itm:bookrecommend>;) is different %-- at least potentially, 
+The (`ref<itm:bookrecommend>;) case is different %-- at least potentially, 
 depending on context %-- insofar as the main idea the 
 speaker wishes to convey is that `q.she` read the book `q.immediately`/, 
 with the specific fact that said book was initially recommended 
@@ -1677,12 +1693,12 @@ her actions `visavis; the book.  In Langacker's other two
 examples `q.book` is also emphasized vocally, we assume, but 
 naturally so because it also coincides with the actual 
 subject of the sentence.  In (`ref<itm:bookjustappeared>;) 
-the stress naturally aligns with the `i.subject` (the book) 
+the stress organically aligns with the `i.subject` (the book) 
 but less so the profiled nexus `i.verb` (that it just appeared), 
-which %-- as Langacker notated via bold highlighting %-- 
+which %-- as Langacker notates via bold highlighting %-- 
 may be tonally deemphasized, with stress instead placed on the 
 clauses stating her reading it immediately.  In other words, 
-here to the intonation shifts emphasis away from the 
+here too the intonation shifts emphasis away from the 
 central verb/object pair in part, but only in part, insofar 
 as the subject now keeps its emphasis but the profiled 
 verb loses the empashasis, at least partially.   
@@ -1756,12 +1772,12 @@ focus on going to Brighton versus `i.to` elsewhere
 `p`
 
 `p.
-Langacker and Hirshberg also both discussed prosodic effects 
+Langacker and Hirshberg also both discuss prosodic effects 
 in phrasal grouping which can determine the 
 literal meaning of sentences, not just their shades of 
 interpretation.  These effects take on several 
 aspects, such as distinguishing when subordinate clauses 
-or modifiers to entire other clauses or just parts 
+are modifiers to entire other clauses or just parts 
 therein (see (`ref<itm:BillDrink>;, taken 
 from page 527)) or distinguishing 
 lists from compountd nouns (see (`ref<itm:ricewine>;, taken 
@@ -1800,8 +1816,11 @@ depend on epistemic factors latent in overall sentences.  He gives
 these example (page 115): |+|
 
 `sentenceList,
-`sentenceItem; `swl -> itm:roof -> The roof leaks if a building hasn't been maintained. -> pro ;;
-`sentenceItem; `swl -> itm:coach -> The team is unsuccessful because the coach is so incompetent. -> pro ;;
+`sentenceItem; `swl ->> The `midemph.ROOF LEAKS` if a building 
+hasn't been `midemph.MAINTAINED`/. -> itm:roof -> The roof leaks if a building hasn't been maintained. -> pro ;;
+`sentenceItem; `swl ->> The `midemph.TEAM` is `midemph.UNSUCCESSFUL` because 
+the `midemph.COACH` is so `midemph.INCOMPETENT`/. -> itm:coach -> The team is unsuccessful because 
+the coach is so incompetent. -> pro ;;
 `sentenceList`
 
 |.|
@@ -1833,11 +1852,26 @@ has no linguistic consequences. `cite<[page 115]LangackerInteractive>;
 
 In effect, Langacker argues that when we hear stress patterns we tend to align 
 the stressed elements with objects `i.in the context of` their grounding 
-`visavis; a sentence's core situation: because a roof is part of a building, 
+`visavis; a sentence's core situation: because a roof is (an essential) part of a building, 
 a discussion centered on the building can latently pivot to considering the 
-roof (and vice versa) which makes stresses on both words, at different points 
-in the sentence, seen natural and understandable (likewise for 
-`i.coach` and `i.team`/.  Langacker's justifies the idea of a 
+roof (and vice versa).  If a `i.roof` is mentioned in discourse, we instinctively 
+contextualize in terms of the building to which it belongs, and so this building itself 
+acts as if it were already introduced into the `q.ledger` even if it is not 
+explicitly mentioned; hence it acquires the intonational pattern of something 
+already present in the conversation (without the stress that would often accompany 
+newly introduced content).  Langacker argues (backed with a small-caps notation 
+to indicate `q.medium` prosodic emphasis) that (`ref<itm:coach>;) is different 
+because the concept of `i.coach`/, while closely associated with a team, 
+is not latent to the same extent as the building beneath a roof (one can 
+perceive and conceive of a team without a coach, but not a roof without 
+a building).  Such degees of cognitive inter-association combine with 
+`q.windowing` effects, in terms of how we hear multi-word units (influenced by 
+intonation as well as phrase-structure), to determine where we tend to 
+place spoken emphases.
+`p`
+
+`p.
+Langacker justifies the idea of a 
 `q.window` of attention, which encompasses both our disposition to 
 hear words grouped into mid-sized phrases and our inclination to 
 focus attention on particular aspects of environing situations, 
@@ -1855,6 +1889,61 @@ syntactic boundaries.  This engenders examples like (from page 111): |+|
 Langacker notates these sentences to indicate that we hear them in 
 roughly three- or four-word groups, even though larger-scale phrasal readings are 
 also possible. 
+`p`
+
+`p.
+Elsewhere Langacker analyzes a different intonation/anchoring pattern, 
+specifically the genre of sentences where a stressed and prosodically 
+isolated clause anchors a sentence thematically, though not as the 
+technical nexus, as in the first two of these 
+`cite<[page 250]LangackerInvestigations>;: |+|
+
+`sentenceList,
+`sentenceItem; `swl ->> `femph.Last night`/, she was painting Easter eggs. -> itm:easter -> Last night, she was painting Easter eggs. -> pro ;;
+`sentenceItem; `swl ->> `femph.With a fine brush`/, she was 
+  painting Easter eggs. -> itm:finebrush -> With a fine brush, she was 
+painting Easter eggs. -> pro ;;
+`sentenceItem; `swl ->> Open the carton `ToBILHperc;. Now remove the monitor carefully. -> itm:opencarton -> Open the carton.  Now remove the monitor carefully. -> pro ;;
+`sentenceItem; `swl ->> The Johnsons are solid citizens.  They `ToBIHstar; pay their `ToBIHstar; taxes `ToBIHLperc;.  They `ToBIHstar; attend `ToBIHstar; PTA meetings `ToBILHperc;. -> itm:johnsons -> The Johnsons are solid citizens.  They pay their taxes.  They attend PTA meetings. -> pro ;;
+`sentenceList`
+
+|.|
+   
+Here I juxtapose Langacker's examples with two from Hirshberg's chapter 
+(page 533) cited above.  These are similar examples, I contend,
+sharing the feature of a preliminary clause or sentence grounding 
+subsequent content, in a fashion reinforced prosodically.  
+Langacker implies that the `q.space-building` clause`footnote.
+Note this 
+is not a term Langacker uses in this context, though elsewhere he 
+approvingly references Gilles Fauconnier's analyses of space-building.
+`footnote` receives particular vocal stress, presumably because it is 
+cognitively foregrounded for the speaker.  Intonation emphasizing 
+the preliminary clause suggests that this material is somehow changing 
+the focus of the conversation; e.g., that in (`ref<itm:easter>;)  
+the speakers were not already discussing anything occurring 
+`q.last night`/; or in (`ref<itm:finebrush>;) the speaker is 
+particularly focused on what may seem to be a granular detail.  
+In the second `i.Handbook` example, Hirshberg argues that a pattern 
+of relatively sustained stress %-- leading through an introductory/framing 
+sentence into subsequent content %-- connotes an `q.open-ended set`/, 
+in her words, as if the speaker wishes to imply that the discourse 
+only mentions `i.some` ways the Jones are reputable.  In 
+(`ref<itm:carton>;) the discourse traces a mental grounding act that 
+coincides with a linear sequence of concrete actions which the 
+addressee either literally carries out, or contemplates: the 
+`q.open the carton` instruction both mentally frames %-- and 
+`q.activates` thought of %-- what it `i.is` in the box, and 
+also the discourse is staging or anticipating a specific 
+enactive sequence, which starts with the box being opened and 
+follows to engaging (literally, not just mentally) with its contents.  
+This particular cognitive framing is connoted prosodically 
+by the intonation across the sentence boundary, if 
+(as would be natural were the example to be spoken aloud) 
+the speaker evinces a `qifirst -> continuation rise -> contour, 
+which is represented by a low phrase accent and high boundary tone 
+(`ToBILHperc;), generally interpreted as conveying
+that there is `sq.more to come` ;; (Hirshberg, page 533). 
 `p`
 
 `p.
@@ -1915,7 +2004,7 @@ what is technically the root verb/noun, so that the example
 is marked by a kind of double focus, a competition between 
 centers which are each posed by cognitively impactful 
 desiderata (syntactic versus thematic/topical), such that 
-`i.book` and `i.I` (and `i.recommend`/`i.read`/) have a 
+`i.book` and `i.I` (and `i.recommend`//`i.read`/) have a 
 different anchoring/peripheralizing relation than would 
 normally be manifest between principle and subordinate 
 clauses.  In the case of (`ref<itm:roof>;) there is another 

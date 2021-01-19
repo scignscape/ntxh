@@ -226,7 +226,7 @@ void GTagML_DGH_Module::process_gtagml_file(QString path,
 }
 
 
-void GTagML_DGH_Module::read_prosodic_markup(GTagML_Project_Info& gpi,
+void GTagML_DGH_Module::read_discourse_markup(GTagML_Project_Info& gpi,
   QString path, QString code)
 {
  s4 index = code.indexOf(':');
@@ -299,9 +299,9 @@ void GTagML_DGH_Module::check_post_processing_codes(GTagML_Project_Info& gpi)
 
    QString cat = code.mid(0, index);
    QString arg = code.mid(index + 1);
-   if(cat == "Prosody-Markup")
+   if(cat == "discourse-markup")
    {
-    read_prosodic_markup(gpi, path, arg);
+    read_discourse_markup(gpi, path, arg);
     // only category of post-processing used here ...
    }
   }

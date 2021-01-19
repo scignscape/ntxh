@@ -6,7 +6,7 @@
 
 
 
-RENAME_TAG(prosody-markup, prosodyMarkup)
+RENAME_TAG(discourse-markup, discourseMarkup)
 
 
 GTAGML_CALLBACK_NOACTION(noxml_)

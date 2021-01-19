@@ -67,7 +67,7 @@ USING_KANS(GTagML)
 
 
 
-void GTagML_Output_Latex::check_prosody_markup(QTextStream& qts, caon_ptr<tNode> node)
+void GTagML_Output_Latex::check_discourse_markup(QTextStream& qts, caon_ptr<tNode> node)
 {
  CAON_PTR_DEBUG(tNode ,node)
  if(caon_ptr<GTagML_Tag_Command> ntc = node->GTagML_tag_command())
@@ -79,7 +79,7 @@ void GTagML_Output_Latex::check_prosody_markup(QTextStream& qts, caon_ptr<tNode>
 
   GH_Block_Base* bl = gsi->block_writer()->current_mandatory_argument_block();
 
-  QString post_processing_code = QString("Prosody-Markup:%1:%2-%3")
+  QString post_processing_code = QString("discourse-markup:%1:%2-%3")
     .arg(bl->layer_code()).arg(ntc->ref_enter()).arg(ntc->ref_leave());
 
   gsi->add_post_processing_code(post_processing_code);

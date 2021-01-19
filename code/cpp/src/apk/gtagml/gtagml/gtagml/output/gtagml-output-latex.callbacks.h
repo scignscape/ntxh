@@ -69,16 +69,16 @@ _GTagML_CALLBACK
 RENAME_TAG(u, underline)
 RENAME_TAG(a, anchor)
 
-//RENAME_TAG(prosody-markup, prosodyMarkup)
+//RENAME_TAG(discourse-markup, discourseMarkup)
 
-GTAGML_CALLBACK_(prosody-markup)
+GTAGML_CALLBACK_(discourse-markup)
 WHEN_(pre)
 {
  cb->flags.pre_fallthrough = true;
 }
 _WHEN_(post)
 {
- check_prosody_markup(qts, node);
+ check_discourse_markup(qts, node);
  cb->flags.post_fallthrough = true;
 }
 _WHEN
