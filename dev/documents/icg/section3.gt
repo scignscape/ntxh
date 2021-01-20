@@ -65,7 +65,7 @@ constructionally regulated by a `q.channel algebra`/,
 those capturing linguistic patterns are actually tightly 
 constrained.  This implies that there are processual 
 and/or conceptual dynamics generating language 
-structure.  The hypegraph mechanism is not only a summarial 
+structure.  The hypergraph mechanism is not only a summarial 
 restaging of language artifacts, but is pointing us 
 toward insights about which forces shape the 
 coordinative instincts among language elements that 
@@ -128,24 +128,27 @@ objects.  Similar arguments apply to `i.indirect` objects:
 the effect of a noun-concept being registeres in an 
 indirect object `q.slot` is to conceptualize that 
 concept in a distinct register, often in a quasi-spatial 
-or processual fashion:
+or processual fashion: |+|
 
 `sentenceList,
-`sentenceItem; I brought you some wine.  
-`sentenceItem; We bought him some school supplies.  
-`sentenceItem; I carved Grandma some duck.  
-`sentenceItem; The coach hit the infielders some ground balls.  
+`sentenceItem; `swl -> itm:broughtwine ->  I brought you some wine. -> cog ;; 
+`sentenceItem; `swl -> itm:broughtschool ->  We bought him some school supplies. -> cog ;;  
+`sentenceItem; `swl -> itm:carvedduck ->  I carved Grandma some duck. -> cog ;;  
+`sentenceItem; `swl -> itm:coachhit ->  The coach hit the infielders some ground balls. -> cog ;;  
 `sentenceList`
+
+|.|
 
 Each of these constructions posits the indirect object 
 as the endpoint of a spatial trajectory, although the 
 path is profiled more in terms of the subject's motivations 
-than the specific spatial coordinates.  Literaly, (1) and (2) 
-(even (3), on reflection) profile a spatial movement 
+than the specific spatial coordinates.  Literaly, 
+(`ref<itm:broughtwine>;) and (`ref<itm:broughtschool>;)
+(even (`ref<itm:carvedduck>;), on reflection) profile a spatial movement 
 between the subject and indirect object (the `i.direct` object 
 being the mover), but the conceptual emphasis is on someone 
 being the `i.recipient` of that object.  (Likewise 
-in (4), the implication is to emphasize not that the baseballs are 
+in (`ref<itm:coachhit>;), the implication is to emphasize not that the baseballs are 
 hit `i.toward` the fielders, but that their path is deliberately 
 induced so for them to practice fielding).  In a typical 
 ditransitive construction, that is, there is a conceptual 
@@ -350,27 +353,32 @@ target for the newly minted adjective (`i.score sheet`/,
 not `i.score piece of paper`/).  Noun-to-verb 
 reassignments are exotic-sounding, perhaps deliberately 
 received as bending the rules of English.  I have 
-in mind cases like: 
+in mind cases like: |+|
 
 `sentenceList,
-`sentenceItem; Don't think you can Champagne me into forgiving you.
-`sentenceItem; If they healthy scratch him enough he might accept a trade. 
+`sentenceItem; `swl -> itm:Champagne ->  Don't think you can Champagne me into forgiving you. -> syn ;;
+`sentenceItem; `swl -> itm:healthyscratch ->  If they healthy scratch him enough he might accept a trade. -> syn ;; 
 `sentenceList`
+
+|.|
 
 Perhaps such verb-producing shifts are rarer than adjective-producing 
 equivalents because to `q.resolve` the peripheralizing 
 transform then requires multiple further transforms (considering 
 the transitive or ditransitive case), as opposed to 
 one compact counter-peripheral step.  The less idiosyncratic 
-approach to sentences like (1) and (2) would be to just 
-factor the complex expressions into separate clauses: 
+approach to sentences like (itm:Champagne) and 
+(itm:healthyscratch) would be to just 
+factor the complex expressions into separate clauses: |+|
 
 `sentenceList,
-`sentenceItem; Don't think you can just buy me Champagne and I'll forgive you.
-`sentenceItem; If they make him a `q.healthy scratch` enough times 
+`sentenceItem; `swl -> --- ->  Don't think you can just buy me Champagne and I'll forgive you. -> syn ;;
+`sentenceItem; `swl ->> If they make him a `q.healthy scratch` enough times 
 (i.e., leave a player off a sport team's active roster even 
-if he is not injured), he might accept a trade. 
+though he is not injured), he might accept a trade. -> --- ->  If they make him a healthy scratch enough times, he might accept a trade. -> syn ;; 
 `sentenceList`
+
+|.|
 
 On this evidence, peripheralizing changes in categorial 
 roles are rare, and especially in cases where the 
@@ -424,15 +432,17 @@ adverbial modifier).  The question of
 `i.which` content is treated as direct or indirect 
 object, rather than a secondary detail, seems 
 to be a matter of context.  Material which is an 
-object in one sentence can be an added detail in another: 
+object in one sentence can be an added detail in another: |+|
 
 `sentenceList,
-`sentenceItem; This bus drops passengers off downtown.
-`sentenceItem; This bus drops passengers off along Queen street.
-`sentenceItem; This bus drops passengers off downtown along Queen street.
-`sentenceItem; This bus will take you downtown via Queen street.
+`sentenceItem; `swl -> --- ->  This bus drops passengers off downtown. -> syn ;;
+`sentenceItem; `swl -> itm:busqueen ->  This bus drops passengers off along Queen street. -> syn ;;
+`sentenceItem; `swl -> --- ->  This bus drops passengers off downtown along Queen street. -> syn ;;
+`sentenceItem; `swl -> --- ->  This bus will take you downtown via Queen street. -> syn ;;
 `sentenceList`
-  
+
+|.|
+
 These sentences differ in the extent to which `i.along Queen street` 
 is factored as an intrinsic part of the bus's destination 
 or rather a supplemental detail of the route taken to get there.   
@@ -450,7 +460,7 @@ of the destination.
 `p.
 This situation should be interpreted functionally as 
 well as spatially: someone interested in a sentence 
-like (2) presumably intends to travel downtown, 
+like (`ref<itm:busqueen>;) presumably intends to travel downtown, 
 and thinks of the bus as a vehicle to serve 
 that purpose.  Accordingly, the bus's destination 
 is functionally salient, because it directly 
@@ -467,11 +477,11 @@ As with `i.heading out to the store`/, it is permissable
 to identify alternative parses which suggest 
 slightly different sentence-meanings (at least, 
 different in light off all contextual details).  
-The meaning we should attribute to (2) depends 
+The meaning we should attribute to (`ref<itm:busqueen>;) depends 
 subtly on whether the speaker believes that 
 `i.along Queen street` is functionally important 
 for the addressee %-- whether it is thereby central 
-to (2)'s information content or is just an 
+to (`ref<itm:busqueen>;)'s information content or is just an 
 aside, introduced perhaps in a spirit of 
 conversational casualness (in that, for instance, 
 conducting a dialog with enunciations appearing 
@@ -494,19 +504,21 @@ precondition (wherein a functionally ordered
 situation is the backdrop wherein the action 
 may occur).  Some details are intrinsic to 
 the basic functional framing of the action, while 
-other profile secondary functional relationships, 
+others profile secondary functional relationships, 
 such as those which are instrumental, spatializing, 
-or rationalizing:  
+or rationalizing: |+|
 
 `sentenceList,
-`sentenceItem; I opened the wine with an antique corkscrew.
-`sentenceItem; I opened the wine in the kitchen.
-`sentenceItem; I opened the wine to aerate.
-`sentenceItem; I opened the wine for John.
-`sentenceItem; I opened the wine because John asked me to.
-`sentenceItem; I opened the wine in the kitchen for John 
-so it could aerate because he asked me to.
+`sentenceItem; `swl -> --- ->  I opened the wine with an antique corkscrew. -> cog ;;
+`sentenceItem; `swl -> --- ->  I opened the wine in the kitchen. -> cog ;;
+`sentenceItem; `swl -> --- ->  I opened the wine to aerate. -> cog ;;
+`sentenceItem; `swl -> --- ->  I opened the wine for John. -> cog ;;
+`sentenceItem; `swl -> --- ->  I opened the wine because John asked me to. -> cog ;;
+`sentenceItem; `swl -> --- ->  I opened the wine in the kitchen for John 
+so it could aerate because he asked me to. -> cog ;;
 `sentenceList`
+
+|.|
 
 As the final sample in this group suggests, extra 
 details can be added in a chain stretching over 
@@ -610,30 +622,34 @@ verb, in proper context, eventually signifies.
 The `q.trail` of secondary details allows 
 the relevant state of affairs to be described 
 as rigorously as the situation warrants 
-(see ( ... wine for ... ) and ( ... for GM ... )).  
+(see (`ref<itm:broughtwine>;) and (`ref<itm:carvedduck>;)).  
 On the other hand, the more tightly coupled 
 verb/subject and verb/object connections allow 
 the focal information in the verb construction to 
-be packaged up, depending on surrounding context: 
+be packaged up, depending on surrounding context: |+|
 
 `sentenceList,
-`sentenceItem; Giving John advice is impossible.
-`sentenceItem; You promised to make us pancakes!
+`sentenceItem; `swl -> --- ->  Giving John advice is impossible. -> cog ;;
+`sentenceItem; `swl -> --- ->  You promised to make us pancakes! -> cog ;;
 `sentenceList`
+
+|.|
 
 For instance, the coexistance of ditransitive 
 patterns with and without prepositions allows 
 the sentence to be restructured according to whether 
 the expression comprising the direct or indirect 
-object is more complex: 
+object is more complex: |+|
 
 `sentenceList,
-`sentenceItem; I gave John a Cabernet Franc from the winery he visited 
-during a trip along the Niagara escarpment last summer.
-`sentenceItem; We'll award a prize to the first caller who correctly 
-identifies who scored the game-winning goal last night.
+`sentenceItem; `swl -> --- ->  I gave John a Cabernet Franc from the winery he visited 
+during a trip along the Niagara escarpment last summer. -> syn ;;
+`sentenceItem; `swl -> --- ->  We'll award a prize to the first caller who correctly 
+identifies who scored the game-winning goal last night. -> syn ;;
 `sentenceList`
-  
+
+|.|
+
 The choice of which object to place first or second, 
 in these cases, is obviously motivated by one 
 object (and not the other) requiring a lengthy nested clause. 
@@ -643,26 +659,27 @@ object (and not the other) requiring a lengthy nested clause.
 Of course, verbs also form clauses which modify other verbs.  
 This means that stating the core verb/subject/object construction 
 compactly helps orient a non-root verb's clause in its 
-larger context.  
-
-  Compare:
+larger context.  Compare: |+|
 
 `sentenceList,
-`sentenceItem; The instructor hit them ground balls to practice fielding and 
-throwing in one motion.
-`sentenceItem; The instructor hit ground balls toward 
+`sentenceItem; `swl -> --- ->  The instructor hit them ground balls to practice fielding and throwing in one motion. -> cog ;;
+`sentenceItem; `swl -> --- ->  The instructor hit ground balls toward 
 the infieldsers so that they could practice fielding and 
-throwing in one motion.
+throwing in one motion. -> cog ;;
 `sentenceList`
+
+|.|
 
 Moreover, suppressing one or another 
 object (or even the subject) allows a nested clause to be 
-transformed into a modifier: 
+transformed into a modifier: |+|
 
 `sentenceList,
-`sentenceItem; I found the wine that John recommended.
-`sentenceItem; Please use brown rice when making the pilaf.
+`sentenceItem; `swl -> --- ->  I found the wine that John recommended. -> cog ;;
+`sentenceItem; `swl -> --- ->  Please use brown rice when making the pilaf. -> cog ;;
 `sentenceList`
+
+|.|
 
 My point is that the verb/subject and verb/object 
 combinations have a kind of combinatorial 
@@ -691,12 +708,14 @@ more complex structures to model
 signifying intent when we `i.do` want 
 to focus on details that would be 
 functionally tangential to a verb-construction 
-as usually interpreted: 
+as usually interpreted: |+|
 
 `sentenceList,
-`sentenceItem; What was it that you used to open the wine?
-`sentenceItem; Which avenue does this bus go down when it drops off passengers?
+`sentenceItem; `swl -> --- ->  What was it that you used to open the wine? -> cog ;;
+`sentenceItem; `swl -> --- ->  Which avenue does this bus go down when it drops off passengers? -> cog ;;
 `sentenceList`
+
+|.|
 
 This brings me to the overarching point that 
 %-- at least in English %-- many of the conceptual 
@@ -721,28 +740,30 @@ concerns the relations between bonafide adverbs (asserting
 details and secondary information) and transforms 
 associated with more central syntactic markers, such as 
 mood and tense.  Adverbs within a gerund construction, 
-let's say, can migrate to different spots: 
+let's say, can migrate to different spots: |+|
 
 `sentenceList,
-`sentenceItem; Those dogs are barking loudly.
-`sentenceItem; Those dogs really keep barking.
-`sentenceItem; Those dogs are really barking.
-`sentenceItem; Those dogs are really barking loudly.
-`sentenceItem; Those dogs are barking %-- really loudly.
+`sentenceItem; `swl -> itm:barkingloudly ->  Those dogs are barking loudly. -> syn ;;
+`sentenceItem; `swl -> itm:loudly ->  Those dogs really keep barking. -> syn ;;
+`sentenceItem; `swl -> --- ->  Those dogs are really barking. -> syn ;;
+`sentenceItem; `swl -> itm:reallyloudly ->  Those dogs are really barking loudly. -> syn ;;
+`sentenceItem; `swl -> itm:barking ->  Those dogs are barking %-- really loudly. -> syn ;;
 `sentenceList`
 
 If we hear the gerund pair as just English's idiomatic 
 progressive tense, then the most logical transform 
 order, at least for analysis, is to treat 
-`i.loudly` in (1) as modifying couple `i.are barking`/, 
+`i.loudly` in (`ref<itm:barkingloudly>;) as modifying couple `i.are barking`/, 
 just as it would modify the past tense `i.barked`/.  
 However, one might also hear `i.bark loudly` as a 
-compound verb, like (in many circumstances) `i.heading out`/: 
+compound verb, like (in many circumstances) `i.heading out`/: |+|
 
 `sentenceList,
-`sentenceItem; She is heading out early.
-`sentenceItem; She is heading out with the dogs.
+`sentenceItem; `swl -> --- ->  She is heading out early. -> syn ;;
+`sentenceItem; `swl -> --- ->  She is heading out with the dogs. -> syn ;;
 `sentenceList`
+
+|.|
 
 In one, say, I find the most natural analysis 
 forms the transform `i.heading out` (in effect 
@@ -750,7 +771,8 @@ creating a gerund for the two-part verb),
 `i.then` the `i.is` (to form a present progressive), 
 and finally `i.early` supplements the verb-profile.  
 This analysis would probably not run the same way 
-for (..1)-(5) because `i.bark loudly` does not have 
+for (`ref<itm:barkingloudly>;)-(`ref<itm:barking>;)
+because `i.bark loudly` does not have 
 the same lexical entrenchment as `i.head out`/.  
 Nevertheless, these cases argue against assigning 
 fixed rules for the `q.order` in which 
@@ -793,8 +815,8 @@ Meanwhile, in the case of an intensifier like
 emphasis to different parts of the construction 
 %-- either `i.loudly` itself, `i.or` the 
 phrasal `i.were barking loudly` as a more 
-holistic emphasis.  In (2)-(4) above I am 
-actually inclined to connect `i.really` 
+holistic emphasis.  In (`ref<itm:loudly>;)-(`ref<itm:reallyloudly>;)
+above I am actually inclined to connect `i.really` 
 with the auxiliary `i.are` or `i.keep`/, 
 the idea being that the very notion of 
 a `i.progressive tense` can acquire multiple 
@@ -814,13 +836,14 @@ or exaggerated.
 The simplest example of clauses nesting into 
 other constructions derives from propositionally
 complete clauses, which are `q.transformed` to 
-nouns with a subordinator such as `i.that`/: 
+nouns with a subordinator such as `i.that`/: |+|
 
 `sentenceList,
-`sentenceItem; We know that Warren and Sanders appeal to the same cohort of voters.
-`sentenceItem; I know that Szechuan recipes call for hot pepper, but John can't eat 
-spicy food.
+`sentenceItem; `swl -> --- ->  We know that Warren and Sanders appeal to the same cohort of voters. -> syn ;;
+`sentenceItem; `swl -> --- ->  I know that Szechuan recipes call for hot pepper, but John can't eat spicy food. -> syn ;;
 `sentenceList`
+
+|.|
 
 It is commonly asserted that the subordinator is unnecessary, and 
 so its presence or absence has no real semantic import 
@@ -829,13 +852,15 @@ for stylistic reasons; using `i.that` sounds less informal).
 I would venture, however, that we are more likely to 
 (even subconsciously) drop `i.that` when we believe the addressee 
 already is familiar with the propositional content of the 
-following clause: 
+following clause: |+|
 
 `sentenceList,
-`sentenceItem; I told you Toronto would win!
-`sentenceItem; I know you like hot pepper, but John can't eat 
-spicy food.
+`sentenceItem; `swl -> itm:raptors ->  I told you Toronto would win! -> syn ;;
+`sentenceItem; `swl -> itm:hotpepper ->  I know you like hot pepper, but John can't eat 
+spicy food. -> syn ;;
 `sentenceList`
+
+|.|
 
 That is, we are more disposed to `i.include` the subordinator if 
 we perceive that the audience is not necessarily expecting a 
@@ -853,8 +878,8 @@ the subordinator if the prior conversational context
 makes the content of the subsequent clause 
 not unexpected; it fits comfortably into the 
 current state of the dialog (two people talking about 
-a recipe in (2), or talking about the 2019 Basketball finals 
-in (1)).  The `q.dropped` version sounds less informal, 
+a recipe in (`ref<itm:hotpepper>;), or talking about the 2019 Basketball finals 
+in (`ref<itm:raptors>;)).  The `q.dropped` version sounds less informal, 
 then, because informal discourse is more likely 
 when the conversants have this degree of shared 
 anticipation of the contours of the dialog, more so 
@@ -903,14 +928,16 @@ are not protoverbs but rather verbs lexically
 re-typed to nouns or, in the latter, mapped to a noun 
 by the infinitive).  The same nonfinite clause (reflected in 
 its protoverb's macrotype) may serve as a noun, 
-adjective, or perhaps otherwise, varying with context: 
+adjective, or perhaps otherwise, varying with context: |+|
 
 `sentenceList,
-`sentenceItem; He is struggling to hold the groceries.
-`sentenceItem; We need a bag to hold to groceries.
-`sentenceItem; She is trying to get our attention.
-`sentenceItem; She is shouting to get our attention.
+`sentenceItem; `swl -> itm:stugglinggroceries ->  He is struggling to hold the groceries. -> syn ;;
+`sentenceItem; `swl -> itm:baggroceries ->  We need a bag to hold to groceries. -> syn ;;
+`sentenceItem; `swl -> itm:tryingattention ->  She is trying to get our attention. -> syn ;;
+`sentenceItem; `swl -> itm:shoutingattention ->  She is shouting to get our attention. -> syn ;;
 `sentenceList`
+
+|.|
 
 I assume here that `i.struggle` and `i.try` are normal 
 transitive verbs whose object is a noun, albeit often 
@@ -919,15 +946,15 @@ on a verb %-- semantically, a verb refigured as a noun,
 to conceptually profile the abstract essence of the verb 
 rather than one specific instantiation.  In simple cases 
 (`i.I want to win`/) this mapping can be done without 
-any clause, but (1) and (3) involve transitive 
+any clause, but (`ref<itm:stugglinggroceries>;) and (`ref<itm:tryingattention>;) involve transitive 
 verbs which need to be elaborated with a corresponding 
 object.  With that detail, the subordinate verb 
 (re-typed as a protoverb) transforms `q.into` a noun 
 (cognitively, at least), which then becomes the 
-object of a different verb.  In (4), on the other 
+object of a different verb.  In (`ref<itm:shoutingattention>;), on the other 
 hand, it seems correct to read `i.to get our attention` 
 as an `i.adverb`/, not a verb, because it modifies 
-(by ascribing a rationale to) her shouting.  And (2) 
+(by ascribing a rationale to) her shouting.  And (`ref<itm:baggroceries>;) 
 is a case of a protoverb mapping to an adjective, because 
 the clause modifies `i.a bag`/.
 `p`
@@ -1009,14 +1036,15 @@ instance).
 `p.
 On this basis, we have an avenue for studying subordinate 
 clauses in terms of the spatial, temporal, and logical 
-form of their `i.internal` conceptualizations:
+form of their `i.internal` conceptualizations: |+|
 
 `sentenceList,
-`sentenceItem; We should look for the wine that John recommended last summer.
-`sentenceItem; I have to shout because the cars are making a lot of noise outside.
-`sentenceItem; At each of the debates, Warren presented more detailed policy 
-proposals than Sanders.
+`sentenceItem; `swl -> --- ->  We should look for the wine that John recommended last summer. -> cog ;;
+`sentenceItem; `swl -> --- ->  I have to shout because the cars are making a lot of noise outside. -> cog ;;
+`sentenceItem; `swl -> itm:warrendetailed ->  At each of the debates, Warren presented more detailed policy proposals than Sanders. -> cog ;;
 `sentenceList`
+
+|.|
 
 Each of these subordinate clauses has a spatial, temporal, or 
 contextual framework which deviates from the surrounding 
@@ -1024,13 +1052,13 @@ sentence (`i.last summer`/, `i.outside`/).  The third is the
 more elaborate, because the speaker is taking a holistic 
 view, where each of the debates referenced could, potentially, 
 be a separate topic that gets exclusive focus in subsequent 
-conversation.  In (3) then speaker (and presumably all 
+conversation.  In (`ref<itm:warrendetailed>;) then speaker (and presumably all 
 conversants) work from a summarial vantage encompassing, 
 in their thoughts, a series of more specific contexts 
 (viz., each debate) which could form their own discursive 
 space (not just in terms of their actual spatial environs, 
 but their abstract space of facticity and themes).  So in 
-(3) the contrast between the setting for the enunciation and 
+(`ref<itm:warrendetailed>;) the contrast between the setting for the enunciation and 
 the clausal alternate space is more abstract than the 
 `i.inside`/`i.outside`/, or `i.now`/`i.last summer` contrast.    
 `p`
@@ -1056,25 +1084,28 @@ food, drink, or something critically experienced
 pleasurability %-- `i.try this bubble bath`/; 
 `i.try that cologne`/).  But `i.try`/'s object 
 appears to typically be shorthand for an implicit 
-clause: 
+clause: |+|
 
 `sentenceList,
-`sentenceItem; I'd like to try this restaurant.
-`sentenceItem; I'd like to try that mountain.
-`sentenceItem; The city is trying ranked-choice voting next election.
-`sentenceItem; I'm going to try binoculars at the next game.
+`sentenceItem; `swl -> itm:tryrestaurant ->  I'd like to try this restaurant. -> sem ;;
+`sentenceItem; `swl -> itm:trymountain ->  I'd like to try that mountain. -> sem ;;
+`sentenceItem; `swl -> --- ->  The city is trying ranked-choice voting next election. -> sem ;;
+`sentenceItem; `swl -> itm:trybinoculars ->  I'm going to try binoculars at the next game. -> sem ;;
 `sentenceList`
 
-By convention we understand (1) to mean desire to 
+|.|
+
+By convention we understand (`ref<itm:tryrestaurant>;) to mean desire to 
 `i.eat at` the restaurant (although there may be 
-special circumstances where (1) could be utterred 
+special circumstances where (`ref<itm:tryrestaurant>;) could be utterred 
 with a completely different sense, e.g. 
 someone visiting numerous restaurants 
 trying to `i.use the bathroom` or `i.apply for 
-a job` or `i.hang a flyer`/).  We hear (2) as 
+a job` or `i.hang a flyer`/).  We hear (`ref<itm:trymountain>;) as 
 intent to `i.climb` the mountain, and would probably 
 be puzzled if it were used in a context other 
-than mountain-climbing.  So (1)-(4) could be rephrased 
+than mountain-climbing.  So 
+(`ref<itm:tryrestaurant>;)-(`ref<itm:trybinoculars>;) could be rephrased 
 with clauses which explicate a specific verb: 
 `i.eat at` this restaurant, `i.climb` that mountain, 
 `i.use` ranked-choice voting, `i.bring` binoculars.  The speaker may choose a 
@@ -1171,12 +1202,14 @@ will argue it actually demonstrates its rationale
 sentence roots) would seem to abstract away 
 type-level specifications established for 
 their ground.  To see what I mean, consider 
-again sentences involving `i.try`/, like 
+again sentences involving `i.try`/, like: |+| 
 
 `sentenceList,
-`sentenceItem; He reluctantly tried Champagne for the first time.
-`sentenceItem; She will try hard to ski during our vacation.
+`sentenceItem; `swl -> --- ->  He reluctantly tried Champagne for the first time. -> sem ;;
+`sentenceItem; `swl -> --- ->  She will try hard to ski during our vacation. -> sem ;;
 `sentenceList`
+
+|.|
 
 As I have discussed, `i.try` is only understood when 
 its direct object is a noun that profiles an 
@@ -1220,12 +1253,14 @@ back to the last two examples).
 
 `p.
 For a simpler example involving similar issues, 
-consider plurals: 
+consider plurals: |+|
 
 `sentenceList,
-`sentenceItem; They have a lot of regional beers on tap, and I've tried most of them.
-`sentenceItem; They have a lot of regional beer on tap, and I order some whenever I come here.
+`sentenceItem; `swl -> --- ->  They have a lot of regional beers on tap, and I've tried most of them. -> syn ;;
+`sentenceItem; `swl -> --- ->  They have a lot of regional beer on tap, and I order some whenever I come here. -> syn ;;
 `sentenceList`
+
+|.|
 
 Beer can be a mass, count singular, or count plural noun; and 
 the modifiers here (`i.regional`/, `i.on tap`/, `i.a lot of`/) 
@@ -1269,9 +1304,9 @@ noun; e.g., a `i.newspaper` can be an object, a place,
 or an institution: 
 
 `sentenceList,
-`sentenceItem; My favorite newspaper is on the table.
-`sentenceItem; My favorite newspaper hired a new editor.
-`sentenceItem; I walk past my favorite newspaper everyday.
+`sentenceItem; `swl -> itm:nptable ->  My favorite newspaper is on the table. -> ont ;;
+`sentenceItem; `swl -> --- ->  My favorite newspaper hired a new editor. -> ont ;;
+`sentenceItem; `swl -> itm:npwalk ->  I walk past my favorite newspaper everyday. -> ont ;;
 `sentenceList`
 
 We have to infer from context which sense of `q.newspaper` applies 
@@ -1280,7 +1315,7 @@ the intended conception profiles the newspaper in the
 `q.Ontological register` as a bouded object, a geospatial 
 location, or a social institution, this classification 
 clearly propagates outward to containing phrases, 
-such as (in (1)-(3)) `i.my favorite newspaper`/.
+such as (in (`ref<itm:nptable>;)-(`ref<itm:npwalk>;)) `i.my favorite newspaper`/.
 `p`
 
 `p.
@@ -1303,7 +1338,7 @@ semantic and `q.Ontological` criteria not syntactically
 marked: nouns of abstract, inanimate, artifactual, 
 sentient, human, sociocultural entities, for example, or 
 perfective vs. imperfective verbs 
-(cf. LangIntro p. 148).  Finally, `i.microtypes` 
+(cf. Langacker `i.intro`/, page 148).  Finally, `i.microtypes` 
 are at the most granular semantic pole, representing 
 individual lexical entries or closely related 
 lexical groups, like `i.apple` or `i.fruit`/. 
@@ -1327,16 +1362,16 @@ then being overlaid semantic specifications.  Moreover,
 locations do not seem to fit the conventional 
 mass/count distinction: they typically function as 
 both a `i.mass` of smaller locations and as 
-`i.singular` integral regions, depending on context: 
+`i.singular` integral regions, depending on context: |+|
 
 `sentenceList,
-`sentenceItem; We are driving across Pennsylvania.
-`sentenceItem; We are driving within Pennsylvania.
-`sentenceItem; We are driving toward Pennsylvania.
-`sentenceItem; We are driving to Pennsylvania.
+`sentenceItem; `swl -> --- ->  We are driving across Pennsylvania. -> syn ;;
+`sentenceItem; `swl -> --- ->  We are driving within Pennsylvania. -> syn ;;
+`sentenceItem; `swl -> --- ->  We are driving toward Pennsylvania. -> syn ;;
+`sentenceItem; `swl -> itm:toPenn ->  We are driving to Pennsylvania. -> syn ;;
 `sentenceList`
 
-Note that (4) implies a path originating `i.outside` 
+Note that (`ref<itm:toPenn>;) implies a path originating `i.outside` 
 the state and terminating `i.inside`/, which thereby 
 has two different portions separated by the location's 
 boundary.
@@ -1348,16 +1383,18 @@ separate macrotype of nouns, on roughly the same
 `q.conceptual granularity` scale as mass, count singular, 
 and count plural.  A counter-argument, however, might 
 note that many nouns become interpreted as locations 
-in the proper context: 
+in the proper context: |+| 
 
 `sentenceList,
-`sentenceItem; I passed a glass of Champagne to John.
-`sentenceItem; I send good wishes to the children.
-`sentenceItem; I hung a leaflet on the whiteboard.
-`sentenceItem; Their best player was traded to the Lakers.
-`sentenceItem; Turning now to hockey, the Leafs just fired their coach.
-`sentenceItem; He will get another job: it's not like they sent him into retirement.
+`sentenceItem; `swl -> --- ->  I passed a glass of Champagne to John. -> ont ;;
+`sentenceItem; `swl -> --- ->  I send good wishes to the children. -> ont ;;
+`sentenceItem; `swl -> --- ->  I hung a leaflet on the whiteboard. -> ont ;;
+`sentenceItem; `swl -> --- ->  Their best player was traded to the Lakers. -> ont ;;
+`sentenceItem; `swl -> --- ->  Turning now to hockey, the Leafs just fired their coach. -> ont ;;
+`sentenceItem; `swl -> --- ->  He will get another job: it's not like they sent him into retirement. -> ont ;;
 `sentenceList`
+
+|.|
  
 This flexibility implies that locative marking is a cue to 
 influence how we semantically construe the `q.location`/, 
@@ -1497,16 +1534,18 @@ to `i.black dogs`/, `i.neighbor's dogs`/,
 `p.
 This last point indicates that we need to track 
 the provenance of type-expressed specifications 
-across a parse graph.  I have in mind cases like: 
+across a parse graph.  I have in mind cases like: |+|
 
 `sentenceList,
-`sentenceItem; My neighbor fired her dog-walker.
-`sentenceItem; My neighbor's dogs fired their dog-walker.
+`sentenceItem; `swl -> itm:dogwalker ->  My neighbor fired her dog-walker. -> ont ;;
+`sentenceItem; `swl -> --- ->  My neighbor's dogs fired their dog-walker. -> ont ;;
 `sentenceList`
 
+|.|
+
 The second reveals a `q.mesotype-level` anomaly 
-(since dogs do not fire people in any not serioously 
-metaphorical sense).  In a Dependency Grammar 
+(since dogs do not fire people in any 
+not-seriously-metaphorical sense).  In a Dependency Grammar 
 wherein `i.dogs` (that specific lexeme) is the 
 subject for `i.fired`/, this specification 
 %-- `i.fire`/'s subject must be a person or people 
@@ -1517,7 +1556,7 @@ and semantic requirements which the dependent
 must obey, on pain of anomaly.  In my proposed 
 representation, however, the actual word-relations 
 formally modeled depend on transform order: 
-so in (1) the noun-phrase `i.neighbor's dogs` 
+so in (`ref<itm:dogwalker>;) the noun-phrase `i.neighbor's dogs` 
 results from the transform `i.neighbor's`/, 
 so that becomes the node connected to `i.fired`/.  
 The dog's-can't-fire anomaly therefore is not 
@@ -1550,7 +1589,4 @@ turn attention toward these more holistic issues
 in the next section.
 `p`
 
-`p.
-
-`p`
 

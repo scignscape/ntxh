@@ -1,4 +1,4 @@
-`section.Linguistic Structure the Accretion of Detail`
+`section.Linguistic Structure and the Accretion of Detail`
 `p.
 As I see it, the primary task for linguistic analysis 
 is to document how linguistic constructions 
@@ -506,7 +506,7 @@ I will now examine the specific formal model introduced
 here.   
 `p`
 
-`subsection.`
+`subsection.Cognitive Transform Grammar`
 `p.
 I will refer to the framework proposed here as 
 `q.Cogitive Transform Grammar`/.  On this theory, 
@@ -613,7 +613,7 @@ sentence such chains will always lead to a single
 `q.root` word.  At this level of description the parse 
 graphs are therefore `i.trees`/.  I will however introduce 
 certain additional structures through which parcse-graphs 
-actually become a form of hypegraph, albeit with acyclic 
+actually become a form of hypergraph, albeit with acyclic 
 directed edges, that is, with a kernel tree-like structure. 
 `p`
 
@@ -755,21 +755,23 @@ seems somehow privileged, since it is omnipresent;
 whereas verb-to-object, and still more so 
 verb-to-direct-object, is less universal.  Most 
 transitive verbs also have intransitive versions; 
-and ditransitive verbs also transitive ones: 
+and ditransitive verbs also transitive ones: |+|
 
 `sentenceList,
-`es; I walked earlier this morning.
-`es; I walked for two hours.
-`es; I walked the dogs earlier this morning.
-`es; I brought wine to the party.
-`es; John brought Champagne!
-`es; I brought Champagne for John.
-`es; I gave Champagne to John.
-`es; I wrote a check for the charity.
-`es; I wrote a check to the charity.
-`es; I gave a check to the charity.
-`es; I gave a donation to the charity.
+`sentenceItem; `swl -> --- ->  I walked earlier this morning. -> syn ;;
+`sentenceItem; `swl -> --- ->  I walked for two hours. -> syn ;;
+`sentenceItem; `swl -> --- ->  I walked the dogs earlier this morning. -> syn ;;
+`sentenceItem; `swl -> --- ->  I brought wine to the party. -> syn ;;
+`sentenceItem; `swl -> --- ->  John brought Champagne! -> syn ;;
+`sentenceItem; `swl -> --- ->  I brought Champagne for John. -> syn ;;
+`sentenceItem; `swl -> --- ->  I gave Champagne to John. -> syn ;;
+`sentenceItem; `swl -> --- ->  I wrote a check for the charity. -> syn ;;
+`sentenceItem; `swl -> --- ->  I wrote a check to the charity. -> syn ;;
+`sentenceItem; `swl -> --- ->  I gave a check to the charity. -> syn ;;
+`sentenceItem; `swl -> --- ->  I gave a donation to the charity. -> syn ;;
 `sentenceList`
+
+|.|
 
 The point of these examples is that not every 
 instance of verb-modification should be read as 
@@ -801,38 +803,42 @@ the meaning of `i.walk` to have special status as
 direct or indirect objects.  Where I walked `i.to` may or 
 may not be seen as a direct object, depending on whether 
 `i.walk` is construed as fundamentally describing a 
-goal-directed movement (like `i.visited`/): 
+goal-directed movement (like `i.visited`/): |+|
 
 `sentenceList,
-`es; I walked to the store.
-`es; I visited the store.
-`es; I walked toward the store.
-`es; I walked past the store.
-`es; I walked around the puddle.
+`sentenceItem; `swl -> itm:walkedto ->  I walked to the store. -> cog ;;
+`sentenceItem; `swl -> --- ->  I visited the store. -> cog ;;
+`sentenceItem; `swl -> itm:walkedtoward ->  I walked toward the store. -> cog ;;
+`sentenceItem; `swl -> --- ->  I walked past the store. -> cog ;;
+`sentenceItem; `swl -> itm:walkedaround ->  I walked around the puddle. -> cog ;;
 `sentenceList`
 
+|.|
+
 That is, to what degree does `i.to` in 
-(1) describe a spatial path analogous to 
-(3)-(5) %-- as such basically augmenting 
+(`ref<itm:walkedto>;) describe a spatial path analogous to 
+(`ref<itm:walkedtoward>;)-(`ref<itm:walkedaround>;) %-- as such basically augmenting 
 the information in `i.walk` somewhat 
-tangentially %-- or is (1) a special 
+tangentially %-- or is (`ref<itm:walkedto>;) a special 
 sense of `i.walk` which is more akin 
 to `i.go` or `i.headed toward`/?  
 To preposition `i.to` may be singled out 
 as implying the more goal-oriented 
 interpretation on `i.walk`/, but arguably 
-there are similar examples with other prepositions: 
+there are similar examples with other prepositions: |+|
 
 `sentenceList,
-`es; I'm headed toward the store.
-`es; This bus is rerouted along Queen Street.
-`es; Traffic was diverted around the highway.
-`es; The steps lead through the underpass.
-`es; The boat is heading under the bridge.
-`es; Please make an omelet for the dogs.
-`es; Please make the dogs an omelet.
+sentenceItem; `swl -> --- -> I'm headed toward the store. -> cog ;;
+sentenceItem; `swl -> --- -> This bus is rerouted along Queen Street. -> cog ;;
+sentenceItem; `swl -> --- -> Traffic was diverted around the highway. -> cog ;;
+sentenceItem; `swl -> --- -> The steps lead through the underpass. -> cog ;;
+sentenceItem; `swl -> --- -> The boat is heading under the bridge. -> cog ;;
+sentenceItem; `swl -> --- -> Please make an omelet for the dogs. -> cog ;;
+sentenceItem; `swl -> --- -> Please make the dogs an omelet. -> cog ;;
 `sentenceList`
-  
+
+|.|
+
 It seems as if `i.toward` in `i.headed toward`/, 
 for instance, is a direct object for 
 `i.head` insofar as it does more than add 
@@ -844,15 +850,17 @@ clarification of a direction one heads `i.toward`/.
 `p.
 In some cases, though, movement verbs take two or more 
 spatial or path specifications, only one of which 
-appears to be a direct object: 
+appears to be a direct object: |+|
 
 `sentenceList,
-`es; I'm heading out.
-`es; I'm heading out to the store.
-`es; We have to drive to the entrance.
-`es; We have to drive past the highway.
-`es; We have to drive past the highway to the entrance.
+`sentenceItem; `swl -> --- ->  I'm heading out.  -> cog ;;
+`sentenceItem; `swl -> --- ->  I'm heading out to the store. -> cog ;;
+`sentenceItem; `swl -> --- ->  We have to drive to the entrance. -> cog ;;
+`sentenceItem; `swl -> --- ->  We have to drive past the highway. -> cog ;;
+`sentenceItem; `swl -> --- ->  We have to drive past the highway to the entrance. -> cog ;;
 `sentenceList`
+
+|.|
 
 I would hypothesize that our conceptual expectations 
 call for one somehow primary or `i.reified` goal-specification, 
@@ -879,10 +887,10 @@ potentially numerous `q.satellites` trailing away from
 the verb itself: 
   
 `sentenceList,
-`es; We have to go to the counter by the cashier near 
-the front of the store for a ticket.
-`es; The waiter carved some duck for Grandma at the 
-table with an ornate knife.
+`sentenceItem; `swl -> --- ->  We have to go to the counter by the cashier near 
+the front of the store for a ticket. -> cog ;;
+`sentenceItem; `swl -> --- ->  The waiter carved some duck for Grandma at the 
+table with an ornate knife. -> cog ;;
 `sentenceList`
 
 Only some of these add-ons are feasible as direct or indirect 
@@ -900,15 +908,17 @@ An intransitive verb without `i.some` detail
 may feel incomplete, but this is probably situational; 
 it is hard to imagine senses where an unadorned 
 verb-plus-subject construction would have any 
-conceptual specificity outside of context: 
+conceptual specificity outside of context: |+|
 
 `sentenceList,
-`es; I studied.
-`es; I studied math.
-`es; I studied last night.
-`es; I studied for two hours.
-`es; I studied in a bookstore.
+`sentenceItem; `swl -> itm:studied ->  I studied. -> cog ;;
+`sentenceItem; `swl -> itm:studiedmath ->  I studied math. -> cog ;;
+`sentenceItem; `swl -> --- ->  I studied last night. -> cog ;;
+`sentenceItem; `swl -> --- ->  I studied for two hours. -> cog ;;
+`sentenceItem; `swl -> --- ->  I studied in a bookstore. -> cog ;;
 `sentenceList`
+
+|.|
 
 The first sentence seems incomplete, although it is fine 
 if anchored in surrounding discourse, e.g. after
@@ -923,14 +933,14 @@ a completed process, but rather generically: the
 specific information focuses on temporal or 
 spatial surroundings where the action transpired, 
 more than considerations we might deem `q.internal` 
-to the action.  On the other hand, (2) makes 
+to the action.  On the other hand, (`ref<itm:studiedmath>;) makes 
 no specific reference to where, when, or for how long 
 the studying occurred, but it gives more info 
 about the studying itself.  Given that comparison, 
-(1) seems more like (2) in asserting no parameters 
+(`ref<itm:studied>;) seems more like (`ref<itm:studiedmath>;) in asserting no parameters 
 spatiotemporally contextualizing the action, but 
 this may not be true in the actual dialog where 
-(1) is produced; as a standalone sentence (1) is 
+(`ref<itm:studied>;) is produced; as a standalone sentence (`ref<itm:studied>;) is 
 more likely to be heard as acquiring completeness 
 from prior discourse.  On this kind of 
 evidence, whether or not a verb takes 
@@ -1062,7 +1072,7 @@ emerge from a noun's status as person, place, thing,
 institution, abstraction, and so forth.  
 There are certain actions which we can envision 
 being predicated of a restaurant as `i.subject`/, 
-say: it may `i.open` (or `close`/), 
+say: it may `i.open` (or `i.close`/),
 `i.serve wine`/, `i.take reservations`/, 
 or `i.hire a sommelier` (these senses focus on 
 the restaurant as a social entity more than a building 
@@ -1283,17 +1293,19 @@ accretion of conceptual detail associated with a verb.
 A verb can be conceptually expounded upon in many ways; only a 
 few are syntactically privileged through transitive or 
 ditransitive constructions.  We can cite grammatic evidence 
-for this discrepancy; consider: 
+for this discrepancy; consider: |+|
  
 `sentenceList,
-`sentenceItem; I baked a cake for Grandma.
-`sentenceItem; I baked Grandma a cake. 
-`sentenceItem; I gave a cake to Grandma.
-`sentenceItem; I gave Grandma a cake. 
-`sentenceItem; ?I baked and gave Grandma a cake. 
-`sentenceItem; I baked Grandma a cake and gave it to her last night. 
-`sentenceItem; I baked Grandma a cake with the recipe she gave me. 
+`sentenceItem; `swl -> --- ->  I baked a cake for Grandma. -> syn ;;
+`sentenceItem; `swl -> --- ->  I baked Grandma a cake. -> syn ;; 
+`sentenceItem; `swl -> --- ->  I gave a cake to Grandma. -> syn ;;
+`sentenceItem; `swl -> --- ->  I gave Grandma a cake. -> syn ;;
+`sentenceItem; `swl -> --- ->  I baked and gave Grandma a cake. ->> (?) -> syn ;;  
+`sentenceItem; `swl -> --- ->  I baked Grandma a cake and gave it to her last night. -> syn ;;
+`sentenceItem; `swl -> --- ->  I baked Grandma a cake with the recipe she gave me. -> syn ;;
 `sentenceList`
+
+|.|
 
 The idea `i.Grandma's cake` can be expanded via different
 avenues, but only one of which can serve in any sentence 
@@ -1310,17 +1322,17 @@ to secondary added detail %-- `i.dereified`/,
 so to speak %-- elsewhere: 
 
 `sentenceList,
-`sentenceItem; I'm heading out.
-`sentenceItem; I'm heading out to the store. 
+`sentenceItem; `swl -> --- ->  I'm heading out. -> syn ;;
+`sentenceItem; `swl -> itm:heading ->  I'm heading out to the store. -> syn ;; 
 `sentenceList`
 
 In the first sentence `i.out` reads like a direct 
 object, giving a direction and destination to 
-`i.heading`/; but in (2) it comes across as more 
+`i.heading`/; but in (`ref<itm:heading>;) it comes across as more 
 tangential.  Perhaps `i.out to the store` serves 
 as a compound path-desription; or perhaps 
 `i.heading out` is a compound verb, roughly the 
-same as `i.leaving`/.  In either case for (2), 
+same as `i.leaving`/.  In either case for (`ref<itm:heading>;), 
 `i.out` augments rather than intrinsically specifies 
 the action concept: it either ornaments the path 
 construal by noting that going `i.to the store` 
@@ -1365,7 +1377,7 @@ and underdetermined.
 
 `p.
 To address this, consider scenarios where someone might 
-actually enunciate (2).  Perhaps two people are studying 
+actually enunciate (`ref<itm:heading>;).  Perhaps two people are studying 
 together in a library; the speaker interrupts the other's 
 concentration to explain that she's leaving.  
 Or, vary the situation somewhat: the addressee looks 
@@ -1436,7 +1448,7 @@ for her to tell him, from his point of view.
 `p`
 
 `p.
-This does not mean that anyone saying (2) would necessarily 
+This does not mean that anyone saying (`ref<itm:heading>;) would necessarily 
 be thinking through the possible variations, or even that 
 vocalization has to reflect divergent patterns in conceiving 
 the sentence as it is spoken.  However, such differences 
@@ -1458,7 +1470,7 @@ to this background in slightly competing ways.
 If we agree that how expressions orient to epistemic 
 backgrounds is part of their meaning, then the 
 parse-differences do reflect some measure 
-of ambiguity in (2)'s precise meaning.        
+of ambiguity in (`ref<itm:heading>;)'s precise meaning.        
 `p`
 
 `p.
@@ -1467,18 +1479,21 @@ ambiguity where alternative meanings do not
 specifically conflict with one another.  
 For a similar, more `q.semantic` example, 
 consider the double sense of a word like 
-`i.rice` in, say, a `i.rice pilaf`/: 
+`i.rice` in, say, a `i.rice pilaf`/: |+|
 
 `sentenceList,
-`sentenceItem; The rice has a nice yellow color that comes from turmeric.
-`sentenceItem; Make sure the rice doesn't burn. 
+`sentenceItem; `swl -> riceyellow ->  The rice has a nice yellow color that comes from turmeric. -> amb ;;
+`sentenceItem; `swl -> riceburn ->  Make sure the rice doesn't burn. -> amb ;;
 `sentenceList`
- 
+
+|.|
+
 In these cases we can hear `i.rice` as designating rice 
 itself `i.inside` the pilaf, or else the pilaf as a whole, 
 which also has other ingredients (compare `i.I haven't 
 yet added the rice to the pilaf`/).  Such  
-difference, strictly speaking, propagates to (1) and (2) 
+difference, strictly speaking, propagates to (`ref<riceyellow>;) 
+and (`ref<riceburn>;) 
 %-- we might be concerned about `i.some rice grains` 
 burning, or observe that rice grains are stained by 
 turmeric.  We might also worry about the pilaf 
@@ -1486,17 +1501,17 @@ turmeric.  We might also worry about the pilaf
 whole dish has a yellow color.  In terms of propositional 
 content, however, the competing precise facts are 
 similar or compatible enough that we may place them 
-together: (2) worries about burning both the rice and 
+together: (`ref<riceburn>;) worries about burning both the rice and 
 the whole dish, without the technical possibility of 
 differentiating them (qua referents of `i.the rice`/) 
-being consciously noted by (2)'s speaker.  So (2) 
+being consciously noted by (`ref<riceburn>;)'s speaker.  So (`ref<riceburn>;) 
 may reveal an ambiguity does not really decide which 
-meaning is preferred.  Whoever hears (2) may therefore 
+meaning is preferred.  Whoever hears (`ref<riceburn>;) may therefore 
 conclude that, while a speaker `i.could potentially` 
 intend one meaning expressly, the potential difference 
 might not even be noticed when formulating the 
 sentence.  In the latter case the precise meaning 
-of (2) may be read as a kind of superposition of 
+of (`ref<riceburn>;) may be read as a kind of superposition of 
 the two fine-grained alternatives.    
 `p`
 
@@ -1504,23 +1519,29 @@ the two fine-grained alternatives.
 Another case of `q.partial` ambiguity comes to mind in light 
 of one of Langacker's case studies, which involves the 
 similarities between the following (despite variant constructions 
-on the subordinate clause):
+on the subordinate clause): |+|
 
 `sentenceList,
-`sentenceItem; The effect was discovered by some scientists who were working in this lab.
-`sentenceItem; The effect was discovered by some scientists working in this lab.
-`sentenceItem; The effect was discovered by some scientists in this lab.
+`sentenceItem; `swl -> itm:discovered ->  The effect was discovered by some scientists who were 
+working in this lab. -> amb ;;
+`sentenceItem; `swl -> --- ->  The effect was 
+discovered by some scientists working in this lab. -> amb ;;
+`sentenceItem; `swl -> itm:discoveredlab ->  The effect was discovered by some scientists in this lab. -> amb ;;
 `sentenceList`
+
+|.|
 
 I find that a greater divergence of meaning between the sentences 
 comes out if we substituting something else for `i.effect`/; say, 
-`i.vandalism`/: 
+`i.vandalism`/: |+|
 
 `sentenceList,
-`sentenceItem; The vandalism was discovered by some scientists who were working in this lab.
-`sentenceItem; The vandalism was discovered by some scientists working in this lab.
-`sentenceItem; The vandalism was discovered by some scientists in this lab.
+`sentenceItem; `swl -> itm:vandalism ->  The vandalism was discovered by some scientists who were working in this lab. -> amb ;;
+`sentenceItem; `swl -> itm:vandalismworking ->  The vandalism was discovered by some scientists working in this lab. -> amb ;;
+`sentenceItem; `swl -> itm:vandalismlab ->  The vandalism was discovered by some scientists in this lab. -> amb ;;
 `sentenceList`
+
+|.|
 
 The presumed circumstances are that a specific act of vandalism 
 resulted in a specific observable damage or disruption 
@@ -1533,14 +1554,15 @@ an archaeology lab discovering evidence of ancient vandalism
 from analysis of artifacts.  These variations point to how 
 potential for ambiguity can be broader than we realize, because 
 we tend to instinctively rule out contrary interpretations 
-in context.  The most straightforward reading of ()-(), 
+in context.  The most straightforward reading of 
+(`ref<itm:vandalism>;)-(`ref<itm:vandalismlab>;), 
 though, is that vandalism occurred in the lab and was 
 discovered after the fact.
 `p`
 
 `p.
 We can still conceive two somewhat different scenarios, though: 
-one reading (implied more strongly in (1)) is that 
+one reading (implied more strongly in (`ref<itm:vandalism>;)) is that 
 the discovery happened `i.while` working in the lab.  
 Note that `i.working in the lab` can be evaluated 
 on two different time frames: this could refer to 
@@ -1561,10 +1583,10 @@ show some of this potential double-sense also:
 were the scientists literally `i.in the lab` 
 at the moment they `q.realized` `i.the effect` 
 exists (assuming there was such a single moment)?  
-For ()-() that does not really seem relevant; 
+For (`ref<itm:discovered>;)-(`ref<itm:discoveredlab>;) that does not really seem relevant; 
 i.e., we do not appear to need to resolve that 
 question to make sense of their meaning.  
-For ()-() however the distinction `i.might` be 
+For (`ref<itm:vandalism>;)-(`ref<itm:vandalismlab>;) however the distinction `i.might` be 
 relevant.  If `i.working in the lab` just asserts 
 the discoverers' affiliation, they may have seen 
 damage as soon as they entered the lab (and were 
@@ -1578,23 +1600,26 @@ influence our appraisal of the vandalism's details.
 
 `p.  
 At least, we can imagine someone hearing 
-()-() as finding it relevant to know whether 
+(`ref<itm:vandalism>;)-(`ref<itm:vandalismlab>;) 
+as finding it relevant to know whether 
 the discoverers were concretely 
 `i.working in the lab` at the time they realized 
 the lab was vandalized.  The sentences, then, 
 are ambiguous on that matter; it is plausible 
 that someone would press for clarification if 
-they are told only ()-().  Moreover, I think 
-() makes it slightly more likely that we would 
+they are told only (`ref<itm:vandalism>;)-(`ref<itm:vandalismlab>;).  Moreover, I think 
+(`ref<itm:vandalismlab>;) makes it slightly more likely that we would 
 infer `i.working` as applying to the `i.time` of 
-discovery, because () profiles `i.working in the lab` 
+discovery, because (`ref<itm:vandalismworking>;) profiles `i.working in the lab` 
 as a grounded process, via a finite clauses.  By 
 extablishing somewhat disparate `q.probabilities` 
-in the space of alternative readings, ()-() have, 
+in the space of alternative readings, 
+(`ref<itm:vandalism>;)-(`ref<itm:vandalismlab>;) have, 
 we should recognize, some non-isomorphism in 
 meaning.  It is, however, entirely possible that 
 their addressees would fail to notice or attend 
-to this variation.  In practice, ()-() could 
+to this variation.  In practice, 
+(`ref<itm:vandalism>;)-(`ref<itm:vandalismlab>;) could 
 well be indeterminate in terms of whether the 
 lab-affiliates were specifically `i.working` 
 at the time of discovery, without that imprecision 

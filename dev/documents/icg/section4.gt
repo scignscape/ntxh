@@ -1,4 +1,4 @@
-`section.Hypegraph Grammar and Conceptual Spaces`
+`section.Hypergraph Grammar and Conceptual Spaces`
 `p.
 I think the motivation behind Coecke `i.et. al.`/'s syntactic
 model based on Hypergraph Categories is comparable to 
@@ -88,7 +88,7 @@ formal models as suggestive, summarial views on
 the structural articulation of mental language-understanding 
 processes, rather than as logical distillations of 
 semantic machinery.  The linguistic literature on 
-Hypegraph Categories (and similar mathematically-inspired 
+Hypergraph Categories (and similar mathematically-inspired
 methodology) has a tendency, in my opinion, to 
 gravitate toward relatively context neutral 
 semantic constructions, and ones which do not require 
@@ -422,14 +422,16 @@ can depend simultaneously on the sort of
 relationship it has to a verb `i.and` on the 
 Ontologial regiseter through which the concept is 
 construed.  The newspaper example shows a locative 
-conceptualization in different registers: 
+conceptualization in different registers: |+|
 
 `sentenceList,
-`sentenceItem; His commute started an hour ago at the paper.
-`sentenceItem; Her career started at the paper.
-`sentenceItem; Start your weekend with Sunday's paper.
-`sentenceItem; Socioeconomic research starts with your local paper.
+`sentenceItem; `swl -> --- ->  His commute started an hour ago at the paper. -> ont ;;
+`sentenceItem; `swl -> --- ->  Her career started at the paper. -> ont ;;
+`sentenceItem; `swl -> --- ->  Start your weekend with Sunday's paper. -> ont ;;
+`sentenceItem; `swl -> --- ->  Socioeconomic research starts with your local paper. -> ont ;;
 `sentenceList`
+
+|.|
 
 I'll propose the term `i.meso-form` to capture the 
 ideo of `q.Ontological register` as a factor in 
@@ -498,23 +500,23 @@ the obstacle.
 Taking this last example further, I would say 
 that functional `q.attitudes` inform even 
 the most straightforward-seeming spatialized language.  
-Consider: 
+Consider: |+|
 
 `sentenceList,
-`sentenceItem; I walk past the paper on my way to work.
-`sentenceItem; I walked from the library straight to class.
-`sentenceItem; I spend time around that sculpture every weekend.
-`sentenceItem; I walked through the door, which was unlocked.
-`sentenceItem; It took us an hour to cross the border.
+`sentenceItem; `swl -> itm:walkpast ->  I walk past the paper on my way to work. -> cog ;;
+`sentenceItem; `swl -> itm:walkfrom ->  I walked from the library straight to class. -> cog ;;
+`sentenceItem; `swl -> itm:aroundsculpture ->  I spend time around that sculpture every weekend. -> cog ;;
+`sentenceItem; `swl -> itm:walkedthrough ->  I walked through the door, which was unlocked. -> cog ;;
+`sentenceItem; `swl -> itm:crossborder ->  It took us an hour to cross the border. -> cog ;;
 `sentenceList`
  
-I read (1) as implying that the newspaper's building is in 
+I read (`ref<itm:walkpast>;) as implying that the newspaper's building is in 
 some sense an `q.aide` to the speaker's walking %-- it 
 may help orient her, or perhaps walking the sidewalk 
 beside an office building is more convenient 
 than walking other routes (past stores or transport 
 stops or whatever where the streets are more crowded).  
-In (2) `i.the library` is presented as a spatial origin, 
+In (`ref<itm:walkfrom>;) `i.the library` is presented as a spatial origin, 
 but the larger point seems to be that the speaker 
 transitioned between two activities (e.g., studying at 
 the library and attending class), and the spatial 
@@ -524,28 +526,31 @@ predominates, I think, more than the spatial:
 if the library is fronted by a lion sculpture 
 we would not expect `i.I walked from the sculpture 
 straight to class` even if this describes 
-essentially the same trajectory.  In (3), though, 
+essentially the same trajectory.  In (`ref<itm:aroundsculpture>;), though, 
 we interpret `i.the sculpture` as a site of 
 activity (I'm thinking of those landmarks where people 
 congregate, play music, drink booze disguised in 
-coffee cups, and so forth).  Both (2) and (3) feature 
+coffee cups, and so forth).  Both (`ref<itm:walkfrom>;) 
+and (`ref<itm:aroundsculpture>;) feature 
 their landmarks not only as places but as sites of 
 activity, which lends them a functional (not merely 
-spatial) role.  In (4), the most likely interpretation 
+spatial) role.  In (`ref<itm:walkedthrough>;), the most likely interpretation 
 is that the speaker both `i.opened` and `i.walked through` 
 to door, the latter playing the functional role of 
 abetting access into a building (not just the 
 spatial status of a boundary between inside and outside).  
-Likewise in (5) we understand `i.the border` not 
+Likewise in (`ref<itm:crossborder>;) we understand `i.the border` not 
 just as a geographical divider but as a functional 
 barrier where nations can deny entry, thereby 
 framing the border as a `i.process` since 
-peoples' entry has to be authorized.  See: 
+peoples' entry has to be authorized.  See: |+|
 
 `sentenceList,
-`sentenceItem; The border took an hour.
-`sentenceItem; The border is closed.
+`sentenceItem; `swl -> --- ->  The border took an hour. -> ont ;;
+`sentenceItem; `swl -> --- ->  The border is closed. -> ont ;;
 `sentenceList`
+
+|.|
 
 Neither construction makes sense for `i.border` 
 qua one-dimensional spatial boundary.
@@ -1081,23 +1086,23 @@ prototypical such situation, perhaps, is using
 color to help identify something: 
 
 `sentenceList,
-`sentenceItem; Please hand me the red scarf?
-`sentenceItem; Have you seen my orange coffee mug?
-`sentenceItem; Your keys are on the blue table.
-`sentenceItem; My purse is the black one.
-`sentenceItem; The yellow column shows last year's data.
-`sentenceItem; On the mantle was a purple vase.
+`sentenceItem; `swl -> itm:redscarf ->  Please hand me the red scarf? -> cog ;;
+`sentenceItem; `swl -> itm:orangemug ->  Have you seen my orange coffee mug? -> cog ;;
+`sentenceItem; `swl -> itm:bluetable ->  Your keys are on the blue table. -> cog ;;
+`sentenceItem; `swl -> itm:blackpurse ->  My purse is the black one. -> cog ;;
+`sentenceItem; `swl -> itm:yellowcolumn ->  The yellow column shows last year's data. -> cog ;;
+`sentenceItem; `swl -> itm:purplevase ->  On the mantle was a purple vase. -> cog ;;
 `sentenceList`
 
 Color words have a functional purpose, in these 
 cases, of selecting one object from its 
 peers (assuming there are multiple purses in 
-(4), multiple scarves in (1), and that the 
-speaker has different mugs in (2)).  
+(`ref<itm:blackpurse>;), multiple scarves in (`ref<itm:redscarf>;), and that the 
+speaker has different mugs in (`ref<itm:orangemug>;)).  
 It is also possible that the color designation 
 helps the addressee to pick out a designated 
 object in a cluttered visual field, even if there 
-is only one scarf in (1) or one table in (3).  
+is only one scarf in (`ref<itm:redscarf>;) or one table in (`ref<itm:bluetable>;).  
 In either case, color terms fashion a succinct 
 description of some focal object's surface 
 appearance to help the conversants syncronize 
@@ -1110,10 +1115,10 @@ speaker is emphasizing.
 `p.
 In that vein, there are many different descriptive 
 strategies which a speaker might choose to similar 
-ends: maybe `i.wool scarf` in (1), 
-`i.glass table` in (2), `i.chipped mug` in (3), 
-`i.gift purse` or `i.strapless purse` in (4), 
-`i.middle column` in (5), or `i.antique vase` in (6).
+ends: maybe `i.wool scarf` in (`ref<itm:redscarf>;), 
+`i.glass table` in (`ref<itm:bluetable>;), `i.chipped mug` in (`ref<itm:orangemug>;),
+`i.gift purse` or `i.strapless purse` in (`ref<itm:blackpurse>;), 
+`i.middle column` in (`ref<itm:yellowcolumn>;), or `i.antique vase` in (6).
 These obviously involve concepts distinct 
 from color, because they address fundamentally 
 different facets of the object's composition 
@@ -1121,16 +1126,18 @@ or provenance.  However, even if we construct
 `i.color` conceptually as a device for 
 individuating objects through the visual properties 
 of their surface, there are still a spectrum 
-of color `i.patterns` which play an analogous role: 
+of color `i.patterns` which play an analogous role: |+|
 
 `sentenceList,
-`sentenceItem; Please hand me the plaid scarf?
-`sentenceItem; Have you seen my green-white-orange coffee mug?
-`sentenceItem; Your keys are on the checkerboard table.
-`sentenceItem; My purse is the striped one.
-`sentenceItem; The cross-hatch column shows last year's data.
-`sentenceItem; On the mantle was a spiral-pattern vase.
+`sentenceItem; `swl -> --- ->  Please hand me the plaid scarf? -> cog ;;
+`sentenceItem; `swl -> --- ->  Have you seen my green-white-orange coffee mug? -> cog ;;
+`sentenceItem; `swl -> --- ->  Your keys are on the checkerboard table. -> cog ;;
+`sentenceItem; `swl -> --- ->  My purse is the striped one. -> cog ;;
+`sentenceItem; `swl -> --- ->  The cross-hatch column shows last year's data. -> cog ;;
+`sentenceItem; `swl -> --- ->  On the mantle was a spiral-pattern vase. -> cog ;;
 `sentenceList`
+
+|.|
 
 I am not convinced that there are functionally viable 
 reasons for treating colors as a separate domain 
@@ -1418,7 +1425,7 @@ direction); so `i.hand` is a scope for `i.finger`/,
 which is a scope for `i.knuckle`/, while 
 `i.arm` is a scope for `i.hand`/.  
 
-`cite,
+`quote,
 To some substantial (though undetermined) extent, 
 therefore, concepts form hierarchies of complexity, 
 such that concepts at one level are presupposed by those 
@@ -1426,10 +1433,10 @@ at the next higher level.  To properly characterize a
 particular notion, one must invoke appropriate levels 
 in the relevant hierarchies, i.e. whichever 
 levels make available those concepts by means of which a characterization 
-is easily and naturally achieved.  Foundations I page 148 
-`cite`
+is easily and naturally achieved.  `cite<[page 148]LangackerFoundations>; 
+`quote`
 
-`cite,       
+`quote,
 For a given expression, degree of embedding correlates with degree of foregrounding and directness
 of mental access.  `i.Knuckle`/, for instance, provides direct mental access to FINGER
 (its immediate scope), which in turn evokes HAND, and so on. The conception of a
@@ -1444,8 +1451,8 @@ A noteworthy feature of these compounds is that the component nouns represent
 adjacent levels in a whole-part hierarchy. ... 
 We can therefore speak of a `i.door
 hinge` or a `i.hinge screw`/, but the same entities could hardly be referred to as a 
-`i.*house hinge` or `i.*door screw`/. LangIntro p. 65 
-`cite`
+`i.*house hinge` or `i.*door screw`/. (page 65) 
+`quote`
 
 This theory of `q.meronymic domains` therefore is centered on the 
 thesis of mereological parts providing `q.direct mental access` to 
@@ -1489,9 +1496,9 @@ Since this is a demonstrative example, we should not read
 too much into its simplicity; however, one open question is 
 whether the dimensional predicates are simply properties asserted 
 `i.of` (say) bananas, or are a `i.definition` of bananas.  
-The authors actually say: 
+The authors actually say: |+|
 
-`cite.
+`quote,
 The subsets of points representing tastes are explained as follows using the case of banana
 as an example.  Bananas are not at all salty ... and therefore 
 [a `q.salt` parameter] is set to 0.  Bananas are sweet, 
@@ -1507,8 +1514,10 @@ giving a set of points corresponding to banana taste.
 Note that here, we are using `i.banana` and `i.apple` as 
 shorthand for specifications of convex areas of the conceptual space.  
 These could be written out in longhand as sets of inequalities within
-the colour and taste spaces.  [p. 16, 18]
-`cite`
+the colour and taste spaces.  `cite<[pages 16 and 18]Coecke>;
+`quote`
+
+|.|
 
 The first passage here is based on a `q.taste pyramid` whose extremum 
 points are salt, sweet, sour, bitter.  Thus the taste and color 
@@ -1608,17 +1617,19 @@ occur, but as localized specifications attached to
 specific `i.points` in linguistic constructions.  
 The Coecke `i.et. al.` model appears to render all 
 linguistic transformations as morphisms against a 
-preexisting (presumably very large) stack of domains: 
+preexisting (presumably very large) stack of domains: |+|
 
-`cite.
+`quote,
 Consider again the sentence `sq.`i.chickens cross roads`/`/.
 The nouns `i.chickens` and roads have type $n$ and so are 
 represented in some vector space $N$ of nouns.  
 The transitive verb `i.cross` ... 
 is represented by a vector in the vector space 
 N $\bigotimes$ S $\bigotimes$ N, where S
-is a vector space modelling sentence meaning. (pp. 8-9) 
-`cite`
+is a vector space modelling sentence meaning. (pages 8-9) 
+`quote`
+
+|.|
 
 In other words, this framework assumes `q.a vector space 
 modeling sentence meaning`/, so that each noun and 
@@ -1626,9 +1637,9 @@ verb within the sentences are smaller vector spaces
 which, in combination, aggregate to the specific 
 sentence (a `i.point` in that overall vector space).  
 Their overall picture of how sentence composition 
-relates to `i.meaning` is summarized as:  
+relates to `i.meaning` is summarized as: |+| 
 
-`cite.
+`quote,
 Organize (conceptual) spaces into a category, the
 `textbf.semantics` category,  with the same
 abstract structure as the grammar category [then] 
@@ -1637,7 +1648,9 @@ category in the semantics category
 via a functor preserving the type reduction structure ... 
 This functor maps type reductions in the grammar category onto algorithms for
 composing meanings in the semantics category. 
-`cite`
+`quote`
+
+|.|
 
 Here, `q.type reduction` reflects the idea that a verb transforms 
 a noun to a sentence, so that the pair of a verb and a noun, 
@@ -1776,7 +1789,7 @@ meanings` often amounts, in the context of
 functional networks, simply to assigning a role to a concept: 
 `i.buying bananas` elaborates the `i.buy` schema with 
 `i.bananas` in the role of the commodity.  This genre 
-of word-pairing fits into the hypegraph-categorial framework 
+of word-pairing fits into the hypergraph-categorial framework 
 to the extent that we can assess `q.filling a 
 functional-configurational slot` as a kind of 
 `i.algorithm`/.  Less obvious, however, is whether 
@@ -1946,7 +1959,7 @@ verb (and clause or sentence).
 `p.
 I believe this kind of analysis is the best way to 
 leverage Coecke `i.et. al.`/'s merger of 
-Hypegraph Grammar with Conceptual Space Theory in a 
+Hypergraph Grammar with Conceptual Space Theory in a
 manner that is linguistically realistic 
 %-- in particular, that accommodates how a significant 
 part of linguistic meaning is tied up in 

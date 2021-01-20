@@ -70,15 +70,17 @@ where the propositional content expressed by a sentence
 cloaks or alters what the speaker really means (often 
 in conventionalized ways so that the intended meaning 
 is clearly communicated).  So in a store `i.I would like` 
-is usually understood to mean `i.I intend to buy`/; or in 
+is usually understood to mean `i.I intend to buy`/; or in: |+|
   
 `sentenceList,
-`sentenceItem; I would like to interview Mr. Jones, is he in his office?
-`sentenceItem; I'm sorry, Mr. Jones is not available.
+`sentenceItem; `swl -> itm:interview -> I would like to interview Mr. Jones, is he in his office? -> dia ;;
+`sentenceItem; `swl -> itm:available -> I'm sorry, Mr. Jones is not available. -> dia ;;
 `sentenceList`
 
-(2) does not mean expressly either that Jones `i.is` or `i.is not` 
-in his office, but rather that (1)'s speaker may not interview him.  
+|.|
+
+(`ref<itm:available>;) does not mean expressly either that Jones `i.is` or `i.is not` 
+in his office, but rather that (`ref<itm:interview>;)'s speaker may not interview him.  
 The `q.basic` propositional content of a typical sentence, 
 then, is often packaged in two or three extra layers 
 reflecting speakers' attitudes `i.toward` that state of affairs 
@@ -159,7 +161,7 @@ or mathematics differs from mathematics.
 Langacker (strategically, I suspect) riffs on `i.The cat 
 is on the mat` examples (which have philosophical as well as 
 linguistic provenance) to illustrate discursive 
-context-sensitivity: 
+context-sensitivity: |+|
 
 `quote,
 If someone says `i.The cat is on the mat`/, 
@@ -523,22 +525,26 @@ so underspecified as to be almost theoretically beside
 the point.  In point of fact, while we recognize a 
 minimal `AdjN; pairing as `q.grammatical` in a 
 vague schematic sense, we do not consider most 
-such formulations as communicatively well-founded: 
+such formulations as communicatively well-founded: |+|
  
 `sentenceList,
-`sentenceItem; That's a hungry window overlooking the yard.
-`sentenceItem; That's a porcelain touchdown under video review.
+`sentenceItem; `swl -> --- ->  That's a hungry window overlooking the yard. -> ont ;;
+`sentenceItem; `swl -> --- ->  That's a porcelain touchdown under video review. -> ont ;;
 `sentenceList`
+
+|.|
 
 Superficially the problem with these sentences is 
 semantic, in the sense that other sentences with 
 apparently the same form, but different lexical 
-selection, are fine:
+selection, are fine: |+|
 
 `sentenceList,
-`sentenceItem; That's a stained-glass window overlooking the yard.
-`sentenceItem; That's a porcelain vase under flourescent lights.
+`sentenceItem; `swl -> --- ->  That's a stained-glass window overlooking the yard. -> ont ;;
+`sentenceItem; `swl -> --- ->  That's a porcelain vase under flourescent lights. -> ont ;;
 `sentenceList`
+
+|.|
 
 Of course, just because any random `AdjN; combination is 
 grammatically plausible, we cannot expect that any 
@@ -553,7 +559,7 @@ the individual lexical level.  For instance,
 animal, so in fact there `i.is` a general pattern here: 
 in lieu of `AdjN; we have a productive rule 
 like `HungrySentient;.  Langacker calls this 
-a `i.partial elaboration` (??): the pattern `HungrySentient; 
+a `i.partial elaboration`/: the pattern `HungrySentient;
 is more specific than (and a narrowing of) `AdjN;, but 
 more general than `i.hungry cat`/.  
 So we do not just have the extremely general and underspecified 
@@ -610,13 +616,15 @@ fixed pattern of language which we only passively
 internalize, in the course of our mastering linguistic 
 rules.  For one thing, we readily extend the 
 pattern in more rhetorical or metaphorical ways, 
-on certain occasions: 
+on certain occasions: |+|
 
 `sentenceList,
-`sentenceItem; This team is hungry for a win.
-`sentenceItem; The violent protesters are hungry for revenge.
-`sentenceItem; Most voters are hungry for a change.
+`sentenceItem; `swl -> --- ->  This team is hungry for a win. -> ont ;;
+`sentenceItem; `swl -> --- ->  The violent protesters are hungry for revenge. -> ont ;;
+`sentenceItem; `swl -> --- ->  Most voters are hungry for a change. -> ont ;;
 `sentenceList`
+
+|.|
 
 These somewhat-metaphorical cases are examples of 
 `q.blending`/, where some facets of the core meaning 
@@ -636,23 +644,27 @@ because the blends `q.work`/; they are conceptually coherent.
 Meanwhile, a further complication is the 
 intermixture of different extensions from a core 
 pattern.  We readily extend `i.cat` to encompass 
-representations or fictitious entities: 
+representations or fictitious entities: |+|
 
 `sentenceList,
-`sentenceItem; The porcelain cat is black.
-`sentenceItem; Garfield is a talking cat in a comic strip.
-`sentenceItem; In the musical, all the actors are cats.
+`sentenceItem; `swl -> --- ->  The porcelain cat is black. -> ont ;;
+`sentenceItem; `swl -> --- ->  Garfield is a talking cat in a comic strip. -> ont ;;
+`sentenceItem; `swl -> --- ->  In the musical, all the actors are cats. -> ont ;;
 `sentenceList`
+
+|.|
 
 But we cannot mix this extension with the `i.hungry` 
-construction, in many cases: 
+construction, in many cases: |+|
 
 `sentenceList,
-`sentenceItem; The porcelain cat is hungry.
-`sentenceItem; Garfield ate my breakfact.
-`sentenceItem; All the cats are hungry because the actors don't eat 
-before the show starts.
+`sentenceItem; `swl -> --- ->  The porcelain cat is hungry. -> ont ;;
+`sentenceItem; `swl -> --- ->  Garfield ate my breakfact. -> ont ;;
+`sentenceItem; `swl -> --- ->  All the cats are hungry because the actors don't eat 
+before the show starts. -> ont ;;
 `sentenceList`
+
+|.|
  
 In short, a pattern like `HungrySentient;, 
 or more generally `AdjSentient; %-- 
@@ -687,20 +699,22 @@ pattern is often extended to the `q.non-somatic`
 desires of `i.groups` of people.  This 
 more complex extension is actually more prevalent 
 than more unidimensional blends: I think 
-(1) is more conventional than (2):
+(`ref<itm:fan>;) is more conventional than (`ref<itm:fans>;): |+|
 
 `sentenceList,
-`sentenceItem; The fans are hungry for a goal. 
-`sentenceItem; That fan is hungry for a goal. 
+`sentenceItem; `swl -> itm:fan ->  The fans are hungry for a goal. -> ont ;;
+`sentenceItem; `swl -> itm:fans ->  That fan is hungry for a goal. -> ont ;;
 `sentenceList`
+
+
 
 Also we are `i.less` likely to adopt `i.hungry` for 
 other more `q.somatic` sensations, which involve less 
 metaphorical leap: 
 
 `sentenceList,
-`sentenceItem; I am hungry for some sleep. 
-`sentenceItem; The dogs are hungry for water. 
+`sentenceItem; `swl -> --- ->  I am hungry for some sleep. -> ont ;; 
+`sentenceItem; `swl -> --- ->  The dogs are hungry for water.  -> ont ;;
 `sentenceList`
  
 Perhaps these more mundane constructions are less normal-sounding 
@@ -1219,15 +1233,17 @@ and `ColorObject;.  In many cases, predicate structure
 is conveyed through more elaborate constructions 
 with their own compositional patterns, deviating from 
 a transparent reciprocation of the underlying logical 
-form.  I'll examine two hypothetical sentences as examples: 
+form.  I'll examine two hypothetical sentences as examples: |+|
 
 `sentenceList,
-`sentenceItem; Biden's support among his base is eroding.
-`sentenceItem; Violent clashes between protesters and the 
-police have spilled out into the streets.  
+`sentenceItem; `swl -> bidensupport ->  Biden's support among his base is eroding. -> fig ;;
+`sentenceItem; `swl -> clashes ->  Violent clashes between protesters and the 
+police have spilled out into the streets. -> fig ;;  
 `sentenceList`
 
-One interesting feature of (2) is that `i.the streets` 
+|.|
+
+One interesting feature of (`ref<clashes>;) is that `i.the streets` 
 figures in the second clause as if to contrast 
 with the first clause; but normally we expect 
 `q.protests` to happen `i.in` the streets 
@@ -1236,18 +1252,18 @@ in turn (this is a different situation than, say,
 onto the street`/).  Evidently, then, `i.the streets` 
 has two different conceptual interpretations which are 
 both relevant to how we would probably receive 
-(2) (in the typical kind of context where 
-(2) would be spoken or written).
+(`ref<clashes>;) (in the typical kind of context where 
+(`ref<clashes>;) would be spoken or written).
 `p`
 
 `p.
 If we say `i.violence has spilled out onto the streets`/, 
 the implication is that the violence designated is 
 random and chaotic.  This implies that whoever formulates 
-(2) would be thinking of violent acts like assault or 
+(`ref<clashes>;) would be thinking of violent acts like assault or 
 vandalism (not just confrontational acts directed 
 at authorities in the course of political protest).  
-In (2) we thereby have an 
+In (`ref<clashes>;) we thereby have an 
 implicit contrast figured between two different forms
 of violence; a goal-directed defiance which is 
 specific to aggressive confrontations between protestors 
@@ -1264,10 +1280,10 @@ transitioned to the more chaotic scenario of the latter.
 This reading is context-dependent: we can imagine 
 scenarios where, let's say, protests originated 
 in some government building and over several hours 
-expanded outside.  In that case (2)'s `i.into the streets` 
+expanded outside.  In that case (`ref<clashes>;)'s `i.into the streets` 
 would be more of a literal profiling of a spatial 
 path.  However, I feel that a more likely 
-use case for (2) would involve the trajectory 
+use case for (`ref<clashes>;) would involve the trajectory 
 being more metaphorical: the violence has 
 `q.moved` in a rather abstract space of  
 categorizations or interpretations of the violence; 
@@ -1277,7 +1293,7 @@ behavior.
 `p`
 
 `p.
-Having said that, (2)'s `i.into the streets` formulation 
+Having said that, (`ref<clashes>;)'s `i.into the streets` formulation 
 does also have less metaphorical aspects, because 
 a further implication (in this `q.riotous` scenario) is 
 that the episodes of violence are indeed spatially 
@@ -1302,7 +1318,7 @@ where the events unfold.
 `p`
 
 `p.
-So the comparison between (2)'s two `q.poles of focus`/, 
+So the comparison between (`ref<clashes>;)'s two `q.poles of focus`/, 
 on my reading, is spatial on two levels, one more 
 literal and one more metaphorical.  These two construals 
 are mutually reinforcing.  The speaker is presenting an 
@@ -1314,10 +1330,10 @@ construal comes the `q.spatial patterns` of riotous
 incidents, so that the spatial figuration in 
 `i.spill out into the streets` in part denotes 
 the pattern of observations which compels the speaker 
-to frame the situation as (2) implies.  Meanwhile, 
-(2) also intimates that the more chaotic 
+to frame the situation as (`ref<clashes>;) implies.  Meanwhile, 
+(`ref<clashes>;) also intimates that the more chaotic 
 situation is both a consequence of and a deviation 
-from the state denoted at (2)'s opening.  
+from the state denoted at (`ref<clashes>;)'s opening.  
 To use the phrase `i.spill out` implies some 
 breach in a container, some outward-aiming force 
 that disrupts a more structured scenario into a 
@@ -1337,12 +1353,12 @@ ordered script %-- acted as a container,
 which constrained the protesters both 
 spatially and behaviorally.  The phrase 
 `i.spilled out` implies that the restraints 
-connoted in the first part of (2) are broken, 
+connoted in the first part of (`ref<clashes>;) are broken, 
 and that this in turn is manifest both 
 spatially and behaviorally: the violent incidents 
 are more spatially scattered and also, we infer, 
 less regulated by the conventions of `q.protesting`/.  
-The manner in which (2) is constructed 
+The manner in which (`ref<clashes>;) is constructed 
 implies that the speaker is asserting some psychological 
 shift on the part of the protesters %-- that 
 they have ceased to deem themselves bound to 
@@ -1390,15 +1406,15 @@ a description: constructional choices indicate
 the speaker's `i.interpretation` and 
 `i.assessment` of the situation.  In many aspects 
 we can highlight the aspects in which this 
-framing is `i.epistemic`/: for (2) I have noted 
+framing is `i.epistemic`/: for (`ref<clashes>;) I have noted 
 rhetorical dimensions which connotes 
-warrants for (2)'s perspective (observations 
+warrants for (`ref<clashes>;)'s perspective (observations 
 of a spatial patterns suggesting that the 
 protests are becoming more disorganized) and 
 causal interpretations (the protesters' psychological 
 shift, the authorities losing legitimacy).  
 We tend (inevitably, I would argue) to read 
-sentences like (2) as not merely describing 
+sentences like (`ref<clashes>;) as not merely describing 
 some situation %-- not merely presenting 
 their propositional content as descriptive 
 assemblies %-- but as packaging up an 
@@ -1412,7 +1428,7 @@ warrants for, and so forth.
 `p`
 
 `p.
-One facet of this connotation, in (2), lies with 
+One facet of this connotation, in (`ref<clashes>;), lies with 
 `i.spilled out` being a metaphor; but we should 
 not get sidetracked into interpreting the 
 operation of this construction being 
@@ -1421,12 +1437,12 @@ we should read the metaphor as conveniently
 packaging multiple epistemic dimensions.  
 The spatial aspect of `i.spilled out` helps 
 signify the `q.evidential` dimension to 
-(2)'s reasoning, since a spatial pattern of 
-observables constitutes one of (2)'s warrants.  
+(`ref<clashes>;)'s reasoning, since a spatial pattern of 
+observables constitutes one of (`ref<clashes>;)'s warrants.  
 The force-dynamic aspect helps profile 
 the apparent construal of a psychological 
 shift (among the protesters), which 
-supports (2)'s apparent causal interpretation 
+supports (`ref<clashes>;)'s apparent causal interpretation 
 (that the sentence describes a non-ordinary 
 level of violence caused by earlier protests 
 along with some breakdown in the conventions 
@@ -1475,7 +1491,7 @@ either (more or less metaphoric) alternatives.
 `p`
 
 `p.
-I'll illustrate this thesis with (1) from earlier: 
+I'll illustrate this thesis with (`ref<bidensupport>;) from earlier: 
 the metaphor of `i.Biden's base eroding` 
 encompasses a range of spatial, temporal, and 
 force-dynamic facets.  First, erosion is 
@@ -1505,16 +1521,16 @@ Presumably, we would not speak of a politician's
 `i.eroding support` if her were, say, to 
 show poorly in polls `i.in one location`/.  
 Someone following Biden's campaign would be 
-more likely to assert (1) in the context of 
+more likely to assert (`ref<bidensupport>;) in the context of 
 recurring observations wherein someone who 
 has supported %-- or who is of a demographic or 
 ideological profile that would often support 
 %-- Biden in the past fails to do so in the present.  
-So (1) carries an implicit provenance where it 
+So (`ref<bidensupport>;) carries an implicit provenance where it 
 would be supported by multiple concrete 
 examples, which we seem to assume to be spatially 
 diverse both literally and figuratively.  
-We expect (1) to be chosen as a description of 
+We expect (`ref<bidensupport>;) to be chosen as a description of 
 the current stare of Biden's campaign by someone 
 who has encountered evidence of Biden losing 
 support in numerous different places %-- 
@@ -1526,35 +1542,35 @@ spatial figuration, more metaphorically).
 `p` 
 
 `p.
-So the spatial dimension of the metaphor in (1) 
+So the spatial dimension of the metaphor in (`ref<bidensupport>;) 
 implies a spatial extent of warrants %-- 
 rather similar to the epistemic pattern I 
-argued for in (2).  Finally, the `i.temporal` 
+argued for in (`ref<clashes>;).  Finally, the `i.temporal` 
 facet implies a pattern which the speaker might 
 intend to signify both descriptively and 
 epistemically.  The `i.erosion` image implies that 
 the process described %-- Biden losing support 
 %-- has been gradual and continuous.  We expect 
-(1) to mean that he did not lose a lot of support all 
+(`ref<bidensupport>;) to mean that he did not lose a lot of support all 
 at once (due to some scandal, say). Plus, we 
-may well hear (1) as inferring that the speaker 
+may well hear (`ref<bidensupport>;) as inferring that the speaker 
 has become increasingly `i.aware` of the trend.  
-Of course, (1) does not imply that the speaker 
+Of course, (`ref<bidensupport>;) does not imply that the speaker 
 mistakenly estimated Biden's level of support, so 
 that his level of support has not changed.  
-But (1) `i.does` imply that Biden has been losing 
+But (`ref<bidensupport>;) `i.does` imply that Biden has been losing 
 support on roughly the same time span as the 
 speaker's process of becoming aware of 
 this fact (we assume the speaker talking as 
 an expert or observer of politics).  That is, 
-(1) connotes both a speaker-relative and an 
+(`ref<bidensupport>;) connotes both a speaker-relative and an 
 objective assessment of the temporal parameters 
 wherein the state-change implied by `i.eroding` 
 occurred.     
 `p`
 
 `p.
-In sum, (1) via its phrasing compiles numerous 
+In sum, (`ref<bidensupport>;) via its phrasing compiles numerous 
 implications appertaining to the speaker's 
 rational stance `visavis; the process described.  
 A less metaphoric construction could well 
@@ -1585,19 +1601,19 @@ the dynamic in how we, on my account, `i.gravitate` toward
 metaphor seems to clearly cut against the paradigmatic 
 commitments of an `q.objective` semantics cleanly 
 isolated from pragmatics.  To see this, note that 
-metaphoric patterns in (1) and (2), I have 
+metaphoric patterns in (`ref<bidensupport>;) and (`ref<clashes>;), I have 
 claimed, are effective in significant part because they 
 unify a signification of multiple epistemic attitudes 
 to their propositional content, as well as the content 
-itself.  So (1) signifies that Biden has less support 
+itself.  So (`ref<bidensupport>;) signifies that Biden has less support 
 than he once did %-- meaning that the percentage of 
 voters supporting him compared to other candidates 
-has decreased %-- and (2) signifies that there 
+has decreased %-- and (`ref<clashes>;) signifies that there 
 has been an increase in violent or riotous 
 incidents, apparently connected to some protests 
 (e.g., some of the protesters are also perpetrators).  
 These are accounts of the basic propositional content 
-laid out by (1) and (2); but they are not the 
+laid out by (`ref<bidensupport>;) and (`ref<clashes>;); but they are not the 
 full `i.meaning` of the sentences, because in their 
 natural context I think we would surely hear them 
 as adding epistemic, speaker-relative details: 
@@ -1608,7 +1624,7 @@ can be imposed.
 
 `p.
 If we now say that the `i.propositional content` 
-signified via (1) and (2) expands beyond 
+signified via (`ref<bidensupport>;) and (`ref<clashes>;) expands beyond 
 just the observed affairs, to include 
 the speaker's assessments and interpretations, 
 then we have to account for `i.how` this 
@@ -1634,7 +1650,7 @@ reflects multifaceted epistemic parameters
 along with base-level descriptions.  
 Merely asserting that a given sentence 
 %-- even in a relatively complex discursive 
-register, as in (1) and (2), which are 
+register, as in (`ref<bidensupport>;) and (`ref<clashes>;), which are 
 expected in relatively formal journalistic 
 or academic speech rather than in casual 
 dialog %-- has a particular associated 
@@ -1833,9 +1849,5 @@ linguistic structure %-- in affect a meta-grammar,
 a theory of the rational forces which 
 become manifest as grammatical intuitions and, 
 through their aegis, syntactic rules.
-`p`
-
-`p.
-
 `p`
 

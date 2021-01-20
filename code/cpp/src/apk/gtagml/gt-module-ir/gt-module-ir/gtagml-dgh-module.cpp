@@ -227,7 +227,7 @@ void GTagML_DGH_Module::process_gtagml_file(QString path,
 
 
 void GTagML_DGH_Module::read_discourse_markup(GTagML_Project_Info& gpi,
-  QString path, QString code)
+  QString mode, QString path, QString code)
 {
  s4 index = code.indexOf(':');
  if(index == -1)
@@ -251,8 +251,6 @@ void GTagML_DGH_Module::read_discourse_markup(GTagML_Project_Info& gpi,
  GH_Block_Base* gbb = gob->get_current_mandatory_argument_block();
 
  QString text = gbb->get_latex_out({start, end});
-
- QString tex1t = text;
 
 }
 
@@ -299,9 +297,15 @@ void GTagML_DGH_Module::check_post_processing_codes(GTagML_Project_Info& gpi)
 
    QString cat = code.mid(0, index);
    QString arg = code.mid(index + 1);
-   if(cat == "discourse-markup")
+   if(cat.startsWith("discourse-markup"))
    {
-    read_discourse_markup(gpi, path, arg);
+    s4 index = cat.indexOf('=');
+    if(index == -1)
+      continue;
+
+    QString mode = cat.mid(index + 1);
+
+    read_discourse_markup(gpi, mode, path, arg);
     // only category of post-processing used here ...
    }
   }

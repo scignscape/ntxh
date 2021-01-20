@@ -78,7 +78,21 @@ WHEN_(pre)
 }
 _WHEN_(post)
 {
- check_discourse_markup(qts, node);
+ check_discourse_markup(qts, node, "multiline");
+ cb->flags.post_fallthrough = true;
+}
+_WHEN
+_GTagML_CALLBACK
+
+
+GTAGML_CALLBACK_(discourse-markup-inline)
+WHEN_(pre)
+{
+ cb->flags.pre_fallthrough = true;
+}
+_WHEN_(post)
+{
+ check_discourse_markup(qts, node, "inline");
  cb->flags.post_fallthrough = true;
 }
 _WHEN

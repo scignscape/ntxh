@@ -44,12 +44,14 @@ is identified as connecting
 `i.swam` to both `i.night` and `i.pool` in 
 `i.Last night, I swam in the pool`/; and 
 `i.chased` to `i.dog` in `i.the cat was chased by the dog`/.  
-Or, describing the `q.nominal subject` relation: 
+Or, describing the `q.nominal subject` relation: |+|
 
 `quote,
 A nominal subject ... is [normally] the syntactic subject and the proto-agent of a clause.  
 The `textbf.nsubj` relation is also used for the nominal subject of a passive verb or verb group, even though the subject is then not typically the proto-agent argument due to valency changing operations. For languages that have a grammaticalized passive transformation, it is strongly recommended to use the subtype `textbf.nsubj:pass` in such cases.
 `quote`
+
+|.|
 
 The `i.nsubj` is not just a verb-to-subject relation, because it 
 also connects `i.red` to `i.car` in `i.The car is red`/; 
@@ -273,14 +275,16 @@ sense are really alternate patterns
 for complex constructions.   
 In American English we have idiomatic but 
 essentially standardized parlance even at a core 
-linguistic level, such as pronouns: 
+linguistic level, such as pronouns: |+| 
 
 `sentenceList,
-`sentenceItem; How are we doing today?
-`sentenceItem; Your new car is waiting!
-`sentenceItem; You guys coming with?
-`sentenceItem; You all gonna love this!
-`sentenceList`   
+`sentenceItem; `swl -> --- ->  How are we doing today? -> syn ;;
+`sentenceItem; `swl -> --- ->  Your new car is waiting! -> syn ;;
+`sentenceItem; `swl -> itm:comewith ->  You guys coming with? -> syn ;;
+`sentenceItem; `swl -> --- ->  You all gonna love this! -> syn ;;
+`sentenceList`
+
+|.|  
 
 We recognize `i.you all` (or `i.y'all`/) as a de facto 
 second-person plural, but only informally %-- and 
@@ -288,7 +292,7 @@ particularly in contexts where one speaker addresses
 a large number of listeners, such as onstage to an audience.  
 We hear `i.you all` also in more intimate settings, but in a 
 small group its territory is oftened covered instead by 
-`i.you guys` (even when the guys are gals); () also 
+`i.you guys` (even when the guys are gals); (`ref<itm:comewith>;) also 
 (I'll mention parenthetically) has the trendy intransitive form  
 `i.come with`/.`footnote.
 For completeness, I sketch an analysis of why `i.that` 
@@ -529,26 +533,29 @@ I will return to those semantic issues below, but
 first consider the syntactic motivation for 
 plausibly differentiating object-as-proposition 
 from normal verb `q.macro-typing`/.  Consider 
-examples like: 
+examples like: |+|
 
 `sentenceList,
-`sentenceItem; I expect them to win.
-`sentenceItem; I expect for them to win.
-`sentenceItem; I expect that they will win.
-`sentenceItem; I expect that of them.
-`sentenceItem; I ask alot of them.
-`sentenceItem; I ask that of you.
-`sentenceItem; I ask that to you.
-`sentenceItem; I ask you that.
-`sentenceItem; I ask for you to be in good health.
-`sentenceItem; I ask you to stay in good health.
+`sentenceItem; `swl -> --- ->  I expect them to win. -> syn ;;
+`sentenceItem; `swl -> --- ->  I expect for them to win. -> syn ;;
+`sentenceItem; `swl -> --- ->  I expect that they will win. -> syn ;;
+`sentenceItem; `swl -> --- ->  I expect that of them. -> syn ;;
+`sentenceItem; `swl -> --- ->  I ask alot of them. -> syn ;;
+`sentenceItem; `swl -> --- ->  I ask that of you. -> syn ;;
+`sentenceItem; `swl -> --- ->  I ask that to you. -> syn ;;
+`sentenceItem; `swl -> --- ->  I ask you that. -> syn ;;
+`sentenceItem; `swl -> itm:goodhealth ->  I ask for you to be in good health. -> syn ;;
+`sentenceItem; `swl -> itm:stayhealth ->  I ask you to stay in good health. -> syn ;;
 `sentenceList`
+
+|.|
 
 Note we cannot comfortably say `i.I expect to win of them` 
 or `i.I ask you to be in good health` %-- the latter is 
-more awkward than (), because () recognizes a certain agency 
+more awkward than (`ref<itm:goodhealth>;); 
+(`ref<itm:stayhealth>;) recognizes a certain agency 
 in `i.you` which befits the relevant sense of `i.ask`/.  
-Conversely, () is more poetic or ritualistic, `q.asking` fate or 
+Conversely, (`ref<itm:goodhealth>;) is more poetic or ritualistic, `q.asking` fate or 
 karma, etc., play an agent-like role.  So one point here is 
 that the indirect object paired with `i.ask`/, as in 
 `i.ask you`/, appears to compress either `i.ask to you` 
@@ -602,7 +609,7 @@ indicator for this formulation is that `i.them` needs the morphology
 of a direct object.  One counter-argument, though, is that 
 such a ditransitive model elides the semantic contrast between 
 `i.expect` and `i.ask`/, or, say, `i.want`/.`footnote.
-Langacker, see LangIntro pp. 432-433, analyzes 
+Langacker, see pages 432-433, analyzes 
 `i.expect` as taking complements which may be nominals, 
 clauses, or both, as in 
 `i.We expect this movie to make a lot of money`/.  
@@ -635,22 +642,22 @@ vehicles for interpreting sentences.
 
 `p.
 Near the beginning of this paper I mentioned the 
-contrast in acceptability between () 
+contrast in acceptability between (`ref<itm:graduate>;) 
 `i.That she will graduate in June is expected by her mother`/, 
-() `i.That they would encounter problems was expected by everybody`/, 
-and ()
+(`ref<itm:everybody>;) `i.That they would encounter problems was expected by everybody`/, 
+and (`ref<itm:thatpainters>;)
 `i.That they will finish on time is expected by the painters`/.
 Despite similar constructions, there are some variations 
-between these examples.  One point is that in () and (), 
-the subject of the subordinate clause is also the 
+between these examples.  One point is that in (`ref<itm:everybody>;) 
+and (`ref<itm:thatpainters>;), the subject of the subordinate clause is also the 
 subject of the main clause (`i.everybody` is who would 
-encounter problems; `i.the painers` are who will 
-finish on time).  Also, () and () have a `i.future tense` 
+encounter problems; `i.the painters` are who will 
+finish on time).  Also, (`ref<itm:graduate>;) and (`ref<itm:thatpainters>;) have a `i.future tense` 
 subordinate clause with a `i.present` main clause; 
-by contrast, in () both clauses are in the past.  
+by contrast, in (`ref<itm:everybody>;) both clauses are in the past.  
 The most anomalous sentence here, in my mind, is 
-(), and perhaps these two points offer an explanation: 
-in () both clauses have the same subject `i.and` the 
+(`ref<itm:thatpainters>;), and perhaps these two points offer an explanation: 
+in (`ref<itm:thatpainters>;) both clauses have the same subject `i.and` the 
 main clause desribes a `i.present` mental act 
 relating to a `i.future` condition.  In this 
 situation, it seems as if the two conceptualizations 
@@ -667,13 +674,13 @@ etc.).  In effect, in this one case
 by typical conceptual organization, to be two facets 
 of an overall ideation, which perhaps is a 
 `i.semantic` reason why the architecture 
-of () %-- separating these conceptual 
+of (`ref<itm:thatpainters>;) %-- separating these conceptual 
 processes into two clauses %-- feels strained.
 `p`
 
 `p.
 As I pointed out earlier, though, in the context 
-of a sketchier reading, anomalies %-- as in () 
+of a sketchier reading, anomalies %-- as in (`ref<itm:thatpainters>;) 
 %-- may only be apparent given a holistic 
 integration of all sentence elements, in light of 
 their unified conceptual picture.  We should not, 
@@ -1290,10 +1297,10 @@ they produce actual propositions (finite clauses)
 or else nouns or adjectives.  Compare: 
 
 `sentenceList,
-`sentenceItem; She failed to hold the groceries.
-`sentenceItem; She asked me to hold the groceries.
-`sentenceItem; She asked that I hold the groceries.
-`sentenceItem; Where is a bag to hold the groceries?
+`sentenceItem; `swl -> --- ->  She failed to hold the groceries. -> syn ;;
+`sentenceItem; `swl -> --- ->  She asked me to hold the groceries. -> syn ;;
+`sentenceItem; `swl -> --- ->  She asked that I hold the groceries. -> syn ;;
+`sentenceItem; `swl -> --- ->  Where is a bag to hold the groceries? -> syn ;;
 `sentenceList`
 
 Here I read `i.(to/that I) hold the groceries` as a noun 
@@ -1561,14 +1568,16 @@ divergence which is nonconsequential at a simpler
 level.  Consider, for example, that 
 `i.authorize` (or `i.encourage`/, `i.`/, etc.) 
 seems to accept a reading like 
-`i.expect` or like `i.persuade`/: 
+`i.expect` or like `i.persuade`/: |+|
 
 `sentenceList,
-`sentenceItem; I authorized him to attend the conference, 
-and I'm expecting him to give a lecture.
-`sentenceItem; I authorized him to attend the conference, 
-and I'm persuading him to give a lecture.
+`sentenceItem; `swl -> --- ->  I authorized him to attend the conference, 
+and I'm expecting him to give a lecture. -> sem ;;
+`sentenceItem; `swl -> --- ->  I authorized him to attend the conference, 
+and I'm persuading him to give a lecture. -> sem ;;
 `sentenceList`
+
+|.|
 
 If `i.him to come` is not decidedly `i.either` a single 
 direct object clause `i.or` a direct object pronoun with 
@@ -1577,26 +1586,28 @@ the proper model simply should allow a sentence to
 be intermediate between disparate parses if the 
 produce equivalent meanings.  But surrounding context 
 may intervene and push one structure as the more 
-likely reading, as in: 
+likely reading, as in: |+|
 
 `sentenceList,
-`sentenceItem; I authorized him to attend the conference, 
-but I was overruled.
-`sentenceItem; I authorized him to attend the conference, 
-but he refused.
-`sentenceItem; I authorized him to attend the conference, 
-but our school said he is just too controversial.
-`sentenceItem; I authorized him to attend the conference, 
-but his school said he is just too busy.
+`sentenceItem; `swl -> --- ->  I authorized him to attend the conference, 
+but I was overruled. -> sem ;;
+`sentenceItem; `swl -> itm:conferencerefused ->  I authorized him to attend the conference, 
+but he refused. -> sem ;;
+`sentenceItem; `swl -> --- ->  I authorized him to attend the conference, 
+but our school said he is just too controversial. -> sem ;;
+`sentenceItem; `swl -> itm:conferencebusy ->  I authorized him to attend the conference, 
+but his school said he is just too busy. -> sem ;;
 `sentenceList`
+
+|.|
       
 The first and third examples imply that an 
 invitation was extended but then revoked, 
 so that the cause of his non-attendance was 
 unrelated to `i.his` actions.  Conversely, 
 the other two make `i.him` the agent of a decision 
-not to come (explicitly in (), and by implication 
-in ()).  The latter scenario is more in keeping 
+not to come (explicitly in (`ref<itm:conferencerefused>;), and by implication 
+in (`ref<itm:conferencebusy>;)).  The latter scenario is more in keeping 
 with reading `i.authorize`/'s direct object
 as just `i.him`/, which then becomes (or at 
 least whose referent becomes) subject 
@@ -1669,7 +1680,7 @@ sentences' meaning in the first place.
 This perspective may possibly reconcile 
 Cognitive Grammar with other, more formalistic 
 paradigms.  To consider one example, the 
-`q.Hypegraph`/Conceptual-Space-oriented model 
+`q.Hypergraph`//Conceptual-Space-oriented model
 I discussed earlier construes syntax 
 %-- speaking at a very general level %-- as 
 dictating the order and parameters of 
@@ -1683,7 +1694,7 @@ underlying Conceptual Space theory in many
 ways.  But leaving such detailed theory 
 aside, the idea of retroactive convergence on 
 one (of several) parses translates, in this 
-`q.Hypegraph/Conceptual-Space` model, to an 
+`q.Hypergraph/Conceptual-Space` model, to an
 ovearching metatheory wherein sentences' 
 surface form often permits several different 
 schema of conceptual space synthesis.  
@@ -1700,8 +1711,4 @@ the meaning, intention, and propositional
 content of the sentence itself.
 `p`
 
-
-`p.
-
-`p`
 

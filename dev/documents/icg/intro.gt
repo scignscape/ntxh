@@ -149,12 +149,15 @@ suggests a not-identical architectonic of visual foci
 than `i.I walked toward the front of the house where 
 two dogs were barking`/.  Similarly, Langacker 
 contrasts the `q.direction of mental scanning` in 
-(his example 23, p. 82): 
+(his example 23, p. 82): |+|
 
 `sentenceList,
-`sentenceItem; The hill gently rises from the bank of the river.
-`sentenceItem; The hill gently falls to the bank of the river.
+`sentenceItem; `swl -> itm:hillrises -> The hill gently rises from the bank of the river. -> cog
+`sentenceItem; `swl -> itm:hillfalls -> The hill gently falls to the bank of the river. 
+-> cog
 `sentenceList`
+
+|.|
 
 In brief, the philosophical starting point 
 for linguistic analysis should be that 
@@ -198,28 +201,34 @@ often not black-or-white.  Langacker's
 analyses frequently point to semantically 
 and syntactically similar patterns which 
 nonetheless have different levels of 
-normalcy, as in (LangIntro pp. 430-432):
+normalcy, as in (LangIntro pp. 430-432): |+|
 
 `sentenceList,
-`sentenceItem; Those problems were fully expected by the organizers.
-`sentenceItem; To encounter those problems was fully expected by the organizers.
-`sentenceItem; That she will graduate in June is expected by her mother.
-`sentenceItem; That they would encounter problems was expected by everybody.
-`sentenceItem; The painters expect that they will finish on time.
-`sentenceItem; That they will finish on time is expected by the painters.
+`sentenceItem; `swl -> itm:expected -> Those problems were fully expected by the organizers. -> syn ;;
+`sentenceItem; `swl -> itm:encounter -> To encounter those problems was fully expected by the organizers. -> syn ;;
+`sentenceItem; `swl -> itm:graduate -> That she will graduate in June is expected by her mother. -> syn ;; 
+`sentenceItem; `swl -> itm:everybody -> That they would encounter problems was expected by everybody. -> syn ;;
+`sentenceItem; `swl -> itm:painters -> The painters expect that they will finish on time. -> syn ;;
+`sentenceItem; `swl -> itm:thatpainters -> That they will finish on time is expected by the painters. -> syn ;;
 `sentenceList`
+
+|.|
 
 He gives each of these different levels of acceptability.  
 The most uncomfortable-sounding of these in my mind are  
-(3) and (6); Langacker argues that (4) sounds better than (3) but 
+(`ref<itm:everybody>;) and (`ref<itm:thatpainters>;); 
+Langacker argues that (`ref<itm:graduate>;) sounds better 
+than (`ref<itm:graduate>;) but 
 that the two sentences have similar rationales both 
 in grammatic form (e.g., opening with a subordinate finite clause) 
 and in semantic content (that clause profiling a grounded 
 process which becomes treated as an object of thought by 
 a sentient subject in the main clause).  Nonetheless, 
-(3), (4), and (6) are not equally conventional.  The reasons 
-for this may be subtle (see LangIntro p. 432), and I will 
-discuss this example in more detail below.  The present 
+(`ref<itm:graduate>;), (`ref<itm:everybody>;), 
+and (`ref<itm:thatpainters>;) are not equally conventional.  The reasons 
+for this may be subtle (see `i.Introduction`/, page 432; 
+subsequent references will be to this book unless otherwise 
+noted), and I will discuss this example in more detail below.  The present 
 point, though, is that acceptability criteria can 
 depend on holistic conceptual and situational features 
 of a sentence, rather than on mechanical concordance 
@@ -280,13 +289,12 @@ and expect their hearers or readers to
 understand that they are consciously selecting 
 some words, in lieu of others, to signify that 
 the rejected words are less appropriate for 
-the speaker's mindset: 
+the speaker's mindset (page 473): |+|
 
 `sentenceList,
-`sentenceItem; If we had had confidence the president clearly 
-did not commit a crime, we would have said so.
-`sentenceItem; I think he's rather ... uh ... competitive 
-(see LangIntro p. 473).
+`sentenceItem; `swl -> --- -> If we had had confidence the president clearly 
+did not commit a crime, we would have said so. -> dis ;;
+`sentenceItem; `swl -> --- -> I think he's rather ... uh ... competitive -> dis ;;
 `sentenceList`   
 `p`
 
@@ -306,34 +314,36 @@ estimation) best capturing her epistemic attitudes
 to a desired granularity.  Adjectival phrases, 
 for instance, can be `q.factored out` to infinite or 
 finite clauses, supporting different scope of supplemental 
-detail: 
+detail: |+|
 
 `sentenceList,
-`sentenceItem; I like Ontario wines.
-`sentenceItem; I like red wines from Southern Ontario.
-`sentenceItem; I like dry red wines that come from Southern Ontario 
-wineries using traditional European grape varieties.
+`sentenceItem; `swl -> --- -> I like Ontario wines. -> log ;;
+`sentenceItem; `swl -> --- -> I like red wines from Southern Ontario. -> log ;;
+`sentenceItem; `swl -> --- -> I like dry red wines that come from Southern Ontario wineries using traditional European grape varieties. -> log ;;
 `sentenceList`   
+
+|.|
 
 Faced with a goal of conveying some mental content, linguistic 
 structures act as `q.gears` that can be manipulated to 
 fine-tune how the speakers' mental picture, explanation, 
 sentiment, and intentions are communicated, along with level 
-of detail: 
+of detail: |+|
 
 `sentenceList,
-`sentenceItem; John is embarrased because he spilled some wine on the carpet.
-`sentenceItem; John shouldn't be embarrased about spilling wine on the carpet, 
-because they served us wine in awkward plastic cups.
-`sentenceItem; I'm going to tell John not to be embarrased about spilling wine on the carpet, 
-because they served us wine in these dumb plastic cups.
+`sentenceItem; `swl -> itm:embassared -> John is embarrased because he spilled some wine on the carpet. -> log ;;
+`sentenceItem; `swl -> --- -> John shouldn't be embarrased about spilling wine on the carpet, 
+because they served us wine in awkward plastic cups. -> log ;;
+`sentenceItem;  `swl -> --- -> I'm going to tell John not to be embarrased about spilling wine on the carpet, because they served us wine in these dumb plastic cups. -> log ;;
 `sentenceList`
+
+|.|
 
 The formal patterns identified by dependency or constituency 
 grammars can therefore be seen as fleshing out the 
-structural maxims which `i.allow` constructions to be 
+structural maxims that `i.allow` constructions to be 
 affordances which speakers avail themselves of, 
-metaphorical dials which are `q.turned` so as to vary 
+metaphorical dials that are `q.turned` so as to vary 
 different aspects of construal: level of detail, 
 perceptual organization (e.g., which visual sites are focal 
 and which peripheral), force dynamics, other 
@@ -535,11 +545,11 @@ motion verb along with a path description (his
 example 49, p. 404):
 
 `sentenceList,
-`sentenceItem; He ran through the mall.
-`sentenceItem; He put through the call.
-`sentenceItem; Through the mall he ran.
-`sentenceItem; The call was put through.
-`sentenceItem; He put the call through.
+`sentenceItem; `swl -> --- ->  He ran through the mall. -> cog ;;
+`sentenceItem; `swl -> --- ->  He put through the call. -> cog ;;
+`sentenceItem; `swl -> --- ->  Through the mall he ran. -> cog ;;
+`sentenceItem; `swl -> --- ->  The call was put through. -> cog ;;
+`sentenceItem; `swl -> --- ->  He put the call through. -> cog ;;
 `sentenceList`
 
 Langacker argues that `i.Through the call he put`/, 
@@ -599,8 +609,8 @@ contrast subordinate clauses and non-clausal phrases,
 such as (examples 12-13, pp. 415-6):
 
 `sentenceList,
-`sentenceItem; They began arguing before they even sat down.
-`sentenceItem; They began arguing before dinner.
+`sentenceItem; `swl -> --- ->  They began arguing before they even sat down. -> log ;;
+`sentenceItem; `swl -> --- ->  They began arguing before dinner. -> log ;;
 `sentenceList`
 
 Langacker's theme here is distinguishing `i.subordination` 
@@ -903,7 +913,7 @@ e.g. comparing Langacker's notion of
 `p.
 Assuming, in any case, that we have a specific 
 `q.Conceptual Hypergraph` model (unifying 
-an elaborated Hypegraph Grammar theory with a 
+an elaborated Hypergraph Grammar theory with a
 Conceptual Space semantics), this model can be 
 considered a `i.computational` model insofar 
 as the resulting hypergraph-based data structures 
@@ -976,7 +986,7 @@ to computationally tractable algorithms.
 
 `p.
 In this spirit I will argue, then, that 
-a Conceptual Hypegraph model can be used to 
+a Conceptual Hypergraph model can be used to
 bridge Cognitive Grammar to formal linguistic 
 methodologies %-- not in the sense that 
 Hypergraph Grammar and Conceptual Space theory 
@@ -1066,40 +1076,43 @@ doubted, and so forth.  Often the communicative burden
 lies not in merely designating the concomitant 
 proposition but in expressing a meta-level attitude 
 to that content, so that the speech-act signifies and 
-then elaborates upon it:
+then elaborates upon it: |+|
 
 `sentenceList,
-`sentenceItem; You know that Warren leads Biden in the polls, don't you?
-`sentenceItem; I hope that Warren can appeal to moderates.
-`sentenceItem; I'm sure that Warren will pivot to the center and 
-will poll well with moderates.
+`sentenceItem; `swl -> itm:warrenleads ->  You know that Warren leads Biden in the polls, don't you? -> log ;;
+`sentenceItem; `swl -> itm:warrenmoderates ->  I hope that Warren can appeal to moderates. -> log ;;
+`sentenceItem; `swl -> itm:warrenpivot -> I'm sure that Warren will pivot to the center and will poll well with moderates. -> log ;;
 `sentenceList`
+
+|.|
 
 The proposition that `i.Warren will poll well with moderates` 
 certainly denotes a testable premise %-- it will prove true or 
 false as the polls are in fact taken over time %-- but 
-the point of (3) is not only to assert that claim, but to 
-add interpretive and causative detail: (3) implies 
+the point of (`ref<itm:warrenpivot>;) is not only to assert that claim, but to 
+add interpretive and causative detail: (`ref<itm:warrenpivot>;) implies 
 that Warren will poll well `i.because` she 
 `q.pivots to the center`/.  So we cannot `q.reduce` the 
-meaning of (3) to the propositional content glossed 
+meaning of (`ref<itm:warrenpivot>;) to the propositional content glossed 
 as `i.Warren will poll well with moderates`/; but 
 denoting that content certainly seems to be 
-a prerequisite to defining (3)'s actual meaning. 
+a prerequisite to defining (`ref<itm:warrenpivot>;)'s actual meaning. 
 `p`
 
 `p.
-Of course, (2) and (3) can be seen as packaging 
+Of course, (`ref<itm:warrenmoderates>;) 
+and (`ref<itm:warrenpivot>;) can be seen as packaging 
 one sort of propositional content inside a second, where 
 the `q.outer` content reflects states of affairs pertaining 
-to propositional attitudes.  Notice that (2) and (3) are 
-falsifiable.  Perhaps (2) is spoken by a critic of 
-Warren, who is rooting `i.against` her; but (2) is an 
+to propositional attitudes.  Notice that (`ref<itm:warrenmoderates>;) 
+and (`ref<itm:warrenpivot>;) are 
+falsifiable.  Perhaps (`ref<itm:warrenmoderates>;) is spoken by a critic of 
+Warren, who is rooting `i.against` her; but (`ref<itm:warrenmoderates>;) is an 
 indirect or diplomatic way of calling attention to her problems 
 appealing to moderates (to hope for something implies some 
 doubt whether that will in fact transpire).  Conversely, 
-(3) might be said by a Warren supporter trying to alleviate 
-the concerns of (2).  People can consciously 
+(`ref<itm:warrenpivot>;) might be said by a Warren supporter trying to alleviate 
+the concerns of (`ref<itm:warrenmoderates>;).  People can consciously 
 falsifiable reports of their propositional attitudes, 
 for various rhetorical or manneristic reasons.  
 But this implies that propositional attitudes are 
@@ -1114,20 +1127,20 @@ and a speaker-relative attitudinal report.
 `p.
 Speech-acts, of course, also signal speakers' desires 
 to `i.make` something the case, including via commands 
-and requests.  In the above examples, (1) is 
+and requests.  In the above examples, (`ref<itm:warrenleads>;) is 
 apparently performative in a similar way, since 
-(1) implies that the speaker `q.wants` the addressee 
+(`ref<itm:warrenleads>;) implies that the speaker `q.wants` the addressee 
 to accept the designated claim as true.  The 
 insinuation is that `i.Warren outpolls Biden` 
 (as an asserted fact) `i.and moreover` that 
 this fact should by collectively agreed upon, 
 among the inventory of shared posits that 
-undergird any conversation.  So (1), via some 
+undergird any conversation.  So (`ref<itm:warrenleads>;), via some 
 indirection, expresses a kind of second-order 
-`q.attitudinal` content analogous to (2) and 
-(3) (the speaker's belief that `i.Warren outpolls Biden` 
+`q.attitudinal` content analogous to (`ref<itm:warrenmoderates>;) and 
+(`ref<itm:warrenpivot>;) (the speaker's belief that `i.Warren outpolls Biden` 
 is sufficiently extablished as fact to be 
-collectively `q.enregistered`/), while (1) also 
+collectively `q.enregistered`/), while (`ref<itm:warrenleads>;) also 
 implicates a request (that the other 
 conversants consent to this epistemic entrenchment).    
 `p`
@@ -1144,7 +1157,7 @@ exposition of factual beliefs and assertions.
 Here I am not implying that patterns in 
 propositional structure are directly translated 
 to patterns in language %-- by way of illustration, 
-the usages in (3) are, on reflection, highly metaphorical 
+the usages in (`ref<itm:warrenpivot>;) are, on reflection, highly metaphorical 
 and stylized.  The conventionalized trope of 
 a politician `q.pivoting to the center` employs a 
 spatial construal to reference an empirical state 
@@ -1201,17 +1214,19 @@ higher-level linguistic `q.shape`/) `i.either` in
 expressed propositions `i.or` in cognitive construals.  
 To some degree this may reflect metatheoretic 
 divergence in the basic terms of discussion: 
-is the `i.meaning` of (4) here to be the 
+is the `i.meaning` of (`ref<itm:warrenwin>;) here to be the 
 proposition that Warren will win, or the speaker's 
-belief that Warren will win?
+belief that Warren will win? |+|
 
-`sentenceList.
-`sentenceItem; Warren will probably win the nomination.
-`sentenceItem; Biden's support among the base is eroding.
+`sentenceList,
+`sentenceItem; `swl -> itm:warrenwin ->  Warren will probably win the nomination. -> log ;;
+`sentenceItem; `swl -> itm:bidensupport ->  Biden's support among the base is eroding. -> log ;;
 `sentenceList`
 
+|.|
+
 Likewise, should we understand the more metaphorical 
-phraseology in (5) as a conventionalized idiom that 
+phraseology in (`ref<itm:bidensupport>;) as a conventionalized idiom that 
 has become a kind of entrenched signifier, no longer 
 really operating metaphorically; or rather as  
 projections of metaphorical devices which the speaker 
@@ -1412,26 +1427,30 @@ on the spot (except insofar as some gestures, like pointing
 or the use of fingers to represent number, have an 
 almost-linguistic determinacy).  Conversely, 
 if the two participants both speak English, we might 
-instead have 
+instead have: |+|
 
 `sentenceList,
-`ex; May I have a baguette?
-`ex; Two Euros, please.
+`sentenceItem; `swl -> itm:baguette ->  May I have a baguette? -> dia ;;
+`sentenceItem; `swl -> itm:euros ->  Two Euros, please. -> dia ;;
 `sentenceList`
 
-We can reasonably assume that the shopper in (1) expresses her 
+|.|
+
+We can reasonably assume that the shopper in (`ref<itm:baguette>;) expresses her 
 desire to `i.purchase` bread (she doesn't expect the baker to 
 just hand her the bread as charity, or for her to examine).  
-Likewise we can assume that the baker indicates in (2) that the 
+Likewise we can assume that the baker indicates in (`ref<itm:euros>;) that the 
 bread costs two Euros, so that in the proper discharge of 
 his duty he will give her the bread once she gives him the Euros.  
-We can clearly identify the relevant propositional contents: 
+We can clearly identify the relevant propositional contents: |+|
 
 `sentenceList,
-`ex; I would like to purchace a baguette.
-`ex; If you give you two Euros, I will give you a baguette
+`sentenceItem; `swl -> --- ->  I would like to purchace a baguette.
+`sentenceItem; `swl -> --- ->  If you give me two Euros, I will give you a baguette
 and recognize it as yours.
-`sentenceList` 
+`sentenceList`
+
+|.|
 
 But fully explicating the logical details can seem awkward, 
 even impolite.  In reality, we almost always use language 
@@ -1595,7 +1614,4 @@ in manipulating language is a different disciplinary
 obligation than studying language itself.   
 `p`
 
-`p.
-
-`p`
 

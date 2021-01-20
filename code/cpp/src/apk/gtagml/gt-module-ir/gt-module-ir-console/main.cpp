@@ -32,20 +32,6 @@ int main(int argc, char *argv[])
 
 
 
- mir.read_lines(QString(R"(
-  .; the folder is just outside the archive
-     but it is copied in @/dev/documents/ctg ...
-   ;.
-
-  gt-compile-manuscript  $  :no-first  :info-path
-    :setup-once  :setup-sdi
-      %1/ctg/src/ctg.tex
-    :manuscript  %1/ctg/manuscript
-    :gt-copy-folder  %1/ctg/gt-copy
-   ;.
-   )").arg(DEMO_DOCUMENT_FOLDER) );
-
-
 // mir.read_lines(QString(R"(
 //  .; the folder is just outside the archive
 //     but it is copied in @/dev/documents/ctg ...
@@ -53,11 +39,25 @@ int main(int argc, char *argv[])
 
 //  gt-compile-manuscript  $  :no-first  :info-path
 //    :setup-once  :setup-sdi
-//      %1/icg/src/icg.tex
-//    :manuscript  %1/icg/manuscript
-//    :gt-copy-folder  %1/icg/gt-copy
+//      %1/ctg/src/ctg.tex
+//    :manuscript  %1/ctg/manuscript
+//    :gt-copy-folder  %1/ctg/gt-copy
 //   ;.
 //   )").arg(DEMO_DOCUMENT_FOLDER) );
+
+
+ mir.read_lines(QString(R"(
+  .; the folder is just outside the archive
+     but it is copied in @/dev/documents/ctg ...
+   ;.
+
+  gt-compile-manuscript  $  :no-first  :info-path
+    :setup-once  :setup-sdi
+      %1/icg/src/icg.tex
+    :manuscript  %1/icg/manuscript
+    :gt-copy-folder  %1/icg/gt-copy
+   ;.
+   )").arg(DEMO_DOCUMENT_FOLDER) );
 
 
  mir.run_lines();
