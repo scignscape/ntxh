@@ -1,9 +1,14 @@
 `section.Hypergraph Grammar and Conceptual Spaces`
 `p.
-I think the motivation behind Coecke `i.et. al.`/'s syntactic
-model based on Hypergraph Categories is comparable to 
+This section will focus on one attempt to formalize 
+Conceptual Space Theory as a paradigm for both 
+semantics and syntax, and amenable to computational 
+analysis.  I refer specifically to Coecke `i.et. al.`/'s 
+model based on Hypergraph Categories `cite<InteractingConceptualSpaces>;, 
+whose motivation,
+I would argue, is somewhat comparable to 
 my focus on `i.cognitive transforms`/.  In particular, 
-their Hypergraph structure invokes the Category Theoretic 
+their hypergraph structure invokes the Category Theoretic 
 sense of `i.morphisms`/, which are taken as the 
 foundation of semantics: each word is construed as a 
 morphism in some semantic Category (using this term 
@@ -33,7 +38,7 @@ least if we want to treat words not only as
 linguistic artifacts but as, in some sense, 
 names or triggers for certain intellectual processes.  
 A noun, we might say, enters into the discursive 
-space the `q.output` of a cognitive process 
+space as the `q.output` of a cognitive process 
 %-- an act of recall and situating whereby we 
 consult the word's lexical meaning and figure out 
 how it applies in the current context.  
@@ -70,7 +75,7 @@ is a space of linguistic and conceptual
 are interwoven via input/output connections: 
 the output of one transform is the input to another.  
 The network structure of these connections 
-defines an flow of `q.information` or construal 
+defines a flow of `q.information` or construal 
 between different sentence elements.  
 An example of `q.flow` in this sense would 
 be specification propagation as analyzed in 
@@ -90,7 +95,7 @@ processes, rather than as logical distillations of
 semantic machinery.  The linguistic literature on 
 Hypergraph Categories (and similar mathematically-inspired
 methodology) has a tendency, in my opinion, to 
-gravitate toward relatively context neutral 
+gravitate toward relatively context-neutral 
 semantic constructions, and ones which do not require 
 a lot of interpretive finesse.  One of the aforementioned 
 authors' more expansive examples, for instance, is the 
@@ -129,7 +134,7 @@ are all concepts I vaguely feel are applicable to
 those three %-- instead the adjective seems 
 to stand in for a complete idea, a clause, 
 like `i.the bananas have been fried`/).  With this 
-caveat, however, the Hypergraph model of the 
+caveat, however, the hypergraph model of the 
 structural `q.network` at play in a sentence 
 does seem to remain a valuable paradigm, 
 however we wish to model the concepts 
@@ -203,7 +208,7 @@ such an expanded Conceptual Space Theory.
 
 `subsection.Conceptual Spaces and Cognitive Grammar`
 `p.
-Spaces like color and taste, which have convenient representations 
+Spaces such as color and taste, which have convenient representations 
 in terms of axes and quantities, are recurring examples 
 in Conceptual Space Theory.  However, this theory has 
 been applied to conceptualizations in many domains, 
@@ -235,10 +240,10 @@ magnitude in `i.some` sense: tall/short;
 around/across (see `cite<[page 13]GardenforsPreposition>;),
 ancestor/descendent (or more generally defining the 
 domain of kinship relations by degrees of relation and 
-forward or backward in generation; see 
-What is a domain? Dimensional structures
-versus meronomic relations p. 449).  
-The cumulative effect is a system of 
+forward or backward in generation).`footnote.
+See `q.What is a domain? Dimensional structures
+versus meronomic relations`/, page 449.
+`footnote`  The cumulative effect is a system of 
 analysis which foregrounds comparative 
 boundaries between `q.competing` concepts 
 (in the sense that borderline cases may 
@@ -355,7 +360,7 @@ or the subject of a verb, as in `i.This knife
 costs a hundred dollars`/.  A knife could 
 be `i.locative` (`i.Nervously I fixed my gaze on 
 the knife I was holding`/, 
-`i.A marble rolled on the table toward a someone's knife`/); but only in the generic 
+`i.A marble rolled on the table toward a knife`/); but only in the generic 
 sense that `i.any` physical object could potentially 
 be the endpoint of a spatial path (there is no special 
 conceptualization available via the locative analogous 
@@ -445,7 +450,7 @@ mesotypes thereby share the same order of granuarity;
 mesoforms are conceptual attitudes more specific than 
 the uppermost conception of nouns profiling 
 `q.obects` or verbs profiling `q.processes` 
-(LangIntro p. 104), but coarser than the lexically 
+(Langacker `i.Introduction` page 104), but coarser than the lexically 
 established conceptualizations we learn for 
 each sense of each word.   
 `p`
@@ -478,7 +483,7 @@ a given concept is understood to fill.
 For example, a construction like 
 `i.drive over the bridge` does not merely 
 construe a spatial configuration; we understand 
-`i.the bridge` to allowing crossing over some 
+`i.the bridge` to allow crossing over some 
 obstacle which otherwise could make the 
 described path impossible.  So the foundational 
 belonging of `i.the bridge` in this signification 
@@ -507,16 +512,18 @@ Consider: |+|
 `sentenceItem; `swl -> itm:walkedthrough ->  I walked through the door, which was unlocked. -> cog ;;
 `sentenceItem; `swl -> itm:crossborder ->  It took us an hour to cross the border. -> cog ;;
 `sentenceList`
- 
+
+|.|
+
 I read (`ref<itm:walkpast>;) as implying that the newspaper's building is in 
 some sense an `q.aide` to the speaker's walking %-- it 
 may help orient her, or perhaps walking the sidewalk 
 beside an office building is more convenient 
 than walking other routes (past stores or transport 
-stops or whatever where the streets are more crowded).  
+stops or whatever, where the streets are more crowded).  
 In (`ref<itm:walkfrom>;) `i.the library` is presented as a spatial origin, 
 but the larger point seems to be that the speaker 
-transitioned between two activities (e.g., studying at 
+transitioned between two activities (e.g., studying in 
 the library and attending class), and the spatial 
 movement was the concrete implementation of 
 this functional transition.  The functional framing 
@@ -534,8 +541,8 @@ their landmarks not only as places but as sites of
 activity, which lends them a functional (not merely 
 spatial) role.  In (`ref<itm:walkedthrough>;), the most likely interpretation 
 is that the speaker both `i.opened` and `i.walked through` 
-to door, the latter playing the functional role of 
-abetting access into a building (not just the 
+the door, the latter playing the functional role of 
+affording access into a building (not just the 
 spatial status of a boundary between inside and outside).  
 Likewise in (`ref<itm:crossborder>;) we understand `i.the border` not 
 just as a geographical divider but as a functional 
@@ -567,9 +574,9 @@ will expand on this later in the section.
 
 `subsection.Case-Forms and the Semantics of Verbs`
 `p.
-In his `i.Geometry of Meaning`/, `Gardenfors; 
+In his `i.Geometry of Meaning` `cite<GeometryofMeaning>; `Gardenfors; 
 suggests that Conceptual Space Theory `q.can be seen 
-as combining frames with prototype theory` (p. 49), 
+as combining frames with prototype theory` (page 49), 
 referring to `q.semantic frames` in the sense of 
 Charles Fillmore's case grammar.  `Gardenfors; 
 suggests however that `q.by highlighting the geometric 
@@ -646,7 +653,7 @@ parts scattering, would not be a `i.collapse`
 either; we would say `i.the elevator descended 
 to the lobby`/, not `i.the elevator collapsed 
 on the lobby`/.  Similarly, `i.melt` implies 
-both that something (chocolate, say) is both being 
+that something (chocolate, say) is both being 
 heated and changing shape; melted chocolate is 
 both warm (while it is melted) and liquid.  Relatedly, 
 if I say that liquid in a pan has `i.cooked away` 
@@ -689,7 +696,7 @@ seems stronger than the converse.  Such arguments
 do not refute `Gardenfors;'s point that 
 verbs `i.most often` profile one single dimension 
 of change; but they do reveal this as a tendency 
-rather than a a structural invariant in verb meanings. 
+rather than a structural invariant in verb meanings. 
 `p`
 
 `p.
@@ -724,7 +731,7 @@ gestalt, our automatic activation of
 the relevant situational `q.frame` 
 arguably precludes our cognitively 
 attending to the force-dynamics 
-involved in the curring process.
+involved in the cutting process.
 `p`
 
 `p.
@@ -737,8 +744,8 @@ and not, say, an accusative like
 `i.sharpened/polished/bought the knife`/) 
 and then modifies `i.cut` (adding the detail 
 of the instrument used for the cutting).  
-The `i.with`/`i.knife` relation (along with 
-`i.cut`/`i.knife` for context) is then a 
+The `i.with`//`i.knife` relation (along with 
+`i.cut`//`i.knife` for context) is then a 
 transform which concretizes how the concept 
 `i.knife` fits in to the relevant expression: 
 we have to `q.activate` a proper sense 
@@ -747,13 +754,13 @@ or even location or benefactor,
 etc. (cf. `i.a bug crawling on the knife`/, 
 `i.my gaze was drawn to the knife in her hand`/, 
 `i.a sheath for the knife`/).  In general, a 
-verb's relation to an process participant 
+verb's relation to a process participant 
 triggers a reconceptualization of that 
 participant, depending on its participatory role.       
 `p`
 
 `p.
-`Gardenfors;'s Conceptual Space theory of verbs 
+`Gardenfors;~'s Conceptual Space theory of verbs 
 provides us with a structural framework for 
 modeling the logical (or `q.geometrical`/) 
 parameters of such participatory roles.  I would 
@@ -780,7 +787,7 @@ the opened bottle and drinking from it.
 `p.
 It is possible to open a beer bottle without a 
 normal bottle opener %-- with a hammer, say 
-(using the head, on its side as a pivot).  
+(using the head, on its side, as a pivot).  
 When someone does so, they have not 
 suddenly expanded the lexical network 
 for `i.hammer` such that the sense `i.bottle 
@@ -804,7 +811,7 @@ with the hammer.
 `p`
 
 `p.
-The force/result vector distinct has some relevance 
+The force/result-vector distinction has some relevance 
 here, too, but I find it mostly an extralinguistic 
 relevance.  I need to apply force to the cap 
 to pry it away from the bottle, and the result 
@@ -818,7 +825,7 @@ demands a proper manual gesture executed with the
 right fine-motor maneuvering, so it is an 
 `q.embodied` faculty more than a cognitive one.  
 To be sure, once I succeed %-- and also 
-before I even attempt to gesture %-- the 
+before I even attempt the gesture %-- the 
 situation falls into certain linguistic 
 glosses: `i.I need a way to open this bottle`/; 
 `i.This bottle is now open`/.  The force-dynamic 
@@ -859,7 +866,7 @@ roles is established mostly
 piece of meat, my attention is perhaps 
 occupied by anticipation of the subsequent 
 process, eating the bite-size pieces: 
-the flesh out the meaning of `i.cut` 
+to flesh out the meaning of `i.cut` 
 in terms of the force and result vectors 
 can distort the play of conscious awareness, 
 where the parameters of one current process 
@@ -909,7 +916,7 @@ Spaces through an agent/patient connection
 %-- that the agent and patient are `q.points in` 
 or somehow semantically grounded within their 
 respective Conceptual Spaces, and the agent/patient 
-connection merges these space %-- then this 
+connection merges these spaces %-- then this 
 `q.double-space` theory is only a `i.semantic` analysis 
 of verbs to the degree that the juxtaposition 
 of the two spaces is a `i.linguistic` construction, 
@@ -964,14 +971,14 @@ have a `i.compositional` theory of this
 some combinations are entrenched in different 
 ways.  Even if we do not have specific 
 conventionalized phrases like `i.red hair`/, 
-we may have a case like `i.cut`/`i.knife`/, 
+we may have a case like `i.cut`//`i.knife`/, 
 where the space-doubling %-- here the agent/patient 
 relation and then the relation of the overall 
 process to its enabling instrument %-- reflects 
 a kind of originary scenario that grounds the 
 lexical conventions of the words involved.  
 The food/dining context is certainly the 
-central pole of `i.knife` and arguable the 
+central pole of `i.knife` and arguably the 
 central meaning, or one of then, for `i.cut`/.  
 And in other cases the integration of 
 two conceptual spaces triggers extralinguistic 
@@ -1105,7 +1112,7 @@ object in a cluttered visual field, even if there
 is only one scarf in (`ref<itm:redscarf>;) or one table in (`ref<itm:bluetable>;).  
 In either case, color terms fashion a succinct 
 description of some focal object's surface 
-appearance to help the conversants syncronize 
+appearance to help the conversants synchronize 
 their visual attention.  The functional purpose of 
 the color-concept is to guide listeners to 
 `i.that particular` object which the 
@@ -1118,7 +1125,8 @@ strategies which a speaker might choose to similar
 ends: maybe `i.wool scarf` in (`ref<itm:redscarf>;), 
 `i.glass table` in (`ref<itm:bluetable>;), `i.chipped mug` in (`ref<itm:orangemug>;),
 `i.gift purse` or `i.strapless purse` in (`ref<itm:blackpurse>;), 
-`i.middle column` in (`ref<itm:yellowcolumn>;), or `i.antique vase` in (6).
+`i.middle column` in (`ref<itm:yellowcolumn>;), 
+or `i.antique vase` in (`ref<itm:purplevase>;).
 These obviously involve concepts distinct 
 from color, because they address fundamentally 
 different facets of the object's composition 
@@ -1212,7 +1220,7 @@ colors more than patterns have in general
 become entrenched via individual words 
 (although we can profile a wider inventory of 
 patterns with descriptive phrases).  
-Indeed, `Gardenfors; point about concepts 
+Indeed, `Gardenfors;'s point about concepts 
 typically being grounded in `q.convex regions` 
 within a domain seems apropos and explanatorily 
 useful for comparing entrenchment in the 
@@ -1231,7 +1239,7 @@ distinctness of their color qualia.
 
 `p.
 These arguments notwithstanding, there 
-are conceptual context (not just singling 
+are conceptual contexts (not just singling 
 out objects of interest) where color-concepts 
 are functionally salient.  Sometimes we do 
 want to focus attention on a specific 
@@ -1245,7 +1253,7 @@ like `i.shiny`/, `i.sparkling`/, `i.glittery`/,
 `i.translucent`/, etc.  
 When we focus in on the aesthetic feature of a 
 specific color, it is usually not only the 
-given hua that creates an experientially resonant 
+given hue that creates an experientially resonant 
 effect; instead we appreciate how light plays 
 with or saturates the colored extent, creating 
 visually pleasing effects.  Unlike patterns, 
@@ -1274,10 +1282,10 @@ to extend colors into a larger domain also
 comprising optical concepts like `i.shiny` or 
 `i.translucent`/.  The color-plus-optical domain 
 is different than color-plus-pattern, but 
-this differents reflects the functional 
+this difference reflects the functional 
 divergence in their use-contexts.  It is 
 also true that optical attributes could be used to 
-indivuate objects (`i.the shiny handbag`/), 
+individuate objects (`i.the shiny handbag`/).   
 I think this is a departure from the functional 
 `i.rule` in force for the color-plus-pattern 
 domain for object-selection: in `i.shiny handbag` 
@@ -1310,7 +1318,7 @@ is `i.also` configurational, because using
 only makes sense if most of the surface is 
 red.  The implicit rules of using color-concepts 
 to identify objects, then, involve the named 
-color being extend completely (or almost so) 
+color being extended completely (or almost so) 
 over their surface; we create an expectation 
 of the configurational relation between the color 
 and the boundaries of the relevant surface.  
@@ -1345,7 +1353,7 @@ of colors as a fiat grouping device.
 
 `p.
 In the spirit of these treatments, then, there 
-really is not `i.one single` color domains; 
+really is not `i.one single` color domain; 
 instead there are numerous domains which involve 
 (but are larger and smaller than) colors, each 
 domain applicable in distinct functional contexts.  
@@ -1357,7 +1365,7 @@ with `i.shiny` or only with `i.yellow`/.
 Instead, I think that their ability to 
 manifest via one or another domain is part of 
 the conceptual specificity of colors.  To be 
-sure, this means that concepts belong to 
+sure, this means that color-concepts belong to 
 both the color-plus-pattern and color-plus-optical 
 domains; as a result, the `q.dimensional` structure 
 of the color pyramid (treated as a domain in its 
@@ -1384,7 +1392,7 @@ color-plus-pattern domain concepts are usually
 adjectives, so they tend to be characteristic 
 or supplemental details posited of their accompanying 
 nouns.  In their more aesthetic, color-plus-optical 
-guise colors are more likely to be subjects 
+guise colors can also be subjects 
 (`i.This brown would be perfect for the living room`/).
 But the specific domains through which color words 
 have information-bearing content depends on 
@@ -1393,7 +1401,7 @@ a concept communicationally effective is an understanding
 of what propositional content inheres in 
 citing specifically that color: `i.red card` in 
 football endows the `i.red` with a different 
-propositional specificty than in `i.red scarf`/.  
+propositional specificity than in `i.red scarf`/.  
 To recognize the information being suggested 
 via a color-word it is necessary to overview 
 the spectrum of concepts which `i.could` 
@@ -1453,6 +1461,8 @@ We can therefore speak of a `i.door
 hinge` or a `i.hinge screw`/, but the same entities could hardly be referred to as a 
 `i.*house hinge` or `i.*door screw`/. (page 65) 
 `quote`
+
+|.|
 
 This theory of `q.meronymic domains` therefore is centered on the 
 thesis of mereological parts providing `q.direct mental access` to 

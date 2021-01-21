@@ -1,6 +1,6 @@
 `section.Cognitive Transforms and the Accretion of Detail`
 `p.
-Thus far, I have argued modifier-transform pairs 
+Thus far, I have argued that modifier-transform pairs 
 form grammatic building blocks which, according to 
 combination via certain rules, reconstruct the 
 syntactic forms of sentences while also revealing 
@@ -73,17 +73,19 @@ become syntactic conventions.  I will try to
 elucidate these dynamics through several lines of argument.
 `p`
 
+{raw>> {~\\\vspace*{-3.5em}} <<raw}
+
 `subsection.Propositions and Transform Dynamics`
 `p.
 In general, sentences yield complete ideas; 
 in this sense, all the transforms which collectively 
 lead to the sentence root are oriented to 
 eventually yield a proposition.  Here again I 
-treat proposition as a grammatic category, albeit 
+treat propositions as a grammatical category, albeit 
 one rarely occupied by individual lexemes 
 (although see `i.He said so` or 
 `i.I didn't know that`/).  The decisive transform, then, 
-is one which yields a %-- which usually means 
+is one which yields a proposition %-- which usually means 
 a verb is the decisive modifier (the sentence's 
 `q.root verb`/), although one might argue that the 
 transform `q.signatures` like conversion `i.between` 
@@ -125,7 +127,7 @@ the verb has three distinct grounds to be modified
 Last section I defended the model wherein verbs are 
 analyzed as (conceptually) modifying their direct 
 objects.  Similar arguments apply to `i.indirect` objects: 
-the effect of a noun-concept being registeres in an 
+the effect of a noun-concept being registered in an 
 indirect object `q.slot` is to conceptualize that 
 concept in a distinct register, often in a quasi-spatial 
 or processual fashion: |+|
@@ -142,7 +144,7 @@ or processual fashion: |+|
 Each of these constructions posits the indirect object 
 as the endpoint of a spatial trajectory, although the 
 path is profiled more in terms of the subject's motivations 
-than the specific spatial coordinates.  Literaly, 
+than the specific spatial coordinates.  Literally, 
 (`ref<itm:broughtwine>;) and (`ref<itm:broughtschool>;)
 (even (`ref<itm:carvedduck>;), on reflection) profile a spatial movement 
 between the subject and indirect object (the `i.direct` object 
@@ -156,7 +158,7 @@ overlay of spatial and `q.benefactive` dimensions: the
 indirect object is both a path end-point and one part of 
 a giver/receiver coordination.  Insofar as use-cases 
 for these verbs tend to align along familiar conceptual 
-patterns, e.g. this locative/benefactive overly, 
+patterns, e.g. this locative/benefactive overlay, 
 the appearance of a noun-concept `i.as` indirect object 
 tends to foreground the sense in which it can fit 
 into such a conceptual matrix (e.g., to be a `q.receiver` 
@@ -204,7 +206,7 @@ taken in combination.
 I will discuss the `q.sequencing` among columns below; 
 but here I want to conceptually examine these 
 type-theoretic `q.signatures`/, or how the type-construction 
-modeling the grammatic categories which modifiers 
+modeling the syntactic categories which modifiers 
 expect as their grounds (and also what kind of 
 aggregate is required, such as three distinct 
 nouns in the ditransitive case) convey modifiers' 
@@ -216,18 +218,18 @@ Applications of type theory in linguistics can
 address different concerns, across syntax 
 and semantics.  To avoid confusion, I propose 
 the term `i.macrotypes` to mean large-scale 
-classifications such as grammatic categories, 
+classifications such as syntactic categories, 
 as opposed to finer-grained units like 
 the senses of one lexeme (which I would call 
 `i.microtypes`/).  Here `i.macrotype` can be 
-seen as essentially a renaming of `i.grammatic category`/, 
+seen as essentially a renaming of `i.syntactic category`/, 
 which avoids using the term `i.category` that in 
 turn has numerous unrelated meanings across 
 fields which, ideally, a multi-disciplinary 
 linguistic methodology will integrate.  
 In short, then, verbs, nouns, propositions, 
-adjectives, advers, and so forth, are 
-`i.macrotypes`/, or more precisely name 
+adjectives, adverbs, and so forth, are 
+`i.macrotypes`/, or more precisely  
 collations of related macrotypes 
 (e.g., intransitive, transitive, and ditransitive verbs).  
 We can assume that all macrotypes other 
@@ -265,7 +267,7 @@ Here again we find that natural language is
 restricted compared, say, to programming languages, 
 in this context with respect to the range of 
 derivative macrotypes which are systematically 
-recognized as grammatic categories.  Again too, 
+recognized as syntactic categories.  Again too, 
 this may reflect the dynamics of sentences building 
 up to a propositional conclusion, with all sentence-components 
 attached to a central root-subject/root-verb connection. 
@@ -275,11 +277,11 @@ attached to a central root-subject/root-verb connection.
 To elaborate, I will make some observations about 
 which macrotypes seem to have categorial status 
 in natural language (i.e., to be incorporated 
-into grammatic norms, as grammatic categories). 
+into grammatical norms, as syntactic categories). 
 Note that, within the linguistic type system, 
 the `i.proposition` macrotype is singled 
 out as the root of all complete sentences 
-(`q.proposition` here referring to the grammatic 
+(`q.proposition` here referring to the syntactic 
 category; I use `i.propositional content` to 
 designate the `i.idea` carried by a proposition-typed 
 phrase).  This also means that macrotypes are 
@@ -313,7 +315,7 @@ logical specificity even within one
 macrotype (e.g. we have demonstratives to 
 transition from abstract concepts to determinate 
 content, but few lexemes to go in the opposite 
-direction.  I will consider these more 
+direction).  I will consider these more 
 refined categorizations `i.within` macrotypes later.
 `p`
 
@@ -331,12 +333,12 @@ roles as adjectives (`i.hockey stick` and
 or `i.alley for bowling`/).  So when some 
 grammatical mutation is desired that would 
 reinterpret a lexeme normally used as a macrotype 
-like noun or verb, so that it become a more 
+such as a noun or verb, so that it become a more 
 `q.peripheral` macrotype like an adjective, 
 conventions are to just preserve the lexeme as a single 
 word (which the hearer presumably grants its new 
 role from context) rather than to embed the 
-word in a phrasal transform (like how `i.that` nominalizing 
+word in a phrasal transform (e.g. how `i.that` nominalizes 
 a proposition, which is in turn `q.peripheralizing`/, 
 a counter-example to the tendency for transforms 
 to move `i.away` from more peripheral types, or as I'll 
@@ -367,8 +369,8 @@ equivalents because to `q.resolve` the peripheralizing
 transform then requires multiple further transforms (considering 
 the transitive or ditransitive case), as opposed to 
 one compact counter-peripheral step.  The less idiosyncratic 
-approach to sentences like (itm:Champagne) and 
-(itm:healthyscratch) would be to just 
+approach to sentences like (`ref<itm:Champagne>;) and 
+(`ref<itm:healthyscratch>;) would be to just 
 factor the complex expressions into separate clauses: |+|
 
 `sentenceList,
@@ -467,16 +469,16 @@ is functionally salient, because it directly
 impacts on her purposeful assessment of the 
 situation, whereas details like the intermediate 
 route are functionally peripheral.  If 
-`i.along main streat` is in fact salient 
+`i.along main streat` is in fact also salient 
 for her in this sense %-- or more precisely if 
-the speaker believe it could be %-- it would be appropriate 
+the speaker believes it could be %-- it would be appropriate 
 to consider `i.downtown along Queen street` as an 
 indirect object phrase; if not, `i.along Queen street` is 
 more of a supplementing modifier to `i.drops off`/.  
 As with `i.heading out to the store`/, it is permissable 
 to identify alternative parses which suggest 
 slightly different sentence-meanings (at least, 
-different in light off all contextual details).  
+different in light of all contextual details).  
 The meaning we should attribute to (`ref<itm:busqueen>;) depends 
 subtly on whether the speaker believes that 
 `i.along Queen street` is functionally important 
@@ -533,7 +535,7 @@ As I have argued, at least in the model I propose here,
 verbs modify their subject and direct objects, while 
 they are `i.modified by` adverbs (including adverbial 
 clauses trailing the objects).  This means that 
-the `q.boundary` the direct or indirect object 
+the `q.boundary` between the direct or indirect object 
 (or their phrases) and subsequent phrases (attached 
 to the same verb) partitions this content into 
 segments `i.modified by` and `i.modifying` the verb.  
@@ -562,7 +564,7 @@ applicable) and is preceded by all adverb-to-verb
 stages.  This is obviously not the same as 
 word-order or how the sentence is processed; 
 nor does it necessarily reflect the most 
-mechanical logical tableu of the sentence's 
+mechanical logical tableau of the sentence's 
 propositional content.  However, I would 
 present as a thesis to investigate that 
 the transform ordering, mandated by 
@@ -603,7 +605,7 @@ image of what the verb signifies before
 ever incorporating its subject and objects.  
 Obviously, upon hearing that someone carved 
 the duck `i.for Grandma`/, our reception 
-of the last phrases is influence by 
+of the last phrase is influenced by 
 our prior knowing the foretold propositional 
 context.  But, plausibly, we perform a mental 
 restaging once we confirm that the sentence is 
@@ -621,16 +623,15 @@ the propositional content which the
 verb, in proper context, eventually signifies.  
 The `q.trail` of secondary details allows 
 the relevant state of affairs to be described 
-as rigorously as the situation warrants 
-(see (`ref<itm:broughtwine>;) and (`ref<itm:carvedduck>;)).  
+as rigorously as the situation warrants.  
 On the other hand, the more tightly coupled 
 verb/subject and verb/object connections allow 
 the focal information in the verb construction to 
 be packaged up, depending on surrounding context: |+|
 
 `sentenceList,
-`sentenceItem; `swl -> --- ->  Giving John advice is impossible. -> cog ;;
-`sentenceItem; `swl -> --- ->  You promised to make us pancakes! -> cog ;;
+`sentenceItem; `swl -> itm:johnadvice ->  Giving John advice is impossible. -> cog ;;
+`sentenceItem; `swl -> itm:pancakes ->  You promised to make us pancakes! -> cog ;;
 `sentenceList`
 
 |.|
@@ -723,8 +724,8 @@ details we would intend to insert into a sentence
 have to be presented via subordinate clauses.  
 The kind of compact transforms offered 
 by adjectives or adverbs paired directly 
-with their targets %-- and by the 
-verb/subject/object column %-- are often 
+with their targets %-- and by 
+verb/subject/object columns %-- are often 
 insufficient mechanisms to fully transform 
 how a language-act signifies its content, 
 enough to render the expression a 
@@ -750,22 +751,24 @@ let's say, can migrate to different spots: |+|
 `sentenceItem; `swl -> itm:barking ->  Those dogs are barking %-- really loudly. -> syn ;;
 `sentenceList`
 
+|.|
+
 If we hear the gerund pair as just English's idiomatic 
 progressive tense, then the most logical transform 
 order, at least for analysis, is to treat 
-`i.loudly` in (`ref<itm:barkingloudly>;) as modifying couple `i.are barking`/, 
+`i.loudly` in (`ref<itm:barkingloudly>;) as modifying the couple `i.are barking`/, 
 just as it would modify the past tense `i.barked`/.  
 However, one might also hear `i.bark loudly` as a 
 compound verb, like (in many circumstances) `i.heading out`/: |+|
 
 `sentenceList,
-`sentenceItem; `swl -> --- ->  She is heading out early. -> syn ;;
+`sentenceItem; `swl -> itm:headingoutearly ->  She is heading out early. -> syn ;;
 `sentenceItem; `swl -> --- ->  She is heading out with the dogs. -> syn ;;
 `sentenceList`
 
 |.|
 
-In one, say, I find the most natural analysis 
+In (`ref<itm:headingoutearly>;), say, I find the most natural analysis 
 forms the transform `i.heading out` (in effect 
 creating a gerund for the two-part verb), 
 `i.then` the `i.is` (to form a present progressive), 
@@ -793,7 +796,7 @@ highly standardized compound verbs
 (`i.reach base`/, `i.catch up`/, `i.take off`/, `i.let go`/, 
 `i.walk around`/, `i.watch television`/) and verb/adverb combinations 
 which just happen to be 
-used often (`i.score a goal`/, `i.land safely`/, 
+used often (`i.ask politely`/, `i.land safely`/, 
 `i.eat well`/, `i.graduate with honors`/).  
 In the context of a multiword conjugation (like a 
 progressive tense), whether we model the modifier 
@@ -831,7 +834,7 @@ continuance is in itself surprising, noteworthy,
 or exaggerated.    
 `p`
 
-`section.Clausal Organization`
+`subsection.Clausal Organization`
 `p.
 The simplest example of clauses nesting into 
 other constructions derives from propositionally
@@ -871,7 +874,7 @@ propositional clauses the case for using determinative
 forms (like `i.the`/) to reference nouns.  We would 
 readily drop `i.that` if we are citing a proposition 
 very similar to one the addressee has already enunciated 
-(e.g. `i.Can I add hot pepper?` for (2)).  By extension, 
+(e.g. `i.Can I add hot pepper?` for (`ref<itm:hotpepper>;)).  By extension, 
 then, even if the clause is not entirely unoriginal 
 in this sense, we are inclined to drop 
 the subordinator if the prior conversational context 
@@ -883,11 +886,11 @@ in (`ref<itm:raptors>;)).  The `q.dropped` version sounds less informal,
 then, because informal discourse is more likely 
 when the conversants have this degree of shared 
 anticipation of the contours of the dialog, more so 
-than formal or technical writing or, say, expert discussions.      
+than formal or technical writing/discourse.      
 But with that said, the two versions are not then 
 semantically identical, even if the differentiating 
 effect is not always in play %-- the choice to 
-include leave out a subordinator can signify an assessment, 
+include or leave out a subordinator can signify an assessment, 
 on the speaker's part, of the relative novelty (or lack 
 thereof) of the topics broached in the subsequent clause.   
 `p` 
@@ -899,7 +902,7 @@ clause is propositionally complete.  For nonfinite clauses,
 the corresponding nonfinite verbs would not have a conventional 
 verb signature where a proposition is produced from one, two, 
 or three nouns.  For discussion, I will use the term 
-`i.protoverb` in lieu of `q.nonfinite`/, assuming the 
+`i.protoverb` in lieu of `q.nonfinite`/, assuming that 
 protoverbs are fundamentally a different macrotype 
 (although most or all lexemes categorized as 
 verbs can, according to context, be used as 
@@ -912,8 +915,8 @@ Protoverbs mirror the columnar structure of verbs,
 except for one column being deleted from their 
 signature; and they exchange the propositional 
 outcome-type for a noun or adjective (or perhaps 
-other macrotype).  In (..1), `i.giving` is then a 
-protoverb yielding a noun, and for (..2) 
+other macrotype).  In (`ref<itm:johnadvice>;), `i.giving` is then a 
+protoverb yielding a noun, and for (`ref<itm:pancakes>;) 
 the infinitive `i.to make` can be modeled as 
 `i.to` transfoming `i.make` `i.from` a verb 
 `i.to` a protoverb.  Protoverbs would actually 
@@ -967,7 +970,8 @@ in any context where such an expression is needed, a
 subordinate-clause construction is a viable fallback.  
 We can then treat this as a dynamic in English 
 syntax: the grammar makes available certain constructions, 
-such as `AdjectiveNoun;, `AdverbVerb;, and `NounNoun; 
+such as `AdjectiveNoun; ($J$ for adjective), 
+`AdverbVerb; ($A$ for adverb), and `NounNoun; 
 pairs (the last for cases where the first noun 
 is re-typed to an adjective), which signal 
 cognitive transforms concisely, and within brief 
@@ -988,7 +992,7 @@ in the specialized language of baseball).
 Clauses may themselves be complex, but they have a 
 rigorous quasi-propositional organization, and 
 a systematic range of subordinators, which helps 
-`i.orchestra` clause's internal structure and 
+`q.orchestrate` clause's internal structure and 
 the relation of clauses to one another.
 `p`
 
@@ -1011,7 +1015,7 @@ In particular, each sentence element or component
 is ultimately meaningful in terms of a detail 
 it adds to a holistic situational picture; 
 adjectives and adverbs, for instance, add 
-detail by conceptually refining are sense of 
+detail by conceptually refining our sense of 
 their target nouns and verbs. 
 `p`
 
@@ -1027,7 +1031,7 @@ the clause has to be anchored in a sense of supplying
 supplemental information about some concept which lies 
 outside it, connecting it to the larger sentence; 
 but on the other hand each clause has its own 
-quase-propositional structure, so that `i.internally` 
+quasi-propositional structure, so that `i.internally` 
 it has its own pattern of cognitive focus, its 
 own schematics (landmark/tranjector gestalts, for 
 instance).
@@ -1041,7 +1045,7 @@ form of their `i.internal` conceptualizations: |+|
 `sentenceList,
 `sentenceItem; `swl -> --- ->  We should look for the wine that John recommended last summer. -> cog ;;
 `sentenceItem; `swl -> --- ->  I have to shout because the cars are making a lot of noise outside. -> cog ;;
-`sentenceItem; `swl -> itm:warrendetailed ->  At each of the debates, Warren presented more detailed policy proposals than Sanders. -> cog ;;
+`sentenceItem; `swl -> itm:warrendetailed ->  Warren presented more detailed policy proposals than Sanders, at each of the debates, . -> cog ;;
 `sentenceList`
 
 |.|
@@ -1052,21 +1056,21 @@ sentence (`i.last summer`/, `i.outside`/).  The third is the
 more elaborate, because the speaker is taking a holistic 
 view, where each of the debates referenced could, potentially, 
 be a separate topic that gets exclusive focus in subsequent 
-conversation.  In (`ref<itm:warrendetailed>;) then speaker (and presumably all 
-conversants) work from a summarial vantage encompassing, 
+conversation.  In (`ref<itm:warrendetailed>;) the speaker (and presumably all 
+conversants) works from a summarial vantage encompassing, 
 in their thoughts, a series of more specific contexts 
 (viz., each debate) which could form their own discursive 
 space (not just in terms of their actual spatial environs, 
 but their abstract space of facticity and themes).  So in 
 (`ref<itm:warrendetailed>;) the contrast between the setting for the enunciation and 
 the clausal alternate space is more abstract than the 
-`i.inside`/`i.outside`/, or `i.now`/`i.last summer` contrast.    
+`i.inside`//`i.outside`/, or `i.now`//`i.last summer` contrast.    
 `p`
 
 `p.
-Nevertheless, we can argue that every linguistis construction 
+Nevertheless, we can argue that every linguistic construction 
 which, at the semantic level, serves as a `q.space builder` 
-(a la Fauconnier) may have a corresponding clausal manifestation.  
+(using Gilles Fauconnier's term) may have a corresponding clausal manifestation.  
 The fact that clauses do need to set up their own space, 
 time, and context, deviating from the main sentence, may 
 explain why they occupy their own phrasal nexus rather 
@@ -1100,15 +1104,15 @@ By convention we understand (`ref<itm:tryrestaurant>;) to mean desire to
 special circumstances where (`ref<itm:tryrestaurant>;) could be utterred 
 with a completely different sense, e.g. 
 someone visiting numerous restaurants 
-trying to `i.use the bathroom` or `i.apply for 
+hoping to `i.use the bathroom` or `i.apply for 
 a job` or `i.hang a flyer`/).  We hear (`ref<itm:trymountain>;) as 
 intent to `i.climb` the mountain, and would probably 
 be puzzled if it were used in a context other 
 than mountain-climbing.  So 
 (`ref<itm:tryrestaurant>;)-(`ref<itm:trybinoculars>;) could be rephrased 
 with clauses which explicate a specific verb: 
-`i.eat at` this restaurant, `i.climb` that mountain, 
-`i.use` ranked-choice voting, `i.bring` binoculars.  The speaker may choose a 
+`i.eat at` this restaurant, `i.attempt to climb` that mountain, 
+`i.implement a system of` ranked-choice voting.  The speaker may choose a 
 shorter form %-- e.g., a single noun or simpler noun-phrase 
 %-- if it seems obvious from context how 
 the noun relates to `i.try`/; i.e., how to 
@@ -1116,9 +1120,11 @@ extrapolate from the noun to an activity usually
 associated with that word-sense (`i.climb` a mountain, 
 etc.).  These cases again show, however, the dynamic 
 role which clausal constructions can play in shaping 
-discourse: we always have the option of reverted 
+discourse: we always have the option of reverting 
 to lengthier clauses when a stripped-down 
-alternative proves enigmatic for hearers.  
+alternative proves enigmatic for hearers 
+(`i.Next game I'll bring a pair of binoculars so 
+I'll be able to see the action on the field`/).     
 The fact that speakers `i.can` adopt subordinate clauses 
 rather than short forms like `i.try binoculars` 
 %-- which need more interpretative effort 
@@ -1131,11 +1137,11 @@ forms beyond some threshold of complexity.
 The fact that subordinate clauses form self-contained 
 units, serving as nouns, adectives, or adverbs in 
 a larger context, may seem like evidence for the 
-usefulness of Constituency grammars, since we 
+usefulness of constituency grammars, since we 
 have a whole phrasal complex serving a unitary 
 role at a higher scale.  On the other hand, 
 the internal organization of clauses may seem 
-like a case for Dependency grammars, since 
+like a case for dependency grammars, since 
 the semantically most sigficant lexemes 
 (e.g. verbs and nouns) get centralized.  
 The verb as clause-head `q.dominates` over 
@@ -1174,7 +1180,7 @@ Via Cognitive Transform Grammar, I propose to sideline
 judgements about relative significance entirely 
 (at least for underlying parse-graphs) and 
 consider modifier-target relations instead of 
-(the more loaded) `q.head`/`q.dependent` contrast.  
+(the more loaded) `q.head`//`q.dependent` contrast.  
 A formal ordering on transform-pairs, as well 
 as the stage/column structure, allows modifiers 
 to be ranked as closer or further from the 
@@ -1205,7 +1211,7 @@ their ground.  To see what I mean, consider
 again sentences involving `i.try`/, like: |+| 
 
 `sentenceList,
-`sentenceItem; `swl -> --- ->  He reluctantly tried Champagne for the first time. -> sem ;;
+`sentenceItem; `swl -> itm:trychamp ->  He reluctantly tried Champagne for the first time. -> sem ;;
 `sentenceItem; `swl -> --- ->  She will try hard to ski during our vacation. -> sem ;;
 `sentenceList`
 
@@ -1215,11 +1221,11 @@ As I have discussed, `i.try` is only understood when
 its direct object is a noun that profiles an 
 action or activity %-- in particular, a noun 
 derived from a subordinate clause.  Forms 
-like (1) can be analyzed as variants on 
+like (`ref<itm:trychamp>;) can be analyzed as variants on 
 more elaborate versions where a clause is 
 explicit (e.g., tried `i.tasting Champagne`/).  So 
-`i.try`/'s object has to be interpreted so that it
- mentally converts either to a clause or to 
+`i.try`/'s object has to be interpreted such that it 
+mentally converts either to a clause or to 
 some abstract conception of a verb (as in `i.try skiing`/).  
 Moreover, `i.try`/'s `i.subject` generally has to be 
 interpreted as something sentient, capable of 
@@ -1301,13 +1307,15 @@ from targets to modifiers in a parse graph.
 Another illustration of related `q.propagation` 
 comes from alternative `q.Ontological` construals of a 
 noun; e.g., a `i.newspaper` can be an object, a place, 
-or an institution: 
+or an institution: |+|
 
 `sentenceList,
 `sentenceItem; `swl -> itm:nptable ->  My favorite newspaper is on the table. -> ont ;;
 `sentenceItem; `swl -> --- ->  My favorite newspaper hired a new editor. -> ont ;;
 `sentenceItem; `swl -> itm:npwalk ->  I walk past my favorite newspaper everyday. -> ont ;;
 `sentenceList`
+
+|.|
 
 We have to infer from context which sense of `q.newspaper` applies 
 in which use-case.  But once we have clarity on whether 
@@ -1400,7 +1408,7 @@ This flexibility implies that locative marking is a cue to
 influence how we semantically construe the `q.location`/, 
 rather than a specific lexical category.  The nominal 
 concepts interpreted as locations cover a spectrum of 
-number %-- plurals (`i.the childern`/), mass 
+number %-- plurals (`i.the children`/), mass 
 (`i.hockey` and `i.retirement` in these contexts; 
 e.g. `i.hockey` qua the space of topics relevant to 
 reporting on that sport), singular (`i.John`/) %-- 
@@ -1426,10 +1434,10 @@ value of placing location-nouns more in the
 
 `p.
 Moving in the opposite meso-to-micro direction in 
-this `q.space`/, consider specifications such that 
+this `q.space`/, consider specifications such as how 
 `i.cook` or `i.dine on` (save for a few specific 
 idioms) only make sense in relation to food.  
-This restriction seems somewhat analogous 
+This restriction appears somewhat analogous 
 to patterns which would be identified 
 on the mesotype scale: for instance, only 
 social institutions can `i.hire` or `i.fire` someone 
@@ -1470,7 +1478,7 @@ I would say that this is a `i.syntactic` anomaly;
 it would be evidently programmatic even within a  
 parse-graph representation, anterior to semantic 
 or interpretive considerations.  I would 
-say that %-- say %-- `i.idea powder` is a 
+say that %-- for example %-- `q.idea powder` is a 
 `i.semantic` anomaly: we construe `i.powder` as 
 a substance made from grinding some object, 
 so we have an Ontological basis for rejecting 
@@ -1478,8 +1486,11 @@ the adjectival `i.idea` as a `q.kind` of powder
 (but the phrase is not `i.primia facie` malformed 
 `i.grammatically`/).`footnote.There is a website of 
 puzzling Chinese-English culinary translations which 
-presents the name of one dish as `i.Napoleon fried 
-the idea powder`/.`  And I would say that 
+presents the name of one dish as `i.Napoleon fries 
+the idea powder`/.  There is also `i.France many privates`/,
+`i.The bureau swallows to take the fish idea powder`/, 
+`i.Butter many privates`/, 
+and `i.The bureau pig chooses the rice`/.`  And I would say that 
 `i.coffee juice` is `i.lexically` anomalous 
 for reasons just articulated. 
 `p`
@@ -1504,8 +1515,8 @@ person or a group of people; finally,
 a desire to use words according to lexical 
 conventions that match conversants' expectations 
 enough to not impede conversation.  
-The macro-, meso-, and micro-type distinction, 
-then, provides a kind of holistic classification 
+The `makebox.macro-,` `makebox.meso-,` and micro-type 
+distinction provides a kind of holistic classification 
 of the spectrum of considerations which factor into 
 speakers' model of selection principles 
 setting boundaries on acceptable usage.
