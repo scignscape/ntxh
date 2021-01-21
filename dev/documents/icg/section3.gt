@@ -422,7 +422,7 @@ if we consider the epistemic dynamics informing sentence
 structure, which I will now consider further. 
 `p`
 
-`subsection.The Epistemic Dynamics of Columns and Stages`
+`spsubsectiontwoline.The Epistemic Dynamics of Columns and Stages`
 `p.
 As I pointed out earlier, verbs can be expounded upon 
 with many added details, but only a few of these 
@@ -675,8 +675,8 @@ object (or even the subject) allows a nested clause to be
 transformed into a modifier: |+|
 
 `sentenceList,
-`sentenceItem; `swl -> --- ->  I found the wine that John recommended. -> cog ;;
-`sentenceItem; `swl -> --- ->  Please use brown rice when making the pilaf. -> cog ;;
+`sentenceItem; `swl -> itm:winerecommended ->  I found the wine that John recommended. -> cog ;;
+`sentenceItem; `swl -> itm:brownrice ->  Please use brown rice when making the pilaf. -> cog ;;
 `sentenceList`
 
 |.|
@@ -689,8 +689,8 @@ deferments or elisions which allow a nested clause
 to join its context in a variety of ways 
 (e.g., a subjectless infinitive verb 
 with its own otherwise complete clause 
-in (..1), or similarly `i.when`/`lingplus;gerund 
-in (..2)).  
+in (`ref<itm:winerecommended>;), or similarly `i.when`/`lingplus;gerund 
+in (`ref<itm:brownrice>;)).  
 `p`
 
 `p.
@@ -1126,7 +1126,7 @@ rather than short forms like `i.try binoculars`
 forms beyond some threshold of complexity.   
 `p`
 
-`subsection.Transform, Constituency, and Dependency Grammar`
+`spsubsectiontwoline.Transform, Constituency, and Dependency Grammar`
 `p.
 The fact that subordinate clauses form self-contained 
 units, serving as nouns, adectives, or adverbs in 

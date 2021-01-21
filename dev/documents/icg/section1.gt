@@ -1,6 +1,7 @@
 `section.Propositional Content and Compositional Structure`
 `p.
-Last section I argued that sentences (as canonical examples 
+So, I accept, with duly noted caveats, 
+that sentences (as canonical examples 
 of internally complete linguistic artifacts) are 
 associated with a propositional content.  Such content 
 is logically structured and verifiable or falsifiable, 
@@ -34,7 +35,7 @@ one candidate or party or another is surely cognitive
 in the `q.ontic` sense that voter sentiment can only 
 exist in people's minds.  Moreover, some generically 
 mental content may be introduced as explanatory 
-parameters: voters are `i.concerned about` 
+parameters %-- voters are `i.concerned about` 
 immigration or jobs or climate change; voters are 
 `i.attracted to` charismatic or empathetic or 
 idealistic candidates, and so forth.  However, 
@@ -48,7 +49,7 @@ normal explanatory resources or theoretical purview.
 For sake of discussion, I will use the term 
 `i.predicate reduction` to designate the process 
 or phenomenon of deriving `q.predicate structure` 
-(treating propositions as construnctions which 
+(treating propositions as constructions which 
 build complex predicates from simple ones, 
 and `i.propositional content` as propositional 
 ideas which may be intimated even if not signified 
@@ -96,7 +97,7 @@ focusing on just `q.base` level propositional content.
 I suggest that linguists' methodologically differ on 
 their assessment of whether the cognitive dimension 
 of `q.predicate reduction` in this baseline sense 
-should be or needs to be foregrounded.  
+should or needs to be foregrounded.  
 To demonstrate, consider the most basic sort 
 of predicate structure, realized logically 
 by a predicate applied to a bearer, and linguistically 
@@ -182,7 +183,7 @@ Or suppose we are using a light-colored mat as a makeshift screen for a slide sh
 find where to place the projector and how to aim it, you put in a slide with the image
 of a cat.  When the projector is finally positioned 
 properly, I can let you know by 
-saying `i.OK, the cat is on the mat`/.[page]
+saying `i.OK, the cat is on the mat`/.
 Since the sentence applies to such diverse situations, what can we identify as
 its meaning? One option is to distinguish between its specifically linguistic meaning
 (a matter of semantics) and the fuller meaning it assumes based on extralinguistic
@@ -194,11 +195,13 @@ shared by all an
 expression's varied interpretations, 
 what qualifies will likely be too impoverished to
 be apprehended independently or recognized as a meaning. 
-(LangIntro, pp.463-4)
+`quotepages<463-4>;
 `quote`
 
+|.|
+
 Responding to these points, however, someone claiming a 
-sharper `i.semantics`/`i.pragmatics` distinction 
+sharper `i.semantics`//`i.pragmatics` distinction 
 might argue that Langacker's `q.atypical` imaginings 
 of `i.cat on mat` scenarios all vary in their 
 specific sense of `i.on`/.  So the `i.reason` the 
@@ -234,11 +237,11 @@ lexical senses for `i.cat`/, `i.on`/, and
 `p`
 
 `p.
-Of course, the sentences does not mark through any 
+Of course, sentences do not mark via any 
 linguistic data %-- no intonation or auxiliary 
 words or morphological cues %-- that `q.cat` 
 here means `catOne;, etc.  So there `i.is` a pragmatic 
-and context-specific processing stage here, indisputably, 
+and context-specific processing stage, indisputably, 
 which leads the interlocutors to infer 
 `catOne; from hearing `i.cat`/, and likewise 
 `onOne; from `i.on` and `matOne; from `i.mat`/.  
@@ -325,12 +328,11 @@ commitment to an isolated syntax/semantic
 pairing %-- assuming it is in fact 
 theoretically desirable %-- holds up against 
 certain forms of context-sensitivity such 
-as highlighted by Langackers analysis of 
-discourse (at least as exposited toward the end of 
-the LangIntro).  The paradigm informing such a 
-metatheoretic stance would reflect what I called 
-the `q.backgrounding` of cognition %-- not actually 
-a denial of cognitions' role in understanding 
+as highlighted by Langacker's analysis of 
+discourse.  The paradigm informing such a 
+metatheoretic stance would reflect a 
+`q.backgrounding` of cognition %-- not actually 
+a denial of cognition's role in understanding 
 language, but a working hypothesis that the 
 aspects of understanding which demand active 
 cognitive interpretation can be theoretically 
@@ -349,7 +351,7 @@ pragmatic complications alone can reveal.
 One preliminary question, which I will 
 skip over temporarily, is why we `i.want` to 
 exclude cognitive explanation in the first place.  
-Aside from we can consider more detailed problems of 
+Aside from that we can consider more detailed problems of 
 `i.predictability`/, `i.contextuality`/, and 
 `i.compositionality`/, which I will examine in turn. 
 `p`
@@ -375,10 +377,10 @@ language.  The observation that `AdjN; constructions
 `q.reduce` to predicate-subject predication 
 is not only a claim about `i.existing` pairs in the 
 language, but the stipulation of the `i.rules` of 
-the languages.  According to the machinery of 
+the language.  According to the machinery of 
 predicate reduction for English, placing a noun 
 after an adjective necessarily (in isolation) 
-designatons a predicate structure wherein the 
+designates a predicate structure wherein the 
 adjective supplies a predicate meaning and 
 the noun its substrate %-- even if the particular 
 combination has never been conceived before, or 
@@ -411,7 +413,7 @@ language-system.  When we say that `AdjN;
 (for example) is a constructional pattern (in English), we mean 
 that English speakers are disposed to accept `AdjN; 
 constructions as grammatical so long as the components 
-are of the proper grammatic categories, and disposed 
+are of the proper syntactic categories, and are primed 
 to anticipate using nouns and adjectives in `AdjN; 
 formations, even if the words are unfamiliar. 
 `p`
@@ -453,7 +455,7 @@ In the more `q.objective` perspective I just spoke to,
 essential linguistic rules and constructions are 
 `i.passive` objects of thought in that our proper 
 disposition to them is to take them as objective 
-givens, which we can think about, and incoporate into 
+givens, which we can think about, and incorporate into 
 our arsenal of techniques prerequiste for linguistic 
 competence, but we do not actively shape them.  
 No one person %-- or even entire linguistic community %-- 
@@ -485,7 +487,7 @@ of predicate-bearer relationships.  The minimal logical
 notion of `i.some generic` substrate bearing 
 `i.some generic` predicate actually encompasses many 
 kinds of cases.  We can consider variations of instantiation 
-modes: a `i.black/tabby/hungry/stray/prizewinning/adopted/very black/very hungry` 
+modes: a `i.black/tabby/hungry/stray/prize-winning/adopted/very black/very hungry` 
 cat.  The `i.black` predicate differs from `i.hungry` in our 
 anticipation that the cat is `i.always` black, but only 
 `i.sometimes` hungry.  Moreover, `i.black` refers to how 
@@ -498,7 +500,7 @@ Therefore `i.very tabby` is quite dubious, while even
 `i.very black` is questionable (since there is 
 no obvious scale of more or less blackness), 
 but `i.very hungry` is quite reasonable.  Meanwhile, 
-`i.stray`/, `i.prizewinning`/, and `i.adopted` 
+`i.stray`/, `i.prize-winning`/, and `i.adopted` 
 are all contextual predicates concerning cats in relation 
 to humans, so they are not `q.borne` by cats in 
 the material sense of an object bearing a color, 
@@ -506,8 +508,8 @@ or the biological sense of an animal bearing hunger.
 `p`
 
 `p.
-Alongside these predicative variations, we also 
-should recognize the proliferation of distinct 
+Alongside these predicative variations, we should also 
+recognize the proliferation of distinct 
 ontological `q.registers` through which 
 predicate-subject relations can be conceptualized.
 We have a `i.registered democrat`/, an `i.Iowa causus`/, 
@@ -541,7 +543,7 @@ selection, are fine: |+|
 
 `sentenceList,
 `sentenceItem; `swl -> --- ->  That's a stained-glass window overlooking the yard. -> ont ;;
-`sentenceItem; `swl -> --- ->  That's a porcelain vase under flourescent lights. -> ont ;;
+`sentenceItem; `swl -> --- ->  That's a porcelain vase under fluorescent lights. -> ont ;;
 `sentenceList`
 
 |.|
@@ -597,7 +599,7 @@ patterns seem more determined by lexical
 specifics, e.g. `i.quick car`/, `i.quick question`/, 
 `i.quick bite`/, `i.quick score`/.  There are different 
 senses in which something can be quick, so one might 
-argue that how the `i.quick` predicate modifiers a 
+argue that how the `i.quick` predicate modifies a 
 given noun is a lexical detail that has to be worked 
 out on a case-by-case basis.  But, excepting 
 obviously metaphorical uses, `i.hungry` always 
@@ -610,8 +612,8 @@ In short, the predictability of `HungrySentient; being
 deemed coherent, in the presence of a sentient 
 noun, seems structurally analogous (even if 
 more grounded in concrete signification) than the 
-`AdjN; pattern.  However, `HungrySentient; seems 
-more difficult to abstract away as a 
+`AdjN; pattern.  However, `HungrySentient; also 
+appears more difficult to abstract away as a 
 fixed pattern of language which we only passively 
 internalize, in the course of our mastering linguistic 
 rules.  For one thing, we readily extend the 
@@ -667,7 +669,7 @@ before the show starts. -> ont ;;
 |.|
  
 In short, a pattern like `HungrySentient;, 
-or more generally `AdjSentient; %-- 
+or more generally `q.`AdjSentient;`/, say %-- 
 some predicate of a sentient animal 
 %-- can be extended out in multiple directions.  
 Hunger can be replaced by a less somatic 
@@ -702,20 +704,22 @@ than more unidimensional blends: I think
 (`ref<itm:fan>;) is more conventional than (`ref<itm:fans>;): |+|
 
 `sentenceList,
-`sentenceItem; `swl -> itm:fan ->  The fans are hungry for a goal. -> ont ;;
-`sentenceItem; `swl -> itm:fans ->  That fan is hungry for a goal. -> ont ;;
+`sentenceItem; `swl -> itm:fans ->  The fans are hungry for a goal. -> ont ;;
+`sentenceItem; `swl -> itm:fan ->  That fan is hungry for a goal. -> ont ;;
 `sentenceList`
 
-
+|.|
 
 Also we are `i.less` likely to adopt `i.hungry` for 
 other more `q.somatic` sensations, which involve less 
-metaphorical leap: 
+metaphorical leap: |+|
 
 `sentenceList,
 `sentenceItem; `swl -> --- ->  I am hungry for some sleep. -> ont ;; 
 `sentenceItem; `swl -> --- ->  The dogs are hungry for water.  -> ont ;;
 `sentenceList`
+
+|.|
  
 Perhaps these more mundane constructions are less normal-sounding 
 because they conflict with non-metaphorical alternatives 
@@ -727,12 +731,12 @@ switching from an individual to a collective.  Or perhaps
 cases like `i.fans hungry for a goal` became entrenched so 
 that other uses which seem to involve the same `i.kind` 
 of blend or extension feel more conventional.  
-A construction like () may then be registered as 
+A construction like (`ref<itm:fan>;) may then be registered as 
 understandable, but with a certain mental note that 
 the speaker here is `i.not` adopting a kind of 
 extension which agrees with other precedents (in contrast 
-to ()).  This impression would render the hearer 
-of () less likely to use extensions with the same 
+to (`ref<itm:fans>;)).  This impression would render the hearer 
+of (`ref<itm:fan>;) less likely to use extensions with the same 
 premise in turn.   
 `p`
 
@@ -962,11 +966,11 @@ but this still has deitic open-endedness.
 Any transparent propositional context emerges 
 only via substituting determinate content for 
 any designations which conversants have to 
-infer from the dialogic situation; e.g. 
-`i.the dogs in the yard directly in front 
-of the person speaking` in place of 
-`i.those dogs` or `i.the dogs in that yard`/.  l
-`p`
+infer from the dialogic situation 
+(something like `i.the dogs in the yard 
+directly in front of the person speaking`/, 
+but for all its specificity such langauge 
+sounds strage `i.as` human language).
 
 `p.
 How linguistic entities are mapped to ambient 
@@ -992,7 +996,7 @@ In some contexts, deictic or antecedent reference can
 indeed be separated out from syntactic or semantic 
 reasoning as a distinct phase or dimension of 
 linguistic processing.  So a pronoun like 
-`i.he` might need to be mentally substituted by 
+`i.she` might need to be mentally substituted by 
 `i.Warren`/, or more precisely by `i.Senator Elizabeth Warren`/.
 We can analyze linguistic processing as a mostly passive 
 observation of syntactic and semantic rules `i.after` 
@@ -1227,9 +1231,9 @@ cases are protypical or explanatorily privileged.
 If we analyze the relations between propositional contents 
 and the linguistic constructions that carry them, we 
 do not only find conventionalized renderings of 
-predicate structure, such as I have used 
-as examples like `NounIsInPlace;, `HungrySentient;, 
-and `ColorObject;.  In many cases, predicate structure 
+predicate structure, such as my running examples 
+(`NounIsInPlace;, `HungrySentient;, 
+and `ColorObject;).  In many cases, predicate structure 
 is conveyed through more elaborate constructions 
 with their own compositional patterns, deviating from 
 a transparent reciprocation of the underlying logical 
@@ -1257,7 +1261,7 @@ both relevant to how we would probably receive
 `p`
 
 `p.
-If we say `i.violence has spilled out onto the streets`/, 
+If we say `i.violence has spilled out into the streets`/, 
 the implication is that the violence designated is 
 random and chaotic.  This implies that whoever formulates 
 (`ref<clashes>;) would be thinking of violent acts like assault or 
@@ -1423,7 +1427,7 @@ The `i.epistemics` of linguistic constructions
 include how the choice of surface-level forms 
 connote speakers' rational attitudes 
 toward situations %-- interpretations and causal 
-assessments of, expalantions and 
+assessments of, explanations and 
 warrants for, and so forth.   
 `p`
 
@@ -1482,11 +1486,11 @@ encode a situation, it is plausible that we
 are disposed to select the formation which 
 matches our internal construal most exactly, 
 and moreover that `i.most exactly` often means 
-`i.according to the most epistemic dimensions`/.  
+`i.according to the greatest number of epistemic dimensions`/.  
 We may subconsciously choose a given metaphor 
-because it's multi-dimensional epistemic 
-appropriateness `visavis; our own construals 
-makes it `i.feel` most accurate, compared to 
+because it has multi-dimensional epistemic 
+appropriateness `visavis; our own construals, 
+making it `i.feel` most accurate, compared to 
 either (more or less metaphoric) alternatives.  
 `p`
 
@@ -1518,7 +1522,7 @@ and centripetal force efficacious within the
 Moreover, the `i.base` is not just very abstractly 
 spatial (e.g., as something which has magnitude).  
 Presumably, we would not speak of a politician's 
-`i.eroding support` if her were, say, to 
+`i.eroding support` if she were, say, to 
 show poorly in polls `i.in one location`/.  
 Someone following Biden's campaign would be 
 more likely to assert (`ref<bidensupport>;) in the context of 
@@ -1534,7 +1538,7 @@ We expect (`ref<bidensupport>;) to be chosen as a description of
 the current stare of Biden's campaign by someone 
 who has encountered evidence of Biden losing 
 support in numerous different places %-- 
-sticking to a literally reading of spatial 
+sticking to a literal reading of spatial 
 extent %-- and also, quite possibly, 
 losing support among different `i.categories` 
 of voters (a case which also justifies 
@@ -1694,7 +1698,7 @@ But this analysis does not appear to bear
 any direct structural relation to the propositional 
 content signified: instead of a neat alignment 
 between predicate structure and linguistic 
-construction (as in `i.ColorObject`/), 
+construction (as in `ColorObject;), 
 we have two seemingly disconnected structural 
 registers.  We can identify a certain logical 
 architecture within the propositional content, 
@@ -1765,7 +1769,7 @@ wants of demands; rather I am focusing on
 how language reflects our narrative encapsulation, 
 causal reading, or interpretive assessment of 
 situations.  Inherent in being `i.aware` of 
-scenarios around us is however we mentally impose 
+scenarios around us is how we mentally impose 
 an order on them, trace their evolution like 
 a story, schematize our assemblies of belief-warrants 
 via spatial or temporal gestalts.  Thus we are already 
@@ -1798,7 +1802,7 @@ for superficial observations.
 `p.
 I therefore claim that in many linguistic examples 
 cognition is `i.active` because only via active 
-cognitive effort can be produce and then 
+cognitive effort can we produce and then 
 understand sentences shaped around narrative, causative, 
 and/or interpretive dispositions rather than 
 around logical organizations which just structurally 
@@ -1826,7 +1830,7 @@ in a deep structural sense, entirely passive.
 I believe that the structuring effects of 
 narrative, causative, interpretive construal 
 are at least as significant for language 
-overall than the passive tolerance of 
+overall as the passive tolerance of 
 simple constructional wrappers for 
 propositional content.  
 `p`

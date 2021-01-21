@@ -1294,18 +1294,21 @@ which affects both macrotypes and bilexical categories.
 `p.
 The first differentiation among clauses is whether 
 they produce actual propositions (finite clauses) 
-or else nouns or adjectives.  Compare: 
+or else nouns or adjectives.  Compare: |+|
 
 `sentenceList,
-`sentenceItem; `swl -> --- ->  She failed to hold the groceries. -> syn ;;
-`sentenceItem; `swl -> --- ->  She asked me to hold the groceries. -> syn ;;
-`sentenceItem; `swl -> --- ->  She asked that I hold the groceries. -> syn ;;
-`sentenceItem; `swl -> --- ->  Where is a bag to hold the groceries? -> syn ;;
+`sentenceItem; `swl -> itm:holddir ->  She failed to hold the groceries. -> syn ;;
+`sentenceItem; `swl -> itm:holdindir ->  She asked me to hold the groceries. -> syn ;;
+`sentenceItem; `swl -> itm:holdprop ->  She asked that I hold the groceries. -> syn ;;
+`sentenceItem; `swl -> itm:holdadj ->  Where is a bag to hold the groceries? -> syn ;;
 `sentenceList`
 
+|.|
+
 Here I read `i.(to/that I) hold the groceries` as a noun 
-which is a direct object in (1) and indirect 
-in (2); a proposition in (3); and an adjective in (4).  
+which is a direct object in (`ref<itm:holddir>;) and indirect 
+in (`ref<itm:holdindir>;); a proposition 
+in (`ref<itm:holdprop>;); and an adjective in (`ref<itm:holdadj>;).  
 If we define the `i.verb` macrotype as intrinsically 
 a transform yielding a proposition, then we 
 should categorize the verb component (`i.(to) hold`/) 
@@ -1317,11 +1320,11 @@ by parenthesizing the non-proposition outcome
 after the `q.V`/: `VparaN; for a `q.noun-clause` 
 verb, and `VparaJ; for an `q.adjective-clause` 
 verb.  Separately, another feature of 
-the above examples (apart from (3)) is that 
+the above examples (apart from (`ref<itm:holdprop>;)) is that 
 the `i.subject` is missing from the clause 
 itself (so that it gets picked up from the 
 surrounding linguistic material, e.g. the 
-`i.direct` object in (2)).  For each 
+`i.direct` object in (`ref<itm:holdindir>;)).  For each 
 verb-alternative, then, we can identify 
 which element is `q.missing`/: say, 
 `VparaNOne; for a noun-clause verb `q.gapped` 

@@ -452,6 +452,13 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
     esc = ":";
     esc1 = ",";
    }
+   else if(se == "?")
+   {
+    m = "`\\[?]";
+    m1 = "`\\[,]";
+    esc = "?";
+    esc1 = ",";
+   }
 
    else
      return;

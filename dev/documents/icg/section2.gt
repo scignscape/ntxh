@@ -8,7 +8,7 @@ derives from observing how constructions do
 not in the general case just `q.transparently` or 
 `q.passively` connote predicate structures, 
 the way that `AdjN; patterns mechanically 
-call up predicate-subject predications.  
+call up predicate-subject connections.  
 Instead of recapitulating predicate structure 
 directly, language structure reflects 
 propositional or `i.interpretive` attitudes, 
@@ -119,10 +119,10 @@ if they have a coherent collection of
 such relationships.  More to the point, 
 we want to explain `i.why` sentences are 
 (felt as) well-formed.  With a focus on 
-phrase-structure, we can explain well-formdeness 
+phrase-structure, we can explain well-formedness 
 in terms of how phrases are nested together.  For 
 example, we can say that subphrases have some
-singular synopsis which allows them to play some 
+singular synopsis which allows them to play an 
 expected structural role in a larger phrase 
 %-- a verb-phrase standing in for a verb, say.  
 Or, in terms of inter-word relations, we 
@@ -189,7 +189,7 @@ data structure which captures the sentence's
 functional propriety; how it functions as a 
 correct embodiment of the language system. 
 To the extent that a sentence has one 
-clear meaning, then a systematic linguistic 
+clear meaning, a systematic linguistic 
 theory will generally hold that there is 
 one clear mechanism `i.through which` 
 the sentence has that meaning.  This 
@@ -205,7 +205,7 @@ can be ignored.
 
 `p.
 In that case, we can not only posit that 
-the meaning of `i.the neighbors dogs were 
+the meaning of `i.the neighbors' dogs were 
 barking` (spoken in a `q.normal` context) 
 is necessarily to report on the vocalizations 
 of some canines, but we are permitted to 
@@ -290,7 +290,7 @@ As I have already suggested, my goal here is to
 propose a formal model which is appropriate 
 for cognitive grammar %-- mostly preserving 
 the philosophical commitments of key figures 
-such as Langacker and Talmy (at least as a goal) 
+such as Langacker and Leonard Talmy (at least as a goal) 
 and yielding representations which help 
 to document cognitive activity sited in linguistic 
 formations.  Ideally, insofar as cognitive grammar 
@@ -362,7 +362,7 @@ similar to the maxim in mathematical type theory
 that functions between two types constitute a 
 third type, or in computational type theory 
 that procedures with respective tuples of 
-input and output types dervice a further type. 
+input and output types derive a further type. 
 `p`
 
 `p.
@@ -406,7 +406,7 @@ forms the core of a parse graph.  At the
 same time, I will suggest conceptual interpretation 
 of relationships; I do not picture formal models 
 as merely observing grammatic `q.behaviors` 
-(cf. Langacker Intro p. 93).  The idea that 
+(cf. Langacker's `i.Introduction`/, page 93).  The idea that 
 adjectives transform nouns into `q.other nouns` 
 can be given a strictly behavioral gloss by 
 reading it as a structural condition: when occurring 
@@ -438,7 +438,7 @@ Likewise for any other adjective; in this
 sense adjectives create conceptual expectations that 
 window onto speakers' rational construals of situations.  
 Sentences fulfill expectations by presenting words 
-or phrases that complete ideas that seem to have been 
+or phrases which complete ideas that seem to have been 
 left open by the previously spoken (or written) sentence-fragment.  
 `p`
 
@@ -477,11 +477,11 @@ wrong (for whatever reason: maybe the speaker is
 incompetent, or was interrupted, or is still deciding 
 what to say next).  The fact that we experience 
 mismatched expectations as violations of syntactic 
-rules, rather than conceptually anomalies, may cloak 
+rules, rather than conceptual anomalies, may cloak 
 the fact that these expectations are intrinsically 
 conceptual.  However, this comports with my theory of 
 the origin of grammatic intuitions: we are used 
-to the flow of expectations to accord with the 
+to the flow of expectations according with the 
 unfolding of grammar.  We `i.become` used to this 
 alignment the more that we immerse ourselves 
 in language; as a result, we come to subconsciously 
@@ -502,18 +502,19 @@ such that expectations are raised and then satisfied.
 Once these patterns become entrenched 
 %-- in particular, via grammatic categories %-- they 
 can nevertheless be given a formal treatment.  
-I will now examine the specific formal model introduced 
-here.   
+I will now examine one specific formal (or quasi-formal) 
+model, which I do not deign to present as a worked-theory 
+but as a set of intuitions that were also elaborated in Part I.   
 `p`
 
 `subsection.Cognitive Transform Grammar`
 `p.
 I will refer to the framework proposed here as 
 `q.Cogitive Transform Grammar`/.  On this theory, 
-the full grammatic interpretation of a sentence 
+the full syntactic interpretation of a sentence 
 can be given, at least in germinal form, through 
-relationships between two words.  The 
-grammatic pattern, in turn, emerges from cognitive 
+collections of two-word relationships.  The 
+grammatical pattern, in turn, emerges from cognitive 
 relations enacted between paired words.  
 In particular, one word is a `i.modifier` and a 
 second is a `i.ground` or `i.target`/.  The modifier's 
@@ -575,7 +576,7 @@ priorly modified by its predecessor in the chain.
 This kind of picture helps motivate the idea of modeling 
 `q.cognitive transforms` wholly via inter-word relations.  
 The graph structure in the case of `i.toward the store` 
-is simple, in that the transform evince a linear chain 
+is simple, in that the transforms evince a linear chain 
 backward through the sentence: `StoreTheChain;.  
 The arrows in this `q.graph` (subgraph, technically) 
 point from the target to the modifier: `i.the` is 
@@ -597,8 +598,8 @@ target.  For example, `i.the` is target for `i.toward`/,
 but conceptually this means that the accumulated concept 
 resulting from `i.the`/'s own modification of its own 
 ground is assumed to be carried along in the 
-`i.the`/`i.toward` interaction (notationally, the 
-`i.the`/`i.toward` arrow, or directed graph-edge).     
+`i.the`//`i.toward` interaction (notationally, the 
+`i.the`//`i.toward` arrow, or directed graph-edge).     
 `p`
 
 `p.
@@ -612,7 +613,7 @@ to another, uniquely, and I stipulate that for any single
 sentence such chains will always lead to a single 
 `q.root` word.  At this level of description the parse 
 graphs are therefore `i.trees`/.  I will however introduce 
-certain additional structures through which parcse-graphs 
+certain additional structures through which parse-graphs 
 actually become a form of hypergraph, albeit with acyclic 
 directed edges, that is, with a kernel tree-like structure. 
 `p`
@@ -642,7 +643,7 @@ establishes a past progressive tense: I read this as a
 transform which yields a verb (i.e., a conceptual 
 outcome which profiles an event or process according to 
 the overall ideational desiderata for verbs, for example 
-in Lang Intro. p. 108).  More precisely, `i.barking` is 
+in Langacker's `i.Introduction` page 108).  More precisely, `i.barking` is 
 (I claim) conceptually adjectival, but by blending this concept 
 with a temporal reference frame, we employ a conventionalized 
 modification which refocuses the original concept toward 
@@ -669,7 +670,7 @@ Also `i.the` modifies `i.dogs` via singular determinant,
 reiterating my sketch for `i.the store`/.  These, then, 
 are basic word-pairs in `i.The dogs were barking very loudly`/.  
 Next, `i.very loudly` `q.outputs` an adverb
-(it also `q.inputs`/) one, which means the outcome of 
+(it also `q.inputs` one), which means the outcome of 
 that transformation needs to link with a verb, to become 
 its ground %-- specifically, here, the verb concept 
 resulting from `i.were barking`/.  So the outcome of 
@@ -788,7 +789,7 @@ transforms modify the conceptual meanings
 we attribute to verbs. 
 `p`
 
-`subsection.Transform `q.Columns` and Verb Objects`
+`subsection.Transform Columns and Verb Objects`
 `p.
 Insofar as a verb profiles an event or action, there 
 are many desiderata that can potentially be predicated 
@@ -828,13 +829,13 @@ interpretation on `i.walk`/, but arguably
 there are similar examples with other prepositions: |+|
 
 `sentenceList,
-sentenceItem; `swl -> --- -> I'm headed toward the store. -> cog ;;
-sentenceItem; `swl -> --- -> This bus is rerouted along Queen Street. -> cog ;;
-sentenceItem; `swl -> --- -> Traffic was diverted around the highway. -> cog ;;
-sentenceItem; `swl -> --- -> The steps lead through the underpass. -> cog ;;
-sentenceItem; `swl -> --- -> The boat is heading under the bridge. -> cog ;;
-sentenceItem; `swl -> --- -> Please make an omelet for the dogs. -> cog ;;
-sentenceItem; `swl -> --- -> Please make the dogs an omelet. -> cog ;;
+`sentenceItem; `swl -> --- -> I'm headed toward the store. -> cog ;;
+`sentenceItem; `swl -> --- -> This bus is rerouted along Queen Street. -> cog ;;
+`sentenceItem; `swl -> --- -> Traffic was diverted around the highway. -> cog ;;
+`sentenceItem; `swl -> --- -> The steps lead through the underpass. -> cog ;;
+`sentenceItem; `swl -> --- -> The boat is heading under the bridge. -> cog ;;
+`sentenceItem; `swl -> --- -> Please make an omelet for the dogs. -> cog ;;
+`sentenceItem; `swl -> --- -> Please make the dogs an omelet. -> cog ;;
 `sentenceList`
 
 |.|
@@ -884,7 +885,7 @@ indirect objects typically occur last in sentence
 order, after a subject and direct object.  
 Indirect objects can then be grouped along with 
 potentially numerous `q.satellites` trailing away from 
-the verb itself: 
+the verb itself: |+|
   
 `sentenceList,
 `sentenceItem; `swl -> --- ->  We have to go to the counter by the cashier near 
@@ -892,6 +893,8 @@ the front of the store for a ticket. -> cog ;;
 `sentenceItem; `swl -> --- ->  The waiter carved some duck for Grandma at the 
 table with an ornate knife. -> cog ;;
 `sentenceList`
+
+|.|
 
 Only some of these add-ons are feasible as direct or indirect 
 objects, e.g., candidates for a dropped preposition as in 
@@ -913,9 +916,9 @@ conceptual specificity outside of context: |+|
 `sentenceList,
 `sentenceItem; `swl -> itm:studied ->  I studied. -> cog ;;
 `sentenceItem; `swl -> itm:studiedmath ->  I studied math. -> cog ;;
-`sentenceItem; `swl -> --- ->  I studied last night. -> cog ;;
-`sentenceItem; `swl -> --- ->  I studied for two hours. -> cog ;;
-`sentenceItem; `swl -> --- ->  I studied in a bookstore. -> cog ;;
+`sentenceItem; `swl -> itm:studiedhours ->  I studied for two hours. -> cog ;;
+`sentenceItem; `swl -> itm:studiedlastnight ->  I studied last night. -> cog ;;
+`sentenceItem; `swl -> itm:studiedbookstore ->  I studied in a bookstore. -> cog ;;
 `sentenceList`
 
 |.|
@@ -928,7 +931,7 @@ of `i.study` is less useful or impactful than
 the transitive; instead, the two forms profile the 
 action of `q.studying` with different degrees of 
 emphasis on its relation to surrounding detail.  
-The final three sentences profiles the action as 
+The final three sentences profile the action as 
 a completed process, but rather generically: the 
 specific information focuses on temporal or 
 spatial surroundings where the action transpired, 
@@ -949,7 +952,28 @@ some `i.internal` detail which the sentence
 highlights, or whether the communicated details 
 are more `q.external` to the action-concept in the 
 sense of framing the action in a spatial, temporal, 
-durational, and functional context.    
+durational, and functional context.  
+As such, `i.math` is a direct object for `i.study`/; 
+it is an indirect object in cases such as `i.she taught 
+me math`/; but the patterns in 
+(`ref<itm:studiedhours>;)-(`ref<itm:studiedbookstore>;) 
+represent verb detailing which is neither direct or 
+indirect object but rather conceptual descriptions 
+adding specificity to the speaker's account of the 
+profiled event/process (although `ref<itm:studiedlastnight>; 
+has an alternative reading that might occasionally be 
+in effect wherein `i.last night` is actually `i.what` was 
+studied, e.g. a political scientist examining a 
+recent debate).  Having pointed out these distinctions, 
+however, my point is that we need to explain `i.why` certain 
+detailing is introduced (i.e., we are inclined to 
+choose phraseology which introduces them) via direct 
+and/or indirect objects as opposed to via supplemental 
+clauses or phrases (note that the distinction between 
+direct and indirect objecthood in the general case is 
+less salient than the distinction of both to supplemental 
+phrasing; direct objects in one context become indirect 
+in others, as in `i.I brought here there` vs. `i.I went there`/).
 `p`
 
 `p.
@@ -1008,10 +1032,10 @@ influenced by their mutual dependency.  In general, a verb
 transforms a noun by enmeshing it in a propositional context: 
 with `i.The dogs were barking` we mentally comport to 
 `i.the dogs` in a manner reflecting their status as a propositional 
-focal point: the intellectual content rationalized via 
+focal point %-- the intellectual content rationalized via 
 the sentence's idea emerges from some property or action 
 that will be predicated of the dogs.  This dynamic remains 
-if force for transitive verbs: in a fragment like 
+in force for transitive verbs: in a fragment like 
 `i.John brought`/, however incomplete, we are 
 still being prepped for a logic wherein it will be 
 some facticity about John that anchors the 
@@ -1041,8 +1065,8 @@ target (the direct object), which it then modifies in turn.
 `p.
 The proposal that verbs modify direct objects may seem 
 less plausible than in the case of subjects: after 
-all, the direct might seem more, on semantic grounds, 
-to be modiying the verb than vice-versa.  To 
+all, the direct object might seem more, on semantic grounds, 
+to be modifying the verb than vice-versa.  To 
 `i.study math` or `i.walk away` may seem to name a 
 special kind of studying and walking.  Moreover, 
 sometimes an object seems to be `q.part of` a verb, 
@@ -1205,7 +1229,7 @@ all pointing to the same node.
 
 `p.
 My theoretical contrast between `i.stages` and 
-`i.colums` %-- calling for distinct 
+`i.columns` %-- calling for distinct 
 representational parameters %-- has the consequence that 
 parse-graphs may differ by virtue of whether 
 transforms are treated as distinct stages or 
@@ -1248,7 +1272,7 @@ references in the city-names: we come to treat them
 not as particular locations, but as points in a larger 
 aggregate.  This aggregate may be further structured 
 by construing a temporal order; but 
-such an ordering effect supplemental to the basic 
+such an ordering effect is supplemental to the basic 
 idea of forming a location-collection from a 
 disparate set of locations.  I would say that 
 each location is a `q.column` in aggregate 
@@ -1288,7 +1312,7 @@ constructions contrast with `q.stage` transforms in the
 accretion of conceptual detail associated with a verb.
 `p`
 
-`subsection.The Cognitive Distinction between Stages and Columns` 
+`spsubsectiontwoline.The Cognitive Distinction between Stages and Columns`
 `p.
 A verb can be conceptually expounded upon in many ways; only a 
 few are syntactically privileged through transitive or 
@@ -1350,7 +1374,7 @@ qua formal representation, may come across as
 overdetermined.  We should at least consider the possibility 
 that no exclusive analysis of the contrast between (say) 
 `i.heading out` and `i.heading out to` matches 
-our actual linguistis processing.  Perhaps mentally we 
+our actual linguistic processing.  Perhaps mentally we 
 somehow allow `i.out` to `q.float`/, vaguely attaching 
 to `i.heading` as an extra specifier, `i.and` perhaps 
 as an entrenched compound, and perhaps also 
@@ -1459,7 +1483,7 @@ in such a restricted sense ambiguous, not fully disclosing
 which `i.epistemic` pattern orients it.  Such ambiguity is 
 barely noticeable here, because the construals are only 
 slightly different.  However, the speaker could 
-`i.potentially` craft the sentence aroud the idea that 
+`i.potentially` craft the sentence around the idea that 
 her addressee wants her to clarify `i.where` she is 
 going; or conversely that, reading his book, she 
 has to get his attention to tell him that she is going 
@@ -1505,7 +1529,7 @@ together: (`ref<riceburn>;) worries about burning both the rice and
 the whole dish, without the technical possibility of 
 differentiating them (qua referents of `i.the rice`/) 
 being consciously noted by (`ref<riceburn>;)'s speaker.  So (`ref<riceburn>;) 
-may reveal an ambiguity does not really decide which 
+may reveal an ambiguity but does not really decide which 
 meaning is preferred.  Whoever hears (`ref<riceburn>;) may therefore 
 conclude that, while a speaker `i.could potentially` 
 intend one meaning expressly, the potential difference 
@@ -1569,9 +1593,9 @@ on two different time frames: this could refer to
 work done physically present in the lab, over a few 
 hours; or more diffusely to the fact of someone 
 having an institutional affiliation with the lab, 
-presumably spending time there doing research, 
-but not necessarily connecting facts of the people 
-to the actual time and place of being in the lab. 
+presumably spending time there doing research, but 
+without the implication that verbs attributed to them 
+profile events occuring in the lab `i.spatially`/. 
 In `i.One of the researchers got 
 married/pregnant/cancer while 
 working in the lab`/, we would not guess 
@@ -1611,7 +1635,7 @@ they are told only (`ref<itm:vandalism>;)-(`ref<itm:vandalismlab>;).  Moreover, 
 (`ref<itm:vandalismlab>;) makes it slightly more likely that we would 
 infer `i.working` as applying to the `i.time` of 
 discovery, because (`ref<itm:vandalismworking>;) profiles `i.working in the lab` 
-as a grounded process, via a finite clauses.  By 
+as a grounded process, via a finite clause.  By 
 extablishing somewhat disparate `q.probabilities` 
 in the space of alternative readings, 
 (`ref<itm:vandalism>;)-(`ref<itm:vandalismlab>;) have, 

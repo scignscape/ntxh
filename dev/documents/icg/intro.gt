@@ -1,18 +1,115 @@
 
 `p.
+This is the second part in a three-part series of essays 
+discussing Cognitive Grammar %-- and, to a limited 
+extent (the limits backed by philosophical claims) 
+ %-- formal natural-language models.  As with Part One, 
+example sentences used to demonstrate or warrant 
+linguistic suggestions are compiled into a data 
+set accompanying these papers.  More information 
+about the dataset and code for generating and accessing 
+this data are available from the repository where 
+this paper is hosted.
+`p`
+
+`p.
+The current document will focus particularly on 
+Langacker's ideas about grounding, which were 
+touched on at the end of Part I.  My arguments 
+in Part I were centered on the idea that 
+sentences evince an accretion of propositional 
+content %-- with the caveat that linguistic 
+structure and figuration often invokes propositional 
+structure only indirectly, so, I suggest, attempts to 
+read language through `q.logic` are problemmatic 
+%-- and that we can analyze inter-word relations and 
+lexical, semantic or syntactic `q.type systems` as 
+outlining stages in this accretion.  
+A central facet of this theory is that the `q.accretion of 
+detail` building toward a sentence's propositional 
+intent %-- note that, as with Speech Act theory, 
+the relation between an utterance and its predicate 
+designatum may be more complex than simply asserting 
+beliefs %-- is inherently organized, 
+as a process, around the speaker's epistemic and perceptual 
+relation to the situation contextualizing the sentence.  
+A `q.sentence` here is proxy for any relatively 
+self-contained language segment, which would be 
+received as `q.sentence-like` as far as bearing relation to a 
+specific propositional content; and by `q.speaker` I mean 
+generically whoever formulates a sentence, not 
+necessarily by speaking (cf., writing, sign-language, etc.). 
+`p`
+
+`p.
+It seems fairly obvious and uncontroversial that 
+propositional attitudes expressed through 
+language are centered on the speaker %-- we can 
+of course assert, say, that some third person 
+believes something, but this occurs against 
+the backdrop of our (typically unstatated) 
+belief `i.that` they believe something.  
+Moreover, every sentence carries with it a 
+point of view; since language is an interpersonal 
+activity, it implicates all of the faculties 
+of intersubjective reality and our innate 
+`q.theory of other minds`/.  We can readily make 
+sense of others' deictic references, for example, 
+by evaluating designations such as `q.this` or 
+`q.now` in terms of the speaker's current 
+practical and perceptual situation.  While these 
+ideas are familiar in both linguistics and philosophy, 
+Langacker's analyses of speaker-relative `i.grounding` 
+or `i.anchoring` achieve exceptional detail both 
+in terms of revealing the diversity of grounding 
+effects %-- classifying different linguistic 
+structures in how they situate speakers `visavis; 
+situational foci in different ways %-- and in 
+examining how grounding effects structurally thread 
+through the entirely of language.
+`p`
+
+`p.
+Although most sentences 
+have one elevated point of focus, or (a term I used 
+in Part I) `q.nexus`/, many sentences have supplementary 
+details and clauses which add refinements.  However, 
+these less-central elements are not undifferentiated 
+`q.peripheral` content, but rather evince different levels 
+of centrality and different structural relations to the 
+nexus.  Langacker's analyses transform generic 
+notions of a center/peripheral axis in sentence-construction 
+into a detailed theory, outlining in discursive and 
+pragmatic terms how the grounded center draws in 
+different peripheral and semi-peripheral content 
+in different ways.  I proceed here under the 
+assumption that this Cognitive and `i.discursive` model 
+applies to syntactic and semantic structure as well, 
+and can help motivate more formalized paradigms for 
+representing linguistic schemas.  Metaphorically, 
+we can picture a sentence-nexus as pulling content 
+in to the center, and this dynamic provides an orientation 
+which motivates patterns of regularity and entrenchment 
+that give language a formal dimension.  System such as 
+Dependency Grammar (analyzing syntax in terms of rules 
+governing word-pairs, as the building blocks of 
+syntactic conventionalization) or type-theoretic semantics 
+can be seen as deriving their technical rigor 
+%-- despite the often ambiguous and subtle nature of 
+human language %-- from the processual and epistemic 
+order induced by sentence-grounding and center/periphery connections. 
+`p`
+
+`p.
 Formal presentations of natural-language grammar are 
 often classified as either `q.dependency` grammars 
 (concentrating on inter-word relationships) 
 or `q.constituency` grammars (focusing on 
 phrase structure and phrase hierarchies).  
 Unlike more rigidly formal models, 
-Ronald Langacker's `i.Cognitive` Grammar 
-does not usually engage in very fine-grained, 
-schematic representations of all the structuring 
-elements contributing to a sentence's or 
-expression's meaning.  Instead, Langacker will 
-call attention to particular features in an 
-overall linguistic artifact those which reveal 
+Langacker attends less to syntactic or semantic rules, 
+calling attention instead those features in an 
+overall linguistic artifact which reveal 
 specific facets of language as a conceptualized 
 system: cognitive construals of referents, 
 extra-linguistic situations, and word-senses; 
@@ -47,8 +144,8 @@ expression as grammatically incorrect, while other
 seemingly similar transformations are accepted.  
 Likewise, although word senses tend to proliferate, 
 there is usually some logical structure binding 
-senses together in a lexical network.  One 
-recurring example in Langacker's writings is 
+senses together in a lexical network.  For instance, 
+one recurring example in Langacker's writings is 
 `i.ring`/: a network of diverse but interconnected 
 meanings join the senses of `i.diamond`/, `i.wedding`/, or 
 `i.smoke` ring with `i.criminal` or `i.boxing` 
@@ -62,8 +159,9 @@ from simpler ones only via certain sorts of
 insertions and rearrangements %-- and because 
 semantic meanings, while often subtly organized 
 (more so than crisp mappings like 
-`i.cat` to `i.felid`/), it is tempting to picture 
-language as logically structured.  It is tempting 
+`i.cat` to `i.felid`/), often have a stable predicate-like 
+substratum %-- it is tempting to picture 
+language as logically structured.  It is tempting, i.e.,
 to envision that meanings emerge from sentences 
 via a series of stylized deductions which people 
 instinctively follow, like replaying a notated 
@@ -138,8 +236,8 @@ that the speaker believes the act was unintentional
 (compare `i.John poured wine on the duck`/).  
 Epistemic attitudes determine how we understand 
 and interpret situations, both in terms of 
-their underlying causative explanation 
-(as in contrasting intentional from accidental 
+their underlying causal explanation 
+(as in contrasting intentional with accidental 
 actions) and in terms of mental organization 
 (such as patterns of visual focus when 
 perceptually spanning an environment where 
@@ -149,12 +247,12 @@ suggests a not-identical architectonic of visual foci
 than `i.I walked toward the front of the house where 
 two dogs were barking`/.  Similarly, Langacker 
 contrasts the `q.direction of mental scanning` in 
-(his example 23, p. 82): |+|
+(his example 23 `cite<[page 82]LangackerIntro>;): |+|
 
 `sentenceList,
-`sentenceItem; `swl -> itm:hillrises -> The hill gently rises from the bank of the river. -> cog
+`sentenceItem; `swl -> itm:hillrises -> The hill gently rises from the bank of the river. -> cog ;;
 `sentenceItem; `swl -> itm:hillfalls -> The hill gently falls to the bank of the river. 
--> cog
+-> cog ;;
 `sentenceList`
 
 |.|
@@ -194,14 +292,14 @@ speakers are under no obligation to use
 standardized syntactic constructions, or 
 even conventionalized word senses.  
 Indeed, many linguistic `q.rules` shoud 
-be seen as approximate.  There question of 
+be seen as approximate.  The question of 
 whether or not a certain construction is 
 or is not grammatically acceptable is 
 often not black-or-white.  Langacker's 
 analyses frequently point to semantically 
 and syntactically similar patterns which 
 nonetheless have different levels of 
-normalcy, as in (LangIntro pp. 430-432): |+|
+normalcy, as in (`i.op. cit.`/,pages 430-432): |+|
 
 `sentenceList,
 `sentenceItem; `swl -> itm:expected -> Those problems were fully expected by the organizers. -> syn ;;
@@ -215,9 +313,9 @@ normalcy, as in (LangIntro pp. 430-432): |+|
 |.|
 
 He gives each of these different levels of acceptability.  
-The most uncomfortable-sounding of these in my mind are  
+The most uncomfortable-sounding in my mind are  
 (`ref<itm:everybody>;) and (`ref<itm:thatpainters>;); 
-Langacker argues that (`ref<itm:graduate>;) sounds better 
+Langacker argues that (`ref<itm:everybody>;) sounds better 
 than (`ref<itm:graduate>;) but 
 that the two sentences have similar rationales both 
 in grammatic form (e.g., opening with a subordinate finite clause) 
@@ -247,13 +345,13 @@ grammar is more anarchic than linguists traditionally
 realize.  There may be grammatic rearrangements which 
 are reasonable even if unconventional; there may also 
 be conventional norms which persist even if 
-violations of those may still yield understandable 
+violations of those might still yield understandable 
 speech-acts.  In these sorts of situations, 
 the norms of a language will tend to be loosened, 
 and the `q.templates` of entrenched constructions tend 
 to multiply.  New patterns, or new levels of acceptability 
 collectively granted to constructions or usages 
-that were once dubious, may emerge under the same 
+that were once dubious, could emerge under the same 
 dynamics as new lexemes and word-senses: if there 
 is a semantic niche for some pattern, to either 
 communicate some idea more precisely or 
@@ -289,7 +387,8 @@ and expect their hearers or readers to
 understand that they are consciously selecting 
 some words, in lieu of others, to signify that 
 the rejected words are less appropriate for 
-the speaker's mindset (page 473): |+|
+the speaker's mindset (the `q.competitive` example 
+is Langacker's, page 473; the first is a now-famous quote about Donald Trump): |+|
 
 `sentenceList,
 `sentenceItem; `swl -> --- -> If we had had confidence the president clearly 
@@ -299,7 +398,7 @@ did not commit a crime, we would have said so. -> dis ;;
 `p`
 
 `p.
-These paradigms do not preclude the use of technical 
+Such paradigms do not preclude the use of technical 
 vocabulary, or formal representations, to explicate 
 the structures which speakers avail themselves of; 
 our only requirement is that we keep in the 
@@ -413,7 +512,7 @@ resources`/, `i.rare coins`/, `i.countless opportunities`/,
 In fact, absolute quantifiers (`i.many`/, `i.few`/, `i.much`/, `i.little`/, 
 `i.several`/, `i.nine`/, etc.) qualify as
 adjectives from both a semantic and a grammatical standpoint.
-(LangIntro p. 320)
+`quotepage<320>;
 `quote`
 
 Langacker then argues, as delineated by this sort of 
@@ -451,8 +550,10 @@ or `i.*blue wooden big sign`/).
 The various patterns and tendencies noted are neither exceptionless nor even
 close to being exhaustive of English nominal structure. But while the facts of noun
 modification are quite complex, they also show a great deal of systematicity.
-LangIntro p. 320.
+`quotepage<320>;
 `quote`
+
+|.|
 
 This systematicity is, arguably, imperfectly modeled within 
 Dependency Grammar, insofar as the foundation of that style 
@@ -460,7 +561,7 @@ of analysis lies within individual word-pairs.
 It is true that a noun can pair off with 
 numerous adjectives %-- 
 see `i.genuine French culinary institute` 
-or `i.those two lazy cats` (LangIntro p. 311) 
+or `i.those two lazy cats` (page 311) 
 %-- but full analysis (granting Langacker's 
 contentions here) calls for identifying 
 rankings `i.between` those pairs.  The `q.ordering` 
@@ -469,7 +570,7 @@ phrase-oriented (constituency) model,
 where we can see the adjectival constructions 
 as nested inside one another.  So for instance 
 `i.my three broken chairs` has the possessive 
-as an `q.outermost structural layer` (LangIntro p. 275), 
+as an `q.outermost structural layer` (page 275), 
 with `i.broken` a designation of quality and 
 `i.three`/, in between, a designation of quantity.  
 Each modifier supplies a different sort of detail, 
@@ -495,7 +596,7 @@ ambiguities in how we hear sentence elements as
 grouped together.  Langacker frequently discusses 
 constituency as a noticeable but partial 
 pattern, so that sentences do not necessarily 
-have a fixed construction hierarchy: 
+have a fixed construction hierarchy: |+|
 
 `quote,
 There is no consensus about the internal constituency of nominals, due in part to the matter
@@ -512,7 +613,7 @@ capture all aspects of grammatical organization.
 From the CG standpoint, questions of constituency have to be addressed as part
 of a broader consideration of symbolic assemblies. A symbolic assembly consists of
 semantic structures, phonological structures, and symbolic links between the two.
-LangIntro pp323-4
+`quotepages<323-4>;
 `quote`
 
 `quote,
@@ -532,7 +633,7 @@ at the other.
 ...
 In the absence of clear-cut evidence, the proper analysis may simply be
 indeterminate %-- certainly for the analyst, and very possibly even for speakers.
-p. 325
+`quotepage<325>;
 `quote`
 `p`
 
@@ -542,7 +643,7 @@ coupled two or more words would be to form multi-word units.
 Thus `i.put through` (as in a phone call) serves as a 
 compound verb, whereas `i.ran through` is more likely a 
 motion verb along with a path description (his 
-example 49, p. 404):
+example 49, page 404): |+|
 
 `sentenceList,
 `sentenceItem; `swl -> --- ->  He ran through the mall. -> cog ;;
@@ -551,6 +652,8 @@ example 49, p. 404):
 `sentenceItem; `swl -> --- ->  The call was put through. -> cog ;;
 `sentenceItem; `swl -> --- ->  He put the call through. -> cog ;;
 `sentenceList`
+
+|.|
 
 Langacker argues that `i.Through the call he put`/, 
 `i.The mall was run through`/, and 
@@ -562,9 +665,7 @@ Interestingly, we can give the example of
 review`/, which behaves like `i.put through` instead of 
 like the `q.physical` run-through: `i.through the options he 
 ran in his mind` is dubious at best).  
-`footnote`
-
-But numerous factors influence whether and to what 
+`footnote`  But numerous factors influence whether and to what 
 degree we hear words as `q.coupled`/.  Even if 
 phrases `i.logically` gather up into a hierarchy, 
 in terms of the situation they describe, Langacker 
@@ -584,8 +685,9 @@ Furthermore, a primary reason for adopting a layered structure is the tacit assu
 reflected in constituency.  In CG this assumption is seen as being
 gratuitous. Grammatical relationships have a conceptual basis and can be
 captured by correspondences irrespective of the order of grammatical combination.
-A viable description is therefore possible adopting an unlayered structure... .
-LangIntro p. 417
+A viable description is therefore possible adopting an unlayered 
+structure `textellipsis; .
+`quotepage<417>;
 `quote`
 `p`
 
@@ -606,12 +708,14 @@ that is the noun which the phrase modifies?
 `p.
 Along similar lines, Langacker uses several examples to 
 contrast subordinate clauses and non-clausal phrases, 
-such as (examples 12-13, pp. 415-6):
+such as (examples 12-13, pages 415-6): |+|
 
 `sentenceList,
 `sentenceItem; `swl -> --- ->  They began arguing before they even sat down. -> log ;;
-`sentenceItem; `swl -> --- ->  They began arguing before dinner. -> log ;;
+`sentenceItem; `swl -> itm:beforedinner ->  They began arguing before dinner. -> log ;;
 `sentenceList`
+
+|.|
 
 Langacker's theme here is distinguishing `i.subordination` 
 from `i.coordination` between clauses: 
@@ -619,7 +723,7 @@ from `i.coordination` between clauses:
 relation between the clauses is inherently asymmetrical ... 
 Underscoring their asymmetry is
 the possibility of replacing the clause in question with a nonclausal structure` 
-(LangIntro p. 415).  He goes on: 
+(page 415).  He goes on: 
 
 `quote,
 With this approach, we are able to maintain a clear and precisely defined 
@@ -628,7 +732,9 @@ We have already seen that coordinate structures exhibit various kinds and degree
 asymmetry. Should we not also expect the converse, that certain subordinate struc-
 tures might tend toward symmetry? Instead of a strict dichotomy, we might well
 anticipate a fuzzy boundary with transitional cases. 
-`quote` 
+`quote`
+
+|.|
 
 I read this as questioning whether we hear `i.before they even sat 
 down`/, say, as a subordinate detail `i.supplementing` the 
@@ -643,7 +749,7 @@ so since before dinner`/).
 `p.
 But I think this question in turn depends on how tightly we 
 hear `i.before dinner` or `i.before they even sat down` coupled to 
-the antecedent phrase and to its parts.  In (), 
+the antecedent phrase and to its parts.  In (`ref<itm:beforedinner>;), 
 `i.before dinner` can be treated as a further detail on 
 `i.started`/: it establishes a temporal time frame 
 augmenting how `i.start` profiles the beginning-point of 
@@ -801,14 +907,14 @@ linguistic competence, or perhaps a
 preliminary step `i.toward` linguistic competence. 
 `p`
 
-`sectline;
+`thindecoline;
+
 `p.
 When linguistic methodology is described as 
 `i.computational`/, this usually implies that 
 the research is not only developing or employing 
 some formal representation of linguistic 
-elements, but is moreover using some kind 
-of computational mechanism to instantiate 
+elements, but is moreover using computational mechanisms to instantiate 
 and/or analyze the relevant formal structures, 
 concretely filled in with particular 
 linguistic content.  In the case of 
@@ -822,7 +928,7 @@ In that digital form, the data structures may
 then be available for further manipulation, 
 such as being visually presented in some 
 diagrammatic manner or being paired with 
-other data structures, such as tables itemizing 
+other data structures, like tables itemizing 
 the lexical interpretation and/or grammatic 
 categorization of the component lexemes.
 `p`
@@ -831,7 +937,7 @@ categorization of the component lexemes.
 The term `i.computational linguistics` probably also 
 implies that these digital representations 
 are %-- or will potentially be %-- `i.automatically` 
-generated by some Natural Language Processing 
+generated by a Natural Language Processing 
 system.  For most researchers, that is, the use of 
 computers as linguistic tools is bound up with a 
 goal to automate various dimensions of linguistic 
@@ -889,7 +995,7 @@ recent investigations merging Conceptual
 Space Theory, in the sense of Peter `Gardenfors;, 
 with a notion of `q.hypergraph` grammar.  
 This combination %-- proposed in a schematic 
-manner particularly in `cite<BobCocke>;, which 
+manner particularly in `cite<InteractingConceptualSpaces>;, which
 apparently reflects the experiences of 
 several seminars conducted by a group of 
 linguists and mathematicians %-- outlines 
@@ -1024,8 +1130,8 @@ somehow operative in myth-making.  Even language
 with no formal rule-books, no instructional pedagogy, 
 or no written form, evince precise grammatic 
 and morphological systems %-- equally or more complex 
-than cosmopolitan languages regulated by institutions 
-like the `AcademieFrancaise;.      
+than cosmopolitan languages regulated by such institutions 
+as the `AcademieFrancaise;.      
 `p`
 
 `p.
@@ -1058,11 +1164,12 @@ treatments of language.
 `p`
 
 `p.
-Structural patterns may emerge from how we cognize 
+Structural patterns can emerge from how we cognize 
 and then share impressions of empirical situations; 
 or in the internal logic of states of affairs that 
 are worthy of or conducive to linguistic expression; 
-or some combination.  It is reasonable to assume 
+or some combination.  As I have intimated, it is reasonable 
+(indeed `i.de rigueur`/) to assume 
 that most (or all) linguistic statements have some 
 basis in fact %-- that they are associated with 
 some `i.propositional content` which the speaker either 
@@ -1112,8 +1219,8 @@ indirect or diplomatic way of calling attention to her problems
 appealing to moderates (to hope for something implies some 
 doubt whether that will in fact transpire).  Conversely, 
 (`ref<itm:warrenpivot>;) might be said by a Warren supporter trying to alleviate 
-the concerns of (`ref<itm:warrenmoderates>;).  People can consciously 
-falsifiable reports of their propositional attitudes, 
+the concerns of (`ref<itm:warrenmoderates>;).  We can consciously 
+falsify reports of our propositional attitudes, 
 for various rhetorical or manneristic reasons.  
 But this implies that propositional attitudes are 
 themselves falsifiable contents, so it can be 
@@ -1142,7 +1249,7 @@ indirection, expresses a kind of second-order
 is sufficiently extablished as fact to be 
 collectively `q.enregistered`/), while (`ref<itm:warrenleads>;) also 
 implicates a request (that the other 
-conversants consent to this epistemic entrenchment).    
+conversants consent to this epistemic registering).    
 `p`
 
 `p.
@@ -1154,7 +1261,9 @@ In this sense language will reveal some
 structural patterns merely insofar as language's 
 signifying resources include, as a proper part, 
 exposition of factual beliefs and assertions.  
-Here I am not implying that patterns in 
+In this sense language needs to mimic logic because 
+it often has to signify things with a logical structure.  
+Here, though, I am not implying that patterns in 
 propositional structure are directly translated 
 to patterns in language %-- by way of illustration, 
 the usages in (`ref<itm:warrenpivot>;) are, on reflection, highly metaphorical 
@@ -1386,7 +1495,7 @@ are synchronized between people to the point
 of conventional entrenchment; `i.and` that 
 linguistics concerns regularities conventionalized 
 to the point where cognitive processes can be 
-excluded from the fields disciplinary scope 
+excluded from the field's disciplinary scope 
 (and when they can't %-- e.g. in the analysis 
 of rhetorical persuasion or of literary artistry 
 %-- they tap into aspects of language which linguistics 
@@ -1445,9 +1554,9 @@ his duty he will give her the bread once she gives him the Euros.
 We can clearly identify the relevant propositional contents: |+|
 
 `sentenceList,
-`sentenceItem; `swl -> --- ->  I would like to purchace a baguette.
+`sentenceItem; `swl -> --- ->  I would like to purchace a baguette. -> log ;;
 `sentenceItem; `swl -> --- ->  If you give me two Euros, I will give you a baguette
-and recognize it as yours.
+and recognize it as yours. -> log ;;
 `sentenceList`
 
 |.|
@@ -1473,14 +1582,14 @@ expressly means that the rules have a commonality which
 transcends any person's (or even any conversation's) 
 cognitive dispositions.  We would probably agree  
 (barring some extraordinary contextual detail) that
-(1) `i.necessarily` signifies the shopper's desire 
+(`ref<itm:baguette>;) `i.necessarily` signifies the shopper's desire 
 to buy a baguette, even if she or the baker (or both) 
 are inclined to impose some idiosyncratic interpretation.  
 We can of course imagine competing scenarios %-- perhaps the 
 baker intends (with her prior knowledge) to give her the baguette 
 for free, but she has to pretend an intention to buy the 
 bread so as hide their collusion from other shoppers.  
-In this case (1) might indeed be a special signal the colluders 
+In this case (`ref<itm:baguette>;) might indeed be a special signal the colluders 
 adopt, with an idiosyncratic meaning; but surely they 
 are still aware of their departure from correct usage, and 
 this departure is part of the metalinguistic rule of 
@@ -1554,16 +1663,14 @@ I believe this framing of the linguistic enterprise is
 too simplistic, so I will rebut it somewhat in the 
 next section, but I also believe that it 
 should be assessed on its own terms.  The paradigm of 
-`q.truth theoretic` semantics %-- which Langacker designates 
-as ... %-- is most directly contrastible with 
+`q.truth theoretic` semantics is most directly contrastible with 
 Langacker's own Cognitive-Grammatic project when the 
 differences are expressed as matters of scientific ontology 
-and theoretical posits.  A ... semantics (or philosophy 
+and theoretical posits.  A logically-inspired semantics (or philosophy 
 of language) can say that there exists objective 
-fixations in how language (surface) structure maps to 
-predicate (deep) structure %-- regulations which are 
-extramental in the same way that propositions themselves 
-are, and likewise linguistic artifacts (like spoken words).  
+fixations in how language-to-predicate, surface-to-deep 
+structure maps %-- regulations which are 
+extramental in the same way that proposition are.  
 Linguistics per se is (so one might argue) the investigation 
 of how, via a catalogue of structural transforms, 
 languages encode propositions, via mechanisms which 
@@ -1612,6 +1719,30 @@ However %-- or at least this is an intuition we
 have to respond to %-- study of our cognitive facility 
 in manipulating language is a different disciplinary 
 obligation than studying language itself.   
+`p`
+
+`p.
+My analyses in Part I of this series addressed these 
+disciplinary issues by arguing that, however well-motivated 
+our intuitions linking linguistic content to propositional 
+content, such intuitions are of only limited 
+`i.expanatory` value.  In most sentences linguistic 
+structure does not recapitulate predicate structure 
+in terms of shape or organization; it merely `i.conveys` 
+predicate structure, often through figurative 
+or interpretive processes that are hard or impossible 
+to model on logical terms.  This line of argument, in short, 
+focuses in particular on how sentences aggregate toward 
+completeness %-- and on how this structural accretion 
+differs from how propositional content emerges from logical 
+connectives.  In the current document I sustain 
+the overall theoretical focus on a simultaneous 
+semantic link but structural divergence between 
+language and logic.  However, I intend to 
+consider the pattern of structural accretion, 
+on the linguistic side, with greater emphasis 
+on the effects of speaker-relative grounding 
+and center/peripheral organization internal to language-acts.
 `p`
 
 

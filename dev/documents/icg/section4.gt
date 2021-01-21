@@ -232,9 +232,7 @@ the (minimally quantitative) notion of
 for concepts which can be paired (or gathered 
 into sets more generally) on grounds of 
 magnitude in `i.some` sense: tall/short; 
-around/across (see Gardenfors, 
-Geometry of Preposition Meanings, p. 13 
-[http://newprairiepress.org/cgi/viewcontent.cgi?article=1098&context=biyclc]); 
+around/across (see `cite<[page 13]GardenforsPreposition>;),
 ancestor/descendent (or more generally defining the 
 domain of kinship relations by degrees of relation and 
 forward or backward in generation; see 
@@ -1065,7 +1063,7 @@ read as a purely `q.semantic`/,
 `p`
 
 
-`subsection.Functional Relations and Elementary Domains`
+`spsubsectiontwoline.Functional Relations and Elementary Domains`
 `p.
 Color may seem like a prime example of what Langacker 
 calls a `q.locational` domain and of `Gardenfors;'s 
@@ -1083,7 +1081,7 @@ Consider real-world situations where color concepts
 are situationally meaningful (and potentially 
 then expressed linguistically).  The most 
 prototypical such situation, perhaps, is using 
-color to help identify something: 
+color to help identify something: |+|
 
 `sentenceList,
 `sentenceItem; `swl -> itm:redscarf ->  Please hand me the red scarf? -> cog ;;
@@ -1093,6 +1091,8 @@ color to help identify something:
 `sentenceItem; `swl -> itm:yellowcolumn ->  The yellow column shows last year's data. -> cog ;;
 `sentenceItem; `swl -> itm:purplevase ->  On the mantle was a purple vase. -> cog ;;
 `sentenceList`
+
+|.|
 
 Color words have a functional purpose, in these 
 cases, of selecting one object from its 
@@ -1514,7 +1514,7 @@ giving a set of points corresponding to banana taste.
 Note that here, we are using `i.banana` and `i.apple` as 
 shorthand for specifications of convex areas of the conceptual space.  
 These could be written out in longhand as sets of inequalities within
-the colour and taste spaces.  `cite<[pages 16 and 18]Coecke>;
+the colour and taste spaces.  `cite<[pages 16 and 18]InteractingConceptualSpaces>;
 `quote`
 
 |.|
