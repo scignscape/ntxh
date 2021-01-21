@@ -29,7 +29,7 @@ DEFINES += DEFAULT_GTAGML_FOLDER=\\\"$$ROOT_DIR/dev/consoles/gtagml/gt\\\"
 
 #DEFINES += DEFAULT_SDI_FOLDER=\\\"$$ROOT_DIR/dev/consoles/gtagml/sdi\\\"
 
-DEFINES += DEFAULT_SDI_FOLDER=\\\"$$ROOT_DIR/../dev/documents/ctg\\\"
+DEFINES += DEFAULT_SDI_FOLDER=\\\"$$ROOT_DIR/../dev/documents\\\"
 
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 

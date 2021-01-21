@@ -41,11 +41,23 @@ int main(int argc, char* argv[])
 //   {&czfile, {}}
 //   });
 
+
+// QStringList cmdl = get_cmdl(argc, argv, 2, {
+//   {&folder, DEFAULT_SDI_FOLDER "/ctg/src/setup"},
+//   {&file, DEFAULT_SDI_FOLDER "/ctg/out/ctg.sdi.ntxh"},
+//   {&outfile, DEFAULT_SDI_FOLDER "/ctg/sdi-merge.ntxh"},
+//   {&pagesf, DEFAULT_SDI_FOLDER "/ctg/out/pages"},
+//   {&pfile, {}},
+//   {&czfile, {}}
+//   });
+
+
+
  QStringList cmdl = get_cmdl(argc, argv, 2, {
-   {&folder, DEFAULT_SDI_FOLDER "/src/setup"},
-   {&file, DEFAULT_SDI_FOLDER "/out/ctg.sdi.ntxh"},
-   {&outfile, DEFAULT_SDI_FOLDER "/sdi-merge.ntxh"},
-   {&pagesf, DEFAULT_SDI_FOLDER "/out/pages"},
+   {&folder, DEFAULT_SDI_FOLDER "/icg/src/setup"},
+   {&file, DEFAULT_SDI_FOLDER "/icg/out/icg.sdi.ntxh"},
+   {&outfile, DEFAULT_SDI_FOLDER "/icg/sdi-merge.ntxh"},
+   {&pagesf, DEFAULT_SDI_FOLDER "/icg/out/pages"},
    {&pfile, {}},
    {&czfile, {}}
    });
