@@ -76,24 +76,29 @@ int main(int argc, char **argv)
  QApplication qapp(argc, argv);
  qapp.setWindowIcon(QIcon(DEFAULT_ICON_FOLDER "/app-icon.png"));
 
- // // put these in the dataset folder if they're not already ...
- QString _mergefile = DEFAULT_SDI_FOLDER "/sdi-merge.ntxh";
- QString _samplesfile = DEFAULT_SDI_FOLDER "/out/ctg.ntxh";
- QString _pdffile = DEFAULT_SDI_FOLDER "/out/ctg.pdf";
+ QString paper_name = "icg";
+// QString paper_name = "ctg";
+ QString dsfolder = QString(DEFAULT_DATASET_FOLDER "/%1").arg(paper_name);
 
- QDir qd(DEFAULT_DATASET_FOLDER);
+ // // put these in the dataset folder if they're not already ...
+ QString _mergefile = QString(DEFAULT_SDI_FOLDER "/%1/sdi-merge.ntxh").arg(paper_name);
+ QString _samplesfile = QString(DEFAULT_SDI_FOLDER "/%1/out/%1.ntxh").arg(paper_name);
+ QString _pdffile = QString(DEFAULT_SDI_FOLDER "/%1/out/%1.pdf").arg(paper_name);
+
+
+ QDir qd(dsfolder);
 
  if(!qd.exists("sdi-merge.ntxh"))
-   copy_file_to_folder(_mergefile, DEFAULT_DATASET_FOLDER);
+   copy_file_to_folder(_mergefile, dsfolder);
 
  if(!qd.exists("samples.ntxh"))
-   copy_file_to_folder_with_rename(_samplesfile, DEFAULT_DATASET_FOLDER, "samples");
+   copy_file_to_folder_with_rename(_samplesfile, dsfolder, "samples");
 
  if(!qd.exists("main.pdf"))
-   copy_binary_file_to_folder_with_rename(_pdffile, DEFAULT_DATASET_FOLDER, "main");
+   copy_binary_file_to_folder_with_rename(_pdffile, dsfolder, "main");
 
 
- Dataset ds(DEFAULT_DATASET_FOLDER);
+ Dataset ds(dsfolder);
 
  ds.load_from_folder();
 

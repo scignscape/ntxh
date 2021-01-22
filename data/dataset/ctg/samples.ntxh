@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-18/1/2021, 11:38
+21/1/2021, 13:39
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -36,13 +36,13 @@ $pdf: @/data/ntxh/main.pdf
 !/ Subdocument 
 $au: Nathaniel Christen
 $start: 4 
-$end: 17 
+$end: 18 
 /! 
 <+> 
 
 !/ Subdocument 
 $au: Nathaniel Christen
-$start: 17 
+$start: 18 
 $end: 33 
 /! 
 <+> 
@@ -57,7 +57,7 @@ $end: 51
 !/ Subdocument 
 $au: Nathaniel Christen
 $start: 51 
-$end: 75 
+$end: 76 
 /!
 <+>
 
@@ -65,12 +65,12 @@ $end: 75
 
 !/ SentenceList
 $i: 1
-$p: 4
+$p: 5
 $s: 1
 
 !/ SentenceItem
 $i: 1
-$p: 4
+$p: 5
 $x: itm:having
 $t: His having lied in the past damages his credibilty in the present.
 $c: syn
@@ -79,7 +79,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 2
-$p: 4
+$p: 5
 $x: itm:whether
 $t: Voters question whether he is truthful this time around.
 $c: syn
@@ -161,12 +161,12 @@ $c: sem
 
 !/ SentenceList
 $i: 4
-$p: 7
+$p: 8
 $s: 1
 
 !/ SentenceItem
 $i: 9
-$p: 7
+$p: 8
 $x: itm:vet
 $t: We have to wait until after the vet's two latest dogs.
 $c: sem
@@ -175,7 +175,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 10
-$p: 7
+$p: 8
 $x: itm:organization
 $t: I'm concerned for the rescue organization's two latest dogs.
 $c: sem
@@ -345,12 +345,12 @@ $c: log
 
 !/ SentenceList
 $i: 9
-$p: 10
+$p: 11
 $s: 1
 
 !/ SentenceItem
 $i: 25
-$p: 10
+$p: 11
 $x: itm:parked
 $t: I am parked out back.
 $o: (example 3, page 371)
@@ -360,7 +360,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 26
-$p: 10
+$p: 11
 $x: itm:waiting
 $t: I am parked out back and have been waiting for 15 minutes.
 $o: (example 3)
@@ -370,7 +370,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 27
-$p: 10
+$p: 11
 $x: itm:start
 $t: I am parked out back and may not start.
 $o: (example 6, page 371)
@@ -380,7 +380,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 28
-$p: 10
+$p: 11
 $x: itm:Whitney
 $t: I'm in the Whitney Museum.
 $o: (page 375)
@@ -390,7 +390,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 29
-$p: 10
+$p: 11
 $x: itm:beers
 $t: I drank two beers.
 $o: (page 375)
@@ -562,7 +562,7 @@ $a: Student after student ---{} and their parents ---{} complained about the tui
 
 !/ SentenceList
 $i: 15
-$p: 15
+$p: 16
 $s: 1
 
 !/ SentenceItem
@@ -790,12 +790,12 @@ $l: GUM_voyage\_socotra-16
 
 !/ SentenceList
 $i: 33
-$p: 22
+$p: 21
 $s: 2
 
 !/ SentenceItem
 $i: 57
-$p: 22
+$p: 21
 $x: itm:students
 $t: Many students and their parents came to complain about the tuition hikes.
 $c: sco
@@ -804,7 +804,7 @@ $c: sco
 
 !/ SentenceItem
 $i: 58
-$p: 22
+$p: 21
 $x: itm:office
 $t: Many students came by my office to complain about their grades.
 $c: sco
@@ -813,7 +813,7 @@ $c: sco
 
 !/ SentenceItem
 $i: 59
-$p: 22
+$p: 21
 $x: itm:after
 $t: Student after student complained about the tuition hikes.
 $c: sco
@@ -822,7 +822,7 @@ $c: sco
 
 !/ SentenceItem
 $i: 60
-$p: 22
+$p: 21
 $x: itm:parents
 $t: Student after student came with their parents to complain about the tuition hikes.
 $c: sco
@@ -872,7 +872,7 @@ $c: lex
 
 !/ SentenceItem
 $i: 64
-$p: 25
+$p: 26
 $x: itm:Liverpool
 $t: Liverpool, an important harbor, built new docks.
 $c: lex
@@ -884,12 +884,12 @@ $c: lex
 
 !/ SentenceList
 $i: 36
-$p: 25
+$p: 26
 $s: 2
 
 !/ SentenceItem
 $i: 65
-$p: 25
+$p: 26
 $t: The newspaper fired a reporter and fell off the table.
 $o: (?)
 $c: lex
@@ -898,7 +898,7 @@ $c: lex
 
 !/ SentenceItem
 $i: 66
-$p: 25
+$p: 26
 $t: Liverpool beat Tottenham and built new docks.
 $o: (?)
 $c: lex
@@ -934,12 +934,12 @@ $c: ont
 
 !/ SentenceList
 $i: 38
-$p: 28
+$p: 29
 $s: 2
 
 !/ SentenceItem
 $i: 69
-$p: 28
+$p: 29
 $x: itm:footprints
 $t: There are footprints on the beach.
 $c: ref
@@ -948,7 +948,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 70
-$p: 28
+$p: 29
 $x: itm:hole
 $t: There's a hole in the bucket.
 $c: ref
@@ -957,7 +957,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 71
-$p: 28
+$p: 29
 $x: itm:footprintsleading
 $t: There are footprints leading up the hill.
 $c: ref
@@ -966,7 +966,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 72
-$p: 28
+$p: 29
 $x: itm:traintracks
 $t: There are train tracks leading up the hill.
 $c: ref
@@ -1036,7 +1036,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 78
-$p: 29
+$p: 30
 $x: itm:cicada
 $t: In some neighborhoods, cicada insects make loud sounds from sunset to sunrise.
 $c: ref
@@ -1050,7 +1050,7 @@ $l: GUM_voyage\_phoenix-30
 
 !/ SentenceItem
 $i: 79
-$p: 29
+$p: 30
 $x: itm:applause
 $t: The audience rose to give thundering applause.
 $c: ref
@@ -1429,7 +1429,7 @@ $s: 3
 
 !/ SentenceItem
 $i: 111
-$p: 36
+$p: 37
 $x: itm:can
 $t: Can I have some milk?
 $c: pra
@@ -1438,7 +1438,7 @@ $c: pra
 
 !/ SentenceItem
 $i: 112
-$p: 36
+$p: 37
 $x: itm:close
 $t: Can you close the kitchen window?
 $c: pra
@@ -1537,7 +1537,7 @@ $s: 3
 
 !/ SentenceItem
 $i: 120
-$p: 40
+$p: 41
 $t: My colleague Ms. O'Shea would like to interview Mr. Jones, who's an old friend of mine. Can he take this call?
 $c: pra
 /!
@@ -1545,7 +1545,7 @@ $c: pra
 
 !/ SentenceItem
 $i: 121
-$p: 40
+$p: 41
 $x: itm:Jones
 $t: I'm sorry, this is his secretary. Mr. Jones is not available at the moment.
 $c: pra
@@ -1557,7 +1557,7 @@ $c: pra
 
 !/ SentenceList
 $i: 60
-$p: 40
+$p: 41
 $s: 3
 
 !/ SentenceItem
@@ -1668,7 +1668,7 @@ $s: 3
 
 !/ SentenceItem
 $i: 131
-$p: 43
+$p: 44
 $x: itm:maj
 $t: The majority of students polled were opposed to tuition increases.
 $c: log
@@ -1677,7 +1677,7 @@ $c: log
 
 !/ SentenceItem
 $i: 132
-$p: 43
+$p: 44
 $x: itm:most
 $t: Most of the students expressed disappointment about tuition increases.
 $c: log
@@ -1686,7 +1686,7 @@ $c: log
 
 !/ SentenceItem
 $i: 133
-$p: 43
+$p: 44
 $x: itm:many
 $t: Many students have protested the tuition increases.
 $c: log
@@ -1868,7 +1868,7 @@ $s: 4
 
 !/ SentenceItem
 $i: 147
-$p: 56
+$p: 57
 $x: itm:coffeeshirt
 $t: There's some coffee on your shirt.
 $c: ref
@@ -1877,7 +1877,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 148
-$p: 56
+$p: 57
 $t: There's coffee all over the table.
 $c: ref
 /!
@@ -1885,7 +1885,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 149
-$p: 56
+$p: 57
 $t: She poured coffee from an ornate beaker.
 $c: ref
 /!
@@ -1893,7 +1893,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 150
-$p: 56
+$p: 57
 $t: There's too much coffee in the grinder.
 $c: ref
 /!
@@ -1901,7 +1901,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 151
-$p: 56
+$p: 57
 $t: There's a lot of coffee left in the pot.
 $c: ref
 /!
@@ -1909,7 +1909,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 152
-$p: 56
+$p: 57
 $t: There's a lot of coffee left in the pot ---{} should I pour it out?
 $c: ref
 /!
@@ -1920,7 +1920,7 @@ $c: ref
 
 !/ SentenceList
 $i: 73
-$p: 56
+$p: 57
 $s: 4
 
 !/ SentenceItem
@@ -2176,12 +2176,12 @@ $c: idi
 
 !/ SentenceList
 $i: 81
-$p: 62
+$p: 63
 $s: 4
 
 !/ SentenceItem
 $i: 176
-$p: 62
+$p: 63
 $t: My favorite band gave a free concert last night. They played some new songs.
 $c: ref
 /!
@@ -2189,7 +2189,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 177
-$p: 62
+$p: 63
 $t: There was some pizza earlier, but it's all gone.
 $c: ref
 /!
@@ -2197,7 +2197,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 178
-$p: 62
+$p: 63
 $t: There were some slices of pizza earlier, but it's all gone.
 $c: ref
 /!
@@ -2272,12 +2272,12 @@ $c: ref
 
 !/ SentenceList
 $i: 82
-$p: 63
+$p: 64
 $s: 4
 
 !/ SentenceItem
 $i: 187
-$p: 63
+$p: 64
 $x: itm:bandtour
 $t: The band planned a tour, where they debuted new songs.
 $c: ref
@@ -2286,7 +2286,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 188
-$p: 63
+$p: 64
 $x: itm:teamflew
 $t: The team flew to New York and they played the Yankees.
 $c: ref
@@ -2295,7 +2295,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 189
-$p: 63
+$p: 64
 $x: itm:theflies
 $t: The city's largest theater company will perform ``The Flies".
 $c: ref
@@ -2447,12 +2447,12 @@ $c: pro
 
 !/ SentenceList
 $i: 87
-$p: 67
+$p: 68
 $s: 4
 
 !/ SentenceItem
 $i: 202
-$p: 67
+$p: 68
 $x: itm:roof
 $t: The roof leaks if a building hasn't been maintained.
 $c: pro
@@ -2461,7 +2461,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 203
-$p: 67
+$p: 68
 $x: itm:coach
 $t: The team is unsuccessful because the coach is so incompetent.
 $c: pro
@@ -2480,7 +2480,11 @@ $s: 4
 $i: 204
 $p: 68
 $x: itm:seedress
-$t: \protect \unhbox \voidb@x \let \reserved@d =[\def {\@@par }
+$t: If you see a dress and you really like it you should buy it while you can.
+$c: pro
+/!
+<>>
+
 !/ SentenceItem
 $i: 205
 $p: 68
@@ -2495,12 +2499,56 @@ $c: pro
 
 !/ SentenceList
 $i: 89
-$p: 71
+$p: 68
 $s: 4
 
 !/ SentenceItem
 $i: 206
-$p: 71
+$p: 68
+$x: itm:easter
+$t: Last night, she was painting Easter eggs.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 207
+$p: 68
+$x: itm:finebrush
+$t: With a fine brush, she was painting Easter eggs.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 208
+$p: 68
+$x: itm:opencarton
+$t: Open the carton. Now remove the monitor carefully.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 209
+$p: 68
+$x: itm:johnsons
+$t: The Johnsons are solid citizens. They pay their taxes. They attend PTA meetings.
+$c: pro
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 90
+$p: 72
+$s: 4
+
+!/ SentenceItem
+$i: 210
+$p: 72
 $x: itm:rhinor
 $t: Rhinos in that park are threatened by poachers.
 $c: sem
@@ -2508,8 +2556,8 @@ $c: sem
 <>>
 
 !/ SentenceItem
-$i: 207
-$p: 71
+$i: 211
+$p: 72
 $t: Young rhinos are threatened by poachers.
 $c: sem
 /!
@@ -2519,13 +2567,13 @@ $c: sem
 <+>
 
 !/ SentenceList
-$i: 90
-$p: 71
+$i: 91
+$p: 72
 $s: 4
 
 !/ SentenceItem
-$i: 208
-$p: 71
+$i: 212
+$p: 72
 $t: Let's find a restaurant that's family-friendly.
 $c: sem
 /!
@@ -2535,21 +2583,21 @@ $c: sem
 <+>
 
 !/ SentenceList
-$i: 91
-$p: 73
+$i: 92
+$p: 74
 $s: 4
 
 !/ SentenceItem
-$i: 209
-$p: 73
+$i: 213
+$p: 74
 $t: I got glue for your daughter.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 210
-$p: 73
+$i: 214
+$p: 74
 $t: I got glue for your coffee mug.
 $c: sem
 /!
@@ -2559,37 +2607,37 @@ $c: sem
 <+>
 
 !/ SentenceList
-$i: 92
-$p: 73
+$i: 93
+$p: 74
 $s: 4
 
 !/ SentenceItem
-$i: 211
-$p: 73
+$i: 215
+$p: 74
 $t: We're going to Grandma!
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 212
-$p: 73
+$i: 216
+$p: 74
 $t: Let's go to him right now.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 213
-$p: 73
+$i: 217
+$p: 74
 $t: Let's go to the lawyers.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 214
-$p: 73
+$i: 218
+$p: 74
 $t: Let's go to the press.
 $c: sem
 /!

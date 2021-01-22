@@ -30,20 +30,21 @@ int main(int argc, char *argv[])
 //    ;.
 //    )").arg(DEMO_DOCUMENT_FOLDER) );
 
+ QString paper_name = "itm";
 
 
  mir.read_lines(QString(R"(
   .; the folder is just outside the archive
-     but it is copied in @/dev/documents/ctg ...
+     but it is copied in @/dev/documents/" + paper_name ...
    ;.
 
   gt-compile-manuscript  $  :no-first  :info-path
     :setup-once  :setup-sdi
-      %1/ctg/src/ctg.tex
-    :manuscript  %1/ctg/manuscript
-    :gt-copy-folder  %1/ctg/gt-copy
+      %1/%2/src/%2.tex
+    :manuscript  %1/%2/manuscript
+    :gt-copy-folder  %1/%2/gt-copy
    ;.
-   )").arg(DEMO_DOCUMENT_FOLDER) );
+   )").arg(DEMO_DOCUMENT_FOLDER).arg(paper_name) );
 
 
 // mir.read_lines(QString(R"(

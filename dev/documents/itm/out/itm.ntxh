@@ -1,0 +1,1114 @@
+- Generated from LaTeX File itm.tex 
+22/1/2021, 0:23
+.
+
+- i=id p=page s=ud source, section number c=classification
+l=label x=latex label t=text r=pre o=post a=archival 
+.
+
+&type SentenceList [8;3;2] 
+:i:1 :p:2 :s:3 ;
+
+&type SentenceItem {14} 
+:i:1 :p:2 :x:3 :t:4 :s:5 :l:6 :r:7 :o:8 :a:9 :c:10 
+:si:11 :sp:12 :am:13 :alt:14 ; 
+
+&type Subdocument {3} 
+:au:1 :start:2 :end:3 ; 
+
+&type DatasetInfo {4} 
+:ae:1 :sdc:2 :sk:3 :pdf:4 ; 
+
+
+&/
+
+
+!/ DatasetInfo
+$ae: Nathaniel Christen
+$sdc: 4
+$sk: Section
+$pdf: @/data/ntxh/main.pdf
+
+/!
+<+>
+
+
+!/ Subdocument 
+$au: Nathaniel Christen
+$start: 0 
+$end: 0 
+/! 
+<+> 
+
+!/ Subdocument 
+$au: Nathaniel Christen
+$start: 0 
+$end: 0 
+/! 
+<+> 
+
+!/ Subdocument 
+$au: Nathaniel Christen
+$start: 0 
+$end: 0 
+/! 
+<+> 
+
+!/ Subdocument 
+$au: Nathaniel Christen
+$start: 0 
+$end: 0 
+/!
+<+>
+
+
+
+!/ SentenceList
+$i: 1
+$p: 9
+$s: 1
+
+!/ SentenceItem
+$i: 1
+$p: 9
+$x: itm:ornate
+$t: He opened the wine bottle with an ornate corkscrew.
+$c: rol
+/!
+<>>
+
+!/ SentenceItem
+$i: 2
+$p: 9
+$x: itm:butterfly
+$t: He opened the beer bottle with a butterfly corkscrew.
+$c: rol
+/!
+<>>
+
+!/ SentenceItem
+$i: 3
+$p: 9
+$x: itm:screwtop
+$t: I thought this was a screw-top but it turns out I need a corkscrew.
+$c: rol
+/!
+<>>
+
+!/ SentenceItem
+$i: 4
+$p: 9
+$x: itm:x3d
+$t: This X3D file shows a very realistic corkscrew created with NURBS surfaces.
+$c: rol
+/!
+<>>
+
+!/ SentenceItem
+$i: 5
+$p: 9
+$x: itm:sendx3d
+$t: Could you send me the corkscrew (the X3D file you just mentioned)?
+$c: rol
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 2
+$p: 9
+$s: 1
+
+!/ SentenceItem
+$i: 6
+$p: 9
+$t: Do you have a bottle opener?
+$c: rol
+/!
+<>>
+
+!/ SentenceItem
+$i: 7
+$p: 9
+$t: Could you get me a corkscrew?
+$c: rol
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 3
+$p: 10
+$s: 1
+
+!/ SentenceItem
+$i: 8
+$p: 10
+$x: itm:hammer
+$t: He opened the bottle of beer with a hammer.
+$c: rol
+/!
+<>>
+
+!/ SentenceItem
+$i: 9
+$p: 10
+$t: He pounded the nail with a lever corkscrew.
+$c: rol
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 4
+$p: 10
+$s: 1
+
+!/ SentenceItem
+$i: 10
+$p: 10
+$t: A hammer is something used to pound nails.
+$c: rol
+/!
+<>>
+
+!/ SentenceItem
+$i: 11
+$p: 10
+$t: A lever corkscrew is something used to open wine.
+$c: rol
+/!
+<>>
+
+!/ SentenceItem
+$i: 12
+$p: 10
+$t: A lever corkscrew can be used to pound nails.
+$c: rol
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 5
+$p: 10
+$s: 1
+
+!/ SentenceItem
+$i: 13
+$p: 10
+$x: itm:bucket
+$t: Can you bring me a bucket of water?
+$c: rol
+/!
+<>>
+
+!/ SentenceItem
+$i: 14
+$p: 10
+$x: itm:glass
+$t: Can you bring me a glass of water?
+$c: rol
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 6
+$p: 10
+$s: 1
+
+!/ SentenceItem
+$i: 15
+$p: 10
+$t: The ocean is over there.
+$c: rol
+/!
+<>>
+
+!/ SentenceItem
+$i: 16
+$p: 10
+$t: The water is over there.
+$c: rol
+/!
+<>>
+
+!/ SentenceItem
+$i: 17
+$p: 10
+$t: You can see the ocean from here.
+$c: rol
+/!
+<>>
+
+!/ SentenceItem
+$i: 18
+$p: 10
+$t: You can see the water from here.
+$c: rol
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 7
+$p: 11
+$s: 1
+
+!/ SentenceItem
+$i: 19
+$p: 11
+$t: The water and the Deuterium Dioxide is over there.
+$c: rol
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 8
+$p: 11
+$s: 1
+
+!/ SentenceItem
+$i: 20
+$p: 11
+$t: Here's a glass of water.
+$c: rol
+/!
+<>>
+
+!/ SentenceItem
+$i: 21
+$p: 11
+$t: Bing cherries are dark red.
+$c: rol
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 9
+$p: 24
+$s: 2
+
+!/ SentenceItem
+$i: 22
+$p: 24
+$x: itm:across
+$t: Our house is across the lake.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 23
+$p: 24
+$x: itm:pour
+$t: I poured wine from a decanter.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 24
+$p: 24
+$x: itm:spill
+$t: Some wine spilled from the decanter.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 25
+$p: 24
+$x: itm:puton
+$t: I put spackle on the wall with a knife.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 26
+$p: 24
+$x: itm:spatter
+$t: Paint spattered all over the wall after a can droppped.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 27
+$p: 24
+$x: itm:colorallover
+$t: There's a purple-and-blue color pattern all over the wall.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 28
+$p: 24
+$t: There are drawings all over the wall.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 29
+$p: 24
+$x: itm:sheetallover
+$t: There's a plastic sheet all over the wall.
+$c: cog
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 10
+$p: 26
+$s: 2
+
+!/ SentenceItem
+$i: 30
+$p: 26
+$x: itm:apartment
+$t: I'm going to a party at my brother's house.
+$c: sem
+/!
+<>>
+
+!/ SentenceItem
+$i: 31
+$p: 26
+$t: This restaurant has the best Hokkien noodles.
+$c: sem
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 11
+$p: 27
+$s: 2
+
+!/ SentenceItem
+$i: 32
+$p: 27
+$t: He had to cut the crusty bread with a serrated knife.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 33
+$p: 27
+$t: The museum had antique butter knives with intricate carvings.
+$c: cog
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 12
+$p: 30
+$s: 2
+
+!/ SentenceItem
+$i: 34
+$p: 30
+$t: What time does the office open?
+$c: log
+/!
+<>>
+
+!/ SentenceItem
+$i: 35
+$p: 30
+$x: itm:phone
+$t: What time does train 100 depart from Newark?
+$c: log
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 13
+$p: 33
+$s: 3
+
+!/ SentenceItem
+$i: 36
+$p: 33
+$x: itm:borough
+$t: New Yorkers live in one of five boroughs.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 37
+$p: 33
+$t: New Yorkers reliably vote for Democratic presidential
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 38
+$p: 34
+$x: itm:commute
+$t: New Yorkers constantly complain about how long it takes to commute to New York City.
+$c: cog
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 14
+$p: 34
+$s: 3
+
+!/ SentenceItem
+$i: 39
+$p: 34
+$t: All New York City residents live in one of five boroughs.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 40
+$p: 34
+$t: The majority of New York voters support Democratic presidential candidates.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 41
+$p: 34
+$t: Many New York metro area residents complain about how long it takes to commute to New York City.
+$c: cog
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 15
+$p: 35
+$s: 3
+
+!/ SentenceItem
+$i: 42
+$p: 35
+$t: My favorite band gave a free concert last night. They played some new songs.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 43
+$p: 35
+$t: There was some pizza earlier, but it's all gone.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 44
+$p: 35
+$t: There were some slices of pizza earlier, but it's all gone.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 45
+$p: 35
+$t: There were some slices of toast earlier, but there's none left.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 46
+$p: 35
+$t: There was some toast earlier, but they're all gone.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 47
+$p: 35
+$t: That franchise had a core of talented young players, but it got eroded by trades and free agency.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 48
+$p: 35
+$t: That franchise had a cohort of talented players, but they drifted away due to trades and free agency.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 49
+$p: 35
+$t: Many star players were drafted by that franchise, but it has not won a title in decades.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 50
+$p: 35
+$t: Many star players were drafted by that franchise, but they failed to surround them with enough depth.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 51
+$p: 35
+$t: Many star players were drafted by that franchise, but they were not surrounded with enough depth.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 52
+$p: 35
+$t: Many star players were drafted by that franchise, but they did not have enough depth (around them).
+$c: cog
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 16
+$p: 36
+$s: 3
+
+!/ SentenceItem
+$i: 53
+$p: 36
+$t: The band planned a tour, where they debuted new songs.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 54
+$p: 36
+$x: itm:teamflew
+$t: The team flew to New York and they played the Yankees.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 55
+$p: 36
+$x: itm:theflies
+$t: The city's largest theater company will perform ``The Flies".
+$c: cog
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 17
+$p: 36
+$s: 3
+
+!/ SentenceItem
+$i: 56
+$p: 36
+$t: The city's largest theater company performed ``The Flies" in French, but everyone's accent sounded Quebecois.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 57
+$p: 36
+$t: The city's largest theater company performed ``The Flies"; then they invited a professor to discuss Sartre's philosophy when the play was over.
+$c: cog
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 18
+$p: 37
+$s: 4
+
+!/ SentenceItem
+$i: 58
+$p: 37
+$t: John is married to a woman from his home country, but he had to get the marriage legally recognized here.
+$c: log
+/!
+<>>
+
+!/ SentenceItem
+$i: 59
+$p: 37
+$t: John married his boyfriend in Canada, but they live in a state that does not recognize same-sex marriages.
+$c: log
+/!
+<>>
+
+!/ SentenceItem
+$i: 60
+$p: 37
+$t: John has been married for five years, but in many ways he's still a bachelor.
+$c: log
+/!
+<>>
+
+!/ SentenceItem
+$i: 61
+$p: 37
+$t: Every married man needs a bachelor pad somewhere, and wherever yours is, you need a mini-fridge.
+$c: log
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 19
+$p: 39
+$s: 5
+
+!/ SentenceItem
+$i: 62
+$p: 39
+$t: We learned that people fed the rescued dogs.
+$c: syn
+/!
+<>>
+
+!/ SentenceItem
+$i: 63
+$p: 39
+$t: No-one seriously entertained the belief that he would govern in a bipartisan manner.
+$c: syn
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 20
+$p: 39
+$s: 5
+
+!/ SentenceItem
+$i: 64
+$p: 40
+$x: itm:trumpcolluded
+$t: The Trump campaign colluded with Russia.
+$c: syn
+/!
+<>>
+
+!/ SentenceItem
+$i: 65
+$p: 40
+$t: Several witnesses testified that the Trump campaign colluded with Russia.
+$c: syn
+/!
+<>>
+
+!/ SentenceItem
+$i: 66
+$p: 40
+$t: Reputable newspapers have reported that the Trump campaign colluded with Russia.
+$c: syn
+/!
+<>>
+
+!/ SentenceItem
+$i: 67
+$p: 40
+$t: Most Democrats believe that the Trump campaign colluded with Russia.
+$c: syn
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 21
+$p: 40
+$s: 5
+
+!/ SentenceItem
+$i: 68
+$p: 40
+$t: I believed in Father Christmas.
+$c: syn
+/!
+<>>
+
+!/ SentenceItem
+$i: 69
+$p: 40
+$t: I believed in Peace on Earth.
+$c: syn
+/!
+<>>
+
+!/ SentenceItem
+$i: 70
+$p: 40
+$t: I believed in Obama.
+$c: syn
+/!
+<>>
+
+!/ SentenceItem
+$i: 71
+$p: 40
+$t: I believed in lies.
+$c: syn
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 22
+$p: 40
+$s: 5
+
+!/ SentenceItem
+$i: 72
+$p: 40
+$t: Obama wouldn't budge on reproductive rights.
+$c: ont
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 23
+$p: 49
+$s: 6
+
+!/ SentenceItem
+$i: 73
+$p: 49
+$t: Today is Tuesday.
+$c: syn
+/!
+<>>
+
+!/ SentenceItem
+$i: 74
+$p: 49
+$t: The big departmental meeting is Tuesday.
+$c: syn
+/!
+<>>
+
+!/ SentenceItem
+$i: 75
+$p: 49
+$t: It is very windy.
+$c: syn
+/!
+<>>
+
+!/ SentenceItem
+$i: 76
+$p: 49
+$t: The lousy weather is very windy.
+$c: syn
+/!
+<>>
+
+!/ SentenceItem
+$i: 77
+$p: 49
+$t: They are forecasting snow.
+$c: syn
+/!
+<>>
+
+!/ SentenceItem
+$i: 78
+$p: 49
+$t: The latest reports are forecasting snow.
+$c: syn
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 24
+$p: 49
+$s: 6
+
+!/ SentenceItem
+$i: 79
+$p: 49
+$t: She is a salaried employee.
+$c: syn
+/!
+<>>
+
+!/ SentenceItem
+$i: 80
+$p: 49
+$t: He is an elected official.
+$c: syn
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 25
+$p: 57
+$s: 6
+
+!/ SentenceItem
+$i: 81
+$p: 57
+$x: itm:penguin
+$t: A penguin is a flightless bird.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 82
+$p: 57
+$x: itm:rhino
+$t: Rhinos in that park are threatened by poachers.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 83
+$p: 57
+$x: itm:elephant
+$t: Baby elephants don't have tusks.
+$c: cog
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 26
+$p: 58
+$s: 6
+
+!/ SentenceItem
+$i: 84
+$p: 58
+$x: itm:koreanstore
+$t: My favorite Korean restaurant is adjacent to the bookstore.
+$c: typ
+/!
+<>>
+
+!/ SentenceItem
+$i: 85
+$p: 58
+$x: itm:koreanclosed
+$t: My favorite Korean restaurant is closed today.
+$c: typ
+/!
+<>>
+
+!/ SentenceItem
+$i: 86
+$p: 58
+$x: itm:koreanposter
+$t: My favorite Korean restaurant is decorated with posters from the 2002 World Cup.
+$c: typ
+/!
+<>>
+
+!/ SentenceItem
+$i: 87
+$p: 58
+$x: itm:koreanstarted
+$t: My favorite Korean restaurant started out in a food court.
+$c: typ
+/!
+<>>
+
+!/ SentenceItem
+$i: 88
+$p: 58
+$x: itm:koreanloyal
+$t: My favorite Korean restaurant said I'm their most loyal customer.
+$c: typ
+/!
+<>>
+
+!/ SentenceItem
+$i: 89
+$p: 58
+$x: itm:bark
+$t: She's constantly barking at her employees.
+$c: typ
+/!
+<>>
+
+!/ SentenceItem
+$i: 90
+$p: 58
+$x: itm:back
+$t: He's not playing well because his back is barking at him.
+$c: typ
+/!
+<>>
+
+!/ SentenceItem
+$i: 91
+$p: 58
+$x: itm:actup
+$t: He's not playing well because his sore back is acting up.
+$c: typ
+/!
+<>>
+
+!/ SentenceItem
+$i: 92
+$p: 58
+$x: itm:kitten
+$t: The kitten barked at the dog.
+$c: typ
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 27
+$p: 58
+$s: 6
+
+!/ SentenceItem
+$i: 93
+$p: 58
+$x: itm:teaduck
+$t: Tea-smoked duck is a Sichuan delicacy.
+$c: ont
+/!
+<>>
+
+!/ SentenceItem
+$i: 94
+$p: 59
+$x: itm:rubberduck
+$t: The baby's favorite toy is a rubber duck.
+$c: ont
+/!
+<>>
+
+!/ SentenceItem
+$i: 95
+$p: 59
+$x: itm:weddingduck
+$t: Wedding ducks are traditional Korean gifts.
+$c: ont
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 28
+$p: 59
+$s: 6
+
+!/ SentenceItem
+$i: 96
+$p: 59
+$t: This book, which costs 40 dollars, has some crazy ideas inside.
+$c: ont
+/!
+<>>
+
+!/ SentenceItem
+$i: 97
+$p: 59
+$t: This book, which the library classifies as young adult nonfiction, has some dude's phone number scrawled inside.
+$c: ont
+/!
+<>>
+
+!/ SentenceItem
+$i: 98
+$p: 59
+$t: My boss barks louder than his dog does.
+$c: ont
+/!
+<>>
+
+/!
+<+>
+
+
+/&
+
+
