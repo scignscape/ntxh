@@ -76,8 +76,11 @@ int main(int argc, char **argv)
  QApplication qapp(argc, argv);
  qapp.setWindowIcon(QIcon(DEFAULT_ICON_FOLDER "/app-icon.png"));
 
- QString paper_name = "icg";
-// QString paper_name = "ctg";
+// QString paper_name = "icg";
+//
+ QString paper_name = "ctg";
+// QString paper_name = "itm";
+
  QString dsfolder = QString(DEFAULT_DATASET_FOLDER "/%1").arg(paper_name);
 
  // // put these in the dataset folder if they're not already ...
@@ -114,14 +117,17 @@ int main(int argc, char **argv)
  ScignStage_Ling_Dialog dlg (nullptr, &ds);
 #endif
 
-// dlg.set_replace_dataset_function([](QString path) -> Dataset*
-// {
-////  Dataset* result = new Dataset;
-////  result->load_from_file(path);
-////  if(result->groups().isEmpty())
-////    return nullptr;
-////  return result;
-// });
+ dlg.set_replace_dataset_function([](QString path) -> Dataset*
+ {
+  QFileInfo qfi(path);
+  Dataset* result = new Dataset(qfi.absolutePath());
+  result->load_from_folder();
+
+//  result->load_from_file(path);
+//  if(result->groups().isEmpty())
+//    return nullptr;
+  return result;
+ });
 
 #ifdef USING_KPH
  dlg.set_phr_init_function([&dlg](PHR_Runner& phr, PHR_Symbol_Scope*& pss)

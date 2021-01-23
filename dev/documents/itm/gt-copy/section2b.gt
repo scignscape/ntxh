@@ -14,7 +14,7 @@ Holmqvist's and Selway's research that I have cited are good examples
 of paradigm-overlap between cognitive and computational
 linguistics.  I will cite other scholarship which
 also finds philosophical inspiration in cognitive linguists
-like Langacker, G\"ardensfors, George Lakoff, and
+like Langacker, `Gardensfors;, George Lakoff, and
 Eleanor Rosch, but which also target cognitive-science
 formalizations and `q.cognitive architecture`/:
 `cite<AntonioLieto>;, `cite<JacobWhitehill>;, 
@@ -191,45 +191,32 @@ the overall system.  In this sense the pursuit of
 AI can yield positive contributions in other
 branches of computer science and other disciplines,
 without the stated rationale of AI realizing
-(and monetizing) systems that exhibit
-humanlike intelligence.
-`p`
-
-`p.
-So perhaps `q.AI` is
+systems that exhibit humanlike intelligence.  
+In this sense, perhaps `q.AI` is
 best understood as shorthand for a suite of
 research agendas across several aspects of
 computer science, not restricted to the
 fields %-- like Machine Learning, Robotics,
 and Artificial Neural Networks %-- that are
-publicly associated with the term.  This is
-not, however, how AI seems to be represented by
-companies and institutions (including in academia)
-who have a vested interest in the products AI may
-yield.  A benevolent reading would be that
-institutions understand the diversity of research
-that can be loosely aggregated under the AI umbrealla,
-but use the particularly science-fictional facets of
-this science to excite public support: visions
+publicly associated with the term.  A diversity of research
+can be loosely aggregated under the AI umbrealla,
+but only the more science-fictional facets of
+this science appear to excite public support: visions
 of humanoid conversationalists and robots provide a compact
 story that is more meaningful to non-experts
 than technical outlines of the intermediate machinery
 beneath the hopefully-intelligent surface.
-However, a more cynical interpretation
-is that AI is valued as a cash cow, and
-residual disciplines which contribute to the
+Nevertheless, residual disciplines which contribute to the
 engineering infrastructure that AI requires
 %-- but are agnostic as to the AI vision
-itself %-- are appreciated only so much as
-needed to keep the AI project moving forward.  On that
-interpretation support for AI-agnostic
-research becomes lukewarm and transactional, and
-actual innovation in such areas may not be properly
-celebrated.
+itself %-- have merits on their own and potentially 
+avoid the problemmatic reductionism often found, 
+I would argue, in the AI paradign.
 `p`
 
 `p.
-Whatver the reality, the technological infrastructure 
+Whatver the paradigmatic forces and public perceptions 
+in play, the technological infrastructure 
 affording support for cognitive science/linguistics, 
 or cognitive humanities/phenomenology, 
 and so forth, is led by frameworks that 
@@ -308,5 +295,5 @@ How this absence
 of `q.non-AI computational` projects may be explained, and 
 what such projects might look like, 
 is a question that will inform my discussions in the 
-next section and then Section 7.  
+next section.  
 `p`

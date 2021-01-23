@@ -65,6 +65,7 @@ public:
  ACCESSORS(u2 ,section)
 
  QString get_issue();
+ bool match_issue(const QSet<QString>& qset);
 
  ACCESSORS(QVector<Language_Sample*> ,samples)
 

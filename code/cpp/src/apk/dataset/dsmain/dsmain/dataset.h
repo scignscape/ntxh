@@ -47,6 +47,8 @@ class Dataset :  public QRing_File_Structure
  QStringList issues_;
  QStringList forms_;
 
+ QStringList issue_codes_;
+
  QVector<QPair<QPair<QString, int>, QPair<int, int>>> subdocuments_;
 
  DSM_SDI_Document sdi_document_;
@@ -59,6 +61,7 @@ public:
  ACCESSORS(QVector<Language_Sample_Group*>* ,groups)
 
  ACCESSORS__RGET(QStringList ,issues)
+ ACCESSORS__RGET(QStringList ,issue_codes)
 // ACCESSORS__RGET(QStringList ,forms)
 
  ACCESSORS(QString ,samples_file)

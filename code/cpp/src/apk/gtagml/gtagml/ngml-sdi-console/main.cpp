@@ -51,13 +51,14 @@ int main(int argc, char* argv[])
 //   {&czfile, {}}
 //   });
 
-
+// QString paper_name = "ctg";
+ QString paper_name = "itm";
 
  QStringList cmdl = get_cmdl(argc, argv, 2, {
-   {&folder, DEFAULT_SDI_FOLDER "/icg/src/setup"},
-   {&file, DEFAULT_SDI_FOLDER "/icg/out/icg.sdi.ntxh"},
-   {&outfile, DEFAULT_SDI_FOLDER "/icg/sdi-merge.ntxh"},
-   {&pagesf, DEFAULT_SDI_FOLDER "/icg/out/pages"},
+   {&folder, QString(DEFAULT_SDI_FOLDER "/%1/src/setup").arg(paper_name)},
+   {&file, QString(DEFAULT_SDI_FOLDER "/%1/out/%1.sdi.ntxh").arg(paper_name)},
+   {&outfile, QString(DEFAULT_SDI_FOLDER "/%1/sdi-merge.ntxh").arg(paper_name)},
+   {&pagesf, QString(DEFAULT_SDI_FOLDER "/%1/out/pages").arg(paper_name)},
    {&pfile, {}},
    {&czfile, {}}
    });

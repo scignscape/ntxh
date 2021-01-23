@@ -57,6 +57,18 @@ QString Language_Sample_Group::get_issue()
  return issues_.join(';');
 }
 
+bool Language_Sample_Group::match_issue(const QSet<QString>& qset)
+{
+ if(issues_.isEmpty())
+   return qset.contains("Text");
+ for(QString issue : issues_)
+ {
+  if(qset.contains(issue))
+    return true;
+ }
+ return false;
+}
+
 
 void Language_Sample_Group::add_sample(Language_Sample* sample)
 {

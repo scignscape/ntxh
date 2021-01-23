@@ -10,7 +10,7 @@ Modern technology makes this thought-experiment less
 hypothtical: automated telephone systems often use a template 
 mechanism that is practically like Searle's Chinese Room, 
 understanding a limited range of sentencs and producing a limited 
-range of responss.  But there are two different kinds of questions we 
+range of responses.  But there are two different kinds of questions we 
 can ask in relation to Searle's argument: some 
 more philosophical and some more practical.
 `p`
@@ -19,14 +19,18 @@ more philosophical and some more practical.
 On the philosophical side, we should properly assess the 
 important questions as being qualitative and not 
 quantitative: it's not as if a synthesized phone system 
-is just not a very `i.good` conervsationalist; it's that 
+is just not a very `i.good` conversationalist; it's that 
 a software machine simply isn't the `i.kind of thing` that 
 we can say actually understands language.  This is 
 plausible if we say that emotions and empathy are 
 intrinsic to language; that we can't properly understand 
 language if we do not grasp the emotions residing 
 behind expressions.  Indeed, as the case of Grandma's window 
-shows, our status as comptent interlopers depends on reading intentions 
+shows (which I analyzed in Part I, where we 
+should try to satisfy her request to close a window which 
+in fact is already closed, perhaps finding a window which `i.is` 
+open and causing a draft), our 
+status as competent interlopers depends on reading intentions 
 behind expressions, and it sems hard to do this if we can't experientially 
 empathize with our linguistic partners.
 `p`
@@ -36,13 +40,13 @@ Maybe we are now just pushing the important questions back
 to reappear: Ok, can computers be programmed to feel emotions?  
 Is there a meaningful distinction between meaningfully, 
 experientially having emotions and just behaving as if 
-you hav them?  Are emotions themselves somehow 
+you have them?  Are emotions themselves somehow 
 functionalizable apart from their 
 chemical/hormonal substrate so that systems with very 
-different physical realization than ours be said 
-to have emotions?  I can see how this dbate can go 
+different physical realization than ours can be said 
+to have emotions?  I can see how such a debate can go 
 different ways.  But I'd also argue that 
-any ell-organized dialog about these questions will be 
+any well-organized dialog about these questions will be 
 only tangentially about language %-- in which case, 
 neither linguistics nor philosophy 
 of language themselves can answer questions about 
@@ -52,7 +56,7 @@ that affirming a computer's linguistic capabilities
 as `i.real` linguistic understanding is a 
 disciplinary non-sequitor for linguistics proper.  
 Nothing in the linguist's arsenal either 
-dmeonstrates or depends on AI agents actually
+demonstrates or depends on AI agents actually
 `i.being` part of our linguistic community or just 
 mimicking language-use to some (sometimes helpful) degree.
 `p`
@@ -103,7 +107,7 @@ However, this quantitative view still leaves open the question
 of where among the `q.features` do we have something 
 that actually drives language competence?  Searle's 
 Chinese Room helps point out these questions: 
-it's reasonable to say that the simplest template-response 
+it is reasonable to say that the simplest template-response 
 system does not really understand language at all, since it 
 is a pattern-matching system that does not 
 have any structural relation to language itself.  
@@ -160,7 +164,7 @@ sift through all the models of processes within
 languages, the central domains in linguistics, 
 and find the few genreas of linguistic processing that are 
 unique to human language %-- and computationally 
-intractable.  These would be the smoking gun evidnce that no 
+intractable.  These would be the smoking gun evidence that no 
 artifical system can equate to human language-use because 
 there is some essential stage in the linguistic 
 pipeline that computers computationally 
@@ -168,9 +172,9 @@ can't realize.
 `p`
 
 `p.
-However, even if we accept premises that the Chinese Room case 
-suggests this analysis and moreover it agrees with our 
-underlying intuitions, there remains 
+However, even if we accept as premises first that the Chinese Room case 
+suggests this analysis %-- and second that it agrees with our 
+underlying intuitions %-- there remains 
 the possibility that computers are indeed lacking 
 some stage associated with language %-- but it 
 is not a `i.linguistic` stage.  If something like 
@@ -182,16 +186,4 @@ linguistically achieve and lies outside of linguistics
 proper.
 `p`
 
-`p.
-
-`p`
-
-
-`p.
-`p`
-
-
-`p.
-
-`p`
 

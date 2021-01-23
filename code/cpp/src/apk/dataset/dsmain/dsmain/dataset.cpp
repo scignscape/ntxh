@@ -29,10 +29,15 @@ Dataset::Dataset(QString root_folder)
 {
  forms_ = QStringList{{"Text", "Dialog", "Intonation", "Fragment", "Paragraph"}};
  issues_ = QStringList{{"Ambiguity", "Context", "Logic",
-            "Scope", "Polarity", "Belief", "Syntax", "Semantics", "Pragmatics",
-            "Convention", "Idioms", "Lexical", "Idiomatic", "Reference",
- "Ontological", //?"Rhetoric"
+            "Scope", "Polarity", "Prosody", "Syntax", "Semantics", "Pragmatics",
+            "Dialogue", "Cognition", "Lexical", "Discourse", "Reference", "Ontological",
  }};
+
+ std::transform(issues_.begin(), issues_.end(),
+   std::back_inserter(issue_codes_),[](QString issue)
+   {
+    return issue.mid(0, 3).toLower();
+   });
 }
 
 void Dataset::load_from_folder()

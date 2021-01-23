@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-22/1/2021, 22:44
+21/1/2021, 13:39
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -50,14 +50,14 @@ $end: 33
 !/ Subdocument 
 $au: Nathaniel Christen
 $start: 33 
-$end: 52 
+$end: 51 
 /! 
 <+> 
 
 !/ Subdocument 
 $au: Nathaniel Christen
-$start: 52 
-$end: 82 
+$start: 51 
+$end: 76 
 /!
 <+>
 
@@ -1799,113 +1799,6 @@ $s: 3
 !/ SentenceItem
 $i: 142
 $p: 49
-$t: John is married to a woman from his home country, but he had to get the marriage legally recognized here.
-$c: log
-/!
-<>>
-
-!/ SentenceItem
-$i: 143
-$p: 49
-$t: John married his boyfriend in Canada, but they live in a state that does not recognize same-sex marriages.
-$c: log
-/!
-<>>
-
-!/ SentenceItem
-$i: 144
-$p: 49
-$t: John has been married for five years, but in many ways he's still a bachelor.
-$c: log
-/!
-<>>
-
-!/ SentenceItem
-$i: 145
-$p: 49
-$t: Every married man needs a bachelor pad somewhere, and wherever yours is, you need a mini-fridge.
-$c: log
-/!
-<>>
-
-/!
-<+>
-
-!/ SentenceList
-$i: 69
-$p: 49
-$s: 3
-
-!/ SentenceItem
-$i: 146
-$p: 49
-$x: itm:borough
-$t: New Yorkers live in one of five boroughs.
-$c: cog
-/!
-<>>
-
-!/ SentenceItem
-$i: 147
-$p: 49
-$x: itm:democratic
-$t: New Yorkers reliably vote for Democratic presidential candidates.
-$c: cog
-/!
-<>>
-
-!/ SentenceItem
-$i: 148
-$p: 49
-$x: itm:commute
-$t: New Yorkers constantly complain about how long it takes to commute to New York City.
-$c: cog
-/!
-<>>
-
-/!
-<+>
-
-!/ SentenceList
-$i: 70
-$p: 50
-$s: 3
-
-!/ SentenceItem
-$i: 149
-$p: 50
-$t: All New York City residents live in one of five boroughs.
-$c: cog
-/!
-<>>
-
-!/ SentenceItem
-$i: 150
-$p: 50
-$t: The majority of New York voters support Democratic presidential candidates.
-$c: cog
-/!
-<>>
-
-!/ SentenceItem
-$i: 151
-$p: 50
-$t: Many New York metro area residents complain about how long it takes to commute to New York City.
-$c: cog
-/!
-<>>
-
-/!
-<+>
-
-!/ SentenceList
-$i: 71
-$p: 51
-$s: 3
-
-!/ SentenceItem
-$i: 152
-$p: 51
 $x: itm:pipe
 $t: We understand that the pipe fitters are also planning to picket the Lake Worth, Florida project as well.
 $c: sco
@@ -1921,21 +1814,21 @@ $l: email-enronsent03\_01-0143
 <+>
 
 !/ SentenceList
-$i: 73
-$p: 55
+$i: 70
+$p: 53
 $s: 4
 
 !/ SentenceItem
-$i: 153
-$p: 55
+$i: 143
+$p: 53
 $t: I snacked on toast and coffee.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 154
-$p: 55
+$i: 144
+$p: 53
 $t: I snacked on buttered toast and iced coffee.
 $c: sem
 /!
@@ -1945,23 +1838,148 @@ $c: sem
 <+>
 
 !/ SentenceList
-$i: 74
-$p: 55
+$i: 71
+$p: 53
 $s: 4
 
 !/ SentenceItem
-$i: 155
-$p: 55
+$i: 145
+$p: 53
 $t: I snacked on toast and instant coffee.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 156
-$p: 55
+$i: 146
+$p: 53
 $t: I snacked on toast and Eritrean coffee.
 $c: sem
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 72
+$p: 56
+$s: 4
+
+!/ SentenceItem
+$i: 147
+$p: 57
+$x: itm:coffeeshirt
+$t: There's some coffee on your shirt.
+$c: ref
+/!
+<>>
+
+!/ SentenceItem
+$i: 148
+$p: 57
+$t: There's coffee all over the table.
+$c: ref
+/!
+<>>
+
+!/ SentenceItem
+$i: 149
+$p: 57
+$t: She poured coffee from an ornate beaker.
+$c: ref
+/!
+<>>
+
+!/ SentenceItem
+$i: 150
+$p: 57
+$t: There's too much coffee in the grinder.
+$c: ref
+/!
+<>>
+
+!/ SentenceItem
+$i: 151
+$p: 57
+$t: There's a lot of coffee left in the pot.
+$c: ref
+/!
+<>>
+
+!/ SentenceItem
+$i: 152
+$p: 57
+$t: There's a lot of coffee left in the pot ---{} should I pour it out?
+$c: ref
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 73
+$p: 57
+$s: 4
+
+!/ SentenceItem
+$i: 153
+$p: 57
+$t: There are coffees all over the far wall at the espresso bar.
+$c: ref
+/!
+<>>
+
+!/ SentenceItem
+$i: 154
+$p: 57
+$t: She poured coffees from an ornate beaker.
+$c: ref
+/!
+<>>
+
+!/ SentenceItem
+$i: 155
+$p: 57
+$x: itm:coffeetable
+$t: There are a lot of coffees left on the table ---{} shall I pour them out?
+$c: ref
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 74
+$p: 57
+$s: 4
+
+!/ SentenceItem
+$i: 156
+$p: 57
+$x: itm:NYboroughs
+$t: New Yorkers live in one of five boroughs.
+$c: ref
+/!
+<>>
+
+!/ SentenceItem
+$i: 157
+$p: 57
+$x: itm:NYDem
+$t: New Yorkers reliably vote for Democratic presidential candidates.
+$c: ref
+/!
+<>>
+
+!/ SentenceItem
+$i: 158
+$p: 57
+$x: itm:NYcommute
+$t: New Yorkers constantly complain about how long it takes to commute to New York City.
+$c: ref
 /!
 <>>
 
@@ -1974,51 +1992,20 @@ $p: 58
 $s: 4
 
 !/ SentenceItem
-$i: 157
-$p: 58
-$x: itm:coffeeshirt
-$t: There's some coffee on your shirt.
-$c: ref
-/!
-<>>
-
-!/ SentenceItem
-$i: 158
-$p: 58
-$t: There's coffee all over the table.
-$c: ref
-/!
-<>>
-
-!/ SentenceItem
 $i: 159
 $p: 58
-$t: She poured coffee from an ornate beaker.
-$c: ref
+$x: itm:pf
+$t: People fed the rescued dogs.
+$c: sem
 /!
 <>>
 
 !/ SentenceItem
 $i: 160
 $p: 58
-$t: There's too much coffee in the grinder.
-$c: ref
-/!
-<>>
-
-!/ SentenceItem
-$i: 161
-$p: 58
-$t: There's a lot of coffee left in the pot.
-$c: ref
-/!
-<>>
-
-!/ SentenceItem
-$i: 162
-$p: 58
-$t: There's a lot of coffee left in the pot ---{} should I pour it out?
-$c: ref
+$x: itm:ve
+$t: Vets examined the rescued dogs.
+$c: sem
 /!
 <>>
 
@@ -2031,27 +2018,34 @@ $p: 58
 $s: 4
 
 !/ SentenceItem
+$i: 161
+$p: 58
+$t: Every singer performed two songs.
+$c: sem
+/!
+<>>
+
+!/ SentenceItem
+$i: 162
+$p: 58
+$t: Everyone performed two songs.
+$c: sem
+/!
+<>>
+
+!/ SentenceItem
 $i: 163
 $p: 58
-$t: There are coffees all over the far wall at the espresso bar.
-$c: ref
+$t: Everyone sang along to two songs.
+$c: sem
 /!
 <>>
 
 !/ SentenceItem
 $i: 164
 $p: 58
-$t: She poured coffees from an ornate beaker.
-$c: ref
-/!
-<>>
-
-!/ SentenceItem
-$i: 165
-$p: 58
-$x: itm:coffeetable
-$t: There are a lot of coffees left on the table ---{} shall I pour them out?
-$c: ref
+$t: Everyone in the audience sang along to two songs.
+$c: sem
 /!
 <>>
 
@@ -2060,33 +2054,32 @@ $c: ref
 
 !/ SentenceList
 $i: 77
-$p: 59
+$p: 58
 $s: 4
 
 !/ SentenceItem
+$i: 165
+$p: 58
+$t: The rescued dogs had been treated by vets in the past (but were subsequently abandoned by their owners).
+$c: sem
+$a: The rescued dogs had been treated by vets in the past.
+/!
+<>>
+
+!/ SentenceItem
 $i: 166
-$p: 59
-$x: itm:NYboroughs
-$t: New Yorkers live in one of five boroughs.
-$c: ref
+$p: 58
+$t: Every singer performed (the last) two songs (for the grand finale).
+$c: sem
+$a: Every singer performed the last two songs for the grand finale.
 /!
 <>>
 
 !/ SentenceItem
 $i: 167
-$p: 59
-$x: itm:NYDem
-$t: New Yorkers reliably vote for Democratic presidential candidates.
-$c: ref
-/!
-<>>
-
-!/ SentenceItem
-$i: 168
-$p: 59
-$x: itm:NYcommute
-$t: New Yorkers constantly complain about how long it takes to commute to New York City.
-$c: ref
+$p: 58
+$t: Everyone in the audience sang along to two songs (they were randomly handed lyrics to different songs when they came in, and we asked them to join in when the song being performed onstage matched the lyrics they had in hand).
+$c: sem
 /!
 <>>
 
@@ -2095,23 +2088,21 @@ $c: ref
 
 !/ SentenceList
 $i: 78
-$p: 59
+$p: 60
 $s: 4
 
 !/ SentenceItem
-$i: 169
-$p: 59
-$x: itm:pf
-$t: People fed the rescued dogs.
+$i: 168
+$p: 60
+$t: The rescued dogs were treated by an experienced vet. One needed surgery and one got a blood transfusion. We went there yesterday and both looked much better.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 170
-$p: 59
-$x: itm:ve
-$t: Vets examined the rescued dogs.
+$i: 169
+$p: 60
+$t: The rescued dogs were treated by an experienced vet. One had been struck by a car and needed surgery on his leg. We went there yesterday and saw debris from another car crash ---{} it's a dangerous stretch of highway.
 $c: sem
 /!
 <>>
@@ -2125,9 +2116,17 @@ $p: 60
 $s: 4
 
 !/ SentenceItem
+$i: 170
+$p: 60
+$t: The rescued dogs were treated by an experienced vet. We saw a lot of other dogs getting medical attention.
+$c: sem
+/!
+<>>
+
+!/ SentenceItem
 $i: 171
 $p: 60
-$t: Every singer performed two songs.
+$t: The rescued dogs were treated by an experienced vet. It looked very modern, like a human hospital.
 $c: sem
 /!
 <>>
@@ -2135,112 +2134,6 @@ $c: sem
 !/ SentenceItem
 $i: 172
 $p: 60
-$t: Everyone performed two songs.
-$c: sem
-/!
-<>>
-
-!/ SentenceItem
-$i: 173
-$p: 60
-$t: Everyone sang along to two songs.
-$c: sem
-/!
-<>>
-
-!/ SentenceItem
-$i: 174
-$p: 60
-$t: Everyone in the audience sang along to two songs.
-$c: sem
-/!
-<>>
-
-/!
-<+>
-
-!/ SentenceList
-$i: 80
-$p: 60
-$s: 4
-
-!/ SentenceItem
-$i: 175
-$p: 60
-$t: The rescued dogs had been treated by vets in the past (but were subsequently abandoned by their owners).
-$c: sem
-$a: The rescued dogs had been treated by vets in the past.
-/!
-<>>
-
-!/ SentenceItem
-$i: 176
-$p: 60
-$t: Every singer performed (the last) two songs (for the grand finale).
-$c: sem
-$a: Every singer performed the last two songs for the grand finale.
-/!
-<>>
-
-!/ SentenceItem
-$i: 177
-$p: 60
-$t: Everyone in the audience sang along to two songs (they were randomly handed lyrics to different songs when they came in, and we asked them to join in when the song being performed onstage matched the lyrics they had in hand).
-$c: sem
-/!
-<>>
-
-/!
-<+>
-
-!/ SentenceList
-$i: 81
-$p: 62
-$s: 4
-
-!/ SentenceItem
-$i: 178
-$p: 62
-$t: The rescued dogs were treated by an experienced vet. One needed surgery and one got a blood transfusion. We went there yesterday and both looked much better.
-$c: sem
-/!
-<>>
-
-!/ SentenceItem
-$i: 179
-$p: 62
-$t: The rescued dogs were treated by an experienced vet. One had been struck by a car and needed surgery on his leg. We went there yesterday and saw debris from another car crash ---{} it's a dangerous stretch of highway.
-$c: sem
-/!
-<>>
-
-/!
-<+>
-
-!/ SentenceList
-$i: 82
-$p: 62
-$s: 4
-
-!/ SentenceItem
-$i: 180
-$p: 62
-$t: The rescued dogs were treated by an experienced vet. We saw a lot of other dogs getting medical attention.
-$c: sem
-/!
-<>>
-
-!/ SentenceItem
-$i: 181
-$p: 62
-$t: The rescued dogs were treated by an experienced vet. It looked very modern, like a human hospital.
-$c: sem
-/!
-<>>
-
-!/ SentenceItem
-$i: 182
-$p: 62
 $t: The rescued dogs were treated by an experienced vet. We looked around and realized how dangerous that road is ---{} for humans as well as dogs.
 $c: sem
 /!
@@ -2250,29 +2143,29 @@ $c: sem
 <+>
 
 !/ SentenceList
-$i: 83
-$p: 63
+$i: 80
+$p: 61
 $s: 4
 
 !/ SentenceItem
-$i: 183
-$p: 63
+$i: 173
+$p: 61
 $t: The trade rescued a star athlete from a losing team.
 $c: idi
 /!
 <>>
 
 !/ SentenceItem
-$i: 184
-$p: 63
+$i: 174
+$p: 61
 $t: New mathematical models rescued her original research from obscurity.
 $c: idi
 /!
 <>>
 
 !/ SentenceItem
-$i: 185
-$p: 63
+$i: 175
+$p: 61
 $t: Discovery of nearby earth-like planets rescued that star from its reputation as ordinary and boring and revealed that its solar system may actually be extraordinary.
 $c: idi
 /!
@@ -2282,93 +2175,93 @@ $c: idi
 <+>
 
 !/ SentenceList
-$i: 84
-$p: 64
+$i: 81
+$p: 63
 $s: 4
 
 !/ SentenceItem
-$i: 186
-$p: 64
+$i: 176
+$p: 63
 $t: My favorite band gave a free concert last night. They played some new songs.
 $c: ref
 /!
 <>>
 
 !/ SentenceItem
-$i: 187
-$p: 64
+$i: 177
+$p: 63
 $t: There was some pizza earlier, but it's all gone.
 $c: ref
 /!
 <>>
 
 !/ SentenceItem
-$i: 188
-$p: 64
+$i: 178
+$p: 63
 $t: There were some slices of pizza earlier, but it's all gone.
 $c: ref
 /!
 <>>
 
 !/ SentenceItem
-$i: 189
-$p: 64
+$i: 179
+$p: 63
 $t: There were some slices of toast earlier, but there's none left.
 $c: ref
 /!
 <>>
 
 !/ SentenceItem
-$i: 190
-$p: 64
+$i: 180
+$p: 63
 $t: There was some toast earlier, but they're all gone.
 $c: ref
 /!
 <>>
 
 !/ SentenceItem
-$i: 191
-$p: 64
+$i: 181
+$p: 63
 $t: That franchise had a core of talented young players, but it got eroded by trades and free agency.
 $c: ref
 /!
 <>>
 
 !/ SentenceItem
-$i: 192
-$p: 64
+$i: 182
+$p: 63
 $t: That franchise had a cohort of talented players, but they drifted away due to trades and free agency.
 $c: ref
 /!
 <>>
 
 !/ SentenceItem
-$i: 193
-$p: 64
+$i: 183
+$p: 63
 $t: Many star players were drafted by that franchise, but it has not won a title in decades.
 $c: ref
 /!
 <>>
 
 !/ SentenceItem
-$i: 194
-$p: 64
+$i: 184
+$p: 63
 $t: Many star players were drafted by that franchise, but they failed to surround them with enough depth.
 $c: ref
 /!
 <>>
 
 !/ SentenceItem
-$i: 195
-$p: 64
+$i: 185
+$p: 63
 $t: Many star players were drafted by that franchise, but they were not surrounded with enough depth.
 $c: ref
 /!
 <>>
 
 !/ SentenceItem
-$i: 196
-$p: 64
+$i: 186
+$p: 63
 $t: Many star players were drafted by that franchise, but they did not have enough depth (around them).
 $c: ref
 /!
@@ -2378,13 +2271,13 @@ $c: ref
 <+>
 
 !/ SentenceList
-$i: 85
-$p: 65
+$i: 82
+$p: 64
 $s: 4
 
 !/ SentenceItem
-$i: 197
-$p: 65
+$i: 187
+$p: 64
 $x: itm:bandtour
 $t: The band planned a tour, where they debuted new songs.
 $c: ref
@@ -2392,8 +2285,8 @@ $c: ref
 <>>
 
 !/ SentenceItem
-$i: 198
-$p: 65
+$i: 188
+$p: 64
 $x: itm:teamflew
 $t: The team flew to New York and they played the Yankees.
 $c: ref
@@ -2401,8 +2294,8 @@ $c: ref
 <>>
 
 !/ SentenceItem
-$i: 199
-$p: 65
+$i: 189
+$p: 64
 $x: itm:theflies
 $t: The city's largest theater company will perform ``The Flies".
 $c: ref
@@ -2413,13 +2306,13 @@ $c: ref
 <+>
 
 !/ SentenceList
-$i: 86
-$p: 65
+$i: 83
+$p: 64
 $s: 4
 
 !/ SentenceItem
-$i: 200
-$p: 65
+$i: 190
+$p: 64
 $x: itm:fliesquebecois
 $t: The city's largest theater company performed ``The Flies" in French, but everyone's accent sounded Quebecois.
 $c: ref
@@ -2427,8 +2320,8 @@ $c: ref
 <>>
 
 !/ SentenceItem
-$i: 201
-$p: 65
+$i: 191
+$p: 64
 $x: itm:fliesinvited
 $t: The city's largest theater company performed ``The Flies"; then they invited a professor to discuss Sartre's philosophy when the play was over.
 $c: ref
@@ -2439,23 +2332,139 @@ $c: ref
 <+>
 
 !/ SentenceList
-$i: 87
+$i: 84
+$p: 66
+$s: 4
+
+!/ SentenceItem
+$i: 192
+$p: 66
+$x: itm:booksheread
+$t: The book she read was very interesting.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 193
+$p: 66
+$x: itm:bookrecommend
+$t: I recommended a book that she read immediately.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 194
+$p: 66
+$x: itm:bookjustappeared
+$t: A book just appeared that she read immediately.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 195
+$p: 66
+$x: itm:bookrecommendalt
+$t: I recommended a book I read years ago to her.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 196
+$p: 66
+$x: itm:harrycause
+$t: This time Harry didn't cause our defeat.
+$c: pro
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 85
 $p: 67
 $s: 4
 
 !/ SentenceItem
-$i: 202
+$i: 197
 $p: 67
-$t: We learned that people fed the rescued dogs.
-$c: syn
+$x: itm:clydebertha
+$t: It's odd that Clyde married Bertha.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 198
+$p: 67
+$x: itm:Brighton
+$t: Londoners most often go to Brighton.
+$c: pro
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 86
+$p: 67
+$s: 4
+
+!/ SentenceItem
+$i: 199
+$p: 67
+$x: itm:BillDrink
+$t: Bill doesn't drink because he's unhappy.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 200
+$p: 67
+$x: itm:ricewine
+$t: Stir in rice wine and seasonings.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 201
+$p: 67
+$x: itm:poodle
+$t: Alice bought a dog. A poodle.
+$c: pro
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 87
+$p: 68
+$s: 4
+
+!/ SentenceItem
+$i: 202
+$p: 68
+$x: itm:roof
+$t: The roof leaks if a building hasn't been maintained.
+$c: pro
 /!
 <>>
 
 !/ SentenceItem
 $i: 203
-$p: 67
-$t: No-one seriously entertained the belief that he would govern in a bipartisan manner.
-$c: syn
+$p: 68
+$x: itm:coach
+$t: The team is unsuccessful because the coach is so incompetent.
+$c: pro
 /!
 <>>
 
@@ -2470,33 +2479,18 @@ $s: 4
 !/ SentenceItem
 $i: 204
 $p: 68
-$x: itm:trumpcolluded
-$t: The Trump campaign colluded with Russia.
-$c: syn
+$x: itm:seedress
+$t: If you see a dress and you really like it you should buy it while you can.
+$c: pro
 /!
 <>>
 
 !/ SentenceItem
 $i: 205
 $p: 68
-$t: Several witnesses testified that the Trump campaign colluded with Russia.
-$c: syn
-/!
-<>>
-
-!/ SentenceItem
-$i: 206
-$p: 68
-$t: Reputable newspapers have reported that the Trump campaign colluded with Russia.
-$c: syn
-/!
-<>>
-
-!/ SentenceItem
-$i: 207
-$p: 68
-$t: Most Democrats believe that the Trump campaign colluded with Russia.
-$c: syn
+$x: itm:atleastdress
+$t: At least for Alice that wonderful dress is just too expensive.
+$c: pro
 /!
 <>>
 
@@ -2509,230 +2503,8 @@ $p: 68
 $s: 4
 
 !/ SentenceItem
-$i: 208
+$i: 206
 $p: 68
-$t: I believed in Father Christmas.
-$c: syn
-/!
-<>>
-
-!/ SentenceItem
-$i: 209
-$p: 68
-$t: I believed in Peace on Earth.
-$c: syn
-/!
-<>>
-
-!/ SentenceItem
-$i: 210
-$p: 68
-$t: I believed in Obama.
-$c: syn
-/!
-<>>
-
-!/ SentenceItem
-$i: 211
-$p: 68
-$t: I believed in lies.
-$c: syn
-/!
-<>>
-
-/!
-<+>
-
-!/ SentenceList
-$i: 90
-$p: 68
-$s: 4
-
-!/ SentenceItem
-$i: 212
-$p: 68
-$t: Obama wouldn't budge on reproductive rights.
-$c: ont
-/!
-<>>
-
-/!
-<+>
-
-!/ SentenceList
-$i: 91
-$p: 71
-$s: 4
-
-!/ SentenceItem
-$i: 213
-$p: 72
-$x: itm:booksheread
-$t: The book she read was very interesting.
-$c: pro
-/!
-<>>
-
-!/ SentenceItem
-$i: 214
-$p: 72
-$x: itm:bookrecommend
-$t: I recommended a book that she read immediately.
-$c: pro
-/!
-<>>
-
-!/ SentenceItem
-$i: 215
-$p: 72
-$x: itm:bookjustappeared
-$t: A book just appeared that she read immediately.
-$c: pro
-/!
-<>>
-
-!/ SentenceItem
-$i: 216
-$p: 72
-$x: itm:bookrecommendalt
-$t: I recommended a book I read years ago to her.
-$c: pro
-/!
-<>>
-
-!/ SentenceItem
-$i: 217
-$p: 72
-$x: itm:harrycause
-$t: This time Harry didn't cause our defeat.
-$c: pro
-/!
-<>>
-
-/!
-<+>
-
-!/ SentenceList
-$i: 92
-$p: 73
-$s: 4
-
-!/ SentenceItem
-$i: 218
-$p: 73
-$x: itm:clydebertha
-$t: It's odd that Clyde married Bertha.
-$c: pro
-/!
-<>>
-
-!/ SentenceItem
-$i: 219
-$p: 73
-$x: itm:Brighton
-$t: Londoners most often go to Brighton.
-$c: pro
-/!
-<>>
-
-/!
-<+>
-
-!/ SentenceList
-$i: 93
-$p: 73
-$s: 4
-
-!/ SentenceItem
-$i: 220
-$p: 73
-$x: itm:BillDrink
-$t: Bill doesn't drink because he's unhappy.
-$c: pro
-/!
-<>>
-
-!/ SentenceItem
-$i: 221
-$p: 73
-$x: itm:ricewine
-$t: Stir in rice wine and seasonings.
-$c: pro
-/!
-<>>
-
-!/ SentenceItem
-$i: 222
-$p: 73
-$x: itm:poodle
-$t: Alice bought a dog. A poodle.
-$c: pro
-/!
-<>>
-
-/!
-<+>
-
-!/ SentenceList
-$i: 94
-$p: 73
-$s: 4
-
-!/ SentenceItem
-$i: 223
-$p: 73
-$x: itm:roof
-$t: The roof leaks if a building hasn't been maintained.
-$c: pro
-/!
-<>>
-
-!/ SentenceItem
-$i: 224
-$p: 73
-$x: itm:coach
-$t: The team is unsuccessful because the coach is so incompetent.
-$c: pro
-/!
-<>>
-
-/!
-<+>
-
-!/ SentenceList
-$i: 95
-$p: 74
-$s: 4
-
-!/ SentenceItem
-$i: 225
-$p: 74
-$x: itm:seedress
-$t: If you see a dress and you really like it you should buy it while you can.
-$c: pro
-/!
-<>>
-
-!/ SentenceItem
-$i: 226
-$p: 74
-$x: itm:atleastdress
-$t: At least for Alice that wonderful dress is just too expensive.
-$c: pro
-/!
-<>>
-
-/!
-<+>
-
-!/ SentenceList
-$i: 96
-$p: 74
-$s: 4
-
-!/ SentenceItem
-$i: 227
-$p: 74
 $x: itm:easter
 $t: Last night, she was painting Easter eggs.
 $c: pro
@@ -2740,8 +2512,8 @@ $c: pro
 <>>
 
 !/ SentenceItem
-$i: 228
-$p: 74
+$i: 207
+$p: 68
 $x: itm:finebrush
 $t: With a fine brush, she was painting Easter eggs.
 $c: pro
@@ -2749,8 +2521,8 @@ $c: pro
 <>>
 
 !/ SentenceItem
-$i: 229
-$p: 74
+$i: 208
+$p: 68
 $x: itm:opencarton
 $t: Open the carton. Now remove the monitor carefully.
 $c: pro
@@ -2758,8 +2530,8 @@ $c: pro
 <>>
 
 !/ SentenceItem
-$i: 230
-$p: 74
+$i: 209
+$p: 68
 $x: itm:johnsons
 $t: The Johnsons are solid citizens. They pay their taxes. They attend PTA meetings.
 $c: pro
@@ -2770,13 +2542,13 @@ $c: pro
 <+>
 
 !/ SentenceList
-$i: 97
-$p: 77
+$i: 90
+$p: 72
 $s: 4
 
 !/ SentenceItem
-$i: 231
-$p: 77
+$i: 210
+$p: 72
 $x: itm:rhinor
 $t: Rhinos in that park are threatened by poachers.
 $c: sem
@@ -2784,8 +2556,8 @@ $c: sem
 <>>
 
 !/ SentenceItem
-$i: 232
-$p: 77
+$i: 211
+$p: 72
 $t: Young rhinos are threatened by poachers.
 $c: sem
 /!
@@ -2795,13 +2567,13 @@ $c: sem
 <+>
 
 !/ SentenceList
-$i: 98
-$p: 78
+$i: 91
+$p: 72
 $s: 4
 
 !/ SentenceItem
-$i: 233
-$p: 78
+$i: 212
+$p: 72
 $t: Let's find a restaurant that's family-friendly.
 $c: sem
 /!
@@ -2811,21 +2583,21 @@ $c: sem
 <+>
 
 !/ SentenceList
-$i: 99
-$p: 79
+$i: 92
+$p: 74
 $s: 4
 
 !/ SentenceItem
-$i: 234
-$p: 80
+$i: 213
+$p: 74
 $t: I got glue for your daughter.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 235
-$p: 80
+$i: 214
+$p: 74
 $t: I got glue for your coffee mug.
 $c: sem
 /!
@@ -2835,37 +2607,37 @@ $c: sem
 <+>
 
 !/ SentenceList
-$i: 100
-$p: 80
+$i: 93
+$p: 74
 $s: 4
 
 !/ SentenceItem
-$i: 236
-$p: 80
+$i: 215
+$p: 74
 $t: We're going to Grandma!
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 237
-$p: 80
+$i: 216
+$p: 74
 $t: Let's go to him right now.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 238
-$p: 80
+$i: 217
+$p: 74
 $t: Let's go to the lawyers.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 239
-$p: 80
+$i: 218
+$p: 74
 $t: Let's go to the press.
 $c: sem
 /!

@@ -140,6 +140,7 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
  filter_issues_grid_layout_ = new QGridLayout;
 
  issues_ = ds->issues();
+ issue_codes_ = ds->issue_codes();
 
  int fcolmax = 2;
  int icolmax = 5;
@@ -168,9 +169,11 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
   int c = 0;
   for(QString i: issues_)
   {
-   current_filters_.insert(i);
+   current_filters_.insert(issue_codes_[c]);
    QCheckBox* cb = new QCheckBox(i, this);
    cb->setChecked(true);
+
+   cb->setProperty("ic", QVariant::fromValue(issue_codes_[c]));
 
 //   // // temporary while issues are notated in the data set
 //   cb->setEnabled(false);
@@ -852,13 +855,17 @@ void ScignStage_Ling_Dialog::highlight(QTreeWidgetItem* twi,
 
 void ScignStage_Ling_Dialog::checked_label_change(QAbstractButton* qab, bool checked)
 {
+ QString code = qab->property("ic").toString();
+ if(code.isEmpty())
+   code = qab->text();
+
  if(checked)
  {
-  current_filters_.insert(qab->text());
+  current_filters_.insert(code);//qab->text());
  }
  else
  {
-  current_filters_.remove(qab->text());
+  current_filters_.remove(code);
  }
 }
 
@@ -1006,6 +1013,10 @@ void ScignStage_Ling_Dialog::find_group_down(Language_Sample_Group* start,
      QMessageBox::information(this, "No More",
        "There are no more samples given the current filters.");
      return;
+    }
+    if(!g->match_issue(*temp_filters))
+    {
+     continue;
     }
    }
    highlight(twi, g);

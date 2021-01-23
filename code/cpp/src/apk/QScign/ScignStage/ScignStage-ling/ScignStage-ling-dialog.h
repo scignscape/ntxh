@@ -123,6 +123,7 @@ class ScignStage_Ling_Dialog : public QDialog
 
  QStringList issues_;
  QStringList forms_;
+ QStringList issue_codes_;
 
  QTreeWidget* main_tree_widget_;
 
