@@ -8,7 +8,7 @@ their conceptual provenance.  Adequate parse representations
 require distinguishing `i.stages` and `i.columns`/, 
 with notation marking each parse-graph edge 
 (modeling a transform) via a unique stage/column 
-duo.  I also mentioned that parge-graphs have 
+duo.  I also mentioned that parse-graphs have 
 the extra organizational structure of `i.channels`/, 
 aggregating columns and distinguishing `q.input` 
 and `q.output` edges (for networking where a modifier 
@@ -92,7 +92,7 @@ transform `q.signatures` like conversion `i.between`
 propositions is also possible (e.g.,  
 `i.Really, Sanders would have been a better candidate in 2016`/).  
 The subject of the root verb can then be called 
-the `i.root subject` of the sentence; all tranforms 
+the `i.root subject` of the sentence; all transforms 
 evinced by the sentence are, accordingly, 
 structurally situated in a dynamic whose core axis 
 leads from the root subject to the final proposition.  
@@ -419,7 +419,7 @@ the phrasal (or word-pair) level.
 `p`
 
 `p.
-Ultimately, I believe these oberservations are reasonable 
+Ultimately, I believe these observations are reasonable 
 if we consider the epistemic dynamics informing sentence 
 structure, which I will now consider further. 
 `p`
@@ -451,7 +451,7 @@ or rather a supplemental detail of the route taken to get there.
 If we endow a passenger's `i.destination` with particular 
 conceptual focus, the focus would exclude the intermediate route 
 if her interest is simply on getting `q.downtown` generically, 
-or to a prominant landmark (say, a bus terminal).  
+or to a prominent landmark (say, a bus terminal).  
 On the other hand, if she were heading toward a specific 
 address along Queen street, she might be concerned about 
 the bus's path `i.within` downtown, so the description 
@@ -469,7 +469,7 @@ is functionally salient, because it directly
 impacts on her purposeful assessment of the 
 situation, whereas details like the intermediate 
 route are functionally peripheral.  If 
-`i.along main streat` is in fact also salient 
+`i.along main street` is in fact also salient 
 for her in this sense %-- or more precisely if 
 the speaker believes it could be %-- it would be appropriate 
 to consider `i.downtown along Queen street` as an 
@@ -498,7 +498,7 @@ the received and/or intended meaning may be suitable for a
 `p.
 This example suggests that whether a verb-affecting detail 
 is aggregated within the expected subject, direct, or 
-indirect object `q.colums` depends on whether 
+indirect object `q.columns` depends on whether 
 it has `i.functional` bearing on the verb in question.  
 That is, in a general case verbs represent 
 actions with particular functional intent or 
@@ -791,7 +791,7 @@ This does not mean, however, that this order is
 semiotically arbitrary.  We should lean toward 
 grouping a modifier most tightly with a verb 
 when the pair forms a lexically recurring phrase; 
-while acknowleging that there are gradations between 
+while acknowledging that there are gradations between 
 highly standardized compound verbs 
 (`i.reach base`/, `i.catch up`/, `i.take off`/, `i.let go`/, 
 `i.walk around`/, `i.watch television`/) and verb/adverb combinations 
@@ -1033,7 +1033,7 @@ outside it, connecting it to the larger sentence;
 but on the other hand each clause has its own 
 quasi-propositional structure, so that `i.internally` 
 it has its own pattern of cognitive focus, its 
-own schematics (landmark/tranjector gestalts, for 
+own schematics (landmark/trajector gestalts, for 
 instance).
 `p`
 
@@ -1142,12 +1142,12 @@ have a whole phrasal complex serving a unitary
 role at a higher scale.  On the other hand, 
 the internal organization of clauses may seem 
 like a case for dependency grammars, since 
-the semantically most sigficant lexemes 
+the semantically most significant lexemes 
 (e.g. verbs and nouns) get centralized.  
 The verb as clause-head `q.dominates` over 
 secondary details, such as adverbs and 
 adverbial phrases, which in terms of semantic 
-importance are tangental.  As a nexus for 
+importance are tangential.  As a nexus for 
 gathering, potentially, multiple such tangents, 
 the verb packages the contents of its phrase 
 and then connects qua dependent with a root verb 
@@ -1177,7 +1177,7 @@ noun-to-adjective in `i.hockey stick`/).
 
 `p.
 Via Cognitive Transform Grammar, I propose to sideline 
-judgements about relative significance entirely 
+judgments about relative significance entirely 
 (at least for underlying parse-graphs) and 
 consider modifier-target relations instead of 
 (the more loaded) `q.head`//`q.dependent` contrast.  
@@ -1320,7 +1320,7 @@ or an institution: |+|
 We have to infer from context which sense of `q.newspaper` applies 
 in which use-case.  But once we have clarity on whether 
 the intended conception profiles the newspaper in the 
-`q.Ontological register` as a bouded object, a geospatial 
+`q.Ontological register` as a bounded object, a geospatial 
 location, or a social institution, this classification 
 clearly propagates outward to containing phrases, 
 such as (in (`ref<itm:nptable>;)-(`ref<itm:npwalk>;)) `i.my favorite newspaper`/.
@@ -1335,7 +1335,7 @@ preverb.  More specifically, I propose a type
 hierarchy where those aforementioned macrotypes 
 (with no further qualifications) are the least 
 granular, followed by subdivisions which 
-tend to be morpholically marked: mass, count singular, 
+tend to be morphologically marked: mass, count singular, 
 and count plural nouns; intransitive, transitive, and 
 ditransitive verbs; propositions in different performative 
 registers (assertions, commands, requests); 

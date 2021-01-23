@@ -4,7 +4,7 @@
 `p.
 I contend we need to tease apart the pursuit of valuable computational
 tools and models from an (often reductionistic) paradigm of
-seeking artifical, computationally engineered replicas of
+seeking artificial, computationally engineered replicas of
 human cognition.  `i.Computational` does not have to equal
 `i.AI` `cite<PeiWang>;.
 `p`
@@ -35,7 +35,7 @@ I have argued that we bring abstract situational prototypes
 to bear on understanding all of the world and social situations
 around us, and that language taps into these models so that
 people can coordinate situation-appropriate activity.  Given
-that there is an abstract and scehmatic dimension to
+that there is an abstract and schematic dimension to
 how we understand situations, we should expect a
 partially abstract sheen to how we intellectually
 engage objects and concepts once they are situationally
@@ -65,14 +65,14 @@ computers with human consciousness or emotions, because
 our mental traffic with the corkscrew or carving
 knife at some point evolves outside the sensate and
 passionate fabric of momentary consciousness.  There
-is a schematic and mechanical dimnsion of
+is a schematic and mechanical dimension of
 human action, and we can imagine computers
-simulating human intellligence at least on
+simulating human intelligence at least on
 `i.that` theatrical level.
 `p`
 
 `p.
-Or at least, such seems to be the intuition behind attemps
+Or at least, such seems to be the intuition behind attempts
 to model our human representations of objects and
 concepts in terms of abstract structures.  But even a feasible
 theory of these semi-abstract layers of cognitive processing
@@ -199,7 +199,7 @@ computer science, not restricted to the
 fields %-- like Machine Learning, Robotics,
 and Artificial Neural Networks %-- that are
 publicly associated with the term.  A diversity of research
-can be loosely aggregated under the AI umbrealla,
+can be loosely aggregated under the AI umbrella,
 but only the more science-fictional facets of
 this science appear to excite public support: visions
 of humanoid conversationalists and robots provide a compact
@@ -211,28 +211,28 @@ engineering infrastructure that AI requires
 %-- but are agnostic as to the AI vision
 itself %-- have merits on their own and potentially 
 avoid the problemmatic reductionism often found, 
-I would argue, in the AI paradign.
+I would argue, in the AI paradigm.
 `p`
 
 `p.
-Whatver the paradigmatic forces and public perceptions 
+Whatever the paradigmatic forces and public perceptions 
 in play, the technological infrastructure 
 affording support for cognitive science/linguistics, 
 or cognitive humanities/phenomenology, 
 and so forth, is led by frameworks that 
 seem to fall into one of two categories.  
 On the one hand, there are `q.Cognitive AI` 
-projects that realize different theortical/proposed models 
+projects that realize different theoretical/proposed models 
 of mental architecture as software systems, emulating our 
 rational behaviors %-- Natural Language Processing, 
 classification, judging similarity, optimizing 
 problem-solving, and so on %-- to various degrees; 
 simulative success or failure then becomes a litmus 
 test for warranting or revising the implemented 
-theory of intlligence.  In the domain of 
+theory of intelligence.  In the domain of 
 linguistics, these projects serve as a paradigmatic 
 complement (and sometimes testing-ground) for 
-thories of how linguistic processes are 
+theories of how linguistic processes are 
 computationally tractable.
 `p`
 
@@ -272,12 +272,12 @@ projects either or both of these analogy/paradigms.
 
 `p.
 I believe that both analogies are flawed, although they 
-may have value as indirect, theortically productive 
+may have value as indirect, theoretically productive 
 models for `i.parts` of language and human intelligence.  
 I think there are several theoretical frameworks, with 
 at least partial realization in computational 
 settings, that `i.do` avoid the reductive ideologies of 
-bpth formalism and computationalism which yielding rigorous 
+both formalism and computationalism which yielding rigorous 
 technological models: Barry Smith and colleagues' Granular 
 Partition models `cite<BittnerSmithDonnelly>;, 
 David Spivak's `q.Ologs` (`q.Ontology Logs`/) 

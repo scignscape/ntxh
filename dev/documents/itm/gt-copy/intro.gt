@@ -141,7 +141,7 @@ of grammar and formal semantics.
 `whdecoline;
 
 `p.
-This essay adresses topics in linguistics and the philosophy 
+This essay addresses topics in linguistics and the philosophy 
 of language, though (by conventional measures of expertise) 
 I am more of a Phenomenologist and a Computer 
 Programmer than a linguist.  I confess this not as biography, 
@@ -179,7 +179,7 @@ grounds.  I will explain later why computers are
 not as logical as non-programmers seemingly believe.  For 
 now I'll just say this: there are rigorous accounts 
 of computation that, I contend, are not grounded on 
-formal logic in any techical or reductive sense.  As a 
+formal logic in any technical or reductive sense.  As a 
 result, someone's non-logical-reductive views 
 on language and consciousness do not `i.a priori` 
 preclude computational models having some intuitive, 
@@ -205,7 +205,7 @@ look away, and forget about the sofa, my sofa-impression
 (but not the sofa) goes away, which seems to 
 suggest that there my sofa-impression is not 
 the same kind of thing as a sofa %-- which in turn 
-invites us to qustion whether what I am really 
+invites us to question whether what I am really 
 seeing is that sofa-impression, not that sofa.
 `p`
 
@@ -318,7 +318,7 @@ theoretical autonomy but also areas of overlap, so
 scientific explanations can bridge across scales.  Biologists
 take it for granted that the basic intellectual structures of 
 their disciplines can be justified by appeal to 
-chemistry (as a causative or emergent base of bioloigical 
+chemistry (as a causative or emergent base of biological 
 phenomena); and the presence of `i.parts` of biology 
 where this connection is explicit (like organic chemistry) 
 is important for our overall sense of biology as 
@@ -391,20 +391,20 @@ the proper ontological status of sciences' theoretical
 posits (this much applies to linguistics also,
 with its theoretical vocabulary of concepts, lexemes,
 syntax rules, generative semantic rules, and so forth 
-%-- are these mental subsystms?  Innate cognitive 
+%-- are these mental subsystems?  Innate cognitive 
 faculties?  Clusters of nerve cells?  Neural pathways 
 reinforced during language acquisition?).  But, on 
 the other hand, there is a different order of question 
 philosophers can ask with regard to a particular 
 science: what qualifies as a well-constructed theory for 
 that science?  What sorts of formal models hold explanatory 
-merit as, seemingly, capturing the casuative factors 
+merit as, seemingly, capturing the causative factors 
 determining the behavior of the systems that science 
 investigates: continuum-based numerical models?  
 Models in discrete mathematics?  Systems of logic?  
 State machines?  And interconnected 
 with that question is the proper scope of the science: 
-a well-constructed theory needs to honor bounaries between 
+a well-constructed theory needs to honor boundaries between 
 and autonomy of different sciences.  Having a clear 
 picture of what beliefs in `i.other` sciences to take 
 as explanatory primitives in `i.this` science is an 
@@ -423,11 +423,11 @@ commitments according to which higher-scale systems
 reduce (via physical composition and the propagation of 
 causality across levels of organization) to lower ones 
 %-- biology to chemistry to physics %-- as a genre 
-of reduction obviously diffrent from reducing sciences 
+of reduction obviously different from reducing sciences 
 as collective intellectual exercises.  We do not reduce the
 community of biologists to the community of chemists, 
 or the kinds of expertise and fluency in certain 
-mental gymanastics, or the criteria of what makes 
+mental gymnastics, or the criteria of what makes 
 good biological theories, to the concordant 
 community, conceptualizations, gymnastics, and 
 theory-criteria of chemists.  This is for me part of 
@@ -456,12 +456,12 @@ weigh in on Conceptual Role Semantics and
 Truth-Theoretic Semantics and explain why I 
 believe some popular paradigms in the philosophy 
 of language are problemmatic.  While the details 
-will vary, the main thurst of my points will be 
+will vary, the main thrust of my points will be 
 that philosophers of language fail to appreciate the 
 importance of sciences' internalizing a map of
 the division of labor between sciences %-- a science is
 constituted in part by how it touches but remains 
-autonomouus from other (both higher- and lower-scale)
+autonomous from other (both higher- and lower-scale)
 sciences.  So biology is constituted in part by its 
 status as a potential reductive base for (e.g.) neuroscience, 
 medicine, genetics, and paleontology, while having 
@@ -481,7 +481,7 @@ can be intrinsically characterized as the cognitive bridge
 between our everyday world %-- of social situations 
 and kinaesthetic/pragmatic enaction and anticipation, 
 planning and memory %-- with the neurophysical 
-substratum (whatver it is) of our mental faculties.  
+substratum (whatever it is) of our mental faculties.  
 Language, that is, is an important tool for our 
 negotiating the duality of our higher-scale 
 social/situational world with our lower-scale 
@@ -496,17 +496,17 @@ better, I claim that linguistics should be the
 and cognitive/neurological strata.  A linguistic 
 analysis starts with entities shooting in 
 from the first stratum (sentences we hear uttered, 
-canonicaly), and it ends with some restructured 
+canonically), and it ends with some restructured 
 representation or consummation of that sentence (parsed, 
 lexified, etc.) understood as inputs to some 
 neurophysical process belonging (ontologically, 
 and as a matter of scientific jurisdiction) to the second 
 stratum.  Such an analysis is `i.correctly` incomplete 
-because it recognizes that a basic criterion of well-formdness 
+because it recognizes that a basic criterion of well-formedness 
 for linguistic theories is that they `i.refrain from` 
 direct analysis of either societal/interpersonal or 
 cognitive/neurophysical processes.  Linguistic 
-analysis is incomplete because a theortical machinery 
+analysis is incomplete because a theoretical machinery 
 fine-tuned for analyzing processes of linguistic understanding 
 at the intermediate level between social/situational and 
 neurological strata cannot be the same as a theoretical machinery
@@ -537,7 +537,7 @@ operations (like changing the state of the screen)
 whose exact functioning remains outside the 
 programmer's theoretical arsenal.  Application 
 developers have only a vague idea of how values and 
-types in code are marshalled to an from electrical signals 
+types in code are marshaled to and from electrical signals 
 physically affecting (or reporting state from) devices 
 like monitors, mouses, and keyboards.  This is by design: 
 if you are too closely attuned to low-level cyberphysical
@@ -550,7 +550,7 @@ the software you are building `i.to` the digital
 structures encoded at the level of microprocessors and 
 machine language.  It is not a theory of microprocessors 
 themselves.  Theory well-formedness in the realm of 
-programming %-- the field sonetimes called 
+programming %-- the field sometimes called 
 Software Language Enginering %-- reflects the 
 transforms bridging `q.Human Computer Interaction` 
 with machine language; it is not a theory of 
@@ -590,7 +590,7 @@ in an emergent manner, the whole `q.intelligence`
 being possible only through specific kinds of 
 interaction between subsystems, in particular 
 a tightly determined transition between high-level 
-systems (like applocation source code) and 
+systems (like application source code) and 
 low-level systems (like machine code).  
 `p`
 
@@ -602,7 +602,7 @@ intelligence can be realized in structural systems whose
 lowest-level operations are not particularly complex.  
 No-one would argue that in and of itself a simple
 Van Neumann machine is particularly `q.intelligent`/;
-but software evincing intelligent bhavior can be implemented 
+but software evincing intelligent behavior can be implemented 
 as emergent phenomena for which Van Neumann machines are
 their reductive base.  This may seem like a
 useful analogy to consciousness, realized in 
@@ -713,7 +713,7 @@ mathematical territories) are realized via
 implementation in computer architecture.  
 But mind-as-computer is not logically related 
 to mind-as-logico-functional-system %-- any apparent 
-link between these analogies is a biproduct of 
+link between these analogies is a byproduct of 
 intellectually backgrounding the
 distinction between `i.being` and `i.implementing`/.  
 We may or may not like a mind-as-computer 
@@ -729,7 +729,7 @@ justifies the latter.
 `p.
 So, my strategy for the remaining sections of this 
 paper is as follows: I will review some 
-language-philosophy controveries and argue 
+language-philosophy controversies and argue 
 that disentangling mind-as-logico-functional-system 
 from mind-as-computer analogies should change 
 our estimation of theoretical claims apparently 
@@ -759,17 +759,17 @@ intermediary between medicine and physics.  We can
 consider how best to describe its `q.intermediariness`/: 
 as a theory-construction maxim (in the sense  
 that intermediariness is expressed in which 
-laws/obervables are thematized and which are 
+laws/observables are thematized and which are 
 deferred to other sciences), as a causal network 
 grounded in cross-scale physical constitutions and 
 mereologies (e.g., tissues are both physically 
 composed of cells and are wholes where cells are parts), 
-as an emeregnt system which both `i.is` 
+as an emergent system which both `i.is` 
 (`visavis; other sciences) and `i.has` a reductive 
 base.  Sciences are like computer programs in 
 that they have `i.inputs` (observables from 
 other sciences) and `q.outputs` (laws from 
-other sciences).  I use thse terms because they 
+other sciences).  I use these terms because they 
 track analytic trajectories: medical 
 `i.observables` (e.g. that many people 
 who are exposed to a toxin develop neurological damage) 
@@ -816,7 +816,7 @@ to equational data in some sense, wherein chemistry
 and physics take over.  By analogy, correct computer 
 software takes observations (data in computer files
 and user actions) and translates these observations 
-to the proper system-kernal calls, whrein the 
+to the proper system-kernel calls, wherein the 
 Operating System takes over.  
 `p`
 
@@ -846,7 +846,7 @@ Semantics, I will now show what for me this means in practice.
 In the first part this paper, I will consider
 several semantic paradigms: Conceptual Role Semantics,
 Conceptual Space Theory, Truth-Theoretic Semantics,
-and ultimately Interface Theory of Maning (a term due to
+and ultimately Interface Theory of Meaning (a term due to
 Orlin Vakarelov).  I approach this
 material as, hopefully, a mediator: I'd like to
 negotiate the differences and aggregate the

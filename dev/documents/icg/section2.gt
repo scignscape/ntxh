@@ -24,7 +24,7 @@ to` propositional contents, manifesting
 evolutive principles which (often 
 subconsciously) depend on speakers' 
 situational immersion as well as 
-abstractic syntactic and semantic conventions.   
+abstract syntactic and semantic conventions.   
 `p`
 
 `p.
@@ -90,7 +90,7 @@ encode propositional content, we need a
 detailed (and cognitively `q.active`/) 
 theory of how, in formulating and understanding 
 linguistic performances, we map constructions to 
-their correlative propostions.  
+their correlative propositions.  
 Constructions are not in the general case 
 direct `q.wrappers` for a given propositional
 arrangement %-- like `AdjN; for predicate-subject; 
@@ -145,7 +145,7 @@ digram or otherwise annotated rendering of a sentence
 which permits explanatory elements to be 
 interspersed among the words, such as 
 lines or curves connecting or encircling 
-groups of words, as well as testual notations 
+groups of words, as well as textual notations 
 such as Part of Speech labels.  The point 
 of these visual displays is to convey, 
 in effect, a `i.data structure` which supplements 
@@ -272,7 +272,7 @@ may include only phrase-structures, only interword relations,
 or both; they may include only words as the 
 canonical lexical elements or admit certain smaller-scale 
 units, like `q.'s` for possessives; they may or may not 
-pair stuctural re-presentations of sentences with 
+pair structural re-presentations of sentences with 
 structurally annotated lexicons, where for example an 
 identifier code associated with a word in (what I am 
 calling) a processual data structure matches the 
@@ -305,7 +305,7 @@ words (or word-pairs or phrases).
 `p`
 
 `p.
-Minimally, my proposed repesentations are 
+Minimally, my proposed representations are 
 derived from Dependency Grammar in that 
 interword relations are taken as the crucial 
 theoretical construct (more so than phrases).  
@@ -329,7 +329,7 @@ by categorial grammar; in particular, I adopt the conventional
 that certain grammatic categories are derived from 
 other categories.  Insofar as words from one category 
 are used in conjunction with a word from another 
-category, resulting in a phrase or transoformation 
+category, resulting in a phrase or transformation 
 assignable to a third category (potentially the 
 same as the second), the first category is 
 derivative on the latter two.  The adjective 
@@ -377,7 +377,7 @@ that take inputs and produce outputs from these
 core categories, or prior derived categories 
 recursively.  In particular, verbs profile 
 transformations that produce propositions from nouns.  
-In Categorial Combinary Grammar, a verb can 
+In Categorial Combinatory Grammar, a verb can 
 be characterized via notation like `NSlashP;, 
 meaning that a verb (phrase) combines with a noun (phrase)  
 `i.preceding` the verb to yield a proposition, e.g., 
@@ -417,7 +417,7 @@ we can `i.find` the noun it modifies and find how the
 resulting phrase is used as a noun in some larger phrase 
 %-- the fact that this `q.search` resolves successfully 
 is mandated by sentence validity, and failure to 
-find the requiste context for the adjective 
+find the requisite context for the adjective 
 is a signal that the enclosing sentence is not, 
 in fact, well-formed.   
 `p`
@@ -450,7 +450,7 @@ established in the discourse, maybe the sentence.
 In the more general case though they refer forward, 
 so we can say that the presence of lexemes from 
 `q.derivative` grammatic categories creates an 
-expection of a conceptual completion that is then 
+expectation of a conceptual completion that is then 
 satisfied by a subsequently occurring word or phrase.  
 Sentences are grammatically correct, then, insofar 
 as they `i.do` resolve their midstream expectations.  
@@ -510,7 +510,7 @@ but as a set of intuitions that were also elaborated in Part I.
 `subsection.Cognitive Transform Grammar`
 `p.
 I will refer to the framework proposed here as 
-`q.Cogitive Transform Grammar`/.  On this theory, 
+`q.Cognitive Transform Grammar`/.  On this theory, 
 the full syntactic interpretation of a sentence 
 can be given, at least in germinal form, through 
 collections of two-word relationships.  The 
@@ -534,7 +534,7 @@ or any other `q.above-word-scale` elements in parse graphs.
 It would certainly be possible to iconify both words and 
 phrases via graph nodes, with one form of inter-node 
 relation being the inclusion of a word in a phrase.  
-I choose however the leave phrase-hierarches implicit, 
+I choose however the leave phrase-hierarchies implicit, 
 partly for the theoretical reason that phrases are 
 (I believe) `i.conceptually` derived from the accumulation 
 of conceptual refinements via `q.cognitive transforms`/, 
@@ -702,7 +702,7 @@ arises.  In this spirit `i.very` links to `i.were`/,
 as modifier-to-target, because of how the transforms 
 are ordered: the kind of transform signified by an 
 adjective logically depends on a verb, so that 
-`i.were`/, whose ouput supplies that verb, 
+`i.were`/, whose output supplies that verb, 
 precedes `i.very` in the formal transform-order.    
 `p`
 
@@ -722,7 +722,7 @@ parse graph are labeled with a number designating
 their stage: so in a minimal example the links 
 between `i.very`/, `i.loudly`/, and `i.were` could 
 be expressed as `WereVeryLoudlyGraph;: the subscripts on the 
-edges disinguish the first transform-stage for `i.very` 
+edges distinguish the first transform-stage for `i.very` 
 from the second.   
 `p`
 
@@ -980,7 +980,7 @@ in others, as in `i.I brought here there` vs. `i.I went there`/).
 Another way to review this line or argument is to 
 consider how a direct object is implicated in 
 the verb-to-subject relationship.  Given 
-an intrinsitive setting, the verb-subject combination 
+an intransitive setting, the verb-subject combination 
 profiles an action with some conceptual completeness, 
 however much in just an outline or minimal-information 
 fashion.  To the degree that our conceptualization 
@@ -1005,7 +1005,7 @@ According to the standard Categorial model, verbs are
 transformations (or modifications or `q.functions`/) 
 which produce propositions from nouns: whereas 
 `i.the dogs` is conceptually abstract and unspecific, 
-`i.the dogs were barking` achieves someting like 
+`i.the dogs were barking` achieves something like 
 propositional closure.  This means that the verb 
 category is `i.derivative` on nouns and propositions; 
 and that the verb is a `i.modifier` whereas the noun 
@@ -1074,7 +1074,7 @@ in the sense of being lexically or semantically
 attached to it: consider nominalizations like 
 `i.goalscorer` or `i.prizewinner`/.  In these 
 cases, informal semantic observations would imply 
-that the direct object is modiying the verb 
+that the direct object is modifying the verb 
 %-- giving some `q.base` verb a new meaning.  I 
 do not rule out occasions when a verb-to-object 
 structure would actually be analyzed with the 
@@ -1122,7 +1122,7 @@ included in a predication actionally anchored elsewhere.
 Part of the nature of math is to be `i.studied`/; 
 part of the nature of a restaurant is to be `i.liked`/.  
 So we can approach the verb's effects, cognitively 
-modiying the object's concept, as to foreground 
+modifying the object's concept, as to foreground 
 these conceptual aspects (whose exact nature will 
 depend on the kind of entity the noun profiles). 
 `p`
@@ -1211,7 +1211,7 @@ the `q.stage` difference between `i.belatedly`
 as adverb and (upon transform-output) as verb; 
 and the `q.column` difference between verb/subject 
 and verb/object.  I accordingly use two 
-different indices, writin a stage number first and 
+different indices, writing a stage number first and 
 then a column number, for edge labels.  Visually, 
 a graph labeled via this system might look like 
 `BelatedlyBroughtIWine;.`footnote.
@@ -1354,7 +1354,7 @@ In the first sentence `i.out` reads like a direct
 object, giving a direction and destination to 
 `i.heading`/; but in (`ref<itm:heading>;) it comes across as more 
 tangential.  Perhaps `i.out to the store` serves 
-as a compound path-desription; or perhaps 
+as a compound path-description; or perhaps 
 `i.heading out` is a compound verb, roughly the 
 same as `i.leaving`/.  In either case for (`ref<itm:heading>;), 
 `i.out` augments rather than intrinsically specifies 
@@ -1595,7 +1595,7 @@ hours; or more diffusely to the fact of someone
 having an institutional affiliation with the lab, 
 presumably spending time there doing research, but 
 without the implication that verbs attributed to them 
-profile events occuring in the lab `i.spatially`/. 
+profile events occurring in the lab `i.spatially`/. 
 In `i.One of the researchers got 
 married/pregnant/cancer while 
 working in the lab`/, we would not guess 
@@ -1636,7 +1636,7 @@ they are told only (`ref<itm:vandalism>;)-(`ref<itm:vandalismlab>;).  Moreover, 
 infer `i.working` as applying to the `i.time` of 
 discovery, because (`ref<itm:vandalismworking>;) profiles `i.working in the lab` 
 as a grounded process, via a finite clause.  By 
-extablishing somewhat disparate `q.probabilities` 
+establishing somewhat disparate `q.probabilities` 
 in the space of alternative readings, 
 (`ref<itm:vandalism>;)-(`ref<itm:vandalismlab>;) have, 
 we should recognize, some non-isomorphism in 

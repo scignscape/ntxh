@@ -104,7 +104,7 @@ by a predicate applied to a bearer, and linguistically
 by an adjective-noun pair, like `i.black cat`/.  
 Logically, this apparently means that the predicate 
 `i.black` is appended to whatever predicates are 
-implicit in the logical designation of the suject; 
+implicit in the logical designation of the subject; 
 here resulting in a conjunction, something 
 which is black `i.and` a cat.  Such conjunctive 
 predication is, of course, a kind of ubiquitous 
@@ -592,7 +592,7 @@ or even a newly-discovered species or a newly-invented
 fictional creature %-- is a reasonable vehicle 
 for the `HungrySentient; pattern.  This pattern 
 thereby seems `q.grammatical` in the productional 
-sense that it licences new construction-instances, 
+sense that it licenses new construction-instances, 
 as opposed to these being established as lexical 
 particulars.  Note by comparison that some 
 patterns seem more determined by lexical 
@@ -661,7 +661,7 @@ construction, in many cases: |+|
 
 `sentenceList,
 `sentenceItem; `swl -> --- ->  The porcelain cat is hungry. -> ont ;;
-`sentenceItem; `swl -> --- ->  Garfield ate my breakfact. -> ont ;;
+`sentenceItem; `swl -> --- ->  Garfield ate my breakfast. -> ont ;;
 `sentenceItem; `swl -> --- ->  All the cats are hungry because the actors don't eat 
 before the show starts. -> ont ;;
 `sentenceList`
@@ -838,7 +838,7 @@ implicitly look beyond the vague `AdjN;
 prototype, and instead point out that 
 certain predicate-subject instantiations 
 are objective phenomena, or kinds of 
-phenomena, which we `i.emprically speaking` 
+phenomena, which we `i.empirically speaking` 
 passively cognize.  In the 
 `ColorObject; schema, for instance, 
 we need not actively interpret 
@@ -935,7 +935,7 @@ Above I suggested that paradigms which try
 to minimize the thematic role of cognition in linguistic 
 analysis face several problems.  My preceding 
 argumentation has focused on the idea of 
-`q.predictability`/: how constructions licence 
+`q.predictability`/: how constructions license 
 novel elaborations, which at the cognitive 
 level points to language users' active role in 
 assessing or expecting the legitimacy of 
@@ -962,15 +962,15 @@ if all conversants have, from
 context, a clear notion of which dogs are 
 `i.the dogs` or `i.those dogs`/.  We can 
 be more precise via, say, `i.the dogs in that yard`/, 
-but this still has deitic open-endedness.  
+but this still has deictic open-endedness.  
 Any transparent propositional context emerges 
 only via substituting determinate content for 
 any designations which conversants have to 
 infer from the dialogic situation 
 (something like `i.the dogs in the yard 
 directly in front of the person speaking`/, 
-but for all its specificity such langauge 
-sounds strage `i.as` human language).
+but for all its specificity such language 
+sounds strange `i.as` human language).
 
 `p.
 How linguistic entities are mapped to ambient 
@@ -980,7 +980,7 @@ passively obeying linguistic rules
 enables one to transition from 
 `i.those dogs` to `i.the dogs in the yard directly in front 
 of the person speaking`/.  The most 
-plausible hypothesis seems to be that deitic 
+plausible hypothesis seems to be that deictic 
 reference, resolution of pronoun antecedents, 
 and similar localized referential context-sensitivity 
 demands a mixture of linguistic and extra-linguistic 
@@ -1010,7 +1010,7 @@ content by `i.global` substitutions of one enunciation
 for another (unspoken) one; in the former, the 
 propositional content is established by locally 
 substituting context-specific words and references 
-for their empicial equivalents.  
+for their empirical equivalents.  
 `p`
 
 `p.
@@ -1055,7 +1055,7 @@ who says the pithier sentence, and then
 (on a signal she's misunderstood) the more specific 
 one, is not presenting two different states of affairs, 
 but merely repackaging the initial content in a 
-suface structure better targeted to her listener's 
+surface structure better targeted to her listener's 
 state of knowledge (or understanding of the current 
 dialog context).  We can pragmatically choose 
 our words for hearers' benefit (or to ensure 
@@ -1077,7 +1077,7 @@ We can certainly claim that the choice of one
 specific sentence, out of many options that 
 express `i.the same propositional content`/, 
 is cognitively `q.active`/.  However, this 
-supposition also ackowledges that there 
+supposition also acknowledges that there 
 is a propositional content that may be shared 
 among superficially different sentences.  The 
 issues raised here are in a sense the inverse of 
@@ -1305,7 +1305,7 @@ expanding.  A protest, even a violent one, tends to
 be spatially circumscribed; the transition from a 
 protest to a `i.riot`/, or some other more 
 chaotic development, is marked in part by the 
-participating indivuals being less constrained 
+participating individuals being less constrained 
 by a specific focal location.  Someone would be 
 more likely to characterize protests as a 
 `i.riot` if they witnessed (or learned of indirectly) 
@@ -1393,7 +1393,7 @@ of words %-- how should we read the use of
 a perfective rather than simple past rendering 
 in `i.have spilled out`/?  And why that choice 
 of spatial figuration rather than a more 
-straighforward path-designation like 
+straightforward path-designation like 
 `q.moved`/?   
 `p`
 

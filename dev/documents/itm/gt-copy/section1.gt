@@ -16,7 +16,7 @@ externalist/internalist hybrid.
 
 `p.
 The basic CRS picture is that linguistic meanings
-should be associatd with conceptual roles in our
+should be associated with conceptual roles in our
 understanding situations more than in terms
 of their reference to external objects.  Given
 sentences like: |+|
@@ -79,10 +79,10 @@ from this operational role, not some list of attributes
 `p`
 
 `p.
-Granted, a suitably designed winged corscrew can be
+Granted, a suitably designed winged corkscrew can be
 construed as a kind of bottle opener, and a multi-knife
 a kind of corkscrew respectively.  We are prepared to
-accept these tools as examples of the respctive
+accept these tools as examples of the respective
 concepts if they are functionally designed to support
 those tasks, even if such are not the primary function.
 But our inclination allowing concepts to dilate
@@ -221,7 +221,7 @@ for a sand castle.
 The most-discussed `q.water` analysis in the literature is
 less earthly than this: Putnam's `q.twin earth` argument
 about a planet whose substance (with chemical
-makeup) XYZ functionally indisinguishable
+makeup) XYZ functionally indistinguishable
 from our (`htwoo;) water.  Externalists and internalists
 use this thought-experiment to express their
 differences as disagreements over
@@ -246,7 +246,7 @@ it is hard for us to conceive that XYZ is
 `i.really` indistinguishable from water.  After all,
 our conceptual understanding of water includes things
 like electrolysis %-- if XYZ does not emit hydrogn
-and oxygen when electricallly charged under certain
+and oxygen when electrically charged under certain
 controlled conditions, it is not behaving like water
 and can not be (even internalistically) construed as
 conforming to our concept of water.  Of course, we are
@@ -296,7 +296,7 @@ a valid use of the concept: |+|
 
 `sentenceList,
 `sentenceItem; `swl ->> Here's a glass of water (even though
-tap water is mixed with flouride). -> --- -> Here's a glass of water. -> rol ;;
+tap water is mixed with fluoride). -> --- -> Here's a glass of water. -> rol ;;
 `sentenceItem;  `swl ->> Bing cherries are dark red (even though
 the stem is brown). -> --- -> Bing cherries are dark red. -> rol ;;
 `sentenceList`
@@ -365,7 +365,7 @@ by actual hydrological properties.
 `p.
 What about the hypothetical twin-earth XYZ that
 Putnam imagines is indistinguishable from
-our `htwoo;?  Well, for this hypoyhsis to
+our `htwoo;?  Well, for this hypothesis to
 even make sense we have to assume that XYZ is
 scientifically indistinguishable from water,
 which is a matter not just of pure `htwoo; but
@@ -379,7 +379,7 @@ way.  We can call nuclei harboring these particles
 `q.twin nuclei`/, so hydrogen becomes `q.twin hydrogen`/,
 oxygen becomes `q.twin oxygn`/, and presumably
 water becomes `q.twin water`/.  This twin water would
-essentilly retrace the the compositional structure of
+essentially retrace the the compositional structure of
 water %-- since it would have to form (and unform, under
 electrolysis) just like `q.our` water.  If we plug this
 `q.twin water` into Putnam's scnario, I can't see why
@@ -478,7 +478,7 @@ We can imagine a non-water XYZ that is water-like enough
 to play an identical role to (our) water, but this story
 can go in two directions: either XYZ is `i.absolutely`
 identical to water, its differences from water so obscure
-as to be observationally and causally maningless; or it
+as to be observationally and causally meaningless; or it
 has legitimate differences from water that `i.could` be
 conceptually significant but in some context are not
 (at least not yet).  These are two different thought
@@ -528,7 +528,7 @@ similarity even with `i.some` differences in both
 aspects tend to be likelier drivers of concept-expansion
 (see water vs. chlorinated water, or red
 wine vs. white wine).  By these rules, expanding
-`q.water` to include XYZ %-- if XYZ is functionaly
+`q.water` to include XYZ %-- if XYZ is functionally
 identical to `i.but` compositionally different from
 water %-- would be abnormal, like
 expanding `q.milk` to %-- without any qualification %--
@@ -581,7 +581,7 @@ concepts.  There's room for most concepts to
 variations; hence there's room for a concept to
 expand (see water to heavy water) without fragmenting.
 But sometimes we `i.do` insist on splitting concepts
-%-- or, eqivalently, refuse to accept a concept-enlargement
+%-- or, equivalently, refuse to accept a concept-enlargement
 %-- and `i.the reasons for this refusal may be external
 to some peoples' use of the concepts`/.  Current
 political discourse in the United States, for example, is
@@ -605,7 +605,7 @@ idea is under discussion at any moment in a discourse.
 That is to say, she needs to subsume them
 under different concepts.  Moreover, we endorse that she
 `i.should` do so, even if she thereby makes a distinction
-that the politicans or their supporters themselves
+that the politicians or their supporters themselves
 do not realize.  In this kind of case we may defer
 to expert opinion when adjudicating a potential
 conceptual divorce, even if there is only
@@ -642,7 +642,7 @@ most appropriately classified as two different concepts.
 Such is not mandated %-- we could certainly
 describe the Sanders and Harris platform as
 `q.two different Medicare for All plans`/, subsuming
-them under one concept but acknowldging their
+them under one concept but acknowledging their
 differences %-- as token differences, like the conceptual
 difference between this apple and that apple, rather
 than concept-differences like apple vs. cherry.
@@ -713,7 +713,7 @@ question conceptual uses where functional
 resemblance strays `i.too far` from common sense.
 Someone may accept agave in lieu of honey, or a hammer
 as a bottle opener, in the context of how one
-situation plays out; but they are less likly
+situation plays out; but they are less likely
 to accept these uses becoming entrenched, compared to,
 say, refiguring `q.milk` to include almond and
 cashew milk.  And our hesitation to
@@ -725,7 +725,7 @@ whom there will never be situations where the
 differences between concept referents, over and
 above functional resemblance, would be important.
 In short, even if a community could do
-just fine with some dialect idiosyncracy that
+just fine with some dialect idiosyncrasy that
 ignores a conceptual distinction we would ordinarily
 make, we don't tend to take this as evidence
 that our multiple concepts can be merged into one more
@@ -746,7 +746,7 @@ Certainly we have variegated `q.water` concepts
 overarching water concept that includes these as
 subconcepts.  We can make a conscious decision to modify
 concept/subconcept relations %-- which is
-different from changing how concepts are mappped to
+different from changing how concepts are mapped to
 lexemes.  So I take it that Conceptual Role Semantics
 prioritizes role factors in drawing concept/subconcept
 relations and boundaries, and the consequence is a
@@ -765,11 +765,11 @@ totality.  Even if technically distinct Medicare for
 All plans play similar conceptual roles in different
 voters' conceptions, we understand that such similarity
 may break down as we expand the community outward.  Sanders
-and Haris supporters don't live on thier own islands.
+and Haris supporters don't live on their own islands.
 There are factors outside their own minds that weigh
 on whether their functionally similar Medicare for
 All concepts are indeed `i.the same concept` from the
-larger communiy's point of view.  But these external
+larger community's point of view.  But these external
 factors are not necessarily `i.extramental`/: we
 can zoom outside the conceptual patterns of one
 subcommunity and argue that conceptual differences
@@ -785,7 +785,7 @@ with her.
 `p.
 Insofar as people can make inferences about other peoples'
 conceptual role `q.system` %-- we can figure out
-the role which a concept plays in somone else's
+the role which a concept plays in someone else's
 mind, to some approximation, even if analogous
 concepts play a different role in our own minds
 %-- conceptual roles are not private affairs; they
@@ -797,7 +797,7 @@ use lexical conventions to diminish the
 chance of confusion.  To the extent that they have this public
 dimension, conceptual roles are
 not `i.internal`/.  But `q.externalism` in this sense is
-waranted because we want to look philosophically
+warranted because we want to look philosophically
 at entire speech or cognitive communities %-- it is not
 automatically a philosophy of conceptual content
 being external to `q.mind in general`/.  Conceptual
@@ -833,7 +833,7 @@ conceptual roles that they themselves may not actually
 experience.  The public facet of conceptual roles
 complicates the notion of conceptual role similarity
 %-- two people's patterns of conceptual roles may
-be observably different as public phenoemena
+be observably different as public phenomena
 even if they lack resources to realize the
 difference.  Conceptual roles are therefore external
 to individual minds %-- but this is by scoping
@@ -849,11 +849,11 @@ cognitive community.
 In short, I will take the mantra of an `q.Externalist`
 when passing from individual minds and subcommunities
 to the public nature of conceptual roles and
-overaching cognitive communities.  Once we get
+overarching cognitive communities.  Once we get
 to the maximal possible community, however,
 I am inclined to revert to Internalism: if there
 is no broadening of communal scope that could
-make putative external diffrences meaningful to
+make putative external differences meaningful to
 `i.anyone's` conceptual roles, I see no reason to
 account for `i.these` erstwhile externalities in  a
 theory of concepts.  If XYZ has `i.some`
@@ -866,18 +866,18 @@ is a different concept than earthers' water-concept.
 Similarly, I accept that Sanders supporters'
 Medicare for All concept may be a different concept
 than Harris supporters'.  But in both cases I accept
-concept splitting to ovrride role-similarity because
+concept splitting to override role-similarity because
 I believe in an overarching cognitive community
 which has an interest in detecting differences or
 potential differences in conceptual roles qua
-public observables, which transcendes our own internal
+public observables, which transcends our own internal
 awareness of what our conceptual roles entail.
 The fact that earthers and twin-earthers might never
 `q.discover` a water/XYZ difference is a contingent
 fact, not an essential structure in policing
 conceptual maps.   When establishing how
-we should consider redrawing thse maps, we should
-work from the picture of an overarching comunity %-- that
+we should consider redrawing these maps, we should
+work from the picture of an overarching community %-- that
 can subsume isolated communities %-- as an abstract
 posit; the parts of the twin earth story that imply
 earthers and twin earthers could never actually discover
@@ -901,7 +901,7 @@ role in Putnam's mind than water).  And we should
 scope to the maximal community when determining whether
 smaller communities' conceptual roles are
 truly identical, because conceptual roles are, in part,
-potential public obervables for any possible supercommunity.
+potential public observables for any possible supercommunity.
 `p`
 
 `p.
@@ -973,13 +973,13 @@ them under `q.milk` outside of special contexts.
 Both the Externalist and Internalist points of
 view have some traffic in the considerations that
 cognitive communities bring to bear on
-which conceptual maps should be enorsed by convention.
+which conceptual maps should be endorsed by convention.
 Because ad-hoc conceptual roles
 can be established for particular situations,
 we can be conservative about `i.conventionalizing`
-concept maps driven by functional correspondances
+concept maps driven by functional correspondences
 too far removed from (what we think
-to be) scintifically endorsed, natural-kind
+to be) scientifically endorsed, natural-kind
 boundaries.  In other words, I think we `i.do` and
 `i.should` allow `q.naturalistic` considerations
 to be a factor in what concept maps we endorse.
@@ -1056,7 +1056,7 @@ I will focus in on Orlin Vakarelov's `q.Interface
 Theory of Meaning`/, developed over several recent papers,
 which I will also (somewhat indirectly) use as a
 kind of metatheoretic guide when presenting my own
-thoretical attachments later on.
+theoretical attachments later on.
 `p`
 
 `spsubsectiontwoline.Orlin Vakarelov's Interface Theory of Maning`
@@ -1218,13 +1218,13 @@ benefit (and maybe a subjective desire for knowledge).
 `p.
 When distinguishing `q.cognitive` from `q.precognitive`/, however,
 we should also recognize the different connotations that
-the term `q.cognitive` itself has in diffrent academic communities.
+the term `q.cognitive` itself has in different academic communities.
 In the context of Cognitive Linguistics, the
 term takes on an interpretive and phenomenological
 dimension which carries noticeably different implications in the
 `q.semantics of the theory` than in, say, conventional AI
 research.  Vakarelov's strategy is to approach `i.human` cognition
-as one manifstation of structured systems which we can visualize
+as one manifestation of structured systems which we can visualize
 as concentric circle, each ring implying greater sophistication
 and more rigorous criteriology than its outer neighbor:
 
@@ -1275,7 +1275,7 @@ the qualities that make `q.grammar`/, say, `q.Cognitive`
 seem uniquely human: our sociality in the complexity
 of social arrangements and cultural transmission;
 our `q.theory of other minds`/.  Certainly
-animals can have society, culture, and emapthy,
+animals can have society, culture, and empathy,
 but the human mind evidently takes these to a
 qualitatively higher level,
 making language `i.qua` cognitive system possible.
@@ -1304,7 +1304,7 @@ I'll mention the following:
 `item ->> Multi-Scale Situationality ;;  We understand situations as
 immediate contexts for our thoughts and actions, but we also
 recognize situations as parts of
-larger contxts, and connected to each other in chains stretching
+larger contexts, and connected to each other in chains stretching
 into past and future.  For example, as a train pulls into a
 subway station, our immediate situation may be needing to
 determine if this is the train we need to board.  But this is
@@ -1346,7 +1346,7 @@ sensate qualities %-- or even through our
 pragmatic/operational interpretations, like believing
 that the solidity of the glass
 prevents the water from leaking out %-- but we also
-intrpret people's practical intensions and mental
+interpret people's practical intentions and mental
 attitudes.  We infer that the first person was thirsty and
 the second cooperated by providing her with water to quench her
 thirst.  Interpreting the situation at that
@@ -1356,7 +1356,7 @@ variations, like responding to requests for a
 `i.glass` of water by bringing a `i.bottle`/.
 `description`
 
-In short, to undrstand `i.how` our cognitive frames
+In short, to understand `i.how` our cognitive frames
 align with environing patterns we have to understand
 the role language plays in this process: a role
 which can be intersubjective, empathic, context-sensitive,
@@ -1376,14 +1376,14 @@ has a `i.meaning` which is either
 intramental (determined by the sum of each person's
 beliefs and dispositions about water) or
 extramental (determined by how our water-experiences
-are structured, even beyond our knowldge,
+are structured, even beyond our knowledge,
 by the physical nature of water).  In place of
 either option, we should say that the meaning of the word
 `i.water` %-- or `i.chair`/, in Vakarelov's example
 %-- depends on all the cognitive systems interacting
 with linguistic understanding.  The word or concept
 does not exist in our `q.language-processing system`
-in isolation; so its meaningis not
+in isolation; so its meaning is not
 just `i.linguistic` meaning but how word-tokens
 and concept-instances become passed from system to system.
 `p`
@@ -1409,7 +1409,7 @@ she drinks %-- but it fades into the
 background rationality that we tend to attribute
 to day-to-day affairs.  Her glass of water %--
 how it continues to serve a useful purpose, how
-she and maybe others interact withbit %-- becomes a stable
+she and maybe others interact with it %-- becomes a stable
 if rather mundane part of our current situation.
 `p`
 
@@ -1463,7 +1463,7 @@ at `i.meaning` through the interstices between
 systems, not as some semiotic accounting summed up
 either `q.inside` or `q.outside` the mind.  The meaning
 of a broad concept like `i.water` is subsidiary to the
-meaning of more context-bound concepts like `i.glasss of water`/,
+meaning of more context-bound concepts like `i.glass of water`/,
 `i.body of water`/, `i.running water`/: and
 to excavate conceptual meanings in these
 situationally anchored cognitions we need to think

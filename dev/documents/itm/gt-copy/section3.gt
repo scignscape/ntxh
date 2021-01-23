@@ -15,7 +15,7 @@ systematic ways %-- processes which
 occur in the midst of logically incomplete
 spaces (in the context of message-passing,
 function-routing, etc.) do not
-nessarily `i.operate` logically.  That is,
+necessarily `i.operate` logically.  That is,
 local rules for message-passing or function-routing systems
 do not seem to be (in their `q.native` semantics)
 logical rules.  The truth-theoretic mapping of words to 
@@ -28,7 +28,7 @@ fails, I have argued.  Substituting a `q.procedural` semantic model
 allows a comparable formalization of linguistic structure
 through theories exploring procedural integration,
 for instance the interactions between computational procedures.
-Analysis of `i.computational` produres can yield interesting
+Analysis of `i.computational` procedures can yield interesting
 ideas for linguistic theories of `i.cognitive` procedures
 %-- without endorsing a reductive metaphysics of
 cognitive procedures as `q.nothing but` computational
@@ -94,8 +94,8 @@ can indeed be used as a foundation for type-theoretic
 and programming-language-design methodology.  The
 key step here is to generalize Link Grammar's
 notion of a `q.connector` %-- the aspect of a
-word or lexeme that allows (or requires) compltion
-via another word %-- to a gneric data structure
+word or lexeme that allows (or requires) completion
+via another word %-- to a generic data structure
 where connections can be made between different
 parts of a system on the basis of double
 potentials that must be in some sense `q.compatible`
@@ -177,7 +177,7 @@ belongs to the graph through the aegis of
 its annotated hyperdge) are not internal
 to the graph theory, but presumed to be
 specified by the modeling environment where
-implemementations of such graphs are
+implementations of such graphs are
 technologically applied.  Annotated Directed
 Hypergraphs are then `q.complete` in a sense
 if every `q.un-annotated` hyperedge has been
@@ -278,7 +278,7 @@ a wide range of empirical phenomena.  Generic code
 represents generic patterns of functional organization,
 allowing models to be built from varying layers of
 abstraction.  From this perspective, to
-describe an empirical system it is neessary to
+describe an empirical system it is necessary to
 identify important behaviors and functional patterns
 via which the system's observed behavior can be
 notated and/or simulated.  To the degree that
@@ -303,8 +303,8 @@ as tools to model information spaces.
 
 `p.
 Unfortunately, this kind of `q.procedural` modeling
-is hard to intgrate with the more static techniques
-representd by the Semantic Web and the current
+is hard to integrate with the more static techniques
+represented by the Semantic Web and the current
 `q.Big Data` fad.  The latter paradigms tend to treat
 data as a static repository to be mined for patterns
 and insights, rather than a digital
@@ -333,7 +333,7 @@ dynamic, functionally organized phenomena.
 `p`
 
 `p.
-As a corrolary, the theoretical building-blocks
+As a corollary, the theoretical building-blocks
 of Procedural Data Modeling %-- how it leverages
 type theory, programming language semantics, and
 so forth %-- can provide at least
@@ -355,7 +355,7 @@ comportments and interpretation.
 Type-theoretically, annotative partiality %-- which
 recall is my terminology for the abstract
 generalization of the mutual `q.incompleteness` in
-Link Grammar connctors, driving their
+Link Grammar connectors, driving their
 link-fusion %-- extends conventional applied type theory
 (as in the Typed Lambda Calculus) in parallel
 to partial-labels extending labeled graph theory.
@@ -380,7 +380,7 @@ become concretized, but as a formal system procedural
 networks model software in terms of its capabilities
 and expected behavior, rather than the state at
 any moment when the software is actually running.
-Partiality therefore models how precedures
+Partiality therefore models how procedures
 (as formal objects) deal with potentialities
 %-- we do not know what values will `i.actually`
 be present at runtime (e.g. what specific
@@ -428,7 +428,7 @@ a function is different from the type of its
 return value.  Expression-types and signature-types
 are almost exact duals (the complication being
 default values for optional parameters, which
-are not directly represented in exprssions
+are not directly represented in expressions
 %-- obviously, since then they would not be
 missing).  The `q.duality` involved here
 derives from partitioning a type system into
@@ -448,7 +448,7 @@ theory (and practice, in a sense) of formal
 and natural-language grammar.  Channel Algebra 
 is discussed in greater detail in `cite<NathanielChristenCyberphysical>;.
 It is fairly divergent from other formalizations
-in computer science, though loosely decended from 
+in computer science, though loosely descended from 
 Process Algebras and from the `q.sigma calculus`/, 
 which is a formal model of Object-Oriented 
 programming `cite<AbadiCardelli>;;
@@ -507,7 +507,7 @@ paragraphs in the earlier discussion) %-- depends on the
 software possessing capabilities to display the 
 information (usually visually).  In other words, 
 among the totality of all procedures that can be performed by
-the system, only a small set of procdures are involved in 
+the system, only a small set of procedures are involved in 
 user-interactions where semantic intentions like 
 `q.this piece of data represents someone's full name` are 
 relevant.
@@ -523,7 +523,7 @@ example, a graph-edge in a Semantic Web resource
 intended to model the proposition `q.This person has full 
 name Jane Doe` should not be seen as `q.meaning` anything about 
 full names.  Instead, it represents some computational 
-artifact which `i.becomes` an asserion of that fact 
+artifact which `i.becomes` an assertion of that fact 
 when a procedure is eventually called which converts
 the full name to a (usually visual) representation 
 which a human user would recognize as a view 
@@ -543,15 +543,15 @@ interface connecting networked data sources to the
 handful of procedures which create views for human users.  
 Within the local structure of this interface, data does not 
 have a `q.human` semantics; instead, it must be passed around 
-between proceurs before eventually 
+between procedures before eventually 
 reaching human-interaction procedures where 
 (what we would call) the `q.real` 
 procedures come into play. 
 `p`
 
 `p.
-When data is shared btween localities, then, the procedures 
-that will receive and manipulate this data are logicallly 
+When data is shared between localities, then, the procedures 
+that will receive and manipulate this data are logically 
 prior to the data itself and constrain when data-sharing is 
 possible.  Without the proper network of procedures, 
 the data can never be transformed into the views 
@@ -573,7 +573,7 @@ interactions with the system.
 `p.
 Analogous to Ontologies as data model specifications 
 for the Semantic Web, I'll use the term `q.Ambient-Procedural 
-Ontologies` to express the paradigm that implememting data-sharing 
+Ontologies` to express the paradigm that implementing data-sharing 
 protocols involves crafting software libraries around 
 procedural requirements.  This has two implications for 
 how we theorize software systems.  First, we need to characterize 
@@ -608,7 +608,7 @@ types and functions.
 In general, an assumption of Channel Algebra is that a significant 
 portion of information, present in some structured system,  
 can be extracted by identifying elements in 
-the system with types in a suitably developd 
+the system with types in a suitably developed 
 type system `tSys;.  In the case of Natural Language 
 %-- specifically Cognitive Grammar %-- this means that
 many syntactic and semantic details for each word 
@@ -619,7 +619,7 @@ for `i.semantics`/, but I intend to apply
 type theory also to `i.syntax`/.  
 Later in this section I will demonstrate 
 this in practice, but for now 
-I will hust note that such analysis requires 
+I will just note that such analysis requires 
 a sufficiently complex type system.  For example, 
 semantic notions like dot-typs and dependent-product 
 typs, which have proven to be effective in shedding 
@@ -678,7 +678,7 @@ and `cite<LuoSoloviev>;.
 `p.
 The point of this example is that many scientific concepts
 %-- the semantic norms embedded in how scientific terms are defined 
-and understood and how the concepts are used in scintific theories
+and understood and how the concepts are used in scientific theories
 and research %-- can be rigorously specified with a suitably 
 expressive type system.  Therefore, a sophisticated 
 system `tSys; is both a practical tool for scientific data 
@@ -697,7 +697,7 @@ metascientific concepts in scientific theories and data
 sharing.  A suitably developed type-system can, in light 
 of these possibilities, act as a kind of multi-purpose 
 tool capturing semantic principles in a broad array 
-of formal and informal cotexts.  This is possible insofar as 
+of formal and informal contexts.  This is possible insofar as 
 type theory is developed on a flexible basis so that 
 type systems can expand in different directions for 
 different intellectual environments %-- dependent 
@@ -727,13 +727,13 @@ Or, in a metascientific context,
 we may rcognize that we need to annotate type-attributions 
 with CSML notions like range, scale, and units.  
 The multi-paradigm criteria means that there would be 
-a mchanism in place to enrich a type system 
+a mechanism in place to enrich a type system 
 `tSys; so that such semantic details can be seen as
 structural parts of types modeled via `tSys;.`footnote.
 I refer to `q.semantic details` even in theories of 
 Natural Language `i.syntax`/, like Link Grammr, 
 because many ideas about language `i.grammar` are 
-relevant tobthe `i.semantics` of the linguistic 
+relevant to the `i.semantics` of the linguistic 
 `i.theory`/, which is different than 
 the Semantics of Natural Language which linguistic 
 theories have as their subject matter.
@@ -771,7 +771,7 @@ by some added `q.connector` structure which must math between
 `p.
 Channel Algebra, as I will now argue, 
 givs us a way to encode `q.extra information` 
-along these lins in type descriptions.
+along these lines in type descriptions.
 `p`
 
 `spsubsectiontwoline.Channels as Type-System Extensions`
@@ -792,8 +792,8 @@ channel, where it provides a result.  The term
 `q.process algebras` where procedures can run concurrently,
 and channels may be two-way means of communication between 
 concurrent procedures.  For this paper, I will only 
-consider `i.sequential` procedurs %-- where two 
-procedurs follow each other in time; no 
+consider `i.sequential` procedures %-- where two 
+procedures follow each other in time; no 
 parallelism %-- and `i.one way` channels, which 
 carry information from one procedure to another but have a fixed 
 direction.  Intuitively, if `procOne; sends a value 
@@ -804,7 +804,7 @@ value in the channel).
 
 `p.
 While type theory may conceive functions as (in effect) 
-a combination of input and ouput channels, actual programming practice
+a combination of input and output channels, actual programming practice
 reveals multiple distinct `i.kinds` of input and output 
 channels.  In Object-Oriented programming, Objects are 
 passed to functions (i.e., `q.methods`/) using a 
@@ -839,7 +839,7 @@ explicit documentation of which symbols are
 %-- these symbols are listed in square brackets, just as 
 regular arguments are listed in parentheses, which 
 helps reinforce the idea that inputs via 
-symboo-capture are similar to inputs via argument-passing 
+symbol-capture are similar to inputs via argument-passing 
 (which I say in Channel Alegebra as `i.lambda` and
 `i.capture` being both input channels).
 `p`
@@ -851,11 +851,11 @@ formations.  For instance, `i.if-then-else` can be
 represented as a structure which involves two nested 
 procedures: if some condition (in the outer, 
 enclosing procedure) is true, then the first nested procedure 
-is calld; if not, the second is called.  Similarly, a 
+is called; if not, the second is called.  Similarly, a 
 `i.loop` takes some nested procedure and calls it repeatedly.  
 In the simplest case, the nested procedure is called again and 
 again until the nested procedure returns in a manner 
-that signals the loop should be brocken off (a common keyword 
+that signals the loop should be broken off (a common keyword 
 for this condition, e.g. in `Cpp;, is `q.break`/).
 `p`
 
@@ -881,7 +881,7 @@ procedure to terminate %-- like `i.return`
 in an ordinary channel %-- but does so as a signal 
 for `i.loop` (in the outer procedure) to break off.  
 In effect, a nested procedure used as a loop block 
-has a spcial kind of output channel which can represent two 
+has a special kind of output channel which can represent two 
 possible states: `i.continue` the loop or 
 `i.break` the loop.  I will call this hypothetical 
 channel a `i.control` channel after Chung-Chieh Shan 
@@ -890,12 +890,12 @@ channel a `i.control` channel after Chung-Chieh Shan
 Most programming language runtimes don't actually 
 support the more `q.exotic` channels I discuss here, 
 and without runtime implementations they can 
-remain as just theortical descriptions of 
+remain as just theoretical descriptions of 
 programming phenomena implemented or analyzed via 
-some theortical framework quite different from 
+some theoretical framework quite different from 
 what I am calling `q.Channel Algebra`/.  
 However, the data set accompanying this text 
-demonstrates a runtine engine where the channel 
+demonstrates a runtime engine where the channel 
 structures I describe here can be directly implemented.
 `p`
 
@@ -959,7 +959,7 @@ the adjectives and nouns involved, which are required
 (along with the underlying type-compatibility) 
 to permit the function (the adjective) to input 
 the argument (the noun).   Then `i.today`/, `i.it`/, 
-and `i.they` cannot take adjectivs because they do not have 
+and `i.they` cannot take adjectives because they do not have 
 the proper `q.connectors`/.  Of course, both ideas
 can be combined, so we can define 
 nouns and adjectives restricted to 
@@ -1013,7 +1013,7 @@ and `i.output-connector` on the output side
 Notice that the range of different channels,
 each with distinct semantics and theoretical 
 roles, extends far beyond the basic intuition 
-that every procesure has some inputs and some outputs.  
+that every procedure has some inputs and some outputs.  
 Instead, type theories can evolve to capture theoretical 
 structures in diverse domains, because many theoretical 
 concepts can be systematically represented by describing 
@@ -1042,7 +1042,7 @@ programming, a `i.method` in a string class might
 take a string `i.object` (representing a string of 
 textual characters) as the nethod `q.receiver`/, 
 aside from `i.arguments`/: e.g., a `q.substring` 
-method would take a pair of intgers.  This procedure 
+method would take a pair of integers.  This procedure 
 would be considered to have a different type than an 
 equivalent non-method function taking `i.three` arguments 
 (one string and two integers) %-- even if both versions had 
@@ -1060,7 +1060,7 @@ such distinctions in Channel Algebra is that a
 procedure which takes all inputs from a lambda channel 
 has a different type than an (even if otherwise identical) 
 procedure which takes one input from a `i.sigma` channel 
-(equivalnt to the `Cpp; `i.this` keyword).
+(equivalent to the `Cpp; `i.this` keyword).
 `p`
 
 `p.
@@ -1080,11 +1080,11 @@ differentiate types.  In `Cpp;, a function which
 with a function which `i.does not` throw 
 an exception (assuming the rest of the functions' signatures 
 are identical).  This means that %-- if we model type systems like 
-that of `Cpp; via Channel Algebra %-- procedurs 
+that of `Cpp; via Channel Algebra %-- procedures 
 with and without error channels can gbe the same type.  But it 
 is always possible `i.in principle` to differentiate function-types 
 based on the kinds of channels their associated procedures use; 
-just that somethimes this results in fine-grained distinctions 
+just that sometimes this results in fine-grained distinctions 
 not recognized by a particular type system.
 `p`
 
@@ -1094,7 +1094,7 @@ via channels (`q.modulo` potential coarsening that equates types
 that could potentially be distinguished).  Therefore, the 
 fundamental fabric of the type system is dependent on 
 modeling channels, because this determines how 
-function-types themselves are miodeled; and, as I will now 
+function-types themselves are modeled; and, as I will now 
 explicate, function-types are the logical core of
 almost any practical type system
 `p`
