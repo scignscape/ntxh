@@ -624,13 +624,13 @@ plurality of coffee (as liquid, or maybe coffee grounds/beans)
 in spatial and/or physical/dynamic terms.  So we have: |+|
 
 `sentenceList,
-`sentenceItem; `swl -> itm:coffeeshirt -> There's some coffee on your shirt. -> ref ;;
-`sentenceItem; `swl -> --- -> There's coffee all over the table. -> ref ;;
-`sentenceItem; `swl -> --- -> She poured coffee from an ornate beaker. -> ref ;;
-`sentenceItem; `swl -> --- -> There's too much coffee in the grinder. -> ref ;;
-`sentenceItem; `swl -> --- -> There's a lot of coffee left in the pot. -> ref ;;
+`sentenceItem; `swl -> itm:coffeeshirt -> There's some coffee on your shirt. -> syn ;;
+`sentenceItem; `swl -> --- -> There's coffee all over the table. -> syn ;;
+`sentenceItem; `swl -> --- -> She poured coffee from an ornate beaker. -> syn ;;
+`sentenceItem; `swl -> --- -> There's too much coffee in the grinder. -> syn ;;
+`sentenceItem; `swl -> --- -> There's a lot of coffee left in the pot. -> syn ;;
 `sentenceItem; `swl -> --- -> There's a lot of coffee left in the pot
-%-- should I pour it out? -> ref ;;
+%-- should I pour it out? -> syn ;;
 `sentenceList`
 
 |.|
@@ -643,10 +643,10 @@ With count-plurals the collective is figured more as an
 aggregate of discrete individuals:  |+|
 
 `sentenceList,
-`sentenceItem; `swl -> --- -> There are coffees all over the far wall at the espresso bar. -> ref ;;
-`sentenceItem; `swl -> --- -> She poured coffees from an ornate beaker. -> ref ;;
+`sentenceItem; `swl -> --- -> There are coffees all over the far wall at the espresso bar. -> syn ;;
+`sentenceItem; `swl -> --- -> She poured coffees from an ornate beaker. -> syn ;;
 `sentenceItem; `swl -> itm:coffeetable -> There are a lot of coffees left on the table
- %-- shall I pour them out? -> ref ;;
+ %-- shall I pour them out? -> syn ;;
 `sentenceList`
 `p`
 
@@ -770,8 +770,8 @@ of both semantics and grammar proper; maybe it is even prelinguistic.
 Consider: |+|
 
 `sentenceList,
-`sentenceItem; `swl -> itm:pf -> People fed the rescued dogs. -> sem ;;
-`sentenceItem; `swl -> itm:ve -> Vets examined the rescued dogs. -> sem ;;
+`sentenceItem; `swl -> itm:pf -> People fed the rescued dogs. -> con ;;
+`sentenceItem; `swl -> itm:ve -> Vets examined the rescued dogs. -> con ;;
 `sentenceList`
 
 |.|
@@ -1581,7 +1581,7 @@ dependency is understood in a given case.
 `p.
 By contrast, Link Grammar does not identify a head-dependent
 assymetry within inter-word relations.  Instead, words
-(along with other lexically signifant units, like
+(along with other lexically significant units, like
 certain morphemes, or punctuation/prosodic units) are
 seen as forming pairs based on a kind of mutual
 incompleteness %-- each word supplying some structural
@@ -1650,7 +1650,7 @@ included into a larger aggregate.
 The interesting resonance between Link Grammar
 and Cognitive Grammar is that this perspective allows
 us to analyze how syntactic incompleteness
-mirrors semantic incompletenss, and vice-versa.
+mirrors semantic incompleteness, and vice-versa.
 `q.Incompleteness` can also often be characterized
 as `i.expectation` (which was how I framed this 
 line of theory earlier): an adjective `q.expects` a noun
@@ -1701,7 +1701,7 @@ fallacious).  But to properly pair with
 `i.testify`/, then, phrases must be
 semantically reinterpreted as nominalizations
 of propositions, rather than as mere linguistic
-exprssion of propositional content via
+expression of propositional content via
 complete sentences.  The `q.epistemic`
 context transforms sentential content into
 nominal content available for further refinement: |+|
@@ -1755,7 +1755,7 @@ something believed %-- effectively a type-theoretic
 tension resolved by understanding `i.Obama` in this
 context to designate either his platform or his
 ability to implement it.  Interpretive `i.tension`
-is a natural correlary to a mismatch in expectations:
+is a natural corollary to a mismatch in expectations:
 `i.believe` expects something epistemic, but the
 discourse gives us a proper name.  Analogously
 `i.budge` expects a brute physical entity in
@@ -1795,7 +1795,7 @@ I have mentioned several ready examples %--
 the syntactic dependency of verbs and adjectives
 on nouns for them to enter correctly into
 discourse (correlate with a semantic dependency
-in the other dirction, to shape noun-ideas to the
+in the other direction, to shape noun-ideas to the
 proper context and signifying intent); also
 part-of-speech or `q.subtyping` dependencies
 reflecting mandates that (in my examples)
@@ -1822,7 +1822,7 @@ details.  But the graph layer articulated by
 a Link Grammar still provides a useful
 intermediate representation, showing
 mutual dependencies in their syntactic manifestations
-that then point toward thir deeper semantic and
+that then point toward their deeper semantic and
 situational origins.
 `p`
 
@@ -1873,7 +1873,7 @@ grounding each other %-- to trigger
 the listener's awareness that the speaker's
 discourse is centered on one specific aspect of the
 dogs (that they were at some point rescued)
-with its conceptual corrolaries and unstated assumptions
+with its conceptual corollaries and unstated assumptions
 (that, being in need of rescue, they were abandoned,
 in danger, and so on).  Similarly
 the further link to the definite article
@@ -1970,7 +1970,7 @@ evokes an interpretive process that on its own logic
 cannot be completed, and likewise `i.dogs`/; but
 each script supplies the content missing from
 the other.  In this sense the bidependent form
-concretized by the pair is actualy evoking
+concretized by the pair is actually evoking
 an interpretive phenomenon of mutual completion
 %-- the language structure here is guiding us
 toward an interpretive interpenetration where
@@ -1989,7 +1989,7 @@ bidependent script-pairs occurs indirectly.
 Some paired-up words are of course adjacent,
 but adjacency between words does not have the same
 binding determinacy as sequencing among morphemes
-in `i.one` word.  Instead, word adjaceny
+in `i.one` word.  Instead, word adjacency
 is only one signal among many others suggesting
 that some prototypical inter-word relation
 applies between two words (which might be
@@ -2029,7 +2029,7 @@ in purely linguistic terms.
 `p.
 Fully working through this theory, then, implies the need 
 for an account of `q.progression to complete propositional content` which 
-can in fact cut acress diverse cognitive registers.  A full treatment 
+can in fact cut across diverse cognitive registers.  A full treatment 
 of such issues is outside the scope of this paper, but I will 
 note several important details, as I see them.  In particular, 
 the `q.accretion of detail`/, as sentence-parts build up to a 
@@ -2059,12 +2059,12 @@ effects of epistemic `q.grounding` along these lines on sentence
 structure.  The point is not simply that every element of a 
 sentence is aligned `visavis; the speaker in some manner, and 
 addressees need to unpack these alignments to understand 
-(and evaluate) what the speaker is saying.  More substantially, empistemic 
+(and evaluate) what the speaker is saying.  More substantially, epistemic 
 grounding creates a pattern within the sentence itself, including 
 designating content as more or less peripheral to each 
 sentence's grounding effects.  The core subject of a sentence is 
 also, in many cases, the anchor for how the sentence is grounded 
-in the speaker's empistemic attitudes %-- this is the object 
+in the speaker's epistemic attitudes %-- this is the object 
 which is the speaker's focus of attention, and the space and 
 time where the speaker observes/encounters the object is a baseline 
 against which other space/time frames (e.g. in subordinate clauses) 
@@ -2099,7 +2099,7 @@ and so forth.  In general, specifications about `i.how`/, `i.where`/,
 stripped away from a central verb/noun anchor.  There's nothing 
 theoretically deep or sophisticated about posing sentences' 
 center/periphery distinction in these terms, but notice that 
-such a theory, albeit simple and commensensical, leads to a 
+such a theory, albeit simple and commonsensical, leads to a 
 structural articulation within sentences that overlays and 
 combines with type-theoretic and transform-pair relations I 
 have discussed in this paper.  For example, case-marked clauses 
@@ -2173,7 +2173,7 @@ Here (`ref<itm:harrycause>;) is from the `i.Handbook` (page 527), and
 (`ref<itm:booksheread>;)-(`ref<itm:bookjustappeared>;) are 
 from Langacker `cite<[pages 102-103]LangackerInteractive>;.  These 
 examples illustrate how patterns of enunciation reinforce anchoring 
-and focusing effects in discource: in the `q.book` examples the 
+and focusing effects in discourse: in the `q.book` examples the 
 stress on that word marks it as the central point of attention 
 in the sentence; and in (`ref<itm:harrycause>;) there are 
 several potential stress patterns which cue the listener 
@@ -2215,7 +2215,7 @@ clauses stating her reading it immediately.  In other words,
 here too the intonation shifts emphasis away from the 
 central verb/object pair in part, but only in part, insofar 
 as the subject now keeps its emphasis but the profiled 
-verb loses the empashasis, at least partially.   
+verb loses the emphasis, at least partially.   
 `p`
 
 `p.
@@ -2275,7 +2275,7 @@ the speaker opining about the fact of their getting married
 if the conversation to that point had been about her, 
 or conversely who Clyde married, if the discourse had been 
 about him).  Likewise in (`ref<itm:Brighton>;) stressing 
-`i.Londeners` suggests focusing on people from London as 
+`i.Londoners` suggests focusing on people from London as 
 the largest group from among those who visit Brighton, 
 whereas stressing Brighton suggests focusing on a 
 place which disproportionately serves as a destination 
@@ -2378,7 +2378,7 @@ to indicate `q.medium` prosodic emphasis) that (`ref<itm:coach>;) is different
 because the concept of `i.coach`/, while closely associated with a team, 
 is not latent to the same extent as the building beneath a roof (one can 
 perceive and conceive of a team without a coach, but not a roof without 
-a building).  Such degees of cognitive inter-association combine with 
+a building).  Such degrees of cognitive inter-association combine with 
 `q.windowing` effects, in terms of how we hear multi-word units (influenced by 
 intonation as well as phrase-structure), to determine where we tend to 
 place spoken emphases.
@@ -2470,7 +2470,7 @@ The prosodic details I have reviewed in the last few paragraphs are
 conventionalized in language to some degree, but not codified 
 with the precision of lexical or syntactic norms, for example.  
 This suggests for me that we tend to form intonation patterns 
-instinctively rather than by rote adherance to linguistic 
+instinctively rather than by rote adherence to linguistic 
 rules; by extension, the cognitive drivers of such patterns 
 may well emerge in large part from prelinguistic or extralinguistic 
 intellectual strata.  This idea seems quite plausible in relatively 
@@ -2562,18 +2562,18 @@ enough that there is no specific order germane to their
 articulation %-- `i.I bought wine for your party in Ontario` 
 and `i.I bought wine in Ontario for your party` both work.  
 Nevertheless, phrases often `i.are` semantically interdependent 
-and, in general, syntactic norms need to be entranched so 
+and, in general, syntactic norms need to be entrenched so 
 that there is a pattern in how phrases are pieced together 
 into larger wholes, since many applications of syntax rules 
 `i.will` apply to interdependent parts.  The `q.accretion of detail` 
 at the heart of any sentences' invocation of propositional 
 content has to unfold in an ordered fashion, where 
 some phrasal or word-pair units logically, vocally, and 
-cognitively follow/preceed others.  This forms the 
+cognitively follow/precede others.  This forms the 
 organizational premise behind part-of-speech rules, I would 
 argue, and, by extension, behind the system of linguistic 
 types at the coarsest (`q.macrotype`/) level.  At more 
-granuar levels, however, types (or so I have argued) 
+granular levels, however, types (or so I have argued) 
 hue more closely to concepts and word-senses, their 
 role being to provide semantic to lexical conventions 
 and/or to negotiate mid-scale conceptual manipulations 
@@ -2592,7 +2592,7 @@ analysis of types in terms of `q.organizing accretion of detail`
 is interconnected with analysis in terms of ontological shifts 
 in register, for example, to a degree which would be 
 less theoretically foregrounded if instead of type-theoretic 
-framing we were intead to conceptualize `q.macrotypes` as parts 
+framing we were instead to conceptualize `q.macrotypes` as parts 
 of speech, say, and `q.mesotypes` as criteria for 
 word-sense disambiguation.   
 `p`

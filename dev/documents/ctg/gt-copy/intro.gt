@@ -114,14 +114,14 @@ that centers its whole attention on building better automated
 `NLP; tools.  Left out of this division is research that 
 invokes formal models as explanatory vehicles while not 
 enmeshing them in an ecosystem oriented toward automation %-- 
-the difference between deploying formal repesentations to 
+the difference between deploying formal representations to 
 model (some aspects) of language processing, syntax, and 
 semantics, and trying to program software to `i.automate` the 
 construction, translation, and pipeline between and among
 formal models.  When situating research relative to 
 computational linguistics, we should bear in mind the 
 metatheoretical point that `i.incorporating` formal 
-schema into linguictis models does not `i.necessarily` 
+schema into linguistic models does not `i.necessarily` 
 mean committing ourselves to a task of programming 
 computers to discover the target representations 
 on their own, given raw linguistic input.
@@ -263,7 +263,7 @@ convenient designation for lexemes in general) as a
 
 `p.
 I will argue that the underlying transform-pair concept is 
-amenable to both more formal and more philophical/interpretive 
+amenable to both more formal and more philosophical/interpretive 
 development.  One the one hand, transform-pairs can sometimes 
 be mapped explicitly to dependency or link-grammar pairs, 
 so the theory can be treated as a philosophical preliminary 
