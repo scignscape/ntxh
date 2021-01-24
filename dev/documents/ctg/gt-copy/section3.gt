@@ -1492,7 +1492,9 @@ a discussion about hikes in general.
 But maybe not; cases like these are perfectly plausible: |+|
 
 `sentenceList,
-`sentenceItem; `swl -> itm:today -> Today the state university system
+`sentenceItem; `swl ->> Today the state university system
+announced plans to raise tuition by
+at least 10 percent.  Most students oppose a tuition increase. -> itm:today -> Today the state university system
 announced plans to raise tuition by
 at least 10\%.  Most students oppose a tuition increase. -> sem ;;
 `sentenceItem; `swl -> itm:colleges -> Colleges all over the country, facing

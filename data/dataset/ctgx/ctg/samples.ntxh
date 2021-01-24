@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-23/1/2021, 23:7
+23/1/2021, 13:10
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -1730,7 +1730,7 @@ $s: 3
 $i: 136
 $p: 45
 $x: itm:today
-$t: Today the state university system announced plans to raise tuition by at least 10 percent. Most students oppose a tuition increase.
+$t: Today the state university system announced plans to raise tuition by at least 10\%. Most students oppose a tuition increase.
 $c: sem
 /!
 <>>
@@ -2103,7 +2103,7 @@ $i: 169
 $p: 59
 $x: itm:pf
 $t: People fed the rescued dogs.
-$c: cog
+$c: con
 /!
 <>>
 
@@ -2112,7 +2112,7 @@ $i: 170
 $p: 59
 $x: itm:ve
 $t: Vets examined the rescued dogs.
-$c: cog
+$c: con
 /!
 <>>
 
@@ -2404,7 +2404,7 @@ $c: ref
 $i: 199
 $p: 65
 $x: itm:theflies
-$t: The city's largest theater company will perform The Flies.
+$t: The city's largest theater company will perform ``The Flies".
 $c: ref
 /!
 <>>

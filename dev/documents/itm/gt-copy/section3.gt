@@ -487,7 +487,7 @@ is simpler.  So, assume we have a computing environment
 where many functions are available to be 
 called %-- in effect, a bundle of software libraries 
 each exposing some collection of function-implementations.  
-For reasons I'll cover momentarily, I'll call thse 
+For reasons I'll cover momentarily, I'll call these 
 `i.ambient procedures`/.
 `p`
 
@@ -577,7 +577,7 @@ Ontologies` to express the paradigm that implementing data-sharing
 protocols involves crafting software libraries around 
 procedural requirements.  This has two implications for 
 how we theorize software systems.  First, we need to characterize 
-procedures in a manner that expresses the proceural 
+procedures in a manner that expresses the procedural 
 capabilities that a system offers, or must have to satisfy a 
 data-sharing protocol.  Second, we can assume that 
 whenever data is sent, received, manipulated, or visualized, 
@@ -621,8 +621,8 @@ Later in this section I will demonstrate
 this in practice, but for now 
 I will just note that such analysis requires 
 a sufficiently complex type system.  For example, 
-semantic notions like dot-typs and dependent-product 
-typs, which have proven to be effective in shedding 
+semantic notions like dot-types and dependent-product 
+types, which have proven to be effective in shedding 
 light on common lexico-semantic phenomena, may need to be 
 expressible in a `tSys;, `i.along with` link- or cognitive-grammatic 
 notions like `i.connectors` and `i.expectations`/.  
@@ -770,7 +770,7 @@ by some added `q.connector` structure which must math between
 
 `p.
 Channel Algebra, as I will now argue, 
-givs us a way to encode `q.extra information` 
+gives us a way to encode `q.extra information` 
 along these lines in type descriptions.
 `p`
 
@@ -1081,7 +1081,7 @@ with a function which `i.does not` throw
 an exception (assuming the rest of the functions' signatures 
 are identical).  This means that %-- if we model type systems like 
 that of `Cpp; via Channel Algebra %-- procedures 
-with and without error channels can gbe the same type.  But it 
+with and without error channels can be the same type.  But it 
 is always possible `i.in principle` to differentiate function-types 
 based on the kinds of channels their associated procedures use; 
 just that sometimes this results in fine-grained distinctions 
@@ -1124,7 +1124,7 @@ conformant to that type can actually be used.
 
 `p.
 In addition to this practical problem, it is also difficult to 
-describe exatly what a value `i.is`/.  Any instance of any type 
+describe exactly what a value `i.is`/.  Any instance of any type 
 (at least in the software ecosystem) 
 does have a numeric manifestation in computer memory %-- 
 essentially an encoding as a sequence of bytes, that is,  
@@ -1133,10 +1133,10 @@ encodings (sometimes called a `q.bit pattern`/) actually
 are `q.values` of types.  In reality, computer code almost never 
 deals with `q.values` per se, but rather deals with types 
 represented symbolically in function signatures: passing 
-`q.values` around from procedure to procdure.  One exception to this 
+`q.values` around from procedure to procedure.  One exception to this 
 rule is that some values are written directly into computer 
 code %-- the numeric literal `q.10` represents a specific 
-value (usually in some intger type).  However, even here some 
+value (usually in some integer type).  However, even here some 
 procedure is needed to interpret the character strings in 
 source code to the actual typed value.
 `p`
@@ -1144,7 +1144,7 @@ source code to the actual typed value.
 `p.
 Given these considerations, while I will informally talk about 
 `q.values` I try to minimize the use of `q.value` as a technical 
-construct in Channel Algbra.  With this foundation we 
+construct in Channel Algebra.  With this foundation we 
 can consider a kind of `q.value free` type theory by 
 rough analogy to `q.point-free` topology 
 (and therefore distantly to mereotopology).  More central than 
@@ -1163,7 +1163,7 @@ In short, at any stage of program execution, we can form
 groups of source-code symbols across the code base unified by 
 the guarantee that these symbols carry `q.the same` value.  
 But rather than talking of values directly we can 
-take this syncronization between symbols as the deeper notion: 
+take this synchronization between symbols as the deeper notion: 
 the notion `i.value` is itself defined as the correlation exhibited 
 by synchronized `q.symbols`/.  The notion of 
 `q.carrier` is then a more rigorous extension of the
@@ -1172,10 +1172,10 @@ notion of source-code symbols or tokens.
 
 `p.
 The difference between a `i.carrier` and a `i.type` is that 
-carriers have aditional states.  Some carriers are defind in
+carriers have additional states.  Some carriers are defind in
 function signatures, but others are introduced as lexical 
 symbols in a procedure implementation.  In many programming 
-languags, lexical symbols can be `i.declared` before being 
+languages, lexical symbols can be `i.declared` before being 
 `i.defined`/.  We can represent this scenario via a `i.carrier` 
 which is in a particular `i.state` (I'll call it 
 `i.preinitialized`/).  When a carrier is initialized, it takes on 
@@ -1187,11 +1187,11 @@ state I'll call `i.retired`/.  Introducing `i.preinitialized`
 and `i.retired` as carrier-states allows these to be separated from 
 the type-system: we do not have to assume a `q.preinitialized` 
 `i.value` which can be an `i.instance` of some types.  In some cases, 
-type systems `i.will` reognize values which play 
+type systems `i.will` recognize values which play 
 similar semantic roles to these carrier-states: for example, 
 Haskell's `q.bottom` value is an instance of every type and represents a
-`q.null` or `q.missing` value.  However, using semenatics of carrier-states 
-rather than type-instancs means that we do not have to introduce extra 
+`q.null` or `q.missing` value.  However, using semantics of carrier-states 
+rather than type-instances means that we do not have to introduce extra 
 structure to type systems which we may want to model via Channel Algebra.
 `p`
 
@@ -1200,7 +1200,7 @@ Carriers which can be in preinitialized, retired, or initialized states
 I call `i.tropes` (there may be only one, or multiple,
 initialized states for tropes).  A different class of carriers are
 called `i.emblems`/, and represent abstract (`q.emblematic`/) 
-specfications on 
+specifications on 
 carriers rather than carriers which hold concrete values: 
 in effect, emblems are carriers present in function 
 signatures.  One or more carriers in an ordered list then 
@@ -1221,10 +1221,10 @@ called `i.abstract` channels.
 `p.
 Carriers and channels interoperate according to several 
 operators, which give Channel Algebra its `q.algebraic` character.  
-To present these oprators I'll also intoduce the notion 
+To present these operators I'll also introduce the notion 
 of `i.stages`/.  Briefly, any procedure is broken down 
 into a sequence of stages, each of which involves 
-constructing some aggregate of chanels.  The basic
+constructing some aggregate of channels.  The basic
 outline is as follows: |+|
 
 `description,
@@ -1237,7 +1237,7 @@ channels can combine to a `q.product`/, called a
 channels can become a channel `i.package`/.  
 A channel complex or package is generically called a 
 channel `i.product`/.  A channel product is considered 
-`q.complex` if any of its chanels are abstract.  
+`q.complex` if any of its channels are abstract.  
 The basic channel-to-channel operator `ChaProductCha; 
 represents a channel product formed by combining 
 `ChaOne; and `ChaTwo;.
@@ -1258,14 +1258,14 @@ alignment is non-trivial; in `cite<NathanielChristenCyberphysical>;
 I address this in terms of hypergraph models of computer code.  But in
 general alignment means that handoffs are possible between 
 tropes and emblems, and if there is enough alignment 
-the chanel `i.package` `Chp; can be interpreted as a call 
+the channel `i.package` `Chp; can be interpreted as a call 
 to a `i.procedure`/, whose `i.signature` is modeled by the channel 
 `i.complex` `Chx;.  In this case we have a `q.Digamma Reduction` 
 operator `DigammaR;, meaning that the package `Chp; is 
 `q.evaluated` and then control passes to the stage 
 labeled `stageLbl;.`footnote.
 The motivation for the term `q.digamma` is first that the `q.sigma` in 
-`sigmaCalc; looksblike a smaller version of the Greek letter Digamma,
+`sigmaCalc; looks like a smaller version of the Greek letter Digamma,
 and second that `q.gamma` is often used to represent graphs, and 
 `q.digamma reduction` can be sen as a relationship between 
 two different source-code graphs.
@@ -1289,7 +1289,7 @@ This strategy is concretely put into practice
 in the sample code distributed with this paper.  In effect, 
 high-level source code is `q.compiled` into an 
 intermediate representation, and this IR is a more or less 
-direct translation of Channel Algebra oprations.  
+direct translation of Channel Algebra operations.  
 `p`
 
 `p.
@@ -1298,7 +1298,7 @@ practical software developments involves mapping
 sophisticated Channel semantics to ordinary
 type systems.  Since a language like `Cpp; does not 
 support the full range of channels I have presented
-here, the more detailed channel-complees have to be mapped to 
+here, the more detailed channel-complexes have to be mapped to 
 function-call semantics which  `Cpp; will actually 
 recognize.  In practice, a lot of this work involves
 manipulating function pointers and casting carriers 
@@ -1316,7 +1316,7 @@ theory I am developing in this section).
 At this point however I `i.will` comment 
 on the overall architecture of building and then evaluating 
 channel packages.  Supporting `q.Digamma Reduction` 
-in a runtime encironment requires reasonably complex 
+in a runtime environment requires reasonably complex 
 `Cpp; libraries (assuming `Cpp; is the language 
 of the runtime itself); but most of 
 the Intermediate Representation is concerned with 
@@ -1355,11 +1355,11 @@ called `i.Channel Algebraic Grammars`/.
 
 `p.
 This paper's data set includes one example of an 
-implmented Channel Algebraic Grammar insofar as code 
+implemented Channel Algebraic Grammar insofar as code 
 written in a special high-level language is translated to 
 a Channel Algebraic Intermediate Representation 
 (and then evaluated).  The syntax and semantics of 
-this spcial-purpose language is, of course, 
+this special-purpose language is, of course, 
 only distantly related to `i.natural` language; 
 I won't address whether a comparable architecture could 
 yield a workable Natural Language Processing engine.  
@@ -1367,7 +1367,7 @@ However, the design and role of this Channel Algebraic
 Grammar in the `i.Software Language Engineering` 
 problem-space can perhaps serve as at least an 
 analogy for how `i.natural` language 
-orchstrates the `q.flow` of information, 
+orchestrates the `q.flow` of information, 
 and the ordering of operations, across the cognitive 
 procedures which underly linguistic understanding.
 I will return to this possibility at the end of the section. 
@@ -1388,7 +1388,7 @@ have to be grounded on some underlying data.
 This data may come from outside the software 
 itself: for example, a program emulating a 
 calculator relies on human users to type numbers 
-on a kyboard or by pushing buttons on a User Interface.   
+on a keyboard or by pushing buttons on a User Interface.   
 Other times values are literally written 
 in computer code, or obtained from files, databases,
 or over a network.  
@@ -1407,15 +1407,15 @@ circulating through the software are derived.
 
 `p.
 In a typical type system, then, at least some types 
-should have procdures which construct values directly 
+should have procedures which construct values directly 
 from source code literals.  I'll call these 
 `i.literal-constructors`/.`footnote. 
 In `Cpp;, similar constructor-functions are called `i.literal 
 operators`/.  This terminology only applies to `q.user-defined` 
 constructors; the compiler itself handles initialization 
-for built-in typs like integer and floats.  However the
+for built-in types like integer and floats.  However the
 overarching term `q.literal-constructors` is helpful for 
-theory-focused languag-agnostic discussion about types and 
+theory-focused language-agnostic discussion about types and 
 constructors.
 `footnote`  In addition to literal-constructors, 
 there are some procedures to create type values from 
@@ -1438,7 +1438,7 @@ There is no strict rule separating constructors for a type
 `tTyp; from other procedures that may return values of 
 `tTyp;.  Intuitively, they play different roles: constructors 
 are about creating new values, while other functions 
-analyze or modify existing valus.  The canonical examples 
+analyze or modify existing values.  The canonical examples 
 are so-called `i.trivial` constructors, which 
 take no arguments %-- for instance, the constructor for a 
 list of numbers returns an empty list.  Such a 
@@ -1497,7 +1497,7 @@ one way to construct `Lprime; from a pair
 `LappendX;.  In other words, an `i.append` 
 constructor is `q.reversible`/.  Moreover, we 
 can repeatedly reverse constructors like 
-thse to get shorter and shorter (and eventually 
+these to get shorter and shorter (and eventually 
 empty) lists.  This means that algorithms can 
 traverse a chain of constructors `q.backward` and 
 will be guaranteed to terminate.  For example, 
@@ -1561,8 +1561,8 @@ this is `i.usually` a `q.default` value.
 
 `p.
 However, a type can have a default value without a trivial 
-constructor.  A defalt value plays the 
-conceptusl role of a `q.fallback`/: 0 is a reasonable 
+constructor.  A default value plays the 
+conceptual role of a `q.fallback`/: 0 is a reasonable 
 default for most numeric types.  However, some numeric types 
 don't have trivial constructors at all.  Meanwhile, types 
 representing calendar dates sometimes default to a 
@@ -1585,7 +1585,7 @@ not actually used.  To demonstrate how this may occur, consider
 the problem of enforcing dependent-type constraints without 
 using dependent types explicitly.  A canonical example is 
 a function which must take a (maybe monotone) 
-increasing or decreasing pair of numbes (I used the 
+increasing or decreasing pair of numbers (I used the 
 monotone-decreasing example for systolic and diastolic 
 blood pressure).  Suppose we implement a procedure to 
 highlight a selection of characters in a screen display,
@@ -1643,7 +1643,7 @@ The key point here is that many conceptual details or
 programming requirements that concern interrelationships 
 between values can be modeled within a 
 type system %-- even without full-fledged 
-dependent types %-- via preconstructros used as 
+dependent types %-- via preconstructors used as 
 signal values.  For a given requirement, such as 
 `q.is $y$ greater than $x$?`/, we can identify a type 
 that `i.could` be constructed if (and only if) 
@@ -1651,7 +1651,7 @@ the requirement is satisfied.  For instance,
 `i.$y$ is greater than $x$` is true iff we can form an 
 instance of a monotone-increasing pair type out 
 of $x$ and $y$ %-- and so, the preconstructor 
-for this type becomes a convnient signaling value 
+for this type becomes a convenient signaling value 
 for the affirmation of $y > x$.  Conceptual requirements 
 can be defined by modeling types whose values 
 necessarily exhibit some significant property, and 
@@ -1723,7 +1723,7 @@ indicates that a given type behaves essentially like a tuple,
 with a sequence of values that, in most cases, vary 
 independently of one another.  These kinds of types 
 hew closely to the Conceptual Space idea of 
-multi-dimensional quality spacs.  However, 
+multi-dimensional quality spaces.  However, 
 other kinds of types have more complex, interdependent 
 internal structuration.  I think Channel Algebra is a 
 way to make Conceptual Space theory relevant for these more 
@@ -1737,7 +1737,7 @@ foundations.
 Having argued for Channel Algebra as a formalization 
 potentially relevant to Conceptual Space models, I 
 want to conclude this section by considering 
-how Channel Algebra msy be intuitively applicable to 
+how Channel Algebra may be intuitively applicable to 
 Cognitive Grammar.  
 `p`
 
@@ -1763,11 +1763,11 @@ On one level, very general Part of Speech classifications
 can be approached type-theoretically.  This helps 
 reinforce the intuitive idea that syntactic categories like 
 verbs, adjectives, and adverbs corresponds to 
-conceptual, cognitive processes which effectuat changes
+conceptual, cognitive processes which effectuate changes
 in beliefs, conceptualizations, or situational 
 records.  A noun by itself is an abstract concept; 
 during the course of a sentence, it is 
-subject to concretization and preicatization, 
+subject to concretization and predicatization, 
 ending up in an idea that has some degree of 
 concrete propositional content.
 `p`
@@ -1786,10 +1786,10 @@ concept-to-belief evolution than mereological units.
 That is, the relation between the signifying whole and 
 its semantic or morphosyntactic parts is more 
 the relationship between a process's ending 
-to its intermediaries than a mereological hierarhy.  
+to its intermediaries than a mereological hierarchy.  
 If this picture seems compelling it can be 
 conveyed by figuring the majority 
-of Part of Spech types as function-like: 
+of Part of Speech types as function-like: 
 the nature of verbs, for example, is to 
 functionally transform (in our 
 cognitive frames) nouns to 
@@ -1806,7 +1806,7 @@ new verbs from other verbs; subordinators like
 nouns (as I argued in the last section), and 
 so forth.  So Parts of Speech can be usefully analyzed 
 as `q.function-like` types (I will discuss 
-specific language examples arguing for this prespective 
+specific language examples arguing for this perspective 
 in the next section).  These are, however, very general
 types, which would be the `q.uppermost` types 
 in a natural language semantics; I will call
@@ -1819,7 +1819,7 @@ lexical `q.cliques`/`footnote.
 Borrowing this term from `cite<GaumeVenantVictorri>; though I'm 
 not using it exactly the same way
 `footnote` %-- the concept or extension or intensional 
-property-set associatd with particular word-meanings 
+property-set associated with particular word-meanings 
 %-- often seem to behave as `i.types` as well.  In `q.Formal 
 Concept Analysis`/, `i.concepts` are (statistically) 
 defined as a combination of extensional and intensional 
@@ -1838,7 +1838,7 @@ the `q.core` or `q.center` of a concept: insofar as
 some example is `q.peripheral`/, an outlier which 
 is somehow not representative of the concept (but 
 still can be classified to it), it must have some 
-`i.featural` difference from examplars; but we can 
+`i.featural` difference from exemplars; but we can 
 also compare it as an individual to more 
 exemplary individuals.  That is, we understand outliers 
 both intensionally %-- we can articulate the features 
@@ -1865,7 +1865,7 @@ concepts do present operationally as types: |+|
 The point of these examples is that their signifying structures 
 involve operations that can be explained type-theoretically.  
 In (`ref<itm:penguin>;), a concept is 
-characetrized via a subtype/supertype relation.  In 
+characterized via a subtype/supertype relation.  In 
 (`ref<itm:rhino>;), a concept is being 
 `q.extensionally filtered`/: we start with an 
 expression that seems to designate the extension of some concept 
@@ -1874,7 +1874,7 @@ extensional criteria (`i.in that park`/).  This suggests
 a type/set interface similar to my analysis in Part I of 
 `q.students polled`/.  And (`ref<itm:elephant>;) 
 suggests an `i.intensional` filter, narrowing a type 
-for contxtual purposes into a subtype that is 
+for contextual purposes into a subtype that is 
 conceptually meaningful but not entrenched:
 there is no common word (peer to `q.kitten` 
 or `q.puppy`/) for `i.baby elephant`/.
@@ -1950,10 +1950,10 @@ no conventionalizing pressues.  The (`ref<itm:bark>;) and
 (`ref<itm:back>;) senses are rather entrenched, using 
 `i.bark` to suggest something a little obnoxious or 
 mean.  But (`ref<itm:kitten>;) does not sound right, even though 
-it is no more of a strecth to imagine a kitten's 
-hissing as argry bark-like than a boss's orders.  
+it is no more of a stretch to imagine a kitten's 
+hissing as angry bark-like than a boss's orders.  
 Perhaps the `i.literal` similarity between cats and
-dogs maks the figurative usage harder to accept 
+dogs makes the figurative usage harder to accept 
 as a purported abstraction from literal situations.
 `p`
 
@@ -1972,28 +1972,28 @@ then we branch out to a more geo-spatial
 sense (`i.where` the building 
 is located), or institutional (the food-court 
 incarnation may have been in a different 
-place with diffrent staff and business classification).
+place with different staff and business classification).
 Hence a `i.commercial building` type is 
-`q.cast` to a geosptial point or to a social institution.   
-Thse `q.casts` are not really metaphors; 
+`q.cast` to a geospatial point or to a social institution.   
+These `q.casts` are not really metaphors; 
 they have conventions, limitations, and rules.
 `p`
 
 `p.
 The mainstream theory is simplest when analyzing 
 casts between mesotypes of similar 
-gnerality, like plant-to-sentient in 
+generality, like plant-to-sentient in 
 `q.flowers like water` or cerebral-to-physical 
 in `q.heavy thoughts`/.  But not all casts follow 
 this recipe: (`ref<itm:bark>;) and (`ref<itm:back>;) 
 seems to cast from a `i.microtype` to a `i.mesotype`/.  
 The construction in (`ref<itm:actup>;) 
-is a common `q.personifacation` of medical/anatomical 
+is a common `q.personification` of medical/anatomical 
 concepts %-- a similarly scalar idiom is 
 cases like `i.my arthritis is acting up`/, or 
 `i.flaring up` to render figure ailment as physical 
 rather than personalistic %-- but here we 
-care operating between typs of comparable Ontological 
+care operating between types of comparable Ontological
 granularity (anatomical part/medical ailment to 
 person/physical thing)  But semantically and 
 syntactically (`ref<itm:actup>;) seems a lot
@@ -2041,7 +2041,7 @@ metaphorical or metonymic in cases like
 become idiomatically entrenched in cases like 
 (`ref<itm:koreanstore>;) and (`ref<itm:koreanstarted>;)
 %-- especially where there is a similar scale of
-granularity btween mesotypes in a coercion %-- and can 
+granularity between mesotypes in a coercion %-- and can 
 become `i.lexically` entrenched in cases like 
 (`ref<itm:rubberduck>;)-(`ref<itm:weddingduck>;).
 `p`
@@ -2051,12 +2051,12 @@ Let's assume in any case that we can give a thorough
 analysis of type-coercions as semantic devices.  
 This is still working on the level of generalized 
 lexical use-patterns; we are not studying the
-`i.cognitive` steps involved in actuallly 
+`i.cognitive` steps involved in actually 
 making whatever imagistic, situational, or 
 conceptual modifications are directed by a type-cast.
 In other words, there is a cognitive process of 
 thinking of a restaurant (say) and 
-then revising this framing to accommoate senses like 
+then revising this framing to accommodate senses like 
 spatial points or social institutions.  We can 
 weave different senses and coercions into one 
 sentence: |+|
@@ -2096,10 +2096,10 @@ cross-mesotype or cross-microtype
 macro-, meso-, and microtypes are distinct thoretical 
 posits with different analytic mthodology; 
 but sometimes the boundaries between micro- and 
-meso, and thir analyses, seem to blur.  Analogous comments
+meso, and their analyses, seem to blur.  Analogous comments
 can apply to the meso/macro boundary as 
 evinced by issues like classifying forms 
-of pluarality, as in `cite<MeryMootRetore>;'s 
+of plurality, as in `cite<MeryMootRetore>;'s 
 analysis of noun plurals. 
 `p`
 
@@ -2113,7 +2113,7 @@ In a computational context values have one canonical
 type; they can be cast to other types but 
 do not maintain a kind of superposition 
 `q.history` over multiple types.  
-These kinds of phenomena can be technically modeld 
+These kinds of phenomena can be technically modeled 
 in various ways (e.g. Luo's `q.dot-product` types), 
 but in that case we want a formalization that seems 
 appropriate for how the corresponding cognitive procedures 
@@ -2154,7 +2154,7 @@ coercions back and forth.  Neither semantic nor syntactic
 evidence warrants this simpler picture: it seems more as 
 if conceptualization across types is a matter of 
 networked cognitive procedures taking turns operating
-on one conceptual package, where latent type atttributions 
+on one conceptual package, where latent type attributions 
 are available to each procedure whether or not they are 
 `q.usable` in the sense of involving type structures 
 that logically fit each procedure's purpose.

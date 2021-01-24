@@ -252,6 +252,7 @@ void GTagML_DGH_Module::read_discourse_markup(GTagML_Project_Info& gpi,
 
  QString text = gbb->get_latex_out({start, end});
 
+ qDebug() << "text = " << text;
 }
 
 

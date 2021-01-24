@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-23/1/2021, 23:7
+22/1/2021, 22:44
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -1730,7 +1730,7 @@ $s: 3
 $i: 136
 $p: 45
 $x: itm:today
-$t: Today the state university system announced plans to raise tuition by at least 10 percent. Most students oppose a tuition increase.
+$t: Today the state university system announced plans to raise tuition by at least 10\%. Most students oppose a tuition increase.
 $c: sem
 /!
 <>>
@@ -1978,7 +1978,7 @@ $i: 157
 $p: 58
 $x: itm:coffeeshirt
 $t: There's some coffee on your shirt.
-$c: syn
+$c: ref
 /!
 <>>
 
@@ -1986,7 +1986,7 @@ $c: syn
 $i: 158
 $p: 58
 $t: There's coffee all over the table.
-$c: syn
+$c: ref
 /!
 <>>
 
@@ -1994,7 +1994,7 @@ $c: syn
 $i: 159
 $p: 58
 $t: She poured coffee from an ornate beaker.
-$c: syn
+$c: ref
 /!
 <>>
 
@@ -2002,7 +2002,7 @@ $c: syn
 $i: 160
 $p: 58
 $t: There's too much coffee in the grinder.
-$c: syn
+$c: ref
 /!
 <>>
 
@@ -2010,7 +2010,7 @@ $c: syn
 $i: 161
 $p: 58
 $t: There's a lot of coffee left in the pot.
-$c: syn
+$c: ref
 /!
 <>>
 
@@ -2018,7 +2018,7 @@ $c: syn
 $i: 162
 $p: 58
 $t: There's a lot of coffee left in the pot ---{} should I pour it out?
-$c: syn
+$c: ref
 /!
 <>>
 
@@ -2034,7 +2034,7 @@ $s: 4
 $i: 163
 $p: 58
 $t: There are coffees all over the far wall at the espresso bar.
-$c: syn
+$c: ref
 /!
 <>>
 
@@ -2042,7 +2042,7 @@ $c: syn
 $i: 164
 $p: 58
 $t: She poured coffees from an ornate beaker.
-$c: syn
+$c: ref
 /!
 <>>
 
@@ -2051,7 +2051,7 @@ $i: 165
 $p: 58
 $x: itm:coffeetable
 $t: There are a lot of coffees left on the table ---{} shall I pour them out?
-$c: syn
+$c: ref
 /!
 <>>
 
@@ -2103,7 +2103,7 @@ $i: 169
 $p: 59
 $x: itm:pf
 $t: People fed the rescued dogs.
-$c: cog
+$c: sem
 /!
 <>>
 
@@ -2112,7 +2112,7 @@ $i: 170
 $p: 59
 $x: itm:ve
 $t: Vets examined the rescued dogs.
-$c: cog
+$c: sem
 /!
 <>>
 
@@ -2404,7 +2404,7 @@ $c: ref
 $i: 199
 $p: 65
 $x: itm:theflies
-$t: The city's largest theater company will perform The Flies.
+$t: The city's largest theater company will perform ``The Flies".
 $c: ref
 /!
 <>>
@@ -2421,7 +2421,7 @@ $s: 4
 $i: 200
 $p: 65
 $x: itm:fliesquebecois
-$t: The city's largest theater company performed The Flies in French, but everyone's accent sounded Quebecois.
+$t: The city's largest theater company performed ``The Flies" in French, but everyone's accent sounded Quebecois.
 $c: ref
 /!
 <>>
@@ -2430,7 +2430,7 @@ $c: ref
 $i: 201
 $p: 65
 $x: itm:fliesinvited
-$t: The city's largest theater company performed The Flies; then they invited a professor to discuss Sartre's philosophy when the play was over.
+$t: The city's largest theater company performed ``The Flies"; then they invited a professor to discuss Sartre's philosophy when the play was over.
 $c: ref
 /!
 <>>

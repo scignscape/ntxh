@@ -1192,7 +1192,7 @@ case-studies:
 
 
 `sentenceList,
-`sentenceItem; `swl -> itm:ants -> A furry black band of ants led up a cupboard door to some scrap that had flicked from a plate. -> sem ;;
+`sentenceItem; `swl -> itm:ants -> A furry black band of ants led up a cupboard door to some scrap that had flicked from a plate. -> fig ;;
 `udref -> en%_lines-ud-train -> 2157 ;;
 `sentenceItem; `swl -> itm:current-waiting-period -> The current waiting period is eight weeks. -> sem ;;
 `udref -> en%_pud -> n01050009 ;;
