@@ -57,6 +57,7 @@ public:
  ACCESSORS(void* ,user_data)
 
  ACCESSORS(QString ,gt_copy_folder)
+ ACCESSORS(QString ,root_folder)
 
 
  ACCESSORS__RGET(MACRO_PASTE(QMap<QString, QStringList>) ,post_processing_codes)

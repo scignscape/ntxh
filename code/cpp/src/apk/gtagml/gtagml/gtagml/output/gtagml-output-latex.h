@@ -66,6 +66,8 @@ class GTagML_Output_Latex : public GTagML_Output_Base, private GTagML_Output_Eve
 
  QMap<caon_ptr<GTagML_Tag_Command>, QString> tile_whitespace_defers_;
 
+ QString held_ref_;
+
 public:
 
 
@@ -78,6 +80,8 @@ public:
 
  void export_latex(QString path = "..tex");
  void write_latex_output(QString& latex_output);
+
+ void set_held_ref(QTextStream& qts, caon_ptr<tNode> node);
 
  void generate(QTextStream& qts);
 

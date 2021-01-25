@@ -1145,7 +1145,7 @@ void get_latex_118_to_127(u1 gp, QString& result)
 void get_latex_128_to_159(u1 gp, QString& result)
 {
  static QVector<QString> static_vec {{
-   "`"  // 128
+   "`",  // 128
    "~", // 129
    "!", // 130
    "@", // 131

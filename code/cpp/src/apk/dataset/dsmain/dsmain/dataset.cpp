@@ -53,9 +53,27 @@ void Dataset::load_from_folder(QString path)
  samples_file_ = qd.absoluteFilePath("samples.ntxh");
  pdf_file_ = qd.absoluteFilePath("main.pdf");
 
+ ppc_file_ = qd.absoluteFilePath("ppc.txt");
+
  sdi_document_.load_from_ntxh(samples_file_);
  groups_ = &sdi_document_.language_sample_groups();
  samples_ = &sdi_document_.language_samples();
+
+ load_ppc_file();
+}
+
+void Dataset::load_ppc_file()
+{
+ QString text;
+ load_file(ppc_file_, text);
+
+ QStringList qsl = text.split("===");
+ for(QString dm : qsl)
+ {
+  Discourse_Markup_Sample dmsamp;
+  dmsamp.parse(dm.trimmed());
+  discourse_markup_samples_.push_back(dmsamp);
+ }
 }
 
 

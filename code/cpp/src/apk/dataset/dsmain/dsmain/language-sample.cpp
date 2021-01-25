@@ -9,10 +9,10 @@
 
 //? #include "ngml-sdi/ngml-sdi-sentence.h"
 
-
+#include "qh-package/qh-pack-builder.h"
 
 #include <QRegularExpression>
-
+#include <QDataStream>
 
 
 USING_KANS(DSM)
@@ -58,25 +58,20 @@ void Language_Sample::parse_classification(QString text)
 }
 
 
-//SDI_Sentence::SDI_Sentence(//NGML_SDI_Sentence* ngml,
-//    u4 in_file_id, u4 file_id, u4 page)
-//  :  in_file_id_(in_file_id), file_id_(file_id), page_(page)//, ngml_(ngml)
-//{
+void Language_Sample::supply_pack(Qh_Pack_Builder& qpb)
+{
+ // // need node data for the string ...
+ qpb.init_node_data();
 
-//}
+ qpb.add_sv(text_)
+   .add_sv(latex_label_)
+   .add_sv(issue_)
+   .add_sv((u2) page_);
+}
 
-//QString SDI_Sentence::get_summary()
-//{
-// if(ngml_)
-//   return QString("%1 = %2:%3,%4-%5,%6; %7-%8").arg(file_id_)
-//     .arg(ngml_->id())
-//     .arg(ngml_->start_x())
-//     .arg(ngml_->end_x())
-//     .arg(ngml_->start_y())
-//     .arg(ngml_->end_y())
-//     .arg(ngml_->start_index())
-//     .arg(ngml_->end_index())
-//   ;
-// return {};
-//}
-
+void Language_Sample::supply_opaque(QByteArray& qba)
+{
+ QDataStream qds(&qba, QIODevice::WriteOnly);
+ qds << example_form_ << external_label_ << external_source_
+   << pre_ << post_ << page_string_;
+}

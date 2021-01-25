@@ -87,6 +87,7 @@ int main(int argc, char **argv)
  QString _mergefile = QString(DEFAULT_SDI_FOLDER "/%1/sdi-merge.ntxh").arg(paper_name);
  QString _samplesfile = QString(DEFAULT_SDI_FOLDER "/%1/out/%1.ntxh").arg(paper_name);
  QString _pdffile = QString(DEFAULT_SDI_FOLDER "/%1/out/%1.pdf").arg(paper_name);
+ QString _ppcfile = QString(DEFAULT_SDI_FOLDER "/%1/src/ppc.txt").arg(paper_name);
 
 
  QDir qd(dsfolder);
@@ -96,6 +97,9 @@ int main(int argc, char **argv)
 
  if(!qd.exists("samples.ntxh"))
    copy_file_to_folder_with_rename(_samplesfile, dsfolder, "samples");
+
+ if(!qd.exists("ppc.txt"))
+   copy_file_to_folder(_ppcfile, dsfolder);
 
  if(!qd.exists("main.pdf"))
    copy_binary_file_to_folder_with_rename(_pdffile, dsfolder, "main");

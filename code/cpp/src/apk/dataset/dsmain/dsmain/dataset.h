@@ -15,6 +15,8 @@
 
 #include "dsm-sdi-document.h"
 
+#include "discourse-markup-sample.h"
+
 #include "kans.h"
 #include "accessors.h"
 
@@ -44,6 +46,8 @@ class Dataset :  public QRing_File_Structure
 // QVector<int> chapter_pages_;
  QVector<Language_Sample_Group*>* groups_;
 
+ QList<Discourse_Markup_Sample> discourse_markup_samples_;
+
  QStringList issues_;
  QStringList forms_;
 
@@ -52,6 +56,8 @@ class Dataset :  public QRing_File_Structure
  QVector<QPair<QPair<QString, int>, QPair<int, int>>> subdocuments_;
 
  DSM_SDI_Document sdi_document_;
+
+ QString ppc_file_;
 
 public:
 
@@ -68,6 +74,8 @@ public:
  ACCESSORS(QString ,merge_file)
 
  ACCESSORS(QString ,pdf_file)
+ ACCESSORS(QString ,ppc_file)
+
 
  ACCESSORS__RGET(MACRO_PASTE(QVector<QPair<QPair<QString, int>,
     QPair<int, int>>>) ,subdocuments)
@@ -87,6 +95,8 @@ public:
 
  void save_to_file_udp();
  void save_to_file_udp(QString path, QString upath, QString ppath);
+
+ void load_ppc_file();
 
 
 };

@@ -17,6 +17,10 @@
 #include "global-types.h"
 
 
+class Qh_Pack_Builder;
+class Qh_Pack_Reader;
+class Qh_Pack_Code;
+class Qh_Hypernode;
 
 KANS_(DSM)
 
@@ -78,6 +82,9 @@ public:
  QString archival_or_text();
 
  void parse_classification(QString text);
+
+ void supply_pack(Qh_Pack_Builder& qpb);
+ void supply_opaque(QByteArray& qba);
 
 //? ACCESSORS(NGML_SDI_Sentence* ,ngml)
 

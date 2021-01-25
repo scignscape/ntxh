@@ -9,6 +9,8 @@
 RENAME_TAG(discourse-markup, discourseMarkup)
 RENAME_TAG(discourse-markup-inline, discourseMarkupInline)
 
+GTAGML_CALLBACK_NOACTION(hold-ref)
+
 GTAGML_CALLBACK_NOACTION(noxml_)
 GTAGML_CALLBACK_NOACTION(_noxml)
 

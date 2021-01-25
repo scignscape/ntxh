@@ -229,18 +229,26 @@ void GTagML_DGH_Module::process_gtagml_file(QString path,
 void GTagML_DGH_Module::read_discourse_markup(GTagML_Project_Info& gpi,
   QString mode, QString path, QString code)
 {
+
  s4 index = code.indexOf(':');
  if(index == -1)
    return;
 
- u4 layer_code = code.mid(0, index).toUInt();
+ QString ref = code.mid(0, index);
 
- s4 index1 = code.indexOf('-', index);
+ s4 index0 = code.indexOf(':', index + 1);
+ if(index0 == -1)
+   return;
+
+ u4 layer_code = code.mid(index + 1, index0 - index - 1).toUInt();
+
+
+ s4 index1 = code.indexOf('-', index0 + 1);
  if(index1 == -1)
    return;
 
  //QString ss = code.mid(index + 1, index1 - index - 1);
- u4 start = code.mid(index + 1, index1 - index - 1).toUInt();
+ u4 start = code.mid(index0 + 1, index1 - index0 - 1).toUInt();
 
  u4 end = code.mid(index1 + 1).toUInt();
 
@@ -252,7 +260,10 @@ void GTagML_DGH_Module::read_discourse_markup(GTagML_Project_Info& gpi,
 
  QString text = gbb->get_latex_out({start, end});
 
- qDebug() << "text = " << text;
+ if(!ref.isEmpty())
+   text.prepend(QString(":%1 ").arg(ref));
+
+ ppc_text_ += text + "\n===\n";
 }
 
 
@@ -279,6 +290,17 @@ void GTagML_DGH_Module::compile_gt_file(QString args)
 
 void GTagML_DGH_Module::check_post_processing_codes(GTagML_Project_Info& gpi)
 {
+ QString ppc_file;
+ if(!gpi.root_folder().isEmpty())
+   ppc_file = gpi.root_folder() + "/ppc.txt";
+
+// QFile f(file);
+// if (f.open(QIODevice::WriteOnly | QIODevice::Append))
+// {
+//  f.write()
+// }
+
+
  QMap<QString, QStringList>& ppc = gpi.post_processing_codes();
 
  QMapIterator<QString, QStringList> it(ppc);
@@ -287,6 +309,10 @@ void GTagML_DGH_Module::check_post_processing_codes(GTagML_Project_Info& gpi)
  {
   it.next();
   QString path = it.key();
+
+  // // assume if there's no root folder that there's only one file ...
+  if(ppc_file.isEmpty())
+    ppc_file = path + ".ppc.txt";
 
   QStringList codes = it.value();
 
@@ -310,6 +336,11 @@ void GTagML_DGH_Module::check_post_processing_codes(GTagML_Project_Info& gpi)
     // only category of post-processing used here ...
    }
   }
+ }
+
+ if(!ppc_text_.isEmpty())
+ {
+  save_file(ppc_file, ppc_text_);
  }
 
 }
@@ -351,7 +382,7 @@ void GTagML_DGH_Module::compile_gt_manuscript(QString args)
 
  QString folder = qfi.absolutePath();
 
- GTagML_Project_Info* gpi = new GTagML_Project_Info(file_path);
+ GTagML_Project_Info* gpi = new GTagML_Project_Info(folder);
 
  if(suffix == "gt")
  {

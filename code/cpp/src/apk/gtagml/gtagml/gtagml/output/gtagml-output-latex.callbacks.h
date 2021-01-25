@@ -71,6 +71,16 @@ RENAME_TAG(a, anchor)
 
 //RENAME_TAG(discourse-markup, discourseMarkup)
 
+
+GTAGML_CALLBACK_(hold-ref)
+WHEN_(around)
+{
+ set_held_ref(qts, node);
+}
+_WHEN
+_GTagML_CALLBACK
+
+
 GTAGML_CALLBACK_(discourse-markup)
 WHEN_(pre)
 {

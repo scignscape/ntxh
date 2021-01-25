@@ -44,6 +44,8 @@ class GTagML_DGH_Module
  QMap<QString, QString> current_flagpairs_;
  QMap<QString, u1> current_flagset_pos_;
 
+ QString ppc_text_;
+
  void read_discourse_markup(GTagML_Project_Info& gpi,
    QString mode, QString path, QString code);
 

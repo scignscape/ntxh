@@ -65,6 +65,15 @@ USING_KANS(GTagML)
 
 //}
 
+void GTagML_Output_Latex::set_held_ref(QTextStream& qts, caon_ptr<tNode> node)
+{
+ CAON_PTR_DEBUG(tNode ,node)
+ if(caon_ptr<GTagML_Tag_Command> ntc = node->GTagML_tag_command())
+ {
+  CAON_PTR_DEBUG(GTagML_Tag_Command ,ntc)
+  held_ref_ = ntc->argument();
+ }
+}
 
 
 void GTagML_Output_Latex::check_discourse_markup(QTextStream& qts,
@@ -76,12 +85,19 @@ void GTagML_Output_Latex::check_discourse_markup(QTextStream& qts,
   CAON_PTR_DEBUG(GTagML_Tag_Command ,ntc)
   //
 
+  QString ref;
+  if(!held_ref_.isEmpty())
+  {
+   ref = held_ref_;
+   held_ref_.clear();
+  }
+
   GTagML_Output_SDI_Infoset* gsi = sdi_document_->sdi_infoset_output(); //sdi_document_->block_writer();
 
   GH_Block_Base* bl = gsi->block_writer()->current_mandatory_argument_block();
 
-  QString post_processing_code = QString("discourse-markup=%1:%2:%3-%4")
-    .arg(mode).arg(bl->layer_code()).arg(ntc->ref_enter()).arg(ntc->ref_leave());
+  QString post_processing_code = QString("discourse-markup=%1:%2:%3:%4-%5")
+    .arg(mode).arg(ref).arg(bl->layer_code()).arg(ntc->ref_enter()).arg(ntc->ref_leave());
 
   gsi->add_post_processing_code(post_processing_code);
   //  block_writer_->current_mandatory_argument_block();

@@ -25,6 +25,8 @@ INCLUDEPATH += $$HTXN_SRC_GROUP_DIR
 
 INCLUDEPATH += $$QRING_SRC_GROUP_DIR
 
+INCLUDEPATH += $$QHP_SRC_GROUP_DIR
+
 
 
 DEFINES += DEFAULT_WCM_FOLDER=\\\"$$DATA_ROOT_DIR/wcm\\\"
@@ -47,6 +49,9 @@ HEADERS +=  \
   $$SRC_DIR/dsm-sdi-document.h  \
   $$SRC_DIR/language-sample.h  \
   $$SRC_DIR/language-sample-group.h  \
+  $$SRC_DIR/discourse-markup-sample.h  \
+  $$SRC_DIR/qh-model.h  \
+  $$SRC_DIR/qh/local.h  \
 
 
 SOURCES += \
@@ -54,6 +59,9 @@ SOURCES += \
   $$SRC_DIR/dsm-sdi-document.cpp  \
   $$SRC_DIR/language-sample.cpp  \
   $$SRC_DIR/language-sample-group.cpp  \
+  $$SRC_DIR/discourse-markup-sample.cpp  \
+  $$SRC_DIR/qh-model.cpp  \
+  $$SRC_DIR/qh/local.cpp  \
 
 
 LIBS +=  -L$$TARGETSDIR  -lntxh-parser -lntxh

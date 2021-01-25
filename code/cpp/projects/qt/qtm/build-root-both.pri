@@ -140,4 +140,6 @@ DGH_SDI_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/dgh-sdi
 
 LEXPAIR_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/QScign/LexPair
 
+QHP_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/qhp
+
 
