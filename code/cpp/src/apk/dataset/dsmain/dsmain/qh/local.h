@@ -5,8 +5,8 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef QH__LOCAL__H
-#define QH__LOCAL__H
+#ifndef LOCAL__H
+#define LOCAL__H
 
 #include "kans.h"
 #include "accessors.h"
@@ -16,17 +16,27 @@
 
 #include "global-types.h"
 
-//?KANS_(GHL)
-
 
 class Qh_Class_Object;
 class Qh_Pack_Code;
 class Qh_Pack_Builder;
 
 
+KANS_(DSM)
+
+class Discourse_Markup_Sample;
+class Dataset;
+
+
 class Qh_Local
 {
  QString description_;
+
+ enum class Known_Types {
+#define TYPE_DECLARE(x) _##x,
+#include "known-types.h"
+#undef TYPE_DECLARE
+ };
 
 public:
 
@@ -53,6 +63,6 @@ public:
 };
 
 
-//?_KANS(GHL)
+_KANS(DSM)
 
-#endif // QH__LOCAL__H
+#endif // LOCAL__H

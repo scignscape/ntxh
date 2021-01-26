@@ -13,10 +13,11 @@
 #include "qh-pack-builder.h"
 
 
-Qh_Type::Qh_Type()
+Qh_Type::Qh_Type(Qh_Type_System* ts)
   :  byte_length_code_(0),
      meta_object_(nullptr),
-     qh_class_object_(nullptr)
+     qh_class_object_(nullptr),
+     type_system_(ts)
 {
 
 }
@@ -24,7 +25,7 @@ Qh_Type::Qh_Type()
 
 Qh_Pack_Builder* Qh_Type::serialize(void* obj)
 {
- Qh_Pack_Code qpc = qh_class_object_->pack_code();
+ Qh_Pack_Code& qpc = qh_class_object_->pack_code();
  Qh_Pack_Builder* result = new Qh_Pack_Builder(qpc);
  serialize(*result, obj);
  return result;
@@ -49,7 +50,7 @@ Qh_Class_Object& Qh_Type::qh_class()
 {
  if(!qh_class_object_)
  {
-  qh_class_object_ = new Qh_Class_Object;
+  qh_class_object_ = new Qh_Class_Object(this);
   qh_class_object_->qh_local(local_);
  }
  return *qh_class_object_;
@@ -58,7 +59,7 @@ Qh_Class_Object& Qh_Type::qh_class()
 
 void Qh_Type::init_qh_class(Qh_Pack_Code& qpc)
 {
- qh_class_object_ = new Qh_Class_Object(name_);
+ qh_class_object_ = new Qh_Class_Object(this, name_);
  qh_class_object_->pack_code() = qpc;
 
  qh_class_object_->qh_local(local_);

@@ -29,8 +29,11 @@ public:
  Qh_Node_Data();
 
  QPair<u4, u4> add_str(const QString& str);
+ QPair<u4, u4> add_qba(const QByteArray& qba);
 
  QString read_str(u4 start, u4 end);
+
+ QByteArray read_qba(u4 start, u4 end);
 
  QPair<u4, u4> add_pointer(void* ptr);
 

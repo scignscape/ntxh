@@ -20,6 +20,8 @@
 
 #include <QDateTime>
 
+#include "qh-model.h"
+
 
 USING_KANS(DSM)
 USING_KANS(TextIO)
@@ -60,6 +62,11 @@ void Dataset::load_from_folder(QString path)
  samples_ = &sdi_document_.language_samples();
 
  load_ppc_file();
+
+
+ Qh_Model qhm(this);
+
+ qhm.init();
 }
 
 void Dataset::load_ppc_file()

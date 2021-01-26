@@ -1,4 +1,3 @@
-
 //           Copyright Nathaniel Christen 2019.
 //  Distributed under the Boost Software License, Version 1.0.
 //     (See accompanying file LICENSE_1_0.txt or copy at
@@ -64,19 +63,19 @@ void Qh_Local::_init_pack_code<Language_Sample>(Qh_Pack_Code& qpc)
 
 void Qh_Local::init_pack_code(QString tn, Qh_Pack_Code& qpc)
 {
- static QMap<QString, std::type_info*> static_map {{
-   {"Language_Sample", &typeid(Language_Sample)},
-   {"Language_Sample_Group", &typeid(Language_Sample_Group)},
-                                      }};
+// static QMap<QString, std::type_info*> static_map {{
+//   {"Language_Sample", &typeid(Language_Sample)},
+//   {"Language_Sample_Group", &typeid(Language_Sample_Group)},
+//                                      }};
 
- std::type_info* sti = static_map.value(tn);
+// std::type_info* sti = static_map.value(tn);
 
- switch ((n8) sti)
- {
- case typeid(Language_Sample) : _init_pack_code<Language_Sample>(qpc); break;
- case typeid(Language_Sample_Group) : _init_pack_code<Language_Sample_Group>(qpc); break;
- default: break;
- }
+// switch ((n8) sti)
+// {
+// case typeid(Language_Sample) : _init_pack_code<Language_Sample>(qpc); break;
+// case typeid(Language_Sample_Group) : _init_pack_code<Language_Sample_Group>(qpc); break;
+// default: break;
+// }
 
 }
 

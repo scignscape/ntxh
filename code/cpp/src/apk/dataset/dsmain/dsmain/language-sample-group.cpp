@@ -11,8 +11,12 @@
 
 #include "language-sample.h"
 
+#include "qh-package/qh-pack-builder.h"
+#include "qh-package/qh-pack-reader.h"
 
 #include <QDebug>
+
+#include <QDataStream>
 
 
 
@@ -36,7 +40,8 @@ USING_KANS(DSM)
 
 Language_Sample_Group::Language_Sample_Group(u2 id)
   :  in_database_id_(0), id_(id),
-     page_(0), order_in_page_(0), section_(0)
+     page_(0), //order_in_page_(0),
+     section_(0)
 {
 
 }
@@ -69,7 +74,6 @@ bool Language_Sample_Group::match_issue(const QSet<QString>& qset)
  return false;
 }
 
-
 void Language_Sample_Group::add_sample(Language_Sample* sample)
 {
  samples_.push_back(sample);
@@ -79,6 +83,67 @@ void Language_Sample_Group::add_sample(Language_Sample* sample)
    return;
  if(!issues_.contains(issue))
    issues_.push_back(issue);
+}
+
+
+void Language_Sample_Group::supply_pack(Qh_Pack_Builder& qpb)
+{
+ // // need node data for the string ...
+ qpb.init_node_data();
+
+ QByteArray qba; supply_opaque(qba);
+
+ qpb.add_sv((u4) in_database_id_)
+   .add_sv((u2) id_)
+   .add_sv((u2) page_)
+   .add_sv((u2) section_)
+   .add_sv(qba);
+}
+
+void Language_Sample_Group::absorb_pack(Qh_Pack_Builder& qpb)
+{
+ Qh_Pack_Reader qpr(qpb.pack_code(), qpb.data(), qpb.node_data());
+
+ in_database_id_ = qpr.read_value().toUInt();
+ id_ = qpr.read_value().toUInt();
+ page_ = qpr.read_value().toUInt();
+ section_ = qpr.read_value().toUInt();
+ QByteArray qba = qpr.read_value().toByteArray();
+ absorb_opaque(qba);
+}
+
+void Language_Sample_Group::supply_opaque(QByteArray& qba)
+{
+ QDataStream qds(&qba, QIODevice::WriteOnly);
+ qds << issues_;
+
+ s4 size = samples_.size();
+ qds << size;
+
+ if(size > 0)
+   qds << samples_.first()->id();
+
+ if(size > 1)
+   qds << samples_.last()->id();
+}
+
+void Language_Sample_Group::absorb_opaque(const QByteArray& qba)
+{
+ QDataStream qds(qba);
+ qds >> issues_;
+
+ s4 size;
+ qds >> size;
+
+ if(size > 0)
+ {
+  u4 low_id, high_id;
+  qds >> low_id;
+  if(size == 1)
+    high_id = low_id;
+  else
+    qds >> high_id;
+ }
 }
 
 

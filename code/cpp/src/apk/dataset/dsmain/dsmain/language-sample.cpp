@@ -10,6 +10,8 @@
 //? #include "ngml-sdi/ngml-sdi-sentence.h"
 
 #include "qh-package/qh-pack-builder.h"
+#include "qh-package/qh-pack-reader.h"
+
 
 #include <QRegularExpression>
 #include <QDataStream>
@@ -63,10 +65,26 @@ void Language_Sample::supply_pack(Qh_Pack_Builder& qpb)
  // // need node data for the string ...
  qpb.init_node_data();
 
+ QByteArray qba; supply_opaque(qba);
+
  qpb.add_sv(text_)
    .add_sv(latex_label_)
    .add_sv(issue_)
-   .add_sv((u2) page_);
+   .add_sv((u2) page_)
+   .add_sv(qba);
+}
+
+void Language_Sample::absorb_pack(Qh_Pack_Builder& qpb)
+{
+ Qh_Pack_Reader qpr(qpb.pack_code(), qpb.data(), qpb.node_data());
+
+ text_ = qpr.read_value().toString();
+ latex_label_ = qpr.read_value().toString();
+ issue_ = qpr.read_value().toString();
+ page_ = qpr.read_value().toUInt();
+ QByteArray qba = qpr.read_value().toByteArray();
+ absorb_opaque(qba);
+
 }
 
 void Language_Sample::supply_opaque(QByteArray& qba)
@@ -75,3 +93,14 @@ void Language_Sample::supply_opaque(QByteArray& qba)
  qds << example_form_ << external_label_ << external_source_
    << pre_ << post_ << page_string_;
 }
+
+void Language_Sample::absorb_opaque(const QByteArray& qba)
+{
+ QDataStream qds(qba);
+ qds >> example_form_ >> external_label_ >> external_source_
+   >> pre_ >> post_ >> page_string_;
+}
+
+
+
+

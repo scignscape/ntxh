@@ -8,14 +8,6 @@
 #ifndef QH_MODEL__H
 #define QH_MODEL__H
 
-#include "phaong/phaong.h"
-#include "phaong/phaong-types.h"
-
-#include "qring/qring-file-structure.h"
-
-#include "dsm-sdi-document.h"
-
-#include "discourse-markup-sample.h"
 
 #include "kans.h"
 #include "accessors.h"
@@ -24,7 +16,9 @@
 #include <QString>
 #include <QMap>
 
-//#define PASTE_EXPRESSION(...) __VA_ARGS__
+#include "qh-package/runtime/qh-runtime.h"
+
+class Qh_Type_System;
 
 
 KANS_(DSM)
@@ -34,11 +28,18 @@ class Language_Sample_Group;
 
 class DSM_SDI_Document;
 
+class Qh_Local;
+
 class Dataset;
 
 class Qh_Model
 {
- Dataset* ds_;
+ Dataset* dataset_;
+
+ Qh_Runtime qh_runtime_;
+ Qh_Type_System* qh_type_system_;
+ Qh_Local* qh_local_;
+
 
 public:
 

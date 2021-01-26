@@ -18,8 +18,12 @@
 
 #include "qh-pack-code.h"
 
+class Qh_Type;
+class Qh_Type_System;
+
 class Qh_Class_Object
 {
+ Qh_Type* qh_type_;
  QString name_;
  Qh_Pack_Code pack_code_;
 
@@ -27,10 +31,14 @@ class Qh_Class_Object
 
 public:
 
- Qh_Class_Object(QString name = {});
+ Qh_Class_Object(Qh_Type* qh_type, QString name = {});
 
  ACCESSORS(QString ,name)
  ACCESSORS__RGET(Qh_Pack_Code ,pack_code)
+ ACCESSORS(Qh_Type* ,qh_type)
+
+ Qh_Type_System* operator->();
+
 
  template<typename Local>
  Qh_Class_Object& qh_local(Local* lcl)

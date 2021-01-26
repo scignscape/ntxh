@@ -52,6 +52,7 @@ HEADERS +=  \
   $$SRC_DIR/discourse-markup-sample.h  \
   $$SRC_DIR/qh-model.h  \
   $$SRC_DIR/qh/local.h  \
+  $$SRC_DIR/qh/known-types.h  \
 
 
 SOURCES += \
@@ -65,6 +66,8 @@ SOURCES += \
 
 
 LIBS +=  -L$$TARGETSDIR  -lntxh-parser -lntxh
+
+LIBS += -L$$TARGETSDIR -lqh-package
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

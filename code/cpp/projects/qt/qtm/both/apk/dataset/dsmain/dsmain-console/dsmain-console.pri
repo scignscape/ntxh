@@ -62,11 +62,12 @@ SOURCES += \
   $$SRC_DIR/main.cpp
 
 
-
 LIBS += -L$$TARGETSDIR  \
   -lntxh  -lntxh-parser -lngml-sdi  -ldgh-sdi  \
   -ldsmain  -lScignStage-ling -lqring   -lxpdf
 
+
+LIBS += -L$$TARGETSDIR -lqh-package
 
 
 contains(CHOICE_FEATURES, "xpdf") \#/

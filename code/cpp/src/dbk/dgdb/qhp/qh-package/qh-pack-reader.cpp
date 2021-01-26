@@ -98,6 +98,20 @@ QVariant Qh_Pack_Reader::read_value()
   }
   break;
 
+ case Qh_Pack_Code::Type_Hints::Opaque:
+  {
+   switch(pr.first)
+   {
+   case 0:
+    current_byte_index_ += 8;
+    u4 start = read_data_4(cbi);
+    u4 end = read_data_4(cbi + 4);
+    return node_data_->read_qba(start, end);
+   }
+  }
+  break;
+
+
  case Qh_Pack_Code::Type_Hints::Chars_QString:
   {
    switch(pr.first)

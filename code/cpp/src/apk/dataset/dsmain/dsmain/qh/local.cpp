@@ -16,10 +16,15 @@
 
 #include <typeindex>
 
+#include "language-sample.h"
+#include "language-sample-group.h"
 
-//USING_KANS(GHL)
+#include "qh-package/qh-pack-builder.h"
+#include "qh-package/qh-pack-code.h"
 
-//#include "qh-package/qh-pack-builder.h"
+
+USING_KANS(DSM)
+
 
 
 Qh_Local::Qh_Local(QString description)
@@ -29,71 +34,86 @@ Qh_Local::Qh_Local(QString description)
 }
 
 
-//void Qh_Local::supply_pack(QString tn, void* _this, Qh_Pack_Builder& qpb)
+void Qh_Local::supply_pack(QString tn, void* _this, Qh_Pack_Builder& qpb)
+{
+ Language_Sample& _this_ = *(Language_Sample*)(_this);
+
+}
+
+KANS_(DSM)
+
+template<>
+void Qh_Local::_supply_pack<Language_Sample>(Language_Sample& _this, Qh_Pack_Builder& qpb)
+{
+
+}
+
+
+template<>
+void Qh_Local::deffields<Language_Sample>(Qh_Class_Object& qco)
+{
+
+}
+
+
+template<>
+void Qh_Local::_init_pack_code<Language_Sample_Group>(Qh_Pack_Code& qpc)
+{
+ qpc.add_u4() // in_database_id_
+   .add_u2() // id_
+   .add_u2() // page_
+   .add_u2() // section_
+   .add_opaque() // everything else
+   ;
+}
+
+template<>
+void Qh_Local::_init_pack_code<Language_Sample>(Qh_Pack_Code& qpc)
+{
+ qpc.add_str() // text
+   .add_str() // latex_label
+   .add_str() // issue
+   .add_u2() // page
+   .add_opaque() // everything else
+   ;
+}
+
+_KANS(DSM)
+
+void Qh_Local::init_pack_code(QString tn, Qh_Pack_Code& qpc)
+{
+ static QMap<QString, Known_Types> static_map {{
+#define TYPE_DECLARE(x) {#x, Known_Types::_##x},
+#include "known-types.h"
+#undef TYPE_DECLARE
+}};
+
+ Known_Types kt = static_map.value(tn);
+
+ switch(kt)
+ {
+#define TYPE_DECLARE(x) case Known_Types::_##x: _init_pack_code<x>(qpc); break;
+#include "known-types.h"
+#undef TYPE_DECLARE
+ default: break;
+ }
+
+}
+
+
+//void Qh_Local::deffields(Qh_Class_Object& qco)
 //{
-// Language_Sample& _this_ = *(Language_Sample*)(_this);
 
 //}
 
+void Qh_Local::_static_deffields(Qh_Class_Object& qco)
+{
 
-//template<>
-//void Qh_Local::_supply_pack<Language_Sample>(Language_Sample& _this, Qh_Pack_Builder& qpb)
-//{
-
-//}
-
-
-//template<>
-//void Qh_Local::deffields<Language_Sample>(Qh_Class_Object& qco)
-//{
-
-//}
-
-//template<>
-//void Qh_Local::_init_pack_code<Language_Sample>(Qh_Pack_Code& qpc)
-//{
-// qpc.add_str() // text
-//   .add_u4() // database_id
-//   .add_u2() // index
-//   .add_str() // full index string
-//   .add_u2() // chapter
-//   .add_u4() // page
-//   .add_opaque() // everything else
-//   ;
-//}
-
-//void Qh_Local::init_pack_code(QString tn, Qh_Pack_Code& qpc)
-//{
-//// static QMap<QString, std::type_info*> static_map {{
-////   {"Language_Sample", &typeid(Language_Sample)},
-////   {"Language_Sample_Group", &typeid(Language_Sample_Group)},
-////                                      }};
-
-//// std::type_info* sti = static_map.value(tn);
-
-//// switch ((n8) sti)
-//// {
-//// case typeid(Language_Sample) : _init_pack_code<Language_Sample>(qpc); break;
-//// case typeid(Language_Sample_Group) : _init_pack_code<Language_Sample_Group>(qpc); break;
-//// default: break;
-//// }
-
-//}
-
-
-////void Qh_Local::deffields(Qh_Class_Object& qco)
-////{
-
-////}
-
-//void Qh_Local::_static_deffields(Qh_Class_Object& qco)
-//{
-
-//}
+}
 
 
 
-//void Qh_Local::static_deffields(Qh_Local* _this, Qh_Class_Object& qco)
-//{
-// //_this->deffields(qco);
-//}
+void Qh_Local::static_deffields(Qh_Local* _this, Qh_Class_Object& qco)
+{
+ //_this->deffields(qco);
+}

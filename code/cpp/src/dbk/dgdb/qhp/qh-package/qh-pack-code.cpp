@@ -66,6 +66,7 @@ QPair<u1, Qh_Pack_Code::Type_Hints> Qh_Pack_Code::get_requirements(u2 index)
 
  switch (th)
  {
+ case Type_Hints::Opaque:
  case Type_Hints::Chars_QString:
   return {addon + (fc & 3), th};
  case Type_Hints::N_A:

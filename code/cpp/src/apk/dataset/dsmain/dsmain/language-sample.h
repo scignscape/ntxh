@@ -84,7 +84,10 @@ public:
  void parse_classification(QString text);
 
  void supply_pack(Qh_Pack_Builder& qpb);
+ void absorb_pack(Qh_Pack_Builder& qpb);
+
  void supply_opaque(QByteArray& qba);
+ void absorb_opaque(const QByteArray& qba);
 
 //? ACCESSORS(NGML_SDI_Sentence* ,ngml)
 

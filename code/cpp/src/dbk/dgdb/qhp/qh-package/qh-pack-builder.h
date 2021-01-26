@@ -54,6 +54,7 @@ public:
  ACCESSORS__CONST_RGET(QVector<u1> ,data)
  ACCESSORS(Qh_Node_Data* ,node_data)
  ACCESSORS(Qh_Node_Data* ,proxy_data)
+ ACCESSORS__RGET(Qh_Pack_Code ,pack_code)
 
 
  Qh_Hypernode* as_hypernode();
@@ -94,7 +95,10 @@ public:
 
  void add_structure_or_array_value(QVariant qvar, u1 bytes_req,
    Qh_Pack_Code::Type_Hints th = Qh_Pack_Code::Type_Hints::N_A);
+
  void add_structure_or_array_value_str(QString str, u1 bytes_req);
+ void add_structure_or_array_value_qba(QByteArray& qba, u1 bytes_req);
+
 
  void init_node_data();
  void init_proxy_data();

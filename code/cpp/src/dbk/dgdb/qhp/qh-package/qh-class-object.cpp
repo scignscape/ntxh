@@ -7,10 +7,16 @@
 
 #include "qh-class-object.h"
 
+#include "runtime/qh-type-system.h"
+#include "runtime/qh-type.h"
 
-Qh_Class_Object::Qh_Class_Object(QString name)
-  :  name_(name)
+Qh_Class_Object::Qh_Class_Object(Qh_Type* qh_type, QString name)
+  :  qh_type_(qh_type), name_(name)
 {
 
 }
 
+Qh_Type_System* Qh_Class_Object::operator->()
+{
+ return qh_type_->operator->();
+}

@@ -21,7 +21,7 @@ Qh_Type& Qh_Type_System::register_type(QString tn, QString ctn)
  Qh_Type* result = get_type_by_name(tn);
  if(!result)
  {
-  result = new Qh_Type();
+  result = new Qh_Type(this);
   result->set_name(tn);
   result->set_cname(ctn);
   types_by_name_[tn] = result;

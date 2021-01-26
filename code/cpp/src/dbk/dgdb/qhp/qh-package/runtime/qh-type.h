@@ -22,6 +22,7 @@
 class Qh_Class_Object;
 class Qh_Pack_Code;
 class Qh_Pack_Builder;
+class Qh_Type_System;
 
 class Qh_Type
 {
@@ -33,6 +34,8 @@ class Qh_Type
  void* meta_object_;
 
  Qh_Class_Object* qh_class_object_;
+
+ Qh_Type_System* type_system_;
 
  void* local_;
 
@@ -65,19 +68,28 @@ class Qh_Type
 
 public:
 
- Qh_Type();
+ Qh_Type(Qh_Type_System* ts);
 
  ACCESSORS(QString ,name)
  ACCESSORS(QString ,cname)
 
  ACCESSORS(Qh_Class_Object* ,qh_class_object)
+ ACCESSORS(Qh_Type_System* ,type_system)
+
 
  ACCESSORS(MACRO_PASTE(std::function<void(void*, Qh_Pack_Builder&)>) ,static_pack_encoder_1)
  ACCESSORS(MACRO_PASTE(std::function<void(void*, void*, Qh_Pack_Builder&)>) ,static_pack_encoder_2)
  ACCESSORS(MACRO_PASTE(std::function<void(void*, QString, void*, Qh_Pack_Builder&)>) ,static_pack_encoder_3)
 
+
+ Qh_Type_System* operator->()
+ {
+  return type_system_;
+ }
+
  Qh_Class_Object& qh_class();
  void init_qh_class(Qh_Pack_Code& qpc);
+
 
  template<typename Local>
  Qh_Type& qh_local(Local* lcl)
@@ -85,6 +97,7 @@ public:
   local_ = lcl;
   return *this;
  }
+
 
  Qh_Type& defpack(void(*fn)(Qh_Pack_Code&));
 

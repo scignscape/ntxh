@@ -22,6 +22,19 @@ u4 Qh_Node_Data::check_resize(u4 start, u4 amount)
 }
 
 
+QPair<u4, u4> Qh_Node_Data::add_qba(const QByteArray& qba)
+{
+ u4 start = (u4) data_.size();
+ u4 end = check_resize(start, qba.size());
+
+ for(u4 uu = start, i = 0; uu < end; ++uu, ++i)
+ {
+  data_[uu] = qba[i];
+ }
+
+ return {start, end};
+}
+
 QPair<u4, u4> Qh_Node_Data::add_str(const QString& str)
 {
  u4 start = (u4) data_.size();
@@ -76,6 +89,19 @@ void* Qh_Node_Data::read_pointer(u4 start, u4 end)
  }
 
  return (void*) nn;
+}
+
+
+QByteArray Qh_Node_Data::read_qba(u4 start, u4 end)
+{
+ QByteArray result(end - start, 0);
+
+ for(u4 uu = start, i = 0; uu < end; ++uu, ++i)
+ {
+  result[(s4)i] = data_[uu];
+ }
+ return result;
+
 }
 
 

@@ -131,17 +131,49 @@ void Qh_Pack_Builder::add_structure_or_array_value_str(QString str, u1 bytes_req
   data_[current_byte_index_ + 5] = (u1) ((pr.second >> 16) & 255);
   data_[current_byte_index_ + 6] = (u1) ((pr.second >> 8) & 255);
   data_[current_byte_index_ + 7] = (u1) (pr.second & 255);
+
+  current_byte_index_ += 8;
  }
 }
+
+void Qh_Pack_Builder::add_structure_or_array_value_qba(QByteArray& qba, u1 bytes_req)
+{
+ if(bytes_req == 0)
+ {
+  check_resize(8);
+
+  QPair<u4, u4> pr = node_data_->add_qba(qba);
+  data_[current_byte_index_] = (u1) (pr.first >> 24);
+  data_[current_byte_index_ + 1] = (u1) ((pr.first >> 16) & 255);
+  data_[current_byte_index_ + 2] = (u1) ((pr.first >> 8) & 255);
+  data_[current_byte_index_ + 3] = (u1) (pr.first & 255);
+
+  data_[current_byte_index_ + 4] = (u1) (pr.second >> 24);
+  data_[current_byte_index_ + 5] = (u1) ((pr.second >> 16) & 255);
+  data_[current_byte_index_ + 6] = (u1) ((pr.second >> 8) & 255);
+  data_[current_byte_index_ + 7] = (u1) (pr.second & 255);
+
+  current_byte_index_ += 8;
+ }
+}
+
 
 void Qh_Pack_Builder::add_structure_or_array_value(QVariant qvar,
   QPair<u1, Qh_Pack_Code::Type_Hints> pr)
 {
  switch (pr.second)
  {
+ case Qh_Pack_Code::Type_Hints::Opaque:
+  {
+   QByteArray qba = qvar.toByteArray();
+   add_structure_or_array_value_qba(qba, pr.first);
+  }
+  break;
+
  case Qh_Pack_Code::Type_Hints::Chars_QString:
   add_structure_or_array_value_str(qvar.toString(), pr.first);
   break;
+
  case Qh_Pack_Code::Type_Hints::Signed:
  case Qh_Pack_Code::Type_Hints::Unsigned:
   add_structure_or_array_value(qvar, pr.first, pr.second);

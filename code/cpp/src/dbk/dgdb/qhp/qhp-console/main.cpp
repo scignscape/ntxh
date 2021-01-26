@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
  qht->REGISTER_TYPE(Language_Sample)
    .qh_local(lcl)
    .set_pack_encoder(&Language_Sample::supply_pack)
-   .defpack(&Qh_Local::init_pack_code)
+   .defpack(&Qh_Local::_init_pack_code<Language_Sample>)
    .qh_class()
    .deffields(&Qh_Local::deffields<Language_Sample>)
    ;
@@ -80,11 +80,11 @@ int main(int argc, char* argv[])
 
  Qh_Pack_Builder* qpb = qhr.serialize(&ls);
 
- Test_Class tc;
- tc.set_a_number(33);
- tc.set_a_string("xxx");
+// Test_Class tc;
+// tc.set_a_number(33);
+// tc.set_a_string("xxx");
 
- Qh_Hypernode* qhn = qhr.new_hypernode(&tc);
+// Qh_Hypernode* qhn = qhr.new_hypernode(&tc);
 
    //;// = qpb.as_hypernode();
 
@@ -99,7 +99,7 @@ int main(int argc, char* argv[])
  qpb1.add_structure_value(QVariant::fromValue(78));
 
  qpb1.init_proxy_data();
- qpb1.add_structure_proxy_value(qhn);
+ //qpb1.add_structure_proxy_value(qhn);
 
  qpb1.add_array_value(QVariant::fromValue(177));
  qpb1.add_array_value(QVariant::fromValue(278));
@@ -115,7 +115,7 @@ int main(int argc, char* argv[])
  Qh_Hyperedge_Dominion qhd; //("generic-connection");
  qhd.add_label("generic-connection", "gen");
 
- qhn << qnf/qhd("gen") >> qhn1;
+ //qhn << qnf/qhd("gen") >> qhn1;
 
 
  Qh_Pack_Reader qpr1(qbc1, *qhn1);
@@ -132,7 +132,7 @@ int main(int argc, char* argv[])
 
  Qh_Hypernode* qhn2 = (Qh_Hypernode*) qvar3a.value<void*>();
 
- qDebug() << ((qhn2 == qhn)? "yeah" : "nay");
+ //qDebug() << ((qhn2 == qhn)? "yeah" : "nay");
 
 // u1 uu3a = qvar3a.toUInt();
 // u2 uu4a = qvar4a.toUInt();
