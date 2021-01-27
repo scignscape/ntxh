@@ -69,6 +69,10 @@ void DSM_SDI_Document::parse_sample_hypernode(NTXH_Graph& g, NTXH_Graph::hyperno
   QString xlbl = prs[5].first;
   ls->set_external_label(xlbl);
 
+  ls->set_pre(prs[6].first);
+  ls->set_post(prs[7].first);
+
+
   QString cl = prs[9].first;
   ls->parse_classification(cl);
 

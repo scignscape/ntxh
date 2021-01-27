@@ -8,6 +8,11 @@
 #include "discourse-markup-sample.h"
 
 #include <QRegularExpression>
+#include <QDataStream>
+
+
+#include "qh-package/qh-pack-builder.h"
+#include "qh-package/qh-pack-reader.h"
 
 
 USING_KANS(DSM)
@@ -17,6 +22,42 @@ Discourse_Markup_Sample::Discourse_Markup_Sample()
 {
 
 }
+
+void Discourse_Markup_Sample::supply_pack(Qh_Pack_Builder& qpb)
+{
+ // // need node data for the string ...
+ qpb.init_node_data();
+
+ QByteArray qba; supply_opaque(qba);
+
+ qpb.add_sv(ref_)
+   .add_sv(qba);
+}
+
+void Discourse_Markup_Sample::absorb_pack(Qh_Pack_Builder& qpb)
+{
+ Qh_Pack_Reader qpr(qpb.pack_code(), qpb.data(), qpb.node_data());
+
+ ref_ = qpr.read_value().toString();
+ QByteArray qba = qpr.read_value().toByteArray();
+ absorb_opaque(qba);
+
+}
+
+void Discourse_Markup_Sample::supply_opaque(QByteArray& qba)
+{
+ QDataStream qds(&qba, QIODevice::WriteOnly);
+ qds << inline_text_ << words_ << notes_
+   << inserts_;
+}
+
+void Discourse_Markup_Sample::absorb_opaque(const QByteArray& qba)
+{
+ QDataStream qds(qba);
+ qds >> inline_text_ >> words_
+   >> notes_ >> inserts_;
+}
+
 
 void Discourse_Markup_Sample::parse_inline(QString text)
 {

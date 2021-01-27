@@ -70,6 +70,9 @@ public:
  ACCESSORS__RGET(QStringList ,issue_codes)
  ACCESSORS__RGET(QStringList ,forms)
 
+ ACCESSORS__RGET(QList<Discourse_Markup_Sample> ,discourse_markup_samples)
+
+
  ACCESSORS(QString ,samples_file)
  ACCESSORS(QString ,merge_file)
 

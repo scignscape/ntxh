@@ -16,6 +16,7 @@
 
 #include "global-types.h"
 
+class Qh_Pack_Builder;
 
 KANS_(DSM)
 
@@ -34,8 +35,17 @@ public:
 
  Discourse_Markup_Sample();
 
+ ACCESSORS__RGET(QStringList ,words)
+
  void parse_inline(QString text);
  void parse(QString text);
+
+
+ void supply_pack(Qh_Pack_Builder& qpb);
+ void absorb_pack(Qh_Pack_Builder& qpb);
+
+ void supply_opaque(QByteArray& qba);
+ void absorb_opaque(const QByteArray& qba);
 
 };
 

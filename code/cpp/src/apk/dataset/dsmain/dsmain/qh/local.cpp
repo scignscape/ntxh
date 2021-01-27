@@ -59,12 +59,12 @@ void Qh_Local::deffields<Language_Sample>(Qh_Class_Object& qco)
 template<>
 void Qh_Local::_init_pack_code<Discourse_Markup_Sample>(Qh_Pack_Code& qpc)
 {
-// qpc.add_str()   //  samples_file_
+ qpc.add_str()   //  ref_
 //   .add_str()    //  pdf_
 //   .add_u2()     //  number_of_samples_
 //   .add_u2()     //  number_of_groups_
-//   .add_opaque() //  everything else
-//   ;
+   .add_opaque() //  everything else
+   ;
 }
 
 template<>

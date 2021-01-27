@@ -24,6 +24,7 @@
 
 #include "language-sample.h"
 #include "language-sample-group.h"
+#include "discourse-markup-sample.h"
 
 #include "dataset.h"
 
@@ -71,6 +72,13 @@ void Qh_Model::init()
    .defpack(&Qh_Local::init_pack_code)
    .set_pack_encoder(&Dataset_Info::supply_pack)
    .qh_class()
+
+  ->REGISTER_TYPE(Discourse_Markup_Sample)
+   .qh_local(qh_local_)
+   .defpack(&Qh_Local::init_pack_code)
+   .set_pack_encoder(&Discourse_Markup_Sample::supply_pack)
+   .qh_class()
+
    ;
 
  Language_Sample* ls = dataset_->samples()->first();
@@ -94,6 +102,15 @@ void Qh_Model::init()
  dsi1.absorb_pack(*qpb3);
 
  qDebug() << dsi1.ds()->samples_file();
+
+ Discourse_Markup_Sample dms = dataset_->discourse_markup_samples().first();
+ Qh_Pack_Builder* qpb4 = qh_runtime_.serialize(&dms);
+
+ Discourse_Markup_Sample dms1;
+ dms1.absorb_pack(*qpb4);
+
+ qDebug() << dms1.words();
+
 
 
 }
