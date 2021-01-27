@@ -1,0 +1,6 @@
+
+,x ::: u4;
+x \= test-find "abcdef" "cd";
+
+&prn x;
+

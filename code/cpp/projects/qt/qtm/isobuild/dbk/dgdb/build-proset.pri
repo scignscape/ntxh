@@ -5,6 +5,6 @@
 #           http://www.boost.org/LICENSE_1_0.txt)
 
 
-PROJECT_SET =dgdb
+PROJECT_SET = dgdb
 
 include(../build-kernel.pri)

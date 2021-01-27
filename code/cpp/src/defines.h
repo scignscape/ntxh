@@ -7,10 +7,6 @@
 #ifndef DEFINES__H
 #define DEFINES__H
 
-#ifdef FIND_ECL__USING_ECL
-#define USING_ECL
-#endif
-
 #include WHICH_DEFINES
 
 #endif

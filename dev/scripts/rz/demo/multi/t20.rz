@@ -1,0 +1,13 @@
+
+,fnd ::: PHR_Fn_Doc*;
+fnd \== default; 
+
+,penv ::: PHR_Env*;
+penv \= (envv "PHR_Env*");
+
+fnd -> init penv;
+
+,test-fn ::: .()  $-> extern;
+
+fnd -> read  "test-fn";
+
