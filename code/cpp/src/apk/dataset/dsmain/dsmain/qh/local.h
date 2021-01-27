@@ -26,6 +26,7 @@ KANS_(DSM)
 
 class Discourse_Markup_Sample;
 class Dataset;
+class Dataset_Info;
 
 
 class Qh_Local

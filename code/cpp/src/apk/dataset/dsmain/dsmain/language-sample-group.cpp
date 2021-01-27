@@ -41,7 +41,8 @@ USING_KANS(DSM)
 Language_Sample_Group::Language_Sample_Group(u2 id)
   :  in_database_id_(0), id_(id),
      page_(0), //order_in_page_(0),
-     section_(0)
+     section_(0),
+     first_sample_id_(0), last_sample_id_(0)
 {
 
 }
@@ -76,6 +77,10 @@ bool Language_Sample_Group::match_issue(const QSet<QString>& qset)
 
 void Language_Sample_Group::add_sample(Language_Sample* sample)
 {
+ if(samples_.isEmpty())
+   first_sample_id_ = sample->id();
+
+ last_sample_id_ = sample->id();
  samples_.push_back(sample);
 
  QString issue = sample->issue();
@@ -137,12 +142,11 @@ void Language_Sample_Group::absorb_opaque(const QByteArray& qba)
 
  if(size > 0)
  {
-  u4 low_id, high_id;
-  qds >> low_id;
+  qds >> first_sample_id_;
   if(size == 1)
-    high_id = low_id;
+    last_sample_id_ = first_sample_id_;
   else
-    qds >> high_id;
+    qds >> last_sample_id_;
  }
 }
 

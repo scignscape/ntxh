@@ -27,6 +27,8 @@
 
 #include "dataset.h"
 
+#include "dataset-info.h"
+
 #include "qh-model.h"
 
 #include "qh/local.h"
@@ -63,6 +65,12 @@ void Qh_Model::init()
    .set_pack_encoder(&Language_Sample_Group::supply_pack)
    .qh_class()
     //? .deffields(&Qh_Local::deffields<Language_Sample_Group>)
+
+  ->REGISTER_TYPE(Dataset_Info)
+   .qh_local(qh_local_)
+   .defpack(&Qh_Local::init_pack_code)
+   .set_pack_encoder(&Dataset_Info::supply_pack)
+   .qh_class()
    ;
 
  Language_Sample* ls = dataset_->samples()->first();
@@ -71,16 +79,22 @@ void Qh_Model::init()
  Language_Sample ls1;
  ls1.absorb_pack(*qpb1);
 
- qDebug() << ls1.text();
-
-
  Language_Sample_Group* lsg = dataset_->groups()->first();
  Qh_Pack_Builder* qpb2 = qh_runtime_.serialize(lsg);
 
  Language_Sample_Group lsg1;
  lsg1.absorb_pack(*qpb2);
 
- qDebug() << ls1.external_label();
+ Dataset_Info dsi(dataset_);
+
+ Qh_Pack_Builder* qpb3 = qh_runtime_.serialize(&dsi);
+
+ Dataset_Info dsi1;
+
+ dsi1.absorb_pack(*qpb3);
+
+ qDebug() << dsi1.ds()->samples_file();
+
 
 }
 

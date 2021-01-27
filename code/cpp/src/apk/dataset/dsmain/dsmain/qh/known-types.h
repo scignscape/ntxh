@@ -8,6 +8,6 @@
 TYPE_DECLARE(Language_Sample)
 TYPE_DECLARE(Language_Sample_Group)
 TYPE_DECLARE(Discourse_Markup_Sample)
-TYPE_DECLARE(Dataset)
+TYPE_DECLARE(Dataset_Info)
 
 

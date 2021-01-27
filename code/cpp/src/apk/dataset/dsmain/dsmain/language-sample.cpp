@@ -70,7 +70,7 @@ void Language_Sample::supply_pack(Qh_Pack_Builder& qpb)
  qpb.add_sv(text_)
    .add_sv(latex_label_)
    .add_sv(issue_)
-   .add_sv((u2) page_)
+   .add_sv(page_)
    .add_sv(qba);
 }
 

@@ -68,7 +68,7 @@ public:
 
  ACCESSORS__RGET(QStringList ,issues)
  ACCESSORS__RGET(QStringList ,issue_codes)
-// ACCESSORS__RGET(QStringList ,forms)
+ ACCESSORS__RGET(QStringList ,forms)
 
  ACCESSORS(QString ,samples_file)
  ACCESSORS(QString ,merge_file)

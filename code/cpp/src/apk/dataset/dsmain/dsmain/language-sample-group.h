@@ -44,6 +44,8 @@ class Language_Sample_Group
 
  QStringList issues_;
 
+ u2 first_sample_id_;
+ u2 last_sample_id_;
 
 public:
 

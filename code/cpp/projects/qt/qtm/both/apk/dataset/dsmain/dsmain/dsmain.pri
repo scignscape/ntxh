@@ -46,6 +46,7 @@ DEFINES += USE_KANS
 
 HEADERS +=  \
   $$SRC_DIR/dataset.h  \
+  $$SRC_DIR/dataset-info.h  \
   $$SRC_DIR/dsm-sdi-document.h  \
   $$SRC_DIR/language-sample.h  \
   $$SRC_DIR/language-sample-group.h  \
@@ -57,6 +58,7 @@ HEADERS +=  \
 
 SOURCES += \
   $$SRC_DIR/dataset.cpp  \
+  $$SRC_DIR/dataset-info.cpp  \
   $$SRC_DIR/dsm-sdi-document.cpp  \
   $$SRC_DIR/language-sample.cpp  \
   $$SRC_DIR/language-sample-group.cpp  \
