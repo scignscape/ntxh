@@ -67,7 +67,8 @@ SOURCES += \
   $$SRC_DIR/qh/local.cpp  \
 
 
-LIBS +=  -L$$TARGETSDIR  -lntxh-parser -lntxh
+LIBS +=  -L$$TARGETSDIR  -lntxh-parser -lntxh  -lqring
+
 
 LIBS += -L$$TARGETSDIR -lqh-package
 

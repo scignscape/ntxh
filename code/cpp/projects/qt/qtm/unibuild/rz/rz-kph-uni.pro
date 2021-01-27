@@ -43,6 +43,20 @@ SUBDIRS += \
   ../sk/rz/rz-phr-runtime/rz-phr-multi-console \
 
 
+SUBDIRS += \
+  ../sk/rz/tests-phr/kph-generator \
+  ../sk/rz/tests-phr/kauvir-phaon-console \
+  ../sk/rz/tests-phr/kph-generator-console \
+  ../sk/rz/tests-phr/kph-multigen-console \
+  ../sk/rz/tests-phr/kph-tcp-console \
+
+
+SUBDIRS += \
+  ../sk/rz/rz-kph-runtime/rz-kph-runtime-console \
+
+
+
+
 CONFIG += ordered
 
 
