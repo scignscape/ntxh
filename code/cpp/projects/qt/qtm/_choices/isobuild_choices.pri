@@ -1,1 +1,1 @@
-CHOICE_FEATURES = xpdf lex-pair
+CHOICE_FEATURES = xpdf lex-pair kph

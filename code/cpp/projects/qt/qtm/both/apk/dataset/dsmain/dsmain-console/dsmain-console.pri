@@ -27,7 +27,6 @@ INCLUDEPATH += $$SCIGNSTAGE_SRC_GROUP_DIR
 
 INCLUDEPATH += $$QRING_SRC_GROUP_DIR
 
-
 INCLUDEPATH += $$HTXN_SRC_GROUP_DIR
 
 
@@ -68,6 +67,30 @@ LIBS += -L$$TARGETSDIR  \
 
 
 LIBS += -L$$TARGETSDIR -lqh-package
+
+
+
+contains(CHOICE_FEATURES, "kph") \#/
+{
+ message(DEFINE\'ing USING_KPH)
+ DEFINES += USING_KPH
+
+ LIBS += -L$$TARGETSDIR -lphaon-lib -lphaon-ir -lphr-direct-eval  \
+   -lphr-command-runtime
+
+ HEADERS += \
+   $$SRC_DIR/test-functions.h \
+
+ SOURCES += \
+   $$SRC_DIR/test-functions.cpp \
+
+ INCLUDEPATH += $$PHAONIR_SRC_GROUP_DIR
+ INCLUDEPATH += $$PHAONLIB_SRC_GROUP_DIR
+ INCLUDEPATH += $$APPLICATION_MODEL_SRC_GROUP_DIR
+
+ LIBS += -L$$TARGETSDIR -lapplication-model
+
+}
 
 
 contains(CHOICE_FEATURES, "xpdf") \#/

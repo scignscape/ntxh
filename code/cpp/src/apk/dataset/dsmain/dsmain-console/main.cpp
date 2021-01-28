@@ -31,7 +31,23 @@
 
 #include "ScignStage-ling/ScignStage-ling-dialog.h"
 
+#ifdef USING_XPDF
 #include "ScignStage-ling/xpdf-bridge.h"
+#endif // USING_XPDF
+
+
+#ifdef USING_KPH
+#include "phaon-ir/phr-code-model.h"
+#include "phaon-lib/phr-runner.h"
+#include "phr-direct-eval/phr-direct-eval.h"
+#include "phaon-ir/table/phr-symbol-scope.h"
+#include "phaon-ir/table/phr-channel-group-table.h"
+#include "phaon-ir/scopes/phr-runtime-scope.h"
+#include "phaon-ir/scopes/phr-scope-system.h"
+extern void init_test_functions(PhaonIR& phr, PHR_Code_Model& pcm,
+  PHR_Channel_Group_Table& table, PHR_Symbol_Scope& pss);
+#endif // USING_KPH
+
 
 #ifdef USING_LEXPAIR
 #include "lexpair/lexpair-dialog.h"

@@ -83,9 +83,19 @@
 //#include "phaon-ir/runtime/phr-command-package.h"
 
 #ifdef USING_KPH
+
+#include "phaon-lib/phr-runner.h"
+
 #include "phaon-ir/channel/phr-channel-system.h"
+#include "phaon-ir/channel/phr-channel-group.h"
+
+#include "phaon-ir/runtime/phr-command-package.h"
+
 #include "phaon-ir/phaon-ir.h"
 extern void default_phr_startup(PhaonIR& phr);
+
+#include "application-model/application-model.h"
+
 #endif
 
 
@@ -136,6 +146,12 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
     ,phr_init_function_(nullptr)
     #endif
 {
+ #ifdef USING_KPH
+
+ application_model_ = new Application_Model(this);
+
+ #endif
+
  filter_forms_grid_layout_ = new QGridLayout;
  filter_issues_grid_layout_ = new QGridLayout;
 

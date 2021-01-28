@@ -18,7 +18,7 @@ DEFINES += CAON_DEBUG
 DEFINES += RELAE_LABEL_NODES
 
 DEFINES += DEFAULT_KPH_FOLDER=\\\"$$ROOT_DIR/dev/kph\\\"
-DEFINES += DEFAULT_ICON_FOLDER=\\\"$$CPP_ROOT_DIR/assets/icons\\\"
+DEFINES += DEFAULT_ICON_FOLDER=\\\"$$ROOT_DIR/code/assets/icons\\\"
 
 CONFIG += no_keywords
 
