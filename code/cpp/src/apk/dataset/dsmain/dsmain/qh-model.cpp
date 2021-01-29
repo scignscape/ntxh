@@ -81,37 +81,6 @@ void Qh_Model::init()
 
    ;
 
- Language_Sample* ls = dataset_->samples()->first();
- Qh_Pack_Builder* qpb1 = qh_runtime_.serialize(ls);
-
- Language_Sample ls1;
- ls1.absorb_pack(*qpb1);
-
- Language_Sample_Group* lsg = dataset_->groups()->first();
- Qh_Pack_Builder* qpb2 = qh_runtime_.serialize(lsg);
-
- Language_Sample_Group lsg1;
- lsg1.absorb_pack(*qpb2);
-
- Dataset_Info dsi(dataset_);
-
- Qh_Pack_Builder* qpb3 = qh_runtime_.serialize(&dsi);
-
- Dataset_Info dsi1;
-
- dsi1.absorb_pack(*qpb3);
-
- qDebug() << dsi1.ds()->samples_file();
-
- Discourse_Markup_Sample dms = dataset_->discourse_markup_samples().first();
- Qh_Pack_Builder* qpb4 = qh_runtime_.serialize(&dms);
-
- Discourse_Markup_Sample dms1;
- dms1.absorb_pack(*qpb4);
-
- qDebug() << dms1.words();
-
-
 
 }
 

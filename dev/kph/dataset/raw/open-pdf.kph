@@ -1,8 +1,9 @@
 - 
 
 .
-%test: This test should result in the Lexpair Dialog 
-  being launched with a sentence defined in the test script.
+%test: This test should result in the XPDF viewer being  
+  opened to the page on which the currenly expanded 
+  sample and/or sample group is typeset, if applicable.
 .
 %origin: @scripts/rz-kph
 .
@@ -16,7 +17,7 @@
 .
 #1
 .
-&:launch_lexpair_dialog
+&:open_pdf
 .
 1 :: 1 :: 1 :::#*ScignStage_Ling_Dialog*
 .

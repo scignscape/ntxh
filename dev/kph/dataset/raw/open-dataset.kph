@@ -1,0 +1,25 @@
+- 
+
+.
+%origin: @scripts/rz-kph
+.
+%test: This test should replicate the response of the 
+   dataset application when a user chooses to open a 
+   new dataset (via the "open" button at the top-left 
+   of the application window/dialog).  The application 
+   should open a file-open dialog and, if the user  
+   chooses a valid data set, should switch to 
+   viewing that data-set's samples in lieu of the current data.
+.
+;sigma:1
+.
+@ScignStage_Ling_Dialog*::1
+.
+#1
+.
+&:open_dataset
+.
+1 :: 1 :: 1 :::#*ScignStage_Ling_Dialog*
+.
+-
+

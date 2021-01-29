@@ -12,11 +12,16 @@
 
 #include <QMap>
 
+#include "kans.h"
 
+KANS_CLASS_DECLARE(DSM ,Dataset)
+KANS_CLASS_DECLARE(DSM ,Qh_Model)
+USING_KANS(DSM)
 
 class QDialog;
 
 class ScignStage_Ling_Dialog;
+
 
 class Application_Model : public QObject
 {
@@ -28,12 +33,21 @@ class Application_Model : public QObject
 
  QString root_folder_;
 
+ Qh_Model* qhm_;
+
 public:
 
 
  Q_INVOKABLE void launch_lexpair_dialog(ScignStage_Ling_Dialog* dlg, QString s);
  Q_INVOKABLE void expand_sample(ScignStage_Ling_Dialog* dlg, int index);
  Q_INVOKABLE void launch_xpdf(ScignStage_Ling_Dialog* dlg, QString f, int page);
+ Q_INVOKABLE void open_pdf(ScignStage_Ling_Dialog* dlg, QString f);
+ Q_INVOKABLE void open_dataset(ScignStage_Ling_Dialog* dlg);
+ Q_INVOKABLE void copy_to_clipboard(ScignStage_Ling_Dialog* dlg);
+
+ Q_INVOKABLE void test_qh(QString type, int index);
+
+ void init_qh(Dataset* ds);
 
 
  Application_Model(ScignStage_Ling_Dialog* ling_dialog, QString root_folder);

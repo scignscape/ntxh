@@ -315,6 +315,7 @@ public:
  void expand_sample(int index);
 
  void open_pdf_file(QString name, int page, int flag);
+ void open_pdf_to_sample(QString f);
 
 
 #ifdef USING_LEXPAIR
@@ -326,6 +327,8 @@ public:
 
  void find_group_up(Language_Sample_Group* start,
    QSet<QString>* temp_filters);
+
+ void copy_to_clipboard();
 
 
 Q_SIGNALS:

@@ -63,10 +63,6 @@ void Dataset::load_from_folder(QString path)
 
  load_ppc_file();
 
-
- Qh_Model qhm(this);
-
- qhm.init();
 }
 
 void Dataset::load_ppc_file()

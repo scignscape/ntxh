@@ -129,6 +129,30 @@ void launch_pdf(ScignStage_Ling_Dialog* dlg, QString f, u4 page)
  }
 }
 
+void open_pdf(ScignStage_Ling_Dialog* dlg, QString f)
+{
+ if(Application_Model* appm = static_cast<Application_Model*>(dlg->application_model()))
+ {
+  appm->open_pdf(dlg, f);
+ }
+}
+
+void open_dataset(ScignStage_Ling_Dialog* dlg)
+{
+ if(Application_Model* appm = static_cast<Application_Model*>(dlg->application_model()))
+ {
+  appm->open_dataset(dlg);
+ }
+}
+
+void copy_to_clipboard(ScignStage_Ling_Dialog* dlg)
+{
+ if(Application_Model* appm = static_cast<Application_Model*>(dlg->application_model()))
+ {
+  appm->copy_to_clipboard(dlg);
+ }
+}
+
 
 void launch_lexpair_dialog(ScignStage_Ling_Dialog* dlg, QString str)
 {
@@ -183,6 +207,48 @@ void init_test_functions(PhaonIR& phr, PHR_Code_Model& pcm,
   (*g1[lambda])[0] = phc2;
 
   table.init_phaon_function(g1, pss, "expand_sample", 710, &expand_sample);
+
+  g1.clear_all();
+ }
+
+ {
+  PHR_Type* ty1 = type_system->get_type_by_name("ScignStage_Ling_Dialog*");
+  PHR_Carrier* phc1 = new PHR_Carrier;
+  phc1->set_phr_type(ty1);
+  g1.init_channel(sigma, 1);
+  (*g1[sigma])[0] = phc1;
+
+  PHR_Carrier* phc2 = new PHR_Carrier;
+  PHR_Type* ty2 = type_system->get_type_by_name("str");
+  phc2->set_phr_type(ty2);
+  g1.init_channel(lambda, 1);
+  (*g1[lambda])[0] = phc2;
+
+  table.init_phaon_function(g1, pss, "open_pdf", 710, &open_pdf);
+
+  g1.clear_all();
+ }
+
+ {
+  PHR_Type* ty1 = type_system->get_type_by_name("ScignStage_Ling_Dialog*");
+  PHR_Carrier* phc1 = new PHR_Carrier;
+  phc1->set_phr_type(ty1);
+  g1.init_channel(sigma, 1);
+  (*g1[sigma])[0] = phc1;
+
+  table.init_phaon_function(g1, pss, "open_dataset", 710, &open_dataset);
+
+  g1.clear_all();
+ }
+
+ {
+  PHR_Type* ty1 = type_system->get_type_by_name("ScignStage_Ling_Dialog*");
+  PHR_Carrier* phc1 = new PHR_Carrier;
+  phc1->set_phr_type(ty1);
+  g1.init_channel(sigma, 1);
+  (*g1[sigma])[0] = phc1;
+
+  table.init_phaon_function(g1, pss, "copy_to_clipboard", 710, &copy_to_clipboard);
 
   g1.clear_all();
  }

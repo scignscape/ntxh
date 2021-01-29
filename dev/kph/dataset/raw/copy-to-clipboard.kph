@@ -1,0 +1,26 @@
+- 
+
+.
+%origin: @scripts/rz-kph
+.
+%test: This test should test the "copy to clipboard"
+  functionality which is in effect when there is a 
+  currently active sample; ordinarily this feature 
+  would be available via a context menu for right-click 
+  actions near the sample display, and should result 
+  in the sample text being copied to the system clipboard.
+  Successful copying can be tested by pasting the 
+  clipboard contents to the scratch area on the test dialog.
+.
+;sigma:1
+.
+@ScignStage_Ling_Dialog*::1
+.
+#1
+.
+&:copy_to_clipboard
+.
+1 :: 1 :: 1 :::#*ScignStage_Ling_Dialog*
+.
+-
+

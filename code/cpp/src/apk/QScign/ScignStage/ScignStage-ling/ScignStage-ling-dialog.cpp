@@ -638,6 +638,26 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
 #endif // USING_XPDF
 }
 
+
+void ScignStage_Ling_Dialog::copy_to_clipboard()
+{
+ if(current_sample_)
+ {
+  QClipboard* clipboard = QApplication::clipboard();
+  clipboard->setText(current_sample_->text());
+ }
+}
+
+
+void ScignStage_Ling_Dialog::open_pdf_to_sample(QString f)
+{
+ u4 page =
+   current_sample_? current_sample_->page() :
+   current_open_group_? current_open_group_->page() :
+   1;
+ open_pdf_file(f, page, 0);
+}
+
 void ScignStage_Ling_Dialog::get_replacement_dataset_path()
 {
  if(replace_dataset_function_)

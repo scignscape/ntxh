@@ -38,7 +38,11 @@ int main(int argc, char **argv)
 
    {"Launch PDF", DEFAULT_KPH_FOLDER "/dataset/raw/launch-pdf.kph"},
 
-//   {"Open PDF to Sample", DEFAULT_KPH_FOLDER "/dataset/raw/open-pdf.kph"},
+   {"Open PDF to Sample", DEFAULT_KPH_FOLDER "/dataset/raw/open-pdf.kph"},
+
+   {"Open Dataset", DEFAULT_KPH_FOLDER "/dataset/raw/open-dataset.kph"},
+
+   {"Copy to Clipboard", DEFAULT_KPH_FOLDER "/dataset/raw/copy-to-clipboard.kph"},
 
    }}, nullptr);
 

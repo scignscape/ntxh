@@ -45,6 +45,9 @@ public:
 
  Qh_Model(Dataset* ds);
 
+ ACCESSORS(Dataset* ,dataset)
+ ACCESSORS__RGET(Qh_Runtime ,qh_runtime)
+
  void init();
 
 
