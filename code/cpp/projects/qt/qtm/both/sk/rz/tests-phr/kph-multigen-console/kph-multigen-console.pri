@@ -29,7 +29,7 @@ DEFINES += USE_KANS
 
 CONFIG += no_keywords
 
-DEFINES += DEFAULT_KPH_FOLDER=\\\"$$CPP_ROOT_DIR/kph\\\"
+DEFINES += DEFAULT_KPH_FOLDER=\\\"$$ROOT_DIR/dev/kph\\\"
 
 
 HEADERS += \

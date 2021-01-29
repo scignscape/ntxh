@@ -30,6 +30,21 @@ typedef quint32 u32t;
 template<int byc>
 struct tybc;
 
+ // onlt implement one 3-arg, for demo ...
+#define TYBC_3(bc, a, b, c) \
+template<> \
+struct tybc<bc> \
+{ \
+ typedef u##a##t a0; \
+ typedef u##b##t a1; \
+ typedef u##c##t a2; \
+ typedef QString(*_sr)(a0, a1, a2); \
+ typedef void*(*_r)(a0, a1, a2); \
+ typedef void(*_nor)(a0, a1, a2); \
+}; \
+
+TYBC_3(9884, 64, 64, 32)
+
 
 #define TYBC_2(bc, a, b) \
 template<> \

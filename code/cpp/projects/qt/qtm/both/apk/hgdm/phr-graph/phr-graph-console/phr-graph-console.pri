@@ -10,7 +10,7 @@ include(../build-group.pri)
 
 TEMPLATE = app
 
-DEFINES += DEFAULT_KPH_FOLDER=\\\"$$CPP_ROOT_DIR/kph\\\"
+DEFINES += DEFAULT_KPH_FOLDER=\\\"$$ROOT_DIR/dev/kph\\\"
 DEFINES += DEFAULT_PHR_FOLDER=\\\"$$CPP_ROOT_DIR/phr\\\"
 DEFINES += DEFAULT_PHR_GEN_FOLDER=\\\"$$CPP_ROOT_DIR/phr/gen\\\"
 

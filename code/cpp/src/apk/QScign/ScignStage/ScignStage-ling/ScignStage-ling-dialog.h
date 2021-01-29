@@ -228,8 +228,6 @@ class ScignStage_Ling_Dialog : public QDialog
  void run_msg(QString msg, QByteArray qba);
  void run_kph(const QByteArray& qba);
 
-
- void open_pdf_file(QString name, int page, int flag);
  int resolve_pdf_page(int page, int flag);
 
  void check_launch_xpdf(std::function<void()> fn,
@@ -315,6 +313,9 @@ public:
  // //  Kernel Application Interface
  void test_msgbox(QString msg);
  void expand_sample(int index);
+
+ void open_pdf_file(QString name, int page, int flag);
+
 
 #ifdef USING_LEXPAIR
  void launch_lexpair_dialog(QString s);

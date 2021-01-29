@@ -1,0 +1,30 @@
+- 
+
+.
+%origin: @scripts/rz-kph
+.
+%test: This test should result in the dataset's main PDF
+  file being opened in the XPDF viewer, set to page 5.
+.
+;sigma:1
+.
+;lambda:2
+.
+@ScignStage_Ling_Dialog*::1
+.
+@str::2
+.
+@u4::3
+.
+#1
+.
+&:launch_pdf
+.
+1 :: 1 :: 1 :::#*ScignStage_Ling_Dialog*
+.
+2 :: 1 :: 2 :::/home/nlevisrael/gits/ntxh/ctg/ar/data/dataset/ctg/main.pdf
+.
+2 :: 1 :: 3 :::5
+.
+-
+

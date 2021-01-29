@@ -11,7 +11,7 @@ fnm -> init penv;
 ,test_msgbox ::: .[ScignStage_Ling_Dialog*] .(QString)  $-> extern;
 ,launch_lexpair_dialog ::: .[ScignStage_Ling_Dialog*] .(QString)   $-> extern;
 
-,launch_pdf ::: .[ScignStage_Ling_Dialog*] .(QString u4)   $-> extern;
+,launch_pdf ::: .[ScignStage_Ling_Dialog*] .(QString u2)   $-> extern;
 
 ,read_sxpr ::: .[Lexpair_Dialog*] .(QString)  $-> extern;
 
@@ -23,5 +23,6 @@ fnm -> read "launch_pdf";
 
 fnm -> read "read_sxpr";
 
-fnm -> kph_gen_multi  "@/dev/kph/gen-multi/t1.kph";
+fnm -> kph_gen_multi  "@/dev/kph/gen-multi/test/t1.kph";
+
 

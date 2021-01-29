@@ -20,7 +20,7 @@ DEFINES += RZ_DIR=\\\"$$ROOT_DIR/dev/scripts/rz\\\"
 
 DEFINES += RZ_KPH_DIR=\\\"$$ROOT_DIR/dev/scripts/rz-kph\\\"
 
-DEFINES += DEFAULT_KPH_FOLDER=\\\"$$CPP_ROOT_DIR/kph\\\"
+DEFINES += DEFAULT_KPH_FOLDER=\\\"$$ROOT_DIR/dev/kph\\\"
 
 DEFINES += AR_ROOT_DIR=\\\"$$ROOT_DIR\\\"
 

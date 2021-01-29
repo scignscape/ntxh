@@ -343,6 +343,8 @@ void PHR_Command_Runtime_Router::proceed_s1_2(PHR_Function_Vector* pfv, void** p
  }
  if(fn0)
  {
+  proceed_s0<3, s0_fn1_p_p_type>(&result, fn0, byte_code, sr, true);
+
   if(pResult)
   {
    *pResult = result;
@@ -936,6 +938,22 @@ void PHR_Command_Runtime_Router::proceed_s0(void** pResult, fn_type fn, int byte
 template<int arg_count>
 struct tybc_;
 
+
+template<>
+struct tybc_<3>
+{
+ // // only implement no-return, for demo ...
+ template<int byc, typename fn_type>
+ static void run(QVector<quint64>& args, fn_type fn)
+ {
+  ( (typename tybc<byc>::_nor) fn)
+       ( (typename tybc<byc>::a0) *((quint64*) args[0]),
+         (typename tybc<byc>::a1) *((quint64*) args[1]),
+         (typename tybc<byc>::a1) *((quint64*) args[2]) );
+ }
+};
+
+
 template<>
 struct tybc_<2>
 {
@@ -1037,6 +1055,20 @@ void PHR_Command_Runtime_Router::proceed_s0_nor<2, s0_fn1_p_p_type>(QVector<quin
  }
 }
 
+
+// // for now only implement one 3-arg for demo purposes ...
+template<>
+void PHR_Command_Runtime_Router::proceed_s0_nor<3, s0_fn1_p_p_type>(QVector<quint64>& args,
+  s0_fn1_p_p_type fn, int byte_code)
+{
+ switch(byte_code)
+ {
+ default:
+ case 9884: tybc_<3>::run<9884, s0_fn1_p_p_type>(args, fn); break;
+ }
+}
+
+
 template<>
 void PHR_Command_Runtime_Router::proceed_s0_r<1, s0_fn1_p_type>(QVector<quint64>& args, void*& result,
   s0_fn1_p_type fn, int byte_code)
@@ -1074,6 +1106,21 @@ void PHR_Command_Runtime_Router::proceed_s0_nor<1, s0_fn1_p_type>(QVector<quint6
  case 98: tybc_<1>::run<98, s0_fn1_p_type>(args, fn); break;
  }
 }
+
+
+template<>
+void PHR_Command_Runtime_Router::proceed_s0_sr<3, s0_fn1_p_p_type>(QVector<quint64>& args,
+  s0_fn1_p_p_type fn, int byte_code)
+{
+}
+
+template<>
+void PHR_Command_Runtime_Router::proceed_s0_r<3, s0_fn1_p_p_type>(QVector<quint64>& args,
+  void*& result, s0_fn1_p_p_type fn, int byte_code)
+{
+}
+
+
 
 template<int c, typename fn_type>
 void PHR_Command_Runtime_Router::proceed_s0(QVector<quint64>& args, void** pResult,

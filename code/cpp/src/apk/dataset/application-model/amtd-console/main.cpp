@@ -36,7 +36,9 @@ int main(int argc, char **argv)
 
    {"Launch Lexpair Dialog", DEFAULT_KPH_FOLDER "/dataset/raw/launch-lexpair-dialog.kph"},
 
-   {"Launch XPDF", DEFAULT_KPH_FOLDER "/dataset/raw/launch-xpdf.kph"},
+   {"Launch PDF", DEFAULT_KPH_FOLDER "/dataset/raw/launch-pdf.kph"},
+
+//   {"Open PDF to Sample", DEFAULT_KPH_FOLDER "/dataset/raw/open-pdf.kph"},
 
    }}, nullptr);
 

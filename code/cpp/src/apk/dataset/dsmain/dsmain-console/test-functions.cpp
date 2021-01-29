@@ -19,6 +19,7 @@
 #include "phaon-ir/scopes/phr-scope-system.h"
 
 //?#include "phr-fn-doc/phr-fn-doc.h"
+#include "global-types.h"
 
 #include <QTextStream>
 
@@ -119,6 +120,24 @@ void expand_sample(ScignStage_Ling_Dialog* dlg, int index)
  }
 }
 
+
+void launch_pdf(ScignStage_Ling_Dialog* dlg, QString f, u4 page)
+{
+ if(Application_Model* appm = static_cast<Application_Model*>(dlg->application_model()))
+ {
+  appm->launch_xpdf(dlg, f, page);
+ }
+}
+
+
+void launch_lexpair_dialog(ScignStage_Ling_Dialog* dlg, QString str)
+{
+ if(Application_Model* appm = static_cast<Application_Model*>(dlg->application_model()))
+ {
+  appm->launch_lexpair_dialog(dlg, str);
+ }
+}
+
 void init_test_functions(PhaonIR& phr, PHR_Code_Model& pcm,
   PHR_Channel_Group_Table& table, PHR_Symbol_Scope& pss)
 {
@@ -164,6 +183,48 @@ void init_test_functions(PhaonIR& phr, PHR_Code_Model& pcm,
   (*g1[lambda])[0] = phc2;
 
   table.init_phaon_function(g1, pss, "expand_sample", 710, &expand_sample);
+
+  g1.clear_all();
+ }
+
+ {
+  PHR_Type* ty1 = type_system->get_type_by_name("ScignStage_Ling_Dialog*");
+  PHR_Carrier* phc1 = new PHR_Carrier;
+  phc1->set_phr_type(ty1);
+  g1.init_channel(sigma, 1);
+  (*g1[sigma])[0] = phc1;
+
+  PHR_Carrier* phc2 = new PHR_Carrier;
+  PHR_Type* ty2 = type_system->get_type_by_name("str");
+  phc2->set_phr_type(ty2);
+  g1.init_channel(lambda, 1);
+  (*g1[lambda])[0] = phc2;
+
+  table.init_phaon_function(g1, pss, "launch_lexpair_dialog", 710, &launch_lexpair_dialog);
+
+  g1.clear_all();
+ }
+
+ {
+  PHR_Type* ty1 = type_system->get_type_by_name("ScignStage_Ling_Dialog*");
+  PHR_Carrier* phc1 = new PHR_Carrier;
+  phc1->set_phr_type(ty1);
+  g1.init_channel(sigma, 1);
+  (*g1[sigma])[0] = phc1;
+
+  PHR_Carrier* phc2 = new PHR_Carrier;
+  PHR_Type* ty2 = type_system->get_type_by_name("str");
+  phc2->set_phr_type(ty2);
+  g1.init_channel(lambda, 2);
+
+  PHR_Carrier* phc3 = new PHR_Carrier;
+  PHR_Type* ty3 = type_system->get_type_by_name("u4");
+  phc3->set_phr_type(ty3);
+
+  (*g1[lambda])[0] = phc2;
+  (*g1[lambda])[1] = phc3;
+
+  table.init_phaon_function(g1, pss, "launch_pdf", 710, &launch_pdf);
 
   g1.clear_all();
  }

@@ -14,7 +14,7 @@ QT += network
 
 TEMPLATE = app
 
-DEFINES += DEFAULT_KPH_FOLDER=\\\"$$CPP_ROOT_DIR/kph\\\"
+DEFINES += DEFAULT_KPH_FOLDER=\\\"$$ROOT_DIR/dev/kph\\\"
 
 
 INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR

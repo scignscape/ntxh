@@ -9,7 +9,7 @@ PROJECT_NAME = phr-graph-core
 include(../build-group.pri)
 
 
-DEFINES += DEFAULT_KPH_FOLDER=\\\"$$CPP_ROOT_DIR/kph\\\"
+DEFINES += DEFAULT_KPH_FOLDER=\\\"$$ROOT_DIR/dev/kph\\\"
 
 
 

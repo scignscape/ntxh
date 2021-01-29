@@ -26,13 +26,17 @@ class Application_Model : public QObject
 
  ScignStage_Ling_Dialog* ling_dialog_;
 
+ QString root_folder_;
+
 public:
 
 
  Q_INVOKABLE void launch_lexpair_dialog(ScignStage_Ling_Dialog* dlg, QString s);
  Q_INVOKABLE void expand_sample(ScignStage_Ling_Dialog* dlg, int index);
+ Q_INVOKABLE void launch_xpdf(ScignStage_Ling_Dialog* dlg, QString f, int page);
 
- Application_Model(ScignStage_Ling_Dialog* ling_dialog);
+
+ Application_Model(ScignStage_Ling_Dialog* ling_dialog, QString root_folder);
  ~Application_Model();
 
 };

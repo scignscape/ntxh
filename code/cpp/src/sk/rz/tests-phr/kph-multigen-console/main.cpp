@@ -103,7 +103,7 @@ extern void default_phr_startup(PhaonIR& phr);
 // return 0;
 //}
 
-int main(int argc, char* argv[])
+int main1(int argc, char* argv[])
 {
  // //  replace "gen-multi" with "raw-multi"
   //    to test manually-written kph files

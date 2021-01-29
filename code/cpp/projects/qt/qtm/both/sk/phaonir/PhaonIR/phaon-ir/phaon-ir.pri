@@ -9,7 +9,7 @@ PROJECT_NAME = phaon-ir
 include(../build-group.pri)
 
 
-DEFINES += DEFAULT_KPH_FOLDER=\\\"$$CPP_ROOT_DIR/kph\\\"
+DEFINES += DEFAULT_KPH_FOLDER=\\\"$$ROOT_DIR/dev/kph\\\"
 
 DEFINES += DEFAULT_PTR_BYTE_CODE=QT_POINTER_SIZE
 

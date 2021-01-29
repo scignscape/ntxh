@@ -12,10 +12,17 @@
 #include <QDebug>
 
 
-Application_Model::Application_Model(ScignStage_Ling_Dialog* ling_dialog)
-  :  ling_dialog_(ling_dialog)
+Application_Model::Application_Model(ScignStage_Ling_Dialog* ling_dialog, QString root_folder)
+  :  ling_dialog_(ling_dialog), root_folder_(root_folder)
 {
 
+}
+
+void Application_Model::launch_xpdf(ScignStage_Ling_Dialog* dlg, QString f, int page)
+{
+ if(f.startsWith('@'))
+   f = f.mid(1).prepend(root_folder_);
+ dlg->open_pdf_file(f, page, 0);
 }
 
 void Application_Model::expand_sample(ScignStage_Ling_Dialog* dlg, int index)

@@ -2,7 +2,7 @@
 
 .
 %test: This test should result in the Lexpair Dialog 
-  being launched with a sentence defined in the test script.
+  being launched with a sentenced defined in the test script.
 .
 %origin: @scripts/rz-kph
 .

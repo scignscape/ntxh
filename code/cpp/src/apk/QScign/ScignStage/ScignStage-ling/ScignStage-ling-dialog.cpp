@@ -148,7 +148,7 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
 {
  #ifdef USING_KPH
 
- application_model_ = new Application_Model(this);
+ application_model_ = new Application_Model(this, ROOT_FOLDER);
 
  #endif
 
