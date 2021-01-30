@@ -1,0 +1,40 @@
+- 
+
+.
+%origin: @scripts/rz-kph
+.
+%test: This test should demonstrate the 
+  "Qh" or "Qt Hypergraph" strategy for 
+  serializing C++ values.  The test 
+  takes a string indicating which type 
+  (language sample, sample group, dataset 
+  info, or property markip) to test out, 
+  and an index number to retrieve one 
+  instance from the current dataset.  
+  It seraliazes and then deserializes 
+  that value, putting a string in the 
+  system clipboard showing that the 
+  deserialization was correct.
+.
+;sigma:1
+.
+;lambda:2
+.
+@ScignStage_Ling_Dialog*::1
+.
+@str::2
+.
+@u4::3
+.
+#1
+.
+&:test_qh
+.
+1 :: 1 :: 1 :::#*ScignStage_Ling_Dialog*
+.
+2 :: 1 :: 2 :::sample
+.
+2 :: 1 :: 3 :::2
+.
+-
+

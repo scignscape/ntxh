@@ -5,13 +5,17 @@
 #           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#BUILD_DIR_CODE = $$OUT_PWD
+message(current UNI_BUILD_CODE: $$UNI_BUILD_CODE)
 
-BUILD_DIR_CODE = uni-nomark
 
-#message(BUILD_DIR_CODE: $$BUILD_DIR_CODE)
+isEmpty(UNI_BUILD_CODE) {
+  UNI_BUILD_CODE = nomark
+}
 
-#BUILD_DIR_CODE ~= s!.*/(build|release)-build-(\w+)-.*!UNIBUILD-\2
+BUILD_DIR_CODE = uni-$$UNI_BUILD_CODE
+
+message(BUILD_DIR_CODE: $$BUILD_DIR_CODE)
+
 
 
 CHOICE_CODE = $$BUILD_DIR_CODE-choices
@@ -23,5 +27,4 @@ UNIBUILD_TARGET_DIR = uni
 include(../_choices/$${WHICH_BUILD_DIR_CODE}_choices.pri)
 
 include(../build-root-both.pri)
-
 

@@ -1,0 +1,26 @@
+- 
+
+.
+%test: This test should result in the dataset application 
+  launching a message-box with the 
+  text This is a "Message Box" Message.
+.
+%origin: @scripts/rz-kph
+.
+;sigma:1
+.
+;lambda:2
+.
+@ScignStage_Ling_Dialog*::1
+.
+@str::2
+.
+#1
+.
+&:test_messagebox
+.
+1 :: 1 :: 1 :::#*ScignStage_Ling_Dialog*
+.
+2 :: 1 :: 2 :::This is a "Message Box" Message.
+.
+-

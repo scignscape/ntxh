@@ -45,9 +45,9 @@ public:
  Q_INVOKABLE void open_dataset(ScignStage_Ling_Dialog* dlg);
  Q_INVOKABLE void copy_to_clipboard(ScignStage_Ling_Dialog* dlg);
 
- Q_INVOKABLE void test_qh(QString type, int index);
+ Q_INVOKABLE QString test_qh(QString type, int index);
 
- void init_qh(Dataset* ds);
+ void check_init_qh(Dataset* ds);
 
 
  Application_Model(ScignStage_Ling_Dialog* ling_dialog, QString root_folder);

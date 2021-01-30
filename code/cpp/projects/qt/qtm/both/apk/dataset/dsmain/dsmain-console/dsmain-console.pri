@@ -63,7 +63,7 @@ SOURCES += \
 
 LIBS += -L$$TARGETSDIR  \
   -lntxh  -lntxh-parser -lngml-sdi  -ldgh-sdi  \
-  -ldsmain  -lScignStage-ling -lqring   -lxpdf
+  -ldsmain  -lScignStage-ling -lqring
 
 
 LIBS += -L$$TARGETSDIR -lqh-package

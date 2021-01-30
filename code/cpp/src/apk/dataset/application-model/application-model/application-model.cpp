@@ -21,12 +21,12 @@
 
 
 Application_Model::Application_Model(ScignStage_Ling_Dialog* ling_dialog, QString root_folder)
-  :  ling_dialog_(ling_dialog), root_folder_(root_folder)
+  :  ling_dialog_(ling_dialog), root_folder_(root_folder), qhm_(nullptr)
 {
 
 }
 
-void Application_Model::test_qh(QString type, int index)
+QString Application_Model::test_qh(QString type, int index)
 {
  Dataset* ds = qhm_->dataset();
  Qh_Runtime& qhr = qhm_->qh_runtime();
@@ -39,7 +39,7 @@ void Application_Model::test_qh(QString type, int index)
   Language_Sample ls1;
   ls1.absorb_pack(*qpb);
 
-  qDebug() << ls1.text();
+  return ls1.text();
  }
 
  else if(type == "group")
@@ -50,7 +50,7 @@ void Application_Model::test_qh(QString type, int index)
   Language_Sample_Group lsg1;
   lsg1.absorb_pack(*qpb);
 
-  qDebug() << lsg1.get_main_text();
+  return lsg1.get_main_text();
  }
 
  else if(type == "info")
@@ -63,7 +63,7 @@ void Application_Model::test_qh(QString type, int index)
 
   dsi1.absorb_pack(*qpb);
 
-  qDebug() << dsi1.ds()->samples_file();
+  return dsi1.ds()->samples_file();
  }
 
  else if(type == "discourse")
@@ -75,18 +75,19 @@ void Application_Model::test_qh(QString type, int index)
   Discourse_Markup_Sample dms1;
   dms1.absorb_pack(*qpb);
 
-  qDebug() << dms1.words();
+  return dms1.words().join(" | ");
  }
 
+ return  {};
 }
 
-void Application_Model::init_qh(Dataset* ds)
+void Application_Model::check_init_qh(Dataset* ds)
 {
- qhm_ = new Qh_Model(ds);
-
- qhm_->init();
-
-
+ if(!qhm_)
+ {
+  qhm_ = new Qh_Model(ds);
+  qhm_->init();
+ }
 }
 
 void Application_Model::launch_xpdf(ScignStage_Ling_Dialog* dlg, QString f, int page)

@@ -222,6 +222,8 @@ class ScignStage_Ling_Dialog : public QDialog
 
  QString pdf_file_;
 
+ Dataset* dataset_;
+
  bool xpdf_is_ready();
  void check_phr();
 
@@ -309,10 +311,13 @@ public:
 
 
  ACCESSORS(void* ,application_model)
+ ACCESSORS(Dataset* ,dataset)
 
  // //  Kernel Application Interface
  void test_msgbox(QString msg);
  void expand_sample(int index);
+
+ void copy_text_to_clipboard(QString text);
 
  void open_pdf_file(QString name, int page, int flag);
  void open_pdf_to_sample(QString f);

@@ -61,11 +61,9 @@ SOURCES += \
 
 LIBS += -L$$TARGETSDIR -lScignStage-ling
 
-LIBS += -L$$TARGETSDIR -lphaon-ir
 
 
-
-CHOICE_FEATURES += kph
+#CHOICE_FEATURES += kph
 
 contains(CHOICE_FEATURES, "kph") \#/
 {
@@ -74,7 +72,7 @@ contains(CHOICE_FEATURES, "kph") \#/
 }
 
 
-CHOICE_FEATURES += lex-pair
+#CHOICE_FEATURES += lex-pair
 
 contains(CHOICE_FEATURES, "lex-pair") \#/
 {

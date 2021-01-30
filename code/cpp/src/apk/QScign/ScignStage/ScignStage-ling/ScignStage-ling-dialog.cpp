@@ -134,7 +134,8 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
     current_open_group_(nullptr),
     no_auto_expand_(nullptr),
     current_peer_index_(0),
-    current_section_number_(0)
+    current_section_number_(0),
+    dataset_(ds)
      // KPH only ...
     #ifdef USING_KPH
     ,current_tcp_msecs_(0)
@@ -646,6 +647,12 @@ void ScignStage_Ling_Dialog::copy_to_clipboard()
   QClipboard* clipboard = QApplication::clipboard();
   clipboard->setText(current_sample_->text());
  }
+}
+
+void ScignStage_Ling_Dialog::copy_text_to_clipboard(QString text)
+{
+ QClipboard* clipboard = QApplication::clipboard();
+ clipboard->setText(text);
 }
 
 

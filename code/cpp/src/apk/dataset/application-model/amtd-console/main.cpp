@@ -44,6 +44,10 @@ int main(int argc, char **argv)
 
    {"Copy to Clipboard", DEFAULT_KPH_FOLDER "/dataset/raw/copy-to-clipboard.kph"},
 
+   {"Test Qh", DEFAULT_KPH_FOLDER "/dataset/raw/test-qh.kph"},
+
+   {"Test Message Box", DEFAULT_KPH_FOLDER "/dataset/raw/test-messagebox.kph"},
+
    }}, nullptr);
 
  dlg.show();
