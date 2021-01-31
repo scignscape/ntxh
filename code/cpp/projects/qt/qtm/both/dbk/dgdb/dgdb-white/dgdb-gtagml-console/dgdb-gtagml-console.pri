@@ -13,8 +13,6 @@ QT -= gui
 
 include($$ROOT_DIR/../preferred/sysr.pri)
 
-#include($$ROOT_DIR/../preferred/sysr-c.pri)
-
 DEFINES += DEFAULT_GTAGML_GEN_FOLDER=\\\"$$ROOT_DIR/../gtagml\\\"
 
 DEFINES += DEFAULT_DEV_DGDB_NGML_FOLDER=\\\"$$ROOT_DIR/../gtagml/dgdb\\\"
@@ -59,5 +57,5 @@ SOURCES += \
 
 
 LIBS += -L$$TARGETSDIR -lwhitedb -ldgdb-white \
-  -lntxh  -lntxh-parser -lngml-sdi  -ldgh-sdi
+  -lntxh  -lntxh-parser -lngml-sdi  -ldgh-sdi -lquazip
 

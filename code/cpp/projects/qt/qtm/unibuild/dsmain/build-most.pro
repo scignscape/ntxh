@@ -32,11 +32,11 @@ SUBDIRS += \
   ./build-most/phr-env \
   ./build-most/phr-fn-doc \
   ./build-most/phr-command-runtime \
+  ./build-most/kph-generator \
   ./build-most/phr-direct-eval \
 
 
 SUBDIRS += \
-  ./build-most/kph-generator \
   ./build-most/kauvir-phaon-console \
   ./build-most/kph-generator-console \
   ./build-most/kph-multigen-console \
@@ -45,6 +45,7 @@ SUBDIRS += \
 
 SUBDIRS += \
   ./build-most/xpdf \
+  ./build-most/xpdf-console \
 
 
 SUBDIRS += \
@@ -66,22 +67,22 @@ SUBDIRS += \
 
 
 SUBDIRS += \
-  ./build-most/quazip \
-  ./build-most/ngml-sdi-console \
-  ./build-most/gtagml \
-  ./build-most/gtagml-console \
-
-
-SUBDIRS += \
   ./build-most/whitedb \
   ./build-most/whitedb-console \
   ./build-most/wgdb-utility \
 
 
 SUBDIRS += \
-  ./build-most/clo43sd \
+  ./build-most/dgdb-white \
+  ./build-most/dgdb-white-console \
+  ./build-most/dgdb-gtagml-console \
+
+
+SUBDIRS += \
+  ./build-most/clo43sd-data \
   ./build-most/clo43sd-console \
   ./build-most/clo43sd-import \
+
 
 
 CONFIG += ordered

@@ -69,10 +69,7 @@ czFile: %4
  nsd.load_prelatex_file(pfile);
 
  nsd.parse();
-
-
 }
-// /home/nlevisrael/gits/ntxh/wip-sebi/ar/dev/consoles/gtagml/sdi/intro
 
 
 int main1(int argc, char* argv[])
@@ -129,13 +126,6 @@ int main1(int argc, char* argv[])
  GTagML_Document_Info* gdi = new GTagML_Document_Info;
 
  gdi->load_marks(DEFAULT_DEV_DGDB_NGML_FOLDER "/ctg/ngml/gen/t1.gt.marks-summary.txt");
-
-// qdc->set_author("Immanuel Kant");
-// qdc->set_title("Critique of Pure Reason");
-// qdc->set_num(777);
-// qdc->set_publication_date(QDate(1787, 4, 23));
-// qdc->set_test_time(QTime(11,47,22,888));
-
 
  DW_Record dwr = dw->register_typed_value(gdi);
 

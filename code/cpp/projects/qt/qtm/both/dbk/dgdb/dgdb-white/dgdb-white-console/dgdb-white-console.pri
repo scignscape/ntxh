@@ -7,11 +7,13 @@
 
 include(../build-group.pri)
 
+TEMPLATE = app
 
 QT -= gui
 
 include($$ROOT_DIR/../preferred/sysr.pri)
 
+#include($$ROOT_DIR/../preferred/sysr-c.pri)
 
 DEFINES += DEFAULT_DEV_DGDB_FOLDER=\\\"$$ROOT_DIR/dev/consoles/dgdb\\\"
 
@@ -20,28 +22,19 @@ DEFINES += USE_KANS
 
 INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR $$WHITEDB_SRC_GROUP_DIR
 
-#INCLUDEPATH += $$SRC_GROUP_DIR/dgdb-white
-
-INCLUDEPATH += $$SRC_PROSET_DIR/dgdb-white
-INCLUDEPATH += $$SRC_PROSET_DIR/dgdb-white/dgdb-white
-
+INCLUDEPATH += $$SRC_GROUP_DIR/dgdb-white
 
 
 HEADERS += \
-  $$SRC_DIR/clo-file.h \
-  $$SRC_DIR/clo-database.h \
-  $$SRC_DIR/clo-file.h \
-  $$SRC_DIR/clo-species.h \
-  $$SRC_DIR/clo-species-display-info.h \
+  $$SRC_DIR/demo-class.h \
+  $$SRC_DIR/queue-demo-class.h \
 
 
 
 SOURCES += \
-  $$SRC_DIR/clo-database.cpp \
-  $$SRC_DIR/clo-file.cpp \
-  $$SRC_DIR/clo-species.cpp \
-  $$SRC_DIR/clo-species-display-info.cpp \
-
+  $$SRC_DIR/main.cpp \
+  $$SRC_DIR/demo-class.cpp \
+  $$SRC_DIR/queue-demo-class.cpp \
 
 
 
