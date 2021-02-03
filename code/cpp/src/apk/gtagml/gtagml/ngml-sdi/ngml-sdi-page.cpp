@@ -36,9 +36,54 @@ void NGML_SDI_Page::read_page_element_from_strings(QStringList& strings)
  qDebug() << "SX: " << el.mark()->start_x();  
 }
 
+
+void NGML_SDI_Page::check_add_file_id(QString jn, u4 file_id)
+{
+ for(QPair<QString, QPair<u4, u4>>& pr : job_names_)
+ {
+  if(pr.first == jn)
+  {
+   if(pr.second.first == 0)
+     pr.second.first = file_id;
+   ++pr.second.second;
+   continue;
+  }
+ }
+}
+
+
+void NGML_SDI_Page::check_add_job_name(QString jn)
+{
+ if(job_names_.isEmpty())
+   add_job_name(jn);
+ else if(job_names_.last().first != jn)
+   add_job_name(jn);
+}
+
+
+void NGML_SDI_Page::add_job_name(QString jn, u4 file_id)
+{
+ job_names_.push_back({jn, {file_id, 0}});
+}
+
+
+QString NGML_SDI_Page::last_job_name(u4& fid)
+{
+ if(job_names_.isEmpty())
+   return {};
+ fid = job_names_.last().second.first;
+ return job_names_.last().first;
+}
+
+
 void NGML_SDI_Page::write(QString& contents)
 {
  QTextStream qts(&contents);
+
+ for(const QPair<QString, QPair<u4, u4>>& pr : job_names_)
+ {
+  qts << "= " << pr.first << ' ' << pr.second.first << ' ' << pr.second.second << '\n';
+ }
 
  int c = 0;
  for(const NGML_SDI_Page_Element& el : page_elements_)
@@ -46,7 +91,7 @@ void NGML_SDI_Page::write(QString& contents)
   ++c;
   NGML_SDI_Mark_Base& mark = *el.mark();
   
-  qts << c << ' ' << mark.id() << ' '
+  qts << mark.file_id() << ' ' << mark.id() << ' '
     << mark.get_kind_string() << ' ' << mark.start_index() << ' ' 
     << mark.end_index() << ' ' << mark.start_x() 
     << ' ' << mark.start_y() << ' ' << mark.end_x() 

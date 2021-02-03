@@ -33,10 +33,14 @@ class NGML_SDI_Mark_Base
 {
  u4 id_;
 
+// u1 job_id_;
+
  u4 start_index_;
  u4 end_index_;
 
  QString kind_str_;
+
+ u4 file_id_;
 
  u4 start_x_;
  u4 start_y_;
@@ -48,6 +52,9 @@ public:
  NGML_SDI_Mark_Base();
 
  ACCESSORS(u4 ,id)
+ ACCESSORS(u4 ,file_id)
+
+// ACCESSORS(u1 ,job_id)
 
  ACCESSORS(u4 ,start_index)
  ACCESSORS(u4 ,end_index)

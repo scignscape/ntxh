@@ -13,6 +13,7 @@
 #include "glyphdeck/gh-glyphdeck-standard-8bit.h"
 
 #include <QTextStream>
+#include <QFile>
 
 GH_Block_Standard_8bit::GH_Block_Standard_8bit()
  :  current_index_(1), glyphdeck_(new GH_Glyphdeck_Standard_8bit)
@@ -22,6 +23,23 @@ GH_Block_Standard_8bit::GH_Block_Standard_8bit()
  chars_.push_back(glyphdeck_->get_default_void_separator());
  chars_.push_back(glyphdeck_->get_default_void_separator());
 }
+
+
+void GH_Block_Standard_8bit::write_to_file(QString path)
+{
+ QFile outfile(path);
+ if (!outfile.open(QIODevice::WriteOnly))
+   return;
+
+ QString multichar;
+ for(u1 ch : chars_)
+ {
+  char c = glyphdeck_->get_encoding(ch, multichar);
+  //QString code = glyphdeck_->
+ }
+
+}
+
 
 n8 GH_Block_Standard_8bit::get_glyph_point_at_index(u4 i)
 {

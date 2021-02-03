@@ -818,26 +818,31 @@ public:
 // XpdfViewer
 //------------------------------------------------------------------------
 
-XpdfViewer::XpdfViewer(XpdfApp *appA, GBool fullScreen) {
-  setAttribute(Qt::WA_DeleteOnClose, true);
-  app = appA;
-  createWindow();
-  if (fullScreen) {
-    move(0, 0);
-    enterFullScreenMode();
-  }
+XpdfViewer::XpdfViewer(XpdfApp *appA, GBool fullScreen)
+{
+ setAttribute(Qt::WA_DeleteOnClose, true);
+ app = appA;
+ ngml_loader_ = new NGML_Loader;
+ createWindow();
+ if (fullScreen)
+ {
+   move(0, 0);
+   enterFullScreenMode();
+ }
 }
 
 XpdfViewer::XpdfViewer(Xpdf_Component* xpdfc, GBool fullScreen)
 {
  app = nullptr;
-  setAttribute(Qt::WA_DeleteOnClose, true);
-  xpdfc_ = xpdfc;
-  createWindow();
-  if (fullScreen) {
-    move(0, 0);
-    enterFullScreenMode();
-  }
+ setAttribute(Qt::WA_DeleteOnClose, true);
+ xpdfc_ = xpdfc;
+ ngml_loader_ = &xpdfc->ngml_loader();
+ createWindow();
+ if (fullScreen)
+ {
+   move(0, 0);
+   enterFullScreenMode();
+ }
 }
 
 
@@ -928,6 +933,9 @@ GBool XpdfViewer::open(QString fileName, int page, QString destName,
   // after opening a document, focus goes to the XpdfWidget
   currentTab->pdf->setFocus(Qt::OtherFocusReason);
   lastFileOpened = fileName;
+
+  ngml_loader_->load_pages(currentTab->pdf);
+
   return gTrue;
 }
 
@@ -1473,7 +1481,10 @@ void XpdfViewer::cmdOpen(GString *args[], int nArgs,
     startDir = QDir(lastFileOpened);
     startDir.cdUp();
   } else {
-    startDir = QDir(".");
+   // // set startDir to project root ...
+   // startDir = QDir(".");
+   // // actually, for now set startDir for document for testing ...
+   startDir = QDir(AR_ROOT_DIR "/data/dataset/ctg");
   }
   fileName = QFileDialog::getOpenFileName(this, "Open PDF File",
        startDir.canonicalPath(),
@@ -1482,6 +1493,8 @@ void XpdfViewer::cmdOpen(GString *args[], int nArgs,
     return;
   }
   open(fileName, 1, "", "");
+
+
 }
 
 void XpdfViewer::cmdOpenErrorWindow(GString *args[], int nArgs,
@@ -3126,20 +3139,24 @@ void XpdfViewer::addTab() {
    int pg;
    double x, y;
 
-   int xx, yy;
-   pdf->convertWindowToDevCoords(p.x(), p.y(),
-          &pg, &xx, &yy);
-
-   qDebug() << "Dev: " << xx << ", " << yy 
-     << "(" << (xx * 65536) << ", " << (yy * 65536) << ")";
-   
-
+//   int xx, yy;
+//   pdf->convertWindowToDevCoords(p.x(), p.y(),
+//          &pg, &xx, &yy);
+//   qDebug() << "Dev: " << xx << ", " << yy
+//     << "(" << (xx * 65536) << ", " << (yy * 65536) << ")";
    pdf->convertWindowToPDFCoords(p.x(), p.y(),
           &pg, &x, &y);
+//   qDebug() << "Coords: " << x << ", " << y
+//     << "(" << (x * 65536) << ", " << (y * 65536) << ")";
 
-   qDebug() << "Coords: " << x << ", " << y 
-     << "(" << (x * 65536) << ", " << (y * 65536) << ")";
+   int start_index = 0;
+   int end_index = 0;
+   QString landmark_file;
+   int landmark_id = 0;
+   QString landmark = ngml_loader_->get_landmark_string(pg, x, y, landmark_id, start_index, end_index, landmark_file);
 
+   //QString msg = QString("%1:%2-%3").arg(landmark).arg(start_index).arg(end_index);
+   //QMessageBox::information(this, "Landmark", msg);
 
    XpdfAnnotHandle xh = pdf->onAnnot(pg, x, y);
 
@@ -3195,6 +3212,8 @@ void XpdfViewer::addTab() {
     });
    }
 
+   // // old (for a demo)
+#ifdef HIDE
    QString chem_name;
    if(pg == 11)
      chem_name = "thionyl chloride";
@@ -3211,6 +3230,7 @@ void XpdfViewer::addTab() {
      []
    {
    });
+#endif HIDE
 
 
    if(figname.startsWith("lst"))
@@ -3220,6 +3240,26 @@ void XpdfViewer::addTab() {
     {
      this->app->run_fig_msg("run-fig", fign);
     });
+   }
+
+   if(!landmark.isEmpty())
+   {
+    QString msg = QString("View landmark (%1) info").arg(landmark);
+    qm->addAction(msg, [this, landmark, landmark_file, landmark_id, start_index, end_index]
+    {
+     QString msg = QString("%1:%2-%3 (id = %4, file = %5)").arg(landmark).arg(start_index)
+       .arg(end_index).arg(landmark_id).arg(landmark_file);
+     QMessageBox::information(this, "Landmark", msg);
+     //QApplication::clipboard()->setText(qs);
+    });
+
+    if(landmark == "sentence")
+    {
+     qm->addAction("Copy sentence", [this, start_index, end_index]
+     {
+
+     });
+    }
    }
 
 #ifdef USING_PDF_PULL

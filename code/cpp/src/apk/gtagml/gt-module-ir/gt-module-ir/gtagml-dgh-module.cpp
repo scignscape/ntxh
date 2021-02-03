@@ -80,6 +80,8 @@ void GTagML_DGH_Module::process_gtagml_file(QString path,
  gob->init_standard_8bit();
  gob->export_blocks();
 
+ gob->export_main_block();
+
  gpi->add_blocks(path, gob);
 
  GTagML_Output_SDI_Infoset* gsi = new GTagML_Output_SDI_Infoset(*gdoc, blw);

@@ -16,6 +16,10 @@
 #include <QColor>
 #include "gtypes.h"
 
+#include "ngml/ngml-loader.h"
+
+#include "accessors.h"
+
 class GList;
 class XpdfViewer;
 
@@ -51,11 +55,15 @@ public:
   const QColor &getFullScreenMatteColor() { return fsMatteColor; }
   GBool getReverseVideo() { return reverseVideo; }
 
-  QString state() { return state_; }
+
+  ACCESSORS__RGET(NGML_Loader ,ngml_loader)
+  ACCESSORS(QString ,state)
 
 private:
 
   QString state_;
+
+  NGML_Loader ngml_loader_;
 
 
   int errorEventType;

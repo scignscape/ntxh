@@ -16,7 +16,7 @@
 NGML_SDI_Mark_Base::NGML_SDI_Mark_Base()
   :  start_index_(0), end_index_(0),
      start_x_(0), start_y_(0),
-     end_x_(0), end_y_(0)
+     end_x_(0), end_y_(0), file_id_(0)
 {
 }
 

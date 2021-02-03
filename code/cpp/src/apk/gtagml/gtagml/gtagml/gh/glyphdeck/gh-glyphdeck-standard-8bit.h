@@ -46,6 +46,7 @@ public:
  QChar get_qchar_representation(u1 gp, QString& alternate);
  QString get_qstring_representation(u1 gp);
 
+ char get_encoding(u1 gp, QString& alternate);
 
 
 };

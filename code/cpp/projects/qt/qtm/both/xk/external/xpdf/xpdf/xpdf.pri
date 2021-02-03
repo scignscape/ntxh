@@ -213,7 +213,15 @@ HEADERS += \
   $$SRC_DIR/qconsole.h \
   $$SRC_DIR/qimplconsole.h \
   $$SRC_DIR/qconsole-dialog.h \
-  
+
+
+HEADERS += \
+  $$SRC_DIR/ngml/ngml-loader.h \
+
+
+SOURCES += \
+  $$SRC_DIR/ngml/ngml-loader.cpp \
+
 
 SOURCES += \
   $$SRC_DIR/qconsole.cpp \

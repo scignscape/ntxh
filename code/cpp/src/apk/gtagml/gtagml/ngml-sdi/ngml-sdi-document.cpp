@@ -442,6 +442,8 @@ void NGML_SDI_Document::merge_dgh()
   {
    nsp->set_start_index(it.value().first);
    nsp->set_end_index(it.value().second);
+   nsp->set_file_id(dsp->file_id());
+   nsp->page_object()->check_add_file_id(nsp->current_jobname(), dsp->file_id());
   }
 
   QVector<DGH_SDI_Sentence*> ss = sentences_.value(dsp);
@@ -468,6 +470,22 @@ void NGML_SDI_Document::merge_dgh()
 // {
 //  qDebug() << dsp->get_summary();
 // }
+
+  // // check for pages with no new paragraphs therefore no job name ...
+ QString held_last_job_name = "?";
+ u4 last_file_id = 0;
+ for(NGML_SDI_Page* page_object : pages_)
+ {
+  u4 fid = 0;
+  QString jn = page_object->last_job_name(fid);
+  if(jn.isEmpty())
+  {
+   page_object->add_job_name(held_last_job_name, last_file_id);
+   continue;
+  }
+  held_last_job_name = jn;
+  last_file_id = fid;
+ }
 }
 
 
@@ -514,7 +532,9 @@ void NGML_SDI_Document::parse_paragraph_start_hypernode(NTXH_Graph& g, hypernode
   }
 
   NGML_SDI_Page* page = this->get_page(pg);
+  page->check_add_job_name(cj);
   page->add_page_element(nsp);
+  nsp->set_page_object(page);
 
  });
  // // qDebug() << "parse_paragraph_start_hypernode()";
@@ -523,6 +543,7 @@ void NGML_SDI_Document::parse_paragraph_start_hypernode(NTXH_Graph& g, hypernode
 void NGML_SDI_Document::parse_sentence_start_hypernode(NTXH_Graph& g, NTXH_Graph::hypernode_type* hn)
 {
  NGML_SDI_Sentence* nss = new NGML_SDI_Sentence();
+ nss->set_file_id(current_parse_paragraph_->file_id());
  g.get_sfsr(hn, {{2,10}}, [this, nss](QVector<QPair<QString, void*>>& prs)
  {
   // :n:1 :i:2 :r:3 :c:4 :o:5 :p:7 :f:8 :x:9 :y:10 :b:6 ;

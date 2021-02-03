@@ -72,6 +72,9 @@ public:
 
  QString get_latex_supplement(u4 index);
 
+ void write_to_file(QString path) Q_DECL_OVERRIDE;
+
+
 };
 
 

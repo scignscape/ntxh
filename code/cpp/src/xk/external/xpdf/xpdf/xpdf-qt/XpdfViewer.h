@@ -113,6 +113,7 @@ private:
 //------------------------------------------------------------------------
 
 class Xpdf_Component;
+class NGML_Loader;
 
 class Mosaic_Menubar;
 
@@ -375,6 +376,7 @@ private:
   Xpdf_Component* xpdfc_;
   int find_;
   int last_hold_page_;
+  NGML_Loader* ngml_loader_;
 
   // menu
   Mosaic_Menubar* mainMenu;

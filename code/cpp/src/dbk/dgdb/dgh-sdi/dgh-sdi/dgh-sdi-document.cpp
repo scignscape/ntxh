@@ -86,6 +86,8 @@ void DGH_SDI_Document::parse_paragraph_hypernode(NTXH_Graph& g, NTXH_Graph::hype
   dsp->set_order_in_page(prs[9].first.toInt());
   dsp->set_in_file_id(prs[10].first.toInt());
   dsp->set_file_id(prs[11].first.toInt());
+
+  // // does this need to be set later?  nsp->set_file_id(dsp->file_id());
  });
  // // qDebug() << "parse_paragraph_start_hypernode()";
 

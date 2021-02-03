@@ -28,16 +28,22 @@
 
 //class hypernode_type;
 
+class NGML_SDI_Page;
+
 
 class NGML_SDI_Paragraph : public NGML_SDI_Mark_Base
 {
  QString current_jobname_;
+
+ NGML_SDI_Page* page_object_;
 
 public:
  
  NGML_SDI_Paragraph();
 
  ACCESSORS(QString ,current_jobname)
+
+ ACCESSORS(NGML_SDI_Page* ,page_object)
 
  QChar get_command_cue()
  {

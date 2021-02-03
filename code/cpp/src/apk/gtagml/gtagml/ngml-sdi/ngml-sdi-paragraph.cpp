@@ -14,7 +14,7 @@
 //typedef NTXH_Graph::hypernode_type hypernode_type;
 
 NGML_SDI_Paragraph::NGML_SDI_Paragraph()
-  :  NGML_SDI_Mark_Base()
+  :  NGML_SDI_Mark_Base(), page_object_(nullptr)
 {
 }
 

@@ -837,6 +837,16 @@ MainSwitch:
 
 }
 
+char GH_Glyphdeck_Standard_8bit::get_encoding(u1 gp, QString& alternate)
+{
+ if(gp < 64)
+   return get_basic_char(gp);
+
+ alternate = "<?>";
+ return '\0';
+}
+
+
 u1 GH_Glyphdeck_Standard_8bit::get_basic_char(u1 gp)
 {
  gp &= 63;

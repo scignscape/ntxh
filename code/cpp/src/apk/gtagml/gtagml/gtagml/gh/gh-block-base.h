@@ -224,6 +224,8 @@ public:
  virtual QChar get_qchar_representation(u4 index, QString& alternate) = 0;
  virtual QString get_qstring_representation(u4 index) = 0;
 
+ virtual void write_to_file(QString path) = 0;
+
 };
 
 

@@ -324,7 +324,23 @@ QString GTagML_Output_Blocks::export_marks(QString path)
  return {};
 }
 
+void GTagML_Output_Blocks::export_main_block(QString path)
+{
+ if(path.startsWith(".."))
+ {
+  path.remove(0, 1);
+  path.prepend(document_.local_or_info_path());
+ }
+ else if(path.startsWith('.'))
+ {
+  QFileInfo qfi(document_.local_or_info_path());
+  path.prepend(qfi.absolutePath() + '/' + qfi.completeBaseName());
+ }
 
+ GH_Block_Base* gbb = block_writer_->current_main_text_block();
+
+ gbb->write_to_file(path);
+}
 
 void GTagML_Output_Blocks::export_blocks(QString path)
 {
