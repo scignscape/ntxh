@@ -80,8 +80,6 @@ void GTagML_DGH_Module::process_gtagml_file(QString path,
  gob->init_standard_8bit();
  gob->export_blocks();
 
- gob->export_main_block();
-
  gpi->add_blocks(path, gob);
 
  GTagML_Output_SDI_Infoset* gsi = new GTagML_Output_SDI_Infoset(*gdoc, blw);
@@ -133,6 +131,10 @@ void GTagML_DGH_Module::process_gtagml_file(QString path,
  gol->export_latex(path + ".tex");
 
  QString cp = copy_file_to_folder(path + ".tex", ffolder);
+
+ // // By now the sentence swaps are all done ...
+ gob->export_main_block();
+
 
  qDebug() << "Copied " << path + ".tex" << " to " << cp;
 

@@ -184,7 +184,6 @@ void NGML_SDI_Document::parse_element_start_hypernode(NTXH_Graph& g, hypernode_t
 //    nsel->set_start_index(prelatex_[ccue].value(id - 1));
 
   nsel->set_id(id);
-  this->open_elements_[{"NGML_SDI_Element", id}] = nsel;
 
   nsel->set_kind(prs[4].first);
   
@@ -216,10 +215,11 @@ void NGML_SDI_Document::parse_element_start_hypernode(NTXH_Graph& g, hypernode_t
  
   u4 pg = prs[6].first.toInt();
 
-  qDebug() << "on page ..." << pg;
+//  qDebug() << "on page ..." << pg;
 
-  NGML_SDI_Page* page = this->get_page(pg);
-  page->add_page_element(nsel);   
+  this->open_elements_[{"NGML_SDI_Element", id}] = {nsel, pg};
+
+
  });
 
 // qDebug() << "parse_element_start_hypernode()";
@@ -232,11 +232,15 @@ void NGML_SDI_Document::parse_element_end_hypernode(NTXH_Graph& g, hypernode_typ
   //:i:2 :o:3 :p:4 :x:5 :y:6 ;
   u4 id = prs[0].first.toInt();
 
-  void* pv = this->open_elements_.value({"NGML_SDI_Element", id});
+  void* pv = this->open_elements_.value({"NGML_SDI_Element", id}).first;
+
+  u4 pg = this->open_elements_.value({"NGML_SDI_Element", id}).second;
+
   if(!pv)
     return;
+
   NGML_SDI_Element* nsel = static_cast<NGML_SDI_Element*>(pv);
- 
+
 //  QChar ccue = nsel->get_command_end_cue();
 //  nsel->set_end_index(prelatex_[ccue].value(id - 1));
 
@@ -253,6 +257,10 @@ void NGML_SDI_Document::parse_element_end_hypernode(NTXH_Graph& g, hypernode_typ
   u4 end_y = (int) ey.toDouble();
   nsel->set_end_x(end_x);
   nsel->set_end_y(end_y);
+
+  NGML_SDI_Page* page = this->get_page(pg);
+  page->add_page_element(nsel);
+
  });
 // qDebug() << "parse_element_end_hypernode()";
 }
@@ -500,12 +508,13 @@ void NGML_SDI_Document::parse_paragraph_start_hypernode(NTXH_Graph& g, hypernode
   // :n:1 :i:2 :o:3 :p:5 :j:6 :x:7 :y:8 :b:4 ;
   u4 id = prs[0].first.toInt();
   nsp->set_id(id);
-  this->open_elements_[{"NGML_SDI_Paragraph", id}] = nsp;
 
   generic_start(*this, *nsp, prs, 6, 2);
 
   u4 rank_in_pg = prs[1].first.toInt(); // prs[3] or [4] ?
   u4 pg = prs[3].first.toInt(); // prs[3] or [4] ?
+
+  this->open_elements_[{"NGML_SDI_Paragraph", id}] = {nsp, pg};
 
   QString cj = prs[4].first; // prs[3] or [4] ?
 
@@ -533,7 +542,7 @@ void NGML_SDI_Document::parse_paragraph_start_hypernode(NTXH_Graph& g, hypernode
 
   NGML_SDI_Page* page = this->get_page(pg);
   page->check_add_job_name(cj);
-  page->add_page_element(nsp);
+//?  page->add_page_element(nsp);
   nsp->set_page_object(page);
 
  });
@@ -549,7 +558,6 @@ void NGML_SDI_Document::parse_sentence_start_hypernode(NTXH_Graph& g, NTXH_Graph
   // :n:1 :i:2 :r:3 :c:4 :o:5 :p:7 :f:8 :x:9 :y:10 :b:6 ;
   u4 id = prs[0].first.toInt();
   nss->set_id(id);
-  this->open_elements_[{"NGML_SDI_Sentence", id}] = nss;
 
   generic_start(*this, *nss, prs, 7, 4);
 
@@ -559,12 +567,14 @@ void NGML_SDI_Document::parse_sentence_start_hypernode(NTXH_Graph& g, NTXH_Graph
 
   u4 pg = prs[5].first.toInt();
 
+  this->open_elements_[{"NGML_SDI_Sentence", id}] = {nss, pg};
+
   DGH_SDI_Sentence* dss = new DGH_SDI_Sentence(nss, in_f_id, f_id, pg);
 
   sentences_[current_parse_paragraph_].push_back(dss);
 
-  NGML_SDI_Page* page = this->get_page(pg);
-  page->add_page_element(nss);   
+//  NGML_SDI_Page* page = this->get_page(pg);
+//  page->add_page_element(nss);
  });
 }
 
@@ -598,12 +608,19 @@ void NGML_SDI_Document::parse_sentence_end_hypernode(NTXH_Graph& g, NTXH_Graph::
   // :n:1 :i:2 :o:3 :p:4 :x:5 :y:6 ;
   u4 id = prs[0].first.toInt();
 
-  void* pv = this->open_elements_.value({"NGML_SDI_Sentence", id});
+  void* pv = this->open_elements_.value({"NGML_SDI_Sentence", id}).first;
   if(!pv)
     return;
   NGML_SDI_Sentence* nss = static_cast<NGML_SDI_Sentence*>(pv);
 
   generic_end(*this, *nss, prs, 3);//  QChar ccue = nsel->get_command_end_cue();
+
+  u4 pg = this->open_elements_.value({"NGML_SDI_Sentence", id}).second;
+  NGML_SDI_Page* page = this->get_page(pg);
+  page->add_page_element(nss);
+
+  // // clean up open elements?
+
  });
 }
 
@@ -615,12 +632,18 @@ void NGML_SDI_Document::parse_paragraph_end_hypernode(NTXH_Graph& g, hypernode_t
   //:i:2 :o:3 :p:4 :x:5 :y:6 ;
   u4 id = prs[0].first.toInt();
 
-  void* pv = this->open_elements_.value({"NGML_SDI_Paragraph", id});
+  void* pv = this->open_elements_.value({"NGML_SDI_Paragraph", id}).first;
   if(!pv)
     return;
   NGML_SDI_Paragraph* nsp = static_cast<NGML_SDI_Paragraph*>(pv);
 
   generic_end(*this, *nsp, prs, 3);//  QChar ccue = nsel->get_command_end_cue();
+
+  u4 pg = this->open_elements_.value({"NGML_SDI_Paragraph", id}).second;
+  NGML_SDI_Page* page = this->get_page(pg);
+  page->add_page_element(nsp);
+
+  // // clean up open elements?
 
  });
  // // qDebug() << "parse_paragraph_end_hypernode()";

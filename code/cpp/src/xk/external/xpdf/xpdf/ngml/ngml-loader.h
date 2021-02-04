@@ -28,6 +28,7 @@ class NGML_Loader
   int file_id;
   QString kind;
   int id;
+  int rank_in_page;
   int pdf_end_x;
   int pdf_end_y;
   int start_index;
@@ -43,7 +44,8 @@ class NGML_Loader
  QVector<QMap<QPair<int, int>, element>> elements_;
 
  QMap<int, file_job_info> file_job_info_;
-  // QPair<QString, QPair<int, int>>>> elements_;
+  //
+ QMap<QString, QVector<u1>> blocks_;
 
  // QMap<QPair<int, int>, QString> welements_;
 
@@ -55,6 +57,10 @@ public:
 
  QString get_landmark_string(int page, int x, int y, int& id,
    int& start_index, int& end_index, QString& file);
+
+ QString read_sentence(QString pdf_file, QString landmark_file, u4 start_index, u4 end_index);
+
+ void load_htxn_block(QString folder, QString file);
 
 
 };

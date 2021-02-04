@@ -34,7 +34,9 @@ class NGML_SDI_Page
 {
  u4 number_;
 
- std::set<NGML_SDI_Page_Element> page_elements_;
+ std::set<NGML_SDI_Page_Element> page_elements_; //set_;
+
+// QList<NGML_SDI_Page_Element> page_elements_;
 
  QVector<QPair<QString, QPair<u4, u4>>> job_names_;
 

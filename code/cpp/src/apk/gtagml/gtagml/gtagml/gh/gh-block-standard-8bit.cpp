@@ -15,6 +15,7 @@
 #include <QTextStream>
 #include <QFile>
 
+
 GH_Block_Standard_8bit::GH_Block_Standard_8bit()
  :  current_index_(1), glyphdeck_(new GH_Glyphdeck_Standard_8bit)
     //parse_mode_(new GH_Block_Parse_Mode(247))
@@ -31,11 +32,19 @@ void GH_Block_Standard_8bit::write_to_file(QString path)
  if (!outfile.open(QIODevice::WriteOnly))
    return;
 
+ QTextStream qts(&outfile);
+
  QString multichar;
  for(u1 ch : chars_)
  {
-  char c = glyphdeck_->get_encoding(ch, multichar);
-  //QString code = glyphdeck_->
+  char c = glyphdeck_->get_simple_encoding(ch, multichar);
+  if(c)
+    qts << QChar::fromLatin1(c);
+  else
+  {
+   qts << multichar;
+   multichar.clear();
+  }
  }
 
 }

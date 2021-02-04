@@ -44,7 +44,7 @@ class NGML_SDI_Document
 
  QString pages_folder_;
 
- QMap<QPair<QString, u4>, void*> open_elements_;
+ QMap<QPair<QString, u4>, QPair<void*, u4>> open_elements_;
 
  QString* unzip_folder_;
 

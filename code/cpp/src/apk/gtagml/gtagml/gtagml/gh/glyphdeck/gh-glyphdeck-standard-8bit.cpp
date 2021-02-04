@@ -837,12 +837,21 @@ MainSwitch:
 
 }
 
-char GH_Glyphdeck_Standard_8bit::get_encoding(u1 gp, QString& alternate)
+char GH_Glyphdeck_Standard_8bit::get_simple_encoding(u1 gp, QString& alternate)
 {
  if(gp < 64)
    return get_basic_char(gp);
 
- alternate = "<?>";
+ if(gp >= 200)
+   alternate = QString("`%1").arg(gp);
+ else
+   alternate = QString("|%1").arg(gp);
+
+// switch(gp)
+// {
+// }
+// alternate = "<?>";
+
  return '\0';
 }
 

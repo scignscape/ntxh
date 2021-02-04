@@ -58,6 +58,19 @@ bool operator <(const NGML_SDI_Page_Element& lhs,
  u4 lsy = lm.start_y();
  u4 rsy = rm.start_y();
 
+ u4 lsx = lm.start_x();
+ u4 rsx = rm.start_x();
+
+ QString ls;
+ QString rs;
+
+ if( (lsx == rsx) && (lsy == rsy) )
+ {
+  // can happen with e.g. paragraph and first sentence
+  ls = lhs.mark()->get_kind_string();
+  rs = rhs.mark()->get_kind_string();
+ }
+
  while(offset > 0)
  {
   if(lsy < rsy - offset)
@@ -65,8 +78,6 @@ bool operator <(const NGML_SDI_Page_Element& lhs,
   if(rsy < lsy - offset)
     return false;
     
-  u4 lsx = lm.start_x();
-  u4 rsx = rm.start_x();
 
   if(lsx < rsx - offset)
     return true;
@@ -80,6 +91,9 @@ bool operator <(const NGML_SDI_Page_Element& lhs,
    --offset;
    continue;
   }
+
+  // // this is getting called before the ends are set.
+   //   OK, or should the set be reordered after the ends are set?
 
   // //  elements whose *ends* are *greater* are placed
    //    *before* on the premise that they are likely
@@ -100,8 +114,16 @@ bool operator <(const NGML_SDI_Page_Element& lhs,
   if(rex < lex)
     return true;
 
-  return false;
+  --offset;
  }
- return false;
+
+ if(lhs.mark()->get_kind_string() == rhs.mark()->get_kind_string() )
+   return lhs.mark()->id() < rhs.mark()->id();
+
+ if(lhs.mark()->get_kind_string() == "\\+" )
+   return true;
+
+ return lhs.mark()->get_kind_string() < rhs.mark()->get_kind_string();
+ //return false;
 }
 

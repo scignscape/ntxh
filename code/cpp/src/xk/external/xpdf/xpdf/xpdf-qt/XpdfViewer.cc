@@ -3253,9 +3253,17 @@ void XpdfViewer::addTab() {
      //QApplication::clipboard()->setText(qs);
     });
 
-    if(landmark == "sentence")
+    if(landmark == "Sentence")
     {
-     qm->addAction("Copy sentence", [this, start_index, end_index]
+
+     qm->addAction("Read full sentence", [this, landmark_file, start_index, end_index]
+     {
+      QString pdf_file = AR_ROOT_DIR "/data/dataset/ctg/main.pdf";
+      QString sentence = ngml_loader_->read_sentence(pdf_file, landmark_file, start_index, end_index);
+      QMessageBox::information(this, "Sentence (decoded)", sentence);
+     });
+
+     qm->addAction("Copy sentence", [this, landmark_file, start_index, end_index]
      {
 
      });

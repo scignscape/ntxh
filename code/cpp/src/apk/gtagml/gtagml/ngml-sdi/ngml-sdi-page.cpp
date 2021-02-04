@@ -24,6 +24,7 @@ void NGML_SDI_Page::add_page_element(NGML_SDI_Mark_Base* mark)
 {
  NGML_SDI_Page_Element npe(mark);
  page_elements_.insert(npe);
+ //page_elements_.push_back(npe);
 }
 
 void NGML_SDI_Page::read_page_element_from_strings(QStringList& strings)
@@ -33,7 +34,8 @@ void NGML_SDI_Page::read_page_element_from_strings(QStringList& strings)
  NGML_SDI_Page_Element el = NGML_SDI_Page_Element(mark);
  el.read_from_strings(strings);
  page_elements_.insert(el);
- qDebug() << "SX: " << el.mark()->start_x();  
+ //page_elements_.push_back(el);
+ //qDebug() << "SX: " << el.mark()->start_x();
 }
 
 
