@@ -31,6 +31,8 @@ public:
  ACCESSORS(GTagML_Whitespace ,ws)
  ACCESSORS(GTagML_Whitespace_Holder* ,inherited)
 
+ QString get_block_whitespace();
+
  void attach_whitespace(QString whitespace);
 
  void inherit_whitespace(GTagML_Whitespace_Holder* wsh);

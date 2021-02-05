@@ -842,7 +842,7 @@ char GH_Glyphdeck_Standard_8bit::get_simple_encoding(u1 gp, QString& alternate)
  if(gp < 64)
    return get_basic_char(gp);
 
- if(gp >= 200)
+ if(gp >= 100)
    alternate = QString("`%1").arg(gp);
  else
    alternate = QString("|%1").arg(gp);
@@ -927,6 +927,15 @@ u1 GH_Glyphdeck_Standard_8bit::get_basic_char(u1 gp)
  case 63: return '-';
  default: return '\0'; 
  }
+}
+
+
+u1 GH_Glyphdeck_Standard_8bit::get_boundary_whitespace_code(QString bws)
+{
+ if(bws == " ")
+   return 117;
+
+ return get_default_null();
 }
 
 
@@ -1119,6 +1128,8 @@ void get_latex_64_to_117(u1 gp, QString& result)
    "^", // 115 // quasi-math
 
    ":", // 116 // se
+
+   "", // 117 // block boundary whitespace
 
 //   "[", // 116 // surround
 //   "]", // 117 // surround

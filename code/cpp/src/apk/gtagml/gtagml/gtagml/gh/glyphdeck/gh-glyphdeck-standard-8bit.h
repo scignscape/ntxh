@@ -39,6 +39,8 @@ public:
  u1 get_default_void_separator();
  u1 get_default_null();
 
+ u1 get_boundary_whitespace_code(QString bws);
+
  QString get_latex_representation(u1 gp);
  QString get_latex_supplement(u1 gp, GH_Block_Base::Divert_Mode dm);
 

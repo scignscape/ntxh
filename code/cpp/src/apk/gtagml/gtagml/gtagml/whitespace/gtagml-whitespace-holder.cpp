@@ -17,6 +17,15 @@ GTagML_Whitespace_Holder::GTagML_Whitespace_Holder()
 
 }
 
+QString GTagML_Whitespace_Holder::get_block_whitespace()
+{
+ // //  basically just a single space character if one should go into a block ...
+ if(ws_.get_length() == 0)
+   return {};
+ return " ";
+}
+
+
 void GTagML_Whitespace_Holder::get_whitespace_counts_as_inherited(u1* result)
 {
  if(inherited_)

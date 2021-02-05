@@ -10,6 +10,8 @@
 
 #include "gh-block-standard-8bit.h"
 
+#define NO_BLOCK_WHITE_SPACE {}
+
 GH_Block_Writer::GH_Block_Writer()
  :  current_main_text_block_(nullptr),
     current_tag_command_name_block_(nullptr),
@@ -21,13 +23,13 @@ GH_Block_Writer::GH_Block_Writer()
 
 GH_Block_Base* GH_Block_Writer::write_mandatory_argument(QString text, QPair<u4, u4>& result)
 {
- current_mandatory_argument_block_->write(text, result);
+ current_mandatory_argument_block_->write(text, NO_BLOCK_WHITE_SPACE, result);
  return current_mandatory_argument_block_;
 }
 
 GH_Block_Base* GH_Block_Writer::write_optional_argument(QString text, QPair<u4, u4>& result)
 {
- current_optional_argument_block_->write(text, result);
+ current_optional_argument_block_->write(text, NO_BLOCK_WHITE_SPACE, result);
  return current_optional_argument_block_;
 }
 
@@ -37,7 +39,7 @@ GH_Block_Base* GH_Block_Writer::write_tag_command_name(QString name, QPair<u4, u
  current_tag_command_name_block_->check_cached(name, result);
  if(result == QPair<u4, u4>{0, 0})
  {
-  current_tag_command_name_block_->write(name, result);
+  current_tag_command_name_block_->write(name, NO_BLOCK_WHITE_SPACE, result);
  }
  return current_tag_command_name_block_;
 }
@@ -128,14 +130,14 @@ u4 GH_Block_Writer::pop_main()
 
 
 GH_Block_Base* GH_Block_Writer::write_tile(QString text,
-  QPair<u4, u4>& result, QVector<u4>* special_flag_marks)
+  QString bws, QPair<u4, u4>& result, QVector<u4>* special_flag_marks)
 {
  if(held_blocks_.isEmpty())
  {
-  current_main_text_block_->write(text, result, special_flag_marks);
+  current_main_text_block_->write(text, bws, result, special_flag_marks);
   return current_main_text_block_;
  }
- held_blocks_.top()->write(text, result, special_flag_marks);
+ held_blocks_.top()->write(text, bws, result, special_flag_marks);
  return held_blocks_.top();
 }
 

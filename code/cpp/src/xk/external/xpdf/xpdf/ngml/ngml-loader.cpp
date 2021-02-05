@@ -198,6 +198,8 @@ QString NGML_Loader::read_sentence(QString pdf_file, QString landmark_file, u4 s
 
  for(u4 uu = start_index; uu <= end_index; ++uu)
  {
+  if(uu == 500)
+    qDebug() << uu;
   qts << decode(chars[uu]);
  }
 

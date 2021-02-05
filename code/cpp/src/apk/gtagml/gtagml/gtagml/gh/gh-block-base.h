@@ -192,7 +192,7 @@ public:
 
 
  virtual void check_cached(QString key, QPair<u4, u4>& result);
- virtual void write(QString text,
+ virtual void write(QString text, QString block_ws,
    QPair<u4, u4>& result, QVector<u4>* special_flag_marks = nullptr) = 0;
 
  virtual void flag_as_sentence_end(u4 ii1, u4 ii2, QPair<QPair<n8, n8>, QPair<n8, n8>>& r) = 0;

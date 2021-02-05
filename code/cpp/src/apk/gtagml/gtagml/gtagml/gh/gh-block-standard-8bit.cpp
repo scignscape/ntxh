@@ -187,11 +187,11 @@ GH_Block_Base::SDI_Interpretation_Codes GH_Block_Standard_8bit::get_sdi_interpre
  return glyphdeck_->get_sdi_interpretation_code((u1) u);
 }
 
-void GH_Block_Standard_8bit::write(QString text,
+void GH_Block_Standard_8bit::write(QString text, QString block_ws,
   QPair<u4, u4>& result, QVector<u4>* special_flag_marks)
 {
  QByteArray qba = text.toLatin1();
- write(qba, result, special_flag_marks);
+ write(qba, block_ws, result, special_flag_marks);
 }
 
 QPair<u4, u4> GH_Block_Standard_8bit::get_effective_start_and_end_indices()
@@ -229,11 +229,9 @@ QString GH_Block_Standard_8bit::get_latex_out(const QPair<u4, u4>& indices)
  return result;
 }
 
-void GH_Block_Standard_8bit::write(QByteArray& text,
+void GH_Block_Standard_8bit::write(QByteArray& text, QString block_ws,
   QPair<u4, u4>& result, QVector<u4>* special_flag_marks)
 {
-
-
  if(text.isEmpty())
  {
   result.first = current_index_;
@@ -331,6 +329,17 @@ skip_continue:
   u1 uu = glyphdeck_->encode_latin1(u);
   chars_.push_back(uu);
  }
+
+ if(!block_ws.isEmpty())
+ {
+  u1 uu = glyphdeck_->get_boundary_whitespace_code(block_ws);
+  if(uu != glyphdeck_->get_default_null())
+  {
+   ++current_index_;
+   chars_.push_back(uu);
+  }
+ }
+
  result.second = current_index_;
 }
 

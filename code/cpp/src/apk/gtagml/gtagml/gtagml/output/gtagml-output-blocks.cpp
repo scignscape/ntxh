@@ -581,7 +581,9 @@ void GTagML_Output_Blocks::generate_tile(const GTagML_Output_Bundle& b, caon_ptr
  QString rt = tile->raw_text();
  QPair<u4, u4> pr;
 
- GH_Block_Base* bl =  block_writer_->write_tile(rt, pr, &special_flag_marks_);//  write
+ QString bws = tile->get_block_whitespace();
+
+ GH_Block_Base* bl =  block_writer_->write_tile(rt, bws, pr, &special_flag_marks_);//  write
  GH_Prenode* ghp = tile->init_prenode(bl, pr.first, pr.second);
 
  u4 layer_code = bl->layer_code();
