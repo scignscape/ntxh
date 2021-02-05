@@ -59,6 +59,7 @@ public:
  u4 push_main();
  u4 pop_main();
 
+ void write_boundary_whitespace(QString bws);
 
  GH_Block_Base* write_tag_command_name(QString name, QPair<u4, u4>& result);
  GH_Block_Base* write_tile(QString name, QString bws, QPair<u4, u4>& result,

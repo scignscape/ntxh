@@ -95,6 +95,8 @@ public:
   bool needs_sdi_mark:1;
 
   bool force_opt_split:1;
+
+  bool has_boundary_white_whitespace:1;
 //?  bool is_provisional_multi_parent_semis:1;
 
  _flags

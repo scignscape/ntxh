@@ -533,6 +533,20 @@ caon_ptr<GTagML_Tag_Command> GTagML_Markup_Position::get_current_tag_command()
  return tag_commands_.top()->GTagML_tag_command();
 }
 
+
+caon_ptr<GTagML_Tag_Command> GTagML_Markup_Position::check_flag_right_whitespace()
+{
+ CAON_PTR_DEBUG(GTagML_Node ,current_node_)
+ if(caon_ptr<GTagML_Tag_Command> ntc = current_node_->GTagML_tag_command())
+ {
+  CAON_PTR_DEBUG(GTagML_Tag_Command ,ntc)
+  ntc->flags.has_boundary_white_whitespace = true;
+  return ntc;
+ }
+ return nullptr;
+}
+
+
 void GTagML_Markup_Position::restore_current_node(caon_ptr<tNode> node)
 {
  position_state_ = held_position_state_;

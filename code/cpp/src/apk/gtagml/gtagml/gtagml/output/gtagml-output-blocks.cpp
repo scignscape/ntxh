@@ -781,6 +781,14 @@ void GTagML_Output_Blocks::generate_tag_command_leave(const GTagML_Output_Bundle
 {
  CAON_PTR_DEBUG(GTagML_Tag_Command ,gtc)
 
+//?
+// QString bws = gtc->get_right_block_whitespace();
+// if(!bws.isEmpty())
+
+ if(gtc->flags.has_boundary_white_whitespace)
+   block_writer_->write_boundary_whitespace(" ");
+
+
  u4 expected_layer_code = 1;
 
  if(gtc->flags.is_layer_optional)
@@ -953,6 +961,9 @@ u1 GTagML_Output_Blocks::get_ws_gap_code(const QString& str)
 void GTagML_Output_Blocks::check_generate_whitespace(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Tag_Command> gtc)
 {
  CAON_PTR_DEBUG(GTagML_Tag_Command ,gtc)
+
+
+
 // if(htxn_document_)
 // {
 //  if(GTagML_HTXN_Node* nhn = gtc->GTagML_htxn_node())
@@ -961,7 +972,9 @@ void GTagML_Output_Blocks::check_generate_whitespace(const GTagML_Output_Bundle&
 //   return;
 //  }
 // }
- GTagML_Output_Event_Handler::check_generate_whitespace(b, gtc);
+
+
+//?   GTagML_Output_Event_Handler::check_generate_whitespace(b, gtc);
  //gtc->write_whitespace(b.qts);
 }
 

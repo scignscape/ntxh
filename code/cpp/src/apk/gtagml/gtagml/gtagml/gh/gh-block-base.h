@@ -201,6 +201,8 @@ public:
  virtual void activate_inserts();
 
  virtual u4 check_declared(u1 gp) = 0;
+ virtual void write_boundary_whitespace(QString bws) = 0;
+
 
 
  virtual QPair<u4, u4> get_effective_start_and_end_indices() = 0;

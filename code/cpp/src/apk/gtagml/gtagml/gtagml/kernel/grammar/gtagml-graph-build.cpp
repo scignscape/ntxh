@@ -291,8 +291,13 @@ void GTagML_Graph_Build::attach_left_whitespace()
   return;
  }
  int index = tile_acc_.indexOf(QRegularExpression("\\S"));
+
  if(index > 0)
  {
+  // // is this hackneyed?
+  if(index < 2)
+    markup_position_.check_flag_right_whitespace();
+
   attach_whitespace(tile_acc_.left(index));
  }
 }

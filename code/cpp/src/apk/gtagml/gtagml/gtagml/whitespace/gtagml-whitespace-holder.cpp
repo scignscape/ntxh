@@ -17,6 +17,14 @@ GTagML_Whitespace_Holder::GTagML_Whitespace_Holder()
 
 }
 
+QString GTagML_Whitespace_Holder::get_right_block_whitespace()
+{
+ GTagML_Whitespace::Left_Right_Codes lrc = ws_.get_right_code();
+ if(lrc == GTagML_Whitespace::Left_Right_Codes::Leave)
+   return get_block_whitespace();
+ return {};
+}
+
 QString GTagML_Whitespace_Holder::get_block_whitespace()
 {
  // //  basically just a single space character if one should go into a block ...

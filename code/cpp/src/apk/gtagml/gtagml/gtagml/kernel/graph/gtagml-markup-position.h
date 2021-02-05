@@ -143,6 +143,8 @@ public:
  QString current_tag_command_name();
  caon_ptr<GTagML_Tag_Command> get_current_tag_command();
 
+ caon_ptr<GTagML_Tag_Command> check_flag_right_whitespace();
+
  void annotation_entry(caon_ptr<tNode> node, caon_ptr<tNode> anode);
  void close_annotation();
 

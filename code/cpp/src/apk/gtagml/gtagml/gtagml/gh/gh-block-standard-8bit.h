@@ -63,6 +63,9 @@ public:
  void write(QByteArray& text, QString block_ws, QPair<u4, u4>& result,
    QVector<u4>* special_flag_marks = nullptr);
 
+ void write_boundary_whitespace(QString bws) Q_DECL_OVERRIDE;
+
+
  QString get_latex_out(const QPair<u4, u4>& indices) Q_DECL_OVERRIDE;
 
  QString get_latex_representation(u4 index) Q_DECL_OVERRIDE;

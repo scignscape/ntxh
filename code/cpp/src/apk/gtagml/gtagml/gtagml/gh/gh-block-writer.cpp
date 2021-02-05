@@ -127,6 +127,13 @@ u4 GH_Block_Writer::pop_main()
  return held_blocks_.top()->layer_code();
 }
 
+void GH_Block_Writer::write_boundary_whitespace(QString bws)
+{
+ if(held_blocks_.isEmpty())
+ {
+  current_main_text_block_->write_boundary_whitespace(bws);
+ }
+}
 
 
 GH_Block_Base* GH_Block_Writer::write_tile(QString text,

@@ -332,16 +332,22 @@ skip_continue:
 
  if(!block_ws.isEmpty())
  {
-  u1 uu = glyphdeck_->get_boundary_whitespace_code(block_ws);
-  if(uu != glyphdeck_->get_default_null())
-  {
-   ++current_index_;
-   chars_.push_back(uu);
-  }
+  write_boundary_whitespace(block_ws);
  }
 
  result.second = current_index_;
 }
+
+void GH_Block_Standard_8bit::write_boundary_whitespace(QString bws)
+{
+ u1 uu = glyphdeck_->get_boundary_whitespace_code(bws);
+ if(uu != glyphdeck_->get_default_null())
+ {
+  ++current_index_;
+  chars_.push_back(uu);
+ }
+}
+
 
 QString GH_Block_Standard_8bit::get_latex_representation(u4 index)
 {
