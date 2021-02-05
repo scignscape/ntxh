@@ -993,6 +993,10 @@ void GTagML_Output_SDI_Infoset::check_sentence_boundaries(QTextStream& qts,
 // htxn_document_->check_sentence_boundaries(bl,
 //   enter, leave, notes);
  u4 i = enter;
+
+ sdi_document_->clear_end_boundary_space(bl, leave);
+
+
  while(i <= leave)
  {
   u4 ss = 0;

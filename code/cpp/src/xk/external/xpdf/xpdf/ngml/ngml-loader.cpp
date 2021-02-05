@@ -113,7 +113,7 @@ QChar decode(u1 cue)
   case 60: return 'X';
   case 61: return 'Y';
   case 62: return 'Z';
-  case 63: return ' ';
+  case 63: return '-';
 
  //  64
   case 64: return '.'; // 64

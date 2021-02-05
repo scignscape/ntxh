@@ -168,6 +168,20 @@ u4 GH_SDI_Document::scan_for_sentence_start_resume(GH_Block_Base& bl, u4 start, 
  return 1;
 }
 
+void GH_SDI_Document::clear_end_boundary_space(GH_Block_Base& bl, u4& end)
+{
+ while(end > 0)
+ {
+  GH_Block_Base::SDI_Interpretation_Codes sic = bl.get_sdi_interpretation_code_at_index(end);
+  if(sic == GH_Block_Base::SDI_Interpretation_Codes::Hide_Ignore)
+    --end;
+  else
+    return;
+ }
+
+}
+
+
 u4 GH_SDI_Document::scan_for_sentence_start(GH_Block_Base& bl, u4 start, u4 end, u4& result)
 {
  u1 gap = 1;

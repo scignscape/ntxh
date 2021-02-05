@@ -1503,6 +1503,8 @@ GH_Block_Base::SDI_Interpretation_Codes GH_Glyphdeck_Standard_8bit::get_sdi_inte
   case 73:
    return GH_Block_Base::SDI_Interpretation_Codes::Potential_Sentence_End_Space;
 
+  case 117:
+   return GH_Block_Base::SDI_Interpretation_Codes::Hide_Ignore;
   default:
    return GH_Block_Base::SDI_Interpretation_Codes::GH_Interpretation;
   }
