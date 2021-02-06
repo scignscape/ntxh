@@ -131,12 +131,13 @@ void GTagML_DGH_Module::process_gtagml_file(QString path,
  gol->export_latex(path + ".tex");
 
  QString cp = copy_file_to_folder(path + ".tex", ffolder);
+ qDebug() << "Copied " << path + ".tex" << " to " << cp;
 
  // // By now the sentence swaps are all done ...
- gob->export_main_block();
+ QString mb_file = gob->export_main_block();
+// QString mb_cp = copy_file_to_folder(mb_file, ffolder);
+// qDebug() << "Copied " << mb_file << " to " << mb_cp;
 
-
- qDebug() << "Copied " << path + ".tex" << " to " << cp;
 
  if(!cpy.isEmpty())
  {
@@ -160,6 +161,8 @@ void GTagML_DGH_Module::process_gtagml_file(QString path,
 
   cp = copy_file_to_folder(sdi_path + ".sdi-prelatex.ntxh", cpy);
   qDebug() << "Copied " << sdi_path + ".sdi-prelatex.ntxh" << " to " << cp;
+
+
  }
 
  QString gcf = gpi->gt_copy_folder();
@@ -443,7 +446,7 @@ void GTagML_DGH_Module::compile_gt_manuscript(QString args)
 
    QDir old_info_dir(newfolder + "/../info");
    {
-    QFileInfoList qfil = old_info_dir.entryInfoList({"*.marks-summary.txt"});
+    QFileInfoList qfil = old_info_dir.entryInfoList({"*.marks-summary.txt", "*.htxn.txt"});
     for(QFileInfo qfi : qfil)
     {
      copy_file_to_folder(qfi.absoluteFilePath(), new_sdi_dir.absolutePath());

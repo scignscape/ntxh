@@ -49,6 +49,8 @@ class NGML_Loader
 
  QString pdf_file_;
 
+ QString unzip_folder_;
+
  // QMap<QPair<int, int>, QString> welements_;
 
 public:
@@ -63,6 +65,8 @@ public:
  QString read_sentence(QString landmark_file, u4 start_index, u4 end_index);
 
  void load_htxn_block(QString folder, QString file);
+
+ void check_unzip_folder(QString zip_file_path);
 
 
 };

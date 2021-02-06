@@ -26,7 +26,7 @@ SOURCES += \
 
 
 
-LIBS += -L$$TARGETSDIR -lxpdf
+LIBS += -L$$TARGETSDIR -lxpdf    -lquazip
 
 
 include($$ROOT_DIR/../preferred/xpdf.pri)

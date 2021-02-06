@@ -324,7 +324,7 @@ QString GTagML_Output_Blocks::export_marks(QString path)
  return {};
 }
 
-void GTagML_Output_Blocks::export_main_block(QString path)
+QString GTagML_Output_Blocks::export_main_block(QString path)
 {
  if(path.startsWith(".."))
  {
@@ -340,6 +340,8 @@ void GTagML_Output_Blocks::export_main_block(QString path)
  GH_Block_Base* gbb = block_writer_->current_main_text_block();
 
  gbb->write_to_file(path);
+
+ return path;
 }
 
 void GTagML_Output_Blocks::export_blocks(QString path)

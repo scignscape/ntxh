@@ -115,7 +115,7 @@ public:
 
  NGML_SDI_Page* get_page(u4 page);
 
- void output_pages(QString mergefile = {});
+ void output_pages(QStringList htxn_files, QString mergefile = {});
 
  NGML_SDI_Page* check_read_page(QString zip_file_path, 
    QString unzip_path, QString unzip_folder_name, u4 page_number);

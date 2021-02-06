@@ -51,9 +51,9 @@ int main(int argc, char* argv[])
 //   {&czfile, {}}
 //   });
 
-// QString paper_name = "ctg";
 //
- QString paper_name = "icg";
+ QString paper_name = "ctg";
+// QString paper_name = "icg";
 // QString paper_name = "itm";
 
  QStringList cmdl = get_cmdl(argc, argv, 2, {
@@ -72,6 +72,7 @@ int main(int argc, char* argv[])
 
  QStringList prelatex_files;
  QStringList marks_files;
+ QStringList htxn_files;
 
  QString cs;
 
@@ -88,6 +89,10 @@ int main(int argc, char* argv[])
 
   else if(file.endsWith("marks-summary.txt"))
     marks_files.push_back(qd.absoluteFilePath(file));
+
+  else if(file.endsWith("htxn.txt"))
+    htxn_files.push_back(qd.absoluteFilePath(file));
+
  }
 
  NGML_SDI_Document nsd(file, folder);
@@ -109,7 +114,7 @@ int main(int argc, char* argv[])
 
  dsd.review_dgh();
 
- nsd.output_pages(outfile);
+ nsd.output_pages(htxn_files, outfile);
 
  QString zp = nsd.zip_path();
 

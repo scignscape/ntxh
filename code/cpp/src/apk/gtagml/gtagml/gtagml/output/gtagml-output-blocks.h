@@ -97,7 +97,7 @@ public:
  void export_blocks(QString path = "..blocks-summary.txt");
  void write_block_output(QMap<QString, QString>& block_output);
 
- void export_main_block(QString path = "..htxn.txt");
+ QString export_main_block(QString path = "..htxn.txt");
 
  QString export_marks(QString path = "..marks-summary.txt");
 

@@ -740,7 +740,7 @@ void NGML_SDI_Document::parse()
 //? output_pages();
 }
 
-void NGML_SDI_Document::output_pages(QString mergefile)
+void NGML_SDI_Document::output_pages(QStringList htxn_files, QString mergefile)
 {
  QDir qd(folder_);
 
@@ -783,6 +783,13 @@ void NGML_SDI_Document::output_pages(QString mergefile)
 
  if(!mergefile.isEmpty())
    files.push_back({mergefile, {"pages/sdi-merge.ntxh", "sdi-merge.ntxh"}});
+
+ for(QString hf : htxn_files)
+ {
+  QFileInfo qfi(hf);
+  QString hn = qfi.baseName() + ".htxn";
+  files.push_back({hf, {"pages/" + hn, hn}});
+ }
 
  QuaZip zip(zip_path_);
  zip.setFileNameCodec("IBM866");
