@@ -1,5 +1,5 @@
 - Generated from LaTeX File icg.tex 
-21/1/2021, 13:24
+5/2/2021, 14:55
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -215,8 +215,8 @@ $s: 0
 !/ SentenceItem
 $i: 14
 $p: 5
-$x: itm:embassared
-$t: John is embarrased because he spilled some wine on the carpet.
+$x: itm:embarassed
+$t: John is embarassed because he spilled some wine on the carpet.
 $c: log
 /!
 <>>
@@ -224,7 +224,7 @@ $c: log
 !/ SentenceItem
 $i: 15
 $p: 5
-$t: John shouldn't be embarrased about spilling wine on the carpet, because they served us wine in awkward plastic cups.
+$t: John shouldn't be embarassed about spilling wine on the carpet, because they served us wine in awkward plastic cups.
 $c: log
 /!
 <>>
@@ -232,7 +232,7 @@ $c: log
 !/ SentenceItem
 $i: 16
 $p: 5
-$t: I'm going to tell John not to be embarrased about spilling wine on the carpet, because they served us wine in these dumb plastic cups.
+$t: I'm going to tell John not to be embarassed about spilling wine on the carpet, because they served us wine in these dumb plastic cups.
 $c: log
 /!
 <>>
@@ -578,7 +578,7 @@ $c: ont
 !/ SentenceItem
 $i: 46
 $p: 21
-$t: Garfield ate my breakfact.
+$t: Garfield ate my breakfast.
 $c: ont
 /!
 <>>
@@ -807,7 +807,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 69
-$p: 38
+$p: 37
 $x: itm:walkedaround
 $t: I walked around the puddle.
 $c: cog
@@ -1138,7 +1138,7 @@ $c: amb
 
 !/ SentenceItem
 $i: 101
-$p: 44
+$p: 43
 $t: The effect was discovered by some scientists working in this lab.
 $c: amb
 /!
@@ -1609,7 +1609,7 @@ $c: syn
 
 !/ SentenceList
 $i: 45
-$p: 52
+$p: 51
 $s: 3
 
 !/ SentenceItem
@@ -2005,7 +2005,7 @@ $s: 4
 
 !/ SentenceItem
 $i: 179
-$p: 62
+$p: 61
 $x: itm:walkpast
 $t: I walk past the paper on my way to work.
 $c: cog
@@ -2014,7 +2014,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 180
-$p: 62
+$p: 61
 $x: itm:walkfrom
 $t: I walked from the library straight to class.
 $c: cog
@@ -2023,7 +2023,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 181
-$p: 62
+$p: 61
 $x: itm:aroundsculpture
 $t: I spend time around that sculpture every weekend.
 $c: cog

@@ -72,9 +72,11 @@ USING_KANS(TextIO)
 void process_sdi_file(XpdfWidget* pdf, int idx, QString file_name)
 {
  qDebug() << "Path: " << file_name;
- pdf->saveEmbeddedFile(idx, file_name);
- QString rt = load_file(file_name);
- qDebug() << "RT: " << rt;
+ file_name.prepend("auto-unzip_");
+ if(pdf->saveEmbeddedFile(idx, file_name))
+   pdf->set_unzip_file(file_name);
+// QString rt = load_file(file_name);
+// qDebug() << "RT: " << rt;
  
 }
 
@@ -934,7 +936,7 @@ GBool XpdfViewer::open(QString fileName, int page, QString destName,
   currentTab->pdf->setFocus(Qt::OtherFocusReason);
   lastFileOpened = fileName;
 
-  ngml_loader_->load_pages(currentTab->pdf);
+  ngml_loader_->load_pages(currentTab->pdf, fileName);
 
   return gTrue;
 }
@@ -3149,11 +3151,11 @@ void XpdfViewer::addTab() {
 //   qDebug() << "Coords: " << x << ", " << y
 //     << "(" << (x * 65536) << ", " << (y * 65536) << ")";
 
-   int start_index = 0;
-   int end_index = 0;
+   QPair<int, int> start_index = {0, 0};
+   QPair<int, int> end_index = {0, 0};
    QString landmark_file;
-   int landmark_id = 0;
-   QString landmark = ngml_loader_->get_landmark_string(pg, x, y, landmark_id, start_index, end_index, landmark_file);
+   QPair<int, int> landmark_id = {0, 0};
+   QPair<QString, QString> landmark = ngml_loader_->get_landmark_string(pg, x, y, landmark_id, start_index, end_index, landmark_file);
 
    //QString msg = QString("%1:%2-%3").arg(landmark).arg(start_index).arg(end_index);
    //QMessageBox::information(this, "Landmark", msg);
@@ -3242,24 +3244,35 @@ void XpdfViewer::addTab() {
     });
    }
 
-   if(!landmark.isEmpty())
+   if(!landmark.second.isEmpty())
    {
-    QString msg = QString("View landmark (%1) info").arg(landmark);
+    QString msg = QString("View landmark (%1) info").arg(landmark.second);
     qm->addAction(msg, [this, landmark, landmark_file, landmark_id, start_index, end_index]
     {
-     QString msg = QString("%1:%2-%3 (id = %4, file = %5)").arg(landmark).arg(start_index)
-       .arg(end_index).arg(landmark_id).arg(landmark_file);
+     QString msg = QString("%1:%2-%3 (id = %4, file = %5)").arg(landmark.second).arg(start_index.second)
+       .arg(end_index.second).arg(landmark_id.second).arg(landmark_file);
+     QMessageBox::information(this, "Landmark", msg);
+     //QApplication::clipboard()->setText(qs);
+    });
+   }
+
+   if(!landmark.first.isEmpty())
+   {
+    QString msg = QString("View landmark (%1) info").arg(landmark.first);
+    qm->addAction(msg, [this, landmark, landmark_file, landmark_id, start_index, end_index]
+    {
+     QString msg = QString("%1:%2-%3 (id = %4, file = %5)").arg(landmark.first).arg(start_index.first)
+       .arg(end_index.first).arg(landmark_id.first).arg(landmark_file);
      QMessageBox::information(this, "Landmark", msg);
      //QApplication::clipboard()->setText(qs);
     });
 
-    if(landmark == "Sentence")
+    if(landmark.first == "Sentence")
     {
-
      qm->addAction("Read full sentence", [this, landmark_file, start_index, end_index]
      {
-      QString pdf_file = AR_ROOT_DIR "/data/dataset/ctg/main.pdf";
-      QString sentence = ngml_loader_->read_sentence(pdf_file, landmark_file, start_index, end_index);
+      // QString pdf_file = AR_ROOT_DIR "/data/dataset/ctg/main.pdf";
+      QString sentence = ngml_loader_->read_sentence(landmark_file, start_index.first, end_index.first);
       QMessageBox::information(this, "Sentence (decoded)", sentence);
      });
 
@@ -3603,7 +3616,7 @@ void XpdfViewer::fillAttachmentList() {
 
     // // mosaic
     QString efn = currentTab->pdf->getEmbeddedFileName(i);
-    if(efn.endsWith(".sdi.ntxh"))
+    if(efn.endsWith(".sdi.zip"))
       process_sdi_file(currentTab->pdf, i, efn);
 
     item = new QTableWidgetItem(efn);

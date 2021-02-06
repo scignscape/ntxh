@@ -778,6 +778,9 @@ public:
   //! Returns true if successful.
   bool saveEmbeddedFile(int idx, QString fileName);
 
+  QString unzip_file() { return unzip_file_; }
+  void set_unzip_file(QString f) { unzip_file_ = f; }
+
   //--- for internal use
 
   //! \cond
@@ -921,6 +924,8 @@ private:
   bool mousePassthrough;
 
   QTimer *tickTimer;
+
+  QString unzip_file_;
 };
 
 #endif

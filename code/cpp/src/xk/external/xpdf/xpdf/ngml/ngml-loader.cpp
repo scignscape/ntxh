@@ -11,6 +11,7 @@
 
 #include "xpdf-qt/XpdfWidget.h"
 
+#include <QCoreApplication>
 
 //NGML_SDI_Page::NGML_SDI_Page(u4 number)
 
@@ -20,12 +21,14 @@ NGML_Loader::NGML_Loader()
 }
 
 
-QString NGML_Loader::get_landmark_string(int page, int x, int y,
-  int& id, int& start_index, int& end_index, QString& file)
+QPair<QString, QString> NGML_Loader::get_landmark_string(int page, int x, int y,
+  QPair<int, int>& id, QPair<int, int>& start_index, QPair<int, int>& end_index, QString& file)
 {
  QMapIterator<QPair<int, int>, element> it(elements_[page - 1]);
 
- QString result;
+ QString result1, result2;
+
+ bool have_first = false;
 
  while(it.hasNext())
  {
@@ -35,15 +38,28 @@ QString NGML_Loader::get_landmark_string(int page, int x, int y,
   if(dx < 20 && dy < 20)
   {
    element el = it.value();
-   result = el.kind;// += QString("%1:%2-%3").arg(el.kind).arg(el.start_index).arg(el.end_index);
-   start_index = el.start_index;
-   end_index = el.end_index;
-   id = el.id;
+
+   if(el.kind == "Paragraph" || have_first)
+   {
+    start_index.second = el.start_index;
+    end_index.second = el.end_index;
+    id.second = el.id;
+    result2 =  el.kind;
+   }
+   else
+   {
+    have_first = true;
+
+    result1 = el.kind;// += QString("%1:%2-%3").arg(el.kind).arg(el.start_index).arg(el.end_index);
+    start_index.first = el.start_index;
+    end_index.first = el.end_index;
+    id.first = el.id;
+   }
    file = file_job_info_[el.file_id].job_name;
   }
  }
 
- return result;
+ return {result1, result2};
 }
 
 QChar decode(u1 cue)
@@ -182,11 +198,11 @@ QChar decode(u1 cue)
 
 }
 
-QString NGML_Loader::read_sentence(QString pdf_file, QString landmark_file, u4 start_index, u4 end_index)
+QString NGML_Loader::read_sentence(QString landmark_file, u4 start_index, u4 end_index)
 {
  if(!blocks_.contains(landmark_file))
  {
-  QFileInfo qfi(pdf_file);
+  QFileInfo qfi(pdf_file_);
   QString folder = qfi.absolutePath();
   load_htxn_block(folder, landmark_file);
  }
@@ -208,12 +224,41 @@ QString NGML_Loader::read_sentence(QString pdf_file, QString landmark_file, u4 s
 }
 
 
-void NGML_Loader::load_pages(XpdfWidget* pdf)
+void NGML_Loader::load_pages(XpdfWidget* pdf, QString file_name)
 {
+ QString appd = QCoreApplication::applicationDirPath();
+ QDir appqd(appd);
+
+ QString src = appqd.absoluteFilePath( pdf->unzip_file() );
+
+
+ pdf_file_ = file_name;
+ QFileInfo qfi(file_name);
+ QDir qd = qfi.absoluteDir();
+
+ if(qd.exists("_unzip"))
+ {
+  qd.cd("_unzip");
+  qd.removeRecursively();
+  qd.cdUp();
+ }
+ qd.mkdir("_unzip");
+ qd.cd("_unzip");
+
+ QString dest = qd.absoluteFilePath( pdf->unzip_file() );
+
+ QFile::copy(src, dest);
+
+ // // need to unzip ...
+
+ if(! qd.cd("pages") )
+   return;
+
+
  for(int page = 1;;++page)
  {
   elements_.push_back({});
-  QString file = QString(AR_ROOT_DIR "/data/dataset/ctg/pages/p%1.txt").arg(page);
+  QString file = qd.absoluteFilePath(QString("p%1.txt").arg(page));
 
   QString text = load_file(file);
   if(text.isEmpty())
@@ -274,7 +319,7 @@ void NGML_Loader::load_pages(XpdfWidget* pdf)
    else if(qsl[1] == "\\:")
      kind = "Paragraph";
 
-   elements_[page - 1][{tlx, tly}] = {file_id, kind, id, count, brx, bry, start_index, end_index};
+   elements_[page - 1].insert({tlx, tly}, {file_id, kind, id, count, brx, bry, start_index, end_index});
 
 
 //   {QString("%1-%2-tl").arg(id).arg(kind), {brx, bry}};

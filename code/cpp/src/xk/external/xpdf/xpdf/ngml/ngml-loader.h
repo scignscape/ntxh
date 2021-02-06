@@ -41,11 +41,13 @@ class NGML_Loader
   int paragraph_count;
  };
 
- QVector<QMap<QPair<int, int>, element>> elements_;
+ QVector<QMultiMap<QPair<int, int>, element>> elements_;
 
  QMap<int, file_job_info> file_job_info_;
   //
  QMap<QString, QVector<u1>> blocks_;
+
+ QString pdf_file_;
 
  // QMap<QPair<int, int>, QString> welements_;
 
@@ -53,12 +55,12 @@ public:
  
  NGML_Loader();
 
- void load_pages(XpdfWidget* pdf);
+ void load_pages(XpdfWidget* pdf, QString file_name);
 
- QString get_landmark_string(int page, int x, int y, int& id,
-   int& start_index, int& end_index, QString& file);
+ QPair<QString, QString> get_landmark_string(int page, int x, int y, QPair<int, int>& id,
+   QPair<int, int>& start_index, QPair<int, int>& end_index, QString& file);
 
- QString read_sentence(QString pdf_file, QString landmark_file, u4 start_index, u4 end_index);
+ QString read_sentence(QString landmark_file, u4 start_index, u4 end_index);
 
  void load_htxn_block(QString folder, QString file);
 
