@@ -461,6 +461,10 @@ void GTagML_Output_Latex::generate_tag_command_entry(const GTagML_Output_Bundle&
   else
   {
    QString name;
+   if(gtc->flags.command_name_written_to_main)
+   {
+    qDebug() << gtc->latex_name();
+   }
    if(GH_Prenode* ghp = gtc->name_prenode())
    {
     if(GH_Block_Base* ghb = ghp->get_block())

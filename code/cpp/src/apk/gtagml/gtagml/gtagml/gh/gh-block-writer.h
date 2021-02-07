@@ -67,6 +67,7 @@ public:
  GH_Block_Base* write_mandatory_argument(QString name, QPair<u4, u4>& result);
  GH_Block_Base* write_optional_argument(QString name, QPair<u4, u4>& result);
 
+ GH_Block_Base* write_tag_command_name_as_main_text(QString name, QPair<u4, u4>& result);
 
 
 };

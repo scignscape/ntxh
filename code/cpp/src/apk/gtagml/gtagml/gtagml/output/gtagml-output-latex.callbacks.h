@@ -17,6 +17,9 @@ GTAGML_CALLBACK_NOACTION(setup)
 GTAGML_CALLBACK_NOACTION(document-title)
 GTAGML_CALLBACK_NOACTION(local-title)
 
+GTAGML_CALLBACK_NOACTION(main-block-text-commands)
+
+
 GTAGML_CALLBACK_(body)
  WHEN_(pre)
  {

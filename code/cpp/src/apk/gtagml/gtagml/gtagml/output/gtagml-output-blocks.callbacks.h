@@ -23,6 +23,16 @@ GTAGML_CALLBACK_NOACTION(document-title)
 GTAGML_CALLBACK_NOACTION(local-title)
 
 
+GTAGML_CALLBACK_(main-block-text-commands)
+ WHEN_(around)
+ {
+  parse_main_block_text_commands(node);
+ }
+ _WHEN
+_GTagML_CALLBACK
+
+
+
 GTAGML_CALLBACK_(cite)
  WHEN_(pre)
  {

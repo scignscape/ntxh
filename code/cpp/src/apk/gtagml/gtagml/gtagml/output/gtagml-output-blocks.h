@@ -40,6 +40,7 @@ class GTagML_Tile;
 
 class GTagML_Output_Infoset;
 
+class GTagML_Project_Info;
 
 
 class GTagML_Output_Blocks : public GTagML_Output_Base, private GTagML_Output_Event_Handler
@@ -79,10 +80,13 @@ class GTagML_Output_Blocks : public GTagML_Output_Base, private GTagML_Output_Ev
 
  GH_Prenode* local_last_prenode_;
 
+// GTagML_Project_Info* project_info_;
 
  void mark_citation(QTextStream& qts,
    caon_ptr<tNode> node, caon_ptr<tNode> prior_node,
    caon_ptr<tNode> parent_of_siblings);
+
+ QMap<QString, QPair<QString, u4>> main_block_text_commands_;
 
 
 public:
@@ -128,6 +132,8 @@ public:
 //   GTagML_HTXN_Node& nhn);
 
 // void check_generate_whitespace(const GTagML_Output_Bundle& b, GTagML_HTXN_Node& nhn);
+
+ void parse_main_block_text_commands(caon_ptr<GTagML_Node> node);
 
  void check_generate_whitespace(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Tag_Command> ntc) Q_DECL_OVERRIDE;
  void check_generate_whitespace(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Tile> tile) Q_DECL_OVERRIDE;

@@ -97,6 +97,8 @@ public:
   bool force_opt_split:1;
 
   bool has_boundary_white_whitespace:1;
+
+  bool command_name_written_to_main:1;
 //?  bool is_provisional_multi_parent_semis:1;
 
  _flags

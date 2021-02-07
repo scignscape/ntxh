@@ -17,6 +17,8 @@ _GTagML_CALLBACK
 
 GTAGML_CALLBACK_SUPPRESS(documentclass)
 GTAGML_CALLBACK_NOACTION(include)
+GTAGML_CALLBACK_NOACTION(main-block-text-commands)
+
 
 GTAGML_CALLBACK_(document)
  WHEN_(pre)

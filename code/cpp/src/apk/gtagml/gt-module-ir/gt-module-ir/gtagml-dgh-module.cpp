@@ -408,7 +408,14 @@ void GTagML_DGH_Module::compile_gt_manuscript(QString args)
  if(!mt.isEmpty())
    fld.set_man_path(mt);
 
- if(!current_flagset_.contains(":no-first"))
+ auto it1 = current_flagpairs_.find(":do-first");
+
+ if(it1 != current_flagpairs_.end())
+ {
+  QString ff = it1.value();
+  fld.set_first_file_path(ff);
+ }
+ else if(!current_flagset_.contains(":no-first"))
    fld.set_first_file_path(file_path);
 
  fld.set_project_info(gpi);

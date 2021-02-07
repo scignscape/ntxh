@@ -47,6 +47,7 @@ int main(int argc, char *argv[])
       %1/%2/src/%2.tex
     :manuscript  %1/%2/manuscript
     :gt-copy-folder  %1/%2/gt-copy
+    :do-first  intro.gt
    ;.
    )").arg(DEMO_DOCUMENT_FOLDER).arg(paper_name) );
 

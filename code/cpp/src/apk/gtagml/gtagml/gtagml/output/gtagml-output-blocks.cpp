@@ -27,6 +27,8 @@
 
 #include "textio.h"
 
+USING_KANS(TextIO)
+
 //?#include "ngml-htxn/ngml-htxn-node.h"
 
 
@@ -37,6 +39,8 @@
 
 //?#include "gtagml-output-infoset.h"
 //?#include "gtagml-output-htxn.h"
+
+#include "gtagml/kernel/document/gtagml-project-info.h"
 
 #include <QFile>
 #include <QFileInfo>
@@ -94,6 +98,42 @@ void GTagML_Output_Blocks::init_callbacks()
  #include "gtagml-output-callbacks-common.h"
 
  #include "gtagml-output-blocks.callbacks.h"
+}
+
+void GTagML_Output_Blocks::parse_main_block_text_commands(caon_ptr<GTagML_Node> node)
+{
+ CAON_PTR_DEBUG(GTagML_Node ,node)
+ if(caon_ptr<GTagML_Tag_Command> ntc = node->GTagML_tag_command())
+ {
+  CAON_PTR_DEBUG(GTagML_Tag_Command ,ntc)
+  QString value = ntc->argument();
+  if(value.startsWith('@'))
+    value = value.mid(1).prepend(document_.project_info()->root_folder());
+  QString lines;
+  load_file(value, lines);
+  QStringList qsl = lines.split('\n');
+  for(QString line : qsl)
+  {
+   line = line.trimmed();
+   if(line.isEmpty())
+     continue;
+
+   int ix = line.indexOf(" === ");
+   if(ix == -1)
+   {
+    main_block_text_commands_.insert(line, {{}, 0});
+   }
+   else
+   {
+    QString cmd = line.mid(0, ix);
+    QString val = line.mid(ix + 5);
+    main_block_text_commands_.insert(cmd, {val, 0});
+   }
+  }
+  //project_info_->add();
+ }
+
+
 }
 
 
@@ -689,8 +729,21 @@ void GTagML_Output_Blocks::generate_tag_command_entry(const GTagML_Output_Bundle
 
    QPair<u4, u4> pr;
    QString name = (cb && !cb->rename_tag().isEmpty())? cb->rename_tag() : gtc->name();
-   GH_Block_Base* bl =  block_writer_->write_tag_command_name(name, pr);//  write
+
+   auto it = main_block_text_commands_.find(name);
+
+   GH_Block_Base* bl;
+   if(it == main_block_text_commands_.end())
+   {
+    bl = block_writer_->write_tag_command_name(name, pr);//  write
+   }
+   else
+   {
+    bl = block_writer_->write_tag_command_name_as_main_text(name, pr);//  write
+    gtc->flags.command_name_written_to_main = true;
+   }
    gtc->init_name_prenode(bl, pr);
+
   }
 
   check_generate_tag_command_argument(b, *gtc);

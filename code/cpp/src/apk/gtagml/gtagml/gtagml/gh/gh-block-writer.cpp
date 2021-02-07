@@ -34,6 +34,13 @@ GH_Block_Base* GH_Block_Writer::write_optional_argument(QString text, QPair<u4, 
 }
 
 
+GH_Block_Base* GH_Block_Writer::write_tag_command_name_as_main_text(QString name, QPair<u4, u4>& result)
+{
+ current_main_text_block_->write(name, NO_BLOCK_WHITE_SPACE, result);
+ return current_main_text_block_;
+}
+
+
 GH_Block_Base* GH_Block_Writer::write_tag_command_name(QString name, QPair<u4, u4>& result)
 {
  current_tag_command_name_block_->check_cached(name, result);
