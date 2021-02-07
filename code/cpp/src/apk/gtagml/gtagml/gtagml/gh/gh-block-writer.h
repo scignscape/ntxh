@@ -61,6 +61,8 @@ public:
 
  void write_boundary_whitespace(QString bws);
 
+ void write_to_main(QString text);
+
  GH_Block_Base* write_tag_command_name(QString name, QPair<u4, u4>& result);
  GH_Block_Base* write_tile(QString name, QString bws, QPair<u4, u4>& result,
    QVector<u4>* special_flag_marks = nullptr);
@@ -68,6 +70,7 @@ public:
  GH_Block_Base* write_optional_argument(QString name, QPair<u4, u4>& result);
 
  GH_Block_Base* write_tag_command_name_as_main_text(QString name, QPair<u4, u4>& result);
+
 
 
 };

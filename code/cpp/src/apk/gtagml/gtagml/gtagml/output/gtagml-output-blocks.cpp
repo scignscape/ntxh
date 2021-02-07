@@ -757,6 +757,7 @@ void GTagML_Output_Blocks::generate_tag_command_entry(const GTagML_Output_Bundle
     {
      // // TODO -- text rewrite?
      bl = block_writer_->write_tag_command_name(name, pr);//  write
+     block_writer_->write_to_main(vpr.first);
     }
 
    }
