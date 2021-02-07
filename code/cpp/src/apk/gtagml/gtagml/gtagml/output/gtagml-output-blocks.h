@@ -86,7 +86,7 @@ class GTagML_Output_Blocks : public GTagML_Output_Base, private GTagML_Output_Ev
    caon_ptr<tNode> node, caon_ptr<tNode> prior_node,
    caon_ptr<tNode> parent_of_siblings);
 
- QMap<QString, QPair<QString, u4>> main_block_text_commands_;
+// QMap<QString, QPair<QString, u4>> main_block_text_commands_;
 
 
 public:

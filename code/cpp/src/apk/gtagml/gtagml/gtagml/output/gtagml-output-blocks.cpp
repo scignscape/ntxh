@@ -102,6 +102,8 @@ void GTagML_Output_Blocks::init_callbacks()
 
 void GTagML_Output_Blocks::parse_main_block_text_commands(caon_ptr<GTagML_Node> node)
 {
+ auto& main_block_text_commands = document_.project_info()->main_block_text_commands();
+
  CAON_PTR_DEBUG(GTagML_Node ,node)
  if(caon_ptr<GTagML_Tag_Command> ntc = node->GTagML_tag_command())
  {
@@ -109,6 +111,9 @@ void GTagML_Output_Blocks::parse_main_block_text_commands(caon_ptr<GTagML_Node> 
   QString value = ntc->argument();
   if(value.startsWith('@'))
     value = value.mid(1).prepend(document_.project_info()->root_folder());
+
+  document_.project_info()->set_main_block_text_commands_file(value);
+
   QString lines;
   load_file(value, lines);
   QStringList qsl = lines.split('\n');
@@ -121,13 +126,13 @@ void GTagML_Output_Blocks::parse_main_block_text_commands(caon_ptr<GTagML_Node> 
    int ix = line.indexOf(" === ");
    if(ix == -1)
    {
-    main_block_text_commands_.insert(line, {{}, 0});
+    main_block_text_commands.insert(line, {{}, 0});
    }
    else
    {
     QString cmd = line.mid(0, ix);
     QString val = line.mid(ix + 5);
-    main_block_text_commands_.insert(cmd, {val, 0});
+    main_block_text_commands.insert(cmd, {val, 0});
    }
   }
   //project_info_->add();
@@ -654,6 +659,8 @@ void GTagML_Output_Blocks::generate_tag_command_entry(const GTagML_Output_Bundle
  CAON_PTR_B_DEBUG(GTagML_Node ,node)
  CAON_PTR_DEBUG(GTagML_Tag_Command ,gtc)
 
+ auto& main_block_text_commands = document_.project_info()->main_block_text_commands();
+
  caon_ptr<GTagML_Tag_Command_Callback> cb = b.cb;
 
  caon_ptr<GTagML_Node> parent_of_siblings = nullptr;
@@ -730,17 +737,28 @@ void GTagML_Output_Blocks::generate_tag_command_entry(const GTagML_Output_Bundle
    QPair<u4, u4> pr;
    QString name = (cb && !cb->rename_tag().isEmpty())? cb->rename_tag() : gtc->name();
 
-   auto it = main_block_text_commands_.find(name);
+   auto it = main_block_text_commands.find(name);
 
    GH_Block_Base* bl;
-   if(it == main_block_text_commands_.end())
+   if(it == main_block_text_commands.end())
    {
     bl = block_writer_->write_tag_command_name(name, pr);//  write
    }
    else
    {
-    bl = block_writer_->write_tag_command_name_as_main_text(name, pr);//  write
-    gtc->flags.command_name_written_to_main = true;
+    QPair<QString, u4>& vpr = it.value();
+    if(vpr.first.isEmpty())
+    {
+     bl = block_writer_->write_tag_command_name_as_main_text(name, pr);//  write
+     gtc->flags.command_name_written_to_main = true;
+     ++vpr.second;
+    }
+    else
+    {
+     // // TODO -- text rewrite?
+     bl = block_writer_->write_tag_command_name(name, pr);//  write
+    }
+
    }
    gtc->init_name_prenode(bl, pr);
 

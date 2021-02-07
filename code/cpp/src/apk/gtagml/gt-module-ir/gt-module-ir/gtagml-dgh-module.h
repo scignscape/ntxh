@@ -50,6 +50,7 @@ class GTagML_DGH_Module
    QString mode, QString path, QString code);
 
  void check_post_processing_codes(GTagML_Project_Info& gpi);
+ void check_main_block_text_commands(GTagML_Project_Info& gpi);
 
 public:
 

@@ -295,6 +295,26 @@ void GTagML_DGH_Module::compile_gt_file(QString args)
  check_post_processing_codes(gpi);
 }
 
+
+void GTagML_DGH_Module::check_main_block_text_commands(GTagML_Project_Info& gpi)
+{
+ auto& main_block_text_commands = gpi.main_block_text_commands();
+ QString f = gpi.main_block_text_commands_file();
+ if(f.isEmpty())
+   return;
+ f += ".counts";
+
+ QString text;
+ QMapIterator<QString, QPair<QString, u4>> it(main_block_text_commands);
+ while (it.hasNext())
+ {
+  it.next();
+  text += QString("%1 %2\n").arg(it.key(), 25).arg(it.value().second);
+ }
+ save_file(f, text);
+}
+
+
 void GTagML_DGH_Module::check_post_processing_codes(GTagML_Project_Info& gpi)
 {
  QString ppc_file;
@@ -425,6 +445,7 @@ void GTagML_DGH_Module::compile_gt_manuscript(QString args)
  fld.convert_all_files( &GTagML_DGH_Module::process_gtagml_file );
 
  check_post_processing_codes(*gpi);
+ check_main_block_text_commands(*gpi);
 
  if(current_flagset_.contains(":setup-once"))
  {

@@ -12,6 +12,8 @@
 
 #include "accessors.h"
 
+#include "global-types.h"
+
 #include "flags.h"
 
 #include "kans.h"
@@ -40,6 +42,7 @@ private:
  QString sdi_template_target_;
 
  QString gt_copy_folder_;
+ QString main_block_text_commands_file_;
 
  QString gtagml_setup_;
  void* user_data_;
@@ -47,6 +50,8 @@ private:
  QMap<QString, QStringList> post_processing_codes_;
 
  QMap<QString, GTagML_Output_Blocks*> blocks_by_path_;
+
+ QMap<QString, QPair<QString, u4>> main_block_text_commands_;
 
 
 public:
@@ -59,10 +64,14 @@ public:
  ACCESSORS(QString ,gt_copy_folder)
  ACCESSORS(QString ,root_folder)
 
+ ACCESSORS(QString ,main_block_text_commands_file)
+
 
  ACCESSORS__RGET(MACRO_PASTE(QMap<QString, QStringList>) ,post_processing_codes)
 
  ACCESSORS__RGET(MACRO_PASTE(QMap<QString, GTagML_Output_Blocks*>) ,blocks_by_path)
+
+ ACCESSORS__RGET(MACRO_PASTE(QMap<QString, QPair<QString, u4>>) ,main_block_text_commands)
 
 
  void finalize_post_processing_codes(QString path, QStringList& qsl);
