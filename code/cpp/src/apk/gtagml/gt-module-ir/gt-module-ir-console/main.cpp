@@ -32,7 +32,6 @@ int main(int argc, char *argv[])
 
 
 // QString paper_name = "itm";
-//
  QString paper_name = "ctg";
 // QString paper_name = "icg";
 
@@ -50,21 +49,6 @@ int main(int argc, char *argv[])
     :do-first  intro.gt
    ;.
    )").arg(DEMO_DOCUMENT_FOLDER).arg(paper_name) );
-
-
-// mir.read_lines(QString(R"(
-//  .; the folder is just outside the archive
-//     but it is copied in @/dev/documents/ctg ...
-//   ;.
-
-//  gt-compile-manuscript  $  :no-first  :info-path
-//    :setup-once  :setup-sdi
-//      %1/icg/src/icg.tex
-//    :manuscript  %1/icg/manuscript
-//    :gt-copy-folder  %1/icg/gt-copy
-//   ;.
-//   )").arg(DEMO_DOCUMENT_FOLDER) );
-
 
  mir.run_lines();
  return 0;

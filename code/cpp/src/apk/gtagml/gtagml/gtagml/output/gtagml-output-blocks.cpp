@@ -755,8 +755,10 @@ void GTagML_Output_Blocks::generate_tag_command_entry(const GTagML_Output_Bundle
     }
     else
     {
-     // // TODO -- text rewrite?
      bl = block_writer_->write_tag_command_name(name, pr);//  write
+     // //  the text goes in the main block but is outside any tile/prenode
+      //    so it's not visible anywhere in the PDF/etc. output ...
+      //    just from transcriptions of the main block itself ...
      block_writer_->write_to_main(vpr.first);
     }
 
@@ -769,11 +771,6 @@ void GTagML_Output_Blocks::generate_tag_command_entry(const GTagML_Output_Bundle
 
   if(!gtc->flags.is_self_closed)
     ref_ranges_[layer_code].insert(gtc, {nullptr, {0, 0}});
-
-//  if(gtc->flags.is_region)
-//    b.qts << "\\begin{" << gtc->latex_name();
-//  else
-//    b.qts << '\\' << gtc->latex_name();
 
   reset_active_gap_code();
 
@@ -848,16 +845,9 @@ void GTagML_Output_Blocks::generate_tag_command_entry(const GTagML_Output_Bundle
 //}
 
 
-//?
-//else if(gtc->flags.is_layer_mandatory)
-//  layer_code = block_writer_->push_mandatory();
 void GTagML_Output_Blocks::generate_tag_command_leave(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Tag_Command> gtc)
 {
  CAON_PTR_DEBUG(GTagML_Tag_Command ,gtc)
-
-//?
-// QString bws = gtc->get_right_block_whitespace();
-// if(!bws.isEmpty())
 
  if(gtc->flags.has_boundary_white_whitespace)
    block_writer_->write_boundary_whitespace(" ");
@@ -909,17 +899,12 @@ void GTagML_Output_Blocks::generate_tag_command_leave(const GTagML_Output_Bundle
 
 // if(htxn_document_)
 // {
-//  if(GTagML_HTXN_Node* nhn = gtc->GTagML_htxn_node())
+//  if(GTagML_HTXN_Node* nhn = gtc->GTagML_HTXN_Node())
 //  {
 //   generate_tag_command_leave(b, *nhn);
 //   return;
 //  }
 // }
-
-// if(gtc->flags.is_region)
-//   b.qts << "\\end{" << gtc->latex_name() << '}';
-// else
-//   b.qts << '}';
 
  reset_active_gap_code();
 }
@@ -1035,8 +1020,6 @@ u1 GTagML_Output_Blocks::get_ws_gap_code(const QString& str)
 void GTagML_Output_Blocks::check_generate_whitespace(const GTagML_Output_Bundle& b, caon_ptr<GTagML_Tag_Command> gtc)
 {
  CAON_PTR_DEBUG(GTagML_Tag_Command ,gtc)
-
-
 
 // if(htxn_document_)
 // {

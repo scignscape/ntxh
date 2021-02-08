@@ -107,6 +107,8 @@ class GTagML_Graph_Build
 
  QString quote_acc_;
 
+ u1 held_semantic_mark_mode_;
+
 public:
 
 

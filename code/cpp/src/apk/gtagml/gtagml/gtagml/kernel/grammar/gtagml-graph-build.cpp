@@ -33,7 +33,7 @@ GTagML_Graph_Build::GTagML_Graph_Build(GTagML_Graph& g, GTagML_Document_Info& do
    current_parsing_mode_(GTagML_Parsing_Modes::NGML), //?current_annotation_tile_(nullptr),
    tile_acc_length_adjustment_(0),
    tile_acc_qts_(&tile_acc_), string_literal_acc_qts_(&string_literal_acc_),
-   current_raw_format_("latex")
+   current_raw_format_("latex"), held_semantic_mark_mode_(0)
 {
 
 }
@@ -486,6 +486,12 @@ void GTagML_Graph_Build::check_non_or_left_wrapped(QString wmi, caon_ptr<GTagML_
 caon_ptr<GTagML_Tag_Command> GTagML_Graph_Build::tag_command_entry(QString wmi, 
   QString prefix, QString tag_command, QString argument, QString parent_tag_type)
 {
+ if(held_semantic_mark_mode_)
+ {
+  document_info_.marks()[held_semantic_mark_mode_].last() += tag_command;
+  held_semantic_mark_mode_ = 0;
+ }
+
  check_tile_acc();
  caon_ptr<GTagML_Tag_Command> gtc = make_new_tag_command(tag_command,
    argument, parent_tag_type);
@@ -1117,16 +1123,29 @@ void GTagML_Graph_Build::check_nonstandard_special_character_sequence
 
 void GTagML_Graph_Build::semantic_mark(QString match_text, QString sem, u1 mode)
 {
- int ix = match_text.indexOf('.');
+ QString acc;
+
+ int ix = sem.indexOf("-/");
  if(ix == -1)
-   match_text.clear();
+ {
+  acc = sem;
+ }
  else
  {
-  match_text = match_text.mid(ix);
+  acc = sem.mid(0, ix);
+  sem = sem.mid(ix + 2);
  }
- if(match_text.isEmpty())
-   match_text = sem;
- QString text = QString("^%%1%2^").arg(mode).arg(sem) + "%9";
+
+ if(sem.endsWith("/+"))
+ {
+  // //  Signals that the following tag-command should be added to the mark ...
+  sem.chop(2);
+  acc = sem;
+  held_semantic_mark_mode_ = mode;
+ }
+
+ QString text = QString("%1%2^").arg(mode).arg(acc) + "%9";
+ text.prepend("^%");
  tile_acc(text);
  document_info_.marks()[mode].push_back(sem);
 }
