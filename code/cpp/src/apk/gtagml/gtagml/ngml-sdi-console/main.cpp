@@ -114,7 +114,7 @@ int main(int argc, char* argv[])
 
  dsd.review_dgh();
 
- nsd.output_pages(htxn_files, outfile);
+ nsd.output_pages(htxn_files, marks_files, outfile);
 
  QString zp = nsd.zip_path();
 

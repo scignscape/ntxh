@@ -1,0 +1,53 @@
+$$ document-title := Cognitive Transform Grammar
+$$ local-title := section1
+
+$& BiskriDescles %% (1:main) 5790 6081
+$& Descles2010 %% (1:main) 43746 43942
+$& EstherPascual p.%%9 (1:main) 35649 35654
+$& Fauconnier %% (1:main) 37411 37464
+$& LangackerFoundations pp.%%119%%and%%128 (1:main) 35621 35633
+$& LineBrandt p.%%189 (1:main) 35634 35648
+$& PerAageBrandt %% (1:main) 37465 37466
+
+
+= 21580:
+= 1
+Ann Copestake
+
+= 21593:
+= 9
+
+= 21598:
+= 1
+Ted Briscoe
+
+= 21609:
+= 9
+
+= 21649:
+= 1
+Geoffrey Nunberg
+
+= 21665:
+= 9
+
+= 35370:
+= 1
+Ronald Langacker
+
+= 35386:
+= 9
+
+= 37427:
+= 1
+Gilles Fauconnier
+
+= 37444:
+= 9
+
+= 37448:
+= 1
+Per Aage Brandt
+
+= 37463:
+= 9

@@ -1,0 +1,87 @@
+$$ document-title := Cognitive Transform Grammar
+$$ local-title := section2
+
+$& AnneVilnat %% (1:main) 32811 32898
+$& AsherPustejovsky example%(1:main) 28699 28727,%%p.%%5 %3
+$& AsherPustejovsky %% (1:main) 60270 60272
+$& BarkerShanTG %% (1:main) 3168 3295
+$& ChoeCharniak %% (1:main) 7587 7588
+$& Gardenfors p.%%4 (1:main) 43403 43576
+$& JamesPustejovsky %% (1:main) 60257 60268
+$& JanVanEijck %% (1:main) 10074 10265
+$& KitFine %% (1:main) 46088 46097
+$& KiyoshiSudo %% (1:main) 7585 7586
+$& KubotaLevine %% (1:main) 3297 3299
+$& MeryMootRetore p.%%4 (1:main) 34211 34223
+$& OsborneMaxwell %% (1:main) 20534 20691
+$& Pinker %% (1:main) 32732 32810
+$& Ramstead p.%%38 (1:main) 44582 44808
+$& RikVanNoord %% (1:main) 10267 10270
+$& Rossi p.%(1:main) 4693 4905 %3
+$& SivaReddy %% (1:main) 7432 7584
+$& ZhaohuiLuo %% (1:main) 34329 34338
+$& ZhaohuiLuoSignatures %% (1:main) 34340 34343
+
+
+= 28620:
+= 1
+Nicholas Asher
+
+= 28634:
+= 9
+
+= 28639:
+= 1
+James Pustejovsky
+
+= 28656:
+= 9
+
+= 32780:
+= 1
+Steven Pinker
+
+= 32793:
+= 9
+
+= 43164:
+= 1
+George Lakoff
+
+= 43177:
+= 9
+
+= 43179:
+= 1
+Mark Johnson
+
+= 43191:
+= 9
+
+= 43193:
+= 1
+Leonard Talmy
+
+= 43206:
+= 9
+
+= 43309:
+= 1
+Jean Petitot
+
+= 43321:
+= 9
+
+= 43996:
+= 1
+Maxwell James Ramstead
+
+= 44018:
+= 9
+
+= 46076:
+= 1
+Kit Fine
+
+= 46084:
+= 9

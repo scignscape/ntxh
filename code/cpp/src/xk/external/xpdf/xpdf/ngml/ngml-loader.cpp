@@ -8,6 +8,7 @@
 #include "ngml-loader.h"
 
 #include "textio.h"
+USING_KANS(TextIO)
 
 #include "xpdf-qt/XpdfWidget.h"
 
@@ -201,16 +202,34 @@ QChar decode(u1 cue)
 
 }
 
+void NGML_Loader::check_subdocument(QString landmark_file)
+{
+ if(!subdocuments_.contains(landmark_file))
+ {
+  subdocuments_.insert(landmark_file, Subdocument());
+ }
+}
+
+
 QString NGML_Loader::read_sentence(QString landmark_file, u4 start_index, u4 end_index)
 {
- if(!blocks_.contains(landmark_file))
+ check_subdocument(landmark_file);
+
+ if(subdocuments_[landmark_file].blocks_.isEmpty())
  {
   QFileInfo qfi(pdf_file_);
   QString folder = qfi.absolutePath();
-  load_htxn_block(folder, landmark_file);
+
+  QString base_file_name = load_htxn_block(folder, landmark_file);
+
+  if(base_file_name.isEmpty())
+    return "??";
+
+  // // should this be somewhere else?
+  load_marks(landmark_file, unzip_folder_ + "/" + base_file_name + ".marks.txt");
  }
 
- QVector<u1>& chars = blocks_[landmark_file];
+ QVector<u1>& chars = subdocuments_[landmark_file].blocks_;
 
  QString result;
  QTextStream qts(&result);
@@ -226,6 +245,91 @@ QString NGML_Loader::read_sentence(QString landmark_file, u4 start_index, u4 end
  return result;
 }
 
+
+// copied from GTagML_Output_Blocks
+
+void NGML_Loader::load_marks(QString landmark_file, QString path)
+{
+ check_subdocument(landmark_file);
+
+ u4 current_index = 0;
+ u1 current_mode = 0;
+ u4 last_index = 0;
+ u1 last_mode = 0;
+
+ QMultiMap<QString, QString> info_params;
+
+// QMap<QString, QStringList> citations;
+
+ Subdocument& subd = subdocuments_[landmark_file];
+
+
+ load_file(path, [this, &subd, &info_params, //&citations,
+           &current_index,
+   &current_mode, &last_index, &last_mode](QString& line) -> int
+ {
+  if(line.isEmpty())
+    return 0;
+
+  if(line.startsWith("$$ "))
+  {
+   if(line.endsWith(';'))
+     line.chop(1);
+   QStringList qsl = line.mid(3).trimmed().split(" := ", Qt::KeepEmptyParts);
+   QString key = qsl.takeFirst();
+   for(QString v : qsl)
+     info_params.insert(key, v);
+   return 0;
+  }
+
+  if(line.startsWith("$& "))
+  {
+   QStringList qsl = line.mid(3).trimmed().split(' ', Qt::SkipEmptyParts);
+   QString citation_text = qsl.takeFirst();
+   citation_text.replace("%%", " ");
+   QString optarg = qsl.takeFirst();
+   if(optarg == "%%")
+     optarg.clear();
+   optarg.prepend('[');
+   optarg.append(']');
+   if(qsl.size() >= 3)
+   {
+    QString layer_code = qsl.takeFirst();
+    int index = layer_code.startsWith('(')? 1 : 0;
+    QString summary = QString("%1=%2:%4-%3").arg(optarg)
+      .arg(layer_code.mid(index, 1)).arg(qsl.takeFirst()).arg(qsl.takeFirst());
+    subd.citations_[citation_text].push_back(summary);
+   }
+   return 0;
+  }
+
+
+  if(line.startsWith("= "))
+  {
+   line = line.mid(2).trimmed();
+   if(line.endsWith(':'))
+   {
+    line.chop(1);
+    last_index = current_index;
+    current_index = line.toUInt();
+   }
+   else
+   {
+    last_mode = current_mode;
+    current_mode = line.toUInt();
+    if(current_mode == 9)
+    {
+     subd.marks_by_mode_[last_mode][last_index].second = current_index;
+    }
+   }
+  }
+  else
+  {
+   subd.marks_by_mode_[current_mode][current_index] = {line, 0};
+  }
+  return 0;
+ });
+}
 
 void NGML_Loader::load_pages(XpdfWidget* pdf, QString file_name)
 {
@@ -429,7 +533,7 @@ MainSwitch:
 
 }
 
-void NGML_Loader::load_htxn_block(QString folder, QString file)
+QString NGML_Loader::load_htxn_block(QString folder, QString file)
 {
  //QDir qd(folder);
  QDir qd(unzip_folder_);
@@ -445,11 +549,11 @@ void NGML_Loader::load_htxn_block(QString folder, QString file)
   qd.cd(folder);
   infile.setFileName(qd.absoluteFilePath(file + ".htxn.txt"));
   if (!infile.open(QIODevice::ReadOnly | QIODevice::Text))
-    return;
+    return {};
  }
  QTextStream in_ts(&infile);
 
- QVector<u1>& block = blocks_[file];
+ QVector<u1>& block = subdocuments_[file].blocks_;
 
  QChar qc;
  while(!in_ts.atEnd())
@@ -486,6 +590,8 @@ void NGML_Loader::load_htxn_block(QString folder, QString file)
 //  {
 //  }
  }
+
+ return ff;
 }
 
 // // mostly copied from NGML Document ...

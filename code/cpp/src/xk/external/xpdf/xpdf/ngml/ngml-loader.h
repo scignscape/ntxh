@@ -41,15 +41,27 @@ class NGML_Loader
   int paragraph_count;
  };
 
+ struct Subdocument
+ {
+  QVector<QMap<u4, QPair<QString, u4>>> marks_by_mode_;
+  QMap<QString, QStringList> citations_;
+  QVector<u1> blocks_;
+
+  Subdocument() : marks_by_mode_{{},{},{},{},{}} {}
+ };
+
  QVector<QMultiMap<QPair<int, int>, element>> elements_;
 
  QMap<int, file_job_info> file_job_info_;
   //
- QMap<QString, QVector<u1>> blocks_;
+ QMap<QString, Subdocument> subdocuments_;
 
  QString pdf_file_;
 
  QString unzip_folder_;
+
+
+
 
  // QMap<QPair<int, int>, QString> welements_;
 
@@ -64,10 +76,13 @@ public:
 
  QString read_sentence(QString landmark_file, u4 start_index, u4 end_index);
 
- void load_htxn_block(QString folder, QString file);
+ QString load_htxn_block(QString folder, QString file);
 
  void check_unzip_folder(QString zip_file_path);
 
+ void load_marks(QString landmark_file, QString path);
+
+ void check_subdocument(QString landmark_file);
 
 };
 

@@ -740,7 +740,7 @@ void NGML_SDI_Document::parse()
 //? output_pages();
 }
 
-void NGML_SDI_Document::output_pages(QStringList htxn_files, QString mergefile)
+void NGML_SDI_Document::output_pages(QStringList htxn_files, QStringList marks_files, QString mergefile)
 {
  QDir qd(folder_);
 
@@ -790,6 +790,14 @@ void NGML_SDI_Document::output_pages(QStringList htxn_files, QString mergefile)
   QString hn = qfi.baseName() + ".htxn";
   files.push_back({hf, {"pages/" + hn, hn}});
  }
+
+ for(QString mf : marks_files)
+ {
+  QFileInfo qfi(mf);
+  QString mn = qfi.baseName() + ".marks.txt";
+  files.push_back({mf, {"pages/" + mn, mn}});
+ }
+
 
  QuaZip zip(zip_path_);
  zip.setFileNameCodec("IBM866");

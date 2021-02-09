@@ -1,0 +1,41 @@
+$$ document-title := Cognitive Transform Grammar
+$$ local-title := section4
+
+$& AkbikBross %% (1:main) 64573 64574
+$& Belohlavek %% (1:main) 116527 116528
+$& BernardyEtAl %% (1:main) 133286 133311
+$& Debusmann %% (1:main) 64565 64566
+$& DebusmannDuchierRossberg %% (1:main) 64567 64568
+$& DebusmannThesis %% (1:main) 64457 64564
+$& HolmqvistDiss %% (1:main) 64061 64062
+$& HolmqvistDiss %% (1:main) 71111 71176
+$& HongEisner %% (1:main) 64571 64572
+$& JiriBenovsky p.%%8 (1:main) 111254 111269
+$& Johnson p.%%208 (1:main) 114928 114929
+$& KennethHolmqvist %% (1:main) 64063 64064
+$& KepserMonnich %% (1:main) 64689 64690
+$& KongRushSmith %% (1:main) 64627 64688
+$& LakoffJohnson p.%%18 (1:main) 114368 114878
+$& LakoffJohnson p.%%90 (1:main) 114879 114927
+$& LangackerInteractive pages%%102-103 (1:main) 90251 90271
+$& LangackerInteractive page%%119 (1:main) 96497 96498
+$& LangackerInteractive page%%115 (1:main) 98276 98531
+$& LangackerInvestigations page%%250 (1:main) 100408 100661
+$& LuoSoloviev %% (1:main) 133694 134077
+$& MathieuBouchard %% (1:main) 109507 109518
+$& MattSelway %% (1:main) 63697 64060
+$& MichaelJubien %% (1:main) 111095 111235
+$& Nivre %% (1:main) 64569 64570
+$& Schneider %% (1:main) 64691 64692
+$& TanakaEtAl %% (1:main) 133312 133313
+$& Wille %% (1:main) 116529 116530
+$& XiaPalmer %% (1:main) 64693 64694
+$& YiyuYao %% (1:main) 116358 116526
+
+
+= 18411:
+= 1
+Edmund Husserl
+
+= 18418:
+= 9
