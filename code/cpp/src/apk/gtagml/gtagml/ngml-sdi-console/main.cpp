@@ -52,9 +52,10 @@ int main(int argc, char* argv[])
 //   });
 
 //
- QString paper_name = "ctg";
+// QString paper_name = "ctg";
 // QString paper_name = "icg";
-// QString paper_name = "itm";
+//
+ QString paper_name = "itm";
 
  QStringList cmdl = get_cmdl(argc, argv, 2, {
    {&folder, QString(DEFAULT_SDI_FOLDER "/%1/src/setup").arg(paper_name)},
@@ -65,10 +66,11 @@ int main(int argc, char* argv[])
    {&czfile, {}}
    });
 
+
 // folder = "/home/nlevisrael/gits/ntxh/wip-sebi/dev/documents/ctg/src/setup";
 // file = "/home/nlevisrael/gits/ntxh/wip-sebi/dev/documents/ctg/src/setup/out/ctg.prep.sdi.ntxh";
-
 // QString outfile = "/home/nlevisrael/gits/ntxh/wip-sebi/dev/documents/ctg/sdi-merge.ntxh";
+
 
  QStringList prelatex_files;
  QStringList marks_files;
@@ -122,7 +124,7 @@ int main(int argc, char* argv[])
  {
   // // we've generated the zip file, now
    //   copy it for embedding ...
-  copy_file_to_folder(zp, folder);
+  copy_binary_file_to_folder(zp, folder);
  }
 
 #ifdef HIDE

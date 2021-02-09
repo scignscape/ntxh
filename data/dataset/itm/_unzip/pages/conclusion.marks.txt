@@ -1,0 +1,6 @@
+
+$& DavidMorris %% (1:main) 9768 9986
+$& GoguenSemioticMorphism %% (1:main) 13500 13596
+$& GoguenWhatIs %% (1:main) 13597 13598
+$& Strle %% (1:main) 13406 13416
+

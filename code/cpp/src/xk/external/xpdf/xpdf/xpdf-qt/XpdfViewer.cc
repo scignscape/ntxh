@@ -3278,7 +3278,8 @@ void XpdfViewer::addTab() {
 
      qm->addAction("Copy sentence", [this, landmark_file, start_index, end_index]
      {
-
+      QString sentence = ngml_loader_->read_sentence(landmark_file, start_index.first, end_index.first);
+      QApplication::clipboard()->setText(sentence);
      });
     }
    }

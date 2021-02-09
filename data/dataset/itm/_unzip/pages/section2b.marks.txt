@@ -1,0 +1,12 @@
+
+$& AnounEtAl %% (1:main) 9707 10237
+$& AntonioLieto %% (1:main) 663 664
+$& BittnerSmithDonnelly %% (1:main) 11280 11449
+$& JacobWhitehill %% (1:main) 665 666
+$& KiselyovShan %% (1:main) 10239 10242
+$& OzkanKilic %% (1:main) 667 668
+$& PeiWang %% (1:main) 289 290
+$& RaubalAdamsCSML %% (1:main) 11489 11523
+$& SpivakKent %% (1:main) 11487 11488
+$& StAmant %% (1:main) 11555 11567
+

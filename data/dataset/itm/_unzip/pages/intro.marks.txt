@@ -1,0 +1,11 @@
+
+$& BarrySmith %% (1:main) 2523 2524
+$& BergenChang %% (1:main) 6678 6814
+$& BittnerSmithDonnelly %% (1:main) 2526 2592
+$& KitFine %% (1:main) 1985 2522
+$& Pinker %% (1:main) 4907 5188
+$& Talmy %% (1:main) 5189 5190
+$& VisettiCadiot %% (1:main) 6815 6816
+$& WiegandGestalts %% (1:main) 3723 3724
+$& WiegandMereology %% (1:main) 2909 3722
+
