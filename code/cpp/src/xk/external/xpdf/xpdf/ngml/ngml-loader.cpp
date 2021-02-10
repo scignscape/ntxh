@@ -210,9 +210,25 @@ void NGML_Loader::check_subdocument(QString landmark_file)
  }
 }
 
+void NGML_Loader::sentence::add_marks_info(QString& info)
+{
+ if(marks.isEmpty())
+   return;
+ info += "\n\nKey Phrases or Other Semantic Marks:\n";
+
+ for(sentence_mark& sm : marks)
+ {
+  info += QString("\ntext:%1\n (internal data: start:%2, end:%3, mode:%4)")
+    .arg(sm.text).arg(sm.start).arg(sm.end).arg(sm.mode);
+ }
+}
+
+
 
 QString NGML_Loader::read_sentence(QString landmark_file, u4 start_index, u4 end_index)
 {
+ QString result;
+
  check_subdocument(landmark_file);
 
  if(subdocuments_[landmark_file].blocks_.isEmpty())
@@ -229,9 +245,48 @@ QString NGML_Loader::read_sentence(QString landmark_file, u4 start_index, u4 end
   load_marks(landmark_file, unzip_folder_ + "/" + base_file_name + ".marks.txt");
  }
 
+ auto it = subdocuments_[landmark_file].sentences_.find(start_index);
+ if(it != subdocuments_[landmark_file].sentences_.end())
+ {
+  result = (*it).text;
+   // // this recalculates but it doesn't seem worth it to stash this ...
+  (*it).add_marks_info(result);
+  return result;
+ }
+
  QVector<u1>& chars = subdocuments_[landmark_file].blocks_;
 
- QString result;
+ QList<sentence_mark> marks;
+
+ for(u1 u = 1; u <= 4; ++u)
+ {
+  QMap<u4, QPair<QString, u4>>& qmap =
+    subdocuments_[landmark_file].marks_by_mode_[u];
+
+  QMapIterator<u4, QPair<QString, u4>> it(qmap);
+
+//  QList<QPair<u4, u4>> ranges;
+//  QStringList strings;
+
+  while(it.hasNext())
+  {
+   it.next();
+   u4 start = it.key();
+   if( (start >= start_index) && (start <= end_index) )
+   {
+    // // i.e. the mark is inside the sentence range ...
+    sentence_mark sm(u);
+    sm.start = start;
+    sm.end = it.value().second;
+    sm.text = it.value().first;
+    marks.push_back(sm);
+//    u4 end = it.value().second;
+//    ranges.push_back({start, end});
+//    strings.push_back(qs);
+   }
+  }
+ }
+
  QTextStream qts(&result);
 
  for(u4 uu = start_index; uu <= end_index; ++uu)
@@ -242,6 +297,9 @@ QString NGML_Loader::read_sentence(QString landmark_file, u4 start_index, u4 end
   qts << decoded;
  }
 
+ subdocuments_[landmark_file].sentences_[start_index] = {start_index, end_index, result, marks};
+
+ subdocuments_[landmark_file].sentences_[start_index].add_marks_info(result);
  return result;
 }
 

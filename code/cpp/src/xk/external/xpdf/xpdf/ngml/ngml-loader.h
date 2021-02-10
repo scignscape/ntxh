@@ -41,11 +41,32 @@ class NGML_Loader
   int paragraph_count;
  };
 
+ struct sentence_mark
+ {
+  u1 mode;
+  u4 start;
+  u4 end;
+  QString text;
+  sentence_mark(u1 m) : mode(m), start(0), end(0) {}
+ };
+
+ struct sentence
+ {
+  u4 start;
+  u4 end;
+  QString text;
+  QList<sentence_mark> marks;
+  void add_marks_info(QString& info);
+
+ };
+
  struct Subdocument
  {
   QVector<QMap<u4, QPair<QString, u4>>> marks_by_mode_;
   QMap<QString, QStringList> citations_;
   QVector<u1> blocks_;
+
+  QMap<u4, sentence> sentences_;
 
   Subdocument() : marks_by_mode_{{},{},{},{},{}} {}
  };
