@@ -4,10 +4,14 @@
 //     (See accompanying file LICENSE_1_0.txt or copy at
 //           http://www.boost.org/LICENSE_1_0.txt)
 
+
 #include <QDebug>
 
 
 #include <QCoreApplication>
+
+#include <QFileInfo>
+#include <QDir>
 
 
 #include "clo43sd-data/clo-file.h"
@@ -33,9 +37,16 @@
 #include "dgdb-white/types/dw-type-system.h"
 #include "dgdb-white/types/dw-type.h"
 
+#include "withs.h"
+
 #include "global-types.h"
 
-//#include "ntxh-parser/ntxh-document.h"
+extern "C" {
+#include "whitedb/_whitedb.h"
+}
+
+//
+#include "ntxh-parser/ntxh-document.h"
 
 #include "kans.h"
 
@@ -79,11 +90,88 @@ int main(int argc, char *argv[])
 
  DW_Manager& dwm = *dw->new_manager(); 
 
+ DW_Record tagged;
 
- dwm.with_check_create() << [dw]()
+ dwm.with_check_create() << [dw, &tagged]()
  {
-  dw->new_tag_record("Default@Info");
+  tagged = dw->new_tag_record("Default@Info");
  };
+
+ if(tagged.id() == 0)
+   tagged = dw->find_tag_record("Default@Info");
+
+ // // write species to database
+ {
+  NTXH_Document doc(DEFAULT_NTXH_FOLDER "/clo43sd/species.ntxh");
+  doc.parse();
+  CLO_Database cld; //(nullptr);
+  cld.set_external_root_folder(CLO43SD_ROOT_FOLDER);
+  QVector<CLO_Species*>& species = cld.species_vec();
+  QVector<NTXH_Graph::hypernode_type*>& hns = doc.top_level_hypernodes();
+
+//  QMap<u4, QString> icm;
+//  icm[0] = "Species::Abbreviation";
+
+  for(NTXH_Graph::hypernode_type* hn : hns)
+  {
+   doc.graph()->get_sfsr(hn, {{1,3}}, [&species]
+     (QVector<QPair<QString, void*>>& prs)
+   {
+    CLO_Species* s = new CLO_Species;
+    s->set_abbreviation(prs[0].first);
+    s->set_instances(prs[1].first.toUInt());
+    s->set_name(prs[2].first);
+    species.push_back(s);
+   });
+  }
+
+  cld.check_species_folders();
+  for(CLO_Species* s : species)
+  {
+   dw->with_new_free_form_record(3) << [s](DW_Instance& dwi,
+     DW_Instance::Free_Form_Value** vals)
+   {
+    void* white = dwi.wdb_instance()->white();
+    vals[1]->wg_encoded = wg_encode_str(white, (char*) s->abbreviation().toStdString().c_str(), nullptr);
+    vals[2]->qvariant = s->instances();
+    vals[3]->qvariant = s->name();
+   };
+  }
+
+  auto process_files = [dw](QFileInfo& qfi, CLO_File::Kinds k)
+  {
+   QString bn = qfi.baseName();
+   CLO_File species_file(k);
+   species_file.set_abbreviation(bn.left(4));
+   bn.remove(0, 4);
+   species_file.set_tail(bn);
+
+   dw->with_new_free_form_record(3) << [&species_file](DW_Instance& dwi,
+     DW_Instance::Free_Form_Value** vals)
+   {
+    void* white = dwi.wdb_instance()->white();
+    vals[1]->qvariant = (u1) species_file.kind();
+    vals[2]->wg_encoded = wg_encode_str(white, (char*)
+      species_file.abbreviation().toStdString().c_str(), nullptr);
+    vals[3]->qvariant = species_file.tail();
+   };
+  };
+
+  with_files(QDir(CLO43SD_ROOT_FOLDER "/logmelspec")).filter({"*.npy"}) <<
+    [process_files](QFileInfo& qfi)
+  {
+   process_files(qfi, CLO_File::Kinds::NPY_Logmelspec);
+  };
+
+  with_files(QDir(CLO43SD_ROOT_FOLDER "/mfcc")).filter({"*.npy"}) <<
+    [process_files](QFileInfo& qfi)
+  {
+   process_files(qfi, CLO_File::Kinds::NPY_MFCC);
+  };
+
+  dw->update_tagged_record(tagged, QVariant(species.size()));
+ }
+
 
  return 0;
 

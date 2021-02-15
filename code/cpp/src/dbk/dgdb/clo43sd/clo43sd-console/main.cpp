@@ -70,18 +70,36 @@ void load_species(DW_Manager& dwm,
 int main(int argc, char* argv[])
 {
  DW_Instance* dw = DGEnvironment(
-   DEFAULT_DEV_DGDB_FOLDER "/instances/clo43sd");
+   DEFAULT_DEV_DGDB_FOLDER "/instances/clo43sd/import");
 
  // // local_scratch_mode has no persistence at all.
-  //   Scratch mode resents the database whenever it is 
-  //   opened by DigammaDB, but keeps the database in memory 
-  //   in between (so e.g. it can be examined via the wgdb utility). 
+  //   Scratch mode resents the database whenever it is
+  //   opened by DigammaDB, but keeps the database in memory
+  //   in between (so e.g. it can be examined via the wgdb utility).
  //dw->Config.flags.local_scratch_mode = true;
 
- dw->Config.flags.scratch_mode = true;
+// dw->Config.flags.scratch_mode = true;
  dw->Config.flags.avoid_record_pointers = true;
 
- DW_Manager* dwm = dw->new_manager(); 
+ DW_Manager& dwm = *dw->new_manager();
+
+ dw->init();
+
+ DW_Record tagged = dw->find_tag_record("Default@Info");
+
+ u4 size;
+ {
+  QByteArray qba;
+  dw->get_hypernode_payload(tagged, qba);
+  QVariant qvar;
+  QDataStream qds(&qba, QIODevice::ReadOnly);
+  qds >> qvar;
+  size = qvar.toInt();
+ }
+
+ CLO_Database cdb;
+
+ load_species(dwm, cdb);
 
 
 // dw->init();

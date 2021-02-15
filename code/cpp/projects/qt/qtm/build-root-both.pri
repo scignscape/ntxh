@@ -110,6 +110,7 @@ RELAE_GRAPH_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/hgdm/relae-graph
 PHAON_GRAPH_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/hgdm/phaon-graph
 NTXH_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/hgdm/ntxh
 DSMAIN_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/dataset/dsmain
+SSQM_DSMAIN_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/ssqm/ssqm-dsmain
 XPDF_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/xpdf
 APPLICATION_MODEL_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/dataset/application-model
 CONFIG_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/dataset/config

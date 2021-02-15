@@ -16,13 +16,20 @@ include($$ROOT_DIR/../preferred/sysr.pri)
 #include($$ROOT_DIR/../preferred/sysr-c.pri)
 
 DEFINES += DEFAULT_DEV_DGDB_FOLDER=\\\"$$ROOT_DIR/dev/consoles/dgdb\\\"
+DEFINES += DEFAULT_NTXH_FOLDER=\\\"$$ROOT_DIR/dev/consoles/dgdb/ntxh\\\"
+DEFINES += CLO43SD_ROOT_FOLDER=\\\"$$ROOT_DIR/dev/external/clo43sd/CLO-43SD\\\"
+
 
 DEFINES += USE_KANS
 
 
 INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR $$WHITEDB_SRC_GROUP_DIR
 
-#INCLUDEPATH += $$SRC_GROUP_DIR/dgdb-white
+INCLUDEPATH += $$NTXH_SRC_GROUP_DIR
+INCLUDEPATH += $$NTXH_SRC_GROUP_DIR/ntxh
+
+INCLUDEPATH += $$RELAE_GRAPH_SRC_GROUP_DIR
+INCLUDEPATH += $$PHAON_GRAPH_SRC_GROUP_DIR
 
 INCLUDEPATH += $$SRC_PROSET_DIR/dgdb-white
 INCLUDEPATH += $$SRC_PROSET_DIR/dgdb-white/dgdb-white

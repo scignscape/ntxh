@@ -34,7 +34,6 @@ KANS_CLASS_DECLARE(DSM ,Test_Series)
 KANS_CLASS_DECLARE(DSM ,Test_Sample)
 KANS_CLASS_DECLARE(DSM ,Test_Sentence)
 
-class CLO_Species;
 
 USING_KANS(DSM)
 
@@ -56,12 +55,8 @@ class QGridLayout;
 class QMediaPlayer;
 class QProcess;
 class QTcpServer;
-class QListWidget;
-class QSplitter;
 
 class ScignStage_Clickable_Label;
-class ScignStage_Audio_TableModel;
-class ScignStage_Audio_TableView;
 
 class XPDF_Bridge;
 
@@ -85,13 +80,8 @@ class ScignStage_Audio_Dialog : public QDialog
  QPushButton* button_proceed_;
 
 
- QHBoxLayout* main_splitter_layout_;
- QSplitter* main_splitter_;
-
- QHBoxLayout* middle_layout1_;
+ QHBoxLayout* middle_layout_;
  QVBoxLayout* main_layout_;
-
- QListWidget* main_list_;
 
  QLabel* sentence_label_;
 
@@ -104,17 +94,31 @@ class ScignStage_Audio_Dialog : public QDialog
  QPushButton* take_screenshot_button_;
 
 
-// QScrollArea* grid_scroll_area_;
-// QFrame* main_frame_;
-// QGridLayout* main_grid_layout_;
+ QScrollArea* grid_scroll_area_;
+ QFrame* main_frame_;
+ QGridLayout* main_grid_layout_;
 
  NAV_Audio1D_Panel* nav_panel_;
 
  XPDF_Bridge* xpdf_bridge_;
 
+ QVector<QString> files_;
+
+ QVector<Test_Sample*>* samples_;
+
+ void test_to_string(QString& result, bool wl);
+
+ void smos_to_string(QString& result, bool wl);
+ void nmos_to_string(QString& result, bool wl);
+ void gmos_to_string(QString& result, bool wl);
+
+ void save_to_user_select_file(QString text);
+
  QMap<Test_Sample*, QPair<QLabel*, int> > sample_to_label_map_;
 
  Test_Sample* last_sample_;
+
+ QMediaPlayer* player_;
 
  int current_index_;
 
@@ -138,10 +142,6 @@ class ScignStage_Audio_Dialog : public QDialog
 
  std::function<void(Phaon_Runner&)> phr_init_function_;
  std::function<void()> screenshot_function_;
-
- ScignStage_Audio_TableView* main_table_view_;
-
-//? CLO_Species* current_species_;
 
  bool xpdf_is_ready();
  void check_phr();
@@ -179,23 +179,15 @@ class ScignStage_Audio_Dialog : public QDialog
 
 public:
 
+
+
  ScignStage_Audio_Dialog(XPDF_Bridge* xpdf_bridge,
-   QWidget* parent = nullptr);
+   Test_Series* ts, QWidget* parent = nullptr);
 
  ~ScignStage_Audio_Dialog();
 
- void redraw_file_list(QStringList qsl);
-
- int get_current_volume();
- quint8 get_repeat_rate();
-
  ACCESSORS__SET(std::function<void(Phaon_Runner&)>, phr_init_function)
  ACCESSORS__SET(std::function<void()> ,screenshot_function)
-
-//? ACCESSORS(CLO_Species* ,current_species)
-
-
- void set_table_model(ScignStage_Audio_TableModel* tm);
 
  // //  Kernel Application Interface
  void test_msgbox(QString msg);
@@ -213,10 +205,6 @@ Q_SIGNALS:
  void canceled(QDialog*);
  void accepted(QDialog*);
  void take_screenshot_requested();
-
- void main_table_view_row_selected(int r);
-
- void file_list_row_selected(int, QString, QClipboard*);
 
 public Q_SLOTS:
 

@@ -9,8 +9,7 @@
 
 #include "styles.h"
 
-#include "scignstage-audio-tablemodel.h"
-#include "scignstage-audio-tableview.h"
+
 
 
 #include <QApplication>
@@ -64,40 +63,39 @@
 
 #include <QListWidget>
 
-//#include "dsmain/test-series.h"
-//#include "dsmain/test-sample.h"
-//#include "dsmain/audio-sample.h"
-//#include "dsmain/assessment-scores-average.h"
+#include "ssqm-dsmain/test-series.h"
+#include "ssqm-dsmain/test-sample.h"
+#include "ssqm-dsmain/audio-sample.h"
+#include "ssqm-dsmain/assessment-scores-average.h"
 
 #include "xpdf-bridge.h"
 
-//#include "dsmain/test-sentence.h"
+#include "ssqm-dsmain/test-sentence.h"
+
+#undef USING_XPDF
 
 //#include "PhaonLib/phaon-runner.h"
-
 //#include "kauvir-phaon/kph-command-package.h"
-
 //#include "kauvir-code-model/kcm-channel-group.h"
 //#include "kauvir-code-model/kauvir-code-model.h"
+
 
 #include "textio.h"
 
 USING_KANS(TextIO)
 
 //USING_KANS(Phaon)
-
 //USING_QSNS(ScignStage)
 
 
 ScignStage_Audio_Dialog::ScignStage_Audio_Dialog(XPDF_Bridge* xpdf_bridge,
-  //Test_Series* ts,
+  Test_Series* ts,
   QWidget* parent)
-  : QDialog(parent), xpdf_bridge_(xpdf_bridge), last_sample_(nullptr),
+  : QDialog(parent), xpdf_bridge_(xpdf_bridge), player_(nullptr), last_sample_(nullptr),
     last_highlight_(nullptr), xpdf_process_(nullptr), tcp_server_(nullptr),
     phr_(nullptr), phr_init_function_(nullptr), screenshot_function_(nullptr),
     current_tcp_msecs_(0),
-    xpdf_port_(0), current_index_(-1),
-    max_index_(0), current_volume_(50) //, current_species_(nullptr)
+    xpdf_port_(0), current_index_(-1), max_index_(0), current_volume_(50)
 {
  // // setup RZW
 
@@ -160,65 +158,121 @@ ScignStage_Audio_Dialog::ScignStage_Audio_Dialog(XPDF_Bridge* xpdf_bridge,
 
  main_layout_->addLayout(top_buttons_layout_);
 
- main_splitter_layout_ = new QHBoxLayout;
+ middle_layout_ = new QHBoxLayout;
 
- main_table_view_ = new ScignStage_Audio_TableView;
- main_splitter_layout_->addWidget(main_table_view_);
+ // //   Foreground
+ main_frame_ = new QFrame(this);
 
- connect(main_table_view_->verticalHeader(),
-         SIGNAL(sectionClicked(int)), this,
-   SIGNAL(main_table_view_row_selected(int)));
+ main_frame_->setMinimumHeight(250);
 
- main_list_ = new QListWidget;
- for(int i = 0; i < 10; ++i)
+ main_frame_->setMinimumWidth(300);
+
+ main_frame_->setContextMenuPolicy(Qt::CustomContextMenu);
+
+ main_grid_layout_ = new QGridLayout;
+
+ int r = 0;
+
+ files_.resize(ts->samples().size());
+
+ max_index_ = files_.size() - 1;
+
+ samples_ = &ts->samples();
+
+ QStringList theaders {
+  "Test 1",
+  "Test 2"
+ };
+
+ QStringList headers {
+  "File Name", "S-MOS",
+  "N-MOS", "G-MOS",
+  "S-MOS", "N-MOS", "G-MOS"
+ };
+
+ int cc = 1;
+ for(QString h : theaders)
  {
-  main_list_->addItem("N/A");
+  QLabel* lbl = new QLabel(h, this);
+  main_grid_layout_->addWidget(lbl, 0, cc, 1, 3);
+  cc += 3;
  }
- main_splitter_layout_->addWidget(main_list_);
 
- main_splitter_ = new QSplitter(this);
- main_splitter_->setLayout(main_splitter_layout_);
-
- main_list_->setContextMenuPolicy(Qt::CustomContextMenu);
- connect(main_list_, &QListWidget::customContextMenuRequested,
-   [this](const QPoint& pos)
+ cc = 0;
+ for(QString h : headers)
  {
-  QListWidgetItem* qwi = main_list_->itemAt(pos);
-  if(!qwi)
-    return;
-  if(qwi->text() == "N/A")
-    return;
-  int row = main_list_->row(qwi);
-//?  Q_EMIT(file_list_row_selected(row, qwi->text()));
+  QLabel* lbl = new QLabel(h, this);
+  main_grid_layout_->addWidget(lbl, 1, cc);
+  ++cc;
+ }
 
-  QPoint gpos = main_list_->mapToGlobal(pos);
-//  QPoint fpos = main_frame_->mapFromGlobal(gpos);
-   // ->mapToGlobal(pos);
 
-  run_sample_context_menu(gpos, [this, row, qwi]()
+
+ for(Test_Sample* sa : ts->samples())
+ {
+  QString f = sa->audio_sample()->file_name();
+
+  QLabel* lbl = new QLabel(f, this);
+  sample_to_label_map_[sa] = {lbl, r};
+
+  main_grid_layout_->addWidget(lbl, r + 2, 0);
+
+  files_[r] = f;
+
+  QStringList qsl;
+  sa->assessment_scores()->to_strings(qsl);
+
+  QStringList lqsl;
+  sa->assessment_scores_with_load()->to_strings(lqsl);
+
+  int c = 1;
+  for(QString qs : qsl)
   {
-   Q_EMIT(file_list_row_selected(row, qwi->text(), nullptr));
-  }, [this, row, qwi]()
+   main_grid_layout_->addWidget(new QLabel(qs), r + 2, c);
+   ++c;
+  }
+  for(QString qs : lqsl)
   {
-   QClipboard* clipboard = QApplication::clipboard();
-   Q_EMIT(file_list_row_selected(row, qwi->text(), clipboard));
-  });
+   main_grid_layout_->addWidget(new QLabel(qs), r + 2, c);
+   ++c;
+  }
+
+  ++r;
+ }
+
+ main_frame_->setLayout(main_grid_layout_);
+
+ grid_scroll_area_ = new QScrollArea(this);
+ grid_scroll_area_->setWidget(main_frame_);
+
+ grid_scroll_area_->setMaximumHeight(200);
+
+ middle_layout_->addWidget(grid_scroll_area_);
+
+ connect(main_frame_, &QTableWidget::customContextMenuRequested, [this](const QPoint& qp)
+ {
+  qDebug() << qp;
+
+  QWidget* qw = QApplication::widgetAt(main_frame_->mapToGlobal(qp));
+
+  if(qw)
+  {
+   if(qw->parent() == main_frame_)
+   {
+    int i = main_grid_layout_->indexOf(qw);
+    if(i != -1)
+    {
+     int r, c, rs, cs;
+     main_grid_layout_->getItemPosition(i, &r, &c, &rs, &cs);
+     run_message_by_grid_position(qp, r, c);
+
+    }
+   }
+  }
 
  });
 
-// connect(main_table_view_->horizontalHeader(),
-//   &QHeaderView::sectionClicked, [](int r)
-// {
-//  qDebug() << "RR: " << r;
-// });
-
- main_layout_->addWidget(main_splitter_);
-
- middle_layout1_ = new QHBoxLayout;
-
-
-
- // //   Foreground
+ main_layout_->addLayout(middle_layout_);
 
  sentence_label_ = new QLabel("(sentence text)", this);
 
@@ -265,32 +319,6 @@ ScignStage_Audio_Dialog::ScignStage_Audio_Dialog(XPDF_Bridge* xpdf_bridge,
  }
 #endif // USING_XPDF
 
-}
-
-quint8 ScignStage_Audio_Dialog::get_repeat_rate()
-{
- return nav_panel_->get_repeat_value();
-}
-
-
-void ScignStage_Audio_Dialog::redraw_file_list(QStringList qsl)
-{
- for(int i = 0; i < 10; ++i)
- {
-  main_list_->item(i)->setText(qsl.value(i));
- }
-}
-
-int ScignStage_Audio_Dialog::get_current_volume()
-{
- return 250;
-}
-
-void ScignStage_Audio_Dialog::set_table_model(ScignStage_Audio_TableModel* tm)
-{
- main_table_view_->setModel(tm);
- main_table_view_->resizeColumnsToContents();
- main_table_view_->resizeRowsToContents();
 }
 
 void ScignStage_Audio_Dialog::handle_take_screenshot_requested()
@@ -345,6 +373,139 @@ void ScignStage_Audio_Dialog::play_previous_sample_in_peer_group()
  handle_peer_up();
 }
 
+void ScignStage_Audio_Dialog::show_sentence_text(int index)
+{
+ Test_Sample* ts = samples_->at(index);
+ sentence_label_->setText(ts->sentence()->raw_text().replace('_', ' '));
+}
+
+void ScignStage_Audio_Dialog::show_distractor_text(int index)
+{
+ Test_Sample* ts = samples_->at(index);
+ nav_panel_->set_distractor_text(ts->distractor_to_string());
+}
+
+void ScignStage_Audio_Dialog::highlight_sample(int index)
+{
+ if(last_highlight_)
+   last_highlight_->setStyleSheet("QLabel{background:none;}");
+ Test_Sample* ts = samples_->at(index);
+ QLabel* lbl = sample_to_label_map_[ts].first;
+ lbl->setStyleSheet("QLabel{background:yellow;}");
+}
+
+void ScignStage_Audio_Dialog::highlight_peers(int index)
+{
+ Test_Sample* ts = samples_->at(index);
+ QVector<Test_Sample*>* apl = ts->sentence()->applicable_samples_ptr();
+
+ for(Test_Sample* tsa : *apl)
+ {
+  if(tsa == ts)
+    continue;
+  QLabel* lbl = sample_to_label_map_[tsa].first;
+  lbl->setStyleSheet("QLabel{background:pink;}");
+ }
+
+}
+
+
+void ScignStage_Audio_Dialog::test_to_string(QString& result, bool wl)
+{
+ if(!samples_) return;
+ int sz = samples_->size() * 18;
+ result.resize(sz, ' ');
+ int index = 0;
+
+ for(Test_Sample* ts : *samples_)
+ {
+  Assessment_Scores_Average* scores = wl? ts->assessment_scores() :
+    ts->assessment_scores_with_load();
+  QString qs = QString::number(scores->speech_nondistortion(),
+    'f', 3);
+  result.replace(index, 5, qs);
+  index += 6;
+  qs = QString::number(scores->background_nondisruption(),
+    'f', 3);
+  result.replace(index, 5, qs);
+  index += 6;
+  qs = QString::number(scores->overall_quality(),
+    'f', 3);
+  result.replace(index, 5, qs);
+  index += 5;
+  result.replace(index, 1, '\n');
+  ++index;
+ }
+}
+
+void ScignStage_Audio_Dialog::smos_to_string(QString& result, bool wl)
+{
+ if(!samples_) return;
+ int sz = samples_->size() * 6;
+ result.resize(sz, '0');
+ int index = 0;
+
+ for(Test_Sample* ts : *samples_)
+ {
+  Assessment_Scores_Average* scores = wl? ts->assessment_scores() :
+    ts->assessment_scores_with_load();
+  QString qs = QString::number(scores->speech_nondistortion(),
+    'f', 3);
+  result.replace(index, 5, qs);
+  index += 5;
+  result.replace(index, 1, '\n');
+  ++index;
+ }
+}
+
+void ScignStage_Audio_Dialog::nmos_to_string(QString& result, bool wl)
+{
+ if(!samples_) return;
+ int sz = samples_->size() * 6;
+ result.resize(sz, '0');
+ int index = 0;
+ for(Test_Sample* ts : *samples_)
+ {
+  Assessment_Scores_Average* scores = wl? ts->assessment_scores() :
+    ts->assessment_scores_with_load();
+  QString qs = QString::number(scores->background_nondisruption(),
+    'f', 3);
+  result.replace(index, 5, qs);
+  index += 5;
+  result.replace(index, 1, '\n');
+  ++index;
+ }
+}
+
+
+void ScignStage_Audio_Dialog::gmos_to_string(QString& result, bool wl)
+{
+ if(!samples_) return;
+ int sz = samples_->size() * 6;
+ result.resize(sz, '0');
+ int index = 0;
+ for(Test_Sample* ts : *samples_)
+ {
+  Assessment_Scores_Average* scores = wl? ts->assessment_scores() :
+    ts->assessment_scores_with_load();
+  QString qs = QString::number(scores->overall_quality(),
+    'f', 3);
+  result.replace(index, 5, qs);
+  index += 5;
+  result.replace(index, 1, '\n');
+  ++index;
+ }
+}
+
+void ScignStage_Audio_Dialog::save_to_user_select_file(QString text)
+{
+ QString f = QFileDialog::getSaveFileName();
+ if(!f.isEmpty())
+ {
+  save_file(f, text);
+ }
+}
+
 void ScignStage_Audio_Dialog::run_smos_message(const QPoint& p, int col)
 {
  run_about_context_menu(p, col, [this]
@@ -357,14 +518,60 @@ void ScignStage_Audio_Dialog::run_smos_message(const QPoint& p, int col)
  },[this, col]
  {
   QString qs;
- // smos_to_string(qs, col > 3);
+  smos_to_string(qs, col > 3);
   QClipboard* clipboard = QApplication::clipboard();
   clipboard->setText(qs);
  },[this, col]
  {
   QString qs;
- // smos_to_string(qs, col > 3);
- // save_to_user_select_file(qs);
+  smos_to_string(qs, col > 3);
+  save_to_user_select_file(qs);
+ });
+}
+
+void ScignStage_Audio_Dialog::run_nmos_message(const QPoint& p, int col)
+{
+ run_about_context_menu(p, col, [this]
+ {
+  bool proceed = ask_pdf_proceed("nmos");
+  if(proceed)
+  {
+   open_pdf_file(ABOUT_FILE_FOLDER "/main.pdf", 3);
+  }
+ },[this, col]
+ {
+  QString qs;
+  nmos_to_string(qs, col > 3);
+  QClipboard* clipboard = QApplication::clipboard();
+  clipboard->setText(qs);
+ },[this, col]
+ {
+  QString qs;
+  nmos_to_string(qs, col > 3);
+  save_to_user_select_file(qs);
+ });
+}
+
+void ScignStage_Audio_Dialog::run_gmos_message(const QPoint& p, int col)
+{
+ run_about_context_menu(p, col, [this]
+ {
+  bool proceed = ask_pdf_proceed("gmos");
+  if(proceed)
+  {
+   open_pdf_file(ABOUT_FILE_FOLDER "/main.pdf", 3);
+  }
+ },[this, col]
+ {
+  QString qs;
+  gmos_to_string(qs, col > 3);
+  QClipboard* clipboard = QApplication::clipboard();
+  clipboard->setText(qs);
+ },[this, col]
+ {
+  QString qs;
+  gmos_to_string(qs, col > 3);
+  save_to_user_select_file(qs);
  });
 }
 
@@ -387,6 +594,29 @@ bool ScignStage_Audio_Dialog::ask_pdf_proceed(QString name)
  return qmb.clickedButton() == yes;
 }
 
+void ScignStage_Audio_Dialog::run_test_with_load_message(const QPoint& p, int col)
+{
+ run_about_context_menu(p, col, [this]
+ {
+  bool proceed = ask_pdf_proceed("test2");
+  if(proceed)
+  {
+   open_pdf_file(ABOUT_FILE_FOLDER "/main.pdf", 2);
+  }
+ },[this, col]
+ {
+  QString qs;
+  test_to_string(qs, col > 3);
+  QClipboard* clipboard = QApplication::clipboard();
+  clipboard->setText(qs);
+ },[this, col]
+ {
+  QString qs;
+  test_to_string(qs, col > 3);
+  save_to_user_select_file(qs);
+ });
+}
+
 void ScignStage_Audio_Dialog::run_about_context_menu(const QPoint& p, int col,
   std::function<void()> about_fn,
   std::function<void()> copy_fn,  std::function<void()> save_fn)
@@ -406,8 +636,8 @@ void ScignStage_Audio_Dialog::run_sample_context_menu(const QPoint& p,
  QMenu* qm = new QMenu(this);
  qm->addAction("Play ...", play_fn);
  qm->addAction("Copy Path to Clipboard", copy_fn);
- //QPoint g = main_frame_->mapToGlobal(p);
- qm->popup(p);
+ QPoint g = main_frame_->mapToGlobal(p);
+ qm->popup(g);
 }
 
 void ScignStage_Audio_Dialog::run_test_no_load_message(const QPoint& p, int col)
@@ -422,14 +652,14 @@ void ScignStage_Audio_Dialog::run_test_no_load_message(const QPoint& p, int col)
  },[this, col]
  {
   QString qs;
-//  test_to_string(qs, col > 3);
+  test_to_string(qs, col > 3);
   QClipboard* clipboard = QApplication::clipboard();
   clipboard->setText(qs);
  },[this, col]
  {
   QString qs;
-//  test_to_string(qs, col > 3);
-//  save_to_user_select_file(qs);
+  test_to_string(qs, col > 3);
+  save_to_user_select_file(qs);
  });
 }
 
@@ -437,6 +667,17 @@ void ScignStage_Audio_Dialog::run_message_by_grid_position(const QPoint& p, int 
 {
  static QMap<QPair<int, int>, void(ScignStage_Audio_Dialog::*)(const QPoint&, int col)>
    static_map {{
+   {{0, 1}, &ScignStage_Audio_Dialog::run_test_no_load_message},
+   {{0, 4}, &ScignStage_Audio_Dialog::run_test_with_load_message},
+
+   {{1, 1}, &ScignStage_Audio_Dialog::run_smos_message},
+   {{1, 4}, &ScignStage_Audio_Dialog::run_smos_message},
+
+   {{1, 2}, &ScignStage_Audio_Dialog::run_nmos_message},
+   {{1, 5}, &ScignStage_Audio_Dialog::run_nmos_message},
+
+   {{1, 3}, &ScignStage_Audio_Dialog::run_gmos_message},
+   {{1, 6}, &ScignStage_Audio_Dialog::run_gmos_message},
   }};
 
  auto it = static_map.find({r, c});
@@ -454,7 +695,7 @@ void ScignStage_Audio_Dialog::run_message_by_grid_position(const QPoint& p, int 
    play_file_at_current_index();
   },[this, r]
   {
-   QString f;// = files_[r - 2];
+   QString f = files_[r - 2];
    QString path = SAMPLES_FOLDER "/" + f;
 
    QClipboard* clipboard = QApplication::clipboard();
@@ -641,37 +882,57 @@ void ScignStage_Audio_Dialog::play_file_at_current_index()
  // //  2 headers rows
  int current_row = current_index_ + 2;
 
-// nav_panel_->set_sample_text(current_index_ + 1);
+ nav_panel_->set_sample_text(current_index_ + 1);
 
- QString f;// = files_[current_index_];
+ QString f = files_[current_index_];
 
  if(last_highlight_)
    last_highlight_->setStyleSheet("QLabel{background:none;}");
 
  if(last_sample_)
  {
-//  QVector<Test_Sample*>* lapl = last_sample_->sentence()->applicable_samples_ptr();
+  QVector<Test_Sample*>* lapl = last_sample_->sentence()->applicable_samples_ptr();
 
-//  for(Test_Sample* ltsa : *lapl)
-//  {
-//   QLabel* lbl = sample_to_label_map_[ltsa].first;
-//   lbl->setStyleSheet("QLabel{background:none;}");
-//  }
+  for(Test_Sample* ltsa : *lapl)
+  {
+   QLabel* lbl = sample_to_label_map_[ltsa].first;
+   lbl->setStyleSheet("QLabel{background:none;}");
+  }
  }
 
-// last_sample_ = samples_->at(current_index_);
-// sentence_label_->setText(last_sample_->sentence()->raw_text().replace('_', ' '));
+ last_sample_ = samples_->at(current_index_);
+ sentence_label_->setText(last_sample_->sentence()->raw_text().replace('_', ' '));
 
-// nav_panel_->set_distractor_text(last_sample_->distractor_to_string());
+ nav_panel_->set_distractor_text(last_sample_->distractor_to_string());
 
-// QVector<Test_Sample*>* apl = last_sample_->sentence()->applicable_samples_ptr();
+ QVector<Test_Sample*>* apl = last_sample_->sentence()->applicable_samples_ptr();
 
+ for(Test_Sample* tsa : *apl)
+ {
+  QLabel* lbl = sample_to_label_map_[tsa].first;
+  lbl->setStyleSheet("QLabel{background:pink;}");
+ }
+
+ last_highlight_ = main_grid_layout_->itemAtPosition(current_row, 0)->widget();
+ last_highlight_->setStyleSheet("QLabel{background:yellow;}");
+
+ grid_scroll_area_->ensureWidgetVisible(last_highlight_);
+
+ if(!player_)
+   player_ = new QMediaPlayer;
+
+ QString path = SAMPLES_FOLDER "/" + f;
+
+ player_->setMedia(QUrl::fromLocalFile(path));
+ player_->setVolume(current_volume_);
+ player_->play();
 
 }
 
 void ScignStage_Audio_Dialog::handle_volume_change_requested(int v)
 {
  current_volume_ = v;
+ player_->setVolume(current_volume_);
 }
 
 void ScignStage_Audio_Dialog::handle_sample_down()
@@ -687,19 +948,28 @@ void ScignStage_Audio_Dialog::handle_sample_down()
 
 void ScignStage_Audio_Dialog::handle_peer_up()
 {
-// QVector<Test_Sample*>* peers = last_sample_->get_peer_samples();
-// int i = last_sample_->index_in_peer_set();
-// Test_Sample* samp;
-// if(i == 0)
-//   samp = peers->last();
-// else
-//   samp = peers->value(i-1);
-// current_index_ = sample_to_label_map_[samp].second;
-// play_file_at_current_index();
+ QVector<Test_Sample*>* peers = last_sample_->get_peer_samples();
+ int i = last_sample_->index_in_peer_set();
+ Test_Sample* samp;
+ if(i == 0)
+   samp = peers->last();
+ else
+   samp = peers->value(i-1);
+ current_index_ = sample_to_label_map_[samp].second;
+ play_file_at_current_index();
 }
 
 void ScignStage_Audio_Dialog::handle_peer_down()
 {
+ if(!last_sample_)
+ {
+  handle_sample_first();
+  return;
+ }
+ QVector<Test_Sample*>* peers = last_sample_->get_peer_samples();
+ int i = last_sample_->index_in_peer_set() + 1;
+ Test_Sample* samp = peers->value(i, peers->value(0));
+ current_index_ = sample_to_label_map_[samp].second;
  play_file_at_current_index();
 }
 

@@ -9,6 +9,8 @@
 
 #include "dw-instance.h"
 
+#include <QDataStream>
+
 extern "C" {
 #include "whitedb/_whitedb.h"
 }
@@ -459,6 +461,18 @@ void* WDB_Instance::query_leading_rec(u4 col)
 */
 }
 
+DW_Record WDB_Instance::find_record_by_string(QString value, u4 col)
+{
+ void* result = wg_find_record_str(white_, col, WG_COND_EQUAL, (char*) value.toStdString().c_str(), NULL);
+ if(result)
+ {
+  wg_int i = wg_get_field(white_, result, 0);
+  return {wg_decode_int(white_, i), result};
+ }
+ return {0, nullptr};
+}
+
+
 void* WDB_Instance::query_leading_str(u4 col)
 {
  return wg_find_record_str(white_, col, WG_COND_NOT_EQUAL, "", NULL);
@@ -684,6 +698,20 @@ QString WDB_Instance::get_tag_field(DW_Record dr, u4 col)
 //   char* ptr = wg_decode_str(wh, wi);
 //   dwsv.data_to_ref<QString>() = QString(QLatin1String(ptr));
 
+
+void WDB_Instance::set_wg_encoded_record_field(void* rec, u4 col, n8 value)
+{
+ wg_set_field(white_, rec, col, (wg_int) value);
+}
+
+void WDB_Instance::set_qvariant_record_field(void* rec, u4 col, QVariant value)
+{
+ QByteArray qba;
+ QDataStream dsw(&qba, QIODevice::WriteOnly);
+ dsw << value;
+
+ set_qba_record_field(rec, col, qba);
+}
 
 n8 WDB_Instance::set_record_field(void* rec, u4 col, DW_Stage_Value& dwsv)
 {

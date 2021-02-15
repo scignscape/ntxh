@@ -44,10 +44,18 @@ DW_Instance::DW_Instance()
      startup_multi_index_record_count_(0),
      current_multi_index_record_count_(0),
      startup_properties_record_count_(0), 
-     current_properties_record_count_(0)
+     current_properties_record_count_(0),
+     startup_free_form_record_count_(0),
+     current_free_form_record_count_(0)
 {
 
 }
+
+DW_Record DW_Instance::find_tag_record(QString tag)
+{
+ return wdb_instance_->find_record_by_string(tag, 3);
+}
+
 
 DW_Record DW_Instance::new_tag_record(QString tag)
 {
@@ -67,6 +75,43 @@ DW_Record DW_Instance::new_tag_record(QString tag, const QByteArray& qba)
  wdb_instance_->set_str_record_field(result, 3, tag);
  return {base_id, result}; 
 }
+
+void DW_Instance::with_new_free_form_record_Package::operator<<(
+  std::function<void (DW_Instance &, Free_Form_Value**)> fn)
+{
+ _this->_with_new_free_form_record(field_count, fn);
+}
+
+void DW_Instance::_with_new_free_form_record(u4 field_count,
+  std::function<void(DW_Instance&, DW_Instance::Free_Form_Value**)> fn)
+{
+ u4 base_id = new_free_form_record_id();
+
+ void* rec = wdb_instance_->new_wg_record(field_count + 1, base_id);
+ Free_Form_Value** values = new Free_Form_Value* [field_count + 1];
+
+ for(u4 u = 0; u <= field_count; ++u)
+ {
+  values[u] = new Free_Form_Value(u);
+ }
+
+ //return {base_id, result};
+ fn(*this, values);
+
+ // //  currently don't support the id column being changed ...
+ for(u4 u = 1; u <= field_count; ++u)
+ {
+  if(values[u]->qvariant.isNull())
+    wdb_instance_->set_wg_encoded_record_field(rec, u, values[u]->wg_encoded);
+  else
+    wdb_instance_->set_qvariant_record_field(rec, u, values[u]->qvariant);
+
+  delete values[u];
+ }
+
+ delete [] values;
+}
+
 
 DW_Manager* DW_Instance::new_manager()
 {
@@ -204,6 +249,13 @@ void* DW_Instance::parse_dw_record(DW_Record dr, std::function<void(const QByteA
  return nullptr;
  
 }
+
+
+void DW_Instance::update_tagged_record(DW_Record dr, QVariant qv, u4 col)
+{
+ wdb_instance_->set_qvariant_record_field(dr.wg_record(), col, qv);
+}
+
 
 void DW_Instance::set_tag_field(DW_Record dr, u4 col, QString str)
 {
@@ -501,6 +553,9 @@ void DW_Instance::init()
  wdb_manager_->set_db_root_folder(db_root_folder_);
  wdb_manager_->init_from_ntxh();
  wdb_instance_ = wdb_manager_->get_current_white();
+
+ if(Config.flags.scratch_mode || Config.flags.local_scratch_mode)
+   wdb_manager_->set_first_new_white(wdb_instance_);
 }
 
 QString DW_Instance::get_restore_file()
@@ -562,6 +617,13 @@ u4 DW_Instance::new_subvalues_record_id()
 {
  ++current_subvalues_record_count_;
  return current_subvalues_record_count_ | subvalues_mask;
+}
+
+u4 DW_Instance::new_free_form_record_id()
+{
+ ++current_free_form_record_count_;
+ // //  free form id's are negative ...
+ return -current_free_form_record_count_;
 }
 
 

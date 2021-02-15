@@ -38,7 +38,7 @@ void XPDF_Bridge::take_message(QString msg)
   int index = arg.indexOf(';');
   QString file = arg.left(index);
   int page = arg.mid(index + 1).toInt();
-//?  xpdf_component_->openInNewWindow(file, page);
+  xpdf_component_->openInNewWindow(file, page);
 
  }
 
@@ -48,7 +48,7 @@ void XPDF_Bridge::take_message(QString msg)
 
 void XPDF_Bridge::init()
 {
- //?xpdf_component_main(argc_, argv_, &xpdf_component_);
+ xpdf_component_main(argc_, argv_, &xpdf_component_);
 
  QThread* thr = QThread::create([this]
  {

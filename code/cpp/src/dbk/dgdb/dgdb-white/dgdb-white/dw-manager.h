@@ -58,6 +58,8 @@ public:
 
  u4 get_tagged_record_count(QString tag);
 
+// void update_tagged_record();
+
  template<typename PROC_Type>
  void query_tagged_records(QString tag, 
    PROC_Type fn);

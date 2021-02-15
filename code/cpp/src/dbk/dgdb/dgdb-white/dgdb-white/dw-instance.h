@@ -35,10 +35,10 @@ class DW_Frame;
 
 class DW_Manager;
 
-class String_Label_Triple;
+//class String_Label_Triple;
 class DW_Type_System;
 class DW_Type;
-class DW_Stage_Queue;
+//class DW_Stage_Queue;
 
 
 //  
@@ -87,6 +87,9 @@ class DW_Instance
  u4 startup_index_label_count_; 
  u4 current_index_label_count_;
 
+ u4 startup_free_form_record_count_;
+ u4 current_free_form_record_count_;
+
  u4 new_hypernode_record_id();
  u4 new_multi_index_record_id();
  u4 new_index_record_id();
@@ -95,6 +98,7 @@ class DW_Instance
  u4 new_outedges_record_id();
  u4 new_properties_record_id();
  u4 new_subvalues_record_id();
+ u4 new_free_form_record_id();
 
 
  static constexpr u4 max_mask = 0x80000000;
@@ -187,6 +191,34 @@ class DW_Instance
 
 public:
 
+ struct Free_Form_Value
+ {
+  //DW_Stage_Value dwsv;
+  u1 field_number;
+  n8 wg_encoded;
+  QVariant qvariant;
+  Free_Form_Value(u1 f) : field_number(f), wg_encoded(0) {}
+ };
+
+private:
+
+ struct with_new_free_form_record_Package
+ {
+  DW_Instance* _this;
+  u4 field_count;
+  void operator <<
+    (std::function<void(DW_Instance&, Free_Form_Value**)> fn);
+//  void operator <<
+//    (std::function<void(WCM_Hyponode**)> fn);
+//  void operator <<
+//    (std::function<void(WCM_Database&, WCM_Hyponode**)> fn);
+ };
+
+ void _with_new_free_form_record(u4 field_count,
+   std::function<void(DW_Instance&, Free_Form_Value**)> fn);
+
+public:
+
  struct _Config
  {
   flags_(1)
@@ -243,6 +275,8 @@ public:
  QString get_restore_file();
  void restore_from_file(QString rf);
 
+ void update_tagged_record(DW_Record dr, QVariant qv, u4 col = 1);
+
  void set_tag_field(DW_Record dr, u4 col, QString str);
  QString get_tag_field(DW_Record dr, u4 col);
 
@@ -250,6 +284,9 @@ public:
 
  DW_Record new_tag_record(QString tag);
  DW_Record new_tag_record(QString tag, const QByteArray& qba);
+
+ DW_Record find_tag_record(QString tag);
+
 
  template<typename VALUE_Type>
  DW_Record new_binary_hypernode_record(VALUE_Type* v)
@@ -293,11 +330,16 @@ public:
  {
   _set_raw_record_fields(rec, start_col, svs);
  }
+
  void set_raw_record_fields(void* rec, u4 start_col, QVector<DW_Stage_Value> svs)
  {
   _set_raw_record_fields(rec, start_col, svs);
  }
 
+ with_new_free_form_record_Package with_new_free_form_record(u4 col_count)
+ {
+  return {this, col_count};
+ }
 
  DW_Record add_hyperedge_or_property(DW_Record& source, QString connector, const DW_Record* annotation, 
    DW_Record& target, u4 property_code = 0);
