@@ -6,14 +6,9 @@
 
 include(../build-group.pri)
 
-TEMPLATE = app
+QT += widgets
 
-
-include($$ROOT_DIR/../preferred/sysr.pri)
-include($$ROOT_DIR/../preferred/gui.pri)
-
-INCLUDEPATH += $$SRC_GROUP_DIR
-
+INCLUDEPATH += $$SRC_DIR
 
 DEFINES += CAON_DEBUG
 DEFINES += RELAE_LABEL_NODES
@@ -21,20 +16,16 @@ DEFINES += RELAE_LABEL_NODES
 
 CONFIG += no_keywords
 
+
+HEADERS += \
+  $$SRC_DIR/config-dialog.h \
+
+
 SOURCES += \
-  $$SRC_DIR/main.cpp \
+  $$SRC_DIR/config-dialog.cpp \
+  $$SRC_ROOT_DIR/add-minimize-frame.cpp \
 
-
-
-LIBS += -L$$TARGETSDIR -lxpdf  -lquazip
-
-
-include($$ROOT_DIR/../preferred/xpdf.pri)
-# uncomment to use default versions of these libraries,
-# then you don't need a preferred/ ...
-# LIBS += -lfreetype  -lpng
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)
 mkpath($$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)
-

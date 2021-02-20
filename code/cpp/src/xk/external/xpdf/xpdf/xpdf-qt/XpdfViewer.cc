@@ -3618,7 +3618,9 @@ void XpdfViewer::fillAttachmentList() {
     // // mosaic
     QString efn = currentTab->pdf->getEmbeddedFileName(i);
     if(efn.endsWith(".sdi.zip"))
-      process_sdi_file(currentTab->pdf, i, efn);
+    {
+     process_sdi_file(currentTab->pdf, i, efn);
+    }
 
     item = new QTableWidgetItem(efn);
 

@@ -105,7 +105,7 @@ contains(CHOICE_FEATURES, "xpdf") \#/
  message(DEFINE\'ing USING_XPDF)
  DEFINES += USING_XPDF
  message(LINKING XPDF)
- LIBS += -L$$TARGETSDIR -lxpdf
+ LIBS += -L$$TARGETSDIR -lxpdf -lquazip
 
  include($$ROOT_DIR/../preferred/xpdf.pri)
 }

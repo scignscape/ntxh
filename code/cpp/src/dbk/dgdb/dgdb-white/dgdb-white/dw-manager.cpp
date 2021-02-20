@@ -44,6 +44,23 @@ DW_Manager::DW_Manager(DW_Instance* dw_instance)
 template<typename PROC_Type>
 inline void _run_fn(PROC_Type fn, QByteArray& qba, u4 count);
 
+template<typename PROC_Type>
+inline void _run_fn(PROC_Type fn, void* rec, u4 count);
+
+template<>
+void _run_fn<std::function<void(void*, u4)>>(
+  std::function<void(void*, u4)> fn, void* rec, u4 count)
+{
+ fn(rec, count);
+}
+
+template<>
+void _run_fn<std::function<void(void*)>>(
+  std::function<void(void*)> fn, void* rec, u4 count)
+{
+ fn(rec);
+}
+
 
 template<>
 void _run_fn<std::function<void(QByteArray&, u4)>>(
@@ -58,6 +75,41 @@ void _run_fn<std::function<void(QByteArray&)>>(
 {
  fn(qba);
 }
+
+
+
+template<typename PROC_Type>
+void DW_Manager::query_free_form_records(PROC_Type fn)
+{
+ WDB_Manager::Query_Iterator* qi = wdb_manager_->new_free_form_query_iterator();
+ n8 brake = 0;
+ u4 count = 0;
+ while(brake == 0)
+ {
+  void* rec = wdb_manager_->cycle_query(qi);
+  if(rec)
+  {
+   ++count;
+   _run_fn(fn, rec, count);
+  }
+  else break;
+ }
+}
+
+
+void DW_Manager::With_All_Free_Form_Records_Package::operator<<
+  (std::function<void(void*)> fn)
+{
+ _this->query_free_form_records(fn);
+}
+
+void DW_Manager::With_All_Free_Form_Records_Package::operator<<
+  (std::function<void(void*, u4)> fn)
+{
+ _this->query_free_form_records(fn);
+}
+
+
 
 template<typename PROC_Type>
 void DW_Manager::query_tagged_records(QString tag, 

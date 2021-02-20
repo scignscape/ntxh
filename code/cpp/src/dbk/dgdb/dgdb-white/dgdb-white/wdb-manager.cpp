@@ -123,6 +123,25 @@ WDB_Manager::Query_Iterator* WDB_Manager::new_single_index_query_iterator(QStrin
 }
 
 
+WDB_Manager::Query_Iterator* WDB_Manager::new_free_form_query_iterator(u4 threshold, u4 id_col)
+{
+ WDB_Instance* wdb = get_current_white();
+
+ void* white = wdb->white();
+
+ u1 arglist_size = 1;
+
+ wg_query_arg arglist[arglist_size];
+
+ arglist[0].column = id_col;
+ arglist[0].cond = WG_COND_GTEQUAL;
+ arglist[0].value = wg_encode_query_param_int(white, (u4) -threshold);
+
+ wg_query* query = wg_make_query(white, nullptr, 0, arglist, arglist_size);
+ return new Query_Iterator {wdb, query, nullptr, nullptr, 0, 0};
+}
+
+
 WDB_Manager::Query_Iterator* WDB_Manager::new_query_iterator(QString criterion, 
   u4 id_low, u4 id_high, u4 col, u4 id_col)
 {

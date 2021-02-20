@@ -50,6 +50,15 @@ class DW_Manager
     (std::function<void(QByteArray&, u4)> fn);
  };
 
+ struct With_All_Free_Form_Records_Package
+ {
+  DW_Manager* _this;
+  void operator <<
+    (std::function<void(void*)> fn);
+  void operator <<
+    (std::function<void(void*, u4)> fn);
+ };
+
 
 public:
 
@@ -64,6 +73,11 @@ public:
  void query_tagged_records(QString tag, 
    PROC_Type fn);
 
+
+ template<typename PROC_Type>
+ void query_free_form_records(PROC_Type fn);
+
+
  void check_create(std::function<void()> fn);
  void check_create(std::function<void(QString)> fn);
 
@@ -76,11 +90,16 @@ public:
   return {this};
  }
 
-
  With_All_Tagged_Records_Package with_all_tagged_records(QString tag)
  {
   return {this, tag};
  }
+
+ With_All_Free_Form_Records_Package with_all_free_form_records()
+ {
+  return {this};
+ }
+
 };
 
 

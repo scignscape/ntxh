@@ -40,30 +40,75 @@
 
 #include "global-types.h"
 
+extern "C" {
+#include "whitedb/_whitedb.h"
+}
+
 class CLO_Database;
 class CLO_Species;
 
 USING_KANS(DGDB)
 
-void load_species(DW_Manager& dwm,
+void load_species(DW_Instance& dw, DW_Manager& dwm,
   //?WCM_Column_Set& wcs, 
-  CLO_Database& cdb)
+  u4 size, CLO_Database& cdb)
 {
  QVector<CLO_Species*>& species_vec = cdb.species_vec();
  QMap<QString, CLO_Species*>& species_map = cdb.species_map();
 
- u4 sc = dwm.get_tagged_record_count("Default@Species");
- species_vec.resize(sc);
+ //u4 sc = dwm.get_tagged_record_count("Default@Species");
+ species_vec.resize(size);
 
- dwm.with_all_tagged_records("Default@Species") <<
-   [//&icm, &wcs, &wcmd, 
+ void* white = dw.wdb_instance()->white();
+
+
+ dwm.with_all_free_form_records() <<
+   [white, //&icm, &wcs, &wcmd,
     &species_vec, &species_map]
-   (QByteArray& qba, u4 i)
+   (void* rec, u4 i)
  {
   CLO_Species* sp = new CLO_Species;
   species_vec[i] = sp;
-  sp->absorb_data(qba);
+  u4 count = 0;
+  QString name;
+  s4 id = wg_decode_int(white, wg_get_field(white, rec, 0));
+  QString abbr = QString::fromLatin1(wg_decode_str(white, wg_get_field(white, rec, 1)));
+  {
+   wg_int data = wg_get_field(white, rec, 2);
+   u4 len = wg_decode_blob_len(white, data);
+   char* cd = wg_decode_blob(white, data);
+   QByteArray qba(cd, len);
+   QDataStream qds(&qba, QIODevice::ReadOnly);
+   QVariant qvar;
+   qds >> qvar;
+   count = qvar.toInt();
+  }
+  {
+   wg_int data = wg_get_field(white, rec, 3);
+   u4 len = wg_decode_blob_len(white, data);
+   char* cd = wg_decode_blob(white, data);
+   QByteArray qba(cd, len);
+   QDataStream qds(&qba, QIODevice::ReadOnly);
+   QVariant qvar;
+   qds >> qvar;
+   name = qvar.toString();
+  }
+  sp->set_abbreviation(abbr);
+  sp->set_instances(count);
+  sp->set_name(name);
+  //sp->absorb_data(qba);
  };
+
+// dwm.with_all_tagged_records("Default@Species") <<
+//   [//&icm, &wcs, &wcmd,
+//    &species_vec, &species_map]
+//   (QByteArray& qba, u4 i)
+// {
+//  CLO_Species* sp = new CLO_Species;
+//  species_vec[i] = sp;
+//  sp->absorb_data(qba);
+// };
+
 }
 
 
@@ -99,7 +144,7 @@ int main(int argc, char* argv[])
 
  CLO_Database cdb;
 
- load_species(dwm, cdb);
+ load_species(*dw, dwm, size, cdb);
 
 
 // dw->init();

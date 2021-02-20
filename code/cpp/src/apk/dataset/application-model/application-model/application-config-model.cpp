@@ -21,64 +21,67 @@ USING_KANS(DSM)
 Application_Config_Model::Application_Config_Model()
  : usrl_(User_Levels::N_A), insert_text_{{
      { "xpdf",
-      {{{"external/xpdf/xpdf"},
+      {{{"quazip", "xpdf"},
        {"USING_XPDF"},
        {} }}},
 
      { "xx",
-      {{{"external/xpdf/xpdf-console"},
+      {{{"xpdf-console"},
        {},
        {} }}},
 
      { "ro",
-      {{{"dataset/ro-info/ro-info-console"},
+      {{{"ro-info-console"},
          {},
          {} }}},
 
      { "ppc",
-      {{{"dataset/pdf-pull/pdf-pull-console"},
+      {{{"pdf-pull-console"},
          {},
          {} }}},
 
     { "udp",
-      {{{"external/udpipe/udpipe", "hgdm/ntxh-udp/ntxh-udp",
-         "hgdm/ntxh-udp/ntxh-udp-console"},
+      {{{"udpipe", "ntxh-udp",
+         "ntxh-udp-console"},
       {"USING_UDP"},
       {} }}},
 
-    { "kdmi",
+    { "dgdb",
       {{
        {
-        "dataset/ds-kdmi/ds-kdmi",
-        "dataset/ds-kdmi/ds-kdmi-console",
-        "dataset/ds-kdmi/kdmi-bridge",
-        "dataset/ds-kdmi/kdmi-bridge-console",
+        "whitedb",
+        "whitedb-console",
+        "wgdb-utility",
+        "dgdb-white",
+        "dgdb-white-console",
+        "dgdb-gtagml-console",
         },
       {},
-       {} }}},
-
-    { "kph",
-      {{
-       {
-        "rz/tests-phr/kauvir-phaon-console",
-        "rz/tests-phr/kph-tcp-console",
-       },
-
-       {"USING_KPH"},
        {} }}},
 
     { "kph-gen",
       {{
        {
-        "rz/phr-runtime/phr-env",
-        "rz/phr-runtime/phr-fn-doc",
-        "rz/PhaonLib/phr-command-runtime",
+        "kauvir-phaon-console",
+        "kph-generator-console",
+        "kph-multigen-console",
+        "kph-tcp-console",
+       },
 
-        "rz/tests-phr/kph-generator",
-        "rz/PhaonLib/phr-direct-eval",
+       {"USING_KPH"},
+       {} }}},
 
-        "rz/tests-phr/kph-generator-console",
-        "rz/tests-phr/kph-multigen-console",
+    { "kph",
+      {{
+       {
+        "phaon-ir",
+        "phaon-lib",
+        "phr-env",
+        "phr-fn-doc",
+        "phr-command-runtime",
+
+        "kph-generator",
+        "phr-direct-eval",
        },
       {"USING_KPH_GEN"},
        {} }}},
@@ -86,7 +89,7 @@ Application_Config_Model::Application_Config_Model()
     { "config",
       {{
        {
-        "dataset/config/config-dialog-console",
+        "config-dialog-console",
        },
       {"USING_CONFIG_DIALOG"},
        {} }}},
@@ -94,8 +97,8 @@ Application_Config_Model::Application_Config_Model()
     { "lex-pair",
       {{
        {
-        "QScign/LexPair/lexpair",
-        "QScign/LexPair/lexpair-console",
+        "lexpair",
+        "lexpair-console",
        },
       {"USING_LEXPAIR"},
        {} }}},
@@ -103,17 +106,17 @@ Application_Config_Model::Application_Config_Model()
     { "charm",
       {{
        {
-        "hgdm/charm/charm-lib",
-        "hgdm/charm/charm-lib-console",
+        "charm-lib",
+        "charm-lib-console",
        },
       {},
        {} }}},
 
-    { "charm",
+    { "rz",
       {{
        {
-        "rz/rz-kauvir/rz-graph-core",
-        "rz/rz-kauvir/rz-graph-token",
+        "rz-graph-core",
+        "rz-graph-token",
        },
        {},
       {} }}},
@@ -175,7 +178,7 @@ void Application_Config_Model::parse_config_code(QString cc)
 
  if(!cc.contains('d'))
  {
-  insert_text_.remove("kdmi");
+  insert_text_.remove("dgdb");
  }
 
  if(!cc.contains('c'))
@@ -211,28 +214,26 @@ void Application_Config_Model::parse_config_code(QString cc)
 
  for(QPair<QString, QString> pr : QList<QPair<QString, QString>>{
 
- {"", "hgdm/ntxh/ntxh"},
- {"", "hgdm/ntxh/ntxh-parser"},
- {"", "hgdm/ntxh/ntxh-builder"},
+ {"", "ntxh"},
+ {"", "ntxh-builder"},
+ {"", "ntxh-parser"},
 
- {"", "QScign/QRing/qring"},
+ {"", "ngml-sdi"},
+ {"", "dgh-sdi"},
 
- {"", "dataset/ro-info/ro-info"},
- {"", "dataset/config/config-dialog"},
- {"", "dataset/dsmain/dsmain"},
- {"", "dataset/pdf-pull/pdf-pull"},
+ {"", "qring"},
+ {"", "qh-package"},
 
- {"kdmi", "*"},
+ {"dgdb", "*"},
 
  {"ppc", "*"},
  {"ro", "*"},
  {"udp", "*"},
  {"xpdf", "*"},
 
- {"", "rz/PhaonIR/phaon-ir"},
- {"", "rz/PhaonLib/phaon-lib"},
+ {"", "dsmain"},
 
- {"", "QScign/ScignStage/ScignStage-ling"},
+ {"", "ScignStage-ling"},
  {"lex-pair", "*"},
  {"config", "*"},
  {"charm", "*"},
@@ -240,17 +241,19 @@ void Application_Config_Model::parse_config_code(QString cc)
 
  {"xx", "*"},
 
- {"", "dataset/application-model/application-model"},
+ {"", "application-model"},
 
- {"kph", "dataset/application-model/application-model-test-dialog"},
- {"kph", "dataset/application-model/amtd-console"},
+ {"kph", "application-model-test-dialog"},
+ {"kph", "amtd-console"},
 
  {"kph-gen", "*"},
 
- {"", "dataset/dsmain/_run__dsmain-console"},
+ {"", "_run__dsmain-console"},
  })
- if(pr.first.isEmpty() || insert_text_.contains(pr.first))
-   subdirs_.push_back(pr);
+ {
+  if(pr.first.isEmpty() || insert_text_.contains(pr.first))
+    subdirs_.push_back(pr);
+ }
 }
 
 void Application_Config_Model::reset(QStringList files, QString name_supplement)
@@ -322,12 +325,16 @@ QString Application_Config_Model::insert_to_unibuild(QString file_path, QString&
  for(QPair<QString, QString> pr : subdirs_)
  {
   if(pr.first.isEmpty())
-    insert += QString("  %1 \\\n").arg(pr.second);
+    insert += QString("  ./build-custom/%1 \\\n").arg(pr.second);
   else if(pr.second == "*")
-    for(QString qs : insert_text_[pr.first][0].subdirs)
-      insert += QString("  %1 \\\n").arg(qs);
+  {
+   for(QString qs : insert_text_[pr.first][0].subdirs)
+   {
+    insert += QString("  ./build-custom/%1 \\\n").arg(qs);
+   }
+  }
   else
-    insert += QString("  %1 \\\n").arg(pr.second);
+    insert += QString("  ./build-custom/%1 \\\n").arg(pr.second);
  }
 
  result.replace(ii.first, ii.second, insert);

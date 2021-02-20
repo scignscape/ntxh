@@ -36,7 +36,7 @@ static inline void base32_encode_qba(const QByteArray& qba, QString& result)
 
  for(int i = 0; i < s; i += 5)
  {
-  u8 val = 0;
+  n8 val = 0;
   memcpy(&val, qba.data() + i, 5);
   result += QString("%1").arg(val, 8, 32, QChar('0')); //?QString::number(val, 32);
  }
@@ -64,7 +64,7 @@ static inline void base32_decode_qstring(QString text, QByteArray& result)
  {
   QStringRef c = str.mid(i, 8);
   bool conversion_ok = false;
-  u8 val = c.toULongLong(&conversion_ok, 32);
+  n8 val = c.toULongLong(&conversion_ok, 32);
   QByteArray qba(5, 0);
   memcpy(qba.data(), &val, 5);
   result.append(qba);
@@ -100,7 +100,7 @@ static inline void base32_decode_qstringref(QStringRef text, QByteArray& result)
   QStringRef c = str.mid(i, 8);
   bool conversion_ok = false;
   QByteArray conv = c.toLatin1();
-  u8 val = conv.toULongLong(&conversion_ok, 32);
+  n8 val = conv.toULongLong(&conversion_ok, 32);
   QByteArray qba(5, 0);
   memcpy(qba.data(), &val, 5);
   result.append(qba);
