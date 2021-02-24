@@ -1518,14 +1518,6 @@ bool XpdfWidget::find(const QString &text, int flags) {
      nxt = false;
      for(int _i = 0; _i < 1; ++_i)//_i < 10; ++_i)
      {
-//      QString _text = QString::number(i);
-//      Unicode* _u = (Unicode *)gmallocn(len + 1, sizeof(Unicode));
-//      _u[0] = (Unicode)_text[0].unicode();
-//      for(int j = 0; j < len; ++j)
-//      {
-//       _u[j + 1] = u[j];
-//      }
-
       QString _text = QString::number(i) + text;
       int _len = _text.size();
       Unicode* _u = (Unicode *)gmallocn(_len, sizeof(Unicode));

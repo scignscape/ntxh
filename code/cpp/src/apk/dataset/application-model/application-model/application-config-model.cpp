@@ -42,7 +42,7 @@ Application_Config_Model::Application_Config_Model()
 
     { "udp",
       {{{"udpipe", "ntxh-udp",
-         "ntxh-udp-console"},
+         "udpipe-console"},
       {"USING_UDP"},
       {} }}},
 
@@ -98,7 +98,7 @@ Application_Config_Model::Application_Config_Model()
       {{
        {
         "lexpair",
-        "lexpair-console",
+        //? "lexpair-console",
        },
       {"USING_LEXPAIR"},
        {} }}},
@@ -112,11 +112,37 @@ Application_Config_Model::Application_Config_Model()
       {},
        {} }}},
 
+    { "gtagml",
+      {{
+       {
+        "ngml-sdi-console",
+        "gtagml",
+        "gtagml-console",
+        "gt-module-ir",
+        "gt-module-ir-console",
+       },
+      {},
+       {} }}},
+
     { "rz",
       {{
        {
         "rz-graph-core",
         "rz-graph-token",
+        "rz-graph-build",
+        "rz-graph-embed",
+        "rz-function-def",
+        "rz-code-elements",
+        "rz-graph-valuer",
+        "rz-graph-embed-run",
+        "rz-graph-run",
+        "rz-graph-visit",
+        "rz-code-generators",
+        "rz-graph-sre",
+        "rz-graph-code",
+        "phr-graph-core",
+        "rz-phr-runtime-console",
+        "rz-phr-multi-console",
        },
        {},
       {} }}},
@@ -181,6 +207,11 @@ void Application_Config_Model::parse_config_code(QString cc)
   insert_text_.remove("dgdb");
  }
 
+ if(!cc.contains('t'))
+ {
+  insert_text_.remove("gtagml");
+ }
+
  if(!cc.contains('c'))
  {
   insert_text_.remove("config");
@@ -243,12 +274,19 @@ void Application_Config_Model::parse_config_code(QString cc)
 
  {"", "application-model"},
 
+ {"kph", "*"},
  {"kph", "application-model-test-dialog"},
  {"kph", "amtd-console"},
 
  {"kph-gen", "*"},
 
+ {"gtagml", "*"},
+
+ {"rz", "*"},
+
  {"", "_run__dsmain-console"},
+
+
  })
  {
   if(pr.first.isEmpty() || insert_text_.contains(pr.first))

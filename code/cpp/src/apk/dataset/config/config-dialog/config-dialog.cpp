@@ -150,14 +150,17 @@ Config_Dialog::Config_Dialog(QWidget* parent)
  xx_check_box_ = new QCheckBox("Build External XPDF Application", this);
  compile_options_grid_layout_->addWidget(xx_check_box_, 4, 0, 1, 2);
 
- config_check_box_ = new QCheckBox("Include Config", this);
- compile_options_grid_layout_->addWidget(config_check_box_, 4, 2);
+// config_check_box_ = new QCheckBox("Include Config", this);
+// compile_options_grid_layout_->addWidget(config_check_box_, 4, 2);
+
+ gtagml_check_box_ = new QCheckBox("Include GTagML/NGML", this);
+ compile_options_grid_layout_->addWidget(gtagml_check_box_, 4, 2);
 
  pdf_pull_check_box_ = new QCheckBox("Build PDF Scraper (pdf-pull-console) Console (Admin)", this);
  compile_options_grid_layout_->addWidget(pdf_pull_check_box_, 5, 0, 1, 3);
  pdf_pull_check_box_->setEnabled(false);
 
- dgdb_check_box_ = new QCheckBox("Build DGDB Components and Console (for data export)", this);
+ dgdb_check_box_ = new QCheckBox("Build DGDB Components and Console (database demonstration)", this);
  compile_options_grid_layout_->addWidget(dgdb_check_box_, 6, 0, 1, 3);
 
  main_button_group_->addButton(dgdb_check_box_);
@@ -364,7 +367,8 @@ void Config_Dialog::autofill_1()
  roic_check_box_->setChecked(false);
  xx_check_box_->setChecked(false);
 
- config_check_box_->setChecked(false);
+ gtagml_check_box_->setChecked(false);
+ //config_check_box_->setChecked(false);
 
  kph_gen_check_box_->setChecked(false);
  rz_check_box_->setChecked(false);
@@ -402,8 +406,8 @@ void Config_Dialog::_autofill_2(bool pdp, bool kph, bool xx, bool roic,
  roic_check_box_->setChecked(roic);
  dgdb_check_box_->setChecked(false);
 
- config_check_box_->setChecked(false);
-
+ gtagml_check_box_->setChecked(false);
+ //config_check_box_->setChecked(false);
 
  lexpair_check_box_->setChecked(lp);
  charm_check_box_->setChecked(ch);
@@ -452,7 +456,8 @@ void Config_Dialog::autofill_6()
  kph_gen_check_box_->setChecked(true);
 
  udpipe_check_box_->setChecked(true);
- config_check_box_->setChecked(true);
+ gtagml_check_box_->setChecked(false);
+ //config_check_box_->setChecked(false);
 
  check_proceed_possible();
 }
@@ -474,8 +479,11 @@ QString Config_Dialog::get_apply_code()
  if(xpdf_check_box_->isChecked())
    result += "x";
 
- if(config_check_box_->isChecked())
-   result += "c";
+// if(config_check_box_->isChecked())
+//   result += "c";
+
+ if(gtagml_check_box_->isChecked())
+   result += "t";
 
  if(xpdf_qt_libs_check_box_->isChecked())
    result += "q";

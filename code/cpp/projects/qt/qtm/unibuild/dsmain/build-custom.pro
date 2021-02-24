@@ -18,11 +18,11 @@ SUBDIRS = \
   ./build-custom/dgh-sdi \
   ./build-custom/qring \
   ./build-custom/qh-package \
-  ./build-custom/quazip \
-  ./build-custom/xpdf \
+  ./build-custom/udpipe \
+  ./build-custom/ntxh-udp \
+  ./build-custom/udpipe-console \
   ./build-custom/dsmain \
   ./build-custom/ScignStage-ling \
-  ./build-custom/xpdf-console \
   ./build-custom/application-model \
   ./build-custom/_run__dsmain-console \
 

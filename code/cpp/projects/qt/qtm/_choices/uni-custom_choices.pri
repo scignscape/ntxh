@@ -1,7 +1,7 @@
 
 #__CHOICE_FEATURES__#
 
-CHOICE_FEATURES = xpdf xx
+CHOICE_FEATURES = udp
 
 #__END_INSERT__#
 

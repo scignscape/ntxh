@@ -1263,6 +1263,7 @@ void XpdfViewer::cmdFindNext(GString *args[], int nArgs, QInputEvent *event) {
     flags |= XpdfWidget::findWholeWord;
   }
 
+#ifdef HIDE
   // //  dsC
   if(find_ != -1)
   {
@@ -1280,10 +1281,6 @@ void XpdfViewer::cmdFindNext(GString *args[], int nArgs, QInputEvent *event) {
    qDebug() << "looking for " << srch <<
      " (chapter " << cn << " page " << pg;
 
-//   for(int fwd = 0; fwd < 10; ++ fwd)
-//   {
-//    if(fwd)
-//      qDebug() << "Forward pages " << fwd;
    if(currentTab->pdf->find(srch, flags))
    {
     int _nxt_pg;
@@ -1305,13 +1302,12 @@ void XpdfViewer::cmdFindNext(GString *args[], int nArgs, QInputEvent *event) {
    }
    else
    {
-
      //--find_;
      //showFindError();
    }
-//   }
   }
   else
+#endif
   if (!currentTab->pdf->find(findEdit->text(), flags)) {
     showFindError();
   }
@@ -2795,11 +2791,18 @@ void XpdfViewer::createToolBar() {
   find_ = 0;
   QAction* find_paren_pattern_action = findSettingsMenu->addAction("use paren pattern");
   find_paren_pattern_action->setCheckable(true);
-  find_paren_pattern_action->setChecked(true);
   connect(find_paren_pattern_action, &QAction::toggled,
-          [this](bool b)
+          [this, find_paren_pattern_action](bool b)
   {
-   find_ = b? 0:-1;
+   //find_ = b? 0:-1;
+   static int count = 0;
+   ++count;
+   if(count & 1)
+     QMessageBox::warning(this, "PDF Scraper not Implemented",
+       "The Paren Pattern feature is designed to locate sample/example text in "
+       "linguistics articles as a tool for building lists or corpora of such samples.  "
+       "This is an experimental feature not implemented in the current XPDF build.");
+   find_paren_pattern_action->setChecked(false);
   });
 
   addToolBarMenuButton(QIcon(":/findSettings-button"),
