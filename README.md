@@ -9,7 +9,8 @@ In addition there is republished data reviewed in _Advances in Ubiquitous Comput
 
 Also in the "`documents`" folder are three essays by Nathaniel Christen addressing topics in Cognitive Grammar. These essays include language samples, some invented and some drawn from several corpora, printed in the text as example case-studies -- as is common in pragmatics and related linguistic disciplines. 
 
-The samples in these documents form the backbone of the core data set, which was compiled by pre-parsing the source code from which the documents were generated. For readers who find it difficult to compile and use the data-set application (for browsing the samples in isolation), it may be helpful to read the text from which the samples are extracted, particularly the "CognitiveTransformGrammar.pdf" file in "`./documents`" (this is the most polished paper; the other two are more provisional, but all three were scraped to compile the data set).
+The samples in these documents form the backbone of the core data set, which was compiled by pre-parsing the source code from which the documents were generated. For readers who find it difficult to compile and use the data-set application (for browsing the samples in isolation), it may be helpful to read the text from which the samples are extracted, particularly the "CognitiveTransformGrammar.pdf" file in "`./documents`" (this is the most polished paper; the other two are more provisional, but all three were scraped to compile the data set). Some of the samples were previously analyzed (or similar to ones previously analyzed) by linguists such as Ronald Langacker; some samples with prosodic markup or distinct prosodic features are taken from 
+Langacker, Julia Hirshberg, the Blackwell _Handbook of Pragmatics_, and an article by Laura A. Michaelis and Knud Lambrecht; and other samples are taken from a CoNLL corpus (see below). 
 
 The data set includes code for a novel document-preparation format with a LaTeX preprocessor and C++ callback engines programmed to identify the samples and export them to a dataset. This technology also implements a pipeline where sentence boundaries and other textual markers are located in the text-encoding and merged with PDF coordinate data generated when running `pdflatex` with auxialiary files (via LaTeX `write` functions). 
 
@@ -25,7 +26,7 @@ The primary pupose of this data set is to provide a collection of language sampl
 The sample annotations use several formats including 
 
 1) S-Expressions to indicate parse structures
-2) CONLLU dependency graphs
+2) CoNLLU (Congress on Natural Language Learning -- "Universal" format) dependency graphs
 3) Prosodic Annotations using ToBI (Tones and Break Indices) or other markup to suggest intonation boundaries, stress patterns, and so forth.
 4) Proposed variations on dependency graphs using De Bruijn indices, or in another context word-pairing sequences to decompose dependency parsers into particular head/dependency relations
 
