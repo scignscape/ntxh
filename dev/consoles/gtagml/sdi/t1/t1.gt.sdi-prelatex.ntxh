@@ -7,5 +7,41 @@
 
 &/
  
+!/ GH_SDI_Paragraph
+$i: 1
+$j: t1.gt
+$s: 2
+$e: 738
+/!
+<<>
+
+
+!/ GH_SDI_Sentence
+$i: 1
+$p: 1
+$s: 2
+$e: 247
+$g: 248
+/!
+<>>
+
+!/ GH_SDI_Sentence
+$i: 2
+$p: 1
+$s: 249
+$e: 500
+$g: 501
+/!
+<>>
+
+!/ GH_SDI_Sentence
+$i: 3
+$p: 1
+$s: 503
+$e: 737
+$g: 0
+/!
+<>>
+
 
 /&

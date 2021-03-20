@@ -60,6 +60,8 @@ void process_gtagml_file(QString path, GTagML_Project_Info* gpi, GTagML_Folder* 
  if(fld)
    gdoc->set_man_folder_path(fld->man_path());
 
+ gdoc->set_project_info(gpi);
+
  gdoc->load_and_parse(path);
 
  GH_Block_Writer* blw = new GH_Block_Writer;

@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
      but it is copied in @/dev/documents/" + paper_name ...
    ;.
 
-  gt-compile-manuscript  $  :no-first  :info-path
+ gt-compile-manuscript  $  :no-first  :info-path
     :setup-once  :setup-sdi
       %1/%2/src/%2.tex
     :manuscript  %1/%2/manuscript

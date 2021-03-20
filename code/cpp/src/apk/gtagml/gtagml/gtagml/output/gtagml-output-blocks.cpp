@@ -659,6 +659,7 @@ void GTagML_Output_Blocks::generate_tag_command_entry(const GTagML_Output_Bundle
  CAON_PTR_B_DEBUG(GTagML_Node ,node)
  CAON_PTR_DEBUG(GTagML_Tag_Command ,gtc)
 
+ //QMap<QString, QPair<QString, u4>>*
  auto& main_block_text_commands = document_.project_info()->main_block_text_commands();
 
  caon_ptr<GTagML_Tag_Command_Callback> cb = b.cb;
