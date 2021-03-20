@@ -52,10 +52,10 @@ int main(int argc, char* argv[])
 //   });
 
 //
-// QString paper_name = "ctg";
-// QString paper_name = "icg";
 //
- QString paper_name = "itm";
+ QString paper_name = "ctg";
+// QString paper_name = "icg";
+// QString paper_name = "itm";
 
  QStringList cmdl = get_cmdl(argc, argv, 2, {
    {&folder, QString(DEFAULT_SDI_FOLDER "/%1/src/setup").arg(paper_name)},

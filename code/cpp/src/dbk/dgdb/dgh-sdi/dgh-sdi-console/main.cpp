@@ -32,9 +32,7 @@ USING_KANS(Util)
 
 int main(int argc, char* argv[])
 {
- //QString mergefile = "/home/nlevisrael/gits/ntxh/wip-sebi/gtagml/ctg/gen/sdi-merge.ntxh";
- QString mergefile = "/home/nlevisrael/gits/ntxh/wip-sebi/dev/documents/ctg/sdi-merge.ntxh";
-
+ QString mergefile = "";
 
  DGH_SDI_Document dsd;
  dsd.load_from_ntxh(mergefile);
