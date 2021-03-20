@@ -41,6 +41,14 @@ DSM_SDI_Document::DSM_SDI_Document()
 
 //}
 
+void DSM_SDI_Document::parse_subdocument_hypernode(NTXH_Graph& g, NTXH_Graph::hypernode_type* hn)
+{
+ g.get_sfs(hn, {2,3}, [this](QVector<QPair<QString, void*>>& prs)
+ {
+  subdocument_ranges_.push_back({prs[0].first.toUShort(), prs[1].first.toUShort()});
+ });
+}
+
 void DSM_SDI_Document::parse_sample_hypernode(NTXH_Graph& g, NTXH_Graph::hypernode_type* hn)
 {
  //NGML_SDI_Sentence* nss; // = new NGML_SDI_Sentence;
@@ -133,6 +141,10 @@ void DSM_SDI_Document::load_from_ntxh(QString path)
 
   {"SentenceItem",
     &DSM_SDI_Document::parse_sample_hypernode},
+
+  {"Subdocument",
+    &DSM_SDI_Document::parse_subdocument_hypernode},
+
  };
 
  NTXH_Document doc(path);

@@ -61,6 +61,14 @@ void Dataset::load_from_folder(QString path)
  groups_ = &sdi_document_.language_sample_groups();
  samples_ = &sdi_document_.language_samples();
 
+ u2 c = 1;
+ for(QPair<u2, u2> pr: sdi_document_.subdocument_ranges())
+ {
+  // ignore author for now ...
+  subdocuments_.push_back({{{},c}, pr});
+  ++c;
+ }
+
  load_ppc_file();
 
 }

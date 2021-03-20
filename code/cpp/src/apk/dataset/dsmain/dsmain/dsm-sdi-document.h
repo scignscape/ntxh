@@ -37,16 +37,21 @@ class DSM_SDI_Document
  QVector<Language_Sample_Group*> language_sample_groups_;
  QVector<Language_Sample*> language_samples_;
 
+ QVector<QPair<u2, u2>> subdocument_ranges_;
+
+
 public:
 
  DSM_SDI_Document();
 
  ACCESSORS__RGET(QVector<Language_Sample_Group*> ,language_sample_groups)
  ACCESSORS__RGET(QVector<Language_Sample*> ,language_samples)
+ ACCESSORS__RGET(MACRO_PASTE(QVector<QPair<u2, u2>>) ,subdocument_ranges)
 
 
  void parse_group_hypernode(NTXH_Graph& g, NTXH_Graph::hypernode_type* hn);
  void parse_sample_hypernode(NTXH_Graph& g, NTXH_Graph::hypernode_type* hn);
+ void parse_subdocument_hypernode(NTXH_Graph& g, NTXH_Graph::hypernode_type* hn);
 
  void load_from_ntxh(QString path);
 

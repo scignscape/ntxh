@@ -703,6 +703,7 @@ void ScignStage_Ling_Dialog::absorb_dataset(Dataset& ds)
  pdf_file_ = ds.pdf_file();
 
  //?subdocument_kind_ = ds.subdocument_kind();
+ subdocument_kind_ = "section";
 
  samples_ = ds.samples();
  groups_ = ds.groups();
@@ -1370,10 +1371,10 @@ void ScignStage_Ling_Dialog::run_sample_context_menu(const QPoint& p, int page, 
  qm->addAction("Show in Document (requires XPDF)",
    [page, pdf_fn](){pdf_fn(page, 0);});
  qm->addAction(
-   QString("Show in Document -- %1 Start").arg(subdocument_kind_),
+   QString("Show in Document -- %1 start").arg(subdocument_kind_),
    [page, pdf_fn](){pdf_fn(page, 1);});
  qm->addAction(
-   QString("Show in Document -- %1 End").arg(subdocument_kind_),
+   QString("Show in Document -- %1 end").arg(subdocument_kind_),
    [page, pdf_fn](){pdf_fn(page, 2);});
  qm->addAction("Copy Text to Clipboard",
    [text, copy_fn](){copy_fn(text);});

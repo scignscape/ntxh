@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-5/2/2021, 13:20
+20/3/2021, 0:13
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -57,7 +57,7 @@ $end: 52
 !/ Subdocument 
 $au: Nathaniel Christen
 $start: 52 
-$end: 82 
+$end: 87 
 /!
 <+>
 
@@ -333,7 +333,7 @@ $c: log
 
 !/ SentenceItem
 $i: 24
-$p: 10
+$p: 11
 $x: itm:leafshabs
 $t: For the first time this year, the Leafs failed to beat the Habs.
 $c: log
@@ -864,7 +864,7 @@ $s: 2
 
 !/ SentenceItem
 $i: 63
-$p: 25
+$p: 26
 $t: The newspaper you are reading is being sued.
 $c: lex
 /!
@@ -1018,7 +1018,7 @@ $s: 2
 
 !/ SentenceItem
 $i: 76
-$p: 29
+$p: 30
 $x: itm:ink
 $t: There are ink stains on the pages of this book.
 $c: ref
@@ -1027,7 +1027,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 77
-$p: 29
+$p: 30
 $x: itm:sunset
 $t: There is a pretty sunset over the river.
 $c: ref
@@ -1192,7 +1192,7 @@ $c: pra
 
 !/ SentenceItem
 $i: 91
-$p: 34
+$p: 35
 $t: I believe this is the customer service desk?
 $c: pra
 /!
@@ -1200,7 +1200,7 @@ $c: pra
 
 !/ SentenceItem
 $i: 92
-$p: 34
+$p: 35
 $t: I believe we ordered a second basket of garlic bread?
 $c: pra
 /!
@@ -1208,7 +1208,7 @@ $c: pra
 
 !/ SentenceItem
 $i: 93
-$p: 34
+$p: 35
 $t: I believe you can help me find computer accessories in this section?
 $c: pra
 /!
@@ -1424,7 +1424,7 @@ $c: pra
 
 !/ SentenceList
 $i: 55
-$p: 36
+$p: 37
 $s: 3
 
 !/ SentenceItem
@@ -1532,7 +1532,7 @@ $c: pra
 
 !/ SentenceList
 $i: 59
-$p: 40
+$p: 41
 $s: 3
 
 !/ SentenceItem
@@ -1663,7 +1663,7 @@ $c: log
 
 !/ SentenceList
 $i: 64
-$p: 43
+$p: 44
 $s: 3
 
 !/ SentenceItem
@@ -1838,7 +1838,7 @@ $s: 3
 
 !/ SentenceItem
 $i: 146
-$p: 49
+$p: 50
 $x: itm:borough
 $t: New Yorkers live in one of five boroughs.
 $c: cog
@@ -1847,7 +1847,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 147
-$p: 49
+$p: 50
 $x: itm:democratic
 $t: New Yorkers reliably vote for Democratic presidential candidates.
 $c: cog
@@ -1856,7 +1856,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 148
-$p: 49
+$p: 50
 $x: itm:commute
 $t: New Yorkers constantly complain about how long it takes to commute to New York City.
 $c: cog
@@ -2095,12 +2095,12 @@ $c: ref
 
 !/ SentenceList
 $i: 78
-$p: 59
+$p: 60
 $s: 4
 
 !/ SentenceItem
 $i: 169
-$p: 59
+$p: 60
 $x: itm:pf
 $t: People fed the rescued dogs.
 $c: cog
@@ -2109,7 +2109,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 170
-$p: 59
+$p: 60
 $x: itm:ve
 $t: Vets examined the rescued dogs.
 $c: cog
@@ -2368,7 +2368,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 196
-$p: 64
+$p: 65
 $t: Many star players were drafted by that franchise, but they did not have enough depth (around them).
 $c: ref
 /!
@@ -2771,12 +2771,38 @@ $c: pro
 
 !/ SentenceList
 $i: 97
-$p: 77
+$p: 76
 $s: 4
 
 !/ SentenceItem
 $i: 231
-$p: 77
+$p: 76
+$x: itm:Amazing
+$t: It's amazing, the things she says sometimes.
+$c: pro
+/!
+<>>
+
+!/ SentenceItem
+$i: 232
+$p: 76
+$x: itm:Ridiculous
+$t: It's ridiculous, what he's saying.
+$c: pro
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 98
+$p: 82
+$s: 4
+
+!/ SentenceItem
+$i: 233
+$p: 82
 $x: itm:rhinor
 $t: Rhinos in that park are threatened by poachers.
 $c: sem
@@ -2784,8 +2810,8 @@ $c: sem
 <>>
 
 !/ SentenceItem
-$i: 232
-$p: 77
+$i: 234
+$p: 82
 $t: Young rhinos are threatened by poachers.
 $c: sem
 /!
@@ -2795,13 +2821,13 @@ $c: sem
 <+>
 
 !/ SentenceList
-$i: 98
-$p: 78
+$i: 99
+$p: 83
 $s: 4
 
 !/ SentenceItem
-$i: 233
-$p: 78
+$i: 235
+$p: 83
 $t: Let's find a restaurant that's family-friendly.
 $c: sem
 /!
@@ -2811,21 +2837,21 @@ $c: sem
 <+>
 
 !/ SentenceList
-$i: 99
-$p: 79
+$i: 100
+$p: 84
 $s: 4
 
 !/ SentenceItem
-$i: 234
-$p: 80
+$i: 236
+$p: 84
 $t: I got glue for your daughter.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 235
-$p: 80
+$i: 237
+$p: 84
 $t: I got glue for your coffee mug.
 $c: sem
 /!
@@ -2835,37 +2861,37 @@ $c: sem
 <+>
 
 !/ SentenceList
-$i: 100
-$p: 80
+$i: 101
+$p: 84
 $s: 4
 
 !/ SentenceItem
-$i: 236
-$p: 80
+$i: 238
+$p: 84
 $t: We're going to Grandma!
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 237
-$p: 80
+$i: 239
+$p: 84
 $t: Let's go to him right now.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 238
-$p: 80
+$i: 240
+$p: 84
 $t: Let's go to the lawyers.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 239
-$p: 80
+$i: 241
+$p: 84
 $t: Let's go to the press.
 $c: sem
 /!

@@ -44,6 +44,7 @@ SUBDIRS += \
 
 
 SUBDIRS += \
+  ./build-quick/quazip \
   ./build-quick/xpdf \
 
 

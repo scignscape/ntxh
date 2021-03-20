@@ -2,37 +2,37 @@ $$ document-title := Cognitive Transform Grammar
 $$ local-title := section4
 
 $& AkbikBross %% (1:main) 64573 64574
-$& Belohlavek %% (1:main) 138843 138844
-$& BernardyEtAl %% (1:main) 155602 155627
+$& Belohlavek %% (1:main) 139098 139099
+$& BernardyEtAl %% (1:main) 155857 155882
 $& Debusmann %% (1:main) 64565 64566
 $& DebusmannDuchierRossberg %% (1:main) 64567 64568
 $& DebusmannThesis %% (1:main) 64457 64564
-$& FriedOstman page%(1:main) 125376 125829 (1:main) 125376 125829
+$& FriedOstman page%(1:main) 125438 125891 (1:main) 125438 125891
 $& HolmqvistDiss %% (1:main) 64061 64062
 $& HolmqvistDiss %% (1:main) 71111 71176
 $& HongEisner %% (1:main) 64571 64572
-$& JiriBenovsky p.%%8 (1:main) 133570 133585
-$& Johnson p.%%208 (1:main) 137244 137245
+$& JiriBenovsky p.%%8 (1:main) 133825 133840
+$& Johnson p.%%208 (1:main) 137499 137500
 $& KennethHolmqvist %% (1:main) 64063 64064
 $& KepserMonnich %% (1:main) 64689 64690
 $& KongRushSmith %% (1:main) 64627 64688
-$& LakoffJohnson p.%%18 (1:main) 136684 137194
-$& LakoffJohnson p.%%90 (1:main) 137195 137243
+$& LakoffJohnson p.%%18 (1:main) 136939 137449
+$& LakoffJohnson p.%%90 (1:main) 137450 137498
 $& LangackerInteractive pages%%102-103 (1:main) 90246 90266
 $& LangackerInteractive page%%119 (1:main) 96492 96493
 $& LangackerInteractive page%%115 (1:main) 98271 98526
 $& LangackerInvestigations page%%250 (1:main) 100403 100656
-$& LuoSoloviev %% (1:main) 156010 156393
-$& MathieuBouchard %% (1:main) 131823 131834
+$& LuoSoloviev %% (1:main) 156265 156648
+$& MathieuBouchard %% (1:main) 132078 132089
 $& MattSelway %% (1:main) 63697 64060
-$& MichaelJubien %% (1:main) 133411 133551
-$& MichaelisLambrech %% (1:main) 109297 109415
+$& MichaelJubien %% (1:main) 133666 133806
+$& MichaelisLambrech e.g.%%page%%223 (1:main) 109338 109456
 $& Nivre %% (1:main) 64569 64570
 $& Schneider %% (1:main) 64691 64692
-$& TanakaEtAl %% (1:main) 155628 155629
-$& Wille %% (1:main) 138845 138846
+$& TanakaEtAl %% (1:main) 155883 155884
+$& Wille %% (1:main) 139100 139101
 $& XiaPalmer %% (1:main) 64693 64694
-$& YiyuYao %% (1:main) 138674 138842
+$& YiyuYao %% (1:main) 138929 139097
 
 
 = 18411:
