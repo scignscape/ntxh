@@ -332,6 +332,9 @@ void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
  {
   it.next();
 
+  u4 itk = it.key();
+  QPair<caon_ptr<tNode>, u4> itv = it.value();
+
   if(held_declared_status == 3)
   {
    if(it.key() <= held_resume)
@@ -352,6 +355,12 @@ void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
 
   else if(held_declared_status == 1)
   {
+   if(it.value().first != current_paragraph_node)
+   {
+    // is this right here?
+    current_paragraph_node = it.value().first;
+    srank_in_paragraph = 0;
+   }
    declared_sentence_starts_.insertMulti(current_paragraph_node, it.key());
    held_declared_status = 0;
   }

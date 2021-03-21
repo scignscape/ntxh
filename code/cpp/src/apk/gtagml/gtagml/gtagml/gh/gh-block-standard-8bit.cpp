@@ -93,6 +93,7 @@ u4 GH_Block_Standard_8bit::get_declared_sentence_end_space(u4 i, u4 e)
 u4 GH_Block_Standard_8bit::check_confirm_sentence_end(u4 i, u4 e)
 {
  bool have_space = false;
+ u4 neutral_count = 0;
  for(u4 u = i; u <= e; ++u)
  {
   n8 uu = get_glyph_point_at_index(u);
@@ -102,12 +103,17 @@ u4 GH_Block_Standard_8bit::check_confirm_sentence_end(u4 i, u4 e)
    have_space = true;
    continue;
   }
+  if(ec == GH_Block_Base::Evaluation_Codes::Neutral)
+  {
+   ++neutral_count;
+   continue;
+  }
   if(ec == GH_Block_Base::Evaluation_Codes::Confirm)
-    return i;
+    return i + neutral_count;
   if(ec == GH_Block_Base::Evaluation_Codes::Refute)
     return 0;
   if(ec == GH_Block_Base::Evaluation_Codes::Confirm_Via_Declared_Suspend)
-    return i;
+    return i + neutral_count;
  }
  return 0;
 }
