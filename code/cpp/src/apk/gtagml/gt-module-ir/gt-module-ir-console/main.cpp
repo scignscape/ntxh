@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
  QString paper_name = "ctg";
 // QString paper_name = "icg";
 
+// QString paper_name = "jr";
 
  mir.read_lines(QString(R"(
   .; the folder is just outside the archive
