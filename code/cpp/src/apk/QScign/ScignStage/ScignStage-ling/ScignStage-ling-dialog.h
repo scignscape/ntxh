@@ -217,6 +217,7 @@ class ScignStage_Ling_Dialog : public QDialog
 
 
  std::function<Dataset*(QString)> replace_dataset_function_;
+ std::function<void(QString, Dataset*)> generate_markdown_function_;
 
  QString subdocument_kind_;
 
@@ -300,6 +301,8 @@ public:
  ACCESSORS__SET(std::function<void()> ,screenshot_function)
 
  ACCESSORS__SET(std::function<Dataset*(QString)> ,replace_dataset_function)
+
+ ACCESSORS__SET(std::function<void(QString, Dataset*)> ,generate_markdown_function)
 
 #ifdef USING_LEXPAIR
  ACCESSORS__SET(std::function<void(QString)> ,launch_lexpair_dialog_function)

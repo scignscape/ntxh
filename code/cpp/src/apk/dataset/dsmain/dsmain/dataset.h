@@ -96,6 +96,9 @@ public:
  void load_from_file(QString path);
  void save_to_file(QString path);
 
+ void save_as_markdown(QString path);
+
+
  void save_to_file_udp();
  void save_to_file_udp(QString path, QString upath, QString ppath);
 

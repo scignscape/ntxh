@@ -137,6 +137,11 @@ int main(int argc, char **argv)
  ScignStage_Ling_Dialog dlg (nullptr, &ds);
 #endif
 
+ dlg.set_generate_markdown_function([](QString path, Dataset* ds)
+ {
+  ds->save_as_markdown(path);
+ });
+
  dlg.set_replace_dataset_function([](QString path) -> Dataset*
  {
   QFileInfo qfi(path);

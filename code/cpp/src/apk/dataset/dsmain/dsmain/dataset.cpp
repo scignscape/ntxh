@@ -302,17 +302,34 @@ void Dataset::save_raw_file(QString text, int page, int num)
  save_file(path, text);
 }
 
+void Dataset::save_as_markdown(QString path)
+{
+ QString text;
+ QTextStream qts(&text);
+ for(Language_Sample_Group* g : *groups_)
+ {
+  qts << " page " << g->page() << "\n---\n";
+  for(Language_Sample* ls : g->samples())
+  {
+   QString text = ls->text();
+   text.replace("---{}", "--");
+   qts << text << "\n";
+  }
+  qts << "\n";
+ }
+ save_file(path, text);
+}
+
 void Dataset::get_serialization(QString& text, QString& gtext)
 {
+ // // TODO ... so far we're not using serialization directly from the dataset ...
  for(Language_Sample* samp : *samples_)
  {
-  //?text += samp->get_serialization() + "\n";
  }
 
  int rgc = 0;
  for(Language_Sample_Group* g : *groups_)
  {
-  //?gtext += g->get_serialization(rgc);
  }
 
 }

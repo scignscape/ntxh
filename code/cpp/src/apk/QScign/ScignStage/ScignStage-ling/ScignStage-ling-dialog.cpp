@@ -120,6 +120,7 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
   : QDialog(parent), xpdf_bridge_(xpdf_bridge),
     current_sample_(nullptr),
     last_highlight_(nullptr), xpdf_process_(nullptr),
+    generate_markdown_function_(nullptr),
     screenshot_function_(nullptr),
     #ifdef USING_CONFIG_DIALOG
     launch_config_function_(nullptr),
@@ -1359,6 +1360,18 @@ void ScignStage_Ling_Dialog::run_group_context_menu(const QPoint& p, int page, Q
    [texts, copies_fn](){copies_fn(texts);});
  qm->addAction("Highlight (scroll from here)",
    [highlight_fn](){highlight_fn();});
+
+ if(generate_markdown_function_)
+ {
+  qm->addAction("Save as Markdown",
+    [this]()
+  {
+   QString path = QFileDialog::getOpenFileName(this, "Select Markdown File", ROOT_FOLDER);
+   if(!path.isEmpty())
+     generate_markdown_function_(path, dataset_);
+  });
+ }
+
  QPoint g = main_tree_widget_->mapToGlobal(p);
  qm->popup(g);
 }
@@ -1380,6 +1393,18 @@ void ScignStage_Ling_Dialog::run_sample_context_menu(const QPoint& p, int page, 
    [text, copy_fn](){copy_fn(text);});
  qm->addAction("Launch Triple-Link Dialog with Text",
    [text, launch_fn](){launch_fn(text);});
+
+ if(generate_markdown_function_)
+ {
+  qm->addAction("Save as Markdown",
+    [this]()
+  {
+   QString path = QFileDialog::getOpenFileName(this, "Select Markdown File", ROOT_FOLDER);
+   if(!path.isEmpty())
+     generate_markdown_function_(path, dataset_);
+  });
+ }
+
  QPoint g = main_tree_widget_->mapToGlobal(p);
  qm->popup(g);
 }
