@@ -59,6 +59,8 @@ class Dataset :  public QRing_File_Structure
 
  QString ppc_file_;
 
+ QString short_publication_title_;
+
 public:
 
  Dataset(QString root_folder = QString());//QString file);
@@ -78,6 +80,8 @@ public:
 
  ACCESSORS(QString ,pdf_file)
  ACCESSORS(QString ,ppc_file)
+
+ ACCESSORS(QString ,short_publication_title)
 
 
  ACCESSORS__RGET(MACRO_PASTE(QVector<QPair<QPair<QString, int>,

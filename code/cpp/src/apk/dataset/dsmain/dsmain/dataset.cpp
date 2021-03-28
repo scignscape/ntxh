@@ -304,11 +304,27 @@ void Dataset::save_raw_file(QString text, int page, int num)
 
 void Dataset::save_as_markdown(QString path)
 {
+ if(short_publication_title_.isEmpty())
+ {
+  // try to guess the title ...
+  QFileInfo qfi(pdf_file_);
+  QString dn = qfi.absoluteDir().dirName();
+  if(dn == "ctg")
+    short_publication_title_ = "Cognitive Transform Grammar";
+  else if(dn == "itm")
+    short_publication_title_ = "Interface Theory of Meaning";
+  else if(dn == "icg")
+    short_publication_title_ = "Conceptual Spaces/Cognitive Grammar";
+ }
+
  QString text;
  QTextStream qts(&text);
+
+ qts << "\n###" << short_publication_title_ << "\n---\n\n";
+
  for(Language_Sample_Group* g : *groups_)
  {
-  qts << "page " << g->page() << "  \n"; //"\n#\n---\n";
+  qts << "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page " << g->page() << ")  \n";
   for(Language_Sample* ls : g->samples())
   {
    QString text = ls->text();
