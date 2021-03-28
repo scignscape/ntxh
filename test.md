@@ -1,12 +1,11 @@
-#### page 5
+page 5  
 #
----
 His having lied in the past damages his credibilty in the present.  
 Voters question whether he is truthful this time around.  
 
-#### page 5
+
 #
----
+page 5  
 Let's go to Grandma.  
 Let's go to the lawyers.  
 Let's go to the press.  
