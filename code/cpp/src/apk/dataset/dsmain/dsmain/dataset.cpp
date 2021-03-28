@@ -320,7 +320,7 @@ void Dataset::save_as_markdown(QString path)
  QString text;
  QTextStream qts(&text);
 
- qts << "\n###" << short_publication_title_ << "\n---\n\n";
+ qts << "\n### " << short_publication_title_ << "\n---\n\n";
 
  for(Language_Sample_Group* g : *groups_)
  {
@@ -333,6 +333,10 @@ void Dataset::save_as_markdown(QString path)
   }
   qts << "\n#\n";
  }
+
+// QString tmplate;
+// load_file(path, tmplate);
+
  save_file(path, text);
 }
 

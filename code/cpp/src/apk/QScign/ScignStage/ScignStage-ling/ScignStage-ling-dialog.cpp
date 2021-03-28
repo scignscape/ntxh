@@ -680,6 +680,7 @@ void ScignStage_Ling_Dialog::get_replacement_dataset_path()
    main_tree_widget_->clear();
    set_paths_from_dataset(*ds);
    absorb_dataset(*ds);
+   dataset_ = ds;
   }
  }
 }
