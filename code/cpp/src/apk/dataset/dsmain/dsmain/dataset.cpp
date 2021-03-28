@@ -308,14 +308,14 @@ void Dataset::save_as_markdown(QString path)
  QTextStream qts(&text);
  for(Language_Sample_Group* g : *groups_)
  {
-  qts << "#### page " << g->page() << "\n#\n---\n";
+  qts << "page " << g->page() << "  \n"; //"\n#\n---\n";
   for(Language_Sample* ls : g->samples())
   {
    QString text = ls->text();
    text.replace("---{}", "--");
    qts << text << "  \n";
   }
-  qts << "\n";
+  qts << "\n#\n";
  }
  save_file(path, text);
 }
