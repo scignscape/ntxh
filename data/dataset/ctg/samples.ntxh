@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-29/3/2021, 15:7
+29/3/2021, 15:37
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -2663,7 +2663,7 @@ $c: cog
 !/ SentenceItem
 $i: 225
 $p: 72
-$t: Don't underestimate our resolve -- this is war!
+$t: Don't underestimate our resolve ---{} this is war!
 $c: cog
 /!
 <>>
@@ -2768,7 +2768,7 @@ $c: cog
 $i: 237
 $p: 72
 $x: itm:warachieved
-$t: ?The war was finally achieved.
+$t: The war was finally achieved.
 $c: cog
 /!
 <>>
@@ -2793,7 +2793,7 @@ $c: cog
 $i: 240
 $p: 72
 $x: itm:peacewenton
-$t: ?The peace went on for five years.
+$t: The peace went on for five years.
 $c: cog
 /!
 <>>

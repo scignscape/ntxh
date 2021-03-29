@@ -464,10 +464,10 @@ The countries are now officially at war.
 #
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 72)  
 The peace was finally achieved.  
-?The war was finally achieved.  
+The war was finally achieved.  
 The peace lasted for five years.  
 The war went on for five years.  
-?The peace went on for five years.  
+The peace went on for five years.  
 
 #
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 75)  
