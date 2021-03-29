@@ -437,6 +437,40 @@ Obama wouldn't budge on reproductive rights.
 
 #
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 71)  
+War could break out any time.  
+The war has lasted many years.  
+A tenuous peace has held for over a year now.  
+The cruel war is raging, Johnny has to fight.  
+War is a cause of misery.  
+The use of war to score political points is immoral.  
+Most of the refugees are fleeing civil war.  
+Before the war, things were different.  
+Historians will study this war for a long time.  
+Diplomats met from many countries to discuss the civil war.  
+The international community must end this war.  
+Diplomats met to discuss how to maintain the peace.  
+Don't underestimate our resolve -- this is war!  
+Secretly the governments met to discuss peace.  
+We must first and foremost work for peace.  
+Environmental degradation was a cause of the war.  
+All this destruction was a result of the war.  
+There is more war to come.  
+A little peace would make a big difference.  
+There is war between moderates and radicals.  
+The moderates made peace with the radicals.  
+Some countries pulled out of the war.  
+The countries are now officially at war.  
+
+#
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 72)  
+The peace was finally achieved.  
+The war was finally achieved.  
+The peace lasted for five years.  
+The war went on for five years.  
+The peace went on for five years.  
+
+#
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 75)  
 The book she read was very interesting.  
 I recommended a book that she read immediately.  
 A book just appeared that she read immediately.  
@@ -444,61 +478,60 @@ I recommended a book I read years ago to her.
 This time Harry didn't cause our defeat.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 73)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 76)  
 It's odd that Clyde married Bertha.  
 Londoners most often go to Brighton.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 73)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 76)  
 Bill doesn't drink because he's unhappy.  
 Stir in rice wine and seasonings.  
 Alice bought a dog. A poodle.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 73)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 76)  
 The roof leaks if a building hasn't been maintained.  
 The team is unsuccessful because the coach is so incompetent.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 74)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 77)  
 If you see a dress and you really like it you should buy it while you can.  
 At least for Alice that wonderful dress is just too expensive.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 74)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 77)  
 Last night, she was painting Easter eggs.  
 With a fine brush, she was painting Easter eggs.  
 Open the carton. Now remove the monitor carefully.  
 The Johnsons are solid citizens. They pay their taxes. They attend PTA meetings.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 76)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 79)  
 It's amazing, the things she says sometimes.  
 It's ridiculous, what he's saying.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 82)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 85)  
 Rhinos in that park are threatened by poachers.  
 Young rhinos are threatened by poachers.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 83)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 86)  
 Let's find a restaurant that's family-friendly.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 84)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 87)  
 I got glue for your daughter.  
 I got glue for your coffee mug.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 84)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 87)  
 We're going to Grandma!  
 Let's go to him right now.  
 Let's go to the lawyers.  
 Let's go to the press.  
 
 #
-
 
 ### Conceptual Spaces/Cognitive Grammar
 ---

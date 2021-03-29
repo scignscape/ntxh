@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-20/3/2021, 22:16
+29/3/2021, 15:7
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -57,7 +57,7 @@ $end: 52
 !/ Subdocument 
 $au: Nathaniel Christen
 $start: 52 
-$end: 87 
+$end: 90 
 /!
 <+>
 
@@ -2360,7 +2360,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 195
-$p: 64
+$p: 65
 $t: Many star players were drafted by that franchise, but they were not surrounded with enough depth.
 $c: ref
 /!
@@ -2428,7 +2428,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 201
-$p: 65
+$p: 66
 $x: itm:fliesinvited
 $t: The city's largest theater company performed The Flies; then they invited a professor to discuss Sartre's philosophy when the play was over.
 $c: ref
@@ -2566,7 +2566,249 @@ $s: 4
 
 !/ SentenceItem
 $i: 213
+$p: 71
+$t: War could break out any time.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 214
+$p: 71
+$t: The war has lasted many years.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 215
+$p: 71
+$t: A tenuous peace has held for over a year now.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 216
+$p: 71
+$t: The cruel war is raging, Johnny has to fight.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 217
+$p: 71
+$t: War is a cause of misery.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 218
+$p: 71
+$t: The use of war to score political points is immoral.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 219
 $p: 72
+$t: Most of the refugees are fleeing civil war.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 220
+$p: 72
+$t: Before the war, things were different.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 221
+$p: 72
+$t: Historians will study this war for a long time.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 222
+$p: 72
+$t: Diplomats met from many countries to discuss the civil war.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 223
+$p: 72
+$t: The international community must end this war.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 224
+$p: 72
+$t: Diplomats met to discuss how to maintain the peace.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 225
+$p: 72
+$t: Don't underestimate our resolve -- this is war!
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 226
+$p: 72
+$t: Secretly the governments met to discuss peace.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 227
+$p: 72
+$t: We must first and foremost work for peace.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 228
+$p: 72
+$t: Environmental degradation was a cause of the war.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 229
+$p: 72
+$t: All this destruction was a result of the war.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 230
+$p: 72
+$t: There is more war to come.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 231
+$p: 72
+$t: A little peace would make a big difference.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 232
+$p: 72
+$t: There is war between moderates and radicals.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 233
+$p: 72
+$t: The moderates made peace with the radicals.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 234
+$p: 72
+$t: Some countries pulled out of the war.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 235
+$p: 72
+$t: The countries are now officially at war.
+$c: cog
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 92
+$p: 72
+$s: 4
+
+!/ SentenceItem
+$i: 236
+$p: 72
+$t: The peace was finally achieved.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 237
+$p: 72
+$x: itm:warachieved
+$t: ?The war was finally achieved.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 238
+$p: 72
+$t: The peace lasted for five years.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 239
+$p: 72
+$t: The war went on for five years.
+$c: cog
+/!
+<>>
+
+!/ SentenceItem
+$i: 240
+$p: 72
+$x: itm:peacewenton
+$t: ?The peace went on for five years.
+$c: cog
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 93
+$p: 75
+$s: 5
+
+!/ SentenceItem
+$i: 241
+$p: 75
 $x: itm:booksheread
 $t: The book she read was very interesting.
 $c: pro
@@ -2574,8 +2816,8 @@ $c: pro
 <>>
 
 !/ SentenceItem
-$i: 214
-$p: 72
+$i: 242
+$p: 75
 $x: itm:bookrecommend
 $t: I recommended a book that she read immediately.
 $c: pro
@@ -2583,8 +2825,8 @@ $c: pro
 <>>
 
 !/ SentenceItem
-$i: 215
-$p: 72
+$i: 243
+$p: 75
 $x: itm:bookjustappeared
 $t: A book just appeared that she read immediately.
 $c: pro
@@ -2592,8 +2834,8 @@ $c: pro
 <>>
 
 !/ SentenceItem
-$i: 216
-$p: 72
+$i: 244
+$p: 75
 $x: itm:bookrecommendalt
 $t: I recommended a book I read years ago to her.
 $c: pro
@@ -2601,8 +2843,8 @@ $c: pro
 <>>
 
 !/ SentenceItem
-$i: 217
-$p: 72
+$i: 245
+$p: 75
 $x: itm:harrycause
 $t: This time Harry didn't cause our defeat.
 $c: pro
@@ -2613,13 +2855,13 @@ $c: pro
 <+>
 
 !/ SentenceList
-$i: 92
-$p: 73
-$s: 4
+$i: 94
+$p: 76
+$s: 5
 
 !/ SentenceItem
-$i: 218
-$p: 73
+$i: 246
+$p: 76
 $x: itm:clydebertha
 $t: It's odd that Clyde married Bertha.
 $c: pro
@@ -2627,8 +2869,8 @@ $c: pro
 <>>
 
 !/ SentenceItem
-$i: 219
-$p: 73
+$i: 247
+$p: 76
 $x: itm:Brighton
 $t: Londoners most often go to Brighton.
 $c: pro
@@ -2639,13 +2881,13 @@ $c: pro
 <+>
 
 !/ SentenceList
-$i: 93
-$p: 73
-$s: 4
+$i: 95
+$p: 76
+$s: 5
 
 !/ SentenceItem
-$i: 220
-$p: 73
+$i: 248
+$p: 76
 $x: itm:BillDrink
 $t: Bill doesn't drink because he's unhappy.
 $c: pro
@@ -2653,8 +2895,8 @@ $c: pro
 <>>
 
 !/ SentenceItem
-$i: 221
-$p: 73
+$i: 249
+$p: 76
 $x: itm:ricewine
 $t: Stir in rice wine and seasonings.
 $c: pro
@@ -2662,8 +2904,8 @@ $c: pro
 <>>
 
 !/ SentenceItem
-$i: 222
-$p: 73
+$i: 250
+$p: 76
 $x: itm:poodle
 $t: Alice bought a dog. A poodle.
 $c: pro
@@ -2674,13 +2916,13 @@ $c: pro
 <+>
 
 !/ SentenceList
-$i: 94
-$p: 73
-$s: 4
+$i: 96
+$p: 76
+$s: 5
 
 !/ SentenceItem
-$i: 223
-$p: 73
+$i: 251
+$p: 76
 $x: itm:roof
 $t: The roof leaks if a building hasn't been maintained.
 $c: pro
@@ -2688,8 +2930,8 @@ $c: pro
 <>>
 
 !/ SentenceItem
-$i: 224
-$p: 73
+$i: 252
+$p: 76
 $x: itm:coach
 $t: The team is unsuccessful because the coach is so incompetent.
 $c: pro
@@ -2700,13 +2942,13 @@ $c: pro
 <+>
 
 !/ SentenceList
-$i: 95
-$p: 74
-$s: 4
+$i: 97
+$p: 77
+$s: 5
 
 !/ SentenceItem
-$i: 225
-$p: 74
+$i: 253
+$p: 77
 $x: itm:seedress
 $t: If you see a dress and you really like it you should buy it while you can.
 $c: pro
@@ -2714,8 +2956,8 @@ $c: pro
 <>>
 
 !/ SentenceItem
-$i: 226
-$p: 74
+$i: 254
+$p: 77
 $x: itm:atleastdress
 $t: At least for Alice that wonderful dress is just too expensive.
 $c: pro
@@ -2726,13 +2968,13 @@ $c: pro
 <+>
 
 !/ SentenceList
-$i: 96
-$p: 74
-$s: 4
+$i: 98
+$p: 77
+$s: 5
 
 !/ SentenceItem
-$i: 227
-$p: 74
+$i: 255
+$p: 77
 $x: itm:easter
 $t: Last night, she was painting Easter eggs.
 $c: pro
@@ -2740,8 +2982,8 @@ $c: pro
 <>>
 
 !/ SentenceItem
-$i: 228
-$p: 74
+$i: 256
+$p: 77
 $x: itm:finebrush
 $t: With a fine brush, she was painting Easter eggs.
 $c: pro
@@ -2749,8 +2991,8 @@ $c: pro
 <>>
 
 !/ SentenceItem
-$i: 229
-$p: 74
+$i: 257
+$p: 77
 $x: itm:opencarton
 $t: Open the carton. Now remove the monitor carefully.
 $c: pro
@@ -2758,8 +3000,8 @@ $c: pro
 <>>
 
 !/ SentenceItem
-$i: 230
-$p: 74
+$i: 258
+$p: 77
 $x: itm:johnsons
 $t: The Johnsons are solid citizens. They pay their taxes. They attend PTA meetings.
 $c: pro
@@ -2770,13 +3012,13 @@ $c: pro
 <+>
 
 !/ SentenceList
-$i: 97
-$p: 76
-$s: 4
+$i: 99
+$p: 79
+$s: 5
 
 !/ SentenceItem
-$i: 231
-$p: 76
+$i: 259
+$p: 79
 $x: itm:Amazing
 $t: It's amazing, the things she says sometimes.
 $c: pro
@@ -2784,8 +3026,8 @@ $c: pro
 <>>
 
 !/ SentenceItem
-$i: 232
-$p: 76
+$i: 260
+$p: 79
 $x: itm:Ridiculous
 $t: It's ridiculous, what he's saying.
 $c: pro
@@ -2796,13 +3038,13 @@ $c: pro
 <+>
 
 !/ SentenceList
-$i: 98
-$p: 82
-$s: 4
+$i: 100
+$p: 85
+$s: 5
 
 !/ SentenceItem
-$i: 233
-$p: 82
+$i: 261
+$p: 85
 $x: itm:rhinor
 $t: Rhinos in that park are threatened by poachers.
 $c: sem
@@ -2810,8 +3052,8 @@ $c: sem
 <>>
 
 !/ SentenceItem
-$i: 234
-$p: 82
+$i: 262
+$p: 85
 $t: Young rhinos are threatened by poachers.
 $c: sem
 /!
@@ -2821,13 +3063,13 @@ $c: sem
 <+>
 
 !/ SentenceList
-$i: 99
-$p: 83
-$s: 4
+$i: 101
+$p: 86
+$s: 5
 
 !/ SentenceItem
-$i: 235
-$p: 83
+$i: 263
+$p: 86
 $t: Let's find a restaurant that's family-friendly.
 $c: sem
 /!
@@ -2837,21 +3079,21 @@ $c: sem
 <+>
 
 !/ SentenceList
-$i: 100
-$p: 84
-$s: 4
+$i: 102
+$p: 87
+$s: 5
 
 !/ SentenceItem
-$i: 236
-$p: 84
+$i: 264
+$p: 87
 $t: I got glue for your daughter.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 237
-$p: 84
+$i: 265
+$p: 87
 $t: I got glue for your coffee mug.
 $c: sem
 /!
@@ -2861,37 +3103,37 @@ $c: sem
 <+>
 
 !/ SentenceList
-$i: 101
-$p: 84
-$s: 4
+$i: 103
+$p: 87
+$s: 5
 
 !/ SentenceItem
-$i: 238
-$p: 84
+$i: 266
+$p: 87
 $t: We're going to Grandma!
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 239
-$p: 84
+$i: 267
+$p: 87
 $t: Let's go to him right now.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 240
-$p: 84
+$i: 268
+$p: 87
 $t: Let's go to the lawyers.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 241
-$p: 84
+$i: 269
+$p: 87
 $t: Let's go to the press.
 $c: sem
 /!
