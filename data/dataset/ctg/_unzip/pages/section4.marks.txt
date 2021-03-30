@@ -8,14 +8,18 @@ $& DebusmannThesis %% (1:main) 64459 64566
 $& HolmqvistDiss %% (1:main) 64063 64064
 $& HolmqvistDiss %% (1:main) 71113 71178
 $& HongEisner %% (1:main) 64573 64574
-$& JensAllwood %% (1:main) 86072 86087
-$& JensAllwood page%%23 (1:main) 90128 90515
+$& JensAllwood %% (1:main) 86076 86091
+$& JensAllwood page%%23 (1:main) 90134 90521
 $& KennethHolmqvist %% (1:main) 64065 64066
 $& KepserMonnich %% (1:main) 64691 64692
 $& KongRushSmith %% (1:main) 64629 64690
+$& LawryTang %% (1:main) 100232 100233
+$& LewisLawry %% (1:main) 100230 100231
+$& LucasBechberger %% (1:main) 100223 100229
 $& MattSelway %% (1:main) 63699 64062
 $& Nivre %% (1:main) 64571 64572
 $& Schneider %% (1:main) 64693 64694
+$& UrbanGrzelinska %% (1:main) 100234 100238
 $& XiaPalmer %% (1:main) 64695 64696
 
 
