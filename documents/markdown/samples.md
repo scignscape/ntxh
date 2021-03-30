@@ -470,7 +470,7 @@ The war went on for five years.
 The peace went on for five years.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 75)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 76)  
 The book she read was very interesting.  
 I recommended a book that she read immediately.  
 A book just appeared that she read immediately.  
@@ -478,54 +478,54 @@ I recommended a book I read years ago to her.
 This time Harry didn't cause our defeat.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 76)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 77)  
 It's odd that Clyde married Bertha.  
 Londoners most often go to Brighton.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 76)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 77)  
 Bill doesn't drink because he's unhappy.  
 Stir in rice wine and seasonings.  
 Alice bought a dog. A poodle.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 76)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 77)  
 The roof leaks if a building hasn't been maintained.  
 The team is unsuccessful because the coach is so incompetent.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 77)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 78)  
 If you see a dress and you really like it you should buy it while you can.  
 At least for Alice that wonderful dress is just too expensive.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 77)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 78)  
 Last night, she was painting Easter eggs.  
 With a fine brush, she was painting Easter eggs.  
 Open the carton. Now remove the monitor carefully.  
 The Johnsons are solid citizens. They pay their taxes. They attend PTA meetings.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 79)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 80)  
 It's amazing, the things she says sometimes.  
 It's ridiculous, what he's saying.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 85)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 86)  
 Rhinos in that park are threatened by poachers.  
 Young rhinos are threatened by poachers.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 86)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 87)  
 Let's find a restaurant that's family-friendly.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 87)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 88)  
 I got glue for your daughter.  
 I got glue for your coffee mug.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 87)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 89)  
 We're going to Grandma!  
 Let's go to him right now.  
 Let's go to the lawyers.  
