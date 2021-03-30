@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-29/3/2021, 15:37
+29/3/2021, 22:21
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -57,7 +57,7 @@ $end: 52
 !/ Subdocument 
 $au: Nathaniel Christen
 $start: 52 
-$end: 90 
+$end: 91 
 /!
 <+>
 
@@ -1815,6 +1815,7 @@ $c: log
 !/ SentenceItem
 $i: 144
 $p: 49
+$x: itm:bachelor
 $t: John has been married for five years, but in many ways he's still a bachelor.
 $c: log
 /!
@@ -1823,6 +1824,7 @@ $c: log
 !/ SentenceItem
 $i: 145
 $p: 49
+$x: itm:bachelorpad
 $t: Every married man needs a bachelor pad somewhere, and wherever yours is, you need a mini-fridge.
 $c: log
 /!
@@ -2803,12 +2805,12 @@ $c: cog
 
 !/ SentenceList
 $i: 93
-$p: 75
+$p: 76
 $s: 5
 
 !/ SentenceItem
 $i: 241
-$p: 75
+$p: 76
 $x: itm:booksheread
 $t: The book she read was very interesting.
 $c: pro
@@ -2817,7 +2819,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 242
-$p: 75
+$p: 76
 $x: itm:bookrecommend
 $t: I recommended a book that she read immediately.
 $c: pro
@@ -2826,7 +2828,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 243
-$p: 75
+$p: 76
 $x: itm:bookjustappeared
 $t: A book just appeared that she read immediately.
 $c: pro
@@ -2835,7 +2837,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 244
-$p: 75
+$p: 76
 $x: itm:bookrecommendalt
 $t: I recommended a book I read years ago to her.
 $c: pro
@@ -2844,7 +2846,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 245
-$p: 75
+$p: 76
 $x: itm:harrycause
 $t: This time Harry didn't cause our defeat.
 $c: pro
@@ -2856,12 +2858,12 @@ $c: pro
 
 !/ SentenceList
 $i: 94
-$p: 76
+$p: 77
 $s: 5
 
 !/ SentenceItem
 $i: 246
-$p: 76
+$p: 77
 $x: itm:clydebertha
 $t: It's odd that Clyde married Bertha.
 $c: pro
@@ -2870,7 +2872,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 247
-$p: 76
+$p: 77
 $x: itm:Brighton
 $t: Londoners most often go to Brighton.
 $c: pro
@@ -2882,12 +2884,12 @@ $c: pro
 
 !/ SentenceList
 $i: 95
-$p: 76
+$p: 77
 $s: 5
 
 !/ SentenceItem
 $i: 248
-$p: 76
+$p: 77
 $x: itm:BillDrink
 $t: Bill doesn't drink because he's unhappy.
 $c: pro
@@ -2896,7 +2898,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 249
-$p: 76
+$p: 77
 $x: itm:ricewine
 $t: Stir in rice wine and seasonings.
 $c: pro
@@ -2905,7 +2907,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 250
-$p: 76
+$p: 77
 $x: itm:poodle
 $t: Alice bought a dog. A poodle.
 $c: pro
@@ -2917,12 +2919,12 @@ $c: pro
 
 !/ SentenceList
 $i: 96
-$p: 76
+$p: 77
 $s: 5
 
 !/ SentenceItem
 $i: 251
-$p: 76
+$p: 78
 $x: itm:roof
 $t: The roof leaks if a building hasn't been maintained.
 $c: pro
@@ -2931,7 +2933,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 252
-$p: 76
+$p: 78
 $x: itm:coach
 $t: The team is unsuccessful because the coach is so incompetent.
 $c: pro
@@ -2943,12 +2945,12 @@ $c: pro
 
 !/ SentenceList
 $i: 97
-$p: 77
+$p: 78
 $s: 5
 
 !/ SentenceItem
 $i: 253
-$p: 77
+$p: 78
 $x: itm:seedress
 $t: If you see a dress and you really like it you should buy it while you can.
 $c: pro
@@ -2957,7 +2959,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 254
-$p: 77
+$p: 78
 $x: itm:atleastdress
 $t: At least for Alice that wonderful dress is just too expensive.
 $c: pro
@@ -2969,12 +2971,12 @@ $c: pro
 
 !/ SentenceList
 $i: 98
-$p: 77
+$p: 78
 $s: 5
 
 !/ SentenceItem
 $i: 255
-$p: 77
+$p: 78
 $x: itm:easter
 $t: Last night, she was painting Easter eggs.
 $c: pro
@@ -2983,7 +2985,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 256
-$p: 77
+$p: 78
 $x: itm:finebrush
 $t: With a fine brush, she was painting Easter eggs.
 $c: pro
@@ -2992,7 +2994,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 257
-$p: 77
+$p: 78
 $x: itm:opencarton
 $t: Open the carton. Now remove the monitor carefully.
 $c: pro
@@ -3001,7 +3003,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 258
-$p: 77
+$p: 78
 $x: itm:johnsons
 $t: The Johnsons are solid citizens. They pay their taxes. They attend PTA meetings.
 $c: pro
@@ -3013,12 +3015,12 @@ $c: pro
 
 !/ SentenceList
 $i: 99
-$p: 79
+$p: 80
 $s: 5
 
 !/ SentenceItem
 $i: 259
-$p: 79
+$p: 80
 $x: itm:Amazing
 $t: It's amazing, the things she says sometimes.
 $c: pro
@@ -3027,7 +3029,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 260
-$p: 79
+$p: 80
 $x: itm:Ridiculous
 $t: It's ridiculous, what he's saying.
 $c: pro
@@ -3039,12 +3041,12 @@ $c: pro
 
 !/ SentenceList
 $i: 100
-$p: 85
+$p: 86
 $s: 5
 
 !/ SentenceItem
 $i: 261
-$p: 85
+$p: 86
 $x: itm:rhinor
 $t: Rhinos in that park are threatened by poachers.
 $c: sem
@@ -3053,7 +3055,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 262
-$p: 85
+$p: 86
 $t: Young rhinos are threatened by poachers.
 $c: sem
 /!
@@ -3064,12 +3066,12 @@ $c: sem
 
 !/ SentenceList
 $i: 101
-$p: 86
+$p: 87
 $s: 5
 
 !/ SentenceItem
 $i: 263
-$p: 86
+$p: 87
 $t: Let's find a restaurant that's family-friendly.
 $c: sem
 /!
@@ -3080,12 +3082,12 @@ $c: sem
 
 !/ SentenceList
 $i: 102
-$p: 87
+$p: 88
 $s: 5
 
 !/ SentenceItem
 $i: 264
-$p: 87
+$p: 89
 $t: I got glue for your daughter.
 $c: sem
 /!
@@ -3093,7 +3095,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 265
-$p: 87
+$p: 89
 $t: I got glue for your coffee mug.
 $c: sem
 /!
@@ -3104,12 +3106,12 @@ $c: sem
 
 !/ SentenceList
 $i: 103
-$p: 87
+$p: 89
 $s: 5
 
 !/ SentenceItem
 $i: 266
-$p: 87
+$p: 89
 $t: We're going to Grandma!
 $c: sem
 /!
@@ -3117,7 +3119,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 267
-$p: 87
+$p: 89
 $t: Let's go to him right now.
 $c: sem
 /!
@@ -3125,7 +3127,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 268
-$p: 87
+$p: 89
 $t: Let's go to the lawyers.
 $c: sem
 /!
@@ -3133,7 +3135,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 269
-$p: 87
+$p: 89
 $t: Let's go to the press.
 $c: sem
 /!
