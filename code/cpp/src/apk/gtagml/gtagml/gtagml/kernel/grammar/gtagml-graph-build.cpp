@@ -30,7 +30,7 @@ USING_KANS(GTagML)
 
 GTagML_Graph_Build::GTagML_Graph_Build(GTagML_Graph& g, GTagML_Document_Info& document_info)
  : Flags(0), markup_position_(g.root_node()), acc_mode_(Acc_Mode::Main_Tile), document_info_(document_info),
-   current_parsing_mode_(GTagML_Parsing_Modes::NGML), //?current_annotation_tile_(nullptr),
+   current_parsing_mode_(GTagML_Parsing_Modes::GTagML), //?current_annotation_tile_(nullptr),
    tile_acc_length_adjustment_(0),
    tile_acc_qts_(&tile_acc_), string_literal_acc_qts_(&string_literal_acc_),
    current_raw_format_("latex"), held_semantic_mark_mode_(0)

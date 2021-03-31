@@ -36,12 +36,14 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
  Context raw_context = add_context("raw-context");
  Context html_context = add_context("html-context");
 
+ Context comment_context = add_context("comment-context");
+
  Context gtagml_or_html_context = add_context("gtaml-or-html",
    {gtagml_context, html_context});
 
 
  track_context({&gtagml_context, &raw_context,
-   &gtagml_or_html_context, &html_context});
+   &gtagml_or_html_context, &html_context, &comment_context});
 
  switch(graph_build.current_parsing_mode())
  {
@@ -53,7 +55,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
   activate(raw_context);
   break;
 
- case GTagML_Parsing_Modes::NGML:
+ case GTagML_Parsing_Modes::GTagML:
   activate(gtagml_context);
   break;
  }
@@ -62,6 +64,29 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
  GTagML_Parse_Context& parse_context = graph_build.parse_context();
 
 // size_t test;
+
+ add_rule( gtagml_context, "enter-multi-line-comment",
+   " ; ;+ (?<tail> [~-]{2,}) "
+   ,[comment_context, this, &p] //raw_context, &graph_build, this, &p]
+ {
+  QString tail = p.matched("tail");
+  activate_with_depth_mark(comment_context, tail.length());
+ });
+
+ add_rule( gtagml_context, "single-line-comment",
+   " ;{2,} [~=-] [^\\n]* \\n "
+   ,[] //raw_context, &graph_build, this, &p]
+ {
+ });
+
+
+ add_rule( comment_context, "leave-multi-line-comment",
+   " (?<tail> [~-]{2,}) ; ;+  "
+   ,[gtagml_context, comment_context, this, &p] //raw_context, &graph_build, this, &p]
+ {
+  QString tail = p.matched("tail");
+  check_activate_with_depth_mark(gtagml_context, comment_context, tail.length());
+ });
 
 
  add_rule( gtagml_context, "enter-special-parse-mode",
@@ -84,7 +109,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
   if(spm.isEmpty())
     spm = "raw";
   graph_build.leave_special_parse_mode(spm);
-  if(graph_build.current_parsing_mode() == GTagML_Parsing_Modes::NGML)
+  if(graph_build.current_parsing_mode() == GTagML_Parsing_Modes::GTagML)
     activate(gtagml_context);
  });
 

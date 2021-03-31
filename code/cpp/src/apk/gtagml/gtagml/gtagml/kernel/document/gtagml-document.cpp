@@ -40,7 +40,7 @@ USING_KANS(GTagML)
 
 
 GTagML_Document::GTagML_Document()
- : parsing_mode_(GTagML_Parsing_Modes::NGML),
+ : parsing_mode_(GTagML_Parsing_Modes::GTagML),
    graph_(nullptr), grammar_(nullptr),
    annotations_(nullptr), divert_(nullptr),
    project_info_(nullptr)
@@ -49,7 +49,7 @@ GTagML_Document::GTagML_Document()
 }
 
 GTagML_Document::GTagML_Document(GTagML_Project_Info* gpi)
- : parsing_mode_(GTagML_Parsing_Modes::NGML),
+ : parsing_mode_(GTagML_Parsing_Modes::GTagML),
    graph_(nullptr), grammar_(nullptr),
    annotations_(nullptr), divert_(nullptr),
    project_info_(gpi)

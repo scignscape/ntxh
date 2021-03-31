@@ -13,7 +13,7 @@
 KANS_(GTagML)
 
 enum class GTagML_Parsing_Modes {
-  N_A, NGML, HTML, Parse_Error, Raw
+  N_A, GTagML, HTML, Parse_Error, Raw, Comment
  };
 
 _KANS(GTagML)

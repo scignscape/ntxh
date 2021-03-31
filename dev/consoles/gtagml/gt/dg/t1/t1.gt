@@ -1,10 +1,19 @@
 
+;;~ test comment ...
+
+;;-- test 
+ comment ...
+ ---;; needs to match ...
+ --;;
+
+
+
 `p.
-Ind`\[:]
+Test sentence one`\[:]
 `p`
 
 `p.
-So which.  Compare.
+Test sentence two.  Test sentence three.
 `p`
 
 

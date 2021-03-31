@@ -33,8 +33,9 @@ public:
  {
   unsigned short index;
   float weight;
-  Context(unsigned short i = 0, float w = 0):index(i),weight(w){}
-  Context(const Context& lhs):index(lhs.index),weight(lhs.weight)
+  unsigned short depth_mark;
+  Context(unsigned short i = 0, float w = 0):index(i),weight(w),depth_mark(0){}
+  Context(const Context& lhs):index(lhs.index),weight(lhs.weight),depth_mark(lhs.depth_mark)
   {
 
   }
@@ -231,6 +232,42 @@ public:
   }
  }
 
+ void check_activate_with_depth_mark(const Context& c, const Context& cc,
+   unsigned short dm, float w = 1)
+ {
+  Context* pcc = context_ptr_vector_[cc.index];
+  if(pcc)
+  {
+   if(pcc->depth_mark == dm)
+   {
+    pcc->depth_mark = 0;
+    activate(c, w);
+   }
+  }
+ }
+
+
+ void activate_with_depth_mark(Context& c, unsigned short dm, float w = 1)
+ {
+  c.weight = w;
+  c.depth_mark = dm;
+  activate_context(c.index);
+  active_context_index_ = c.index;
+ }
+
+ void activate_with_depth_mark(const Context& c, unsigned short dm, float w = 1)
+ {
+  Context* pc = context_ptr_vector_[c.index];
+  if(pc)
+  {
+   activate_with_depth_mark(*pc, dm, w);
+  }
+  else
+  {
+   activate_context(c.index);
+   active_context_index_ = c.index;
+  }
+ }
 
  void cancel_context(QString s, float w = 0)
  {
