@@ -2,24 +2,27 @@ $$ document-title := Cognitive Transform Grammar
 $$ local-title := section4
 
 $& AkbikBross %% (1:main) 64575 64576
+$& CarlosMontemayor %% (1:main) 92924 93069
+$& DanRyder %% (1:main) 93070 93071
 $& Debusmann %% (1:main) 64567 64568
 $& DebusmannDuchierRossberg %% (1:main) 64569 64570
 $& DebusmannThesis %% (1:main) 64459 64566
 $& HolmqvistDiss %% (1:main) 64063 64064
 $& HolmqvistDiss %% (1:main) 71113 71178
 $& HongEisner %% (1:main) 64573 64574
-$& JensAllwood %% (1:main) 86076 86091
-$& JensAllwood page%%23 (1:main) 90134 90521
+$& JensAllwood %% (1:main) 86093 86108
+$& JensAllwood page%%9 (1:main) 90082 90471
+$& JoeyPollack %% (1:main) 93072 93076
 $& KennethHolmqvist %% (1:main) 64065 64066
 $& KepserMonnich %% (1:main) 64691 64692
 $& KongRushSmith %% (1:main) 64629 64690
-$& LawryTang %% (1:main) 100232 100233
-$& LewisLawry %% (1:main) 100230 100231
-$& LucasBechberger %% (1:main) 100223 100229
+$& LawryTang %% (1:main) 103342 103343
+$& LewisLawry %% (1:main) 103340 103341
+$& LucasBechberger %% (1:main) 103333 103339
 $& MattSelway %% (1:main) 63699 64062
 $& Nivre %% (1:main) 64571 64572
 $& Schneider %% (1:main) 64693 64694
-$& UrbanGrzelinska %% (1:main) 100234 100238
+$& UrbanGrzelinska %% (1:main) 103344 103348
 $& XiaPalmer %% (1:main) 64695 64696
 
 

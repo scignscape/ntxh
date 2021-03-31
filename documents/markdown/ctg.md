@@ -483,35 +483,35 @@ It's odd that Clyde married Bertha.
 Londoners most often go to Brighton.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 77)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 78)  
 Bill doesn't drink because he's unhappy.  
 Stir in rice wine and seasonings.  
 Alice bought a dog. A poodle.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 77)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 78)  
 The roof leaks if a building hasn't been maintained.  
 The team is unsuccessful because the coach is so incompetent.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 78)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 79)  
 If you see a dress and you really like it you should buy it while you can.  
 At least for Alice that wonderful dress is just too expensive.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 78)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 79)  
 Last night, she was painting Easter eggs.  
 With a fine brush, she was painting Easter eggs.  
 Open the carton. Now remove the monitor carefully.  
 The Johnsons are solid citizens. They pay their taxes. They attend PTA meetings.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 80)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 81)  
 It's amazing, the things she says sometimes.  
 It's ridiculous, what he's saying.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 86)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 87)  
 Rhinos in that park are threatened by poachers.  
 Young rhinos are threatened by poachers.  
 
@@ -520,7 +520,7 @@ Young rhinos are threatened by poachers.
 Let's find a restaurant that's family-friendly.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 88)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 89)  
 I got glue for your daughter.  
 I got glue for your coffee mug.  
 
