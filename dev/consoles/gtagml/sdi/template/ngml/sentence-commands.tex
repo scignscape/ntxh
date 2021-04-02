@@ -1,4 +1,12 @@
 
+
+\newlength{\sentenceListStartPullup}
+\newlength{\sentenceListEndPullup}
+
+\setlength{\sentenceListStartPullup}{2pt}
+\setlength{\sentenceListEndPullup}{1pt}
+
+
 \newwrite\ntxhFile
 \immediate\openout\ntxhFile=\jobname.ntxh
 
@@ -10,9 +18,6 @@
 \newcommand{\listItemMark}{\rotatebox{30}{\raisebox{2pt}{\color{green!30!yellow!40!black}{\begin{tiny}$\blacktriangleright$\end{tiny}}}}}
 
 \newenvironment{sentenceList}{\writeNtxhSentenceListStart%
-\begin{list}{\listItemMark}{\setlength{\leftmargin}{.5em}\setlength{\itemsep}{-.1em}\setlength{\topsep}{.85em}}\begin{small}}{\writeNtxhSentenceListEnd\end{small}\end{list}}
-
-\newenvironment{sentenceListLbl}{\writeNtxhSentenceListStartLbl%
 \begin{list}{\listItemMark}{\setlength{\leftmargin}{.5em}\setlength{\itemsep}{-.1em}\setlength{\topsep}{.85em}}\begin{small}}{\writeNtxhSentenceListEnd\end{small}\end{list}}
 
 
@@ -33,18 +38,10 @@
 \makeatletter
 
 \newcommand{\writeNtxhSentenceListStart}{%
-\stepcounter{ntxhGroupCounter}
-\immediate\write\ntxhFile{%
-!/ SentenceList^^J%
-$i: \thentxhGroupCounter^^J%
-$r: 0^^J%
-$p: \thepage^^J%
-$s: \OldTheSection^^J%
-}}
+\stepcounter{ntxhGroupCounter}%
+\stepcounter{zSentenceList}%
 
-\newcommand{\writeNtxhSentenceListStartLbl}{%
-\stepcounter{ntxhGroupCounter}\stepcounter{zSentenceList}%
-{\zlabel{Z.\thezSentenceList}}%
+\vspace{-\sentenceListStartPullup}{\zlabel{Z.\thezSentenceList}}%
 \setcounter{zPage}{\zref@extract{Z.\thezSentenceList}{abspage}}%
 \immediate\write\ntxhFile{%
 !/ SentenceList^^J%
@@ -57,7 +54,7 @@ $s: \OldTheSection^^J%
 \makeatother
 
 
-\newcommand{\writeNtxhSentenceListEnd}{%
+\newcommand{\writeNtxhSentenceListEnd}{\vspace{-\sentenceListEndPullup}%
 \immediate\write\ntxhFile{%
 /!^^J%
 <+>^^J%

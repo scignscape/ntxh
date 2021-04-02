@@ -1,5 +1,5 @@
 - Generated from LaTeX File icg.tex 
-2/4/2021, 12:8
+2/4/2021, 14:11
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -65,7 +65,7 @@ $end: 88
 
 !/ SentenceList
 $i: 1
-$r: 0
+$r: 3
 $p: 3
 $s: 0
 
@@ -92,8 +92,8 @@ $c: cog
 
 !/ SentenceList
 $i: 2
-$r: 0
-$p: 3
+$r: 4
+$p: 4
 $s: 0
 
 !/ SentenceItem
@@ -155,7 +155,7 @@ $c: syn
 
 !/ SentenceList
 $i: 3
-$r: 0
+$r: 4
 $p: 4
 $s: 0
 
@@ -180,13 +180,13 @@ $c: dis
 
 !/ SentenceList
 $i: 4
-$r: 0
+$r: 5
 $p: 4
 $s: 0
 
 !/ SentenceItem
 $i: 11
-$p: 4
+$p: 5
 $t: I like Ontario wines.
 $c: log
 /!
@@ -194,7 +194,7 @@ $c: log
 
 !/ SentenceItem
 $i: 12
-$p: 4
+$p: 5
 $t: I like red wines from Southern Ontario.
 $c: log
 /!
@@ -213,7 +213,7 @@ $c: log
 
 !/ SentenceList
 $i: 5
-$r: 0
+$r: 5
 $p: 5
 $s: 0
 
@@ -247,7 +247,7 @@ $c: log
 
 !/ SentenceList
 $i: 6
-$r: 0
+$r: 7
 $p: 7
 $s: 0
 
@@ -296,7 +296,7 @@ $c: cog
 
 !/ SentenceList
 $i: 7
-$r: 0
+$r: 7
 $p: 7
 $s: 0
 
@@ -322,7 +322,7 @@ $c: log
 
 !/ SentenceList
 $i: 8
-$r: 0
+$r: 11
 $p: 11
 $s: 0
 
@@ -358,7 +358,7 @@ $c: log
 
 !/ SentenceList
 $i: 9
-$r: 0
+$r: 12
 $p: 12
 $s: 0
 
@@ -385,7 +385,7 @@ $c: log
 
 !/ SentenceList
 $i: 10
-$r: 0
+$r: 14
 $p: 14
 $s: 0
 
@@ -412,7 +412,7 @@ $c: dia
 
 !/ SentenceList
 $i: 11
-$r: 0
+$r: 14
 $p: 14
 $s: 0
 
@@ -437,7 +437,7 @@ $c: log
 
 !/ SentenceList
 $i: 12
-$r: 0
+$r: 17
 $p: 17
 $s: 1
 
@@ -464,7 +464,7 @@ $c: dia
 
 !/ SentenceList
 $i: 13
-$r: 0
+$r: 20
 $p: 20
 $s: 1
 
@@ -489,7 +489,7 @@ $c: ont
 
 !/ SentenceList
 $i: 14
-$r: 0
+$r: 20
 $p: 20
 $s: 1
 
@@ -514,7 +514,7 @@ $c: ont
 
 !/ SentenceList
 $i: 15
-$r: 0
+$r: 21
 $p: 21
 $s: 1
 
@@ -547,7 +547,7 @@ $c: ont
 
 !/ SentenceList
 $i: 16
-$r: 0
+$r: 21
 $p: 21
 $s: 1
 
@@ -580,7 +580,7 @@ $c: ont
 
 !/ SentenceList
 $i: 17
-$r: 0
+$r: 21
 $p: 21
 $s: 1
 
@@ -613,7 +613,7 @@ $c: ont
 
 !/ SentenceList
 $i: 18
-$r: 0
+$r: 22
 $p: 22
 $s: 1
 
@@ -640,7 +640,7 @@ $c: ont
 
 !/ SentenceList
 $i: 19
-$r: 0
+$r: 22
 $p: 22
 $s: 1
 
@@ -665,7 +665,7 @@ $c: ont
 
 !/ SentenceList
 $i: 20
-$r: 0
+$r: 26
 $p: 26
 $s: 1
 
@@ -692,7 +692,7 @@ $c: fig
 
 !/ SentenceList
 $i: 21
-$r: 0
+$r: 37
 $p: 37
 $s: 2
 
@@ -789,7 +789,7 @@ $c: syn
 
 !/ SentenceList
 $i: 22
-$r: 0
+$r: 37
 $p: 37
 $s: 2
 
@@ -841,7 +841,7 @@ $c: cog
 
 !/ SentenceList
 $i: 23
-$r: 0
+$r: 38
 $p: 38
 $s: 2
 
@@ -906,7 +906,7 @@ $c: cog
 
 !/ SentenceList
 $i: 24
-$r: 0
+$r: 38
 $p: 38
 $s: 2
 
@@ -955,7 +955,7 @@ $c: cog
 
 !/ SentenceList
 $i: 25
-$r: 0
+$r: 38
 $p: 38
 $s: 2
 
@@ -980,7 +980,7 @@ $c: cog
 
 !/ SentenceList
 $i: 26
-$r: 0
+$r: 38
 $p: 38
 $s: 2
 
@@ -1034,7 +1034,7 @@ $c: cog
 
 !/ SentenceList
 $i: 27
-$r: 0
+$r: 42
 $p: 42
 $s: 2
 
@@ -1100,7 +1100,7 @@ $c: syn
 
 !/ SentenceList
 $i: 28
-$r: 0
+$r: 42
 $p: 42
 $s: 2
 
@@ -1126,7 +1126,7 @@ $c: syn
 
 !/ SentenceList
 $i: 29
-$r: 0
+$r: 43
 $p: 43
 $s: 2
 
@@ -1153,7 +1153,7 @@ $c: amb
 
 !/ SentenceList
 $i: 30
-$r: 0
+$r: 43
 $p: 43
 $s: 2
 
@@ -1188,7 +1188,7 @@ $c: amb
 
 !/ SentenceList
 $i: 31
-$r: 0
+$r: 44
 $p: 44
 $s: 2
 
@@ -1224,7 +1224,7 @@ $c: amb
 
 !/ SentenceList
 $i: 32
-$r: 0
+$r: 46
 $p: 46
 $s: 3
 
@@ -1269,7 +1269,7 @@ $c: cog
 
 !/ SentenceList
 $i: 33
-$r: 0
+$r: 48
 $p: 48
 $s: 3
 
@@ -1296,7 +1296,7 @@ $c: syn
 
 !/ SentenceList
 $i: 34
-$r: 0
+$r: 48
 $p: 48
 $s: 3
 
@@ -1321,7 +1321,7 @@ $c: syn
 
 !/ SentenceList
 $i: 35
-$r: 0
+$r: 48
 $p: 48
 $s: 3
 
@@ -1363,7 +1363,7 @@ $c: syn
 
 !/ SentenceList
 $i: 36
-$r: 0
+$r: 49
 $p: 49
 $s: 3
 
@@ -1420,7 +1420,7 @@ $c: cog
 
 !/ SentenceList
 $i: 37
-$r: 0
+$r: 50
 $p: 50
 $s: 3
 
@@ -1447,7 +1447,7 @@ $c: cog
 
 !/ SentenceList
 $i: 38
-$r: 0
+$r: 50
 $p: 50
 $s: 3
 
@@ -1472,7 +1472,7 @@ $c: syn
 
 !/ SentenceList
 $i: 39
-$r: 0
+$r: 50
 $p: 50
 $s: 3
 
@@ -1497,7 +1497,7 @@ $c: cog
 
 !/ SentenceList
 $i: 40
-$r: 0
+$r: 50
 $p: 50
 $s: 3
 
@@ -1524,7 +1524,7 @@ $c: cog
 
 !/ SentenceList
 $i: 41
-$r: 0
+$r: 50
 $p: 50
 $s: 3
 
@@ -1549,7 +1549,7 @@ $c: cog
 
 !/ SentenceList
 $i: 42
-$r: 0
+$r: 51
 $p: 51
 $s: 3
 
@@ -1602,7 +1602,7 @@ $c: syn
 
 !/ SentenceList
 $i: 43
-$r: 0
+$r: 51
 $p: 51
 $s: 3
 
@@ -1628,7 +1628,7 @@ $c: syn
 
 !/ SentenceList
 $i: 44
-$r: 0
+$r: 51
 $p: 51
 $s: 3
 
@@ -1653,8 +1653,8 @@ $c: syn
 
 !/ SentenceList
 $i: 45
-$r: 0
-$p: 51
+$r: 52
+$p: 52
 $s: 3
 
 !/ SentenceItem
@@ -1680,7 +1680,7 @@ $c: syn
 
 !/ SentenceList
 $i: 46
-$r: 0
+$r: 52
 $p: 52
 $s: 3
 
@@ -1725,7 +1725,7 @@ $c: syn
 
 !/ SentenceList
 $i: 47
-$r: 0
+$r: 53
 $p: 53
 $s: 3
 
@@ -1759,8 +1759,8 @@ $c: cog
 
 !/ SentenceList
 $i: 48
-$r: 0
-$p: 53
+$r: 54
+$p: 54
 $s: 3
 
 !/ SentenceItem
@@ -1803,8 +1803,8 @@ $c: sem
 
 !/ SentenceList
 $i: 49
-$r: 0
-$p: 54
+$r: 55
+$p: 55
 $s: 3
 
 !/ SentenceItem
@@ -1829,7 +1829,7 @@ $c: sem
 
 !/ SentenceList
 $i: 50
-$r: 0
+$r: 55
 $p: 55
 $s: 3
 
@@ -1854,7 +1854,7 @@ $c: syn
 
 !/ SentenceList
 $i: 51
-$r: 0
+$r: 55
 $p: 55
 $s: 3
 
@@ -1889,7 +1889,7 @@ $c: ont
 
 !/ SentenceList
 $i: 52
-$r: 0
+$r: 56
 $p: 56
 $s: 3
 
@@ -1931,7 +1931,7 @@ $c: syn
 
 !/ SentenceList
 $i: 53
-$r: 0
+$r: 56
 $p: 56
 $s: 3
 
@@ -1988,7 +1988,7 @@ $c: ont
 
 !/ SentenceList
 $i: 54
-$r: 0
+$r: 57
 $p: 57
 $s: 3
 
@@ -2014,7 +2014,7 @@ $c: ont
 
 !/ SentenceList
 $i: 55
-$r: 0
+$r: 61
 $p: 61
 $s: 4
 
@@ -2055,13 +2055,13 @@ $c: ont
 
 !/ SentenceList
 $i: 56
-$r: 0
+$r: 62
 $p: 61
 $s: 4
 
 !/ SentenceItem
 $i: 179
-$p: 61
+$p: 62
 $x: itm:walkpast
 $t: I walk past the paper on my way to work.
 $c: cog
@@ -2070,7 +2070,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 180
-$p: 61
+$p: 62
 $x: itm:walkfrom
 $t: I walked from the library straight to class.
 $c: cog
@@ -2079,7 +2079,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 181
-$p: 61
+$p: 62
 $x: itm:aroundsculpture
 $t: I spend time around that sculpture every weekend.
 $c: cog
@@ -2109,7 +2109,7 @@ $c: cog
 
 !/ SentenceList
 $i: 57
-$r: 0
+$r: 62
 $p: 62
 $s: 4
 
@@ -2134,7 +2134,7 @@ $c: ont
 
 !/ SentenceList
 $i: 58
-$r: 0
+$r: 66
 $p: 66
 $s: 4
 
@@ -2197,7 +2197,7 @@ $c: cog
 
 !/ SentenceList
 $i: 59
-$r: 0
+$r: 66
 $p: 66
 $s: 4
 
@@ -2254,7 +2254,7 @@ $c: cog
 
 !/ SentenceList
 $i: 60
-$r: 0
+$r: 77
 $p: 77
 $s: 5
 
@@ -2298,7 +2298,7 @@ $c: syn
 
 !/ SentenceList
 $i: 61
-$r: 0
+$r: 79
 $p: 79
 $s: 5
 
@@ -2389,7 +2389,7 @@ $c: syn
 
 !/ SentenceList
 $i: 62
-$r: 0
+$r: 85
 $p: 85
 $s: 5
 
@@ -2434,7 +2434,7 @@ $c: syn
 
 !/ SentenceList
 $i: 63
-$r: 0
+$r: 87
 $p: 87
 $s: 5
 
@@ -2459,7 +2459,7 @@ $c: sem
 
 !/ SentenceList
 $i: 64
-$r: 0
+$r: 87
 $p: 87
 $s: 5
 

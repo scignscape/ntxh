@@ -1,5 +1,5 @@
 - Generated from LaTeX File itm.tex 
-2/4/2021, 11:59
+2/4/2021, 14:25
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -65,7 +65,7 @@ $end: 0
 
 !/ SentenceList
 $i: 1
-$r: 0
+$r: 9
 $p: 9
 $s: 1
 
@@ -119,7 +119,7 @@ $c: rol
 
 !/ SentenceList
 $i: 2
-$r: 0
+$r: 9
 $p: 9
 $s: 1
 
@@ -144,7 +144,7 @@ $c: rol
 
 !/ SentenceList
 $i: 3
-$r: 0
+$r: 10
 $p: 10
 $s: 1
 
@@ -170,7 +170,7 @@ $c: rol
 
 !/ SentenceList
 $i: 4
-$r: 0
+$r: 10
 $p: 10
 $s: 1
 
@@ -203,7 +203,7 @@ $c: rol
 
 !/ SentenceList
 $i: 5
-$r: 0
+$r: 10
 $p: 10
 $s: 1
 
@@ -230,7 +230,7 @@ $c: rol
 
 !/ SentenceList
 $i: 6
-$r: 0
+$r: 10
 $p: 10
 $s: 1
 
@@ -260,7 +260,7 @@ $c: rol
 
 !/ SentenceItem
 $i: 18
-$p: 10
+$p: 11
 $t: You can see the water from here.
 $c: rol
 /!
@@ -271,7 +271,7 @@ $c: rol
 
 !/ SentenceList
 $i: 7
-$r: 0
+$r: 11
 $p: 11
 $s: 1
 
@@ -288,7 +288,7 @@ $c: rol
 
 !/ SentenceList
 $i: 8
-$r: 0
+$r: 11
 $p: 11
 $s: 1
 
@@ -313,7 +313,7 @@ $c: rol
 
 !/ SentenceList
 $i: 9
-$r: 0
+$r: 24
 $p: 24
 $s: 2
 
@@ -393,7 +393,7 @@ $c: cog
 
 !/ SentenceList
 $i: 10
-$r: 0
+$r: 26
 $p: 26
 $s: 2
 
@@ -419,7 +419,7 @@ $c: sem
 
 !/ SentenceList
 $i: 11
-$r: 0
+$r: 27
 $p: 27
 $s: 2
 
@@ -444,7 +444,7 @@ $c: cog
 
 !/ SentenceList
 $i: 12
-$r: 0
+$r: 30
 $p: 30
 $s: 2
 
@@ -470,7 +470,7 @@ $c: log
 
 !/ SentenceList
 $i: 13
-$r: 0
+$r: 41
 $p: 41
 $s: 3
 
@@ -527,7 +527,7 @@ $c: syn
 
 !/ SentenceList
 $i: 14
-$r: 0
+$r: 41
 $p: 41
 $s: 3
 
@@ -552,7 +552,7 @@ $c: syn
 
 !/ SentenceList
 $i: 15
-$r: 0
+$r: 49
 $p: 49
 $s: 3
 
@@ -588,7 +588,7 @@ $c: cog
 
 !/ SentenceList
 $i: 16
-$r: 0
+$r: 50
 $p: 50
 $s: 3
 
@@ -678,7 +678,7 @@ $c: typ
 
 !/ SentenceList
 $i: 17
-$r: 0
+$r: 51
 $p: 51
 $s: 3
 
@@ -714,7 +714,7 @@ $c: ont
 
 !/ SentenceList
 $i: 18
-$r: 0
+$r: 51
 $p: 51
 $s: 3
 

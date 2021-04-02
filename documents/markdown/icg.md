@@ -7,7 +7,7 @@ The hill gently rises from the bank of the river.
 The hill gently falls to the bank of the river.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 3)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 4)  
 Those problems were fully expected by the organizers.  
 To encounter those problems was fully expected by the organizers.  
 That she will graduate in June is expected by her mother.  
@@ -21,7 +21,7 @@ If we had had confidence the president clearly did not commit a crime, we would 
 I think he's rather ... uh ... competitive  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 4)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 5)  
 I like Ontario wines.  
 I like red wines from Southern Ontario.  
 I like dry red wines that come from Southern Ontario wineries using traditional European grape varieties.  
@@ -276,7 +276,7 @@ We know that Warren and Sanders appeal to the same cohort of voters.
 I know that Szechuan recipes call for hot pepper, but John can't eat spicy food.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 51)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 52)  
 I told you Toronto would win!  
 I know you like hot pepper, but John can't eat spicy food.  
 
@@ -294,14 +294,14 @@ I have to shout because the cars are making a lot of noise outside.
 Warren presented more detailed policy proposals than Sanders, at each of the debates, .  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 53)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 54)  
 I'd like to try this restaurant.  
 I'd like to try that mountain.  
 The city is trying ranked-choice voting next election.  
 I'm going to try binoculars at the next game.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 54)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 55)  
 He reluctantly tried Champagne for the first time.  
 She will try hard to ski during our vacation.  
 
@@ -345,7 +345,7 @@ Start your weekend with Sunday's paper.
 Socioeconomic research starts with your local paper.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 61)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 62)  
 I walk past the paper on my way to work.  
 I walked from the library straight to class.  
 I spend time around that sculpture every weekend.  

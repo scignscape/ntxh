@@ -124,7 +124,7 @@ Three times, students asked an interesting question.
 Three times, a student asked an interesting question.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 25)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 26)  
 The newspaper you are reading is being sued.  
 Liverpool, an important harbor, built new docks.  
 
@@ -152,7 +152,7 @@ Salesmen are knocking on the door.
 Should I let them in?  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 29)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 30)  
 There are ink stains on the pages of this book.  
 There is a pretty sunset over the river.  
 In some neighborhoods, cicada insects make loud sounds from sunset to sunrise.  
@@ -306,7 +306,7 @@ John has been married for five years, but in many ways he's still a bachelor.
 Every married man needs a bachelor pad somewhere, and wherever yours is, you need a mini-fridge.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 49)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 50)  
 New Yorkers live in one of five boroughs.  
 New Yorkers reliably vote for Democratic presidential candidates.  
 New Yorkers constantly complain about how long it takes to commute to New York City.  
@@ -470,7 +470,7 @@ The war went on for five years.
 The peace went on for five years.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 76)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 77)  
 The book she read was very interesting.  
 I recommended a book that she read immediately.  
 A book just appeared that she read immediately.  
