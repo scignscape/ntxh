@@ -1,13 +1,13 @@
 - Generated from LaTeX File itm.tex 
-5/2/2021, 15:5
+2/4/2021, 11:59
 .
 
 - i=id p=page s=ud source, section number c=classification
 l=label x=latex label t=text r=pre o=post a=archival 
 .
 
-&type SentenceList [8;3;2] 
-:i:1 :p:2 :s:3 ;
+&type SentenceList [8;4;2] 
+:i:1 :r:2 :p:3 :s:4 ;
 
 &type SentenceItem {14} 
 :i:1 :p:2 :x:3 :t:4 :s:5 :l:6 :r:7 :o:8 :a:9 :c:10 
@@ -65,6 +65,7 @@ $end: 0
 
 !/ SentenceList
 $i: 1
+$r: 0
 $p: 9
 $s: 1
 
@@ -118,6 +119,7 @@ $c: rol
 
 !/ SentenceList
 $i: 2
+$r: 0
 $p: 9
 $s: 1
 
@@ -142,6 +144,7 @@ $c: rol
 
 !/ SentenceList
 $i: 3
+$r: 0
 $p: 10
 $s: 1
 
@@ -167,6 +170,7 @@ $c: rol
 
 !/ SentenceList
 $i: 4
+$r: 0
 $p: 10
 $s: 1
 
@@ -199,6 +203,7 @@ $c: rol
 
 !/ SentenceList
 $i: 5
+$r: 0
 $p: 10
 $s: 1
 
@@ -225,6 +230,7 @@ $c: rol
 
 !/ SentenceList
 $i: 6
+$r: 0
 $p: 10
 $s: 1
 
@@ -265,6 +271,7 @@ $c: rol
 
 !/ SentenceList
 $i: 7
+$r: 0
 $p: 11
 $s: 1
 
@@ -281,6 +288,7 @@ $c: rol
 
 !/ SentenceList
 $i: 8
+$r: 0
 $p: 11
 $s: 1
 
@@ -305,6 +313,7 @@ $c: rol
 
 !/ SentenceList
 $i: 9
+$r: 0
 $p: 24
 $s: 2
 
@@ -384,6 +393,7 @@ $c: cog
 
 !/ SentenceList
 $i: 10
+$r: 0
 $p: 26
 $s: 2
 
@@ -409,6 +419,7 @@ $c: sem
 
 !/ SentenceList
 $i: 11
+$r: 0
 $p: 27
 $s: 2
 
@@ -433,6 +444,7 @@ $c: cog
 
 !/ SentenceList
 $i: 12
+$r: 0
 $p: 30
 $s: 2
 
@@ -458,6 +470,7 @@ $c: log
 
 !/ SentenceList
 $i: 13
+$r: 0
 $p: 41
 $s: 3
 
@@ -514,6 +527,7 @@ $c: syn
 
 !/ SentenceList
 $i: 14
+$r: 0
 $p: 41
 $s: 3
 
@@ -538,6 +552,7 @@ $c: syn
 
 !/ SentenceList
 $i: 15
+$r: 0
 $p: 49
 $s: 3
 
@@ -573,6 +588,7 @@ $c: cog
 
 !/ SentenceList
 $i: 16
+$r: 0
 $p: 50
 $s: 3
 
@@ -662,6 +678,7 @@ $c: typ
 
 !/ SentenceList
 $i: 17
+$r: 0
 $p: 51
 $s: 3
 
@@ -697,6 +714,7 @@ $c: ont
 
 !/ SentenceList
 $i: 18
+$r: 0
 $p: 51
 $s: 3
 

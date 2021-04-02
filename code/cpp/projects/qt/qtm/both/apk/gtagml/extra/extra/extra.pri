@@ -25,12 +25,9 @@ INCLUDEPATH += $$HTXN_SRC_GROUP_DIR
 
 INCLUDEPATH += $$SRC_GROUP_DIR/gtagml
 
-DEFINES += DEFAULT_NTXH_FOLDER=\\\"$$DATA_ROOT_DIR/ntxh\\\"
 
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
-DEFINES += DEFAULT_GTAGML_FOLDER=\\\"$$ROOT_DIR/dev/consoles/gtagml/gt\\\"
-DEFINES += DEFAULT_SDI_FOLDER=\\\"$$ROOT_DIR/dev/consoles/gtagml/sdi\\\"
 
 DEFINES += CAON_DEBUG
 DEFINES += RELAE_LABEL_NODES
@@ -42,13 +39,20 @@ DEFINES += USE_KANS
 
 
 HEADERS += \
+  $$SRC_DIR/compilation-unit-object.h \
+  $$SRC_DIR/test-class.h \
+  $$SRC_DIR/unified-runtime-object.h \
+
 
 
 SOURCES += \
+  $$SRC_DIR/compilation-unit-object.cpp \
+  $$SRC_DIR/test-class.cpp \
+  $$SRC_DIR/unified-runtime-object.cpp \
   $$SRC_DIR/main.cpp \
 
 
-LIBS += -L$$TARGETSDIR -lgtagml
+#LIBS += -L$$TARGETSDIR -lgtagml
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)
 mkpath($$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

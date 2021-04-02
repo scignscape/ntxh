@@ -1,0 +1,193 @@
+
+\newwrite\ntxhFile
+\immediate\openout\ntxhFile=\jobname.ntxh
+
+\newcounter{sentenceCounter}{}
+
+\newcommand{\writeIncSentenceCounter}{\refstepcounter{sentenceCounter}(\arabic{sentenceCounter})}{}
+
+
+\newcommand{\listItemMark}{\rotatebox{30}{\raisebox{2pt}{\color{green!30!yellow!40!black}{\begin{tiny}$\blacktriangleright$\end{tiny}}}}}
+
+\newenvironment{sentenceList}{\writeNtxhSentenceListStart%
+\begin{list}{\listItemMark}{\setlength{\leftmargin}{.5em}\setlength{\itemsep}{-.1em}\setlength{\topsep}{.85em}}\begin{small}}{\writeNtxhSentenceListEnd\end{small}\end{list}}
+
+\newenvironment{sentenceListLbl}{\writeNtxhSentenceListStartLbl%
+\begin{list}{\listItemMark}{\setlength{\leftmargin}{.5em}\setlength{\itemsep}{-.1em}\setlength{\topsep}{.85em}}\begin{small}}{\writeNtxhSentenceListEnd\end{small}\end{list}}
+
+
+\newcommand{\sentenceItem}{\item \writeIncSentenceCounter}{}
+
+\newcounter{ntxhCounter}
+\newcounter{ntxhGroupCounter}
+\newcounter{ntxhLocalCounter}[ntxhGroupCounter]
+
+\newcommand{\writeNtxh}[1]{\immediate\write\ntxhFile#1}
+
+\usepackage{zref-user,zref-abspage}
+
+\newcounter{zPage}
+\newcounter{zSentenceList}
+
+
+\makeatletter
+
+\newcommand{\writeNtxhSentenceListStart}{%
+\stepcounter{ntxhGroupCounter}
+\immediate\write\ntxhFile{%
+!/ SentenceList^^J%
+$i: \thentxhGroupCounter^^J%
+$r: 0^^J%
+$p: \thepage^^J%
+$s: \OldTheSection^^J%
+}}
+
+\newcommand{\writeNtxhSentenceListStartLbl}{%
+\stepcounter{ntxhGroupCounter}\stepcounter{zSentenceList}%
+{\zlabel{Z.\thezSentenceList}}%
+\setcounter{zPage}{\zref@extract{Z.\thezSentenceList}{abspage}}%
+\immediate\write\ntxhFile{%
+!/ SentenceList^^J%
+$i: \thentxhGroupCounter^^J%
+$r: \thezPage^^J%
+$p: \thepage^^J%
+$s: \OldTheSection^^J%
+}}
+
+\makeatother
+
+
+\newcommand{\writeNtxhSentenceListEnd}{%
+\immediate\write\ntxhFile{%
+/!^^J%
+<+>^^J%
+}}
+
+\usepackage[yyyymmdd,hhmmss]{datetime}
+
+
+\newcommand{\writeNtxhStart}{\immediate\write\ntxhFile{%
+- Generated from LaTeX File \jobname.tex ^^J%
+  \the\day/\the\month/\the\year, \the\currenthour:\the\currentminute ^^J%
+.^^J%
+^^J%
+- i=id p=page s=ud source, section number c=classification^^J%
+  l=label x=latex label t=text r=pre o=post a=archival ^^J%
+.^^J%
+^^J%
+&type SentenceList [8;4;2] ^^J%
+  :i:1 :r:2 :p:3 :s:4 ;^^J%
+^^J%
+&type SentenceItem {14} ^^J%
+  :i:1 :p:2 :x:3 :t:4 :s:5 :l:6 :r:7 :o:8 :a:9 :c:10 ^^J%
+  :si:11 :sp:12 :am:13 :alt:14 ;  ^^J%
+^^J%
+&type Subdocument {3} ^^J%
+  :au:1 :start:2 :end:3 ; ^^J%
+^^J%
+&type DatasetInfo {4} ^^J%
+  :ae:1 :sdc:2 :sk:3 :pdf:4 ; ^^J%
+^^J%
+^^J%
+&/^^J%
+^^J%
+^^J%
+!/ DatasetInfo^^J%
+$ae: \auntxh^^J%
+$sdc: 4^^J%
+$sk: Section^^J%
+$pdf: @/data/ntxh/main.pdf^^J%
+^^J%
+/!^^J%
+<+>^^J%
+^^J%
+^^J%
+!/ Subdocument ^^J%
+$au: \auntxh ^^J%
+$start: \getpagerefnumber{s1} ^^J%
+$end: \getpagerefnumber{s2} ^^J%
+/! ^^J%
+<+> ^^J%
+^^J%
+!/ Subdocument ^^J%
+$au: \auntxh ^^J%
+$start: \getpagerefnumber{s2} ^^J%
+$end: \getpagerefnumber{s3} ^^J%
+/! ^^J%
+<+> ^^J%
+^^J%
+!/ Subdocument ^^J%
+$au: \auntxh ^^J%
+$start: \getpagerefnumber{s3} ^^J%
+$end: \getpagerefnumber{s4} ^^J%
+/! ^^J%
+<+> ^^J%
+^^J%
+!/ Subdocument ^^J%
+$au: \auntxh ^^J%
+$start: \getpagerefnumber{s4} ^^J%
+$end: \getpagerefnumber{References} ^^J%
+/!^^J%
+<+>^^J%
+^^J%
+^^J%
+}}
+
+\newcommand{\writeNtxhEnd}{\immediate\write\ntxhFile{%
+^^J%
+/&^^J%
+^^J%
+}}
+
+\AtBeginDocument{{\writeNtxhStart}}
+\AtEndDocument{{\writeNtxhEnd}}
+
+\usepackage{ifmtarg}% http://ctan.org/pkg/ifmtarg
+\makeatletter
+\newcommand{\writeNtxhSentenceItem}[6]{%
+\stepcounter{ntxhCounter}%
+\immediate\write\ntxhFile{%
+!/ SentenceItem^^J%
+$i: \thentxhCounter^^J%
+$p: \thepage^^J%
+\@ifmtarg{#1}{}{$x: #1^^J}%
+$t: #2^^J%
+\@ifmtarg{#3}{}{$r: #3^^J}%
+\@ifmtarg{#4}{}{$o: #4^^J}%
+$c: #5^^J%
+\@ifmtarg{#6}{}{$a: #6^^J}%
+/!^^J%
+<>>^^J%
+}}
+\makeatother
+
+
+\newcommand{\writeNtxhUDRef}[2]{%
+\stepcounter{ntxhGroupCounter}%
+\immediate\write\ntxhFile{%
+&s/^^J%
+$s: #1^^J%
+$l: #2^^J%
+&/s^^J%
+}}
+
+
+\newcommand{\udref}[2]{\writeNtxhUDRef{\detokenize{#1}}{\detokenize{#2}}\texttt{(\detokenize{#1})}}
+
+\newcommand{\sannot}[1]{%
+\ifthenelse{\equal{\detokenize{#1}}{\detokenize{(?)}}}
+{\raisebox{2pt}{{\footnotesize\textbf{?}}}}
+{#1}}
+
+
+\makeatletter
+\usepackage{xargs}
+\newcommandx{\swl}[7][1,3,5,7]{\writeNtxhSentenceItem{#2}{#4}{#3}{#5}{#6}{#7}%
+\def\ttmp{#1}\def\tmp{#2}\ifx\tmp\@empty\else\label{#2}\fi%
+{#3}{\ifx\ttmp\@empty#4\else#1\fi}{\sannot{#5}}}
+\makeatother
+
+
+\newcommand{\midemph}[1]{{\fontsize{8}{8}\fontseries{b}\selectfont{}#1}}
+
+

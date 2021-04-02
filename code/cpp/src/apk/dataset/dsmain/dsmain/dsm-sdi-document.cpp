@@ -113,15 +113,27 @@ void DSM_SDI_Document::parse_group_hypernode(NTXH_Graph& g, NTXH_Graph::hypernod
 
  language_sample_groups_.push_back(lsg);
 
- g.get_sfsr(hn, {{1,3}}, [this, lsg](QVector<QPair<QString, void*>>& prs)
+ g.get_sfsr(hn, {{1,4}}, [this, lsg](QVector<QPair<QString, void*>>& prs)
  {
   u2 id = prs[0].first.toUShort();
   lsg->set_id(id);
 
-  u2 page = prs[1].first.toUShort();
+  u2 rpage = prs[1].first.toUShort();
+  // // currently rpage is not used ...
+
+  u2 page = prs[2].first.toUShort();
+
+  if( (rpage != 0) && (page != rpage) )
+  {
+   qDebug() << "\n" << QString("Different page and running-page values (%1, %2), "
+     "maybe due to the surrounding paragraph crossing a page break.  Using "
+     "the running-page value.").arg(page).arg(rpage) << "\n";
+   page = rpage;
+  }
+
   lsg->set_page(page);
 
-  u2 section = prs[2].first.toUShort();
+  u2 section = prs[3].first.toUShort();
   lsg->set_section(section);
 
   // :i:1 :p:2 :s:3 ;

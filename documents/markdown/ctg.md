@@ -516,7 +516,7 @@ Rhinos in that park are threatened by poachers.
 Young rhinos are threatened by poachers.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 87)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 88)  
 Let's find a restaurant that's family-friendly.  
 
 #

@@ -1,13 +1,13 @@
 - Generated from LaTeX File ctg.tex 
-30/3/2021, 22:22
+2/4/2021, 11:49
 .
 
 - i=id p=page s=ud source, section number c=classification
 l=label x=latex label t=text r=pre o=post a=archival 
 .
 
-&type SentenceList [8;3;2] 
-:i:1 :p:2 :s:3 ;
+&type SentenceList [8;4;2] 
+:i:1 :r:2 :p:3 :s:4 ;
 
 &type SentenceItem {14} 
 :i:1 :p:2 :x:3 :t:4 :s:5 :l:6 :r:7 :o:8 :a:9 :c:10 
@@ -65,6 +65,7 @@ $end: 91
 
 !/ SentenceList
 $i: 1
+$r: 0
 $p: 5
 $s: 1
 
@@ -91,6 +92,7 @@ $c: syn
 
 !/ SentenceList
 $i: 2
+$r: 0
 $p: 5
 $s: 1
 
@@ -126,6 +128,7 @@ $c: syn
 
 !/ SentenceList
 $i: 3
+$r: 0
 $p: 7
 $s: 1
 
@@ -161,6 +164,7 @@ $c: sem
 
 !/ SentenceList
 $i: 4
+$r: 0
 $p: 8
 $s: 1
 
@@ -187,6 +191,7 @@ $c: sem
 
 !/ SentenceList
 $i: 5
+$r: 0
 $p: 8
 $s: 1
 
@@ -213,6 +218,7 @@ $c: sem
 
 !/ SentenceList
 $i: 6
+$r: 0
 $p: 9
 $s: 1
 
@@ -266,6 +272,7 @@ $c: ref
 
 !/ SentenceList
 $i: 7
+$r: 0
 $p: 10
 $s: 1
 
@@ -301,6 +308,7 @@ $c: amb
 
 !/ SentenceList
 $i: 8
+$r: 0
 $p: 10
 $s: 1
 
@@ -345,6 +353,7 @@ $c: log
 
 !/ SentenceList
 $i: 9
+$r: 0
 $p: 11
 $s: 1
 
@@ -423,6 +432,7 @@ $c: ref
 
 !/ SentenceList
 $i: 10
+$r: 0
 $p: 11
 $s: 1
 
@@ -450,6 +460,7 @@ $c: ref
 
 !/ SentenceList
 $i: 11
+$r: 0
 $p: 11
 $s: 1
 
@@ -482,6 +493,7 @@ $c: log
 
 !/ SentenceList
 $i: 12
+$r: 0
 $p: 12
 $s: 1
 
@@ -499,6 +511,7 @@ $c: sco
 
 !/ SentenceList
 $i: 13
+$r: 0
 $p: 13
 $s: 1
 
@@ -516,6 +529,7 @@ $c: log
 
 !/ SentenceList
 $i: 14
+$r: 0
 $p: 13
 $s: 1
 
@@ -562,6 +576,7 @@ $a: Student after student ---{} and their parents ---{} complained about the tui
 
 !/ SentenceList
 $i: 15
+$r: 0
 $p: 16
 $s: 1
 
@@ -682,6 +697,7 @@ $l: GUM_news\_warhol-35
 
 !/ SentenceList
 $i: 24
+$r: 0
 $p: 16
 $s: 1
 
@@ -746,6 +762,7 @@ $l: w01119076vs
 
 !/ SentenceList
 $i: 29
+$r: 0
 $p: 19
 $s: 2
 
@@ -768,6 +785,7 @@ $l: GUM_voyage\_merida-20
 
 !/ SentenceList
 $i: 31
+$r: 0
 $p: 20
 $s: 2
 
@@ -790,6 +808,7 @@ $l: GUM_voyage\_socotra-16
 
 !/ SentenceList
 $i: 33
+$r: 0
 $p: 21
 $s: 2
 
@@ -834,6 +853,7 @@ $c: sco
 
 !/ SentenceList
 $i: 34
+$r: 0
 $p: 22
 $s: 2
 
@@ -859,6 +879,7 @@ $c: sco
 
 !/ SentenceList
 $i: 35
+$r: 0
 $p: 25
 $s: 2
 
@@ -884,6 +905,7 @@ $c: lex
 
 !/ SentenceList
 $i: 36
+$r: 0
 $p: 26
 $s: 2
 
@@ -910,6 +932,7 @@ $c: lex
 
 !/ SentenceList
 $i: 37
+$r: 0
 $p: 26
 $s: 2
 
@@ -934,6 +957,7 @@ $c: ont
 
 !/ SentenceList
 $i: 38
+$r: 0
 $p: 29
 $s: 2
 
@@ -978,6 +1002,7 @@ $c: ref
 
 !/ SentenceList
 $i: 39
+$r: 0
 $p: 29
 $s: 2
 
@@ -1013,6 +1038,7 @@ $c: ont;dlg
 
 !/ SentenceList
 $i: 40
+$r: 0
 $p: 29
 $s: 2
 
@@ -1062,6 +1088,7 @@ $c: ref
 
 !/ SentenceList
 $i: 42
+$r: 0
 $p: 31
 $s: 2
 
@@ -1088,6 +1115,7 @@ $c: ref
 
 !/ SentenceList
 $i: 43
+$r: 0
 $p: 31
 $s: 2
 
@@ -1105,6 +1133,7 @@ $c: ref
 
 !/ SentenceList
 $i: 44
+$r: 0
 $p: 34
 $s: 3
 
@@ -1139,6 +1168,7 @@ $c: pra
 
 !/ SentenceList
 $i: 45
+$r: 0
 $p: 34
 $s: 3
 
@@ -1179,6 +1209,7 @@ $c: pra
 
 !/ SentenceList
 $i: 46
+$r: 0
 $p: 34
 $s: 3
 
@@ -1219,6 +1250,7 @@ $c: pra
 
 !/ SentenceList
 $i: 47
+$r: 0
 $p: 35
 $s: 3
 
@@ -1251,6 +1283,7 @@ $c: pra
 
 !/ SentenceList
 $i: 48
+$r: 0
 $p: 35
 $s: 3
 
@@ -1277,6 +1310,7 @@ $c: pra
 
 !/ SentenceList
 $i: 49
+$r: 0
 $p: 35
 $s: 3
 
@@ -1309,6 +1343,7 @@ $c: pra
 
 !/ SentenceList
 $i: 50
+$r: 0
 $p: 35
 $s: 3
 
@@ -1335,6 +1370,7 @@ $c: pra
 
 !/ SentenceList
 $i: 51
+$r: 0
 $p: 35
 $s: 3
 
@@ -1352,6 +1388,7 @@ $c: sem
 
 !/ SentenceList
 $i: 52
+$r: 0
 $p: 36
 $s: 3
 
@@ -1376,6 +1413,7 @@ $c: pra
 
 !/ SentenceList
 $i: 53
+$r: 0
 $p: 36
 $s: 3
 
@@ -1400,6 +1438,7 @@ $c: pra
 
 !/ SentenceList
 $i: 54
+$r: 0
 $p: 36
 $s: 3
 
@@ -1424,6 +1463,7 @@ $c: pra
 
 !/ SentenceList
 $i: 55
+$r: 0
 $p: 37
 $s: 3
 
@@ -1450,6 +1490,7 @@ $c: pra
 
 !/ SentenceList
 $i: 56
+$r: 0
 $p: 37
 $s: 3
 
@@ -1476,6 +1517,7 @@ $c: pra
 
 !/ SentenceList
 $i: 57
+$r: 0
 $p: 38
 $s: 3
 
@@ -1500,6 +1542,7 @@ $c: ref
 
 !/ SentenceList
 $i: 58
+$r: 0
 $p: 39
 $s: 3
 
@@ -1532,6 +1575,7 @@ $c: pra
 
 !/ SentenceList
 $i: 59
+$r: 0
 $p: 41
 $s: 3
 
@@ -1557,6 +1601,7 @@ $c: pra
 
 !/ SentenceList
 $i: 60
+$r: 0
 $p: 41
 $s: 3
 
@@ -1581,6 +1626,7 @@ $c: pra
 
 !/ SentenceList
 $i: 61
+$r: 0
 $p: 41
 $s: 3
 
@@ -1607,6 +1653,7 @@ $c: pra
 
 !/ SentenceList
 $i: 62
+$r: 0
 $p: 42
 $s: 3
 
@@ -1639,6 +1686,7 @@ $c: pra
 
 !/ SentenceList
 $i: 63
+$r: 0
 $p: 43
 $s: 3
 
@@ -1663,6 +1711,7 @@ $c: log
 
 !/ SentenceList
 $i: 64
+$r: 0
 $p: 44
 $s: 3
 
@@ -1698,6 +1747,7 @@ $c: log
 
 !/ SentenceList
 $i: 65
+$r: 0
 $p: 45
 $s: 3
 
@@ -1723,6 +1773,7 @@ $c: sem
 
 !/ SentenceList
 $i: 66
+$r: 0
 $p: 45
 $s: 3
 
@@ -1749,6 +1800,7 @@ $c: sem
 
 !/ SentenceList
 $i: 67
+$r: 0
 $p: 46
 $s: 3
 
@@ -1793,6 +1845,7 @@ $c: sem
 
 !/ SentenceList
 $i: 68
+$r: 0
 $p: 49
 $s: 3
 
@@ -1835,6 +1888,7 @@ $c: log
 
 !/ SentenceList
 $i: 69
+$r: 0
 $p: 49
 $s: 3
 
@@ -1870,6 +1924,7 @@ $c: cog
 
 !/ SentenceList
 $i: 70
+$r: 0
 $p: 50
 $s: 3
 
@@ -1902,6 +1957,7 @@ $c: cog
 
 !/ SentenceList
 $i: 71
+$r: 0
 $p: 51
 $s: 3
 
@@ -1924,6 +1980,7 @@ $l: email-enronsent03\_01-0143
 
 !/ SentenceList
 $i: 73
+$r: 0
 $p: 55
 $s: 4
 
@@ -1948,6 +2005,7 @@ $c: sem
 
 !/ SentenceList
 $i: 74
+$r: 0
 $p: 55
 $s: 4
 
@@ -1972,6 +2030,7 @@ $c: sem
 
 !/ SentenceList
 $i: 75
+$r: 0
 $p: 58
 $s: 4
 
@@ -2029,6 +2088,7 @@ $c: syn
 
 !/ SentenceList
 $i: 76
+$r: 0
 $p: 58
 $s: 4
 
@@ -2062,6 +2122,7 @@ $c: syn
 
 !/ SentenceList
 $i: 77
+$r: 0
 $p: 59
 $s: 4
 
@@ -2097,6 +2158,7 @@ $c: ref
 
 !/ SentenceList
 $i: 78
+$r: 0
 $p: 60
 $s: 4
 
@@ -2123,6 +2185,7 @@ $c: cog
 
 !/ SentenceList
 $i: 79
+$r: 0
 $p: 60
 $s: 4
 
@@ -2163,6 +2226,7 @@ $c: sem
 
 !/ SentenceList
 $i: 80
+$r: 0
 $p: 60
 $s: 4
 
@@ -2197,6 +2261,7 @@ $c: sem
 
 !/ SentenceList
 $i: 81
+$r: 0
 $p: 62
 $s: 4
 
@@ -2221,6 +2286,7 @@ $c: sem
 
 !/ SentenceList
 $i: 82
+$r: 0
 $p: 62
 $s: 4
 
@@ -2253,6 +2319,7 @@ $c: sem
 
 !/ SentenceList
 $i: 83
+$r: 0
 $p: 63
 $s: 4
 
@@ -2285,6 +2352,7 @@ $c: idi
 
 !/ SentenceList
 $i: 84
+$r: 0
 $p: 64
 $s: 4
 
@@ -2381,6 +2449,7 @@ $c: ref
 
 !/ SentenceList
 $i: 85
+$r: 0
 $p: 65
 $s: 4
 
@@ -2416,6 +2485,7 @@ $c: ref
 
 !/ SentenceList
 $i: 86
+$r: 0
 $p: 65
 $s: 4
 
@@ -2442,6 +2512,7 @@ $c: ref
 
 !/ SentenceList
 $i: 87
+$r: 0
 $p: 67
 $s: 4
 
@@ -2466,6 +2537,7 @@ $c: syn
 
 !/ SentenceList
 $i: 88
+$r: 0
 $p: 68
 $s: 4
 
@@ -2507,6 +2579,7 @@ $c: syn
 
 !/ SentenceList
 $i: 89
+$r: 0
 $p: 68
 $s: 4
 
@@ -2547,6 +2620,7 @@ $c: syn
 
 !/ SentenceList
 $i: 90
+$r: 0
 $p: 68
 $s: 4
 
@@ -2563,6 +2637,7 @@ $c: ont
 
 !/ SentenceList
 $i: 91
+$r: 0
 $p: 71
 $s: 4
 
@@ -2755,6 +2830,7 @@ $c: cog
 
 !/ SentenceList
 $i: 92
+$r: 0
 $p: 72
 $s: 4
 
@@ -2805,6 +2881,7 @@ $c: cog
 
 !/ SentenceList
 $i: 93
+$r: 0
 $p: 76
 $s: 5
 
@@ -2858,6 +2935,7 @@ $c: pro
 
 !/ SentenceList
 $i: 94
+$r: 0
 $p: 77
 $s: 5
 
@@ -2884,6 +2962,7 @@ $c: pro
 
 !/ SentenceList
 $i: 95
+$r: 0
 $p: 78
 $s: 5
 
@@ -2919,6 +2998,7 @@ $c: pro
 
 !/ SentenceList
 $i: 96
+$r: 0
 $p: 78
 $s: 5
 
@@ -2945,6 +3025,7 @@ $c: pro
 
 !/ SentenceList
 $i: 97
+$r: 0
 $p: 79
 $s: 5
 
@@ -2971,6 +3052,7 @@ $c: pro
 
 !/ SentenceList
 $i: 98
+$r: 0
 $p: 79
 $s: 5
 
@@ -3015,6 +3097,7 @@ $c: pro
 
 !/ SentenceList
 $i: 99
+$r: 0
 $p: 81
 $s: 5
 
@@ -3041,6 +3124,7 @@ $c: pro
 
 !/ SentenceList
 $i: 100
+$r: 0
 $p: 87
 $s: 5
 
@@ -3066,6 +3150,7 @@ $c: sem
 
 !/ SentenceList
 $i: 101
+$r: 88
 $p: 87
 $s: 5
 
@@ -3082,6 +3167,7 @@ $c: sem
 
 !/ SentenceList
 $i: 102
+$r: 0
 $p: 89
 $s: 5
 
@@ -3106,6 +3192,7 @@ $c: sem
 
 !/ SentenceList
 $i: 103
+$r: 0
 $p: 89
 $s: 5
 

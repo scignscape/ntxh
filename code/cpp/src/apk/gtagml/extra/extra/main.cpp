@@ -7,11 +7,15 @@
 
 #include <QDebug>
 
+#include "test-class.h"
 
 
 int main(int argc, char *argv[])
 {
- qDebug() << "OK";
+ Test_Class tc("OK");
+ qDebug() << tc.text();
+ tc.test_method(ROOT_FOLDER "/dev/extra", 79, 81);
+ tc.test_cuo();
  return 0;
 }
 
