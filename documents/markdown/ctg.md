@@ -181,7 +181,7 @@ If you get MsNBC, can you turn on Rachel Maddow?
 If there is a corkscrew in the house, can you get it?  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 34)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 35)  
 I believe you have a reservation for Jones?  
 I believe this is the customer service desk?  
 I believe we ordered a second basket of garlic bread?  
@@ -224,7 +224,7 @@ Grandma wants us to close the window.
 He wants a bottle opener.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 36)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 37)  
 Grandma wants us to eliminate the cold draft.  
 He wants something to open that bottle.  
 
@@ -341,7 +341,7 @@ There's a lot of coffee left in the pot.
 There's a lot of coffee left in the pot -- should I pour it out?  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 58)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 59)  
 There are coffees all over the far wall at the espresso bar.  
 She poured coffees from an ornate beaker.  
 There are a lot of coffees left on the table -- shall I pour them out?  
@@ -388,7 +388,7 @@ New mathematical models rescued her original research from obscurity.
 Discovery of nearby earth-like planets rescued that star from its reputation as ordinary and boring and revealed that its solar system may actually be extraordinary.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 64)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 65)  
 My favorite band gave a free concert last night. They played some new songs.  
 There was some pizza earlier, but it's all gone.  
 There were some slices of pizza earlier, but it's all gone.  
@@ -402,18 +402,18 @@ Many star players were drafted by that franchise, but they were not surrounded w
 Many star players were drafted by that franchise, but they did not have enough depth (around them).  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 65)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 66)  
 The band planned a tour, where they debuted new songs.  
 The team flew to New York and they played the Yankees.  
 The city's largest theater company will perform The Flies.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 65)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 66)  
 The city's largest theater company performed The Flies in French, but everyone's accent sounded Quebecois.  
 The city's largest theater company performed The Flies; then they invited a professor to discuss Sartre's philosophy when the play was over.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 67)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 68)  
 We learned that people fed the rescued dogs.  
 No-one seriously entertained the belief that he would govern in a bipartisan manner.  
 
@@ -432,11 +432,11 @@ I believed in Obama.
 I believed in lies.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 68)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 69)  
 Obama wouldn't budge on reproductive rights.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 71)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 72)  
 War could break out any time.  
 The war has lasted many years.  
 A tenuous peace has held for over a year now.  
@@ -470,7 +470,7 @@ The war went on for five years.
 The peace went on for five years.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 77)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 78)  
 The book she read was very interesting.  
 I recommended a book that she read immediately.  
 A book just appeared that she read immediately.  
@@ -478,54 +478,54 @@ I recommended a book I read years ago to her.
 This time Harry didn't cause our defeat.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 77)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 79)  
 It's odd that Clyde married Bertha.  
 Londoners most often go to Brighton.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 78)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 79)  
 Bill doesn't drink because he's unhappy.  
 Stir in rice wine and seasonings.  
 Alice bought a dog. A poodle.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 78)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 79)  
 The roof leaks if a building hasn't been maintained.  
 The team is unsuccessful because the coach is so incompetent.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 79)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 80)  
 If you see a dress and you really like it you should buy it while you can.  
 At least for Alice that wonderful dress is just too expensive.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 79)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 80)  
 Last night, she was painting Easter eggs.  
 With a fine brush, she was painting Easter eggs.  
 Open the carton. Now remove the monitor carefully.  
 The Johnsons are solid citizens. They pay their taxes. They attend PTA meetings.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 81)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 82)  
 It's amazing, the things she says sometimes.  
 It's ridiculous, what he's saying.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 87)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 88)  
 Rhinos in that park are threatened by poachers.  
 Young rhinos are threatened by poachers.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 88)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 89)  
 Let's find a restaurant that's family-friendly.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 89)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 90)  
 I got glue for your daughter.  
 I got glue for your coffee mug.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 89)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 90)  
 We're going to Grandma!  
 Let's go to him right now.  
 Let's go to the lawyers.  

@@ -2954,7 +2954,7 @@ void XpdfViewer::createMainMenu() {
   helpSubmenu->addAction("About XpdfReader...", this, SLOT(aboutMenuAction()));
 
   QWidgetAction* sep = mainMenu->add_text_separator();
-  QMenu* mosaic_submenu = mainMenu->addMenu("&Mosaic");
+  QMenu* mosaic_submenu = mainMenu->addMenu("Springer - &Mosaic");
   mosaic_submenu->menuAction()->setProperty("mosaic", true);
   QLinearGradient* qlg = new QLinearGradient(0,0,0,400);
   qlg->setColorAt(0.0, QColor(250,255,245));
@@ -2962,7 +2962,7 @@ void XpdfViewer::createMainMenu() {
   Mosaic_Menubar::add_action_data(mosaic_submenu->menuAction(), 
     "QLinearGradient", qlg);
   mosaic_submenu->setObjectName("mosaic_submenu");
-  mosaic_submenu->addAction("Show Dataset ...");
+  mosaic_submenu->addAction("Show Article ...", this, SLOT(show_article()));
 
   mainMenu->use_default_stylesheet("the_Mosaic_Menubar");
 
@@ -2978,6 +2978,15 @@ void XpdfViewer::createMainMenu() {
   }
   )");
 
+}
+
+#include <QDesktopServices>
+#include <QUrl>
+
+void XpdfViewer::show_article()
+{
+ // // For now just hard-code the link ...
+ QDesktopServices::openUrl(QUrl("https://link.springer.com/journal/10772/volumes-and-issues"));
 }
 
 // This can't be named createPopupMenu because there's a QMainWindow

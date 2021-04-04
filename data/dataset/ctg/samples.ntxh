@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-2/4/2021, 13:59
+4/4/2021, 1:3
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -50,14 +50,14 @@ $end: 33
 !/ Subdocument 
 $au: Nathaniel Christen
 $start: 33 
-$end: 52 
+$end: 53 
 /! 
 <+> 
 
 !/ Subdocument 
 $au: Nathaniel Christen
-$start: 52 
-$end: 91 
+$start: 53 
+$end: 93 
 /!
 <+>
 
@@ -880,7 +880,7 @@ $c: sco
 !/ SentenceList
 $i: 35
 $r: 26
-$p: 25
+$p: 26
 $s: 2
 
 !/ SentenceItem
@@ -1039,7 +1039,7 @@ $c: ont;dlg
 !/ SentenceList
 $i: 40
 $r: 30
-$p: 29
+$p: 30
 $s: 2
 
 !/ SentenceItem
@@ -1209,13 +1209,13 @@ $c: pra
 
 !/ SentenceList
 $i: 46
-$r: 34
-$p: 34
+$r: 35
+$p: 35
 $s: 3
 
 !/ SentenceItem
 $i: 90
-$p: 34
+$p: 35
 $t: I believe you have a reservation for Jones?
 $c: pra
 /!
@@ -1438,13 +1438,13 @@ $c: pra
 
 !/ SentenceList
 $i: 54
-$r: 36
-$p: 36
+$r: 37
+$p: 37
 $s: 3
 
 !/ SentenceItem
 $i: 109
-$p: 36
+$p: 37
 $t: Grandma wants us to eliminate the cold draft.
 $c: pra
 /!
@@ -1452,7 +1452,7 @@ $c: pra
 
 !/ SentenceItem
 $i: 110
-$p: 36
+$p: 37
 $t: He wants something to open that bottle.
 $c: pra
 /!
@@ -2077,7 +2077,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 162
-$p: 58
+$p: 59
 $t: There's a lot of coffee left in the pot ---{} should I pour it out?
 $c: syn
 /!
@@ -2088,13 +2088,13 @@ $c: syn
 
 !/ SentenceList
 $i: 76
-$r: 58
-$p: 58
+$r: 59
+$p: 59
 $s: 4
 
 !/ SentenceItem
 $i: 163
-$p: 58
+$p: 59
 $t: There are coffees all over the far wall at the espresso bar.
 $c: syn
 /!
@@ -2102,7 +2102,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 164
-$p: 58
+$p: 59
 $t: She poured coffees from an ornate beaker.
 $c: syn
 /!
@@ -2110,7 +2110,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 165
-$p: 58
+$p: 59
 $x: itm:coffeetable
 $t: There are a lot of coffees left on the table ---{} shall I pour them out?
 $c: syn
@@ -2352,13 +2352,13 @@ $c: idi
 
 !/ SentenceList
 $i: 84
-$r: 64
-$p: 64
+$r: 65
+$p: 65
 $s: 4
 
 !/ SentenceItem
 $i: 186
-$p: 64
+$p: 65
 $t: My favorite band gave a free concert last night. They played some new songs.
 $c: ref
 /!
@@ -2366,7 +2366,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 187
-$p: 64
+$p: 65
 $t: There was some pizza earlier, but it's all gone.
 $c: ref
 /!
@@ -2374,7 +2374,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 188
-$p: 64
+$p: 65
 $t: There were some slices of pizza earlier, but it's all gone.
 $c: ref
 /!
@@ -2382,7 +2382,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 189
-$p: 64
+$p: 65
 $t: There were some slices of toast earlier, but there's none left.
 $c: ref
 /!
@@ -2390,7 +2390,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 190
-$p: 64
+$p: 65
 $t: There was some toast earlier, but they're all gone.
 $c: ref
 /!
@@ -2398,7 +2398,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 191
-$p: 64
+$p: 65
 $t: That franchise had a core of talented young players, but it got eroded by trades and free agency.
 $c: ref
 /!
@@ -2406,7 +2406,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 192
-$p: 64
+$p: 65
 $t: That franchise had a cohort of talented players, but they drifted away due to trades and free agency.
 $c: ref
 /!
@@ -2414,7 +2414,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 193
-$p: 64
+$p: 65
 $t: Many star players were drafted by that franchise, but it has not won a title in decades.
 $c: ref
 /!
@@ -2449,13 +2449,13 @@ $c: ref
 
 !/ SentenceList
 $i: 85
-$r: 65
+$r: 66
 $p: 65
 $s: 4
 
 !/ SentenceItem
 $i: 197
-$p: 65
+$p: 66
 $x: itm:bandtour
 $t: The band planned a tour, where they debuted new songs.
 $c: ref
@@ -2464,7 +2464,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 198
-$p: 65
+$p: 66
 $x: itm:teamflew
 $t: The team flew to New York and they played the Yankees.
 $c: ref
@@ -2473,7 +2473,7 @@ $c: ref
 
 !/ SentenceItem
 $i: 199
-$p: 65
+$p: 66
 $x: itm:theflies
 $t: The city's largest theater company will perform The Flies.
 $c: ref
@@ -2485,13 +2485,13 @@ $c: ref
 
 !/ SentenceList
 $i: 86
-$r: 65
-$p: 65
+$r: 66
+$p: 66
 $s: 4
 
 !/ SentenceItem
 $i: 200
-$p: 65
+$p: 66
 $x: itm:fliesquebecois
 $t: The city's largest theater company performed The Flies in French, but everyone's accent sounded Quebecois.
 $c: ref
@@ -2512,13 +2512,13 @@ $c: ref
 
 !/ SentenceList
 $i: 87
-$r: 67
+$r: 68
 $p: 67
 $s: 4
 
 !/ SentenceItem
 $i: 202
-$p: 67
+$p: 68
 $t: We learned that people fed the rescued dogs.
 $c: syn
 /!
@@ -2526,7 +2526,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 203
-$p: 67
+$p: 68
 $t: No-one seriously entertained the belief that he would govern in a bipartisan manner.
 $c: syn
 /!
@@ -2620,13 +2620,13 @@ $c: syn
 
 !/ SentenceList
 $i: 90
-$r: 68
-$p: 68
+$r: 69
+$p: 69
 $s: 4
 
 !/ SentenceItem
 $i: 212
-$p: 68
+$p: 69
 $t: Obama wouldn't budge on reproductive rights.
 $c: ont
 /!
@@ -2637,13 +2637,13 @@ $c: ont
 
 !/ SentenceList
 $i: 91
-$r: 71
-$p: 71
+$r: 72
+$p: 72
 $s: 4
 
 !/ SentenceItem
 $i: 213
-$p: 71
+$p: 72
 $t: War could break out any time.
 $c: cog
 /!
@@ -2651,7 +2651,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 214
-$p: 71
+$p: 72
 $t: The war has lasted many years.
 $c: cog
 /!
@@ -2659,7 +2659,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 215
-$p: 71
+$p: 72
 $t: A tenuous peace has held for over a year now.
 $c: cog
 /!
@@ -2667,7 +2667,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 216
-$p: 71
+$p: 72
 $t: The cruel war is raging, Johnny has to fight.
 $c: cog
 /!
@@ -2675,7 +2675,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 217
-$p: 71
+$p: 72
 $t: War is a cause of misery.
 $c: cog
 /!
@@ -2881,13 +2881,13 @@ $c: cog
 
 !/ SentenceList
 $i: 93
-$r: 77
-$p: 77
+$r: 78
+$p: 78
 $s: 5
 
 !/ SentenceItem
 $i: 241
-$p: 77
+$p: 78
 $x: itm:booksheread
 $t: The book she read was very interesting.
 $c: pro
@@ -2896,7 +2896,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 242
-$p: 77
+$p: 78
 $x: itm:bookrecommend
 $t: I recommended a book that she read immediately.
 $c: pro
@@ -2905,7 +2905,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 243
-$p: 77
+$p: 78
 $x: itm:bookjustappeared
 $t: A book just appeared that she read immediately.
 $c: pro
@@ -2914,7 +2914,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 244
-$p: 77
+$p: 78
 $x: itm:bookrecommendalt
 $t: I recommended a book I read years ago to her.
 $c: pro
@@ -2923,7 +2923,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 245
-$p: 77
+$p: 78
 $x: itm:harrycause
 $t: This time Harry didn't cause our defeat.
 $c: pro
@@ -2935,13 +2935,13 @@ $c: pro
 
 !/ SentenceList
 $i: 94
-$r: 77
-$p: 77
+$r: 79
+$p: 79
 $s: 5
 
 !/ SentenceItem
 $i: 246
-$p: 77
+$p: 79
 $x: itm:clydebertha
 $t: It's odd that Clyde married Bertha.
 $c: pro
@@ -2950,7 +2950,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 247
-$p: 78
+$p: 79
 $x: itm:Brighton
 $t: Londoners most often go to Brighton.
 $c: pro
@@ -2962,13 +2962,13 @@ $c: pro
 
 !/ SentenceList
 $i: 95
-$r: 78
-$p: 78
+$r: 79
+$p: 79
 $s: 5
 
 !/ SentenceItem
 $i: 248
-$p: 78
+$p: 79
 $x: itm:BillDrink
 $t: Bill doesn't drink because he's unhappy.
 $c: pro
@@ -2977,7 +2977,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 249
-$p: 78
+$p: 79
 $x: itm:ricewine
 $t: Stir in rice wine and seasonings.
 $c: pro
@@ -2986,7 +2986,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 250
-$p: 78
+$p: 79
 $x: itm:poodle
 $t: Alice bought a dog. A poodle.
 $c: pro
@@ -2998,13 +2998,13 @@ $c: pro
 
 !/ SentenceList
 $i: 96
-$r: 78
-$p: 78
+$r: 79
+$p: 79
 $s: 5
 
 !/ SentenceItem
 $i: 251
-$p: 78
+$p: 79
 $x: itm:roof
 $t: The roof leaks if a building hasn't been maintained.
 $c: pro
@@ -3013,7 +3013,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 252
-$p: 78
+$p: 79
 $x: itm:coach
 $t: The team is unsuccessful because the coach is so incompetent.
 $c: pro
@@ -3025,13 +3025,13 @@ $c: pro
 
 !/ SentenceList
 $i: 97
-$r: 79
-$p: 79
+$r: 80
+$p: 80
 $s: 5
 
 !/ SentenceItem
 $i: 253
-$p: 79
+$p: 80
 $x: itm:seedress
 $t: If you see a dress and you really like it you should buy it while you can.
 $c: pro
@@ -3040,7 +3040,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 254
-$p: 79
+$p: 80
 $x: itm:atleastdress
 $t: At least for Alice that wonderful dress is just too expensive.
 $c: pro
@@ -3052,13 +3052,13 @@ $c: pro
 
 !/ SentenceList
 $i: 98
-$r: 79
-$p: 79
+$r: 80
+$p: 80
 $s: 5
 
 !/ SentenceItem
 $i: 255
-$p: 79
+$p: 80
 $x: itm:easter
 $t: Last night, she was painting Easter eggs.
 $c: pro
@@ -3067,7 +3067,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 256
-$p: 79
+$p: 80
 $x: itm:finebrush
 $t: With a fine brush, she was painting Easter eggs.
 $c: pro
@@ -3076,7 +3076,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 257
-$p: 79
+$p: 80
 $x: itm:opencarton
 $t: Open the carton. Now remove the monitor carefully.
 $c: pro
@@ -3085,7 +3085,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 258
-$p: 79
+$p: 80
 $x: itm:johnsons
 $t: The Johnsons are solid citizens. They pay their taxes. They attend PTA meetings.
 $c: pro
@@ -3097,13 +3097,13 @@ $c: pro
 
 !/ SentenceList
 $i: 99
-$r: 81
-$p: 81
+$r: 82
+$p: 82
 $s: 5
 
 !/ SentenceItem
 $i: 259
-$p: 81
+$p: 82
 $x: itm:Amazing
 $t: It's amazing, the things she says sometimes.
 $c: pro
@@ -3112,7 +3112,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 260
-$p: 81
+$p: 82
 $x: itm:Ridiculous
 $t: It's ridiculous, what he's saying.
 $c: pro
@@ -3124,13 +3124,13 @@ $c: pro
 
 !/ SentenceList
 $i: 100
-$r: 87
-$p: 87
+$r: 88
+$p: 88
 $s: 5
 
 !/ SentenceItem
 $i: 261
-$p: 87
+$p: 88
 $x: itm:rhinor
 $t: Rhinos in that park are threatened by poachers.
 $c: sem
@@ -3139,7 +3139,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 262
-$p: 87
+$p: 88
 $t: Young rhinos are threatened by poachers.
 $c: sem
 /!
@@ -3150,13 +3150,13 @@ $c: sem
 
 !/ SentenceList
 $i: 101
-$r: 88
-$p: 88
+$r: 89
+$p: 89
 $s: 5
 
 !/ SentenceItem
 $i: 263
-$p: 88
+$p: 89
 $t: Let's find a restaurant that's family-friendly.
 $c: sem
 /!
@@ -3167,13 +3167,13 @@ $c: sem
 
 !/ SentenceList
 $i: 102
-$r: 89
-$p: 89
+$r: 90
+$p: 90
 $s: 5
 
 !/ SentenceItem
 $i: 264
-$p: 89
+$p: 90
 $t: I got glue for your daughter.
 $c: sem
 /!
@@ -3181,7 +3181,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 265
-$p: 89
+$p: 90
 $t: I got glue for your coffee mug.
 $c: sem
 /!
@@ -3192,13 +3192,13 @@ $c: sem
 
 !/ SentenceList
 $i: 103
-$r: 89
-$p: 89
+$r: 90
+$p: 90
 $s: 5
 
 !/ SentenceItem
 $i: 266
-$p: 89
+$p: 90
 $t: We're going to Grandma!
 $c: sem
 /!
@@ -3206,7 +3206,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 267
-$p: 89
+$p: 90
 $t: Let's go to him right now.
 $c: sem
 /!
@@ -3214,7 +3214,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 268
-$p: 89
+$p: 90
 $t: Let's go to the lawyers.
 $c: sem
 /!
@@ -3222,7 +3222,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 269
-$p: 89
+$p: 90
 $t: Let's go to the press.
 $c: sem
 /!

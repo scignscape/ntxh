@@ -222,6 +222,8 @@ private slots:
 
   void clearFindError();
 
+  void show_article();
+
 private:
 
   friend class XpdfErrorWindow;

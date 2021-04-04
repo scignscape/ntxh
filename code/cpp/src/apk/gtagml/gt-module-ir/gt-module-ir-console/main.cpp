@@ -31,10 +31,10 @@ int main(int argc, char *argv[])
 //    )").arg(DEMO_DOCUMENT_FOLDER) );
 
 
-// QString paper_name = "ctg";
-// QString paper_name = "icg";
 //
- QString paper_name = "itm";
+ QString paper_name = "ctg";
+// QString paper_name = "icg";
+// QString paper_name = "itm";
 
 // QString paper_name = "jrjr";
 
