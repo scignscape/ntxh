@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-4/4/2021, 1:3
+4/4/2021, 14:54
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -2998,13 +2998,13 @@ $c: pro
 
 !/ SentenceList
 $i: 96
-$r: 79
-$p: 79
+$r: 80
+$p: 80
 $s: 5
 
 !/ SentenceItem
 $i: 251
-$p: 79
+$p: 80
 $x: itm:roof
 $t: The roof leaks if a building hasn't been maintained.
 $c: pro
@@ -3013,7 +3013,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 252
-$p: 79
+$p: 80
 $x: itm:coach
 $t: The team is unsuccessful because the coach is so incompetent.
 $c: pro
@@ -3085,7 +3085,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 258
-$p: 80
+$p: 81
 $x: itm:johnsons
 $t: The Johnsons are solid citizens. They pay their taxes. They attend PTA meetings.
 $c: pro
@@ -3167,13 +3167,13 @@ $c: sem
 
 !/ SentenceList
 $i: 102
-$r: 90
-$p: 90
+$r: 91
+$p: 91
 $s: 5
 
 !/ SentenceItem
 $i: 264
-$p: 90
+$p: 91
 $t: I got glue for your daughter.
 $c: sem
 /!
@@ -3181,7 +3181,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 265
-$p: 90
+$p: 91
 $t: I got glue for your coffee mug.
 $c: sem
 /!
@@ -3192,13 +3192,13 @@ $c: sem
 
 !/ SentenceList
 $i: 103
-$r: 90
-$p: 90
+$r: 91
+$p: 91
 $s: 5
 
 !/ SentenceItem
 $i: 266
-$p: 90
+$p: 91
 $t: We're going to Grandma!
 $c: sem
 /!
@@ -3206,7 +3206,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 267
-$p: 90
+$p: 91
 $t: Let's go to him right now.
 $c: sem
 /!
@@ -3214,7 +3214,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 268
-$p: 90
+$p: 91
 $t: Let's go to the lawyers.
 $c: sem
 /!
@@ -3222,7 +3222,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 269
-$p: 90
+$p: 91
 $t: Let's go to the press.
 $c: sem
 /!
