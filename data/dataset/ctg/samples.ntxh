@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-4/4/2021, 23:13
+5/4/2021, 10:9
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -3069,7 +3069,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 256
-$p: 80
+$p: 81
 $x: itm:finebrush
 $t: With a fine brush, she was painting Easter eggs.
 $c: pro
@@ -3078,7 +3078,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 257
-$p: 80
+$p: 81
 $x: itm:opencarton
 $t: Open the carton. Now remove the monitor carefully.
 $c: pro
