@@ -33,7 +33,6 @@ USING_KANS(TextIO)
 
 #include <QTableWidget>
 
-#include <QDirIterator>
 
 #include <QPlainTextEdit>
 #include <QTextStream>

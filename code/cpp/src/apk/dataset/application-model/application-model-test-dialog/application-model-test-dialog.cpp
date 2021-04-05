@@ -10,7 +10,6 @@
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QRegularExpression>
-#include <QDirIterator>
 #include <QGroupBox>
 
 #include <QFormLayout>

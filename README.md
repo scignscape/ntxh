@@ -26,7 +26,50 @@ For readers who find it difficult to compile and use the data-set application (f
 
 Readers may also want to browse the essays where the samples are analyzed and from which the samples are extracted, particularly the "CognitiveTransformGrammar.pdf" file in "`./documents`" (this is the most polished paper; the other two are more provisional, but all three were scraped to compile the data set). In lieu of cloning the repository, readers may wish to start by looking at the essay on "Cognitive Transform Grammar" -- click [here](https://github.com/scignscape/ntxh/blob/ctg/documents/CognitiveTransformGrammar.pdf) -- which discusses roughly half the samples. Note that the analyses (and the curation of the data set as a whole) are those of Nathaniel Christen, a co-author but not primary author on Joseph Lehmann's paper, and don't necessarily reflect the views of the other authors (though I have no reason to suspect that they would substantially disagree with my argumentation). 
 
-Amongst the data set, some of the samples were previously analyzed (or similar to ones previously analyzed) by linguists such as Ronald Langacker; some samples with prosodic markup or distinct prosodic features are taken from Langacker, Julia Hirshberg, Jens Allwood, the Blackwell _Handbook of Pragmatics_, and an article by Laura A. Michaelis and Knud Lambrecht; and other samples are taken from a CoNLL corpus (see below). 
+Amongst the data set, some of the samples were previously analyzed (or similar to ones previously analyzed) by linguists such as Ronald Langacker, Jens Allwood, and James Pustejovsky; some samples with prosodic markup or distinct prosodic features are taken from Langacker, Julia Hirshberg, the Blackwell _Handbook of Pragmatics_, and an article by Laura A. Michaelis and Knud Lambrecht; and other samples are taken from a CoNLL corpus (see below). 
+
+
+---
+**Notation**
+
+Source files in the special "`GTagML`" language (see above) include notation for typesetting, 
+metadata, and digrammatic treatment of language samples (e.g. prosodic markup, parse-graphs, 
+citation of corpora sources, and so forth). The authors propose a `TagML` based format for 
+annotating language samples and their metadata (for purposes of corpus-building and 
+general-purpose linguistics publication). The code accompanying this data set represents 
+the _kind_ of coding requirements necessary for establishing a general-purpose sample-annotation 
+system for Cognitive Linguistics. Readers may examine the specific syntax used for this 
+data set, but the code can be refactored to work with other markup-language grammars as well.
+
+Several language examples use various forms of prosodic/intonation markup, including 
+ToBI (Tones and Break Indices) notation. Following the conventions of linguists such as 
+Hirshberg and Langacker, other samples employ bold or small-caps to mark full or partial 
+stress, respectively. Langacker's double-slash notation to mark potential intonation gaps 
+is carried over to his examples present in the data set.
+
+In general, a robust "Cognitive Grammar Annotation and Metadata Language" would have 
+multiple components, including (1) straightforward sample text; (2) notation of sample 
+sources in prior literature/corpora as well as their position in the current publication 
+where they are presented (e.g. page and section numbers); (3) notation of parse-graphs 
+or other parsing structures and/or semantic/lexical data or interpretations, appropriate 
+for the publications' methods and theoretical perspectives; (4) prosodic/intonation markup 
+and/or discourse/conversational representations when needed; and (5) identication of issues 
+or analytic commentary on samples, such as markup dubious or unacceptable examples 
+introduced to illustrate theories for why certain constructions are ill-formed. 
+
+Each of these sorts of information can be modeled via notation used for this data set, 
+though the language for doing so has not (yet) been formally described. For readers 
+who would like to examine this notation notwithstanding its provisional/experimental 
+status, a list of the "`GTagML`" sources for every sample is [here](https://github.com/scignscape/ntxh/blob/ctg/documents/all-samples.gt). 
+
+Readers interested in speech/prosody may want to search for 
+examples of the "`discourse-markup-inline`" command and view 
+corresponding sample markup, as well as samples in the same 
+section, to see the syntax and commands relevant to prosodic 
+markup in particular. Similarly, readers interested in corpus curation 
+may wish to search for "`udref`" commands to see the notation 
+used to indicate samples obtained from a CoNLL shared task collection.
+
 
 # Technology Overview
 ---

@@ -16,7 +16,6 @@
 
 #include <QCommandLineParser>
 
-#include <QDirIterator>
 
 #include "dgh-sdi/dgh-sdi-document.h"
 
@@ -66,10 +65,6 @@ int main(int argc, char* argv[])
    {&czfile, {}}
    });
 
-
-// folder = "/home/nlevisrael/gits/ntxh/wip-sebi/dev/documents/ctg/src/setup";
-// file = "/home/nlevisrael/gits/ntxh/wip-sebi/dev/documents/ctg/src/setup/out/ctg.prep.sdi.ntxh";
-// QString outfile = "/home/nlevisrael/gits/ntxh/wip-sebi/dev/documents/ctg/sdi-merge.ntxh";
 
 
  QStringList prelatex_files;

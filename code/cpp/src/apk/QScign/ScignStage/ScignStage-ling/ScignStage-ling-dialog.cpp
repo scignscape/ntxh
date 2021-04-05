@@ -32,7 +32,6 @@
 #include <QLineEdit>
 #include <QGroupBox>
 
-#include <QDirIterator>
 
 #include <QPlainTextEdit>
 #include <QTextStream>
