@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-4/4/2021, 14:54
+4/4/2021, 23:13
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -2847,6 +2847,7 @@ $i: 237
 $p: 72
 $x: itm:warachieved
 $t: The war was finally achieved.
+$o: (?)
 $c: cog
 /!
 <>>
@@ -2872,6 +2873,7 @@ $i: 240
 $p: 72
 $x: itm:peacewenton
 $t: The peace went on for five years.
+$o: (?)
 $c: cog
 /!
 <>>

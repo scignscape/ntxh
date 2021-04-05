@@ -489,7 +489,7 @@ Stir in rice wine and seasonings.
 Alice bought a dog. A poodle.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 79)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 80)  
 The roof leaks if a building hasn't been maintained.  
 The team is unsuccessful because the coach is so incompetent.  
 
@@ -520,12 +520,12 @@ Young rhinos are threatened by poachers.
 Let's find a restaurant that's family-friendly.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 90)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 91)  
 I got glue for your daughter.  
 I got glue for your coffee mug.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 90)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 91)  
 We're going to Grandma!  
 Let's go to him right now.  
 Let's go to the lawyers.  

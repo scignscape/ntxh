@@ -225,6 +225,8 @@ class ScignStage_Ling_Dialog : public QDialog
 
  Dataset* dataset_;
 
+ QString publication_url_;
+
  bool xpdf_is_ready();
  void check_phr();
 
@@ -269,6 +271,7 @@ class ScignStage_Ling_Dialog : public QDialog
 
  void run_group_context_menu(const QPoint& p, int page, QString text,
    QStringList texts,
+   std::function<void(QString)> pub_url_fn,
    std::function<void(int, int)> pdf_fn,
    std::function<void(QString)> copy_fn,
    std::function<void(QString)> launch_fn,
@@ -276,6 +279,7 @@ class ScignStage_Ling_Dialog : public QDialog
    std::function<void()> highlight_fn);
 
  void run_sample_context_menu(const QPoint& p, int page, QString text,
+   std::function<void(QString)> pub_url_fn,
    std::function<void(int, int)> pdf_fn,
    std::function<void(QString)> copy_fn,
    std::function<void(QString)> launch_fn);
@@ -315,6 +319,8 @@ public:
 
  ACCESSORS(void* ,application_model)
  ACCESSORS(Dataset* ,dataset)
+
+ ACCESSORS(QString ,publication_url)
 
  // //  Kernel Application Interface
  void test_msgbox(QString msg);

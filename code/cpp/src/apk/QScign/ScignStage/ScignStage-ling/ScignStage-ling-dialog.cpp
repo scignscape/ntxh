@@ -32,6 +32,8 @@
 #include <QLineEdit>
 #include <QGroupBox>
 
+#include <QDesktopServices>
+
 
 #include <QPlainTextEdit>
 #include <QTextStream>
@@ -515,7 +517,12 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
    }
    if(qsl.isEmpty())
    {
-    run_sample_context_menu(qp, page, text, [this](int page, int flag)
+    run_sample_context_menu(qp, page, text,
+    [](QString url)
+    {
+     QDesktopServices::openUrl(QUrl(url));
+    },
+    [this](int page, int flag)
     {
      open_pdf_file(pdf_file_, page, flag);
     },
@@ -537,7 +544,12 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
    }
    else
    {
-    run_group_context_menu(qp, page, text, qsl, [this](int page, int flag)
+    run_group_context_menu(qp, page, text, qsl,
+    [](QString url)
+    {
+     QDesktopServices::openUrl(QUrl(url));
+    },
+    [this](int page, int flag)
     {
      open_pdf_file(pdf_file_, page, flag);
     },
@@ -1337,6 +1349,7 @@ void ScignStage_Ling_Dialog::save_to_user_select_file(QString text)
 
 void ScignStage_Ling_Dialog::run_group_context_menu(const QPoint& p, int page, QString text,
   QStringList texts,
+  std::function<void(QString)> pub_url_fn,
   std::function<void(int, int)> pdf_fn,
   std::function<void(QString)> copy_fn,
   std::function<void(QString)> launch_fn,
@@ -1344,6 +1357,8 @@ void ScignStage_Ling_Dialog::run_group_context_menu(const QPoint& p, int page, Q
   std::function<void()> highlight_fn)
 {
  QMenu* qm = new QMenu(this);
+ qm->addAction("Show Associated Publication Page (in web browser)",
+   [this, pub_url_fn](){pub_url_fn(publication_url_);});
  qm->addAction("Show in Document (requires XPDF)",
    [page, pdf_fn](){pdf_fn(page, 0);});
  qm->addAction(
@@ -1377,10 +1392,12 @@ void ScignStage_Ling_Dialog::run_group_context_menu(const QPoint& p, int page, Q
 }
 
 void ScignStage_Ling_Dialog::run_sample_context_menu(const QPoint& p, int page, QString text,
-  std::function<void(int, int)> pdf_fn,
+  std::function<void(QString)> pub_url_fn, std::function<void(int, int)> pdf_fn,
   std::function<void(QString)> copy_fn, std::function<void(QString)> launch_fn)
 {
  QMenu* qm = new QMenu(this);
+ qm->addAction("Show Associated Publication Page (in web browser)",
+   [this, pub_url_fn](){pub_url_fn(publication_url_);});
  qm->addAction("Show in Document (requires XPDF)",
    [page, pdf_fn](){pdf_fn(page, 0);});
  qm->addAction(
