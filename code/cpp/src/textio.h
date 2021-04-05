@@ -279,6 +279,35 @@ inline QString copy_binary_file_to_folder_with_rename(QString path, QString fold
  return {};
 }
 
+inline QString backup_binary_file(QString path, QString inner_folder = "bk", QString presuffix = "bk")
+{
+ QFileInfo qfi(path);
+
+ QString suffix = qfi.completeSuffix();
+
+ QDir qd(qfi.absoluteDir());
+
+ QString new_path;
+
+ if(inner_folder.isEmpty())
+ {
+  new_path = qd.filePath(qfi.baseName() + "." + presuffix + "." + suffix);
+ }
+ else
+ {
+  if(!qd.exists(inner_folder))
+    qd.mkdir(inner_folder);
+
+  qd.cd(inner_folder);
+  new_path = qd.filePath(qfi.baseName() + "." + presuffix + "." + suffix);
+ }
+
+ if( QFile::copy(path, new_path) )
+   return new_path;
+
+ return {};
+}
+
 inline QString copy_file_with_preliminary_suffix(QString path, QString preliminary_suffix)
 {
  QFileInfo qfi(path);

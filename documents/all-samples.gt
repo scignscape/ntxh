@@ -628,13 +628,13 @@ the Trump campaign colluded with Russia. -> syn ;;
 
 `swl ->  --- -> The peace was finally achieved. -> cog ;;
 
-`swl ->> `qmarkdubious;The war was finally achieved. -> itm:warachieved -> The war was finally achieved. -> cog ;;
+`swl -> itm:warachieved -> The war was finally achieved. ->> (?) -> cog ;;
 
 `swl ->  --- -> The peace lasted for five years. -> cog ;;
 
 `swl ->  --- -> The war went on for five years. -> cog ;;
 
-`swl ->> `qmarkdubious;The peace went on for five years. -> itm:peacewenton -> The peace went on for five years. -> cog ;;
+`swl -> itm:peacewenton -> The peace went on for five years. ->> (?) -> cog ;;
 
 
  ;;- __________ 

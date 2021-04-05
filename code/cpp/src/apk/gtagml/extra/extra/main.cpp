@@ -24,7 +24,7 @@ int main1(int argc, char *argv[])
  return 0;
 }
 
-void get_files(QString paper_name, QMap<QString, QString>& result)
+void get_section_files(QString paper_name, QMap<QString, QString>& result)
 {
  QString folder = ROOT_FOLDER "/../dev/documents/" + paper_name + "/src";
 
@@ -46,15 +46,15 @@ void get_files(QString paper_name, QMap<QString, QString>& result)
 
 }
 
-int main(int argc, char *argv[])
+void generate_swl()
 {
  // //  Pull all the `swl tag-commands
 
  QMap<QString, QString> files;
 
- get_files("ctg", files);
- get_files("icg", files);
- get_files("itm", files);
+ get_section_files("ctg", files);
+ get_section_files("icg", files);
+ get_section_files("itm", files);
 
  qDebug() << files;
 
@@ -126,5 +126,71 @@ int main(int argc, char *argv[])
  }
 
  save_file(ROOT_FOLDER "/documents/all-samples.gt", all_swl);
-
 }
+
+void merge_markdown_samples(QStringList paper_names, QString out_name)
+{
+ QString markdown_folder = ROOT_FOLDER "/documents/markdown";
+ QString all_text;
+ for(QString pn : paper_names)
+ {
+  all_text += load_file(markdown_folder + "/" + pn + ".md");
+ }
+
+ backup_binary_file(markdown_folder + "/" + out_name + ".md");
+ save_file(markdown_folder + "/" + out_name + ".md", all_text);
+}
+
+void copy_and_backup(QString paper_name, QString full_name)
+{
+ QString out_folder = ROOT_FOLDER "/../dev/documents/" + paper_name + "/out";
+ QString dataset_folder = ROOT_FOLDER "/data/dataset/" + paper_name;
+
+ QString documents_folder = ROOT_FOLDER "/documents";
+
+ QDir qd(dataset_folder);
+ if(!qd.exists("dryad"))
+   qd.mkdir("dryad");
+
+ qd.cd("dryad");
+
+ QString dryad_folder = qd.absolutePath();
+
+ backup_binary_file(dataset_folder + "/samples.ntxh");
+ backup_binary_file(dryad_folder + QString("/samples-%1.ntxh").arg(paper_name));
+
+ copy_binary_file_to_folder_with_rename(out_folder + "/" + paper_name + ".ntxh",
+   dataset_folder, "samples");
+ copy_binary_file_to_folder_with_rename(out_folder + "/" + paper_name + ".ntxh",
+   dryad_folder, QString("samples-%1").arg(paper_name));
+
+ backup_binary_file(dataset_folder + "/sdi-merge.ntxh");
+ backup_binary_file(dryad_folder + QString("/sdi-merge-%1.ntxh").arg(paper_name));
+
+ copy_binary_file_to_folder_with_rename(out_folder + "/../sdi-merge.ntxh",
+   dataset_folder, "sdi-merge");
+ copy_binary_file_to_folder_with_rename(out_folder + "/../sdi-merge.ntxh",
+   dryad_folder, QString("sdi-merge-%1").arg(paper_name));
+
+ backup_binary_file(dataset_folder + "/main.pdf");
+ copy_binary_file_to_folder_with_rename(out_folder + "/" + paper_name + ".pdf",
+   dataset_folder, "main");
+
+ copy_binary_file_to_folder_with_rename(out_folder + "/" + paper_name + ".pdf",
+   documents_folder, full_name);
+}
+
+// // a handful of utilities for finalizing the data set ...
+int main(int argc, char *argv[])
+{
+ generate_swl();
+
+ copy_and_backup("ctg", "CognitiveTransformGrammar");
+ copy_and_backup("icg", "ConceptualSpacesAndTheIntroToCognitiveGrammar");
+ copy_and_backup("itm", "InterfaceTheoryOfMeaning");
+
+ merge_markdown_samples({"ctg", "icg", "itm"}, "samples");
+}
+
+
+
