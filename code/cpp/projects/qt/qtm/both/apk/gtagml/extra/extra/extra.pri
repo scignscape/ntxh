@@ -42,13 +42,14 @@ HEADERS += \
   $$SRC_DIR/compilation-unit-object.h \
   $$SRC_DIR/test-class.h \
   $$SRC_DIR/unified-runtime-object.h \
-
+  $$SRC_DIR/metatype-object.h \
 
 
 SOURCES += \
   $$SRC_DIR/compilation-unit-object.cpp \
   $$SRC_DIR/test-class.cpp \
   $$SRC_DIR/unified-runtime-object.cpp \
+  $$SRC_DIR/metatype-object.cpp \
   $$SRC_DIR/main.cpp \
 
 

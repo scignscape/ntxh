@@ -22,12 +22,14 @@
 //KANS_(GTagML)
 
 class Compilation_Unit_Object;
+class Metatype_Object;
 
 class Unified_Runtime_Object
 {
  QString file_path_;
 
  QMap<QString, Compilation_Unit_Object*> registered_compilation_unit_objects_;
+ QMap<QString, Metatype_Object*> registered_metatype_objects_;
 
  Unified_Runtime_Object(QString file_path);
 
@@ -38,7 +40,7 @@ public:
  ACCESSORS(QString ,file_path)
 
  void register_compilation_unit_object(Compilation_Unit_Object* cuo);
-
+ void register_metatype_object(Metatype_Object* cuo);
 
 };
 

@@ -8,6 +8,8 @@
 #include "unified-runtime-object.h"
 
 #include "compilation-unit-object.h"
+#include "metatype-object.h"
+
 
 #include "kans.h"
 
@@ -31,3 +33,7 @@ void Unified_Runtime_Object::register_compilation_unit_object(Compilation_Unit_O
  registered_compilation_unit_objects_[cuo->file_path()] = cuo;
 }
 
+void Unified_Runtime_Object::register_metatype_object(Metatype_Object* mto)
+{
+ registered_metatype_objects_[mto->get_full_name()] = mto;
+}
