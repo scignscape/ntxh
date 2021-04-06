@@ -243,6 +243,9 @@ inline QString copy_binary_file_to_folder(QString path, QString folder)
  QDir qd(folder);
  QString newpath = qd.filePath(fn);
 
+ if( QFile::exists(newpath) )
+   QFile::remove(newpath);
+
  if( QFile::copy(path, newpath) )
    return newpath;
 
@@ -272,6 +275,9 @@ inline QString copy_binary_file_to_folder_with_rename(QString path, QString fold
 
  QDir qd(folder);
  QString newpath = qd.filePath(name + "." + suffix);
+
+ if( QFile::exists(newpath) )
+   QFile::remove(newpath);
 
  if( QFile::copy(path, newpath) )
    return newpath;

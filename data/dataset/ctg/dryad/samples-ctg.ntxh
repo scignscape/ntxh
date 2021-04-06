@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-5/4/2021, 10:9
+6/4/2021, 8:47
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -128,13 +128,13 @@ $c: syn
 
 !/ SentenceList
 $i: 3
-$r: 7
+$r: 8
 $p: 7
 $s: 1
 
 !/ SentenceItem
 $i: 6
-$p: 7
+$p: 8
 $x: itm:black
 $t: I saw my neighbor's two black dogs.
 $c: sem
@@ -143,7 +143,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 7
-$p: 7
+$p: 8
 $x: itm:rescued
 $t: I saw my neighbor's two rescued dogs.
 $c: sem
@@ -152,7 +152,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 8
-$p: 7
+$p: 8
 $x: itm:latest
 $t: I saw my neighbor's two latest dogs.
 $c: sem
@@ -308,13 +308,13 @@ $c: amb
 
 !/ SentenceList
 $i: 8
-$r: 10
-$p: 10
+$r: 11
+$p: 11
 $s: 1
 
 !/ SentenceItem
 $i: 21
-$p: 10
+$p: 11
 $x: itm:allresidents
 $t: All residents of the city of New York live in one of five boroughs.
 $c: log
@@ -323,7 +323,7 @@ $c: log
 
 !/ SentenceItem
 $i: 22
-$p: 10
+$p: 11
 $x: itm:manyresidents
 $t: Many residents of the New York metropolitan area complain about how long it takes to commute to New York City.
 $c: log
@@ -332,7 +332,7 @@ $c: log
 
 !/ SentenceItem
 $i: 23
-$p: 10
+$p: 11
 $x: itm:SouthCambridge
 $t: All districts on the south side of Cambridge voted Conservative.
 $c: log
@@ -717,7 +717,7 @@ $l: 2157
 
 !/ SentenceItem
 $i: 52
-$p: 16
+$p: 17
 $x: itm:current-waiting-period
 $t: The current waiting period is eight weeks.
 $c: sem
@@ -731,7 +731,7 @@ $l: n01050009
 
 !/ SentenceItem
 $i: 53
-$p: 16
+$p: 17
 $x: itm:immersed
 $t: I think that's why they immersed themselves in pattern and colour.
 $c: sem
@@ -745,7 +745,7 @@ $l: n01087018
 
 !/ SentenceItem
 $i: 54
-$p: 16
+$p: 17
 $x: itm:princess
 $t: With her appearance finalized, Jasmine became Disney's first non-white princess as opposed to being of European heritage.
 $c: sem
@@ -1370,7 +1370,7 @@ $c: pra
 
 !/ SentenceList
 $i: 51
-$r: 35
+$r: 36
 $p: 35
 $s: 3
 
@@ -1427,7 +1427,7 @@ $c: pra
 
 !/ SentenceItem
 $i: 108
-$p: 36
+$p: 37
 $t: He wants a bottle opener.
 $c: pra
 /!
