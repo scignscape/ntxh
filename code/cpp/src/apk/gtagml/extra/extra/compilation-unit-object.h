@@ -21,6 +21,7 @@
 //KANS_(GTagML)
 
 class Unified_Runtime_Object;
+class Metatype_Object;
 
 class Compilation_Unit_Object
 {
@@ -28,14 +29,18 @@ class Compilation_Unit_Object
 
  static Unified_Runtime_Object* unified_runtime_object_;
 
+ Metatype_Object* principal_metatype_object_;
+
 public:
 
 
  Compilation_Unit_Object(QString file_path);
 
+ static Compilation_Unit_Object* init_new(QString file_path, std::function<void(Compilation_Unit_Object*)>);
+
  ACCESSORS(QString ,file_path)
 
-
+ ACCESSORS(Metatype_Object* ,principal_metatype_object)
 
 
 };

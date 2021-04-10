@@ -11,6 +11,9 @@
 #include <QString>
 #include <QMap>
 
+#include <QList>
+
+
 #include "accessors.h"
 #include "flags.h"
 
@@ -27,6 +30,10 @@ class Metatype_Object
  QString local_name_;
  QString full_name_;
 
+ typedef std::function<n8(QVector<n8>)> guard_fn_type;
+
+ QMap<QString, QList<guard_fn_type>> guard_fns_;
+
 public:
 
  Metatype_Object(QString local_name);
@@ -34,7 +41,11 @@ public:
  ACCESSORS(QString ,local_name)
  ACCESSORS(QString ,full_name)
 
+ void register_guard_fn(QString key, guard_fn_type fn);
+
  QString get_full_name();
+
+ guard_fn_type check_single_guard_fn(QString key);
 
 
 

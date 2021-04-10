@@ -27,9 +27,7 @@ class Test_Class
 {
  QString text_;
 
- typedef std::function<n8(QVector<n8>)> guard_fn_type;
 
- QMap<QString, QVector<guard_fn_type>> guard_fns_;
 
 public:
 

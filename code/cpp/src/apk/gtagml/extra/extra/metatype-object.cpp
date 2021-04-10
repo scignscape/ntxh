@@ -26,3 +26,17 @@ QString Metatype_Object::get_full_name()
 
  return full_name_;
 }
+
+void Metatype_Object::register_guard_fn(QString key, guard_fn_type fn)
+{
+ guard_fns_[key].push_front(fn);
+}
+
+Metatype_Object::guard_fn_type Metatype_Object::check_single_guard_fn(QString key)
+{
+ auto it = guard_fns_.find(key);
+ if(it == guard_fns_.end())
+   return nullptr;
+
+ return it->first();
+}

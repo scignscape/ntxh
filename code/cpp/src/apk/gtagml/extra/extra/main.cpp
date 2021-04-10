@@ -11,14 +11,35 @@
 
 #include "test-class.h"
 
+#include "unified-runtime-object.h"
+
+#include "metatype-object.h"
+
 #include "textio.h"
 USING_KANS(TextIO)
 
 
-int main1(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
+ Unified_Runtime_Object& uro = *Unified_Runtime_Object::instance();
+ uro.register_new_metatype_object("Test_Class");
+
  Test_Class tc("OK");
  qDebug() << tc.text();
+
+
+ Metatype_Object& mto = *uro.get_metetype_object_by_type_name("Test_Class");
+
+ mto.register_guard_fn("test_method@enter", [](QVector<n8> args) -> n8
+ {
+  QString& arg0 = *(QString*)args[0];
+  u4& arg1 = *(u4*)args[1];
+  u4& arg2 = *(u4*)args[2];
+  return 0;
+ });
+
+// mto
+
  tc.test_method(ROOT_FOLDER "/dev/extra", 79, 81);
  tc.test_cuo();
  return 0;
@@ -181,7 +202,7 @@ void copy_and_backup(QString paper_name, QString full_name)
 }
 
 // // a handful of utilities for finalizing the data set ...
-int main(int argc, char *argv[])
+int main1(int argc, char *argv[])
 {
  generate_swl();
 

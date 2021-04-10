@@ -41,6 +41,9 @@ public:
 
  void register_compilation_unit_object(Compilation_Unit_Object* cuo);
  void register_metatype_object(Metatype_Object* cuo);
+ void register_new_metatype_object(QString type_name);
+
+ Metatype_Object* get_metetype_object_by_type_name(QString type_name);
 
 };
 

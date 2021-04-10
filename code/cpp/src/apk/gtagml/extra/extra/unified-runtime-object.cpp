@@ -37,3 +37,28 @@ void Unified_Runtime_Object::register_metatype_object(Metatype_Object* mto)
 {
  registered_metatype_objects_[mto->get_full_name()] = mto;
 }
+
+void Unified_Runtime_Object::register_new_metatype_object(QString type_name)
+{
+ QString full_name;
+ full_name = type_name;
+
+ QString local_name;
+ s4 index = type_name.lastIndexOf(':');
+ if(index == -1)
+   local_name = type_name;
+ else
+   local_name = type_name.mid(index + 1);
+
+ Metatype_Object* mto = new Metatype_Object(local_name);
+
+ mto->set_full_name(full_name);
+ registered_metatype_objects_[type_name] = mto;
+}
+
+
+Metatype_Object* Unified_Runtime_Object::get_metetype_object_by_type_name(QString type_name)
+{
+ return registered_metatype_objects_.value(type_name);
+}
+

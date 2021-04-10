@@ -28,3 +28,11 @@ Compilation_Unit_Object::Compilation_Unit_Object(QString file_path)
  unified_runtime_object_->register_compilation_unit_object(this);
 }
 
+Compilation_Unit_Object* Compilation_Unit_Object::init_new(QString file_path, std::function<void(Compilation_Unit_Object*)> fn)
+{
+ Compilation_Unit_Object* result = new Compilation_Unit_Object(file_path);
+ if(fn)
+   fn(result);
+ return result;
+}
+
