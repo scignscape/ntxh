@@ -137,6 +137,8 @@ int main(int argc, char **argv)
  ScignStage_Ling_Dialog dlg (nullptr, &ds);
 #endif
 
+ dlg.setWindowFlags(dlg.windowFlags() & Qt::WindowStaysOnTopHint);
+
  dlg.set_publication_url("https://link.springer.com/journal/10772/volumes-and-issues");
 
  dlg.set_generate_markdown_function([](QString path, Dataset* ds)

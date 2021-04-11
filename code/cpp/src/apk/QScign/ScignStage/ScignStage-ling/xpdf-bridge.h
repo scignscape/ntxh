@@ -14,6 +14,8 @@
 #include "defines.h"
 
 #include <QObject>
+#include <QPoint>
+#include <QDialog>
 
 #include "qsns.h"
 
@@ -32,7 +34,7 @@ public:
 
  XPDF_Bridge(int argc, char** argv);
 
- void init();
+ void init(QPoint dlg_point = QPoint(), QDialog* origin_dlg = nullptr);
  bool is_ready();
  void take_message(QString msg);
 
@@ -42,7 +44,7 @@ public:
 
  void take_message(QString) {}
  bool is_ready(){ return false; }
- void init(){}
+ void init(QPoint dlg_point = QPoint(), QDialog* origin_dlg = nullptr){}
 #endif //  USING_XPDF
 
 Q_SIGNALS:

@@ -66,9 +66,10 @@ static ArgDesc argDesc[] = {
  {NULL}
 };
 
-void xpdf_component_main(int argc, char *argv[], Xpdf_Component** _xpc)
+void xpdf_component_main(int argc, char *argv[], Xpdf_Component** _xpc,
+  QPoint dlg_point, QDialog* origin_dlg)
 {
- Xpdf_Component* xpc = new Xpdf_Component(argc, argv);
+ Xpdf_Component* xpc = new Xpdf_Component(argc, argv, dlg_point, origin_dlg);
  if(_xpc)
    *_xpc = xpc;
 }
@@ -77,7 +78,8 @@ void xpdf_component_main(int argc, char *argv[], Xpdf_Component** _xpc)
 // Xpdf_Component
 //------------------------------------------------------------------------
 
-Xpdf_Component::Xpdf_Component(int &argc, char **argv)
+Xpdf_Component::Xpdf_Component(int &argc, char **argv,
+  QPoint dlg_point, QDialog* origin_dlg)
 {
  const char *fileName, *dest;
  GString *color;
@@ -159,11 +161,12 @@ Xpdf_Component::Xpdf_Component(int &argc, char **argv)
 
  viewers = new GList();
 
- QMessageBox::information(nullptr, "About XPDF",
-   "The XPDF Component is based on XPDF Software Copyright 2015 "
-   "by Glyph & Cog, Inc.  This version of XPDF has been "
-   "customized to work with the current data set.  Please see the "
-   "dataset documentation for more information");
+ if(!dlg_point.isNull())
+   QMessageBox::information(nullptr, "About XPDF",
+     "The XPDF Component is based on XPDF Software Copyright 2015 "
+     "by Glyph & Cog, Inc.  This version of XPDF has been "
+     "customized to work with the current data set.  Please see the "
+     "dataset documentation for more information");
 
  //newWindow(fullScreen);
  //--- load PDF file(s) requested on the command line
@@ -226,6 +229,10 @@ GBool Xpdf_Component::openInNewWindow(QString fileName, int page, QString dest,
  }
  viewers->append(viewer);
  viewer->tweakSize();
+
+ // //  added for the data set -- is this right?
+//? viewer->setWindowFlags(Qt::WindowStaysOnTopHint);
+
  viewer->show();
  return gTrue;
 }

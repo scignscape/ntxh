@@ -1,53 +1,54 @@
 $$ document-title := Cognitive Transform Grammar
 $$ local-title := section1
 
-$& BiskriDescles %% (1:main) 5790 6081
-$& Descles2010 %% (1:main) 43762 43958
-$& EstherPascual p.%%9 (1:main) 35665 35670
-$& Fauconnier %% (1:main) 37427 37480
-$& LangackerFoundations pp.%%119%%and%%128 (1:main) 35637 35649
-$& LineBrandt p.%%189 (1:main) 35650 35664
-$& PerAageBrandt %% (1:main) 37481 37482
+$& BiskriDescles %% (1:main) 6626 6917
+$& Descles2010 %% (1:main) 44598 44794
+$& EstherPascual p.%%9 (1:main) 36501 36506
+$& Fauconnier %% (1:main) 38263 38316
+$& LangackerFoundations pp.%%119%%and%%128 (1:main) 36473 36485
+$& LineBrandt p.%%189 (1:main) 36486 36500
+$& MiriamTaverniers %% (1:main) 3163 3282
+$& PerAageBrandt %% (1:main) 38317 38318
 
 
-= 21580:
+= 22416:
 = 1
 Ann Copestake
 
-= 21593:
+= 22429:
 = 9
 
-= 21598:
+= 22434:
 = 1
 Ted Briscoe
 
-= 21609:
+= 22445:
 = 9
 
-= 21649:
+= 22485:
 = 1
 Geoffrey Nunberg
 
-= 21665:
+= 22501:
 = 9
 
-= 35386:
+= 36222:
 = 1
 Ronald Langacker
 
-= 35402:
+= 36238:
 = 9
 
-= 37443:
+= 38279:
 = 1
 Gilles Fauconnier
 
-= 37460:
+= 38296:
 = 9
 
-= 37464:
+= 38300:
 = 1
 Per Aage Brandt
 
-= 37479:
+= 38315:
 = 9

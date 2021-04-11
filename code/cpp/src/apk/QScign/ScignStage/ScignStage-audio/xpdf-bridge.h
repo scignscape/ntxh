@@ -9,6 +9,7 @@
 #define XPDF_BRIDGE__H
 
 
+#include <QPoint>
 
 //QSNS_(ScignStage)
 //?namespace QScign { namespace ScignStage {
@@ -33,7 +34,7 @@ public:
 
  XPDF_Bridge(int argc, char** argv);
 
- void init();
+ void init(QPoint dlg_point = QPoint());
 
  bool is_ready();
 
@@ -56,7 +57,7 @@ struct XPDF_Bridge
 {
  void take_message(QString) {}
  bool is_ready(){ return false; }
- void init(){}
+ void init(QPoint dlg_point = QPoint()){}
 
 };
 

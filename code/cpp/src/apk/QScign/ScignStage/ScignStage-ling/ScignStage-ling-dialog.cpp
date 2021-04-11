@@ -522,8 +522,10 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
     {
      QDesktopServices::openUrl(QUrl(url));
     },
-    [this](int page, int flag)
+    [this, qp](int page, int flag)
     {
+     last_xpdf_dlg_point_ = this->mapToGlobal(qp);
+     qDebug() << "XPDF Dialog Point: " << last_xpdf_dlg_point_;
      open_pdf_file(pdf_file_, page, flag);
     },
     [](QString s)
@@ -549,8 +551,9 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
     {
      QDesktopServices::openUrl(QUrl(url));
     },
-    [this](int page, int flag)
+    [this, qp](int page, int flag)
     {
+     last_xpdf_dlg_point_ = qp;
      open_pdf_file(pdf_file_, page, flag);
     },
     [](QString s)
@@ -633,7 +636,7 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
    this->setWindowFlags(Qt::Window);
    showMinimized();
 #else
-   setWindowState(Qt::WindowMinimized);
+   this->setWindowState(Qt::WindowMinimized);
 #endif
  });
 
@@ -1569,7 +1572,7 @@ void ScignStage_Ling_Dialog::check_launch_xpdf(std::function<void()> fn,
 
  if(xpdf_bridge_)
  {
-  xpdf_bridge_->init();
+  xpdf_bridge_->init(last_xpdf_dlg_point_, this);
   waitfn();
   return;
  }

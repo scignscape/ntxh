@@ -154,6 +154,8 @@ class ScignStage_Ling_Dialog : public QDialog
 
  QStack<QMenu*> popped_up_menus_;
 
+ QPoint last_xpdf_dlg_point_;
+
 #ifdef USING_KPH
  PHR_Channel_System* phr_channel_system_;
  PhaonIR* phaonir_;

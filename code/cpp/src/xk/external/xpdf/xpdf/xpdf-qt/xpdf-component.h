@@ -31,7 +31,10 @@ class Xpdf_Component
 {
 public:
 
-  Xpdf_Component(int &argc, char **argv);
+  Xpdf_Component(int &argc, char **argv,
+    QPoint dlg_point = QPoint(),
+    QDialog* origin = nullptr);
+
   virtual ~Xpdf_Component();
 
   int getNumViewers();
