@@ -34,7 +34,8 @@ public:
 
  XPDF_Bridge(int argc, char** argv);
 
- void init(QPoint dlg_point = QPoint(), QDialog* origin_dlg = nullptr);
+ void init(QPoint dlg_point = QPoint(),
+   QDialog* origin_dlg = nullptr, QString origin_msg = {});
  bool is_ready();
  void take_message(QString msg);
 
@@ -44,7 +45,8 @@ public:
 
  void take_message(QString) {}
  bool is_ready(){ return false; }
- void init(QPoint dlg_point = QPoint(), QDialog* origin_dlg = nullptr){}
+ void init(QPoint dlg_point = QPoint(),
+   QDialog* origin_dlg = nullptr, QString origin_msg = {}){}
 #endif //  USING_XPDF
 
 Q_SIGNALS:

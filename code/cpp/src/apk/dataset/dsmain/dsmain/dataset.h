@@ -24,8 +24,6 @@
 #include <QString>
 #include <QMap>
 
-//#define PASTE_EXPRESSION(...) __VA_ARGS__
-
 
 KANS_(DSM)
 
@@ -52,6 +50,7 @@ class Dataset :  public QRing_File_Structure
  QStringList forms_;
 
  QStringList issue_codes_;
+ QMap<QString, u4> issue_counts_;
 
  QVector<QPair<QPair<QString, int>, QPair<int, int>>> subdocuments_;
 
@@ -71,6 +70,8 @@ public:
  ACCESSORS__RGET(QStringList ,issues)
  ACCESSORS__RGET(QStringList ,issue_codes)
  ACCESSORS__RGET(QStringList ,forms)
+ ACCESSORS__RGET(MACRO_PASTE(QMap<QString, u4>), issue_counts)
+
 
  ACCESSORS__RGET(QList<Discourse_Markup_Sample> ,discourse_markup_samples)
 

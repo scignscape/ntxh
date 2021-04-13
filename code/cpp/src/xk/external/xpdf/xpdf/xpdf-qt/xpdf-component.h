@@ -33,7 +33,7 @@ public:
 
   Xpdf_Component(int &argc, char **argv,
     QPoint dlg_point = QPoint(),
-    QDialog* origin = nullptr);
+    QDialog* origin_dlg = nullptr, QString origin_msg = {});
 
   virtual ~Xpdf_Component();
 

@@ -115,6 +115,33 @@ Q_DECLARE_METATYPE(Language_Sample_Group*)
 #include "add-minimize-frame.h"
 
 
+
+void ScignStage_Ling_Dialog::reset_issue_counts()
+{
+ int c = 0;
+
+ QList<QAbstractButton*> bs = filter_issues_button_group_->buttons();
+
+ for(QAbstractButton* ab : bs)
+ {
+  if(QCheckBox* cb = qobject_cast<QCheckBox*>(ab))
+  {
+   QString ic = cb->property("ic").toString();
+   u4 issue_count = issue_counts_.value(ic);
+   if(issue_count > 0)
+   {
+    current_filters_.insert(ic);
+    cb->setChecked(true);
+   }
+   else
+   {
+    qDebug() << "No examples for issue: " << ic;
+    cb->setEnabled(false);
+   }
+  }
+ }
+}
+
 ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
   Dataset* ds,
   QWidget* parent)
@@ -160,6 +187,11 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
 
  issues_ = ds->issues();
  issue_codes_ = ds->issue_codes();
+ issue_counts_ = ds->issue_counts();
+
+ qDebug() << "Issues: " << issues_;
+ qDebug() << "Issue Codes: " << issue_codes_;
+ qDebug() << "Issue Counts: " << issue_counts_;
 
  int fcolmax = 2;
  int icolmax = 5;
@@ -188,24 +220,37 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
   int c = 0;
   for(QString i: issues_)
   {
-   current_filters_.insert(issue_codes_[c]);
    QCheckBox* cb = new QCheckBox(i, this);
-   cb->setChecked(true);
-
+   QString ic = issue_codes_[c];
+//   issues_check_map_[ic] =
    cb->setProperty("ic", QVariant::fromValue(issue_codes_[c]));
-
-//   // // temporary while issues are notated in the data set
-//   cb->setEnabled(false);
-
    filter_issues_grid_layout_->addWidget(cb, c / icolmax,
      c % icolmax);
    filter_issues_button_group_->addButton(cb);
    ++c;
   }
  }
+//   QString issue_code = issue_codes_[c];
+
+//   u4 issue_count = issue_counts_.value(issue_code);
+//   if(issue_count > 0)
+//   {
+//    current_filters_.insert(issue_codes_[c]);
+//    cb->setChecked(true);
+//   }
+//   else
+//   {
+//    cb->setEnabled(false);
+//   }
+
+
+//   // // temporary while issues are notated in the data set
+//   cb->setEnabled(false);
 
  for(int i = 0; i < icolmax; ++i)
    filter_issues_grid_layout_->setColumnStretch(i, 0);
+
+ reset_issue_counts();
 
  connect(filter_issues_button_group_,
    SIGNAL(buttonToggled(QAbstractButton*,bool)), this,
@@ -1572,7 +1617,8 @@ void ScignStage_Ling_Dialog::check_launch_xpdf(std::function<void()> fn,
 
  if(xpdf_bridge_)
  {
-  xpdf_bridge_->init(last_xpdf_dlg_point_, this);
+  xpdf_bridge_->init(last_xpdf_dlg_point_, this,
+    "(dataset: " + dataset_->samples_file() + ")");
   waitfn();
   return;
  }

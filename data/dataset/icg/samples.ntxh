@@ -1,5 +1,5 @@
 - Generated from LaTeX File icg.tex 
-2/4/2021, 14:11
+12/4/2021, 23:56
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -1538,7 +1538,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 133
-$p: 50
+$p: 51
 $t: Which avenue does this bus go down when it drops off passengers?
 $c: cog
 /!
@@ -1642,7 +1642,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 142
-$p: 51
+$p: 52
 $t: I know that Szechuan recipes call for hot pepper, but John can't eat spicy food.
 $c: syn
 /!
@@ -1749,7 +1749,7 @@ $c: cog
 $i: 151
 $p: 53
 $x: itm:warrendetailed
-$t: Warren presented more detailed policy proposals than Sanders, at each of the debates, .
+$t: Warren presented more detailed policy proposals than Sanders, at each of the debates where they were both onstage.
 $c: cog
 /!
 <>>
@@ -2056,7 +2056,7 @@ $c: ont
 !/ SentenceList
 $i: 56
 $r: 62
-$p: 61
+$p: 62
 $s: 4
 
 !/ SentenceItem

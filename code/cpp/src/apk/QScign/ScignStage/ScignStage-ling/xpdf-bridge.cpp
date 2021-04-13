@@ -18,7 +18,8 @@
 #include <QDebug>
 
 extern void xpdf_component_main(int argc, char *argv[],
-  Xpdf_Component** xpc, QPoint dlg_point = QPoint(), QDialog* origin_dlg = nullptr);
+  Xpdf_Component** xpc, QPoint dlg_point = QPoint(),
+  QDialog* origin_dlg = nullptr, QString origin_msg = {});
 
 XPDF_Bridge::XPDF_Bridge(int argc, char** argv)
   :  argc_(argc), argv_(argv), xpdf_component_(nullptr)
@@ -47,9 +48,9 @@ void XPDF_Bridge::take_message(QString msg)
 
 }
 
-void XPDF_Bridge::init(QPoint dlg_point, QDialog* origin_dlg)
+void XPDF_Bridge::init(QPoint dlg_point, QDialog* origin_dlg, QString origin_msg)
 {
- xpdf_component_main(argc_, argv_, &xpdf_component_, dlg_point, origin_dlg);
+ xpdf_component_main(argc_, argv_, &xpdf_component_, dlg_point, origin_dlg, origin_msg);
 
  QThread* thr = QThread::create([this]
  {

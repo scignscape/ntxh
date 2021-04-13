@@ -24,6 +24,9 @@
 #include <functional>
 
 #include "accessors.h"
+
+#include "global-types.h"
+
 #include "qsns.h"
 
 #include "nav-protocols/nav-ling-1d-panel.h"
@@ -61,6 +64,7 @@ class QTreeWidgetItem;
 class QAbstractButton;
 class QSplitter;
 class QComboBox;
+class QCheckBox;
 
 class ScignStage_Clickable_Label;
 
@@ -125,6 +129,8 @@ class ScignStage_Ling_Dialog : public QDialog
  QStringList forms_;
  QStringList issue_codes_;
 
+ QMap<QString, u4> issue_counts_;
+
  QTreeWidget* main_tree_widget_;
 
  NAV_Ling1D_Panel* nav_panel_;
@@ -168,6 +174,8 @@ class ScignStage_Ling_Dialog : public QDialog
  void group_to_string(QString& result, bool wl);
 
  void save_to_user_select_file(QString text);
+
+ void reset_issue_counts();
 
  QMap<Language_Sample*, QPair<QLabel*, int> > sample_to_label_map_;
 

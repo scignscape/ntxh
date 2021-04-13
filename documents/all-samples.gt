@@ -988,7 +988,7 @@ spicy food. -> syn ;;
 
 `swl -> --- ->  I have to shout because the cars are making a lot of noise outside. -> cog ;;
 
-`swl -> itm:warrendetailed ->  Warren presented more detailed policy proposals than Sanders, at each of the debates, . -> cog ;;
+`swl -> itm:warrendetailed ->  Warren presented more detailed policy proposals than Sanders, at each of the debates where they were both onstage. -> cog ;;
 
 `swl -> itm:tryrestaurant ->  I'd like to try this restaurant. -> sem ;;
 

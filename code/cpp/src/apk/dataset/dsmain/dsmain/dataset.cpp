@@ -40,6 +40,11 @@ Dataset::Dataset(QString root_folder)
    {
     return issue.mid(0, 3).toLower();
    });
+
+ for(QString issue: issue_codes_)
+ {
+  issue_counts_.insert(issue, 0);
+ }
 }
 
 void Dataset::load_from_folder()
@@ -60,6 +65,14 @@ void Dataset::load_from_folder(QString path)
  sdi_document_.load_from_ntxh(samples_file_);
  groups_ = &sdi_document_.language_sample_groups();
  samples_ = &sdi_document_.language_samples();
+
+ // // get issue counts
+
+ for(Language_Sample* samp : *samples_)
+ {
+  ++issue_counts_[samp->issue()];
+ }
+ qDebug() << "issue_counts: " << issue_counts_;
 
  u2 c = 1;
  for(QPair<u2, u2> pr: sdi_document_.subdocument_ranges())

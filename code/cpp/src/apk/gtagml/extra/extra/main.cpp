@@ -19,7 +19,7 @@
 USING_KANS(TextIO)
 
 
-int main(int argc, char *argv[])
+int main1(int argc, char *argv[])
 {
  Unified_Runtime_Object& uro = *Unified_Runtime_Object::instance();
  uro.register_new_metatype_object("Test_Class");
@@ -202,7 +202,7 @@ void copy_and_backup(QString paper_name, QString full_name)
 }
 
 // // a handful of utilities for finalizing the data set ...
-int main1(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
  generate_swl();
 
