@@ -1,5 +1,5 @@
 - Generated from LaTeX File icg.tex 
-12/4/2021, 23:56
+15/4/2021, 16:1
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -57,7 +57,7 @@ $end: 0
 !/ Subdocument 
 $au: Nathaniel Christen
 $start: 0 
-$end: 88 
+$end: 94 
 /!
 <+>
 
@@ -2441,7 +2441,8 @@ $s: 5
 !/ SentenceItem
 $i: 216
 $p: 87
-$t: I authorized him to attend the conference, and I'm expecting him to give a lecture.
+$x: itm:marriedJohn
+$t: A pastor we have known for years married John to Katherine.
 $c: sem
 /!
 <>>
@@ -2449,7 +2450,8 @@ $c: sem
 !/ SentenceItem
 $i: 217
 $p: 87
-$t: I authorized him to attend the conference, and I'm persuading him to give a lecture.
+$x: itm:marriedOff
+$t: His parents finally married John off to Katherine.
 $c: sem
 /!
 <>>
@@ -2459,21 +2461,46 @@ $c: sem
 
 !/ SentenceList
 $i: 64
-$r: 87
-$p: 87
+$r: 93
+$p: 93
 $s: 5
 
 !/ SentenceItem
 $i: 218
-$p: 87
-$t: I authorized him to attend the conference, but I was overruled.
+$p: 93
+$t: I authorized him to attend the conference, and I'm expecting him to give a lecture.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
 $i: 219
-$p: 87
+$p: 93
+$t: I authorized him to attend the conference, and I'm persuading him to give a lecture.
+$c: sem
+/!
+<>>
+
+/!
+<+>
+
+!/ SentenceList
+$i: 65
+$r: 93
+$p: 93
+$s: 5
+
+!/ SentenceItem
+$i: 220
+$p: 93
+$t: I authorized him to attend the conference, but I was overruled.
+$c: sem
+/!
+<>>
+
+!/ SentenceItem
+$i: 221
+$p: 93
 $x: itm:conferencerefused
 $t: I authorized him to attend the conference, but he refused.
 $c: sem
@@ -2481,16 +2508,16 @@ $c: sem
 <>>
 
 !/ SentenceItem
-$i: 220
-$p: 87
+$i: 222
+$p: 93
 $t: I authorized him to attend the conference, but our school said he is just too controversial.
 $c: sem
 /!
 <>>
 
 !/ SentenceItem
-$i: 221
-$p: 87
+$i: 223
+$p: 93
 $x: itm:conferencebusy
 $t: I authorized him to attend the conference, but his school said he is just too busy.
 $c: sem

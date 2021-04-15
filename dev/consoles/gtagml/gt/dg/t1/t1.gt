@@ -1,19 +1,6 @@
 
-;;~ test comment ...
-
-;;-- test 
- comment ...
- ---;; needs to match ...
- --;;
-
-
-
 `p.
-Test sentence one`\[:]
-`p`
-
-`p.
-Test sentence two.  Test sentence three.
+`\(@)`Gard;'s framework.
 `p`
 
 

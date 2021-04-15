@@ -727,8 +727,10 @@ u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
    {{4, '<'}, 188}, // group
    {{4, '>'}, 189}, // group
 
-   {{1, '?'}, 103}, // wp
-   {{1, '!'}, 104}, // wp
+   {{1, '?'}, 83}, // wp
+   {{1, '@'}, 84}, // wp
+
+   {{1, '.'}, 104}, // wp
 
    {{1, '*'}, 95}, // quasi let
 
@@ -790,7 +792,7 @@ MainSwitch:
  case '=': return 86;   //ascii 61
  case '>': return 94;   //ascii 62
 
- case '?': return 103;   //ascii 63
+ case '?': return 83;   //ascii 63
 
  case ' ': return 71;//
  case '\n': return 73;//
@@ -1056,7 +1058,7 @@ u1 GH_Glyphdeck_Standard_8bit::get_sentence_end_swap(u1 gp)
  if( gp == 116 )
    return gp;
 
- if( (gp == 103) || (gp == 75) || (gp == 70) )
+ if( (gp == 83) || (gp == 75) || (gp == 70) )
    return gp;
 
  if( (gp >= 120) && (gp <= 124) )
@@ -1088,8 +1090,14 @@ void get_latex_64_to_117(u1 gp, QString& result)
    "&", // 81 // not part of name  (colloq/subpunctuation)
    "/", // 82 // punc
 
-   "(", // 83 // surround
-   ")", // 84 // surround
+   "?", // 83 // punc
+
+
+//?   "(", // 83 // surround
+//?   ")", // 84 // surround
+
+   // 84 = start of sentence flag ...
+   "{\\zfl}",
 
    "*", // 85 // polite
    "=", // 86 // (quasi math)
@@ -1104,6 +1112,7 @@ void get_latex_64_to_117(u1 gp, QString& result)
    "\\", // 92 // non-punc
    "<", // 93 // quasi-math
    ">", // 94 // quasi-math
+
    "*", // 95 // quasi math
    "\\ssquote", // 96 // ' feet
    "\\sdquote", // 97 // " inches
@@ -1113,11 +1122,15 @@ void get_latex_64_to_117(u1 gp, QString& result)
    "\\ndash{}", // 101
 
    ".", // 102 // num literal
-   "?", // 103 // punc
-   "!", // 104 // //? punc
+
+   "...", // 103 // //? punc ell one char in sentence?
+   "...", // 104 // //? punc ell in sentence?
+
    ".", // 105 // abbr
+
    ".", // 106 // ellipses (1 char)
    ".", // 107 // ellipses part (subpunc)
+
    "_", // 108 // no esc
    "#", // 109 // no esc
    "%", // 110 // no esc
@@ -1486,13 +1499,17 @@ GH_Block_Base::SDI_Interpretation_Codes GH_Glyphdeck_Standard_8bit::get_sdi_inte
 {
  if(gp < 64)
    return GH_Block_Base::SDI_Interpretation_Codes::Letter;
+
+ if(gp == 84)
+   return GH_Block_Base::SDI_Interpretation_Codes::Declared_Fiat_Letter;
+
  if(gp < 118)
  {
   switch (gp)
   {
   case 64: // .
   case 75:
-  case 103: return GH_Block_Base::SDI_Interpretation_Codes::Potential_Sentence_End;
+  case 83: return GH_Block_Base::SDI_Interpretation_Codes::Potential_Sentence_End;
 
    //?
   case 116: return GH_Block_Base::SDI_Interpretation_Codes::Potential_Sentence_End;

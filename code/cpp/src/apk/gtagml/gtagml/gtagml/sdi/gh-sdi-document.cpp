@@ -140,7 +140,8 @@ void GH_SDI_Document::finalize_sentence_boundaries(GH_Block_Base& bl, QString pa
 bool GH_SDI_Document::check_letter(GH_Block_Base& bl, u4 pos)
 {
  GH_Block_Base::SDI_Interpretation_Codes sic = bl.get_sdi_interpretation_code_at_index(pos);
- return sic == GH_Block_Base::SDI_Interpretation_Codes::Letter;
+ return sic == GH_Block_Base::SDI_Interpretation_Codes::Letter
+   || sic == GH_Block_Base::SDI_Interpretation_Codes::Declared_Fiat_Letter;
 }
 
 bool GH_SDI_Document::check_sentence_start_resume(GH_Block_Base& bl, u4 pos)

@@ -1130,6 +1130,11 @@ spicy food. -> syn ;;
 
 `swl -> itm:holdadj ->  Where is a bag to hold the groceries? -> syn ;;
 
+`swl -> itm:marriedJohn ->  A pastor we have known for years married 
+John to Katherine. -> sem ;;
+
+`swl -> itm:marriedOff ->  His parents finally married John off to Katherine. -> sem ;;
+
 `swl -> --- ->  I authorized him to attend the conference, 
 and I'm expecting him to give a lecture. -> sem ;;
 

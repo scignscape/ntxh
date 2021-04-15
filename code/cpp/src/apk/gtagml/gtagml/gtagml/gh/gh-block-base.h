@@ -52,7 +52,7 @@ public:
 
  enum class SDI_Interpretation_Codes
  {
-  N_A, Letter, Hide_Ignore, Potential_Sentence_End, Sentence_End,
+  N_A, Letter, Declared_Fiat_Letter, Hide_Ignore, Potential_Sentence_End, Sentence_End,
   Potential_Sentence_End_Space, Sentence_End_Space,
   GH_Interpretation, Void_Null,
   Declared_Sentence_End,
