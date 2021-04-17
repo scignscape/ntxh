@@ -85,9 +85,13 @@ u4 GH_Block_Standard_8bit::get_declared_sentence_end_space(u4 i, u4 e)
  {
   n8 uu = get_glyph_point_at_index(u);
   GH_Block_Base::Evaluation_Codes ec = glyphdeck_->check_confirm_sentence_end(uu, false);
-  if(ec == GH_Block_Base::Evaluation_Codes::Confirm_Via_Declared)
+  if(ec == GH_Block_Base::Evaluation_Codes::Confirm_Via_Declared
+   // // ok?
+     || ec == GH_Block_Base::Evaluation_Codes::Confirm_Via_Declared_Suspend
+     )
     return i;
  }
+ return 0;
 }
 
 u4 GH_Block_Standard_8bit::check_confirm_sentence_end(u4 i, u4 e)

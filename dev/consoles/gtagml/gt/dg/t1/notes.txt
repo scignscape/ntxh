@@ -1,0 +1,14 @@
+`\(&)  ellipses between sentences
+`\($)  condensed ellipsis at end of sentence (esp with period after)
+
+|+|  sentence end 
+
+`\[,]
+
+
+`\[!]
+`\[?]
+`\[:]
+`\[.]
+
+

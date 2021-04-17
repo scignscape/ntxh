@@ -685,11 +685,6 @@ u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
    {{1, '_'}, 108}, // _ no escape
    {{2, '_'}, 106}, // ell (one ch se)
    {{3, '_'}, 118}, // _ decl s e
-   {{4, '_'}, 106}, // ell (one ch)
-
-
-   {{3, '='}, 125}, // _ decl s e
-   {{3, '@'}, 126}, // _ decl s s
 
 
    {{1, '#'}, 109}, // # no escape
@@ -702,15 +697,31 @@ u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
    {{2, '"'}, 183}, // cdquote
    {{3, '"'}, 97}, // sdquote
 
+   {{1, '?'}, 83}, // wp
+   {{1, '@'}, 84}, // fiat letter
+
+   {{1, '&'}, 103}, // ell between sentences
+
+   {{1, '$'}, 106}, // ell (one ch)
+
    //?{{4, '.'}, 109}, // mdash
 
-   {{1, '.'}, 102}, // n lit
+   {{1, '.'}, 104}, // wp
    {{2, '.'}, 105}, // abbr
    {{3, '.'}, 120}, // declare s end
-   {{4, '.'}, 106}, // ell (part)
+   {{4, '.'}, 102}, // n lit
 
    {{1, ','}, 113}, // n lit
    {{3, ','}, 119}, // _ decl s e
+
+   {{3, '='}, 125}, // _ decl s e
+   {{3, '@'}, 126}, // _ decl s s
+
+   {{4, '~'}, 116}, // _ s e
+   {{3, ':'}, 123}, // _ decl s e
+
+   {{3, '?'}, 121}, // _ decl s e
+   {{3, '!'}, 122}, // _ decl s e
 
    {{4, '('}, 184}, // group
    {{4, ')'}, 185}, // group
@@ -727,18 +738,9 @@ u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
    {{4, '<'}, 188}, // group
    {{4, '>'}, 189}, // group
 
-   {{1, '?'}, 83}, // wp
-   {{1, '@'}, 84}, // wp
-
-   {{1, '.'}, 104}, // wp
 
    {{1, '*'}, 95}, // quasi let
 
-   {{1, ':'}, 116}, // _ s e
-   {{3, ':'}, 123}, // _ decl s e
-
-   {{3, '?'}, 121}, // _ decl s e
-   {{3, '!'}, 122}, // _ decl s e
 
 }};
 
@@ -1058,7 +1060,7 @@ u1 GH_Glyphdeck_Standard_8bit::get_sentence_end_swap(u1 gp)
  if( gp == 116 )
    return gp;
 
- if( (gp == 83) || (gp == 75) || (gp == 70) )
+ if( (gp == 83) || (gp == 75) || (gp == 70)  || (gp == 103) )
    return gp;
 
  if( (gp >= 120) && (gp <= 124) )
@@ -1092,10 +1094,6 @@ void get_latex_64_to_117(u1 gp, QString& result)
 
    "?", // 83 // punc
 
-
-//?   "(", // 83 // surround
-//?   ")", // 84 // surround
-
    // 84 = start of sentence flag ...
    "{\\zfl}",
 
@@ -1123,12 +1121,13 @@ void get_latex_64_to_117(u1 gp, QString& result)
 
    ".", // 102 // num literal
 
-   "...", // 103 // //? punc ell one char in sentence?
+   "...", // 103 // // punc ell between sentence
+
    "...", // 104 // //? punc ell in sentence?
 
    ".", // 105 // abbr
 
-   ".", // 106 // ellipses (1 char)
+   "\\txtdots{}", // 106 // ellipses (1 char)
    ".", // 107 // ellipses part (subpunc)
 
    "_", // 108 // no esc
@@ -1140,7 +1139,8 @@ void get_latex_64_to_117(u1 gp, QString& result)
    ",", // 114 // quasi-math (lit)
    "^", // 115 // quasi-math
 
-   ":", // 116 // se
+   // 116 = abnormal end of sentence flag ...
+   "{\\efl}",
 
    "", // 117 // block boundary whitespace
 
@@ -1500,8 +1500,6 @@ GH_Block_Base::SDI_Interpretation_Codes GH_Glyphdeck_Standard_8bit::get_sdi_inte
  if(gp < 64)
    return GH_Block_Base::SDI_Interpretation_Codes::Letter;
 
- if(gp == 84)
-   return GH_Block_Base::SDI_Interpretation_Codes::Declared_Fiat_Letter;
 
  if(gp < 118)
  {
@@ -1509,7 +1507,15 @@ GH_Block_Base::SDI_Interpretation_Codes GH_Glyphdeck_Standard_8bit::get_sdi_inte
   {
   case 64: // .
   case 75:
-  case 83: return GH_Block_Base::SDI_Interpretation_Codes::Potential_Sentence_End;
+  case 83:
+   return GH_Block_Base::SDI_Interpretation_Codes::Potential_Sentence_End;
+
+  case 84:
+   return GH_Block_Base::SDI_Interpretation_Codes::Declared_Fiat_Letter;
+
+  case 103: // ... between sentences
+   return GH_Block_Base::SDI_Interpretation_Codes::Declared_Fiat_Letter_Sentence_End;
+
 
    //?
   case 116: return GH_Block_Base::SDI_Interpretation_Codes::Potential_Sentence_End;

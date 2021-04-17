@@ -141,7 +141,8 @@ bool GH_SDI_Document::check_letter(GH_Block_Base& bl, u4 pos)
 {
  GH_Block_Base::SDI_Interpretation_Codes sic = bl.get_sdi_interpretation_code_at_index(pos);
  return sic == GH_Block_Base::SDI_Interpretation_Codes::Letter
-   || sic == GH_Block_Base::SDI_Interpretation_Codes::Declared_Fiat_Letter;
+   || sic == GH_Block_Base::SDI_Interpretation_Codes::Declared_Fiat_Letter
+   || sic == GH_Block_Base::SDI_Interpretation_Codes::Declared_Fiat_Letter_Sentence_End;
 }
 
 bool GH_SDI_Document::check_sentence_start_resume(GH_Block_Base& bl, u4 pos)
@@ -206,7 +207,8 @@ u4 GH_SDI_Document::scan_for_sentence_end(GH_Block_Base& bl,
  for(u4 i = start; i <= end; ++i)
  {
   GH_Block_Base::SDI_Interpretation_Codes sic = bl.get_sdi_interpretation_code_at_index(i);
-  if(sic == GH_Block_Base::SDI_Interpretation_Codes::Potential_Sentence_End)
+  if(sic == GH_Block_Base::SDI_Interpretation_Codes::Potential_Sentence_End
+   || sic == GH_Block_Base::SDI_Interpretation_Codes::Declared_Fiat_Letter_Sentence_End)
   {
    if(i == end)
    {

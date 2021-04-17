@@ -454,6 +454,24 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
    graph_build.tile_acc("\n");
   });
 
+  add_rule( gtagml_context, "declare-sentence-end-special-character-sequence",
+    " (?<se> [;:-]) \\s* \\| (?<cue> [=]) \\|",
+    [&]
+  {
+   QString se = p.matched("se");
+   QString cue = p.matched("cue");
+   QString m = QString("`\\[%1]").arg(se);
+   QString m1 = QString("`\\[%1]").arg(cue);
+
+   QString esc = se;
+   QString esc1 = cue;
+   u1 which = 3;
+
+   graph_build.special_character_sequence(m, esc, which);
+   graph_build.special_character_sequence(m1, esc1, which);
+
+  });
+
   add_rule( gtagml_context, "declare-sentence-end",
     " (?<se> [?!;:-] | [.]) (?<mid> [\\])]*)"
     " \\s* \\|\\+\\| \\s* ",
@@ -480,6 +498,13 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
    else if(se == "?")
    {
     m = "`\\[?]";
+    m1 = "`\\[,]";
+    esc = "?";
+    esc1 = ",";
+   }
+   else if(se == "!")
+   {
+    m = "`\\[!]";
     m1 = "`\\[,]";
     esc = "?";
     esc1 = ",";
