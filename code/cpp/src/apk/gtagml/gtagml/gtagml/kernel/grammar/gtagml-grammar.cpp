@@ -455,17 +455,35 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
   });
 
   add_rule( gtagml_context, "declare-sentence-end-special-character-sequence",
-    " (?<se> [;:-]) \\s* \\| (?<cue> [=]) \\|",
+    " (?<se> [,;:-]) (?<sp> \\s*) \\| (?<cue> [=]) \\|",
     [&]
   {
+
    QString se = p.matched("se");
    QString cue = p.matched("cue");
-   QString m = QString("`\\[%1]").arg(se);
+
+   QString esc1 = cue;
    QString m1 = QString("`\\[%1]").arg(cue);
 
-   QString esc = se;
-   QString esc1 = cue;
    u1 which = 3;
+
+//   if(se == ",")
+//   {
+//    QString sp = p.matched("sp");
+
+//    QString m = "`\\<~>";
+//    QString esc = "~";
+//    u1 which0 = 4;
+//    graph_build.tile_acc(se);
+//    graph_build.special_character_sequence(m, esc, which0);
+//    //?graph_build.tile_acc(sp);
+//    graph_build.special_character_sequence(m1, esc1, which);
+//    return;
+//   }
+
+   QString m = QString("`\\[%1]").arg(se);
+   QString esc = se;
+
 
    graph_build.special_character_sequence(m, esc, which);
    graph_build.special_character_sequence(m1, esc1, which);
@@ -473,7 +491,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
   });
 
   add_rule( gtagml_context, "declare-sentence-end",
-    " (?<se> [?!;:-] | [.]) (?<mid> [\\])]*)"
+    " (?<se> [,?!:-] | [.]) (?<mid> [\\])]*)"
     " \\s* \\|\\+\\| \\s* ",
     [&]
   {
@@ -481,40 +499,58 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
    QString mid = p.matched("mid");
    QString m, m1, esc, esc1;
    u1 which = 3; // = "`\\[.]" QString esc = "." u1 which = 3
-   if(se == ".")
+
+   if( (se == ":") || (se == ",") )
    {
-    m = "`\\[.]";
-    m1 = "`\\[,]";
-    esc = ".";
-    esc1 = ",";
+    m = QString("`\\[%1]").arg(se);
+    m1 = "`\\[;]";
+    esc = se;
+    esc1 = ";";
    }
-   else if(se == ":")
-   {
-    m = "`\\[:]";
-    m1 = "`\\[,]";
-    esc = ":";
-    esc1 = ",";
-   }
-   else if(se == "?")
-   {
-    m = "`\\[?]";
-    m1 = "`\\[,]";
-    esc = "?";
-    esc1 = ",";
-   }
-   else if(se == "!")
-   {
-    m = "`\\[!]";
-    m1 = "`\\[,]";
-    esc = "?";
-    esc1 = ",";
-   }
+//   else if(se == ",")
+//   {
+//    m = "`\\[,]";
+//    m1 = "`\\[;]";
+//    esc = ",";
+//    esc1 = ";";
+//   }
 
    else
-     return;
-   // else others?
+   {
+    m1 = "`\\[;]";
+    esc1 = ";";
+   }
 
-   graph_build.special_character_sequence(m, esc, which);
+//   else if(se == ".")
+//   {
+////    m = "`\\[.]";
+//    m1 = "`\\[;]";
+////    esc = ".";
+//    esc1 = ";";
+//   }
+//   else if(se == "?")
+//   {
+//    m = "`\\[?]";
+//    m1 = "`\\[;]";
+//    esc = "?";
+//    esc1 = ";";
+//   }
+//   else if(se == "!")
+//   {
+//    m = "`\\[!]";
+//    m1 = "`\\[;]";
+//    esc = "?";
+//    esc1 = ";";
+//   }
+
+//   else
+//     return;
+//   // else others?
+
+   if(m.isEmpty())
+     graph_build.tile_acc(se);
+   else
+     graph_build.special_character_sequence(m, esc, which);
 
    if(!mid.isEmpty())
      graph_build.tile_acc(mid);

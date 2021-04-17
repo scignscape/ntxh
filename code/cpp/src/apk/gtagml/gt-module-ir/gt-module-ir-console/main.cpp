@@ -12,7 +12,10 @@
 
 #include "textio.h"
 
+#include "get-cmdl.h"
+
 USING_KANS(TextIO)
+USING_KANS(Util)
 
 USING_KANS(DGH)
 
@@ -20,6 +23,14 @@ USING_KANS(DGH)
 int main(int argc, char *argv[])
 {
  GT_Module_IR mir;
+
+ QString paper_name;
+
+ QStringList cmds = get_cmdl(argc, argv);
+
+ QString program_name = cmds.takeFirst();
+
+ //=
 
 // mir.read_lines(QString(R"(
 //   .; the folder is just outside the archive
@@ -30,13 +41,21 @@ int main(int argc, char *argv[])
 //    ;.
 //    )").arg(DEMO_DOCUMENT_FOLDER) );
 
+ if(cmds.isEmpty())
+ {
+  paper_name = "ctg";
+// paper_name = "icg";
+// paper_name = "itm";
+ }
+ else
+   paper_name = cmds.first();
 
-//
- QString paper_name = "ctg";
-// QString paper_name = "icg";
-// QString paper_name = "itm";
 
-// QString paper_name = "jrjr";
+// //  Here in case need to override the cmdline ...
+// paper_name = "ctg";
+// paper_name = "icg";
+// paper_name = "itm";
+
 
  mir.read_lines(QString(R"(
   .; the folder is just outside the archive

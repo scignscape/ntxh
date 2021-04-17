@@ -53,11 +53,22 @@ int main(int argc, char* argv[])
 //
 //
 //
- QString paper_name = "ctg";
+ QString paper_name; //= "ctg";
 // QString paper_name = "icg";
 // QString paper_name = "itm";
 
- QStringList cmdl = get_cmdl(argc, argv, 2, {
+ if(argc >= 3)
+ {
+  paper_name = QString::fromLatin1(argv[2]);
+ }
+ else
+ {
+  paper_name = "ctg";
+  // paper_name = "icg";
+  // paper_name = "itm";
+ }
+
+ QStringList cmdl = get_cmdl(argc, argv, 3, {
    {&folder, QString(DEFAULT_SDI_FOLDER "/%1/src/setup").arg(paper_name)},
    {&file, QString(DEFAULT_SDI_FOLDER "/%1/out/%1.sdi.ntxh").arg(paper_name)},
    {&outfile, QString(DEFAULT_SDI_FOLDER "/%1/sdi-merge.ntxh").arg(paper_name)},

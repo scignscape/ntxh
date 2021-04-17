@@ -112,7 +112,10 @@ u4 GH_Block_Standard_8bit::check_confirm_sentence_end(u4 i, u4 e)
    ++neutral_count;
    continue;
   }
-  if(ec == GH_Block_Base::Evaluation_Codes::Confirm)
+  if(ec == GH_Block_Base::Evaluation_Codes::Confirm
+    //?
+    || ec == GH_Block_Base::Evaluation_Codes::Confirm_Via_Declared
+    )
     return i + neutral_count;
   if(ec == GH_Block_Base::Evaluation_Codes::Refute)
     return 0;

@@ -712,16 +712,19 @@ u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
    {{4, '.'}, 102}, // n lit
 
    {{1, ','}, 113}, // n lit
-   {{3, ','}, 119}, // _ decl s e
+
+   {{3, ';'}, 119}, // _ decl s e
 
    {{3, '='}, 125}, // _ decl s e
    {{3, '@'}, 126}, // _ decl s s
 
    {{4, '~'}, 116}, // _ s e
-   {{3, ':'}, 123}, // _ decl s e
+   {{3, ':'}, 121}, // _ decl s e
 
-   {{3, '?'}, 121}, // _ decl s e
-   {{3, '!'}, 122}, // _ decl s e
+//   {{3, '?'}, 121}, // _ decl s e
+//   {{3, '!'}, 122}, // _ decl s e
+
+   {{3, ','}, 122}, // _ decl s e
 
    {{4, '('}, 184}, // group
    {{4, ')'}, 185}, // group
@@ -1163,11 +1166,11 @@ void get_latex_118_to_127(u1 gp, QString& result)
    " ", // 118
    "\n", // 119
    ".", // 120
-   "?", // 121
-   "!", // 122
-   ":", // 123
+   ":", // 121
+   ",", // 122
 
-//   " ", // 124 se post declare
+   "{\\srs}", // ss resume
+   //   " ", // 123 se post declare
 
    "{\\spsg}", // 124 se suspend to par
 
@@ -1539,17 +1542,20 @@ GH_Block_Base::SDI_Interpretation_Codes GH_Glyphdeck_Standard_8bit::get_sdi_inte
   case 118:
   case 119:
    return GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_End_Space;
-  case 125:
-   return GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_End_Suspend_Space;
-  case 126:
-   return GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_Resume_Space;
 
   case 120:
   case 121:
   case 122:
   case 123:
-  case 124:
    return GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_End;
+
+  case 125:
+   return GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_End_Suspend_Space;
+
+  case 124: // //?
+  case 126:
+   return GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_Resume_Space;
+
   }
  }
  if(gp < 159)

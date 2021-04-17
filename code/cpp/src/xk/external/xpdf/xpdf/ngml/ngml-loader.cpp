@@ -156,8 +156,8 @@ QChar decode(u1 cue)
   case 81: return '&'; // 81 // not part of name  (colloq/subpunctuation)
   case 82: return '/'; // 82 // punc
 
-  case 83: return '('; // 83 // surround
-  case 84: return ')'; // 84 // surround
+  case 83: return ' ';
+  case 84: return ' '; // 84
 
   case 85: return '*'; // 85 // polite
   case 86: return '='; // 86 // (quasi math)
@@ -181,8 +181,8 @@ QChar decode(u1 cue)
   case 101: return '-'; // 101
 
   case 102: return '.'; // 102 // num literal
-  case 103: return '?'; // 103 // punc
-  case 104: return '!'; // 104 // //? punc
+  case 103: return '.'; // 103 // ell between sentence
+  case 104: return '.'; // 104 // ell (condensed)
   case 105: return '.'; // 105 // abbr
   case 106: return '.'; // 106 // ellipses (1 char)
   case 107: return '.'; // 107 // ellipses part (subpunc)
@@ -195,7 +195,14 @@ QChar decode(u1 cue)
   case 114: return ','; // 114 // quasi-math (lit)
   case 115: return '^'; // 115 // quasi-math
 
-  case 116: return ':'; // 116 // se
+  case 116: return ' '; // 116 // se
+  case 117: return ' '; // 116 // se
+
+  case 118: return ' '; 
+  case 119: return '\n'; 
+  case 120: return '.'; 
+  case 121: return ':'; 
+  case 122: return ','; 
 
   default: return ' ';
  }

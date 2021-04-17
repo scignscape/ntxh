@@ -1,87 +1,87 @@
 $$ document-title := Cognitive Transform Grammar
 $$ local-title := section2
 
-$& AnneVilnat %% (1:main) 32811 32898
-$& AsherPustejovsky example%(1:main) 28699 28727,%%p.%%5 %3
-$& AsherPustejovsky %% (1:main) 60270 60272
+$& AnneVilnat %% (1:main) 32812 32899
+$& AsherPustejovsky example%(1:main) 28700 28728,%%p.%%5 %3
+$& AsherPustejovsky %% (1:main) 60272 60274
 $& BarkerShanTG %% (1:main) 3168 3295
-$& ChoeCharniak %% (1:main) 7587 7588
-$& Gardenfors p.%%4 (1:main) 43403 43576
-$& JamesPustejovsky %% (1:main) 60257 60268
-$& JanVanEijck %% (1:main) 10074 10265
-$& KitFine %% (1:main) 46088 46097
-$& KiyoshiSudo %% (1:main) 7585 7586
+$& ChoeCharniak %% (1:main) 7588 7589
+$& Gardenfors p.%%4 (1:main) 43405 43578
+$& JamesPustejovsky %% (1:main) 60259 60270
+$& JanVanEijck %% (1:main) 10075 10266
+$& KitFine %% (1:main) 46090 46099
+$& KiyoshiSudo %% (1:main) 7586 7587
 $& KubotaLevine %% (1:main) 3297 3299
-$& MeryMootRetore p.%%4 (1:main) 34211 34223
-$& OsborneMaxwell %% (1:main) 20534 20691
-$& Pinker %% (1:main) 32732 32810
-$& Ramstead p.%%38 (1:main) 44582 44808
-$& RikVanNoord %% (1:main) 10267 10270
-$& Rossi p.%(1:main) 4693 4905 %3
-$& SivaReddy %% (1:main) 7432 7584
-$& ZhaohuiLuo %% (1:main) 34329 34338
-$& ZhaohuiLuoSignatures %% (1:main) 34340 34343
+$& MeryMootRetore p.%%4 (1:main) 34213 34225
+$& OsborneMaxwell %% (1:main) 20535 20692
+$& Pinker %% (1:main) 32733 32811
+$& Ramstead p.%%38 (1:main) 44584 44810
+$& RikVanNoord %% (1:main) 10268 10271
+$& Rossi p.%(1:main) 4694 4906 %3
+$& SivaReddy %% (1:main) 7433 7585
+$& ZhaohuiLuo %% (1:main) 34331 34340
+$& ZhaohuiLuoSignatures %% (1:main) 34342 34345
 
 
-= 28620:
+= 28621:
 = 1
 Nicholas Asher
 
-= 28634:
+= 28635:
 = 9
 
-= 28639:
+= 28640:
 = 1
 James Pustejovsky
 
-= 28656:
+= 28657:
 = 9
 
-= 32780:
+= 32781:
 = 1
 Steven Pinker
 
-= 32793:
+= 32794:
 = 9
 
-= 43164:
+= 43166:
 = 1
 George Lakoff
 
-= 43177:
+= 43179:
 = 9
 
-= 43179:
+= 43181:
 = 1
 Mark Johnson
 
-= 43191:
+= 43193:
 = 9
 
-= 43193:
+= 43195:
 = 1
 Leonard Talmy
 
-= 43206:
+= 43208:
 = 9
 
-= 43309:
+= 43311:
 = 1
 Jean Petitot
 
-= 43321:
+= 43323:
 = 9
 
-= 43996:
+= 43998:
 = 1
 Maxwell James Ramstead
 
-= 44018:
+= 44020:
 = 9
 
-= 46076:
+= 46078:
 = 1
 Kit Fine
 
-= 46084:
+= 46086:
 = 9
