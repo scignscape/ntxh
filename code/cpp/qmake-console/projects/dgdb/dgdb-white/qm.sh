@@ -3,5 +3,8 @@ if hash git 2>/dev/null; then
 else
   ar=../../../../../..
 fi
-`cat $ar/../preferred/preferred-qmake` "QMAKE_CONSOLE_TARGET_DIR=@/code/cpp/qmake-console/targets" $ar/code/cpp/projects/qt/qtm/isobuild/dbk/dgdb/dgdb-white/dgdb-white/dgdb-white.pro
+preferred_qmake=`cat $ar/../preferred/preferred-qmake`
+preferred_qmake=${preferred_qmake/\~/$HOME/}
+echo $preferred_qmake
+$preferred_qmake  "QMAKE_CONSOLE_TARGET_DIR=@/code/cpp/qmake-console/targets" $ar/code/cpp/projects/qt/qtm/isobuild/dbk/dgdb/dgdb-white/dgdb-white/dgdb-white.pro
 
