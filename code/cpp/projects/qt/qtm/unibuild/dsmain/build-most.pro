@@ -44,6 +44,10 @@ SUBDIRS += \
 
 
 SUBDIRS += \
+  ./build-most/quazip \
+
+
+SUBDIRS += \
   ./build-most/xpdf \
   ./build-most/xpdf-console \
 
@@ -58,7 +62,6 @@ SUBDIRS += \
 
 
 SUBDIRS += \
-  ./build-most/quazip \
   ./build-most/ngml-sdi-console \
   ./build-most/gtagml \
   ./build-most/gtagml-console \

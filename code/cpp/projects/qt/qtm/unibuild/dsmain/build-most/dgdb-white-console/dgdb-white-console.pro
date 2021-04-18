@@ -5,7 +5,7 @@
 #           http://www.boost.org/LICENSE_1_0.txt)
 
 
-UNI_BUILD_CODE = all
+UNI_BUILD_CODE = most
 
 include(../../../dbk/dgdb/dgdb-white/dgdb-white-console/dgdb-white-console.pro)
 

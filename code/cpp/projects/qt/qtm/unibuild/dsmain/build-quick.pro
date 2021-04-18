@@ -52,7 +52,11 @@ SUBDIRS += \
 
 SUBDIRS += \
   ./build-quick/quazip \
+
+
+SUBDIRS += \
   ./build-quick/xpdf \
+  ./build-quick/xpdf-console \
 
 
 SUBDIRS += \
