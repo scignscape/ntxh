@@ -32,11 +32,18 @@ SUBDIRS += \
   ./build-quick/phr-env \
   ./build-quick/phr-fn-doc \
   ./build-quick/phr-command-runtime \
-  ./build-quick/phr-direct-eval \
+
 
 
 SUBDIRS += \
   ./build-quick/kph-generator \
+
+
+SUBDIRS += \
+  ./build-quick/phr-direct-eval \
+
+
+SUBDIRS += \
   ./build-quick/kauvir-phaon-console \
   ./build-quick/kph-generator-console \
   ./build-quick/kph-multigen-console \

@@ -47,7 +47,7 @@ LIBS += -L$$TARGETSDIR -lqh-package
 
 contains(CHOICE_FEATURES, "xpdf") \#/
 {
- LIBS += -L$$TARGETSDIR -lxpdf
+ LIBS += -L$$TARGETSDIR -lxpdf  -lquazip
 }
 
 contains(CHOICE_FEATURES, "pdf-pull") \#/
