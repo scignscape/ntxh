@@ -108,7 +108,7 @@ The code base currently uses Qt5, but a newer Qt major version, Qt6, was release
 This repository demonstrates a fairly extensive range of techniques and features related to dataset management and matching datasets with custom-built applications. There are demo-related components concerning text encoding, database engineering, data serialization, dataset organization, and GUI implementation, including testing and documentation. At this stage, many of these components are more conducive to in-person demonstration than out-of-the-box usability, and the documentation for most of the repository code is incomplete. For these reasons, users are invited to ask questions about the different components that may be found here by browsing through the code base. Hopefully future versions of this repository will include more detailed assistance for users seeking to try out the text-encoding, dataset curation, PDF generation, and related tools for their own C++ projects. 
 
 ---
-**CONSOLE BUILDS and UTILITY SCRIPTS**
+**Console Builds and Utility Scripts**
 
 Some technical information about building/compiling the data set source code 
 is below. Some of this information may be relevant to users for purposes of 
@@ -186,7 +186,7 @@ research data should attempt to clarify the source, origins,
 provenance, and methodology applicable to the data's origination).
 
 ---
-**UDPIPE**
+**UDPipe**
 
 The data set's source code and project files includes code related to UDPipe, a tool for reading files in the Universal Dependency format, developed by the Conference on Computational Natural Language Learning (CoNNL). At this point, the primary purpose of including UDPipe is for reading the sample data and parse representations for those samples derived from a CoNLL-U corpus and included in the data set. As discussed in the essays where the samples are analyzed, a trained CoNLL Dependency Parser was run against some samples so as to demonstrate Universal Dependencies as one grammatic paradigm and methodology, but the current data set and code does not prioritize automated sentence parsing; instead, the UDPipe code is included primary so as to access CoNLL-U files.
 
