@@ -1,0 +1,12 @@
+
+This folder is provided for convenience; files here should not (and if gitignore 
+is written properly will not) be uploaded.  This folder may be useful for 
+temporarily saving some files, e.g. testing that a zip process has 
+worked properly by extracting into a subfolder here.
+
+One example is unzipping the "preferred-zip" file in the "@/preferred" 
+folder for setting up the out-of-source "preferred" sibling folder.  
+After extracting here look for "preferred" inside the 
+unzipped "preferred-zip" folder and the former folder can be 
+copied directly to the parent of the archive root.
+

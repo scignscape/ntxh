@@ -37,6 +37,7 @@ cpp/src/qt-reprozip/export/*
 cpp/qmake-console/targets/*
 
 /temp/*
+!/temp/README
 
 *.fcs
 
