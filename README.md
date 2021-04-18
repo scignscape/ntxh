@@ -22,9 +22,9 @@ Currently, although individual cognitive linguists may have distinctive styles o
 
 Each of the 541 samples are discussed in some detail in the course of several documents included with the data set (some of the samples are also analyzed in prior literature, as referenced within the data fields). The "`documents`" folder includes three essays by Nathaniel Christen which study the samples from different perspectives in Cognitive Grammar. The language samples  are printed in the text as example case-studies -- as is common in pragmatics and related linguistic disciplines -- and the core data set is compiled in its aggregate form by pre-parsing the source code from which these documents were generated.
 
-For readers who find it difficult to compile and use the data-set application (for browsing the samples in isolation), or who don't want to take the time to work with any of these programming tools, the samples can be browsed collectively through a simple Markdown file ("`samples.md`") in the `./documents/markdown` folder -- click [here](./documents/markdown/samples.md) -- to view this file without cloning the repository, if desired. The complete data-set repository contains many files which demonstrate technological features associated with the idea of a cognitive-grammar description language, in addition to the specific data set comprised of these samples, so readers who do not intend to work with any of the supplemental source code directly can use the "`samples`" file for a quick preview of the data set. 
+For readers who find it difficult to compile and use the data-set application (for browsing the samples in isolation), or who don't want to take the time to work with any of these programming tools, the samples can be browsed collectively through a simple Markdown file ("`samples.md`") in the `@/documents/markdown` folder -- click [here](./documents/markdown/samples.md) -- to view this file without cloning the repository, if desired (the "`@`" symbol designates the repository root folder). The complete data-set repository contains many files which demonstrate technological features associated with the idea of a cognitive-grammar description language, in addition to the specific data set comprised of these samples, so readers who do not intend to work with any of the supplemental source code directly can use the "`samples`" file for a quick preview of the data set. 
 
-Readers may also want to browse the essays where the samples are analyzed and from which the samples are extracted, particularly the "CognitiveTransformGrammar.pdf" file in "`./documents`" (this is the most polished paper; the other two are more provisional, but all three were scraped to compile the data set). In lieu of cloning the repository, readers may wish to start by looking at the essay on "Cognitive Transform Grammar" -- click [here](https://github.com/scignscape/ntxh/blob/ctg/documents/CognitiveTransformGrammar.pdf) -- which discusses roughly half the samples. Note that the analyses (and the curation of the data set as a whole) are those of Nathaniel Christen, a co-author but not primary author on Joseph Lehmann's paper, and don't necessarily reflect the views of the other authors (though I have no reason to suspect that they would substantially disagree with my argumentation). 
+Readers may also want to browse the essays where the samples are analyzed and from which the samples are extracted, particularly the "CognitiveTransformGrammar.pdf" file in "`@/documents`" (this is the most polished paper; the other two are more provisional, but all three were scraped to compile the data set). In lieu of cloning the repository, readers may wish to start by looking at the essay on "Cognitive Transform Grammar" -- click [here](https://github.com/scignscape/ntxh/blob/ctg/documents/CognitiveTransformGrammar.pdf) -- which discusses roughly half the samples. Note that the analyses (and the curation of the data set as a whole) are those of Nathaniel Christen, a co-author but not primary author on Joseph Lehmann's paper, and don't necessarily reflect the views of the other authors (though I have no reason to suspect that they would substantially disagree with my argumentation). 
 
 Amongst the data set, some of the samples were previously analyzed (or similar to ones previously analyzed) by linguists such as Ronald Langacker, Jens Allwood, and James Pustejovsky; some samples with prosodic markup or distinct prosodic features are taken from Langacker, Julia Hirshberg, the Blackwell _Handbook of Pragmatics_, and an article by Laura A. Michaelis and Knud Lambrecht; and other samples are taken from a CoNLL corpus (see below). 
 
@@ -124,13 +124,13 @@ with only one or two steos. Full discussion of Qt Creator is outside
 the scope of this overview, but it is easy to find documentation 
 for Qt Creator (which is free for non-commercial use) explaining 
 how to build and run C++ projects. In the data set, all Qt "project" files are 
-located under the "`code/cpp/projects`" directory.
+located under the "`@/code/cpp/projects`" directory (again, the "`@`" symbol designates the repository root folder).
 
 In some circumstances a user may prefer to build some of the data-set libraries 
 or executables from a command line instead of within Qt Creator. Each 
 of the data-set projects is designed to identify during compilation (and 
 if necessary at runtime) whether it is being built in this 
-"console" mode and alter its behavior accordingly. The `"code/cpp/qmake-console"` 
+"console" mode and alter its behavior accordingly. The `"@/code/cpp/qmake-console"` 
 directory includes a "`projects`" folder which contains (within subfolders) 
 command-line scripts that run "`qmake`" and can run "`make`" (thereby 
 replicating the build steps which Qt Creator takes) on many of the project 
@@ -142,7 +142,7 @@ executable (rather than a library).
 Casual users would presumably have little reason to build and run projects 
 in this manner. However, the project-specific run scripts have the 
 side-benefit of allowing certain steps in preparing the data set to be 
-executed automatically. In particular, the top `"code/cpp/qmake-console"` 
+executed automatically. In particular, the top `"@/code/cpp/qmake-console"` 
 includes several scripts which are executed prior to revisions of the data 
 set being uploaded. These scripts automate numerous tasks 
 related to preparing the data set and its associated documents, including 
@@ -156,10 +156,10 @@ The data set is structured so that the editing and preparing of documents is
 conducted in folders which do not become part of the data set itself. 
 By default, the publications (or supplementary/explanatory texts) which 
 are intended to be part of or associated with the data set are assumed to be 
-located within a "`dev/documents`" directory which is a _sibling_ folder 
+located within a "`@/dev/documents`" directory which is a _sibling_ folder 
 to the repository root. A utility scripts creates a zipped version 
 of the `GTagML` files most recently used to create relevant documents 
-and places the resulting zip file in the repository's "`dev/documents/gen`" 
+and places the resulting zip file in the repository's "`@/dev/documents/gen`" 
 folder, but it is assumed that those files will be unzipped to their 
 expected out-of-source location for any user who wishes to recreate 
 the steps taken to construct the data set to begin with (a utility 
@@ -184,6 +184,49 @@ Cognitive Grammar) data sets in the feature, and partly in
 the spirit of transparency (insofar as those who publish 
 research data should attempt to clarify the source, origins, 
 provenance, and methodology applicable to the data's origination).
+
+
+---
+**Setting up a Development Environment**
+
+Once you have cloned the data set (see below) and wish to view the data set through 
+the data-set specific application (rather than via Dryad or accompanying papers) 
+it is necessary to compile and build the data-set application. The easiest way to 
+do this is via Qt Creator. This seection assumes that each user has Qt (the libraries) 
+and Qt Creator (the IDE) installed on their computer and has no difficulty compiling, 
+building, and running C++ projects within this IDE.
+
+To get started with the data set, begin with the project called "`build-first`". 
+Specifically, within Qt Creator open the project at the location 
+"`@/code/cpp/projects/qt/qtm/unibuild/dsmain/build-first.pro`". This project should 
+build and run without further preparation (except for potential 
+font-related issues; see below), assuming the development environment 
+is set up for Qt in general. This build option provides a basic version of 
+the data-set application and can serve as a check that the development environment 
+is working correctly.
+
+To examine more advanced features of the data set, it is necessary to set up a 
+"`preferred`" folder, which must be a _sibling_ folder to the archive 
+root called "`preferred`". Inside that folder would be several files indicating 
+"preferred" paths for certain tools needed for the data set (except for 
+basic usage), such as `qmake` and `pdflatex`, as well as several "`.pri`" 
+files (which are similar to Qt `pro` project files but can be included in other 
+"`.pri`" or "`.pro`"s) providing users opportunities to customize certain 
+dependencies and out-of-source locations. Users can examine the 
+`@/preferred` folder for a template of the proper out-of-source 
+`preferred` folder (note that `sysroot`-related files are not needed 
+by most users). Within the `@/preferred` folder is a zipped `preferred-zip` 
+file for convenience, which can be extracted (within the convenience "`@/temp`" 
+folder, if desired), then copy the `preferred` subfolder to the 
+parent directory of the archive root, so that `preferred` becomes the root's sibling.
+
+With the `preferred` folder in place, the simplest build option to 
+try next is `build-quick`, which is located in the same folder as 
+`build-first`. It should be possible to build and run `build-quick` 
+at this point providing essentially the same data-set application 
+as before (via `build-first`) but with additional built-in features.
+
+More complex build options and use-cases are discussed below.
 
 ---
 **UDPipe**
@@ -231,7 +274,7 @@ The code in this data set is designed to build and run within Qt Creator.  You d
 
 This data set includes a slightly modified version of the open-source XPDF reader (see https://www.xpdfreader.com/).  Users are encouraged to also install the official XPDF Reader.  The version distributed in this repository has been modified to work primarily with this data set.
 
-Users may want to edit the "`./code/cpp/src/xk/external/xpdf/xpdf/aconf/aconf.h`" file.  If you have (or choose to install) an official XPDF Reader you may want to copy "`aconf.h`" from that code base ("`aconf.h`" will be generated during cmake; this data set provides a default "`aconf.h`" file to eliminate the need for cmake as a build tool for the data set over all).
+Users may want to edit the "`@/code/cpp/src/xk/external/xpdf/xpdf/aconf/aconf.h`" file.  If you have (or choose to install) an official XPDF Reader you may want to copy "`aconf.h`" from that code base ("`aconf.h`" will be generated during cmake; this data set provides a default "`aconf.h`" file to eliminate the need for cmake as a build tool for the data set over all).
 
 ---
 **TROUBLESHOOTING**
@@ -272,9 +315,9 @@ fnd -> read  "test-fn";
 
 Multiple samples can be executed in sequence with the project/executable called "`rz-multi-console`".
 
-So for example, after confirming that "`t1.rz`" runs properly, try "`rz-multi-console`" which (as coded) will run all scripts listed in the "`./dev/scripts/rz/demo/multi`" file; "`m1.txt`" lists scripts to run in sequence (e.g. as an informal test suite). 
+So for example, after confirming that "`t1.rz`" runs properly, try "`rz-multi-console`" which (as coded) will run all scripts listed in the "`@/dev/scripts/rz/demo/multi`" file; "`m1.txt`" lists scripts to run in sequence (e.g. as an informal test suite). 
 
-Testing multiple scripts can also be achieved by including them all in one script with "`<#...>`" notation, e.g. script "`t24.rz`" in "`./dev/scripts/rz/demo/multi`" has the two lines "`<#t23>`" and "`<#t25>`".
+Testing multiple scripts can also be achieved by including them all in one script with "`<#...>`" notation, e.g. script "`t24.rz`" in "`@/dev/scripts/rz/demo/multi`" has the two lines "`<#t23>`" and "`<#t25>`".
 
 ---
 **COMMENTS**
