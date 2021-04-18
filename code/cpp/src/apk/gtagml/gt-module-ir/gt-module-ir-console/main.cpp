@@ -28,10 +28,6 @@ int main(int argc, char *argv[])
 
  QStringList cmds = get_cmdl(argc, argv);
 
- QString program_name = cmds.takeFirst();
-
- //=
-
 // mir.read_lines(QString(R"(
 //   .; the folder is just outside the archive
 //      but it is copied in @/dev/documents/ctg ...
@@ -41,20 +37,21 @@ int main(int argc, char *argv[])
 //    ;.
 //    )").arg(DEMO_DOCUMENT_FOLDER) );
 
- if(cmds.isEmpty())
+ if(cmds.size() >= 3)
  {
-  paper_name = "ctg";
-// paper_name = "icg";
-// paper_name = "itm";
+  paper_name = cmds.at(2);
  }
  else
-   paper_name = cmds.first();
+ {
+  paper_name = "ctg";
+  // paper_name = "icg";
+  // paper_name = "itm";
+ }
 
-
-// //  Here in case need to override the cmdline ...
-// paper_name = "ctg";
-// paper_name = "icg";
-// paper_name = "itm";
+ // //  Here in case need to override the cmdline ...
+ // paper_name = "ctg";
+ // paper_name = "icg";
+ // paper_name = "itm";
 
 
  mir.read_lines(QString(R"(

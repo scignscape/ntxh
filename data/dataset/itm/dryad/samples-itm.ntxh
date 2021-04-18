@@ -1,5 +1,5 @@
 - Generated from LaTeX File itm.tex 
-16/4/2021, 19:37
+18/4/2021, 1:6
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -57,7 +57,7 @@ $end: 0
 !/ Subdocument 
 $au: Nathaniel Christen
 $start: 0 
-$end: 58 
+$end: 59 
 /!
 <+>
 
@@ -65,13 +65,13 @@ $end: 58
 
 !/ SentenceList
 $i: 1
-$r: 9
-$p: 9
+$r: 10
+$p: 10
 $s: 1
 
 !/ SentenceItem
 $i: 1
-$p: 9
+$p: 10
 $x: itm:ornate
 $t: He opened the wine bottle with an ornate corkscrew.
 $c: rol
@@ -80,7 +80,7 @@ $c: rol
 
 !/ SentenceItem
 $i: 2
-$p: 9
+$p: 10
 $x: itm:butterfly
 $t: He opened the beer bottle with a butterfly corkscrew.
 $c: rol
@@ -89,7 +89,7 @@ $c: rol
 
 !/ SentenceItem
 $i: 3
-$p: 9
+$p: 10
 $x: itm:screwtop
 $t: I thought this was a screw-top but it turns out I need a corkscrew.
 $c: rol
@@ -98,7 +98,7 @@ $c: rol
 
 !/ SentenceItem
 $i: 4
-$p: 9
+$p: 10
 $x: itm:x3d
 $t: This X3D file shows a very realistic corkscrew created with NURBS surfaces.
 $c: rol
@@ -107,7 +107,7 @@ $c: rol
 
 !/ SentenceItem
 $i: 5
-$p: 9
+$p: 10
 $x: itm:sendx3d
 $t: Could you send me the corkscrew (the X3D file you just mentioned)?
 $c: rol
@@ -119,13 +119,13 @@ $c: rol
 
 !/ SentenceList
 $i: 2
-$r: 9
-$p: 9
+$r: 11
+$p: 11
 $s: 1
 
 !/ SentenceItem
 $i: 6
-$p: 9
+$p: 11
 $t: Do you have a bottle opener?
 $c: rol
 /!
@@ -133,7 +133,7 @@ $c: rol
 
 !/ SentenceItem
 $i: 7
-$p: 9
+$p: 11
 $t: Could you get me a corkscrew?
 $c: rol
 /!
@@ -144,13 +144,13 @@ $c: rol
 
 !/ SentenceList
 $i: 3
-$r: 10
-$p: 10
+$r: 11
+$p: 11
 $s: 1
 
 !/ SentenceItem
 $i: 8
-$p: 10
+$p: 11
 $x: itm:hammer
 $t: He opened the bottle of beer with a hammer.
 $c: rol
@@ -159,7 +159,7 @@ $c: rol
 
 !/ SentenceItem
 $i: 9
-$p: 10
+$p: 11
 $t: He pounded the nail with a lever corkscrew.
 $c: rol
 /!
@@ -170,13 +170,13 @@ $c: rol
 
 !/ SentenceList
 $i: 4
-$r: 10
-$p: 10
+$r: 11
+$p: 11
 $s: 1
 
 !/ SentenceItem
 $i: 10
-$p: 10
+$p: 11
 $t: A hammer is something used to pound nails.
 $c: rol
 /!
@@ -184,7 +184,7 @@ $c: rol
 
 !/ SentenceItem
 $i: 11
-$p: 10
+$p: 11
 $t: A lever corkscrew is something used to open wine.
 $c: rol
 /!
@@ -192,7 +192,7 @@ $c: rol
 
 !/ SentenceItem
 $i: 12
-$p: 10
+$p: 11
 $t: A lever corkscrew can be used to pound nails.
 $c: rol
 /!
@@ -203,13 +203,13 @@ $c: rol
 
 !/ SentenceList
 $i: 5
-$r: 10
-$p: 10
+$r: 12
+$p: 12
 $s: 1
 
 !/ SentenceItem
 $i: 13
-$p: 10
+$p: 12
 $x: itm:bucket
 $t: Can you bring me a bucket of water?
 $c: rol
@@ -218,7 +218,7 @@ $c: rol
 
 !/ SentenceItem
 $i: 14
-$p: 10
+$p: 12
 $x: itm:glass
 $t: Can you bring me a glass of water?
 $c: rol
@@ -230,13 +230,13 @@ $c: rol
 
 !/ SentenceList
 $i: 6
-$r: 10
-$p: 10
+$r: 12
+$p: 12
 $s: 1
 
 !/ SentenceItem
 $i: 15
-$p: 10
+$p: 12
 $t: The ocean is over there.
 $c: rol
 /!
@@ -244,7 +244,7 @@ $c: rol
 
 !/ SentenceItem
 $i: 16
-$p: 10
+$p: 12
 $t: The water is over there.
 $c: rol
 /!
@@ -252,7 +252,7 @@ $c: rol
 
 !/ SentenceItem
 $i: 17
-$p: 10
+$p: 12
 $t: You can see the ocean from here.
 $c: rol
 /!
@@ -260,7 +260,7 @@ $c: rol
 
 !/ SentenceItem
 $i: 18
-$p: 11
+$p: 12
 $t: You can see the water from here.
 $c: rol
 /!
@@ -271,13 +271,13 @@ $c: rol
 
 !/ SentenceList
 $i: 7
-$r: 11
-$p: 11
+$r: 12
+$p: 12
 $s: 1
 
 !/ SentenceItem
 $i: 19
-$p: 11
+$p: 12
 $t: The water and the Deuterium Dioxide is over there.
 $c: rol
 /!
@@ -288,13 +288,13 @@ $c: rol
 
 !/ SentenceList
 $i: 8
-$r: 11
-$p: 11
+$r: 13
+$p: 12
 $s: 1
 
 !/ SentenceItem
 $i: 20
-$p: 11
+$p: 13
 $t: Here's a glass of water.
 $c: rol
 /!
@@ -302,7 +302,7 @@ $c: rol
 
 !/ SentenceItem
 $i: 21
-$p: 11
+$p: 13
 $t: Bing cherries are dark red.
 $c: rol
 /!
@@ -313,13 +313,13 @@ $c: rol
 
 !/ SentenceList
 $i: 9
-$r: 24
-$p: 24
+$r: 26
+$p: 26
 $s: 2
 
 !/ SentenceItem
 $i: 22
-$p: 24
+$p: 26
 $x: itm:across
 $t: Our house is across the lake.
 $c: cog
@@ -328,7 +328,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 23
-$p: 24
+$p: 26
 $x: itm:pour
 $t: I poured wine from a decanter.
 $c: cog
@@ -337,7 +337,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 24
-$p: 24
+$p: 26
 $x: itm:spill
 $t: Some wine spilled from the decanter.
 $c: cog
@@ -346,7 +346,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 25
-$p: 24
+$p: 26
 $x: itm:puton
 $t: I put spackle on the wall with a knife.
 $c: cog
@@ -355,7 +355,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 26
-$p: 24
+$p: 26
 $x: itm:spatter
 $t: Paint spattered all over the wall after a can droppped.
 $c: cog
@@ -364,7 +364,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 27
-$p: 24
+$p: 26
 $x: itm:colorallover
 $t: There's a purple-and-blue color pattern all over the wall.
 $c: cog
@@ -373,7 +373,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 28
-$p: 24
+$p: 26
 $t: There are drawings all over the wall.
 $c: cog
 /!
@@ -381,7 +381,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 29
-$p: 24
+$p: 26
 $x: itm:sheetallover
 $t: There's a plastic sheet all over the wall.
 $c: cog
@@ -393,13 +393,13 @@ $c: cog
 
 !/ SentenceList
 $i: 10
-$r: 26
-$p: 26
+$r: 27
+$p: 27
 $s: 2
 
 !/ SentenceItem
 $i: 30
-$p: 26
+$p: 27
 $x: itm:apartment
 $t: I'm going to a party at my brother's house.
 $c: sem
@@ -408,7 +408,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 31
-$p: 26
+$p: 27
 $t: This restaurant has the best Hokkien noodles.
 $c: sem
 /!
@@ -419,13 +419,13 @@ $c: sem
 
 !/ SentenceList
 $i: 11
-$r: 27
-$p: 27
+$r: 29
+$p: 29
 $s: 2
 
 !/ SentenceItem
 $i: 32
-$p: 27
+$p: 29
 $t: He had to cut the crusty bread with a serrated knife.
 $c: cog
 /!
@@ -433,7 +433,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 33
-$p: 27
+$p: 29
 $t: The museum had antique butter knives with intricate carvings.
 $c: cog
 /!
@@ -444,13 +444,13 @@ $c: cog
 
 !/ SentenceList
 $i: 12
-$r: 30
-$p: 30
+$r: 31
+$p: 31
 $s: 2
 
 !/ SentenceItem
 $i: 34
-$p: 30
+$p: 31
 $t: What time does the office open?
 $c: log
 /!
@@ -458,7 +458,7 @@ $c: log
 
 !/ SentenceItem
 $i: 35
-$p: 30
+$p: 31
 $x: itm:phone
 $t: What time does train 100 depart from Newark?
 $c: log
@@ -470,13 +470,14 @@ $c: log
 
 !/ SentenceList
 $i: 13
-$r: 41
-$p: 41
+$r: 42
+$p: 42
 $s: 3
 
 !/ SentenceItem
 $i: 36
-$p: 41
+$p: 42
+$x: ---{}
 $t: Today is Tuesday.
 $c: syn
 /!
@@ -484,7 +485,8 @@ $c: syn
 
 !/ SentenceItem
 $i: 37
-$p: 41
+$p: 42
+$x: ---{}
 $t: The big departmental meeting is Tuesday.
 $c: syn
 /!
@@ -492,7 +494,8 @@ $c: syn
 
 !/ SentenceItem
 $i: 38
-$p: 41
+$p: 42
+$x: ---{}
 $t: It is very windy.
 $c: syn
 /!
@@ -500,7 +503,8 @@ $c: syn
 
 !/ SentenceItem
 $i: 39
-$p: 41
+$p: 42
+$x: ---{}
 $t: The lousy weather is very windy.
 $c: syn
 /!
@@ -508,7 +512,8 @@ $c: syn
 
 !/ SentenceItem
 $i: 40
-$p: 41
+$p: 42
+$x: ---{}
 $t: They are forecasting snow.
 $c: syn
 /!
@@ -516,7 +521,8 @@ $c: syn
 
 !/ SentenceItem
 $i: 41
-$p: 41
+$p: 42
+$x: ---{}
 $t: The latest reports are forecasting snow.
 $c: syn
 /!
@@ -527,13 +533,14 @@ $c: syn
 
 !/ SentenceList
 $i: 14
-$r: 41
-$p: 41
+$r: 43
+$p: 43
 $s: 3
 
 !/ SentenceItem
 $i: 42
-$p: 41
+$p: 43
+$x: ---{}
 $t: She is a salaried employee.
 $c: syn
 /!
@@ -541,7 +548,8 @@ $c: syn
 
 !/ SentenceItem
 $i: 43
-$p: 41
+$p: 43
+$x: ---{}
 $t: He is an elected official.
 $c: syn
 /!
@@ -552,13 +560,13 @@ $c: syn
 
 !/ SentenceList
 $i: 15
-$r: 49
-$p: 49
+$r: 51
+$p: 51
 $s: 3
 
 !/ SentenceItem
 $i: 44
-$p: 49
+$p: 51
 $x: itm:penguin
 $t: A penguin is a flightless bird.
 $c: cog
@@ -567,7 +575,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 45
-$p: 49
+$p: 51
 $x: itm:rhino
 $t: Rhinos in that park are threatened by poachers.
 $c: cog
@@ -576,7 +584,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 46
-$p: 49
+$p: 51
 $x: itm:elephant
 $t: Baby elephants don't have tusks.
 $c: cog
@@ -588,13 +596,13 @@ $c: cog
 
 !/ SentenceList
 $i: 16
-$r: 50
-$p: 50
+$r: 51
+$p: 51
 $s: 3
 
 !/ SentenceItem
 $i: 47
-$p: 50
+$p: 51
 $x: itm:koreanstore
 $t: My favorite Korean restaurant is adjacent to the bookstore.
 $c: typ
@@ -603,7 +611,7 @@ $c: typ
 
 !/ SentenceItem
 $i: 48
-$p: 50
+$p: 51
 $x: itm:koreanclosed
 $t: My favorite Korean restaurant is closed today.
 $c: typ
@@ -612,7 +620,7 @@ $c: typ
 
 !/ SentenceItem
 $i: 49
-$p: 50
+$p: 51
 $x: itm:koreanposter
 $t: My favorite Korean restaurant is decorated with posters from the 2002 World Cup.
 $c: typ
@@ -621,7 +629,7 @@ $c: typ
 
 !/ SentenceItem
 $i: 50
-$p: 50
+$p: 51
 $x: itm:koreanstarted
 $t: My favorite Korean restaurant started out in a food court.
 $c: typ
@@ -630,7 +638,7 @@ $c: typ
 
 !/ SentenceItem
 $i: 51
-$p: 50
+$p: 51
 $x: itm:koreanloyal
 $t: My favorite Korean restaurant said I'm their most loyal customer.
 $c: typ
@@ -639,7 +647,7 @@ $c: typ
 
 !/ SentenceItem
 $i: 52
-$p: 50
+$p: 51
 $x: itm:bark
 $t: She's constantly barking at her employees.
 $c: typ
@@ -648,7 +656,7 @@ $c: typ
 
 !/ SentenceItem
 $i: 53
-$p: 50
+$p: 51
 $x: itm:back
 $t: He's not playing well because his back is barking at him.
 $c: typ
@@ -657,7 +665,7 @@ $c: typ
 
 !/ SentenceItem
 $i: 54
-$p: 50
+$p: 51
 $x: itm:actup
 $t: He's not playing well because his sore back is acting up.
 $c: typ
@@ -666,7 +674,7 @@ $c: typ
 
 !/ SentenceItem
 $i: 55
-$p: 50
+$p: 51
 $x: itm:kitten
 $t: The kitten barked at the dog.
 $c: typ
@@ -678,13 +686,13 @@ $c: typ
 
 !/ SentenceList
 $i: 17
-$r: 51
-$p: 51
+$r: 52
+$p: 52
 $s: 3
 
 !/ SentenceItem
 $i: 56
-$p: 51
+$p: 52
 $x: itm:teaduck
 $t: Tea-smoked duck is a Sichuan delicacy.
 $c: ont
@@ -693,7 +701,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 57
-$p: 51
+$p: 52
 $x: itm:rubberduck
 $t: The baby's favorite toy is a rubber duck.
 $c: ont
@@ -702,7 +710,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 58
-$p: 51
+$p: 52
 $x: itm:weddingduck
 $t: Wedding ducks are traditional Korean gifts.
 $c: ont
@@ -714,13 +722,14 @@ $c: ont
 
 !/ SentenceList
 $i: 18
-$r: 51
-$p: 51
+$r: 52
+$p: 52
 $s: 3
 
 !/ SentenceItem
 $i: 59
-$p: 51
+$p: 52
+$x: ---{}
 $t: This book, which costs 40 dollars, has some crazy ideas inside.
 $c: ont
 /!
@@ -728,7 +737,8 @@ $c: ont
 
 !/ SentenceItem
 $i: 60
-$p: 51
+$p: 52
+$x: ---{}
 $t: This book, which the library classifies as young adult nonfiction, has some dude's phone number scrawled inside.
 $c: ont
 /!
@@ -736,7 +746,8 @@ $c: ont
 
 !/ SentenceItem
 $i: 61
-$p: 51
+$p: 52
+$x: ---{}
 $t: My boss barks louder than his dog does.
 $c: ont
 /!

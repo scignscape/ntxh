@@ -419,6 +419,9 @@ void NGML_Loader::load_pages(XpdfWidget* pdf, QString file_name)
 
  QString dest = qd.absoluteFilePath( pdf->unzip_file() );
 
+ qDebug() << "First Unzip Source: " << src;
+ qDebug() << "First Unzip Destination: " << dest;
+
  QFile::copy(src, dest);
 
  // // need to unzip ...

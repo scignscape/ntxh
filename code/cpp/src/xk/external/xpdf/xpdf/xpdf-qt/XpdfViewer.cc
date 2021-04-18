@@ -73,8 +73,21 @@ void process_sdi_file(XpdfWidget* pdf, int idx, QString file_name)
 {
  qDebug() << "Path: " << file_name;
  file_name.prepend("auto-unzip_");
- if(pdf->saveEmbeddedFile(idx, file_name))
-   pdf->set_unzip_file(file_name);
+
+ QString appd = QCoreApplication::applicationDirPath();
+ QDir appqd(appd);
+
+ QString file_path = appqd.absoluteFilePath( file_name );
+
+ if(pdf->saveEmbeddedFile(idx, file_path))
+ {
+  qDebug() << "Saved unzip to: " << file_path;
+  pdf->set_unzip_file(file_name);
+ }
+ else
+ {
+  qDebug() << "Failed to save embedded file: " << file_path;
+ }
 // QString rt = load_file(file_name);
 // qDebug() << "RT: " << rt;
  

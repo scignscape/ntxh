@@ -67,6 +67,25 @@ void get_section_files(QString paper_name, QMap<QString, QString>& result)
 
 }
 
+void get_source_files(QString paper_name, QMap<QString, QStringList>& result)
+{
+ QString folder = ROOT_FOLDER "/../dev/documents/" + paper_name + "/src";
+
+ QDirIterator qdi(folder, {"*.gt", "*.tex"});
+ while(qdi.hasNext())
+ {
+  qdi.next();
+  QString fp = qdi.filePath();
+  QFileInfo qfi(fp);
+  if(qfi.completeSuffix() == "gt.tex")
+    continue;
+  if(qfi.completeSuffix() == "prep.tex")
+    continue;
+  result[paper_name].push_back(fp);
+ }
+}
+
+
 void generate_swl()
 {
  // //  Pull all the `swl tag-commands
@@ -78,6 +97,37 @@ void generate_swl()
  get_section_files("itm", files);
 
  qDebug() << files;
+
+
+ QMap<QString, QStringList> source_files;
+
+ get_source_files("ctg", source_files);
+ get_source_files("icg", source_files);
+ get_source_files("itm", source_files);
+
+ QString src_copy_folder = ROOT_FOLDER "/../dev";
+ QDir scdir(src_copy_folder);
+ if(!scdir.exists("src-copy"))
+   scdir.mkdir("src-copy");
+ scdir.cd("src-copy");
+ QMapIterator<QString, QStringList> sfit(source_files);
+ while(sfit.hasNext())
+ {
+  sfit.next();
+  QString pn = sfit.key();
+  if(!scdir.exists(pn))
+    scdir.mkdir(pn);
+  scdir.cd(pn);
+  if(!scdir.exists("src"))
+    scdir.mkdir("src");
+  scdir.cd("src");
+  for(QString sf : sfit.value())
+  {
+   copy_binary_file_to_folder(sf, scdir.absolutePath());
+  }
+  scdir.cdUp();
+  scdir.cdUp();
+ }
 
  QString all_swl = R"(
 ;;--
