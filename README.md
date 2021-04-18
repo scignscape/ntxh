@@ -120,7 +120,7 @@ Integrated Development Environment (IDE) especially designed for
 C++ projects which use the Qt application-development framework. 
 Within Qt creator, the data-set application (and supplemental 
 testing/development features, if desired) can typically be built and run 
-with only one or two quicks. Full discussion of Qt Creator is outside 
+with only one or two steos. Full discussion of Qt Creator is outside 
 the scope of this overview, but it is easy to find documentation 
 for Qt Creator (which is free for non-commercial use) explaining 
 how to build and run C++ projects. In the data set, all Qt "project" files are 
@@ -143,7 +143,7 @@ Casual users would presumably have little reason to build and run projects
 in this manner. However, the project-specific run scripts have the 
 side-benefit of allowing certain steps in preparing the data set to be 
 executed automatically. In particular, the top `"code/cpp/qmake-console"` 
-includes several steps which are executed prior to revisions of the data 
+includes several scripts which are executed prior to revisions of the data 
 set being uploaded. These scripts automate numerous tasks 
 related to preparing the data set and its associated documents, including 
 generating "`LaTeX`" sources, running the system "`pdfLatex`" command, 
@@ -178,7 +178,7 @@ data set is generated, as opposed to simply viewing the language
 samples. 
 
 Every effort has been made to include tools for aggregating the data set 
-itself within this code repository partly to serve as a prototype 
+itself within this code repository -- partly to serve as a prototype 
 of a system for curating other linguistics (and especially 
 Cognitive Grammar) data sets in the feature, and partly in 
 the spirit of transparency (insofar as those who publish 
