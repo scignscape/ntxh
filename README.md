@@ -108,6 +108,84 @@ The code base currently uses Qt5, but a newer Qt major version, Qt6, was release
 This repository demonstrates a fairly extensive range of techniques and features related to dataset management and matching datasets with custom-built applications. There are demo-related components concerning text encoding, database engineering, data serialization, dataset organization, and GUI implementation, including testing and documentation. At this stage, many of these components are more conducive to in-person demonstration than out-of-the-box usability, and the documentation for most of the repository code is incomplete. For these reasons, users are invited to ask questions about the different components that may be found here by browsing through the code base. Hopefully future versions of this repository will include more detailed assistance for users seeking to try out the text-encoding, dataset curation, PDF generation, and related tools for their own C++ projects. 
 
 ---
+**CONSOLE BUILDS and UTILITY SCRIPTS**
+
+Some technical information about building/compiling the data set source code 
+is below. Some of this information may be relevant to users for purposes of 
+explaining how the data set files are organized (and on some cases generated) 
+so these details are provided here.
+
+The easiest way to use the data-set application is via Qt Creator, an 
+Integrated Development Environment (IDE) especially designed for 
+C++ projects which use the Qt application-development framework. 
+Within Qt creator, the data-set application (and supplemental 
+testing/development features, if desired) can typically be built and run 
+with only one or two quicks. Full discussion of Qt Creator is outside 
+the scope of this overview, but it is easy to find documentation 
+for Qt Creator (which is free for non-commercial use) explaining 
+how to build and run C++ projects. In the data set, all Qt "project" files are 
+located under the "`code/cpp/projects`" directory.
+
+In some circumstances a user may prefer to build some of the data-set libraries 
+or executables from a command line instead of within Qt Creator. Each 
+of the data-set projects is designed to identify during compilation (and 
+if necessary at runtime) whether it is being built in this 
+"console" mode and alter its behavior accordingly. The `"code/cpp/qmake-console"` 
+directory includes a "`projects`" folder which contains (within subfolders) 
+command-line scripts that run "`qmake`" and can run "`make`" (thereby 
+replicating the build steps which Qt Creator takes) on many of the project 
+files that users would otherwise access via the IDE. Scripts (called "`run`" 
+or some variation thereof) within the project-specific folders allow the 
+projects to be run via the command line when their code compiles to an 
+executable (rather than a library).
+
+Casual users would presumably have little reason to build and run projects 
+in this manner. However, the project-specific run scripts have the 
+side-benefit of allowing certain steps in preparing the data set to be 
+executed automatically. In particular, the top `"code/cpp/qmake-console"` 
+includes several steps which are executed prior to revisions of the data 
+set being uploaded. These scripts automate numerous tasks 
+related to preparing the data set and its associated documents, including 
+generating "`LaTeX`" sources, running the system "`pdfLatex`" command, 
+merging LaTeX-derived auxiliary files with data structures generated 
+by `GTagML`, aggregating the data set into different formats for 
+publishing in different locations, and copying all the data-set related 
+files to proper locations in the project file system.
+
+The data set is structured so that the editing and preparing of documents is 
+conducted in folders which do not become part of the data set itself. 
+By default, the publications (or supplementary/explanatory texts) which 
+are intended to be part of or associated with the data set are assumed to be 
+located within a "`dev/documents`" directory which is a _sibling_ folder 
+to the repository root. A utility scripts creates a zipped version 
+of the `GTagML` files most recently used to create relevant documents 
+and places the resulting zip file in the repository's "`dev/documents/gen`" 
+folder, but it is assumed that those files will be unzipped to their 
+expected out-of-source location for any user who wishes to recreate 
+the steps taken to construct the data set to begin with (a utility 
+script is included which does this automatically).
+
+Note that the data-curation tools within the data set assume that the 
+document sources from which the data set is extracted have a specific 
+file organization (some of this structure is set up by 
+default by `GTagML`-related executables or by utility scripts). At 
+present this repository makes no effort to thoroughly document 
+the necessary folder structure or proper usage of the `GTagML` scripts 
+and projects. Users wishing to examine these tools in greater detail 
+are invited to request more information. Note that these details are 
+only relevant to those who wish to replicate or analyze how this
+data set is generated, as opposed to simply viewing the language 
+samples. 
+
+Every effort has been made to include tools for aggregating the data set 
+itself within this code repository partly to serve as a prototype 
+of a system for curating other linguistics (and especially 
+Cognitive Grammar) data sets in the feature, and partly in 
+the spirit of transparency (insofar as those who publish 
+research data should attempt to clarify the source, origins, 
+provenance, and methodology applicable to the data's origination).
+
+---
 **UDPIPE**
 
 The data set's source code and project files includes code related to UDPipe, a tool for reading files in the Universal Dependency format, developed by the Conference on Computational Natural Language Learning (CoNNL). At this point, the primary purpose of including UDPipe is for reading the sample data and parse representations for those samples derived from a CoNLL-U corpus and included in the data set. As discussed in the essays where the samples are analyzed, a trained CoNLL Dependency Parser was run against some samples so as to demonstrate Universal Dependencies as one grammatic paradigm and methodology, but the current data set and code does not prioritize automated sentence parsing; instead, the UDPipe code is included primary so as to access CoNLL-U files.
@@ -133,7 +211,7 @@ A more complex option is "`build-all.pro`", which is only needed for users wishi
 ---
 **Downloading**
 
-If you use "`git clone`", it is recommended to provide your own name to the folder where the data set is unpacked.  For example, create a folder called "`NTXH-CognitiveGrammar`" or something smaller ("`ntxh`", say) and _inside_ that folder execute "`git clone https://github.com/scignscape/ntxh.git ar`" -- notice the trailing "`ar`" (for "archive") where this repository will be unpacked.  Then the parent "`ntxh`" folder can be used for other files related to the project (or follow-up research) but isolated from the actual repo.
+If you use "`git clone`", it is recommended to provide your own name to the folder where the data set is unpacked.  For example, create a folder called "`NTXH-CognitiveGrammar`" or something smaller ("`ntxh`", say) and _inside_ that folder execute "`git clone -b ctg --single-branch https://github.com/scignscape/ntxh.git ar`" -- notice the trailing "`ar`" (for "archive") where this repository will be unpacked.  Then the parent "`ntxh`" folder can be used for other files related to the project (or follow-up research) but isolated from the actual repo.
 
 Be aware that using long folder names, rather than succinct names like "`ntxh/ar`", may occasionally cause problems (see "`TROUBLESHOOTING`").
 
