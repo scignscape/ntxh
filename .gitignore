@@ -77,10 +77,15 @@ build-*
 !build-root.pri
 !build-root-both.pri
 !build-all.pro
+!build-all
 !build-quick.pro
+!build-quick
 !build-most.pro
+!build-most
 !build-first.pro
+!build-first
 !build-custom.pro
+!build-custom
 !build-order.txt
 targets
 Contents
