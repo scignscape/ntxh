@@ -32,7 +32,13 @@ SUBDIRS += \
   ./build-all/phr-env \
   ./build-all/phr-fn-doc \
   ./build-all/phr-command-runtime \
+
+
+SUBDIRS += \
   ./build-all/kph-generator \
+
+
+SUBDIRS += \
   ./build-all/phr-direct-eval \
 
 
@@ -44,7 +50,12 @@ SUBDIRS += \
 
 
 SUBDIRS += \
+  ./build-all/quazip \
+
+
+SUBDIRS += \
   ./build-all/xpdf \
+  ./build-all/xpdf-console \
 
 
 SUBDIRS += \
@@ -57,7 +68,6 @@ SUBDIRS += \
 
 
 SUBDIRS += \
-  ./build-all/quazip \
   ./build-all/ngml-sdi-console \
   ./build-all/gtagml \
   ./build-all/gtagml-console \
@@ -72,9 +82,9 @@ SUBDIRS += \
 
 
 SUBDIRS += \
-  ./build-most/dgdb-white \
-  ./build-most/dgdb-white-console \
-  ./build-most/dgdb-gtagml-console \
+  ./build-all/dgdb-white \
+  ./build-all/dgdb-white-console \
+  ./build-all/dgdb-gtagml-console \
 
 
 SUBDIRS += \

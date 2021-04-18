@@ -5,7 +5,7 @@
 #     (See accompanying file LICENSE_1_0.txt or copy at
 #           http://www.boost.org/LICENSE_1_0.txt)
 
-UNI_BUILD_CODE = most 
+UNI_BUILD_CODE = all 
 
 include(../../../xk/external/xpdf/xpdf-console/xpdf-console.pro)
 

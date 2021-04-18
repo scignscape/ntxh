@@ -74,6 +74,10 @@ used to indicate samples obtained from a CoNLL shared task collection.
 # Technology Overview
 ---
 
+__Note:__ For "getting started" information on how to launch a basic version of 
+the data-set application, which may help to orient the rest of this 
+discussion, see _Setting Up a Development Environment_ later in this section.
+
 The data set includes code for a novel document-preparation format with a LaTeX preprocessor and C++ callback engines programmed to identify the samples and export them to a dataset. This technology also implements a pipeline where sentence boundaries and other textual markers are located in the text-encoding and merged with PDF coordinate data generated when running `pdflatex` with auxialiary files (via LaTeX `write` functions). 
 
 This software uses a hypergraph-based encoding system to construct and then merge the text-encoding data with the PDF coordinate metadata, embedding metadata within the generated PDF file that can then be extracted with the special PDF viewer (part of the data set's code sources). That viewer (based on Glyph and Cog's XPDF; see below) implements some text-encoding-driven features such as copying individual sentences (by mapping text encoding to sentence boundary PDF locations). Nathaniel's _Advances in Ubiquitous Computing_ chapter (the PDF form in this repo, not in the published book) was generated with similar tools.
@@ -187,7 +191,7 @@ provenance, and methodology applicable to the data's origination).
 
 
 ---
-**Setting up a Development Environment**
+**Setting Up a Development Environment**
 
 Once you have cloned the data set (see below) and wish to view the data set through 
 the data-set specific application (rather than via Dryad or accompanying papers) 
@@ -225,6 +229,10 @@ try next is `build-quick`, which is located in the same folder as
 `build-first`. It should be possible to build and run `build-quick` 
 at this point providing essentially the same data-set application 
 as before (via `build-first`) but with additional built-in features.
+
+If the `preferred` setup is different from what the data-set code expects 
+the `build-quick` option will likely fail to build, reporting an 
+error about missing font-related libaries (i.e., "`undefined reference`"s).
 
 More complex build options and use-cases are discussed below.
 

@@ -67,7 +67,7 @@ void get_section_files(QString paper_name, QMap<QString, QString>& result)
 
 }
 
-void get_source_files(QString paper_name, QMap<QString, QStringList>& result)
+void get_source_files(QString paper_name, QMap<QString, QMap<QString, QStringList>>& result)
 {
  QString folder = ROOT_FOLDER "/../dev/documents/" + paper_name + "/src";
 
@@ -81,7 +81,27 @@ void get_source_files(QString paper_name, QMap<QString, QStringList>& result)
     continue;
   if(qfi.completeSuffix() == "prep.tex")
     continue;
-  result[paper_name].push_back(fp);
+  result[paper_name]["src"].push_back(fp);
+ }
+
+ QString folderx = ROOT_FOLDER "/../dev/documents/" + paper_name + "/extra";
+ QDirIterator qdix(folderx, {"*.tex"});
+ while(qdix.hasNext())
+ {
+  qdix.next();
+  QString fp = qdix.filePath();
+  QFileInfo qfi(fp);
+  if(qfi.fileName() == "biblio.tex")
+    result[paper_name]["extra"].push_back(fp);
+ }
+
+ QString folderf = ROOT_FOLDER "/../dev/documents/" + paper_name + "/figures";
+ QDirIterator qdif(folderf, {"*.tex"});
+ while(qdif.hasNext())
+ {
+  qdif.next();
+  QString fp = qdif.filePath();
+  result[paper_name]["figures"].push_back(fp);
  }
 }
 
@@ -99,7 +119,7 @@ void generate_swl()
  qDebug() << files;
 
 
- QMap<QString, QStringList> source_files;
+ QMap<QString, QMap<QString, QStringList>> source_files;
 
  get_source_files("ctg", source_files);
  get_source_files("icg", source_files);
@@ -110,7 +130,7 @@ void generate_swl()
  if(!scdir.exists("src-copy"))
    scdir.mkdir("src-copy");
  scdir.cd("src-copy");
- QMapIterator<QString, QStringList> sfit(source_files);
+ QMapIterator<QString, QMap<QString, QStringList>> sfit(source_files);
  while(sfit.hasNext())
  {
   sfit.next();
@@ -118,14 +138,22 @@ void generate_swl()
   if(!scdir.exists(pn))
     scdir.mkdir(pn);
   scdir.cd(pn);
-  if(!scdir.exists("src"))
-    scdir.mkdir("src");
-  scdir.cd("src");
-  for(QString sf : sfit.value())
+
+  QMapIterator<QString, QStringList> sfiti(sfit.value());
+
+  while(sfiti.hasNext())
   {
-   copy_binary_file_to_folder(sf, scdir.absolutePath());
+   sfiti.next();
+   QString subdir = sfiti.key();
+   if(!scdir.exists(subdir))
+     scdir.mkdir(subdir);
+   scdir.cd(subdir);
+   for(QString sf : sfiti.value())
+   {
+    copy_binary_file_to_folder(sf, scdir.absolutePath());
+   }
+   scdir.cdUp();
   }
-  scdir.cdUp();
   scdir.cdUp();
  }
 
