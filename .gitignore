@@ -36,20 +36,13 @@ cpp/src/qt-reprozip/bin/*
 cpp/src/qt-reprozip/export/*
 cpp/qmake-console/targets/*
 
-extra/facs/bridge/bridge-console/build/*
-extra/facs/dest/*
-extra/facs/dest-qtc/*
-extra/facs/dest_qtc/*
-extra/facs/build/*
-extra/facs/cytolib/build/*
-extra/facs/cytolib/armadillo/*
-extra/facs/cytolib/qtc/*
-extra/facs/cytolib/build-*
-extra/facs/bridge/build/*
 
 *.fcs
 
 *.zip
+!/dev/documents/gen/src-copy.zip
+!/preferred/preferred-zip.zip
+
 *.gz
 *.aux
 *.log
