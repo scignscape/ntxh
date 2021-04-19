@@ -6,8 +6,12 @@ fi
 
 echo "Setting ar as: " $(realpath $ar)
 
+cd ..
+
 for paperName in "ctg" "icg" "itm"
 do
-  ../run-with-rest-args.sh xpdf-console "$ar/data/dataset/$paperName/main.pdf"
+  ./run-with-rest-args.sh xpdf-console "$ar/data/dataset/$paperName/main.pdf"
 done
+
+cd -
 

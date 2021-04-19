@@ -146,8 +146,8 @@ executable (rather than a library).
 Casual users would presumably have little reason to build and run projects 
 in this manner. However, the project-specific run scripts have the 
 side-benefit of allowing certain steps in preparing the data set to be 
-executed automatically. In particular, the top `"@/code/cpp/qmake-console"` 
-includes several scripts which are executed prior to revisions of the data 
+executed automatically. In particular, the `"@/code/cpp/qmake-console/util"` 
+folder includes several scripts which are executed prior to revisions of the data 
 set being uploaded. These scripts automate numerous tasks 
 related to preparing the data set and its associated documents, including 
 generating "`LaTeX`" sources, running the system "`pdfLatex`" command, 
@@ -188,6 +188,15 @@ Cognitive Grammar) data sets in the feature, and partly in
 the spirit of transparency (insofar as those who publish 
 research data should attempt to clarify the source, origins, 
 provenance, and methodology applicable to the data's origination).
+
+As a shortcut for moving development to a different machine, the 
+script `"@/code/cpp/qmake-console/util/quick-setup.sh"` tries 
+to automatically run other utilities and copy folders 
+for prearing a `GTagML` workflow. Again, these steps are 
+not relevant to typically users who do not need to 
+reconstruct how the data set itself is generated. However, 
+examining this script and those which it calls can serve 
+as partial documentation of the data-set-generation workflow. 
 
 
 ---
