@@ -6,6 +6,8 @@ fi
 
 echo "Setting ar as: " $(realpath $ar)
 
+first_dir=$(pwd)
+
 cd ..
 
 for paperName in "ctg" "icg" "itm"
@@ -23,7 +25,7 @@ done
 echo "Running the data set preparation."
 ./run.sh extra
 
-cd -
+cd $first_dir
 
 echo "Zipping the sources."
 
@@ -31,5 +33,5 @@ cd "$ar/../dev"
 zip -r "$ar/dev/documents/gen/src-copy.zip" "src-copy" 
 cd -
 
-../run-papers-xpdf-console.sh
+./run-papers-xpdf-console.sh
 
