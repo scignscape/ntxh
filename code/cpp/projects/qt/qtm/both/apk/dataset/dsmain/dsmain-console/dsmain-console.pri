@@ -122,6 +122,22 @@ contains(CHOICE_FEATURES, "lex-pair") \#/
 }
 
 
+contains(CHOICE_FEATURES, "config") \#/
+{
+ message(DEFINE\'ing USING_CONFIG_DIALOG)
+ DEFINES += USING_CONFIG_DIALOG
+
+ INCLUDEPATH += $$CONFIG_SRC_GROUP_DIR
+
+ DEFINES += DEFINES_SRC_FOLDER=\\\"$$SRC_ROOT_DIR/_defines\\\"
+ DEFINES += CHOICES_PRI_FOLDER=\\\"$$CPP_ROOT_DIR/projects/qt/qtm/_choices\\\"
+ DEFINES += CUSTOM_LIBS_PRI_FOLDER=\\\"$$CPP_ROOT_DIR/projects/qt/qtm/_custom_libs\\\"
+ DEFINES += UNIBUILD_PRI_FOLDER=\\\"$$CPP_ROOT_DIR/projects/qt/qtm/unibuild/dsmain\\\"
+
+ LIBS += -L$$TARGETSDIR -lconfig-dialog
+}
+
+
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)
 mkpath($$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

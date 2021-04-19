@@ -64,6 +64,14 @@ SUBDIRS += \
   ./build-all/application-model  \
   ./build-all/application-model-test-dialog  \
   ./build-all/amtd-console  \
+
+
+SUBDIRS += \
+  ./build-all/config-dialog  \
+  ./build-all/config-dialog-console  \
+
+
+SUBDIRS += \
   ./build-all/_run__dsmain-console
 
 

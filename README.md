@@ -248,6 +248,43 @@ error about missing font-related libaries (i.e., "`undefined reference`"s).
 More complex build options and use-cases are discussed below.
 
 ---
+**Configuring which Features are Built**
+
+Build options such as `build-first` and `build-quick` should suffice for most 
+users, but the data set includes features to fine-tune which capabilities 
+are included when the data-set application is compiled. If desired, users 
+can choose to incorporate features for testing the application via 
+GUI-guided test actions, to construct a customized build configuration, 
+and to explore various other interactive features which lie outside 
+the basic operations needed to access the data set.
+
+The data set does not use __cmake__ or other conventional build systems 
+other than __qmake__. To provide customizable configuration the 
+data-set code relies on strategically placed Qt project (and project-include 
+"`.pri`") files. This experimental setup has the advantage of freeing the 
+code base from relying on any external build system (apart from Qt's, 
+which is not really "external" insofar as the data set is built 
+on a Qt foundation) but has the disadvantage of adding addition source 
+components and requirements to be contained. The full scope of this 
+configuration model is not directly relevant for most uses of the 
+data set itself, but is included as an example of the sort of 
+development requirements which should be addressed by a potential 
+"Cognitive Grammar" software ecosystem, and potentially reused as 
+part of such an ecosystem.
+
+The "`config-dialog`" project provides a GUI component (which can 
+depending on the build model be integrated with the main 
+data-set application) allowing custom configuration to be 
+performed via GUI actions rather than with build scripts. 
+Again, this code is experimental and intended as a prototype 
+as much as for practical use within the current data set. 
+However, it may be helpful for users who wish to experiment 
+with including or excluding different data-set features. 
+Note that (without modifying the configurations for 
+pre-defined build models) this dialog is only compiled when 
+using the "`build-most`" or "`build-all`" options. 
+
+---
 **UDPipe**
 
 The data set's source code and project files includes code related to UDPipe, a tool for reading files in the Universal Dependency format, developed by the Conference on Computational Natural Language Learning (CoNNL). At this point, the primary purpose of including UDPipe is for reading the sample data and parse representations for those samples derived from a CoNLL-U corpus and included in the data set. As discussed in the essays where the samples are analyzed, a trained CoNLL Dependency Parser was run against some samples so as to demonstrate Universal Dependencies as one grammatic paradigm and methodology, but the current data set and code does not prioritize automated sentence parsing; instead, the UDPipe code is included primary so as to access CoNLL-U files.
@@ -298,11 +335,11 @@ Users may want to edit the "`@/code/cpp/src/xk/external/xpdf/xpdf/aconf/aconf.h`
 ---
 **TROUBLESHOOTING**
 
-1.  Except with "`build-quick.pro`", the build process will generate multiple executable files, some for testing or related documentation.  Most of the times users will want the executable called "`dsmain-console`" (the project named "`__run_dsmain-console`") which should run automatically.  However, any executable may be chosen by right-clicking on the project as listed on Qt Creator's Project Panel (usually on the left of the IDE) or by selecting that desired "Run Configuration" from the "Run Settings" section of the "Projects" tab (at the far-left of the IDE).  If the application does not seem to run properly, it may be because the wrong executable selection is chosen for the default Run Configuration, so the "`__run_dsmain-console`" option should be chosen from the drop-down list in "Run Settings".
+1.  Except with "`build-first.pro`", the build process will generate multiple executable files, some for testing or related documentation.  Most of the times users will want the executable called "`dsmain-console`" (the project named "`__run_dsmain-console`") which should run automatically.  However, any executable may be chosen by right-clicking on the project as listed on Qt Creator's Project Panel (usually on the left of the IDE) or by selecting that desired "Run Configuration" from the "Run Settings" section of the "Projects" tab (at the far-left of the IDE).  If the application does not seem to run properly, it may be because the wrong executable selection is chosen for the default Run Configuration, so the "`__run_dsmain-console`" option should be chosen from the drop-down list in "Run Settings".
 
-2.  The dsC project organization uses Qt naming conventions to automatically configure an environment so typical users can easily build and launch the main ("`dsmain-console`") application and other executables.  This process will fail if a working Qt environment (called a Qt "`kit`") is not available _before_ the "`build-quick.pro`" or other project files are opened in the IDE.  It is recommended to double-check that you have a valid kit ("`Options`" -- "`Build & Run`" -- "`Kits`") and start a new, blank session (via the menubar "`File`" -- "`Sessions`" submenu) before starting to use this data set.
+2.  The data-set project organization uses Qt naming conventions to automatically configure an environment so typical users can easily build and launch the main ("`dsmain-console`") application and other executables.  This process will fail if a working Qt environment (called a Qt "`kit`") is not available _before_ the "`build-quick.pro`" or other project files are opened in the IDE.  It is recommended to double-check that you have a valid kit ("`Options`" -- "`Build & Run`" -- "`Kits`") and start a new, blank session (via the menubar "`File`" -- "`Sessions`" submenu) before starting to use this data set.
 
-3.  Because of a quirk, Qt Creator will on some systems misidentify project files with unusually long paths, causing an endless loop during the build (because "`qmake`" will run repeatedly).  This is most likely a problem for users choosing the more complex "`build-all`" or "`isobuild`" strategies.  If you use these options, keep an eye on the "Compiler Output" window on Qt Creator and make sure "`qmake`" is not running multiple times on one file (this attention ceases to be necessary once the Compiler Output suggests that all of the "`qmake`" files are processed and the compiler has started to generate object files).  If you do encounter a loop, you may either rename the problemmatic "`.pro`" files -- this repo chooses to give projects relatively long, descriptive names -- or choose shorter names like "`ntxh/ar`" for the repo folder and its parent.  Alternatively, employ the "`isobuild`" approach where you can manually decide when to run "`qmake`".
+3.  Because of a quirk, Qt Creator will on some systems misidentify project files with unusually long paths, causing an endless loop during the build (because "`qmake`" will run repeatedly).  Such behavior has been observed on Windows (but not Linux) and appears to be a bug in older versions of Qt Creator, so more recent users may never encounter this problem, but we'll keep mentioning it in case it arises again.  The problem is most likely to arise if at all for users choosing the more complex "`build-all`" or "`isobuild`" strategies.  If you use these options, keep an eye on the "Compiler Output" window on Qt Creator and make sure "`qmake`" is not running multiple times on one file (this attention ceases to be necessary once the Compiler Output suggests that all of the "`qmake`" files are processed and the compiler has started to generate object files).  If you do encounter a loop, you may either rename the problemmatic "`.pro`" files -- this repo chooses to give projects relatively long, descriptive names -- or choose shorter names like "`ntxh/ar`" for the repo folder and its parent.  Alternatively, employ the "`isobuild`" approach where you can manually decide when to run "`qmake`".
 
 4.  For XPDF, you may encounter linking problems associated with **freetype** fonts and **png**.  Qt provides its own freetypelib and pnglib which can be used as an alternative to system libs when those are not present. If however you have them on your system then simply uncomment the line "`LIBS += -lfreetype  -lpng`" in the XPDF-console project file to resolve linker errors for those libs.
 
