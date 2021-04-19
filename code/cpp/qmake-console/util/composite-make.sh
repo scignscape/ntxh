@@ -13,6 +13,7 @@ echo "Setting ar as: " $(realpath $ar)
 qmc="$ar/code/cpp/qmake-console/projects"
 cd $qmc
 
+
 echo "Building NTXH projects"
 cd ntxh
 cd ntxh
@@ -35,9 +36,45 @@ chmod a+x ./mk.sh
 cd ..
 cd ..
 
+
+echo "Building DGH projects"
+cd dgh-sdi
+cd dgh-sdi
+chmod a+x ./qm.sh
+./qm.sh
+chmod a+x ./mk.sh
+./mk.sh
+cd ..
+cd ..
+
+
+echo "Building QUAZIP projects"
+cd quazip
+cd quazip
+chmod a+x ./qm.sh
+./qm.sh
+chmod a+x ./mk.sh
+./mk.sh
+cd ..
+cd ..
+
+
+
 echo "Building GTagML projects"
 cd gtagml
 cd gtagml
+chmod a+x ./qm.sh
+./qm.sh
+chmod a+x ./mk.sh
+./mk.sh
+cd ..
+cd ngml-sdi
+chmod a+x ./qm.sh
+./qm.sh
+chmod a+x ./mk.sh
+./mk.sh
+cd ..
+cd ngml-sdi-console
 chmod a+x ./qm.sh
 ./qm.sh
 chmod a+x ./mk.sh
@@ -61,18 +98,6 @@ chmod a+x ./qm.sh
 chmod a+x ./mk.sh
 ./mk.sh
 cd ..
-cd ngml-sdi
-chmod a+x ./qm.sh
-./qm.sh
-chmod a+x ./mk.sh
-./mk.sh
-cd ..
-cd ngml-sdi-console
-chmod a+x ./qm.sh
-./qm.sh
-chmod a+x ./mk.sh
-./mk.sh
-cd ..
 cd extra
 chmod a+x ./qm.sh
 ./qm.sh
@@ -81,15 +106,6 @@ chmod a+x ./mk.sh
 cd ..
 cd ..
 
-echo "Building QUAZIP projects"
-cd quazip
-cd quazip
-chmod a+x ./qm.sh
-./qm.sh
-chmod a+x ./mk.sh
-./mk.sh
-cd ..
-cd ..
 
 echo "Building XPDF projects"
 cd xpdf

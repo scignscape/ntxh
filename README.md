@@ -190,7 +190,7 @@ research data should attempt to clarify the source, origins,
 provenance, and methodology applicable to the data's origination).
 
 As a shortcut for moving development to a different machine, the 
-script `"@/code/cpp/qmake-console/util/quick-setup.sh"` tries 
+script "`@/code/cpp/qmake-console/util/quick-setup.sh`" tries 
 to automatically run other utilities and copy folders 
 for prearing a `GTagML` workflow. Again, these steps are 
 not relevant to typically users who do not need to 
@@ -231,7 +231,9 @@ dependencies and out-of-source locations. Users can examine the
 by most users). Within the `@/preferred` folder is a zipped `preferred-zip` 
 file for convenience, which can be extracted (within the convenience "`@/temp`" 
 folder, if desired), then copy the `preferred` subfolder to the 
-parent directory of the archive root, so that `preferred` becomes the root's sibling.
+parent directory of the archive root, so that `preferred` becomes the root's sibling. 
+(If desired, check the `quick-setup` script mentioned earlier to see how 
+this step may be automated.)
 
 With the `preferred` folder in place, the simplest build option to 
 try next is `build-quick`, which is located in the same folder as 
@@ -240,7 +242,7 @@ at this point providing essentially the same data-set application
 as before (via `build-first`) but with additional built-in features.
 
 If the `preferred` setup is different from what the data-set code expects 
-the `build-quick` option will likely fail to build, reporting an 
+the `build-quick` option will likely fail to link, reporting an 
 error about missing font-related libaries (i.e., "`undefined reference`"s).
 
 More complex build options and use-cases are discussed below.
