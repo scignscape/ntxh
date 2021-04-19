@@ -397,7 +397,7 @@ and wherever yours is, you need a mini-fridge. -> log ;;
 
 
 `swl -> itm:democratic -> New Yorkers reliably vote for Democratic presidential candidates. -> cog ;; 
-`swl -> itm:commute -> New Yorkers constantly complain about how long it takes to commute
+`swl -> itm:nycommute -> New Yorkers constantly complain about how long it takes to commute
 to New York City. -> cog ;;
 
 `swl -> --- -> All New York City residents live in one of five boroughs. -> cog ;;
