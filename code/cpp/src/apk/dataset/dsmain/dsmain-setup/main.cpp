@@ -86,6 +86,9 @@ int main(int argc, char **argv)
 
  ds.load_from_folder();
 
+ qDebug() << "Dataset: " << ds.samples()->size() << " samples in "
+   << ds.groups()->size() << " groups.";
+
  if(cmds.size() >= 4)
  {
   QString flag = cmds.at(3);

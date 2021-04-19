@@ -1,4 +1,8 @@
 
+
+[//]: # (This automatically-generated file merges others in the directory)
+
+
 ### Cognitive Transform Grammar
 ---
 
@@ -13,7 +17,7 @@ Let's go to the lawyers.
 Let's go to the press.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 7)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 8)  
 I saw my neighbor's two black dogs.  
 I saw my neighbor's two rescued dogs.  
 I saw my neighbor's two latest dogs.  
@@ -43,7 +47,7 @@ The Leafs failed to win two consecutive games for the first time this year.
 The Leafs failed to score a goal for the first time this year.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 10)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 11)  
 All residents of the city of New York live in one of five boroughs.  
 Many residents of the New York metropolitan area complain about how long it takes to commute to New York City.  
 All districts on the south side of Cambridge voted Conservative.  
@@ -210,7 +214,7 @@ The window, it's still open.
 A window, it's still open.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 35)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 36)  
 He scribbled on a living-room wall.  
 
 #
@@ -533,6 +537,10 @@ Let's go to the press.
 
 #
 
+
+[//]: # (This automatically-generated file merges others in the directory)
+
+
 ### Conceptual Spaces/Cognitive Grammar
 ---
 
@@ -825,7 +833,7 @@ She is shouting to get our attention.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 53)  
 We should look for the wine that John recommended last summer.  
 I have to shout because the cars are making a lot of noise outside.  
-Warren presented more detailed policy proposals than Sanders, at each of the debates, .  
+Warren presented more detailed policy proposals than Sanders, at each of the debates where they were both onstage.  
 
 #
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 54)  
@@ -938,11 +946,16 @@ Where is a bag to hold the groceries?
 
 #
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 87)  
+A pastor we have known for years married John to Katherine.  
+His parents finally married John off to Katherine.  
+
+#
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 93)  
 I authorized him to attend the conference, and I'm expecting him to give a lecture.  
 I authorized him to attend the conference, and I'm persuading him to give a lecture.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 87)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 93)  
 I authorized him to attend the conference, but I was overruled.  
 I authorized him to attend the conference, but he refused.  
 I authorized him to attend the conference, but our school said he is just too controversial.  
@@ -950,10 +963,14 @@ I authorized him to attend the conference, but his school said he is just too bu
 
 #
 
+
+[//]: # (This automatically-generated file merges others in the directory)
+
+
 ### Interface Theory of Meaning
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 9)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 10)  
 He opened the wine bottle with an ornate corkscrew.  
 He opened the beer bottle with a butterfly corkscrew.  
 I thought this was a screw-top but it turns out I need a corkscrew.  
@@ -961,44 +978,44 @@ This X3D file shows a very realistic corkscrew created with NURBS surfaces.
 Could you send me the corkscrew (the X3D file you just mentioned)?  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 9)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 11)  
 Do you have a bottle opener?  
 Could you get me a corkscrew?  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 10)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 11)  
 He opened the bottle of beer with a hammer.  
 He pounded the nail with a lever corkscrew.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 10)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 11)  
 A hammer is something used to pound nails.  
 A lever corkscrew is something used to open wine.  
 A lever corkscrew can be used to pound nails.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 10)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 12)  
 Can you bring me a bucket of water?  
 Can you bring me a glass of water?  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 10)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 12)  
 The ocean is over there.  
 The water is over there.  
 You can see the ocean from here.  
 You can see the water from here.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 11)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 12)  
 The water and the Deuterium Dioxide is over there.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 11)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 13)  
 Here's a glass of water.  
 Bing cherries are dark red.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 24)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 26)  
 Our house is across the lake.  
 I poured wine from a decanter.  
 Some wine spilled from the decanter.  
@@ -1009,22 +1026,22 @@ There are drawings all over the wall.
 There's a plastic sheet all over the wall.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 26)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 27)  
 I'm going to a party at my brother's house.  
 This restaurant has the best Hokkien noodles.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 27)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 29)  
 He had to cut the crusty bread with a serrated knife.  
 The museum had antique butter knives with intricate carvings.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 30)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 31)  
 What time does the office open?  
 What time does train 100 depart from Newark?  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 41)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 42)  
 Today is Tuesday.  
 The big departmental meeting is Tuesday.  
 It is very windy.  
@@ -1033,18 +1050,18 @@ They are forecasting snow.
 The latest reports are forecasting snow.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 41)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 43)  
 She is a salaried employee.  
 He is an elected official.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 49)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 51)  
 A penguin is a flightless bird.  
 Rhinos in that park are threatened by poachers.  
 Baby elephants don't have tusks.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 50)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 51)  
 My favorite Korean restaurant is adjacent to the bookstore.  
 My favorite Korean restaurant is closed today.  
 My favorite Korean restaurant is decorated with posters from the 2002 World Cup.  
@@ -1056,13 +1073,13 @@ He's not playing well because his sore back is acting up.
 The kitten barked at the dog.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 51)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 52)  
 Tea-smoked duck is a Sichuan delicacy.  
 The baby's favorite toy is a rubber duck.  
 Wedding ducks are traditional Korean gifts.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 51)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 52)  
 This book, which costs 40 dollars, has some crazy ideas inside.  
 This book, which the library classifies as young adult nonfiction, has some dude's phone number scrawled inside.  
 My boss barks louder than his dog does.  
