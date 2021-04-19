@@ -193,7 +193,7 @@ As a shortcut for moving development to a different machine, the
 script "`@/code/cpp/qmake-console/util/quick-setup.sh`" tries 
 to automatically run other utilities and copy folders 
 for prearing a `GTagML` workflow. Again, these steps are 
-not relevant to typically users who do not need to 
+not relevant to typical users who do not need to 
 reconstruct how the data set itself is generated. However, 
 examining this script and those which it calls can serve 
 as partial documentation of the data-set-generation workflow. 
