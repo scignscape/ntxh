@@ -23,7 +23,7 @@ do
   echo "Running NGML"
   ./run-with-args.sh ngml-sdi-console $paperName
   cd "$ar/../dev/documents/$paperName/src/setup"
-  chmod a+x ./run-pdflatex.sh
+  ./run-pdflatex.sh
   cd - 
   echo "Done."
 done
