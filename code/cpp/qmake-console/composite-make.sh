@@ -14,42 +14,61 @@ cd $qmc
 echo "Building NTXH projects"
 cd ntxh
 cd ntxh
+chmod a+x ./qm.sh
 ./qm.sh
+chmod a+x ./mk.sh
 ./mk.sh
 cd ..
 cd ntxh-parser
+chmod a+x ./qm.sh
 ./qm.sh
+chmod a+x ./mk.sh
 ./mk.sh
 cd ..
 cd ntxh-builder
+chmod a+x ./qm.sh
 ./qm.sh
+chmod a+x ./mk.sh
 ./mk.sh
+cd ..
 cd ..
 
 echo "Building GTagML projects"
-cd ..
 cd gtagml
+cd gtagml
+chmod a+x ./qm.sh
 ./qm.sh
+chmod a+x ./mk.sh
 ./mk.sh
 cd ..
 cd gtagml-console
+chmod a+x ./qm.sh
 ./qm.sh
+chmod a+x ./mk.sh
 ./mk.sh
 cd ..
 cd gt-module-ir
+chmod a+x ./qm.sh
 ./qm.sh
+chmod a+x ./mk.sh
 ./mk.sh
 cd ..
 cd gt-module-ir-console
+chmod a+x ./qm.sh
 ./qm.sh
+chmod a+x ./mk.sh
 ./mk.sh
 cd ..
 cd ngml-sdi
+chmod a+x ./qm.sh
 ./qm.sh
+chmod a+x ./mk.sh
 ./mk.sh
 cd ..
 cd ngml-sdi-console
+chmod a+x ./qm.sh
 ./qm.sh
+chmod a+x ./mk.sh
 ./mk.sh
 cd ..
 cd extra
@@ -61,7 +80,9 @@ cd ..
 echo "Building QUAZIP projects"
 cd quazip
 cd quazip
+chmod a+x ./qm.sh
 ./qm.sh
+chmod a+x ./mk.sh
 ./mk.sh
 cd ..
 cd ..
@@ -69,11 +90,15 @@ cd ..
 echo "Building XPDF projects"
 cd xpdf
 cd xpdf
+chmod a+x ./qm.sh
 ./qm.sh
+chmod a+x ./mk.sh
 ./mk.sh
 cd ..
 cd xpdf-console
+chmod a+x ./qm.sh
 ./qm.sh
+chmod a+x ./mk.sh
 ./mk.sh
 cd ..
 
