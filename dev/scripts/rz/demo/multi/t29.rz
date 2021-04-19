@@ -2,7 +2,7 @@
 &test-call do .() ->
 
  ,x ::: u4;
- x \= test-find "abcdef" "cd";
+ x \= test-find "cd" "abcdef";
  &prn x; 
 
  ;;

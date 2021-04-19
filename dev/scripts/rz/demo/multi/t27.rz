@@ -1,6 +1,6 @@
 
-,x ::: int;
-x \= test-find "abcdef" "cd";
+,x ::: u4;
+x \= test-find  "cd" "abcdef";
  
 &if \(x =? -1) \do
  &prs "Not Found";

@@ -1,6 +1,8 @@
 
+;;- should report -1 due to wrong order ...
+
 ,x ::: u4;
-x \= test-find "cd" "abcdef";
+x \= test-find "abcdef" "cd";
 
 &prn x;
 

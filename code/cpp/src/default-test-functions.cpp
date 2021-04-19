@@ -35,7 +35,7 @@
 
 USING_KANS(Phaon)
 
-quint32 test_find(QString outstr, QString instr)
+quint32 test_find(QString instr, QString outstr)
 {
  return outstr.indexOf(instr);
 }

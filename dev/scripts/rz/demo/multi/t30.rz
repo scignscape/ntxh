@@ -1,6 +1,6 @@
 
 ,x ::: int;
-x \= test-find "abcdef" "de";
+x \= test-find "de" "abcdef";
  
 &if \(x =? 3) \do
  &prs "Found";
