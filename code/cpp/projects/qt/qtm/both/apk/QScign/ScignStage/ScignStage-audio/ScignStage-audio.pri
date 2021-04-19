@@ -30,7 +30,7 @@ DEFINES += DEFAULT_ICON_FOLDER=\\\"$$CODE_ROOT_DIR/assets/icons\\\"
 
 DEFINES += ABOUT_FILE_FOLDER=\\\"$$CPP_ROOT_DIR/about/about-files\\\"
 
-DEFINES += SAMPLES_FOLDER=\\\"$$DATA_ROOT_DIR/audio/samples\\\"
+DEFINES += SAMPLES_FOLDER=\\\"$$DEV_ROOT_DIR/audio/samples\\\"
 
 
 CONFIG += no_keywords

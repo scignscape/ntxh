@@ -25,7 +25,7 @@ CONFIG += no_keywords
 
 DEFINES += USE_KANS
 
-DEFINES += CONLLU_DIR=\\\"$$DATA_ROOT_DIR/conllu\\\"
+DEFINES += CONLLU_DIR=\\\"$$DEV_ROOT_DIR/conllu\\\"
 
 INCLUDEPATH += $$SRC_GROUP_DIR/udpipe $$SRC_GROUP_DIR/
 

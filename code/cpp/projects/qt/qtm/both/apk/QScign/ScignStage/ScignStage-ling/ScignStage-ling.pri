@@ -48,7 +48,7 @@ DEFINES += ABOUT_FILE_FOLDER=\\\"$$CPP_ROOT_DIR/about/about-files\\\"
 
 DEFINES += SAMPLES_FOLDER=\\\"$$DATA_ROOT_DIR/samples\\\"
 
-DEFINES += DATA_ROOT_DIR=\\\"$$DATA_ROOT_DIR\\\"
+DEFINES += DATA_ROOT_FOLDER=\\\"$$DATA_ROOT_DIR\\\"
 
 
 CONFIG += no_keywords
