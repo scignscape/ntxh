@@ -36,18 +36,7 @@ chmod a+x ./mk.sh
 cd ..
 cd ..
 
-
-echo "Building DGH projects"
-cd dgh-sdi
-cd dgh-sdi
-chmod a+x ./qm.sh
-./qm.sh
-chmod a+x ./mk.sh
-./mk.sh
-cd ..
-cd ..
-
-
+echo ""
 echo "Building QUAZIP projects"
 cd quazip
 cd quazip
@@ -59,7 +48,7 @@ cd ..
 cd ..
 
 
-
+echo ""
 echo "Building GTagML projects"
 cd gtagml
 cd gtagml
@@ -74,6 +63,23 @@ chmod a+x ./qm.sh
 chmod a+x ./mk.sh
 ./mk.sh
 cd ..
+cd ..
+
+echo ""
+
+echo "Building DGH projects"
+cd dgh-sdi
+cd dgh-sdi
+chmod a+x ./qm.sh
+./qm.sh
+chmod a+x ./mk.sh
+./mk.sh
+cd ..
+cd ..
+
+echo ""
+echo "Resuming GTagML projects"
+cd gtagml
 cd ngml-sdi-console
 chmod a+x ./qm.sh
 ./qm.sh
@@ -106,7 +112,7 @@ chmod a+x ./mk.sh
 cd ..
 cd ..
 
-
+echo ""
 echo "Building XPDF projects"
 cd xpdf
 cd xpdf

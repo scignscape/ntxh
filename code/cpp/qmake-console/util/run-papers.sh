@@ -16,7 +16,9 @@ do
   echo "Running GTagML"
   ./run-with-args.sh gt-module-ir-console $paperName
   echo "Running PDFLaTeX"
-  cd "$ar/../dev/documents/$paperName/src/setup"; ./run-pdflatex.sh; cd - 
+  cd "$ar/../dev/documents/$paperName/src/setup"; chmod a+x ./run-pdflatex.sh
+  ./run-pdflatex.sh; ./run-pdflatex.sh; 
+  cd - 
   echo "Running NGML"
   ./run-with-args.sh ngml-sdi-console $paperName
   echo "Done."
