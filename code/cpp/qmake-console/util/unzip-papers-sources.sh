@@ -16,7 +16,6 @@ for paperName in "ctg" "icg" "itm"
 do
   echo "Processing paper: $paperName" 
   mkdir -p "$ar/../dev/documents-copy/$paperName"
-  cp -r "$ar/../dev/documents-copy/src-copy/$paperName/src" "$ar/../dev/documents-copy/$paperName" 
+  cp -r "$ar/../dev/documents-copy/src-copy/$paperName"/* "$ar/../dev/documents-copy/$paperName" 
 done
-
 
