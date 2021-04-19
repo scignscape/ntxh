@@ -95,5 +95,12 @@ SUBDIRS += \
   ./build-most/clo43sd-import \
 
 
+SUBDIRS += \
+  ./build-most/ScignStage-audio \
+  ./build-most/ssqm-dsmain \
+  ./build-most/ssqm-data-model-console \
+  ./build-most/ssqm-dsmain-console \
+
+
 
 CONFIG += ordered

@@ -102,6 +102,13 @@ SUBDIRS += \
 
 
 SUBDIRS += \
+  ./build-all/ScignStage-audio \
+  ./build-all/ssqm-dsmain \
+  ./build-all/ssqm-data-model-console \
+  ./build-all/ssqm-dsmain-console \
+
+
+SUBDIRS += \
   ./build-all/rz-graph-core \
   ./build-all/rz-graph-token \
   ./build-all/rz-graph-build \
@@ -124,3 +131,4 @@ SUBDIRS += \
 
 
 CONFIG += ordered
+
