@@ -72,7 +72,9 @@ chmod a+x ./mk.sh
 ./mk.sh
 cd ..
 cd extra
+chmod a+x ./qm.sh
 ./qm.sh
+chmod a+x ./mk.sh
 ./mk.sh
 cd ..
 cd ..

@@ -4,8 +4,7 @@ else
   ar=../../..
 fi
 
-# if $@ empty ...?
+cp -R "$ar/../dev/documents-copy" "$ar/../dev/documents"
+ 
 
-qm=${qm/\~/$HOME/}
-`cat $ar/../preferred/preferred-qmake` $@
 

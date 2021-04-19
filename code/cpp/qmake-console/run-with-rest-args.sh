@@ -4,9 +4,10 @@ else
   ar=../../..
 fi
 qm=`cat $ar/../preferred/preferred-qmake`
+qm=${qm/\~/$HOME/}
 qtv=`$qm -query QT_VERSION`
-qtv=`echo ${qtv/./-}`
-qtv=`echo ${qtv/./-}`
+qtv=${qtv/./-}
+qtv=${qtv/./-}
 echo $qtv
 cmd=$1
 shift
