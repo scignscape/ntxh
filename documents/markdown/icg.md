@@ -291,7 +291,7 @@ She is shouting to get our attention.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 53)  
 We should look for the wine that John recommended last summer.  
 I have to shout because the cars are making a lot of noise outside.  
-Warren presented more detailed policy proposals than Sanders, at each of the debates, .  
+Warren presented more detailed policy proposals than Sanders, at each of the debates where they were both onstage.  
 
 #
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 54)  
@@ -404,11 +404,16 @@ Where is a bag to hold the groceries?
 
 #
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 87)  
+A pastor we have known for years married John to Katherine.  
+His parents finally married John off to Katherine.  
+
+#
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 93)  
 I authorized him to attend the conference, and I'm expecting him to give a lecture.  
 I authorized him to attend the conference, and I'm persuading him to give a lecture.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 87)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 93)  
 I authorized him to attend the conference, but I was overruled.  
 I authorized him to attend the conference, but he refused.  
 I authorized him to attend the conference, but our school said he is just too controversial.  

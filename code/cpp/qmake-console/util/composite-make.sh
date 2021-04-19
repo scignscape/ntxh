@@ -127,7 +127,40 @@ chmod a+x ./qm.sh
 chmod a+x ./mk.sh
 ./mk.sh
 cd ..
+cd ..
 
+
+echo ""
+echo "Building Dataset projects"
+cd QScign
+cd qring
+chmod a+x ./qm.sh
+./qm.sh
+chmod a+x ./mk.sh
+./mk.sh
+cd ..
+cd ..
+cd dgdb
+cd qh-package
+chmod a+x ./qm.sh
+./qm.sh
+chmod a+x ./mk.sh
+./mk.sh
+cd ..
+cd ..
+cd dataset
+cd dsmain
+chmod a+x ./qm.sh
+./qm.sh
+chmod a+x ./mk.sh
+./mk.sh
+cd ..
+cd dsmain-setup
+chmod a+x ./qm.sh
+./qm.sh
+chmod a+x ./mk.sh
+./mk.sh
+cd ..
 cd ..
 
 

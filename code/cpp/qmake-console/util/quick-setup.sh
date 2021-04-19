@@ -20,3 +20,7 @@ echo ""
 echo "Running run-papers.sh"
 ./run-papers.sh
 
+echo ""
+echo "Running samples-and-markdown.sh"
+./samples-and-markdown.sh
+

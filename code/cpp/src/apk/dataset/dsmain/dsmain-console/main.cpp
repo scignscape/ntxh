@@ -29,6 +29,9 @@
 
 #include "dsmain/dataset.h"
 
+#include "get-cmdl.h"
+USING_KANS(Util)
+
 #include "ScignStage-ling/ScignStage-ling-dialog.h"
 
 #ifdef USING_XPDF
@@ -166,13 +169,26 @@ void launch_config_dialog(Config_Dialog*& dlg, QWidget* parent)
 
 int main(int argc, char **argv)
 {
- QApplication qapp(argc, argv);
- qapp.setWindowIcon(QIcon(DEFAULT_ICON_FOLDER "/app-icon.png"));
 
-// QString paper_name = "icg";
-//
- QString paper_name = "ctg";
-// QString paper_name = "itm";
+ QString paper_name;
+
+ QStringList cmds = get_cmdl(argc, argv);
+
+ if(cmds.size() >= 3)
+ {
+  paper_name = cmds.at(2);
+ }
+ else
+ {
+  paper_name = "ctg";
+  // paper_name = "icg";
+  // paper_name = "itm";
+ }
+
+ // //  Here in case need to override the cmdline ...
+ // paper_name = "ctg";
+ // paper_name = "icg";
+ // paper_name = "itm";
 
  QString dsfolder = QString(DEFAULT_DATASET_FOLDER "/%1").arg(paper_name);
 
@@ -201,6 +217,22 @@ int main(int argc, char **argv)
  Dataset ds(dsfolder);
 
  ds.load_from_folder();
+
+ if(cmds.size() >= 4)
+ {
+  QString flag = cmds.at(3);
+  if(flag == "-s")
+  {
+   // // setup only
+   ds.save_as_markdown(QString(ROOT_FOLDER "/documents/markdown/%1.ctg").arg(paper_name));
+   return 0;
+  }
+ }
+
+ QApplication qapp(argc, argv);
+ qapp.setWindowIcon(QIcon(DEFAULT_ICON_FOLDER "/app-icon.png"));
+
+
 
  //?ds.load_from_file()DEFAULT_NTXH_FOLDER  "/ctg.ngml.ntxh");
 

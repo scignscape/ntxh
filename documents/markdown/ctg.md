@@ -13,7 +13,7 @@ Let's go to the lawyers.
 Let's go to the press.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 7)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 8)  
 I saw my neighbor's two black dogs.  
 I saw my neighbor's two rescued dogs.  
 I saw my neighbor's two latest dogs.  
@@ -43,7 +43,7 @@ The Leafs failed to win two consecutive games for the first time this year.
 The Leafs failed to score a goal for the first time this year.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 10)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 11)  
 All residents of the city of New York live in one of five boroughs.  
 Many residents of the New York metropolitan area complain about how long it takes to commute to New York City.  
 All districts on the south side of Cambridge voted Conservative.  
@@ -210,7 +210,7 @@ The window, it's still open.
 A window, it's still open.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 35)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 36)  
 He scribbled on a living-room wall.  
 
 #
