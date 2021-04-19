@@ -19,3 +19,9 @@ done
 cd -
 
 
+cd $ar/documents/markdown
+cp samples.md bk
+cat _comment.md ctg.md _comment.md icg.md _comment.md itm.md > samples.md
+
+cd -
+
