@@ -619,7 +619,7 @@ That's a hungry window overlooking the yard.
 That's a porcelain touchdown under video review.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 20)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 21)  
 That's a stained-glass window overlooking the yard.  
 That's a porcelain vase under fluorescent lights.  
 
@@ -671,7 +671,7 @@ I gave a check to the charity.
 I gave a donation to the charity.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 37)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 38)  
 I walked to the store.  
 I visited the store.  
 I walked toward the store.  
@@ -730,7 +730,7 @@ The rice has a nice yellow color that comes from turmeric.
 Make sure the rice doesn't burn.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 43)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 44)  
 The effect was discovered by some scientists who were working in this lab.  
 The effect was discovered by some scientists working in this lab.  
 The effect was discovered by some scientists in this lab.  
@@ -759,7 +759,7 @@ Don't think you can just buy me Champagne and I'll forgive you.
 If they make him a healthy scratch enough times, he might accept a trade.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 48)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 49)  
 This bus drops passengers off downtown.  
 This bus drops passengers off along Queen street.  
 This bus drops passengers off downtown along Queen street.  
@@ -795,7 +795,7 @@ I found the wine that John recommended.
 Please use brown rice when making the pilaf.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 50)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 51)  
 What was it that you used to open the wine?  
 Which avenue does this bus go down when it drops off passengers?  
 
@@ -813,7 +813,7 @@ She is heading out early.
 She is heading out with the dogs.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 51)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 52)  
 We know that Warren and Sanders appeal to the same cohort of voters.  
 I know that Szechuan recipes call for hot pepper, but John can't eat spicy food.  
 
@@ -909,7 +909,7 @@ The yellow column shows last year's data.
 On the mantle was a purple vase.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 66)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 67)  
 Please hand me the plaid scarf?  
 Have you seen my green-white-orange coffee mug?  
 Your keys are on the checkerboard table.  

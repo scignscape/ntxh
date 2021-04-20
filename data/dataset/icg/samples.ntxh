@@ -1,5 +1,5 @@
 - Generated from LaTeX File icg.tex 
-20/4/2021, 8:25
+20/4/2021, 11:31
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -489,13 +489,13 @@ $c: ont
 
 !/ SentenceList
 $i: 14
-$r: 20
-$p: 20
+$r: 21
+$p: 21
 $s: 1
 
 !/ SentenceItem
 $i: 37
-$p: 20
+$p: 21
 $t: That's a stained-glass window overlooking the yard.
 $c: ont
 /!
@@ -789,13 +789,13 @@ $c: syn
 
 !/ SentenceList
 $i: 22
-$r: 37
-$p: 37
+$r: 38
+$p: 38
 $s: 2
 
 !/ SentenceItem
 $i: 65
-$p: 37
+$p: 38
 $x: itm:walkedto
 $t: I walked to the store.
 $c: cog
@@ -804,7 +804,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 66
-$p: 37
+$p: 38
 $t: I visited the store.
 $c: cog
 /!
@@ -812,7 +812,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 67
-$p: 37
+$p: 38
 $x: itm:walkedtoward
 $t: I walked toward the store.
 $c: cog
@@ -821,7 +821,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 68
-$p: 37
+$p: 38
 $t: I walked past the store.
 $c: cog
 /!
@@ -829,7 +829,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 69
-$p: 37
+$p: 38
 $x: itm:walkedaround
 $t: I walked around the puddle.
 $c: cog
@@ -1153,13 +1153,13 @@ $c: amb
 
 !/ SentenceList
 $i: 30
-$r: 43
-$p: 43
+$r: 44
+$p: 44
 $s: 2
 
 !/ SentenceItem
 $i: 100
-$p: 43
+$p: 44
 $x: itm:discovered
 $t: The effect was discovered by some scientists who were working in this lab.
 $c: amb
@@ -1168,7 +1168,7 @@ $c: amb
 
 !/ SentenceItem
 $i: 101
-$p: 43
+$p: 44
 $t: The effect was discovered by some scientists working in this lab.
 $c: amb
 /!
@@ -1321,13 +1321,13 @@ $c: syn
 
 !/ SentenceList
 $i: 35
-$r: 48
-$p: 48
+$r: 49
+$p: 49
 $s: 3
 
 !/ SentenceItem
 $i: 114
-$p: 48
+$p: 49
 $t: This bus drops passengers off downtown.
 $c: syn
 /!
@@ -1335,7 +1335,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 115
-$p: 48
+$p: 49
 $x: itm:busqueen
 $t: This bus drops passengers off along Queen street.
 $c: syn
@@ -1344,7 +1344,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 116
-$p: 48
+$p: 49
 $t: This bus drops passengers off downtown along Queen street.
 $c: syn
 /!
@@ -1352,7 +1352,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 117
-$p: 48
+$p: 49
 $t: This bus will take you downtown via Queen street.
 $c: syn
 /!
@@ -1524,13 +1524,13 @@ $c: cog
 
 !/ SentenceList
 $i: 41
-$r: 50
-$p: 50
+$r: 51
+$p: 51
 $s: 3
 
 !/ SentenceItem
 $i: 132
-$p: 50
+$p: 51
 $t: What was it that you used to open the wine?
 $c: cog
 /!
@@ -1628,13 +1628,13 @@ $c: syn
 
 !/ SentenceList
 $i: 44
-$r: 51
-$p: 51
+$r: 52
+$p: 52
 $s: 3
 
 !/ SentenceItem
 $i: 141
-$p: 51
+$p: 52
 $t: We know that Warren and Sanders appeal to the same cohort of voters.
 $c: syn
 /!
@@ -2197,13 +2197,13 @@ $c: cog
 
 !/ SentenceList
 $i: 59
-$r: 66
-$p: 66
+$r: 67
+$p: 67
 $s: 4
 
 !/ SentenceItem
 $i: 192
-$p: 66
+$p: 67
 $t: Please hand me the plaid scarf?
 $c: cog
 /!
@@ -2211,7 +2211,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 193
-$p: 66
+$p: 67
 $t: Have you seen my green-white-orange coffee mug?
 $c: cog
 /!
@@ -2219,7 +2219,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 194
-$p: 66
+$p: 67
 $t: Your keys are on the checkerboard table.
 $c: cog
 /!
@@ -2227,7 +2227,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 195
-$p: 66
+$p: 67
 $t: My purse is the striped one.
 $c: cog
 /!
@@ -2235,7 +2235,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 196
-$p: 66
+$p: 67
 $t: The cross-hatch column shows last year's data.
 $c: cog
 /!
@@ -2243,7 +2243,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 197
-$p: 66
+$p: 67
 $t: On the mantle was a spiral-pattern vase.
 $c: cog
 /!
