@@ -3,27 +3,27 @@ $$ local-title := section4
 
 $& AkbikBross %% (1:main) 65067 65068
 $& BradleyRives p.%%24 (1:main) 27103 27107
-$& CarlosMontemayor %% (1:main) 93417 93562
-$& DanRyder %% (1:main) 93563 93564
+$& CarlosMontemayor %% (1:main) 93419 93564
+$& DanRyder %% (1:main) 93565 93566
 $& Debusmann %% (1:main) 65059 65060
 $& DebusmannDuchierRossberg %% (1:main) 65061 65062
 $& DebusmannThesis %% (1:main) 64951 65058
 $& HolmqvistDiss %% (1:main) 64555 64556
 $& HolmqvistDiss %% (1:main) 71606 71671
 $& HongEisner %% (1:main) 65065 65066
-$& JensAllwood %% (1:main) 86586 86601
-$& JensAllwood page%%9 (1:main) 90575 90964
-$& JoeyPollack %% (1:main) 93565 93569
+$& JensAllwood %% (1:main) 86588 86603
+$& JensAllwood page%%9 (1:main) 90577 90966
+$& JoeyPollack %% (1:main) 93567 93571
 $& KennethHolmqvist %% (1:main) 64557 64558
 $& KepserMonnich %% (1:main) 65183 65184
 $& KongRushSmith %% (1:main) 65121 65182
-$& LawryTang %% (1:main) 108378 108379
-$& LewisLawry %% (1:main) 108376 108377
-$& LucasBechberger %% (1:main) 108369 108375
+$& LawryTang %% (1:main) 108380 108381
+$& LewisLawry %% (1:main) 108378 108379
+$& LucasBechberger %% (1:main) 108371 108377
 $& MattSelway %% (1:main) 64191 64554
 $& Nivre %% (1:main) 65063 65064
 $& Schneider %% (1:main) 65185 65186
-$& UrbanGrzelinska %% (1:main) 108380 108384
+$& UrbanGrzelinska %% (1:main) 108382 108386
 $& XiaPalmer %% (1:main) 65187 65188
 
 

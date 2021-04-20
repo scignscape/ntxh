@@ -248,28 +248,28 @@ void copy_and_backup(QString paper_name, QString full_name)
  QString documents_folder = ROOT_FOLDER "/documents";
 
  QDir qd(dataset_folder);
- if(!qd.exists("dryad"))
-   qd.mkdir("dryad");
+ if(!qd.exists("osf"))
+   qd.mkdir("osf");
 
- qd.cd("dryad");
+ qd.cd("osf");
 
- QString dryad_folder = qd.absolutePath();
+ QString osf_folder = qd.absolutePath();
 
  backup_binary_file(dataset_folder + "/samples.ntxh");
- backup_binary_file(dryad_folder + QString("/samples-%1.ntxh").arg(paper_name));
+ backup_binary_file(osf_folder + QString("/samples-%1.ntxh").arg(paper_name));
 
  copy_binary_file_to_folder_with_rename(out_folder + "/" + paper_name + ".ntxh",
    dataset_folder, "samples");
  copy_binary_file_to_folder_with_rename(out_folder + "/" + paper_name + ".ntxh",
-   dryad_folder, QString("samples-%1").arg(paper_name));
+   osf_folder, QString("samples-%1").arg(paper_name));
 
  backup_binary_file(dataset_folder + "/sdi-merge.ntxh");
- backup_binary_file(dryad_folder + QString("/sdi-merge-%1.ntxh").arg(paper_name));
+ backup_binary_file(osf_folder + QString("/sdi-merge-%1.ntxh").arg(paper_name));
 
  copy_binary_file_to_folder_with_rename(out_folder + "/../sdi-merge.ntxh",
    dataset_folder, "sdi-merge");
  copy_binary_file_to_folder_with_rename(out_folder + "/../sdi-merge.ntxh",
-   dryad_folder, QString("sdi-merge-%1").arg(paper_name));
+   osf_folder, QString("sdi-merge-%1").arg(paper_name));
 
  backup_binary_file(dataset_folder + "/main.pdf");
  copy_binary_file_to_folder_with_rename(out_folder + "/" + paper_name + ".pdf",
