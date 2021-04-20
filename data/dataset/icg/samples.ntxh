@@ -1,5 +1,5 @@
 - Generated from LaTeX File icg.tex 
-20/4/2021, 11:31
+20/4/2021, 12:48
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -464,13 +464,13 @@ $c: dia
 
 !/ SentenceList
 $i: 13
-$r: 20
+$r: 21
 $p: 20
 $s: 1
 
 !/ SentenceItem
 $i: 35
-$p: 20
+$p: 21
 $t: That's a hungry window overlooking the yard.
 $c: ont
 /!
@@ -478,7 +478,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 36
-$p: 20
+$p: 21
 $t: That's a porcelain touchdown under video review.
 $c: ont
 /!
@@ -580,13 +580,13 @@ $c: ont
 
 !/ SentenceList
 $i: 17
-$r: 21
-$p: 21
+$r: 22
+$p: 22
 $s: 1
 
 !/ SentenceItem
 $i: 45
-$p: 21
+$p: 22
 $t: The porcelain cat is hungry.
 $c: ont
 /!
@@ -594,7 +594,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 46
-$p: 21
+$p: 22
 $t: Garfield ate my breakfast.
 $c: ont
 /!
@@ -602,7 +602,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 47
-$p: 21
+$p: 22
 $t: All the cats are hungry because the actors don't eat before the show starts.
 $c: ont
 /!
@@ -1497,13 +1497,13 @@ $c: cog
 
 !/ SentenceList
 $i: 40
-$r: 50
-$p: 50
+$r: 51
+$p: 51
 $s: 3
 
 !/ SentenceItem
 $i: 130
-$p: 50
+$p: 51
 $x: itm:winerecommended
 $t: I found the wine that John recommended.
 $c: cog
@@ -1512,7 +1512,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 131
-$p: 50
+$p: 51
 $x: itm:brownrice
 $t: Please use brown rice when making the pilaf.
 $c: cog
@@ -1680,13 +1680,13 @@ $c: syn
 
 !/ SentenceList
 $i: 46
-$r: 52
-$p: 52
+$r: 53
+$p: 53
 $s: 3
 
 !/ SentenceItem
 $i: 145
-$p: 52
+$p: 53
 $x: itm:stugglinggroceries
 $t: He is struggling to hold the groceries.
 $c: syn
@@ -1695,7 +1695,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 146
-$p: 52
+$p: 53
 $x: itm:baggroceries
 $t: We need a bag to hold to groceries.
 $c: syn
@@ -1704,7 +1704,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 147
-$p: 52
+$p: 53
 $x: itm:tryingattention
 $t: She is trying to get our attention.
 $c: syn
@@ -1713,7 +1713,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 148
-$p: 52
+$p: 53
 $x: itm:shoutingattention
 $t: She is shouting to get our attention.
 $c: syn
@@ -1854,13 +1854,13 @@ $c: syn
 
 !/ SentenceList
 $i: 51
-$r: 55
-$p: 55
+$r: 56
+$p: 56
 $s: 3
 
 !/ SentenceItem
 $i: 160
-$p: 55
+$p: 56
 $x: itm:nptable
 $t: My favorite newspaper is on the table.
 $c: ont
@@ -1869,7 +1869,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 161
-$p: 55
+$p: 56
 $t: My favorite newspaper hired a new editor.
 $c: ont
 /!
@@ -1877,7 +1877,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 162
-$p: 55
+$p: 56
 $x: itm:npwalk
 $t: I walk past my favorite newspaper everyday.
 $c: ont
