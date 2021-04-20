@@ -1,5 +1,5 @@
 - Generated from LaTeX File itm.tex 
-19/4/2021, 1:18
+19/4/2021, 21:54
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -477,7 +477,6 @@ $s: 3
 !/ SentenceItem
 $i: 36
 $p: 42
-$x: ---{}
 $t: Today is Tuesday.
 $c: syn
 /!
@@ -486,7 +485,6 @@ $c: syn
 !/ SentenceItem
 $i: 37
 $p: 42
-$x: ---{}
 $t: The big departmental meeting is Tuesday.
 $c: syn
 /!
@@ -495,7 +493,6 @@ $c: syn
 !/ SentenceItem
 $i: 38
 $p: 42
-$x: ---{}
 $t: It is very windy.
 $c: syn
 /!
@@ -504,7 +501,6 @@ $c: syn
 !/ SentenceItem
 $i: 39
 $p: 42
-$x: ---{}
 $t: The lousy weather is very windy.
 $c: syn
 /!
@@ -513,7 +509,6 @@ $c: syn
 !/ SentenceItem
 $i: 40
 $p: 42
-$x: ---{}
 $t: They are forecasting snow.
 $c: syn
 /!
@@ -522,7 +517,6 @@ $c: syn
 !/ SentenceItem
 $i: 41
 $p: 42
-$x: ---{}
 $t: The latest reports are forecasting snow.
 $c: syn
 /!
@@ -540,7 +534,6 @@ $s: 3
 !/ SentenceItem
 $i: 42
 $p: 43
-$x: ---{}
 $t: She is a salaried employee.
 $c: syn
 /!
@@ -549,7 +542,6 @@ $c: syn
 !/ SentenceItem
 $i: 43
 $p: 43
-$x: ---{}
 $t: He is an elected official.
 $c: syn
 /!
@@ -738,7 +730,6 @@ $c: ont
 !/ SentenceItem
 $i: 60
 $p: 52
-$x: ---{}
 $t: This book, which the library classifies as young adult nonfiction, has some dude's phone number scrawled inside.
 $c: ont
 /!
@@ -747,7 +738,6 @@ $c: ont
 !/ SentenceItem
 $i: 61
 $p: 52
-$x: ---{}
 $t: My boss barks louder than his dog does.
 $c: ont
 /!

@@ -1257,21 +1257,21 @@ he actually lives in an apartment). -> itm:apartment ->  I'm going to a party at
  ;;- __________ 
 
 
-`swl -> %-- -> Today is Tuesday. -> syn ;;
+`swl -> --- -> Today is Tuesday. -> syn ;;
 
-`swl -> %-- -> The big departmental meeting is Tuesday. -> syn ;;
+`swl -> --- -> The big departmental meeting is Tuesday. -> syn ;;
 
-`swl -> %-- -> It is very windy. -> syn ;;
+`swl -> --- -> It is very windy. -> syn ;;
 
-`swl -> %-- -> The lousy weather is very windy. -> syn ;;
+`swl -> --- -> The lousy weather is very windy. -> syn ;;
 
-`swl -> %-- -> They are forecasting snow. -> syn ;;
+`swl -> --- -> They are forecasting snow. -> syn ;;
 
-`swl -> %-- -> The latest reports are forecasting snow. -> syn ;;
+`swl -> --- -> The latest reports are forecasting snow. -> syn ;;
 
-`swl -> %-- -> She is a salaried employee. -> syn ;;
+`swl -> --- -> She is a salaried employee. -> syn ;;
 
-`swl -> %-- -> He is an elected official.  -> syn ;;
+`swl -> --- -> He is an elected official.  -> syn ;;
 
 `swl -> itm:penguin -> A penguin is a flightless bird. -> cog ;;
 
@@ -1306,7 +1306,7 @@ he actually lives in an apartment). -> itm:apartment ->  I'm going to a party at
 `swl ->> This book, which costs \$40, has some crazy ideas inside. -> %--
  -> This book, which costs 40 dollars, has some crazy ideas inside. -> ont ;;
 
-`swl -> %-- -> This book, which the library classifies as young adult
+`swl -> --- -> This book, which the library classifies as young adult
 nonfiction, has some dude's phone number scrawled inside. -> ont ;;
 
-`swl -> %-- -> My boss barks louder than his dog does. -> ont ;;
+`swl -> --- -> My boss barks louder than his dog does. -> ont ;;
