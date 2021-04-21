@@ -2999,7 +2999,7 @@ void XpdfViewer::createMainMenu() {
 void XpdfViewer::show_article()
 {
  // // For now just hard-code the link ...
- QDesktopServices::openUrl(QUrl("https://link.springer.com/journal/10772/volumes-and-issues"));
+ QDesktopServices::openUrl(QUrl("https://link.springer.com/article/10.1007/s10772-021-09817-z"));
 }
 
 // This can't be named createPopupMenu because there's a QMainWindow

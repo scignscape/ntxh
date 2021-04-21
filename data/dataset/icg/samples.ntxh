@@ -1,5 +1,5 @@
 - Generated from LaTeX File icg.tex 
-21/4/2021, 1:59
+21/4/2021, 14:43
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -181,7 +181,7 @@ $c: dis
 !/ SentenceList
 $i: 4
 $r: 5
-$p: 4
+$p: 5
 $s: 0
 
 !/ SentenceItem
@@ -550,12 +550,12 @@ $c: ont
 !/ SentenceList
 $i: 16
 $r: 22
-$p: 22
+$p: 21
 $s: 1
 
 !/ SentenceItem
 $i: 42
-$p: 22
+$p: 21
 $t: The porcelain cat is black.
 $c: ont
 /!
@@ -697,7 +697,7 @@ $c: fig
 
 !/ SentenceList
 $i: 21
-$r: 38
+$r: 37
 $p: 37
 $s: 2
 
@@ -711,7 +711,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 55
-$p: 38
+$p: 37
 $t: I walked for two hours.
 $c: syn
 /!
@@ -719,7 +719,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 56
-$p: 38
+$p: 37
 $t: I walked the dogs earlier this morning.
 $c: syn
 /!
@@ -727,7 +727,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 57
-$p: 38
+$p: 37
 $t: I brought wine to the party.
 $c: syn
 /!
@@ -735,7 +735,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 58
-$p: 38
+$p: 37
 $t: John brought Champagne!
 $c: syn
 /!
@@ -743,7 +743,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 59
-$p: 38
+$p: 37
 $t: I brought Champagne for John.
 $c: syn
 /!
@@ -751,7 +751,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 60
-$p: 38
+$p: 37
 $t: I gave Champagne to John.
 $c: syn
 /!
@@ -759,7 +759,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 61
-$p: 38
+$p: 37
 $t: I wrote a check for the charity.
 $c: syn
 /!
@@ -767,7 +767,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 62
-$p: 38
+$p: 37
 $t: I wrote a check to the charity.
 $c: syn
 /!
@@ -960,13 +960,13 @@ $c: cog
 
 !/ SentenceList
 $i: 25
-$r: 39
-$p: 39
+$r: 38
+$p: 38
 $s: 2
 
 !/ SentenceItem
 $i: 82
-$p: 39
+$p: 38
 $t: We have to go to the counter by the cashier near the front of the store for a ticket.
 $c: cog
 /!
@@ -1315,7 +1315,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 113
-$p: 49
+$p: 48
 $t: If they make him a healthy scratch enough times, he might accept a trade.
 $c: syn
 /!
@@ -1578,7 +1578,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 136
-$p: 52
+$p: 51
 $t: Those dogs are really barking.
 $c: syn
 /!
@@ -1586,7 +1586,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 137
-$p: 52
+$p: 51
 $x: itm:reallyloudly
 $t: Those dogs are really barking loudly.
 $c: syn
@@ -1673,7 +1673,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 144
-$p: 53
+$p: 52
 $x: itm:hotpepper
 $t: I know you like hot pepper, but John can't eat spicy food.
 $c: syn
@@ -1796,7 +1796,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 155
-$p: 55
+$p: 54
 $x: itm:trybinoculars
 $t: I'm going to try binoculars at the next game.
 $c: sem

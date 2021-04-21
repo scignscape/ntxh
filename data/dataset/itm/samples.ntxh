@@ -1,5 +1,5 @@
 - Generated from LaTeX File itm.tex 
-21/4/2021, 2:2
+21/4/2021, 14:46
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -80,7 +80,7 @@ $c: rol
 
 !/ SentenceItem
 $i: 2
-$p: 10
+$p: 11
 $x: itm:butterfly
 $t: He opened the beer bottle with a butterfly corkscrew.
 $c: rol
@@ -89,7 +89,7 @@ $c: rol
 
 !/ SentenceItem
 $i: 3
-$p: 10
+$p: 11
 $x: itm:screwtop
 $t: I thought this was a screw-top but it turns out I need a corkscrew.
 $c: rol
@@ -98,7 +98,7 @@ $c: rol
 
 !/ SentenceItem
 $i: 4
-$p: 10
+$p: 11
 $x: itm:x3d
 $t: This X3D file shows a very realistic corkscrew created with NURBS surfaces.
 $c: rol
@@ -107,7 +107,7 @@ $c: rol
 
 !/ SentenceItem
 $i: 5
-$p: 10
+$p: 11
 $x: itm:sendx3d
 $t: Could you send me the corkscrew (the X3D file you just mentioned)?
 $c: rol
@@ -271,13 +271,13 @@ $c: rol
 
 !/ SentenceList
 $i: 7
-$r: 12
-$p: 12
+$r: 13
+$p: 13
 $s: 1
 
 !/ SentenceItem
 $i: 19
-$p: 12
+$p: 13
 $t: The water and the Deuterium Dioxide is over there.
 $c: rol
 /!
@@ -289,7 +289,7 @@ $c: rol
 !/ SentenceList
 $i: 8
 $r: 13
-$p: 12
+$p: 13
 $s: 1
 
 !/ SentenceItem
@@ -470,13 +470,13 @@ $c: log
 
 !/ SentenceList
 $i: 13
-$r: 42
-$p: 42
+$r: 43
+$p: 43
 $s: 3
 
 !/ SentenceItem
 $i: 36
-$p: 42
+$p: 43
 $t: Today is Tuesday.
 $c: syn
 /!
@@ -484,7 +484,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 37
-$p: 42
+$p: 43
 $t: The big departmental meeting is Tuesday.
 $c: syn
 /!
@@ -492,7 +492,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 38
-$p: 42
+$p: 43
 $t: It is very windy.
 $c: syn
 /!
@@ -500,7 +500,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 39
-$p: 42
+$p: 43
 $t: The lousy weather is very windy.
 $c: syn
 /!
@@ -508,7 +508,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 40
-$p: 42
+$p: 43
 $t: They are forecasting snow.
 $c: syn
 /!
@@ -516,7 +516,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 41
-$p: 42
+$p: 43
 $t: The latest reports are forecasting snow.
 $c: syn
 /!

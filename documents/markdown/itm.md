@@ -38,7 +38,7 @@ You can see the ocean from here.
 You can see the water from here.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 12)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 13)  
 The water and the Deuterium Dioxide is over there.  
 
 #
@@ -73,7 +73,7 @@ What time does the office open?
 What time does train 100 depart from Newark?  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 42)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 43)  
 Today is Tuesday.  
 The big departmental meeting is Tuesday.  
 It is very windy.  

@@ -50,8 +50,7 @@ int main(int argc, char *argv[])
 
  // //  Here in case need to override the cmdline ...
  // paper_name = "ctg";
- //
- paper_name = "icg";
+ // paper_name = "icg";
  // paper_name = "itm";
 
 

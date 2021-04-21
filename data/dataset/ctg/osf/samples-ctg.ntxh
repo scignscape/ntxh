@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-21/4/2021, 1:52
+21/4/2021, 14:36
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -493,13 +493,13 @@ $c: log
 
 !/ SentenceList
 $i: 12
-$r: 12
-$p: 12
+$r: 13
+$p: 13
 $s: 1
 
 !/ SentenceItem
 $i: 37
-$p: 12
+$p: 13
 $x: itm:threetimes
 $t: Three times, students asked an interesting question.
 $c: sco
@@ -697,13 +697,13 @@ $l: GUM_news\_warhol-35
 
 !/ SentenceList
 $i: 24
-$r: 16
-$p: 16
+$r: 17
+$p: 17
 $s: 1
 
 !/ SentenceItem
 $i: 51
-$p: 16
+$p: 17
 $x: itm:ants
 $t: A furry black band of ants led up a cupboard door to some scrap that had flicked from a plate.
 $c: sem
@@ -832,7 +832,7 @@ $c: sco
 
 !/ SentenceItem
 $i: 59
-$p: 21
+$p: 22
 $x: itm:after
 $t: Student after student complained about the tuition hikes.
 $c: sco
@@ -841,7 +841,7 @@ $c: sco
 
 !/ SentenceItem
 $i: 60
-$p: 21
+$p: 22
 $x: itm:parents
 $t: Student after student came with their parents to complain about the tuition hikes.
 $c: sco
@@ -1343,13 +1343,13 @@ $c: pra
 
 !/ SentenceList
 $i: 50
-$r: 35
+$r: 36
 $p: 35
 $s: 3
 
 !/ SentenceItem
 $i: 102
-$p: 35
+$p: 36
 $x: itm:TheWindow
 $t: The window, it's still open.
 $c: pra
@@ -1358,7 +1358,7 @@ $c: pra
 
 !/ SentenceItem
 $i: 103
-$p: 35
+$p: 36
 $x: itm:AWindow
 $t: A window, it's still open.
 $c: pra
@@ -1371,12 +1371,12 @@ $c: pra
 !/ SentenceList
 $i: 51
 $r: 36
-$p: 35
+$p: 36
 $s: 3
 
 !/ SentenceItem
 $i: 104
-$p: 35
+$p: 36
 $x: itm:scribbled
 $t: He scribbled on a living-room wall.
 $c: sem
@@ -1413,13 +1413,13 @@ $c: pra
 
 !/ SentenceList
 $i: 53
-$r: 36
-$p: 36
+$r: 37
+$p: 37
 $s: 3
 
 !/ SentenceItem
 $i: 107
-$p: 36
+$p: 37
 $t: Grandma wants us to close the window.
 $c: pra
 /!
@@ -1653,13 +1653,13 @@ $c: pra
 
 !/ SentenceList
 $i: 62
-$r: 42
+$r: 43
 $p: 42
 $s: 3
 
 !/ SentenceItem
 $i: 126
-$p: 42
+$p: 43
 $t: If the kitchen window is closed, we can see if other windows are open.
 $c: pra
 /!
@@ -1667,7 +1667,7 @@ $c: pra
 
 !/ SentenceItem
 $i: 127
-$p: 42
+$p: 43
 $t: If no windows are open, we can see if there is a draft through the window-cracks.
 $c: pra
 /!
@@ -1675,7 +1675,7 @@ $c: pra
 
 !/ SentenceItem
 $i: 128
-$p: 42
+$p: 43
 $t: If there is no draft, we can ask if she wants a sweater.
 $c: pra
 /!
@@ -1686,13 +1686,13 @@ $c: pra
 
 !/ SentenceList
 $i: 63
-$r: 43
-$p: 43
+$r: 44
+$p: 44
 $s: 3
 
 !/ SentenceItem
 $i: 129
-$p: 43
+$p: 44
 $t: This wine is a young Syrah.
 $c: log
 /!
@@ -1700,7 +1700,7 @@ $c: log
 
 !/ SentenceItem
 $i: 130
-$p: 43
+$p: 44
 $t: My cousin adopted one of my neighbor's dog's puppies.
 $c: log
 /!
@@ -2030,13 +2030,13 @@ $c: sem
 
 !/ SentenceList
 $i: 75
-$r: 58
-$p: 58
+$r: 59
+$p: 59
 $s: 4
 
 !/ SentenceItem
 $i: 157
-$p: 58
+$p: 59
 $x: itm:coffeeshirt
 $t: There's some coffee on your shirt.
 $c: syn
@@ -2045,7 +2045,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 158
-$p: 58
+$p: 59
 $t: There's coffee all over the table.
 $c: syn
 /!
@@ -2053,7 +2053,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 159
-$p: 58
+$p: 59
 $t: She poured coffee from an ornate beaker.
 $c: syn
 /!
@@ -2061,7 +2061,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 160
-$p: 58
+$p: 59
 $t: There's too much coffee in the grinder.
 $c: syn
 /!
@@ -2069,7 +2069,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 161
-$p: 58
+$p: 59
 $t: There's a lot of coffee left in the pot.
 $c: syn
 /!
@@ -2450,7 +2450,7 @@ $c: ref
 !/ SentenceList
 $i: 85
 $r: 66
-$p: 65
+$p: 66
 $s: 4
 
 !/ SentenceItem
@@ -2513,7 +2513,7 @@ $c: ref
 !/ SentenceList
 $i: 87
 $r: 68
-$p: 67
+$p: 68
 $s: 4
 
 !/ SentenceItem
@@ -2601,7 +2601,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 210
-$p: 68
+$p: 69
 $t: I believed in Obama.
 $c: syn
 /!
@@ -2609,7 +2609,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 211
-$p: 68
+$p: 69
 $t: I believed in lies.
 $c: syn
 /!
@@ -2862,7 +2862,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 239
-$p: 72
+$p: 73
 $t: The war went on for five years.
 $c: cog
 /!
@@ -2870,7 +2870,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 240
-$p: 72
+$p: 73
 $x: itm:peacewenton
 $t: The peace went on for five years.
 $o: (?)
@@ -3042,7 +3042,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 254
-$p: 80
+$p: 81
 $x: itm:atleastdress
 $t: At least for Alice that wonderful dress is just too expensive.
 $c: pro
@@ -3054,13 +3054,13 @@ $c: pro
 
 !/ SentenceList
 $i: 98
-$r: 80
-$p: 80
+$r: 81
+$p: 81
 $s: 5
 
 !/ SentenceItem
 $i: 255
-$p: 80
+$p: 81
 $x: itm:easter
 $t: Last night, she was painting Easter eggs.
 $c: pro
@@ -3099,13 +3099,13 @@ $c: pro
 
 !/ SentenceList
 $i: 99
-$r: 82
-$p: 82
+$r: 83
+$p: 83
 $s: 5
 
 !/ SentenceItem
 $i: 259
-$p: 82
+$p: 83
 $x: itm:Amazing
 $t: It's amazing, the things she says sometimes.
 $c: pro
@@ -3114,7 +3114,7 @@ $c: pro
 
 !/ SentenceItem
 $i: 260
-$p: 82
+$p: 83
 $x: itm:Ridiculous
 $t: It's ridiculous, what he's saying.
 $c: pro
@@ -3126,13 +3126,13 @@ $c: pro
 
 !/ SentenceList
 $i: 100
-$r: 88
-$p: 88
+$r: 89
+$p: 89
 $s: 5
 
 !/ SentenceItem
 $i: 261
-$p: 88
+$p: 89
 $x: itm:rhinor
 $t: Rhinos in that park are threatened by poachers.
 $c: sem
@@ -3141,7 +3141,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 262
-$p: 88
+$p: 89
 $t: Young rhinos are threatened by poachers.
 $c: sem
 /!

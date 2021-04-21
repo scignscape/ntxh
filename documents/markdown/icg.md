@@ -115,7 +115,7 @@ Biden's support among his base is eroding.
 Violent clashes between protesters and the police have spilled out into the streets.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 38)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 37)  
 I walked earlier this morning.  
 I walked for two hours.  
 I walked the dogs earlier this morning.  
@@ -155,7 +155,7 @@ We have to drive past the highway.
 We have to drive past the highway to the entrance.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 39)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 38)  
 We have to go to the counter by the cashier near the front of the store for a ticket.  
 The waiter carved some duck for Grandma at the table with an ornate knife.  
 

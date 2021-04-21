@@ -248,7 +248,7 @@ int main(int argc, char **argv)
 
  dlg.setWindowFlags(dlg.windowFlags() & Qt::WindowStaysOnTopHint);
 
- dlg.set_publication_url("https://link.springer.com/journal/10772/volumes-and-issues");
+ dlg.set_publication_url("https://link.springer.com/article/10.1007/s10772-021-09817-z");
 
  dlg.set_generate_markdown_function([](QString path, Dataset* ds)
  {
