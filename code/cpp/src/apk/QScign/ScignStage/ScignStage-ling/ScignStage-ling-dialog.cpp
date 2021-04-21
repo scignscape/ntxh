@@ -116,32 +116,6 @@ Q_DECLARE_METATYPE(Language_Sample_Group*)
 
 
 
-void ScignStage_Ling_Dialog::reset_issue_counts()
-{
- int c = 0;
-
- QList<QAbstractButton*> bs = filter_issues_button_group_->buttons();
-
- for(QAbstractButton* ab : bs)
- {
-  if(QCheckBox* cb = qobject_cast<QCheckBox*>(ab))
-  {
-   QString ic = cb->property("ic").toString();
-   u4 issue_count = issue_counts_.value(ic);
-   if(issue_count > 0)
-   {
-    current_filters_.insert(ic);
-    cb->setChecked(true);
-   }
-   else
-   {
-    qDebug() << "No examples for issue: " << ic;
-    cb->setEnabled(false);
-   }
-  }
- }
-}
-
 ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
   Dataset* ds,
   QWidget* parent)
@@ -700,6 +674,33 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
 }
 
 
+
+void ScignStage_Ling_Dialog::reset_issue_counts()
+{
+ QList<QAbstractButton*> bs = filter_issues_button_group_->buttons();
+
+ for(QAbstractButton* ab : bs)
+ {
+  if(QCheckBox* cb = qobject_cast<QCheckBox*>(ab))
+  {
+   QString ic = cb->property("ic").toString();
+   u4 issue_count = issue_counts_.value(ic);
+   if(issue_count > 0)
+   {
+    current_filters_.insert(ic);
+    cb->setEnabled(true);
+    cb->setChecked(true);
+   }
+   else
+   {
+    qDebug() << "No examples for issue: " << ic;
+    cb->setChecked(false);
+    cb->setEnabled(false);
+   }
+  }
+ }
+}
+
 void ScignStage_Ling_Dialog::copy_to_clipboard()
 {
  if(current_sample_)
@@ -739,7 +740,16 @@ void ScignStage_Ling_Dialog::get_replacement_dataset_path()
   {
    main_tree_widget_->clear();
    set_paths_from_dataset(*ds);
+
+   // //  This assumes the issues and codes are alike for all data sets
+    //    (counts may be different).  TODO: be more flexible, should be
+    //    able to create more checkboxes if needed.
+   issues_ = ds->issues();
+   issue_codes_ = ds->issue_codes();
+   issue_counts_ = ds->issue_counts();
+
    absorb_dataset(*ds);
+   reset_issue_counts();
    dataset_ = ds;
   }
  }

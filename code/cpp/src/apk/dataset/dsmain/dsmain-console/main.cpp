@@ -180,6 +180,7 @@ int main(int argc, char **argv)
  }
  else
  {
+  //
   paper_name = "ctg";
   // paper_name = "icg";
   // paper_name = "itm";

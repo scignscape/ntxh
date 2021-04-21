@@ -30,8 +30,8 @@ Dataset::Dataset(QString root_folder)
   : QRing_File_Structure(root_folder), samples_(nullptr), groups_(nullptr)
 {
  forms_ = QStringList{{"Text", "Dialog", "Intonation", "Fragment", "Paragraph"}};
- issues_ = QStringList{{"Ambiguity", "Figure", "Logic",
-            "Scope", "Polarity", "Prosody", "Syntax", "Semantics", "Pragmatics",
+ issues_ = QStringList{{"Ambiguity", "Roles", "Logic",
+            "Scope", "Types", "Prosody", "Syntax", "Semantics", "Pragmatics",
             "Dialogue", "Cognition", "Lexical", "Discourse", "Reference", "Ontological",
  }};
 
