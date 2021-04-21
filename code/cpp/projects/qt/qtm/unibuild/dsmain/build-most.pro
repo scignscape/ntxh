@@ -61,6 +61,11 @@ SUBDIRS += \
 
 
 SUBDIRS += \
+  ./build-most/ro-info  \
+  ./build-most/ro-info-console  \
+
+
+SUBDIRS += \
   ./build-most/config-dialog  \
   ./build-most/config-dialog-console  \
 

@@ -60,6 +60,11 @@ SUBDIRS += \
 
 
 SUBDIRS += \
+  ./build-quick/ro-info \
+  ./build-quick/ro-info-console \
+
+
+SUBDIRS += \
   ./build-quick/ScignStage-ling  \
   ./build-quick/lexpair  \
   ./build-quick/application-model  \

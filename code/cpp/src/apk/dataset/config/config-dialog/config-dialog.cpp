@@ -168,7 +168,7 @@ Config_Dialog::Config_Dialog(QWidget* parent)
  roic_check_box_ = new QCheckBox("Build Research Object Information Console", this);
  compile_options_grid_layout_->addWidget(roic_check_box_, 7, 0, 1, 3);
 
- charm_check_box_ = new QCheckBox("Charm Lib", this);
+ charm_check_box_ = new QCheckBox("Hypergraph Library", this);
  compile_options_grid_layout_->addWidget(charm_check_box_, 8, 0);
 
  lexpair_check_box_ = new QCheckBox("LexPair / Triple Link GUI", this);

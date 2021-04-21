@@ -730,7 +730,7 @@ void ScignStage_Ling_Dialog::get_replacement_dataset_path()
 {
  if(replace_dataset_function_)
  {
-  QString fld = DATA_ROOT_FOLDER;
+  QString fld = DATA_ROOT_FOLDER "/dataset";
   QString path = QFileDialog::getOpenFileName(this,
     "Choose Dataset File", fld);
   if(path.isEmpty())
