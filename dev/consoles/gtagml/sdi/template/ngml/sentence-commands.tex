@@ -180,8 +180,12 @@ $l: #2^^J%
 
 \newcommand{\sannot}[1]{%
 \ifthenelse{\equal{\detokenize{#1}}{\detokenize{(?)}}}
-{\raisebox{4pt}{{\footnotesize\textbf{?}}}}
-{#1}}
+{\raisebox{4pt}{{\footnotesize\textbf{?}}}}%
+%else
+{\ifthenelse{\equal{\detokenize{#1}}{\detokenize{(*)}}}
+{\raisebox{2pt}{{\small\textbf{*}\hspace*{2pt}}}}
+%else
+{#1}}}
 
 
 \makeatletter

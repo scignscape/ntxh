@@ -1,5 +1,5 @@
 - Generated from LaTeX File icg.tex 
-20/4/2021, 12:48
+20/4/2021, 20:45
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -465,13 +465,14 @@ $c: dia
 !/ SentenceList
 $i: 13
 $r: 21
-$p: 20
+$p: 21
 $s: 1
 
 !/ SentenceItem
 $i: 35
 $p: 21
 $t: That's a hungry window overlooking the yard.
+$o: (*)
 $c: ont
 /!
 <>>
@@ -480,6 +481,7 @@ $c: ont
 $i: 36
 $p: 21
 $t: That's a porcelain touchdown under video review.
+$o: (*)
 $c: ont
 /!
 <>>
@@ -547,13 +549,13 @@ $c: ont
 
 !/ SentenceList
 $i: 16
-$r: 21
-$p: 21
+$r: 22
+$p: 22
 $s: 1
 
 !/ SentenceItem
 $i: 42
-$p: 21
+$p: 22
 $t: The porcelain cat is black.
 $c: ont
 /!
@@ -561,7 +563,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 43
-$p: 21
+$p: 22
 $t: Garfield is a talking cat in a comic strip.
 $c: ont
 /!
@@ -569,7 +571,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 44
-$p: 21
+$p: 22
 $t: In the musical, all the actors are cats.
 $c: ont
 /!
@@ -588,6 +590,7 @@ $s: 1
 $i: 45
 $p: 22
 $t: The porcelain cat is hungry.
+$o: (?)
 $c: ont
 /!
 <>>
@@ -596,6 +599,7 @@ $c: ont
 $i: 46
 $p: 22
 $t: Garfield ate my breakfast.
+$o: (?)
 $c: ont
 /!
 <>>
@@ -604,6 +608,7 @@ $c: ont
 $i: 47
 $p: 22
 $t: All the cats are hungry because the actors don't eat before the show starts.
+$o: (?)
 $c: ont
 /!
 <>>
@@ -692,7 +697,7 @@ $c: fig
 
 !/ SentenceList
 $i: 21
-$r: 37
+$r: 38
 $p: 37
 $s: 2
 
@@ -706,7 +711,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 55
-$p: 37
+$p: 38
 $t: I walked for two hours.
 $c: syn
 /!
@@ -714,7 +719,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 56
-$p: 37
+$p: 38
 $t: I walked the dogs earlier this morning.
 $c: syn
 /!
@@ -722,7 +727,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 57
-$p: 37
+$p: 38
 $t: I brought wine to the party.
 $c: syn
 /!
@@ -730,7 +735,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 58
-$p: 37
+$p: 38
 $t: John brought Champagne!
 $c: syn
 /!
@@ -738,7 +743,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 59
-$p: 37
+$p: 38
 $t: I brought Champagne for John.
 $c: syn
 /!
@@ -746,7 +751,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 60
-$p: 37
+$p: 38
 $t: I gave Champagne to John.
 $c: syn
 /!
@@ -754,7 +759,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 61
-$p: 37
+$p: 38
 $t: I wrote a check for the charity.
 $c: syn
 /!
@@ -762,7 +767,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 62
-$p: 37
+$p: 38
 $t: I wrote a check to the charity.
 $c: syn
 /!
@@ -770,7 +775,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 63
-$p: 37
+$p: 38
 $t: I gave a check to the charity.
 $c: syn
 /!
@@ -778,7 +783,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 64
-$p: 37
+$p: 38
 $t: I gave a donation to the charity.
 $c: syn
 /!
@@ -955,13 +960,13 @@ $c: cog
 
 !/ SentenceList
 $i: 25
-$r: 38
-$p: 38
+$r: 39
+$p: 39
 $s: 2
 
 !/ SentenceItem
 $i: 82
-$p: 38
+$p: 39
 $t: We have to go to the counter by the cashier near the front of the store for a ticket.
 $c: cog
 /!
@@ -969,7 +974,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 83
-$p: 38
+$p: 39
 $t: The waiter carved some duck for Grandma at the table with an ornate knife.
 $c: cog
 /!
@@ -980,13 +985,13 @@ $c: cog
 
 !/ SentenceList
 $i: 26
-$r: 38
-$p: 38
+$r: 39
+$p: 39
 $s: 2
 
 !/ SentenceItem
 $i: 84
-$p: 38
+$p: 39
 $x: itm:studied
 $t: I studied.
 $c: cog
@@ -995,7 +1000,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 85
-$p: 38
+$p: 39
 $x: itm:studiedmath
 $t: I studied math.
 $c: cog
@@ -1004,7 +1009,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 86
-$p: 38
+$p: 39
 $x: itm:studiedhours
 $t: I studied for two hours.
 $c: cog
@@ -1013,7 +1018,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 87
-$p: 38
+$p: 39
 $x: itm:studiedlastnight
 $t: I studied last night.
 $c: cog
@@ -1022,7 +1027,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 88
-$p: 38
+$p: 39
 $x: itm:studiedbookstore
 $t: I studied in a bookstore.
 $c: cog
@@ -1126,13 +1131,13 @@ $c: syn
 
 !/ SentenceList
 $i: 29
-$r: 43
-$p: 43
+$r: 44
+$p: 44
 $s: 2
 
 !/ SentenceItem
 $i: 98
-$p: 43
+$p: 44
 $x: riceyellow
 $t: The rice has a nice yellow color that comes from turmeric.
 $c: amb
@@ -1141,7 +1146,7 @@ $c: amb
 
 !/ SentenceItem
 $i: 99
-$p: 43
+$p: 44
 $x: riceburn
 $t: Make sure the rice doesn't burn.
 $c: amb
@@ -1257,7 +1262,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 109
-$p: 46
+$p: 47
 $x: itm:coachhit
 $t: The coach hit the infielders some ground balls.
 $c: cog
@@ -1363,13 +1368,13 @@ $c: syn
 
 !/ SentenceList
 $i: 36
-$r: 49
-$p: 49
+$r: 50
+$p: 50
 $s: 3
 
 !/ SentenceItem
 $i: 118
-$p: 49
+$p: 50
 $t: I opened the wine with an antique corkscrew.
 $c: cog
 /!
@@ -1377,7 +1382,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 119
-$p: 49
+$p: 50
 $t: I opened the wine in the kitchen.
 $c: cog
 /!
@@ -1385,7 +1390,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 120
-$p: 49
+$p: 50
 $t: I opened the wine to aerate.
 $c: cog
 /!
@@ -1393,7 +1398,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 121
-$p: 49
+$p: 50
 $t: I opened the wine for John.
 $c: cog
 /!
@@ -1401,7 +1406,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 122
-$p: 49
+$p: 50
 $t: I opened the wine because John asked me to.
 $c: cog
 /!
@@ -1409,7 +1414,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 123
-$p: 49
+$p: 50
 $t: I opened the wine in the kitchen for John so it could aerate because he asked me to.
 $c: cog
 /!
@@ -1447,13 +1452,13 @@ $c: cog
 
 !/ SentenceList
 $i: 38
-$r: 50
-$p: 50
+$r: 51
+$p: 51
 $s: 3
 
 !/ SentenceItem
 $i: 126
-$p: 50
+$p: 51
 $t: I gave John a Cabernet Franc from the winery he visited during a trip along the Niagara escarpment last summer.
 $c: syn
 /!
@@ -1461,7 +1466,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 127
-$p: 50
+$p: 51
 $t: We'll award a prize to the first caller who correctly identifies who scored the game-winning goal last night.
 $c: syn
 /!
@@ -1472,13 +1477,13 @@ $c: syn
 
 !/ SentenceList
 $i: 39
-$r: 50
-$p: 50
+$r: 51
+$p: 51
 $s: 3
 
 !/ SentenceItem
 $i: 128
-$p: 50
+$p: 51
 $t: The instructor hit them ground balls to practice fielding and throwing in one motion.
 $c: cog
 /!
@@ -1486,7 +1491,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 129
-$p: 50
+$p: 51
 $t: The instructor hit ground balls toward the infieldsers so that they could practice fielding and throwing in one motion.
 $c: cog
 /!
@@ -1725,13 +1730,13 @@ $c: syn
 
 !/ SentenceList
 $i: 47
-$r: 53
-$p: 53
+$r: 54
+$p: 54
 $s: 3
 
 !/ SentenceItem
 $i: 149
-$p: 53
+$p: 54
 $t: We should look for the wine that John recommended last summer.
 $c: cog
 /!
@@ -1739,7 +1744,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 150
-$p: 53
+$p: 54
 $t: I have to shout because the cars are making a lot of noise outside.
 $c: cog
 /!
@@ -1747,7 +1752,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 151
-$p: 53
+$p: 54
 $x: itm:warrendetailed
 $t: Warren presented more detailed policy proposals than Sanders, at each of the debates where they were both onstage.
 $c: cog
@@ -1931,13 +1936,13 @@ $c: syn
 
 !/ SentenceList
 $i: 53
-$r: 56
-$p: 56
+$r: 57
+$p: 57
 $s: 3
 
 !/ SentenceItem
 $i: 167
-$p: 56
+$p: 57
 $t: I passed a glass of Champagne to John.
 $c: ont
 /!
@@ -1945,7 +1950,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 168
-$p: 56
+$p: 57
 $t: I send good wishes to the children.
 $c: ont
 /!
@@ -1953,7 +1958,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 169
-$p: 56
+$p: 57
 $t: I hung a leaflet on the whiteboard.
 $c: ont
 /!
@@ -1961,7 +1966,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 170
-$p: 56
+$p: 57
 $t: Their best player was traded to the Lakers.
 $c: ont
 /!
@@ -1969,7 +1974,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 171
-$p: 56
+$p: 57
 $t: Turning now to hockey, the Leafs just fired their coach.
 $c: ont
 /!
@@ -1977,7 +1982,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 172
-$p: 56
+$p: 57
 $t: He will get another job: it's not like they sent him into retirement.
 $c: ont
 /!
@@ -1988,13 +1993,13 @@ $c: ont
 
 !/ SentenceList
 $i: 54
-$r: 57
-$p: 57
+$r: 58
+$p: 58
 $s: 3
 
 !/ SentenceItem
 $i: 173
-$p: 57
+$p: 58
 $x: itm:dogwalker
 $t: My neighbor fired her dog-walker.
 $c: ont
@@ -2003,7 +2008,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 174
-$p: 57
+$p: 58
 $t: My neighbor's dogs fired their dog-walker.
 $c: ont
 /!
@@ -2134,13 +2139,13 @@ $c: ont
 
 !/ SentenceList
 $i: 58
-$r: 66
-$p: 66
+$r: 67
+$p: 67
 $s: 4
 
 !/ SentenceItem
 $i: 186
-$p: 66
+$p: 67
 $x: itm:redscarf
 $t: Please hand me the red scarf?
 $c: cog
@@ -2149,7 +2154,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 187
-$p: 66
+$p: 67
 $x: itm:orangemug
 $t: Have you seen my orange coffee mug?
 $c: cog
@@ -2158,7 +2163,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 188
-$p: 66
+$p: 67
 $x: itm:bluetable
 $t: Your keys are on the blue table.
 $c: cog
@@ -2167,7 +2172,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 189
-$p: 66
+$p: 67
 $x: itm:blackpurse
 $t: My purse is the black one.
 $c: cog
@@ -2176,7 +2181,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 190
-$p: 66
+$p: 67
 $x: itm:yellowcolumn
 $t: The yellow column shows last year's data.
 $c: cog
@@ -2185,7 +2190,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 191
-$p: 66
+$p: 67
 $x: itm:purplevase
 $t: On the mantle was a purple vase.
 $c: cog
@@ -2287,7 +2292,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 201
-$p: 77
+$p: 78
 $t: You all gonna love this!
 $c: syn
 /!
@@ -2352,7 +2357,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 208
-$p: 79
+$p: 80
 $t: I ask that to you.
 $c: syn
 /!
@@ -2360,7 +2365,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 209
-$p: 79
+$p: 80
 $t: I ask you that.
 $c: syn
 /!
@@ -2368,7 +2373,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 210
-$p: 79
+$p: 80
 $x: itm:goodhealth
 $t: I ask for you to be in good health.
 $c: syn
@@ -2377,7 +2382,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 211
-$p: 79
+$p: 80
 $x: itm:stayhealth
 $t: I ask you to stay in good health.
 $c: syn

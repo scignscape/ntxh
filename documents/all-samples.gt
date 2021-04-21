@@ -730,9 +730,9 @@ They `ToBIHstar<^Hs->; attend `ToBIHstar<^Hs->; PTA meetings `ToBILHperc<^LHp->;
 
 `swl -> itm:available -> I'm sorry, Mr. Jones is not available. -> dia ;;
 
-`swl -> --- ->  That's a hungry window overlooking the yard. -> ont ;;
+`swl -> --- ->  That's a hungry window overlooking the yard. ->> (*) -> ont ;;
 
-`swl -> --- ->  That's a porcelain touchdown under video review. -> ont ;;
+`swl -> --- ->  That's a porcelain touchdown under video review. ->> (*) -> ont ;;
 
 `swl -> --- ->  That's a stained-glass window overlooking the yard. -> ont ;;
 
@@ -750,12 +750,12 @@ They `ToBIHstar<^Hs->; attend `ToBIHstar<^Hs->; PTA meetings `ToBILHperc<^LHp->;
 
 `swl -> --- ->  In the musical, all the actors are cats. -> ont ;;
 
-`swl -> --- ->  The porcelain cat is hungry. -> ont ;;
+`swl -> --- ->  The porcelain cat is hungry. ->> (?) -> ont ;;
 
-`swl -> --- ->  Garfield ate my breakfast. -> ont ;;
+`swl -> --- ->  Garfield ate my breakfast. ->> (?) -> ont ;;
 
 `swl -> --- ->  All the cats are hungry because the actors don't eat 
-before the show starts. -> ont ;;
+before the show starts. ->> (?) -> ont ;;
 
 `swl -> itm:fans ->  The fans are hungry for a goal. -> ont ;;
 

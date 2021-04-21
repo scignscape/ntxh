@@ -630,7 +630,7 @@ The violent protesters are hungry for revenge.
 Most voters are hungry for a change.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 21)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 22)  
 The porcelain cat is black.  
 Garfield is a talking cat in a comic strip.  
 In the musical, all the actors are cats.  
@@ -657,7 +657,7 @@ Biden's support among his base is eroding.
 Violent clashes between protesters and the police have spilled out into the streets.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 37)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 38)  
 I walked earlier this morning.  
 I walked for two hours.  
 I walked the dogs earlier this morning.  
@@ -697,12 +697,12 @@ We have to drive past the highway.
 We have to drive past the highway to the entrance.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 38)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 39)  
 We have to go to the counter by the cashier near the front of the store for a ticket.  
 The waiter carved some duck for Grandma at the table with an ornate knife.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 38)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 39)  
 I studied.  
 I studied math.  
 I studied for two hours.  
@@ -725,7 +725,7 @@ I'm heading out.
 I'm heading out to the store.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 43)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 44)  
 The rice has a nice yellow color that comes from turmeric.  
 Make sure the rice doesn't burn.  
 
@@ -766,7 +766,7 @@ This bus drops passengers off downtown along Queen street.
 This bus will take you downtown via Queen street.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 49)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 50)  
 I opened the wine with an antique corkscrew.  
 I opened the wine in the kitchen.  
 I opened the wine to aerate.  
@@ -780,12 +780,12 @@ Giving John advice is impossible.
 You promised to make us pancakes!  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 50)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 51)  
 I gave John a Cabernet Franc from the winery he visited during a trip along the Niagara escarpment last summer.  
 We'll award a prize to the first caller who correctly identifies who scored the game-winning goal last night.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 50)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 51)  
 The instructor hit them ground balls to practice fielding and throwing in one motion.  
 The instructor hit ground balls toward the infieldsers so that they could practice fielding and throwing in one motion.  
 
@@ -830,7 +830,7 @@ She is trying to get our attention.
 She is shouting to get our attention.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 53)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 54)  
 We should look for the wine that John recommended last summer.  
 I have to shout because the cars are making a lot of noise outside.  
 Warren presented more detailed policy proposals than Sanders, at each of the debates where they were both onstage.  
@@ -866,7 +866,7 @@ We are driving toward Pennsylvania.
 We are driving to Pennsylvania.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 56)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 57)  
 I passed a glass of Champagne to John.  
 I send good wishes to the children.  
 I hung a leaflet on the whiteboard.  
@@ -875,7 +875,7 @@ Turning now to hockey, the Leafs just fired their coach.
 He will get another job: it's not like they sent him into retirement.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 57)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 58)  
 My neighbor fired her dog-walker.  
 My neighbor's dogs fired their dog-walker.  
 
@@ -900,7 +900,7 @@ The border took an hour.
 The border is closed.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 66)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 67)  
 Please hand me the red scarf?  
 Have you seen my orange coffee mug?  
 Your keys are on the blue table.  

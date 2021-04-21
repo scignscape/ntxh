@@ -606,7 +606,7 @@ I would like to interview Mr. Jones, is he in his office?
 I'm sorry, Mr. Jones is not available.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 20)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 21)  
 That's a hungry window overlooking the yard.  
 That's a porcelain touchdown under video review.  
 
@@ -628,7 +628,7 @@ Garfield is a talking cat in a comic strip.
 In the musical, all the actors are cats.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 21)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 22)  
 The porcelain cat is hungry.  
 Garfield ate my breakfast.  
 All the cats are hungry because the actors don't eat before the show starts.  
@@ -782,7 +782,7 @@ The instructor hit them ground balls to practice fielding and throwing in one mo
 The instructor hit ground balls toward the infieldsers so that they could practice fielding and throwing in one motion.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 50)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 51)  
 I found the wine that John recommended.  
 Please use brown rice when making the pilaf.  
 
@@ -815,7 +815,7 @@ I told you Toronto would win!
 I know you like hot pepper, but John can't eat spicy food.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 52)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 53)  
 He is struggling to hold the groceries.  
 We need a bag to hold to groceries.  
 She is trying to get our attention.  
@@ -845,7 +845,7 @@ They have a lot of regional beers on tap, and I've tried most of them.
 They have a lot of regional beer on tap, and I order some whenever I come here.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 55)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 56)  
 My favorite newspaper is on the table.  
 My favorite newspaper hired a new editor.  
 I walk past my favorite newspaper everyday.  
