@@ -7,5 +7,16 @@
  "aggregates": [
   { "uri":  "/README.md" },
   { "uri":  "/LICENSE_1_0.txt" },
+  { "uri":  "/documents/markdown/samples.md" },
+  { "uri":  "/documents/all-samples.gt" },
+  { "uri":  "/documents/CognitiveTransformGrammar.pdf" },
+  { "uri":  "/documents/ConceptualSpacesAndTheIntroToCognitiveGrammar.pdf" },
+  { "uri":  "/documents/InterfaceTheoryOfMeaning.pdf" },
+  { "uri":  "/data/dataset/ctg/osf/samples-ctg.ntxh" },
+  { "uri":  "/data/dataset/ctg/osf/sdi-merge-ctg.ntxh" },
+  { "uri":  "/data/dataset/icg/osf/samples-icg.ntxh" },
+  { "uri":  "/data/dataset/icg/osf/sdi-merge-icg.ntxh" },
+  { "uri":  "/data/dataset/icg/osf/samples-itm.ntxh" },
+  { "uri":  "/data/dataset/icg/osf/sdi-merge-itm.ntxh" },
  ],
 }

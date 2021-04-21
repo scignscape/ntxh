@@ -734,7 +734,7 @@ The vandalism was discovered by some scientists working in this lab.
 The vandalism was discovered by some scientists in this lab.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 46)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 47)  
 I brought you some wine.  
 We bought him some school supplies.  
 I carved Grandma some duck.  
@@ -767,7 +767,7 @@ I opened the wine because John asked me to.
 I opened the wine in the kitchen for John so it could aerate because he asked me to.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 50)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 51)  
 Giving John advice is impossible.  
 You promised to make us pancakes!  
 
@@ -800,7 +800,7 @@ Those dogs are really barking loudly.
 Those dogs are barking -- really loudly.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 51)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 52)  
 She is heading out early.  
 She is heading out with the dogs.  
 
@@ -840,7 +840,7 @@ He reluctantly tried Champagne for the first time.
 She will try hard to ski during our vacation.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 55)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 56)  
 They have a lot of regional beers on tap, and I've tried most of them.  
 They have a lot of regional beer on tap, and I order some whenever I come here.  
 
@@ -851,7 +851,7 @@ My favorite newspaper hired a new editor.
 I walk past my favorite newspaper everyday.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 56)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 57)  
 We are driving across Pennsylvania.  
 We are driving within Pennsylvania.  
 We are driving toward Pennsylvania.  
@@ -872,14 +872,14 @@ My neighbor fired her dog-walker.
 My neighbor's dogs fired their dog-walker.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 61)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 62)  
 His commute started an hour ago at the paper.  
 Her career started at the paper.  
 Start your weekend with Sunday's paper.  
 Socioeconomic research starts with your local paper.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 62)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 63)  
 I walk past the paper on my way to work.  
 I walked from the library straight to class.  
 I spend time around that sculpture every weekend.  
@@ -887,7 +887,7 @@ I walked through the door, which was unlocked.
 It took us an hour to cross the border.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 62)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 63)  
 The border took an hour.  
 The border is closed.  
 
@@ -901,7 +901,7 @@ The yellow column shows last year's data.
 On the mantle was a purple vase.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 67)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 68)  
 Please hand me the plaid scarf?  
 Have you seen my green-white-orange coffee mug?  
 Your keys are on the checkerboard table.  
@@ -910,14 +910,14 @@ The cross-hatch column shows last year's data.
 On the mantle was a spiral-pattern vase.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 77)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 78)  
 How are we doing today?  
 Your new car is waiting!  
 You guys coming with?  
 You all gonna love this!  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 79)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 80)  
 I expect them to win.  
 I expect for them to win.  
 I expect that they will win.  
@@ -930,24 +930,24 @@ I ask for you to be in good health.
 I ask you to stay in good health.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 85)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 86)  
 She failed to hold the groceries.  
 She asked me to hold the groceries.  
 She asked that I hold the groceries.  
 Where is a bag to hold the groceries?  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 87)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 88)  
 A pastor we have known for years married John to Katherine.  
 His parents finally married John off to Katherine.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 93)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 94)  
 I authorized him to attend the conference, and I'm expecting him to give a lecture.  
 I authorized him to attend the conference, and I'm persuading him to give a lecture.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 93)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 94)  
 I authorized him to attend the conference, but I was overruled.  
 I authorized him to attend the conference, but he refused.  
 I authorized him to attend the conference, but our school said he is just too controversial.  
