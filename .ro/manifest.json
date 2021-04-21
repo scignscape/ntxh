@@ -1,0 +1,11 @@
+{
+ "@context":["https://w3id.org/bundle/context"],
+ "id": "/",
+ "manifest":  "manifest.json",
+ "createdOn": "2021-04-21",
+ "createdBy": {"name": "Nathaniel Christen"},
+ "aggregates": [
+  { "uri":  "/README.md" },
+  { "uri":  "/LICENSE_1_0.txt" },
+ ],
+}

@@ -876,9 +876,19 @@ working in this lab. -> amb ;;
 `swl -> --- ->  The effect was 
 discovered by some scientists working in this lab. -> amb ;;
 
-`swl -> itm:discoveredlab ->  The effect was discovered by some scientists in this lab. -> amb ;;
 
-`swl -> itm:vandalism ->  The vandalism was discovered by some scientists who were working in this lab. -> amb ;;
+`swl -> itm:discoveredlab ->  The effect was discovered by some scientists in this lab. -> amb ;;`
+`swlEliminateGap;
+`sentenceList`
+
+|.|
+
+I find that a greater divergence of meaning between the sentences 
+comes out if we substitute something else for `i.effect`/; say, 
+`i.vandalism`/: |+|
+
+`sentenceList,
+`sentenceItem; `swl -> itm:vandalism ->  The vandalism was discovered by some scientists who were working in this lab. -> amb ;;
 
 `swl -> itm:vandalismworking ->  The vandalism was discovered by some scientists working in this lab. -> amb ;;
 
@@ -929,9 +939,9 @@ though he is not injured), he might accept a trade. -> --- ->  If they make him 
 `swl -> --- ->  I opened the wine in the kitchen for John 
 so it could aerate because he asked me to. -> cog ;;
 
-`swl -> itm:johnadvice ->  Giving John advice is impossible. -> cog ;;
+`swl -> itm:johnadvice ->  Giving John advice is impossible. -> cog;pro ;;
 
-`swl -> itm:pancakes ->  You promised to make us pancakes! -> cog ;;
+`swl -> itm:pancakes ->  You promised to make us pancakes! -> cog;pro ;;
 
 `swl -> --- ->  I gave John a Cabernet Franc from the winery he visited 
 during a trip along the Niagara escarpment last summer. -> syn ;;
@@ -988,9 +998,55 @@ spicy food. -> syn ;;
 
 `swl -> --- ->  I have to shout because the cars are making a lot of noise outside. -> cog ;;
 
-`swl -> itm:warrendetailed ->  Warren presented more detailed policy proposals than Sanders, at each of the debates where they were both onstage. -> cog ;;
 
-`swl -> itm:tryrestaurant ->  I'd like to try this restaurant. -> sem ;;
+`swl -> itm:warrendetailed ->  Warren presented more detailed policy proposals than Sanders, at each of the debates where they were both onstage. -> cog ;;`
+`swlEliminateGap;
+`sentenceList`
+
+|.|
+
+Each of these subordinate clauses has a spatial, temporal, or 
+contextual framework which deviates from the surrounding 
+sentence (`i.last summer`/, `i.outside`/).  The third is the 
+more elaborate, because the speaker is taking a holistic 
+view, where each of the debates referenced could, potentially, 
+be a separate topic that gets exclusive focus in subsequent 
+conversation.  In (`ref<itm:warrendetailed>;) the speaker (and presumably all 
+conversants) works from a summarial vantage encompassing, 
+in their thoughts, a series of more specific contexts 
+(viz., each debate) which could form their own discursive 
+space (not just in terms of their actual spatial environs, 
+but their abstract space of facticity and themes).  So in 
+(`ref<itm:warrendetailed>;) the contrast between the setting for the enunciation and 
+the clausal alternate space is more abstract than the 
+`i.inside`//`i.outside`/, or `i.now`//`i.last summer` contrast.    
+`p`
+
+`p.
+Nevertheless, we can argue that every linguistic construction 
+which, at the semantic level, serves as a `q.space builder` 
+(using Gilles Fauconnier's term) may have a corresponding clausal manifestation.  
+The fact that clauses do need to set up their own space, 
+time, and context, deviating from the main sentence, may 
+explain why they occupy their own phrasal nexus rather 
+than serve to modify their eventual target more directly.
+`p`
+
+`p.
+Often, on the other hand, clausal constructions can be 
+bypassed if there is a pithier designation, which 
+may depend on context, or on the presence of some 
+entrenched idiomatic conventions.  We clearly recognize 
+the pattern behind the verb `i.try` preceding a noun for 
+food, drink, or something critically experienced 
+(in the sense that we can assess the experience's 
+pleasurability %-- `i.try this bubble bath`/; 
+`i.try that cologne`/).  But `i.try`/'s object 
+appears to typically be shorthand for an implicit 
+clause: |+|
+
+`sentenceList,
+`sentenceItem; `swl -> itm:tryrestaurant ->  I'd like to try this restaurant. -> sem ;;
 
 `swl -> itm:trymountain ->  I'd like to try that mountain. -> sem ;;
 

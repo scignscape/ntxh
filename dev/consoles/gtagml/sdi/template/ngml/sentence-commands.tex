@@ -2,6 +2,15 @@
 \newcommand{\zfl}{}
 \newcommand{\txtdots}{\hspace{-2pt}\makebox[.9em][c]{.\hfil.\hfil.}\hspace{.1em}}
 
+%% Use this to correct a situation where a sample
+%% which is the last in a sample-group just does
+%% fill a line, resulting in too much of a vertical
+%% gap (apparently the lack of horizontal space
+%% on the sample's line causes an excess of
+%% vertical space, as if a new line is typeset
+%% to contain some post-sample space which
+%% actually doesn't *need* to be there.
+\newcommand{\swlEliminateGap}{\vspace{-1em}}
 
 \usepackage[preserveurlmacro]{breakurl}
 \newcommand{\bhref}[1]{\href{#1}{\burl{#1}}}

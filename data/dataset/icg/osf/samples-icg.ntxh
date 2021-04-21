@@ -1,5 +1,5 @@
 - Generated from LaTeX File icg.tex 
-20/4/2021, 20:45
+21/4/2021, 1:38
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -57,7 +57,7 @@ $end: 0
 !/ Subdocument 
 $au: Nathaniel Christen
 $start: 0 
-$end: 94 
+$end: 95 
 /!
 <+>
 
@@ -1229,13 +1229,13 @@ $c: amb
 
 !/ SentenceList
 $i: 32
-$r: 46
-$p: 46
+$r: 47
+$p: 47
 $s: 3
 
 !/ SentenceItem
 $i: 106
-$p: 46
+$p: 47
 $x: itm:broughtwine
 $t: I brought you some wine.
 $c: cog
@@ -1244,7 +1244,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 107
-$p: 46
+$p: 47
 $x: itm:broughtschool
 $t: We bought him some school supplies.
 $c: cog
@@ -1253,7 +1253,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 108
-$p: 46
+$p: 47
 $x: itm:carvedduck
 $t: I carved Grandma some duck.
 $c: cog
@@ -1315,7 +1315,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 113
-$p: 48
+$p: 49
 $t: If they make him a healthy scratch enough times, he might accept a trade.
 $c: syn
 /!
@@ -1425,25 +1425,25 @@ $c: cog
 
 !/ SentenceList
 $i: 37
-$r: 50
-$p: 50
+$r: 51
+$p: 51
 $s: 3
 
 !/ SentenceItem
 $i: 124
-$p: 50
+$p: 51
 $x: itm:johnadvice
 $t: Giving John advice is impossible.
-$c: cog
+$c: cog;pro
 /!
 <>>
 
 !/ SentenceItem
 $i: 125
-$p: 50
+$p: 51
 $x: itm:pancakes
 $t: You promised to make us pancakes!
-$c: cog
+$c: cog;pro
 /!
 <>>
 
@@ -1578,7 +1578,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 136
-$p: 51
+$p: 52
 $t: Those dogs are really barking.
 $c: syn
 /!
@@ -1586,7 +1586,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 137
-$p: 51
+$p: 52
 $x: itm:reallyloudly
 $t: Those dogs are really barking loudly.
 $c: syn
@@ -1595,7 +1595,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 138
-$p: 51
+$p: 52
 $x: itm:barking
 $t: Those dogs are barking ---{} really loudly.
 $c: syn
@@ -1607,13 +1607,13 @@ $c: syn
 
 !/ SentenceList
 $i: 43
-$r: 51
-$p: 51
+$r: 52
+$p: 52
 $s: 3
 
 !/ SentenceItem
 $i: 139
-$p: 51
+$p: 52
 $x: itm:headingoutearly
 $t: She is heading out early.
 $c: syn
@@ -1622,7 +1622,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 140
-$p: 51
+$p: 52
 $t: She is heading out with the dogs.
 $c: syn
 /!
@@ -1673,7 +1673,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 144
-$p: 52
+$p: 53
 $x: itm:hotpepper
 $t: I know you like hot pepper, but John can't eat spicy food.
 $c: syn
@@ -1796,7 +1796,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 155
-$p: 54
+$p: 55
 $x: itm:trybinoculars
 $t: I'm going to try binoculars at the next game.
 $c: sem
@@ -1834,13 +1834,13 @@ $c: sem
 
 !/ SentenceList
 $i: 50
-$r: 55
-$p: 55
+$r: 56
+$p: 56
 $s: 3
 
 !/ SentenceItem
 $i: 158
-$p: 55
+$p: 56
 $t: They have a lot of regional beers on tap, and I've tried most of them.
 $c: syn
 /!
@@ -1848,7 +1848,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 159
-$p: 55
+$p: 56
 $t: They have a lot of regional beer on tap, and I order some whenever I come here.
 $c: syn
 /!
@@ -1894,13 +1894,13 @@ $c: ont
 
 !/ SentenceList
 $i: 52
-$r: 56
-$p: 56
+$r: 57
+$p: 57
 $s: 3
 
 !/ SentenceItem
 $i: 163
-$p: 56
+$p: 57
 $t: We are driving across Pennsylvania.
 $c: syn
 /!
@@ -1908,7 +1908,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 164
-$p: 56
+$p: 57
 $t: We are driving within Pennsylvania.
 $c: syn
 /!
@@ -1916,7 +1916,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 165
-$p: 56
+$p: 57
 $t: We are driving toward Pennsylvania.
 $c: syn
 /!
@@ -1924,7 +1924,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 166
-$p: 56
+$p: 57
 $x: itm:toPenn
 $t: We are driving to Pennsylvania.
 $c: syn
@@ -2019,13 +2019,13 @@ $c: ont
 
 !/ SentenceList
 $i: 55
-$r: 61
-$p: 61
+$r: 62
+$p: 62
 $s: 4
 
 !/ SentenceItem
 $i: 175
-$p: 61
+$p: 62
 $t: His commute started an hour ago at the paper.
 $c: ont
 /!
@@ -2033,7 +2033,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 176
-$p: 61
+$p: 62
 $t: Her career started at the paper.
 $c: ont
 /!
@@ -2041,7 +2041,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 177
-$p: 61
+$p: 62
 $t: Start your weekend with Sunday's paper.
 $c: ont
 /!
@@ -2049,7 +2049,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 178
-$p: 61
+$p: 62
 $t: Socioeconomic research starts with your local paper.
 $c: ont
 /!
@@ -2060,13 +2060,13 @@ $c: ont
 
 !/ SentenceList
 $i: 56
-$r: 62
-$p: 62
+$r: 63
+$p: 63
 $s: 4
 
 !/ SentenceItem
 $i: 179
-$p: 62
+$p: 63
 $x: itm:walkpast
 $t: I walk past the paper on my way to work.
 $c: cog
@@ -2075,7 +2075,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 180
-$p: 62
+$p: 63
 $x: itm:walkfrom
 $t: I walked from the library straight to class.
 $c: cog
@@ -2084,7 +2084,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 181
-$p: 62
+$p: 63
 $x: itm:aroundsculpture
 $t: I spend time around that sculpture every weekend.
 $c: cog
@@ -2093,7 +2093,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 182
-$p: 62
+$p: 63
 $x: itm:walkedthrough
 $t: I walked through the door, which was unlocked.
 $c: cog
@@ -2102,7 +2102,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 183
-$p: 62
+$p: 63
 $x: itm:crossborder
 $t: It took us an hour to cross the border.
 $c: cog
@@ -2114,13 +2114,13 @@ $c: cog
 
 !/ SentenceList
 $i: 57
-$r: 62
-$p: 62
+$r: 63
+$p: 63
 $s: 4
 
 !/ SentenceItem
 $i: 184
-$p: 62
+$p: 63
 $t: The border took an hour.
 $c: ont
 /!
@@ -2128,7 +2128,7 @@ $c: ont
 
 !/ SentenceItem
 $i: 185
-$p: 62
+$p: 63
 $t: The border is closed.
 $c: ont
 /!
@@ -2202,13 +2202,13 @@ $c: cog
 
 !/ SentenceList
 $i: 59
-$r: 67
-$p: 67
+$r: 68
+$p: 68
 $s: 4
 
 !/ SentenceItem
 $i: 192
-$p: 67
+$p: 68
 $t: Please hand me the plaid scarf?
 $c: cog
 /!
@@ -2216,7 +2216,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 193
-$p: 67
+$p: 68
 $t: Have you seen my green-white-orange coffee mug?
 $c: cog
 /!
@@ -2224,7 +2224,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 194
-$p: 67
+$p: 68
 $t: Your keys are on the checkerboard table.
 $c: cog
 /!
@@ -2232,7 +2232,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 195
-$p: 67
+$p: 68
 $t: My purse is the striped one.
 $c: cog
 /!
@@ -2240,7 +2240,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 196
-$p: 67
+$p: 68
 $t: The cross-hatch column shows last year's data.
 $c: cog
 /!
@@ -2248,7 +2248,7 @@ $c: cog
 
 !/ SentenceItem
 $i: 197
-$p: 67
+$p: 68
 $t: On the mantle was a spiral-pattern vase.
 $c: cog
 /!
@@ -2259,13 +2259,13 @@ $c: cog
 
 !/ SentenceList
 $i: 60
-$r: 77
-$p: 77
+$r: 78
+$p: 78
 $s: 5
 
 !/ SentenceItem
 $i: 198
-$p: 77
+$p: 78
 $x: itm:howarewe
 $t: How are we doing today?
 $c: syn
@@ -2274,7 +2274,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 199
-$p: 77
+$p: 78
 $x: itm:newcar
 $t: Your new car is waiting!
 $c: syn
@@ -2283,7 +2283,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 200
-$p: 77
+$p: 78
 $x: itm:comewith
 $t: You guys coming with?
 $c: syn
@@ -2303,13 +2303,13 @@ $c: syn
 
 !/ SentenceList
 $i: 61
-$r: 79
-$p: 79
+$r: 80
+$p: 80
 $s: 5
 
 !/ SentenceItem
 $i: 202
-$p: 79
+$p: 80
 $t: I expect them to win.
 $c: syn
 /!
@@ -2317,7 +2317,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 203
-$p: 79
+$p: 80
 $t: I expect for them to win.
 $c: syn
 /!
@@ -2325,7 +2325,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 204
-$p: 79
+$p: 80
 $t: I expect that they will win.
 $c: syn
 /!
@@ -2333,7 +2333,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 205
-$p: 79
+$p: 80
 $t: I expect that of them.
 $c: syn
 /!
@@ -2341,7 +2341,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 206
-$p: 79
+$p: 80
 $t: I ask alot of them.
 $c: syn
 /!
@@ -2349,7 +2349,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 207
-$p: 79
+$p: 80
 $t: I ask that of you.
 $c: syn
 /!
@@ -2394,13 +2394,13 @@ $c: syn
 
 !/ SentenceList
 $i: 62
-$r: 85
-$p: 85
+$r: 86
+$p: 86
 $s: 5
 
 !/ SentenceItem
 $i: 212
-$p: 85
+$p: 86
 $x: itm:holddir
 $t: She failed to hold the groceries.
 $c: syn
@@ -2409,7 +2409,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 213
-$p: 85
+$p: 86
 $x: itm:holdindir
 $t: She asked me to hold the groceries.
 $c: syn
@@ -2418,7 +2418,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 214
-$p: 85
+$p: 86
 $x: itm:holdprop
 $t: She asked that I hold the groceries.
 $c: syn
@@ -2427,7 +2427,7 @@ $c: syn
 
 !/ SentenceItem
 $i: 215
-$p: 85
+$p: 86
 $x: itm:holdadj
 $t: Where is a bag to hold the groceries?
 $c: syn
@@ -2439,13 +2439,13 @@ $c: syn
 
 !/ SentenceList
 $i: 63
-$r: 87
-$p: 87
+$r: 88
+$p: 88
 $s: 5
 
 !/ SentenceItem
 $i: 216
-$p: 87
+$p: 88
 $x: itm:marriedJohn
 $t: A pastor we have known for years married John to Katherine.
 $c: sem
@@ -2454,7 +2454,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 217
-$p: 87
+$p: 88
 $x: itm:marriedOff
 $t: His parents finally married John off to Katherine.
 $c: sem
@@ -2466,13 +2466,13 @@ $c: sem
 
 !/ SentenceList
 $i: 64
-$r: 93
-$p: 93
+$r: 94
+$p: 94
 $s: 5
 
 !/ SentenceItem
 $i: 218
-$p: 93
+$p: 94
 $t: I authorized him to attend the conference, and I'm expecting him to give a lecture.
 $c: sem
 /!
@@ -2480,7 +2480,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 219
-$p: 93
+$p: 94
 $t: I authorized him to attend the conference, and I'm persuading him to give a lecture.
 $c: sem
 /!
@@ -2491,13 +2491,13 @@ $c: sem
 
 !/ SentenceList
 $i: 65
-$r: 93
-$p: 93
+$r: 94
+$p: 94
 $s: 5
 
 !/ SentenceItem
 $i: 220
-$p: 93
+$p: 94
 $t: I authorized him to attend the conference, but I was overruled.
 $c: sem
 /!
@@ -2505,7 +2505,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 221
-$p: 93
+$p: 94
 $x: itm:conferencerefused
 $t: I authorized him to attend the conference, but he refused.
 $c: sem
@@ -2514,7 +2514,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 222
-$p: 93
+$p: 94
 $t: I authorized him to attend the conference, but our school said he is just too controversial.
 $c: sem
 /!
@@ -2522,7 +2522,7 @@ $c: sem
 
 !/ SentenceItem
 $i: 223
-$p: 93
+$p: 94
 $x: itm:conferencebusy
 $t: I authorized him to attend the conference, but his school said he is just too busy.
 $c: sem
