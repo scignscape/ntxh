@@ -71,7 +71,7 @@ I drank two pints of beer last night.
 I tried two different Sauternes last night.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 12)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 13)  
 Three times, students asked an interesting question.  
 
 #
@@ -97,7 +97,7 @@ For each start tag, there is a corresponding end tag.
 Each collection donated by the Andy Warhol Photographic Legacy Program holds Polaroids of well-known celebrities.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 16)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 17)  
 A furry black band of ants led up a cupboard door to some scrap that had flicked from a plate.  
 The current waiting period is eight weeks.  
 I think that's why they immersed themselves in pattern and colour.  
@@ -205,7 +205,7 @@ It's not open, but I closed the window in the bedroom.
 I can't -- it's stuck.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 35)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 36)  
 The window, it's still open.  
 A window, it's still open.  
 
@@ -219,7 +219,7 @@ I believe the kitchen window is open -- please close it!
 I believe some window is open -- please close it!  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 36)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 37)  
 Grandma wants us to close the window.  
 He wants a bottle opener.  
 
@@ -265,13 +265,13 @@ Is Jones there?
 He is not available.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 42)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 43)  
 If the kitchen window is closed, we can see if other windows are open.  
 If no windows are open, we can see if there is a draft through the window-cracks.  
 If there is no draft, we can ask if she wants a sweater.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 43)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 44)  
 This wine is a young Syrah.  
 My cousin adopted one of my neighbor's dog's puppies.  
 
@@ -332,7 +332,7 @@ I snacked on toast and instant coffee.
 I snacked on toast and Eritrean coffee.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 58)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 59)  
 There's some coffee on your shirt.  
 There's coffee all over the table.  
 She poured coffee from an ornate beaker.  
@@ -499,19 +499,19 @@ If you see a dress and you really like it you should buy it while you can.
 At least for Alice that wonderful dress is just too expensive.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 80)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 81)  
 Last night, she was painting Easter eggs.  
 With a fine brush, she was painting Easter eggs.  
 Open the carton. Now remove the monitor carefully.  
 The Johnsons are solid citizens. They pay their taxes. They attend PTA meetings.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 82)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 83)  
 It's amazing, the things she says sometimes.  
 It's ridiculous, what he's saying.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 88)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 89)  
 Rhinos in that park are threatened by poachers.  
 Young rhinos are threatened by poachers.  
 

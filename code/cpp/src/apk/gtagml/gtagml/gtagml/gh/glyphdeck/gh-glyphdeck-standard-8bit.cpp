@@ -1169,8 +1169,7 @@ void get_latex_118_to_127(u1 gp, QString& result)
    ":", // 121
    ",", // 122
 
-   "{\\srs}", // ss resume
-   //   " ", // 123 se post declare
+   "{\\fiatse}", // 123 fiat (zero-width) se
 
    "{\\spsg}", // 124 se suspend to par
 
