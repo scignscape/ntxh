@@ -720,6 +720,7 @@ u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
 
    {{4, '~'}, 116}, // _ s e
    {{3, ':'}, 121}, // _ decl s e
+   {{3, '*'}, 123}, // _ decl s e
 
 //   {{3, '?'}, 121}, // _ decl s e
 //   {{3, '!'}, 122}, // _ decl s e
