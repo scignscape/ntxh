@@ -276,12 +276,37 @@ void add_or_remove(QMessageBox* qmb,
  }
 }
 
+QMessageBox* check_duplicate(QCheckBox* ckb, QString file, u4& count)
+{
+ static QMap<QPair<QCheckBox*, QString>, QPair<QMessageBox*, u4>*> static_map;
+ auto it = static_map.find({ckb, file});
+ if(it == static_map.end())
+ {
+  QMessageBox* result = new QMessageBox;
+  static_map.insert({ckb, file}, new QPair<QMessageBox*, u4>{result, 0});
+  return result;
+ }
+ else
+ {
+  QMessageBox* result = it.value()->first;
+  count = ++it.value()->second;
+  return result;
+ }
+}
+
 void Application_Model_Test_Dialog::check_test_result(QString desc,
   QCheckBox* ckb, QString file)
 {
- QMessageBox* qmb = new QMessageBox;
+ u4 count = 0;
+ QMessageBox* qmb = check_duplicate(ckb, file, count);
+ if(count > 0)
+ {
+  return;
+ }
 
  add_or_remove(qmb, ckb, file);
+
+ qDebug() << "qt: " <<  qmb->text();
 
  QString ask = QString("Test %1: Pass or Fail?").arg(desc);
 
