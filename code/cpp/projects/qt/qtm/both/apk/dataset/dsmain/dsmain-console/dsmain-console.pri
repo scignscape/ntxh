@@ -69,6 +69,19 @@ LIBS += -L$$TARGETSDIR  \
 LIBS += -L$$TARGETSDIR -lqh-package
 
 
+contains(CHOICE_FEATURES, "ro") \#/
+{
+ message(DEFINE\'ing USING_RO)
+ DEFINES += USING_RO
+ LIBS += -L$$TARGETSDIR -lro-info
+
+ DEFINES += TARGETS_DIR=\\\"$$TARGETSDIR\\\"
+ DEFINES += AR_ROOT_DIR=\\\"$$ROOT_DIR\\\"
+
+ INCLUDEPATH += $$SRC_PROSET_DIR/ro-info
+}
+
+
 contains(CHOICE_FEATURES, "kph-gen") \#/
 {
  message(DEFINE\'ing USING_KPH_GEN)

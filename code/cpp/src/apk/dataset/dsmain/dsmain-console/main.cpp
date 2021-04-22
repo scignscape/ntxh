@@ -22,6 +22,8 @@
 #include <QTimer>
 #include <QScreen>
 
+#include <QMessageBox>
+
 
 #include "dsmain/dsm-sdi-document.h"
 
@@ -62,6 +64,9 @@ extern void init_test_functions(PhaonIR& phr, PHR_Code_Model& pcm,
 #include "application-model/application-config-model.h"
 #endif
 
+#ifdef USING_RO
+#include "ro-info/ro-info.h"
+#endif // USING_RO
 
 #include "textio.h"
 //?#include "get-cmdl.h"
@@ -167,6 +172,37 @@ void launch_config_dialog(Config_Dialog*& dlg, QWidget* parent)
 }
 #endif // USING_CONFIG_DIALOG
 
+void ro_info()
+{
+ QString message;
+ QString detailed;
+#ifdef USING_RO
+ static RO_Info* ro = new RO_Info([](RO_Info& ro)
+ {
+  #include "ro.h"
+ });
+ message = "Check the ro-info project for more detailed "
+           "Research Object info.  Click \"Show Details\" for a brief summary.";
+ detailed  = ro->get_summary();
+#else
+ message = R("
+RO Info is not compiled in this build setting.
+Try "build_quick" or loading the ro-info project
+directly as a Qt project to examine this info in more detail.
+");
+#endif
+
+ QMessageBox* qmb = new QMessageBox;
+ qmb->setAttribute(Qt::WA_DeleteOnClose);
+ qmb->setText(message);
+ qmb->setIcon(QMessageBox::Information);
+ qmb->setWindowTitle("Research Object Information");
+ if(!detailed.isEmpty())
+   qmb->setDetailedText(detailed);
+ qmb->addButton("Ok", QMessageBox::YesRole);
+ qmb->open();
+}
+
 int main(int argc, char **argv)
 {
 
@@ -250,6 +286,8 @@ int main(int argc, char **argv)
  dlg.setWindowFlags(dlg.windowFlags() & Qt::WindowStaysOnTopHint);
 
  dlg.set_publication_url("https://link.springer.com/article/10.1007/s10772-021-09817-z");
+
+ dlg.set_ro_info_function(&ro_info);
 
  dlg.set_generate_markdown_function([](QString path, Dataset* ds)
  {

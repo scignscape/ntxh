@@ -102,7 +102,8 @@ class ScignStage_Ling_Dialog : public QDialog
 
  QPushButton* launch_config_button_;
  QPushButton* activate_tcp_button_;
- QPushButton* take_screenshot_button_;
+ //QPushButton* take_screenshot_button_;
+ QPushButton* more_actions_button_;
 
  QHBoxLayout* paths_layout_;
  QLabel* ds_path_label_;
@@ -228,6 +229,7 @@ class ScignStage_Ling_Dialog : public QDialog
 
  std::function<Dataset*(QString)> replace_dataset_function_;
  std::function<void(QString, Dataset*)> generate_markdown_function_;
+ std::function<void()> ro_info_function_;
 
  QString subdocument_kind_;
 
@@ -279,6 +281,10 @@ class ScignStage_Ling_Dialog : public QDialog
   highlight(twi, nullptr, index);
  }
 
+ void run_global_context_menu(const QPoint& p,
+    std::function<void(QString)> pub_url_fn,
+    std::function<void(int, int)> pdf_fn);
+
  void run_group_context_menu(const QPoint& p, int page, QString text,
    QStringList texts,
    std::function<void(QString)> pub_url_fn,
@@ -317,6 +323,8 @@ public:
  ACCESSORS__SET(std::function<Dataset*(QString)> ,replace_dataset_function)
 
  ACCESSORS__SET(std::function<void(QString, Dataset*)> ,generate_markdown_function)
+
+ ACCESSORS__SET(std::function<void()> ,ro_info_function)
 
 #ifdef USING_LEXPAIR
  ACCESSORS__SET(std::function<void(QString)> ,launch_lexpair_dialog_function)

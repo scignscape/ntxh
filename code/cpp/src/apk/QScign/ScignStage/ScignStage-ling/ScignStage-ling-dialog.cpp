@@ -123,6 +123,7 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
     current_sample_(nullptr),
     last_highlight_(nullptr), xpdf_process_(nullptr),
     generate_markdown_function_(nullptr),
+    ro_info_function_(nullptr),
     screenshot_function_(nullptr),
     #ifdef USING_CONFIG_DIALOG
     launch_config_function_(nullptr),
@@ -271,15 +272,33 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
  main_layout_ = new QVBoxLayout;
 
  launch_config_button_ = new QPushButton("Customize Build", this);
- take_screenshot_button_ = new QPushButton("Screenshot", this);
+ //take_screenshot_button_ = new QPushButton("Screenshot", this);
  activate_tcp_button_ = new QPushButton("Activate TCP", this);
+ more_actions_button_ = new QPushButton("More Actions ...", this);
 
  launch_config_button_->setStyleSheet(colorful_button_style_sheet_());
- take_screenshot_button_->setStyleSheet(colorful_button_style_sheet_());
+ //take_screenshot_button_->setStyleSheet(colorful_button_style_sheet_());
+ more_actions_button_->setStyleSheet(colorful_button_style_sheet_());
  activate_tcp_button_->setStyleSheet(colorful_button_style_sheet_());
 
- connect(take_screenshot_button_, SIGNAL(clicked()),
-   this, SLOT(handle_take_screenshot_requested()));
+ connect(more_actions_button_, &QPushButton::clicked,
+   [this]()
+ {
+  QPoint qp = QCursor::pos();
+
+  run_global_context_menu(qp,
+  [](QString url)
+  {
+   QDesktopServices::openUrl(QUrl(url));
+  },
+  [this, qp](int page, int flag)
+  {
+   last_xpdf_dlg_point_ = qp;
+   qDebug() << "XPDF Dialog Point: " << last_xpdf_dlg_point_;
+   open_pdf_file(pdf_file_, page, flag);
+  });
+  //this, SLOT(handle_take_screenshot_requested())
+ });
 
  connect(activate_tcp_button_, SIGNAL(clicked()),
    this, SLOT(activate_tcp_requested()));
@@ -331,10 +350,10 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
  quasi_toolbar_layout_ = new QGridLayout;
  quasi_toolbar_layout_->setRowStretch(0, 1);
  quasi_toolbar_layout_->addWidget(activate_tcp_button_, 1, 0);
- quasi_toolbar_layout_->addWidget(take_screenshot_button_, 1, 1);
+ quasi_toolbar_layout_->addWidget(launch_config_button_, 1, 1);
  config_layout_ = new QHBoxLayout;
  config_layout_->addStretch();
- config_layout_->addWidget(launch_config_button_);
+ config_layout_->addWidget(more_actions_button_);
  config_layout_->addStretch();
  quasi_toolbar_layout_->addLayout(config_layout_, 2, 0, 1, 2);
  quasi_toolbar_layout_->setRowStretch(3, 1);
@@ -1406,6 +1425,46 @@ void ScignStage_Ling_Dialog::save_to_user_select_file(QString text)
  }
 }
 
+
+void ScignStage_Ling_Dialog::run_global_context_menu(const QPoint& p,
+  std::function<void(QString)> pub_url_fn,
+  std::function<void(int, int)> pdf_fn)
+{
+ QMenu* qm = new QMenu(this);
+
+ qm->addAction("Show Associated Publication Page (in web browser)",
+   [this, pub_url_fn](){pub_url_fn(publication_url_);});
+ qm->addAction("Show Essay (requires XPDF)",
+   [pdf_fn](){pdf_fn(1, 0);});
+
+ if(generate_markdown_function_)
+ {
+  qm->addAction("Save as Markdown",
+    [this]()
+  {
+   QString path = QFileDialog::getOpenFileName(this, "Select Markdown File", ROOT_FOLDER);
+   if(!path.isEmpty())
+     generate_markdown_function_(path, dataset_);
+  });
+ }
+
+ if(ro_info_function_)
+ {
+  qm->addAction("View Research Object Info",
+    [this]()
+  {
+   ro_info_function_();
+  });
+ }
+
+
+ qm->addAction("Take Screenshot",
+   [this](){handle_take_screenshot_requested();});
+
+ qm->popup(p);
+}
+
+
 void ScignStage_Ling_Dialog::run_group_context_menu(const QPoint& p, int page, QString text,
   QStringList texts,
   std::function<void(QString)> pub_url_fn,
@@ -1435,17 +1494,6 @@ void ScignStage_Ling_Dialog::run_group_context_menu(const QPoint& p, int page, Q
  qm->addAction("Highlight (scroll from here)",
    [highlight_fn](){highlight_fn();});
 
- if(generate_markdown_function_)
- {
-  qm->addAction("Save as Markdown",
-    [this]()
-  {
-   QString path = QFileDialog::getOpenFileName(this, "Select Markdown File", ROOT_FOLDER);
-   if(!path.isEmpty())
-     generate_markdown_function_(path, dataset_);
-  });
- }
-
  QPoint g = main_tree_widget_->mapToGlobal(p);
  qm->popup(g);
 }
@@ -1469,17 +1517,6 @@ void ScignStage_Ling_Dialog::run_sample_context_menu(const QPoint& p, int page, 
    [text, copy_fn](){copy_fn(text);});
  qm->addAction("Launch Triple-Link Dialog with Text",
    [text, launch_fn](){launch_fn(text);});
-
- if(generate_markdown_function_)
- {
-  qm->addAction("Save as Markdown",
-    [this]()
-  {
-   QString path = QFileDialog::getOpenFileName(this, "Select Markdown File", ROOT_FOLDER);
-   if(!path.isEmpty())
-     generate_markdown_function_(path, dataset_);
-  });
- }
 
  QPoint g = main_tree_widget_->mapToGlobal(p);
  qm->popup(g);

@@ -36,7 +36,7 @@ class RO_Info
 
 public:
 
- RO_Info();
+ RO_Info(std::function<void(RO_Info&)> fn = nullptr);
 
  ACCESSORS(QUrl ,article_url)
  ACCESSORS(QUrl ,main_repo_url)
@@ -50,6 +50,8 @@ public:
 
  void parse_kai_signatures_from_file(QString class_name,
    QString path);
+
+ QString get_summary();
 
 
 };
