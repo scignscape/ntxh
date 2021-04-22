@@ -185,11 +185,11 @@ void ro_info()
            "Research Object info.  Click \"Show Details\" for a brief summary.";
  detailed  = ro->get_summary();
 #else
- message = R("
+ message = R"(
 RO Info is not compiled in this build setting.
 Try "build_quick" or loading the ro-info project
 directly as a Qt project to examine this info in more detail.
-");
+)";
 #endif
 
  QMessageBox* qmb = new QMessageBox;
