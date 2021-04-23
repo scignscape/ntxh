@@ -3,36 +3,32 @@
 }
 }
 
-\p{\:\+Type-theoretic semantics can also apply Ontological tropes to unpack the overlapping mesh of word-senses,
-like \i{material object} or \i{place} or \i{institution}.
-\> This mode of analysis is especially well illustrated when competing senses
-collide in the same sentence. \> Slightly modifying two examples:\;{\sssg}\footnote{
-\cite[p. 40]{ChatzikyriakidisLuo} (former) and
-\cite[p. 4]{MeryMootRetore} (latter).
-}
-{\srsg}\begin{sentenceList}
-\sentenceItem{} \swl{}{The newspaper you are reading is being sued.}{lex}
-\sentenceItem{} \swl{itm:Liverpool}{Liverpool, an important harbor, built new docks.}{lex}
-\end{sentenceList}
-\+Both have a mid-sentence shift between senses, which is analyzed
-in terms of \q{type coercions} (see also \cite{ZhaohuiLuo}
-and \cite{ZhaohuiLuoSignatures}).
-\> The interesting detail of this treatment
-is how it correctly predicts that such coercions are not guaranteed to
-be accepted:\;
-\begin{sentenceList}
-\sentenceItem{} \swl{}{The newspaper fired a reporter and fell off
-the table.}[(?)]{lex}
-\sentenceItem{} \swl{}{Liverpool beat Tottenham and built new docks.}[(?)]{lex}
-\end{sentenceList}
-(\+again, slightly modifying the counter-examples). \> Type coercions are
-\i{possible} but not \i{inevitable}. \> Some word-senses \q{block} certain coercions
-\mdash{} that is, certain sense combinations, or juxtapositions, are disallowed.
-\> These preliminary, motivating analyses carry to more
-complex and higher-scale types, like plurals (the plural of a type-coercion
-works as a type-coercion of the plural, so to speak).
-\> As it becomes structurally established that type rules at the
-simpler levels have correspondents at more complex levels, the use of
-type notions \i{per se} (rather than just \q{word senses} or other
-classifications) becomes more well-motivated.\;\<
+\p{\:\+In any case, these variations present some potentially
+informative characteristics about individual types.
+\> Given type \tTyp{}, we can ask questions like:\;{\fiatses}\begin{enumerate}
+
+\item{} \+Which instances of \tTyp{}, if any, can be the result of
+a trivial constructor?\;  
+\item{} \+Does \tTyp{} have a \i{default value} whish is the result of
+a trivial constructor?\;  
+\item{} \+Which instances of \tTyp{} can be the result of a
+literal constructor?\;  
+\item{} \+Which instances of \tTyp{}, if any, can be the result of
+a reversible constructor?\;  
+\item{} \+If we have values which \i{are} the result of
+a reversible constructor, is there an efficient way
+to \q{un-construct} the value to support pattern matching?\;  
+\item{} \+Does \tTyp{} have co-constructors (i.e., they
+are not literal) which also are neither trivial nor reversible?\;  
+\end{enumerate}
+
+\+Notice that a trivial constructor does not necessarily produce
+a default value. \> For example, a type meant to represent
+days of the week could default to whichever day is current
+when a constructor is called: if an application is run on
+Tuesday, the day-of-week trivial constructor would return
+the value for Tuesday. \> So a type may have \i{more
+than one} trivial-constructed values. \> But
+if a type has \i{exactly one} trivial-constructed value,
+this is \i{usually} a \q{default} value.\;\<
 }
