@@ -3,24 +3,24 @@ $$ local-title := section2
 
 $& AnneVilnat %% (1:main) 32812 32899
 $& AsherPustejovsky example%(1:main) 28700 28728,%%p.%%5 %3
-$& AsherPustejovsky %% (1:main) 60272 60274
+$& AsherPustejovsky %% (1:main) 60270 60272
 $& BarkerShanTG %% (1:main) 3168 3295
 $& ChoeCharniak %% (1:main) 7588 7589
-$& Gardenfors p.%%4 (1:main) 43405 43578
-$& JamesPustejovsky %% (1:main) 60259 60270
+$& Gardenfors p.%%4 (1:main) 43404 43577
+$& JamesPustejovsky %% (1:main) 60257 60268
 $& JanVanEijck %% (1:main) 10075 10266
-$& KitFine %% (1:main) 46090 46099
+$& KitFine %% (1:main) 46088 46097
 $& KiyoshiSudo %% (1:main) 7586 7587
 $& KubotaLevine %% (1:main) 3297 3299
-$& MeryMootRetore p.%%4 (1:main) 34213 34225
+$& MeryMootRetore p.%%4 (1:main) 34212 34224
 $& OsborneMaxwell %% (1:main) 20535 20692
 $& Pinker %% (1:main) 32733 32811
-$& Ramstead p.%%38 (1:main) 44584 44810
+$& Ramstead p.%%38 (1:main) 44583 44809
 $& RikVanNoord %% (1:main) 10268 10271
 $& Rossi p.%(1:main) 4694 4906 %3
 $& SivaReddy %% (1:main) 7433 7585
-$& ZhaohuiLuo %% (1:main) 34331 34340
-$& ZhaohuiLuoSignatures %% (1:main) 34342 34345
+$& ZhaohuiLuo %% (1:main) 34330 34339
+$& ZhaohuiLuoSignatures %% (1:main) 34341 34344
 
 
 = 28621:
@@ -44,44 +44,44 @@ Steven Pinker
 = 32794:
 = 9
 
-= 43166:
+= 43165:
 = 1
 George Lakoff
 
-= 43179:
+= 43178:
 = 9
 
-= 43181:
+= 43180:
 = 1
 Mark Johnson
 
-= 43193:
+= 43192:
 = 9
 
-= 43195:
+= 43194:
 = 1
 Leonard Talmy
 
-= 43208:
+= 43207:
 = 9
 
-= 43311:
+= 43310:
 = 1
 Jean Petitot
 
-= 43323:
+= 43322:
 = 9
 
-= 43998:
+= 43997:
 = 1
 Maxwell James Ramstead
 
-= 44020:
+= 44019:
 = 9
 
-= 46078:
+= 46076:
 = 1
 Kit Fine
 
-= 46086:
+= 46084:
 = 9

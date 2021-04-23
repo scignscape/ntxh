@@ -1,8 +1,8 @@
 
 $& GardenforsPreposition page%%13 (1:main) 9579 9616
-$& GeometryofMeaning %% (1:main) 21406 21424
+$& GeometryofMeaning %% (1:main) 21407 21425
 $& InteractingConceptualSpaces %% (1:main) 242 281
-$& InteractingConceptualSpaces pages%%16%%and%%18 (1:main) 57244 57415
-$& LangackerFoundations page%%148 (1:main) 53360 53778
-$& RaubalAdamsCSML page%%5 (1:main) 60962 60989
+$& InteractingConceptualSpaces pages%%16%%and%%18 (1:main) 57246 57417
+$& LangackerFoundations page%%148 (1:main) 53361 53779
+$& RaubalAdamsCSML page%%5 (1:main) 60964 60991
 

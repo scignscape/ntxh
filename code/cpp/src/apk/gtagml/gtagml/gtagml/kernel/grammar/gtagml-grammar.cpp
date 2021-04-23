@@ -454,6 +454,15 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
    graph_build.tile_acc("\n");
   });
 
+  add_rule( gtagml_context, "deleted-visual-line-then-sentence-start",
+    "\\n* \\s* \\|-\\| \\s* ",
+    [&]
+  {
+   QString m = p.match_text();
+   graph_build.tile_acc("\n`\(@)");
+  });
+
+
   add_rule( gtagml_context, "declare-sentence-end-special-character-sequence",
     " (?<se> [,;:-]) (?<sp> \\s*) \\| (?<cue> [=]) \\|",
     [&]
@@ -492,20 +501,32 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
 
   add_rule( gtagml_context, "declare-sentence-end",
     " (?<se> [,?!:-] | [.]) (?<mid> [\\])]*)"
-    " \\s* \\|\\+\\| \\s* ",
+    " \\s* \\|(?<end>[+*])\\| \\s* ",
     [&]
   {
    QString se = p.matched("se");
    QString mid = p.matched("mid");
+   QString end = p.matched("end");
    QString m, m1, esc, esc1;
    u1 which = 3; // = "`\\[.]" QString esc = "." u1 which = 3
+
+   if(end == "*")
+   {
+    m = QString("`\\[%1]").arg(se);
+    esc = se;
+    m1 = "`\\[*]";
+    esc1 = "*";
+   }
+   else
+   {
+    m1 = "`\\[;]";
+    esc1 = ";";
+   }
 
    if( (se == ":") || (se == ",") )
    {
     m = QString("`\\[%1]").arg(se);
-    m1 = "`\\[;]";
     esc = se;
-    esc1 = ";";
    }
 //   else if(se == ",")
 //   {
@@ -515,11 +536,11 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
 //    esc1 = ";";
 //   }
 
-   else
-   {
-    m1 = "`\\[;]";
-    esc1 = ";";
-   }
+//   else
+//   {
+//    m1 = "`\\[;]";
+//    esc1 = ";";
+//   }
 
 //   else if(se == ".")
 //   {
@@ -560,7 +581,7 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
   });
 
   add_rule( gtagml_context, "special-special-character-sequence",
-    " \\s* \\| (?<cue> [=@]) \\| \\s* ",
+    " \\s* \\| (?<cue> [=_@]) \\| \\s* ",
     [&]
   {
    QString cue = p.matched("cue");

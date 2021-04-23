@@ -667,6 +667,8 @@ u4 GH_Glyphdeck_Standard_8bit::check_declared(u1 gp)
  if(gp == 125)
    return 3;
 
+ if(gp == 115)
+   return 1; //?
 
  return 0;
 }
@@ -715,17 +717,15 @@ u1 GH_Glyphdeck_Standard_8bit::encode_alt_pair(const QPair<u4, u4>& pr)
 
    {{3, ';'}, 119}, // _ decl s e
 
-   {{3, '='}, 125}, // _ decl s e
-   {{3, '@'}, 126}, // _ decl s s
+   {{3, '='}, 125}, //  decl s e
+   {{3, '@'}, 126}, //  decl s s
 
-   {{4, '~'}, 116}, // _ s e
-   {{3, ':'}, 121}, // _ decl s e
-   {{3, '*'}, 123}, // _ decl s e
+   {{4, '~'}, 116}, //  s e
+   {{3, ':'}, 121}, //  decl s e
+   {{3, '*'}, 124}, //  decl s e
+   {{4, '#'}, 123}, //  decl s e
 
-//   {{3, '?'}, 121}, // _ decl s e
-//   {{3, '!'}, 122}, // _ decl s e
-
-   {{3, ','}, 122}, // _ decl s e
+   {{3, ','}, 122}, //  decl s e
 
    {{4, '('}, 184}, // group
    {{4, ')'}, 185}, // group
@@ -1061,10 +1061,7 @@ u1 GH_Glyphdeck_Standard_8bit::get_sentence_end_swap(u1 gp)
  if(gp == 64)
    return 70;
 
- if( gp == 116 )
-   return gp;
-
- if( (gp == 83) || (gp == 75) || (gp == 70)  || (gp == 103) )
+ if( (gp == 115) || (gp == 116) || (gp == 83) || (gp == 75) || (gp == 70)  || (gp == 103) )
    return gp;
 
  if( (gp >= 120) && (gp <= 124) )
@@ -1141,8 +1138,10 @@ void get_latex_64_to_117(u1 gp, QString& result)
    "-", // 112 // quasi-math (neg)
    "-", // 113 // quasi-math (minus)
    ",", // 114 // quasi-math (lit)
-   "^", // 115 // quasi-math
 
+
+   // 115 se suspend to par
+   "{\\spsg}",
    // 116 = abnormal end of sentence flag ...
    "{\\efl}",
 
@@ -1160,8 +1159,8 @@ void get_latex_118_to_127(u1 gp, QString& result)
  // 118 = space se declare
  // 119 = \n se declare
  // 120 = . se declare
- // 121 = ? se declare
- // 122 = ! se declare
+ // 121 = : se declare
+ // 122 = , se declare
 
  static QVector<QString> static_vec {{
    " ", // 118
@@ -1171,16 +1170,10 @@ void get_latex_118_to_127(u1 gp, QString& result)
    ",", // 122
 
    "{\\fiatse}", // 123 fiat (zero-width) se
-
-   "{\\spsg}", // 124 se suspend to par
+   "{\\fiatses}", // 124 fiat (zero-width) ses
 
    "{\\sssg}", // 125 se suspend
    "{\\srsg}", // 126 ss resume
-
-
-//   "&sedash;", // 124   se
-//   ";", // 125
-//   ",", // 126
 
    "\n"  // 127   se widow
   }};
@@ -1475,10 +1468,10 @@ GH_Block_Base::Evaluation_Codes GH_Glyphdeck_Standard_8bit::check_confirm_senten
 
 GH_Block_Base::Evaluation_Codes GH_Glyphdeck_Standard_8bit::check_confirm_sentence_end(u1 gp, bool have_space)
 {
- if(gp == 118)
+ if( (gp == 118) || (gp == 119) || (gp == 124) )
    return GH_Block_Base::Evaluation_Codes::Confirm_Via_Declared;
- if(gp == 119)
-   return GH_Block_Base::Evaluation_Codes::Confirm_Via_Declared;
+
+  // //? 115?
 
  if(gp == 125)
    return GH_Block_Base::Evaluation_Codes::Confirm_Via_Declared_Suspend;
@@ -1541,18 +1534,19 @@ GH_Block_Base::SDI_Interpretation_Codes GH_Glyphdeck_Standard_8bit::get_sdi_inte
   {
   case 118:
   case 119:
+  case 124:
    return GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_End_Space;
 
   case 120:
   case 121:
   case 122:
-  case 123:
+  case 123:   
    return GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_End;
 
   case 125:
    return GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_End_Suspend_Space;
 
-  case 124: // //?
+  case 115: // //?
   case 126:
    return GH_Block_Base::SDI_Interpretation_Codes::Declared_Sentence_Resume_Space;
 

@@ -2,11 +2,11 @@
 $& BarrySmith %% (1:main) 2523 2524
 $& BergenChang %% (1:main) 6665 6801
 $& BittnerSmithDonnelly %% (1:main) 2526 2592
-$& GiuseppeRiva %% (1:main) 13237 13304
-$& GriseldaPollock %% (1:main) 15115 15189
+$& GiuseppeRiva %% (1:main) 13238 13305
+$& GriseldaPollock %% (1:main) 15116 15190
 $& KitFine %% (1:main) 2069 2522
-$& MelChen %% (1:main) 15190 15279
-$& NaturalizingPhenomenology %% (1:main) 14756 15074
+$& MelChen %% (1:main) 15191 15280
+$& NaturalizingPhenomenology %% (1:main) 14757 15075
 $& Pinker %% (1:main) 4907 5188
 $& Talmy %% (1:main) 5189 5190
 $& VisettiCadiot %% (1:main) 6802 6803

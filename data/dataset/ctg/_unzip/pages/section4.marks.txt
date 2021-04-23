@@ -1,30 +1,30 @@
 $$ document-title := Cognitive Transform Grammar
 $$ local-title := section4
 
-$& AkbikBross %% (1:main) 65067 65068
-$& BradleyRives p.%%24 (1:main) 27103 27107
-$& CarlosMontemayor %% (1:main) 93419 93564
-$& DanRyder %% (1:main) 93565 93566
-$& Debusmann %% (1:main) 65059 65060
-$& DebusmannDuchierRossberg %% (1:main) 65061 65062
-$& DebusmannThesis %% (1:main) 64951 65058
-$& HolmqvistDiss %% (1:main) 64555 64556
-$& HolmqvistDiss %% (1:main) 71606 71671
-$& HongEisner %% (1:main) 65065 65066
-$& JensAllwood %% (1:main) 86588 86603
-$& JensAllwood page%%9 (1:main) 90577 90966
-$& JoeyPollack %% (1:main) 93567 93571
-$& KennethHolmqvist %% (1:main) 64557 64558
-$& KepserMonnich %% (1:main) 65183 65184
-$& KongRushSmith %% (1:main) 65121 65182
-$& LawryTang %% (1:main) 108380 108381
-$& LewisLawry %% (1:main) 108378 108379
-$& LucasBechberger %% (1:main) 108371 108377
-$& MattSelway %% (1:main) 64191 64554
-$& Nivre %% (1:main) 65063 65064
-$& Schneider %% (1:main) 65185 65186
-$& UrbanGrzelinska %% (1:main) 108382 108386
-$& XiaPalmer %% (1:main) 65187 65188
+$& AkbikBross %% (1:main) 65068 65069
+$& BradleyRives p.%%24 (1:main) 27104 27108
+$& CarlosMontemayor %% (1:main) 93421 93566
+$& DanRyder %% (1:main) 93567 93568
+$& Debusmann %% (1:main) 65060 65061
+$& DebusmannDuchierRossberg %% (1:main) 65062 65063
+$& DebusmannThesis %% (1:main) 64952 65059
+$& HolmqvistDiss %% (1:main) 64556 64557
+$& HolmqvistDiss %% (1:main) 71607 71672
+$& HongEisner %% (1:main) 65066 65067
+$& JensAllwood %% (1:main) 86589 86604
+$& JensAllwood page%%9 (1:main) 90578 90967
+$& JoeyPollack %% (1:main) 93569 93573
+$& KennethHolmqvist %% (1:main) 64558 64559
+$& KepserMonnich %% (1:main) 65184 65185
+$& KongRushSmith %% (1:main) 65122 65183
+$& LawryTang %% (1:main) 108383 108384
+$& LewisLawry %% (1:main) 108381 108382
+$& LucasBechberger %% (1:main) 108374 108380
+$& MattSelway %% (1:main) 64192 64555
+$& Nivre %% (1:main) 65064 65065
+$& Schneider %% (1:main) 65186 65187
+$& UrbanGrzelinska %% (1:main) 108385 108389
+$& XiaPalmer %% (1:main) 65188 65189
 
 
 = 18411:

@@ -1,6 +1,6 @@
 
 $& DavidMorris %% (1:main) 9768 9986
-$& GoguenSemioticMorphism %% (1:main) 13496 13592
-$& GoguenWhatIs %% (1:main) 13593 13594
-$& Strle %% (1:main) 13402 13412
+$& GoguenSemioticMorphism %% (1:main) 13497 13593
+$& GoguenWhatIs %% (1:main) 13594 13595
+$& Strle %% (1:main) 13403 13413
 
