@@ -380,9 +380,10 @@ void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
   auto it1 = marked_sentence_ends_.find(send);
   if(it1 != marked_sentence_ends_.end())
   {
-   u4 sse = it1.value().second;
+   // // ses is "sentence end space" ...
+   u4 ses = it1.value().second;
    QPair<QPair<n8, n8>, QPair<n8, n8>> oldnew;
-   bl.flag_as_sentence_end(send, sse, oldnew);
+   bl.flag_as_sentence_end(send, ses, oldnew);
    n8 dn = bl.get_default_null();
    if(oldnew.first.second == dn)
      continue;
@@ -405,17 +406,17 @@ void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
    else if(space_was_declared == 3)
    {
     declared_sentence_ends_.insertMulti(it.value().first, send);
-    u4 _resume = bl.find_sentence_start_resume(sse, 0);
+    u4 _resume = bl.find_sentence_start_resume(ses, 0);
     if(_resume)
       resume = _resume;
     else
       resume = 1;
    }
 
-    //   Next, did the sse (space after se) change too?
+    //   Next, did the ses (space after se) change too?
    else if(oldnew.second.first == dn)
    {
-    // // this means the sse wasn't found ...
+    // // this means the ses wasn't found ...
      //   need to add a \;
     widowed_sentence_ends_.insertMulti(it.value().first, send);
     continue;
@@ -451,25 +452,26 @@ void GTagML_Output_SDI_Infoset::finalize_sentence_boundaries(GH_Block_Base& bl)
    if(it.hasNext())
    {
     ns = it.peekNext().key();
-    u4 sse1 = sse + 1;
-    if(sse1 > ns)
+    u4 ses1 = ses + 1;
+    if(ses1 > ns)
       ns = 0;
-    else if(sse1 == ns)
+    else if(ses1 == ns)
     {
-     // // this should mean the sse is a newline.
-      //   Should that be confirmed?
-     gap = 1;
+     // // this should mean the ses is a newline.
+      //   Unless ses is declared ...
+     if(!space_was_declared)
+       gap = 1;
     }
     else
     {
-     gap = bl.clear_to_sentence_start(sse1, ns);
+     gap = bl.clear_to_sentence_start(ses1, ns);
     }
    }
    if(gap == 0)
    {
     // this means we have to undo the swap
     widowed_sentence_ends_.insertMulti(it.value().first, send);
-    bl.swap_codes(sse, oldnew.second.second, oldnew.second.first);
+    bl.swap_codes(ses, oldnew.second.second, oldnew.second.first);
     if(ns != 0)
     {
      widowed_sentence_starts_.insertMulti(it.value().first, ns);

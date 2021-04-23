@@ -510,18 +510,17 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
    QString m, m1, esc, esc1;
    u1 which = 3; // = "`\\[.]" QString esc = "." u1 which = 3
 
-   if(end == "*")
-   {
-    m = QString("`\\[%1]").arg(se);
-    esc = se;
-    m1 = "`\\[*]";
-    esc1 = "*";
-   }
-   else
+   if(end == "+")
    {
     m1 = "`\\[;]";
     esc1 = ";";
    }
+   else
+   {
+    m1 = QString("`\\[%1]").arg(end);
+    esc1 = end;
+   }
+
 
    if( (se == ":") || (se == ",") )
    {

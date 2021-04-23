@@ -132,6 +132,11 @@ n8 GH_Block_Standard_8bit::get_default_null()
 
 void GH_Block_Standard_8bit::swap_codes(u4 i, n8 oldc, n8 newc)
 {
+ // // a swap back can occur even if the swap doesn't actually
+  //   change the glyph code (e.g. for a declared se space ...)
+ if(oldc == newc)
+   return;
+
  if(chars_[i] == (u1) oldc)
    chars_[i] = (u1) newc;
 }
