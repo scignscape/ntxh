@@ -181,7 +181,7 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
   int c = 0;
   for(QString f: forms_)
   {
-   current_filters_.insert(f);
+   current_ffilters_.insert(f);
    QCheckBox* cb = new QCheckBox(f, this);
    cb->setProperty("fc", QVariant::fromValue(forms_codes_[c]));
    cb->setChecked(true);
@@ -729,7 +729,7 @@ void ScignStage_Ling_Dialog::reset_forms_counts()
    u4 form_count = forms_counts_.value(fc);
    if(form_count > 0)
    {
-    //current_filters_.insert(ic);
+    current_ffilters_.insert(fc);
     cb->setEnabled(true);
     cb->setChecked(true);
    }
@@ -1045,33 +1045,54 @@ void ScignStage_Ling_Dialog::highlight(QTreeWidgetItem* twi,
 void ScignStage_Ling_Dialog::checked_label_change(QAbstractButton* qab, bool checked)
 {
  QString code = qab->property("ic").toString();
- if(code.isEmpty())
-   code = qab->text();
+ QString fcode;
 
- if(checked)
+ if(code.isEmpty())
  {
-  current_filters_.insert(code);//qab->text());
+  fcode = qab->property("fc").toString();
+  if(fcode.isEmpty())
+    code = qab->text();
+ }
+
+ if(fcode.isEmpty())
+ {
+  if(checked)
+  {
+   current_filters_.insert(code);//qab->text());
+  }
+  else
+  {
+   current_filters_.remove(code);
+  }
  }
  else
  {
-  current_filters_.remove(code);
+  if(checked)
+  {
+   current_ffilters_.insert(fcode);//qab->text());
+  }
+  else
+  {
+   current_ffilters_.remove(fcode);
+  }
  }
+
 }
 
 void ScignStage_Ling_Dialog::handle_filtered_down()
 {
  if(current_open_group_)
-   find_group_down(current_open_group_, &current_filters_);
+   find_group_down(current_open_group_, &current_filters_, &current_ffilters_);
  else
-   find_group_down(groups_->constLast(), &current_filters_);
+   find_group_down(groups_->constLast(), &current_filters_, &current_ffilters_);
 }
 
 void ScignStage_Ling_Dialog::handle_filtered_up()
 {
  if(current_open_group_)
-   find_group_up(current_open_group_, &current_filters_);
+   find_group_up(current_open_group_, &current_filters_, &current_ffilters_);
  else
-   find_group_up(groups_->first(), &current_filters_);
+   find_group_up(groups_->first(), &current_filters_, &current_ffilters_);
 }
 
 void ScignStage_Ling_Dialog::set_group_foreground(QTreeWidgetItem* twi)
@@ -1128,7 +1149,7 @@ void ScignStage_Ling_Dialog::handle_group_down()
  // // here?
  current_sample_ = nullptr;
 
- find_group_down(nullptr, nullptr);
+ find_group_down(nullptr, nullptr, nullptr);
 }
 
 void ScignStage_Ling_Dialog::show_full_sentence(Language_Sample_Group* g)
@@ -1178,7 +1199,7 @@ void ScignStage_Ling_Dialog::expand_sample(int index)
 
 
 void ScignStage_Ling_Dialog::find_group_down(Language_Sample_Group* start,
-  QSet<QString>* temp_filters)
+  QSet<QString>* temp_filters, QSet<QString>* temp_ffilters)
 {
  while(true)
  {
@@ -1203,7 +1224,7 @@ void ScignStage_Ling_Dialog::find_group_down(Language_Sample_Group* start,
        "There are no more samples given the current filters.");
      return;
     }
-    if(!g->match_issue(*temp_filters))
+    if(!g->match_issue(*temp_filters, *temp_ffilters))
     {
      continue;
     }
@@ -1279,11 +1300,11 @@ void ScignStage_Ling_Dialog::handle_group_up()
  // // here?
  current_sample_ = nullptr;
 
- find_group_up(nullptr, nullptr);
+ find_group_up(nullptr, nullptr, nullptr);
 }
 
 void ScignStage_Ling_Dialog::find_group_up(Language_Sample_Group* start,
-  QSet<QString>* temp_filters)
+  QSet<QString>* temp_filters, QSet<QString>* temp_ffilters)
 {
  while(true)
  {
@@ -1306,6 +1327,10 @@ void ScignStage_Ling_Dialog::find_group_up(Language_Sample_Group* start,
      QMessageBox::information(this, "No More",
                               "NM");
      return;
+    }
+    if(!g->match_issue(*temp_filters, *temp_ffilters))
+    {
+     continue;
     }
    }
 

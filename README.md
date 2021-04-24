@@ -109,7 +109,24 @@ While some of the materials included in this repository can be viewed with ordin
 
 The code base currently uses Qt5, but a newer Qt major version, Qt6, was released at the end of 2020 with some significant changes. The current repository should therefore be considered "work in progress" with one outstanding task being to port all the C++ code to work with Qt6.
 
-This repository demonstrates a fairly extensive range of techniques and features related to dataset management and matching datasets with custom-built applications. There are demo-related components concerning text encoding, database engineering, data serialization, dataset organization, and GUI implementation, including testing and documentation. At this stage, many of these components are more conducive to in-person demonstration than out-of-the-box usability, and the documentation for most of the repository code is incomplete. For these reasons, users are invited to ask questions about the different components that may be found here by browsing through the code base. Hopefully future versions of this repository will include more detailed assistance for users seeking to try out the text-encoding, dataset curation, PDF generation, and related tools for their own C++ projects. 
+This repository demonstrates a fairly extensive range of techniques and features related to dataset management and matching datasets with custom-built applications. There are demo-related components concerning text encoding, database engineering, data serialization, dataset organization, and GUI implementation, including testing and documentation. At this stage, many of these components are more conducive to in-person demonstration than out-of-the-box usability, and the documentation for most of the repository code is incomplete. For these reasons, users are invited to ask questions about the different components that may be found here by browsing through the code base. Hopefully future versions of this repository will include more detailed assistance for users seeking to try out the text-encoding, dataset curation, PDF generation, and related tools for their own C++ projects.
+
+Note finally that the data-set application is implemented as a 
+"dialog box", rather than a conventional "main window" (which in a 
+typical desktop application would have a file menu and toolbar). 
+Although dialog boxes (technically, instances of the `QDialogBox` C++ 
+class) are not usually designed to serve as the primary window 
+of an application, they can be programmed to function like a 
+main window (i.e., in the Qt context, instances of the 
+`QMainWindow` class) if desired. One rationale for adopting this 
+design is to implement components which can be used as 
+standalone applications (such as data-set applications) and 
+could also be reused as embedded components in other software. 
+For instance, this data-set application or future components with 
+a similar design could be embedded in software used for 
+curating linguistic and/or speech corpora or academic 
+texts, particularly those based on Qt, such as Praat, 
+Praaline, BiblioteQ, LitSoz, or TexStudio.
 
 ---
 **Console Builds and Utility Scripts**

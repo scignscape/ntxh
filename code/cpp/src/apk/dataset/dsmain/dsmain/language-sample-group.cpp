@@ -60,16 +60,45 @@ QString Language_Sample_Group::get_example_form()
 
 QString Language_Sample_Group::get_issue()
 {
- return issues_.join(';');
-}
-
-bool Language_Sample_Group::match_issue(const QSet<QString>& qset)
-{
- if(issues_.isEmpty())
-   return qset.contains("Text");
+ QString result; //= issues_.first();
+ u4 count = 0;
  for(QString issue : issues_)
  {
-  if(qset.contains(issue))
+  if(issue.startsWith('#'))
+   continue;
+  if(count == 0)
+    result = issue;
+  else if(count == 1)
+    result += "(" + issue;
+  else result += "," + issue;
+  ++count;
+ }
+ if(count > 1)
+   result += ")";
+ return result;
+}
+
+bool Language_Sample_Group::match_issue(const QSet<QString>& iset, const QSet<QString>& fset)
+{
+ // // is this a reasonable generic default?  Needed at all?
+ if(issues_.isEmpty())
+   return fset.contains("txt");
+
+ u1 form_count = 0;
+
+ for(QString form : fset)
+ {
+  form.prepend('#');
+  if(issues_.contains(form))
+    ++form_count;
+ }
+
+ if(form_count == 0)
+   return false;
+
+ for(QString issue : issues_)
+ {
+  if(iset.contains(issue))
     return true;
  }
  return false;
@@ -86,8 +115,20 @@ void Language_Sample_Group::add_sample(Language_Sample* sample)
  QString issue = sample->issue();
  if(issue.isEmpty())
    return;
+
  if(!issues_.contains(issue))
    issues_.push_back(issue);
+
+ QString ef = sample->example_form();
+ if(ef.isEmpty())
+   ef = "txt";
+ ef.prepend('#');
+
+ if(!issues_.contains(ef))
+   issues_.push_back(ef);
+
+
+
 }
 
 

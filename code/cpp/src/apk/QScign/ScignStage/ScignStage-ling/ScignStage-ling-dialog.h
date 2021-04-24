@@ -146,6 +146,7 @@ class ScignStage_Ling_Dialog : public QDialog
  QVector<Language_Sample_Group*>* groups_;
 
  QSet<QString> current_filters_;
+ QSet<QString> current_ffilters_;
 
  QHBoxLayout* full_sentence_layout_;
  QSplitter* full_sentence_splitter_;
@@ -362,10 +363,10 @@ public:
 #endif // USING_LEXPAIR
 
  void find_group_down(Language_Sample_Group* start,
-   QSet<QString>* temp_filters);
+   QSet<QString>* temp_filters, QSet<QString>* temp_ffilters);
 
  void find_group_up(Language_Sample_Group* start,
-   QSet<QString>* temp_filters);
+   QSet<QString>* temp_filters, QSet<QString>* temp_ffilters);
 
  void copy_to_clipboard();
 

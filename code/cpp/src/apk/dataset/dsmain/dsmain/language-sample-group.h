@@ -42,6 +42,7 @@ class Language_Sample_Group
 
  QVector<Language_Sample*> samples_;
 
+ // //  also includes forms, prepended with '#'
  QStringList issues_;
 
  u2 first_sample_id_;
@@ -61,7 +62,7 @@ public:
  ACCESSORS(u2 ,section)
 
  QString get_issue();
- bool match_issue(const QSet<QString>& qset);
+ bool match_issue(const QSet<QString>& iset, const QSet<QString>& fset);
 
  ACCESSORS(QVector<Language_Sample*> ,samples)
 
