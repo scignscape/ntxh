@@ -164,11 +164,15 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
  issue_codes_ = ds->issue_codes();
  issue_counts_ = ds->issue_counts();
 
+ forms_ = ds->forms();
+ forms_codes_ = ds->forms_codes();
+ forms_counts_ = ds->forms_counts();
+
  qDebug() << "Issues: " << issues_;
  qDebug() << "Issue Codes: " << issue_codes_;
  qDebug() << "Issue Counts: " << issue_counts_;
 
- int fcolmax = 2;
+ int fcolmax = 1;
  int icolmax = 5;
 
  filter_forms_button_group_ = new QButtonGroup(this);
@@ -179,6 +183,7 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
   {
    current_filters_.insert(f);
    QCheckBox* cb = new QCheckBox(f, this);
+   cb->setProperty("fc", QVariant::fromValue(forms_codes_[c]));
    cb->setChecked(true);
    filter_forms_grid_layout_->addWidget(cb,
      c / fcolmax, c % fcolmax);
@@ -226,6 +231,7 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
    filter_issues_grid_layout_->setColumnStretch(i, 0);
 
  reset_issue_counts();
+ reset_forms_counts();
 
  connect(filter_issues_button_group_,
    SIGNAL(buttonToggled(QAbstractButton*,bool)), this,
@@ -319,13 +325,16 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
 
  paths_layout_->addWidget(ds_path_label_);
  paths_layout_->addWidget(ds_path_line_edit_);
+ ds_path_line_edit_->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Preferred);
+ //ds_path_line_edit_->setSizeConstraint(QLayout::SetNoConstraint)''
 
  paths_layout_->addWidget(ds_path_open_button_);
 
- paths_layout_->addStretch();
+ paths_layout_->addSpacing(30);
 
  paths_layout_->addWidget(pdf_file_label_);
  paths_layout_->addWidget(pdf_file_line_edit_);
+ pdf_file_line_edit_->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Preferred);
 
  set_paths_from_dataset(*ds);
 
@@ -347,6 +356,8 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
  filters_layout_->addWidget(filter_issues_group_box_);
  filters_layout_->addStretch();
 
+ right_layout_ = new QVBoxLayout;
+
  quasi_toolbar_layout_ = new QGridLayout;
  quasi_toolbar_layout_->setRowStretch(0, 1);
  quasi_toolbar_layout_->addWidget(activate_tcp_button_, 1, 0);
@@ -358,7 +369,8 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
  quasi_toolbar_layout_->addLayout(config_layout_, 2, 0, 1, 2);
  quasi_toolbar_layout_->setRowStretch(3, 1);
 
- filters_layout_->addLayout(quasi_toolbar_layout_);
+ right_layout_->addLayout(quasi_toolbar_layout_);
+ filters_layout_->addLayout(right_layout_);
 
  main_layout_->addLayout(filters_layout_);
 
@@ -408,15 +420,27 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
  show_archival_version_group_box_->setMaximumWidth(90);
 
  full_sentence_layout_->addWidget(full_sentence_splitter_);
- full_sentence_layout_->addWidget(show_archival_version_group_box_);
 
- full_sentence_pre_label_->setStyleSheet("QLabel{background:yellow}");
+ //full_sentence_layout_->addWidget(show_archival_version_group_box_);
+ show_archival_version_centering_layout_ = new QHBoxLayout;
+ show_archival_version_centering_layout_->addStretch();
+ show_archival_version_centering_layout_->addWidget(show_archival_version_group_box_);
+ show_archival_version_centering_layout_->addStretch();
+ right_layout_->addLayout(show_archival_version_centering_layout_);
+
 
  full_sentence_plain_text_edit_->setStyleSheet("QLabel{background:white}");
  full_sentence_plain_text_edit_->setMaximumHeight(50);
- full_sentence_post_label_->setStyleSheet("QLabel{background:pink}");
 
- full_sentence_splitter_->setSizes({1, 10, 1});
+ // rgb(255,218,185) rgb(215,237,195) rgb(225,238,245)
+ full_sentence_pre_label_->setStyleSheet("QLabel{background:rgb(201, 159, 159)}");
+ full_sentence_post_label_->setStyleSheet("QLabel{background:rgb(200,212,223)}");
+ // rgb(214,187,163)
+
+// full_sentence_splitter_->setSizes({1, 30, 1});
+ full_sentence_splitter_->setStretchFactor(0, 1);
+ full_sentence_splitter_->setStretchFactor(1, 2);
+ full_sentence_splitter_->setStretchFactor(2, 1);
 
  main_layout_->addLayout(full_sentence_layout_);
 
@@ -693,6 +717,31 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
 }
 
 
+void ScignStage_Ling_Dialog::reset_forms_counts()
+{
+ QList<QAbstractButton*> bs = filter_forms_button_group_->buttons();
+
+ for(QAbstractButton* ab : bs)
+ {
+  if(QCheckBox* cb = qobject_cast<QCheckBox*>(ab))
+  {
+   QString fc = cb->property("fc").toString();
+   u4 form_count = forms_counts_.value(fc);
+   if(form_count > 0)
+   {
+    //current_filters_.insert(ic);
+    cb->setEnabled(true);
+    cb->setChecked(true);
+   }
+   else
+   {
+    //qDebug() << "No examples for form: " << ic;
+    cb->setChecked(false);
+    cb->setEnabled(false);
+   }
+  }
+ }
+}
 
 void ScignStage_Ling_Dialog::reset_issue_counts()
 {
@@ -767,8 +816,13 @@ void ScignStage_Ling_Dialog::get_replacement_dataset_path()
    issue_codes_ = ds->issue_codes();
    issue_counts_ = ds->issue_counts();
 
+   forms_ = ds->forms();
+   forms_codes_ = ds->forms_codes();
+   forms_counts_ = ds->forms_counts();
+
    absorb_dataset(*ds);
    reset_issue_counts();
+   reset_forms_counts();
    dataset_ = ds;
   }
  }

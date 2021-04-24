@@ -1,5 +1,5 @@
 - Generated from LaTeX File icg.tex 
-23/4/2021, 12:7
+24/4/2021, 0:10
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -1434,7 +1434,7 @@ $i: 124
 $p: 51
 $x: itm:johnadvice
 $t: Giving John advice is impossible.
-$c: cog;pro
+$c: cog
 /!
 <>>
 
@@ -1443,7 +1443,7 @@ $i: 125
 $p: 51
 $x: itm:pancakes
 $t: You promised to make us pancakes!
-$c: cog;pro
+$c: cog
 /!
 <>>
 

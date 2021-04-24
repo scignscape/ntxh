@@ -17,6 +17,12 @@
 
 
  ;;- __________ 
+ ;;- From file: ctg (section 0)
+ ;;- __________ 
+
+
+
+ ;;- __________ 
  ;;- From file: ctg (section 1)
  ;;- __________ 
 
@@ -642,51 +648,51 @@ the Trump campaign colluded with Russia. -> syn ;;
  ;;- __________ 
 
 
-`swl ->> `slsep; `textbf.The book she read` `slsep; was very interesting. `slsep; -> itm:booksheread -> The book she read was very interesting. -> pro ;;
+`swl ->> `slsep; `textbf.The book she read` `slsep; was very interesting. `slsep; -> itm:booksheread -> The book she read was very interesting. -> int;pro ;;
 
 `swl ->> `slsep; I recommended `textbf.a book` `slsep; `textbf.that 
-she read immediately`/. `slsep; -> itm:bookrecommend -> I recommended a book that she read immediately.  -> pro ;;
+she read immediately`/. `slsep; -> itm:bookrecommend -> I recommended a book that she read immediately.  -> int;pro ;;
 
-`swl ->> `slsep; `textbf.A book` just appeared `slsep; `textbf.that she read immediately`  `slsep; -> itm:bookjustappeared -> A book just appeared that she read immediately. -> pro ;;
+`swl ->> `slsep; `textbf.A book` just appeared `slsep; `textbf.that she read immediately`  `slsep; -> itm:bookjustappeared -> A book just appeared that she read immediately. -> int;pro ;;
 
-`swl -> itm:bookrecommendalt -> I recommended a book I read years ago to her. -> pro ;;
+`swl -> itm:bookrecommendalt -> I recommended a book I read years ago to her. -> int;pro ;;
 
 `swl ->> This time `textbf.Harry` didn't cause our defeat.
-  -> itm:harrycause -> This time Harry didn't cause our defeat. -> pro ;;
+  -> itm:harrycause -> This time Harry didn't cause our defeat. -> int;pro ;;
 
+`swl -> itm:clydebertha -> It's odd that Clyde married Bertha. -> int;pro ;;
 
-`swl -> itm:clydebertha -> It's odd that Clyde married Bertha. -> pro ;; 
+`swl -> itm:Brighton -> Londoners most often go to Brighton. -> int;pro ;;
 
-`swl -> itm:Brighton -> Londoners most often go to Brighton. -> pro ;; 
+`swl -> itm:BillDrink -> Bill doesn't drink because he's unhappy. -> int;pro ;;
 
-`swl -> itm:BillDrink -> Bill doesn't drink because he's unhappy. -> pro ;; 
-`swl -> itm:ricewine -> Stir in rice wine and seasonings. -> pro ;;
+`swl -> itm:ricewine -> Stir in rice wine and seasonings. -> int;pro ;;
 
-`swl -> itm:poodle -> Alice bought a dog.  A poodle. -> pro ;;
+`swl -> itm:poodle -> Alice bought a dog.  A poodle. -> int;pro ;;
 
 `swl ->> The `midemph.ROOF LEAKS` if a building 
-hasn't been `midemph.MAINTAINED`/. -> itm:roof -> The roof leaks if a building hasn't been maintained. -> pro ;;
+hasn't been `midemph.MAINTAINED`/. -> itm:roof -> The roof leaks if a building hasn't been maintained. -> int;pro ;;
 
 `swl ->> The `midemph.TEAM` is `midemph.UNSUCCESSFUL` because 
 the `midemph.COACH` is so `midemph.INCOMPETENT`/. -> itm:coach -> The team is unsuccessful because 
-the coach is so incompetent. -> pro ;;
+the coach is so incompetent. -> int;pro ;;
 
-`swl ->> `slsep; If you see a dress `slsep; and you really like it `slsep; you should buy it `slsep; while you can. `slsep; -> itm:seedress -> If you see a dress and you really like it you should buy it while you can. -> pro ;;
+`swl ->> `slsep; If you see a dress `slsep; and you really like it `slsep; you should buy it `slsep; while you can. `slsep; -> itm:seedress -> If you see a dress and you really like it you should buy it while you can. -> int;pro ;;
 
-`swl ->> `slsep; At least for Alice `slsep; that wonderful dress `slsep; is just too expensive. `slsep; -> itm:atleastdress -> At least for Alice that wonderful dress is just too expensive. -> pro ;;
+`swl ->> `slsep; At least for Alice `slsep; that wonderful dress `slsep; is just too expensive. `slsep; -> itm:atleastdress -> At least for Alice that wonderful dress is just too expensive. -> int;pro ;;
 
-`swl ->> `femph.Last night`/, she was painting Easter eggs. -> itm:easter -> Last night, she was painting Easter eggs. -> pro ;;
+`swl ->> `femph.Last night`/, she was painting Easter eggs. -> itm:easter -> Last night, she was painting Easter eggs. -> int;pro ;;
 
 `swl ->> `femph.With a fine brush`/, she was 
   painting Easter eggs. -> itm:finebrush -> With a fine brush, she was 
-painting Easter eggs. -> pro ;;
+painting Easter eggs. -> int;pro ;;
 
 `swl ->> 
 
 `hold-ref<opencarton>; 
 `discourse-markup-inline/ --> 
 Open the carton `ToBILHperc<^LHp->;.  Now remove the monitor carefully. 
-`discourse-markup-inline` -> itm:opencarton -> Open the carton.  Now remove the monitor carefully. -> pro ;;
+`discourse-markup-inline` -> itm:opencarton -> Open the carton.  Now remove the monitor carefully. -> int;pro ;;
 
 `swl ->> 
 
@@ -694,13 +700,13 @@ Open the carton `ToBILHperc<^LHp->;.  Now remove the monitor carefully.
 `discourse-markup-inline/ --> 
 The Johnsons are solid citizens.  They `ToBIHstar<^Hs->; pay their `ToBIHstar<^Hs->; taxes `ToBIHLperc<^HLp->;.  
 They `ToBIHstar<^Hs->; attend `ToBIHstar<^Hs->; PTA meetings `ToBILHperc<^LHp->;. 
-`discourse-markup-inline` -> itm:johnsons -> The Johnsons are solid citizens.  They pay their taxes.  They attend PTA meetings. -> pro ;;
-
+`discourse-markup-inline` -> itm:johnsons -> The Johnsons are solid citizens.  They pay their taxes.  They attend PTA meetings. -> int;pro ;;
 
 `swl ->> It's `textsc.amazing`/, the things she says sometimes. 
--> itm:Amazing -> It's amazing, the things she says sometimes. -> pro ;; 
+-> itm:Amazing -> It's amazing, the things she says sometimes. -> int;pro ;;
+
 `swl ->> It's `textsc.ridiculous`/, what he's saying. 
--> itm:Ridiculous -> It's ridiculous, what he's saying. -> pro ;;
+-> itm:Ridiculous -> It's ridiculous, what he's saying. -> int;pro ;;
 
 `swl -> itm:rhinor -> Rhinos in that park are threatened by poachers. -> sem ;;
 
@@ -719,6 +725,164 @@ They `ToBIHstar<^Hs->; attend `ToBIHstar<^Hs->; PTA meetings `ToBILHperc<^LHp->;
 `swl -> --- -> Let's go to the lawyers. -> sem ;;
 
 `swl -> --- -> Let's go to the press. -> sem ;;
+
+
+ ;;- __________ 
+ ;;- From file: icg (section 0)
+ ;;- __________ 
+
+
+`swl -> itm:hillrises -> The hill gently rises from the bank of the river. -> cog ;;
+
+`swl -> itm:hillfalls -> The hill gently falls to the bank of the river. 
+-> cog ;;
+
+`swl -> itm:expected -> Those problems were fully expected by the organizers. -> syn ;;
+
+`swl -> itm:encounter -> To encounter those problems was fully expected by the organizers. -> syn ;;
+
+
+`swl -> itm:graduate -> That she will graduate in June is expected by her mother. -> syn ;; 
+`swl -> itm:everybody -> That they would encounter problems was expected by everybody. -> syn ;;
+
+`swl -> itm:painters -> The painters expect that they will finish on time. -> syn ;;
+
+
+`swl -> itm:thatpainters -> That they will finish on time is expected by the painters. -> syn ;;`
+`swlEliminateGap;
+`sentenceList`
+
+|.|
+
+He gives each of these different levels of acceptability.  
+The most uncomfortable-sounding in my mind are  
+(`ref<itm:graduate>;) and (`ref<itm:thatpainters>;); 
+Langacker argues that (`ref<itm:everybody>;) sounds better 
+than (`ref<itm:graduate>;) but 
+that the two sentences have similar rationales both 
+in grammatic form (e.g., opening with a subordinate finite clause) 
+and in semantic content (that clause profiling a grounded 
+process which becomes treated as an object of thought by 
+a sentient subject in the main clause).  Nonetheless, 
+(`ref<itm:graduate>;), (`ref<itm:everybody>;), 
+and (`ref<itm:thatpainters>;) are not equally conventional.  The reasons 
+for this may be subtle (see `i.Introduction`/, page 432; 
+subsequent references will be to this book unless otherwise 
+noted), and I will discuss this example in more detail below.  The present 
+point, though, is that acceptability criteria can 
+depend on holistic conceptual and situational features 
+of a sentence, rather than on mechanical concordance 
+with specific grammatic laws or templates.  This can  
+be difficult to reconcile with the idea that grammar 
+determines how meanings fuse into wholes %-- if 
+holistic meaning is prerequisite for adjudicating 
+syntactic form, then how do addressees infer 
+the constructional sequence which is proper for 
+perceiving the holistic meaning which a speaker intended?
+`p`
+
+`p.
+In the presence of these issues we should assume that 
+grammar is more anarchic than linguists traditionally 
+realize.  There may be grammatic rearrangements which 
+are reasonable even if unconventional; there may also 
+be conventional norms which persist even if 
+violations of those might still yield understandable 
+speech-acts.  In these sorts of situations, 
+the norms of a language will tend to be loosened, 
+and the `q.templates` of entrenched constructions tend 
+to multiply.  New patterns, or new levels of acceptability 
+collectively granted to constructions or usages 
+that were once dubious, could emerge under the same 
+dynamics as new lexemes and word-senses: if there 
+is a semantic niche for some pattern, to either 
+communicate some idea more precisely or 
+with a new degree of precision in a given 
+register (on a scale of casual to formal language).  
+For instance, a novel pattern might become popular if 
+it yields an idiom in everyday speech which 
+equals the precision of an entrenched but overly 
+formal-sounding alternative.  One of the 
+forces giving impetus to novel constructions 
+is, I think obviously, a speech community's 
+desire to have a casual, quotidian language 
+register equally expressive as more formal, 
+professional language.  When an idiom feels 
+to old-fashioned or non-casual, English 
+speakers seem compelled to settle on an 
+alternative: `i.No problem` instead of 
+`i.You're welcome`/; `i.dude` or `i.boss` 
+instead of `i.sir`/; `i.gotta` instead of `i.must`/.  
+`p`
+
+`p.
+The pressure against excess novelty comes from 
+our concern that linguistic productions will 
+be opaque to our addressees, and therefore 
+fail to properly interpersonalize our 
+private epistemic framings.  But a `i.lack` 
+of novelty can be undesirable for 
+similar reasons: rote expressions might cause 
+listeners to miss the nuances of one's attitudes.  
+People will often choose words carefully, 
+and expect their hearers or readers to 
+understand that they are consciously selecting 
+some words, in lieu of others, to signify that 
+the rejected words are less appropriate for 
+the speaker's mindset (the `q.competitive` example 
+is Langacker's, page 473; the first is a now-famous quote about Donald Trump): |+|
+
+`sentenceList,
+`sentenceItem; `swl -> --- -> If we had had confidence the president clearly 
+did not commit a crime, we would have said so. -> dis ;;
+
+`swl -> --- -> I think he's rather ... uh ... competitive -> dis ;;
+
+`swl -> --- -> I like Ontario wines. -> log ;;
+
+`swl -> --- -> I like red wines from Southern Ontario. -> log ;;
+
+`swl -> --- -> I like dry red wines that come from Southern Ontario wineries using traditional European grape varieties. -> log ;;
+
+`swl -> itm:embarassed -> John is embarassed because he spilled some wine on the carpet. -> log ;;
+
+`swl -> --- -> John shouldn't be embarassed about spilling wine on the carpet, 
+because they served us wine in awkward plastic cups. -> log ;;
+
+`swl -> --- -> I'm going to tell John not to be embarassed about spilling wine on the carpet, because they served us wine in these dumb plastic cups. -> log ;;
+
+`swl -> --- ->  He ran through the mall. -> cog ;;
+
+`swl -> --- ->  He put through the call. -> cog ;;
+
+`swl -> --- ->  Through the mall he ran. -> cog ;;
+
+`swl -> --- ->  The call was put through. -> cog ;;
+
+`swl -> --- ->  He put the call through. -> cog ;;
+
+`swl -> --- ->  They began arguing before they even sat down. -> log ;;
+
+`swl -> itm:beforedinner ->  They began arguing before dinner. -> log ;;
+
+`swl -> itm:warrenleads ->  You know that Warren leads Biden in the polls, don't you? -> log ;;
+
+`swl -> itm:warrenmoderates ->  I hope that Warren can appeal to moderates. -> log ;;
+
+`swl -> itm:warrenpivot -> I'm sure that Warren will pivot to the center and will poll well with moderates. -> log ;;
+
+`swl -> itm:warrenwin ->  Warren will probably win the nomination. -> log ;;
+
+`swl -> itm:bidensupport ->  Biden's support among the base is eroding. -> log ;;
+
+`swl -> itm:baguette ->  May I have a baguette? -> dia ;;
+
+`swl -> itm:euros ->  Two Euros, please. -> dia ;;
+
+`swl -> --- ->  I would like to purchace a baguette. -> log ;;
+
+`swl -> --- ->  If you give me two Euros, I will give you a baguette
+and recognize it as yours. -> log ;;
 
 
  ;;- __________ 
@@ -939,9 +1103,9 @@ though he is not injured), he might accept a trade. -> --- ->  If they make him 
 `swl -> --- ->  I opened the wine in the kitchen for John 
 so it could aerate because he asked me to. -> cog ;;
 
-`swl -> itm:johnadvice ->  Giving John advice is impossible. -> cog;pro ;;
+`swl -> itm:johnadvice ->  Giving John advice is impossible. -> cog ;;
 
-`swl -> itm:pancakes ->  You promised to make us pancakes! -> cog;pro ;;
+`swl -> itm:pancakes ->  You promised to make us pancakes! -> cog ;;
 
 `swl -> --- ->  I gave John a Cabernet Franc from the winery he visited 
 during a trip along the Niagara escarpment last summer. -> syn ;;
@@ -1208,6 +1372,12 @@ but our school said he is just too controversial. -> sem ;;
 
 `swl -> itm:conferencebusy ->  I authorized him to attend the conference,
 but his school said he is just too busy. -> sem ;;
+
+
+ ;;- __________ 
+ ;;- From file: itm (section 0)
+ ;;- __________ 
+
 
 
  ;;- __________ 

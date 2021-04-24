@@ -120,6 +120,8 @@ class ScignStage_Ling_Dialog : public QDialog
  QGridLayout* quasi_toolbar_layout_;
  QHBoxLayout* config_layout_;
 
+ QVBoxLayout* right_layout_;
+
  QButtonGroup* filter_forms_button_group_;
  QButtonGroup* filter_issues_button_group_;
 
@@ -129,8 +131,10 @@ class ScignStage_Ling_Dialog : public QDialog
  QStringList issues_;
  QStringList forms_;
  QStringList issue_codes_;
+ QStringList forms_codes_;
 
  QMap<QString, u4> issue_counts_;
+ QMap<QString, u4> forms_counts_;
 
  QTreeWidget* main_tree_widget_;
 
@@ -152,6 +156,8 @@ class ScignStage_Ling_Dialog : public QDialog
  QVBoxLayout* show_archival_version_layout_;
  QPushButton* show_archival_version_button_;
  QGroupBox* show_archival_version_group_box_;
+ QHBoxLayout* show_archival_version_centering_layout_;
+
 
 
  QFrame* select_section_frame_;
@@ -177,6 +183,7 @@ class ScignStage_Ling_Dialog : public QDialog
  void save_to_user_select_file(QString text);
 
  void reset_issue_counts();
+ void reset_forms_counts();
 
  QMap<Language_Sample*, QPair<QLabel*, int> > sample_to_label_map_;
 

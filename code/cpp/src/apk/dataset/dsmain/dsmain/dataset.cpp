@@ -29,10 +29,12 @@ USING_KANS(TextIO)
 Dataset::Dataset(QString root_folder)
   : QRing_File_Structure(root_folder), samples_(nullptr), groups_(nullptr)
 {
- forms_ = QStringList{{"Text", "Dialog", "Intonation", "Fragment", "Paragraph"}};
+ forms_ = QStringList{{"Text", "Dialog", "Prosodic", "Segment", "Paragraph"}};
+ forms_codes_ = QStringList{{"txt", "dlg", "pro", "seg", "par"}};
  issues_ = QStringList{{"Ambiguity", "Roles", "Logic",
-            "Scope", "Types", "Prosody", "Syntax", "Semantics", "Pragmatics",
-            "Dialogue", "Cognition", "Lexical", "Discourse", "Reference", "Ontological",
+            "Scope", "Types", "Intonation", "Syntax", "Semantics", "Pragmatics",
+            "Dialogue", "Cognition", "Lexical", "Discourse", "Reference",
+            "Ontological", "Idioms", "Figural", "Polarity", "Epistemics", "Context"
  }};
 
  std::transform(issues_.begin(), issues_.end(),
@@ -45,6 +47,13 @@ Dataset::Dataset(QString root_folder)
  {
   issue_counts_.insert(issue, 0);
  }
+
+
+ for(QString form: forms_codes_)
+ {
+  forms_counts_.insert(form, 0);
+ }
+
 }
 
 void Dataset::load_from_folder()
@@ -71,6 +80,12 @@ void Dataset::load_from_folder(QString path)
  for(Language_Sample* samp : *samples_)
  {
   ++issue_counts_[samp->issue()];
+
+  QString ef = samp->example_form();
+  if(ef.isEmpty())
+    ++forms_counts_["txt"];
+  else
+    ++forms_counts_[ef];
  }
  qDebug() << "issue_counts: " << issue_counts_;
 

@@ -55,7 +55,7 @@ void get_section_files(QString paper_name, QMap<QString, QString>& result)
   qdi.next();
   QString fp = qdi.filePath();
   QFileInfo qfi(fp);
-  if(qfi.fileName().startsWith("section"))
+  if(qfi.fileName().startsWith("section") || qfi.fileName().startsWith("intro"))
   {
    QString tail;
    if(qfi.fileName().length() == 12)

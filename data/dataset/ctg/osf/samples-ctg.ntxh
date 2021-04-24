@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-23/4/2021, 12:3
+24/4/2021, 0:4
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -2892,7 +2892,7 @@ $i: 241
 $p: 78
 $x: itm:booksheread
 $t: The book she read was very interesting.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -2901,7 +2901,7 @@ $i: 242
 $p: 78
 $x: itm:bookrecommend
 $t: I recommended a book that she read immediately.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -2910,7 +2910,7 @@ $i: 243
 $p: 78
 $x: itm:bookjustappeared
 $t: A book just appeared that she read immediately.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -2919,7 +2919,7 @@ $i: 244
 $p: 78
 $x: itm:bookrecommendalt
 $t: I recommended a book I read years ago to her.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -2928,7 +2928,7 @@ $i: 245
 $p: 78
 $x: itm:harrycause
 $t: This time Harry didn't cause our defeat.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -2946,7 +2946,7 @@ $i: 246
 $p: 79
 $x: itm:clydebertha
 $t: It's odd that Clyde married Bertha.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -2955,7 +2955,7 @@ $i: 247
 $p: 79
 $x: itm:Brighton
 $t: Londoners most often go to Brighton.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -2973,7 +2973,7 @@ $i: 248
 $p: 79
 $x: itm:BillDrink
 $t: Bill doesn't drink because he's unhappy.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -2982,7 +2982,7 @@ $i: 249
 $p: 79
 $x: itm:ricewine
 $t: Stir in rice wine and seasonings.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -2991,7 +2991,7 @@ $i: 250
 $p: 79
 $x: itm:poodle
 $t: Alice bought a dog. A poodle.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -3009,7 +3009,7 @@ $i: 251
 $p: 80
 $x: itm:roof
 $t: The roof leaks if a building hasn't been maintained.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -3018,7 +3018,7 @@ $i: 252
 $p: 80
 $x: itm:coach
 $t: The team is unsuccessful because the coach is so incompetent.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -3036,7 +3036,7 @@ $i: 253
 $p: 80
 $x: itm:seedress
 $t: If you see a dress and you really like it you should buy it while you can.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -3045,7 +3045,7 @@ $i: 254
 $p: 81
 $x: itm:atleastdress
 $t: At least for Alice that wonderful dress is just too expensive.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -3063,7 +3063,7 @@ $i: 255
 $p: 81
 $x: itm:easter
 $t: Last night, she was painting Easter eggs.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -3072,7 +3072,7 @@ $i: 256
 $p: 81
 $x: itm:finebrush
 $t: With a fine brush, she was painting Easter eggs.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -3081,7 +3081,7 @@ $i: 257
 $p: 81
 $x: itm:opencarton
 $t: Open the carton. Now remove the monitor carefully.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -3090,7 +3090,7 @@ $i: 258
 $p: 81
 $x: itm:johnsons
 $t: The Johnsons are solid citizens. They pay their taxes. They attend PTA meetings.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -3108,7 +3108,7 @@ $i: 259
 $p: 83
 $x: itm:Amazing
 $t: It's amazing, the things she says sometimes.
-$c: pro
+$c: int;pro
 /!
 <>>
 
@@ -3117,7 +3117,7 @@ $i: 260
 $p: 83
 $x: itm:Ridiculous
 $t: It's ridiculous, what he's saying.
-$c: pro
+$c: int;pro
 /!
 <>>
 

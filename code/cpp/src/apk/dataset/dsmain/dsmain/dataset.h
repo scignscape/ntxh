@@ -52,6 +52,9 @@ class Dataset :  public QRing_File_Structure
  QStringList issue_codes_;
  QMap<QString, u4> issue_counts_;
 
+ QStringList forms_codes_;
+ QMap<QString, u4> forms_counts_;
+
  QVector<QPair<QPair<QString, int>, QPair<int, int>>> subdocuments_;
 
  DSM_SDI_Document sdi_document_;
@@ -70,7 +73,9 @@ public:
  ACCESSORS__RGET(QStringList ,issues)
  ACCESSORS__RGET(QStringList ,issue_codes)
  ACCESSORS__RGET(QStringList ,forms)
+ ACCESSORS__RGET(QStringList ,forms_codes)
  ACCESSORS__RGET(MACRO_PASTE(QMap<QString, u4>), issue_counts)
+ ACCESSORS__RGET(MACRO_PASTE(QMap<QString, u4>), forms_counts)
 
 
  ACCESSORS__RGET(QList<Discourse_Markup_Sample> ,discourse_markup_samples)
