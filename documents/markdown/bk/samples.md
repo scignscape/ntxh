@@ -1,8 +1,4 @@
 
-
-[//]: # (This automatically-generated file merges others in the directory)
-
-
 ### Cognitive Transform Grammar
 ---
 
@@ -537,10 +533,6 @@ Let's go to the press.
 
 #
 
-
-[//]: # (This automatically-generated file merges others in the directory)
-
-
 ### Conceptual Spaces/Cognitive Grammar
 ---
 
@@ -962,10 +954,6 @@ I authorized him to attend the conference, but our school said he is just too co
 I authorized him to attend the conference, but his school said he is just too busy.  
 
 #
-
-
-[//]: # (This automatically-generated file merges others in the directory)
-
 
 ### Interface Theory of Meaning
 ---
