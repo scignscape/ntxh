@@ -50,12 +50,28 @@ Language_Sample_Group::Language_Sample_Group(u2 id)
 
 QString Language_Sample_Group::get_example_form()
 {
+ QString result;
+ QSet<QString> seen;
  for(Language_Sample* ls : samples_)
  {
-  if(!ls->example_form().isEmpty())
-    return ls->example_form();
+  QString ef = ls->example_form();
+  if(!ef.isEmpty())
+  {
+   if(result.isEmpty())
+   {
+    result = ef;
+    seen.insert(ef);
+   }
+   else if(!seen.contains(ef))
+   {
+    seen.insert(ef);
+    result += "," + ef;
+   }
+  }
  }
- return "txt";
+ if(result.isEmpty())
+   return "txt";
+ return result;
 }
 
 QString Language_Sample_Group::get_issue()

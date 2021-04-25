@@ -1,5 +1,5 @@
 - Generated from LaTeX File icg.tex 
-25/4/2021, 1:3
+25/4/2021, 1:47
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -163,7 +163,7 @@ $s: 0
 $i: 9
 $p: 4
 $t: If we had had confidence the president clearly did not commit a crime, we would have said so.
-$c: dis
+$c: dis;txt
 /!
 <>>
 
@@ -1003,7 +1003,7 @@ $i: 85
 $p: 39
 $x: itm:studiedmath
 $t: I studied math.
-$c: cog
+$c: cog;txt
 /!
 <>>
 
@@ -1012,7 +1012,7 @@ $i: 86
 $p: 39
 $x: itm:studiedhours
 $t: I studied for two hours.
-$c: cog
+$c: cog;txt
 /!
 <>>
 
@@ -1021,7 +1021,7 @@ $i: 87
 $p: 39
 $x: itm:studiedlastnight
 $t: I studied last night.
-$c: cog
+$c: cog;txt
 /!
 <>>
 
@@ -1030,7 +1030,7 @@ $i: 88
 $p: 39
 $x: itm:studiedbookstore
 $t: I studied in a bookstore.
-$c: cog
+$c: cog;txt
 /!
 <>>
 

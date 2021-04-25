@@ -660,9 +660,9 @@ she read immediately`/. `slsep; -> itm:bookrecommend -> I recommended a book tha
 
 `swl -> itm:Brighton -> Londoners most often go to Brighton. -> int ;;
 
-`swl -> itm:BillDrink -> Bill doesn't drink because he's unhappy. -> int ;;
+`swl -> itm:BillDrink -> Bill doesn't drink because he's unhappy. -> int;txt ;;
 
-`swl -> itm:ricewine -> Stir in rice wine and seasonings. -> int ;;
+`swl -> itm:ricewine -> Stir in rice wine and seasonings. -> int;txt ;;
 
 `swl -> itm:poodle -> Alice bought a dog.  A poodle. -> int;seg ;;
 
@@ -746,7 +746,7 @@ They `ToBIHstar<^Hs->; attend `ToBIHstar<^Hs->; PTA meetings `ToBILHperc<^LHp->;
 `swl -> itm:thatpainters -> That they will finish on time is expected by the painters. -> syn ;;`
 
 `swl -> --- -> If we had had confidence the president clearly 
-did not commit a crime, we would have said so. -> dis ;;
+did not commit a crime, we would have said so. -> dis;txt ;;
 
 `swl -> --- -> I think he's rather ... uh ... competitive -> dis;seg ;;
 
@@ -916,13 +916,13 @@ table with an ornate knife. -> cog ;;
 
 `swl -> itm:studied ->  I studied. -> cog;seg ;;
 
-`swl -> itm:studiedmath ->  I studied math. -> cog ;;
+`swl -> itm:studiedmath ->  I studied math. -> cog;txt ;;
 
-`swl -> itm:studiedhours ->  I studied for two hours. -> cog ;;
+`swl -> itm:studiedhours ->  I studied for two hours. -> cog;txt ;;
 
-`swl -> itm:studiedlastnight ->  I studied last night. -> cog ;;
+`swl -> itm:studiedlastnight ->  I studied last night. -> cog;txt ;;
 
-`swl -> itm:studiedbookstore ->  I studied in a bookstore. -> cog ;;
+`swl -> itm:studiedbookstore ->  I studied in a bookstore. -> cog;txt ;;
 
 `swl -> --- ->  I baked a cake for Grandma. -> syn ;;
 

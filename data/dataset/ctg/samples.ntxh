@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-25/4/2021, 0:56
+25/4/2021, 1:40
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -2973,7 +2973,7 @@ $i: 248
 $p: 79
 $x: itm:BillDrink
 $t: Bill doesn't drink because he's unhappy.
-$c: int
+$c: int;txt
 /!
 <>>
 
@@ -2982,7 +2982,7 @@ $i: 249
 $p: 79
 $x: itm:ricewine
 $t: Stir in rice wine and seasonings.
-$c: int
+$c: int;txt
 /!
 <>>
 
