@@ -1,22 +1,22 @@
 $$ document-title := Cognitive Transform Grammar
 $$ local-title := section5
 
-$& Belohlavek %% (1:main) 57300 57301
-$& BernardyEtAl %% (1:main) 74058 74084
-$& FriedOstman page%(1:main) 43639 44092 (1:main) 43639 44092
-$& JiriBenovsky p.%%8 (1:main) 52027 52042
-$& Johnson p.%%208 (1:main) 55701 55702
-$& LakoffJohnson p.%%18 (1:main) 55141 55651
-$& LakoffJohnson p.%%90 (1:main) 55652 55700
-$& LangackerInteractive pages%%102-103 (1:main) 8446 8466
-$& LangackerInteractive page%%119 (1:main) 14692 14693
-$& LangackerInteractive page%%115 (1:main) 16472 16727
-$& LangackerInvestigations page%%250 (1:main) 18605 18858
-$& LuoSoloviev %% (1:main) 74468 74851
-$& MathieuBouchard %% (1:main) 50280 50291
-$& MichaelJubien %% (1:main) 51868 52008
-$& MichaelisLambrech e.g.%%page%%223 (1:main) 27539 27657
-$& TanakaEtAl %% (1:main) 74085 74086
-$& Wille %% (1:main) 57302 57303
-$& YiyuYao %% (1:main) 57131 57299
+$& Belohlavek %% (1:main) 57283 57284
+$& BernardyEtAl %% (1:main) 74041 74067
+$& FriedOstman page%(1:main) 43622 44075 (1:main) 43622 44075
+$& JiriBenovsky p.%%8 (1:main) 52010 52025
+$& Johnson p.%%208 (1:main) 55684 55685
+$& LakoffJohnson p.%%18 (1:main) 55124 55634
+$& LakoffJohnson p.%%90 (1:main) 55635 55683
+$& LangackerInteractive pages%%102-103 (1:main) 8450 8470
+$& LangackerInteractive page%%119 (1:main) 14671 14672
+$& LangackerInteractive page%%115 (1:main) 16451 16706
+$& LangackerInvestigations page%%250 (1:main) 18584 18837
+$& LuoSoloviev %% (1:main) 74451 74834
+$& MathieuBouchard %% (1:main) 50263 50274
+$& MichaelJubien %% (1:main) 51851 51991
+$& MichaelisLambrech e.g.%%page%%223 (1:main) 27522 27640
+$& TanakaEtAl %% (1:main) 74068 74069
+$& Wille %% (1:main) 57285 57286
+$& YiyuYao %% (1:main) 57114 57282
 

@@ -77,20 +77,20 @@ complain about how long it takes to commute to New York City. -> log ;;
 `swl -> itm:leafshabs -> For the first time this year, the Leafs failed to beat 
 the Habs. -> log ;;
 
-`swl -> itm:parked -> I am parked out back. ->> (example 3, page 371) -> ref ;;
+`swl -> itm:parked -> I am parked out back. ->> (example 3, page 346/369) -> ref ;;
 
 `swl -> itm:waiting -> I am parked out back and have been waiting for 15 minutes. 
-->> (example 3) -> ref ;;
+->> (example 5, 347/370) -> ref ;;
 
-`swl -> itm:start -> I am parked out back and may not start. ->> (example 6, page 371) -> ref ;;
+`swl -> itm:start -> I am parked out back and may not start. ->> (example 6) -> ref ;;
 
-`swl -> itm:Whitney -> I'm in the Whitney Museum. ->> (page 375) -> ref ;;
+`swl -> itm:Whitney -> I'm in the Whitney Museum. ->> (page 348/371) -> ref ;;
 
-`swl -> itm:beers -> I drank two beers. ->> (page 375) -> ref ;;
+`swl -> itm:beers -> I drank two beers. ->> (352/375) -> ref ;;
 
-`swl -> itm:Michelobs -> I drank two Michelobs. ->> (page 375) -> ref ;;
+`swl -> itm:Michelobs -> I drank two Michelobs. ->> (352/375) -> ref ;;
 
-`swl -> itm:Sauternes -> I drank two Sauternes last night. ->> (page 375) -> ref ;;
+`swl -> itm:Sauternes -> I drank two Sauternes last night. ->> (352/375) -> ref ;;
 
 `swl -> itm:library -> I'm in the library. ->> (said by an author whose books are there) -> ref ;;
 
@@ -656,9 +656,11 @@ she read immediately`/. `slsep; -> itm:bookrecommend -> I recommended a book tha
 `swl ->> This time `textbf.Harry` didn't cause our defeat.
   -> itm:harrycause -> This time Harry didn't cause our defeat. -> int;pro ;;
 
-`swl -> itm:clydebertha -> It's odd that Clyde married Bertha. -> int ;;
+`swl -> itm:clydebertha -> It's odd that Clyde married Bertha.
+ ->> (example 20, page 526/549) -> int ;;
 
-`swl -> itm:Brighton -> Londoners most often go to Brighton. -> int ;;
+`swl -> itm:Brighton -> Londoners most often go to Brighton.
+ ->> (example 18, 526/549) -> int ;;
 
 `swl -> itm:BillDrink -> Bill doesn't drink because he's unhappy. -> int;txt ;;
 

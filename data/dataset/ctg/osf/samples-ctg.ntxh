@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-25/4/2021, 12:22
+25/4/2021, 15:48
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -35,7 +35,7 @@ $pdf: @/data/ntxh/main.pdf
 
 !/ Subdocument 
 $au: Nathaniel Christen
-$start: 4 
+$start: 5 
 $end: 18 
 /! 
 <+> 
@@ -129,7 +129,7 @@ $c: syn
 !/ SentenceList
 $i: 3
 $r: 8
-$p: 7
+$p: 8
 $s: 1
 
 !/ SentenceItem
@@ -362,7 +362,7 @@ $i: 25
 $p: 11
 $x: itm:parked
 $t: I am parked out back.
-$o: (example 3, page 371)
+$o: (example 3, page 346/369)
 $c: ref
 /!
 <>>
@@ -372,7 +372,7 @@ $i: 26
 $p: 11
 $x: itm:waiting
 $t: I am parked out back and have been waiting for 15 minutes.
-$o: (example 3)
+$o: (example 5, 347/370)
 $c: ref
 /!
 <>>
@@ -382,7 +382,7 @@ $i: 27
 $p: 11
 $x: itm:start
 $t: I am parked out back and may not start.
-$o: (example 6, page 371)
+$o: (example 6)
 $c: ref
 /!
 <>>
@@ -392,7 +392,7 @@ $i: 28
 $p: 11
 $x: itm:Whitney
 $t: I'm in the Whitney Museum.
-$o: (page 375)
+$o: (page 348/371)
 $c: ref
 /!
 <>>
@@ -402,7 +402,7 @@ $i: 29
 $p: 11
 $x: itm:beers
 $t: I drank two beers.
-$o: (page 375)
+$o: (352/375)
 $c: ref
 /!
 <>>
@@ -412,7 +412,7 @@ $i: 30
 $p: 11
 $x: itm:Michelobs
 $t: I drank two Michelobs.
-$o: (page 375)
+$o: (352/375)
 $c: ref
 /!
 <>>
@@ -422,7 +422,7 @@ $i: 31
 $p: 11
 $x: itm:Sauternes
 $t: I drank two Sauternes last night.
-$o: (page 375)
+$o: (352/375)
 $c: ref
 /!
 <>>
@@ -808,7 +808,7 @@ $l: GUM_voyage\_socotra-16
 
 !/ SentenceList
 $i: 33
-$r: 21
+$r: 22
 $p: 21
 $s: 2
 
@@ -823,7 +823,7 @@ $c: sco
 
 !/ SentenceItem
 $i: 58
-$p: 21
+$p: 22
 $x: itm:office
 $t: Many students came by my office to complain about their grades.
 $c: sco
@@ -2946,6 +2946,7 @@ $i: 246
 $p: 79
 $x: itm:clydebertha
 $t: It's odd that Clyde married Bertha.
+$o: (example 20, page 526/549)
 $c: int
 /!
 <>>
@@ -2955,6 +2956,7 @@ $i: 247
 $p: 79
 $x: itm:Brighton
 $t: Londoners most often go to Brighton.
+$o: (example 18, 526/549)
 $c: int
 /!
 <>>

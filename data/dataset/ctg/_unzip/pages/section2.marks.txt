@@ -3,11 +3,11 @@ $$ local-title := section2
 
 $& AnneVilnat %% (1:main) 32812 32899
 $& AsherPustejovsky example%(1:main) 28700 28728,%%p.%%5 %3
-$& AsherPustejovsky %% (1:main) 60270 60272
+$& AsherPustejovsky %% (1:main) 60274 60276
 $& BarkerShanTG %% (1:main) 3168 3295
 $& ChoeCharniak %% (1:main) 7588 7589
 $& Gardenfors p.%%4 (1:main) 43404 43577
-$& JamesPustejovsky %% (1:main) 60257 60268
+$& JamesPustejovsky %% (1:main) 60261 60272
 $& JanVanEijck %% (1:main) 10075 10266
 $& KitFine %% (1:main) 46088 46097
 $& KiyoshiSudo %% (1:main) 7586 7587
