@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-24/4/2021, 0:4
+25/4/2021, 0:56
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -1635,7 +1635,7 @@ $i: 124
 $p: 41
 $x: itm:isJones
 $t: Is Jones there?
-$c: pra
+$c: pra;dlg
 /!
 <>>
 
@@ -1644,7 +1644,7 @@ $i: 125
 $p: 41
 $x: itm:not
 $t: He is not available.
-$c: pra
+$c: pra;dlg
 /!
 <>>
 
@@ -1782,7 +1782,7 @@ $i: 136
 $p: 45
 $x: itm:today
 $t: Today the state university system announced plans to raise tuition by at least 10 percent. Most students oppose a tuition increase.
-$c: sem
+$c: sem;par
 /!
 <>>
 
@@ -2546,7 +2546,7 @@ $i: 204
 $p: 68
 $x: itm:trumpcolluded
 $t: The Trump campaign colluded with Russia.
-$c: syn
+$c: epi
 /!
 <>>
 
@@ -2554,7 +2554,7 @@ $c: syn
 $i: 205
 $p: 68
 $t: Several witnesses testified that the Trump campaign colluded with Russia.
-$c: syn
+$c: epi
 /!
 <>>
 
@@ -2562,7 +2562,7 @@ $c: syn
 $i: 206
 $p: 68
 $t: Reputable newspapers have reported that the Trump campaign colluded with Russia.
-$c: syn
+$c: epi
 /!
 <>>
 
@@ -2570,7 +2570,7 @@ $c: syn
 $i: 207
 $p: 68
 $t: Most Democrats believe that the Trump campaign colluded with Russia.
-$c: syn
+$c: epi
 /!
 <>>
 
@@ -2946,7 +2946,7 @@ $i: 246
 $p: 79
 $x: itm:clydebertha
 $t: It's odd that Clyde married Bertha.
-$c: int;pro
+$c: int
 /!
 <>>
 
@@ -2955,7 +2955,7 @@ $i: 247
 $p: 79
 $x: itm:Brighton
 $t: Londoners most often go to Brighton.
-$c: int;pro
+$c: int
 /!
 <>>
 
@@ -2973,7 +2973,7 @@ $i: 248
 $p: 79
 $x: itm:BillDrink
 $t: Bill doesn't drink because he's unhappy.
-$c: int;pro
+$c: int
 /!
 <>>
 
@@ -2982,7 +2982,7 @@ $i: 249
 $p: 79
 $x: itm:ricewine
 $t: Stir in rice wine and seasonings.
-$c: int;pro
+$c: int
 /!
 <>>
 
@@ -2991,7 +2991,7 @@ $i: 250
 $p: 79
 $x: itm:poodle
 $t: Alice bought a dog. A poodle.
-$c: int;pro
+$c: int;seg
 /!
 <>>
 
@@ -3108,7 +3108,7 @@ $i: 259
 $p: 83
 $x: itm:Amazing
 $t: It's amazing, the things she says sometimes.
-$c: int;pro
+$c: con;pro
 /!
 <>>
 
@@ -3117,7 +3117,7 @@ $i: 260
 $p: 83
 $x: itm:Ridiculous
 $t: It's ridiculous, what he's saying.
-$c: int;pro
+$c: con;pro
 /!
 <>>
 

@@ -13,18 +13,14 @@
   by itself would not be able to generate
   a usable PDF file (for example).
 
+  Total samples: 553
+
 --;;
 
 
  ;;- __________ 
- ;;- From file: ctg (section 0)
- ;;- __________ 
-
-
-
- ;;- __________ 
  ;;- From file: ctg (section 1)
- ;;- __________ 
+ ;;- __________ (count: 54) 
 
 
 `swl -> itm:having -> His having lied in the past damages his credibilty in the present. -> syn ;;
@@ -168,7 +164,7 @@ Student after student %-- and their parents
 
  ;;- __________ 
  ;;- From file: ctg (section 2)
- ;;- __________ 
+ ;;- __________ (count: 28) 
 
 
 `swl -> itm:ambience -> The city's ambience is colonial and the climate is tropical. -> sem ;;
@@ -187,9 +183,9 @@ came to complain about the tuition hikes. -> sco ;;
 `swl -> itm:parents -> Student after student came with their parents to complain 
 about the tuition hikes. -> sco ;;
 
-
 `swl -> --- -> Three times, students asked an interesting question.
 ->> `usebox =-> Langackerboxi ;; 
+
 `swl -> --- -> Three times, a student asked an interesting question. -> sco ;;
 
 `swl -> --- -> The newspaper you are reading is being sued. -> lex ;;
@@ -237,7 +233,7 @@ the table. ->> (?) -> lex ;;
 
  ;;- __________ 
  ;;- From file: ctg (section 3)
- ;;- __________ 
+ ;;- __________ (count: 70) 
 
 
 `swl -> itm:almond -> Do you have almond milk? -> pra ;;
@@ -337,9 +333,9 @@ a contract in exchange for campaign contributions? -> pra ;;
 to answer that question on the grounds that it
 may incriminate me. -> pra ;;
 
-`swl -> itm:isJones -> Is Jones there? -> pra ;;
+`swl -> itm:isJones -> Is Jones there? -> pra;dlg ;;
 
-`swl -> itm:not -> He is not available. -> pra ;;
+`swl -> itm:not -> He is not available. -> pra;dlg ;;
 
 `swl -> --- -> If the kitchen window is closed,
 we can see if other windows are open. -> pra ;;
@@ -370,7 +366,7 @@ about tuition increases. -> log ;;
 announced plans to raise tuition by
 at least 10\%.  Most students oppose a tuition increase. -> itm:today -> Today the state university system
 announced plans to raise tuition by
-at least 10 percent.  Most students oppose a tuition increase. -> sem ;;
+at least 10 percent.  Most students oppose a tuition increase. -> sem;par ;;
 
 `swl -> itm:colleges -> Colleges all over the country, facing
 rising costs, have had to raise tuition, but
@@ -401,8 +397,8 @@ and wherever yours is, you need a mini-fridge. -> log ;;
 
 `swl -> itm:borough -> New Yorkers live in one of five boroughs. -> cog ;;
 
-
 `swl -> itm:democratic -> New Yorkers reliably vote for Democratic presidential candidates. -> cog ;; 
+
 `swl -> itm:nycommute -> New Yorkers constantly complain about how long it takes to commute
 to New York City. -> cog ;;
 
@@ -420,7 +416,7 @@ long it takes to commute to New York City. -> cog ;;
 
  ;;- __________ 
  ;;- From file: ctg (section 4)
- ;;- __________ 
+ ;;- __________ (count: 88) 
 
 
 `swl -> --- -> I snacked on toast and coffee. -> sem ;;
@@ -565,16 +561,16 @@ to discuss Sartre's philosophy when the play was over. -> ref ;;
 `swl -> --- ->  No-one seriously entertained the belief that
 he would govern in a bipartisan manner. -> syn ;;
 
-`swl -> itm:trumpcolluded -> The Trump campaign colluded with Russia. -> syn ;;
+`swl -> itm:trumpcolluded -> The Trump campaign colluded with Russia. -> epi ;;
 
 `swl -> --- -> Several witnesses testified that
-the Trump campaign colluded with Russia. -> syn ;;
+the Trump campaign colluded with Russia. -> epi ;;
 
 `swl -> --- -> Reputable newspapers have reported that
-the Trump campaign colluded with Russia. -> syn ;;
+the Trump campaign colluded with Russia. -> epi ;;
 
 `swl -> --- -> Most Democrats believe that
-the Trump campaign colluded with Russia. -> syn ;;
+the Trump campaign colluded with Russia. -> epi ;;
 
 `swl ->  --- -> I believed in Father Christmas. -> syn ;;
 
@@ -590,8 +586,8 @@ the Trump campaign colluded with Russia. -> syn ;;
 
 `swl ->  --- -> The war has lasted many years. -> cog ;;
 
-
 `swl ->  --- -> A tenuous peace has held for over a year now. -> cog ;; 
+
 `swl ->  --- -> The cruel war is raging, Johnny has to fight. -> cog ;;
 
 `swl ->  --- -> War is a cause of misery. -> cog ;;
@@ -645,7 +641,7 @@ the Trump campaign colluded with Russia. -> syn ;;
 
  ;;- __________ 
  ;;- From file: ctg (section 5)
- ;;- __________ 
+ ;;- __________ (count: 29) 
 
 
 `swl ->> `slsep; `textbf.The book she read` `slsep; was very interesting. `slsep; -> itm:booksheread -> The book she read was very interesting. -> int;pro ;;
@@ -655,20 +651,20 @@ she read immediately`/. `slsep; -> itm:bookrecommend -> I recommended a book tha
 
 `swl ->> `slsep; `textbf.A book` just appeared `slsep; `textbf.that she read immediately`  `slsep; -> itm:bookjustappeared -> A book just appeared that she read immediately. -> int;pro ;;
 
-`swl -> itm:bookrecommendalt -> I recommended a book I read years ago to her. -> int;pro ;;
+`swl ->> I recommended `slsep; a book I read years ago `slsep; to her. -> itm:bookrecommendalt -> I recommended a book I read years ago to her. -> int;pro ;;
 
 `swl ->> This time `textbf.Harry` didn't cause our defeat.
   -> itm:harrycause -> This time Harry didn't cause our defeat. -> int;pro ;;
 
-`swl -> itm:clydebertha -> It's odd that Clyde married Bertha. -> int;pro ;;
+`swl -> itm:clydebertha -> It's odd that Clyde married Bertha. -> int ;;
 
-`swl -> itm:Brighton -> Londoners most often go to Brighton. -> int;pro ;;
+`swl -> itm:Brighton -> Londoners most often go to Brighton. -> int ;;
 
-`swl -> itm:BillDrink -> Bill doesn't drink because he's unhappy. -> int;pro ;;
+`swl -> itm:BillDrink -> Bill doesn't drink because he's unhappy. -> int ;;
 
-`swl -> itm:ricewine -> Stir in rice wine and seasonings. -> int;pro ;;
+`swl -> itm:ricewine -> Stir in rice wine and seasonings. -> int ;;
 
-`swl -> itm:poodle -> Alice bought a dog.  A poodle. -> int;pro ;;
+`swl -> itm:poodle -> Alice bought a dog.  A poodle. -> int;seg ;;
 
 `swl ->> The `midemph.ROOF LEAKS` if a building 
 hasn't been `midemph.MAINTAINED`/. -> itm:roof -> The roof leaks if a building hasn't been maintained. -> int;pro ;;
@@ -703,10 +699,10 @@ They `ToBIHstar<^Hs->; attend `ToBIHstar<^Hs->; PTA meetings `ToBILHperc<^LHp->;
 `discourse-markup-inline` -> itm:johnsons -> The Johnsons are solid citizens.  They pay their taxes.  They attend PTA meetings. -> int;pro ;;
 
 `swl ->> It's `textsc.amazing`/, the things she says sometimes. 
--> itm:Amazing -> It's amazing, the things she says sometimes. -> int;pro ;;
+-> itm:Amazing -> It's amazing, the things she says sometimes. -> con;pro ;;
 
 `swl ->> It's `textsc.ridiculous`/, what he's saying. 
--> itm:Ridiculous -> It's ridiculous, what he's saying. -> int;pro ;;
+-> itm:Ridiculous -> It's ridiculous, what he's saying. -> con;pro ;;
 
 `swl -> itm:rhinor -> Rhinos in that park are threatened by poachers. -> sem ;;
 
@@ -728,8 +724,8 @@ They `ToBIHstar<^Hs->; attend `ToBIHstar<^Hs->; PTA meetings `ToBILHperc<^LHp->;
 
 
  ;;- __________ 
- ;;- From file: icg (section 0)
- ;;- __________ 
+ ;;- From file: icg (intro)
+ ;;- __________ (count: 32) 
 
 
 `swl -> itm:hillrises -> The hill gently rises from the bank of the river. -> cog ;;
@@ -741,102 +737,18 @@ They `ToBIHstar<^Hs->; attend `ToBIHstar<^Hs->; PTA meetings `ToBILHperc<^LHp->;
 
 `swl -> itm:encounter -> To encounter those problems was fully expected by the organizers. -> syn ;;
 
-
 `swl -> itm:graduate -> That she will graduate in June is expected by her mother. -> syn ;; 
+
 `swl -> itm:everybody -> That they would encounter problems was expected by everybody. -> syn ;;
 
 `swl -> itm:painters -> The painters expect that they will finish on time. -> syn ;;
 
-
 `swl -> itm:thatpainters -> That they will finish on time is expected by the painters. -> syn ;;`
-`swlEliminateGap;
-`sentenceList`
 
-|.|
-
-He gives each of these different levels of acceptability.  
-The most uncomfortable-sounding in my mind are  
-(`ref<itm:graduate>;) and (`ref<itm:thatpainters>;); 
-Langacker argues that (`ref<itm:everybody>;) sounds better 
-than (`ref<itm:graduate>;) but 
-that the two sentences have similar rationales both 
-in grammatic form (e.g., opening with a subordinate finite clause) 
-and in semantic content (that clause profiling a grounded 
-process which becomes treated as an object of thought by 
-a sentient subject in the main clause).  Nonetheless, 
-(`ref<itm:graduate>;), (`ref<itm:everybody>;), 
-and (`ref<itm:thatpainters>;) are not equally conventional.  The reasons 
-for this may be subtle (see `i.Introduction`/, page 432; 
-subsequent references will be to this book unless otherwise 
-noted), and I will discuss this example in more detail below.  The present 
-point, though, is that acceptability criteria can 
-depend on holistic conceptual and situational features 
-of a sentence, rather than on mechanical concordance 
-with specific grammatic laws or templates.  This can  
-be difficult to reconcile with the idea that grammar 
-determines how meanings fuse into wholes %-- if 
-holistic meaning is prerequisite for adjudicating 
-syntactic form, then how do addressees infer 
-the constructional sequence which is proper for 
-perceiving the holistic meaning which a speaker intended?
-`p`
-
-`p.
-In the presence of these issues we should assume that 
-grammar is more anarchic than linguists traditionally 
-realize.  There may be grammatic rearrangements which 
-are reasonable even if unconventional; there may also 
-be conventional norms which persist even if 
-violations of those might still yield understandable 
-speech-acts.  In these sorts of situations, 
-the norms of a language will tend to be loosened, 
-and the `q.templates` of entrenched constructions tend 
-to multiply.  New patterns, or new levels of acceptability 
-collectively granted to constructions or usages 
-that were once dubious, could emerge under the same 
-dynamics as new lexemes and word-senses: if there 
-is a semantic niche for some pattern, to either 
-communicate some idea more precisely or 
-with a new degree of precision in a given 
-register (on a scale of casual to formal language).  
-For instance, a novel pattern might become popular if 
-it yields an idiom in everyday speech which 
-equals the precision of an entrenched but overly 
-formal-sounding alternative.  One of the 
-forces giving impetus to novel constructions 
-is, I think obviously, a speech community's 
-desire to have a casual, quotidian language 
-register equally expressive as more formal, 
-professional language.  When an idiom feels 
-to old-fashioned or non-casual, English 
-speakers seem compelled to settle on an 
-alternative: `i.No problem` instead of 
-`i.You're welcome`/; `i.dude` or `i.boss` 
-instead of `i.sir`/; `i.gotta` instead of `i.must`/.  
-`p`
-
-`p.
-The pressure against excess novelty comes from 
-our concern that linguistic productions will 
-be opaque to our addressees, and therefore 
-fail to properly interpersonalize our 
-private epistemic framings.  But a `i.lack` 
-of novelty can be undesirable for 
-similar reasons: rote expressions might cause 
-listeners to miss the nuances of one's attitudes.  
-People will often choose words carefully, 
-and expect their hearers or readers to 
-understand that they are consciously selecting 
-some words, in lieu of others, to signify that 
-the rejected words are less appropriate for 
-the speaker's mindset (the `q.competitive` example 
-is Langacker's, page 473; the first is a now-famous quote about Donald Trump): |+|
-
-`sentenceList,
-`sentenceItem; `swl -> --- -> If we had had confidence the president clearly 
+`swl -> --- -> If we had had confidence the president clearly 
 did not commit a crime, we would have said so. -> dis ;;
 
-`swl -> --- -> I think he's rather ... uh ... competitive -> dis ;;
+`swl -> --- -> I think he's rather ... uh ... competitive -> dis;seg ;;
 
 `swl -> --- -> I like Ontario wines. -> log ;;
 
@@ -867,17 +779,17 @@ because they served us wine in awkward plastic cups. -> log ;;
 
 `swl -> itm:warrenleads ->  You know that Warren leads Biden in the polls, don't you? -> log ;;
 
-`swl -> itm:warrenmoderates ->  I hope that Warren can appeal to moderates. -> log ;;
+`swl -> itm:warrenmoderates ->  I hope that Warren can appeal to moderates. -> pol ;;
 
-`swl -> itm:warrenpivot -> I'm sure that Warren will pivot to the center and will poll well with moderates. -> log ;;
+`swl -> itm:warrenpivot -> I'm sure that Warren will pivot to the center and will poll well with moderates. -> fig ;;
 
 `swl -> itm:warrenwin ->  Warren will probably win the nomination. -> log ;;
 
-`swl -> itm:bidensupport ->  Biden's support among the base is eroding. -> log ;;
+`swl -> itm:bidensupport ->  Biden's support among the base is eroding. -> epi ;;
 
-`swl -> itm:baguette ->  May I have a baguette? -> dia ;;
+`swl -> itm:baguette ->  May I have a baguette? -> log;dia ;;
 
-`swl -> itm:euros ->  Two Euros, please. -> dia ;;
+`swl -> itm:euros ->  Two Euros, please. -> log;dia ;;
 
 `swl -> --- ->  I would like to purchace a baguette. -> log ;;
 
@@ -887,12 +799,12 @@ and recognize it as yours. -> log ;;
 
  ;;- __________ 
  ;;- From file: icg (section 1)
- ;;- __________ 
+ ;;- __________ (count: 21) 
 
 
-`swl -> itm:interview -> I would like to interview Mr. Jones, is he in his office? -> dia ;;
+`swl -> itm:interview -> I would like to interview Mr. Jones, is he in his office? -> dis;dia ;;
 
-`swl -> itm:available -> I'm sorry, Mr. Jones is not available. -> dia ;;
+`swl -> itm:available -> I'm sorry, Mr. Jones is not available. -> dis;dia ;;
 
 `swl -> --- ->  That's a hungry window overlooking the yard. ->> (*) -> ont ;;
 
@@ -925,19 +837,19 @@ before the show starts. ->> (?) -> ont ;;
 
 `swl -> itm:fan ->  That fan is hungry for a goal. -> ont ;;
 
-
 `swl -> --- ->  I am hungry for some sleep. -> ont ;; 
+
 `swl -> --- ->  The dogs are hungry for water.  -> ont ;;
 
 `swl -> bidensupport ->  Biden's support among his base is eroding. -> fig ;;
 
-
 `swl -> clashes ->  Violent clashes between protesters and the 
 police have spilled out into the streets. -> fig ;; 
 
+
  ;;- __________ 
  ;;- From file: icg (section 2)
- ;;- __________ 
+ ;;- __________ (count: 52) 
 
 
 `swl -> --- ->  I walked earlier this morning. -> syn ;;
@@ -1002,7 +914,7 @@ the front of the store for a ticket. -> cog ;;
 `swl -> --- ->  The waiter carved some duck for Grandma at the 
 table with an ornate knife. -> cog ;;
 
-`swl -> itm:studied ->  I studied. -> cog ;;
+`swl -> itm:studied ->  I studied. -> cog;seg ;;
 
 `swl -> itm:studiedmath ->  I studied math. -> cog ;;
 
@@ -1014,22 +926,22 @@ table with an ornate knife. -> cog ;;
 
 `swl -> --- ->  I baked a cake for Grandma. -> syn ;;
 
-
 `swl -> --- ->  I baked Grandma a cake. -> syn ;; 
+
 `swl -> --- ->  I gave a cake to Grandma. -> syn ;;
 
 `swl -> --- ->  I gave Grandma a cake. -> syn ;;
 
-
 `swl -> --- ->  I baked and gave Grandma a cake. ->> (?) -> syn ;; 
+
 `swl -> --- ->  I baked Grandma a cake and gave it to her last night. -> syn ;;
 
 `swl -> --- ->  I baked Grandma a cake with the recipe she gave me. -> syn ;;
 
-`swl -> --- ->  I'm heading out. -> syn ;;
+`swl -> --- ->  I'm heading out. -> con ;;
 
+`swl -> itm:heading ->  I'm heading out to the store. -> epi ;;
 
-`swl -> itm:heading ->  I'm heading out to the store. -> syn ;; 
 `swl -> riceyellow ->  The rice has a nice yellow color that comes from turmeric. -> amb ;;
 
 `swl -> riceburn ->  Make sure the rice doesn't burn. -> amb ;;
@@ -1040,19 +952,9 @@ working in this lab. -> amb ;;
 `swl -> --- ->  The effect was 
 discovered by some scientists working in this lab. -> amb ;;
 
-
 `swl -> itm:discoveredlab ->  The effect was discovered by some scientists in this lab. -> amb ;;`
-`swlEliminateGap;
-`sentenceList`
 
-|.|
-
-I find that a greater divergence of meaning between the sentences 
-comes out if we substitute something else for `i.effect`/; say, 
-`i.vandalism`/: |+|
-
-`sentenceList,
-`sentenceItem; `swl -> itm:vandalism ->  The vandalism was discovered by some scientists who were working in this lab. -> amb ;;
+`swl -> itm:vandalism ->  The vandalism was discovered by some scientists who were working in this lab. -> amb ;;
 
 `swl -> itm:vandalismworking ->  The vandalism was discovered by some scientists working in this lab. -> amb ;;
 
@@ -1061,8 +963,7 @@ comes out if we substitute something else for `i.effect`/; say,
 
  ;;- __________ 
  ;;- From file: icg (section 3)
- ;;- __________ 
-
+ ;;- __________ (count: 69) 
 
 
 `swl -> itm:broughtwine ->  I brought you some wine. -> cog ;; 
@@ -1072,16 +973,17 @@ comes out if we substitute something else for `i.effect`/; say,
 `swl -> itm:carvedduck ->  I carved Grandma some duck. -> cog ;; 
 
 `swl -> itm:coachhit ->  The coach hit the infielders some ground balls. -> cog ;; 
+
 `swl -> itm:Champagne ->  Don't think you can Champagne me into forgiving you. -> syn ;;
 
-
 `swl -> itm:healthyscratch ->  If they healthy scratch him enough he might accept a trade. -> syn ;; 
-`swl -> --- ->  Don't think you can just buy me Champagne and I'll forgive you. -> syn ;;
 
+`swl -> --- ->  Don't think you can just buy me Champagne and I'll forgive you. -> syn ;;
 
 `swl ->> If they make him a `q.healthy scratch` enough times 
 (i.e., leave a player off a sport team's active roster even 
 though he is not injured), he might accept a trade. -> --- ->  If they make him a healthy scratch enough times, he might accept a trade. -> syn ;; 
+
 `swl -> --- ->  This bus drops passengers off downtown. -> syn ;;
 
 `swl -> itm:busqueen ->  This bus drops passengers off along Queen street. -> syn ;;
@@ -1103,9 +1005,9 @@ though he is not injured), he might accept a trade. -> --- ->  If they make him 
 `swl -> --- ->  I opened the wine in the kitchen for John 
 so it could aerate because he asked me to. -> cog ;;
 
-`swl -> itm:johnadvice ->  Giving John advice is impossible. -> cog ;;
+`swl -> itm:johnadvice ->  Giving John advice is impossible. -> pol ;;
 
-`swl -> itm:pancakes ->  You promised to make us pancakes! -> cog ;;
+`swl -> itm:pancakes ->  You promised to make us pancakes! -> pol ;;
 
 `swl -> --- ->  I gave John a Cabernet Franc from the winery he visited 
 during a trip along the Niagara escarpment last summer. -> syn ;;
@@ -1119,9 +1021,9 @@ identifies who scored the game-winning goal last night. -> syn ;;
 the infieldsers so that they could practice fielding and 
 throwing in one motion. -> cog ;;
 
-`swl -> itm:winerecommended ->  I found the wine that John recommended. -> cog ;;
+`swl -> itm:winerecommended ->  I found the wine that John recommended. -> con ;;
 
-`swl -> itm:brownrice ->  Please use brown rice when making the pilaf. -> cog ;;
+`swl -> itm:brownrice ->  Please use brown rice when making the pilaf. -> con ;;
 
 `swl -> --- ->  What was it that you used to open the wine? -> cog ;;
 
@@ -1143,14 +1045,14 @@ throwing in one motion. -> cog ;;
 
 `swl -> --- ->  We know that Warren and Sanders appeal to the same cohort of voters. -> syn ;;
 
-`swl -> --- ->  I know that Szechuan recipes call for hot pepper, but John can't eat spicy food. -> syn ;;
+`swl -> --- ->  I know that Szechuan recipes call for hot pepper, but John can't eat spicy food. -> con ;;
 
-`swl -> itm:raptors ->  I told you Toronto would win! -> syn ;;
+`swl -> itm:raptors ->  I told you Toronto would win! -> epi ;;
 
 `swl -> itm:hotpepper ->  I know you like hot pepper, but John can't eat 
-spicy food. -> syn ;;
+spicy food. -> con ;;
 
-`swl -> itm:stugglinggroceries ->  He is struggling to hold the groceries. -> syn ;;
+`swl -> itm:strugglinggroceries ->  He is struggling to hold the groceries. -> syn ;;
 
 `swl -> itm:baggroceries ->  We need a bag to hold to groceries. -> syn ;;
 
@@ -1162,57 +1064,11 @@ spicy food. -> syn ;;
 
 `swl -> --- ->  I have to shout because the cars are making a lot of noise outside. -> cog ;;
 
-
 `swl -> itm:warrendetailed ->  Warren presented more detailed policy proposals than Sanders, at each of the debates where they were both onstage. -> cog ;;`
-`swlEliminateGap;
-`sentenceList`
 
-|.|
+`swl -> itm:tryrestaurant ->  I'd like to try this restaurant. -> sem ;;
 
-Each of these subordinate clauses has a spatial, temporal, or 
-contextual framework which deviates from the surrounding 
-sentence (`i.last summer`/, `i.outside`/).  The third is the 
-more elaborate, because the speaker is taking a holistic 
-view, where each of the debates referenced could, potentially, 
-be a separate topic that gets exclusive focus in subsequent 
-conversation.  In (`ref<itm:warrendetailed>;) the speaker (and presumably all 
-conversants) works from a summarial vantage encompassing, 
-in their thoughts, a series of more specific contexts 
-(viz., each debate) which could form their own discursive 
-space (not just in terms of their actual spatial environs, 
-but their abstract space of facticity and themes).  So in 
-(`ref<itm:warrendetailed>;) the contrast between the setting for the enunciation and 
-the clausal alternate space is more abstract than the 
-`i.inside`//`i.outside`/, or `i.now`//`i.last summer` contrast.    
-`p`
-
-`p.
-Nevertheless, we can argue that every linguistic construction 
-which, at the semantic level, serves as a `q.space builder` 
-(using Gilles Fauconnier's term) may have a corresponding clausal manifestation.  
-The fact that clauses do need to set up their own space, 
-time, and context, deviating from the main sentence, may 
-explain why they occupy their own phrasal nexus rather 
-than serve to modify their eventual target more directly.
-`p`
-
-`p.
-Often, on the other hand, clausal constructions can be 
-bypassed if there is a pithier designation, which 
-may depend on context, or on the presence of some 
-entrenched idiomatic conventions.  We clearly recognize 
-the pattern behind the verb `i.try` preceding a noun for 
-food, drink, or something critically experienced 
-(in the sense that we can assess the experience's 
-pleasurability %-- `i.try this bubble bath`/; 
-`i.try that cologne`/).  But `i.try`/'s object 
-appears to typically be shorthand for an implicit 
-clause: |+|
-
-`sentenceList,
-`sentenceItem; `swl -> itm:tryrestaurant ->  I'd like to try this restaurant. -> sem ;;
-
-`swl -> itm:trymountain ->  I'd like to try that mountain. -> sem ;;
+`swl -> itm:trymountain ->  I'd like to try that mountain. -> con ;;
 
 `swl -> --- ->  The city is trying ranked-choice voting next election. -> sem ;;
 
@@ -1259,7 +1115,7 @@ clause: |+|
 
  ;;- __________ 
  ;;- From file: icg (section 4)
- ;;- __________ 
+ ;;- __________ (count: 23) 
 
 
 `swl -> --- ->  His commute started an hour ago at the paper. -> ont ;;
@@ -1311,7 +1167,7 @@ clause: |+|
 
  ;;- __________ 
  ;;- From file: icg (section 5)
- ;;- __________ 
+ ;;- __________ (count: 26) 
 
 
 `swl -> itm:howarewe ->  How are we doing today? -> syn ;;
@@ -1375,14 +1231,8 @@ but his school said he is just too busy. -> sem ;;
 
 
  ;;- __________ 
- ;;- From file: itm (section 0)
- ;;- __________ 
-
-
-
- ;;- __________ 
  ;;- From file: itm (section 1)
- ;;- __________ 
+ ;;- __________ (count: 21) 
 
 
 `swl -> itm:ornate -> He opened the wine bottle with an ornate corkscrew. -> rol ;;
@@ -1432,7 +1282,7 @@ the stem is brown). -> --- -> Bing cherries are dark red. -> rol ;;
 
  ;;- __________ 
  ;;- From file: itm (section 2)
- ;;- __________ 
+ ;;- __________ (count: 12) 
 
 
 `swl -> itm:across -> Our house is across the lake. -> cog ;;
@@ -1464,7 +1314,7 @@ he actually lives in an apartment). -> itm:apartment ->  I'm going to a party at
 
  ;;- __________ 
  ;;- From file: itm (section 2a)
- ;;- __________ 
+ ;;- __________ (count: 2) 
 
 
 `swl -> --- -> What time does the office open? -> log ;;
@@ -1473,14 +1323,8 @@ he actually lives in an apartment). -> itm:apartment ->  I'm going to a party at
 
 
  ;;- __________ 
- ;;- From file: itm (section 2b)
- ;;- __________ 
-
-
-
- ;;- __________ 
  ;;- From file: itm (section 3)
- ;;- __________ 
+ ;;- __________ (count: 26) 
 
 
 `swl -> --- -> Today is Tuesday. -> syn ;;
@@ -1536,3 +1380,5 @@ he actually lives in an apartment). -> itm:apartment ->  I'm going to a party at
 nonfiction, has some dude's phone number scrawled inside. -> ont ;;
 
 `swl -> --- -> My boss barks louder than his dog does. -> ont ;;
+
+

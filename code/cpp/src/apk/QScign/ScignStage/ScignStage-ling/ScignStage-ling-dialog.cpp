@@ -133,8 +133,9 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
     launch_lexpair_dialog_function_(nullptr),
     #endif // USING_LEXPAIR
     //xpdf_port_(0),
-    current_index_(-1), max_index_(0),
-    current_volume_(50), current_group_index_(-1),
+    current_index_(-1), // max_index_(0),
+     // current_volume_(50),
+    current_group_index_(-1),
     current_open_group_(nullptr),
     no_auto_expand_(nullptr),
     current_peer_index_(0),
@@ -823,6 +824,13 @@ void ScignStage_Ling_Dialog::get_replacement_dataset_path()
    absorb_dataset(*ds);
    reset_issue_counts();
    reset_forms_counts();
+
+   current_index_ = -1;
+   current_group_index_ = -1;
+   current_open_group_ = nullptr;
+   current_peer_index_ = 0;
+   current_section_number_ = 0;
+
    dataset_ = ds;
   }
  }
@@ -1325,7 +1333,7 @@ void ScignStage_Ling_Dialog::find_group_up(Language_Sample_Group* start,
     {
      // // i.e. all way round
      QMessageBox::information(this, "No More",
-                              "NM");
+       "There are no more samples given the current filters.");
      return;
     }
     if(!g->match_issue(*temp_filters, *temp_ffilters))

@@ -1,5 +1,5 @@
 - Generated from LaTeX File icg.tex 
-24/4/2021, 0:10
+25/4/2021, 1:3
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -171,7 +171,7 @@ $c: dis
 $i: 10
 $p: 4
 $t: I think he's rather ... uh ... competitive
-$c: dis
+$c: dis;seg
 /!
 <>>
 
@@ -340,7 +340,7 @@ $i: 25
 $p: 11
 $x: itm:warrenmoderates
 $t: I hope that Warren can appeal to moderates.
-$c: log
+$c: pol
 /!
 <>>
 
@@ -349,7 +349,7 @@ $i: 26
 $p: 11
 $x: itm:warrenpivot
 $t: I'm sure that Warren will pivot to the center and will poll well with moderates.
-$c: log
+$c: fig
 /!
 <>>
 
@@ -376,7 +376,7 @@ $i: 28
 $p: 12
 $x: itm:bidensupport
 $t: Biden's support among the base is eroding.
-$c: log
+$c: epi
 /!
 <>>
 
@@ -394,7 +394,7 @@ $i: 29
 $p: 14
 $x: itm:baguette
 $t: May I have a baguette?
-$c: dia
+$c: log;dia
 /!
 <>>
 
@@ -403,7 +403,7 @@ $i: 30
 $p: 14
 $x: itm:euros
 $t: Two Euros, please.
-$c: dia
+$c: log;dia
 /!
 <>>
 
@@ -446,7 +446,7 @@ $i: 33
 $p: 17
 $x: itm:interview
 $t: I would like to interview Mr. Jones, is he in his office?
-$c: dia
+$c: dis;dia
 /!
 <>>
 
@@ -455,7 +455,7 @@ $i: 34
 $p: 17
 $x: itm:available
 $t: I'm sorry, Mr. Jones is not available.
-$c: dia
+$c: dis;dia
 /!
 <>>
 
@@ -994,7 +994,7 @@ $i: 84
 $p: 39
 $x: itm:studied
 $t: I studied.
-$c: cog
+$c: cog;seg
 /!
 <>>
 
@@ -1113,7 +1113,7 @@ $s: 2
 $i: 96
 $p: 42
 $t: I'm heading out.
-$c: syn
+$c: con
 /!
 <>>
 
@@ -1122,7 +1122,7 @@ $i: 97
 $p: 42
 $x: itm:heading
 $t: I'm heading out to the store.
-$c: syn
+$c: epi
 /!
 <>>
 
@@ -1434,7 +1434,7 @@ $i: 124
 $p: 51
 $x: itm:johnadvice
 $t: Giving John advice is impossible.
-$c: cog
+$c: pol
 /!
 <>>
 
@@ -1443,7 +1443,7 @@ $i: 125
 $p: 51
 $x: itm:pancakes
 $t: You promised to make us pancakes!
-$c: cog
+$c: pol
 /!
 <>>
 
@@ -1511,7 +1511,7 @@ $i: 130
 $p: 51
 $x: itm:winerecommended
 $t: I found the wine that John recommended.
-$c: cog
+$c: con
 /!
 <>>
 
@@ -1520,7 +1520,7 @@ $i: 131
 $p: 51
 $x: itm:brownrice
 $t: Please use brown rice when making the pilaf.
-$c: cog
+$c: con
 /!
 <>>
 
@@ -1649,7 +1649,7 @@ $c: syn
 $i: 142
 $p: 52
 $t: I know that Szechuan recipes call for hot pepper, but John can't eat spicy food.
-$c: syn
+$c: con
 /!
 <>>
 
@@ -1667,7 +1667,7 @@ $i: 143
 $p: 52
 $x: itm:raptors
 $t: I told you Toronto would win!
-$c: syn
+$c: epi
 /!
 <>>
 
@@ -1676,7 +1676,7 @@ $i: 144
 $p: 52
 $x: itm:hotpepper
 $t: I know you like hot pepper, but John can't eat spicy food.
-$c: syn
+$c: con
 /!
 <>>
 
@@ -1692,7 +1692,7 @@ $s: 3
 !/ SentenceItem
 $i: 145
 $p: 53
-$x: itm:stugglinggroceries
+$x: itm:strugglinggroceries
 $t: He is struggling to hold the groceries.
 $c: syn
 /!
@@ -1782,7 +1782,7 @@ $i: 153
 $p: 54
 $x: itm:trymountain
 $t: I'd like to try that mountain.
-$c: sem
+$c: con
 /!
 <>>
 

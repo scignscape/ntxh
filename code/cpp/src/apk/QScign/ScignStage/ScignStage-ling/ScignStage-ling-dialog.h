@@ -192,11 +192,11 @@ class ScignStage_Ling_Dialog : public QDialog
 
  int current_index_;
 
- int max_index_;
+ // // not used now ... int max_index_;
 
  QWidget* last_highlight_;
 
- int current_volume_;
+ // // only if there's audio; currently not ... int current_volume_;
 
  QProcess* xpdf_process_;
 
