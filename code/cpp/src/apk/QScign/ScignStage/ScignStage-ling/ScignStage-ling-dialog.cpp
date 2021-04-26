@@ -555,95 +555,7 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
 
  connect(main_tree_widget_, &QTreeWidget::customContextMenuRequested, [this](const QPoint& qp)
  {
-  QTreeWidgetItem* twi = main_tree_widget_->itemAt(qp);
-  if(twi)
-  {
-   int page;
-   QString text;
-   QStringList qsl;
-   if(twi->parent())
-   {
-    // //  for the double-nested cases (e.g. Dialogs)
-    if(twi->parent()->parent())
-      twi = twi->parent();
-    Language_Sample* ls
-      = twi->data(0, Qt::UserRole).value<Language_Sample*>();
-    page = ls->page();
-    text = ls->text().simplified();
-   }
-   else
-   {
-    Language_Sample_Group* lsg
-      = twi->data(0, Qt::UserRole).value<Language_Sample_Group*>();
-    page = lsg->page();
-    text = lsg->get_main_text().simplified();
-   }
-   if(qsl.isEmpty())
-   {
-    run_sample_context_menu(qp, page, text,
-    [](QString url)
-    {
-     QDesktopServices::openUrl(QUrl(url));
-    },
-    [this, qp](int page, int flag)
-    {
-     last_xpdf_dlg_point_ = this->mapToGlobal(qp);
-     qDebug() << "XPDF Dialog Point: " << last_xpdf_dlg_point_;
-     open_pdf_file(pdf_file_, page, flag);
-    },
-    [](QString s)
-    {
-     QClipboard* clipboard = QApplication::clipboard();
-     clipboard->setText(s);
-    },
-    [this](QString s)
-    {
-#ifdef USING_LEXPAIR
-     if(launch_lexpair_dialog_function_)
-       launch_lexpair_dialog_function_(s);
-#else
-     QMessageBox::warning(this, "Not Built",
-       "LexPair / Tri Link Dialog Support is not Part of this Build.");
-#endif // USING_LEXPAIR
-    });
-   }
-   else
-   {
-    run_group_context_menu(qp, page, text, qsl,
-    [](QString url)
-    {
-     QDesktopServices::openUrl(QUrl(url));
-    },
-    [this, qp](int page, int flag)
-    {
-     last_xpdf_dlg_point_ = qp;
-     open_pdf_file(pdf_file_, page, flag);
-    },
-    [](QString s)
-    {
-     QClipboard* clipboard = QApplication::clipboard();
-     clipboard->setText(s);
-    },
-    [this](QString s)
-    {
-#ifdef USING_LEXPAIR
-     launch_lexpair_dialog(s);
-#else
-     // //?
-#endif // USING_LEXPAIR
-    },
-    [](QStringList qsl)
-    {
-     QClipboard* clipboard = QApplication::clipboard();
-     clipboard->setText(qsl.join('\n'));
-    },
-    [this, twi]()
-    {
-     highlight(twi, &current_group_index_);
-    }
-    );
-   }
-  }
+  prepare_tree_context_menu(qp);
  });
 
  main_layout_->addLayout(middle_layout_);
@@ -716,6 +628,107 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
  }
 #endif // USING_XPDF
 }
+
+
+void ScignStage_Ling_Dialog::prepare_tree_context_menu(const QPoint& qp)
+{
+ QTreeWidgetItem* twi = main_tree_widget_->itemAt(qp);
+ if(twi)
+ {
+  int page;
+  QString text;
+  QStringList qsl;
+  if(twi->parent())
+  {
+   // //  for the double-nested cases (e.g. Dialogs)
+   if(twi->parent()->parent())
+     twi = twi->parent();
+   Language_Sample* ls
+     = twi->data(0, Qt::UserRole).value<Language_Sample*>();
+   page = ls->page();
+   text = ls->text().simplified();
+  }
+  else
+  {
+   Language_Sample_Group* lsg
+     = twi->data(0, Qt::UserRole).value<Language_Sample_Group*>();
+   page = lsg->page();
+   text = lsg->get_main_text().simplified();
+   lsg->get_sample_texts(qsl);
+  }
+  if(qsl.isEmpty())
+  {
+   run_sample_context_menu(qp, page, text,
+   [](QString url)
+   {
+    QDesktopServices::openUrl(QUrl(url));
+   },
+   [this, qp](int page, int flag)
+   {
+    last_xpdf_dlg_point_ = this->mapToGlobal(qp);
+    qDebug() << "XPDF Dialog Point: " << last_xpdf_dlg_point_;
+    open_pdf_file(pdf_file_, page, flag);
+   },
+   [](QString s)
+   {
+    QClipboard* clipboard = QApplication::clipboard();
+    clipboard->setText(s);
+   },
+   [this](QString s)
+   {
+#ifdef USING_LEXPAIR
+    if(launch_lexpair_dialog_function_)
+      launch_lexpair_dialog_function_(s);
+#else
+    QMessageBox::warning(this, "Not Built",
+      "LexPair / Tri Link Dialog Support is not Part of this Build.");
+#endif // USING_LEXPAIR
+   },
+   [this, twi]()
+   {
+    highlight_from_here(twi, "sample");
+   }
+   );
+  }
+  else
+  {
+   run_group_context_menu(qp, page, text, qsl,
+   [](QString url)
+   {
+    QDesktopServices::openUrl(QUrl(url));
+   },
+   [this, qp](int page, int flag)
+   {
+    last_xpdf_dlg_point_ = qp;
+    open_pdf_file(pdf_file_, page, flag);
+   },
+   [](QString s)
+   {
+    QClipboard* clipboard = QApplication::clipboard();
+    clipboard->setText(s);
+   },
+   [this](QString s)
+   {
+#ifdef USING_LEXPAIR
+    launch_lexpair_dialog(s);
+#else
+    // //?
+#endif // USING_LEXPAIR
+   },
+   [](QStringList qsl)
+   {
+    QClipboard* clipboard = QApplication::clipboard();
+    clipboard->setText(qsl.join('\n'));
+   },
+   [this, twi]()
+   {
+    highlight_from_here(twi, "group");
+   }
+   );
+  }
+ }
+}
+
 
 
 void ScignStage_Ling_Dialog::reset_forms_counts()
@@ -1016,10 +1029,87 @@ void ScignStage_Ling_Dialog::highlight(QTreeWidgetItem* twi)
  set_group_foreground(twi);
 }
 
+void ScignStage_Ling_Dialog::highlight_from_here(QTreeWidgetItem* twi,
+  //Language_Sample_Group* g, int* index,
+  QString via_context_menu)
+{
+ bool via_group_context_menu = via_context_menu == "group";
+ bool via_sample_context_menu = via_context_menu == "sample";
+
+ if(via_group_context_menu)
+ {
+  if(current_open_group_) // && !via_group_context_menu)
+  {
+   QTreeWidgetItem* otwi = twi_by_group_[current_open_group_];
+   otwi->setExpanded(false);
+   clear_group_foreground(otwi);
+   if(current_peer_index_)
+   {
+    clear_child_group_foreground(twi);
+    current_peer_index_ = 0;
+   }
+  }
+
+  Language_Sample_Group* g = twi->data(0, Qt::UserRole).value<Language_Sample_Group*>();
+  if(g)
+  {
+   twi->setExpanded(true);
+
+    // // is this always right?
+   current_group_index_ = g->id() - 1;
+
+   Language_Sample* ls = g->samples().first();
+   show_full_sentence(ls);
+
+   QTreeWidgetItem* ctwi = twi->child(0);
+   set_group_foreground(ctwi);
+
+   current_open_group_ = g;
+   current_sample_ = ls;
+   current_section_number_ = g->section();
+   current_peer_index_ = 1;
+//   current_open_group_ = g;
+//   show_full_sentence(g);
+//   current_section_number_ = g->section();
+  }
+ }
+
+ else if(via_sample_context_menu)
+ {
+  Language_Sample_Group* g = twi->data(0, Qt::UserRole).value<Language_Sample_Group*>();
+  if(g)
+  {
+   twi->setExpanded(true);
+  }
+  else
+  {
+   Language_Sample* ls = twi->data(0, Qt::UserRole).value<Language_Sample*>();
+   if(ls)
+   {
+    QTreeWidgetItem* ptwi = twi->parent();
+    if(ptwi)
+    {
+     g = ptwi->data(0, Qt::UserRole).value<Language_Sample_Group*>();
+     if(g)
+     {
+      ptwi->setExpanded(true);
+      u4 ind = ptwi->indexOfChild(twi);
+      show_full_sentence(ls);
+      set_group_foreground(twi);
+      current_peer_index_ = ind + 1;
+      current_open_group_ = g;
+      current_group_index_ = g->id() - 1;
+     }
+    }
+   }
+  }
+ }
+}
+
 void ScignStage_Ling_Dialog::highlight(QTreeWidgetItem* twi,
   Language_Sample_Group* g, int* index)
 {
- if(current_open_group_)
+ if(current_open_group_) // && !via_group_context_menu)
  {
   QTreeWidgetItem* twi = twi_by_group_[current_open_group_];
   twi->setExpanded(false);
@@ -1033,6 +1123,13 @@ void ScignStage_Ling_Dialog::highlight(QTreeWidgetItem* twi,
  if(!g)
  {
   g = twi->data(0, Qt::UserRole).value<Language_Sample_Group*>();
+  if(!g)
+  {
+//   if(via_group_context_menu)
+//     g = current_open_group_;
+//   else
+   return;
+  }
   if(index)
     *index = g->id() - 1;
  }
@@ -1587,7 +1684,8 @@ void ScignStage_Ling_Dialog::run_group_context_menu(const QPoint& p, int page, Q
 
 void ScignStage_Ling_Dialog::run_sample_context_menu(const QPoint& p, int page, QString text,
   std::function<void(QString)> pub_url_fn, std::function<void(int, int)> pdf_fn,
-  std::function<void(QString)> copy_fn, std::function<void(QString)> launch_fn)
+  std::function<void(QString)> copy_fn, std::function<void(QString)> launch_fn,
+  std::function<void()> highlight_fn)
 {
  QMenu* qm = new QMenu(this);
  qm->addAction("Show Associated Publication Page (in web browser)",
@@ -1604,6 +1702,8 @@ void ScignStage_Ling_Dialog::run_sample_context_menu(const QPoint& p, int page, 
    [text, copy_fn](){copy_fn(text);});
  qm->addAction("Launch Triple-Link Dialog with Text",
    [text, launch_fn](){launch_fn(text);});
+ qm->addAction("Highlight (scroll from here)",
+   [highlight_fn](){highlight_fn();});
 
  QPoint g = main_tree_widget_->mapToGlobal(p);
  qm->popup(g);

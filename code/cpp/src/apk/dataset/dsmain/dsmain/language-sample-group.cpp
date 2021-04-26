@@ -207,6 +207,12 @@ void Language_Sample_Group::absorb_opaque(const QByteArray& qba)
  }
 }
 
+void Language_Sample_Group::get_sample_texts(QStringList& qsl)
+{
+ for(Language_Sample* sample : samples_)
+   qsl << sample->archival_or_text();
+}
+
 
 QString Language_Sample_Group::get_main_text()
 {

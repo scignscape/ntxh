@@ -1,9 +1,9 @@
 - Generated from LaTeX File ctg.tex 
-25/4/2021, 15:48
+26/4/2021, 11:56
 .
 
 - i=id p=page s=ud source, section number c=classification
-l=label x=latex label t=text r=pre o=post a=archival 
+l=label x=latex label t=text r=pre/zPage o=post a=archival 
 .
 
 &type SentenceList [8;4;2] 
@@ -808,7 +808,7 @@ $l: GUM_voyage\_socotra-16
 
 !/ SentenceList
 $i: 33
-$r: 22
+$r: 21
 $p: 21
 $s: 2
 
@@ -823,7 +823,7 @@ $c: sco
 
 !/ SentenceItem
 $i: 58
-$p: 22
+$p: 21
 $x: itm:office
 $t: Many students came by my office to complain about their grades.
 $c: sco
@@ -860,8 +860,9 @@ $s: 2
 !/ SentenceItem
 $i: 61
 $p: 22
+$x: itm:_repeating_37
 $t: Three times, students asked an interesting question.
-$o: \unhbox \voidb@x \copy \Langackerboxi \relax 
+$r: \unhbox \voidb@x \copy \Langackerboxi \relax  
 $c: sco
 /!
 <>>

@@ -19,6 +19,176 @@
 USING_KANS(TextIO)
 
 
+typedef void (*fnt)();
+
+void testfn(s1 arg1, u4 arg2, s1& arg3)
+{
+ qDebug() << "arg1 = " << arg1;
+ qDebug() << "arg2 = " << arg2;
+ qDebug() << "arg3 = " << arg3;
+ arg3 = -arg3;
+}
+
+void testf(QString& arg1, u4 arg2, u2 arg3)
+{
+ qDebug() << "arg1 = " << arg1;
+ qDebug() << "arg2 = " << arg2;
+ qDebug() << "arg3 = " << arg3;
+ arg1.prepend("'");
+ arg1.append("'");
+}
+
+enum class test_enum { E1, E2, E3 };
+
+void teste(QStringList* arg1, u4* arg2, test_enum arg3)
+{
+ qDebug() << "arg1 = " << *arg1;
+ qDebug() << "arg2 = " << *arg2;
+ qDebug() << "arg3 = " << (u1) arg3;
+ ++*arg2;
+}
+
+void test2(u2 arg1, s2 arg2, s2& arg3)
+{
+ qDebug() << "arg1 = " << arg1;
+ qDebug() << "arg2 = " << arg2;
+ qDebug() << "arg3 = " << arg3;
+ --arg3;
+}
+
+void f_140 (n8 arg1, n8 arg2, n8 arg3, fnt fn)
+{
+ u1 a1 = *(u1*)arg1;
+ u4 a2 = *(u4*)arg2;
+ u2& a3 = *(u2*)arg3;
+
+ void(*f)(u1, u4, u2&) = (void(*)(u1, u4, u2&)) fn;
+ f(a1, a2, a3);
+}
+
+void f_149 (n8 arg1, n8 arg2, n8 arg3, fnt fn)
+{
+ u1 a1 = *(u1*)arg1;
+ u4 a2 = *(u4*)arg2;
+ n8& a3 = *(n8*)arg3;
+
+ void(*f)(u1, u4, n8&) = (void(*)(u1, u4, n8&)) fn;
+ f(a1, a2, a3);
+}
+
+
+void f_741 (n8 arg1, n8 arg2, n8 arg3, fnt fn)
+{
+ QString& a1 = *(QString*)arg1;
+ u4 a2 = *(u4*)arg2;
+ u1 a3 = *(u1*)arg3;
+
+ void(*f)(QString&, u4, u1) = (void(*)(QString&, u4, u1)) fn;
+ f(a1, a2, a3);
+}
+
+void f_ (n8 arg1, n8 arg2, n8 arg3, fnt fn)
+{
+ void* a1 = *(void**)arg1;
+ void* a2 = *(void**)arg2;
+ u1 a3 = *(u1*)arg3;
+
+ void(*f)(void*, void*, u1) = (void(*)(void*, void*, u1)) fn;
+ f(a1, a2, a3);
+}
+
+void f_223 (n8 arg1, n8 arg2, n8 arg3, fnt fn)
+{
+ u2 a1 = *(u2*)arg1;
+ u2 a2 = *(u2*)arg2;
+ n8& a3 = *(n8*)arg3;
+
+ void(*f)(u2, u2, n8&) = (void(*)(u2, u2, n8&)) fn;
+ f(a1, a2, a3);
+}
+
+void f_229 (n8 arg1, n8 arg2, n8 arg3, fnt fn)
+{
+ u2 a1 = *(u2*)arg1;
+ u2 a2 = *(u2*)arg2;
+ n8& a3 = *(n8*)arg3;
+
+ void(*f)(u2, u2, n8&) = (void(*)(u2, u2, n8&)) fn;
+ f(a1, a2, a3);
+}
+
+
+void f_881 (n8 arg1, n8 arg2, n8 arg3, fnt fn)
+{
+ n8 a1 = *(n8*)arg1;
+ n8 a2 = *(n8*)arg2;
+ u1 a3 = *(u1*)arg3;
+
+ void(*f)(n8, n8, u1) = (void(*)(n8, n8, u1)) fn;
+ f(a1, a2, a3);
+}
+
+typedef void(*ff)(n8 arg1, n8 arg2, n8 arg3, fnt fn);
+
+typedef ff farr [1001];
+
+farr* init_fs()
+{
+ farr* result = (farr*) new ff[1001];
+
+ for(int i = 0; i < 1001; ++i)
+   (*result)[i] = 0;
+
+ (*result)[741] = (ff) f_741;
+ (*result)[140] = (ff) f_140;
+ (*result)[149] = (ff) f_140;
+ (*result)[223] = (ff) f_223;
+ (*result)[229] = (ff) f_229;
+ (*result)[881] = (ff) f_881;
+
+ return result;
+}
+
+void run(u4 code, fnt fn, n8 a1, n8 a2, n8 a3)
+{
+ static farr* fs = init_fs(); // (farr*) new ff[1001];
+ ff f = (*fs)[code];
+ f(a1, a2, a3, fn);
+}
+
+int main2(int argc, char *argv[])
+{
+ QString a11 = "Test";
+ u4 a21 = 33;
+ u2 a31 = 11;
+ run(741, (fnt) &testf, (n8) &a11, (n8) &a21, (n8) &a31);
+ qDebug() << "a11 = " << a11;
+
+ s1 a12 = -4;
+ u4 a22 = 1033;
+ s1 a32 = -40;
+ run(140, (fnt) &testfn, (n8) &a12, (n8) &a22, (n8) &a32);
+ qDebug() << "a32 = " << a32;
+
+ run(149, (fnt) &testfn, (n8) &a12, (n8) &a22, (n8) &a32);
+ qDebug() << "a32 = " << a32;
+
+ QStringList* a13 = new QStringList({"Ptr", "A2"});
+ u4* a23 = new u4(92300);
+ test_enum a33 = test_enum::E3;
+ run(881, (fnt) &teste, (n8) &a13, (n8) &a23, (n8) &a33);
+ qDebug() << "a23 = " << *a23;
+
+ u2 a14 = 22;
+ s2 a24 = -22;
+ s2 a34 = 0;
+ run(223, (fnt) &test2, (n8) &a14, (n8) &a24, (n8) &a34);
+ qDebug() << "a34 = " << a34;
+ run(229, (fnt) &test2, (n8) &a14, (n8) &a24, (n8) &a34);
+ qDebug() << "a34 = " << a34;
+
+}
+
 int main1(int argc, char *argv[])
 {
  Unified_Runtime_Object& uro = *Unified_Runtime_Object::instance();
@@ -355,6 +525,8 @@ int main(int argc, char *argv[])
  copy_and_backup("itm", "InterfaceTheoryOfMeaning");
 
  merge_markdown_samples({"ctg", "icg", "itm"}, "samples");
+
+ return 0;
 }
 
 

@@ -77,7 +77,30 @@ void DSM_SDI_Document::parse_sample_hypernode(NTXH_Graph& g, NTXH_Graph::hyperno
   QString xlbl = prs[5].first;
   ls->set_external_label(xlbl);
 
-  ls->set_pre(prs[6].first);
+  QString pre = prs[6].first;
+  // // not many pre's ...
+  if(!pre.isEmpty())
+  {
+   if(pre.startsWith("{\\") || pre.startsWith('\\'))
+   {
+    qDebug() << "Likely LaTeX commands in ntxh; re-interpreting: " << pre;
+    // // this is a hack to encode the ds version of the pre in the label
+    if(lbl.startsWith("itm:_"))
+    {
+     pre = QString("(%1)").arg(lbl.mid(4));
+     pre.replace('_', ' ');
+     ls->set_pre(pre);
+    }
+   }
+   else
+   {
+    qDebug() << "Have pre: " << pre;
+    ls->set_pre(pre);
+   }
+
+  }
+
+  QString post = prs[7].first;
   ls->set_post(prs[7].first);
 
 

@@ -289,6 +289,19 @@ class ScignStage_Ling_Dialog : public QDialog
   highlight(twi, nullptr, index);
  }
 
+ void highlight_from_here(QTreeWidgetItem* twi,
+   //Language_Sample_Group* g,
+   QString via_context_menu);
+
+// void highlight_from_here(QTreeWidgetItem* twi,
+//   int* index, QString via_context_menu = {})
+// {
+//  highlight_from_here(twi, index, via_context_menu);
+// }
+
+
+ void prepare_tree_context_menu(const QPoint& qp);
+
  void run_global_context_menu(const QPoint& p,
     std::function<void(QString)> pub_url_fn,
     std::function<void(int, int)> pdf_fn);
@@ -306,7 +319,8 @@ class ScignStage_Ling_Dialog : public QDialog
    std::function<void(QString)> pub_url_fn,
    std::function<void(int, int)> pdf_fn,
    std::function<void(QString)> copy_fn,
-   std::function<void(QString)> launch_fn);
+   std::function<void(QString)> launch_fn,
+   std::function<void()> highlight_fn);
 
  void run_message_by_grid_position(const QPoint& p, int r, int c);
 

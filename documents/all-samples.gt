@@ -92,7 +92,8 @@ the Habs. -> log ;;
 
 `swl -> itm:Sauternes -> I drank two Sauternes last night. ->> (352/375) -> ref ;;
 
-`swl -> itm:library -> I'm in the library. ->> (said by an author whose books are there) -> ref ;;
+`swl -> itm:library ->> (said by an author whose books are there)
+  -> I'm in the library. -> ref ;;
 
 `swl -> itm:autoshop -> I've been in the auto shop for the 
 last 15 days. -> ref ;;
@@ -183,8 +184,8 @@ came to complain about the tuition hikes. -> sco ;;
 `swl -> itm:parents -> Student after student came with their parents to complain 
 about the tuition hikes. -> sco ;;
 
-`swl -> --- -> Three times, students asked an interesting question.
-->> `usebox =-> Langackerboxi ;; 
+`swl -> itm:`\(_)repeating`\(_)37 
+ ->> `spnoswl -> `usebox =-> Langackerboxi ;; 
 
 `swl -> --- -> Three times, a student asked an interesting question. -> sco ;;
 

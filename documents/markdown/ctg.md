@@ -112,7 +112,7 @@ The city's ambience is colonial and the climate is tropical.
 The most popular lodging is actually camping on the beaches.  
 
 #
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 22)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(page 21)  
 Many students and their parents came to complain about the tuition hikes.  
 Many students came by my office to complain about their grades.  
 Student after student complained about the tuition hikes.  

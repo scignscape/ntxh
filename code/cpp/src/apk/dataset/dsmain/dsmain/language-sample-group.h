@@ -72,6 +72,8 @@ public:
 
  QString get_example_form();
 
+ void get_sample_texts(QStringList& qsl);
+
  void add_sample(Language_Sample* sample);
 
  void supply_pack(Qh_Pack_Builder& qpb);

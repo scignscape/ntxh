@@ -1,87 +1,87 @@
 $$ document-title := Cognitive Transform Grammar
 $$ local-title := section2
 
-$& AnneVilnat %% (1:main) 32812 32899
-$& AsherPustejovsky example%(1:main) 28700 28728,%%p.%%5 %3
-$& AsherPustejovsky %% (1:main) 60274 60276
+$& AnneVilnat %% (1:main) 32813 32900
+$& AsherPustejovsky example%(1:main) 28701 28729,%%p.%%5 %3
+$& AsherPustejovsky %% (1:main) 60275 60277
 $& BarkerShanTG %% (1:main) 3168 3295
 $& ChoeCharniak %% (1:main) 7588 7589
-$& Gardenfors p.%%4 (1:main) 43404 43577
-$& JamesPustejovsky %% (1:main) 60261 60272
+$& Gardenfors p.%%4 (1:main) 43405 43578
+$& JamesPustejovsky %% (1:main) 60262 60273
 $& JanVanEijck %% (1:main) 10075 10266
-$& KitFine %% (1:main) 46088 46097
+$& KitFine %% (1:main) 46089 46098
 $& KiyoshiSudo %% (1:main) 7586 7587
 $& KubotaLevine %% (1:main) 3297 3299
-$& MeryMootRetore p.%%4 (1:main) 34212 34224
-$& OsborneMaxwell %% (1:main) 20535 20692
-$& Pinker %% (1:main) 32733 32811
-$& Ramstead p.%%38 (1:main) 44583 44809
+$& MeryMootRetore p.%%4 (1:main) 34213 34225
+$& OsborneMaxwell %% (1:main) 20536 20693
+$& Pinker %% (1:main) 32734 32812
+$& Ramstead p.%%38 (1:main) 44584 44810
 $& RikVanNoord %% (1:main) 10268 10271
 $& Rossi p.%(1:main) 4694 4906 %3
 $& SivaReddy %% (1:main) 7433 7585
-$& ZhaohuiLuo %% (1:main) 34330 34339
-$& ZhaohuiLuoSignatures %% (1:main) 34341 34344
+$& ZhaohuiLuo %% (1:main) 34331 34340
+$& ZhaohuiLuoSignatures %% (1:main) 34342 34345
 
 
-= 28621:
+= 28622:
 = 1
 Nicholas Asher
 
-= 28635:
+= 28636:
 = 9
 
-= 28640:
+= 28641:
 = 1
 James Pustejovsky
 
-= 28657:
+= 28658:
 = 9
 
-= 32781:
+= 32782:
 = 1
 Steven Pinker
 
-= 32794:
+= 32795:
 = 9
 
-= 43165:
+= 43166:
 = 1
 George Lakoff
 
-= 43178:
+= 43179:
 = 9
 
-= 43180:
+= 43181:
 = 1
 Mark Johnson
 
-= 43192:
+= 43193:
 = 9
 
-= 43194:
+= 43195:
 = 1
 Leonard Talmy
 
-= 43207:
+= 43208:
 = 9
 
-= 43310:
+= 43311:
 = 1
 Jean Petitot
 
-= 43322:
+= 43323:
 = 9
 
-= 43997:
+= 43998:
 = 1
 Maxwell James Ramstead
 
-= 44019:
+= 44020:
 = 9
 
-= 46076:
+= 46077:
 = 1
 Kit Fine
 
-= 46084:
+= 46085:
 = 9
