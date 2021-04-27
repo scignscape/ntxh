@@ -260,11 +260,11 @@ the table. ->> (?) -> lex ;;
 `swl -> --- -> I believe you can help me find computer
 accessories in this section? -> pra ;;
 
-`swl -> --- -> Do you have any milk? -> pra ;;
+`swl -> --- -> Do you have any milk? -> pra;dlg ;;
 
-`swl -> --- -> Yes, we have almond milk. -> pra ;;
+`swl -> --- -> Yes, we have almond milk. -> pra;dlg ;;
 
-`swl -> --- -> No, we have almond milk. -> pra ;;
+`swl -> --- -> No, we have almond milk. -> pra;dlg ;;
 
 `swl -> itm:put -> Can you put some almond milk in my coffee? -> pra ;;
 

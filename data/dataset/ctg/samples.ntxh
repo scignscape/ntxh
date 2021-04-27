@@ -1,5 +1,5 @@
 - Generated from LaTeX File ctg.tex 
-26/4/2021, 11:56
+27/4/2021, 9:28
 .
 
 - i=id p=page s=ud source, section number c=classification
@@ -441,7 +441,7 @@ $i: 32
 $p: 11
 $x: itm:library
 $t: I'm in the library.
-$o: (said by an author whose books are there)
+$r: (said by an author whose books are there)
 $c: ref
 /!
 <>>
@@ -1259,7 +1259,7 @@ $s: 3
 $i: 94
 $p: 35
 $t: Do you have any milk?
-$c: pra
+$c: pra;dlg
 /!
 <>>
 
@@ -1267,7 +1267,7 @@ $c: pra
 $i: 95
 $p: 35
 $t: Yes, we have almond milk.
-$c: pra
+$c: pra;dlg
 /!
 <>>
 
@@ -1275,7 +1275,7 @@ $c: pra
 $i: 96
 $p: 35
 $t: No, we have almond milk.
-$c: pra
+$c: pra;dlg
 /!
 <>>
 
