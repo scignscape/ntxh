@@ -18,23 +18,12 @@
 #include "textio.h"
 USING_KANS(TextIO)
 
-#include "./dev/consoles/fns/run-s0_3.cpp"
+#include "./dev/consoles/fns/run-s0_3_r0.cpp"
 
 
 typedef void (*_temp_minimal_fn_type)();
 
-/*
-0 = ca
-1 = u1
-2 = u2
-3 = ref
-4 = u4
-5 = QVariant
-6 = QString
-7 = pointer
-8 = n8
-9 = dbl
-*/
+
 
 void testqvar(QVariant arg1, double arg2, float* arg3)
 {
@@ -52,14 +41,14 @@ void testfn(s1 arg1, u4 arg2, s1& arg3)
  arg3 = -arg3;
 }
 
-void testqs(QString arg1, u4 arg2, u2 arg3)
+void testqs(QString arg1, u4 arg2, u1 arg3)
 {
  qDebug() << "arg1 = " << arg1;
  qDebug() << "arg2 = " << arg2;
  qDebug() << "arg3 = " << arg3;
 }
 
-void testf(QString& arg1, u4 arg2, u2 arg3)
+void testf(QString& arg1, u4 arg2, u1 arg3)
 {
  qDebug() << "arg1 = " << arg1;
  qDebug() << "arg2 = " << arg2;
@@ -87,12 +76,12 @@ void test2(u2 arg1, s2 arg2, s2& arg3)
 }
 
 /*
-0 = ca
+0 = ref
 1 = u1
 2 = u2
 3 = QString
 4 = u4
-5 = ref
+5 = call/expr
 6 = dbl
 7 = QVariant
 8 = n8
@@ -100,7 +89,7 @@ void test2(u2 arg1, s2 arg2, s2& arg3)
 */
 
 
-void f_145 (n8 arg1, n8 arg2, n8 arg3, _temp_minimal_fn_type fn)
+void f_140 (n8 arg1, n8 arg2, n8 arg3, _temp_minimal_fn_type fn)
 {
  u1 a1 = *(u1*)arg1;
  u4 a2 = *(u4*)arg2;
@@ -128,7 +117,7 @@ void f_341 (n8 arg1, n8 arg2, n8 arg3, _temp_minimal_fn_type fn)
  ((void(*)(QString,u4,u1)) fn)(a1,a2,a3);
 }
 
-void f_641 (n8 arg1, n8 arg2, n8 arg3, _temp_minimal_fn_type fn)
+void f_041 (n8 arg1, n8 arg2, n8 arg3, _temp_minimal_fn_type fn)
 {
  n8& a1 = *(n8*)arg1;
  u4 a2 = *(u4*)arg2;
@@ -155,7 +144,7 @@ void f_769 (n8 arg1, n8 arg2, n8 arg3, _temp_minimal_fn_type fn)
  ((void(*)(QVariant, r8, n8)) fn)(a1,a2,a3);
 }
 
-void f_223 (n8 arg1, n8 arg2, n8 arg3, _temp_minimal_fn_type fn)
+void f_220 (n8 arg1, n8 arg2, n8 arg3, _temp_minimal_fn_type fn)
 {
  u2 a1 = *(u2*)arg1;
  u2 a2 = *(u2*)arg2;
@@ -187,17 +176,18 @@ _temp_s0_3_dispatch_array* _temp_init_s0_3_dispatch_array()
 
  (*result)[769] = (_temp_run_s0_3_type) &f_769;
  (*result)[341] = (_temp_run_s0_3_type) &f_341;
- (*result)[641] = (_temp_run_s0_3_type) &f_641;
- (*result)[145] = (_temp_run_s0_3_type) &f_145;
+ (*result)[41] = (_temp_run_s0_3_type) &f_041;
+ (*result)[140] = (_temp_run_s0_3_type) &f_140;
  (*result)[149] = (_temp_run_s0_3_type) &f_149;
- (*result)[223] = (_temp_run_s0_3_type) &f_223;
+ (*result)[220] = (_temp_run_s0_3_type) &f_220;
  (*result)[881] = (_temp_run_s0_3_type) &f_881;
 
  return result;
 }
 
-void run(u4 code, _temp_minimal_fn_type fn, n8 a1, n8 a2, n8 a3)
+void _temp_run(u4 code, _temp_minimal_fn_type fn, n8 a1, n8 a2, n8 a3)
 {
+ code %= 10000;
  static _temp_s0_3_dispatch_array* fs = _temp_init_s0_3_dispatch_array(); // (farr*) new run_s0_3_type[1001];
  _temp_run_s0_3_type f = (*fs)[code];
  f(a1, a2, a3, fn);
@@ -208,17 +198,34 @@ int main(int argc, char *argv[])
  QString a11 = "Test";
  u4 a21 = 33;
  u1 a31 = 11;
- run(341, (_temp_minimal_fn_type) &testqs, (n8) &a11, (n8) &a21, (n8) &a31);
+ _temp_run(10341, (_temp_minimal_fn_type) &testqs, (n8) &a11, (n8) &a21, (n8) &a31);
  qDebug() << "a11 = " << a11;
 
- run(641, (_temp_minimal_fn_type) &testf, (n8) &a11, (n8) &a21, (n8) &a31);
+ qDebug() << "\n====\n";
+ run_s0_3_r0(10341, (minimal_fn_type) &testqs, (n8) &a11, (n8) &a21, (n8) &a31);
  qDebug() << "a11 = " << a11;
+ qDebug() << "\n====\n\n";
+
+ _temp_run(10041, (_temp_minimal_fn_type) &testf, (n8) &a11, (n8) &a21, (n8) &a31);
+ qDebug() << "a11 = " << a11;
+
+ qDebug() << "\n====\n";
+ run_s0_3_r0(10041, (minimal_fn_type) &testf, (n8) &a11, (n8) &a21, (n8) &a31);
+ qDebug() << "a11 = " << a11;
+ qDebug() << "\n====\n\n";
 
  s1 a12 = -4;
- u4 a22 = 1033;
+ u4 a22 = 10033;
  s1 a32 = -40;
- run(145, (_temp_minimal_fn_type) &testfn, (n8) &a12, (n8) &a22, (n8) &a32);
+
+ _temp_run(10140, (_temp_minimal_fn_type) &testfn, (n8) &a12, (n8) &a22, (n8) &a32);
  qDebug() << "a32 = " << a32;
+
+ qDebug() << "\n====\n";
+ run_s0_3_r0(10140, (minimal_fn_type) &testfn, (n8) &a12, (n8) &a22, (n8) &a32);
+ qDebug() << "a32 = " << a32;
+
+ qDebug() << "\n====\n\n";
 
 // run(149, (_temp_minimal_fn_type) &testfn, (n8) &a12, (n8) &a22, (n8) &a32);
 // qDebug() << "a32 = " << a32;
@@ -226,14 +233,26 @@ int main(int argc, char *argv[])
  QStringList* a13 = new QStringList({"Ptr", "A2"});
  u4* a23 = new u4(92300);
  test_enum a33 = test_enum::E3;
- run(881, (_temp_minimal_fn_type) &teste, (n8) &a13, (n8) &a23, (n8) &a33);
+
+ _temp_run(10881, (_temp_minimal_fn_type) &teste, (n8) &a13, (n8) &a23, (n8) &a33);
  qDebug() << "a23 = " << *a23;
+
+ qDebug() << "\n====\n";
+ run_s0_3_r0(10881, (minimal_fn_type) &teste, (n8) &a13, (n8) &a23, (n8) &a33);
+ qDebug() << "a23 = " << *a23;
+ qDebug() << "\n====\n\n";
 
  u2 a14 = 22;
  s2 a24 = -22;
  s2 a34 = 0;
- run(223, (_temp_minimal_fn_type) &test2, (n8) &a14, (n8) &a24, (n8) &a34);
+
+ _temp_run(10220, (_temp_minimal_fn_type) &test2, (n8) &a14, (n8) &a24, (n8) &a34);
  qDebug() << "a34 = " << a34;
+
+ qDebug() << "\n====\n";
+ run_s0_3_r0(10220, (minimal_fn_type) &test2, (n8) &a14, (n8) &a24, (n8) &a34);
+ qDebug() << "a34 = " << a34;
+ qDebug() << "\n====\n\n";
 
 
  QVariant a15 = QVariant::fromValue(QString("var..."));
@@ -243,7 +262,12 @@ int main(int argc, char *argv[])
  qDebug() << "a15 = " << a15;
  qDebug() << "a25 = " << a25;
  qDebug() << "a35 = " << a35;
- run(769, (_temp_minimal_fn_type) &testqvar, (n8) &a15, (n8) &a25, (n8) &_a35);
+
+ _temp_run(10769, (_temp_minimal_fn_type) &testqvar, (n8) &a15, (n8) &a25, (n8) &_a35);
+
+ qDebug() << "\n====\n";
+ run_s0_3_r0(10769, (minimal_fn_type) &testqvar, (n8) &a15, (n8) &a25, (n8) &_a35);
+ qDebug() << "\n====\n\n";
 
  return 0;
 }
@@ -264,8 +288,13 @@ QString generate_function_code(u2 key)
   key -= akey*factor;
   switch(akey)
   {
-   // // for now treat 0 and 9 like a n8
-  case 0: case 9: akey = 8; // fallthrough
+  case 0: // ref
+   types[i] = "n8&";
+   result += QString("n8& a%1=*(n8*)arg%1;").arg(i);
+   break;
+
+   // // for now treat 5 and 9 like a n8
+  case 5: case 9: akey = 8; // fallthrough
   case 1: case 2: case 4: case 8:
    types[i] = QString("%1%2").arg(akey == 8?'n':'u').arg(akey);
    result += QString("%1 a%2=*(%1*)arg%2;").arg(types[i]).arg(i);
@@ -276,19 +305,14 @@ QString generate_function_code(u2 key)
    result += QString("QString a%1=*(QString*)arg%1;").arg(i);
    break;
 
-  case 5: // ref
-   types[i] = "n8&";
-   result += QString("n8& a%1=*(n8*)arg%1;").arg(i);
-   break;
-
   case 6: // double
-   types[i] = "r8&";
-   result += QString("r8& a%1=*(r8*)arg%1;").arg(i);
+   types[i] = "r8";
+   result += QString("r8 a%1=*(r8*)arg%1;").arg(i);
    break;
 
   case 7: // QVariant
    types[i] = "QVariant";
-   result += QString("QVariant a%1 = *(QString*)arg%1;").arg(i);
+   result += QString("QVariant a%1 = *(QVariant*)arg%1;").arg(i);
    break;
 
   }
@@ -302,43 +326,44 @@ QString generate_function_code(u2 key)
 
 int main2(int argc, char *argv[])
 {
- QString s0_3_file = ROOT_FOLDER "/dev/consoles/fns/run-s0_3.cpp";
- QString fn_array_file = ROOT_FOLDER "/dev/consoles/fns/fn-array-s0_3.cpp";
+ QString s0_3_r0_file = ROOT_FOLDER "/dev/consoles/fns/run-s0_3_r0.cpp";
+ QString fn_array_r0_file = ROOT_FOLDER "/dev/consoles/fns/fn-array-s0_3_r0.cpp";
 
- QString fn_array_text;
- QString s0_3_text = R"(
+ QString fn_array_r0_text;
+ QString s0_3_r0_text = R"(
 
 typedef void (*minimal_fn_type)();
-typedef void(*run_s0_3_type)(n8 arg1, n8 arg2, n8 arg3, minimal_fn_type fn);
-typedef run_s0_3_type s0_3_dispatch_array [1000];
+typedef void(*run_s0_3_r0_type)(n8 arg1, n8 arg2, n8 arg3, minimal_fn_type fn);
+typedef run_s0_3_r0_type s0_3_r0_dispatch_array [1000];
 
-#include "fn-array-s0_3.cpp"
+#include "fn-array-s0_3_r0.cpp"
 
-s0_3_dispatch_array* init_s0_3_dispatch_array()
+s0_3_r0_dispatch_array* init_s0_3_r0_dispatch_array()
 {
- s0_3_dispatch_array* result = (s0_3_dispatch_array*) new run_s0_3_type[1000];
+ s0_3_r0_dispatch_array* result = (s0_3_r0_dispatch_array*) new run_s0_3_r0_type[1000];
 )";
  for(u2 i = 0; i < 1000; ++i)
  {
-  s0_3_text += QString("\n (*result)[%1] = &_f_%2_;").arg(i).arg(i, 3, 10, QLatin1Char('0'));
+  s0_3_r0_text += QString("\n (*result)[%1] = &_f_%2_;").arg(i).arg(i, 3, 10, QLatin1Char('0'));
  }
 
- s0_3_text +=  R"(
+ s0_3_r0_text +=  R"(
 }
 
-void run_s0_3(u4 code, minimal_fn_type fn, n8 a1, n8 a2, n8 a3)
+void run_s0_3_r0(u4 code, minimal_fn_type fn, n8 a1, n8 a2, n8 a3)
 {
- static s0_3_dispatch_array* dispatch_array = init_s0_3_dispatch_array();
- run_s0_3_type f = (*dispatch_array)[code];
+ code %= 10000;
+ static s0_3_r0_dispatch_array* dispatch_array = init_s0_3_r0_dispatch_array();
+ run_s0_3_r0_type f = (*dispatch_array)[code];
  f(a1, a2, a3, fn);
 }
 )";
 
- save_file(s0_3_file, s0_3_text);
+ save_file(s0_3_r0_file, s0_3_r0_text);
 
  for(int i = 0; i < 1000; ++i)
-   fn_array_text += generate_function_code(i);
- save_file(fn_array_file, fn_array_text);
+   fn_array_r0_text += generate_function_code(i);
+ save_file(fn_array_r0_file, fn_array_r0_text);
 
  return 0;
 }

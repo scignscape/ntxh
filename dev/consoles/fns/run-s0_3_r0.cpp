@@ -1,14 +1,14 @@
 
 
 typedef void (*minimal_fn_type)();
-typedef void(*run_s0_3_type)(n8 arg1, n8 arg2, n8 arg3, minimal_fn_type fn);
-typedef run_s0_3_type s0_3_dispatch_array [1000];
+typedef void(*run_s0_3_r0_type)(n8 arg1, n8 arg2, n8 arg3, minimal_fn_type fn);
+typedef run_s0_3_r0_type s0_3_r0_dispatch_array [1000];
 
-#include "fn-array-s0_3.cpp"
+#include "fn-array-s0_3_r0.cpp"
 
-s0_3_dispatch_array* init_s0_3_dispatch_array()
+s0_3_r0_dispatch_array* init_s0_3_r0_dispatch_array()
 {
- s0_3_dispatch_array* result = (s0_3_dispatch_array*) new run_s0_3_type[1000];
+ s0_3_r0_dispatch_array* result = (s0_3_r0_dispatch_array*) new run_s0_3_r0_type[1000];
 
  (*result)[0] = &_f_000_;
  (*result)[1] = &_f_001_;
@@ -1012,9 +1012,10 @@ s0_3_dispatch_array* init_s0_3_dispatch_array()
  (*result)[999] = &_f_999_;
 }
 
-void run_s0_3(u4 code, minimal_fn_type fn, n8 a1, n8 a2, n8 a3)
+void run_s0_3_r0(u4 code, minimal_fn_type fn, n8 a1, n8 a2, n8 a3)
 {
- static s0_3_dispatch_array* dispatch_array = init_s0_3_dispatch_array();
- run_s0_3_type f = (*dispatch_array)[code];
+ code %= 10000;
+ static s0_3_r0_dispatch_array* dispatch_array = init_s0_3_r0_dispatch_array();
+ run_s0_3_r0_type f = (*dispatch_array)[code];
  f(a1, a2, a3, fn);
 }
