@@ -226,13 +226,15 @@ void GTagML_Grammar::init(GTagML_Parser& p, GTagML_Graph& g, GTagML_Graph_Build&
 
  add_rule( flags_all_(parse_context ,inside_multi_parent_semis),
    gtagml_context, "tag-command-leave-multi",
-   "  \\s+ ;; "
+   "  \\s+ ;[.]*; "
    ,[&]
  {
   graph_build.tag_command_leave_multi({});
  //?  parse_context.flags.inside_multi_parent_semis = false;
  //? parse_context.flags.inside_multi_parent = false;
  });
+
+
 
  add_rule( flags_all_(parse_context ,inside_multi_parent),
    gtagml_context, "tag-command-leave-multi",

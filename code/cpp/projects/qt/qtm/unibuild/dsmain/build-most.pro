@@ -80,6 +80,7 @@ SUBDIRS += \
   ./build-most/gtagml-console \
   ./build-most/gt-module-ir \
   ./build-most/gt-module-ir-console \
+  ./build-most/ds-extra \
 
 
 SUBDIRS += \

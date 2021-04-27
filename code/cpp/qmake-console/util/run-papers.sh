@@ -29,7 +29,7 @@ do
 done
 
 echo "Running the data set preparation."
-./run.sh extra
+./run.sh ds-extra
 
 cd $first_dir
 

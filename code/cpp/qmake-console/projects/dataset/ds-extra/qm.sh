@@ -6,5 +6,5 @@ fi
 preferred_qmake=`cat $ar/../preferred/preferred-qmake`
 preferred_qmake=${preferred_qmake/\~/$HOME/}
 echo $preferred_qmake
-$preferred_qmake  "QMAKE_CONSOLE_TARGET_DIR=@/code/cpp/qmake-console/targets" $ar/code/cpp/projects/qt/qtm/isobuild/apk/gtagml/extra/extra/extra.pro
+$preferred_qmake  "QMAKE_CONSOLE_TARGET_DIR=@/code/cpp/qmake-console/targets" $ar/code/cpp/projects/qt/qtm/isobuild/apk/dataset/ds-extra/ds-extra/ds-extra.pro
 

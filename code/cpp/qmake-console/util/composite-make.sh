@@ -104,7 +104,10 @@ chmod a+x ./qm.sh
 chmod a+x ./mk.sh
 ./mk.sh
 cd ..
-cd extra
+cd ..
+
+cd dataset
+cd ds-extra
 chmod a+x ./qm.sh
 ./qm.sh
 chmod a+x ./mk.sh
