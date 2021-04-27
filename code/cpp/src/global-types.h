@@ -41,6 +41,7 @@ typedef qint32 s4;
 typedef qint64 s8;
 
 typedef qreal r8;
+typedef float r4;
 
 
 typedef quint8 un1;

@@ -25,6 +25,11 @@ INCLUDEPATH += $$HTXN_SRC_GROUP_DIR
 
 INCLUDEPATH += $$SRC_GROUP_DIR/gtagml
 
+ # Most projects don't use ROOT_DIR as a basis
+ # for includes but this one loads some generated
+ # source code to experiment with ...
+INCLUDEPATH += $$ROOT_DIR
+
 
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
