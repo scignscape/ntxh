@@ -116,6 +116,10 @@ SUBDIRS += \
 
 
 SUBDIRS += \
+  ./build-all/extra \
+
+
+SUBDIRS += \
   ./build-all/rz-graph-core \
   ./build-all/rz-graph-token \
   ./build-all/rz-graph-build \

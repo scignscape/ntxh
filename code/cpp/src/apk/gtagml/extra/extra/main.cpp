@@ -193,7 +193,7 @@ void _temp_run(u4 code, _temp_minimal_fn_type fn, n8 a1, n8 a2, n8 a3)
  f(a1, a2, a3, fn);
 }
 
-int main2(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
  QString a11 = "Test";
  u4 a21 = 33;
@@ -324,7 +324,7 @@ QString generate_function_code(u2 key)
  return result;
 }
 
-int main(int argc, char *argv[])
+int main2(int argc, char *argv[])
 {
  QString s0_3_r0_file = ROOT_FOLDER "/dev/consoles/fns/run-s0_3_r0.cpp";
  QString fn_array_r0_file = ROOT_FOLDER "/dev/consoles/fns/fn-array-s0_3_r0.cpp";
