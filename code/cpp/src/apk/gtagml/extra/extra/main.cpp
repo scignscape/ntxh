@@ -19,6 +19,7 @@
 USING_KANS(TextIO)
 
 #include "./dev/consoles/fns/run-s0_3_r0.cpp"
+//#include "./dev/consoles/fns/run-s0_3_r4.cpp"
 
 
 typedef void (*_temp_minimal_fn_s0_r0_type)();
@@ -196,7 +197,7 @@ void _temp_run(u4 code, _temp_minimal_fn_s0_r0_type fn, n8 a1, n8 a2, n8 a3)
 //#define run_s0_3_r0(a,b,c,d,e)
 
 
-int main(int argc, char *argv[])
+int main2(int argc, char *argv[])
 {
  QString a11 = "Test";
  u4 a21 = 33;
@@ -280,9 +281,12 @@ QStringList returns{{"void", "u1", "u2", "QString", "u4", "void**", "r8", "QVari
 QString generate_function_code(u1 retc, u2 key, QString sc)
 {
  QString ret = returns[retc];
+ QString retv;
+ if(retc > 0) retv = ret + "& retv, ";
 
- QString result = QString("void _f_%1_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_%2_r%3_type fn){\n  ")
-   .arg(key, 4, 10, QLatin1Char('0')).arg(sc).arg(retc);
+
+ QString result = QString("void _f_%1%2_(%3n8 arg1, n8 arg2, n8 arg3, minimal_fn_%4_r%1_type fn){\n  ")
+   .arg(retc).arg(key, 3, 10, QLatin1Char('0')).arg(retv).arg(sc);
 
  u1 akey = 0;
 
@@ -325,13 +329,15 @@ QString generate_function_code(u1 retc, u2 key, QString sc)
   }
  }
 
- result += QString("((void(*)(%1,%2,%3)) fn)(a1,a2,a3);}\n\n")
-   .arg(types[1]).arg(types[2]).arg(types[3]);
+ if(retc > 0) result += "retv=";
+
+ result += QString("((%1(*)(%2,%3,%4)) fn)(a1,a2,a3);}\n\n")
+   .arg(ret).arg(types[1]).arg(types[2]).arg(types[3]);
 
  return result;
 }
 
-int main2(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
  /*
  0 = ref
@@ -349,8 +355,10 @@ int main2(int argc, char *argv[])
  for(u1 i = 0; i < 10; ++i)
  {
   QString ret = returns[i];
-  QString retv;
-  if(i > 0) retv = ret + "& retv, ";
+  QString retv, rsym;
+
+  // //  concisely initialize two strings.  A bit cute.
+  if(i > 0) retv = QString("%1& %2").arg(ret).arg(rsym = "retv, ");
 
   QString s0_3_rX_file = QString(ROOT_FOLDER "/dev/consoles/fns/run-s0_3_r%1.cpp").arg(i);
   QString fn_array_rX_file = QString(ROOT_FOLDER "/dev/consoles/fns/fn-array-s0_3_r%1.cpp").arg(i);
@@ -360,7 +368,7 @@ int main2(int argc, char *argv[])
 
 typedef %1(*minimal_fn_s0_r%2_type)();
 typedef void(*run_s0_3_r%2_type)(%3n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r%2_type fn);
-typedef run_s0_3_r0_type s0_3_r0_dispatch_array [1000];
+typedef run_s0_3_r%2_type s0_3_r%2_dispatch_array [1000];
 
 #include "fn-array-s0_3_r%2.cpp"
 
@@ -382,9 +390,9 @@ void run_s0_3_r%1(u4 code, minimal_fn_s0_r%1_type fn, %2n8 a1, n8 a2, n8 a3)
  code %= 10000;
  static s0_3_r%1_dispatch_array* dispatch_array = init_s0_3_r%1_dispatch_array();
  run_s0_3_r%1_type f = (*dispatch_array)[code];
- f(%2a1, a2, a3, fn);
+ f(%3a1, a2, a3, fn);
 }
-)").arg(i).arg(retv);
+)").arg(i).arg(retv).arg(rsym);
 
   save_file(s0_3_rX_file, s0_3_rX_text);
 

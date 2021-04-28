@@ -2,7 +2,7 @@
 
 typedef void*(*minimal_fn_s0_r9_type)();
 typedef void(*run_s0_3_r9_type)(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn);
-typedef run_s0_3_r0_type s0_3_r0_dispatch_array [1000];
+typedef run_s0_3_r9_type s0_3_r9_dispatch_array [1000];
 
 #include "fn-array-s0_3_r9.cpp"
 
@@ -1017,5 +1017,5 @@ void run_s0_3_r9(u4 code, minimal_fn_s0_r9_type fn, void*& retv, n8 a1, n8 a2, n
  code %= 10000;
  static s0_3_r9_dispatch_array* dispatch_array = init_s0_3_r9_dispatch_array();
  run_s0_3_r9_type f = (*dispatch_array)[code];
- f(void*& retv, a1, a2, a3, fn);
+ f(retv, a1, a2, a3, fn);
 }

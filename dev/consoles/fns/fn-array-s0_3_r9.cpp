@@ -1,3000 +1,3000 @@
-void _f_0000_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8&,n8&,n8&)) fn)(a1,a2,a3);}
+void _f_9000_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8&,n8&,n8&)) fn)(a1,a2,a3);}
 
-void _f_0001_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8&,n8&,u1)) fn)(a1,a2,a3);}
+void _f_9001_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8&,n8&,u1)) fn)(a1,a2,a3);}
 
-void _f_0002_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8&,n8&,u2)) fn)(a1,a2,a3);}
+void _f_9002_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8&,n8&,u2)) fn)(a1,a2,a3);}
 
-void _f_0003_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8&,n8&,QString)) fn)(a1,a2,a3);}
+void _f_9003_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8&,n8&,QString)) fn)(a1,a2,a3);}
 
-void _f_0004_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8&,n8&,u4)) fn)(a1,a2,a3);}
+void _f_9004_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8&,n8&,u4)) fn)(a1,a2,a3);}
 
-void _f_0005_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9005_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0006_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8&,n8&,r8)) fn)(a1,a2,a3);}
+void _f_9006_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8&,n8&,r8)) fn)(a1,a2,a3);}
 
-void _f_0007_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8&,n8&,QVariant)) fn)(a1,a2,a3);}
+void _f_9007_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8&,n8&,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0008_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9008_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0009_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9009_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0010_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8&,u1,n8&)) fn)(a1,a2,a3);}
+void _f_9010_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8&,u1,n8&)) fn)(a1,a2,a3);}
 
-void _f_0011_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8&,u1,u1)) fn)(a1,a2,a3);}
+void _f_9011_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8&,u1,u1)) fn)(a1,a2,a3);}
 
-void _f_0012_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8&,u1,u2)) fn)(a1,a2,a3);}
+void _f_9012_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8&,u1,u2)) fn)(a1,a2,a3);}
 
-void _f_0013_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;((void(*)(n8&,u1,QString)) fn)(a1,a2,a3);}
+void _f_9013_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8&,u1,QString)) fn)(a1,a2,a3);}
 
-void _f_0014_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8&,u1,u4)) fn)(a1,a2,a3);}
+void _f_9014_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8&,u1,u4)) fn)(a1,a2,a3);}
 
-void _f_0015_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,u1,n8)) fn)(a1,a2,a3);}
+void _f_9015_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0016_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8&,u1,r8)) fn)(a1,a2,a3);}
+void _f_9016_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8&,u1,r8)) fn)(a1,a2,a3);}
 
-void _f_0017_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8&,u1,QVariant)) fn)(a1,a2,a3);}
+void _f_9017_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8&,u1,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0018_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,u1,n8)) fn)(a1,a2,a3);}
+void _f_9018_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0019_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,u1,n8)) fn)(a1,a2,a3);}
+void _f_9019_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0020_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8&,u2,n8&)) fn)(a1,a2,a3);}
+void _f_9020_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8&,u2,n8&)) fn)(a1,a2,a3);}
 
-void _f_0021_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8&,u2,u1)) fn)(a1,a2,a3);}
+void _f_9021_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8&,u2,u1)) fn)(a1,a2,a3);}
 
-void _f_0022_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8&,u2,u2)) fn)(a1,a2,a3);}
+void _f_9022_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8&,u2,u2)) fn)(a1,a2,a3);}
 
-void _f_0023_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;((void(*)(n8&,u2,QString)) fn)(a1,a2,a3);}
+void _f_9023_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8&,u2,QString)) fn)(a1,a2,a3);}
 
-void _f_0024_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8&,u2,u4)) fn)(a1,a2,a3);}
+void _f_9024_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8&,u2,u4)) fn)(a1,a2,a3);}
 
-void _f_0025_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,u2,n8)) fn)(a1,a2,a3);}
+void _f_9025_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0026_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8&,u2,r8)) fn)(a1,a2,a3);}
+void _f_9026_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8&,u2,r8)) fn)(a1,a2,a3);}
 
-void _f_0027_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8&,u2,QVariant)) fn)(a1,a2,a3);}
+void _f_9027_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8&,u2,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0028_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,u2,n8)) fn)(a1,a2,a3);}
+void _f_9028_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0029_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,u2,n8)) fn)(a1,a2,a3);}
+void _f_9029_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0030_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8&,QString,n8&)) fn)(a1,a2,a3);}
+void _f_9030_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8&,QString,n8&)) fn)(a1,a2,a3);}
 
-void _f_0031_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8&,QString,u1)) fn)(a1,a2,a3);}
+void _f_9031_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8&,QString,u1)) fn)(a1,a2,a3);}
 
-void _f_0032_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8&,QString,u2)) fn)(a1,a2,a3);}
+void _f_9032_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8&,QString,u2)) fn)(a1,a2,a3);}
 
-void _f_0033_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;((void(*)(n8&,QString,QString)) fn)(a1,a2,a3);}
+void _f_9033_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8&,QString,QString)) fn)(a1,a2,a3);}
 
-void _f_0034_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8&,QString,u4)) fn)(a1,a2,a3);}
+void _f_9034_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8&,QString,u4)) fn)(a1,a2,a3);}
 
-void _f_0035_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,QString,n8)) fn)(a1,a2,a3);}
+void _f_9035_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0036_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8&,QString,r8)) fn)(a1,a2,a3);}
+void _f_9036_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8&,QString,r8)) fn)(a1,a2,a3);}
 
-void _f_0037_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8&,QString,QVariant)) fn)(a1,a2,a3);}
+void _f_9037_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8&,QString,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0038_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,QString,n8)) fn)(a1,a2,a3);}
+void _f_9038_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0039_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,QString,n8)) fn)(a1,a2,a3);}
+void _f_9039_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0040_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8&,u4,n8&)) fn)(a1,a2,a3);}
+void _f_9040_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8&,u4,n8&)) fn)(a1,a2,a3);}
 
-void _f_0041_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8&,u4,u1)) fn)(a1,a2,a3);}
+void _f_9041_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8&,u4,u1)) fn)(a1,a2,a3);}
 
-void _f_0042_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8&,u4,u2)) fn)(a1,a2,a3);}
+void _f_9042_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8&,u4,u2)) fn)(a1,a2,a3);}
 
-void _f_0043_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;((void(*)(n8&,u4,QString)) fn)(a1,a2,a3);}
+void _f_9043_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8&,u4,QString)) fn)(a1,a2,a3);}
 
-void _f_0044_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8&,u4,u4)) fn)(a1,a2,a3);}
+void _f_9044_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8&,u4,u4)) fn)(a1,a2,a3);}
 
-void _f_0045_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,u4,n8)) fn)(a1,a2,a3);}
+void _f_9045_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0046_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8&,u4,r8)) fn)(a1,a2,a3);}
+void _f_9046_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8&,u4,r8)) fn)(a1,a2,a3);}
 
-void _f_0047_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8&,u4,QVariant)) fn)(a1,a2,a3);}
+void _f_9047_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8&,u4,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0048_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,u4,n8)) fn)(a1,a2,a3);}
+void _f_9048_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0049_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,u4,n8)) fn)(a1,a2,a3);}
+void _f_9049_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0050_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8&,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9050_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8&,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0051_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8&,n8,u1)) fn)(a1,a2,a3);}
+void _f_9051_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8&,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0052_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8&,n8,u2)) fn)(a1,a2,a3);}
+void _f_9052_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8&,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0053_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8&,n8,QString)) fn)(a1,a2,a3);}
+void _f_9053_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8&,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0054_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8&,n8,u4)) fn)(a1,a2,a3);}
+void _f_9054_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8&,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0055_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
+void _f_9055_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0056_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8&,n8,r8)) fn)(a1,a2,a3);}
+void _f_9056_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8&,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0057_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8&,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9057_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8&,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0058_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
+void _f_9058_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0059_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
+void _f_9059_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0060_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8&,r8,n8&)) fn)(a1,a2,a3);}
+void _f_9060_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8&,r8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0061_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8&,r8,u1)) fn)(a1,a2,a3);}
+void _f_9061_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8&,r8,u1)) fn)(a1,a2,a3);}
 
-void _f_0062_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8&,r8,u2)) fn)(a1,a2,a3);}
+void _f_9062_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8&,r8,u2)) fn)(a1,a2,a3);}
 
-void _f_0063_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8&,r8,QString)) fn)(a1,a2,a3);}
+void _f_9063_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8&,r8,QString)) fn)(a1,a2,a3);}
 
-void _f_0064_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8&,r8,u4)) fn)(a1,a2,a3);}
+void _f_9064_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8&,r8,u4)) fn)(a1,a2,a3);}
 
-void _f_0065_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,r8,n8)) fn)(a1,a2,a3);}
+void _f_9065_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0066_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8&,r8,r8)) fn)(a1,a2,a3);}
+void _f_9066_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8&,r8,r8)) fn)(a1,a2,a3);}
 
-void _f_0067_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8&,r8,QVariant)) fn)(a1,a2,a3);}
+void _f_9067_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8&,r8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0068_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,r8,n8)) fn)(a1,a2,a3);}
+void _f_9068_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0069_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,r8,n8)) fn)(a1,a2,a3);}
+void _f_9069_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0070_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8&,QVariant,n8&)) fn)(a1,a2,a3);}
+void _f_9070_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8&,QVariant,n8&)) fn)(a1,a2,a3);}
 
-void _f_0071_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8&,QVariant,u1)) fn)(a1,a2,a3);}
+void _f_9071_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8&,QVariant,u1)) fn)(a1,a2,a3);}
 
-void _f_0072_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8&,QVariant,u2)) fn)(a1,a2,a3);}
+void _f_9072_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8&,QVariant,u2)) fn)(a1,a2,a3);}
 
-void _f_0073_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;((void(*)(n8&,QVariant,QString)) fn)(a1,a2,a3);}
+void _f_9073_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8&,QVariant,QString)) fn)(a1,a2,a3);}
 
-void _f_0074_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8&,QVariant,u4)) fn)(a1,a2,a3);}
+void _f_9074_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8&,QVariant,u4)) fn)(a1,a2,a3);}
 
-void _f_0075_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9075_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0076_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8&,QVariant,r8)) fn)(a1,a2,a3);}
+void _f_9076_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8&,QVariant,r8)) fn)(a1,a2,a3);}
 
-void _f_0077_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8&,QVariant,QVariant)) fn)(a1,a2,a3);}
+void _f_9077_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8&,QVariant,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0078_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9078_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0079_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9079_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0080_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8&,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9080_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8&,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0081_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8&,n8,u1)) fn)(a1,a2,a3);}
+void _f_9081_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8&,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0082_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8&,n8,u2)) fn)(a1,a2,a3);}
+void _f_9082_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8&,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0083_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8&,n8,QString)) fn)(a1,a2,a3);}
+void _f_9083_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8&,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0084_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8&,n8,u4)) fn)(a1,a2,a3);}
+void _f_9084_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8&,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0085_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
+void _f_9085_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0086_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8&,n8,r8)) fn)(a1,a2,a3);}
+void _f_9086_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8&,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0087_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8&,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9087_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8&,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0088_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
+void _f_9088_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0089_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
+void _f_9089_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0090_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8&,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9090_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8&,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0091_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8&,n8,u1)) fn)(a1,a2,a3);}
+void _f_9091_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8&,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0092_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8&,n8,u2)) fn)(a1,a2,a3);}
+void _f_9092_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8&,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0093_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8&,n8,QString)) fn)(a1,a2,a3);}
+void _f_9093_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8&,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0094_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8&,n8,u4)) fn)(a1,a2,a3);}
+void _f_9094_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8&,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0095_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
+void _f_9095_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0096_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8&,n8,r8)) fn)(a1,a2,a3);}
+void _f_9096_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8&,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0097_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8&,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9097_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8&,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0098_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
+void _f_9098_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0099_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
+void _f_9099_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0100_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(u1,n8&,n8&)) fn)(a1,a2,a3);}
+void _f_9100_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u1,n8&,n8&)) fn)(a1,a2,a3);}
 
-void _f_0101_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(u1,n8&,u1)) fn)(a1,a2,a3);}
+void _f_9101_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u1,n8&,u1)) fn)(a1,a2,a3);}
 
-void _f_0102_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(u1,n8&,u2)) fn)(a1,a2,a3);}
+void _f_9102_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u1,n8&,u2)) fn)(a1,a2,a3);}
 
-void _f_0103_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(u1,n8&,QString)) fn)(a1,a2,a3);}
+void _f_9103_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u1,n8&,QString)) fn)(a1,a2,a3);}
 
-void _f_0104_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(u1,n8&,u4)) fn)(a1,a2,a3);}
+void _f_9104_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u1,n8&,u4)) fn)(a1,a2,a3);}
 
-void _f_0105_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9105_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0106_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(u1,n8&,r8)) fn)(a1,a2,a3);}
+void _f_9106_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u1,n8&,r8)) fn)(a1,a2,a3);}
 
-void _f_0107_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u1,n8&,QVariant)) fn)(a1,a2,a3);}
+void _f_9107_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u1,n8&,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0108_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9108_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0109_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9109_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0110_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;((void(*)(u1,u1,n8&)) fn)(a1,a2,a3);}
+void _f_9110_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u1,u1,n8&)) fn)(a1,a2,a3);}
 
-void _f_0111_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;((void(*)(u1,u1,u1)) fn)(a1,a2,a3);}
+void _f_9111_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u1,u1,u1)) fn)(a1,a2,a3);}
 
-void _f_0112_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;((void(*)(u1,u1,u2)) fn)(a1,a2,a3);}
+void _f_9112_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u1,u1,u2)) fn)(a1,a2,a3);}
 
-void _f_0113_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;((void(*)(u1,u1,QString)) fn)(a1,a2,a3);}
+void _f_9113_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u1,u1,QString)) fn)(a1,a2,a3);}
 
-void _f_0114_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;((void(*)(u1,u1,u4)) fn)(a1,a2,a3);}
+void _f_9114_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u1,u1,u4)) fn)(a1,a2,a3);}
 
-void _f_0115_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,u1,n8)) fn)(a1,a2,a3);}
+void _f_9115_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0116_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;((void(*)(u1,u1,r8)) fn)(a1,a2,a3);}
+void _f_9116_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u1,u1,r8)) fn)(a1,a2,a3);}
 
-void _f_0117_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u1,u1,QVariant)) fn)(a1,a2,a3);}
+void _f_9117_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u1,u1,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0118_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,u1,n8)) fn)(a1,a2,a3);}
+void _f_9118_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0119_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,u1,n8)) fn)(a1,a2,a3);}
+void _f_9119_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0120_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;((void(*)(u1,u2,n8&)) fn)(a1,a2,a3);}
+void _f_9120_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u1,u2,n8&)) fn)(a1,a2,a3);}
 
-void _f_0121_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;((void(*)(u1,u2,u1)) fn)(a1,a2,a3);}
+void _f_9121_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u1,u2,u1)) fn)(a1,a2,a3);}
 
-void _f_0122_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;((void(*)(u1,u2,u2)) fn)(a1,a2,a3);}
+void _f_9122_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u1,u2,u2)) fn)(a1,a2,a3);}
 
-void _f_0123_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;((void(*)(u1,u2,QString)) fn)(a1,a2,a3);}
+void _f_9123_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u1,u2,QString)) fn)(a1,a2,a3);}
 
-void _f_0124_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;((void(*)(u1,u2,u4)) fn)(a1,a2,a3);}
+void _f_9124_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u1,u2,u4)) fn)(a1,a2,a3);}
 
-void _f_0125_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,u2,n8)) fn)(a1,a2,a3);}
+void _f_9125_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0126_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;((void(*)(u1,u2,r8)) fn)(a1,a2,a3);}
+void _f_9126_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u1,u2,r8)) fn)(a1,a2,a3);}
 
-void _f_0127_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u1,u2,QVariant)) fn)(a1,a2,a3);}
+void _f_9127_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u1,u2,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0128_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,u2,n8)) fn)(a1,a2,a3);}
+void _f_9128_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0129_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,u2,n8)) fn)(a1,a2,a3);}
+void _f_9129_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0130_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;((void(*)(u1,QString,n8&)) fn)(a1,a2,a3);}
+void _f_9130_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u1,QString,n8&)) fn)(a1,a2,a3);}
 
-void _f_0131_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;((void(*)(u1,QString,u1)) fn)(a1,a2,a3);}
+void _f_9131_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u1,QString,u1)) fn)(a1,a2,a3);}
 
-void _f_0132_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;((void(*)(u1,QString,u2)) fn)(a1,a2,a3);}
+void _f_9132_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u1,QString,u2)) fn)(a1,a2,a3);}
 
-void _f_0133_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;((void(*)(u1,QString,QString)) fn)(a1,a2,a3);}
+void _f_9133_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u1,QString,QString)) fn)(a1,a2,a3);}
 
-void _f_0134_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;((void(*)(u1,QString,u4)) fn)(a1,a2,a3);}
+void _f_9134_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u1,QString,u4)) fn)(a1,a2,a3);}
 
-void _f_0135_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,QString,n8)) fn)(a1,a2,a3);}
+void _f_9135_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0136_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;((void(*)(u1,QString,r8)) fn)(a1,a2,a3);}
+void _f_9136_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u1,QString,r8)) fn)(a1,a2,a3);}
 
-void _f_0137_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u1,QString,QVariant)) fn)(a1,a2,a3);}
+void _f_9137_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u1,QString,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0138_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,QString,n8)) fn)(a1,a2,a3);}
+void _f_9138_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0139_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,QString,n8)) fn)(a1,a2,a3);}
+void _f_9139_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0140_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;((void(*)(u1,u4,n8&)) fn)(a1,a2,a3);}
+void _f_9140_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u1,u4,n8&)) fn)(a1,a2,a3);}
 
-void _f_0141_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;((void(*)(u1,u4,u1)) fn)(a1,a2,a3);}
+void _f_9141_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u1,u4,u1)) fn)(a1,a2,a3);}
 
-void _f_0142_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;((void(*)(u1,u4,u2)) fn)(a1,a2,a3);}
+void _f_9142_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u1,u4,u2)) fn)(a1,a2,a3);}
 
-void _f_0143_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;((void(*)(u1,u4,QString)) fn)(a1,a2,a3);}
+void _f_9143_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u1,u4,QString)) fn)(a1,a2,a3);}
 
-void _f_0144_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;((void(*)(u1,u4,u4)) fn)(a1,a2,a3);}
+void _f_9144_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u1,u4,u4)) fn)(a1,a2,a3);}
 
-void _f_0145_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,u4,n8)) fn)(a1,a2,a3);}
+void _f_9145_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0146_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;((void(*)(u1,u4,r8)) fn)(a1,a2,a3);}
+void _f_9146_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u1,u4,r8)) fn)(a1,a2,a3);}
 
-void _f_0147_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u1,u4,QVariant)) fn)(a1,a2,a3);}
+void _f_9147_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u1,u4,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0148_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,u4,n8)) fn)(a1,a2,a3);}
+void _f_9148_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0149_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,u4,n8)) fn)(a1,a2,a3);}
+void _f_9149_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0150_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(u1,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9150_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u1,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0151_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(u1,n8,u1)) fn)(a1,a2,a3);}
+void _f_9151_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u1,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0152_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(u1,n8,u2)) fn)(a1,a2,a3);}
+void _f_9152_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u1,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0153_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(u1,n8,QString)) fn)(a1,a2,a3);}
+void _f_9153_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u1,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0154_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(u1,n8,u4)) fn)(a1,a2,a3);}
+void _f_9154_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u1,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0155_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,n8,n8)) fn)(a1,a2,a3);}
+void _f_9155_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0156_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(u1,n8,r8)) fn)(a1,a2,a3);}
+void _f_9156_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u1,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0157_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u1,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9157_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u1,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0158_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,n8,n8)) fn)(a1,a2,a3);}
+void _f_9158_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0159_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,n8,n8)) fn)(a1,a2,a3);}
+void _f_9159_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0160_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;((void(*)(u1,r8,n8&)) fn)(a1,a2,a3);}
+void _f_9160_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u1,r8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0161_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;((void(*)(u1,r8,u1)) fn)(a1,a2,a3);}
+void _f_9161_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u1,r8,u1)) fn)(a1,a2,a3);}
 
-void _f_0162_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;((void(*)(u1,r8,u2)) fn)(a1,a2,a3);}
+void _f_9162_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u1,r8,u2)) fn)(a1,a2,a3);}
 
-void _f_0163_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;((void(*)(u1,r8,QString)) fn)(a1,a2,a3);}
+void _f_9163_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u1,r8,QString)) fn)(a1,a2,a3);}
 
-void _f_0164_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;((void(*)(u1,r8,u4)) fn)(a1,a2,a3);}
+void _f_9164_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u1,r8,u4)) fn)(a1,a2,a3);}
 
-void _f_0165_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,r8,n8)) fn)(a1,a2,a3);}
+void _f_9165_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0166_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;((void(*)(u1,r8,r8)) fn)(a1,a2,a3);}
+void _f_9166_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u1,r8,r8)) fn)(a1,a2,a3);}
 
-void _f_0167_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u1,r8,QVariant)) fn)(a1,a2,a3);}
+void _f_9167_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u1,r8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0168_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,r8,n8)) fn)(a1,a2,a3);}
+void _f_9168_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0169_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,r8,n8)) fn)(a1,a2,a3);}
+void _f_9169_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0170_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;((void(*)(u1,QVariant,n8&)) fn)(a1,a2,a3);}
+void _f_9170_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u1,QVariant,n8&)) fn)(a1,a2,a3);}
 
-void _f_0171_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;((void(*)(u1,QVariant,u1)) fn)(a1,a2,a3);}
+void _f_9171_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u1,QVariant,u1)) fn)(a1,a2,a3);}
 
-void _f_0172_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;((void(*)(u1,QVariant,u2)) fn)(a1,a2,a3);}
+void _f_9172_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u1,QVariant,u2)) fn)(a1,a2,a3);}
 
-void _f_0173_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;((void(*)(u1,QVariant,QString)) fn)(a1,a2,a3);}
+void _f_9173_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u1,QVariant,QString)) fn)(a1,a2,a3);}
 
-void _f_0174_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;((void(*)(u1,QVariant,u4)) fn)(a1,a2,a3);}
+void _f_9174_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u1,QVariant,u4)) fn)(a1,a2,a3);}
 
-void _f_0175_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9175_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0176_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;((void(*)(u1,QVariant,r8)) fn)(a1,a2,a3);}
+void _f_9176_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u1,QVariant,r8)) fn)(a1,a2,a3);}
 
-void _f_0177_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u1,QVariant,QVariant)) fn)(a1,a2,a3);}
+void _f_9177_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u1,QVariant,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0178_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9178_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0179_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9179_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0180_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(u1,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9180_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u1,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0181_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(u1,n8,u1)) fn)(a1,a2,a3);}
+void _f_9181_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u1,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0182_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(u1,n8,u2)) fn)(a1,a2,a3);}
+void _f_9182_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u1,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0183_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(u1,n8,QString)) fn)(a1,a2,a3);}
+void _f_9183_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u1,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0184_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(u1,n8,u4)) fn)(a1,a2,a3);}
+void _f_9184_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u1,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0185_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,n8,n8)) fn)(a1,a2,a3);}
+void _f_9185_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0186_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(u1,n8,r8)) fn)(a1,a2,a3);}
+void _f_9186_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u1,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0187_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u1,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9187_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u1,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0188_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,n8,n8)) fn)(a1,a2,a3);}
+void _f_9188_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0189_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,n8,n8)) fn)(a1,a2,a3);}
+void _f_9189_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0190_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(u1,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9190_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u1,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0191_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(u1,n8,u1)) fn)(a1,a2,a3);}
+void _f_9191_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u1,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0192_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(u1,n8,u2)) fn)(a1,a2,a3);}
+void _f_9192_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u1,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0193_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(u1,n8,QString)) fn)(a1,a2,a3);}
+void _f_9193_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u1,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0194_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(u1,n8,u4)) fn)(a1,a2,a3);}
+void _f_9194_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u1,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0195_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,n8,n8)) fn)(a1,a2,a3);}
+void _f_9195_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0196_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(u1,n8,r8)) fn)(a1,a2,a3);}
+void _f_9196_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u1,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0197_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u1,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9197_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u1,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0198_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,n8,n8)) fn)(a1,a2,a3);}
+void _f_9198_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0199_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u1,n8,n8)) fn)(a1,a2,a3);}
+void _f_9199_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u1,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0200_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(u2,n8&,n8&)) fn)(a1,a2,a3);}
+void _f_9200_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u2,n8&,n8&)) fn)(a1,a2,a3);}
 
-void _f_0201_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(u2,n8&,u1)) fn)(a1,a2,a3);}
+void _f_9201_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u2,n8&,u1)) fn)(a1,a2,a3);}
 
-void _f_0202_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(u2,n8&,u2)) fn)(a1,a2,a3);}
+void _f_9202_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u2,n8&,u2)) fn)(a1,a2,a3);}
 
-void _f_0203_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(u2,n8&,QString)) fn)(a1,a2,a3);}
+void _f_9203_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u2,n8&,QString)) fn)(a1,a2,a3);}
 
-void _f_0204_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(u2,n8&,u4)) fn)(a1,a2,a3);}
+void _f_9204_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u2,n8&,u4)) fn)(a1,a2,a3);}
 
-void _f_0205_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9205_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0206_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(u2,n8&,r8)) fn)(a1,a2,a3);}
+void _f_9206_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u2,n8&,r8)) fn)(a1,a2,a3);}
 
-void _f_0207_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u2,n8&,QVariant)) fn)(a1,a2,a3);}
+void _f_9207_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u2,n8&,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0208_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9208_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0209_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9209_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0210_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;((void(*)(u2,u1,n8&)) fn)(a1,a2,a3);}
+void _f_9210_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u2,u1,n8&)) fn)(a1,a2,a3);}
 
-void _f_0211_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;((void(*)(u2,u1,u1)) fn)(a1,a2,a3);}
+void _f_9211_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u2,u1,u1)) fn)(a1,a2,a3);}
 
-void _f_0212_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;((void(*)(u2,u1,u2)) fn)(a1,a2,a3);}
+void _f_9212_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u2,u1,u2)) fn)(a1,a2,a3);}
 
-void _f_0213_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;((void(*)(u2,u1,QString)) fn)(a1,a2,a3);}
+void _f_9213_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u2,u1,QString)) fn)(a1,a2,a3);}
 
-void _f_0214_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;((void(*)(u2,u1,u4)) fn)(a1,a2,a3);}
+void _f_9214_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u2,u1,u4)) fn)(a1,a2,a3);}
 
-void _f_0215_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,u1,n8)) fn)(a1,a2,a3);}
+void _f_9215_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0216_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;((void(*)(u2,u1,r8)) fn)(a1,a2,a3);}
+void _f_9216_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u2,u1,r8)) fn)(a1,a2,a3);}
 
-void _f_0217_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u2,u1,QVariant)) fn)(a1,a2,a3);}
+void _f_9217_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u2,u1,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0218_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,u1,n8)) fn)(a1,a2,a3);}
+void _f_9218_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0219_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,u1,n8)) fn)(a1,a2,a3);}
+void _f_9219_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0220_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;((void(*)(u2,u2,n8&)) fn)(a1,a2,a3);}
+void _f_9220_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u2,u2,n8&)) fn)(a1,a2,a3);}
 
-void _f_0221_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;((void(*)(u2,u2,u1)) fn)(a1,a2,a3);}
+void _f_9221_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u2,u2,u1)) fn)(a1,a2,a3);}
 
-void _f_0222_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;((void(*)(u2,u2,u2)) fn)(a1,a2,a3);}
+void _f_9222_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u2,u2,u2)) fn)(a1,a2,a3);}
 
-void _f_0223_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;((void(*)(u2,u2,QString)) fn)(a1,a2,a3);}
+void _f_9223_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u2,u2,QString)) fn)(a1,a2,a3);}
 
-void _f_0224_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;((void(*)(u2,u2,u4)) fn)(a1,a2,a3);}
+void _f_9224_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u2,u2,u4)) fn)(a1,a2,a3);}
 
-void _f_0225_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,u2,n8)) fn)(a1,a2,a3);}
+void _f_9225_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0226_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;((void(*)(u2,u2,r8)) fn)(a1,a2,a3);}
+void _f_9226_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u2,u2,r8)) fn)(a1,a2,a3);}
 
-void _f_0227_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u2,u2,QVariant)) fn)(a1,a2,a3);}
+void _f_9227_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u2,u2,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0228_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,u2,n8)) fn)(a1,a2,a3);}
+void _f_9228_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0229_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,u2,n8)) fn)(a1,a2,a3);}
+void _f_9229_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0230_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;((void(*)(u2,QString,n8&)) fn)(a1,a2,a3);}
+void _f_9230_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u2,QString,n8&)) fn)(a1,a2,a3);}
 
-void _f_0231_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;((void(*)(u2,QString,u1)) fn)(a1,a2,a3);}
+void _f_9231_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u2,QString,u1)) fn)(a1,a2,a3);}
 
-void _f_0232_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;((void(*)(u2,QString,u2)) fn)(a1,a2,a3);}
+void _f_9232_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u2,QString,u2)) fn)(a1,a2,a3);}
 
-void _f_0233_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;((void(*)(u2,QString,QString)) fn)(a1,a2,a3);}
+void _f_9233_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u2,QString,QString)) fn)(a1,a2,a3);}
 
-void _f_0234_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;((void(*)(u2,QString,u4)) fn)(a1,a2,a3);}
+void _f_9234_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u2,QString,u4)) fn)(a1,a2,a3);}
 
-void _f_0235_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,QString,n8)) fn)(a1,a2,a3);}
+void _f_9235_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0236_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;((void(*)(u2,QString,r8)) fn)(a1,a2,a3);}
+void _f_9236_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u2,QString,r8)) fn)(a1,a2,a3);}
 
-void _f_0237_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u2,QString,QVariant)) fn)(a1,a2,a3);}
+void _f_9237_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u2,QString,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0238_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,QString,n8)) fn)(a1,a2,a3);}
+void _f_9238_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0239_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,QString,n8)) fn)(a1,a2,a3);}
+void _f_9239_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0240_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;((void(*)(u2,u4,n8&)) fn)(a1,a2,a3);}
+void _f_9240_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u2,u4,n8&)) fn)(a1,a2,a3);}
 
-void _f_0241_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;((void(*)(u2,u4,u1)) fn)(a1,a2,a3);}
+void _f_9241_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u2,u4,u1)) fn)(a1,a2,a3);}
 
-void _f_0242_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;((void(*)(u2,u4,u2)) fn)(a1,a2,a3);}
+void _f_9242_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u2,u4,u2)) fn)(a1,a2,a3);}
 
-void _f_0243_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;((void(*)(u2,u4,QString)) fn)(a1,a2,a3);}
+void _f_9243_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u2,u4,QString)) fn)(a1,a2,a3);}
 
-void _f_0244_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;((void(*)(u2,u4,u4)) fn)(a1,a2,a3);}
+void _f_9244_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u2,u4,u4)) fn)(a1,a2,a3);}
 
-void _f_0245_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,u4,n8)) fn)(a1,a2,a3);}
+void _f_9245_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0246_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;((void(*)(u2,u4,r8)) fn)(a1,a2,a3);}
+void _f_9246_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u2,u4,r8)) fn)(a1,a2,a3);}
 
-void _f_0247_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u2,u4,QVariant)) fn)(a1,a2,a3);}
+void _f_9247_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u2,u4,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0248_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,u4,n8)) fn)(a1,a2,a3);}
+void _f_9248_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0249_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,u4,n8)) fn)(a1,a2,a3);}
+void _f_9249_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0250_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(u2,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9250_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u2,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0251_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(u2,n8,u1)) fn)(a1,a2,a3);}
+void _f_9251_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u2,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0252_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(u2,n8,u2)) fn)(a1,a2,a3);}
+void _f_9252_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u2,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0253_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(u2,n8,QString)) fn)(a1,a2,a3);}
+void _f_9253_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u2,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0254_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(u2,n8,u4)) fn)(a1,a2,a3);}
+void _f_9254_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u2,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0255_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,n8,n8)) fn)(a1,a2,a3);}
+void _f_9255_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0256_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(u2,n8,r8)) fn)(a1,a2,a3);}
+void _f_9256_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u2,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0257_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u2,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9257_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u2,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0258_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,n8,n8)) fn)(a1,a2,a3);}
+void _f_9258_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0259_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,n8,n8)) fn)(a1,a2,a3);}
+void _f_9259_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0260_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;((void(*)(u2,r8,n8&)) fn)(a1,a2,a3);}
+void _f_9260_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u2,r8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0261_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;((void(*)(u2,r8,u1)) fn)(a1,a2,a3);}
+void _f_9261_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u2,r8,u1)) fn)(a1,a2,a3);}
 
-void _f_0262_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;((void(*)(u2,r8,u2)) fn)(a1,a2,a3);}
+void _f_9262_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u2,r8,u2)) fn)(a1,a2,a3);}
 
-void _f_0263_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;((void(*)(u2,r8,QString)) fn)(a1,a2,a3);}
+void _f_9263_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u2,r8,QString)) fn)(a1,a2,a3);}
 
-void _f_0264_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;((void(*)(u2,r8,u4)) fn)(a1,a2,a3);}
+void _f_9264_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u2,r8,u4)) fn)(a1,a2,a3);}
 
-void _f_0265_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,r8,n8)) fn)(a1,a2,a3);}
+void _f_9265_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0266_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;((void(*)(u2,r8,r8)) fn)(a1,a2,a3);}
+void _f_9266_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u2,r8,r8)) fn)(a1,a2,a3);}
 
-void _f_0267_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u2,r8,QVariant)) fn)(a1,a2,a3);}
+void _f_9267_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u2,r8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0268_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,r8,n8)) fn)(a1,a2,a3);}
+void _f_9268_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0269_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,r8,n8)) fn)(a1,a2,a3);}
+void _f_9269_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0270_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;((void(*)(u2,QVariant,n8&)) fn)(a1,a2,a3);}
+void _f_9270_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u2,QVariant,n8&)) fn)(a1,a2,a3);}
 
-void _f_0271_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;((void(*)(u2,QVariant,u1)) fn)(a1,a2,a3);}
+void _f_9271_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u2,QVariant,u1)) fn)(a1,a2,a3);}
 
-void _f_0272_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;((void(*)(u2,QVariant,u2)) fn)(a1,a2,a3);}
+void _f_9272_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u2,QVariant,u2)) fn)(a1,a2,a3);}
 
-void _f_0273_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;((void(*)(u2,QVariant,QString)) fn)(a1,a2,a3);}
+void _f_9273_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u2,QVariant,QString)) fn)(a1,a2,a3);}
 
-void _f_0274_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;((void(*)(u2,QVariant,u4)) fn)(a1,a2,a3);}
+void _f_9274_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u2,QVariant,u4)) fn)(a1,a2,a3);}
 
-void _f_0275_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9275_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0276_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;((void(*)(u2,QVariant,r8)) fn)(a1,a2,a3);}
+void _f_9276_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u2,QVariant,r8)) fn)(a1,a2,a3);}
 
-void _f_0277_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u2,QVariant,QVariant)) fn)(a1,a2,a3);}
+void _f_9277_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u2,QVariant,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0278_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9278_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0279_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9279_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0280_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(u2,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9280_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u2,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0281_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(u2,n8,u1)) fn)(a1,a2,a3);}
+void _f_9281_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u2,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0282_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(u2,n8,u2)) fn)(a1,a2,a3);}
+void _f_9282_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u2,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0283_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(u2,n8,QString)) fn)(a1,a2,a3);}
+void _f_9283_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u2,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0284_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(u2,n8,u4)) fn)(a1,a2,a3);}
+void _f_9284_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u2,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0285_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,n8,n8)) fn)(a1,a2,a3);}
+void _f_9285_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0286_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(u2,n8,r8)) fn)(a1,a2,a3);}
+void _f_9286_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u2,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0287_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u2,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9287_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u2,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0288_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,n8,n8)) fn)(a1,a2,a3);}
+void _f_9288_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0289_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,n8,n8)) fn)(a1,a2,a3);}
+void _f_9289_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0290_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(u2,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9290_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u2,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0291_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(u2,n8,u1)) fn)(a1,a2,a3);}
+void _f_9291_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u2,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0292_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(u2,n8,u2)) fn)(a1,a2,a3);}
+void _f_9292_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u2,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0293_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(u2,n8,QString)) fn)(a1,a2,a3);}
+void _f_9293_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u2,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0294_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(u2,n8,u4)) fn)(a1,a2,a3);}
+void _f_9294_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u2,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0295_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,n8,n8)) fn)(a1,a2,a3);}
+void _f_9295_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0296_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(u2,n8,r8)) fn)(a1,a2,a3);}
+void _f_9296_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u2,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0297_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u2,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9297_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u2,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0298_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,n8,n8)) fn)(a1,a2,a3);}
+void _f_9298_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0299_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u2,n8,n8)) fn)(a1,a2,a3);}
+void _f_9299_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u2,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0300_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(QString,n8&,n8&)) fn)(a1,a2,a3);}
+void _f_9300_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QString,n8&,n8&)) fn)(a1,a2,a3);}
 
-void _f_0301_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(QString,n8&,u1)) fn)(a1,a2,a3);}
+void _f_9301_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QString,n8&,u1)) fn)(a1,a2,a3);}
 
-void _f_0302_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(QString,n8&,u2)) fn)(a1,a2,a3);}
+void _f_9302_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QString,n8&,u2)) fn)(a1,a2,a3);}
 
-void _f_0303_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(QString,n8&,QString)) fn)(a1,a2,a3);}
+void _f_9303_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QString,n8&,QString)) fn)(a1,a2,a3);}
 
-void _f_0304_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(QString,n8&,u4)) fn)(a1,a2,a3);}
+void _f_9304_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QString,n8&,u4)) fn)(a1,a2,a3);}
 
-void _f_0305_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9305_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0306_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(QString,n8&,r8)) fn)(a1,a2,a3);}
+void _f_9306_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QString,n8&,r8)) fn)(a1,a2,a3);}
 
-void _f_0307_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QString,n8&,QVariant)) fn)(a1,a2,a3);}
+void _f_9307_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QString,n8&,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0308_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9308_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0309_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9309_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0310_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;((void(*)(QString,u1,n8&)) fn)(a1,a2,a3);}
+void _f_9310_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QString,u1,n8&)) fn)(a1,a2,a3);}
 
-void _f_0311_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;((void(*)(QString,u1,u1)) fn)(a1,a2,a3);}
+void _f_9311_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QString,u1,u1)) fn)(a1,a2,a3);}
 
-void _f_0312_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;((void(*)(QString,u1,u2)) fn)(a1,a2,a3);}
+void _f_9312_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QString,u1,u2)) fn)(a1,a2,a3);}
 
-void _f_0313_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;((void(*)(QString,u1,QString)) fn)(a1,a2,a3);}
+void _f_9313_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QString,u1,QString)) fn)(a1,a2,a3);}
 
-void _f_0314_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;((void(*)(QString,u1,u4)) fn)(a1,a2,a3);}
+void _f_9314_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QString,u1,u4)) fn)(a1,a2,a3);}
 
-void _f_0315_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,u1,n8)) fn)(a1,a2,a3);}
+void _f_9315_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0316_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;((void(*)(QString,u1,r8)) fn)(a1,a2,a3);}
+void _f_9316_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QString,u1,r8)) fn)(a1,a2,a3);}
 
-void _f_0317_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QString,u1,QVariant)) fn)(a1,a2,a3);}
+void _f_9317_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QString,u1,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0318_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,u1,n8)) fn)(a1,a2,a3);}
+void _f_9318_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0319_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,u1,n8)) fn)(a1,a2,a3);}
+void _f_9319_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0320_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;((void(*)(QString,u2,n8&)) fn)(a1,a2,a3);}
+void _f_9320_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QString,u2,n8&)) fn)(a1,a2,a3);}
 
-void _f_0321_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;((void(*)(QString,u2,u1)) fn)(a1,a2,a3);}
+void _f_9321_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QString,u2,u1)) fn)(a1,a2,a3);}
 
-void _f_0322_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;((void(*)(QString,u2,u2)) fn)(a1,a2,a3);}
+void _f_9322_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QString,u2,u2)) fn)(a1,a2,a3);}
 
-void _f_0323_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;((void(*)(QString,u2,QString)) fn)(a1,a2,a3);}
+void _f_9323_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QString,u2,QString)) fn)(a1,a2,a3);}
 
-void _f_0324_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;((void(*)(QString,u2,u4)) fn)(a1,a2,a3);}
+void _f_9324_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QString,u2,u4)) fn)(a1,a2,a3);}
 
-void _f_0325_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,u2,n8)) fn)(a1,a2,a3);}
+void _f_9325_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0326_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;((void(*)(QString,u2,r8)) fn)(a1,a2,a3);}
+void _f_9326_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QString,u2,r8)) fn)(a1,a2,a3);}
 
-void _f_0327_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QString,u2,QVariant)) fn)(a1,a2,a3);}
+void _f_9327_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QString,u2,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0328_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,u2,n8)) fn)(a1,a2,a3);}
+void _f_9328_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0329_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,u2,n8)) fn)(a1,a2,a3);}
+void _f_9329_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0330_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;((void(*)(QString,QString,n8&)) fn)(a1,a2,a3);}
+void _f_9330_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QString,QString,n8&)) fn)(a1,a2,a3);}
 
-void _f_0331_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;((void(*)(QString,QString,u1)) fn)(a1,a2,a3);}
+void _f_9331_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QString,QString,u1)) fn)(a1,a2,a3);}
 
-void _f_0332_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;((void(*)(QString,QString,u2)) fn)(a1,a2,a3);}
+void _f_9332_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QString,QString,u2)) fn)(a1,a2,a3);}
 
-void _f_0333_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;((void(*)(QString,QString,QString)) fn)(a1,a2,a3);}
+void _f_9333_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QString,QString,QString)) fn)(a1,a2,a3);}
 
-void _f_0334_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;((void(*)(QString,QString,u4)) fn)(a1,a2,a3);}
+void _f_9334_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QString,QString,u4)) fn)(a1,a2,a3);}
 
-void _f_0335_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,QString,n8)) fn)(a1,a2,a3);}
+void _f_9335_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0336_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;((void(*)(QString,QString,r8)) fn)(a1,a2,a3);}
+void _f_9336_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QString,QString,r8)) fn)(a1,a2,a3);}
 
-void _f_0337_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QString,QString,QVariant)) fn)(a1,a2,a3);}
+void _f_9337_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QString,QString,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0338_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,QString,n8)) fn)(a1,a2,a3);}
+void _f_9338_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0339_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,QString,n8)) fn)(a1,a2,a3);}
+void _f_9339_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0340_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;((void(*)(QString,u4,n8&)) fn)(a1,a2,a3);}
+void _f_9340_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QString,u4,n8&)) fn)(a1,a2,a3);}
 
-void _f_0341_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;((void(*)(QString,u4,u1)) fn)(a1,a2,a3);}
+void _f_9341_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QString,u4,u1)) fn)(a1,a2,a3);}
 
-void _f_0342_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;((void(*)(QString,u4,u2)) fn)(a1,a2,a3);}
+void _f_9342_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QString,u4,u2)) fn)(a1,a2,a3);}
 
-void _f_0343_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;((void(*)(QString,u4,QString)) fn)(a1,a2,a3);}
+void _f_9343_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QString,u4,QString)) fn)(a1,a2,a3);}
 
-void _f_0344_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;((void(*)(QString,u4,u4)) fn)(a1,a2,a3);}
+void _f_9344_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QString,u4,u4)) fn)(a1,a2,a3);}
 
-void _f_0345_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,u4,n8)) fn)(a1,a2,a3);}
+void _f_9345_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0346_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;((void(*)(QString,u4,r8)) fn)(a1,a2,a3);}
+void _f_9346_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QString,u4,r8)) fn)(a1,a2,a3);}
 
-void _f_0347_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QString,u4,QVariant)) fn)(a1,a2,a3);}
+void _f_9347_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QString,u4,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0348_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,u4,n8)) fn)(a1,a2,a3);}
+void _f_9348_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0349_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,u4,n8)) fn)(a1,a2,a3);}
+void _f_9349_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0350_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(QString,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9350_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QString,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0351_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(QString,n8,u1)) fn)(a1,a2,a3);}
+void _f_9351_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QString,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0352_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(QString,n8,u2)) fn)(a1,a2,a3);}
+void _f_9352_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QString,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0353_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(QString,n8,QString)) fn)(a1,a2,a3);}
+void _f_9353_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QString,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0354_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(QString,n8,u4)) fn)(a1,a2,a3);}
+void _f_9354_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QString,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0355_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,n8,n8)) fn)(a1,a2,a3);}
+void _f_9355_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0356_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(QString,n8,r8)) fn)(a1,a2,a3);}
+void _f_9356_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QString,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0357_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QString,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9357_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QString,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0358_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,n8,n8)) fn)(a1,a2,a3);}
+void _f_9358_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0359_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,n8,n8)) fn)(a1,a2,a3);}
+void _f_9359_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0360_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;((void(*)(QString,r8,n8&)) fn)(a1,a2,a3);}
+void _f_9360_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QString,r8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0361_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;((void(*)(QString,r8,u1)) fn)(a1,a2,a3);}
+void _f_9361_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QString,r8,u1)) fn)(a1,a2,a3);}
 
-void _f_0362_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;((void(*)(QString,r8,u2)) fn)(a1,a2,a3);}
+void _f_9362_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QString,r8,u2)) fn)(a1,a2,a3);}
 
-void _f_0363_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;((void(*)(QString,r8,QString)) fn)(a1,a2,a3);}
+void _f_9363_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QString,r8,QString)) fn)(a1,a2,a3);}
 
-void _f_0364_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;((void(*)(QString,r8,u4)) fn)(a1,a2,a3);}
+void _f_9364_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QString,r8,u4)) fn)(a1,a2,a3);}
 
-void _f_0365_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,r8,n8)) fn)(a1,a2,a3);}
+void _f_9365_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0366_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;((void(*)(QString,r8,r8)) fn)(a1,a2,a3);}
+void _f_9366_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QString,r8,r8)) fn)(a1,a2,a3);}
 
-void _f_0367_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QString,r8,QVariant)) fn)(a1,a2,a3);}
+void _f_9367_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QString,r8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0368_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,r8,n8)) fn)(a1,a2,a3);}
+void _f_9368_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0369_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,r8,n8)) fn)(a1,a2,a3);}
+void _f_9369_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0370_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;((void(*)(QString,QVariant,n8&)) fn)(a1,a2,a3);}
+void _f_9370_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QString,QVariant,n8&)) fn)(a1,a2,a3);}
 
-void _f_0371_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;((void(*)(QString,QVariant,u1)) fn)(a1,a2,a3);}
+void _f_9371_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QString,QVariant,u1)) fn)(a1,a2,a3);}
 
-void _f_0372_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;((void(*)(QString,QVariant,u2)) fn)(a1,a2,a3);}
+void _f_9372_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QString,QVariant,u2)) fn)(a1,a2,a3);}
 
-void _f_0373_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;((void(*)(QString,QVariant,QString)) fn)(a1,a2,a3);}
+void _f_9373_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QString,QVariant,QString)) fn)(a1,a2,a3);}
 
-void _f_0374_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;((void(*)(QString,QVariant,u4)) fn)(a1,a2,a3);}
+void _f_9374_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QString,QVariant,u4)) fn)(a1,a2,a3);}
 
-void _f_0375_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9375_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0376_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;((void(*)(QString,QVariant,r8)) fn)(a1,a2,a3);}
+void _f_9376_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QString,QVariant,r8)) fn)(a1,a2,a3);}
 
-void _f_0377_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QString,QVariant,QVariant)) fn)(a1,a2,a3);}
+void _f_9377_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QString,QVariant,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0378_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9378_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0379_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9379_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0380_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(QString,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9380_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QString,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0381_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(QString,n8,u1)) fn)(a1,a2,a3);}
+void _f_9381_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QString,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0382_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(QString,n8,u2)) fn)(a1,a2,a3);}
+void _f_9382_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QString,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0383_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(QString,n8,QString)) fn)(a1,a2,a3);}
+void _f_9383_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QString,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0384_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(QString,n8,u4)) fn)(a1,a2,a3);}
+void _f_9384_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QString,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0385_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,n8,n8)) fn)(a1,a2,a3);}
+void _f_9385_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0386_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(QString,n8,r8)) fn)(a1,a2,a3);}
+void _f_9386_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QString,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0387_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QString,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9387_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QString,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0388_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,n8,n8)) fn)(a1,a2,a3);}
+void _f_9388_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0389_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,n8,n8)) fn)(a1,a2,a3);}
+void _f_9389_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0390_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(QString,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9390_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QString,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0391_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(QString,n8,u1)) fn)(a1,a2,a3);}
+void _f_9391_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QString,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0392_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(QString,n8,u2)) fn)(a1,a2,a3);}
+void _f_9392_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QString,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0393_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(QString,n8,QString)) fn)(a1,a2,a3);}
+void _f_9393_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QString,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0394_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(QString,n8,u4)) fn)(a1,a2,a3);}
+void _f_9394_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QString,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0395_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,n8,n8)) fn)(a1,a2,a3);}
+void _f_9395_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0396_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(QString,n8,r8)) fn)(a1,a2,a3);}
+void _f_9396_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QString,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0397_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QString,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9397_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QString,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0398_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,n8,n8)) fn)(a1,a2,a3);}
+void _f_9398_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0399_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QString,n8,n8)) fn)(a1,a2,a3);}
+void _f_9399_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QString,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0400_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(u4,n8&,n8&)) fn)(a1,a2,a3);}
+void _f_9400_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u4,n8&,n8&)) fn)(a1,a2,a3);}
 
-void _f_0401_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(u4,n8&,u1)) fn)(a1,a2,a3);}
+void _f_9401_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u4,n8&,u1)) fn)(a1,a2,a3);}
 
-void _f_0402_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(u4,n8&,u2)) fn)(a1,a2,a3);}
+void _f_9402_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u4,n8&,u2)) fn)(a1,a2,a3);}
 
-void _f_0403_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(u4,n8&,QString)) fn)(a1,a2,a3);}
+void _f_9403_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u4,n8&,QString)) fn)(a1,a2,a3);}
 
-void _f_0404_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(u4,n8&,u4)) fn)(a1,a2,a3);}
+void _f_9404_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u4,n8&,u4)) fn)(a1,a2,a3);}
 
-void _f_0405_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9405_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0406_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(u4,n8&,r8)) fn)(a1,a2,a3);}
+void _f_9406_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u4,n8&,r8)) fn)(a1,a2,a3);}
 
-void _f_0407_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u4,n8&,QVariant)) fn)(a1,a2,a3);}
+void _f_9407_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u4,n8&,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0408_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9408_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0409_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9409_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0410_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;((void(*)(u4,u1,n8&)) fn)(a1,a2,a3);}
+void _f_9410_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u4,u1,n8&)) fn)(a1,a2,a3);}
 
-void _f_0411_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;((void(*)(u4,u1,u1)) fn)(a1,a2,a3);}
+void _f_9411_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u4,u1,u1)) fn)(a1,a2,a3);}
 
-void _f_0412_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;((void(*)(u4,u1,u2)) fn)(a1,a2,a3);}
+void _f_9412_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u4,u1,u2)) fn)(a1,a2,a3);}
 
-void _f_0413_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;((void(*)(u4,u1,QString)) fn)(a1,a2,a3);}
+void _f_9413_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u4,u1,QString)) fn)(a1,a2,a3);}
 
-void _f_0414_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;((void(*)(u4,u1,u4)) fn)(a1,a2,a3);}
+void _f_9414_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u4,u1,u4)) fn)(a1,a2,a3);}
 
-void _f_0415_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,u1,n8)) fn)(a1,a2,a3);}
+void _f_9415_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0416_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;((void(*)(u4,u1,r8)) fn)(a1,a2,a3);}
+void _f_9416_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u4,u1,r8)) fn)(a1,a2,a3);}
 
-void _f_0417_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u4,u1,QVariant)) fn)(a1,a2,a3);}
+void _f_9417_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u4,u1,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0418_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,u1,n8)) fn)(a1,a2,a3);}
+void _f_9418_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0419_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,u1,n8)) fn)(a1,a2,a3);}
+void _f_9419_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0420_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;((void(*)(u4,u2,n8&)) fn)(a1,a2,a3);}
+void _f_9420_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u4,u2,n8&)) fn)(a1,a2,a3);}
 
-void _f_0421_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;((void(*)(u4,u2,u1)) fn)(a1,a2,a3);}
+void _f_9421_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u4,u2,u1)) fn)(a1,a2,a3);}
 
-void _f_0422_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;((void(*)(u4,u2,u2)) fn)(a1,a2,a3);}
+void _f_9422_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u4,u2,u2)) fn)(a1,a2,a3);}
 
-void _f_0423_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;((void(*)(u4,u2,QString)) fn)(a1,a2,a3);}
+void _f_9423_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u4,u2,QString)) fn)(a1,a2,a3);}
 
-void _f_0424_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;((void(*)(u4,u2,u4)) fn)(a1,a2,a3);}
+void _f_9424_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u4,u2,u4)) fn)(a1,a2,a3);}
 
-void _f_0425_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,u2,n8)) fn)(a1,a2,a3);}
+void _f_9425_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0426_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;((void(*)(u4,u2,r8)) fn)(a1,a2,a3);}
+void _f_9426_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u4,u2,r8)) fn)(a1,a2,a3);}
 
-void _f_0427_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u4,u2,QVariant)) fn)(a1,a2,a3);}
+void _f_9427_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u4,u2,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0428_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,u2,n8)) fn)(a1,a2,a3);}
+void _f_9428_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0429_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,u2,n8)) fn)(a1,a2,a3);}
+void _f_9429_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0430_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;((void(*)(u4,QString,n8&)) fn)(a1,a2,a3);}
+void _f_9430_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u4,QString,n8&)) fn)(a1,a2,a3);}
 
-void _f_0431_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;((void(*)(u4,QString,u1)) fn)(a1,a2,a3);}
+void _f_9431_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u4,QString,u1)) fn)(a1,a2,a3);}
 
-void _f_0432_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;((void(*)(u4,QString,u2)) fn)(a1,a2,a3);}
+void _f_9432_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u4,QString,u2)) fn)(a1,a2,a3);}
 
-void _f_0433_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;((void(*)(u4,QString,QString)) fn)(a1,a2,a3);}
+void _f_9433_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u4,QString,QString)) fn)(a1,a2,a3);}
 
-void _f_0434_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;((void(*)(u4,QString,u4)) fn)(a1,a2,a3);}
+void _f_9434_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u4,QString,u4)) fn)(a1,a2,a3);}
 
-void _f_0435_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,QString,n8)) fn)(a1,a2,a3);}
+void _f_9435_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0436_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;((void(*)(u4,QString,r8)) fn)(a1,a2,a3);}
+void _f_9436_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u4,QString,r8)) fn)(a1,a2,a3);}
 
-void _f_0437_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u4,QString,QVariant)) fn)(a1,a2,a3);}
+void _f_9437_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u4,QString,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0438_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,QString,n8)) fn)(a1,a2,a3);}
+void _f_9438_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0439_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,QString,n8)) fn)(a1,a2,a3);}
+void _f_9439_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0440_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;((void(*)(u4,u4,n8&)) fn)(a1,a2,a3);}
+void _f_9440_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u4,u4,n8&)) fn)(a1,a2,a3);}
 
-void _f_0441_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;((void(*)(u4,u4,u1)) fn)(a1,a2,a3);}
+void _f_9441_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u4,u4,u1)) fn)(a1,a2,a3);}
 
-void _f_0442_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;((void(*)(u4,u4,u2)) fn)(a1,a2,a3);}
+void _f_9442_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u4,u4,u2)) fn)(a1,a2,a3);}
 
-void _f_0443_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;((void(*)(u4,u4,QString)) fn)(a1,a2,a3);}
+void _f_9443_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u4,u4,QString)) fn)(a1,a2,a3);}
 
-void _f_0444_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;((void(*)(u4,u4,u4)) fn)(a1,a2,a3);}
+void _f_9444_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u4,u4,u4)) fn)(a1,a2,a3);}
 
-void _f_0445_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,u4,n8)) fn)(a1,a2,a3);}
+void _f_9445_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0446_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;((void(*)(u4,u4,r8)) fn)(a1,a2,a3);}
+void _f_9446_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u4,u4,r8)) fn)(a1,a2,a3);}
 
-void _f_0447_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u4,u4,QVariant)) fn)(a1,a2,a3);}
+void _f_9447_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u4,u4,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0448_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,u4,n8)) fn)(a1,a2,a3);}
+void _f_9448_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0449_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,u4,n8)) fn)(a1,a2,a3);}
+void _f_9449_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0450_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(u4,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9450_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u4,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0451_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(u4,n8,u1)) fn)(a1,a2,a3);}
+void _f_9451_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u4,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0452_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(u4,n8,u2)) fn)(a1,a2,a3);}
+void _f_9452_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u4,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0453_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(u4,n8,QString)) fn)(a1,a2,a3);}
+void _f_9453_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u4,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0454_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(u4,n8,u4)) fn)(a1,a2,a3);}
+void _f_9454_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u4,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0455_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,n8,n8)) fn)(a1,a2,a3);}
+void _f_9455_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0456_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(u4,n8,r8)) fn)(a1,a2,a3);}
+void _f_9456_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u4,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0457_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u4,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9457_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u4,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0458_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,n8,n8)) fn)(a1,a2,a3);}
+void _f_9458_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0459_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,n8,n8)) fn)(a1,a2,a3);}
+void _f_9459_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0460_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;((void(*)(u4,r8,n8&)) fn)(a1,a2,a3);}
+void _f_9460_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u4,r8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0461_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;((void(*)(u4,r8,u1)) fn)(a1,a2,a3);}
+void _f_9461_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u4,r8,u1)) fn)(a1,a2,a3);}
 
-void _f_0462_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;((void(*)(u4,r8,u2)) fn)(a1,a2,a3);}
+void _f_9462_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u4,r8,u2)) fn)(a1,a2,a3);}
 
-void _f_0463_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;((void(*)(u4,r8,QString)) fn)(a1,a2,a3);}
+void _f_9463_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u4,r8,QString)) fn)(a1,a2,a3);}
 
-void _f_0464_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;((void(*)(u4,r8,u4)) fn)(a1,a2,a3);}
+void _f_9464_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u4,r8,u4)) fn)(a1,a2,a3);}
 
-void _f_0465_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,r8,n8)) fn)(a1,a2,a3);}
+void _f_9465_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0466_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;((void(*)(u4,r8,r8)) fn)(a1,a2,a3);}
+void _f_9466_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u4,r8,r8)) fn)(a1,a2,a3);}
 
-void _f_0467_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u4,r8,QVariant)) fn)(a1,a2,a3);}
+void _f_9467_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u4,r8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0468_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,r8,n8)) fn)(a1,a2,a3);}
+void _f_9468_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0469_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,r8,n8)) fn)(a1,a2,a3);}
+void _f_9469_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0470_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;((void(*)(u4,QVariant,n8&)) fn)(a1,a2,a3);}
+void _f_9470_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u4,QVariant,n8&)) fn)(a1,a2,a3);}
 
-void _f_0471_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;((void(*)(u4,QVariant,u1)) fn)(a1,a2,a3);}
+void _f_9471_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u4,QVariant,u1)) fn)(a1,a2,a3);}
 
-void _f_0472_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;((void(*)(u4,QVariant,u2)) fn)(a1,a2,a3);}
+void _f_9472_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u4,QVariant,u2)) fn)(a1,a2,a3);}
 
-void _f_0473_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;((void(*)(u4,QVariant,QString)) fn)(a1,a2,a3);}
+void _f_9473_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u4,QVariant,QString)) fn)(a1,a2,a3);}
 
-void _f_0474_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;((void(*)(u4,QVariant,u4)) fn)(a1,a2,a3);}
+void _f_9474_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u4,QVariant,u4)) fn)(a1,a2,a3);}
 
-void _f_0475_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9475_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0476_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;((void(*)(u4,QVariant,r8)) fn)(a1,a2,a3);}
+void _f_9476_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u4,QVariant,r8)) fn)(a1,a2,a3);}
 
-void _f_0477_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u4,QVariant,QVariant)) fn)(a1,a2,a3);}
+void _f_9477_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u4,QVariant,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0478_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9478_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0479_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9479_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0480_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(u4,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9480_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u4,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0481_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(u4,n8,u1)) fn)(a1,a2,a3);}
+void _f_9481_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u4,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0482_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(u4,n8,u2)) fn)(a1,a2,a3);}
+void _f_9482_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u4,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0483_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(u4,n8,QString)) fn)(a1,a2,a3);}
+void _f_9483_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u4,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0484_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(u4,n8,u4)) fn)(a1,a2,a3);}
+void _f_9484_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u4,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0485_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,n8,n8)) fn)(a1,a2,a3);}
+void _f_9485_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0486_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(u4,n8,r8)) fn)(a1,a2,a3);}
+void _f_9486_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u4,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0487_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u4,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9487_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u4,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0488_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,n8,n8)) fn)(a1,a2,a3);}
+void _f_9488_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0489_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,n8,n8)) fn)(a1,a2,a3);}
+void _f_9489_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0490_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(u4,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9490_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(u4,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0491_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(u4,n8,u1)) fn)(a1,a2,a3);}
+void _f_9491_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(u4,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0492_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(u4,n8,u2)) fn)(a1,a2,a3);}
+void _f_9492_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(u4,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0493_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(u4,n8,QString)) fn)(a1,a2,a3);}
+void _f_9493_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(u4,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0494_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(u4,n8,u4)) fn)(a1,a2,a3);}
+void _f_9494_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(u4,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0495_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,n8,n8)) fn)(a1,a2,a3);}
+void _f_9495_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0496_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(u4,n8,r8)) fn)(a1,a2,a3);}
+void _f_9496_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(u4,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0497_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(u4,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9497_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(u4,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0498_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,n8,n8)) fn)(a1,a2,a3);}
+void _f_9498_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0499_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(u4,n8,n8)) fn)(a1,a2,a3);}
+void _f_9499_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(u4,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0500_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,n8&,n8&)) fn)(a1,a2,a3);}
+void _f_9500_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,n8&,n8&)) fn)(a1,a2,a3);}
 
-void _f_0501_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,n8&,u1)) fn)(a1,a2,a3);}
+void _f_9501_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,n8&,u1)) fn)(a1,a2,a3);}
 
-void _f_0502_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,n8&,u2)) fn)(a1,a2,a3);}
+void _f_9502_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,n8&,u2)) fn)(a1,a2,a3);}
 
-void _f_0503_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,n8&,QString)) fn)(a1,a2,a3);}
+void _f_9503_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,n8&,QString)) fn)(a1,a2,a3);}
 
-void _f_0504_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,n8&,u4)) fn)(a1,a2,a3);}
+void _f_9504_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,n8&,u4)) fn)(a1,a2,a3);}
 
-void _f_0505_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9505_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0506_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,n8&,r8)) fn)(a1,a2,a3);}
+void _f_9506_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,n8&,r8)) fn)(a1,a2,a3);}
 
-void _f_0507_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,n8&,QVariant)) fn)(a1,a2,a3);}
+void _f_9507_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,n8&,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0508_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9508_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0509_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9509_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0510_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,u1,n8&)) fn)(a1,a2,a3);}
+void _f_9510_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,u1,n8&)) fn)(a1,a2,a3);}
 
-void _f_0511_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,u1,u1)) fn)(a1,a2,a3);}
+void _f_9511_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,u1,u1)) fn)(a1,a2,a3);}
 
-void _f_0512_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,u1,u2)) fn)(a1,a2,a3);}
+void _f_9512_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,u1,u2)) fn)(a1,a2,a3);}
 
-void _f_0513_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,u1,QString)) fn)(a1,a2,a3);}
+void _f_9513_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,u1,QString)) fn)(a1,a2,a3);}
 
-void _f_0514_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,u1,u4)) fn)(a1,a2,a3);}
+void _f_9514_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,u1,u4)) fn)(a1,a2,a3);}
 
-void _f_0515_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u1,n8)) fn)(a1,a2,a3);}
+void _f_9515_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0516_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,u1,r8)) fn)(a1,a2,a3);}
+void _f_9516_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,u1,r8)) fn)(a1,a2,a3);}
 
-void _f_0517_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,u1,QVariant)) fn)(a1,a2,a3);}
+void _f_9517_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,u1,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0518_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u1,n8)) fn)(a1,a2,a3);}
+void _f_9518_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0519_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u1,n8)) fn)(a1,a2,a3);}
+void _f_9519_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0520_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,u2,n8&)) fn)(a1,a2,a3);}
+void _f_9520_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,u2,n8&)) fn)(a1,a2,a3);}
 
-void _f_0521_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,u2,u1)) fn)(a1,a2,a3);}
+void _f_9521_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,u2,u1)) fn)(a1,a2,a3);}
 
-void _f_0522_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,u2,u2)) fn)(a1,a2,a3);}
+void _f_9522_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,u2,u2)) fn)(a1,a2,a3);}
 
-void _f_0523_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,u2,QString)) fn)(a1,a2,a3);}
+void _f_9523_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,u2,QString)) fn)(a1,a2,a3);}
 
-void _f_0524_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,u2,u4)) fn)(a1,a2,a3);}
+void _f_9524_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,u2,u4)) fn)(a1,a2,a3);}
 
-void _f_0525_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u2,n8)) fn)(a1,a2,a3);}
+void _f_9525_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0526_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,u2,r8)) fn)(a1,a2,a3);}
+void _f_9526_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,u2,r8)) fn)(a1,a2,a3);}
 
-void _f_0527_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,u2,QVariant)) fn)(a1,a2,a3);}
+void _f_9527_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,u2,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0528_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u2,n8)) fn)(a1,a2,a3);}
+void _f_9528_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0529_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u2,n8)) fn)(a1,a2,a3);}
+void _f_9529_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0530_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,QString,n8&)) fn)(a1,a2,a3);}
+void _f_9530_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,QString,n8&)) fn)(a1,a2,a3);}
 
-void _f_0531_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,QString,u1)) fn)(a1,a2,a3);}
+void _f_9531_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,QString,u1)) fn)(a1,a2,a3);}
 
-void _f_0532_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,QString,u2)) fn)(a1,a2,a3);}
+void _f_9532_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,QString,u2)) fn)(a1,a2,a3);}
 
-void _f_0533_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,QString,QString)) fn)(a1,a2,a3);}
+void _f_9533_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,QString,QString)) fn)(a1,a2,a3);}
 
-void _f_0534_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,QString,u4)) fn)(a1,a2,a3);}
+void _f_9534_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,QString,u4)) fn)(a1,a2,a3);}
 
-void _f_0535_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,QString,n8)) fn)(a1,a2,a3);}
+void _f_9535_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0536_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,QString,r8)) fn)(a1,a2,a3);}
+void _f_9536_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,QString,r8)) fn)(a1,a2,a3);}
 
-void _f_0537_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,QString,QVariant)) fn)(a1,a2,a3);}
+void _f_9537_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,QString,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0538_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,QString,n8)) fn)(a1,a2,a3);}
+void _f_9538_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0539_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,QString,n8)) fn)(a1,a2,a3);}
+void _f_9539_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0540_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,u4,n8&)) fn)(a1,a2,a3);}
+void _f_9540_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,u4,n8&)) fn)(a1,a2,a3);}
 
-void _f_0541_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,u4,u1)) fn)(a1,a2,a3);}
+void _f_9541_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,u4,u1)) fn)(a1,a2,a3);}
 
-void _f_0542_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,u4,u2)) fn)(a1,a2,a3);}
+void _f_9542_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,u4,u2)) fn)(a1,a2,a3);}
 
-void _f_0543_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,u4,QString)) fn)(a1,a2,a3);}
+void _f_9543_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,u4,QString)) fn)(a1,a2,a3);}
 
-void _f_0544_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,u4,u4)) fn)(a1,a2,a3);}
+void _f_9544_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,u4,u4)) fn)(a1,a2,a3);}
 
-void _f_0545_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u4,n8)) fn)(a1,a2,a3);}
+void _f_9545_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0546_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,u4,r8)) fn)(a1,a2,a3);}
+void _f_9546_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,u4,r8)) fn)(a1,a2,a3);}
 
-void _f_0547_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,u4,QVariant)) fn)(a1,a2,a3);}
+void _f_9547_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,u4,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0548_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u4,n8)) fn)(a1,a2,a3);}
+void _f_9548_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0549_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u4,n8)) fn)(a1,a2,a3);}
+void _f_9549_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0550_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9550_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0551_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,n8,u1)) fn)(a1,a2,a3);}
+void _f_9551_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0552_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,n8,u2)) fn)(a1,a2,a3);}
+void _f_9552_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0553_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,n8,QString)) fn)(a1,a2,a3);}
+void _f_9553_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0554_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,n8,u4)) fn)(a1,a2,a3);}
+void _f_9554_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0555_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9555_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0556_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,n8,r8)) fn)(a1,a2,a3);}
+void _f_9556_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0557_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9557_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0558_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9558_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0559_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9559_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0560_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,r8,n8&)) fn)(a1,a2,a3);}
+void _f_9560_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,r8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0561_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,r8,u1)) fn)(a1,a2,a3);}
+void _f_9561_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,r8,u1)) fn)(a1,a2,a3);}
 
-void _f_0562_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,r8,u2)) fn)(a1,a2,a3);}
+void _f_9562_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,r8,u2)) fn)(a1,a2,a3);}
 
-void _f_0563_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,r8,QString)) fn)(a1,a2,a3);}
+void _f_9563_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,r8,QString)) fn)(a1,a2,a3);}
 
-void _f_0564_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,r8,u4)) fn)(a1,a2,a3);}
+void _f_9564_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,r8,u4)) fn)(a1,a2,a3);}
 
-void _f_0565_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,r8,n8)) fn)(a1,a2,a3);}
+void _f_9565_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0566_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,r8,r8)) fn)(a1,a2,a3);}
+void _f_9566_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,r8,r8)) fn)(a1,a2,a3);}
 
-void _f_0567_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,r8,QVariant)) fn)(a1,a2,a3);}
+void _f_9567_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,r8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0568_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,r8,n8)) fn)(a1,a2,a3);}
+void _f_9568_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0569_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,r8,n8)) fn)(a1,a2,a3);}
+void _f_9569_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0570_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,QVariant,n8&)) fn)(a1,a2,a3);}
+void _f_9570_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,QVariant,n8&)) fn)(a1,a2,a3);}
 
-void _f_0571_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,QVariant,u1)) fn)(a1,a2,a3);}
+void _f_9571_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,QVariant,u1)) fn)(a1,a2,a3);}
 
-void _f_0572_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,QVariant,u2)) fn)(a1,a2,a3);}
+void _f_9572_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,QVariant,u2)) fn)(a1,a2,a3);}
 
-void _f_0573_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,QVariant,QString)) fn)(a1,a2,a3);}
+void _f_9573_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,QVariant,QString)) fn)(a1,a2,a3);}
 
-void _f_0574_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,QVariant,u4)) fn)(a1,a2,a3);}
+void _f_9574_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,QVariant,u4)) fn)(a1,a2,a3);}
 
-void _f_0575_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9575_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0576_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,QVariant,r8)) fn)(a1,a2,a3);}
+void _f_9576_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,QVariant,r8)) fn)(a1,a2,a3);}
 
-void _f_0577_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,QVariant,QVariant)) fn)(a1,a2,a3);}
+void _f_9577_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,QVariant,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0578_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9578_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0579_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9579_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0580_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9580_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0581_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,n8,u1)) fn)(a1,a2,a3);}
+void _f_9581_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0582_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,n8,u2)) fn)(a1,a2,a3);}
+void _f_9582_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0583_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,n8,QString)) fn)(a1,a2,a3);}
+void _f_9583_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0584_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,n8,u4)) fn)(a1,a2,a3);}
+void _f_9584_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0585_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9585_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0586_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,n8,r8)) fn)(a1,a2,a3);}
+void _f_9586_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0587_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9587_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0588_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9588_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0589_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9589_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0590_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9590_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0591_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,n8,u1)) fn)(a1,a2,a3);}
+void _f_9591_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0592_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,n8,u2)) fn)(a1,a2,a3);}
+void _f_9592_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0593_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,n8,QString)) fn)(a1,a2,a3);}
+void _f_9593_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0594_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,n8,u4)) fn)(a1,a2,a3);}
+void _f_9594_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0595_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9595_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0596_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,n8,r8)) fn)(a1,a2,a3);}
+void _f_9596_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0597_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9597_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0598_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9598_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0599_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9599_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0600_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(r8,n8&,n8&)) fn)(a1,a2,a3);}
+void _f_9600_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(r8,n8&,n8&)) fn)(a1,a2,a3);}
 
-void _f_0601_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(r8,n8&,u1)) fn)(a1,a2,a3);}
+void _f_9601_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(r8,n8&,u1)) fn)(a1,a2,a3);}
 
-void _f_0602_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(r8,n8&,u2)) fn)(a1,a2,a3);}
+void _f_9602_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(r8,n8&,u2)) fn)(a1,a2,a3);}
 
-void _f_0603_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(r8,n8&,QString)) fn)(a1,a2,a3);}
+void _f_9603_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(r8,n8&,QString)) fn)(a1,a2,a3);}
 
-void _f_0604_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(r8,n8&,u4)) fn)(a1,a2,a3);}
+void _f_9604_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(r8,n8&,u4)) fn)(a1,a2,a3);}
 
-void _f_0605_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9605_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0606_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(r8,n8&,r8)) fn)(a1,a2,a3);}
+void _f_9606_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(r8,n8&,r8)) fn)(a1,a2,a3);}
 
-void _f_0607_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(r8,n8&,QVariant)) fn)(a1,a2,a3);}
+void _f_9607_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(r8,n8&,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0608_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9608_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0609_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9609_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0610_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;((void(*)(r8,u1,n8&)) fn)(a1,a2,a3);}
+void _f_9610_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(r8,u1,n8&)) fn)(a1,a2,a3);}
 
-void _f_0611_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;((void(*)(r8,u1,u1)) fn)(a1,a2,a3);}
+void _f_9611_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(r8,u1,u1)) fn)(a1,a2,a3);}
 
-void _f_0612_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;((void(*)(r8,u1,u2)) fn)(a1,a2,a3);}
+void _f_9612_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(r8,u1,u2)) fn)(a1,a2,a3);}
 
-void _f_0613_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;((void(*)(r8,u1,QString)) fn)(a1,a2,a3);}
+void _f_9613_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(r8,u1,QString)) fn)(a1,a2,a3);}
 
-void _f_0614_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;((void(*)(r8,u1,u4)) fn)(a1,a2,a3);}
+void _f_9614_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(r8,u1,u4)) fn)(a1,a2,a3);}
 
-void _f_0615_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,u1,n8)) fn)(a1,a2,a3);}
+void _f_9615_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0616_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;((void(*)(r8,u1,r8)) fn)(a1,a2,a3);}
+void _f_9616_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(r8,u1,r8)) fn)(a1,a2,a3);}
 
-void _f_0617_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(r8,u1,QVariant)) fn)(a1,a2,a3);}
+void _f_9617_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(r8,u1,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0618_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,u1,n8)) fn)(a1,a2,a3);}
+void _f_9618_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0619_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,u1,n8)) fn)(a1,a2,a3);}
+void _f_9619_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0620_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;((void(*)(r8,u2,n8&)) fn)(a1,a2,a3);}
+void _f_9620_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(r8,u2,n8&)) fn)(a1,a2,a3);}
 
-void _f_0621_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;((void(*)(r8,u2,u1)) fn)(a1,a2,a3);}
+void _f_9621_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(r8,u2,u1)) fn)(a1,a2,a3);}
 
-void _f_0622_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;((void(*)(r8,u2,u2)) fn)(a1,a2,a3);}
+void _f_9622_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(r8,u2,u2)) fn)(a1,a2,a3);}
 
-void _f_0623_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;((void(*)(r8,u2,QString)) fn)(a1,a2,a3);}
+void _f_9623_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(r8,u2,QString)) fn)(a1,a2,a3);}
 
-void _f_0624_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;((void(*)(r8,u2,u4)) fn)(a1,a2,a3);}
+void _f_9624_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(r8,u2,u4)) fn)(a1,a2,a3);}
 
-void _f_0625_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,u2,n8)) fn)(a1,a2,a3);}
+void _f_9625_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0626_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;((void(*)(r8,u2,r8)) fn)(a1,a2,a3);}
+void _f_9626_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(r8,u2,r8)) fn)(a1,a2,a3);}
 
-void _f_0627_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(r8,u2,QVariant)) fn)(a1,a2,a3);}
+void _f_9627_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(r8,u2,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0628_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,u2,n8)) fn)(a1,a2,a3);}
+void _f_9628_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0629_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,u2,n8)) fn)(a1,a2,a3);}
+void _f_9629_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0630_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;((void(*)(r8,QString,n8&)) fn)(a1,a2,a3);}
+void _f_9630_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(r8,QString,n8&)) fn)(a1,a2,a3);}
 
-void _f_0631_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;((void(*)(r8,QString,u1)) fn)(a1,a2,a3);}
+void _f_9631_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(r8,QString,u1)) fn)(a1,a2,a3);}
 
-void _f_0632_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;((void(*)(r8,QString,u2)) fn)(a1,a2,a3);}
+void _f_9632_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(r8,QString,u2)) fn)(a1,a2,a3);}
 
-void _f_0633_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;((void(*)(r8,QString,QString)) fn)(a1,a2,a3);}
+void _f_9633_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(r8,QString,QString)) fn)(a1,a2,a3);}
 
-void _f_0634_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;((void(*)(r8,QString,u4)) fn)(a1,a2,a3);}
+void _f_9634_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(r8,QString,u4)) fn)(a1,a2,a3);}
 
-void _f_0635_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,QString,n8)) fn)(a1,a2,a3);}
+void _f_9635_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0636_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;((void(*)(r8,QString,r8)) fn)(a1,a2,a3);}
+void _f_9636_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(r8,QString,r8)) fn)(a1,a2,a3);}
 
-void _f_0637_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(r8,QString,QVariant)) fn)(a1,a2,a3);}
+void _f_9637_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(r8,QString,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0638_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,QString,n8)) fn)(a1,a2,a3);}
+void _f_9638_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0639_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,QString,n8)) fn)(a1,a2,a3);}
+void _f_9639_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0640_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;((void(*)(r8,u4,n8&)) fn)(a1,a2,a3);}
+void _f_9640_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(r8,u4,n8&)) fn)(a1,a2,a3);}
 
-void _f_0641_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;((void(*)(r8,u4,u1)) fn)(a1,a2,a3);}
+void _f_9641_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(r8,u4,u1)) fn)(a1,a2,a3);}
 
-void _f_0642_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;((void(*)(r8,u4,u2)) fn)(a1,a2,a3);}
+void _f_9642_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(r8,u4,u2)) fn)(a1,a2,a3);}
 
-void _f_0643_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;((void(*)(r8,u4,QString)) fn)(a1,a2,a3);}
+void _f_9643_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(r8,u4,QString)) fn)(a1,a2,a3);}
 
-void _f_0644_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;((void(*)(r8,u4,u4)) fn)(a1,a2,a3);}
+void _f_9644_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(r8,u4,u4)) fn)(a1,a2,a3);}
 
-void _f_0645_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,u4,n8)) fn)(a1,a2,a3);}
+void _f_9645_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0646_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;((void(*)(r8,u4,r8)) fn)(a1,a2,a3);}
+void _f_9646_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(r8,u4,r8)) fn)(a1,a2,a3);}
 
-void _f_0647_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(r8,u4,QVariant)) fn)(a1,a2,a3);}
+void _f_9647_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(r8,u4,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0648_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,u4,n8)) fn)(a1,a2,a3);}
+void _f_9648_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0649_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,u4,n8)) fn)(a1,a2,a3);}
+void _f_9649_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0650_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(r8,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9650_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(r8,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0651_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(r8,n8,u1)) fn)(a1,a2,a3);}
+void _f_9651_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(r8,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0652_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(r8,n8,u2)) fn)(a1,a2,a3);}
+void _f_9652_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(r8,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0653_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(r8,n8,QString)) fn)(a1,a2,a3);}
+void _f_9653_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(r8,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0654_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(r8,n8,u4)) fn)(a1,a2,a3);}
+void _f_9654_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(r8,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0655_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9655_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0656_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(r8,n8,r8)) fn)(a1,a2,a3);}
+void _f_9656_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(r8,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0657_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(r8,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9657_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(r8,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0658_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9658_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0659_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9659_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0660_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;((void(*)(r8,r8,n8&)) fn)(a1,a2,a3);}
+void _f_9660_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(r8,r8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0661_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;((void(*)(r8,r8,u1)) fn)(a1,a2,a3);}
+void _f_9661_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(r8,r8,u1)) fn)(a1,a2,a3);}
 
-void _f_0662_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;((void(*)(r8,r8,u2)) fn)(a1,a2,a3);}
+void _f_9662_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(r8,r8,u2)) fn)(a1,a2,a3);}
 
-void _f_0663_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;((void(*)(r8,r8,QString)) fn)(a1,a2,a3);}
+void _f_9663_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(r8,r8,QString)) fn)(a1,a2,a3);}
 
-void _f_0664_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;((void(*)(r8,r8,u4)) fn)(a1,a2,a3);}
+void _f_9664_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(r8,r8,u4)) fn)(a1,a2,a3);}
 
-void _f_0665_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,r8,n8)) fn)(a1,a2,a3);}
+void _f_9665_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0666_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;((void(*)(r8,r8,r8)) fn)(a1,a2,a3);}
+void _f_9666_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(r8,r8,r8)) fn)(a1,a2,a3);}
 
-void _f_0667_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(r8,r8,QVariant)) fn)(a1,a2,a3);}
+void _f_9667_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(r8,r8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0668_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,r8,n8)) fn)(a1,a2,a3);}
+void _f_9668_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0669_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,r8,n8)) fn)(a1,a2,a3);}
+void _f_9669_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0670_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;((void(*)(r8,QVariant,n8&)) fn)(a1,a2,a3);}
+void _f_9670_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(r8,QVariant,n8&)) fn)(a1,a2,a3);}
 
-void _f_0671_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;((void(*)(r8,QVariant,u1)) fn)(a1,a2,a3);}
+void _f_9671_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(r8,QVariant,u1)) fn)(a1,a2,a3);}
 
-void _f_0672_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;((void(*)(r8,QVariant,u2)) fn)(a1,a2,a3);}
+void _f_9672_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(r8,QVariant,u2)) fn)(a1,a2,a3);}
 
-void _f_0673_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;((void(*)(r8,QVariant,QString)) fn)(a1,a2,a3);}
+void _f_9673_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(r8,QVariant,QString)) fn)(a1,a2,a3);}
 
-void _f_0674_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;((void(*)(r8,QVariant,u4)) fn)(a1,a2,a3);}
+void _f_9674_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(r8,QVariant,u4)) fn)(a1,a2,a3);}
 
-void _f_0675_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9675_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0676_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;((void(*)(r8,QVariant,r8)) fn)(a1,a2,a3);}
+void _f_9676_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(r8,QVariant,r8)) fn)(a1,a2,a3);}
 
-void _f_0677_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(r8,QVariant,QVariant)) fn)(a1,a2,a3);}
+void _f_9677_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(r8,QVariant,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0678_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9678_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0679_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9679_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0680_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(r8,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9680_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(r8,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0681_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(r8,n8,u1)) fn)(a1,a2,a3);}
+void _f_9681_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(r8,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0682_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(r8,n8,u2)) fn)(a1,a2,a3);}
+void _f_9682_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(r8,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0683_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(r8,n8,QString)) fn)(a1,a2,a3);}
+void _f_9683_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(r8,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0684_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(r8,n8,u4)) fn)(a1,a2,a3);}
+void _f_9684_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(r8,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0685_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9685_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0686_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(r8,n8,r8)) fn)(a1,a2,a3);}
+void _f_9686_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(r8,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0687_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(r8,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9687_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(r8,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0688_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9688_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0689_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9689_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0690_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(r8,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9690_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(r8,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0691_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(r8,n8,u1)) fn)(a1,a2,a3);}
+void _f_9691_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(r8,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0692_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(r8,n8,u2)) fn)(a1,a2,a3);}
+void _f_9692_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(r8,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0693_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(r8,n8,QString)) fn)(a1,a2,a3);}
+void _f_9693_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(r8,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0694_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(r8,n8,u4)) fn)(a1,a2,a3);}
+void _f_9694_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(r8,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0695_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9695_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0696_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(r8,n8,r8)) fn)(a1,a2,a3);}
+void _f_9696_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(r8,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0697_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(r8,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9697_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(r8,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0698_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9698_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0699_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(r8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9699_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(r8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0700_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(QVariant,n8&,n8&)) fn)(a1,a2,a3);}
+void _f_9700_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QVariant,n8&,n8&)) fn)(a1,a2,a3);}
 
-void _f_0701_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(QVariant,n8&,u1)) fn)(a1,a2,a3);}
+void _f_9701_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QVariant,n8&,u1)) fn)(a1,a2,a3);}
 
-void _f_0702_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(QVariant,n8&,u2)) fn)(a1,a2,a3);}
+void _f_9702_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QVariant,n8&,u2)) fn)(a1,a2,a3);}
 
-void _f_0703_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(QVariant,n8&,QString)) fn)(a1,a2,a3);}
+void _f_9703_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QVariant,n8&,QString)) fn)(a1,a2,a3);}
 
-void _f_0704_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(QVariant,n8&,u4)) fn)(a1,a2,a3);}
+void _f_9704_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QVariant,n8&,u4)) fn)(a1,a2,a3);}
 
-void _f_0705_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9705_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0706_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(QVariant,n8&,r8)) fn)(a1,a2,a3);}
+void _f_9706_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QVariant,n8&,r8)) fn)(a1,a2,a3);}
 
-void _f_0707_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QVariant,n8&,QVariant)) fn)(a1,a2,a3);}
+void _f_9707_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QVariant,n8&,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0708_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9708_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0709_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9709_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0710_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;((void(*)(QVariant,u1,n8&)) fn)(a1,a2,a3);}
+void _f_9710_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QVariant,u1,n8&)) fn)(a1,a2,a3);}
 
-void _f_0711_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;((void(*)(QVariant,u1,u1)) fn)(a1,a2,a3);}
+void _f_9711_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QVariant,u1,u1)) fn)(a1,a2,a3);}
 
-void _f_0712_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;((void(*)(QVariant,u1,u2)) fn)(a1,a2,a3);}
+void _f_9712_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QVariant,u1,u2)) fn)(a1,a2,a3);}
 
-void _f_0713_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;((void(*)(QVariant,u1,QString)) fn)(a1,a2,a3);}
+void _f_9713_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QVariant,u1,QString)) fn)(a1,a2,a3);}
 
-void _f_0714_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;((void(*)(QVariant,u1,u4)) fn)(a1,a2,a3);}
+void _f_9714_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QVariant,u1,u4)) fn)(a1,a2,a3);}
 
-void _f_0715_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,u1,n8)) fn)(a1,a2,a3);}
+void _f_9715_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0716_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;((void(*)(QVariant,u1,r8)) fn)(a1,a2,a3);}
+void _f_9716_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QVariant,u1,r8)) fn)(a1,a2,a3);}
 
-void _f_0717_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QVariant,u1,QVariant)) fn)(a1,a2,a3);}
+void _f_9717_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QVariant,u1,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0718_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,u1,n8)) fn)(a1,a2,a3);}
+void _f_9718_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0719_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,u1,n8)) fn)(a1,a2,a3);}
+void _f_9719_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0720_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;((void(*)(QVariant,u2,n8&)) fn)(a1,a2,a3);}
+void _f_9720_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QVariant,u2,n8&)) fn)(a1,a2,a3);}
 
-void _f_0721_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;((void(*)(QVariant,u2,u1)) fn)(a1,a2,a3);}
+void _f_9721_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QVariant,u2,u1)) fn)(a1,a2,a3);}
 
-void _f_0722_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;((void(*)(QVariant,u2,u2)) fn)(a1,a2,a3);}
+void _f_9722_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QVariant,u2,u2)) fn)(a1,a2,a3);}
 
-void _f_0723_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;((void(*)(QVariant,u2,QString)) fn)(a1,a2,a3);}
+void _f_9723_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QVariant,u2,QString)) fn)(a1,a2,a3);}
 
-void _f_0724_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;((void(*)(QVariant,u2,u4)) fn)(a1,a2,a3);}
+void _f_9724_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QVariant,u2,u4)) fn)(a1,a2,a3);}
 
-void _f_0725_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,u2,n8)) fn)(a1,a2,a3);}
+void _f_9725_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0726_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;((void(*)(QVariant,u2,r8)) fn)(a1,a2,a3);}
+void _f_9726_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QVariant,u2,r8)) fn)(a1,a2,a3);}
 
-void _f_0727_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QVariant,u2,QVariant)) fn)(a1,a2,a3);}
+void _f_9727_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QVariant,u2,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0728_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,u2,n8)) fn)(a1,a2,a3);}
+void _f_9728_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0729_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,u2,n8)) fn)(a1,a2,a3);}
+void _f_9729_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0730_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;((void(*)(QVariant,QString,n8&)) fn)(a1,a2,a3);}
+void _f_9730_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QVariant,QString,n8&)) fn)(a1,a2,a3);}
 
-void _f_0731_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;((void(*)(QVariant,QString,u1)) fn)(a1,a2,a3);}
+void _f_9731_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QVariant,QString,u1)) fn)(a1,a2,a3);}
 
-void _f_0732_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;((void(*)(QVariant,QString,u2)) fn)(a1,a2,a3);}
+void _f_9732_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QVariant,QString,u2)) fn)(a1,a2,a3);}
 
-void _f_0733_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;((void(*)(QVariant,QString,QString)) fn)(a1,a2,a3);}
+void _f_9733_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QVariant,QString,QString)) fn)(a1,a2,a3);}
 
-void _f_0734_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;((void(*)(QVariant,QString,u4)) fn)(a1,a2,a3);}
+void _f_9734_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QVariant,QString,u4)) fn)(a1,a2,a3);}
 
-void _f_0735_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,QString,n8)) fn)(a1,a2,a3);}
+void _f_9735_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0736_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;((void(*)(QVariant,QString,r8)) fn)(a1,a2,a3);}
+void _f_9736_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QVariant,QString,r8)) fn)(a1,a2,a3);}
 
-void _f_0737_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QVariant,QString,QVariant)) fn)(a1,a2,a3);}
+void _f_9737_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QVariant,QString,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0738_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,QString,n8)) fn)(a1,a2,a3);}
+void _f_9738_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0739_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,QString,n8)) fn)(a1,a2,a3);}
+void _f_9739_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0740_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;((void(*)(QVariant,u4,n8&)) fn)(a1,a2,a3);}
+void _f_9740_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QVariant,u4,n8&)) fn)(a1,a2,a3);}
 
-void _f_0741_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;((void(*)(QVariant,u4,u1)) fn)(a1,a2,a3);}
+void _f_9741_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QVariant,u4,u1)) fn)(a1,a2,a3);}
 
-void _f_0742_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;((void(*)(QVariant,u4,u2)) fn)(a1,a2,a3);}
+void _f_9742_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QVariant,u4,u2)) fn)(a1,a2,a3);}
 
-void _f_0743_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;((void(*)(QVariant,u4,QString)) fn)(a1,a2,a3);}
+void _f_9743_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QVariant,u4,QString)) fn)(a1,a2,a3);}
 
-void _f_0744_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;((void(*)(QVariant,u4,u4)) fn)(a1,a2,a3);}
+void _f_9744_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QVariant,u4,u4)) fn)(a1,a2,a3);}
 
-void _f_0745_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,u4,n8)) fn)(a1,a2,a3);}
+void _f_9745_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0746_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;((void(*)(QVariant,u4,r8)) fn)(a1,a2,a3);}
+void _f_9746_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QVariant,u4,r8)) fn)(a1,a2,a3);}
 
-void _f_0747_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QVariant,u4,QVariant)) fn)(a1,a2,a3);}
+void _f_9747_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QVariant,u4,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0748_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,u4,n8)) fn)(a1,a2,a3);}
+void _f_9748_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0749_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,u4,n8)) fn)(a1,a2,a3);}
+void _f_9749_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0750_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(QVariant,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9750_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QVariant,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0751_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(QVariant,n8,u1)) fn)(a1,a2,a3);}
+void _f_9751_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QVariant,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0752_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(QVariant,n8,u2)) fn)(a1,a2,a3);}
+void _f_9752_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QVariant,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0753_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(QVariant,n8,QString)) fn)(a1,a2,a3);}
+void _f_9753_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QVariant,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0754_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(QVariant,n8,u4)) fn)(a1,a2,a3);}
+void _f_9754_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QVariant,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0755_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
+void _f_9755_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0756_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(QVariant,n8,r8)) fn)(a1,a2,a3);}
+void _f_9756_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QVariant,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0757_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QVariant,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9757_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QVariant,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0758_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
+void _f_9758_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0759_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
+void _f_9759_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0760_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;((void(*)(QVariant,r8,n8&)) fn)(a1,a2,a3);}
+void _f_9760_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QVariant,r8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0761_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;((void(*)(QVariant,r8,u1)) fn)(a1,a2,a3);}
+void _f_9761_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QVariant,r8,u1)) fn)(a1,a2,a3);}
 
-void _f_0762_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;((void(*)(QVariant,r8,u2)) fn)(a1,a2,a3);}
+void _f_9762_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QVariant,r8,u2)) fn)(a1,a2,a3);}
 
-void _f_0763_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;((void(*)(QVariant,r8,QString)) fn)(a1,a2,a3);}
+void _f_9763_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QVariant,r8,QString)) fn)(a1,a2,a3);}
 
-void _f_0764_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;((void(*)(QVariant,r8,u4)) fn)(a1,a2,a3);}
+void _f_9764_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QVariant,r8,u4)) fn)(a1,a2,a3);}
 
-void _f_0765_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,r8,n8)) fn)(a1,a2,a3);}
+void _f_9765_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0766_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;((void(*)(QVariant,r8,r8)) fn)(a1,a2,a3);}
+void _f_9766_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QVariant,r8,r8)) fn)(a1,a2,a3);}
 
-void _f_0767_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QVariant,r8,QVariant)) fn)(a1,a2,a3);}
+void _f_9767_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QVariant,r8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0768_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,r8,n8)) fn)(a1,a2,a3);}
+void _f_9768_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0769_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,r8,n8)) fn)(a1,a2,a3);}
+void _f_9769_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0770_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;((void(*)(QVariant,QVariant,n8&)) fn)(a1,a2,a3);}
+void _f_9770_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QVariant,QVariant,n8&)) fn)(a1,a2,a3);}
 
-void _f_0771_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;((void(*)(QVariant,QVariant,u1)) fn)(a1,a2,a3);}
+void _f_9771_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QVariant,QVariant,u1)) fn)(a1,a2,a3);}
 
-void _f_0772_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;((void(*)(QVariant,QVariant,u2)) fn)(a1,a2,a3);}
+void _f_9772_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QVariant,QVariant,u2)) fn)(a1,a2,a3);}
 
-void _f_0773_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;((void(*)(QVariant,QVariant,QString)) fn)(a1,a2,a3);}
+void _f_9773_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QVariant,QVariant,QString)) fn)(a1,a2,a3);}
 
-void _f_0774_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;((void(*)(QVariant,QVariant,u4)) fn)(a1,a2,a3);}
+void _f_9774_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QVariant,QVariant,u4)) fn)(a1,a2,a3);}
 
-void _f_0775_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9775_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0776_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;((void(*)(QVariant,QVariant,r8)) fn)(a1,a2,a3);}
+void _f_9776_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QVariant,QVariant,r8)) fn)(a1,a2,a3);}
 
-void _f_0777_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QVariant,QVariant,QVariant)) fn)(a1,a2,a3);}
+void _f_9777_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QVariant,QVariant,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0778_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9778_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0779_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9779_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0780_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(QVariant,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9780_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QVariant,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0781_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(QVariant,n8,u1)) fn)(a1,a2,a3);}
+void _f_9781_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QVariant,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0782_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(QVariant,n8,u2)) fn)(a1,a2,a3);}
+void _f_9782_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QVariant,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0783_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(QVariant,n8,QString)) fn)(a1,a2,a3);}
+void _f_9783_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QVariant,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0784_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(QVariant,n8,u4)) fn)(a1,a2,a3);}
+void _f_9784_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QVariant,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0785_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
+void _f_9785_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0786_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(QVariant,n8,r8)) fn)(a1,a2,a3);}
+void _f_9786_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QVariant,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0787_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QVariant,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9787_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QVariant,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0788_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
+void _f_9788_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0789_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
+void _f_9789_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0790_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(QVariant,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9790_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(QVariant,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0791_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(QVariant,n8,u1)) fn)(a1,a2,a3);}
+void _f_9791_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(QVariant,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0792_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(QVariant,n8,u2)) fn)(a1,a2,a3);}
+void _f_9792_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(QVariant,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0793_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(QVariant,n8,QString)) fn)(a1,a2,a3);}
+void _f_9793_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(QVariant,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0794_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(QVariant,n8,u4)) fn)(a1,a2,a3);}
+void _f_9794_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(QVariant,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0795_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
+void _f_9795_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0796_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(QVariant,n8,r8)) fn)(a1,a2,a3);}
+void _f_9796_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(QVariant,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0797_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(QVariant,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9797_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(QVariant,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0798_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
+void _f_9798_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0799_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
+void _f_9799_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0800_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,n8&,n8&)) fn)(a1,a2,a3);}
+void _f_9800_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,n8&,n8&)) fn)(a1,a2,a3);}
 
-void _f_0801_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,n8&,u1)) fn)(a1,a2,a3);}
+void _f_9801_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,n8&,u1)) fn)(a1,a2,a3);}
 
-void _f_0802_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,n8&,u2)) fn)(a1,a2,a3);}
+void _f_9802_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,n8&,u2)) fn)(a1,a2,a3);}
 
-void _f_0803_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,n8&,QString)) fn)(a1,a2,a3);}
+void _f_9803_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,n8&,QString)) fn)(a1,a2,a3);}
 
-void _f_0804_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,n8&,u4)) fn)(a1,a2,a3);}
+void _f_9804_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,n8&,u4)) fn)(a1,a2,a3);}
 
-void _f_0805_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9805_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0806_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,n8&,r8)) fn)(a1,a2,a3);}
+void _f_9806_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,n8&,r8)) fn)(a1,a2,a3);}
 
-void _f_0807_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,n8&,QVariant)) fn)(a1,a2,a3);}
+void _f_9807_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,n8&,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0808_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9808_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0809_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9809_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0810_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,u1,n8&)) fn)(a1,a2,a3);}
+void _f_9810_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,u1,n8&)) fn)(a1,a2,a3);}
 
-void _f_0811_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,u1,u1)) fn)(a1,a2,a3);}
+void _f_9811_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,u1,u1)) fn)(a1,a2,a3);}
 
-void _f_0812_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,u1,u2)) fn)(a1,a2,a3);}
+void _f_9812_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,u1,u2)) fn)(a1,a2,a3);}
 
-void _f_0813_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,u1,QString)) fn)(a1,a2,a3);}
+void _f_9813_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,u1,QString)) fn)(a1,a2,a3);}
 
-void _f_0814_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,u1,u4)) fn)(a1,a2,a3);}
+void _f_9814_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,u1,u4)) fn)(a1,a2,a3);}
 
-void _f_0815_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u1,n8)) fn)(a1,a2,a3);}
+void _f_9815_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0816_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,u1,r8)) fn)(a1,a2,a3);}
+void _f_9816_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,u1,r8)) fn)(a1,a2,a3);}
 
-void _f_0817_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,u1,QVariant)) fn)(a1,a2,a3);}
+void _f_9817_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,u1,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0818_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u1,n8)) fn)(a1,a2,a3);}
+void _f_9818_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0819_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u1,n8)) fn)(a1,a2,a3);}
+void _f_9819_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0820_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,u2,n8&)) fn)(a1,a2,a3);}
+void _f_9820_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,u2,n8&)) fn)(a1,a2,a3);}
 
-void _f_0821_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,u2,u1)) fn)(a1,a2,a3);}
+void _f_9821_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,u2,u1)) fn)(a1,a2,a3);}
 
-void _f_0822_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,u2,u2)) fn)(a1,a2,a3);}
+void _f_9822_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,u2,u2)) fn)(a1,a2,a3);}
 
-void _f_0823_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,u2,QString)) fn)(a1,a2,a3);}
+void _f_9823_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,u2,QString)) fn)(a1,a2,a3);}
 
-void _f_0824_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,u2,u4)) fn)(a1,a2,a3);}
+void _f_9824_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,u2,u4)) fn)(a1,a2,a3);}
 
-void _f_0825_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u2,n8)) fn)(a1,a2,a3);}
+void _f_9825_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0826_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,u2,r8)) fn)(a1,a2,a3);}
+void _f_9826_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,u2,r8)) fn)(a1,a2,a3);}
 
-void _f_0827_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,u2,QVariant)) fn)(a1,a2,a3);}
+void _f_9827_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,u2,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0828_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u2,n8)) fn)(a1,a2,a3);}
+void _f_9828_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0829_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u2,n8)) fn)(a1,a2,a3);}
+void _f_9829_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0830_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,QString,n8&)) fn)(a1,a2,a3);}
+void _f_9830_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,QString,n8&)) fn)(a1,a2,a3);}
 
-void _f_0831_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,QString,u1)) fn)(a1,a2,a3);}
+void _f_9831_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,QString,u1)) fn)(a1,a2,a3);}
 
-void _f_0832_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,QString,u2)) fn)(a1,a2,a3);}
+void _f_9832_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,QString,u2)) fn)(a1,a2,a3);}
 
-void _f_0833_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,QString,QString)) fn)(a1,a2,a3);}
+void _f_9833_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,QString,QString)) fn)(a1,a2,a3);}
 
-void _f_0834_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,QString,u4)) fn)(a1,a2,a3);}
+void _f_9834_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,QString,u4)) fn)(a1,a2,a3);}
 
-void _f_0835_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,QString,n8)) fn)(a1,a2,a3);}
+void _f_9835_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0836_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,QString,r8)) fn)(a1,a2,a3);}
+void _f_9836_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,QString,r8)) fn)(a1,a2,a3);}
 
-void _f_0837_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,QString,QVariant)) fn)(a1,a2,a3);}
+void _f_9837_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,QString,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0838_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,QString,n8)) fn)(a1,a2,a3);}
+void _f_9838_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0839_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,QString,n8)) fn)(a1,a2,a3);}
+void _f_9839_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0840_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,u4,n8&)) fn)(a1,a2,a3);}
+void _f_9840_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,u4,n8&)) fn)(a1,a2,a3);}
 
-void _f_0841_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,u4,u1)) fn)(a1,a2,a3);}
+void _f_9841_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,u4,u1)) fn)(a1,a2,a3);}
 
-void _f_0842_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,u4,u2)) fn)(a1,a2,a3);}
+void _f_9842_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,u4,u2)) fn)(a1,a2,a3);}
 
-void _f_0843_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,u4,QString)) fn)(a1,a2,a3);}
+void _f_9843_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,u4,QString)) fn)(a1,a2,a3);}
 
-void _f_0844_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,u4,u4)) fn)(a1,a2,a3);}
+void _f_9844_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,u4,u4)) fn)(a1,a2,a3);}
 
-void _f_0845_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u4,n8)) fn)(a1,a2,a3);}
+void _f_9845_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0846_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,u4,r8)) fn)(a1,a2,a3);}
+void _f_9846_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,u4,r8)) fn)(a1,a2,a3);}
 
-void _f_0847_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,u4,QVariant)) fn)(a1,a2,a3);}
+void _f_9847_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,u4,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0848_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u4,n8)) fn)(a1,a2,a3);}
+void _f_9848_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0849_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u4,n8)) fn)(a1,a2,a3);}
+void _f_9849_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0850_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9850_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0851_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,n8,u1)) fn)(a1,a2,a3);}
+void _f_9851_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0852_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,n8,u2)) fn)(a1,a2,a3);}
+void _f_9852_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0853_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,n8,QString)) fn)(a1,a2,a3);}
+void _f_9853_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0854_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,n8,u4)) fn)(a1,a2,a3);}
+void _f_9854_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0855_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9855_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0856_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,n8,r8)) fn)(a1,a2,a3);}
+void _f_9856_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0857_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9857_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0858_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9858_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0859_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9859_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0860_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,r8,n8&)) fn)(a1,a2,a3);}
+void _f_9860_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,r8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0861_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,r8,u1)) fn)(a1,a2,a3);}
+void _f_9861_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,r8,u1)) fn)(a1,a2,a3);}
 
-void _f_0862_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,r8,u2)) fn)(a1,a2,a3);}
+void _f_9862_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,r8,u2)) fn)(a1,a2,a3);}
 
-void _f_0863_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,r8,QString)) fn)(a1,a2,a3);}
+void _f_9863_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,r8,QString)) fn)(a1,a2,a3);}
 
-void _f_0864_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,r8,u4)) fn)(a1,a2,a3);}
+void _f_9864_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,r8,u4)) fn)(a1,a2,a3);}
 
-void _f_0865_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,r8,n8)) fn)(a1,a2,a3);}
+void _f_9865_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0866_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,r8,r8)) fn)(a1,a2,a3);}
+void _f_9866_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,r8,r8)) fn)(a1,a2,a3);}
 
-void _f_0867_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,r8,QVariant)) fn)(a1,a2,a3);}
+void _f_9867_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,r8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0868_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,r8,n8)) fn)(a1,a2,a3);}
+void _f_9868_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0869_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,r8,n8)) fn)(a1,a2,a3);}
+void _f_9869_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0870_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,QVariant,n8&)) fn)(a1,a2,a3);}
+void _f_9870_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,QVariant,n8&)) fn)(a1,a2,a3);}
 
-void _f_0871_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,QVariant,u1)) fn)(a1,a2,a3);}
+void _f_9871_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,QVariant,u1)) fn)(a1,a2,a3);}
 
-void _f_0872_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,QVariant,u2)) fn)(a1,a2,a3);}
+void _f_9872_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,QVariant,u2)) fn)(a1,a2,a3);}
 
-void _f_0873_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,QVariant,QString)) fn)(a1,a2,a3);}
+void _f_9873_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,QVariant,QString)) fn)(a1,a2,a3);}
 
-void _f_0874_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,QVariant,u4)) fn)(a1,a2,a3);}
+void _f_9874_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,QVariant,u4)) fn)(a1,a2,a3);}
 
-void _f_0875_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9875_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0876_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,QVariant,r8)) fn)(a1,a2,a3);}
+void _f_9876_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,QVariant,r8)) fn)(a1,a2,a3);}
 
-void _f_0877_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,QVariant,QVariant)) fn)(a1,a2,a3);}
+void _f_9877_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,QVariant,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0878_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9878_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0879_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9879_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0880_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9880_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0881_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,n8,u1)) fn)(a1,a2,a3);}
+void _f_9881_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0882_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,n8,u2)) fn)(a1,a2,a3);}
+void _f_9882_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0883_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,n8,QString)) fn)(a1,a2,a3);}
+void _f_9883_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0884_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,n8,u4)) fn)(a1,a2,a3);}
+void _f_9884_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0885_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9885_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0886_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,n8,r8)) fn)(a1,a2,a3);}
+void _f_9886_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0887_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9887_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0888_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9888_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0889_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9889_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0890_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9890_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0891_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,n8,u1)) fn)(a1,a2,a3);}
+void _f_9891_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0892_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,n8,u2)) fn)(a1,a2,a3);}
+void _f_9892_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0893_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,n8,QString)) fn)(a1,a2,a3);}
+void _f_9893_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0894_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,n8,u4)) fn)(a1,a2,a3);}
+void _f_9894_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0895_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9895_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0896_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,n8,r8)) fn)(a1,a2,a3);}
+void _f_9896_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0897_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9897_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0898_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9898_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0899_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9899_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0900_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,n8&,n8&)) fn)(a1,a2,a3);}
+void _f_9900_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,n8&,n8&)) fn)(a1,a2,a3);}
 
-void _f_0901_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,n8&,u1)) fn)(a1,a2,a3);}
+void _f_9901_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,n8&,u1)) fn)(a1,a2,a3);}
 
-void _f_0902_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,n8&,u2)) fn)(a1,a2,a3);}
+void _f_9902_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,n8&,u2)) fn)(a1,a2,a3);}
 
-void _f_0903_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,n8&,QString)) fn)(a1,a2,a3);}
+void _f_9903_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,n8&,QString)) fn)(a1,a2,a3);}
 
-void _f_0904_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,n8&,u4)) fn)(a1,a2,a3);}
+void _f_9904_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,n8&,u4)) fn)(a1,a2,a3);}
 
-void _f_0905_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9905_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0906_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,n8&,r8)) fn)(a1,a2,a3);}
+void _f_9906_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,n8&,r8)) fn)(a1,a2,a3);}
 
-void _f_0907_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,n8&,QVariant)) fn)(a1,a2,a3);}
+void _f_9907_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,n8&,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0908_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9908_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0909_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
+void _f_9909_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
 
-void _f_0910_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,u1,n8&)) fn)(a1,a2,a3);}
+void _f_9910_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,u1,n8&)) fn)(a1,a2,a3);}
 
-void _f_0911_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,u1,u1)) fn)(a1,a2,a3);}
+void _f_9911_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,u1,u1)) fn)(a1,a2,a3);}
 
-void _f_0912_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,u1,u2)) fn)(a1,a2,a3);}
+void _f_9912_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,u1,u2)) fn)(a1,a2,a3);}
 
-void _f_0913_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,u1,QString)) fn)(a1,a2,a3);}
+void _f_9913_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,u1,QString)) fn)(a1,a2,a3);}
 
-void _f_0914_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,u1,u4)) fn)(a1,a2,a3);}
+void _f_9914_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,u1,u4)) fn)(a1,a2,a3);}
 
-void _f_0915_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u1,n8)) fn)(a1,a2,a3);}
+void _f_9915_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0916_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,u1,r8)) fn)(a1,a2,a3);}
+void _f_9916_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,u1,r8)) fn)(a1,a2,a3);}
 
-void _f_0917_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,u1,QVariant)) fn)(a1,a2,a3);}
+void _f_9917_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,u1,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0918_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u1,n8)) fn)(a1,a2,a3);}
+void _f_9918_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0919_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u1,n8)) fn)(a1,a2,a3);}
+void _f_9919_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u1,n8)) fn)(a1,a2,a3);}
 
-void _f_0920_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,u2,n8&)) fn)(a1,a2,a3);}
+void _f_9920_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,u2,n8&)) fn)(a1,a2,a3);}
 
-void _f_0921_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,u2,u1)) fn)(a1,a2,a3);}
+void _f_9921_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,u2,u1)) fn)(a1,a2,a3);}
 
-void _f_0922_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,u2,u2)) fn)(a1,a2,a3);}
+void _f_9922_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,u2,u2)) fn)(a1,a2,a3);}
 
-void _f_0923_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,u2,QString)) fn)(a1,a2,a3);}
+void _f_9923_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,u2,QString)) fn)(a1,a2,a3);}
 
-void _f_0924_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,u2,u4)) fn)(a1,a2,a3);}
+void _f_9924_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,u2,u4)) fn)(a1,a2,a3);}
 
-void _f_0925_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u2,n8)) fn)(a1,a2,a3);}
+void _f_9925_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0926_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,u2,r8)) fn)(a1,a2,a3);}
+void _f_9926_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,u2,r8)) fn)(a1,a2,a3);}
 
-void _f_0927_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,u2,QVariant)) fn)(a1,a2,a3);}
+void _f_9927_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,u2,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0928_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u2,n8)) fn)(a1,a2,a3);}
+void _f_9928_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0929_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u2,n8)) fn)(a1,a2,a3);}
+void _f_9929_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u2,n8)) fn)(a1,a2,a3);}
 
-void _f_0930_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,QString,n8&)) fn)(a1,a2,a3);}
+void _f_9930_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,QString,n8&)) fn)(a1,a2,a3);}
 
-void _f_0931_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,QString,u1)) fn)(a1,a2,a3);}
+void _f_9931_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,QString,u1)) fn)(a1,a2,a3);}
 
-void _f_0932_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,QString,u2)) fn)(a1,a2,a3);}
+void _f_9932_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,QString,u2)) fn)(a1,a2,a3);}
 
-void _f_0933_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,QString,QString)) fn)(a1,a2,a3);}
+void _f_9933_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,QString,QString)) fn)(a1,a2,a3);}
 
-void _f_0934_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,QString,u4)) fn)(a1,a2,a3);}
+void _f_9934_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,QString,u4)) fn)(a1,a2,a3);}
 
-void _f_0935_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,QString,n8)) fn)(a1,a2,a3);}
+void _f_9935_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0936_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,QString,r8)) fn)(a1,a2,a3);}
+void _f_9936_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,QString,r8)) fn)(a1,a2,a3);}
 
-void _f_0937_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,QString,QVariant)) fn)(a1,a2,a3);}
+void _f_9937_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,QString,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0938_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,QString,n8)) fn)(a1,a2,a3);}
+void _f_9938_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0939_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,QString,n8)) fn)(a1,a2,a3);}
+void _f_9939_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,QString,n8)) fn)(a1,a2,a3);}
 
-void _f_0940_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,u4,n8&)) fn)(a1,a2,a3);}
+void _f_9940_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,u4,n8&)) fn)(a1,a2,a3);}
 
-void _f_0941_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,u4,u1)) fn)(a1,a2,a3);}
+void _f_9941_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,u4,u1)) fn)(a1,a2,a3);}
 
-void _f_0942_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,u4,u2)) fn)(a1,a2,a3);}
+void _f_9942_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,u4,u2)) fn)(a1,a2,a3);}
 
-void _f_0943_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,u4,QString)) fn)(a1,a2,a3);}
+void _f_9943_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,u4,QString)) fn)(a1,a2,a3);}
 
-void _f_0944_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,u4,u4)) fn)(a1,a2,a3);}
+void _f_9944_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,u4,u4)) fn)(a1,a2,a3);}
 
-void _f_0945_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u4,n8)) fn)(a1,a2,a3);}
+void _f_9945_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0946_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,u4,r8)) fn)(a1,a2,a3);}
+void _f_9946_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,u4,r8)) fn)(a1,a2,a3);}
 
-void _f_0947_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,u4,QVariant)) fn)(a1,a2,a3);}
+void _f_9947_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,u4,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0948_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u4,n8)) fn)(a1,a2,a3);}
+void _f_9948_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0949_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,u4,n8)) fn)(a1,a2,a3);}
+void _f_9949_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,u4,n8)) fn)(a1,a2,a3);}
 
-void _f_0950_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9950_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0951_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,n8,u1)) fn)(a1,a2,a3);}
+void _f_9951_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0952_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,n8,u2)) fn)(a1,a2,a3);}
+void _f_9952_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0953_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,n8,QString)) fn)(a1,a2,a3);}
+void _f_9953_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0954_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,n8,u4)) fn)(a1,a2,a3);}
+void _f_9954_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0955_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9955_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0956_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,n8,r8)) fn)(a1,a2,a3);}
+void _f_9956_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0957_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9957_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0958_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9958_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0959_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9959_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0960_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,r8,n8&)) fn)(a1,a2,a3);}
+void _f_9960_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,r8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0961_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,r8,u1)) fn)(a1,a2,a3);}
+void _f_9961_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,r8,u1)) fn)(a1,a2,a3);}
 
-void _f_0962_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,r8,u2)) fn)(a1,a2,a3);}
+void _f_9962_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,r8,u2)) fn)(a1,a2,a3);}
 
-void _f_0963_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,r8,QString)) fn)(a1,a2,a3);}
+void _f_9963_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,r8,QString)) fn)(a1,a2,a3);}
 
-void _f_0964_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,r8,u4)) fn)(a1,a2,a3);}
+void _f_9964_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,r8,u4)) fn)(a1,a2,a3);}
 
-void _f_0965_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,r8,n8)) fn)(a1,a2,a3);}
+void _f_9965_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0966_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,r8,r8)) fn)(a1,a2,a3);}
+void _f_9966_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,r8,r8)) fn)(a1,a2,a3);}
 
-void _f_0967_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,r8,QVariant)) fn)(a1,a2,a3);}
+void _f_9967_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,r8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0968_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,r8,n8)) fn)(a1,a2,a3);}
+void _f_9968_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0969_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,r8,n8)) fn)(a1,a2,a3);}
+void _f_9969_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,r8,n8)) fn)(a1,a2,a3);}
 
-void _f_0970_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,QVariant,n8&)) fn)(a1,a2,a3);}
+void _f_9970_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,QVariant,n8&)) fn)(a1,a2,a3);}
 
-void _f_0971_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,QVariant,u1)) fn)(a1,a2,a3);}
+void _f_9971_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,QVariant,u1)) fn)(a1,a2,a3);}
 
-void _f_0972_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,QVariant,u2)) fn)(a1,a2,a3);}
+void _f_9972_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,QVariant,u2)) fn)(a1,a2,a3);}
 
-void _f_0973_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,QVariant,QString)) fn)(a1,a2,a3);}
+void _f_9973_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,QVariant,QString)) fn)(a1,a2,a3);}
 
-void _f_0974_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,QVariant,u4)) fn)(a1,a2,a3);}
+void _f_9974_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,QVariant,u4)) fn)(a1,a2,a3);}
 
-void _f_0975_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9975_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0976_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,QVariant,r8)) fn)(a1,a2,a3);}
+void _f_9976_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,QVariant,r8)) fn)(a1,a2,a3);}
 
-void _f_0977_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,QVariant,QVariant)) fn)(a1,a2,a3);}
+void _f_9977_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,QVariant,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0978_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9978_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0979_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
+void _f_9979_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
 
-void _f_0980_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9980_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0981_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,n8,u1)) fn)(a1,a2,a3);}
+void _f_9981_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0982_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,n8,u2)) fn)(a1,a2,a3);}
+void _f_9982_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0983_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,n8,QString)) fn)(a1,a2,a3);}
+void _f_9983_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0984_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,n8,u4)) fn)(a1,a2,a3);}
+void _f_9984_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0985_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9985_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0986_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,n8,r8)) fn)(a1,a2,a3);}
+void _f_9986_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0987_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9987_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0988_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9988_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0989_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9989_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0990_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;((void(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
+void _f_9990_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
 
-void _f_0991_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;((void(*)(n8,n8,u1)) fn)(a1,a2,a3);}
+void _f_9991_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((void*(*)(n8,n8,u1)) fn)(a1,a2,a3);}
 
-void _f_0992_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;((void(*)(n8,n8,u2)) fn)(a1,a2,a3);}
+void _f_9992_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((void*(*)(n8,n8,u2)) fn)(a1,a2,a3);}
 
-void _f_0993_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;((void(*)(n8,n8,QString)) fn)(a1,a2,a3);}
+void _f_9993_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((void*(*)(n8,n8,QString)) fn)(a1,a2,a3);}
 
-void _f_0994_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;((void(*)(n8,n8,u4)) fn)(a1,a2,a3);}
+void _f_9994_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((void*(*)(n8,n8,u4)) fn)(a1,a2,a3);}
 
-void _f_0995_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9995_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0996_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;((void(*)(n8,n8,r8)) fn)(a1,a2,a3);}
+void _f_9996_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((void*(*)(n8,n8,r8)) fn)(a1,a2,a3);}
 
-void _f_0997_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;((void(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
+void _f_9997_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((void*(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
 
-void _f_0998_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9998_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
-void _f_0999_(n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;((void(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+void _f_9999_(void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r9_type fn){
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((void*(*)(n8,n8,n8)) fn)(a1,a2,a3);}
 
