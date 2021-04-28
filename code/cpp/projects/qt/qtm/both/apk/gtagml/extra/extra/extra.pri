@@ -48,6 +48,10 @@ HEADERS += \
   $$SRC_DIR/test-class.h \
   $$SRC_DIR/unified-runtime-object.h \
   $$SRC_DIR/metatype-object.h \
+  $$SRC_DIR/chasm/chasm-runtime.h \
+  $$SRC_DIR/chasm/chasm-channel.h \
+  $$SRC_DIR/chasm/chasm-call-package.h \
+  $$SRC_DIR/chasm/chasm-carrier.h \
 
 
 SOURCES += \
@@ -55,6 +59,10 @@ SOURCES += \
   $$SRC_DIR/test-class.cpp \
   $$SRC_DIR/unified-runtime-object.cpp \
   $$SRC_DIR/metatype-object.cpp \
+  $$SRC_DIR/chasm/chasm-runtime.cpp \
+  $$SRC_DIR/chasm/chasm-channel.cpp \
+  $$SRC_DIR/chasm/chasm-call-package.cpp \
+  $$SRC_DIR/chasm/chasm-carrier.cpp \
   $$SRC_DIR/main.cpp \
 
 

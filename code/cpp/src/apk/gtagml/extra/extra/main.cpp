@@ -18,8 +18,9 @@
 #include "textio.h"
 USING_KANS(TextIO)
 
-#include "./dev/consoles/fns/run-s0_3_r0.cpp"
-//#include "./dev/consoles/fns/run-s0_3_r4.cpp"
+#include "chasm/chasm-runtime.h"
+#include "chasm/chasm-call-package.h"
+
 
 
 typedef void (*_temp_minimal_fn_s0_r0_type)();
@@ -48,6 +49,15 @@ void testqs(QString arg1, u4 arg2, u1 arg3)
  qDebug() << "arg2 = " << arg2;
  qDebug() << "arg3 = " << arg3;
 }
+
+QString testqsr(QString arg1, u4 arg2, u1 arg3)
+{
+ qDebug() << "arg1 = " << arg1;
+ qDebug() << "arg2 = " << arg2;
+ qDebug() << "arg3 = " << arg3;
+ return QString("%1, %2, %3").arg(arg1).arg(arg2).arg(arg3);
+}
+
 
 void testf(QString& arg1, u4 arg2, u1 arg3)
 {
@@ -194,10 +204,37 @@ void _temp_run(u4 code, _temp_minimal_fn_s0_r0_type fn, n8 a1, n8 a2, n8 a3)
  f(a1, a2, a3, fn);
 }
 
-//#define run_s0_3_r0(a,b,c,d,e)
+#define run_s0_3_r0(a,b,c,d,e)
 
+int main(int argc, char *argv[])
+{
+ Chasm_Runtime* csr = new Chasm_Runtime;
+ csr->init_no_file_session();
+ Chasm_Call_Package* ccp = csr->new_call_package();
+ ccp->add_new_channel("lambda");
 
-int main2(int argc, char *argv[])
+ QString a11 = "Test";
+ u4 a21 = 33;
+ u1 a31 = 11;
+
+ Chasm_Carrier cc1 = csr->gen_carrier();
+ cc1.set_value((n8) &a11);
+
+ Chasm_Carrier cc2 = csr->gen_carrier();
+ cc1.set_value((n8) &a21);
+
+ Chasm_Carrier cc3 = csr->gen_carrier();
+ cc1.set_value((n8) &a31);
+
+ ccp->add_carrier(cc1);
+ ccp->add_carrier(cc2);
+ ccp->add_carrier(cc3);
+
+ csr->evaluate(ccp, 10341, (minimal_fn_s0_r0_type) &testqs);
+ //ccp->add_carrier()
+}
+
+int main3(int argc, char *argv[])
 {
  QString a11 = "Test";
  u4 a21 = 33;
@@ -217,6 +254,13 @@ int main2(int argc, char *argv[])
  run_s0_3_r0(10041, (minimal_fn_s0_r0_type) &testf, (n8) &a11, (n8) &a21, (n8) &a31);
  qDebug() << "a11 = " << a11;
  qDebug() << "\n====\n\n";
+
+
+ QString test_res;
+ //run_s0_3_r3(30341, (minimal_fn_s0_r3_type) &testqsr, test_res, (n8) &a11, (n8) &a21, (n8) &a31);
+ qDebug() << "test_res = " << test_res;
+ qDebug() << "\n====\n\n";
+
 
  s1 a12 = -4;
  u4 a22 = 10033;
@@ -337,7 +381,7 @@ QString generate_function_code(u1 retc, u2 key, QString sc)
  return result;
 }
 
-int main(int argc, char *argv[])
+int main2(int argc, char *argv[])
 {
  /*
  0 = ref
