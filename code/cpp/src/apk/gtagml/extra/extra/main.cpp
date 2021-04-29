@@ -217,20 +217,28 @@ int main(int argc, char *argv[])
  u4 a21 = 33;
  u1 a31 = 11;
 
- Chasm_Carrier cc1 = csr->gen_carrier();
- cc1.set_value((n8) &a11);
+ Chasm_Carrier cc1 = csr->gen_carrier<QString>(&a11);
+ Chasm_Carrier cc2 = csr->gen_carrier<u4>(&a21);
+ Chasm_Carrier cc3 = csr->gen_carrier<u1>(&a31);
 
- Chasm_Carrier cc2 = csr->gen_carrier();
- cc1.set_value((n8) &a21);
+ ccp->add_carriers({cc1,cc2,cc3});
 
- Chasm_Carrier cc3 = csr->gen_carrier();
- cc1.set_value((n8) &a31);
+ ccp->add_new_channel("result");
 
- ccp->add_carrier(cc1);
- ccp->add_carrier(cc2);
- ccp->add_carrier(cc3);
+// QString QString_result;
+ Chasm_Carrier cc0 = csr->gen_carrier<QString>(csr->Result._QString);
 
- csr->evaluate(ccp, 10341, (minimal_fn_s0_r0_type) &testqs);
+ ccp->add_carrier(cc0);
+// ccp->add_carrier(cc3);
+
+// csr->evaluate(ccp, 10341, (minimal_fn_s0_r0_type) &testqs);
+
+ //?
+ csr->evaluate(ccp, 13341, (minimal_fn_s0_r3_type) &testqsr);
+
+ QString result = cc0.value_as<QString>();
+ qDebug() << "r = " << result;
+
  //ccp->add_carrier()
 }
 
@@ -320,7 +328,7 @@ int main3(int argc, char *argv[])
  return 0;
 }
 
-QStringList returns{{"void", "u1", "u2", "QString", "u4", "void**", "r8", "QVariant", "n8", "void*"}};
+QStringList returns{{"void", "u1", "u2", "QString", "u4", "QByteArray", "r8", "QVariant", "n8", "void*"}};
 
 QString generate_function_code(u1 retc, u2 key, QString sc)
 {
@@ -349,7 +357,7 @@ QString generate_function_code(u1 retc, u2 key, QString sc)
    break;
 
    // // for now treat 5 and 9 like a n8
-  case 5: case 9: akey = 8; // fallthrough
+  case 9: akey = 8; // fallthrough
   case 1: case 2: case 4: case 8:
    types[i] = QString("%1%2").arg(akey == 8?'n':'u').arg(akey);
    result += QString("%1 a%2=*(%1*)arg%2;").arg(types[i]).arg(i);
@@ -358,6 +366,11 @@ QString generate_function_code(u1 retc, u2 key, QString sc)
   case 3: // QString
    types[i] = "QString";
    result += QString("QString a%1=*(QString*)arg%1;").arg(i);
+   break;
+
+  case 5: // QByteArray
+   types[i] = "QByteArray";
+   result += QString("QByteArray a%1=*(QByteArray*)arg%1;").arg(i);
    break;
 
   case 6: // double
@@ -389,7 +402,7 @@ int main2(int argc, char *argv[])
  2 = u2
  3 = QString
  4 = u4
- 5 = call/expr
+ 5 = QByteArray
  6 = dbl
  7 = QVariant
  8 = n8
@@ -410,9 +423,17 @@ int main2(int argc, char *argv[])
   QString fn_array_rX_text;
   QString s0_3_rX_text = QString(R"(
 
+
+#ifndef SEEN_DEFS_S0_3_R%2
+#define SEEN_DEFS_S0_3_R%2
+
 typedef %1(*minimal_fn_s0_r%2_type)();
 typedef void(*run_s0_3_r%2_type)(%3n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r%2_type fn);
 typedef run_s0_3_r%2_type s0_3_r%2_dispatch_array [1000];
+
+#endif //  SEEN_DEFS_S0_3_R%2
+
+#ifdef FULL_INCLUDE
 
 #include "fn-array-s0_3_r%2.cpp"
 
@@ -436,6 +457,8 @@ void run_s0_3_r%1(u4 code, minimal_fn_s0_r%1_type fn, %2n8 a1, n8 a2, n8 a3)
  run_s0_3_r%1_type f = (*dispatch_array)[code];
  f(%3a1, a2, a3, fn);
 }
+
+#endif //def FULL_INCLUDE
 )").arg(i).arg(retv).arg(rsym);
 
   save_file(s0_3_rX_file, s0_3_rX_text);

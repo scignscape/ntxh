@@ -21,3 +21,10 @@ Chasm_Channel::Chasm_Channel(QString name)
 
 }
 
+Chasm_Carrier Chasm_Channel::first_carrier()
+{
+ if(carriers_.isEmpty())
+  return {};
+
+ return carriers_.first();
+}

@@ -1,8 +1,16 @@
 
 
+
+#ifndef SEEN_DEFS_S0_3_R4
+#define SEEN_DEFS_S0_3_R4
+
 typedef u4(*minimal_fn_s0_r4_type)();
 typedef void(*run_s0_3_r4_type)(u4& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r4_type fn);
 typedef run_s0_3_r4_type s0_3_r4_dispatch_array [1000];
+
+#endif //  SEEN_DEFS_S0_3_R4
+
+#ifdef FULL_INCLUDE
 
 #include "fn-array-s0_3_r4.cpp"
 
@@ -1019,3 +1027,5 @@ void run_s0_3_r4(u4 code, minimal_fn_s0_r4_type fn, u4& retv, n8 a1, n8 a2, n8 a
  run_s0_3_r4_type f = (*dispatch_array)[code];
  f(retv, a1, a2, a3, fn);
 }
+
+#endif //def FULL_INCLUDE

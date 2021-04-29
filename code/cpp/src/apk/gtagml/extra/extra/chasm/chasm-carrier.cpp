@@ -19,7 +19,30 @@
 
 
 Chasm_Carrier::Chasm_Carrier()
+  :  key_(), value_(0)
 {
 
 }
+
+Chasm_Carrier& Chasm_Carrier::take_value(void* pv)
+{
+ u1 tf = key_.type_flag();
+
+ switch (tf)
+ {
+ case 0: break; //
+
+ case 1: set_value( (n8) *(u1*)pv ); break;
+ case 2: set_value( (n8) *(u2*)pv ); break;
+ case 3: set_value( (n8) new QString(*(QString*)pv) ); break;
+ case 4: set_value( (n8) *(u4*)pv ); break;
+
+ default: break;
+
+ }
+
+ return *this;
+
+}
+
 

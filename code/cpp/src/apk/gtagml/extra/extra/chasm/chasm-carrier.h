@@ -26,7 +26,8 @@ struct trisym
 {
  n8 code;
 
- trisym() : code(0) {}
+ // //  15 type flag = unknown
+ trisym() : code(15) {}
 
  void set_fcode(u4 val)
  {
@@ -52,15 +53,33 @@ struct trisym
 
  void set_ccode(u2 val)
  {
-  // // clear lowest 2 bytes
-  code ^= 0xFFFF;
+  // // reserve lowest 4 val bits
+  val <<= 4;
+
+  // // clear lowest 2 bytes except lowest 4 bits
+  code &= ~((n8)0xFFF0);
 
   code |= val;
  }
 
+ void set_type_flag(u1 tf)
+ {
+  // // only lowest 4 bits
+  tf &= 0x0F;
+
+  // // clear lowest 4 bits
+  code &= ~((n8)0x0F);
+
+  code |= tf;
+ }
+
+
  u4 fcode() { return (code & 0xFFFFFF0000000000) >> 40; }
  s4 scode() { return (code & 0x000000FFFFFF0000) >> 24; }
- u4 ccode() { return (code & 0xFFFF); }
+ u4 ccode() { return (code & 0xFFF0) >> 4; }
+
+ u1 type_flag() { return (code & 0x0F); }
+
 };
 
 
@@ -78,7 +97,30 @@ public:
  ACCESSORS(trisym ,key)
  ACCESSORS(n8 ,value)
 
-// void test_cuo();
+ void set_type_flag(u1 tf)
+ {
+  key_.set_type_flag(tf);
+ }
+
+ Chasm_Carrier& take_value(void* pv);
+
+ n8 pasn8()
+ {
+  u1 tf = key_.type_flag();
+  if(tf == 3)
+  {
+   QString* qs = (QString*) value_;
+   return value_;
+  }
+  return (n8) &value_;
+ }
+
+ template<typename VALUE_Type>
+ VALUE_Type& value_as()
+ {
+  return *(VALUE_Type*)value_;
+ }
+ // void test_cuo();
 
 // void test_method(QString path, u4 val1, u4 val2);
 

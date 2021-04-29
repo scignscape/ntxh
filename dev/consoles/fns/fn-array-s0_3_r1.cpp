@@ -14,7 +14,7 @@ void _f_1004_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8&,n8&,u4)) fn)(a1,a2,a3);}
 
 void _f_1005_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8&,n8&,n8)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8&,n8&,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1006_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8&,n8&,r8)) fn)(a1,a2,a3);}
@@ -44,7 +44,7 @@ void _f_1014_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8&,u1,u4)) fn)(a1,a2,a3);}
 
 void _f_1015_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8&,u1,n8)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8&,u1,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1016_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8&,u1,r8)) fn)(a1,a2,a3);}
@@ -74,7 +74,7 @@ void _f_1024_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8&,u2,u4)) fn)(a1,a2,a3);}
 
 void _f_1025_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8&,u2,n8)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8&,u2,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1026_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8&,u2,r8)) fn)(a1,a2,a3);}
@@ -104,7 +104,7 @@ void _f_1034_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8&,QString,u4)) fn)(a1,a2,a3);}
 
 void _f_1035_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8&,QString,n8)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8&,QString,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1036_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8&,QString,r8)) fn)(a1,a2,a3);}
@@ -134,7 +134,7 @@ void _f_1044_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8&,u4,u4)) fn)(a1,a2,a3);}
 
 void _f_1045_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8&,u4,n8)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8&,u4,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1046_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8&,u4,r8)) fn)(a1,a2,a3);}
@@ -149,34 +149,34 @@ void _f_1049_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8&,u4,n8)) fn)(a1,a2,a3);}
 
 void _f_1050_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8&,n8,n8&)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8&,QByteArray,n8&)) fn)(a1,a2,a3);}
 
 void _f_1051_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(n8&,n8,u1)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(n8&,QByteArray,u1)) fn)(a1,a2,a3);}
 
 void _f_1052_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(n8&,n8,u2)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(n8&,QByteArray,u2)) fn)(a1,a2,a3);}
 
 void _f_1053_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(n8&,n8,QString)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(n8&,QByteArray,QString)) fn)(a1,a2,a3);}
 
 void _f_1054_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8&,n8,u4)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8&,QByteArray,u4)) fn)(a1,a2,a3);}
 
 void _f_1055_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8&,QByteArray,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1056_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8&,n8,r8)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8&,QByteArray,r8)) fn)(a1,a2,a3);}
 
 void _f_1057_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(n8&,n8,QVariant)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(n8&,QByteArray,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1058_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8&,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1059_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8&,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1060_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8&,r8,n8&)) fn)(a1,a2,a3);}
@@ -194,7 +194,7 @@ void _f_1064_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8&,r8,u4)) fn)(a1,a2,a3);}
 
 void _f_1065_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8&,r8,n8)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8&,r8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1066_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8&,r8,r8)) fn)(a1,a2,a3);}
@@ -224,7 +224,7 @@ void _f_1074_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8&,QVariant,u4)) fn)(a1,a2,a3);}
 
 void _f_1075_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8&,QVariant,n8)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8&,QVariant,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1076_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8&,QVariant,r8)) fn)(a1,a2,a3);}
@@ -254,7 +254,7 @@ void _f_1084_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8&,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1085_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8&,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1086_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8&,n8,r8)) fn)(a1,a2,a3);}
@@ -284,7 +284,7 @@ void _f_1094_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8&,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1095_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8&,n8,n8)) fn)(a1,a2,a3);}
+  n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8&,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1096_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8& a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8&,n8,r8)) fn)(a1,a2,a3);}
@@ -314,7 +314,7 @@ void _f_1104_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u1,n8&,u4)) fn)(a1,a2,a3);}
 
 void _f_1105_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u1,n8&,n8)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u1,n8&,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1106_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u1,n8&,r8)) fn)(a1,a2,a3);}
@@ -344,7 +344,7 @@ void _f_1114_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u1,u1,u4)) fn)(a1,a2,a3);}
 
 void _f_1115_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u1,u1,n8)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u1,u1,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1116_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u1,u1,r8)) fn)(a1,a2,a3);}
@@ -374,7 +374,7 @@ void _f_1124_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u1,u2,u4)) fn)(a1,a2,a3);}
 
 void _f_1125_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u1,u2,n8)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u1,u2,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1126_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u1,u2,r8)) fn)(a1,a2,a3);}
@@ -404,7 +404,7 @@ void _f_1134_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u1,QString,u4)) fn)(a1,a2,a3);}
 
 void _f_1135_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u1,QString,n8)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u1,QString,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1136_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u1,QString,r8)) fn)(a1,a2,a3);}
@@ -434,7 +434,7 @@ void _f_1144_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u1,u4,u4)) fn)(a1,a2,a3);}
 
 void _f_1145_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u1,u4,n8)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u1,u4,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1146_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u1,u4,r8)) fn)(a1,a2,a3);}
@@ -449,34 +449,34 @@ void _f_1149_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u1,u4,n8)) fn)(a1,a2,a3);}
 
 void _f_1150_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(u1,n8,n8&)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;QByteArray a2=*(QByteArray*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(u1,QByteArray,n8&)) fn)(a1,a2,a3);}
 
 void _f_1151_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(u1,n8,u1)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;QByteArray a2=*(QByteArray*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(u1,QByteArray,u1)) fn)(a1,a2,a3);}
 
 void _f_1152_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(u1,n8,u2)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;QByteArray a2=*(QByteArray*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(u1,QByteArray,u2)) fn)(a1,a2,a3);}
 
 void _f_1153_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(u1,n8,QString)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;QByteArray a2=*(QByteArray*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(u1,QByteArray,QString)) fn)(a1,a2,a3);}
 
 void _f_1154_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u1,n8,u4)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;QByteArray a2=*(QByteArray*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u1,QByteArray,u4)) fn)(a1,a2,a3);}
 
 void _f_1155_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u1,n8,n8)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;QByteArray a2=*(QByteArray*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u1,QByteArray,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1156_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u1,n8,r8)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;QByteArray a2=*(QByteArray*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u1,QByteArray,r8)) fn)(a1,a2,a3);}
 
 void _f_1157_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(u1,n8,QVariant)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;QByteArray a2=*(QByteArray*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(u1,QByteArray,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1158_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u1,n8,n8)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u1,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1159_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u1,n8,n8)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u1,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1160_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(u1,r8,n8&)) fn)(a1,a2,a3);}
@@ -494,7 +494,7 @@ void _f_1164_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u1,r8,u4)) fn)(a1,a2,a3);}
 
 void _f_1165_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u1,r8,n8)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u1,r8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1166_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u1,r8,r8)) fn)(a1,a2,a3);}
@@ -524,7 +524,7 @@ void _f_1174_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u1,QVariant,u4)) fn)(a1,a2,a3);}
 
 void _f_1175_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u1,QVariant,n8)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u1,QVariant,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1176_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u1,QVariant,r8)) fn)(a1,a2,a3);}
@@ -554,7 +554,7 @@ void _f_1184_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u1,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1185_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u1,n8,n8)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u1,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1186_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u1,n8,r8)) fn)(a1,a2,a3);}
@@ -584,7 +584,7 @@ void _f_1194_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u1,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1195_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u1,n8,n8)) fn)(a1,a2,a3);}
+  u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u1,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1196_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u1 a1=*(u1*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u1,n8,r8)) fn)(a1,a2,a3);}
@@ -614,7 +614,7 @@ void _f_1204_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u2,n8&,u4)) fn)(a1,a2,a3);}
 
 void _f_1205_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u2,n8&,n8)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u2,n8&,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1206_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u2,n8&,r8)) fn)(a1,a2,a3);}
@@ -644,7 +644,7 @@ void _f_1214_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u2,u1,u4)) fn)(a1,a2,a3);}
 
 void _f_1215_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u2,u1,n8)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u2,u1,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1216_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u2,u1,r8)) fn)(a1,a2,a3);}
@@ -674,7 +674,7 @@ void _f_1224_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u2,u2,u4)) fn)(a1,a2,a3);}
 
 void _f_1225_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u2,u2,n8)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u2,u2,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1226_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u2,u2,r8)) fn)(a1,a2,a3);}
@@ -704,7 +704,7 @@ void _f_1234_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u2,QString,u4)) fn)(a1,a2,a3);}
 
 void _f_1235_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u2,QString,n8)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u2,QString,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1236_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u2,QString,r8)) fn)(a1,a2,a3);}
@@ -734,7 +734,7 @@ void _f_1244_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u2,u4,u4)) fn)(a1,a2,a3);}
 
 void _f_1245_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u2,u4,n8)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u2,u4,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1246_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u2,u4,r8)) fn)(a1,a2,a3);}
@@ -749,34 +749,34 @@ void _f_1249_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u2,u4,n8)) fn)(a1,a2,a3);}
 
 void _f_1250_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(u2,n8,n8&)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;QByteArray a2=*(QByteArray*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(u2,QByteArray,n8&)) fn)(a1,a2,a3);}
 
 void _f_1251_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(u2,n8,u1)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;QByteArray a2=*(QByteArray*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(u2,QByteArray,u1)) fn)(a1,a2,a3);}
 
 void _f_1252_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(u2,n8,u2)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;QByteArray a2=*(QByteArray*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(u2,QByteArray,u2)) fn)(a1,a2,a3);}
 
 void _f_1253_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(u2,n8,QString)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;QByteArray a2=*(QByteArray*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(u2,QByteArray,QString)) fn)(a1,a2,a3);}
 
 void _f_1254_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u2,n8,u4)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;QByteArray a2=*(QByteArray*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u2,QByteArray,u4)) fn)(a1,a2,a3);}
 
 void _f_1255_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u2,n8,n8)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;QByteArray a2=*(QByteArray*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u2,QByteArray,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1256_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u2,n8,r8)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;QByteArray a2=*(QByteArray*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u2,QByteArray,r8)) fn)(a1,a2,a3);}
 
 void _f_1257_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(u2,n8,QVariant)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;QByteArray a2=*(QByteArray*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(u2,QByteArray,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1258_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u2,n8,n8)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u2,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1259_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u2,n8,n8)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u2,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1260_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(u2,r8,n8&)) fn)(a1,a2,a3);}
@@ -794,7 +794,7 @@ void _f_1264_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u2,r8,u4)) fn)(a1,a2,a3);}
 
 void _f_1265_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u2,r8,n8)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u2,r8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1266_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u2,r8,r8)) fn)(a1,a2,a3);}
@@ -824,7 +824,7 @@ void _f_1274_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u2,QVariant,u4)) fn)(a1,a2,a3);}
 
 void _f_1275_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u2,QVariant,n8)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u2,QVariant,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1276_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u2,QVariant,r8)) fn)(a1,a2,a3);}
@@ -854,7 +854,7 @@ void _f_1284_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u2,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1285_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u2,n8,n8)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u2,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1286_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u2,n8,r8)) fn)(a1,a2,a3);}
@@ -884,7 +884,7 @@ void _f_1294_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u2,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1295_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u2,n8,n8)) fn)(a1,a2,a3);}
+  u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u2,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1296_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u2 a1=*(u2*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u2,n8,r8)) fn)(a1,a2,a3);}
@@ -914,7 +914,7 @@ void _f_1304_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QString,n8&,u4)) fn)(a1,a2,a3);}
 
 void _f_1305_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QString,n8&,n8)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QString,n8&,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1306_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QString,n8&,r8)) fn)(a1,a2,a3);}
@@ -944,7 +944,7 @@ void _f_1314_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QString,u1,u4)) fn)(a1,a2,a3);}
 
 void _f_1315_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QString,u1,n8)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QString,u1,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1316_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QString,u1,r8)) fn)(a1,a2,a3);}
@@ -974,7 +974,7 @@ void _f_1324_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QString,u2,u4)) fn)(a1,a2,a3);}
 
 void _f_1325_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QString,u2,n8)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QString,u2,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1326_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QString,u2,r8)) fn)(a1,a2,a3);}
@@ -1004,7 +1004,7 @@ void _f_1334_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QString,QString,u4)) fn)(a1,a2,a3);}
 
 void _f_1335_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QString,QString,n8)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QString,QString,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1336_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QString,QString,r8)) fn)(a1,a2,a3);}
@@ -1034,7 +1034,7 @@ void _f_1344_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QString,u4,u4)) fn)(a1,a2,a3);}
 
 void _f_1345_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QString,u4,n8)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QString,u4,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1346_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QString,u4,r8)) fn)(a1,a2,a3);}
@@ -1049,34 +1049,34 @@ void _f_1349_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QString,u4,n8)) fn)(a1,a2,a3);}
 
 void _f_1350_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(QString,n8,n8&)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;QByteArray a2=*(QByteArray*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(QString,QByteArray,n8&)) fn)(a1,a2,a3);}
 
 void _f_1351_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(QString,n8,u1)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;QByteArray a2=*(QByteArray*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(QString,QByteArray,u1)) fn)(a1,a2,a3);}
 
 void _f_1352_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(QString,n8,u2)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;QByteArray a2=*(QByteArray*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(QString,QByteArray,u2)) fn)(a1,a2,a3);}
 
 void _f_1353_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(QString,n8,QString)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;QByteArray a2=*(QByteArray*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(QString,QByteArray,QString)) fn)(a1,a2,a3);}
 
 void _f_1354_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QString,n8,u4)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;QByteArray a2=*(QByteArray*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QString,QByteArray,u4)) fn)(a1,a2,a3);}
 
 void _f_1355_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QString,n8,n8)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;QByteArray a2=*(QByteArray*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QString,QByteArray,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1356_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QString,n8,r8)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;QByteArray a2=*(QByteArray*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QString,QByteArray,r8)) fn)(a1,a2,a3);}
 
 void _f_1357_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(QString,n8,QVariant)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;QByteArray a2=*(QByteArray*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(QString,QByteArray,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1358_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QString,n8,n8)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QString,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1359_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QString,n8,n8)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QString,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1360_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(QString,r8,n8&)) fn)(a1,a2,a3);}
@@ -1094,7 +1094,7 @@ void _f_1364_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QString,r8,u4)) fn)(a1,a2,a3);}
 
 void _f_1365_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QString,r8,n8)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QString,r8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1366_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QString,r8,r8)) fn)(a1,a2,a3);}
@@ -1124,7 +1124,7 @@ void _f_1374_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QString,QVariant,u4)) fn)(a1,a2,a3);}
 
 void _f_1375_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QString,QVariant,n8)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QString,QVariant,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1376_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QString,QVariant,r8)) fn)(a1,a2,a3);}
@@ -1154,7 +1154,7 @@ void _f_1384_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QString,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1385_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QString,n8,n8)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QString,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1386_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QString,n8,r8)) fn)(a1,a2,a3);}
@@ -1184,7 +1184,7 @@ void _f_1394_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QString,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1395_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QString,n8,n8)) fn)(a1,a2,a3);}
+  QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QString,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1396_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QString a1=*(QString*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QString,n8,r8)) fn)(a1,a2,a3);}
@@ -1214,7 +1214,7 @@ void _f_1404_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u4,n8&,u4)) fn)(a1,a2,a3);}
 
 void _f_1405_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u4,n8&,n8)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u4,n8&,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1406_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u4,n8&,r8)) fn)(a1,a2,a3);}
@@ -1244,7 +1244,7 @@ void _f_1414_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u4,u1,u4)) fn)(a1,a2,a3);}
 
 void _f_1415_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u4,u1,n8)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u4,u1,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1416_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u4,u1,r8)) fn)(a1,a2,a3);}
@@ -1274,7 +1274,7 @@ void _f_1424_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u4,u2,u4)) fn)(a1,a2,a3);}
 
 void _f_1425_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u4,u2,n8)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u4,u2,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1426_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u4,u2,r8)) fn)(a1,a2,a3);}
@@ -1304,7 +1304,7 @@ void _f_1434_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u4,QString,u4)) fn)(a1,a2,a3);}
 
 void _f_1435_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u4,QString,n8)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u4,QString,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1436_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u4,QString,r8)) fn)(a1,a2,a3);}
@@ -1334,7 +1334,7 @@ void _f_1444_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u4,u4,u4)) fn)(a1,a2,a3);}
 
 void _f_1445_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u4,u4,n8)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u4,u4,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1446_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u4,u4,r8)) fn)(a1,a2,a3);}
@@ -1349,34 +1349,34 @@ void _f_1449_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u4,u4,n8)) fn)(a1,a2,a3);}
 
 void _f_1450_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(u4,n8,n8&)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;QByteArray a2=*(QByteArray*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(u4,QByteArray,n8&)) fn)(a1,a2,a3);}
 
 void _f_1451_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(u4,n8,u1)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;QByteArray a2=*(QByteArray*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(u4,QByteArray,u1)) fn)(a1,a2,a3);}
 
 void _f_1452_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(u4,n8,u2)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;QByteArray a2=*(QByteArray*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(u4,QByteArray,u2)) fn)(a1,a2,a3);}
 
 void _f_1453_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(u4,n8,QString)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;QByteArray a2=*(QByteArray*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(u4,QByteArray,QString)) fn)(a1,a2,a3);}
 
 void _f_1454_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u4,n8,u4)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;QByteArray a2=*(QByteArray*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u4,QByteArray,u4)) fn)(a1,a2,a3);}
 
 void _f_1455_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u4,n8,n8)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;QByteArray a2=*(QByteArray*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u4,QByteArray,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1456_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u4,n8,r8)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;QByteArray a2=*(QByteArray*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u4,QByteArray,r8)) fn)(a1,a2,a3);}
 
 void _f_1457_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(u4,n8,QVariant)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;QByteArray a2=*(QByteArray*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(u4,QByteArray,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1458_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u4,n8,n8)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u4,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1459_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u4,n8,n8)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u4,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1460_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(u4,r8,n8&)) fn)(a1,a2,a3);}
@@ -1394,7 +1394,7 @@ void _f_1464_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u4,r8,u4)) fn)(a1,a2,a3);}
 
 void _f_1465_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u4,r8,n8)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u4,r8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1466_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u4,r8,r8)) fn)(a1,a2,a3);}
@@ -1424,7 +1424,7 @@ void _f_1474_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u4,QVariant,u4)) fn)(a1,a2,a3);}
 
 void _f_1475_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u4,QVariant,n8)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u4,QVariant,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1476_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u4,QVariant,r8)) fn)(a1,a2,a3);}
@@ -1454,7 +1454,7 @@ void _f_1484_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u4,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1485_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u4,n8,n8)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u4,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1486_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u4,n8,r8)) fn)(a1,a2,a3);}
@@ -1484,7 +1484,7 @@ void _f_1494_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(u4,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1495_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u4,n8,n8)) fn)(a1,a2,a3);}
+  u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(u4,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1496_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(u4,n8,r8)) fn)(a1,a2,a3);}
@@ -1499,304 +1499,304 @@ void _f_1499_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   u4 a1=*(u4*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(u4,n8,n8)) fn)(a1,a2,a3);}
 
 void _f_1500_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8,n8&,n8&)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(QByteArray,n8&,n8&)) fn)(a1,a2,a3);}
 
 void _f_1501_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(n8,n8&,u1)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8& a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(QByteArray,n8&,u1)) fn)(a1,a2,a3);}
 
 void _f_1502_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(n8,n8&,u2)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8& a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(QByteArray,n8&,u2)) fn)(a1,a2,a3);}
 
 void _f_1503_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(n8,n8&,QString)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8& a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(QByteArray,n8&,QString)) fn)(a1,a2,a3);}
 
 void _f_1504_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,n8&,u4)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QByteArray,n8&,u4)) fn)(a1,a2,a3);}
 
 void _f_1505_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8& a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QByteArray,n8&,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1506_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,n8&,r8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QByteArray,n8&,r8)) fn)(a1,a2,a3);}
 
 void _f_1507_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(n8,n8&,QVariant)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8& a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(QByteArray,n8&,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1508_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,n8&,n8)) fn)(a1,a2,a3);}
 
 void _f_1509_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,n8&,n8)) fn)(a1,a2,a3);}
 
 void _f_1510_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8,u1,n8&)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u1 a2=*(u1*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(QByteArray,u1,n8&)) fn)(a1,a2,a3);}
 
 void _f_1511_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(n8,u1,u1)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u1 a2=*(u1*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(QByteArray,u1,u1)) fn)(a1,a2,a3);}
 
 void _f_1512_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(n8,u1,u2)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u1 a2=*(u1*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(QByteArray,u1,u2)) fn)(a1,a2,a3);}
 
 void _f_1513_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(n8,u1,QString)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u1 a2=*(u1*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(QByteArray,u1,QString)) fn)(a1,a2,a3);}
 
 void _f_1514_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,u1,u4)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QByteArray,u1,u4)) fn)(a1,a2,a3);}
 
 void _f_1515_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,u1,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u1 a2=*(u1*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QByteArray,u1,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1516_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,u1,r8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QByteArray,u1,r8)) fn)(a1,a2,a3);}
 
 void _f_1517_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(n8,u1,QVariant)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u1 a2=*(u1*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(QByteArray,u1,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1518_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,u1,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,u1,n8)) fn)(a1,a2,a3);}
 
 void _f_1519_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,u1,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,u1,n8)) fn)(a1,a2,a3);}
 
 void _f_1520_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8,u2,n8&)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u2 a2=*(u2*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(QByteArray,u2,n8&)) fn)(a1,a2,a3);}
 
 void _f_1521_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(n8,u2,u1)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u2 a2=*(u2*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(QByteArray,u2,u1)) fn)(a1,a2,a3);}
 
 void _f_1522_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(n8,u2,u2)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u2 a2=*(u2*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(QByteArray,u2,u2)) fn)(a1,a2,a3);}
 
 void _f_1523_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(n8,u2,QString)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u2 a2=*(u2*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(QByteArray,u2,QString)) fn)(a1,a2,a3);}
 
 void _f_1524_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,u2,u4)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QByteArray,u2,u4)) fn)(a1,a2,a3);}
 
 void _f_1525_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,u2,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u2 a2=*(u2*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QByteArray,u2,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1526_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,u2,r8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QByteArray,u2,r8)) fn)(a1,a2,a3);}
 
 void _f_1527_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(n8,u2,QVariant)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u2 a2=*(u2*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(QByteArray,u2,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1528_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,u2,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,u2,n8)) fn)(a1,a2,a3);}
 
 void _f_1529_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,u2,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,u2,n8)) fn)(a1,a2,a3);}
 
 void _f_1530_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8,QString,n8&)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QString a2=*(QString*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(QByteArray,QString,n8&)) fn)(a1,a2,a3);}
 
 void _f_1531_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(n8,QString,u1)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QString a2=*(QString*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(QByteArray,QString,u1)) fn)(a1,a2,a3);}
 
 void _f_1532_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(n8,QString,u2)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QString a2=*(QString*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(QByteArray,QString,u2)) fn)(a1,a2,a3);}
 
 void _f_1533_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(n8,QString,QString)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QString a2=*(QString*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(QByteArray,QString,QString)) fn)(a1,a2,a3);}
 
 void _f_1534_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,QString,u4)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QByteArray,QString,u4)) fn)(a1,a2,a3);}
 
 void _f_1535_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,QString,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QString a2=*(QString*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QByteArray,QString,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1536_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,QString,r8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QByteArray,QString,r8)) fn)(a1,a2,a3);}
 
 void _f_1537_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(n8,QString,QVariant)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QString a2=*(QString*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(QByteArray,QString,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1538_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,QString,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,QString,n8)) fn)(a1,a2,a3);}
 
 void _f_1539_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,QString,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,QString,n8)) fn)(a1,a2,a3);}
 
 void _f_1540_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8,u4,n8&)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u4 a2=*(u4*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(QByteArray,u4,n8&)) fn)(a1,a2,a3);}
 
 void _f_1541_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(n8,u4,u1)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u4 a2=*(u4*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(QByteArray,u4,u1)) fn)(a1,a2,a3);}
 
 void _f_1542_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(n8,u4,u2)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u4 a2=*(u4*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(QByteArray,u4,u2)) fn)(a1,a2,a3);}
 
 void _f_1543_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(n8,u4,QString)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u4 a2=*(u4*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(QByteArray,u4,QString)) fn)(a1,a2,a3);}
 
 void _f_1544_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,u4,u4)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QByteArray,u4,u4)) fn)(a1,a2,a3);}
 
 void _f_1545_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,u4,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u4 a2=*(u4*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QByteArray,u4,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1546_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,u4,r8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QByteArray,u4,r8)) fn)(a1,a2,a3);}
 
 void _f_1547_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(n8,u4,QVariant)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u4 a2=*(u4*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(QByteArray,u4,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1548_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,u4,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,u4,n8)) fn)(a1,a2,a3);}
 
 void _f_1549_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,u4,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,u4,n8)) fn)(a1,a2,a3);}
 
 void _f_1550_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QByteArray a2=*(QByteArray*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(QByteArray,QByteArray,n8&)) fn)(a1,a2,a3);}
 
 void _f_1551_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(n8,n8,u1)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QByteArray a2=*(QByteArray*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(QByteArray,QByteArray,u1)) fn)(a1,a2,a3);}
 
 void _f_1552_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(n8,n8,u2)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QByteArray a2=*(QByteArray*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(QByteArray,QByteArray,u2)) fn)(a1,a2,a3);}
 
 void _f_1553_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(n8,n8,QString)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QByteArray a2=*(QByteArray*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(QByteArray,QByteArray,QString)) fn)(a1,a2,a3);}
 
 void _f_1554_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,n8,u4)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QByteArray a2=*(QByteArray*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QByteArray,QByteArray,u4)) fn)(a1,a2,a3);}
 
 void _f_1555_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QByteArray a2=*(QByteArray*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QByteArray,QByteArray,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1556_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,n8,r8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QByteArray a2=*(QByteArray*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QByteArray,QByteArray,r8)) fn)(a1,a2,a3);}
 
 void _f_1557_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QByteArray a2=*(QByteArray*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(QByteArray,QByteArray,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1558_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1559_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1560_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8,r8,n8&)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(QByteArray,r8,n8&)) fn)(a1,a2,a3);}
 
 void _f_1561_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(n8,r8,u1)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;r8 a2=*(r8*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(QByteArray,r8,u1)) fn)(a1,a2,a3);}
 
 void _f_1562_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(n8,r8,u2)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;r8 a2=*(r8*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(QByteArray,r8,u2)) fn)(a1,a2,a3);}
 
 void _f_1563_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(n8,r8,QString)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;r8 a2=*(r8*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(QByteArray,r8,QString)) fn)(a1,a2,a3);}
 
 void _f_1564_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,r8,u4)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QByteArray,r8,u4)) fn)(a1,a2,a3);}
 
 void _f_1565_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,r8,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;r8 a2=*(r8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QByteArray,r8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1566_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,r8,r8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QByteArray,r8,r8)) fn)(a1,a2,a3);}
 
 void _f_1567_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(n8,r8,QVariant)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;r8 a2=*(r8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(QByteArray,r8,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1568_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,r8,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,r8,n8)) fn)(a1,a2,a3);}
 
 void _f_1569_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,r8,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,r8,n8)) fn)(a1,a2,a3);}
 
 void _f_1570_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8,QVariant,n8&)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QVariant a2 = *(QVariant*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(QByteArray,QVariant,n8&)) fn)(a1,a2,a3);}
 
 void _f_1571_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(n8,QVariant,u1)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QVariant a2 = *(QVariant*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(QByteArray,QVariant,u1)) fn)(a1,a2,a3);}
 
 void _f_1572_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(n8,QVariant,u2)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QVariant a2 = *(QVariant*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(QByteArray,QVariant,u2)) fn)(a1,a2,a3);}
 
 void _f_1573_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(n8,QVariant,QString)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QVariant a2 = *(QVariant*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(QByteArray,QVariant,QString)) fn)(a1,a2,a3);}
 
 void _f_1574_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,QVariant,u4)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QByteArray,QVariant,u4)) fn)(a1,a2,a3);}
 
 void _f_1575_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QVariant a2 = *(QVariant*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QByteArray,QVariant,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1576_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,QVariant,r8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QByteArray,QVariant,r8)) fn)(a1,a2,a3);}
 
 void _f_1577_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(n8,QVariant,QVariant)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QVariant a2 = *(QVariant*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(QByteArray,QVariant,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1578_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,QVariant,n8)) fn)(a1,a2,a3);}
 
 void _f_1579_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,QVariant,n8)) fn)(a1,a2,a3);}
 
 void _f_1580_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(QByteArray,n8,n8&)) fn)(a1,a2,a3);}
 
 void _f_1581_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(n8,n8,u1)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(QByteArray,n8,u1)) fn)(a1,a2,a3);}
 
 void _f_1582_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(n8,n8,u2)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(QByteArray,n8,u2)) fn)(a1,a2,a3);}
 
 void _f_1583_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(n8,n8,QString)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(QByteArray,n8,QString)) fn)(a1,a2,a3);}
 
 void _f_1584_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,n8,u4)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QByteArray,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1585_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QByteArray,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1586_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,n8,r8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QByteArray,n8,r8)) fn)(a1,a2,a3);}
 
 void _f_1587_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(QByteArray,n8,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1588_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,n8,n8)) fn)(a1,a2,a3);}
 
 void _f_1589_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,n8,n8)) fn)(a1,a2,a3);}
 
 void _f_1590_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(QByteArray,n8,n8&)) fn)(a1,a2,a3);}
 
 void _f_1591_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(n8,n8,u1)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(QByteArray,n8,u1)) fn)(a1,a2,a3);}
 
 void _f_1592_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(n8,n8,u2)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(QByteArray,n8,u2)) fn)(a1,a2,a3);}
 
 void _f_1593_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(n8,n8,QString)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(QByteArray,n8,QString)) fn)(a1,a2,a3);}
 
 void _f_1594_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,n8,u4)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QByteArray,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1595_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QByteArray,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1596_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,n8,r8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QByteArray,n8,r8)) fn)(a1,a2,a3);}
 
 void _f_1597_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(QByteArray,n8,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1598_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,n8,n8)) fn)(a1,a2,a3);}
 
 void _f_1599_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  QByteArray a1=*(QByteArray*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QByteArray,n8,n8)) fn)(a1,a2,a3);}
 
 void _f_1600_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(r8,n8&,n8&)) fn)(a1,a2,a3);}
@@ -1814,7 +1814,7 @@ void _f_1604_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(r8,n8&,u4)) fn)(a1,a2,a3);}
 
 void _f_1605_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(r8,n8&,n8)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(r8,n8&,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1606_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(r8,n8&,r8)) fn)(a1,a2,a3);}
@@ -1844,7 +1844,7 @@ void _f_1614_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(r8,u1,u4)) fn)(a1,a2,a3);}
 
 void _f_1615_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(r8,u1,n8)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(r8,u1,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1616_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(r8,u1,r8)) fn)(a1,a2,a3);}
@@ -1874,7 +1874,7 @@ void _f_1624_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(r8,u2,u4)) fn)(a1,a2,a3);}
 
 void _f_1625_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(r8,u2,n8)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(r8,u2,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1626_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(r8,u2,r8)) fn)(a1,a2,a3);}
@@ -1904,7 +1904,7 @@ void _f_1634_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(r8,QString,u4)) fn)(a1,a2,a3);}
 
 void _f_1635_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(r8,QString,n8)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(r8,QString,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1636_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(r8,QString,r8)) fn)(a1,a2,a3);}
@@ -1934,7 +1934,7 @@ void _f_1644_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(r8,u4,u4)) fn)(a1,a2,a3);}
 
 void _f_1645_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(r8,u4,n8)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(r8,u4,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1646_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(r8,u4,r8)) fn)(a1,a2,a3);}
@@ -1949,34 +1949,34 @@ void _f_1649_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(r8,u4,n8)) fn)(a1,a2,a3);}
 
 void _f_1650_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(r8,n8,n8&)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;QByteArray a2=*(QByteArray*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(r8,QByteArray,n8&)) fn)(a1,a2,a3);}
 
 void _f_1651_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(r8,n8,u1)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;QByteArray a2=*(QByteArray*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(r8,QByteArray,u1)) fn)(a1,a2,a3);}
 
 void _f_1652_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(r8,n8,u2)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;QByteArray a2=*(QByteArray*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(r8,QByteArray,u2)) fn)(a1,a2,a3);}
 
 void _f_1653_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(r8,n8,QString)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;QByteArray a2=*(QByteArray*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(r8,QByteArray,QString)) fn)(a1,a2,a3);}
 
 void _f_1654_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(r8,n8,u4)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;QByteArray a2=*(QByteArray*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(r8,QByteArray,u4)) fn)(a1,a2,a3);}
 
 void _f_1655_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(r8,n8,n8)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;QByteArray a2=*(QByteArray*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(r8,QByteArray,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1656_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(r8,n8,r8)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;QByteArray a2=*(QByteArray*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(r8,QByteArray,r8)) fn)(a1,a2,a3);}
 
 void _f_1657_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(r8,n8,QVariant)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;QByteArray a2=*(QByteArray*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(r8,QByteArray,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1658_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(r8,n8,n8)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(r8,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1659_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(r8,n8,n8)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(r8,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1660_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(r8,r8,n8&)) fn)(a1,a2,a3);}
@@ -1994,7 +1994,7 @@ void _f_1664_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(r8,r8,u4)) fn)(a1,a2,a3);}
 
 void _f_1665_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(r8,r8,n8)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(r8,r8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1666_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(r8,r8,r8)) fn)(a1,a2,a3);}
@@ -2024,7 +2024,7 @@ void _f_1674_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(r8,QVariant,u4)) fn)(a1,a2,a3);}
 
 void _f_1675_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(r8,QVariant,n8)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(r8,QVariant,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1676_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(r8,QVariant,r8)) fn)(a1,a2,a3);}
@@ -2054,7 +2054,7 @@ void _f_1684_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(r8,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1685_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(r8,n8,n8)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(r8,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1686_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(r8,n8,r8)) fn)(a1,a2,a3);}
@@ -2084,7 +2084,7 @@ void _f_1694_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(r8,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1695_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(r8,n8,n8)) fn)(a1,a2,a3);}
+  r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(r8,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1696_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   r8 a1=*(r8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(r8,n8,r8)) fn)(a1,a2,a3);}
@@ -2114,7 +2114,7 @@ void _f_1704_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QVariant,n8&,u4)) fn)(a1,a2,a3);}
 
 void _f_1705_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QVariant,n8&,n8)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QVariant,n8&,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1706_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QVariant,n8&,r8)) fn)(a1,a2,a3);}
@@ -2144,7 +2144,7 @@ void _f_1714_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QVariant,u1,u4)) fn)(a1,a2,a3);}
 
 void _f_1715_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QVariant,u1,n8)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QVariant,u1,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1716_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QVariant,u1,r8)) fn)(a1,a2,a3);}
@@ -2174,7 +2174,7 @@ void _f_1724_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QVariant,u2,u4)) fn)(a1,a2,a3);}
 
 void _f_1725_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QVariant,u2,n8)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QVariant,u2,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1726_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QVariant,u2,r8)) fn)(a1,a2,a3);}
@@ -2204,7 +2204,7 @@ void _f_1734_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QVariant,QString,u4)) fn)(a1,a2,a3);}
 
 void _f_1735_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QVariant,QString,n8)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QVariant,QString,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1736_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QVariant,QString,r8)) fn)(a1,a2,a3);}
@@ -2234,7 +2234,7 @@ void _f_1744_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QVariant,u4,u4)) fn)(a1,a2,a3);}
 
 void _f_1745_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QVariant,u4,n8)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QVariant,u4,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1746_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QVariant,u4,r8)) fn)(a1,a2,a3);}
@@ -2249,34 +2249,34 @@ void _f_1749_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QVariant,u4,n8)) fn)(a1,a2,a3);}
 
 void _f_1750_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(QVariant,n8,n8&)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;QByteArray a2=*(QByteArray*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(QVariant,QByteArray,n8&)) fn)(a1,a2,a3);}
 
 void _f_1751_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(QVariant,n8,u1)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;QByteArray a2=*(QByteArray*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(QVariant,QByteArray,u1)) fn)(a1,a2,a3);}
 
 void _f_1752_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(QVariant,n8,u2)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;QByteArray a2=*(QByteArray*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(QVariant,QByteArray,u2)) fn)(a1,a2,a3);}
 
 void _f_1753_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(QVariant,n8,QString)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;QByteArray a2=*(QByteArray*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(QVariant,QByteArray,QString)) fn)(a1,a2,a3);}
 
 void _f_1754_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QVariant,n8,u4)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;QByteArray a2=*(QByteArray*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QVariant,QByteArray,u4)) fn)(a1,a2,a3);}
 
 void _f_1755_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;QByteArray a2=*(QByteArray*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QVariant,QByteArray,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1756_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QVariant,n8,r8)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;QByteArray a2=*(QByteArray*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QVariant,QByteArray,r8)) fn)(a1,a2,a3);}
 
 void _f_1757_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(QVariant,n8,QVariant)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;QByteArray a2=*(QByteArray*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(QVariant,QByteArray,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1758_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QVariant,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1759_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QVariant,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1760_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(QVariant,r8,n8&)) fn)(a1,a2,a3);}
@@ -2294,7 +2294,7 @@ void _f_1764_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QVariant,r8,u4)) fn)(a1,a2,a3);}
 
 void _f_1765_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QVariant,r8,n8)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QVariant,r8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1766_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QVariant,r8,r8)) fn)(a1,a2,a3);}
@@ -2324,7 +2324,7 @@ void _f_1774_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QVariant,QVariant,u4)) fn)(a1,a2,a3);}
 
 void _f_1775_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QVariant,QVariant,n8)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QVariant,QVariant,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1776_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QVariant,QVariant,r8)) fn)(a1,a2,a3);}
@@ -2354,7 +2354,7 @@ void _f_1784_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QVariant,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1785_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QVariant,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1786_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QVariant,n8,r8)) fn)(a1,a2,a3);}
@@ -2384,7 +2384,7 @@ void _f_1794_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(QVariant,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1795_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(QVariant,n8,n8)) fn)(a1,a2,a3);}
+  QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(QVariant,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1796_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   QVariant a1 = *(QVariant*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(QVariant,n8,r8)) fn)(a1,a2,a3);}
@@ -2414,7 +2414,7 @@ void _f_1804_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,n8&,u4)) fn)(a1,a2,a3);}
 
 void _f_1805_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,n8&,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1806_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,n8&,r8)) fn)(a1,a2,a3);}
@@ -2444,7 +2444,7 @@ void _f_1814_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,u1,u4)) fn)(a1,a2,a3);}
 
 void _f_1815_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,u1,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,u1,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1816_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,u1,r8)) fn)(a1,a2,a3);}
@@ -2474,7 +2474,7 @@ void _f_1824_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,u2,u4)) fn)(a1,a2,a3);}
 
 void _f_1825_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,u2,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,u2,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1826_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,u2,r8)) fn)(a1,a2,a3);}
@@ -2504,7 +2504,7 @@ void _f_1834_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,QString,u4)) fn)(a1,a2,a3);}
 
 void _f_1835_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,QString,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,QString,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1836_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,QString,r8)) fn)(a1,a2,a3);}
@@ -2534,7 +2534,7 @@ void _f_1844_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,u4,u4)) fn)(a1,a2,a3);}
 
 void _f_1845_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,u4,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,u4,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1846_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,u4,r8)) fn)(a1,a2,a3);}
@@ -2549,34 +2549,34 @@ void _f_1849_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,u4,n8)) fn)(a1,a2,a3);}
 
 void _f_1850_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8,QByteArray,n8&)) fn)(a1,a2,a3);}
 
 void _f_1851_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(n8,n8,u1)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(n8,QByteArray,u1)) fn)(a1,a2,a3);}
 
 void _f_1852_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(n8,n8,u2)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(n8,QByteArray,u2)) fn)(a1,a2,a3);}
 
 void _f_1853_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(n8,n8,QString)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(n8,QByteArray,QString)) fn)(a1,a2,a3);}
 
 void _f_1854_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,n8,u4)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,QByteArray,u4)) fn)(a1,a2,a3);}
 
 void _f_1855_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,QByteArray,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1856_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,n8,r8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,QByteArray,r8)) fn)(a1,a2,a3);}
 
 void _f_1857_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(n8,QByteArray,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1858_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1859_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1860_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8,r8,n8&)) fn)(a1,a2,a3);}
@@ -2594,7 +2594,7 @@ void _f_1864_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,r8,u4)) fn)(a1,a2,a3);}
 
 void _f_1865_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,r8,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,r8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1866_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,r8,r8)) fn)(a1,a2,a3);}
@@ -2624,7 +2624,7 @@ void _f_1874_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,QVariant,u4)) fn)(a1,a2,a3);}
 
 void _f_1875_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,QVariant,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1876_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,QVariant,r8)) fn)(a1,a2,a3);}
@@ -2654,7 +2654,7 @@ void _f_1884_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1885_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1886_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,n8,r8)) fn)(a1,a2,a3);}
@@ -2684,7 +2684,7 @@ void _f_1894_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1895_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1896_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,n8,r8)) fn)(a1,a2,a3);}
@@ -2714,7 +2714,7 @@ void _f_1904_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,n8&,u4)) fn)(a1,a2,a3);}
 
 void _f_1905_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8&,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,n8&,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1906_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;n8& a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,n8&,r8)) fn)(a1,a2,a3);}
@@ -2744,7 +2744,7 @@ void _f_1914_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,u1,u4)) fn)(a1,a2,a3);}
 
 void _f_1915_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,u1,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,u1,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1916_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;u1 a2=*(u1*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,u1,r8)) fn)(a1,a2,a3);}
@@ -2774,7 +2774,7 @@ void _f_1924_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,u2,u4)) fn)(a1,a2,a3);}
 
 void _f_1925_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,u2,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,u2,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1926_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;u2 a2=*(u2*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,u2,r8)) fn)(a1,a2,a3);}
@@ -2804,7 +2804,7 @@ void _f_1934_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,QString,u4)) fn)(a1,a2,a3);}
 
 void _f_1935_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,QString,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,QString,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1936_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;QString a2=*(QString*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,QString,r8)) fn)(a1,a2,a3);}
@@ -2834,7 +2834,7 @@ void _f_1944_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,u4,u4)) fn)(a1,a2,a3);}
 
 void _f_1945_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,u4,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,u4,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1946_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,u4,r8)) fn)(a1,a2,a3);}
@@ -2849,34 +2849,34 @@ void _f_1949_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;u4 a2=*(u4*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,u4,n8)) fn)(a1,a2,a3);}
 
 void _f_1950_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8&)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8,QByteArray,n8&)) fn)(a1,a2,a3);}
 
 void _f_1951_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(n8,n8,u1)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;u1 a3=*(u1*)arg3;retv=((u1(*)(n8,QByteArray,u1)) fn)(a1,a2,a3);}
 
 void _f_1952_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(n8,n8,u2)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;u2 a3=*(u2*)arg3;retv=((u1(*)(n8,QByteArray,u2)) fn)(a1,a2,a3);}
 
 void _f_1953_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(n8,n8,QString)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;QString a3=*(QString*)arg3;retv=((u1(*)(n8,QByteArray,QString)) fn)(a1,a2,a3);}
 
 void _f_1954_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,n8,u4)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,QByteArray,u4)) fn)(a1,a2,a3);}
 
 void _f_1955_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,QByteArray,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1956_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,n8,r8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,QByteArray,r8)) fn)(a1,a2,a3);}
 
 void _f_1957_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(n8,n8,QVariant)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;QVariant a3 = *(QVariant*)arg3;retv=((u1(*)(n8,QByteArray,QVariant)) fn)(a1,a2,a3);}
 
 void _f_1958_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1959_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QByteArray a2=*(QByteArray*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,QByteArray,n8)) fn)(a1,a2,a3);}
 
 void _f_1960_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8& a3=*(n8*)arg3;retv=((u1(*)(n8,r8,n8&)) fn)(a1,a2,a3);}
@@ -2894,7 +2894,7 @@ void _f_1964_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,r8,u4)) fn)(a1,a2,a3);}
 
 void _f_1965_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,r8,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,r8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1966_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;r8 a2=*(r8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,r8,r8)) fn)(a1,a2,a3);}
@@ -2924,7 +2924,7 @@ void _f_1974_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,QVariant,u4)) fn)(a1,a2,a3);}
 
 void _f_1975_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,QVariant,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,QVariant,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1976_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;QVariant a2 = *(QVariant*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,QVariant,r8)) fn)(a1,a2,a3);}
@@ -2954,7 +2954,7 @@ void _f_1984_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1985_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1986_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,n8,r8)) fn)(a1,a2,a3);}
@@ -2984,7 +2984,7 @@ void _f_1994_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;u4 a3=*(u4*)arg3;retv=((u1(*)(n8,n8,u4)) fn)(a1,a2,a3);}
 
 void _f_1995_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
-  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;n8 a3=*(n8*)arg3;retv=((u1(*)(n8,n8,n8)) fn)(a1,a2,a3);}
+  n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;QByteArray a3=*(QByteArray*)arg3;retv=((u1(*)(n8,n8,QByteArray)) fn)(a1,a2,a3);}
 
 void _f_1996_(u1& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r1_type fn){
   n8 a1=*(n8*)arg1;n8 a2=*(n8*)arg2;r8 a3=*(r8*)arg3;retv=((u1(*)(n8,n8,r8)) fn)(a1,a2,a3);}

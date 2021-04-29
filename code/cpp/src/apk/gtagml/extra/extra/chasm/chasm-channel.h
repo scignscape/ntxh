@@ -42,6 +42,22 @@ public:
   carriers_.push_back(cc);
  }
 
+ void add_carriers(const QVector<Chasm_Carrier>& ccs)
+ {
+  carriers_.append(ccs);
+ }
+
+ Chasm_Carrier first_carrier();
+
+ n8 pasn8(s4 index)
+ {
+  if(index > carriers_.size())
+    return 0;
+
+  Chasm_Carrier& cc = carriers_[index - 1];
+  return cc.pasn8();
+ }
+
 };
 
 // _KANS(GTagML)

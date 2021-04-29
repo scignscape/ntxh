@@ -32,6 +32,7 @@ Chasm_Call_Package::Chasm_Call_Package(u4 id)
 void Chasm_Call_Package::add_new_channel(QString name)
 {
  current_build_channel_ = new Chasm_Channel(name);
+ channels_[name] = current_build_channel_;
 }
 
 void Chasm_Call_Package::add_carrier(const Chasm_Carrier& cc)
@@ -39,5 +40,9 @@ void Chasm_Call_Package::add_carrier(const Chasm_Carrier& cc)
  current_build_channel_->add_carrier(cc);
 }
 
+void Chasm_Call_Package::add_carriers(const QVector<Chasm_Carrier>& ccs)
+{
+ current_build_channel_->add_carriers(ccs);
+}
 
 

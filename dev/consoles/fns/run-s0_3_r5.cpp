@@ -1,8 +1,16 @@
 
 
-typedef void**(*minimal_fn_s0_r5_type)();
-typedef void(*run_s0_3_r5_type)(void**& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r5_type fn);
+
+#ifndef SEEN_DEFS_S0_3_R5
+#define SEEN_DEFS_S0_3_R5
+
+typedef QByteArray(*minimal_fn_s0_r5_type)();
+typedef void(*run_s0_3_r5_type)(QByteArray& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r5_type fn);
 typedef run_s0_3_r5_type s0_3_r5_dispatch_array [1000];
+
+#endif //  SEEN_DEFS_S0_3_R5
+
+#ifdef FULL_INCLUDE
 
 #include "fn-array-s0_3_r5.cpp"
 
@@ -1012,10 +1020,12 @@ s0_3_r5_dispatch_array* init_s0_3_r5_dispatch_array()
  (*result)[999] = &_f_5999_;
 }
 
-void run_s0_3_r5(u4 code, minimal_fn_s0_r5_type fn, void**& retv, n8 a1, n8 a2, n8 a3)
+void run_s0_3_r5(u4 code, minimal_fn_s0_r5_type fn, QByteArray& retv, n8 a1, n8 a2, n8 a3)
 {
  code %= 10000;
  static s0_3_r5_dispatch_array* dispatch_array = init_s0_3_r5_dispatch_array();
  run_s0_3_r5_type f = (*dispatch_array)[code];
  f(retv, a1, a2, a3, fn);
 }
+
+#endif //def FULL_INCLUDE
