@@ -13,6 +13,8 @@
 
 #define FULL_INCLUDE
 #include "./dev/consoles/fns/run-s0_3_r0.cpp"
+#include "./dev/consoles/fns/run-s0_3_r1.cpp"
+#include "./dev/consoles/fns/run-s0_3_r2.cpp"
 #include "./dev/consoles/fns/run-s0_3_r3.cpp"
 
 
@@ -169,8 +171,38 @@ void Chasm_Runtime::evaluate_r0(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s
    lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
 }
 
+void Chasm_Runtime::evaluate_r1(Chasm_Call_Package* ccp,
+ u2 fncode, minimal_fn_s0_r1_type fn, Chasm_Carrier* rcar)
+{
+ Chasm_Channel* lambda = ccp->channel("lambda");
+ if(!lambda)
+   return;
+
+ Chasm_Channel* resultch = ccp->channel("result");
+ if(!resultch)
+   return;
+
+ Chasm_Carrier cc = resultch->first_carrier();
+
+ u1 rr = cc.value();
+
+ run_s0_3_r1(fncode, (minimal_fn_s0_r1_type) fn,
+   rr, lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
+
+ if(rcar)
+   rcar->set_value(rr);
+}
+
+
+void Chasm_Runtime::evaluate_r2(Chasm_Call_Package* ccp,
+ u2 fncode, minimal_fn_s0_r2_type fn, Chasm_Carrier* rcar)
+{
+#include "./dev/consoles/fns/ch-eval-s0_3_r2.cpp"
+}
+
+
 void Chasm_Runtime::evaluate_r3(Chasm_Call_Package* ccp,
- u2 fncode, minimal_fn_s0_r3_type fn)
+ u2 fncode, minimal_fn_s0_r3_type fn, Chasm_Carrier* rcar)
 {
  Chasm_Channel* lambda = ccp->channel("lambda");
  if(!lambda)
@@ -186,7 +218,10 @@ void Chasm_Runtime::evaluate_r3(Chasm_Call_Package* ccp,
 
  run_s0_3_r3(fncode, (minimal_fn_s0_r3_type) fn,
    rr, lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
- qDebug() << "rr = " << rr;
+
+ if(rcar)
+   rcar->set_value_as<QString>(rr);
+
 }
 
 

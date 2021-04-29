@@ -23,8 +23,10 @@ Chasm_Channel::Chasm_Channel(QString name)
 
 Chasm_Carrier Chasm_Channel::first_carrier()
 {
+ //static Chasm_Carrier fallback;
  if(carriers_.isEmpty())
-  return {};
+   return {};
+//  return fallback;
 
  return carriers_.first();
 }

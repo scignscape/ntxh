@@ -29,6 +29,8 @@
 #include "chasm-carrier.h"
 
 #include "./dev/consoles/fns/run-s0_3_r0.cpp"
+#include "./dev/consoles/fns/run-s0_3_r1.cpp"
+#include "./dev/consoles/fns/run-s0_3_r2.cpp"
 #include "./dev/consoles/fns/run-s0_3_r3.cpp"
 
 class Chasm_Call_Package;
@@ -41,9 +43,21 @@ class Chasm_Runtime
 
  struct _Result
  {
+  n8* _ref;
+  u1* _u1;
+  u2* _u2;
   QString* _QString;
+  u4* _u4;
+  QByteArray* _QByteArray;
+  r8* _r8;
+  QVariant* _QVariant;
+  n8* _n8;
+  void** _ptr;
 
-  _Result() : _QString(new QString) {}
+  _Result() : _ref(new n8(0)), _u1(new u1(0)), _u2(new u2(0)),
+    _QString(new QString), _u4(new u4(0)), _QByteArray(new QByteArray),
+    _r8(new r8(0)), _QVariant(new QVariant), _ptr(new void*(nullptr))
+    {}
  };
 
  u4 gen_trisym_line_index_;
@@ -76,8 +90,10 @@ public:
  void init_no_file_session();
 
  template<typename FN_Type>
- void evaluate(Chasm_Call_Package* ccp, u2 fncode, FN_Type fn)
+ void evaluate(Chasm_Call_Package* ccp, u4 fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
  {
+  u1 sl = fncode / 10000;
+
   u1 rr = (fncode % 10000) / 1000;
 
   fncode %= 1000;
@@ -88,15 +104,25 @@ public:
    evaluate_r0(ccp, fncode, (minimal_fn_s0_r0_type) fn);
    break;
 
+  case 1:
+   evaluate_r1(ccp, fncode, (minimal_fn_s0_r1_type) fn, rcar);
+   break;
+
+  case 2:
+   evaluate_r2(ccp, fncode, (minimal_fn_s0_r2_type) fn, rcar);
+   break;
+
   case 3:
-   evaluate_r3(ccp, fncode, (minimal_fn_s0_r3_type) fn);
+   evaluate_r3(ccp, fncode, (minimal_fn_s0_r3_type) fn, rcar);
    break;
 
   }
  }
 
  void evaluate_r0(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_r0_type fn);
- void evaluate_r3(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_r3_type fn);
+ void evaluate_r1(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_r1_type fn, Chasm_Carrier* rcar = nullptr);
+ void evaluate_r2(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_r2_type fn, Chasm_Carrier* rcar = nullptr);
+ void evaluate_r3(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_r3_type fn, Chasm_Carrier* rcar = nullptr);
 
 
 //.. ACCESSORS(QString ,text)

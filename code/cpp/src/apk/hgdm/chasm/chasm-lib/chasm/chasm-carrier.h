@@ -120,6 +120,17 @@ public:
  {
   return *(VALUE_Type*)value_;
  }
+
+ template<typename VALUE_Type>
+ VALUE_Type raw_value()
+ {
+  return (VALUE_Type)value_;
+ }
+
+ template<typename VALUE_Type>
+ void set_value_as(const VALUE_Type& val);
+
+
  // void test_cuo();
 
 // void test_method(QString path, u4 val1, u4 val2);

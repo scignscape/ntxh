@@ -24,6 +24,14 @@ Chasm_Carrier::Chasm_Carrier()
 
 }
 
+
+template<>
+void Chasm_Carrier::set_value_as<QString>(const QString& val)
+{
+ take_value(const_cast<QString*>(&val));
+}
+
+
 Chasm_Carrier& Chasm_Carrier::take_value(void* pv)
 {
  u1 tf = key_.type_flag();
