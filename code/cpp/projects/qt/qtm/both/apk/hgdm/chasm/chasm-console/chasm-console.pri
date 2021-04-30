@@ -7,7 +7,10 @@
 
 include(../build-group.pri)
 
-QT -= gui
+# QT -= gui
+
+QT += webenginewidgets
+
 
 TEMPLATE = app
 
@@ -48,19 +51,20 @@ INCLUDEPATH += $$ROOT_DIR
 
 
 HEADERS += \
-  $$SRC_DIR/compilation-unit-object.h \
-  $$SRC_DIR/test-class.h \
-  $$SRC_DIR/unified-runtime-object.h \
-  $$SRC_DIR/metatype-object.h \
-  $$SRC_DIR/chasm/chasm-runtime.h \
-  $$SRC_DIR/chasm/chasm-channel.h \
-  $$SRC_DIR/chasm/chasm-call-package.h \
-  $$SRC_DIR/chasm/chasm-carrier.h \
+  $$SRC_DIR/rpdf/webgl-view-dialog/my-page.h \
+  $$SRC_DIR/rpdf/webgl-view-dialog/rpdf-web-engine-page.h \
+  $$SRC_DIR/rpdf/webgl-view-dialog/rpdf-web-engine-view.h \
+  $$SRC_DIR/rpdf/webgl-view-dialog/webgl-view-dialog.h \
+
 
 
 SOURCES += \
   $$SRC_DIR/main.cpp \
- 
+  $$SRC_DIR/rpdf/webgl-view-dialog/my-page.cpp \
+  $$SRC_DIR/rpdf/webgl-view-dialog/rpdf-web-engine-page.cpp \
+  $$SRC_DIR/rpdf/webgl-view-dialog/rpdf-web-engine-view.cpp  \
+  $$SRC_DIR/rpdf/webgl-view-dialog/webgl-view-dialog.cpp \
+
 
 LIBS += -L$$TARGETSDIR -lchasm-lib
 

@@ -23,6 +23,40 @@ USING_KANS(TextIO)
 
 
 
+
+
+
+
+
+
+
+#include <QWebEngineView>
+#include <QMainWindow>
+#include <QApplication>
+#include <QTabWidget>
+#include <QWebChannel>
+#include <QWebEnginePage>
+#include <QContextMenuEvent>
+#include <QMenu>
+#include <QWebEngineContextMenuData>
+
+#include "rpdf/webgl-view-dialog/rpdf-web-engine-page.h"
+#include "rpdf/webgl-view-dialog/rpdf-web-engine-view.h"
+
+#include "rpdf/webgl-view-dialog/webgl-view-dialog.h"
+
+int main(int argc, char *argv[])
+{
+ QApplication a(argc, argv);
+ WebGL_View_Dialog* dlg = new WebGL_View_Dialog(nullptr);
+
+ return a.exec();
+}
+
+
+
+
+
 typedef void (*_temp_minimal_fn_s0_r0_type)();
 
 
@@ -697,7 +731,7 @@ void run_test2(Chasm_Runtime* csr)
 
 //#define run_s0_3_r0(a,b,c,d,e)
 
-int main(int argc, char *argv[])
+int main1(int argc, char *argv[])
 {
  Chasm_Runtime* csr = new Chasm_Runtime;
  csr->init_no_file_session();
@@ -897,7 +931,7 @@ int main(int argc, char *argv[])
 
 
 
-int main1(int argc, char *argv[])
+int main2(int argc, char *argv[])
 {
  Unified_Runtime_Object& uro = *Unified_Runtime_Object::instance();
  uro.register_new_metatype_object("Test_Class");
