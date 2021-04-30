@@ -70,7 +70,7 @@ Chasm_Carrier& Chasm_Carrier::take_value(void* pv)
  case 4: set_raw_value( (n8) *(u4*)pv ); break;
  case 5: set_raw_value( (n8) new QByteArray(*(QByteArray*)pv) ); break;
  case 6: set_raw_value( (n8) *(r8*)pv ); break;
- case 7: set_raw_value( (n8) *(u4*)pv ); break;// new QVariant(*(QVariant*)pv) ); break;
+ case 7: set_raw_value( (n8) new QVariant(*(QVariant*)pv) ); break;
  case 8: set_raw_value( (n8) *(n8*)pv ); break;
  case 9: set_raw_value( (n8) *(void**)pv ); break;
 
