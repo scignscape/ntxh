@@ -10,9 +10,9 @@ if(!resultch)
 
 Chasm_Carrier cc = resultch->first_carrier();
 
-void* rr = cc.value();
-run_s0_3_r9(fncode, (minimal_fn_s0_r9_type) fn,
-      rr, lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
+QString& rr = cc.value_as<QString>();
+run_s0_3_re3(fncode, (minimal_fn_s0_re3_type) fn,
+  rr, lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
 
 if(rcar)
-  rcar->set_value(rr);
+  rcar->set_value_as<QString>(rr);

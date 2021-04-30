@@ -10,9 +10,9 @@ if(!resultch)
 
 Chasm_Carrier cc = resultch->first_carrier();
 
-QByteArray rr = cc.value();
-run_s0_3_r5(fncode, (minimal_fn_s0_r5_type) fn,
-      rr, lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
+u4 rr = cc.value<u4>();
+run_s0_3_re4(fncode, (minimal_fn_s0_re4_type) fn,
+  rr, lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
 
 if(rcar)
   rcar->set_value(rr);

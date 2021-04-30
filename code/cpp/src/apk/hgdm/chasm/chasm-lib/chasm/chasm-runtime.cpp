@@ -12,10 +12,16 @@
 #include <QByteArray>
 
 #define FULL_INCLUDE
-#include "./dev/consoles/fns/run-s0_3_r0.cpp"
-#include "./dev/consoles/fns/run-s0_3_r1.cpp"
-#include "./dev/consoles/fns/run-s0_3_r2.cpp"
-#include "./dev/consoles/fns/run-s0_3_r3.cpp"
+#include "./dev/consoles/fns/s0/a3/run-s0_3_re0.cpp"
+#include "./dev/consoles/fns/s0/a3/run-s0_3_re1.cpp"
+#include "./dev/consoles/fns/s0/a3/run-s0_3_re2.cpp"
+#include "./dev/consoles/fns/s0/a3/run-s0_3_re3.cpp"
+#include "./dev/consoles/fns/s0/a3/run-s0_3_re4.cpp"
+#include "./dev/consoles/fns/s0/a3/run-s0_3_re5.cpp"
+#include "./dev/consoles/fns/s0/a3/run-s0_3_re6.cpp"
+#include "./dev/consoles/fns/s0/a3/run-s0_3_re7.cpp"
+#include "./dev/consoles/fns/s0/a3/run-s0_3_re8.cpp"
+#include "./dev/consoles/fns/s0/a3/run-s0_3_re9.cpp"
 
 
 //#include "kans.h"
@@ -162,17 +168,97 @@ Chasm_Carrier Chasm_Runtime::gen_carrier<void*>(void* pv)
 
 
 
-void Chasm_Runtime::evaluate_r0(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_r0_type fn)
+void Chasm_Runtime::evaluate_re0(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re0_type fn)
 {
- Chasm_Channel* lambda = ccp->channel("lambda");
- if(!lambda)
-   return;
- run_s0_3_r0(fncode, (minimal_fn_s0_r0_type) fn,
-   lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
+// Chasm_Channel* lambda = ccp->channel("lambda");
+// if(!lambda)
+//   return;
+// run_s0_3_re0(fncode, (minimal_fn_s0_re0_type) fn,
+//   lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
+
+#include "./dev/consoles/fns/s0/a3/ch-eval-s0_3_re0.cpp"
+
 }
 
-void Chasm_Runtime::evaluate_r1(Chasm_Call_Package* ccp,
- u2 fncode, minimal_fn_s0_r1_type fn, Chasm_Carrier* rcar)
+//void Chasm_Runtime::evaluate_r1(Chasm_Call_Package* ccp,
+// u2 fncode, minimal_fn_s0_r1_type fn, Chasm_Carrier* rcar)
+//{
+// Chasm_Channel* lambda = ccp->channel("lambda");
+// if(!lambda)
+//   return;
+
+// Chasm_Channel* resultch = ccp->channel("result");
+// if(!resultch)
+//   return;
+
+// Chasm_Carrier cc = resultch->first_carrier();
+
+// u1 rr = cc.value();
+
+// run_s0_3_r1(fncode, (minimal_fn_s0_r1_type) fn,
+//   rr, lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
+
+// if(rcar)
+//   rcar->set_value(rr);
+//}
+
+void Chasm_Runtime::evaluate_re1(Chasm_Call_Package* ccp,
+ u2 fncode, minimal_fn_s0_re1_type fn, Chasm_Carrier* rcar)
+{
+#include "./dev/consoles/fns/s0/a3/ch-eval-s0_3_re1.cpp"
+}
+
+
+void Chasm_Runtime::evaluate_re2(Chasm_Call_Package* ccp,
+ u2 fncode, minimal_fn_s0_re2_type fn, Chasm_Carrier* rcar)
+{
+#include "./dev/consoles/fns/s0/a3/ch-eval-s0_3_re2.cpp"
+}
+
+
+void Chasm_Runtime::evaluate_re4(Chasm_Call_Package* ccp,
+ u2 fncode, minimal_fn_s0_re4_type fn, Chasm_Carrier* rcar)
+{
+#include "./dev/consoles/fns/s0/a3/ch-eval-s0_3_re4.cpp"
+}
+
+void Chasm_Runtime::evaluate_re5(Chasm_Call_Package* ccp,
+ u2 fncode, minimal_fn_s0_re5_type fn, Chasm_Carrier* rcar)
+{
+#include "./dev/consoles/fns/s0/a3/ch-eval-s0_3_re5.cpp"
+}
+
+void Chasm_Runtime::evaluate_re6(Chasm_Call_Package* ccp,
+ u2 fncode, minimal_fn_s0_re6_type fn, Chasm_Carrier* rcar)
+{
+#include "./dev/consoles/fns/s0/a3/ch-eval-s0_3_re6.cpp"
+}
+
+void Chasm_Runtime::evaluate_re7(Chasm_Call_Package* ccp,
+ u2 fncode, minimal_fn_s0_re7_type fn, Chasm_Carrier* rcar)
+{
+#include "./dev/consoles/fns/s0/a3/ch-eval-s0_3_re7.cpp"
+}
+
+void Chasm_Runtime::evaluate_re8(Chasm_Call_Package* ccp,
+ u2 fncode, minimal_fn_s0_re8_type fn, Chasm_Carrier* rcar)
+{
+#include "./dev/consoles/fns/s0/a3/ch-eval-s0_3_re8.cpp"
+}
+
+void Chasm_Runtime::evaluate_re9(Chasm_Call_Package* ccp,
+ u2 fncode, minimal_fn_s0_re9_type fn, Chasm_Carrier* rcar)
+{
+#include "./dev/consoles/fns/s0/a3/ch-eval-s0_3_re9.cpp"
+}
+
+
+
+
+
+
+void Chasm_Runtime::evaluate_re3(Chasm_Call_Package* ccp,
+ u2 fncode, minimal_fn_s0_re3_type fn, Chasm_Carrier* rcar)
 {
  Chasm_Channel* lambda = ccp->channel("lambda");
  if(!lambda)
@@ -184,39 +270,9 @@ void Chasm_Runtime::evaluate_r1(Chasm_Call_Package* ccp,
 
  Chasm_Carrier cc = resultch->first_carrier();
 
- u1 rr = cc.value();
+ QString& rr = *(QString*)cc.raw_value();
 
- run_s0_3_r1(fncode, (minimal_fn_s0_r1_type) fn,
-   rr, lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
-
- if(rcar)
-   rcar->set_value(rr);
-}
-
-
-void Chasm_Runtime::evaluate_r2(Chasm_Call_Package* ccp,
- u2 fncode, minimal_fn_s0_r2_type fn, Chasm_Carrier* rcar)
-{
-#include "./dev/consoles/fns/ch-eval-s0_3_r2.cpp"
-}
-
-
-void Chasm_Runtime::evaluate_r3(Chasm_Call_Package* ccp,
- u2 fncode, minimal_fn_s0_r3_type fn, Chasm_Carrier* rcar)
-{
- Chasm_Channel* lambda = ccp->channel("lambda");
- if(!lambda)
-   return;
-
- Chasm_Channel* resultch = ccp->channel("result");
- if(!resultch)
-   return;
-
- Chasm_Carrier cc = resultch->first_carrier();
-
- QString& rr = *(QString*)cc.value();
-
- run_s0_3_r3(fncode, (minimal_fn_s0_r3_type) fn,
+ run_s0_3_re3(fncode, (minimal_fn_s0_re3_type) fn,
    rr, lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
 
  if(rcar)

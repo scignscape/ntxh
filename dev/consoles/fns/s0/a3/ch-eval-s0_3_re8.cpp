@@ -10,9 +10,9 @@ if(!resultch)
 
 Chasm_Carrier cc = resultch->first_carrier();
 
-QVariant rr = cc.value();
-run_s0_3_r7(fncode, (minimal_fn_s0_r7_type) fn,
-      rr, lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
+n8 rr = cc.value<n8>();
+run_s0_3_re8(fncode, (minimal_fn_s0_re8_type) fn,
+  rr, lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
 
 if(rcar)
   rcar->set_value(rr);

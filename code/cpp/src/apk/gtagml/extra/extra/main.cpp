@@ -22,7 +22,7 @@ QString generate_function_code(u1 retc, u2 key, QString sc)
  if(retc > 0) retv = ret + "& retv, ";
 
 
- QString result = QString("void _f_%1%2_(%3n8 arg1, n8 arg2, n8 arg3, minimal_fn_%4_r%1_type fn){\n  ")
+ QString result = QString("void _f_%1%2_(%3n8 arg1, n8 arg2, n8 arg3, minimal_fn_%4_re%1_type fn){\n  ")
    .arg(retc).arg(key, 3, 10, QLatin1Char('0')).arg(retv).arg(sc);
 
  u1 akey = 0;
@@ -102,8 +102,8 @@ int main(int argc, char *argv[])
   // //  concisely initialize two strings.  A bit cute.
   if(i > 0) retv = QString("%1& %2").arg(ret).arg(rsym = "retv, ");
 
-  QString s0_3_rX_ch_eval_file = QString(ROOT_FOLDER "/dev/consoles/fns/ch-eval-s0_3_r%1.cpp").arg(i);
-  QString s0_3_rX_ch_eval_text = R"(
+  QString s0_3_reX_ch_eval_file = QString(ROOT_FOLDER "/dev/consoles/fns/s0/a3/ch-eval-s0_3_re%1.cpp").arg(i);
+  QString s0_3_reX_ch_eval_text = R"(
 
 Chasm_Channel* lambda = ccp->channel("lambda");
 if(!lambda)
@@ -111,75 +111,94 @@ if(!lambda)
 )";
 
   if(i > 0)
-    s0_3_rX_ch_eval_text += R"(
+    s0_3_reX_ch_eval_text += R"(
 Chasm_Channel* resultch = ccp->channel("result");
 if(!resultch)
   return;
 )";
 
-  s0_3_rX_ch_eval_text += QString(R"(
+  if(i == 0)
+  {
+   s0_3_reX_ch_eval_text += QString(R"(
+run_s0_3_re0(fncode, (minimal_fn_s0_re0_type) fn,
+  lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
+)");
+  }
+  else
+  {
+   s0_3_reX_ch_eval_text += QString(R"(
 Chasm_Carrier cc = resultch->first_carrier();
 
-%1 rr = cc.value();
-run_s0_3_r%2(fncode, (minimal_fn_s0_r%2_type) fn,
-      rr, lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
+%1%2 rr = %3cc.value%4<%1>();
+run_s0_3_re%5(fncode, (minimal_fn_s0_re%5_type) fn,
+  rr, lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
 
 if(rcar)
-  rcar->set_value(rr);
-)").arg(ret).arg(i);
+  rcar->set_value%6(rr);
+)").arg(ret).arg( (i == 3 || i == 5 || i == 7 || i == 9)?"&":"")
+   .arg("")  //.arg((i == 3 || i == 5 || i == 7 || i == 9)?"*("+ret+"*)":"")
+   .arg((i == 3 || i == 5 || i == 7 || i == 9)?"_as":"")
+   .arg(i)
+   .arg((i == 3 || i == 5 || i == 7 || i == 9)?"_as<"+ret+">":
+     //(i==9)?"":(i==0)?"*":
+     ""
 
-  save_file(s0_3_rX_ch_eval_file, s0_3_rX_ch_eval_text);
+   )
+   ;
+  }
+  save_file(s0_3_reX_ch_eval_file, s0_3_reX_ch_eval_text);
+
+  // (i==9)?"*"
+
+  QString s0_3_reX_file = QString(ROOT_FOLDER "/dev/consoles/fns/s0/a3/run-s0_3_re%1.cpp").arg(i);
+  QString fn_array_reX_file = QString(ROOT_FOLDER "/dev/consoles/fns/s0/a3/fn-array-s0_3_re%1.cpp").arg(i);
+
+  QString fn_array_reX_text;
+  QString s0_3_reX_text = QString(R"(
 
 
-  QString s0_3_rX_file = QString(ROOT_FOLDER "/dev/consoles/fns/run-s0_3_r%1.cpp").arg(i);
-  QString fn_array_rX_file = QString(ROOT_FOLDER "/dev/consoles/fns/fn-array-s0_3_r%1.cpp").arg(i);
+#ifndef SEEN_DEFS_S0_3_RE%2
+#define SEEN_DEFS_S0_3_RE%2
 
-  QString fn_array_rX_text;
-  QString s0_3_rX_text = QString(R"(
+typedef %1(*minimal_fn_s0_re%2_type)();
+typedef void(*run_s0_3_re%2_type)(%3n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_re%2_type fn);
+typedef run_s0_3_re%2_type s0_3_re%2_dispatch_array [1000];
 
-
-#ifndef SEEN_DEFS_S0_3_R%2
-#define SEEN_DEFS_S0_3_R%2
-
-typedef %1(*minimal_fn_s0_r%2_type)();
-typedef void(*run_s0_3_r%2_type)(%3n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r%2_type fn);
-typedef run_s0_3_r%2_type s0_3_r%2_dispatch_array [1000];
-
-#endif //  SEEN_DEFS_S0_3_R%2
+#endif //  SEEN_DEFS_S0_3_RE%2
 
 #ifdef FULL_INCLUDE
 
-#include "fn-array-s0_3_r%2.cpp"
+#include "fn-array-s0_3_re%2.cpp"
 
-s0_3_r%2_dispatch_array* init_s0_3_r%2_dispatch_array()
+s0_3_re%2_dispatch_array* init_s0_3_re%2_dispatch_array()
 {
- s0_3_r%2_dispatch_array* result = (s0_3_r%2_dispatch_array*) new run_s0_3_r%2_type[1000];
+ s0_3_re%2_dispatch_array* result = (s0_3_re%2_dispatch_array*) new run_s0_3_re%2_type[1000];
  )").arg(ret).arg(i).arg(retv);
 
   for(u2 j = 0; j < 1000; ++j)
   {
-   s0_3_rX_text += QString("\n (*result)[%1] = &_f_%2%3_;").arg(j).arg(i).arg(j, 3, 10, QLatin1Char('0'));
+   s0_3_reX_text += QString("\n (*result)[%1] = &_f_%2%3_;").arg(j).arg(i).arg(j, 3, 10, QLatin1Char('0'));
   }
 
-  s0_3_rX_text += QString(R"(
+  s0_3_reX_text += QString(R"(
 }
 
-void run_s0_3_r%1(u4 code, minimal_fn_s0_r%1_type fn, %2n8 a1, n8 a2, n8 a3)
+void run_s0_3_re%1(u4 code, minimal_fn_s0_re%1_type fn, %2n8 a1, n8 a2, n8 a3)
 {
  code %= 10000;
- static s0_3_r%1_dispatch_array* dispatch_array = init_s0_3_r%1_dispatch_array();
- run_s0_3_r%1_type f = (*dispatch_array)[code];
+ static s0_3_re%1_dispatch_array* dispatch_array = init_s0_3_re%1_dispatch_array();
+ run_s0_3_re%1_type f = (*dispatch_array)[code];
  f(%3a1, a2, a3, fn);
 }
 
 #endif //def FULL_INCLUDE
 )").arg(i).arg(retv).arg(rsym);
 
-  save_file(s0_3_rX_file, s0_3_rX_text);
+  save_file(s0_3_reX_file, s0_3_reX_text);
 
   for(int j = 0; j < 1000; ++j)
-    fn_array_rX_text += generate_function_code(i, j, "s0");
-  save_file(fn_array_rX_file, fn_array_rX_text);
+    fn_array_reX_text += generate_function_code(i, j, "s0");
+  save_file(fn_array_reX_file, fn_array_reX_text);
  }
 
  return 0;

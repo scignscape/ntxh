@@ -1,22 +1,22 @@
 
 
 
-#ifndef SEEN_DEFS_S0_3_R6
-#define SEEN_DEFS_S0_3_R6
+#ifndef SEEN_DEFS_S0_3_RE6
+#define SEEN_DEFS_S0_3_RE6
 
-typedef r8(*minimal_fn_s0_r6_type)();
-typedef void(*run_s0_3_r6_type)(r8& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r6_type fn);
-typedef run_s0_3_r6_type s0_3_r6_dispatch_array [1000];
+typedef r8(*minimal_fn_s0_re6_type)();
+typedef void(*run_s0_3_re6_type)(r8& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_re6_type fn);
+typedef run_s0_3_re6_type s0_3_re6_dispatch_array [1000];
 
-#endif //  SEEN_DEFS_S0_3_R6
+#endif //  SEEN_DEFS_S0_3_RE6
 
 #ifdef FULL_INCLUDE
 
-#include "fn-array-s0_3_r6.cpp"
+#include "fn-array-s0_3_re6.cpp"
 
-s0_3_r6_dispatch_array* init_s0_3_r6_dispatch_array()
+s0_3_re6_dispatch_array* init_s0_3_re6_dispatch_array()
 {
- s0_3_r6_dispatch_array* result = (s0_3_r6_dispatch_array*) new run_s0_3_r6_type[1000];
+ s0_3_re6_dispatch_array* result = (s0_3_re6_dispatch_array*) new run_s0_3_re6_type[1000];
  
  (*result)[0] = &_f_6000_;
  (*result)[1] = &_f_6001_;
@@ -1020,11 +1020,11 @@ s0_3_r6_dispatch_array* init_s0_3_r6_dispatch_array()
  (*result)[999] = &_f_6999_;
 }
 
-void run_s0_3_r6(u4 code, minimal_fn_s0_r6_type fn, r8& retv, n8 a1, n8 a2, n8 a3)
+void run_s0_3_re6(u4 code, minimal_fn_s0_re6_type fn, r8& retv, n8 a1, n8 a2, n8 a3)
 {
  code %= 10000;
- static s0_3_r6_dispatch_array* dispatch_array = init_s0_3_r6_dispatch_array();
- run_s0_3_r6_type f = (*dispatch_array)[code];
+ static s0_3_re6_dispatch_array* dispatch_array = init_s0_3_re6_dispatch_array();
+ run_s0_3_re6_type f = (*dispatch_array)[code];
  f(retv, a1, a2, a3, fn);
 }
 

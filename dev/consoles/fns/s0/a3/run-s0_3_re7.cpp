@@ -1,22 +1,22 @@
 
 
 
-#ifndef SEEN_DEFS_S0_3_R7
-#define SEEN_DEFS_S0_3_R7
+#ifndef SEEN_DEFS_S0_3_RE7
+#define SEEN_DEFS_S0_3_RE7
 
-typedef QVariant(*minimal_fn_s0_r7_type)();
-typedef void(*run_s0_3_r7_type)(QVariant& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_r7_type fn);
-typedef run_s0_3_r7_type s0_3_r7_dispatch_array [1000];
+typedef QVariant(*minimal_fn_s0_re7_type)();
+typedef void(*run_s0_3_re7_type)(QVariant& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_re7_type fn);
+typedef run_s0_3_re7_type s0_3_re7_dispatch_array [1000];
 
-#endif //  SEEN_DEFS_S0_3_R7
+#endif //  SEEN_DEFS_S0_3_RE7
 
 #ifdef FULL_INCLUDE
 
-#include "fn-array-s0_3_r7.cpp"
+#include "fn-array-s0_3_re7.cpp"
 
-s0_3_r7_dispatch_array* init_s0_3_r7_dispatch_array()
+s0_3_re7_dispatch_array* init_s0_3_re7_dispatch_array()
 {
- s0_3_r7_dispatch_array* result = (s0_3_r7_dispatch_array*) new run_s0_3_r7_type[1000];
+ s0_3_re7_dispatch_array* result = (s0_3_re7_dispatch_array*) new run_s0_3_re7_type[1000];
  
  (*result)[0] = &_f_7000_;
  (*result)[1] = &_f_7001_;
@@ -1020,11 +1020,11 @@ s0_3_r7_dispatch_array* init_s0_3_r7_dispatch_array()
  (*result)[999] = &_f_7999_;
 }
 
-void run_s0_3_r7(u4 code, minimal_fn_s0_r7_type fn, QVariant& retv, n8 a1, n8 a2, n8 a3)
+void run_s0_3_re7(u4 code, minimal_fn_s0_re7_type fn, QVariant& retv, n8 a1, n8 a2, n8 a3)
 {
  code %= 10000;
- static s0_3_r7_dispatch_array* dispatch_array = init_s0_3_r7_dispatch_array();
- run_s0_3_r7_type f = (*dispatch_array)[code];
+ static s0_3_re7_dispatch_array* dispatch_array = init_s0_3_re7_dispatch_array();
+ run_s0_3_re7_type f = (*dispatch_array)[code];
  f(retv, a1, a2, a3, fn);
 }
 
