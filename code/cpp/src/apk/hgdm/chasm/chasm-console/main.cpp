@@ -45,10 +45,36 @@ USING_KANS(TextIO)
 
 #include "rpdf/webgl-view-dialog/webgl-view-dialog.h"
 
+#include "rpdf/webgl-view-dialog/context-menu-provider.h"
+
 int main(int argc, char *argv[])
 {
+ QVector< QMap<QString, QString> >* url_patterns;
+
+ Context_Menu_Provider cmp;
+ url_patterns = &cmp.url_patterns();
+
  QApplication a(argc, argv);
  WebGL_View_Dialog* dlg = new WebGL_View_Dialog(nullptr);
+
+ dlg->set_context_menu_provider(&cmp);
+
+ QApplication::connect(dlg, &WebGL_View_Dialog::url_patterns_changed,
+   [dlg, &url_patterns]()
+ {
+  *url_patterns = dlg->url_patterns();
+ });
+
+ QApplication::connect(dlg, &WebGL_View_Dialog::url_pattern_match,
+   [dlg, &url_patterns](QString procedure_name, QString arguments)
+ {
+  qDebug() << "Proc: " << procedure_name;
+  qDebug() << "arguments: " << arguments;
+ });
+
+
+
+
 
  return a.exec();
 }

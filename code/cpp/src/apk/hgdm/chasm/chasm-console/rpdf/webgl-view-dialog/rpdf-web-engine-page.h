@@ -25,6 +25,8 @@ public:
 
 class RPDF_Web_Engine_Page : public QWebEnginePage
 {
+ Q_OBJECT
+
 public:
  RPDF_Web_Engine_Page();
  RPDF_Web_Engine_Page(RPDF_Web_Engine_Page* parent);
@@ -34,6 +36,12 @@ public:
 
  NavigationRequestInterceptor*
  createWindow(QWebEnginePage::WebWindowType type) override;
+
+ void emit_navRequest(const QUrl &url);
+
+Q_SIGNALS:
+
+ void navRequest(const QUrl &url);
 
 };
 

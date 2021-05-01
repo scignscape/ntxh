@@ -23,6 +23,10 @@ bool NavigationRequestInterceptor::acceptNavigationRequest(const QUrl
  //    else
  //        target->load(url);
 
+ RPDF_Web_Engine_Page* wep = dynamic_cast<RPDF_Web_Engine_Page*>(target);
+
+ wep->emit_navRequest(url);
+
  return false;
 }
 
@@ -110,6 +114,10 @@ RPDF_Web_Engine_Page::createWindow(QWebEnginePage::WebWindowType type)
 //// return sec;
 //}
 
+void RPDF_Web_Engine_Page::emit_navRequest(const QUrl &url)
+{
+ Q_EMIT navRequest(url);
+}
 
 bool RPDF_Web_Engine_Page::acceptNavigationRequest(const QUrl &url,
                                                    NavigationType type, bool isMainFrame)
