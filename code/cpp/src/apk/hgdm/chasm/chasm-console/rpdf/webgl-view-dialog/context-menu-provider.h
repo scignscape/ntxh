@@ -11,13 +11,22 @@
 
 #include "global-types.h"
 
+#include "./dev/consoles/fns/s0/a3/run-s0_3_re8.cpp"
+
+
 class Chasm_Call_Package;
 
+class Chasm_Runtime;
 
 class Context_Menu_Provider
 {
  QVector<QMap<QString, QString>> url_patterns_;
 
+ QMap<QString, QString> procedure_name_resolutions_;
+
+ Chasm_Runtime* chasm_runtime_;
+
+ QMap<QString, QPair<u4, minimal_fn_s0_re8_type>> registered_procedures_;
 
 public:
 

@@ -150,8 +150,9 @@ WebGL_View_Dialog::WebGL_View_Dialog(QWidget* parent)
 
  url_patterns_table_->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
 
- add_fixed_url_pattern("contextMenu!.*www.google.com/maps/place/([\\w+]+)", "map_places",
-   "<QString-> `.1");
+ add_fixed_url_pattern("contextMenu!.*www.google.com/maps/place/([\\w+]+)", "test_map_places",
+   "`.1 ; 1234567 ; 89");
+                       // // "<QString-> `.1");
 
  QHBoxLayout* add_row_layout = new QHBoxLayout;
  QPushButton* add_row_button = new QPushButton("Add", this);

@@ -47,6 +47,9 @@ USING_KANS(TextIO)
 
 #include "rpdf/webgl-view-dialog/context-menu-provider.h"
 
+
+
+
 int main(int argc, char *argv[])
 {
  QVector< QMap<QString, QString> >* url_patterns;
