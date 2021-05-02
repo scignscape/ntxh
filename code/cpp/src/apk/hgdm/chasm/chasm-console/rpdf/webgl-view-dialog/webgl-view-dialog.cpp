@@ -8,6 +8,8 @@
 
 #include <QRegularExpression>
 
+#include "context-menu-provider.h"
+
 
 #include "styles.h"
 
@@ -19,7 +21,7 @@ void WebGL_View_Dialog::check_url_patterns(QString url)
  if(url.contains("/maps/place"))
    qDebug() << url;
 
-
+ QVector<Context_Menu_Provider::Action_Info> info;
 
  for(int i = url_patterns_.size() - 1; i >= 0; --i) //const QMap<QString, QString>& m : url_patterns_)
  {
@@ -41,8 +43,26 @@ void WebGL_View_Dialog::check_url_patterns(QString url)
      arguments.replace(QString("`.%1").arg(i), rxm.captured(i));
    qDebug() << "Proc = " << proc;
    qDebug() << "Arguments = " << arguments;
-   Q_EMIT url_pattern_match(proc, arguments);
+
+   QStringList action_procedures;
+   QStringList option_labels;
+
+   context_menu_provider_->check_url(proc, arguments, info);
+
+   if(!info.isEmpty())
+     break;
+   //Q_EMIT url_pattern_match(proc, arguments);
   }
+ }
+
+ if(info.isEmpty())
+   return;
+
+
+
+ for(Context_Menu_Provider::Action_Info& ai : info)
+ {
+  qDebug() << ai.option_label;
  }
 
 }
@@ -61,12 +81,12 @@ WebGL_View_Dialog::WebGL_View_Dialog(QWidget* parent)
 
  QObject::connect(wep_, &RPDF_Web_Engine_Page::urlChanged,[this](const QUrl &url){
   qDebug() << "r:" << url.toString();
-  check_url_patterns(url.toString().prepend("urlChanged!"));
+  //? check_url_patterns(url.toString().prepend("urlChanged!"));
  });
 
  QObject::connect(wep_, &RPDF_Web_Engine_Page::navRequest,[this](const QUrl &url){
   qDebug() << "req:" << url.toString();
-  check_url_patterns(url.toString().prepend("navRequest!"));
+  //? check_url_patterns(url.toString().prepend("navRequest!"));
  });
 
 
@@ -130,7 +150,7 @@ WebGL_View_Dialog::WebGL_View_Dialog(QWidget* parent)
 
  url_patterns_table_->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
 
- add_fixed_url_pattern("urlChanged!.*www.google.com/maps/place/([\\w+]+)", "map_places",
+ add_fixed_url_pattern("contextMenu!.*www.google.com/maps/place/([\\w+]+)", "map_places",
    "<QString-> `.1");
 
  QHBoxLayout* add_row_layout = new QHBoxLayout;
@@ -206,6 +226,13 @@ WebGL_View_Dialog::WebGL_View_Dialog(QWidget* parent)
 WebGL_View_Dialog::~WebGL_View_Dialog()
 {
 
+}
+
+void WebGL_View_Dialog::set_context_menu_provider(Context_Menu_Provider *context_menu_provider)
+{
+ context_menu_provider_ = context_menu_provider;
+ wev_->set_context_menu_provider(context_menu_provider_);
+ context_menu_provider_->url_patterns() = url_patterns_;
 }
 
 void WebGL_View_Dialog::add_fixed_url_pattern(QString pattern,

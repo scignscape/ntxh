@@ -59,7 +59,9 @@ public:
 
  ACCESSORS__RGET(MACRO_PASTE( QVector<QMap<QString, QString>> ) ,url_patterns)
 
- ACCESSORS(Context_Menu_Provider* ,context_menu_provider)
+ ACCESSORS__SDECLARE(Context_Menu_Provider* ,context_menu_provider)
+
+ ACCESSORS(RPDF_Web_Engine_View* ,wev)
 
  void handle_edit_url_patterns_row(int rc);
  void handle_save_url_patterns_row(int rc);
@@ -67,6 +69,7 @@ public:
  void handle_add_url_patterns_row();
 
  void check_url_patterns(QString url);
+
 
 Q_SIGNALS:
 

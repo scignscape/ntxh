@@ -11,6 +11,8 @@
 #include <QMenu>
 #include <QWebEngineContextMenuData>
 
+#include "accessors.h"
+
 ////class NavigationRequestInterceptor;
 //class NavigationRequestInterceptor : public QWebEnginePage
 //{
@@ -21,17 +23,24 @@
 //                              bool isMainFrame) Q_DECL_OVERRIDE;
 //};
 
+class Context_Menu_Provider;
 
 class RPDF_Web_Engine_View : public QWebEngineView
 {
+ Context_Menu_Provider* context_menu_provider_;
+
 public:
  RPDF_Web_Engine_View();
 
+ ACCESSORS(Context_Menu_Provider* ,context_menu_provider)
  RPDF_Web_Engine_View* sec;
 
  void contextMenuEvent(QContextMenuEvent *event) override;
  //?    MyWebView* createWindow(QWebEnginePage::WebWindowType type) override;
  void check_sec();
+
+ void check_url_patterns(QString url);
+
 
 };
 

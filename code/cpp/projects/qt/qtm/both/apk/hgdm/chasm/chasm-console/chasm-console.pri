@@ -61,6 +61,7 @@ HEADERS += \
 
 SOURCES += \
   $$SRC_DIR/main.cpp \
+  $$SRC_DIR/rpdf/webgl-view-dialog/my-page.cpp \
   $$SRC_DIR/rpdf/webgl-view-dialog/rpdf-web-engine-page.cpp \
   $$SRC_DIR/rpdf/webgl-view-dialog/rpdf-web-engine-view.cpp  \
   $$SRC_DIR/rpdf/webgl-view-dialog/webgl-view-dialog.cpp \
