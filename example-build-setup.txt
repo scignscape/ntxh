@@ -1,0 +1,40 @@
+
+Suppose you have just installed a new version of Ubuntu on your computer.
+To set up a working environment for basic Qt/C++ development (say, 
+building the application for this data set) the following is a typical 
+list of steps you might take (of course, if you don't have a brand-new 
+system some of these may be unnecessary):
+
+1)  Visit qt.io and install Qt and Qt Creator (you'll probably download an online installer first)
+  -- make sure Qt Creator runs properly 
+
+2)  There seems to be a recurring problem with Qt Creator and something called "xcb".  If Qt creator 
+does not start, try running it from a command line (i.e., enter the Qt tools/bin 
+directory and type ./qtcreator.sh, or for more info something like 
+QT_DEBUG_PLUGINS=1 ./qtcreator.sh).  Fixing xcb problems might be as simple as 
+installing a library which Qt Creator might need, libxcb-xinerama0 
+(i.e. type sudo apt-get install libxcb-xinerama0).
+
+3)  To avoid error messages in Qt Creator (some of which may not affect the 
+data set but might cause confusion between unimportant and important 
+messages) this is a good time to set up the "preferred" folder 
+alongside the archive.  Unless you need to customize the 
+.pri files, the quick way to do this is to run the script 
+called "unzip-preferred.sh" in @/code/cpp/qmake-console/util.   
+
+4)  If you don't have a C++ compiler, install "build-essential" (which includes a 
+variety of tools needed for C/C++ development); i.e. type "sudo apt-get install 
+build-essential" from a command line.
+
+5)  Try opening the "build-first.pro" project in Qt Creator -- or skip ahead to 
+installing some basic libraries, but trying to compile "build-first" will 
+indicate which libraries you might need.  This assumes you're working 
+from a new installation; otherwise you might well have these libraries already. 
+
+6)  A typical setup will include installing zlib, via "sudo apt-get install libz-dev"
+
+7)  A typical setup will include installing GL, via "sudo apt-get install libgl1-mesa-dev"
+
+8)  Now "build-first" should compile and run.  Try that, then try other build varieties 
+(if desired) which may have other dependencies.
+

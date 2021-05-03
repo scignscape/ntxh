@@ -39,7 +39,7 @@ void RPDF_Web_Engine_View::contextMenuEvent(QContextMenuEvent *event)
 
  for(Context_Menu_Provider::Action_Info& ai : info)
  {
-  menu->addAction(ai.option_label, [this, &ai]
+  menu->addAction(ai.option_label, [this, ai]
   {
    context_menu_provider_->run_callback(ai);
   });

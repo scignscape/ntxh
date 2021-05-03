@@ -62,7 +62,6 @@ Chasm_Type_Object* Chasm_Runtime::get_type_object_by_name(QString name)
  return type_objects_.value(name);
 }
 
-
 Chasm_Type_Object* Chasm_Runtime::register_type_object(QString name, u2 pos1code, u2 pos2code,
   u2 pos3code, u2 pos4code)
 {
@@ -196,6 +195,30 @@ Chasm_Carrier Chasm_Runtime::gen_carrier<void*>(void* pv)
  return gen_carrier(9).take_value(pv);
 }
 
+Chasm_Carrier Chasm_Runtime::gen_carrier(Chasm_Typed_Value_Representation& tvr)
+{
+ Chasm_Type_Object* cto = tvr.type_object;
+
+ // just until the full reg is set up ...
+
+ if(cto->name() == "QString")
+ {
+  return gen_carrier<QString>(&tvr.rep);
+ }
+
+ if(cto->name() == "QVariant")
+ {
+  return gen_carrier<QVariant>(&tvr.rep);
+ }
+
+ if(cto->name() == "u1")
+ {
+  u1 arg = tvr.rep.toUInt();
+  return gen_carrier<u1>(&arg);
+ }
+
+ return gen_carrier<void*>(&tvr.raw_value);
+}
 
 
 void Chasm_Runtime::evaluate_re0(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re0_type fn)

@@ -49,7 +49,7 @@ public:
 
  void check_url_patterns(QString url, QVector<Context_Menu_Provider::Action_Info>& info);
 
- void run_callback(Action_Info& ai);
+ void run_callback(Action_Info ai);
 
 };
 

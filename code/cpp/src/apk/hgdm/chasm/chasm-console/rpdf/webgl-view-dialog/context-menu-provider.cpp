@@ -11,6 +11,16 @@
 
 
 
+void launch_web_site(QString place, QVariant pos, u1 flag)
+{
+ qDebug() << "Place = " << place;
+}
+
+void launch_virtual_tour(QString place, QVariant pos, u1 flag)
+{
+ qDebug() << "Place = " << place;
+}
+
 
 
 void test_map_places(Context_Menu_Provider* _this, QString arguments,
@@ -48,6 +58,21 @@ Context_Menu_Provider::Context_Menu_Provider()
 
  registered_procedures_.insert("test_map_places@70930",
    {70930, (minimal_fn_s0_re8_type) &test_map_places});
+
+
+ procedure_name_resolutions_.insert("launch_web_site",
+   "launch_web_site@70371");
+
+ registered_procedures_.insert("launch_web_site@70371",
+   {70371, (minimal_fn_s0_re8_type) &launch_web_site});
+
+
+ procedure_name_resolutions_.insert("launch_virtual_tour",
+   "launch_virtual_tour@70371");
+
+ registered_procedures_.insert("launch_virtual_tour@70371",
+   {70371, (minimal_fn_s0_re8_type) &launch_virtual_tour});
+
 }
 
 void Context_Menu_Provider::check_url(QString procedure, QString arguments,
@@ -99,8 +124,37 @@ void Context_Menu_Provider::check_url(QString procedure, QString arguments,
 }
 
 
-void Context_Menu_Provider::run_callback(Action_Info& ai)
+void Context_Menu_Provider::run_callback(Action_Info ai)
 {
+ QString procedure = ai.action_procedure;
+ {
+  auto it = procedure_name_resolutions_.find(procedure);
+  if(it != procedure_name_resolutions_.end())
+    procedure = it.value();
+ }
+
+ auto it = registered_procedures_.find(procedure);
+
+ if(it == registered_procedures_.end())
+   return;
+
+
+ const QPair<u4, minimal_fn_s0_re8_type>& pr = it.value();
+
+
+ u4 pcode = pr.first;
+ minimal_fn_s0_re8_type proc = pr.second;
+
+ Chasm_Call_Package* ccp = chasm_runtime_->new_call_package();
+ ccp->add_new_channel("lambda");
+
+ u1 pos = 0;
+ for(Chasm_Typed_Value_Representation tvr : ai.reps)
+ {
+  Chasm_Carrier cc = chasm_runtime_->gen_carrier(tvr);
+  //tvr.
+  //tvr.rep;
+ }
 
 }
 

@@ -101,6 +101,7 @@ public:
 
  Chasm_Call_Package* new_call_package();
 
+ Chasm_Carrier gen_carrier(Chasm_Typed_Value_Representation& tvr);
  Chasm_Carrier gen_carrier(QString type_name = {});
  Chasm_Carrier gen_carrier(u1 type_flag);
 
