@@ -208,7 +208,8 @@ Chasm_Carrier Chasm_Runtime::gen_carrier(Chasm_Typed_Value_Representation& tvr)
 
  if(cto->name() == "QVariant")
  {
-  return gen_carrier<QVariant>(&tvr.rep);
+  QVariant r = tvr.rep.toInt();
+  return gen_carrier<QVariant>(&r);
  }
 
  if(cto->name() == "u1")

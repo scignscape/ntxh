@@ -36,6 +36,9 @@ public:
 
  ACCESSORS__RGET(MACRO_PASTE(QVector<QMap<QString, QString>>) ,url_patterns)
 
+ ACCESSORS(Chasm_Runtime* ,chasm_runtime)
+
+
  struct Action_Info
  {
   //Chasm_Call_Package* ccp;

@@ -90,12 +90,56 @@ typedef void (*_temp_minimal_fn_s0_r0_type)();
 
 
 
-void testqvar(QVariant arg1, double arg2, float* arg3)
+void testqvar(QVariant arg1, r8 arg2, u2 arg3)
+{
+ qDebug() << "arg1 = " << arg1;
+ qDebug() << "arg2 = " << arg2;
+ qDebug() << "arg3 = " << arg3;
+}
+
+void run_testqvar(Chasm_Runtime* csr)
+{
+ Chasm_Call_Package* ccp = csr->new_call_package();
+ ccp->add_new_channel("lambda");
+
+ QVariant a1 = 103;
+ r8 a2 = .12345;
+ u2 a3 = 12345;
+
+ Chasm_Carrier cc1 = csr->gen_carrier<QVariant>(&a1);
+ Chasm_Carrier cc2 = csr->gen_carrier<r8>(&a2);
+ Chasm_Carrier cc3 = csr->gen_carrier<u2>(&a3);
+
+ ccp->add_carriers({cc1,cc2,cc3});
+ csr->evaluate(ccp, 70762, (minimal_fn_s0_re0_type) &testqvar);
+}
+
+
+void testqvarf(QVariant arg1, r8 arg2, float* arg3)
 {
  qDebug() << "arg1 = " << arg1;
  qDebug() << "arg2 = " << arg2;
  qDebug() << "arg3 = " << *arg3;
 }
+
+void run_testqvarf(Chasm_Runtime* csr)
+{
+ Chasm_Call_Package* ccp = csr->new_call_package();
+ ccp->add_new_channel("lambda");
+
+ QVariant a1 = 103;
+ r8 a2 = .12345;
+ float* a3 = new float(.12345);
+
+ Chasm_Carrier cc1 = csr->gen_carrier<QVariant>(&a1);
+ Chasm_Carrier cc2 = csr->gen_carrier<r8>(&a2);
+ Chasm_Carrier cc3 = csr->gen_carrier<void*>(&a3);
+
+ ccp->add_carriers({cc1,cc2,cc3});
+ csr->evaluate(ccp, 70769, (minimal_fn_s0_re0_type) &testqvarf);
+}
+
+
 
 
 void testfn(s1 arg1, u4 arg2, s2& arg3)
@@ -105,6 +149,26 @@ void testfn(s1 arg1, u4 arg2, s2& arg3)
  qDebug() << "arg3 = " << arg3;
  arg3 = -arg3;
 }
+
+void run_testfn(Chasm_Runtime* csr)
+{
+ Chasm_Call_Package* ccp = csr->new_call_package();
+ ccp->add_new_channel("lambda");
+
+ s1 a1 = -103;
+ u4 a2 = -1;
+ s2 a3 = -211;
+
+ Chasm_Carrier cc1 = csr->gen_carrier<u1>(&a1);
+ Chasm_Carrier cc2 = csr->gen_carrier<u4>(&a2);
+ Chasm_Carrier cc3 = csr->gen_carrier<n8&>(&a3);
+
+ ccp->add_carriers({cc1,cc2,cc3});
+ csr->evaluate(ccp, 70140, (minimal_fn_s0_re0_type) &testfn);
+ qDebug() << "a3 = " << a3;
+}
+
+
 
 s1 testsus(s1 arg1, u4 arg2, s2 arg3)
 {
@@ -764,6 +828,13 @@ int main1(int argc, char *argv[])
 {
  Chasm_Runtime* csr = new Chasm_Runtime;
  csr->init_no_file_session();
+
+ run_testqvar(csr);
+ qDebug() << "\n===\n";
+ run_testqvarf(csr);
+ qDebug() << "\n===\n";
+ run_testfn(csr);
+ qDebug() << "\n===\n";
 
  run_test2(csr);
  qDebug() << "\n===\n";

@@ -55,6 +55,16 @@ void Chasm_Carrier::set_value_as<QVariant>(const QVariant& val)
  take_value(const_cast<QVariant*>(&val));
 }
 
+n8 Chasm_Carrier::pasn8()
+{
+ u1 tf = key_.type_flag();
+
+ if( (tf == 0) || (tf == 3) || (tf == 5) || (tf == 7) )
+   return raw_value_;
+ return (n8) &raw_value_;
+}
+
+
 
 Chasm_Carrier& Chasm_Carrier::take_value(void* pv)
 {
@@ -69,7 +79,7 @@ Chasm_Carrier& Chasm_Carrier::take_value(void* pv)
  case 3: set_raw_value( (n8) new QString(*(QString*)pv) ); break;
  case 4: set_raw_value( (n8) *(u4*)pv ); break;
  case 5: set_raw_value( (n8) new QByteArray(*(QByteArray*)pv) ); break;
- case 6: set_raw_value( (n8) *(r8*)pv ); break;
+ case 6: set_value_reinterpret(pv); break;
  case 7: set_raw_value( (n8) new QVariant(*(QVariant*)pv) ); break;
  case 8: set_raw_value( (n8) *(n8*)pv ); break;
  case 9: set_raw_value( (n8) *(void**)pv ); break;

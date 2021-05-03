@@ -114,20 +114,7 @@ public:
 
  Chasm_Carrier& take_value(void* pv);
 
- n8 pasn8()
- {
-  u1 tf = key_.type_flag();
-  if(tf == 3)
-  {
-   QString* qs = (QString*) raw_value_;
-   return raw_value_;
-  }
-  if(tf == 0)
-  {
-   return raw_value_;
-  }
-  return (n8) &raw_value_;
- }
+ n8 pasn8();
 
 // n8& pasn8_ref()
 // {
