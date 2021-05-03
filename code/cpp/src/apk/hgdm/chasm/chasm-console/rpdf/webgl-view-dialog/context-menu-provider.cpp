@@ -41,7 +41,7 @@ void test_map_places(Context_Menu_Provider* _this, QString arguments,
 
 
  info = {{{
-     {QString_type->with_rep("Birmingham") },
+     {QString_type->with_rep(qsl.first()) },
      {QVariant_type->with_rep("89") },
      {u1_type->with_rep("103") },
 
