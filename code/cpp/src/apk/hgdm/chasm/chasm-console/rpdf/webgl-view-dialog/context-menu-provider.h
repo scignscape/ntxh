@@ -13,8 +13,10 @@
 
 #include "./dev/consoles/fns/s0/a3/run-s0_3_re8.cpp"
 
+#include "chasm-lib/chasm/chasm-runtime.h"
 
 class Chasm_Call_Package;
+class Chasm_Type_Object;
 
 class Chasm_Runtime;
 
@@ -36,7 +38,8 @@ public:
 
  struct Action_Info
  {
-  Chasm_Call_Package* ccp;
+  //Chasm_Call_Package* ccp;
+  QVector<Chasm_Typed_Value_Representation> reps;
   QString option_label;
   QString action_procedure;
  };

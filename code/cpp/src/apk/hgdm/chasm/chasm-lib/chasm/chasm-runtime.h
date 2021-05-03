@@ -41,6 +41,14 @@
 
 
 class Chasm_Call_Package;
+class Chasm_Type_Object;
+
+struct Chasm_Typed_Value_Representation
+{
+ Chasm_Type_Object* type_object;
+ n8 raw_value;
+ QString rep;
+};
 
 //KANS_(GTagML)
 
@@ -78,11 +86,18 @@ class Chasm_Runtime
 
  u4 current_no_file_session_;
 
+ QMap<QString, Chasm_Type_Object*> type_objects_;
+
 public:
 
  Chasm_Runtime();
 
  _Result Result;
+
+ Chasm_Type_Object* register_type_object(QString name, u2 pos1code, u2 pos2code,
+   u2 pos3code, u2 pos4code);
+
+ Chasm_Type_Object* get_type_object_by_name(QString name);
 
  Chasm_Call_Package* new_call_package();
 

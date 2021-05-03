@@ -36,14 +36,44 @@
 #include "chasm-call-package.h"
 #include "chasm-channel.h"
 
+#include "chasm-type-object.h"
+
 
 Chasm_Runtime::Chasm_Runtime()
  :  gen_trisym_line_index_(0), gen_trisym_file_index_(0),
     gen_trisym_col_index_(0), call_package_index_(0),
     current_no_file_session_(0)
 {
+ register_type_object("n8&", 0, 0, 0, -1);
 
+ register_type_object("u1", 1, 10, 100, 1000);
+ register_type_object("u2", 2, 20, 200, 2000);
+ register_type_object("QString", 3, 30, 300, 3000);
+ register_type_object("u4", 4, 40, 400, 4000);
+ register_type_object("QByteArray", 5, 50, 500, 5000);
+ register_type_object("r8", 6, 60, 600, 6000);
+ register_type_object("QVariant", 7, 70, 700, 7000);
+ register_type_object("u8", 8, 80, 800, 8000);
+ register_type_object("void*", 9, 90, 900, 9000);
 }
+
+Chasm_Type_Object* Chasm_Runtime::get_type_object_by_name(QString name)
+{
+ return type_objects_.value(name);
+}
+
+
+Chasm_Type_Object* Chasm_Runtime::register_type_object(QString name, u2 pos1code, u2 pos2code,
+  u2 pos3code, u2 pos4code)
+{
+ Chasm_Type_Object* result = new Chasm_Type_Object(name, pos1code, pos2code,
+   pos3code, pos4code);
+
+ type_objects_.insert(name, result);
+
+ return result;
+}
+
 
 template<>
 Chasm_Carrier Chasm_Runtime::gen_carrier<n8&>()
@@ -170,37 +200,8 @@ Chasm_Carrier Chasm_Runtime::gen_carrier<void*>(void* pv)
 
 void Chasm_Runtime::evaluate_re0(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re0_type fn)
 {
-// Chasm_Channel* lambda = ccp->channel("lambda");
-// if(!lambda)
-//   return;
-// run_s0_3_re0(fncode, (minimal_fn_s0_re0_type) fn,
-//   lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
-
 #include "./dev/consoles/fns/s0/a3/ch-eval-s0_3_re0.cpp"
-
 }
-
-//void Chasm_Runtime::evaluate_r1(Chasm_Call_Package* ccp,
-// u2 fncode, minimal_fn_s0_r1_type fn, Chasm_Carrier* rcar)
-//{
-// Chasm_Channel* lambda = ccp->channel("lambda");
-// if(!lambda)
-//   return;
-
-// Chasm_Channel* resultch = ccp->channel("result");
-// if(!resultch)
-//   return;
-
-// Chasm_Carrier cc = resultch->first_carrier();
-
-// u1 rr = cc.value();
-
-// run_s0_3_r1(fncode, (minimal_fn_s0_r1_type) fn,
-//   rr, lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3));
-
-// if(rcar)
-//   rcar->set_value(rr);
-//}
 
 void Chasm_Runtime::evaluate_re1(Chasm_Call_Package* ccp,
  u2 fncode, minimal_fn_s0_re1_type fn, Chasm_Carrier* rcar)

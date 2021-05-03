@@ -20,7 +20,13 @@ void test_map_places(Context_Menu_Provider* _this, QString arguments,
  static QRegularExpression rx{"[\\s.]+;[\\s.]+"};
  QStringList qsl = arguments.split(rx);
 
- info = {{nullptr, "_this" + qsl.first(), ""}, {nullptr, arguments, ""}};
+ info = {
+   {{}, "Virtual Tour", "launch_virtual_tour"},
+   {{}, "Web Site", "launch_web_site"}
+   };
+
+
+// info = {{nullptr, "_this" + qsl.first(), ""}, {nullptr, arguments, ""}};
 
 
 // qDebug() << "arg1 = " << arg1;

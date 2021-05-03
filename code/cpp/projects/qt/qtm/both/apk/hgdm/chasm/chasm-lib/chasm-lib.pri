@@ -50,6 +50,8 @@ HEADERS += \
   $$SRC_DIR/chasm/chasm-channel.h \
   $$SRC_DIR/chasm/chasm-call-package.h \
   $$SRC_DIR/chasm/chasm-carrier.h \
+  $$SRC_DIR/chasm/chasm-type-object.h \
+
 
 
 SOURCES += \
@@ -61,6 +63,7 @@ SOURCES += \
   $$SRC_DIR/chasm/chasm-channel.cpp \
   $$SRC_DIR/chasm/chasm-call-package.cpp \
   $$SRC_DIR/chasm/chasm-carrier.cpp \
+  $$SRC_DIR/chasm/chasm-type-object.cpp \
 
 
 
