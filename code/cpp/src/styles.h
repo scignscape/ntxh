@@ -215,7 +215,7 @@ inline QString tab_style_sheet_()
         "border-bottom-color: #C2C7CB; /* same as the pane color */"
         "border-top-left-radius: 4px;"
         "border-top-right-radius: 4px;"
-        "min-width: 8ex;"
+        "min-width: 20ex;"
         "padding: 2px;"
         "color:rgb(145,50,70)"
         "}"

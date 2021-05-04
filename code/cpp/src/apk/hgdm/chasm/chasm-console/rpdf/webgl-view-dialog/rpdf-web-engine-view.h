@@ -24,15 +24,20 @@
 //};
 
 class Context_Menu_Provider;
+class Pattern_Matcher_Runtime;
 
 class RPDF_Web_Engine_View : public QWebEngineView
 {
  Context_Menu_Provider* context_menu_provider_;
+ Pattern_Matcher_Runtime* pm_runtime_;
 
 public:
+
  RPDF_Web_Engine_View();
 
  ACCESSORS(Context_Menu_Provider* ,context_menu_provider)
+ ACCESSORS(Pattern_Matcher_Runtime* ,pm_runtime)
+
  RPDF_Web_Engine_View* sec;
 
  void contextMenuEvent(QContextMenuEvent *event) override;

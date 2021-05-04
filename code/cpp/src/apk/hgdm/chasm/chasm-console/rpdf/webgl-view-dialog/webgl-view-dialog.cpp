@@ -13,65 +13,66 @@
 
 #include "styles.h"
 
-void WebGL_View_Dialog::check_url_patterns(QString url)
-{
- if(url_patterns_.isEmpty())
-   return;
+//void WebGL_View_Dialog::check_url_patterns(QString url)
+//{
+// if(url_patterns_.isEmpty())
+//   return;
 
- if(url.contains("/maps/place"))
-   qDebug() << url;
+// if(url.contains("/maps/place"))
+//   qDebug() << url;
 
- QVector<Context_Menu_Provider::Action_Info> info;
+// QVector<Pattern_Matcher_Runtime::Action_Info> info;
 
- for(int i = url_patterns_.size() - 1; i >= 0; --i) //const QMap<QString, QString>& m : url_patterns_)
- {
-  QMap<QString, QString>& m = url_patterns_[i];
-  QString pattern = m.value("pattern");
+// for(int i = url_patterns_.size() - 1; i >= 0; --i) //const QMap<QString, QString>& m : url_patterns_)
+// {
+//  URL_Or_Event_Pattern& uep = url_patterns_[i];
+//  QString pattern = uep.pattern_expression();
 
-  if(pattern.isEmpty())
-    continue;
+//  if(pattern.isEmpty())
+//    continue;
 
-  QRegularExpression rx(pattern);
+//  QRegularExpression rx(pattern);
 
-  QRegularExpressionMatch rxm = rx.match(url);
+//  QRegularExpressionMatch rxm = rx.match(url);
 
-  if(rxm.hasMatch())
-  {
-   QString proc = m.value("procedure");
-   QString arguments = m.value("arguments");
-   for(int i = 0; i < 10; ++i)
-     arguments.replace(QString("`.%1").arg(i), rxm.captured(i));
-   qDebug() << "Proc = " << proc;
-   qDebug() << "Arguments = " << arguments;
+//  if(rxm.hasMatch())
+//  {
+//   QString proc = uep.procedure_name();
+//   QString arguments = uep.procedure_arguments();
+//   for(int i = 0; i < 10; ++i)
+//     arguments.replace(QString("`.%1").arg(i), rxm.captured(i));
+//   qDebug() << "Proc = " << proc;
+//   qDebug() << "Arguments = " << arguments;
 
-   QStringList action_procedures;
-   QStringList option_labels;
+//   QStringList action_procedures;
+//   QStringList option_labels;
 
-   context_menu_provider_->check_url(proc, arguments, info);
+//   context_menu_provider_->check_url(proc, arguments, info);
 
-   if(!info.isEmpty())
-     break;
-   //Q_EMIT url_pattern_match(proc, arguments);
-  }
- }
+//   if(!info.isEmpty())
+//     break;
+//   //Q_EMIT url_pattern_match(proc, arguments);
+//  }
+// }
 
- if(info.isEmpty())
-   return;
+// if(info.isEmpty())
+//   return;
 
 
 
- for(Context_Menu_Provider::Action_Info& ai : info)
- {
-  qDebug() << ai.option_label;
- }
+// for(Pattern_Matcher_Runtime::Action_Info& ai : info)
+// {
+//  qDebug() << ai.option_label;
+// }
 
-}
-
+//}
 
 
 WebGL_View_Dialog::WebGL_View_Dialog(QWidget* parent)
-  :  QDialog(parent), context_menu_provider_(nullptr)
+  :  QDialog(parent), context_menu_provider_(nullptr), pm_runtime_(nullptr)
 {
+ pm_runtime_ = new Pattern_Matcher_Runtime;
+
  main_layout_ = new QVBoxLayout;
  wev_ = new RPDF_Web_Engine_View();
  //wev->setGeometry(0,0,700,600);
@@ -134,24 +135,27 @@ WebGL_View_Dialog::WebGL_View_Dialog(QWidget* parent)
 
  qtw_->addTab(url_patterns_frame_, "URL Patterns");
 
- url_patterns_table_->setColumnCount(4);
+ url_patterns_table_->setColumnCount(6);
  url_patterns_table_->setRowCount(0);
 
  // // urlChanged!.*www.google.com/maps/place/([\w+]+) <QString-> PN:`.1
- url_patterns_table_->setHorizontalHeaderLabels({"Pettern Expression", "C++ Procedure", "Arguments", ""});
+ url_patterns_table_->setHorizontalHeaderLabels({"Context", "Secondary", "Pettern Expression", "C++ Procedure", "Arguments", ""});
 
- url_patterns_table_->setColumnWidth(0, 130);
+ url_patterns_table_->setColumnWidth(0, 60);
+
+ url_patterns_table_->setColumnWidth(2, 130);
 // url_patterns_table_->setSt
 
- url_patterns_table_->setColumnWidth(3, 150);
+ url_patterns_table_->setColumnWidth(5, 150);
 // url_patterns_table_->setColumnWidth(4, 50);
 // url_patterns_table_->setColumnWidth(5, 60);
 
 
- url_patterns_table_->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
+ url_patterns_table_->horizontalHeader()->setSectionResizeMode(4, QHeaderView::Stretch);
 
- add_fixed_url_pattern("contextMenu!.*www.google.com/maps/place/([\\w+]+)", "test_map_places",
-   "`.1 ; 1234567 ; 89");
+ add_fixed_url_pattern("C", {},
+   ".*www.google.com/maps/place/([^/]+)(?:/@([\\d,.\\w-]+))?", "test_map_places",
+   "$.1$ ; $.2$ ; 89");
                        // // "<QString-> `.1");
 
  QHBoxLayout* add_row_layout = new QHBoxLayout;
@@ -233,27 +237,31 @@ void WebGL_View_Dialog::set_context_menu_provider(Context_Menu_Provider *context
 {
  context_menu_provider_ = context_menu_provider;
  wev_->set_context_menu_provider(context_menu_provider_);
- context_menu_provider_->url_patterns() = url_patterns_;
+ wev_->set_pm_runtime(pm_runtime_);
+ //context_menu_provider_->url_patterns() = url_patterns_;
 }
 
-void WebGL_View_Dialog::add_fixed_url_pattern(QString pattern,
+void WebGL_View_Dialog::add_fixed_url_pattern(QString context, QString sec, QString pattern,
   QString procedure, QString arguments)
 {
- url_patterns_.push_back({{"pattern", pattern}, {"procedure", procedure},
-   {"arguments", arguments} });
+ pm_runtime_->add_url_pattern(context, sec, pattern,
+   procedure, arguments);
+
  int rc = url_patterns_table_->rowCount();
  url_patterns_table_->insertRow(rc);
 
- for(int i = 0; i < 3; ++i)
+ for(int i = 0; i < 5; ++i)
  {
   QTableWidgetItem* twi = new QTableWidgetItem();
   url_patterns_table_->setItem(rc, i, twi);
   twi->setFlags(twi->flags() & (~ (Qt::ItemIsEditable | Qt::ItemIsSelectable)));
   switch (i)
   {
-  case 0: twi->setText(pattern); break;
-  case 1: twi->setText(procedure); break;
-  case 2: twi->setText(arguments); break;
+  case 0: twi->setText(context); break;
+  case 1: twi->setText(sec); break;
+  case 2: twi->setText(pattern); break;
+  case 3: twi->setText(procedure); break;
+  case 4: twi->setText(arguments); break;
   }
  }
 
@@ -262,9 +270,12 @@ void WebGL_View_Dialog::add_fixed_url_pattern(QString pattern,
 
 void WebGL_View_Dialog::handle_add_url_patterns_row()
 {
- url_patterns_.push_back({});
+ //pm_runtime_->add_url_pattern();
+ //url_patterns_.push_back(URL_Or_Event_Pattern({}));
  int rc = url_patterns_table_->rowCount();
  url_patterns_table_->insertRow(rc);
+
+ patterns_by_row_.insert((u2) rc, nullptr);
 
  QPushButton* edit_row_button = new QPushButton("Edit", this);
  edit_row_button->setMaximumWidth(45);
@@ -300,14 +311,14 @@ void WebGL_View_Dialog::handle_add_url_patterns_row()
  cell_widget_layout->setAlignment(Qt::AlignCenter); //set Alignment layout
  cell_widget_layout->setContentsMargins(0,0,0,0);
  cell_widget->setLayout(cell_widget_layout);
- url_patterns_table_->setCellWidget(rc, 3, cell_widget);
+ url_patterns_table_->setCellWidget(rc, 5, cell_widget);
 
 
 
 // url_patterns_table_->item(rc, 5)->setTextAlignment(Qt::AlignHCenter | Qt::AlignCenter);
 // cancel_remove_row_button->setStyleSheet( "text-align: center; margin-left:50%; margin-right:50%;" );
 
-for(int i = 0; i < 3; ++i)
+for(int i = 0; i < 5; ++i)
  {
   QTableWidgetItem* twi = new QTableWidgetItem();
   url_patterns_table_->setItem(rc, i, twi);
@@ -322,49 +333,68 @@ void WebGL_View_Dialog::handle_edit_url_patterns_row(int rc)
 {
  qDebug() << "rc = " << rc;
 
- for(int i = 0; i < 3; ++i)
+ for(int i = 0; i < 5; ++i)
  {
   QTableWidgetItem* twi = url_patterns_table_->item(rc, i);
   twi->setFlags(twi->flags() | (Qt::ItemIsEditable | Qt::ItemIsSelectable));
  }
 
 // QTableWidgetItem* twi = url_patterns_table_->item(rc, 5);
- qobject_cast<QPushButton*>(url_patterns_table_->cellWidget(rc, 5))->setText("Cancel");
+//? qobject_cast<QPushButton*>(url_patterns_table_->cellWidget(rc, 5))->setText("Cancel");
 }
 
 void WebGL_View_Dialog::handle_cancel_remove_url_patterns_row(int rc)
 {
- QString text = qobject_cast<QPushButton*>(url_patterns_table_->cellWidget(rc, 5))->text();
- if(text == "Cancel")
- {
-  for(int i = 0; i < 3; ++i)
-  {
-   QTableWidgetItem* twi = url_patterns_table_->item(rc, i);
-   twi->setFlags(twi->flags() & (~ (Qt::ItemIsEditable | Qt::ItemIsSelectable)));
-  }
- }
- else if(text == "Remove")
- {
-  url_patterns_.remove(rc);
-  url_patterns_table_->removeRow(rc);
-  Q_EMIT url_patterns_changed();
- }
+// QString text = qobject_cast<QPushButton*>(url_patterns_table_->cellWidget(rc, 5))->text();
+// if(text == "Cancel")
+// {
+//  for(int i = 0; i < 3; ++i)
+//  {
+//   QTableWidgetItem* twi = url_patterns_table_->item(rc, i);
+//   twi->setFlags(twi->flags() & (~ (Qt::ItemIsEditable | Qt::ItemIsSelectable)));
+//  }
+// }
+// else if(text == "Remove")
+// {
+//  url_patterns_.remove(rc);
+//  url_patterns_table_->removeRow(rc);
+//  Q_EMIT url_patterns_changed();
+// }
 }
 
 
 void WebGL_View_Dialog::handle_save_url_patterns_row(int rc)
 {
- for(int i = 0; i < 3; ++i)
+ for(int i = 0; i < 5; ++i)
  {
   QTableWidgetItem* twi = url_patterns_table_->item(rc, i);
   twi->setFlags(twi->flags() & (~ (Qt::ItemIsEditable | Qt::ItemIsSelectable)));
  }
 
- url_patterns_[rc]["pattern"] = url_patterns_table_->item(rc, 0)->text();
- url_patterns_[rc]["procedure"] = url_patterns_table_->item(rc, 1)->text();
- url_patterns_[rc]["arguments"] = url_patterns_table_->item(rc, 2)->text();
+ auto it = patterns_by_row_.find(rc);
 
- qobject_cast<QPushButton*>(url_patterns_table_->cellWidget(rc, 5))->setText("Remove");
+ URL_Or_Event_Pattern* pattern = nullptr;
+
+ if(it == patterns_by_row_.end())
+ {
+  pattern = pm_runtime_->add_url_pattern();
+  patterns_by_row_[rc] = pattern;
+ }
+ else if(it.value() == nullptr)
+ {
+  pattern = pm_runtime_->add_url_pattern();
+  it.value() = pattern;
+ }
+ else
+   pattern = it.value();
+
+ pattern->set_pattern_context_string(url_patterns_table_->item(rc, 0)->text());
+ pattern->set_secondary_context(url_patterns_table_->item(rc, 1)->text());
+ pattern->set_pattern_expression(url_patterns_table_->item(rc, 2)->text());
+ pattern->set_procedure_name(url_patterns_table_->item(rc, 3)->text());
+ pattern->set_procedure_arguments(url_patterns_table_->item(rc, 4)->text());
+
+//? qobject_cast<QPushButton*>(url_patterns_table_->cellWidget(rc, 5))->setText("Remove");
 
  Q_EMIT url_patterns_changed();
 }

@@ -46,26 +46,31 @@ USING_KANS(TextIO)
 #include "rpdf/webgl-view-dialog/webgl-view-dialog.h"
 
 #include "rpdf/webgl-view-dialog/context-menu-provider.h"
-
+#include "rpdf/webgl-view-dialog/pattern-matcher-runtime.h"
 
 
 
 int main(int argc, char *argv[])
 {
- QVector< QMap<QString, QString> >* url_patterns;
-
- Context_Menu_Provider cmp;
- url_patterns = &cmp.url_patterns();
-
  QApplication a(argc, argv);
+
  WebGL_View_Dialog* dlg = new WebGL_View_Dialog(nullptr);
 
+ dlg->setWindowTitle("Matterport/Google Console");
+
+ Pattern_Matcher_Runtime* pm_runtime = dlg->pm_runtime();
+
+ QVector<URL_Or_Event_Pattern*>* url_patterns;
+
+ Context_Menu_Provider cmp(pm_runtime);
+ pm_runtime->set_context_menu_provider(&cmp);
+ url_patterns = &pm_runtime->url_patterns();
  dlg->set_context_menu_provider(&cmp);
 
  QApplication::connect(dlg, &WebGL_View_Dialog::url_patterns_changed,
    [dlg, &url_patterns]()
  {
-  *url_patterns = dlg->url_patterns();
+  //? *url_patterns = dlg->url_patterns();
  });
 
  QApplication::connect(dlg, &WebGL_View_Dialog::url_pattern_match,

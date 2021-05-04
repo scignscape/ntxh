@@ -3,6 +3,8 @@
 
 #include "context-menu-provider.h"
 
+#include "url-or-event-pattern.h"
+
 RPDF_Web_Engine_View::RPDF_Web_Engine_View()
   :  QWebEngineView(), context_menu_provider_(nullptr)
 {
@@ -31,13 +33,20 @@ void RPDF_Web_Engine_View::contextMenuEvent(QContextMenuEvent *event)
 
  QString url = page()->url().toString();
 
- QVector<Context_Menu_Provider::Action_Info> info;
+ QVector<Pattern_Matcher_Runtime::Action_Info> info;
 
- context_menu_provider_->check_url_patterns(url.prepend("contextMenu!"), info);
+ if(cd.linkUrl().isEmpty())
+   pm_runtime_->check_url_patterns(
+     URL_Or_Event_Pattern::Pattern_Contexts::Context_Menu_Formation, url, info);
+
+ else
+   pm_runtime_->check_url_patterns(
+     URL_Or_Event_Pattern::Pattern_Contexts::Link_Context_Menu_Formation,
+     cd.linkUrl().toString(), info, cd.linkText());
 
  QMenu* menu = new QMenu(this);//
 
- for(Context_Menu_Provider::Action_Info& ai : info)
+ for(Pattern_Matcher_Runtime::Action_Info& ai : info)
  {
   menu->addAction(ai.option_label, [this, ai]
   {

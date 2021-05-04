@@ -56,6 +56,9 @@ HEADERS += \
   $$SRC_DIR/rpdf/webgl-view-dialog/rpdf-web-engine-view.h \
   $$SRC_DIR/rpdf/webgl-view-dialog/webgl-view-dialog.h \
   $$SRC_DIR/rpdf/webgl-view-dialog/context-menu-provider.h \
+  $$SRC_DIR/rpdf/webgl-view-dialog/url-or-event-pattern.h \
+  $$SRC_DIR/rpdf/webgl-view-dialog/pattern-matcher-runtime.h \
+
 
 
 
@@ -66,6 +69,9 @@ SOURCES += \
   $$SRC_DIR/rpdf/webgl-view-dialog/rpdf-web-engine-view.cpp  \
   $$SRC_DIR/rpdf/webgl-view-dialog/webgl-view-dialog.cpp \
   $$SRC_DIR/rpdf/webgl-view-dialog/context-menu-provider.cpp \
+  $$SRC_DIR/rpdf/webgl-view-dialog/url-or-event-pattern.cpp \
+  $$SRC_DIR/rpdf/webgl-view-dialog/pattern-matcher-runtime.cpp \
+
 
 
 LIBS += -L$$TARGETSDIR -lchasm-lib

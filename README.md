@@ -324,6 +324,18 @@ There are several "build strategies" that can be used to create the dataset appl
 
 A more complex option is "`build-all.pro`", which is only needed for users wishing to generate test scripts or use other advanced features related to "Runtime Reflection".  For developing new code or debugging the executables it may be necessary or easier to use the "`isobuild`" strategy, where each Qt project is built separately, rather than the "`unibuild`" options where projeects are built automatically in order.  Via "`isobuild`" developers can choose which projects to include more precisely.  For the equivalent of "`build-all.pro`" follow the build order listed in "`build-order.txt`".  Note that these comments are only applicable to a small set of users extending or exploring the code in detail.
 
+In general, examining or reusing the dataset code will be easiest for users who 
+have some experience with C++ programming and are familiar with the steps 
+needed to install C++ dependencies and compile C++ libraries (though the 
+dataset has been designed to minimize external dependencies as much as possible).
+For a brief review of the kinds of steps which might be needed to set up a 
+development environment suitable for this dataset (and typical C++ projects), 
+see the "`@/example-build-setup.txt`" file. Of course, most C++ programmers 
+will already have an environment suitable for common C++ projects on 
+their computer (the dataset only needs very commonplace libraries 
+installed, such as __libgl__ or __libz__, and does not require 
+a particularly recent compiler).
+
 ---
 **Downloading**
 
