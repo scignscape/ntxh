@@ -11,17 +11,54 @@
 
 #include "chasm-lib/chasm/chasm-type-object.h"
 
+#include "signal-generator.h"
+
+#include <QScreen>
+#include <QGuiApplication>
+#include <QApplication>
+#include <QTimer>
+#include <QPixmap>
+#include <QFile>
 
 
 
-void launch_web_site(QString place, QVariant pos, u1 flag)
+void launch_web_site(QString place, QVariant pos, n8 winid)
 {
  qDebug() << "\n\nPlace = " << place << "\n\n";
+
+
+ qDebug() << "\n\nwinid = " << winid << "\n\n";
+
+
+
+ QScreen* screen = QGuiApplication::primaryScreen();
+ if (!screen)
+   return;
+ QApplication::beep();
+
+ QTimer::singleShot(10000, [=]
+ {
+  QPixmap pixmap = screen->grabWindow(winid);
+  QString path = SCREENSHOTS_FOLDER "/chasm.png";
+  qDebug() << "Saving to path: " << path;
+
+  QFile file(path);
+  if(file.open(QIODevice::WriteOnly))
+  {
+   pixmap.save(&file, "PNG");
+  }
+ });
+
 }
 
-void launch_virtual_tour(QString place, QVariant pos, u1 flag)
+void launch_virtual_tour(const QPoint& pos, QVariant url, Context_Menu_Provider* _this)
 {
- qDebug() << "\n\nv Place = " << place << "\n\n";
+ // qDebug() << "\n\nv Place = " << place << "\n\n";
+
+ qDebug() << "\n\nv url = " << url << "\n\n";
+
+ _this->signal_generator()->emit_new_dialog_requested(pos, url.value<QUrl>());
+
 }
 
 
@@ -37,21 +74,30 @@ void test_map_places(Context_Menu_Provider* _this, QString arguments,
 
  Chasm_Type_Object* QString_type = csr.get_type_object_by_name("QString");
  Chasm_Type_Object* QVariant_type = csr.get_type_object_by_name("QVariant");
- Chasm_Type_Object* u1_type = csr.get_type_object_by_name("u1");
+ Chasm_Type_Object* ref_type = csr.get_type_object_by_name("n8&");
+ Chasm_Type_Object* n8_type = csr.get_type_object_by_name("n8");
+ Chasm_Type_Object* pVoid_type = csr.get_type_object_by_name("void*");
 
+ QString url = ROOT_FOLDER "/../testdia/matterport/new-alexander.html";
+
+ QPoint* qp = new QPoint(qsl[3].toUInt(), qsl[4].toUInt());
 
  info = {
    {{
-     {QString_type->with_rep(qsl.first()) },
-     {QVariant_type->with_rep("89") },
-     {u1_type->with_rep("103") },
+     {ref_type->with_instance(qp) },
+     {QVariant_type->with_rep("url:file:///" + url) },
+     {pVoid_type->with_instance(_this) },
     }, "Virtual Tour", "launch_virtual_tour"},
    {{
      {QString_type->with_rep(qsl.first()) },
      {QVariant_type->with_rep("89") },
-     {u1_type->with_rep("103") },
-    }, "Web Site", "launch_web_site"}
-   };
+     {n8_type->with_rep(qsl.last()) },
+    }, "Web Site", "launch_web_site"},
+   //};
+   {{ {}
+    }, "View GIS data", "viwe_gis_data"}
+   }
+   ;
 
  //info[0].reps.push_back()
 
@@ -66,8 +112,9 @@ void test_map_places(Context_Menu_Provider* _this, QString arguments,
 }
 
 
-Context_Menu_Provider::Context_Menu_Provider(Pattern_Matcher_Runtime* pm_runtime)
-  :  pm_runtime_(pm_runtime)
+Context_Menu_Provider::Context_Menu_Provider(Pattern_Matcher_Runtime* pm_runtime,
+  Signal_Generator* signal_generator)
+  :  pm_runtime_(pm_runtime), signal_generator_(signal_generator)
 {
  chasm_runtime_ = pm_runtime_->chasm_runtime();
 
@@ -79,17 +126,17 @@ Context_Menu_Provider::Context_Menu_Provider(Pattern_Matcher_Runtime* pm_runtime
 
 
  pm_runtime_->procedure_name_resolutions().insert("launch_web_site",
-   "launch_web_site@70371");
+   "launch_web_site@70378");
 
- pm_runtime_->registered_procedures().insert("launch_web_site@70371",
-   {70371, (minimal_fn_s0_re8_type) &launch_web_site});
+ pm_runtime_->registered_procedures().insert("launch_web_site@70378",
+   {70378, (minimal_fn_s0_re8_type) &launch_web_site});
 
 
  pm_runtime_->procedure_name_resolutions().insert("launch_virtual_tour",
-   "launch_virtual_tour@70371");
+   "launch_virtual_tour@70079");
 
- pm_runtime_->registered_procedures().insert("launch_virtual_tour@70371",
-   {70371, (minimal_fn_s0_re8_type) &launch_virtual_tour});
+ pm_runtime_->registered_procedures().insert("launch_virtual_tour@70079",
+   {70079, (minimal_fn_s0_re8_type) &launch_virtual_tour});
 
 }
 

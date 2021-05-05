@@ -48,6 +48,7 @@ USING_KANS(TextIO)
 #include "rpdf/webgl-view-dialog/context-menu-provider.h"
 #include "rpdf/webgl-view-dialog/pattern-matcher-runtime.h"
 
+#include "rpdf/webgl-view-dialog/signal-generator.h"
 
 
 int main(int argc, char *argv[])
@@ -62,7 +63,20 @@ int main(int argc, char *argv[])
 
  QVector<URL_Or_Event_Pattern*>* url_patterns;
 
- Context_Menu_Provider cmp(pm_runtime);
+ Signal_Generator sg;
+
+ QApplication::connect(&sg, &Signal_Generator::new_dialog_requested,
+   [](const QPoint& pos, QUrl url)
+ {
+  WebGL_View_Dialog* dlg1 = new WebGL_View_Dialog(nullptr);
+
+  dlg1->move(pos);
+
+  dlg1->show();
+
+ });
+
+ Context_Menu_Provider cmp(pm_runtime, &sg);
  pm_runtime->set_context_menu_provider(&cmp);
  url_patterns = &pm_runtime->url_patterns();
  dlg->set_context_menu_provider(&cmp);
@@ -80,9 +94,7 @@ int main(int argc, char *argv[])
   qDebug() << "arguments: " << arguments;
  });
 
-
-
-
+ dlg->show();
 
  return a.exec();
 }

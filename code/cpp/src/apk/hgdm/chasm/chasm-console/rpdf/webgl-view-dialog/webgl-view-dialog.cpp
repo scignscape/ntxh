@@ -67,6 +67,9 @@
 
 //}
 
+#include <QTimer>
+#include <QScreen>
+
 
 WebGL_View_Dialog::WebGL_View_Dialog(QWidget* parent)
   :  QDialog(parent), context_menu_provider_(nullptr), pm_runtime_(nullptr)
@@ -74,7 +77,7 @@ WebGL_View_Dialog::WebGL_View_Dialog(QWidget* parent)
  pm_runtime_ = new Pattern_Matcher_Runtime;
 
  main_layout_ = new QVBoxLayout;
- wev_ = new RPDF_Web_Engine_View();
+ wev_ = new RPDF_Web_Engine_View(this);
  //wev->setGeometry(0,0,700,600);
 
 //?
@@ -102,6 +105,8 @@ WebGL_View_Dialog::WebGL_View_Dialog(QWidget* parent)
 
  //?
  wev_->setPage(wep_);
+
+ //?this->winId();
 
 //?
 
@@ -155,7 +160,7 @@ WebGL_View_Dialog::WebGL_View_Dialog(QWidget* parent)
 
  add_fixed_url_pattern("C", {},
    ".*www.google.com/maps/place/([^/]+)(?:/@([\\d,.\\w-]+))?", "test_map_places",
-   "$.1$ ; $.2$ ; 89");
+   "$.1$ ; $.2$ ; $winid$ ; $gx$ ; $gy$");
                        // // "<QString-> `.1");
 
  QHBoxLayout* add_row_layout = new QHBoxLayout;
@@ -223,7 +228,7 @@ WebGL_View_Dialog::WebGL_View_Dialog(QWidget* parent)
  //mw->setGeometry(5,50,900,650);
 
  //wev->show();
- this->show();
+ //this->show();
 
 }
 

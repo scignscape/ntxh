@@ -46,6 +46,11 @@ public:
   return {this, 0, rep};
  }
 
+ Chasm_Typed_Value_Representation with_instance(void* v)
+ {
+  return {this, (n8) v, {}};
+ }
+
 };
 
 // _KANS(GTagML)

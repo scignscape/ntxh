@@ -11,6 +11,10 @@
 #include <QVariant>
 #include <QByteArray>
 
+#include <QUrl>
+
+#include <QPoint>
+
 #define FULL_INCLUDE
 #include "./dev/consoles/fns/s0/a3/run-s0_3_re0.cpp"
 #include "./dev/consoles/fns/s0/a3/run-s0_3_re1.cpp"
@@ -53,7 +57,7 @@ Chasm_Runtime::Chasm_Runtime()
  register_type_object("QByteArray", 5, 50, 500, 5000);
  register_type_object("r8", 6, 60, 600, 6000);
  register_type_object("QVariant", 7, 70, 700, 7000);
- register_type_object("u8", 8, 80, 800, 8000);
+ register_type_object("n8", 8, 80, 800, 8000);
  register_type_object("void*", 9, 90, 900, 9000);
 }
 
@@ -208,7 +212,15 @@ Chasm_Carrier Chasm_Runtime::gen_carrier(Chasm_Typed_Value_Representation& tvr)
 
  if(cto->name() == "QVariant")
  {
-  QVariant r = tvr.rep.toInt();
+  QString typ = tvr.rep.left(4);
+  QString rep = tvr.rep.mid(4);
+  QVariant r;
+  if(typ == "url:")
+    r = QUrl(tvr.rep);
+  else if(typ == "int:")
+    r = tvr.rep.toInt();
+  else
+    r = tvr.rep;
   return gen_carrier<QVariant>(&r);
  }
 
@@ -216,6 +228,23 @@ Chasm_Carrier Chasm_Runtime::gen_carrier(Chasm_Typed_Value_Representation& tvr)
  {
   u1 arg = tvr.rep.toUInt();
   return gen_carrier<u1>(&arg);
+ }
+
+ if(cto->name() == "n8")
+ {
+  n8 arg = tvr.rep.toULongLong();
+  return gen_carrier<n8>(&arg);
+ }
+
+ if(cto->name() == "void*")
+ {
+  void* arg = (void*) tvr.raw_value;
+  return gen_carrier<void*>(&arg);
+ }
+
+ if(cto->name() == "n8&")
+ {
+  return gen_carrier<n8&>((n8*) tvr.raw_value);
  }
 
  return gen_carrier<void*>(&tvr.raw_value);

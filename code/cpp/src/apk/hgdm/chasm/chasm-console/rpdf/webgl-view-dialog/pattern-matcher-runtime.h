@@ -7,6 +7,8 @@
 #include <QMap>
 #include <QString>
 
+#include <functional>
+
 #include "accessors.h"
 
 #include "global-types.h"
@@ -68,7 +70,7 @@ public:
 //   QVector<Action_Info>& info);
 
  void check_url_patterns(URL_Or_Event_Pattern::Pattern_Contexts context,
-   QString url, QVector<Action_Info>& info,
+   QString url, QVector<Action_Info>& info, std::function<void(QString&)> check_arguments,
    QString secondary = {});
 
 // void run_callback(Action_Info ai);

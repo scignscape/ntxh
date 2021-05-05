@@ -34,6 +34,8 @@ INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR $$SRC_ROOT_DIR
 
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
+DEFINES += SCREENSHOTS_FOLDER=\\\"$$ROOT_DIR/code/assets/screenshots\\\"
+
 
 DEFINES += CAON_DEBUG
 DEFINES += RELAE_LABEL_NODES
@@ -58,7 +60,7 @@ HEADERS += \
   $$SRC_DIR/rpdf/webgl-view-dialog/context-menu-provider.h \
   $$SRC_DIR/rpdf/webgl-view-dialog/url-or-event-pattern.h \
   $$SRC_DIR/rpdf/webgl-view-dialog/pattern-matcher-runtime.h \
-
+  $$SRC_DIR/rpdf/webgl-view-dialog/signal-generator.h \
 
 
 
@@ -71,6 +73,7 @@ SOURCES += \
   $$SRC_DIR/rpdf/webgl-view-dialog/context-menu-provider.cpp \
   $$SRC_DIR/rpdf/webgl-view-dialog/url-or-event-pattern.cpp \
   $$SRC_DIR/rpdf/webgl-view-dialog/pattern-matcher-runtime.cpp \
+  $$SRC_DIR/rpdf/webgl-view-dialog/signal-generator.cpp \
 
 
 

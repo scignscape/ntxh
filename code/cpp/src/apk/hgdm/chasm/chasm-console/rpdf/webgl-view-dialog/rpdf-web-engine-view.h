@@ -1,3 +1,4 @@
+
 #ifndef RPDF_WEB_ENGINE_VIEW__H
 #define RPDF_WEB_ENGINE_VIEW__H
 
@@ -31,9 +32,11 @@ class RPDF_Web_Engine_View : public QWebEngineView
  Context_Menu_Provider* context_menu_provider_;
  Pattern_Matcher_Runtime* pm_runtime_;
 
+ QDialog* parent_dialog_;
+
 public:
 
- RPDF_Web_Engine_View();
+ RPDF_Web_Engine_View(QDialog* parent_dialog);
 
  ACCESSORS(Context_Menu_Provider* ,context_menu_provider)
  ACCESSORS(Pattern_Matcher_Runtime* ,pm_runtime)

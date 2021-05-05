@@ -24,10 +24,15 @@ class Chasm_Type_Object;
 
 class Chasm_Runtime;
 
+class Signal_Generator;
+
 class Context_Menu_Provider
 {
  Pattern_Matcher_Runtime* pm_runtime_;
  Chasm_Runtime* chasm_runtime_;
+
+ Signal_Generator* signal_generator_;
+
 // QVector<URL_Or_Event_Pattern> url_patterns_;
 
 // QMap<QString, QString> procedure_name_resolutions_;
@@ -38,11 +43,13 @@ class Context_Menu_Provider
 
 public:
 
- Context_Menu_Provider(Pattern_Matcher_Runtime* pm_runtime);
+ Context_Menu_Provider(Pattern_Matcher_Runtime* pm_runtime, Signal_Generator* signal_generator);
 
 // ACCESSORS__RGET(QVector<URL_Or_Event_Pattern> ,url_patterns)
  ACCESSORS(Chasm_Runtime* ,chasm_runtime)
  ACCESSORS(Pattern_Matcher_Runtime* ,pm_runtime)
+
+ ACCESSORS(Signal_Generator* ,signal_generator)
 
  void check_url(QString procedure, QString arguments,
    QVector<Pattern_Matcher_Runtime::Action_Info>& info);

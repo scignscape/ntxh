@@ -64,7 +64,8 @@ Pattern_Matcher_Runtime::Pattern_Matcher_Runtime()
 
 void Pattern_Matcher_Runtime::check_url_patterns(
   URL_Or_Event_Pattern::Pattern_Contexts context, QString url,
-  QVector<Pattern_Matcher_Runtime::Action_Info>& info, QString secondary)
+  QVector<Pattern_Matcher_Runtime::Action_Info>& info,
+  std::function<void(QString&)> check_arguments, QString secondary)
 {
  if(url_patterns_.isEmpty())
    return;
@@ -103,10 +104,16 @@ void Pattern_Matcher_Runtime::check_url_patterns(
   {
    QString proc = uep.procedure_name();
    QString arguments = uep.procedure_arguments();
+
    for(int i = 0; i < 10; ++i)
      arguments.replace(QString("$.%1$").arg(i), rxm.captured(i));
+
    qDebug() << "Proc = " << proc;
    qDebug() << "Arguments = " << arguments;
+
+   if(check_arguments)
+     check_arguments(arguments);
+
 
    QStringList action_procedures;
    QStringList option_labels;

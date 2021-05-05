@@ -5,8 +5,11 @@
 
 #include "url-or-event-pattern.h"
 
-RPDF_Web_Engine_View::RPDF_Web_Engine_View()
-  :  QWebEngineView(), context_menu_provider_(nullptr)
+#include <QDialog>
+
+
+RPDF_Web_Engine_View::RPDF_Web_Engine_View(QDialog* parent_dialog)
+  :  QWebEngineView(), parent_dialog_(parent_dialog), context_menu_provider_(nullptr)
 {
  sec  =  nullptr;
 }
@@ -35,14 +38,21 @@ void RPDF_Web_Engine_View::contextMenuEvent(QContextMenuEvent *event)
 
  QVector<Pattern_Matcher_Runtime::Action_Info> info;
 
+ auto check = [this, &event](QString& args)
+ {
+  args.replace("$winid$", QString::number(parent_dialog_->winId()));
+  args.replace("$gx$", QString::number(event->globalX()));
+  args.replace("$gy$", QString::number(event->globalY()));
+ };
+
  if(cd.linkUrl().isEmpty())
    pm_runtime_->check_url_patterns(
-     URL_Or_Event_Pattern::Pattern_Contexts::Context_Menu_Formation, url, info);
+     URL_Or_Event_Pattern::Pattern_Contexts::Context_Menu_Formation, url, info, check);
 
  else
    pm_runtime_->check_url_patterns(
      URL_Or_Event_Pattern::Pattern_Contexts::Link_Context_Menu_Formation,
-     cd.linkUrl().toString(), info, cd.linkText());
+     cd.linkUrl().toString(), info, check, cd.linkText());
 
  QMenu* menu = new QMenu(this);//
 
