@@ -806,12 +806,6 @@ QPoint* test_smart(test_qpr& arg1, //QPair<QString, u4>& arg1,  //test_qpr& arg1
 
 void pre_run_smart(Chasm_Runtime* csr, QVector<Chasm_Typed_Value_Representation>& args)
 {
-// Chasm_Typed_Value_Representation
-
-// Chasm_Type_Object* ref_type_shared = csr->get_type_object_by_name("n8&!!");
-
-// Chasm_Type_Object* ref_type_shared = csr->get_type_object_by_name("n8&!!");
-
  Chasm_Type_Object* ref_type_shared = csr->get_type_object_by_name("n8&!");
  Chasm_Type_Object* pVoid_type = csr->get_type_object_by_name("void*");
  Chasm_Type_Object* ref_type = csr->get_type_object_by_name("n8&");
@@ -819,18 +813,12 @@ void pre_run_smart(Chasm_Runtime* csr, QVector<Chasm_Typed_Value_Representation>
  QString a11 = "Test";
  u4 a12 = 33;
 
- test_qpr* _a1 = new test_qpr{a11, a12};
- //std::shared_ptr<test_qpr>* ss = new std::shared_ptr<test_qpr>(_a1);
-
-// std::shared_ptr<n8>* ss = new std::shared_ptr<n8>( (n8*) _a1);
- //return with_instance(ss);
-
-
- args.push_back( ref_type_shared->make_instance(_a1) );
+ test_qpr* a1 = new test_qpr{a11, a12};
+ args.push_back( ref_type_shared->make_instance(a1) );
  // args.push_back( ref_type_shared->with_instance(_a1) );
 
  QPoint* a2 = new QPoint(500,501);
- args.push_back( ref_type->with_instance(a2) );
+ args.push_back( ref_type_shared->make_instance(a2) );
 
 
  QStringList* qsl = new QStringList{"qsl1", "qsl2"};
@@ -870,19 +858,13 @@ void run_smart(Chasm_Runtime* csr)
 
  QString a11 = "Test";
  u4 a12 = 33;
- test_qpr* _a1 = new test_qpr{a11, a12};
-
- //std::shared_ptr<test_qpr>* ss = new std::shared_ptr<test_qpr>(_a1);
-
- //std::shared_ptr<QPair<QString, u4>>* ss  = new std::shared_ptr<QPair<QString, u4>>(_a1);
-
- //test_qpr& a1 = *_a1;
+ test_qpr* a1 = new test_qpr{a11, a12};
 
  QPoint* a2 = new QPoint(500,501);
  QStringList* qsl = new QStringList{"qsl1", "qsl2"};
 
 
- Chasm_Carrier cc1 = csr->gen_carrier<n8&>(_a1);
+ Chasm_Carrier cc1 = csr->gen_carrier<n8&>(a1);
  Chasm_Carrier cc2 = csr->gen_carrier<n8&>(a2);
  Chasm_Carrier cc3 = csr->gen_carrier<void*>(&qsl);
 
@@ -911,9 +893,10 @@ int main(int argc, char *argv[])
  pre_run_smart(csr, rs_args);
  run_smart(csr, rs_args);
 
-// qDebug() << "\n===\n";
-// run_testqvar(csr);
-#ifdef HIDE
+ qDebug() << "\n===\n";
+ run_testqvar(csr);
+
+//#ifdef HIDE
  qDebug() << "\n===\n";
  run_testqvarf(csr);
  qDebug() << "\n===\n";
@@ -964,7 +947,9 @@ int main(int argc, char *argv[])
  qDebug() << "\n===\n";
  run_testqsb(csr);
 
-#endif
+ qDebug() << "\n_____\n";
+
+//#endif
 
 // Chasm_Call_Package* ccp = csr->new_call_package();
 // ccp->add_new_channel("lambda");

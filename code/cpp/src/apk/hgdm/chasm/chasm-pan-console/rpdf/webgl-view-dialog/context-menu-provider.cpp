@@ -80,6 +80,8 @@ void test_map_places(Context_Menu_Provider* _this, QString arguments,
  Chasm_Type_Object* n8_type = csr.get_type_object_by_name("n8");
  Chasm_Type_Object* pVoid_type = csr.get_type_object_by_name("void*");
 
+ Chasm_Type_Object* ref_type_shared = csr.get_type_object_by_name("n8&!");
+
  QString url = ROOT_FOLDER "/../testdia/matterport/new-alexander.html";
 
  //QSharedDataPointer<QPoint> qp = QSharedDataPointer<QPoint>(new QPoint(qsl[3].toUInt(), qsl[4].toUInt()) );
@@ -91,7 +93,7 @@ void test_map_places(Context_Menu_Provider* _this, QString arguments,
 
  info = {
    {{
-     {ref_type->with_instance(_pos) },
+     {ref_type_shared->make_instance(_pos) },
      {QVariant_type->with_rep("url:file:///" + url) },
      {pVoid_type->with_instance(_this) },
     }, "Virtual Tour", "launch_virtual_tour"},
