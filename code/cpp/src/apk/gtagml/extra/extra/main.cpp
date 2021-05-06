@@ -193,6 +193,16 @@ if(rcar)
    QString fn_array_reX_file = QString(ROOT_FOLDER "/dev/consoles/fns/s0/a%1/fn-array-s0_%1_re%2.cpp").arg(ac).arg(i);
 
    QString fn_array_reX_text;
+
+   QString n8argtext;
+   if(ac > 0)
+   {
+    for(u1 aa = 1; aa <= ac; ++aa)
+    {
+     n8argtext += QString("n8 arg%1, ").arg(aa);
+    }
+   }
+
    QString s0_X_reX_text = QString(R"(
 
 
@@ -200,7 +210,7 @@ if(rcar)
 #define SEEN_DEFS_S0_%4_RE%2
 
 typedef %1(*minimal_fn_s0_re%2_type)();
-typedef void(*run_s0_%4_re%2_type)(%3n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_re%2_type fn);
+typedef void(*run_s0_%4_re%2_type)(%3%6minimal_fn_s0_re%2_type fn);
 typedef run_s0_%4_re%2_type s0_%4_re%2_dispatch_array [%5];
 
 #endif //  SEEN_DEFS_S0_%4_RE%2
@@ -212,11 +222,17 @@ typedef run_s0_%4_re%2_type s0_%4_re%2_dispatch_array [%5];
 s0_%4_re%2_dispatch_array* init_s0_%4_re%2_dispatch_array()
 {
  s0_%4_re%2_dispatch_array* result = (s0_%4_re%2_dispatch_array*) new run_s0_%4_re%2_type[%5];
- )").arg(ret).arg(i).arg(retv).arg(ac).arg(arsize);
+ )").arg(ret).arg(i).arg(retv).arg(ac).arg(arsize).arg(n8argtext);
 
-   for(u2 j = 0; j < 1000; ++j)
+   for(u2 j = 0; j < arsize; ++j)
    {
-    s0_X_reX_text += QString("\n (*result)[%1] = &_f_%2%3_;").arg(j).arg(i).arg(j, 3, 10, QLatin1Char('0'));
+    s0_X_reX_text += QString("\n (*result)[%1] = &_f_%2%3_;").arg(j).arg(i).arg(j, ac, 10, QLatin1Char('0'));
+   }
+
+   QString atext;
+   if(ac > 0)
+   {
+//    for()
    }
 
    s0_X_reX_text += QString(R"(

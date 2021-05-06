@@ -869,20 +869,50 @@ void run_smart(Chasm_Runtime* csr)
 
 
 
+void test2arg(bool arg1, s2& arg2)
+{
+ qDebug() << "arg1 = " << arg1;
+ qDebug() << "arg2 = " << arg2;
+ --arg2;
+}
+
+void run_test2arg(Chasm_Runtime* csr)
+{
+ Chasm_Call_Package* ccp = csr->new_call_package();
+ ccp->add_new_channel("lambda");
+
+ bool a1 = "true";
+ s2 a2 = -533;
+
+ Chasm_Carrier cc1 = csr->gen_carrier<u1>(&a1);
+ Chasm_Carrier cc2 = csr->gen_carrier<n8&>(&a2);
+
+ ccp->add_carriers({cc1,cc2});
+ csr->evaluate(ccp, 7010, (minimal_fn_s0_type) &test2arg);
+ qDebug() << "a2 = " << a2;
+}
+
+
+
 int main(int argc, char *argv[])
 {
  Chasm_Runtime* csr = new Chasm_Runtime;
  csr->init_no_file_session();
 
- QVector<Chasm_Typed_Value_Representation> rs_args;
+// qDebug() << "\n----\n";
+// run_test2arg(csr);
 
- pre_run_smart(csr, rs_args);
- run_smart(csr, rs_args);
+
+//// #ifdef HIDE
+
+// QVector<Chasm_Typed_Value_Representation> rs_args;
+
+// pre_run_smart(csr, rs_args);
+// run_smart(csr, rs_args);
 
  qDebug() << "\n===\n";
  run_testqvar(csr);
 
-//#ifdef HIDE
  qDebug() << "\n===\n";
  run_testqvarf(csr);
  qDebug() << "\n===\n";
