@@ -120,12 +120,12 @@ s0_2_re9_dispatch_array* init_s0_2_re9_dispatch_array()
  (*result)[99] = &_f_999_;
 }
 
-void run_s0_2_re9(u4 code, minimal_fn_s0_re9_type fn, void*& retv, n8 a1, n8 a2, n8 a3)
+void run_s0_2_re9(u4 code, minimal_fn_s0_re9_type fn, void*& retv, n8 a1, n8 a2)
 {
  code %= 1000;
  static s0_2_re9_dispatch_array* dispatch_array = init_s0_2_re9_dispatch_array();
  run_s0_2_re9_type f = (*dispatch_array)[code];
- f(retv, a1, a2, a3, fn);
+ f(retv, a1,a2,fn);
 }
 
 #endif //def FULL_INCLUDE

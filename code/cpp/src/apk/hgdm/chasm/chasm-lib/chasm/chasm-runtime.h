@@ -50,6 +50,28 @@
 #include "./dev/consoles/fns/s0/a2/run-s0_2_re8.cpp"
 #include "./dev/consoles/fns/s0/a2/run-s0_2_re9.cpp"
 
+#include "./dev/consoles/fns/s0/a1/run-s0_1_re0.cpp"
+#include "./dev/consoles/fns/s0/a1/run-s0_1_re1.cpp"
+#include "./dev/consoles/fns/s0/a1/run-s0_1_re2.cpp"
+#include "./dev/consoles/fns/s0/a1/run-s0_1_re3.cpp"
+#include "./dev/consoles/fns/s0/a1/run-s0_1_re4.cpp"
+#include "./dev/consoles/fns/s0/a1/run-s0_1_re5.cpp"
+#include "./dev/consoles/fns/s0/a1/run-s0_1_re6.cpp"
+#include "./dev/consoles/fns/s0/a1/run-s0_1_re7.cpp"
+#include "./dev/consoles/fns/s0/a1/run-s0_1_re8.cpp"
+#include "./dev/consoles/fns/s0/a1/run-s0_1_re9.cpp"
+
+#include "./dev/consoles/fns/s0/a0/run-s0_0_re0.cpp"
+#include "./dev/consoles/fns/s0/a0/run-s0_0_re1.cpp"
+#include "./dev/consoles/fns/s0/a0/run-s0_0_re2.cpp"
+#include "./dev/consoles/fns/s0/a0/run-s0_0_re3.cpp"
+#include "./dev/consoles/fns/s0/a0/run-s0_0_re4.cpp"
+#include "./dev/consoles/fns/s0/a0/run-s0_0_re5.cpp"
+#include "./dev/consoles/fns/s0/a0/run-s0_0_re6.cpp"
+#include "./dev/consoles/fns/s0/a0/run-s0_0_re7.cpp"
+#include "./dev/consoles/fns/s0/a0/run-s0_0_re8.cpp"
+#include "./dev/consoles/fns/s0/a0/run-s0_0_re9.cpp"
+
 
 class Chasm_Call_Package;
 class Chasm_Type_Object;
@@ -239,12 +261,109 @@ public:
  template<typename FN_Type>
  void evaluate_1(Chasm_Call_Package* ccp, u4 fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
  {
+  u1 sl = fncode / 100;
+
+  u1 rr = (fncode % 100) / 10;
+
+  fncode %= 100;
+
+  switch(rr)
+  {
+  case 0:
+   evaluate_1_re0(ccp, fncode, (minimal_fn_s0_re0_type) fn);
+   break;
+
+  case 1:
+   evaluate_1_re1(ccp, fncode, (minimal_fn_s0_re1_type) fn, rcar);
+   break;
+
+  case 2:
+   evaluate_1_re2(ccp, fncode, (minimal_fn_s0_re2_type) fn, rcar);
+   break;
+
+  case 3:
+   evaluate_1_re3(ccp, fncode, (minimal_fn_s0_re3_type) fn, rcar);
+   break;
+
+  case 4:
+   evaluate_1_re4(ccp, fncode, (minimal_fn_s0_re4_type) fn, rcar);
+   break;
+
+  case 5:
+   evaluate_1_re5(ccp, fncode, (minimal_fn_s0_re5_type) fn, rcar);
+   break;
+
+  case 6:
+   evaluate_1_re6(ccp, fncode, (minimal_fn_s0_re6_type) fn, rcar);
+   break;
+
+  case 7:
+   evaluate_1_re7(ccp, fncode, (minimal_fn_s0_re7_type) fn, rcar);
+   break;
+
+  case 8:
+   evaluate_1_re8(ccp, fncode, (minimal_fn_s0_re8_type) fn, rcar);
+   break;
+
+  case 9:
+   evaluate_1_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, rcar);
+   break;
+  }
 
  }
 
  template<typename FN_Type>
  void evaluate_0(Chasm_Call_Package* ccp, u4 fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
  {
+  u1 sl = fncode / 10;
+
+  u1 rr = (fncode % 10);
+
+  fncode %= 10;
+
+  switch(rr)
+  {
+  case 0:
+   evaluate_0_re0(ccp, fncode, (minimal_fn_s0_re0_type) fn);
+   break;
+
+  case 1:
+   evaluate_0_re1(ccp, fncode, (minimal_fn_s0_re1_type) fn, rcar);
+   break;
+
+  case 2:
+   evaluate_0_re2(ccp, fncode, (minimal_fn_s0_re2_type) fn, rcar);
+   break;
+
+  case 3:
+   evaluate_0_re3(ccp, fncode, (minimal_fn_s0_re3_type) fn, rcar);
+   break;
+
+  case 4:
+   evaluate_0_re4(ccp, fncode, (minimal_fn_s0_re4_type) fn, rcar);
+   break;
+
+  case 5:
+   evaluate_0_re5(ccp, fncode, (minimal_fn_s0_re5_type) fn, rcar);
+   break;
+
+  case 6:
+   evaluate_0_re6(ccp, fncode, (minimal_fn_s0_re6_type) fn, rcar);
+   break;
+
+  case 7:
+   evaluate_0_re7(ccp, fncode, (minimal_fn_s0_re7_type) fn, rcar);
+   break;
+
+  case 8:
+   evaluate_0_re8(ccp, fncode, (minimal_fn_s0_re8_type) fn, rcar);
+   break;
+
+  case 9:
+   evaluate_0_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, rcar);
+   break;
+  }
+
 
  }
 
@@ -290,6 +409,28 @@ public:
  void evaluate_2_re9(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re9_type fn, Chasm_Carrier* rcar = nullptr);
 
 
+ void evaluate_1_re0(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re0_type fn);
+ void evaluate_1_re1(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re1_type fn, Chasm_Carrier* rcar = nullptr);
+ void evaluate_1_re2(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re2_type fn, Chasm_Carrier* rcar = nullptr);
+ void evaluate_1_re3(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re3_type fn, Chasm_Carrier* rcar = nullptr);
+ void evaluate_1_re4(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re4_type fn, Chasm_Carrier* rcar = nullptr);
+ void evaluate_1_re5(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re5_type fn, Chasm_Carrier* rcar = nullptr);
+ void evaluate_1_re6(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re6_type fn, Chasm_Carrier* rcar = nullptr);
+ void evaluate_1_re7(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re7_type fn, Chasm_Carrier* rcar = nullptr);
+ void evaluate_1_re8(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re8_type fn, Chasm_Carrier* rcar = nullptr);
+ void evaluate_1_re9(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re9_type fn, Chasm_Carrier* rcar = nullptr);
+
+
+ void evaluate_0_re0(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re0_type fn);
+ void evaluate_0_re1(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re1_type fn, Chasm_Carrier* rcar = nullptr);
+ void evaluate_0_re2(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re2_type fn, Chasm_Carrier* rcar = nullptr);
+ void evaluate_0_re3(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re3_type fn, Chasm_Carrier* rcar = nullptr);
+ void evaluate_0_re4(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re4_type fn, Chasm_Carrier* rcar = nullptr);
+ void evaluate_0_re5(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re5_type fn, Chasm_Carrier* rcar = nullptr);
+ void evaluate_0_re6(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re6_type fn, Chasm_Carrier* rcar = nullptr);
+ void evaluate_0_re7(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re7_type fn, Chasm_Carrier* rcar = nullptr);
+ void evaluate_0_re8(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re8_type fn, Chasm_Carrier* rcar = nullptr);
+ void evaluate_0_re9(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re9_type fn, Chasm_Carrier* rcar = nullptr);
 
 //.. ACCESSORS(QString ,text)
 

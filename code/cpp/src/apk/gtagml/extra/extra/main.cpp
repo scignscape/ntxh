@@ -22,16 +22,26 @@ QString generate_function_code(u1 retc, u2 key, QString sc, u1 ac)
  if(retc > 0) retv = ret + "& retv, ";
 
  QString more_args;
+
  if(ac > 0)
-   more_args += "n8 arg1, ";
- if(ac > 1)
-   more_args += "n8 arg2, ";
- if(ac > 2)
-   more_args += "n8 arg3, ";
+ {
+  for(u1 aa = 1; aa <= ac; ++aa)
+  {
+   more_args += QString("n8 arg%1, ").arg(aa);
+  }
+ }
+//   more_args += "n8 arg1, ";
+// if(ac > 1)
+//   more_args += "n8 arg2, ";
+// if(ac > 2)
+//   more_args += "n8 arg3, ";
 
 
- QString result = QString("void _f_%1%2_(%3%4minimal_fn_%5_re%1_type fn){\n  ")
-   .arg(retc).arg(key, ac, 10, QLatin1Char('0')).arg(retv).arg(more_args).arg(sc);
+
+ QString result = (ac > 0)? QString("void _f_%1%2_(%3%4minimal_fn_%5_re%1_type fn){\n  ")
+   .arg(retc).arg(key, ac, 10, QLatin1Char('0')).arg(retv).arg(more_args).arg(sc)
+   :  QString("void _f_%1_(%2%3minimal_fn_%4_re%1_type fn){\n  ")
+                            .arg(retc).arg(retv).arg(more_args).arg(sc);
 
  u1 akey = 0;
 
@@ -122,19 +132,21 @@ int main(int argc, char *argv[])
 
 // u1 ac = 3;
 
- for(u1 ac = 1; ac <=3; ++ac)
+ for(u1 ac = 0; ac <= 3; ++ac)
  {
-  static u2 exps[3] {10, 100, 1000};
+  static u2 exps[4] {1, 10, 100, 1000};
 
-  u2 arsize = exps[ac - 1];
+  u2 arsize = exps[ac];
 
   for(u1 i = 0; i < 10; ++i)
   {
    QString ret = returns[i];
    QString retv, rsym;
 
-  // //  concisely initialize two strings.  A bit cute.
-   if(i > 0) retv = QString("%1& %2").arg(ret).arg(rsym = "retv, ");
+   // //  concisely initialize two strings.  A bit cute.
+   if(i > 0)
+     retv = QString("%1& %2").arg(ret).arg(rsym = "retv, ");
+
 
    QString s0_X_reX_ch_eval_file = QString(ROOT_FOLDER "/dev/consoles/fns/s0/a%1/ch-eval-s0_%1_re%2.cpp").arg(ac).arg(i);
    QString s0_X_reX_ch_eval_text = R"(
@@ -226,28 +238,54 @@ s0_%4_re%2_dispatch_array* init_s0_%4_re%2_dispatch_array()
 
    for(u2 j = 0; j < arsize; ++j)
    {
-    s0_X_reX_text += QString("\n (*result)[%1] = &_f_%2%3_;").arg(j).arg(i).arg(j, ac, 10, QLatin1Char('0'));
+    if(ac > 0)
+      s0_X_reX_text += QString("\n (*result)[%1] = &_f_%2%3_;").arg(j).arg(i).arg(j, ac, 10, QLatin1Char('0'));
+    else
+      s0_X_reX_text += QString("\n (*result)[%1] = &_f_%2_;").arg(j).arg(i);
    }
 
    QString atext;
+   QString natext;
    if(ac > 0)
    {
-//    for()
+    for(u1 aa = 1; aa <= ac; ++aa)
+    {
+     natext += QString("n8 a%1%2").arg(aa).arg(aa < ac? ", " : "");
+     atext += QString("a%1,").arg(aa);
+    }
    }
 
-   s0_X_reX_text += QString(R"(
+   if( (ac > 0) )
+     s0_X_reX_text += QString(R"(
 }
 
-void run_s0_%4_re%1(u4 code, minimal_fn_s0_re%1_type fn, %2n8 a1, n8 a2, n8 a3)
+void run_s0_%1_re%2(u4 code, minimal_fn_s0_re%2_type fn, %3%4))")
+   .arg(ac).arg(i).arg(retv).arg(natext);
+
+   else if( (i > 0) )
+     s0_X_reX_text += QString(R"(
+}
+
+void run_s0_%1_re%2(u4 code, minimal_fn_s0_re%2_type fn, %3))")
+   .arg(ac).arg(i).arg(retv.left(retv.size() - 2));
+
+   else
+    s0_X_reX_text += QString(R"(
+}
+
+void run_s0_%1_re%2(u4 code, minimal_fn_s0_re%2_type fn))")
+  .arg(ac).arg(i); // // here ac = 0 and i = 0 always but keep the substitutions for clarity ...
+
+   s0_X_reX_text += QString(R"(
 {
- code %= %5;
- static s0_%4_re%1_dispatch_array* dispatch_array = init_s0_%4_re%1_dispatch_array();
- run_s0_%4_re%1_type f = (*dispatch_array)[code];
- f(%3a1, a2, a3, fn);
+ code %= %1;
+ static s0_%2_re%3_dispatch_array* dispatch_array = init_s0_%2_re%3_dispatch_array();
+ run_s0_%2_re%3_type f = (*dispatch_array)[code];
+ f(%4%5fn);
 }
 
 #endif //def FULL_INCLUDE
-)").arg(i).arg(retv).arg(rsym).arg(ac).arg(arsize * 10);
+)").arg(arsize * 10).arg(ac).arg(i).arg(rsym).arg(atext); // .arg(ac).arg(arsize * 10).arg(atext);
 
    save_file(s0_X_reX_file, s0_X_reX_text);
 

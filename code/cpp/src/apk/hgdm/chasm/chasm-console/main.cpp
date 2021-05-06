@@ -893,17 +893,61 @@ void run_test2arg(Chasm_Runtime* csr)
 }
 
 
+void test1arg(s2& arg1)
+{
+ qDebug() << "arg1 = " << arg1;
+ --arg1;
+}
+
+void run_test1arg(Chasm_Runtime* csr)
+{
+ Chasm_Call_Package* ccp = csr->new_call_package();
+ ccp->add_new_channel("lambda");
+
+ s2 a1 = -533;
+
+ Chasm_Carrier cc1 = csr->gen_carrier<n8&>(&a1);
+
+ ccp->add_carriers({cc1});
+ csr->evaluate(ccp, 700, (minimal_fn_s0_type) &test1arg);
+ qDebug() << "a1 = " << a1;
+}
+
+
+void test0arg()
+{
+ qDebug() << "0 arg1";
+}
+
+void run_test0arg(Chasm_Runtime* csr)
+{
+ Chasm_Call_Package* ccp = csr->new_call_package();
+// ccp->add_new_channel("lambda");
+
+// s2 a1 = -533;
+
+// Chasm_Carrier cc1 = csr->gen_carrier<n8&>(&a1);
+
+// ccp->add_carriers({cc1});
+ csr->evaluate(ccp, 70, (minimal_fn_s0_type) &test0arg);
+}
+
 
 int main(int argc, char *argv[])
 {
  Chasm_Runtime* csr = new Chasm_Runtime;
  csr->init_no_file_session();
 
-// qDebug() << "\n----\n";
-// run_test2arg(csr);
+ qDebug() << "\n----\n";
+ run_test0arg(csr);
 
+ qDebug() << "\n===\n";
+ run_test1arg(csr);
 
-//// #ifdef HIDE
+ qDebug() << "\n===\n";
+ run_test2arg(csr);
+
+#ifdef HIDE
 
 // QVector<Chasm_Typed_Value_Representation> rs_args;
 
@@ -965,7 +1009,7 @@ int main(int argc, char *argv[])
 
  qDebug() << "\n_____\n";
 
-//#endif
+#endif
 
 // Chasm_Call_Package* ccp = csr->new_call_package();
 // ccp->add_new_channel("lambda");
