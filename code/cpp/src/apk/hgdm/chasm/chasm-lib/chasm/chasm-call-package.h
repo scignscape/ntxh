@@ -37,6 +37,8 @@ public:
 
  Chasm_Call_Package(u4 id);
 
+ ACCESSORS__RGET(MACRO_PASTE(QMap<QString, Chasm_Channel*>) ,channels)
+
  void add_new_channel(QString name);
 
  void add_carrier(const Chasm_Carrier& cc);

@@ -15,8 +15,6 @@
 
 #include "chasm-lib/metatype-object.h"
 
-#include "chasm-lib/chasm/chasm-type-object.h"
-
 #include "textio.h"
 USING_KANS(TextIO)
 
@@ -42,8 +40,72 @@ USING_KANS(TextIO)
 #include <QMenu>
 #include <QWebEngineContextMenuData>
 
+#include "rpdf/webgl-view-dialog/rpdf-web-engine-page.h"
+#include "rpdf/webgl-view-dialog/rpdf-web-engine-view.h"
+
+#include "rpdf/webgl-view-dialog/webgl-view-dialog.h"
+
+#include "rpdf/webgl-view-dialog/context-menu-provider.h"
+#include "rpdf/webgl-view-dialog/pattern-matcher-runtime.h"
+
+#include "rpdf/webgl-view-dialog/signal-generator.h"
+
+
+int main(int argc, char *argv[])
+{
+ QApplication a(argc, argv);
+
+ WebGL_View_Dialog* dlg = new WebGL_View_Dialog(nullptr);
+
+ dlg->setWindowTitle("Matterport/Google Console");
+
+ Pattern_Matcher_Runtime* pm_runtime = dlg->pm_runtime();
+
+ QVector<URL_Or_Event_Pattern*>* url_patterns;
+
+ Signal_Generator sg;
+
+ QApplication::connect(&sg, &Signal_Generator::new_dialog_requested,
+   [](const QPoint& pos, QUrl url)
+ {
+  WebGL_View_Dialog* dlg1 = new WebGL_View_Dialog(nullptr);
+
+  dlg1->move(pos);
+
+  dlg1->show();
+
+ });
+
+ Context_Menu_Provider cmp(pm_runtime, &sg);
+ pm_runtime->set_context_menu_provider(&cmp);
+ url_patterns = &pm_runtime->url_patterns();
+ dlg->set_context_menu_provider(&cmp);
+
+ QApplication::connect(dlg, &WebGL_View_Dialog::url_patterns_changed,
+   [dlg, &url_patterns]()
+ {
+  //? *url_patterns = dlg->url_patterns();
+ });
+
+ QApplication::connect(dlg, &WebGL_View_Dialog::url_pattern_match,
+   [dlg, &url_patterns](QString procedure_name, QString arguments)
+ {
+  qDebug() << "Proc: " << procedure_name;
+  qDebug() << "arguments: " << arguments;
+ });
+
+ dlg->show();
+
+ return a.exec();
+}
+
+
+
+
 
 typedef void (*_temp_minimal_fn_s0_r0_type)();
+
+
 
 void testqvar(QVariant arg1, r8 arg2, u2 arg3)
 {
@@ -779,141 +841,12 @@ void run_test2(Chasm_Runtime* csr)
 
 //#define run_s0_3_r0(a,b,c,d,e)
 
-
-struct test_qpr
-{
- QString qs;
- u4 uu;
- ~test_qpr()
- {
-  qDebug() << "~test qpr";
- }
-
- QPair<QString, u4> to_pr() { return {qs, uu}; }
-};
-
-
-
-QPoint* test_smart(test_qpr& arg1, //QPair<QString, u4>& arg1,  //test_qpr& arg1,
-                   QPoint& arg2, QStringList* arg3)
-{
- qDebug() << "arg1 = " << arg1.to_pr();
- qDebug() << "arg2 = " << arg2;
- qDebug() << "arg3 = " << *arg3;
- return new QPoint(600,601);
-}
-
-
-void pre_run_smart(Chasm_Runtime* csr, QVector<Chasm_Typed_Value_Representation>& args)
-{
-// Chasm_Typed_Value_Representation
-
-// Chasm_Type_Object* ref_type_shared = csr->get_type_object_by_name("n8&!!");
-
-// Chasm_Type_Object* ref_type_shared = csr->get_type_object_by_name("n8&!!");
-
- Chasm_Type_Object* ref_type_shared = csr->get_type_object_by_name("n8&!");
- Chasm_Type_Object* pVoid_type = csr->get_type_object_by_name("void*");
- Chasm_Type_Object* ref_type = csr->get_type_object_by_name("n8&");
-
- QString a11 = "Test";
- u4 a12 = 33;
-
- test_qpr* _a1 = new test_qpr{a11, a12};
- //std::shared_ptr<test_qpr>* ss = new std::shared_ptr<test_qpr>(_a1);
-
-// std::shared_ptr<n8>* ss = new std::shared_ptr<n8>( (n8*) _a1);
- //return with_instance(ss);
-
-
- args.push_back( ref_type_shared->make_instance(_a1) );
- // args.push_back( ref_type_shared->with_instance(_a1) );
-
- QPoint* a2 = new QPoint(500,501);
- args.push_back( ref_type->with_instance(a2) );
-
-
- QStringList* qsl = new QStringList{"qsl1", "qsl2"};
-
- args.push_back( pVoid_type->with_instance(qsl) );
-
-}
-
-void run_smart(Chasm_Runtime* csr, QVector<Chasm_Typed_Value_Representation>& args)
-{
- Chasm_Call_Package* ccp = csr->new_call_package();
- ccp->add_new_channel("lambda");
-
-
- Chasm_Carrier cc1 = csr->gen_carrier(args[0]);
- Chasm_Carrier cc2 = csr->gen_carrier(args[1]);
- Chasm_Carrier cc3 = csr->gen_carrier(args[2]);
-
- ccp->add_carriers({cc1,cc2,cc3});
-
- ccp->add_new_channel("result");
-
- Chasm_Carrier cc0 = csr->gen_carrier<u4>(csr->Result._ptr);
- ccp->add_carrier(cc0);
- csr->evaluate(ccp, 79009, (minimal_fn_s0_re4_type) &test_smart, &cc0);
- QPoint* result = cc0.value<QPoint*>();
- qDebug() << "r = " << *result;
-
- csr->release(ccp);
-}
-
-
-void run_smart(Chasm_Runtime* csr)
-{
- Chasm_Call_Package* ccp = csr->new_call_package();
- ccp->add_new_channel("lambda");
-
- QString a11 = "Test";
- u4 a12 = 33;
- test_qpr* _a1 = new test_qpr{a11, a12};
-
- //std::shared_ptr<test_qpr>* ss = new std::shared_ptr<test_qpr>(_a1);
-
- //std::shared_ptr<QPair<QString, u4>>* ss  = new std::shared_ptr<QPair<QString, u4>>(_a1);
-
- //test_qpr& a1 = *_a1;
-
- QPoint* a2 = new QPoint(500,501);
- QStringList* qsl = new QStringList{"qsl1", "qsl2"};
-
-
- Chasm_Carrier cc1 = csr->gen_carrier<n8&>(_a1);
- Chasm_Carrier cc2 = csr->gen_carrier<n8&>(a2);
- Chasm_Carrier cc3 = csr->gen_carrier<void*>(&qsl);
-
- ccp->add_carriers({cc1,cc2,cc3});
-
- ccp->add_new_channel("result");
-
- Chasm_Carrier cc0 = csr->gen_carrier<u4>(csr->Result._ptr);
- ccp->add_carrier(cc0);
- csr->evaluate(ccp, 79009, (minimal_fn_s0_re4_type) &test_smart, &cc0);
- QPoint* result = cc0.value<QPoint*>();
- qDebug() << "r = " << *result;
-
- csr->release(ccp);
-}
-
-
-
-int main(int argc, char *argv[])
+int main1(int argc, char *argv[])
 {
  Chasm_Runtime* csr = new Chasm_Runtime;
  csr->init_no_file_session();
 
- QVector<Chasm_Typed_Value_Representation> rs_args;
-
- pre_run_smart(csr, rs_args);
- run_smart(csr, rs_args);
-
-// qDebug() << "\n===\n";
-// run_testqvar(csr);
-#ifdef HIDE
+ run_testqvar(csr);
  qDebug() << "\n===\n";
  run_testqvarf(csr);
  qDebug() << "\n===\n";
@@ -964,7 +897,7 @@ int main(int argc, char *argv[])
  qDebug() << "\n===\n";
  run_testqsb(csr);
 
-#endif
+
 
 // Chasm_Call_Package* ccp = csr->new_call_package();
 // ccp->add_new_channel("lambda");

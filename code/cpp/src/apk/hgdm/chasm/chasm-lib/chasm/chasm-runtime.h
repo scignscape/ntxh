@@ -105,6 +105,9 @@ public:
  Chasm_Carrier gen_carrier(QString type_name = {});
  Chasm_Carrier gen_carrier(u1 type_flag);
 
+ Chasm_Carrier gen_shared_ref_carrier(std::shared_ptr<n8>* ss);
+ //Chasm_Carrier gen_shared_ref_carrier(n8 val);
+
  template<typename CARRIER_Type>
  inline Chasm_Carrier gen_carrier();
 
@@ -112,6 +115,8 @@ public:
  inline Chasm_Carrier gen_carrier(void* value);
 
  void init_no_file_session();
+
+ void release(Chasm_Call_Package* ccp);
 
  template<typename FN_Type>
  void evaluate(Chasm_Call_Package* ccp, u4 fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)

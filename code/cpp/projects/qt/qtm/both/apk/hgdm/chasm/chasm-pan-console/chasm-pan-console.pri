@@ -53,11 +53,27 @@ INCLUDEPATH += $$ROOT_DIR
 
 
 HEADERS += \
+  $$SRC_DIR/rpdf/webgl-view-dialog/my-page.h \
+  $$SRC_DIR/rpdf/webgl-view-dialog/rpdf-web-engine-page.h \
+  $$SRC_DIR/rpdf/webgl-view-dialog/rpdf-web-engine-view.h \
+  $$SRC_DIR/rpdf/webgl-view-dialog/webgl-view-dialog.h \
+  $$SRC_DIR/rpdf/webgl-view-dialog/context-menu-provider.h \
+  $$SRC_DIR/rpdf/webgl-view-dialog/url-or-event-pattern.h \
+  $$SRC_DIR/rpdf/webgl-view-dialog/pattern-matcher-runtime.h \
+  $$SRC_DIR/rpdf/webgl-view-dialog/signal-generator.h \
 
 
 
 SOURCES += \
   $$SRC_DIR/main.cpp \
+  $$SRC_DIR/rpdf/webgl-view-dialog/my-page.cpp \
+  $$SRC_DIR/rpdf/webgl-view-dialog/rpdf-web-engine-page.cpp \
+  $$SRC_DIR/rpdf/webgl-view-dialog/rpdf-web-engine-view.cpp  \
+  $$SRC_DIR/rpdf/webgl-view-dialog/webgl-view-dialog.cpp \
+  $$SRC_DIR/rpdf/webgl-view-dialog/context-menu-provider.cpp \
+  $$SRC_DIR/rpdf/webgl-view-dialog/url-or-event-pattern.cpp \
+  $$SRC_DIR/rpdf/webgl-view-dialog/pattern-matcher-runtime.cpp \
+  $$SRC_DIR/rpdf/webgl-view-dialog/signal-generator.cpp \
 
 
 

@@ -49,6 +49,8 @@ Chasm_Runtime::Chasm_Runtime()
     current_no_file_session_(0)
 {
  register_type_object("n8&", 0, 0, 0, -1);
+ register_type_object("n8&!", 0, 0, 0, -1);
+ //register_type_object("n8&!!", 0, 0, 0, -1);
 
  register_type_object("u1", 1, 10, 100, 1000);
  register_type_object("u2", 2, 20, 200, 2000);
@@ -76,6 +78,18 @@ Chasm_Type_Object* Chasm_Runtime::register_type_object(QString name, u2 pos1code
 
  return result;
 }
+
+
+Chasm_Carrier Chasm_Runtime::gen_shared_ref_carrier(std::shared_ptr<n8>* ss)
+{
+ return gen_carrier(0).take_shared_ref_value(ss);
+}
+
+//Chasm_Carrier Chasm_Runtime::gen_shared_ref_carrier(n8 val)
+//{
+// std::shared_ptr<n8>* ss = new std::shared_ptr<n8>((n8*) val);
+// return gen_carrier(0).take_twice_shared_ref_value(ss);
+//}
 
 
 template<>
@@ -242,12 +256,45 @@ Chasm_Carrier Chasm_Runtime::gen_carrier(Chasm_Typed_Value_Representation& tvr)
   return gen_carrier<void*>(&arg);
  }
 
+// if(cto->name() == "n8&!")
+// {
+//  return gen_shared_ref_carrier(tvr.raw_value);
+//  //return gen_shared_ref_carrier(*(std::shared_ptr<n8>*) tvr.raw_value);
+// }
+
+ if(cto->name() == "n8&!")
+ {
+  return gen_shared_ref_carrier((std::shared_ptr<n8>*) tvr.raw_value);
+  //return gen_shared_ref_carrier(*(std::shared_ptr<n8>*) tvr.raw_value);
+ }
+
  if(cto->name() == "n8&")
  {
   return gen_carrier<n8&>((n8*) tvr.raw_value);
  }
 
  return gen_carrier<void*>(&tvr.raw_value);
+}
+
+
+void Chasm_Runtime::release(Chasm_Call_Package* ccp)
+{
+ QMapIterator<QString, Chasm_Channel*> it(ccp->channels());
+ while(it.hasNext())
+ {
+  it.next();
+  Chasm_Channel* ch = it.value();
+
+  for(Chasm_Carrier cc : ch->carriers())
+  {
+   if(cc.key().type_flag() == 14)
+   {
+    std::shared_ptr<n8>* ss = cc.raw_value_as<std::shared_ptr<n8>*>();
+    delete ss;
+   }
+  }
+ }
+
 }
 
 

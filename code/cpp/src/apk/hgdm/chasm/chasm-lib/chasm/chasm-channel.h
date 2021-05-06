@@ -36,6 +36,7 @@ public:
  Chasm_Channel(QString name);
 
  ACCESSORS(QString ,name)
+ ACCESSORS(QVector<Chasm_Carrier> ,carriers)
 
  void add_carrier(const Chasm_Carrier& cc)
  {

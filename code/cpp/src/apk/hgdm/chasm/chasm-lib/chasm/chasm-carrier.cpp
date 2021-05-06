@@ -61,9 +61,32 @@ n8 Chasm_Carrier::pasn8()
 
  if( (tf == 0) || (tf == 3) || (tf == 5) || (tf == 7) )
    return raw_value_;
+
+ if(tf == 14)
+ {
+  return (n8) ((std::shared_ptr<n8>*) raw_value_)->get();
+ }
+
  return (n8) &raw_value_;
 }
 
+
+Chasm_Carrier& Chasm_Carrier::take_shared_ref_value(std::shared_ptr<n8>* ss)
+{
+ u1 tf = key_.type_flag();
+
+ // // tf only = 0?
+
+ if(tf != 0)
+   return *this;
+
+ key_.set_type_flag(14);
+
+ raw_value_ = (n8) ss; //->get();
+
+ //delete ss;
+
+}
 
 
 Chasm_Carrier& Chasm_Carrier::take_value(void* pv)

@@ -51,6 +51,19 @@ public:
   return {this, (n8) v, {}};
  }
 
+ template<typename T>
+ Chasm_Typed_Value_Representation make_instance(T* v)
+ {
+  if(name_.endsWith("!"))
+  {
+   std::shared_ptr<T>* ss = new std::shared_ptr<T>(v);
+   return with_instance(ss);
+  }
+   // v = new std::shared_ptr<n8>((n8*) v);
+
+  return with_instance(v);
+ }
+
 };
 
 // _KANS(GTagML)

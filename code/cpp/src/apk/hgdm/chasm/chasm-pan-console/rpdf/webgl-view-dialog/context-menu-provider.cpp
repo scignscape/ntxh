@@ -20,6 +20,8 @@
 #include <QPixmap>
 #include <QFile>
 
+//#include <smart
+
 
 
 void launch_web_site(QString place, QVariant pos, n8 winid)
@@ -80,11 +82,16 @@ void test_map_places(Context_Menu_Provider* _this, QString arguments,
 
  QString url = ROOT_FOLDER "/../testdia/matterport/new-alexander.html";
 
- QPoint* qp = new QPoint(qsl[3].toUInt(), qsl[4].toUInt());
+ //QSharedDataPointer<QPoint> qp = QSharedDataPointer<QPoint>(new QPoint(qsl[3].toUInt(), qsl[4].toUInt()) );
+
+ QPoint* _pos = new QPoint(qsl[3].toUInt(), qsl[4].toUInt());
+
+// std::shared_ptr<QPoint> spos(_pos);
+// QPoint& pos = *_pos;
 
  info = {
    {{
-     {ref_type->with_instance(qp) },
+     {ref_type->with_instance(_pos) },
      {QVariant_type->with_rep("url:file:///" + url) },
      {pVoid_type->with_instance(_this) },
     }, "Virtual Tour", "launch_virtual_tour"},
