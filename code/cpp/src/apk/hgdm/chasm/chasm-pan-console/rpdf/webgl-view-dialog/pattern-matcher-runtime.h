@@ -34,7 +34,7 @@ class Pattern_Matcher_Runtime
 
  QMap<QString, QString> procedure_name_resolutions_;
 
- QMap<QString, QPair<u4, minimal_fn_s0_re8_type>> registered_procedures_;
+ QMap<QString, QPair<u4, minimal_fn_s0_re0_type>> registered_procedures_;
 
  Context_Menu_Provider* context_menu_provider_;
 
@@ -46,7 +46,7 @@ public:
 
  ACCESSORS__RGET(MACRO_PASTE(QMap<QString, QString>) ,procedure_name_resolutions)
 
- ACCESSORS__RGET(MACRO_PASTE(QMap<QString, QPair<u4, minimal_fn_s0_re8_type>>) ,registered_procedures)
+ ACCESSORS__RGET(MACRO_PASTE(QMap<QString, QPair<u4, minimal_fn_s0_re0_type>>) ,registered_procedures)
 
 
  ACCESSORS(Chasm_Runtime* ,chasm_runtime)

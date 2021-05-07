@@ -149,7 +149,7 @@ int main(int argc, char *argv[])
 
 
    QString s0_X_reX_ch_eval_file = QString(ROOT_FOLDER "/dev/consoles/fns/s0/a%1/ch-eval-s0_%1_re%2.cpp").arg(ac).arg(i);
-   QString s0_X_reX_ch_eval_text = R"(
+   QString s0_X_reX_ch_eval_text = (ac == 0)? "" : R"(
 
 Chasm_Channel* lambda = ccp->channel("lambda");
 if(!lambda)
@@ -285,7 +285,7 @@ void run_s0_%1_re%2(u4 code, minimal_fn_s0_re%2_type fn))")
 }
 
 #endif //def FULL_INCLUDE
-)").arg(arsize * 10).arg(ac).arg(i).arg(rsym).arg(atext); // .arg(ac).arg(arsize * 10).arg(atext);
+)").arg(arsize).arg(ac).arg(i).arg(rsym).arg(atext); // .arg(ac).arg(arsize * 10).arg(atext);
 
    save_file(s0_X_reX_file, s0_X_reX_text);
 

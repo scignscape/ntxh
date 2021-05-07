@@ -23,7 +23,7 @@ s0_0_re8_dispatch_array* init_s0_0_re8_dispatch_array()
 
 void run_s0_0_re8(u4 code, minimal_fn_s0_re8_type fn, n8& retv)
 {
- code %= 10;
+ code %= 1;
  static s0_0_re8_dispatch_array* dispatch_array = init_s0_0_re8_dispatch_array();
  run_s0_0_re8_type f = (*dispatch_array)[code];
  f(retv, fn);

@@ -204,6 +204,7 @@ public:
   }
  }
 
+
  template<typename FN_Type>
  void evaluate_2(Chasm_Call_Package* ccp, u4 fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
  {
@@ -255,8 +256,8 @@ public:
    evaluate_2_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, rcar);
    break;
   }
-
  }
+
 
  template<typename FN_Type>
  void evaluate_1(Chasm_Call_Package* ccp, u4 fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
@@ -363,8 +364,6 @@ public:
    evaluate_0_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, rcar);
    break;
   }
-
-
  }
 
 

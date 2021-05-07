@@ -23,7 +23,7 @@ s0_0_re3_dispatch_array* init_s0_0_re3_dispatch_array()
 
 void run_s0_0_re3(u4 code, minimal_fn_s0_re3_type fn, QString& retv)
 {
- code %= 10;
+ code %= 1;
  static s0_0_re3_dispatch_array* dispatch_array = init_s0_0_re3_dispatch_array();
  run_s0_0_re3_type f = (*dispatch_array)[code];
  f(retv, fn);

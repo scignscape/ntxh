@@ -122,7 +122,7 @@ s0_2_re4_dispatch_array* init_s0_2_re4_dispatch_array()
 
 void run_s0_2_re4(u4 code, minimal_fn_s0_re4_type fn, u4& retv, n8 a1, n8 a2)
 {
- code %= 1000;
+ code %= 100;
  static s0_2_re4_dispatch_array* dispatch_array = init_s0_2_re4_dispatch_array();
  run_s0_2_re4_type f = (*dispatch_array)[code];
  f(retv, a1,a2,fn);

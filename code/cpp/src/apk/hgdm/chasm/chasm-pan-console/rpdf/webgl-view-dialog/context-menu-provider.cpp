@@ -24,7 +24,7 @@
 
 
 
-void launch_web_site(QString place, QVariant pos, n8 winid)
+void launch_web_site(QString place, n8 winid)
 {
  qDebug() << "\n\nPlace = " << place << "\n\n";
 
@@ -99,12 +99,11 @@ void test_map_places(Context_Menu_Provider* _this, QString arguments,
     }, "Virtual Tour", "launch_virtual_tour"},
    {{
      {QString_type->with_rep(qsl.first()) },
-     {QVariant_type->with_rep("89") },
-     {n8_type->with_rep(qsl.last()) },
-    }, "Web Site", "launch_web_site"},
+     {n8_type->with_rep(qsl[2]) },
+    }, "Launch Web Site", "launch_web_site"},
    //};
    {{ {}
-    }, "View GIS data", "viwe_gis_data"}
+    }, "View GIS Data", "viwe_gis_data"}
    }
    ;
 
@@ -135,10 +134,10 @@ Context_Menu_Provider::Context_Menu_Provider(Pattern_Matcher_Runtime* pm_runtime
 
 
  pm_runtime_->procedure_name_resolutions().insert("launch_web_site",
-   "launch_web_site@70378");
+   "launch_web_site@7038");
 
- pm_runtime_->registered_procedures().insert("launch_web_site@70378",
-   {70378, (minimal_fn_s0_re0_type) &launch_web_site});
+ pm_runtime_->registered_procedures().insert("launch_web_site@7038",
+   {7038, (minimal_fn_s0_re0_type) &launch_web_site});
 
 
  pm_runtime_->procedure_name_resolutions().insert("launch_virtual_tour",
@@ -214,11 +213,13 @@ void Context_Menu_Provider::run_callback(Pattern_Matcher_Runtime::Action_Info ai
  Chasm_Call_Package* ccp = chasm_runtime_->new_call_package();
  ccp->add_new_channel("lambda");
 
- Chasm_Carrier cc1 = chasm_runtime_->gen_carrier(ai.reps[0]);
- Chasm_Carrier cc2 = chasm_runtime_->gen_carrier(ai.reps[1]);
- Chasm_Carrier cc3 = chasm_runtime_->gen_carrier(ai.reps[2]);
+ for(Chasm_Typed_Value_Representation& ctvr : ai.reps)
+   ccp->add_carrier(chasm_runtime_->gen_carrier(ctvr));
+// Chasm_Carrier cc1 = chasm_runtime_->gen_carrier(ai.reps[0]);
+// Chasm_Carrier cc2 = chasm_runtime_->gen_carrier(ai.reps[1]);
+// Chasm_Carrier cc3 = chasm_runtime_->gen_carrier(ai.reps[2]);
 
- ccp->add_carriers({cc1,cc2,cc3});
+// ccp->add_carriers({cc1,cc2,cc3});
 
  chasm_runtime_->evaluate(ccp, pcode, proc); //proc);
 }

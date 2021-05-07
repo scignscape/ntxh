@@ -1,9 +1,4 @@
 
-
-Chasm_Channel* lambda = ccp->channel("lambda");
-if(!lambda)
-  return;
-
 Chasm_Channel* resultch = ccp->channel("result");
 if(!resultch)
   return;

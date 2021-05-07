@@ -32,7 +32,7 @@ s0_1_re7_dispatch_array* init_s0_1_re7_dispatch_array()
 
 void run_s0_1_re7(u4 code, minimal_fn_s0_re7_type fn, QVariant& retv, n8 a1)
 {
- code %= 100;
+ code %= 10;
  static s0_1_re7_dispatch_array* dispatch_array = init_s0_1_re7_dispatch_array();
  run_s0_1_re7_type f = (*dispatch_array)[code];
  f(retv, a1,fn);

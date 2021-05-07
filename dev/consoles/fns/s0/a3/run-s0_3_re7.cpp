@@ -1022,7 +1022,7 @@ s0_3_re7_dispatch_array* init_s0_3_re7_dispatch_array()
 
 void run_s0_3_re7(u4 code, minimal_fn_s0_re7_type fn, QVariant& retv, n8 a1, n8 a2, n8 a3)
 {
- code %= 10000;
+ code %= 1000;
  static s0_3_re7_dispatch_array* dispatch_array = init_s0_3_re7_dispatch_array();
  run_s0_3_re7_type f = (*dispatch_array)[code];
  f(retv, a1,a2,a3,fn);
