@@ -73,6 +73,8 @@
 #include "./dev/consoles/fns/s0/a0/run-s0_0_re9.cpp"
 
 
+//struct _min_{};
+
 class Chasm_Call_Package;
 class Chasm_Type_Object;
 
@@ -313,8 +315,10 @@ public:
 
  }
 
- template<typename FN_Type>
- void evaluate_0(Chasm_Call_Package* ccp, u4 fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
+
+ template<typename SFN_Type>
+ void evaluate_s1_0(Chasm_Call_Package* ccp, u4 fncode,
+  SFN_Type sfn)// Chasm_Carrier* rcar = nullptr)
  {
   u1 sl = fncode / 10;
 
@@ -325,7 +329,32 @@ public:
   switch(rr)
   {
   case 0:
-   evaluate_0_re0(ccp, fncode, (minimal_fn_s0_re0_type) fn);
+   evaluate_0_re0(ccp, fncode, nullptr,
+     (minimal_fn_s1_re0_type) sfn);
+   break;
+  }
+ }
+
+
+ template<typename FN_Type>
+ void evaluate_0(Chasm_Call_Package* ccp, u4 fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
+ {
+  u1 sl = fncode / 10;
+
+//  if(sl == 8)
+//  {
+//   evaluate_s1_0(ccp, fncode, fn);
+//   return;
+//  }
+
+  u1 rr = (fncode % 10);
+
+  fncode %= 10;
+
+  switch(rr)
+  {
+  case 0:
+   //?evaluate_0_re0(ccp, fncode, (minimal_fn_s0_re0_type) fn);
    break;
 
   case 1:
@@ -420,7 +449,10 @@ public:
  void evaluate_1_re9(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re9_type fn, Chasm_Carrier* rcar = nullptr);
 
 
- void evaluate_0_re0(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re0_type fn);
+ void evaluate_0_re0(Chasm_Call_Package* ccp, u2 fncode,
+   minimal_fn_s0_re0_type fn,
+   minimal_fn_s1_re0_type sfn);
+
  void evaluate_0_re1(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re1_type fn, Chasm_Carrier* rcar = nullptr);
  void evaluate_0_re2(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re2_type fn, Chasm_Carrier* rcar = nullptr);
  void evaluate_0_re3(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re3_type fn, Chasm_Carrier* rcar = nullptr);

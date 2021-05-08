@@ -26,7 +26,7 @@ void RPDF_Web_Engine_View::check_sec()
  }
 }
 
-void RPDF_Web_Engine_View::contextMenuEvent(QContextMenuEvent *event)
+void RPDF_Web_Engine_View::contextMenuEvent(QContextMenuEvent* event)
 {
  //
  qDebug()<< "event->reason()";
@@ -64,6 +64,14 @@ void RPDF_Web_Engine_View::contextMenuEvent(QContextMenuEvent *event)
   });
   qDebug() << ai.option_label;
  }
+
+// if(info.isEmpty())
+// {
+//  menu->addAction("Review Matterport Tags");
+//  menu->addAction("Launch Tag Dialog");
+//  menu->addAction("View Sensor Data");
+//  menu->addAction("View Pattern Match Data");
+// }
 
 
 //   page()->createStandardContextMenu();

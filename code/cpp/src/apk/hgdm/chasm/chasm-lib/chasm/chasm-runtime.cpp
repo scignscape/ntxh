@@ -550,7 +550,9 @@ void Chasm_Runtime::evaluate_1_re9(Chasm_Call_Package* ccp,
 
 
 
-void Chasm_Runtime::evaluate_0_re0(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re0_type fn)
+void Chasm_Runtime::evaluate_0_re0(Chasm_Call_Package* ccp,
+  u2 fncode, minimal_fn_s0_re0_type fn,
+  minimal_fn_s1_re0_type sfn)
 {
 #include "./dev/consoles/fns/s0/a0/ch-eval-s0_0_re0.cpp"
 }

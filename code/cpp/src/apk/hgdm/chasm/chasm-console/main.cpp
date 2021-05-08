@@ -28,6 +28,7 @@ USING_KANS(TextIO)
 typedef void (*_temp_minimal_fn_s0_r0_type)();
 
 typedef minimal_fn_s0_re0_type minimal_fn_s0_type;
+typedef minimal_fn_s1_re0_type minimal_fn_s1_type;
 
 
 void testqvar(QVariant arg1, r8 arg2, u2 arg3)
@@ -948,12 +949,55 @@ void run_test0r9(Chasm_Runtime* csr)
 }
 
 
+struct test0s1
+{
+ QStringList qsl;
+
+ void test()
+ {
+  QStringList* result = new QStringList(qsl);
+  (*result) << "_qsl1" << "_qsl2";
+ }
+};
+
+void run_test0s1(Chasm_Runtime* csr)
+{
+ Chasm_Call_Package* ccp = csr->new_call_package();
+
+// ccp->add_new_channel("result");
+
+ ccp->add_new_channel("sigma");
+ test0s1 ts1{{"q1", "q2"}};
+
+ test0s1* arg1 = &ts1;
+
+ Chasm_Carrier cc0 = csr->gen_carrier<void*>(&arg1);
+ ccp->add_carrier(cc0);
+
+ //csr->evaluate(ccp, 80, (minimal_fn_s1_type) &test0s1::test);
+
+ csr->evaluate_s1_0(ccp, 80, (minimal_fn_s1_type) &test0s1::test);
+
+
+ //QStringList* result = cc0.value<QStringList*>();
+ //qDebug() << "r = " << *result;
+
+}
+
+
+
 int main(int argc, char *argv[])
 {
  Chasm_Runtime* csr = new Chasm_Runtime;
  csr->init_no_file_session();
 
  qDebug() << "\n----\n";
+
+ run_test0s1(csr);
+
+
+#ifdef HIDE
+
  run_test0arg(csr);
 
  qDebug() << "\n===\n";
@@ -965,7 +1009,6 @@ int main(int argc, char *argv[])
  qDebug() << "\n===\n";
  run_test2arg(csr);
 
-//#ifdef HIDE
 
 // QVector<Chasm_Typed_Value_Representation> rs_args;
 
@@ -1027,7 +1070,7 @@ int main(int argc, char *argv[])
 
  qDebug() << "\n_____\n";
 
-//#endif
+#endif
 
 // Chasm_Call_Package* ccp = csr->new_call_package();
 // ccp->add_new_channel("lambda");
