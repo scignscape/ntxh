@@ -184,8 +184,8 @@ URL_Or_Event_Pattern* Pattern_Matcher_Runtime::add_url_pattern()
 
 // ccp->add_carriers({cc1,cc2,cc3});
 
-//// ccp->add_new_channel("result");
-//// Chasm_Carrier cc0 = csr->gen_carrier<r8>(csr->Result._r8);
+//// ccp->add_new_channel("retvalue");
+//// Chasm_Carrier cc0 = csr->gen_carrier<r8>(csr->Retvalue._r8);
 //// ccp->add_carrier(cc0);
 
 // chasm_runtime_->evaluate(ccp, pcode, //(minimal_fn_s0_re8_type)

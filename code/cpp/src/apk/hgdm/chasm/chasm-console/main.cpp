@@ -138,8 +138,8 @@ void run_testsus(Chasm_Runtime* csr)
  csr->evaluate(ccp, 70120, (minimal_fn_s0_type) &testsus);
  qDebug() << "a3 = " << a3;
 
- // ccp->add_new_channel("result");
- // Chasm_Carrier cc0 = csr->gen_carrier<u1>(csr->Result._u1);
+ // ccp->add_new_channel("retvalue");
+ // Chasm_Carrier cc0 = csr->gen_carrier<u1>(csr->Retvalue._u1);
  // ccp->add_carrier(cc0);
  // csr->evaluate(ccp, 71341, (minimal_fn_s0_re1_type) &testqs1, &cc0);
  // u1 result = cc0.value<u1>();
@@ -179,8 +179,8 @@ void run_testqss(Chasm_Runtime* csr)
  csr->evaluate(ccp, 70120, (minimal_fn_s0_type) &testqss);
  qDebug() << "a3 = " << a3;
 
- // ccp->add_new_channel("result");
- // Chasm_Carrier cc0 = csr->gen_carrier<u1>(csr->Result._u1);
+ // ccp->add_new_channel("retvalue");
+ // Chasm_Carrier cc0 = csr->gen_carrier<u1>(csr->Retvalue._u1);
  // ccp->add_carrier(cc0);
  // csr->evaluate(ccp, 71341, (minimal_fn_s0_re1_type) &testqs1, &cc0);
  // u1 result = cc0.value<u1>();
@@ -212,8 +212,8 @@ void run_testqs1(Chasm_Runtime* csr)
 
  ccp->add_carriers({cc1,cc2,cc3});
 
- ccp->add_new_channel("result");
- Chasm_Carrier cc0 = csr->gen_carrier<u1>(csr->Result._u1);
+ ccp->add_new_channel("retvalue");
+ Chasm_Carrier cc0 = csr->gen_carrier<u1>(csr->Retvalue._u1);
  ccp->add_carrier(cc0);
 
  csr->evaluate(ccp, 71341, (minimal_fn_s0_type) &testqs1, &cc0);
@@ -246,9 +246,9 @@ void run_testqs1n(Chasm_Runtime* csr)
 
  ccp->add_carriers({cc1,cc2,cc3});
 
- ccp->add_new_channel("result");
+ ccp->add_new_channel("retvalue");
 
- Chasm_Carrier cc0 = csr->gen_carrier<u2>(csr->Result._u1);
+ Chasm_Carrier cc0 = csr->gen_carrier<u2>(csr->Retvalue._u1);
  ccp->add_carrier(cc0);
  csr->evaluate(ccp, 71341, (minimal_fn_s0_type) &testqs1n, &cc0);
  s1 result = cc0.value<s1>();
@@ -279,9 +279,9 @@ void run_testqs2(Chasm_Runtime* csr)
 
  ccp->add_carriers({cc1,cc2,cc3});
 
- ccp->add_new_channel("result");
+ ccp->add_new_channel("retvalue");
 
- Chasm_Carrier cc0 = csr->gen_carrier<u2>(csr->Result._u2);
+ Chasm_Carrier cc0 = csr->gen_carrier<u2>(csr->Retvalue._u2);
  ccp->add_carrier(cc0);
  csr->evaluate(ccp, 72341, (minimal_fn_s0_type) &testqs2, &cc0);
  u2 result = cc0.value<u2>();
@@ -313,9 +313,9 @@ void run_testqs2n(Chasm_Runtime* csr)
 
  ccp->add_carriers({cc1,cc2,cc3});
 
- ccp->add_new_channel("result");
+ ccp->add_new_channel("retvalue");
 
- Chasm_Carrier cc0 = csr->gen_carrier<u2>(csr->Result._u2);
+ Chasm_Carrier cc0 = csr->gen_carrier<u2>(csr->Retvalue._u2);
  ccp->add_carrier(cc0);
  csr->evaluate(ccp, 72341, (minimal_fn_s0_type) &testqs2n, &cc0);
  s2 result = cc0.value<s2>();
@@ -347,9 +347,9 @@ void run_testqsq(Chasm_Runtime* csr)
 
  ccp->add_carriers({cc1,cc2,cc3});
 
- ccp->add_new_channel("result");
+ ccp->add_new_channel("retvalue");
 
- Chasm_Carrier cc0 = csr->gen_carrier<QString>(csr->Result._QString);
+ Chasm_Carrier cc0 = csr->gen_carrier<QString>(csr->Retvalue._QString);
  ccp->add_carrier(cc0);
  csr->evaluate(ccp, 73341, (minimal_fn_s0_type) &testqsq, &cc0);
  QString result = cc0.value<QString>();
@@ -382,9 +382,9 @@ void run_testqs4(Chasm_Runtime* csr)
 
  ccp->add_carriers({cc1,cc2,cc3});
 
- ccp->add_new_channel("result");
+ ccp->add_new_channel("retvalue");
 
- Chasm_Carrier cc0 = csr->gen_carrier<u4>(csr->Result._u4);
+ Chasm_Carrier cc0 = csr->gen_carrier<u4>(csr->Retvalue._u4);
  ccp->add_carrier(cc0);
  csr->evaluate(ccp, 74341, (minimal_fn_s0_type) &testqs4, &cc0);
  u4 result = cc0.value<u4>();
@@ -415,9 +415,9 @@ void run_testqs4n(Chasm_Runtime* csr)
 
  ccp->add_carriers({cc1,cc2,cc3});
 
- ccp->add_new_channel("result");
+ ccp->add_new_channel("retvalue");
 
- Chasm_Carrier cc0 = csr->gen_carrier<u4>(csr->Result._u4);
+ Chasm_Carrier cc0 = csr->gen_carrier<u4>(csr->Retvalue._u4);
  ccp->add_carrier(cc0);
  csr->evaluate(ccp, 74341, (minimal_fn_s0_type) &testqs4n, &cc0);
  s4 result = cc0.value<s4>();
@@ -449,9 +449,9 @@ void run_testqs5(Chasm_Runtime* csr)
 
  ccp->add_carriers({cc1,cc2,cc3});
 
- ccp->add_new_channel("result");
+ ccp->add_new_channel("retvalue");
 
- Chasm_Carrier cc0 = csr->gen_carrier<QByteArray>(csr->Result._QByteArray);
+ Chasm_Carrier cc0 = csr->gen_carrier<QByteArray>(csr->Retvalue._QByteArray);
  ccp->add_carrier(cc0);
  csr->evaluate(ccp, 75341, (minimal_fn_s0_type) &testqs5, &cc0);
  QByteArray result = cc0.value<QByteArray>();
@@ -484,9 +484,9 @@ void run_testqs6(Chasm_Runtime* csr)
 
  ccp->add_carriers({cc1,cc2,cc3});
 
- ccp->add_new_channel("result");
+ ccp->add_new_channel("retvalue");
 
- Chasm_Carrier cc0 = csr->gen_carrier<r8>(csr->Result._r8);
+ Chasm_Carrier cc0 = csr->gen_carrier<r8>(csr->Retvalue._r8);
  ccp->add_carrier(cc0);
  csr->evaluate(ccp, 76341, (minimal_fn_s0_type) &testqs6, &cc0);
  QVariant result = cc0.value<r8>();
@@ -518,9 +518,9 @@ void run_testqs6n(Chasm_Runtime* csr)
 
  ccp->add_carriers({cc1,cc2,cc3});
 
- ccp->add_new_channel("result");
+ ccp->add_new_channel("retvalue");
 
- Chasm_Carrier cc0 = csr->gen_carrier<r8>(csr->Result._r8);
+ Chasm_Carrier cc0 = csr->gen_carrier<r8>(csr->Retvalue._r8);
  ccp->add_carrier(cc0);
  csr->evaluate(ccp, 76341, (minimal_fn_s0_type) &testqs6n, &cc0);
  QVariant result = cc0.value<r8>();
@@ -551,9 +551,9 @@ void run_testqsv(Chasm_Runtime* csr)
 
  ccp->add_carriers({cc1,cc2,cc3});
 
- ccp->add_new_channel("result");
+ ccp->add_new_channel("retvalue");
 
- Chasm_Carrier cc0 = csr->gen_carrier<QVariant>(csr->Result._QVariant);
+ Chasm_Carrier cc0 = csr->gen_carrier<QVariant>(csr->Retvalue._QVariant);
  ccp->add_carrier(cc0);
  csr->evaluate(ccp, 77341, (minimal_fn_s0_type) &testqsv, &cc0);
  QVariant result = cc0.value<QVariant>();
@@ -586,9 +586,9 @@ void run_testqs8(Chasm_Runtime* csr)
 
  ccp->add_carriers({cc1,cc2,cc3});
 
- ccp->add_new_channel("result");
+ ccp->add_new_channel("retvalue");
 
- Chasm_Carrier cc0 = csr->gen_carrier<n8>(csr->Result._n8);
+ Chasm_Carrier cc0 = csr->gen_carrier<n8>(csr->Retvalue._n8);
  ccp->add_carrier(cc0);
  csr->evaluate(ccp, 78341, (minimal_fn_s0_type) &testqs8, &cc0);
  n8 result = cc0.value<n8>();
@@ -622,7 +622,7 @@ void run_testqsp(Chasm_Runtime* csr)
 
  ccp->add_carriers({cc1,cc2,cc3});
 
- ccp->add_new_channel("result");
+ ccp->add_new_channel("retvalue");
 
  Chasm_Carrier cc0 = csr->gen_carrier<void*>();
  ccp->add_carrier(cc0);
@@ -659,8 +659,8 @@ void run_testqsb(Chasm_Runtime* csr)
 
  ccp->add_carriers({cc1,cc2,cc3});
 
- ccp->add_new_channel("result");
- Chasm_Carrier cc0 = csr->gen_carrier<void*>(csr->Result._ptr);
+ ccp->add_new_channel("retvalue");
+ Chasm_Carrier cc0 = csr->gen_carrier<void*>(csr->Retvalue._ptr);
  ccp->add_carrier(cc0);
 
  csr->evaluate(ccp, 79310, (minimal_fn_s0_type) &testqsb, &cc0);
@@ -826,9 +826,9 @@ void run_smart(Chasm_Runtime* csr, QVector<Chasm_Typed_Value_Representation>& ar
 
  ccp->add_carriers({cc1,cc2,cc3});
 
- ccp->add_new_channel("result");
+ ccp->add_new_channel("retvalue");
 
- Chasm_Carrier cc0 = csr->gen_carrier<u4>(csr->Result._ptr);
+ Chasm_Carrier cc0 = csr->gen_carrier<u4>(csr->Retvalue._ptr);
  ccp->add_carrier(cc0);
  csr->evaluate(ccp, 79009, (minimal_fn_s0_type) &test_smart, &cc0);
  QPoint* result = cc0.value<QPoint*>();
@@ -857,9 +857,9 @@ void run_smart(Chasm_Runtime* csr)
 
  ccp->add_carriers({cc1,cc2,cc3});
 
- ccp->add_new_channel("result");
+ ccp->add_new_channel("retvalue");
 
- Chasm_Carrier cc0 = csr->gen_carrier<void*>(csr->Result._ptr);
+ Chasm_Carrier cc0 = csr->gen_carrier<void*>(csr->Retvalue._ptr);
  ccp->add_carrier(cc0);
  csr->evaluate(ccp, 79009, (minimal_fn_s0_type) &test_smart, &cc0);
  QPoint* result = cc0.value<QPoint*>();
@@ -938,8 +938,8 @@ void run_test0r9(Chasm_Runtime* csr)
 {
  Chasm_Call_Package* ccp = csr->new_call_package();
 
- ccp->add_new_channel("result");
- Chasm_Carrier cc0 = csr->gen_carrier<void*>(csr->Result._ptr);
+ ccp->add_new_channel("retvalue");
+ Chasm_Carrier cc0 = csr->gen_carrier<void*>(csr->Retvalue._ptr);
  ccp->add_carrier(cc0);
 
  csr->evaluate(ccp, 79, (minimal_fn_s0_type) &test0r9, &cc0);
@@ -957,14 +957,23 @@ struct test0s1
  {
   QStringList* result = new QStringList(qsl);
   (*result) << "_qsl1" << "_qsl2";
+  qDebug() << "new string list: " << *result;
  }
+
+ QStringList* testr()
+ {
+  QStringList* result = new QStringList(qsl);
+  (*result) << "_qsl1" << "_qsl2";
+  return result;
+ }
+
 };
 
 void run_test0s1(Chasm_Runtime* csr)
 {
  Chasm_Call_Package* ccp = csr->new_call_package();
 
-// ccp->add_new_channel("result");
+// ccp->add_new_channel("retvalue");
 
  ccp->add_new_channel("sigma");
  test0s1 ts1{{"q1", "q2"}};
@@ -976,7 +985,7 @@ void run_test0s1(Chasm_Runtime* csr)
 
  //csr->evaluate(ccp, 80, (minimal_fn_s1_type) &test0s1::test);
 
- csr->evaluate_s1_0(ccp, 80, (minimal_fn_s1_type) &test0s1::test);
+ csr->evaluate(ccp, 80, (minimal_fn_s1_type) &test0s1::test);
 
 
  //QStringList* result = cc0.value<QStringList*>();
@@ -985,23 +994,57 @@ void run_test0s1(Chasm_Runtime* csr)
 }
 
 
+void run_test0s1r(Chasm_Runtime* csr)
+{
+ Chasm_Call_Package* ccp = csr->new_call_package();
+
+
+ ccp->add_new_channel("sigma");
+ test0s1 ts1{{"q1", "q2"}};
+
+ test0s1* arg1 = &ts1;
+
+ Chasm_Carrier cc_this = csr->gen_carrier<void*>(&arg1);
+ ccp->add_carrier(cc_this);
+
+ ccp->add_new_channel("retvalue");
+ Chasm_Carrier cc0 = csr->gen_carrier<void*>(csr->Retvalue._ptr);
+ ccp->add_carrier(cc0);
+
+ csr->evaluate(ccp, 89, (minimal_fn_s1_type) &test0s1::testr, &cc0);
+
+// csr->evaluate_s1(ccp, 89, (minimal_fn_s1_type) &test0s1::testr, &cc0);
+
+// csr->evaluate_s01(ccp, 89, (minimal_fn_s1_type) &test0s1::testr, &cc0);
+
+ QStringList* result = cc0.value<QStringList*>();
+ qDebug() << "r = " << *result;
+
+}
+
 
 int main(int argc, char *argv[])
 {
  Chasm_Runtime* csr = new Chasm_Runtime;
  csr->init_no_file_session();
 
+//#ifdef HIDE
  qDebug() << "\n----\n";
-
  run_test0s1(csr);
 
+ qDebug() << "\n===\n";
+ run_test0s1r(csr);
 
-#ifdef HIDE
-
+ qDebug() << "\n===\n";
  run_test0arg(csr);
 
  qDebug() << "\n===\n";
  run_test0r9(csr);
+
+
+// run_test0arg(csr);
+// qDebug() << "\n===\n";
+// run_test0r9(csr);
 
  qDebug() << "\n===\n";
  run_test1arg(csr);
@@ -1009,68 +1052,77 @@ int main(int argc, char *argv[])
  qDebug() << "\n===\n";
  run_test2arg(csr);
 
-
 // QVector<Chasm_Typed_Value_Representation> rs_args;
 
 // pre_run_smart(csr, rs_args);
 // run_smart(csr, rs_args);
 
+//#endif //def HIDE
+
  qDebug() << "\n===\n";
  run_testqvar(csr);
 
+//#ifdef HIDE
  qDebug() << "\n===\n";
  run_testqvarf(csr);
+
  qDebug() << "\n===\n";
  run_testfn(csr);
- qDebug() << "\n===\n";
 
+ qDebug() << "\n===\n";
  run_test2(csr);
+
  qDebug() << "\n===\n";
  run_teste(csr);
+
  qDebug() << "\n===\n";
  run_testf(csr);
 
  qDebug() << "\n===\n";
-
  run_testqs1(csr);
- qDebug() << "\n===\n";
 
+ qDebug() << "\n===\n";
  run_testqs1n(csr);
- qDebug() << "\n===\n";
 
+ qDebug() << "\n===\n";
  run_testqs2(csr);
+
  qDebug() << "\n===\n";
  run_testqs2n(csr);
- qDebug() << "\n===\n";
 
+ qDebug() << "\n===\n";
  run_testqsq(csr);
- qDebug() << "\n===\n";
 
+ qDebug() << "\n===\n";
  run_testqs4(csr);
+
  qDebug() << "\n===\n";
  run_testqs4n(csr);
- qDebug() << "\n===\n";
 
+ qDebug() << "\n===\n";
  run_testqs5(csr);
+
  qDebug() << "\n===\n";
-
-
  run_testqs6(csr);
+
  qDebug() << "\n===\n";
  run_testqs6n(csr);
- qDebug() << "\n===\n";
 
+ qDebug() << "\n===\n";
  run_testqsv(csr);
+
  qDebug() << "\n===\n";
  run_testqs8(csr);
+
  qDebug() << "\n===\n";
  run_testqsp(csr);
+
  qDebug() << "\n===\n";
  run_testqsb(csr);
 
  qDebug() << "\n_____\n";
 
-#endif
+//#endif
 
 // Chasm_Call_Package* ccp = csr->new_call_package();
 // ccp->add_new_channel("lambda");
@@ -1085,78 +1137,78 @@ int main(int argc, char *argv[])
 
 // ccp->add_carriers({cc1,cc2,cc3});
 
-// ccp->add_new_channel("result");
+// ccp->add_new_channel("retvalue");
 
 
-// Chasm_Carrier cc0 = csr->gen_carrier<u1>(csr->Result._u1);
+// Chasm_Carrier cc0 = csr->gen_carrier<u1>(csr->Retvalue._u1);
 // ccp->add_carrier(cc0);
 // csr->evaluate(ccp, 71341, (minimal_fn_s0_re1_type) &testqs1, &cc0);
 // u1 result = cc0.value<u1>();
 // qDebug() << "r = " << result;
 
 
-//  Chasm_Carrier cc0 = csr->gen_carrier<u1>(csr->Result._u1);
+//  Chasm_Carrier cc0 = csr->gen_carrier<u1>(csr->Retvalue._u1);
 //  ccp->add_carrier(cc0);
 //  csr->evaluate(ccp, 71341, (minimal_fn_s0_re1_type) &testqs1n, &cc0);
 //  s1 result = cc0.value<s1>();
 //  qDebug() << "r = " << result;
 
-// Chasm_Carrier cc0 = csr->gen_carrier<u2>(csr->Result._u2);
+// Chasm_Carrier cc0 = csr->gen_carrier<u2>(csr->Retvalue._u2);
 // ccp->add_carrier(cc0);
 // csr->evaluate(ccp, 72341, (minimal_fn_s0_re1_type) &testqs2, &cc0);
 // u2 result = cc0.value<u2>();
 // qDebug() << "r = " << result;
 
-// Chasm_Carrier cc0 = csr->gen_carrier<u2>(csr->Result._u2);
+// Chasm_Carrier cc0 = csr->gen_carrier<u2>(csr->Retvalue._u2);
 // ccp->add_carrier(cc0);
 // csr->evaluate(ccp, 72341, (minimal_fn_s0_re1_type) &testqs2n, &cc0);
 // s2 result = cc0.value<s2>();
 // qDebug() << "r = " << result;
 
 
- // Chasm_Carrier cc0 = csr->gen_carrier<QString>(csr->Result._QString);
+ // Chasm_Carrier cc0 = csr->gen_carrier<QString>(csr->Retvalue._QString);
 // ccp->add_carrier(cc0);
 // csr->evaluate(ccp, 13341, (minimal_fn_s0_re3_type) &testqss);
 // QString result = cc0.value<QString>();
 // qDebug() << "r = " << result;
 
-// Chasm_Carrier cc0 = csr->gen_carrier<u4>(csr->Result._u4);
+// Chasm_Carrier cc0 = csr->gen_carrier<u4>(csr->Retvalue._u4);
 // ccp->add_carrier(cc0);
 // csr->evaluate(ccp, 74341, (minimal_fn_s0_re4_type) &testqs4, &cc0);
 // u4 result = cc0.value<u4>();
 // qDebug() << "r = " << result;
 
-// Chasm_Carrier cc0 = csr->gen_carrier<u4>(csr->Result._u4);
+// Chasm_Carrier cc0 = csr->gen_carrier<u4>(csr->Retvalue._u4);
 // ccp->add_carrier(cc0);
 // csr->evaluate(ccp, 74341, (minimal_fn_s0_re4_type) &testqs4n, &cc0);
 // s4 result = cc0.value<s4>();
 // qDebug() << "r = " << result;
 
-// Chasm_Carrier cc0 = csr->gen_carrier<QByteArray>(csr->Result._QByteArray);
+// Chasm_Carrier cc0 = csr->gen_carrier<QByteArray>(csr->Retvalue._QByteArray);
 // ccp->add_carrier(cc0);
 // csr->evaluate(ccp, 75341, (minimal_fn_s0_re5_type) &testqs5, &cc0);
 // QByteArray result = cc0.value<QByteArray>();
 // qDebug() << "r = " << result;
 
-// Chasm_Carrier cc0 = csr->gen_carrier<r8>(csr->Result._r8);
+// Chasm_Carrier cc0 = csr->gen_carrier<r8>(csr->Retvalue._r8);
 // ccp->add_carrier(cc0);
 // csr->evaluate(ccp, 76341, (minimal_fn_s0_re6_type) &testqs6, &cc0);
 // r8 result = cc0.reinterpret_value<r8>();
 // qDebug() << "r = " << result;
 
-// Chasm_Carrier cc0 = csr->gen_carrier<r8>(csr->Result._r8);
+// Chasm_Carrier cc0 = csr->gen_carrier<r8>(csr->Retvalue._r8);
 // ccp->add_carrier(cc0);
 // csr->evaluate(ccp, 76341, (minimal_fn_s0_re6_type) &testqs6n, &cc0);
 // r8 result = cc0.reinterpret_value<r8>();
 // qDebug() << "r = " << result;
 
-// Chasm_Carrier cc0 = csr->gen_carrier<QVariant>(csr->Result._QVariant);
+// Chasm_Carrier cc0 = csr->gen_carrier<QVariant>(csr->Retvalue._QVariant);
 // ccp->add_carrier(cc0);
 // csr->evaluate(ccp, 77341, (minimal_fn_s0_re7_type) &testqsv, &cc0);
 // QVariant result = cc0.value<QVariant>();
 // qDebug() << "r = " << result.toString();
 
-// Chasm_Carrier cc0 = csr->gen_carrier<n8>(csr->Result._n8);
+// Chasm_Carrier cc0 = csr->gen_carrier<n8>(csr->Retvalue._n8);
 // ccp->add_carrier(cc0);
 // csr->evaluate(ccp, 78341, (minimal_fn_s0_re8_type) &testqs8, &cc0);
 // n8 result = cc0.value<n8>();
@@ -1175,10 +1227,10 @@ int main(int argc, char *argv[])
 
 // ccp->add_carriers({cc1,cc2,cc3});
 
-// ccp->add_new_channel("result");
+// ccp->add_new_channel("retvalue");
 
 // Chasm_Carrier cc0 = csr->gen_carrier<void*>();
-// //cc0.set_raw_value((n8) *(void**)pv )//csr->Result._ptr);
+// //cc0.set_raw_value((n8) *(void**)pv )//csr->Retvalue._ptr);
 // ccp->add_carrier(cc0);
 // csr->evaluate(ccp, 79341, (minimal_fn_s0_re9_type) &testqsp, &cc0);
 // QString* result = (QString*) cc0.value<void*>();
@@ -1194,9 +1246,9 @@ int main(int argc, char *argv[])
 
 // ccp->add_carriers({cc1,cc2,cc3});
 
-// ccp->add_new_channel("result");
+// ccp->add_new_channel("retvalue");
 
-// Chasm_Carrier cc0 = csr->gen_carrier<u1>(csr->Result._u1);
+// Chasm_Carrier cc0 = csr->gen_carrier<u1>(csr->Retvalue._u1);
 // ccp->add_carrier(cc0);
 // csr->evaluate(ccp, 71142, (minimal_fn_s0_re1_type) &testsus, &cc0);
 
