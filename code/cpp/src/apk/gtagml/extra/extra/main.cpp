@@ -7,6 +7,10 @@
 
 #include <QDebug>
 
+#include <QMap>
+#include <QTextStream>
+#include <QDataStream>
+
 #include <QDirIterator>
 
 #include "textio.h"
@@ -14,6 +18,407 @@ USING_KANS(TextIO)
 
 
 QStringList returns{{"void", "u1", "u2", "QString", "u4", "QByteArray", "r8", "QVariant", "n8", "void*"}};
+
+
+void parse_fn_code(u4 cue)
+{
+ u4 cc = cue;
+
+ u1 st_code, return_type_code, pattern_digits_run;
+ u2 distinct_type_pattern, arguments_type_pattern;
+
+ if(cue >= 10000000)
+ {
+  st_code = (cue/10000000) - 1;
+  cue %= 10000000;
+  return_type_code = cue/1000000;
+  cue %= 1000000;
+  pattern_digits_run = 6;
+ }
+ else if(cue >= 1000000)
+ {
+  st_code = (cue/1000000) - 1;
+  cue %= 1000000;
+  return_type_code = cue/100000;
+  cue %= 10000;
+  pattern_digits_run = 5;
+ }
+ else if(cue >= 100000)
+ {
+  st_code = (cue/100000) - 1;
+  cue %= 100000;
+  return_type_code = cue/1000;
+  cue %= 1000;
+  pattern_digits_run = 4;
+ }
+ else if(cue >= 10000)
+ {
+  st_code = (cue/10000) - 1;
+  cue %= 10000;
+  return_type_code = cue/1000;
+  cue %= 1000;
+  pattern_digits_run = 3;
+ }
+ else if(cue >= 1000)
+ {
+  st_code = (cue/1000) - 1;
+  cue %= 1000;
+  return_type_code = cue/100;
+  cue %= 100;
+  pattern_digits_run = 2;
+ }
+ else
+ {
+  // only valid range 10-29
+  return_type_code = cue % 10;
+  st_code = (cue / 10) - 1;
+  pattern_digits_run = 0;
+ }
+
+// else if(cue >= 100)
+// {
+//  // error?
+////  st_code = (cue/100) - 1;
+////  cue %= 100;
+////  return_type_code = cue/10;
+////  cue %= 10;
+////  pattern_digits_run = 1;
+// }
+// else if(cue >= 10)
+// {
+//  st_code = (cue/10) - 1;
+//  return_type_code = cue % 10;
+//  pattern_digits_run = 0;
+// }
+// else
+// {
+//  // errer?
+// }
+
+
+ u1 distinct_type_count = (st_code & 6) >> 1;
+ bool s1 = st_code & 1;
+
+ u1 arg_count = pattern_digits_run - distinct_type_count;
+
+ u4 st_base = 1;
+ for(int i = 0; i < distinct_type_count; ++i) st_base *= 10;
+
+ switch (arg_count)
+ {
+ case 3: arguments_type_pattern = cue % 1000; distinct_type_pattern = cue / 1000; break;
+ //case 23: arguments_type_pattern = cue % 1000; distinct_type_pattern = cue / 1000; break;
+ case 2: arguments_type_pattern = cue % 100; distinct_type_pattern = cue / 100; break;
+ case 1: arguments_type_pattern = cue % 10; distinct_type_pattern = cue / 10; break;
+ case 0: arguments_type_pattern = distinct_type_pattern = 0; break;
+ }
+
+
+
+ u2 dd = ( (st_code + 1) * st_base) + distinct_type_pattern;
+
+ qDebug() << "cue: " << cc << ", D: " << dd << ", A: " << arguments_type_pattern;
+
+}
+
+int main(int argc, char *argv[])
+{
+ QString case_text_4_file = QString(ROOT_FOLDER "/dev/consoles/fns/case-text-4.cpp");
+
+ QString case_text_4;
+
+ for(int i = 1; i <= 3; ++i)
+ {
+  for(int j = 1; j <= 3; ++j)
+  {
+   for(int k = 1; k <= 3; ++k)
+   {
+    for(int l = 1; l <= 3; ++l)
+    {
+     u4 same = 0;
+     if(i == j) ++same;
+     if(i == k) ++same;
+     if(i == l) ++same;
+     if(j == k) ++same;
+     if(j == l) ++same;
+     if(k == l) ++same;
+     if(same > 1)
+       continue;
+     u2 caseval = (1000*i) + (100*j) + (10*k) + l;
+     case_text_4 += QString("\ncase %1: ").arg(caseval);
+    }
+   }
+  }
+ }
+ save_file(case_text_4_file, case_text_4);
+
+
+ QString case_text_5_file = QString(ROOT_FOLDER "/dev/consoles/fns/case-text-5.cpp");
+ QString case_text_5a_file = QString(ROOT_FOLDER "/dev/consoles/fns/case-text-5a.cpp");
+ QString case_text_5b_file = QString(ROOT_FOLDER "/dev/consoles/fns/case-text-5b.cpp");
+
+ QString case_text_5;
+ QString case_text_5a;
+ QString case_text_5b;
+
+ for(int i = 1; i <= 3; ++i)
+ {
+  for(int j = 1; j <= 3; ++j)
+  {
+   for(int k = 1; k <= 3; ++k)
+   {
+    for(int l = 1; l <= 3; ++l)
+    {
+     for(int m = 1; m <= 3; ++m)
+     {
+      u4 same = 0;
+      if(i == j) ++same;
+      if(i == k) ++same;
+      if(i == l) ++same;
+      if(i == m) ++same;
+      if(j == k) ++same;
+      if(j == l) ++same;
+      if(j == m) ++same;
+      if(k == l) ++same;
+      if(k == m) ++same;
+      if(l == m) ++same;
+      if(same > 3)
+        continue;
+      u2 caseval = (10000*i) + (1000*j) + (100*k) + (10*l) + m;
+      case_text_5 += QString("\ncase %1: ").arg(caseval);
+
+      if(same == 2)
+        case_text_5a += QString("\ncase %1: ").arg(caseval);
+      if(same == 3)
+        case_text_5b += QString("\ncase %1: ").arg(caseval);
+     }
+    }
+   }
+  }
+ }
+ save_file(case_text_5_file, case_text_5);
+ save_file(case_text_5a_file, case_text_5a);
+ save_file(case_text_5b_file, case_text_5b);
+
+}
+
+int main4(int argc, char *argv[])
+{
+ QString case_text_file = QString(ROOT_FOLDER "/dev/consoles/fns/case-text.cpp");
+
+ QString case_text;
+
+ for(int i = 1; i <= 3; ++i)
+ {
+  for(int j = 1; j <= 3; ++j)
+  {
+   if(j == i)
+     continue;
+   for(int k = 1; k <= 3; ++k)
+   {
+    if(k == i)
+      continue;
+    if(k == j)
+      continue;
+
+    u2 caseval = (100*i) + (10*j) + k;
+    case_text += QString("\ncase %1: ").arg(caseval);
+   }
+  }
+ }
+
+ case_text += "\n";
+
+ for(u1 i = 1; i < 63; ++i)
+ {
+  case_text += QString("\ncase 0b%1: ").arg(i, 6, 2, QLatin1Char('0'));
+ }
+
+ case_text += "\n";
+
+// for(int i = 1; i <= 3; ++i)
+// {
+//  for(int j = 1; j <= 3; ++j)
+//  {
+
+//  }
+// }
+
+ save_file(case_text_file, case_text);
+
+}
+
+
+
+int main2(int argc, char *argv[])
+{
+#define INCLUDE_MAP_CODE
+ QMap<u2, u2> type_patterns_3_map {
+  #include "./dev/consoles/fns/type-patterns-3.cpp"
+ };
+
+ QMap<u2, u2> type_patterns_2_map {
+  #include "./dev/consoles/fns/type-patterns-2.cpp"
+ };
+
+ QMap<u2, u2> type_patterns_1_map {
+  #include "./dev/consoles/fns/type-patterns-1.cpp"
+ };
+
+ return 0;
+}
+
+
+int main1(int argc, char *argv[])
+{
+ /*
+ 0 = ref
+ 1 = u1
+ 2 = u2
+ 3 = QString
+ 4 = u4
+ 5 = QByteArray
+ 6 = dbl
+ 7 = QVariant
+ 8 = n8
+ 9 = pointer
+ */
+
+// u1 ac = 3;
+
+
+// parse_fn_code(84049123);
+// parse_fn_code(74049123);
+
+// parse_fn_code(6409121);
+// parse_fn_code(5409121);
+
+// parse_fn_code(440111);
+// parse_fn_code(340111);
+
+// parse_fn_code(44011);
+// parse_fn_code(34011);
+
+// parse_fn_code(4401);
+// parse_fn_code(3401);
+
+
+// parse_fn_code(29);
+// parse_fn_code(19);
+
+ QString type_pattern_3_file = QString(ROOT_FOLDER "/dev/consoles/fns/type-patterns-3.cpp");
+ QString type_pattern_3_text = "#ifdef INCLUDE_ARRAY_CODE\n{";
+
+ QString type_pattern_2_file = QString(ROOT_FOLDER "/dev/consoles/fns/type-patterns-2.cpp");
+ QString type_pattern_2_text = "#ifdef INCLUDE_ARRAY_CODE\n{";
+
+ int col3 = 0;
+ int col2 = 0;
+
+ int row3 = 0;
+
+ QMap<u2, u2> type_pattern_3_map;
+ QMap<u2, u2> type_pattern_2_map;
+
+ int count2 = 0;
+ int count3 = 0;
+
+ for(int i = 0; i <= 8; ++i)
+ {
+  for(int j = i + 1; j <= 9; ++j)
+  {
+   u2 val2 = 200 + (i*10) + j;
+   type_pattern_2_map[val2] = count2;
+   ++count2;
+
+   ++col2;
+   if(col2 == 10)
+     col2 = 1;
+
+   if(col2 == 1)
+     type_pattern_2_text += "\n";
+   else if(col2 == 4 || col2 == 7)
+     type_pattern_2_text += "  ";
+
+
+   type_pattern_2_text += QString(" %1,").arg(val2);
+
+   if(j == 9)
+     continue;
+   if(i == 8)
+     continue;
+
+   for(int k = j + 1; k <= 9; ++k)
+   {
+    u2 val3 = 3000 + (i*100) + (j*10) + k;
+    type_pattern_3_map[val3] = count3;
+    ++count3;
+
+    ++col3;
+    if(col3 == 13)
+    {
+     col3 = 1;
+     ++row3;
+     if(row3 == 5)
+       type_pattern_3_text += "\n";
+    }
+
+
+    if(col3 == 1)
+      type_pattern_3_text += "\n";
+    else if(col3 == 4 || col3 == 7 || col3 == 10)
+      type_pattern_3_text += "  ";
+
+    type_pattern_3_text += QString(" %1,").arg(val3);
+   }
+  }
+ }
+
+ type_pattern_3_text.chop(1);
+ type_pattern_3_text += "\n}\n#endif //def INCLUDE_ARRAY_CODE\n";
+
+ type_pattern_2_text.chop(1);
+ type_pattern_2_text += "\n}\n#endif // def INCLUDE_ARRAY_CODE\n";
+
+// QTextStream qts3(&type_pattern_3_text);
+
+ type_pattern_3_text += "\n\n#ifdef INCLUDE_MAP_CODE\n{\n";
+ QMapIterator<u2, u2> it3(type_pattern_3_map);
+ while(it3.hasNext())
+ {
+  it3.next();
+  type_pattern_3_text += QString(" {%1,%2},").arg(it3.key()).arg(it3.value());
+  if( (it3.value() % 6) == 5 )
+    type_pattern_3_text += "\n";
+ }
+ type_pattern_3_text.chop(2);
+ type_pattern_3_text += "\n}\n#endif // INCLUDE_MAP_CODE\n";
+
+
+// QTextStream qts2(&type_pattern_2_text);
+
+ type_pattern_2_text += "\n\n#ifdef INCLUDE_MAP_CODE\n{\n";
+ QMapIterator<u2, u2> it2(type_pattern_2_map);
+ while(it2.hasNext())
+ {
+  it2.next();
+  type_pattern_2_text += QString(" {%1,%2},").arg(it2.key()).arg(it2.value());
+  if( (it2.value() % 5) == 4 )
+    type_pattern_2_text += "\n";
+ }
+ type_pattern_2_text.chop(2);
+ type_pattern_2_text += "\n}\n#endif // INCLUDE_MAP_CODE\n";
+
+
+ save_file(type_pattern_3_file, type_pattern_3_text);
+ save_file(type_pattern_2_file, type_pattern_2_text);
+}
+
+
+
+
+
+#ifdef HIDE
 
 QString generate_function_code(u1 retc, u2 key, QString sc0, QString sc1, u1 ac)
 {
@@ -146,6 +551,7 @@ QString generate_function_code(u1 retc, u2 key, QString sc0, QString sc1, u1 ac)
 
  return result;
 }
+
 
 int main(int argc, char *argv[])
 {
@@ -348,3 +754,5 @@ void run_s01_%1_re%2(u4 code, minimal_fn_s0_re%2_type fn,
  }
  return 0;
 }
+
+#endif //def HIDE
