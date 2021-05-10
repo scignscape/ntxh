@@ -118,10 +118,500 @@ void parse_fn_code(u4 cue)
  u2 dd = ( (st_code + 1) * st_base) + distinct_type_pattern;
 
  qDebug() << "cue: " << cc << ", D: " << dd << ", A: " << arguments_type_pattern;
+}
 
+
+QVector<u2>* generate_4_3()
+{
+ QVector<u2>* result = new QVector<u2>;
+ for(int i = 1; i <= 3; ++i)
+ {
+  for(int j = 1; j <= 3; ++j)
+  {
+   for(int k = 1; k <= 3; ++k)
+   {
+    for(int l = 1; l <= 3; ++l)
+    {
+     u1 same = 0;
+     if(i == j) ++same;
+     if(i == k) ++same;
+     if(i == l) ++same;
+     if(j == k) ++same;
+     if(j == l) ++same;
+     if(k == l) ++same;
+     if(same > 1)
+       continue;
+     u2 caseval = (1000*i) + (100*j) + (10*k) + l;
+     (*result) << caseval;
+    }
+   }
+  }
+ }
+ return result;
+}
+
+QString arg_text(u1 type_pattern, u1 index, QString& st)
+{
+ /*
+ 0 = ref
+ 1 = u1
+ 2 = u2
+ 3 = QString
+ 4 = u4
+ 5 = QByteArray
+ 6 = dbl
+ 7 = QVariant
+ 8 = n8
+ 9 = pointer
+ */
+
+ //QString type; // [4] = {{},{},{},{}};
+
+ switch(type_pattern)
+ {
+ case 0: // ref
+  // types[i] = "n8&";
+  st = "n8&";
+  return QString("n8& a%1=*(n8*)arg%1;").arg(index);
+  break;
+
+  // // for now treat 9 like a n8
+ case 9: type_pattern = 8; // fallthrough
+ case 1: case 2: case 4: case 8:
+  st = QString("%1%2").arg(type_pattern == 8?'n':'u').arg(type_pattern);
+  // types[i] = QString("%1%2").arg(akey == 8?'n':'u').arg(akey);
+  return QString("%1 a%2=*(%1*)arg%2;").arg(st).arg(index);
+  break;
+
+ case 3: // QString
+  st = "QString";
+  return QString("QString a%1=*(QString*)arg%1;").arg(index);
+  break;
+
+ case 5: // QByteArray
+  st = "QByteArray";
+  return QString("QByteArray a%1=*(QByteArray*)arg%1;").arg(index);
+  break;
+
+ case 6: // double
+  st = "r8";
+  return QString("r8 a%1=*(r8*)arg%1;").arg(index);
+  break;
+
+ case 7: // QVariant
+  st = "QVariant";
+  return QString("QVariant a%1 = *(QVariant*)arg%1;").arg(index);
+  break;
+ }
+}
+
+QString generate_function_code(u2 type_pattern, u1 ret)
+{
+
+ u1 case_len = 4;
+ u4 clexp = 1;
+ for(int i = 0; i < case_len; ++i)
+ {
+  clexp *= 10;
+ }
+
+ static QVector<u2>* vec = generate_4_3();
+
+ u1 type_pattern_len = 0;
+ u4 tplexp = 1;
+ while( (tplexp * 10) < type_pattern)
+ {
+  ++type_pattern_len;
+  tplexp *= 10;
+ }
+
+
+ u2 len = type_pattern / tplexp;
+
+ u2 lenexp = len * tplexp * 10;
+// for(u1 i = 0; i < len; ++i)
+// {
+//  lenexp *= 10;
+// }
+
+// u1 t1 = (type_pattern % 1000) / 100;
+// u1 t2 = (type_pattern % 100) / 10;
+// u1 t3 = type_pattern % 10;
+// u1 ts [3] = {t1, t2, t3};
+
+ u1 ts [type_pattern_len];
+
+ {
+  u4 exp = tplexp;
+  for(int i = 0; i < type_pattern_len; ++i)
+  {
+   ts[i] = (type_pattern % exp) / (exp / 10);
+   exp /= 10;
+  }
+ }
+
+ QString sig_args;
+ QString call_args;
+
+ if(case_len > 0)
+ {
+  for(int i = 1; i <= case_len; ++i)
+  {
+   sig_args += QString("n8 arg%1, ").arg(i);
+   call_args += QString("a%1,").arg(i);
+  }
+  call_args.chop(1);
+ }
+
+ QString retfull;
+ if(ret > 0)
+   retfull = QString("%1& retv, ").arg(returns[ret]);
+
+ QString result = QString("void _f_%1_%2_(u4 pattern, %3%4"
+   "minimal_fn_s0_re%2_type fn,\n  minimal_fn_s1_re%2_type sfn, void* _this)"
+   "\n{\n switch(pattern)\n {\n")
+   .arg(type_pattern).arg(ret).arg(retfull).arg(sig_args);
+
+ for(u2 case_val : *vec)
+ {
+//  u1 c1 = (case_val % 10000) / 1000;
+//  u1 c2 = (case_val % 1000) / 100;
+//  u1 c3 = (case_val % 100) / 10;
+//  u1 c4 = case_val % 10;
+
+  u1 cs[case_len];
+  {
+   u4 exp = clexp;
+   for(int i = 0; i < type_pattern_len; ++i)
+   {
+    cs[i] = (case_val % exp) / (exp / 10);
+    exp /= 10;
+   }
+  }
+
+  u1 cts[case_len];
+  for(u1 i = 0; i < case_len; ++i)
+  {
+   cts[i] = ts[cs[i] - 1];
+  }
+
+  QString case_txt = QString(" case %1:\n  {").arg(case_val); //\n  %2\n  %3\n  %4\n}").arg(cc); //.arg(at1).arg(at2).arg(at3);
+
+  QString sig_type_args;
+
+  if(case_len > 0)
+  {
+   for(u1 i = 0; i < case_len; ++i)
+   {
+    QString st;
+    QString at = arg_text(cts[i], i + 1, st);
+    case_txt += at; // QString("%1").arg(at);
+    sig_type_args += st + ",";
+   }
+   sig_type_args.chop(1);
+  }
+
+  QString retv = (ret==0)?"":"retv=";
+  QString rettext = returns[ret];
+
+  QString call_args;
+  if(case_len > 0)
+  {
+   for(int i = 1; i <= case_len; ++i)
+   {
+    call_args += QString("a%1,").arg(i);
+   }
+   call_args.chop(1);
+  }
+
+
+  case_txt += QString(R"(
+   auto _sfn = (%1(_min_::*)(%2))(sfn);
+   if(_this) %3((_min_*)_this->*_sfn)(%4);
+   else %3((%5(*)(%2))fn)(%4);
+  )").arg(rettext).arg(sig_type_args).arg(retv).arg(call_args).arg(rettext);
+
+  case_txt += "} break;\n";
+
+//  QString at1 = arg_text(ct1, 1);
+//  QString at2 = arg_text(ct2, 2);
+//  QString at3 = arg_text(ct3, 3);
+//  QString at4 = arg_text(ct4, 4);
+
+
+  result += case_txt;
+  //QString("case %1: ")
+
+ }
+
+ result += "  //end of switch\n }\n}\n";
+
+ return result;
+
+
+// QString case_text_file = QString(ROOT_FOLDER "/dev/consoles/fns/case-text-4.cpp");
+// QString cast_text = load_file(case_text_file);
+// int index = 0;
+// while(index != -1)
+// {
+//  index = cast_text.indexOf(":", index);
+// }
+}
+
+
+QString gen_dispatch_array(u1 ret, u1 ac, u1 distinct_type_count, u2 arsize,
+  QMap<u2, u2>& type_patterns_map )
+{
+ //u1 ret =
+ QString rettext = returns[ret];
+ //QString retv = (ret==0)?"":"retv";
+ QString retv, rsym, retfull;
+
+ // //  concisely initialize three strings.  A bit cute.
+ if(ret > 0)
+   retfull = QString("%1& %2").arg(rettext)
+   .arg(rsym = QString("%1, ").arg(retv = "retv"));
+
+ QString n8argtext;
+ QString argtext;
+ for(int i = 1; i <= ac; ++i)
+ {
+  n8argtext += QString("n8 arg%1, ").arg(i);
+  argtext += QString("arg%1, ").arg(i);
+ }
+
+ QString result = QString(R"(
+#ifndef SEEN_DEFS_S01_%1of%2_RE%3
+#define SEEN_DEFS_S01_%1of%2_RE%3
+
+typedef %4(*minimal_fn_s0_re%3_type)();
+typedef %4(_min_::*minimal_fn_s1_re%3_type)();
+typedef void(*run_s01_%1_re%3_type)(u4 pattern, %5%6minimal_fn_s0_re%3_type fn,
+  minimal_fn_s1_re%3_type sfn, void* _this);
+typedef run_s01_%1_re%3_type s01_%1of%2_re%3_dispatch_array [%7];
+
+#endif //  SEEN_DEFS_S01_%1of%2_RE%3
+
+#ifdef FULL_INCLUDE
+
+ )").arg(ac).arg(distinct_type_count).arg(ret).arg(rettext).arg(retfull)
+   .arg(n8argtext).arg(arsize);
+
+
+ QMapIterator<u2, u2> it(type_patterns_map);
+
+ while(it.hasNext())
+ {
+  it.next();
+  u2 type_pattern = it.key();
+  u2 index = it.value();
+  result += QString("\n#include \"./dev/consoles/fns/a%1of%2-r%3/fn%4.cpp\" // #%5")
+    .arg(ac).arg(distinct_type_count).arg(ret).arg(type_pattern).arg(index);
+ }
+
+
+
+ result += QString(R"(
+
+s01_%1of%2_re%3_dispatch_array* init_s01_%1of%2_re%3_dispatch_array()
+{
+ s01_%1of%2_re%3_dispatch_array* result = (s01_%1of%2_re%3_dispatch_array*) new run_s01_%1_re%3_type[%4];
+ )").arg(ac).arg(distinct_type_count).arg(ret).arg(arsize);
+
+
+ it.toFront();
+
+ while(it.hasNext())
+ {
+  it.next();
+  u2 type_pattern = it.key();
+  u2 index = it.value();
+  result += QString("\n (*result)[%1] = &_f_%2_%3_;")
+    .arg(index).arg(type_pattern).arg(ret);
+ }
+
+ result += "\n\n return result;\n}\n";
+
+ result += QString(R"(
+
+void run_s01_%1of%2_re%3(u4 pattern, u4 index, minimal_fn_s0_re%3_type fn,
+  minimal_fn_s1_re%3_type sfn, %4%5 void* _this))")
+ .arg(ac).arg(distinct_type_count).arg(ret).arg(n8argtext).arg(retfull);
+
+//? u4 code_mask = 99999;
+
+ result += QString(R"(
+{
+ static s01_%1of%2_re%3_dispatch_array* dispatch_array = init_s01_%1of%2_re%3_dispatch_array();
+ run_s01_%1_re%3_type f = (*dispatch_array)[index];
+ f(pattern, %4%5fn, sfn, _this);
+}
+
+#endif //def FULL_INCLUDE
+   )").arg(ac).arg(distinct_type_count).arg(ret).arg(rsym).arg(argtext);
+
+
+ // u4 pattern = code % 10000;
+ //  code %= %1;
+
+//   void run_s01_%1_re%2(u4 code, minimal_fn_s0_re%2_type fn,
+//     minimal_fn_s1_re%2_type sfn, void* _this))")
+//     .arg(ac).arg(i); // // here ac = 0 and i = 0 always but keep the substitutions for clarity ...
+
+//      s01_X_reX_text += QString(R"(
+
+
+//code %=
+// typedef s01_%1of%8_re%2_dispatch_array s01_%1of%8_re%2_dispatch_arrays [%7];
+
+// for(u2 j = 0; j < arsize; ++j)
+// {
+// //  if(ac > 0)
+// //      s01_X_reX_text += QString("\n (*result)[%1] = &_f_%2%3_;").arg(j).arg(i).arg(j, ac, 10, QLatin1Char('0'));
+// //    else
+// //      s01_X_reX_text += QString("\n (*result)[%1] = &_f_%2_;").arg(j).arg(i);
+// }
+
+ return result;
+}
+
+//   QString atext;
+//   QString natext;
+//   if(ac > 0)
+//   {
+//    for(u1 aa = 1; aa <= ac; ++aa)
+//    {
+//     natext += QString("n8 a%1%2").arg(aa).arg(aa < ac? ", " : "");
+//     atext += QString("a%1,").arg(aa);
+//    }
+//   }
+
+//   if( (ac > 0) )
+//     s01_X_reX_text += QString(R"(
+// return result;
+//}
+
+//void run_s01_%1_re%2(u4 code, minimal_fn_s0_re%2_type fn,
+//   minimal_fn_s1_re%2_type sfn, %3%4, void* _this))")
+//   .arg(ac).arg(i).arg(retv).arg(natext);
+
+//   else if( (i > 0) )
+//     s01_X_reX_text += QString(R"(
+// return result;
+//}
+
+//void run_s01_%1_re%2(u4 code, minimal_fn_s0_re%2_type fn,
+//   minimal_fn_s1_re%2_type sfn, %3, void* _this))")
+//   .arg(ac).arg(i).arg(retv.left(retv.size() - 2));
+
+//   else
+//    s01_X_reX_text += QString(R"(
+// return result;
+//}
+
+//void run_s01_%1_re%2(u4 code, minimal_fn_s0_re%2_type fn,
+//  minimal_fn_s1_re%2_type sfn, void* _this))")
+//  .arg(ac).arg(i); // // here ac = 0 and i = 0 always but keep the substitutions for clarity ...
+
+//   s01_X_reX_text += QString(R"(
+//{
+// code %= %1;
+// static s01_%2_re%3_dispatch_array* dispatch_array = init_s01_%2_re%3_dispatch_array();
+// run_s01_%2_re%3_type f = (*dispatch_array)[code];
+// f(%4%5fn, sfn, _this);
+//}
+
+//#endif //def FULL_INCLUDE
+//)").arg(arsize).arg(ac).arg(i).arg(rsym).arg(atext); // .arg(ac).arg(arsize * 10).arg(atext);
+
+
+// ""));
+
+// return result;
+//}
+
+void generate_4_3(QMap<u2, u2>& type_patterns_map)
+{
+ QMapIterator<u2, u2> it(type_patterns_map);
+
+ while(it.hasNext())
+ {
+  it.next();
+  u2 type_pattern = it.key();
+
+  for(int i = 0; i <= 9; ++i)
+  {
+   QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/a4of3-r%1").arg(i);
+   QDir qd(folder);
+   if(!qd.exists())
+    qd.mkpath(".");
+
+
+   QString fn_file = QString(ROOT_FOLDER "/dev/consoles/fns/a4of3-r%1/fn%2.cpp").arg(i).arg(type_pattern);
+   QString fn_text;
+
+   //   for(int j = 0; j < 120; ++j)
+   //   {
+   fn_text += generate_function_code(type_pattern, i) + "\n";
+   //   }
+   save_file(fn_file, fn_text);
+  }
+ }
 }
 
 int main(int argc, char *argv[])
+{
+#define INCLUDE_MAP_CODE
+ QMap<u2, u2> type_patterns_3_map {
+  #include "./dev/consoles/fns/type-patterns-3.cpp"
+ };
+#undef INCLUDE_MAP_CODE// def INCLUDE_MAP_CODE
+
+  // //  generate_4_3(type_patterns_3_map);
+
+// QMapIterator<u2, u2> it(type_patterns_3_map);
+
+// while(it.hasNext())
+// {
+//  it.next();
+
+//  u2 type_pattern = it.key();
+
+//  for(int i = 0; i <= 9; ++i)
+//  {
+//   QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/a4of3-r%1").arg(i);
+//   QDir qd(folder);
+//   if(!qd.exists())
+//     qd.mkpath(".");
+
+//   QString fn_file = QString(ROOT_FOLDER "/dev/consoles/fns/a4of3-r%1/fn%2.cpp").arg(i).arg(type_pattern);
+//   QString fn_text;
+
+////   for(int j = 0; j < 120; ++j)
+////   {
+//    fn_text += generate_function_code(type_pattern, i) + "\n";
+////   }
+//   save_file(fn_file, fn_text);
+//  }
+
+// }
+
+
+ for(int i = 0; i <= 9; ++i)
+ {
+  QString disp = gen_dispatch_array(i, 4, 3, 120, type_patterns_3_map);
+  //fn_text += generate_function_code(type_pattern, i) + "\n";
+
+  QString run_file = QString(ROOT_FOLDER "/dev/consoles/fns/run-a4of3/run-s01-4of3-re%1.cpp").arg(i);
+  //  QString run_text = gen_dispatch_array(5,4,3,6);
+
+  save_file(run_file, disp);
+
+ }
+}
+
+
+int main5(int argc, char *argv[])
 {
  QString case_text_4_file = QString(ROOT_FOLDER "/dev/consoles/fns/case-text-4.cpp");
 
@@ -456,7 +946,7 @@ QString generate_function_code(u1 retc, u2 key, QString sc0, QString sc1, u1 ac)
  u1 akey = 0;
 
  // types[0] is return ...  less than 3 others might be used (if ac < 3)
- static QString types [4] = {ret,{},{},{}};
+ QString types [4] = {ret,{},{},{}};
 
  if(ac > 0)
  {

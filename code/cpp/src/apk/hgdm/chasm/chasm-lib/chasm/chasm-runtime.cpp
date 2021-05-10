@@ -75,6 +75,7 @@
 
 #include "chasm-type-object.h"
 
+#include "./dev/consoles/fns/run-a4of3/run-s01-4of3-re9.cpp"
 
 Chasm_Runtime::Chasm_Runtime()
  :  gen_trisym_line_index_(0), gen_trisym_file_index_(0),

@@ -1019,8 +1019,55 @@ void run_test0s1r(Chasm_Runtime* csr)
 
  QStringList* result = cc0.value<QStringList*>();
  qDebug() << "r = " << *result;
-
 }
+
+
+QStringList* teste4(QString start, QVector<u4>& nums, u2 c1, u2 c2)
+{
+ QStringList* result = new QStringList(start);
+ u2 i = 0;
+ for(u4 n: nums)
+ {
+  ++i;
+  (*result) << QString("%1=%2").arg(i).arg(n, c1, 10, QChar(c2) );
+ }
+ return result;
+}
+
+void run_teste4(Chasm_Runtime* csr)
+{
+ Chasm_Call_Package* ccp = csr->new_call_package();
+
+
+ ccp->add_new_channel("lambda");
+
+ QString a1 = "true";
+ QVector<u4> nums {12, 144, 542, 5578};
+ u2 fw = 10;
+ u2 ch = '*';
+
+ Chasm_Carrier cc1 = csr->gen_carrier<QString>(&a1);
+ Chasm_Carrier cc2 = csr->gen_carrier<n8&>(&nums);
+ Chasm_Carrier cc3 = csr->gen_carrier<u2>(&fw);
+ Chasm_Carrier cc4 = csr->gen_carrier<u2>(&ch);
+
+ ccp->add_carriers({cc1,cc2,cc3,cc4});
+
+ ccp->add_new_channel("retvalue");
+
+ Chasm_Carrier cc0 = csr->gen_carrier<void*>(csr->Retvalue._ptr);
+ ccp->add_carrier(cc0);
+
+ csr->e4(ccp, 89, (minimal_fn_s0_re4_type) &teste4, &cc0);
+
+// csr->evaluate_s1(ccp, 89, (minimal_fn_s1_type) &test0s1::testr, &cc0);
+
+// csr->evaluate_s01(ccp, 89, (minimal_fn_s1_type) &test0s1::testr, &cc0);
+
+ QStringList* result = cc0.value<QStringList*>();
+ qDebug() << "r = " << *result;
+}
+
 
 
 int main(int argc, char *argv[])
@@ -1028,7 +1075,13 @@ int main(int argc, char *argv[])
  Chasm_Runtime* csr = new Chasm_Runtime;
  csr->init_no_file_session();
 
-//#ifdef HIDE
+ qDebug() << "\n----\n";
+ run_teste4(csr);
+
+ qDebug() << "\n===\n";
+
+
+#ifdef HIDE
  qDebug() << "\n----\n";
  run_test0s1(csr);
 
@@ -1122,7 +1175,7 @@ int main(int argc, char *argv[])
 
  qDebug() << "\n_____\n";
 
-//#endif
+#endif
 
 // Chasm_Call_Package* ccp = csr->new_call_package();
 // ccp->add_new_channel("lambda");

@@ -158,6 +158,14 @@ public:
 
 
  template<typename FN_Type>
+ void e4(Chasm_Call_Package* ccp, u4 fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
+ {
+
+
+ }
+
+
+ template<typename FN_Type>
  void evaluate_3_s0(Chasm_Call_Package* ccp, u4 fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
  {
   u1 sl = fncode / 10000;
