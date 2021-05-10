@@ -16,6 +16,7 @@
 #include <QPoint>
 
 #define FULL_INCLUDE
+#ifdef HIDE
 #include "./dev/consoles/fns/s01/a3/run-s01_3_re0.cpp"
 #include "./dev/consoles/fns/s01/a3/run-s01_3_re1.cpp"
 #include "./dev/consoles/fns/s01/a3/run-s01_3_re2.cpp"
@@ -59,7 +60,7 @@
 #include "./dev/consoles/fns/s01/a0/run-s01_0_re7.cpp"
 #include "./dev/consoles/fns/s01/a0/run-s01_0_re8.cpp"
 #include "./dev/consoles/fns/s01/a0/run-s01_0_re9.cpp"
-
+#endif //def HIDE
 
 //#include "kans.h"
 //USING_KANS(GTagML)
@@ -76,6 +77,113 @@
 #include "chasm-type-object.h"
 
 #include "./dev/consoles/fns/run-a4of3/run-s01-4of3-re9.cpp"
+
+
+Chasm_Function_Code operator""_cfc(n8 cue)
+{
+ Chasm_Function_Code result;
+
+ u1 distinct_type_pattern_len, arg_count;
+ u2 distinct_type_pattern_len_exp = 1;
+ u2 arg_count_exp = 1;
+
+ auto do_exp = [&distinct_type_pattern_len, &arg_count,
+   &distinct_type_pattern_len_exp, &arg_count_exp]()
+ {
+  for(int i = 0; i < distinct_type_pattern_len; ++i)
+    distinct_type_pattern_len_exp *= 10;
+  distinct_type_pattern_len_exp *= arg_count;
+  for(int i = 0; i < arg_count; ++i)
+    arg_count_exp *= 10;
+ };
+
+ if(cue >= 1000000000) // 10 digits
+ {
+  arg_count = result.arg_count = cue / 1000000000;
+  cue %= 1000000000;
+  result.convention = cue / 100000000;
+  cue %= 100000000;
+  result.return_code = cue / 10000000;
+  cue %= 10000000; // 7 digits left
+  distinct_type_pattern_len = 7 - result.arg_count;
+  result.sizes = (distinct_type_pattern_len * 10) + result.arg_count;
+  do_exp();
+  result.type_pattern = cue % arg_count_exp;
+  cue /= arg_count_exp;
+  result.distinct_type_pattern = distinct_type_pattern_len_exp + cue;
+ }
+ else if(cue >= 100000000) // 9 digits
+ {
+  arg_count = result.arg_count = cue / 100000000;
+  cue %= 100000000;
+  result.convention = cue / 10000000;
+  cue %= 10000000;
+  result.return_code = cue / 1000000;
+  cue %= 1000000; // 6 digits left
+  distinct_type_pattern_len = 6 - result.arg_count;
+  result.sizes = (distinct_type_pattern_len * 10) + result.arg_count;
+  do_exp();
+  result.type_pattern = cue % arg_count_exp;
+  cue /= arg_count_exp;
+  result.distinct_type_pattern = distinct_type_pattern_len_exp + cue;
+ }
+ else if(cue >= 10000000) // 8 digits
+ {
+  arg_count = result.arg_count = cue / 10000000;
+  cue %= 10000000;
+  result.convention = cue / 1000000;
+  cue %= 1000000;
+  result.return_code = cue / 100000;
+  cue %= 100000; // 5 digits left
+  distinct_type_pattern_len = 5 - result.arg_count;
+  result.sizes = (distinct_type_pattern_len * 10) + result.arg_count;
+  do_exp();
+  result.type_pattern = cue % arg_count_exp;
+  cue /= arg_count_exp;
+  result.distinct_type_pattern = distinct_type_pattern_len_exp + cue;
+ }
+ else if(cue >= 1000000) // 7 digits
+ {
+  arg_count = result.arg_count = cue / 1000000;
+  cue %= 1000000;
+  result.convention = cue / 100000;
+  cue %= 100000;
+  result.return_code = cue / 10000;
+  cue %= 10000; // 4 digits left
+  distinct_type_pattern_len = 4 - result.arg_count;
+  result.sizes = (distinct_type_pattern_len * 10) + result.arg_count;
+  do_exp();
+  result.type_pattern = cue % arg_count_exp;
+  cue /= arg_count_exp;
+  result.distinct_type_pattern = distinct_type_pattern_len_exp + cue;
+ }
+ else if(cue >= 100000) // 6 digits
+ {
+
+ }
+ else if(cue >= 10000) // 5 digits
+ {
+
+ }
+ else if(cue >= 1000) // 4 digits
+ {
+
+ }
+ else if(cue >= 100) // 3 digits
+ {
+
+ }
+ else if(cue >= 10) // 2 digits
+ {
+
+ }
+
+
+ return result;
+}
+
+
+
 
 Chasm_Runtime::Chasm_Runtime()
  :  gen_trisym_line_index_(0), gen_trisym_file_index_(0),
@@ -367,6 +475,7 @@ Chasm_Call_Package* Chasm_Runtime::new_call_package()
  return result;
 }
 
+#ifdef HIDE
 
 void Chasm_Runtime::evaluate_3_re0(Chasm_Call_Package* ccp, u2 fncode,
   minimal_fn_s0_re0_type fn, minimal_fn_s1_re0_type sfn)
@@ -615,3 +724,4 @@ void Chasm_Runtime::evaluate_0_re9(Chasm_Call_Package* ccp,
 #include "./dev/consoles/fns/s01/a0/ch-eval-s01_0_re9.cpp"
 }
 
+#endif // HIDE

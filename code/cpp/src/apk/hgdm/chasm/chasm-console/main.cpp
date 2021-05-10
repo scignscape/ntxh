@@ -27,6 +27,7 @@ USING_KANS(TextIO)
 
 typedef void (*_temp_minimal_fn_s0_r0_type)();
 
+#ifdef HIDE
 typedef minimal_fn_s0_re0_type minimal_fn_s0_type;
 typedef minimal_fn_s1_re0_type minimal_fn_s1_type;
 
@@ -1021,6 +1022,7 @@ void run_test0s1r(Chasm_Runtime* csr)
  qDebug() << "r = " << *result;
 }
 
+#endif
 
 QStringList* teste4(QString start, QVector<u4>& nums, u2 c1, u2 c2)
 {
@@ -1058,7 +1060,14 @@ void run_teste4(Chasm_Runtime* csr)
  Chasm_Carrier cc0 = csr->gen_carrier<void*>(csr->Retvalue._ptr);
  ccp->add_carrier(cc0);
 
- csr->e4(ccp, 89, (minimal_fn_s0_re4_type) &teste4, &cc0);
+
+  // 49'023'3122_cfc
+
+ csr->e4(ccp, 4090233122_cfc, //(minimal_fn_s0_re4_type)
+         &teste4, &cc0);
+
+ csr->e4(ccp, 309023312_cfc, //(minimal_fn_s0_re4_type)
+         &teste4, &cc0);
 
 // csr->evaluate_s1(ccp, 89, (minimal_fn_s1_type) &test0s1::testr, &cc0);
 

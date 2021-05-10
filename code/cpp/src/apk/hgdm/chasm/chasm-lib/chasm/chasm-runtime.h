@@ -31,6 +31,8 @@
 
 struct _min_{};
 
+#ifdef HIDE
+
 #include "./dev/consoles/fns/s01/a3/run-s01_3_re0.cpp"
 #include "./dev/consoles/fns/s01/a3/run-s01_3_re1.cpp"
 #include "./dev/consoles/fns/s01/a3/run-s01_3_re2.cpp"
@@ -75,6 +77,8 @@ struct _min_{};
 #include "./dev/consoles/fns/s01/a0/run-s01_0_re8.cpp"
 #include "./dev/consoles/fns/s01/a0/run-s01_0_re9.cpp"
 
+#endif // def HIDE
+
 
 //struct _min_{};
 
@@ -87,6 +91,18 @@ struct Chasm_Typed_Value_Representation
  n8 raw_value;
  QString rep;
 };
+
+struct Chasm_Function_Code
+{
+ u1 arg_count;
+ u1 convention;
+ u1 return_code;
+ u2 distinct_type_pattern;
+ u2 type_pattern;
+ u1 sizes;
+};
+
+Chasm_Function_Code operator""_cfc(n8 cue);
 
 //KANS_(GTagML)
 
@@ -158,12 +174,13 @@ public:
 
 
  template<typename FN_Type>
- void e4(Chasm_Call_Package* ccp, u4 fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
+ void e4(Chasm_Call_Package* ccp, Chasm_Function_Code fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
  {
 
 
  }
 
+#ifdef HIDE
 
  template<typename FN_Type>
  void evaluate_3_s0(Chasm_Call_Package* ccp, u4 fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
@@ -735,23 +752,27 @@ public:
    return;
   }
  }
+#endif //def HIDE
+
 
  template<typename FN_Type>
  void evaluate(Chasm_Call_Package* ccp, u4 fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
  {
-  if(fncode >= 10000)
-    evaluate_3(ccp, fncode, fn, rcar);
+//  if(fncode >= 10000)
+//    evaluate_3(ccp, fncode, fn, rcar);
 
-  else if(fncode >= 1000)
-    evaluate_2(ccp, fncode, fn, rcar);
+//  else if(fncode >= 1000)
+//    evaluate_2(ccp, fncode, fn, rcar);
 
-  else if(fncode >= 100)
-    evaluate_1(ccp, fncode, fn, rcar);
+//  else if(fncode >= 100)
+//    evaluate_1(ccp, fncode, fn, rcar);
 
-  else
-    evaluate_0(ccp, fncode, fn, rcar);
+//  else
+//    evaluate_0(ccp, fncode, fn, rcar);
  }
 
+
+#ifdef HIDE
 
  void evaluate_3_re0(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re0_type fn, minimal_fn_s1_re0_type sfn);
  void evaluate_3_re1(Chasm_Call_Package* ccp, u2 fncode, minimal_fn_s0_re1_type fn, minimal_fn_s1_re1_type sfn, Chasm_Carrier* rcar = nullptr);
@@ -808,6 +829,7 @@ public:
    minimal_fn_s0_re9_type fn,
    minimal_fn_s1_re9_type sfn, Chasm_Carrier* rcar = nullptr);
 
+#endif // HIDE
 
 //.. ACCESSORS(QString ,text)
 
