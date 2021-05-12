@@ -207,7 +207,7 @@ public:
    minimal_fn_s0_re9_type fn, minimal_fn_s1_re9_type sfn, Chasm_Carrier* rcar);
 
 
- void evaluate_4of1_re9(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+ void evaluate_Xof1_re9(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
    minimal_fn_s0_re9_type fn, minimal_fn_s1_re9_type sfn, Chasm_Carrier* rcar);
 
  template<typename FN_Type>
@@ -219,7 +219,7 @@ public:
    {
     if(fncode.distinct_type_pattern < 10)
     {
-     evaluate_4of1_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, nullptr, rcar);
+     evaluate_Xof1_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, nullptr, rcar);
     }
     else if(fncode.distinct_type_pattern < 100)
     {

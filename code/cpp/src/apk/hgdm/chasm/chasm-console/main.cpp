@@ -1151,7 +1151,7 @@ void run_teste4of1(Chasm_Runtime* csr)
 // Chasm_Function_Code cfc2 = 609787878_cfc;
 
  csr->evaluate(ccp, 4093_cfc, //(minimal_fn_s0_re4_type)
-         &teste4, &cc0);
+         &teste4of1, &cc0);
 
 // csr->evaluate(ccp, 4090233122_cfc, //(minimal_fn_s0_re4_type)
 //         &teste4, &cc0);
@@ -1179,6 +1179,7 @@ int main(int argc, char *argv[])
 
  qDebug() << "\n----\n";
 // run_teste4(csr);
+//
 //
  run_teste4of1(csr);
 

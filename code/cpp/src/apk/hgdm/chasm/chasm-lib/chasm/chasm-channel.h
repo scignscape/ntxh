@@ -50,6 +50,8 @@ public:
 
  Chasm_Carrier first_carrier();
 
+ void pasn8vector(QVector<n8>& result, u1 size);
+
  n8 pasn8(s4 index)
  {
   if(index > carriers_.size())

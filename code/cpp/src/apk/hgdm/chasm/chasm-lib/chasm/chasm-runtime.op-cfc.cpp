@@ -162,7 +162,9 @@ Chasm_Function_Code _parse_cfc(n8 cue, bool udn_literal = true)
 
  if(len == 1)
  {
-  result.type_pattern = cue % 10;
+  result.distinct_type_pattern = cue % 10;
+  result.type_pattern = 1;
+  result.type_pattern_binary = arg_count;
   return result;
  }
 

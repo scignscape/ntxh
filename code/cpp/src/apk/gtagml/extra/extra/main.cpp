@@ -284,13 +284,6 @@ QString generate_function_code(u2 type_pattern, u1 ret)
 //  u1 c3 = (case_val % 100) / 10;
 //  u1 c4 = case_val % 10;
 
-  if(type_pattern == 4023)
-  {
-   if(case_val == 3122)
-   {
-    qDebug() << "444";
-   }
-  }
 
   u1 cs[case_len];
   {
@@ -427,7 +420,7 @@ typedef run_s01_%1of%2_re%3_type s01_%1of%2_re%3_dispatch_array [%7];
 //  type_pattern += (distinct_type_exp * ac);
 
   u2 index = it.value();
-  result += QString("\n#include \"./dev/consoles/fns/a%1of%2-re%3/fn%4.cpp\" // #%5")
+  result += QString("\n#include \"./dev/consoles/fns/a%1of%2/a%1of%2-re%3/fn%4.cpp\" // #%5")
     .arg(ac).arg(distinct_type_count).arg(ret).arg(type_pattern).arg(index);
  }
 
@@ -571,13 +564,13 @@ void generate_4_3(QMap<u2, u2>& type_patterns_map)
 
   for(int i = 0; i <= 9; ++i)
   {
-   QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/a4of3-re%1").arg(i);
+   QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/a4of3/a4of3-re%1").arg(i);
    QDir qd(folder);
    if(!qd.exists())
     qd.mkpath(".");
 
 
-   QString fn_file = QString(ROOT_FOLDER "/dev/consoles/fns/a4of3-re%1/fn%2.cpp").arg(i).arg(type_pattern);
+   QString fn_file = QString(ROOT_FOLDER "/dev/consoles/fns/a4of3/a4of3-re%1/fn%2.cpp").arg(i).arg(type_pattern);
    QString fn_text;
 
    //   for(int j = 0; j < 120; ++j)
@@ -758,12 +751,12 @@ void gen_fn_files(QMap<u2, u2>& type_patterns_map, QString xofy)
 
   for(int i = 0; i <= 9; ++i)
   {
-   QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/a%1-re%2").arg(xofy).arg(i);
+   QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/a%1/a%1-re%2").arg(xofy).arg(i);
    QDir qd(folder);
    if(!qd.exists())
     qd.mkpath(".");
 
-   QString fn_file = QString(ROOT_FOLDER "/dev/consoles/fns/a%1-re%2/fn%3.cpp").arg(xofy).arg(i).arg(type_pattern);
+   QString fn_file = QString(ROOT_FOLDER "/dev/consoles/fns/a%1/a%1-re%2/fn%3.cpp").arg(xofy).arg(i).arg(type_pattern);
    QString fn_text;
 
    //   for(int j = 0; j < 120; ++j)
@@ -876,6 +869,81 @@ if(rcar)
  }
 }
 
+
+void gen_eval_file_Xof1_r(u1 ret)
+{
+ QString retv, rsym;
+
+   // //  concisely initialize two strings.  A bit cute.
+ if(ret > 0)
+   retv = QString("%1& %2").arg(ret).arg(rsym = "retv, ");
+
+ QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/eval/aXof1");
+ QDir qd(folder);
+ if(!qd.exists())
+   qd.mkpath(".");
+
+ QString s01_aXof1_reX_ch_eval_file = QString(
+    ROOT_FOLDER "/dev/consoles/fns/eval/aXof1/ch-eval-s01_Xof1_re%1.cpp")
+    .arg(ret);
+ QString s01_aXof1_reX_ch_eval_text = R"(
+
+Chasm_Channel* lambda = ccp->channel("lambda");
+if(!lambda)
+  return;
+)";
+
+ if(ret > 0)
+   s01_aXof1_reX_ch_eval_text += R"(
+Chasm_Channel* retvalue = ccp->channel("retvalue");
+if(!retvalue)
+  return;
+)";
+
+ s01_aXof1_reX_ch_eval_text += R"(
+
+QVector<n8> args;
+lambda->pasn8vector(args, fncode.arg_count);
+
+Chasm_Channel* sigma = ccp->channel("sigma");
+void* _this;
+if(sigma)
+  _this = sigma->first_carrier().value<void*>();
+else
+  _this = nullptr;
+)";
+
+if(ret > 0)
+  s01_aXof1_reX_ch_eval_text += R"(
+Chasm_Carrier cc = retvalue->first_carrier();
+void* rr = cc.value<void*>();
+)";
+
+QString rr = (ret == 0)? "": "rr, ";
+
+s01_aXof1_reX_ch_eval_text += QString(R"(
+run_s01_Xof1_re9(fncode.distinct_type_pattern, fncode.arg_count,
+   (minimal_fn_s0_re%1_type) fn,
+   (minimal_fn_s1_re%1_type) sfn, args, %2_this);
+)").arg(ret).arg(rr);
+
+if(ret > 0)
+  s01_aXof1_reX_ch_eval_text += R"(
+if(rcar)
+  rcar->set_value(rr);
+)";
+
+ save_file(s01_aXof1_reX_ch_eval_file, s01_aXof1_reX_ch_eval_text);
+}
+
+void gen_eval_files_Xof1()
+{
+ for(u1 i = 0; i < 10; ++i)
+ {
+  gen_eval_file_Xof1_r(i);
+ }
+}
+
 int main(int argc, char *argv[])
 {
 #define INCLUDE_MAP_CODE
@@ -890,12 +958,16 @@ int main(int argc, char *argv[])
  };
 #undef INCLUDE_MAP_CODE// def INCLUDE_MAP_CODE
 
+ gen_eval_files_Xof1();
+
 // generate_type_patterns_maps();
 
   // //
 // generate_4_3(type_patterns_4of3_map);
 // gen_dispatch_arrays(type_patterns_4of3_map, "4of3");
- gen_fn_files(type_patterns_4of3_map, "4of3");
+// gen_fn_files(type_patterns_4of3_map, "4of3");
+
+
 
 // gen_eval_files(4, 3);
 

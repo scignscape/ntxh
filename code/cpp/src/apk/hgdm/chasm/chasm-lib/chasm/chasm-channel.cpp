@@ -21,6 +21,14 @@ Chasm_Channel::Chasm_Channel(QString name)
 
 }
 
+void Chasm_Channel::pasn8vector(QVector<n8>& result, u1 size)
+{
+ result.resize(size);
+ for(s1 i = 0; i < size; ++i)
+   result[i] = pasn8(i + 1);
+}
+
+
 Chasm_Carrier Chasm_Channel::first_carrier()
 {
  //static Chasm_Carrier fallback;
