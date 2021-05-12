@@ -758,11 +758,108 @@ void gen_fn_files(QMap<u2, u2>& type_patterns_map, QString xofy)
    //   }
    save_file(fn_file, fn_text);
   }
+ }
+}
 
+
+//void generate_function_code()
+//{
+//}
+
+void gen_eval_files(//QMap<u2, u2>& type_patterns_map,
+  u1 arg_count, u1 distinct_types_count)
+{
+ //static u2 exps[4] {1, 10, 100, 1000};
+
+ u4 arsize = 1;
+ for(u1 i = 0; i < arg_count; ++i)
+ {
+  arsize *= 10;
  }
 
+ for(u1 i = 0; i < 10; ++i)
+ {
+  QString ret = returns[i];
+  QString retv, rsym;
+
+  // //  concisely initialize two strings.  A bit cute.
+  if(i > 0)
+    retv = QString("%1& %2").arg(ret).arg(rsym = "retv, ");
+
+  QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/eval/a%1of%2").arg(arg_count)
+    .arg(distinct_types_count);
+  QDir qd(folder);
+  if(!qd.exists())
+   qd.mkpath(".");
+
+  QString s01_X_reX_ch_eval_file = QString(ROOT_FOLDER "/dev/consoles/fns/eval/a%1of%2/ch-eval-s01_%1of%2_re%3.cpp")
+    .arg(arg_count).arg(distinct_types_count).arg(i);
+  QString s01_X_reX_ch_eval_text = (arg_count == 0)? "" : R"(
+
+Chasm_Channel* lambda = ccp->channel("lambda");
+if(!lambda)
+ return;
+)";
+
+  if(i > 0)
+    s01_X_reX_ch_eval_text += R"(
+Chasm_Channel* retvalue = ccp->channel("retvalue");
+if(!retvalue)
+ return;
+)";
 
 
+  s01_X_reX_ch_eval_text += R"(
+Chasm_Channel* sigma = ccp->channel("sigma");
+void* _this;
+if(sigma)
+ _this = sigma->first_carrier().value<void*>();
+else
+ _this = nullptr;
+)";
+
+  QString pasn8s;
+  if(arg_count > 0)
+  {
+   for(int aa = 1; aa <= arg_count; ++aa)
+     pasn8s += QString(", lambda->pasn8(%1)").arg(aa);
+  }
+
+  if(i == 0)
+  {
+   s01_X_reX_ch_eval_text += QString(R"(
+u2 index = type_patterns_%1of%2_map.value(fncode.distinct_type_pattern);
+run_s01_%1of%2_re0(fncode.type_pattern, index, (minimal_fn_s0_re0_type) fn,
+ (minimal_fn_s1_re0_type) sfn%3, _this);
+)").arg(arg_count).arg(distinct_types_count).arg(pasn8s);
+  }
+  else
+  {
+   s01_X_reX_ch_eval_text += QString(R"(
+Chasm_Carrier cc = retvalue->first_carrier();
+
+%1%2 rr = %3cc.value%4<%1>();
+
+u2 index = type_patterns_%5of%6_map.value(fncode.distinct_type_pattern);
+run_s01_%5of%6_re%7(fncode.type_pattern, index, (minimal_fn_s0_re%7_type) fn,
+ (minimal_fn_s1_re%7_type) sfn%8, rr, _this);
+
+if(rcar)
+ rcar->set_value%9(rr);
+)").arg(ret).arg( (i == 3 || i == 5 || i == 7)?"&":"")
+  .arg("")  //.arg((i == 3 || i == 5 || i == 7)?"*("+ret+"*)":"")
+  .arg((i == 3 || i == 5 || i == 7)?"_as":"")
+  .arg(arg_count).arg(distinct_types_count)
+  .arg(i).arg(pasn8s)
+  .arg((i == 3 || i == 5 || i == 7)?"_as<"+ret+">":
+    //(i==9)?"":(i==0)?"*":
+    ""
+
+   )
+   ;
+  }
+  save_file(s01_X_reX_ch_eval_file, s01_X_reX_ch_eval_text);
+ }
 }
 
 int main(int argc, char *argv[])
@@ -782,9 +879,11 @@ int main(int argc, char *argv[])
 // generate_type_patterns_maps();
 
   // //
- generate_4_3(type_patterns_4of3_map);
- gen_dispatch_arrays(type_patterns_4of3_map, "4of3");
- gen_fn_files(type_patterns_4of3_map, "4of3");
+// generate_4_3(type_patterns_4of3_map);
+// gen_dispatch_arrays(type_patterns_4of3_map, "4of3");
+// gen_fn_files(type_patterns_4of3_map, "4of3");
+
+ gen_eval_files(4, 3);
 
 // for(int i = 0; i <= 9; ++i)
 // {
