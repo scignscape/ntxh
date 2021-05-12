@@ -207,10 +207,37 @@ public:
    minimal_fn_s0_re9_type fn, minimal_fn_s1_re9_type sfn, Chasm_Carrier* rcar);
 
 
+ void evaluate_4of1_re9(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+   minimal_fn_s0_re9_type fn, minimal_fn_s1_re9_type sfn, Chasm_Carrier* rcar);
+
  template<typename FN_Type>
  void evaluate(Chasm_Call_Package* ccp, Chasm_Function_Code fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
  {
-  evaluate_4of3_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, nullptr, rcar);
+  switch(fncode.arg_count)
+  {
+  case 4:
+   {
+    if(fncode.distinct_type_pattern < 10)
+    {
+     evaluate_4of1_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, nullptr, rcar);
+    }
+    else if(fncode.distinct_type_pattern < 100)
+    {
+
+    }
+    else if(fncode.distinct_type_pattern < 1000)
+    {
+
+    }
+    else if(fncode.distinct_type_pattern < 10000)
+    {
+     // // 3 args ...
+     evaluate_4of3_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, nullptr, rcar);
+    }
+   }
+  }
+
+  //evaluate_4of3_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, nullptr, rcar);
  }
 
 

@@ -167,12 +167,14 @@ QString arg_text(u1 type_pattern, u1 index, QString& st)
 
  //QString type; // [4] = {{},{},{},{}};
 
+ QString result;
+
  switch(type_pattern)
  {
  case 0: // ref
   // types[i] = "n8&";
   st = "n8&";
-  return QString("n8& a%1=*(n8*)arg%1;").arg(index);
+  result = QString("n8& a%1=*(n8*)arg%1;").arg(index);
   break;
 
   // // for now treat 9 like a n8
@@ -180,29 +182,31 @@ QString arg_text(u1 type_pattern, u1 index, QString& st)
  case 1: case 2: case 4: case 8:
   st = QString("%1%2").arg(type_pattern == 8?'n':'u').arg(type_pattern);
   // types[i] = QString("%1%2").arg(akey == 8?'n':'u').arg(akey);
-  return QString("%1 a%2=*(%1*)arg%2;").arg(st).arg(index);
+  result = QString("%1 a%2=*(%1*)arg%2;").arg(st).arg(index);
   break;
 
  case 3: // QString
   st = "QString";
-  return QString("QString a%1=*(QString*)arg%1;").arg(index);
+  result = QString("QString a%1=*(QString*)arg%1;").arg(index);
   break;
 
  case 5: // QByteArray
   st = "QByteArray";
-  return QString("QByteArray a%1=*(QByteArray*)arg%1;").arg(index);
+  result = QString("QByteArray a%1=*(QByteArray*)arg%1;").arg(index);
   break;
 
  case 6: // double
   st = "r8";
-  return QString("r8 a%1=*(r8*)arg%1;").arg(index);
+  result = QString("r8 a%1=*(r8*)arg%1;").arg(index);
   break;
 
  case 7: // QVariant
   st = "QVariant";
-  return QString("QVariant a%1 = *(QVariant*)arg%1;").arg(index);
+  result = QString("QVariant a%1 = *(QVariant*)arg%1;").arg(index);
   break;
  }
+
+ return result;
 }
 
 QString generate_function_code(u2 type_pattern, u1 ret)
@@ -225,6 +229,7 @@ QString generate_function_code(u2 type_pattern, u1 ret)
   tplexp *= 10;
  }
 
+ u4 distinct_type_pattern = type_pattern % tplexp;
 
  u2 len = type_pattern / tplexp;
 
@@ -245,7 +250,7 @@ QString generate_function_code(u2 type_pattern, u1 ret)
   u4 exp = tplexp;
   for(int i = 0; i < type_pattern_len; ++i)
   {
-   ts[i] = (type_pattern % exp) / (exp / 10);
+   ts[i] = (distinct_type_pattern % exp) / (exp / 10);
    exp /= 10;
   }
  }
@@ -279,10 +284,18 @@ QString generate_function_code(u2 type_pattern, u1 ret)
 //  u1 c3 = (case_val % 100) / 10;
 //  u1 c4 = case_val % 10;
 
+  if(type_pattern == 4023)
+  {
+   if(case_val == 3122)
+   {
+    qDebug() << "444";
+   }
+  }
+
   u1 cs[case_len];
   {
    u4 exp = clexp;
-   for(int i = 0; i < type_pattern_len; ++i)
+   for(int i = 0; i < len; ++i)
    {
     cs[i] = (case_val % exp) / (exp / 10);
     exp /= 10;
@@ -296,6 +309,7 @@ QString generate_function_code(u2 type_pattern, u1 ret)
   }
 
   QString case_txt = QString(" case %1:\n  {").arg(case_val); //\n  %2\n  %3\n  %4\n}").arg(cc); //.arg(at1).arg(at2).arg(at3);
+
 
   QString sig_type_args;
 
@@ -413,7 +427,7 @@ typedef run_s01_%1of%2_re%3_type s01_%1of%2_re%3_dispatch_array [%7];
 //  type_pattern += (distinct_type_exp * ac);
 
   u2 index = it.value();
-  result += QString("\n#include \"./dev/consoles/fns/a%1of%2-r%3/fn%4.cpp\" // #%5")
+  result += QString("\n#include \"./dev/consoles/fns/a%1of%2-re%3/fn%4.cpp\" // #%5")
     .arg(ac).arg(distinct_type_count).arg(ret).arg(type_pattern).arg(index);
  }
 
@@ -557,13 +571,13 @@ void generate_4_3(QMap<u2, u2>& type_patterns_map)
 
   for(int i = 0; i <= 9; ++i)
   {
-   QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/a4of3-r%1").arg(i);
+   QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/a4of3-re%1").arg(i);
    QDir qd(folder);
    if(!qd.exists())
     qd.mkpath(".");
 
 
-   QString fn_file = QString(ROOT_FOLDER "/dev/consoles/fns/a4of3-r%1/fn%2.cpp").arg(i).arg(type_pattern);
+   QString fn_file = QString(ROOT_FOLDER "/dev/consoles/fns/a4of3-re%1/fn%2.cpp").arg(i).arg(type_pattern);
    QString fn_text;
 
    //   for(int j = 0; j < 120; ++j)
@@ -744,12 +758,12 @@ void gen_fn_files(QMap<u2, u2>& type_patterns_map, QString xofy)
 
   for(int i = 0; i <= 9; ++i)
   {
-   QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/a%1-r%2").arg(xofy).arg(i);
+   QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/a%1-re%2").arg(xofy).arg(i);
    QDir qd(folder);
    if(!qd.exists())
     qd.mkpath(".");
 
-   QString fn_file = QString(ROOT_FOLDER "/dev/consoles/fns/a%1-r%2/fn%3.cpp").arg(xofy).arg(i).arg(type_pattern);
+   QString fn_file = QString(ROOT_FOLDER "/dev/consoles/fns/a%1-re%2/fn%3.cpp").arg(xofy).arg(i).arg(type_pattern);
    QString fn_text;
 
    //   for(int j = 0; j < 120; ++j)
@@ -881,9 +895,10 @@ int main(int argc, char *argv[])
   // //
 // generate_4_3(type_patterns_4of3_map);
 // gen_dispatch_arrays(type_patterns_4of3_map, "4of3");
-// gen_fn_files(type_patterns_4of3_map, "4of3");
+ gen_fn_files(type_patterns_4of3_map, "4of3");
 
- gen_eval_files(4, 3);
+// gen_eval_files(4, 3);
+
 
 // for(int i = 0; i <= 9; ++i)
 // {

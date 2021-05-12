@@ -1024,6 +1024,7 @@ void run_test0s1r(Chasm_Runtime* csr)
 
 #endif
 
+
 QStringList* teste4(QString start, QVector<u4>& nums, u2 c1, QChar c2)
 {
  QStringList* result = new QStringList(start);
@@ -1100,13 +1101,86 @@ void run_teste4(Chasm_Runtime* csr)
 
 
 
+
+QStringList* teste4of1(QString start, QString start1, QString start2, QString start3)
+{
+ QStringList* result = new QStringList({start, start1, start2, start3});
+ return result;
+}
+
+void run_teste4of1(Chasm_Runtime* csr)
+{
+ Chasm_Call_Package* ccp = csr->new_call_package();
+
+
+ ccp->add_new_channel("lambda");
+
+ QString a1 = "true";
+ QString a2 = "false";
+ QString a3 = "maybe";
+ QString a4 = "unknown";
+
+ Chasm_Carrier cc1 = csr->gen_carrier<QString>(&a1);
+ Chasm_Carrier cc2 = csr->gen_carrier<QString>(&a2);
+ Chasm_Carrier cc3 = csr->gen_carrier<QString>(&a3);
+ Chasm_Carrier cc4 = csr->gen_carrier<QString>(&a4);
+
+ ccp->add_carriers({cc1,cc2,cc3,cc4});
+
+ ccp->add_new_channel("retvalue");
+
+ Chasm_Carrier cc0 = csr->gen_carrier<void*>(csr->Retvalue._ptr);
+ ccp->add_carrier(cc0);
+
+
+  // 49'023'3122_cfc
+
+  //  Chasm_Function_Code cfc = 0x9F4090233122_parse;
+
+// Chasm_Function_Code cfc1 = 4090233122_cfc;
+// Chasm_Function_Code cfc2 = 4093022_cfc; //parse;
+
+// Chasm_Function_Code cfc1 = 5096821122_cfc;
+// Chasm_Function_Code cfc2 = 60968122122_cfc;
+
+// Chasm_Function_Code cfc1 = 5096_cfc;
+// Chasm_Function_Code cfc2 = 6096_cfc;
+
+
+// Chasm_Function_Code cfc1 = 50964446_cfc;
+// Chasm_Function_Code cfc2 = 609787878_cfc;
+
+ csr->evaluate(ccp, 4093_cfc, //(minimal_fn_s0_re4_type)
+         &teste4, &cc0);
+
+// csr->evaluate(ccp, 4090233122_cfc, //(minimal_fn_s0_re4_type)
+//         &teste4, &cc0);
+
+// csr->e4(ccp, 309023312_cfc, //(minimal_fn_s0_re4_type)
+//         &teste4, &cc0);
+
+
+
+
+// csr->evaluate_s1(ccp, 89, (minimal_fn_s1_type) &test0s1::testr, &cc0);
+
+// csr->evaluate_s01(ccp, 89, (minimal_fn_s1_type) &test0s1::testr, &cc0);
+
+ QStringList* result = cc0.value<QStringList*>();
+ qDebug() << "r = " << *result;
+}
+
+
+
 int main(int argc, char *argv[])
 {
  Chasm_Runtime* csr = new Chasm_Runtime;
  csr->init_no_file_session();
 
  qDebug() << "\n----\n";
- run_teste4(csr);
+// run_teste4(csr);
+//
+ run_teste4of1(csr);
 
  qDebug() << "\n===\n";
 
