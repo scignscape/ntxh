@@ -1024,7 +1024,7 @@ void run_test0s1r(Chasm_Runtime* csr)
 
 #endif
 
-QStringList* teste4(QString start, QVector<u4>& nums, u2 c1, u2 c2)
+QStringList* teste4(QString start, QVector<u4>& nums, u2 c1, QChar c2)
 {
  QStringList* result = new QStringList(start);
  u2 i = 0;
@@ -1063,18 +1063,37 @@ void run_teste4(Chasm_Runtime* csr)
 
   // 49'023'3122_cfc
 
+  //  Chasm_Function_Code cfc = 0x9F4090233122_parse;
+
+// Chasm_Function_Code cfc1 = 4090233122_cfc;
+// Chasm_Function_Code cfc2 = 4093022_cfc; //parse;
+
+// Chasm_Function_Code cfc1 = 5096821122_cfc;
+// Chasm_Function_Code cfc2 = 60968122122_cfc;
+
+// Chasm_Function_Code cfc1 = 5096_cfc;
+// Chasm_Function_Code cfc2 = 6096_cfc;
+
+
+// Chasm_Function_Code cfc1 = 50964446_cfc;
+// Chasm_Function_Code cfc2 = 609787878_cfc;
+
+
  csr->e4(ccp, 4090233122_cfc, //(minimal_fn_s0_re4_type)
          &teste4, &cc0);
 
- csr->e4(ccp, 309023312_cfc, //(minimal_fn_s0_re4_type)
-         &teste4, &cc0);
+// csr->e4(ccp, 309023312_cfc, //(minimal_fn_s0_re4_type)
+//         &teste4, &cc0);
+
+
+
 
 // csr->evaluate_s1(ccp, 89, (minimal_fn_s1_type) &test0s1::testr, &cc0);
 
 // csr->evaluate_s01(ccp, 89, (minimal_fn_s1_type) &test0s1::testr, &cc0);
 
  QStringList* result = cc0.value<QStringList*>();
- qDebug() << "r = " << *result;
+ //qDebug() << "r = " << *result;
 }
 
 

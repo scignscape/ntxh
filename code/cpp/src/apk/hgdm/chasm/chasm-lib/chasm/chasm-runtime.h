@@ -79,6 +79,9 @@ struct _min_{};
 
 #endif // def HIDE
 
+#include "./dev/consoles/fns/run-a4of3/run-s01-4of3-re9.cpp"
+
+
 
 //struct _min_{};
 
@@ -98,8 +101,8 @@ struct Chasm_Function_Code
  u1 convention;
  u1 return_code;
  u2 distinct_type_pattern;
- u2 type_pattern;
- u1 sizes;
+ s2 type_pattern;
+ u1 type_pattern_binary;
 };
 
 Chasm_Function_Code operator""_cfc(n8 cue);
@@ -172,12 +175,14 @@ public:
 
  void release(Chasm_Call_Package* ccp);
 
+ void evaluate_4_re9(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+   minimal_fn_s0_re9_type fn, minimal_fn_s1_re9_type sfn, Chasm_Carrier* rcar);
+
 
  template<typename FN_Type>
  void e4(Chasm_Call_Package* ccp, Chasm_Function_Code fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
  {
-
-
+  evaluate_4_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, nullptr, rcar);
  }
 
 #ifdef HIDE
