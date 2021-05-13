@@ -20,11 +20,11 @@ else
   _this = nullptr;
 
 Chasm_Carrier cc = retvalue->first_carrier();
-void* rr = cc.value<void*>();
+QVariant& rr = cc.value_as<QVariant>();
 
-run_s01_Xof1_re9(fncode.distinct_type_pattern, fncode.arg_count,
+run_s01_Xof1_re7(fncode.arg_count, fncode.distinct_type_pattern,
    (minimal_fn_s0_re7_type) fn,
    (minimal_fn_s1_re7_type) sfn, args, rr, _this);
 
 if(rcar)
-  rcar->set_value(rr);
+  rcar->set_value_as<QVariant>(rr);

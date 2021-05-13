@@ -20,9 +20,9 @@ else
   _this = nullptr;
 
 Chasm_Carrier cc = retvalue->first_carrier();
-void* rr = cc.value<void*>();
+n8 rr = cc.value<n8>();
 
-run_s01_Xof1_re9(fncode.distinct_type_pattern, fncode.arg_count,
+run_s01_Xof1_re8(fncode.arg_count, fncode.distinct_type_pattern,
    (minimal_fn_s0_re8_type) fn,
    (minimal_fn_s1_re8_type) sfn, args, rr, _this);
 

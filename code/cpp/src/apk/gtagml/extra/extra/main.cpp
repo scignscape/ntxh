@@ -583,6 +583,127 @@ void generate_4_3(QMap<u2, u2>& type_patterns_map)
 }
 
 
+QString arg_text_from_args(u1 pretype, u1 index, QString& st)
+{
+ /*
+ 0 = ref
+ 1 = u1
+ 2 = u2
+ 3 = QString
+ 4 = u4
+ 5 = QByteArray
+ 6 = dbl
+ 7 = QVariant
+ 8 = n8
+ 9 = pointer
+ */
+
+ //QString type; // [4] = {{},{},{},{}};
+
+ QString result;
+
+ switch(pretype)
+ {
+ case 0: // ref
+  // types[i] = "n8&";
+  st = "n8&";
+  result = QString("n8& a%1=*(n8*)args[%2];").arg(index).arg(index - 1);
+  break;
+
+  // // for now treat 9 like a n8
+ case 9: pretype = 8; // fallthrough
+ case 1: case 2: case 4: case 8:
+  st = QString("%1%2").arg(pretype == 8?'n':'u').arg(pretype);
+  // types[i] = QString("%1%2").arg(akey == 8?'n':'u').arg(akey);
+  result = QString("%1 a%2=*(%1*)args[%3];").arg(st).arg(index).arg(index - 1);
+  break;
+
+ case 3: // QString
+  st = "QString";
+  result = QString("QString a%1=*(QString*)args[%2];").arg(index).arg(index - 1);
+  break;
+
+ case 5: // QByteArray
+  st = "QByteArray";
+  result = QString("QByteArray a%1=*(QByteArray*)args[%2];").arg(index).arg(index - 1);
+  break;
+
+ case 6: // double
+  st = "r8";
+  result = QString("r8 a%1=*(r8*)args[%2];").arg(index).arg(index - 1);
+  break;
+
+ case 7: // QVariant
+  st = "QVariant";
+  result = QString("QVariant a%1 = *(QVariant*)args[%2];").arg(index).arg(index - 1);
+  break;
+ }
+
+ return result;
+}
+
+void generate_4_1()
+{
+ for(u1 i = 0; i <= 9; ++i)
+ {
+  QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/aXof1/aXof1-re%1").arg(i);
+  QDir qd(folder);
+  if(!qd.exists())
+    qd.mkpath(".");
+
+  QString rettext = returns[i];
+  //QString retv = (ret==0)?"":"retv";
+  QString retv, rsym, retfull;
+
+  // //  concisely initialize three strings.  A bit cute.
+  if(i > 0)
+    retfull = QString("%1& %2").arg(rettext)
+    .arg(rsym = QString("%1, ").arg((retv = "retv=").left(4)));
+
+  for(u1 j = 0; j < 10; ++j)
+  {
+   QString fn_file = QString(ROOT_FOLDER "/dev/consoles/fns/aXof1/aXof1-re%1/fn_%2.cpp").arg(i).arg(j);
+   QString fn_text = QString(R"(
+
+void _f_X%1_%2_(u1 ac, %3 QVector<n8>& args, minimal_fn_s0_re%2_type fn,
+  minimal_fn_s1_re%2_type sfn, void* _this)
+{
+ switch(ac)
+ {
+)").arg(j).arg(i).arg(retfull);
+
+   for(u1 k = 1; k < 9; ++k)
+   {
+    QString at;
+    QString st;
+    QString aat;
+    for(u1 l = 1; l <= k; ++l)
+    {
+     aat += QString("a%1,").arg(l);
+     QString _st;
+     at += arg_text_from_args(j, l, _st);
+     st += _st + ",";
+    }
+    aat.chop(1);
+    st.chop(1);
+    fn_text += QString(R"(
+ case %1:
+  {%2
+   auto _sfn = (%3(_min_::*)(%4))(sfn);
+   if(_this) %5((_min_*)_this->*_sfn)(%6);
+   else %5((%3(*)(%4))fn)(%6);
+  } break;
+)").arg(k).arg(at).arg(rettext).arg(st).arg(retv).arg(aat);
+   }
+
+  fn_text += "\n }\n}";
+   save_file(fn_file, fn_text);
+  }
+ }
+}
+
+
+
 void generate_type_patterns_maps()
 {
  QString type_pattern_3_file = QString(ROOT_FOLDER "/dev/consoles/fns/type-patterns-3.cpp");
@@ -739,6 +860,89 @@ void gen_dispatch_arrays(QMap<u2, u2>& type_patterns_map, QString xofy)
  }
 }
 
+QString gen_dispatch_array_Xof1(u1 ret)
+{
+ QString rettext = returns[ret];
+ //QString retv = (ret==0)?"":"retv";
+ QString retv, rsym, retfull;
+
+ // //  concisely initialize three strings.  A bit cute.
+ if(ret > 0)
+   retfull = QString("%1& %2").arg(rettext)
+   .arg(rsym = QString("%1, ").arg(retv = "retv"));
+
+ QString result = QString(R"(
+#ifndef SEEN_DEFS_S01_Xof1_RE%1
+#define SEEN_DEFS_S01_Xof1_RE%1
+
+typedef %2(*minimal_fn_s0_re%1_type)();
+typedef %2(_min_::*minimal_fn_s1_re%1_type)();
+typedef void(*run_s01_Xof1_re%1_type)(u1 ac, %3 QVector<n8>& arg1s,
+  minimal_fn_s0_re%1_type fn, minimal_fn_s1_re%1_type sfn, void* _this);
+typedef run_s01_Xof1_re%1_type s01_Xof1_re%1_dispatch_array [10];
+
+#endif //  SEEN_DEFS_S01_Xof1_RE%2
+
+#ifdef FULL_INCLUDE
+
+ )").arg(ret).arg(rettext).arg(retfull);
+
+ for(u1 i = 0; i < 10; ++i)
+ {
+  result += QString(R"(
+#include "./dev/consoles/fns/aXof1/aXof1-re%1/fn_%2.cpp" // #%2)").arg(ret).arg(i);
+ }
+
+ result += QString(R"(
+
+
+s01_Xof1_re%1_dispatch_array* init_s01_Xof1_re%1_dispatch_array()
+{
+ s01_Xof1_re%1_dispatch_array* result = (s01_Xof1_re%1_dispatch_array*) new run_s01_Xof1_re%1_type[10];
+ )").arg(ret);
+
+ for(u1 i = 0; i < 10; ++i)
+ {
+  result += QString(R"(
+ (*result)[%1] = &_f_X%1_%2_;)").arg(i).arg(ret);
+ }
+
+ result += "\n\n return result;\n}\n";
+
+ result += QString(R"(
+
+void run_s01_Xof1_re%1(u1 ac, u1 index, minimal_fn_s0_re%1_type fn,
+  minimal_fn_s1_re%1_type sfn, QVector<n8>& args, %2 void* _this))")
+ .arg(ret).arg(retfull);
+
+ result += QString(R"(
+{
+ static s01_Xof1_re%1_dispatch_array* dispatch_array = init_s01_Xof1_re%1_dispatch_array();
+ run_s01_Xof1_re%1_type f = (*dispatch_array)[index];
+ f(ac, %2args, fn, sfn, _this);
+}
+
+#endif //def FULL_INCLUDE
+   )").arg(ret).arg(rsym);
+
+ return result;
+}
+
+
+void gen_dispatch_arrays_Xof1()
+{
+ for(int i = 0; i <= 9; ++i)
+ {
+  QString disp = gen_dispatch_array_Xof1(i);
+  //fn_text += generate_function_code(type_pattern, i) + "\n";
+
+  QString run_file = QString(ROOT_FOLDER "/dev/consoles/fns/run-aXof1/run-s01-Xof1-re%1.cpp")
+     .arg(i);
+
+  save_file(run_file, disp);
+ }
+}
+
 void gen_fn_files(QMap<u2, u2>& type_patterns_map, QString xofy)
 {
  QMapIterator<u2, u2> it(type_patterns_map);
@@ -872,11 +1076,12 @@ if(rcar)
 
 void gen_eval_file_Xof1_r(u1 ret)
 {
- QString retv, rsym;
+ QString rettext = returns[ret];
+ QString retfull, retv, rsym;
 
-   // //  concisely initialize two strings.  A bit cute.
+   // //  concisely initialize three strings.  A bit cute.
  if(ret > 0)
-   retv = QString("%1& %2").arg(ret).arg(rsym = "retv, ");
+   retfull = QString("%1& %2").arg(ret).arg(rsym = QString("%1, ").arg(retv = "retv"));
 
  QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/eval/aXof1");
  QDir qd(folder);
@@ -914,24 +1119,25 @@ else
 )";
 
 if(ret > 0)
-  s01_aXof1_reX_ch_eval_text += R"(
+  s01_aXof1_reX_ch_eval_text += QString(R"(
 Chasm_Carrier cc = retvalue->first_carrier();
-void* rr = cc.value<void*>();
-)";
+%1%2 rr = cc.value%3<%1>();
+)").arg(rettext).arg( (ret == 3 || ret == 5 || ret == 7)?"&":"")
+   .arg((ret == 3 || ret == 5 || ret == 7)?"_as":"");
 
 QString rr = (ret == 0)? "": "rr, ";
 
 s01_aXof1_reX_ch_eval_text += QString(R"(
-run_s01_Xof1_re9(fncode.distinct_type_pattern, fncode.arg_count,
+run_s01_Xof1_re%1(fncode.arg_count, fncode.distinct_type_pattern,
    (minimal_fn_s0_re%1_type) fn,
    (minimal_fn_s1_re%1_type) sfn, args, %2_this);
 )").arg(ret).arg(rr);
 
 if(ret > 0)
-  s01_aXof1_reX_ch_eval_text += R"(
+  s01_aXof1_reX_ch_eval_text += QString(R"(
 if(rcar)
-  rcar->set_value(rr);
-)";
+  rcar->set_value%1(rr);
+)").arg((ret == 3 || ret == 5 || ret == 7)?"_as<"+rettext+">":"");
 
  save_file(s01_aXof1_reX_ch_eval_file, s01_aXof1_reX_ch_eval_text);
 }
@@ -957,6 +1163,10 @@ int main(int argc, char *argv[])
   #include "./dev/consoles/fns/type-patterns-4of3.cpp"
  };
 #undef INCLUDE_MAP_CODE// def INCLUDE_MAP_CODE
+
+ generate_4_1();
+
+ gen_dispatch_arrays_Xof1();
 
  gen_eval_files_Xof1();
 
