@@ -80,6 +80,8 @@
 #include "chasm-runtime.op-cfc.cpp"
 #include "chasm-runtime.eval-4of3.cpp"
 #include "chasm-runtime.eval-Xof1.cpp"
+#include "chasm-runtime.eval-Xof2.cpp"
+
 
 
 

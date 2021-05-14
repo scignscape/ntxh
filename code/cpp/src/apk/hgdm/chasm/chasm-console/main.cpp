@@ -1172,6 +1172,62 @@ void run_teste4of1(Chasm_Runtime* csr)
 
 
 
+QStringList* teste5of2(QString start, u4 xx, QString start1, QString start2, u4 yy)
+{
+ QStringList* result = new QStringList({start, start1, start2, QString::number(xx + yy)});
+ return result;
+}
+
+void run_teste5of2(Chasm_Runtime* csr)
+{
+ Chasm_Call_Package* ccp = csr->new_call_package();
+
+
+ ccp->add_new_channel("lambda");
+
+ QString a1 = "true";
+ u4 a2 = 123456789;
+ QString a3 = "maybe";
+ QString a4 = "unknown";
+ u4 a5 = 345678912;
+
+ Chasm_Carrier cc1 = csr->gen_carrier<QString>(&a1);
+ Chasm_Carrier cc2 = csr->gen_carrier<u4>(&a2);
+ Chasm_Carrier cc3 = csr->gen_carrier<QString>(&a3);
+ Chasm_Carrier cc4 = csr->gen_carrier<QString>(&a4);
+ Chasm_Carrier cc5 = csr->gen_carrier<u4>(&a5);
+
+ ccp->add_carriers({cc1,cc2,cc3,cc4,cc5});
+
+ ccp->add_new_channel("retvalue");
+
+ Chasm_Carrier cc0 = csr->gen_carrier<void*>(csr->Retvalue._ptr);
+ ccp->add_carrier(cc0);
+
+// Chasm_Function_Code cfc1 = 50964446_cfc;
+// Chasm_Function_Code cfc2 = 609787878_cfc;
+
+ csr->evaluate(ccp, 50934334_cfc, //(minimal_fn_s0_re4_type)
+         &teste5of2, &cc0);
+
+// csr->evaluate(ccp, 4090233122_cfc, //(minimal_fn_s0_re4_type)
+//         &teste4, &cc0);
+
+// csr->e4(ccp, 309023312_cfc, //(minimal_fn_s0_re4_type)
+//         &teste4, &cc0);
+
+
+
+
+// csr->evaluate_s1(ccp, 89, (minimal_fn_s1_type) &test0s1::testr, &cc0);
+
+// csr->evaluate_s01(ccp, 89, (minimal_fn_s1_type) &test0s1::testr, &cc0);
+
+ QStringList* result = cc0.value<QStringList*>();
+ qDebug() << "r = " << *result;
+}
+
+
 int main(int argc, char *argv[])
 {
  Chasm_Runtime* csr = new Chasm_Runtime;
@@ -1180,8 +1236,8 @@ int main(int argc, char *argv[])
  qDebug() << "\n----\n";
 // run_teste4(csr);
 //
-//
- run_teste4of1(csr);
+// run_teste4of1(csr);
+ run_teste5of2(csr);
 
  qDebug() << "\n===\n";
 

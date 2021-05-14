@@ -228,6 +228,10 @@ public:
    minimal_fn_s0_re9_type fn, minimal_fn_s1_re9_type sfn, Chasm_Carrier* rcar);
 
 
+ void evaluate_Xof2_re9(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+   minimal_fn_s0_re9_type fn, minimal_fn_s1_re9_type sfn, Chasm_Carrier* rcar);
+
+
  template<typename FN_Type>
  void evaluate_s0_Xof1(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
    FN_Type fn, Chasm_Carrier* rcar)
@@ -246,6 +250,28 @@ public:
   case 9: evaluate_Xof1_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, nullptr, rcar); break;
   }
  }
+
+
+
+ template<typename FN_Type>
+ void evaluate_s0_Xof2(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+   FN_Type fn, Chasm_Carrier* rcar)
+ {
+  switch (fncode.return_code)
+  {
+//  case 0: evaluate_Xof1_re0(ccp, fncode, (minimal_fn_s0_re0_type) fn, nullptr); break;
+//  case 1: evaluate_Xof1_re1(ccp, fncode, (minimal_fn_s0_re1_type) fn, nullptr, rcar); break;
+//  case 2: evaluate_Xof1_re2(ccp, fncode, (minimal_fn_s0_re2_type) fn, nullptr, rcar); break;
+//  case 3: evaluate_Xof1_re3(ccp, fncode, (minimal_fn_s0_re3_type) fn, nullptr, rcar); break;
+//  case 4: evaluate_Xof1_re4(ccp, fncode, (minimal_fn_s0_re4_type) fn, nullptr, rcar); break;
+//  case 5: evaluate_Xof1_re5(ccp, fncode, (minimal_fn_s0_re5_type) fn, nullptr, rcar); break;
+//  case 6: evaluate_Xof1_re6(ccp, fncode, (minimal_fn_s0_re6_type) fn, nullptr, rcar); break;
+//  case 7: evaluate_Xof1_re7(ccp, fncode, (minimal_fn_s0_re7_type) fn, nullptr, rcar); break;
+//  case 8: evaluate_Xof1_re8(ccp, fncode, (minimal_fn_s0_re8_type) fn, nullptr, rcar); break;
+  case 9: evaluate_Xof2_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, nullptr, rcar); break;
+  }
+ }
+
 
 
 // template<typename SFN_Type>
@@ -306,18 +332,33 @@ public:
  template<typename FN_Type>
  void evaluate(Chasm_Call_Package* ccp, Chasm_Function_Code fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
  {
+  if(fncode.distinct_type_pattern < 10)
+  {
+   if(fncode.convention == 0)
+     evaluate_s0_Xof1(ccp, fncode, fn, rcar);
+   //     else if(fncode.convention == 1)
+   //       evaluate_s1_Xof1(ccp, fncode, fn, rcar);
+  }
+  else if(fncode.distinct_type_pattern < 100)
+  {
+//   if(fncode.convention == 0)
+//     evaluate_s0_Xof2(ccp, fncode, fn, rcar);
+  }
+  else if(fncode.distinct_type_pattern < 1000)
+  {
+   if(fncode.convention == 0)
+     evaluate_s0_Xof2(ccp, fncode, fn, rcar);
+  }
+
   switch(fncode.arg_count)
   {
+  case 5:
+   {
+
+   }
   case 4:
    {
-    if(fncode.distinct_type_pattern < 10)
-    {
-     if(fncode.convention == 0)
-       evaluate_s0_Xof1(ccp, fncode, fn, rcar);
-//     else if(fncode.convention == 1)
-//       evaluate_s1_Xof1(ccp, fncode, fn, rcar);
-    }
-    else if(fncode.distinct_type_pattern < 100)
+    if(fncode.distinct_type_pattern < 100)
     {
 
     }

@@ -943,6 +943,92 @@ void gen_dispatch_arrays_Xof1()
  }
 }
 
+
+
+QString gen_dispatch_array_Xof2(QMap<u2, u2>& type_patterns_map, u1 ret)
+{
+ QString rettext = returns[ret];
+ //QString retv = (ret==0)?"":"retv";
+ QString retv, rsym, retfull;
+
+ // //  concisely initialize three strings.  A bit cute.
+ if(ret > 0)
+   retfull = QString("%1& %2").arg(rettext)
+   .arg(rsym = QString("%1, ").arg(retv = "retv"));
+
+ QString result = QString(R"(
+#ifndef SEEN_DEFS_S01_Xof2_RE%1
+#define SEEN_DEFS_S01_Xof2_RE%1
+
+typedef %2(*minimal_fn_s0_re%1_type)();
+typedef %2(_min_::*minimal_fn_s1_re%1_type)();
+typedef void(*run_s01_Xof1_re%1_type)(u1 ac, %3 QVector<n8>& arg1s,
+  minimal_fn_s0_re%1_type fn, minimal_fn_s1_re%1_type sfn, void* _this);
+typedef run_s01_Xof2_re%1_type s01_Xof2_re%1_dispatch_array [10];
+
+#endif //  SEEN_DEFS_S01_Xof1_RE%2
+
+#ifdef FULL_INCLUDE
+
+ )").arg(ret).arg(rettext).arg(retfull);
+
+ for(u1 i = 0; i < 10; ++i)
+ {
+  result += QString(R"(
+#include "./dev/consoles/fns/aXof2/aXof2-re%1/fn_%2.cpp" // #%2)").arg(ret).arg(i);
+ }
+
+ result += QString(R"(
+
+
+s01_Xof2_re%1_dispatch_array* init_s01_Xof2_re%1_dispatch_array()
+{
+ s01_Xof2_re%1_dispatch_array* result = (s01_Xof2_re%1_dispatch_array*) new run_s01_Xof2_re%1_type[10];
+ )").arg(ret);
+
+ for(u1 i = 0; i < 10; ++i)
+ {
+  result += QString(R"(
+ (*result)[%1] = &_f_X%1_%2_;)").arg(i).arg(ret);
+ }
+
+ result += "\n\n return result;\n}\n";
+
+ result += QString(R"(
+
+void run_s01_Xof2_re%1(u1 ac, u1 index, minimal_fn_s0_re%1_type fn,
+  minimal_fn_s1_re%1_type sfn, QVector<n8>& args, %2 void* _this))")
+ .arg(ret).arg(retfull);
+
+ result += QString(R"(
+{
+ static s01_Xof2_re%1_dispatch_array* dispatch_array = init_s01_Xof2_re%1_dispatch_array();
+ run_s01_Xof2_re%1_type f = (*dispatch_array)[index];
+ f(ac, %2args, fn, sfn, _this);
+}
+
+#endif //def FULL_INCLUDE
+   )").arg(ret).arg(rsym);
+
+ return result;
+}
+
+
+void gen_dispatch_arrays_Xof2(QMap<u2, u2>& type_patterns_map)
+{
+ for(int i = 0; i <= 9; ++i)
+ {
+  QString disp = gen_dispatch_array_Xof2(type_patterns_map, i);
+  //fn_text += generate_function_code(type_pattern, i) + "\n";
+
+  QString run_file = QString(ROOT_FOLDER "/dev/consoles/fns/run-aXof2/run-s01-Xof2-re%1.cpp")
+     .arg(i);
+
+  save_file(run_file, disp);
+ }
+}
+
+
 void gen_fn_files(QMap<u2, u2>& type_patterns_map, QString xofy)
 {
  QMapIterator<u2, u2> it(type_patterns_map);
@@ -1074,7 +1160,7 @@ if(rcar)
 }
 
 
-void gen_eval_file_Xof1_r(u1 ret)
+void gen_eval_file_Xof1or2_r(u1 ret, u1 num)
 {
  QString rettext = returns[ret];
  QString retfull, retv, rsym;
@@ -1088,10 +1174,10 @@ void gen_eval_file_Xof1_r(u1 ret)
  if(!qd.exists())
    qd.mkpath(".");
 
- QString s01_aXof1_reX_ch_eval_file = QString(
-    ROOT_FOLDER "/dev/consoles/fns/eval/aXof1/ch-eval-s01_Xof1_re%1.cpp")
-    .arg(ret);
- QString s01_aXof1_reX_ch_eval_text = R"(
+ QString s01_aXof1or2_reX_ch_eval_file = QString(
+    ROOT_FOLDER "/dev/consoles/fns/eval/aXof%1/ch-eval-s01_Xof%1_re%2.cpp")
+    .arg(num).arg(ret);
+ QString s01_aXof1or2_reX_ch_eval_text = R"(
 
 Chasm_Channel* lambda = ccp->channel("lambda");
 if(!lambda)
@@ -1099,13 +1185,13 @@ if(!lambda)
 )";
 
  if(ret > 0)
-   s01_aXof1_reX_ch_eval_text += R"(
+   s01_aXof1or2_reX_ch_eval_text += R"(
 Chasm_Channel* retvalue = ccp->channel("retvalue");
 if(!retvalue)
   return;
 )";
 
- s01_aXof1_reX_ch_eval_text += R"(
+ s01_aXof1or2_reX_ch_eval_text += R"(
 
 QVector<n8> args;
 lambda->pasn8vector(args, fncode.arg_count);
@@ -1119,34 +1205,63 @@ else
 )";
 
 if(ret > 0)
-  s01_aXof1_reX_ch_eval_text += QString(R"(
+  s01_aXof1or2_reX_ch_eval_text += QString(R"(
 Chasm_Carrier cc = retvalue->first_carrier();
 %1%2 rr = cc.value%3<%1>();
 )").arg(rettext).arg( (ret == 3 || ret == 5 || ret == 7)?"&":"")
    .arg((ret == 3 || ret == 5 || ret == 7)?"_as":"");
 
+if(num == 2)
+  s01_aXof1or2_reX_ch_eval_text += R"(
+
+u1 ac_pattern = (fncode.arg_count == 2)?
+  ( (fncode.type_pattern_binary == 1)? 255: 0):
+  ( ((fncode.arg_count - 3) << 5)
+    | (fncode.type_pattern_binary &
+        ((1 << fncode.arg_count) - 1) ) );
+
+u1 index = type_patterns_2_map.value((fncode.distinct_type_pattern % 100) + 200);
+)";
+
 QString rr = (ret == 0)? "": "rr, ";
 
-s01_aXof1_reX_ch_eval_text += QString(R"(
-run_s01_Xof1_re%1(fncode.arg_count, fncode.distinct_type_pattern,
-   (minimal_fn_s0_re%1_type) fn,
-   (minimal_fn_s1_re%1_type) sfn, args, %2_this);
-)").arg(ret).arg(rr);
+if(num == 2)
+  s01_aXof1or2_reX_ch_eval_text += QString(R"(
+run_s01_Xof%1_re%2(ac_pattern, index,,
+  (minimal_fn_s0_re%2_type) fn,
+  (minimal_fn_s1_re%2_type) sfn, args, %3_this);
+)").arg(num).arg(ret).arg(rr);
+
+s01_aXof1or2_reX_ch_eval_text += QString(R"(
+run_s01_Xof%1_re%2(fncode.arg_count, fncode.distinct_type_pattern,
+   (minimal_fn_s0_re%2_type) fn,
+   (minimal_fn_s1_re%2_type) sfn, args, %3_this);
+)").arg(num).arg(ret).arg(rr);
+
+
 
 if(ret > 0)
-  s01_aXof1_reX_ch_eval_text += QString(R"(
+  s01_aXof1or2_reX_ch_eval_text += QString(R"(
 if(rcar)
   rcar->set_value%1(rr);
 )").arg((ret == 3 || ret == 5 || ret == 7)?"_as<"+rettext+">":"");
 
- save_file(s01_aXof1_reX_ch_eval_file, s01_aXof1_reX_ch_eval_text);
+ save_file(s01_aXof1or2_reX_ch_eval_file, s01_aXof1or2_reX_ch_eval_text);
 }
 
-void gen_eval_files_Xof1()
+//u1 ac_pattern = (fncode.arg_count == 2)?
+//  ( (fncode.type_pattern_binary == 1)? 255: 0):
+//  ( ((fncode.arg_count - 2) << 6)
+//    | (fncode.type_pattern_binary &
+//        ((1 << fncode.arg_count) - 1) ) );
+
+
+void gen_eval_files_Xof1or2()
 {
  for(u1 i = 0; i < 10; ++i)
  {
-  gen_eval_file_Xof1_r(i);
+  gen_eval_file_Xof1or2_r(i, 1);
+  gen_eval_file_Xof1or2_r(i, 2);
  }
 }
 
@@ -1155,6 +1270,12 @@ int main(int argc, char *argv[])
 #define INCLUDE_MAP_CODE
  QMap<u2, u2> type_patterns_3_map {
   #include "./dev/consoles/fns/type-patterns-3.cpp"
+ };
+#undef INCLUDE_MAP_CODE// def INCLUDE_MAP_CODE
+
+#define INCLUDE_MAP_CODE
+ QMap<u2, u2> type_patterns_2_map {
+  #include "./dev/consoles/fns/type-patterns-2.cpp"
  };
 #undef INCLUDE_MAP_CODE// def INCLUDE_MAP_CODE
 
@@ -1168,7 +1289,7 @@ int main(int argc, char *argv[])
 
  gen_dispatch_arrays_Xof1();
 
- gen_eval_files_Xof1();
+ gen_eval_files_Xof1or2();
 
 // generate_type_patterns_maps();
 
