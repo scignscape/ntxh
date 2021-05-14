@@ -1,4 +1,5 @@
 
+
 Chasm_Channel* lambda = ccp->channel("lambda");
 if(!lambda)
   return;
@@ -21,6 +22,7 @@ else
 Chasm_Carrier cc = retvalue->first_carrier();
 void* rr = cc.value<void*>();
 
+
 u1 ac_pattern = (fncode.arg_count == 2)?
   ( (fncode.type_pattern_binary == 1)? 255: 0):
   ( ((fncode.arg_count - 3) << 5)
@@ -29,10 +31,9 @@ u1 ac_pattern = (fncode.arg_count == 2)?
 
 u1 index = type_patterns_2_map.value((fncode.distinct_type_pattern % 100) + 200);
 
-run_s01_Xof2_re9(ac_pattern,
-   index,
-   (minimal_fn_s0_re9_type) fn,
-   (minimal_fn_s1_re9_type) sfn, args, rr, _this);
+run_s01_Xof2_re9(ac_pattern, index,
+  (minimal_fn_s0_re9_type) fn,
+  (minimal_fn_s1_re9_type) sfn, args, rr, _this);
 
 if(rcar)
   rcar->set_value(rr);

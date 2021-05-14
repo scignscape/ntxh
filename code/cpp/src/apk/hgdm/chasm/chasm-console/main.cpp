@@ -1236,7 +1236,8 @@ int main(int argc, char *argv[])
  qDebug() << "\n----\n";
 // run_teste4(csr);
 //
-// run_teste4of1(csr);
+//
+ run_teste4of1(csr);
  run_teste5of2(csr);
 
  qDebug() << "\n===\n";
