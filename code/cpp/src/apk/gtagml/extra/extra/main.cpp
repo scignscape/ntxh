@@ -1285,10 +1285,10 @@ Chasm_Carrier cc = retvalue->first_carrier();
 
 u2 index = type_patterns_%5of%6_map.value(fncode.distinct_type_pattern);
 run_s01_%5of%6_re%7(fncode.type_pattern, index, (minimal_fn_s0_re%7_type) fn,
- (minimal_fn_s1_re%7_type) sfn%8, rr, _this);
+  (minimal_fn_s1_re%7_type) sfn%8, rr, _this);
 
 if(rcar)
- rcar->set_value%9(rr);
+  rcar->set_value%9(rr);
 )").arg(ret).arg( (i == 3 || i == 5 || i == 7)?"&":"")
   .arg("")  //.arg((i == 3 || i == 5 || i == 7)?"*("+ret+"*)":"")
   .arg((i == 3 || i == 5 || i == 7)?"_as":"")

@@ -36,7 +36,7 @@
 void _evaluate_4of3_re0(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
   minimal_fn_s0_re0_type fn, minimal_fn_s1_re0_type sfn)
 {
-// #include "./dev/consoles/fns/eval/a4of3/ch-eval-s01_4of3_re0.cpp"
+ #include "./dev/consoles/fns/eval/a4of3/ch-eval-s01_4of3_re0.cpp"
 }
 
 void _evaluate_4of3_re1(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,

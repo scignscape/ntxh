@@ -23,7 +23,7 @@ u2 rr = cc.value<u2>();
 
 u2 index = type_patterns_4of3_map.value(fncode.distinct_type_pattern);
 run_s01_4of3_re2(fncode.type_pattern, index, (minimal_fn_s0_re2_type) fn,
- (minimal_fn_s1_re2_type) sfn, lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3), lambda->pasn8(4), rr, _this);
+  (minimal_fn_s1_re2_type) sfn, lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3), lambda->pasn8(4), rr, _this);
 
 if(rcar)
- rcar->set_value(rr);
+  rcar->set_value(rr);
