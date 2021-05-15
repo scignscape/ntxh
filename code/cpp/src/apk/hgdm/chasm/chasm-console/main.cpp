@@ -954,6 +954,7 @@ void run_test0r9(Chasm_Runtime* csr)
  qDebug() << "r = " << *result;
 
 }
+#endif
 
 
 struct test0s1
@@ -992,7 +993,8 @@ void run_test0s1(Chasm_Runtime* csr)
 
  //csr->evaluate(ccp, 80, (minimal_fn_s1_type) &test0s1::test);
 
- csr->evaluate(ccp, 80, (minimal_fn_s1_type) &test0s1::test);
+ csr->evaluate(ccp, 10_cfc, //(minimal_fn_s1_type)
+   &test0s1::test);
 
 
  //QStringList* result = cc0.value<QStringList*>();
@@ -1018,7 +1020,8 @@ void run_test0s1r(Chasm_Runtime* csr)
  Chasm_Carrier cc0 = csr->gen_carrier<void*>(csr->Retvalue._ptr);
  ccp->add_carrier(cc0);
 
- csr->evaluate(ccp, 89, (minimal_fn_s1_type) &test0s1::testr, &cc0);
+ csr->evaluate(ccp, 19_cfc, //(minimal_fn_s1_type)
+               &test0s1::testr, &cc0);
 
 // csr->evaluate_s1(ccp, 89, (minimal_fn_s1_type) &test0s1::testr, &cc0);
 
@@ -1028,7 +1031,6 @@ void run_test0s1r(Chasm_Runtime* csr)
  qDebug() << "r = " << *result;
 }
 
-#endif
 
 
 QStringList* teste4(QString start, QVector<u4>& nums, u2 c1, QChar c2)
@@ -1261,6 +1263,42 @@ void run_teste5of2(Chasm_Runtime* csr)
 }
 
 
+QStringList* test0()
+{
+ QStringList* result = new QStringList({"start", "start1", "start2"});
+ return result;
+}
+
+void run_test0(Chasm_Runtime* csr)
+{
+ Chasm_Call_Package* ccp = csr->new_call_package();
+
+ ccp->add_new_channel("retvalue");
+
+ Chasm_Carrier cc0 = csr->gen_carrier<void*>(csr->Retvalue._ptr);
+ ccp->add_carrier(cc0);
+
+ csr->evaluate(ccp, 9_cfc, //(minimal_fn_s0_re4_type)
+         &test0, &cc0);
+
+ QStringList* result = cc0.value<QStringList*>();
+ qDebug() << "r = " << *result;
+}
+
+
+void test00()
+{
+ qDebug() << "In test00 ...";
+}
+
+void run_test00(Chasm_Runtime* csr)
+{
+ Chasm_Call_Package* ccp = csr->new_call_package();
+
+ csr->evaluate(ccp, 0_cfc, //(minimal_fn_s0_re4_type)
+         &test00);
+
+}
 
 
 r8 teste2of2(u1 x, n8 y)
@@ -1334,6 +1372,18 @@ int main(int argc, char *argv[])
 
  qDebug() << "\n----\n";
 
+ run_test0(csr);
+ qDebug() << "\n===\n";
+
+ run_test00(csr);
+ qDebug() << "\n===\n";
+
+ run_test0s1(csr);
+ qDebug() << "\n===\n";
+
+ run_test0s1r(csr);
+ qDebug() << "\n===\n";
+
  run_teste4(csr);
  qDebug() << "\n===\n";
  run_teste3(csr);
@@ -1349,7 +1399,6 @@ int main(int argc, char *argv[])
  run_teste2of2rev(csr);
  qDebug() << "\n===\n";
 
-// qDebug() << "\n===\n";
 
 
 #ifdef HIDE

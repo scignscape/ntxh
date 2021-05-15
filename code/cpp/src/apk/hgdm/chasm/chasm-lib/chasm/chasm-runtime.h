@@ -119,22 +119,37 @@ Chasm_Function_Code operator""_cfc(n8 cue);
 //KANS_(GTagML)
 
 
-template<typename FN_Type>
-extern void _evaluate_s0_3of3(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
-  FN_Type fn, Chasm_Carrier* rcar);
+//template<typename FN_Type>
+extern void _evaluate_s01_3of3(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+  void(*fn)(), void(_min_::*sfn)(), Chasm_Carrier* rcar);
 
-template<typename FN_Type>
-extern void _evaluate_s0_4of3(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
-  FN_Type fn, Chasm_Carrier* rcar);
+//FN_Type fn, Chasm_Carrier* rcar);
 
-template<typename FN_Type>
-extern void _evaluate_s0_Xof1(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
-  FN_Type fn, Chasm_Carrier* rcar);
+//template<typename FN_Type>
+extern void _evaluate_s01_4of3(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+  void(*fn)(), void(_min_::*sfn)(), Chasm_Carrier* rcar);
 
-template<typename FN_Type>
-extern void _evaluate_s0_Xof2(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
-  FN_Type fn, Chasm_Carrier* rcar);
+                              //FN_Type fn, Chasm_Carrier* rcar);
 
+//template<typename FN_Type>
+//extern void _evaluate_s0_Xof1(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+//  FN_Type fn, Chasm_Carrier* rcar);
+
+extern void _evaluate_s01_Xof1(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+  void(*fn)(), void(_min_::*sfn)(), Chasm_Carrier* rcar);
+
+
+//template<typename FN_Type>
+extern void _evaluate_s01_Xof2(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+  void(*fn)(), void(_min_::*sfn)(), Chasm_Carrier* rcar);
+
+                               //FN_Type fn, Chasm_Carrier* rcar);
+
+void _evaluate_s01_0_rX(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+  void(*fn)(), void(_min_::*sfn)(), Chasm_Carrier* rcar);
+
+//void _evaluate_s1_0_rX(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+//  void(*fn)(), Chasm_Carrier* rcar);
 
 
 class Chasm_Runtime
@@ -204,13 +219,21 @@ public:
  void release(Chasm_Call_Package* ccp);
 
 
- template<typename FN_Type>
- void evaluate(Chasm_Call_Package* ccp, Chasm_Function_Code fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
+ template<typename RETURN_Type, typename CLASS_Type>
+ void evaluate(Chasm_Call_Package* ccp, Chasm_Function_Code fncode, RETURN_Type (CLASS_Type::*sfn), Chasm_Carrier* rcar = nullptr)
  {
   if(fncode.distinct_type_pattern < 10)
   {
-   if(fncode.convention == 0)
-     _evaluate_s0_Xof1(ccp, fncode, fn, rcar);
+   if(fncode.distinct_type_pattern == 0)
+   {
+    if(fncode.convention == 0)
+      ; //_evaluate_s01_0_rX(ccp, fncode, (void(*)()) fn, nullptr, rcar);
+    else if(fncode.convention == 1)
+      _evaluate_s01_0_rX(ccp, fncode, nullptr, (void(_min_::*)()) sfn, rcar);
+   }
+
+   else if(fncode.convention == 0)
+     ;// _evaluate_s0_Xof1(ccp, fncode, fn, rcar);
    //     else if(fncode.convention == 1)
    //       evaluate_s1_Xof1(ccp, fncode, fn, rcar);
   }
@@ -222,14 +245,51 @@ public:
   else if(fncode.distinct_type_pattern < 1000)
   {
    if(fncode.convention == 0)
-     _evaluate_s0_Xof2(ccp, fncode, fn, rcar);
+     ;//_evaluate_s0_Xof2(ccp, fncode, fn, rcar);
   }
   else if(fncode.arg_count == 3)
    // // 3 args ...
-    _evaluate_s0_3of3(ccp, fncode, fn, rcar);
+    ;//_evaluate_s0_3of3(ccp, fncode, fn, rcar);
   else if(fncode.arg_count == 4)
    // // 4 args ...
-    _evaluate_s0_4of3(ccp, fncode, fn, rcar);
+    ;//_evaluate_s0_4of3(ccp, fncode, fn, rcar);
+ }
+
+
+ template<typename FN_Type>
+ void evaluate(Chasm_Call_Package* ccp, Chasm_Function_Code fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
+ {
+  if(fncode.distinct_type_pattern < 10)
+  {
+   if(fncode.distinct_type_pattern == 0)
+   {
+    if(fncode.convention == 0)
+      _evaluate_s01_0_rX(ccp, fncode, (void(*)()) fn, nullptr, rcar);
+    else if(fncode.convention == 1)
+      ;//_evaluate_s01_0_rX(ccp, fncode, nullptr, (void(_min_::*)()) fn, rcar);
+   }
+
+   else if(fncode.convention == 0)
+     _evaluate_s01_Xof1(ccp, fncode, (void(*)()) fn, nullptr, rcar);
+   //     else if(fncode.convention == 1)
+   //       evaluate_s1_Xof1(ccp, fncode, fn, rcar);
+  }
+  else if(fncode.distinct_type_pattern < 100)
+  {
+//   if(fncode.convention == 0)
+//     evaluate_s0_Xof2(ccp, fncode, fn, rcar);
+  }
+  else if(fncode.distinct_type_pattern < 1000)
+  {
+   if(fncode.convention == 0)
+     _evaluate_s01_Xof2(ccp, fncode, (void(*)()) fn, nullptr, rcar);
+  }
+  else if(fncode.arg_count == 3)
+   // // 3 args ...
+    _evaluate_s01_3of3(ccp, fncode, (void(*)()) fn, nullptr, rcar);
+  else if(fncode.arg_count == 4)
+   // // 4 args ...
+    _evaluate_s01_4of3(ccp, fncode, (void(*)()) fn, nullptr, rcar);
  }
 };
 

@@ -444,6 +444,165 @@ Chasm_Call_Package* Chasm_Runtime::new_call_package()
  return result;
 }
 
+void _evaluate_s01_0_rX(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+  void(*fn)(), void(_min_::*sfn)(), Chasm_Carrier* rcar)
+{
+ Chasm_Channel* sigma = ccp->channel("sigma");
+ void** _this; void* _this_;
+ if(sigma)
+ {
+  _this_ = sigma->first_carrier().value<void*>();
+  _this = &_this_;
+ }
+ else { _this = nullptr; _this_ = nullptr; }
+
+ if(fncode.return_code == 0)
+ {
+  if(_this)
+    ((_min_*)*_this->*sfn)();
+  else
+    fn();
+  return;
+ }
+
+ Chasm_Channel* retvalue = ccp->channel("retvalue");
+ if(!retvalue)
+   return;
+
+ Chasm_Carrier cc = retvalue->first_carrier();
+
+ switch (fncode.return_code)
+ {
+ case 1:
+  {
+   u1 rr = cc.value<u1>();
+   if(_this)
+   {
+    auto _sfn = (u1(_min_::*)())(sfn);
+    rr=((_min_*)*_this->*_sfn)();
+   }
+   else
+     rr=((u1(*)())fn)();
+   if(rcar)
+     rcar->set_value(rr);
+   break;
+  }
+ case 2:
+  {
+   u2 rr = cc.value<u2>();
+   if(_this)
+   {
+    auto _sfn = (u1(_min_::*)())(sfn);
+    rr=((_min_*)*_this->*_sfn)();
+   }
+   else
+     rr=((u2(*)())fn)();
+   if(rcar)
+     rcar->set_value(rr);
+   break;
+  }
+ case 3:
+  {
+   QString& rr = cc.value_as<QString>();
+   if(_this)
+   {
+    auto _sfn = (QString(_min_::*)())(sfn);
+    rr=((_min_*)*_this->*_sfn)();
+   }
+   else
+     rr=((QString(*)())fn)();
+   if(rcar)
+     rcar->set_value_as<QString>(rr);
+   break;
+  }
+ case 4:
+  {
+   u4 rr = cc.value<u4>();
+   if(_this)
+   {
+    auto _sfn = (u4(_min_::*)())(sfn);
+    rr=((_min_*)*_this->*_sfn)();
+   }
+   else
+     rr=((u4(*)())fn)();
+   if(rcar)
+     rcar->set_value(rr);
+   break;
+  }
+ case 5:
+  {
+   QByteArray& rr = cc.value_as<QByteArray>();
+   if(_this)
+   {
+    auto _sfn = (QByteArray(_min_::*)())(sfn);
+    rr=((_min_*)*_this->*_sfn)();
+   }
+   else
+     rr=((QByteArray(*)())fn)();
+   if(rcar)
+     rcar->set_value_as<QByteArray>(rr);
+   break;
+  }
+ case 6:
+  {
+   r8 rr = cc.value<r8>();
+   if(_this)
+   {
+    auto _sfn = (r8(_min_::*)())(sfn);
+    rr=((_min_*)*_this->*_sfn)();
+   }
+   else
+     rr=((r8(*)())fn)();
+   if(rcar)
+     rcar->set_value(rr);
+   break;
+  }
+ case 7:
+  {
+   QVariant& rr = cc.value_as<QVariant>();
+   if(_this)
+   {
+    auto _sfn = (QVariant(_min_::*)())(sfn);
+    rr=((_min_*)*_this->*_sfn)();
+   }
+   else
+     rr=((QVariant(*)())fn)();
+   if(rcar)
+     rcar->set_value_as<QVariant>(rr);
+   break;
+  }
+ case 8:
+  {
+   n8 rr = cc.value<n8>();
+   if(_this)
+   {
+    auto _sfn = (n8(_min_::*)())(sfn);
+    rr=((_min_*)*_this->*_sfn)();
+   }
+   else
+     rr=((n8(*)())fn)();
+   if(rcar)
+     rcar->set_value(rr);
+   break;
+  }
+ case 9:
+  {
+   void* rr = cc.value<void*>();
+   if(_this)
+   {
+    auto _sfn = (void*(_min_::*)())(sfn);
+    rr=((_min_*)*_this->*_sfn)();
+   }
+   else
+     rr=((void*(*)())fn)();
+   if(rcar)
+     rcar->set_value(rr);
+   break;
+  }
+ }
+}
+
+
 #ifdef HIDE
 
 void Chasm_Runtime::evaluate_3_re0(Chasm_Call_Package* ccp, u2 fncode,
