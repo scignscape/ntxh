@@ -25,7 +25,7 @@ void parse_fn_code(u4 cue)
  u4 cc = cue;
 
  u1 st_code, return_type_code, pattern_digits_run;
- u2 distinct_type_pattern, arguments_type_pattern;
+ u2 distinct_pretype_pattern, arguments_type_pattern;
 
  if(cue >= 10000000)
  {
@@ -106,16 +106,16 @@ void parse_fn_code(u4 cue)
 
  switch (arg_count)
  {
- case 3: arguments_type_pattern = cue % 1000; distinct_type_pattern = cue / 1000; break;
- //case 23: arguments_type_pattern = cue % 1000; distinct_type_pattern = cue / 1000; break;
- case 2: arguments_type_pattern = cue % 100; distinct_type_pattern = cue / 100; break;
- case 1: arguments_type_pattern = cue % 10; distinct_type_pattern = cue / 10; break;
- case 0: arguments_type_pattern = distinct_type_pattern = 0; break;
+ case 3: arguments_type_pattern = cue % 1000; distinct_pretype_pattern = cue / 1000; break;
+ //case 23: arguments_type_pattern = cue % 1000; distinct_pretype_pattern = cue / 1000; break;
+ case 2: arguments_type_pattern = cue % 100; distinct_pretype_pattern = cue / 100; break;
+ case 1: arguments_type_pattern = cue % 10; distinct_pretype_pattern = cue / 10; break;
+ case 0: arguments_type_pattern = distinct_pretype_pattern = 0; break;
  }
 
 
 
- u2 dd = ( (st_code + 1) * st_base) + distinct_type_pattern;
+ u2 dd = ( (st_code + 1) * st_base) + distinct_pretype_pattern;
 
  qDebug() << "cue: " << cc << ", D: " << dd << ", A: " << arguments_type_pattern;
 }
@@ -257,7 +257,7 @@ QString generate_function_code(u2 type_pattern, u1 ret, u1 number)
   tplexp *= 10;
  }
 
- u4 distinct_type_pattern = type_pattern % tplexp;
+ u4 distinct_pretype_pattern = type_pattern % tplexp;
 
  u2 len = type_pattern / tplexp;
 
@@ -278,7 +278,7 @@ QString generate_function_code(u2 type_pattern, u1 ret, u1 number)
   u4 exp = tplexp;
   for(int i = 0; i < type_pattern_len; ++i)
   {
-   ts[i] = (distinct_type_pattern % exp) / (exp / 10);
+   ts[i] = (distinct_pretype_pattern % exp) / (exp / 10);
    exp /= 10;
   }
  }
@@ -1271,7 +1271,7 @@ else { _this = nullptr; _this_ = nullptr; }
   if(i == 0)
   {
    s01_X_reX_ch_eval_text += QString(R"(
-u2 index = type_patterns_%1of%2_map.value(fncode.distinct_type_pattern);
+u2 index = type_patterns_%1of%2_map.value(fncode.distinct_pretype_pattern);
 run_s01_%1of%2_re0(fncode.type_pattern, index, (minimal_fn_s0_re0_type) fn,
  (minimal_fn_s1_re0_type) sfn%3, _this);
 )").arg(arg_count).arg(distinct_types_count).arg(pasn8s);
@@ -1283,7 +1283,7 @@ Chasm_Carrier cc = retvalue->first_carrier();
 
 %1%2 rr = %3cc.value%4<%1>();
 
-u2 index = type_patterns_%5of%6_map.value(fncode.distinct_type_pattern);
+u2 index = type_patterns_%5of%6_map.value(fncode.distinct_pretype_pattern);
 run_s01_%5of%6_re%7(fncode.type_pattern, index, (minimal_fn_s0_re%7_type) fn,
   (minimal_fn_s1_re%7_type) sfn%8, rr, _this);
 
@@ -1368,7 +1368,7 @@ u1 ac_pattern = (fncode.arg_count == 2)?
     | (fncode.type_pattern_binary &
         ((1 << fncode.arg_count) - 1) ) );
 
-u1 index = type_patterns_2_map.value((fncode.distinct_type_pattern % 100) + 200);
+u1 index = type_patterns_2_map.value((fncode.distinct_pretype_pattern % 100) + 200);
 )";
 
 QString rr = (ret == 0)? "": "rr, ";
@@ -1382,7 +1382,7 @@ run_s01_Xof%1_re%2(ac_pattern, index,
 
 else
   s01_aXof1or2_reX_ch_eval_text += QString(R"(
-run_s01_Xof%1_re%2(fncode.arg_count, fncode.distinct_type_pattern,
+run_s01_Xof%1_re%2(fncode.arg_count, fncode.distinct_pretype_pattern,
    (minimal_fn_s0_re%2_type) fn,
    (minimal_fn_s1_re%2_type) sfn, args, %3_this);
 )").arg(num).arg(ret).arg(rr);

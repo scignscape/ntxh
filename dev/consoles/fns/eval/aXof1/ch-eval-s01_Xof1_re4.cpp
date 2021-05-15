@@ -24,7 +24,7 @@ else { _this = nullptr; _this_ = nullptr; }
 Chasm_Carrier cc = retvalue->first_carrier();
 u4 rr = cc.value<u4>();
 
-run_s01_Xof1_re4(fncode.arg_count, fncode.distinct_type_pattern,
+run_s01_Xof1_re4(fncode.arg_count, fncode.distinct_pretype_pattern,
    (minimal_fn_s0_re4_type) fn,
    (minimal_fn_s1_re4_type) sfn, args, rr, _this);
 

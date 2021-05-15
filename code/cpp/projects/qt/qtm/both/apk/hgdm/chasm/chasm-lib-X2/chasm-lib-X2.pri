@@ -46,7 +46,6 @@ INCLUDEPATH += $$SRC_GROUP_DIR/chasm-lib/chasm \
 
 
 HEADERS += \
-  $$SRC_DIR/_eval-Xof2.h \
 
 
 SOURCES += \

@@ -45,7 +45,6 @@ INCLUDEPATH += $$SRC_GROUP_DIR/chasm-lib/chasm \
 
 
 HEADERS += \
-  $$SRC_DIR/_eval-4of3.h \
 
 
 SOURCES += \

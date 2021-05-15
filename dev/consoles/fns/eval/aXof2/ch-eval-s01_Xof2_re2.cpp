@@ -31,7 +31,7 @@ u1 ac_pattern = (fncode.arg_count == 2)?
     | (fncode.type_pattern_binary &
         ((1 << fncode.arg_count) - 1) ) );
 
-u1 index = type_patterns_2_map.value((fncode.distinct_type_pattern % 100) + 200);
+u1 index = type_patterns_2_map.value((fncode.distinct_pretype_pattern % 100) + 200);
 
 run_s01_Xof2_re2(ac_pattern, index,
   (minimal_fn_s0_re2_type) fn,

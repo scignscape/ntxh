@@ -21,7 +21,7 @@ Chasm_Carrier cc = retvalue->first_carrier();
 
 n8 rr = cc.value<n8>();
 
-u2 index = type_patterns_4of3_map.value(fncode.distinct_type_pattern);
+u2 index = type_patterns_4of3_map.value(fncode.distinct_pretype_pattern);
 run_s01_4of3_re8(fncode.type_pattern, index, (minimal_fn_s0_re8_type) fn,
   (minimal_fn_s1_re8_type) sfn, lambda->pasn8(1), lambda->pasn8(2), lambda->pasn8(3), lambda->pasn8(4), rr, _this);
 

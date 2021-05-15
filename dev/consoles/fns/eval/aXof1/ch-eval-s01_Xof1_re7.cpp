@@ -24,7 +24,7 @@ else { _this = nullptr; _this_ = nullptr; }
 Chasm_Carrier cc = retvalue->first_carrier();
 QVariant& rr = cc.value_as<QVariant>();
 
-run_s01_Xof1_re7(fncode.arg_count, fncode.distinct_type_pattern,
+run_s01_Xof1_re7(fncode.arg_count, fncode.distinct_pretype_pattern,
    (minimal_fn_s0_re7_type) fn,
    (minimal_fn_s1_re7_type) sfn, args, rr, _this);
 

@@ -118,7 +118,7 @@ struct Chasm_Function_Code
  u1 arg_count;
  u1 convention;
  u1 return_code;
- u2 distinct_type_pattern;
+ u2 distinct_pretype_pattern;
  s2 type_pattern;
  u1 type_pattern_binary;
 };
@@ -234,16 +234,16 @@ public:
   if(fncode.convention != 1)
     UNEXPECTED_CONVENTION_CODE
 
-  if(fncode.distinct_type_pattern < 10)
+  if(fncode.distinct_pretype_pattern < 10)
   {
-   if(fncode.distinct_type_pattern == 0)
+   if(fncode.distinct_pretype_pattern == 0)
      _evaluate_s01_0_rX(ccp, fncode, nullptr, (void(_min_::*)()) sfn, rcar);
    else
      _evaluate_s01_Xof1(ccp, fncode, nullptr, (void(_min_::*)()) sfn, rcar);
   }
-  else if(fncode.distinct_type_pattern < 100)
+  else if(fncode.distinct_pretype_pattern < 100)
     UNEXPECTED_PRETYPE_PATTERN
-  else if(fncode.distinct_type_pattern < 1000)
+  else if(fncode.distinct_pretype_pattern < 1000)
     _evaluate_s01_Xof2(ccp, fncode, nullptr, (void(_min_::*)()) sfn, rcar);
   else if(fncode.arg_count == 3)
     _evaluate_s01_3of3(ccp, fncode, nullptr, (void(_min_::*)()) sfn, rcar);
@@ -257,7 +257,7 @@ public:
  {
   if(fncode.convention != 0)
     UNEXPECTED_CONVENTION_CODE
-  else if(fncode.distinct_type_pattern < 10)
+  else if(fncode.distinct_pretype_pattern < 10)
   {
    if(fncode.arg_count == 0)
      _evaluate_s01_0_rX(ccp, fncode, (void(*)()) fn, nullptr, rcar);
@@ -265,9 +265,9 @@ public:
    else
      _evaluate_s01_Xof1(ccp, fncode, (void(*)()) fn, nullptr, rcar);
   }
-  else if(fncode.distinct_type_pattern < 100)
+  else if(fncode.distinct_pretype_pattern < 100)
     UNEXPECTED_PRETYPE_PATTERN
-  else if(fncode.distinct_type_pattern < 1000)
+  else if(fncode.distinct_pretype_pattern < 1000)
     _evaluate_s01_Xof2(ccp, fncode, (void(*)()) fn, nullptr, rcar);
   else if(fncode.arg_count == 3)
    // // 3 args ...

@@ -17,6 +17,6 @@ if(sigma)
 }
 else { _this = nullptr; _this_ = nullptr; }
 
-run_s01_Xof1_re0(fncode.arg_count, fncode.distinct_type_pattern,
+run_s01_Xof1_re0(fncode.arg_count, fncode.distinct_pretype_pattern,
    (minimal_fn_s0_re0_type) fn,
    (minimal_fn_s1_re0_type) sfn, args, _this);
