@@ -224,12 +224,12 @@ public:
    if(fncode.convention == 0)
      _evaluate_s0_Xof2(ccp, fncode, fn, rcar);
   }
-  else if(fncode.arg_count == 4)
-   // // 3 args ...
-   ;//    evaluate_4of3_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, nullptr, rcar);
   else if(fncode.arg_count == 3)
    // // 3 args ...
-   ;// _evaluate_s0_3of3(ccp, fncode, fn, rcar);
+    _evaluate_s0_3of3(ccp, fncode, fn, rcar);
+  else if(fncode.arg_count == 4)
+   // // 4 args ...
+    _evaluate_s0_4of3(ccp, fncode, fn, rcar);
  }
 };
 

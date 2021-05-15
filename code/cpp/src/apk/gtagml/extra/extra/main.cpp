@@ -150,6 +150,32 @@ QVector<u2>* generate_4_3()
  return result;
 }
 
+
+QVector<u2>* generate_3_3()
+{
+ QVector<u2>* result = new QVector<u2>;
+ for(int i = 1; i <= 3; ++i)
+ {
+  for(int j = 1; j <= 3; ++j)
+  {
+   for(int k = 1; k <= 3; ++k)
+   {
+    u1 same = 0;
+    if(i == j) ++same;
+    if(i == k) ++same;
+    if(j == k) ++same;
+    if(same > 1)
+      continue;
+    u2 caseval = (100*i) + (10*j) + k;
+    (*result) << caseval;
+   }
+  }
+ }
+ return result;
+}
+
+
+
 QString arg_text(u1 type_pattern, u1 index, QString& st)
 {
  /*
@@ -209,17 +235,19 @@ QString arg_text(u1 type_pattern, u1 index, QString& st)
  return result;
 }
 
-QString generate_function_code(u2 type_pattern, u1 ret)
+QString generate_function_code(u2 type_pattern, u1 ret, u1 number)
 {
-
- u1 case_len = 4;
+ u1 case_len = number;
  u4 clexp = 1;
  for(int i = 0; i < case_len; ++i)
  {
   clexp *= 10;
  }
 
- static QVector<u2>* vec = generate_4_3();
+ static QVector<u2>* vec4 = generate_4_3();
+ static QVector<u2>* vec3 = generate_3_3();
+
+ QVector<u2>* vec = number == 3? vec3:vec4;
 
  u1 type_pattern_len = 0;
  u4 tplexp = 1;
@@ -354,15 +382,6 @@ QString generate_function_code(u2 type_pattern, u1 ret)
  result += "  //end of switch\n }\n}\n";
 
  return result;
-
-
-// QString case_text_file = QString(ROOT_FOLDER "/dev/consoles/fns/case-text-4.cpp");
-// QString cast_text = load_file(case_text_file);
-// int index = 0;
-// while(index != -1)
-// {
-//  index = cast_text.indexOf(":", index);
-// }
 }
 
 
@@ -549,7 +568,7 @@ void run_s01_%1of%2_re%3(u4 pattern, u4 index, minimal_fn_s0_re%3_type fn,
 // return result;
 //}
 
-void generate_4_3(QMap<u2, u2>& type_patterns_map)
+void generate_4or3_3(QMap<u2, u2>& type_patterns_map, u1 number)
 {
  QMapIterator<u2, u2> it(type_patterns_map);
 
@@ -564,18 +583,19 @@ void generate_4_3(QMap<u2, u2>& type_patterns_map)
 
   for(int i = 0; i <= 9; ++i)
   {
-   QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/a4of3/a4of3-re%1").arg(i);
+   QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/a%1of3/a%1of3-re%2").arg(number).arg(i);
    QDir qd(folder);
    if(!qd.exists())
     qd.mkpath(".");
 
 
-   QString fn_file = QString(ROOT_FOLDER "/dev/consoles/fns/a4of3/a4of3-re%1/fn%2.cpp").arg(i).arg(type_pattern);
+   QString fn_file = QString(ROOT_FOLDER "/dev/consoles/fns/a%1of3/a%1of3-re%2/fn%3.cpp")
+     .arg(number).arg(i).arg(type_pattern);
    QString fn_text;
 
    //   for(int j = 0; j < 120; ++j)
    //   {
-   fn_text += generate_function_code(type_pattern, i) + "\n";
+   fn_text += generate_function_code(type_pattern, i, number) + "\n";
    //   }
    save_file(fn_file, fn_text);
   }
@@ -961,15 +981,15 @@ void generate_type_patterns_maps()
 
 }
 
-void gen_dispatch_arrays(QMap<u2, u2>& type_patterns_map, QString xofy)
+void gen_dispatch_arrays(QMap<u2, u2>& type_patterns_map, QString xofy, u1 number)
 {
  for(int i = 0; i <= 9; ++i)
  {
-  QString disp = gen_dispatch_array(i, 4, 3, 120, type_patterns_map);
+  QString disp = gen_dispatch_array(i, number, 3, 120, type_patterns_map);
   //fn_text += generate_function_code(type_pattern, i) + "\n";
 
-  QString run_file = QString(ROOT_FOLDER "/dev/consoles/fns/run-a4of3/run-s01-%1-re%2.cpp")
-     .arg(xofy).arg(i);
+  QString run_file = QString(ROOT_FOLDER "/dev/consoles/fns/run-a%1of3/run-s01-%2-re%3.cpp")
+    .arg(number).arg(xofy).arg(i);
 
   save_file(run_file, disp);
  }
@@ -1153,7 +1173,7 @@ void gen_dispatch_arrays_Xof2(QMap<u2, u2>& type_patterns_map)
 }
 
 
-void gen_fn_files(QMap<u2, u2>& type_patterns_map, QString xofy)
+void gen_fn_files(QMap<u2, u2>& type_patterns_map, QString xofy, u1 number)
 {
  QMapIterator<u2, u2> it(type_patterns_map);
 
@@ -1175,7 +1195,7 @@ void gen_fn_files(QMap<u2, u2>& type_patterns_map, QString xofy)
 
    //   for(int j = 0; j < 120; ++j)
    //   {
-   fn_text += generate_function_code(type_pattern, i) + "\n";
+   fn_text += generate_function_code(type_pattern, i, number) + "\n";
    //   }
    save_file(fn_file, fn_text);
   }
@@ -1420,12 +1440,17 @@ int main(int argc, char *argv[])
 
   // //
 // generate_4_3(type_patterns_4of3_map);
-// gen_dispatch_arrays(type_patterns_4of3_map, "4of3");
-// gen_fn_files(type_patterns_4of3_map, "4of3");
+
+ gen_dispatch_arrays(type_patterns_4of3_map, "4of3", 4);
+ gen_fn_files(type_patterns_4of3_map, "4of3", 4);
+ gen_eval_files(4, 3);
 
 
+  //generate_3_3(type_patterns_3_map);
+  gen_dispatch_arrays(type_patterns_3_map, "3of3", 3);
+  gen_fn_files(type_patterns_3_map, "3of3", 3);
+  gen_eval_files(3, 3);
 
-// gen_eval_files(4, 3);
 
 
 // for(int i = 0; i <= 9; ++i)

@@ -19,6 +19,8 @@
 
 #include "chasm-lib-X1/_eval-Xof1.h"
 #include "chasm-lib-X2/_eval-Xof2.h"
+#include "chasm-lib-33/_eval-3of3.h"
+#include "chasm-lib-43/_eval-4of3.h"
 
 
 #include "textio.h"
@@ -1083,8 +1085,8 @@ void run_teste4(Chasm_Runtime* csr)
 // Chasm_Function_Code cfc1 = 50964446_cfc;
 // Chasm_Function_Code cfc2 = 609787878_cfc;
 
-// csr->evaluate(ccp, 4093022_cfc, //(minimal_fn_s0_re4_type)
-//         &teste4, &cc0);
+ csr->evaluate(ccp, 4093022_cfc, //(minimal_fn_s0_re4_type)
+         &teste4, &cc0);
 
 // csr->evaluate(ccp, 4090233122_cfc, //(minimal_fn_s0_re4_type)
 //         &teste4, &cc0);
@@ -1139,8 +1141,8 @@ void run_teste3(Chasm_Runtime* csr)
  Chasm_Carrier cc0 = csr->gen_carrier<void*>(csr->Retvalue._ptr);
  ccp->add_carrier(cc0);
 
-// csr->evaluate(ccp, 309302_cfc, //(minimal_fn_s0_re4_type)
-//         &teste3, &cc0);
+ csr->evaluate(ccp, 309302_cfc, //(minimal_fn_s0_re4_type)
+         &teste3, &cc0);
 
  QStringList* result = cc0.value<QStringList*>();
  qDebug() << "r = " << *result;
@@ -1291,8 +1293,8 @@ void run_teste2of2(Chasm_Runtime* csr)
  Chasm_Carrier cc0 = csr->gen_carrier<r8>(csr->Retvalue._r8);
  ccp->add_carrier(cc0);
 
-// csr->evaluate(ccp, 20618_cfc, //(minimal_fn_s0_re4_type)
-//         &teste2of2, &cc0);
+ csr->evaluate(ccp, 20618_cfc, //(minimal_fn_s0_re4_type)
+         &teste2of2, &cc0);
 
  r8 result = cc0.value<r8>();
  qDebug() << "r = " << result;
@@ -1317,8 +1319,8 @@ void run_teste2of2rev(Chasm_Runtime* csr)
  Chasm_Carrier cc0 = csr->gen_carrier<r8>(csr->Retvalue._r8);
  ccp->add_carrier(cc0);
 
-// csr->evaluate(ccp, 20681_cfc, //(minimal_fn_s0_re4_type)
-//         &teste2of2rev, &cc0);
+ csr->evaluate(ccp, 20681_cfc, //(minimal_fn_s0_re4_type)
+         &teste2of2rev, &cc0);
 
  r8 result = cc0.value<r8>();
  qDebug() << "r = " << result;
@@ -1331,16 +1333,23 @@ int main(int argc, char *argv[])
  csr->init_no_file_session();
 
  qDebug() << "\n----\n";
-// run_teste3(csr);
-//
-// run_teste4of1(csr);
-//
- run_teste5of2(csr);
 
-// run_teste2of2(csr);
-// run_teste2of2rev(csr);
-
+ run_teste4(csr);
  qDebug() << "\n===\n";
+ run_teste3(csr);
+ qDebug() << "\n===\n";
+
+ run_teste4of1(csr);
+ qDebug() << "\n===\n";
+ run_teste5of2(csr);
+ qDebug() << "\n===\n";
+
+ run_teste2of2(csr);
+ qDebug() << "\n===\n";
+ run_teste2of2rev(csr);
+ qDebug() << "\n===\n";
+
+// qDebug() << "\n===\n";
 
 
 #ifdef HIDE

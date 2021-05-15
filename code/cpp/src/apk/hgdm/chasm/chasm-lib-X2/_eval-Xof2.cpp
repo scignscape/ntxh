@@ -19,7 +19,7 @@
 //#include "./dev/consoles/fns/run-aXof2/run-s01-Xof2-re3.cpp"
 //#include "./dev/consoles/fns/run-aXof2/run-s01-Xof2-re4.cpp"
 //#include "./dev/consoles/fns/run-aXof2/run-s01-Xof2-re5.cpp"
-//#include "./dev/consoles/fns/run-aXof2/run-s01-Xof2-re6.cpp"
+#include "./dev/consoles/fns/run-aXof2/run-s01-Xof2-re6.cpp"
 //#include "./dev/consoles/fns/run-aXof2/run-s01-Xof2-re7.cpp"
 //#include "./dev/consoles/fns/run-aXof2/run-s01-Xof2-re8.cpp"
 #include "./dev/consoles/fns/run-aXof2/run-s01-Xof2-re9.cpp"
@@ -72,7 +72,7 @@ void _evaluate_Xof2_re5(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
 void _evaluate_Xof2_re6(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
   minimal_fn_s0_re6_type fn, minimal_fn_s1_re6_type sfn, Chasm_Carrier* rcar)
 {
-// #include "./dev/consoles/fns/eval/aXof2/ch-eval-s01_Xof2_re6.cpp"
+ #include "./dev/consoles/fns/eval/aXof2/ch-eval-s01_Xof2_re6.cpp"
 }
 
 void _evaluate_Xof2_re7(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
