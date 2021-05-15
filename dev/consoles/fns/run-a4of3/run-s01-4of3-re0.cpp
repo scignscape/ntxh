@@ -5,7 +5,7 @@
 typedef void(*minimal_fn_s0_re0_type)();
 typedef void(_min_::*minimal_fn_s1_re0_type)();
 typedef void(*run_s01_4of3_re0_type)(u4 pattern, n8 arg1, n8 arg2, n8 arg3, n8 arg4, minimal_fn_s0_re0_type fn,
-  minimal_fn_s1_re0_type sfn, void* _this);
+  minimal_fn_s1_re0_type sfn, void** _this);
 typedef run_s01_4of3_re0_type s01_4of3_re0_dispatch_array [120];
 
 #endif //  SEEN_DEFS_S01_4of3_RE0
@@ -264,7 +264,7 @@ s01_4of3_re0_dispatch_array* init_s01_4of3_re0_dispatch_array()
 
 
 void run_s01_4of3_re0(u4 pattern, u4 index, minimal_fn_s0_re0_type fn,
-  minimal_fn_s1_re0_type sfn, n8 arg1, n8 arg2, n8 arg3, n8 arg4,  void* _this)
+  minimal_fn_s1_re0_type sfn, n8 arg1, n8 arg2, n8 arg3, n8 arg4,  void** _this)
 {
  static s01_4of3_re0_dispatch_array* dispatch_array = init_s01_4of3_re0_dispatch_array();
  run_s01_4of3_re0_type f = (*dispatch_array)[index];

@@ -5,7 +5,7 @@
 typedef void*(*minimal_fn_s0_re9_type)();
 typedef void*(_min_::*minimal_fn_s1_re9_type)();
 typedef void(*run_s01_Xof2_re9_type)(u1 ac, void*& retv,  QVector<n8>& args,
-  minimal_fn_s0_re9_type fn, minimal_fn_s1_re9_type sfn, void* _this);
+  minimal_fn_s0_re9_type fn, minimal_fn_s1_re9_type sfn, void** _this);
 typedef run_s01_Xof2_re9_type s01_Xof2_re9_dispatch_array [10];
 
 #endif //  SEEN_DEFS_S01_Xof2_RE9
@@ -114,7 +114,7 @@ s01_Xof2_re9_dispatch_array* init_s01_Xof2_re9_dispatch_array()
 
 
 void run_s01_Xof2_re9(u1 ac_pattern, u1 index, minimal_fn_s0_re9_type fn,
-  minimal_fn_s1_re9_type sfn, QVector<n8>& args, void*& retv,  void* _this)
+  minimal_fn_s1_re9_type sfn, QVector<n8>& args, void*& retv,  void** _this)
 {
  static s01_Xof2_re9_dispatch_array* dispatch_array = init_s01_Xof2_re9_dispatch_array();
  run_s01_Xof2_re9_type f = (*dispatch_array)[index];

@@ -1,5 +1,5 @@
 void _f_4379_7_(u4 pattern, QVariant& retv, n8 arg1, n8 arg2, n8 arg3, n8 arg4, minimal_fn_s0_re7_type fn,
-  minimal_fn_s1_re7_type sfn, void* _this)
+  minimal_fn_s1_re7_type sfn, void** _this)
 {
  switch(pattern)
  {

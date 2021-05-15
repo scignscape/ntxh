@@ -1,7 +1,7 @@
 
 
 void _f_X56_0_(u1 ac_pattern,  QVector<n8>& args, minimal_fn_s0_re0_type fn,
-  minimal_fn_s1_re0_type sfn, void* _this) // # 35
+  minimal_fn_s1_re0_type sfn, void** _this) // # 35
 {
  switch(ac_pattern)
  {

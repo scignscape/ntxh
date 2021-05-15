@@ -1,7 +1,7 @@
 
 
 void _f_X39_3_(u1 ac_pattern, QString& retv,  QVector<n8>& args, minimal_fn_s0_re3_type fn,
-  minimal_fn_s1_re3_type sfn, void* _this) // # 29
+  minimal_fn_s1_re3_type sfn, void** _this) // # 29
 {
  switch(ac_pattern)
  {

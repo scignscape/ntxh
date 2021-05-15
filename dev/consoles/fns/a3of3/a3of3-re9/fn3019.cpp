@@ -1,5 +1,5 @@
 void _f_3019_9_(u4 pattern, void*& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_re9_type fn,
-  minimal_fn_s1_re9_type sfn, void* _this)
+  minimal_fn_s1_re9_type sfn, void** _this)
 {
  switch(pattern)
  {

@@ -5,7 +5,7 @@
 typedef QByteArray(*minimal_fn_s0_re5_type)();
 typedef QByteArray(_min_::*minimal_fn_s1_re5_type)();
 typedef void(*run_s01_3of3_re5_type)(u4 pattern, QByteArray& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_re5_type fn,
-  minimal_fn_s1_re5_type sfn, void* _this);
+  minimal_fn_s1_re5_type sfn, void** _this);
 typedef run_s01_3of3_re5_type s01_3of3_re5_dispatch_array [120];
 
 #endif //  SEEN_DEFS_S01_3of3_RE5
@@ -264,7 +264,7 @@ s01_3of3_re5_dispatch_array* init_s01_3of3_re5_dispatch_array()
 
 
 void run_s01_3of3_re5(u4 pattern, u4 index, minimal_fn_s0_re5_type fn,
-  minimal_fn_s1_re5_type sfn, n8 arg1, n8 arg2, n8 arg3, QByteArray& retv,  void* _this)
+  minimal_fn_s1_re5_type sfn, n8 arg1, n8 arg2, n8 arg3, QByteArray& retv,  void** _this)
 {
  static s01_3of3_re5_dispatch_array* dispatch_array = init_s01_3of3_re5_dispatch_array();
  run_s01_3of3_re5_type f = (*dispatch_array)[index];

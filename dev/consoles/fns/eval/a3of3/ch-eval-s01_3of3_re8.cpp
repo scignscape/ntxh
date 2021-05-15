@@ -9,11 +9,13 @@ if(!retvalue)
  return;
 
 Chasm_Channel* sigma = ccp->channel("sigma");
-void* _this;
+void** _this; void* _this_;
 if(sigma)
- _this = sigma->first_carrier().value<void*>();
-else
- _this = nullptr;
+{
+ _this_ = sigma->first_carrier().value<void*>();
+ _this = &_this_;
+}
+else { _this = nullptr; _this_ = nullptr; }
 
 Chasm_Carrier cc = retvalue->first_carrier();
 

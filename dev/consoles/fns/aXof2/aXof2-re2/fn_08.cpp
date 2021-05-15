@@ -1,7 +1,7 @@
 
 
 void _f_X08_2_(u1 ac_pattern, u2& retv,  QVector<n8>& args, minimal_fn_s0_re2_type fn,
-  minimal_fn_s1_re2_type sfn, void* _this) // # 7
+  minimal_fn_s1_re2_type sfn, void** _this) // # 7
 {
  switch(ac_pattern)
  {

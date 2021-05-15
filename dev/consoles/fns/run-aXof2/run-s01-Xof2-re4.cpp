@@ -5,7 +5,7 @@
 typedef u4(*minimal_fn_s0_re4_type)();
 typedef u4(_min_::*minimal_fn_s1_re4_type)();
 typedef void(*run_s01_Xof2_re4_type)(u1 ac, u4& retv,  QVector<n8>& args,
-  minimal_fn_s0_re4_type fn, minimal_fn_s1_re4_type sfn, void* _this);
+  minimal_fn_s0_re4_type fn, minimal_fn_s1_re4_type sfn, void** _this);
 typedef run_s01_Xof2_re4_type s01_Xof2_re4_dispatch_array [10];
 
 #endif //  SEEN_DEFS_S01_Xof2_RE4
@@ -114,7 +114,7 @@ s01_Xof2_re4_dispatch_array* init_s01_Xof2_re4_dispatch_array()
 
 
 void run_s01_Xof2_re4(u1 ac_pattern, u1 index, minimal_fn_s0_re4_type fn,
-  minimal_fn_s1_re4_type sfn, QVector<n8>& args, u4& retv,  void* _this)
+  minimal_fn_s1_re4_type sfn, QVector<n8>& args, u4& retv,  void** _this)
 {
  static s01_Xof2_re4_dispatch_array* dispatch_array = init_s01_Xof2_re4_dispatch_array();
  run_s01_Xof2_re4_type f = (*dispatch_array)[index];

@@ -1,7 +1,7 @@
 
 
 void _f_X45_6_(u1 ac_pattern, r8& retv,  QVector<n8>& args, minimal_fn_s0_re6_type fn,
-  minimal_fn_s1_re6_type sfn, void* _this) // # 30
+  minimal_fn_s1_re6_type sfn, void** _this) // # 30
 {
  switch(ac_pattern)
  {

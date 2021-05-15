@@ -5,11 +5,13 @@ if(!lambda)
  return;
 
 Chasm_Channel* sigma = ccp->channel("sigma");
-void* _this;
+void** _this; void* _this_;
 if(sigma)
- _this = sigma->first_carrier().value<void*>();
-else
- _this = nullptr;
+{
+ _this_ = sigma->first_carrier().value<void*>();
+ _this = &_this_;
+}
+else { _this = nullptr; _this_ = nullptr; }
 
 u2 index = type_patterns_4of3_map.value(fncode.distinct_type_pattern);
 run_s01_4of3_re0(fncode.type_pattern, index, (minimal_fn_s0_re0_type) fn,

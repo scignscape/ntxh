@@ -301,7 +301,7 @@ QString generate_function_code(u2 type_pattern, u1 ret, u1 number)
    retfull = QString("%1& retv, ").arg(returns[ret]);
 
  QString result = QString("void _f_%1_%2_(u4 pattern, %3%4"
-   "minimal_fn_s0_re%2_type fn,\n  minimal_fn_s1_re%2_type sfn, void* _this)"
+   "minimal_fn_s0_re%2_type fn,\n  minimal_fn_s1_re%2_type sfn, void** _this)"
    "\n{\n switch(pattern)\n {\n")
    .arg(type_pattern).arg(ret).arg(retfull).arg(sig_args);
 
@@ -417,7 +417,7 @@ QString gen_dispatch_array(u1 ret, u1 ac, u1 distinct_type_count, u2 arsize,
 typedef %4(*minimal_fn_s0_re%3_type)();
 typedef %4(_min_::*minimal_fn_s1_re%3_type)();
 typedef void(*run_s01_%1of%2_re%3_type)(u4 pattern, %5%6minimal_fn_s0_re%3_type fn,
-  minimal_fn_s1_re%3_type sfn, void* _this);
+  minimal_fn_s1_re%3_type sfn, void** _this);
 typedef run_s01_%1of%2_re%3_type s01_%1of%2_re%3_dispatch_array [%7];
 
 #endif //  SEEN_DEFS_S01_%1of%2_RE%3
@@ -473,7 +473,7 @@ s01_%1of%2_re%3_dispatch_array* init_s01_%1of%2_re%3_dispatch_array()
  result += QString(R"(
 
 void run_s01_%1of%2_re%3(u4 pattern, u4 index, minimal_fn_s0_re%3_type fn,
-  minimal_fn_s1_re%3_type sfn, %4%5 void* _this))")
+  minimal_fn_s1_re%3_type sfn, %4%5 void** _this))")
  .arg(ac).arg(distinct_type_count).arg(ret).arg(n8argtext).arg(retfull);
 
 //? u4 code_mask = 99999;
@@ -493,7 +493,7 @@ void run_s01_%1of%2_re%3(u4 pattern, u4 index, minimal_fn_s0_re%3_type fn,
  //  code %= %1;
 
 //   void run_s01_%1_re%2(u4 code, minimal_fn_s0_re%2_type fn,
-//     minimal_fn_s1_re%2_type sfn, void* _this))")
+//     minimal_fn_s1_re%2_type sfn, void** _this))")
 //     .arg(ac).arg(i); // // here ac = 0 and i = 0 always but keep the substitutions for clarity ...
 
 //      s01_X_reX_text += QString(R"(
@@ -530,7 +530,7 @@ void run_s01_%1of%2_re%3(u4 pattern, u4 index, minimal_fn_s0_re%3_type fn,
 //}
 
 //void run_s01_%1_re%2(u4 code, minimal_fn_s0_re%2_type fn,
-//   minimal_fn_s1_re%2_type sfn, %3%4, void* _this))")
+//   minimal_fn_s1_re%2_type sfn, %3%4, void** _this))")
 //   .arg(ac).arg(i).arg(retv).arg(natext);
 
 //   else if( (i > 0) )
@@ -539,7 +539,7 @@ void run_s01_%1of%2_re%3(u4 pattern, u4 index, minimal_fn_s0_re%3_type fn,
 //}
 
 //void run_s01_%1_re%2(u4 code, minimal_fn_s0_re%2_type fn,
-//   minimal_fn_s1_re%2_type sfn, %3, void* _this))")
+//   minimal_fn_s1_re%2_type sfn, %3, void** _this))")
 //   .arg(ac).arg(i).arg(retv.left(retv.size() - 2));
 
 //   else
@@ -548,7 +548,7 @@ void run_s01_%1of%2_re%3(u4 pattern, u4 index, minimal_fn_s0_re%3_type fn,
 //}
 
 //void run_s01_%1_re%2(u4 code, minimal_fn_s0_re%2_type fn,
-//  minimal_fn_s1_re%2_type sfn, void* _this))")
+//  minimal_fn_s1_re%2_type sfn, void** _this))")
 //  .arg(ac).arg(i); // // here ac = 0 and i = 0 always but keep the substitutions for clarity ...
 
 //   s01_X_reX_text += QString(R"(
@@ -686,7 +686,7 @@ void generate_X_1()
    QString fn_text = QString(R"(
 
 void _f_X%1_%2_(u1 ac, %3 QVector<n8>& args, minimal_fn_s0_re%2_type fn,
-  minimal_fn_s1_re%2_type sfn, void* _this)
+  minimal_fn_s1_re%2_type sfn, void** _this)
 {
  switch(ac)
  {
@@ -754,7 +754,7 @@ void generate_X_2(const QMap<u2, u2>& type_patterns_map)
    QString fn_text = QString(R"(
 
 void _f_X%1_%2_(u1 ac_pattern, %3 QVector<n8>& args, minimal_fn_s0_re%2_type fn,
-  minimal_fn_s1_re%2_type sfn, void* _this) // # %4
+  minimal_fn_s1_re%2_type sfn, void** _this) // # %4
 {
  switch(ac_pattern)
  {
@@ -1013,7 +1013,7 @@ QString gen_dispatch_array_Xof1(u1 ret)
 typedef %2(*minimal_fn_s0_re%1_type)();
 typedef %2(_min_::*minimal_fn_s1_re%1_type)();
 typedef void(*run_s01_Xof1_re%1_type)(u1 ac, %3 QVector<n8>& args,
-  minimal_fn_s0_re%1_type fn, minimal_fn_s1_re%1_type sfn, void* _this);
+  minimal_fn_s0_re%1_type fn, minimal_fn_s1_re%1_type sfn, void** _this);
 typedef run_s01_Xof1_re%1_type s01_Xof1_re%1_dispatch_array [10];
 
 #endif //  SEEN_DEFS_S01_Xof1_RE%1
@@ -1047,7 +1047,7 @@ s01_Xof1_re%1_dispatch_array* init_s01_Xof1_re%1_dispatch_array()
  result += QString(R"(
 
 void run_s01_Xof1_re%1(u1 ac, u1 index, minimal_fn_s0_re%1_type fn,
-  minimal_fn_s1_re%1_type sfn, QVector<n8>& args, %2 void* _this))")
+  minimal_fn_s1_re%1_type sfn, QVector<n8>& args, %2 void** _this))")
  .arg(ret).arg(retfull);
 
  result += QString(R"(
@@ -1098,7 +1098,7 @@ QString gen_dispatch_array_Xof2(QMap<u2, u2>& type_patterns_map, u1 ret)
 typedef %2(*minimal_fn_s0_re%1_type)();
 typedef %2(_min_::*minimal_fn_s1_re%1_type)();
 typedef void(*run_s01_Xof2_re%1_type)(u1 ac, %3 QVector<n8>& args,
-  minimal_fn_s0_re%1_type fn, minimal_fn_s1_re%1_type sfn, void* _this);
+  minimal_fn_s0_re%1_type fn, minimal_fn_s1_re%1_type sfn, void** _this);
 typedef run_s01_Xof2_re%1_type s01_Xof2_re%1_dispatch_array [10];
 
 #endif //  SEEN_DEFS_S01_Xof2_RE%1
@@ -1141,7 +1141,7 @@ s01_Xof2_re%1_dispatch_array* init_s01_Xof2_re%1_dispatch_array()
  result += QString(R"(
 
 void run_s01_Xof2_re%1(u1 ac_pattern, u1 index, minimal_fn_s0_re%1_type fn,
-  minimal_fn_s1_re%1_type sfn, QVector<n8>& args, %2 void* _this))")
+  minimal_fn_s1_re%1_type sfn, QVector<n8>& args, %2 void** _this))")
  .arg(ret).arg(retfull);
 
  result += QString(R"(
@@ -1252,11 +1252,13 @@ if(!retvalue)
 
   s01_X_reX_ch_eval_text += R"(
 Chasm_Channel* sigma = ccp->channel("sigma");
-void* _this;
+void** _this; void* _this_;
 if(sigma)
- _this = sigma->first_carrier().value<void*>();
-else
- _this = nullptr;
+{
+ _this_ = sigma->first_carrier().value<void*>();
+ _this = &_this_;
+}
+else { _this = nullptr; _this_ = nullptr; }
 )";
 
   QString pasn8s;
@@ -1341,11 +1343,13 @@ QVector<n8> args;
 lambda->pasn8vector(args, fncode.arg_count);
 
 Chasm_Channel* sigma = ccp->channel("sigma");
-void* _this;
+void** _this; void* _this_;
 if(sigma)
-  _this = sigma->first_carrier().value<void*>();
-else
-  _this = nullptr;
+{
+ _this_ = sigma->first_carrier().value<void*>();
+ _this = &_this_;
+}
+else { _this = nullptr; _this_ = nullptr; }
 )";
 
 if(ret > 0)

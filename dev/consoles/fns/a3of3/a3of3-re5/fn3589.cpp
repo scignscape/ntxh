@@ -1,5 +1,5 @@
 void _f_3589_5_(u4 pattern, QByteArray& retv, n8 arg1, n8 arg2, n8 arg3, minimal_fn_s0_re5_type fn,
-  minimal_fn_s1_re5_type sfn, void* _this)
+  minimal_fn_s1_re5_type sfn, void** _this)
 {
  switch(pattern)
  {

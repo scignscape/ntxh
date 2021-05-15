@@ -1,5 +1,5 @@
 void _f_4123_8_(u4 pattern, n8& retv, n8 arg1, n8 arg2, n8 arg3, n8 arg4, minimal_fn_s0_re8_type fn,
-  minimal_fn_s1_re8_type sfn, void* _this)
+  minimal_fn_s1_re8_type sfn, void** _this)
 {
  switch(pattern)
  {
