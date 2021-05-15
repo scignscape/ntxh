@@ -4,11 +4,11 @@
 
 typedef r8(*minimal_fn_s0_re6_type)();
 typedef r8(_min_::*minimal_fn_s1_re6_type)();
-typedef void(*run_s01_Xof1_re6_type)(u1 ac, r8& retv,  QVector<n8>& arg1s,
-  minimal_fn_s0_re6_type fn, minimal_fn_s1_re6_type sfn, void* _this);
+typedef void(*run_s01_Xof1_re6_type)(u1 ac, r8& retv,  QVector<n8>& args,
+  minimal_fn_s0_re6_type fn, minimal_fn_s1_re6_type sfn, void** _this);
 typedef run_s01_Xof1_re6_type s01_Xof1_re6_dispatch_array [10];
 
-#endif //  SEEN_DEFS_S01_Xof1_REr8
+#endif //  SEEN_DEFS_S01_Xof1_RE6
 
 #ifdef FULL_INCLUDE
 
@@ -45,7 +45,7 @@ s01_Xof1_re6_dispatch_array* init_s01_Xof1_re6_dispatch_array()
 
 
 void run_s01_Xof1_re6(u1 ac, u1 index, minimal_fn_s0_re6_type fn,
-  minimal_fn_s1_re6_type sfn, QVector<n8>& args, r8& retv,  void* _this)
+  minimal_fn_s1_re6_type sfn, QVector<n8>& args, r8& retv,  void** _this)
 {
  static s01_Xof1_re6_dispatch_array* dispatch_array = init_s01_Xof1_re6_dispatch_array();
  run_s01_Xof1_re6_type f = (*dispatch_array)[index];

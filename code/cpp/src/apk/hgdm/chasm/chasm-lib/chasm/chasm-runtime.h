@@ -234,8 +234,8 @@ public:
 
    else if(fncode.convention == 0)
      ;// _evaluate_s0_Xof1(ccp, fncode, fn, rcar);
-   //     else if(fncode.convention == 1)
-   //       evaluate_s1_Xof1(ccp, fncode, fn, rcar);
+   else if(fncode.convention == 1)
+     _evaluate_s01_Xof1(ccp, fncode, nullptr, (void(_min_::*)()) sfn, rcar);
   }
   else if(fncode.distinct_type_pattern < 100)
   {
@@ -261,7 +261,7 @@ public:
  {
   if(fncode.distinct_type_pattern < 10)
   {
-   if(fncode.distinct_type_pattern == 0)
+   if(fncode.arg_count == 0)
    {
     if(fncode.convention == 0)
       _evaluate_s01_0_rX(ccp, fncode, (void(*)()) fn, nullptr, rcar);

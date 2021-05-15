@@ -362,7 +362,7 @@ QString generate_function_code(u2 type_pattern, u1 ret, u1 number)
 
   case_txt += QString(R"(
    auto _sfn = (%1(_min_::*)(%2))(sfn);
-   if(_this) %3((_min_*)_this->*_sfn)(%4);
+   if(_this) %3((_min_*)*_this->*_sfn)(%4);
    else %3((%5(*)(%2))fn)(%4);
   )").arg(rettext).arg(sig_type_args).arg(retv).arg(call_args).arg(rettext);
 
@@ -710,7 +710,7 @@ void _f_X%1_%2_(u1 ac, %3 QVector<n8>& args, minimal_fn_s0_re%2_type fn,
  case %1:
   {%2
    auto _sfn = (%3(_min_::*)(%4))(sfn);
-   if(_this) %5((_min_*)_this->*_sfn)(%6);
+   if(_this) %5((_min_*)*_this->*_sfn)(%6);
    else %5((%3(*)(%4))fn)(%6);
   } break;
 )").arg(k).arg(at).arg(rettext).arg(st).arg(retv).arg(aat);
@@ -769,7 +769,7 @@ void _f_X%1_%2_(u1 ac_pattern, %3 QVector<n8>& args, minimal_fn_s0_re%2_type fn,
  case 0: // 2 args, lower-number pretype first
  {%1
   auto _sfn = (%2(_min_::*)(%3))(sfn);
-  if(_this) %4((_min_*)_this->*_sfn)(a1,a2);
+  if(_this) %4((_min_*)*_this->*_sfn)(a1,a2);
   else %4((%2(*)(%3))fn)(a1,a2);
  } break;
 )").arg(argstext).arg(rettext).arg(sigatext).arg(retv);
@@ -784,7 +784,7 @@ void _f_X%1_%2_(u1 ac_pattern, %3 QVector<n8>& args, minimal_fn_s0_re%2_type fn,
  case 255: // 2 args, higher-number pretype first
  {%1
   auto _sfn = (%2(_min_::*)(%3))(sfn);
-  if(_this) %4((_min_*)_this->*_sfn)(a1,a2);
+  if(_this) %4((_min_*)*_this->*_sfn)(a1,a2);
   else %4((%2(*)(%3))fn)(a1,a2);
  } break;
 )").arg(argstext).arg(rettext).arg(sigatext).arg(retv);
@@ -817,7 +817,7 @@ void _f_X%1_%2_(u1 ac_pattern, %3 QVector<n8>& args, minimal_fn_s0_re%2_type fn,
      fn_text += QString(R"(
   {%1
    auto _sfn = (%2(_min_::*)(%3))(sfn);
-   if(_this) %4((_min_*)_this->*_sfn)(%5);
+   if(_this) %4((_min_*)*_this->*_sfn)(%5);
    else %4((%2(*)(%3))fn)(%5);
   } break;
 )").arg(argstext).arg(rettext).arg(sigatext).arg(retv).arg(atext);
@@ -826,7 +826,7 @@ void _f_X%1_%2_(u1 ac_pattern, %3 QVector<n8>& args, minimal_fn_s0_re%2_type fn,
 // case %1:
 //  {%2
 //   auto _sfn = (%3(_min_::*)(%4))(sfn);
-//   if(_this) %5((_min_*)_this->*_sfn)(%6);
+//   if(_this) %5((_min_*)*_this->*_sfn)(%6);
 //   else %5((%3(*)(%4))fn)(%6);
 //  } break;
 //)").arg(k).arg(at).arg(rettext).arg(st).arg(retv).arg(aat);
@@ -1433,17 +1433,17 @@ int main(int argc, char *argv[])
  };
 #undef INCLUDE_MAP_CODE// def INCLUDE_MAP_CODE
 
-// generate_X_1();
+ generate_X_1();
  generate_X_2(type_patterns_2_map);
 
+ gen_dispatch_arrays_Xof1();
  gen_dispatch_arrays_Xof2(type_patterns_2_map);
 
  gen_eval_files_Xof1or2();
 
 // generate_type_patterns_maps();
 
-  // //
-// generate_4_3(type_patterns_4of3_map);
+  // // generate_4_3(type_patterns_4of3_map);
 
  gen_dispatch_arrays(type_patterns_4of3_map, "4of3", 4);
  gen_fn_files(type_patterns_4of3_map, "4of3", 4);
@@ -1764,20 +1764,20 @@ QString generate_function_code(u1 retc, u2 key, QString sc0, QString sc1, u1 ac)
  {
  case 0:
   sfn_line += QString("auto _sfn = (%1(_min_::*)())(sfn);\n").arg(ret);
-  if_this += "((_min_*)_this->*_sfn)();\n";//.arg(ret);
+  if_this += "((_min_*)*_this->*_sfn)();\n";//.arg(ret);
   if_this_else += QString("((%1(*)()) fn)();\n}\n").arg(ret);
   break;
 
  case 1:  //(%2))
   sfn_line += QString("auto _sfn = (%1(_min_::*)(%2))(sfn);\n").arg(ret).arg(types[1]);
-  if_this += " ((_min_*)_this->*_sfn)(a1);"; // //(%2))\n"; //.arg(ret).arg(types[1]);
+  if_this += " ((_min_*)*_this->*_sfn)(a1);"; // //(%2))\n"; //.arg(ret).arg(types[1]);
   if_this_else += QString("((%1(*)(%2)) fn)(a1);\n}\n").arg(ret).arg(types[1]);
   break;
 
  case 2: //(%2,%3))
   sfn_line += QString("auto _sfn = (%1(_min_::*)(%2,%3))(sfn);\n").arg(ret)
     .arg(types[1]).arg(types[2]);
-  if_this += " ((_min_*)_this->*_sfn)(a1,a2);"; // //(2,3))\n")
+  if_this += " ((_min_*)*_this->*_sfn)(a1,a2);"; // //(2,3))\n")
     //.arg(types[1]).arg(types[2]);
   if_this_else += QString("((%1(*)(%2,%3)) fn)(a1,a2);\n}\n")
     .arg(ret).arg(types[1]).arg(types[2]);
@@ -1786,7 +1786,7 @@ QString generate_function_code(u1 retc, u2 key, QString sc0, QString sc1, u1 ac)
  case 3: //(%2,%3,%4))
   sfn_line += QString("auto _sfn = (%1(_min_::*)(%2,%3,%4))(sfn);\n")
     .arg(ret).arg(types[1]).arg(types[2]).arg(types[3]);
-  if_this += " ((_min_*)_this->*_sfn)(a1,a2,a3);"; //(%2,%3,%4))\n"
+  if_this += " ((_min_*)*_this->*_sfn)(a1,a2,a3);"; //(%2,%3,%4))\n"
     //.arg(ret).arg(types[1]).arg(types[2]).arg(types[3]);
   if_this_else += QString("((%1(*)(%2,%3,%4))fn)(a1,a2,a3);\n}\n")
     .arg(ret).arg(types[1]).arg(types[2]).arg(types[3]);
