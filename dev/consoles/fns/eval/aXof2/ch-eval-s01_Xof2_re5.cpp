@@ -24,8 +24,8 @@ QByteArray& rr = cc.value_as<QByteArray>();
 
 
 u1 ac_pattern = (fncode.arg_count == 2)?
-  ( (fncode.type_pattern_binary == 1)? 255: 0):
-  ( ((fncode.arg_count - 3) << 5)
+  ( (fncode.type_pattern_binary == 2)? 255: 0):
+  ( ((fncode.arg_count - 3) << 6)
     | (fncode.type_pattern_binary &
         ((1 << fncode.arg_count) - 1) ) );
 

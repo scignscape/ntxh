@@ -4,17 +4,18 @@
 //     (See accompanying file LICENSE_1_0.txt or copy at
 //           http://www.boost.org/LICENSE_1_0.txt)
 
+#include "chasm-runtime.h"
 
 u1 _early_parse(Chasm_Function_Code& cfc, n8& cue)
 {
- if(cue >= 10000000000) // 10 digits
+ if(cue >= 10000000000) // 11 digits
  {
   cfc.arg_count = cue / 10000000000;
   cue %= 10000000000;
   cfc.convention = cue / 1000000000;
   cue %= 1000000000;
   cfc.return_code = cue / 100000000;
-  cue %= 100000000; // 8 digits left
+  cue %= 100000000; // 9 digits left
   return 8;
  }
  else if(cue >= 1000000000) // 10 digits
@@ -57,7 +58,7 @@ u1 _early_parse(Chasm_Function_Code& cfc, n8& cue)
   cue %= 10000; // 4 digits left
   return 4;
  }
- else if(cue >= 10000) // 6 digits
+ else if(cue >= 100000) // 6 digits
  {
   cfc.arg_count = cue / 100000;
   cue %= 100000;

@@ -60,11 +60,17 @@ SOURCES += \
   $$SRC_DIR/unified-runtime-object.cpp \
   $$SRC_DIR/metatype-object.cpp \
   $$SRC_DIR/chasm/chasm-runtime.cpp \
+  $$SRC_DIR/chasm/chasm-runtime.op-cfc.cpp \
   $$SRC_DIR/chasm/chasm-channel.cpp \
   $$SRC_DIR/chasm/chasm-call-package.cpp \
   $$SRC_DIR/chasm/chasm-carrier.cpp \
   $$SRC_DIR/chasm/chasm-type-object.cpp \
 
+
+#$$SRC_DIR/chasm/chasm-runtime.eval-4of3.cpp \
+#$$SRC_DIR/chasm/chasm-runtime.eval-3of3.cpp \
+#$$SRC_DIR/chasm/chasm-runtime.eval-Xof2.cpp \
+#$$SRC_DIR/chasm/chasm-runtime.eval-Xof1.cpp \
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

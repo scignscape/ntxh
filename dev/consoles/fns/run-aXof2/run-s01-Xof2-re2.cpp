@@ -4,7 +4,7 @@
 
 typedef u2(*minimal_fn_s0_re2_type)();
 typedef u2(_min_::*minimal_fn_s1_re2_type)();
-typedef void(*run_s01_Xof1_re2_type)(u1 ac, u2& retv,  QVector<n8>& arg1s,
+typedef void(*run_s01_Xof2_re2_type)(u1 ac, u2& retv,  QVector<n8>& args,
   minimal_fn_s0_re2_type fn, minimal_fn_s1_re2_type sfn, void* _this);
 typedef run_s01_Xof2_re2_type s01_Xof2_re2_dispatch_array [10];
 
@@ -13,51 +13,51 @@ typedef run_s01_Xof2_re2_type s01_Xof2_re2_dispatch_array [10];
 #ifdef FULL_INCLUDE
 
  
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn01.cpp" // #0
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn02.cpp" // #1
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn03.cpp" // #2
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn04.cpp" // #3
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn05.cpp" // #4
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn06.cpp" // #5
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn07.cpp" // #6
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn08.cpp" // #7
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn09.cpp" // #8
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn12.cpp" // #9
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn13.cpp" // #10
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn14.cpp" // #11
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn15.cpp" // #12
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn16.cpp" // #13
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn17.cpp" // #14
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn18.cpp" // #15
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn19.cpp" // #16
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn23.cpp" // #17
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn24.cpp" // #18
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn25.cpp" // #19
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn26.cpp" // #20
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn27.cpp" // #21
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn28.cpp" // #22
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn29.cpp" // #23
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn34.cpp" // #24
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn35.cpp" // #25
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn36.cpp" // #26
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn37.cpp" // #27
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn38.cpp" // #28
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn39.cpp" // #29
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn45.cpp" // #30
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn46.cpp" // #31
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn47.cpp" // #32
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn48.cpp" // #33
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn49.cpp" // #34
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn56.cpp" // #35
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn57.cpp" // #36
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn58.cpp" // #37
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn59.cpp" // #38
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn67.cpp" // #39
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn68.cpp" // #40
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn69.cpp" // #41
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn78.cpp" // #42
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn79.cpp" // #43
-#include "./dev/consoles/fns/aXof2/aXof2-re2/fn89.cpp" // #44
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_01.cpp" // #0
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_02.cpp" // #1
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_03.cpp" // #2
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_04.cpp" // #3
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_05.cpp" // #4
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_06.cpp" // #5
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_07.cpp" // #6
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_08.cpp" // #7
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_09.cpp" // #8
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_12.cpp" // #9
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_13.cpp" // #10
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_14.cpp" // #11
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_15.cpp" // #12
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_16.cpp" // #13
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_17.cpp" // #14
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_18.cpp" // #15
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_19.cpp" // #16
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_23.cpp" // #17
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_24.cpp" // #18
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_25.cpp" // #19
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_26.cpp" // #20
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_27.cpp" // #21
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_28.cpp" // #22
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_29.cpp" // #23
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_34.cpp" // #24
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_35.cpp" // #25
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_36.cpp" // #26
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_37.cpp" // #27
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_38.cpp" // #28
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_39.cpp" // #29
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_45.cpp" // #30
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_46.cpp" // #31
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_47.cpp" // #32
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_48.cpp" // #33
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_49.cpp" // #34
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_56.cpp" // #35
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_57.cpp" // #36
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_58.cpp" // #37
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_59.cpp" // #38
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_67.cpp" // #39
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_68.cpp" // #40
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_69.cpp" // #41
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_78.cpp" // #42
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_79.cpp" // #43
+#include "./dev/consoles/fns/aXof2/aXof2-re2/fn_89.cpp" // #44
 
 s01_Xof2_re2_dispatch_array* init_s01_Xof2_re2_dispatch_array()
 {

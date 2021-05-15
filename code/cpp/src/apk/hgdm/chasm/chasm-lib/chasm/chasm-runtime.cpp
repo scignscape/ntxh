@@ -73,14 +73,14 @@
 
 #include "chasm-call-package.h"
 #include "chasm-channel.h"
-
 #include "chasm-type-object.h"
 
 
-#include "chasm-runtime.op-cfc.cpp"
-#include "chasm-runtime.eval-4of3.cpp"
-#include "chasm-runtime.eval-Xof1.cpp"
-#include "chasm-runtime.eval-Xof2.cpp"
+//#include "chasm-runtime.op-cfc.cpp"
+//#include "chasm-runtime.eval-4of3.cpp"
+//#include "chasm-runtime.eval-3of3.cpp"
+//#include "chasm-runtime.eval-Xof2.cpp"
+//#include "chasm-runtime.eval-Xof1.cpp"
 
 
 

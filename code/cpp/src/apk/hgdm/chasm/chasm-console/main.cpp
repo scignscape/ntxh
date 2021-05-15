@@ -1101,6 +1101,49 @@ void run_teste4(Chasm_Runtime* csr)
 
 
 
+QStringList* teste3(QString start, QVector<u4>& nums, u2 c1)
+{
+ QStringList* result = new QStringList(start);
+ u2 i = 0;
+ for(u4 n: nums)
+ {
+  ++i;
+  (*result) << QString("%1=%2").arg(i).arg(n, c1, 10, QLatin1Char('@') );
+ }
+ return result;
+}
+
+void run_teste3(Chasm_Runtime* csr)
+{
+ Chasm_Call_Package* ccp = csr->new_call_package();
+
+
+ ccp->add_new_channel("lambda");
+
+ QString a1 = "true";
+ QVector<u4> nums {12, 144, 542, 5578};
+ u2 fw = 10;
+
+ Chasm_Carrier cc1 = csr->gen_carrier<QString>(&a1);
+ Chasm_Carrier cc2 = csr->gen_carrier<n8&>(&nums);
+ Chasm_Carrier cc3 = csr->gen_carrier<u2>(&fw);
+
+ ccp->add_carriers({cc1,cc2,cc3});
+
+ ccp->add_new_channel("retvalue");
+
+ Chasm_Carrier cc0 = csr->gen_carrier<void*>(csr->Retvalue._ptr);
+ ccp->add_carrier(cc0);
+
+ csr->evaluate(ccp, 309302_cfc, //(minimal_fn_s0_re4_type)
+         &teste3, &cc0);
+
+ QStringList* result = cc0.value<QStringList*>();
+ qDebug() << "r = " << *result;
+}
+
+
+
 
 QStringList* teste4of1(QString start, QString start1, QString start2, QString start3)
 {
@@ -1204,27 +1247,77 @@ void run_teste5of2(Chasm_Runtime* csr)
  Chasm_Carrier cc0 = csr->gen_carrier<void*>(csr->Retvalue._ptr);
  ccp->add_carrier(cc0);
 
-// Chasm_Function_Code cfc1 = 50964446_cfc;
-// Chasm_Function_Code cfc2 = 609787878_cfc;
-
  csr->evaluate(ccp, 50934334_cfc, //(minimal_fn_s0_re4_type)
          &teste5of2, &cc0);
 
-// csr->evaluate(ccp, 4090233122_cfc, //(minimal_fn_s0_re4_type)
-//         &teste4, &cc0);
-
-// csr->e4(ccp, 309023312_cfc, //(minimal_fn_s0_re4_type)
-//         &teste4, &cc0);
-
-
-
-
-// csr->evaluate_s1(ccp, 89, (minimal_fn_s1_type) &test0s1::testr, &cc0);
-
-// csr->evaluate_s01(ccp, 89, (minimal_fn_s1_type) &test0s1::testr, &cc0);
-
  QStringList* result = cc0.value<QStringList*>();
  qDebug() << "r = " << *result;
+}
+
+
+
+
+r8 teste2of2(u1 x, n8 y)
+{
+ return ((r8) x) / y;
+}
+
+r8 teste2of2rev(n8 x, u1 y)
+{
+ return ((r8) x) / y;
+}
+
+
+void run_teste2of2(Chasm_Runtime* csr)
+{
+ Chasm_Call_Package* ccp = csr->new_call_package();
+
+ ccp->add_new_channel("lambda");
+
+ u1 a1 = 12;
+ n8 a2 = 1200000000000;
+
+ Chasm_Carrier cc1 = csr->gen_carrier<u1>(&a1);
+ Chasm_Carrier cc2 = csr->gen_carrier<n8>(&a2);
+
+ ccp->add_carriers({cc1,cc2});
+
+ ccp->add_new_channel("retvalue");
+
+ Chasm_Carrier cc0 = csr->gen_carrier<r8>(csr->Retvalue._r8);
+ ccp->add_carrier(cc0);
+
+ csr->evaluate(ccp, 20618_cfc, //(minimal_fn_s0_re4_type)
+         &teste2of2, &cc0);
+
+ r8 result = cc0.value<r8>();
+ qDebug() << "r = " << result;
+}
+
+void run_teste2of2rev(Chasm_Runtime* csr)
+{
+ Chasm_Call_Package* ccp = csr->new_call_package();
+
+ ccp->add_new_channel("lambda");
+
+ n8 a1 = 1200000000000;
+ u1 a2 = 12;
+
+ Chasm_Carrier cc1 = csr->gen_carrier<n8>(&a1);
+ Chasm_Carrier cc2 = csr->gen_carrier<u1>(&a2);
+
+ ccp->add_carriers({cc1,cc2});
+
+ ccp->add_new_channel("retvalue");
+
+ Chasm_Carrier cc0 = csr->gen_carrier<r8>(csr->Retvalue._r8);
+ ccp->add_carrier(cc0);
+
+ csr->evaluate(ccp, 20681_cfc, //(minimal_fn_s0_re4_type)
+         &teste2of2rev, &cc0);
+
+ r8 result = cc0.value<r8>();
+ qDebug() << "r = " << result;
 }
 
 
@@ -1234,11 +1327,15 @@ int main(int argc, char *argv[])
  csr->init_no_file_session();
 
  qDebug() << "\n----\n";
-// run_teste4(csr);
+//
+ run_teste3(csr);
 //
 //
- run_teste4of1(csr);
- run_teste5of2(csr);
+// run_teste4of1(csr);
+// run_teste5of2(csr);
+
+// run_teste2of2(csr);
+// run_teste2of2rev(csr);
 
  qDebug() << "\n===\n";
 

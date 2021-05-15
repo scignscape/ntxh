@@ -1,10 +1,24 @@
 
 
 void _f_X89_9_(u1 ac_pattern, void*& retv,  QVector<n8>& args, minimal_fn_s0_re9_type fn,
-  minimal_fn_s1_re9_type sfn, void* _this)
+  minimal_fn_s1_re9_type sfn, void* _this) // # 44
 {
  switch(ac_pattern)
  {
+
+ case 0: // 2 args, lower-number pretype first
+ {n8 a1=*(n8*)args[0];n8 a2=*(n8*)args[1];
+  auto _sfn = (void*(_min_::*)(n8,n8))(sfn);
+  if(_this) retv=((_min_*)_this->*_sfn)(a1,a2);
+  else retv=((void*(*)(n8,n8))fn)(a1,a2);
+ } break;
+
+ case 255: // 2 args, higher-number pretype first
+ {n8 a1=*(n8*)args[0];n8 a2=*(n8*)args[1];
+  auto _sfn = (void*(_min_::*)(n8,n8))(sfn);
+  if(_this) retv=((_min_*)_this->*_sfn)(a1,a2);
+  else retv=((void*(*)(n8,n8))fn)(a1,a2);
+ } break;
 
   case 0 + 0b001:
   {n8 a1=*(n8*)args[0];n8 a2=*(n8*)args[1];n8 a3=*(n8*)args[2];

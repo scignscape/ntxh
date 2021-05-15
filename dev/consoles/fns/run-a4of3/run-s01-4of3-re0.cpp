@@ -272,4 +272,3 @@ void run_s01_4of3_re0(u4 pattern, u4 index, minimal_fn_s0_re0_type fn,
 }
 
 #endif //def FULL_INCLUDE
-   

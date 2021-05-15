@@ -206,6 +206,11 @@ public:
  void evaluate_4of3_re9(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
    minimal_fn_s0_re9_type fn, minimal_fn_s1_re9_type sfn, Chasm_Carrier* rcar);
 
+
+ void evaluate_3of3_re9(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+   minimal_fn_s0_re9_type fn, minimal_fn_s1_re9_type sfn, Chasm_Carrier* rcar);
+
+
  void evaluate_Xof1_re0(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
    minimal_fn_s0_re0_type fn, minimal_fn_s1_re0_type sfn);
  void evaluate_Xof1_re1(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
@@ -228,6 +233,24 @@ public:
    minimal_fn_s0_re9_type fn, minimal_fn_s1_re9_type sfn, Chasm_Carrier* rcar);
 
 
+ void evaluate_Xof2_re0(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+   minimal_fn_s0_re0_type fn, minimal_fn_s1_re0_type sfn);
+ void evaluate_Xof2_re1(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+   minimal_fn_s0_re1_type fn, minimal_fn_s1_re1_type sfn, Chasm_Carrier* rcar);
+ void evaluate_Xof2_re2(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+   minimal_fn_s0_re2_type fn, minimal_fn_s1_re2_type sfn, Chasm_Carrier* rcar);
+ void evaluate_Xof2_re3(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+   minimal_fn_s0_re3_type fn, minimal_fn_s1_re3_type sfn, Chasm_Carrier* rcar);
+ void evaluate_Xof2_re4(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+   minimal_fn_s0_re4_type fn, minimal_fn_s1_re4_type sfn, Chasm_Carrier* rcar);
+ void evaluate_Xof2_re5(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+   minimal_fn_s0_re5_type fn, minimal_fn_s1_re5_type sfn, Chasm_Carrier* rcar);
+ void evaluate_Xof2_re6(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+   minimal_fn_s0_re6_type fn, minimal_fn_s1_re6_type sfn, Chasm_Carrier* rcar);
+ void evaluate_Xof2_re7(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+   minimal_fn_s0_re7_type fn, minimal_fn_s1_re7_type sfn, Chasm_Carrier* rcar);
+ void evaluate_Xof2_re8(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+   minimal_fn_s0_re8_type fn, minimal_fn_s1_re8_type sfn, Chasm_Carrier* rcar);
  void evaluate_Xof2_re9(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
    minimal_fn_s0_re9_type fn, minimal_fn_s1_re9_type sfn, Chasm_Carrier* rcar);
 
@@ -259,20 +282,18 @@ public:
  {
   switch (fncode.return_code)
   {
-//  case 0: evaluate_Xof1_re0(ccp, fncode, (minimal_fn_s0_re0_type) fn, nullptr); break;
-//  case 1: evaluate_Xof1_re1(ccp, fncode, (minimal_fn_s0_re1_type) fn, nullptr, rcar); break;
-//  case 2: evaluate_Xof1_re2(ccp, fncode, (minimal_fn_s0_re2_type) fn, nullptr, rcar); break;
-//  case 3: evaluate_Xof1_re3(ccp, fncode, (minimal_fn_s0_re3_type) fn, nullptr, rcar); break;
-//  case 4: evaluate_Xof1_re4(ccp, fncode, (minimal_fn_s0_re4_type) fn, nullptr, rcar); break;
-//  case 5: evaluate_Xof1_re5(ccp, fncode, (minimal_fn_s0_re5_type) fn, nullptr, rcar); break;
-//  case 6: evaluate_Xof1_re6(ccp, fncode, (minimal_fn_s0_re6_type) fn, nullptr, rcar); break;
-//  case 7: evaluate_Xof1_re7(ccp, fncode, (minimal_fn_s0_re7_type) fn, nullptr, rcar); break;
-//  case 8: evaluate_Xof1_re8(ccp, fncode, (minimal_fn_s0_re8_type) fn, nullptr, rcar); break;
+//  case 0: evaluate_Xof2_re0(ccp, fncode, (minimal_fn_s0_re0_type) fn, nullptr); break;
+//  case 1: evaluate_Xof2_re1(ccp, fncode, (minimal_fn_s0_re1_type) fn, nullptr, rcar); break;
+//  case 2: evaluate_Xof2_re2(ccp, fncode, (minimal_fn_s0_re2_type) fn, nullptr, rcar); break;
+//  case 3: evaluate_Xof2_re3(ccp, fncode, (minimal_fn_s0_re3_type) fn, nullptr, rcar); break;
+//  case 4: evaluate_Xof2_re4(ccp, fncode, (minimal_fn_s0_re4_type) fn, nullptr, rcar); break;
+//  case 5: evaluate_Xof2_re5(ccp, fncode, (minimal_fn_s0_re5_type) fn, nullptr, rcar); break;
+  case 6: evaluate_Xof2_re6(ccp, fncode, (minimal_fn_s0_re6_type) fn, nullptr, rcar); break;
+//  case 7: evaluate_Xof2_re7(ccp, fncode, (minimal_fn_s0_re7_type) fn, nullptr, rcar); break;
+//  case 8: evaluate_Xof2_re8(ccp, fncode, (minimal_fn_s0_re8_type) fn, nullptr, rcar); break;
   case 9: evaluate_Xof2_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, nullptr, rcar); break;
   }
  }
-
-
 
 // template<typename SFN_Type>
 
@@ -297,6 +318,18 @@ public:
   }
  }
 
+
+
+ template<typename FN_Type>
+ void evaluate_s0_3of3(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
+   FN_Type fn, Chasm_Carrier* rcar)
+ {
+  switch (fncode.return_code)
+  {
+  case 9: evaluate_3of3_re9(ccp, fncode, fn, nullptr, rcar); break;
+  }
+ }
+
  template<typename RETURN_Type, typename CLASS_Type>
  void evaluate(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
                RETURN_Type (CLASS_Type::*sfn), Chasm_Carrier* rcar = nullptr)
@@ -307,23 +340,8 @@ public:
    {
     if(fncode.distinct_type_pattern < 10)
     {
-//     if(fncode.convention == 0)
-//       evaluate_s0_Xof1(ccp, fncode, fn, rcar);
      if(fncode.convention == 1)
        evaluate_s1_Xof1(ccp, fncode, sfn, rcar);
-    }
-    else if(fncode.distinct_type_pattern < 100)
-    {
-
-    }
-    else if(fncode.distinct_type_pattern < 1000)
-    {
-
-    }
-    else if(fncode.distinct_type_pattern < 10000)
-    {
-     // // 3 args ...
-     //evaluate_4of3_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, nullptr, rcar);
     }
    }
   }
@@ -349,30 +367,46 @@ public:
    if(fncode.convention == 0)
      evaluate_s0_Xof2(ccp, fncode, fn, rcar);
   }
+  else if(fncode.arg_count == 4)
+   // // 3 args ...
+   ;//    evaluate_4of3_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, nullptr, rcar);
+  else if(fncode.arg_count == 3)
+   // // 3 args ...
+    evaluate_s0_3of3(ccp, fncode, (minimal_fn_s0_re9_type) fn, rcar);
 
-  switch(fncode.arg_count)
-  {
-  case 5:
-   {
 
-   }
-  case 4:
-   {
-    if(fncode.distinct_type_pattern < 100)
-    {
+//  switch(fncode.arg_count)
+//  {
+////  case 5:
+////   {
 
-    }
-    else if(fncode.distinct_type_pattern < 1000)
-    {
+////   }
+//  case 4:
+//   {
+////    if(fncode.distinct_type_pattern < 100)
+////    {
 
-    }
-    else if(fncode.distinct_type_pattern < 10000)
-    {
-     // // 3 args ...
-     evaluate_4of3_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, nullptr, rcar);
-    }
-   }
-  }
+////    }
+////    else if(fncode.distinct_type_pattern < 1000)
+////    {
+
+////    }
+////    else
+//    if(fncode.distinct_type_pattern < 10000)
+//    {
+//     // // 3 args ...
+//     evaluate_4of3_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, nullptr, rcar);
+//    }
+//   }
+//  case 3:
+//   {
+//    if(fncode.distinct_type_pattern < 10000)
+//    {
+//        // // 3 args ...
+//     evaluate_4of3_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, nullptr, rcar);
+//    }
+//   }
+//  }
 
   //evaluate_4of3_re9(ccp, fncode, (minimal_fn_s0_re9_type) fn, nullptr, rcar);
  }

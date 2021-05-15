@@ -734,11 +734,41 @@ void generate_X_2(const QMap<u2, u2>& type_patterns_map)
    QString fn_text = QString(R"(
 
 void _f_X%1_%2_(u1 ac_pattern, %3 QVector<n8>& args, minimal_fn_s0_re%2_type fn,
-  minimal_fn_s1_re%2_type sfn, void* _this)
+  minimal_fn_s1_re%2_type sfn, void* _this) // # %4
 {
  switch(ac_pattern)
  {
-)").arg(type_pattern, 2, 10, QLatin1Char('0')).arg(i).arg(retfull);
+)").arg(type_pattern, 2, 10, QLatin1Char('0')).arg(i).arg(retfull).arg(index);
+
+   {
+    QString st1, st2;
+    QString argstext = arg_text_from_args(type_pattern / 10, 1, st1)
+      + arg_text_from_args(type_pattern % 10, 2, st2);
+    QString sigatext = st1 + "," + st2;
+    fn_text += QString(R"(
+ case 0: // 2 args, lower-number pretype first
+ {%1
+  auto _sfn = (%2(_min_::*)(%3))(sfn);
+  if(_this) %4((_min_*)_this->*_sfn)(a1,a2);
+  else %4((%2(*)(%3))fn)(a1,a2);
+ } break;
+)").arg(argstext).arg(rettext).arg(sigatext).arg(retv);
+   }
+
+   {
+    QString st1, st2;
+    QString argstext = arg_text_from_args(type_pattern % 10, 1, st1)
+      + arg_text_from_args(type_pattern / 10, 2, st2);
+    QString sigatext = st1 + "," + st2;
+    fn_text += QString(R"(
+ case 255: // 2 args, higher-number pretype first
+ {%1
+  auto _sfn = (%2(_min_::*)(%3))(sfn);
+  if(_this) %4((_min_*)_this->*_sfn)(a1,a2);
+  else %4((%2(*)(%3))fn)(a1,a2);
+ } break;
+)").arg(argstext).arg(rettext).arg(sigatext).arg(retv);
+   }
 
    // k + 3 is arg count ...
    for(u1 k = 0; k < 4; ++k)
@@ -751,12 +781,12 @@ void _f_X%1_%2_(u1 ac_pattern, %3 QVector<n8>& args, minimal_fn_s0_re%2_type fn,
   case %1 + 0b%2:)").arg(k << 6).arg(l, k + 3, 2, QLatin1Char('0'));
 
      QString argstext, atext, sigatext;
-     for(u1 m = 1, pos = 1; m <= k + 3; ++m, pos <<= 1)
+     for(u1 m = 1, pos = 1 << (k + 2); m <= k + 3; ++m, pos >>= 1)
      {
       QString st;
 
       // get the pretype
-      u1 pretype = (l % pos)? (type_pattern % 10) : (type_pattern / 10);
+      u1 pretype = (l & pos)? (type_pattern % 10) : (type_pattern / 10);
 
       argstext += arg_text_from_args(pretype, m, st);
       sigatext += st + ",";
@@ -962,7 +992,7 @@ QString gen_dispatch_array_Xof1(u1 ret)
 
 typedef %2(*minimal_fn_s0_re%1_type)();
 typedef %2(_min_::*minimal_fn_s1_re%1_type)();
-typedef void(*run_s01_Xof1_re%1_type)(u1 ac, %3 QVector<n8>& arg1s,
+typedef void(*run_s01_Xof1_re%1_type)(u1 ac, %3 QVector<n8>& args,
   minimal_fn_s0_re%1_type fn, minimal_fn_s1_re%1_type sfn, void* _this);
 typedef run_s01_Xof1_re%1_type s01_Xof1_re%1_dispatch_array [10];
 
@@ -1047,7 +1077,7 @@ QString gen_dispatch_array_Xof2(QMap<u2, u2>& type_patterns_map, u1 ret)
 
 typedef %2(*minimal_fn_s0_re%1_type)();
 typedef %2(_min_::*minimal_fn_s1_re%1_type)();
-typedef void(*run_s01_Xof1_re%1_type)(u1 ac, %3 QVector<n8>& arg1s,
+typedef void(*run_s01_Xof2_re%1_type)(u1 ac, %3 QVector<n8>& args,
   minimal_fn_s0_re%1_type fn, minimal_fn_s1_re%1_type sfn, void* _this);
 typedef run_s01_Xof2_re%1_type s01_Xof2_re%1_dispatch_array [10];
 
@@ -1064,7 +1094,7 @@ typedef run_s01_Xof2_re%1_type s01_Xof2_re%1_dispatch_array [10];
   u2 type_pattern = it.key();
   type_pattern %= 100;
   u2 index = it.value();
-  result += QString("\n#include \"./dev/consoles/fns/aXof2/aXof2-re%1/fn%2.cpp\" // #%3")
+  result += QString("\n#include \"./dev/consoles/fns/aXof2/aXof2-re%1/fn_%2.cpp\" // #%3")
     .arg(ret).arg(type_pattern, 2, 10, QLatin1Char('0')).arg(index);
  }
 
@@ -1309,8 +1339,8 @@ if(num == 2)
   s01_aXof1or2_reX_ch_eval_text += R"(
 
 u1 ac_pattern = (fncode.arg_count == 2)?
-  ( (fncode.type_pattern_binary == 1)? 255: 0):
-  ( ((fncode.arg_count - 3) << 5)
+  ( (fncode.type_pattern_binary == 2)? 255: 0):
+  ( ((fncode.arg_count - 3) << 6)
     | (fncode.type_pattern_binary &
         ((1 << fncode.arg_count) - 1) ) );
 
@@ -1332,8 +1362,6 @@ run_s01_Xof%1_re%2(fncode.arg_count, fncode.distinct_type_pattern,
    (minimal_fn_s0_re%2_type) fn,
    (minimal_fn_s1_re%2_type) sfn, args, %3_this);
 )").arg(num).arg(ret).arg(rr);
-
-
 
 
 if(ret > 0)
