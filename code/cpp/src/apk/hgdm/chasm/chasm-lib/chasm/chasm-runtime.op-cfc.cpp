@@ -114,18 +114,18 @@ u1 _early_parse(Chasm_Function_Code& cfc, n8& cue)
 
 }
 
-u1 _do_binary(u1 arg_count, u4 type_pattern)
+u1 _do_binary(u1 arg_count, u4 pretype_pattern)
 {
  u1 result = 0;
  u1 mask = ~((1 << arg_count) - 1);
  bool last_true = false;
  for(u1 i = 0, b = 1; i < arg_count; ++i, b <<= 1)
  {
-  u1 d = type_pattern % 10;
+  u1 d = pretype_pattern % 10;
   last_true = (d == 2);
   if(last_true)
     result |= b;
-  type_pattern /= 10;
+  pretype_pattern /= 10;
  }
  if(!last_true)
  {
@@ -138,9 +138,9 @@ Chasm_Function_Code _parse_cfc(n8 cue, bool udn_literal = true)
 {
  Chasm_Function_Code result;
 
- //result.type_pattern_binary = udn_literal? 100:200;
+ //result.prepretype_pattern_binary = udn_literal? 100:200;
 
- result.type_pattern_binary = 0;
+ result.pretype_pattern_binary = 0;
 
  u1 distinct_pretype_pattern_len, arg_count;
  u4 distinct_pretype_pattern_len_exp = 1;
@@ -164,8 +164,8 @@ Chasm_Function_Code _parse_cfc(n8 cue, bool udn_literal = true)
  if(len == 1)
  {
   result.distinct_pretype_pattern = cue % 10;
-  result.type_pattern = 1;
-  result.type_pattern_binary = arg_count;
+  result.pretype_pattern = 1;
+  result.pretype_pattern_binary = arg_count;
   return result;
  }
 
@@ -173,27 +173,27 @@ Chasm_Function_Code _parse_cfc(n8 cue, bool udn_literal = true)
  {
   // type pattern already encoded
   distinct_pretype_pattern_len = len - result.arg_count;
-    // result.type_pattern_binary += (distinct_pretype_pattern_len * 10) + result.arg_count;
+    // result.pretype_pattern_binary += (distinct_pretype_pattern_len * 10) + result.arg_count;
   do_exp();
 
   if(distinct_pretype_pattern_len > 2)
   {
-   result.type_pattern = cue % arg_count_exp;
+   result.pretype_pattern = cue % arg_count_exp;
    cue /= arg_count_exp;
    result.distinct_pretype_pattern = distinct_pretype_pattern_len_exp + cue;
    return result;
   }
   else if(distinct_pretype_pattern_len == 2)
   {
-   u4 type_pattern = cue % arg_count_exp;
+   u4 pretype_pattern = cue % arg_count_exp;
    cue /= arg_count_exp;
    result.distinct_pretype_pattern = distinct_pretype_pattern_len_exp + cue;
    if(arg_count < 6)
-     result.type_pattern = type_pattern;
+     result.pretype_pattern = pretype_pattern;
    else
-     result.type_pattern = -1;
+     result.pretype_pattern = -1;
 
-   result.type_pattern_binary = _do_binary(arg_count, type_pattern);
+   result.pretype_pattern_binary = _do_binary(arg_count, pretype_pattern);
    return result;
   }
   else if(distinct_pretype_pattern_len == 1)
@@ -202,7 +202,7 @@ Chasm_Function_Code _parse_cfc(n8 cue, bool udn_literal = true)
   }
  }
 
- result.type_pattern = result.distinct_pretype_pattern = 0;
+ result.pretype_pattern = result.distinct_pretype_pattern = 0;
 
  // // need to encode the type pattern
  u1 type_counts[arg_count];
@@ -267,7 +267,7 @@ Chasm_Function_Code _parse_cfc(n8 cue, bool udn_literal = true)
  }
  result.distinct_pretype_pattern += arg_count * e;
 
- u4 type_pattern = 0;
+ u4 pretype_pattern = 0;
  e = 1;
  for(s1 i = arg_count - 1; i >= 0; --i, e *= 10) //, digit_exp *= 10)
  {
@@ -276,17 +276,17 @@ Chasm_Function_Code _parse_cfc(n8 cue, bool udn_literal = true)
   {
    if(d == distinct_type_numbers[j])
    {
-    type_pattern += ((j + 1) * e);
+    pretype_pattern += ((j + 1) * e);
     break;
    }
   }
  }
 
  if(arg_count < 6)
-   result.type_pattern = type_pattern;
+   result.pretype_pattern = pretype_pattern;
 
  if(seen_type_count == 2)
-   result.type_pattern_binary = _do_binary(arg_count, type_pattern);
+   result.pretype_pattern_binary = _do_binary(arg_count, pretype_pattern);
 
  return result;
 }

@@ -25,7 +25,7 @@ void parse_fn_code(u4 cue)
  u4 cc = cue;
 
  u1 st_code, return_type_code, pattern_digits_run;
- u2 distinct_pretype_pattern, arguments_type_pattern;
+ u2 distinct_pretype_pattern, arguments_pretype_pattern;
 
  if(cue >= 10000000)
  {
@@ -106,18 +106,18 @@ void parse_fn_code(u4 cue)
 
  switch (arg_count)
  {
- case 3: arguments_type_pattern = cue % 1000; distinct_pretype_pattern = cue / 1000; break;
+ case 3: arguments_pretype_pattern = cue % 1000; distinct_pretype_pattern = cue / 1000; break;
  //case 23: arguments_type_pattern = cue % 1000; distinct_pretype_pattern = cue / 1000; break;
- case 2: arguments_type_pattern = cue % 100; distinct_pretype_pattern = cue / 100; break;
- case 1: arguments_type_pattern = cue % 10; distinct_pretype_pattern = cue / 10; break;
- case 0: arguments_type_pattern = distinct_pretype_pattern = 0; break;
+ case 2: arguments_pretype_pattern = cue % 100; distinct_pretype_pattern = cue / 100; break;
+ case 1: arguments_pretype_pattern = cue % 10; distinct_pretype_pattern = cue / 10; break;
+ case 0: arguments_pretype_pattern = distinct_pretype_pattern = 0; break;
  }
 
 
 
  u2 dd = ( (st_code + 1) * st_base) + distinct_pretype_pattern;
 
- qDebug() << "cue: " << cc << ", D: " << dd << ", A: " << arguments_type_pattern;
+ qDebug() << "cue: " << cc << ", D: " << dd << ", A: " << arguments_pretype_pattern;
 }
 
 
@@ -176,7 +176,7 @@ QVector<u2>* generate_3_3()
 
 
 
-QString arg_text(u1 type_pattern, u1 index, QString& st)
+QString arg_text(u1 pretype_pattern, u1 index, QString& st)
 {
  /*
  0 = ref
@@ -195,7 +195,7 @@ QString arg_text(u1 type_pattern, u1 index, QString& st)
 
  QString result;
 
- switch(type_pattern)
+ switch(pretype_pattern)
  {
  case 0: // ref
   // types[i] = "n8&";
@@ -204,9 +204,9 @@ QString arg_text(u1 type_pattern, u1 index, QString& st)
   break;
 
   // // for now treat 9 like a n8
- case 9: type_pattern = 8; // fallthrough
+ case 9: pretype_pattern = 8; // fallthrough
  case 1: case 2: case 4: case 8:
-  st = QString("%1%2").arg(type_pattern == 8?'n':'u').arg(type_pattern);
+  st = QString("%1%2").arg(pretype_pattern == 8?'n':'u').arg(pretype_pattern);
   // types[i] = QString("%1%2").arg(akey == 8?'n':'u').arg(akey);
   result = QString("%1 a%2=*(%1*)arg%2;").arg(st).arg(index);
   break;
@@ -235,7 +235,7 @@ QString arg_text(u1 type_pattern, u1 index, QString& st)
  return result;
 }
 
-QString generate_function_code(u2 type_pattern, u1 ret, u1 number)
+QString generate_function_code(u2 pretype_pattern, u1 ret, u1 number)
 {
  u1 case_len = number;
  u4 clexp = 1;
@@ -249,17 +249,17 @@ QString generate_function_code(u2 type_pattern, u1 ret, u1 number)
 
  QVector<u2>* vec = number == 3? vec3:vec4;
 
- u1 type_pattern_len = 0;
+ u1 pretype_pattern_len = 0;
  u4 tplexp = 1;
- while( (tplexp * 10) < type_pattern)
+ while( (tplexp * 10) < pretype_pattern)
  {
-  ++type_pattern_len;
+  ++pretype_pattern_len;
   tplexp *= 10;
  }
 
- u4 distinct_pretype_pattern = type_pattern % tplexp;
+ u4 distinct_pretype_pattern = pretype_pattern % tplexp;
 
- u2 len = type_pattern / tplexp;
+ u2 len = pretype_pattern / tplexp;
 
  u2 lenexp = len * tplexp * 10;
 // for(u1 i = 0; i < len; ++i)
@@ -267,16 +267,16 @@ QString generate_function_code(u2 type_pattern, u1 ret, u1 number)
 //  lenexp *= 10;
 // }
 
-// u1 t1 = (type_pattern % 1000) / 100;
-// u1 t2 = (type_pattern % 100) / 10;
-// u1 t3 = type_pattern % 10;
+// u1 t1 = (pretype_pattern % 1000) / 100;
+// u1 t2 = (pretype_pattern % 100) / 10;
+// u1 t3 = pretype_pattern % 10;
 // u1 ts [3] = {t1, t2, t3};
 
- u1 ts [type_pattern_len];
+ u1 ts [pretype_pattern_len];
 
  {
   u4 exp = tplexp;
-  for(int i = 0; i < type_pattern_len; ++i)
+  for(int i = 0; i < pretype_pattern_len; ++i)
   {
    ts[i] = (distinct_pretype_pattern % exp) / (exp / 10);
    exp /= 10;
@@ -303,7 +303,7 @@ QString generate_function_code(u2 type_pattern, u1 ret, u1 number)
  QString result = QString("void _f_%1_%2_(u4 pattern, %3%4"
    "minimal_fn_s0_re%2_type fn,\n  minimal_fn_s1_re%2_type sfn, void** _this)"
    "\n{\n switch(pattern)\n {\n")
-   .arg(type_pattern).arg(ret).arg(retfull).arg(sig_args);
+   .arg(pretype_pattern).arg(ret).arg(retfull).arg(sig_args);
 
  for(u2 case_val : *vec)
  {
@@ -386,7 +386,7 @@ QString generate_function_code(u2 type_pattern, u1 ret, u1 number)
 
 
 QString gen_dispatch_array(u1 ret, u1 ac, u1 distinct_type_count, u2 arsize,
-  QMap<u2, u2>& type_patterns_map )
+  QMap<u2, u2>& pretype_patterns_map )
 {
  u4 distinct_type_exp = 1;
  for(u1 i = 0; i < distinct_type_count; ++i)
@@ -428,19 +428,19 @@ typedef run_s01_%1of%2_re%3_type s01_%1of%2_re%3_dispatch_array [%7];
    .arg(n8argtext).arg(arsize);
 
 
- QMapIterator<u2, u2> it(type_patterns_map);
+ QMapIterator<u2, u2> it(pretype_patterns_map);
 
  while(it.hasNext())
  {
   it.next();
-  u2 type_pattern = it.key();
+  u2 pretype_pattern = it.key();
 
-//  type_pattern %= distinct_type_exp;
-//  type_pattern += (distinct_type_exp * ac);
+//  pretype_pattern %= distinct_type_exp;
+//  pretype_pattern += (distinct_type_exp * ac);
 
   u2 index = it.value();
-  result += QString("\n#include \"./dev/consoles/fns/a%1of%2/a%1of%2-re%3/fn%4.cpp\" // #%5")
-    .arg(ac).arg(distinct_type_count).arg(ret).arg(type_pattern).arg(index);
+  result += QString("\n#include \"../dev/consoles/fns/a%1of%2/a%1of%2-re%3/fn%4.cpp\" // #%5")
+    .arg(ac).arg(distinct_type_count).arg(ret).arg(pretype_pattern).arg(index);
  }
 
 
@@ -458,14 +458,14 @@ s01_%1of%2_re%3_dispatch_array* init_s01_%1of%2_re%3_dispatch_array()
  while(it.hasNext())
  {
   it.next();
-  u2 type_pattern = it.key();
+  u2 pretype_pattern = it.key();
 
-//  type_pattern %= distinct_type_exp;
-//  type_pattern += (distinct_type_exp * ac);
+//  pretype_pattern %= distinct_type_exp;
+//  pretype_pattern += (distinct_type_exp * ac);
 
   u2 index = it.value();
   result += QString("\n (*result)[%1] = &_f_%2_%3_;")
-    .arg(index).arg(type_pattern).arg(ret);
+    .arg(index).arg(pretype_pattern).arg(ret);
  }
 
  result += "\n\n return result;\n}\n";
@@ -568,34 +568,34 @@ void run_s01_%1of%2_re%3(u4 pattern, u4 index, minimal_fn_s0_re%3_type fn,
 // return result;
 //}
 
-void generate_4or3_3(QMap<u2, u2>& type_patterns_map, u1 number)
+void generate_4or3_3(QMap<u2, u2>& pretype_patterns_map, u1 number)
 {
- QMapIterator<u2, u2> it(type_patterns_map);
+ QMapIterator<u2, u2> it(pretype_patterns_map);
 
  while(it.hasNext())
  {
   it.next();
-  u2 type_pattern = it.key();
+  u2 pretype_pattern = it.key();
 
-//  type_pattern %= 1000;
-//  type_pattern += 4000;
+//  pretype_pattern %= 1000;
+//  pretype_pattern += 4000;
 
 
   for(int i = 0; i <= 9; ++i)
   {
-   QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/a%1of3/a%1of3-re%2").arg(number).arg(i);
+   QString folder = QString(ROOT_FOLDER "/../dev/consoles/fns/a%1of3/a%1of3-re%2").arg(number).arg(i);
    QDir qd(folder);
    if(!qd.exists())
     qd.mkpath(".");
 
 
-   QString fn_file = QString(ROOT_FOLDER "/dev/consoles/fns/a%1of3/a%1of3-re%2/fn%3.cpp")
-     .arg(number).arg(i).arg(type_pattern);
+   QString fn_file = QString(ROOT_FOLDER "/../dev/consoles/fns/a%1of3/a%1of3-re%2/fn%3.cpp")
+     .arg(number).arg(i).arg(pretype_pattern);
    QString fn_text;
 
    //   for(int j = 0; j < 120; ++j)
    //   {
-   fn_text += generate_function_code(type_pattern, i, number) + "\n";
+   fn_text += generate_function_code(pretype_pattern, i, number) + "\n";
    //   }
    save_file(fn_file, fn_text);
   }
@@ -666,7 +666,7 @@ void generate_X_1()
 {
  for(u1 i = 0; i <= 9; ++i)
  {
-  QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/aXof1/aXof1-re%1").arg(i);
+  QString folder = QString(ROOT_FOLDER "/../dev/consoles/fns/aXof1/aXof1-re%1").arg(i);
   QDir qd(folder);
   if(!qd.exists())
     qd.mkpath(".");
@@ -682,7 +682,7 @@ void generate_X_1()
 
   for(u1 j = 0; j < 10; ++j)
   {
-   QString fn_file = QString(ROOT_FOLDER "/dev/consoles/fns/aXof1/aXof1-re%1/fn_%2.cpp").arg(i).arg(j);
+   QString fn_file = QString(ROOT_FOLDER "/../dev/consoles/fns/aXof1/aXof1-re%1/fn_%2.cpp").arg(i).arg(j);
    QString fn_text = QString(R"(
 
 void _f_X%1_%2_(u1 ac, %3 QVector<n8>& args, minimal_fn_s0_re%2_type fn,
@@ -723,11 +723,11 @@ void _f_X%1_%2_(u1 ac, %3 QVector<n8>& args, minimal_fn_s0_re%2_type fn,
 }
 
 
-void generate_X_2(const QMap<u2, u2>& type_patterns_map)
+void generate_X_2(const QMap<u2, u2>& pretype_patterns_map)
 {
  for(u1 i = 0; i <= 9; ++i)
  {
-  QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/aXof2/aXof2-re%1").arg(i);
+  QString folder = QString(ROOT_FOLDER "/../dev/consoles/fns/aXof2/aXof2-re%1").arg(i);
   QDir qd(folder);
   if(!qd.exists())
     qd.mkpath(".");
@@ -741,16 +741,16 @@ void generate_X_2(const QMap<u2, u2>& type_patterns_map)
     retfull = QString("%1& %2").arg(rettext)
     .arg(rsym = QString("%1, ").arg((retv = "retv=").left(4)));
 
-  QMapIterator<u2, u2> it(type_patterns_map);
+  QMapIterator<u2, u2> it(pretype_patterns_map);
   while(it.hasNext())
   {
    it.next();
-   u2 type_pattern = it.key();
-   type_pattern %= 100;
+   u2 pretype_pattern = it.key();
+   pretype_pattern %= 100;
    u2 index = it.value();
 
-   QString fn_file = QString(ROOT_FOLDER "/dev/consoles/fns/aXof2/aXof2-re%1/fn_%2.cpp").arg(i)
-     .arg(type_pattern, 2, 10, QLatin1Char('0'));
+   QString fn_file = QString(ROOT_FOLDER "/../dev/consoles/fns/aXof2/aXof2-re%1/fn_%2.cpp").arg(i)
+     .arg(pretype_pattern, 2, 10, QLatin1Char('0'));
    QString fn_text = QString(R"(
 
 void _f_X%1_%2_(u1 ac_pattern, %3 QVector<n8>& args, minimal_fn_s0_re%2_type fn,
@@ -758,12 +758,12 @@ void _f_X%1_%2_(u1 ac_pattern, %3 QVector<n8>& args, minimal_fn_s0_re%2_type fn,
 {
  switch(ac_pattern)
  {
-)").arg(type_pattern, 2, 10, QLatin1Char('0')).arg(i).arg(retfull).arg(index);
+)").arg(pretype_pattern, 2, 10, QLatin1Char('0')).arg(i).arg(retfull).arg(index);
 
    {
     QString st1, st2;
-    QString argstext = arg_text_from_args(type_pattern / 10, 1, st1)
-      + arg_text_from_args(type_pattern % 10, 2, st2);
+    QString argstext = arg_text_from_args(pretype_pattern / 10, 1, st1)
+      + arg_text_from_args(pretype_pattern % 10, 2, st2);
     QString sigatext = st1 + "," + st2;
     fn_text += QString(R"(
  case 0: // 2 args, lower-number pretype first
@@ -777,8 +777,8 @@ void _f_X%1_%2_(u1 ac_pattern, %3 QVector<n8>& args, minimal_fn_s0_re%2_type fn,
 
    {
     QString st1, st2;
-    QString argstext = arg_text_from_args(type_pattern % 10, 1, st1)
-      + arg_text_from_args(type_pattern / 10, 2, st2);
+    QString argstext = arg_text_from_args(pretype_pattern % 10, 1, st1)
+      + arg_text_from_args(pretype_pattern / 10, 2, st2);
     QString sigatext = st1 + "," + st2;
     fn_text += QString(R"(
  case 255: // 2 args, higher-number pretype first
@@ -806,7 +806,7 @@ void _f_X%1_%2_(u1 ac_pattern, %3 QVector<n8>& args, minimal_fn_s0_re%2_type fn,
       QString st;
 
       // get the pretype
-      u1 pretype = (l & pos)? (type_pattern % 10) : (type_pattern / 10);
+      u1 pretype = (l & pos)? (pretype_pattern % 10) : (pretype_pattern / 10);
 
       argstext += arg_text_from_args(pretype, m, st);
       sigatext += st + ",";
@@ -839,25 +839,25 @@ void _f_X%1_%2_(u1 ac_pattern, %3 QVector<n8>& args, minimal_fn_s0_re%2_type fn,
 
 
 
-void generate_type_patterns_maps()
+void generate_pretype_patterns_maps()
 {
- QString type_pattern_3_file = QString(ROOT_FOLDER "/dev/consoles/fns/type-patterns-3.cpp");
- QString type_pattern_3_text = "#ifdef INCLUDE_ARRAY_CODE\n{";
+ QString pretype_pattern_3_file = QString(ROOT_FOLDER "/../dev/consoles/fns/pretype-patterns-3.cpp");
+ QString pretype_pattern_3_text = "#ifdef INCLUDE_ARRAY_CODE\n{";
 
- QString type_pattern_4of3_file = QString(ROOT_FOLDER "/dev/consoles/fns/type-patterns-4of3.cpp");
- QString type_pattern_4of3_text = "#ifdef INCLUDE_ARRAY_CODE\n{";
+ QString pretype_pattern_4of3_file = QString(ROOT_FOLDER "/../dev/consoles/fns/pretype-patterns-4of3.cpp");
+ QString pretype_pattern_4of3_text = "#ifdef INCLUDE_ARRAY_CODE\n{";
 
- QString type_pattern_2_file = QString(ROOT_FOLDER "/dev/consoles/fns/type-patterns-2.cpp");
- QString type_pattern_2_text = "#ifdef INCLUDE_ARRAY_CODE\n{";
+ QString pretype_pattern_2_file = QString(ROOT_FOLDER "/../dev/consoles/fns/pretype-patterns-2.cpp");
+ QString pretype_pattern_2_text = "#ifdef INCLUDE_ARRAY_CODE\n{";
 
  int col3 = 0;
  int col2 = 0;
 
  int row3 = 0;
 
- QMap<u2, u2> type_pattern_4of3_map;
- QMap<u2, u2> type_pattern_3_map;
- QMap<u2, u2> type_pattern_2_map;
+ QMap<u2, u2> pretype_pattern_4of3_map;
+ QMap<u2, u2> pretype_pattern_3_map;
+ QMap<u2, u2> pretype_pattern_2_map;
 
  int count2 = 0;
  int count3 = 0;
@@ -867,7 +867,7 @@ void generate_type_patterns_maps()
   for(int j = i + 1; j <= 9; ++j)
   {
    u2 val2 = 200 + (i*10) + j;
-   type_pattern_2_map[val2] = count2;
+   pretype_pattern_2_map[val2] = count2;
    ++count2;
 
    ++col2;
@@ -875,12 +875,12 @@ void generate_type_patterns_maps()
      col2 = 1;
 
    if(col2 == 1)
-     type_pattern_2_text += "\n";
+     pretype_pattern_2_text += "\n";
    else if(col2 == 4 || col2 == 7)
-     type_pattern_2_text += "  ";
+     pretype_pattern_2_text += "  ";
 
 
-   type_pattern_2_text += QString(" %1,").arg(val2);
+   pretype_pattern_2_text += QString(" %1,").arg(val2);
 
    if(j == 9)
      continue;
@@ -891,8 +891,8 @@ void generate_type_patterns_maps()
    {
     u2 val3 = 3000 + (i*100) + (j*10) + k;
     u2 val4of3 = 4000 + (i*100) + (j*10) + k;
-    type_pattern_3_map[val3] = count3;
-    type_pattern_4of3_map[val4of3] = count3;
+    pretype_pattern_3_map[val3] = count3;
+    pretype_pattern_4of3_map[val4of3] = count3;
     ++count3;
 
     ++col3;
@@ -902,94 +902,101 @@ void generate_type_patterns_maps()
      ++row3;
      if(row3 == 5)
      {
-      type_pattern_3_text += "\n";
-      type_pattern_4of3_text += "\n";
+      pretype_pattern_3_text += "\n";
+      pretype_pattern_4of3_text += "\n";
      }
     }
 
     if(col3 == 1)
     {
-     type_pattern_3_text += "\n";
-     type_pattern_4of3_text += "\n";
+     pretype_pattern_3_text += "\n";
+     pretype_pattern_4of3_text += "\n";
     }
     else if(col3 == 4 || col3 == 7 || col3 == 10)
     {
-     type_pattern_3_text += "  ";
-     type_pattern_4of3_text += "  ";
+     pretype_pattern_3_text += "  ";
+     pretype_pattern_4of3_text += "  ";
     }
 
-    type_pattern_3_text += QString(" %1,").arg(val3);
-    type_pattern_4of3_text += QString(" %1,").arg(val4of3);
+    pretype_pattern_3_text += QString(" %1,").arg(val3);
+    pretype_pattern_4of3_text += QString(" %1,").arg(val4of3);
 
    }
   }
  }
 
- type_pattern_3_text.chop(1);
- type_pattern_3_text += "\n}\n#endif //def INCLUDE_ARRAY_CODE\n";
+ pretype_pattern_3_text.chop(1);
+ pretype_pattern_3_text += "\n}\n#endif //def INCLUDE_ARRAY_CODE\n";
 
- type_pattern_4of3_text.chop(1);
- type_pattern_4of3_text += "\n}\n#endif //def INCLUDE_ARRAY_CODE\n";
+ pretype_pattern_4of3_text.chop(1);
+ pretype_pattern_4of3_text += "\n}\n#endif //def INCLUDE_ARRAY_CODE\n";
 
- type_pattern_2_text.chop(1);
- type_pattern_2_text += "\n}\n#endif // def INCLUDE_ARRAY_CODE\n";
+ pretype_pattern_2_text.chop(1);
+ pretype_pattern_2_text += "\n}\n#endif // def INCLUDE_ARRAY_CODE\n";
 
-// QTextStream qts3(&type_pattern_3_text);
+// QTextStream qts3(&pretype_pattern_3_text);
 
- type_pattern_3_text += "\n\n#ifdef INCLUDE_MAP_CODE\n{\n";
- QMapIterator<u2, u2> it3(type_pattern_3_map);
+ pretype_pattern_3_text += "\n\n#ifdef INCLUDE_MAP_CODE\n{\n";
+ QMapIterator<u2, u2> it3(pretype_pattern_3_map);
  while(it3.hasNext())
  {
   it3.next();
-  type_pattern_3_text += QString(" {%1,%2},").arg(it3.key()).arg(it3.value());
+  pretype_pattern_3_text += QString(" {%1,%2},").arg(it3.key()).arg(it3.value());
   if( (it3.value() % 6) == 5 )
-    type_pattern_3_text += "\n";
+    pretype_pattern_3_text += "\n";
  }
- type_pattern_3_text.chop(2);
- type_pattern_3_text += "\n}\n#endif // INCLUDE_MAP_CODE\n";
+ pretype_pattern_3_text.chop(2);
+ pretype_pattern_3_text += "\n}\n#endif // INCLUDE_MAP_CODE\n";
 
- type_pattern_4of3_text += "\n\n#ifdef INCLUDE_MAP_CODE\n{\n";
- QMapIterator<u2, u2> it4of3(type_pattern_4of3_map);
+ pretype_pattern_4of3_text += "\n\n#ifdef INCLUDE_MAP_CODE\n{\n";
+ QMapIterator<u2, u2> it4of3(pretype_pattern_4of3_map);
  while(it4of3.hasNext())
  {
   it4of3.next();
-  type_pattern_4of3_text += QString(" {%1,%2},").arg(it4of3.key()).arg(it4of3.value());
+  pretype_pattern_4of3_text += QString(" {%1,%2},").arg(it4of3.key()).arg(it4of3.value());
   if( (it4of3.value() % 6) == 5 )
-    type_pattern_4of3_text += "\n";
+    pretype_pattern_4of3_text += "\n";
  }
- type_pattern_4of3_text.chop(2);
- type_pattern_4of3_text += "\n}\n#endif // INCLUDE_MAP_CODE\n";
+ pretype_pattern_4of3_text.chop(2);
+ pretype_pattern_4of3_text += "\n}\n#endif // INCLUDE_MAP_CODE\n";
 
 
-// QTextStream qts2(&type_pattern_2_text);
+// QTextStream qts2(&pretype_pattern_2_text);
 
- type_pattern_2_text += "\n\n#ifdef INCLUDE_MAP_CODE\n{\n";
- QMapIterator<u2, u2> it2(type_pattern_2_map);
+ pretype_pattern_2_text += "\n\n#ifdef INCLUDE_MAP_CODE\n{\n";
+ QMapIterator<u2, u2> it2(pretype_pattern_2_map);
  while(it2.hasNext())
  {
   it2.next();
-  type_pattern_2_text += QString(" {%1,%2},").arg(it2.key()).arg(it2.value());
+  pretype_pattern_2_text += QString(" {%1,%2},").arg(it2.key()).arg(it2.value());
   if( (it2.value() % 5) == 4 )
-    type_pattern_2_text += "\n";
+    pretype_pattern_2_text += "\n";
  }
- type_pattern_2_text.chop(2);
- type_pattern_2_text += "\n}\n#endif // INCLUDE_MAP_CODE\n";
+ pretype_pattern_2_text.chop(2);
+ pretype_pattern_2_text += "\n}\n#endif // INCLUDE_MAP_CODE\n";
 
- save_file(type_pattern_4of3_file, type_pattern_4of3_text);
- save_file(type_pattern_3_file, type_pattern_3_text);
- save_file(type_pattern_2_file, type_pattern_2_text);
+ save_file(pretype_pattern_4of3_file, pretype_pattern_4of3_text);
+ save_file(pretype_pattern_3_file, pretype_pattern_3_text);
+ save_file(pretype_pattern_2_file, pretype_pattern_2_text);
 
 }
 
-void gen_dispatch_arrays(QMap<u2, u2>& type_patterns_map, QString xofy, u1 number)
+void gen_dispatch_arrays(QMap<u2, u2>& pretype_patterns_map, QString xofy, u1 number)
 {
+ QString run_folder = QString(ROOT_FOLDER "/../dev/consoles/fns/run/run-a%1")
+   .arg(xofy);
+
+ QDir qd(run_folder);
+ if(!qd.exists())
+   qd.mkpath(".");
+
  for(int i = 0; i <= 9; ++i)
  {
-  QString disp = gen_dispatch_array(i, number, 3, 120, type_patterns_map);
-  //fn_text += generate_function_code(type_pattern, i) + "\n";
+  QString disp = gen_dispatch_array(i, number, 3, 120, pretype_patterns_map);
+  //fn_text += generate_function_code(pretype_pattern, i) + "\n";
 
-  QString run_file = QString(ROOT_FOLDER "/dev/consoles/fns/run-a%1of3/run-s01-%2-re%3.cpp")
-    .arg(number).arg(xofy).arg(i);
+  QString run_file = QString(ROOT_FOLDER "/../dev/consoles/fns/run/run-a%1/run-s01-%1-re%2.cpp")
+    .arg(xofy).arg(i);
 
   save_file(run_file, disp);
  }
@@ -1025,7 +1032,7 @@ typedef run_s01_Xof1_re%1_type s01_Xof1_re%1_dispatch_array [10];
  for(u1 i = 0; i < 10; ++i)
  {
   result += QString(R"(
-#include "./dev/consoles/fns/aXof1/aXof1-re%1/fn_%2.cpp" // #%2)").arg(ret).arg(i);
+#include "../dev/consoles/fns/aXof1/aXof1-re%1/fn_%2.cpp" // #%2)").arg(ret).arg(i);
  }
 
  result += QString(R"(
@@ -1069,9 +1076,15 @@ void gen_dispatch_arrays_Xof1()
  for(int i = 0; i <= 9; ++i)
  {
   QString disp = gen_dispatch_array_Xof1(i);
-  //fn_text += generate_function_code(type_pattern, i) + "\n";
+  //fn_text += generate_function_code(pretype_pattern, i) + "\n";
 
-  QString run_file = QString(ROOT_FOLDER "/dev/consoles/fns/run-aXof1/run-s01-Xof1-re%1.cpp")
+  QString run_folder = ROOT_FOLDER "/../dev/consoles/fns/run/run-aXof1";
+  QDir qd(run_folder);
+  if(!qd.exists())
+    qd.mkpath(".");
+
+
+  QString run_file = QString(ROOT_FOLDER "/../dev/consoles/fns/run/run-aXof1/run-s01-Xof1-re%1.cpp")
      .arg(i);
 
   save_file(run_file, disp);
@@ -1080,7 +1093,7 @@ void gen_dispatch_arrays_Xof1()
 
 
 
-QString gen_dispatch_array_Xof2(QMap<u2, u2>& type_patterns_map, u1 ret)
+QString gen_dispatch_array_Xof2(QMap<u2, u2>& pretype_patterns_map, u1 ret)
 {
  QString rettext = returns[ret];
  //QString retv = (ret==0)?"":"retv";
@@ -1107,15 +1120,15 @@ typedef run_s01_Xof2_re%1_type s01_Xof2_re%1_dispatch_array [10];
 
  )").arg(ret).arg(rettext).arg(retfull);
 
- QMapIterator<u2, u2> it(type_patterns_map);
+ QMapIterator<u2, u2> it(pretype_patterns_map);
  while(it.hasNext())
  {
   it.next();
-  u2 type_pattern = it.key();
-  type_pattern %= 100;
+  u2 pretype_pattern = it.key();
+  pretype_pattern %= 100;
   u2 index = it.value();
-  result += QString("\n#include \"./dev/consoles/fns/aXof2/aXof2-re%1/fn_%2.cpp\" // #%3")
-    .arg(ret).arg(type_pattern, 2, 10, QLatin1Char('0')).arg(index);
+  result += QString("\n#include \"../dev/consoles/fns/aXof2/aXof2-re%1/fn_%2.cpp\" // #%3")
+    .arg(ret).arg(pretype_pattern, 2, 10, QLatin1Char('0')).arg(index);
  }
 
  result += QString(R"(
@@ -1129,11 +1142,11 @@ s01_Xof2_re%1_dispatch_array* init_s01_Xof2_re%1_dispatch_array()
  while(it.hasNext())
  {
   it.next();
-  u2 type_pattern = it.key();
-  type_pattern %= 100;
+  u2 pretype_pattern = it.key();
+  pretype_pattern %= 100;
   u2 index = it.value();
   result += QString(R"(
-  (*result)[%1] = &_f_X%2_%3_;)").arg(index).arg(type_pattern, 2, 10, QLatin1Char('0')).arg(ret);
+  (*result)[%1] = &_f_X%2_%3_;)").arg(index).arg(pretype_pattern, 2, 10, QLatin1Char('0')).arg(ret);
  }
 
  result += "\n\n return result;\n}\n";
@@ -1158,14 +1171,20 @@ void run_s01_Xof2_re%1(u1 ac_pattern, u1 index, minimal_fn_s0_re%1_type fn,
 }
 
 
-void gen_dispatch_arrays_Xof2(QMap<u2, u2>& type_patterns_map)
+void gen_dispatch_arrays_Xof2(QMap<u2, u2>& pretype_patterns_map)
 {
+ QString run_folder = ROOT_FOLDER "/../dev/consoles/fns/run/run-aXof2";
+ QDir qd(run_folder);
+ if(!qd.exists())
+   qd.mkpath(".");
+
  for(int i = 0; i <= 9; ++i)
  {
-  QString disp = gen_dispatch_array_Xof2(type_patterns_map, i);
-  //fn_text += generate_function_code(type_pattern, i) + "\n";
+  QString disp = gen_dispatch_array_Xof2(pretype_patterns_map, i);
+  //fn_text += generate_function_code(pretype_pattern, i) + "\n";
 
-  QString run_file = QString(ROOT_FOLDER "/dev/consoles/fns/run-aXof2/run-s01-Xof2-re%1.cpp")
+
+  QString run_file = QString(ROOT_FOLDER "/../dev/consoles/fns/run/run-aXof2/run-s01-Xof2-re%1.cpp")
      .arg(i);
 
   save_file(run_file, disp);
@@ -1173,29 +1192,29 @@ void gen_dispatch_arrays_Xof2(QMap<u2, u2>& type_patterns_map)
 }
 
 
-void gen_fn_files(QMap<u2, u2>& type_patterns_map, QString xofy, u1 number)
+void gen_fn_files(QMap<u2, u2>& pretype_patterns_map, QString xofy, u1 number)
 {
- QMapIterator<u2, u2> it(type_patterns_map);
+ QMapIterator<u2, u2> it(pretype_patterns_map);
 
  while(it.hasNext())
  {
   it.next();
 
-  u2 type_pattern = it.key();
+  u2 pretype_pattern = it.key();
 
   for(int i = 0; i <= 9; ++i)
   {
-   QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/a%1/a%1-re%2").arg(xofy).arg(i);
+   QString folder = QString(ROOT_FOLDER "/../dev/consoles/fns/a%1/a%1-re%2").arg(xofy).arg(i);
    QDir qd(folder);
    if(!qd.exists())
     qd.mkpath(".");
 
-   QString fn_file = QString(ROOT_FOLDER "/dev/consoles/fns/a%1/a%1-re%2/fn%3.cpp").arg(xofy).arg(i).arg(type_pattern);
+   QString fn_file = QString(ROOT_FOLDER "/../dev/consoles/fns/a%1/a%1-re%2/fn%3.cpp").arg(xofy).arg(i).arg(pretype_pattern);
    QString fn_text;
 
    //   for(int j = 0; j < 120; ++j)
    //   {
-   fn_text += generate_function_code(type_pattern, i, number) + "\n";
+   fn_text += generate_function_code(pretype_pattern, i, number) + "\n";
    //   }
    save_file(fn_file, fn_text);
   }
@@ -1207,7 +1226,7 @@ void gen_fn_files(QMap<u2, u2>& type_patterns_map, QString xofy, u1 number)
 //{
 //}
 
-void gen_eval_files(//QMap<u2, u2>& type_patterns_map,
+void gen_eval_files(//QMap<u2, u2>& pretype_patterns_map,
   u1 arg_count, u1 distinct_types_count)
 {
  //static u2 exps[4] {1, 10, 100, 1000};
@@ -1227,13 +1246,13 @@ void gen_eval_files(//QMap<u2, u2>& type_patterns_map,
   if(i > 0)
     retv = QString("%1& %2").arg(ret).arg(rsym = "retv, ");
 
-  QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/eval/a%1of%2").arg(arg_count)
+  QString folder = QString(ROOT_FOLDER "/../dev/consoles/fns/eval/a%1of%2").arg(arg_count)
     .arg(distinct_types_count);
   QDir qd(folder);
   if(!qd.exists())
    qd.mkpath(".");
 
-  QString s01_X_reX_ch_eval_file = QString(ROOT_FOLDER "/dev/consoles/fns/eval/a%1of%2/ch-eval-s01_%1of%2_re%3.cpp")
+  QString s01_X_reX_ch_eval_file = QString(ROOT_FOLDER "/../dev/consoles/fns/eval/a%1of%2/ch-eval-s01_%1of%2_re%3.cpp")
     .arg(arg_count).arg(distinct_types_count).arg(i);
   QString s01_X_reX_ch_eval_text = (arg_count == 0)? "" : R"(
 
@@ -1271,8 +1290,8 @@ else { _this = nullptr; _this_ = nullptr; }
   if(i == 0)
   {
    s01_X_reX_ch_eval_text += QString(R"(
-u2 index = type_patterns_%1of%2_map.value(fncode.distinct_pretype_pattern);
-run_s01_%1of%2_re0(fncode.type_pattern, index, (minimal_fn_s0_re0_type) fn,
+u2 index = pretype_patterns_%1of%2_map.value(fncode.distinct_pretype_pattern);
+run_s01_%1of%2_re0(fncode.pretype_pattern, index, (minimal_fn_s0_re0_type) fn,
  (minimal_fn_s1_re0_type) sfn%3, _this);
 )").arg(arg_count).arg(distinct_types_count).arg(pasn8s);
   }
@@ -1283,8 +1302,8 @@ Chasm_Carrier cc = retvalue->first_carrier();
 
 %1%2 rr = %3cc.value%4<%1>();
 
-u2 index = type_patterns_%5of%6_map.value(fncode.distinct_pretype_pattern);
-run_s01_%5of%6_re%7(fncode.type_pattern, index, (minimal_fn_s0_re%7_type) fn,
+u2 index = pretype_patterns_%5of%6_map.value(fncode.distinct_pretype_pattern);
+run_s01_%5of%6_re%7(fncode.pretype_pattern, index, (minimal_fn_s0_re%7_type) fn,
   (minimal_fn_s1_re%7_type) sfn%8, rr, _this);
 
 if(rcar)
@@ -1306,7 +1325,7 @@ if(rcar)
 }
 
 
-void gen_eval_file_Xof1or2_r(u1 ret, u1 num)
+void gen_eval_file_Xof1or2_r(u1 ret, u1 number)
 {
  QString rettext = returns[ret];
  QString retfull, retv, rsym;
@@ -1315,14 +1334,14 @@ void gen_eval_file_Xof1or2_r(u1 ret, u1 num)
  if(ret > 0)
    retfull = QString("%1& %2").arg(ret).arg(rsym = QString("%1, ").arg(retv = "retv"));
 
- QString folder = QString(ROOT_FOLDER "/dev/consoles/fns/eval/aXof1");
+ QString folder = QString(ROOT_FOLDER "/../dev/consoles/fns/eval/aXof%1").arg(number);
  QDir qd(folder);
  if(!qd.exists())
    qd.mkpath(".");
 
  QString s01_aXof1or2_reX_ch_eval_file = QString(
-    ROOT_FOLDER "/dev/consoles/fns/eval/aXof%1/ch-eval-s01_Xof%1_re%2.cpp")
-    .arg(num).arg(ret);
+    ROOT_FOLDER "/../dev/consoles/fns/eval/aXof%1/ch-eval-s01_Xof%1_re%2.cpp")
+    .arg(number).arg(ret);
  QString s01_aXof1or2_reX_ch_eval_text = R"(
 
 Chasm_Channel* lambda = ccp->channel("lambda");
@@ -1359,33 +1378,33 @@ Chasm_Carrier cc = retvalue->first_carrier();
 )").arg(rettext).arg( (ret == 3 || ret == 5 || ret == 7)?"&":"")
    .arg((ret == 3 || ret == 5 || ret == 7)?"_as":"");
 
-if(num == 2)
+if(number == 2)
   s01_aXof1or2_reX_ch_eval_text += R"(
 
 u1 ac_pattern = (fncode.arg_count == 2)?
-  ( (fncode.type_pattern_binary == 2)? 255: 0):
+  ( (fncode.pretype_pattern_binary == 2)? 255: 0):
   ( ((fncode.arg_count - 3) << 6)
-    | (fncode.type_pattern_binary &
+    | (fncode.pretype_pattern_binary &
         ((1 << fncode.arg_count) - 1) ) );
 
-u1 index = type_patterns_2_map.value((fncode.distinct_pretype_pattern % 100) + 200);
+u1 index = pretype_patterns_2_map.value((fncode.distinct_pretype_pattern % 100) + 200);
 )";
 
 QString rr = (ret == 0)? "": "rr, ";
 
-if(num == 2)
+if(number == 2)
   s01_aXof1or2_reX_ch_eval_text += QString(R"(
 run_s01_Xof%1_re%2(ac_pattern, index,
   (minimal_fn_s0_re%2_type) fn,
   (minimal_fn_s1_re%2_type) sfn, args, %3_this);
-)").arg(num).arg(ret).arg(rr);
+)").arg(number).arg(ret).arg(rr);
 
 else
   s01_aXof1or2_reX_ch_eval_text += QString(R"(
 run_s01_Xof%1_re%2(fncode.arg_count, fncode.distinct_pretype_pattern,
    (minimal_fn_s0_re%2_type) fn,
    (minimal_fn_s1_re%2_type) sfn, args, %3_this);
-)").arg(num).arg(ret).arg(rr);
+)").arg(number).arg(ret).arg(rr);
 
 
 if(ret > 0)
@@ -1398,9 +1417,9 @@ if(rcar)
 }
 
 //u1 ac_pattern = (fncode.arg_count == 2)?
-//  ( (fncode.type_pattern_binary == 1)? 255: 0):
+//  ( (fncode.pretype_pattern_binary == 1)? 255: 0):
 //  ( ((fncode.arg_count - 2) << 6)
-//    | (fncode.type_pattern_binary &
+//    | (fncode.pretype_pattern_binary &
 //        ((1 << fncode.arg_count) - 1) ) );
 
 
@@ -1415,65 +1434,48 @@ void gen_eval_files_Xof1or2()
 
 int main(int argc, char *argv[])
 {
+// generate_pretype_patterns_maps();
+
 #define INCLUDE_MAP_CODE
- QMap<u2, u2> type_patterns_3_map {
-  #include "./dev/consoles/fns/type-patterns-3.cpp"
+ QMap<u2, u2> pretype_patterns_3_map {
+  #include "../dev/consoles/fns/pretype-patterns-3.cpp"
  };
 #undef INCLUDE_MAP_CODE// def INCLUDE_MAP_CODE
 
 #define INCLUDE_MAP_CODE
- QMap<u2, u2> type_patterns_2_map {
-  #include "./dev/consoles/fns/type-patterns-2.cpp"
+ QMap<u2, u2> pretype_patterns_2_map {
+  #include "../dev/consoles/fns/pretype-patterns-2.cpp"
  };
 #undef INCLUDE_MAP_CODE// def INCLUDE_MAP_CODE
 
 #define INCLUDE_MAP_CODE
- QMap<u2, u2> type_patterns_4of3_map {
-  #include "./dev/consoles/fns/type-patterns-4of3.cpp"
+ QMap<u2, u2> pretype_patterns_4of3_map {
+  #include "../dev/consoles/fns/pretype-patterns-4of3.cpp"
  };
 #undef INCLUDE_MAP_CODE// def INCLUDE_MAP_CODE
 
  generate_X_1();
- generate_X_2(type_patterns_2_map);
+ generate_X_2(pretype_patterns_2_map);
 
  gen_dispatch_arrays_Xof1();
- gen_dispatch_arrays_Xof2(type_patterns_2_map);
+ gen_dispatch_arrays_Xof2(pretype_patterns_2_map);
 
  gen_eval_files_Xof1or2();
 
-// generate_type_patterns_maps();
-
-  // // generate_4_3(type_patterns_4of3_map);
-
- gen_dispatch_arrays(type_patterns_4of3_map, "4of3", 4);
- gen_fn_files(type_patterns_4of3_map, "4of3", 4);
+ gen_dispatch_arrays(pretype_patterns_4of3_map, "4of3", 4);
+ gen_fn_files(pretype_patterns_4of3_map, "4of3", 4);
  gen_eval_files(4, 3);
 
+ gen_dispatch_arrays(pretype_patterns_3_map, "3of3", 3);
+ gen_fn_files(pretype_patterns_3_map, "3of3", 3);
+ gen_eval_files(3, 3);
 
-  //generate_3_3(type_patterns_3_map);
-  gen_dispatch_arrays(type_patterns_3_map, "3of3", 3);
-  gen_fn_files(type_patterns_3_map, "3of3", 3);
-  gen_eval_files(3, 3);
-
-
-
-// for(int i = 0; i <= 9; ++i)
-// {
-//  QString disp = gen_dispatch_array(i, 4, 3, 120, type_patterns_3_map);
-//  //fn_text += generate_function_code(type_pattern, i) + "\n";
-
-//  QString run_file = QString(ROOT_FOLDER "/dev/consoles/fns/run-a4of3/run-s01-4of3-re%1.cpp").arg(i);
-//  //  QString run_text = gen_dispatch_array(5,4,3,6);
-
-//  save_file(run_file, disp);
-
-// }
 }
 
 
 int main5(int argc, char *argv[])
 {
- QString case_text_4_file = QString(ROOT_FOLDER "/dev/consoles/fns/case-text-4.cpp");
+ QString case_text_4_file = QString(ROOT_FOLDER "/../dev/consoles/fns/case-text-4.cpp");
 
  QString case_text_4;
 
@@ -1503,9 +1505,9 @@ int main5(int argc, char *argv[])
  save_file(case_text_4_file, case_text_4);
 
 
- QString case_text_5_file = QString(ROOT_FOLDER "/dev/consoles/fns/case-text-5.cpp");
- QString case_text_5a_file = QString(ROOT_FOLDER "/dev/consoles/fns/case-text-5a.cpp");
- QString case_text_5b_file = QString(ROOT_FOLDER "/dev/consoles/fns/case-text-5b.cpp");
+ QString case_text_5_file = QString(ROOT_FOLDER "/../dev/consoles/fns/case-text-5.cpp");
+ QString case_text_5a_file = QString(ROOT_FOLDER "/../dev/consoles/fns/case-text-5a.cpp");
+ QString case_text_5b_file = QString(ROOT_FOLDER "/../dev/consoles/fns/case-text-5b.cpp");
 
  QString case_text_5;
  QString case_text_5a;
@@ -1556,7 +1558,7 @@ int main5(int argc, char *argv[])
 
 int main4(int argc, char *argv[])
 {
- QString case_text_file = QString(ROOT_FOLDER "/dev/consoles/fns/case-text.cpp");
+ QString case_text_file = QString(ROOT_FOLDER "/../dev/consoles/fns/case-text.cpp");
 
  QString case_text;
 
@@ -1604,18 +1606,18 @@ int main4(int argc, char *argv[])
 
 int main2(int argc, char *argv[])
 {
-#define INCLUDE_MAP_CODE
- QMap<u2, u2> type_patterns_3_map {
-  #include "./dev/consoles/fns/type-patterns-3.cpp"
- };
+//#define INCLUDE_MAP_CODE
+// QMap<u2, u2> pretype_patterns_3_map {
+//  #include "../dev/consoles/fns/pretype-patterns-3.cpp"
+// };
 
- QMap<u2, u2> type_patterns_2_map {
-  #include "./dev/consoles/fns/type-patterns-2.cpp"
- };
+// QMap<u2, u2> pretype_patterns_2_map {
+//  #include "../dev/consoles/fns/pretype-patterns-2.cpp"
+// };
 
- QMap<u2, u2> type_patterns_1_map {
-  #include "./dev/consoles/fns/type-patterns-1.cpp"
- };
+// QMap<u2, u2> pretype_patterns_1_map {
+//  #include "../dev/consoles/fns/pretype-patterns-1.cpp"
+// };
 
  return 0;
 }
@@ -1832,7 +1834,7 @@ int main(int argc, char *argv[])
      retv = QString("%1& %2").arg(ret).arg(rsym = "retv, ");
 
 
-   QString s01_X_reX_ch_eval_file = QString(ROOT_FOLDER "/dev/consoles/fns/s01/a%1/ch-eval-s01_%1_re%2.cpp").arg(ac).arg(i);
+   QString s01_X_reX_ch_eval_file = QString(ROOT_FOLDER "/../dev/consoles/fns/s01/a%1/ch-eval-s01_%1_re%2.cpp").arg(ac).arg(i);
    QString s01_X_reX_ch_eval_text = (ac == 0)? "" : R"(
 
 Chasm_Channel* lambda = ccp->channel("lambda");
@@ -1896,8 +1898,8 @@ if(rcar)
    }
    save_file(s01_X_reX_ch_eval_file, s01_X_reX_ch_eval_text);
 
-   QString s01_X_reX_file = QString(ROOT_FOLDER "/dev/consoles/fns/s01/a%1/run-s01_%1_re%2.cpp").arg(ac).arg(i);
-   QString fn_array_reX_file = QString(ROOT_FOLDER "/dev/consoles/fns/s01/a%1/fn-array-s01_%1_re%2.cpp").arg(ac).arg(i);
+   QString s01_X_reX_file = QString(ROOT_FOLDER "/../dev/consoles/fns/s01/a%1/run-s01_%1_re%2.cpp").arg(ac).arg(i);
+   QString fn_array_reX_file = QString(ROOT_FOLDER "/../dev/consoles/fns/s01/a%1/fn-array-s01_%1_re%2.cpp").arg(ac).arg(i);
 
    QString fn_array_reX_text;
 

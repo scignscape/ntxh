@@ -11,7 +11,7 @@
 
 #include "global-types.h"
 
-#include "./dev/consoles/fns/s0/a3/run-s0_3_re8.cpp"
+#include "../dev/consoles/fns/s0/a3/run-s0_3_re8.cpp"
 
 #include "chasm-lib/chasm/chasm-runtime.h"
 

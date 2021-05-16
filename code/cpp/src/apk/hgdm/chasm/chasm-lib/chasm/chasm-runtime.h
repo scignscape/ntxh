@@ -42,62 +42,62 @@ struct _min_{};
 
 #ifdef HIDE
 
-#include "./dev/consoles/fns/s01/a3/run-s01_3_re0.cpp"
-#include "./dev/consoles/fns/s01/a3/run-s01_3_re1.cpp"
-#include "./dev/consoles/fns/s01/a3/run-s01_3_re2.cpp"
-#include "./dev/consoles/fns/s01/a3/run-s01_3_re3.cpp"
-#include "./dev/consoles/fns/s01/a3/run-s01_3_re4.cpp"
-#include "./dev/consoles/fns/s01/a3/run-s01_3_re5.cpp"
-#include "./dev/consoles/fns/s01/a3/run-s01_3_re6.cpp"
-#include "./dev/consoles/fns/s01/a3/run-s01_3_re7.cpp"
-#include "./dev/consoles/fns/s01/a3/run-s01_3_re8.cpp"
-#include "./dev/consoles/fns/s01/a3/run-s01_3_re9.cpp"
+#include "../dev/consoles/fns/s01/a3/run-s01_3_re0.cpp"
+#include "../dev/consoles/fns/s01/a3/run-s01_3_re1.cpp"
+#include "../dev/consoles/fns/s01/a3/run-s01_3_re2.cpp"
+#include "../dev/consoles/fns/s01/a3/run-s01_3_re3.cpp"
+#include "../dev/consoles/fns/s01/a3/run-s01_3_re4.cpp"
+#include "../dev/consoles/fns/s01/a3/run-s01_3_re5.cpp"
+#include "../dev/consoles/fns/s01/a3/run-s01_3_re6.cpp"
+#include "../dev/consoles/fns/s01/a3/run-s01_3_re7.cpp"
+#include "../dev/consoles/fns/s01/a3/run-s01_3_re8.cpp"
+#include "../dev/consoles/fns/s01/a3/run-s01_3_re9.cpp"
 
-#include "./dev/consoles/fns/s01/a2/run-s01_2_re0.cpp"
-#include "./dev/consoles/fns/s01/a2/run-s01_2_re1.cpp"
-#include "./dev/consoles/fns/s01/a2/run-s01_2_re2.cpp"
-#include "./dev/consoles/fns/s01/a2/run-s01_2_re3.cpp"
-#include "./dev/consoles/fns/s01/a2/run-s01_2_re4.cpp"
-#include "./dev/consoles/fns/s01/a2/run-s01_2_re5.cpp"
-#include "./dev/consoles/fns/s01/a2/run-s01_2_re6.cpp"
-#include "./dev/consoles/fns/s01/a2/run-s01_2_re7.cpp"
-#include "./dev/consoles/fns/s01/a2/run-s01_2_re8.cpp"
-#include "./dev/consoles/fns/s01/a2/run-s01_2_re9.cpp"
+#include "../dev/consoles/fns/s01/a2/run-s01_2_re0.cpp"
+#include "../dev/consoles/fns/s01/a2/run-s01_2_re1.cpp"
+#include "../dev/consoles/fns/s01/a2/run-s01_2_re2.cpp"
+#include "../dev/consoles/fns/s01/a2/run-s01_2_re3.cpp"
+#include "../dev/consoles/fns/s01/a2/run-s01_2_re4.cpp"
+#include "../dev/consoles/fns/s01/a2/run-s01_2_re5.cpp"
+#include "../dev/consoles/fns/s01/a2/run-s01_2_re6.cpp"
+#include "../dev/consoles/fns/s01/a2/run-s01_2_re7.cpp"
+#include "../dev/consoles/fns/s01/a2/run-s01_2_re8.cpp"
+#include "../dev/consoles/fns/s01/a2/run-s01_2_re9.cpp"
 
-#include "./dev/consoles/fns/s01/a1/run-s01_1_re0.cpp"
-#include "./dev/consoles/fns/s01/a1/run-s01_1_re1.cpp"
-#include "./dev/consoles/fns/s01/a1/run-s01_1_re2.cpp"
-#include "./dev/consoles/fns/s01/a1/run-s01_1_re3.cpp"
-#include "./dev/consoles/fns/s01/a1/run-s01_1_re4.cpp"
-#include "./dev/consoles/fns/s01/a1/run-s01_1_re5.cpp"
-#include "./dev/consoles/fns/s01/a1/run-s01_1_re6.cpp"
-#include "./dev/consoles/fns/s01/a1/run-s01_1_re7.cpp"
-#include "./dev/consoles/fns/s01/a1/run-s01_1_re8.cpp"
-#include "./dev/consoles/fns/s01/a1/run-s01_1_re9.cpp"
+#include "../dev/consoles/fns/s01/a1/run-s01_1_re0.cpp"
+#include "../dev/consoles/fns/s01/a1/run-s01_1_re1.cpp"
+#include "../dev/consoles/fns/s01/a1/run-s01_1_re2.cpp"
+#include "../dev/consoles/fns/s01/a1/run-s01_1_re3.cpp"
+#include "../dev/consoles/fns/s01/a1/run-s01_1_re4.cpp"
+#include "../dev/consoles/fns/s01/a1/run-s01_1_re5.cpp"
+#include "../dev/consoles/fns/s01/a1/run-s01_1_re6.cpp"
+#include "../dev/consoles/fns/s01/a1/run-s01_1_re7.cpp"
+#include "../dev/consoles/fns/s01/a1/run-s01_1_re8.cpp"
+#include "../dev/consoles/fns/s01/a1/run-s01_1_re9.cpp"
 
-#include "./dev/consoles/fns/s01/a0/run-s01_0_re0.cpp"
-#include "./dev/consoles/fns/s01/a0/run-s01_0_re1.cpp"
-#include "./dev/consoles/fns/s01/a0/run-s01_0_re2.cpp"
-#include "./dev/consoles/fns/s01/a0/run-s01_0_re3.cpp"
-#include "./dev/consoles/fns/s01/a0/run-s01_0_re4.cpp"
-#include "./dev/consoles/fns/s01/a0/run-s01_0_re5.cpp"
-#include "./dev/consoles/fns/s01/a0/run-s01_0_re6.cpp"
-#include "./dev/consoles/fns/s01/a0/run-s01_0_re7.cpp"
-#include "./dev/consoles/fns/s01/a0/run-s01_0_re8.cpp"
-#include "./dev/consoles/fns/s01/a0/run-s01_0_re9.cpp"
+#include "../dev/consoles/fns/s01/a0/run-s01_0_re0.cpp"
+#include "../dev/consoles/fns/s01/a0/run-s01_0_re1.cpp"
+#include "../dev/consoles/fns/s01/a0/run-s01_0_re2.cpp"
+#include "../dev/consoles/fns/s01/a0/run-s01_0_re3.cpp"
+#include "../dev/consoles/fns/s01/a0/run-s01_0_re4.cpp"
+#include "../dev/consoles/fns/s01/a0/run-s01_0_re5.cpp"
+#include "../dev/consoles/fns/s01/a0/run-s01_0_re6.cpp"
+#include "../dev/consoles/fns/s01/a0/run-s01_0_re7.cpp"
+#include "../dev/consoles/fns/s01/a0/run-s01_0_re8.cpp"
+#include "../dev/consoles/fns/s01/a0/run-s01_0_re9.cpp"
 
 #endif // def HIDE
 
-//#include "./dev/consoles/fns/run-a4of3/run-s01-4of3-re0.cpp"
-//#include "./dev/consoles/fns/run-a4of3/run-s01-4of3-re1.cpp"
-//#include "./dev/consoles/fns/run-a4of3/run-s01-4of3-re2.cpp"
-//#include "./dev/consoles/fns/run-a4of3/run-s01-4of3-re3.cpp"
-//#include "./dev/consoles/fns/run-a4of3/run-s01-4of3-re4.cpp"
-//#include "./dev/consoles/fns/run-a4of3/run-s01-4of3-re5.cpp"
-//#include "./dev/consoles/fns/run-a4of3/run-s01-4of3-re6.cpp"
-//#include "./dev/consoles/fns/run-a4of3/run-s01-4of3-re7.cpp"
-//#include "./dev/consoles/fns/run-a4of3/run-s01-4of3-re8.cpp"
-//#include "./dev/consoles/fns/run-a4of3/run-s01-4of3-re9.cpp"
+//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re0.cpp"
+//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re1.cpp"
+//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re2.cpp"
+//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re3.cpp"
+//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re4.cpp"
+//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re5.cpp"
+//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re6.cpp"
+//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re7.cpp"
+//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re8.cpp"
+//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re9.cpp"
 
 
 
@@ -119,8 +119,8 @@ struct Chasm_Function_Code
  u1 convention;
  u1 return_code;
  u2 distinct_pretype_pattern;
- s2 type_pattern;
- u1 type_pattern_binary;
+ s2 pretype_pattern;
+ u1 pretype_pattern_binary;
 };
 
 Chasm_Function_Code operator""_cfc(n8 cue);

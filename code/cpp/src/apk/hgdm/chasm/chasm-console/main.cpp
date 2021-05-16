@@ -94,6 +94,7 @@ void testfn(s1 arg1, u4 arg2, s2& arg3)
 {
  qDebug() << "arg1 = " << arg1;
  qDebug() << "arg2 = " << arg2;
+ qDebug() << "arg2 + 1 = " << arg2 + 1;
  qDebug() << "arg3 = " << arg3;
  arg3 = -arg3;
 }
