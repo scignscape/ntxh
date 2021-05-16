@@ -127,24 +127,24 @@ Context_Menu_Provider::Context_Menu_Provider(Pattern_Matcher_Runtime* pm_runtime
  chasm_runtime_ = pm_runtime_->chasm_runtime();
 
  pm_runtime_->procedure_name_resolutions().insert("test_map_places",
-   "test_map_places@70930");
+   "test_map_places@300930");
 
- pm_runtime_->registered_procedures().insert("test_map_places@70930",
-   {70930, (minimal_fn_s0_re0_type) &test_map_places});
+ pm_runtime_->registered_procedures().insert("test_map_places@300930",
+   {300930, (_minimal_fn_type) &test_map_places});
 
 
  pm_runtime_->procedure_name_resolutions().insert("launch_web_site",
-   "launch_web_site@7038");
+   "launch_web_site@20038");
 
- pm_runtime_->registered_procedures().insert("launch_web_site@7038",
-   {7038, (minimal_fn_s0_re0_type) &launch_web_site});
+ pm_runtime_->registered_procedures().insert("launch_web_site@20038",
+   {20038, (_minimal_fn_type) &launch_web_site});
 
 
  pm_runtime_->procedure_name_resolutions().insert("launch_virtual_tour",
-   "launch_virtual_tour@70079");
+   "launch_virtual_tour@300079");
 
- pm_runtime_->registered_procedures().insert("launch_virtual_tour@70079",
-   {70079, (minimal_fn_s0_re0_type) &launch_virtual_tour});
+ pm_runtime_->registered_procedures().insert("launch_virtual_tour@300079",
+   {300079, (_minimal_fn_type) &launch_virtual_tour});
 
 }
 
@@ -163,18 +163,14 @@ void Context_Menu_Provider::check_url(
  if(it == pm_runtime_->registered_procedures().end())
    return;
 
- const QPair<u4, minimal_fn_s0_re0_type>& pr = it.value();
+ const QPair<u4, _minimal_fn_type>& pr = it.value();
 
 
  u4 pcode = pr.first;
- minimal_fn_s0_re0_type proc = pr.second;
+ _minimal_fn_type proc = pr.second;
 
  Chasm_Call_Package* ccp = chasm_runtime_->new_call_package();
  ccp->add_new_channel("lambda");
-
-//// QString a1 = qsl.takeFirst();
-//// u4 a2 = qsl.takeFirst().toUInt();
-//// u1 a3 = qsl.takeFirst().toUInt();
 
  Context_Menu_Provider* _this = this;
 
@@ -184,8 +180,7 @@ void Context_Menu_Provider::check_url(
 
  ccp->add_carriers({cc1,cc2,cc3});
 
- chasm_runtime_->evaluate(ccp, pcode, //(minimal_fn_s0_re0_type)
-                          proc);
+ chasm_runtime_->evaluate(ccp, _cfc(pcode), proc);
 }
 
 
@@ -204,24 +199,19 @@ void Context_Menu_Provider::run_callback(Pattern_Matcher_Runtime::Action_Info ai
    return;
 
 
- const QPair<u4, minimal_fn_s0_re0_type>& pr = it.value();
+ const QPair<u4, _minimal_fn_type>& pr = it.value();
 
 
  u4 pcode = pr.first;
- minimal_fn_s0_re0_type proc = (minimal_fn_s0_re0_type) pr.second;
+ _minimal_fn_type proc = pr.second;
 
  Chasm_Call_Package* ccp = chasm_runtime_->new_call_package();
  ccp->add_new_channel("lambda");
 
  for(Chasm_Typed_Value_Representation& ctvr : ai.reps)
    ccp->add_carrier(chasm_runtime_->gen_carrier(ctvr));
-// Chasm_Carrier cc1 = chasm_runtime_->gen_carrier(ai.reps[0]);
-// Chasm_Carrier cc2 = chasm_runtime_->gen_carrier(ai.reps[1]);
-// Chasm_Carrier cc3 = chasm_runtime_->gen_carrier(ai.reps[2]);
 
-// ccp->add_carriers({cc1,cc2,cc3});
-
- chasm_runtime_->evaluate(ccp, pcode, proc); //proc);
+ chasm_runtime_->evaluate(ccp, _cfc(pcode), proc); //proc);
 }
 
 

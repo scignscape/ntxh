@@ -40,69 +40,6 @@
 
 struct _min_{};
 
-#ifdef HIDE
-
-#include "../dev/consoles/fns/s01/a3/run-s01_3_re0.cpp"
-#include "../dev/consoles/fns/s01/a3/run-s01_3_re1.cpp"
-#include "../dev/consoles/fns/s01/a3/run-s01_3_re2.cpp"
-#include "../dev/consoles/fns/s01/a3/run-s01_3_re3.cpp"
-#include "../dev/consoles/fns/s01/a3/run-s01_3_re4.cpp"
-#include "../dev/consoles/fns/s01/a3/run-s01_3_re5.cpp"
-#include "../dev/consoles/fns/s01/a3/run-s01_3_re6.cpp"
-#include "../dev/consoles/fns/s01/a3/run-s01_3_re7.cpp"
-#include "../dev/consoles/fns/s01/a3/run-s01_3_re8.cpp"
-#include "../dev/consoles/fns/s01/a3/run-s01_3_re9.cpp"
-
-#include "../dev/consoles/fns/s01/a2/run-s01_2_re0.cpp"
-#include "../dev/consoles/fns/s01/a2/run-s01_2_re1.cpp"
-#include "../dev/consoles/fns/s01/a2/run-s01_2_re2.cpp"
-#include "../dev/consoles/fns/s01/a2/run-s01_2_re3.cpp"
-#include "../dev/consoles/fns/s01/a2/run-s01_2_re4.cpp"
-#include "../dev/consoles/fns/s01/a2/run-s01_2_re5.cpp"
-#include "../dev/consoles/fns/s01/a2/run-s01_2_re6.cpp"
-#include "../dev/consoles/fns/s01/a2/run-s01_2_re7.cpp"
-#include "../dev/consoles/fns/s01/a2/run-s01_2_re8.cpp"
-#include "../dev/consoles/fns/s01/a2/run-s01_2_re9.cpp"
-
-#include "../dev/consoles/fns/s01/a1/run-s01_1_re0.cpp"
-#include "../dev/consoles/fns/s01/a1/run-s01_1_re1.cpp"
-#include "../dev/consoles/fns/s01/a1/run-s01_1_re2.cpp"
-#include "../dev/consoles/fns/s01/a1/run-s01_1_re3.cpp"
-#include "../dev/consoles/fns/s01/a1/run-s01_1_re4.cpp"
-#include "../dev/consoles/fns/s01/a1/run-s01_1_re5.cpp"
-#include "../dev/consoles/fns/s01/a1/run-s01_1_re6.cpp"
-#include "../dev/consoles/fns/s01/a1/run-s01_1_re7.cpp"
-#include "../dev/consoles/fns/s01/a1/run-s01_1_re8.cpp"
-#include "../dev/consoles/fns/s01/a1/run-s01_1_re9.cpp"
-
-#include "../dev/consoles/fns/s01/a0/run-s01_0_re0.cpp"
-#include "../dev/consoles/fns/s01/a0/run-s01_0_re1.cpp"
-#include "../dev/consoles/fns/s01/a0/run-s01_0_re2.cpp"
-#include "../dev/consoles/fns/s01/a0/run-s01_0_re3.cpp"
-#include "../dev/consoles/fns/s01/a0/run-s01_0_re4.cpp"
-#include "../dev/consoles/fns/s01/a0/run-s01_0_re5.cpp"
-#include "../dev/consoles/fns/s01/a0/run-s01_0_re6.cpp"
-#include "../dev/consoles/fns/s01/a0/run-s01_0_re7.cpp"
-#include "../dev/consoles/fns/s01/a0/run-s01_0_re8.cpp"
-#include "../dev/consoles/fns/s01/a0/run-s01_0_re9.cpp"
-
-#endif // def HIDE
-
-//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re0.cpp"
-//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re1.cpp"
-//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re2.cpp"
-//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re3.cpp"
-//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re4.cpp"
-//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re5.cpp"
-//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re6.cpp"
-//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re7.cpp"
-//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re8.cpp"
-//#include "../dev/consoles/fns/run-a4of3/run-s01-4of3-re9.cpp"
-
-
-
-//struct _min_{};
-
 class Chasm_Call_Package;
 class Chasm_Type_Object;
 
@@ -125,40 +62,25 @@ struct Chasm_Function_Code
 
 Chasm_Function_Code operator""_cfc(n8 cue);
 
-//KANS_(GTagML)
+inline Chasm_Function_Code _cfc(n8 cue)
+{
+ return operator""_cfc(cue);
+}
 
-
-//template<typename FN_Type>
 extern void _evaluate_s01_3of3(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
   void(*fn)(), void(_min_::*sfn)(), Chasm_Carrier* rcar);
 
-//FN_Type fn, Chasm_Carrier* rcar);
-
-//template<typename FN_Type>
 extern void _evaluate_s01_4of3(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
   void(*fn)(), void(_min_::*sfn)(), Chasm_Carrier* rcar);
-
-                              //FN_Type fn, Chasm_Carrier* rcar);
-
-//template<typename FN_Type>
-//extern void _evaluate_s0_Xof1(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
-//  FN_Type fn, Chasm_Carrier* rcar);
 
 extern void _evaluate_s01_Xof1(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
   void(*fn)(), void(_min_::*sfn)(), Chasm_Carrier* rcar);
 
-
-//template<typename FN_Type>
 extern void _evaluate_s01_Xof2(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
   void(*fn)(), void(_min_::*sfn)(), Chasm_Carrier* rcar);
 
-                               //FN_Type fn, Chasm_Carrier* rcar);
-
 void _evaluate_s01_0_rX(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
   void(*fn)(), void(_min_::*sfn)(), Chasm_Carrier* rcar);
-
-//void _evaluate_s1_0_rX(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
-//  void(*fn)(), Chasm_Carrier* rcar);
 
 
 class Chasm_Runtime
@@ -215,7 +137,6 @@ public:
  Chasm_Carrier gen_carrier(u1 type_flag);
 
  Chasm_Carrier gen_shared_ref_carrier(std::shared_ptr<n8>* ss);
- //Chasm_Carrier gen_shared_ref_carrier(n8 val);
 
  template<typename CARRIER_Type>
  inline Chasm_Carrier gen_carrier();

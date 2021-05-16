@@ -77,7 +77,8 @@ SOURCES += \
 
 
 
-LIBS += -L$$TARGETSDIR -lchasm-lib
+LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
+  -lchasm-lib-33 -lchasm-lib-43
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)
