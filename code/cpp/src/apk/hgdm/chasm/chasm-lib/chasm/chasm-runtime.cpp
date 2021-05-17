@@ -157,21 +157,23 @@
 Chasm_Runtime::Chasm_Runtime()
  :  gen_trisym_line_index_(0), gen_trisym_file_index_(0),
     gen_trisym_col_index_(0), call_package_index_(0),
-    current_no_file_session_(0)
+    current_no_file_session_(0), pretype_type_objects_(new QVector<Chasm_Type_Object*>)
 {
- register_type_object("n8&", 0, 0, 0, -1);
- register_type_object("n8&!", 0, 0, 0, -1);
+ pretype_type_objects_->resize(10);
+
+ (*pretype_type_objects_)[0] = register_type_object("n8&", 0, 0, 0, -1);
+ //(*pretype_type_objects_)[1] = register_type_object("n8&!", 0, 0, 0, -1);
  //register_type_object("n8&!!", 0, 0, 0, -1);
 
- register_type_object("u1", 1, 10, 100, 1000);
- register_type_object("u2", 2, 20, 200, 2000);
- register_type_object("QString", 3, 30, 300, 3000);
- register_type_object("u4", 4, 40, 400, 4000);
- register_type_object("QByteArray", 5, 50, 500, 5000);
- register_type_object("r8", 6, 60, 600, 6000);
- register_type_object("QVariant", 7, 70, 700, 7000);
- register_type_object("n8", 8, 80, 800, 8000);
- register_type_object("void*", 9, 90, 900, 9000);
+ (*pretype_type_objects_)[1] = register_type_object("u1", 1, 10, 100, 1000);
+ (*pretype_type_objects_)[2] = register_type_object("u2", 2, 20, 200, 2000);
+ (*pretype_type_objects_)[3] = register_type_object("QString", 3, 30, 300, 3000);
+ (*pretype_type_objects_)[4] = register_type_object("u4", 4, 40, 400, 4000);
+ (*pretype_type_objects_)[5] = register_type_object("QByteArray", 5, 50, 500, 5000);
+ (*pretype_type_objects_)[6] = register_type_object("r8", 6, 60, 600, 6000);
+ (*pretype_type_objects_)[7] = register_type_object("QVariant", 7, 70, 700, 7000);
+ (*pretype_type_objects_)[8] = register_type_object("n8", 8, 80, 800, 8000);
+ (*pretype_type_objects_)[9] = register_type_object("void*", 9, 90, 900, 9000);
 }
 
 Chasm_Type_Object* Chasm_Runtime::get_type_object_by_name(QString name)
@@ -323,6 +325,19 @@ Chasm_Carrier Chasm_Runtime::gen_carrier<void*>(void* pv)
 {
  return gen_carrier(9).take_value(pv);
 }
+
+Chasm_Carrier Chasm_Runtime::gen_carrier_by_type_object(Chasm_Type_Object* cto)
+{
+ u1 ptc = cto->get_pretype_code();
+ return gen_carrier(ptc);
+}
+
+Chasm_Carrier Chasm_Runtime::gen_carrier_by_type_object(Chasm_Type_Object* cto, void* pv)
+{
+ u1 ptc = cto->get_pretype_code();
+ return gen_carrier(ptc).take_value(pv);
+}
+
 
 Chasm_Carrier Chasm_Runtime::gen_carrier(Chasm_Typed_Value_Representation& tvr)
 {

@@ -80,6 +80,6 @@ void local_program(PhaonIR& phr)
  init_basic_functions(phr, pcm, *phr.table(), pss);
 
  phr.hold_symbol_scope(&pss);
- phr.read_local_program(RZ_DIR "/demo/phaon/t1.rz.gen.pgb.phr");
+ phr.read_local_program(RZ_DIR "/demo/t1.rz.gen.pgb.phr");
 }
 

@@ -5,7 +5,8 @@
 #           http://www.boost.org/LICENSE_1_0.txt)
 
 
-PROJECT_NAME = phaon-ir-console
+PROJECT_NAME = crb-console
+
 
 include(../build-group.pri)
 

@@ -119,9 +119,13 @@ class Chasm_Runtime
 
  QMap<QString, Chasm_Type_Object*> type_objects_;
 
+ QVector<Chasm_Type_Object*>* pretype_type_objects_;
+
 public:
 
  Chasm_Runtime();
+
+ ACCESSORS__CGET(QVector<Chasm_Type_Object*>* ,pretype_type_objects)
 
  _Retvalue Retvalue;
 
@@ -143,6 +147,10 @@ public:
 
  template<typename CARRIER_Type>
  inline Chasm_Carrier gen_carrier(void* value);
+
+ Chasm_Carrier gen_carrier_by_type_object(Chasm_Type_Object* cto);
+ Chasm_Carrier gen_carrier_by_type_object(Chasm_Type_Object* cto, void* pv);
+
 
  void init_no_file_session();
 

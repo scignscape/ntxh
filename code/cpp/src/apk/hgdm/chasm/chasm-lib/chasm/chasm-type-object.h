@@ -41,6 +41,9 @@ public:
 
  ACCESSORS(QString ,name)
 
+ u1 get_pretype_code();
+
+
  Chasm_Typed_Value_Representation with_rep(QString rep)
  {
   return {this, 0, rep};

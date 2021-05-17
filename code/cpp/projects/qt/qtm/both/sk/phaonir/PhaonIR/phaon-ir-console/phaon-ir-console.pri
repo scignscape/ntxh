@@ -4,7 +4,6 @@
 #     (See accompanying file LICENSE_1_0.txt or copy at
 #           http://www.boost.org/LICENSE_1_0.txt)
 
-PROJECT_NAME = phaon-ir-console
 
 include(../build-group.pri)
 
@@ -13,7 +12,7 @@ TEMPLATE = app
 DEFINES += DEFAULT_KPH_FOLDER=\\\"$$ROOT_DIR/dev/kph\\\"
 DEFINES += DEFAULT_PHR_FOLDER=\\\"$$CPP_ROOT_DIR/phr\\\"
 
-DEFINES += RZ_DIR=\\\"$$ROOT_DIR/scripts/rz\\\"
+DEFINES += RZ_DIR=\\\"$$ROOT_DIR/dev/scripts/rz\\\"
 
 INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR
 
