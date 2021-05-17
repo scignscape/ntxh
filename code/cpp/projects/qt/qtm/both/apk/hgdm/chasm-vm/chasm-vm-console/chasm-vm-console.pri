@@ -4,9 +4,10 @@
 #     (See accompanying file LICENSE_1_0.txt or copy at
 #           http://www.boost.org/LICENSE_1_0.txt)
 
-QT -= gui
 
 include(../build-group.pri)
+
+QT -= gui
 
 
 TEMPLATE = app
@@ -22,6 +23,9 @@ INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR $$SRC_ROOT_DIR
 #INCLUDEPATH += $$RELAE_GRAPH_SRC_GROUP_DIR
 #INCLUDEPATH += $$HTXN_SRC_GROUP_DIR
 #INCLUDEPATH += $$SRC_GROUP_DIR/gtagml
+
+INCLUDEPATH += $$SRC_PROSET_DIR/chasm/chasm-lib
+
 
  # Most projects don't use ROOT_DIR as a basis
  # for includes but this one loads some generated
@@ -49,6 +53,7 @@ DEFINES += USE_KANS
 INCLUDEPATH += $$ROOT_DIR
 
 
+
 HEADERS += \
 
 
@@ -58,7 +63,7 @@ SOURCES += \
 
 
 
-LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
+LIBS += -L$$TARGETSDIR -lchasm-runtime-bridge -lchasm-vm -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
   -lchasm-lib-33 -lchasm-lib-43
 
 

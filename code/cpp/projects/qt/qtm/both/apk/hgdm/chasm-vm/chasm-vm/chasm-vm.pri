@@ -4,17 +4,18 @@
 #     (See accompanying file LICENSE_1_0.txt or copy at
 #           http://www.boost.org/LICENSE_1_0.txt)
 
-QT -= gui
 
 include(../build-group.pri)
 
+QT -= gui
 
-TEMPLATE = app
 
 include($$ROOT_DIR/../preferred/sysr.pri)
 
 
 INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR $$SRC_ROOT_DIR
+
+INCLUDEPATH += $$SRC_PROSET_DIR/chasm/chasm-lib
 
 #INCLUDEPATH += $$NTXH_SRC_GROUP_DIR
 #INCLUDEPATH += $$NTXH_SRC_GROUP_DIR/ntxh
@@ -49,12 +50,14 @@ DEFINES += USE_KANS
 INCLUDEPATH += $$ROOT_DIR
 
 
+
 HEADERS += \
+  $$SRC_DIR/chasm-vm.h \
 
 
 
 SOURCES += \
-  $$SRC_DIR/main.cpp \
+  $$SRC_DIR/chasm-vm.cpp \
 
 
 

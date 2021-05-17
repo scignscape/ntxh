@@ -1886,11 +1886,14 @@ int main(int argc, char *argv[])
  run_test2arg(csr);
  qDebug() << "\n===\n";
 
- QVector<Chasm_Typed_Value_Representation> rs_args;
 
+#ifndef __clang__
+ // //  so far have trouble with this on Clang ...
+ QVector<Chasm_Typed_Value_Representation> rs_args;
  pre_run_smart(csr, rs_args);
  run_smart(csr, rs_args);
  qDebug() << "\n===\n";
+#endif
 
  run_testqvar(csr);
  qDebug() << "\n===\n";

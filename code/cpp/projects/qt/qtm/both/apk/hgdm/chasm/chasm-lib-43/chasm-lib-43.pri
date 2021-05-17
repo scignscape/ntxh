@@ -5,9 +5,10 @@
 #           http://www.boost.org/LICENSE_1_0.txt)
 
 
-include(../build-group.pri)
-
 QT -= gui
+
+
+include(../build-group.pri)
 
 
 include($$ROOT_DIR/../preferred/sysr.pri)
