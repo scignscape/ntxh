@@ -55,7 +55,6 @@ HEADERS += \
   $$SRC_DIR/chasm-vm.h \
 
 
-
 SOURCES += \
   $$SRC_DIR/chasm-vm.cpp \
 

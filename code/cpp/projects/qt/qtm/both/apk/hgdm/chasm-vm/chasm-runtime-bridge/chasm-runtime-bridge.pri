@@ -46,11 +46,13 @@ DEFINES += USE_KANS
 
 HEADERS += \
   $$SRC_DIR/chasm-runtime-bridge.h \
+  $$SRC_DIR/csm-ghost-scope.h \
 
 
 
 SOURCES += \
   $$SRC_DIR/chasm-runtime-bridge.cpp \
+  $$SRC_DIR/csm-ghost-scope.cpp \
 
 
 

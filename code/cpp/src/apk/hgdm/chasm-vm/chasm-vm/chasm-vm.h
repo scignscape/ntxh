@@ -28,6 +28,7 @@ class Chasm_Runtime;
 
 class Chasm_Runtime_Bridge;
 
+
 class Chasm_VM
 {
  Chasm_Runtime_Bridge* crb_;

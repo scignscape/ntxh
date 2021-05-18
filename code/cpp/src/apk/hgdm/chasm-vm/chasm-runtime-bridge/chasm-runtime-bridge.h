@@ -30,6 +30,7 @@
 
 class Chasm_Call_Package;
 class Chasm_Type_Object;
+class CSM_Ghost_Scope;
 
 typedef void(*_minimal_fn_s0_type)();
 typedef void(_min_::*_minimal_fn_s1_type)();
@@ -62,6 +63,10 @@ class Chasm_Runtime_Bridge
 
  n8 current_loaded_raw_value_;
 
+ CSM_Ghost_Scope* current_ghost_scope_;
+ QStack<CSM_Ghost_Scope*> active_ghost_scopes_;
+
+
 public:
 
  Chasm_Runtime_Bridge(Chasm_Runtime* csr);
@@ -69,6 +74,14 @@ public:
  void new_call_package(); //Chasm_Call_Package*
 
  void add_new_channel(QString name);
+
+ void init_new_ghost_scope();
+
+ void check_claims(const Chasm_Carrier& cc);
+ void check_ghost(const Chasm_Carrier& cc);
+
+ void clear_current_ghost_scope();
+
 
  void load_type_ref();
  void load_type_u1();

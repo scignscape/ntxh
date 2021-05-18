@@ -10,6 +10,8 @@
 #include "chasm/chasm-runtime.h"
 #include "chasm/chasm-call-package.h"
 
+#include "csm-ghost-scope.h"
+
 #include <QString>
 #include <QVariant>
 #include <QByteArray>
@@ -20,8 +22,9 @@
 
 
 Chasm_Runtime_Bridge::Chasm_Runtime_Bridge(Chasm_Runtime* csr)
-  :  csr_(csr), current_call_package_(nullptr), current_loaded_raw_value_(0),
-     current_type_object_(nullptr), current_carrier_deque_(nullptr)
+  :  csr_(csr), current_call_package_(nullptr),
+     current_type_object_(nullptr), current_carrier_deque_(nullptr),
+     current_loaded_raw_value_(0), current_ghost_scope_(nullptr)
 {
  const QVector<Chasm_Type_Object*>& pto = *csr_->pretype_type_objects();
 
@@ -37,6 +40,18 @@ Chasm_Runtime_Bridge::Chasm_Runtime_Bridge(Chasm_Runtime* csr)
  type_object_ptr_ = pto[9];
 }
 
+void Chasm_Runtime_Bridge::init_new_ghost_scope()
+{
+ if(current_ghost_scope_)
+   active_ghost_scopes_.push(current_ghost_scope_);
+ current_ghost_scope_ = new CSM_Ghost_Scope;
+}
+
+void Chasm_Runtime_Bridge::clear_current_ghost_scope()
+{
+ if(current_ghost_scope_)
+   current_ghost_scope_->clear_all();
+}
 
 void Chasm_Runtime_Bridge::run_eval(QString proc_name)
 {
@@ -87,10 +102,23 @@ void Chasm_Runtime_Bridge::push_carrier_deque()
  current_carrier_deque_ = new std::deque<Chasm_Carrier>;
 }
 
+void Chasm_Runtime_Bridge::check_claims(const Chasm_Carrier& cc)
+{
+ check_ghost(cc);
+}
+
+void Chasm_Runtime_Bridge::check_ghost(const Chasm_Carrier& cc)
+{
+ if(current_ghost_scope_)
+   current_ghost_scope_->add_carrier(cc);
+}
+
 void Chasm_Runtime_Bridge::gen_carrier_tvr(QString rep)
 {
  Chasm_Typed_Value_Representation tvr({current_type_object_, current_loaded_raw_value_, rep});
- current_carrier_deque_->push_back( csr_->gen_carrier(tvr) );
+ Chasm_Carrier cc = csr_->gen_carrier(tvr);
+ check_claims(cc);
+ current_carrier_deque_->push_back(cc);
 }
 
 void Chasm_Runtime_Bridge::reset_loaded_raw_value()
@@ -106,12 +134,16 @@ void Chasm_Runtime_Bridge::reset_type_object()
 
 void Chasm_Runtime_Bridge::gen_carrier()
 {
- current_carrier_deque_->push_back( csr_->gen_carrier_by_type_object(current_type_object_) );
+ Chasm_Carrier cc = csr_->gen_carrier_by_type_object(current_type_object_);
+ check_claims(cc);
+ current_carrier_deque_->push_back(cc);
 }
 
 void Chasm_Runtime_Bridge::gen_carrier(void* pv)
 {
- current_carrier_deque_->push_back( csr_->gen_carrier_by_type_object(current_type_object_, pv) );
+ Chasm_Carrier cc = csr_->gen_carrier_by_type_object(current_type_object_, pv);
+ check_claims(cc);
+ current_carrier_deque_->push_back(cc);
 }
 
 

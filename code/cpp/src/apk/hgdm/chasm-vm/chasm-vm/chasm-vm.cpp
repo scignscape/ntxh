@@ -155,6 +155,8 @@ void Chasm_VM::read_line(QString inst)
   { "reset_type_object", &Chasm_Runtime_Bridge::reset_type_object },
   { "add_carriers", &Chasm_Runtime_Bridge::add_carriers },
   { "reset_carrier_deque", &Chasm_Runtime_Bridge::reset_carrier_deque },
+  { "init_new_ghost_scope", &Chasm_Runtime_Bridge::init_new_ghost_scope },
+  { "clear_current_ghost_scope", &Chasm_Runtime_Bridge::clear_current_ghost_scope },
  }};
 
  auto it = static_map.find(inst);

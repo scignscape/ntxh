@@ -1,7 +1,8 @@
 
 
-push_carrier_deque ;.
+init_new_ghost_scope ;.
 
+push_carrier_deque ;.
 
 new_call_package ;.
 add_new_channel $ lambda ;.
@@ -17,4 +18,5 @@ add_carriers ;.
 run_eval $ testqvar ;.
 
 reset_carrier_deque ;.
+clear_current_ghost_scope ;.
 
