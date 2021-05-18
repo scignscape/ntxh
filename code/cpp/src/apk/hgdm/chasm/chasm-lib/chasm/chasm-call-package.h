@@ -21,6 +21,8 @@
 
 #include "chasm-carrier.h"
 
+#include <deque>
+
 //KANS_(GTagML)
 
 class Chasm_Channel;
@@ -44,6 +46,7 @@ public:
  void add_carrier(const Chasm_Carrier& cc);
 
  void add_carriers(const QVector<Chasm_Carrier>& ccs);
+ void add_carriers(std::deque<Chasm_Carrier>& ccs);
 
  Chasm_Channel* channel(QString name)
  {

@@ -17,10 +17,26 @@ USING_KANS(TextIO)
 #include "chasm-vm/chasm-vm.h"
 #include "chasm-runtime-bridge/chasm-runtime-bridge.h"
 
+#define register_s0(proc ,code) register_procedure_s0(#proc, (void(*)()) &proc, #code)
+
+void testqvar(QVariant arg1, r8 arg2, u2 arg3)
+{
+ qDebug() << "arg1 = " << arg1;
+ qDebug() << "arg2 = " << arg2;
+ qDebug() << "arg3 = " << arg3;
+}
+
+
 int main(int argc, char *argv[])
 {
  Chasm_Runtime csr;
  Chasm_Runtime_Bridge crb(&csr);
- Chasm_VM cvm(&crb);
+
+ crb.register_s0(testqvar, @300762);
+
+ Chasm_VM csm(&crb);
+ csm.gen_source_proc_name();
+ csm.load_program(DEMO_CSM_FOLDER "/demo/t1.csm");
+ csm.run_current_source_proc_name();
 }
 

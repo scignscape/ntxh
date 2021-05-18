@@ -163,7 +163,8 @@ Chasm_Runtime::Chasm_Runtime()
 
  (*pretype_type_objects_)[0] = register_type_object("n8&", 0, 0, 0, -1);
  //(*pretype_type_objects_)[1] = register_type_object("n8&!", 0, 0, 0, -1);
- //register_type_object("n8&!!", 0, 0, 0, -1);
+
+ register_type_object("n8&!", 0, 0, 0, -1);
 
  (*pretype_type_objects_)[1] = register_type_object("u1", 1, 10, 100, 1000);
  (*pretype_type_objects_)[2] = register_type_object("u2", 2, 20, 200, 2000);
@@ -356,9 +357,9 @@ Chasm_Carrier Chasm_Runtime::gen_carrier(Chasm_Typed_Value_Representation& tvr)
   QString rep = tvr.rep.mid(4);
   QVariant r;
   if(typ == "url:")
-    r = QUrl(tvr.rep);
+    r = QUrl(rep);
   else if(typ == "int:")
-    r = tvr.rep.toInt();
+    r = rep.toInt();
   else
     r = tvr.rep;
   return gen_carrier<QVariant>(&r);
@@ -368,6 +369,24 @@ Chasm_Carrier Chasm_Runtime::gen_carrier(Chasm_Typed_Value_Representation& tvr)
  {
   u1 arg = tvr.rep.toUInt();
   return gen_carrier<u1>(&arg);
+ }
+
+ if(cto->name() == "u2")
+ {
+  u2 arg = tvr.rep.toUInt();
+  return gen_carrier<u2>(&arg);
+ }
+
+ if(cto->name() == "u4")
+ {
+  u4 arg = tvr.rep.toUInt();
+  return gen_carrier<u4>(&arg);
+ }
+
+ if(cto->name() == "r8")
+ {
+  r8 arg = tvr.rep.toDouble();
+  return gen_carrier<r8>(&arg);
  }
 
  if(cto->name() == "n8")

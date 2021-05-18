@@ -21,6 +21,8 @@
 
 #include "chasm-carrier.h"
 
+#include <deque>
+
 
 //KANS_(GTagML)
 
@@ -47,6 +49,9 @@ public:
  {
   carriers_.append(ccs);
  }
+
+ void add_carriers(std::deque<Chasm_Carrier>& ccs);
+
 
  Chasm_Carrier first_carrier();
 

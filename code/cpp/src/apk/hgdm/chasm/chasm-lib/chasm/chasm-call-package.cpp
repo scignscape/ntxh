@@ -40,6 +40,11 @@ void Chasm_Call_Package::add_carrier(const Chasm_Carrier& cc)
  current_build_channel_->add_carrier(cc);
 }
 
+void Chasm_Call_Package::add_carriers(std::deque<Chasm_Carrier>& ccs)
+{
+ current_build_channel_->add_carriers(ccs);
+}
+
 void Chasm_Call_Package::add_carriers(const QVector<Chasm_Carrier>& ccs)
 {
  current_build_channel_->add_carriers(ccs);

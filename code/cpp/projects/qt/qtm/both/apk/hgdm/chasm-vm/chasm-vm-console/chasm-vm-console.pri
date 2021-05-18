@@ -35,7 +35,7 @@ INCLUDEPATH += $$SRC_PROSET_DIR/chasm/chasm-lib
 
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
-DEFINES += SCREENSHOTS_FOLDER=\\\"$$ROOT_DIR/code/assets/screenshots\\\"
+DEFINES += DEMO_CSM_FOLDER=\\\"$$ROOT_DIR/dev/consoles/chasm-vm\\\"
 
 
 DEFINES += CAON_DEBUG

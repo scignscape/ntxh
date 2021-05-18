@@ -13,6 +13,7 @@
 #include <QStack>
 #include <QVariant>
 #include <QQueue>
+#include <deque>
 
 #include <QDebug>
 
@@ -24,10 +25,16 @@
 #include "global-types.h"
 #include "kans.h"
 
+#include "chasm/chasm-runtime.h"
 
-class Chasm_Runtime;
+
 class Chasm_Call_Package;
 class Chasm_Type_Object;
+
+typedef void(*_minimal_fn_s0_type)();
+typedef void(_min_::*_minimal_fn_s1_type)();
+
+union _minimal_fn_type { _minimal_fn_s0_type s0; _minimal_fn_s1_type s1; };
 
 class Chasm_Runtime_Bridge
 {
@@ -46,9 +53,14 @@ class Chasm_Runtime_Bridge
  Chasm_Type_Object* type_object_n8_;
  Chasm_Type_Object* type_object_ptr_;
 
- QStack<QQueue<Chasm_Carrier>*> carrier_stacks_;
+ QStack<std::deque<Chasm_Carrier>*> carrier_stacks_;
 
- QQueue<Chasm_Carrier>* current_carrienr_queue_;
+ std::deque<Chasm_Carrier>* current_carrier_deque_;
+
+ QMap<QString, QString> procedure_name_resolutions_;
+ QMap<QString, QPair<Chasm_Function_Code, _minimal_fn_type>> registered_procedures_;
+
+ n8 current_loaded_raw_value_;
 
 public:
 
@@ -69,10 +81,24 @@ public:
  void load_type_n8();
  void load_type_ptr();
 
- void push_carrier_queue();
+ void push_carrier_deque();
  void gen_carrier();
  void gen_carrier(void* pv);
+ void gen_carrier_tvr(QString rep);
 
+ void reset_loaded_raw_value();
+ void reset_type_object();
+
+ void add_carriers();
+ void reset_carrier_deque();
+
+// void register_procedure_s0(QString name,
+//   _minimal_fn_s0_type fn, u4 proc);
+
+ void register_procedure_s0(QString name,
+   _minimal_fn_s0_type fn, QString code);
+
+ void run_eval(QString proc_name);
 
 };
 

@@ -28,6 +28,12 @@ void Chasm_Channel::pasn8vector(QVector<n8>& result, u1 size)
    result[i] = pasn8(i + 1);
 }
 
+void Chasm_Channel::add_carriers(std::deque<Chasm_Carrier>& ccs)
+{
+ for(Chasm_Carrier& cc : ccs)
+   carriers_.push_back(cc);
+}
+
 
 Chasm_Carrier Chasm_Channel::first_carrier()
 {

@@ -1,0 +1,20 @@
+
+
+push_carrier_deque ;.
+
+
+new_call_package ;.
+add_new_channel $ lambda ;.
+
+load_type_QVariant ;.
+gen_carrier_tvr $ int:103 ;.
+load_type_r8 ;.
+gen_carrier_tvr $ .12345 ;.
+load_type_u2 ;.
+gen_carrier_tvr $ 12345 ;.
+add_carriers ;.
+
+run_eval $ testqvar ;.
+
+reset_carrier_deque ;.
+
