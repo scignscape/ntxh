@@ -5,4 +5,6 @@
 #           http://www.boost.org/LICENSE_1_0.txt)
 
 
+PROJECT_GROUP = chasm-dsmain
+
 include(../build-proset.pri)

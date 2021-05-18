@@ -630,6 +630,12 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
 }
 
 
+void ScignStage_Ling_Dialog::proceed()
+{
+ // //  Not needed so long as the dialog is not embedded ...
+}
+
+
 void ScignStage_Ling_Dialog::prepare_tree_context_menu(const QPoint& qp)
 {
  QTreeWidgetItem* twi = main_tree_widget_->itemAt(qp);

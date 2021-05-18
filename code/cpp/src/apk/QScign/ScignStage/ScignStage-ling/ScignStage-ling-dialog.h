@@ -403,6 +403,7 @@ public Q_SLOTS:
 
  void accept();
  void cancel();
+ void proceed();
 
  void activate_tcp_requested();
 

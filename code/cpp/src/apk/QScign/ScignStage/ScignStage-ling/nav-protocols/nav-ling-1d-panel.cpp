@@ -117,8 +117,8 @@ NAV_Ling1D_Panel::NAV_Ling1D_Panel(int vmn, int vmx, int v, QWidget* parent)
  connect(sample_first_button_, SIGNAL(clicked()),
    this, SIGNAL(sample_first_requested()));
 
- connect(auto_expand_button_, SIGNAL(clicked()),
-   this, SIGNAL(sample_review_requested()));
+// connect(auto_expand_button_, SIGNAL(clicked()),
+//   this, SIGNAL(sample_review_requested()));
 
  filter_up_down_layout_ = new QVBoxLayout;
 
