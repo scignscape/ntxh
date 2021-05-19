@@ -10,6 +10,8 @@
 #include "chasm/chasm-runtime.h"
 #include "chasm/chasm-call-package.h"
 
+#include "chasm-procedure-table/chasm-procedure-table.h"
+
 #include "csm-ghost-scope.h"
 
 #include <QString>
@@ -24,7 +26,8 @@
 Chasm_Runtime_Bridge::Chasm_Runtime_Bridge(Chasm_Runtime* csr)
   :  csr_(csr), current_call_package_(nullptr),
      current_type_object_(nullptr), current_carrier_deque_(nullptr),
-     current_loaded_raw_value_(0), current_ghost_scope_(nullptr)
+     current_loaded_raw_value_(0), current_ghost_scope_(nullptr),
+     proctable_(nullptr)
 {
  const QVector<Chasm_Type_Object*>& pto = *csr_->pretype_type_objects();
 
@@ -56,12 +59,12 @@ void Chasm_Runtime_Bridge::clear_current_ghost_scope()
 void Chasm_Runtime_Bridge::run_eval(QString proc_name)
 {
  {
-  auto it = procedure_name_resolutions_.find(proc_name);
-  if(it != procedure_name_resolutions_.end())
+  auto it = proctable_->procedure_name_resolutions().find(proc_name);
+  if(it != proctable_->procedure_name_resolutions().end())
     proc_name = *it;
  }
- auto it = registered_procedures_.find(proc_name);
- if(it == registered_procedures_.end())
+ auto it = proctable_->registered_procedures().find(proc_name);
+ if(it == proctable_->registered_procedures().end())
    return;
  const QPair<Chasm_Function_Code, _minimal_fn_type>& pr = *it;
  if(pr.first.convention == 0)
@@ -72,16 +75,6 @@ void Chasm_Runtime_Bridge::run_eval(QString proc_name)
  {
   csr_->evaluate(current_call_package_, pr.first, pr.second.s1);
  }
-}
-
-
-void Chasm_Runtime_Bridge::register_procedure_s0(QString name,
-  _minimal_fn_s0_type fn, QString proc)
-{
- n8 nn = proc.mid(1).toULongLong();
- Chasm_Function_Code fncode = _cfc(nn);
- procedure_name_resolutions_[name] = name + proc;
- registered_procedures_[name + proc] = {fncode, {.s0 = fn}};
 }
 
 

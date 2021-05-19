@@ -10,12 +10,15 @@ include(../build-group.pri)
 QT -= gui
 
 
-TEMPLATE = app
-
 include($$ROOT_DIR/../preferred/sysr.pri)
 
 
 INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR $$SRC_ROOT_DIR
+
+
+INCLUDEPATH += $$SRC_PROSET_DIR/chasm/chasm-lib
+INCLUDEPATH += $$SRC_PROSET_DIR/chasm-vm
+
 
 #INCLUDEPATH += $$NTXH_SRC_GROUP_DIR
 #INCLUDEPATH += $$NTXH_SRC_GROUP_DIR/ntxh
@@ -23,9 +26,6 @@ INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR $$SRC_ROOT_DIR
 #INCLUDEPATH += $$RELAE_GRAPH_SRC_GROUP_DIR
 #INCLUDEPATH += $$HTXN_SRC_GROUP_DIR
 #INCLUDEPATH += $$SRC_GROUP_DIR/gtagml
-
-INCLUDEPATH += $$SRC_PROSET_DIR/chasm/chasm-lib
-
 
  # Most projects don't use ROOT_DIR as a basis
  # for includes but this one loads some generated
@@ -55,16 +55,15 @@ INCLUDEPATH += $$ROOT_DIR
 
 
 HEADERS += \
-
+  $$SRC_DIR/chasm-dsmain-model.h \
 
 
 SOURCES += \
-  $$SRC_DIR/main.cpp \
+  $$SRC_DIR/chasm-dsmain-model.cpp \
 
 
 
-LIBS += -L$$TARGETSDIR -lchasm-runtime-bridge -lchasm-vm  -lchasm-procedure-table \
-  -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
+LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
   -lchasm-lib-33 -lchasm-lib-43
 
 

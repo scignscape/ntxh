@@ -31,9 +31,12 @@ int main(int argc, char *argv[])
 {
  Chasm_Runtime csr;
  Chasm_Runtime_Bridge crb(&csr);
+ Chasm_Procedure_Table cpt(&csr);
+
+ crb.set_proctable(&cpt);
 // crb.register_(testqvar ,300782);
 
- crb.register_s0(testqvar, @300762);
+ cpt.register_s0(testqvar, @300762);
 
  crb.push_carrier_deque();
 // Chasm_VM cvm(&crb);

@@ -44,9 +44,20 @@ CONFIG += no_keywords
 DEFINES += USE_KANS
 
 
+# # currently chasm is only available through the isobuild ...
+CHOICE_FEATURES += chasm
+
+contains(CHOICE_FEATURES, "chasm") \#/
+{
+ message(DEFINE\'ing USE_CHASM)
+ DEFINES += USE_CHASM
+}
+
+
 HEADERS +=  \
   $$SRC_DIR/dataset.h  \
   $$SRC_DIR/dataset-info.h  \
+  $$SRC_DIR/dataset-environment.h  \
   $$SRC_DIR/dsm-sdi-document.h  \
   $$SRC_DIR/language-sample.h  \
   $$SRC_DIR/language-sample-group.h  \
@@ -58,6 +69,7 @@ HEADERS +=  \
 
 SOURCES += \
   $$SRC_DIR/dataset.cpp  \
+  $$SRC_DIR/dataset-environment.cpp  \
   $$SRC_DIR/dataset-info.cpp  \
   $$SRC_DIR/dsm-sdi-document.cpp  \
   $$SRC_DIR/language-sample.cpp  \
@@ -69,8 +81,12 @@ SOURCES += \
 
 LIBS +=  -L$$TARGETSDIR  -lntxh-parser -lntxh  -lqring
 
-
 LIBS += -L$$TARGETSDIR -lqh-package
+
+contains(CHOICE_FEATURES, "chasm") \#/
+{
+ LIBS += -L$$TARGETSDIR -lchasm-dsmain -lchasm-lib
+}
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

@@ -27,15 +27,19 @@
 
 #include "chasm/chasm-runtime.h"
 
+//#define register_s0(proc ,code) register_procedure_s0(#proc, (void(*)()) &proc, #code)
+//#define register_s1(proc ,code) register_procedure_s1(#proc, (void(_min_::*)()) &proc, #code)
+
+#include "chasm-procedure-table/chasm-procedure-table.h"
 
 class Chasm_Call_Package;
 class Chasm_Type_Object;
 class CSM_Ghost_Scope;
 
-typedef void(*_minimal_fn_s0_type)();
-typedef void(_min_::*_minimal_fn_s1_type)();
 
-union _minimal_fn_type { _minimal_fn_s0_type s0; _minimal_fn_s1_type s1; };
+//typedef void(*_minimal_fn_s0_type)();
+//typedef void(_min_::*_minimal_fn_s1_type)();
+//union _minimal_fn_type { _minimal_fn_s0_type s0; _minimal_fn_s1_type s1; };
 
 class Chasm_Runtime_Bridge
 {
@@ -58,16 +62,17 @@ class Chasm_Runtime_Bridge
 
  std::deque<Chasm_Carrier>* current_carrier_deque_;
 
- QMap<QString, QString> procedure_name_resolutions_;
- QMap<QString, QPair<Chasm_Function_Code, _minimal_fn_type>> registered_procedures_;
-
  n8 current_loaded_raw_value_;
 
  CSM_Ghost_Scope* current_ghost_scope_;
  QStack<CSM_Ghost_Scope*> active_ghost_scopes_;
 
+ Chasm_Procedure_Table* proctable_;
+
 
 public:
+
+ ACCESSORS(Chasm_Procedure_Table* ,proctable)
 
  Chasm_Runtime_Bridge(Chasm_Runtime* csr);
 
@@ -104,12 +109,6 @@ public:
 
  void add_carriers();
  void reset_carrier_deque();
-
-// void register_procedure_s0(QString name,
-//   _minimal_fn_s0_type fn, u4 proc);
-
- void register_procedure_s0(QString name,
-   _minimal_fn_s0_type fn, QString code);
 
  void run_eval(QString proc_name);
 

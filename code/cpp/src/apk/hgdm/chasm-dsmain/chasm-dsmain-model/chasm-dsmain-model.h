@@ -5,8 +5,8 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef CHASM_DSMAIN__H
-#define CHASM_DSMAIN__H
+#ifndef CHASM_DSMAIN_MODEL__H
+#define CHASM_DSMAIN_MODEL__H
 
 #include <QString>
 
@@ -27,22 +27,22 @@
 class Chasm_Runtime;
 
 class Chasm_Runtime_Bridge;
+class Chasm_Procedure_Table;
 
-
-class Chasm_DSMain
+class Chasm_DSMain_Model
 {
- QString current_paper_name_;
+ //Chasm_Runtime_Bridge* crb_;
+ Chasm_Procedure_Table* proctable_;
 
 public:
 
- Chasm_DSMain();
+ Chasm_DSMain_Model(Chasm_Procedure_Table* proctable);
 
- void load_dataset(QString paper_name);
- void setup_sdifolder(QString paper_name);
+ void register_procedures();
 
 
 };
 
 // _KANS(GTagML)
 
-#endif // CHASM_DSMAIN__H
+#endif // CHASM_DSMAIN_MODEL__H
