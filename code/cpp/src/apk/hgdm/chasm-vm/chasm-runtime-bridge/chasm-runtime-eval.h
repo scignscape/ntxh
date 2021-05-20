@@ -68,6 +68,7 @@ public:
  Chasm_Carrier call_s1(void* obj, QString name);
 
  Chasm_Carrier call_s0(QString name, QString args_rep);
+ Chasm_Carrier call_s0(QString name, QString args_rep, QString ret_channel_name);
 
 
 };

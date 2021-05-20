@@ -1,1 +1,1 @@
-CHOICE_FEATURES = xpdf lex-pair kph kph-gen ro
+CHOICE_FEATURES = xpdf lex-pair kph kph-gen ro chasm

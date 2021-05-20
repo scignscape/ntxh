@@ -45,6 +45,12 @@ Chasm_Runtime_Eval::Chasm_Runtime_Eval(Chasm_Runtime* csr)
 
 Chasm_Carrier Chasm_Runtime_Eval::call_s0(QString name, QString args_rep)
 {
+ return call_s0(name, args_rep, "retvalue");
+}
+
+
+Chasm_Carrier Chasm_Runtime_Eval::call_s0(QString name, QString args_rep, QString ret_channel_name)
+{
  _minimal_fn_s0_type fn = nullptr;
  _minimal_fn_s1_type sfn = nullptr;
 
@@ -76,7 +82,7 @@ Chasm_Carrier Chasm_Runtime_Eval::call_s0(QString name, QString args_rep)
  }
 
 
- ccp->add_new_channel("retvalue");
+ ccp->add_new_channel(ret_channel_name);
  Chasm_Carrier rcc = csr_->gen_carrier(cfc.return_code);
  ccp->add_carrier(rcc);
 

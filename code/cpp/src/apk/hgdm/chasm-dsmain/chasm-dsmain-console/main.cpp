@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
  Dataset_Environment* dsenv;
 
  {
-  Chasm_Carrier cc = cre.call_s0("Dataset_Environment::_new", "0/;");
+  Chasm_Carrier cc = cre.call_s0("Dataset_Environment::_new", "0/;", "coco:retvalue");
   dsenv = cc.value<Dataset_Environment*>();
  }
 

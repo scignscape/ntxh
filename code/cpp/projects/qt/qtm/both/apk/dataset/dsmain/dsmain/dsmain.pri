@@ -45,7 +45,7 @@ DEFINES += USE_KANS
 
 
 # # currently chasm is only available through the isobuild ...
-CHOICE_FEATURES += chasm
+ # CHOICE_FEATURES += chasm
 
 contains(CHOICE_FEATURES, "chasm") \#/
 {

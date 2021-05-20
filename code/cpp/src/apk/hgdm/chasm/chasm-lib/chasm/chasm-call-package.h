@@ -35,6 +35,8 @@ class Chasm_Call_Package
 
  u4 id_;
 
+ QMap<QString, QString> name_defers_;
+
 public:
 
  Chasm_Call_Package(u4 id);
@@ -48,10 +50,10 @@ public:
  void add_carriers(const QVector<Chasm_Carrier>& ccs);
  void add_carriers(std::deque<Chasm_Carrier>& ccs);
 
- Chasm_Channel* channel(QString name)
- {
-  return channels_.value(name);
- }
+ Chasm_Channel* channel(QString name);
+// {
+//  return channels_.value(name);
+// }
 
 //.. ACCESSORS(QString ,text)
 

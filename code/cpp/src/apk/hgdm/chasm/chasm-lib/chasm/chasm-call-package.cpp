@@ -29,8 +29,32 @@ Chasm_Call_Package::Chasm_Call_Package(u4 id)
 
 }
 
+
+Chasm_Channel* Chasm_Call_Package::channel(QString name)
+{
+ auto it = channels_.find(name);
+ if(it == channels_.end())
+ {
+  name = name_defers_.value(name);
+  if(name.isEmpty())
+    return nullptr;
+  return channel(name);
+ }
+ return *it;
+}
+
+
 void Chasm_Call_Package::add_new_channel(QString name)
 {
+ if(name.contains(':'))
+ {
+  QStringList qsl = name.split(':');
+  for(u1 u = 0; u < qsl.size() - 1; ++u)
+  {
+   name_defers_[qsl[u + 1]] = qsl[u];
+  }
+  name = qsl.first();
+ }
  current_build_channel_ = new Chasm_Channel(name);
  channels_[name] = current_build_channel_;
 }
