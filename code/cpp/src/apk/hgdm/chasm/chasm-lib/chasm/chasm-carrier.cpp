@@ -55,6 +55,17 @@ void Chasm_Carrier::set_value_as<QVariant>(const QVariant& val)
  take_value(const_cast<QVariant*>(&val));
 }
 
+//Chasm_Carrier& Chasm_Carrier::take_string_value()
+//{
+// u1 tf = key_.type_flag();
+
+// switch (tf)
+// {
+// case 0:
+// }
+//}
+
+
 n8 Chasm_Carrier::pasn8()
 {
  u1 tf = key_.type_flag();

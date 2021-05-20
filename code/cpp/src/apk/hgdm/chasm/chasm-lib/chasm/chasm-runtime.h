@@ -58,6 +58,17 @@ struct Chasm_Function_Code
  u2 distinct_pretype_pattern;
  s2 pretype_pattern;
  u1 pretype_pattern_binary;
+
+ u2 invalid()
+ {
+  if((distinct_pretype_pattern % 100) == 0)
+    return distinct_pretype_pattern;
+  return 0;
+ }
+ static Chasm_Function_Code _invalid()
+ {
+  return {0,0,0,100,0,0};
+ }
 };
 
 Chasm_Function_Code operator""_cfc(n8 cue);
@@ -139,6 +150,7 @@ public:
  Chasm_Carrier gen_carrier(Chasm_Typed_Value_Representation& tvr);
  Chasm_Carrier gen_carrier(QString type_name = {});
  Chasm_Carrier gen_carrier(u1 type_flag);
+ Chasm_Carrier gen_carrier(u1 type_flag, QString rep);
 
  Chasm_Carrier gen_shared_ref_carrier(std::shared_ptr<n8>* ss);
 

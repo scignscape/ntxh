@@ -340,6 +340,41 @@ Chasm_Carrier Chasm_Runtime::gen_carrier_by_type_object(Chasm_Type_Object* cto, 
 }
 
 
+Chasm_Carrier Chasm_Runtime::gen_carrier(u1 type_flag, QString rep)
+{
+// Chasm_Typed_Value_Representation tvr({(*pretype_type_objects_)[type_flag], 0, rep});
+// return gen_carrier(tvr);
+
+ // ccp->add_new_channel("lambda");
+ // QStringList qsl;
+ // void* h = &qsl;
+ // Chasm_Carrier cc = csr_->gen_carrier<n8&>(h);
+ // ccp->add_carrier(cc);
+
+
+ switch (type_flag)
+ {
+ case 0:
+  {
+  QStringList qsl{rep};
+  void** handle = new void*(&qsl);
+  return gen_carrier<n8&>(handle);
+   //n8 v = rep.toULongLong(); return gen_carrier<n8&>(&v);
+
+  }
+ case 1: { u1 v = rep.toUShort(); return gen_carrier<u1>(&v); }
+ case 2: { u2 v = rep.toUShort(); return gen_carrier<u2>(&v); }
+ case 3:
+ case 7: { Chasm_Typed_Value_Representation tvr({(*pretype_type_objects_)[type_flag], 0, rep});
+  return gen_carrier(tvr); }
+ case 4: { u4 v = rep.toUInt(); return gen_carrier<u4>(&v); }
+ case 8: { n8 v = rep.toULongLong(); return gen_carrier<n8>(&v); }
+ //?case 9: { n8 v = rep.toULongLong(); return gen_carrier<n8>(&v); }
+ }
+
+}
+
+
 Chasm_Carrier Chasm_Runtime::gen_carrier(Chasm_Typed_Value_Representation& tvr)
 {
  Chasm_Type_Object* cto = tvr.type_object;

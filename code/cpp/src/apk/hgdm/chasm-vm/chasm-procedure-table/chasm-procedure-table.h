@@ -81,6 +81,11 @@ public:
  void register_procedure_s0(QString name,
    _minimal_fn_s0_type fn, QString code);
 
+ void register_procedure_s1(QString name,
+   _minimal_fn_s1_type sfn, QString code);
+
+ Chasm_Function_Code find_procedure(QString name,
+   _minimal_fn_s0_type& s0, _minimal_fn_s1_type& s1);
 
 };
 

@@ -50,6 +50,12 @@ Dataset_Environment::Dataset_Environment(const QStringList& cmd_args)
  initial_paper_name_ = current_paper_name_;
 }
 
+Dataset_Environment* Dataset_Environment::_new(const QStringList& cmd_args)
+{
+ return new Dataset_Environment(cmd_args);
+}
+
+
 bool Dataset_Environment::check_setup_only()
 {
  if(cmd_args_.size() >= 4)

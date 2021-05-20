@@ -124,6 +124,10 @@ void Chasm_Runtime_Bridge::reset_type_object()
  current_type_object_ = nullptr;
 }
 
+Chasm_Carrier Chasm_Runtime_Bridge::last_carrier()
+{
+ return current_carrier_deque_->back();
+}
 
 void Chasm_Runtime_Bridge::gen_carrier()
 {

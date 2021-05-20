@@ -53,6 +53,8 @@ public:
 
  Dataset_Environment(const QStringList& cmd_args);
 
+ static Dataset_Environment* _new(const QStringList& cmd_args);
+
 // Dataset_Environment();
 
  ACCESSORS(QString ,current_paper_name)

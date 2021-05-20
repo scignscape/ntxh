@@ -116,6 +116,8 @@ public:
 
  Chasm_Carrier& take_value(void* pv);
 
+// Chasm_Carrier& take_string_value();
+
  Chasm_Carrier& take_shared_ref_value(std::shared_ptr<n8>* ss);
 
  n8 pasn8();
