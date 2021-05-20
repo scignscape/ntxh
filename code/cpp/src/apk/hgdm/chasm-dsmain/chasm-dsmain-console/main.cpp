@@ -43,8 +43,16 @@ int main(int argc, char *argv[])
  Dataset_Environment* dsenv;
 
  {
-  Chasm_Carrier cc = cre.call_s0("Dataset_Environment::_new", "0/;", "coco:retvalue");
+  QStringList qsl;
+//  Chasm_Carrier cc = cre.call_s0("coco:retvalue")("Dataset_Environment::_new",
+//    cpt.type_object_ref(), &qsl);
+
+  Chasm_Carrier cc = cre.call_s0("Dataset_Environment::_new",
+    cpt.type_object_ref(), &qsl);
+
   dsenv = cc.value<Dataset_Environment*>();
+
+
  }
 
  Chasm_Carrier cc = cre.call_s1(dsenv, "Dataset_Environment::check_setup_only");

@@ -64,16 +64,16 @@ public:
  ACCESSORS__RGET(MACRO_PASTE(QMap<QString, QPair<Chasm_Function_Code, _minimal_fn_type>>) ,registered_procedures)
 
 
- void load_type_ref();
- void load_type_u1();
- void load_type_u2();
- void load_type_QString();
- void load_type_u4();
- void load_type_QByteArray();
- void load_type_r8();
- void load_type_QVariant();
- void load_type_n8();
- void load_type_ptr();
+ ACCESSORS__GET(Chasm_Type_Object* ,type_object_ref)
+ ACCESSORS__GET(Chasm_Type_Object* ,type_object_u1)
+ ACCESSORS__GET(Chasm_Type_Object* ,type_object_u2)
+ ACCESSORS__GET(Chasm_Type_Object* ,type_object_QString)
+ ACCESSORS__GET(Chasm_Type_Object* ,type_object_u4)
+ ACCESSORS__GET(Chasm_Type_Object* ,type_object_QByteArray)
+ ACCESSORS__GET(Chasm_Type_Object* ,type_object_r8)
+ ACCESSORS__GET(Chasm_Type_Object* ,type_object_QVariant)
+ ACCESSORS__GET(Chasm_Type_Object* ,type_object_n8)
+ ACCESSORS__GET(Chasm_Type_Object* ,type_object_ptr)
 
 // void register_procedure_s0(QString name,
 //   _minimal_fn_s0_type fn, u4 proc);

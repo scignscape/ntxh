@@ -58,6 +58,26 @@ class Chasm_Runtime_Eval
 
  Chasm_Procedure_Table* proctable_;
 
+ struct call_s0_package
+ {
+  Chasm_Runtime_Eval* _this;
+  QString arg;
+  operator Chasm_Carrier()
+  {
+   return _this->_call_s0(arg);
+  }
+  Chasm_Carrier operator()(QString name, QString args = {})
+  {
+   return _this->_call_s0(name, arg, args);
+  }
+
+  template<typename... Args>
+  Chasm_Carrier operator()(QString name, Args... args)
+  {
+   return _this->_call_s0(name, arg, {args...});
+  }
+ };
+
 
 public:
 
@@ -67,11 +87,39 @@ public:
 
  Chasm_Carrier call_s1(void* obj, QString name);
 
- Chasm_Carrier call_s0(QString name, QString args_rep);
- Chasm_Carrier call_s0(QString name, QString args_rep, QString ret_channel_name);
+ call_s0_package call_s0(QString ret_channel_name)
+ {
+  return {this, ret_channel_name};
+ }
 
+ Chasm_Carrier call_s0(QString name, QString args_rep);
+
+ template<typename... Args>
+ Chasm_Carrier call_s0(QString name, Args... args)
+ {
+  return _call_s0(name, {args...});
+ }
+
+
+ Chasm_Carrier _call_s0(QString name, QString ret_channel_name, QString args_rep);
+ Chasm_Carrier _call_s0(QString name);
+
+ Chasm_Carrier _call_s0(QString name, QVector<void*> args)
+ {
+  return _call_s0(name, "retvalue", args);
+ }
+ Chasm_Carrier _call_s0(QString name, QString ret_channel_name, QVector<void*> args);
+
+// Chasm_Carrier call_s0(QString name, QString ret_channel_name, );
 
 };
+
+//template<>
+//inline Chasm_Carrier Chasm_Runtime_Eval::call_s0_package::operator()(QString name, void* args ...)
+//{
+// return _this->_call_s0(name, {args});
+//}
+
 
 // _KANS(GTagML)
 

@@ -9,6 +9,7 @@
 
 #include "chasm/chasm-runtime.h"
 #include "chasm/chasm-call-package.h"
+#include "chasm/chasm-type-object.h"
 
 #include "chasm-procedure-table/chasm-procedure-table.h"
 
@@ -43,13 +44,54 @@ Chasm_Runtime_Eval::Chasm_Runtime_Eval(Chasm_Runtime* csr)
 }
 
 
+Chasm_Carrier Chasm_Runtime_Eval::_call_s0(QString name)
+{
+ _call_s0(name, "retvalue", QString{});
+}
+
 Chasm_Carrier Chasm_Runtime_Eval::call_s0(QString name, QString args_rep)
 {
- return call_s0(name, args_rep, "retvalue");
+ return _call_s0(name, "retvalue", args_rep);
+}
+
+Chasm_Carrier Chasm_Runtime_Eval::_call_s0(QString name, QString ret_channel_name, QVector<void*> args)
+{
+ _minimal_fn_s0_type fn = nullptr;
+ _minimal_fn_s1_type sfn = nullptr;
+
+ Chasm_Function_Code cfc = proctable_->find_procedure(name, fn, sfn);
+
+ if(cfc.invalid())
+   return {};
+
+ Chasm_Call_Package* ccp = csr_->new_call_package();
+
+ if(cfc.arg_count > 0)
+ {
+  ccp->add_new_channel("lambda");
+
+  for(u1 a, u = 0; a < cfc.arg_count; ++a, u += 2)
+  {
+   Chasm_Type_Object* cto = (Chasm_Type_Object*) args[u];
+   Chasm_Carrier cc = csr_->gen_carrier(cto->get_pretype_code()).take_value(args[u + 1]);
+   ccp->add_carrier(cc);
+  }
+ }
+
+ ccp->add_new_channel(ret_channel_name);
+ Chasm_Carrier rcc = csr_->gen_carrier(cfc.return_code);
+ ccp->add_carrier(rcc);
+
+ if(fn)
+ {
+  csr_->evaluate(ccp, cfc, fn, &rcc);
+ }
+
+ return rcc;
 }
 
 
-Chasm_Carrier Chasm_Runtime_Eval::call_s0(QString name, QString args_rep, QString ret_channel_name)
+Chasm_Carrier Chasm_Runtime_Eval::_call_s0(QString name, QString ret_channel_name, QString args_rep)
 {
  _minimal_fn_s0_type fn = nullptr;
  _minimal_fn_s1_type sfn = nullptr;
