@@ -31,6 +31,7 @@
 //#define register_s1(proc ,code) register_procedure_s1(#proc, (void(_min_::*)()) &proc, #code)
 
 #include "chasm-procedure-table/chasm-procedure-table.h"
+#include "chasm/chasm-value-expression.h"
 
 class Chasm_Call_Package;
 class Chasm_Type_Object;
@@ -68,7 +69,11 @@ class Chasm_Runtime_Eval
   }
   Chasm_Carrier operator()(QString name, QString args = {})
   {
-   return _this->_call_s0(name, arg, args);
+   //return _this->_call_s0(name, arg, args);
+  }
+  Chasm_Carrier operator()(QString name, QVector<Chasm_Value_Expression> args)
+  {
+   return _this->_call_s01(name, arg, args);
   }
 
   template<typename... Args>
@@ -101,13 +106,15 @@ public:
  }
 
 
- Chasm_Carrier _call_s0(QString name, QString ret_channel_name, QString args_rep);
+ Chasm_Carrier _call_s01(QString name, QString ret_channel_name, QVector<Chasm_Value_Expression> args);
+
  Chasm_Carrier _call_s0(QString name);
 
  Chasm_Carrier _call_s0(QString name, QVector<void*> args)
  {
   return _call_s0(name, "retvalue", args);
  }
+
  Chasm_Carrier _call_s0(QString name, QString ret_channel_name, QVector<void*> args);
 
 // Chasm_Carrier call_s0(QString name, QString ret_channel_name, );

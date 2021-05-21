@@ -43,14 +43,20 @@ int main(int argc, char *argv[])
  Dataset_Environment* dsenv;
 
  {
-  QStringList qsl;
+  //QVector<Chasm_Value_Expression> cvxs = ".qsl/;.u4/45;$.23;;;a $$;string;"_cvx;
+  QVector<Chasm_Value_Expression> cvxs = ".qsl/;.&/22;.u4/45;11;;.true;"_cvx;
+
+//  Chasm_Value_Expression cvx(".u4/789");
+
 //  Chasm_Carrier cc = cre.call_s0("coco:retvalue")("Dataset_Environment::_new",
 //    cpt.type_object_ref(), &qsl);
 
-  Chasm_Carrier cc = cre.call_s0("Dataset_Environment::_new",
-    cpt.type_object_ref(), &qsl);
+//  QStringList qsl;
 
-  dsenv = cc.value<Dataset_Environment*>();
+//  Chasm_Carrier cc = cre.call_s0("Dataset_Environment::_new",
+//    cpt.type_object_ref(), &qsl);
+
+  // dsenv = cc.value<Dataset_Environment*>();
 
 
  }

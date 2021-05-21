@@ -46,12 +46,10 @@ DEFINES += USE_KANS
 
 HEADERS += \
   $$SRC_DIR/chasm-procedure-table.h \
-  $$SRC_DIR/chasm-value-expression.h \
 
 
 SOURCES += \
   $$SRC_DIR/chasm-procedure-table.cpp \
-  $$SRC_DIR/chasm-value-expression.cpp \
 
 
 

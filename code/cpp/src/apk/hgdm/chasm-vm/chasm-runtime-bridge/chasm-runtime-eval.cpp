@@ -90,8 +90,10 @@ Chasm_Carrier Chasm_Runtime_Eval::_call_s0(QString name, QString ret_channel_nam
  return rcc;
 }
 
+// Chasm_Carrier Chasm_Runtime_Eval::_call_s0(QString name, QString ret_channel_name, QString args_rep)
 
-Chasm_Carrier Chasm_Runtime_Eval::_call_s0(QString name, QString ret_channel_name, QString args_rep)
+Chasm_Carrier Chasm_Runtime_Eval::_call_s01(QString name, QString ret_channel_name,
+  QVector<Chasm_Value_Expression> args)
 {
  _minimal_fn_s0_type fn = nullptr;
  _minimal_fn_s1_type sfn = nullptr;
@@ -103,34 +105,30 @@ Chasm_Carrier Chasm_Runtime_Eval::_call_s0(QString name, QString ret_channel_nam
 
  Chasm_Call_Package* ccp = csr_->new_call_package();
 
- if(cfc.arg_count > 0)
- {
-  ccp->add_new_channel("lambda");
-  QStringList qsl = args_rep.split(';');
-  u1 current_pretype = 0;
-  for(u1 u = 0; u < cfc.arg_count; ++u)
-  {
-   QString rep = qsl.value(u);
-   QRegularExpression rx("^(\\d+)/");
-   QRegularExpressionMatch rxm = rx.match(rep);
-   if(rxm.hasMatch())
-   {
-    current_pretype = rxm.captured(1).toInt();
-    rep = rep.mid(rxm.capturedEnd());
-   }
-   Chasm_Carrier cc = csr_->gen_carrier(current_pretype, rep);
-   ccp->add_carrier(cc);
-  }
- }
-
-
  ccp->add_new_channel(ret_channel_name);
  Chasm_Carrier rcc = csr_->gen_carrier(cfc.return_code);
  ccp->add_carrier(rcc);
 
- if(fn)
+ if(cfc.arg_count == 0)
  {
-  csr_->evaluate(ccp, cfc, fn, &rcc);
+  if(fn)
+    csr_->evaluate(ccp, cfc, fn, &rcc);
+  else if(sfn)
+    csr_->evaluate(ccp, cfc, sfn, &rcc);
+  return rcc;
+ }
+
+ ccp->add_new_channel("lambda");
+
+ u1 count = qMin<u1>(cfc.arg_count, args.size());
+
+ Chasm_Carrier ccs[count];
+
+ for(u1 u = 0; u < count; ++u)
+ {
+  Chasm_Value_Expression cxv = args[u];
+
+
  }
 
  return rcc;
