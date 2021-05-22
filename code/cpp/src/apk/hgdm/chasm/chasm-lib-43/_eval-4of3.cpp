@@ -8,7 +8,7 @@
 
 #include "chasm-call-package.h"
 #include "chasm-channel.h"
-#include "chasm-type-object.h"
+#include "types/chasm-type-object.h"
 
 //#include "_eval-4of3.h"
 

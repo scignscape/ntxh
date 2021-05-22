@@ -9,7 +9,7 @@
 #include "chasm-lib/chasm/chasm-runtime.h"
 #include "chasm-lib/chasm/chasm-call-package.h"
 
-#include "chasm-lib/chasm/chasm-type-object.h"
+#include "chasm-lib/chasm/types/chasm-type-object.h"
 
 #include "context-menu-provider.h"
 

@@ -21,9 +21,9 @@
 
 #include "kans.h"
 
-#include "chasm-carrier.h"
+//#include "chasm-carrier.h"
 
-#include "chasm-runtime.h"
+#include "../chasm-runtime.h"
 
 
 //KANS_(GTagML)

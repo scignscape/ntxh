@@ -27,6 +27,8 @@
 
 #include "chasm/chasm-runtime.h"
 
+#include "chasm/chasm-value-expression.h"
+
 #define register_s0(proc ,code) register_procedure_s0(#proc, (void(*)()) &proc, #code)
 #define register_s1(proc ,code) register_procedure_s1(#proc, (void(_min_::*)()) &proc, #code)
 
@@ -52,6 +54,7 @@ class Chasm_Procedure_Table
  Chasm_Type_Object* type_object_QVariant_;
  Chasm_Type_Object* type_object_n8_;
  Chasm_Type_Object* type_object_ptr_;
+ Chasm_Type_Object* type_object_qsl_;
 
  QMap<QString, QString> procedure_name_resolutions_;
  QMap<QString, QPair<Chasm_Function_Code, _minimal_fn_type>> registered_procedures_;
@@ -74,6 +77,7 @@ public:
  ACCESSORS__GET(Chasm_Type_Object* ,type_object_QVariant)
  ACCESSORS__GET(Chasm_Type_Object* ,type_object_n8)
  ACCESSORS__GET(Chasm_Type_Object* ,type_object_ptr)
+ ACCESSORS__GET(Chasm_Type_Object* ,type_object_qsl)
 
 // void register_procedure_s0(QString name,
 //   _minimal_fn_s0_type fn, u4 proc);
@@ -86,6 +90,12 @@ public:
 
  Chasm_Function_Code find_procedure(QString name,
    _minimal_fn_s0_type& s0, _minimal_fn_s1_type& s1);
+
+ QVector<Chasm_Value_Expression> parse_expressions(QString reps);
+
+ Chasm_Value_Expression read_value_expression(QString rep);
+ Chasm_Value_Expression read_value_expression(QString type_string, QString rep);
+
 
 };
 

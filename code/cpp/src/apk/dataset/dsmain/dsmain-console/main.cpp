@@ -210,7 +210,7 @@ int main(int argc, char **argv)
 
  QStringList cmds = get_cmdl(argc, argv);
 
- Dataset_Environment dsenv(cmds);
+ Dataset_Environment dsenv(cmds, "ctg");
 
  QString paper_name = dsenv.current_paper_name();
  dsenv.set_default_dataset_folder(DEFAULT_DATASET_FOLDER);

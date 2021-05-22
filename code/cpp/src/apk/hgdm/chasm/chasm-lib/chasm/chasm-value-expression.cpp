@@ -103,149 +103,99 @@ u1 Chasm_Value_Expression::get_pair_code()
 Chasm_Value_Expression::Chasm_Value_Expression(QString rep)
   :  raw_value_(0)
 {
- QString type_string;
- if(rep.startsWith("$.."))
-   rep.remove(1, 1);
- else if(rep.startsWith("$."))
-   rep.remove(0, 1);
- else if(rep.startsWith('.'))
- {
-  s4 index = rep.indexOf('/');
-  if(index == -1)
-  {
-   type_string = rep.mid(1);
-   rep.clear();
-  }
-  else
-  {
-   type_string = rep.mid(1, index - 1);
-   rep = rep.mid(index + 1);
-  }
- }
- parse(type_string, rep);
 }
 
-void Chasm_Value_Expression::parse_qsl(QString rep)
+
+void Chasm_Value_Expression::split_defer(QString rep, Chasm_Type_Object* cto)
+{
+ QString* prep = new QString(rep);
+ QPair<n8, n8>* pr = new QPair<n8, n8>((n8)cto, (n8)prep);
+ pr->second |= 1;
+ raw_value_ = (n8) pr;
+ raw_value_ |= 2;
+}
+
+void Chasm_Value_Expression::parse_qsl(QString rep, Chasm_Type_Object* cto)
+{
+ split_defer(rep, cto);
+}
+
+void Chasm_Value_Expression::parse_qs(QString rep, Chasm_Type_Object* cto)
+{
+ split_defer(rep, cto);
+}
+
+void Chasm_Value_Expression::parse_b1(QString rep, Chasm_Type_Object* cto)
 {
 
 }
-void Chasm_Value_Expression::parse_qs(QString rep)
+void Chasm_Value_Expression::parse_u1(QString rep, Chasm_Type_Object* cto)
 {
 
 }
-void Chasm_Value_Expression::parse_b1(QString rep)
+void Chasm_Value_Expression::parse_u2(QString rep, Chasm_Type_Object* cto)
 {
 
 }
-void Chasm_Value_Expression::parse_u1(QString rep)
+void Chasm_Value_Expression::parse_u4(QString rep, Chasm_Type_Object* cto)
 {
 
 }
-void Chasm_Value_Expression::parse_u2(QString rep)
+void Chasm_Value_Expression::parse_s1(QString rep, Chasm_Type_Object* cto)
 {
 
 }
-void Chasm_Value_Expression::parse_u4(QString rep)
+void Chasm_Value_Expression::parse_s2(QString rep, Chasm_Type_Object* cto)
 {
 
 }
-void Chasm_Value_Expression::parse_s1(QString rep)
+void Chasm_Value_Expression::parse_s4(QString rep, Chasm_Type_Object* cto)
 {
 
 }
-void Chasm_Value_Expression::parse_s2(QString rep)
+void Chasm_Value_Expression::parse_n8(QString rep, Chasm_Type_Object* cto)
 {
 
 }
-void Chasm_Value_Expression::parse_s4(QString rep)
+void Chasm_Value_Expression::parse_r8(QString rep, Chasm_Type_Object* cto)
 {
 
 }
-void Chasm_Value_Expression::parse_n8(QString rep)
+void Chasm_Value_Expression::parse_r4(QString rep, Chasm_Type_Object* cto)
 {
 
 }
-void Chasm_Value_Expression::parse_r8(QString rep)
-{
-
-}
-void Chasm_Value_Expression::parse_r4(QString rep)
-{
-
-}
-void Chasm_Value_Expression::parse_other(QString rep)
+void Chasm_Value_Expression::parse_other(QString rep) //, Chasm_Type_Object* cto)
 {
 
 }
 
-void Chasm_Value_Expression::parse(QString type_string, QString rep)
-{
- Known_Type_Strings k = parse_known_type_string(type_string);
+//void Chasm_Value_Expression::parse(QString type_string, QString rep)
+//{
+// Known_Type_Strings k = parse_known_type_string(type_string);
 
- switch (k)
- {
- default: parse_other(rep); break;
- case Known_Type_Strings::QSL: parse_qsl(rep); break;
- case Known_Type_Strings::QS: parse_qs(rep); break;
- case Known_Type_Strings::B1: parse_b1(rep); break;
- case Known_Type_Strings::U1: parse_u1(rep); break;
- case Known_Type_Strings::U2: parse_u2(rep); break;
- case Known_Type_Strings::U4: parse_u4(rep); break;
- case Known_Type_Strings::S1: parse_s1(rep); break;
- case Known_Type_Strings::S2: parse_s2(rep); break;
- case Known_Type_Strings::S4: parse_s4(rep); break;
- case Known_Type_Strings::N8: parse_n8(rep); break;
- case Known_Type_Strings::R4: parse_r4(rep); break;
- case Known_Type_Strings::R8: parse_r8(rep); break;
- }
- //raw_value_ = rep.toInt();
-}
+// switch (k)
+// {
+// default: parse_other(rep); break;
+// case Known_Type_Strings::QSL: parse_qsl(rep); break;
+// case Known_Type_Strings::QS: parse_qs(rep); break;
+// case Known_Type_Strings::B1: parse_b1(rep); break;
+// case Known_Type_Strings::U1: parse_u1(rep); break;
+// case Known_Type_Strings::U2: parse_u2(rep); break;
+// case Known_Type_Strings::U4: parse_u4(rep); break;
+// case Known_Type_Strings::S1: parse_s1(rep); break;
+// case Known_Type_Strings::S2: parse_s2(rep); break;
+// case Known_Type_Strings::S4: parse_s4(rep); break;
+// case Known_Type_Strings::N8: parse_n8(rep); break;
+// case Known_Type_Strings::R4: parse_r4(rep); break;
+// case Known_Type_Strings::R8: parse_r8(rep); break;
+// }
+// //raw_value_ = rep.toInt();
+//}
 
-QVector<Chasm_Value_Expression> operator""_cvx(const char* ss, unsigned long len)
-{
- QVector<Chasm_Value_Expression> result;
-
- QString reps = QString::fromUtf8(ss, len);
- QStringList qsl;
-
- s4 index = 0;
- s4 old_index = 0;
- s4 mid_index = 0;
- while (true)
- {
-  index = reps.indexOf(';', mid_index);
-  if(index == -1)
-    break;
-  QChar qc = reps[index];
-  s4 gap = index - 1;
-  while (gap >= 0)
-  {
-   QChar qc = reps[gap];
-   if(qc != '$')
-     break;
-   --gap;
-  }
-  u1 dollars = index - gap - 1;
-  if((dollars % 2) == 1)
-  {
-   mid_index = index + 1;
-   continue;
-  }
-  QString rep = reps.mid(old_index, index - old_index);
-  index = old_index = mid_index = index + 1;
-  rep.replace("$$", "$");
-  rep.replace("$;", ";");
-
-  qsl << rep;
- }
-
- result.resize(qsl.size());
-
- std::transform(qsl.begin(), qsl.end(), result.begin(),
-   [](QString qs) { return Chasm_Value_Expression(qs); });
-
- return result;
-}
+//QVector<Chasm_Value_Expression> operator""_cvx(const char* ss, unsigned long len)
+//{
+//}
 
 //void* Chasm_Value_Expression::val1of2()
 //{

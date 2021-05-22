@@ -73,7 +73,8 @@
 
 #include "chasm-call-package.h"
 #include "chasm-channel.h"
-#include "chasm-type-object.h"
+
+#include "types/chasm-type-object.h"
 
 
 //#include "chasm-runtime.op-cfc.cpp"
@@ -157,42 +158,9 @@
 Chasm_Runtime::Chasm_Runtime()
  :  gen_trisym_line_index_(0), gen_trisym_file_index_(0),
     gen_trisym_col_index_(0), call_package_index_(0),
-    current_no_file_session_(0), pretype_type_objects_(new QVector<Chasm_Type_Object*>)
+    current_no_file_session_(0)
 {
- pretype_type_objects_->resize(10);
-
- (*pretype_type_objects_)[0] = register_type_object("n8&", 0, 0, 0, -1);
- //(*pretype_type_objects_)[1] = register_type_object("n8&!", 0, 0, 0, -1);
-
- register_type_object("n8&!", 0, 0, 0, -1);
-
- (*pretype_type_objects_)[1] = register_type_object("u1", 1, 10, 100, 1000);
- (*pretype_type_objects_)[2] = register_type_object("u2", 2, 20, 200, 2000);
- (*pretype_type_objects_)[3] = register_type_object("QString", 3, 30, 300, 3000);
- (*pretype_type_objects_)[4] = register_type_object("u4", 4, 40, 400, 4000);
- (*pretype_type_objects_)[5] = register_type_object("QByteArray", 5, 50, 500, 5000);
- (*pretype_type_objects_)[6] = register_type_object("r8", 6, 60, 600, 6000);
- (*pretype_type_objects_)[7] = register_type_object("QVariant", 7, 70, 700, 7000);
- (*pretype_type_objects_)[8] = register_type_object("n8", 8, 80, 800, 8000);
- (*pretype_type_objects_)[9] = register_type_object("void*", 9, 90, 900, 9000);
 }
-
-Chasm_Type_Object* Chasm_Runtime::get_type_object_by_name(QString name)
-{
- return type_objects_.value(name);
-}
-
-Chasm_Type_Object* Chasm_Runtime::register_type_object(QString name, u2 pos1code, u2 pos2code,
-  u2 pos3code, u2 pos4code)
-{
- Chasm_Type_Object* result = new Chasm_Type_Object(name, pos1code, pos2code,
-   pos3code, pos4code);
-
- type_objects_.insert(name, result);
-
- return result;
-}
-
 
 Chasm_Carrier Chasm_Runtime::gen_shared_ref_carrier(std::shared_ptr<n8>* ss)
 {
@@ -365,7 +333,7 @@ Chasm_Carrier Chasm_Runtime::gen_carrier(u1 type_flag, QString rep)
  case 1: { u1 v = rep.toUShort(); return gen_carrier<u1>(&v); }
  case 2: { u2 v = rep.toUShort(); return gen_carrier<u2>(&v); }
  case 3:
- case 7: { Chasm_Typed_Value_Representation tvr({(*pretype_type_objects_)[type_flag], 0, rep});
+ case 7: { Chasm_Typed_Value_Representation tvr({(*pretype_type_objects())[type_flag], 0, rep});
   return gen_carrier(tvr); }
  case 4: { u4 v = rep.toUInt(); return gen_carrier<u4>(&v); }
  case 8: { n8 v = rep.toULongLong(); return gen_carrier<n8>(&v); }

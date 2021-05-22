@@ -9,7 +9,7 @@
 #include "chasm-lib/chasm/chasm-runtime.h"
 #include "chasm-lib/chasm/chasm-call-package.h"
 
-#include "chasm-lib/chasm/chasm-type-object.h"
+#include "chasm-lib/chasm/types/chasm-type-object.h"
 
 #include "signal-generator.h"
 
@@ -74,13 +74,13 @@ void test_map_places(Context_Menu_Provider* _this, QString arguments,
 
  Chasm_Runtime& csr = *_this->chasm_runtime();
 
- Chasm_Type_Object* QString_type = csr.get_type_object_by_name("QString");
- Chasm_Type_Object* QVariant_type = csr.get_type_object_by_name("QVariant");
- Chasm_Type_Object* ref_type = csr.get_type_object_by_name("n8&");
- Chasm_Type_Object* n8_type = csr.get_type_object_by_name("n8");
- Chasm_Type_Object* pVoid_type = csr.get_type_object_by_name("void*");
+ Chasm_Type_Object* QString_type = csr.type_system().get_type_object_by_name("QString");
+ Chasm_Type_Object* QVariant_type = csr.type_system().get_type_object_by_name("QVariant");
+ Chasm_Type_Object* ref_type = csr.type_system().get_type_object_by_name("n8&");
+ Chasm_Type_Object* n8_type = csr.type_system().get_type_object_by_name("n8");
+ Chasm_Type_Object* pVoid_type = csr.type_system().get_type_object_by_name("void*");
 
- Chasm_Type_Object* ref_type_shared = csr.get_type_object_by_name("n8&!");
+ Chasm_Type_Object* ref_type_shared = csr.type_system().get_type_object_by_name("n8&!");
 
  QString url = ROOT_FOLDER "/../testdia/matterport/new-alexander.html";
 

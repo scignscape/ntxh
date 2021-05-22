@@ -37,6 +37,8 @@
 
 #include "chasm-carrier.h"
 
+#include "types/chasm-type-system.h"
+
 
 struct _min_{};
 
@@ -128,15 +130,18 @@ class Chasm_Runtime
 
  u4 current_no_file_session_;
 
- QMap<QString, Chasm_Type_Object*> type_objects_;
-
- QVector<Chasm_Type_Object*>* pretype_type_objects_;
+ Chasm_Type_System type_system_;
 
 public:
 
  Chasm_Runtime();
 
- ACCESSORS__CGET(QVector<Chasm_Type_Object*>* ,pretype_type_objects)
+ ACCESSORS__RGET(Chasm_Type_System ,type_system)
+
+ QVector<Chasm_Type_Object*>* pretype_type_objects()
+ {
+  return type_system_.pretype_type_objects();
+ }
 
  _Retvalue Retvalue;
 

@@ -9,7 +9,7 @@
 
 #include "chasm/chasm-runtime.h"
 #include "chasm/chasm-call-package.h"
-#include "chasm/chasm-type-object.h"
+#include "chasm/types/chasm-type-object.h"
 
 #include "chasm-procedure-table/chasm-procedure-table.h"
 
@@ -46,12 +46,12 @@ Chasm_Runtime_Eval::Chasm_Runtime_Eval(Chasm_Runtime* csr)
 
 Chasm_Carrier Chasm_Runtime_Eval::_call_s0(QString name)
 {
- _call_s0(name, "retvalue", QString{});
+ _call_s0(name, "retvalue", {});
 }
 
 Chasm_Carrier Chasm_Runtime_Eval::call_s0(QString name, QString args_rep)
 {
- return _call_s0(name, "retvalue", args_rep);
+ //? return _call_s0(name, "retvalue", args_rep);
 }
 
 Chasm_Carrier Chasm_Runtime_Eval::_call_s0(QString name, QString ret_channel_name, QVector<void*> args)

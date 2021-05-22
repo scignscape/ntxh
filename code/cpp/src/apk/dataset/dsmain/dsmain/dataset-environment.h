@@ -51,9 +51,9 @@ class Dataset_Environment
 
 public:
 
- Dataset_Environment(const QStringList& cmd_args);
+ Dataset_Environment(const QStringList& cmd_args, QString first_paper);
 
- static Dataset_Environment* _new(const QStringList& cmd_args);
+ static Dataset_Environment* _new(const QStringList& cmd_args, QString first_paper);
 
 // Dataset_Environment();
 

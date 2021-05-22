@@ -36,6 +36,8 @@ Chasm_Procedure_Table::Chasm_Procedure_Table(Chasm_Runtime* csr)
  type_object_QVariant_ = pto[7];
  type_object_n8_ = pto[8];
  type_object_ptr_ = pto[9];
+
+ type_object_qsl_ = csr->type_system().get_type_object_by_name("QStringList&");
 }
 
 
@@ -99,4 +101,103 @@ Chasm_Function_Code Chasm_Procedure_Table::find_procedure(QString name,
    s1 = pr.second.s1;
  return pr.first;
 }
+
+Chasm_Value_Expression Chasm_Procedure_Table::read_value_expression(QString type_string, QString rep)
+{
+ Chasm_Value_Expression result;
+ Chasm_Value_Expression::Known_Type_Strings k = Chasm_Value_Expression::parse_known_type_string(type_string);
+
+ switch (k)
+ {
+ default: //parse_other(rep);
+    break;
+ case Chasm_Value_Expression::Known_Type_Strings::QSL:
+   result.parse_qsl(rep, type_object_qsl_); break;
+ case Chasm_Value_Expression::Known_Type_Strings::QS:
+   result.parse_qs(rep, type_object_QString_); break;
+// case Chasm_Value_Expression::Known_Type_Strings::B1: result.parse_b1(rep); break;
+// case Chasm_Value_Expression::Known_Type_Strings::U1: result.parse_u1(rep); break;
+// case Chasm_Value_Expression::Known_Type_Strings::U2: result.parse_u2(rep); break;
+// case Chasm_Value_Expression::Known_Type_Strings::U4: result.parse_u4(rep); break;
+// case Chasm_Value_Expression::Known_Type_Strings::S1: result.parse_s1(rep); break;
+// case Chasm_Value_Expression::Known_Type_Strings::S2: result.parse_s2(rep); break;
+// case Chasm_Value_Expression::Known_Type_Strings::S4: result.parse_s4(rep); break;
+// case Chasm_Value_Expression::Known_Type_Strings::N8: result.parse_n8(rep); break;
+// case Chasm_Value_Expression::Known_Type_Strings::R4: result.parse_r4(rep); break;
+// case Chasm_Value_Expression::Known_Type_Strings::R8: result.parse_r8(rep); break;
+ }
+  //raw_value_ = rep.toInt();
+}
+
+
+Chasm_Value_Expression Chasm_Procedure_Table::read_value_expression(QString rep)
+{
+ QString type_string;
+ if(rep.startsWith("$.."))
+   rep.remove(1, 1);
+ else if(rep.startsWith("$."))
+   rep.remove(0, 1);
+ else if(rep.startsWith('.'))
+ {
+  s4 index = rep.indexOf('/');
+  if(index == -1)
+  {
+   type_string = rep.mid(1);
+   rep.clear();
+  }
+  else
+  {
+   type_string = rep.mid(1, index - 1);
+   rep = rep.mid(index + 1);
+  }
+ }
+ return read_value_expression(type_string, rep);
+}
+
+QVector<Chasm_Value_Expression> Chasm_Procedure_Table::parse_expressions(QString reps)
+{
+ QVector<Chasm_Value_Expression> result;
+
+ QStringList qsl;
+
+ s4 index = 0;
+ s4 old_index = 0;
+ s4 mid_index = 0;
+ while (true)
+ {
+  index = reps.indexOf(';', mid_index);
+  if(index == -1)
+    break;
+  QChar qc = reps[index];
+  s4 gap = index - 1;
+  while (gap >= 0)
+  {
+   QChar qc = reps[gap];
+   if(qc != '$')
+     break;
+   --gap;
+  }
+  u1 dollars = index - gap - 1;
+  if((dollars % 2) == 1)
+  {
+   mid_index = index + 1;
+   continue;
+  }
+  QString rep = reps.mid(old_index, index - old_index);
+  index = old_index = mid_index = index + 1;
+  rep.replace("$$", "$");
+  rep.replace("$;", ";");
+
+  qsl << rep;
+ }
+
+ result.resize(qsl.size());
+
+ std::transform(qsl.begin(), qsl.end(), result.begin(),
+   [this](QString qs) { return read_value_expression(qs); });
+
+ return result;
+
+}
+
 

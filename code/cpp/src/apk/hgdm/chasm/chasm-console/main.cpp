@@ -15,7 +15,7 @@
 
 #include "chasm-lib/metatype-object.h"
 
-#include "chasm-lib/chasm/chasm-type-object.h"
+#include "chasm-lib/chasm/types/chasm-type-object.h"
 
 
 #include "textio.h"
@@ -849,9 +849,9 @@ QPoint* test_smart(test_qpr& arg1, //QPair<QString, u4>& arg1,  //test_qpr& arg1
 
 void pre_run_smart(Chasm_Runtime* csr, QVector<Chasm_Typed_Value_Representation>& args)
 {
- Chasm_Type_Object* ref_type_shared = csr->get_type_object_by_name("n8&!");
- Chasm_Type_Object* pVoid_type = csr->get_type_object_by_name("void*");
- Chasm_Type_Object* ref_type = csr->get_type_object_by_name("n8&");
+ Chasm_Type_Object* ref_type_shared = csr->type_system().get_type_object_by_name("n8&!");
+ Chasm_Type_Object* pVoid_type = csr->type_system().get_type_object_by_name("void*");
+ Chasm_Type_Object* ref_type = csr->type_system().get_type_object_by_name("n8&");
 
  QString a11 = "Test";
  u4 a12 = 33;

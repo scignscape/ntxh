@@ -40,6 +40,22 @@ class Chasm_Value_Expression
   Triple, Fixnum
  };
 
+// Rep_State rep_state();
+// Rep_State rep_state_1();
+// Rep_State rep_state_2();
+
+ u1 get_pair_code();
+ u1 get_pair_code2();
+ u1 get_pair_code3();
+
+
+ void parse_other(QString rep);
+
+public:
+
+ Chasm_Value_Expression(n8 raw_value = 0);
+ Chasm_Value_Expression(QString rep);
+
  enum class Known_Type_Strings {
    N_A, QSL, QS, B1, U1, U2, U4, N8, S1, S2, S4, R4, R8
  };
@@ -64,44 +80,30 @@ class Chasm_Value_Expression
   return static_map.value(str.toUpper(), Known_Type_Strings::N_A);
  }
 
-
-// Rep_State rep_state();
-// Rep_State rep_state_1();
-// Rep_State rep_state_2();
-
- u1 get_pair_code();
- u1 get_pair_code2();
- u1 get_pair_code3();
-
- void parse(QString type_string, QString rep);
-
- void parse_other(QString rep);
- void parse_qsl(QString rep);
- void parse_qs(QString rep);
- void parse_b1(QString rep);
- void parse_u1(QString rep);
- void parse_u2(QString rep);
- void parse_u4(QString rep);
- void parse_s1(QString rep);
- void parse_s2(QString rep);
- void parse_s4(QString rep);
- void parse_n8(QString rep);
- void parse_r8(QString rep);
- void parse_r4(QString rep);
+ void parse_qsl(QString rep, Chasm_Type_Object* cto);
+ void parse_qs(QString rep, Chasm_Type_Object* cto);
+ void parse_b1(QString rep, Chasm_Type_Object* cto);
+ void parse_u1(QString rep, Chasm_Type_Object* cto);
+ void parse_u2(QString rep, Chasm_Type_Object* cto);
+ void parse_u4(QString rep, Chasm_Type_Object* cto);
+ void parse_s1(QString rep, Chasm_Type_Object* cto);
+ void parse_s2(QString rep, Chasm_Type_Object* cto);
+ void parse_s4(QString rep, Chasm_Type_Object* cto);
+ void parse_n8(QString rep, Chasm_Type_Object* cto);
+ void parse_r8(QString rep, Chasm_Type_Object* cto);
+ void parse_r4(QString rep, Chasm_Type_Object* cto);
 
 
-public:
-
- Chasm_Value_Expression(n8 raw_value = 0);
- Chasm_Value_Expression(QString rep);
 
  void fix_type_object(Chasm_Type_Object* cto);
+
+ void split_defer(QString rep, Chasm_Type_Object* cto);
+
 
 
 
 };
 
-QVector<Chasm_Value_Expression> operator""_cvx(const char* ss, unsigned long len);
 
 
 // _KANS(GTagML)

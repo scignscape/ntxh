@@ -44,7 +44,12 @@ int main(int argc, char *argv[])
 
  {
   //QVector<Chasm_Value_Expression> cvxs = ".qsl/;.u4/45;$.23;;;a $$;string;"_cvx;
-  QVector<Chasm_Value_Expression> cvxs = ".qsl/;.&/22;.u4/45;11;;.true;"_cvx;
+  QVector<Chasm_Value_Expression> cvxs =
+    cpt.parse_expressions(".qsl/prog:.a1:.xxx:.test:$...:.:.ok;.&/ctg;");
+
+  Chasm_Carrier cc = cre.call_s0("coco:retvalue")("Dataset_Environment::_new",
+    cvxs);
+
 
 //  Chasm_Value_Expression cvx(".u4/789");
 
@@ -56,7 +61,7 @@ int main(int argc, char *argv[])
 //  Chasm_Carrier cc = cre.call_s0("Dataset_Environment::_new",
 //    cpt.type_object_ref(), &qsl);
 
-  // dsenv = cc.value<Dataset_Environment*>();
+  dsenv = cc.value<Dataset_Environment*>();
 
 
  }

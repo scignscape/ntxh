@@ -27,7 +27,7 @@ USING_KANS(TextIO)
 USING_KANS(DSM)
 
 
-Dataset_Environment::Dataset_Environment(const QStringList& cmd_args)
+Dataset_Environment::Dataset_Environment(const QStringList& cmd_args, QString first_paper)
   :  cmd_args_(cmd_args)
 {
  if(cmd_args_.size() >= 3)
@@ -37,7 +37,8 @@ Dataset_Environment::Dataset_Environment(const QStringList& cmd_args)
  else
  {
   //
-  current_paper_name_ = "ctg";
+  current_paper_name_ = first_paper;
+  // "ctg";
   // paper_name = "icg";
   // paper_name = "itm";
  }
@@ -50,9 +51,9 @@ Dataset_Environment::Dataset_Environment(const QStringList& cmd_args)
  initial_paper_name_ = current_paper_name_;
 }
 
-Dataset_Environment* Dataset_Environment::_new(const QStringList& cmd_args)
+Dataset_Environment* Dataset_Environment::_new(const QStringList& cmd_args, QString first_paper)
 {
- return new Dataset_Environment(cmd_args);
+ return new Dataset_Environment(cmd_args, first_paper);
 }
 
 
