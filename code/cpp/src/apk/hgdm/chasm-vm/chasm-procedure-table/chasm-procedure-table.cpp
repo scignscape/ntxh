@@ -115,6 +115,10 @@ Chasm_Value_Expression Chasm_Procedure_Table::read_value_expression(QString type
    result.parse_qsl(rep, type_object_qsl_); break;
  case Chasm_Value_Expression::Known_Type_Strings::QS:
    result.parse_qs(rep, type_object_QString_); break;
+
+ case Chasm_Value_Expression::Known_Type_Strings::U1: result.parse_u1(rep, type_object_u1_);
+   break;
+
 // case Chasm_Value_Expression::Known_Type_Strings::B1: result.parse_b1(rep); break;
 // case Chasm_Value_Expression::Known_Type_Strings::U1: result.parse_u1(rep); break;
 // case Chasm_Value_Expression::Known_Type_Strings::U2: result.parse_u2(rep); break;
@@ -127,6 +131,8 @@ Chasm_Value_Expression Chasm_Procedure_Table::read_value_expression(QString type
 // case Chasm_Value_Expression::Known_Type_Strings::R8: result.parse_r8(rep); break;
  }
   //raw_value_ = rep.toInt();
+
+ return result;
 }
 
 

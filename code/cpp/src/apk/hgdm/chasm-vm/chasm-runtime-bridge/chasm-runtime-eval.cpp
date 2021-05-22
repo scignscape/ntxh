@@ -31,16 +31,16 @@ Chasm_Runtime_Eval::Chasm_Runtime_Eval(Chasm_Runtime* csr)
 {
  const QVector<Chasm_Type_Object*>& pto = *csr_->pretype_type_objects();
 
- type_object_ref_ = pto[0];
- type_object_u1_ = pto[1];
- type_object_u2_ = pto[2];
- type_object_QString_ = pto[3];
- type_object_u4_ = pto[4];
- type_object_QByteArray_ = pto[5];
- type_object_r8_ = pto[6];
- type_object_QVariant_ = pto[7];
- type_object_n8_ = pto[8];
- type_object_ptr_ = pto[9];
+// type_object_ref_ = pto[0];
+// type_object_u1_ = pto[1];
+// type_object_u2_ = pto[2];
+// type_object_QString_ = pto[3];
+// type_object_u4_ = pto[4];
+// type_object_QByteArray_ = pto[5];
+// type_object_r8_ = pto[6];
+// type_object_QVariant_ = pto[7];
+// type_object_n8_ = pto[8];
+// type_object_ptr_ = pto[9];
 }
 
 
@@ -126,14 +126,67 @@ Chasm_Carrier Chasm_Runtime_Eval::_call_s01(QString name, QString ret_channel_na
 
  for(u1 u = 0; u < count; ++u)
  {
-  Chasm_Value_Expression cxv = args[u];
-
-
+  Chasm_Value_Expression cvx = args[u];
+  init_carrier(ccs[u], cvx);
+  ccp->add_carrier(ccs[u]);
  }
+
+ if(fn)
+ {
+  csr_->evaluate(ccp, cfc, fn, &rcc);
+ }
+
+ else if(sfn)
+ {
+  csr_->evaluate(ccp, cfc, sfn, &rcc);
+ }
+
+ //ccp->add_carriers({ccs});
 
  return rcc;
 }
 
+void Chasm_Runtime_Eval::init_carrier(Chasm_Carrier& cc, Chasm_Value_Expression cvx)
+{
+ Chasm_Type_Object* cto = cvx.get_type_object();
+
+ if(cto)
+ {
+  if(cto->name() == "QStringList&")
+  {
+   QString* qs = cvx.get_qstring();
+   QStringList* qsl = new QStringList( qs->split(":.") );
+   for(QString& qs1 : (*qsl))
+   {
+    qs1.replace(QRegularExpression(":\\$[.](?!=[.])"), ":.");
+    qs1.replace(":$.", ":$");
+   }
+   cc.set_type_flag(0);
+   cc.take_value(qsl);
+   return;
+  }
+ }
+ u1 pc = cto? cto->get_pretype_code() : cvx.get_hint_pretype_code();
+
+ switch (pc)
+ {
+ case 1:
+  {
+   u1 u = cvx.get_u1();
+   cc.set_type_flag(1);
+   cc.take_value(&u);
+  }
+  break;
+
+ case 3:
+  {
+   QString* qs = cvx.get_qstring();
+   cc.set_type_flag(3);
+   cc.take_value(qs);
+  }
+  break;
+ }
+}
 
 Chasm_Carrier Chasm_Runtime_Eval::call_s1(void* obj, QString name)
 {

@@ -105,6 +105,66 @@ Chasm_Value_Expression::Chasm_Value_Expression(QString rep)
 {
 }
 
+u1 Chasm_Value_Expression::get_hint_pretype_code()
+{
+ u1 spread = raw_value_ & 3;
+ if(spread == 3)
+ {
+  u1 hints = raw_value_ - 3;
+  if(hints == 0)
+    return 1;
+ }
+ return 0;
+}
+
+
+u1 Chasm_Value_Expression::get_u1()
+{
+ u1 spread = raw_value_ & 3;
+ if(spread == 3)
+ {
+  return (raw_value_ >> 8) & 255;
+ }
+ return 0;
+}
+
+
+QString* Chasm_Value_Expression::get_qstring()
+{
+ u1 spread = raw_value_  & 3;
+ if(spread == 2)
+ {
+  QPair<n8, n8>* pr = (QPair<n8, n8>*) (raw_value_ - 2);
+  u1 pr1code = pr->first & 3;
+  if(pr1code == 0)
+  {
+   u1 pr2code = pr->second & 3;
+   if(pr2code == 1)
+     return (QString*) (pr->second - 1);
+  }
+ }
+
+ return nullptr;
+}
+
+
+Chasm_Type_Object* Chasm_Value_Expression::get_type_object()
+{
+ u1 spread = raw_value_  & 3;
+ if(spread == 2)
+ {
+  QPair<n8, n8>* pr = (QPair<n8, n8>*) (raw_value_ - 2);
+  u1 pr1code = pr->first & 3;
+  if(pr1code == 0)
+    return (Chasm_Type_Object*) pr->first;
+  return nullptr;
+ }
+ if(spread == 3)
+ {
+
+ }
+ return nullptr;
+}
 
 void Chasm_Value_Expression::split_defer(QString rep, Chasm_Type_Object* cto)
 {
@@ -131,7 +191,11 @@ void Chasm_Value_Expression::parse_b1(QString rep, Chasm_Type_Object* cto)
 }
 void Chasm_Value_Expression::parse_u1(QString rep, Chasm_Type_Object* cto)
 {
+ raw_value_ = 3;
 
+ u1 u = rep.toUInt();
+
+ raw_value_ |= (u << 8);
 }
 void Chasm_Value_Expression::parse_u2(QString rep, Chasm_Type_Object* cto)
 {

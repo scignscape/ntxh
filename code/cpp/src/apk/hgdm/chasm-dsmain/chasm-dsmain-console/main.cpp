@@ -25,8 +25,14 @@ USING_KANS(TextIO)
 #include "dsmain/dataset-environment.h"
 USING_KANS(DSM)
 
+#include "get-cmdl.h"
+USING_KANS(Util)
+
+
 int main(int argc, char *argv[])
 {
+ QStringList cmds = get_cmdl(argc, argv);
+
  Chasm_Runtime csr;
  Chasm_Runtime_Bridge crb(&csr);
  Chasm_Runtime_Eval cre(&csr);
@@ -45,7 +51,7 @@ int main(int argc, char *argv[])
  {
   //QVector<Chasm_Value_Expression> cvxs = ".qsl/;.u4/45;$.23;;;a $$;string;"_cvx;
   QVector<Chasm_Value_Expression> cvxs =
-    cpt.parse_expressions(".qsl/prog:.a1:.xxx:.test:$...:.:.ok;.&/ctg;");
+    cpt.parse_expressions(QString(".qsl/%1;.&/ctg;.u1/%2;").arg(cmds.join(":.")).arg(argc));
 
   Chasm_Carrier cc = cre.call_s0("coco:retvalue")("Dataset_Environment::_new",
     cvxs);

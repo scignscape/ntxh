@@ -94,6 +94,11 @@ public:
  void parse_r4(QString rep, Chasm_Type_Object* cto);
 
 
+ Chasm_Type_Object* get_type_object();
+ QString* get_qstring();
+ u1 get_u1();
+
+ u1 get_hint_pretype_code();
 
  void fix_type_object(Chasm_Type_Object* cto);
 

@@ -1702,7 +1702,6 @@ void run_test4s1r(Chasm_Runtime* csr)
  Chasm_Carrier cc3 = csr->gen_carrier<QVariant>(&a3);
  Chasm_Carrier cc4 = csr->gen_carrier<QString>(&a4);
 
-
  ccp->add_carriers({cc1,cc2,cc3,cc4});
 
  ccp->add_new_channel("retvalue");

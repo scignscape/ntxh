@@ -36,7 +36,7 @@ void Chasm_DSMain_Model::register_procedures()
  //@300
  //proctable_->re
  proctable_->register_s1(Dataset_Environment::check_setup_only, @11);
- proctable_->register_s0(Dataset_Environment::_new, @1090);
+ proctable_->register_s0(Dataset_Environment::_new, @309031);
 
  //Dataset_Environment dsenv({});
 

@@ -46,16 +46,16 @@ class Chasm_Runtime_Eval
 {
  Chasm_Runtime* csr_;
 
- Chasm_Type_Object* type_object_ref_;
- Chasm_Type_Object* type_object_u1_;
- Chasm_Type_Object* type_object_u2_;
- Chasm_Type_Object* type_object_QString_;
- Chasm_Type_Object* type_object_u4_;
- Chasm_Type_Object* type_object_QByteArray_;
- Chasm_Type_Object* type_object_r8_;
- Chasm_Type_Object* type_object_QVariant_;
- Chasm_Type_Object* type_object_n8_;
- Chasm_Type_Object* type_object_ptr_;
+// Chasm_Type_Object* type_object_ref_;
+// Chasm_Type_Object* type_object_u1_;
+// Chasm_Type_Object* type_object_u2_;
+// Chasm_Type_Object* type_object_QString_;
+// Chasm_Type_Object* type_object_u4_;
+// Chasm_Type_Object* type_object_QByteArray_;
+// Chasm_Type_Object* type_object_r8_;
+// Chasm_Type_Object* type_object_QVariant_;
+// Chasm_Type_Object* type_object_n8_;
+// Chasm_Type_Object* type_object_ptr_;
 
  Chasm_Procedure_Table* proctable_;
 
@@ -82,6 +82,8 @@ class Chasm_Runtime_Eval
    return _this->_call_s0(name, arg, {args...});
   }
  };
+
+ void init_carrier(Chasm_Carrier& cc, Chasm_Value_Expression cvx);
 
 
 public:
