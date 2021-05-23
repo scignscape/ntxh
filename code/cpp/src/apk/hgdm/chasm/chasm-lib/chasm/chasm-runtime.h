@@ -71,14 +71,26 @@ struct Chasm_Function_Code
  {
   return {0,0,0,100,0,0};
  }
+ static QPair<Chasm_Function_Code, Chasm_Function_Code> _invalid_pair()
+ {
+  return {_invalid(), _invalid()};
+ }
+
+ n8 collapsed(n8 cue);
 };
 
-Chasm_Function_Code operator""_cfc(n8 cue);
+QPair<Chasm_Function_Code, Chasm_Function_Code> operator""_cfc(n8 cue);
 
-inline Chasm_Function_Code _cfc(n8 cue)
+inline QPair<Chasm_Function_Code, Chasm_Function_Code> _cfc(n8 cue)
 {
  return operator""_cfc(cue);
 }
+
+//Chasm_Function_Code operator""_cfc(n8 cue);
+//inline Chasm_Function_Code _cfc(n8 cue)
+//{
+// return operator""_cfc(cue);
+//}
 
 extern void _evaluate_s01_3of3(Chasm_Call_Package* ccp, Chasm_Function_Code fncode,
   void(*fn)(), void(_min_::*sfn)(), Chasm_Carrier* rcar);
@@ -175,14 +187,19 @@ public:
 
 
  template<typename RETURN_Type, typename CLASS_Type>
- void evaluate(Chasm_Call_Package* ccp, Chasm_Function_Code fncode, RETURN_Type (CLASS_Type::*sfn), Chasm_Carrier* rcar = nullptr)
+ void evaluate(Chasm_Call_Package* ccp, QPair<Chasm_Function_Code, Chasm_Function_Code> fncodes,
+   RETURN_Type (CLASS_Type::*sfn), Chasm_Carrier* rcar = nullptr)
  {
+  //
+  Chasm_Function_Code  fncode = fncodes.second;
+  //Chasm_Function_Code fncode = fncodes.first;
+
   if(fncode.convention != 1)
     UNEXPECTED_CONVENTION_CODE
 
   if(fncode.distinct_pretype_pattern < 10)
   {
-   if(fncode.distinct_pretype_pattern == 0)
+   if(fncode.arg_count == 0)
      _evaluate_s01_0_rX(ccp, fncode, nullptr, (void(_min_::*)()) sfn, rcar);
    else
      _evaluate_s01_Xof1(ccp, fncode, nullptr, (void(_min_::*)()) sfn, rcar);
@@ -199,15 +216,19 @@ public:
 
 
  template<typename FN_Type>
- void evaluate(Chasm_Call_Package* ccp, Chasm_Function_Code fncode, FN_Type fn, Chasm_Carrier* rcar = nullptr)
+ void evaluate(Chasm_Call_Package* ccp, QPair<Chasm_Function_Code, Chasm_Function_Code> fncodes,
+   FN_Type fn, Chasm_Carrier* rcar = nullptr)
  {
+  //
+  Chasm_Function_Code fncode = fncodes.second;
+  //Chasm_Function_Code fncode = fncodes.first;
+
   if(fncode.convention != 0)
     UNEXPECTED_CONVENTION_CODE
   else if(fncode.distinct_pretype_pattern < 10)
   {
    if(fncode.arg_count == 0)
      _evaluate_s01_0_rX(ccp, fncode, (void(*)()) fn, nullptr, rcar);
-
    else
      _evaluate_s01_Xof1(ccp, fncode, (void(*)()) fn, nullptr, rcar);
   }

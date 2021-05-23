@@ -42,6 +42,8 @@ typedef void(*_minimal_fn_s0_type)();
 typedef void(_min_::*_minimal_fn_s1_type)();
 union _minimal_fn_type { _minimal_fn_s0_type s0; _minimal_fn_s1_type s1; };
 
+typedef QPair<Chasm_Function_Code, Chasm_Function_Code> CFC_Pair;
+
 class Chasm_Procedure_Table
 {
  Chasm_Type_Object* type_object_ref_;
@@ -57,14 +59,14 @@ class Chasm_Procedure_Table
  Chasm_Type_Object* type_object_qsl_;
 
  QMap<QString, QString> procedure_name_resolutions_;
- QMap<QString, QPair<Chasm_Function_Code, _minimal_fn_type>> registered_procedures_;
+ QMap<QString, QPair<CFC_Pair, _minimal_fn_type>> registered_procedures_;
 
 public:
 
  Chasm_Procedure_Table(Chasm_Runtime* csr);
 
  ACCESSORS__RGET(MACRO_PASTE(QMap<QString, QString>) ,procedure_name_resolutions)
- ACCESSORS__RGET(MACRO_PASTE(QMap<QString, QPair<Chasm_Function_Code, _minimal_fn_type>>) ,registered_procedures)
+ ACCESSORS__RGET(MACRO_PASTE(QMap<QString, QPair<CFC_Pair, _minimal_fn_type>>) ,registered_procedures)
 
 
  ACCESSORS__GET(Chasm_Type_Object* ,type_object_ref)
@@ -88,7 +90,7 @@ public:
  void register_procedure_s1(QString name,
    _minimal_fn_s1_type sfn, QString code);
 
- Chasm_Function_Code find_procedure(QString name,
+ CFC_Pair find_procedure(QString name,
    _minimal_fn_s0_type& s0, _minimal_fn_s1_type& s1);
 
  QVector<Chasm_Value_Expression> parse_expressions(QString reps);

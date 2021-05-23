@@ -66,9 +66,9 @@ void Chasm_Procedure_Table::register_procedure_s1(QString name,
  QString lead;
  QString fc = read_fncode(code, lead);
  n8 nn = fc.toULongLong();
- Chasm_Function_Code fncode = _cfc(nn);
+ CFC_Pair fncodes = _cfc(nn);
  procedure_name_resolutions_[name] = name + code;
- registered_procedures_[name + code] = {fncode, _minimal_fn_type {.s1 = sfn}};
+ registered_procedures_[name + code] = {fncodes, _minimal_fn_type {.s1 = sfn}};
 }
 
 
@@ -78,12 +78,12 @@ void Chasm_Procedure_Table::register_procedure_s0(QString name,
  QString lead;
  QString fc = read_fncode(code, lead);
  n8 nn = fc.toULongLong();
- Chasm_Function_Code fncode = _cfc(nn);
+ CFC_Pair fncode = _cfc(nn);
  procedure_name_resolutions_[name] = name + code;
  registered_procedures_[name + code] = {fncode, {.s0 = fn}};
 }
 
-Chasm_Function_Code Chasm_Procedure_Table::find_procedure(QString name,
+CFC_Pair Chasm_Procedure_Table::find_procedure(QString name,
   _minimal_fn_s0_type& s0, _minimal_fn_s1_type& s1)
 {
  {
@@ -93,9 +93,9 @@ Chasm_Function_Code Chasm_Procedure_Table::find_procedure(QString name,
  }
  auto it = registered_procedures_.find(name);
  if(it == registered_procedures_.end())
-   return Chasm_Function_Code::_invalid();
- const QPair<Chasm_Function_Code, _minimal_fn_type>& pr = *it;
- if(pr.first.convention == 0)
+   return Chasm_Function_Code::_invalid_pair();
+ const QPair<CFC_Pair, _minimal_fn_type>& pr = *it;
+ if(pr.first.first.convention == 0)
    s0 = pr.second.s0;
  else
    s1 = pr.second.s1;

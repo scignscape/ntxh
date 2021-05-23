@@ -134,7 +134,7 @@ u1 _do_binary(u1 arg_count, u4 pretype_pattern)
  return result;
 }
 
-Chasm_Function_Code _parse_cfc(n8 cue, bool udn_literal = true)
+Chasm_Function_Code _parse_cfc(n8 cue) //, bool condensed = false)
 {
  Chasm_Function_Code result;
 
@@ -223,6 +223,15 @@ Chasm_Function_Code _parse_cfc(n8 cue, bool udn_literal = true)
  for(int i = 0; i < arg_count; ++i) //, digit_exp *= 10)
  {
   u1 d = types % 10;
+
+//  if(condensed)
+//  {
+//   if( (d == 1) || (d == 2) || (d == 4) || (d == 9) )
+//     d = 8;
+//   else if( (d == 3) || (d == 5) || (d == 7) )
+//     d = 0;
+//  }
+
   type_numbers[arg_count - i - 1] = d;
 
   u1 j = 0;
@@ -291,9 +300,26 @@ Chasm_Function_Code _parse_cfc(n8 cue, bool udn_literal = true)
  return result;
 }
 
+//Chasm_Function_Code operator""_cfc(n8 cue)
+//{
 
+//}
 
-Chasm_Function_Code operator""_cfc(n8 cue)
+QPair<Chasm_Function_Code, Chasm_Function_Code>  operator""_cfc(n8 cue)
 {
- return _parse_cfc(cue);
+ Chasm_Function_Code cfc1 = _parse_cfc(cue);
+ n8 cue2 = cfc1.collapsed(cue);
+ Chasm_Function_Code cfc2 = _parse_cfc(cue2);
+
+ u1 rc = cfc2.return_code;
+ switch(rc)
+ {
+ case 1: case 2: case 4: case 9: cfc2.return_code = 8; break;
+ default: break;
+
+ }
+
+ return {cfc1, cfc2};
+ //return {_parse_cfc(cue), _parse_cfc(cue, true)};
 }
+

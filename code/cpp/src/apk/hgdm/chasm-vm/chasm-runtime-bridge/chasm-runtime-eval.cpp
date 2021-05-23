@@ -59,18 +59,18 @@ Chasm_Carrier Chasm_Runtime_Eval::_call_s0(QString name, QString ret_channel_nam
  _minimal_fn_s0_type fn = nullptr;
  _minimal_fn_s1_type sfn = nullptr;
 
- Chasm_Function_Code cfc = proctable_->find_procedure(name, fn, sfn);
+ CFC_Pair cfc = proctable_->find_procedure(name, fn, sfn);
 
- if(cfc.invalid())
+ if(cfc.first.invalid())
    return {};
 
  Chasm_Call_Package* ccp = csr_->new_call_package();
 
- if(cfc.arg_count > 0)
+ if(cfc.first.arg_count > 0)
  {
   ccp->add_new_channel("lambda");
 
-  for(u1 a, u = 0; a < cfc.arg_count; ++a, u += 2)
+  for(u1 a, u = 0; a < cfc.first.arg_count; ++a, u += 2)
   {
    Chasm_Type_Object* cto = (Chasm_Type_Object*) args[u];
    Chasm_Carrier cc = csr_->gen_carrier(cto->get_pretype_code()).take_value(args[u + 1]);
@@ -79,7 +79,7 @@ Chasm_Carrier Chasm_Runtime_Eval::_call_s0(QString name, QString ret_channel_nam
  }
 
  ccp->add_new_channel(ret_channel_name);
- Chasm_Carrier rcc = csr_->gen_carrier(cfc.return_code);
+ Chasm_Carrier rcc = csr_->gen_carrier(cfc.first.return_code);
  ccp->add_carrier(rcc);
 
  if(fn)
@@ -98,18 +98,19 @@ Chasm_Carrier Chasm_Runtime_Eval::_call_s01(QString name, QString ret_channel_na
  _minimal_fn_s0_type fn = nullptr;
  _minimal_fn_s1_type sfn = nullptr;
 
- Chasm_Function_Code cfc = proctable_->find_procedure(name, fn, sfn);
+ //Chasm_Function_Code
+ CFC_Pair cfc = proctable_->find_procedure(name, fn, sfn);
 
- if(cfc.invalid())
+ if(cfc.first.invalid())
    return {};
 
  Chasm_Call_Package* ccp = csr_->new_call_package();
 
  ccp->add_new_channel(ret_channel_name);
- Chasm_Carrier rcc = csr_->gen_carrier(cfc.return_code);
+ Chasm_Carrier rcc = csr_->gen_carrier(cfc.first.return_code);
  ccp->add_carrier(rcc);
 
- if(cfc.arg_count == 0)
+ if(cfc.first.arg_count == 0)
  {
   if(fn)
     csr_->evaluate(ccp, cfc, fn, &rcc);
@@ -120,7 +121,7 @@ Chasm_Carrier Chasm_Runtime_Eval::_call_s01(QString name, QString ret_channel_na
 
  ccp->add_new_channel("lambda");
 
- u1 count = qMin<u1>(cfc.arg_count, args.size());
+ u1 count = qMin<u1>(cfc.first.arg_count, args.size());
 
  Chasm_Carrier ccs[count];
 
@@ -193,9 +194,9 @@ Chasm_Carrier Chasm_Runtime_Eval::call_s1(void* obj, QString name)
  _minimal_fn_s0_type fn = nullptr;
  _minimal_fn_s1_type sfn = nullptr;
 
- Chasm_Function_Code cfc = proctable_->find_procedure(name, fn, sfn);
+ CFC_Pair cfc = proctable_->find_procedure(name, fn, sfn);
 
- if(cfc.invalid())
+ if(cfc.first.invalid())
    return {};
  //csr
 
@@ -205,7 +206,7 @@ Chasm_Carrier Chasm_Runtime_Eval::call_s1(void* obj, QString name)
  ccp->add_carrier(scc);
 
  ccp->add_new_channel("retvalue");
- Chasm_Carrier rcc = csr_->gen_carrier(cfc.return_code);
+ Chasm_Carrier rcc = csr_->gen_carrier(cfc.first.return_code);
  ccp->add_carrier(rcc);
 
  if(sfn)

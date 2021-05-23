@@ -55,6 +55,7 @@ void run_testqvar(Chasm_Runtime* csr)
  ccp->add_carriers({cc1,cc2,cc3});
 
  csr->evaluate(ccp, 300762_cfc, &testqvar);
+ //csr->evaluate(ccp, 300762_cfc, &testqvar);
 }
 
 
@@ -183,12 +184,12 @@ void run_testqss(Chasm_Runtime* csr)
 }
 
 
-u1 testqs1(QString arg1, u4 arg2, u1 arg3)
+u1 testqs1(QString arg1, float arg2, u1 arg3)
 {
  qDebug() << "arg1 = " << arg1;
  qDebug() << "arg2 = " << arg2;
  qDebug() << "arg3 = " << arg3;
- u1 result = arg1.size() + (arg2 % 10) + (arg3 % 10);
+ u1 result = arg1.size() + ( (u1)arg2 % 10) + (arg3 % 10);
  return result;
 }
 
@@ -198,11 +199,11 @@ void run_testqs1(Chasm_Runtime* csr)
  ccp->add_new_channel("lambda");
 
  QString a1 = "A1";
- u4 a2 = 123456789;
+ float a2 = 12345.6789;
  u1 a3 = 135;
 
  Chasm_Carrier cc1 = csr->gen_carrier<QString>(&a1);
- Chasm_Carrier cc2 = csr->gen_carrier<u4>(&a2);
+ Chasm_Carrier cc2 = csr->gen_carrier<r8>(&a2);
  Chasm_Carrier cc3 = csr->gen_carrier<u1>(&a3);
 
  ccp->add_carriers({cc1,cc2,cc3});
@@ -211,7 +212,7 @@ void run_testqs1(Chasm_Runtime* csr)
  Chasm_Carrier cc0 = csr->gen_carrier<u1>(csr->Retvalue._u1);
  ccp->add_carrier(cc0);
 
- csr->evaluate(ccp, 301341_cfc, &testqs1, &cc0);
+ csr->evaluate(ccp, 301361_cfc, &testqs1, &cc0);
  u1 result = cc0.value<u1>();
  qDebug() << "r = " << result;
 }
@@ -455,12 +456,12 @@ void run_testqs5(Chasm_Runtime* csr)
 
 
 
-r8 testqs6(QString arg1, u4 arg2, u1 arg3)
+float testqs6(QString arg1, u4 arg2, u1 arg3)
 {
  qDebug() << "arg1 = " << arg1;
  qDebug() << "arg2 = " << arg2;
  qDebug() << "arg3 = " << arg3;
- r8 result = ((r8) arg1.size()) / (arg1.size() + arg2 + arg3);
+ float result = ((float) arg1.size()) / (arg1.size() + arg2 + arg3);
  return result;
 }
 
@@ -484,7 +485,7 @@ void run_testqs6(Chasm_Runtime* csr)
  Chasm_Carrier cc0 = csr->gen_carrier<r8>(csr->Retvalue._r8);
  ccp->add_carrier(cc0);
  csr->evaluate(ccp, 306341_cfc, &testqs6, &cc0);
- QVariant result = cc0.value<r8>();
+ QVariant result = cc0.value<float>();
  qDebug() << "r = " << result;
 }
 
@@ -687,6 +688,7 @@ void run_teste(Chasm_Runtime* csr)
  Chasm_Carrier cc1 = csr->gen_carrier<void*>(&a1);
  Chasm_Carrier cc2 = csr->gen_carrier<void*>(&a2);
  Chasm_Carrier cc3 = csr->gen_carrier<u1>(&a3);
+
 
  ccp->add_carriers({cc1,cc2,cc3});
  csr->evaluate(ccp, 300991_cfc, &teste);
@@ -1062,7 +1064,7 @@ struct test0s1
 
  void test4(n8 a1, QString a2, n8 a3, u2& a4)
  {
-  qDebug() << QString("%1: %2").arg(a2).arg(a1 + a3);
+  qDebug() << QString("%1 %2").arg(a2).arg(a1 + a3);
   a4 = a1 - a3;
  }
 
@@ -1071,7 +1073,6 @@ struct test0s1
   qDebug() << a1 << "," << a2 << a3.toStringList() << a4;
   return true;
  }
-
 
  void test62(r8 a1, r8 a2, u1 a3, u1 a4, u1 a5, u1 a6)
  {
@@ -1656,7 +1657,7 @@ void run_test4s1(Chasm_Runtime* csr)
 
  ccp->add_new_channel("lambda");
  n8 a1 = 222;
- QString a2 = "sum: ";
+ QString a2 = "sum:";
  n8 a3 = 200;
  u2 a4;
 
@@ -1794,6 +1795,43 @@ void run_test62s1r(Chasm_Runtime* csr)
  qDebug() << "r = " << result;
 }
 
+s1 test4rr(s2 a1, QByteArray a2, u2 a3, QVariant a4)
+{
+ qDebug() << a1 << a2 << a3 << a4.toStringList();
+ return -2;
+}
+
+void run_test4rr(Chasm_Runtime* csr)
+{
+ Chasm_Call_Package* ccp = csr->new_call_package();
+
+ ccp->add_new_channel("lambda");
+
+ s2 a1 = -33;
+ QByteArray a2 = "a2 (byte array)";
+ u2 a3 = 34;
+ QStringList _a4{"string list 1", "string list 2"};
+ QVariant a4 = _a4; //{"string list 1", "string list 2"};
+
+ Chasm_Carrier cc1 = csr->gen_carrier<u2>(&a1);
+ Chasm_Carrier cc2 = csr->gen_carrier<QByteArray>(&a2);
+ Chasm_Carrier cc3 = csr->gen_carrier<u2>(&a3);
+ Chasm_Carrier cc4 = csr->gen_carrier<QVariant>(&a4);
+
+ ccp->add_carriers({cc1,cc2,cc3,cc4});
+
+ ccp->add_new_channel("retvalue");
+ Chasm_Carrier ccr = csr->gen_carrier<void*>(csr->Retvalue._u1);
+ ccp->add_carrier(ccr);
+
+ csr->evaluate(ccp, 4012527_cfc, //(minimal_fn_s1_type)
+               &test4rr, &ccr);
+
+ s2 result = ccr._value<s2>();
+ qDebug() << "r = " << result;
+}
+
+
 
 int main(int argc, char *argv[])
 {
@@ -1807,7 +1845,7 @@ int main(int argc, char *argv[])
 // #ifdef HIDE
 // #endif //def HIDE
 
- // //  47 tests ...
+ // //  48 tests ...
 
  run_test0(csr);
  qDebug() << "\n===\n";
@@ -1901,6 +1939,9 @@ int main(int argc, char *argv[])
  qDebug() << "\n===\n";
 
  run_testfn(csr);
+ qDebug() << "\n===\n";
+
+ run_test4rr(csr);
  qDebug() << "\n===\n";
 
  run_test2(csr);

@@ -66,12 +66,12 @@ void Chasm_Runtime_Bridge::run_eval(QString proc_name)
  auto it = proctable_->registered_procedures().find(proc_name);
  if(it == proctable_->registered_procedures().end())
    return;
- const QPair<Chasm_Function_Code, _minimal_fn_type>& pr = *it;
- if(pr.first.convention == 0)
+ const QPair<CFC_Pair, _minimal_fn_type>& pr = *it;
+ if(pr.first.first.convention == 0)
  {
   csr_->evaluate(current_call_package_, pr.first, pr.second.s0);
  }
- else if(pr.first.convention == 1)
+ else if(pr.first.first.convention == 1)
  {
   csr_->evaluate(current_call_package_, pr.first, pr.second.s1);
  }
