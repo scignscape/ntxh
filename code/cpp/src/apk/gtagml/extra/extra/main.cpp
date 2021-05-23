@@ -1434,7 +1434,11 @@ void gen_eval_files_Xof1or2()
 
 int main(int argc, char *argv[])
 {
-// generate_pretype_patterns_maps();
+#ifndef HAVE_PRETYPE_PATTERNS
+ generate_pretype_patterns_maps();
+#endif
+
+#ifdef HAVE_PRETYPE_PATTERNS
 
 #define INCLUDE_MAP_CODE
  QMap<u2, u2> pretype_patterns_3_map {
@@ -1469,7 +1473,7 @@ int main(int argc, char *argv[])
  gen_dispatch_arrays(pretype_patterns_3_map, "3of3", 3);
  gen_fn_files(pretype_patterns_3_map, "3of3", 3);
  gen_eval_files(3, 3);
-
+#endif // def HAVE_PRETYPE_PATTERNS
 }
 
 
