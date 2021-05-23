@@ -95,7 +95,8 @@ public:
  QPair<QString, QString> get_landmark_string(int page, int x, int y, QPair<int, int>& id,
    QPair<int, int>& start_index, QPair<int, int>& end_index, QString& file);
 
- QString read_sentence(QString landmark_file, u4 start_index, u4 end_index);
+ QString read_sentence(QString landmark_file, u4 start_index,
+   u4 end_index, QString* info = nullptr);
 
  QString load_htxn_block(QString folder, QString file);
 

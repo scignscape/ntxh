@@ -3294,18 +3294,61 @@ void XpdfViewer::addTab() {
 
     if(landmark.first == "Sentence")
     {
-     qm->addAction("Read full sentence", [this, landmark_file, start_index, end_index]
+     // //  this assumes it is not noticeably time-consuming to check the
+      //    sentence and info while constructing the popup menu.
+      //    The reason it's better is to only give info options
+      //    when there's info to show ...
+     QString info;
+     QString sentence = ngml_loader_->read_sentence(landmark_file, start_index.first, end_index.first, &info);
+
+     qm->addAction("Read full sentence", [this, sentence, info]
      {
-      // QString pdf_file = AR_ROOT_DIR "/data/dataset/ctg/main.pdf";
-      QString sentence = ngml_loader_->read_sentence(landmark_file, start_index.first, end_index.first);
-      QMessageBox::information(this, "Sentence (decoded)", sentence);
+      QMessageBox::information(this, "Sentence (decoded)", sentence + info);
      });
 
-     qm->addAction("Copy sentence", [this, landmark_file, start_index, end_index]
+     if(!info.isEmpty())
      {
-      QString sentence = ngml_loader_->read_sentence(landmark_file, start_index.first, end_index.first);
+      qm->addAction("Copy sentence marks info", [info]
+      {
+       QApplication::clipboard()->setText(info);
+      });
+      qm->addAction("Copy sentence and marks info", [sentence, info]
+      {
+       QApplication::clipboard()->setText(sentence + info);
+      });
+     }
+     qm->addAction("Copy sentence", [sentence]
+     {
       QApplication::clipboard()->setText(sentence);
      });
+
+// //  here's code for the option of not looking for marks info a priori ...
+//     qm->addAction("Read full sentence", [this, landmark_file, start_index, end_index]
+//     {
+//      // QString pdf_file = AR_ROOT_DIR "/data/dataset/ctg/main.pdf";
+//      QString sentence = ngml_loader_->read_sentence(landmark_file, start_index.first, end_index.first);
+//      QMessageBox::information(this, "Sentence (decoded)", sentence);
+//     });
+
+//     qm->addAction("Copy sentence info", [this, landmark_file, start_index, end_index]
+//     {
+//      QString info;
+//      QString sentence = ngml_loader_->read_sentence(landmark_file, start_index.first, end_index.first, &info);
+//      QApplication::clipboard()->setText(info);
+//     });
+
+//     qm->addAction("Copy sentence and info", [this, landmark_file, start_index, end_index]
+//     {
+//      QString sentence = ngml_loader_->read_sentence(landmark_file, start_index.first, end_index.first);
+//      QApplication::clipboard()->setText(sentence);
+//     });
+
+//     qm->addAction("Copy sentence", [this, landmark_file, start_index, end_index]
+//     {
+//      QString info;
+//      QString sentence = ngml_loader_->read_sentence(landmark_file, start_index.first, end_index.first, &info);
+//      QApplication::clipboard()->setText(sentence);
+//     });
     }
    }
 

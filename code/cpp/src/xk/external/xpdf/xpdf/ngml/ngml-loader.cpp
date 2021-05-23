@@ -232,7 +232,8 @@ void NGML_Loader::sentence::add_marks_info(QString& info)
 
 
 
-QString NGML_Loader::read_sentence(QString landmark_file, u4 start_index, u4 end_index)
+QString NGML_Loader::read_sentence(QString landmark_file,
+  u4 start_index, u4 end_index, QString* info)
 {
  QString result;
 
@@ -257,7 +258,10 @@ QString NGML_Loader::read_sentence(QString landmark_file, u4 start_index, u4 end
  {
   result = (*it).text;
    // // this recalculates but it doesn't seem worth it to stash this ...
-  (*it).add_marks_info(result);
+  if(info)
+    (*it).add_marks_info(*info);
+  else
+    (*it).add_marks_info(result);
   return result;
  }
 
@@ -306,7 +310,10 @@ QString NGML_Loader::read_sentence(QString landmark_file, u4 start_index, u4 end
 
  subdocuments_[landmark_file].sentences_[start_index] = {start_index, end_index, result, marks};
 
- subdocuments_[landmark_file].sentences_[start_index].add_marks_info(result);
+ if(info)
+   subdocuments_[landmark_file].sentences_[start_index].add_marks_info(*info);
+ else
+   subdocuments_[landmark_file].sentences_[start_index].add_marks_info(result);
  return result;
 }
 
