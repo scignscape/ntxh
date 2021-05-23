@@ -293,9 +293,12 @@ void GH_Block_Standard_8bit::write(QByteArray& text, QString block_ws,
    {
     if(special_flag_marks)
     {
+     // //  we want the *next* index unless mode is 9 ...
+     u1 offset = (u1)(check != 99);
+
      if(special_flag_marks->isEmpty())
      {
-      special_flag_marks->push_back(current_index_ | 0x80000000);
+      special_flag_marks->push_back((current_index_ + offset)| 0x80000000);
       special_flag_marks->push_back(check - 90);
      }
      else
@@ -316,11 +319,14 @@ void GH_Block_Standard_8bit::write(QByteArray& text, QString block_ws,
       if(sf_index)
       {
        // we've found an index.  Is it current?
-       if(sf_index == current_index_)
+       if(sf_index == (current_index_ + offset))//? (current_index_ + 1) )
          special_flag_marks->push_back(check - 90);
        else
        {
-        special_flag_marks->push_back(current_index_ | 0x80000000);
+        if(check == 99)
+          special_flag_marks->push_back( (current_index_ + offset) | 0x80000000);
+        else
+          special_flag_marks->push_back( (current_index_ + offset) | 0x80000000);
         special_flag_marks->push_back(check - 90);
        }
       }

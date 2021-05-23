@@ -77,6 +77,8 @@ GTagML_Output_Blocks::GTagML_Output_Blocks(GTagML_Document& document, GH_Block_W
  htxn_qts_.setString(&htxn_acc_);
  ws_qts_.setString(&ws_acc_);
  init_callbacks();
+
+ // // two copies of the first ...
  marks_by_mode_.push_back(new QMap<u4, QPair<QString, u4>>);
  marks_by_mode_.push_back(marks_by_mode_.first());
 
