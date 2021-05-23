@@ -13,6 +13,10 @@ TEMPLATE = app
 
 include($$ROOT_DIR/../preferred/sysr.pri)
 
+exists($$ROOT_DIR/../dev/consoles/fns/pretype-patterns.pri) {
+ message(pretype patterns file located; assuming patterns files have been generated)
+ DEFINES += HAVE_PRETYPE_PATTERNS
+}
 
 INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR $$SRC_ROOT_DIR
 
@@ -33,6 +37,7 @@ INCLUDEPATH += $$ROOT_DIR
 
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
+DEFINES += CONDENSED_ONLY
 
 DEFINES += CAON_DEBUG
 DEFINES += RELAE_LABEL_NODES
