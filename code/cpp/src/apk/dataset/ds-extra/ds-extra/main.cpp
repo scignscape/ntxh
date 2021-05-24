@@ -57,6 +57,15 @@ void get_source_files(QString paper_name, QMap<QString, QMap<QString, QStringLis
   result[paper_name]["src"].push_back(fp);
  }
 
+ QString folderv = ROOT_FOLDER "/../dev/documents/" + paper_name + "/src/vocab";
+ QDirIterator qdiv(folderv, {"*.txt"});
+ while(qdiv.hasNext())
+ {
+  qdiv.next();
+  QString fp = qdiv.filePath();
+  result[paper_name]["vocab"].push_back(fp);
+ }
+
  QString folderx = ROOT_FOLDER "/../dev/documents/" + paper_name + "/extra";
  QDirIterator qdix(folderx, {"*.tex"});
  while(qdix.hasNext())

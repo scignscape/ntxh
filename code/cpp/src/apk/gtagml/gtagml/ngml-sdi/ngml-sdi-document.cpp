@@ -229,6 +229,8 @@ void NGML_SDI_Document::parse_element_start_hypernode(NTXH_Graph& g, hypernode_t
      b.chop(2);
    if(qsl.isEmpty())
      start_y += half_base_line_stretch(b.toUInt());
+   else if(qsl.first().isEmpty())
+    start_y += half_base_line_stretch(b.toUInt(), 1.);
    else
      start_y += half_base_line_stretch(b.toUInt(), qsl.first().toDouble());
   }    
@@ -320,6 +322,8 @@ void generic_start(NGML_SDI_Document& nsd, T& obj,
     b.chop(2);
   if(qsl.isEmpty())
     start_y += nsd.half_base_line_stretch(b.toUInt());
+  else if(qsl.first().isEmpty())
+   start_y += nsd.half_base_line_stretch(b.toUInt(), 1.);
   else
     start_y += nsd.half_base_line_stretch(b.toUInt(), qsl.first().toDouble());
  }    
