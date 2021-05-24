@@ -38,7 +38,7 @@ USING_KANS(DGH)
 typedef NTXH_Graph::hypernode_type hypernode_type;
 
 NGML_SDI_Document::NGML_SDI_Document(QString path, QString folder)
-  :  path_(path), folder_(folder), global_base_line_skip_(12),
+  :  path_(path), folder_(folder), global_base_line_skip_(12), global_base_line_stretch_(1.0),
      carried_paragraph_id_(0), carried_sentence_id_(0), current_parse_paragraph_(nullptr)
 {
 }
@@ -156,6 +156,23 @@ NGML_SDI_Page* NGML_SDI_Document::get_page(u4 page)
  return result;
 }
 
+u4 NGML_SDI_Document::half_base_line_stretch()
+{
+ return half_base_line_stretch(global_base_line_skip_, global_base_line_stretch_);
+}
+
+u4 NGML_SDI_Document::half_base_line_stretch(n8 bls)
+{
+ return half_base_line_stretch(bls, global_base_line_stretch_);
+}
+
+
+u4 NGML_SDI_Document::half_base_line_stretch(n8 bls, r8 blt)
+{
+ return (u4) (( (r8) bls * blt) / 2);
+}
+
+
 void NGML_SDI_Document::parse_element_start_hypernode(NTXH_Graph& g, hypernode_type* hn)
 {
  NGML_SDI_Element* nsel = new NGML_SDI_Element();
@@ -201,13 +218,19 @@ void NGML_SDI_Document::parse_element_start_hypernode(NTXH_Graph& g, hypernode_t
   u4 start_y = (int) sy.toDouble();
 
   if(prs[5].first.isEmpty())
-    start_y += (u4) (this->global_base_line_skip_ / 2);
+    start_y += half_base_line_stretch();
   else
   {
-   QString b = prs[5].first;
+   QString bb = prs[5].first;
+   qDebug() << "Using special skip: " << bb;
+   QStringList qsl = bb.split(';');
+   QString b = qsl.takeFirst();
    if(b.endsWith("pt"))
      b.chop(2);
-   start_y += (int) (b.toDouble() / 2);
+   if(qsl.isEmpty())
+     start_y += half_base_line_stretch(b.toUInt());
+   else
+     start_y += half_base_line_stretch(b.toUInt(), qsl.first().toDouble());
   }    
 
   nsel->set_start_x(start_x);
@@ -286,14 +309,19 @@ void generic_start(NGML_SDI_Document& nsd, T& obj,
 
  // //  go from bottom of line to top ...
  if(prs[b_pos].first.isEmpty())
-    start_y += (u4) (nsd.global_base_line_skip() / 2);
+    start_y += nsd.half_base_line_stretch();
  else
  {
-  QString b = prs[b_pos].first;
-  qDebug() << "Using special skip: " << b;
+  QString bb = prs[5].first;
+  qDebug() << "Using special skip: " << bb;
+  QStringList qsl = bb.split(';');
+  QString b = qsl.takeFirst();
   if(b.endsWith("pt"))
     b.chop(2);
-  start_y += (int) (b.toDouble() / 2);
+  if(qsl.isEmpty())
+    start_y += nsd.half_base_line_stretch(b.toUInt());
+  else
+    start_y += nsd.half_base_line_stretch(b.toUInt(), qsl.first().toDouble());
  }    
 
  obj.set_start_x(start_x);

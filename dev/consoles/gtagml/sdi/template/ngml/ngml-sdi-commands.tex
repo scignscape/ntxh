@@ -28,8 +28,10 @@
 %\catcode`:=11
 
 \newlength\orig-basels % original baselineskip
+\providecommand{\baselinestretch}{1.0}
 \AtBeginDocument{%
 \setlength\orig-basels{\baselineskip}%
+\let\origbaselinestretch\baselinestretch
 } 
 
 \newwrite\sdi-file
@@ -142,7 +144,7 @@
 
 \newcommand{\sdi@check-write-bls}{%
 \ifthenelse{\lengthtest{\orig-basels=\baselineskip}}{}%
-{\write\sdi-file\expandafter{\expandafter\field-mark@b\the\baselineskip}}}
+{\write\sdi-file\expandafter{\expandafter\field-mark@b\the\baselineskip;\baselinestretch}}}
 
 
 \newcommand{\nhv!sdi-element-start}[1]{%
@@ -328,7 +330,7 @@ $y: \topt\pdflastypos}%
 :n:1 :i:2 :o:3 :p:4 :x:5 :y:6 ;^^J%
 ^^J%
 &type SDI_Info {2}^^J%
-:n:1 :global-baseline-skip:2 ;^^J%
+:n:1 :global-baseline-skip:2 :global-baseline-stretch:3 ;^^J%
 ^^J%
 ^^J%
 &/^^J%
@@ -337,6 +339,7 @@ $y: \topt\pdflastypos}%
 !/ SDI_Info^^J%
 $n: Info^^J%
 $global-baseline-skip: \the\orig-basels^^J%
+$global-baseline-stretch: \origbaselinestretch^^J%
 ^^J%
 /!^^J%
 <+>^^J%

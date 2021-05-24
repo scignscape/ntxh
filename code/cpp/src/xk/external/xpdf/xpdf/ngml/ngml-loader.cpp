@@ -157,8 +157,8 @@ QChar decode(u1 cue)
   case 81: return '&'; // 81 // not part of name  (colloq/subpunctuation)
   case 82: return '/'; // 82 // punc
 
-  case 83: return ' ';
-  case 84: return ' '; // 84
+  case 83: return '?';
+  case 84: return ' '; // fiat letter ...
 
   case 85: return '*'; // 85 // polite
   case 86: return '='; // 86 // (quasi math)
