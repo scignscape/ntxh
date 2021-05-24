@@ -1,87 +1,87 @@
 $$ document-title := Cognitive Transform Grammar
 $$ local-title := section2
 
-$& AnneVilnat %% (1:main) 32822 32909
-$& AsherPustejovsky example%(1:main) 28710 28738,%%p.%%5 %3
-$& AsherPustejovsky %% (1:main) 60284 60286
+$& AnneVilnat %% (1:main) 32813 32900
+$& AsherPustejovsky example%(1:main) 28701 28729,%%p.%%5 %3
+$& AsherPustejovsky %% (1:main) 60275 60277
 $& BarkerShanTG %% (1:main) 3168 3295
 $& ChoeCharniak %% (1:main) 7588 7589
-$& Gardenfors p.%%4 (1:main) 43414 43587
-$& JamesPustejovsky %% (1:main) 60271 60282
+$& Gardenfors p.%%4 (1:main) 43405 43578
+$& JamesPustejovsky %% (1:main) 60262 60273
 $& JanVanEijck %% (1:main) 10075 10266
-$& KitFine %% (1:main) 46098 46107
+$& KitFine %% (1:main) 46089 46098
 $& KiyoshiSudo %% (1:main) 7586 7587
 $& KubotaLevine %% (1:main) 3297 3299
-$& MeryMootRetore p.%%4 (1:main) 34222 34234
+$& MeryMootRetore p.%%4 (1:main) 34213 34225
 $& OsborneMaxwell %% (1:main) 20536 20693
-$& Pinker %% (1:main) 32743 32821
-$& Ramstead p.%%38 (1:main) 44593 44819
+$& Pinker %% (1:main) 32734 32812
+$& Ramstead p.%%38 (1:main) 44584 44810
 $& RikVanNoord %% (1:main) 10268 10271
 $& Rossi p.%(1:main) 4694 4906 %3
 $& SivaReddy %% (1:main) 7433 7585
-$& ZhaohuiLuo %% (1:main) 34340 34349
-$& ZhaohuiLuoSignatures %% (1:main) 34351 34354
+$& ZhaohuiLuo %% (1:main) 34331 34340
+$& ZhaohuiLuoSignatures %% (1:main) 34342 34345
 
 
-= 28631:
+= 28623:
 = 1
 Nicholas Asher
 
-= 28645:
+= 28636:
 = 9
 
-= 28650:
+= 28642:
 = 1
 James Pustejovsky
 
-= 28667:
+= 28658:
 = 9
 
-= 32791:
+= 32783:
 = 1
 Steven Pinker
 
-= 32804:
+= 32795:
 = 9
 
-= 43175:
+= 43167:
 = 1
 George Lakoff
 
-= 43188:
+= 43179:
 = 9
 
-= 43190:
+= 43182:
 = 1
 Mark Johnson
 
-= 43202:
+= 43193:
 = 9
 
-= 43204:
+= 43196:
 = 1
 Leonard Talmy
 
-= 43217:
+= 43208:
 = 9
 
-= 43320:
+= 43312:
 = 1
 Jean Petitot
 
-= 43332:
+= 43323:
 = 9
 
-= 44007:
+= 43999:
 = 1
 Maxwell James Ramstead
 
-= 44029:
+= 44020:
 = 9
 
-= 46086:
+= 46078:
 = 1
 Kit Fine
 
-= 46094:
+= 46085:
 = 9

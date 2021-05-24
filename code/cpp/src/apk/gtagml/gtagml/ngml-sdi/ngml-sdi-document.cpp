@@ -201,13 +201,13 @@ void NGML_SDI_Document::parse_element_start_hypernode(NTXH_Graph& g, hypernode_t
   u4 start_y = (int) sy.toDouble();
 
   if(prs[5].first.isEmpty())
-    start_y -= (u4) this->global_base_line_skip_;
+    start_y += (u4) (this->global_base_line_skip_ / 2);
   else
   {
    QString b = prs[5].first;
    if(b.endsWith("pt"))
      b.chop(2);
-   start_y -= (int) b.toDouble();
+   start_y += (int) (b.toDouble() / 2);
   }    
 
   nsel->set_start_x(start_x);
@@ -284,14 +284,16 @@ void generic_start(NGML_SDI_Document& nsd, T& obj,
  u4 start_x = (int) sx.toDouble();
  u4 start_y = (int) sy.toDouble();
 
+ // //  go from bottom of line to top ...
  if(prs[b_pos].first.isEmpty())
-    start_y -= (u4) nsd.global_base_line_skip();
+    start_y += (u4) (nsd.global_base_line_skip() / 2);
  else
  {
   QString b = prs[b_pos].first;
+  qDebug() << "Using special skip: " << b;
   if(b.endsWith("pt"))
     b.chop(2);
-  start_y -= (int) b.toDouble();
+  start_y += (int) (b.toDouble() / 2);
  }    
 
  obj.set_start_x(start_x);

@@ -2,113 +2,112 @@ $$ document-title := Cognitive Transform Grammar
 $$ local-title := intro
 
 $& BittnerSmithDonnelly %% (1:main) 2823 3113
-$& BlackwellPragmatics %% (1:main) 13681 13702
-$& ErwanMoreau %% (1:main) 12194 12195
-$& GoertzelPLN %% (1:main) 12192 12193
+$& BlackwellPragmatics %% (1:main) 13680 13701
+$& ErwanMoreau %% (1:main) 12193 12194
+$& GoertzelPLN %% (1:main) 12191 12192
 $& HolmqvistDiss %% (1:main) 2403 2404
 $& InteractingConceptualSpaces %% (1:main) 2714 2822
 $& JeanPetitot %% (1:main) 3114 3137
-$& JordanZlatev %% (1:main) 3319 3339
+$& JordanZlatev %% (1:main) 3318 3338
 $& KennethHolmqvist %% (1:main) 2383 2402
 $& MattSelway %% (1:main) 2298 2382
-$& OlavKWiegand %% (1:main) 3138 3316
+$& OlavKWiegand %% (1:main) 3138 3315
 $& RaubalAdams %% (1:main) 2546 2709
 $& RaubalAdamsCSML %% (1:main) 2710 2711
-$& Schneider %% (1:main) 12047 12189
-$& SleatorTamperley %% (1:main) 12190 12191
+$& Schneider %% (1:main) 12046 12188
+$& SleatorTamperley %% (1:main) 12189 12190
 $& TerryRegier %% (1:main) 2405 2482
-$& WiegandGestalts %% (1:main) 3317 3318
+$& WiegandGestalts %% (1:main) 3316 3317
 $& Zenker %% (1:main) 2712 2713
 
 
-= 2370:
+= 2371:
 = 1
 Matt Selway
 
 = 2381:
 = 9
 
-= 2384:
+= 2385:
 = 1
 Kenneth Holmqvist
 
 = 2401:
 = 9
 
-= 2455:
+= 2456:
 = 1
 Terry Regier
 
 = 2467:
 = 9
 
-= 2528:
+= 2529:
 = 1
 PeterGardenfors
 
 = 2533:
 = 9
 
-= 2631:
+= 2632:
 = 1
 Frank Zenker
 
 = 2643:
 = 9
 
-= 2645:
+= 2646:
 = 1
 Martin Raubal
 
 = 2658:
 = 9
 
-= 2664:
+= 2665:
 = 1
 Benjamin Adams
 
 = 2678:
 = 9
 
-= 2794:
+= 2795:
 = 1
 David Spivak
 
 = 2806:
 = 9
 
-= 2811:
+= 2812:
 = 1
 Bob Coecke
 
 = 2821:
 = 9
 
-= 3094:
+= 3095:
 = 1
 Barry Smith
 
 = 3105:
 = 9
 
-= 3119:
+= 3120:
 = 1
 Jean Petitot
 
 = 3131:
 = 9
 
-= 3298:
+= 3299:
 = 1
-Olav 
-K. Wiegand
+Olav K. Wiegand
 
-= 3314:
+= 3313:
 = 9
 
 = 3324:
 = 1
 Jordan Zlatev
 
-= 3337:
+= 3336:
 = 9

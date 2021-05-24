@@ -37,8 +37,9 @@ QPair<QString, QString> NGML_Loader::get_landmark_string(int page, int x, int y,
  while(it.hasNext())
  {
   it.next();
-  int dx = qAbs(x - it.key().first);
-  int dy = qAbs(y - it.key().second);
+  QPair<int, int> pr = it.key();
+  int dx = qAbs(x - pr.first);
+  int dy = qAbs(y - pr.second);
   if(dx < 20 && dy < 20)
   {
    element el = it.value();
@@ -470,7 +471,7 @@ void NGML_Loader::load_pages(XpdfWidget* pdf, QString file_name)
    }
 
    if(qsl.size() != 8)
-    continue;
+     continue;
 
    int file_id = qf.toInt();
 
