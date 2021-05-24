@@ -127,6 +127,12 @@ void generate_swl()
   {
    sfiti.next();
    QString subdir = sfiti.key();
+   if(subdir == "vocab")
+   {
+    if(!scdir.exists("src"))
+      scdir.mkdir("src");
+    scdir.cd("src");
+   }
    if(!scdir.exists(subdir))
      scdir.mkdir(subdir);
    scdir.cd(subdir);
@@ -134,6 +140,8 @@ void generate_swl()
    {
     copy_binary_file_to_folder(sf, scdir.absolutePath());
    }
+   if(subdir == "vocab")
+     scdir.cdUp();
    scdir.cdUp();
   }
   scdir.cdUp();

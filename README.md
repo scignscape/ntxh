@@ -228,7 +228,11 @@ building, and running C++ projects within this IDE.
 
 To get started with the data set, begin with the project called "`build-first`". 
 Specifically, within Qt Creator open the project at the location 
-"`@/code/cpp/projects/qt/qtm/unibuild/dsmain/build-first.pro`". This project should 
+"`@/code/cpp/projects/qt/qtm/unibuild/dsmain/build-first.pro`". 
+(For convenience a shortcut link to the "`unibuild`" folder is provided 
+in the root folder of the archive; most of the useful project files 
+are in the "`dsmain`" folder inside that "`unibuild`" link target). 
+This "`build-first`" project should 
 build and run without further preparation (except for potential 
 font-related issues; see below), assuming the development environment 
 is set up for Qt in general. This build option provides a basic version of 
@@ -237,7 +241,7 @@ is working correctly.
 
 To examine more advanced features of the data set, it is necessary to set up a 
 "`preferred`" folder, which must be a _sibling_ folder to the archive 
-root called "`preferred`". Inside that folder would be several files indicating 
+root, one called "`preferred`". Inside that folder would be several files indicating 
 "preferred" paths for certain tools needed for the data set (except for 
 basic usage), such as `qmake` and `pdflatex`, as well as several "`.pri`" 
 files (which are similar to Qt `pro` project files but can be included in other 
