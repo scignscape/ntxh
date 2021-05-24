@@ -15,14 +15,16 @@ do
   echo "Processing paper: $paperName" 
   echo "Running GTagML"
   ./run-with-args.sh gt-module-ir-console $paperName
-  echo "Running PDFLaTeX"
+  echo "Running PDFLaTeX (twice, to finalize references)"
   cd "$ar/../dev/documents/$paperName/src/setup"
   chmod a+x ./run-pdflatex.sh
+  ./run-pdflatex.sh
   ./run-pdflatex.sh
   cd - 
   echo "Running NGML"
   ./run-with-args.sh ngml-sdi-console $paperName
   cd "$ar/../dev/documents/$paperName/src/setup"
+  echo "Running PDFLaTeX (again, to embed sdi files)"
   ./run-pdflatex.sh
   cd - 
   echo "Done."
