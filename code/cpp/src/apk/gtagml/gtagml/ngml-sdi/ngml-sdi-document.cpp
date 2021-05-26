@@ -38,7 +38,7 @@ USING_KANS(DGH)
 typedef NTXH_Graph::hypernode_type hypernode_type;
 
 NGML_SDI_Document::NGML_SDI_Document(QString path, QString folder)
-  :  path_(path), folder_(folder), global_base_line_skip_(12), global_base_line_stretch_(1.0),
+  :  path_(path), folder_(folder), global_base_line_skip_(12.), global_base_line_stretch_(1.),
      carried_paragraph_id_(0), carried_sentence_id_(0), current_parse_paragraph_(nullptr)
 {
 }
@@ -156,6 +156,19 @@ NGML_SDI_Page* NGML_SDI_Document::get_page(u4 page)
  return result;
 }
 
+r8 NGML_SDI_Document::ptstring_to_r8(QString str, r8 default_value)
+{
+ if(str.isEmpty())
+   return default_value;
+ if(str.endsWith("pt"))
+   str.chop(2);
+ bool ok = false;
+ r8 result = str.toDouble(&ok);
+ if(ok)
+   return result;
+ return default_value;
+}
+
 u4 NGML_SDI_Document::half_base_line_stretch()
 {
  return half_base_line_stretch(global_base_line_skip_, global_base_line_stretch_);
@@ -225,14 +238,11 @@ void NGML_SDI_Document::parse_element_start_hypernode(NTXH_Graph& g, hypernode_t
    qDebug() << "Using special skip: " << bb;
    QStringList qsl = bb.split(';');
    QString b = qsl.takeFirst();
-   if(b.endsWith("pt"))
-     b.chop(2);
+   r8 bls = ptstring_to_r8(b, global_base_line_skip_);
    if(qsl.isEmpty())
-     start_y += half_base_line_stretch(b.toUInt());
-   else if(qsl.first().isEmpty())
-    start_y += half_base_line_stretch(b.toUInt(), 1.);
+     start_y += half_base_line_stretch(bls);
    else
-     start_y += half_base_line_stretch(b.toUInt(), qsl.first().toDouble());
+     start_y += half_base_line_stretch(bls, ptstring_to_r8(qsl.first(), 1.));
   }    
 
   nsel->set_start_x(start_x);
@@ -317,15 +327,13 @@ void generic_start(NGML_SDI_Document& nsd, T& obj,
   QString bb = prs[5].first;
   qDebug() << "Using special skip: " << bb;
   QStringList qsl = bb.split(';');
+
   QString b = qsl.takeFirst();
-  if(b.endsWith("pt"))
-    b.chop(2);
+  r8 bls = nsd.ptstring_to_r8(b, nsd.global_base_line_skip());
   if(qsl.isEmpty())
-    start_y += nsd.half_base_line_stretch(b.toUInt());
-  else if(qsl.first().isEmpty())
-   start_y += nsd.half_base_line_stretch(b.toUInt(), 1.);
+    start_y += nsd.half_base_line_stretch(bls);
   else
-    start_y += nsd.half_base_line_stretch(b.toUInt(), qsl.first().toDouble());
+    start_y += nsd.half_base_line_stretch(bls, nsd.ptstring_to_r8(qsl.first(), 1.));
  }    
 
  obj.set_start_x(start_x);
@@ -686,6 +694,13 @@ void NGML_SDI_Document::parse_paragraph_end_hypernode(NTXH_Graph& g, hypernode_t
 void NGML_SDI_Document::parse_info_hypernode(NTXH_Graph& g, hypernode_type* hn)
 {
  qDebug() << "parse_info_hypernode()";
+ g.get_sfs(hn, {2,3}, [this](QVector<QPair<QString, void*>>& prs)
+ {
+  r8 bls = ptstring_to_r8(prs[0].first, global_base_line_skip_);
+  global_base_line_skip_ = bls;
+  r8 blt = ptstring_to_r8(prs[1].first, global_base_line_stretch_);
+  global_base_line_stretch_ = blt;
+ });
 }
 
 

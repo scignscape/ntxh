@@ -38,7 +38,7 @@ class NGML_SDI_Document
 {
  QString path_;
  QString folder_;
- n8 global_base_line_skip_;// = 12
+ r8 global_base_line_skip_;// = 12
  r8 global_base_line_stretch_;
 
  QVector<NGML_SDI_Page*> pages_;
@@ -78,6 +78,7 @@ class NGML_SDI_Document
 
  QMap<DGH_SDI_Paragraph*, QVector<DGH_SDI_Sentence*>> sentences_;
 
+
 public:
  
  NGML_SDI_Document(QString path, QString folder);
@@ -90,10 +91,12 @@ public:
  u4 half_base_line_stretch();
  u4 half_base_line_stretch(n8 bls);
  static u4 half_base_line_stretch(n8 bls, r8 blt);
+ static r8 ptstring_to_r8(QString str, r8 default_value = 1.);
+
 
  QMap<QChar, QVector<u4>>& review() { return prelatex_; }
 
- ACCESSORS(n8 ,global_base_line_skip)
+ ACCESSORS(r8 ,global_base_line_skip)
  ACCESSORS(r8 ,global_base_line_stretch)
 
  void load_prelatex_file(QString path);
