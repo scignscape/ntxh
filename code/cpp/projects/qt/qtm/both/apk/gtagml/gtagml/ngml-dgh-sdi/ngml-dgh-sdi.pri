@@ -44,10 +44,14 @@ DEFINES += USE_KANS
 
 HEADERS += \
   $$SRC_DIR/nds-project.h \
+  $$SRC_DIR/nds-paragraph.h \
+  $$SRC_DIR/nds-sentence.h \
 
 
 SOURCES += \
   $$SRC_DIR/nds-project.cpp \
+  $$SRC_DIR/nds-paragraph.cpp \
+  $$SRC_DIR/nds-sentence.cpp \
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

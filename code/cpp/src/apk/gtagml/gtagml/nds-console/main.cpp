@@ -31,7 +31,30 @@ USING_KANS(Util)
 
 int main(int argc, char* argv[])
 {
- NDS_Project nsp;
+ QString paper_short_name; //= "ctg";
+// QString paper_short_name = "icg";
+// QString paper_short_name = "itm";
+
+ if(argc >= 3)
+ {
+  paper_short_name = QString::fromLatin1(argv[2]);
+ }
+ else
+ {
+  paper_short_name = "ctg";
+  // paper_short_name = "icg";
+  // paper_short_name = "itm";
+ }
+
+ QString project_folder = QString(DEFAULT_SDI_FOLDER "/%1").arg(paper_short_name);
+ QString setup_folder = QString("%1/src/setup").arg(project_folder);
+
+
+ NDS_Project nsp(paper_short_name, project_folder, setup_folder);
+
+ nsp.locate_files();
+ nsp.init_ngml_document();
+
 
  return 0;
 }
