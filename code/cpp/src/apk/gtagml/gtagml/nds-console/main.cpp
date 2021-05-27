@@ -54,6 +54,7 @@ int main(int argc, char* argv[])
 
  nsp.locate_files();
  nsp.init_ngml_document();
+ nsp.init_dgh_document();
 
 
  return 0;

@@ -53,7 +53,8 @@ SOURCES += \
   $$SRC_DIR/main.cpp \
 
 
-LIBS += -L$$TARGETSDIR -lngml-dgh-sdi
+LIBS += -L$$TARGETSDIR -lngml-dgh-sdi -lngml-sdi \
+   -lquazip  -lntxh-parser -lntxh  -ldgh-sdi
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

@@ -50,9 +50,9 @@ SOURCES += \
 LIBS += -L$$TARGETSDIR -lngml-sdi -lntxh-parser -lntxh  \
   -ldgh-sdi  -lquazip
 
-
-QUA_ZIP_LIB_DIR = $$TARGETSDIR
-defined(QUA_ZIP_LIB_DIR, var) { LIBS += -L$$QUA_ZIP_LIB_DIR  -lquazip }
+# no longer applicable?
+#QUA_ZIP_LIB_DIR = $$TARGETSDIR
+#defined(QUA_ZIP_LIB_DIR, var) { LIBS += -L$$QUA_ZIP_LIB_DIR  -lquazip }
 
 
 

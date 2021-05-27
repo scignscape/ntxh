@@ -47,7 +47,9 @@ class NDS_Project
  NGML_SDI_Document* ngml_;
  DGH_SDI_Document* dgh_;
 
- QString paper_sdi_file_;
+ QString paper_sdi_file_; // /%1/sdi-merge.ntxh
+ QString sdi_merge_file_;
+
 
 public:
 
@@ -66,6 +68,7 @@ public:
  NDS_Sentence get_sentence_by_project_id(u4 id);
 
  void init_ngml_document();
+ void init_dgh_document();
 
 
 };

@@ -12,6 +12,8 @@
 
 #include "ngml-sdi/ngml-sdi-document.h"
 
+#include "dgh-sdi/dgh-sdi-document.h"
+
 
 USING_KANS(NGML)
 
@@ -41,12 +43,22 @@ void NDS_Project::init_ngml_document()
  ngml_->merge_dgh();
 }
 
+void NDS_Project::init_dgh_document()
+{
+ dgh_ = new DGH_SDI_Document;
+ dgh_->load_from_ntxh(sdi_merge_file_);
+}
 
 QMap<QString, u2> NDS_Project::locate_files()
 {
- QFileInfo qfi(QString("%1/%2.sdi.ntxh").arg(paper_short_name_).arg(paper_root_folder_));
+ QFileInfo qfi(QString("%1/out/%2.sdi.ntxh").arg(paper_root_folder_).arg(paper_short_name_));
  if(qfi.exists())
    paper_sdi_file_ = qfi.absoluteFilePath();
+
+ QFileInfo qfi1(QString("%1/sdi-merge.ntxh").arg(paper_root_folder_));
+ if(qfi1.exists())
+   sdi_merge_file_ = qfi1.absoluteFilePath();
+
 
  QDir qd(paper_setup_folder_);
  if(!qd.cd("sdi"))
