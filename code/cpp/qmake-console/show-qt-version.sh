@@ -6,6 +6,6 @@ fi
 
 # if $@ empty ...?
 
-qm=${qm/\~/$HOME/}
+qm=${qm/\~\//$HOME/}
 `cat $ar/../preferred/preferred-qmake` $@
 

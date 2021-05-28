@@ -4,7 +4,7 @@ else
   ar=../../../../../..
 fi
 preferred_qmake=`cat $ar/../preferred/preferred-qmake`
-preferred_qmake=${preferred_qmake/\~/$HOME/}
+preferred_qmake=${preferred_qmake/\~\//$HOME/}
 echo $preferred_qmake
 $preferred_qmake  "QMAKE_CONSOLE_TARGET_DIR=@/code/cpp/qmake-console/targets" $ar/code/cpp/projects/qt/qtm/isobuild/apk/hgdm/ntxh/ntxh-builder/ntxh-builder.pro
 

@@ -51,7 +51,7 @@ struct PHR_Graph_Dominion
  template<typename T>
  Type_Codes get_type_code()
  {
-  return 0;
+  return Type_Codes::N_A;
  }
 
 };

@@ -379,7 +379,9 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
 
  full_sentence_splitter_ = new QSplitter(this);
  full_sentence_pre_label_ = new QLabel("pre", this);
+ full_sentence_pre_label_->setAlignment(Qt::AlignCenter);
  full_sentence_post_label_ = new QLabel("post", this);
+ full_sentence_post_label_->setAlignment(Qt::AlignCenter);
  full_sentence_plain_text_edit_ = new QPlainTextEdit("main", this);
  full_sentence_splitter_->addWidget(full_sentence_pre_label_);
  full_sentence_splitter_->addWidget(full_sentence_plain_text_edit_);
@@ -465,9 +467,9 @@ ScignStage_Ling_Dialog::ScignStage_Ling_Dialog(XPDF_Bridge* xpdf_bridge,
  main_tree_widget_->setHeaderLabels(headers);
 
  main_tree_widget_->setColumnWidth(0, 400);
- main_tree_widget_->setColumnWidth(1, 45);
- main_tree_widget_->setColumnWidth(2, 20);
- main_tree_widget_->setColumnWidth(3, 45);
+ main_tree_widget_->setColumnWidth(1, 60);
+ main_tree_widget_->setColumnWidth(2, 50);
+ main_tree_widget_->setColumnWidth(3, 55);
  main_tree_widget_->setColumnWidth(4, 35);
  main_tree_widget_->setColumnWidth(5, 50);
 

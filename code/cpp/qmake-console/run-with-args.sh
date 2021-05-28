@@ -4,7 +4,7 @@ else
   ar=../../..
 fi
 qm=`cat $ar/../preferred/preferred-qmake`
-qm=${qm/\~/$HOME/}
+qm=${qm/\~\//$HOME/}
 qtv=`$qm -query QT_VERSION`
 qtv=${qtv/./-}
 qtv=${qtv/./-}
