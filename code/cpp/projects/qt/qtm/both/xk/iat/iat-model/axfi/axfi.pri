@@ -7,8 +7,6 @@
 
 include(../build-group.pri)
 
-TEMPLATE = app
-
 QT += widgets
 
 INCLUDEPATH += $$SRC_DIR
@@ -17,38 +15,17 @@ INCLUDEPATH += $$SRC_DIR
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
 
-INCLUDEPATH += $$SRC_PROSET_DIR
-
-
-
-
-FORMS  += \
-  $$SRC_DIR/mainwindow.ui\
-  $$SRC_DIR/options.ui\
-  $$SRC_DIR/listtool.ui
-
 
 HEADERS += \
-  $$SRC_DIR/mainwindow.h\
-  $$SRC_DIR/displayimage.h\
-  $$SRC_DIR/projectwizard.h\
-  $$SRC_DIR/options.h\
-  $$SRC_DIR/listtool.h \
-  $$SRC_DIR/shape-select-frame.h \
+  $$SRC_DIR/axfi-annotation.h  \
+  $$SRC_DIR/axfi-location-2d.h  \
+  $$SRC_DIR/axfi-annotation-group.h  \
 
 
 SOURCES += \
-  $$SRC_DIR/main.cpp\
-  $$SRC_DIR/mainwindow.cpp\
-  $$SRC_DIR/displayimage.cpp\
-  $$SRC_DIR/projectwizard.cpp\
-  $$SRC_DIR/options.cpp\
-  $$SRC_DIR/listtool.cpp \
-  $$SRC_DIR/shape-select-frame.cpp \
-
-
-LIBS += -L$$TARGETSDIR -laxfi
-
+  $$SRC_DIR/axfi-annotation.cpp  \
+  $$SRC_DIR/axfi-location-2d.cpp  \
+  $$SRC_DIR/axfi-annotation-group.cpp  \
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

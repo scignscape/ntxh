@@ -13,6 +13,15 @@
 #define version 1.7
 
 
+// // instead of \t ...
+
+#define TAB_DIVIDER '|'
+#define TAB_DIVIDER_STR "|"
+
+
+#include "iat-model/axfi/axfi-annotation.h"
+
+
 class Special_Input_Dialog : public QInputDialog
 {
  int* autogen_index_;
@@ -82,11 +91,21 @@ Special_Input_Dialog::Special_Input_Dialog(int* autogen_index, QWidget* parent)
 
 using namespace std;
 
+#include "iat-model/axfi/axfi-annotation-group.h"
+
+void MainWindow::check_init_axfi_annotation_group()
+{
+ if(!axfi_annotation_group_)
+   axfi_annotation_group_ = new AXFI_Annotation_Group();
+}
+
+
 //costruttore
 MainWindow::MainWindow(QWidget *parent) :
    QMainWindow(parent), ui(new Ui::MainWindow)
 {
  autogen_index_ = 0;
+ axfi_annotation_group_ = nullptr;
 
  ui->setupUi(this);
 
@@ -255,16 +274,21 @@ void MainWindow::on_actionAnnotate_Single_Image_triggered()
    {
     load_image(); //viene invocato load_image che passer�  a processare l-immagine scelta
     //viene chiesto se si vuole caricare una nuova lista in caso affermativo viene invocasto load_List
-    QMessageBox::StandardButton reply = QMessageBox::Yes;
-    if(!list_filename_path_.isEmpty())
-      reply=QMessageBox::question(this,"Question!","Do you want to load a new list?",QMessageBox::Yes|QMessageBox::No);
-    if(reply==QMessageBox::Yes)
-    {
-     QFileDialog qdialog;
-     // //                    list_filename_path=qdialog.getOpenFileName(this,"Open List",qApp->applicationDirPath(),"*.lst");
-     list_filename_path_ = qdialog.getOpenFileName(this,
-       "Open List", ROOT_FOLDER "..", "*.lst");
-    }
+
+//    QMessageBox::StandardButton reply = QMessageBox::Yes;
+//    if(!list_filename_path_.isEmpty())
+//      reply=QMessageBox::question(this,"Question!","Do you want to load a new list?",QMessageBox::Yes|QMessageBox::No);
+
+//    if(reply==QMessageBox::Yes)
+//    {
+//     QFileDialog qdialog;
+//     // //                    list_filename_path=qdialog.getOpenFileName(this,"Open List",qApp->applicationDirPath(),"*.lst");
+//     list_filename_path_ = qdialog.getOpenFileName(this,
+//       "Open List", ROOT_FOLDER "..", "*.lst");
+//    }
+
+    list_filename_path_ = ROOT_FOLDER "../default.lst";
+
     if(!list_filename_path_.isEmpty())
     {
      load_list();
@@ -454,8 +478,10 @@ bool MainWindow::load_annotation()
  //questo è il "magic number" per scongiurare il fatto che l-utente carichi un file non coerente con il contesto
 
  line=file.readLine();
+
  if(project_filename_path_.isEmpty())
- { //modifica di comportamento
+ {
+  //modifica di comportamento
   if(line.at(1) == ':')
     image_filename_path_ = line;
   else
@@ -483,23 +509,30 @@ bool MainWindow::load_annotation()
   //fino a qui vengono lette object ed instance
   line = file.readLine();
 
-  // // split the line on tabs ...
-  QStringList parts = line.split('\t');
+  AXFI_Annotation* axa = new AXFI_Annotation;
+  axa->from_compact_string(line);
 
-  int sz = parts.size();
+
+  // // split the line on tabs ...
+//?  QStringList parts = line.split(TAB_DIVIDER_STR);
+
+
+
+//?  int sz = parts.size();
 
   //?line.toStdString();
 
-  int i;
+//?  int i;
   DisplayImage::shape another;
 
   QString object;
 //?
 //  for(i=0; line[i] != '\t'; ++i)
 //    object.append(line[i]);
-  object = parts.value(0);
+//  object = axa->scoped_identifiers().value(0);
+//?  object = parts.value(0);
 
-  i = line.indexOf('\t', i) + 1;
+//?  i = line.indexOf('\t', i) + 1;
 
   QString instance;
 //?
@@ -507,7 +540,12 @@ bool MainWindow::load_annotation()
 //      && line[i] != '\n'
 //      && i < line.size(); ++i)
 //    instance.append(line[i]);
-  instance = parts.value(1);
+//  instance = axa->scoped_identifiers().value(1);
+//?  instance = parts.value(1);
+
+  object = axa->scoped_identifiers().value(0);
+  instance = axa->scoped_identifiers().value(1);
+
 
   bool findObject=false;
 
@@ -526,10 +564,11 @@ bool MainWindow::load_annotation()
   }
 
   //se la linea non è finita
-  i = line.indexOf('\t', i) + 1;
+//  i = line.indexOf('\t', i) + 1;
 
 //?  if( ( i + 1 ) >= line.size() )
-  if(sz == 2)
+  int sz = axa->scoped_identifiers().size();
+  if(sz <= 2)
   {
    //+1 per sicurezza
    //viene letto il nome della shape
@@ -548,7 +587,9 @@ bool MainWindow::load_annotation()
   {
    QString number;
 
-   number = parts.value(2);
+//?   number = parts.value(2);
+
+   number = axa->scoped_identifiers().value(2);
 
 //?
 //   for( i = i + 1; line[i] != '\t'; ++i)
@@ -576,37 +617,45 @@ bool MainWindow::load_annotation()
 //?
 //   for(i=i+1; line[i]!=':'; ++i)
 //     type.append(line[i]);
-   type = parts.value(3);
-   type.chop(1); // remove trailing colon ...
+   //type = parts.value(3);
+   type = axa->shape_designation();
 
-   if(type=="Square")
+   //type.chop(1); // remove trailing colon ...
+
+   if(type=="Rectangle")
      another.form=square;
    if(type=="Ellipse")
      another.form=ellipse;
    if(type=="Polygon")
      another.form=polygon;
 
-   QString sh = parts.value(4);
+
+//   QString sh = parts.value(4);
    int s = 0;
 
 //   i += 2; //salta : e \t
 //   while(i<line.size())
 
-   while(s < sh.size())
-   {
-    QString x;
-    QString y;
-    for(s = s; sh[s] != ','; ++s)
-      x.append(sh[s]);
-    int rx=x.toInt();
+//   while(s < sh.size())
+//   {
+//    QString x;
+//    QString y;
+//    for(s = s; sh[s] != ','; ++s)
+//      x.append(sh[s]);
+//    int rx=x.toInt();
 
-    for(s = s+1; sh[s] != ':' && s < sh.size(); ++s)
-      y.append(sh[s]);
+//    for(s = s+1; sh[s] != ':' && s < sh.size(); ++s)
+//      y.append(sh[s]);
 
-    int ry = y.toInt();
-    ++s;
-    another.shapePoints << QPoint(rx, ry);
-   }
+//    int ry = y.toInt();
+//    ++s;
+//    another.shapePoints << QPoint(rx, ry);
+//   }
+
+   QVector<QPoint> points;
+   axa->locations_to_qpoints(points);
+   another.shapePoints = points.toList();
+
    outEdits << another;
    scaledEdits_ << another; //qui viene caricata la shape ottenuta
 
@@ -632,7 +681,9 @@ bool MainWindow::load_annotation()
   if(!resizeMethod(default_resize))
     return false;
  }
- if(!outEdits.isEmpty()){
+
+ if(!outEdits.isEmpty())
+ {
   display_.setEdits(outEdits);
   display_.resizeEdits(default_resize);
 
@@ -679,7 +730,8 @@ void MainWindow::doBackUp()
 }
 
 //metodo che resetta il programma preparandolo ad un nuovo processo
-void MainWindow::cleanWindow(){
+void MainWindow::cleanWindow()
+{
  ui->ObjectListView->clear();
  ui->InstanceListView->clear();
  ui->NumberListView->clear();
@@ -708,7 +760,8 @@ void MainWindow::defaultView()
 }
 
 //metodo legato allo slider che gestisce lo zoom
-void MainWindow::on_ResizeSlider_sliderMoved(int position){
+void MainWindow::on_ResizeSlider_sliderMoved(int position)
+{
  if(!scaledEdits_.isEmpty())
  {
   display_.setEdits(scaledEdits_);
@@ -726,6 +779,7 @@ bool MainWindow::resizeMethod(int value)
  //lo zoom attuale si ottiene quindi facendo 190 meno 18 moltiplicato per il valore dello slider, resize, che gestisce lo zoom nell'interfaccia
  //lo slider varia tra 0 e quindi 190% di zoom fino a 10, ovvero il 10% di zoom
  //trovato il valore si fa una proprozione per trovare il nuovo valore
+
  if(background_.load(image_filename_path_))
  {
   resize_factor_ = value;
@@ -932,14 +986,29 @@ void MainWindow::setup_highlight(bool checked)
 }
 
 //metodo attivato dal signal onLineDraw presente in DisplayImage
-void MainWindow::onDrawLine(QList<DisplayImage::shape> edits){
+void MainWindow::onDrawLine(QList<DisplayImage::shape> edits)
+{
  //questo metodo viene invocato per nature diverse
  //ma riesce a capire se si st�  aggiunggendo una shape o se ne sta modificando/spostando una gi�  presente
- for(int i=0; i<edits.size(); ++i)
+
+ for(int i=0; i < edits.size(); ++i)
  {
+  AXFI_Annotation* axa = new AXFI_Annotation;
+
+  DisplayImage::shape e = edits.at(i);
+
   DisplayImage::shape another;
+
+  if(e.form == DisplayImage::square)
+    axa->set_shape_designation("Rectangle");
+  else if(e.form == DisplayImage::ellipse)
+    axa->set_shape_designation("Ellipse");
+  else if(e.form == DisplayImage::polygon)
+    axa->set_shape_designation("Polygon");
+
   if(edits.at(i).id.isEmpty())
-  { //se è vero allora è stata aggiunta una nuova shape
+  {
+   //se è vero allora è stata aggiunta una nuova shape
 
    QString object;
    {
@@ -949,6 +1018,7 @@ void MainWindow::onDrawLine(QList<DisplayImage::shape> edits){
     else
       object = "<?>";
    }
+   axa->add_scoped_identifier(object);
 
    QString instance;
    {
@@ -958,47 +1028,70 @@ void MainWindow::onDrawLine(QList<DisplayImage::shape> edits){
     else
       instance = "<?>";
    }
-
+   axa->add_scoped_identifier(instance);
 
 
    QString number;
    bool ok;
-   do{
+   do
+   {
     number = Special_Input_Dialog::get_text(&autogen_index_, this, "Need a Shape Name",
-                                 "Text here the Shape Name", QLineEdit::Normal,QString(),&ok,0);
+      "Enter text here providing a Shape Name",
+      QLineEdit::Normal, QString(), &ok, 0);
+
     if(ok)
     {
      if(!number.isEmpty())
      {
-      QList<QString> numbers;
-      numbers << mapInstanceNumber_.values(object + ":" + instance);
-      for(int j=0;j<numbers.size();++j)
-        if(number==numbers.at(j))
-          ok=false;
+      QList<QString> numbers = mapInstanceNumber_.values(object + ":" + instance);
+
+      for(int j=0; j < numbers.size(); ++j)
+      {
+       if(number == numbers.at(j))
+       {
+        ok=false;
+        break;
+       }
+      }
      }
      else
-       ok=false;
+       ok = false;
     }
     else
-      ok=true;
+      ok = true;
    }
    while(!ok);
+
    if(!number.isEmpty())
    {
+    axa->add_scoped_identifier(number);
+
     another.id = object + ":" + instance + ":" + number;
-    another.form=edits.at(i).form;
-    for(int j=0; j<edits.at(i).shapePoints.size(); ++j){
-     QPoint scaled_point=coordinate_scaling(edits.at(i).shapePoints.at(j));
-     another.shapePoints<<scaled_point;
+    another.form = edits.at(i).form;
+    for(int j=0; j < edits.at(i).shapePoints.size(); ++j)
+    {
+     QPoint scaled_point = coordinate_scaling(edits.at(i).shapePoints.at(j));
+     another.shapePoints << scaled_point;
+
+     axa->absorb_shape_point(scaled_point);
+
     }
+
+    another.axfi_annotation = axa;
+
     scaledEdits_ << another;
-    mapInstanceNumber_.insert(object+":"+instance,number);
+
+    check_init_axfi_annotation_group();
+    axfi_annotation_group_->add_annotation(axa);
+
+    mapInstanceNumber_.insert(object + ":" + instance, number);
     on_InstanceListView_clicked();
     ui->NumberListView->setCurrentRow(ui->NumberListView->count() - 1);
     on_NumberListView_clicked();
     ui->Save->setDisabled(false);
    }
   }
+
   if(shapeID_ != "" && shapeID_ == edits.at(i).id)
   {
    //tramite l-id so quale shape è stata modificata e quindi sostituirla con quella nuova
@@ -1012,9 +1105,11 @@ void MainWindow::onDrawLine(QList<DisplayImage::shape> edits){
    scaledEdits_.replace(i, another);
    ui->Save->setDisabled(false);
   }
+
  }
  display_.setEdits(scaledEdits_);
  display_.resizeEdits(resize_factor_);
+
  if(scaledEdits_.size() > 1)
  {
   ui->_Shape_Select_Frame->set_clear_last_btn_enabled();
@@ -1023,6 +1118,7 @@ void MainWindow::onDrawLine(QList<DisplayImage::shape> edits){
 //  ui->ClearLast->setDisabled(false);
 //  ui->ClearAll->setDisabled(false);
  }
+
 }
 
 //metodo che calcola il resize dei punti apparteneti alle shape
@@ -1220,7 +1316,7 @@ void MainWindow::on_LoadNext_clicked()
    for(pos=imageName.size(); imageName[pos]!='/'; --pos);
    imageName.remove(0,pos+1);
    imageName.remove(imageName.size()-4,4);
-   imageName+=".txt";
+   imageName += ".txt";
    txt_filename_path_ = project_filename_path_ + "/" + pwizard_.projectName+"/"+imageName;
    load_annotation();
   }
@@ -1309,24 +1405,32 @@ void MainWindow::_handle_save()
  {
   for(int i = 0; i < scaledEdits_.size(); ++i)
   {
-   QString temp = scaledEdits_.at(i).id;
-   temp.toStdString();
-   for(int j = 0; j < temp.size(); ++j)
-     if(temp[j]==':')
-       temp[j]='\t';
-   temp[temp.size()]='\t';
-   ofs << temp;
-   if(scaledEdits_.at(i).form==square) ofs << "Square:\t";
-   if(scaledEdits_.at(i).form==ellipse) ofs << "Ellipse:\t";
-   if(scaledEdits_.at(i).form==polygon) ofs << "Polygon:\t";
+   AXFI_Annotation* axa = scaledEdits_.at(i).axfi_annotation;
+   QString cs = axa->to_compact_string();
 
-   for(int j = 0; j < scaledEdits_.at(i).shapePoints.size()-1; ++j)
-   {
-    QPoint point = scaledEdits_.at(i).shapePoints.at(j);
-    ofs<<point.rx()<<","<<point.ry()<<":";
-   }
-   QPoint point = scaledEdits_.at(i).shapePoints.at(scaledEdits_.at(i).shapePoints.size() - 1);
-   ofs<<point.rx()<<","<<point.ry()<<"\n";
+//   QString temp = scaledEdits_.at(i).id;
+//   temp.toStdString();
+//   for(int j = 0; j < temp.size(); ++j)
+//     if(temp[j] == ':')
+//       temp[j] = TAB_DIVIDER;
+//   temp[temp.size()] = TAB_DIVIDER;
+//   ofs << temp;
+//   if(scaledEdits_.at(i).form == square) ofs << "Square:" TAB_DIVIDER_STR;
+//   if(scaledEdits_.at(i).form == ellipse) ofs << "Ellipse:" TAB_DIVIDER_STR;
+//   if(scaledEdits_.at(i).form == polygon) ofs << "Polygon:" TAB_DIVIDER_STR;
+
+
+
+//   for(int j = 0; j < scaledEdits_.at(i).shapePoints.size()-1; ++j)
+//   {
+//    QPoint point = scaledEdits_.at(i).shapePoints.at(j);
+//    ofs<<point.rx() << "," << point.ry() << ":";
+//   }
+//   QPoint point = scaledEdits_.at(i).shapePoints.at(scaledEdits_.at(i).shapePoints.size() - 1);
+//   ofs<<point.rx()<<","<<point.ry()<<"\n";
+
+   ofs << cs << '\n';
+
   }
  }
  QList<QString> uniqueKeys = mapInstanceNumber_.uniqueKeys();
@@ -1340,7 +1444,7 @@ void MainWindow::_handle_save()
      if(ui->ObjectListView->item(i)->text() + ":" + correlatedItems.at(j) == uniqueKeys.at(k))
        find=true;
    if(!find)
-     ofs << ui->ObjectListView->item(i)->text() + "\t" + correlatedItems.at(j) + "\n";
+     ofs << ui->ObjectListView->item(i)->text() + TAB_DIVIDER_STR + correlatedItems.at(j) + "\n";
   }
  }
  file.close();
