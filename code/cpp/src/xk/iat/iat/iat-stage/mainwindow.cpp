@@ -21,6 +21,8 @@
 
 #include "iat-model/axfi/axfi-annotation.h"
 
+#include "zoom-and-navigate-frame.h"
+
 
 class Special_Input_Dialog : public QInputDialog
 {
@@ -74,7 +76,6 @@ Special_Input_Dialog::Special_Input_Dialog(int* autogen_index, QWidget* parent)
 
   QMenu* menu = new QMenu(this);//
 
-
   menu->addAction("Autogenerate", [this]
   {
    this->setTextValue(QString("auto_%1").arg(++*this->autogen_index_));
@@ -102,22 +103,85 @@ void MainWindow::check_init_axfi_annotation_group()
 
 //costruttore
 MainWindow::MainWindow(QWidget *parent) :
-   QMainWindow(parent), ui(new Ui::MainWindow)
+   QMainWindow(parent) //??, ui(new Ui::MainWindow)
 {
+   //?menuBar->setGeometry(QRect(0, 0, 739, 22));
+ file_menu_ = menuBar()->addMenu("File"); // new QMenu(menubar_);
+ help_menu_ = menuBar()->addMenu("Help"); // new QMenu(menubar_);
+ tools_menu_ = menuBar()->addMenu("Tools"); // new QMenu(menubar_);
+
+   //?menuFile->setObjectName(QString::fromUtf8("menuFile"));
+//? help_menu_ = new QMenu(menubar_);
+
+   //?menuHelp->setObjectName(QString::fromUtf8("menuHelp"));
+
+//? tools_menu_ = new QMenu(menubar_);
+  //? menuTools->setObjectName(QString::fromUtf8("menuTools"));
+
+ menuBar()->addAction(file_menu_->menuAction());
+ menuBar()->addAction(tools_menu_->menuAction());
+ menuBar()->addAction(help_menu_->menuAction());
+
+// menubar_->addMenu(file_menu_);
+// menubar_->addMenu(help_menu_);
+// menubar_->addMenu(tools_menu_);
+
+
+ actionAnnotate_Single_Image = new QAction("Load Image", this);
+ actionLoad_annotations = new QAction("Load Notes", this);
+ actionQuit = new QAction("Quit", this);
+ actionInstructions = new QAction("Instructions", this);
+ actionOptions = new QAction("Options", this);
+
+ file_menu_->addAction(actionAnnotate_Single_Image);
+//? file_menu_->addAction(actionAnnotate_Multiple_Image);
+ file_menu_->addSeparator();
+ file_menu_->addAction(actionLoad_annotations);
+ file_menu_->addSeparator();
+ file_menu_->addAction(actionQuit);
+ help_menu_->addAction(actionInstructions);
+ tools_menu_->addAction(actionOptions);
+//?? tools_menu_->addAction(actionCreate_List);
+
+ connect(actionAnnotate_Single_Image,SIGNAL(triggered()), this, SLOT(on_actionAnnotate_Single_Image_triggered()));
+ connect(actionOptions,SIGNAL(triggered()), this, SLOT(on_actionOptions_triggered()));
+ connect(actionQuit,SIGNAL(triggered()), this, SLOT(on_actionQuit_triggered()));
+
  autogen_index_ = 0;
  axfi_annotation_group_ = nullptr;
 
- ui->setupUi(this);
+ main_frame_ = new QFrame(this);
 
- set_initial_gui();
+ shape_select_frame_ = new Shape_Select_Frame(main_frame_);
+ zoom_frame_ = new Zoom_and_Navigate_Frame(main_frame_);
 
- connect(&display_,SIGNAL(onLineDraw(QList<DisplayImage::shape>)),this,SLOT(onDrawLine(QList<DisplayImage::shape>)));
- connect(&display_,SIGNAL(setTuple(QString)),this,SLOT(getTuple(QString)));
+ top_layout_ = new QHBoxLayout;
+
+ top_layout_->addWidget(shape_select_frame_);
+ top_layout_->addWidget(zoom_frame_);
+
+ main_layout_ = new QVBoxLayout;
+
+ main_layout_->addLayout(top_layout_);
+
+ display_ = new DisplayImage(main_frame_);
+
+ display_->setMinimumHeight(300);
+
+ main_layout_->addWidget(display_);
+
+ //?? ui->setupUi(this);
+
+
+ connect(display_,SIGNAL(onLineDraw(QList<DisplayImage::shape>)),this,SLOT(onDrawLine(QList<DisplayImage::shape>)));
+ connect(display_,SIGNAL(setTuple(QString)),this,SLOT(getTuple(QString)));
+
  connect(&optionsDialog_,SIGNAL(ColorsThickness(int,int,int,int,int,int,int,int,int,int,int)),
          this,SLOT(getColorsThickness(int,int,int,int,int,int,int,int,int,int,int)));
 
 
- connect(ui->_Shape_Select_Frame,
+// connect(ui->_Shape_Select_Frame,
+ connect(shape_select_frame_,
    &Shape_Select_Frame::shape_selection_changed, [this](QString sel)
  {
   if(sel == "Rectangle")
@@ -128,20 +192,31 @@ MainWindow::MainWindow(QWidget *parent) :
     setup_shape_ellipse();
  });
 
+
+ main_frame_->setLayout(main_layout_);
+
+ setCentralWidget(main_frame_);
+
+ set_initial_gui();
+
  // assume a rectangle to begin with ...
  setup_shape_rectangle();
+
+ show();
 }
 
 //distruttore
 MainWindow::~MainWindow()
 {
- delete ui; //distruge in particola modo l'interfaccia
+ //??  delete ui; //distruge in particola modo l'interfaccia
 }
 
 //metodo che setter�  l'interfaccia grafica all'avvio
-void MainWindow::set_initial_gui(){
+void MainWindow::set_initial_gui()
+{
  //qui viene disattivata tutta la gui e viene ben definita l-istanza display
- ui->actionCreate_List->setDisabled(true);
+
+ //?? ui->actionCreate_List->setDisabled(true);
 
 // ui->Square->setDisabled(true);
 // ui->Ellipse->setDisabled(true);
@@ -150,36 +225,42 @@ void MainWindow::set_initial_gui(){
 // ui->ClearSelected->setDisabled(true);
 // ui->ClearLast->setDisabled(true);
 // ui->ClearAll->setDisabled(true);
- ui->_Shape_Select_Frame->set_clear_selected_btn_disabled();
- ui->_Shape_Select_Frame->set_clear_last_btn_disabled();
- ui->_Shape_Select_Frame->set_clear_all_btn_disabled();
+// ui->_Shape_Select_Frame->set_clear_selected_btn_disabled();
+// ui->_Shape_Select_Frame->set_clear_last_btn_disabled();
+// ui->_Shape_Select_Frame->set_clear_all_btn_disabled();
+
+ shape_select_frame_->set_clear_selected_btn_disabled();
+ shape_select_frame_->set_clear_last_btn_disabled();
+ shape_select_frame_->set_clear_all_btn_disabled();
 
 
- ui->ObjectListView->setDisabled(true);
- ui->InstanceListView->setDisabled(true);
- ui->NumberListView->setDisabled(true);
- ui->EndProject->setDisabled(true);
- ui->LoadNext->setDisabled(true);
- ui->LoadPrevious->setDisabled(true);
- ui->Save->setDisabled(true);
+// ui->ObjectListView->setDisabled(true);
+// ui->InstanceListView->setDisabled(true);
+// ui->NumberListView->setDisabled(true);
+// ui->EndProject->setDisabled(true);
+// ui->LoadNext->setDisabled(true);
+// ui->LoadPrevious->setDisabled(true);
+// ui->Save->setDisabled(true);
 
- //ui->Highlight->setDisabled(true);
- ui->_Shape_Select_Frame->set_highlight_ckb_disabled();
+// //ui->Highlight->setDisabled(true);
+// ui->_Shape_Select_Frame->set_highlight_ckb_disabled();
 
 
- ui->ResizeSlider->setDisabled(true);
- ui->ResizeSlider->setMinimum(min_resize);
- ui->ResizeSlider->setMaximum(max_resize);
- ui->ResizeSlider->setValue(default_resize);
+// ui->ResizeSlider->setDisabled(true);
+// ui->ResizeSlider->setMinimum(min_resize);
+// ui->ResizeSlider->setMaximum(max_resize);
+// ui->ResizeSlider->setValue(default_resize);
  ctrlIsPressed_ = false;
  shiftIsPressed_ = false;
 
  sizew_ = window_size_x;
  sizeh_ = window_size_y;
- display_.setParent(ui->scrollContents);
- ui->scrollContents->resize(0,0);
- display_.setGeometry(0,0,0,0);
- display_.setObjectName(QString::fromUtf8("ImageDisplayWidget"));
+
+//? display_->setParent(ui->scrollContents);
+ //?ui->scrollContents->resize(0,0);
+
+ display_->setGeometry(0,0,0,0);
+ display_->setObjectName(QString::fromUtf8("ImageDisplayWidget"));
 
  QString title = "Image Annotation Tool (v." + QString::number(version) + ")";
  QMainWindow::setMinimumSize(sizew_, sizeh_);
@@ -218,7 +299,7 @@ void MainWindow::on_actionOptions_triggered()
 void MainWindow::getColorsThickness(int radius, int thickness, int myRed, int myGreen, int MyBlue, int sqRed, int sqGreen, int sqBlue, int shapeRed, int shapeGreen, int shapeBlue)
 {
  //quando viene attivato il compito di MainWindow e quello di fare da tramite e cambiare i colori in display con il metodo pubblico setClororThickness
- display_.setColorsThickness(radius, thickness, myRed, myGreen, MyBlue, sqRed, sqGreen, sqBlue, shapeRed, shapeGreen, shapeBlue);
+ display_->setColorsThickness(radius, thickness, myRed, myGreen, MyBlue, sqRed, sqGreen, sqBlue, shapeRed, shapeGreen, shapeBlue);
 }
 
 //metodo legato al comando Create List (WIP)
@@ -232,7 +313,8 @@ void MainWindow::on_actionAnnotate_Single_Image_triggered()
 {
  //all-inizio viene chiesto all-untente se vuole salvare il lavoro svolto fino al quel momento (se necessario)
  QMessageBox::StandardButton reply = QMessageBox::No;
- if(ui->Save->isEnabled())
+
+ if(true) //?  ui->Save->isEnabled())
  { //il tasto save è il più adatto falg di controllo
   reply = QMessageBox::question(this,"Question","Do you want to save before annotate a new image?",QMessageBox::Cancel|QMessageBox::Yes|QMessageBox::No);
  }
@@ -250,7 +332,7 @@ void MainWindow::on_actionAnnotate_Single_Image_triggered()
 
   image_filename_path_ = qdialog.getOpenFileName(this, "Open Image", ws, filters);
 
-  display_.setNameSelected(true);
+  display_->setNameSelected(true);
 
   if(!image_filename_path_.isNull())
   { //se è stata scelta l-immagine
@@ -306,7 +388,8 @@ void MainWindow::on_actionAnnotate_Multiple_Image_triggered()
 {
  //viene chiesto se si vuole salvare
  QMessageBox::StandardButton reply = QMessageBox::No;
- if(ui->Save->isEnabled()){
+ if(true) //?  (ui->Save->isEnabled())
+ {
   reply = QMessageBox::question(this,"Question","Do you want to save before load an annotation file?",QMessageBox::Cancel|QMessageBox::Yes|QMessageBox::No);
  }
  if(reply!=QMessageBox::Cancel)
@@ -321,21 +404,25 @@ void MainWindow::on_actionAnnotate_Multiple_Image_triggered()
    dir.mkdir(pwizard_.projectName);
    project_filename_path_ = pwizard_.projectpath; //attiviamo il flag
    on_actionAnnotate_Single_Image_triggered();
-   ui->LoadNext->setDisabled(false);
-   ui->EndProject->setDisabled(false);
-   ui->actionAnnotate_Single_Image->setDisabled(true);
-   ui->actionAnnotate_Multiple_Image->setDisabled(true);
-   ui->actionLoad_annotations->setDisabled(true);
+
+//?
+//   ui->LoadNext->setDisabled(false);
+//   ui->EndProject->setDisabled(false);
+//   ui->actionAnnotate_Single_Image->setDisabled(true);
+//   ui->actionAnnotate_Multiple_Image->setDisabled(true);
+//   ui->actionLoad_annotations->setDisabled(true);
   }
   else doBackUp(); //in caso di interruzioni
  }
 }
 
 //metodo legato al comando Load Annotation
-void MainWindow::on_actionLoad_annotations_triggered(){
+void MainWindow::on_actionLoad_annotations_triggered()
+{
  //viene chiesto se si vuole salvare
  QMessageBox::StandardButton reply = QMessageBox::No;
- if(ui->Save->isEnabled()){
+ if(true) //? (ui->Save->isEnabled())
+ {
   reply = QMessageBox::question(this,"Question","Do you want to save before load an annotation file?",QMessageBox::Cancel|QMessageBox::Yes|QMessageBox::No);
  }
  if(reply!=QMessageBox::Cancel){
@@ -385,8 +472,8 @@ void MainWindow::load_image()
  else title+=pwizard_.projectpath + "/" + pwizard_.projectName;
  QMainWindow::setWindowTitle(title);
 
- display_.clear_image(); //si pulisce anche display
- ui->ResizeSlider->setValue(default_resize);
+ display_->clear_image(); //si pulisce anche display
+ //?? ui->ResizeSlider->setValue(default_resize);
  resizeMethod(default_resize); //questo è il metodo che processa l-immagne
 }
 
@@ -440,9 +527,9 @@ void MainWindow::load_list()
   if(findObject && !findInstance)
     mapObjectInstance_.insert(object,instance);
  }
- ui->ObjectListView->addItems(objectList); //dalla lettura si prendono i valori da caricare nella prima colonna
+ //?? ui->ObjectListView->addItems(objectList); //dalla lettura si prendono i valori da caricare nella prima colonna
  file.close();
- ui->Save->setDisabled(false); //il save viene abilitato
+ //?? ui->Save->setDisabled(false); //il save viene abilitato
 }
 
 //metodo che processa il file di annotazione scelto dall'utente
@@ -663,10 +750,10 @@ bool MainWindow::load_annotation()
 
  }
  //viene popolata la prima colonna della gui
- ui->ObjectListView->addItems(objectList);
+ //?? ui->ObjectListView->addItems(objectList);
  file.close();
 
- ui->ResizeSlider->setValue(default_resize);
+ //?? ui->ResizeSlider->setValue(default_resize);
 
  //se l-immagine non viene trovata
  if(!resizeMethod(default_resize))
@@ -684,11 +771,14 @@ bool MainWindow::load_annotation()
 
  if(!outEdits.isEmpty())
  {
-  display_.setEdits(outEdits);
-  display_.resizeEdits(default_resize);
+  display_->setEdits(outEdits);
+  display_->resizeEdits(default_resize);
 
-  ui->_Shape_Select_Frame->set_clear_all_btn_enabled();
-  ui->_Shape_Select_Frame->set_clear_last_btn_enabled();
+  shape_select_frame_->set_clear_all_btn_enabled();
+  shape_select_frame_->set_clear_last_btn_enabled();
+
+  //?? ui->_Shape_Select_Frame->set_clear_all_btn_enabled();
+  //?? ui->_Shape_Select_Frame->set_clear_last_btn_enabled();
 
 //  ui->ClearAll->setDisabled(false);
 //  ui->ClearLast->setDisabled(false);
@@ -700,9 +790,9 @@ bool MainWindow::load_annotation()
 //metodo che esegue il ripristino dei dati
 void MainWindow::doBackUp()
 {
- ui->ObjectListView->clear();
- ui->InstanceListView->clear();
- ui->NumberListView->clear();
+ //?? ui->ObjectListView->clear();
+ //?? ui->InstanceListView->clear();
+ //?? ui->NumberListView->clear();
  workspace_ = backUpHere_.workspace;
  image_filename_path_ = backUpHere_.image_filename_path;
  list_filename_path_ = backUpHere_.list_filename_path;
@@ -720,27 +810,27 @@ void MainWindow::doBackUp()
  for(int i=0; i<uniqueKeys.size(); ++i){
   objects<<uniqueKeys.at(i);
  }
- ui->ObjectListView->addItems(objects);
- ui->ResizeSlider->setValue(resize_factor_);
+ //?? ui->ObjectListView->addItems(objects);
+ //?? ui->ResizeSlider->setValue(resize_factor_);
  resizeMethod(resize_factor_);
- display_.setEdits(scaledEdits_);
+ display_->setEdits(scaledEdits_);
  if(!scaledEdits_.isEmpty())
-   display_.resizeEdits(resize_factor_);
+   display_->resizeEdits(resize_factor_);
  QMainWindow::setWindowTitle(backUpHere_.title);
 }
 
 //metodo che resetta il programma preparandolo ad un nuovo processo
 void MainWindow::cleanWindow()
 {
- ui->ObjectListView->clear();
- ui->InstanceListView->clear();
- ui->NumberListView->clear();
+ //?? ui->ObjectListView->clear();
+ //?? ui->InstanceListView->clear();
+ //?? ui->NumberListView->clear();
  scaledEdits_.clear();
  mapObjectInstance_.clear();
  mapInstanceNumber_.clear();
- display_.setNameSelected(false);
- display_.setShapeSelected("");
- display_.clear_image();
+ display_->setNameSelected(false);
+ display_->setShapeSelected("");
+ display_->clear_image();
 }
 
 //metodo che porta il programma ad una situazione standard
@@ -749,14 +839,15 @@ void MainWindow::defaultView()
 // ui->Square->setDisabled(false);
 // ui->Ellipse->setDisabled(false);
 // ui->Polygon->setDisabled(false);
- ui->ResizeSlider->setDisabled(false);
+ //?? ui->ResizeSlider->setDisabled(false);
  //ui->Highlight->setDisabled(false);
 
- ui->_Shape_Select_Frame->set_highlight_ckb_enabled();
+ //?? ui->_Shape_Select_Frame->set_highlight_ckb_enabled();
+ shape_select_frame_->set_highlight_ckb_enabled();
 
- ui->ObjectListView->setDisabled(false);
- ui->InstanceListView->setDisabled(false);
- ui->NumberListView->setDisabled(false);
+ //?? ui->ObjectListView->setDisabled(false);
+ //?? ui->InstanceListView->setDisabled(false);
+ //?? ui->NumberListView->setDisabled(false);
 }
 
 //metodo legato allo slider che gestisce lo zoom
@@ -764,8 +855,8 @@ void MainWindow::on_ResizeSlider_sliderMoved(int position)
 {
  if(!scaledEdits_.isEmpty())
  {
-  display_.setEdits(scaledEdits_);
-  display_.resizeEdits(position);
+  display_->setEdits(scaledEdits_);
+  display_->resizeEdits(position);
  }
  resizeMethod(position);
 }
@@ -786,9 +877,9 @@ bool MainWindow::resizeMethod(int value)
   sizew_ = background_.size().width()/(100.0/(190-resize_factor_*18));
   sizeh_ = background_.size().height()/(100.0/(190-resize_factor_*18));
   QImage scaled=background_.scaled(sizew_,sizeh_,Qt::KeepAspectRatio, Qt::FastTransformation);
-  display_.resize(sizew_, sizeh_);
-  display_.setView(scaled);
-  ui->scrollContents->resize(sizew_, sizeh_);
+  display_->resize(sizew_, sizeh_);
+  display_->setView(scaled);
+  //?? ui->scrollContents->resize(sizew_, sizeh_);
   return true;
  }
  return false;
@@ -815,26 +906,27 @@ void MainWindow::getTuple(QString shapeID)
  int j=0;
  do
  {
-  ui->ObjectListView->setCurrentRow(j);
+  //?? ui->ObjectListView->setCurrentRow(j);
   j++;
- } while(ui->ObjectListView->currentItem()->text()!=object);
+ } while(false); //?? ui->ObjectListView->currentItem()->text()!=object);
  on_ObjectListView_clicked();
  j=0;
  do
  {
-  ui->InstanceListView->setCurrentRow(j);
+  //? ui->InstanceListView->setCurrentRow(j);
   j++;
- } while(ui->InstanceListView->currentItem()->text()!=instance);
+ } while(false); //?? ui->InstanceListView->currentItem()->text()!=instance);
  on_InstanceListView_clicked();
  j=0;
  do
  {
-  ui->NumberListView->setCurrentRow(j);
+  //?? ui->NumberListView->setCurrentRow(j);
   j++;
- } while(ui->NumberListView->currentItem()->text()!=number);
+ } while(false); //?ui->NumberListView->currentItem()->text()!=number);
  on_NumberListView_clicked();
 
- ui->_Shape_Select_Frame->set_clear_selected_btn_enabled();
+ shape_select_frame_->set_clear_selected_btn_enabled();
+ //? ui->_Shape_Select_Frame->set_clear_selected_btn_enabled();
  //ui->ClearSelected->setDisabled(false);
 }
 
@@ -842,58 +934,65 @@ void MainWindow::getTuple(QString shapeID)
 void MainWindow::on_ObjectListView_clicked()
 {
  //quando un valore viene selezionato il metodo provvede a far comparire nella seconda colonna i valori subordinati
- display_.setNameSelected(false);
- display_.setShapeSelected("");
+ display_->setNameSelected(false);
+ display_->setShapeSelected("");
 
- ui->_Shape_Select_Frame->set_clear_selected_btn_enabled();
+ //?? ui->_Shape_Select_Frame->set_clear_selected_btn_enabled();
+ shape_select_frame_->set_clear_selected_btn_enabled();
 
 // ui->ClearSelected->setDisabled(true);
- ui->InstanceListView->clear();
- ui->NumberListView->clear();
+ //?? ui->InstanceListView->clear();
+ //?? ui->NumberListView->clear();
  QList<QString> instances;
- QList<QString> correlatedInstance = mapObjectInstance_.values(ui->ObjectListView->currentItem()->text());
+//? QList<QString> correlatedInstance = mapObjectInstance_.values(ui->ObjectListView->currentItem()->text());
  //per evitare l-inversione della lista rispetto al file originale
- for(int i=correlatedInstance.size()-1;i>=0;--i) instances<<correlatedInstance.at(i);
- ui->InstanceListView->addItems(instances);
+
+//?
+// for(int i=correlatedInstance.size()-1;i>=0;--i) instances<<correlatedInstance.at(i);
+// ui->InstanceListView->addItems(instances);
 }
 
 //metodo legato alla seconda colonna
 void MainWindow::on_InstanceListView_clicked()
 {
  //quando un valore viene selezionato il metodo provvede a far comparire nella terza colonna i valori subordinati
- display_.setNameSelected(true);
- display_.setShapeSelected("");
+ display_->setNameSelected(true);
+ display_->setShapeSelected("");
 
- ui->_Shape_Select_Frame->set_clear_selected_btn_disabled();
+//?? ui->_Shape_Select_Frame->set_clear_selected_btn_disabled();
+ shape_select_frame_->set_clear_selected_btn_disabled();
 
 // ui->ClearSelected->setDisabled(true);
- ui->NumberListView->clear();
+//?? ui->NumberListView->clear();
  QList<QString> numbers;
 
  QString objectText;
- {
-  QListWidgetItem* qlwi = ui->ObjectListView->currentItem();
-  if(qlwi)
-    objectText = qlwi ->text();
-  else
+//? {
+//  QListWidgetItem* qlwi = ui->ObjectListView->currentItem();
+//  if(qlwi)
+//    objectText = qlwi ->text();
+//  else
     objectText = "<?>";
- }
+// }
  QString instanceText;
- {
-  QListWidgetItem* qlwi = ui->InstanceListView->currentItem();
-  if(qlwi)
-    objectText = qlwi ->text();
-  else
-    objectText = "<?>";
- }
+//?
+// {
+//  QListWidgetItem* qlwi = ui->InstanceListView->currentItem();
+//  if(qlwi)
+//    objectText = qlwi ->text();
+//  else
+//
+ objectText = "<?>";
+// }
 
 
  numbers << mapInstanceNumber_.values(objectText + ":" + instanceText);
  for(int i=0;i<numbers.size()/2;++i)
    numbers.swap(i,numbers.size()-(i+1));
 
- if(ui->NumberListView)
-   ui->NumberListView->addItems(numbers);
+//?
+// if(ui->NumberListView)
+//   ui->NumberListView->addItems(numbers);
 }
 
 //metodo legato alla terza colonnna
@@ -901,37 +1000,40 @@ void MainWindow::on_NumberListView_clicked()
 {
 
  QString object;
- {
-  QListWidgetItem* qlwi = ui->ObjectListView->currentItem();
-  if(qlwi)
-    object = qlwi->text();
-  else
-    object = "<?>";
- }
+//? {
+//  QListWidgetItem* qlwi = ui->ObjectListView->currentItem();
+//  if(qlwi)
+//    object = qlwi->text();
+//  else
+//    object = "<?>";
+// }
 
  QString instance;
- {
-  QListWidgetItem* qlwi =  ui->InstanceListView->currentItem();
-  if(qlwi)
-    object = qlwi->text();
-  else
-    object = "<?>";
- }
+//?
+// {
+//  QListWidgetItem* qlwi =  ui->InstanceListView->currentItem();
+//  if(qlwi)
+//    object = qlwi->text();
+//  else
+//    object = "<?>";
+// }
 
  QString number;
- {
-  QListWidgetItem* qlwi =  ui->NumberListView->currentItem();
-  if(qlwi)
-    object = qlwi->text();
-  else
-    object = "<?>";
- }
+//?
+// {
+//  QListWidgetItem* qlwi =  ui->NumberListView->currentItem();
+//  if(qlwi)
+//    object = qlwi->text();
+//  else
+//    object = "<?>";
+// }
 
  //quando un valore viene selezionato il metodo provvede a mandare un segnale a display colorando diversamente la relativa shape
- display_.setShapeSelected(object + ":" + instance + ":" + number);
+ display_->setShapeSelected(object + ":" + instance + ":" + number);
  shapeID_ = object + ":" + instance + ":" + number;
 
- ui->_Shape_Select_Frame->set_clear_selected_btn_enabled();
+//?? ui->_Shape_Select_Frame->set_clear_selected_btn_enabled();
+ shape_select_frame_->set_clear_selected_btn_enabled();
 
  //ui->ClearSelected->setDisabled(false);
 }
@@ -943,8 +1045,8 @@ void MainWindow::on_NumberListView_clicked()
 //}
 void MainWindow::setup_shape_rectangle()
 {
- display_.reset();
- display_.enableSquareDraw(); //informa display che deve mostrare shape di forma rettangolare
+ display_->reset();
+ display_->enableSquareDraw(); //informa display che deve mostrare shape di forma rettangolare
 }
 
 
@@ -955,8 +1057,8 @@ void MainWindow::setup_shape_rectangle()
 //}
 void MainWindow::setup_shape_ellipse()
 {
- display_.reset();
- display_.enableEllipseDraw(); //informa display che deve mostrare shape di forma circolare
+ display_->reset();
+ display_->enableEllipseDraw(); //informa display che deve mostrare shape di forma circolare
 }
 
 
@@ -970,8 +1072,8 @@ void MainWindow::setup_shape_ellipse()
 //metodo legato al bottone circolare con a fianco il testo Polygon
 void MainWindow::setup_shape_polygon()
 {
- display_.reset();
- display_.enablePolygonDraw(); //informa display che deve mostrare shape di forma pligonale
+ display_->reset();
+ display_->enablePolygonDraw(); //informa display che deve mostrare shape di forma pligonale
 }
 
 
@@ -982,7 +1084,7 @@ void MainWindow::setup_shape_polygon()
 
 void MainWindow::setup_highlight(bool checked)
 {
- display_.enableHighlight(checked);
+ display_->enableHighlight(checked);
 }
 
 //metodo attivato dal signal onLineDraw presente in DisplayImage
@@ -1011,23 +1113,25 @@ void MainWindow::onDrawLine(QList<DisplayImage::shape> edits)
    //se è vero allora è stata aggiunta una nuova shape
 
    QString object;
-   {
-    QListWidgetItem* qlwi = ui->ObjectListView->currentItem();
-    if(qlwi)
-      object = qlwi->text();
-    else
-      object = "<?>";
-   }
+//?   {
+//    QListWidgetItem* qlwi = ui->ObjectListView->currentItem();
+//    if(qlwi)
+//      object = qlwi->text();
+//    else
+//
+   object = "<?>";
+//   }
    axa->add_scoped_identifier(object);
 
    QString instance;
-   {
-    QListWidgetItem* qlwi =  ui->InstanceListView->currentItem();
-    if(qlwi)
-      instance = qlwi->text();
-    else
-      instance = "<?>";
-   }
+//?   {
+//    QListWidgetItem* qlwi =  ui->InstanceListView->currentItem();
+//    if(qlwi)
+//      instance = qlwi->text();
+//    else
+//
+   instance = "<?>";
+//   }
    axa->add_scoped_identifier(instance);
 
 
@@ -1086,9 +1190,9 @@ void MainWindow::onDrawLine(QList<DisplayImage::shape> edits)
 
     mapInstanceNumber_.insert(object + ":" + instance, number);
     on_InstanceListView_clicked();
-    ui->NumberListView->setCurrentRow(ui->NumberListView->count() - 1);
+    //?? ui->NumberListView->setCurrentRow(ui->NumberListView->count() - 1);
     on_NumberListView_clicked();
-    ui->Save->setDisabled(false);
+    //?? ui->Save->setDisabled(false);
    }
   }
 
@@ -1103,17 +1207,20 @@ void MainWindow::onDrawLine(QList<DisplayImage::shape> edits)
     another.shapePoints << new_current_point;
    }
    scaledEdits_.replace(i, another);
-   ui->Save->setDisabled(false);
+   //?? ui->Save->setDisabled(false);
   }
 
  }
- display_.setEdits(scaledEdits_);
- display_.resizeEdits(resize_factor_);
+ display_->setEdits(scaledEdits_);
+ display_->resizeEdits(resize_factor_);
 
  if(scaledEdits_.size() > 1)
  {
-  ui->_Shape_Select_Frame->set_clear_last_btn_enabled();
-  ui->_Shape_Select_Frame->set_clear_last_btn_enabled();
+  //?? ui->_Shape_Select_Frame->set_clear_last_btn_enabled();
+  //?? ui->_Shape_Select_Frame->set_clear_all_btn_enabled();
+
+  shape_select_frame_->set_clear_last_btn_enabled();
+  shape_select_frame_->set_clear_all_btn_enabled();
 
 //  ui->ClearLast->setDisabled(false);
 //  ui->ClearAll->setDisabled(false);
@@ -1172,14 +1279,14 @@ void MainWindow::_handle_clear_selected()
   for(int i=0; i < scaledEdits_.size(); ++i)
     if(scaledEdits_.at(i).id == shapeID_)
       scaledEdits_.removeAt(i);
-  display_.setEdits(scaledEdits_);
-  display_.resizeEdits(resize_factor_);
-  display_.reset();
+  display_->setEdits(scaledEdits_);
+  display_->resizeEdits(resize_factor_);
+  display_->reset();
  }
  else
  {
   scaledEdits_.clear();
-  display_.clear_image();
+  display_->clear_image();
  }
  int i;
  QString object;
@@ -1200,27 +1307,35 @@ void MainWindow::_handle_clear_selected()
  mapInstanceNumber_.remove(object + ":" + instance, number);
  shapeID_.clear();
 
- ui->_Shape_Select_Frame->set_clear_selected_btn_disabled();
+//? ui->_Shape_Select_Frame->set_clear_selected_btn_disabled();
+ shape_select_frame_->set_clear_selected_btn_disabled();
+
 
 // ui->ClearSelected->setDisabled(true);
  if(scaledEdits_.isEmpty())
  {
-  ui->_Shape_Select_Frame->set_clear_last_btn_disabled();
-  ui->_Shape_Select_Frame->set_clear_all_btn_disabled();
+  shape_select_frame_->set_clear_last_btn_disabled();
+  shape_select_frame_->set_clear_all_btn_disabled();
+
+
+  //?? ui->_Shape_Select_Frame->set_clear_last_btn_disabled();
+  //?? ui->_Shape_Select_Frame->set_clear_all_btn_disabled();
 
 //  ui->ClearLast->setDisabled(true);
 //  ui->ClearAll->setDisabled(true);
  }
- ui->Save->setDisabled(false);
- if(ui->InstanceListView->isItemSelected(ui->InstanceListView->currentItem())&&ui->InstanceListView->currentItem()->text()==instance)
-   on_InstanceListView_clicked();
+ //?? ui->Save->setDisabled(false);
+
+//??
+// if(ui->InstanceListView->isItemSelected(ui->InstanceListView->currentItem())&&ui->InstanceListView->currentItem()->text()==instance)
+//   on_InstanceListView_clicked();
 }
 
 //metodo legato al bottone rettangolare con il nome Clear Last
 void MainWindow::_handle_clear_last()
 {
  //toglier�  tutti i dati relativi all-ultima shape disegnata
- display_.clearLastEdits();
+ display_->clearLastEdits();
  QString temp = scaledEdits_.last().id;
  int i;
  QString object;
@@ -1233,40 +1348,49 @@ void MainWindow::_handle_clear_last()
  for(i=i+1;i<temp.size();++i) number.append(temp[i]);
  mapInstanceNumber_.remove(object + ":" + instance, number);
  scaledEdits_.removeLast();
- display_.reset();
+ display_->reset();
 
  if(scaledEdits_.isEmpty())
  {
-  ui->_Shape_Select_Frame->set_clear_last_btn_disabled();
-  ui->_Shape_Select_Frame->set_clear_all_btn_disabled();
+  //?? ui->_Shape_Select_Frame->set_clear_last_btn_disabled();
+  //?? ui->_Shape_Select_Frame->set_clear_all_btn_disabled();
+
+  shape_select_frame_->set_clear_last_btn_disabled();
+  shape_select_frame_->set_clear_all_btn_disabled();
+
 
 //  ui->ClearLast->setDisabled(true);
 //  ui->ClearAll->setDisabled(true);
  }
- ui->Save->setDisabled(false);
- if(ui->InstanceListView->isItemSelected(ui->InstanceListView->currentItem())&&ui->InstanceListView->currentItem()->text()==instance)
-   on_InstanceListView_clicked();
+ //?? ui->Save->setDisabled(false);
+
+//?? if(ui->InstanceListView->isItemSelected(ui->InstanceListView->currentItem())&&ui->InstanceListView->currentItem()->text()==instance)
+ //??  on_InstanceListView_clicked();
 }
 
 //metodo legato al bottone rettangolare con il nome Clear All
 void MainWindow::_handle_clear_all()
 {
  //pulir�  l-immagine da tutte le shape cancellando i relativi dati
- display_.clear_image();
+ display_->clear_image();
  if(!scaledEdits_.isEmpty())
    scaledEdits_.clear();
 
  if(scaledEdits_.isEmpty())
  {
-  ui->_Shape_Select_Frame->set_clear_selected_btn_disabled();
-  ui->_Shape_Select_Frame->set_clear_selected_btn_disabled();
+  //?? ui->_Shape_Select_Frame->set_clear_selected_btn_disabled();
+  //?? ui->_Shape_Select_Frame->set_clear_selected_btn_disabled();
+
+  shape_select_frame_->set_clear_last_btn_disabled();
+  shape_select_frame_->set_clear_all_btn_disabled();
+
 
 //  ui->ClearLast->setDisabled(true);
 //  ui->ClearAll->setDisabled(true);
  }
- ui->NumberListView->clear();
+ //?? ui->NumberListView->clear();
  mapInstanceNumber_.clear();
- ui->Save->setDisabled(false);
+ //?? ui->Save->setDisabled(false);
 }
 
 //metodo legato al bottone rettangolare con il nome End Project
@@ -1274,18 +1398,20 @@ void MainWindow::on_EndProject_clicked()
 {
  //quando premuto, interrompre il progetto cancellando il valore nel flag project_filename_path
  QMessageBox::StandardButton reply = QMessageBox::No;
- if(ui->Save->isEnabled())
- {
-  reply = QMessageBox::question(this, "Question", "Do you want to save before load an annotation file?",QMessageBox::Cancel|QMessageBox::Yes|QMessageBox::No);
- }
+
+// if(ui->Save->isEnabled())
+// {
+//  reply = QMessageBox::question(this, "Question", "Do you want to save before load an annotation file?",QMessageBox::Cancel|QMessageBox::Yes|QMessageBox::No);
+// }
+
  if(reply!=QMessageBox::Cancel)
  {
   if(reply==QMessageBox::Yes)
     on_Save_clicked();
   project_filename_path_.clear();
-  ui->actionAnnotate_Single_Image->setDisabled(false);
-  ui->actionAnnotate_Multiple_Image->setDisabled(false);
-  ui->actionLoad_annotations->setDisabled(false);
+  //?? ui->actionAnnotate_Single_Image->setDisabled(false);
+  //?? ui->actionAnnotate_Multiple_Image->setDisabled(false);
+  //?? ui->actionLoad_annotations->setDisabled(false);
   cleanWindow();
   set_initial_gui();
  }
@@ -1298,11 +1424,17 @@ void MainWindow::on_LoadNext_clicked()
  //dopo aver caricato l-ultima, se ripremuto avvier�  il processo per annotare una nuova immagine
  //attiva e disattiva il tasto load_previous
  QMessageBox::StandardButton reply = QMessageBox::No;
- if(ui->Save->isEnabled()){
-  reply = QMessageBox::question(this,"Question","Do you want to save before?",QMessageBox::Cancel|QMessageBox::Yes|QMessageBox::No);
- }
- if(reply!=QMessageBox::Cancel){
-  if(reply==QMessageBox::Yes){
+
+//?
+// if(ui->Save->isEnabled())
+// {
+//
+ reply = QMessageBox::question(this,"Question","Do you want to save before?",QMessageBox::Cancel|QMessageBox::Yes|QMessageBox::No);
+// }
+ if(reply!=QMessageBox::Cancel)
+ {
+  if(reply==QMessageBox::Yes)
+  {
    on_Save_clicked();
    if(imageSequence_.indexOf(image_filename_path_) == -1)
      imageSequence_.append(image_filename_path_);
@@ -1320,10 +1452,11 @@ void MainWindow::on_LoadNext_clicked()
    txt_filename_path_ = project_filename_path_ + "/" + pwizard_.projectName+"/"+imageName;
    load_annotation();
   }
-  if(imageSequence_.indexOf(image_filename_path_) == 0)
-    ui->LoadPrevious->setDisabled(true);
-  else
-    ui->LoadPrevious->setDisabled(false);
+//??
+//  if(imageSequence_.indexOf(image_filename_path_) == 0)
+//    ui->LoadPrevious->setDisabled(true);
+//  else
+//    ui->LoadPrevious->setDisabled(false);
  }
 }
 
@@ -1332,7 +1465,8 @@ void MainWindow::on_LoadPrevious_clicked(){
  //permette all-utente di navigare tra le immagini annotate fino a quel momento
  //dopo aver caricato la prima il bottone si disattiva
  QMessageBox::StandardButton reply = QMessageBox::No;
- if(ui->Save->isEnabled()){
+ if(true) //?? (ui->Save->isEnabled())
+ {
   reply = QMessageBox::question(this,"Question","Do you want to save before?",QMessageBox::Cancel|QMessageBox::Yes|QMessageBox::No);
  }
  if(reply!=QMessageBox::Cancel)
@@ -1351,8 +1485,10 @@ void MainWindow::on_LoadPrevious_clicked(){
   imageName+=".txt";
   txt_filename_path_ = project_filename_path_ + "/" + pwizard_.projectName + "/" + imageName;
   load_annotation();
-  if(imageSequence_.indexOf(image_filename_path_) - 1 < 0)
-    ui->LoadPrevious->setDisabled(true);
+
+//??
+//  if(imageSequence_.indexOf(image_filename_path_) - 1 < 0)
+//    ui->LoadPrevious->setDisabled(true);
  }
 }
 
@@ -1434,21 +1570,27 @@ void MainWindow::_handle_save()
   }
  }
  QList<QString> uniqueKeys = mapInstanceNumber_.uniqueKeys();
- for(int i=0; i<ui->ObjectListView->count(); ++i)
- {
-  QList<QString> correlatedItems = mapObjectInstance_.values(ui->ObjectListView->item(i)->text());
-  for(int j = correlatedItems.size()-1 ; j>=0; --j)
-  {
-   bool find=false;
-   for(int k=0; k<uniqueKeys.size(); ++k)
-     if(ui->ObjectListView->item(i)->text() + ":" + correlatedItems.at(j) == uniqueKeys.at(k))
-       find=true;
-   if(!find)
-     ofs << ui->ObjectListView->item(i)->text() + TAB_DIVIDER_STR + correlatedItems.at(j) + "\n";
-  }
- }
+
+
+//??
+// for(int i=0; i<ui->ObjectListView->count(); ++i)
+// {
+//  QList<QString> correlatedItems = mapObjectInstance_.values(ui->ObjectListView->item(i)->text());
+//  for(int j = correlatedItems.size()-1 ; j>=0; --j)
+//  {
+//   bool find=false;
+//   for(int k=0; k<uniqueKeys.size(); ++k)
+//     if(ui->ObjectListView->item(i)->text() + ":" + correlatedItems.at(j) == uniqueKeys.at(k))
+//       find=true;
+//   if(!find)
+//     ofs << ui->ObjectListView->item(i)->text() + TAB_DIVIDER_STR + correlatedItems.at(j) + "\n";
+//  }
+// }
+
+
  file.close();
- ui->Save->setDisabled(true);
+
+//?? ui->Save->setDisabled(true);
 }
 
 //metodo legato al comando Quit
@@ -1458,26 +1600,38 @@ void MainWindow::on_actionQuit_triggered()
 }
 
 //metodo per la gestione della chiusura della finestra
-void MainWindow::closeEvent(QCloseEvent *event){
- QMessageBox::StandardButton reply = QMessageBox::No;
- if(ui->Save->isEnabled()){
-  reply = QMessageBox::question(this,"Question","Do you want to save before quit?",QMessageBox::Cancel|QMessageBox::Yes|QMessageBox::No);
- }
- if(reply!=QMessageBox::Cancel){
-  if(reply==QMessageBox::Yes) on_Save_clicked();
-  event->accept();
- }
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+
+ //??
+
+
+// QMessageBox::StandardButton reply = QMessageBox::No;
+
+// if(ui->Save->isEnabled())
+// {
+//  reply = QMessageBox::question(this,"Question","Do you want to save before quit?",QMessageBox::Cancel|QMessageBox::Yes|QMessageBox::No);
+// }
+
+// if(reply!=QMessageBox::Cancel){
+//  if(reply==QMessageBox::Yes) on_Save_clicked();
+//  event->accept();
+// }
+
+
 }
 
 //metodo per la gestione del resize della finestra
-void MainWindow::resizeEvent(QResizeEvent *event){
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
  QSize temp=event->size();
- ui->scrollArea->resize(temp.rwidth()-20,temp.rheight()-250);
+ //?? ui->scrollArea->resize(temp.rwidth()-20,temp.rheight()-250);
 }
 
 //metodo per la gestione della pressione di determinati tasti mentre è attiva la finestra
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
+#ifdef HIDE
  if(event->key() == Qt::Key_Control)
    ctrlIsPressed_ = true;
  if(ctrlIsPressed_ && event->key() == Qt::Key_Shift)
@@ -1495,6 +1649,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
    on_actionAnnotate_Multiple_Image_triggered();
  if(ui->actionLoad_annotations->isEnabled() && ctrlIsPressed_ && event->key()==Qt::Key_L)
    on_actionLoad_annotations_triggered();
+
  if(ctrlIsPressed_ && !shiftIsPressed_ && event->key()==Qt::Key_Q)
    on_actionQuit_triggered();
  if(ctrlIsPressed_ && event->key() == Qt::Key_O)
@@ -1535,12 +1690,14 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 // if(ui->Polygon->isEnabled()&&ctrlIsPressed&&shiftIsPressed&&event->key()==Qt::Key_P) ui->Polygon->click();
 // if(ui->Highlight->isEnabled()&&ctrlIsPressed&&shiftIsPressed&&event->key()==Qt::Key_H) ui->Highlight->click();
 // if(ui->ClearAll->isEnabled()&&ctrlIsPressed&&shiftIsPressed&&event->key()==Qt::Key_Cancel) on_ClearAll_clicked();
+
+#endif // def HIDE
 }
 
 //metodo per la gestione del rilascio di determinati tasti mentre è attiva la finestra
 void MainWindow::keyReleaseEvent(QKeyEvent *event)
 {
- if(event->key()==Qt::Key_Escape) display_.reset(); //esc
+ if(event->key()==Qt::Key_Escape) display_->reset(); //esc
  if(event->key()==Qt::Key_Control) ctrlIsPressed_ = false; //ctrl
  if(event->key()==Qt::Key_Shift) shiftIsPressed_ = false; //shift
 }
@@ -1548,18 +1705,19 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
 //metodo per la gestione del movimento della rotella mentre è attiva la finestra
 void MainWindow::wheelEvent(QWheelEvent *event)
 {
- if(ctrlIsPressed_ && ui->ResizeSlider->isEnabled()){
-  if(event->delta() > 0 && resize_factor_ > 0)
-  {
-   ui->ResizeSlider->setValue(resize_factor_ -= 1);
-   on_ResizeSlider_sliderMoved(resize_factor_);
-  }
-  if(event->delta()<0 && resize_factor_ < 10)
-  {
-   ui->ResizeSlider->setValue(resize_factor_ += 1);
-   on_ResizeSlider_sliderMoved(resize_factor_);
-  }
- }
+//?
+// if(ctrlIsPressed_ && ui->ResizeSlider->isEnabled()){
+//  if(event->delta() > 0 && resize_factor_ > 0)
+//  {
+//   ui->ResizeSlider->setValue(resize_factor_ -= 1);
+//   on_ResizeSlider_sliderMoved(resize_factor_);
+//  }
+//  if(event->delta()<0 && resize_factor_ < 10)
+//  {
+//   ui->ResizeSlider->setValue(resize_factor_ += 1);
+//   on_ResizeSlider_sliderMoved(resize_factor_);
+//  }
+// }
 }
 
 //tentare di adattare a questa tipologia

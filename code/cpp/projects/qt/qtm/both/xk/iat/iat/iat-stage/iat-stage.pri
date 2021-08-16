@@ -35,6 +35,8 @@ HEADERS += \
   $$SRC_DIR/options.h\
   $$SRC_DIR/listtool.h \
   $$SRC_DIR/shape-select-frame.h \
+  $$SRC_DIR/zoom-and-navigate-frame.h \
+  $$SRC_DIR/range-slider.h \
 
 
 SOURCES += \
@@ -45,6 +47,8 @@ SOURCES += \
   $$SRC_DIR/options.cpp\
   $$SRC_DIR/listtool.cpp \
   $$SRC_DIR/shape-select-frame.cpp \
+  $$SRC_DIR/zoom-and-navigate-frame.cpp \
+  $$SRC_DIR/range-slider.cpp \
 
 
 LIBS += -L$$TARGETSDIR -laxfi

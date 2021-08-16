@@ -10,13 +10,16 @@
 
 #include <QVector>
 
-namespace Ui
-{
-class MainWindow;
-}
+//namespace Ui
+//{
+// class MainWindow;
+//}
 
 class AXFI_Annotation;
 class AXFI_Annotation_Group;
+
+class Shape_Select_Frame;
+class Zoom_and_Navigate_Frame;
 
 
 class MainWindow : public QMainWindow
@@ -24,16 +27,38 @@ class MainWindow : public QMainWindow
  Q_OBJECT
 
 public:
- explicit MainWindow(QWidget *parent = 0); //costruttore
+
+ explicit  MainWindow(QWidget* parent = 0);  //costruttore
+
  ~MainWindow(); //ditruttore
 
 private:
- DisplayImage display_; //istanza della classe DisplayImage, dove viene gestita tutta la parte grafica
+
+ QAction* actionAnnotate_Single_Image;
+ QAction* actionLoad_annotations;
+ QAction* actionQuit;
+ QAction* actionInstructions;
+ QAction* actionOptions;
+
+ QMenu* file_menu_;
+ QMenu* help_menu_;
+ QMenu* tools_menu_;
+
+
+ DisplayImage* display_; //istanza della classe DisplayImage, dove viene gestita tutta la parte grafica
  ProjectWizard pwizard_; //istanza della classe ProjectWizard, dove viene iniziato il processo per le annotazioni di più immagini
  Options optionsDialog_; //istanza della classe Options, dove l'utente potrà cambiare alcune impostazioni
  ListTool listToolDialog_; //istanza della classe ListTool, dove l'utente potrà creare liste personalizzate (WIP)
 
  int autogen_index_;
+
+ QFrame* main_frame_;
+
+ Shape_Select_Frame* shape_select_frame_;
+ Zoom_and_Navigate_Frame* zoom_frame_;
+
+ QHBoxLayout* top_layout_;
+ QVBoxLayout* main_layout_;
 
 
  QString workspace_; //percorso che contiene il path di dove è stato aperta l'ultima immagine o l'ultimo file di annotazione
@@ -83,9 +108,11 @@ private:
   int sizew;
   int resize_factor;
  };
+
  backUp backUpHere_; //istanza dove salvare i dati sensibili
 
- Ui::MainWindow *ui; //puntatore all'interfaccia grafica
+ //? Ui::MainWindow *ui; //puntatore all'interfaccia grafica
+
  void set_initial_gui(); //metodo che setterà l'interfaccia grafica all'avvio
  void makeBackUp(); //metodo che esegue il backUp dei dati
  void load_image(); //metodo che prepara la finestra a stampare la nuova immagine
