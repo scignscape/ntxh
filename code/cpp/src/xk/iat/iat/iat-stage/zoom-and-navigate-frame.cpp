@@ -7,6 +7,9 @@
 Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
   :  QFrame(parent)
 {
+ handle_zoom_ok_ = false;
+ initial_zoom_position_ = 25;
+
  QString s1 = QString("%1").arg(QChar(5184));
  zoom_in_button_ = new QPushButton(s1, this);
  zoom_in_button_->setStyleSheet("QPushButton{font-size: 12pt;"
@@ -33,6 +36,13 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  zoom_buttons_layout_->addStretch();
 
+ pan_mode_button_ = new QPushButton("Pan Mode", this);
+ zoom_buttons_layout_->addWidget(pan_mode_button_);
+ pan_mode_button_->setCheckable(true);
+ pan_mode_button_->setChecked(false);
+
+ connect(pan_mode_button_, SIGNAL(clicked(bool)), this, SIGNAL(pan_mode_changed(bool)));
+
 
  zoom_slider_ = new ctkRangeSlider(Qt::Horizontal, this);
 
@@ -43,10 +53,35 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  connect(zoom_slider_, SIGNAL(maximumValueChanged(int)), this,
    SLOT(handle_zoom_maximum_value_changed(int)));
 
+ zoom_slider_->setMinimumValue(initial_zoom_position_);
+ zoom_slider_->setMaximumValue(100 - initial_zoom_position_);
 
  main_layout_ = new QVBoxLayout;
  main_layout_->addLayout(zoom_buttons_layout_);
  main_layout_->addWidget(zoom_slider_);
+
+
+
+ image_top_left_button_ = new QPushButton("Image Top Left", this);
+ image_top_left_button_->setMinimumWidth(110);
+
+ center_image_button_ = new QPushButton("Center Image", this);
+ center_image_button_->setMinimumWidth(110);
+
+ position_buttons_layout_ = new QHBoxLayout;
+
+ position_buttons_layout_->addStretch();
+ position_buttons_layout_->addWidget(image_top_left_button_);
+ position_buttons_layout_->addWidget(center_image_button_);
+ position_buttons_layout_->addStretch();
+
+ main_layout_->addLayout(position_buttons_layout_);
+
+ connect(image_top_left_button_, SIGNAL(clicked(bool)),
+   this, SIGNAL(image_top_left_button_clicked(bool)));
+
+ connect(center_image_button_, SIGNAL(clicked(bool)),
+   this, SIGNAL(center_image_button_clicked(bool)));
 
  setLayout(main_layout_);
 
@@ -73,23 +108,26 @@ void Zoom_and_Navigate_Frame::direct_adjust_zoom(int z)
 
  qreal adj_ratio = vr * (2.0/5.0);
 
+ //qDebug() << "ar = " << adj_ratio ;
+
+ Q_EMIT(zoom_factor_changed(adj_ratio));
+
  //?scrolled_image_pixmap_item_->setScale(adj_ratio);
 
 }
 
 void Zoom_and_Navigate_Frame::adjust_zoom(int z)
 {
- //  v == 50  r == 3
- //  v == 1   r == 1/10
-
- // v / 10
-
- if(handle_zoom_ok_)
+ if(!handle_zoom_ok_)
  {
-  direct_adjust_zoom(z);
-
-  recenter_image();
+  if(z == initial_zoom_position_)
+    return;
+  handle_zoom_ok_ = true;
  }
+
+ direct_adjust_zoom(z);
+
+ recenter_image();
 }
 
 void Zoom_and_Navigate_Frame::handle_zoom_minimum_value_changed(int val)
@@ -100,7 +138,6 @@ void Zoom_and_Navigate_Frame::handle_zoom_minimum_value_changed(int val)
  {
   adjust_zoom(val);
  }
-
 
  //qDebug() << "min " << val;
 }

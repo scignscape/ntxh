@@ -10,6 +10,8 @@
 
 #include <QVector>
 
+#include "global-types.h"
+
 //namespace Ui
 //{
 // class MainWindow;
@@ -44,8 +46,12 @@ private:
  QMenu* help_menu_;
  QMenu* tools_menu_;
 
+ DisplayImage* display_image_; //istanza della classe DisplayImage, dove viene gestita tutta la parte grafica
 
- DisplayImage* display_; //istanza della classe DisplayImage, dove viene gestita tutta la parte grafica
+ DisplayImage_Scene_Item* display_scene_item_; //istanza della classe DisplayImage, dove viene gestita tutta la parte grafica
+ DisplayImage_Data* display_image_data_; //istanza della classe DisplayImage, dove viene gestita tutta la parte grafica
+
+
  ProjectWizard pwizard_; //istanza della classe ProjectWizard, dove viene iniziato il processo per le annotazioni di più immagini
  Options optionsDialog_; //istanza della classe Options, dove l'utente potrà cambiare alcune impostazioni
  ListTool listToolDialog_; //istanza della classe ListTool, dove l'utente potrà creare liste personalizzate (WIP)
@@ -77,7 +83,7 @@ private:
 
  enum shapes{square, ellipse, polygon}; //le tre forme che può avere una shape, enumerate per evitare confusione
 
- QList<DisplayImage::shape> scaledEdits_; //lista di tutte le shape che si stanno disegnando sull'imagine
+ QList<DisplayImage_Data::shape> scaledEdits_; //lista di tutte le shape che si stanno disegnando sull'imagine
  AXFI_Annotation_Group* axfi_annotation_group_;
 
  void check_init_axfi_annotation_group();
@@ -103,7 +109,7 @@ private:
   QMultiMap<QString,QString> mapObjectInstance;
   QMultiMap<QString,QString> mapInstanceNumber;
   QImage background;
-  QList<DisplayImage::shape> scaledEdits;
+  QList<DisplayImage_Data::shape> scaledEdits;
   int sizeh;
   int sizew;
   int resize_factor;
@@ -135,8 +141,12 @@ private:
 
  void _handle_save();
 
+public:
 
-private slots:
+ void init_display_scene_item(DisplayImage_Scene_Item* si);
+
+
+private Q_SLOTS:
 
  void on_actionOptions_triggered(); //metodo legato al comando Options
  //metodo attivato dal signal colorsThickness presente in Options
@@ -152,6 +162,9 @@ private slots:
  void on_InstanceListView_clicked(); //metodo legato alla seconda colonna
  void on_NumberListView_clicked(); //metodo legato alla terza colonnna
 
+
+ void handle_zoom_factor_changed(r8 factor);
+
  //?
  //    void on_Square_clicked(); //metodo legato al bottone circolare con a fianco il testo Square
  //    void on_Ellipse_clicked(); //metodo legato al bottone circolare con a fianco il testo Ellipse
@@ -159,7 +172,7 @@ private slots:
  //    void on_Highlight_clicked(bool checked); //metodo legato al bottone quadrato con a fianco il testo Highlight
 
 
- void onDrawLine(QList<DisplayImage::shape> edits); //metodo attivato dal signal onLineDraw presente in DisplayImage
+ void onDrawLine(QList<DisplayImage_Data::shape> edits); //metodo attivato dal signal onLineDraw presente in DisplayImage
 
  //?
  //    void on_ClearSelected_clicked(); //metodo legato al bottone rettangolare con il nome Clear Selected

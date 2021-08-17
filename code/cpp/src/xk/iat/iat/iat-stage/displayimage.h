@@ -4,13 +4,95 @@
 #include <QWidget>
 #include <QtGui>
 
+
+#include <QGraphicsView>
+#include <QGraphicsScene>
+#include <QGraphicsPixmapItem>
+
+#include <QVBoxLayout>
+
+#include "global-types.h"
+
+#include "accessors.h"
+
+
 class AXFI_Annotation;
+
+
+//class Special_Graphics_Scene : public QGraphicsScene
+//{
+
+//public:
+
+// Special_Graphics_Scene(QWidget* parent);
+
+// void drawForeground() Q_DECL_OVERRIDE;
+
+//};
+
+
+class DisplayImage_Scene_Item;
+class DisplayImage_Data;
+
+class MainWindow;
 
 class DisplayImage : public QWidget
 {
  Q_OBJECT
 
-private:
+  QPixmap* scrolled_image_pixmap_;
+
+ // QPixmap* original_scrolled_image_pixmap_;
+ // QMap<int, QPixmap*> pixmaps_by_contrast_measure_;
+
+
+  //QGraphicsScene *scene
+  QGraphicsView* scrolled_image_view_;
+  QGraphicsScene* scrolled_image_scene_;
+
+  //QGraphicsPixmapItem* scrolled_image_pixmap_item_;
+  QGraphicsProxyWidget* scrolled_image_pixmap_item_;
+
+  QGraphicsRectItem* background_rectangle_;
+
+  int background_rectangle_center_x_;
+  int background_rectangle_center_y_;
+
+  QVBoxLayout* main_layout_;
+
+  DisplayImage_Scene_Item* image_scene_item_;
+
+  DisplayImage_Data* display_image_data_;
+
+  MainWindow* main_window_;
+
+  void recenter_image();
+
+public:
+
+ enum shapes{ square, ellipse, polygon }; //le tre forme che può avere una shape, enumerate per evitare confusione
+
+ ACCESSORS__GET(DisplayImage_Scene_Item* ,image_scene_item)
+ ACCESSORS__GET(DisplayImage_Data* ,display_image_data)
+ ACCESSORS(MainWindow* ,main_window)
+
+ void recenter_scroll_center();
+ void recenter_scroll_top_left();
+
+ explicit DisplayImage(QWidget *parent = nullptr); //costruttore
+
+ void load_image(QString file_path);
+ void reset_scale(r8 factor);
+
+
+};
+
+class DisplayImage_Data
+{
+ friend class DisplayImage_Scene_Item;
+
+ bool pan_mode;
+
  bool isMoving_; //se vero, il programma sta catturando la posizione del mouse sull'immagine
  bool isPressed_; //se vero, il programma è entrato nella fase di disegno di una shape
  bool isDoublePressed_; //se vero, il programma riconosce che l'utente ha terminato di disegnare un poligono
@@ -21,6 +103,7 @@ private:
  bool drawingSquareEnabled_; //se vero, la prossima shape sarà quadrata/rettangolare
  bool drawingEllipseEnabled_; //se vero, la prossima shape sarà circolare
  bool drawingPolygonEnabled_; //se vero, la prossima shape sarà un poligono
+
  int pointPosition_; //indica la posizione nel vettore del punto di quella shape che l'utente sta modificando
  int shapePosition_; //indica la posizione nel vettore della shape che l'utente sta modificando/spostando
  int radius_; //dimensione dei quadrati corrispondenti ai punti da cui, insieme alle linee, è formata la shape
@@ -41,11 +124,7 @@ private:
  QList<QPoint> points_; //variabile dove verranno salvati i punti della shape che l'utente sta disegnando in quel momento
  QString shapeID_; //l'id della shape che l'utente ha selezionato in quel momento
 
-
 public:
-
- enum shapes{ square, ellipse, polygon }; //le tre forme che può avere una shape, enumerate per evitare confusione
-
  struct shape
  {
   //cosa caratterizza una shape
@@ -56,15 +135,33 @@ public:
   AXFI_Annotation* axfi_annotation;
  };
 
+public:
+
+ void setView(QImage image); //assegna l'immagine su cui l'utente sta lavorando, invocato da MainWindow
+
+ void set_pan_mode()
+ {
+  pan_mode = true;
+ }
+
+ void unset_pan_mode()
+ {
+  pan_mode = false;
+ }
+
+
+
 private:
+
  QList<shape> allEdits_; //lista di tutte le shape che si stanno disegnando sull'immagine
- void defaultColorsThickness(); //metodo privato che assegna i valori di default da "radius" a "shapeBlu"
+
 
 public:
- explicit DisplayImage(QWidget *parent = 0); //costruttore
+
+ void defaultColorsThickness(); //metodo privato che assegna i valori di default da "radius" a "shapeBlu"
+
  //metodo per assegnare i valori da "radius" a "shapeBlu" indicati dall'utente, invocato da MainWondow
  void setColorsThickness(int in_radius, int in_thickness, int in_myRed, int in_myGreen, int in_MyBlue, int in_sqRed, int in_sqGreen, int in_sqBlue, int in_shapeRed, int in_shapeGreen, int in_shapeBlue);
- void setView(QImage image); //assegna l'immagine su cui l'utente sta lavorando, invocato da MainWindow
  void enableSquareDraw(); //modifica il valore di verità di drawingSquareEnabled, invocato da MainWindow
  void enableEllipseDraw(); //modifica il valore di verità di drawingEllipseEnabled, invocato da MainWindow
  void enablePolygonDraw(); //modifica il valore di verità di drawingPolygonEnabled, invocato da MainWindow
@@ -77,8 +174,63 @@ public:
  void reset(); //rimuove tutti i dati temporanei, invocato da MainWindow
  void clearLastEdits(); //rimuove l'ultima annotazione effettutata, invocato da MainWindow
 
+public:
+
+ DisplayImage_Data();
+
+};
+
+class DisplayImage_Scene_Item : public QWidget
+{
+ Q_OBJECT
+
+private:
+
+
+// QPixmap* scrolled_image_pixmap_;
+
+//// QPixmap* original_scrolled_image_pixmap_;
+//// QMap<int, QPixmap*> pixmaps_by_contrast_measure_;
+
+
+// //QGraphicsScene *scene
+// QGraphicsView* scrolled_image_view_;
+// QGraphicsScene* scrolled_image_scene_;
+// QGraphicsPixmapItem* scrolled_image_pixmap_item_;
+
+// QGraphicsRectItem* background_rectangle_;
+
+// int background_rectangle_center_x_;
+// int background_rectangle_center_y_;
+
+// QVBoxLayout* main_layout_;
+
+// void recenter_image();
+
+ DisplayImage_Data* data_;
+
+ QGraphicsProxyWidget* this_proxy_widget_;
+
+// QGraphics
+
+
+public:
+
+ enum shapes{ square, ellipse, polygon }; //le tre forme che può avere una shape, enumerate per evitare confusione
+
+// void recenter_scroll_center();
+// void recenter_scroll_top_left();
+
+ ACCESSORS(DisplayImage_Data* ,data)
+ ACCESSORS(QGraphicsProxyWidget* ,this_proxy_widget)
+
+public:
+
+ explicit DisplayImage_Scene_Item(QWidget *parent = 0); //costruttore
+
+
 signals:
- void onLineDraw(QList<DisplayImage::shape>); //signals per la classe MainWindow. Spedisce la lista di tutte le annotazioni sull'immagine
+ void onLineDraw(QList<DisplayImage_Data::shape>); //signals per la classe MainWindow. Spedisce la lista di tutte le annotazioni sull'immagine
  void setTuple(QString); //signals per la classe MainWindow. Speidisce l'id della shape selezionata dall'utente in caso di modifica/spostamento o aggiunta
 
 protected:

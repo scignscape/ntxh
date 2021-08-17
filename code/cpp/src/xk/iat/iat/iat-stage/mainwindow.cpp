@@ -1,8 +1,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
+
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QInputDialog>
+
+#include <QTimer>
+
 #define window_size_x 670
 #define window_size_y 540
 #define max_window_size_x 1050 //da capire la risoluzione del pc
@@ -101,6 +106,20 @@ void MainWindow::check_init_axfi_annotation_group()
 }
 
 
+void MainWindow::init_display_scene_item(DisplayImage_Scene_Item* si)
+{
+ display_scene_item_ = si;
+
+ display_scene_item_->setGeometry(0,0,0,0);
+ display_scene_item_->setObjectName(QString::fromUtf8("ImageDisplayWidget"));
+
+ connect(display_scene_item_,SIGNAL(onLineDraw(QList<DisplayImage::shape>)),this,SLOT(onDrawLine(QList<DisplayImage::shape>)));
+ connect(display_scene_item_,SIGNAL(setTuple(QString)),this,SLOT(getTuple(QString)));
+
+
+}
+
+
 //costruttore
 MainWindow::MainWindow(QWidget *parent) :
    QMainWindow(parent) //??, ui(new Ui::MainWindow)
@@ -155,6 +174,27 @@ MainWindow::MainWindow(QWidget *parent) :
  shape_select_frame_ = new Shape_Select_Frame(main_frame_);
  zoom_frame_ = new Zoom_and_Navigate_Frame(main_frame_);
 
+ connect(zoom_frame_, SIGNAL(zoom_factor_changed(r8)), this, SLOT(handle_zoom_factor_changed(r8)));
+
+ connect(zoom_frame_, &Zoom_and_Navigate_Frame::image_top_left_button_clicked, [this](bool)
+ {
+  display_image_->recenter_scroll_top_left();
+ });
+
+ connect(zoom_frame_, &Zoom_and_Navigate_Frame::center_image_button_clicked, [this](bool)
+ {
+  display_image_->recenter_scroll_center();
+ });
+
+ connect(zoom_frame_, &Zoom_and_Navigate_Frame::pan_mode_changed, [this](bool mode)
+ {
+  if(mode)
+    display_image_data_->set_pan_mode();
+  else
+    display_image_data_->unset_pan_mode();
+ });
+
+
  top_layout_ = new QHBoxLayout;
 
  top_layout_->addWidget(shape_select_frame_);
@@ -164,17 +204,29 @@ MainWindow::MainWindow(QWidget *parent) :
 
  main_layout_->addLayout(top_layout_);
 
- display_ = new DisplayImage(main_frame_);
+ display_image_ = new DisplayImage(main_frame_);
 
- display_->setMinimumHeight(300);
+ display_image_->setMinimumHeight(300);
 
- main_layout_->addWidget(display_);
+ display_image_->set_main_window(this);
+
+ display_scene_item_ = nullptr;
+// display_scene_item_ = new DisplayImage_Scene_Item;//(main_frame_);
+
+ main_layout_->addWidget(display_image_);
+
+ display_image_data_ = display_image_->display_image_data();
+
+// display_scene_item_ = display_image_->image_scene_item();
+
+// display_scene_item_-> load_image("/home/nlevisrael/gits/annot/ctg-temp/pics/testdia.png");
 
  //?? ui->setupUi(this);
 
 
- connect(display_,SIGNAL(onLineDraw(QList<DisplayImage::shape>)),this,SLOT(onDrawLine(QList<DisplayImage::shape>)));
- connect(display_,SIGNAL(setTuple(QString)),this,SLOT(getTuple(QString)));
+// connect(display_scene_item_,SIGNAL(onLineDraw(QList<DisplayImage::shape>)),this,SLOT(onDrawLine(QList<DisplayImage::shape>)));
+// connect(display_scene_item_,SIGNAL(setTuple(QString)),this,SLOT(getTuple(QString)));
+
 
  connect(&optionsDialog_,SIGNAL(ColorsThickness(int,int,int,int,int,int,int,int,int,int,int)),
          this,SLOT(getColorsThickness(int,int,int,int,int,int,int,int,int,int,int)));
@@ -191,7 +243,6 @@ MainWindow::MainWindow(QWidget *parent) :
   else if(sel == "Ellipse")
     setup_shape_ellipse();
  });
-
 
  main_frame_->setLayout(main_layout_);
 
@@ -257,15 +308,22 @@ void MainWindow::set_initial_gui()
  sizeh_ = window_size_y;
 
 //? display_->setParent(ui->scrollContents);
- //?ui->scrollContents->resize(0,0);
+ //?ui->scrollContents->resize(0,0);qgraphicsview position visibile top left
 
- display_->setGeometry(0,0,0,0);
- display_->setObjectName(QString::fromUtf8("ImageDisplayWidget"));
 
  QString title = "Image Annotation Tool (v." + QString::number(version) + ")";
  QMainWindow::setMinimumSize(sizew_, sizeh_);
  QMainWindow::setWindowTitle(title);
 }
+
+
+void MainWindow::handle_zoom_factor_changed(r8 factor)
+{
+// qDebug() << "factor: " << factor;
+
+ display_image_->reset_scale(factor);
+}
+
 
 //metodo che esegue il backUp dei dati
 void MainWindow::makeBackUp()
@@ -299,7 +357,7 @@ void MainWindow::on_actionOptions_triggered()
 void MainWindow::getColorsThickness(int radius, int thickness, int myRed, int myGreen, int MyBlue, int sqRed, int sqGreen, int sqBlue, int shapeRed, int shapeGreen, int shapeBlue)
 {
  //quando viene attivato il compito di MainWindow e quello di fare da tramite e cambiare i colori in display con il metodo pubblico setClororThickness
- display_->setColorsThickness(radius, thickness, myRed, myGreen, MyBlue, sqRed, sqGreen, sqBlue, shapeRed, shapeGreen, shapeBlue);
+ display_image_data_->setColorsThickness(radius, thickness, myRed, myGreen, MyBlue, sqRed, sqGreen, sqBlue, shapeRed, shapeGreen, shapeBlue);
 }
 
 //metodo legato al comando Create List (WIP)
@@ -314,12 +372,15 @@ void MainWindow::on_actionAnnotate_Single_Image_triggered()
  //all-inizio viene chiesto all-untente se vuole salvare il lavoro svolto fino al quel momento (se necessario)
  QMessageBox::StandardButton reply = QMessageBox::No;
 
- if(true) //?  ui->Save->isEnabled())
+ if(false) //?  ui->Save->isEnabled())
  { //il tasto save √® il pi√π adatto falg di controllo
   reply = QMessageBox::question(this,"Question","Do you want to save before annotate a new image?",QMessageBox::Cancel|QMessageBox::Yes|QMessageBox::No);
  }
- if(reply!=QMessageBox::Cancel){
-   if(reply==QMessageBox::Yes) on_Save_clicked();
+
+ if(reply != QMessageBox::Cancel)
+ {
+  if(reply==QMessageBox::Yes)
+    on_Save_clicked();
   makeBackUp(); //si esegue un backup in quanto l-utente potrebbe interrompere il processo e rendere necessario un ripristino dei dati
   if(workspace_.isEmpty())
     workspace_=qApp->applicationDirPath();
@@ -332,7 +393,7 @@ void MainWindow::on_actionAnnotate_Single_Image_triggered()
 
   image_filename_path_ = qdialog.getOpenFileName(this, "Open Image", ws, filters);
 
-  display_->setNameSelected(true);
+  display_image_data_->setNameSelected(true);
 
   if(!image_filename_path_.isNull())
   { //se √® stata scelta l-immagine
@@ -396,7 +457,7 @@ void MainWindow::on_actionAnnotate_Multiple_Image_triggered()
  {
   if(reply==QMessageBox::Yes) on_Save_clicked();
   makeBackUp(); //viene eseguito un backup
-  if(pwizard_.exec()>0)
+  if(pwizard_.exec() > 0)
   {
    //viene eseguito il wizard che chieder√  di dare un nome al progetto
    //e di specificare dove si vuole creare la cartella con quel nome
@@ -468,13 +529,26 @@ void MainWindow::load_image()
  workspace_ = qfile.absolutePath();
  QString title="Image Annotation Tool (v."+QString::number(version)+") - ";
  if(project_filename_path_.isNull())
-   title += image_filename_path_;
+   title += image_filename_path_;//"/home/nlevisrael/gits/annot/ctg-temp/pics/testdia.png"
  else title+=pwizard_.projectpath + "/" + pwizard_.projectName;
  QMainWindow::setWindowTitle(title);
 
- display_->clear_image(); //si pulisce anche display
+//? display_->clear_image(); //si pulisce anche display
+
+ display_image_->load_image(image_filename_path_);
+
+// display_->update();
+// display_->repaint();
+
+
+ QTimer::singleShot(0, [this]
+ {
+  display_image_->recenter_scroll_top_left();
+ });
+
  //?? ui->ResizeSlider->setValue(default_resize);
- resizeMethod(default_resize); //questo √® il metodo che processa l-immagne
+
+//? resizeMethod(default_resize); //questo √® il metodo che processa l-immagne
 }
 
 //metodo che processa la lista scelta dall'utente e la carica
@@ -587,7 +661,7 @@ bool MainWindow::load_annotation()
  image_filename_path_.remove(image_filename_path_.size()-1, 1);
 
  //viene creato image_filename_path che avr√  il compito di indicare a resizeMethod quale immagine caricare
- QList<DisplayImage::shape> outEdits;
+ QList<DisplayImage_Data::shape> outEdits;
  QStringList objectList;
 
  //qui il file viene processato
@@ -610,7 +684,7 @@ bool MainWindow::load_annotation()
   //?line.toStdString();
 
 //?  int i;
-  DisplayImage::shape another;
+  DisplayImage_Data::shape another;
 
   QString object;
 //?
@@ -771,8 +845,8 @@ bool MainWindow::load_annotation()
 
  if(!outEdits.isEmpty())
  {
-  display_->setEdits(outEdits);
-  display_->resizeEdits(default_resize);
+  display_image_data_->setEdits(outEdits);
+  display_image_data_->resizeEdits(default_resize);
 
   shape_select_frame_->set_clear_all_btn_enabled();
   shape_select_frame_->set_clear_last_btn_enabled();
@@ -813,9 +887,9 @@ void MainWindow::doBackUp()
  //?? ui->ObjectListView->addItems(objects);
  //?? ui->ResizeSlider->setValue(resize_factor_);
  resizeMethod(resize_factor_);
- display_->setEdits(scaledEdits_);
+ display_image_data_->setEdits(scaledEdits_);
  if(!scaledEdits_.isEmpty())
-   display_->resizeEdits(resize_factor_);
+   display_image_data_->resizeEdits(resize_factor_);
  QMainWindow::setWindowTitle(backUpHere_.title);
 }
 
@@ -828,9 +902,9 @@ void MainWindow::cleanWindow()
  scaledEdits_.clear();
  mapObjectInstance_.clear();
  mapInstanceNumber_.clear();
- display_->setNameSelected(false);
- display_->setShapeSelected("");
- display_->clear_image();
+ display_image_data_->setNameSelected(false);
+ display_image_data_->setShapeSelected("");
+ display_image_data_->clear_image();
 }
 
 //metodo che porta il programma ad una situazione standard
@@ -855,8 +929,8 @@ void MainWindow::on_ResizeSlider_sliderMoved(int position)
 {
  if(!scaledEdits_.isEmpty())
  {
-  display_->setEdits(scaledEdits_);
-  display_->resizeEdits(position);
+  display_image_data_->setEdits(scaledEdits_);
+  display_image_data_->resizeEdits(position);
  }
  resizeMethod(position);
 }
@@ -877,11 +951,12 @@ bool MainWindow::resizeMethod(int value)
   sizew_ = background_.size().width()/(100.0/(190-resize_factor_*18));
   sizeh_ = background_.size().height()/(100.0/(190-resize_factor_*18));
   QImage scaled=background_.scaled(sizew_,sizeh_,Qt::KeepAspectRatio, Qt::FastTransformation);
-  display_->resize(sizew_, sizeh_);
-  display_->setView(scaled);
+  display_image_->resize(sizew_, sizeh_);
+  display_image_data_->setView(scaled);
   //?? ui->scrollContents->resize(sizew_, sizeh_);
   return true;
  }
+
  return false;
 }
 
@@ -934,8 +1009,8 @@ void MainWindow::getTuple(QString shapeID)
 void MainWindow::on_ObjectListView_clicked()
 {
  //quando un valore viene selezionato il metodo provvede a far comparire nella seconda colonna i valori subordinati
- display_->setNameSelected(false);
- display_->setShapeSelected("");
+ display_image_data_->setNameSelected(false);
+ display_image_data_->setShapeSelected("");
 
  //?? ui->_Shape_Select_Frame->set_clear_selected_btn_enabled();
  shape_select_frame_->set_clear_selected_btn_enabled();
@@ -956,8 +1031,8 @@ void MainWindow::on_ObjectListView_clicked()
 void MainWindow::on_InstanceListView_clicked()
 {
  //quando un valore viene selezionato il metodo provvede a far comparire nella terza colonna i valori subordinati
- display_->setNameSelected(true);
- display_->setShapeSelected("");
+ display_image_data_->setNameSelected(true);
+ display_image_data_->setShapeSelected("");
 
 //?? ui->_Shape_Select_Frame->set_clear_selected_btn_disabled();
  shape_select_frame_->set_clear_selected_btn_disabled();
@@ -1029,7 +1104,7 @@ void MainWindow::on_NumberListView_clicked()
 // }
 
  //quando un valore viene selezionato il metodo provvede a mandare un segnale a display colorando diversamente la relativa shape
- display_->setShapeSelected(object + ":" + instance + ":" + number);
+ display_image_data_->setShapeSelected(object + ":" + instance + ":" + number);
  shapeID_ = object + ":" + instance + ":" + number;
 
 //?? ui->_Shape_Select_Frame->set_clear_selected_btn_enabled();
@@ -1045,8 +1120,8 @@ void MainWindow::on_NumberListView_clicked()
 //}
 void MainWindow::setup_shape_rectangle()
 {
- display_->reset();
- display_->enableSquareDraw(); //informa display che deve mostrare shape di forma rettangolare
+ display_image_data_->reset();
+ display_image_data_->enableSquareDraw(); //informa display che deve mostrare shape di forma rettangolare
 }
 
 
@@ -1057,8 +1132,8 @@ void MainWindow::setup_shape_rectangle()
 //}
 void MainWindow::setup_shape_ellipse()
 {
- display_->reset();
- display_->enableEllipseDraw(); //informa display che deve mostrare shape di forma circolare
+ display_image_data_->reset();
+ display_image_data_->enableEllipseDraw(); //informa display che deve mostrare shape di forma circolare
 }
 
 
@@ -1072,8 +1147,8 @@ void MainWindow::setup_shape_ellipse()
 //metodo legato al bottone circolare con a fianco il testo Polygon
 void MainWindow::setup_shape_polygon()
 {
- display_->reset();
- display_->enablePolygonDraw(); //informa display che deve mostrare shape di forma pligonale
+ display_image_data_->reset();
+ display_image_data_->enablePolygonDraw(); //informa display che deve mostrare shape di forma pligonale
 }
 
 
@@ -1084,11 +1159,11 @@ void MainWindow::setup_shape_polygon()
 
 void MainWindow::setup_highlight(bool checked)
 {
- display_->enableHighlight(checked);
+ display_image_data_->enableHighlight(checked);
 }
 
 //metodo attivato dal signal onLineDraw presente in DisplayImage
-void MainWindow::onDrawLine(QList<DisplayImage::shape> edits)
+void MainWindow::onDrawLine(QList<DisplayImage_Data::shape> edits)
 {
  //questo metodo viene invocato per nature diverse
  //ma riesce a capire se si st√  aggiunggendo una shape o se ne sta modificando/spostando una gi√  presente
@@ -1097,9 +1172,9 @@ void MainWindow::onDrawLine(QList<DisplayImage::shape> edits)
  {
   AXFI_Annotation* axa = new AXFI_Annotation;
 
-  DisplayImage::shape e = edits.at(i);
+  DisplayImage_Data::shape e = edits.at(i);
 
-  DisplayImage::shape another;
+  DisplayImage_Data::shape another;
 
   if(e.form == DisplayImage::square)
     axa->set_shape_designation("Rectangle");
@@ -1211,8 +1286,8 @@ void MainWindow::onDrawLine(QList<DisplayImage::shape> edits)
   }
 
  }
- display_->setEdits(scaledEdits_);
- display_->resizeEdits(resize_factor_);
+ display_image_data_->setEdits(scaledEdits_);
+ display_image_data_->resizeEdits(resize_factor_);
 
  if(scaledEdits_.size() > 1)
  {
@@ -1279,14 +1354,14 @@ void MainWindow::_handle_clear_selected()
   for(int i=0; i < scaledEdits_.size(); ++i)
     if(scaledEdits_.at(i).id == shapeID_)
       scaledEdits_.removeAt(i);
-  display_->setEdits(scaledEdits_);
-  display_->resizeEdits(resize_factor_);
-  display_->reset();
+  display_image_data_->setEdits(scaledEdits_);
+  display_image_data_->resizeEdits(resize_factor_);
+  display_image_data_->reset();
  }
  else
  {
   scaledEdits_.clear();
-  display_->clear_image();
+  display_image_data_->clear_image();
  }
  int i;
  QString object;
@@ -1335,7 +1410,7 @@ void MainWindow::_handle_clear_selected()
 void MainWindow::_handle_clear_last()
 {
  //toglier√  tutti i dati relativi all-ultima shape disegnata
- display_->clearLastEdits();
+ display_image_data_->clearLastEdits();
  QString temp = scaledEdits_.last().id;
  int i;
  QString object;
@@ -1348,7 +1423,7 @@ void MainWindow::_handle_clear_last()
  for(i=i+1;i<temp.size();++i) number.append(temp[i]);
  mapInstanceNumber_.remove(object + ":" + instance, number);
  scaledEdits_.removeLast();
- display_->reset();
+ display_image_data_->reset();
 
  if(scaledEdits_.isEmpty())
  {
@@ -1372,7 +1447,7 @@ void MainWindow::_handle_clear_last()
 void MainWindow::_handle_clear_all()
 {
  //pulir√  l-immagine da tutte le shape cancellando i relativi dati
- display_->clear_image();
+ display_image_data_->clear_image();
  if(!scaledEdits_.isEmpty())
    scaledEdits_.clear();
 
@@ -1697,9 +1772,12 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 //metodo per la gestione del rilascio di determinati tasti mentre √® attiva la finestra
 void MainWindow::keyReleaseEvent(QKeyEvent *event)
 {
- if(event->key()==Qt::Key_Escape) display_->reset(); //esc
- if(event->key()==Qt::Key_Control) ctrlIsPressed_ = false; //ctrl
- if(event->key()==Qt::Key_Shift) shiftIsPressed_ = false; //shift
+ if(event->key()==Qt::Key_Escape)
+   display_image_data_->reset(); //esc
+ if(event->key()==Qt::Key_Control)
+   ctrlIsPressed_ = false; //ctrl
+ if(event->key()==Qt::Key_Shift)
+   shiftIsPressed_ = false; //shift
 }
 
 //metodo per la gestione del movimento della rotella mentre √® attiva la finestra
