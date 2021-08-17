@@ -139,6 +139,23 @@ public:
 
  void setView(QImage image); //assegna l'immagine su cui l'utente sta lavorando, invocato da MainWindow
 
+ enum class Shape_Kind_Enabled_Classification
+ {
+  N_A, Rectangle, Ellipse, Polygon
+ };
+
+ Shape_Kind_Enabled_Classification current_enabled_shape_kind()
+ {
+  if(drawingSquareEnabled_)
+    return Shape_Kind_Enabled_Classification::Rectangle;
+  if(drawingEllipseEnabled_)
+    return Shape_Kind_Enabled_Classification::Ellipse;
+  if(drawingPolygonEnabled_)
+    return Shape_Kind_Enabled_Classification::Polygon;
+
+  return Shape_Kind_Enabled_Classification::N_A;
+ }
+
  void set_pan_mode()
  {
   pan_mode = true;
@@ -211,7 +228,20 @@ private:
 
  QGraphicsProxyWidget* this_proxy_widget_;
 
+ QGraphicsItem* background_item_;
+
+ QPointF original_position_;
+
 // QGraphics
+
+ enum class Mouse_Event_Modes { N_A, Left_Edit, Left_Move,
+   Left_Init, Right_Edit, Right_Move, Right_Init
+                              };
+
+ template<Mouse_Event_Modes mem>
+ void handle_mouse_event(QMouseEvent* mev);
+
+ void _handle_mouse_event(QMouseEvent* mev, Mouse_Event_Modes mem);
 
 
 public:
@@ -223,10 +253,15 @@ public:
 
  ACCESSORS(DisplayImage_Data* ,data)
  ACCESSORS(QGraphicsProxyWidget* ,this_proxy_widget)
+ ACCESSORS(QPointF ,original_position)
+ ACCESSORS(QGraphicsItem* ,background_item)
+
 
 public:
 
- explicit DisplayImage_Scene_Item(QWidget *parent = 0); //costruttore
+ explicit DisplayImage_Scene_Item(QWidget *parent = 0);
+
+ void reset_background_to_original_position();
 
 
 signals:

@@ -29,19 +29,36 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  zoom_out_button_->setMaximumHeight(15);
 
  zoom_buttons_layout_ = new QHBoxLayout;
+
+ reset_zoom_button_ = new QPushButton("Reset Zoom", this);
+ reset_zoom_button_->setMaximumWidth(85);
+ zoom_buttons_layout_->addWidget(reset_zoom_button_);
+
+
  zoom_buttons_layout_->addStretch();
 
  zoom_buttons_layout_->addWidget(zoom_in_button_);
+
+ zoom_buttons_layout_->addSpacing(10);
+
  zoom_buttons_layout_->addWidget(zoom_out_button_);
 
  zoom_buttons_layout_->addStretch();
 
+
  pan_mode_button_ = new QPushButton("Pan Mode", this);
+ pan_mode_button_->setMaximumWidth(85);
+
  zoom_buttons_layout_->addWidget(pan_mode_button_);
  pan_mode_button_->setCheckable(true);
  pan_mode_button_->setChecked(false);
 
  connect(pan_mode_button_, SIGNAL(clicked(bool)), this, SIGNAL(pan_mode_changed(bool)));
+
+ connect(reset_zoom_button_, SIGNAL(clicked(bool)), this, SLOT(handle_reset_zoom(bool)));
+
+ connect(zoom_in_button_, SIGNAL(clicked(bool)), this, SLOT(handle_zoom_in_discrete(bool)));
+ connect(zoom_out_button_, SIGNAL(clicked(bool)), this, SLOT(handle_zoom_out_discrete(bool)));
 
 
  zoom_slider_ = new ctkRangeSlider(Qt::Horizontal, this);
@@ -85,7 +102,69 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  setLayout(main_layout_);
 
+ setMaximumHeight(190);
+
 }
+
+void Zoom_and_Navigate_Frame::handle_reset_zoom(bool)
+{
+ int v = zoom_slider_->minimumValue();
+ if(v != 25)
+ {
+  zoom_slider_->setMinimumValue(25);
+ }
+}
+
+
+void Zoom_and_Navigate_Frame::handle_zoom_in_discrete(bool)
+{
+ int v = zoom_slider_->minimumValue();
+
+ if(v == 50)
+   return;
+
+ if(v > 43)
+   v = 50;
+
+ else
+ {
+  u1 vmod = v%5;
+  v -= vmod;
+
+  if(vmod < 3)
+    v += 5;
+  else
+    v += 10;
+
+ }
+
+ zoom_slider_->setMinimumValue(v);
+}
+
+void Zoom_and_Navigate_Frame::handle_zoom_out_discrete(bool)
+{
+ int v = zoom_slider_->minimumValue();
+
+ if(v == 1)
+   return;
+
+ if(v < 7)
+   v = 1;
+ else
+ {
+  u1 vmod = v%5;
+
+  if(vmod < 2)
+    v -= 5;
+
+  v -= vmod;
+ }
+
+ zoom_slider_->setMinimumValue(v);
+}
+
+
+
 
 void Zoom_and_Navigate_Frame::recenter_image()
 {

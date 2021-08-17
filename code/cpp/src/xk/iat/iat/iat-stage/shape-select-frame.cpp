@@ -7,6 +7,15 @@
 Shape_Select_Frame::Shape_Select_Frame(QWidget* parent)
   :  QFrame(parent)
 {
+ main_tab_ = new QFrame(this);
+ clear_last_all_tab_ = new QFrame(this);
+
+ main_tab_widget_ = new QTabWidget(this);
+
+ main_tab_widget_->addTab(main_tab_, "Notes");
+ main_tab_widget_->addTab(clear_last_all_tab_, "Editing ...");
+
+
  clear_selected_btn_ = new QPushButton("Clear Selected", this);
  clear_last_btn_ = new QPushButton("Clear Last", this);
  clear_all_btn_ = new QPushButton("Clear All", this);
@@ -14,6 +23,7 @@ Shape_Select_Frame::Shape_Select_Frame(QWidget* parent)
  clear_last_btn_->setEnabled(false);
  clear_all_btn_->setEnabled(false);
 
+ main_tab_layout_ = new QVBoxLayout;
  main_layout_ = new QVBoxLayout;
 
  domain_shape_options_ = new QComboBox(this);
@@ -25,8 +35,8 @@ Shape_Select_Frame::Shape_Select_Frame(QWidget* parent)
  domain_shape_options_->setCurrentText("select ...");
 
  domain_shape_ckb_ = new QCheckBox("Registered Marking", this);
- main_layout_->addWidget(domain_shape_ckb_);
- main_layout_->addWidget(domain_shape_options_);
+  main_tab_layout_->addWidget(domain_shape_ckb_);
+  main_tab_layout_->addWidget(domain_shape_options_);
 
  shape_ckb_group_ = new QButtonGroup(this);
 
@@ -36,7 +46,7 @@ Shape_Select_Frame::Shape_Select_Frame(QWidget* parent)
  connect(domain_shape_options_, &QComboBox::currentTextChanged,
    [this] {update_shape_selection();});
 
- main_layout_->addStretch();
+ main_tab_layout_->addStretch();
 
  generic_shape_options_ = new QComboBox(this);
  generic_shape_options_->addItem("Rectangle");
@@ -49,8 +59,8 @@ Shape_Select_Frame::Shape_Select_Frame(QWidget* parent)
 
 
  generic_shape_ckb_ = new QCheckBox("Generic Shape", this);
- main_layout_->addWidget(generic_shape_ckb_);
- main_layout_->addWidget(generic_shape_options_);
+ main_tab_layout_->addWidget(generic_shape_ckb_);
+ main_tab_layout_->addWidget(generic_shape_options_);
 
  shape_ckb_group_->addButton(generic_shape_ckb_);
 
@@ -75,21 +85,31 @@ Shape_Select_Frame::Shape_Select_Frame(QWidget* parent)
 
  domain_shape_options_->setEnabled(false);
 
+ main_tab_->setLayout(main_tab_layout_);
 
- main_layout_->addStretch();
+ clear_last_all_tab_layout_ = new QVBoxLayout;
 
- main_layout_->addWidget(clear_selected_btn_);
+ //main_layout_->addStretch();
+
+ clear_last_all_tab_layout_->addWidget(clear_selected_btn_);
 
  QHBoxLayout* clear_last_all_layout = new QHBoxLayout;
  clear_last_all_layout->addWidget(clear_last_btn_);
  clear_last_all_layout->addWidget(clear_all_btn_);
 
- main_layout_->addLayout(clear_last_all_layout);
+ clear_last_all_tab_layout_->addLayout(clear_last_all_layout);
 
  highlight_ckb_ = new QCheckBox("Highlight", this);
- main_layout_->addWidget(highlight_ckb_);
+ clear_last_all_tab_layout_->addWidget(highlight_ckb_);
+
+ clear_last_all_tab_->setLayout(clear_last_all_tab_layout_);
+
+ main_layout_->addWidget(main_tab_widget_);
 
  setLayout(main_layout_);
+
+ setMaximumWidth(190);
+ setMaximumHeight(190);
 
 }
 

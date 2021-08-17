@@ -10,18 +10,26 @@
 #include <QCheckBox>
 #include <QButtonGroup>
 
+#include <QTabWidget>
+
 
 class Shape_Select_Frame : public QFrame
 {
  Q_OBJECT
 
+ QFrame* main_tab_;
+ QFrame* clear_last_all_tab_;
+
+ QTabWidget* main_tab_widget_;
 
  QPushButton* clear_selected_btn_;
-
  QPushButton* clear_last_btn_;
  QPushButton* clear_all_btn_;
 
  QVBoxLayout* main_layout_;
+ QVBoxLayout* main_tab_layout_;
+
+ QVBoxLayout* clear_last_all_tab_layout_;
 
  QCheckBox* domain_shape_ckb_;
  QComboBox* domain_shape_options_;

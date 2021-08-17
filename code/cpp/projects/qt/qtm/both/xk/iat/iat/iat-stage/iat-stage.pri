@@ -49,6 +49,8 @@ SOURCES += \
   $$SRC_DIR/shape-select-frame.cpp \
   $$SRC_DIR/zoom-and-navigate-frame.cpp \
   $$SRC_DIR/range-slider.cpp \
+  $$SRC_DIR/displayimage.mouse-events.cpp \
+
 
 
 LIBS += -L$$TARGETSDIR -laxfi

@@ -46,11 +46,21 @@ void DisplayImage::recenter_image()
 
 void DisplayImage::recenter_scroll_center()
 {
+ if(!image_scene_item_)
+   return;
+
+ image_scene_item_->reset_background_to_original_position();
+
  scrolled_image_view_->centerOn(background_rectangle_center_x_, background_rectangle_center_y_);
 }
 
 void DisplayImage::recenter_scroll_top_left()
 {
+ if(!image_scene_item_)
+   return;
+
+ image_scene_item_->reset_background_to_original_position();
+
  qreal width = scrolled_image_view_->viewport()->width();
  qreal height = scrolled_image_view_->viewport()->height();
 
@@ -93,112 +103,50 @@ void DisplayImage::load_image(QString file_path)
 
  image_scene_item_ = new DisplayImage_Scene_Item;// (this);
  image_scene_item_->set_data(display_image_data_);
+
+ image_scene_item_->resize(sipw, siph);
+
  image_scene_item_->setParent(nullptr);
-
-
-// image_scene_item_->update();
-// image_scene_item_->repaint();
-
-
 
  QGraphicsProxyWidget* w =  scrolled_image_scene_->addWidget(image_scene_item_);
  w->setPos(sipw/2,siph/2);
 
- QGraphicsRectItem* background_center_rectangle_ = scrolled_image_scene_->addRect(
-   (sipw/2) - 10, (siph/2) - 10, sipw + 10, siph + 10);
+ QGraphicsRectItem* background_center_rectangle = scrolled_image_scene_->addRect(
+   (sipw/2) - 10, (siph/2) - 10, sipw + 20, siph + 20);
 
- background_center_rectangle_->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
- background_center_rectangle_->setBrush(Qt::darkCyan);
-
- QGraphicsRectItem* foreground_center_rectangle_ = scrolled_image_scene_->addRect(
-   (sipw/2) - 10, (siph/2) - 10, sipw + 10, siph + 10);
-
- foreground_center_rectangle_->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
-
- foreground_center_rectangle_->setVisible(false);
+ image_scene_item_->set_original_position(background_center_rectangle->pos());
 
 
- QBrush qbr;
- qbr.setColor(QColor::fromRgba(qRgba(200, 200, 100, 100)));
- qbr.setStyle(Qt::BrushStyle::SolidPattern);
- foreground_center_rectangle_->setBrush(qbr);
+ background_center_rectangle->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
+ background_center_rectangle->setBrush(Qt::darkCyan);
+
+// QGraphicsRectItem* foreground_center_rectangle_ = scrolled_image_scene_->addRect(
+//   (sipw/2) - 10, (siph/2) - 10, sipw, siph);
+// foreground_center_rectangle_->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
+// foreground_center_rectangle_->setVisible(false);
+// QBrush qbr;
+// qbr.setColor(QColor::fromRgba(qRgba(200, 200, 100, 100)));
+// qbr.setStyle(Qt::BrushStyle::SolidPattern);
+// foreground_center_rectangle_->setBrush(qbr);
 
  //foreground_center_rectangle
 
 
- w->graphicsItem()->setParentItem(background_center_rectangle_);
+ w->graphicsItem()->setParentItem(background_center_rectangle);
 
  image_scene_item_->set_this_proxy_widget(w);
+ image_scene_item_->set_background_item(background_center_rectangle);
+
 
  scrolled_image_pixmap_item_ = w;
 
-//? main_window_->init_display_scene_item(image_scene_item_);
-
-// scrolled_image_pixmap_item_ = scrolled_image_scene_->addWidget()
-
-// scrolled_image_pixmap_item_ = scrolled_image_scene_->addPixmap(*scrolled_image_pixmap_);
-// scrolled_image_pixmap_item_->setPos(sipw/2,siph/2);
-
-
-
-
-//? scrolled_image_pixmap_item_->setFlags(QGraphicsItem::ItemIsMovable);
-
-
-
-// QGraphicsRectItem* background_center_rectangle1_ = scrolled_image_scene_->addRect(100, 100, 100, 100);
-// QGraphicsRectItem* background_center_rectangle2_ = scrolled_image_scene_->addRect(1100, 1100, 200, 200);
-
-// background_center_rectangle1_->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
-// background_center_rectangle2_->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
-
-// scrolled_image_view_->centerOn(background_center_rectangle2_);
-
-
-// scrolled_image_view_->updateGeometry();
-
-
-// QRect viewport_rect(0, 0, scrolled_image_view_->viewport()->width(), scrolled_image_view_->viewport()->height());
-// QRectF visible_scene_rect = scrolled_image_view_->mapToScene(viewport_rect).boundingRect();
-
-// //scrolled_image_view_->setVi
-
-// qDebug() << "viewport_rect = " << viewport_rect;
-// qDebug() << "visible_scene_rect = " << visible_scene_rect;
-
-// scrolled_image_view_->ensureVisible(sipw, siph, 100, 100);
-
-// scrolled_image_view_->scroll(0, 0);
-// scrolled_image_view_->scroll(100, 100);
-
-// scrolled_image_view_->horizontalScrollBar()->setValue( scrolled_image_view_->horizontalScrollBar()->maximum() / 4);
-// scrolled_image_view_->verticalScrollBar()->setValue( scrolled_image_view_->verticalScrollBar()->maximum() / 4);
-
-// scrolled_image_view_->horizontalScrollBar()->setValue(90);
-// scrolled_image_view_->verticalScrollBar()->setValue(90);
-// scrolled_image_view_->horizontalScrollBar()->setSliderPosition(10);
-
-
- //scrolled_image_scene_->scr
-
-// scrolled_image_view_->scrollContentsBy(80, 80);
-
-// scrolled_image_view_->update();
-// update();
-
-// QPointF center = QPointF(400, 400);// scrolled_image_view_->mapToScene(scrolled_image_view_->viewport()->rect().center());
-
-//// scrolled_image_view_->centerOn(center.x(), center.y());
-
-// scrolled_image_view_->scroll(400, 400);
-
-// scrolled_image_scene_->update();
-// scrolled_image_view_->update();
-// scrolled_image_view_->repaint();
-// update(); repaint();
-// qDebug() << "center = " << center;
-
 }
+
+void DisplayImage_Scene_Item::reset_background_to_original_position()
+{
+ background_item_->setPos(original_position_);
+}
+
 
 DisplayImage::DisplayImage(QWidget* parent) : QWidget(parent)
 {
@@ -218,15 +166,14 @@ DisplayImage::DisplayImage(QWidget* parent) : QWidget(parent)
   background_rectangle_ = nullptr;
   scrolled_image_pixmap_item_ = nullptr;
 
-  //?scrolled_image_label_ = new QLabel("Scrolled Image ...", this);
-  //?scrolled_image_label_->setPixmap(*scrolled_image_pixmap_);
+   //?scrolled_image_label_ = new QLabel("Scrolled Image ...", this);
+   //?scrolled_image_label_->setPixmap(*scrolled_image_pixmap_);
 
   scrolled_image_view_->setScene(scrolled_image_scene_);
 
- //? scrolled_image_view_->setTransformationAnchor(QGraphicsView::AnchorViewCenter);
+   //? scrolled_image_view_->setTransformationAnchor(QGraphicsView::AnchorViewCenter);
   scrolled_image_view_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
   scrolled_image_view_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-
 
 
   main_layout_ = new QVBoxLayout;
@@ -666,23 +613,36 @@ void DisplayImage_Scene_Item::paintEvent(QPaintEvent*)
 }
 
 //metodo per la gestione del click da parte dell'utente
-void DisplayImage_Scene_Item::mousePressEvent(QMouseEvent *mouseEvent)
+void DisplayImage_Scene_Item::mousePressEvent(QMouseEvent* mev)
 {
 // return;
 
  if(data_->pan_mode)
  {
-  mouseEvent->ignore();
+  mev->ignore();
   return;
  }
 
+ Mouse_Event_Modes mem = Mouse_Event_Modes::N_A;
 
+ if(mev->button() == Qt::LeftButton) //  !data_->editing_ && !data_->shapeMoving_
+ {
+  if(data_->editing_)
+    mem = Mouse_Event_Modes::Left_Edit;
+  else if(data_->shapeMoving_)
+    mem = Mouse_Event_Modes::Left_Move;
+  else
+    mem = Mouse_Event_Modes::Left_Init;
+ }
 
+ _handle_mouse_event(mev, mem);
+
+#ifdef HIDE
  //qui viene gestito il tasto destro ed il tasto sinistro del mouse
  //con il tasto sinistro si creano le annotazioni
  if(mouseEvent->button() == Qt::LeftButton && !data_->editing_ && !data_->shapeMoving_)
  {
-  //Se nameSelected è falso, allora non si potranno aggiungere nuove shape
+  //Se nameSelected falso, allora non si potranno aggiungere nuove shape
   if(!data_->drawingSquareEnabled_ && !data_->drawingEllipseEnabled_ && !data_->drawingPolygonEnabled_)
     QMessageBox::warning(this,"Warning!","Please select the shape's form");
   else
@@ -839,6 +799,7 @@ void DisplayImage_Scene_Item::mousePressEvent(QMouseEvent *mouseEvent)
    }
   }
  }
+#endif
 }
 
 //metodo per la gestione del rilascio del tasto premuto dall'utente

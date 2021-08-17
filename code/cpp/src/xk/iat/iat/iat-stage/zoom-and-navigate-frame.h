@@ -25,6 +25,8 @@ class Zoom_and_Navigate_Frame : public QFrame
  QPushButton* zoom_out_button_;
 
  QPushButton* pan_mode_button_;
+ QPushButton* reset_zoom_button_;
+
 
  QPushButton* image_top_left_button_;
  QPushButton* center_image_button_;
@@ -62,6 +64,13 @@ public Q_SLOTS:
 
  void handle_zoom_minimum_value_changed(int val);
  void handle_zoom_maximum_value_changed(int val);
+
+ void handle_zoom_in_discrete(bool);
+ void handle_zoom_out_discrete(bool);
+
+ void handle_reset_zoom(bool);
+
+
 
 
 };

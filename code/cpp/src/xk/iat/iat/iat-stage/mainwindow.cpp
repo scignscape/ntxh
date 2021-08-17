@@ -194,11 +194,26 @@ MainWindow::MainWindow(QWidget *parent) :
     display_image_data_->unset_pan_mode();
  });
 
-
  top_layout_ = new QHBoxLayout;
 
+ top_layout_->setContentsMargins(0,0,0,0);
+
+ shape_select_frame_->setContentsMargins(0,0,0,0);
+
  top_layout_->addWidget(shape_select_frame_);
+
+ top_layout_->addStretch(1);
+
+ QSizePolicy spr(QSizePolicy::Preferred, QSizePolicy::Preferred);
+ spr.setHorizontalStretch(30);
+ zoom_frame_->setSizePolicy(spr);
+
+ zoom_frame_->setContentsMargins(0,0,0,0);
+
  top_layout_->addWidget(zoom_frame_);
+
+// top_layout_->addStretch(1);
+
 
  main_layout_ = new QVBoxLayout;
 
