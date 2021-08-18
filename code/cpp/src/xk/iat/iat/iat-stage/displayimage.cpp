@@ -200,6 +200,9 @@ DisplayImage_Scene_Item::DisplayImage_Scene_Item(QWidget *parent) : QWidget(pare
 
 DisplayImage_Data::DisplayImage_Data()
 {
+ current_drawn_shape_ = nullptr;
+
+ multi_draw = true;
 
  pan_mode = false;
 
@@ -803,24 +806,36 @@ void DisplayImage_Scene_Item::mousePressEvent(QMouseEvent* mev)
 }
 
 //metodo per la gestione del rilascio del tasto premuto dall'utente
-void DisplayImage_Scene_Item::mouseReleaseEvent(QMouseEvent *mouseEvent)
+void DisplayImage_Scene_Item::mouseReleaseEvent(QMouseEvent* mev)
 {
 // return;
 
  if(data_->pan_mode)
  {
-  mouseEvent->ignore();
+  mev->ignore();
   return;
  }
 
+ Mouse_Event_Modes mem = Mouse_Event_Modes::N_A;
 
+ if(mev->button() == Qt::LeftButton) //  !data_->editing_ && !data_->shapeMoving_
+ {
+  if(data_->isMoving_)
+  {
+   mem = Mouse_Event_Modes::Left_Move_Release;
+  }
+ }
+
+ _handle_mouse_event(mev, mem);
+
+ return;
 
 
  //questo controllo costinge l'utente a mantenere il tasto destro premuto
  //nel caso di rilascio all'ora l'utente ha terminato la modifica e i valori
  //vengono riportati allo stato precedente conservando eventuali modifiche
  //quindi se l'utente premesse a caso il programma non varierebbe stato
- if(mouseEvent->button() == Qt::RightButton && (data_->editing_ || data_->shapePosition_ != -1))
+ if(mev->button() == Qt::RightButton && (data_->editing_ || data_->shapePosition_ != -1))
  {
   if(data_->editing_)
   {
@@ -832,7 +847,7 @@ void DisplayImage_Scene_Item::mouseReleaseEvent(QMouseEvent *mouseEvent)
   }
   if(data_->shapePosition_ != -1)
   {
-   data_->mEndPoint_ = mouseEvent->pos();
+   data_->mEndPoint_ = mev->pos();
    data_->shapeMoving_ = false; //fine
    onLineDraw(data_->allEdits_); //signal per MainWindow
    data_->mStartPoint_ = QPoint();

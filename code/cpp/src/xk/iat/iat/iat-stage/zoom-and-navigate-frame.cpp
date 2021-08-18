@@ -46,14 +46,12 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  zoom_buttons_layout_->addStretch();
 
 
- pan_mode_button_ = new QPushButton("Pan Mode", this);
- pan_mode_button_->setMaximumWidth(85);
+ save_button_ = new QPushButton("Save", this);
+ save_button_->setMaximumWidth(85);
 
- zoom_buttons_layout_->addWidget(pan_mode_button_);
- pan_mode_button_->setCheckable(true);
- pan_mode_button_->setChecked(false);
+ zoom_buttons_layout_->addWidget(save_button_);
 
- connect(pan_mode_button_, SIGNAL(clicked(bool)), this, SIGNAL(pan_mode_changed(bool)));
+ connect(save_button_, SIGNAL(clicked(bool)), this, SIGNAL(save_requested(bool)));
 
  connect(reset_zoom_button_, SIGNAL(clicked(bool)), this, SLOT(handle_reset_zoom(bool)));
 
@@ -75,9 +73,12 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  main_layout_ = new QVBoxLayout;
  main_layout_->addLayout(zoom_buttons_layout_);
+
+ main_layout_->addStretch(5);
+
  main_layout_->addWidget(zoom_slider_);
 
-
+ main_layout_->addStretch(2);
 
  image_top_left_button_ = new QPushButton("Image Top Left", this);
  image_top_left_button_->setMinimumWidth(110);
@@ -99,6 +100,31 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  connect(center_image_button_, SIGNAL(clicked(bool)),
    this, SIGNAL(center_image_button_clicked(bool)));
+
+ multi_draw_ckb_ = new QCheckBox("Multi-Draw", this);
+ bottom_layout_ = new QHBoxLayout;
+ bottom_layout_->addWidget(multi_draw_ckb_);
+ bottom_layout_->addStretch();
+
+ connect(multi_draw_ckb_, &QCheckBox::stateChanged,
+   [this](int st)
+ {
+  if(st == Qt::Unchecked)
+    Q_EMIT multi_draw_unset();
+  else if(st == Qt::Checked)
+    Q_EMIT multi_draw_set();
+ });
+
+ pan_mode_button_ = new QPushButton("Pan Mode", this);
+ pan_mode_button_->setMaximumWidth(85);
+
+ bottom_layout_->addWidget(pan_mode_button_);
+ pan_mode_button_->setCheckable(true);
+ pan_mode_button_->setChecked(false);
+
+ connect(pan_mode_button_, SIGNAL(clicked(bool)), this, SIGNAL(pan_mode_changed(bool)));
+
+ main_layout_->addLayout(bottom_layout_);
 
  setLayout(main_layout_);
 

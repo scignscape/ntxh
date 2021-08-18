@@ -15,6 +15,7 @@
 
 #include "accessors.h"
 
+#include "display-drawn-shape.h"
 
 class AXFI_Annotation;
 
@@ -93,6 +94,8 @@ class DisplayImage_Data
 
  bool pan_mode;
 
+ bool multi_draw;
+
  bool isMoving_; //se vero, il programma sta catturando la posizione del mouse sull'immagine
  bool isPressed_; //se vero, il programma è entrato nella fase di disegno di una shape
  bool isDoublePressed_; //se vero, il programma riconosce che l'utente ha terminato di disegnare un poligono
@@ -139,21 +142,17 @@ public:
 
  void setView(QImage image); //assegna l'immagine su cui l'utente sta lavorando, invocato da MainWindow
 
- enum class Shape_Kind_Enabled_Classification
- {
-  N_A, Rectangle, Ellipse, Polygon
- };
 
- Shape_Kind_Enabled_Classification current_enabled_shape_kind()
+ Display_Drawn_Shape::Shape_Kind current_enabled_shape_kind()
  {
   if(drawingSquareEnabled_)
-    return Shape_Kind_Enabled_Classification::Rectangle;
+    return Display_Drawn_Shape::Shape_Kind::Rectangle;
   if(drawingEllipseEnabled_)
-    return Shape_Kind_Enabled_Classification::Ellipse;
+    return Display_Drawn_Shape::Shape_Kind::Ellipse;
   if(drawingPolygonEnabled_)
-    return Shape_Kind_Enabled_Classification::Polygon;
+    return Display_Drawn_Shape::Shape_Kind::Polygon;
 
-  return Shape_Kind_Enabled_Classification::N_A;
+  return Display_Drawn_Shape::Shape_Kind::N_A;
  }
 
  void set_pan_mode()
@@ -166,14 +165,48 @@ public:
   pan_mode = false;
  }
 
+ void set_multi_draw()
+ {
+  multi_draw = true;
+ }
+
+ void unset_multi_draw()
+ {
+  multi_draw = false;
+ }
 
 
 private:
 
  QList<shape> allEdits_; //lista di tutte le shape che si stanno disegnando sull'immagine
 
+ Display_Drawn_Shape* current_drawn_shape_;
+
+ QStack<Display_Drawn_Shape*> held_drawn_shapes_;
 
 public:
+
+ ACCESSORS(Display_Drawn_Shape* ,current_drawn_shape)
+
+ Display_Drawn_Shape* check_current_drawn_shape()
+ {
+  if(!current_drawn_shape_)
+    current_drawn_shape_ = new Display_Drawn_Shape(current_enabled_shape_kind());
+  return current_drawn_shape_;
+ }
+
+ void check_hold_drawn_shape()
+ {
+  if(current_drawn_shape_)
+    held_drawn_shapes_.push(current_drawn_shape_);
+  current_drawn_shape_ = nullptr;
+ }
+
+ void check_reset_drawn_shape()
+ {
+  if(current_drawn_shape_)
+    current_drawn_shape_->reset();
+ }
 
  void defaultColorsThickness(); //metodo privato che assegna i valori di default da "radius" a "shapeBlu"
 
@@ -235,8 +268,8 @@ private:
 // QGraphics
 
  enum class Mouse_Event_Modes { N_A, Left_Edit, Left_Move,
-   Left_Init, Right_Edit, Right_Move, Right_Init
-                              };
+   Left_Init, Right_Edit, Right_Move, Right_Init,
+   Left_Move_Release, Left_Edit_Release };
 
  template<Mouse_Event_Modes mem>
  void handle_mouse_event(QMouseEvent* mev);

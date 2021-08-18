@@ -28,40 +28,89 @@ template<>
 void DisplayImage_Scene_Item::handle_mouse_event<
   DisplayImage_Scene_Item::Mouse_Event_Modes::Left_Init>(QMouseEvent* mev)
 {
- if(!data_->drawingSquareEnabled_ && !data_->drawingEllipseEnabled_ && !data_->drawingPolygonEnabled_)
-   QMessageBox::warning(this,"Warning!","Please select the shape's form");
+ if(data_->multi_draw)
+ {
+  data_->check_hold_drawn_shape();
+ }
  else
  {
-  if(!data_->nameSelected_)
-   data_->nameSelected_ = true;
-  if(!data_->nameSelected_)
-   QMessageBox::warning(this,"Warning!","Please select an instance name");
-  else
+  data_->check_reset_drawn_shape();
+ }
+
+//?
+// if(!data_->drawingSquareEnabled_ && !data_->drawingEllipseEnabled_ && !data_->drawingPolygonEnabled_)
+//   QMessageBox::warning(this,"Warning!","Please select the shape's form");
+// else
+// {
+//  if(!data_->nameSelected_)
+//   data_->nameSelected_ = true;
+//  if(!data_->nameSelected_)
+//   QMessageBox::warning(this,"Warning!","Please select an instance name");
+//  else
+//  {
+//   data_->shapeID_.clear();
+//   //qui verranno gestite le condizione di inizio e di fine durante la creazione delle annotazioni
+
+ Display_Drawn_Shape::Shape_Kind sk = data_->current_enabled_shape_kind();
+
+ switch(sk)
+ {
+ default: break;
+ case Display_Drawn_Shape::Shape_Kind::Rectangle:
   {
-   data_->shapeID_.clear();
-   //qui verranno gestite le condizione di inizio e di fine durante la creazione delle annotazioni
-
-   DisplayImage_Data::Shape_Kind_Enabled_Classification sk = data_->current_enabled_shape_kind();
-
-   switch(sk)
-   {
-   case DisplayImage_Data::Shape_Kind_Enabled_Classification::Rectangle:
-    {
-     if(data_->mStartPoint_.isNull())
-     { //primo click
-      data_->mStartPoint_ = mev->pos();
-      data_->mEndPoint_ = mev->pos();
-      data_->isMoving_ = true; //inizio
-      update();
-     }
-    }
+   if(data_->mStartPoint_.isNull())
+   { //primo click
+    data_->mStartPoint_ = mev->pos();
+    data_->mEndPoint_ = mev->pos();
+    data_->isMoving_ = true; //inizio
+    update();
    }
-
   }
  }
 }
 
+template<>
+void DisplayImage_Scene_Item::handle_mouse_event<
+  DisplayImage_Scene_Item::Mouse_Event_Modes::Left_Move_Release>(QMouseEvent* mev)
+{
+ Display_Drawn_Shape::Shape_Kind sk = data_->current_enabled_shape_kind();
 
+ Display_Drawn_Shape* dds = data_->check_current_drawn_shape(); //current_drawn_shape_
+
+ //data_->current_drawn_shape();
+
+ switch(sk)
+ {
+ default: break;
+ case Display_Drawn_Shape::Shape_Kind::Rectangle:
+  {
+   dds->points() << data_->mStartPoint_ << mev->pos();
+   data_->isMoving_ = false;
+//  {
+//   data_->points_.clear();
+//   data_->points_ << data_->mStartPoint_ << QPoint(data_->mEndPoint_.rx(), data_->mStartPoint_.ry())
+//         << data_->mEndPoint_ << QPoint(data_->mStartPoint_.rx(), data_->mEndPoint_.ry());
+//   data_->isMoving_ = false; //fine
+//   DisplayImage_Data::shape another;
+//   another.form=square;
+//   another.shapePoints = data_->points_;
+//   data_->allEdits_ << another; //aggiunta della shape
+//   onLineDraw(data_->allEdits_); //signal per MainWindow
+//   data_->mStartPoint_ = QPoint();
+//   data_->mEndPoint_ = QPoint();
+//   data_->points_.clear();
+//   update();
+//  }
+  }
+ }
+}
+
+template<>
+void DisplayImage_Scene_Item::handle_mouse_event<
+  DisplayImage_Scene_Item::Mouse_Event_Modes::Left_Edit_Release>(QMouseEvent* mev)
+{
+
+}
 
 template<>
 void DisplayImage_Scene_Item::handle_mouse_event<
@@ -94,6 +143,7 @@ void DisplayImage_Scene_Item::_handle_mouse_event(QMouseEvent* mev, Mouse_Event_
 #define TEMP_MACRO(x) case Mouse_Event_Modes::x: handle_mouse_event<Mouse_Event_Modes::x>(mev); return;
   TEMP_MACRO(Left_Edit)TEMP_MACRO(Left_Move)TEMP_MACRO(Left_Init)
   TEMP_MACRO(Right_Edit)TEMP_MACRO(Right_Move)TEMP_MACRO(Right_Init)
+  TEMP_MACRO(Left_Move_Release)TEMP_MACRO(Left_Edit_Release)
    default:break;
  }
 }

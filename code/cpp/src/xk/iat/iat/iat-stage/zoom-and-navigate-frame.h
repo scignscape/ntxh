@@ -24,12 +24,16 @@ class Zoom_and_Navigate_Frame : public QFrame
  QPushButton* zoom_in_button_;
  QPushButton* zoom_out_button_;
 
- QPushButton* pan_mode_button_;
  QPushButton* reset_zoom_button_;
+ QPushButton* save_button_;
 
 
  QPushButton* image_top_left_button_;
  QPushButton* center_image_button_;
+
+ QPushButton* pan_mode_button_;
+ QCheckBox* multi_draw_ckb_;
+ QHBoxLayout* bottom_layout_;
 
  ctkRangeSlider* zoom_slider_;
 
@@ -58,7 +62,11 @@ Q_SIGNALS:
  void center_image_button_clicked(bool);
  void image_top_left_button_clicked(bool);
 
+ void save_requested(bool);
  void pan_mode_changed(bool);
+
+ void multi_draw_unset();
+ void multi_draw_set();
 
 public Q_SLOTS:
 

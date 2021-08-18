@@ -37,6 +37,7 @@ HEADERS += \
   $$SRC_DIR/shape-select-frame.h \
   $$SRC_DIR/zoom-and-navigate-frame.h \
   $$SRC_DIR/range-slider.h \
+  $$SRC_DIR/display-drawn-shape.h \
 
 
 SOURCES += \
@@ -50,7 +51,7 @@ SOURCES += \
   $$SRC_DIR/zoom-and-navigate-frame.cpp \
   $$SRC_DIR/range-slider.cpp \
   $$SRC_DIR/displayimage.mouse-events.cpp \
-
+  $$SRC_DIR/display-drawn-shape.cpp \
 
 
 LIBS += -L$$TARGETSDIR -laxfi

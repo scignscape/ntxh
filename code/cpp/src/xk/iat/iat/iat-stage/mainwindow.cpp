@@ -194,6 +194,16 @@ MainWindow::MainWindow(QWidget *parent) :
     display_image_data_->unset_pan_mode();
  });
 
+ connect(zoom_frame_, &Zoom_and_Navigate_Frame::multi_draw_set, [this]()
+ {
+  display_image_data_->set_multi_draw();
+ });
+
+ connect(zoom_frame_, &Zoom_and_Navigate_Frame::multi_draw_unset, [this]()
+ {
+  display_image_data_->unset_multi_draw();
+ });
+
  top_layout_ = new QHBoxLayout;
 
  top_layout_->setContentsMargins(0,0,0,0);
