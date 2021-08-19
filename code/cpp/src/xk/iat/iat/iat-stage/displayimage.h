@@ -97,20 +97,20 @@ class DisplayImage_Data
  bool multi_draw;
 
  bool isMoving_; //se vero, il programma sta catturando la posizione del mouse sull'immagine
- bool isPressed_; //se vero, il programma è entrato nella fase di disegno di una shape
+ bool isPressed_; //se vero, il programma  entrato nella fase di disegno di una shape
  bool isDoublePressed_; //se vero, il programma riconosce che l'utente ha terminato di disegnare un poligono
  bool shapeMoving_; //se vero, il programma riconosce che l'utente sta spostando una shape
  bool checked_; //se vero, l'utente ha attivo la funzione highlight
  bool editing_; //se vero, il programma riconosce che l'utente sta modificando le coordinate di un punto di una shape
  bool nameSelected_; //se vero, l'utente ha selezionato un valore nella colonna Object ed un valore nella colonna Instance
- bool drawingSquareEnabled_; //se vero, la prossima shape sarà quadrata/rettangolare
- bool drawingEllipseEnabled_; //se vero, la prossima shape sarà circolare
- bool drawingPolygonEnabled_; //se vero, la prossima shape sarà un poligono
+ bool drawingSquareEnabled_; //se vero, la prossima shape sar quadrata/rettangolare
+ bool drawingEllipseEnabled_; //se vero, la prossima shape sar circolare
+ bool drawingPolygonEnabled_; //se vero, la prossima shape sar un poligono
 
  int pointPosition_; //indica la posizione nel vettore del punto di quella shape che l'utente sta modificando
  int shapePosition_; //indica la posizione nel vettore della shape che l'utente sta modificando/spostando
- int radius_; //dimensione dei quadrati corrispondenti ai punti da cui, insieme alle linee, è formata la shape
- int thickness_; //spessore delle linee da cui, insieme ai punti, è formata la shape
+ int radius_; //dimensione dei quadrati corrispondenti ai punti da cui, insieme alle linee,  formata la shape
+ int thickness_; //spessore delle linee da cui, insieme ai punti,  formata la shape
  int myRed_; //valore del colore rosso delle shape non selezionate
  int myGreen_; //valore del colore verde delle shape non selezionate
  int myBlue_; //valore del colore blu delle shape non selezionate
@@ -120,6 +120,7 @@ class DisplayImage_Data
  int shapeRed_; //valore del colore rosso della shape selezionata
  int shapeGreen_; //valore del colore verde della shape selezionata
  int shapeBlue_; //valore del colore blu della shape selezionata
+
  QImage m_background_; //copia dell'immagine su cui si faranno le annotazioni
  QPoint mStartPoint_; //coordinate iniziali del punto per il disegno di una shape e per modifica/spostamento
  QPoint mEndPoint_; //coordinate finali del punto per il disegno di una shape e per modifica/spostamento
@@ -127,7 +128,10 @@ class DisplayImage_Data
  QList<QPoint> points_; //variabile dove verranno salvati i punti della shape che l'utente sta disegnando in quel momento
  QString shapeID_; //l'id della shape che l'utente ha selezionato in quel momento
 
+ QVector<QPair<QPoint, QPoint>> point_pairs_;
+
 public:
+
  struct shape
  {
   //cosa caratterizza una shape
@@ -142,17 +146,16 @@ public:
 
  void setView(QImage image); //assegna l'immagine su cui l'utente sta lavorando, invocato da MainWindow
 
-
- Display_Drawn_Shape::Shape_Kind current_enabled_shape_kind()
+ Display_Drawn_Shape::Shape_Kinds current_enabled_shape_kind()
  {
   if(drawingSquareEnabled_)
-    return Display_Drawn_Shape::Shape_Kind::Rectangle;
+    return Display_Drawn_Shape::Shape_Kinds::Rectangle;
   if(drawingEllipseEnabled_)
-    return Display_Drawn_Shape::Shape_Kind::Ellipse;
+    return Display_Drawn_Shape::Shape_Kinds::Ellipse;
   if(drawingPolygonEnabled_)
-    return Display_Drawn_Shape::Shape_Kind::Polygon;
+    return Display_Drawn_Shape::Shape_Kinds::Polygon;
 
-  return Display_Drawn_Shape::Shape_Kind::N_A;
+  return Display_Drawn_Shape::Shape_Kinds::N_A;
  }
 
  void set_pan_mode()
@@ -184,15 +187,48 @@ private:
 
  QStack<Display_Drawn_Shape*> held_drawn_shapes_;
 
+ QList<Display_Drawn_Shape*> last_canceled_drawn_shapes_;
+
 public:
 
  ACCESSORS(Display_Drawn_Shape* ,current_drawn_shape)
 
- Display_Drawn_Shape* check_current_drawn_shape()
+ ACCESSORS__RGET(QStack<Display_Drawn_Shape*> ,held_drawn_shapes)
+ ACCESSORS__RGET(QList<Display_Drawn_Shape*> ,last_canceled_drawn_shapes)
+
+ Display_Drawn_Shape* get_current_drawn_shape();
+
+ void reset_drawn_shapes();
+
+ void complete_polygon();
+
+ void check_clear_last_canceled_drawn_shapes()
+ {
+  while(!last_canceled_drawn_shapes_.isEmpty())
+  {
+   Display_Drawn_Shape* dds = last_canceled_drawn_shapes_.takeLast();
+   delete dds;
+  }
+ }
+
+ Display_Drawn_Shape* check_current_drawn_shape(Display_Drawn_Shape::Shape_Kinds sk)
  {
   if(!current_drawn_shape_)
-    current_drawn_shape_ = new Display_Drawn_Shape(current_enabled_shape_kind());
+    current_drawn_shape_ = new Display_Drawn_Shape(sk);
+  else
+    current_drawn_shape_->set_shape_kind(sk);
   return current_drawn_shape_;
+ }
+
+ Display_Drawn_Shape* check_current_drawn_shape()
+ {
+  return check_current_drawn_shape(current_enabled_shape_kind());
+ }
+
+ void cancel_current_drawn_shape()
+ {
+  last_canceled_drawn_shapes_.push_back(current_drawn_shape_);
+  current_drawn_shape_ = nullptr;
  }
 
  void check_hold_drawn_shape()
@@ -202,21 +238,27 @@ public:
   current_drawn_shape_ = nullptr;
  }
 
- void check_reset_drawn_shape()
+ Display_Drawn_Shape* check_reset_drawn_shape()
  {
   if(current_drawn_shape_)
-    current_drawn_shape_->reset();
+  {
+   current_drawn_shape_->reset_all();
+   return current_drawn_shape_;
+  }
+  return nullptr;
  }
+
+
 
  void defaultColorsThickness(); //metodo privato che assegna i valori di default da "radius" a "shapeBlu"
 
  //metodo per assegnare i valori da "radius" a "shapeBlu" indicati dall'utente, invocato da MainWondow
  void setColorsThickness(int in_radius, int in_thickness, int in_myRed, int in_myGreen, int in_MyBlue, int in_sqRed, int in_sqGreen, int in_sqBlue, int in_shapeRed, int in_shapeGreen, int in_shapeBlue);
- void enableSquareDraw(); //modifica il valore di verità di drawingSquareEnabled, invocato da MainWindow
- void enableEllipseDraw(); //modifica il valore di verità di drawingEllipseEnabled, invocato da MainWindow
- void enablePolygonDraw(); //modifica il valore di verità di drawingPolygonEnabled, invocato da MainWindow
- void enableHighlight(bool enable); //modifica il valore di verità di checked, invocato da MainWindow
- void setNameSelected(bool enable); //modifica il valore di verità di nameSelected, invocato da MainWindow
+ void enableSquareDraw(); //modifica il valore di verit di drawingSquareEnabled, invocato da MainWindow
+ void enableEllipseDraw(); //modifica il valore di verit di drawingEllipseEnabled, invocato da MainWindow
+ void enablePolygonDraw(); //modifica il valore di verit di drawingPolygonEnabled, invocato da MainWindow
+ void enableHighlight(bool enable); //modifica il valore di verit di checked, invocato da MainWindow
+ void setNameSelected(bool enable); //modifica il valore di verit di nameSelected, invocato da MainWindow
  void setShapeSelected(QString in_shapeID); //assegna l'id della shape selezionata dall'utente, invocato da MainWindow
  void setEdits(QList<shape> inputEdits); //assegna l'elenco delle shape disegnate sull'immagine, invocato da MainWindow
  void resizeEdits(int resize); //esegue il resize delle shape in base al resize applicato in quel momento sull'immagine, invocato da MainWindow
@@ -265,17 +307,30 @@ private:
 
  QPointF original_position_;
 
+ QVector<QPair<AXFI_Annotation*, r8>> saved_axfi_annotations_;
+
 // QGraphics
 
  enum class Mouse_Event_Modes { N_A, Left_Edit, Left_Move,
    Left_Init, Right_Edit, Right_Move, Right_Init,
-   Left_Move_Release, Left_Edit_Release };
+   Left_Move_Release, Left_Edit_Release,
+   Right_Click_Iso   };
 
  template<Mouse_Event_Modes mem>
  void handle_mouse_event(QMouseEvent* mev);
 
  void _handle_mouse_event(QMouseEvent* mev, Mouse_Event_Modes mem);
 
+ void paintEvent_draw_point_pairs(QVector<QPair<QPoint, QPoint>>& pairs, QPainter& painter,
+   QPen& pen, QPen& shape_pen);
+
+ void paintEvent_draw_drawn_shape(Display_Drawn_Shape* dds, QPainter& painter,
+   QPen& pen, QPen& shape_pen);
+
+ void paintEvent_draw_annotation(AXFI_Annotation& axa, QPainter& painter,
+   QPen& pen, QPen& shape_pen, r8 resize_factor);
+
+ void paintEvent_draw_vertex_handles(const QVector<const QPoint*>& points, QPainter& painter);
 
 public:
 
@@ -296,10 +351,22 @@ public:
 
  void reset_background_to_original_position();
 
+ void add_axfi_annotation(AXFI_Annotation* axa, r8 resize_factor)
+ {
+  saved_axfi_annotations_.push_back({axa, resize_factor});
+ }
 
-signals:
+
+Q_SIGNALS:
+
  void onLineDraw(QList<DisplayImage_Data::shape>); //signals per la classe MainWindow. Spedisce la lista di tutte le annotazioni sull'immagine
  void setTuple(QString); //signals per la classe MainWindow. Speidisce l'id della shape selezionata dall'utente in caso di modifica/spostamento o aggiunta
+
+ void save_notation_requested();
+ void polygon_complete_and_save_notation_requested();
+ void polygon_save_notation_requested();
+ void complete_polygon_requested();
+
 
 protected:
  void paintEvent(QPaintEvent *); //metodo per la stampa su schermo di tutte le annotazioni e le varie operazioni effettuate dall'utente

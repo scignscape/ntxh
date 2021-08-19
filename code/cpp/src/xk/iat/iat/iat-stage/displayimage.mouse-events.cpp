@@ -2,10 +2,9 @@
 #include "displayimage.h"
 
 #include <QMessageBox>
-
 #include <QScrollBar>
-
 #include <QGraphicsProxyWidget>
+#include <QMenu>
 
 #include "mainwindow.h"
 
@@ -35,6 +34,8 @@ void DisplayImage_Scene_Item::handle_mouse_event<
  else
  {
   data_->check_reset_drawn_shape();
+//  if(data_->check_reset_drawn_shape())
+//    update();
  }
 
 //?
@@ -51,21 +52,29 @@ void DisplayImage_Scene_Item::handle_mouse_event<
 //   data_->shapeID_.clear();
 //   //qui verranno gestite le condizione di inizio e di fine durante la creazione delle annotazioni
 
- Display_Drawn_Shape::Shape_Kind sk = data_->current_enabled_shape_kind();
+ Display_Drawn_Shape::Shape_Kinds sk = data_->current_enabled_shape_kind();
 
  switch(sk)
  {
  default: break;
- case Display_Drawn_Shape::Shape_Kind::Rectangle:
+ case Display_Drawn_Shape::Shape_Kinds::Ellipse:
+ case Display_Drawn_Shape::Shape_Kinds::Rectangle:
   {
-   if(data_->mStartPoint_.isNull())
-   { //primo click
-    data_->mStartPoint_ = mev->pos();
-    data_->mEndPoint_ = mev->pos();
-    data_->isMoving_ = true; //inizio
-    update();
-   }
+     // //  don't need to test for this here ...
+     //if(data_->mStartPoint_.isNull())
+   data_->mStartPoint_ = mev->pos();
+   data_->mEndPoint_ = mev->pos();
+   data_->isMoving_ = true;
+   update();
   }
+  break;
+ case Display_Drawn_Shape::Shape_Kinds::Polygon:
+  {
+   data_->point_pairs_.push_back({mev->pos(), mev->pos()});
+   data_->isMoving_ = true;
+   update();
+  }
+  break;
  }
 }
 
@@ -73,16 +82,25 @@ template<>
 void DisplayImage_Scene_Item::handle_mouse_event<
   DisplayImage_Scene_Item::Mouse_Event_Modes::Left_Move_Release>(QMouseEvent* mev)
 {
- Display_Drawn_Shape::Shape_Kind sk = data_->current_enabled_shape_kind();
+ Display_Drawn_Shape::Shape_Kinds sk = data_->current_enabled_shape_kind();
 
- Display_Drawn_Shape* dds = data_->check_current_drawn_shape(); //current_drawn_shape_
+ Display_Drawn_Shape* dds = data_->check_current_drawn_shape(); //get_current_drawn_shape_
 
- //data_->current_drawn_shape();
+ //data_->get_current_drawn_shape();
 
  switch(sk)
  {
  default: break;
- case Display_Drawn_Shape::Shape_Kind::Rectangle:
+
+ case Display_Drawn_Shape::Shape_Kinds::Polygon:
+  {
+   data_->point_pairs_.last().second = mev->pos();
+   data_->isMoving_ = false;
+  }
+  break;
+
+ case Display_Drawn_Shape::Shape_Kinds::Ellipse:
+ case Display_Drawn_Shape::Shape_Kinds::Rectangle:
   {
    dds->points() << data_->mStartPoint_ << mev->pos();
    data_->isMoving_ = false;
@@ -102,6 +120,13 @@ void DisplayImage_Scene_Item::handle_mouse_event<
 //   update();
 //  }
   }
+
+// case Display_Drawn_Shape::Shape_Kinds::Ellipse:
+//  {
+//   dds->points() << data_->mStartPoint_ << mev->pos();
+//   data_->isMoving_ = false;
+//  }
+
  }
 }
 
@@ -135,6 +160,73 @@ void DisplayImage_Scene_Item::handle_mouse_event<
 
 
 
+template<>
+void DisplayImage_Scene_Item::handle_mouse_event<
+  DisplayImage_Scene_Item::Mouse_Event_Modes::Right_Click_Iso>(QMouseEvent* mev)
+{
+ QMenu* menu = new QMenu(this);
+
+ if(!data_->point_pairs_.isEmpty())
+ {
+  menu->addAction("Complete Polygon", [this]
+  {
+   Q_EMIT complete_polygon_requested();
+  });
+
+  menu->addAction("Save Notation", [this]
+  {
+   Q_EMIT polygon_save_notation_requested();
+  });
+
+  menu->addAction("Complete and Save", [this]
+  {
+   Q_EMIT polygon_complete_and_save_notation_requested();
+  });
+
+  menu->addAction("Save Notation with Comment", [this]
+  {
+  });
+
+  menu->addAction("Complete and Save with Comment", [this]
+  {
+  });
+
+  menu->addAction("Cancel Notation", [this]
+  {
+   data_->check_clear_last_canceled_drawn_shapes();
+   data_->cancel_current_drawn_shape();
+  });
+
+ }
+
+ if(data_->get_current_drawn_shape())
+ {
+  menu->addAction("Save Notation", [this]
+  {
+//   qDebug() << "this = " << this;
+//   this->handle_save_notation_requested();
+   Q_EMIT save_notation_requested();
+//   Q_EMIT onLineDraw({});
+  });
+
+  menu->addAction("Save Notation with Comment", [this]
+  {
+  });
+
+
+  menu->addAction("Cancel Notation", [this]
+  {
+   data_->check_clear_last_canceled_drawn_shapes();
+   data_->cancel_current_drawn_shape();
+  });
+
+ }
+
+ menu->popup(mapToGlobal(mev->pos()));
+
+}
+
+
 
 void DisplayImage_Scene_Item::_handle_mouse_event(QMouseEvent* mev, Mouse_Event_Modes mem)
 {
@@ -144,6 +236,7 @@ void DisplayImage_Scene_Item::_handle_mouse_event(QMouseEvent* mev, Mouse_Event_
   TEMP_MACRO(Left_Edit)TEMP_MACRO(Left_Move)TEMP_MACRO(Left_Init)
   TEMP_MACRO(Right_Edit)TEMP_MACRO(Right_Move)TEMP_MACRO(Right_Init)
   TEMP_MACRO(Left_Move_Release)TEMP_MACRO(Left_Edit_Release)
+  TEMP_MACRO(Right_Click_Iso)
    default:break;
  }
 }

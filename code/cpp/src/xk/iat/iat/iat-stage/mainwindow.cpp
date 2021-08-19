@@ -49,25 +49,28 @@ public:
 
 
 QString Special_Input_Dialog::get_text(int* autogen_index, QWidget *parent, const QString &title, const QString &label,
-                              QLineEdit::EchoMode mode, const QString &text, bool *ok,
-                              Qt::WindowFlags flags, Qt::InputMethodHints inputMethodHints)
+                                       QLineEdit::EchoMode mode, const QString &text, bool *ok,
+                                       Qt::WindowFlags flags, Qt::InputMethodHints inputMethodHints)
 {
-//?    QAutoPointer<QInputDialog> dialog(new QInputDialog(parent, flags));
+ //?    QAutoPointer<QInputDialog> dialog(new QInputDialog(parent, flags));
  Special_Input_Dialog* dialog = new Special_Input_Dialog(autogen_index, parent); //, flags);
-    dialog->setWindowTitle(title);
-    dialog->setLabelText(label);
-    dialog->setTextValue(text);
-    dialog->setTextEchoMode(mode);
-    dialog->setInputMethodHints(inputMethodHints);
+ dialog->setWindowTitle(title);
+ dialog->setLabelText(label);
+ dialog->setTextValue(text);
+ dialog->setTextEchoMode(mode);
+ dialog->setInputMethodHints(inputMethodHints);
 
-    const int ret = dialog->exec();
-    if (ok)
-        *ok = !!ret;
-    if (ret) {
-        return dialog->textValue();
-    } else {
-        return QString();
-    }
+ const int ret = dialog->exec();
+ if (ok)
+  *ok = !!ret;
+ if (ret)
+ {
+  return dialog->textValue();
+ }
+ else
+ {
+  return QString();
+ }
 }
 
 Special_Input_Dialog::Special_Input_Dialog(int* autogen_index, QWidget* parent)
@@ -91,7 +94,7 @@ Special_Input_Dialog::Special_Input_Dialog(int* autogen_index, QWidget* parent)
 }
 
 
-//Questa classe √® quella principale
+//Questa classe  quella principale
 //Da qui gestisce tutte le altre classi e tutti i dati in loro contenuti
 //Gestisce in particolar modo la gui e tutte le operazione ad essa commesse
 
@@ -110,11 +113,24 @@ void MainWindow::init_display_scene_item(DisplayImage_Scene_Item* si)
 {
  display_scene_item_ = si;
 
- display_scene_item_->setGeometry(0,0,0,0);
- display_scene_item_->setObjectName(QString::fromUtf8("ImageDisplayWidget"));
+//?
+// display_scene_item_->setGeometry(0,0,0,0);
+// display_scene_item_->setObjectName(QString::fromUtf8("ImageDisplayWidget"));
 
- connect(display_scene_item_,SIGNAL(onLineDraw(QList<DisplayImage::shape>)),this,SLOT(onDrawLine(QList<DisplayImage::shape>)));
- connect(display_scene_item_,SIGNAL(setTuple(QString)),this,SLOT(getTuple(QString)));
+
+ connect(display_scene_item_,SIGNAL(save_notation_requested()), this, SLOT(handle_save_notation_requested()));
+ connect(display_scene_item_,SIGNAL(polygon_save_notation_requested()), this, SLOT(handle_polygon_save_notation_requested()));
+ connect(display_scene_item_,SIGNAL(polygon_complete_and_save_notation_requested()), this,
+   SLOT(handle_polygon_complete_and_save_notation_requested()));
+
+ connect(display_scene_item_, SIGNAL(complete_polygon_requested()), this,
+   SLOT(handle_complete_polygon_requested()));
+
+
+// qDebug() << "display_scene_item_ = " << display_scene_item_;
+
+//? connect(display_scene_item_,SIGNAL(onLineDraw(QList<DisplayImage::shape>)),this,SLOT(onDrawLine(QList<DisplayImage::shape>)));
+//? connect(display_scene_item_,SIGNAL(setTuple(QString)),this,SLOT(getTuple(QString)));
 
 
 }
@@ -128,6 +144,8 @@ MainWindow::MainWindow(QWidget *parent) :
  file_menu_ = menuBar()->addMenu("File"); // new QMenu(menubar_);
  help_menu_ = menuBar()->addMenu("Help"); // new QMenu(menubar_);
  tools_menu_ = menuBar()->addMenu("Tools"); // new QMenu(menubar_);
+
+ resize_factor_ = 25;  // based on slider ...
 
    //?menuFile->setObjectName(QString::fromUtf8("menuFile"));
 //? help_menu_ = new QMenu(menubar_);
@@ -287,7 +305,7 @@ MainWindow::~MainWindow()
  //??  delete ui; //distruge in particola modo l'interfaccia
 }
 
-//metodo che setter√  l'interfaccia grafica all'avvio
+//metodo che setter  l'interfaccia grafica all'avvio
 void MainWindow::set_initial_gui()
 {
  //qui viene disattivata tutta la gui e viene ben definita l-istanza display
@@ -398,8 +416,9 @@ void MainWindow::on_actionAnnotate_Single_Image_triggered()
  QMessageBox::StandardButton reply = QMessageBox::No;
 
  if(false) //?  ui->Save->isEnabled())
- { //il tasto save √® il pi√π adatto falg di controllo
-  reply = QMessageBox::question(this,"Question","Do you want to save before annotate a new image?",QMessageBox::Cancel|QMessageBox::Yes|QMessageBox::No);
+ { //il tasto save  il pi adatto falg di controllo
+  reply = QMessageBox::question(this, "Question",
+    "Do you want to save before annotate a new image?",QMessageBox::Cancel|QMessageBox::Yes|QMessageBox::No);
  }
 
  if(reply != QMessageBox::Cancel)
@@ -421,11 +440,11 @@ void MainWindow::on_actionAnnotate_Single_Image_triggered()
   display_image_data_->setNameSelected(true);
 
   if(!image_filename_path_.isNull())
-  { //se √® stata scelta l-immagine
+  { //se  stata scelta l-immagine
    if(!project_filename_path_.isEmpty() && imageSequence_.indexOf(image_filename_path_) != -1)
    {
-    //questo codice viene attivato solo se si st√  lavorando in un progetto e per questo project_filename_path √® il miglior flag
-    //qui dentro si entra se l-utente st√  caricando un-immagine gi√  annotata durante il progetto
+    //questo codice viene attivato solo se si st  lavorando in un progetto e per questo project_filename_path  il miglior flag
+    //qui dentro si entra se l-utente st  caricando un-immagine gi  annotata durante il progetto
     //quindi per avere tutte le annotazioni precedenti si esce dal contesto e si passa a caricare
     //il file di annotazione tramite load_annotation
     txt_filename_path_ = pwizard_.projectpath + "/" + pwizard_.projectName+"/";
@@ -440,7 +459,7 @@ void MainWindow::on_actionAnnotate_Single_Image_triggered()
    }
    else
    {
-    load_image(); //viene invocato load_image che passer√  a processare l-immagine scelta
+    load_image(); //viene invocato load_image che passer  a processare l-immagine scelta
     //viene chiesto se si vuole caricare una nuova lista in caso affermativo viene invocasto load_List
 
 //    QMessageBox::StandardButton reply = QMessageBox::Yes;
@@ -484,7 +503,7 @@ void MainWindow::on_actionAnnotate_Multiple_Image_triggered()
   makeBackUp(); //viene eseguito un backup
   if(pwizard_.exec() > 0)
   {
-   //viene eseguito il wizard che chieder√  di dare un nome al progetto
+   //viene eseguito il wizard che chieder  di dare un nome al progetto
    //e di specificare dove si vuole creare la cartella con quel nome
    QDir dir(pwizard_.projectpath);
    dir.mkdir(pwizard_.projectName);
@@ -565,15 +584,18 @@ void MainWindow::load_image()
 // display_->update();
 // display_->repaint();
 
+ init_display_scene_item(display_image_->image_scene_item());
 
  QTimer::singleShot(0, [this]
  {
   display_image_->recenter_scroll_top_left();
  });
 
+//? init_display_scene_item(display_image_->image_scene_item());
+
  //?? ui->ResizeSlider->setValue(default_resize);
 
-//? resizeMethod(default_resize); //questo √® il metodo che processa l-immagne
+//? resizeMethod(default_resize); //questo  il metodo che processa l-immagne
 }
 
 //metodo che processa la lista scelta dall'utente e la carica
@@ -581,7 +603,7 @@ void MainWindow::load_list()
 {
  QFile file(list_filename_path_);
  if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) return;
- //una volta che la lista √® stata caricata si procede alla lettura ed a popolare le mappe
+ //una volta che la lista  stata caricata si procede alla lettura ed a popolare le mappe
  QStringList objectList;
  while(!file.atEnd())
  {
@@ -634,7 +656,7 @@ void MainWindow::load_list()
 //metodo che processa il file di annotazione scelto dall'utente
 bool MainWindow::load_annotation()
 {
- //questo metodo √® stato reso booleano perch√® pu√≤ fallire per vari motivi
+ //questo metodo  stato reso booleano perch pu fallire per vari motivi
  cleanWindow();
  if(project_filename_path_.isEmpty())
  { //modifica di comportamento
@@ -661,7 +683,7 @@ bool MainWindow::load_annotation()
 
  if(!(line=="133518122014\n"))
    return false;
- //questo √® il "magic number" per scongiurare il fatto che l-utente carichi un file non coerente con il contesto
+ //questo  il "magic number" per scongiurare il fatto che l-utente carichi un file non coerente con il contesto
 
  line=file.readLine();
 
@@ -685,7 +707,7 @@ bool MainWindow::load_annotation()
 
  image_filename_path_.remove(image_filename_path_.size()-1, 1);
 
- //viene creato image_filename_path che avr√  il compito di indicare a resizeMethod quale immagine caricare
+ //viene creato image_filename_path che avr  il compito di indicare a resizeMethod quale immagine caricare
  QList<DisplayImage_Data::shape> outEdits;
  QStringList objectList;
 
@@ -749,7 +771,7 @@ bool MainWindow::load_annotation()
        findInstance=true;
   }
 
-  //se la linea non √® finita
+  //se la linea non  finita
 //  i = line.indexOf('\t', i) + 1;
 
 //?  if( ( i + 1 ) >= line.size() )
@@ -963,10 +985,11 @@ void MainWindow::on_ResizeSlider_sliderMoved(int position)
 //metodo che processa l'immagine, fa il resize se necessario e la stampa
 bool MainWindow::resizeMethod(int value)
 {
- //booleano, cos- si pu√≤ intervenire in caso di errore
- //la formula per le nuove dimensioni √® cos√¨ composta:
- //190 √® la massima percentuale di zoom a cui si pu√≤ arrivare, 10 √® la minima
- //lo zoom attuale si ottiene quindi facendo 190 meno 18 moltiplicato per il valore dello slider, resize, che gestisce lo zoom nell'interfaccia
+ //booleano, cossi intervenire in caso di errore
+ //la formula per le nuove dimensioni cos composta:
+ //190 la massima percentuale di zoom a cui si pu arrivare, 10 la minima
+ //lo zoom attuale si ottiene quindi facendo 190 meno 18 moltiplicato
+ //per il valore dello slider, resize, che gestisce lo zoom nell'interfaccia
  //lo slider varia tra 0 e quindi 190% di zoom fino a 10, ovvero il 10% di zoom
  //trovato il valore si fa una proprozione per trovare il nuovo valore
 
@@ -1187,11 +1210,57 @@ void MainWindow::setup_highlight(bool checked)
  display_image_data_->enableHighlight(checked);
 }
 
+
+void MainWindow::handle_polygon_complete_and_save_notation_requested()
+{
+
+}
+
+void MainWindow::handle_polygon_save_notation_requested()
+{
+
+}
+
+void MainWindow::handle_complete_polygon_requested()
+{
+ display_image_data_->complete_polygon();
+}
+
+
+void MainWindow::handle_save_notation_requested()
+{
+ Display_Drawn_Shape* dds = display_image_data_->current_drawn_shape();
+
+ if(!dds)
+   return;
+
+ AXFI_Annotation* axa = dds->to_axfi_annotation(resize_factor_);
+
+ bool ok = false;
+ QString name = Special_Input_Dialog::get_text(&autogen_index_, this, "Need a Shape Name",
+   "Enter text here providing a Shape Name",
+   QLineEdit::Normal, QString(), &ok, 0);
+
+ if(ok)
+ {
+  axa->add_scoped_identifier(name);
+ }
+
+ check_init_axfi_annotation_group();
+ axfi_annotation_group_->add_annotation(axa);
+
+ display_scene_item_->add_axfi_annotation(axa, resize_factor_);
+
+ display_image_data_->reset_drawn_shapes();
+
+ //qDebug() << "handle_save_notation_requested()";
+}
+
 //metodo attivato dal signal onLineDraw presente in DisplayImage
 void MainWindow::onDrawLine(QList<DisplayImage_Data::shape> edits)
 {
  //questo metodo viene invocato per nature diverse
- //ma riesce a capire se si st√  aggiunggendo una shape o se ne sta modificando/spostando una gi√  presente
+ //ma riesce a capire se si st  aggiunggendo una shape o se ne sta modificando/spostando una gi  presente
 
  for(int i=0; i < edits.size(); ++i)
  {
@@ -1210,7 +1279,7 @@ void MainWindow::onDrawLine(QList<DisplayImage_Data::shape> edits)
 
   if(edits.at(i).id.isEmpty())
   {
-   //se √® vero allora √® stata aggiunta una nuova shape
+   //se  vero allora stata aggiunta una nuova shape
 
    QString object;
 //?   {
@@ -1298,7 +1367,7 @@ void MainWindow::onDrawLine(QList<DisplayImage_Data::shape> edits)
 
   if(shapeID_ != "" && shapeID_ == edits.at(i).id)
   {
-   //tramite l-id so quale shape √® stata modificata e quindi sostituirla con quella nuova
+   //tramite l-id so quale shape  stata modificata e quindi sostituirla con quella nuova
    another.id = edits.at(i).id;
    another.form = edits.at(i).form;
    for(int j=0; j < edits.at(i).shapePoints.size(); ++j)
@@ -1372,7 +1441,7 @@ void MainWindow::handle_clear_all()
 //metodo legato al bottone rettangolare con il nome Clear Selected
 void MainWindow::_handle_clear_selected()
 {
- //toglier√  tutti i dati relativi alla shape selezionata
+ //toglier  tutti i dati relativi alla shape selezionata
  QString temp=shapeID_;
  if(scaledEdits_.size()>1)
  {
@@ -1434,7 +1503,7 @@ void MainWindow::_handle_clear_selected()
 //metodo legato al bottone rettangolare con il nome Clear Last
 void MainWindow::_handle_clear_last()
 {
- //toglier√  tutti i dati relativi all-ultima shape disegnata
+ //toglier  tutti i dati relativi all-ultima shape disegnata
  display_image_data_->clearLastEdits();
  QString temp = scaledEdits_.last().id;
  int i;
@@ -1471,7 +1540,7 @@ void MainWindow::_handle_clear_last()
 //metodo legato al bottone rettangolare con il nome Clear All
 void MainWindow::_handle_clear_all()
 {
- //pulir√  l-immagine da tutte le shape cancellando i relativi dati
+ //pulir  l-immagine da tutte le shape cancellando i relativi dati
  display_image_data_->clear_image();
  if(!scaledEdits_.isEmpty())
    scaledEdits_.clear();
@@ -1521,7 +1590,7 @@ void MainWindow::on_EndProject_clicked()
 void MainWindow::on_LoadNext_clicked()
 {
  //permette all-utente di navigare tra le immagini annotate fino a quel momento
- //dopo aver caricato l-ultima, se ripremuto avvier√  il processo per annotare una nuova immagine
+ //dopo aver caricato l-ultima, se ripremuto avvier  il processo per annotare una nuova immagine
  //attiva e disattiva il tasto load_previous
  QMessageBox::StandardButton reply = QMessageBox::No;
 
@@ -1728,7 +1797,7 @@ void MainWindow::resizeEvent(QResizeEvent *event)
  //?? ui->scrollArea->resize(temp.rwidth()-20,temp.rheight()-250);
 }
 
-//metodo per la gestione della pressione di determinati tasti mentre √® attiva la finestra
+//metodo per la gestione della pressione di determinati tasti mentre  attiva la finestra
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
 #ifdef HIDE
@@ -1794,7 +1863,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 #endif // def HIDE
 }
 
-//metodo per la gestione del rilascio di determinati tasti mentre √® attiva la finestra
+//metodo per la gestione del rilascio di determinati tasti mentre  attiva la finestra
 void MainWindow::keyReleaseEvent(QKeyEvent *event)
 {
  if(event->key()==Qt::Key_Escape)
@@ -1805,7 +1874,7 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
    shiftIsPressed_ = false; //shift
 }
 
-//metodo per la gestione del movimento della rotella mentre √® attiva la finestra
+//metodo per la gestione del movimento della rotella mentre  attiva la finestra
 void MainWindow::wheelEvent(QWheelEvent *event)
 {
 //?

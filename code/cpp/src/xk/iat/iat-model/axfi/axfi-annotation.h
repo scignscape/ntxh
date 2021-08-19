@@ -36,6 +36,7 @@ class AXFI_Annotation
 
  QVector<n8> locations_;
 
+ n8 opaque_shape_kind_code_;
 
 public:
 
@@ -43,6 +44,7 @@ public:
 
  ACCESSORS(QString ,shape_designation)
  ACCESSORS__RGET(QStringList ,scoped_identifiers)
+ ACCESSORS(n8 ,opaque_shape_kind_code)
 
 
  void read_iat_string(QString line);

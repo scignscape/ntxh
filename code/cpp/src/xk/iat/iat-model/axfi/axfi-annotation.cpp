@@ -21,6 +21,7 @@
 
 
 AXFI_Annotation::AXFI_Annotation()
+  :  opaque_shape_kind_code_(0xFFFFFFFFFFFFFFFF)
 {
 
 }

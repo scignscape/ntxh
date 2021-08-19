@@ -9,17 +9,18 @@
 
 #include "mainwindow.h"
 
+#include "global-types.h"
 
 //Questa classe gestisce tutto il livello di interazione tra:
 //Le annotazioni, visualizzate su un'immagine di background, e
-//le azioni dell'utente che interagir√  tramite puntatore sulle annotazioni.
+//le azioni dell'utente che interagir  tramite puntatore sulle annotazioni.
 //Gestendo quindi le seguenti operazioni:
 //Visualizzazione, continua, delle shape prodotte
 //La creazione di una nuova shape
 //Lo spostamento di una shape
 //Lo spostamento di un punto appartenente ad una shape
 //Cambiare colore alla shape selezionata
-//Per quanto riguarda l'eliminazione di una shape, la sua gestione √® lasciata alla classe parent.
+//Per quanto riguarda l'eliminazione di una shape, la sua gestione ® lasciata alla classe parent.
 
 
 
@@ -101,6 +102,8 @@ void DisplayImage::load_image(QString file_path)
 
  display_image_data_->setView(scrolled_image_pixmap_->toImage());
 
+
+  // //  always new ?
  image_scene_item_ = new DisplayImage_Scene_Item;// (this);
  image_scene_item_->set_data(display_image_data_);
 
@@ -186,7 +189,7 @@ DisplayImage::DisplayImage(QWidget* parent) : QWidget(parent)
 }
 
 //Costruttore della classe
-//La classe parent √® la classe MainWindow
+//La classe parent ® la classe MainWindow
 DisplayImage_Scene_Item::DisplayImage_Scene_Item(QWidget *parent) : QWidget(parent)
 {
 
@@ -198,11 +201,40 @@ DisplayImage_Scene_Item::DisplayImage_Scene_Item(QWidget *parent) : QWidget(pare
 
 }
 
+Display_Drawn_Shape* DisplayImage_Data::get_current_drawn_shape()
+{
+ if(current_drawn_shape_)
+ {
+  if(current_drawn_shape_->shape_kind() != Display_Drawn_Shape::Shape_Kinds::N_A)
+   return current_drawn_shape_;
+ }
+
+ return nullptr;
+}
+
+
+void DisplayImage_Data::reset_drawn_shapes()
+{
+ while(!held_drawn_shapes_.isEmpty())
+ {
+  delete held_drawn_shapes_.takeLast();
+ }
+ while(!held_drawn_shapes_.isEmpty())
+ {
+  delete last_canceled_drawn_shapes_.takeLast();
+ }
+
+ if(current_drawn_shape_)
+   current_drawn_shape_->reset_all();
+
+}
+
+
 DisplayImage_Data::DisplayImage_Data()
 {
  current_drawn_shape_ = nullptr;
 
- multi_draw = true;
+ multi_draw = false;
 
  pan_mode = false;
 
@@ -225,7 +257,7 @@ DisplayImage_Data::DisplayImage_Data()
 //metodo privato che assegna i valori di default
 void DisplayImage_Data::defaultColorsThickness()
 {
- //in decimale, la presenza di uno dei tre colori fondamentali, andr√  da un minimo di zero ad un massimo di 255
+ //in decimale, la presenza di uno dei tre colori fondamentali, andr  da un minimo di zero ad un massimo di 255
  radius_ = 6;
  thickness_ = 3;
  myRed_ = 255;
@@ -258,15 +290,30 @@ void DisplayImage_Data::setColorsThickness(int in_radius, int in_thickness, int 
   //? update();
 }
 
-//assegna l'immagine su cui l'utente st√  lavorando, invocato da MainWindow
+
+void DisplayImage_Data::complete_polygon()
+{
+ Display_Drawn_Shape* dds = check_current_drawn_shape(Display_Drawn_Shape::Shape_Kinds::Polygon);
+
+ for(const QPair<QPoint, QPoint>& pr : point_pairs_)
+ {
+  dds->points() << pr.first << pr.second;
+ }
+
+ point_pairs_.clear();
+
+}
+
+
+//assegna l'immagine su cui l'utente st  lavorando, invocato da MainWindow
 void DisplayImage_Data::setView(QImage image)
 {
- //image √® l'immagine scelta dall'utente e che poi verr√  stampata in background
+ //image ® l'immagine scelta dall'utente e che poi verr  stampata in background
  m_background_ = image;
   //?? update();
 }
 
-//modifica il valore di verit√  di drawingSquareEnabled, invocato da MainWindow
+//modifica il valore di verit  di drawingSquareEnabled, invocato da MainWindow
 void DisplayImage_Data::enableSquareDraw()
 {
  //se l'utente sceglie un tipo di forma, automaticamente gli altri tipi verranno disattivati
@@ -275,7 +322,7 @@ void DisplayImage_Data::enableSquareDraw()
  drawingPolygonEnabled_ = false;
 }
 
-//modifica il valore di verit√  di drawingEllipseEnabled, invocato da MainWindow
+//modifica il valore di verit  di drawingEllipseEnabled, invocato da MainWindow
 void DisplayImage_Data::enableEllipseDraw()
 {
  //se l'utente sceglie un tipo di forma, automaticamente gli altri tipi verranno disattivati
@@ -284,7 +331,7 @@ void DisplayImage_Data::enableEllipseDraw()
  drawingPolygonEnabled_ = false;
 }
 
-//modifica il valore di verit√  di drawingPolygonEnabled, invocato da MainWindow
+//modifica il valore di verit  di drawingPolygonEnabled, invocato da MainWindow
 void DisplayImage_Data::enablePolygonDraw()
 {
  //se l'utente sceglie un tipo di forma, automaticamente gli altri tipi verranno disattivati
@@ -293,13 +340,14 @@ void DisplayImage_Data::enablePolygonDraw()
  drawingEllipseEnabled_ = false;
 }
 
-//modifica il valore di verit√  di checked, invocato da MainWindow
-void DisplayImage_Data::enableHighlight(bool enable){
- //il valore di enable √® calcolato sulla presenza o meno della spunta nel relativo bottone nell'interfaccia grafica del programma
+//modifica il valore di verit  di checked, invocato da MainWindow
+void DisplayImage_Data::enableHighlight(bool enable)
+{
+ //il valore di enable ® calcolato sulla presenza o meno della spunta nel relativo bottone nell'interfaccia grafica del programma
  checked_ = enable;
 }
 
-//modifica il valore di verit√  di nameSelected, invocato da MainWindow
+//modifica il valore di verit  di nameSelected, invocato da MainWindow
 void DisplayImage_Data::setNameSelected(bool enable)
 {
  nameSelected_ = enable;
@@ -309,7 +357,7 @@ void DisplayImage_Data::setNameSelected(bool enable)
 void DisplayImage_Data::setShapeSelected(QString in_shapeID)
 {
  //quando un utente seleziona una shape, cliccando su un valore (se presente) nella terza colonna allora MainWindow
- //aggiorner√  la shapeID di DisplayImage per visualizzare (con colore diverso) la shape selezionata
+ //aggiorner  la shapeID di DisplayImage per visualizzare (con colore diverso) la shape selezionata
  shapeID_ = in_shapeID;
  //? update();
 }
@@ -317,8 +365,8 @@ void DisplayImage_Data::setShapeSelected(QString in_shapeID)
 //assegna l'elenco delle shape disegnate sull'immagine, invocato da MainWindow
 void DisplayImage_Data::setEdits(QList<shape> inputEdits)
 {
- //la natura di inputEdist pu√≤ essere diversa
- //l'invocazione, per√≤, viene fatta per permettere alla classe di lavorare sulla copia originale dei dati
+ //la natura di inputEdist pu≤ essere diversa
+ //l'invocazione, per≤, viene fatta per permettere alla classe di lavorare sulla copia originale dei dati
  if(!inputEdits.isEmpty())
    allEdits_ = inputEdits;
  else
@@ -344,7 +392,7 @@ void DisplayImage_Data::resizeEdits(int resize)
 //rimuove tutti i dati temporanei e quelli relativi all'immagine su cui si stava lavorando, annotazioni comprese. Invocato da MainWindow
 void DisplayImage_Data::clear_image()
 {
- //fa quello che farebbe reset, ma in pi√π cancella tutte le annotazioni
+ //fa quello che farebbe reset, ma in piπ cancella tutte le annotazioni
  //invocato esplicitamente anche per cancellare tutte le annotazioni
  if(!allEdits_.isEmpty())
    allEdits_.clear();
@@ -376,12 +424,169 @@ void DisplayImage_Data::clearLastEdits()
  //? update();
 }
 
+
+void DisplayImage_Scene_Item::paintEvent_draw_vertex_handles(
+  const QVector<const QPoint*>& points, QPainter& painter)
+{
+ int r = data_->radius_;
+ QPoint pr(r, r);
+ QPoint pr1(r - 1, r - 1);
+
+ for(const QPoint* const point : points)
+ {
+  QRect rect(*point - pr, *point + pr1);
+  painter.fillRect(rect, QColor(data_->sqRed_, data_->sqGreen_, data_->sqBlue_));
+ }
+}
+
+void DisplayImage_Scene_Item::paintEvent_draw_point_pairs(QVector<QPair<QPoint, QPoint>>& pairs, QPainter& painter,
+  QPen& pen, QPen& shape_pen)
+{
+ u1 count = 0;
+ QPoint sec;
+
+ if(true) //  drawn shape is selected ...
+ {
+  painter.setPen(shape_pen);
+  painter.setBrush(QBrush(QColor(data_->shapeRed_, data_->shapeGreen_, data_->shapeBlue_), Qt::Dense6Pattern));
+ }
+ else
+ {
+  painter.setPen(pen);
+  painter.setBrush(QBrush(QColor(data_->myRed_, data_->myGreen_, data_->myBlue_), Qt::Dense6Pattern));
+ }
+
+ for(QPair<QPoint, QPoint>& pr : pairs)
+ {
+  painter.drawLine(pr.first, pr.second);
+
+  if(count)
+    painter.drawLine(sec, pr.first);
+
+  ++count;
+  sec = pr.second;
+
+  paintEvent_draw_vertex_handles({&pr.first, &pr.second}, painter);
+ }
+
+// Display_Drawn_Shape dds;
+// dds.init_from_axfi_annotation(axa, resize_factor);
+// paintEvent_draw_point_pairs(&dds, painter, pen, shape_pen);
+}
+
+
+
+void DisplayImage_Scene_Item::paintEvent_draw_annotation(AXFI_Annotation& axa, QPainter& painter,
+  QPen& pen, QPen& shape_pen, r8 resize_factor)
+{
+ Display_Drawn_Shape dds;
+ dds.init_from_axfi_annotation(axa, resize_factor);
+ paintEvent_draw_drawn_shape(&dds, painter, pen, shape_pen);
+}
+
+void DisplayImage_Scene_Item::paintEvent_draw_drawn_shape(Display_Drawn_Shape* dds,
+  QPainter& painter, QPen& pen, QPen& shape_pen)
+{
+ if(true) //  drawn shape is selected ...
+ {
+  painter.setPen(shape_pen);
+  painter.setBrush(QBrush(QColor(data_->shapeRed_, data_->shapeGreen_, data_->shapeBlue_), Qt::Dense6Pattern));
+ }
+ else
+ {
+  painter.setPen(pen);
+  painter.setBrush(QBrush(QColor(data_->myRed_, data_->myGreen_, data_->myBlue_), Qt::Dense6Pattern));
+ }
+
+
+ switch (dds->shape_kind())
+ {
+ case Display_Drawn_Shape::Shape_Kinds::Rectangle:
+  {
+   const QPoint& tl = dds->points()[0];
+   const QPoint& br = dds->points()[1];
+
+   QRect rect(tl, br);
+   painter.drawRect(rect);
+
+   QPoint tr = rect.topRight();
+   QPoint bl = rect.bottomLeft();
+
+   paintEvent_draw_vertex_handles({&tl, &tr, &br, &bl}, painter);
+
+//   {
+//    painter.fillRect(rect, QColor(data_->sqRed_, data_->sqGreen_, data_->sqBlue_))
+//   }
+
+//   QPoint temp = data_->allEdits_.at(i).shapePoints.at(2);
+//   QRect square(data_->allEdits_[i].shapePoints.first().rx(),data_->allEdits_[i].shapePoints.first().ry(),
+//               (temp.rx() - data_->allEdits_[i].shapePoints.first().rx()),
+//               (temp.ry() - data_->allEdits_[i].shapePoints.first().ry()));
+//   painter.drawRect(square);
+//   for(int j = 0; j < data_->allEdits_.at(i).shapePoints.size(); ++j)
+//   {
+//    QRect rect(data_->allEdits_[i].shapePoints[j].rx() - data_->radius_,
+//               data_->allEdits_[i].shapePoints[j].ry()- data_->radius_ , data_->radius_ * 2, data_->radius_ * 2);
+//    painter.fillRect(rect, QColor(data_->sqRed_, data_->sqGreen_, data_->sqBlue_));
+//   }
+  }
+  break;
+
+ case Display_Drawn_Shape::Shape_Kinds::Ellipse:
+  {
+   const QPoint& tl = dds->points()[0];
+   const QPoint& br = dds->points()[1];
+
+   QRect rect(tl, br);
+   painter.drawEllipse(rect);
+
+   QPoint tr = rect.topRight();
+   QPoint bl = rect.bottomLeft();
+
+   paintEvent_draw_vertex_handles({&tl, &tr, &br, &bl}, painter);
+
+  }
+
+ case Display_Drawn_Shape::Shape_Kinds::Polygon:
+  {
+   u1 count = 0;
+   QPoint last;
+   QVector<const QPoint*> ptrs;
+   ptrs.resize(dds->points().size());
+   for(const QPoint& qp : dds->points())
+   {
+    ptrs[count] = &qp;
+    ++count;
+    if(count == 1)
+    {
+     last = qp;
+     continue;
+    }
+    painter.drawLine(last, qp);
+    last = qp;
+   }
+   if(count > 2)
+     painter.drawLine(last, dds->points().first());
+   paintEvent_draw_vertex_handles(ptrs, painter);
+  }
+  break;
+
+ default:
+  break;
+ }
+// painter.drawText(QPoint(data_->allEdits_[i].shapePoints.first().rx()+5,
+//   data_->allEdits_[i].shapePoints.first().ry()-3), data_->allEdits_.at(i).id);
+
+}
+
+
 //metodo per la stampa su schermo di tutte le annotazioni e le varie operazioni effettuate dall'utente
 void DisplayImage_Scene_Item::paintEvent(QPaintEvent*)
 {
+  //qDebug() << "paint event ...";
  //si definiscono due tipi di pen
  QPainter painter(this);
- QPen myPen(QColor(data_->myRed_, data_->myGreen_,data_->myBlue_), data_->thickness_, Qt::SolidLine); //myPen √® per tutte le shape
+ QPen myPen(QColor(data_->myRed_, data_->myGreen_,data_->myBlue_), data_->thickness_, Qt::SolidLine); //myPen per tutte le shape
  QPen shapePen(QColor(data_->shapeRed_, data_->shapeGreen_, data_->shapeBlue_), data_->thickness_, Qt::SolidLine); //shapePen e per la shape selezionata dall'utente
  myPen.setCapStyle(Qt::RoundCap);
  shapePen.setCapStyle(Qt::RoundCap);
@@ -391,12 +596,16 @@ void DisplayImage_Scene_Item::paintEvent(QPaintEvent*)
    painter.drawImage(0, 0, data_->m_background_); //riempe lo sfonfo con l'immagine scelta dall'utente
 
  if(!data_->editing_)
- { //il valore di verit√  di editing viene calcolato dai metodi che gestiscono il mouse
+ {
+  //il valore di verit  di editing viene calcolato dai metodi che gestiscono il mouse
   //viene visualizzato su schermo la costruzione della shape
+
   if(data_->drawingSquareEnabled_ && data_->isMoving_)
-  { //il valore di verit√  di isMoving viene calcolato dai metodi che gesticono il mouse
+  {
+
+   //il valore di verit  di isMoving viene calcolato dai metodi che gesticono il mouse
    //viene visualizzato su schermo la costruzione della shape rettangolare
-   //per essere costruita, la shape, richiede un punto di inizio ed un punto di fine, che sar√  letto come il suo opposto
+   //per essere costruita, la shape, richiede un punto di inizio ed un punto di fine, che sar  letto come il suo opposto
    //questi due punti permettono di ricavare gli altri due che inisieme formano una shape rettangolare
    data_->points_.clear();
    data_->points_ << data_->mStartPoint_ << QPoint(data_->mStartPoint_.rx(),data_->mEndPoint_.ry())
@@ -410,14 +619,14 @@ void DisplayImage_Scene_Item::paintEvent(QPaintEvent*)
     QRect rect(data_->points_[i].rx() - data_->radius_, data_->points_[i].ry() - data_->radius_, data_->radius_*2, data_->radius_*2);
     painter.fillRect(rect, QColor(data_->sqRed_, data_->sqGreen_, data_->sqBlue_));
 
-    qDebug() << "fr: " << rect;
+    //qDebug() << "fr: " << rect;
 
    }
   }
   if(data_->drawingEllipseEnabled_ && data_->isMoving_)
   {
    //viene visualizzato su schermo la costruzione della shape circolare
-   //per essere costruita, la shape, richiede un punto di inizio ed un punto di fine, che sar√  letto come il suo opposto
+   //per essere costruita, la shape, richiede un punto di inizio ed un punto di fine, che sar  letto come il suo opposto
    //questi due punti permettono di ricavare gli altri due che inisieme formano una shape rettangolare
    data_->points_.clear();
    data_->points_ << data_->mStartPoint_ << QPoint(data_->mStartPoint_.rx(), data_->mEndPoint_.ry())
@@ -431,25 +640,31 @@ void DisplayImage_Scene_Item::paintEvent(QPaintEvent*)
     painter.fillRect(rect, QColor(data_->sqRed_, data_->sqGreen_, data_->sqBlue_));
    }
   }
-  if(data_->drawingPolygonEnabled_ && data_->isMoving_)
-  {
-   //viene visualizzato su schermo la costruzione della shape poligonale
-   //i vari punti formeranno una linea spezzata e solo all'ultimo passaggio (quello di chiusira)
-   //si avr√  la shape come vera superficie poligonale
-   for(int i=0; i < data_->points_.size()-1; ++i)
-   {
-    painter.drawLine(data_->points_.at(i), data_->points_.at(i+1));
-    QRect rect(data_->points_[i].rx()- data_->radius_, data_->points_[i].ry() - data_->radius_, data_->radius_ * 2, data_->radius_ * 2);
-    painter.fillRect(rect, QColor(data_->sqRed_, data_->sqGreen_, data_->sqBlue_));
-   }
-   painter.drawLine(data_->points_.last(), data_->mEndPoint_);
-   QRect rect1(data_->points_.last().rx()-data_->radius_, data_->points_.last().ry() - data_->radius_, data_->radius_ * 2, data_->radius_ * 2); //solo per far si che la linea non vada sopra al quadratino
-   painter.fillRect(rect1, QColor(data_->sqRed_,data_->sqGreen_, data_->sqBlue_));
-   QRect rect2(data_->mEndPoint_.rx() - data_->radius_, data_->mEndPoint_.ry()-data_->radius_, data_->radius_ * 2, data_->radius_ * 2);
-   painter.fillRect(rect2, Qt::yellow);
-  }
+
+//?
+//  if(data_->drawingPolygonEnabled_ && data_->isMoving_)
+//  {
+//   //viene visualizzato su schermo la costruzione della shape poligonale
+//   //i vari punti formeranno una linea spezzata e solo all'ultimo passaggio (quello di chiusira)
+//   //si avr  la shape come vera superficie poligonale
+//   for(int i=0; i < data_->points_.size()-1; ++i)
+//   {
+//    painter.drawLine(data_->points_.at(i), data_->points_.at(i+1));
+//    QRect rect(data_->points_[i].rx()- data_->radius_, data_->points_[i].ry() - data_->radius_, data_->radius_ * 2, data_->radius_ * 2);
+//    painter.fillRect(rect, QColor(data_->sqRed_, data_->sqGreen_, data_->sqBlue_));
+//   }
+//   painter.drawLine(data_->points_.last(), data_->mEndPoint_);
+//   QRect rect1(data_->points_.last().rx()-data_->radius_, data_->points_.last().ry() - data_->radius_, data_->radius_ * 2, data_->radius_ * 2); //solo per far si che la linea non vada sopra al quadratino
+//   painter.fillRect(rect1, QColor(data_->sqRed_,data_->sqGreen_, data_->sqBlue_));
+//   QRect rect2(data_->mEndPoint_.rx() - data_->radius_, data_->mEndPoint_.ry()-data_->radius_, data_->radius_ * 2, data_->radius_ * 2);
+//   painter.fillRect(rect2, Qt::yellow);
+//  }
+
   if(data_->shapeMoving_)
-  { //il valore di verit√  di shapeMoving viene calcolato dai metodi che gesticono il mouse
+  {
+   qDebug() << "m2 ...";
+
+   //il valore di verit  di shapeMoving viene calcolato dai metodi che gesticono il mouse
    //viene gestito lo spostamento di un'intera shape e di tutti i suo punti
    int diffx = (data_->mEndPoint_.rx() - data_->mStartPoint_.rx());
    int diffy = (data_->mEndPoint_.ry() - data_->mStartPoint_.ry());
@@ -492,6 +707,8 @@ void DisplayImage_Scene_Item::paintEvent(QPaintEvent*)
  }
  else
  {
+  qDebug() << "end ...";
+
   //qui si passa alla modifica dei singoli punti
   //nel caso si stia modificando il punto di un poligono basta sostituire il valore
   data_->allEdits_[data_->shapePosition_].shapePoints.replace(data_->pointPosition_, data_->mEndPoint_);
@@ -528,6 +745,39 @@ void DisplayImage_Scene_Item::paintEvent(QPaintEvent*)
   data_->mStartPoint_ = QPoint();
   data_->mEndPoint_ = QPoint();
  }
+
+
+ if(!data_->point_pairs_.isEmpty())
+ {
+  paintEvent_draw_point_pairs(data_->point_pairs_, painter,
+    myPen, shapePen);
+ }
+
+ if(!data_->held_drawn_shapes_.isEmpty())
+ {
+  // //  any setup?
+  for(Display_Drawn_Shape* dds : data_->held_drawn_shapes())
+    paintEvent_draw_drawn_shape(dds, painter, myPen, shapePen);
+ }
+
+ if(Display_Drawn_Shape* dds = data_->current_drawn_shape())
+ {
+  paintEvent_draw_drawn_shape(dds, painter, myPen, shapePen);
+ }
+
+ if(!saved_axfi_annotations_.isEmpty())
+ {
+  // //  any setup?
+  for(QPair<AXFI_Annotation*, r8> pr : saved_axfi_annotations_)
+  {
+   paintEvent_draw_annotation(*pr.first, painter, myPen, shapePen, pr.second);
+  }
+
+//      Display_Drawn_Shape* dds : data_->held_drawn_shapes())
+//    paintEvent_draw_drawn_shape(dds, painter, myPen, shapePen);
+ }
+
+
  if(!data_->allEdits_.isEmpty())
  {
   //qui vengono visualizzate su schermo tutte le shape terminate
@@ -535,7 +785,7 @@ void DisplayImage_Scene_Item::paintEvent(QPaintEvent*)
   {
    if(!(data_->allEdits_.at(i).id.isNull()))
    {
-    //qui si controlla se c'√® una shape selezionata, quella selezionata avr√  un colore diverso per distinguerla dalle altre
+    //qui si controlla se  una shape selezionata, quella selezionata avr  un colore diverso per distinguerla dalle altre
     if(data_->allEdits_.at(i).id == data_->shapeID_)
     {
      painter.setPen(shapePen);
@@ -554,7 +804,7 @@ void DisplayImage_Scene_Item::paintEvent(QPaintEvent*)
     painter.setPen(shapePen);
     painter.setBrush(QBrush(QColor(data_->shapeRed_, data_->shapeGreen_, data_->shapeBlue_),Qt::Dense6Pattern));
    }
-   //il metodo di stampa viene deciso a seconda del valore contenuto in form (una propriet√  della shape)
+   //il metodo di stampa viene deciso a seconda del valore contenuto in form (una propriet  della shape)
    if(data_->allEdits_.at(i).form==square)
    {
     QPoint temp = data_->allEdits_.at(i).shapePoints.at(2);
@@ -741,8 +991,8 @@ void DisplayImage_Scene_Item::mousePressEvent(QMouseEvent* mev)
  {
   if(!data_->allEdits_.isEmpty())
   {
-   //questo controllo vuole verificare se il click √® stato fatto in prossimit√  di un quadratino
-   //se dovesse essere vero allora l'utente st√  spostando un punto e verr√  reso noto tramite editing
+   //questo controllo vuole verificare se il click ® stato fatto in prossimit  di un quadratino
+   //se dovesse essere vero allora l'utente st  spostando un punto e verr  reso noto tramite editing
    for(int i = 0; i < data_->allEdits_.size(); ++i)
    {
     for(int j=0; j < data_->allEdits_.at(i).shapePoints.size(); ++j)
@@ -767,15 +1017,15 @@ void DisplayImage_Scene_Item::mousePressEvent(QMouseEvent* mev)
     update();
    }
    else{
-    //se il click non non √® in prossimit√  di un quadratino si controlla se √® allinterno di una shape
+    //se il click non non ® in prossimit  di un quadratino si controlla se ® allinterno di una shape
     for(int i=0; i<data_->allEdits_.size(); ++i)
     {
      bool inside=false;
      for(int j=0,k=data_->allEdits_.at(i).shapePoints.size() - 1; j < data_->allEdits_.at(i).shapePoints.size(); k = j++)
      {
-      //questa condizione, reperibile su internet, verifica se il mouse √® all'interno di tutti i punti di un poligono
+      //questa condizione, reperibile su internet, verifica se il mouse ® all'interno di tutti i punti di un poligono
       //anche molto complesso, con molta precisione.
-      //se dovesse essere vero allora l'utente st√  spostando un'intera shape e verr√  reso noto tramite shapeMoving
+      //se dovesse essere vero allora l'utente st  spostando un'intera shape e verr  reso noto tramite shapeMoving
 
       //?
       if(((data_->allEdits_[i].shapePoints[j].y() >= mouseEvent->pos().y())
@@ -824,6 +1074,12 @@ void DisplayImage_Scene_Item::mouseReleaseEvent(QMouseEvent* mev)
   {
    mem = Mouse_Event_Modes::Left_Move_Release;
   }
+ }
+
+ else if(mev->button() == Qt::RightButton)
+ {
+  // //  any other possibilities?
+  mem = Mouse_Event_Modes::Right_Click_Iso;
  }
 
  _handle_mouse_event(mev, mem);
@@ -878,15 +1134,27 @@ void DisplayImage_Scene_Item::mouseMoveEvent(QMouseEvent *mouseEvent)
  //v->mouseM
  //this->QGraphicsProxyWidget::mouseMoveEvent(mouseEvent);
 
- //ogni volta che l'utente inizia un processo, attiver√  questo metodo che permetter√  a paintEvent
+ //ogni volta che l'utente inizia un processo, attiver  questo metodo che permetter  a paintEvent
  //di visualizzare la posizione finale del mouse (in quel momento) e fare i calcoli necessari con esso
  //fino alla fine del processo
  if(data_->isMoving_ || data_->shapeMoving_)
  {
-  data_->mEndPoint_ = mouseEvent->pos();
+
+  // //  added polygon logic
+  if(data_->point_pairs_.isEmpty())
+  {
+   data_->mEndPoint_ = mouseEvent->pos();
+  }
+  else
+  {
+   data_->point_pairs_.last().second = mouseEvent->pos();
+  }
+
   update();
  }
- //questo metodo assega a mTempPoint un valore che poi attiver√  il metodo per la stampa di un bordo grigio
+
+
+ //questo metodo assega a mTempPoint un valore che poi attiver  il metodo per la stampa di un bordo grigio
  //intorno ad un quadratino, presente in paintEvent
  if(!data_->allEdits_.isEmpty() && !data_->isMoving_ && data_->checked_ && !data_->shapeMoving_)
  {
@@ -903,7 +1171,7 @@ void DisplayImage_Scene_Item::mouseMoveEvent(QMouseEvent *mouseEvent)
    }
   }
  }
- //questo metodo assega a mTempPoint un valore che poi attiver√  il metodo per la stampa di un bordo grigio
+ //questo metodo assega a mTempPoint un valore che poi attiver il metodo per la stampa di un bordo grigio
  //intorno ad un quadratino, presente in paintEvent, in particolare al primo punto di un polygono durante la sua costruzione
  if(data_->drawingPolygonEnabled_ && data_->points_.size() >= 3)
  {
@@ -930,7 +1198,7 @@ void DisplayImage_Scene_Item::mouseDoubleClickEvent(QMouseEvent *mouseEvent)
 
 
  //questo evento serve unicamente per terminare il processo di creazione di un poligono
- //un doppio click casuale non attiver√  il codice per le condizioni necessarie
+ //un doppio click casuale non attiver  il codice per le condizioni necessarie
  if(mouseEvent->button() == Qt::LeftButton)
  {
   if(data_->drawingPolygonEnabled_ && data_->points_.size() >= 3)

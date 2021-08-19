@@ -164,7 +164,12 @@ private Q_SLOTS:
 
 
  void handle_zoom_factor_changed(r8 factor);
+ void handle_save_notation_requested();
 
+ void handle_complete_polygon_requested();
+
+ void handle_polygon_complete_and_save_notation_requested();
+ void handle_polygon_save_notation_requested();
  //?
  //    void on_Square_clicked(); //metodo legato al bottone circolare con a fianco il testo Square
  //    void on_Ellipse_clicked(); //metodo legato al bottone circolare con a fianco il testo Ellipse
