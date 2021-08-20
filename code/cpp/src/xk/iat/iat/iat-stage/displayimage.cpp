@@ -546,6 +546,7 @@ void DisplayImage_Scene_Item::paintEvent_draw_drawn_shape(Display_Drawn_Shape* d
    paintEvent_draw_vertex_handles({&tl, &tr, &br, &bl}, painter);
 
   }
+  break;
 
  case Display_Drawn_Shape::Shape_Kinds::Polygon:
   {

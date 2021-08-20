@@ -356,6 +356,7 @@ public:
   saved_axfi_annotations_.push_back({axa, resize_factor});
  }
 
+ ACCESSORS(MACRO_PASTE(QVector<QPair<AXFI_Annotation*, r8>>) ,saved_axfi_annotations)
 
 Q_SIGNALS:
 

@@ -165,7 +165,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
  actionAnnotate_Single_Image = new QAction("Load Image", this);
- actionLoad_annotations = new QAction("Load Notes", this);
+ action_load_annotations = new QAction("Load Notes", this);
  actionQuit = new QAction("Quit", this);
  actionInstructions = new QAction("Instructions", this);
  actionOptions = new QAction("Options", this);
@@ -173,7 +173,7 @@ MainWindow::MainWindow(QWidget *parent) :
  file_menu_->addAction(actionAnnotate_Single_Image);
 //? file_menu_->addAction(actionAnnotate_Multiple_Image);
  file_menu_->addSeparator();
- file_menu_->addAction(actionLoad_annotations);
+ file_menu_->addAction(action_load_annotations);
  file_menu_->addSeparator();
  file_menu_->addAction(actionQuit);
  help_menu_->addAction(actionInstructions);
@@ -184,6 +184,8 @@ MainWindow::MainWindow(QWidget *parent) :
  connect(actionOptions,SIGNAL(triggered()), this, SLOT(on_actionOptions_triggered()));
  connect(actionQuit,SIGNAL(triggered()), this, SLOT(on_actionQuit_triggered()));
 
+ connect(action_load_annotations, SIGNAL(triggered()), this, SLOT(on_action_load_annotations_triggered()));
+
  autogen_index_ = 0;
  axfi_annotation_group_ = nullptr;
 
@@ -193,6 +195,8 @@ MainWindow::MainWindow(QWidget *parent) :
  zoom_frame_ = new Zoom_and_Navigate_Frame(main_frame_);
 
  connect(zoom_frame_, SIGNAL(zoom_factor_changed(r8)), this, SLOT(handle_zoom_factor_changed(r8)));
+
+ connect(zoom_frame_, SIGNAL(save_requested(bool)), this, SLOT(handle_save_requested(bool)));
 
  connect(zoom_frame_, &Zoom_and_Navigate_Frame::image_top_left_button_clicked, [this](bool)
  {
@@ -515,36 +519,44 @@ void MainWindow::on_actionAnnotate_Multiple_Image_triggered()
 //   ui->EndProject->setDisabled(false);
 //   ui->actionAnnotate_Single_Image->setDisabled(true);
 //   ui->actionAnnotate_Multiple_Image->setDisabled(true);
-//   ui->actionLoad_annotations->setDisabled(true);
+//   ui->action_load_annotations->setDisabled(true);
   }
   else doBackUp(); //in caso di interruzioni
  }
 }
 
 //metodo legato al comando Load Annotation
-void MainWindow::on_actionLoad_annotations_triggered()
+void MainWindow::on_action_load_annotations_triggered()
 {
- //viene chiesto se si vuole salvare
- QMessageBox::StandardButton reply = QMessageBox::No;
- if(true) //? (ui->Save->isEnabled())
- {
-  reply = QMessageBox::question(this,"Question","Do you want to save before load an annotation file?",QMessageBox::Cancel|QMessageBox::Yes|QMessageBox::No);
- }
- if(reply!=QMessageBox::Cancel){
-  if(reply==QMessageBox::Yes) on_Save_clicked();
-  makeBackUp(); //si esegue un backup
-  if(workspace_.isEmpty())
-    workspace_ = qApp->applicationDirPath();
-  QFileDialog qdialog;
-  txt_filename_path_ = qdialog.getOpenFileName(this,"Load Annotation", workspace_, "*.txt");
-  if(!txt_filename_path_.isNull())
-  {
-   if(!load_annotation())
-     doBackUp(); //ripristino in caso di interruzioni
-  }
-  else
-    doBackUp(); //si esegue il ripristino in caso di interruzioni
- }
+ load_annotation();
+
+// if(!load_annotation())
+//   doBackUp(); //ripristino in caso di interruzioni
+
+
+// //viene chiesto se si vuole salvare
+// QMessageBox::StandardButton reply = QMessageBox::No;
+// if(true) //? (ui->Save->isEnabled())
+// {
+//  reply = QMessageBox::question(this,"Question","Do you want to save before load an annotation file?",QMessageBox::Cancel|QMessageBox::Yes|QMessageBox::No);
+// }
+// if(reply!=QMessageBox::Cancel)
+// {
+//  if(reply==QMessageBox::Yes) on_Save_clicked();
+//  makeBackUp(); //si esegue un backup
+//  if(workspace_.isEmpty())
+//    workspace_ = qApp->applicationDirPath();
+//  QFileDialog qdialog;
+//  txt_filename_path_ = qdialog.getOpenFileName(this,"Load Annotation", workspace_, "*.txt");
+//  if(!txt_filename_path_.isNull())
+//  {
+//   if(!load_annotation())
+//     doBackUp(); //ripristino in caso di interruzioni
+//  }
+//  else
+//    doBackUp(); //si esegue il ripristino in caso di interruzioni
+// }
+
 }
 
 //metodo legato al comando Instructions
@@ -656,24 +668,42 @@ void MainWindow::load_list()
 //metodo che processa il file di annotazione scelto dall'utente
 bool MainWindow::load_annotation()
 {
+ if(!display_scene_item_)
+ {
+  QMessageBox::warning(this, "Load Image First",
+    "Please load an image before attempting to load annotations");
+  return false;
+ }
+
  //questo metodo  stato reso booleano perch pu fallire per vari motivi
  cleanWindow();
- if(project_filename_path_.isEmpty())
- { //modifica di comportamento
-  QFileInfo qfile(txt_filename_path_);
-  workspace_ = qfile.absolutePath();
- }
- else
- {
-  QFileInfo qfile(image_filename_path_);
-  workspace_ = qfile.absolutePath();
- }
- QString title = "Image Annotation Tool (v." + QString::number(version) + ") - ";
- if(project_filename_path_.isEmpty())
-   title += workspace_;
- else
-   title += pwizard_.projectpath + "/" + pwizard_.projectName;
- QMainWindow::setWindowTitle(title);
+
+// if(project_filename_path_.isEmpty())
+// { //modifica di comportamento
+//  QFileInfo qfile(txt_filename_path_);
+//  workspace_ = qfile.absolutePath();
+// }
+// else
+// {
+//  QFileInfo qfile(image_filename_path_);
+//  workspace_ = qfile.absolutePath();
+// }
+// QString title = "Image Annotation Tool (v." + QString::number(version) + ") - ";
+// if(project_filename_path_.isEmpty())
+//   title += workspace_;
+// else
+//   title += pwizard_.projectpath + "/" + pwizard_.projectName;
+// QMainWindow::setWindowTitle(title);
+
+ QFileInfo qfi(image_filename_path_);
+ QString path = qfi.absolutePath();
+ QString file_path = QFileDialog::getOpenFileName(this, "Select Notes File", path);
+
+ if(file_path.isEmpty())
+   return false;
+
+ txt_filename_path_ = file_path;
+
  QFile file(txt_filename_path_);
 
  if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -681,45 +711,62 @@ bool MainWindow::load_annotation()
 
  QString line = file.readLine();
 
- if(!(line=="133518122014\n"))
+ if(!(line=="--AXFI--\n"))
    return false;
- //questo  il "magic number" per scongiurare il fatto che l-utente carichi un file non coerente con il contesto
 
- line=file.readLine();
+ line = file.readLine();
 
- if(project_filename_path_.isEmpty())
- {
-  //modifica di comportamento
-  if(line.at(1) == ':')
-    image_filename_path_ = line;
-  else
-  {
-   image_filename_path_ = txt_filename_path_;
-   image_filename_path_.remove(image_filename_path_.size() - 4, 4);
-   int pos;
-   for(pos=line.size(); line[pos] != '.'; --pos);
-   line.remove(0,pos);
-   image_filename_path_ += line;
-  }
- }
- else
-   image_filename_path_=line;
+//?
+// if(project_filename_path_.isEmpty())
+// {
+//  //modifica di comportamento
+//  if(line.at(1) == ':')
+//    image_filename_path_ = line;
+//  else
+//  {
+//   image_filename_path_ = txt_filename_path_;
+//   image_filename_path_.remove(image_filename_path_.size() - 4, 4);
+//   int pos;
+//   for(pos=line.size(); line[pos] != '.'; --pos);
+//   line.remove(0,pos);
+//   image_filename_path_ += line;
+//  }
+// }
+// else
+//   image_filename_path_=line;
 
- image_filename_path_.remove(image_filename_path_.size()-1, 1);
+ image_filename_path_ = line;
 
- //viene creato image_filename_path che avr  il compito di indicare a resizeMethod quale immagine caricare
- QList<DisplayImage_Data::shape> outEdits;
- QStringList objectList;
+// image_filename_path_.remove(image_filename_path_.size()-1, 1);
 
+// //viene creato image_filename_path che avr  il compito di indicare a resizeMethod quale immagine caricare
+// QList<DisplayImage_Data::shape> outEdits;
+// QStringList objectList;
+
+ r8 current_resize_factor = 0;
  //qui il file viene processato
  while(!file.atEnd())
  {
   //fino a qui vengono lette object ed instance
   line = file.readLine();
 
+  if(line.isEmpty())
+    continue;
+
+  if(line.startsWith('%'))
+  {
+   current_resize_factor = line.mid(1).toDouble();
+   continue;
+  }
+
   AXFI_Annotation* axa = new AXFI_Annotation;
   axa->from_compact_string(line);
 
+  display_scene_item_->add_axfi_annotation(axa, current_resize_factor);
+
+ }
+
+#ifdef HIDE
 
   // // split the line on tabs ...
 //?  QStringList parts = line.split(TAB_DIVIDER_STR);
@@ -904,6 +951,10 @@ bool MainWindow::load_annotation()
 //  ui->ClearAll->setDisabled(false);
 //  ui->ClearLast->setDisabled(false);
  }
+
+#endif
+
+
  defaultView();
  return true;
 }
@@ -1580,7 +1631,7 @@ void MainWindow::on_EndProject_clicked()
   project_filename_path_.clear();
   //?? ui->actionAnnotate_Single_Image->setDisabled(false);
   //?? ui->actionAnnotate_Multiple_Image->setDisabled(false);
-  //?? ui->actionLoad_annotations->setDisabled(false);
+  //?? ui->action_load_annotations->setDisabled(false);
   cleanWindow();
   set_initial_gui();
  }
@@ -1666,6 +1717,48 @@ void MainWindow::on_Save_clicked()
 {
  _handle_save();
 }
+
+void MainWindow::_handle_save_requested()
+{
+ QFileInfo qfi(image_filename_path_);
+ QDir qd = qfi.absoluteDir();
+ QString cbn = qfi.completeBaseName();
+
+ QString path = qd.absoluteFilePath(cbn + ".notes.txt");
+
+ QString file_path = QFileDialog::getSaveFileName(this, "Select File Name", path);
+ if(file_path.isEmpty())
+   return;
+
+ QFile file(file_path);
+ if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    return;
+
+ QTextStream ofs(&file);
+ ofs << "--AXFI--\n";
+ QString imageName = image_filename_path_;
+ ofs << imageName << "\n";
+
+ r8 current_resize_factor = 0;
+
+ for(const QPair<AXFI_Annotation*, r8>& pr : display_scene_item_->saved_axfi_annotations())
+ {
+  if(pr.second != current_resize_factor)
+  {
+   current_resize_factor = pr.second;
+   ofs << "%" << current_resize_factor << "\n";
+  }
+  AXFI_Annotation* axa = pr.first;
+  QString compact = axa->to_compact_string();
+  ofs << compact << "\n";
+ }
+}
+
+void MainWindow::handle_save_requested(bool)
+{
+ _handle_save_requested();
+}
+
 
 void MainWindow::_handle_save()
 {
@@ -1816,8 +1909,8 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
    on_actionAnnotate_Single_Image_triggered();
  if(ui->actionAnnotate_Multiple_Image->isEnabled() && ctrlIsPressed_ && event->key()==Qt::Key_M)
    on_actionAnnotate_Multiple_Image_triggered();
- if(ui->actionLoad_annotations->isEnabled() && ctrlIsPressed_ && event->key()==Qt::Key_L)
-   on_actionLoad_annotations_triggered();
+ if(ui->action_load_annotations->isEnabled() && ctrlIsPressed_ && event->key()==Qt::Key_L)
+   on_action_load_annotations_triggered();
 
  if(ctrlIsPressed_ && !shiftIsPressed_ && event->key()==Qt::Key_Q)
    on_actionQuit_triggered();

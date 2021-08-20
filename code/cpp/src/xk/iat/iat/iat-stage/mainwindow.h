@@ -37,7 +37,7 @@ public:
 private:
 
  QAction* actionAnnotate_Single_Image;
- QAction* actionLoad_annotations;
+ QAction* action_load_annotations;
  QAction* actionQuit;
  QAction* actionInstructions;
  QAction* actionOptions;
@@ -140,6 +140,7 @@ private:
  void _handle_clear_all(); //metodo legato al bottone rettangolare con il nome Clear All
 
  void _handle_save();
+ void _handle_save_requested();
 
 public:
 
@@ -153,7 +154,7 @@ private Q_SLOTS:
  void getColorsThickness(int radius, int thickness, int myRed, int myGreen, int MyBlue, int sqRed, int sqGreen, int sqBlue, int shapeRed, int shapeGreen, int shapeBlue);
  void on_actionAnnotate_Single_Image_triggered(); //metodo legato al comando Annotate Single Image
  void on_actionAnnotate_Multiple_Image_triggered(); //metodo legato al comando Annotate Multiple Image
- void on_actionLoad_annotations_triggered(); //metodo legato al comando Load Annotation
+ void on_action_load_annotations_triggered(); //metodo legato al comando Load Annotation
  void on_actionCreate_List_triggered(); //metodo legato al comando Create List (WIP)
  void on_actionInstructions_triggered(); //metodo legato al comando Instructions
  void on_ResizeSlider_sliderMoved(int position); //metodo legato allo slider che gestisce lo zoom
@@ -193,6 +194,8 @@ private Q_SLOTS:
  void on_LoadPrevious_clicked(); //metodo legato al bottone rettangolare con il nome Load Previous
  void on_Save_clicked(); //metodo legato al bottone rettangolare con il nome Save
  void on_actionQuit_triggered(); //metodo legato al comando Quit
+
+ void handle_save_requested(bool);
 
 protected:
  void closeEvent(QCloseEvent *event); //metodo per la gestione della chiusura della finestra

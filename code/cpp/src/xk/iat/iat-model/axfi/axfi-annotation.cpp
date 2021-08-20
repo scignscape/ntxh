@@ -40,7 +40,7 @@ void AXFI_Annotation::locations_to_qpoints(QVector<QPoint>& result)
 QString AXFI_Annotation::to_compact_string()
 {
  QString result = scoped_identifiers_.join('^');
- result += "|" + shape_designation_ + "|";
+ result += QString("|%1|%2|").arg(shape_designation_).arg(opaque_shape_kind_code_);
  for(n8 nn : locations_)
  {
   AXFI_Location_2d* loc = (AXFI_Location_2d*) nn;
@@ -76,6 +76,11 @@ void AXFI_Annotation::from_compact_string(QString cs)
    return;
 
  shape_designation_ = parts.takeFirst();
+
+ if(parts.isEmpty())
+   return;
+
+ opaque_shape_kind_code_ = parts.takeFirst().toLongLong();
 
  if(parts.isEmpty())
    return;

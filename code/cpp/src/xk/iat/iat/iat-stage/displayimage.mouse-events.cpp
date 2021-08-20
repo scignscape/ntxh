@@ -120,6 +120,7 @@ void DisplayImage_Scene_Item::handle_mouse_event<
 //   update();
 //  }
   }
+  break;
 
 // case Display_Drawn_Shape::Shape_Kinds::Ellipse:
 //  {
