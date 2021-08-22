@@ -57,6 +57,8 @@ public:
 
  QString to_compact_string();
 
+ QString scoped_identifiers_to_string();
+
  void locations_to_qpoints(QVector<QPoint>& result);
 
 };

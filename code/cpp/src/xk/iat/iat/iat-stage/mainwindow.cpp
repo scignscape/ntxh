@@ -8,6 +8,11 @@
 
 #include <QTimer>
 
+#include "textio.h"
+
+USING_KANS(TextIO);
+
+
 #define window_size_x 670
 #define window_size_y 540
 #define max_window_size_x 1050 //da capire la risoluzione del pc
@@ -15,7 +20,7 @@
 #define max_resize 10
 #define min_resize 0
 #define default_resize 5
-#define version 1.7
+#define _version 1.7
 
 
 // // instead of \t ...
@@ -23,6 +28,7 @@
 #define TAB_DIVIDER '|'
 #define TAB_DIVIDER_STR "|"
 
+#include "rpdf/webgl-view-dialog.h"
 
 #include "iat-model/axfi/axfi-annotation.h"
 
@@ -140,6 +146,8 @@ void MainWindow::init_display_scene_item(DisplayImage_Scene_Item* si)
 MainWindow::MainWindow(QWidget *parent) :
    QMainWindow(parent) //??, ui(new Ui::MainWindow)
 {
+ save_area_folder_ = ROOT_FOLDER "/../save-area";
+
    //?menuBar->setGeometry(QRect(0, 0, 739, 22));
  file_menu_ = menuBar()->addMenu("File"); // new QMenu(menubar_);
  help_menu_ = menuBar()->addMenu("Help"); // new QMenu(menubar_);
@@ -166,6 +174,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
  actionAnnotate_Single_Image = new QAction("Load Image", this);
  action_load_annotations = new QAction("Load Notes", this);
+ action_view_360 = new QAction("View 360 Mode", this);
  actionQuit = new QAction("Quit", this);
  actionInstructions = new QAction("Instructions", this);
  actionOptions = new QAction("Options", this);
@@ -174,6 +183,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //? file_menu_->addAction(actionAnnotate_Multiple_Image);
  file_menu_->addSeparator();
  file_menu_->addAction(action_load_annotations);
+ file_menu_->addAction(action_view_360);
  file_menu_->addSeparator();
  file_menu_->addAction(actionQuit);
  help_menu_->addAction(actionInstructions);
@@ -185,6 +195,8 @@ MainWindow::MainWindow(QWidget *parent) :
  connect(actionQuit,SIGNAL(triggered()), this, SLOT(on_actionQuit_triggered()));
 
  connect(action_load_annotations, SIGNAL(triggered()), this, SLOT(on_action_load_annotations_triggered()));
+
+ connect(action_view_360, SIGNAL(triggered()), this, SLOT(on_action_view_360_triggered()));
 
  autogen_index_ = 0;
  axfi_annotation_group_ = nullptr;
@@ -358,7 +370,8 @@ void MainWindow::set_initial_gui()
  //?ui->scrollContents->resize(0,0);qgraphicsview position visibile top left
 
 
- QString title = "Image Annotation Tool (v." + QString::number(version) + ")";
+ QString title = "Image Annotation Tool (v." + QString::number(_version) + ")";
+
  QMainWindow::setMinimumSize(sizew_, sizeh_);
  QMainWindow::setWindowTitle(title);
 }
@@ -413,6 +426,44 @@ void MainWindow::on_actionCreate_List_triggered(){
  {}
 }
 
+
+void MainWindow::load_image(QString file_path)
+{
+ image_filename_path_ = file_path;
+ display_image_data_->setNameSelected(true);
+
+ if(!project_filename_path_.isEmpty() && imageSequence_.indexOf(image_filename_path_) != -1)
+ {
+  //questo codice viene attivato solo se si st  lavorando in un progetto e per questo project_filename_path  il miglior flag
+  //qui dentro si entra se l-utente st  caricando un-immagine gi  annotata durante il progetto
+  //quindi per avere tutte le annotazioni precedenti si esce dal contesto e si passa a caricare
+  //il file di annotazione tramite load_annotation
+  txt_filename_path_ = pwizard_.projectpath + "/" + pwizard_.projectName+"/";
+  QString imageName = image_filename_path_;
+  int pos;
+  for(pos=imageName.size(); imageName[pos]!='/'; --pos);
+  imageName.remove(0, pos+1);
+  imageName.remove(imageName.size()-4, 4);
+  imageName += ".txt";
+  txt_filename_path_ += imageName;
+  load_annotation(); //load_annotation per lavorare richiede un txt_filename_path che qui viene creato
+ }
+ else
+ {
+  load_image(); //viene invocato load_image che passer  a processare l-immagine scelta
+  list_filename_path_ = ROOT_FOLDER "../default.lst";
+
+  if(!list_filename_path_.isEmpty())
+  {
+   load_list();
+   defaultView();
+  }
+  else doBackUp(); //in caso di interruzione viene cancellato tutte ed eseguito il ripristino dei dati
+ }
+
+}
+
+
 //metodo legato al comando Annotate Single Image
 void MainWindow::on_actionAnnotate_Single_Image_triggered()
 {
@@ -439,54 +490,12 @@ void MainWindow::on_actionAnnotate_Single_Image_triggered()
   QString filters = "Images (*.jpg *.png *.bmp)";
   QFileDialog qdialog;
 
-  image_filename_path_ = qdialog.getOpenFileName(this, "Open Image", ws, filters);
+  QString open = qdialog.getOpenFileName(this, "Open Image", ws, filters);
 
-  display_image_data_->setNameSelected(true);
 
-  if(!image_filename_path_.isNull())
-  { //se  stata scelta l-immagine
-   if(!project_filename_path_.isEmpty() && imageSequence_.indexOf(image_filename_path_) != -1)
-   {
-    //questo codice viene attivato solo se si st  lavorando in un progetto e per questo project_filename_path  il miglior flag
-    //qui dentro si entra se l-utente st  caricando un-immagine gi  annotata durante il progetto
-    //quindi per avere tutte le annotazioni precedenti si esce dal contesto e si passa a caricare
-    //il file di annotazione tramite load_annotation
-    txt_filename_path_ = pwizard_.projectpath + "/" + pwizard_.projectName+"/";
-    QString imageName = image_filename_path_;
-    int pos;
-    for(pos=imageName.size(); imageName[pos]!='/'; --pos);
-    imageName.remove(0, pos+1);
-    imageName.remove(imageName.size()-4, 4);
-    imageName += ".txt";
-    txt_filename_path_ += imageName;
-    load_annotation(); //load_annotation per lavorare richiede un txt_filename_path che qui viene creato
-   }
-   else
-   {
-    load_image(); //viene invocato load_image che passer  a processare l-immagine scelta
-    //viene chiesto se si vuole caricare una nuova lista in caso affermativo viene invocasto load_List
-
-//    QMessageBox::StandardButton reply = QMessageBox::Yes;
-//    if(!list_filename_path_.isEmpty())
-//      reply=QMessageBox::question(this,"Question!","Do you want to load a new list?",QMessageBox::Yes|QMessageBox::No);
-
-//    if(reply==QMessageBox::Yes)
-//    {
-//     QFileDialog qdialog;
-//     // //                    list_filename_path=qdialog.getOpenFileName(this,"Open List",qApp->applicationDirPath(),"*.lst");
-//     list_filename_path_ = qdialog.getOpenFileName(this,
-//       "Open List", ROOT_FOLDER "..", "*.lst");
-//    }
-
-    list_filename_path_ = ROOT_FOLDER "../default.lst";
-
-    if(!list_filename_path_.isEmpty())
-    {
-     load_list();
-     defaultView();
-    }
-    else doBackUp(); //in caso di interruzione viene cancellato tutte ed eseguito il ripristino dei dati
-   }
+  if(!open.isNull())
+  {
+   load_image(open);
   }
   else doBackUp(); //in caso di interruzione viene cancellato tutte ed eseguito il ripristino dei dati
  }
@@ -524,6 +533,32 @@ void MainWindow::on_actionAnnotate_Multiple_Image_triggered()
   else doBackUp(); //in caso di interruzioni
  }
 }
+
+
+void MainWindow::on_action_view_360_triggered()
+{
+ WebGL_View_Dialog* dlg = new WebGL_View_Dialog(nullptr);
+
+ dlg->setWindowTitle("360 Mode");
+
+ connect(dlg, &WebGL_View_Dialog::snapshot_saved,
+   [this, dlg](QString file_path)
+ {
+  qDebug() << "loading " << file_path;
+  dlg->hide();
+
+  QString copy_path = copy_binary_file_to_folder(file_path, save_area_folder_);
+
+  if(copy_path.isEmpty())
+    load_image(file_path);
+  else
+    load_image(copy_path);
+ });
+
+ dlg->show();
+
+}
+
 
 //metodo legato al comando Load Annotation
 void MainWindow::on_action_load_annotations_triggered()
@@ -583,7 +618,7 @@ void MainWindow::load_image()
  cleanWindow(); //si esegue una pulizia dei dati e della finestra
  QFileInfo qfile(image_filename_path_);
  workspace_ = qfile.absolutePath();
- QString title="Image Annotation Tool (v."+QString::number(version)+") - ";
+ QString title="Image Annotation Tool (v."+QString::number(_version)+") - ";
  if(project_filename_path_.isNull())
    title += image_filename_path_;//"/home/nlevisrael/gits/annot/ctg-temp/pics/testdia.png"
  else title+=pwizard_.projectpath + "/" + pwizard_.projectName;
@@ -643,9 +678,11 @@ void MainWindow::load_list()
   }
 
   bool findObject=false;
-  for(int j=0;j<objectList.size();++j)
-    if(object==objectList.at(j))
-      findObject=true;
+
+  for(int j=0; j < objectList.size(); ++j)
+    if(object == objectList.at(j))
+      findObject = true;
+
   bool findInstance=false;
   if(findObject)
   {

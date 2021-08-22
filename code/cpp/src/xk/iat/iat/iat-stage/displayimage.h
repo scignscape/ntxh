@@ -229,6 +229,7 @@ public:
  {
   last_canceled_drawn_shapes_.push_back(current_drawn_shape_);
   current_drawn_shape_ = nullptr;
+  points_.clear();
  }
 
  void check_hold_drawn_shape()
@@ -324,8 +325,14 @@ private:
  void paintEvent_draw_point_pairs(QVector<QPair<QPoint, QPoint>>& pairs, QPainter& painter,
    QPen& pen, QPen& shape_pen);
 
- void paintEvent_draw_drawn_shape(Display_Drawn_Shape* dds, QPainter& painter,
-   QPen& pen, QPen& shape_pen);
+ void paintEvent_draw_drawn_shape(Display_Drawn_Shape* dds, QString text,
+   QPainter& painter, QPen& pen, QPen& shape_pen);
+
+ void paintEvent_draw_drawn_shape(Display_Drawn_Shape* dds,
+   QPainter& painter, QPen& pen, QPen& shape_pen)
+ {
+  paintEvent_draw_drawn_shape(dds, {}, painter, pen, shape_pen);
+ }
 
  void paintEvent_draw_annotation(AXFI_Annotation& axa, QPainter& painter,
    QPen& pen, QPen& shape_pen, r8 resize_factor);

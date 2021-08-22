@@ -36,6 +36,8 @@ public:
 
 private:
 
+ QAction* action_view_360;
+
  QAction* actionAnnotate_Single_Image;
  QAction* action_load_annotations;
  QAction* actionQuit;
@@ -45,6 +47,8 @@ private:
  QMenu* file_menu_;
  QMenu* help_menu_;
  QMenu* tools_menu_;
+
+ QString save_area_folder_;
 
  DisplayImage* display_image_; //istanza della classe DisplayImage, dove viene gestita tutta la parte grafica
 
@@ -130,6 +134,9 @@ private:
  bool resizeMethod(int value); //metodo che processa l'immagine, fa il resize se necessario e la stampa
  QPoint coordinate_scaling(QPoint init_point); //metodo che calcola il resize dei punti apparteneti alle shape
 
+
+ void load_image(QString file_path);
+
  void setup_shape_rectangle();
  void setup_shape_polygon();
  void setup_shape_ellipse();
@@ -154,7 +161,10 @@ private Q_SLOTS:
  void getColorsThickness(int radius, int thickness, int myRed, int myGreen, int MyBlue, int sqRed, int sqGreen, int sqBlue, int shapeRed, int shapeGreen, int shapeBlue);
  void on_actionAnnotate_Single_Image_triggered(); //metodo legato al comando Annotate Single Image
  void on_actionAnnotate_Multiple_Image_triggered(); //metodo legato al comando Annotate Multiple Image
+
  void on_action_load_annotations_triggered(); //metodo legato al comando Load Annotation
+ void on_action_view_360_triggered();
+
  void on_actionCreate_List_triggered(); //metodo legato al comando Create List (WIP)
  void on_actionInstructions_triggered(); //metodo legato al comando Instructions
  void on_ResizeSlider_sliderMoved(int position); //metodo legato allo slider che gestisce lo zoom

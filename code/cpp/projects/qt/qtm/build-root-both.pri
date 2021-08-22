@@ -146,4 +146,6 @@ LEXPAIR_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/QScign/LexPair
 
 QHP_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/qhp
 
+CHASM_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/hgdm/chasm
+
 

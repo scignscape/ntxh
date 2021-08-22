@@ -22,7 +22,7 @@
 //Cambiare colore alla shape selezionata
 //Per quanto riguarda l'eliminazione di una shape, la sua gestione ¨ lasciata alla classe parent.
 
-
+#include "iat-model/axfi/axfi-annotation.h"
 
 
 void DisplayImage::reset_scale(r8 factor)
@@ -481,12 +481,45 @@ void DisplayImage_Scene_Item::paintEvent_draw_annotation(AXFI_Annotation& axa, Q
 {
  Display_Drawn_Shape dds;
  dds.init_from_axfi_annotation(axa, resize_factor);
- paintEvent_draw_drawn_shape(&dds, painter, pen, shape_pen);
+ paintEvent_draw_drawn_shape(&dds, axa.scoped_identifiers_to_string(),
+   painter, pen, shape_pen);
 }
 
 void DisplayImage_Scene_Item::paintEvent_draw_drawn_shape(Display_Drawn_Shape* dds,
-  QPainter& painter, QPen& pen, QPen& shape_pen)
+  QString text, QPainter& painter, QPen& pen, QPen& shape_pen)
 {
+ static QPoint text_offest (5, -3);
+
+ static int text_height_offset = 2;
+ static int text_width_offset = 1;
+ static int double_text_width_offset = 2*text_width_offset;
+
+
+ if(!text.isEmpty())
+ {
+  QSize sz = QFontMetrics(painter.font()).size(Qt::TextSingleLine, text);
+
+//?  painter.setBrush(Qt::white);
+  painter.setBrush(Qt::white);
+  painter.setBrush(QColor(data_->sqRed_, data_->sqGreen_, data_->sqBlue_));
+
+  QPoint bl = dds->points()[0] + text_offest;
+
+  painter.setPen({});
+  painter.drawRect(bl.x() - text_width_offset,
+    bl.y() - sz.height() + text_height_offset,
+    sz.width() + double_text_width_offset, sz.height() + text_height_offset);
+
+  painter.setPen(Qt::black);
+  painter.drawText(dds->points()[0] + text_offest, text);
+
+//  painter.setPen(Qt::white);
+
+  //painter.setBrush(Qt::white);
+
+
+ }
+
  if(true) //  drawn shape is selected ...
  {
   painter.setPen(shape_pen);
@@ -497,6 +530,9 @@ void DisplayImage_Scene_Item::paintEvent_draw_drawn_shape(Display_Drawn_Shape* d
   painter.setPen(pen);
   painter.setBrush(QBrush(QColor(data_->myRed_, data_->myGreen_, data_->myBlue_), Qt::Dense6Pattern));
  }
+
+// painter.drawText(QPoint(data_->allEdits_[i].shapePoints.first().rx()+5,
+//   data_->allEdits_[i].shapePoints.first().ry()-3), data_->allEdits_.at(i).id);
 
 
  switch (dds->shape_kind())
@@ -614,7 +650,9 @@ void DisplayImage_Scene_Item::paintEvent(QPaintEvent*)
 
    QRect square(data_->mStartPoint_.rx(), data_->mStartPoint_.ry(),
      (data_->mEndPoint_.rx() - data_->mStartPoint_.rx()), (data_->mEndPoint_.ry()-data_->mStartPoint_.ry()));
+
    painter.drawRect(square);
+
    for(int i=0; i < data_->points_.size(); ++i)
    {
     QRect rect(data_->points_[i].rx() - data_->radius_, data_->points_[i].ry() - data_->radius_, data_->radius_*2, data_->radius_*2);

@@ -62,6 +62,11 @@ void AXFI_Annotation::add_scoped_identifier(QString si)
  scoped_identifiers_.push_back(si);
 }
 
+QString AXFI_Annotation::scoped_identifiers_to_string()
+{
+ return scoped_identifiers_.join(':');
+}
+
 void AXFI_Annotation::from_compact_string(QString cs)
 {
  QStringList parts = cs.split(LINE_DIVIDER_STR);

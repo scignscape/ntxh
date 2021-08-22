@@ -165,7 +165,8 @@ template<>
 void DisplayImage_Scene_Item::handle_mouse_event<
   DisplayImage_Scene_Item::Mouse_Event_Modes::Right_Click_Iso>(QMouseEvent* mev)
 {
- QMenu* menu = new QMenu(this);
+ QMenu* menu = new QMenu(nullptr);
+ menu->setAttribute(Qt::WA_DeleteOnClose);
 
  if(!data_->point_pairs_.isEmpty())
  {
@@ -196,11 +197,13 @@ void DisplayImage_Scene_Item::handle_mouse_event<
   {
    data_->check_clear_last_canceled_drawn_shapes();
    data_->cancel_current_drawn_shape();
+
+   update();
   });
 
  }
 
- if(data_->get_current_drawn_shape())
+ else if(data_->get_current_drawn_shape())
  {
   menu->addAction("Save Notation", [this]
   {
@@ -219,6 +222,8 @@ void DisplayImage_Scene_Item::handle_mouse_event<
   {
    data_->check_clear_last_canceled_drawn_shapes();
    data_->cancel_current_drawn_shape();
+
+   update();
   });
 
  }
