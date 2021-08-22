@@ -21,9 +21,27 @@ DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
 DEFINES += SCREENSHOTS_FOLDER=\\\"$$ROOT_DIR/code/assets/screenshots\\\"
 
+DEFINES += DEFAULT_DGI_FOLDER=\\\"$$ROOT_DIR/dev/consoles/dgi/images\\\"
+
+DEFINES += DEFAULT_DGI_TEMP_FOLDER=\\\"$$ROOT_DIR/../dev/consoles/dgi/images\\\"
+
+
+DEFINES += USE_KANS
+
 INCLUDEPATH += $$SRC_PROSET_DIR
 
 INCLUDEPATH += $$CHASM_SRC_GROUP_DIR
+
+#/home/nlevisrael/sebi-libs/opencv-4.5.0/modules/imgcodecs/include/opencv2/imgcodecs.hpp
+
+
+include($$ROOT_DIR/../preferred/opencv.pri)
+
+INCLUDEPATH += $$OPENCV_SRC_DIR/modules/core/include
+INCLUDEPATH += $$OPENCV_SRC_DIR/modules/imgproc/include
+INCLUDEPATH += $$OPENCV_SRC_DIR/modules/imgcodecs/include
+INCLUDEPATH += $$OPENCV_BUILD_DIR
+
 
 
 # #  for working with QWebEngineView parent classes directly ...
@@ -38,6 +56,9 @@ INCLUDEPATH += $$CHASM_SRC_GROUP_DIR
 #INCLUDEPATH += qt sources .../gcc_64/include/QtCore/5.15.2/
 #INCLUDEPATH += qt sources .../gcc_64/include/QtWebEngineCore/5.15.2/
 
+
+#INCLUDEPATH += $$SRC_DIR/dbk/dgdb/dgdb-white
+INCLUDEPATH += $$DGDB_WHITE_SRC_GROUP_DIR
 
 
 FORMS  += \
@@ -94,6 +115,15 @@ LIBS += -L$$TARGETSDIR -laxfi
 
 LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
   -lchasm-lib-33 -lchasm-lib-43
+
+
+LIBS += -L$$TARGETSDIR  -ldgi-opencv
+
+
+
+LIBS += -L$$OPENCV_LIB_DIR/ -lopencv_core -lopencv_imgcodecs
+LIBS += -L$$OPENCV_LIB_DIR/ -lopencv_core -lopencv_core
+LIBS += -L$$OPENCV_LIB_DIR/ -lopencv_core -lopencv_imgproc
 
 
 

@@ -72,6 +72,15 @@
 #include <QScreen>
 
 
+void WebGL_View_Dialog::reset_tab_selection()
+{
+ qtw_->setCurrentIndex(1);
+ qtw_->setCurrentIndex(0);
+
+// qtw_->setCurrentWidget(wev_scroll_area_);
+}
+
+
 WebGL_View_Dialog::WebGL_View_Dialog(QWidget* parent)
   :  QDialog(parent), context_menu_provider_(nullptr), pm_runtime_(nullptr)
 {

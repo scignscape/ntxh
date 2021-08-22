@@ -8,6 +8,13 @@
 
 #include <QTimer>
 
+
+#include "dgi-opencv/dgi-image.h"
+#include "dgi-opencv/dgi-demo-frame.h"
+
+USING_KANS(DGI)
+
+
 #include "textio.h"
 
 USING_KANS(TextIO);
@@ -146,6 +153,7 @@ void MainWindow::init_display_scene_item(DisplayImage_Scene_Item* si)
 MainWindow::MainWindow(QWidget *parent) :
    QMainWindow(parent) //??, ui(new Ui::MainWindow)
 {
+ current_wgl_dialog_ = nullptr;
  save_area_folder_ = ROOT_FOLDER "/../save-area";
 
    //?menuBar->setGeometry(QRect(0, 0, 739, 22));
@@ -175,6 +183,8 @@ MainWindow::MainWindow(QWidget *parent) :
  actionAnnotate_Single_Image = new QAction("Load Image", this);
  action_load_annotations = new QAction("Load Notes", this);
  action_view_360 = new QAction("View 360 Mode", this);
+ action_view_contours = new QAction("View Contours", this);
+
  actionQuit = new QAction("Quit", this);
  actionInstructions = new QAction("Instructions", this);
  actionOptions = new QAction("Options", this);
@@ -183,7 +193,12 @@ MainWindow::MainWindow(QWidget *parent) :
 //? file_menu_->addAction(actionAnnotate_Multiple_Image);
  file_menu_->addSeparator();
  file_menu_->addAction(action_load_annotations);
+
+ file_menu_->addAction(action_view_contours);
+
  file_menu_->addAction(action_view_360);
+
+
  file_menu_->addSeparator();
  file_menu_->addAction(actionQuit);
  help_menu_->addAction(actionInstructions);
@@ -197,6 +212,8 @@ MainWindow::MainWindow(QWidget *parent) :
  connect(action_load_annotations, SIGNAL(triggered()), this, SLOT(on_action_load_annotations_triggered()));
 
  connect(action_view_360, SIGNAL(triggered()), this, SLOT(on_action_view_360_triggered()));
+ connect(action_view_contours, SIGNAL(triggered()), this, SLOT(on_action_view_contours_triggered()));
+
 
  autogen_index_ = 0;
  axfi_annotation_group_ = nullptr;
@@ -535,17 +552,75 @@ void MainWindow::on_actionAnnotate_Multiple_Image_triggered()
 }
 
 
+void MainWindow::on_action_view_contours_triggered()
+{
+ if(image_filename_path_.isEmpty())
+   return;
+
+ QFileInfo qfi(image_filename_path_);
+
+ copy_binary_file_to_folder_with_rename(image_filename_path_,
+   DEFAULT_DGI_TEMP_FOLDER, "iat-temp-image" );
+
+ QString ini = DEFAULT_DGI_TEMP_FOLDER "/iat-temp-image." + qfi.suffix();
+ QString thei;
+ thei = DEFAULT_DGI_TEMP_FOLDER "/iat-temp-image-conv." + qfi.suffix();
+ QImageReader reader;
+ reader.setFileName(ini);
+
+ QImage image = reader.read();
+ QImage converted = image.convertToFormat(QImage::Format_RGB888);
+ QImageWriter writer;
+ writer.setFileName(thei);
+ writer.write(converted);
+
+ DGI_Image* dgi = new DGI_Image(thei);
+
+// DGI_Image dgi(DEFAULT_DGI_FOLDER "/img1.jpg");
+
+// DGI_Image dgi(DEFAULT_DGI_FOLDER "/AT20-0131A111.png");
+
+ dgi->load();
+
+ Demo_Transform_Group* dtg = new Demo_Transform_Group(dgi);
+ dgi->init_demo_transform_group(*dtg);
+
+ dgi->to_csv(DEFAULT_DGI_TEMP_FOLDER "/iat-temp-image.csv");
+
+ QDialog* dlg = new QDialog(this);
+
+ dlg->setWindowTitle("Contour View");
+
+ DGI_Demo_Frame* fr = new DGI_Demo_Frame(*dtg, 200, 800, 300);
+
+ QVBoxLayout* vbl = new QVBoxLayout;
+ vbl->addWidget(fr);
+
+ dlg->setLayout(vbl);
+ dlg->show();
+}
+
 void MainWindow::on_action_view_360_triggered()
 {
- WebGL_View_Dialog* dlg = new WebGL_View_Dialog(nullptr);
+ if(current_wgl_dialog_)
+ {
+  current_wgl_dialog_->setWindowState(current_wgl_dialog_->windowState()
+    & ~Qt::WindowMinimized | Qt::WindowActive);
+  current_wgl_dialog_->reset_tab_selection();
+  return;
+ }
 
- dlg->setWindowTitle("360 Mode");
+ current_wgl_dialog_ = new WebGL_View_Dialog(nullptr);
 
- connect(dlg, &WebGL_View_Dialog::snapshot_saved,
-   [this, dlg](QString file_path)
+ current_wgl_dialog_->setWindowTitle("360 Mode");
+
+ connect(current_wgl_dialog_, &WebGL_View_Dialog::snapshot_saved,
+   [this](QString file_path)
  {
   qDebug() << "loading " << file_path;
-  dlg->hide();
+  current_wgl_dialog_->setWindowState(current_wgl_dialog_->windowState()
+    | Qt::WindowMinimized);
+
 
   QString copy_path = copy_binary_file_to_folder(file_path, save_area_folder_);
 
@@ -555,7 +630,7 @@ void MainWindow::on_action_view_360_triggered()
     load_image(copy_path);
  });
 
- dlg->show();
+ current_wgl_dialog_->show();
 
 }
 
@@ -659,7 +734,7 @@ void MainWindow::load_list()
   int i;
   QString object;
 
-  for(i=0; line[i]!='\t'; ++i)
+  for(i=0; line[i] != '\t'; ++i)
   {
    if(i >= line.size())
      break;

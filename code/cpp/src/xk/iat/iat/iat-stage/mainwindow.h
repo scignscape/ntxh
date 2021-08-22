@@ -23,6 +23,8 @@ class AXFI_Annotation_Group;
 class Shape_Select_Frame;
 class Zoom_and_Navigate_Frame;
 
+class WebGL_View_Dialog;
+
 
 class MainWindow : public QMainWindow
 {
@@ -36,13 +38,19 @@ public:
 
 private:
 
+ WebGL_View_Dialog* current_wgl_dialog_;
+
  QAction* action_view_360;
+
 
  QAction* actionAnnotate_Single_Image;
  QAction* action_load_annotations;
+ QAction* action_view_contours;
+
  QAction* actionQuit;
  QAction* actionInstructions;
  QAction* actionOptions;
+
 
  QMenu* file_menu_;
  QMenu* help_menu_;
@@ -164,6 +172,8 @@ private Q_SLOTS:
 
  void on_action_load_annotations_triggered(); //metodo legato al comando Load Annotation
  void on_action_view_360_triggered();
+ void on_action_view_contours_triggered();
+
 
  void on_actionCreate_List_triggered(); //metodo legato al comando Create List (WIP)
  void on_actionInstructions_triggered(); //metodo legato al comando Instructions

@@ -86,7 +86,7 @@ public:
  void mouseReleaseEvent(QMouseEvent* mouseEvent) override;
  void mousePressEvent(QMouseEvent* mouseEvent) override;
 
-
+ void reset_tab_selection();
 
 Q_SIGNALS:
 
