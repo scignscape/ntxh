@@ -236,7 +236,11 @@ void GLArea::pasteTile()
     bool ret = (snapBuffer.mirrored(false,true)).save(outfile,"PNG");
     if (ret)
     {
-     this->Logf(GLLogStream::SYSTEM, "Snapshot saved to %s",outfile.toLocal8Bit().constData());
+     this->Logf(GLLogStream::SYSTEM, "Snapshot saved to %s", outfile.toLocal8Bit().constData());
+
+     // //  axfi ...
+     Q_EMIT snapshot_saved(outfile);
+
      if(ss.addToRasters)
      {
       // get current transform, before is reset by the following importRaster

@@ -156,6 +156,9 @@ MainWindow::MainWindow(QWidget *parent) :
    QMainWindow(parent) //??, ui(new Ui::MainWindow)
 {
  current_wgl_dialog_ = nullptr;
+ meshlab_in_socket_ = nullptr;
+ meshlab_out_socket_ = nullptr;
+
  save_area_folder_ = ROOT_FOLDER "/../save-area";
 
    //?menuBar->setGeometry(QRect(0, 0, 739, 22));
@@ -559,6 +562,34 @@ void MainWindow::on_actionAnnotate_Multiple_Image_triggered()
 
 void MainWindow::on_action_view_3d_triggered()
 {
+ if(meshlab_in_socket_)
+ {
+  if(!meshlab_out_socket_)
+  {
+   meshlab_out_socket_ = new QUdpSocket(this);
+   meshlab_out_socket_->bind(QHostAddress::LocalHost, 1235);
+  }
+  static QByteArray qba("^");
+  meshlab_out_socket_->writeDatagram(qba, QHostAddress::LocalHost, 1235);
+  return;
+ }
+
+ meshlab_in_socket_ = new QUdpSocket(this);
+ meshlab_in_socket_->bind(QHostAddress::LocalHost, 1234);
+
+ connect(meshlab_in_socket_, &QUdpSocket::readyRead,
+   [this]()
+ {
+  QByteArray qba(512, ' ');
+  meshlab_in_socket_->readDatagram(qba.data(), 512);
+  QByteArray num = qba.left(3);
+  int size = num.toInt();
+  qba = qba.mid(3, size);
+  QString file_path = QString::fromLatin1(qba);
+  showNormal();
+  load_image(file_path);
+ });
+
  QString path = qApp->applicationDirPath();
  QDir qd(path);
 
@@ -567,17 +598,6 @@ void MainWindow::on_action_view_3d_triggered()
 
  QProcess cmd;
  cmd.startDetached(ap, {});
-
- QUdpSocket* socket = new QUdpSocket(this);
- socket->bind(QHostAddress::LocalHost, 1234);
-
- connect(socket, &QUdpSocket::readyRead,
-   [this, socket]()
- {
-  QByteArray qba(300, ' ');
-  socket->readDatagram(qba.data(), 300);
-  qDebug() << "qba = " << qba;
- });
 
 
 }

@@ -45,6 +45,7 @@
 #include "saveSnapshotDialog.h"
 #include "ui_congratsDialog.h"
 
+#include <QUdpSocket>
 
 
 QProgressBar *MainWindow::qb;
@@ -52,6 +53,27 @@ QProgressBar *MainWindow::qb;
 MainWindow::MainWindow()
 	:mwsettings(), httpReq(this), gpumeminfo(NULL), wama()
 {
+ // // axfi
+ pending_snapshot_count_ = 0;
+
+ // //  only when launched from axfi ...
+ axfi_out_socket_ = nullptr;
+ if(true) // some sort of check?
+ {
+  axfi_in_socket_ = new QUdpSocket(this);
+  axfi_in_socket_->bind(QHostAddress::LocalHost, 1235);
+  connect(axfi_in_socket_, &QUdpSocket::readyRead,
+    [this]()
+  {
+   QByteArray qba(512, ' ');
+   axfi_in_socket_->readDatagram(qba.data(), 512);
+   qDebug() << "socket: " << qba;
+   if(qba[0] == '^')
+     setWindowState(windowState() & ~Qt::WindowMinimized | Qt::WindowActive);
+  });
+ }
+
+
 	_currviewcontainer = NULL;
 	setContextMenuPolicy(Qt::NoContextMenu);
 
@@ -180,7 +202,7 @@ void MainWindow::createActions()
 	importRasterAct = new QAction(QIcon(":/images/open.png"), tr("Import Raster..."), this);
 	connect(importRasterAct, SIGNAL(triggered()), this, SLOT(importRaster()));
 
-	saveSnapshotAct = new QAction(QIcon(":/images/snapshot.png"), tr("Save snapsho&t"), this);
+ saveSnapshotAct = new QAction(QIcon(":/images/snapshot.png"), tr("Save snapsho&t (or Export/Notate)"), this);
 	connect(saveSnapshotAct, SIGNAL(triggered()), this, SLOT(saveSnapshot()));
 
 	for (int i = 0; i < MAXRECENTFILES; ++i)

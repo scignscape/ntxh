@@ -2638,13 +2638,31 @@ void MainWindow::readViewFromFile(QString const& filename){
 
 void MainWindow::send_export_notate(QString file_name)
 {
- qDebug() << "send export notate ...";
+ if(!axfi_out_socket_)
+ {
+  axfi_out_socket_ = new QUdpSocket(this);
+  axfi_out_socket_->bind(QHostAddress::LocalHost, 1234);
+ }
+
+ int sz = file_name.size();
+ QByteArray qba = file_name.toLatin1();
+
+ if(sz < 10)
+ {
+  qba.prepend(QByteArray::number(sz));
+  qba.prepend("00");
+ }
+ else if(sz < 100)
+ {
+  qba.prepend(QByteArray::number(sz));
+  qba.prepend("0");
+ }
+ else
+   qba.prepend(QByteArray::number(sz));
 
 
- QUdpSocket* socket = new QUdpSocket(this);
- socket->bind(QHostAddress::LocalHost, 1234);
- QByteArray test = file_name.toLatin1();
- socket->writeDatagram(test, QHostAddress::LocalHost, 1234);
+ axfi_out_socket_->writeDatagram(qba, QHostAddress::LocalHost, 1234);
+ showMinimized();
 
 }
 
@@ -2658,15 +2676,23 @@ bool MainWindow::saveSnapshot()
 
  connect(&dialog, &SaveSnapshotDialog::export_notate_requested, [this, &dialog]()
  {
-
+  // //  axfi ...
+  if(pending_snapshot_count_ == 0)
+  {
+   connect(GLA(), &GLArea::snapshot_saved, [this](QString file_path)
+   {
+    if(pending_snapshot_count_ % 2)
+    {
+     ++pending_snapshot_count_;
+     qDebug() << "file path = " << file_path;
+     send_export_notate(file_path);
+    }
+   });
+  }
+  ++pending_snapshot_count_;
 
   GLA()->ss = dialog.getValues();
   GLA()->saveSnapshot( DEFAULT_TEMP_SNAPSHOT_FOLDER );
-
-//  QTimer::singleShot(2000, [this]()
-//  {
-   send_export_notate( DEFAULT_TEMP_SNAPSHOT_FOLDER );
-//  });
 
   dialog.close();
  });

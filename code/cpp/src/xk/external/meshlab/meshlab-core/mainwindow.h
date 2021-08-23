@@ -63,6 +63,8 @@ class QProgressDialog;
 class QNetworkAccessManager;
 class QNetworkReply;
 class QToolBar;
+class QUdpSocket;
+
 
 class MainWindowSetting
 {
@@ -92,6 +94,10 @@ public:
 class MainWindow : public QMainWindow, public MainWindowInterface
 {
 	Q_OBJECT
+
+
+ // //  axfi ...
+ int pending_snapshot_count_;
 
 public:
 	// callback function to execute a filter
@@ -143,6 +149,9 @@ private:
 
  // //  axfi ...
  void send_export_notate(QString file_name);
+
+ QUdpSocket* axfi_out_socket_;
+ QUdpSocket* axfi_in_socket_;
 
  void updateRenderingDataAccordingToActionsCommonCode(int meshid, const QList<MLRenderingAction*>& acts);
 	void updateRenderingDataAccordingToActionCommonCode(int meshid, MLRenderingAction* act);
@@ -250,7 +259,9 @@ private slots:
 	void updateGPUMemBar(int,int,int,int);
 
 	void updateLog();
+
 private:
+
 	void addRenderingSystemLogInfo(unsigned mmid);
 	int longestActionWidthInMenu(QMenu* m,const int longestwidth);
 	int longestActionWidthInMenu( QMenu* m);

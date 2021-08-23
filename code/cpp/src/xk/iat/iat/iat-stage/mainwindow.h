@@ -24,6 +24,7 @@ class Shape_Select_Frame;
 class Zoom_and_Navigate_Frame;
 
 class WebGL_View_Dialog;
+class QUdpSocket;
 
 
 class MainWindow : public QMainWindow
@@ -39,6 +40,11 @@ public:
 private:
 
  WebGL_View_Dialog* current_wgl_dialog_;
+
+
+ QUdpSocket* meshlab_out_socket_;
+ QUdpSocket* meshlab_in_socket_;
+
 
  QAction* action_view_360;
 
