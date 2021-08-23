@@ -39,11 +39,16 @@ public:
 	~SaveSnapshotDialog();
 	void setValues(const SnapshotSetting &ss);
 	SnapshotSetting getValues();
-	
+
+Q_SIGNALS:
+
+ void export_notate_requested();
+
 private slots:
 	void browseDir();
 
 private:
+
 	Ui::SSDialog* ui;
 	SnapshotSetting settings;
 };

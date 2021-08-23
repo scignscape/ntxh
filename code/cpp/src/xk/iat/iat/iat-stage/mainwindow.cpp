@@ -8,6 +8,8 @@
 
 #include <QTimer>
 
+#include <QUdpSocket>
+
 
 #include "dgi-opencv/dgi-image.h"
 #include "dgi-opencv/dgi-demo-frame.h"
@@ -182,8 +184,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
  actionAnnotate_Single_Image = new QAction("Load Image", this);
  action_load_annotations = new QAction("Load Notes", this);
- action_view_360 = new QAction("View 360 Mode", this);
- action_view_contours = new QAction("View Contours", this);
+ action_view_360 = new QAction("View 360 (Matterport)", this);
+ action_view_contours = new QAction("View Contours (OpenCV)", this);
+ action_view_3d = new QAction("View 3d (MeshLab)", this);
+
 
  actionQuit = new QAction("Quit", this);
  actionInstructions = new QAction("Instructions", this);
@@ -195,7 +199,7 @@ MainWindow::MainWindow(QWidget *parent) :
  file_menu_->addAction(action_load_annotations);
 
  file_menu_->addAction(action_view_contours);
-
+ file_menu_->addAction(action_view_3d);
  file_menu_->addAction(action_view_360);
 
 
@@ -213,6 +217,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
  connect(action_view_360, SIGNAL(triggered()), this, SLOT(on_action_view_360_triggered()));
  connect(action_view_contours, SIGNAL(triggered()), this, SLOT(on_action_view_contours_triggered()));
+ connect(action_view_3d, SIGNAL(triggered()), this, SLOT(on_action_view_3d_triggered()));
 
 
  autogen_index_ = 0;
@@ -549,6 +554,32 @@ void MainWindow::on_actionAnnotate_Multiple_Image_triggered()
   }
   else doBackUp(); //in caso di interruzioni
  }
+}
+
+
+void MainWindow::on_action_view_3d_triggered()
+{
+ QString path = qApp->applicationDirPath();
+ QDir qd(path);
+
+ QString ap = qd.absoluteFilePath("meshlab-console");
+ qDebug() << "ap = " << ap;
+
+ QProcess cmd;
+ cmd.startDetached(ap, {});
+
+ QUdpSocket* socket = new QUdpSocket(this);
+ socket->bind(QHostAddress::LocalHost, 1234);
+
+ connect(socket, &QUdpSocket::readyRead,
+   [this, socket]()
+ {
+  QByteArray qba(300, ' ');
+  socket->readDatagram(qba.data(), 300);
+  qDebug() << "qba = " << qba;
+ });
+
+
 }
 
 

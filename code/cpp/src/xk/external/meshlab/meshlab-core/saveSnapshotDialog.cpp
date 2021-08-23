@@ -30,6 +30,13 @@ SaveSnapshotDialog::SaveSnapshotDialog(QWidget * parent):QDialog(parent)
 	connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(accept()));
 	connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
 	connect(ui->browseDir, SIGNAL(clicked()),this, SLOT(browseDir()));
+
+
+ // // added
+ connect(ui->exportNotateButton, SIGNAL(clicked()), this, SIGNAL(export_notate_requested()));
+
+
+
 	ui->outDirLineEdit->setReadOnly(true);
 //	setFixedSize(250,130);
 }

@@ -56,6 +56,8 @@
 #include <wrap/io_trimesh/alnParser.h>
 #include <exif.h>
 
+#include <QUdpSocket>
+
 using namespace std;
 using namespace vcg;
 
@@ -2634,6 +2636,18 @@ void MainWindow::readViewFromFile(QString const& filename){
 		GLA()->readViewFromFile(filename);
 }
 
+void MainWindow::send_export_notate(QString file_name)
+{
+ qDebug() << "send export notate ...";
+
+
+ QUdpSocket* socket = new QUdpSocket(this);
+ socket->bind(QHostAddress::LocalHost, 1234);
+ QByteArray test = file_name.toLatin1();
+ socket->writeDatagram(test, QHostAddress::LocalHost, 1234);
+
+}
+
 bool MainWindow::saveSnapshot()
 {
 	if (!GLA()) return false;
@@ -2641,16 +2655,33 @@ bool MainWindow::saveSnapshot()
 	
 	SaveSnapshotDialog dialog(this);
 	dialog.setValues(GLA()->ss);
+
+ connect(&dialog, &SaveSnapshotDialog::export_notate_requested, [this, &dialog]()
+ {
+
+
+  GLA()->ss = dialog.getValues();
+  GLA()->saveSnapshot( DEFAULT_TEMP_SNAPSHOT_FOLDER );
+
+//  QTimer::singleShot(2000, [this]()
+//  {
+   send_export_notate( DEFAULT_TEMP_SNAPSHOT_FOLDER );
+//  });
+
+  dialog.close();
+ });
+
+ QDialog::DialogCode status = (QDialog::DialogCode) dialog.exec();
 	
-	if (dialog.exec()==QDialog::Accepted)
+ if (status == QDialog::Accepted)
 	{
-		GLA()->ss=dialog.getValues();
-		GLA()->saveSnapshot();
-		return true;
+  GLA()->ss=dialog.getValues();
+  GLA()->saveSnapshot();
+  return true;
 	}
-	
-	return false;
+ return false;
 }
+
 void MainWindow::about()
 {
 	QDialog *about_dialog = new QDialog();

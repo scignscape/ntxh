@@ -177,7 +177,10 @@ public:
     bool isHelpVisible()      {return helpVisible;}
     bool isTrackBallVisible()		{return trackBallVisible;}
     bool isDefaultTrackBall()   {return activeDefaultTrackball;}
-    void saveSnapshot();
+
+    // //  added temp_path -- axfi
+    void saveSnapshot(QString temp_path = {});
+
     void toggleHelpVisible()      {helpVisible = !helpVisible; update();}
   /*  void setBackFaceCulling(bool enabled);
     void setLight(bool state);

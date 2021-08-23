@@ -63,7 +63,11 @@ int main(int argc, char *argv[])
 		handleCriticalError(exc);
 		return -1;
 	}
-	window->showMaximized();
+
+ // //	window->showMaximized();  changed this -- iat
+
+ window->show();
+
 
 	// This event filter is installed to intercept the open events sent directly by the Operative System.
 	FileOpenEater *filterObj=new FileOpenEater(window.get());

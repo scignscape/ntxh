@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>616</width>
+    <width>628</width>
     <height>225</height>
    </rect>
   </property>
@@ -298,6 +298,25 @@
        </property>
        <property name="text">
         <string>Save</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="exportNotateButton">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Export/Notate</string>
        </property>
        <property name="default">
         <bool>true</bool>

@@ -45,5 +45,6 @@ LIBS += -L$$TARGETSDIR -lmeshlab-core  \
 
 LIBS += -lGL -lGLU -lGLEW 
 
-
-
+message(DESTDIR $$DESTDIR)
+#/home/nlevisrael/gits/annot/ctg-temp/ar/code/cpp/targets/qt/qt-multiple/uni/targets-5-15-2-uni-nomark
+#/home/nlevisrael/gits/annot/ctg-temp/ar/code/cpp/targets/qt/qt-multiple/nomark/targets-5-15-2-Desktop_Qt_5_15_2_GCC_64bit/

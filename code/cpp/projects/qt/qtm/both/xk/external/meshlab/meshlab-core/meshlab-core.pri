@@ -18,6 +18,8 @@ DEFINES += MESHLAB_SCALAR=float
 DEFINES += setResizeMode=setSectionResizeMode
 
 
+DEFINES += DEFAULT_TEMP_SNAPSHOT_FOLDER=\\\"$$ROOT_DIR/../dev/consoles/meshlab\\\"
+
 
 INCLUDEPATH += $$SRC_GROUP_DIR  
 

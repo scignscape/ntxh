@@ -103,6 +103,7 @@ public:
 	//const QString appName() const {return tr("MeshLab v")+appVer(); }
 	//const QString appVer() const {return tr("1.3.2"); }
 	MainWindowSetting mwsettings;
+
 signals:
 	void dispatchCustomSettings(const RichParameterList& rps);
 	void filterExecuted();
@@ -137,16 +138,24 @@ public slots:
 	void updateRenderingDataAccordingToAction(int meshid, MLRenderingAction* act,bool);
 	void updateRenderingDataAccordingToActions(QList<MLRenderingGlobalAction*> actlist);
 
+
 private:
-	void updateRenderingDataAccordingToActionsCommonCode(int meshid, const QList<MLRenderingAction*>& acts);
+
+ // //  axfi ...
+ void send_export_notate(QString file_name);
+
+ void updateRenderingDataAccordingToActionsCommonCode(int meshid, const QList<MLRenderingAction*>& acts);
 	void updateRenderingDataAccordingToActionCommonCode(int meshid, MLRenderingAction* act);
 
+
 private slots:
-	void documentUpdateRequested();
+
+ void documentUpdateRequested();
 	bool importMesh(QString fileName=QString(), bool isareload = false);
 	void endEdit();
 	void updateProgressBar(const int pos,const QString& text);
 	void updateTexture(int meshid);
+
 public:
 
 	bool exportMesh(QString fileName,MeshModel* mod,const bool saveAllPossibleAttributes);

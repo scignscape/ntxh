@@ -42,6 +42,7 @@ private:
 
  QAction* action_view_360;
 
+ QAction* action_view_3d;
 
  QAction* actionAnnotate_Single_Image;
  QAction* action_load_annotations;
@@ -173,6 +174,7 @@ private Q_SLOTS:
  void on_action_load_annotations_triggered(); //metodo legato al comando Load Annotation
  void on_action_view_360_triggered();
  void on_action_view_contours_triggered();
+ void on_action_view_3d_triggered();
 
 
  void on_actionCreate_List_triggered(); //metodo legato al comando Create List (WIP)

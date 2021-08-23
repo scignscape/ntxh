@@ -55,12 +55,13 @@ public:
     QSpacerItem *spacerItem3;
     QPushButton *cancelButton;
     QPushButton *saveButton;
+    QPushButton *exportNotateButton;
 
     void setupUi(QDialog *SSDialog)
     {
         if (SSDialog->objectName().isEmpty())
             SSDialog->setObjectName(QString::fromUtf8("SSDialog"));
-        SSDialog->resize(616, 225);
+        SSDialog->resize(628, 225);
         vboxLayout = new QVBoxLayout(SSDialog);
         vboxLayout->setSpacing(6);
         vboxLayout->setContentsMargins(11, 11, 11, 11);
@@ -212,13 +213,20 @@ public:
 
         hboxLayout3->addWidget(saveButton);
 
+        exportNotateButton = new QPushButton(SSDialog);
+        exportNotateButton->setObjectName(QString::fromUtf8("exportNotateButton"));
+        exportNotateButton->setMinimumSize(QSize(0, 25));
+        exportNotateButton->setMaximumSize(QSize(16777215, 25));
+
+        hboxLayout3->addWidget(exportNotateButton);
+
 
         vboxLayout->addLayout(hboxLayout3);
 
 
         retranslateUi(SSDialog);
 
-        saveButton->setDefault(true);
+        exportNotateButton->setDefault(true);
 
 
         QMetaObject::connectSlotsByName(SSDialog);
@@ -252,6 +260,7 @@ public:
         addToRastersCheckBox->setText(QCoreApplication::translate("SSDialog", "Add Snapshot as new Raster Layer", nullptr));
         cancelButton->setText(QCoreApplication::translate("SSDialog", "Cancel", nullptr));
         saveButton->setText(QCoreApplication::translate("SSDialog", "Save", nullptr));
+        exportNotateButton->setText(QCoreApplication::translate("SSDialog", "Export/Notate", nullptr));
     } // retranslateUi
 
 };
