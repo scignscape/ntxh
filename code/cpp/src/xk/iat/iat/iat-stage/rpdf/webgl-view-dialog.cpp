@@ -127,9 +127,6 @@ WebGL_View_Dialog::WebGL_View_Dialog(QWidget* parent)
 //?
 
  QString url = ROOT_FOLDER "/../testdia/matterport/examples.html";
-
-
-
  qDebug() << "url = " << url;
  //
  wep_->load(QUrl("file:///" + url));
@@ -145,9 +142,11 @@ WebGL_View_Dialog::WebGL_View_Dialog(QWidget* parent)
  wev_->set_scroll_container(wev_scroll_area_);
  qtw_->addTab(wev_scroll_area_, "Tour");
 
+ QString iurl = ROOT_FOLDER "/../testdia/matterport/info.html";
+
  iwev_ = new QWebEngineView(this);
- iwev_->page()->load(QUrl("https://matterport.com/"));
- qtw_->addTab(iwev_, "Matterport Info");
+ iwev_->page()->load(QUrl("file:///" + iurl));
+ qtw_->addTab(iwev_, "360 Provider Info");
 
  qtw_->tabBar()->setShape(QTabBar::TriangularNorth);
  //?

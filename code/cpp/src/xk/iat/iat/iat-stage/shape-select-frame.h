@@ -43,6 +43,9 @@ class Shape_Select_Frame : public QFrame
 
  QCheckBox* highlight_ckb_;
 
+ QHBoxLayout* save_button_layout_;
+ QPushButton* save_button_;
+ QPushButton* close_button_;
 
 public:
 
@@ -104,9 +107,11 @@ public:
  }
 
 
-signals:
+Q_SIGNALS:
 
  void shape_selection_changed(QString new_selection);
+ void save_requested(bool);
+ void close_requested(bool);
 
 };
 

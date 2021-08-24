@@ -228,7 +228,13 @@ void DisplayImage_Scene_Item::handle_mouse_event<
 
  }
 
- menu->popup(mapToGlobal(mev->pos()));
+ //QPoint pos = this_proxy_widget_->mapToParent(mev->pos()).toPoint();
+// QPoint pos = mev->globalPos();
+
+ QPoint pos = mev->pos();
+ qDebug() << "pos = " << pos;
+
+ menu->popup(pos);
 
 }
 

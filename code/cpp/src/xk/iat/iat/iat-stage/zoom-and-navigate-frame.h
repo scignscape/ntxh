@@ -10,6 +10,7 @@
 #include <QComboBox>
 #include <QCheckBox>
 #include <QButtonGroup>
+#include <QGroupBox>
 
 // subwindows/
 #include "range-slider.h"
@@ -24,8 +25,10 @@ class Zoom_and_Navigate_Frame : public QFrame
  QPushButton* zoom_in_button_;
  QPushButton* zoom_out_button_;
 
+ QPushButton* reset_all_button_;
+
  QPushButton* reset_zoom_button_;
- QPushButton* save_button_;
+ QPushButton* repeat_zoom_button_;
 
 
  QPushButton* image_top_left_button_;
@@ -35,7 +38,11 @@ class Zoom_and_Navigate_Frame : public QFrame
  QCheckBox* multi_draw_ckb_;
  QHBoxLayout* bottom_layout_;
 
- ctkRangeSlider* zoom_slider_;
+ QSlider* zoom_slider_[3];
+ QGroupBox* zoom_sliders_group_box1_;
+ QGroupBox* zoom_sliders_group_box2_;
+ QVBoxLayout* zoom_sliders_group_box1_layout_;
+ QHBoxLayout* zoom_sliders_group_box2_layout_;
 
  QHBoxLayout* zoom_buttons_layout_;
  QVBoxLayout* main_layout_;
@@ -62,7 +69,7 @@ Q_SIGNALS:
  void center_image_button_clicked(bool);
  void image_top_left_button_clicked(bool);
 
- void save_requested(bool);
+ void reset_notes_zoom_requested(bool);
  void pan_mode_changed(bool);
 
  void multi_draw_unset();
@@ -77,6 +84,7 @@ public Q_SLOTS:
  void handle_zoom_out_discrete(bool);
 
  void handle_reset_zoom(bool);
+ void handle_repeat_zoom(bool);
 
 
 

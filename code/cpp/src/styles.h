@@ -164,6 +164,8 @@ inline QString colorful_toggle_button_quiet_style_sheet_()
  ;
 }
 
+
+
 //?QPushButton:hover,
 //"QPushButton[checked=true] { background:#B13240; }"
 //"QPushButton[checked=false] { background:white; }"
@@ -248,6 +250,66 @@ inline QString tab_style_sheet_()
 //        "QTabWidget{border:solid white 3px; background:white}"
 }
 
+inline QString soft_group_box_style_sheet_()
+{
+ return R"(
+        QGroupBox {
+            border: 1px solid silver;
+            border-radius: 6px;
+            margin-top: 13px;
+        }
+        QGroupBox::title {
+        subcontrol-origin:  margin;
+            subcontrol-position: top left;
+            padding: -1 12px 0 %1px;        }
+
+        )";
+}
+
+inline QString mini_tab_style_sheet_()
+{
+ return "QTabBar::tab {"
+        "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
+        "                            stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,"
+        "  stop: 0.5 #D8D8D8, stop: 0.8 #A8D8A9,  stop: 1.0 #A030D0);"
+        "border: 2px solid #C4C4C3;"
+        "border-bottom-color: #C2C7CB; /* same as the pane color */"
+        "border-top-left-radius: 1px;"
+        "border-top-right-radius: 1px;"
+        "min-width: 10ex;"
+        "padding: 1px;"
+        "color:rgb(45,50,17)"
+        "}"
+
+        "QTabBar::tab:selected, QTabBar::tab:hover {"
+        "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
+        "                            stop: 0 #fafafa, stop: 0.4 #f4f4f4,"
+        "                            stop: 0.8 #e7e7e7, stop: 1.0 #A030D0);"
+        "border-color: rgb(15,10,90);"
+        "border-bottom-color: #C2C7CB; /* same as pane color */"
+        "color: rgb(15,10,90);"
+        "}"
+
+        "QTabBar::tab:hover { border-color: #ABABCB; }"
+
+        "QTabBar::tab:selected {"
+        "border-color: #1B9B9B;"
+        "border-bottom-color: #C2C7CB; /* same as pane color */"
+        "}"
+
+        "QTabBar::tab:!selected {"
+        "margin-top: 2px; /* make non-selected tabs look smaller */"
+        "}"
+
+        "QTabBar::tab::disabled {"
+        "width: 0; height: 0; margin: 0; padding: 0; border: none;"
+        "}"
+   ;
+
+//        "QTabWidget{border:solid white 3px; background:white}"
+}
+
+
 
 inline QString colorful_button_style_sheet_()
 {
@@ -264,6 +326,128 @@ inline QString colorful_button_style_sheet_()
    "C6BC, stop: 0.8 #ECCFA0, stop: 0.9 darkred,  stop: 1 brown"
    "); min-width: 80px; }";
 }
+
+inline QString soft_colorful_button_style_sheet_()
+{
+ return
+   "QPushButton:hover {background:rgb(240,190,150);"
+   " border-left: 4px groove rgb(240,190,150); "
+   " border-right: 4px ridge rgb(240,190,150); "
+   "}\n"
+   "QPushButton{color:black;  padding:1px;  border: 1px solid rgb(180,60,15); "
+   "  border-bottom: 1px solid #0E15CD; "
+   " border-radius: 3px; "
+   " background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+   "  stop: 0 red,  stop: 0.08 white,  stop: 0.2 #E0E0C0, stop: 0.6 #EEE6CC"
+   "  stop: 0.8 #FCEFE0, stop: 0.95 white,  stop: 1 brown"
+   "); }";
+}
+
+
+//"QPushButton:hover {"
+//"background-color: qlineargradient("
+//"x1:0, y1:0, x2:0, y2:1,"
+//"stop:0 #C5D8FA,"
+//"stop:0.03 #F5E0FA,"
+//"stop:0.04 #F5E8FA,"
+//"stop:1 #F5E8BE"
+//");"
+//"background-image: none;"
+//"border-image: none;"
+//"border-radius: 6px;"
+//"border-left: 2px ridge #3AFFAB;"
+//"border-right: 2px ridge #3AFFAB;"
+//"border-top: 2px ridge #C5D8FA;"
+//"border-bottom: 2px ridge #C5D8FA;"
+//"}"
+
+//"QPushButton:disabled {"
+//"background-color: qlineargradient("
+//"x1:0, y1:0, x2:0, y2:1,"
+//"stop:0 #C5D8FA,"
+//"stop:0.01 #618281,"
+//"stop:0.02 #EDEDED,"
+//"stop:0.07 #EDEDED,"
+//"stop:0.09 #445A82,"
+//"stop:1 #616161"
+//");"
+//"background-image: none;"
+//"border-image: none;"
+//"border: 1px solid #364767;"
+//"}"
+
+
+
+inline QString colorful_toggle_button_mixed_style_sheet_()
+{
+ return
+
+   "QPushButton{color:black;  padding:1px;  border: 2px solid rgb(240,190,150); "
+   "  border-bottom: 1px solid #CEF51D; "
+   " border-radius: 6px; "
+   " background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+   "  stop: 0 white, stop: 0.1 #C0C0C0, stop: 0.6 #CCC6BC "
+   "  stop: 0.8 #ECCFA0, stop: 0.9 darkred,  stop: 1 brown "
+   ");} "
+
+
+   "QPushButton:hover{ color:black; padding:1px;  border: 1px solid rgb(150,240,190); "
+   "  border-bottom: 1px solid #CEF51D; "
+   " border-radius: 0px; "
+   " background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+   "  stop: 0 white, stop: 0.1 #C0C0C0, stop: 0.6 #C6CCBC "
+   "  stop: 0.8 #A0ECCF, stop: 0.9 darkseagreen,  stop: 1 blue"
+   "); }"
+
+   "QPushButton:hover:pressed {background:rgb(150,240,190); "
+   " border-left: 4px groove rgb(150,240,190); "
+   " border-right: 4px ridge rgb(150,240,190); "
+   "}\n"
+
+ "QPushButton:checked {"
+ "border:1px solid #EFE7F7;"
+ "background-color: qlineargradient("
+ "x1:0, y1:0, x2:0, y2:1,"
+ "stop:0 #C5D8FA,"
+ "stop:0.03 #E95289,"
+ "stop:0.04 #E95289,"
+ "stop:1 #A64166"
+ ");"
+ "}"
+
+ "QPushButton:checked:hover {"
+ "border:1px solid #EFE7F7;"
+ "background-color: qlineargradient("
+ "x1:0, y1:0, x2:0, y2:1,"
+ "stop:0 #C5D8FA,"
+ "stop:0.5 #E95289,"
+ "stop:1 #A64166"
+ ");"
+ "}"
+
+   "QPushButton:checked:hover:pressed{"
+   "background-color: qlineargradient("
+   "x1:0, y1:0, x2:0, y2:1,"
+   "stop:0 #C5D8FA,"
+   "stop:0.03 #F5E0FA,"
+   "stop:0.04 #F5E8FA,"
+   "stop:1 #F5E8BE"
+   ");"
+   "background-image: none;"
+   "border-image: none;"
+   "border-radius: 6px;"
+   "border-left: 2px ridge #3AFFAB;"
+   "border-right: 2px ridge #3AFFAB;"
+   "border-top: 2px ridge #C5D8FA;"
+   "border-bottom: 2px ridge #C5D8FA;"
+   "}"
+
+
+ ;
+}
+
+
+
 
 inline QString colorful_button_style_sheet_down_()
 {

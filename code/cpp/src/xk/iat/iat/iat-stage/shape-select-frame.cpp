@@ -1,6 +1,8 @@
 
 #include "shape-select-frame.h"
 
+#include "styles.h"
+
 #include <QDebug>
 
 
@@ -9,6 +11,8 @@ Shape_Select_Frame::Shape_Select_Frame(QWidget* parent)
 {
  main_tab_ = new QFrame(this);
  clear_last_all_tab_ = new QFrame(this);
+
+
 
  main_tab_widget_ = new QTabWidget(this);
 
@@ -106,10 +110,43 @@ Shape_Select_Frame::Shape_Select_Frame(QWidget* parent)
 
  main_layout_->addWidget(main_tab_widget_);
 
+ save_button_ = new QPushButton("Save", this);
+ save_button_->setMinimumWidth(75);
+ save_button_->setMaximumWidth(75);
+ save_button_->setStyleSheet(soft_colorful_button_style_sheet_());
+
+ close_button_ = new QPushButton("Close", this);
+ close_button_->setMinimumWidth(75);
+ close_button_->setMaximumWidth(75);
+ close_button_->setStyleSheet(soft_colorful_button_style_sheet_());
+
+ save_button_layout_ = new QHBoxLayout;
+
+ save_button_layout_->addStretch();
+ save_button_layout_->addWidget(save_button_);
+ save_button_layout_->addStretch();
+ save_button_layout_->addWidget(close_button_);
+ save_button_layout_->addStretch();
+
+ main_layout_->addStretch();
+
+ main_layout_->addLayout(save_button_layout_);
+
+ main_layout_->addStretch();
+
+ connect(save_button_, SIGNAL(clicked(bool)), this, SIGNAL(save_requested(bool)));
+ connect(close_button_, SIGNAL(clicked(bool)), this, SIGNAL(close_requested(bool)));
+
+
+
  setLayout(main_layout_);
 
  setMaximumWidth(190);
- setMaximumHeight(190);
+// setMaximumHeight(190);
+
+ main_tab_widget_->tabBar()->setShape(QTabBar::RoundedNorth);
+ //?
+ main_tab_widget_->setStyleSheet(mini_tab_style_sheet_());
 
 }
 

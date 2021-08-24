@@ -3,10 +3,14 @@
 
 #include <QDebug>
 
+#include "styles.h"
+
 
 Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
   :  QFrame(parent)
 {
+ QString button_style_sheet = colorful_small_button_style_sheet_();
+
  handle_zoom_ok_ = false;
  initial_zoom_position_ = 25;
 
@@ -32,8 +36,15 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  reset_zoom_button_ = new QPushButton("Reset Zoom", this);
  reset_zoom_button_->setMaximumWidth(85);
- zoom_buttons_layout_->addWidget(reset_zoom_button_);
 
+ reset_zoom_button_->setStyleSheet(button_style_sheet);
+
+
+ repeat_zoom_button_ = new QPushButton("Repeat Zoom", this);
+ repeat_zoom_button_->setMaximumWidth(85);
+ repeat_zoom_button_->setStyleSheet(button_style_sheet);
+
+ zoom_buttons_layout_->addWidget(repeat_zoom_button_);
 
  zoom_buttons_layout_->addStretch();
 
@@ -45,13 +56,9 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  zoom_buttons_layout_->addStretch();
 
+ zoom_buttons_layout_->addWidget(reset_zoom_button_);
 
- save_button_ = new QPushButton("Save", this);
- save_button_->setMaximumWidth(85);
-
- zoom_buttons_layout_->addWidget(save_button_);
-
- connect(save_button_, SIGNAL(clicked(bool)), this, SIGNAL(save_requested(bool)));
+ connect(repeat_zoom_button_, SIGNAL(clicked(bool)), this, SLOT(handle_repeat_zoom(bool)));
 
  connect(reset_zoom_button_, SIGNAL(clicked(bool)), this, SLOT(handle_reset_zoom(bool)));
 
@@ -59,32 +66,85 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  connect(zoom_out_button_, SIGNAL(clicked(bool)), this, SLOT(handle_zoom_out_discrete(bool)));
 
 
- zoom_slider_ = new ctkRangeSlider(Qt::Horizontal, this);
+ zoom_slider_[0] = new ctkRangeSlider(Qt::Horizontal, this);
+ zoom_slider_[1] = new ctkRangeSlider(Qt::Horizontal, this);
+ zoom_slider_[2] = new QSlider(Qt::Horizontal, this);
+ zoom_slider_[2]->setRange(1, 20);
 
-
- connect(zoom_slider_, SIGNAL(minimumValueChanged(int)), this,
+ connect(zoom_slider_[0], SIGNAL(minimumValueChanged(int)), this,
    SLOT(handle_zoom_minimum_value_changed(int)));
 
- connect(zoom_slider_, SIGNAL(maximumValueChanged(int)), this,
+ connect(zoom_slider_[0], SIGNAL(maximumValueChanged(int)), this,
    SLOT(handle_zoom_maximum_value_changed(int)));
 
- zoom_slider_->setMinimumValue(initial_zoom_position_);
- zoom_slider_->setMaximumValue(100 - initial_zoom_position_);
+ ((ctkRangeSlider*) zoom_slider_[0])->setMinimumValue(initial_zoom_position_);
+ ((ctkRangeSlider*) zoom_slider_[0])->setMaximumValue(100 - initial_zoom_position_);
+
+ ((ctkRangeSlider*) zoom_slider_[1])->setMinimumValue(initial_zoom_position_);
+ ((ctkRangeSlider*) zoom_slider_[1])->setMaximumValue(100 - initial_zoom_position_);
+
+ zoom_sliders_group_box1_ = new QGroupBox("Zoom (Image)", this);
+ zoom_sliders_group_box2_ = new QGroupBox("Notes/Image", this);
+
+ zoom_sliders_group_box1_->setStyleSheet(soft_group_box_style_sheet_().arg(99));
+ zoom_sliders_group_box2_->setStyleSheet(soft_group_box_style_sheet_().arg(12));
+
+ // zoom_sliders_group_box_[1] = new QGroupBox("Notes", this);
+// zoom_sliders_group_box_[2] = new QGroupBox("Notes and Image", this);
+
+ zoom_sliders_group_box1_layout_ = new QVBoxLayout;
+ zoom_sliders_group_box2_layout_ = new QHBoxLayout;
+// zoom_sliders_group_box_layout_[1] = new QVBoxLayout;
+// zoom_sliders_group_box_layout_[2] = new QVBoxLayout;
+
+
+ zoom_sliders_group_box1_layout_->addLayout(zoom_buttons_layout_);
+ zoom_sliders_group_box1_layout_->addWidget(zoom_slider_[0]);
+
+ zoom_sliders_group_box1_->setLayout(zoom_sliders_group_box1_layout_);
 
  main_layout_ = new QVBoxLayout;
- main_layout_->addLayout(zoom_buttons_layout_);
 
- main_layout_->addStretch(5);
+// main_layout_->addWidget(zoom_slider_[0]);
 
- main_layout_->addWidget(zoom_slider_);
+// main_layout_->addStretch(1);
+
+ zoom_sliders_group_box2_layout_->addWidget(zoom_slider_[1], 3);
+ zoom_sliders_group_box2_layout_->addWidget(zoom_slider_[2], 1);
+
+ reset_all_button_ = new QPushButton("Reset (All)", this);
+ reset_all_button_->setMaximumWidth(85);
+
+ reset_all_button_->setStyleSheet(button_style_sheet);
+
+ zoom_sliders_group_box2_layout_->addWidget(reset_all_button_);
+
+ zoom_sliders_group_box2_->setLayout(zoom_sliders_group_box2_layout_);
+
+ main_layout_->addWidget(zoom_sliders_group_box2_);
+
+ main_layout_->addStretch(3);
+
+ main_layout_->addWidget(zoom_sliders_group_box1_);
+
+ // zoom_sliders_group_box_layout_[1]->addWidget(zoom_slider_[1]);
+ // zoom_sliders_group_box_layout_[2]->addWidget(zoom_slider_[2]);
+ // zoom_sliders_group_box_[1]->setLayout(zoom_sliders_group_box_layout_[1]);
+ // zoom_sliders_group_box_[2]->setLayout(zoom_sliders_group_box_layout_[2]);
+
+ // main_layout_->addWidget(zoom_sliders_group_box_[1]);
+ // main_layout_->addWidget(zoom_sliders_group_box_[2]);
 
  main_layout_->addStretch(2);
 
  image_top_left_button_ = new QPushButton("Image Top Left", this);
  image_top_left_button_->setMinimumWidth(110);
 
+ image_top_left_button_->setStyleSheet(button_style_sheet);
+
  center_image_button_ = new QPushButton("Center Image", this);
  center_image_button_->setMinimumWidth(110);
+ center_image_button_->setStyleSheet(button_style_sheet);
 
  position_buttons_layout_ = new QHBoxLayout;
 
@@ -116,11 +176,13 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  });
 
  pan_mode_button_ = new QPushButton("Pan Mode", this);
- pan_mode_button_->setMaximumWidth(85);
+ pan_mode_button_->setMinimumWidth(75);
 
  bottom_layout_->addWidget(pan_mode_button_);
  pan_mode_button_->setCheckable(true);
  pan_mode_button_->setChecked(false);
+
+ pan_mode_button_->setStyleSheet(colorful_toggle_button_mixed_style_sheet_());
 
  connect(pan_mode_button_, SIGNAL(clicked(bool)), this, SIGNAL(pan_mode_changed(bool)));
 
@@ -128,23 +190,29 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  setLayout(main_layout_);
 
- setMaximumHeight(190);
+ //setMaximumHeight(190);
+
+}
+
+void Zoom_and_Navigate_Frame::handle_repeat_zoom(bool)
+{
 
 }
 
 void Zoom_and_Navigate_Frame::handle_reset_zoom(bool)
 {
- int v = zoom_slider_->minimumValue();
+ int v =  ((ctkRangeSlider*) zoom_slider_[0])->minimumValue();
  if(v != 25)
  {
-  zoom_slider_->setMinimumValue(25);
+   ((ctkRangeSlider*) zoom_slider_[0])->setMinimumValue(25);
+   ((ctkRangeSlider*) zoom_slider_[1])->setMinimumValue(25);
  }
 }
 
 
 void Zoom_and_Navigate_Frame::handle_zoom_in_discrete(bool)
 {
- int v = zoom_slider_->minimumValue();
+ int v =  ((ctkRangeSlider*) zoom_slider_[0])->minimumValue();
 
  if(v == 50)
    return;
@@ -164,12 +232,13 @@ void Zoom_and_Navigate_Frame::handle_zoom_in_discrete(bool)
 
  }
 
- zoom_slider_->setMinimumValue(v);
+  ((ctkRangeSlider*) zoom_slider_[0])->setMinimumValue(v);
+  ((ctkRangeSlider*) zoom_slider_[1])->setMinimumValue(v);
 }
 
 void Zoom_and_Navigate_Frame::handle_zoom_out_discrete(bool)
 {
- int v = zoom_slider_->minimumValue();
+ int v =  ((ctkRangeSlider*) zoom_slider_[0])->minimumValue();
 
  if(v == 1)
    return;
@@ -186,7 +255,8 @@ void Zoom_and_Navigate_Frame::handle_zoom_out_discrete(bool)
   v -= vmod;
  }
 
- zoom_slider_->setMinimumValue(v);
+  ((ctkRangeSlider*) zoom_slider_[0])->setMinimumValue(v);
+  ((ctkRangeSlider*) zoom_slider_[1])->setMinimumValue(v);
 }
 
 
@@ -237,7 +307,8 @@ void Zoom_and_Navigate_Frame::adjust_zoom(int z)
 
 void Zoom_and_Navigate_Frame::handle_zoom_minimum_value_changed(int val)
 {
- zoom_slider_->setMaximumValue(100 - val);
+ ((ctkRangeSlider*) zoom_slider_[0])->setMaximumValue(100 - val);
+ ((ctkRangeSlider*) zoom_slider_[1])->setMaximumValue(100 - val);
 
  if(val > 0)
  {
@@ -249,7 +320,8 @@ void Zoom_and_Navigate_Frame::handle_zoom_minimum_value_changed(int val)
 
 void Zoom_and_Navigate_Frame::handle_zoom_maximum_value_changed(int val)
 {
- zoom_slider_->setMinimumValue(100 - val);
+ ((ctkRangeSlider*) zoom_slider_[0])->setMinimumValue(100 - val);
+ ((ctkRangeSlider*) zoom_slider_[1])->setMinimumValue(100 - val);
 
  if(val > 0)
  {

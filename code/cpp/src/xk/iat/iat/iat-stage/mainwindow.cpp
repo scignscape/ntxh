@@ -14,6 +14,8 @@
 #include "dgi-opencv/dgi-image.h"
 #include "dgi-opencv/dgi-demo-frame.h"
 
+#include "styles.h"
+
 USING_KANS(DGI)
 
 
@@ -233,7 +235,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
  connect(zoom_frame_, SIGNAL(zoom_factor_changed(r8)), this, SLOT(handle_zoom_factor_changed(r8)));
 
- connect(zoom_frame_, SIGNAL(save_requested(bool)), this, SLOT(handle_save_requested(bool)));
+ connect(shape_select_frame_, SIGNAL(save_requested(bool)), this, SLOT(handle_save_requested(bool)));
+ connect(shape_select_frame_, &Shape_Select_Frame::close_requested, this,
+         [this](bool) {close();});
 
  connect(zoom_frame_, &Zoom_and_Navigate_Frame::image_top_left_button_clicked, [this](bool)
  {
