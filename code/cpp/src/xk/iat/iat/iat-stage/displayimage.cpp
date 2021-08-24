@@ -106,6 +106,8 @@ void DisplayImage::load_image(QString file_path)
   // //  always new ?
  image_scene_item_ = new DisplayImage_Scene_Item;// (this);
  image_scene_item_->set_data(display_image_data_);
+ image_scene_item_->set_containing_image_view(scrolled_image_view_);
+
 
  image_scene_item_->resize(sipw, siph);
 
@@ -118,7 +120,6 @@ void DisplayImage::load_image(QString file_path)
    (sipw/2) - 10, (siph/2) - 10, sipw + 20, siph + 20);
 
  image_scene_item_->set_original_position(background_center_rectangle->pos());
-
 
  background_center_rectangle->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
  background_center_rectangle->setBrush(Qt::darkCyan);
@@ -192,6 +193,7 @@ DisplayImage::DisplayImage(QWidget* parent) : QWidget(parent)
 //La classe parent ¨ la classe MainWindow
 DisplayImage_Scene_Item::DisplayImage_Scene_Item(QWidget *parent) : QWidget(parent)
 {
+ containing_image_view_ = nullptr;
 
  setAutoFillBackground(true);
  setBackgroundRole(QPalette::Window);

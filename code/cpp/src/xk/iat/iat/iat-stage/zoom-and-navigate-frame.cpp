@@ -9,10 +9,16 @@
 Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
   :  QFrame(parent)
 {
+ image_data_ = nullptr;
+
  QString button_style_sheet = colorful_small_button_style_sheet_();
 
  handle_zoom_ok_ = false;
  initial_zoom_position_ = 25;
+ initial_annotation_zoom_position_ = 100;
+
+ last_zoom_position_ = -1;
+ last_annotation_zoom_position_ = -1;
 
  QString s1 = QString("%1").arg(QChar(5184));
  zoom_in_button_ = new QPushButton(s1, this);
@@ -43,6 +49,7 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  repeat_zoom_button_ = new QPushButton("Repeat Zoom", this);
  repeat_zoom_button_->setMaximumWidth(85);
  repeat_zoom_button_->setStyleSheet(button_style_sheet);
+ repeat_zoom_button_->setEnabled(false);
 
  zoom_buttons_layout_->addWidget(repeat_zoom_button_);
 
@@ -66,10 +73,14 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  connect(zoom_out_button_, SIGNAL(clicked(bool)), this, SLOT(handle_zoom_out_discrete(bool)));
 
 
+ zoom_slider_[2] = nullptr;
+
  zoom_slider_[0] = new ctkRangeSlider(Qt::Horizontal, this);
  zoom_slider_[1] = new ctkRangeSlider(Qt::Horizontal, this);
  zoom_slider_[2] = new QSlider(Qt::Horizontal, this);
- zoom_slider_[2]->setRange(1, 20);
+
+ zoom_slider_[2]->setRange(0, 2 * initial_annotation_zoom_position_);
+ zoom_slider_[2]->setValue(initial_annotation_zoom_position_);
 
  connect(zoom_slider_[0], SIGNAL(minimumValueChanged(int)), this,
    SLOT(handle_zoom_minimum_value_changed(int)));
@@ -77,31 +88,42 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  connect(zoom_slider_[0], SIGNAL(maximumValueChanged(int)), this,
    SLOT(handle_zoom_maximum_value_changed(int)));
 
+
+ connect(zoom_slider_[1], SIGNAL(minimumValueChanged(int)), this,
+   SLOT(handle_top_zoom_minimum_value_changed(int)));
+
+ connect(zoom_slider_[1], SIGNAL(maximumValueChanged(int)), this,
+   SLOT(handle_top_zoom_maximum_value_changed(int)));
+
+ connect(zoom_slider_[2], SIGNAL(valueChanged(int)), this,
+   SLOT(handle_annotation_zoom_value_changed(int)));
+
+
  ((ctkRangeSlider*) zoom_slider_[0])->setMinimumValue(initial_zoom_position_);
  ((ctkRangeSlider*) zoom_slider_[0])->setMaximumValue(100 - initial_zoom_position_);
 
  ((ctkRangeSlider*) zoom_slider_[1])->setMinimumValue(initial_zoom_position_);
  ((ctkRangeSlider*) zoom_slider_[1])->setMaximumValue(100 - initial_zoom_position_);
 
- zoom_sliders_group_box1_ = new QGroupBox("Zoom (Image)", this);
- zoom_sliders_group_box2_ = new QGroupBox("Notes/Image", this);
+ zoom_sliders_group_box_ = new QGroupBox("Zoom (Image)", this);
+ zoom_sliders_top_group_box_ = new QGroupBox("Notes/Image", this);
 
- zoom_sliders_group_box1_->setStyleSheet(soft_group_box_style_sheet_().arg(99));
- zoom_sliders_group_box2_->setStyleSheet(soft_group_box_style_sheet_().arg(12));
+ zoom_sliders_group_box_->setStyleSheet(soft_group_box_style_sheet_().arg(99));
+ zoom_sliders_top_group_box_->setStyleSheet(soft_group_box_style_sheet_().arg(12));
 
  // zoom_sliders_group_box_[1] = new QGroupBox("Notes", this);
 // zoom_sliders_group_box_[2] = new QGroupBox("Notes and Image", this);
 
- zoom_sliders_group_box1_layout_ = new QVBoxLayout;
- zoom_sliders_group_box2_layout_ = new QHBoxLayout;
+ zoom_sliders_group_box_layout_ = new QVBoxLayout;
+ zoom_sliders_top_group_box_layout_ = new QHBoxLayout;
 // zoom_sliders_group_box_layout_[1] = new QVBoxLayout;
 // zoom_sliders_group_box_layout_[2] = new QVBoxLayout;
 
 
- zoom_sliders_group_box1_layout_->addLayout(zoom_buttons_layout_);
- zoom_sliders_group_box1_layout_->addWidget(zoom_slider_[0]);
+ zoom_sliders_group_box_layout_->addLayout(zoom_buttons_layout_);
+ zoom_sliders_group_box_layout_->addWidget(zoom_slider_[0]);
 
- zoom_sliders_group_box1_->setLayout(zoom_sliders_group_box1_layout_);
+ zoom_sliders_group_box_->setLayout(zoom_sliders_group_box_layout_);
 
  main_layout_ = new QVBoxLayout;
 
@@ -109,23 +131,24 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
 // main_layout_->addStretch(1);
 
- zoom_sliders_group_box2_layout_->addWidget(zoom_slider_[1], 3);
- zoom_sliders_group_box2_layout_->addWidget(zoom_slider_[2], 1);
+ zoom_sliders_top_group_box_layout_->addWidget(zoom_slider_[1], 3);
+ zoom_sliders_top_group_box_layout_->addWidget(zoom_slider_[2], 1);
 
  reset_all_button_ = new QPushButton("Reset (All)", this);
  reset_all_button_->setMaximumWidth(85);
 
  reset_all_button_->setStyleSheet(button_style_sheet);
+ reset_all_button_->setEnabled(false);
 
- zoom_sliders_group_box2_layout_->addWidget(reset_all_button_);
+ zoom_sliders_top_group_box_layout_->addWidget(reset_all_button_);
 
- zoom_sliders_group_box2_->setLayout(zoom_sliders_group_box2_layout_);
+ zoom_sliders_top_group_box_->setLayout(zoom_sliders_top_group_box_layout_);
 
- main_layout_->addWidget(zoom_sliders_group_box2_);
+ main_layout_->addWidget(zoom_sliders_top_group_box_);
 
  main_layout_->addStretch(3);
 
- main_layout_->addWidget(zoom_sliders_group_box1_);
+ main_layout_->addWidget(zoom_sliders_group_box_);
 
  // zoom_sliders_group_box_layout_[1]->addWidget(zoom_slider_[1]);
  // zoom_sliders_group_box_layout_[2]->addWidget(zoom_slider_[2]);
@@ -162,9 +185,8 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
    this, SIGNAL(center_image_button_clicked(bool)));
 
  multi_draw_ckb_ = new QCheckBox("Multi-Draw", this);
+
  bottom_layout_ = new QHBoxLayout;
- bottom_layout_->addWidget(multi_draw_ckb_);
- bottom_layout_->addStretch();
 
  connect(multi_draw_ckb_, &QCheckBox::stateChanged,
    [this](int st)
@@ -178,13 +200,17 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  pan_mode_button_ = new QPushButton("Pan Mode", this);
  pan_mode_button_->setMinimumWidth(75);
 
- bottom_layout_->addWidget(pan_mode_button_);
  pan_mode_button_->setCheckable(true);
  pan_mode_button_->setChecked(false);
 
  pan_mode_button_->setStyleSheet(colorful_toggle_button_mixed_style_sheet_());
 
  connect(pan_mode_button_, SIGNAL(clicked(bool)), this, SIGNAL(pan_mode_changed(bool)));
+
+ bottom_layout_->addWidget(pan_mode_button_);
+ bottom_layout_->addStretch();
+ bottom_layout_->addWidget(multi_draw_ckb_);
+
 
  main_layout_->addLayout(bottom_layout_);
 
@@ -194,21 +220,59 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
 }
 
-void Zoom_and_Navigate_Frame::handle_repeat_zoom(bool)
+void Zoom_and_Navigate_Frame::reset_with_image_data(void* image_data)
 {
 
+ image_data_ = image_data;
+
+// ((ctkRangeSlider*) zoom_slider_[0])->setMinimumValue(initial_zoom_position_);
+// ((ctkRangeSlider*) zoom_slider_[1])->setMinimumValue(initial_zoom_position_);
+// ((ctkRangeSlider*) zoom_slider_[2])->setMinimumValue(initial_annotation_zoom_position_);
+
+ last_zoom_position_ = -1;
+ last_annotation_zoom_position_ = -1;
+
+ handle_reset_all(false);
+
+ repeat_zoom_button_->setEnabled(false);
 }
+
 
 void Zoom_and_Navigate_Frame::handle_reset_zoom(bool)
 {
  int v =  ((ctkRangeSlider*) zoom_slider_[0])->minimumValue();
- if(v != 25)
+ if(v != initial_zoom_position_)
  {
-   ((ctkRangeSlider*) zoom_slider_[0])->setMinimumValue(25);
-   ((ctkRangeSlider*) zoom_slider_[1])->setMinimumValue(25);
+  last_zoom_position_ = ((ctkRangeSlider*) zoom_slider_[0])->minimumValue();
+  ((ctkRangeSlider*) zoom_slider_[0])->setMinimumValue(initial_zoom_position_);
+  ((ctkRangeSlider*) zoom_slider_[1])->setMinimumValue(initial_zoom_position_);
+  repeat_zoom_button_->setEnabled(true);
  }
 }
 
+void Zoom_and_Navigate_Frame::handle_reset_all(bool)
+{
+ last_annotation_zoom_position_ = zoom_slider_[2]->value();
+ handle_reset_zoom(false);
+ zoom_slider_[2]->setValue(100);
+ reset_all_button_->setEnabled(false);
+}
+
+void Zoom_and_Navigate_Frame::handle_repeat_zoom(bool)
+{
+ if(last_zoom_position_ != (u2) -1)
+ {
+  ((ctkRangeSlider*) zoom_slider_[0])->setMinimumValue(last_zoom_position_);
+  last_zoom_position_ = -1;
+  repeat_zoom_button_->setEnabled(false);
+ }
+
+ if(last_annotation_zoom_position_ != (u2) -1)
+ {
+  zoom_slider_[2]->setValue(last_annotation_zoom_position_);
+  last_annotation_zoom_position_ = -1;
+ }
+}
 
 void Zoom_and_Navigate_Frame::handle_zoom_in_discrete(bool)
 {
@@ -232,12 +296,14 @@ void Zoom_and_Navigate_Frame::handle_zoom_in_discrete(bool)
 
  }
 
-  ((ctkRangeSlider*) zoom_slider_[0])->setMinimumValue(v);
-  ((ctkRangeSlider*) zoom_slider_[1])->setMinimumValue(v);
+ ((ctkRangeSlider*) zoom_slider_[0])->setMinimumValue(v);
+ ((ctkRangeSlider*) zoom_slider_[1])->setMinimumValue(v);
 }
 
 void Zoom_and_Navigate_Frame::handle_zoom_out_discrete(bool)
 {
+ if(!image_data_) return;
+
  int v =  ((ctkRangeSlider*) zoom_slider_[0])->minimumValue();
 
  if(v == 1)
@@ -310,12 +376,12 @@ void Zoom_and_Navigate_Frame::handle_zoom_minimum_value_changed(int val)
  ((ctkRangeSlider*) zoom_slider_[0])->setMaximumValue(100 - val);
  ((ctkRangeSlider*) zoom_slider_[1])->setMaximumValue(100 - val);
 
+ if(!image_data_) return;
+
  if(val > 0)
  {
   adjust_zoom(val);
  }
-
- //qDebug() << "min " << val;
 }
 
 void Zoom_and_Navigate_Frame::handle_zoom_maximum_value_changed(int val)
@@ -323,10 +389,54 @@ void Zoom_and_Navigate_Frame::handle_zoom_maximum_value_changed(int val)
  ((ctkRangeSlider*) zoom_slider_[0])->setMinimumValue(100 - val);
  ((ctkRangeSlider*) zoom_slider_[1])->setMinimumValue(100 - val);
 
+ if(!image_data_) return;
+
  if(val > 0)
  {
   adjust_zoom(100 - val);
  }
 }
 
+void Zoom_and_Navigate_Frame::handle_top_zoom_minimum_value_changed(int val)
+{
+ if(!image_data_)
+ {
+  handle_zoom_minimum_value_changed(val);
+  return;
+ }
+
+ u2 v1 = ((ctkRangeSlider*) zoom_slider_[0])->minimumValue();
+ handle_zoom_minimum_value_changed(val);
+ u2 v2 = ((ctkRangeSlider*) zoom_slider_[0])->minimumValue();
+
+ // //  note: annotations increase left to right, not out to in ...
+ s2 diff = v2 - v1;
+ u2 z = zoom_slider_[2]->value();
+ zoom_slider_[2]->setValue(z + (diff * 2));
+}
+
+void Zoom_and_Navigate_Frame::handle_top_zoom_maximum_value_changed(int val)
+{
+ if(!image_data_)
+ {
+  handle_zoom_maximum_value_changed(val);
+  return;
+ }
+
+ u2 v1 = ((ctkRangeSlider*) zoom_slider_[0])->minimumValue();
+ handle_zoom_maximum_value_changed(val);
+ u2 v2 = ((ctkRangeSlider*) zoom_slider_[0])->minimumValue();
+
+ // //  note: annotations increase left to right, not out to in ...
+ s2 diff = v2 - v1;
+ u2 z = zoom_slider_[2]->value();
+ zoom_slider_[2]->setValue(z + (diff * 2));
+}
+
+void Zoom_and_Navigate_Frame::handle_annotation_zoom_value_changed(int)
+{
+ reset_all_button_->setEnabled(true);
+
+ // //   needs a selected annotation ...
+}
 

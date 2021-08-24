@@ -273,10 +273,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
  shape_select_frame_->setContentsMargins(0,0,0,0);
 
- top_layout_->addWidget(shape_select_frame_);
-
- top_layout_->addStretch(1);
-
  QSizePolicy spr(QSizePolicy::Preferred, QSizePolicy::Preferred);
  spr.setHorizontalStretch(30);
  zoom_frame_->setSizePolicy(spr);
@@ -284,6 +280,11 @@ MainWindow::MainWindow(QWidget *parent) :
  zoom_frame_->setContentsMargins(0,0,0,0);
 
  top_layout_->addWidget(zoom_frame_);
+
+ top_layout_->addStretch(1);
+
+ top_layout_->addWidget(shape_select_frame_);
+
 
 // top_layout_->addStretch(1);
 
@@ -460,6 +461,8 @@ void MainWindow::load_image(QString file_path)
 {
  image_filename_path_ = file_path;
  display_image_data_->setNameSelected(true);
+
+ zoom_frame_->reset_with_image_data(&image_filename_path_);
 
  if(!project_filename_path_.isEmpty() && imageSequence_.indexOf(image_filename_path_) != -1)
  {

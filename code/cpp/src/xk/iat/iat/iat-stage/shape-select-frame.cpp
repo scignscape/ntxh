@@ -108,8 +108,6 @@ Shape_Select_Frame::Shape_Select_Frame(QWidget* parent)
 
  clear_last_all_tab_->setLayout(clear_last_all_tab_layout_);
 
- main_layout_->addWidget(main_tab_widget_);
-
  save_button_ = new QPushButton("Save", this);
  save_button_->setMinimumWidth(75);
  save_button_->setMaximumWidth(75);
@@ -128,9 +126,11 @@ Shape_Select_Frame::Shape_Select_Frame(QWidget* parent)
  save_button_layout_->addWidget(close_button_);
  save_button_layout_->addStretch();
 
+ main_layout_->addLayout(save_button_layout_);
+
  main_layout_->addStretch();
 
- main_layout_->addLayout(save_button_layout_);
+ main_layout_->addWidget(main_tab_widget_);
 
  main_layout_->addStretch();
 
@@ -144,9 +144,10 @@ Shape_Select_Frame::Shape_Select_Frame(QWidget* parent)
  setMaximumWidth(190);
 // setMaximumHeight(190);
 
- main_tab_widget_->tabBar()->setShape(QTabBar::RoundedNorth);
+ main_tab_widget_->tabBar()->setShape(QTabBar::RoundedSouth);
+ main_tab_widget_->setTabPosition(QTabWidget::South);
  //?
- main_tab_widget_->setStyleSheet(mini_tab_style_sheet_());
+ main_tab_widget_->setStyleSheet(mini_tab_style_sheet_inverted_());
 
 }
 

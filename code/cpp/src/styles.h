@@ -309,6 +309,49 @@ inline QString mini_tab_style_sheet_()
 //        "QTabWidget{border:solid white 3px; background:white}"
 }
 
+inline QString mini_tab_style_sheet_inverted_()
+{
+ return "QTabBar::tab {"
+        "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
+        "                            stop: 1 #E1E1E1, stop: 0.6 #DDDDDD,"
+        "  stop: 0.5 #D8D8D8, stop: 0.2 #A8D8A9,  stop: 0 #A030D0);"
+        "border: 2px solid #C4C4C3;"
+        "border-top-color: #C2C7CB; /* same as the pane color */"
+        "border-bottom-left-radius: 1px;"
+        "border-bottom-right-radius: 1px;"
+        "min-width: 10ex;"
+        "padding: 1px;"
+        "color:rgb(45,50,17)"
+        "}"
+
+        "QTabBar::tab:selected, QTabBar::tab:hover {"
+        "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
+        "                            stop: 1 #fafafa, stop: 0.6 #f4f4f4,"
+        "                            stop: 0.2 #e7e7e7, stop: 0 #A030D0);"
+        "border-color: rgb(15,10,90);"
+        "border-top-color: #C2C7CB; /* same as pane color */"
+        "color: rgb(15,10,90);"
+        "}"
+
+        "QTabBar::tab:hover { border-color: #ABABCB; }"
+
+        "QTabBar::tab:selected {"
+        "border-color: #1B9B9B;"
+        "border-top-color: #C2C7CB; /* same as pane color */"
+        "}"
+
+        "QTabBar::tab:!selected {"
+        "margin-bottom: 2px; /* make non-selected tabs look smaller */"
+        "}"
+
+        "QTabBar::tab::disabled {"
+        "width: 0; height: 0; margin: 0; padding: 0; border: none;"
+        "}"
+   ;
+
+//        "QTabWidget{border:solid white 3px; background:white}"
+}
+
 
 
 inline QString colorful_button_style_sheet_()
@@ -493,6 +536,20 @@ inline QString colorful_small_button_style_sheet_()
    " border-left: 4px groove rgb(240,190,0); "
    " border-right: 4px ridge rgb(240,190,0); "
    "}\n"
+
+   "QPushButton:disabled {background:rgb(200,200,204);min-width: 11px;"
+   " color:rgb(160,190,230); "
+   " padding-left:2;padding-right:2;padding-top:0;padding-bottom:0;"
+   " border-left: 4px groove rgb(240,190,150); "
+   " border-right: 4px ridge rgb(240,190,150); "
+   "}\n"
+
+   "QPushButton:pressed {background:rgb(190,0,230);min-width:11px;"
+   " border-radius: 4px;padding-left:2;padding-right:2;padding-top:0;padding-bottom:0;"
+   " border-left: 4px groove rgb(240,90,240); "
+   " border-right: 4px ridge rgb(240,90,240); "
+   "}\n"
+
    ;
 }
 

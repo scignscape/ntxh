@@ -225,17 +225,12 @@ void DisplayImage_Scene_Item::handle_mouse_event<
 
    update();
   });
-
  }
 
- //QPoint pos = this_proxy_widget_->mapToParent(mev->pos()).toPoint();
-// QPoint pos = mev->globalPos();
+ QPoint pos = this_proxy_widget_->mapToScene(mev->pos()).toPoint();
+ QPoint pos1 = containing_image_view_->mapFromScene(pos);
 
- QPoint pos = mev->pos();
- qDebug() << "pos = " << pos;
-
- menu->popup(pos);
-
+ menu->popup(containing_image_view_->viewport()->mapToGlobal(pos1));
 }
 
 

@@ -17,6 +17,8 @@
 
 #include "global-types.h"
 
+#include "accessors.h"
+
 
 class Zoom_and_Navigate_Frame : public QFrame
 {
@@ -39,18 +41,25 @@ class Zoom_and_Navigate_Frame : public QFrame
  QHBoxLayout* bottom_layout_;
 
  QSlider* zoom_slider_[3];
- QGroupBox* zoom_sliders_group_box1_;
- QGroupBox* zoom_sliders_group_box2_;
- QVBoxLayout* zoom_sliders_group_box1_layout_;
- QHBoxLayout* zoom_sliders_group_box2_layout_;
+
+ QGroupBox* zoom_sliders_top_group_box_;
+ QHBoxLayout* zoom_sliders_top_group_box_layout_;
+
+ QGroupBox* zoom_sliders_group_box_;
+ QVBoxLayout* zoom_sliders_group_box_layout_;
 
  QHBoxLayout* zoom_buttons_layout_;
  QVBoxLayout* main_layout_;
  QHBoxLayout* position_buttons_layout_;
 
+ void* image_data_;
 
  bool handle_zoom_ok_;
- int initial_zoom_position_;
+ u2 initial_zoom_position_;
+ u2 initial_annotation_zoom_position_;
+
+ u2 last_zoom_position_;
+ u2 last_annotation_zoom_position_;
 
  void adjust_zoom(int z);
  void direct_adjust_zoom(int z);
@@ -61,6 +70,10 @@ class Zoom_and_Navigate_Frame : public QFrame
 public:
 
  Zoom_and_Navigate_Frame(QWidget* parent);
+
+ ACCESSORS(void* ,image_data)
+
+ void reset_with_image_data(void* image_data);
 
 Q_SIGNALS:
 
@@ -80,13 +93,17 @@ public Q_SLOTS:
  void handle_zoom_minimum_value_changed(int val);
  void handle_zoom_maximum_value_changed(int val);
 
+ void handle_top_zoom_minimum_value_changed(int val);
+ void handle_top_zoom_maximum_value_changed(int val);
+
  void handle_zoom_in_discrete(bool);
  void handle_zoom_out_discrete(bool);
 
  void handle_reset_zoom(bool);
  void handle_repeat_zoom(bool);
+ void handle_reset_all(bool);
 
-
+ void handle_annotation_zoom_value_changed(int);
 
 
 };

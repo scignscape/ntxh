@@ -306,6 +306,8 @@ private:
 
  QGraphicsItem* background_item_;
 
+ QGraphicsView* containing_image_view_;
+
  QPointF original_position_;
 
  QVector<QPair<AXFI_Annotation*, r8>> saved_axfi_annotations_;
@@ -350,6 +352,7 @@ public:
  ACCESSORS(QGraphicsProxyWidget* ,this_proxy_widget)
  ACCESSORS(QPointF ,original_position)
  ACCESSORS(QGraphicsItem* ,background_item)
+ ACCESSORS(QGraphicsView* ,containing_image_view)
 
 
 public:
