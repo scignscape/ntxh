@@ -73,7 +73,7 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  connect(zoom_out_button_, SIGNAL(clicked(bool)), this, SLOT(handle_zoom_out_discrete(bool)));
 
 
- zoom_slider_[2] = nullptr;
+// zoom_slider_[2] = nullptr;
 
  zoom_slider_[0] = new ctkRangeSlider(Qt::Horizontal, this);
  zoom_slider_[1] = new ctkRangeSlider(Qt::Horizontal, this);
@@ -139,6 +139,9 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  reset_all_button_->setStyleSheet(button_style_sheet);
  reset_all_button_->setEnabled(false);
+
+ connect(reset_all_button_, SIGNAL(clicked(bool)), this, SLOT(handle_reset_all(bool)));
+
 
  zoom_sliders_top_group_box_layout_->addWidget(reset_all_button_);
 
