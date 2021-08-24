@@ -1,0 +1,38 @@
+
+
+\begin{frame}{\ft{Room Highlights Dialog Box: Room-By-Room Breakdown}}
+
+\doubleFrame{The Re-PDF viewer provides a special 
+dialog box to show the room-by-room 
+breakdown of architectural/decorative features/amenities.}
+
+\begin{tikzpicture}
+
+%\nodeincludegraphics[0.85\textwidth]{screenshots/ss-rm1.png}
+\nodeincludegraphicsTR{5.5cm}{2cm}{screenshots/ss-rm1.png}
+
+\ann{darkRed}{0.7}{1mm}{grred!30!brown}{0.5}{13,9}{10}{3}{0.8}
+
+\node [anchor=west,fill=white,inner sep=8]
+ (note) at (13,9) {\hc{Feature Descriptions}};
+ 
+% \node [anchor=west,fill=yellow!5!white,opacity=.95,
+% text opacity=1,inner sep=9, text width=6.8]
+%  (longnote) at (5,4.8) {{\color{black}{Each room features, one of which is highlighted at a %time}
+%  }
+%  };
+
+
+ \node [anchor=west,fill=yellow!5!white,opacity=.95,
+ text opacity=1,inner sep=9, text width=6.8cm]
+  (longnote) at (5,4.8) {{\color{brred!30!black}{%
+  {\hspace*{0.8em}\parbox{6.3cm}{
+  {\LARGE {\begin{centering}\begin{spacing}{1.1}\textbf{Each room description is divided into several features, 
+  one of which is highlighted at a time}\end{spacing}\end{centering}}}}}}}};
+  
+
+\end{tikzpicture}
+
+
+\end{frame}
+

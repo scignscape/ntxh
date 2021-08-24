@@ -1,0 +1,97 @@
+
+
+\begin{frame}{\ft{Virtual Tour Tag Posts}}
+
+\doubleFrame{With Materport tours that employ tag-posts, 
+the Virtual Tour can also be synchronized 
+with other parts of the application --- for 
+example, showing information about a particular room when 
+users click on a tag-post hyperlink positioned 
+at the center of the room as depicted in a virtual tour.
+Matterport spaces often use tag-posts to 
+describe property features/amenities found at 
+specific points in the virtual tour. 
+}
+
+\begin{tikzpicture}
+
+\nodeincludegraphicsTRRS{1}{0cm}{1cm}{2.8cm}{3cm}{screenshots/ss-vt3.png}
+
+%\ann{BlueGreen!30!red}{0.8}{0.7mm}{red!30!blue}{0.5}{11,4.5}{2}{2.5}{0.95}
+
+%\polyann{BlueGreen!30!red}{0.8}{0.7mm}{red!30!blue}{0.5}{11,4.5}{6}{3cm}{3.5cm}
+
+%\polyann{black}{1}{2mm}{red!30!blue}{0.5}{11,4.5}{6}{3cm}{3.5cm}
+
+%\path [draw=#1,draw opacity=#2,line width=#3, fill=#4, fill opacity = #5, even odd rule] %
+%	node [minimum size=#8,regular polygon,regular polygon sides=#7] at (#6) {}
+%	node [minimum size=#9,regular polygon,regular polygon sides=#7] at (#6) {};}
+%\path [draw=black,line width=3mm,fill=red,even odd rule] %
+%	
+
+\node [minimum size=4.2cm,regular polygon,regular polygon sides=6,
+rotate=30,draw=BlueGreen!30!red,line width=1mm] (innr) at (8.3,5.58) {};
+
+\node [minimum size=4.8cm,regular polygon,regular polygon sides=6,
+rotate=30,draw=BlueGreen!30!red,line width=1mm] (outr) at (8.3,5.58) {};
+
+\path [fill=red!30!blue,fill opacity=0.5,even odd rule]
+(outr.corner 1) -- (outr.corner 2) -- (outr.corner 3) -- 
+(outr.corner 4) -- (outr.corner 5) -- (outr.corner 6)
+(innr.corner 1) -- (innr.corner 2) -- (innr.corner 3) -- 
+(innr.corner 4) -- (innr.corner 5) -- (innr.corner 6)
+;
+
+\node [anchor=west,fill=white,inner sep=8]
+ (note) at (-0.1,6) {\hc{Tag Posts}};
+
+\node [anchor=west,fill=white,inner sep=4, text width=5.2cm]
+ (longnote) at (-0.1,2.4) {{\color{rb!80!red}{%
+ {\LARGE {\begin{spacing}{0.9}\textit{Matterport Tag Posts add details to fixed 
+ locations in a virtual tour.  Tag Posts can include 
+ text, audio, video, or hyperlinks}\end{spacing}}}}}};
+
+
+\colorarr{>=latex, ->}{fcBoxColor!70!blue}{1}
+{fcBoxColor!30!red}{1}{2mm}{note.east}{7.4,4.75}
+
+
+
+%\filldraw[fill=red]
+%node [minimum size=2cm,regular polygon,regular polygon sides=6,draw=black,thick]
+% (innr) at (10,4.5) {}
+%node [minimum size=3cm,regular polygon,regular polygon sides=6,draw=black,thick] at (10,4.5)  %(outr) {};
+
+
+%\fill[even odd rule] innr outr {};
+%
+%\path [draw=black,line width=3mm,fill=red,even odd rule]
+
+%
+%\path[fill=red,even odd rule]
+%\draw[fill, fill=red,even odd rule]
+
+%\node [minimum size=3cm,regular polygon,
+%regular polygon sides=6,draw=black,thick] (outr) at (15,4.5) {};
+%\node [minimum size=2cm,regular polygon,
+%regular polygon sides=6,draw=black,thick] (innr) at (15,4.5) {};
+
+%%,save path=innr
+
+%\path[fill=red,even odd rule]
+%restore spath=innr;
+
+
+
+%\path[fill=red,even odd rule]
+%regular polygon [minimum size=3cm,regular polygon sides=6] at (15,4.5) {} 
+%regular polygon [minimum size=2cm,regular polygon sides=6] at (15,4.5) {};
+
+
+%\ann{BlueGreen!30!red}{0.8}{0.7mm}{red!30!blue}{0.5}{11,4.5}{2}{2.5}{0.95}
+
+\end{tikzpicture}
+
+
+\end{frame}
+

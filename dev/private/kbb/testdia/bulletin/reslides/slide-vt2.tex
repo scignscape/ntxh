@@ -1,0 +1,31 @@
+
+
+\begin{frame}{\ft{Virtual Tour Windows}}
+
+\doubleFrame{Compared to browser-based Virtual Tours,
+the embedded WebGL viewers in Re-PDF are more convenient, because 
+they allow the tour window to be visually juxtaposed with 
+other windows, such as the room-by-room breakdown of 
+descriptions and features.}
+
+\begin{tikzpicture}
+\nodeincludegraphicsTR{2.1cm}{2cm}{screenshots/ss-vt2.png}
+
+ \node [anchor=west,fill=yellow!10!red!2!white,opacity=0.98,
+ text opacity=1,inner sep=16, text width=6cm]
+  (longnote) at (14,11.15) {{\color{brred!50!black}{%
+  {\hspace*{0.8em}\parbox{5.7cm}{
+  {\LARGE {\begin{centering}\begin{spacing}{1.1}\textbf{Room description features
+  can be linked to Matterport views of each room}\end{spacing}\end{centering}}}}}}}};
+
+\colorarr{>=latex, ->}{fcBoxColor!20!black}
+{0.8}{darkRed!70!blue}{2}{1mm}{longnote.west}{12.5, 10.5}
+
+\colorarr{>=latex, ->}{fcBoxColor!60!black}
+{0.8}{blGreen!30!red}{1}{1mm}{longnote.south}{18.5, 7.5}
+
+\end{tikzpicture}
+
+
+\end{frame}
+

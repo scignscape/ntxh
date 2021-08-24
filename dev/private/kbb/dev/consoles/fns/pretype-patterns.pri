@@ -1,0 +1,1 @@
+# this file is created to signal for qmake that the pretype patterns files have been generated
