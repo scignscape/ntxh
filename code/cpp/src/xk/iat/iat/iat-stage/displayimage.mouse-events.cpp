@@ -216,12 +216,13 @@ void DisplayImage_Scene_Item::handle_mouse_event<
   {
 //   qDebug() << "this = " << this;
 //   this->handle_save_notation_requested();
-   Q_EMIT save_notation_requested();
+   Q_EMIT save_notation_requested(false);
 //   Q_EMIT onLineDraw({});
   });
 
   menu->addAction("Save Notation with Comment", [this]
   {
+   Q_EMIT save_notation_requested(true);
   });
 
 

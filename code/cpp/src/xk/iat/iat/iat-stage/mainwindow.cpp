@@ -9,6 +9,7 @@
 #include <QTimer>
 
 #include <QUdpSocket>
+#include <QTextEdit>
 
 
 #include "dgi-opencv/dgi-image.h"
@@ -50,32 +51,119 @@ class Special_Input_Dialog : public QInputDialog
 {
  int* autogen_index_;
 
+ // // these are only used if the dialog
+  //   also has a multiline input field ....
+ QString* short_text_;
+ QLineEdit* short_text_input_field_;
+
 public:
 
- Special_Input_Dialog(int* autogen_index, QWidget* parent = nullptr);
+ Special_Input_Dialog(int* autogen_index,
+   QWidget* parent = nullptr, QString* short_text = nullptr);
 
  void customMenuRequested(QPoint pos);
 
- static QString get_text(int* autogen_index, QWidget *parent, const QString &title, const QString &label,
-                 QLineEdit::EchoMode echo = QLineEdit::Normal,
-                 const QString &text = QString(), bool *ok = nullptr,
+ static QString get_text(int* autogen_index, QWidget *parent,
+   const QString &title, const QString &label, QString* short_text = nullptr,
+   QLineEdit::EchoMode echo = QLineEdit::Normal,
+   const QString &text = QString(), bool *ok = nullptr,
                  Qt::WindowFlags flags = Qt::WindowFlags(),
                  Qt::InputMethodHints inputMethodHints = Qt::ImhNone);
 
 };
 
+// //  Note: this is all for mixing a QLineEdit and QTextEdit
+ //    in the input dialog.  Obviously depending on internal
+ //    Qt implementation details and might be better as a
+ //    hand-rolled dialog box (except it's good to keep the
+ //    interface similar to QInputDilog as much as possible ...)
 
-QString Special_Input_Dialog::get_text(int* autogen_index, QWidget *parent, const QString &title, const QString &label,
-                                       QLineEdit::EchoMode mode, const QString &text, bool *ok,
-                                       Qt::WindowFlags flags, Qt::InputMethodHints inputMethodHints)
+#include "private/qdialog_p.h"
+
+class QPlainTextEdit;
+class QSpinBox;
+class QDoubleSpinBox;
+class QInputDialogListView;
+
+// //  All we need here is the d->mainLayout which is VBox ...
+class QInputDialogPrivate : public QDialogPrivate
 {
- //?    QAutoPointer<QInputDialog> dialog(new QInputDialog(parent, flags));
- Special_Input_Dialog* dialog = new Special_Input_Dialog(autogen_index, parent); //, flags);
+ Q_DECLARE_PUBLIC(QInputDialog)
+
+public:
+    QInputDialogPrivate();
+
+    void ensureLayout();
+    void ensureLineEdit();
+    void ensurePlainTextEdit();
+    void ensureComboBox();
+    void ensureListView();
+    void ensureIntSpinBox();
+    void ensureDoubleSpinBox();
+    void ensureEnabledConnection(QAbstractSpinBox *spinBox);
+    void setInputWidget(QWidget *widget);
+    void chooseRightTextInputWidget();
+    void setComboBoxText(const QString &text);
+    void setListViewText(const QString &text);
+    QString listViewText() const;
+    void ensureLayout() const { const_cast<QInputDialogPrivate *>(this)->ensureLayout(); }
+    bool useComboBoxOrListView() const { return comboBox && comboBox->count() > 0; }
+    void _q_textChanged(const QString &text);
+    void _q_plainTextEditTextChanged();
+    void _q_currentRowChanged(const QModelIndex &newIndex, const QModelIndex &oldIndex);
+
+    mutable QLabel *label;
+    mutable QDialogButtonBox *buttonBox;
+    mutable QLineEdit *lineEdit;
+    mutable QPlainTextEdit *plainTextEdit;
+    mutable QSpinBox *intSpinBox;
+    mutable QDoubleSpinBox *doubleSpinBox;
+    mutable QComboBox *comboBox;
+    mutable QInputDialogListView *listView;
+    mutable QWidget *inputWidget;
+    mutable QVBoxLayout *mainLayout;
+    QInputDialog::InputDialogOptions opts;
+    QString textValue;
+    QPointer<QObject> receiverToDisconnectOnClose;
+    QByteArray memberToDisconnectOnClose;
+};
+
+
+
+QString Special_Input_Dialog::get_text(int* autogen_index, QWidget *parent,
+  const QString &title, const QString &label, QString* short_text,
+  QLineEdit::EchoMode mode, const QString &text, bool *ok,
+  Qt::WindowFlags flags, Qt::InputMethodHints inputMethodHints)
+{
+ Special_Input_Dialog* dialog = new Special_Input_Dialog(autogen_index,
+   parent, short_text); //, flags);
+
  dialog->setWindowTitle(title);
  dialog->setLabelText(label);
  dialog->setTextValue(text);
  dialog->setTextEchoMode(mode);
  dialog->setInputMethodHints(inputMethodHints);
+
+ if(dialog->short_text_)
+ {
+  // //  setOptions causes ensureLayout(), so we're good for that ...
+  dialog->setOptions(QInputDialog::UsePlainTextEditForTextInput);
+
+  QInputDialogPrivate* d = reinterpret_cast<QInputDialogPrivate*>(dialog->QInputDialog::d_ptr.data());
+
+  dialog->short_text_input_field_ = new QLineEdit(dialog);
+  d->mainLayout->insertWidget(1, dialog->short_text_input_field_);
+
+  connect(dialog->short_text_input_field_, &QLineEdit::textChanged,
+    [dialog](const QString& text)
+  {
+   *dialog->short_text_ = text;
+  });
+
+  QLabel* comment = new QLabel("Enter Comment Text:", dialog);
+  d->mainLayout->insertWidget(2, comment);
+
+ }
 
  const int ret = dialog->exec();
  if (ok)
@@ -90,10 +178,14 @@ QString Special_Input_Dialog::get_text(int* autogen_index, QWidget *parent, cons
  }
 }
 
-Special_Input_Dialog::Special_Input_Dialog(int* autogen_index, QWidget* parent)
-  :  autogen_index_(autogen_index), QInputDialog(parent)
+
+Special_Input_Dialog::Special_Input_Dialog(int* autogen_index,
+  QWidget* parent, QString* short_text)
+    :  QInputDialog(parent), autogen_index_(autogen_index),
+      short_text_(short_text),  short_text_input_field_(nullptr)
 {
  setContextMenuPolicy(Qt::CustomContextMenu);
+
  connect(this, &Special_Input_Dialog::customContextMenuRequested,
    [this](QPoint pos)
  {
@@ -103,7 +195,11 @@ Special_Input_Dialog::Special_Input_Dialog(int* autogen_index, QWidget* parent)
 
   menu->addAction("Autogenerate", [this]
   {
-   this->setTextValue(QString("auto_%1").arg(++*this->autogen_index_));
+   QString text = QString("auto_%1").arg(++*this->autogen_index_);
+   if(short_text_input_field_)
+     short_text_input_field_->setText(text);
+   else
+     setTextValue(text);
   });
 
   menu->popup(mapToGlobal(pos));
@@ -138,7 +234,8 @@ void MainWindow::init_display_scene_item(DisplayImage_Scene_Item* si)
 // display_scene_item_->setObjectName(QString::fromUtf8("ImageDisplayWidget"));
 
 
- connect(display_scene_item_,SIGNAL(save_notation_requested()), this, SLOT(handle_save_notation_requested()));
+ connect(display_scene_item_,SIGNAL(save_notation_requested(bool)), this, SLOT(handle_save_notation_requested(bool)));
+
  connect(display_scene_item_,SIGNAL(polygon_save_notation_requested()), this, SLOT(handle_polygon_save_notation_requested()));
  connect(display_scene_item_,SIGNAL(polygon_complete_and_save_notation_requested()), this,
    SLOT(handle_polygon_complete_and_save_notation_requested()));
@@ -1032,6 +1129,9 @@ bool MainWindow::load_annotation()
 // QStringList objectList;
 
  r8 current_resize_factor = 0;
+
+ AXFI_Annotation* current_annotation = nullptr;
+
  //qui il file viene processato
  while(!file.atEnd())
  {
@@ -1047,10 +1147,19 @@ bool MainWindow::load_annotation()
    continue;
   }
 
-  AXFI_Annotation* axa = new AXFI_Annotation;
-  axa->from_compact_string(line);
+  if(line.startsWith('`'))
+  {
+   if(current_annotation)
+   {
+    current_annotation->set_comment(line.mid(1).replace('`', '\n'));
+   }
+   continue;
+  }
 
-  display_scene_item_->add_axfi_annotation(axa, current_resize_factor);
+  current_annotation = new AXFI_Annotation;
+  current_annotation->from_compact_string(line);
+
+  display_scene_item_->add_axfi_annotation(current_annotation, current_resize_factor);
 
  }
 
@@ -1566,7 +1675,7 @@ void MainWindow::handle_complete_polygon_requested()
 }
 
 
-void MainWindow::handle_save_notation_requested()
+void MainWindow::handle_save_notation_requested(bool with_comment)
 {
  Display_Drawn_Shape* dds = display_image_data_->current_drawn_shape();
 
@@ -1578,13 +1687,31 @@ void MainWindow::handle_save_notation_requested()
  zoom_frame_->reset_current_selected_annotation(axa);
 
  bool ok = false;
- QString name = Special_Input_Dialog::get_text(&autogen_index_, this, "Need a Shape Name",
+
+ QString* short_text = nullptr;
+
+ QString name;
+
+ if(with_comment)
+   short_text = &name;
+
+
+ QString dlg_result = Special_Input_Dialog::get_text(&autogen_index_, this, "Need a Shape Name",
    "Enter text here providing a Shape Name (or right-click to autogenerate)",
-   QLineEdit::Normal, QString(), &ok, 0);
+   short_text, QLineEdit::Normal, QString(), &ok, 0);
+
+//  QString name = Special_Input_Dialog::getMultiLineText(this, "Need a Shape Name",
+//    "Enter text here providing a Shape Name (or right-click to autogenerate)");
+
+ if(!with_comment)
+   name = dlg_result;
 
  if(ok)
  {
   axa->add_scoped_identifier(name);
+
+  if(with_comment)
+    axa->set_comment(dlg_result);
  }
 
  check_init_axfi_annotation_group();
@@ -1651,7 +1778,7 @@ void MainWindow::onDrawLine(QList<DisplayImage_Data::shape> edits)
    {
     number = Special_Input_Dialog::get_text(&autogen_index_, this, "Need a Shape Name",
       "Enter text here providing a Shape Name (or right-click to autogenerate)",
-      QLineEdit::Normal, QString(), &ok, 0);
+      nullptr, QLineEdit::Normal, QString(), &ok, 0);
 
     if(ok)
     {
@@ -2040,7 +2167,14 @@ void MainWindow::_handle_save_requested()
   }
   AXFI_Annotation* axa = pr.first;
   QString compact = axa->to_compact_string();
-  ofs << compact << "\n";
+  ofs << compact << '\n';
+  QString comment = axa->comment();
+  if(!comment.isEmpty())
+  {
+   comment.replace('\n', '`');
+   ofs << '`' << comment << '\n';
+  }
+
  }
 }
 

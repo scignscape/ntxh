@@ -38,6 +38,8 @@ class AXFI_Annotation
 
  n8 opaque_shape_kind_code_;
 
+ QString comment_;
+
 public:
 
  AXFI_Annotation();
@@ -45,7 +47,7 @@ public:
  ACCESSORS(QString ,shape_designation)
  ACCESSORS__RGET(QStringList ,scoped_identifiers)
  ACCESSORS(n8 ,opaque_shape_kind_code)
-
+ ACCESSORS(QString ,comment)
 
  void read_iat_string(QString line);
 

@@ -375,7 +375,7 @@ Q_SIGNALS:
  void onLineDraw(QList<DisplayImage_Data::shape>); //signals per la classe MainWindow. Spedisce la lista di tutte le annotazioni sull'immagine
  void setTuple(QString); //signals per la classe MainWindow. Speidisce l'id della shape selezionata dall'utente in caso di modifica/spostamento o aggiunta
 
- void save_notation_requested();
+ void save_notation_requested(bool);
  void polygon_complete_and_save_notation_requested();
  void polygon_save_notation_requested();
  void complete_polygon_requested();

@@ -204,7 +204,8 @@ private Q_SLOTS:
 
 
  void handle_zoom_factor_changed(r8 factor);
- void handle_save_notation_requested();
+
+ void handle_save_notation_requested(bool with_comment);
 
  void handle_complete_polygon_requested();
 

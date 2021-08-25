@@ -51,14 +51,26 @@ INCLUDEPATH += $$OPENCV_BUILD_DIR
 #INCLUDEPATH += qt sources .../Src/qtwebengine/src/core/
 #INCLUDEPATH += qt sources .../Src/qtwebengine/src/
 #INCLUDEPATH += qt sources .../Src/qtwebengine/src/core/api
-#INCLUDEPATH += qt sources .../Src/../qtbase/include/QtCore/5.15.2/
-#INCLUDEPATH += qt sources .../Src/qtbase/include/QtCore/5.15.2/
-#INCLUDEPATH += qt sources .../gcc_64/include/QtCore/5.15.2/
-#INCLUDEPATH += qt sources .../gcc_64/include/QtWebEngineCore/5.15.2/
+#INCLUDEPATH += qt sources .../Src/../qtbase/include/QtCore/$$[QT_VERSION]/
+#INCLUDEPATH += qt sources .../Src/qtbase/include/QtCore/$$[QT_VERSION]/
+#INCLUDEPATH += qt sources .../gcc_64/include/QtCore/$$[QT_VERSION]/
+#INCLUDEPATH += qt sources .../gcc_64/include/QtWebEngineCore/$$[QT_VERSION]/
 
 
 #INCLUDEPATH += $$SRC_DIR/dbk/dgdb/dgdb-white
 INCLUDEPATH += $$DGDB_WHITE_SRC_GROUP_DIR
+
+
+## This is needed for adding to the QInputDialog layout in Special_Dialog ...
+QT_HEADER_LOCATION = $$[QT_INSTALL_HEADERS]
+
+INCLUDEPATH += $${QT_HEADER_LOCATION}/QtCore/$$[QT_VERSION]
+INCLUDEPATH += $${QT_HEADER_LOCATION}/QtGui/$$[QT_VERSION]
+INCLUDEPATH += $${QT_HEADER_LOCATION}/QtWidgets/$$[QT_VERSION]
+
+INCLUDEPATH += $${QT_HEADER_LOCATION}/QtGui/$$[QT_VERSION]/QtGui
+INCLUDEPATH += $${QT_HEADER_LOCATION}/QtCore/$$[QT_VERSION]/QtCore
+INCLUDEPATH += $${QT_HEADER_LOCATION}/QtWidgets/$$[QT_VERSION]/QtWidgets
 
 
 FORMS  += \
