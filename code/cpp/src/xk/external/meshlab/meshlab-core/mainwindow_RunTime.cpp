@@ -2280,6 +2280,8 @@ bool MainWindow::importMesh(QString fileName,bool isareload)
 			return false;
 	}
 	
+// if(lastUsedDirectory.isEmpty())
+//    lastUsedDirectory = DEFAULT_TEMP_SNAPSHOT_FOLDER;
 	
 	//QStringList suffixList;
 	// HashTable storing all supported formats together with
@@ -2636,7 +2638,8 @@ void MainWindow::readViewFromFile(QString const& filename){
 		GLA()->readViewFromFile(filename);
 }
 
-void MainWindow::send_export_notate(QString file_name)
+void MainWindow::send_export_notate(QString file_name,
+  QString track_info, QString scale_info)
 {
  if(!axfi_out_socket_)
  {
@@ -2644,8 +2647,10 @@ void MainWindow::send_export_notate(QString file_name)
   axfi_out_socket_->bind(QHostAddress::LocalHost, 1234);
  }
 
- int sz = file_name.size();
- QByteArray qba = file_name.toLatin1();
+ QString text = QString("%1*%2*%3").arg(file_name).arg(track_info).arg(scale_info);
+
+ int sz = text.size();
+ QByteArray qba = text.toLatin1();
 
  if(sz < 10)
  {
@@ -2679,13 +2684,14 @@ bool MainWindow::saveSnapshot()
   // //  axfi ...
   if(pending_snapshot_count_ == 0)
   {
-   connect(GLA(), &GLArea::snapshot_saved, [this](QString file_path)
+   connect(GLA(), &GLArea::snapshot_saved, [this](QString file_path,
+     QString track_info, QString scale_info)
    {
     if(pending_snapshot_count_ % 2)
     {
      ++pending_snapshot_count_;
      qDebug() << "file path = " << file_path;
-     send_export_notate(file_path);
+     send_export_notate(file_path, track_info, scale_info);
     }
    });
   }

@@ -130,6 +130,9 @@ void MainWindow::init_display_scene_item(DisplayImage_Scene_Item* si)
 {
  display_scene_item_ = si;
 
+ si->set_meshlab_import_count(meshlab_import_count_);
+
+
 //?
 // display_scene_item_->setGeometry(0,0,0,0);
 // display_scene_item_->setObjectName(QString::fromUtf8("ImageDisplayWidget"));
@@ -143,6 +146,8 @@ void MainWindow::init_display_scene_item(DisplayImage_Scene_Item* si)
  connect(display_scene_item_, SIGNAL(complete_polygon_requested()), this,
    SLOT(handle_complete_polygon_requested()));
 
+ connect(display_scene_item_, SIGNAL(meshlab_import_info_requested()), this,
+   SLOT(show_meshlab_info()));
 
 // qDebug() << "display_scene_item_ = " << display_scene_item_;
 
@@ -160,6 +165,10 @@ MainWindow::MainWindow(QWidget *parent) :
  current_wgl_dialog_ = nullptr;
  meshlab_in_socket_ = nullptr;
  meshlab_out_socket_ = nullptr;
+ meshlab_message_box_ = nullptr;
+
+ meshlab_import_count_ = new u4;
+ *meshlab_import_count_ = 0;
 
  save_area_folder_ = ROOT_FOLDER "/../save-area";
 
@@ -397,10 +406,11 @@ void MainWindow::set_initial_gui()
  sizeh_ = window_size_y;
 
 //? display_->setParent(ui->scrollContents);
- //?ui->scrollContents->resize(0,0);qgraphicsview position visibile top left
+//? ui->scrollContents->resize(0,0);qgraphicsview position visibile top left
 
+// QString title = "Image Annotation Tool (v." + QString::number(_version) + ")";
 
- QString title = "Image Annotation Tool (v." + QString::number(_version) + ")";
+ QString title = "AXFi Edit/Notate and Image Database";
 
  QMainWindow::setMinimumSize(sizew_, sizeh_);
  QMainWindow::setWindowTitle(title);
@@ -592,7 +602,24 @@ void MainWindow::on_action_view_3d_triggered()
   QByteArray num = qba.left(3);
   int size = num.toInt();
   qba = qba.mid(3, size);
-  QString file_path = QString::fromLatin1(qba);
+  QString text = QString::fromLatin1(qba);
+  QStringList qsl = text.split('*');
+  QString file_path = qsl.takeFirst();
+
+  meshlab_file_path_ = file_path;
+
+  if(!qsl.isEmpty())
+    meshlab_track_info_ = qsl.takeFirst();
+  else
+    meshlab_track_info_ = "N/A";
+
+  if(!qsl.isEmpty())
+    meshlab_scale_info_ = qsl.takeFirst();
+  else
+    meshlab_scale_info_ = "N/A";
+
+  ++*meshlab_import_count_;
+
   showNormal();
   load_image(file_path);
  });
@@ -605,10 +632,30 @@ void MainWindow::on_action_view_3d_triggered()
 
  QProcess cmd;
  cmd.startDetached(ap, {});
-
-
 }
 
+void MainWindow::show_meshlab_info()
+{
+ QString dt = QString(R"(Temp File Path: %1
+Track (Rotation) Position: %2
+Scale (Zoom) Level: %3)")
+   .arg(meshlab_file_path_)
+   .arg(meshlab_track_info_.replace(' ', ",  "))
+   .arg(meshlab_scale_info_);
+
+ if(meshlab_message_box_)
+   delete meshlab_message_box_;
+
+ meshlab_message_box_ = new QMessageBox(this);
+ meshlab_message_box_->setText("Meshlab Export");
+ meshlab_message_box_->setInformativeText(R"(Hit "Show Details" for information about the Meshlab snapshot recently imported)");
+ meshlab_message_box_->setDetailedText(dt);
+ QSpacerItem* horizontalSpacer = new QSpacerItem(600, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+ QGridLayout* layout = (QGridLayout*)meshlab_message_box_->layout();
+ layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+
+ meshlab_message_box_->show();
+}
 
 void MainWindow::on_action_view_contours_triggered()
 {
@@ -651,11 +698,82 @@ void MainWindow::on_action_view_contours_triggered()
 
  DGI_Demo_Frame* fr = new DGI_Demo_Frame(*dtg, 200, 800, 300);
 
+ fr->setContextMenuPolicy(Qt::CustomContextMenu);
+
+ connect(fr, &QFrame::customContextMenuRequested,
+   [this, fr, dgi](QPoint pos)
+ {
+  QMenu* menu = new QMenu(fr);
+  menu->addAction("View Contour Info", [this, dgi]
+  {
+   handle_view_contour_info(dgi->saved_csv_path());
+  });
+
+  menu->popup(fr->mapToGlobal(pos));
+ });
+
  QVBoxLayout* vbl = new QVBoxLayout;
  vbl->addWidget(fr);
 
  dlg->setLayout(vbl);
  dlg->show();
+}
+
+void MainWindow::handle_view_contour_info(QString csv_path)
+{
+ qDebug() << "csv path = " << csv_path;
+
+ // QDesktopServices::openUrl(QUrl::fromLocalFile(csv_path));
+
+ QDialog* dlg = new QDialog(this);
+
+ dlg->setWindowTitle("Contour Info");
+
+ QTableWidget* qtw = new QTableWidget(dlg);
+
+ u2 row = 0;
+
+ QStringList lines;
+ load_file(csv_path, [&row, qtw] (QString& line) -> n8
+ {
+  if(line.isEmpty())
+    return 0;
+
+  QStringList qsl = line.split(',');
+  if(qsl.isEmpty())
+    return 0;
+
+  if(row == 0)
+  {
+   row = 1;
+   qtw->setColumnCount(qsl.size());
+
+   qtw->setHorizontalHeaderLabels(qsl);
+   return 0;
+  }
+
+  qtw->insertRow(row - 1);
+
+  u1 col = 0;
+  for(QString qs : qsl)
+  {
+   qtw->setItem(row - 1, col, new QTableWidgetItem(qs));
+   ++col;
+  }
+  ++row;
+
+//  if(row > 4)
+//    return row;
+  return 0;
+ });
+
+ QVBoxLayout* vbl = new QVBoxLayout;
+ vbl->addWidget(qtw);
+
+ dlg->setLayout(vbl);
+ dlg->show();
+
+
 }
 
 void MainWindow::on_action_view_360_triggered()
@@ -1457,9 +1575,11 @@ void MainWindow::handle_save_notation_requested()
 
  AXFI_Annotation* axa = dds->to_axfi_annotation(resize_factor_);
 
+ zoom_frame_->reset_current_selected_annotation(axa);
+
  bool ok = false;
  QString name = Special_Input_Dialog::get_text(&autogen_index_, this, "Need a Shape Name",
-   "Enter text here providing a Shape Name",
+   "Enter text here providing a Shape Name (or right-click to autogenerate)",
    QLineEdit::Normal, QString(), &ok, 0);
 
  if(ok)
@@ -1530,7 +1650,7 @@ void MainWindow::onDrawLine(QList<DisplayImage_Data::shape> edits)
    do
    {
     number = Special_Input_Dialog::get_text(&autogen_index_, this, "Need a Shape Name",
-      "Enter text here providing a Shape Name",
+      "Enter text here providing a Shape Name (or right-click to autogenerate)",
       QLineEdit::Normal, QString(), &ok, 0);
 
     if(ok)

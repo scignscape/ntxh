@@ -168,6 +168,13 @@ void DisplayImage_Scene_Item::handle_mouse_event<
  QMenu* menu = new QMenu(nullptr);
  menu->setAttribute(Qt::WA_DeleteOnClose);
 
+ if(meshlab_import_count_ && *meshlab_import_count_)
+   menu->addAction("Meshlab Import Info", [this]
+   {
+    Q_EMIT meshlab_import_info_requested();
+   });
+
+
  if(!data_->point_pairs_.isEmpty())
  {
   menu->addAction("Complete Polygon", [this]

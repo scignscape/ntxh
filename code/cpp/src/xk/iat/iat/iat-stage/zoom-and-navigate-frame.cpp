@@ -10,6 +10,7 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
   :  QFrame(parent)
 {
  image_data_ = nullptr;
+ current_selected_annotation_ = nullptr;
 
  QString button_style_sheet = colorful_small_button_style_sheet_();
 
@@ -82,6 +83,8 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  zoom_slider_[2]->setRange(0, 2 * initial_annotation_zoom_position_);
  zoom_slider_[2]->setValue(initial_annotation_zoom_position_);
 
+
+
  connect(zoom_slider_[0], SIGNAL(minimumValueChanged(int)), this,
    SLOT(handle_zoom_minimum_value_changed(int)));
 
@@ -98,6 +101,8 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  connect(zoom_slider_[2], SIGNAL(valueChanged(int)), this,
    SLOT(handle_annotation_zoom_value_changed(int)));
 
+
+ zoom_slider_[2]->setEnabled(false);
 
  ((ctkRangeSlider*) zoom_slider_[0])->setMinimumValue(initial_zoom_position_);
  ((ctkRangeSlider*) zoom_slider_[0])->setMaximumValue(100 - initial_zoom_position_);
@@ -400,40 +405,44 @@ void Zoom_and_Navigate_Frame::handle_zoom_maximum_value_changed(int val)
  }
 }
 
+void Zoom_and_Navigate_Frame::reset_current_selected_annotation(AXFI_Annotation* axa)
+{
+ current_selected_annotation_ = axa;
+ zoom_slider_[2]->setEnabled(true);
+}
+
 void Zoom_and_Navigate_Frame::handle_top_zoom_minimum_value_changed(int val)
 {
- if(!image_data_)
- {
-  handle_zoom_minimum_value_changed(val);
-  return;
- }
-
  u2 v1 = ((ctkRangeSlider*) zoom_slider_[0])->minimumValue();
  handle_zoom_minimum_value_changed(val);
  u2 v2 = ((ctkRangeSlider*) zoom_slider_[0])->minimumValue();
 
+ adjust_annotation_zoom_slider(v2 - v1);
+}
+
+
+void Zoom_and_Navigate_Frame::adjust_annotation_zoom_slider(s2 diff)
+{
+ zoom_slider_[2]->setEnabled(true);
+
  // //  note: annotations increase left to right, not out to in ...
- s2 diff = v2 - v1;
  u2 z = zoom_slider_[2]->value();
  zoom_slider_[2]->setValue(z + (diff * 2));
+
+ if(!current_selected_annotation_)
+   zoom_slider_[2]->setEnabled(false);
 }
+
 
 void Zoom_and_Navigate_Frame::handle_top_zoom_maximum_value_changed(int val)
 {
- if(!image_data_)
- {
-  handle_zoom_maximum_value_changed(val);
-  return;
- }
-
  u2 v1 = ((ctkRangeSlider*) zoom_slider_[0])->minimumValue();
  handle_zoom_maximum_value_changed(val);
  u2 v2 = ((ctkRangeSlider*) zoom_slider_[0])->minimumValue();
 
- // //  note: annotations increase left to right, not out to in ...
- s2 diff = v2 - v1;
- u2 z = zoom_slider_[2]->value();
- zoom_slider_[2]->setValue(z + (diff * 2));
+ zoom_slider_[2]->setEnabled(true);
+
+ adjust_annotation_zoom_slider(v2 - v1);
 }
 
 void Zoom_and_Navigate_Frame::handle_annotation_zoom_value_changed(int)

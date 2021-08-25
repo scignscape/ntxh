@@ -19,7 +19,7 @@ INCLUDEPATH += $$SRC_DIR
 #INCLUDEPATH += $$SRC_GROUP_DIR
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
-DEFINES += SCREENSHOTS_FOLDER=\\\"$$ROOT_DIR/code/assets/screenshots\\\"
+DEFINES += SCREENSHOTS_FOLDER=\\\"$$ROOT_DIR/code/assets/_snapshots\\\"
 
 DEFINES += DEFAULT_DGI_FOLDER=\\\"$$ROOT_DIR/dev/consoles/dgi/images\\\"
 

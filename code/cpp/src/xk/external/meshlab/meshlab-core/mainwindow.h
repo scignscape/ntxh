@@ -148,7 +148,7 @@ public slots:
 private:
 
  // //  axfi ...
- void send_export_notate(QString file_name);
+ void send_export_notate(QString file_name, QString track_info, QString scale_info);
 
  QUdpSocket* axfi_out_socket_;
  QUdpSocket* axfi_in_socket_;

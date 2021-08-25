@@ -1,5 +1,0 @@
---AXFI--
-/home/nlevisrael/gits/annot/ctg-temp/pics/testdia.png
-%25
-auto_1|Rectangle|1|67;91:243;194
-auto_2|Ellipse|2|368;95:483;203

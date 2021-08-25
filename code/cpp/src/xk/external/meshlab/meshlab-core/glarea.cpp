@@ -239,7 +239,7 @@ void GLArea::pasteTile()
      this->Logf(GLLogStream::SYSTEM, "Snapshot saved to %s", outfile.toLocal8Bit().constData());
 
      // //  axfi ...
-     Q_EMIT snapshot_saved(outfile);
+     Q_EMIT snapshot_saved(outfile, track_info_, scale_info_);
 
      if(ss.addToRasters)
      {
@@ -834,7 +834,16 @@ void GLArea::displayInfo(QPainter *painter)
   if(fov>5) col0Text += QString("FOV: %1\n").arg(fov);
   else col0Text += QString("FOV: Ortho\n");
   if ((cfps>0) && (cfps<1999))
-   col0Text += QString("FPS: %1\n").arg(cfps,7,'f',1);
+    col0Text += QString("FPS: %1\n").arg(cfps,7,'f',1);
+
+  // //  axfi ...
+  vcg::Quaternionf qf = trackball.track.rot;
+  track_info_ = QString("%1 %2 %3 %4").arg(qf.W())
+    .arg(qf.X()).arg(qf.Y()).arg(qf.Z());
+  col0Text += QString(" * Track: %1\n").arg(track_info_);
+
+  scale_info_ = QString::number(trackball.track.sca);
+  col0Text += QString(" * Scale: %1\n").arg(scale_info_);
 
   col0Text += renderfacility;
 

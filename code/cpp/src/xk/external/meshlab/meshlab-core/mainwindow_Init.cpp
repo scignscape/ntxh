@@ -55,6 +55,7 @@ MainWindow::MainWindow()
 {
  // // axfi
  pending_snapshot_count_ = 0;
+ lastUsedDirectory.setPath(DEFAULT_TEMP_SNAPSHOT_FOLDER "/..");
 
  // //  only when launched from axfi ...
  axfi_out_socket_ = nullptr;
@@ -139,6 +140,9 @@ MainWindow::MainWindow()
 
 	connect(this, SIGNAL(updateLayerTable()), this, SLOT(updateLayerDialog()));
 	connect(layerDialog, SIGNAL(removeDecoratorRequested(QAction*)), this, SLOT(switchOffDecorator(QAction*)));
+
+ // //  axfi
+ setMinimumWidth(1200);
 }
 
 MainWindow::~MainWindow()

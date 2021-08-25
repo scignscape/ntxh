@@ -48,6 +48,8 @@
 
 #define SSHOT_BYTES_PER_PIXEL 4
 
+#include "accessors.h"
+
 enum LightingModel{LDOUBLE,LFANCY};
 
 class MeshModel;
@@ -59,10 +61,21 @@ class GLArea : public QGLWidget
 
  //typedef vcg::Shot<double> Shot;
 
+ // // axfi ...
+
+ QString track_info_;
+ QString scale_info_;
+
+
 public:
  GLArea(QWidget *parent,MultiViewer_Container *mvcont, RichParameterList *current);
  ~GLArea();
  static void initGlobalParameterList( RichParameterList * /*globalparam*/);
+
+ // // axfi
+ ACCESSORS__GET(QString ,track_info)
+ ACCESSORS__GET(QString ,scale_info)
+
 
 private:
  int id;  //the very important unique id of each subwindow.
@@ -284,7 +297,8 @@ signals:
  void currentViewerChanged(int currentId);
 
  // // axfi
- void snapshot_saved(QString file_path);
+ void snapshot_saved(QString file_path,
+   QString track_info, QString scale_info);
 
 
 public slots:

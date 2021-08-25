@@ -395,6 +395,7 @@ void DGI_Image::init_demo_transform_group(Demo_Transform_Group& dtg)
 
 void DGI_Image::to_csv(QString path)
 {
+ saved_csv_path_ = path;
  save_file(path, [this](QTextStream& qts, int count)
  {
   if(count == 1)

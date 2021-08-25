@@ -20,6 +20,8 @@
 #include "accessors.h"
 
 
+class AXFI_Annotation;
+
 class Zoom_and_Navigate_Frame : public QFrame
 {
  Q_OBJECT
@@ -61,10 +63,14 @@ class Zoom_and_Navigate_Frame : public QFrame
  u2 last_zoom_position_;
  u2 last_annotation_zoom_position_;
 
+ AXFI_Annotation* current_selected_annotation_;
+
  void adjust_zoom(int z);
  void direct_adjust_zoom(int z);
 
  void recenter_image();
+
+ void adjust_annotation_zoom_slider(s2 diff);
 
 
 public:
@@ -72,8 +78,10 @@ public:
  Zoom_and_Navigate_Frame(QWidget* parent);
 
  ACCESSORS(void* ,image_data)
+ ACCESSORS(AXFI_Annotation* ,current_selected_annotation)
 
  void reset_with_image_data(void* image_data);
+ void reset_current_selected_annotation(AXFI_Annotation* axa);
 
 Q_SIGNALS:
 

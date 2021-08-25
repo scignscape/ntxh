@@ -25,6 +25,7 @@ class Zoom_and_Navigate_Frame;
 
 class WebGL_View_Dialog;
 class QUdpSocket;
+class QMessageBox;
 
 
 class MainWindow : public QMainWindow
@@ -45,6 +46,12 @@ private:
  QUdpSocket* meshlab_out_socket_;
  QUdpSocket* meshlab_in_socket_;
 
+ QString meshlab_track_info_;
+ QString meshlab_scale_info_;
+ QString meshlab_file_path_;
+
+ QMessageBox* meshlab_message_box_;
+ u4* meshlab_import_count_;
 
  QAction* action_view_360;
 
@@ -107,6 +114,8 @@ private:
 
  void check_init_axfi_annotation_group();
  //QVector<AXFI_Annotation*> axfi_annotations_;
+
+ void handle_view_contour_info(QString csv_path);
 
 
  int sizeh_; //altezza dell'immagine
@@ -190,6 +199,8 @@ private Q_SLOTS:
  void on_ObjectListView_clicked(); //metodo legato alla prima colonna
  void on_InstanceListView_clicked(); //metodo legato alla seconda colonna
  void on_NumberListView_clicked(); //metodo legato alla terza colonnna
+
+ void show_meshlab_info();
 
 
  void handle_zoom_factor_changed(r8 factor);

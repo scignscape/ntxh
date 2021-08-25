@@ -61,6 +61,7 @@ class DGI_Image : QVector<DGI_Contour*>
 
  QString applied_transform_;
 
+ QString saved_csv_path_;
 
 public:
 
@@ -76,6 +77,7 @@ public:
  ACCESSORS(DGI_Image* ,parent_image)
 
  ACCESSORS(QString ,applied_transform)
+ ACCESSORS(QString ,saved_csv_path)
 
  QLabel* as_qlabel(int w = 0, int h = 0);
  QPushButton* as_qbutton(int w = 0, int h = 0);
