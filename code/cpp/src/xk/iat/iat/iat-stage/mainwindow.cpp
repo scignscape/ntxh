@@ -733,12 +733,25 @@ void MainWindow::on_action_view_3d_triggered()
 
 void MainWindow::show_meshlab_info()
 {
+ QString ti = meshlab_track_info_.replace(' ', ",  ");
+
+ QString si = meshlab_scale_info_;
+ QString ci = "N/A";
+ int i = meshlab_scale_info_.indexOf(' ');
+ if(i != -1)
+ {
+  si = meshlab_scale_info_.left(i).replace(' ', ",  ");
+  ci = meshlab_scale_info_.mid(i + 1);
+ }
+
  QString dt = QString(R"(Temp File Path: %1
 Track (Rotation) Position: %2
-Scale (Zoom) Level: %3)")
+Center Position: %3
+Scale (Zoom) Level: %4)")
    .arg(meshlab_file_path_)
-   .arg(meshlab_track_info_.replace(' ', ",  "))
-   .arg(meshlab_scale_info_);
+   .arg(ti)
+   .arg(ci)
+   .arg(si);
 
  if(meshlab_message_box_)
    delete meshlab_message_box_;
