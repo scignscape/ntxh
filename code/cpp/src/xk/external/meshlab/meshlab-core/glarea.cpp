@@ -838,17 +838,32 @@ void GLArea::displayInfo(QPainter *painter)
 
   // //  axfi ...
   vcg::Quaternionf qf = trackball.track.rot;
-  track_info_ = QString("%1 %2 %3 %4").arg(qf.W())
-    .arg(qf.X()).arg(qf.Y()).arg(qf.Z());
+  track_info_ = QString("%1 %2 %3 %4").arg(qf.W(),10)
+    .arg(qf.X(),10).arg(qf.Y(),10).arg(qf.Z(),10);
   col0Text += QString(" * Track: %1\n").arg(track_info_);
 
-  scale_info_ = QString::number(trackball.track.sca);
-  col0Text += QString(" * Scale: %1\n").arg(scale_info_);
+  Point3<float> tc = trackball.track.tra;
+//  float cd = getCameraDistance();
+//  tc.V();
+
+
+  scale_info_ = QString("%1 %2 %3")
+    .arg(tc.X(),10).arg(tc.Y(),10).arg(tc.Z(),10);
+
+  col0Text += QString(" * Center: %1\n").arg(scale_info_);
+
+  scale_info_.prepend(QString::number(trackball.track.sca) + " ");
+  col0Text += QString(" * Scale: %1\n")
+    .arg(trackball.track.sca);
 
   col0Text += renderfacility;
 
+
+  // //  moves this to col 1 (axfi) ...
   if (clipRatioNear!=clipRatioNearDefault())
-   col0Text += QString("\nClipping Near:%1\n").arg(clipRatioNear,7,'f',2);
+   col1Text += QString("\nClipping Near:%1\n").arg(clipRatioNear,7,'f',2);
+
+
   painter->drawText(Column_1, Qt::AlignLeft | Qt::TextWordWrap, col1Text);
   painter->drawText(Column_0, Qt::AlignLeft | Qt::TextWordWrap, col0Text);
   if(mm()->cm.Tr != Matrix44m::Identity() ) displayMatrix(painter, Column_2);
@@ -1328,6 +1343,8 @@ void GLArea::wheelEvent(QWheelEvent*e)
    notchY *= -1;
   switch(e->modifiers())
   {
+  case Qt::ControlModifier | Qt::ShiftModifier:
+    trackball.MouseWheel(notchY); break;
   case Qt::ControlModifier:
    clipRatioNear = math::Clamp(clipRatioNear*powf(1.1f, notchY),0.01f,500.0f);
    break;

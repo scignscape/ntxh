@@ -32,6 +32,9 @@
 #include <wrap/gui/trackball.h>
 #include <wrap/gui/trackutils.h>
 
+// //  axfi
+#include <QDebug>
+
 using namespace vcg;
 using namespace vcg::trackutils;
 

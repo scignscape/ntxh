@@ -33,6 +33,9 @@
 #include <wrap/gl/math.h>
 #include <wrap/gl/space.h>
 
+// //  axfi ...
+#include <QDebug>
+
 using namespace vcg;
 
 Transform::Transform() {
@@ -81,12 +84,14 @@ void Trackball::setDefaultMapping () {
 
   modes[BUTTON_LEFT | KEY_CTRL] = new PanMode ();
 
-  modes[BUTTON_MIDDLE] = new PanMode ();
 
   modes[WHEEL] =
   modes[BUTTON_LEFT | KEY_SHIFT] = new ScaleMode ();
 
-  modes[BUTTON_LEFT | KEY_ALT] = new ZMode ();
+
+  modes[BUTTON_LEFT | KEY_SHIFT] =
+  // //  axfi?
+  modes[WHEEL | KEY_CTRL | KEY_SHIFT] = new ZMode ();
 
 }
 
@@ -436,6 +441,7 @@ void Trackball::SetCurrentAction ()
     current_mode = NULL;
   } else {
     current_mode = modes[current_button & MODIFIER_MASK];
+
     if(current_mode != NULL)
       current_mode->SetAction();
   }

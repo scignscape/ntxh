@@ -706,12 +706,12 @@ void MainWindow::on_action_view_3d_triggered()
   meshlab_file_path_ = file_path;
 
   if(!qsl.isEmpty())
-    meshlab_track_info_ = qsl.takeFirst();
+    meshlab_track_info_ = qsl.takeFirst().simplified();
   else
     meshlab_track_info_ = "N/A";
 
   if(!qsl.isEmpty())
-    meshlab_scale_info_ = qsl.takeFirst();
+    meshlab_scale_info_ = qsl.takeFirst().simplified();
   else
     meshlab_scale_info_ = "N/A";
 
