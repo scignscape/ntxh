@@ -15,6 +15,8 @@
 #include "dgi-opencv/dgi-image.h"
 #include "dgi-opencv/dgi-demo-frame.h"
 
+#include "bim-select-dialog.h"
+
 #include "styles.h"
 
 USING_KANS(DGI)
@@ -318,6 +320,13 @@ MainWindow::MainWindow(QWidget *parent) :
  file_menu_->addAction(actionQuit);
  help_menu_->addAction(actionInstructions);
  tools_menu_->addAction(actionOptions);
+
+ tools_menu_->addAction("BIM ...", [this]()
+ {
+  BIM_Select_Dialog* bsd = new BIM_Select_Dialog(this);
+  bsd->show();
+ });
+
 //?? tools_menu_->addAction(actionCreate_List);
 
  connect(actionAnnotate_Single_Image,SIGNAL(triggered()), this, SLOT(on_actionAnnotate_Single_Image_triggered()));

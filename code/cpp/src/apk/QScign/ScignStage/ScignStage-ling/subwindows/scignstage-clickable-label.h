@@ -25,6 +25,7 @@ class ScignStage_Clickable_Label : public QLabel
  QPair<std::function<void(QObject*, QString)>,
    std::function<void(QObject*, QMouseEvent*,
    ScignStage_Clickable_Label* scl, QString)>> cb_;
+
  typedef QPair<std::function<void(QObject*, QString)>,
    std::function<void(QObject*, QMouseEvent*,
    ScignStage_Clickable_Label* scl, QString)>> cb_type;

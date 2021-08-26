@@ -28,6 +28,7 @@ DEFINES += DEFAULT_DGI_TEMP_FOLDER=\\\"$$ROOT_DIR/../dev/consoles/dgi/images\\\"
 
 DEFINES += USE_KANS
 
+
 INCLUDEPATH += $$SRC_PROSET_DIR
 
 INCLUDEPATH += $$CHASM_SRC_GROUP_DIR
@@ -57,7 +58,10 @@ INCLUDEPATH += $$OPENCV_BUILD_DIR
 #INCLUDEPATH += qt sources .../gcc_64/include/QtWebEngineCore/$$[QT_VERSION]/
 
 
-#INCLUDEPATH += $$SRC_DIR/dbk/dgdb/dgdb-white
+#INCLUDEPATH += $$SRC_ROOT_DIR/apk/QScign/ScignStage
+INCLUDEPATH += $$SCIGNSTAGE_SRC_GROUP_DIR
+
+
 INCLUDEPATH += $$DGDB_WHITE_SRC_GROUP_DIR
 
 
@@ -97,6 +101,8 @@ HEADERS += \
   $$SRC_DIR/rpdf/pattern-matcher-runtime.h \
   $$SRC_DIR/rpdf/my-page.h \
   $$SRC_DIR/rpdf/signal-generator.h \
+  $$SRC_DIR/bim-select-dialog.h \
+  $$SCIGNSTAGE_SRC_GROUP_DIR/ScignStage-ling/subwindows/scignstage-clickable-label.h  \
 
 
 
@@ -120,6 +126,8 @@ SOURCES += \
   $$SRC_DIR/rpdf/pattern-matcher-runtime.cpp \
   $$SRC_DIR/rpdf/my-page.cpp \
   $$SRC_DIR/rpdf/signal-generator.cpp \
+  $$SRC_DIR/bim-select-dialog.cpp \
+  $$SCIGNSTAGE_SRC_GROUP_DIR/ScignStage-ling/subwindows/scignstage-clickable-label.cpp  \
 
 
 
