@@ -50,6 +50,8 @@
 #include <QProgressBar>
 #include <QNetworkAccessManager>
 
+#include "global-types.h"
+
 // Note the number of recent files is limited by the number of 
 // shortcuts for quick opening 1..9
 #define MAXRECENTFILES 9
@@ -148,16 +150,25 @@ public slots:
 private:
 
  // //  axfi ...
- void send_export_notate(QString file_name, QString track_info, QString scale_info);
+ void send_export_notate(QString file_path, QString track_info, QString scale_info);
 
  QUdpSocket* axfi_out_socket_;
  QUdpSocket* axfi_in_socket_;
+
+ QString axfi_restore_data_;
+ QString axfi_mesh_path_;
+
+ void axfi_restore(QString file_path, const QVector<r8>& coords);
+ void axfi_load_restore(QString file_path);
+
 
  void updateRenderingDataAccordingToActionsCommonCode(int meshid, const QList<MLRenderingAction*>& acts);
 	void updateRenderingDataAccordingToActionCommonCode(int meshid, MLRenderingAction* act);
 
 
 private slots:
+
+ void axfi_load_restore();
 
  void documentUpdateRequested();
 	bool importMesh(QString fileName=QString(), bool isareload = false);

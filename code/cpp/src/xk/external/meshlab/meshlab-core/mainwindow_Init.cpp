@@ -575,6 +575,34 @@ void MainWindow::createMenus()
 	fileMenu->addAction(importRasterAct);
 	fileMenu->addSeparator();
 
+ fileMenu->addAction("AXFI Load/Restore", this, SLOT(axfi_load_restore()));
+
+ fileMenu->addAction("AXFI Restore", [this]()
+ {
+  QStringList qsl = axfi_restore_data_.split('*');
+
+  QString file_path = qsl.takeFirst();
+
+  if(qsl.isEmpty())
+    return;
+
+  QVector<r8> coords;
+
+  while(!qsl.isEmpty())
+  {
+   QStringList qsl1 = qsl.takeFirst().simplified().split(' ');
+   std::transform(qsl1.begin(), qsl1.end(), std::back_inserter(coords),
+     [](QString qs) {return qs.toDouble();});
+  }
+
+  axfi_restore(file_path, coords);
+
+ });
+
+
+ fileMenu->addSeparator();
+
+
 	fileMenu->addAction(saveSnapshotAct);
 	fileMenu->addSeparator();
 	recentProjMenu = fileMenu->addMenu(tr("Recent Projects"));
@@ -662,6 +690,83 @@ void MainWindow::createMenus()
 		searchButton->setMenu(searchMenu);
 		connect(searchShortCut, SIGNAL(activated()), searchButton, SLOT(openMenu()));
 	}
+}
+
+void MainWindow::axfi_load_restore()
+{
+ QString fn = QFileDialog::getOpenFileName(this, "Select Annotation File", DEFAULT_TEMP_SNAPSHOT_FOLDER);
+ if(!fn.isEmpty())
+   axfi_load_restore(fn);
+}
+
+void MainWindow::axfi_load_restore(QString file_path)
+{
+ qDebug() << "file path = " << file_path;
+ QFile file(file_path);
+
+ if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+   return;
+
+ QString line = file.readLine();
+
+ if(!(line=="--AXFI--\n"))
+   return;
+
+ // //  image file; ignore
+ file.readLine();
+
+ QVector<r8> coords;
+ QString mesh_path;
+
+ while(!file.atEnd())
+ {
+  //fino a qui vengono lette object ed instance
+  line = file.readLine();
+
+  if(line.isEmpty())
+    continue;
+
+  if(line.startsWith("%%"))
+    break;
+
+  if(line.startsWith('*'))
+  {
+   QStringList qsl = line.mid(1).simplified().split(' ');
+   std::transform(qsl.begin(), qsl.end(), std::back_inserter(coords),
+     [](QString qs) {return qs.toDouble();});
+  }
+  else
+    mesh_path = line.simplified();
+  continue;
+ }
+ file.close();
+
+ if(mesh_path.isEmpty())
+   return;
+
+ importMesh(mesh_path);
+
+ axfi_restore(mesh_path, coords);
+}
+
+void MainWindow::axfi_restore(QString file_path, const QVector<r8>& coords)
+{
+ // // should we handle the file_path here or in a separate function?
+
+ qDebug() << "file path = " << file_path;
+ qDebug() << "coords = " << coords;
+
+ if(coords.size() != 8)
+   return;
+
+ vcg::Quaternionf qf(coords[0], coords[1], coords[2], coords[3]); // = trackball.track.rot;
+ GLA()->trackball.track.rot = qf;
+
+ GLA()->trackball.track.sca = coords[4]; //SetScale();
+ GLA()->trackball.track.tra = vcg::Point3f(coords[5], coords[6], coords[7]);
+
+ GLA()->update();
+
 }
 
 void MainWindow::initSearchEngine()

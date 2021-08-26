@@ -838,14 +838,11 @@ void GLArea::displayInfo(QPainter *painter)
 
   // //  axfi ...
   vcg::Quaternionf qf = trackball.track.rot;
-  track_info_ = QString("%1 %2 %3 %4").arg(qf.W(),10)
-    .arg(qf.X(),10).arg(qf.Y(),10).arg(qf.Z(),10);
+  track_info_ = QString("%1 %2 %3 %4").arg(qf.X(),10)
+    .arg(qf.Y(),10).arg(qf.Z(),10).arg(qf.W(),10);
   col0Text += QString(" * Track: %1\n").arg(track_info_);
 
   Point3<float> tc = trackball.track.tra;
-//  float cd = getCameraDistance();
-//  tc.V();
-
 
   scale_info_ = QString("%1 %2 %3")
     .arg(tc.X(),10).arg(tc.Y(),10).arg(tc.Z(),10);

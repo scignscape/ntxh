@@ -42,6 +42,8 @@ private:
 
  WebGL_View_Dialog* current_wgl_dialog_;
 
+ QString mesh_position_;
+ QString mesh_file_path_;
 
  QUdpSocket* meshlab_out_socket_;
  QUdpSocket* meshlab_in_socket_;

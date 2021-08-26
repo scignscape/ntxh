@@ -701,17 +701,26 @@ void MainWindow::on_action_view_3d_triggered()
   qba = qba.mid(3, size);
   QString text = QString::fromLatin1(qba);
   QStringList qsl = text.split('*');
+
+  mesh_file_path_ = qsl.takeFirst();
   QString file_path = qsl.takeFirst();
 
   meshlab_file_path_ = file_path;
 
+  mesh_position_.clear();
   if(!qsl.isEmpty())
-    meshlab_track_info_ = qsl.takeFirst().simplified();
+  {
+   meshlab_track_info_ = qsl.takeFirst().simplified();
+   mesh_position_ += meshlab_track_info_ + " ";
+  }
   else
     meshlab_track_info_ = "N/A";
 
   if(!qsl.isEmpty())
-    meshlab_scale_info_ = qsl.takeFirst().simplified();
+  {
+   meshlab_scale_info_ = qsl.takeFirst().simplified();
+   mesh_position_ += meshlab_scale_info_;
+  }
   else
     meshlab_scale_info_ = "N/A";
 
@@ -745,9 +754,11 @@ void MainWindow::show_meshlab_info()
  }
 
  QString dt = QString(R"(Temp File Path: %1
-Track (Rotation) Position: %2
-Center Position: %3
-Scale (Zoom) Level: %4)")
+Mesh File: %2
+Track (Rotation) Position: %3
+Center Position: %4
+Scale (Zoom) Level: %5)")
+   .arg(mesh_file_path_)
    .arg(meshlab_file_path_)
    .arg(ti)
    .arg(ci)
@@ -1153,6 +1164,21 @@ bool MainWindow::load_annotation()
 
   if(line.isEmpty())
     continue;
+
+  QString annotation_start_line;
+  if(line.startsWith("$$"))
+  {
+   annotation_start_line = line;
+   continue;
+  }
+  if(annotation_start_line.isEmpty())
+  {
+   if(line.startsWith('*'))
+     mesh_position_ = line.mid(1);
+   else
+     mesh_file_path_ = line;
+   continue;
+  }
 
   if(line.startsWith('%'))
   {
@@ -2168,6 +2194,14 @@ void MainWindow::_handle_save_requested()
  ofs << "--AXFI--\n";
  QString imageName = image_filename_path_;
  ofs << imageName << "\n";
+
+ if(!mesh_position_.isEmpty())
+   ofs << '*' << mesh_position_ << '\n';
+
+ if(!mesh_file_path_.isEmpty())
+   ofs << mesh_file_path_ << '\n';
+
+ ofs << "%%\n";
 
  r8 current_resize_factor = 0;
 
