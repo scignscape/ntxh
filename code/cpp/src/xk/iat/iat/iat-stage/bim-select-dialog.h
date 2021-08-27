@@ -33,7 +33,9 @@ public:
  void dg_info_cb(QString text);
 
 
-//Q_SIGNALS:
+Q_SIGNALS:
+
+ void text_chosen(QString text);
 
 
 };

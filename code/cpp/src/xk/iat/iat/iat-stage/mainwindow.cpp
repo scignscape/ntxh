@@ -4,6 +4,7 @@
 
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QPlainTextEdit>
 #include <QInputDialog>
 
 #include <QTimer>
@@ -57,6 +58,7 @@ class Special_Input_Dialog : public QInputDialog
   //   also has a multiline input field ....
  QString* short_text_;
  QLineEdit* short_text_input_field_;
+ QWidget* input_widget_;
 
 public:
 
@@ -153,6 +155,8 @@ QString Special_Input_Dialog::get_text(int* autogen_index, QWidget *parent,
 
   QInputDialogPrivate* d = reinterpret_cast<QInputDialogPrivate*>(dialog->QInputDialog::d_ptr.data());
 
+  dialog->input_widget_ = qobject_cast<QWidget*>(d->plainTextEdit);
+
   dialog->short_text_input_field_ = new QLineEdit(dialog);
   d->mainLayout->insertWidget(1, dialog->short_text_input_field_);
 
@@ -184,7 +188,8 @@ QString Special_Input_Dialog::get_text(int* autogen_index, QWidget *parent,
 Special_Input_Dialog::Special_Input_Dialog(int* autogen_index,
   QWidget* parent, QString* short_text)
     :  QInputDialog(parent), autogen_index_(autogen_index),
-      short_text_(short_text),  short_text_input_field_(nullptr)
+      short_text_(short_text),  short_text_input_field_(nullptr),
+      input_widget_(nullptr)
 {
  setContextMenuPolicy(Qt::CustomContextMenu);
 
@@ -203,6 +208,22 @@ Special_Input_Dialog::Special_Input_Dialog(int* autogen_index,
    else
      setTextValue(text);
   });
+
+  menu->addAction("Open IFC Dialog", [this]
+  {
+   BIM_Select_Dialog* bsd = new BIM_Select_Dialog(this);
+   connect(bsd, &BIM_Select_Dialog::text_chosen, [this](QString text)
+   {
+    QPlainTextEdit* qpte = qobject_cast<QPlainTextEdit*>(input_widget_);
+    //QTextCursor text_cursor = QTextCursor(qpte->document());
+    qpte->textCursor().insertText(text);
+    //text_cursor.insertText(text);
+
+   });
+   bsd->show();
+
+  });
+
 
   menu->popup(mapToGlobal(pos));
  });

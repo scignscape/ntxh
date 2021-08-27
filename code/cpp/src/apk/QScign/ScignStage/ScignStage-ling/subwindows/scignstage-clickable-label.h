@@ -30,6 +30,8 @@ class ScignStage_Clickable_Label : public QLabel
    std::function<void(QObject*, QMouseEvent*,
    ScignStage_Clickable_Label* scl, QString)>> cb_type;
 
+ QObject* cb_parent_;
+
 public:
 
  explicit ScignStage_Clickable_Label(QWidget* parent = nullptr,
@@ -43,6 +45,7 @@ public:
 
  ACCESSORS(QString ,text_data)
  ACCESSORS(cb_type ,cb)
+ ACCESSORS(QObject* ,cb_parent)
 
 
 Q_SIGNALS:

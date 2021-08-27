@@ -6,6 +6,7 @@
 #include <QPushButton>
 
 #include <QDebug>
+#include <QMessageBox>
 
 #include "ScignStage-ling/subwindows/scignstage-clickable-label.h"
 
@@ -15,8 +16,7 @@ void _dg_info_cb(QObject* obj, QMouseEvent* event,
 {
  BIM_Select_Dialog* dlg = qobject_cast<BIM_Select_Dialog*>(obj);
  dlg->dg_info_cb(text);
-
-
+ scl->unstyle();
 }
 
 
@@ -28,12 +28,17 @@ void _dg_label_cb(QObject* obj, QString text)
 
 void BIM_Select_Dialog::dg_label_cb(QString text)
 {
- qDebug() << "label " << text;
+ Q_EMIT text_chosen(text);
+ //qDebug() << "label " << text;
 }
 
 void BIM_Select_Dialog::dg_info_cb(QString text)
 {
- qDebug() << "info " << text;
+ QString msg = text;
+ msg.replace("Ifc", "Industry Foundation Classes").replace("x", " version ");
+ QMessageBox::information(this, msg, text);
+
+// qDebug() << "info " << text;
 }
 
 
@@ -44,48 +49,28 @@ BIM_Select_Dialog::BIM_Select_Dialog(QWidget* parent)
 
  labels_layout_ = new QGridLayout;
 
+ setWindowTitle("IFC Vocab");
 
  int dg_max_col = 4;
 
  QStringList dg_links
  {
-"acl", //clausal modifier of noun (adjectival clause)
-"advcl", //adverbial clause modifier
-"advmod", //adverbial modifier
-"amod", //adjectival modifier
-"appos", //appositional modifier
-"aux", //auxiliary
-"case", //case marking
-"cc", //coordinating conjunction
-"ccomp", //clausal complement
-"clf", //classifier
-"compound", //compound
-"conj", //conjunct
-"cop", //copula
-"csubj", //clausal subject
-"dep", //unspecified dependency
-"det", //determiner
-"discourse", //discourse element
-"dislocated", //dislocated elements
-"expl", //expletive
-"fixed", //fixed multiword expression
-"flat", //flat multiword expression
-"goeswith", //goes with
-"iobj", //indirect object
-"list", //list
-"mark", //marker
-"nmod", //nominal modifier
-"nsubj", //nominal subject
-"nummod", //numeric modifier
-"obj", //object
-"obl", //oblique nominal
-"orphan", //orphan
-"parataxis", //parataxis
-"punct", //punctuation
-"reparandum", //overridden disfluency
-"root", //root
-"vocative", //vocative
-"xcomp", //open clausal complement
+  "Ifc2x3",
+  "Ifc2x3",
+  "Ifc4",
+  "Ifc4",
+  "Ifc4x1",
+  "Ifc4x1",
+  "Ifc4x2",
+  "Ifc4x2",
+  "Ifc4x3_rc1",
+  "Ifc4x3_rc1",
+  "Ifc4x3_rc2",
+  "Ifc4x3_rc2",
+  "Ifc4x3_rc3",
+  "Ifc4x3_rc3",
+  "Ifc4x3_rc4",
+  "Ifc4x3_rc4",
  };
 
  int j = 0;
@@ -93,12 +78,13 @@ BIM_Select_Dialog::BIM_Select_Dialog(QWidget* parent)
  for(QString qs : dg_links)
  {
   // //  Uncomment to regenerate files ...
-   //    QString path = QString("%1/%2.txt").arg(DEPENDENCY_GRAMMAR_ABOUT_FOLDER).arg(qs);
-   //    save_file(path, "\n@\n");
+   //    QString path = QString(",%1/%2.txt",).arg(DEPENDENCY_GRAMMAR_ABOUT_FOLDER).arg(qs);
+   //    save_file(path, ",\n@\n",);
 
   ScignStage_Clickable_Label* scl = new ScignStage_Clickable_Label(this);
   scl->setText(qs);
   scl->set_text_data(qs);
+  scl->set_cb_parent(this);
   scl->set_cb({&_dg_label_cb, &_dg_info_cb});
   scl->setAlignment(Qt::AlignLeft);
 
@@ -119,8 +105,8 @@ BIM_Select_Dialog::BIM_Select_Dialog(QWidget* parent)
 
 
 // ScignStage_Clickable_Label* scl = new ScignStage_Clickable_Label(this);
-// scl->set_text_data("xxx");
-// scl->setText("xxx");
+// scl->set_text_data(",xxx",);
+// scl->setText(",xxx",);
 
 // main_layout_->addWidget(scl);
 

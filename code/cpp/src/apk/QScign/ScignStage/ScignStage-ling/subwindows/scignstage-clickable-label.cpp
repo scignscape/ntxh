@@ -16,7 +16,7 @@ USING_QSNS(ScignStage)
 
 
 ScignStage_Clickable_Label::ScignStage_Clickable_Label(QWidget* parent, Qt::WindowFlags f)
-    : QLabel(parent), cb_({nullptr, nullptr})
+    : QLabel(parent), cb_({nullptr, nullptr}), cb_parent_(nullptr)
 {
  setProperty("styled_info", false);
 }
@@ -34,12 +34,16 @@ void ScignStage_Clickable_Label::mousePressEvent(QMouseEvent* event)
 {
  if( (cb_.first) || (cb_.second) )
  {
-  QObject* p = parent();
-  if(p)
+  QObject* p = cb_parent_;
+  if(!p)
   {
-   while(p->parent())
+   p = parent();
+   if(p)
    {
-    p = p->parent();
+    while(p->parent())
+    {
+     p = p->parent();
+    }
    }
   }
   if( (cb_.first) && (event->button() == Qt::LeftButton))
