@@ -16,6 +16,11 @@
 #include "dgi-opencv/dgi-image.h"
 #include "dgi-opencv/dgi-demo-frame.h"
 
+
+#ifdef USE_IFC
+extern int ifc_convert_run_main(QApplication* qapp);
+#endif
+
 #include "bim-select-dialog.h"
 
 #include "styles.h"
@@ -342,11 +347,13 @@ MainWindow::MainWindow(QWidget *parent) :
  help_menu_->addAction(actionInstructions);
  tools_menu_->addAction(actionOptions);
 
- tools_menu_->addAction("BIM ...", [this]()
+#ifdef USE_IFC
+ tools_menu_->addAction("IFC Convert ...", [this]()
  {
-  BIM_Select_Dialog* bsd = new BIM_Select_Dialog(this);
-  bsd->show();
+  QApplication* qapp = qApp;
+  ifc_convert_run_main(qapp);
  });
+#endif
 
 //?? tools_menu_->addAction(actionCreate_List);
 

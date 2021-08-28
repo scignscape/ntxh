@@ -6,7 +6,6 @@
 
 include(../build-group.pri)
 
-TEMPLATE = app
 
 QT += widgets
 
@@ -113,7 +112,7 @@ SOURCES += \
 
 
 SOURCES += \
-  $$IFC_CORE_DIR/ifcconvert/IfcConvert.cpp \
+  \# $$IFC_CORE_DIR/ifcconvert/IfcConvert.cpp \
   $$IFC_CORE_DIR/ifcgeom_schema_agnostic/IfcGeomMaterial.cpp \
   $$IFC_CORE_DIR/ifcgeom_schema_agnostic/IteratorImplementation.cpp \
   $$IFC_CORE_DIR/ifcgeom_schema_agnostic/Kernel.cpp \

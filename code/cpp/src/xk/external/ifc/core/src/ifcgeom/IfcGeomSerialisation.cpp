@@ -677,7 +677,8 @@ IfcUtil::IfcBaseClass* IfcGeom::MAKE_TYPE_NAME(serialise_)(const TopoDS_Shape& s
 	return new IfcSchema::IfcProductDefinitionShape(boost::none, boost::none, reps);
 }
 
-IfcUtil::IfcBaseClass* IfcGeom::MAKE_TYPE_NAME(tesselate_)(const TopoDS_Shape& shape, double deflection) {
+IfcUtil::IfcBaseClass* IfcGeom::MAKE_TYPE_NAME(tesselate_)(const TopoDS_Shape& shape, double deflection)
+{
 	BRepMesh_IncrementalMesh(shape, deflection);
 
 	IfcSchema::IfcFace::list::ptr faces(new IfcSchema::IfcFace::list);

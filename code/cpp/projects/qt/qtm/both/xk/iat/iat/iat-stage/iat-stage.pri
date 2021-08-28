@@ -28,6 +28,11 @@ DEFINES += DEFAULT_DGI_TEMP_FOLDER=\\\"$$ROOT_DIR/../dev/consoles/dgi/images\\\"
 
 DEFINES += USE_KANS
 
+FEATURE_IFC = "USE_IFC"
+
+defined(FEATURE_IFC ,var) {
+ DEFINES += $$FEATURE_IFC
+}
 
 INCLUDEPATH += $$SRC_PROSET_DIR
 
@@ -144,6 +149,50 @@ LIBS += -L$$TARGETSDIR  -ldgi-opencv
 LIBS += -L$$OPENCV_LIB_DIR/ -lopencv_core -lopencv_imgcodecs
 LIBS += -L$$OPENCV_LIB_DIR/ -lopencv_core -lopencv_core
 LIBS += -L$$OPENCV_LIB_DIR/ -lopencv_core -lopencv_imgproc
+
+
+defined(FEATURE_IFC ,var) {
+ DEFINES += $$FEATURE_IFC
+
+
+LIBS += -L$$TARGETSDIR  -lifc-2x3  -lifc-4  -lifc-4x1  -lifc-4x2   \
+  -lifc-4x3_rc1 -lifc-4x3_rc2 -lifc-4x3_rc3 -lifc-4x3_rc4 \
+  -lifc-multi
+
+LIBS += \
+ -lboost_program_options \
+ -lboost_system\
+ -lboost_program_options\
+ -lboost_regex\
+ -lboost_thread\
+ -lboost_date_time\
+ -lboost_chrono\
+ -lboost_atomic\
+ -lpthread\
+ -lxml2\
+ -lTKernel\
+ -lTKMath\
+ -lTKBRep\
+ -lTKGeomBase\
+ -lTKGeomAlgo\
+ -lTKG3d\
+ -lTKG2d\
+ -lTKShHealing\
+ -lTKTopAlgo\
+ -lTKMesh\
+ -lTKPrim\
+ -lTKBool\
+ -lTKBO\
+ -lTKFillet\
+ -lTKSTEP\
+ -lTKSTEPBase\
+ -lTKSTEPAttr\
+ -lTKXSBase\
+ -lTKSTEP209\
+ -lTKIGES\
+ -lTKOffset\
+ -lTKHLR
+}
 
 
 

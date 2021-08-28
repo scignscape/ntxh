@@ -1337,7 +1337,8 @@ IfcFile::IfcFile(const IfcParse::schema_definition* schema)
 	setDefaultHeaderValues();
 }
 
-void IfcFile::initialize_(IfcParse::IfcSpfStream* s) {
+void IfcFile::initialize_(IfcParse::IfcSpfStream* s)
+{
 	// Initialize a "C" locale for locale-independent
 	// number parsing. See comment above on line 41.
 	init_locale();
@@ -1351,7 +1352,8 @@ void IfcFile::initialize_(IfcParse::IfcSpfStream* s) {
 	setDefaultHeaderValues();
 	
 	stream = s;
-	if (!stream->valid) {
+ if (!stream->valid)
+ {
 		good_ = file_open_status::READ_ERROR;
 		return;
 	}
@@ -1361,26 +1363,37 @@ void IfcFile::initialize_(IfcParse::IfcSpfStream* s) {
 	std::vector<std::string> schemas;
 
 	_header.file(this);
-	if (_header.tryRead()) {
-		try {
+ if (_header.tryRead())
+ {
+  try
+  {
 			schemas = _header.file_schema().schema_identifiers();
-		} catch (...) {
+  }
+  catch (...)
+  {
 			// Purposely empty catch block
 		}
-	} else {
+ }
+ else
+ {
 		good_ = file_open_status::NO_HEADER;
 	}
 
-	if (schemas.size() == 1) {
-		try {
+ if (schemas.size() == 1)
+ {
+  try
+  {
 			schema_ = IfcParse::schema_by_name(schemas.front());
-		} catch (const IfcParse::IfcException& e) {
+  }
+  catch (const IfcParse::IfcException& e)
+  {
 			good_ = file_open_status::UNSUPPORTED_SCHEMA;
 			Logger::Error(e);
 		}
 	}
 
-	if (schema_ == 0) {
+ if (schema_ == 0)
+ {
 		Logger::Message(Logger::LOG_ERROR, "No support for file schema encountered ("
 			+ boost::algorithm::join(schemas, ", ") + ")");
 		return;

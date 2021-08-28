@@ -32,6 +32,19 @@ namespace IfcGeom {
 	extern IfcUtil::IfcBaseClass* tesselate_Ifc4x3_rc2(const TopoDS_Shape& shape, double deflection);
 	extern IfcUtil::IfcBaseClass* serialise_Ifc4x3_rc2(const TopoDS_Shape& shape, bool advanced);
 #endif
+
+//?
+#ifdef HAS_SCHEMA_4x3_rc3
+ extern IfcUtil::IfcBaseClass* tesselate_Ifc4x3_rc3(const TopoDS_Shape& shape, double deflection);
+ extern IfcUtil::IfcBaseClass* serialise_Ifc4x3_rc3(const TopoDS_Shape& shape, bool advanced);
+#endif
+
+ //?
+ #ifdef HAS_SCHEMA_4x3_rc4
+  extern IfcUtil::IfcBaseClass* tesselate_Ifc4x3_rc4(const TopoDS_Shape& shape, double deflection);
+  extern IfcUtil::IfcBaseClass* serialise_Ifc4x3_rc4(const TopoDS_Shape& shape, bool advanced);
+ #endif
+
 }
 
 template <typename Fn, typename T>
@@ -54,6 +67,16 @@ IfcUtil::IfcBaseClass* execute_based_on_schema(
 #ifdef HAS_SCHEMA_4x3_rc2
 	Fn fn_4x3_rc2,
 #endif
+
+  //?
+  #ifdef HAS_SCHEMA_4x3_rc3
+   Fn fn_4x3_rc3,
+  #endif
+
+  #ifdef HAS_SCHEMA_4x3_rc4
+   Fn fn_4x3_rc4,
+  #endif
+
 	const std::string& schema_name, const TopoDS_Shape& shape, T t)
 {
 	// @todo an ugly hack to guarantee schemas are initialised.
@@ -94,6 +117,21 @@ IfcUtil::IfcBaseClass* execute_based_on_schema(
 	}
 #endif
 
+ //?
+#ifdef HAS_SCHEMA_4x3_rc3
+ if (schema_name_lower == "ifc4x3_rc3") {
+  return fn_4x3_rc3(shape, t);
+ }
+#endif
+
+ //?
+#ifdef HAS_SCHEMA_4x3_rc4
+ if (schema_name_lower == "ifc4x3_rc4") {
+  return fn_4x3_rc4(shape, t);
+ }
+#endif
+
+
 	throw IfcParse::IfcException("No geometry serialization available for " + schema_name);
 }
 
@@ -121,6 +159,11 @@ IfcUtil::IfcBaseClass* IfcGeom::tesselate(const std::string& schema_name, const 
    #ifdef HAS_SCHEMA_4x3_rc3
      IfcGeom::tesselate_Ifc4x3_rc3,
    #endif
+
+   #ifdef HAS_SCHEMA_4x3_rc4
+     IfcGeom::tesselate_Ifc4x3_rc4,
+   #endif
+
   schema_name, shape, deflection);
 }
 
@@ -144,5 +187,15 @@ IfcUtil::IfcBaseClass* IfcGeom::serialise(const std::string& schema_name, const 
 #ifdef HAS_SCHEMA_4x3_rc2
 		IfcGeom::serialise_Ifc4x3_rc2,
 #endif
+
+    //?
+   #ifdef HAS_SCHEMA_4x3_rc3
+     IfcGeom::serialise_Ifc4x3_rc3,
+   #endif
+
+   #ifdef HAS_SCHEMA_4x3_rc4
+     IfcGeom::serialise_Ifc4x3_rc4,
+   #endif
+
 		schema_name, shape, advanced);
 }

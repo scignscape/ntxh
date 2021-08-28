@@ -47,6 +47,7 @@
 #include <QFileDialog>
 #include <QStandardPaths>
 #include <QApplication>
+#include <QMessageBox>
 
 
 #if OCC_VERSION_HEX < 0x60900
@@ -666,13 +667,26 @@ int main(int argc, char** argv) {
   return EXIT_FAILURE;
  }
 
- if (file_exists(IfcUtil::path::to_utf8(output_filename)) && !vmap.count("yes")) {
-  std::string answer;
-  cout_ << "A file '" << output_filename << "' already exists. Overwrite the existing file?" << std::endl;
-  std::cin >> answer;
-  if (!boost::iequals(answer, "yes") && !boost::iequals(answer, "y")) {
+ if (file_exists(IfcUtil::path::to_utf8(output_filename)) && !vmap.count("yes"))
+ {
+//?
+//  std::string answer;
+//  cout_ << "A file '" << output_filename << "' already exists. Overwrite the existing file?" << std::endl;
+//  std::cin >> answer;
+  QMessageBox::StandardButton reply =
+    QMessageBox::question(nullptr, "File Exists",
+    QString("A file '%1' already exists. Overwrite the existing file?")
+    .arg(QString::fromStdString(output_filename)));
+
+  if(reply != QMessageBox::Yes)
+  {
    return EXIT_SUCCESS;
   }
+
+//  if (!boost::iequals(answer, "yes") && !boost::iequals(answer, "y"))
+//  {
+//   return EXIT_SUCCESS;
+//  }
  }
 
  ofstream_t log_fs;
