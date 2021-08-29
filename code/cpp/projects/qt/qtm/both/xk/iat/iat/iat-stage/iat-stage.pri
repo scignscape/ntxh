@@ -25,6 +25,7 @@ DEFINES += DEFAULT_DGI_FOLDER=\\\"$$ROOT_DIR/dev/consoles/dgi/images\\\"
 
 DEFINES += DEFAULT_DGI_TEMP_FOLDER=\\\"$$ROOT_DIR/../dev/consoles/dgi/images\\\"
 
+DEFINES += DEFAULT_IFC_FOLDER=\\\"$$ROOT_DIR/../dev/ifc\\\"
 
 DEFINES += USE_KANS
 

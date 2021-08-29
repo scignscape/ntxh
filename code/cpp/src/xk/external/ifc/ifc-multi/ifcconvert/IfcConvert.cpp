@@ -555,7 +555,8 @@ int ifc_convert_run_main(int argc, char** argv, QApplication* qapp = nullptr)
  else if (!vmap.count("input-file"))
  {
   dialog_input_file = QFileDialog::getOpenFileName(nullptr, "Open IFC File",
-    QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).value(0),
+   DEFAULT_IFC_FOLDER,
+   //QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).value(0),
     "*.ifc");
 
   if(dialog_input_file.isEmpty())
