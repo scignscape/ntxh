@@ -12,9 +12,11 @@ QT += widgets
 
 include($$ROOT_DIR/../preferred/sysr.pri)
 
+include($$ROOT_DIR/../preferred/occt.pri)
 
-INCLUDEPATH += /usr/include/oce/
 INCLUDEPATH += /usr/include/libxml2/
+
+INCLUDEPATH += /home/nlevisrael/occt/occt-install/include/opencascade
 
 
 DEFINES = BOOST_ALL_NO_LIB BOOST_OPTIONAL_USE_OLD_DEFINITION_OF_NONE
@@ -152,16 +154,18 @@ SOURCES += \
 
 LIBS += \
  -lboost_program_options \
- -lboost_system\
- -lboost_program_options\
- -lboost_regex\
- -lboost_thread\
- -lboost_date_time\
- -lboost_chrono\
- -lboost_atomic\
- -lpthread\
- -lxml2\
- -lTKernel\
+ -lboost_system \
+ -lboost_regex \
+ -lboost_thread \
+ -lboost_date_time \
+ -lboost_chrono \
+ -lboost_atomic \
+ -lpthread \
+ -lxml2 \
+
+
+LIBS += -L$$OCCT_LIB_DIR \
+-lTKernel\
  -lTKMath\
  -lTKBRep\
  -lTKGeomBase\

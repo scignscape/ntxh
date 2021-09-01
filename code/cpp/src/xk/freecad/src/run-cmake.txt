@@ -1,0 +1,22 @@
+/ ... path .../ ... to ... / cmake \
+  -DCMAKE_CXX_COMPILER=g++-7 -DCMAKE_INSTALL_PREFIX:PATH= ... \
+  -DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH};/ ... /occt-install/lib/cmake/opencascade" \
+  -DBUILD_PY_LIB=ON -DUSE_PY_3=OFF \
+  -DCMAKE_BUILD_TYPE:STRING=Debug \
+  -DPYSIDE2RCCBINARY:FILEPATH=/ ... /Qt/5.15.2/gcc_64/bin/rcc \
+  -DVTK_DIR=/ ... /VTK-Build \
+  -DQt5Core_DIR=/ ... /Qt/5.15.2/gcc_64/lib/cmake/Qt5Core \
+  -DQt5Network_DIR=/ ... /Qt/5.15.2/gcc_64/lib/cmake/Qt5Network \
+  -DQt5Xml_DIR=/ ... /Qt/5.15.2/gcc_64/lib/cmake/Qt5Xml \
+  -DQt5XmlPatterns_DIR=/ ... /Qt/5.15.2/gcc_64/lib/cmake/Qt5XmlPatterns \
+  -DQt5Concurrent_DIR=/ ... /Qt/5.15.2/gcc_64/lib/cmake/Qt5Concurrent \
+  -DQt5Widgets_DIR=/ ... /Qt/5.15.2/gcc_64/lib/cmake/Qt5Widgets \
+  -DQt5PrintSupport_DIR=/ ... /Qt/5.15.2/gcc_64/lib/cmake/Qt5PrintSupport \
+  -DQt5OpenGL_DIR=/ ... /Qt/5.15.2/gcc_64/lib/cmake/Qt5OpenGL \
+  -DQt5Svg_DIR=/ ... /Qt/5.15.2/gcc_64/lib/cmake/Qt5Svg \
+  -DQt5UiTools_DIR=/ ... /Qt/5.15.2/gcc_64/lib/cmake/Qt5UiTools \
+  -DQt5WebEngineWidgets_DIR=/ ... /Qt/5.15.2/gcc_64/lib/cmake/Qt5WebEngineWidgets \
+  -DCMAKE_LIBRARY_PATH:PATH=/ ... /ifc/oce-install/lib/ \
+  ../FreeCAD
+
+

@@ -326,6 +326,7 @@ MainWindow::MainWindow(QWidget *parent) :
  action_view_360 = new QAction("View 360 (Matterport)", this);
  action_view_contours = new QAction("View Contours (OpenCV)", this);
  action_view_3d = new QAction("View 3d (MeshLab)", this);
+ action_view_cad = new QAction("View CAD/3d (FreeCAD)", this);
 
 
  actionQuit = new QAction("Quit", this);
@@ -366,7 +367,7 @@ MainWindow::MainWindow(QWidget *parent) :
  connect(action_view_360, SIGNAL(triggered()), this, SLOT(on_action_view_360_triggered()));
  connect(action_view_contours, SIGNAL(triggered()), this, SLOT(on_action_view_contours_triggered()));
  connect(action_view_3d, SIGNAL(triggered()), this, SLOT(on_action_view_3d_triggered()));
-
+ connect(action_view_cad, SIGNAL(triggered()), this, SLOT(on_action_view_cad_triggered()));
 
  autogen_index_ = 0;
  axfi_annotation_group_ = nullptr;
@@ -708,6 +709,18 @@ void MainWindow::on_actionAnnotate_Multiple_Image_triggered()
   }
   else doBackUp(); //in caso di interruzioni
  }
+}
+
+void MainWindow::on_action_view_cad_triggered()
+{
+ //QString path = qApp->applicationDirPath();
+ QDir qd(FREECAD_BIN_FOLDER);
+
+ QString ap = qd.absoluteFilePath("FreeCAD");
+ qDebug() << "ap = " << ap;
+
+ QProcess cmd;
+ cmd.startDetached(ap, {});
 }
 
 

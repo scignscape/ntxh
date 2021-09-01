@@ -12,8 +12,10 @@ QT += widgets
 
 include($$ROOT_DIR/../preferred/sysr.pri)
 
+include($$ROOT_DIR/../preferred/occt.pri)
 
-INCLUDEPATH += /usr/include/oce/
+INCLUDEPATH += $$OCCT_INCLUDE_DIR/opencascade
+
 INCLUDEPATH += /usr/include/libxml2/
 
 
@@ -60,36 +62,36 @@ LIBS += -L$$TARGETSDIR  -lifc-2x3  -lifc-4  -lifc-4x1  -lifc-4x2   \
 
 LIBS += \
  -lboost_program_options \
- -lboost_system\
- -lboost_program_options\
- -lboost_regex\
- -lboost_thread\
- -lboost_date_time\
- -lboost_chrono\
- -lboost_atomic\
- -lpthread\
- -lxml2\
- -lTKernel\
- -lTKMath\
- -lTKBRep\
- -lTKGeomBase\
- -lTKGeomAlgo\
- -lTKG3d\
- -lTKG2d\
- -lTKShHealing\
- -lTKTopAlgo\
- -lTKMesh\
- -lTKPrim\
- -lTKBool\
- -lTKBO\
- -lTKFillet\
- -lTKSTEP\
- -lTKSTEPBase\
- -lTKSTEPAttr\
- -lTKXSBase\
- -lTKSTEP209\
- -lTKIGES\
- -lTKOffset\
- -lTKHLR
+ -lboost_system \
+ -lboost_regex \
+ -lboost_thread \
+ -lboost_date_time \
+ -lboost_chrono \
+ -lboost_atomic \
+ -lpthread \
+ -lxml2 \
 
+LIBS += -L$$OCCT_LIB_DIR \
+ -lTKernel \
+ -lTKMath \
+ -lTKBRep \
+ -lTKGeomBase \
+ -lTKGeomAlgo \
+ -lTKG3d \
+ -lTKG2d \
+ -lTKShHealing \
+ -lTKTopAlgo \
+ -lTKMesh \
+ -lTKPrim \
+ -lTKBool \
+ -lTKBO \
+ -lTKFillet \
+ -lTKSTEP \
+ -lTKSTEPBase \
+ -lTKSTEPAttr \
+ -lTKXSBase \
+ -lTKSTEP209 \
+ -lTKIGES \
+ -lTKOffset \
+ -lTKHLR
 

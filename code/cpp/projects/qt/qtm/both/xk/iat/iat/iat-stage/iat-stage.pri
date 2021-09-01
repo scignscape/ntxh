@@ -27,6 +27,9 @@ DEFINES += DEFAULT_DGI_TEMP_FOLDER=\\\"$$ROOT_DIR/../dev/consoles/dgi/images\\\"
 
 DEFINES += DEFAULT_IFC_FOLDER=\\\"$$ROOT_DIR/../dev/ifc\\\"
 
+DEFINES += FREECAD_BIN_FOLDER=\\\"FREECAD_BIN_DIR\\\"
+
+
 DEFINES += USE_KANS
 
 FEATURE_IFC = "USE_IFC"
@@ -48,6 +51,10 @@ INCLUDEPATH += $$OPENCV_SRC_DIR/modules/core/include
 INCLUDEPATH += $$OPENCV_SRC_DIR/modules/imgproc/include
 INCLUDEPATH += $$OPENCV_SRC_DIR/modules/imgcodecs/include
 INCLUDEPATH += $$OPENCV_BUILD_DIR
+
+
+include($$ROOT_DIR/../preferred/freecad.pri)
+include($$ROOT_DIR/../preferred/occt.pri)
 
 
 
@@ -170,7 +177,9 @@ LIBS += \
  -lboost_chrono\
  -lboost_atomic\
  -lpthread\
- -lxml2\
+ -lxml2
+
+LIBS += -L$$OCCT_LIB_DIR \
  -lTKernel\
  -lTKMath\
  -lTKBRep\
@@ -193,9 +202,8 @@ LIBS += \
  -lTKIGES\
  -lTKOffset\
  -lTKHLR
+
 }
-
-
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)
 mkpath($$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)
