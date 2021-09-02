@@ -311,6 +311,7 @@ private:
  QPointF original_position_;
 
  u4* meshlab_import_count_;
+ u4* freecad_import_count_;
 
  QVector<QPair<AXFI_Annotation*, r8>> saved_axfi_annotations_;
 
@@ -356,6 +357,7 @@ public:
  ACCESSORS(QGraphicsItem* ,background_item)
  ACCESSORS(QGraphicsView* ,containing_image_view)
  ACCESSORS(u4* ,meshlab_import_count)
+ ACCESSORS(u4* ,freecad_import_count)
 
 public:
 
@@ -380,7 +382,8 @@ Q_SIGNALS:
  void polygon_save_notation_requested();
  void complete_polygon_requested();
  void meshlab_import_info_requested();
-
+ void freecad_import_info_requested();
+ void freecad_reset_requested();
 
 protected:
  void paintEvent(QPaintEvent *); //metodo per la stampa su schermo di tutte le annotazioni e le varie operazioni effettuate dall'utente

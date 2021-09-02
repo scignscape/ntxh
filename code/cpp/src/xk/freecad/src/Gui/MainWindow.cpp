@@ -118,6 +118,17 @@
 #include "DlgObjectSelection.h"
 #include "Tools.h"
 
+
+
+// // axfi
+#include "NaviCube.h"
+#include <Inventor/nodes/SoCamera.h>
+#include <QtGlobal>
+#include <QVector>
+#include <QUdpSocket>
+
+
+
 FC_LOG_LEVEL_INIT("MainWindow",false,true,true)
 
 #if defined(Q_OS_WIN32)
@@ -274,6 +285,52 @@ protected:
 MainWindow::MainWindow(QWidget * parent, Qt::WindowFlags f)
   : QMainWindow( parent, f/*WDestructiveClose*/ )
 {
+ // //
+ // QUdpSocket
+
+ // //  axfi ...
+ axfi_out_socket_ = nullptr;
+ //axfi_in_socket_ = nullptr;
+
+ if(true) // some sort of check?
+ {
+  axfi_in_socket_ = new QUdpSocket(this);
+  axfi_in_socket_->bind(QHostAddress::LocalHost, 1235);
+  connect(axfi_in_socket_, &QUdpSocket::readyRead,
+    [this]()
+  {
+   QByteArray qba(512, ' ');
+   axfi_in_socket_->readDatagram(qba.data(), 512);
+   qDebug() << "socket: " << qba;
+
+   short sz1 = qba[0];
+   short sz2 = qba[1];
+
+   short flags = sz1 >> 2;
+   sz1 &= 3;
+   short sz = (sz1 << 8) + sz2;
+
+   QString text = QString::fromLatin1(qba.mid(2, sz));
+
+   qDebug() << "text = " << text;
+   qDebug() << "flags = " << flags;
+   if(flags & 1)
+   {
+    setWindowState(windowState() & ~Qt::WindowMinimized | Qt::WindowActive);
+   }
+
+   QStringList qsl = text.split(QChar::fromLatin1(';'));
+   QVector<qreal> data(qsl.size());
+   std::transform(qsl.begin(), qsl.end(), data.begin(),
+     [](QString qs) { return qs.toDouble(); });
+
+   axfi_reset(data);
+
+//   if(qba[0] == '^')
+//     setWindowState(windowState() & ~Qt::WindowMinimized | Qt::WindowActive);
+  });
+ }
+
     d = new MainWindowP;
     d->splashscreen = 0;
     d->activeView = 0;
@@ -513,6 +570,131 @@ MainWindow::MainWindow(QWidget * parent, Qt::WindowFlags f)
     setAcceptDrops(true);
     statusBar()->showMessage(tr("Ready"), 2001);
 }
+
+// //   axfi_defines ...
+#define DEFAULT_SNAPSHOTS_FOLDER "axfi-snapshots/snapshots"
+
+static inline QString operator ""_q(const char* cs, size_t size)
+{
+ std::string ss(cs, size);
+ return QString::fromStdString(ss);
+}
+
+
+void MainWindow::axfi_reset(QVector<qreal>& data)
+{
+ Gui::Document* doc = Gui::Application::Instance->activeDocument();
+ if (doc)
+ {
+  Gui::View3DInventor* view = static_cast<Gui::View3DInventor*>(doc->getActiveView());
+  Gui::View3DInventorViewer* viewer = view->getViewer();
+  SoCamera* camera = viewer->getSoRenderManager()->getCamera();
+  camera->position.setValue({(float)data[0], (float)data[1], (float)data[2]});
+  camera->orientation.setValue({(float)data[3], (float)data[4], (float)data[5]}, data[6]);
+
+  camera->aspectRatio = data[7];
+  camera->nearDistance = data[8];
+  camera->farDistance = data[9];
+  camera->focalDistance = data[10];
+ }
+}
+
+
+void MainWindow::axfi_export(Gui::Workbench* wb)
+{
+ QScreen* screen = QGuiApplication::primaryScreen();
+ if (!screen)
+   return;
+
+ QTimer::singleShot(1000, [=]
+ {
+  Gui::Document* doc = Gui::Application::Instance->activeDocument();
+  if (doc)
+  {
+   Gui::View3DInventor* view = static_cast<Gui::View3DInventor*>(doc->getActiveView());
+   Gui::View3DInventorViewer* viewer = view->getViewer();
+
+   NaviCube* nc = viewer->getNavigationCube();
+
+   SbVec2s sz = viewer->getSoRenderManager()->getSize();
+   float enlarge = 1;
+   int nsz = nc->get_size(enlarge);
+   nsz *= enlarge;
+
+   int ofx = nc->get_offset_x();
+
+   int _w = sz[0] - nsz - ofx;
+   int _h = sz[1];
+
+   QPixmap pixmap = screen->grabWindow(viewer->winId(), 0, 0, _w, _h);
+   QString path = QCoreApplication::applicationDirPath();
+   QDir qd(path);
+   qd.cdUp();
+   path = qd.absoluteFilePath(DEFAULT_SNAPSHOTS_FOLDER "/iat-freecad.png"_q);
+   qDebug() << "Saving to path: " << path;
+
+   QFile file(path);
+   if(file.open(QIODevice::WriteOnly))
+   {
+    pixmap.save(&file, "PNG");
+   }
+
+   SoCamera* camera = viewer->getSoRenderManager()->getCamera();
+   SbVec3f pos = camera->position.getValue();
+   SoSFRotation orientation = camera->orientation; //  4 floats ?
+   SoSFFloat aspectRatio = camera->aspectRatio; // 4 floats ...
+   SoSFFloat nearDistance = camera->nearDistance;
+   SoSFFloat farDistance = camera->farDistance;
+   SoSFFloat focalDistance = camera->focalDistance;
+
+   SbVec3f axis; float angle;
+
+   orientation.getValue(axis, angle);
+
+   QVector<qreal> data = { (qreal) pos[0], (qreal) pos[1],
+     (qreal) pos[2], (qreal) axis[0],  (qreal) axis[1],
+     (qreal) axis[2], angle, (qreal) aspectRatio.getValue(),
+     (qreal) nearDistance.getValue(),
+     (qreal) farDistance.getValue(),
+     (qreal) focalDistance.getValue()};
+
+   QString text = ("+FreeCAD+%1*%2"_q)
+     .arg(path).arg(data.first());
+
+   for(int i = 1; i < data.size(); ++i)
+   {
+    text += (";%2"_q).arg(data[i]);
+   }
+
+   if(!axfi_out_socket_)
+   {
+    axfi_out_socket_ = new QUdpSocket(this);
+    axfi_out_socket_->bind(QHostAddress::LocalHost, 1234);
+   }
+
+   int tsz = text.size();
+   QByteArray qba = text.toLatin1();
+
+   if(tsz < 10)
+   {
+    qba.prepend(QByteArray::number(tsz));
+    qba.prepend("00");
+   }
+   else if(tsz < 100)
+   {
+    qba.prepend(QByteArray::number(tsz));
+    qba.prepend("0");
+   }
+   else
+     qba.prepend(QByteArray::number(tsz));
+
+   axfi_out_socket_->writeDatagram(qba, QHostAddress::LocalHost, 1234);
+   showMinimized();
+  }
+ });
+}
+
+
 
 MainWindow::~MainWindow()
 {

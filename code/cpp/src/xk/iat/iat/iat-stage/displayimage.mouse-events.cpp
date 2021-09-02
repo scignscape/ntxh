@@ -174,6 +174,19 @@ void DisplayImage_Scene_Item::handle_mouse_event<
     Q_EMIT meshlab_import_info_requested();
    });
 
+ if(freecad_import_count_ && *freecad_import_count_)
+ {
+  menu->addAction("Freecad Import Info", [this]
+  {
+   Q_EMIT freecad_import_info_requested();
+  });
+
+  menu->addAction("Freecad Reset", [this]
+  {
+   Q_EMIT freecad_reset_requested();
+  });
+ }
+
 
  if(!data_->point_pairs_.isEmpty())
  {

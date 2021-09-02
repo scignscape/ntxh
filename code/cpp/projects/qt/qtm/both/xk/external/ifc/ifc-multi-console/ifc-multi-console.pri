@@ -54,9 +54,22 @@ SOURCES += \
   $$SRC_DIR/main.cpp \
 
 
-LIBS += -L$$TARGETSDIR  -lifc-2x3  -lifc-4  -lifc-4x1  -lifc-4x2   \
-  -lifc-4x3_rc1 -lifc-4x3_rc2 -lifc-4x3_rc3 -lifc-4x3_rc4 \
-  -lifc-multi
+#LIBS += -L$$TARGETSDIR  -lifc-2x3  -lifc-4  -lifc-4x1  -lifc-4x2   \
+#  -lifc-4x3_rc1 -lifc-4x3_rc2 -lifc-4x3_rc3 -lifc-4x3_rc4 \
+#  -lifc-multi
+
+
+
+LIBS += $$TARGETSDIR/libifc-multi.a
+
+LIBS += $$TARGETSDIR/libifc-2x3.a \
+  $$TARGETSDIR/libifc-4.a \
+  $$TARGETSDIR/libifc-4x1.a \
+  $$TARGETSDIR/libifc-4x2.a \
+  $$TARGETSDIR/libifc-4x3_rc1.a \
+  $$TARGETSDIR/libifc-4x3_rc2.a \
+  $$TARGETSDIR/libifc-4x3_rc3.a \
+  $$TARGETSDIR/libifc-4x3_rc4.a \
 
 
 

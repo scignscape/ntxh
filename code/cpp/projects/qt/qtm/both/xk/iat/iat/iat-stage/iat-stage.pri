@@ -27,16 +27,15 @@ DEFINES += DEFAULT_DGI_TEMP_FOLDER=\\\"$$ROOT_DIR/../dev/consoles/dgi/images\\\"
 
 DEFINES += DEFAULT_IFC_FOLDER=\\\"$$ROOT_DIR/../dev/ifc\\\"
 
-DEFINES += FREECAD_BIN_FOLDER=\\\"FREECAD_BIN_DIR\\\"
-
-
 DEFINES += USE_KANS
 
 FEATURE_IFC = "USE_IFC"
 
 defined(FEATURE_IFC ,var) {
  DEFINES += $$FEATURE_IFC
+ include($$ROOT_DIR/../preferred/occt.pri)
 }
+
 
 INCLUDEPATH += $$SRC_PROSET_DIR
 
@@ -54,7 +53,9 @@ INCLUDEPATH += $$OPENCV_BUILD_DIR
 
 
 include($$ROOT_DIR/../preferred/freecad.pri)
-include($$ROOT_DIR/../preferred/occt.pri)
+
+DEFINES += FREECAD_BIN_FOLDER=\\\"$$FREECAD_BIN_DIR\\\"
+
 
 
 
@@ -163,44 +164,53 @@ defined(FEATURE_IFC ,var) {
  DEFINES += $$FEATURE_IFC
 
 
-LIBS += -L$$TARGETSDIR  -lifc-2x3  -lifc-4  -lifc-4x1  -lifc-4x2   \
-  -lifc-4x3_rc1 -lifc-4x3_rc2 -lifc-4x3_rc3 -lifc-4x3_rc4 \
-  -lifc-multi
+
+LIBS += $$TARGETSDIR/libifc-multi.a
+
+LIBS += $$TARGETSDIR/libifc-2x3.a \
+  $$TARGETSDIR/libifc-4.a \
+  $$TARGETSDIR/libifc-4x1.a \
+  $$TARGETSDIR/libifc-4x2.a \
+  $$TARGETSDIR/libifc-4x3_rc1.a \
+  $$TARGETSDIR/libifc-4x3_rc2.a \
+  $$TARGETSDIR/libifc-4x3_rc3.a \
+  $$TARGETSDIR/libifc-4x3_rc4.a \
+
 
 LIBS += \
  -lboost_program_options \
- -lboost_system\
- -lboost_program_options\
- -lboost_regex\
- -lboost_thread\
- -lboost_date_time\
- -lboost_chrono\
- -lboost_atomic\
- -lpthread\
+ -lboost_system \
+ -lboost_program_options \
+ -lboost_regex \
+ -lboost_thread \
+ -lboost_date_time \
+ -lboost_chrono \
+ -lboost_atomic \
+ -lpthread \
  -lxml2
 
 LIBS += -L$$OCCT_LIB_DIR \
- -lTKernel\
- -lTKMath\
- -lTKBRep\
- -lTKGeomBase\
- -lTKGeomAlgo\
- -lTKG3d\
- -lTKG2d\
- -lTKShHealing\
- -lTKTopAlgo\
- -lTKMesh\
- -lTKPrim\
- -lTKBool\
- -lTKBO\
- -lTKFillet\
- -lTKSTEP\
- -lTKSTEPBase\
- -lTKSTEPAttr\
- -lTKXSBase\
- -lTKSTEP209\
- -lTKIGES\
- -lTKOffset\
+ -lTKernel \
+ -lTKMath \
+ -lTKBRep \
+ -lTKGeomBase \
+ -lTKGeomAlgo \
+ -lTKG3d \
+ -lTKG2d \
+ -lTKShHealing \
+ -lTKTopAlgo \
+ -lTKMesh \
+ -lTKPrim \
+ -lTKBool \
+ -lTKBO \
+ -lTKFillet \
+ -lTKSTEP \
+ -lTKSTEPBase \
+ -lTKSTEPAttr \
+ -lTKXSBase \
+ -lTKSTEP209 \
+ -lTKIGES \
+ -lTKOffset \
  -lTKHLR
 
 }

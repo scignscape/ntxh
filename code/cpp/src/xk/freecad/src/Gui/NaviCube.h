@@ -49,6 +49,13 @@ public:
 	void setCorner(Corner);
 	static void setNaviCubeCommands(const std::vector<std::string>& cmd);
 	static void setNaviCubeLabels(const std::vector<std::string>& labels);
+
+ // //  axfi
+
+ int get_size(float& enlarge);
+ int get_offset_x();
+ int get_offset_y();
+
 private:
 	NaviCubeImplementation* m_NaviCubeImplementation;
 };

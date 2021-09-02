@@ -255,6 +255,7 @@ void MainWindow::init_display_scene_item(DisplayImage_Scene_Item* si)
  display_scene_item_ = si;
 
  si->set_meshlab_import_count(meshlab_import_count_);
+ si->set_freecad_import_count(freecad_import_count_);
 
 
 //?
@@ -272,7 +273,14 @@ void MainWindow::init_display_scene_item(DisplayImage_Scene_Item* si)
    SLOT(handle_complete_polygon_requested()));
 
  connect(display_scene_item_, SIGNAL(meshlab_import_info_requested()), this,
-   SLOT(show_meshlab_info()));
+   SLOT(show_meshlab_import_info()));
+
+ connect(display_scene_item_, SIGNAL(freecad_import_info_requested()), this,
+   SLOT(show_freecad_import_info()));
+
+ connect(display_scene_item_, SIGNAL(freecad_reset_requested()), this,
+   SLOT(send_freecad_reset()));
+
 
 // qDebug() << "display_scene_item_ = " << display_scene_item_;
 
@@ -288,12 +296,15 @@ MainWindow::MainWindow(QWidget *parent) :
    QMainWindow(parent) //??, ui(new Ui::MainWindow)
 {
  current_wgl_dialog_ = nullptr;
- meshlab_in_socket_ = nullptr;
- meshlab_out_socket_ = nullptr;
- meshlab_message_box_ = nullptr;
+ udp_incoming_socket_ = nullptr;
+ udp_outgoing_socket_ = nullptr;
+ import_info_message_box_ = nullptr;
 
  meshlab_import_count_ = new u4;
  *meshlab_import_count_ = 0;
+
+ freecad_import_count_ = new u4;
+ *freecad_import_count_ = 0;
 
  save_area_folder_ = ROOT_FOLDER "/../save-area";
 
@@ -341,6 +352,7 @@ MainWindow::MainWindow(QWidget *parent) :
  file_menu_->addAction(action_view_contours);
  file_menu_->addAction(action_view_3d);
  file_menu_->addAction(action_view_360);
+ file_menu_->addAction(action_view_cad);
 
 
  file_menu_->addSeparator();
@@ -713,6 +725,8 @@ void MainWindow::on_actionAnnotate_Multiple_Image_triggered()
 
 void MainWindow::on_action_view_cad_triggered()
 {
+ check_init_udp_incoming_socket();
+
  //QString path = qApp->applicationDirPath();
  QDir qd(FREECAD_BIN_FOLDER);
 
@@ -723,74 +737,203 @@ void MainWindow::on_action_view_cad_triggered()
  cmd.startDetached(ap, {});
 }
 
-
-void MainWindow::on_action_view_3d_triggered()
+void MainWindow::check_init_udp_incoming_socket()
 {
- if(meshlab_in_socket_)
- {
-  if(!meshlab_out_socket_)
-  {
-   meshlab_out_socket_ = new QUdpSocket(this);
-   meshlab_out_socket_->bind(QHostAddress::LocalHost, 1235);
-  }
-  static QByteArray qba("^");
-  meshlab_out_socket_->writeDatagram(qba, QHostAddress::LocalHost, 1235);
+ if(udp_incoming_socket_)
   return;
- }
 
- meshlab_in_socket_ = new QUdpSocket(this);
- meshlab_in_socket_->bind(QHostAddress::LocalHost, 1234);
+ udp_incoming_socket_ = new QUdpSocket(this);
+ udp_incoming_socket_->bind(QHostAddress::LocalHost, 1234);
 
- connect(meshlab_in_socket_, &QUdpSocket::readyRead,
+ connect(udp_incoming_socket_, &QUdpSocket::readyRead,
    [this]()
  {
   QByteArray qba(512, ' ');
-  meshlab_in_socket_->readDatagram(qba.data(), 512);
-  QByteArray num = qba.left(3);
-  int size = num.toInt();
-  qba = qba.mid(3, size);
-  QString text = QString::fromLatin1(qba);
-  QStringList qsl = text.split('*');
-
-  mesh_file_path_ = qsl.takeFirst();
-  QString file_path = qsl.takeFirst();
-
-  meshlab_file_path_ = file_path;
-
-  mesh_position_.clear();
-  if(!qsl.isEmpty())
-  {
-   meshlab_track_info_ = qsl.takeFirst().simplified();
-   mesh_position_ += meshlab_track_info_ + " ";
-  }
-  else
-    meshlab_track_info_ = "N/A";
-
-  if(!qsl.isEmpty())
-  {
-   meshlab_scale_info_ = qsl.takeFirst().simplified();
-   mesh_position_ += meshlab_scale_info_;
-  }
-  else
-    meshlab_scale_info_ = "N/A";
-
-  ++*meshlab_import_count_;
-
-  showNormal();
-  load_image(file_path);
+  udp_incoming_socket_->readDatagram(qba.data(), 512);
+  read_udp_socket(qba);
  });
+
+}
+
+void MainWindow::read_udp_meshlab(QString text)
+{
+ QStringList qsl = text.split('*');
+
+ mesh_file_path_ = qsl.takeFirst();
+ QString file_path = qsl.takeFirst();
+
+ meshlab_file_path_ = file_path;
+
+ mesh_position_.clear();
+ if(!qsl.isEmpty())
+ {
+  meshlab_track_info_ = qsl.takeFirst().simplified();
+  mesh_position_ += meshlab_track_info_ + " ";
+ }
+ else
+  meshlab_track_info_ = "N/A";
+
+ if(!qsl.isEmpty())
+ {
+  meshlab_scale_info_ = qsl.takeFirst().simplified();
+  mesh_position_ += meshlab_scale_info_;
+ }
+ else
+  meshlab_scale_info_ = "N/A";
+
+ ++*meshlab_import_count_;
+
+ showNormal();
+ load_image(file_path);
+}
+
+void MainWindow::read_udp_freecad(QString text)
+{
+ QStringList qsl = text.split('*');
+ if(qsl.isEmpty())
+   return;
+
+ ++*freecad_import_count_;
+
+ freecad_file_path_ = qsl.takeFirst();
+ if(!qsl.isEmpty())
+ {
+  QStringList qsl1 =  qsl.takeFirst().split(';');
+  freecad_position_data_.resize(qsl1.size());
+  std::transform(qsl1.begin(), qsl1.end(), freecad_position_data_.begin(),
+    [](QString qs) { return qs.toDouble(); });
+ }
+ showNormal();
+ load_image(freecad_file_path_);
+}
+
+
+void MainWindow::read_udp_socket(const QByteArray& qba)
+{
+ QByteArray num = qba.left(3);
+ int size = num.toInt();
+ QByteArray qbam = qba.mid(3, size);
+ QString text = QString::fromLatin1(qbam);
+
+ QString origin;
+
+ if(text.startsWith('+'))
+ {
+  int ix = text.indexOf('+', 1);
+  if(ix != -1)
+  {
+   origin = text.mid(1, ix - 1);
+   text = text.mid(ix + 1);
+  }
+ }
+
+ if(true) // // perhaps some origin won't require an outgoing ...
+   check_init_udp_outgoing_socket();
+
+ if(origin.isEmpty() || origin == "MeshLab")
+ {
+  read_udp_meshlab(text);
+ }
+ else if(origin == "FreeCAD")
+ {
+  read_udp_freecad(text);
+ }
+
+}
+
+
+void MainWindow::check_init_udp_outgoing_socket()
+{
+ if(!udp_outgoing_socket_)
+ {
+  udp_outgoing_socket_ = new QUdpSocket(this);
+  udp_outgoing_socket_->bind(QHostAddress::LocalHost, 1235);
+ }
+}
+
+void MainWindow::on_action_view_3d_triggered()
+{
+ check_init_udp_incoming_socket();
 
  QString path = qApp->applicationDirPath();
  QDir qd(path);
 
  QString ap = qd.absoluteFilePath("meshlab-console");
- qDebug() << "ap = " << ap;
 
  QProcess cmd;
  cmd.startDetached(ap, {});
 }
 
-void MainWindow::show_meshlab_info()
+
+void MainWindow::send_freecad_reset()
+{
+ if(freecad_position_data_.isEmpty())
+   return;
+
+ QByteArray qba = QByteArray::number(freecad_position_data_[0]);
+
+ for(u2 i = 1; i < freecad_position_data_.size(); ++i)
+ {
+  qba += ";" + QByteArray::number(freecad_position_data_[i]);
+ }
+
+ u2 sz = qba.size();
+ u1 sz0 = sz & 255;
+ u1 sz1 = sz >> 8;
+
+ u1 flags = 1;
+ sz1 |= (flags << 2);
+
+ qba.prepend(sz0);
+ qba.prepend(sz1);
+
+ udp_outgoing_socket_->writeDatagram(qba, QHostAddress::LocalHost, 1235);
+
+}
+
+void MainWindow::show_freecad_import_info()
+{
+ QString dt = QString(R"(Temp File Path: %1
+Camera Position: %2, %3, %4
+Camera Rotation: %5, %6, %7; %8)")
+   .arg(freecad_file_path_)
+   .arg(freecad_position_data_.value(0))
+   .arg(freecad_position_data_.value(1))
+   .arg(freecad_position_data_.value(2))
+   .arg(freecad_position_data_.value(3))
+   .arg(freecad_position_data_.value(4))
+   .arg(freecad_position_data_.value(5))
+   .arg(freecad_position_data_.value(6))
+   ;
+
+ dt += QString(R"(
+Aspect Ratio: %1
+Near Distance: %2
+Far Distance: %3
+Focal Distance: %4)")
+   .arg(freecad_position_data_.value(7))
+   .arg(freecad_position_data_.value(8))
+   .arg(freecad_position_data_.value(9))
+   .arg(freecad_position_data_.value(10));
+
+
+ if(import_info_message_box_)
+   delete import_info_message_box_;
+
+ import_info_message_box_ = new QMessageBox(this);
+ import_info_message_box_->setText("FreeCAD Import");
+ import_info_message_box_->setInformativeText(R"(Hit "Show Details" for information about the FreeCAD snapshot recently imported)");
+ import_info_message_box_->setDetailedText(dt);
+ QSpacerItem* horizontalSpacer = new QSpacerItem(600, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+ QGridLayout* layout = (QGridLayout*)import_info_message_box_->layout();
+ layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+
+ import_info_message_box_->show();
+
+}
+
+
+void MainWindow::show_meshlab_import_info()
 {
  QString ti = meshlab_track_info_.replace(' ', ",  ");
 
@@ -814,18 +957,18 @@ Scale (Zoom) Level: %5)")
    .arg(ci)
    .arg(si);
 
- if(meshlab_message_box_)
-   delete meshlab_message_box_;
+ if(import_info_message_box_)
+   delete import_info_message_box_;
 
- meshlab_message_box_ = new QMessageBox(this);
- meshlab_message_box_->setText("Meshlab Export");
- meshlab_message_box_->setInformativeText(R"(Hit "Show Details" for information about the Meshlab snapshot recently imported)");
- meshlab_message_box_->setDetailedText(dt);
+ import_info_message_box_ = new QMessageBox(this);
+ import_info_message_box_->setText("Meshlab Export");
+ import_info_message_box_->setInformativeText(R"(Hit "Show Details" for information about the Meshlab snapshot recently imported)");
+ import_info_message_box_->setDetailedText(dt);
  QSpacerItem* horizontalSpacer = new QSpacerItem(600, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
- QGridLayout* layout = (QGridLayout*)meshlab_message_box_->layout();
+ QGridLayout* layout = (QGridLayout*)import_info_message_box_->layout();
  layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
 
- meshlab_message_box_->show();
+ import_info_message_box_->show();
 }
 
 void MainWindow::on_action_view_contours_triggered()
@@ -851,10 +994,6 @@ void MainWindow::on_action_view_contours_triggered()
  writer.write(converted);
 
  DGI_Image* dgi = new DGI_Image(thei);
-
-// DGI_Image dgi(DEFAULT_DGI_FOLDER "/img1.jpg");
-
-// DGI_Image dgi(DEFAULT_DGI_FOLDER "/AT20-0131A111.png");
 
  dgi->load();
 

@@ -395,6 +395,10 @@ bool Workbench::activate()
     delete dw;
 
     MenuItem* mb = setupMenuBar();
+
+    // // axfi ...
+    MenuManager::getInstance()->set_workbench(this);
+
     MenuManager::getInstance()->setup( mb );
     delete mb;
 

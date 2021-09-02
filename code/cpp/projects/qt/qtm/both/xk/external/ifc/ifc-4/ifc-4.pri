@@ -16,7 +16,11 @@ include($$ROOT_DIR/../preferred/occt.pri)
 
 INCLUDEPATH += /usr/include/libxml2/
 
-INCLUDEPATH += /home/nlevisrael/occt/occt-install/include/opencascade
+#? INCLUDEPATH += /home/nlevisrael/occt/occt-install/include/opencascade
+
+INCLUDEPATH += $$OCCT_INCLUDE_DIR/opencascade
+
+CONFIG += staticlib
 
 
 DEFINES = BOOST_ALL_NO_LIB BOOST_OPTIONAL_USE_OLD_DEFINITION_OF_NONE
@@ -152,40 +156,40 @@ SOURCES += \
   $$SRC_DIR/schema-specific/ifcparse/Ifc4-schema.cpp \
 
 
-LIBS += \
- -lboost_program_options \
- -lboost_system \
- -lboost_regex \
- -lboost_thread \
- -lboost_date_time \
- -lboost_chrono \
- -lboost_atomic \
- -lpthread \
- -lxml2 \
+#LIBS += \
+# -lboost_program_options \
+# -lboost_system \
+# -lboost_regex \
+# -lboost_thread \
+# -lboost_date_time \
+# -lboost_chrono \
+# -lboost_atomic \
+# -lpthread \
+# -lxml2 \
 
 
-LIBS += -L$$OCCT_LIB_DIR \
--lTKernel\
- -lTKMath\
- -lTKBRep\
- -lTKGeomBase\
- -lTKGeomAlgo\
- -lTKG3d\
- -lTKG2d\
- -lTKShHealing\
- -lTKTopAlgo\
- -lTKMesh\
- -lTKPrim\
- -lTKBool\
- -lTKBO\
- -lTKFillet\
- -lTKSTEP\
- -lTKSTEPBase\
- -lTKSTEPAttr\
- -lTKXSBase\
- -lTKSTEP209\
- -lTKIGES\
- -lTKOffset\
- -lTKHLR
+#LIBS += -L$$OCCT_LIB_DIR \
+#-lTKernel\
+# -lTKMath\
+# -lTKBRep\
+# -lTKGeomBase\
+# -lTKGeomAlgo\
+# -lTKG3d\
+# -lTKG2d\
+# -lTKShHealing\
+# -lTKTopAlgo\
+# -lTKMesh\
+# -lTKPrim\
+# -lTKBool\
+# -lTKBO\
+# -lTKFillet\
+# -lTKSTEP\
+# -lTKSTEPBase\
+# -lTKSTEPAttr\
+# -lTKXSBase\
+# -lTKSTEP209\
+# -lTKIGES\
+# -lTKOffset\
+# -lTKHLR
 
 

@@ -265,6 +265,11 @@ public:
 	int m_CubeWidgetPosY = 0;
 	int m_PrevWidth = 0;
 	int m_PrevHeight = 0;
+
+ // //  axfi
+ int last_offset_x_ = 0;
+ int last_offset_y_ = 0;
+
 	QColor m_TextColor;
 	QColor m_HiliteColor;
 	QColor m_ButtonColor;
@@ -326,10 +331,18 @@ void NaviCube::setCorner(Corner c) {
 NaviCubeImplementation::NaviCubeImplementation(
 	Gui::View3DInventorViewer* viewer) {
 
+
 	m_View3DInventorViewer = viewer;
 
 	auto hGrp = App::GetApplication().GetParameterGroupByPath("User parameter:BaseApp/Preferences/NaviCube");
 	hGrp->Attach(this);
+
+
+ // //  axfi ...
+ //?ParameterGrp::handle hGrp = App::GetApplication().GetParameterGroupByPath("User parameter:BaseApp/Preferences/NaviCube");
+ last_offset_x_ = hGrp->GetInt("OffsetX", 0);
+ last_offset_y_ = hGrp->GetInt("OffsetY", 0);
+
 
 	OnChange(*hGrp, "TextColor");
 	OnChange(*hGrp, "FrontColor");
@@ -924,6 +937,11 @@ void NaviCubeImplementation::handleResize() {
 			ParameterGrp::handle hGrp = App::GetApplication().GetParameterGroupByPath("User parameter:BaseApp/Preferences/NaviCube");
 			int m_CubeWidgetOffsetX = hGrp->GetInt("OffsetX", 0);
 			int m_CubeWidgetOffsetY = hGrp->GetInt("OffsetY", 0);
+
+   last_offset_x_ = m_CubeWidgetOffsetX;
+   last_offset_y_ = m_CubeWidgetOffsetY;
+
+
 			switch (m_Corner) {
 			case NaviCube::TopLeftCorner:
 				m_CubeWidgetPosX = m_CubeWidgetSize*1.1 / 2 + m_CubeWidgetOffsetX;
@@ -1688,6 +1706,28 @@ bool NaviCubeImplementation::processSoEvent(const SoEvent* ev) {
 		return mouseMoved(x, y);
 	return false;
 }
+
+// // axfi
+
+int NaviCube::get_size(float& enlarge)
+{
+ enlarge = 1.1;
+ return m_NaviCubeImplementation->m_CubeWidgetSize;
+}
+
+int NaviCube::get_offset_x()
+{
+ return m_NaviCubeImplementation->last_offset_x_;
+}
+
+int NaviCube::get_offset_y()
+{
+ return m_NaviCubeImplementation->last_offset_y_;
+}
+
+
+
+
 
 
 QString NaviCubeImplementation::str(char* str) {

@@ -45,15 +45,19 @@ private:
  QString mesh_position_;
  QString mesh_file_path_;
 
- QUdpSocket* meshlab_out_socket_;
- QUdpSocket* meshlab_in_socket_;
+ QUdpSocket* udp_outgoing_socket_;
+ QUdpSocket* udp_incoming_socket_;
 
  QString meshlab_track_info_;
  QString meshlab_scale_info_;
  QString meshlab_file_path_;
+ QString freecad_file_path_;
 
- QMessageBox* meshlab_message_box_;
+ QMessageBox* import_info_message_box_;
  u4* meshlab_import_count_;
+ u4* freecad_import_count_;
+
+ QVector<r8> freecad_position_data_;
 
  QAction* action_view_360;
 
@@ -176,6 +180,13 @@ private:
  void _handle_save();
  void _handle_save_requested();
 
+ void check_init_udp_incoming_socket();
+ void check_init_udp_outgoing_socket();
+ void read_udp_socket(const QByteArray& qba);
+
+ void read_udp_meshlab(QString text);
+ void read_udp_freecad(QString text);
+
 public:
 
  void init_display_scene_item(DisplayImage_Scene_Item* si);
@@ -204,7 +215,9 @@ private Q_SLOTS:
  void on_InstanceListView_clicked(); //metodo legato alla seconda colonna
  void on_NumberListView_clicked(); //metodo legato alla terza colonnna
 
- void show_meshlab_info();
+ void show_meshlab_import_info();
+ void show_freecad_import_info();
+ void send_freecad_reset();
 
 
  void handle_zoom_factor_changed(r8 factor);

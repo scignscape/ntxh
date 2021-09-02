@@ -523,6 +523,7 @@ StdCmdFreeCADDonation::StdCmdFreeCADDonation()
     sStatusTip    = sToolTipText;
     sPixmap       = "internet-web-browser";
     eType         = 0;
+
 }
 
 void StdCmdFreeCADDonation::activated(int iMsg)
@@ -835,6 +836,7 @@ void CreateStdCommands(void)
     rcCmdMgr.addCommand(new StdCmdOnlineHelpWebsite());
     rcCmdMgr.addCommand(new StdCmdFreeCADWebsite());
     rcCmdMgr.addCommand(new StdCmdFreeCADDonation());
+
     rcCmdMgr.addCommand(new StdCmdFreeCADUserHub());
     rcCmdMgr.addCommand(new StdCmdFreeCADPowerUserHub());
     rcCmdMgr.addCommand(new StdCmdFreeCADForum());
@@ -842,6 +844,8 @@ void CreateStdCommands(void)
     rcCmdMgr.addCommand(new StdCmdPythonWebsite());
     rcCmdMgr.addCommand(new StdCmdTextDocument());
     rcCmdMgr.addCommand(new StdCmdUnitsCalculator());
+
+
     //rcCmdMgr.addCommand(new StdCmdMeasurementSimple());
     //rcCmdMgr.addCommand(new StdCmdDownloadOnlineHelp());
     //rcCmdMgr.addCommand(new StdCmdDescription());

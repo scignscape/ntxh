@@ -41,6 +41,11 @@ namespace App {
 class Document;
 }
 
+
+// //  axfi
+class QUdpSocket;
+
+
 namespace Gui {
 
 class BaseView;
@@ -48,6 +53,9 @@ class CommandManager;
 class Document;
 class MacroManager;
 class MDIView;
+
+// // axfi
+class Workbench;
 
 namespace DockWnd {
     class HelpView;
@@ -189,6 +197,9 @@ public:
     enum StatusType {None, Err, Wrn, Pane, Msg, Log, Tmp};
     void showStatus(int type, const QString & message);
 
+    // //  axfi ...
+    void axfi_export(Gui::Workbench* wb);
+    void axfi_reset(QVector<qreal>& data);
 
 public Q_SLOTS:
     /**
@@ -322,6 +333,12 @@ private:
     /// some kind of singleton
     static MainWindow* instance;
     struct MainWindowP* d;
+
+
+    // //
+    QUdpSocket* axfi_out_socket_;
+    QUdpSocket* axfi_in_socket_;
+
 };
 
 inline MainWindow* getMainWindow()

@@ -27,12 +27,15 @@
 #include <string>
 #include <QStringList>
 
+
 class QAction;
 class QMenu;
 
 namespace Gui {
 
 class MainWindow;
+class Workbench;
+
 
 class GuiExport MenuItem
 {
@@ -84,8 +87,19 @@ public:
     static MenuManager* getInstance();
     static void destruct();
 
+    void set_workbench(Workbench* workbench)
+    {
+     workbench_ = workbench;
+    }
+    Workbench* workbench()
+    {
+     return workbench_;
+    }
+
 protected:
+
     MenuManager();
+
     ~MenuManager();
 
 private:
@@ -93,6 +107,10 @@ private:
     void retranslate(QMenu*) const;
     QAction* findAction(const QList<QAction*>&, const QString&) const;
     QList<QAction*> findActions(const QList<QAction*>&, const QString&) const;
+
+    // //  axfi ...
+
+    Workbench* workbench_;
 
 private:
     static MenuManager* _instance;
