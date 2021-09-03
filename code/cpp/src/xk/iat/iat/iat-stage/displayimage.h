@@ -382,6 +382,7 @@ Q_SIGNALS:
  void polygon_save_notation_requested();
  void complete_polygon_requested();
  void meshlab_import_info_requested();
+ void meshlab_reset_requested();
  void freecad_import_info_requested();
  void freecad_reset_requested();
 

@@ -48,8 +48,9 @@ private:
  QUdpSocket* udp_outgoing_socket_;
  QUdpSocket* udp_incoming_socket_;
 
- QString meshlab_track_info_;
- QString meshlab_scale_info_;
+ QQuaternion meshlab_track_info_;
+ r4 meshlab_scale_info_;
+ QVector3D meshlab_center_position_;
  QString meshlab_file_path_;
  QString freecad_file_path_;
 
@@ -124,6 +125,9 @@ private:
 
  void handle_view_contour_info(QString csv_path);
 
+ static void r8_vector_to_qba(const QVector<r8>& data, QByteArray& qba);
+
+ static void wrap_udp(QByteArray& qba, u1 msg_flags = 1);
 
  int sizeh_; //altezza dell'immagine
  int sizew_; //larghezza dell'immagine
@@ -217,7 +221,9 @@ private Q_SLOTS:
 
  void show_meshlab_import_info();
  void show_freecad_import_info();
+
  void send_freecad_reset();
+ void send_meshlab_reset();
 
 
  void handle_zoom_factor_changed(r8 factor);

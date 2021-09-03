@@ -838,8 +838,10 @@ void GLArea::displayInfo(QPainter *painter)
 
   // //  axfi ...
   vcg::Quaternionf qf = trackball.track.rot;
-  track_info_ = QString("%1 %2 %3 %4").arg(qf.X(),10)
-    .arg(qf.Y(),10).arg(qf.Z(),10).arg(qf.W(),10);
+  // //  note restoring w to the front of the list from the back ...
+   //    (see the vcg documentation for explanation of the w position ...)
+  track_info_ = QString("%1 %2 %3 %4").arg(qf.W(),10)
+    .arg(qf.X(),10).arg(qf.Y(),10).arg(qf.Z(),10);
   col0Text += QString(" * Track: %1\n").arg(track_info_);
 
   Point3<float> tc = trackball.track.tra;

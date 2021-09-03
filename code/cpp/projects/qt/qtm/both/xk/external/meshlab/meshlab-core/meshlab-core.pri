@@ -19,6 +19,7 @@ DEFINES += setResizeMode=setSectionResizeMode
 
 
 DEFINES += DEFAULT_TEMP_SNAPSHOT_FOLDER=\\\"$$ROOT_DIR/../dev/consoles/meshlab\\\"
+DEFINES += SCREENSHOTS_FOLDER=\\\"$$ROOT_DIR/../dev/screenshots\\\"
 
 
 INCLUDEPATH += $$SRC_GROUP_DIR  

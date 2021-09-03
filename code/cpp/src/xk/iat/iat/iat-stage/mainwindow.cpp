@@ -275,6 +275,9 @@ void MainWindow::init_display_scene_item(DisplayImage_Scene_Item* si)
  connect(display_scene_item_, SIGNAL(meshlab_import_info_requested()), this,
    SLOT(show_meshlab_import_info()));
 
+ connect(display_scene_item_, SIGNAL(meshlab_reset_requested()), this,
+   SLOT(send_meshlab_reset()));
+
  connect(display_scene_item_, SIGNAL(freecad_import_info_requested()), this,
    SLOT(show_freecad_import_info()));
 
@@ -369,6 +372,28 @@ MainWindow::MainWindow(QWidget *parent) :
 #endif
 
 //?? tools_menu_->addAction(actionCreate_List);
+
+ tools_menu_->addAction("Take screenshot", [this]()
+ {
+  QScreen* screen = QGuiApplication::primaryScreen();
+  if (!screen)
+    return;
+
+  QTimer::singleShot(10000, [=]
+  {
+   QPixmap pixmap = screen->grabWindow(this->winId());
+   QString path = SCREENSHOTS_FOLDER "/axfi.png";
+   qDebug() << "Saving to path: " << path;
+
+   QFile file(path);
+   if(file.open(QIODevice::WriteOnly))
+   {
+    pixmap.save(&file, "PNG");
+   }
+  });
+
+ });
+
 
  connect(actionAnnotate_Single_Image,SIGNAL(triggered()), this, SLOT(on_actionAnnotate_Single_Image_triggered()));
  connect(actionOptions,SIGNAL(triggered()), this, SLOT(on_actionOptions_triggered()));
@@ -764,22 +789,25 @@ void MainWindow::read_udp_meshlab(QString text)
 
  meshlab_file_path_ = file_path;
 
- mesh_position_.clear();
  if(!qsl.isEmpty())
  {
-  meshlab_track_info_ = qsl.takeFirst().simplified();
-  mesh_position_ += meshlab_track_info_ + " ";
+  QStringList qsl1 = qsl.takeFirst().simplified().split(' ');
+  meshlab_track_info_.setScalar(qsl1.value(0).toFloat());
+  meshlab_track_info_.setX(qsl1.value(1).toFloat());
+  meshlab_track_info_.setY(qsl1.value(2).toFloat());
+  meshlab_track_info_.setZ(qsl1.value(3).toFloat());
  }
- else
-  meshlab_track_info_ = "N/A";
 
  if(!qsl.isEmpty())
  {
-  meshlab_scale_info_ = qsl.takeFirst().simplified();
-  mesh_position_ += meshlab_scale_info_;
+  QString scale_and_center = qsl.takeFirst().simplified();
+  QStringList qsl1 = scale_and_center.split(' ');
+  meshlab_scale_info_ = qsl1.value(0).toFloat();
+
+  meshlab_center_position_.setX(qsl1.value(1).toFloat());
+  meshlab_center_position_.setY(qsl1.value(2).toFloat());
+  meshlab_center_position_.setZ(qsl1.value(3).toFloat());
  }
- else
-  meshlab_scale_info_ = "N/A";
 
  ++*meshlab_import_count_;
 
@@ -865,30 +893,73 @@ void MainWindow::on_action_view_3d_triggered()
 }
 
 
+void MainWindow::r8_vector_to_qba(const QVector<r8>& data, QByteArray& qba)
+{
+ if(data.isEmpty())
+   return;
+ qba = QByteArray::number(data[0]);
+
+ for(u2 i = 1; i < data.size(); ++i)
+ {
+  qba += ";" + QByteArray::number(data[i]);
+ }
+}
+
+
+void MainWindow::send_meshlab_reset()
+{
+ QVector<r8> data(8);
+ data[0] = meshlab_track_info_.scalar();
+ data[1] = meshlab_track_info_.x();
+ data[2] = meshlab_track_info_.y();
+ data[3] = meshlab_track_info_.z();
+
+ data[4] = meshlab_scale_info_;
+ data[5] = meshlab_center_position_.x();
+ data[6] = meshlab_center_position_.y();
+ data[7] = meshlab_center_position_.z();
+
+ QByteArray qba;
+ r8_vector_to_qba(data, qba);
+
+ qba.prepend(meshlab_file_path_.toLatin1() + "*");
+ qba.prepend(mesh_file_path_.toLatin1() + "*");
+
+ wrap_udp(qba);
+
+ udp_outgoing_socket_->writeDatagram(qba, QHostAddress::LocalHost, 1235);
+}
+
+void MainWindow::wrap_udp(QByteArray& qba, u1 msg_flags)
+{
+ u2 sz = qba.size();
+ u1 sz0 = sz & 255;
+ u1 sz1 = sz >> 8;
+
+ sz1 |= (msg_flags << 2);
+
+ qba.prepend(sz0);
+ qba.prepend(sz1);
+}
+
+
 void MainWindow::send_freecad_reset()
 {
  if(freecad_position_data_.isEmpty())
    return;
 
- QByteArray qba = QByteArray::number(freecad_position_data_[0]);
+ QByteArray qba;// = QByteArray::number(freecad_position_data_[0]);
 
- for(u2 i = 1; i < freecad_position_data_.size(); ++i)
- {
-  qba += ";" + QByteArray::number(freecad_position_data_[i]);
- }
+ r8_vector_to_qba(freecad_position_data_, qba);
 
- u2 sz = qba.size();
- u1 sz0 = sz & 255;
- u1 sz1 = sz >> 8;
+ wrap_udp(qba);
 
- u1 flags = 1;
- sz1 |= (flags << 2);
-
- qba.prepend(sz0);
- qba.prepend(sz1);
+// for(u2 i = 1; i < freecad_position_data_.size(); ++i)
+// {
+//  qba += ";" + QByteArray::number(freecad_position_data_[i]);
+// }
 
  udp_outgoing_socket_->writeDatagram(qba, QHostAddress::LocalHost, 1235);
-
 }
 
 void MainWindow::show_freecad_import_info()
@@ -935,27 +1006,32 @@ Focal Distance: %4)")
 
 void MainWindow::show_meshlab_import_info()
 {
- QString ti = meshlab_track_info_.replace(' ', ",  ");
+ //QString ti = meshlab_track_info_.replace(' ', ",  ");
 
- QString si = meshlab_scale_info_;
- QString ci = "N/A";
- int i = meshlab_scale_info_.indexOf(' ');
- if(i != -1)
- {
-  si = meshlab_scale_info_.left(i).replace(' ', ",  ");
-  ci = meshlab_scale_info_.mid(i + 1);
- }
+ QString ti = QString("%1; %2, %3, %4").arg(meshlab_track_info_.scalar())
+   .arg(meshlab_track_info_.x()).arg(meshlab_track_info_.y()).arg(meshlab_track_info_.z());
+
+ //QString si = meshlab_scale_info_;
+// QString ci = "N/A";
+// int i = meshlab_scale_info_.indexOf(' ');
+// if(i != -1)
+// {
+//  si = meshlab_scale_info_.left(i).replace(' ', ",  ");
+//  ci = meshlab_scale_info_.mid(i + 1);
+// }
 
  QString dt = QString(R"(Temp File Path: %1
 Mesh File: %2
 Track (Rotation) Position: %3
-Center Position: %4
-Scale (Zoom) Level: %5)")
+Center Position: %4, %5, %6
+Scale (Zoom) Level: %7)")
    .arg(mesh_file_path_)
    .arg(meshlab_file_path_)
    .arg(ti)
-   .arg(ci)
-   .arg(si);
+   .arg(meshlab_center_position_.x()).
+    arg(meshlab_center_position_.y()).
+    arg(meshlab_center_position_.z())
+   .arg(meshlab_scale_info_);
 
  if(import_info_message_box_)
    delete import_info_message_box_;

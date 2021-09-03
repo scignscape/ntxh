@@ -158,8 +158,11 @@ private:
  QString axfi_restore_data_;
  QString axfi_mesh_path_;
 
+ void check_load_file(QString file_path);
+
  void axfi_restore(QString file_path, const QVector<r8>& coords);
  void axfi_load_restore(QString file_path);
+ void read_axfi_in_socket(const QByteArray& qba);
 
 
  void updateRenderingDataAccordingToActionsCommonCode(int meshid, const QList<MLRenderingAction*>& acts);

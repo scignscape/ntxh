@@ -45,7 +45,9 @@
 #include "saveSnapshotDialog.h"
 #include "ui_congratsDialog.h"
 
+// //  axfi
 #include <QUdpSocket>
+#include <QScreen>
 
 
 QProgressBar *MainWindow::qb;
@@ -69,8 +71,9 @@ MainWindow::MainWindow()
    QByteArray qba(512, ' ');
    axfi_in_socket_->readDatagram(qba.data(), 512);
    qDebug() << "socket: " << qba;
-   if(qba[0] == '^')
-     setWindowState(windowState() & ~Qt::WindowMinimized | Qt::WindowActive);
+   read_axfi_in_socket(qba);
+//   if(qba[0] == '^')
+//     setWindowState(windowState() & ~Qt::WindowMinimized | Qt::WindowActive);
   });
  }
 
@@ -143,6 +146,45 @@ MainWindow::MainWindow()
 
  // //  axfi
  setMinimumWidth(1200);
+}
+
+// //  generic drop-in functions
+QString read_axfi_text(const QByteArray& qba, short& axfi_flags, short& qba_size)
+{
+ short sz1 = qba[0];
+ short sz2 = qba[1];
+
+ axfi_flags = sz1 >> 2;
+ sz1 &= 3;
+ qba_size = (sz1 << 8) + sz2;
+
+ return QString::fromLatin1(qba.mid(2, qba_size));
+}
+
+QVector<qreal> axfi_text_to_vector(QString text)
+{
+ QStringList qsl = text.split(QChar::fromLatin1(';'));
+ QVector<qreal> result(qsl.size());
+ std::transform(qsl.begin(), qsl.end(), result.begin(),
+   [](QString qs) { return qs.toDouble(); });
+ return result;
+}
+
+void MainWindow::read_axfi_in_socket(const QByteArray& qba)
+{
+ short axfi_flags, qba_size;
+ QString text = read_axfi_text(qba, axfi_flags, qba_size);
+
+ QStringList qsl = text.split('*');
+
+ if(qsl.size() < 3)
+   return;
+
+ QString mesh_file_path = qsl[0];
+ QString mesh_image_path = qsl[1];
+ QVector<qreal> data = axfi_text_to_vector(qsl[2]);
+
+ axfi_restore(mesh_file_path, data);
 }
 
 MainWindow::~MainWindow()
@@ -663,6 +705,29 @@ void MainWindow::createMenus()
 	preferencesMenu->addSeparator();*/
 	preferencesMenu->addAction(setCustomizeAct);
 
+ preferencesMenu->addAction("Take screenshot", [this]()
+ {
+  QScreen* screen = QGuiApplication::primaryScreen();
+  if (!screen)
+    return;
+
+  QTimer::singleShot(10000, [=]
+  {
+   QPixmap pixmap = screen->grabWindow(this->winId());
+   QString path = SCREENSHOTS_FOLDER "/meshlab.png";
+   qDebug() << "Saving to path: " << path;
+
+   QFile file(path);
+   if(file.open(QIODevice::WriteOnly))
+   {
+    pixmap.save(&file, "PNG");
+   }
+  });
+
+ });
+
+
+
 	//////////////////// Menu Help ////////////////////////////////////////////////////////////////
 	helpMenu = menuBar()->addMenu(tr("&Help"));
 	helpMenu->addAction(aboutAct);
@@ -744,22 +809,38 @@ void MainWindow::axfi_load_restore(QString file_path)
  if(mesh_path.isEmpty())
    return;
 
- importMesh(mesh_path);
+ //importMesh(mesh_path);
 
  axfi_restore(mesh_path, coords);
+}
+
+
+void MainWindow::check_load_file(QString file_path)
+{
+ if(axfi_mesh_path_ == file_path)
+ {
+  qDebug() << "file already loaded ... " << file_path;
+  return;
+ }
+ importMesh(file_path);
 }
 
 void MainWindow::axfi_restore(QString file_path, const QVector<r8>& coords)
 {
  // // should we handle the file_path here or in a separate function?
+ check_load_file(file_path);
 
  qDebug() << "file path = " << file_path;
  qDebug() << "coords = " << coords;
 
  if(coords.size() != 8)
-   return;
+ {
+  qDebug() << "Malformed Coordinates in AXFI restore ...";
+  return;
+ }
 
- vcg::Quaternionf qf(coords[0], coords[1], coords[2], coords[3]); // = trackball.track.rot;
+ // //   vcg quaternion scalar goes at the end ...
+ vcg::Quaternionf qf(coords[1], coords[2], coords[3], coords[0]); // = trackball.track.rot;
  GLA()->trackball.track.rot = qf;
 
  GLA()->trackball.track.sca = coords[4]; //SetScale();

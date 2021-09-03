@@ -37,7 +37,6 @@ void launch_web_site(QString place, n8 winid)
  QScreen* screen = QGuiApplication::primaryScreen();
  if (!screen)
    return;
- QApplication::beep();
 
  QTimer::singleShot(10000, [=]
  {

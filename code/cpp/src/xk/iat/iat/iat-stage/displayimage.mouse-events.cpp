@@ -169,19 +169,26 @@ void DisplayImage_Scene_Item::handle_mouse_event<
  menu->setAttribute(Qt::WA_DeleteOnClose);
 
  if(meshlab_import_count_ && *meshlab_import_count_)
-   menu->addAction("Meshlab Import Info", [this]
-   {
-    Q_EMIT meshlab_import_info_requested();
-   });
+ {
+  menu->addAction("MeshLab Import Info", [this]
+  {
+   Q_EMIT meshlab_import_info_requested();
+  });
+
+  menu->addAction("MeshLab Reset", [this]
+  {
+   Q_EMIT meshlab_reset_requested();
+  });
+ }
 
  if(freecad_import_count_ && *freecad_import_count_)
  {
-  menu->addAction("Freecad Import Info", [this]
+  menu->addAction("FreeCAD Import Info", [this]
   {
    Q_EMIT freecad_import_info_requested();
   });
 
-  menu->addAction("Freecad Reset", [this]
+  menu->addAction("FreeCAD Reset", [this]
   {
    Q_EMIT freecad_reset_requested();
   });
