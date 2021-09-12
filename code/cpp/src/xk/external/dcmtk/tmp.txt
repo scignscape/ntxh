@@ -1,0 +1,305 @@
+./dcmdata/dcencdoc.cc:        opt_annotation(OFTrue),
+./dcmdata/dcencdoc.cc:  cmd.addSubGroup("burned-in annotation:");
+./dcmdata/dcencdoc.cc:  cmd.addOption("--annotation-yes", "+an", "document contains patient identifying data\n(default)");
+./dcmdata/dcencdoc.cc:  cmd.addOption("--annotation-no", "-an", "document does not contain patient identif. data");
+./dcmdata/dcencdoc.cc:  if (cmd.findOption("--annotation-yes"))
+./dcmdata/dcencdoc.cc:    opt_annotation = OFTrue;
+./dcmdata/dcencdoc.cc:  if (cmd.findOption("--annotation-no"))
+./dcmdata/dcencdoc.cc:    opt_annotation = OFFalse;
+./dcmdata/dcencdoc.cc:  if (result.good()) result = dataset->putAndInsertString(DCM_BurnedInAnnotation, opt_annotation ? "YES" : "NO");
+./dcmdata/include/dcmtk/dcmdata/dcencdoc.h:  OFBool                  opt_annotation;
+./dcmdata/libi2d/i2dplnsc.cc:  // As a default we do not expect the image to have burnt in annotations
+./dcmpstat/dcmpstat.cc:  /* what is about VOI LUT sequence, annotations, etc. ? */
+./dcmpstat/dviface.cc:, annotationText()
+./dcmpstat/dviface.cc:    /* set annotation if active */
+./dcmpstat/dviface.cc:      text += annotationText;
+./dcmpstat/dviface.cc:      if (text.size() >64) text.erase(64); // limit to max annotation length
+./dcmpstat/dviface.cc:  if (value) annotationText=value; else annotationText.clear();
+./dcmpstat/dvpsab.cc:, annotationPosition(DCM_AnnotationPosition)
+./dcmpstat/dvpsab.cc:, annotationPosition(copy.annotationPosition)
+./dcmpstat/dvpsab.cc:  annotationPosition.clear();
+./dcmpstat/dvpsab.cc:    if (EC_Normal == result) result = annotationPosition.putUint16(position,0);
+./dcmpstat/dvpsab.cc:  READ_FROM_DATASET(DcmUnsignedShort, EVR_US, annotationPosition)
+./dcmpstat/dvpsab.cc:    if ((annotationPosition.getLength() == 0)||(annotationPosition.getVM() != 1))
+./dcmpstat/dvpsab.cc:  if (annotationPosition.getLength() == 0)
+./dcmpstat/dvpsab.cc:  ADD_TO_DATASET(DcmUnsignedShort, annotationPosition)
+./dcmpstat/dvpsab.cc:  ADD_TO_DATASET(DcmUnsignedShort, annotationPosition)
+./dcmpstat/dvpsga.cc:    DCMPSTAT_WARN("presentation state contains a graphic annotation SQ item with graphicAnnotationLayer absent or empty");
+./dcmpstat/dvpsga.cc:    DCMPSTAT_WARN("presentation state contains a graphic annotation SQ item with graphicAnnotationLayer VM != 1");
+./dcmpstat/dvpsga.cc:    DCMPSTAT_WARN("presentation state contains a graphic annotation SQ item without any graphic or text objects");
+./dcmpstat/dvpsga.cc:  if (referencedImageList.size() == 0) return OFTrue; // if no image references exist, the annotation is valid "globally".
+./dcmpstat/dvpsga.cc:    case DVPSB_currentFrame: // check if annotation applies to current frame
+./dcmpstat/dvpsga.cc:    case DVPSB_currentImage: // check if annotation applies to all frames of current image
+./dcmpstat/dvpsgal.cc:  DVPSGraphicAnnotation *annotation = NULL;
+./dcmpstat/dvpsgal.cc:      annotation = *first;
+./dcmpstat/dvpsgal.cc:  if (annotation==NULL)
+./dcmpstat/dvpsgal.cc:    annotation = new DVPSGraphicAnnotation();
+./dcmpstat/dvpsgal.cc:    if (annotation)
+./dcmpstat/dvpsgal.cc:      annotation->setAnnotationLayer(layer);
+./dcmpstat/dvpsgal.cc:      if (applicability != DVPSB_allImages) annotation->addImageReference(sopclassUID, instanceUID, frame, applicability);
+./dcmpstat/dvpsgal.cc:      list_.push_back(annotation);
+./dcmpstat/dvpsgal.cc:  if (annotation)
+./dcmpstat/dvpsgal.cc:    annotation->addTextObject(text);
+./dcmpstat/dvpsgal.cc:  DVPSGraphicAnnotation *annotation = NULL;
+./dcmpstat/dvpsgal.cc:      annotation = *first;
+./dcmpstat/dvpsgal.cc:  if (annotation==NULL)
+./dcmpstat/dvpsgal.cc:    annotation = new DVPSGraphicAnnotation();
+./dcmpstat/dvpsgal.cc:    if (annotation)
+./dcmpstat/dvpsgal.cc:      annotation->setAnnotationLayer(layer);
+./dcmpstat/dvpsgal.cc:      if (applicability != DVPSB_allImages) annotation->addImageReference(sopclassUID, instanceUID, frame, applicability);
+./dcmpstat/dvpsgal.cc:      list_.push_back(annotation);
+./dcmpstat/dvpsgal.cc:  if (annotation)
+./dcmpstat/dvpsgal.cc:    annotation->addGraphicObject(graphic);
+./dcmpstat/dvpsgll.cc:#include "dcmtk/dcmpstat/dvpsall.h"     /* for DVPSGraphicAnnotation_PList& annotations */
+./dcmpstat/dvpsgll.cc:     DVPSGraphicAnnotation_PList& annotations)
+./dcmpstat/dvpsgll.cc:    if ((! activations.usesLayerName(name))&&(! annotations.usesLayerName(name)))
+./dcmpstat/dvpsgr.cc:DVPSannotationUnit DVPSGraphicObject::getAnnotationUnits()
+./dcmpstat/dvpsgr.cc:  DVPSannotationUnit aresult = DVPSA_pixels;
+./dcmpstat/dvpsgr.cc:OFCondition DVPSGraphicObject::setData(size_t number, const Float32 *data, DVPSannotationUnit unit)
+./dcmpstat/dvpspr.cc:  /* we always propose basic grayscale, presentation LUT and annotation box*/
+./dcmpstat/dvpssp.cc:, annotationDisplayFormatID(DCM_AnnotationDisplayFormatID)
+./dcmpstat/dvpssp.cc:, annotationContentList()
+./dcmpstat/dvpssp.cc:, annotationDisplayFormatID(copy.annotationDisplayFormatID)
+./dcmpstat/dvpssp.cc:, annotationContentList(copy.annotationContentList)
+./dcmpstat/dvpssp.cc:  annotationDisplayFormatID.clear();
+./dcmpstat/dvpssp.cc:  annotationContentList.clear();
+./dcmpstat/dvpssp.cc:         READ_FROM_DATASET2(DcmCodeString, EVR_CS, annotationDisplayFormatID)
+./dcmpstat/dvpssp.cc:  if (EC_Normal==result) result = annotationContentList.read(dset);
+./dcmpstat/dvpssp.cc:        if (annotationDisplayFormatID.getLength() > 0) { ADD_TO_DATASET2(DcmCodeString, annotationDisplayFormatID) }
+./dcmpstat/dvpssp.cc:  // write annotationContentList
+./dcmpstat/dvpssp.cc:  if (EC_Normal == result) result = annotationContentList.write(dset);
+./dcmpstat/dvpssp.cc:    if ((result == EC_Normal)&&(annotationContentList.size() > 0))
+./dcmpstat/dvpssp.cc:  OFString annotationB(UID_BasicAnnotationBoxSOPClass);
+./dcmpstat/dvpssp.cc:  if ((printHandler.printerSupportsAnnotationBox())&&(annotationDisplayFormatID.getLength() > 0))
+./dcmpstat/dvpssp.cc:        ADD_TO_DATASET(DcmCodeString, annotationDisplayFormatID)
+./dcmpstat/dvpssp.cc:      annotationContentList.clearAnnotationSOPInstanceUIDs();
+./dcmpstat/dvpssp.cc:        if (numItems > annotationContentList.size()) numItems = annotationContentList.size();
+./dcmpstat/dvpssp.cc:           if ((EC_Normal==result) && c && (annotationB == c))
+./dcmpstat/dvpssp.cc:                 if (EC_Normal==result) result = annotationContentList.setAnnotationSOPInstanceUID(i, c);
+./dcmpstat/dvpssp.cc:    const char *annotationSopInstanceUID = annotationContentList.getSOPInstanceUID(idx);
+./dcmpstat/dvpssp.cc:    if ((annotationSopInstanceUID==NULL)||(strlen(annotationSopInstanceUID)==0))
+./dcmpstat/dvpssp.cc:       DCMPSTAT_WARN("not enough Annotation Boxes created by printer, ignoring annotation.");
+./dcmpstat/dvpssp.cc:    result = annotationContentList.prepareBasicAnnotationBox(idx, dataset);
+./dcmpstat/dvpssp.cc:      OFCondition cond = printHandler.setRQ(UID_BasicAnnotationBoxSOPClass, annotationSopInstanceUID, &dataset, status, attributeListOut);
+./dcmpstat/dvpssp.cc:    DCMPSTAT_WARN("printer does not support Annotation Box, ignoring annotation.");
+./dcmpstat/dvpssp.cc:    result = annotationContentList.addAnnotationBox(newuid, text, position);
+./dcmpstat/dvpssp.cc:    if (EC_Normal==result) result = annotationDisplayFormatID.putString(displayformat);
+./dcmpstat/dvpssp.cc:  annotationContentList.clear();
+./dcmpstat/dvpssp.cc:  annotationDisplayFormatID.clear();
+./dcmpstat/dvpstx.cc:OFCondition DVPSTextObject::setAnchorPoint(double x, double y, DVPSannotationUnit unit, OFBool isVisible)
+./dcmpstat/dvpstx.cc:  DVPSannotationUnit unit,
+./dcmpstat/dvpstx.cc:DVPSannotationUnit DVPSTextObject::getBoundingBoxAnnotationUnits()
+./dcmpstat/dvpstx.cc:  DVPSannotationUnit aresult = DVPSA_pixels;
+./dcmpstat/dvpstx.cc:DVPSannotationUnit DVPSTextObject::getAnchorPointAnnotationUnits()
+./dcmpstat/dvpstx.cc:  DVPSannotationUnit aresult = DVPSA_pixels;
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgr.h:  /** gets the graphic annotation units.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgr.h:   *  @return annotation units
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgr.h:  DVPSannotationUnit getAnnotationUnits();
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgr.h:   *  @param unit the graphic annotation units for this data.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgr.h:  OFCondition setData(size_t number, const Float32 *data, DVPSannotationUnit unit);
+./dcmpstat/include/dcmtk/dcmpstat/dcmpstat.h:   *  Upon success, all references (for graphic annotations, curves and overlays) to the given
+./dcmpstat/include/dcmtk/dcmpstat/dcmpstat.h:   *  Also deletes all graphic annotation sequence items containing
+./dcmpstat/include/dcmtk/dcmpstat/dcmpstat.h:   * "required if graphical annotation to be applied"
+./dcmpstat/include/dcmtk/dcmpstat/dcmpstat.h:   * "required if graphic annotation, overlays or curves to be applied"
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:    /* annotation interface */
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:    /** gets the current setting of the annotation activity annotation flag.
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:     *  @return OFTrue if annotation is on, OFFalse otherwise.
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:    /** gets the current setting of the Prepend Date/Time annotation flag.
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:    /** gets the current setting of the Prepend Printer Name annotation flag.
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:    /** gets the current setting of the Prepend Lighting annotation flag.
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:    /** gets the current annotation text.
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:     *  @return annotation text, may be NULL or empty string.
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:    const char *getAnnotationText() { return annotationText.c_str(); }
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:    /** switches annotation printing on/off
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:     *  @param value OFTrue if annotation is switched on, OFFalse otherwise.
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:    /** sets the Prepend Date/Time annotation flag.
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:    /** sets the Prepend Printer Name annotation flag.
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:    /** sets the Prepend Lighting annotation flag.
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:    /** sets the current annotation text.
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:    /** true if annotation should be created when spooling print job
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:    /** true if date and time should be prepended to annotation text
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:    /** true if printer name should be prepended to annotation text
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:    /** true if reflected ambient light and illumination should be prepended to annotation text
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:    /** annotation text (if any)
+./dcmpstat/include/dcmtk/dcmpstat/dviface.h:    OFString annotationText;
+./dcmpstat/include/dcmtk/dcmpstat/dvpsab.h:  /** reads an annotation content item from a DICOM dataset.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsab.h:  /** writes the annotation box managed by this object to a DICOM dataset.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsab.h:  /** sets the content of this annotation box object.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsab.h:   *  @param instanceuid SOP instance UID of this annotation
+./dcmpstat/include/dcmtk/dcmpstat/dvpsab.h:   *  @param text annotation text string
+./dcmpstat/include/dcmtk/dcmpstat/dvpsab.h:   *  @param position annotation box position
+./dcmpstat/include/dcmtk/dcmpstat/dvpsab.h:   *  basic annotation box N-SET request into the DICOM dataset.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsab.h:  DcmUnsignedShort         annotationPosition;
+./dcmpstat/include/dcmtk/dcmpstat/dvpsabl.h:  /** reads a list of annotations (AnnotationContentSequence) from a DICOM dataset.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsabl.h:   *  The DICOM elements of the annotations are copied from the dataset to this object.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsabl.h:  /** writes the list of annotations managed by this object to a DICOM dataset.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsabl.h:  /** gets the number of annotations in this list.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsabl.h:   *  @return the number of annotations.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsabl.h:  /** creates a new annotation object and sets the content of this annotation object.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsabl.h:   *  @param instanceuid SOP instance UID of this annotation
+./dcmpstat/include/dcmtk/dcmpstat/dvpsabl.h:   *  @param text annotation text string
+./dcmpstat/include/dcmtk/dcmpstat/dvpsabl.h:   *  @param position annotation box position
+./dcmpstat/include/dcmtk/dcmpstat/dvpsabl.h:  /** deletes one of the registered annotations.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsabl.h:  /** deletes multiple of the registered annotations, starting with the first one.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsabl.h:   *  @param number number of annotations to delete, must be <= size()
+./dcmpstat/include/dcmtk/dcmpstat/dvpsabl.h:  /** sets the SOP instance UID for the given annotation.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsabl.h:  /** gets the current SOP Instance UID for the given registered annotation.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsabl.h:   *  basic annotation box N-SET request into the DICOM dataset.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsabl.h:  /** removes all UIDs from the annotation boxes managed by this object
+./dcmpstat/include/dcmtk/dcmpstat/dvpsabl.h:  /** returns a pointer to the annotation with the given
+./dcmpstat/include/dcmtk/dcmpstat/dvpsabl.h:   *  @return pointer to annotation object or NULL
+./dcmpstat/include/dcmtk/dcmpstat/dvpscf.h:   *  @return OFTrue if printer supports annotation, OFFalse otherwise.
+./dcmpstat/include/dcmtk/dcmpstat/dvpscf.h:   *  @return OFTrue if printer supports annotation, OFFalse otherwise.
+./dcmpstat/include/dcmtk/dcmpstat/dvpscf.h:   *  @return OFTrue if printer supports annotations in film session label, OFFalse otherwise.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsga.h:/** an item of the graphic annotation sequence in a presentation state (internal use only).
+./dcmpstat/include/dcmtk/dcmpstat/dvpsga.h:  /** reads a graphic annotation from a DICOM dataset.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsga.h:  /** writes the graphic annotation managed by this object to a DICOM dataset.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsga.h:  /** get annotation layer name.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsga.h:   *  @return a pointer to the annotation layer name
+./dcmpstat/include/dcmtk/dcmpstat/dvpsga.h:  /** set annotation layer name of this annotation.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsga.h:   *  @param aLayer a pointer to the annotation layer name, which is copied into this object.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsga.h:  /** checks if this annotation layer is empty.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsga.h:   *  An annotation layer is empty when it contains no text object and no graphic object.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsga.h:  /** checks if this annotation layer is applicable to the given image and frame.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsga.h:   *    annotation layer applies to the current frame of the current image.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsga.h:  /** returns the number of text objects in this annotation.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsga.h:  /** returns the number of graphic objects in this annotation.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgal.h:/** the list of graphic annotations contained in a presentation state (internal use only).
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgal.h:  /** reads a list of graphic annotations from a DICOM dataset.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgal.h:  /** writes the list of graphic annotations managed by this object to a DICOM dataset.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgal.h:  /** renames the graphic annotation layer name in all activations
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgal.h:   *  with a matching old graphic annotation layer name.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgal.h:   *  @param oldName the old graphic annotation layer name
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgal.h:   *  @param newName the new graphic annotation layer name
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgal.h:  /** deletes all graphic annotation layers belonging to the given
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgal.h:   *  graphic annotation layer name.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgal.h:   *  @param name name of the graphic annotation layers to be deleted
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgal.h:  /** deletes all graphic annotation sequence items containing
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgal.h:   *  graphic annotation layers managed by this object.
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgal.h:   *    it gets owned by this graphic annotation object and will be deleted
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgal.h:   *    upon destruction of the annotation or if this method fails (returns NULL).
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgal.h:   *    it gets owned by this graphic annotation object and will be deleted
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgal.h:   *    upon destruction of the annotation or if this method fails (returns NULL).
+./dcmpstat/include/dcmtk/dcmpstat/dvpsgll.h:     DVPSGraphicAnnotation_PList& annotations);
+./dcmpstat/include/dcmtk/dcmpstat/dvpssp.h:  /** gets the number of annotations currently registered in this object.
+./dcmpstat/include/dcmtk/dcmpstat/dvpssp.h:   *  @return number of annotations.
+./dcmpstat/include/dcmtk/dcmpstat/dvpssp.h:    return annotationContentList.size();
+./dcmpstat/include/dcmtk/dcmpstat/dvpssp.h:  /** deletes all existing annotations and creates a new one,
+./dcmpstat/include/dcmtk/dcmpstat/dvpssp.h:   *  with given text and position. Sets annotation display format
+./dcmpstat/include/dcmtk/dcmpstat/dvpssp.h:   *  @param displayformat annotation display format
+./dcmpstat/include/dcmtk/dcmpstat/dvpssp.h:   *  @param text annotation text
+./dcmpstat/include/dcmtk/dcmpstat/dvpssp.h:   *  @param position annotation position
+./dcmpstat/include/dcmtk/dcmpstat/dvpssp.h:  /** deletes all annotations, clears annotation display format.
+./dcmpstat/include/dcmtk/dcmpstat/dvpssp.h:  /** Transmits a DICOM annotation to the printer (Basic Annotation Box N-SET).
+./dcmpstat/include/dcmtk/dcmpstat/dvpssp.h:   *  @param idx index of the annotation from which the settings are taken,
+./dcmpstat/include/dcmtk/dcmpstat/dvpssp.h:  DcmCodeString            annotationDisplayFormatID;
+./dcmpstat/include/dcmtk/dcmpstat/dvpssp.h:  DVPSAnnotationContent_PList annotationContentList;
+./dcmpstat/include/dcmtk/dcmpstat/dvpstat.h:     *  to create the preformatted bitmap where the annotations are later burned in.
+./dcmpstat/include/dcmtk/dcmpstat/dvpstat.h:     *  Overlays, bitmapped shutters and any other annotations are not rendered into the preview image.
+./dcmpstat/include/dcmtk/dcmpstat/dvpstx.h:    *  @param unit anchor point annotation units (pixel/display)
+./dcmpstat/include/dcmtk/dcmpstat/dvpstx.h:   OFCondition setAnchorPoint(double x, double y, DVPSannotationUnit unit, OFBool isVisible);
+./dcmpstat/include/dcmtk/dcmpstat/dvpstx.h:    *  @param unit bounding box annotation units (pixel/display)
+./dcmpstat/include/dcmtk/dcmpstat/dvpstx.h:     double BRHC_y, DVPSannotationUnit unit, DVPSTextJustification justification);
+./dcmpstat/include/dcmtk/dcmpstat/dvpstx.h:   /** gets the bounding box annotation units.
+./dcmpstat/include/dcmtk/dcmpstat/dvpstx.h:    *  @return bounding box annotation units
+./dcmpstat/include/dcmtk/dcmpstat/dvpstx.h:   DVPSannotationUnit getBoundingBoxAnnotationUnits();
+./dcmpstat/include/dcmtk/dcmpstat/dvpstx.h:   /** gets the anchor point annotation units.
+./dcmpstat/include/dcmtk/dcmpstat/dvpstx.h:    *  @return anchor point annotation units
+./dcmpstat/include/dcmtk/dcmpstat/dvpstx.h:   DVPSannotationUnit getAnchorPointAnnotationUnits();
+./dcmpstat/include/dcmtk/dcmpstat/dvpstyp.h:/** describes the different types of annotation units
+./dcmpstat/include/dcmtk/dcmpstat/dvpstyp.h:enum DVPSannotationUnit
+./dcmsr/dsrcitem.cc:OFCondition DSRContentItem::setAnnotationText(const OFString &annotationText) const
+./dcmsr/dsrcitem.cc:        TreeNode->setAnnotation(annotationText);
+./dcmsr/dsrdnflt.cc:DSRDocumentTreeNodeAnnotationFilter::DSRDocumentTreeNodeAnnotationFilter(const DSRTreeNodeAnnotation &annotation)
+./dcmsr/dsrdnflt.cc:  : Annotation(annotation)
+./dcmsr/dsrdnflt.cc:    /* check whether the annotation matches */
+./dcmsr/dsrdocst.cc:size_t DSRDocumentSubTree::gotoAnnotatedNode(const OFString &annotationText,
+./dcmsr/dsrdocst.cc:    return gotoNode(DSRTreeNodeAnnotation(annotationText), startFromRoot);
+./dcmsr/dsrdocst.cc:size_t DSRDocumentSubTree::gotoNextAnnotatedNode(const OFString &annotationText)
+./dcmsr/dsrdocst.cc:        nodeID = gotoAnnotatedNode(annotationText, OFFalse /*startFromRoot*/);
+./dcmsr/dsrdoctn.cc:    /* print annotation (optional) */
+./dcmsr/dsrtpltn.cc:    /* print annotation (optional) */
+./dcmsr/include/dcmtk/dcmsr/cmr/tid1411.h:     *  @param  annotationText    optional text used to annotate the content item
+./dcmsr/include/dcmtk/dcmsr/cmr/tid1411.h:                                        const OFString &annotationText,
+./dcmsr/include/dcmtk/dcmsr/cmr/tid1419m.h:     *  @param  annotationText    optional text used to annotate the content item
+./dcmsr/include/dcmtk/dcmsr/cmr/tid1419m.h:                                        const OFString &annotationText,
+./dcmsr/include/dcmtk/dcmsr/cmr/tid1501.h:     *  @param  annotationText    optional text used to annotate the content item
+./dcmsr/include/dcmtk/dcmsr/cmr/tid1501.h:                                        const OFString &annotationText,
+./dcmsr/include/dcmtk/dcmsr/cmr/tid1600.h:     *  @param  annotationText  text used to annotate the content item (might be empty)
+./dcmsr/include/dcmtk/dcmsr/cmr/tid1600.h:                                              const OFString &annotationText,
+./dcmsr/include/dcmtk/dcmsr/cmr/tid1600.h:     *  @param  annotationText  text used to annotate the content item (might be empty)
+./dcmsr/include/dcmtk/dcmsr/cmr/tid1600.h:                                            const OFString &annotationText,
+./dcmsr/include/dcmtk/dcmsr/cmr/tid1600.h:     *  @param  annotationText   text used to annotate the content item (might be empty)
+./dcmsr/include/dcmtk/dcmsr/cmr/tid1600.h:                                               const OFString &annotationText,
+./dcmsr/include/dcmtk/dcmsr/cmr/tid1600.h:     *  @param  annotationText  optional text used to annotate the content item
+./dcmsr/include/dcmtk/dcmsr/cmr/tid1600.h:                                                       const OFString &annotationText,
+./dcmsr/include/dcmtk/dcmsr/cmr/tid1600.h:     *  @param  annotationText  optional text used to annotate the content item
+./dcmsr/include/dcmtk/dcmsr/cmr/tid1600.h:                                                     const OFString &annotationText,
+./dcmsr/include/dcmtk/dcmsr/cmr/tid1600.h:     *  @param  annotationText   optional text used to annotate the content item
+./dcmsr/include/dcmtk/dcmsr/cmr/tid1600.h:                                                        const OFString &annotationText,
+./dcmsr/include/dcmtk/dcmsr/cmr/tid300.h:     *  @param  annotationText    optional text used to annotate the content item
+./dcmsr/include/dcmtk/dcmsr/cmr/tid300.h:                                        const OFString &annotationText,
+./dcmsr/include/dcmtk/dcmsr/dsrcitem.h:    /** get annotation text.
+./dcmsr/include/dcmtk/dcmsr/dsrcitem.h:     *  The optional annotation text allows for labeling a content item with an arbitrary
+./dcmsr/include/dcmtk/dcmsr/dsrcitem.h:     ** @return annotation text of current content item if valid,  EmptyString otherwise
+./dcmsr/include/dcmtk/dcmsr/dsrcitem.h:    /** set annotation text.
+./dcmsr/include/dcmtk/dcmsr/dsrcitem.h:     *  The optional annotation text allows for labeling a content item with an arbitrary
+./dcmsr/include/dcmtk/dcmsr/dsrcitem.h:     ** @param  annotationText  value to be set (might be an empty string)
+./dcmsr/include/dcmtk/dcmsr/dsrcitem.h:    OFCondition setAnnotationText(const OFString &annotationText) const;
+./dcmsr/include/dcmtk/dcmsr/dsrdnflt.h:/** Class implementing a document tree node filter that checks for a given annotation
+./dcmsr/include/dcmtk/dcmsr/dsrdnflt.h:     ** @param  annotation  annotation to check for
+./dcmsr/include/dcmtk/dcmsr/dsrdnflt.h:    DSRDocumentTreeNodeAnnotationFilter(const DSRTreeNodeAnnotation &annotation);
+./dcmsr/include/dcmtk/dcmsr/dsrdnflt.h:    /** check whether given node matches the filter criterion (annotation)
+./dcmsr/include/dcmtk/dcmsr/dsrdnflt.h:    /// annotation to check for
+./dcmsr/include/dcmtk/dcmsr/dsrdocst.h:     *  If more than one node exists with the given annotation text, the first one will
+./dcmsr/include/dcmtk/dcmsr/dsrdocst.h:     ** @param  annotationText  annotation text of the node to be searched for
+./dcmsr/include/dcmtk/dcmsr/dsrdocst.h:    virtual size_t gotoAnnotatedNode(const OFString &annotationText,
+./dcmsr/include/dcmtk/dcmsr/dsrdocst.h:     ** @param  annotationText  annotation text of the node to be searched for
+./dcmsr/include/dcmtk/dcmsr/dsrdocst.h:    virtual size_t gotoNextAnnotatedNode(const OFString &annotationText);
+./dcmsr/include/dcmtk/dcmsr/dsrdoctn.h:     *  date/time (in curly brackets), annotation text (in quotation marks) and template
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:/** Base class for tree node annotations.
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h: *  Currently, this class supports textual annotations only.
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:     *                of the annotation text
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:    /** conversion operator that returns the currently stored annotation text
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:     *  Two annotations are equal, if the internally stored character strings (text)
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:     ** @param  annotation  annotation that should be compared to the current one
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:     ** @return OFTrue if both annotations are equal, OFFalse otherwise
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:    OFBool operator==(const DSRTreeNodeAnnotation &annotation) const
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:        return (Text == annotation.Text);
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:     *  Two annotations are not equal, if the internally stored character strings
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:     ** @param  annotation  annotation that should be compared to the current one
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:     ** @return OFTrue if both annotations are not equal, OFFalse otherwise
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:    OFBool operator!=(const DSRTreeNodeAnnotation &annotation) const
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:        return (Text != annotation.Text);
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:    /** clear the currently stored annotation text
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:    /** check whether the annotation is empty, i.e.\ whether the internally stored
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:     ** @return OFTrue if the annotation is empty, OFFalse otherwise
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:    /** get annotation text, i.e.\ the internally stored character string
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:    /** set annotation text, i.e.\ the internally stored character string
+./dcmsr/include/dcmtk/dcmsr/dsrtnant.h:     *                annotation text.  Use an empty string ("") to delete the value.
+./dcmsr/include/dcmtk/dcmsr/dsrtncsr.h:     ** @param  annotation  annotation of the node to set the cursor to
+./dcmsr/include/dcmtk/dcmsr/dsrtncsr.h:    size_t gotoNode(const DSRTreeNodeAnnotation &annotation);
+./dcmsr/include/dcmtk/dcmsr/dsrtncsr.h:size_t DSRTreeNodeCursor<T>::gotoNode(const DSRTreeNodeAnnotation &annotation)
+./dcmsr/include/dcmtk/dcmsr/dsrtncsr.h:    if (!annotation.isEmpty())
+./dcmsr/include/dcmtk/dcmsr/dsrtncsr.h:            while ((nodeID > 0) && (NodeCursor->getAnnotation() != annotation))
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:     ** @param  annotation  optional annotation that should be set as the initial value
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:    DSRTreeNode(const DSRTreeNodeAnnotation &annotation = DSRTreeNodeAnnotation())
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:        Annotation(annotation),
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:     *  Only the optional annotation is copied.
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:    /** check whether this node has a (non-empty) annotation
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:     ** @return OFTrue if this node has a (non-empty) annotation, OFFalse otherwise
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:    /** clear annotation of this node
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:    /** get annotation of this node (optional)
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:     ** @return annotation of this node (might be empty)
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:    /** set annotation of this node (optional)
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:     ** @param  annotation  annotation to be set
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:    inline void setAnnotation(const DSRTreeNodeAnnotation &annotation)
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:        Annotation = annotation;
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:    /// annotation of the tree node (optional)
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:    /** clear annotations of all tree nodes
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:     ** @param  annotation     annotation of the node to set the cursor to
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:    size_t gotoNode(const DSRTreeNodeAnnotation &annotation,
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:size_t DSRTree<T>::gotoNode(const DSRTreeNodeAnnotation &annotation,
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:    if (!annotation.isEmpty())
+./dcmsr/include/dcmtk/dcmsr/dsrtree.h:        nodeID = DSRTreeNodeCursor<T>::gotoNode(annotation);
+./dcmsr/include/dcmtk/dcmsr/dsrtypes.h:    /// print annotation of a content item (optional, e.g. user-defined information)

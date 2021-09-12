@@ -126,6 +126,7 @@ RZ_KAUVIR_SRC_GROUP_DIR = $$SRC_ROOT_DIR/sk/rz/rz-kauvir
 
 
 QUA_ZIP_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/quazip
+DCMTK_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/dcmtk
 
 ANGELSCRIPT_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/angelscript
 
