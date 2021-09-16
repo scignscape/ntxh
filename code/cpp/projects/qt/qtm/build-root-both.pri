@@ -132,6 +132,7 @@ ANGELSCRIPT_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/angelscript
 
 SCIGNSTAGE_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/QScign/ScignStage
 
+DGDB_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/dgdb
 
 
 HTXN_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/htxn/htxn

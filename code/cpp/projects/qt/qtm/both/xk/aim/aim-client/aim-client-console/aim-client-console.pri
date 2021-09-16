@@ -38,6 +38,10 @@ TEMPLATE = app
 LIBS += -L$$TARGETSDIR  -laimlib -ldcmsr -lofstd -loflog -ldcmdata \
    -ldcmimage -ldcmimgle
 
+
+LIBS += -lrt
+
+
 #LIBS += -L$$TARGETSDIR -laimlib
 
 
