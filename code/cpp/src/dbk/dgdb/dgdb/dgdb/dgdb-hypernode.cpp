@@ -7,8 +7,8 @@
 
 #include "dgdb-hypernode.h"
 
-DGDB_Hypernode::DGDB_Hypernode(n8 id)
-  :  id_(id)
+DgDb_Hypernode::DgDb_Hypernode(n8 id)
+  :  id_(id), shm_block_(nullptr)
 {
 
 }

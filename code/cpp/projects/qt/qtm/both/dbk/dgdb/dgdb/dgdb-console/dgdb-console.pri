@@ -33,21 +33,26 @@ INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR
 
 INCLUDEPATH += $$SRC_GROUP_DIR/tkrzw
 
-#INCLUDEPATH += /home/nlevisrael/tkrzw/install/include
+INCLUDEPATH += $$WHITEDB_SRC_GROUP_DIR
 
 
 
 
 HEADERS += \
+  $$SRC_DIR/test-class.h \
 
 
 SOURCES += \
   $$SRC_DIR/main.cpp \
+  $$SRC_DIR/test-class.cpp \
 
 
 LIBS += -L$$TARGETSDIR -ldgdb
 
 LIBS += -L$$TARGETSDIR -ltkrzw -llz4  -llzma -lz
+
+LIBS += -L$$TARGETSDIR -lwhitedb
+
 
 #LIBS += /home/nlevisrael/tkrzw/install/lib/libtkrzw.a  -llz4  -llzma -lz
 

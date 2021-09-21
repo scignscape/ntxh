@@ -132,7 +132,7 @@ ANGELSCRIPT_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/angelscript
 
 SCIGNSTAGE_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/QScign/ScignStage
 
-DGDB_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/dgdb
+DgDb_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/dgdb
 
 
 HTXN_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/htxn/htxn
@@ -140,7 +140,7 @@ MPF_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/htxn/mosaic
 CWL_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/cwl
 GTAGML_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/gtagml/gtagml
 
-DGDB_WHITE_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/dgdb-white
+DgDb_WHITE_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/dgdb-white
 
 DGH_SDI_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/dgh-sdi
 

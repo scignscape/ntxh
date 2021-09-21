@@ -9,19 +9,23 @@
 
 #include <QDir>
 #include <QFileInfo>
+#include <QDebug>
 
 #include "dgdb-location-structure.h"
 
+#include "dwb/dwb-instance.h"
 
-#include "tkrzw/tkrzw_dbm.h"
 
-using namespace tkrzw;
 
-#include <string_view>
+//#include <string_view>
 
 #include "dgdb-record-processors.h"
 
+#include "dtb/dtb-package.h"
+
 #include "dgdb-hypernode.h"
+
+#include "types/dh-type-system.h"
 
 #include <QDataStream>
 
@@ -54,147 +58,216 @@ using namespace tkrzw;
 //}
 
 
-DGDB_Database_Instance::DGDB_Database_Instance(QString private_folder_path)
+DgDb_Database_Instance::DgDb_Database_Instance(QString private_folder_path)
   :  private_folder_path_(private_folder_path),
-     hypernode_count_status_(_unknown), info_dbm_(nullptr),
-     nodes_dbm_(nullptr),
-     pinterns_dbm_(nullptr), finterns_dbm_(nullptr),
-     pinterns_count_(0), finterns_count_(0)
+     blocks_dwb_(nullptr),
+     hypernode_count_status_(_unknown),
+     //pinterns_count_(0), finterns_count_(0),
+     type_system_(nullptr),
+     dtb_package_(nullptr)
 {
 }
 
-s4 DGDB_Database_Instance::read_hypernode_count_status()
+void DgDb_Database_Instance::init_type_system()
 {
- check_info_dbm();
- ktype_<u4>::get kg;
- info_dbm_->Process(":_hypernode_count", &kg, true);
- hypernode_count_status_ = (s4) kg.data();
- return hypernode_count_status_;
+ type_system_ = new DH_Type_System;
 }
 
-void DGDB_Database_Instance::read_interns_count_status()
+void DgDb_Database_Instance::init_dtb_package()
 {
- check_info_dbm();
- static u2 kg_default = 0;
- ktype_<u2>::get kg (&kg_default);
- info_dbm_->Process(":_pinterns_count", &kg, true);
- pinterns_count_ = kg.data();
- kg.reset();
- info_dbm_->Process(":_finterns_count", &kg, true);
- finterns_count_ = kg.data();
- kg.reset();
+ dtb_package_ = new DTB_Package;
 }
 
-void DGDB_Database_Instance::store_hypernode_count_status(u4 count)
+s4 DgDb_Database_Instance::read_hypernode_count_status()
 {
- //HashDBM* dbm =
- check_info_dbm();
+ dtb_package_->check_info_dbm(private_folder_path_);
+ hypernode_count_status_ = dtb_package_->read_hypernode_count_status();
+}
 
- // //  possibilities for other range checking as well ...
- u4 c = count & 0b0011'1111'1111'1111'1111'1111'1111'1111;
+void DgDb_Database_Instance::read_interns_count_status()
+{
+ dtb_package_->read_interns_count_status(); //pinterns_count_, finterns_count_);
+}
 
- ktype_<u4>::set ks(*info_dbm_);
+void DgDb_Database_Instance::store_hypernode_count_status(u4 count)
+{
+ dtb_package_->store_hypernode_count_status(count);
+}
 
- ks(":_hypernode_count", c);
+void DgDb_Database_Instance::check_nodes_dbm()
+{
+ dtb_package_->check_nodes_dbm(private_folder_path_);
+}
+
+void DgDb_Database_Instance::check_interns_dbm()
+{
+ dtb_package_->check_interns_dbm(private_folder_path_);
+}
+
+void DgDb_Database_Instance::store_indexed_field(DgDb_Hypernode* dgh,
+  u2 index, const QByteArray& value,
+  DgDb_Location_Structure::Data_Options opts, QString field_name)
+{
+ DgDb_Location_Structure dls;
+
+ dls.set_raw_primary_field_id(index);
+ dls.set_data_options(opts);
+
+ // dls.set_primary_field_id(index, DgDb_Location_Structure::Field_Id_Options::Raw_Index);
+ dls.set_node_id(dgh->id());
+ switch (opts)
+ {
+#define TEMP_MACRO(x) \
+  case DgDb_Location_Structure::Data_Options::x: \
+    store_indexed_field_<DgDb_Location_Structure::Data_Options::x>(dls, dgh, value, field_name); break;
+  TEMP_MACRO(QVariant)
+  TEMP_MACRO(Numeric)
+  TEMP_MACRO(QString)
+  TEMP_MACRO(Raw_Binary)
+  TEMP_MACRO(Shm_Pointer)
+  TEMP_MACRO(Shm_Pointer_With_Path_Code)
+  TEMP_MACRO(Shm_Pointer_With_Size)
+  TEMP_MACRO(Shm_Pointer_With_Size_and_Path_Code)
+  TEMP_MACRO(Signed_Numeric)
+  TEMP_MACRO(Typed_Numeric)
+  TEMP_MACRO(Typed_QString)
+  TEMP_MACRO(Typed_Raw_Binary)
+  TEMP_MACRO(Typed_Shm_Pointer)
+  TEMP_MACRO(Typed_Shm_Pointer_With_Path_Code)
+  TEMP_MACRO(Typed_Shm_Pointer_With_Size)
+  TEMP_MACRO(Typed_Shm_Pointer_With_Size_and_Path_Code)
+ }
 }
 
 
-DGDB_Hypernode* DGDB_Database_Instance::new_hypernode()
+void DgDb_Database_Instance::fetch_indexed_field(DgDb_Hypernode* dgh,
+  u2 index, QByteArray& value,
+  DgDb_Location_Structure::Data_Options opts)
+{
+ DgDb_Location_Structure dls;
+ dls.set_primary_field_id(index, DgDb_Location_Structure::Field_Id_Options::Raw_Index);
+ dls.set_node_id(dgh->id());
+ dls.set_data_options(opts);
+ fetch_node_data(dls, value);
+}
+
+
+void DgDb_Database_Instance::fetch_indexed_field(DgDb_Hypernode* dgh, u2 index,
+  DgDb_Location_Structure::Field_Id_Options fio,
+  QByteArray& value,
+  DgDb_Location_Structure::Data_Options opts)
+{
+ DgDb_Location_Structure dls;
+ dls.set_primary_field_id(index, fio);
+ dls.set_node_id(dgh->id());
+ dls.set_data_options(opts);
+ fetch_node_data(dls, value);
+}
+
+void DgDb_Database_Instance::fetch_indexed_field(DgDb_Hypernode* dgh, u2 index,
+  DgDb_Location_Structure::Field_Id_Options fio,
+  QByteArray& value, void*& pv,
+  DgDb_Location_Structure::Data_Options opts)
+{
+ DgDb_Location_Structure dls;
+ dls.set_primary_field_id(index, fio);
+ dls.set_node_id(dgh->id());
+ dls.set_data_options(opts);
+ fetch_node_data(dls, pv);
+ value = QByteArray( (char*) pv, 2);
+}
+
+DH_Type* DgDb_Database_Instance::get_type_by_name(QString tn, QString* res)
+{
+ return type_system_->get_type_by_name(tn, res);
+}
+
+DgDb_Hypernode* DgDb_Database_Instance::new_hypernode_(DH_Type* dht)
+{
+ DgDb_Hypernode* result = new_hypernode();
+ result->set_dh_type(dht);
+ return result;
+}
+
+DgDb_Hypernode* DgDb_Database_Instance::new_hypernode()
 {
  ++hypernode_count_status_;
- DGDB_Hypernode* result = new DGDB_Hypernode(hypernode_count_status_);
+ DgDb_Hypernode* result = new DgDb_Hypernode(hypernode_count_status_);
  return result;
 }
 
 
-void DGDB_Database_Instance::check_interns_dbm()
+
+u2 DgDb_Database_Instance::check_field_id(QString key)
 {
- check_internal_dbm("_pinterns", pinterns_dbm_);
- check_internal_dbm("_finterns", finterns_dbm_);
- //return interns_dbm_;
+ return dtb_package_->check_field_id(key);
+// auto it = field_ids_.find(key);
+// if(it == field_ids_.end())
+// {
+//  ktype_<u2>::get kg;
+//  Status st = finterns_dbm_->Process((char*)key.data(), &kg, true);
+//  if(st == Status::NOT_FOUND_ERROR)
+//  {
+
+//  }
+//  field_ids_[key] = kg.data();
+//  return kg.data();
+// }
+// return *it;
 }
 
-HashDBM* DGDB_Database_Instance::check_info_dbm()
+u2 DgDb_Database_Instance::check_property_id(QString key)
 {
- check_internal_dbm("_info", info_dbm_);
- return info_dbm_;
+ return dtb_package_->check_property_id(key);
+// auto it = property_ids_.find(key);
+// if(it == property_ids_.end())
+// {
+//  ktype_<u2>::get kg;
+//  std::string_view kview((char*)key.data(), key.size() * 2);
+//  Status st = pinterns_dbm_->Process(kview, &kg, false);
+//  if(st == Status::BROKEN_DATA_ERROR)
+//  {
+//   ktype_<u2>::set ks(*pinterns_dbm_);
+//   ++pinterns_count_;
+//   ks(key, pinterns_count_);
+//   property_ids_[key] = pinterns_count_;
+//   return pinterns_count_;
+//  }
+//  property_ids_[key] = kg.data();
+//  return kg.data();
+// }
+// return *it;
 }
 
-HashDBM* DGDB_Database_Instance::check_nodes_dbm()
+void DgDb_Database_Instance::fetch_node_data(DgDb_Location_Structure dls, QByteArray& result)
 {
- check_internal_dbm("_nodes", nodes_dbm_);
- return info_dbm_;
-}
+ dtb_package_->fetch_node_data(dls, result);
+// std::string key(IntToStrBigEndian(dls.raw_code()));
+// //std::string_view sval((char*)value.data(), value.size());
+// //nodes_dbm_->Get(key, sval, true);
 
-void DGDB_Database_Instance::check_internal_dbm(QString which, tkrzw::HashDBM*& result)
-{
- if(result)
- {
-  if(!result->IsOpen())
-    result->Open( (private_folder_path_ + "/" + which).toStdString(), true);
- }
- else
- {
-  result = new HashDBM;
-  result->Open( (private_folder_path_ + "/" + which).toStdString(), true);
- }
-}
+// ktype_<QByteArray*>::get kg(&result);
 
+// Status st = nodes_dbm_->Process(key, &kg, true);
 
-u2 DGDB_Database_Instance::check_field_id(QString key)
-{
- auto it = field_ids_.find(key);
- if(it == field_ids_.end())
- {
-  ktype_<u2>::get kg;
-  Status st = finterns_dbm_->Process((char*)key.data(), &kg, true);
-  if(st == Status::NOT_FOUND_ERROR)
-  {
-
-  }
-  field_ids_[key] = kg.data();
-  return kg.data();
- }
- return *it;
-}
-
-u2 DGDB_Database_Instance::check_property_id(QString key)
-{
- auto it = property_ids_.find(key);
- if(it == property_ids_.end())
- {
-  ktype_<u2>::get kg;
-  std::string_view kview((char*)key.data(), key.size() * 2);
-  Status st = pinterns_dbm_->Process(kview, &kg, false);
-  if(st == Status::BROKEN_DATA_ERROR)
-  {
-   ktype_<u2>::set ks(*pinterns_dbm_);
-   ++pinterns_count_;
-   ks(key, pinterns_count_);
-   property_ids_[key] = pinterns_count_;
-   return pinterns_count_;
-  }
-  property_ids_[key] = kg.data();
-  return kg.data();
- }
- return *it;
 }
 
 
-void DGDB_Database_Instance::get_node_data(DGDB_Location_Structure dls, QVariant& result)
+void DgDb_Database_Instance::fetch_node_data(DgDb_Location_Structure dls, QVariant& result)
 {
- std::string key(IntToStrBigEndian(dls.raw_code()));
- //std::string_view sval((char*)value.data(), value.size());
- //nodes_dbm_->Get(key, sval, true);
+ dtb_package_->fetch_node_data(dls, result);
+// std::string key(IntToStrBigEndian(dls.raw_code()));
+// //std::string_view sval((char*)value.data(), value.size());
+// //nodes_dbm_->Get(key, sval, true);
 
- std::string value;
- ktype_<QVariant>::get kg;
+// //std::string value;
+// ktype_<QVariant>::get kg;
 
- Status st = nodes_dbm_->Get(key, &value);
+// //Status st = nodes_dbm_->Get(key, &value);
 
- Status st1 = nodes_dbm_->Process(key, &kg, true);
+// Status st = nodes_dbm_->Process(key, &kg, true);
 
- result = kg.data();
+// result = kg.data();
 
  //result = kg.data();
 // QByteArray qba(kg.data(), value.size());
@@ -203,16 +276,44 @@ void DGDB_Database_Instance::get_node_data(DGDB_Location_Structure dls, QVariant
 }
 
 
-void DGDB_Database_Instance::store_node_data(DGDB_Location_Structure dls, QByteArray& value)
+void DgDb_Database_Instance::store_node_data(DgDb_Location_Structure dls, const QByteArray& value)
 {
- std::string key(IntToStrBigEndian(dls.raw_code()));
- std::string_view sval((char*)value.data(), value.size());
- nodes_dbm_->Set(key, sval, true);
+ dtb_package_->store_node_data(dls, value);
+
+// std::string key(IntToStrBigEndian(dls.raw_code()));
+// std::string_view sval((char*)value.data(), value.size());
+// nodes_dbm_->Set(key, sval, true);
+
 // ktype_<n8>::set ks(*nodes_dbm_);
 // ks();
 }
 
-void DGDB_Database_Instance::store_node_data(DGDB_Location_Structure dls, QVariant value)
+void DgDb_Database_Instance::store_node_data(DgDb_Location_Structure dls, void* value)
+{
+ dtb_package_->store_node_data(dls, value);
+// std::string key(IntToStrBigEndian(dls.raw_code()));
+// std::string_view sval((char*)&value, sizeof(void*));
+// nodes_dbm_->Set(key, sval, true);
+}
+
+
+void DgDb_Database_Instance::fetch_node_data(DgDb_Location_Structure dls, void*& result)
+{
+ dtb_package_->fetch_node_data(dls, result);
+// std::string key(IntToStrBigEndian(dls.raw_code()));
+// //std::string_view sval((char*)value.data(), value.size());
+// //nodes_dbm_->Get(key, sval, true);
+
+// ktype_<void*>::get kg(&result);
+
+// Status st = nodes_dbm_->Process(key, &kg, true);
+
+// result = kg.data();
+}
+
+
+
+void DgDb_Database_Instance::store_node_data(DgDb_Location_Structure dls, QVariant value)
 {
  QByteArray qba;
  QDataStream qds(&qba, QIODevice::WriteOnly);
@@ -220,12 +321,12 @@ void DGDB_Database_Instance::store_node_data(DGDB_Location_Structure dls, QVaria
  store_node_data(dls, qba);
 }
 
-void DGDB_Database_Instance::set_property(DGDB_Hypernode* hypernode, QString key, QVariant value)
+void DgDb_Database_Instance::set_property(DgDb_Hypernode* hypernode, QString key, QVariant value)
 {
  u2 id = check_property_id(key);
 
- DGDB_Location_Structure dls;
- dls.set_primary_field_id(id, DGDB_Location_Structure::Field_Id_Options::Interned_Property_Name);
+ DgDb_Location_Structure dls;
+ dls.set_primary_field_id(id, DgDb_Location_Structure::Field_Id_Options::Interned_Property_Name);
 
  dls.set_node_id(hypernode->id());
 
@@ -233,26 +334,62 @@ void DGDB_Database_Instance::set_property(DGDB_Hypernode* hypernode, QString key
 }
 
 
-QVariant DGDB_Database_Instance::get_property(DGDB_Hypernode* hypernode, QString key)
+QVariant DgDb_Database_Instance::get_property(DgDb_Hypernode* hypernode, QString key)
 {
  u2 id = check_property_id(key);
 
- DGDB_Location_Structure dls;
- dls.set_primary_field_id(id, DGDB_Location_Structure::Field_Id_Options::Interned_Property_Name);
+ DgDb_Location_Structure dls;
+ dls.set_primary_field_id(id, DgDb_Location_Structure::Field_Id_Options::Interned_Property_Name);
 
  dls.set_node_id(hypernode->id());
 
  QVariant result;
- get_node_data(dls, result);
+ fetch_node_data(dls, result);
 
  return result;
 }
 
 
 
+u1 DgDb_Database_Instance::check_construct_dwb_files(QDir qdir)
+{
+ u1 result = 0;
+ qdir.cd("dwb/blocks");
+ static QStringList files {"_config", "_restore"}; //, "_properties", "_fields"};
+
+ for(QString f : files)
+ {
+  if(!qdir.exists(f))
+  {
+   QFile file(qdir.absoluteFilePath(f));
+   if(file.open(QFile::ReadWrite))
+     file.close();
+   else
+   {
+    return 0;
+   }
+  }
+  ++result;
+ }
+ return result;
+}
 
 
-void DGDB_Database_Instance::check_construct_files()
+void DgDb_Database_Instance::init_dwb_blocks()
+{
+ blocks_dwb_ = new DWB_Instance(confirmed_private_folder_path_
+   + "/dwb/blocks/_config", confirmed_private_folder_path_ + "/dwb/blocks/_restore");
+
+ DWB_Instance::_DB_Create_Status cst = blocks_dwb_->check_init();
+ if(! ((u1)cst & 7) )
+ {
+  // //  unusual condition on the whitedb ...
+  qDebug() << "WhiteDB Blocks Database not fully initialized";
+ }
+}
+
+
+void DgDb_Database_Instance::check_construct_files()
 {
  QDir qdir(private_folder_path_);
  static QStringList files {"_pinterns", "_finterns", "_info", "_nodes"};
@@ -272,12 +409,25 @@ void DGDB_Database_Instance::check_construct_files()
     }
    }
   }
+  if(!qdir.exists("dwb"))
+  {
+   if(!qdir.mkpath("./dwb"))
+   {
+    hypernode_count_status_ = _dwb_folder_create_failed;
+    return;
+   }
+  }
  }
  else
  {
   if(!qdir.mkpath("."))
   {
    hypernode_count_status_ = _folder_create_failed;
+   return;
+  }
+  if(!qdir.mkpath("./dwb"))
+  {
+   hypernode_count_status_ = _dwb_folder_create_failed;
    return;
   }
 
@@ -294,6 +444,19 @@ void DGDB_Database_Instance::check_construct_files()
    }
   }
  }
+
+ if(!qdir.mkpath("./dwb/blocks"))
+ {
+  hypernode_count_status_ = _dwb_subfolder_create_failed;
+  return;
+ }
+
+ if(!check_construct_dwb_files(qdir))
+ {
+  hypernode_count_status_ = _dwb_file_create_failed;
+  return;
+ }
+
  QFileInfo qfi(private_folder_path_);
  confirmed_private_folder_path_ = qfi.canonicalFilePath();
 }

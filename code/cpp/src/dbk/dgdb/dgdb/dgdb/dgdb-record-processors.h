@@ -5,8 +5,8 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef DGDB_RECORD_PROCESSORS__H
-#define DGDB_RECORD_PROCESSORS__H
+#ifndef DgDb_RECORD_PROCESSORS__H
+#define DgDb_RECORD_PROCESSORS__H
 
 #include <QByteArray>
 #include <QVariant>
@@ -18,6 +18,8 @@
 #include "accessors.h"
 
 #include "tkrzw/tkrzw_dbm.h"
+
+using namespace tkrzw;
 
 #include <string_view>
 
@@ -110,6 +112,92 @@ public:
 
 };
 
+
+template<>
+class _ktype_Get<QByteArray> : public tkrzw::DBM::RecordProcessor
+{
+ QByteArray data_;
+ QByteArray* default_;
+
+public:
+
+ _ktype_Get(QByteArray* d = nullptr)
+   : tkrzw::DBM::RecordProcessor(),
+     data_{}, default_{d}
+ {
+ }
+
+ void reset() { data_ = {}; }
+ void reset_all(QByteArray* d = nullptr) { default_ = d; data_ = {}; }
+
+
+ ~_ktype_Get() = default;
+
+ std::string_view ProcessFull	(std::string_view key, std::string_view value)
+   Q_DECL_OVERRIDE
+ {
+  data_ = QByteArray(value.data(), value.size());
+  return DBM::RecordProcessor::NOOP;
+ }
+
+ std::string_view ProcessEmpty	(std::string_view key)
+   Q_DECL_OVERRIDE
+ {
+  if(default_)
+  {
+   data_ = *default_;
+   return DBM::RecordProcessor::NOOP;
+  }
+  return nullptr;
+ }
+
+ ACCESSORS__RGET(QByteArray ,data)
+};
+
+
+template<>
+class _ktype_Get<QByteArray*> : public tkrzw::DBM::RecordProcessor
+{
+ QByteArray* data_;
+ QByteArray** default_;
+
+public:
+
+ _ktype_Get(QByteArray* data, QByteArray** d = nullptr)
+   : tkrzw::DBM::RecordProcessor(),
+     data_{data}, default_{d}
+ {
+ }
+
+ void reset() { data_ = nullptr; }
+ void reset_all(QByteArray** d = nullptr) { default_ = d; data_ = nullptr; }
+
+
+ ~_ktype_Get() = default;
+
+ std::string_view ProcessFull	(std::string_view key, std::string_view value)
+   Q_DECL_OVERRIDE
+ {
+  *data_ = QByteArray(value.data(), value.size());
+  return DBM::RecordProcessor::NOOP;
+ }
+
+ std::string_view ProcessEmpty	(std::string_view key)
+   Q_DECL_OVERRIDE
+ {
+  if(default_)
+  {
+   *data_ = **default_;
+   return DBM::RecordProcessor::NOOP;
+  }
+  return nullptr;
+ }
+
+ ACCESSORS__GET(QByteArray* ,data)
+};
+
+
+
 template<typename VALUE_Type, size_t SZ_Value = sizeof (VALUE_Type)>
 struct ktype_
 {
@@ -133,6 +221,6 @@ struct ktype_
 };
 
 
-#endif // DGDB_RECORD_PROCESSORS__H
+#endif // DgDb_RECORD_PROCESSORS__H
 
 

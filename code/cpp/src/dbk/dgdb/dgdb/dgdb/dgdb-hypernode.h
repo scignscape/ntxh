@@ -20,16 +20,26 @@
 //     0b 0000'0000'0000'0000 0000'0000'0000'1000 0000'0000'0000'0000 0000'0000'0000'1000
 
 
+class DH_Type;
 
-class DGDB_Hypernode
+
+class DgDb_Hypernode
 {
  n8 id_;
 
+ DH_Type* dh_type_;
+
+ char* shm_block_;
+
 public:
 
- DGDB_Hypernode(n8 id);
+ DgDb_Hypernode(n8 id);
 
  ACCESSORS(n8 ,id)
+
+ ACCESSORS(DH_Type* ,dh_type)
+ ACCESSORS(char* ,shm_block)
+
 
 };
 

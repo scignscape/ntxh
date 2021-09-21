@@ -116,6 +116,18 @@ ACCESSORS__GET(type, name)
 #endif
 
 
+#ifndef ACCESSORS__SETR
+#define ACCESSORS__SETR(type, name) \
+ auto set_##name(type _arg_) { name##_ = _arg_; return *this; }
+#endif
+
+
+#ifndef ACCESSORS__SETP
+#define ACCESSORS__SETP(type, name) \
+ auto set_##name(type _arg_) { name##_ = _arg_; return this; }
+#endif
+
+
 #ifndef Q_INVOKABLE__ACCESSORS__SET
 #define Q_INVOKABLE__ACCESSORS__SET(type, name) \
  void Q_INVOKABLE set_##name(type _arg_) { name##_ = _arg_; }
@@ -146,11 +158,25 @@ ACCESSORS__GET(type, name)
  ACCESSORS__SDECLARE(type, name)
 #endif
 
-//?
+
 #ifndef ACCESSORS
 #define ACCESSORS(type, name) \
  ACCESSORS__GET(MACRO_PASTE(type), name) \
  ACCESSORS__SET(MACRO_PASTE(type), name)
+#endif
+
+
+#ifndef ACCESSORSR
+#define ACCESSORSR(type, name) \
+ ACCESSORS__GET(MACRO_PASTE(type), name) \
+ ACCESSORS__SETR(MACRO_PASTE(type), name)
+#endif
+
+
+#ifndef ACCESSORSP
+#define ACCESSORSP(type, name) \
+ ACCESSORS__GET(MACRO_PASTE(type), name) \
+ ACCESSORS__SETP(MACRO_PASTE(type), name)
 #endif
 
 
