@@ -62,8 +62,11 @@ void* _get_shm_field_ptr(DgDb_Database_Instance& ddi,
  {
   auto [offset, end] = dht->get_field_block_offset(field_name);
   u4 size = end - offset + 1;
-  size_t bs = dht->shm_block_size();
-
+  size_t sbs = dht->shm_block_size();
+  char* block = ddi.allocate_shm_block(sbs, "testOk");
+  void* rec = ddi.get_wdb_record_from_block(block);
+  QString msg = ddi.get_string_from_wdb_record(rec);
+  qDebug() << "msg = " << msg;
  }
 }
 
@@ -84,10 +87,10 @@ int main(int argc, char *argv[])
 
  DH_Type_System* dht = ddi.type_system();
  dht->REGISTER_TYPE(Test_Class)
-   -> set_shm_block_size(100)
-   -> note_field_block_offset("a_string")(10,17)
+   .set_shm_block_size(100)
+   .note_field_block_offset("a_string")(10,17)
         ("a_number")(4,5)
-   -> set_stash_id(0)
+   ->set_stash_id(0)
    ;
 
  DgDb_Hypernode* dgh = ddi.new_hypernode<Test_Class>();

@@ -68,6 +68,22 @@ DgDb_Database_Instance::DgDb_Database_Instance(QString private_folder_path)
 {
 }
 
+char* DgDb_Database_Instance::allocate_shm_block(size_t size,
+  QString test_message, Block_Options options)
+{
+ u1 field_count = test_message.isEmpty()? 2 : 3;
+
+ auto [rec, result] = blocks_dwb_->new_block_record(field_count, size);
+ if(options & Block_Options::Init_to_0)
+   memset(result, 0, size);
+ if(options & Block_Options::Write_WhiteDB_Record)
+   blocks_dwb_->write_record_pointer_bytes(rec, result);
+ if(!test_message.isEmpty())
+   blocks_dwb_->write_str_field(rec, 1, test_message);
+
+ return result;
+}
+
 void DgDb_Database_Instance::init_type_system()
 {
  type_system_ = new DH_Type_System;
@@ -151,6 +167,16 @@ void DgDb_Database_Instance::fetch_indexed_field(DgDb_Hypernode* dgh,
  fetch_node_data(dls, value);
 }
 
+void* DgDb_Database_Instance::get_wdb_record_from_block(char* block)
+{
+ return blocks_dwb_->get_record_from_block(block);
+ //wg_int enc;
+}
+
+QString DgDb_Database_Instance::get_string_from_wdb_record(void* rec, u2 field_number)
+{
+ return blocks_dwb_->get_string_from_record(rec, field_number);
+}
 
 void DgDb_Database_Instance::fetch_indexed_field(DgDb_Hypernode* dgh, u2 index,
   DgDb_Location_Structure::Field_Id_Options fio,

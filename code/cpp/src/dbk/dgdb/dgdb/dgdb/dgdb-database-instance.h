@@ -65,11 +65,28 @@ public:
 
  DgDb_Database_Instance(QString private_folder_path = {});
 
+ enum class Block_Options {
+   N_A = 0, Write_WhiteDB_Record = 1, Init_to_0 = 2, Write_Type_Code = 4,
+   Write_Forward_Pointer = 8, Write_Backward_Pointer = 16
+ };
+
+ friend constexpr Block_Options operator|(Block_Options lhs, Block_Options rhs)
+ {
+  return (Block_Options) ( (u1) lhs | (u1) rhs );
+ }
+
+ friend constexpr u1 operator&(Block_Options lhs, Block_Options rhs)
+ {
+  return (u1) lhs & (u1) rhs;
+ }
+
 
  ACCESSORS(QString ,private_folder_path)
  ACCESSORS(get_shm_field_ptr_type ,get_shm_field_ptr)
  ACCESSORS(DH_Type_System* ,type_system)
 
+ char* allocate_shm_block(size_t size, QString init_message = {}, Block_Options options =
+   Block_Options::Write_WhiteDB_Record | Block_Options::Init_to_0);
 
  DgDb_Hypernode* new_hypernode();
 
@@ -150,7 +167,8 @@ public:
  void fetch_node_data(DgDb_Location_Structure dls, QByteArray& result);
  void fetch_node_data(DgDb_Location_Structure dls, void*& result);
 
-
+ void* get_wdb_record_from_block(char* block);
+ QString get_string_from_wdb_record(void* rec, u2 field_number = 1);
 };
 
 

@@ -67,10 +67,10 @@ public:
  }
 
  template<typename VERTEX_Type>
- DH_Type* register_type_with_name_resolution(QString desired)
+ DH_Type& register_type_with_name_resolution(QString desired)
  {
   QString ctn = register_type_name_resolution<VERTEX_Type>(desired);
-  return &register_type(desired, ctn);
+  return register_type(desired, ctn);
  }
 
 };

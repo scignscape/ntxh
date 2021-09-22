@@ -100,7 +100,7 @@ public:
  ACCESSORS(u4 ,byte_length)
  ACCESSORS(u1 ,byte_length_code)
 
- ACCESSORSP(size_t ,shm_block_size)
+ ACCESSORSR(size_t ,shm_block_size)
 
  ACCESSORS(s2 ,stash_id)
 

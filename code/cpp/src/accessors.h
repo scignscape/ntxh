@@ -118,7 +118,7 @@ ACCESSORS__GET(type, name)
 
 #ifndef ACCESSORS__SETR
 #define ACCESSORS__SETR(type, name) \
- auto set_##name(type _arg_) { name##_ = _arg_; return *this; }
+ auto& set_##name(type _arg_) { name##_ = _arg_; return *this; }
 #endif
 
 
