@@ -33,6 +33,8 @@ rtti_read<ho_tname<tn>>("(" #ho_tname \
 
 #include "kans.h"
 
+#include "dh-subvalue-field.h"
+
  //?KANS_(DgDb)
 
 //class DgDb_Node;
@@ -43,6 +45,8 @@ rtti_read<ho_tname<tn>>("(" #ho_tname \
 
 
 class DgDb_Hypernode;
+
+class DH_Subvalue_Field;
 
 
 class DH_Type
@@ -59,7 +63,10 @@ class DH_Type
 
  size_t shm_block_size_;
 
- QMap<QString, QPair<u4, u4>> field_block_offsets_;
+ u2 shm_block_column_;
+ s1 shm_message_column_;
+
+// QMap<QString, QPair<u4, u4>> field_block_offsets_;
 
 
  std::function<void*(DgDb_Hypernode*,
@@ -84,6 +91,11 @@ class DH_Type
  using Class_Of_Member_Function = typename _Class_Of_Member_Function<T>::type;
 
 
+private:
+
+ QMap<QString, u2> subvalue_fields_index_map_;
+ QMap<u2, DH_Subvalue_Field*> subvalue_fields_;
+
 public:
 
 
@@ -101,25 +113,104 @@ public:
  ACCESSORS(u1 ,byte_length_code)
 
  ACCESSORSR(size_t ,shm_block_size)
+ ACCESSORSR(u2 ,shm_block_column)
+ ACCESSORSR(s1 ,shm_message_column)
 
  ACCESSORS(s2 ,stash_id)
 
  ACCESSORS(QString ,name)
  ACCESSORS(QString ,cname)
 
- void _note_field_block_offset(QString field_name, u4 start, u4 end);
+ u2 get_shm_message_column(u2 block_column)
+ {
+  if(shm_message_column_ == -2)
+    return block_column + 1;
+  return shm_message_column_;
+ }
 
- struct note_field_block_offset_intermediary
+ u2 get_shm_message_column()
+ {
+  return get_shm_message_column(shm_block_column_);
+ }
+
+ void note_field_block_offset(DH_Subvalue_Field* sf, u4 start, u4 end);
+ void note_field_index(DH_Subvalue_Field* sf, u2 index);
+
+ DH_Subvalue_Field* note_field_block_offset(QString field_name, u4 start, u4 end);
+ DH_Subvalue_Field* note_field_index(QString field_name, u2 index);
+
+ void note_record_column_index(DH_Subvalue_Field* sf, u2 rci);
+
+
+//? DH_Subvalue_Field* check_note_field_name(QString field_name);
+
+ void note_write_mode(DH_Subvalue_Field* sf, DH_Subvalue_Field::Write_Mode wm);
+ DH_Subvalue_Field* note_write_mode(QString field_name, DH_Subvalue_Field::Write_Mode wm);
+
+ DH_Subvalue_Field::Write_Mode get_write_mode(QString field_name);
+ DH_Subvalue_Field* get_subvalue_field_by_field_name(QString field_name);
+
+
+
+ u2 get_internal_field_column_requirements();
+
+ struct note_field_intermediary
  {
   QString field_name;
   DH_Type& _this;
-  note_field_block_offset_intermediary& operator()(u4 start, u4 end)
+  u4 held_start;
+  DH_Subvalue_Field* field;
+  note_field_intermediary& operator()(u4 start, u4 end)
   {
-   _this._note_field_block_offset(field_name, start, end);
+   if(field)
+     _this.note_field_block_offset(field, start, end);
+   else
+     field = _this.note_field_block_offset(field_name, start, end);
    return *this;
   }
-  note_field_block_offset_intermediary& operator()(QString another_field_name)
+  note_field_intermediary& operator()(DH_Subvalue_Field::Write_Mode wm)
   {
+   if(field)
+     _this.note_write_mode(field, wm);
+   else
+     field = _this.note_write_mode(field_name, wm);
+   return *this;
+  }
+  note_field_intermediary& operator()(QPair<DH_Subvalue_Field::Write_Mode, u2> pr)
+  {
+   auto [wm, column_index] = pr;
+   if(field)
+     _this.note_write_mode(field, wm);
+   else
+     field = _this.note_write_mode(field_name, wm);
+
+   _this.note_record_column_index(field, column_index);
+   return *this;
+  }
+
+  note_field_intermediary& operator()(u4 start)
+  {
+   held_start = start;
+   //_this._note_field_block_offset(field_name, start, start);
+   return *this;
+  }
+  note_field_intermediary& operator[](u2 index)
+  {
+   if(field)
+     _this.note_field_index(field, index);
+   else
+     field = _this.note_field_index(field_name, index);
+   return *this;
+  }
+
+  note_field_intermediary& operator()(QString another_field_name)
+  {
+   field = nullptr;
+   //_this.check_note_field_name(another_field_name);
+   if(held_start != -1)
+   {
+
+   }
    field_name = another_field_name;
    return *this;
   }
@@ -129,9 +220,10 @@ public:
   }
  };
 
- note_field_block_offset_intermediary note_field_block_offset(QString field_name)
+ note_field_intermediary sf(QString field_name)
  {
-  return {field_name, *this};
+  //check_note_field_name(field_name);
+  return {field_name, *this, (u4) -1, nullptr};
  }
 
  template<typename T>

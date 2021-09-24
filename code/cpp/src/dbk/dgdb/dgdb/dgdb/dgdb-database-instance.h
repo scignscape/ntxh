@@ -30,6 +30,8 @@ class DH_Type;
 class DH_Type_System; //* dht = ddi.type_system()
 
 class DTB_Package;
+class DH_Subvalue_Field;
+
 
 class DgDb_Database_Instance
 {
@@ -85,7 +87,12 @@ public:
  ACCESSORS(get_shm_field_ptr_type ,get_shm_field_ptr)
  ACCESSORS(DH_Type_System* ,type_system)
 
- char* allocate_shm_block(size_t size, QString init_message = {}, Block_Options options =
+ char* allocate_shm_block(DH_Type* dht,
+   QString init_message = {}, u2 total_columns = 0, Block_Options options =
+   Block_Options::Write_WhiteDB_Record | Block_Options::Init_to_0);
+
+ char* allocate_shm_block(size_t size, u2 block_column, u2 message_column,
+   QString init_message = {}, u2 total_columns = 0, Block_Options options =
    Block_Options::Write_WhiteDB_Record | Block_Options::Init_to_0);
 
  DgDb_Hypernode* new_hypernode();
@@ -113,9 +120,25 @@ public:
  void init_dtb_package();
  void init_type_system();
 
+ void store(DgDb_Hypernode* dh, QString field_or_property_name, const QByteArray& value);
+
+ void store_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Field* sf,
+   const QByteArray& value);
+
+ void store_subvalue(DgDb_Hypernode* dh,
+   DH_Subvalue_Field* sf, DgDb_Location_Structure& dls,
+   DgDb_Location_Structure::Data_Options opts,
+   const QByteArray& value);
+
  void store_indexed_field(DgDb_Hypernode* dh, u2 index,
    const QByteArray& value,
    DgDb_Location_Structure::Data_Options opts, QString field_name);
+
+
+ template<DgDb_Location_Structure::Data_Options OPTS>
+ void store_subvalue_(DgDb_Location_Structure dls,
+   DgDb_Hypernode* dh, DH_Subvalue_Field* sf, const QByteArray& value, QString field_name);
+
 
 
  template<DgDb_Location_Structure::Data_Options OPTS>
@@ -123,16 +146,25 @@ public:
    DgDb_Hypernode* dh, const QByteArray& value, QString field_name);
 
 
- void fetch_indexed_field(DgDb_Hypernode* dgh, u2 index,
+ //ddi.fetch_subvalue(dh, "a_number", qba, pv);
+ void fetch_subvalue(DgDb_Hypernode* dh, QString field_name,
+   QByteArray& value, void*& pv);
+
+ void fetch_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Field* sf,
+   QByteArray& value, void*& pv);
+
+  // DgDb_Location_Structure::Data_Options opts);
+
+ void fetch_indexed_field(DgDb_Hypernode* dh, u2 index,
    QByteArray& value,
    DgDb_Location_Structure::Data_Options opts);
 
- void fetch_indexed_field(DgDb_Hypernode* dgh, u2 index,
+ void fetch_indexed_field(DgDb_Hypernode* dh, u2 index,
    DgDb_Location_Structure::Field_Id_Options fio,
    QByteArray& value,
    DgDb_Location_Structure::Data_Options opts);
 
- void fetch_indexed_field(DgDb_Hypernode* dgh, u2 index,
+ void fetch_indexed_field(DgDb_Hypernode* dh, u2 index,
    DgDb_Location_Structure::Field_Id_Options fio,
    QByteArray& value, void*& pv,
    DgDb_Location_Structure::Data_Options opts);
@@ -169,6 +201,8 @@ public:
 
  void* get_wdb_record_from_block(char* block);
  QString get_string_from_wdb_record(void* rec, u2 field_number = 1);
+
+ key_t ftok_key(QString which);
 };
 
 

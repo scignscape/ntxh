@@ -17,6 +17,8 @@
 
 #include "tkrzw/tkrzw_dbm.h"
 
+#include "types/dh-type.h"
+
 using namespace tkrzw;
 
 #include <string_view>
@@ -81,7 +83,24 @@ void DgDb_Database_Instance::store_indexed_field_<DgDb_Location_Structure::Data_
 (DgDb_Location_Structure dls, DgDb_Hypernode* dh, const QByteArray& value, QString field_name)
 {
  void* mem = get_shm_field_ptr_(*this, *dh, dls.get_raw_primary_field_id(), field_name, nullptr, nullptr);
- memcpy(mem, value.data(), value.size());
+
+ DH_Type* dht = dh->dh_type();
+ DH_Subvalue_Field::Write_Mode wm = dht->get_write_mode(field_name);
+ switch (wm)
+ {
+ case DH_Subvalue_Field::In_Block:
+  memcpy(mem, value.data(), value.size());
+  break;
+
+ case DH_Subvalue_Field::Redirect_In_Block:
+  break;
+
+ case DH_Subvalue_Field::Redirect_In_Record:
+
+  break;
+
+ }
+
 
  //ktype_<n8>::set ks(*nodes_dbm_);
  store_node_data(dls, mem);

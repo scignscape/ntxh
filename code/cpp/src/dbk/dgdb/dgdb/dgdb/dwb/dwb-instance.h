@@ -32,7 +32,10 @@ public:
 
  DWB_Instance(QString config_path, QString restore_path);
 
+
  ACCESSORS(QString ,config_path)
+
+ ACCESSORS__GET(key_t ,ftok_key)
 
  enum class _DB_Create_Status
  {
@@ -44,7 +47,7 @@ public:
 
  _DB_Create_Status check_init();
 
- QPair<void*, char*> new_block_record(u2 field_count, size_t block_size);
+ QPair<void*, char*> new_block_record(u2 field_count, size_t block_size, u2 block_column);
  void write_record_pointer_bytes(void* rec, char* destination);
  void write_str_field(void* rec, u2 field_number, QString str);
  void* get_record_from_block(char* block);

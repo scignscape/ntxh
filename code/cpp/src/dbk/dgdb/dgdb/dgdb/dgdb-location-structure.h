@@ -29,6 +29,7 @@ public:
 
  enum class Field_Id_Options {
   Raw_Index, //Raw_Position,
+  Structure_Field_Index,
   Raw_Array_Position,
   Offset_Array_Position,
   Negative_Raw_Array_Position,
@@ -36,7 +37,7 @@ public:
 
   Interned_Property_Name,
   Interned_Field_Name,
-  Mapped_Field_Name
+  //?Mapped_Field_Name
  };
 
  enum class Data_Options {
@@ -96,13 +97,14 @@ namespace _class_DgDb_Location_Structure
    ((u2)(DgDb_Location_Structure::Field_Id_Options::x) << 13);} \
 
  TEMP_MACRO(_raw_index, Raw_Index)
+ TEMP_MACRO(_structure_field_index, Structure_Field_Index)
  TEMP_MACRO(_raw_array_position, Raw_Array_Position)
  TEMP_MACRO(_offset_array_position, Offset_Array_Position)
  TEMP_MACRO(_negative_raw_array_position, Negative_Raw_Array_Position)
  TEMP_MACRO(_negative_offset_array_position, Negative_Offset_Array_Position)
  TEMP_MACRO(_interned_property_name, Interned_Property_Name)
  TEMP_MACRO(_interned_field_name, Interned_Field_Name)
- TEMP_MACRO(_mapped_field_name, Mapped_Field_Name)
+// TEMP_MACRO(_mapped_field_name, Mapped_Field_Name)
 
 // TEMP_MACRO(_raw_index, Raw_Index)
 // TEMP_MACRO(_raw_index, Raw_Index)

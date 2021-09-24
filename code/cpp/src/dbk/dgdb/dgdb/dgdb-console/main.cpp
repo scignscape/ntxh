@@ -52,22 +52,21 @@ void* _get_shm_field_ptr(DgDb_Database_Instance& ddi,
  auto [fio, index] = _split_index_code(index_code);
 
  DH_Type* dht = dgh.dh_type();
- if(dgh.shm_block())
+ char* block = dgh.shm_block();
+ auto [offset, end] = dht->get_field_block_offset(field_name);
+ u4 sz = end - offset;
+ if(!block)
  {
-  auto [offset, end] = dht->get_field_block_offset(field_name);
-  u4 size = end - offset;
+//  size_t sbs = dht->shm_block_size();
+//  u2 block_column = dht->shm_block_column();
+  block = ddi.allocate_shm_block(dht, "testOk");
+  dgh.set_shm_block(block);
+//  void* rec = ddi.get_wdb_record_from_block(block);
+//  QString msg = ddi.get_string_from_wdb_record(rec);
+//  qDebug() << "msg = " << msg;
+ }
 
- }
- else
- {
-  auto [offset, end] = dht->get_field_block_offset(field_name);
-  u4 size = end - offset + 1;
-  size_t sbs = dht->shm_block_size();
-  char* block = ddi.allocate_shm_block(sbs, "testOk");
-  void* rec = ddi.get_wdb_record_from_block(block);
-  QString msg = ddi.get_string_from_wdb_record(rec);
-  qDebug() << "msg = " << msg;
- }
+ return block + offset;
 }
 
 
@@ -83,21 +82,69 @@ int main(int argc, char *argv[])
  ddi.read_hypernode_count_status();
  ddi.read_interns_count_status();
  ddi.init_dwb_blocks();
+
+ qDebug() << "blocks ftok key: " << ddi.ftok_key("blocks");
+
  ddi.set_get_shm_field_ptr(_get_shm_field_ptr);
 
  DH_Type_System* dht = ddi.type_system();
  dht->REGISTER_TYPE(Test_Class)
    .set_shm_block_size(100)
-   .note_field_block_offset("a_string")(10,17)
-        ("a_number")(4,5)
+   .sf("a_number")[1](8,9)
+      ("a_string")[2](10,11)(DH::Redirect_In_Record (4)) //(DH_Subvalue_Field::Redirect_In_Record)
    ->set_stash_id(0)
    ;
 
- DgDb_Hypernode* dgh = ddi.new_hypernode<Test_Class>();
+ DgDb_Hypernode* dh = ddi.new_hypernode<Test_Class>();
 
- ddi.store_indexed_field(dgh, _interned_field_name(3), u2_to_qba(524),
-   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+// ddi.store_indexed_field(dgh, _interned_field_name(3), u2_to_qba(524),
+//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
 
+ ddi.store(dh, "a_string", "a string test");
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "a_string", qba, pv);
+
+//  u2 test_val = qba_to_u2(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "test_val = " << qba;
+ }
+
+
+
+// ddi.store(dh, "a_number", u2_to_qba(892));
+// {
+//  QByteArray qba;
+//  void* pv;
+
+//  ddi.fetch_subvalue(dh, "a_number", qba, pv);
+
+//  u2 test_val = qba_to_u2(qba);
+//  //test = qToBigEndian(test);
+
+//  qDebug() << "test_val = " << test_val;
+// }
+
+
+// ddi.store_indexed_field(dgh, _interned_field_name(3), u2_to_qba(524),
+//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_number");
+
+// ddi.store_indexed_field(dgh, _interned_field_name(4), "test",
+//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+
+// {
+//  QByteArray qba;
+//  void* pv;
+//  ddi.fetch_indexed_field(dgh, 3, DgDb_Location_Structure::Field_Id_Options::Interned_Field_Name,
+//    qba, pv, DgDb_Location_Structure::Data_Options::Shm_Pointer);
+
+//  u2 test = qba_to_u2(qba);
+
+//  qDebug() << "test = " << test;
+// }
 
  //ddi.set_get_shm_field_ptr(_get_shm_field_ptr);
 
@@ -270,7 +317,7 @@ int main1(int argc, char *argv[])
 
  //dls.set_raw_code();
 
- dls.set_primary_field_id(33, DgDb_Location_Structure::Field_Id_Options::Mapped_Field_Name);
+ dls.set_primary_field_id(33, DgDb_Location_Structure::Field_Id_Options::Structure_Field_Index);
  dls.set_secondary_field_id(44, DgDb_Location_Structure::Field_Id_Options::Negative_Raw_Array_Position);
 
 // QPair<DgDb_Location_Structure::Field_Id_Options, u2> pr1 = dls.get_primary_field_id();

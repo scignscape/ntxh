@@ -57,12 +57,13 @@ QString DWB_Instance::get_string_from_record(void* rec, u2 field_number)
  return QString::fromLatin1(str);
 }
 
-QPair<void*, char*> DWB_Instance::new_block_record(u2 field_count, size_t size)
+QPair<void*, char*> DWB_Instance::new_block_record(u2 field_count,
+  size_t size, u2 block_column)
 {
  void* rec = wg_create_record(wdb_instance_, field_count);
  char array[size];
  wg_int blob = wg_encode_blob(wdb_instance_, array, nullptr, size);
- wg_set_field(wdb_instance_, rec, 0, blob);
+ wg_set_field(wdb_instance_, rec, block_column, blob);
  char* result = wg_decode_blob(wdb_instance_, blob);
  return {rec, result};
 }
