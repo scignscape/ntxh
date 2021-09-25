@@ -15,7 +15,7 @@
 
 #include "dwb/dwb-instance.h"
 
-
+#include "conversions.h"
 
 //#include <string_view>
 
@@ -70,31 +70,46 @@ DgDb_Database_Instance::DgDb_Database_Instance(QString private_folder_path)
 }
 
 
-char* DgDb_Database_Instance::allocate_shm_block(DH_Type* dht,
-  QString init_message, u2 total_columns, Block_Options options)
+static constexpr u2 default_total_columns = 5;
+// //   0         1          2       3?     4              5
+// //   rec id    node id    block   msg?   branch-code    user-data
+
+
+char* DgDb_Database_Instance::allocate_shm_block(DH_Type* dht, u4 dh_id,
+  QString init_message, u1 maxed_fixed, u2 total_columns, Block_Options options)
 {
  if(total_columns == 0)
  {
-  total_columns = init_message.isEmpty()? 2 : 3;
+  total_columns = init_message.isEmpty()? default_total_columns : default_total_columns + 1;
+  if(maxed_fixed == 0)
+    maxed_fixed = total_columns - 1;
   total_columns += dht->get_internal_field_column_requirements();
  }
  return allocate_shm_block(dht->shm_block_size(), dht->shm_block_column(),
-   dht->get_shm_message_column(), init_message, total_columns, options);
+   dht->get_shm_message_column(), dh_id, init_message, maxed_fixed, total_columns, options);
 }
 
 char* DgDb_Database_Instance::allocate_shm_block(size_t size,
-  u2 block_column, u2 message_column, QString init_message, u2 total_columns, Block_Options options)
+  u2 block_column, u2 message_column, u4 dh_id, QString init_message,
+  u1 maxed_fixed, u2 total_columns, Block_Options options)
 {
  if(total_columns == 0)
  {
-  total_columns = init_message.isEmpty()? 2 : 3;
+  total_columns = init_message.isEmpty()? default_total_columns : default_total_columns + 1;
  }
 
  auto [rec, result] = blocks_dwb_->new_block_record(total_columns, size, block_column);
  if(options & Block_Options::Init_to_0)
    memset(result, 0, size);
+ size_t current_ptr_offset = 0;
  if(options & Block_Options::Write_WhiteDB_Record)
-   blocks_dwb_->write_record_pointer_bytes(rec, result);
+   current_ptr_offset += blocks_dwb_->write_record_pointer_bytes(rec, result);
+ if(options & Block_Options::Write_Max_Fixed)
+   current_ptr_offset += blocks_dwb_->write_max_fixed(maxed_fixed, result + current_ptr_offset);
+
+ u2 dh_id_column = 1;
+ blocks_dwb_->write_u4_field(rec, dh_id_column, dh_id);
+
  if(! (init_message.isEmpty() && message_column == (u2)-1) )
  {
 //  u2 mc = dh->get_shm_message_column(block_column);
@@ -262,13 +277,42 @@ void DgDb_Database_Instance::fetch_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Fiel
 
  fetch_node_data(dls, pv);
 
- char* cs = (char*) pv;
+ DH_Subvalue_Field::Write_Mode wm = sf->write_mode();
 
- //value = QByteArray( (char*) pv, 2);
+ switch (wm)
+ {
+ case DH_Subvalue_Field::Write_Mode::In_Block:
+  {
+   //char* cs = (char*) pv;
+   //
+   value = QByteArray( (char*) pv, 2);
+//  value.resize(2);
+//  value[0] = cs[0];
+//  value[1] = cs[1];
+  }
+  break;
 
- value.resize(2);
- value[0] = cs[0];
- value[1] = cs[1];
+ case DH_Subvalue_Field::Write_Mode::Redirect_In_Record:
+  {
+   QByteArray qba = QByteArray( (char*) pv, 2);
+   auto [rec, column] = blocks_dwb_->get_record_via_split((char*) pv, qba_to_u2(qba));
+   blocks_dwb_->get_qba_from_record(rec, column, value);
+
+//   auto [offset, column] = DH::block_offset_record_column_unsplit(qba_to_u2(qba));
+//   char* rec_ptr = (char*) pv - offset;
+//   void* rec = blocks_dwb_->get_record_from_block(rec_ptr);
+
+//   qba = QByteArray( rec_ptr, sizeof (wg_int));
+   //char* cs = (char*) pv;
+   //
+   //value = QByteArray( (char*) pv, 2);
+//  value.resize(2);
+//  value[0] = cs[0];
+//  value[1] = cs[1];
+  }
+  break;
+
+ }
 
 }
 

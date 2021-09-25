@@ -12,6 +12,8 @@
 
 #include "dgdb-location-structure.h"
 
+#include "dwb/dwb-instance.h"
+
 //#include "
 
 
@@ -24,6 +26,8 @@ using namespace tkrzw;
 #include <string_view>
 
 #include "dgdb-record-processors.h"
+
+#include "conversions.h"
 
 #include "dgdb-hypernode.h"
 
@@ -83,8 +87,14 @@ void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Optio
 
  case DH_Subvalue_Field::Redirect_In_Record:
   {
-   u4 sfo = sf->block_offset_start();
-   u2 sri = sf->record_column_index();
+//   u4 sfo = sf->block_offset_start();
+//   u2 sri = sf->record_column_index();
+   u2 spl = sf->block_offset_record_column_split();
+   QByteArray qba = u2_to_qba(spl);
+   memcpy(mem, qba.data(), qba.size());
+
+   blocks_dwb_->write_rec_field_via_split((char*)mem, spl, value);
+
   }
   break;
 

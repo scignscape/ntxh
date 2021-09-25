@@ -70,10 +70,18 @@ public:
  ACCESSORS(u2 ,index)
  ACCESSORS(u2 ,record_column_index)
 
+ u2 block_offset_record_column_split();
+
 };
 
 struct DH
 {
+ static QPair<u2, u1> block_offset_record_column_unsplit(u2 combined)
+ {
+  return {combined >> 6, (u1) combined & 0b00111111};
+ }
+
+
  struct Redirect_In_Record_intermediary
  {
   operator DH_Subvalue_Field::Write_Mode() const

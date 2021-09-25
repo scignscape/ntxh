@@ -7,6 +7,8 @@
 
 #include "dwb-instance.h"
 
+#include "types/dh-subvalue-field.h"
+
 //#include <sys/types.h>
 //#include <sys/ipc.h>
 #include <sys/shm.h>
@@ -35,12 +37,24 @@ void DWB_Instance::write_str_field(void* rec, u2 field_number, QString str)
  wg_set_str_field(wdb_instance_, rec, field_number, str.toLatin1().data());
 }
 
+void DWB_Instance::write_u4_field(void* rec, u2 field_number, u4 value)
+{
+ wg_set_int_field(wdb_instance_, rec, field_number, value);
+   //_field(wdb_instance_, rec, field_number, str.toLatin1().data());
+}
 
-void DWB_Instance::write_record_pointer_bytes(void* rec, char* destination)
+size_t DWB_Instance::write_max_fixed(u1 max_fixed, char* destination)
+{
+ *destination = max_fixed;
+ return 1;
+}
+
+size_t DWB_Instance::write_record_pointer_bytes(void* rec, char* destination)
 {
  wg_int enc = wg_encode_record(wdb_instance_, rec);
  //? enc = qToBigEndian(enc);
  memcpy(destination, &enc, sizeof (wg_int));
+ return sizeof (wg_int);
 }
 
 void* DWB_Instance::get_record_from_block(char* block)
@@ -48,6 +62,20 @@ void* DWB_Instance::get_record_from_block(char* block)
  wg_int enc;
  memcpy(&enc, block, sizeof (wg_int));
  return wg_decode_record(wdb_instance_, enc);
+}
+
+u1 DWB_Instance::get_max_fixed_from_block(char* block)
+{
+ // //  should we always assume rec is written before?
+ return *(block + sizeof (wg_int));
+}
+
+void DWB_Instance::get_qba_from_record(void* rec, u2 field_number, QByteArray& result)
+{
+ wg_int enc = wg_get_field(wdb_instance_, rec, field_number);
+ char* str = wg_decode_str(wdb_instance_, enc);
+ wg_int len = wg_decode_str_len(wdb_instance_, enc);
+ result = QByteArray(str, len);
 }
 
 QString DWB_Instance::get_string_from_record(void* rec, u2 field_number)
@@ -68,6 +96,31 @@ QPair<void*, char*> DWB_Instance::new_block_record(u2 field_count,
  return {rec, result};
 }
 
+QPair<void*, u2> DWB_Instance::get_record_via_split(char* ptr, u2 spl)
+{
+ auto [offset, column] = DH::block_offset_record_column_unsplit(spl);
+
+ char* block_start = (char*) ptr - offset;
+
+ column += get_max_fixed_from_block(block_start);
+
+ return {get_record_from_block(block_start), column};
+}
+
+//void* DWB_Instance::get_record_via_split(char* ptr, u2 spl)
+//{
+// auto [offset, column] = DH::block_offset_record_column_unsplit(spl);
+
+// char* block_start = (char*) ptr - offset;
+
+// return get_record_from_block(block_start);
+//}
+
+void DWB_Instance::write_rec_field_via_split(char* ptr, u2 spl, const QByteArray& text)
+{
+ auto [rec, column] = get_record_via_split(ptr, spl);
+ wg_set_str_field(wdb_instance_, rec, column, (char*) text.data());
+}
 
 DWB_Instance::_DB_Create_Status DWB_Instance::check_init()
 {

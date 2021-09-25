@@ -21,26 +21,26 @@
 
 #include "accessors.h"
 
-QByteArray u1_to_qba(u1 u)
+inline QByteArray u1_to_qba(u1 u)
 {
  return QByteArray(1, u);
 }
 
-QByteArray s1_to_qba(s1 s)
+inline QByteArray s1_to_qba(s1 s)
 {
  return QByteArray(1, s);
 }
 
 
 
-u1 qba_to_u1(const QByteArray& qba)
+inline u1 qba_to_u1(const QByteArray& qba)
 {
  if(qba.isEmpty())
    return 0;
  return (u1) qba.at(0);
 }
 
-s1 qba_to_s1(const QByteArray& qba)
+inline s1 qba_to_s1(const QByteArray& qba)
 {
  if(qba.isEmpty())
    return 0;
@@ -59,41 +59,41 @@ void _to_qba(VALUE_Type v, QByteArray& result)
  buffer.write((char*) &v, sizeof(VALUE_Type));
 }
 
-QByteArray u2_to_qba(u2 u)
+inline QByteArray u2_to_qba(u2 unsigned_value)
 {
  QByteArray result;
- _to_qba<u2>(u, result);
+ _to_qba<u2>(unsigned_value, result);
  return result;
 }
 
-QByteArray s2_to_qba(s2 s)
+inline QByteArray s2_to_qba(s2 signed_value)
 {
  QByteArray result;
- _to_qba<s2>(s, result);
- return result;
-}
-
-
-QByteArray u4_to_qba(u4 u)
-{
- QByteArray result;
- _to_qba<u4>(u, result);
- return result;
-}
-
-QByteArray s4_to_qba(s4 s)
-{
- QByteArray result;
- _to_qba<s4>(s, result);
+ _to_qba<s2>(signed_value, result);
  return result;
 }
 
 
-
-QByteArray n8_to_qba(n8 n)
+inline QByteArray u4_to_qba(u4 unsigned_value)
 {
  QByteArray result;
- _to_qba<n8>(n, result);
+ _to_qba<u4>(unsigned_value, result);
+ return result;
+}
+
+inline QByteArray s4_to_qba(s4 signed_value)
+{
+ QByteArray result;
+ _to_qba<s4>(signed_value, result);
+ return result;
+}
+
+
+
+inline QByteArray n8_to_qba(n8 value)
+{
+ QByteArray result;
+ _to_qba<n8>(value, result);
  return result;
 }
 
@@ -109,28 +109,28 @@ void qba_to_(const QByteArray& data, VALUE_Type& result)
  buffer.read((char*) &result, sizeof(VALUE_Type));
 }
 
-u2 qba_to_u2(const QByteArray& qba)
+inline u2 qba_to_u2(const QByteArray& qba)
 {
  u2 result;
  qba_to_<u2>(qba, result);
  return qFromBigEndian(result);
 }
 
-s2 qba_to_s2(const QByteArray& qba)
+inline s2 qba_to_s2(const QByteArray& qba)
 {
  s2 result;
  qba_to_<s2>(qba, result);
  return qFromBigEndian(result);
 }
 
-u4 qba_to_u4(const QByteArray& qba)
+inline u4 qba_to_u4(const QByteArray& qba)
 {
  u4 result;
  qba_to_<u4>(qba, result);
  return qFromBigEndian(result);
 }
 
-s4 qba_to_s4(const QByteArray& qba)
+inline s4 qba_to_s4(const QByteArray& qba)
 {
  s4 result;
  qba_to_<s4>(qba, result);
@@ -138,7 +138,7 @@ s4 qba_to_s4(const QByteArray& qba)
 }
 
 
-n8 qba_to_n8(const QByteArray& qba)
+inline n8 qba_to_n8(const QByteArray& qba)
 {
  n8 result;
  qba_to_<n8>(qba, result);

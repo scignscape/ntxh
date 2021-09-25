@@ -44,23 +44,23 @@ using namespace _class_DgDb_Location_Structure;
 using namespace tkrzw;
 
 void* _get_shm_field_ptr(DgDb_Database_Instance& ddi,
-  DgDb_Hypernode& dgh,
+  DgDb_Hypernode& dh,
   u2 index_code, QString field_name,
   size_t* size, n8* shm_path_code)
 {
  qDebug() << "field name = " << field_name;
  auto [fio, index] = _split_index_code(index_code);
 
- DH_Type* dht = dgh.dh_type();
- char* block = dgh.shm_block();
+ DH_Type* dht = dh.dh_type();
+ char* block = dh.shm_block();
  auto [offset, end] = dht->get_field_block_offset(field_name);
  u4 sz = end - offset;
  if(!block)
  {
 //  size_t sbs = dht->shm_block_size();
 //  u2 block_column = dht->shm_block_column();
-  block = ddi.allocate_shm_block(dht, "testOk");
-  dgh.set_shm_block(block);
+  block = ddi.allocate_shm_block(dht, dh.id(), "testOk");
+  dh.set_shm_block(block);
 //  void* rec = ddi.get_wdb_record_from_block(block);
 //  QString msg = ddi.get_string_from_wdb_record(rec);
 //  qDebug() << "msg = " << msg;
@@ -90,14 +90,14 @@ int main(int argc, char *argv[])
  DH_Type_System* dht = ddi.type_system();
  dht->REGISTER_TYPE(Test_Class)
    .set_shm_block_size(100)
-   .sf("a_number")[1](8,9)
-      ("a_string")[2](10,11)(DH::Redirect_In_Record (4)) //(DH_Subvalue_Field::Redirect_In_Record)
+   .sf("a_number")[1](9,10)
+      ("a_string")[2](11,12)(DH::Redirect_In_Record (1)) //(DH_Subvalue_Field::Redirect_In_Record)
    ->set_stash_id(0)
    ;
 
  DgDb_Hypernode* dh = ddi.new_hypernode<Test_Class>();
 
-// ddi.store_indexed_field(dgh, _interned_field_name(3), u2_to_qba(524),
+// ddi.store_indexed_field(dh, _interned_field_name(3), u2_to_qba(524),
 //   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
 
  ddi.store(dh, "a_string", "a string test");
@@ -129,16 +129,16 @@ int main(int argc, char *argv[])
 // }
 
 
-// ddi.store_indexed_field(dgh, _interned_field_name(3), u2_to_qba(524),
+// ddi.store_indexed_field(dh, _interned_field_name(3), u2_to_qba(524),
 //   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_number");
 
-// ddi.store_indexed_field(dgh, _interned_field_name(4), "test",
+// ddi.store_indexed_field(dh, _interned_field_name(4), "test",
 //   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
 
 // {
 //  QByteArray qba;
 //  void* pv;
-//  ddi.fetch_indexed_field(dgh, 3, DgDb_Location_Structure::Field_Id_Options::Interned_Field_Name,
+//  ddi.fetch_indexed_field(dh, 3, DgDb_Location_Structure::Field_Id_Options::Interned_Field_Name,
 //    qba, pv, DgDb_Location_Structure::Data_Options::Shm_Pointer);
 
 //  u2 test = qba_to_u2(qba);
@@ -173,9 +173,9 @@ int main(int argc, char *argv[])
 ////  return nullptr;
 //// });
 
-// DgDb_Hypernode* dgh = ddi.new_hypernode();
+// DgDb_Hypernode* dh = ddi.new_hypernode();
 
-// ddi.store_indexed_field(dgh, _negative_raw_array_position(3), u2_to_qba(514),
+// ddi.store_indexed_field(dh, _negative_raw_array_position(3), u2_to_qba(514),
 //   DgDb_Location_Structure::Data_Options::Shm_Pointer, "xtest");
 
 // void* v = wg_get_first_record(db);
@@ -226,7 +226,7 @@ int main(int argc, char *argv[])
 
 // QByteArray qba;
 // void* pv;
-// ddi.fetch_indexed_field(dgh, 3, DgDb_Location_Structure::Field_Id_Options::Negative_Raw_Array_Position, qba,
+// ddi.fetch_indexed_field(dh, 3, DgDb_Location_Structure::Field_Id_Options::Negative_Raw_Array_Position, qba,
 //   pv, DgDb_Location_Structure::Data_Options::Shm_Pointer);
 
 //// u2 test;// = qba_to_u2(qba);
@@ -251,14 +251,14 @@ int main4(int argc, char *argv[])
  ddi.read_hypernode_count_status();
  ddi.read_interns_count_status();
 
- DgDb_Hypernode* dgh = ddi.new_hypernode();
+ DgDb_Hypernode* dh = ddi.new_hypernode();
 
- ddi.store_indexed_field(dgh, 3, u1_to_qba(78),
+ ddi.store_indexed_field(dh, 3, u1_to_qba(78),
    DgDb_Location_Structure::Data_Options::Numeric, {});
 
 
  QByteArray qba;
- ddi.fetch_indexed_field(dgh, 3, qba,
+ ddi.fetch_indexed_field(dh, 3, qba,
    DgDb_Location_Structure::Data_Options::Numeric);
 
  u1 test = qba_to_u1(qba);
@@ -277,11 +277,11 @@ int main2(int argc, char *argv[])
  ddi.read_hypernode_count_status();
  ddi.read_interns_count_status();
 
- DgDb_Hypernode* dgh = ddi.new_hypernode();
+ DgDb_Hypernode* dh = ddi.new_hypernode();
 
- ddi.set_property(dgh, "test", 78);
+ ddi.set_property(dh, "test", 78);
 
- QVariant qv = ddi.get_property(dgh, "test");
+ QVariant qv = ddi.get_property(dh, "test");
 
  qDebug() << "qv = " << qv;
 

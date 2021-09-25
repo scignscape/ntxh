@@ -48,10 +48,17 @@ public:
  _DB_Create_Status check_init();
 
  QPair<void*, char*> new_block_record(u2 field_count, size_t block_size, u2 block_column);
- void write_record_pointer_bytes(void* rec, char* destination);
+ size_t write_record_pointer_bytes(void* rec, char* destination);
  void write_str_field(void* rec, u2 field_number, QString str);
+ void write_u4_field(void* rec, u2 field_number, u4 value);
  void* get_record_from_block(char* block);
  QString get_string_from_record(void* rec, u2 field_number);
+ void get_qba_from_record(void* rec, u2 field_number, QByteArray& result);
+ void write_rec_field_via_split(char* ptr, u2 spl, const QByteArray& text);
+ //void* get_record_via_split(char* ptr, u2 spl);
+ QPair<void*, u2> get_record_via_split(char* ptr, u2 spl);
+ size_t write_max_fixed(u1 max_fixed, char* destination);
+ u1 get_max_fixed_from_block(char* block);
 };
 
 

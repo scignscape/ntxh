@@ -13,7 +13,7 @@ DH_Type::DH_Type()
   :  byte_length_(0),
      byte_length_code_(0), stash_id_(0),
      meta_object_(nullptr), shm_block_size_(0),
-     shm_block_column_(1), shm_message_column_(-2)
+     shm_block_column_(2), shm_message_column_(-2)
   //   stage_encoder_(nullptr)
 {
 

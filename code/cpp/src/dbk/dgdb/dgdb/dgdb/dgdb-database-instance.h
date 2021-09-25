@@ -68,8 +68,9 @@ public:
  DgDb_Database_Instance(QString private_folder_path = {});
 
  enum class Block_Options {
-   N_A = 0, Write_WhiteDB_Record = 1, Init_to_0 = 2, Write_Type_Code = 4,
-   Write_Forward_Pointer = 8, Write_Backward_Pointer = 16
+   N_A = 0, Write_WhiteDB_Record = 1, Write_Max_Fixed = 2,
+   Init_to_0 = 4, Write_Type_Code = 8,
+   Write_Forward_Pointer = 16, Write_Backward_Pointer = 32
  };
 
  friend constexpr Block_Options operator|(Block_Options lhs, Block_Options rhs)
@@ -87,13 +88,14 @@ public:
  ACCESSORS(get_shm_field_ptr_type ,get_shm_field_ptr)
  ACCESSORS(DH_Type_System* ,type_system)
 
- char* allocate_shm_block(DH_Type* dht,
-   QString init_message = {}, u2 total_columns = 0, Block_Options options =
-   Block_Options::Write_WhiteDB_Record | Block_Options::Init_to_0);
+ char* allocate_shm_block(DH_Type* dht, u4 dh_id,
+   QString init_message = {}, u1 Max_Fixed = 0, u2 total_columns = 0, Block_Options options =
+   Block_Options::Write_WhiteDB_Record | Block_Options::Write_Max_Fixed | Block_Options::Init_to_0);
 
  char* allocate_shm_block(size_t size, u2 block_column, u2 message_column,
-   QString init_message = {}, u2 total_columns = 0, Block_Options options =
-   Block_Options::Write_WhiteDB_Record | Block_Options::Init_to_0);
+   u4 dh_id, QString init_message = {}, u1 Max_Fixed = 0,
+   u2 total_columns = 0, Block_Options options =
+   Block_Options::Write_WhiteDB_Record | Block_Options::Write_Max_Fixed | Block_Options::Init_to_0);
 
  DgDb_Hypernode* new_hypernode();
 
