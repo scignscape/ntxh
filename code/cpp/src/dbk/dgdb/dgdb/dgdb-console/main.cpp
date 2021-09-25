@@ -90,8 +90,8 @@ int main(int argc, char *argv[])
  DH_Type_System* dht = ddi.type_system();
  dht->REGISTER_TYPE(Test_Class)
    .set_shm_block_size(100)
-   .sf("a_number")[1](9,10)
-      ("a_string")[2](11,12)(DH::Redirect_In_Record (1)) //(DH_Subvalue_Field::Redirect_In_Record)
+   .sf("a_number")[1](10,11)
+      ("a_string")[2](12,13)(DH::Redirect_In_Record) //(DH_Subvalue_Field::Redirect_In_Record)
    ->set_stash_id(0)
    ;
 

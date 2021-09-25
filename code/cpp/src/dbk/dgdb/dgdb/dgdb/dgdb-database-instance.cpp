@@ -295,8 +295,16 @@ void DgDb_Database_Instance::fetch_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Fiel
  case DH_Subvalue_Field::Write_Mode::Redirect_In_Record:
   {
    QByteArray qba = QByteArray( (char*) pv, 2);
-   auto [rec, column] = blocks_dwb_->get_record_via_split((char*) pv, qba_to_u2(qba));
-   blocks_dwb_->get_qba_from_record(rec, column, value);
+   u2 spl = qba_to_u2(qba);
+   if( (spl & 0b00011111) == 0 )
+   {
+    // //  means that field is empty ...
+   }
+   else
+   {
+    auto [rec, column] = blocks_dwb_->get_record_via_known_split((char*) pv, qba_to_u2(qba));
+    blocks_dwb_->get_qba_from_record(rec, column, value);
+   }
 
 //   auto [offset, column] = DH::block_offset_record_column_unsplit(qba_to_u2(qba));
 //   char* rec_ptr = (char*) pv - offset;

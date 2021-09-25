@@ -54,11 +54,17 @@ public:
  void* get_record_from_block(char* block);
  QString get_string_from_record(void* rec, u2 field_number);
  void get_qba_from_record(void* rec, u2 field_number, QByteArray& result);
- void write_rec_field_via_split(char* ptr, u2 spl, const QByteArray& text);
+ u2 write_rec_field_via_split(char* ptr, u2 spl, const QByteArray& text);
  //void* get_record_via_split(char* ptr, u2 spl);
- QPair<void*, u2> get_record_via_split(char* ptr, u2 spl);
+
+ QPair<void*, QPair<u2, u2>> get_record_via_split(char* ptr, u2 spl);
+ QPair<void*, u2> get_record_via_known_split(char* ptr, u2 spl);
+
+
  size_t write_max_fixed(u1 max_fixed, char* destination);
  u1 get_max_fixed_from_block(char* block);
+ u1 get_max_used_from_block(char* block);
+ u1 inc_max_used_from_block(char* block);
 };
 
 

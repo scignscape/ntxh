@@ -90,10 +90,10 @@ void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Optio
 //   u4 sfo = sf->block_offset_start();
 //   u2 sri = sf->record_column_index();
    u2 spl = sf->block_offset_record_column_split();
-   QByteArray qba = u2_to_qba(spl);
-   memcpy(mem, qba.data(), qba.size());
 
-   blocks_dwb_->write_rec_field_via_split((char*)mem, spl, value);
+   u2 adj = blocks_dwb_->write_rec_field_via_split((char*)mem, spl, value);
+   QByteArray qba = u2_to_qba(adj? adj : spl);
+   memcpy(mem, qba.data(), qba.size());
 
   }
   break;

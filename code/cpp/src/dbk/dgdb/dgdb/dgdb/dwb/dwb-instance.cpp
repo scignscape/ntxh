@@ -46,7 +46,8 @@ void DWB_Instance::write_u4_field(void* rec, u2 field_number, u4 value)
 size_t DWB_Instance::write_max_fixed(u1 max_fixed, char* destination)
 {
  *destination = max_fixed;
- return 1;
+ *(destination + 1) = 1;
+ return 2;
 }
 
 size_t DWB_Instance::write_record_pointer_bytes(void* rec, char* destination)
@@ -63,6 +64,21 @@ void* DWB_Instance::get_record_from_block(char* block)
  memcpy(&enc, block, sizeof (wg_int));
  return wg_decode_record(wdb_instance_, enc);
 }
+
+u1 DWB_Instance::get_max_used_from_block(char* block)
+{
+ // //  should we always assume rec is written before?
+ return *(block + sizeof (wg_int) + 1);
+}
+
+u1 DWB_Instance::inc_max_used_from_block(char* block)
+{
+ u1 result = get_max_used_from_block(block);
+ // //  should we always assume rec is written before?
+ *(block + sizeof (wg_int) + 1) = result + 1;
+ return result;
+}
+
 
 u1 DWB_Instance::get_max_fixed_from_block(char* block)
 {
@@ -96,15 +112,52 @@ QPair<void*, char*> DWB_Instance::new_block_record(u2 field_count,
  return {rec, result};
 }
 
-QPair<void*, u2> DWB_Instance::get_record_via_split(char* ptr, u2 spl)
+
+QPair<void*, u2> DWB_Instance::get_record_via_known_split(char* ptr, u2 spl)
 {
  auto [offset, column] = DH::block_offset_record_column_unsplit(spl);
 
  char* block_start = (char*) ptr - offset;
 
- column += get_max_fixed_from_block(block_start);
+
+ // //  the 6th bit is a flag that the column was set
+  //    ahead of time and should not be adjusted ...
+ if(column & 0b0010'0000)
+    column &= 0b0001'1111;
 
  return {get_record_from_block(block_start), column};
+}
+
+
+QPair<void*, QPair<u2, u2>> DWB_Instance::get_record_via_split(char* ptr, u2 spl)
+{
+ auto [offset, column] = DH::block_offset_record_column_unsplit(spl);
+
+ char* block_start = (char*) ptr - offset;
+
+ u2 adj = 0;
+
+ if(column)
+ {
+  if(column & 0b0010'0000)
+    // //  the 6th bit is a flag that the column is set
+     //    ahead of time and should not be adjusted ...
+    column &= 0b0001'1111;
+  else
+    column += get_max_fixed_from_block(block_start);
+ }
+ else
+ {
+  // //  column = 0 means we have to use first available non-fixed ...
+  column = get_max_fixed_from_block(block_start) + inc_max_used_from_block(block_start);
+  // //  set the column part of the split ... assume we won't overflow
+  adj = spl + column;
+ }
+
+ // // returning adj as part of the return value, when it's not
+  //   0, signals that the split to be stored is different
+  //   than the one passed to this function ...
+ return {get_record_from_block(block_start), {column, adj} };
 }
 
 //void* DWB_Instance::get_record_via_split(char* ptr, u2 spl)
@@ -116,10 +169,13 @@ QPair<void*, u2> DWB_Instance::get_record_via_split(char* ptr, u2 spl)
 // return get_record_from_block(block_start);
 //}
 
-void DWB_Instance::write_rec_field_via_split(char* ptr, u2 spl, const QByteArray& text)
+u2 DWB_Instance::write_rec_field_via_split(char* ptr, u2 spl, const QByteArray& text)
 {
- auto [rec, column] = get_record_via_split(ptr, spl);
+ auto [rec, column_adj] = get_record_via_split(ptr, spl);
+ auto [column, adj] = column_adj;
+
  wg_set_str_field(wdb_instance_, rec, column, (char*) text.data());
+ return adj;
 }
 
 DWB_Instance::_DB_Create_Status DWB_Instance::check_init()
