@@ -91,9 +91,12 @@ int main(int argc, char *argv[])
  dht->REGISTER_TYPE(Test_Class)
    .set_shm_block_size(100)
    .sf("a_number")[1](10,11)
-      ("a_string")[2](12,13)(DH::Redirect_In_Record) //(DH_Subvalue_Field::Redirect_In_Record)
+      ("a_string")[2](12,13)
+        .query<QString>("&/q/$type")[5]
    ->set_stash_id(0)
    ;
+
+ // (DH::Redirect_In_Record [7]) //(DH_Subvalue_Field::Redirect_In_Record)
 
  DgDb_Hypernode* dh = ddi.new_hypernode<Test_Class>();
 
@@ -101,17 +104,17 @@ int main(int argc, char *argv[])
 //   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
 
  ddi.store(dh, "a_string", "a string test");
- {
-  QByteArray qba;
-  void* pv;
+// {
+//  QByteArray qba;
+//  void* pv;
 
-  ddi.fetch_subvalue(dh, "a_string", qba, pv);
+//  ddi.fetch_subvalue(dh, "a_string", qba, pv);
 
-//  u2 test_val = qba_to_u2(qba);
-  //test = qToBigEndian(test);
+////  u2 test_val = qba_to_u2(qba);
+//  //test = qToBigEndian(test);
 
-  qDebug() << "test_val = " << qba;
- }
+//  qDebug() << "test_val = " << qba;
+// }
 
 
 

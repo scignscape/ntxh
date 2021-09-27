@@ -15,6 +15,18 @@ DH_Subvalue_Field::DH_Subvalue_Field(QString field_name)
 
 }
 
+void DH_Subvalue_Field::check_write_mode()
+{
+ if(write_mode_ != Write_Mode::In_Block)
+  return;
+
+ if(query_path_.isEmpty())
+  return;
+
+ write_mode_ = Write_Mode::Redirect_External;
+}
+
+
 u2 DH_Subvalue_Field::block_offset_record_column_split()
 {
  u2 result = (u2) block_offset_start_ << 6;

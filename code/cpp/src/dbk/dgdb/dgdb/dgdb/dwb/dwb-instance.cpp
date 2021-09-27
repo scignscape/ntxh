@@ -169,6 +169,26 @@ QPair<void*, QPair<u2, u2>> DWB_Instance::get_record_via_split(char* ptr, u2 spl
 // return get_record_from_block(block_start);
 //}
 
+
+void* DWB_Instance::new_query_record(DWB_Instance* origin_dwb,
+  void* target_record, u2 target_column,
+  u2 value_column, const QByteArray& value, u2 field_count)
+{
+ void* result = wg_create_record(wdb_instance_, field_count);
+
+ wg_int origin_rec = wg_encode_record(origin_dwb->wdb_instance_, target_record);
+
+ wg_set_field(wdb_instance_, result, target_column, origin_rec);
+
+ wg_set_field(wdb_instance_, result, value_column,
+   wg_encode_str(wdb_instance_, (char*) value.data(), NULL));
+
+ return result;
+
+}
+
+
+
 u2 DWB_Instance::write_rec_field_via_split(char* ptr, u2 spl, const QByteArray& text)
 {
  auto [rec, column_adj] = get_record_via_split(ptr, spl);

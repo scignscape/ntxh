@@ -28,6 +28,19 @@ DH_Subvalue_Field* DH_Type::get_subvalue_field_by_field_name(QString field_name)
  return subvalue_fields_.value(ix);
 }
 
+u2 DH_Type::get_max_declared_field_column()
+{
+ std::vector<u1> fixed;
+ std::transform(subvalue_fields_.cbegin(), subvalue_fields_.cend(), std::back_inserter(fixed),
+    [](DH_Subvalue_Field* sf) -> u1
+ {
+  return ((sf->write_mode() == DH_Subvalue_Field::Redirect_In_Record) &&
+    (sf->record_column_index() & 0b0010'0000))?
+    (sf->record_column_index() & 0b0001'1111):0;
+ });
+ return *std::max_element(fixed.begin(), fixed.end());
+}
+
 u2 DH_Type::get_internal_field_column_requirements()
 {
  return std::count_if(subvalue_fields_.cbegin(), subvalue_fields_.cend(), [](DH_Subvalue_Field* sf)
@@ -83,6 +96,15 @@ void DH_Type::note_field_index(DH_Subvalue_Field* sf, u2 index)
  sf->set_index(index);
 }
 
+void DH_Type::note_field_query_path(DH_Subvalue_Field* sf, QString path, DH_Subvalue_Field::Query_Typecode qtc)
+{
+ sf->note_query_info(path, qtc);
+}
+
+void DH_Type::note_field_query_column(DH_Subvalue_Field* sf, u2 qyc)
+{
+ sf->set_query_column(qyc);
+}
 
 DH_Subvalue_Field* DH_Type::note_field_block_offset(QString field_name, u4 start, u4 end)
 {
@@ -99,6 +121,18 @@ DH_Subvalue_Field* DH_Type::note_field_block_offset(QString field_name, u4 start
 //{
 
 //}
+
+
+DH_Subvalue_Field* DH_Type::note_field_query_path(QString field_name, QString path,
+  DH_Subvalue_Field::Query_Typecode qtc)
+{
+ if(DH_Subvalue_Field* sf = get_subvalue_field_by_field_name(field_name))
+ {
+  note_field_query_path(sf, path, qtc);
+  return sf;
+ }
+ return nullptr;
+}
 
 
 DH_Subvalue_Field* DH_Type::note_field_index(QString field_name, u2 index)

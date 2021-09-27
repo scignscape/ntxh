@@ -55,6 +55,8 @@ class DgDb_Database_Instance
 
  get_shm_field_ptr_type get_shm_field_ptr_;
 
+ QMap<QString, DWB_Instance*> query_dwbs_;
+
 public:
 
  static constexpr s4 _unknown = -1;
@@ -102,6 +104,8 @@ public:
  DgDb_Hypernode* new_hypernode_(DH_Type* dh_type);
 
  DH_Type* get_type_by_name(QString tn, QString* res = nullptr);
+
+ DWB_Instance* get_query_dwb(DH_Type* dht, DH_Subvalue_Field& sf); //query_dwbs_)
 
  template<typename HYPERNODE_Type>
  DgDb_Hypernode* new_hypernode()
@@ -178,6 +182,8 @@ public:
 
  void check_construct_files();
  u1 check_construct_dwb_files(QDir qdir);
+
+ u1 check_construct_dwb_files(QString folder_path);
 
  s4 read_hypernode_count_status();
  void read_interns_count_status();

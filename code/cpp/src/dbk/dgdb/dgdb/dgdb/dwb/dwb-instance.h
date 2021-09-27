@@ -60,11 +60,13 @@ public:
  QPair<void*, QPair<u2, u2>> get_record_via_split(char* ptr, u2 spl);
  QPair<void*, u2> get_record_via_known_split(char* ptr, u2 spl);
 
-
  size_t write_max_fixed(u1 max_fixed, char* destination);
  u1 get_max_fixed_from_block(char* block);
  u1 get_max_used_from_block(char* block);
  u1 inc_max_used_from_block(char* block);
+
+ void* new_query_record(DWB_Instance* origin_dwb, void* target_record,
+   u2 target_column, u2 value_column, const QByteArray& value, u2 field_count);
 };
 
 

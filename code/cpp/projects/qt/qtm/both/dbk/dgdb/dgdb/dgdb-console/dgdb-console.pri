@@ -11,6 +11,8 @@ TEMPLATE = app
 
 QT -= gui
 
+QT += xml
+
 QMAKE_CC = gcc-7
 QMAKE_CXX = g++-7
 

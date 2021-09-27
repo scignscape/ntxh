@@ -98,6 +98,28 @@ void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Optio
   }
   break;
 
+ case DH_Subvalue_Field::Redirect_External:
+  {
+   DWB_Instance* dwb = get_query_dwb(dh->dh_type(), *sf);
+   void* rec = get_wdb_record_from_block(dh->shm_block());
+
+   // //  assume always 2 for now ...
+   static u1 rec_column = 2;
+
+   // //  also assume the query column is the last columns (so
+    //    we don't need to allocate more fields than that ...)
+   void* qrec = dwb->new_query_record(blocks_dwb_, rec, rec_column, sf->query_column(),
+     value, sf->query_column() + 1);
+
+
+//   QString qp = sf->query_path();
+//   if(!qp.isEmpty())
+//   {
+//    DWB_Instance* dwb = get_query_dwb(qp, *sf);
+//   }
+  }
+  break;
+
  }
 
 

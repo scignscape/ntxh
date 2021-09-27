@@ -35,6 +35,10 @@ rtti_read<ho_tname<tn>>("(" #ho_tname \
 
 #include "dh-subvalue-field.h"
 
+
+#include <QtXml>
+
+
  //?KANS_(DgDb)
 
 //class DgDb_Node;
@@ -91,8 +95,6 @@ class DH_Type
  using Class_Of_Member_Function = typename _Class_Of_Member_Function<T>::type;
 
 
-private:
-
  QMap<QString, u2> subvalue_fields_index_map_;
  QMap<u2, DH_Subvalue_Field*> subvalue_fields_;
 
@@ -135,9 +137,12 @@ public:
 
  void note_field_block_offset(DH_Subvalue_Field* sf, u4 start, u4 end);
  void note_field_index(DH_Subvalue_Field* sf, u2 index);
+ void note_field_query_path(DH_Subvalue_Field* sf, QString path, DH_Subvalue_Field::Query_Typecode qtc);
+ void note_field_query_column(DH_Subvalue_Field* sf, u2 qyc);
 
  DH_Subvalue_Field* note_field_block_offset(QString field_name, u4 start, u4 end);
  DH_Subvalue_Field* note_field_index(QString field_name, u2 index);
+ DH_Subvalue_Field* note_field_query_path(QString field_name, QString path, DH_Subvalue_Field::Query_Typecode qtc);
 
  void note_record_column_index(DH_Subvalue_Field* sf, u2 rci);
 
@@ -150,17 +155,19 @@ public:
  DH_Subvalue_Field::Write_Mode get_write_mode(QString field_name);
  DH_Subvalue_Field* get_subvalue_field_by_field_name(QString field_name);
 
-
-
+ u2 get_max_declared_field_column();
  u2 get_internal_field_column_requirements();
 
- struct note_field_intermediary
+ template<typename T>
+ struct Note_Field_Query_intermediary;
+
+ struct Note_Field_intermediary
  {
   QString field_name;
   DH_Type& _this;
   u4 held_start;
   DH_Subvalue_Field* field;
-  note_field_intermediary& operator()(u4 start, u4 end)
+  Note_Field_intermediary& operator()(u4 start, u4 end)
   {
    if(field)
      _this.note_field_block_offset(field, start, end);
@@ -168,7 +175,7 @@ public:
      field = _this.note_field_block_offset(field_name, start, end);
    return *this;
   }
-  note_field_intermediary& operator()(DH_Subvalue_Field::Write_Mode wm)
+  Note_Field_intermediary& operator()(DH_Subvalue_Field::Write_Mode wm)
   {
    if(field)
      _this.note_write_mode(field, wm);
@@ -176,7 +183,7 @@ public:
      field = _this.note_write_mode(field_name, wm);
    return *this;
   }
-  note_field_intermediary& operator()(QPair<DH_Subvalue_Field::Write_Mode, u2> pr)
+  Note_Field_intermediary& operator()(QPair<DH_Subvalue_Field::Write_Mode, u2> pr)
   {
    auto [wm, column_index] = pr;
    if(field)
@@ -188,13 +195,13 @@ public:
    return *this;
   }
 
-  note_field_intermediary& operator()(u4 start)
+  Note_Field_intermediary& operator()(u4 start)
   {
    held_start = start;
    //_this._note_field_block_offset(field_name, start, start);
    return *this;
   }
-  note_field_intermediary& operator[](u2 index)
+  Note_Field_intermediary& operator[](u2 index)
   {
    if(field)
      _this.note_field_index(field, index);
@@ -203,7 +210,7 @@ public:
    return *this;
   }
 
-  note_field_intermediary& operator()(QString another_field_name)
+  Note_Field_intermediary& operator()(QString another_field_name)
   {
    field = nullptr;
    //_this.check_note_field_name(another_field_name);
@@ -218,9 +225,31 @@ public:
   {
    return &_this;
   }
+
+  template<typename T>
+  Note_Field_Query_intermediary<T> query(QString path)
+  {
+   if(field)
+     _this.note_field_query_path(field, path, DH_Subvalue_Field::get_qtc_code<T>());
+   else
+     field = _this.note_field_query_path(field_name, path, DH_Subvalue_Field::get_qtc_code<T>());
+   return {*this};
+  }
  };
 
- note_field_intermediary sf(QString field_name)
+ template<typename T>
+ struct Note_Field_Query_intermediary
+ {
+  Note_Field_intermediary& surrounding;
+
+  Note_Field_intermediary& operator[](u2 column)
+  {
+   surrounding._this.note_field_query_column(surrounding.field, column);
+   return surrounding;
+  }
+ };
+
+ Note_Field_intermediary sf(QString field_name)
  {
   //check_note_field_name(field_name);
   return {field_name, *this, (u4) -1, nullptr};

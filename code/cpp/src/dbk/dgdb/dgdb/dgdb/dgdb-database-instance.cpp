@@ -83,7 +83,10 @@ char* DgDb_Database_Instance::allocate_shm_block(DH_Type* dht, u4 dh_id,
   total_columns = init_message.isEmpty()? default_total_columns : default_total_columns + 1;
   if(maxed_fixed == 0)
     maxed_fixed = total_columns - 1;
+  u1 max_declared = dht->get_max_declared_field_column();
   total_columns += dht->get_internal_field_column_requirements();
+  if(max_declared >= total_columns)
+    total_columns = max_declared + 1;
  }
  return allocate_shm_block(dht->shm_block_size(), dht->shm_block_column(),
    dht->get_shm_message_column(), dh_id, init_message, maxed_fixed, total_columns, options);
@@ -203,6 +206,59 @@ void DgDb_Database_Instance::store_subvalue(DgDb_Hypernode* dh,
  }
 
 }
+
+DWB_Instance* DgDb_Database_Instance::get_query_dwb(DH_Type* dht, DH_Subvalue_Field& sf)
+{
+ QString path = sf.checked_query_path();
+
+ if(path.isEmpty())
+ {
+  path = sf.query_path();
+  if(path.startsWith('&'))
+  {
+   path = path.mid(1);
+   path.prepend(confirmed_private_folder_path_);
+  }
+  s4 index = path.indexOf("$type");
+  if(index != -1)
+  {
+   path.replace(index, 5, dht->name());
+  }
+  sf.set_checked_query_path(path);
+ }
+ DWB_Instance* result = query_dwbs_.value(path);
+ if(!result)
+ {
+  QDir qdir(path);
+  if(!qdir.exists())
+  {
+   if(qdir.mkpath("."))
+     qDebug() << "Created directory " << path;
+  }
+  u1 file_count = check_construct_dwb_files(qdir.absolutePath());
+  if(file_count == 0)
+  {
+   qDebug() << "Failed to create query database files";
+   return nullptr;
+  }
+
+  result = new DWB_Instance(path + "/_config", path + "/_restore");
+
+  DWB_Instance::_DB_Create_Status cst = result->check_init();
+  if(! ((u1)cst & 7) )
+  {
+   // //  unusual condition on the whitedb ...
+   qDebug() << "WhiteDB Blocks Database not fully initialized";
+  }
+
+  qDebug() << "DWB opened with path " << path <<
+    "and ftok key" << result->ftok_key();
+
+  query_dwbs_[path] = result;
+ }
+
+ return result;
+} //)
 
 
 void DgDb_Database_Instance::store(DgDb_Hypernode* dh, QString field_or_property_name, const QByteArray& value)
@@ -553,12 +609,10 @@ QVariant DgDb_Database_Instance::get_property(DgDb_Hypernode* hypernode, QString
  return result;
 }
 
-
-
-u1 DgDb_Database_Instance::check_construct_dwb_files(QDir qdir)
+u1 DgDb_Database_Instance::check_construct_dwb_files(QString folder_path)
 {
  u1 result = 0;
- qdir.cd("dwb/blocks");
+ QDir qdir(folder_path);
  static QStringList files {"_config", "_restore"}; //, "_properties", "_fields"};
 
  for(QString f : files)
@@ -576,6 +630,13 @@ u1 DgDb_Database_Instance::check_construct_dwb_files(QDir qdir)
   ++result;
  }
  return result;
+}
+
+
+u1 DgDb_Database_Instance::check_construct_dwb_files(QDir qdir)
+{
+ qdir.cd("dwb/blocks");
+ return check_construct_dwb_files(qdir.absolutePath());
 }
 
 
