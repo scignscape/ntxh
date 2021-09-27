@@ -76,25 +76,25 @@ static constexpr u2 default_total_columns = 5;
 
 
 char* DgDb_Database_Instance::allocate_shm_block(DH_Type* dht, u4 dh_id,
-  QString init_message, u1 maxed_fixed, u2 total_columns, Block_Options options)
+  QString init_message, u1 max_fixed, u2 total_columns, Block_Options options)
 {
  if(total_columns == 0)
  {
   total_columns = init_message.isEmpty()? default_total_columns : default_total_columns + 1;
-  if(maxed_fixed == 0)
-    maxed_fixed = total_columns - 1;
+  if(max_fixed == 0)
+    max_fixed = total_columns - 1;
   u1 max_declared = dht->get_max_declared_field_column();
   total_columns += dht->get_internal_field_column_requirements();
   if(max_declared >= total_columns)
     total_columns = max_declared + 1;
  }
  return allocate_shm_block(dht->shm_block_size(), dht->shm_block_column(),
-   dht->get_shm_message_column(), dh_id, init_message, maxed_fixed, total_columns, options);
+   dht->get_shm_message_column(), dh_id, init_message, max_fixed, total_columns, options);
 }
 
 char* DgDb_Database_Instance::allocate_shm_block(size_t size,
   u2 block_column, u2 message_column, u4 dh_id, QString init_message,
-  u1 maxed_fixed, u2 total_columns, Block_Options options)
+  u1 max_fixed, u2 total_columns, Block_Options options)
 {
  if(total_columns == 0)
  {
@@ -108,7 +108,7 @@ char* DgDb_Database_Instance::allocate_shm_block(size_t size,
  if(options & Block_Options::Write_WhiteDB_Record)
    current_ptr_offset += blocks_dwb_->write_record_pointer_bytes(rec, result);
  if(options & Block_Options::Write_Max_Fixed)
-   current_ptr_offset += blocks_dwb_->write_max_fixed(maxed_fixed, result + current_ptr_offset);
+   current_ptr_offset += blocks_dwb_->write_max_fixed(max_fixed, result + current_ptr_offset);
 
  u2 dh_id_column = 1;
  blocks_dwb_->write_u4_field(rec, dh_id_column, dh_id);
@@ -322,6 +322,58 @@ void DgDb_Database_Instance::fetch_subvalue(DgDb_Hypernode* dh, QString field_na
    fetch_subvalue(dh, sf, value, pv);
 }
 
+
+DgDb_Hypernode* DgDb_Database_Instance::find_hypernode(DH_Type* dht, QString field_name, QString test)
+{
+ if(DH_Subvalue_Field* sf = dht->get_subvalue_field_by_field_name(field_name))
+   return find_hypernode(dht, sf, test);
+}
+
+
+DgDb_Hypernode* DgDb_Database_Instance::find_hypernode(DH_Type* dht, DH_Subvalue_Field* sf, QString test)
+{
+// u2 index = sf->index();
+// DgDb_Location_Structure dls;
+// dls.set_primary_field_id(index, DgDb_Location_Structure::Field_Id_Options::Structure_Field_Index);
+// dls.set_node_id(dh->id());
+// dls.set_data_options(DgDb_Location_Structure::Data_Options::Shm_Pointer);
+
+// fetch_node_data(dls, pv);
+
+ DH_Subvalue_Field::Write_Mode wm = sf->write_mode();
+
+ switch (wm)
+ {
+ case DH_Subvalue_Field::Write_Mode::Redirect_External:
+  {
+   DWB_Instance* dwb = get_query_dwb(dht, *sf);
+   // //  assume always 2 for now ...
+   static u1 rec_column = 2;
+   void* qrec = dwb->find_query_record(sf->query_column(), test);
+   if(qrec)
+   {
+    void* rec = dwb->get_target_record_from_query_record(blocks_dwb_, qrec, rec_column);
+    if(rec)
+      return get_hypernode_from_block_record(dht, rec);
+    return nullptr;
+   }
+   return nullptr;
+  }
+ }
+}
+
+
+DgDb_Hypernode* DgDb_Database_Instance::get_hypernode_from_block_record(DH_Type* dht, void* rec)
+{
+ u2 dh_id_column = 1;
+ u4 id = blocks_dwb_->fetch_u4_field(rec, dh_id_column);
+
+ DgDb_Hypernode* result = active_hypernodes_.value(id);
+ if(result)
+   return result;
+}
+
+
 void DgDb_Database_Instance::fetch_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Field* sf,
   QByteArray& value, void*& pv)
 {
@@ -347,6 +399,15 @@ void DgDb_Database_Instance::fetch_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Fiel
 //  value[1] = cs[1];
   }
   break;
+
+ case DH_Subvalue_Field::Write_Mode::Redirect_External:
+  {
+   QByteArray qba = QByteArray( (char*) pv, 8);
+   DWB_Instance* dwb = get_query_dwb(dh->dh_type(), *sf);
+   void* rec = dwb->get_record_from_qba(qba);
+   dwb->get_qba_from_record(rec, sf->query_column(), value);
+   sf->query_column();
+  }
 
  case DH_Subvalue_Field::Write_Mode::Redirect_In_Record:
   {
@@ -446,6 +507,7 @@ DgDb_Hypernode* DgDb_Database_Instance::new_hypernode_(DH_Type* dht)
 {
  DgDb_Hypernode* result = new_hypernode();
  result->set_dh_type(dht);
+ active_hypernodes_[result->id()] = result;
  return result;
 }
 

@@ -106,11 +106,13 @@ void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Optio
    // //  assume always 2 for now ...
    static u1 rec_column = 2;
 
-   // //  also assume the query column is the last columns (so
+   // //  also assume the query column is the last column (so
     //    we don't need to allocate more fields than that ...)
    void* qrec = dwb->new_query_record(blocks_dwb_, rec, rec_column, sf->query_column(),
      value, sf->query_column() + 1);
 
+   QByteArray enc = dwb->encode_record(qrec);
+   memcpy(mem, enc.data(), enc.size());
 
 //   QString qp = sf->query_path();
 //   if(!qp.isEmpty())

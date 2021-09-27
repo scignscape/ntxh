@@ -57,6 +57,11 @@ public:
  u2 write_rec_field_via_split(char* ptr, u2 spl, const QByteArray& text);
  //void* get_record_via_split(char* ptr, u2 spl);
 
+ void* get_record_from_qba(const QByteArray& qba);
+ void* get_target_record_from_query_record(DWB_Instance* origin_dwb, void* qrec, u2 rec_column);
+
+ void* find_query_record(u2 query_column, QString test); // u2 rec_column,
+
  QPair<void*, QPair<u2, u2>> get_record_via_split(char* ptr, u2 spl);
  QPair<void*, u2> get_record_via_known_split(char* ptr, u2 spl);
 
@@ -65,8 +70,13 @@ public:
  u1 get_max_used_from_block(char* block);
  u1 inc_max_used_from_block(char* block);
 
+ QByteArray encode_record(void* rec);
+
  void* new_query_record(DWB_Instance* origin_dwb, void* target_record,
    u2 target_column, u2 value_column, const QByteArray& value, u2 field_count);
+
+ u4 fetch_u4_field(void* rec, u2 dh_id_column);
+
 };
 
 

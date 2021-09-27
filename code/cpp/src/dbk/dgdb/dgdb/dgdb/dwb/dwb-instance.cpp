@@ -9,6 +9,8 @@
 
 #include "types/dh-subvalue-field.h"
 
+#include "conversions.h"
+
 //#include <sys/types.h>
 //#include <sys/ipc.h>
 #include <sys/shm.h>
@@ -62,6 +64,45 @@ void* DWB_Instance::get_record_from_block(char* block)
 {
  wg_int enc;
  memcpy(&enc, block, sizeof (wg_int));
+ return wg_decode_record(wdb_instance_, enc);
+}
+
+void* DWB_Instance::find_query_record(u2 query_column, QString test)
+{
+ wg_query_arg arglist[1];
+ arglist[0].column = query_column;
+ arglist[0].cond = WG_COND_EQUAL;
+ arglist[0].value = wg_encode_query_param_str(wdb_instance_, test.toLatin1().data(), nullptr);
+
+ wg_query* wq = wg_make_query(wdb_instance_, nullptr, 0,
+   arglist, 1);
+
+ void* result = wg_fetch(wdb_instance_, wq);
+
+ wg_free_query(wdb_instance_, wq);
+ wg_free_query_param(wdb_instance_, arglist[0].value);
+
+ return result;
+}
+
+
+void* DWB_Instance::get_target_record_from_query_record(DWB_Instance* origin_dwb, void* qrec, u2 rec_column)
+{
+ wg_int wi = wg_get_field(wdb_instance_, qrec, rec_column);
+ return wg_decode_record(origin_dwb->wdb_instance_, wi);
+}
+
+u4 DWB_Instance::fetch_u4_field(void* rec, u2 dh_id_column)
+{
+ wg_int wi = wg_get_field(wdb_instance_, rec, dh_id_column);
+ return wg_decode_int(wdb_instance_, wi);
+}
+
+
+
+void* DWB_Instance::get_record_from_qba(const QByteArray& qba)
+{
+ wg_int enc = qba_to_n8(qba);
  return wg_decode_record(wdb_instance_, enc);
 }
 
@@ -169,6 +210,11 @@ QPair<void*, QPair<u2, u2>> DWB_Instance::get_record_via_split(char* ptr, u2 spl
 // return get_record_from_block(block_start);
 //}
 
+QByteArray DWB_Instance::encode_record(void* rec)
+{
+ wg_int enc = wg_encode_record(wdb_instance_, rec);
+ return n8_to_qba(enc);
+}
 
 void* DWB_Instance::new_query_record(DWB_Instance* origin_dwb,
   void* target_record, u2 target_column,

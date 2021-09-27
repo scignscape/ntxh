@@ -57,6 +57,8 @@ class DgDb_Database_Instance
 
  QMap<QString, DWB_Instance*> query_dwbs_;
 
+ QMap<u4, DgDb_Hypernode*> active_hypernodes_;
+
 public:
 
  static constexpr s4 _unknown = -1;
@@ -156,8 +158,14 @@ public:
  void fetch_subvalue(DgDb_Hypernode* dh, QString field_name,
    QByteArray& value, void*& pv);
 
+
+ DgDb_Hypernode* find_hypernode(DH_Type* dht, QString field_name, QString test);
+ DgDb_Hypernode* find_hypernode(DH_Type* dht, DH_Subvalue_Field* sf, QString test);
+
+
  void fetch_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Field* sf,
    QByteArray& value, void*& pv);
+
 
   // DgDb_Location_Structure::Data_Options opts);
 
@@ -211,6 +219,9 @@ public:
  QString get_string_from_wdb_record(void* rec, u2 field_number = 1);
 
  key_t ftok_key(QString which);
+
+ DgDb_Hypernode* get_hypernode_from_block_record(DH_Type* dht, void* rec);
+
 };
 
 
