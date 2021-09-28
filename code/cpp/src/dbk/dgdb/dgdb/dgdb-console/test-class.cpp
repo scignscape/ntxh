@@ -45,11 +45,11 @@ Test_Class::Test_Class()
 //}
 
 
-//void Test_Class::supply_data(QByteArray& qba)
-//{
-// QDataStream qds(&qba, QIODevice::WriteOnly);
-// qds << a_string_ << a_number_;
-//}
+void Test_Class::supply_data(QByteArray& qba)
+{
+ QDataStream qds(&qba, QIODevice::WriteOnly);
+ qds << a_number_ << a_string_;
+}
 
 void Test_Class::absorb_data(const QByteArray& qba)
 {

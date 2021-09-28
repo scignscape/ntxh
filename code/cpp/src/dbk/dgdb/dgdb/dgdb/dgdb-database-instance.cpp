@@ -209,13 +209,13 @@ void DgDb_Database_Instance::store_subvalue(DgDb_Hypernode* dh,
 
 }
 
-DWB_Instance* DgDb_Database_Instance::get_query_dwb(DH_Type* dht, DH_Subvalue_Field& sf)
+DWB_Instance* DgDb_Database_Instance::get_query_dwb(DH_Type* dht, DH_Subvalue_Field* sf)
 {
- QString path = sf.checked_query_path();
+ QString path = sf->checked_query_path();
 
  if(path.isEmpty())
  {
-  path = sf.query_path();
+  path = sf->query_path();
   if(path.startsWith('&'))
   {
    path = path.mid(1);
@@ -226,7 +226,7 @@ DWB_Instance* DgDb_Database_Instance::get_query_dwb(DH_Type* dht, DH_Subvalue_Fi
   {
    path.replace(index, 5, dht->name());
   }
-  sf.set_checked_query_path(path);
+  sf->set_checked_query_path(path);
  }
  DWB_Instance* result = query_dwbs_.value(path);
  if(!result)
@@ -352,7 +352,7 @@ DgDb_Hypernode* DgDb_Database_Instance::find_hypernode(DH_Type* dht,
  {
  case DH_Subvalue_Field::Write_Mode::Redirect_External:
   {
-   DWB_Instance* dwb = get_query_dwb(dht, *sf);
+   DWB_Instance* dwb = get_query_dwb(dht, sf);
    // //  assume always 2 for now ...
    static u1 rec_column = 2;
    void* qrec = dwb->find_query_record(sf->query_column(), test);
@@ -393,6 +393,116 @@ void DgDb_Database_Instance::init_hypernode_from_shm_block(DgDb_Hypernode* dh, v
 }
 
 
+
+std::function<void(void*, QByteArray&)> DgDb_Database_Instance::get_binary_encoder(DgDb_Hypernode* dh)
+{
+ if(DH_Type* dht = dh->dh_type())
+  return dht->binary_encoder();
+ return nullptr;
+}
+
+
+template<>
+void DgDb_Database_Instance::write_key_value<DH_Subvalue_Field::Write_Mode::In_Block>
+  (DgDb_Hypernode* dh, DH_Subvalue_Field* sf, char* mem)
+{
+ DgDb_Location_Structure dls;
+
+ dls.set_data_options(DgDb_Location_Structure::Data_Options::Shm_Pointer);
+ dls.set_primary_field_id(sf->index(), DgDb_Location_Structure::Field_Id_Options::Structure_Field_Index);
+ dls.set_node_id(dh->id());
+
+ store_node_data(dls, mem);
+}
+
+
+template<>
+void DgDb_Database_Instance::write_key_value<DH_Subvalue_Field::Write_Mode::Redirect_External>
+  (DgDb_Hypernode* dh, DH_Subvalue_Field* sf, char* mem)
+{
+ DgDb_Location_Structure dls;
+
+ dls.set_data_options(DgDb_Location_Structure::Data_Options::Shm_Pointer);
+ dls.set_primary_field_id(sf->index(), DgDb_Location_Structure::Field_Id_Options::Structure_Field_Index);
+ dls.set_node_id(dh->id());
+
+ store_node_data(dls, mem);
+}
+
+
+
+
+void  _acc_conv(char* mem, QDataStream& qds, u4 len)
+{
+ QByteArray qba;
+ switch (len)
+ {
+ case 1: u1 u_1; qds >> u_1; qba = u1_to_qba(u_1); break;
+ case 2: u2 u_2; qds >> u_2; qba = u2_to_qba(u_2); break;
+ case 4: u4 u_4; qds >> u_4; qba = u1_to_qba(u_4); break;
+ case 8: n8 n_8; qds >> n_8; qba = u2_to_qba(n_8); break;
+ }
+ memcpy(mem, qba.data(), len);
+}
+
+void DgDb_Database_Instance::init_hypernode_from_object(DgDb_Hypernode* dh, void* obj,
+  std::function<void(void*, QByteArray&)> cb)
+{
+ QByteArray enc;
+ cb(obj, enc);
+
+ QDataStream qds(enc);
+
+ DH_Type* dht = dh->dh_type();
+
+
+ char* mem = dh->shm_block();
+ if(!mem)
+ {
+  mem = allocate_shm_block(dht, dh->id(), "test=Ok");
+  dh->set_shm_block(mem);
+ }
+
+ QVector<DH_Subvalue_Field*> sfs;
+ dht->get_subvalue_fields_as_vector(sfs);
+
+ u2 c = 0;
+ for(DH_Subvalue_Field* sf : sfs)
+ {
+//  QByteArray temp;
+//  QDataStream qds
+  if(sf)
+  {
+   u4 s = sf->block_offset_start();
+   u4 e = sf->block_offset_end();
+
+   switch (sf->write_mode())
+   {
+    case DH_Subvalue_Field::Write_Mode::In_Block:
+    {
+     _acc_conv(mem + s, qds, e - s + 1);
+
+     write_key_value<DH_Subvalue_Field::Write_Mode::In_Block>(dh, sf, mem + s);
+    }
+    break;
+
+   case DH_Subvalue_Field::Write_Mode::Redirect_External:
+   {
+    QString value;
+    qds >> value;
+    store_subvalue_to_external_wdb_instance(dh, mem + s, sf, value.toLatin1());
+//    _acc_conv(mem + s, qds, e - s + 1);
+    write_key_value<DH_Subvalue_Field::Write_Mode::Redirect_External>(dh, sf, mem + s);
+//    store_node_data(dls, mem + s);
+   }
+   break;
+
+
+   }
+  }
+ }
+}
+
 void DgDb_Database_Instance::init_hypernode_from_shm_block(DgDb_Hypernode* dh,
   const QByteArray& qba, void* rec, void* obj,
   std::function<void(void*, const QByteArray&)> cb)
@@ -424,7 +534,13 @@ void DgDb_Database_Instance::init_hypernode_from_shm_block(DgDb_Hypernode* dh,
     break;
    case DH_Subvalue_Field::Write_Mode::Redirect_External:
     {
-     qds << QString("OK ...");
+     QByteArray value;
+     //QByteArray qba = QByteArray( (char*) pv, 8);
+     DWB_Instance* dwb = get_query_dwb(dh->dh_type(), sf);
+     void* rec = dwb->get_record_from_qba(temp);
+     dwb->get_qba_from_record(rec, sf->query_column(), value);
+
+     qds << QString::fromLatin1(value);
     }
     break;
    }
@@ -514,10 +630,10 @@ void DgDb_Database_Instance::fetch_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Fiel
  case DH_Subvalue_Field::Write_Mode::Redirect_External:
   {
    QByteArray qba = QByteArray( (char*) pv, 8);
-   DWB_Instance* dwb = get_query_dwb(dh->dh_type(), *sf);
+   DWB_Instance* dwb = get_query_dwb(dh->dh_type(), sf);
    void* rec = dwb->get_record_from_qba(qba);
    dwb->get_qba_from_record(rec, sf->query_column(), value);
-   sf->query_column();
+   //sf->query_column();
   }
 
  case DH_Subvalue_Field::Write_Mode::Redirect_In_Record:

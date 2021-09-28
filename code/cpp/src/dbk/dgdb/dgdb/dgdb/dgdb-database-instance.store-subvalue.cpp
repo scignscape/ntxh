@@ -38,6 +38,27 @@ using namespace tkrzw;
 
 
 
+void DgDb_Database_Instance::store_subvalue_to_external_wdb_instance(DgDb_Hypernode* dh,
+ char* mem, DH_Subvalue_Field* sf, const QByteArray& value)
+{
+ DWB_Instance* dwb = get_query_dwb(dh->dh_type(), sf);
+ void* rec = get_wdb_record_from_block(dh->shm_block());
+
+ // //  assume always 2 for now ...
+ static u1 rec_column = 2;
+
+ // //  also assume the query column is the last column (so
+  //    we don't need to allocate more fields than that ...)
+ void* qrec = dwb->new_query_record(blocks_dwb_, rec, rec_column, sf->query_column(),
+   value, sf->query_column() + 1);
+
+ QByteArray enc = dwb->encode_record(qrec);
+ memcpy(mem, enc.data(), enc.size());
+
+}
+
+
+
 template<>
 void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Options::QVariant>
   (DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, const QByteArray& value, QString field_name)
@@ -100,25 +121,23 @@ void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Optio
 
  case DH_Subvalue_Field::Redirect_External:
   {
-   DWB_Instance* dwb = get_query_dwb(dh->dh_type(), *sf);
-   void* rec = get_wdb_record_from_block(dh->shm_block());
+   store_subvalue_to_external_wdb_instance(dh, (char*) mem, sf, value);
+//   DWB_Instance* dwb = get_query_dwb(dh->dh_type(), *sf);
+//   void* rec = get_wdb_record_from_block(dh->shm_block());
 
-   // //  assume always 2 for now ...
-   static u1 rec_column = 2;
+//   // //  assume always 2 for now ...
+//   static u1 rec_column = 2;
 
-   // //  also assume the query column is the last column (so
-    //    we don't need to allocate more fields than that ...)
-   void* qrec = dwb->new_query_record(blocks_dwb_, rec, rec_column, sf->query_column(),
-     value, sf->query_column() + 1);
+//   // //  also assume the query column is the last column (so
+//    //    we don't need to allocate more fields than that ...)
+//   void* qrec = dwb->new_query_record(blocks_dwb_, rec, rec_column, sf->query_column(),
+//     value, sf->query_column() + 1);
 
-   QByteArray enc = dwb->encode_record(qrec);
-   memcpy(mem, enc.data(), enc.size());
+//   QByteArray enc = dwb->encode_record(qrec);
+//   memcpy(mem, enc.data(), enc.size());
 
-//   QString qp = sf->query_path();
-//   if(!qp.isEmpty())
-//   {
-//    DWB_Instance* dwb = get_query_dwb(qp, *sf);
-//   }
+
+
   }
   break;
 

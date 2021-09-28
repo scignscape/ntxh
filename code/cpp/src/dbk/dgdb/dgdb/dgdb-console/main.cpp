@@ -93,7 +93,8 @@ int main(int argc, char *argv[])
    .sf("a_number")[1](10,11)
       ("a_string")[2](12,19)
         .query<QString>("&/q/$type")[5]
-  ->set_default_binary_decoder(&Test_Class::absorb_data)
+  ->set_default_binary_encoder(&Test_Class::supply_data)
+   .set_default_binary_decoder(&Test_Class::absorb_data)
    ;
 
  // (DH::Redirect_In_Record [7]) //(DH_Subvalue_Field::Redirect_In_Record)
@@ -103,9 +104,27 @@ int main(int argc, char *argv[])
 // ddi.store_indexed_field(dh, _interned_field_name(3), u2_to_qba(524),
 //   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
 
- ddi.store(dh, "a_number", u2_to_qba(892));
 
- ddi.store(dh, "a_string", "a-test");
+// ddi.store(dh, "a_number", u2_to_qba(892));
+// ddi.store(dh, "a_string", "a-test");
+
+ Test_Class* tc = new Test_Class;
+ tc->set_a_number(4461);
+ tc->set_a_string("a str");
+
+ ddi.init_hypernode_from_object(dh, tc);
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "a_number", qba, pv);
+
+  u2 test_val = qba_to_u2(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "test_val = " << test_val;
+ }
+
  {
   QByteArray qba;
   void* pv;
@@ -115,16 +134,16 @@ int main(int argc, char *argv[])
   qDebug() << "test_val = " << qba;
  }
 
- {
-  QByteArray qba;
-  void* pv;
+// {
+//  QByteArray qba;
+//  void* pv;
 
-  Test_Class* tc;
-  DgDb_Hypernode* dh1 = ddi.find_hypernode("a_string", "a-test", &tc);
+//  Test_Class* tc;
+//  DgDb_Hypernode* dh1 = ddi.find_hypernode("a_string", "a-test", &tc);
 
-  qDebug() << "dh id = " << dh->id();
-  qDebug() << "dh1 id = " << dh1->id();
- }
+//  qDebug() << "dh id = " << dh->id();
+//  qDebug() << "dh1 id = " << dh1->id();
+// }
 
 
 

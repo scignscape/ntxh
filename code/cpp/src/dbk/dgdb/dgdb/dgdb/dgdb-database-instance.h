@@ -107,7 +107,7 @@ public:
 
  DH_Type* get_type_by_name(QString tn, QString* res = nullptr);
 
- DWB_Instance* get_query_dwb(DH_Type* dht, DH_Subvalue_Field& sf); //query_dwbs_)
+ DWB_Instance* get_query_dwb(DH_Type* dht, DH_Subvalue_Field* sf); //query_dwbs_)
 
  template<typename HYPERNODE_Type>
  DgDb_Hypernode* new_hypernode()
@@ -147,6 +147,22 @@ public:
 //  init_hypernode_from_shm_block(dh, QByteArray(dh->shm_block()))
 // }
 
+ void store_subvalue_to_external_wdb_instance(DgDb_Hypernode* dh,
+   char* mem, DH_Subvalue_Field* sf, const QByteArray& value);
+
+ void init_hypernode_from_object(DgDb_Hypernode* dh, void* obj,
+   std::function<void(void*, QByteArray&)> cb);
+
+
+ template<typename OBJECT_Type>
+ void init_hypernode_from_object(DgDb_Hypernode* dh, OBJECT_Type* obj)
+ {
+  std::function<void(void*, QByteArray&)> cb = get_binary_encoder(dh);// dht->binary_encoder();
+  init_hypernode_from_object(dh, obj, cb);
+  //init_hypernode_from_shm_block(result, rec, obj, cb);
+ }
+
+ std::function<void(void*, QByteArray&)> get_binary_encoder(DgDb_Hypernode* dh);
 
  void store(DgDb_Hypernode* dh, QString field_or_property_name, const QByteArray& value);
 
@@ -259,6 +275,9 @@ public:
  key_t ftok_key(QString which);
 
  DgDb_Hypernode* get_hypernode_from_block_record(DH_Type* dht, void* rec);
+
+ template<DH_Subvalue_Field::Write_Mode WM>
+ void write_key_value(DgDb_Hypernode* dh, DH_Subvalue_Field* sf, char* mem);
 
 };
 
