@@ -21,6 +21,8 @@
 
 #include "dgdb-record-processors.h"
 
+#include "dgdb-data-out-stream.h"
+
 #include "dtb/dtb-package.h"
 
 #include "dgdb-hypernode.h"
@@ -323,14 +325,18 @@ void DgDb_Database_Instance::fetch_subvalue(DgDb_Hypernode* dh, QString field_na
 }
 
 
-DgDb_Hypernode* DgDb_Database_Instance::find_hypernode(DH_Type* dht, QString field_name, QString test)
+DgDb_Hypernode* DgDb_Database_Instance::find_hypernode(DH_Type* dht, QString field_name,
+  QString test, void** rec)
 {
  if(DH_Subvalue_Field* sf = dht->get_subvalue_field_by_field_name(field_name))
-   return find_hypernode(dht, sf, test);
+   return find_hypernode(dht, sf, test, rec);
 }
 
 
-DgDb_Hypernode* DgDb_Database_Instance::find_hypernode(DH_Type* dht, DH_Subvalue_Field* sf, QString test)
+
+
+DgDb_Hypernode* DgDb_Database_Instance::find_hypernode(DH_Type* dht,
+  DH_Subvalue_Field* sf, QString test, void** rec)
 {
 // u2 index = sf->index();
 // DgDb_Location_Structure dls;
@@ -352,14 +358,95 @@ DgDb_Hypernode* DgDb_Database_Instance::find_hypernode(DH_Type* dht, DH_Subvalue
    void* qrec = dwb->find_query_record(sf->query_column(), test);
    if(qrec)
    {
-    void* rec = dwb->get_target_record_from_query_record(blocks_dwb_, qrec, rec_column);
-    if(rec)
-      return get_hypernode_from_block_record(dht, rec);
+    void* result_rec = dwb->get_target_record_from_query_record(blocks_dwb_, qrec, rec_column);
+    if(result_rec)
+    {
+     if(rec)
+       *rec = result_rec;
+     return get_hypernode_from_block_record(dht, result_rec);
+    }
     return nullptr;
    }
    return nullptr;
   }
  }
+}
+
+
+void _acc_conv(const QByteArray& source, QDataStream& target, u4 len)
+{
+ switch (len)
+ {
+ case 1: target << qba_to_u1(source); break;
+ case 2: target << qba_to_u2(source); break;
+ case 4: target << qba_to_u4(source); break;
+ case 8: target << qba_to_n8(source); break;
+ }
+}
+
+
+void DgDb_Database_Instance::init_hypernode_from_shm_block(DgDb_Hypernode* dh, void* rec,
+  void* obj, std::function<void(void*, const QByteArray&)> cb)
+{
+ init_hypernode_from_shm_block(dh, QByteArray(dh->shm_block(), dh->get_shm_block_size()),
+   rec, obj, cb);
+}
+
+
+void DgDb_Database_Instance::init_hypernode_from_shm_block(DgDb_Hypernode* dh,
+  const QByteArray& qba, void* rec, void* obj,
+  std::function<void(void*, const QByteArray&)> cb)
+{
+ DH_Type* dht = dh->dh_type();
+
+ QVector<DH_Subvalue_Field*> sfs;
+ dht->get_subvalue_fields_as_vector(sfs);
+
+ QByteArray enc;
+ QDataStream qds(&enc, QIODevice::WriteOnly);
+
+ u2 c = 0;
+ for(DH_Subvalue_Field* sf : sfs)
+ {
+  QByteArray temp;
+  if(sf)
+  {
+   u4 s = sf->block_offset_start();
+   u4 e = sf->block_offset_end();
+
+   temp = QByteArray(qba.mid(s, e - s + 1));
+   switch (sf->write_mode())
+   {
+    case DH_Subvalue_Field::Write_Mode::In_Block:
+    {
+     _acc_conv(temp, qds, e - s + 1);
+    }
+    break;
+   case DH_Subvalue_Field::Write_Mode::Redirect_External:
+    {
+     qds << QString("OK ...");
+    }
+    break;
+   }
+  }
+  ++c;
+ }
+
+ //std::function<void(void*, const QByteArray&)> cb = dht->binary_decoder();
+ cb(obj, enc);
+
+// QStringList qsl = dht->get_subvalue_field_names();
+// for(QString name : qsl)
+// {
+//  DH_Subvalue_Field* sf = dht->get_subvalue_field_by_field_name(name);
+
+// }
+
+// DgDb_Data_Out_Stream ddo(qba);
+// n8 nn;
+// u4 uu;
+// ddo /8/ nn /4/ uu;
+
 }
 
 
@@ -369,8 +456,32 @@ DgDb_Hypernode* DgDb_Database_Instance::get_hypernode_from_block_record(DH_Type*
  u4 id = blocks_dwb_->fetch_u4_field(rec, dh_id_column);
 
  DgDb_Hypernode* result = active_hypernodes_.value(id);
- if(result)
-   return result;
+ if(!result)
+ {
+  result = new DgDb_Hypernode(id);
+  auto [mem, len] = blocks_dwb_->fetch_blob_field(rec, dht->shm_block_column());
+  result->set_shm_block(mem);
+  //?result->set_shm_block_length(len);
+  result->set_dh_type(dht);
+
+//       QByteArray qba(mem, len);
+//       init_hypernode_from_shm_block(result, qba, rec, );
+
+    // init_hypernode_from_shm_block(result, qba, rec);
+
+  //QByteArray qba(mem, len);
+  //init_hypernode_from_shm_block(result, qba, rec);
+ }
+//  //  temporarily ...
+//  {
+//   auto [mem, len] = blocks_dwb_->fetch_blob_field(rec, dht->shm_block_column());
+//   QByteArray qba(mem, len);
+//   init_hypernode_from_shm_block(result, qba, rec);
+//  }
+
+ return result;
+
+
 }
 
 
@@ -498,10 +609,12 @@ void DgDb_Database_Instance::fetch_indexed_field(DgDb_Hypernode* dh, u2 index,
  value = QByteArray( (char*) pv, 2);
 }
 
+
 DH_Type* DgDb_Database_Instance::get_type_by_name(QString tn, QString* res)
 {
  return type_system_->get_type_by_name(tn, res);
 }
+
 
 DgDb_Hypernode* DgDb_Database_Instance::new_hypernode_(DH_Type* dht)
 {
@@ -510,6 +623,7 @@ DgDb_Hypernode* DgDb_Database_Instance::new_hypernode_(DH_Type* dht)
  active_hypernodes_[result->id()] = result;
  return result;
 }
+
 
 DgDb_Hypernode* DgDb_Database_Instance::new_hypernode()
 {

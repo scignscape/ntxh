@@ -24,21 +24,21 @@ class Qh_Hypernode;
 class Test_Class
 {
  QString a_string_;
- u4 a_number_;
+ u2 a_number_;
 
 public:
 
  Test_Class();
 
  ACCESSORS(QString ,a_string)
- ACCESSORS(u4 ,a_number)
+ ACCESSORS(u2 ,a_number)
 
 // Qh_Hypernode* (*as_hypernode)();
 
 // static void init_pack_code(Qh_Pack_Code& qpc);
 
-// void supply_data(QByteArray& qba);
-// void absorb_data(const QByteArray& qba);
+ void supply_data(QByteArray& qba);
+ void absorb_data(const QByteArray& qba);
 
 // void supply_pack(Qh_Pack_Builder& qpb);
 // void absorb_pack(const Qh_Pack_Reader& qpr);

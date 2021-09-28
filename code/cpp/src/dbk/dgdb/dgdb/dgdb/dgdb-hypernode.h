@@ -31,6 +31,8 @@ class DgDb_Hypernode
 
  char* shm_block_;
 
+ //u4 shm_block_length_;
+
 public:
 
  DgDb_Hypernode(n8 id);
@@ -39,6 +41,9 @@ public:
 
  ACCESSORS(DH_Type* ,dh_type)
  ACCESSORS(char* ,shm_block)
+ //ACCESSORS(
+
+ u4 get_shm_block_size();
 
 
 };

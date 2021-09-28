@@ -98,6 +98,11 @@ u4 DWB_Instance::fetch_u4_field(void* rec, u2 dh_id_column)
  return wg_decode_int(wdb_instance_, wi);
 }
 
+QPair<char*, size_t> DWB_Instance::fetch_blob_field(void* rec, u2 column)
+{
+ wg_int wi = wg_get_field(wdb_instance_, rec, column);
+ return {wg_decode_blob(wdb_instance_, wi), wg_decode_blob_len(wdb_instance_, wi)};
+}
 
 
 void* DWB_Instance::get_record_from_qba(const QByteArray& qba)

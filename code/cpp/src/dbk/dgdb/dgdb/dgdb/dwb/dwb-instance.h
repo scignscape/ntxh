@@ -76,6 +76,7 @@ public:
    u2 target_column, u2 value_column, const QByteArray& value, u2 field_count);
 
  u4 fetch_u4_field(void* rec, u2 dh_id_column);
+ QPair<char*, size_t> fetch_blob_field(void* rec, u2 column);
 
 };
 

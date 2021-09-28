@@ -54,7 +54,7 @@ HEADERS += \
   $$SRC_DIR/types/dh-type-system.h  \
   $$SRC_DIR/types/dh-type-builder.h  \
   $$SRC_DIR/types/dh-subvalue-field.h  \
-
+  $$SRC_DIR/dgdb-data-out-stream.h  \
 
 
 SOURCES += \
@@ -69,6 +69,7 @@ SOURCES += \
   $$SRC_DIR/types/dh-type-system.cpp  \
   $$SRC_DIR/types/dh-type-builder.cpp  \
   $$SRC_DIR/types/dh-subvalue-field.cpp  \
+  $$SRC_DIR/dgdb-data-out-stream.cpp  \
 
 
 

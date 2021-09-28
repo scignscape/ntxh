@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
    .sf("a_number")[1](10,11)
       ("a_string")[2](12,19)
         .query<QString>("&/q/$type")[5]
-   ->set_stash_id(0)
+  ->set_default_binary_decoder(&Test_Class::absorb_data)
    ;
 
  // (DH::Redirect_In_Record [7]) //(DH_Subvalue_Field::Redirect_In_Record)
@@ -102,6 +102,8 @@ int main(int argc, char *argv[])
 
 // ddi.store_indexed_field(dh, _interned_field_name(3), u2_to_qba(524),
 //   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+
+ ddi.store(dh, "a_number", u2_to_qba(892));
 
  ddi.store(dh, "a_string", "a-test");
  {
@@ -117,7 +119,8 @@ int main(int argc, char *argv[])
   QByteArray qba;
   void* pv;
 
-  DgDb_Hypernode* dh1 = ddi.find_hypernode(dh->dh_type(), "a_string", "a-test");
+  Test_Class* tc;
+  DgDb_Hypernode* dh1 = ddi.find_hypernode("a_string", "a-test", &tc);
 
   qDebug() << "dh id = " << dh->id();
   qDebug() << "dh1 id = " << dh1->id();

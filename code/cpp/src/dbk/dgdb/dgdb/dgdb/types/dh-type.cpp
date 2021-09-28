@@ -20,6 +20,26 @@ DH_Type::DH_Type()
 }
 
 
+void DH_Type::get_subvalue_fields_as_vector(QVector<DH_Subvalue_Field*>& sfs)
+{
+ if(subvalue_fields_.isEmpty())
+   return;
+
+ // //  assume QMaps are sorted by keys, so the
+  //    largest is the last one before .end() ...
+ u2 max = (subvalue_fields_.end() - 1).key();
+
+ sfs.resize(max);
+
+ QMapIterator<u2, DH_Subvalue_Field*> it(subvalue_fields_);
+ while(it.hasNext())
+ {
+  it.next();
+  sfs[it.key() - 1] = it.value();
+ }
+}
+
+
 DH_Subvalue_Field* DH_Type::get_subvalue_field_by_field_name(QString field_name)
 {
  u2 ix = subvalue_fields_index_map_.value(field_name);

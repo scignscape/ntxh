@@ -135,6 +135,14 @@ public:
   return get_shm_message_column(shm_block_column_);
  }
 
+ QStringList get_subvalue_field_names()
+ {
+  return subvalue_fields_index_map_.keys();
+ }
+
+ void get_subvalue_fields_as_vector(QVector<DH_Subvalue_Field*>& sfs);
+
+
  void note_field_block_offset(DH_Subvalue_Field* sf, u4 start, u4 end);
  void note_field_index(DH_Subvalue_Field* sf, u2 index);
  void note_field_query_path(DH_Subvalue_Field* sf, QString path, DH_Subvalue_Field::Query_Typecode qtc);

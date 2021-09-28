@@ -9,6 +9,7 @@
 //#include "qh-package/qh-pack-code.h"
 //#include "qh-package/qh-pack-builder.h"
 
+#include <QDebug>
 
 #include <QDataStream>
 
@@ -50,11 +51,18 @@ Test_Class::Test_Class()
 // qds << a_string_ << a_number_;
 //}
 
-//void Test_Class::absorb_data(const QByteArray& qba)
-//{
-// QDataStream qds(qba);
-// qds >> a_string_ >> a_number_;
-//}
+void Test_Class::absorb_data(const QByteArray& qba)
+{
+ QDataStream qds(qba);
+
+// u2 an; QString str;
+// qds >> an;
+// qds >> str;
+
+ qds >> a_number_ >> a_string_;
+ qDebug() << "a string = " << a_string_;
+ qDebug() << "a number = " << a_number_;
+}
 
 
 

@@ -17,7 +17,7 @@
 
 #include "accessors.h"
 
-
+#include "types/dh-type.h"
 
 #include "dgdb-location-structure.h"
 
@@ -118,6 +118,16 @@ public:
   return new_hypernode_(dht);
  }
 
+// template<typename HYPERNODE_Type>
+// DgDb_Hypernode* new_hypernode(HYPERNODE_Type** object)
+// {
+//  QString tn = QString::fromStdString(typeid(HYPERNODE_Type).name());
+//  QString res;
+//  DH_Type* dht = get_type_by_name(tn, &res);
+//  return new_hypernode_(dht);
+// }
+
+
 // {
 //  QString tn = QString::fromStdString(typeid(HYPERNODE_Type).name());
 //  tn = type_system_ type_name_resolutions_.value(tn, tn);
@@ -127,6 +137,16 @@ public:
 
  void init_dtb_package();
  void init_type_system();
+
+ void init_hypernode_from_shm_block(DgDb_Hypernode* dh, const QByteArray& qba, void* rec,
+   void* obj, std::function<void(void*, const QByteArray&)> cb);
+
+ void init_hypernode_from_shm_block(DgDb_Hypernode* dh, void* rec,
+   void* obj, std::function<void(void*, const QByteArray&)> cb);
+// {
+//  init_hypernode_from_shm_block(dh, QByteArray(dh->shm_block()))
+// }
+
 
  void store(DgDb_Hypernode* dh, QString field_or_property_name, const QByteArray& value);
 
@@ -159,9 +179,27 @@ public:
    QByteArray& value, void*& pv);
 
 
- DgDb_Hypernode* find_hypernode(DH_Type* dht, QString field_name, QString test);
- DgDb_Hypernode* find_hypernode(DH_Type* dht, DH_Subvalue_Field* sf, QString test);
+ DgDb_Hypernode* find_hypernode(DH_Type* dht, QString field_name, QString test, void** rec = nullptr);
+ DgDb_Hypernode* find_hypernode(DH_Type* dht, DH_Subvalue_Field* sf, QString test, void** rec = nullptr);
 
+ template<typename OBJECT_Type>
+ DgDb_Hypernode* find_hypernode(QString field_name,
+   QString test, OBJECT_Type** object)
+ {
+  QString tn = QString::fromStdString(typeid(OBJECT_Type).name());
+  QString res;
+  DH_Type* dht = get_type_by_name(tn, &res);
+  void* rec;
+  DgDb_Hypernode* result = find_hypernode(dht, field_name, test, &rec);
+  if(object)
+  {
+   OBJECT_Type* obj = new OBJECT_Type;
+   std::function<void(void*, const QByteArray&)> cb = dht->binary_decoder();
+   init_hypernode_from_shm_block(result, rec, obj, cb);
+   *object  = obj;
+  }
+  return result;
+ }
 
  void fetch_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Field* sf,
    QByteArray& value, void*& pv);
