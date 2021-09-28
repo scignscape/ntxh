@@ -59,6 +59,10 @@ class DgDb_Database_Instance
 
  QMap<u4, DgDb_Hypernode*> active_hypernodes_;
 
+ void* default_get_shm_field_ptr(DgDb_Hypernode& dh,
+   u2 index_code, QString field_name,
+   size_t* size, n8* shm_path_code);
+
 public:
 
  static constexpr s4 _unknown = -1;
@@ -147,8 +151,10 @@ public:
 //  init_hypernode_from_shm_block(dh, QByteArray(dh->shm_block()))
 // }
 
- void store_subvalue_to_external_wdb_instance(DgDb_Hypernode* dh,
-   char* mem, DH_Subvalue_Field* sf, const QByteArray& value);
+ void store_subvalue_to_external_record(DgDb_Hypernode* dh,
+   DH_Subvalue_Field* sf, char* mem, const QByteArray& value);
+
+ void store_subvalue_to_record(DH_Subvalue_Field* sf, char* mem, const QByteArray& value);
 
  void init_hypernode_from_object(DgDb_Hypernode* dh, void* obj,
    std::function<void(void*, QByteArray&)> cb);

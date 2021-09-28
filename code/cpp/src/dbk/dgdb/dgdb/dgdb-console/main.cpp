@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
    .set_shm_block_size(100)
    .sf("a_number")[1](10,11)
       ("a_string")[2](12,19)
-        .query<QString>("&/q/$type")[5]
+         .query<QString>("&/q/$type")[5]
   ->set_default_binary_encoder(&Test_Class::supply_data)
    .set_default_binary_decoder(&Test_Class::absorb_data)
    ;
@@ -183,6 +183,71 @@ int main(int argc, char *argv[])
 
 }
 
+
+
+int main3(int argc, char *argv[])
+{
+ DgDb_Database_Instance ddi(DEFAULT_DEV_DGDB_FOLDER "/t1");
+
+ ddi.init_dtb_package();
+ ddi.init_type_system();
+ ddi.check_construct_files();
+ ddi.check_interns_dbm();
+ ddi.check_nodes_dbm();
+ ddi.read_hypernode_count_status();
+ ddi.read_interns_count_status();
+ ddi.init_dwb_blocks();
+
+ qDebug() << "blocks ftok key: " << ddi.ftok_key("blocks");
+
+ ddi.set_get_shm_field_ptr(_get_shm_field_ptr);
+
+ DH_Type_System* dht = ddi.type_system();
+ dht->REGISTER_TYPE(Test_Class)
+   .set_shm_block_size(100)
+   .sf("a_number")[1](10,11)
+      ("a_string")[2](12,19)(DH_Subvalue_Field::Redirect_In_Record)
+  ->set_default_binary_encoder(&Test_Class::supply_data)
+   .set_default_binary_decoder(&Test_Class::absorb_data)
+   ;
+
+ // (DH::Redirect_In_Record [7]) //(DH_Subvalue_Field::Redirect_In_Record)
+
+ DgDb_Hypernode* dh = ddi.new_hypernode<Test_Class>();
+
+// ddi.store_indexed_field(dh, _interned_field_name(3), u2_to_qba(524),
+//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+
+
+// ddi.store(dh, "a_number", u2_to_qba(892));
+// ddi.store(dh, "a_string", "a-test");
+
+ Test_Class* tc = new Test_Class;
+ tc->set_a_number(4451);
+ tc->set_a_string("a-str");
+
+ ddi.init_hypernode_from_object(dh, tc);
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "a_number", qba, pv);
+
+  u2 test_val = qba_to_u2(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "test_val = " << test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "a_string", qba, pv);
+
+  qDebug() << "test_val = " << qba;
+ }
+}
 
 //int main5(int argc, char *argv[])
 //{

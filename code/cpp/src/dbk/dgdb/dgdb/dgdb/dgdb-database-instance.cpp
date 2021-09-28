@@ -402,9 +402,10 @@ std::function<void(void*, QByteArray&)> DgDb_Database_Instance::get_binary_encod
 }
 
 
-template<>
-void DgDb_Database_Instance::write_key_value<DH_Subvalue_Field::Write_Mode::In_Block>
-  (DgDb_Hypernode* dh, DH_Subvalue_Field* sf, char* mem)
+// //   currently there is no difference between
+ //     the different write_mode implementations
+ //     so we can use one procedure for all three ...
+void _write_key_value(DgDb_Database_Instance& _this, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, char* mem)
 {
  DgDb_Location_Structure dls;
 
@@ -412,7 +413,16 @@ void DgDb_Database_Instance::write_key_value<DH_Subvalue_Field::Write_Mode::In_B
  dls.set_primary_field_id(sf->index(), DgDb_Location_Structure::Field_Id_Options::Structure_Field_Index);
  dls.set_node_id(dh->id());
 
- store_node_data(dls, mem);
+ _this.store_node_data(dls, mem);
+
+}
+
+
+template<>
+void DgDb_Database_Instance::write_key_value<DH_Subvalue_Field::Write_Mode::In_Block>
+  (DgDb_Hypernode* dh, DH_Subvalue_Field* sf, char* mem)
+{
+ _write_key_value(*this, dh, sf, mem);
 }
 
 
@@ -420,16 +430,16 @@ template<>
 void DgDb_Database_Instance::write_key_value<DH_Subvalue_Field::Write_Mode::Redirect_External>
   (DgDb_Hypernode* dh, DH_Subvalue_Field* sf, char* mem)
 {
- DgDb_Location_Structure dls;
-
- dls.set_data_options(DgDb_Location_Structure::Data_Options::Shm_Pointer);
- dls.set_primary_field_id(sf->index(), DgDb_Location_Structure::Field_Id_Options::Structure_Field_Index);
- dls.set_node_id(dh->id());
-
- store_node_data(dls, mem);
+ _write_key_value(*this, dh, sf, mem);
 }
 
 
+template<>
+void DgDb_Database_Instance::write_key_value<DH_Subvalue_Field::Write_Mode::Redirect_In_Record>
+  (DgDb_Hypernode* dh, DH_Subvalue_Field* sf, char* mem)
+{
+ _write_key_value(*this, dh, sf, mem);
+}
 
 
 void  _acc_conv(char* mem, QDataStream& qds, u4 len)
@@ -490,12 +500,24 @@ void DgDb_Database_Instance::init_hypernode_from_object(DgDb_Hypernode* dh, void
    {
     QString value;
     qds >> value;
-    store_subvalue_to_external_wdb_instance(dh, mem + s, sf, value.toLatin1());
+    store_subvalue_to_external_record(dh, sf, mem + s, value.toLatin1());
 //    _acc_conv(mem + s, qds, e - s + 1);
     write_key_value<DH_Subvalue_Field::Write_Mode::Redirect_External>(dh, sf, mem + s);
 //    store_node_data(dls, mem + s);
    }
    break;
+
+   case DH_Subvalue_Field::Write_Mode::Redirect_In_Record:
+   {
+    QString value;
+    qds >> value;
+    store_subvalue_to_record(sf, mem + s, value.toLatin1());
+//    _acc_conv(mem + s, qds, e - s + 1);
+    write_key_value<DH_Subvalue_Field::Write_Mode::Redirect_In_Record>(dh, sf, mem + s);
+//    store_node_data(dls, mem + s);
+   }
+   break;
+
 
 
    }
@@ -596,8 +618,6 @@ DgDb_Hypernode* DgDb_Database_Instance::get_hypernode_from_block_record(DH_Type*
 //  }
 
  return result;
-
-
 }
 
 

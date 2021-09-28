@@ -38,8 +38,8 @@ using namespace tkrzw;
 
 
 
-void DgDb_Database_Instance::store_subvalue_to_external_wdb_instance(DgDb_Hypernode* dh,
- char* mem, DH_Subvalue_Field* sf, const QByteArray& value)
+void DgDb_Database_Instance::store_subvalue_to_external_record(DgDb_Hypernode* dh,
+  DH_Subvalue_Field* sf, char* mem, const QByteArray& value)
 {
  DWB_Instance* dwb = get_query_dwb(dh->dh_type(), sf);
  void* rec = get_wdb_record_from_block(dh->shm_block());
@@ -57,6 +57,15 @@ void DgDb_Database_Instance::store_subvalue_to_external_wdb_instance(DgDb_Hypern
 
 }
 
+
+void DgDb_Database_Instance::store_subvalue_to_record(DH_Subvalue_Field* sf, char* mem, const QByteArray& value)
+{
+ u2 spl = sf->block_offset_record_column_split();
+
+ u2 adj = blocks_dwb_->write_rec_field_via_split((char*)mem, spl, value);
+ QByteArray qba = u2_to_qba(adj? adj : spl);
+ memcpy(mem, qba.data(), qba.size());
+}
 
 
 template<>
@@ -108,20 +117,14 @@ void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Optio
 
  case DH_Subvalue_Field::Redirect_In_Record:
   {
-//   u4 sfo = sf->block_offset_start();
-//   u2 sri = sf->record_column_index();
-   u2 spl = sf->block_offset_record_column_split();
-
-   u2 adj = blocks_dwb_->write_rec_field_via_split((char*)mem, spl, value);
-   QByteArray qba = u2_to_qba(adj? adj : spl);
-   memcpy(mem, qba.data(), qba.size());
+   store_subvalue_to_record(sf, (char*) mem, value);
 
   }
   break;
 
  case DH_Subvalue_Field::Redirect_External:
   {
-   store_subvalue_to_external_wdb_instance(dh, (char*) mem, sf, value);
+   store_subvalue_to_external_record(dh, sf, (char*) mem, value);
 //   DWB_Instance* dwb = get_query_dwb(dh->dh_type(), *sf);
 //   void* rec = get_wdb_record_from_block(dh->shm_block());
 
