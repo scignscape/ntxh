@@ -55,6 +55,10 @@ HEADERS += \
   $$SRC_DIR/types/dh-type-builder.h  \
   $$SRC_DIR/types/dh-subvalue-field.h  \
   $$SRC_DIR/dgdb-data-out-stream.h  \
+  $$SRC_DIR/dh-stage-value.h  \
+  $$SRC_DIR/types/stage/dh-stage-queue.h  \
+  $$SRC_DIR/types/stage/dh-stage-code.h  \
+
 
 
 SOURCES += \
@@ -70,6 +74,12 @@ SOURCES += \
   $$SRC_DIR/types/dh-type-builder.cpp  \
   $$SRC_DIR/types/dh-subvalue-field.cpp  \
   $$SRC_DIR/dgdb-data-out-stream.cpp  \
+  $$SRC_DIR/dh-stage-value.cpp  \
+  $$SRC_DIR/types/stage/dh-stage-queue.cpp  \
+  $$SRC_DIR/types/stage/dh-stage-code.cpp  \
+  $$SRC_DIR/types/stage/dh-stage-value.to-qba.cpp  \
+
+
 
 
 

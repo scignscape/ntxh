@@ -8,6 +8,7 @@
 #include "dwb-instance.h"
 
 #include "types/dh-subvalue-field.h"
+#include "dh-stage-value.h"
 
 #include "conversions.h"
 
@@ -66,6 +67,148 @@ void* DWB_Instance::get_record_from_block(char* block)
  memcpy(&enc, block, sizeof (wg_int));
  return wg_decode_record(wdb_instance_, enc);
 }
+
+
+
+wg_int _wg_encode_query_param(void* wh, DH_Stage_Value& sv)
+{
+ u1 et = 0;
+ u1 ec = sv.get_prelim_encoding_code();
+ switch(ec)
+ {
+ case 0:  // same as char ...
+  et = WG_CHARTYPE; break;
+ case 1:  // uint; same as int in this context ...
+  et = WG_INTTYPE; break;
+ case 2:  // qstring
+  return 0; // what here? et = sv.get_dw_encoding_type();
+
+ default:
+  et = sv.get_wg_encoding_type();
+ }
+
+ switch(et)
+ {
+ case WG_NULLTYPE:
+  {
+   wg_int wi = wg_encode_query_param_null(wh, nullptr);
+   return wi;
+  }
+  break;
+
+ case WG_RECORDTYPE:
+  {
+   wg_int wi = wg_encode_query_param_record(wh, (void*) sv.data());
+   return wi;
+  }
+  break;
+
+ case WG_INTTYPE:
+  {
+   wg_int wi = wg_encode_query_param_int(wh, sv.data());
+   return wi;
+  }
+  break;
+
+ case WG_DOUBLETYPE:
+  {
+   double* dbl = (double*) sv.data();
+   wg_int wi = wg_encode_query_param_double(wh, *dbl);
+   sv.cleanup<double>();
+   return wi;
+  }
+  break;
+
+ case WG_STRTYPE:
+  {
+   char* cs = (char*) sv.data();
+   wg_int wi = wg_encode_query_param_str(wh, cs, nullptr);
+   //?sv.cleanup();
+   return wi;
+  }
+  break;
+
+ case WG_XMLLITERALTYPE:
+  {
+   // // not implemented
+   return 0;
+  }
+  break;
+
+ case WG_URITYPE:
+  {
+   // // currently not implemented
+   return 0;
+  }
+  break;
+
+ case WG_BLOBTYPE:
+  {
+   // // not implemented
+   return 0;
+  }
+  break;
+
+ case WG_CHARTYPE:
+  {
+   wg_int wi = wg_encode_char(wh, sv.data());
+   return wi;
+  }
+  break;
+
+ case WG_FIXPOINTTYPE:
+  {
+   u4 rgt = sv.data() & 0xFFFFFFFF;
+   u4 lft = sv.data() >> 32;
+   double dbl = rgt + (lft/10000);
+   wg_int wi = wg_encode_query_param_double(wh, dbl);
+   return wi;
+  }
+  break;
+
+ case WG_DATETYPE:
+  {
+   QDate qd = QDate::fromJulianDay(sv.data());
+   int wdate = wg_ymd_to_date(wh, qd.year(), qd.month(), qd.day());
+   wg_int wi = wg_encode_query_param_date(wh, wdate);
+   return wi;
+  }
+  break;
+
+ case WG_TIMETYPE:
+  {
+   // // data is msecsSinceStartOfDay();
+    //   WhiteDB uses 100ths of a second ...
+   wg_int wi = wg_encode_query_param_time(wh, sv.data() / 10);
+   return wi;
+  }
+  break;
+ default:
+   break;
+ }
+
+ return 0;
+}
+
+void* DWB_Instance::find_query_record(u2 query_column, DH_Stage_Value& sv)
+{
+ wg_query_arg arglist[1];
+ arglist[0].column = query_column;
+ arglist[0].cond = WG_COND_EQUAL;
+ arglist[0].value = _wg_encode_query_param(wdb_instance_, sv);
+
+ wg_query* wq = wg_make_query(wdb_instance_, nullptr, 0,
+   arglist, 1);
+
+ void* result = wg_fetch(wdb_instance_, wq);
+
+ wg_free_query(wdb_instance_, wq);
+ wg_free_query_param(wdb_instance_, arglist[0].value);
+
+ return result;
+}
+// u2 rec_column,
+
 
 void* DWB_Instance::find_query_record(u2 query_column, QString test)
 {
@@ -221,18 +364,186 @@ QByteArray DWB_Instance::encode_record(void* rec)
  return n8_to_qba(enc);
 }
 
+
+
+// // helper function for the method following it ...
+wg_int _rec_encode(void* wh, DH_Stage_Value& sv)
+{
+ u1 et = sv.get_wg_encoding_type();
+ switch(et)
+ {
+ case WG_NULLTYPE:
+  {
+   wg_int wi = wg_encode_null(wh, nullptr);
+   return wi;
+  }
+  break;
+
+ case WG_RECORDTYPE:
+  {
+   wg_int wi = wg_encode_record(wh, (void*) sv.data());
+   return wi;
+  }
+  break;
+
+ case WG_INTTYPE:
+  {
+   wg_int wi = wg_encode_int(wh, sv.data());
+   return wi;
+  }
+  break;
+
+ case WG_DOUBLETYPE:
+  {
+   double* dbl = (double*) sv.data();
+   wg_int wi = wg_encode_double(wh, *dbl);
+   sv.cleanup<double>();
+   return wi;
+  }
+  break;
+
+ case WG_STRTYPE:
+  {
+   char* cs = (char*) sv.data();
+   wg_int wi = wg_encode_str(wh, cs, nullptr);
+   //?sv.cleanup<double>();
+   return wi;
+  }
+  break;
+
+ case WG_XMLLITERALTYPE:
+  {
+   char* lit, *xsdt;
+   QByteArray qba1, qba2; // //  prevents the toUtf8 temporaries
+     // from going out of scope too soon ...
+
+   if(sv.check_data_has_type())
+   {
+    QPair<n8, QStringList*>* pr = (QPair<n8, QStringList*>*) sv.data();
+    if(pr->first)
+      break; // //  TODO: special types
+    if(pr->second->isEmpty())
+      break; // //  something's wrong ...
+    qba1 = pr->second->first().toUtf8();
+    lit = qba1.data();
+    if(pr->second->size() > 1)
+    {
+     qba2 = pr->second->at(1).toUtf8();
+     xsdt = qba2.data();
+    }
+    else
+      xsdt = nullptr;
+   }
+   else
+   {
+    lit = (char*) sv.data();
+    xsdt = nullptr;
+   }
+   wg_int wi = wg_encode_xmlliteral(wh, lit, xsdt);
+   //?sv.cleanup();
+   return wi;
+  }
+  break;
+
+ case WG_URITYPE:
+  {
+   char* uri, *prefix;
+   QByteArray qba1, qba2; // //  prevents the toUtf8 temporaries
+     // from going out of scope too soon ...
+
+   if(sv.check_data_has_type())
+   {
+    QPair<n8, QStringList*>* pr = (QPair<n8, QStringList*>*) sv.data();
+    if(pr->first)
+      break; // //  TODO: special types
+    if(pr->second->isEmpty())
+      break; // //  something's wrong ...
+    qba1 = pr->second->first().toLatin1();
+    uri = qba1.data();
+    if(pr->second->size() > 1)
+    {
+     qba2 = pr->second->at(1).toUtf8();
+     prefix = qba2.data();
+    }
+    else
+      prefix = nullptr;
+   }
+   else
+   {
+    uri = (char*) sv.data();
+    prefix = nullptr;
+   }
+   wg_int wi = wg_encode_uri(wh, uri, prefix);
+   //?sv.cleanup();
+   return wi;
+  }
+  break;
+
+ case WG_BLOBTYPE:
+  {
+   QPair<u4, char*>* pr = (QPair<u4, char*>*) sv.data();
+   wg_int wi = wg_encode_blob(wh, pr->second, nullptr, pr->first);
+   //?sv.cleanup();
+   return wi;
+  }
+  break;
+
+ case WG_CHARTYPE:
+  {
+   wg_int wi = wg_encode_char(wh, sv.data());
+   return wi;
+  }
+  break;
+
+ case WG_FIXPOINTTYPE:
+  {
+   u4 rgt = sv.data() & 0xFFFFFFFF;
+   u4 lft = sv.data() >> 32;
+   double dbl = rgt + (lft/10000);
+   wg_int wi = wg_encode_double(wh, dbl);
+   return wi;
+  }
+  break;
+
+ case WG_DATETYPE:
+  {
+   QDate qd = QDate::fromJulianDay(sv.data());
+   int wdate = wg_ymd_to_date(wh, qd.year(), qd.month(), qd.day());
+   wg_int wi = wg_encode_date(wh, wdate);
+   return wi;
+  }
+  break;
+
+ case WG_TIMETYPE:
+  {
+   // // data is msecsSinceStartOfDay();
+    //   WhiteDB uses 100ths of a second ...
+   wg_int wi = wg_encode_time(wh, sv.data() / 10);
+   return wi;
+  }
+  break;
+ default:
+   break;
+ }
+}
+
+
 void* DWB_Instance::new_query_record(DWB_Instance* origin_dwb,
   void* target_record, u2 target_column,
-  u2 value_column, const QByteArray& value, u2 field_count)
+  u2 value_column, DH_Stage_Value& sv, u2 field_count)
 {
  void* result = wg_create_record(wdb_instance_, field_count);
 
  wg_int origin_rec = wg_encode_record(origin_dwb->wdb_instance_, target_record);
 
- wg_set_field(wdb_instance_, result, target_column, origin_rec);
+ wg_int wi = _rec_encode(wdb_instance_, sv);
 
- wg_set_field(wdb_instance_, result, value_column,
-   wg_encode_str(wdb_instance_, (char*) value.data(), NULL));
+ wg_set_field(wdb_instance_, result, value_column, wi);
+
+// wg_set_field(wdb_instance_, result, value_column,
+//   wg_encode_str(wdb_instance_, (char*) value.data(), NULL));
+
+ wg_set_field(wdb_instance_, result, target_column, origin_rec);
 
  return result;
 
@@ -240,12 +551,12 @@ void* DWB_Instance::new_query_record(DWB_Instance* origin_dwb,
 
 
 
-u2 DWB_Instance::write_rec_field_via_split(char* ptr, u2 spl, const QByteArray& text)
+u2 DWB_Instance::write_rec_field_via_split(char* ptr, u2 spl, DH_Stage_Value& sv) //const QByteArray& text)
 {
  auto [rec, column_adj] = get_record_via_split(ptr, spl);
  auto [column, adj] = column_adj;
 
- wg_set_str_field(wdb_instance_, rec, column, (char*) text.data());
+ //?wg_set_str_field(wdb_instance_, rec, column, (char*) text.data());
  return adj;
 }
 

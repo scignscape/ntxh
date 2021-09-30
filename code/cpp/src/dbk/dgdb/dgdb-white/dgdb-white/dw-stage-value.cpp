@@ -353,13 +353,13 @@ DW_Stage_Value& DW_Stage_Value::note_byte_length(u1 len)
 
 DW_Stage_Value& DW_Stage_Value::note_no_delete()
 {
- info_ |= 16;
+ info_ |= 4;
  return *this;
 }
 
 DW_Stage_Value& DW_Stage_Value::clear_no_delete()
 {
- info_ &= (255 - 16);
+ info_ &= (255 - 4);
  return *this;
 }
 

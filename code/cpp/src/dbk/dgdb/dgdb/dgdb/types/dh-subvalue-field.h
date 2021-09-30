@@ -20,28 +20,11 @@
 
 #include "kans.h"
 
+#include "stage/dh-stage-code.h"
 
  //?KANS_(DgDb)
 
 class DH_Type;
-
-#define _TYPECODE_QUERY_MACROS(x) \
- x(N_A ,void*) \
- x(qstr ,QString) \
- x(qvar ,QVariant) \
- x(WG_INTTYPE ,int) \
- x(WG_DOUBLETYPE ,double) \
- x(WG_STRTYPE ,std::string) \
- x(WG_XMLLITERALTYPE ,QDomEntity) \
- x(WG_URITYPE ,QUrl) \
- x(WG_BLOBTYPE ,QByteArray) \
- x(WG_CHARTYPE ,char) \
- x(WG_FIXPOINTTYPE ,float) \
- x(WG_DATETYPE ,QDate) \
- x(WG_TIMETYPE ,QDateTime) \
- x(Generic ,n8) \
-
-
 
 
 class DH_Subvalue_Field
@@ -50,21 +33,19 @@ class DH_Subvalue_Field
 
 public:
 
- enum class Query_Typecode {
-#define TEMP_MACRO(x ,y) \
-  qtc_##x,
-  _TYPECODE_QUERY_MACROS(TEMP_MACRO)
-#undef TEMP_MACRO
- };
 
- template<typename T>
- static inline Query_Typecode get_qtc_code()
+ inline DH_Stage_Code::Query_Typecode get_qtc_code()
  {
-  return Query_Typecode::qtc_N_A;
+  return stage_code_.get_qtc_code();
  }
 
 
- enum Write_Mode{
+ enum class Stage_Profiles {
+   Signed_Number, QString_Latin1,
+   QString_Local, QString_Unicode
+ };
+
+ enum Write_Mode {
   In_Block,
   Redirect_In_Block,
   Redirect_In_Record,
@@ -96,7 +77,9 @@ private:
  QString query_path_;
  QString checked_query_path_;
 
- Query_Typecode query_typecode_;
+ DH_Stage_Code stage_code_;
+ Stage_Profiles stage_profile_;
+
  u2 query_column_;
 
 public:
@@ -108,6 +91,8 @@ public:
 
  ACCESSORS(QString ,field_name)
 
+ ACCESSORS(Stage_Profiles ,stage_profile)
+
  ACCESSORS(u4 ,block_offset_start)
  ACCESSORS(u4 ,block_offset_end)
 
@@ -115,18 +100,20 @@ public:
  ACCESSORS(u2 ,record_column_index)
 
  ACCESSORS(QString ,query_path)
- ACCESSORS(Query_Typecode ,query_typecode)
+ ACCESSORS(DH_Stage_Code ,stage_code)
  ACCESSORS(u2 ,query_column)
  ACCESSORS(QString ,checked_query_path)
 
  u2 block_offset_record_column_split();
  void check_write_mode();
 
- void note_query_info(QString path, Query_Typecode qtc)
+ u1 construct_stage_code();
+
+ void note_query_info(QString path, DH_Stage_Code::Query_Typecode qtc)
  {
   set_query_path(path);
   check_write_mode();
-  set_query_typecode(qtc);
+  stage_code_.note_qtc_code(qtc);
  }
 
 };
@@ -161,17 +148,6 @@ struct DH
  static constexpr Redirect_In_Record_intermediary Redirect_In_Record = {};
 
 };
-
-
-#define TEMP_MACRO(x ,y) \
-template<> \
-inline DH_Subvalue_Field::Query_Typecode DH_Subvalue_Field::get_qtc_code<y>() \
-{ \
- return Query_Typecode::qtc_##x; \
-} \
-
-_TYPECODE_QUERY_MACROS(TEMP_MACRO)
-#undef TEMP_MACRO
 
  //?_KANS(DgDb)
 

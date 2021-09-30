@@ -145,23 +145,26 @@ public:
 
  void note_field_block_offset(DH_Subvalue_Field* sf, u4 start, u4 end);
  void note_field_index(DH_Subvalue_Field* sf, u2 index);
- void note_field_query_path(DH_Subvalue_Field* sf, QString path, DH_Subvalue_Field::Query_Typecode qtc);
+ void note_field_query_path(DH_Subvalue_Field* sf, QString path, DH_Stage_Code::Query_Typecode qtc);
  void note_field_query_column(DH_Subvalue_Field* sf, u2 qyc);
 
  DH_Subvalue_Field* note_field_block_offset(QString field_name, u4 start, u4 end);
  DH_Subvalue_Field* note_field_index(QString field_name, u2 index);
- DH_Subvalue_Field* note_field_query_path(QString field_name, QString path, DH_Subvalue_Field::Query_Typecode qtc);
+ DH_Subvalue_Field* note_field_query_path(QString field_name, QString path, DH_Stage_Code::Query_Typecode qtc);
 
  void note_record_column_index(DH_Subvalue_Field* sf, u2 rci);
 
 
 //? DH_Subvalue_Field* check_note_field_name(QString field_name);
 
+ void note_field_signed(DH_Subvalue_Field* sf);
+
  void note_write_mode(DH_Subvalue_Field* sf, DH_Subvalue_Field::Write_Mode wm);
  DH_Subvalue_Field* note_write_mode(QString field_name, DH_Subvalue_Field::Write_Mode wm);
 
  DH_Subvalue_Field::Write_Mode get_write_mode(QString field_name);
  DH_Subvalue_Field* get_subvalue_field_by_field_name(QString field_name);
+ DH_Subvalue_Field* get_subvalue_field_by_index(u2 ix);
 
  u2 get_max_declared_field_column();
  u2 get_internal_field_column_requirements();
@@ -181,6 +184,12 @@ public:
      _this.note_field_block_offset(field, start, end);
    else
      field = _this.note_field_block_offset(field_name, start, end);
+   return *this;
+  }
+  Note_Field_intermediary& si(u4 start, u4 end)
+  {
+   operator()(start, end);
+   _this.note_field_signed(field);
    return *this;
   }
   Note_Field_intermediary& operator()(DH_Subvalue_Field::Write_Mode wm)
@@ -238,9 +247,9 @@ public:
   Note_Field_Query_intermediary<T> query(QString path)
   {
    if(field)
-     _this.note_field_query_path(field, path, DH_Subvalue_Field::get_qtc_code<T>());
+     _this.note_field_query_path(field, path, DH_Stage_Code::get_qtc_code<T>());
    else
-     field = _this.note_field_query_path(field_name, path, DH_Subvalue_Field::get_qtc_code<T>());
+     field = _this.note_field_query_path(field_name, path, DH_Stage_Code::get_qtc_code<T>());
    return {*this};
   }
  };

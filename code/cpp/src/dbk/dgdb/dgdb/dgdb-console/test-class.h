@@ -24,14 +24,16 @@ class Qh_Hypernode;
 class Test_Class
 {
  QString a_string_;
- u2 a_number_;
+ s2 a_sign_;
+ u4 a_number_;
 
 public:
 
  Test_Class();
 
  ACCESSORS(QString ,a_string)
- ACCESSORS(u2 ,a_number)
+ ACCESSORS(s2 ,a_sign)
+ ACCESSORS(u4 ,a_number)
 
 // Qh_Hypernode* (*as_hypernode)();
 

@@ -7,6 +7,8 @@
 
 #include "dh-subvalue-field.h"
 
+#include "stage/dh-stage-code.h"
+
 
 DH_Subvalue_Field::DH_Subvalue_Field(QString field_name)
   :  field_name_(field_name), write_mode_(In_Block), block_offset_start_(0),
@@ -32,5 +34,10 @@ u2 DH_Subvalue_Field::block_offset_record_column_split()
  u2 result = (u2) block_offset_start_ << 6;
  result |= ( (u1)record_column_index_ & 0b00111111 );
  return result;
+}
+
+u1 DH_Subvalue_Field::construct_stage_code()
+{
+ DH_Stage_Code result;
 }
 

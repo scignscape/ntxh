@@ -22,6 +22,10 @@ using namespace _class_DgDb_Location_Structure;
 
 #include "dgdb/dgdb-database-instance.h"
 
+#include "dgdb/types/stage/dh-stage-code.h"
+#include "dgdb/dh-stage-value.h"
+
+
 #include "dgdb/dgdb-hypernode.h"
 
 #include "dgdb/conversions.h"
@@ -69,7 +73,6 @@ void* _get_shm_field_ptr(DgDb_Database_Instance& ddi,
  return block + offset;
 }
 
-
 int main(int argc, char *argv[])
 {
  DgDb_Database_Instance ddi(DEFAULT_DEV_DGDB_FOLDER "/t1");
@@ -85,14 +88,183 @@ int main(int argc, char *argv[])
 
  qDebug() << "blocks ftok key: " << ddi.ftok_key("blocks");
 
- ddi.set_get_shm_field_ptr(_get_shm_field_ptr);
+ //ddi.set_get_shm_field_ptr(_get_shm_field_ptr);
+
+ DH_Type_System* dhts = ddi.type_system();
+ dhts->REGISTER_TYPE(Test_Class)
+   .set_shm_block_size(100)
+   .sf("a_sign")[1].si(10,11)
+      ("a_string")[2](12,19)
+         .query<QString>("&/q/$type")[5]
+      ("a_number")[3](20,21)
+         .query<int>("&/q/$type")[6]
+  ->set_default_binary_encoder(&Test_Class::supply_data)
+   .set_default_binary_decoder(&Test_Class::absorb_data)
+   ;
+
+ DH_Type* dht = dhts->get_type_by_name("Test_Class");
+ DH_Stage_Code sc = ddi.get_stage_code(dht, "a_string");
+
+ DgDb_Hypernode* dh = ddi.new_hypernode<Test_Class>();
+
+// ddi.store_indexed_field(dh, _interned_field_name(3), u2_to_qba(524),
+//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+
+// Test_Class* tc = new Test_Class;
+// tc->set_a_number(991);
+// tc->set_a_string("a str");
+// tc->set_a_sign(-265);
+
+ ddi.store(dh, "a_number", u4_to_qba(991));
+
+ ddi.store(dh, "a_string", "a-test");
+
+// ddi.store_indexed_field(dh, _structure_field_index(2), "a-test",
+//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+
+ ddi.store(dh, "a_sign", s2_to_qba(-256));
+// DgDb_Hypernode* dh1 = ddi.find_hypernode(dht, "a_string", "a-test");
+
+// Test_Class* tc;
+
+ DH_Stage_Value sv;
+ sv.set_str_data("a-test");
+
+ DgDb_Hypernode* dh1 = ddi.find_hypernode(dht, "a_string", sv);
+
+ qDebug() << "dh id = " << dh->id();
+ qDebug() << "dh1 id = " << dh1->id();
+
+
+
+ // ddi.init_hypernode_from_object(dh, tc);
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh1, "a_number", qba, pv);
+
+  u4 test_val = qba_to_u4(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "test_val = " << test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh1, "a_sign", qba, pv);
+
+  s2 test_val = qba_to_s2(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "test_val = " << test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh1, "a_string", qba, pv);
+
+  qDebug() << "test_val = " << qba;
+ }
+}
+
+int main6(int argc, char *argv[])
+{
+ DgDb_Database_Instance ddi(DEFAULT_DEV_DGDB_FOLDER "/t1");
+
+ ddi.init_dtb_package();
+ ddi.init_type_system();
+ ddi.check_construct_files();
+ ddi.check_interns_dbm();
+ ddi.check_nodes_dbm();
+ ddi.read_hypernode_count_status();
+ ddi.read_interns_count_status();
+ ddi.init_dwb_blocks();
+
+ qDebug() << "blocks ftok key: " << ddi.ftok_key("blocks");
+
+ //ddi.set_get_shm_field_ptr(_get_shm_field_ptr);
+
+ DH_Type_System* dhts = ddi.type_system();
+ dhts->REGISTER_TYPE(Test_Class)
+   .set_shm_block_size(100)
+   .sf("a_sign")[1].si(10,11)
+      ("a_string")[2](12,19)
+         .query<QString>("&/q/$type")[5]
+      ("a_number")[3](20,23)
+  ->set_default_binary_encoder(&Test_Class::supply_data)
+   .set_default_binary_decoder(&Test_Class::absorb_data)
+   ;
+
+ // (DH::Redirect_In_Record [7]) //(DH_Subvalue_Field::Redirect_In_Record)
+
+ DH_Type* dht = dhts->get_type_by_name("Test_Class");
+ DH_Stage_Code sc1 = ddi.get_stage_code(dht, "a_number");
+
+
+#ifdef HIDE
+
+ DgDb_Hypernode* dh = ddi.new_hypernode<Test_Class>();
+
+ ddi.store_indexed_field(dh, _interned_field_name(3), u2_to_qba(524),
+   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+
+
+// ddi.store(dh, "a_number", u2_to_qba(892));
+// ddi.store(dh, "a_string", "a-test");
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "a_number", qba, pv);
+
+  u2 test_val = qba_to_u2(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "test_val = " << test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "a_string", qba, pv);
+
+  qDebug() << "test_val = " << qba;
+ }
+#endif
+}
+
+
+int main8(int argc, char *argv[])
+{
+ DgDb_Database_Instance ddi(DEFAULT_DEV_DGDB_FOLDER "/t1");
+
+ ddi.init_dtb_package();
+ ddi.init_type_system();
+ ddi.check_construct_files();
+ ddi.check_interns_dbm();
+ ddi.check_nodes_dbm();
+ ddi.read_hypernode_count_status();
+ ddi.read_interns_count_status();
+ ddi.init_dwb_blocks();
+
+ qDebug() << "blocks ftok key: " << ddi.ftok_key("blocks");
+
+ //ddi.set_get_shm_field_ptr(_get_shm_field_ptr);
 
  DH_Type_System* dht = ddi.type_system();
  dht->REGISTER_TYPE(Test_Class)
    .set_shm_block_size(100)
-   .sf("a_number")[1](10,11)
+   .sf("a_sign")[1].si(10,11)
       ("a_string")[2](12,19)
          .query<QString>("&/q/$type")[5]
+      ("a_number")[3](20,23)
   ->set_default_binary_encoder(&Test_Class::supply_data)
    .set_default_binary_decoder(&Test_Class::absorb_data)
    ;
@@ -109,8 +281,9 @@ int main(int argc, char *argv[])
 // ddi.store(dh, "a_string", "a-test");
 
  Test_Class* tc = new Test_Class;
- tc->set_a_number(4461);
+ tc->set_a_number(1);
  tc->set_a_string("a str");
+ tc->set_a_sign(-265);
 
  ddi.init_hypernode_from_object(dh, tc);
  {
@@ -119,7 +292,19 @@ int main(int argc, char *argv[])
 
   ddi.fetch_subvalue(dh, "a_number", qba, pv);
 
-  u2 test_val = qba_to_u2(qba);
+  u4 test_val = qba_to_u4(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "test_val = " << test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "a_sign", qba, pv);
+
+  s2 test_val = qba_to_s2(qba);
   //test = qToBigEndian(test);
 
   qDebug() << "test_val = " << test_val;
@@ -200,7 +385,7 @@ int main3(int argc, char *argv[])
 
  qDebug() << "blocks ftok key: " << ddi.ftok_key("blocks");
 
- ddi.set_get_shm_field_ptr(_get_shm_field_ptr);
+ //ddi.set_get_shm_field_ptr(_get_shm_field_ptr);
 
  DH_Type_System* dht = ddi.type_system();
  dht->REGISTER_TYPE(Test_Class)

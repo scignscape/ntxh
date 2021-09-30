@@ -39,6 +39,10 @@ void DH_Type::get_subvalue_fields_as_vector(QVector<DH_Subvalue_Field*>& sfs)
  }
 }
 
+DH_Subvalue_Field* DH_Type::get_subvalue_field_by_index(u2 ix)
+{
+ return subvalue_fields_.value(ix);
+}
 
 DH_Subvalue_Field* DH_Type::get_subvalue_field_by_field_name(QString field_name)
 {
@@ -69,6 +73,11 @@ u2 DH_Type::get_internal_field_column_requirements()
  });
 }
 
+
+void DH_Type::note_field_signed(DH_Subvalue_Field* sf)
+{
+ sf->set_stage_profile(DH_Subvalue_Field::Stage_Profiles::Signed_Number);
+}
 
 void DH_Type::note_write_mode(DH_Subvalue_Field* sf, DH_Subvalue_Field::Write_Mode wm)
 {
@@ -116,7 +125,7 @@ void DH_Type::note_field_index(DH_Subvalue_Field* sf, u2 index)
  sf->set_index(index);
 }
 
-void DH_Type::note_field_query_path(DH_Subvalue_Field* sf, QString path, DH_Subvalue_Field::Query_Typecode qtc)
+void DH_Type::note_field_query_path(DH_Subvalue_Field* sf, QString path, DH_Stage_Code::Query_Typecode qtc)
 {
  sf->note_query_info(path, qtc);
 }
@@ -144,7 +153,7 @@ DH_Subvalue_Field* DH_Type::note_field_block_offset(QString field_name, u4 start
 
 
 DH_Subvalue_Field* DH_Type::note_field_query_path(QString field_name, QString path,
-  DH_Subvalue_Field::Query_Typecode qtc)
+  DH_Stage_Code::Query_Typecode qtc)
 {
  if(DH_Subvalue_Field* sf = get_subvalue_field_by_field_name(field_name))
  {

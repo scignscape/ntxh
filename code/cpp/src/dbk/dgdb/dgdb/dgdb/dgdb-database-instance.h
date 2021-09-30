@@ -19,6 +19,8 @@
 
 #include "types/dh-type.h"
 
+#include "types/stage/dh-stage-code.h"
+
 #include "dgdb-location-structure.h"
 
 #include <QVariant>
@@ -31,6 +33,7 @@ class DH_Type_System; //* dht = ddi.type_system()
 
 class DTB_Package;
 class DH_Subvalue_Field;
+class DH_Stage_Value;
 
 
 class DgDb_Database_Instance
@@ -59,8 +62,8 @@ class DgDb_Database_Instance
 
  QMap<u4, DgDb_Hypernode*> active_hypernodes_;
 
- void* default_get_shm_field_ptr(DgDb_Hypernode& dh,
-   u2 index_code, QString field_name,
+ void* default_get_shm_field_ptr(DgDb_Location_Structure dls,
+   DgDb_Hypernode* dh, u2 index_code, QString field_name,
    size_t* size, n8* shm_path_code);
 
 public:
@@ -138,6 +141,10 @@ public:
 
 // }
 
+ DH_Stage_Code get_stage_code(DH_Type* dht, QString field_name);
+ DH_Stage_Code get_stage_code(DgDb_Hypernode* dh, QString field_name);
+ DH_Stage_Code get_stage_code(DH_Type* dht, DH_Subvalue_Field* sf);
+
 
  void init_dtb_package();
  void init_type_system();
@@ -152,9 +159,9 @@ public:
 // }
 
  void store_subvalue_to_external_record(DgDb_Hypernode* dh,
-   DH_Subvalue_Field* sf, char* mem, const QByteArray& value);
+   DH_Subvalue_Field* sf, char* mem, DH_Stage_Value& sv);// const QByteArray& value);
 
- void store_subvalue_to_record(DH_Subvalue_Field* sf, char* mem, const QByteArray& value);
+ void store_subvalue_to_record(DH_Subvalue_Field* sf, char* mem, DH_Stage_Value& sv);//const QByteArray& value);
 
  void init_hypernode_from_object(DgDb_Hypernode* dh, void* obj,
    std::function<void(void*, QByteArray&)> cb);
@@ -170,35 +177,40 @@ public:
 
  std::function<void(void*, QByteArray&)> get_binary_encoder(DgDb_Hypernode* dh);
 
- void store(DgDb_Hypernode* dh, QString field_or_property_name, const QByteArray& value);
+ void store(DgDb_Hypernode* dh, QString field_or_property_name, DH_Stage_Value& sv); //const QByteArray& value);
 
- void store_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Field* sf,
-   const QByteArray& value);
+ void store_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv);
+   //const QByteArray& value);
 
  void store_subvalue(DgDb_Hypernode* dh,
    DH_Subvalue_Field* sf, DgDb_Location_Structure& dls,
-   DgDb_Location_Structure::Data_Options opts,
-   const QByteArray& value);
+   DgDb_Location_Structure::Data_Options opts, DH_Stage_Value& sv);
+   //const QByteArray& value);
 
  void store_indexed_field(DgDb_Hypernode* dh, u2 index,
-   const QByteArray& value,
+   DH_Stage_Value& sh, //const QByteArray& value,
    DgDb_Location_Structure::Data_Options opts, QString field_name);
 
 
  template<DgDb_Location_Structure::Data_Options OPTS>
  void store_subvalue_(DgDb_Location_Structure dls,
-   DgDb_Hypernode* dh, DH_Subvalue_Field* sf, const QByteArray& value, QString field_name);
+   DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv,//const QByteArray& value,
+   QString field_name);
 
 
 
  template<DgDb_Location_Structure::Data_Options OPTS>
  void store_indexed_field_(DgDb_Location_Structure dls,
-   DgDb_Hypernode* dh, const QByteArray& value, QString field_name);
+   DgDb_Hypernode* dh, DH_Stage_Value& sv, QString field_name);
 
 
  //ddi.fetch_subvalue(dh, "a_number", qba, pv);
  void fetch_subvalue(DgDb_Hypernode* dh, QString field_name,
    QByteArray& value, void*& pv);
+
+
+ DgDb_Hypernode* find_hypernode(DH_Type* dht, QString field_name, DH_Stage_Value& sv, void** rec = nullptr);
+ DgDb_Hypernode* find_hypernode(DH_Type* dht, DH_Subvalue_Field* sf, DH_Stage_Value& sv, void** rec = nullptr);
 
 
  DgDb_Hypernode* find_hypernode(DH_Type* dht, QString field_name, QString test, void** rec = nullptr);
