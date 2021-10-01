@@ -45,10 +45,17 @@ Test_Class::Test_Class()
 //}
 
 
+
 void Test_Class::supply_data(QByteArray& qba)
 {
  QDataStream qds(&qba, QIODevice::WriteOnly);
- qds << a_sign_ << a_string_ << a_number_;
+
+#define TEMP_MACRO(x) << x##_
+ qds _Test_Class_FM(TEMP_MACRO);
+#undef TEMP_MACRO
+
+
+// qds << a_sign_ << a_string_ << a_number_;
 
 }
 
@@ -60,11 +67,15 @@ void Test_Class::absorb_data(const QByteArray& qba)
 // qds >> an;
 // qds >> str;
 
- qds >> a_sign_ >> a_string_ >> a_number_;
+#define TEMP_MACRO(x) >> x##_
+ qds _Test_Class_FM(TEMP_MACRO);
+#undef TEMP_MACRO
 
- qDebug() << "a string = " << a_string_;
- qDebug() << "a sign = " << a_sign_;
- qDebug() << "a number = " << a_number_;
+// qds >> a_sign_ >> a_string_ >> a_number_;
+
+// qDebug() << "a string = " << a_string_;
+// qDebug() << "a sign = " << a_sign_;
+// qDebug() << "a number = " << a_number_;
 }
 
 

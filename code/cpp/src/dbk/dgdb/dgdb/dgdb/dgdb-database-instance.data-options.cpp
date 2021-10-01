@@ -83,18 +83,27 @@ void DgDb_Database_Instance::store_indexed_field_<DgDb_Location_Structure::Data_
 {
 //?// store_node_data(dls, value);
 }
-
+                // //  write_mode
 template<>
 void DgDb_Database_Instance::store_indexed_field_<DgDb_Location_Structure::Data_Options::Shm_Pointer>
 (DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Stage_Value& sv, QString field_name)
 {
  u2 raw = dls.get_raw_primary_field_id();
+ auto [fio, ix] = _class_DgDb_Location_Structure::_split_index_code(raw);
 
+ DH_Type* dht = dh->dh_type();
+ DH_Subvalue_Field* sf = dht->get_subvalue_field_by_index(ix);
+
+ if(sf)
+ {
+  store_subvalue(dh, sf, sv);
+ }
+
+#ifdef HIDE
  auto [fio, ix] = _class_DgDb_Location_Structure::_split_index_code(raw);
 
  void* mem = default_get_shm_field_ptr(dls, dh, dls.get_raw_primary_field_id(), field_name, nullptr, nullptr);
 
- DH_Type* dht = dh->dh_type();
  //DH_Subvalue_Field::Write_Mode wm = dht->get_write_mode(field_name);
 
  //DH_Subvalue_Field* sf = dht->get_subvalue_field_by_field_name(field_name);
@@ -127,6 +136,7 @@ void DgDb_Database_Instance::store_indexed_field_<DgDb_Location_Structure::Data_
 
  //ktype_<n8>::set ks(*nodes_dbm_);
  store_node_data(dls, mem);
+#endif
 }
 
 template<>

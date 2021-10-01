@@ -21,6 +21,13 @@ class Qh_Pack_Code;
 class Qh_Hypernode;
 
 
+// //  defines the serialization order ...
+#define _Test_Class_FM(x) \
+ x(a_sign) \
+ x(a_string) \
+ x(a_number)
+
+
 class Test_Class
 {
  QString a_string_;
@@ -35,7 +42,7 @@ public:
  ACCESSORS(s2 ,a_sign)
  ACCESSORS(u4 ,a_number)
 
-// Qh_Hypernode* (*as_hypernode)();
+// Qh_Hypernode* (*as_hypernode)();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
 
 // static void init_pack_code(Qh_Pack_Code& qpc);
 

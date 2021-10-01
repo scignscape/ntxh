@@ -12,6 +12,7 @@
 DH_Type::DH_Type()
   :  byte_length_(0),
      byte_length_code_(0), stash_id_(0),
+     subvalue_fields_serialization_vector_(nullptr),
      meta_object_(nullptr), shm_block_size_(0),
      shm_block_column_(2), shm_message_column_(-2)
   //   stage_encoder_(nullptr)
@@ -22,6 +23,23 @@ DH_Type::DH_Type()
 
 void DH_Type::get_subvalue_fields_as_vector(QVector<DH_Subvalue_Field*>& sfs)
 {
+ if(subvalue_fields_serialization_vector_)
+ {
+  // //  this vector is non-null when someone has declared a
+   //    particular serialization order, which may differ
+   //    from the order of how the fields are declared ...
+  if(subvalue_fields_serialization_vector_->isEmpty())
+  {
+   subvalue_fields_serialization_vector_->resize(field_name_serialization_order_.size());
+   std::transform(field_name_serialization_order_.begin(),
+     field_name_serialization_order_.end(),
+     subvalue_fields_serialization_vector_->begin(),
+     [this](QString fn) { return get_subvalue_field_by_field_name(fn);});
+  }
+  sfs = *subvalue_fields_serialization_vector_;
+  return;
+ }
+
  if(subvalue_fields_.isEmpty())
    return;
 

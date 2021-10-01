@@ -70,7 +70,7 @@ class DH_Type
  u2 shm_block_column_;
  s1 shm_message_column_;
 
-// QMap<QString, QPair<u4, u4>> field_block_offsets_;
+ QStringList field_name_serialization_order_;
 
 
  std::function<void*(DgDb_Hypernode*,
@@ -97,6 +97,8 @@ class DH_Type
 
  QMap<QString, u2> subvalue_fields_index_map_;
  QMap<u2, DH_Subvalue_Field*> subvalue_fields_;
+
+ QVector<DH_Subvalue_Field*>* subvalue_fields_serialization_vector_;
 
 public:
 
@@ -188,7 +190,7 @@ public:
      field = _this.note_field_block_offset(field_name, start, end);
    return *this;
   }
-  Note_Field_intermediary& si(u4 start, u4 end)
+  Note_Field_intermediary& _signed_(u4 start, u4 end)
   {
    operator()(start, end);
    _this.note_field_signed(field);
@@ -272,6 +274,16 @@ public:
    return *this;
   }
  };
+
+ Note_Field_intermediary sf(QStringList field_names)
+ {
+  field_name_serialization_order_ = field_names;
+  subvalue_fields_serialization_vector_ = new QVector<DH_Subvalue_Field*>();
+
+  //check_note_field_name(field_name);
+  //
+  return {{}, *this, (u4) -1, nullptr};
+ }
 
  Note_Field_intermediary sf(QString field_name)
  {

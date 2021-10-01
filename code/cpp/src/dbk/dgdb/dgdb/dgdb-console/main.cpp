@@ -95,7 +95,7 @@ int main7(int argc, char *argv[])
  DH_Type_System* dhts = ddi.type_system();
  dhts->REGISTER_TYPE(Test_Class)
    .set_shm_block_size(100)
-   .sf("a_sign")[1].si(10,11)
+   .sf("a_sign")[1]._signed_(10,11)
       ("a_string")[2](12,19)
          .query<QString>("&/q/$type")[5]
       ("a_number")[3](20,27)  //(20,21)
@@ -177,7 +177,7 @@ int main7(int argc, char *argv[])
  }
 }
 
-int main(int argc, char *argv[])
+int main6(int argc, char *argv[])
 {
  DgDb_Database_Instance ddi(DEFAULT_DEV_DGDB_FOLDER "/t1");
 
@@ -197,7 +197,7 @@ int main(int argc, char *argv[])
  DH_Type_System* dhts = ddi.type_system();
  dhts->REGISTER_TYPE(Test_Class)
    .set_shm_block_size(100)
-   .sf("a_sign")[1].si(10,11)
+   .sf("a_sign")[1]._signed_(10,11)
       ("a_string")[2](12,19)
          .query<QString>("&/q/$type")[5]
       ("a_number")[3](20,23)
@@ -292,7 +292,7 @@ int main(int argc, char *argv[])
 }
 
 
-int main6(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
  DgDb_Database_Instance ddi(DEFAULT_DEV_DGDB_FOLDER "/t1");
 
@@ -309,10 +309,13 @@ int main6(int argc, char *argv[])
 
  //ddi.set_get_shm_field_ptr(_get_shm_field_ptr);
 
+#define _field_list_(x) #x,
+
  DH_Type_System* dhts = ddi.type_system();
  dhts->REGISTER_TYPE(Test_Class)
    .set_shm_block_size(100)
-   .sf("a_sign")[1].si(10,11)
+   .sf({_Test_Class_FM(_field_list_)})
+      ("a_sign")[1]._signed_(10,11)
       ("a_string")[2](12,19)
          .query<QString>("&/q/$type")[5]
       ("a_number")[3](20,27)
