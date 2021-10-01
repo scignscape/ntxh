@@ -55,7 +55,9 @@ public:
  void write_u4_field(void* rec, u2 field_number, u4 value);
  void* get_record_from_block(char* block);
  QString get_string_from_record(void* rec, u2 field_number);
- void get_qba_from_record(void* rec, u2 field_number, QByteArray& result);
+
+ void get_qba_from_record(void* rec, u2 field_number,
+   QByteArray& result, u1 len, bool is_signed);//DH_Stage_Value& sv); //
 
  u2 write_rec_field_via_split(char* ptr, u2 spl, DH_Stage_Value& sv); //const QByteArray& text);
  //void* get_record_via_split(char* ptr, u2 spl);

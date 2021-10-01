@@ -7,6 +7,8 @@
 
 #include "dh-stage-value.h"
 
+#include "conversions.h"
+
 template<DH_Stage_Code::Query_Typecode QTC>
 void to_qba_(DH_Stage_Value& sv, QByteArray& result);
 
@@ -34,13 +36,46 @@ void to_qba_<DH_Stage_Code::Query_Typecode::qtc_N_A>(DH_Stage_Value& sv, QByteAr
 template<>
 void to_qba_<DH_Stage_Code::Query_Typecode::qtc_qstr>(DH_Stage_Value& sv, QByteArray& result)
 {
+ QString* qs = (QString*) sv.data();
+ result = qs->toStdString().c_str();//qs->toUtf8().data();
+ //xdata = nullptr;
+}
+
+template<>
+void to_qba_<DH_Stage_Code::Query_Typecode::qtc_qvar>(DH_Stage_Value& sv, QByteArray& result)
+{
+
+}
+
+template<>
+void to_qba_<DH_Stage_Code::Query_Typecode::qtc_WG_NULLTYPE>(DH_Stage_Value& sv, QByteArray& result)
+{
+
+}
+
+template<>
+void to_qba_<DH_Stage_Code::Query_Typecode::qtc_WG_RECTYPE>(DH_Stage_Value& sv, QByteArray& result)
+{
 
 }
 
 template<>
 void to_qba_<DH_Stage_Code::Query_Typecode::qtc_WG_INTTYPE>(DH_Stage_Value& sv, QByteArray& result)
 {
-
+ u1 len = sv.get_byte_length();
+ bool cs = sv.check_signed();
+ switch (len)
+ {
+ case 1: result = cs? s1_to_qba((u1)sv.data()): u1_to_qba((u1)sv.data()); break;
+ case 2: result = cs? s2_to_qba((u2)sv.data()): u2_to_qba((u2)sv.data()); break;
+ case 4: result = cs? s4_to_qba((u4)sv.data()): u4_to_qba((u4)sv.data()); break;
+ case 8: if(cs)
+  {
+   // //  flag for some nonstandard number type ...
+   break;
+  }
+  result = n8_to_qba(sv.data()); break;
+ }
 }
 
 template<>

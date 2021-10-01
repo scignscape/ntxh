@@ -275,12 +275,187 @@ u1 DWB_Instance::get_max_fixed_from_block(char* block)
  return *(block + sizeof (wg_int));
 }
 
-void DWB_Instance::get_qba_from_record(void* rec, u2 field_number, QByteArray& result)
+
+
+// // helper function for the method following it ...
+void _rec_decode(void* wh, void* rec, u4 index,
+  DH_Stage_Value& sv, u1 ft = 0)
 {
- wg_int enc = wg_get_field(wdb_instance_, rec, field_number);
- char* str = wg_decode_str(wdb_instance_, enc);
- wg_int len = wg_decode_str_len(wdb_instance_, enc);
- result = QByteArray(str, len);
+ if(ft == 0)
+   ft = wg_get_field_type(wh, rec, index);
+ switch(ft)
+ {
+ case 0:
+  {
+   // // error ... uninit
+  }
+  break;
+
+ case WG_NULLTYPE:
+  {
+   wg_int wi = wg_get_field(wh, rec, index);
+   char* c = wg_decode_null(wh, wi);
+   // //  should always be nullptr ...
+   switch(sv.get_byte_length())
+   {
+   case 1: sv.data_to_ref<u1>() = 0; break;
+   case 2: sv.data_to_ref<u2>() = 0; break;
+   case 4: sv.data_to_ref<u4>() = 0; break;
+   case 8: sv.data_to_ref<n8>() = 0; break;
+   }
+  }
+  break;
+
+ case WG_RECORDTYPE:
+  {
+   wg_int wi = wg_get_field(wh, rec, index);
+   sv.set_ptr_data(wg_decode_record(wh, wi));
+  }
+  break;
+
+ case WG_INTTYPE:
+  {
+   wg_int wi = wg_get_field(wh, rec, index);
+   if(sv.is_uninit())
+   {
+    sv.generic_int(wg_decode_int(wh, wi));
+    break;
+   }
+   switch(sv.get_byte_length())
+   {
+   case 1: sv.data_to_ref<s1>() = wg_decode_int(wh, wi); break;
+   case 2: sv.data_to_ref<s2>() = wg_decode_int(wh, wi); break;
+   case 4: sv.data_to_ref<s4>() = wg_decode_int(wh, wi); break;
+   case 8: sv.data_to_ref<s8>() = wg_decode_int(wh, wi); break;
+   }
+  }
+  break;
+
+ case WG_DOUBLETYPE:
+  {
+   wg_int wi = wg_get_field(wh, rec, index);
+   if(sv.get_byte_length() == 4)
+     sv.data_to_ref<float>() = wg_decode_double(wh, wi);
+   else
+     sv.data_to_ref<double>() = wg_decode_double(wh, wi);
+  }
+  break;
+
+ case WG_STRTYPE:
+  {
+   wg_int wi = wg_get_field(wh, rec, index);
+   char* ptr = wg_decode_str(wh, wi);
+   wg_int len = wg_decode_str_len(wh, wi);
+     //? QLatin1String?
+   if(sv.data())
+     sv.data_to_ref<QString>() = QString::fromStdString(std::string(ptr, len));
+   else
+     sv.set_data(QString::fromStdString(std::string(ptr, len)));
+  }
+  break;
+
+ case WG_XMLLITERALTYPE:
+  {
+   wg_int wi = wg_get_field(wh, rec, index);
+   u1 dcf = sv.get_prelim_decoding_flag();
+   if(dcf & 128)
+   {
+    char* ptr = wg_decode_xmlliteral(wh, wi);
+    char* xptr = wg_decode_xmlliteral_xsdtype(wh, wi);
+    sv.data_to_ref<QStringList>() = QStringList({
+      QString::fromUtf8(ptr), QString::fromUtf8(xptr)});
+   }
+   else
+   {
+    char* ptr = wg_decode_xmlliteral(wh, wi);
+    sv.data_to_ref<QString>() = QString::fromUtf8(ptr);
+   }
+  }
+  break;
+
+ case WG_URITYPE:
+  {
+   wg_int wi = wg_get_field(wh, rec, index);
+   u1 dcf = sv.get_prelim_decoding_flag();
+   if(dcf & 128)
+   {
+    char* ptr = wg_decode_uri(wh, wi);
+    char* xptr = wg_decode_uri_prefix(wh, wi);
+    sv.data_to_ref<QStringList>() = QStringList({
+      QString::fromUtf8(ptr), QString::fromUtf8(xptr)});
+   }
+   else
+   {
+    char* ptr = wg_decode_uri(wh, wi);
+    sv.data_to_ref<QString>() = QString::fromUtf8(ptr);
+   }
+  }
+  break;
+
+ case WG_BLOBTYPE:
+  {
+   wg_int wi = wg_get_field(wh, rec, index);
+   char* blob = wg_decode_blob(wh, wi);
+   wg_int blen = wg_decode_blob_len(wh, wi);
+   sv.data_to_ref<QByteArray>() = QByteArray::fromRawData(blob, blen);
+  }
+  break;
+
+ case WG_CHARTYPE:
+  {
+   wg_int wi = wg_get_field(wh, rec, index);
+   sv.data_to_ref<char>() = wg_decode_char(wh, wi);
+  }
+  break;
+
+ case WG_FIXPOINTTYPE:
+  {
+   wg_int wi = wg_get_field(wh, rec, index);
+   if(sv.get_byte_length() == 4)
+     sv.data_to_ref<float>() = wg_decode_double(wh, wi);
+   else
+     sv.data_to_ref<double>() = wg_decode_double(wh, wi);
+  }
+  break;
+
+ case WG_DATETYPE:
+  {
+   wg_int wi = wg_get_field(wh, rec, index);
+   int y, m, d;
+   int wdate = wg_decode_date(wh, wi);
+   wg_date_to_ymd(wh, wdate, &y, &m, &d);
+   sv.data_to_ref<QDate>() = QDate(y, m, d);
+  }
+  break;
+
+ case WG_TIMETYPE:
+  {
+   wg_int wi = wg_get_field(wh, rec, index);
+   int tm = wg_decode_time(wh, wi);
+   sv.data_to_ref<QTime>() = QTime::fromMSecsSinceStartOfDay(tm * 10);
+  }
+  break;
+
+  default:
+   break;
+ }
+}
+
+void DWB_Instance::get_qba_from_record(void* rec, u2 field_number,
+  QByteArray& result, u1 len, bool is_signed)
+{
+ //u1 dc = sv.get_prelim_decoding_code();
+
+ DH_Stage_Value sv;
+ _rec_decode(wdb_instance_, rec, field_number, sv);
+
+ sv.check_confirm_byte_length(len, is_signed);
+ sv.to_qba(result);
+
+// wg_int enc = wg_get_field(wdb_instance_, rec, field_number);
+// char* str = wg_decode_str(wdb_instance_, enc);
+// wg_int len = wg_decode_str_len(wdb_instance_, enc);
+// result = QByteArray(str, len);
 }
 
 QString DWB_Instance::get_string_from_record(void* rec, u2 field_number)

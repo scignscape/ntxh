@@ -169,6 +169,8 @@ public:
  u2 get_max_declared_field_column();
  u2 get_internal_field_column_requirements();
 
+ void note_field_target_byte_length(DH_Subvalue_Field* sf, u1 len);
+
  template<typename T>
  struct Note_Field_Query_intermediary;
 
@@ -263,6 +265,11 @@ public:
   {
    surrounding._this.note_field_query_column(surrounding.field, column);
    return surrounding;
+  }
+  Note_Field_Query_intermediary& operator()(u1 target_byte_len)
+  {
+   surrounding._this.note_field_target_byte_length(surrounding.field, target_byte_len);
+   return *this;
   }
  };
 

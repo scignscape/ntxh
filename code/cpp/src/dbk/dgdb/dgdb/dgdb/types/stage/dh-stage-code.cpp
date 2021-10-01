@@ -57,6 +57,20 @@
 
 //}
 
+void DH_Stage_Code::check_confirm_byte_length(u1 len, bool is_signed)
+{
+ Query_Typecode qtc = get_qtc_code();
+ if(qtc == Query_Typecode::qtc_WG_INTTYPE)
+ {
+  if(check_unspec_or_data_has_type())
+  {
+   note_byte_length(len);
+   if(is_signed)
+     note_signed_or_no_delete();
+   clear_unspec_or_data_has_type();
+  }
+ }
+}
 
 u1 DH_Stage_Code::get_byte_length() const
 {
@@ -66,8 +80,7 @@ u1 DH_Stage_Code::get_byte_length() const
  case Query_Typecode::qtc_WG_INTTYPE:
  case Query_Typecode::qtc_WG_DOUBLETYPE:
  case Query_Typecode::qtc_WG_TIMETYPE:
-   return 1 << get_option_code();
-
+   return 1 << (3 - get_option_code());
  default:
    return 0;
  }
@@ -119,16 +132,20 @@ DH_Stage_Code& DH_Stage_Code::note_char_enum()
 
 DH_Stage_Code& DH_Stage_Code::note_uint()
 {
- code_ &= 15;
- code_ |= (1 << 4);
+// code_ &= 15;
+// code_ |= (1 << 4);
 
+ code_ &= 15;
+ code_ |= (5 << 4);
+
+ //note_signed_or_no_delete();
  return *this;
 }
 
 DH_Stage_Code& DH_Stage_Code::note_qstring()
 {
  code_ &= 15;
- code_ |= (2 << 4);
+ code_ |= (1 << 4);
  return *this;
 }
 
@@ -150,6 +167,8 @@ DH_Stage_Code& DH_Stage_Code::note_int()
 {
  code_ &= 15;
  code_ |= (5 << 4);
+
+ note_signed_or_no_delete();
  return *this;
 }
 
@@ -224,13 +243,13 @@ DH_Stage_Code& DH_Stage_Code::note_tbd()
 }
 
 
-DH_Stage_Code& DH_Stage_Code::note_data_has_type()
+DH_Stage_Code& DH_Stage_Code::note_unspec_or_data_has_type()
 {
  code_ |= 8;
  return *this;
 }
 
-DH_Stage_Code& DH_Stage_Code::clear_data_has_type()
+DH_Stage_Code& DH_Stage_Code::clear_unspec_or_data_has_type()
 {
  code_ &= 0b1111'0111; //(255 - 8);
  return *this;

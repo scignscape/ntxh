@@ -32,9 +32,11 @@
 
 
 #define _TYPECODE_QUERY_MACROS(x) \
- x(N_A ,void*) \
+ x(N_A ,char*) \
  x(qstr ,QString) \
  x(qvar ,QVariant) \
+ x(WG_NULLTYPE ,nullptr_t) \
+ x(WG_RECTYPE ,void*) \
  x(WG_INTTYPE ,int) \
  x(WG_DOUBLETYPE ,double) \
  x(WG_STRTYPE ,std::string) \
@@ -138,11 +140,18 @@ public:
   return code_ & 4;
  }
 
- bool check_data_has_type()
+ bool check_signed() const
+ {
+  return code_ & 4;
+ }
+
+ bool check_unspec_or_data_has_type()
  {
   return code_ & 8;
  }
 
+
+ void check_confirm_byte_length(u1 len, bool is_signed);
 
 // u1 get_query_typecode() const;
  u1 get_byte_length() const;
@@ -181,9 +190,9 @@ public:
 
  DH_Stage_Code& note_byte_length(u1 len);
 
- DH_Stage_Code& note_data_has_type();
- DH_Stage_Code& clear_data_has_type();
-//? bool check_data_has_type() { return code_ & 8; }
+ DH_Stage_Code& note_unspec_or_data_has_type();
+ DH_Stage_Code& clear_unspec_or_data_has_type();
+//? bool check_unspec_or_data_has_type() { return code_ & 8; }
 
 // DH_Stage_Code& note_signed_or_no_delete();
 // DH_Stage_Code& clear_signed_or_no_delete();

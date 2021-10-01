@@ -125,6 +125,12 @@ void DH_Type::note_field_index(DH_Subvalue_Field* sf, u2 index)
  sf->set_index(index);
 }
 
+
+void DH_Type::note_field_target_byte_length(DH_Subvalue_Field* sf, u1 len)
+{
+ sf->note_target_byte_length(len);
+}
+
 void DH_Type::note_field_query_path(DH_Subvalue_Field* sf, QString path, DH_Stage_Code::Query_Typecode qtc)
 {
  sf->note_query_info(path, qtc);

@@ -82,25 +82,25 @@ DH_Stage_Value& DH_Stage_Value::new_qstring(const QString& qs)
 
 DH_Stage_Value& DH_Stage_Value::new_qstring_pair(const QString& qs)
 {
- return note_qstring().note_data_has_type().set_data(
+ return note_qstring().note_unspec_or_data_has_type().set_data(
    QPair<n8, QStringList*> {0, new QStringList {qs, {}}});
 }
 
 DH_Stage_Value& DH_Stage_Value::new_qstring_pair(const QString& qs1, const QString& qs2)
 {
- return note_qstring().note_data_has_type().set_data(
+ return note_qstring().note_unspec_or_data_has_type().set_data(
    QPair<n8, QStringList*> {0, new QStringList {qs1, qs2}});
 }
 
 DH_Stage_Value& DH_Stage_Value::new_qstring_xml_pair(const QString& qs1, const QString& qs2)
 {
- return note_xml().note_data_has_type().set_data(
+ return note_xml().note_unspec_or_data_has_type().set_data(
    QPair<n8, QStringList*> {0, new QStringList {qs1, qs2}});
 }
 
 DH_Stage_Value& DH_Stage_Value::new_qstring_uri_pair(const QString& qs1, const QString& qs2)
 {
- return note_uri().note_data_has_type().set_data(
+ return note_uri().note_unspec_or_data_has_type().set_data(
    QPair<n8, QStringList*> {0, new QStringList {qs1, qs2}});
 }
 
@@ -299,16 +299,32 @@ DH_Stage_Value& DH_Stage_Value::note_tbd()
 }
 
 
-DH_Stage_Value& DH_Stage_Value::note_data_has_type()
+DH_Stage_Value& DH_Stage_Value::note_unspec_or_data_has_type()
 {
- info_.note_data_has_type();
+ info_.note_unspec_or_data_has_type();
  return *this;
 }
 
-DH_Stage_Value& DH_Stage_Value::clear_data_has_type()
+DH_Stage_Value& DH_Stage_Value::clear_unspec_or_data_has_type()
 {
- info_.clear_data_has_type();
+ info_.clear_unspec_or_data_has_type();
  return *this;
+}
+
+void DH_Stage_Value::check_confirm_byte_length(u1 len, bool is_signed)
+{
+ if(len == 0)
+   return;
+
+ return info_.check_confirm_byte_length(len, is_signed);
+
+}
+
+
+void DH_Stage_Value::generic_int(n8 data)
+{
+ set_raw_data(data);
+ info_.note_int().note_unspec_or_data_has_type();
 }
 
 u1 DH_Stage_Value::get_byte_length() const

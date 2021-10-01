@@ -21,6 +21,8 @@
 
 #include "accessors.h"
 
+#include "dh-stage-value.h"
+
 inline QByteArray u1_to_qba(u1 u)
 {
  return QByteArray(1, u);
@@ -88,8 +90,6 @@ inline QByteArray s4_to_qba(s4 signed_value)
  return result;
 }
 
-
-
 inline QByteArray n8_to_qba(n8 value)
 {
  QByteArray result;
@@ -98,6 +98,57 @@ inline QByteArray n8_to_qba(n8 value)
 }
 
 
+
+
+
+template<typename VALUE_Type>
+void _to_sv(VALUE_Type v, DH_Stage_Value& sv)
+{
+// QBuffer buffer(&result);
+// buffer.open(QIODevice::WriteOnly);
+// v = qToBigEndian(v);
+// buffer.write((char*) &v, sizeof(VALUE_Type));
+}
+
+inline DH_Stage_Value u1_to_sv(u1 unsigned_value)
+{
+ return DH_Stage_Value().set_u1_data(unsigned_value);
+}
+
+inline DH_Stage_Value s1_to_sv(s1 unsigned_value)
+{
+ return DH_Stage_Value().set_s1_data(unsigned_value);
+}
+
+inline DH_Stage_Value u2_to_sv(u2 unsigned_value)
+{
+ return DH_Stage_Value().set_u2_data(unsigned_value);
+}
+
+inline DH_Stage_Value s2_to_sv(s2 unsigned_value)
+{
+ return DH_Stage_Value().set_s2_data(unsigned_value);
+}
+
+inline DH_Stage_Value u4_to_sv(u4 unsigned_value)
+{
+ return DH_Stage_Value().set_u4_data(unsigned_value);
+}
+
+inline DH_Stage_Value s4_to_sv(s4 unsigned_value)
+{
+ return DH_Stage_Value().set_s4_data(unsigned_value);
+}
+
+inline DH_Stage_Value n8_to_sv(n8 unsigned_value)
+{
+ return DH_Stage_Value().set_n8_data(unsigned_value);
+}
+
+//inline DH_Stage_Value qstring_to_sv(n8 unsigned_value)
+//{
+// return DH_Stage_Value().set_n8_data(unsigned_value);
+//}
 
 
 template<typename VALUE_Type>

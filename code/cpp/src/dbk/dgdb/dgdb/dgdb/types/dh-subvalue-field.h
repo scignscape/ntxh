@@ -82,6 +82,9 @@ private:
 
  u2 query_column_;
 
+ // //  may become part of a bitmask sometime ...
+ s1 target_byte_length_;
+
 public:
 
 
@@ -106,6 +109,8 @@ public:
 
  u2 block_offset_record_column_split();
  void check_write_mode();
+ void note_target_byte_length(s1 len);
+ QPair<u1, bool> get_target_byte_length();
 
  u1 construct_stage_code();
 

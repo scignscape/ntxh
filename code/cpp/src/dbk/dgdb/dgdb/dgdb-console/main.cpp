@@ -96,8 +96,8 @@ int main(int argc, char *argv[])
    .sf("a_sign")[1].si(10,11)
       ("a_string")[2](12,19)
          .query<QString>("&/q/$type")[5]
-      ("a_number")[3](20,21)
-         .query<int>("&/q/$type")[6]
+      ("a_number")[3](20,27)  //(20,21)
+         .query<int>("&/q/$type")(4)[6]
   ->set_default_binary_encoder(&Test_Class::supply_data)
    .set_default_binary_decoder(&Test_Class::absorb_data)
    ;
@@ -115,14 +115,14 @@ int main(int argc, char *argv[])
 // tc->set_a_string("a str");
 // tc->set_a_sign(-265);
 
- ddi.store(dh, "a_number", u4_to_qba(991));
+ ddi.store(dh, "a_number", u4_to_sv(991));
 
  ddi.store(dh, "a_string", "a-test");
 
 // ddi.store_indexed_field(dh, _structure_field_index(2), "a-test",
 //   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
 
- ddi.store(dh, "a_sign", s2_to_qba(-256));
+ ddi.store(dh, "a_sign", s2_to_sv(-256));
 // DgDb_Hypernode* dh1 = ddi.find_hypernode(dht, "a_string", "a-test");
 
 // Test_Class* tc;
@@ -536,7 +536,7 @@ int main4(int argc, char *argv[])
 
  DgDb_Hypernode* dh = ddi.new_hypernode();
 
- ddi.store_indexed_field(dh, 3, u1_to_qba(78),
+ ddi.store_indexed_field(dh, 3, u1_to_sv(78),
    DgDb_Location_Structure::Data_Options::Numeric, {});
 
 

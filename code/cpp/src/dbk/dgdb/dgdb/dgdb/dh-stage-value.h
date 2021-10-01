@@ -148,6 +148,8 @@ public:
 
  DH_Stage_Value& set_ptr_data(void* ptr);
 
+ void check_confirm_byte_length(u1 len, bool is_signed);
+
  u1 get_wg_encoding_type() const;
  u1 get_byte_length() const;
  u1 get_prelim_encoding_code() const;
@@ -227,6 +229,8 @@ public:
 
  void to_qba(QByteArray& result);
 
+ void generic_int(n8 data);
+
  DH_Stage_Value& note_unspec();
  DH_Stage_Value& note_enum();
  DH_Stage_Value& note_signed_enum();
@@ -250,17 +254,18 @@ public:
  DH_Stage_Value& note_byte_length(u1 len);
 
 //?
- DH_Stage_Value& note_data_has_type();
- DH_Stage_Value& clear_data_has_type();
+ DH_Stage_Value& note_unspec_or_data_has_type();
+ DH_Stage_Value& clear_unspec_or_data_has_type();
  bool check_data_has_type()
  {
-  return info_.check_data_has_type();
+  return info_.check_unspec_or_data_has_type();
  }
 
  DH_Stage_Value& note_no_delete();
  DH_Stage_Value& clear_no_delete();
 
  bool check_no_delete() { return info_.check_no_delete(); }
+ bool check_signed() { return info_.check_signed(); }
 
  DH_Stage_Value& new_qstring(const QString& qs);
  DH_Stage_Value& new_qstring_pair(const QString& qs);

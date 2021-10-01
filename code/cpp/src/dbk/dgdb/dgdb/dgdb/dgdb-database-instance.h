@@ -177,7 +177,16 @@ public:
 
  std::function<void(void*, QByteArray&)> get_binary_encoder(DgDb_Hypernode* dh);
 
- void store(DgDb_Hypernode* dh, QString field_or_property_name, DH_Stage_Value& sv); //const QByteArray& value);
+ void store_(DgDb_Hypernode* dh, QString field_or_property_name, DH_Stage_Value& sv); //const QByteArray& value);
+ void store(DgDb_Hypernode* dh, QString field_or_property_name, DH_Stage_Value& sv)
+ {
+  store_(dh, field_or_property_name, sv);
+ }
+ void store(DgDb_Hypernode* dh, QString field_or_property_name, DH_Stage_Value sv);
+ void store(DgDb_Hypernode* dh, QString field_or_property_name, QString value);
+// {
+//  store(dh, field_or_property_name, sv);
+// }//const QByteArray& value);
 
  void store_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv);
    //const QByteArray& value);
@@ -190,7 +199,13 @@ public:
  void store_indexed_field(DgDb_Hypernode* dh, u2 index,
    DH_Stage_Value& sh, //const QByteArray& value,
    DgDb_Location_Structure::Data_Options opts, QString field_name);
+ void store_indexed_field(DgDb_Hypernode* dh, u2 index,
+   DH_Stage_Value sh, //const QByteArray& value,
+   DgDb_Location_Structure::Data_Options opts, QString field_name);
 
+ void store_indexed_field_(DgDb_Hypernode* dh, u2 index,
+   DH_Stage_Value& sh, //const QByteArray& value,
+   DgDb_Location_Structure::Data_Options opts, QString field_name);
 
  template<DgDb_Location_Structure::Data_Options OPTS>
  void store_subvalue_(DgDb_Location_Structure dls,

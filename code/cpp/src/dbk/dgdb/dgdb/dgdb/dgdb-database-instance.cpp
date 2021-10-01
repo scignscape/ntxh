@@ -285,8 +285,23 @@ DH_Stage_Code DgDb_Database_Instance::get_stage_code(DH_Type* dht, DH_Subvalue_F
  return sf->stage_code();
 }
 
+void DgDb_Database_Instance::store(DgDb_Hypernode* dh,
+  QString field_or_property_name, DH_Stage_Value sv)
+{
+ store_(dh, field_or_property_name, sv);
+}//const QByteArray& value);
 
-void DgDb_Database_Instance::store(DgDb_Hypernode* dh, QString field_or_property_name,
+
+void DgDb_Database_Instance::store(DgDb_Hypernode* dh,
+  QString field_or_property_name, QString value)
+{
+ DH_Stage_Value sv;
+ sv.set_str_data(value);
+ store_(dh, field_or_property_name, sv);
+}
+
+
+void DgDb_Database_Instance::store_(DgDb_Hypernode* dh, QString field_or_property_name,
   DH_Stage_Value& sv) //                                 const QByteArray& value)
 {
  DH_Type* dht = dh->dh_type();
@@ -304,6 +319,24 @@ void DgDb_Database_Instance::store(DgDb_Hypernode* dh, QString field_or_property
 
 
 void DgDb_Database_Instance::store_indexed_field(DgDb_Hypernode* dh,
+  u2 index, DH_Stage_Value sv, // const QByteArray& value,
+  DgDb_Location_Structure::Data_Options opts, QString field_name)
+{
+ store_indexed_field_(dh, index, sv, opts, field_name);
+}
+
+
+void DgDb_Database_Instance::store_indexed_field(DgDb_Hypernode* dh,
+  u2 index, DH_Stage_Value& sv, // const QByteArray& value,
+  DgDb_Location_Structure::Data_Options opts, QString field_name)
+{
+ store_indexed_field_(dh, index, sv, opts, field_name);
+}
+
+
+
+
+void DgDb_Database_Instance::store_indexed_field_(DgDb_Hypernode* dh,
   u2 index, DH_Stage_Value& sv, // const QByteArray& value,
   DgDb_Location_Structure::Data_Options opts, QString field_name)
 {
@@ -609,13 +642,14 @@ void DgDb_Database_Instance::init_hypernode_from_shm_block(DgDb_Hypernode* dh,
   {
    u4 s = sf->block_offset_start();
    u4 e = sf->block_offset_end();
+   u4 len = e - s + 1;
 
-   temp = QByteArray(qba.mid(s, e - s + 1));
+   temp = QByteArray(qba.mid(s, len));
    switch (sf->write_mode())
    {
     case DH_Subvalue_Field::Write_Mode::In_Block:
     {
-     _acc_conv(temp, qds, e - s + 1);
+     _acc_conv(temp, qds, len);
     }
     break;
    case DH_Subvalue_Field::Write_Mode::Redirect_External:
@@ -624,7 +658,8 @@ void DgDb_Database_Instance::init_hypernode_from_shm_block(DgDb_Hypernode* dh,
      //QByteArray qba = QByteArray( (char*) pv, 8);
      DWB_Instance* dwb = get_query_dwb(dh->dh_type(), sf);
      void* rec = dwb->get_record_from_qba(temp);
-     dwb->get_qba_from_record(rec, sf->query_column(), value);
+     auto [len, is_signed] = sf->get_target_byte_length();
+     dwb->get_qba_from_record(rec, sf->query_column(), value, len, is_signed);
 
      qds << QString::fromLatin1(value);
     }
@@ -745,7 +780,8 @@ void DgDb_Database_Instance::fetch_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Fiel
    QByteArray qba = QByteArray( (char*) pv, 8);
    DWB_Instance* dwb = get_query_dwb(dh->dh_type(), sf);
    void* rec = dwb->get_record_from_qba(qba);
-   dwb->get_qba_from_record(rec, sf->query_column(), value);
+   auto [len, is_signed] = sf->get_target_byte_length();
+   dwb->get_qba_from_record(rec, sf->query_column(), value, len, is_signed);
    //sf->query_column();
   }
   break;
@@ -761,7 +797,8 @@ void DgDb_Database_Instance::fetch_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Fiel
    else
    {
     auto [rec, column] = blocks_dwb_->get_record_via_known_split((char*) pv, qba_to_u2(qba));
-    blocks_dwb_->get_qba_from_record(rec, column, value);
+    auto [len, is_signed] = sf->get_target_byte_length();   QByteArray qba = QByteArray( (char*) pv, 8);
+    blocks_dwb_->get_qba_from_record(rec, column, value, len, is_signed);
    }
 
 //   auto [offset, column] = DH::block_offset_record_column_unsplit(qba_to_u2(qba));

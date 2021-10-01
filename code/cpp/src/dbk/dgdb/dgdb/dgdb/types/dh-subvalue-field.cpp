@@ -29,6 +29,20 @@ void DH_Subvalue_Field::check_write_mode()
 }
 
 
+void DH_Subvalue_Field::note_target_byte_length(s1 len)
+{
+ target_byte_length_ = len;
+}
+
+QPair<u1, bool> DH_Subvalue_Field::get_target_byte_length()
+{
+ if(target_byte_length_ < 0)
+   return {-target_byte_length_, true};
+
+ return {target_byte_length_, false};
+}
+
+
 u2 DH_Subvalue_Field::block_offset_record_column_split()
 {
  u2 result = (u2) block_offset_start_ << 6;
