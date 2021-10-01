@@ -47,33 +47,35 @@ using namespace _class_DgDb_Location_Structure;
 
 using namespace tkrzw;
 
-void* _get_shm_field_ptr(DgDb_Database_Instance& ddi,
-  DgDb_Hypernode& dh,
-  u2 index_code, QString field_name,
-  size_t* size, n8* shm_path_code)
-{
- qDebug() << "field name = " << field_name;
- auto [fio, index] = _split_index_code(index_code);
+//void* _get_shm_field_ptr(DgDb_Database_Instance& ddi,
+//  DgDb_Hypernode& dh,
+//  u2 index_code, QString field_name,
+//  size_t* size, n8* shm_path_code)
+//{
+// qDebug() << "field name = " << field_name;
+// auto [fio, index] = _split_index_code(index_code);
 
- DH_Type* dht = dh.dh_type();
- char* block = dh.shm_block();
- auto [offset, end] = dht->get_field_block_offset(field_name);
- u4 sz = end - offset;
- if(!block)
- {
-//  size_t sbs = dht->shm_block_size();
-//  u2 block_column = dht->shm_block_column();
-  block = ddi.allocate_shm_block(dht, dh.id(), "testOk");
-  dh.set_shm_block(block);
-//  void* rec = ddi.get_wdb_record_from_block(block);
-//  QString msg = ddi.get_string_from_wdb_record(rec);
-//  qDebug() << "msg = " << msg;
- }
+// DH_Type* dht = dh.dh_type();
+// char* block = dh.shm_block();
+// auto [offset, end] = dht->get_field_block_offset(field_name);
+// u4 sz = end - offset;
+// if(!block)
+// {
+////  size_t sbs = dht->shm_block_size();
+////  u2 block_column = dht->shm_block_column();
+//  block = ddi.allocate_shm_block(dht, dh.id(), "testOk");
+//  dh.set_shm_block(block);
+////  void* rec = ddi.get_wdb_record_from_block(block);
+////  QString msg = ddi.get_string_from_wdb_record(rec);
+////  qDebug() << "msg = " << msg;
+// }
 
- return block + offset;
-}
+// return block + offset;
+//}
 
-int main(int argc, char *argv[])
+
+
+int main7(int argc, char *argv[])
 {
  DgDb_Database_Instance ddi(DEFAULT_DEV_DGDB_FOLDER "/t1");
 
@@ -128,9 +130,12 @@ int main(int argc, char *argv[])
 // Test_Class* tc;
 
  DH_Stage_Value sv;
- sv.set_str_data("a-test");
+// sv.set_str_data("a-test");
+// DgDb_Hypernode* dh1 = ddi.find_hypernode(dht, "a_string", sv);
 
- DgDb_Hypernode* dh1 = ddi.find_hypernode(dht, "a_string", sv);
+ sv.set_u4_data(991);
+ DgDb_Hypernode* dh1 = ddi.find_hypernode(dht, "a_number", sv);
+
 
  qDebug() << "dh id = " << dh->id();
  qDebug() << "dh1 id = " << dh1->id();
@@ -172,7 +177,7 @@ int main(int argc, char *argv[])
  }
 }
 
-int main6(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
  DgDb_Database_Instance ddi(DEFAULT_DEV_DGDB_FOLDER "/t1");
 
@@ -202,8 +207,54 @@ int main6(int argc, char *argv[])
 
  // (DH::Redirect_In_Record [7]) //(DH_Subvalue_Field::Redirect_In_Record)
 
- DH_Type* dht = dhts->get_type_by_name("Test_Class");
- DH_Stage_Code sc1 = ddi.get_stage_code(dht, "a_number");
+// DH_Type* dht = dhts->get_type_by_name("Test_Class");
+// DH_Stage_Code sc1 = ddi.get_stage_code(dht, "a_number");
+
+ DgDb_Hypernode* dh = ddi.new_hypernode<Test_Class>();
+
+ ddi.store_indexed_field(dh, _structure_field_index(1), s2_to_sv(-324),
+   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_number");
+
+ ddi.store_indexed_field(dh, _structure_field_index(2), qstring_to_sv("test"),
+   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+
+ ddi.store_indexed_field(dh, _structure_field_index(3), u4_to_sv(11324),
+   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+
+ DgDb_Hypernode* dh1 = dh;
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh1, "a_number", qba, pv);
+
+  u4 test_val = qba_to_u4(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "test_val = " << test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh1, "a_sign", qba, pv);
+
+  s2 test_val = qba_to_s2(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "test_val = " << test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh1, "a_string", qba, pv);
+
+  qDebug() << "test_val = " << qba;
+ }
 
 
 #ifdef HIDE
@@ -241,7 +292,7 @@ int main6(int argc, char *argv[])
 }
 
 
-int main8(int argc, char *argv[])
+int main6(int argc, char *argv[])
 {
  DgDb_Database_Instance ddi(DEFAULT_DEV_DGDB_FOLDER "/t1");
 
@@ -258,18 +309,21 @@ int main8(int argc, char *argv[])
 
  //ddi.set_get_shm_field_ptr(_get_shm_field_ptr);
 
- DH_Type_System* dht = ddi.type_system();
- dht->REGISTER_TYPE(Test_Class)
+ DH_Type_System* dhts = ddi.type_system();
+ dhts->REGISTER_TYPE(Test_Class)
    .set_shm_block_size(100)
    .sf("a_sign")[1].si(10,11)
       ("a_string")[2](12,19)
          .query<QString>("&/q/$type")[5]
-      ("a_number")[3](20,23)
+      ("a_number")[3](20,27)
+         .query<int>("&/q/$type")(4)[6]
   ->set_default_binary_encoder(&Test_Class::supply_data)
    .set_default_binary_decoder(&Test_Class::absorb_data)
    ;
 
  // (DH::Redirect_In_Record [7]) //(DH_Subvalue_Field::Redirect_In_Record)
+
+ DH_Type* dht = dhts->get_type_by_name("Test_Class");
 
  DgDb_Hypernode* dh = ddi.new_hypernode<Test_Class>();
 

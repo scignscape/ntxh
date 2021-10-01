@@ -11,6 +11,8 @@
 
 #include <QDebug>
 
+#include <QDataStream>
+
 extern "C" {
 #include "whitedb/_whitedb.h"
 }
@@ -348,6 +350,59 @@ DH_Stage_Value& DH_Stage_Value::clear_no_delete()
 {
  info_.clear_signed_or_no_delete();
  return *this;
+}
+
+
+// //  maybe should template on qtc like with to_qba_ ...
+void DH_Stage_Value::aborb_data(QDataStream& qds, DH_Stage_Code sc)
+{
+ DH_Stage_Code::Query_Typecode qtc = sc.get_qtc_code();
+
+ switch (qtc)
+ {
+
+ case DH_Stage_Code::Query_Typecode::qtc_WG_INTTYPE:
+  {
+   u1 len = sc.get_byte_length();
+   bool is_signed = sc.check_signed();
+   if(is_signed)
+   {
+    switch(len)
+    {
+    case 1: { s1 s; qds >> s; set_s1_data(s); } break;
+    case 2: { s2 s; qds >> s; set_s2_data(s); } break;
+    case 4: { s4 s; qds >> s; set_s4_data(s); } break;
+    default: break;
+    }
+   }
+   else
+   {
+    switch(len)
+    {
+    case 1: { u1 u; qds >> u; set_u1_data(u); } break;
+    case 2: { u2 u; qds >> u; set_u2_data(u); } break;
+    case 4: { u4 u; qds >> u; set_u4_data(u); } break;
+    case 8: { n8 n; qds >> n; set_n8_data(n); } break;
+    default: break;
+    }
+   }
+  }
+  break;
+
+ case DH_Stage_Code::Query_Typecode::qtc_qstr:
+  {
+   QString value;
+   qds >> value;
+   set_str_data(value);
+  }
+  break;
+
+ default:
+  break;
+ }
+
+
+
 }
 
 

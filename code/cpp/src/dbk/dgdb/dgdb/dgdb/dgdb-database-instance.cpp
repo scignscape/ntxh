@@ -594,8 +594,10 @@ void DgDb_Database_Instance::init_hypernode_from_object(DgDb_Hypernode* dh, void
    case DH_Subvalue_Field::Write_Mode::Redirect_External:
    {
     DH_Stage_Value sv;
-    QString value;
-    qds >> value;
+
+    sv.aborb_data(qds, sf->stage_code());
+
+
     store_subvalue_to_external_record(dh, sf, mem + s, sv);//value.toLatin1());
 //    _acc_conv(mem + s, qds, e - s + 1);
     write_key_value<DH_Subvalue_Field::Write_Mode::Redirect_External>(dh, sf, mem + s);
@@ -614,9 +616,6 @@ void DgDb_Database_Instance::init_hypernode_from_object(DgDb_Hypernode* dh, void
 //    store_node_data(dls, mem + s);
    }
    break;
-
-
-
    }
   }
  }

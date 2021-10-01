@@ -158,6 +158,9 @@ public:
  u1 get_prelim_decoding_code() const;
  u1 get_prelim_decoding_flag() const;
 
+
+ void aborb_data(QDataStream& qds, DH_Stage_Code sc);
+
  bool is_uninit() const
  {
   return info_.code() == 0;

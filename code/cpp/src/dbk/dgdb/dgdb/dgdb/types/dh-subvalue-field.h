@@ -83,7 +83,7 @@ private:
  u2 query_column_;
 
  // //  may become part of a bitmask sometime ...
- s1 target_byte_length_;
+ //s1 target_byte_length_;
 
 public:
 

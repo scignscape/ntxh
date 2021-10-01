@@ -31,15 +31,19 @@ void DH_Subvalue_Field::check_write_mode()
 
 void DH_Subvalue_Field::note_target_byte_length(s1 len)
 {
- target_byte_length_ = len;
+ if(len < 0)
+ {
+  stage_code_.note_byte_length(-len).note_signed_or_no_delete();
+ }
+ else
+ {
+  stage_code_.note_byte_length(len);
+ }
 }
 
 QPair<u1, bool> DH_Subvalue_Field::get_target_byte_length()
 {
- if(target_byte_length_ < 0)
-   return {-target_byte_length_, true};
-
- return {target_byte_length_, false};
+ return {stage_code_.get_byte_length(), stage_code_.check_signed()};
 }
 
 

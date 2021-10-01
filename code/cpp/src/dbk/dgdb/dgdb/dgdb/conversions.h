@@ -145,10 +145,10 @@ inline DH_Stage_Value n8_to_sv(n8 unsigned_value)
  return DH_Stage_Value().set_n8_data(unsigned_value);
 }
 
-//inline DH_Stage_Value qstring_to_sv(n8 unsigned_value)
-//{
-// return DH_Stage_Value().set_n8_data(unsigned_value);
-//}
+inline DH_Stage_Value qstring_to_sv(QString value)
+{
+ return DH_Stage_Value().set_str_data(value);
+}
 
 
 template<typename VALUE_Type>
