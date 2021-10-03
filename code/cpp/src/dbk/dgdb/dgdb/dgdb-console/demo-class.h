@@ -20,6 +20,9 @@
 
 // //  defines the serialization order ...
 #define _Demo_Class_fm(field    )field(,\
+ QDateTime ,datetime_for_query  )field(,\
+ QTime ,time_for_query          )field(,\
+ QDate ,date_for_query          )field(,\
  QString ,string_in_record      )field(,\
  QString ,string_for_query      )field(,\
  u4 ,u4_in_block                )field(,\
@@ -28,13 +31,10 @@
  s2 ,s2_for_query               )field(,\
  QDate ,date_in_block           )field(,\
  QTime ,time_in_block           )field(,\
- QDateTime ,datetime_in_block   )field(,\
- QTime ,time_for_query          )field(,\
- QDate ,date_for_query          )field(,\
- QDateTime ,datetime_for_query  )\
-\
+ QDateTime ,datetime_in_block   )\
+ /* enum fields need cast ... */ \
+field((u1&), Test_Enum_Flags ,test_enum_flags)\
 field((u1&), Test_Enum ,test_enum)\
-field((u1&), Test_Enum_Flags ,test_enum_flags)
 
 
 

@@ -16,6 +16,8 @@
 
 #include "accessors.h"
 
+#include "types/stage/dh-stage-code.h"
+
 #include <sys/types.h>
 
 
@@ -57,7 +59,7 @@ public:
  QString get_string_from_record(void* rec, u2 field_number);
 
  void get_qba_from_record(void* rec, u2 field_number,
-   QByteArray& result, u1 len, bool is_signed);//DH_Stage_Value& sv); //
+   QByteArray& result, DH_Stage_Code::Query_Typecode qtc, u1 len, bool is_signed);//DH_Stage_Value& sv); //
 
  u2 write_rec_field_via_split(char* ptr, u2 spl, DH_Stage_Value& sv); //const QByteArray& text);
  //void* get_record_via_split(char* ptr, u2 spl);

@@ -119,7 +119,7 @@ u1 DH_Stage_Value::get_prelim_encoding_code() const
 
 u1 DH_Stage_Value::get_prelim_decoding_flag() const
 {
- return info_.code() & 192; // high two bits ...
+ return info_.code() & 12; // 3rd,4th bits ...
 }
 
 u1 DH_Stage_Value::get_prelim_decoding_code() const
@@ -361,6 +361,12 @@ void DH_Stage_Value::aborb_data(QDataStream& qds, DH_Stage_Code sc)
  switch (qtc)
  {
 
+ case DH_Stage_Code::Query_Typecode::qtc_WG_NULLTYPE:
+  {
+
+  }
+  break;
+
  case DH_Stage_Code::Query_Typecode::qtc_WG_INTTYPE:
   {
    u1 len = sc.get_byte_length();
@@ -394,6 +400,62 @@ void DH_Stage_Value::aborb_data(QDataStream& qds, DH_Stage_Code sc)
    QString value;
    qds >> value;
    set_str_data(value);
+  }
+  break;
+
+ case DH_Stage_Code::Query_Typecode::qtc_WG_DOUBLETYPE:
+  {
+   r8 value;
+   qds >> value;
+   set_double_data(value);
+  }
+  break;
+
+ case DH_Stage_Code::Query_Typecode::qtc_WG_DATETYPE:
+  {
+   QDate value;
+   qds >> value;
+   set_date_data(value);
+  }
+  break;
+
+ case DH_Stage_Code::Query_Typecode::qtc_WG_TIMETYPE:
+  {
+   QTime value;
+   qds >> value;
+   set_time_data(value);
+  }
+  break;
+
+ case DH_Stage_Code::Query_Typecode::qtc_QDateTime:
+  {
+   QDateTime value;
+   qds >> value;
+   set_n8_data(value.toMSecsSinceEpoch());
+  }
+  break;
+
+ case DH_Stage_Code::Query_Typecode::qtc_WG_FIXPOINTTYPE:
+  {
+
+  }
+  break;
+
+ case DH_Stage_Code::Query_Typecode::qtc_WG_RECTYPE:
+  {
+
+  }
+  break;
+
+ case DH_Stage_Code::Query_Typecode::qtc_WG_CHARTYPE:
+  {
+
+  }
+  break;
+
+ case DH_Stage_Code::Query_Typecode::qtc_WG_BLOBTYPE:
+  {
+
   }
   break;
 

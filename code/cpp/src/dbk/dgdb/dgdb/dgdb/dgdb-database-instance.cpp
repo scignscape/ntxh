@@ -650,7 +650,7 @@ void DgDb_Database_Instance::init_hypernode_from_shm_block(DgDb_Hypernode* dh,
      DWB_Instance* dwb = get_query_dwb(dh->dh_type(), sf);
      void* rec = dwb->get_record_from_qba(temp);
      auto [len, is_signed] = sf->get_target_byte_length();
-     dwb->get_qba_from_record(rec, sf->query_column(), value, len, is_signed);
+     dwb->get_qba_from_record(rec, sf->query_column(), value, sf->get_qtc_code(), len, is_signed);
 
      qds << QString::fromLatin1(value);
     }
@@ -772,7 +772,7 @@ void DgDb_Database_Instance::fetch_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Fiel
    DWB_Instance* dwb = get_query_dwb(dh->dh_type(), sf);
    void* rec = dwb->get_record_from_qba(qba);
    auto [len, is_signed] = sf->get_target_byte_length();
-   dwb->get_qba_from_record(rec, sf->query_column(), value, len, is_signed);
+   dwb->get_qba_from_record(rec, sf->query_column(), value, sf->get_qtc_code(), len, is_signed);
    //sf->query_column();
   }
   break;
@@ -789,7 +789,7 @@ void DgDb_Database_Instance::fetch_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Fiel
    {
     auto [rec, column] = blocks_dwb_->get_record_via_known_split((char*) pv, qba_to_u2(qba));
     auto [len, is_signed] = sf->get_target_byte_length();   QByteArray qba = QByteArray( (char*) pv, 8);
-    blocks_dwb_->get_qba_from_record(rec, column, value, len, is_signed);
+    blocks_dwb_->get_qba_from_record(rec, column, value, sf->get_qtc_code(), len, is_signed);
    }
 
 //   auto [offset, column] = DH::block_offset_record_column_unsplit(qba_to_u2(qba));

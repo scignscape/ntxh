@@ -424,7 +424,10 @@ void _rec_decode(void* wh, void* rec, u4 index,
    int y, m, d;
    int wdate = wg_decode_date(wh, wi);
    wg_date_to_ymd(wh, wdate, &y, &m, &d);
-   sv.data_to_ref<QDate>() = QDate(y, m, d);
+   if(sv.data())
+     sv.data_to_ref<QDate>() = QDate(y, m, d);
+   else
+     sv.set_date_data(QDate(y, m, d));
   }
   break;
 
@@ -432,9 +435,23 @@ void _rec_decode(void* wh, void* rec, u4 index,
   {
    wg_int wi = wg_get_field(wh, rec, index);
    int tm = wg_decode_time(wh, wi);
-   sv.data_to_ref<QTime>() = QTime::fromMSecsSinceStartOfDay(tm * 10);
+   if(sv.data())
+     sv.data_to_ref<QTime>() = QTime::fromMSecsSinceStartOfDay(tm * 10);
+   else
+     sv.set_time_data(QTime::fromMSecsSinceStartOfDay(tm * 10));
   }
   break;
+
+// case qtc_QDateTime:
+//  {
+//   wg_int wi = wg_get_field(wh, rec, index);
+//   int tm = wg_decode_time(wh, wi);
+//   if(sv.data())
+//     sv.data_to_ref<QTime>() = QTime::fromMSecsSinceStartOfDay(tm * 10);
+//   else
+//     sv.set_time_data(QTime::fromMSecsSinceStartOfDay(tm * 10));
+//  }
+//  break;
 
   default:
    break;
@@ -442,15 +459,33 @@ void _rec_decode(void* wh, void* rec, u4 index,
 }
 
 void DWB_Instance::get_qba_from_record(void* rec, u2 field_number,
-  QByteArray& result, u1 len, bool is_signed)
+  QByteArray& result, DH_Stage_Code::Query_Typecode qtc, u1 len, bool is_signed)
 {
  //u1 dc = sv.get_prelim_decoding_code();
 
+ // //  here we're starting with an empty sv and
+  //    reconciling the data provided with the
+  //    existing len, sign, qtc info after ...
+  //    though it might be better to have
+  //    _rec_decode consider that info too ...
  DH_Stage_Value sv;
  _rec_decode(wdb_instance_, rec, field_number, sv);
 
- sv.check_confirm_byte_length(len, is_signed);
- sv.to_qba(result);
+ switch(qtc)
+ {
+ case DH_Stage_Code::Query_Typecode::qtc_qstr:
+ case DH_Stage_Code::Query_Typecode::qtc_QDateTime:
+  sv.to_qba(result, (u1) qtc);
+  break;
+
+ case DH_Stage_Code::Query_Typecode::qtc_WG_INTTYPE:
+  sv.check_confirm_byte_length(len, is_signed);
+  sv.to_qba(result);
+
+ default:
+  sv.to_qba(result);
+  break;
+ }
 
 // wg_int enc = wg_get_field(wdb_instance_, rec, field_number);
 // char* str = wg_decode_str(wdb_instance_, enc);

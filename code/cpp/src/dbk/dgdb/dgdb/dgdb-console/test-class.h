@@ -42,7 +42,7 @@ public:
  ACCESSORS(s2 ,a_sign)
  ACCESSORS(u4 ,a_number)
 
-// Qh_Hypernode* (*as_hypernode)();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
+// Qh_Hypernode* (*as_hypernode)();
 
 // static void init_pack_code(Qh_Pack_Code& qpc);
 

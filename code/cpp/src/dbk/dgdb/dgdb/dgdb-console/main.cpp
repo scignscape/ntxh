@@ -299,6 +299,67 @@ int main(int argc, char *argv[])
   QByteArray qba;
   void* pv;
 
+  ddi.fetch_subvalue(dh, "date_for_query", qba, pv);
+
+  QDate test_val = qba_to_qdate(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "date_for_query = " << test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "datetime_for_query", qba, pv);
+
+  QDateTime test_val = qba_to_qdatetime(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "datetime_for_query = " << test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "time_for_query", qba, pv);
+
+  QTime test_val = qba_to_qtime(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "time_for_query = " << test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "test_enum", qba, pv);
+
+  Demo_Class::Test_Enum test_val = (Demo_Class::Test_Enum) qba_to_u1(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "test_enum = " << (u1) test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "test_enum_flags", qba, pv);
+
+  Demo_Class::Test_Enum_Flags test_val = (Demo_Class::Test_Enum_Flags) qba_to_u1(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "test_enum_flags = " << (u1) test_val;
+ }
+
+
+ {
+  QByteArray qba;
+  void* pv;
+
   ddi.fetch_subvalue(dh, "date_in_block", qba, pv);
 
   QDate test_val = qba_to_qdate(qba);

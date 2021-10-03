@@ -123,31 +123,35 @@ void to_qba_<DH_Stage_Code::Query_Typecode::qtc_WG_FIXPOINTTYPE>(DH_Stage_Value&
 template<>
 void to_qba_<DH_Stage_Code::Query_Typecode::qtc_WG_DATETYPE>(DH_Stage_Value& sv, QByteArray& result)
 {
-
+ // //  data is toJulianDay ...
+ result = n8_to_qba(sv.data());
 }
 
 template<>
 void to_qba_<DH_Stage_Code::Query_Typecode::qtc_WG_TIMETYPE>(DH_Stage_Value& sv, QByteArray& result)
 {
-
+ // //  data is toMSecsSinceStartOfDay ...
+ result = u4_to_qba(sv.data());
 }
 
 template<>
 void to_qba_<DH_Stage_Code::Query_Typecode::qtc_QDateTime>(DH_Stage_Value& sv, QByteArray& result)
 {
-
+ // //  data is toMSecsSinceEpoch ...
+ result = n8_to_qba(sv.data());
 }
 
-void DH_Stage_Value::to_qba(QByteArray& result)
+void DH_Stage_Value::to_qba(QByteArray& result, u1 qtc)
 {
- DH_Stage_Code::Query_Typecode qtc = info_.get_qtc_code();
+ DH_Stage_Code::Query_Typecode _qtc =
+   qtc == 255? info_.get_qtc_code() : (DH_Stage_Code::Query_Typecode) qtc;
 
- switch (qtc)
+ switch (_qtc)
  {
 
   #define TEMP_MACRO(x ,y) \
   case DH_Stage_Code::Query_Typecode::qtc_##x: \
-    to_qba_<DH_Stage_Code::Query_Typecode::qtc_##x>(*this, result);
+    to_qba_<DH_Stage_Code::Query_Typecode::qtc_##x>(*this, result); break;
   _TYPECODE_QUERY_MACROS(TEMP_MACRO)
   #undef TEMP_MACRO
 

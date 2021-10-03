@@ -230,7 +230,7 @@ public:
  }
 
 
- void to_qba(QByteArray& result);
+ void to_qba(QByteArray& result, u1 qtc = 255);
 
  void generic_int(n8 data);
 
