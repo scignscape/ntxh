@@ -32,7 +32,7 @@
 
 
 #define _TYPECODE_QUERY_MACROS(x) \
- x(N_A ,char*) \
+ x(Generic ,char*) \
  x(qstr ,QString) \
  x(qvar ,QVariant) \
  x(WG_NULLTYPE ,nullptr_t) \
@@ -46,8 +46,8 @@
  x(WG_CHARTYPE ,char) \
  x(WG_FIXPOINTTYPE ,float) \
  x(WG_DATETYPE ,QDate) \
- x(WG_TIMETYPE ,QDateTime) \
- x(Generic ,n8) \
+ x(WG_TIMETYPE ,QTime) \
+ x(QDateTime ,QDateTime) \
 
 
 
@@ -79,7 +79,7 @@ public:
  template<typename T>
  static inline DH_Stage_Code::Query_Typecode get_qtc_code()
  {
-  return DH_Stage_Code::Query_Typecode::qtc_N_A;
+  return DH_Stage_Code::Query_Typecode::qtc_Generic;
  }
 
  DH_Stage_Code::Query_Typecode get_qtc_code() const
@@ -87,8 +87,8 @@ public:
   u1 result = code_ >> 4;
 
   // //  currently only 14 options ...
-  if(result == 15)
-    result = 0;
+//  if(result == 15)
+//    result = 0;
 
   return (Query_Typecode) result;
  }

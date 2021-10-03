@@ -42,11 +42,13 @@ INCLUDEPATH += $$WHITEDB_SRC_GROUP_DIR
 
 HEADERS += \
   $$SRC_DIR/test-class.h \
+  $$SRC_DIR/demo-class.h \
 
 
 SOURCES += \
   $$SRC_DIR/main.cpp \
   $$SRC_DIR/test-class.cpp \
+  $$SRC_DIR/demo-class.cpp \
 
 
 LIBS += -L$$TARGETSDIR -ldgdb

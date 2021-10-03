@@ -121,6 +121,11 @@ public:
   stage_code_.note_qtc_code(qtc);
  }
 
+ void note_query_info(DH_Stage_Code::Query_Typecode qtc)
+ {
+  stage_code_.note_qtc_code(qtc);
+ }
+
 };
 
 struct DH
@@ -130,27 +135,30 @@ struct DH
   return {combined >> 6, (u1) combined & 0b00111111};
  }
 
-
+ template<typename T>
  struct Redirect_In_Record_intermediary
  {
-  operator DH_Subvalue_Field::Write_Mode() const
+  operator QPair<DH_Subvalue_Field::Write_Mode, DH_Stage_Code::Query_Typecode>() const
   {
-   return DH_Subvalue_Field::Redirect_In_Record;
+   return {DH_Subvalue_Field::Redirect_In_Record, DH_Stage_Code::get_qtc_code<T>()};
   }
-  QPair<DH_Subvalue_Field::Write_Mode, u2> operator()(u1 column_index) const
+  QPair<QPair<DH_Subvalue_Field::Write_Mode, DH_Stage_Code::Query_Typecode>, u2>
+    operator()(u1 column_index) const
   {
-   return {DH_Subvalue_Field::Redirect_In_Record, column_index};
+   return {{DH_Subvalue_Field::Redirect_In_Record, DH_Stage_Code::get_qtc_code<T>()}, column_index};
   }
-  QPair<DH_Subvalue_Field::Write_Mode, u2> operator[](u1 column_index) const
+  QPair<QPair<DH_Subvalue_Field::Write_Mode, DH_Stage_Code::Query_Typecode>, u2>
+    operator[](u1 column_index) const
   {
-   return {DH_Subvalue_Field::Redirect_In_Record, column_index | 0b0010'0000};
+   return {{DH_Subvalue_Field::Redirect_In_Record, DH_Stage_Code::get_qtc_code<T>()}, column_index | 0b0010'0000};
   }
 
  };
 
  // column_index
 
- static constexpr Redirect_In_Record_intermediary Redirect_In_Record = {};
+ template<typename T>
+ static constexpr Redirect_In_Record_intermediary<T> Redirect_In_Record = {};
 
 };
 

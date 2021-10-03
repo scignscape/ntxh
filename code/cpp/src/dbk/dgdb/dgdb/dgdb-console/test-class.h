@@ -31,7 +31,7 @@ class Qh_Hypernode;
 class Test_Class
 {
  QString a_string_;
- s2 a_sign_;
+ s1 a_sign_;
  u4 a_number_;
 
 public:

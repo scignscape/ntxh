@@ -44,8 +44,330 @@ using namespace _class_DgDb_Location_Structure;
 //}
 
 #include "test-class.h"
+#include "demo-class.h"
 
 using namespace tkrzw;
+
+
+//dhts->REGISTER_TYPE(Test_Class)
+//  .set_shm_block_size(100)
+//  .sf({_Demo_Class_fm(_field_list_)})
+//     ("a_sign")[1]._signed_(10,11)
+//     ("a_string")[2](12,19)
+//        .query<QString>("&/q/$type")[5]
+//     ("a_number")[3](20,27)
+//        .query<int>("&/q/$type")(4)[6]
+// ->set_default_binary_encoder(&Test_Class::supply_data)
+//  .set_default_binary_decoder(&Test_Class::absorb_data)
+//  ;
+
+
+int main2(int argc, char *argv[])
+{
+ DgDb_Database_Instance ddi(DEFAULT_DEV_DGDB_FOLDER "/t1");
+
+ ddi.init_dtb_package();
+ ddi.init_type_system();
+ ddi.check_construct_files();
+ ddi.check_interns_dbm();
+ ddi.check_nodes_dbm();
+ ddi.read_hypernode_count_status();
+ ddi.read_interns_count_status();
+ ddi.init_dwb_blocks();
+
+ qDebug() << "blocks ftok key: " << ddi.ftok_key("blocks");
+
+ //ddi.set_get_shm_field_ptr(_get_shm_field_ptr);
+
+#define _field_list_(x) #x,
+
+ DH_Type_System* dhts = ddi.type_system();
+ dhts->REGISTER_TYPE(Test_Class)
+   .set_shm_block_size(100)
+   .sf({_Test_Class_FM(_field_list_)})
+      ("a_sign")[1]._signed_(11,11)
+      ("a_string")[2](12,19)
+         .query<QString>("&/q/$type")[5]
+      ("a_number")[3](20,27)
+         .query<int>("&/q/$type")(4)[6]
+  ->set_default_binary_encoder(&Test_Class::supply_data)
+   .set_default_binary_decoder(&Test_Class::absorb_data)
+   ;
+
+ // (DH::Redirect_In_Record [7]) //(DH_Subvalue_Field::Redirect_In_Record)
+
+ DH_Type* dht = dhts->get_type_by_name("Test_Class");
+
+ DgDb_Hypernode* dh = ddi.new_hypernode<Test_Class>();
+
+// ddi.store_indexed_field(dh, _interned_field_name(3), u2_to_qba(524),
+//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+
+
+// ddi.store(dh, "a_number", u2_to_qba(892));
+// ddi.store(dh, "a_string", "a-test");
+
+ Test_Class* tc = new Test_Class;
+ tc->set_a_number(1);
+ tc->set_a_string("a str");
+ tc->set_a_sign(-25);
+
+ ddi.init_hypernode_from_object(dh, tc);
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "a_number", qba, pv);
+
+  u4 test_val = qba_to_u4(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "test_val = " << test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "a_sign", qba, pv);
+
+  s1 test_val = qba_to_s1(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "test_val = " << test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "a_string", qba, pv);
+
+  qDebug() << "test_val = " << qba;
+ }
+
+// {
+//  QByteArray qba;
+//  void* pv;
+
+//  Test_Class* tc;
+//  DgDb_Hypernode* dh1 = ddi.find_hypernode("a_string", "a-test", &tc);
+
+//  qDebug() << "dh id = " << dh->id();
+//  qDebug() << "dh1 id = " << dh1->id();
+// }
+
+
+
+
+// ddi.store(dh, "a_number", u2_to_qba(892));
+// {
+//  QByteArray qba;
+//  void* pv;
+
+//  ddi.fetch_subvalue(dh, "a_number", qba, pv);
+
+//  u2 test_val = qba_to_u2(qba);
+//  //test = qToBigEndian(test);
+
+//  qDebug() << "test_val = " << test_val;
+// }
+
+
+// ddi.store_indexed_field(dh, _interned_field_name(3), u2_to_qba(524),
+//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_number");
+
+// ddi.store_indexed_field(dh, _interned_field_name(4), "test",
+//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+
+// {
+//  QByteArray qba;
+//  void* pv;
+//  ddi.fetch_indexed_field(dh, 3, DgDb_Location_Structure::Field_Id_Options::Interned_Field_Name,
+//    qba, pv, DgDb_Location_Structure::Data_Options::Shm_Pointer);
+
+//  u2 test = qba_to_u2(qba);
+
+//  qDebug() << "test = " << test;
+// }
+
+ //ddi.set_get_shm_field_ptr(_get_shm_field_ptr);
+
+}
+
+
+
+int main(int argc, char *argv[])
+{
+ DgDb_Database_Instance ddi(DEFAULT_DEV_DGDB_FOLDER "/t1");
+
+ ddi.init_dtb_package();
+ ddi.init_type_system();
+ ddi.check_construct_files();
+ ddi.check_interns_dbm();
+ ddi.check_nodes_dbm();
+ ddi.read_hypernode_count_status();
+ ddi.read_interns_count_status();
+ ddi.init_dwb_blocks();
+
+ qDebug() << "blocks ftok key: " << ddi.ftok_key("blocks");
+
+ //ddi.set_get_shm_field_ptr(_get_shm_field_ptr);
+
+#define _field_list_(cast, type ,name) #name,
+
+ DH_Type_System* dhts = ddi.type_system();
+
+ dhts->REGISTER_TYPE(Demo_Class)
+   .set_shm_block_size(100)
+   .sf({_Demo_Class_fm(_field_list_)})
+      ("u4_in_block")[1](12,15)
+      ("s1_in_block")[2]._signed_(16,16)
+      ("datetime_in_block")[3]._datetime_(17,24)
+      ("date_in_block")[4]._date_(25,32)
+      ("time_in_block")[5]._time_(33,40)
+      ("string_in_record")[6](41,48)
+         (DH::Redirect_In_Record <QString> [7])
+         //.column<QString>(7)
+      ("test_enum")[7](49,49)
+      ("test_enum_flags")[8](50,50)
+      ("string_for_query")[9](51,58)
+         .query<QString>("&/q/$type")[5]
+      ("s2_for_query")[10](59,66)
+         .query<int>("&/q/$type")(-2)[6]
+      ("u4_for_query")[11](67,74)
+         .query<int>("&/q/$type")(4)[7]
+      ("datetime_for_query")[12](75,82)
+         .query<QDateTime>("&/q/$type")[8]
+      ("date_for_query")[13](83,90)
+         .query<QDate>("&/q/$type")[9]
+      ("time_for_query")[14](91,98)
+         .query<QTime>("&/q/$type")[10]
+  ->set_default_binary_encoder(&Demo_Class::supply_data)
+   .set_default_binary_decoder(&Demo_Class::absorb_data)
+   ;
+
+
+// QString ,string_in_record      )field(,\
+// QString ,string_for_query      )field(,\
+// u4 ,u4_in_block                )field(,\
+// u4 ,u4_for_query               )field(,\
+// s1 ,s1_in_block                )field(,\
+// s2 ,s2_for_query               )field(,\
+// QDateTime ,datetime_in_block   )field(,\
+// QDateTime ,datetime_for_query  )field(,\
+// QDate ,date_in_block           )field(,\
+// QDate ,date_for_query          )\
+//\
+//field((u1&), Test_Enum ,test_enum)\
+//field((u1&), Test_Enum_Flags ,test_enum_flags)
+
+
+ // (DH::Redirect_In_Record [7]) //(DH_Subvalue_Field::Redirect_In_Record)
+
+ DH_Type* dht = dhts->get_type_by_name("Demo_Class");
+
+ DgDb_Hypernode* dh = ddi.new_hypernode<Demo_Class>();
+
+// ddi.store_indexed_field(dh, _interned_field_name(3), u2_to_qba(524),
+//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+
+
+// ddi.store(dh, "a_number", u2_to_qba(892));
+// ddi.store(dh, "a_string", "a-test");
+
+ Demo_Class* dc = new Demo_Class;
+ dc->set_date_for_query(QDate(1794, 2, 4));
+ dc->set_date_in_block(QDate(1787, 4, 23));
+ dc->set_time_for_query(QTime(12, 13, 14, 15));
+ dc->set_time_in_block(QTime(16, 17, 18, 19));
+ dc->set_datetime_in_block(QDate(2021, 2, 4).startOfDay());
+ dc->set_datetime_for_query(QDateTime(QDate(2021, 2, 4), QTime(20, 21, 22, 23)));
+ dc->set_s1_in_block(-25);
+ dc->set_s2_for_query(-789);
+ dc->set_u4_in_block(12345);
+ dc->set_u4_for_query(67890);
+ dc->set_string_for_query("y"); //test:string-for-quer
+ dc->set_string_in_record("d"); //test:string-in-recor
+ dc->set_test_enum(Demo_Class::Test_Enum::Enum_Val_3);
+ dc->set_test_enum_flags(Demo_Class::Test_Enum_Flags::Enum_Flags_4
+   | Demo_Class::Test_Enum_Flags::Enum_Flags_2);
+
+
+ ddi.init_hypernode_from_object(dh, dc);
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "date_in_block", qba, pv);
+
+  QDate test_val = qba_to_qdate(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "date_in_block = " << test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "datetime_in_block", qba, pv);
+
+  QDateTime test_val = qba_to_qdatetime(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "datetime_in_block = " << test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "time_in_block", qba, pv);
+
+  QTime test_val = qba_to_qtime(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "time_in_block = " << test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "u4_in_block", qba, pv);
+
+  u4 test_val = qba_to_u4(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "u4_in_block = " << test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "s1_in_block", qba, pv);
+
+  s2 test_val = qba_to_s1(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "s1_in_block = " << test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "string_for_query", qba, pv);
+
+  qDebug() << "string_for_query = " << qba;
+ }
+}
+
+#ifdef HIDE
+
+
 
 //void* _get_shm_field_ptr(DgDb_Database_Instance& ddi,
 //  DgDb_Hypernode& dh,
@@ -292,7 +614,7 @@ int main6(int argc, char *argv[])
 }
 
 
-int main(int argc, char *argv[])
+int main8(int argc, char *argv[])
 {
  DgDb_Database_Instance ddi(DEFAULT_DEV_DGDB_FOLDER "/t1");
 
@@ -799,3 +1121,4 @@ int main1(int argc, char *argv[])
 //}
 
 
+#endif // HIDE

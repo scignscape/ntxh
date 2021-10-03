@@ -468,16 +468,16 @@ DgDb_Hypernode* DgDb_Database_Instance::find_hypernode(DH_Type* dht,
 }
 
 
-void _acc_conv(const QByteArray& source, QDataStream& target, u4 len)
-{
- switch (len)
- {
- case 1: target << qba_to_u1(source); break;
- case 2: target << qba_to_u2(source); break;
- case 4: target << qba_to_u4(source); break;
- case 8: target << qba_to_n8(source); break;
- }
-}
+//void _acc_conv(const QByteArray& source, QDataStream& target, u4 len)
+//{
+// switch (len)
+// {
+// case 1: target << qba_to_u1(source); break;
+// case 2: target << qba_to_u2(source); break;
+// case 4: target << qba_to_u4(source); break;
+// case 8: target << qba_to_n8(source); break;
+// }
+//}
 
 
 void DgDb_Database_Instance::init_hypernode_from_shm_block(DgDb_Hypernode* dh, void* rec,
@@ -537,18 +537,10 @@ void DgDb_Database_Instance::write_key_value<DH_Subvalue_Field::Write_Mode::Redi
 }
 
 
-void  _acc_conv(char* mem, QDataStream& qds, u4 len)
-{
- QByteArray qba;
- switch (len)
- {
- case 1: u1 u_1; qds >> u_1; qba = u1_to_qba(u_1); break;
- case 2: u2 u_2; qds >> u_2; qba = u2_to_qba(u_2); break;
- case 4: u4 u_4; qds >> u_4; qba = u4_to_qba(u_4); break;
- case 8: n8 n_8; qds >> n_8; qba = n8_to_qba(n_8); break;
- }
- memcpy(mem, qba.data(), len);
-}
+#define _DH_INCLUDE_ONLY_
+#include "dgdb-database-instance._acc_conv.cpp"
+#undef _DH_INCLUDE_ONLY_
+
 
 void DgDb_Database_Instance::init_hypernode_from_object(DgDb_Hypernode* dh, void* obj,
   std::function<void(void*, QByteArray&)> cb)
@@ -585,7 +577,7 @@ void DgDb_Database_Instance::init_hypernode_from_object(DgDb_Hypernode* dh, void
    {
     case DH_Subvalue_Field::Write_Mode::In_Block:
     {
-     _acc_conv(mem + s, qds, e - s + 1);
+     _acc_conv(sf->stage_code(), mem + s, qds, e - s + 1);
 
      write_key_value<DH_Subvalue_Field::Write_Mode::In_Block>(dh, sf, mem + s);
     }
@@ -648,7 +640,7 @@ void DgDb_Database_Instance::init_hypernode_from_shm_block(DgDb_Hypernode* dh,
    {
     case DH_Subvalue_Field::Write_Mode::In_Block:
     {
-     _acc_conv(temp, qds, len);
+     _acc_conv(sf->stage_code(), temp, qds, len);
     }
     break;
    case DH_Subvalue_Field::Write_Mode::Redirect_External:

@@ -28,7 +28,7 @@ void to_qba_(DH_Stage_Value& sv, QByteArray& result);
 //x(Generic ,n8) \
 
 template<>
-void to_qba_<DH_Stage_Code::Query_Typecode::qtc_N_A>(DH_Stage_Value& sv, QByteArray& result)
+void to_qba_<DH_Stage_Code::Query_Typecode::qtc_Generic>(DH_Stage_Value& sv, QByteArray& result)
 {
 
 }
@@ -133,7 +133,7 @@ void to_qba_<DH_Stage_Code::Query_Typecode::qtc_WG_TIMETYPE>(DH_Stage_Value& sv,
 }
 
 template<>
-void to_qba_<DH_Stage_Code::Query_Typecode::qtc_Generic>(DH_Stage_Value& sv, QByteArray& result)
+void to_qba_<DH_Stage_Code::Query_Typecode::qtc_QDateTime>(DH_Stage_Value& sv, QByteArray& result)
 {
 
 }

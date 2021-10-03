@@ -154,8 +154,6 @@ public:
  DH_Subvalue_Field* note_field_index(QString field_name, u2 index);
  DH_Subvalue_Field* note_field_query_path(QString field_name, QString path, DH_Stage_Code::Query_Typecode qtc);
 
- void note_record_column_index(DH_Subvalue_Field* sf, u2 rci);
-
 
 //? DH_Subvalue_Field* check_note_field_name(QString field_name);
 
@@ -172,6 +170,15 @@ public:
  u2 get_internal_field_column_requirements();
 
  void note_field_target_byte_length(DH_Subvalue_Field* sf, u1 len);
+ void note_record_column_index(DH_Subvalue_Field* sf, DH_Stage_Code::Query_Typecode qtc, u2 rci);
+ void note_record_column_index(DH_Subvalue_Field* sf, u2 rci);
+
+ void note_field_qtc(DH_Subvalue_Field* sf, DH_Stage_Code::Query_Typecode qtc);
+
+
+// DH_Subvalue_Field* note_field_column_in_record(QString field_name,
+//   DH_Stage_Code::Query_Typecode qtc, u2 qyc);
+
 
  template<typename T>
  struct Note_Field_Query_intermediary;
@@ -182,20 +189,47 @@ public:
   DH_Type& _this;
   u4 held_start;
   DH_Subvalue_Field* field;
-  Note_Field_intermediary& operator()(u4 start, u4 end)
+
+  Note_Field_intermediary& note_field_block_offset(u4 start, u4 end, u1 qtc = 255)
   {
    if(field)
      _this.note_field_block_offset(field, start, end);
    else
      field = _this.note_field_block_offset(field_name, start, end);
+   if(qtc != 255)
+     _this.note_field_qtc(field, (DH_Stage_Code::Query_Typecode) qtc);
    return *this;
   }
+
+  Note_Field_intermediary& operator()(u4 start, u4 end)
+  {
+   note_field_block_offset(start, end, (u1)DH_Stage_Code::get_qtc_code<int>());
+  }
+
   Note_Field_intermediary& _signed_(u4 start, u4 end)
   {
-   operator()(start, end);
+   note_field_block_offset(start, end, (u1)DH_Stage_Code::get_qtc_code<int>());
    _this.note_field_signed(field);
    return *this;
   }
+  Note_Field_intermediary& _date_(u4 start, u4 end)
+  {
+   note_field_block_offset(start, end, (u1)DH_Stage_Code::get_qtc_code<QDate>());
+   return *this;
+  }
+
+  Note_Field_intermediary& _time_(u4 start, u4 end)
+  {
+   note_field_block_offset(start, end, (u1)DH_Stage_Code::get_qtc_code<QTime>());
+   return *this;
+  }
+
+  Note_Field_intermediary& _datetime_(u4 start, u4 end)
+  {
+   note_field_block_offset(start, end, (u1)DH_Stage_Code::get_qtc_code<QDateTime>());
+   return *this;
+  }
+
   Note_Field_intermediary& operator()(DH_Subvalue_Field::Write_Mode wm)
   {
    if(field)
@@ -204,6 +238,7 @@ public:
      field = _this.note_write_mode(field_name, wm);
    return *this;
   }
+
   Note_Field_intermediary& operator()(QPair<DH_Subvalue_Field::Write_Mode, u2> pr)
   {
    auto [wm, column_index] = pr;
@@ -216,12 +251,27 @@ public:
    return *this;
   }
 
+  Note_Field_intermediary& operator()(QPair<
+    QPair<DH_Subvalue_Field::Write_Mode, DH_Stage_Code::Query_Typecode>, u2> pr)
+  {
+   auto [pr1, column_index] = pr;
+   auto [wm, qtc] = pr1;
+   if(field)
+     _this.note_write_mode(field, wm);
+   else
+     field = _this.note_write_mode(field_name, wm);
+
+   _this.note_record_column_index(field, qtc, column_index);
+   return *this;
+  }
+
   Note_Field_intermediary& operator()(u4 start)
   {
    held_start = start;
    //_this._note_field_block_offset(field_name, start, start);
    return *this;
   }
+
   Note_Field_intermediary& operator[](u2 index)
   {
    if(field)
@@ -256,6 +306,17 @@ public:
      field = _this.note_field_query_path(field_name, path, DH_Stage_Code::get_qtc_code<T>());
    return {*this};
   }
+
+//  template<typename T>
+//  Note_Field_intermediary column(u2 c)
+//  {
+//   if(field)
+//     _this.note_field_column_in_record(field, c, DH_Stage_Code::get_qtc_code<T>());
+//   else
+//     field = _this.note_field_column_in_record(field_name, c, DH_Stage_Code::get_qtc_code<T>());
+//   return {*this};
+//  }
+
  };
 
  template<typename T>

@@ -91,6 +91,10 @@ u2 DH_Type::get_internal_field_column_requirements()
  });
 }
 
+void DH_Type::note_field_qtc(DH_Subvalue_Field* sf, DH_Stage_Code::Query_Typecode qtc)
+{
+ sf->note_query_info(qtc);
+}
 
 void DH_Type::note_field_signed(DH_Subvalue_Field* sf)
 {
@@ -159,6 +163,13 @@ void DH_Type::note_field_query_column(DH_Subvalue_Field* sf, u2 qyc)
  sf->set_query_column(qyc);
 }
 
+void DH_Type::note_record_column_index(DH_Subvalue_Field* sf,
+  DH_Stage_Code::Query_Typecode qtc, u2 rci)
+{
+ sf->note_query_info({}, qtc);
+ sf->set_record_column_index(rci);
+}
+
 DH_Subvalue_Field* DH_Type::note_field_block_offset(QString field_name, u4 start, u4 end)
 {
  if(DH_Subvalue_Field* sf = get_subvalue_field_by_field_name(field_name))
@@ -186,6 +197,18 @@ DH_Subvalue_Field* DH_Type::note_field_query_path(QString field_name, QString pa
  }
  return nullptr;
 }
+
+
+//DH_Subvalue_Field* DH_Type::note_field_column_in_record(QString field_name,
+//  DH_Stage_Code::Query_Typecode qtc, u2 column)
+//{
+// if(DH_Subvalue_Field* sf = get_subvalue_field_by_field_name(field_name))
+// {
+//  note_field_column_in_record(sf, qtc, column);
+//  return sf;
+// }
+// return nullptr;
+//}
 
 
 DH_Subvalue_Field* DH_Type::note_field_index(QString field_name, u2 index)

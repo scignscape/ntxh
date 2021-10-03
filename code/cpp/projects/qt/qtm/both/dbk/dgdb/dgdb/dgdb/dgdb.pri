@@ -67,6 +67,7 @@ SOURCES += \
   $$SRC_DIR/dgdb-hypernode.cpp  \
   $$SRC_DIR/dgdb-database-instance.data-options.cpp  \
   $$SRC_DIR/dgdb-database-instance.store-subvalue.cpp  \
+  $$SRC_DIR/dgdb-database-instance._acc_conv.cpp  \
   $$SRC_DIR/dwb/dwb-instance.cpp  \
   $$SRC_DIR/dtb/dtb-package.cpp  \
   $$SRC_DIR/types/dh-type.cpp  \

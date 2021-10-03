@@ -13,6 +13,19 @@
 
 #include <functional>
 
+
+#define ENUM_FLAGS_OP_MACROS(e) \
+ friend constexpr Test_Enum_Flags operator|(e lhs, e rhs) \
+ { \
+  return (e) ( (u1) lhs | (u1) rhs ); \
+ } \
+ friend constexpr u1 operator&(e lhs, e rhs) \
+ { \
+  return (u1) lhs & (u1) rhs; \
+ } \
+
+
+
 inline char* q_to_std(const QString& qs)
 {
  return const_cast<char*>( qs.toStdString().c_str() );

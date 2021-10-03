@@ -46,7 +46,7 @@ inline s1 qba_to_s1(const QByteArray& qba)
 {
  if(qba.isEmpty())
    return 0;
- return (s1) qba.at(1);
+ return (s1) qba.at(0);
 }
 
 
@@ -196,7 +196,20 @@ inline n8 qba_to_n8(const QByteArray& qba)
  return qFromBigEndian(result);
 }
 
+inline QDate qba_to_qdate(const QByteArray& qba)
+{
+ return QDate::fromJulianDay(qba_to_n8(qba));
+}
 
+inline QDateTime qba_to_qdatetime(const QByteArray& qba)
+{
+ return QDateTime::fromMSecsSinceEpoch(qba_to_n8(qba));
+}
+
+inline QTime qba_to_qtime(const QByteArray& qba)
+{
+ return QTime::fromMSecsSinceStartOfDay(qba_to_u4(qba));
+}
 
 
 #endif // CONVERSIONS__H
