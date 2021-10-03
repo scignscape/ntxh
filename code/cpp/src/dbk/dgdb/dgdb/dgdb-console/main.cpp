@@ -295,6 +295,51 @@ int main(int argc, char *argv[])
 
 
  ddi.init_hypernode_from_object(dh, dc);
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "string_in_record", qba, pv);
+
+  qDebug() << "string_in_record = " << qba;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "string_for_query", qba, pv);
+
+  qDebug() << "string_for_query = " << qba;
+ }
+
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "s2_for_query", qba, pv);
+
+  s2 test_val = qba_to_s2(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "s2_for_query = " << test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "u4_for_query", qba, pv);
+
+  u4 test_val = qba_to_u4(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "u4_for_query = " << test_val;
+ }
+
+
  {
   QByteArray qba;
   void* pv;
@@ -416,14 +461,6 @@ int main(int argc, char *argv[])
   qDebug() << "s1_in_block = " << test_val;
  }
 
- {
-  QByteArray qba;
-  void* pv;
-
-  ddi.fetch_subvalue(dh, "string_for_query", qba, pv);
-
-  qDebug() << "string_for_query = " << qba;
- }
 }
 
 #ifdef HIDE

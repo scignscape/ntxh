@@ -166,7 +166,7 @@ void DH_Type::note_field_query_column(DH_Subvalue_Field* sf, u2 qyc)
 void DH_Type::note_record_column_index(DH_Subvalue_Field* sf,
   DH_Stage_Code::Query_Typecode qtc, u2 rci)
 {
- sf->note_query_info({}, qtc);
+ sf->note_query_info(qtc);
  sf->set_record_column_index(rci);
 }
 

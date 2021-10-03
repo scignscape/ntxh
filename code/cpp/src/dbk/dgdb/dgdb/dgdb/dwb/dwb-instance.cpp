@@ -766,6 +766,12 @@ u2 DWB_Instance::write_rec_field_via_split(char* ptr, u2 spl, DH_Stage_Value& sv
  auto [rec, column_adj] = get_record_via_split(ptr, spl);
  auto [column, adj] = column_adj;
 
+ DH_Stage_Code::Query_Typecode qtc = sv.get_qtc_code();
+
+ if(qtc == DH_Stage_Code::Query_Typecode::qtc_WG_STRTYPE)
+ {
+  wg_set_str_field(wdb_instance_, rec, column, (char*) sv.data());
+ }
  //?wg_set_str_field(wdb_instance_, rec, column, (char*) text.data());
  return adj;
 }

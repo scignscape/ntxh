@@ -148,6 +148,11 @@ public:
 
  DH_Stage_Value& set_ptr_data(void* ptr);
 
+ DH_Stage_Code::Query_Typecode get_qtc_code()
+ {
+  return info_.get_qtc_code();
+ }
+
  void check_confirm_byte_length(u1 len, bool is_signed);
 
  u1 get_wg_encoding_type() const;

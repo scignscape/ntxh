@@ -600,8 +600,11 @@ void DgDb_Database_Instance::init_hypernode_from_object(DgDb_Hypernode* dh, void
    case DH_Subvalue_Field::Write_Mode::Redirect_In_Record:
    {
     DH_Stage_Value sv;
-    QString value;
-    qds >> value;
+//    QString value;
+//    qds >> value;
+
+    // // todo deal with q_str versus WG_STR ...
+    sv.aborb_data(qds, sf->stage_code());
     store_subvalue_to_record(sf, mem + s, sv); //value.toLatin1());
 //    _acc_conv(mem + s, qds, e - s + 1);
     write_key_value<DH_Subvalue_Field::Write_Mode::Redirect_In_Record>(dh, sf, mem + s);
