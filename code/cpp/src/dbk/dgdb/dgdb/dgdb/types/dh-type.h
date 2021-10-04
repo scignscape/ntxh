@@ -7,11 +7,14 @@
 #ifndef DH_TYPE__H
 #define DH_TYPE__H
 
+
 #include <functional>
 
 #include <QMap>
 
 #include "global-types.h"
+
+#include "dh-type-field-info-state.h"
 
 //#include "dw-stage-value.h"
 //#include "stage/dw-stage-queue.h"
@@ -180,6 +183,258 @@ public:
 //   DH_Stage_Code::Query_Typecode qtc, u2 qyc);
 
 
+ DH_Type_Field_Info_State sf(QVector<QPair<QString, DH_Stage_Code>> nqtc)
+ {
+  //qtc_serialization_order_.resize(nqtc.size());
+  //int i = 0;
+  std::transform(nqtc.begin(), nqtc.end(), std::back_inserter(field_name_serialization_order_),
+   [this](auto pr) { subvalue_fields_index_map_[pr.first].second = pr.second; return pr.first; });
+
+  subvalue_fields_serialization_vector_ = new QVector<DH_Subvalue_Field*>();
+  return DH_Type_Field_Info_State(*this,
+    DH_Type_Field_Info_State::Wide_Input_State::Field_Map);
+ }
+////  subvalue_fields_qtc_vector_ = new QVector<DH_Stage_Code::Query_Typecode>();
+
+//  //check_note_field_name(field_name);
+//  //
+//  DH_Type_Field_Info_State result(*this);
+//  //result.set_field_name()
+//  //return {{}, *this, (u4) -1, nullptr};
+//  return result;
+// }
+
+
+ DH_Type_Field_Info_State sf(QStringList field_names)
+ {
+  field_name_serialization_order_ = field_names;
+  subvalue_fields_serialization_vector_ = new QVector<DH_Subvalue_Field*>();
+  return DH_Type_Field_Info_State(*this,
+    DH_Type_Field_Info_State::Wide_Input_State::Field_Vecotor);
+ }
+  //check_note_field_name(field_name);
+  //
+//  return {{}, *this, (u4) -1, nullptr};
+
+//  DH_Type_Field_Info_State result(*this);
+//  //result.set_field_name()
+//  //return {{}, *this, (u4) -1, nullptr};
+//  return result;
+
+// }
+
+ DH_Type_Field_Info_State sf(QString field_name)
+ {
+  return DH_Type_Field_Info_State(*this, field_name);
+  //check_note_field_name(field_name);
+  //return {field_name, *this, (u4) -1, nullptr};
+ }
+
+ template<typename T>
+ static std::function<void(void*, QByteArray&)> default_binary_encoder(void (T::*fn)(QByteArray&))
+ {
+  return [fn](void* v, QByteArray& qba)
+  {
+   (((T*) v)->*fn)(qba);
+  };
+ }
+
+
+ template<typename T>
+ static std::function<void(void*, const QByteArray&)> 
+   default_binary_decoder(void (T::*fn)(const QByteArray&))
+ {
+  return [fn](void* v, const QByteArray& qba)
+  {
+   (((T*) v)->*fn)(qba);
+  };
+ }
+
+
+ template<typename PROC_Type>
+ DH_Type& set_binary_encoder(PROC_Type pt)
+ {
+  binary_encoder_ = pt;
+  return *this;
+ }  
+
+ template<typename VALUE_Type, typename PROC_Type>
+ DH_Type& _set_default_binary_encoder(PROC_Type pt)
+ {
+  return set_binary_encoder(default_binary_encoder
+     <VALUE_Type>(pt) );
+  return *this;
+ }  
+
+ template<typename PROC_Type>
+ DH_Type& set_default_binary_encoder(PROC_Type pt)
+ {
+  return _set_default_binary_encoder<
+    Class_Of_Member_Function<PROC_Type>, PROC_Type>(pt);
+ }  
+
+
+ template<typename PROC_Type>
+ DH_Type& _set_static_opaque_encoder(PROC_Type pt)
+ {
+  opaque_encoder_ = pt;
+  return *this;
+ }
+
+ template<typename PROC_Type>
+ DH_Type& set_static_opaque_encoder(PROC_Type pt)
+ {
+  static s2 stash_id = 0;
+  --stash_id;
+  opaque_encoder_ = pt;
+  stash_id_ = stash_id;
+  return *this;
+ }
+
+ template<typename VALUE_Type, typename PROC_Type>
+ DH_Type& _set_opaque_encoder(PROC_Type pt)
+ {
+  return set_static_opaque_encoder(default_binary_encoder
+     <VALUE_Type>(pt) );
+  //return *this;
+ }
+
+
+ template<typename PROC_Type>
+ DH_Type& set_opaque_encoder(PROC_Type pt)
+ {
+  return _set_opaque_encoder<
+    Class_Of_Member_Function<PROC_Type>, PROC_Type>(pt);
+ }
+
+
+
+ template<typename PROC_Type>
+ DH_Type& set_binary_decoder(PROC_Type pt)
+ {
+  binary_decoder_ = pt;
+  return *this;
+ }  
+
+ template<typename VALUE_Type, typename PROC_Type>
+ DH_Type& _set_default_binary_decoder(PROC_Type pt)
+ {
+  return set_binary_decoder(default_binary_decoder
+     <VALUE_Type>(pt) );
+  return *this;
+ }  
+
+ template<typename PROC_Type>
+ DH_Type& set_default_binary_decoder(PROC_Type pt)
+ {
+  return _set_default_binary_decoder<
+    Class_Of_Member_Function<PROC_Type>, PROC_Type>(pt);
+ }  
+
+
+ template<typename PROC_Type>
+ DH_Type& set_static_opaque_decoder(PROC_Type pt)
+ {
+  opaque_decoder_ = pt;
+  return *this;
+ }
+
+ template<typename VALUE_Type, typename PROC_Type>
+ DH_Type& _set_opaque_decoder(PROC_Type pt)
+ {
+  return set_static_opaque_decoder(default_binary_decoder
+     <VALUE_Type>(pt) );
+  return *this;
+ }
+
+ template<typename PROC_Type>
+ DH_Type& set_opaque_decoder(PROC_Type pt)
+ {
+  return _set_opaque_decoder<
+    Class_Of_Member_Function<PROC_Type>, PROC_Type>(pt);
+ }
+
+
+ template<typename CType>
+ void rtti_read(QString name)
+ {
+  name_ = name;
+  cname_ = QString::fromStdString(typeid(CType).name());
+  byte_length_ = sizeof(CType);
+  if( (byte_length_ == 1) || (byte_length_ == 2)
+    || (byte_length_ == 4) || (byte_length_ == 8) )
+    byte_length_code_ = byte_length_; 
+ } 
+
+
+ DH_Type();
+
+ DH_Type& default_object_layout();
+ 
+ QPair<u4, u4> get_field_block_offset(QString field_name);
+
+};
+
+
+#ifndef UNEXPECTED_INPUT_PATTERN
+#define UNEXPECTED_INPUT_PATTERN \
+  qDebug() << "Unexpected input pattern in field info (line " << __LINE__ << " )";
+#endif
+
+
+// //   this goes here to avoid #including
+ //     dh-type.h in dh-field-info-state.h ...
+template<typename T>
+DH_Type_Field_Info_State& DH_Type_Field_Info_State::query(QString path)
+{
+ if(field_)
+   _this.note_field_query_path(field_, path, DH_Stage_Code::get_qtc_code<T>());
+ else
+   field_ = _this.note_field_query_path(field_name_, path, DH_Stage_Code::get_qtc_code<T>());
+ wide_ = Wide_Input_State::Query;
+ narrow_ = Narrow_Input_State::N_A;
+ return *this;
+}
+
+template<typename T>
+DH_Type_Field_Info_State& DH_Type_Field_Info_State::record(u2 column_index)
+{
+ if(wide_ != Wide_Input_State::Field_Name)
+ {
+  UNEXPECTED_INPUT_PATTERN
+  return *this;
+ }
+
+ note_write_mode(DH_Subvalue_Field::Write_Mode::Redirect_In_Record);
+
+ DH_Stage_Code::Query_Typecode qtc = DH_Stage_Code::get_qtc_code<T>();
+
+ if(column_index)
+   _this.note_record_column_index(field_, qtc, column_index - 1);
+ else
+   _this.note_field_qtc(field_, qtc);
+
+ wide_ = Wide_Input_State::Record;
+ narrow_ = Narrow_Input_State::N_A;
+ return *this;
+}
+
+ //?_KANS(DgDb)
+
+#endif // DH_TYPE__H
+
+
+
+
+
+
+
+
+
+
+
+
+#ifdef HIDE
  template<typename T>
  struct Note_Field_Query_intermediary;
 
@@ -372,154 +627,4 @@ public:
   return {field_name, *this, (u4) -1, nullptr};
  }
 
- template<typename T>
- static std::function<void(void*, QByteArray&)> default_binary_encoder(void (T::*fn)(QByteArray&))
- {
-  return [fn](void* v, QByteArray& qba)
-  {
-   (((T*) v)->*fn)(qba);
-  };
- }
-
-
- template<typename T>
- static std::function<void(void*, const QByteArray&)> 
-   default_binary_decoder(void (T::*fn)(const QByteArray&))
- {
-  return [fn](void* v, const QByteArray& qba)
-  {
-   (((T*) v)->*fn)(qba);
-  };
- }
-
-
- template<typename PROC_Type>
- DH_Type& set_binary_encoder(PROC_Type pt)
- {
-  binary_encoder_ = pt;
-  return *this;
- }  
-
- template<typename VALUE_Type, typename PROC_Type>
- DH_Type& _set_default_binary_encoder(PROC_Type pt)
- {
-  return set_binary_encoder(default_binary_encoder
-     <VALUE_Type>(pt) );
-  return *this;
- }  
-
- template<typename PROC_Type>
- DH_Type& set_default_binary_encoder(PROC_Type pt)
- {
-  return _set_default_binary_encoder<
-    Class_Of_Member_Function<PROC_Type>, PROC_Type>(pt);
- }  
-
-
- template<typename PROC_Type>
- DH_Type& _set_static_opaque_encoder(PROC_Type pt)
- {
-  opaque_encoder_ = pt;
-  return *this;
- }
-
- template<typename PROC_Type>
- DH_Type& set_static_opaque_encoder(PROC_Type pt)
- {
-  static s2 stash_id = 0;
-  --stash_id;
-  opaque_encoder_ = pt;
-  stash_id_ = stash_id;
-  return *this;
- }
-
- template<typename VALUE_Type, typename PROC_Type>
- DH_Type& _set_opaque_encoder(PROC_Type pt)
- {
-  return set_static_opaque_encoder(default_binary_encoder
-     <VALUE_Type>(pt) );
-  //return *this;
- }
-
-
- template<typename PROC_Type>
- DH_Type& set_opaque_encoder(PROC_Type pt)
- {
-  return _set_opaque_encoder<
-    Class_Of_Member_Function<PROC_Type>, PROC_Type>(pt);
- }
-
-
-
- template<typename PROC_Type>
- DH_Type& set_binary_decoder(PROC_Type pt)
- {
-  binary_decoder_ = pt;
-  return *this;
- }  
-
- template<typename VALUE_Type, typename PROC_Type>
- DH_Type& _set_default_binary_decoder(PROC_Type pt)
- {
-  return set_binary_decoder(default_binary_decoder
-     <VALUE_Type>(pt) );
-  return *this;
- }  
-
- template<typename PROC_Type>
- DH_Type& set_default_binary_decoder(PROC_Type pt)
- {
-  return _set_default_binary_decoder<
-    Class_Of_Member_Function<PROC_Type>, PROC_Type>(pt);
- }  
-
-
- template<typename PROC_Type>
- DH_Type& set_static_opaque_decoder(PROC_Type pt)
- {
-  opaque_decoder_ = pt;
-  return *this;
- }
-
- template<typename VALUE_Type, typename PROC_Type>
- DH_Type& _set_opaque_decoder(PROC_Type pt)
- {
-  return set_static_opaque_decoder(default_binary_decoder
-     <VALUE_Type>(pt) );
-  return *this;
- }
-
- template<typename PROC_Type>
- DH_Type& set_opaque_decoder(PROC_Type pt)
- {
-  return _set_opaque_decoder<
-    Class_Of_Member_Function<PROC_Type>, PROC_Type>(pt);
- }
-
-
- template<typename CType>
- void rtti_read(QString name)
- {
-  name_ = name;
-  cname_ = QString::fromStdString(typeid(CType).name());
-  byte_length_ = sizeof(CType);
-  if( (byte_length_ == 1) || (byte_length_ == 2)
-    || (byte_length_ == 4) || (byte_length_ == 8) )
-    byte_length_code_ = byte_length_; 
- } 
-
-
- DH_Type();
-
- DH_Type& default_object_layout();
- 
- QPair<u4, u4> get_field_block_offset(QString field_name);
-
-};
-
-
- //?_KANS(DgDb)
-
-#endif // DH_TYPE__H
-
-
+#endif // HIDE

@@ -142,15 +142,18 @@ struct DH
   {
    return {DH_Subvalue_Field::Redirect_In_Record, DH_Stage_Code::get_qtc_code<T>()};
   }
+
   QPair<QPair<DH_Subvalue_Field::Write_Mode, DH_Stage_Code::Query_Typecode>, u2>
     operator()(u1 column_index) const
   {
-   return {{DH_Subvalue_Field::Redirect_In_Record, DH_Stage_Code::get_qtc_code<T>()}, column_index};
+   return {{DH_Subvalue_Field::Redirect_In_Record, DH_Stage_Code::get_qtc_code<T>()}, column_index - 1};
   }
+
   QPair<QPair<DH_Subvalue_Field::Write_Mode, DH_Stage_Code::Query_Typecode>, u2>
     operator[](u1 column_index) const
   {
-   return {{DH_Subvalue_Field::Redirect_In_Record, DH_Stage_Code::get_qtc_code<T>()}, column_index | 0b0010'0000};
+   return {{DH_Subvalue_Field::Redirect_In_Record, DH_Stage_Code::get_qtc_code<T>()},
+     column_index | 0b0010'0000};
   }
 
  };

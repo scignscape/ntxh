@@ -418,6 +418,7 @@ void DH_Stage_Value::aborb_data(QDataStream& qds, DH_Stage_Code sc)
 
  case DH_Stage_Code::Query_Typecode::qtc_WG_STRTYPE:
   {
+   DH_Stage_Code::String_Kind sk = get_string_kind();
 
    QString value;
    qds >> value;
