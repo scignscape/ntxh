@@ -62,6 +62,7 @@
 #define _Demo_Class_fm(field      )field(,\
  QString ,string_in_record        )field(,\
  QString ,string_for_query        )field(,\
+ QString ,string_encoded          )field(,\
  u4 ,u4_in_block                  )field(,\
  u4 ,u4_for_query                 )field(,\
  s1 ,s1_in_block                  )field(,\

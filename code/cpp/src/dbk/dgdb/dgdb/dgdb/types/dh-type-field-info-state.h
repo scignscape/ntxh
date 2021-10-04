@@ -119,6 +119,8 @@ public:
  template<typename T>
  DH_Type_Field_Info_State& record(u2 column_index = 0);
 
+ template<typename T>
+ DH_Type_Field_Info_State& encode();
 
 // ACCESSORS(QString ,field_name)
 // ACCESSORS(u4 ,held_start)

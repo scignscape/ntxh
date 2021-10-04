@@ -62,7 +62,11 @@ public:
    QByteArray& result, DH_Stage_Code::Query_Typecode qtc, u1 len, bool is_signed);//DH_Stage_Value& sv); //
 
  u2 write_rec_field_via_split(char* ptr, u2 spl, DH_Stage_Value& sv); //const QByteArray& text);
+ n8 write_encoded_value(DH_Stage_Value& sv); //const QByteArray& text);
+
  //void* get_record_via_split(char* ptr, u2 spl);
+
+ void get_qba_from_encoded_value(n8 enc, DH_Stage_Code::Query_Typecode qtc, QByteArray& result);
 
  void* get_record_from_qba(const QByteArray& qba);
  void* get_target_record_from_query_record(DWB_Instance* origin_dwb, void* qrec, u2 rec_column);

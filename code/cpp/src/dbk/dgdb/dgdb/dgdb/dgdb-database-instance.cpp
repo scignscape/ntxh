@@ -513,6 +513,7 @@ void _write_key_value(DgDb_Database_Instance& _this, DgDb_Hypernode* dh, DH_Subv
 }
 
 
+// //  these are all the same?
 template<>
 void DgDb_Database_Instance::write_key_value<DH_Subvalue_Field::Write_Mode::In_Block>
   (DgDb_Hypernode* dh, DH_Subvalue_Field* sf, char* mem)
@@ -531,6 +532,13 @@ void DgDb_Database_Instance::write_key_value<DH_Subvalue_Field::Write_Mode::Redi
 
 template<>
 void DgDb_Database_Instance::write_key_value<DH_Subvalue_Field::Write_Mode::Redirect_In_Record>
+  (DgDb_Hypernode* dh, DH_Subvalue_Field* sf, char* mem)
+{
+ _write_key_value(*this, dh, sf, mem);
+}
+
+template<>
+void DgDb_Database_Instance::write_key_value<DH_Subvalue_Field::Write_Mode::Redirect_In_Block>
   (DgDb_Hypernode* dh, DH_Subvalue_Field* sf, char* mem)
 {
  _write_key_value(*this, dh, sf, mem);
@@ -597,6 +605,17 @@ void DgDb_Database_Instance::init_hypernode_from_object(DgDb_Hypernode* dh, void
    }
    break;
 
+   case DH_Subvalue_Field::Write_Mode::Redirect_In_Block:
+   {
+    DH_Stage_Value sv;
+
+    sv.aborb_data(qds, sf->stage_code());
+
+    store_subvalue_to_block(sf, mem + s, sv);
+    write_key_value<DH_Subvalue_Field::Write_Mode::Redirect_In_Block>(dh, sf, mem + s);
+   }
+   break;
+
    case DH_Subvalue_Field::Write_Mode::Redirect_In_Record:
    {
     DH_Stage_Value sv;
@@ -611,6 +630,8 @@ void DgDb_Database_Instance::init_hypernode_from_object(DgDb_Hypernode* dh, void
 //    store_node_data(dls, mem + s);
    }
    break;
+
+
    }
   }
  }
@@ -777,6 +798,14 @@ void DgDb_Database_Instance::fetch_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Fiel
    auto [len, is_signed] = sf->get_target_byte_length();
    dwb->get_qba_from_record(rec, sf->query_column(), value, sf->get_qtc_code(), len, is_signed);
    //sf->query_column();
+  }
+  break;
+
+ case DH_Subvalue_Field::Write_Mode::Redirect_In_Block:
+  {
+   QByteArray qba = QByteArray( (char*) pv, 8);
+   blocks_dwb_->get_qba_from_encoded_value(qba_to_n8(qba), sf->get_qtc_code(), value);
+     //sf->query_column();
   }
   break;
 

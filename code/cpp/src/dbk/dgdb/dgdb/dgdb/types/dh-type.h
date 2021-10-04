@@ -419,6 +419,26 @@ DH_Type_Field_Info_State& DH_Type_Field_Info_State::record(u2 column_index)
  return *this;
 }
 
+
+template<typename T>
+DH_Type_Field_Info_State& DH_Type_Field_Info_State::encode()
+{
+ if(wide_ != Wide_Input_State::Field_Name)
+ {
+  UNEXPECTED_INPUT_PATTERN
+  return *this;
+ }
+
+ note_write_mode(DH_Subvalue_Field::Write_Mode::Redirect_In_Block);
+
+ DH_Stage_Code::Query_Typecode qtc = DH_Stage_Code::get_qtc_code<T>();
+ _this.note_field_qtc(field_, qtc);
+
+ wide_ = Wide_Input_State::Encode;
+ narrow_ = Narrow_Input_State::N_A;
+ return *this;
+}
+
  //?_KANS(DgDb)
 
 #endif // DH_TYPE__H

@@ -27,9 +27,10 @@
 
 //KANS_(DGDB)
 
-static constexpr u1 C_STRING_DECODING_Flag = 64;
-static constexpr u1 XSD_TYPE_DECODING_Flag = 128;
-static constexpr u1 URI_PREFIX_DECODING_Flag = 128;
+//?
+static constexpr u1 C_STRING_DECODING_Flag = 4;
+static constexpr u1 XSD_TYPE_DECODING_Flag = 8;
+static constexpr u1 URI_PREFIX_DECODING_Flag = 8;
 
 class DH_Stage_Queue;
 
@@ -241,6 +242,7 @@ public:
  void to_qba(QByteArray& result, u1 qtc = 255);
 
  void generic_int(n8 data);
+ void generic_null();
 
  DH_Stage_Value& note_unspec();
  DH_Stage_Value& note_enum();

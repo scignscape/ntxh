@@ -322,6 +322,10 @@ void DH_Stage_Value::check_confirm_byte_length(u1 len, bool is_signed)
 
 }
 
+void DH_Stage_Value::generic_null()
+{
+ info_.note_null().note_unspec_or_data_has_type();
+}
 
 void DH_Stage_Value::generic_int(n8 data)
 {

@@ -72,6 +72,16 @@ void DH_Stage_Code::check_confirm_byte_length(u1 len, bool is_signed)
  }
 }
 
+u1 DH_Stage_Code::qtc_to_wg_field_type(Query_Typecode qtc)
+{
+ u1 result = (u1) qtc;
+ if(result == 15)
+   return 0;
+ if(result < 2)
+   return 0;
+ return result - 2;
+}
+
 u1 DH_Stage_Code::get_byte_length() const
 {
  Query_Typecode qtc = get_qtc_code();

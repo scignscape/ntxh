@@ -163,6 +163,8 @@ public:
 
  void store_subvalue_to_record(DH_Subvalue_Field* sf, char* mem, DH_Stage_Value& sv);//const QByteArray& value);
 
+ void store_subvalue_to_block(DH_Subvalue_Field* sf, char* mem, DH_Stage_Value& sv);
+
  void init_hypernode_from_object(DgDb_Hypernode* dh, void* obj,
    std::function<void(void*, QByteArray&)> cb);
 

@@ -157,6 +157,7 @@ public:
   return code_ & 8;
  }
 
+ static u1 qtc_to_wg_field_type(Query_Typecode qtc);
 
  void check_confirm_byte_length(u1 len, bool is_signed);
 

@@ -221,7 +221,7 @@ int main(int argc, char *argv[])
  DH_Type_System* dhts = ddi.type_system();
 
  dhts->REGISTER_TYPE(Demo_Class)
-   .set_shm_block_size(100)    //   .sf({_Demo_Class_fm(_field_list_)})
+   .set_shm_block_size(106)    //   .sf({_Demo_Class_fm(_field_list_)})
    .sf({_Demo_Class_fm(_field_map_)})
       ("u4_in_block")[1](12,15)
       ("s1_in_block")[2]._signed_(16,16)
@@ -233,20 +233,22 @@ int main(int argc, char *argv[])
          //(DH::Redirect_In_Record <QString> [7])
          //(DH::Redirect_In_Record <QString> (1))
          .record<QString>()[7]
-      ("test_enum")[7](49,49)
-      ("test_enum_flags")[8](50,50)
-      ("string_for_query")[9](51,58)
+      ("string_encoded")[7](49,56)
+         .encode<QString>()
+      ("string_for_query")[8](57,64)
          .query<QString>("&/q/$type")[5]
-      ("s2_for_query")[10]._signed_(59,66)
+      ("s2_for_query")[9]._signed_(65,72)
          .query<int>("&/q/$type")(2)[6] // (-2)[6]
-      ("u4_for_query")[11](67,74)
+      ("u4_for_query")[10](73,80)
          .query<int>("&/q/$type")(4)[7]
-      ("datetime_for_query")[12](75,82)
+      ("datetime_for_query")[11](81,88)
          .query<QDateTime>("&/q/$type")[8]
-      ("date_for_query")[13](83,90)
+      ("date_for_query")[12](89,96)
          .query<QDate>("&/q/$type")[9]
-      ("time_for_query")[14](91,98)
+      ("time_for_query")[13](97,104)
          .query<QTime>("&/q/$type")[10]
+      ("test_enum")[14](105,105)
+      ("test_enum_flags")[15](106,106)
   ->set_default_binary_encoder(&Demo_Class::supply_data)
    .set_default_binary_decoder(&Demo_Class::absorb_data)
    ;
@@ -277,23 +279,15 @@ int main(int argc, char *argv[])
  dc->set_s2_for_query(-789);
  dc->set_u4_in_block(12345);
  dc->set_u4_for_query(67890);
- dc->set_string_for_query("y"); //test:string-for-quer
- dc->set_string_in_record("d"); //test:string-in-recor
+ dc->set_string_for_query("test:string-for-query"); //test:string-for-quer
+ dc->set_string_in_record("test:string-in-record"); //test:string-in-recor
+ dc->set_string_encoded("test:string-encoded"); //test:string-in-recor
  dc->set_test_enum(Demo_Class::Test_Enum::Enum_Val_3);
  dc->set_test_enum_flags(Demo_Class::Test_Enum_Flags::Enum_Flags_4
    | Demo_Class::Test_Enum_Flags::Enum_Flags_2);
 
 
  ddi.init_hypernode_from_object(dh, dc);
-
- {
-  QByteArray qba;
-  void* pv;
-
-  ddi.fetch_subvalue(dh, "string_for_query", qba, pv);
-
-  qDebug() << "string_for_query = " << qba;
- }
 
  {
   QByteArray qba;
@@ -326,6 +320,24 @@ int main(int argc, char *argv[])
   ddi.fetch_subvalue(dh, "string_in_record", qba, pv);
 
   qDebug() << "string_in_record = " << qba;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "string_encoded", qba, pv);
+
+  qDebug() << "string_encoded = " << qba;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "string_for_query", qba, pv);
+
+  qDebug() << "string_for_query = " << qba;
  }
 
  {

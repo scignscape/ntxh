@@ -70,6 +70,15 @@ void DgDb_Database_Instance::store_subvalue_to_record(DH_Subvalue_Field* sf, cha
  memcpy(mem, qba.data(), qba.size());
 }
 
+void DgDb_Database_Instance::store_subvalue_to_block(DH_Subvalue_Field* sf,
+  char* mem, DH_Stage_Value& sv)
+{
+ n8 enc = blocks_dwb_->write_encoded_value(sv); //value);
+ QByteArray qba = n8_to_qba(enc);
+ memcpy(mem, qba.data(), qba.size());
+}
+
+
 
 template<>
 void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Options::QVariant>
