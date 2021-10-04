@@ -473,17 +473,17 @@ void DWB_Instance::get_qba_from_record(void* rec, u2 field_number,
 
  switch(qtc)
  {
- case DH_Stage_Code::Query_Typecode::qtc_qstr:
- case DH_Stage_Code::Query_Typecode::qtc_QDateTime:
-  sv.to_qba(result, (u1) qtc);
-  break;
+// case DH_Stage_Code::Query_Typecode::qtc_qstr:
+// case DH_Stage_Code::Query_Typecode::qtc_QDateTime:
+//  sv.to_qba(result, (u1) qtc);
+//  break;
 
  case DH_Stage_Code::Query_Typecode::qtc_WG_INTTYPE:
   sv.check_confirm_byte_length(len, is_signed);
   sv.to_qba(result);
 
  default:
-  sv.to_qba(result);
+  sv.to_qba(result, (u1) qtc);
   break;
  }
 

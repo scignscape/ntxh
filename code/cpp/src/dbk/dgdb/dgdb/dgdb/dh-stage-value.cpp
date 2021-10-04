@@ -77,20 +77,20 @@ DH_Stage_Value::~DH_Stage_Value()
 
 
 
-DH_Stage_Value& DH_Stage_Value::new_qstring(const QString& qs)
+DH_Stage_Value& DH_Stage_Value::new_qstring(const QString& qs, DH_Stage_Code::String_Kind sk)
 {
- return note_qstring().set_data(qs);
+ return note_qstring(sk).set_data(qs);
 }
 
-DH_Stage_Value& DH_Stage_Value::new_qstring_pair(const QString& qs)
+DH_Stage_Value& DH_Stage_Value::new_qstring_pair(const QString& qs, DH_Stage_Code::String_Kind sk)
 {
- return note_qstring().note_unspec_or_data_has_type().set_data(
+ return note_qstring(sk).note_unspec_or_data_has_type().set_data(
    QPair<n8, QStringList*> {0, new QStringList {qs, {}}});
 }
 
-DH_Stage_Value& DH_Stage_Value::new_qstring_pair(const QString& qs1, const QString& qs2)
+DH_Stage_Value& DH_Stage_Value::new_qstring_pair(const QString& qs1, const QString& qs2, DH_Stage_Code::String_Kind sk)
 {
- return note_qstring().note_unspec_or_data_has_type().set_data(
+ return note_qstring(sk).note_unspec_or_data_has_type().set_data(
    QPair<n8, QStringList*> {0, new QStringList {qs1, qs2}});
 }
 
@@ -216,9 +216,9 @@ DH_Stage_Value& DH_Stage_Value::note_uint()
  return *this;
 }
 
-DH_Stage_Value& DH_Stage_Value::note_qstring()
+DH_Stage_Value& DH_Stage_Value::note_qstring(DH_Stage_Code::String_Kind sk)
 {
- info_.note_qstring();
+ info_.note_qstring(sk);
  return *this;
 }
 
@@ -334,6 +334,12 @@ u1 DH_Stage_Value::get_byte_length() const
  return info_.get_byte_length();
 }
 
+DH_Stage_Code::String_Kind DH_Stage_Value::get_string_kind() const
+{
+ return info_.get_string_kind();
+}
+
+
 DH_Stage_Value& DH_Stage_Value::note_byte_length(u1 len)
 {
  info_.note_byte_length(len);
@@ -360,6 +366,21 @@ void DH_Stage_Value::aborb_data(QDataStream& qds, DH_Stage_Code sc)
 
  switch (qtc)
  {
+
+ case DH_Stage_Code::Query_Typecode::qtc_User_Data:
+  {
+  }
+  break;
+
+ case DH_Stage_Code::Query_Typecode::qtc_qvar:
+  {
+  }
+  break;
+
+ case DH_Stage_Code::Query_Typecode::qtc_Hypernode:
+  {
+  }
+  break;
 
  case DH_Stage_Code::Query_Typecode::qtc_WG_NULLTYPE:
   {
@@ -395,13 +416,15 @@ void DH_Stage_Value::aborb_data(QDataStream& qds, DH_Stage_Code sc)
   }
   break;
 
- case DH_Stage_Code::Query_Typecode::qtc_qstr:
+ case DH_Stage_Code::Query_Typecode::qtc_WG_STRTYPE:
   {
+
    QString value;
    qds >> value;
    set_str_data(value);
   }
   break;
+
 
  case DH_Stage_Code::Query_Typecode::qtc_WG_DOUBLETYPE:
   {

@@ -29,17 +29,17 @@
 
 #include "kans.h"
 
-
+class DgDb_Hypernode;
 
 #define _TYPECODE_QUERY_MACROS(x) \
- x(Generic ,char*) \
- x(qstr ,QString) \
+ x(User_Data ,char*) \
+ x(Hypernode ,DgDb_Hypernode*) \
  x(qvar ,QVariant) \
  x(WG_NULLTYPE ,nullptr_t) \
  x(WG_RECTYPE ,void*) \
  x(WG_INTTYPE ,int) \
  x(WG_DOUBLETYPE ,double) \
- x(WG_STRTYPE ,std::string) \
+ x(WG_STRTYPE ,QString) \
  x(WG_XMLLITERALTYPE ,QDomEntity) \
  x(WG_URITYPE ,QUrl) \
  x(WG_BLOBTYPE ,QByteArray) \
@@ -66,6 +66,7 @@ public:
 #undef TEMP_MACRO
  };
 
+ enum class String_Kind { ql1, ql8, q16, Other };
 
  DH_Stage_Code() : code_(0) { }
 
@@ -79,7 +80,13 @@ public:
  template<typename T>
  static inline DH_Stage_Code::Query_Typecode get_qtc_code()
  {
-  return DH_Stage_Code::Query_Typecode::qtc_Generic;
+  return DH_Stage_Code::Query_Typecode::qtc_User_Data;
+ }
+
+ template<typename T>
+ static inline DH_Stage_Code get_prelim_for_type()
+ {
+  return DH_Stage_Code();
  }
 
  DH_Stage_Code::Query_Typecode get_qtc_code() const
@@ -156,6 +163,10 @@ public:
 // u1 get_query_typecode() const;
  u1 get_byte_length() const;
 
+ String_Kind get_string_kind() const;
+ DH_Stage_Code& note_string_kind(String_Kind sk);
+
+
 // u1 get_prelim_encoding_code() const;
 // u1 get_read_encoding_type() const;
 
@@ -172,7 +183,7 @@ public:
  DH_Stage_Code& note_enum();
  DH_Stage_Code& note_signed_enum();
  DH_Stage_Code& note_char_enum();
- DH_Stage_Code& note_qstring();
+ DH_Stage_Code& note_qstring(String_Kind sk);
  DH_Stage_Code& note_uint();
  DH_Stage_Code& note_null();
  DH_Stage_Code& note_rec();
@@ -219,6 +230,46 @@ inline DH_Stage_Code::Query_Typecode DH_Stage_Code::get_qtc_code<y>() \
 
 _TYPECODE_QUERY_MACROS(TEMP_MACRO)
 #undef TEMP_MACRO
+
+
+template<>
+inline DH_Stage_Code DH_Stage_Code::get_prelim_for_type<s1>()
+{
+ return DH_Stage_Code().note_int().note_byte_length(1).note_signed_or_no_delete();
+}
+
+template<>
+inline DH_Stage_Code DH_Stage_Code::get_prelim_for_type<u1>()
+{
+ return DH_Stage_Code().note_int().note_byte_length(1);
+}
+
+
+template<>
+inline DH_Stage_Code DH_Stage_Code::get_prelim_for_type<s2>()
+{
+ return DH_Stage_Code().note_int().note_byte_length(2).note_signed_or_no_delete();
+}
+
+template<>
+inline DH_Stage_Code DH_Stage_Code::get_prelim_for_type<u2>()
+{
+ return DH_Stage_Code().note_int().note_byte_length(2);
+}
+
+
+template<>
+inline DH_Stage_Code DH_Stage_Code::get_prelim_for_type<s4>()
+{
+ return DH_Stage_Code().note_int().note_byte_length(4).note_signed_or_no_delete();
+}
+
+template<>
+inline DH_Stage_Code DH_Stage_Code::get_prelim_for_type<u4>()
+{
+ return DH_Stage_Code().note_int().note_byte_length(4);
+}
+
 
 
 

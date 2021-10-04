@@ -15,6 +15,7 @@ DH_Type::DH_Type()
      subvalue_fields_serialization_vector_(nullptr),
      meta_object_(nullptr), shm_block_size_(0),
      shm_block_column_(2), shm_message_column_(-2)
+     //subvalue_fields_qtc_vector_(nullptr)
   //   stage_encoder_(nullptr)
 {
 
@@ -36,6 +37,7 @@ void DH_Type::get_subvalue_fields_as_vector(QVector<DH_Subvalue_Field*>& sfs)
      subvalue_fields_serialization_vector_->begin(),
      [this](QString fn) { return get_subvalue_field_by_field_name(fn);});
   }
+
   sfs = *subvalue_fields_serialization_vector_;
   return;
  }
@@ -64,7 +66,7 @@ DH_Subvalue_Field* DH_Type::get_subvalue_field_by_index(u2 ix)
 
 DH_Subvalue_Field* DH_Type::get_subvalue_field_by_field_name(QString field_name)
 {
- u2 ix = subvalue_fields_index_map_.value(field_name);
+ u2 ix = subvalue_fields_index_map_.value(field_name).first;
  if(ix == 0)
   return nullptr;
  return subvalue_fields_.value(ix);
@@ -221,7 +223,19 @@ DH_Subvalue_Field* DH_Type::note_field_index(QString field_name, u2 index)
 
  DH_Subvalue_Field* result = new DH_Subvalue_Field(field_name);
  note_field_index(result, index);
- subvalue_fields_index_map_[field_name] = index;
+
+ // //  see if a qtc has already been entered ...
+ auto it = subvalue_fields_index_map_.find(field_name);
+ if(it == subvalue_fields_index_map_.end())
+ {
+  // //   todo: maybe a non-0 DH_Stage_Code uninit value ...
+  subvalue_fields_index_map_[field_name] = {index, DH_Stage_Code()};
+ }
+ else
+   it->first = index;
+
+ //subvalue_fields_index_map_[field_name] = index;
+
  subvalue_fields_[index] = result;
  return result;
 }

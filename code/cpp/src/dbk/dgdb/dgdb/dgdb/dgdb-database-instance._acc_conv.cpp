@@ -14,14 +14,14 @@ void _acc_conv(DH_Stage_Code sc, char* mem, QDataStream& qds, u4 len);
 #define _lenmin(x) qMin(len, (u4) x)
 
 template<>
-void _acc_conv<DH_Stage_Code::Query_Typecode::qtc_Generic>(DH_Stage_Code sc,
+void _acc_conv<DH_Stage_Code::Query_Typecode::qtc_User_Data>(DH_Stage_Code sc,
   char* mem, QDataStream& qds, u4 len)
 {
 
 }
 
 template<>
-void _acc_conv<DH_Stage_Code::Query_Typecode::qtc_qstr>(DH_Stage_Code sc,
+void _acc_conv<DH_Stage_Code::Query_Typecode::qtc_Hypernode>(DH_Stage_Code sc,
   char* mem, QDataStream& qds, u4 len)
 {
 // QString* qs = (QString*) sv.data();
@@ -201,14 +201,14 @@ void _acc_conv(DH_Stage_Code sc, const QByteArray& source, QDataStream& target, 
 //#define _lenmin(x) qMin(len, (u4) x)
 
 template<>
-void _acc_conv<DH_Stage_Code::Query_Typecode::qtc_Generic>(DH_Stage_Code sc,
+void _acc_conv<DH_Stage_Code::Query_Typecode::qtc_User_Data>(DH_Stage_Code sc,
   const QByteArray& source, QDataStream& target, u4 len)
 {
 
 }
 
 template<>
-void _acc_conv<DH_Stage_Code::Query_Typecode::qtc_qstr>(DH_Stage_Code sc,
+void _acc_conv<DH_Stage_Code::Query_Typecode::qtc_Hypernode>(DH_Stage_Code sc,
   const QByteArray& source, QDataStream& target, u4 len)
 {
 // QString* qs = (QString*) sv.data();

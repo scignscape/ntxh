@@ -157,6 +157,9 @@ public:
 
  u1 get_wg_encoding_type() const;
  u1 get_byte_length() const;
+
+ DH_Stage_Code::String_Kind get_string_kind() const;
+
  u1 get_prelim_encoding_code() const;
  u1 get_read_encoding_type() const;
 
@@ -243,7 +246,7 @@ public:
  DH_Stage_Value& note_enum();
  DH_Stage_Value& note_signed_enum();
  DH_Stage_Value& note_char_enum();
- DH_Stage_Value& note_qstring();
+ DH_Stage_Value& note_qstring(DH_Stage_Code::String_Kind sk);
  DH_Stage_Value& note_uint();
  DH_Stage_Value& note_null();
  DH_Stage_Value& note_rec();
@@ -275,9 +278,9 @@ public:
  bool check_no_delete() { return info_.check_no_delete(); }
  bool check_signed() { return info_.check_signed(); }
 
- DH_Stage_Value& new_qstring(const QString& qs);
- DH_Stage_Value& new_qstring_pair(const QString& qs);
- DH_Stage_Value& new_qstring_pair(const QString& qs1, const QString& qs2);
+ DH_Stage_Value& new_qstring(const QString& qs, DH_Stage_Code::String_Kind sk);
+ DH_Stage_Value& new_qstring_pair(const QString& qs, DH_Stage_Code::String_Kind sk);
+ DH_Stage_Value& new_qstring_pair(const QString& qs1, const QString& qs2, DH_Stage_Code::String_Kind sk);
 
  DH_Stage_Value& new_qstring_xml_pair(const QString& qs1, const QString& qs2);
  DH_Stage_Value& new_qstring_uri_pair(const QString& qs1, const QString& qs2);

@@ -86,7 +86,18 @@ u1 DH_Stage_Code::get_byte_length() const
  }
 }
 
+DH_Stage_Code::String_Kind DH_Stage_Code::get_string_kind() const
+{
+ return (String_Kind) get_option_code();
+}
 
+DH_Stage_Code& DH_Stage_Code::note_string_kind(String_Kind sk)
+{
+ u1 _sk = (u1) sk & 3;
+ code_ &= 0b1111'1100;
+ code_ |= _sk;
+ return *this;
+}
 
 DH_Stage_Code& DH_Stage_Code::note_unspec()
 {
@@ -142,10 +153,12 @@ DH_Stage_Code& DH_Stage_Code::note_uint()
  return *this;
 }
 
-DH_Stage_Code& DH_Stage_Code::note_qstring()
+DH_Stage_Code& DH_Stage_Code::note_qstring(String_Kind sk)
 {
- code_ &= 15;
- code_ |= (1 << 4);
+ note_str();
+ note_string_kind(sk);
+// code_ &= 15;
+// code_ |= (1 << 4);
  return *this;
 }
 

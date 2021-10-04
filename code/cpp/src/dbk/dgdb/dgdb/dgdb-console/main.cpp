@@ -214,13 +214,15 @@ int main(int argc, char *argv[])
 
  //ddi.set_get_shm_field_ptr(_get_shm_field_ptr);
 
-#define _field_list_(cast, type ,name) #name,
+//#define _field_list_(cast, type ,name) #name,
+
+#define _field_map_(cast, type ,name) {#name, DH_Stage_Code::get_prelim_for_type<type>() },
 
  DH_Type_System* dhts = ddi.type_system();
 
  dhts->REGISTER_TYPE(Demo_Class)
-   .set_shm_block_size(100)
-   .sf({_Demo_Class_fm(_field_list_)})
+   .set_shm_block_size(100)    //   .sf({_Demo_Class_fm(_field_list_)})
+   .sf({_Demo_Class_fm(_field_map_)})
       ("u4_in_block")[1](12,15)
       ("s1_in_block")[2]._signed_(16,16)
       ("datetime_in_block")[3]._datetime_(17,24)
@@ -233,8 +235,8 @@ int main(int argc, char *argv[])
       ("test_enum_flags")[8](50,50)
       ("string_for_query")[9](51,58)
          .query<QString>("&/q/$type")[5]
-      ("s2_for_query")[10](59,66)
-         .query<int>("&/q/$type")(-2)[6]
+      ("s2_for_query")[10]._signed_(59,66)
+         .query<int>("&/q/$type")(2)[6] // (-2)[6]
       ("u4_for_query")[11](67,74)
          .query<int>("&/q/$type")(4)[7]
       ("datetime_for_query")[12](75,82)
@@ -247,20 +249,6 @@ int main(int argc, char *argv[])
    .set_default_binary_decoder(&Demo_Class::absorb_data)
    ;
 
-
-// QString ,string_in_record      )field(,\
-// QString ,string_for_query      )field(,\
-// u4 ,u4_in_block                )field(,\
-// u4 ,u4_for_query               )field(,\
-// s1 ,s1_in_block                )field(,\
-// s2 ,s2_for_query               )field(,\
-// QDateTime ,datetime_in_block   )field(,\
-// QDateTime ,datetime_for_query  )field(,\
-// QDate ,date_in_block           )field(,\
-// QDate ,date_for_query          )\
-//\
-//field((u1&), Test_Enum ,test_enum)\
-//field((u1&), Test_Enum_Flags ,test_enum_flags)
 
 
  // (DH::Redirect_In_Record [7]) //(DH_Subvalue_Field::Redirect_In_Record)
@@ -300,20 +288,43 @@ int main(int argc, char *argv[])
   QByteArray qba;
   void* pv;
 
-  ddi.fetch_subvalue(dh, "string_in_record", qba, pv);
+  ddi.fetch_subvalue(dh, "string_for_query", qba, pv);
 
-  qDebug() << "string_in_record = " << qba;
+  qDebug() << "string_for_query = " << qba;
  }
 
  {
   QByteArray qba;
   void* pv;
 
-  ddi.fetch_subvalue(dh, "string_for_query", qba, pv);
+  ddi.fetch_subvalue(dh, "test_enum", qba, pv);
 
-  qDebug() << "string_for_query = " << qba;
+  Demo_Class::Test_Enum test_val = (Demo_Class::Test_Enum) qba_to_u1(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "test_enum = " << (u1) test_val;
  }
 
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "test_enum_flags", qba, pv);
+
+  Demo_Class::Test_Enum_Flags test_val = (Demo_Class::Test_Enum_Flags) qba_to_u1(qba);
+  //test = qToBigEndian(test);
+
+  qDebug() << "test_enum_flags = " << (u1) test_val;
+ }
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh, "string_in_record", qba, pv);
+
+  qDebug() << "string_in_record = " << qba;
+ }
 
  {
   QByteArray qba;
@@ -374,30 +385,6 @@ int main(int argc, char *argv[])
   //test = qToBigEndian(test);
 
   qDebug() << "time_for_query = " << test_val;
- }
-
- {
-  QByteArray qba;
-  void* pv;
-
-  ddi.fetch_subvalue(dh, "test_enum", qba, pv);
-
-  Demo_Class::Test_Enum test_val = (Demo_Class::Test_Enum) qba_to_u1(qba);
-  //test = qToBigEndian(test);
-
-  qDebug() << "test_enum = " << (u1) test_val;
- }
-
- {
-  QByteArray qba;
-  void* pv;
-
-  ddi.fetch_subvalue(dh, "test_enum_flags", qba, pv);
-
-  Demo_Class::Test_Enum_Flags test_val = (Demo_Class::Test_Enum_Flags) qba_to_u1(qba);
-  //test = qToBigEndian(test);
-
-  qDebug() << "test_enum_flags = " << (u1) test_val;
  }
 
 

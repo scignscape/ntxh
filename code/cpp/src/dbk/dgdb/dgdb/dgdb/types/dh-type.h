@@ -72,7 +72,6 @@ class DH_Type
 
  QStringList field_name_serialization_order_;
 
-
  std::function<void*(DgDb_Hypernode*,
    std::function<void*(u4)> )> raw_binary_encoder_;
 
@@ -95,10 +94,11 @@ class DH_Type
  using Class_Of_Member_Function = typename _Class_Of_Member_Function<T>::type;
 
 
- QMap<QString, u2> subvalue_fields_index_map_;
+ QMap<QString, QPair<u2, DH_Stage_Code>> subvalue_fields_index_map_;
  QMap<u2, DH_Subvalue_Field*> subvalue_fields_;
 
  QVector<DH_Subvalue_Field*>* subvalue_fields_serialization_vector_;
+
 
 public:
 
@@ -335,6 +335,26 @@ public:
    return *this;
   }
  };
+
+ Note_Field_intermediary sf(QVector<QPair<QString, DH_Stage_Code>> nqtc)
+ {
+  //qtc_serialization_order_.resize(nqtc.size());
+  //int i = 0;
+  std::transform(nqtc.begin(), nqtc.end(), std::back_inserter(field_name_serialization_order_),
+   [this](auto pr) { subvalue_fields_index_map_[pr.first].second = pr.second; return pr.first; });
+
+
+  //field_name_serialization_order_.resize(nqtc.size());
+
+  // = field_names;
+  subvalue_fields_serialization_vector_ = new QVector<DH_Subvalue_Field*>();
+//  subvalue_fields_qtc_vector_ = new QVector<DH_Stage_Code::Query_Typecode>();
+
+  //check_note_field_name(field_name);
+  //
+  return {{}, *this, (u4) -1, nullptr};
+ }
+
 
  Note_Field_intermediary sf(QStringList field_names)
  {

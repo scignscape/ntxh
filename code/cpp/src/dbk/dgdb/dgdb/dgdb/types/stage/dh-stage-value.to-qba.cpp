@@ -28,16 +28,14 @@ void to_qba_(DH_Stage_Value& sv, QByteArray& result);
 //x(Generic ,n8) \
 
 template<>
-void to_qba_<DH_Stage_Code::Query_Typecode::qtc_Generic>(DH_Stage_Value& sv, QByteArray& result)
+void to_qba_<DH_Stage_Code::Query_Typecode::qtc_User_Data>(DH_Stage_Value& sv, QByteArray& result)
 {
 
 }
 
 template<>
-void to_qba_<DH_Stage_Code::Query_Typecode::qtc_qstr>(DH_Stage_Value& sv, QByteArray& result)
+void to_qba_<DH_Stage_Code::Query_Typecode::qtc_Hypernode>(DH_Stage_Value& sv, QByteArray& result)
 {
- QString* qs = (QString*) sv.data();
- result = qs->toStdString().c_str();//qs->toUtf8().data();
  //xdata = nullptr;
 }
 
@@ -84,9 +82,14 @@ void to_qba_<DH_Stage_Code::Query_Typecode::qtc_WG_DOUBLETYPE>(DH_Stage_Value& s
 
 }
 
+
 template<>
 void to_qba_<DH_Stage_Code::Query_Typecode::qtc_WG_STRTYPE>(DH_Stage_Value& sv, QByteArray& result)
 {
+ DH_Stage_Code::String_Kind sk = sv.get_string_kind();
+
+ QString* qs = (QString*) sv.data();
+ result = qs->toStdString().c_str();//qs->toUtf8().data();
 
 }
 
