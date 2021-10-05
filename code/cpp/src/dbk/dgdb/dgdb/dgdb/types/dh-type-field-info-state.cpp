@@ -163,6 +163,15 @@ DH_Type_Field_Info_State& DH_Type_Field_Info_State::operator[](u2 index)
    // //  we found field_ ...
    if(it != query_partners_[psf].end())
      (*it).second = 0;
+
+   // //  now reset the max
+   u2 max = std::max_element(query_partners_[psf].begin(),
+     query_partners_[psf].end(), [](auto pr1, auto pr2)
+   {
+    return pr1.second < pr2.second;
+   })->second;
+
+   psf->set_max_partner_query_column(qMax(max, index));
   }
   narrow_ = Narrow_Input_State::Query_Column;
   break;

@@ -40,7 +40,25 @@ void DWB_Instance::write_str_field(void* rec, u2 field_number, QString str)
  wg_set_str_field(wdb_instance_, rec, field_number, str.toLatin1().data());
 }
 
+void DWB_Instance::write_u1_field(void* rec, u2 field_number, u1 value)
+{
+ wg_set_int_field(wdb_instance_, rec, field_number, value);
+   //_field(wdb_instance_, rec, field_number, str.toLatin1().data());
+}
+
+void DWB_Instance::write_u2_field(void* rec, u2 field_number, u2 value)
+{
+ wg_set_int_field(wdb_instance_, rec, field_number, value);
+   //_field(wdb_instance_, rec, field_number, str.toLatin1().data());
+}
+
 void DWB_Instance::write_u4_field(void* rec, u2 field_number, u4 value)
+{
+ wg_set_int_field(wdb_instance_, rec, field_number, value);
+   //_field(wdb_instance_, rec, field_number, str.toLatin1().data());
+}
+
+void DWB_Instance::write_n8_field(void* rec, u2 field_number, n8 value)
 {
  wg_set_int_field(wdb_instance_, rec, field_number, value);
    //_field(wdb_instance_, rec, field_number, str.toLatin1().data());

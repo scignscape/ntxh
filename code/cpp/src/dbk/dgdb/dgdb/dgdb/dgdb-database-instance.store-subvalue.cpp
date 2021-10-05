@@ -58,30 +58,43 @@ void DgDb_Database_Instance::store_subvalue_to_external_record(DgDb_Hypernode* d
  DWB_Instance* dwb = get_query_dwb(dh->dh_type(), sf);
  void* rec = get_wdb_record_from_block(dh->shm_block());
 
-  // //  assume always 2 for now ...
-  static u1 rec_column = 2;
+ // //  assume always 2 for now ...
+ static u1 rec_column = 2;
 
-  u2 qc = sf->query_column();
+ u2 qc = sf->query_column();
 
-//  this is presumably obsolete because the qc is now set to a default ...
-//  if(qc == 0)
-//  {
-//   // //  note: here we're updating sf ...
-//   qc = rec_column + 1;
-//   sf->set_query_column(qc);
-//  }
+ //  this is presumably obsolete because the qc is now set to a default ...
+ //  if(qc == 0)
+ //  {
+ //   // //  note: here we're updating sf ...
+ //   qc = rec_column + 1;
+ //   sf->set_query_column(qc);
+ //  }
 
-  u2 max = sf->max_partner_query_column();
+ u2 max = sf->max_partner_query_column();
 
-  // //  also assume the query columns are the last column (so
-   //    we don't need to allocate more fields than that ...)
-  max = max? max + 1 : qc + 1;
+ // //  also assume the query columns are the last column (so
+ //    we don't need to allocate more fields than that ...)
+ max = max? max + 1 : qc + 1;
 
-  void* qrec = dwb->new_query_record(blocks_dwb_, rec, rec_column, qc,
-    sv, max);
+ void* qrec = dwb->new_query_record(blocks_dwb_, rec, rec_column, qc,
+                                    sv, max);
 
-  QByteArray enc = dwb->encode_record(qrec);
-  memcpy(mem, enc.data(), enc.size());
+ QByteArray enc = dwb->encode_record(qrec);
+ memcpy(mem, enc.data(), enc.size());
+
+ // //  store the hypernode id for testing/demo -- currently not strictly needed.
+ //    The wgdn utility doesn't work well with direct inter-record links
+ //    so id's can be used in lieu of rec's to look at db contents temporarily
+
+ // //  assume always 1 for now ...
+ static u1 target_id_column = 1;
+ dwb->write_u1_field(qrec, target_id_column, dh->id());
+
+ // //  assume always 0 for now ...
+ static u1 rec_id_column = 0;
+ n8 rid = new_record_id(_queries_rec_id_category_base);
+ dwb->write_n8_field(qrec, rec_id_column, rid);
 }
 
 

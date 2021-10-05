@@ -62,6 +62,8 @@ class DgDb_Database_Instance
 
  QMap<u4, DgDb_Hypernode*> active_hypernodes_;
 
+ QMap<n8, n8> max_record_ids_;
+
  void* default_get_shm_field_ptr(DgDb_Location_Structure dls,
    DgDb_Hypernode* dh, u2 index_code, QString field_name,
    size_t* size, n8* shm_path_code);
@@ -74,6 +76,9 @@ public:
  static constexpr s4 _dwb_folder_create_failed = -4;
  static constexpr s4 _dwb_file_create_failed = -5;
  static constexpr s4 _dwb_subfolder_create_failed = -6;
+
+ static constexpr n8 _blocks_rec_id_category_base = 1000;
+ static constexpr n8 _queries_rec_id_category_base = 2000;
 
 
  DgDb_Database_Instance(QString private_folder_path = {});
@@ -98,6 +103,8 @@ public:
  ACCESSORS(QString ,private_folder_path)
  ACCESSORS(get_shm_field_ptr_type ,get_shm_field_ptr)
  ACCESSORS(DH_Type_System* ,type_system)
+
+ n8 new_record_id(n8 category_base);
 
  char* allocate_shm_block(DH_Type* dht, u4 dh_id,
    QString init_message = {}, u1 Max_Fixed = 0, u2 total_columns = 0, Block_Options options =
@@ -171,6 +178,8 @@ public:
  void init_hypernode_from_object(DgDb_Hypernode* dh, void* obj,
    std::function<void(void*, QByteArray&)> cb);
 
+ void init_object_from_hypernode(DgDb_Hypernode* dh, void* obj,
+   std::function<void(void*, const QByteArray&)> cb);
 
  template<typename OBJECT_Type>
  void init_hypernode_from_object(DgDb_Hypernode* dh, OBJECT_Type* obj)
@@ -180,7 +189,17 @@ public:
   //init_hypernode_from_shm_block(result, rec, obj, cb);
  }
 
+ template<typename OBJECT_Type>
+ void init_object_from_hypernode(DgDb_Hypernode* dh, OBJECT_Type*& obj)
+ {
+  obj = new OBJECT_Type;
+  std::function<void(void*, const QByteArray&)> cb = get_binary_decoder(dh);// dht->binary_encoder();
+  init_object_from_hypernode(dh, obj, cb);
+  //init_hypernode_from_shm_block(result, rec, obj, cb);
+ }
+
  std::function<void(void*, QByteArray&)> get_binary_encoder(DgDb_Hypernode* dh);
+ std::function<void(void*, const QByteArray&)> get_binary_decoder(DgDb_Hypernode* dh);
 
  void store_(DgDb_Hypernode* dh, QString field_or_property_name, DH_Stage_Value& sv); //const QByteArray& value);
  void store(DgDb_Hypernode* dh, QString field_or_property_name, DH_Stage_Value& sv)

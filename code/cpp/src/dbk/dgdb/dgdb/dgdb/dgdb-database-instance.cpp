@@ -69,7 +69,7 @@ DgDb_Database_Instance::DgDb_Database_Instance(QString private_folder_path)
      hypernode_count_status_(_unknown),
      //pinterns_count_(0), finterns_count_(0),
      type_system_(nullptr),
-     dtb_package_(nullptr), get_shm_field_ptr_(nullptr)
+     dtb_package_(nullptr), get_shm_field_ptr_(nullptr) //, max_record_id_(0)
 {
 }
 
@@ -77,6 +77,11 @@ DgDb_Database_Instance::DgDb_Database_Instance(QString private_folder_path)
 static constexpr u2 default_total_columns = 5;
 // //   0         1          2       3?     4              5
 // //   rec id    node id    block   msg?   branch-code    user-data
+
+n8 DgDb_Database_Instance::new_record_id(n8 category_base)
+{
+ return ++max_record_ids_[category_base];
+}
 
 
 char* DgDb_Database_Instance::allocate_shm_block(DH_Type* dht, u4 dh_id,
@@ -114,8 +119,14 @@ char* DgDb_Database_Instance::allocate_shm_block(size_t size,
  if(options & Block_Options::Write_Max_Fixed)
    current_ptr_offset += blocks_dwb_->write_max_fixed(max_fixed, result + current_ptr_offset);
 
+ // //  these are not strictly necessary but help with examining db contents ...
  u2 dh_id_column = 1;
- blocks_dwb_->write_u4_field(rec, dh_id_column, dh_id);
+ blocks_dwb_->write_u2_field(rec, dh_id_column, dh_id);
+
+ u2 rid_column = 0;
+ n8 rid = new_record_id(_blocks_rec_id_category_base);
+ blocks_dwb_->write_n8_field(rec, rid_column, rid);
+
 
  if(! (init_message.isEmpty() && message_column == (u2)-1) )
  {
@@ -489,13 +500,21 @@ void DgDb_Database_Instance::init_hypernode_from_shm_block(DgDb_Hypernode* dh, v
 
 
 
-std::function<void(void*, QByteArray&)> DgDb_Database_Instance::get_binary_encoder(DgDb_Hypernode* dh)
+std::function<void(void*, QByteArray&)>
+  DgDb_Database_Instance::get_binary_encoder(DgDb_Hypernode* dh)
 {
  if(DH_Type* dht = dh->dh_type())
   return dht->binary_encoder();
  return nullptr;
 }
 
+std::function<void(void*, const QByteArray&)>
+  DgDb_Database_Instance::get_binary_decoder(DgDb_Hypernode* dh)
+{
+ if(DH_Type* dht = dh->dh_type())
+  return dht->binary_decoder();
+ return nullptr;
+}
 
 // //   currently there is no difference between
  //     the different write_mode implementations
@@ -548,6 +567,88 @@ void DgDb_Database_Instance::write_key_value<DH_Subvalue_Field::Write_Mode::Redi
 #define _DH_INCLUDE_ONLY_
 #include "dgdb-database-instance._acc_conv.cpp"
 #undef _DH_INCLUDE_ONLY_
+
+
+void DgDb_Database_Instance::init_object_from_hypernode(DgDb_Hypernode* dh, void* obj,
+  std::function<void(void*, const QByteArray&)> cb)
+{
+ DH_Type* dht = dh->dh_type();
+
+ QByteArray qba;
+ QDataStream qds(&qba, QIODevice::WriteOnly);
+
+ QVector<DH_Subvalue_Field*> sfs;
+ dht->get_subvalue_fields_as_vector(sfs);
+
+ for(DH_Subvalue_Field* sf : sfs)
+ {
+  QByteArray qba1;
+  void* pv;
+  fetch_subvalue(dh, sf, qba1, pv);
+  DH_Stage_Code::Query_Typecode qtc = sf->get_qtc_code();
+
+  // some of these similar to _acc_conv ...
+  switch (qtc)
+  {
+  case DH_Stage_Code::Query_Typecode::qtc_WG_INTTYPE:
+   {
+    auto [len, sgned] = sf->get_target_byte_length();
+    if(sgned)
+    {
+     switch (len)
+     {
+     case 1: { s1 s_1 = qba_to_s1(qba1); qds << s_1; } break;
+     case 2: { s2 s_2 = qba_to_s2(qba1); qds << s_2; } break;
+     case 4: { s4 s_4 = qba_to_s4(qba1); qds << s_4; } break;
+     case 8: { n8 n_8 = qba_to_n8(qba1); qds << n_8; } break;
+     }
+    }
+    else
+    {
+     switch (len)
+     {
+     case 1: { u1 u_1 = qba_to_u1(qba1); qds << u_1; } break;
+     case 2: { u2 u_2 = qba_to_u2(qba1); qds << u_2; } break;
+     case 4: { u4 u_4 = qba_to_u4(qba1); qds << u_4; } break;
+     case 8: { n8 n_8 = qba_to_n8(qba1); qds << n_8; } break;
+     }
+    }
+   }
+   break;
+
+  case DH_Stage_Code::Query_Typecode::qtc_WG_STRTYPE:
+   {
+    QString qs = QString::fromLatin1(qba1);
+    qds << qs;
+   }
+   break;
+
+  case DH_Stage_Code::Query_Typecode::qtc_WG_DATETYPE:
+   {
+    QDate qd = QDate::fromJulianDay(qba_to_n8(qba1));
+    qds << qd;
+   }
+   break;
+
+  case DH_Stage_Code::Query_Typecode::qtc_WG_TIMETYPE:
+   {
+    QTime qtm = QTime::fromMSecsSinceStartOfDay(qba_to_u4(qba1));
+    qds << qtm;
+   }
+   break;
+
+  case DH_Stage_Code::Query_Typecode::qtc_QDateTime:
+   {
+    qds << QDateTime::fromMSecsSinceEpoch(qba_to_n8(qba1));
+   }
+   break;
+
+  }
+
+ }
+
+ cb(obj, qba);
+}
 
 
 void DgDb_Database_Instance::init_hypernode_from_object(DgDb_Hypernode* dh, void* obj,
@@ -603,18 +704,13 @@ void DgDb_Database_Instance::init_hypernode_from_object(DgDb_Hypernode* dh, void
 
      // //  we need to get the partner's query record ...
 
-     // //  this is the same as fetch_subvalue; maybe can go in a common procedure ...
+     // //  this is similar to fetch_subvalue; maybe can go in a common procedure ...
 
      QByteArray qba = QByteArray( (char*) mem + psf->block_offset_start(),
        psf->block_offset_end() - psf->block_offset_start() + 1);
 
      DWB_Instance* dwb = get_query_dwb(dh->dh_type(), psf);
      void* rec = dwb->get_record_from_qba(qba);
-
-
-   //  auto [rec, column] = blocks_dwb_->get_record_via_known_split((char*) pv, qba_to_u2(qba));
-   //  auto [len, is_signed] = sf->get_target_byte_length();   QByteArray qba = QByteArray( (char*) pv, 8);
-   //  blocks_dwb_->get_qba_from_record(rec, column, value, sf->get_qtc_code(), len, is_signed);
 
      store_subvalue_to_external_record(sf, dwb, rec, mem + s, sv);//value.toLatin1());
 
@@ -857,7 +953,7 @@ void DgDb_Database_Instance::fetch_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Fiel
    //char* cs = (char*) pv;
    //
    //value = QByteArray( (char*) pv, 2);
-//  value.resize(2);
+//  value.resdwbize(2);
 //  value[0] = cs[0];
 //  value[1] = cs[1];
   }

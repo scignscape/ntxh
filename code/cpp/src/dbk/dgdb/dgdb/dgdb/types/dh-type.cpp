@@ -74,7 +74,7 @@ DH_Subvalue_Field* DH_Type::get_subvalue_field_by_field_name(QString field_name)
 }
 
 void DH_Type::note_field_query_partner(DH_Subvalue_Field* sf,
-  QString partner, QMap<DH_Subvalue_Field*, QVector<QPair<DH_Subvalue_Field*, u2>>> query_partners)
+  QString partner, QMap<DH_Subvalue_Field*, QVector<QPair<DH_Subvalue_Field*, u2>>>& query_partners)
 {
  DH_Subvalue_Field* psf = get_subvalue_field_by_field_name(partner);
  sf->set_query_partner(psf);

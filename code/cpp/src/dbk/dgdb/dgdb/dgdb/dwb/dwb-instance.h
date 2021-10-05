@@ -54,7 +54,10 @@ public:
  QPair<void*, char*> new_block_record(u2 field_count, size_t block_size, u2 block_column);
  size_t write_record_pointer_bytes(void* rec, char* destination);
  void write_str_field(void* rec, u2 field_number, QString str);
+ void write_u1_field(void* rec, u2 field_number, u1 value);
+ void write_u2_field(void* rec, u2 field_number, u2 value);
  void write_u4_field(void* rec, u2 field_number, u4 value);
+ void write_n8_field(void* rec, u2 field_number, n8 value);
  void* get_record_from_block(char* block);
  QString get_string_from_record(void* rec, u2 field_number);
 
