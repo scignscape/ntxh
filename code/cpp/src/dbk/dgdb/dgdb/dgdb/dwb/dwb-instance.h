@@ -64,6 +64,8 @@ public:
  u2 write_rec_field_via_split(char* ptr, u2 spl, DH_Stage_Value& sv); //const QByteArray& text);
  n8 write_encoded_value(DH_Stage_Value& sv); //const QByteArray& text);
 
+ void write_field(void* rec, u2 query_column, DH_Stage_Value& sv);
+
  //void* get_record_via_split(char* ptr, u2 spl);
 
  void get_qba_from_encoded_value(n8 enc, DH_Stage_Code::Query_Typecode qtc, QByteArray& result);

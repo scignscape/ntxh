@@ -232,21 +232,21 @@ int main(int argc, char *argv[])
          //(DH::Redirect_In_Record <QString>)
          //(DH::Redirect_In_Record <QString> [7])
          //(DH::Redirect_In_Record <QString> (1))
-         .record<QString>()[7]
+         .record<QString>() //[7]
       ("string_encoded")[7](49,56)
          .encode<QString>()
       ("string_for_query")[8](57,64)
-         .query<QString>("&/q/$type")[5]
+         .query<QString>("&/q/$type") //[5]
       ("s2_for_query")[9]._signed_(65,72)
-         .query<int>("&/q/$type")(2)[6] // (-2)[6]
+         .query<int>("&/q/$type")(2) //[6] // (-2)[6]
       ("u4_for_query")[10](73,80)
-         .query<int>("&/q/$type")(4)[7]
+         .query<int>("&/q/$type")(4)["string_for_query"] //[7]
       ("datetime_for_query")[11](81,88)
-         .query<QDateTime>("&/q/$type")[8]
+         .query<QDateTime>("&/q/$type") //[8]
       ("date_for_query")[12](89,96)
-         .query<QDate>("&/q/$type")[9]
+         .query<QDate>("&/q/$type") //[9]
       ("time_for_query")[13](97,104)
-         .query<QTime>("&/q/$type")[10]
+         .query<QTime>("&/q/$type") //[10]
       ("test_enum")[14](105,105)
       ("test_enum_flags")[15](106,106)
   ->set_default_binary_encoder(&Demo_Class::supply_data)

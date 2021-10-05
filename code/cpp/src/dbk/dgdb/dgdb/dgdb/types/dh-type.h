@@ -66,6 +66,9 @@ class DH_Type
 
  s2 stash_id_;
 
+ u2 default_query_column_;
+ QString default_query_path_;
+
  void* meta_object_;
 
  size_t shm_block_size_;
@@ -156,6 +159,10 @@ public:
  DH_Subvalue_Field* note_field_block_offset(QString field_name, u4 start, u4 end);
  DH_Subvalue_Field* note_field_index(QString field_name, u2 index);
  DH_Subvalue_Field* note_field_query_path(QString field_name, QString path, DH_Stage_Code::Query_Typecode qtc);
+
+ void note_field_query_partner(DH_Subvalue_Field* sf,
+   QString partner,
+   QMap<DH_Subvalue_Field*, QVector<QPair<DH_Subvalue_Field*, u2>>> query_partners);
 
 
 //? DH_Subvalue_Field* check_note_field_name(QString field_name);

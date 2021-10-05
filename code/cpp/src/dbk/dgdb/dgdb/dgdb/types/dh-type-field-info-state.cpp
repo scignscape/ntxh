@@ -111,6 +111,22 @@ DH_Type_Field_Info_State& DH_Type_Field_Info_State::operator()(QPair<
 }
 
 
+DH_Type_Field_Info_State& DH_Type_Field_Info_State::operator[](QString partner)
+{
+ switch (wide_)
+ {
+ default:
+  // //  anything other than Query here ?
+  break;
+
+ case Wide_Input_State::Query:
+  _this.note_field_query_partner(field_, partner, query_partners_);
+  narrow_ = Narrow_Input_State::Query_Partner;
+  break;
+ }
+}
+
+
 DH_Type_Field_Info_State& DH_Type_Field_Info_State::operator[](u2 index)
 {
  switch (wide_)
@@ -135,6 +151,19 @@ DH_Type_Field_Info_State& DH_Type_Field_Info_State::operator[](u2 index)
 
  case Wide_Input_State::Query:
   _this.note_field_query_column(field_, index);
+  if(DH_Subvalue_Field* psf = field_->query_partner())
+  {
+   // // we need to 0 out the qc in the query partners map
+    //   since now the qc is being set explicitly ...
+   auto it = std::find_if(query_partners_[psf].begin(),
+                query_partners_[psf].end(), [this](auto pr)
+   {
+    return pr.first == field_;
+   });
+   // //  we found field_ ...
+   if(it != query_partners_[psf].end())
+     (*it).second = 0;
+  }
   narrow_ = Narrow_Input_State::Query_Column;
   break;
  }

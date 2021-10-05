@@ -929,6 +929,11 @@ wg_int _rec_encode(void* wh, DH_Stage_Value& sv)
  }
 }
 
+void DWB_Instance::write_field(void* rec, u2 query_column, DH_Stage_Value& sv)
+{
+ wg_int wi = _rec_encode(wdb_instance_, sv);
+ wg_set_field(wdb_instance_, rec, query_column, wi);
+}
 
 void* DWB_Instance::new_query_record(DWB_Instance* origin_dwb,
   void* target_record, u2 target_column,

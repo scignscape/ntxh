@@ -50,6 +50,8 @@ class DH_Type_Field_Info_State
  u4 held_start_;
  DH_Subvalue_Field* field_;
 
+ QMap<DH_Subvalue_Field*, QVector<QPair<DH_Subvalue_Field*, u2>>> query_partners_;
+
 
 public:
  enum class Wide_Input_State : u1 {
@@ -58,7 +60,8 @@ public:
 
  enum class Narrow_Input_State : u1 {
    N_A, Declared_Path, Declared_Field_Index,
-   Declared_Block_Indexes, Declared_Byte_Length, Query_Column
+   Declared_Block_Indexes, Declared_Byte_Length,
+   Query_Column, Query_Partner
  };
 
 private:
@@ -107,6 +110,7 @@ public:
  DH_Type_Field_Info_State& operator()(QPair<DH_Subvalue_Field::Write_Mode, DH_Stage_Code::Query_Typecode> pr);
 
  DH_Type_Field_Info_State& operator[](u2 index);
+ DH_Type_Field_Info_State& operator[](QString partner);
 
  DH_Type_Field_Info_State& _signed_(u4 start, u4 end);
  DH_Type_Field_Info_State& _date_(u4 start, u4 end);

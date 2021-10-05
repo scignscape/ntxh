@@ -161,6 +161,9 @@ public:
  void store_subvalue_to_external_record(DgDb_Hypernode* dh,
    DH_Subvalue_Field* sf, char* mem, DH_Stage_Value& sv);// const QByteArray& value);
 
+ void store_subvalue_to_external_record(DH_Subvalue_Field* sf,
+   DWB_Instance* dwb, void* rec, char* mem, DH_Stage_Value& sv);// const QByteArray& value);
+
  void store_subvalue_to_record(DH_Subvalue_Field* sf, char* mem, DH_Stage_Value& sv);//const QByteArray& value);
 
  void store_subvalue_to_block(DH_Subvalue_Field* sf, char* mem, DH_Stage_Value& sv);

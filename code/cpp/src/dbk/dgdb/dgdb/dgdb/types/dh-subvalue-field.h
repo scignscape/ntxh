@@ -82,6 +82,15 @@ private:
 
  u2 query_column_;
 
+ DH_Subvalue_Field* query_partner_;
+
+ // //  note: this is the max of sf's which have
+  //    *this* as a partner, not this's own partner.
+  //    Probably max_partner_query_column_ should = 0
+  //    when query_partner_ doesn't, and vice-versa
+  //    (could an sf have a partner and also be a partner?)
+ u2 max_partner_query_column_;
+
  // //  may become part of a bitmask sometime ...
  //s1 target_byte_length_;
 
@@ -102,10 +111,13 @@ public:
  ACCESSORS(u2 ,index)
  ACCESSORS(u2 ,record_column_index)
 
+ ACCESSORS(u2 ,max_partner_query_column)
+
  ACCESSORS(QString ,query_path)
  ACCESSORS(DH_Stage_Code ,stage_code)
  ACCESSORS(u2 ,query_column)
  ACCESSORS(QString ,checked_query_path)
+ ACCESSORS(DH_Subvalue_Field* ,query_partner)
 
  u2 block_offset_record_column_split();
  void check_write_mode();

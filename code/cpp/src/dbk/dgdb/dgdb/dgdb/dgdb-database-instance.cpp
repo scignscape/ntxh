@@ -597,11 +597,36 @@ void DgDb_Database_Instance::init_hypernode_from_object(DgDb_Hypernode* dh, void
 
     sv.aborb_data(qds, sf->stage_code());
 
+    if(DH_Subvalue_Field* psf = sf->query_partner())
+    {
+     // //  currently we assume the partner already has a constructed query_record!
 
-    store_subvalue_to_external_record(dh, sf, mem + s, sv);//value.toLatin1());
+     // //  we need to get the partner's query record ...
+
+     // //  this is the same as fetch_subvalue; maybe can go in a common procedure ...
+
+     QByteArray qba = QByteArray( (char*) mem + psf->block_offset_start(),
+       psf->block_offset_end() - psf->block_offset_start() + 1);
+
+     DWB_Instance* dwb = get_query_dwb(dh->dh_type(), psf);
+     void* rec = dwb->get_record_from_qba(qba);
+
+
+   //  auto [rec, column] = blocks_dwb_->get_record_via_known_split((char*) pv, qba_to_u2(qba));
+   //  auto [len, is_signed] = sf->get_target_byte_length();   QByteArray qba = QByteArray( (char*) pv, 8);
+   //  blocks_dwb_->get_qba_from_record(rec, column, value, sf->get_qtc_code(), len, is_signed);
+
+     store_subvalue_to_external_record(sf, dwb, rec, mem + s, sv);//value.toLatin1());
+
+    }
+    else
+    {
+     store_subvalue_to_external_record(dh, sf, mem + s, sv);//value.toLatin1());
+
 //    _acc_conv(mem + s, qds, e - s + 1);
-    write_key_value<DH_Subvalue_Field::Write_Mode::Redirect_External>(dh, sf, mem + s);
 //    store_node_data(dls, mem + s);
+    }
+    write_key_value<DH_Subvalue_Field::Write_Mode::Redirect_External>(dh, sf, mem + s);
    }
    break;
 

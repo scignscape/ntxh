@@ -18,7 +18,8 @@ DH_Type::DH_Type()
      //subvalue_fields_qtc_vector_(nullptr)
   //   stage_encoder_(nullptr)
 {
-
+ default_query_column_ = 3;
+ default_query_path_ = "&/q/$type";
 }
 
 
@@ -71,6 +72,52 @@ DH_Subvalue_Field* DH_Type::get_subvalue_field_by_field_name(QString field_name)
   return nullptr;
  return subvalue_fields_.value(ix);
 }
+
+void DH_Type::note_field_query_partner(DH_Subvalue_Field* sf,
+  QString partner, QMap<DH_Subvalue_Field*, QVector<QPair<DH_Subvalue_Field*, u2>>> query_partners)
+{
+ DH_Subvalue_Field* psf = get_subvalue_field_by_field_name(partner);
+ sf->set_query_partner(psf);
+ u2 qc = sf->query_column() + 1;
+ if(query_partners.isEmpty())
+ {
+  sf->set_query_column(qc);
+  query_partners[psf] = {{sf, qc}};
+  psf->set_max_partner_query_column(qc);
+ }
+ else
+ {
+  QSet<u2> already_declared_qcs;
+  // //  the idea here is that explicitly setting the
+   //    column for partner sf's will make them 0 in
+   //    this vector; otherwise count all
+   //    the sf's which had automatically assigned columns ...
+
+  for(QPair<DH_Subvalue_Field*, u2>& pr : query_partners[psf])
+  {
+   if(pr.second == 0)
+     already_declared_qcs.insert(pr.first->query_column());
+   else
+   {
+    ++qc;
+    // // users should be careful when mixing
+     //   declared and automatically assigned
+     //   qc's so they don't conflict.  But
+     //   we'll try to double check just in case.
+    while(already_declared_qcs.contains(qc))
+    {
+     // // can't use that column; try the next one
+     ++qc;
+    }
+   }
+  }
+  sf->set_query_column(qc);
+  if(qc > psf->max_partner_query_column())
+    psf->set_max_partner_query_column(qc);
+  query_partners[psf].push_back({sf, qc});
+ }
+}
+
 
 u2 DH_Type::get_max_declared_field_column()
 {
@@ -222,6 +269,10 @@ DH_Subvalue_Field* DH_Type::note_field_index(QString field_name, u2 index)
  }
 
  DH_Subvalue_Field* result = new DH_Subvalue_Field(field_name);
+
+ result->set_query_column(default_query_column_);
+ result->set_query_path(default_query_path_);
+
  note_field_index(result, index);
 
  // //  see if a qtc has already been entered ...

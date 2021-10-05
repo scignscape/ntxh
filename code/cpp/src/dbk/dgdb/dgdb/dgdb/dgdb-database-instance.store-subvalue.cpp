@@ -39,6 +39,18 @@ using namespace tkrzw;
 //void store_subvalue_(DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value, QString field_name);
 
 
+void DgDb_Database_Instance::store_subvalue_to_external_record(DH_Subvalue_Field* sf,
+   DWB_Instance* dwb, void* rec, char* mem, DH_Stage_Value& sv) //const QByteArray& value)
+{
+ dwb->write_field(rec, sf->query_column(), sv);
+
+ // //  are we re-encoding this?  Would it be more efficient to get the enc
+  //    when the record is extracted?  Or is encoding quick enough that it's
+  //    not worth the hassle passing the end around? ...
+ QByteArray enc = dwb->encode_record(rec);
+ memcpy(mem, enc.data(), enc.size());
+
+}
 
 void DgDb_Database_Instance::store_subvalue_to_external_record(DgDb_Hypernode* dh,
   DH_Subvalue_Field* sf, char* mem, DH_Stage_Value& sv) //const QByteArray& value)
@@ -46,17 +58,30 @@ void DgDb_Database_Instance::store_subvalue_to_external_record(DgDb_Hypernode* d
  DWB_Instance* dwb = get_query_dwb(dh->dh_type(), sf);
  void* rec = get_wdb_record_from_block(dh->shm_block());
 
- // //  assume always 2 for now ...
- static u1 rec_column = 2;
+  // //  assume always 2 for now ...
+  static u1 rec_column = 2;
 
- // //  also assume the query column is the last column (so
-  //    we don't need to allocate more fields than that ...)
- void* qrec = dwb->new_query_record(blocks_dwb_, rec, rec_column, sf->query_column(),
-   sv, sf->query_column() + 1);
+  u2 qc = sf->query_column();
 
- QByteArray enc = dwb->encode_record(qrec);
- memcpy(mem, enc.data(), enc.size());
+//  this is presumably obsolete because the qc is now set to a default ...
+//  if(qc == 0)
+//  {
+//   // //  note: here we're updating sf ...
+//   qc = rec_column + 1;
+//   sf->set_query_column(qc);
+//  }
 
+  u2 max = sf->max_partner_query_column();
+
+  // //  also assume the query columns are the last column (so
+   //    we don't need to allocate more fields than that ...)
+  max = max? max + 1 : qc + 1;
+
+  void* qrec = dwb->new_query_record(blocks_dwb_, rec, rec_column, qc,
+    sv, max);
+
+  QByteArray enc = dwb->encode_record(qrec);
+  memcpy(mem, enc.data(), enc.size());
 }
 
 
