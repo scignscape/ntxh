@@ -411,11 +411,18 @@ DgDb_Hypernode* DgDb_Database_Instance::find_hypernode(DH_Type* dht, DH_Subvalue
   {
    DWB_Instance* dwb = get_query_dwb(dht, sf);
    // //  assume always 2 for now ...
+
    static u1 rec_column = 2;
+
+   // //  these are for test/demo/etc. if rec's are not stored as raw pointers ...
+   static u1 target_id_column = 1;
+   static u1 target_id_target_column = 1;
+
    void* qrec = dwb->find_query_record(sf->query_column(), sv);
    if(qrec)
    {
-    void* result_rec = dwb->get_target_record_from_query_record(blocks_dwb_, qrec, rec_column);
+    void* result_rec = dwb->get_target_record_from_query_record(blocks_dwb_,
+      qrec, rec_column, target_id_column, target_id_target_column);
     if(result_rec)
     {
      if(rec)
@@ -459,12 +466,19 @@ DgDb_Hypernode* DgDb_Database_Instance::find_hypernode(DH_Type* dht,
  case DH_Subvalue_Field::Write_Mode::Redirect_External:
   {
    DWB_Instance* dwb = get_query_dwb(dht, sf);
+
    // //  assume always 2 for now ...
    static u1 rec_column = 2;
+
+   // //  these are for test/demo/etc. if rec's are not stored as raw pointers ...
+   static u1 target_id_column = 1;
+   static u1 target_id_target_column = 1;
+
    void* qrec = dwb->find_query_record(sf->query_column(), test);
    if(qrec)
    {
-    void* result_rec = dwb->get_target_record_from_query_record(blocks_dwb_, qrec, rec_column);
+    void* result_rec = dwb->get_target_record_from_query_record(blocks_dwb_,
+      qrec, rec_column, target_id_column, target_id_target_column);
     if(result_rec)
     {
      if(rec)
@@ -592,8 +606,13 @@ void DgDb_Database_Instance::init_object_from_hypernode(DgDb_Hypernode* dh, void
   {
   case DH_Stage_Code::Query_Typecode::qtc_WG_INTTYPE:
    {
-    auto [len, sgned] = sf->get_target_byte_length();
-    if(sgned)
+    auto [len, is_signed] = sf->get_target_byte_length();
+      // len is not always declared
+
+    sf->check_adjust_from_default_length(len);
+
+      //
+    if(is_signed)
     {
      switch (len)
      {
@@ -639,7 +658,8 @@ void DgDb_Database_Instance::init_object_from_hypernode(DgDb_Hypernode* dh, void
 
   case DH_Stage_Code::Query_Typecode::qtc_QDateTime:
    {
-    qds << QDateTime::fromMSecsSinceEpoch(qba_to_n8(qba1));
+    QDateTime qdt = QDateTime::fromMSecsSinceEpoch(qba_to_n8(qba1));
+    qds << qdt; //QDateTime::fromMSecsSinceEpoch(qba_to_n8(qba1));
    }
    break;
 
@@ -706,6 +726,7 @@ void DgDb_Database_Instance::init_hypernode_from_object(DgDb_Hypernode* dh, void
 
      // //  this is similar to fetch_subvalue; maybe can go in a common procedure ...
 
+      // //  again do we need some kind of "get block segment length" method?
      QByteArray qba = QByteArray( (char*) mem + psf->block_offset_start(),
        psf->block_offset_end() - psf->block_offset_start() + 1);
 
@@ -901,7 +922,12 @@ void DgDb_Database_Instance::fetch_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Fiel
  {
  case DH_Subvalue_Field::Write_Mode::In_Block:
   {
-   u4 len = sf->block_offset_end() - sf->block_offset_start() + 1;
+   // //  do we take len from indices or sf's declared len?  That's not always declared ...
+
+   u4 len = sf->get_block_segment_byte_length();
+
+   //u4 len = sf->block_offset_end() - sf->block_offset_start() + 1;
+
    //char* cs = (char*) pv;
    //
    value = QByteArray( (char*) pv, len);

@@ -246,9 +246,41 @@ void* DWB_Instance::find_query_record(u2 query_column, QString test)
  return result;
 }
 
-
-void* DWB_Instance::get_target_record_from_query_record(DWB_Instance* origin_dwb, void* qrec, u2 rec_column)
+void* DWB_Instance::find_record_via_id(n8 id, u2 query_column)
 {
+ wg_query_arg arglist[1];
+ arglist[0].column = query_column;
+ arglist[0].cond = WG_COND_EQUAL;
+ arglist[0].value = wg_encode_query_param_int(wdb_instance_, id);
+
+ wg_query* wq = wg_make_query(wdb_instance_, nullptr, 0,
+   arglist, 1);
+
+ void* result = wg_fetch(wdb_instance_, wq);
+
+ wg_free_query(wdb_instance_, wq);
+ wg_free_query_param(wdb_instance_, arglist[0].value);
+
+ return result;
+}
+
+void* DWB_Instance::get_target_record_from_query_record(DWB_Instance* origin_dwb, void* qrec,
+  u2 rec_column, u2 target_id_column, u2 target_id_target_column)
+{
+ // //  this code should only be active when using id's rather than rec pointers
+  //    so as to view db contents with the WhiteDB utility ...
+ if(target_id_column)
+ {
+  wg_int ft = wg_get_field_type(wdb_instance_, qrec, rec_column);
+  if(ft == WG_STRTYPE)
+  {
+   // this means we're not storing rec pointers ...
+   wg_int wi = wg_get_field(wdb_instance_, qrec, target_id_column);
+   n8 id = wg_decode_int(wdb_instance_, wi);
+   return origin_dwb->find_record_via_id(id, target_id_target_column);
+  }
+ }
+
  wg_int wi = wg_get_field(wdb_instance_, qrec, rec_column);
  return wg_decode_record(origin_dwb->wdb_instance_, wi);
 }
@@ -954,7 +986,7 @@ void DWB_Instance::write_field(void* rec, u2 query_column, DH_Stage_Value& sv)
 }
 
 void* DWB_Instance::new_query_record(DWB_Instance* origin_dwb,
-  void* target_record, u2 target_column,
+  void* target_record, n8 target_record_id, u2 target_column,
   u2 value_column, DH_Stage_Value& sv, u2 field_count)
 {
  void* result = wg_create_record(wdb_instance_, field_count);
@@ -965,10 +997,10 @@ void* DWB_Instance::new_query_record(DWB_Instance* origin_dwb,
 
  wg_set_field(wdb_instance_, result, value_column, wi);
 
-// wg_set_field(wdb_instance_, result, value_column,
-//   wg_encode_str(wdb_instance_, (char*) value.data(), NULL));
-
- wg_set_field(wdb_instance_, result, target_column, origin_rec);
+ // // chance to save a string description instead ...
+ //wg_set_field(wdb_instance_, result, target_column, origin_rec);
+ QString ref_to = QString("ref:id=%1").arg(target_record_id);
+ wg_set_str_field(wdb_instance_, result, target_column, ref_to.toLatin1().data());
 
  return result;
 

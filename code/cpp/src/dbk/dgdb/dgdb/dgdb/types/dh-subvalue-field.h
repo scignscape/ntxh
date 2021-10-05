@@ -124,7 +124,22 @@ public:
  void note_target_byte_length(s1 len);
  QPair<u1, bool> get_target_byte_length();
 
- u1 construct_stage_code();
+ u4 get_block_segment_byte_length();
+
+ void inline check_adjust_from_default_length(u1& len)
+ {
+  if(len == 8) // default -- this could be changed if/when there's some
+               // other flag that the len was not explicitly set ...
+  {
+   u4 olen = block_offset_end_ - block_offset_start_ + 1;
+   if(olen == 1)
+     len = 1;
+   else if(olen < 4)
+     len = 2;
+   else if(olen < 8)
+     len = 4;
+  }
+ }
 
  void note_query_info(QString path, DH_Stage_Code::Query_Typecode qtc)
  {

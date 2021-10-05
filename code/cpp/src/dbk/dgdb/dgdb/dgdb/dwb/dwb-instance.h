@@ -74,11 +74,13 @@ public:
  void get_qba_from_encoded_value(n8 enc, DH_Stage_Code::Query_Typecode qtc, QByteArray& result);
 
  void* get_record_from_qba(const QByteArray& qba);
- void* get_target_record_from_query_record(DWB_Instance* origin_dwb, void* qrec, u2 rec_column);
+ void* get_target_record_from_query_record(DWB_Instance* origin_dwb,
+   void* qrec, u2 rec_column, u2 target_id_column, u2 target_id_target_column);
 
  void* find_query_record(u2 query_column, QString test); // u2 rec_column,
  void* find_query_record(u2 query_column, DH_Stage_Value& sv); // u2 rec_column,
 
+ void* find_record_via_id(n8 id, u2 query_column);
 
  QPair<void*, QPair<u2, u2>> get_record_via_split(char* ptr, u2 spl);
  QPair<void*, u2> get_record_via_known_split(char* ptr, u2 spl);
@@ -90,7 +92,7 @@ public:
 
  QByteArray encode_record(void* rec);
 
- void* new_query_record(DWB_Instance* origin_dwb, void* target_record,
+ void* new_query_record(DWB_Instance* origin_dwb, void* target_record, n8 target_record_id,
    u2 target_column, u2 value_column, DH_Stage_Value& sv, u2 field_count);
 
  u4 fetch_u4_field(void* rec, u2 dh_id_column);
