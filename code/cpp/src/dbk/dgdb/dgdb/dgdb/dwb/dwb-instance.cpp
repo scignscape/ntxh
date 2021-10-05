@@ -265,19 +265,19 @@ void* DWB_Instance::find_record_via_id(n8 id, u2 query_column)
 }
 
 void* DWB_Instance::get_target_record_from_query_record(DWB_Instance* origin_dwb, void* qrec,
-  u2 rec_column, u2 target_id_column, u2 target_id_target_column)
+  u2 rec_column, QPair<u2, u2> target_id_columns)//, u2 target_id_target_column)
 {
  // //  this code should only be active when using id's rather than rec pointers
   //    so as to view db contents with the WhiteDB utility ...
- if(target_id_column)
+ if(target_id_columns.first) // target_id_column
  {
   wg_int ft = wg_get_field_type(wdb_instance_, qrec, rec_column);
   if(ft == WG_STRTYPE)
   {
    // this means we're not storing rec pointers ...
-   wg_int wi = wg_get_field(wdb_instance_, qrec, target_id_column);
+   wg_int wi = wg_get_field(wdb_instance_, qrec, target_id_columns.first);
    n8 id = wg_decode_int(wdb_instance_, wi);
-   return origin_dwb->find_record_via_id(id, target_id_target_column);
+   return origin_dwb->find_record_via_id(id, target_id_columns.second); // target_id_column_target_column
   }
  }
 
@@ -985,22 +985,32 @@ void DWB_Instance::write_field(void* rec, u2 query_column, DH_Stage_Value& sv)
  wg_set_field(wdb_instance_, rec, query_column, wi);
 }
 
+n8 DWB_Instance::get_record_id(void* rec, u2 id_column)
+{
+ wg_int wi = wg_get_field(wdb_instance_, rec, id_column);
+ return wg_decode_int(wdb_instance_, wi);
+}
+
 void* DWB_Instance::new_query_record(DWB_Instance* origin_dwb,
   void* target_record, n8 target_record_id, u2 target_column,
-  u2 value_column, DH_Stage_Value& sv, u2 field_count)
+  n8 hypernode_id, u2 value_column, DH_Stage_Value& sv, u2 field_count, bool avoid_record_pointers)
 {
  void* result = wg_create_record(wdb_instance_, field_count);
 
  wg_int origin_rec = wg_encode_record(origin_dwb->wdb_instance_, target_record);
-
  wg_int wi = _rec_encode(wdb_instance_, sv);
-
  wg_set_field(wdb_instance_, result, value_column, wi);
 
  // // chance to save a string description instead ...
- //wg_set_field(wdb_instance_, result, target_column, origin_rec);
- QString ref_to = QString("ref:id=%1").arg(target_record_id);
- wg_set_str_field(wdb_instance_, result, target_column, ref_to.toLatin1().data());
+ if(avoid_record_pointers)
+ {
+  QString ref_to = QString("ref:id=%1;node=%2;raw=%3").arg(target_record_id).arg(hypernode_id).arg(origin_rec);
+  wg_set_str_field(wdb_instance_, result, target_column, ref_to.toLatin1().data());
+ }
+ else
+ {
+  wg_set_field(wdb_instance_, result, target_column, origin_rec);
+ }
 
  return result;
 
@@ -1027,7 +1037,7 @@ u2 DWB_Instance::write_rec_field_via_split(char* ptr, u2 spl, DH_Stage_Value& sv
  return adj;
 }
 
-DWB_Instance::_DB_Create_Status DWB_Instance::check_init()
+DWB_Instance::_DB_Create_Status DWB_Instance::check_init(bool reset)
 {
  ftok_key_ = ftok(config_path_.toLatin1().data(), _FTOK_CHAR);
 
@@ -1038,6 +1048,21 @@ DWB_Instance::_DB_Create_Status DWB_Instance::check_init()
 
  if(( wdb_instance_ = wg_attach_existing_database(qba.data()) ))
  {
+  if(reset)
+  {
+   wdb_instance_ = nullptr;
+   qDebug() << "Resetting database ...";
+   int ok = wg_delete_database(qba.data());
+   if(ok > 0)
+   {
+    qDebug() << "Failed to delete database: " << ftok_key_;
+    return _DB_Create_Status::Reset_Failed;
+    // // error ... throw something?
+   }
+   if(( wdb_instance_ = wg_attach_database(qba.data(), 0) ))
+     qDebug() << "After reset attaching database ..." << ftok_key_;
+   else return _DB_Create_Status::Reset_Failed;
+  }
   return _DB_Create_Status::Attached;
  }
 

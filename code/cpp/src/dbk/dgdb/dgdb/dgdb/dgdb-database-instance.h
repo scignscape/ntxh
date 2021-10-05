@@ -17,6 +17,8 @@
 
 #include "accessors.h"
 
+#include "flags.h"
+
 #include "types/dh-type.h"
 
 #include "types/stage/dh-stage-code.h"
@@ -69,6 +71,23 @@ class DgDb_Database_Instance
    size_t* size, n8* shm_path_code);
 
 public:
+
+ struct _Config
+ {
+  flags_(1)
+   bool scratch_mode:1;
+   bool local_scratch_mode:1;
+   bool auto_stage:1;
+   bool auto_commit:1;
+   bool avoid_record_pointers:1;
+   bool temp_reinit:1;
+  _flags
+
+  _Config() : Flags(0) {}
+ };
+
+ _Config Config;
+
 
  static constexpr s4 _unknown = -1;
  static constexpr s4 _file_create_failed = -2;

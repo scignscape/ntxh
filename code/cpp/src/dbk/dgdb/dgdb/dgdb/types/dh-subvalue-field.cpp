@@ -12,7 +12,7 @@
 
 DH_Subvalue_Field::DH_Subvalue_Field(QString field_name)
   :  field_name_(field_name), write_mode_(In_Block), block_offset_start_(0),
-     block_offset_end_(0), record_column_index_(0), index_(0),
+     block_offset_end_(0), record_column_index_(0), index_(0), query_column_(0),
      max_partner_query_column_(0)
 {
 

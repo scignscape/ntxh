@@ -46,10 +46,12 @@ public:
   N_A = 0, Attached = 1,
   Created_Via_Restore = 2, Created_New = 4,
   FTOK_Failed = 8, Created_Restore_Failed = 16,
-  Create_And_Restore_Failed = 32, Attach_Failed = 64
+  Create_And_Restore_Failed = 32, Attach_Failed = 64, Reset_Failed = 128
  };
 
- _DB_Create_Status check_init();
+ _DB_Create_Status check_init(bool reset);
+
+ n8 get_record_id(void* rec, u2 id_column = 0);
 
  QPair<void*, char*> new_block_record(u2 field_count, size_t block_size, u2 block_column);
  size_t write_record_pointer_bytes(void* rec, char* destination);
@@ -75,7 +77,7 @@ public:
 
  void* get_record_from_qba(const QByteArray& qba);
  void* get_target_record_from_query_record(DWB_Instance* origin_dwb,
-   void* qrec, u2 rec_column, u2 target_id_column, u2 target_id_target_column);
+   void* qrec, u2 rec_column, QPair<u2, u2> target_id_columns);//, u2 target_id_column, u2 target_id_target_column);
 
  void* find_query_record(u2 query_column, QString test); // u2 rec_column,
  void* find_query_record(u2 query_column, DH_Stage_Value& sv); // u2 rec_column,
@@ -93,7 +95,8 @@ public:
  QByteArray encode_record(void* rec);
 
  void* new_query_record(DWB_Instance* origin_dwb, void* target_record, n8 target_record_id,
-   u2 target_column, u2 value_column, DH_Stage_Value& sv, u2 field_count);
+   u2 target_column, n8 hypernode_id, u2 value_column, DH_Stage_Value& sv,
+   u2 field_count, bool avoid_record_pointers);
 
  u4 fetch_u4_field(void* rec, u2 dh_id_column);
  QPair<char*, size_t> fetch_blob_field(void* rec, u2 column);

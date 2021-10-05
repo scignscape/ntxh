@@ -18,7 +18,7 @@ DH_Type::DH_Type()
      //subvalue_fields_qtc_vector_(nullptr)
   //   stage_encoder_(nullptr)
 {
- default_query_column_ = 3;
+ default_query_column_ = 5;
  default_query_path_ = "&/q/$type";
 }
 

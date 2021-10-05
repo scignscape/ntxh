@@ -80,7 +80,7 @@ static constexpr u2 default_total_columns = 5;
 
 n8 DgDb_Database_Instance::new_record_id(n8 category_base)
 {
- return ++max_record_ids_[category_base];
+ return category_base + ++max_record_ids_[category_base];
 }
 
 
@@ -260,7 +260,9 @@ DWB_Instance* DgDb_Database_Instance::get_query_dwb(DH_Type* dht, DH_Subvalue_Fi
 
   result = new DWB_Instance(path + "/_config", path + "/_restore");
 
-  DWB_Instance::_DB_Create_Status cst = result->check_init();
+  bool reset_needed = Config.flags.scratch_mode | Config.flags.temp_reinit;
+
+  DWB_Instance::_DB_Create_Status cst = result->check_init(reset_needed);
   if(! ((u1)cst & 7) )
   {
    // //  unusual condition on the whitedb ...
@@ -416,13 +418,15 @@ DgDb_Hypernode* DgDb_Database_Instance::find_hypernode(DH_Type* dht, DH_Subvalue
 
    // //  these are for test/demo/etc. if rec's are not stored as raw pointers ...
    static u1 target_id_column = 1;
-   static u1 target_id_target_column = 1;
+   static u1 target_id_target_column = 0;  //? 0
 
    void* qrec = dwb->find_query_record(sf->query_column(), sv);
    if(qrec)
    {
     void* result_rec = dwb->get_target_record_from_query_record(blocks_dwb_,
-      qrec, rec_column, target_id_column, target_id_target_column);
+      qrec, rec_column, Config.flags.avoid_record_pointers?
+      QPair<u2,u2>{target_id_column, target_id_target_column}:
+      QPair<u2,u2>{0,0});
     if(result_rec)
     {
      if(rec)
@@ -472,13 +476,16 @@ DgDb_Hypernode* DgDb_Database_Instance::find_hypernode(DH_Type* dht,
 
    // //  these are for test/demo/etc. if rec's are not stored as raw pointers ...
    static u1 target_id_column = 1;
-   static u1 target_id_target_column = 1;
+   static u1 target_id_target_column = 0;  //1
 
    void* qrec = dwb->find_query_record(sf->query_column(), test);
    if(qrec)
    {
     void* result_rec = dwb->get_target_record_from_query_record(blocks_dwb_,
-      qrec, rec_column, target_id_column, target_id_target_column);
+      qrec, rec_column,
+      Config.flags.avoid_record_pointers?
+      QPair<u2,u2>{target_id_column, target_id_target_column}:
+      QPair<u2,u2>{0,0});
     if(result_rec)
     {
      if(rec)
@@ -1258,7 +1265,9 @@ void DgDb_Database_Instance::init_dwb_blocks()
  blocks_dwb_ = new DWB_Instance(confirmed_private_folder_path_
    + "/dwb/blocks/_config", confirmed_private_folder_path_ + "/dwb/blocks/_restore");
 
- DWB_Instance::_DB_Create_Status cst = blocks_dwb_->check_init();
+ bool reset_needed = Config.flags.scratch_mode | Config.flags.temp_reinit;
+
+ DWB_Instance::_DB_Create_Status cst = blocks_dwb_->check_init(reset_needed);
  if(! ((u1)cst & 7) )
  {
   // //  unusual condition on the whitedb ...

@@ -58,6 +58,8 @@ void DgDb_Database_Instance::store_subvalue_to_external_record(DgDb_Hypernode* d
  DWB_Instance* dwb = get_query_dwb(dh->dh_type(), sf);
  void* rec = get_wdb_record_from_block(dh->shm_block());
 
+ n8 rid = blocks_dwb_->get_record_id(rec);
+
  // //  assume always 2 for now ...
  static u1 rec_column = 2;
 
@@ -79,13 +81,18 @@ void DgDb_Database_Instance::store_subvalue_to_external_record(DgDb_Hypernode* d
 
  // //  assume always 1 for now ...
  static u1 target_id_column = 1;
- n8 rid = new_record_id(_queries_rec_id_category_base);
+ n8 qrid = new_record_id(_queries_rec_id_category_base);
 
  // //  assume always 0 for now ...
  static u1 rec_id_column = 0;
 
- void* qrec = dwb->new_query_record(blocks_dwb_, rec, dh->id(), rec_column, qc,
-   sv, max);
+ // //  these are not currently used but help to clarify db contents when displayed ...
+ n8 hypernode_id = dh->id();
+ // //  assyme always 3 for now ...
+ u2 hypernode_id_column = 3;
+
+ void* qrec = dwb->new_query_record(blocks_dwb_, rec, rid, rec_column,
+   hypernode_id, qc, sv, max, Config.flags.avoid_record_pointers);
 
  QByteArray enc = dwb->encode_record(qrec);
  memcpy(mem, enc.data(), enc.size());
@@ -93,8 +100,11 @@ void DgDb_Database_Instance::store_subvalue_to_external_record(DgDb_Hypernode* d
  // //  store the hypernode id for testing/demo -- currently not strictly needed.
  //    The wgdn utility doesn't work well with direct inter-record links
  //    so id's can be used in lieu of rec's to look at db contents temporarily
- dwb->write_u1_field(qrec, target_id_column, dh->id());
- dwb->write_n8_field(qrec, rec_id_column, rid);
+// dwb->write_u1_field(qrec, target_id_column, dh->id());
+
+ dwb->write_n8_field(qrec, target_id_column, rid);
+ dwb->write_n8_field(qrec, rec_id_column, qrid);
+ dwb->write_n8_field(qrec, hypernode_id_column, hypernode_id);
 }
 
 

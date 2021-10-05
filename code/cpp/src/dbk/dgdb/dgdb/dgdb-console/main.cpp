@@ -201,6 +201,9 @@ int main(int argc, char *argv[])
 {
  DgDb_Database_Instance ddi(DEFAULT_DEV_DGDB_FOLDER "/t1");
 
+ //ddi.Config.flags.avoid_record_pointers = true;
+ //ddi.Config.flags.temp_reinit = true;
+
  ddi.init_dtb_package();
  ddi.init_type_system();
  ddi.check_construct_files();
