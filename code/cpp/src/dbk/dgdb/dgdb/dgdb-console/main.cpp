@@ -16,9 +16,9 @@
 
 #include "tkrzw_dbm_hash.h"
 
-#include "dgdb/dgdb-location-structure.h"
+#include "dgdb/dh-location-structure.h"
 
-using namespace _class_DgDb_Location_Structure;
+using namespace _class_DH_Location_Structure;
 
 #include "dgdb/dgdb-database-instance.h"
 
@@ -105,7 +105,7 @@ int main2(int argc, char *argv[])
  DgDb_Hypernode* dh = ddi.new_hypernode<Test_Class>();
 
 // ddi.store_indexed_field(dh, _interned_field_name(3), u2_to_qba(524),
-//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+//   DH_Location_Structure::Data_Options::Shm_Pointer, "a_string");
 
 
 // ddi.store(dh, "a_number", u2_to_qba(892));
@@ -179,16 +179,16 @@ int main2(int argc, char *argv[])
 
 
 // ddi.store_indexed_field(dh, _interned_field_name(3), u2_to_qba(524),
-//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_number");
+//   DH_Location_Structure::Data_Options::Shm_Pointer, "a_number");
 
 // ddi.store_indexed_field(dh, _interned_field_name(4), "test",
-//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+//   DH_Location_Structure::Data_Options::Shm_Pointer, "a_string");
 
 // {
 //  QByteArray qba;
 //  void* pv;
-//  ddi.fetch_indexed_field(dh, 3, DgDb_Location_Structure::Field_Id_Options::Interned_Field_Name,
-//    qba, pv, DgDb_Location_Structure::Data_Options::Shm_Pointer);
+//  ddi.fetch_indexed_field(dh, 3, DH_Location_Structure::Field_Id_Options::Interned_Field_Name,
+//    qba, pv, DH_Location_Structure::Data_Options::Shm_Pointer);
 
 //  u2 test = qba_to_u2(qba);
 
@@ -272,7 +272,7 @@ int main(int argc, char *argv[])
  DgDb_Hypernode* dh = ddi.new_hypernode<Demo_Class>();
 
 // ddi.store_indexed_field(dh, _interned_field_name(3), u2_to_qba(524),
-//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+//   DH_Location_Structure::Data_Options::Shm_Pointer, "a_string");
 
 
 // ddi.store(dh, "a_number", u2_to_qba(892));
@@ -587,7 +587,7 @@ int main7(int argc, char *argv[])
  DgDb_Hypernode* dh = ddi.new_hypernode<Test_Class>();
 
 // ddi.store_indexed_field(dh, _interned_field_name(3), u2_to_qba(524),
-//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+//   DH_Location_Structure::Data_Options::Shm_Pointer, "a_string");
 
 // Test_Class* tc = new Test_Class;
 // tc->set_a_number(991);
@@ -599,7 +599,7 @@ int main7(int argc, char *argv[])
  ddi.store(dh, "a_string", "a-test");
 
 // ddi.store_indexed_field(dh, _structure_field_index(2), "a-test",
-//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+//   DH_Location_Structure::Data_Options::Shm_Pointer, "a_string");
 
  ddi.store(dh, "a_sign", s2_to_sv(-256));
 // DgDb_Hypernode* dh1 = ddi.find_hypernode(dht, "a_string", "a-test");
@@ -690,13 +690,13 @@ int main6(int argc, char *argv[])
  DgDb_Hypernode* dh = ddi.new_hypernode<Test_Class>();
 
  ddi.store_indexed_field(dh, _structure_field_index(1), s2_to_sv(-324),
-   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_number");
+   DH_Location_Structure::Data_Options::Shm_Pointer, "a_number");
 
  ddi.store_indexed_field(dh, _structure_field_index(2), qstring_to_sv("test"),
-   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+   DH_Location_Structure::Data_Options::Shm_Pointer, "a_string");
 
  ddi.store_indexed_field(dh, _structure_field_index(3), u4_to_sv(11324),
-   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+   DH_Location_Structure::Data_Options::Shm_Pointer, "a_string");
 
  DgDb_Hypernode* dh1 = dh;
 
@@ -739,7 +739,7 @@ int main6(int argc, char *argv[])
  DgDb_Hypernode* dh = ddi.new_hypernode<Test_Class>();
 
  ddi.store_indexed_field(dh, _interned_field_name(3), u2_to_qba(524),
-   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+   DH_Location_Structure::Data_Options::Shm_Pointer, "a_string");
 
 
 // ddi.store(dh, "a_number", u2_to_qba(892));
@@ -808,7 +808,7 @@ int main8(int argc, char *argv[])
  DgDb_Hypernode* dh = ddi.new_hypernode<Test_Class>();
 
 // ddi.store_indexed_field(dh, _interned_field_name(3), u2_to_qba(524),
-//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+//   DH_Location_Structure::Data_Options::Shm_Pointer, "a_string");
 
 
 // ddi.store(dh, "a_number", u2_to_qba(892));
@@ -882,16 +882,16 @@ int main8(int argc, char *argv[])
 
 
 // ddi.store_indexed_field(dh, _interned_field_name(3), u2_to_qba(524),
-//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_number");
+//   DH_Location_Structure::Data_Options::Shm_Pointer, "a_number");
 
 // ddi.store_indexed_field(dh, _interned_field_name(4), "test",
-//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+//   DH_Location_Structure::Data_Options::Shm_Pointer, "a_string");
 
 // {
 //  QByteArray qba;
 //  void* pv;
-//  ddi.fetch_indexed_field(dh, 3, DgDb_Location_Structure::Field_Id_Options::Interned_Field_Name,
-//    qba, pv, DgDb_Location_Structure::Data_Options::Shm_Pointer);
+//  ddi.fetch_indexed_field(dh, 3, DH_Location_Structure::Field_Id_Options::Interned_Field_Name,
+//    qba, pv, DH_Location_Structure::Data_Options::Shm_Pointer);
 
 //  u2 test = qba_to_u2(qba);
 
@@ -935,7 +935,7 @@ int main3(int argc, char *argv[])
  DgDb_Hypernode* dh = ddi.new_hypernode<Test_Class>();
 
 // ddi.store_indexed_field(dh, _interned_field_name(3), u2_to_qba(524),
-//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "a_string");
+//   DH_Location_Structure::Data_Options::Shm_Pointer, "a_string");
 
 
 // ddi.store(dh, "a_number", u2_to_qba(892));
@@ -993,7 +993,7 @@ int main3(int argc, char *argv[])
 // DgDb_Hypernode* dh = ddi.new_hypernode();
 
 // ddi.store_indexed_field(dh, _negative_raw_array_position(3), u2_to_qba(514),
-//   DgDb_Location_Structure::Data_Options::Shm_Pointer, "xtest");
+//   DH_Location_Structure::Data_Options::Shm_Pointer, "xtest");
 
 // void* v = wg_get_first_record(db);
 
@@ -1043,8 +1043,8 @@ int main3(int argc, char *argv[])
 
 // QByteArray qba;
 // void* pv;
-// ddi.fetch_indexed_field(dh, 3, DgDb_Location_Structure::Field_Id_Options::Negative_Raw_Array_Position, qba,
-//   pv, DgDb_Location_Structure::Data_Options::Shm_Pointer);
+// ddi.fetch_indexed_field(dh, 3, DH_Location_Structure::Field_Id_Options::Negative_Raw_Array_Position, qba,
+//   pv, DH_Location_Structure::Data_Options::Shm_Pointer);
 
 //// u2 test;// = qba_to_u2(qba);
 //// qba_to_<u2>(qba, test);
@@ -1071,12 +1071,12 @@ int main4(int argc, char *argv[])
  DgDb_Hypernode* dh = ddi.new_hypernode();
 
  ddi.store_indexed_field(dh, 3, u1_to_sv(78),
-   DgDb_Location_Structure::Data_Options::Numeric, {});
+   DH_Location_Structure::Data_Options::Numeric, {});
 
 
  QByteArray qba;
  ddi.fetch_indexed_field(dh, 3, qba,
-   DgDb_Location_Structure::Data_Options::Numeric);
+   DH_Location_Structure::Data_Options::Numeric);
 
  u1 test = qba_to_u1(qba);
 
@@ -1110,15 +1110,15 @@ int main2(int argc, char *argv[])
 // qDebug() << "st1 = " << st1;
 
 
-// DgDb_Location_Structure dls;
+// DH_Location_Structure dls;
 
 // //dls.set_raw_code();
 
-// dls.set_primary_field_id(33, DgDb_Location_Structure::Field_Id_Options::Interned_Field_Name);
-// dls.set_secondary_field_id(44, DgDb_Location_Structure::Field_Id_Options::Offset_Array_Position);
+// dls.set_primary_field_id(33, DH_Location_Structure::Field_Id_Options::Interned_Field_Name);
+// dls.set_secondary_field_id(44, DH_Location_Structure::Field_Id_Options::Offset_Array_Position);
 
-// QPair<DgDb_Location_Structure::Field_Id_Options, u2> pr1 = dls.get_primary_field_id();
-// QPair<DgDb_Location_Structure::Field_Id_Options, u2> pr2 = dls.get_secondary_field_id();
+// QPair<DH_Location_Structure::Field_Id_Options, u2> pr1 = dls.get_primary_field_id();
+// QPair<DH_Location_Structure::Field_Id_Options, u2> pr2 = dls.get_secondary_field_id();
 
 // qDebug() << dls.raw_code();
 // qDebug() << (u1) pr1.first << pr1.second;
@@ -1130,15 +1130,15 @@ int main2(int argc, char *argv[])
 
 int main1(int argc, char *argv[])
 {
- DgDb_Location_Structure dls;
+ DH_Location_Structure dls;
 
  //dls.set_raw_code();
 
- dls.set_primary_field_id(33, DgDb_Location_Structure::Field_Id_Options::Structure_Field_Index);
- dls.set_secondary_field_id(44, DgDb_Location_Structure::Field_Id_Options::Negative_Raw_Array_Position);
+ dls.set_primary_field_id(33, DH_Location_Structure::Field_Id_Options::Structure_Field_Index);
+ dls.set_secondary_field_id(44, DH_Location_Structure::Field_Id_Options::Negative_Raw_Array_Position);
 
-// QPair<DgDb_Location_Structure::Field_Id_Options, u2> pr1 = dls.get_primary_field_id();
-// QPair<DgDb_Location_Structure::Field_Id_Options, u2> pr2 = dls.get_secondary_field_id();
+// QPair<DH_Location_Structure::Field_Id_Options, u2> pr1 = dls.get_primary_field_id();
+// QPair<DH_Location_Structure::Field_Id_Options, u2> pr2 = dls.get_secondary_field_id();
 
 // qDebug() << dls.raw_code();
 //// qDebug() << (u1) pr1.first << pr1.second;
@@ -1148,14 +1148,14 @@ int main1(int argc, char *argv[])
 
  // qDebug() << dls.raw_code();
 
- dls.set_data_options(DgDb_Location_Structure::Data_Options::Shm_Pointer_With_Size);
+ dls.set_data_options(DH_Location_Structure::Data_Options::Shm_Pointer_With_Size);
 
  // // qDebug() << dls.raw_code();
- QPair<DgDb_Location_Structure::Data_Options, u4> pr3 = dls.get_node_id();
+ QPair<DH_Location_Structure::Data_Options, u4> pr3 = dls.get_node_id();
 
 
- QPair<DgDb_Location_Structure::Field_Id_Options, u2> pr1 = dls.get_primary_field_id();
- QPair<DgDb_Location_Structure::Field_Id_Options, u2> pr2 = dls.get_secondary_field_id();
+ QPair<DH_Location_Structure::Field_Id_Options, u2> pr1 = dls.get_primary_field_id();
+ QPair<DH_Location_Structure::Field_Id_Options, u2> pr2 = dls.get_secondary_field_id();
 
  qDebug() << (u1) pr1.first << pr1.second;
  qDebug() << (u1) pr2.first << pr2.second;

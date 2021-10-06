@@ -5,36 +5,51 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#include "dgdb-location-structure.h"
+#include "dh-location-structure.h"
 
-DgDb_Location_Structure::DgDb_Location_Structure()
+DH_Location_Structure::DH_Location_Structure()
   :  raw_code_(0)
 {
 
 }
 
-u2 DgDb_Location_Structure::get_raw_primary_field_id()
+void DH_Location_Structure::set_edge_id(u4 id)
 {
- return (u2) (raw_code_ & 0xFFFF);
+ // //  highest bit should be clear
+ id &= 0x7FFF'FFFF;
+
+ raw_code_ |= ( (n8)id << 32 );
 }
 
-u2 DgDb_Location_Structure::get_raw_secondary_field_id()
+u4 DH_Location_Structure::get_edge_id()
+{
+ u4 result = raw_code_ >> 32;
+ return result & 0x7FFF'FFFF;
+}
+
+u2 DH_Location_Structure::get_raw_primary_field_id()
+{
+ // return (u2) (raw_code_ & 0x0000'FFFF'0000'0000);
+ return (u2) (raw_code_ >> 32);
+}
+
+u2 DH_Location_Structure::get_raw_secondary_field_id()
 {
  u2 result = raw_code_ >> 48;
  return result & 0b0111'1111'1111'1111;
 }
 
 
-QPair<DgDb_Location_Structure::Field_Id_Options, u2>
-  DgDb_Location_Structure::split_index_code(u2 index_code)
+QPair<DH_Location_Structure::Field_Id_Options, u2>
+  DH_Location_Structure::split_index_code(u2 index_code)
 {
  static u2 mask13 = 0b0001'1111'1111'1111;
  return { (Field_Id_Options) (index_code >> 13), index_code & mask13 };
 }
 
 
-QPair<DgDb_Location_Structure::Field_Id_Options, u2>
-  DgDb_Location_Structure::get_primary_field_id()
+QPair<DH_Location_Structure::Field_Id_Options, u2>
+  DH_Location_Structure::get_primary_field_id()
 {
  u2 result = get_raw_primary_field_id();
 
@@ -44,8 +59,8 @@ QPair<DgDb_Location_Structure::Field_Id_Options, u2>
 }
 
 
-QPair<DgDb_Location_Structure::Field_Id_Options, u2>
-  DgDb_Location_Structure::get_secondary_field_id()
+QPair<DH_Location_Structure::Field_Id_Options, u2>
+  DH_Location_Structure::get_secondary_field_id()
 {
  u2 result = get_raw_secondary_field_id();
 
@@ -55,28 +70,29 @@ QPair<DgDb_Location_Structure::Field_Id_Options, u2>
 // return { (Field_Id_Options) ( (result >> 13) & 3), result & mask13};
 }
 
-u4 DgDb_Location_Structure::get_raw_node_id()
+u4 DH_Location_Structure::get_raw_node_id()
 {
- n8 result = raw_code_ & 0x0000'FFFF'FFFF'0000;
- return (u4) (result >> 16);
+// n8 result = raw_code_ & 0x0000'FFFF'FFFF'0000;
+// return (u4) (result >> 16);
+ return raw_code_ & 0xFFFF'FFFF;
 }
 
 
-void DgDb_Location_Structure::set_data_options(Data_Options opts)
+void DH_Location_Structure::set_data_options(Data_Options opts)
 {
  u1 data_options = (u1) opts & 7;
 
  // //  clear the data_options and typed flag bits ///
- raw_code_ &= 0x7FFF'1FFF'FFFF'FFFF;
+ raw_code_ &= 0x7FFF'FFFF'1FFF'FFFF;
 
- raw_code_ |= (n8)data_options << 45;
+ raw_code_ |= (n8)data_options << 29;
 
  if( (u1)opts & 8 )
    raw_code_ |= ( (n8)1 << 63);
 }
 
 
-QPair<DgDb_Location_Structure::Data_Options, u4> DgDb_Location_Structure::get_node_id()
+QPair<DH_Location_Structure::Data_Options, u4> DH_Location_Structure::get_node_id()
 {
  u4 result = get_raw_node_id();
  u1 data_options = result >> 29;
@@ -84,36 +100,36 @@ QPair<DgDb_Location_Structure::Data_Options, u4> DgDb_Location_Structure::get_no
  if(raw_code_ >> 63)
  {
   // //  typed_flag bit set
-  return { (DgDb_Location_Structure::Data_Options) (data_options | 8), result };
+  return { (DH_Location_Structure::Data_Options) (data_options | 8), result };
  }
  // //  typed_flag bit not set
- return { (DgDb_Location_Structure::Data_Options) data_options, result };
+ return { (DH_Location_Structure::Data_Options) data_options, result };
 }
 
-void DgDb_Location_Structure::set_node_id(u4 id)
+void DH_Location_Structure::set_node_id(u4 id)
 {
  // //  id should be < 0x1FFF'FFFF ...
 
- // //  middle four bytes should be 0b0001'1111 ... all ones ...
- raw_code_ &= 0xFFFF'E000'0000'FFFF;
- raw_code_ |= ((n8)id << 16);
+ // //  smallest four bytes should be 0b0001'1111 ... all ones ...
+ raw_code_ &= 0xFFFF'FFFF'E000'0000;
+ raw_code_ |= id;
 }
 
 
-void DgDb_Location_Structure::set_raw_primary_field_id(u2 index_code)
+void DH_Location_Structure::set_raw_primary_field_id(u2 index_code)
 {
- raw_code_ &= 0xFFFF'FFFF'FFFF'0000;
- raw_code_ |= index_code;
+ raw_code_ &= 0xFFFF'0000'FFFF'FFFF;
+ raw_code_ |= ( (n8) index_code << 32);
 }
 
-void DgDb_Location_Structure::set_raw_secondary_field_id(u2 index_code)
+void DH_Location_Structure::set_raw_secondary_field_id(u2 index_code)
 {
  raw_code_ &= 0x8000'FFFF'FFFF'FFFF;
  raw_code_ |= ( (n8)index_code << 48);
 }
 
 
-u2 DgDb_Location_Structure::set_primary_field_id(u2 field_number, Field_Id_Options fio)
+u2 DH_Location_Structure::set_primary_field_id(u2 field_number, Field_Id_Options fio)
 {
  static u2 mask13 = 0b0001'1111'1111'1111;
  u2 result = field_number & mask13;
@@ -131,7 +147,7 @@ u2 DgDb_Location_Structure::set_primary_field_id(u2 field_number, Field_Id_Optio
  return result;
 }
 
-u2 DgDb_Location_Structure::set_secondary_field_id(u2 field_number, Field_Id_Options fio)
+u2 DH_Location_Structure::set_secondary_field_id(u2 field_number, Field_Id_Options fio)
 {
  static u2 mask13 = 0b0001'1111'1111'1111;
  u2 result = field_number & mask13;

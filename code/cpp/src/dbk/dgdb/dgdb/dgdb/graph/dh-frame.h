@@ -22,6 +22,8 @@
 
 #include "dh-record.h"
 
+#include <QDataStream>
+
 
 //KANS_(DGDB)
 
@@ -37,11 +39,28 @@ class DgDb_Hypernode;
 struct String_Label_Triple
 {
  DH_Record* source;
+ DH_Record* annotation;
  QString connector_label;
  DH_Record* target;
  DH_Dominion* dom;
  u1 multi_relation_kind;
 };
+
+
+struct Hyperedge_Data
+{
+ n8 hyperedge_id;
+ n8 annotation_id;
+ u4 connector_id;
+ n8 target_id;
+ u1 multi_relation_kind;
+ u2 context_id;
+ u1 flags; //  1 = out-edge, 2 = in-edge, 3 = bi-edge, etc.
+
+ void supply_data(QByteArray& qba);
+ void absorb_data(const QByteArray& qba);
+};
+
 
 class DH_Context
 {

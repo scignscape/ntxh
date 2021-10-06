@@ -41,7 +41,7 @@ HashDBM* DTB_Package::check_info_dbm(QString folder_path)
 HashDBM* DTB_Package::check_nodes_dbm(QString folder_path)
 {
  check_internal_dbm(folder_path, "_nodes", nodes_dbm_);
- return info_dbm_;
+ return nodes_dbm_;
 }
 
 void DTB_Package::check_internal_dbm(QString folder_path, QString which, tkrzw::HashDBM*& result)
@@ -94,7 +94,7 @@ void DTB_Package::read_interns_count_status() //u2& p, u2& f)
 }
 
 
-void DTB_Package::store_node_data(DgDb_Location_Structure dls, void* value)
+void DTB_Package::store_node_data(DH_Location_Structure dls, void* value)
 {
  std::string key(IntToStrBigEndian(dls.raw_code()));
  std::string_view sval((char*)&value, sizeof(void*));
@@ -103,7 +103,7 @@ void DTB_Package::store_node_data(DgDb_Location_Structure dls, void* value)
 
 
 
-void DTB_Package::fetch_node_data(DgDb_Location_Structure dls, void*& result)
+void DTB_Package::fetch_node_data(DH_Location_Structure dls, void*& result)
 {
  std::string key(IntToStrBigEndian(dls.raw_code()));
  //std::string_view sval((char*)value.data(), value.size());
@@ -155,7 +155,7 @@ u2 DTB_Package::check_property_id(QString key)
  return *it;
 }
 
-void DTB_Package::fetch_node_data(DgDb_Location_Structure dls, QByteArray& result)
+void DTB_Package::fetch_node_data(DH_Location_Structure dls, QByteArray& result)
 {
  std::string key(IntToStrBigEndian(dls.raw_code()));
  //std::string_view sval((char*)value.data(), value.size());
@@ -168,7 +168,7 @@ void DTB_Package::fetch_node_data(DgDb_Location_Structure dls, QByteArray& resul
 }
 
 
-void DTB_Package::fetch_node_data(DgDb_Location_Structure dls, QVariant& result)
+void DTB_Package::fetch_node_data(DH_Location_Structure dls, QVariant& result)
 {
  std::string key(IntToStrBigEndian(dls.raw_code()));
  //std::string_view sval((char*)value.data(), value.size());
@@ -190,7 +190,7 @@ void DTB_Package::fetch_node_data(DgDb_Location_Structure dls, QVariant& result)
 }
 
 
-void DTB_Package::store_node_data(DgDb_Location_Structure dls, const QByteArray& value)
+void DTB_Package::store_node_data(DH_Location_Structure dls, const QByteArray& value)
 {
  std::string key(IntToStrBigEndian(dls.raw_code()));
  std::string_view sval((char*)value.data(), value.size());

@@ -23,7 +23,7 @@
 
 #include "types/stage/dh-stage-code.h"
 
-#include "dgdb-location-structure.h"
+#include "dh-location-structure.h"
 
 #include <QVariant>
 
@@ -72,7 +72,7 @@ class DgDb_Database_Instance
 
  QMap<QString, n8> category_floors_;
 
- void* default_get_shm_field_ptr(DgDb_Location_Structure dls,
+ void* default_get_shm_field_ptr(DH_Location_Structure dls,
    DgDb_Hypernode* dh, u2 index_code, QString field_name,
    size_t* size, n8* shm_path_code);
 
@@ -144,6 +144,9 @@ public:
    u4 dh_id, QString init_message = {}, u1 Max_Fixed = 0,
    u2 total_columns = 0, Block_Options options =
    Block_Options::Write_WhiteDB_Record | Block_Options::Write_Max_Fixed | Block_Options::Init_to_0);
+
+ void store_outedge(DgDb_Hypernode* dh,
+   u4 edge_id, const QByteArray& data);
 
  DgDb_Hypernode* new_hypernode();
 
@@ -258,30 +261,30 @@ public:
    //const QByteArray& value);
 
  void store_subvalue(DgDb_Hypernode* dh,
-   DH_Subvalue_Field* sf, DgDb_Location_Structure& dls,
-   DgDb_Location_Structure::Data_Options opts, DH_Stage_Value& sv);
+   DH_Subvalue_Field* sf, DH_Location_Structure& dls,
+   DH_Location_Structure::Data_Options opts, DH_Stage_Value& sv);
    //const QByteArray& value);
 
  void store_indexed_field(DgDb_Hypernode* dh, u2 index,
    DH_Stage_Value& sh, //const QByteArray& value,
-   DgDb_Location_Structure::Data_Options opts, QString field_name);
+   DH_Location_Structure::Data_Options opts, QString field_name);
  void store_indexed_field(DgDb_Hypernode* dh, u2 index,
    DH_Stage_Value sh, //const QByteArray& value,
-   DgDb_Location_Structure::Data_Options opts, QString field_name);
+   DH_Location_Structure::Data_Options opts, QString field_name);
 
  void store_indexed_field_(DgDb_Hypernode* dh, u2 index,
    DH_Stage_Value& sh, //const QByteArray& value,
-   DgDb_Location_Structure::Data_Options opts, QString field_name);
+   DH_Location_Structure::Data_Options opts, QString field_name);
 
- template<DgDb_Location_Structure::Data_Options OPTS>
- void store_subvalue_(DgDb_Location_Structure dls,
+ template<DH_Location_Structure::Data_Options OPTS>
+ void store_subvalue_(DH_Location_Structure dls,
    DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv,//const QByteArray& value,
    QString field_name);
 
 
 
- template<DgDb_Location_Structure::Data_Options OPTS>
- void store_indexed_field_(DgDb_Location_Structure dls,
+ template<DH_Location_Structure::Data_Options OPTS>
+ void store_indexed_field_(DH_Location_Structure dls,
    DgDb_Hypernode* dh, DH_Stage_Value& sv, QString field_name);
 
 
@@ -320,21 +323,21 @@ public:
    QByteArray& value, void*& pv);
 
 
-  // DgDb_Location_Structure::Data_Options opts);
+  // DH_Location_Structure::Data_Options opts);
 
  void fetch_indexed_field(DgDb_Hypernode* dh, u2 index,
    QByteArray& value,
-   DgDb_Location_Structure::Data_Options opts);
+   DH_Location_Structure::Data_Options opts);
 
  void fetch_indexed_field(DgDb_Hypernode* dh, u2 index,
-   DgDb_Location_Structure::Field_Id_Options fio,
+   DH_Location_Structure::Field_Id_Options fio,
    QByteArray& value,
-   DgDb_Location_Structure::Data_Options opts);
+   DH_Location_Structure::Data_Options opts);
 
  void fetch_indexed_field(DgDb_Hypernode* dh, u2 index,
-   DgDb_Location_Structure::Field_Id_Options fio,
+   DH_Location_Structure::Field_Id_Options fio,
    QByteArray& value, void*& pv,
-   DgDb_Location_Structure::Data_Options opts);
+   DH_Location_Structure::Data_Options opts);
 
  u2 check_field_id(QString key);
 
@@ -360,13 +363,13 @@ public:
  void check_nodes_dbm();
 
  void store_hypernode_count_status(u4 count);
- void store_node_data(DgDb_Location_Structure dls, QVariant value);
- void store_node_data(DgDb_Location_Structure dls, const QByteArray& value);
- void store_node_data(DgDb_Location_Structure dls, void* value);
+ void store_node_data(DH_Location_Structure dls, QVariant value);
+ void store_node_data(DH_Location_Structure dls, const QByteArray& value);
+ void store_node_data(DH_Location_Structure dls, void* value);
 
- void fetch_node_data(DgDb_Location_Structure dls, QVariant& result);
- void fetch_node_data(DgDb_Location_Structure dls, QByteArray& result);
- void fetch_node_data(DgDb_Location_Structure dls, void*& result);
+ void fetch_node_data(DH_Location_Structure dls, QVariant& result);
+ void fetch_node_data(DH_Location_Structure dls, QByteArray& result);
+ void fetch_node_data(DH_Location_Structure dls, void*& result);
 
  void* get_wdb_record_from_block(char* block);
  QString get_string_from_wdb_record(void* rec, u2 field_number = 1);

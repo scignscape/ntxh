@@ -22,7 +22,7 @@
 
 #include "tkrzw/tkrzw_dbm_hash.h"
 
-#include "dgdb-location-structure.h"
+#include "dh-location-structure.h"
 
 
 class DTB_Package
@@ -55,13 +55,13 @@ public:
  s4 read_hypernode_count_status();
  void read_interns_count_status(); //u2& p, u2& f);
 
- void fetch_node_data(DgDb_Location_Structure dls, QVariant& result);
- void fetch_node_data(DgDb_Location_Structure dls, QByteArray& result);
- void fetch_node_data(DgDb_Location_Structure dls, void*& result);
+ void fetch_node_data(DH_Location_Structure dls, QVariant& result);
+ void fetch_node_data(DH_Location_Structure dls, QByteArray& result);
+ void fetch_node_data(DH_Location_Structure dls, void*& result);
 
- void store_node_data(DgDb_Location_Structure dls, void* value);
+ void store_node_data(DH_Location_Structure dls, void* value);
 
- void store_node_data(DgDb_Location_Structure dls, const QByteArray& value);
+ void store_node_data(DH_Location_Structure dls, const QByteArray& value);
  u2 check_property_id(QString key);
  u2 check_field_id(QString key);
 

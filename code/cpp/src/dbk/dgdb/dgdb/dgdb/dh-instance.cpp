@@ -8,6 +8,10 @@
 
 #include "graph/dh-frame.h"
 
+#include "dgdb-hypernode.h"
+
+#include "dgdb-database-instance.h"
+
 #include <QDebug>
 
 
@@ -55,6 +59,9 @@ DH_Record DH_Instance::new_outedges_or_multi_relation_record(DH_Record base,
   u4 col, u4 (DH_Instance::*cb)(),
   QVector<QPair<QPair<QString, DH_Record>, DH_Record>>& targets)
 {
+
+
+
  //? DH_Record result = wdb_instance_->check_reset_ref_field(base, col, targets.size() * 3);
 }
 
@@ -72,26 +79,63 @@ DH_Record DH_Instance::new_multi_relation_record(DH_Record base,
  return new_outedges_or_multi_relation_record(base, 7, &DH_Instance::new_multi_relation_record_id, targets);
 }
 
+u4 DH_Instance::get_connector_id(DH_Dominion* dom, QString connector_label)
+{
+ // // for now just use indexed pairs ...
+ static QMap<QPair<DH_Dominion*, QString>, u4> static_map;
+ static u4 last_used = 0;
+ u4 result = static_map.value({dom, connector_label});
+ if(!result)
+ {
+  result = ++last_used;
+  static_map[{dom, connector_label}] = result;
+ }
+ return result;
+}
+
+//TreeDBM::TuningParameters division_index_params;
+//  division_index_params.key_comparator = PairDecimalKeyComparator;
 
 QPair<u4, u4> DH_Instance::commit_new_triples(QVector<String_Label_Triple>& triples)
 {
  QPair<u4, u4> result = {0, 0};
+
+ u2 context_id = 0; // 0 for now -- can come from frame ...
+
  for(String_Label_Triple& triple : triples)
  {
-  if(triple.multi_relation_kind > 0)
-  {
-   ++result.first;
-   qDebug() << "adding multi relation ..." << triple.connector_label;
-   add_multi_relation(*triple.source, triple.connector_label, *triple.target,
-     triple.multi_relation_kind);
-  }
-  else
-  {
-   ++result.second;
-   qDebug() << "adding hyperedge ..." << triple.connector_label;
-   add_hyperedge(*triple.source, triple.connector_label, *triple.target);
-  }
+  u1 flags = 1;  // currently just outedges
+  n8 id = new_outedges_record_id();
+
+  //n8 source_id = triple.source->node()->id();
+  Hyperedge_Data data {id,
+    triple.annotation? triple.annotation->node()->id() : 0,
+    get_connector_id(triple.dom, triple.connector_label),
+    triple.target->node()->id(), triple.multi_relation_kind,
+    context_id, flags};
+
+  QByteArray qba;
+  data.supply_data(qba);
+  ddi_->store_outedge(triple.source->node(), id, qba);
  }
+
+// for(String_Label_Triple& triple : triples)
+// {
+//  if(triple.multi_relation_kind > 0)
+//  {
+//   ++result.first;
+//   qDebug() << "adding multi relation ..." << triple.connector_label;
+//   add_multi_relation(*triple.source, triple.connector_label, *triple.target,
+//     triple.multi_relation_kind);
+//  }
+//  else
+//  {
+//   ++result.second;
+//   qDebug() << "adding hyperedge ..." << triple.connector_label;
+//   add_hyperedge(*triple.source, triple.connector_label, *triple.target);
+//  }
+// }
+
  return result;
 }
 

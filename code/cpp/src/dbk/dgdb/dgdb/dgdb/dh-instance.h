@@ -24,6 +24,13 @@
 
 //? KANS_(DGDB)
 
+#include "tkrzw/tkrzw_index.h"
+#include "tkrzw/tkrzw_str_util.h"
+
+using namespace tkrzw;
+
+typedef StdIndex<int64_t, Hyperedge_Data> Triples_Index_type;
+
 
 class DgDb_Database_Instance;
 class DgDb_Hypernode;
@@ -57,6 +64,8 @@ public:
 
 
  DH_Instance(DgDb_Database_Instance* ddi);
+
+ u4 get_connector_id(DH_Dominion* dom, QString connector_label);
 
  u4 new_inedges_record_id();
  u4 new_outedges_record_id();

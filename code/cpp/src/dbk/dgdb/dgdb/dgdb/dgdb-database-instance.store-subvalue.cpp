@@ -10,7 +10,7 @@
 #include <QDir>
 #include <QFileInfo>
 
-#include "dgdb-location-structure.h"
+#include "dh-location-structure.h"
 
 #include "dwb/dwb-instance.h"
 
@@ -35,8 +35,8 @@ using namespace tkrzw;
 
 #include <QDataStream>
 
-//template<DgDb_Location_Structure::Data_Options OPTS>
-//void store_subvalue_(DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value, QString field_name);
+//template<DH_Location_Structure::Data_Options OPTS>
+//void store_subvalue_(DH_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value, QString field_name);
 
 
 void DgDb_Database_Instance::store_subvalue_to_external_record(DH_Subvalue_Field* sf,
@@ -129,8 +129,8 @@ void DgDb_Database_Instance::store_subvalue_to_block(DH_Subvalue_Field* sf,
 
 
 template<>
-void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Options::QVariant>
-  (DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
+void DgDb_Database_Instance::store_subvalue_<DH_Location_Structure::Data_Options::QVariant>
+  (DH_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
    QString field_name)
 {
  // store_node_data(dls, value);
@@ -138,8 +138,8 @@ void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Optio
 
 
 template<>
-void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Options::Numeric>
-  (DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
+void DgDb_Database_Instance::store_subvalue_<DH_Location_Structure::Data_Options::Numeric>
+  (DH_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
    QString field_name)
 {
  // store_node_data(dls, value);
@@ -147,24 +147,24 @@ void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Optio
 
 
 template<>
-void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Options::QString>
-(DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
+void DgDb_Database_Instance::store_subvalue_<DH_Location_Structure::Data_Options::QString>
+(DH_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
  QString field_name)
 {
  // store_node_data(dls, value);
 }
 
 template<>
-void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Options::Raw_Binary>
-(DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
+void DgDb_Database_Instance::store_subvalue_<DH_Location_Structure::Data_Options::Raw_Binary>
+(DH_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
  QString field_name)
 {
  // store_node_data(dls, value);
 }
 
 template<>
-void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Options::Shm_Pointer>
-(DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
+void DgDb_Database_Instance::store_subvalue_<DH_Location_Structure::Data_Options::Shm_Pointer>
+(DH_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
  QString field_name)
 {
  void* mem = default_get_shm_field_ptr(dls, dh, dls.get_raw_primary_field_id(), field_name, nullptr, nullptr);
@@ -221,8 +221,8 @@ void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Optio
 }
 
 template<>
-void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Options::Shm_Pointer_With_Path_Code>
-(DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
+void DgDb_Database_Instance::store_subvalue_<DH_Location_Structure::Data_Options::Shm_Pointer_With_Path_Code>
+(DH_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
  QString field_name)
 {
  //?get_shm_field_ptr_(*this, *dh, dls.get_raw_primary_field_id(), field_name, nullptr, nullptr);
@@ -230,80 +230,80 @@ void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Optio
 }
 
 template<>
-void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Options::Shm_Pointer_With_Size>
-(DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
+void DgDb_Database_Instance::store_subvalue_<DH_Location_Structure::Data_Options::In_Edge>
+(DH_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
  QString field_name)
 {
  // store_node_data(dls, value);
 }
 
 template<>
-void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Options::Shm_Pointer_With_Size_and_Path_Code>
-(DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
+void DgDb_Database_Instance::store_subvalue_<DH_Location_Structure::Data_Options::Out_Edge>
+(DH_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
  QString field_name)
 {
  // store_node_data(dls, value);
 }
 
 template<>
-void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Options::Signed_Numeric>
-(DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
+void DgDb_Database_Instance::store_subvalue_<DH_Location_Structure::Data_Options::Signed_Numeric>
+(DH_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
  QString field_name)
 {
  // store_node_data(dls, value);
 }
 
 template<>
-void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Options::Typed_Numeric>
-(DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
+void DgDb_Database_Instance::store_subvalue_<DH_Location_Structure::Data_Options::Typed_Numeric>
+(DH_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
  QString field_name)
 {
  // store_node_data(dls, value);
 }
 
 template<>
-void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Options::Typed_QString>
-(DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
+void DgDb_Database_Instance::store_subvalue_<DH_Location_Structure::Data_Options::Typed_QString>
+(DH_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
  QString field_name)
 {
  // store_node_data(dls, value);
 }
 
 template<>
-void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Options::Typed_Raw_Binary>
-(DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
+void DgDb_Database_Instance::store_subvalue_<DH_Location_Structure::Data_Options::Typed_Raw_Binary>
+(DH_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
  QString field_name)
 {
  // store_node_data(dls, value);
 }
 
 template<>
-void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Options::Typed_Shm_Pointer>
-(DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
+void DgDb_Database_Instance::store_subvalue_<DH_Location_Structure::Data_Options::Typed_Shm_Pointer>
+(DH_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
  QString field_name)
 {
  // store_node_data(dls, value);
 }
 
 template<>
-void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Options::Typed_Shm_Pointer_With_Path_Code>
-(DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
+void DgDb_Database_Instance::store_subvalue_<DH_Location_Structure::Data_Options::Typed_Shm_Pointer_With_Path_Code>
+(DH_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
  QString field_name)
 {
  // store_node_data(dls, value);
 }
 
 template<>
-void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Options::Typed_Shm_Pointer_With_Size>
-(DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
+void DgDb_Database_Instance::store_subvalue_<DH_Location_Structure::Data_Options::Typed_In_Edge>
+(DH_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
  QString field_name)
 {
  // store_node_data(dls, value);
 }
 
 template<>
-void DgDb_Database_Instance::store_subvalue_<DgDb_Location_Structure::Data_Options::Typed_Shm_Pointer_With_Size_and_Path_Code>
-(DgDb_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
+void DgDb_Database_Instance::store_subvalue_<DH_Location_Structure::Data_Options::Typed_Out_Edge>
+(DH_Location_Structure dls, DgDb_Hypernode* dh, DH_Subvalue_Field* sf, DH_Stage_Value& sv, // const QByteArray& value,
  QString field_name)
 {
  // store_node_data(dls, value);

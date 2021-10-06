@@ -20,6 +20,21 @@ DH_Frame::DH_Frame(DH_Instance* dh_instance, u4 id)
 
 } 
 
+void Hyperedge_Data::supply_data(QByteArray& qba)
+{
+ QDataStream qds(&qba, QIODevice::WriteOnly);
+ qds << hyperedge_id << annotation_id << connector_id << target_id
+   << multi_relation_kind << context_id << flags;
+}
+
+void Hyperedge_Data::absorb_data(const QByteArray& qba)
+{
+ QDataStream qds(qba);
+ qds >> hyperedge_id >> annotation_id >> connector_id >> target_id
+   >> multi_relation_kind >> context_id >> flags;
+}
+
+
 QPair<u4, u4> DH_Frame::commit()
 {
  //? return dh_instance_->commit_new_triples(new_string_label_triples_);
@@ -39,7 +54,7 @@ DH_Record* DH_Frame::register_new_triple(DH_Record* source, QString connector, D
 //    property_kind = target->id() - 1000;
 // }
 
- new_string_label_triples_.push_back({source, connector, target, dom, multi_relation_kind});
+ new_string_label_triples_.push_back({source, nullptr, connector, target, dom, multi_relation_kind});
  return source;
 }
 

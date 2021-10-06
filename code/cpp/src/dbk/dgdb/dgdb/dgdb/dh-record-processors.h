@@ -5,8 +5,8 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef DgDb_RECORD_PROCESSORS__H
-#define DgDb_RECORD_PROCESSORS__H
+#ifndef DH_RECORD_PROCESSORS__H
+#define DH_RECORD_PROCESSORS__H
 
 #include <QByteArray>
 #include <QVariant>
@@ -221,6 +221,6 @@ struct ktype_
 };
 
 
-#endif // DgDb_RECORD_PROCESSORS__H
+#endif // DH_RECORD_PROCESSORS__H
 
 

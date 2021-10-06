@@ -43,9 +43,9 @@ INCLUDEPATH += $$PHAON_GRAPH_SRC_GROUP_DIR
 
 
 HEADERS += \
-  $$SRC_DIR/dgdb-location-structure.h  \
+  $$SRC_DIR/dh-location-structure.h  \
   $$SRC_DIR/dgdb-database-instance.h  \
-  $$SRC_DIR/dgdb-record-processors.h  \
+  $$SRC_DIR/dh-record-processors.h  \
   $$SRC_DIR/conversions.h  \
   $$SRC_DIR/dgdb-hypernode.h  \
   $$SRC_DIR/dwb/dwb-instance.h  \
@@ -68,7 +68,7 @@ HEADERS += \
 
 
 SOURCES += \
-  $$SRC_DIR/dgdb-location-structure.cpp  \
+  $$SRC_DIR/dh-location-structure.cpp  \
   $$SRC_DIR/dgdb-database-instance.cpp  \
   $$SRC_DIR/dgdb-hypernode.cpp  \
   $$SRC_DIR/dgdb-database-instance.data-options.cpp  \
