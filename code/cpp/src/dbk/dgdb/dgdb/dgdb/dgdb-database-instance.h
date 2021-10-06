@@ -37,6 +37,8 @@ class DTB_Package;
 class DH_Subvalue_Field;
 class DH_Stage_Value;
 
+class DH_Instance;
+
 
 class DgDb_Database_Instance
 {
@@ -54,6 +56,8 @@ class DgDb_Database_Instance
 
  DH_Type_System* type_system_;
 
+ DH_Instance* dh_instance_;
+
 
  typedef void* (*get_shm_field_ptr_type)(DgDb_Database_Instance&,
    DgDb_Hypernode&, u2, QString, size_t*, n8*);
@@ -64,7 +68,9 @@ class DgDb_Database_Instance
 
  QMap<u4, DgDb_Hypernode*> active_hypernodes_;
 
- QMap<n8, n8> max_record_ids_;
+ QMap<n8, n8*> max_record_ids_;
+
+ QMap<QString, n8> category_floors_;
 
  void* default_get_shm_field_ptr(DgDb_Location_Structure dls,
    DgDb_Hypernode* dh, u2 index_code, QString field_name,
@@ -74,13 +80,16 @@ public:
 
  struct _Config
  {
-  flags_(1)
+  flags_(2)
    bool scratch_mode:1;
    bool local_scratch_mode:1;
    bool auto_stage:1;
    bool auto_commit:1;
    bool avoid_record_pointers:1;
    bool temp_reinit:1;
+   bool reset_tkrzw:1;
+   bool whitedb_auto_commit:1;
+   bool tkrzw_auto_commit:1;
   _flags
 
   _Config() : Flags(0) {}
@@ -96,8 +105,8 @@ public:
  static constexpr s4 _dwb_file_create_failed = -5;
  static constexpr s4 _dwb_subfolder_create_failed = -6;
 
- static constexpr n8 _blocks_rec_id_category_base = 1000;
- static constexpr n8 _queries_rec_id_category_base = 2000;
+ static constexpr n8 _blocks_rec_id_category_floor = 1000;
+ static constexpr n8 _queries_rec_id_category_floor = 2000;
 
 
  DgDb_Database_Instance(QString private_folder_path = {});
@@ -123,7 +132,9 @@ public:
  ACCESSORS(get_shm_field_ptr_type ,get_shm_field_ptr)
  ACCESSORS(DH_Type_System* ,type_system)
 
- n8 new_record_id(n8 category_base);
+ DH_Instance* dh_instance();
+
+ n8 new_record_id(n8 category_floor);
 
  char* allocate_shm_block(DH_Type* dht, u4 dh_id,
    QString init_message = {}, u1 Max_Fixed = 0, u2 total_columns = 0, Block_Options options =
@@ -137,6 +148,7 @@ public:
  DgDb_Hypernode* new_hypernode();
 
  DgDb_Hypernode* new_hypernode_(DH_Type* dh_type);
+ DgDb_Hypernode* new_hypernode_(DH_Type* dh_type, void* obj);
 
  DH_Type* get_type_by_name(QString tn, QString* res = nullptr);
 
@@ -150,6 +162,17 @@ public:
   DH_Type* dht = get_type_by_name(tn, &res);
   return new_hypernode_(dht);
  }
+
+ template<typename HYPERNODE_Type>
+ DgDb_Hypernode* new_hypernode(HYPERNODE_Type* obj)
+ {
+  QString tn = QString::fromStdString(typeid(HYPERNODE_Type).name());
+  QString res;
+  DH_Type* dht = get_type_by_name(tn, &res);
+  return new_hypernode_(dht, obj);
+ }
+
+
 
 // template<typename HYPERNODE_Type>
 // DgDb_Hypernode* new_hypernode(HYPERNODE_Type** object)

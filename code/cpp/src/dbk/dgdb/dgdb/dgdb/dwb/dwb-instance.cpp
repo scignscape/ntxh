@@ -7,6 +7,8 @@
 
 #include "dwb-instance.h"
 
+#include "dgdb-database-instance.h"
+
 #include "types/dh-subvalue-field.h"
 #include "dh-stage-value.h"
 
@@ -1037,18 +1039,29 @@ u2 DWB_Instance::write_rec_field_via_split(char* ptr, u2 spl, DH_Stage_Value& sv
  return adj;
 }
 
-DWB_Instance::_DB_Create_Status DWB_Instance::check_init(bool reset)
+DWB_Instance::_DB_Create_Status DWB_Instance::check_init(DgDb_Database_Instance* origin)
 {
+ if(origin->Config.flags.local_scratch_mode)
+ {
+  // //  todo: maybe a configuration for default local_scratch db size ...
+  if(( wdb_instance_ = wg_attach_local_database(0) ))
+    return _DB_Create_Status::Attached;
+  return _DB_Create_Status::Attach_Failed;
+ }
+
  ftok_key_ = ftok(config_path_.toLatin1().data(), _FTOK_CHAR);
 
  if(ftok_key_ == -1)
    return _DB_Create_Status::FTOK_Failed;
 
+ bool reset_needed = origin->Config.flags.scratch_mode | origin->Config.flags.temp_reinit;
+
  QByteArray qba = QByteArray::number(ftok_key_);
+
 
  if(( wdb_instance_ = wg_attach_existing_database(qba.data()) ))
  {
-  if(reset)
+  if(reset_needed)
   {
    wdb_instance_ = nullptr;
    qDebug() << "Resetting database ...";

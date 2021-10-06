@@ -32,6 +32,8 @@
 #include "types/dh-type-system.h"
 #include "types/dh-type.h"
 
+#include "dh-instance.h"
+
 #include <QDataStream>
 
 //class _rec_proc : public tkrzw::DBM::RecordProcessor
@@ -66,11 +68,40 @@
 DgDb_Database_Instance::DgDb_Database_Instance(QString private_folder_path)
   :  private_folder_path_(private_folder_path),
      blocks_dwb_(nullptr),
-     hypernode_count_status_(_unknown),
+     hypernode_count_status_(_unknown), dh_instance_(nullptr),
      //pinterns_count_(0), finterns_count_(0),
      type_system_(nullptr),
      dtb_package_(nullptr), get_shm_field_ptr_(nullptr) //, max_record_id_(0)
 {
+ max_record_ids_[_blocks_rec_id_category_floor] = new n8(0);
+ max_record_ids_[_queries_rec_id_category_floor] = new n8(0);
+}
+
+DH_Instance* DgDb_Database_Instance::dh_instance()
+{
+ if(!dh_instance_)
+ {
+  dh_instance_ = new DH_Instance(this);
+
+  // //  just demo numbers for now ...
+  category_floors_["inedges"] = 3000;
+  category_floors_["outedges"] = 4000;
+  category_floors_["multi-relation"] = 5000;
+
+  dh_instance_->set_inedges_floor(category_floors_["inedges"]);
+  dh_instance_->set_outedges_floor(category_floors_["outedges"]);
+  dh_instance_->set_multi_relation_floor(category_floors_["multi-relation"]);
+
+  max_record_ids_[category_floors_["inedges"]] = new n8(0);
+  max_record_ids_[category_floors_["outedges"]] = new n8(0);
+  max_record_ids_[category_floors_["multi-relation"]] = new n8(0);
+
+  dh_instance_->set_current_inedges_record_count(max_record_ids_[category_floors_["inedges"]]);
+  dh_instance_->set_current_outedges_record_count(max_record_ids_[category_floors_["outedges"]]);
+  dh_instance_->set_current_multi_relation_record_count(max_record_ids_[category_floors_["multi-relation"]]);
+
+ }
+ return dh_instance_;
 }
 
 
@@ -78,9 +109,9 @@ static constexpr u2 default_total_columns = 5;
 // //   0         1          2       3?     4              5
 // //   rec id    node id    block   msg?   branch-code    user-data
 
-n8 DgDb_Database_Instance::new_record_id(n8 category_base)
+n8 DgDb_Database_Instance::new_record_id(n8 category_floor)
 {
- return category_base + ++max_record_ids_[category_base];
+ return category_floor + ++*max_record_ids_[category_floor];
 }
 
 
@@ -124,7 +155,7 @@ char* DgDb_Database_Instance::allocate_shm_block(size_t size,
  blocks_dwb_->write_u2_field(rec, dh_id_column, dh_id);
 
  u2 rid_column = 0;
- n8 rid = new_record_id(_blocks_rec_id_category_base);
+ n8 rid = new_record_id(_blocks_rec_id_category_floor);
  blocks_dwb_->write_n8_field(rec, rid_column, rid);
 
 
@@ -260,9 +291,9 @@ DWB_Instance* DgDb_Database_Instance::get_query_dwb(DH_Type* dht, DH_Subvalue_Fi
 
   result = new DWB_Instance(path + "/_config", path + "/_restore");
 
-  bool reset_needed = Config.flags.scratch_mode | Config.flags.temp_reinit;
+  //bool reset_needed = Config.flags.scratch_mode | Config.flags.temp_reinit;
 
-  DWB_Instance::_DB_Create_Status cst = result->check_init(reset_needed);
+  DWB_Instance::_DB_Create_Status cst = result->check_init(this);
   if(! ((u1)cst & 7) )
   {
    // //  unusual condition on the whitedb ...
@@ -1065,9 +1096,20 @@ DgDb_Hypernode* DgDb_Database_Instance::new_hypernode_(DH_Type* dht)
  DgDb_Hypernode* result = new_hypernode();
  result->set_dh_type(dht);
  active_hypernodes_[result->id()] = result;
+
+ if(Config.flags.auto_commit || Config.flags.tkrzw_auto_commit)
+ {
+  dtb_package_->store_hypernode_count_status(hypernode_count_status_);
+ }
  return result;
 }
 
+DgDb_Hypernode* DgDb_Database_Instance::new_hypernode_(DH_Type* dht, void* obj)
+{
+ DgDb_Hypernode* result = new_hypernode_(dht);
+ init_hypernode_from_object(result, obj);
+ return result;
+}
 
 DgDb_Hypernode* DgDb_Database_Instance::new_hypernode()
 {
@@ -1265,9 +1307,7 @@ void DgDb_Database_Instance::init_dwb_blocks()
  blocks_dwb_ = new DWB_Instance(confirmed_private_folder_path_
    + "/dwb/blocks/_config", confirmed_private_folder_path_ + "/dwb/blocks/_restore");
 
- bool reset_needed = Config.flags.scratch_mode | Config.flags.temp_reinit;
-
- DWB_Instance::_DB_Create_Status cst = blocks_dwb_->check_init(reset_needed);
+ DWB_Instance::_DB_Create_Status cst = blocks_dwb_->check_init(this);
  if(! ((u1)cst & 7) )
  {
   // //  unusual condition on the whitedb ...
@@ -1294,6 +1334,11 @@ void DgDb_Database_Instance::check_construct_files()
      hypernode_count_status_ = _file_create_failed;
      break;
     }
+   }
+   else if(Config.flags.reset_tkrzw)
+   {
+    // //  we need to clear each file so we have an empty tkrzw database
+    QFile::resize(qdir.absoluteFilePath(f), 0);
    }
   }
   if(!qdir.exists("dwb"))

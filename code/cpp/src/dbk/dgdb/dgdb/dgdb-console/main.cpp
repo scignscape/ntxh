@@ -201,8 +201,11 @@ int main(int argc, char *argv[])
 {
  DgDb_Database_Instance ddi(DEFAULT_DEV_DGDB_FOLDER "/t1");
 
- //ddi.Config.flags.avoid_record_pointers = true;
- //ddi.Config.flags.temp_reinit = true;
+ ddi.Config.flags.avoid_record_pointers = true;
+ ddi.Config.flags.tkrzw_auto_commit = true;
+ //ddi.Config.flags.local_scratch_mode = true;
+ ddi.Config.flags.scratch_mode = true;
+ ddi.Config.flags.reset_tkrzw = true;
 
  ddi.init_dtb_package();
  ddi.init_type_system();
@@ -278,7 +281,7 @@ int main(int argc, char *argv[])
  dc->set_time_in_block(QTime(16, 17, 18, 19));
  dc->set_datetime_in_block(QDate(2021, 2, 4).startOfDay());
  dc->set_datetime_for_query(QDateTime(QDate(2021, 2, 4), QTime(20, 21, 22, 23)));
- dc->set_s1_in_block(-25);
+ dc->set_s1_in_block(-123);
  dc->set_s2_for_query(-789);
  dc->set_u4_in_block(12345);
  dc->set_u4_for_query(67890);
@@ -291,6 +294,10 @@ int main(int argc, char *argv[])
 
 
  ddi.init_hypernode_from_object(dh, dc);
+
+ ddi.set_property(dh, "test", 78);
+ QVariant qv = ddi.get_property(dh, "test");
+ qDebug() << "qv = " << qv;
 
  {
   QByteArray qba;
@@ -481,6 +488,27 @@ int main(int argc, char *argv[])
  ddi.init_object_from_hypernode(dh1, dc1);
  qDebug() << "string_encoded = " << dc1->string_encoded();
 
+ dc1->set_string_in_record("modified string ...");
+
+ DgDb_Hypernode* dh2 = ddi.new_hypernode<Demo_Class>(dc1);
+
+ {
+  QByteArray qba;
+  void* pv;
+
+  ddi.fetch_subvalue(dh2, "string_in_record", qba, pv);
+
+  qDebug() << "string_in_record = " << qba;
+ }
+
+ DH_Instance* dhi = ddi.dh_instance();
+
+// DH_Frame& fr = *dhi.new_frame();
+
+
+// DW_Frame& fr = *dw->new_frame(); // new DW_Frame(dw);
+// DW_Dominion* dom = new DW_Dominion();
+// DW_Context* ctxt = fr.new_context();
 
 
 }
@@ -880,7 +908,7 @@ int main3(int argc, char *argv[])
  ddi.check_nodes_dbm();
  ddi.read_hypernode_count_status();
  ddi.read_interns_count_status();
- ddi.init_dwb_blocks();
+ ddi.init_dwb_blocks();:  6881280
 
  qDebug() << "blocks ftok key: " << ddi.ftok_key("blocks");
 

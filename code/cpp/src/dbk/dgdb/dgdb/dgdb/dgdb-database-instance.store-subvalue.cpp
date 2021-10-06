@@ -81,7 +81,7 @@ void DgDb_Database_Instance::store_subvalue_to_external_record(DgDb_Hypernode* d
 
  // //  assume always 1 for now ...
  static u1 target_id_column = 1;
- n8 qrid = new_record_id(_queries_rec_id_category_base);
+ n8 qrid = new_record_id(_queries_rec_id_category_floor);
 
  // //  assume always 0 for now ...
  static u1 rec_id_column = 0;

@@ -77,7 +77,7 @@ s4 DTB_Package::read_hypernode_count_status()
 {
  //check_info_dbm();
  ktype_<u4>::get kg;
- info_dbm_->Process(":_hypernodeDgDb_Database_Instance_count", &kg, true);
+ info_dbm_->Process(":_hypernode_count", &kg, true);
  return (s4) kg.data();
 }
 

@@ -23,6 +23,8 @@
 
 class DH_Stage_Value;
 
+class DgDb_Database_Instance;
+
 class DWB_Instance
 {
  QString config_path_;
@@ -49,7 +51,7 @@ public:
   Create_And_Restore_Failed = 32, Attach_Failed = 64, Reset_Failed = 128
  };
 
- _DB_Create_Status check_init(bool reset);
+ _DB_Create_Status check_init(DgDb_Database_Instance* origin);
 
  n8 get_record_id(void* rec, u2 id_column = 0);
 
