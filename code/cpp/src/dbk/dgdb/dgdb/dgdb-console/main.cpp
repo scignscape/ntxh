@@ -33,6 +33,10 @@ using namespace _class_DgDb_Location_Structure;
 #include "dgdb/types/dh-type-system.h"
 #include "dgdb/types/dh-type.h"
 
+#include "dgdb/graph/dh-frame.h"
+#include "dgdb/graph/dh-dominion.h"
+#include "dgdb/dh-instance.h"
+
 
 #include <sys/types.h>
 #include <sys/ipc.h>
@@ -503,8 +507,11 @@ int main(int argc, char *argv[])
 
  DH_Instance* dhi = ddi.dh_instance();
 
-// DH_Frame& fr = *dhi.new_frame();
+ DH_Frame& fr = *dhi->new_frame();
+ DH_Dominion* dom = new DH_Dominion();
+ DH_Context* ctxt = fr.new_context();
 
+ dh1 << (fr/dom/ctxt)["Demo.SomeRelation"] >> dh2;
 
 // DW_Frame& fr = *dw->new_frame(); // new DW_Frame(dw);
 // DW_Dominion* dom = new DW_Dominion();

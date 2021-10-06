@@ -6,6 +6,8 @@
 
 #include "dh-instance.h"
 
+#include "graph/dh-frame.h"
+
 #include <QDebug>
 
 
@@ -21,6 +23,12 @@ DH_Instance::DH_Instance(DgDb_Database_Instance* ddi)
      outedges_floor_(0),
      multi_relation_floor_(0)
 {}
+
+
+DH_Frame* DH_Instance::new_frame()
+{
+ return new DH_Frame(this);
+}
 
 
 u4 DH_Instance::new_inedges_record_id()

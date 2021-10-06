@@ -61,6 +61,7 @@ HEADERS += \
   $$SRC_DIR/types/stage/dh-stage-code.h  \
   $$SRC_DIR/graph/dh-frame.h  \
   $$SRC_DIR/graph/dh-dominion.h  \
+  $$SRC_DIR/graph/dh-record.h  \
   $$SRC_DIR/dh-instance.h  \
 
 
@@ -87,6 +88,7 @@ SOURCES += \
   $$SRC_DIR/types/stage/dh-stage-value.to-qba.cpp  \
   $$SRC_DIR/graph/dh-frame.cpp  \
   $$SRC_DIR/graph/dh-dominion.cpp  \
+  $$SRC_DIR/graph/dh-record.cpp  \
   $$SRC_DIR/dh-instance.cpp  \
 
 

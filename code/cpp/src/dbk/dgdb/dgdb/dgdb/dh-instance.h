@@ -28,20 +28,6 @@
 class DgDb_Database_Instance;
 class DgDb_Hypernode;
 
-class DH_Record
-{
- n8 record_id_;
- DgDb_Hypernode* node_;
-
-public:
-
- DH_Record() : record_id_(0), node_(nullptr) {}
- DH_Record(QPair<n8, DgDb_Hypernode*> pr) : record_id_(pr.first), node_(pr.second) {}
-
- ACCESSORS(DgDb_Hypernode* ,node)
- ACCESSORS(n8 ,record_id)
-};
-
 
 class DH_Instance
 {
@@ -76,6 +62,7 @@ public:
  u4 new_outedges_record_id();
  u4 new_multi_relation_record_id();
 
+ DH_Frame* new_frame();
 
  DH_Record new_outedges_or_multi_relation_record(DH_Record base,
    u4 col, u4 (DH_Instance::*cb)(),

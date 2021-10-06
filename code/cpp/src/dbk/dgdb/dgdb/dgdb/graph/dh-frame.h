@@ -20,6 +20,8 @@
 
 #include "flags.h"
 
+#include "dh-record.h"
+
 
 //KANS_(DGDB)
 
@@ -28,6 +30,8 @@ class DgDb_Database_Instance;
 class DH_Instance;
 class DH_Dominion;
 class DH_Record;
+
+class DgDb_Hypernode;
 
 
 struct String_Label_Triple
@@ -86,14 +90,22 @@ struct _Frame_With_Source_and_Dominion_Connector
  DH_Context* context;
  QString connector;
  DH_Record* source;
- DH_Record& operator>>(DH_Record* rhs)
+
+// DH_Record& operator>>(DH_Record* rhs)
+// {
+//  return *fr->register_new_triple(source, connector, rhs, dom);
+// }
+// DH_Record& operator>>(DH_Record& rhs)
+// {
+//  return *fr->register_new_triple(source, connector, &rhs, dom);
+// }
+
+ DH_Record& operator>>(DgDb_Hypernode* rhs)
  {
-  return *fr->register_new_triple(source, connector, rhs, dom);
- } 
- DH_Record& operator>>(DH_Record& rhs)
- {
-  return *fr->register_new_triple(source, connector, &rhs, dom);
- } 
+  DH_Record dhr{{0, rhs}};
+  return *fr->register_new_triple(source, connector, &dhr, dom);
+ }
+
 };
 
 
@@ -125,6 +137,19 @@ inline _Frame_With_Dominion operator/(_Frame_With_Dominion fr, DH_Context* ctxt)
 {
  fr.context = ctxt;
  return fr;
+}
+
+inline _Frame_With_Source_and_Dominion_Connector operator<<(DH_Record& lhs,
+  const _Frame_With_Dominion_Connector& rhs)
+{
+ return {rhs.fr, rhs.dom, rhs.context, rhs.connector, &lhs};
+}
+
+inline _Frame_With_Source_and_Dominion_Connector operator<<(DgDb_Hypernode* lhs,
+  const _Frame_With_Dominion_Connector& rhs)
+{
+ DH_Record dhr{{0, lhs}};
+ return {rhs.fr, rhs.dom, rhs.context, rhs.connector, &dhr};
 }
 
 
