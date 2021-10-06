@@ -37,7 +37,7 @@ void Hyperedge_Data::absorb_data(const QByteArray& qba)
 
 QPair<u4, u4> DH_Frame::commit()
 {
- //? return dh_instance_->commit_new_triples(new_string_label_triples_);
+ return dh_instance_->commit_new_triples(new_string_label_triples_);
 }
 
 DH_Record* DH_Frame::register_new_triple(DH_Record* source, QString connector, DH_Record* target,

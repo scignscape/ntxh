@@ -29,6 +29,12 @@ DH_Instance::DH_Instance(DgDb_Database_Instance* ddi)
 {}
 
 
+DH_Record DH_Instance::find_hyperedge(DgDb_Hypernode* dh, QString connector_label)
+{
+ DH_Record result{{0, nullptr}};
+ return result;
+}
+
 DH_Frame* DH_Instance::new_frame()
 {
  return new DH_Frame(this);

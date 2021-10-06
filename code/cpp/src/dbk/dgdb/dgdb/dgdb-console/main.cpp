@@ -511,12 +511,21 @@ int main(int argc, char *argv[])
  DH_Dominion* dom = new DH_Dominion();
  DH_Context* ctxt = fr.new_context();
 
- dh1 << (fr/dom/ctxt)["Demo.SomeRelation"] >> dh2;
+ dh << (fr/dom/ctxt)["Demo.SomeRelation"] >> dh2;
 
 // DW_Frame& fr = *dw->new_frame(); // new DW_Frame(dw);
 // DW_Dominion* dom = new DW_Dominion();
 // DW_Context* ctxt = fr.new_context();
 
+ fr.commit();
+
+ DH_Record dhr = dhi->find_hyperedge(dh, "Demo.SomeRelation");
+
+// DW_Record dwr4 = dw->find_hyperedge(dwr1, "Demo.SomeRelation");
+
+// qDebug() << "dwr4 = " << dwr4.id();
+
+// Demo_Class* dc3 = dw->parse_binary_record<Demo_Class>(dwr4);
 
 }
 

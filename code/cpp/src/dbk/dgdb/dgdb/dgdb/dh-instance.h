@@ -71,6 +71,8 @@ public:
  u4 new_outedges_record_id();
  u4 new_multi_relation_record_id();
 
+ DH_Record find_hyperedge(DgDb_Hypernode* dh, QString connector_label);
+
  DH_Frame* new_frame();
 
  DH_Record new_outedges_or_multi_relation_record(DH_Record base,
