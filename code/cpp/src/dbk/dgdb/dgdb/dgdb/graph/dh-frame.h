@@ -38,10 +38,10 @@ class DgDb_Hypernode;
 
 struct String_Label_Triple
 {
- DH_Record* source;
+ DH_Record source;
  DH_Record* annotation;
  QString connector_label;
- DH_Record* target;
+ DH_Record target;
  DH_Dominion* dom;
  u1 multi_relation_kind;
 };
@@ -90,7 +90,7 @@ public:
 
  DH_Frame(DH_Instance* dh_instance, u4 id = 0);
 
- DH_Record* register_new_triple(DH_Record* source, QString connector, DH_Record* target,
+ DH_Record register_new_triple(DH_Record source, QString connector, DH_Record target,
    DH_Dominion* dom);
 
  DH_Context* new_context()
@@ -108,7 +108,7 @@ struct _Frame_With_Source_and_Dominion_Connector
  DH_Dominion* dom;
  DH_Context* context;
  QString connector;
- DH_Record* source;
+ DH_Record source;
 
 // DH_Record& operator>>(DH_Record* rhs)
 // {
@@ -119,11 +119,11 @@ struct _Frame_With_Source_and_Dominion_Connector
 //  return *fr->register_new_triple(source, connector, &rhs, dom);
 // }
 
- DH_Record& operator>>(DgDb_Hypernode* rhs)
- {
-  DH_Record dhr{{0, rhs}};
-  return *fr->register_new_triple(source, connector, &dhr, dom);
- }
+ DH_Record operator>>(DgDb_Hypernode* rhs);
+// {
+//  DH_Record dhr{{rhs->id(), rhs}};
+//  return *fr->register_new_triple(source, connector, &dhr, dom);
+// }
 
 };
 
@@ -161,15 +161,11 @@ inline _Frame_With_Dominion operator/(_Frame_With_Dominion fr, DH_Context* ctxt)
 inline _Frame_With_Source_and_Dominion_Connector operator<<(DH_Record& lhs,
   const _Frame_With_Dominion_Connector& rhs)
 {
- return {rhs.fr, rhs.dom, rhs.context, rhs.connector, &lhs};
+ return {rhs.fr, rhs.dom, rhs.context, rhs.connector, lhs};
 }
 
-inline _Frame_With_Source_and_Dominion_Connector operator<<(DgDb_Hypernode* lhs,
-  const _Frame_With_Dominion_Connector& rhs)
-{
- DH_Record dhr{{0, lhs}};
- return {rhs.fr, rhs.dom, rhs.context, rhs.connector, &dhr};
-}
+_Frame_With_Source_and_Dominion_Connector operator<<(DgDb_Hypernode* lhs,
+  const _Frame_With_Dominion_Connector& rhs);
 
 
 //?_KANS(DGDB)

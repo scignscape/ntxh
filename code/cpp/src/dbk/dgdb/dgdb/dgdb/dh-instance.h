@@ -27,9 +27,6 @@
 #include "tkrzw/tkrzw_index.h"
 #include "tkrzw/tkrzw_str_util.h"
 
-using namespace tkrzw;
-
-typedef StdIndex<int64_t, Hyperedge_Data> Triples_Index_type;
 
 
 class DgDb_Database_Instance;
@@ -48,6 +45,7 @@ class DH_Instance
  n8 outedges_floor_;
  n8 multi_relation_floor_;
 
+ QMap<u4, QPair<DH_Dominion*, QString>> connector_ids_;
 
 public:
 
@@ -62,16 +60,22 @@ public:
  ACCESSORS(n8 ,outedges_floor)
  ACCESSORS(n8 ,multi_relation_floor)
 
+ QPair<DH_Dominion*, QString> get_connector_label_from_id(u4 id)
+ {
+  return connector_ids_.value(id);
+ }
 
  DH_Instance(DgDb_Database_Instance* ddi);
 
  u4 get_connector_id(DH_Dominion* dom, QString connector_label);
 
+
+
  u4 new_inedges_record_id();
  u4 new_outedges_record_id();
  u4 new_multi_relation_record_id();
 
- DH_Record find_hyperedge(DgDb_Hypernode* dh, QString connector_label);
+ DH_Record find_outedge(DgDb_Hypernode* dh, QString connector_label);
 
  DH_Frame* new_frame();
 

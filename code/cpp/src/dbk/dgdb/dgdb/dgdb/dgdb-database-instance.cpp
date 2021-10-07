@@ -204,6 +204,11 @@ void DgDb_Database_Instance::check_interns_dbm()
  dtb_package_->check_interns_dbm(private_folder_path_);
 }
 
+void DgDb_Database_Instance::init_indices()
+{
+ dtb_package_->init_hyperedge_index(private_folder_path_);
+}
+
 
 void DgDb_Database_Instance::store_subvalue(DgDb_Hypernode* dh,
   DH_Subvalue_Field* sf, DH_Stage_Value& sv) //const QByteArray& value)
@@ -378,9 +383,37 @@ void DgDb_Database_Instance::store_indexed_field(DgDb_Hypernode* dh,
 }
 
 
+void DgDb_Database_Instance::find_outedge(DgDb_Hypernode* dh,
+  QString connector_label, DH_Record& dhr)
+{
+ QVector<DH_Location_Structure> matches;
+ dtb_package_->search_hyperedge_index(dh->id(), matches);
+ if(matches.isEmpty())
+   return;
+ for(DH_Location_Structure dls : matches)
+ {
+  QByteArray qba;
+  fetch_node_data(dls, qba);
+  Hyperedge_Data hd;
+  hd.absorb_data(qba);
+  u4 cid = hd.connector_id;
+  auto [dom, label] = dh_instance_->get_connector_label_from_id(cid);
+  if(label == connector_label)
+  {
+   if(DgDb_Hypernode* dh = active_hypernodes_.value(hd.target_id))
+   {
+    dhr.set_node(dh);
+    dhr.set_record_id(dh->id());
+    break;
+   }
+  }
+  //if(hd.connector_id)
+ }
+}
+
 
 void DgDb_Database_Instance::store_outedge(DgDb_Hypernode* dh,
-  u4 edge_id, const QByteArray& data)
+  u4 edge_id, const QByteArray& data, Hyperedge_Data& hd)
 {
  DH_Location_Structure dls;
  dls.set_node_id(dh->id());
@@ -388,6 +421,20 @@ void DgDb_Database_Instance::store_outedge(DgDb_Hypernode* dh,
  dls.set_data_options(DH_Location_Structure::Data_Options::Out_Edge);
 
  store_node_data(dls, data);
+
+ dtb_package_->index_hyperedge(dh->id(), dls);
+
+}
+
+void DgDb_Database_Instance::fetch_outedges(DgDb_Hypernode* dh,
+  QByteArray& data)
+{
+ DH_Location_Structure dls;
+ dls.set_node_id(dh->id());
+ //dls.set_edge_id(edge_id);
+ dls.set_data_options(DH_Location_Structure::Data_Options::Out_Edge);
+
+ //store_node_data(dls, data);
 }
 
 
@@ -1332,7 +1379,7 @@ void DgDb_Database_Instance::init_dwb_blocks()
 void DgDb_Database_Instance::check_construct_files()
 {
  QDir qdir(private_folder_path_);
- static QStringList files {"_pinterns", "_finterns", "_info", "_nodes"};
+ static QStringList files {"_pinterns", "_finterns", "_hyperedge-index", "_info", "_nodes"};
  if(qdir.exists())
  {
   for(QString f : files)

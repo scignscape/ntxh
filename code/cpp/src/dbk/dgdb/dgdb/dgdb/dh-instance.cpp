@@ -29,9 +29,12 @@ DH_Instance::DH_Instance(DgDb_Database_Instance* ddi)
 {}
 
 
-DH_Record DH_Instance::find_hyperedge(DgDb_Hypernode* dh, QString connector_label)
+DH_Record DH_Instance::find_outedge(DgDb_Hypernode* dh, QString connector_label)
 {
  DH_Record result{{0, nullptr}};
+
+ ddi_->find_outedge(dh, connector_label, result);
+
  return result;
 }
 
@@ -95,6 +98,7 @@ u4 DH_Instance::get_connector_id(DH_Dominion* dom, QString connector_label)
  {
   result = ++last_used;
   static_map[{dom, connector_label}] = result;
+  connector_ids_[result] = {dom, connector_label};
  }
  return result;
 }
@@ -117,12 +121,14 @@ QPair<u4, u4> DH_Instance::commit_new_triples(QVector<String_Label_Triple>& trip
   Hyperedge_Data data {id,
     triple.annotation? triple.annotation->node()->id() : 0,
     get_connector_id(triple.dom, triple.connector_label),
-    triple.target->node()->id(), triple.multi_relation_kind,
+    triple.target.node()->id(), triple.multi_relation_kind,
     context_id, flags};
 
   QByteArray qba;
   data.supply_data(qba);
-  ddi_->store_outedge(triple.source->node(), id, qba);
+  ddi_->store_outedge(triple.source.node(), id, qba, data);
+
+  return result;
  }
 
 // for(String_Label_Triple& triple : triples)

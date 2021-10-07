@@ -78,6 +78,7 @@ int main2(int argc, char *argv[])
  ddi.read_hypernode_count_status();
  ddi.read_interns_count_status();
  ddi.init_dwb_blocks();
+ ddi.init_indices();
 
  qDebug() << "blocks ftok key: " << ddi.ftok_key("blocks");
 
@@ -216,6 +217,7 @@ int main(int argc, char *argv[])
  ddi.check_construct_files();
  ddi.check_interns_dbm();
  ddi.check_nodes_dbm();
+ ddi.init_indices();
  ddi.read_hypernode_count_status();
  ddi.read_interns_count_status();
  ddi.init_dwb_blocks();
@@ -519,7 +521,13 @@ int main(int argc, char *argv[])
 
  fr.commit();
 
- DH_Record dhr = dhi->find_hyperedge(dh, "Demo.SomeRelation");
+ DH_Record dhr = dhi->find_outedge(dh, "Demo.SomeRelation");
+
+ DgDb_Hypernode* dh3 = dhr.node();
+ if(dh2 == dh3)
+ {
+  qDebug() << "OK";
+ }
 
 // DW_Record dwr4 = dw->find_hyperedge(dwr1, "Demo.SomeRelation");
 

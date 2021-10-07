@@ -24,6 +24,14 @@
 
 #include "dh-location-structure.h"
 
+#include "tkrzw/tkrzw_index.h"
+#include "tkrzw/tkrzw_str_util.h"
+
+//using namespace tkrzw;
+
+//typedef StdIndex<int64_t, Hyperedge_Data> Triples_Index_type;
+
+struct Hyperedge_Data;
 
 class DTB_Package
 {
@@ -43,10 +51,14 @@ public:
  u2 pinterns_count_;
  u2 finterns_count_;
 
+ tkrzw::FileIndex* hyperedge_index_;
+
 
  tkrzw::HashDBM* check_info_dbm(QString folder_path);
  tkrzw::HashDBM* check_nodes_dbm(QString folder_path);
  void check_internal_dbm(QString folder_path, QString which, tkrzw::HashDBM*& result);
+
+ void init_hyperedge_index(QString folder_path);
 
  void store_hypernode_count_status(u4 count);
 
@@ -65,6 +77,11 @@ public:
  u2 check_property_id(QString key);
  u2 check_field_id(QString key);
 
+// void index_pair(u4 key, u4 value, tkrzw::DBM* dbm, tkrzw::FileIndex* division_index);
+
+ void index_hyperedge(u4 node_id, DH_Location_Structure dls); //const Hyperedge_Data& hd);
+ void search_hyperedge_index(u4 node_id, QVector<DH_Location_Structure>& matches);
+   //tkrzw::DBM* dbm, tkrzw::FileIndex* hyperedge_index);
 
 };
 

@@ -25,7 +25,7 @@ using namespace tkrzw;
 
 #include <string_view>
 
-#include "dgdb-record-processors.h"
+#include "dh-record-processors.h"
 
 #include "dh-stage-value.h"
 

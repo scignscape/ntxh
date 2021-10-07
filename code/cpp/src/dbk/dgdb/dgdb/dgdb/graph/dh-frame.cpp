@@ -8,6 +8,8 @@
 
 #include "dgdb-database-instance.h"
 
+#include "dgdb-hypernode.h"
+
 #include "dh-instance.h"
 
 
@@ -40,7 +42,21 @@ QPair<u4, u4> DH_Frame::commit()
  return dh_instance_->commit_new_triples(new_string_label_triples_);
 }
 
-DH_Record* DH_Frame::register_new_triple(DH_Record* source, QString connector, DH_Record* target,
+_Frame_With_Source_and_Dominion_Connector operator<<(DgDb_Hypernode* lhs,
+  const _Frame_With_Dominion_Connector& rhs)
+{
+ DH_Record dhr{{lhs->id(), lhs}};
+ return {rhs.fr, rhs.dom, rhs.context, rhs.connector, dhr};
+}
+
+
+DH_Record _Frame_With_Source_and_Dominion_Connector::operator>>(DgDb_Hypernode* rhs)
+{
+ DH_Record dhr{{rhs->id(), rhs}};
+ return fr->register_new_triple(source, connector, dhr, dom);
+}
+
+DH_Record DH_Frame::register_new_triple(DH_Record source, QString connector, DH_Record target,
   DH_Dominion* dom)
 {
  // // not using dom here ...

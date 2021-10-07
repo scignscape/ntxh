@@ -38,6 +38,9 @@ class DH_Subvalue_Field;
 class DH_Stage_Value;
 
 class DH_Instance;
+class DH_Record;
+
+struct Hyperedge_Data;
 
 
 class DgDb_Database_Instance
@@ -136,6 +139,8 @@ public:
 
  n8 new_record_id(n8 category_floor);
 
+ void init_indices();
+
  char* allocate_shm_block(DH_Type* dht, u4 dh_id,
    QString init_message = {}, u1 Max_Fixed = 0, u2 total_columns = 0, Block_Options options =
    Block_Options::Write_WhiteDB_Record | Block_Options::Write_Max_Fixed | Block_Options::Init_to_0);
@@ -146,7 +151,12 @@ public:
    Block_Options::Write_WhiteDB_Record | Block_Options::Write_Max_Fixed | Block_Options::Init_to_0);
 
  void store_outedge(DgDb_Hypernode* dh,
-   u4 edge_id, const QByteArray& data);
+   u4 edge_id, const QByteArray& data, Hyperedge_Data& hd);
+
+ void find_outedge(DgDb_Hypernode* dh, QString connector_label, DH_Record& result);
+
+
+ void fetch_outedges(DgDb_Hypernode* dh, QByteArray& data);
 
  DgDb_Hypernode* new_hypernode();
 
