@@ -116,6 +116,7 @@ void DTB_Package::process_info_record( tkrzw::DBM* dbm, QString key,
   create_cb(empty), update_cb(full) ) // void(*full)(Sv_3 svs), void(*empty)(Sv_2 svs))
 {
  const std::string& skey = key.toStdString();
+ QByteArray rqba;
  struct _rp : public DBM::RecordProcessor
  {
   std::string_view ProcessFull(std::string_view key,
@@ -124,45 +125,41 @@ void DTB_Package::process_info_record( tkrzw::DBM* dbm, QString key,
    // //  create the qba for devel so we can see the bytes ..
    QByteArray vqba(value.data(), value.size());
 
-   QByteArray rqba;
-
-   std::string_view result;
+   //std::string_view result;
 
    SV_Wrapper swk {key, nullptr};
    SV_Wrapper swv {value, nullptr};
-   SV_Wrapper swr {result, &rqba};
+   SV_Wrapper swr {{}, rqba};
    SV_Wrapper_3 svs{swk, swv, swr};
    _full(svs);
 
    // //  create the qba for devel so we can see the bytes ..
-   QByteArray qba(result.data(), result.size());
+   QByteArray qba(swr.value.data(), swr.value.size());
 
-   return result;
+   return swr.value;
   }
 
   std::string_view ProcessEmpty(std::string_view key) override
   {
-   std::string_view result;
-
-   QByteArray rqba;
+   //std::string_view result;
 
    SV_Wrapper swk {key, nullptr};
-   SV_Wrapper swr {result, &rqba};
+   SV_Wrapper swr {{}, rqba};
    SV_Wrapper_2 svs{swk, swr};
    _empty(svs);
 
    // //  create the qba for devel so we can see the bytes ..
-   QByteArray qba(result.data(), result.size());
+   QByteArray qba(swr.value.data(), swr.value.size());
 
    return swr.value;
   }
 
   void(*_full)(Sv_3);
   void(*_empty)(Sv_2);
-
-  _rp(void(*f)(Sv_3 svs), void(*e)(Sv_2 svs))
-    : _full(f), _empty(e) {}
- } rp(full, empty);
+  QByteArray* rqba;
+  _rp(create_cb e, update_cb f, QByteArray* r)
+    : _full(f), _empty(e), rqba(r) {}
+ } rp(empty, full, &rqba);
  dbm->Process(skey, &rp, true).OrDie();
 }
 

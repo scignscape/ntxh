@@ -23,7 +23,7 @@
 
 struct SV_Wrapper
 {
- std::string_view& value;
+ std::string_view value;
  QByteArray* qba;
 
  QString qstring();
