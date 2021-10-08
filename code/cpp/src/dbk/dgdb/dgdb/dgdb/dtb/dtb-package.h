@@ -23,6 +23,7 @@
 #include "tkrzw/tkrzw_dbm_hash.h"
 
 #include "dh-location-structure.h"
+#include "_sv-wrapper.h"
 
 #include "tkrzw/tkrzw_index.h"
 #include "tkrzw/tkrzw_str_util.h"
@@ -33,15 +34,13 @@
 
 struct Hyperedge_Data;
 
+
+
 class DTB_Package
 {
-
  QMap<QString, u2> property_ids_;
  QMap<QString, u2> field_ids_;
 
-public:
-
- DTB_Package();
 
  tkrzw::HashDBM* info_dbm_;
  tkrzw::HashDBM* pinterns_dbm_;
@@ -53,6 +52,13 @@ public:
 
  tkrzw::FileIndex* hyperedge_index_;
 
+ QMap<QString, tkrzw::DBM**> dbms_;
+
+public:
+
+ DTB_Package();
+
+ ACCESSORS(tkrzw::HashDBM* ,info_dbm)
 
  tkrzw::HashDBM* check_info_dbm(QString folder_path);
  tkrzw::HashDBM* check_nodes_dbm(QString folder_path);
@@ -83,6 +89,11 @@ public:
  void search_hyperedge_index(u4 node_id, QVector<DH_Location_Structure>& matches);
    //tkrzw::DBM* dbm, tkrzw::FileIndex* hyperedge_index);
 
+ //void process_info_record(tkrzw::DBM* dbm, QString key);
+ void process_info_record( tkrzw::DBM* dbm, QString key,
+   create_cb(empty), update_cb(full) );
+
+ tkrzw::DBM* find_dbm(QString key);
 };
 
 

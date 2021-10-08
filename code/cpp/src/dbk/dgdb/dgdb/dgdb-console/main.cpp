@@ -22,6 +22,8 @@ using namespace _class_DH_Location_Structure;
 
 #include "dgdb/dgdb-database-instance.h"
 
+#include "dgdb/dtb/sv-wrapper.h"
+
 #include "dgdb/types/stage/dh-stage-code.h"
 #include "dgdb/dh-stage-value.h"
 
@@ -200,6 +202,29 @@ int main2(int argc, char *argv[])
 
 }
 
+
+void test_process_cb(DgDb_Database_Instance& ddi)
+{
+ ddi.process_info_record("test-info",  [](Sv_2 svs)
+  {
+   QString k = svs.key.qstring();
+   svs.result.from_n8(100);
+   qDebug() << "create = 100";
+  },
+   [](Sv_3 svs)
+  {
+   QString k = svs.key.qstring();
+   n8 v = svs.value.to_n8();
+   --v;
+
+   // //  equivalent to
+    //    *svs.result.qba = n8_to_qba(v);
+    //    svs.result.confirm();
+   svs.result.from_n8(v);
+
+   qDebug() << "update = " << v;
+  });
+}
 
 
 int main(int argc, char *argv[])
@@ -528,6 +553,18 @@ int main(int argc, char *argv[])
  {
   qDebug() << "OK";
  }
+
+ test_process_cb(ddi);
+ test_process_cb(ddi);
+ test_process_cb(ddi);
+
+// ddi.process_info_record("test-info");
+
+
+// , [](std::string_view)
+// {
+
+// });
 
 // DW_Record dwr4 = dw->find_hyperedge(dwr1, "Demo.SomeRelation");
 

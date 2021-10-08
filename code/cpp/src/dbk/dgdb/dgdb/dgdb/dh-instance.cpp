@@ -126,7 +126,7 @@ QPair<u4, u4> DH_Instance::commit_new_triples(QVector<String_Label_Triple>& trip
 
   QByteArray qba;
   data.supply_data(qba);
-  ddi_->store_outedge(triple.source.node(), id, qba, data);
+  ddi_->store_outedge(triple.source.node(), id, qba); //, data);
 
   return result;
  }

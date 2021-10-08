@@ -24,6 +24,8 @@
 #include "types/stage/dh-stage-code.h"
 
 #include "dh-location-structure.h"
+#include "dtb/_sv-wrapper.h"
+
 
 #include <QVariant>
 
@@ -151,7 +153,7 @@ public:
    Block_Options::Write_WhiteDB_Record | Block_Options::Write_Max_Fixed | Block_Options::Init_to_0);
 
  void store_outedge(DgDb_Hypernode* dh,
-   u4 edge_id, const QByteArray& data, Hyperedge_Data& hd);
+   u4 edge_id, const QByteArray& data); //, Hyperedge_Data& hd);
 
  void find_outedge(DgDb_Hypernode* dh, QString connector_label, DH_Record& result);
 
@@ -332,6 +334,14 @@ public:
  void fetch_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Field* sf,
    QByteArray& value, void*& pv);
 
+ void process_info_record(QString dbm_key, QString key,
+   create_cb(empty), update_cb(full));
+
+ void process_info_record(QString key,
+   create_cb(empty), update_cb(full))
+ {
+  process_info_record("info", key, empty, full);
+ }
 
   // DH_Location_Structure::Data_Options opts);
 

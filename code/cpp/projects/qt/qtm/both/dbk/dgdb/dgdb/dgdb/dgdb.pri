@@ -50,6 +50,8 @@ HEADERS += \
   $$SRC_DIR/dgdb-hypernode.h  \
   $$SRC_DIR/dwb/dwb-instance.h  \
   $$SRC_DIR/dtb/dtb-package.h  \
+  $$SRC_DIR/dtb/sv-wrapper.h  \
+  $$SRC_DIR/dtb/_sv-wrapper.h  \
   $$SRC_DIR/types/dh-type.h  \
   $$SRC_DIR/types/dh-type-system.h  \
   $$SRC_DIR/types/dh-type-builder.h  \
@@ -76,6 +78,7 @@ SOURCES += \
   $$SRC_DIR/dgdb-database-instance._acc_conv.cpp  \
   $$SRC_DIR/dwb/dwb-instance.cpp  \
   $$SRC_DIR/dtb/dtb-package.cpp  \
+  $$SRC_DIR/dtb/sv-wrapper.cpp  \
   $$SRC_DIR/types/dh-type.cpp  \
   $$SRC_DIR/types/dh-type-field-info-state.cpp  \
   $$SRC_DIR/types/dh-type-system.cpp  \

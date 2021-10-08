@@ -12,11 +12,15 @@
 
 #include <string_view>
 
+#include "global-types.h"
+
 #include "dh-record-processors.h"
 
 #include <QDebug>
 
 #include "graph/dh-frame.h"
+
+#include "sv-wrapper.h"
 
 
 using namespace tkrzw;
@@ -52,6 +56,12 @@ void DTB_Package::check_interns_dbm(QString folder_path)
 {
  check_internal_dbm(folder_path, "_pinterns", pinterns_dbm_);
  check_internal_dbm(folder_path, "_finterns", finterns_dbm_);
+
+ dbms_["info"] = (tkrzw::DBM**) &info_dbm_;
+ dbms_["nodes"] = (tkrzw::DBM**) &nodes_dbm_;
+ dbms_["pinterns"] = (tkrzw::DBM**) &pinterns_dbm_;
+ dbms_["finterns"] = (tkrzw::DBM**) &finterns_dbm_;
+
  //check_internal_dbm(folder_path, "_hyperedge_index", finterns_dbm_);
  //return interns_dbm_;
 }
@@ -99,33 +109,76 @@ void DTB_Package::search_hyperedge_index(u4 node_id, QVector<DH_Location_Structu
 void DTB_Package::index_hyperedge(u4 node_id, DH_Location_Structure dls) //const Hyperedge_Data& hd)//, tkrzw::FileIndex* hyperedge_index)
 {
  hyperedge_index_->Add(ToString(node_id), ToString(dls.raw_code())); //ToString(hd.hyperedge_id));
+}
 
-// const std::string& primary_key = ToString(node_id);
-// struct Updater : public DBM::RecordProcessor
-// {
-//  std::string_view ProcessFull(std::string_view key,
-//    std::string_view value) override
-//  {
-//   return NOOP;
-//  }
 
-//  std::string_view ProcessEmpty(std::string_view key) override
-//  {
-//   _hyperedge_index->Add(ToString(_hd.hyperedge_id), key);
-//   return NOOP; // // or return _hd, or what?
-//  }
+void DTB_Package::process_info_record( tkrzw::DBM* dbm, QString key,
+  create_cb(empty), update_cb(full) ) // void(*full)(Sv_3 svs), void(*empty)(Sv_2 svs))
+{
+ const std::string& skey = key.toStdString();
+ struct _rp : public DBM::RecordProcessor
+ {
+  std::string_view ProcessFull(std::string_view key,
+    std::string_view value) override
+  {   
+   // //  create the qba for devel so we can see the bytes ..
+   QByteArray vqba(value.data(), value.size());
 
-//  const Hyperedge_Data& _hd; // _value;
-//  FileIndex* _hyperedge_index;
-//  std::string _new_value;
+   QByteArray rqba;
 
-//  Updater(const Hyperedge_Data& h, FileIndex* i)
-//          : _hd(h), _hyperedge_index(i)
-//  {
-//  }
+   std::string_view result;
 
-// } updater (hd, hyperedge_index_);
-// nodes_dbm_->Process(primary_key, &updater, true).OrDie();
+   SV_Wrapper swk {key, nullptr};
+   SV_Wrapper swv {value, nullptr};
+   SV_Wrapper swr {result, &rqba};
+   SV_Wrapper_3 svs{swk, swv, swr};
+   _full(svs);
+
+   // //  create the qba for devel so we can see the bytes ..
+   QByteArray qba(result.data(), result.size());
+
+   return result;
+  }
+
+  std::string_view ProcessEmpty(std::string_view key) override
+  {
+   std::string_view result;
+
+   QByteArray rqba;
+
+   SV_Wrapper swk {key, nullptr};
+   SV_Wrapper swr {result, &rqba};
+   SV_Wrapper_2 svs{swk, swr};
+   _empty(svs);
+
+   // //  create the qba for devel so we can see the bytes ..
+   QByteArray qba(result.data(), result.size());
+
+   return swr.value;
+  }
+
+  void(*_full)(Sv_3);
+  void(*_empty)(Sv_2);
+
+  _rp(void(*f)(Sv_3 svs), void(*e)(Sv_2 svs))
+    : _full(f), _empty(e) {}
+ } rp(full, empty);
+ dbm->Process(skey, &rp, true).OrDie();
+}
+
+
+//void DTB_Package::process_info_record(tkrzw::DBM* dbm, QString key)
+//{
+
+//}
+
+
+tkrzw::DBM* DTB_Package::find_dbm(QString key)
+{
+ auto it = dbms_.find(key);
+ if(it == dbms_.end())
+   return nullptr;
+ return **it;
 }
 
 //void DTB_Package::index_pair(u4 key, u4 value,

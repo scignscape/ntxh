@@ -413,7 +413,7 @@ void DgDb_Database_Instance::find_outedge(DgDb_Hypernode* dh,
 
 
 void DgDb_Database_Instance::store_outedge(DgDb_Hypernode* dh,
-  u4 edge_id, const QByteArray& data, Hyperedge_Data& hd)
+  u4 edge_id, const QByteArray& data) //, Hyperedge_Data& hd)
 {
  DH_Location_Structure dls;
  dls.set_node_id(dh->id());
@@ -423,7 +423,6 @@ void DgDb_Database_Instance::store_outedge(DgDb_Hypernode* dh,
  store_node_data(dls, data);
 
  dtb_package_->index_hyperedge(dh->id(), dls);
-
 }
 
 void DgDb_Database_Instance::fetch_outedges(DgDb_Hypernode* dh,
@@ -1451,5 +1450,13 @@ void DgDb_Database_Instance::check_construct_files()
 
  QFileInfo qfi(private_folder_path_);
  confirmed_private_folder_path_ = qfi.canonicalFilePath();
+}
+
+
+void DgDb_Database_Instance::process_info_record(QString dbm_key, QString key,
+  create_cb(empty), update_cb(full))
+{
+ if( tkrzw::DBM* dbm = dtb_package_->find_dbm(dbm_key) )
+   dtb_package_->process_info_record(dbm, key, empty, full);
 }
 
