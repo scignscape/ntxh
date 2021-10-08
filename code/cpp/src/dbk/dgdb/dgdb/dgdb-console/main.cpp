@@ -203,14 +203,35 @@ int main2(int argc, char *argv[])
 }
 
 
+//ddi.process_info_record("test-info",  [](Sv_2 svs)
+// {
+//  QString k = svs.key.qstring();
+//  svs.result.from_n8(100);
+//  qDebug() << "create = 100";
+// },
+//  [](Sv_3 svs)
+// {
+//  QString k = svs.key.qstring();
+//  n8 v = svs.value.to_n8();
+//  --v;
+
+//  // //  equivalent to
+//   //    *svs.result.qba = n8_to_qba(v);
+//   //    svs.result.confirm();
+//  svs.result.from_n8(v);
+
+//  qDebug() << "update = " << v;
+// });
+
+
 void test_process_cb(DgDb_Database_Instance& ddi)
 {
- ddi.process_info_record("test-info",  [](Sv_2 svs)
+ ddi.process_info_record("test-info") << [](Sv_2 svs)
   {
    QString k = svs.key.qstring();
    svs.result.from_n8(100);
    qDebug() << "create = 100";
-  },
+  } <<
    [](Sv_3 svs)
   {
    QString k = svs.key.qstring();
@@ -223,7 +244,7 @@ void test_process_cb(DgDb_Database_Instance& ddi)
    svs.result.from_n8(v);
 
    qDebug() << "update = " << v;
-  });
+  };
 }
 
 

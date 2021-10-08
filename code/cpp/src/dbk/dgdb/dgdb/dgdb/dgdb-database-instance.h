@@ -334,6 +334,7 @@ public:
  void fetch_subvalue(DgDb_Hypernode* dh, DH_Subvalue_Field* sf,
    QByteArray& value, void*& pv);
 
+
  void process_info_record(QString dbm_key, QString key,
    create_cb(empty), update_cb(full));
 
@@ -341,6 +342,54 @@ public:
    create_cb(empty), update_cb(full))
  {
   process_info_record("info", key, empty, full);
+ }
+
+ struct process_info_record_temporary
+ {
+  static constexpr u1 need_cbs = 2;
+  DgDb_Database_Instance* _this;
+  QString dbm_key;
+  QString key;
+  create_cb create;
+  update_cb update;
+  u1 cb_count;
+
+  void check_ready()
+  {
+   if(cb_count >= need_cbs)
+   {
+    if(dbm_key.isEmpty())
+      _this->process_info_record(key, create, update);
+    else
+      _this->process_info_record(dbm_key, key, create, update);
+   }
+  }
+
+  process_info_record_temporary& operator<<(create_cb c)
+  {
+   create = c;
+   ++cb_count;
+   check_ready();
+   return *this;
+  }
+
+  process_info_record_temporary& operator<<(update_cb u)
+  {
+   update = u;
+   ++cb_count;
+   check_ready();
+   return *this;
+  }
+ };
+
+ process_info_record_temporary process_info_record(QString key)
+ {
+  return {this, {}, key, nullptr, nullptr, 0};
+ }
+
+ process_info_record_temporary process_info_record(QString dbm_key, QString key)
+ {
+  return {this, dbm_key, key, nullptr, nullptr, 0};
  }
 
   // DH_Location_Structure::Data_Options opts);
