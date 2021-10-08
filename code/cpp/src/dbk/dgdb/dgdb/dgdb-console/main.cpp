@@ -236,16 +236,53 @@ void test_process_cb(DgDb_Database_Instance& ddi)
   {
    QString k = svs.key.qstring();
    n8 v = svs.value.to_n8();
-   --v;
 
-   // //  equivalent to
-    //    *svs.result.qba = n8_to_qba(v);
-    //    svs.result.confirm();
-   svs.result.from_n8(v);
+   if(v < 98)
+     svs.result.noop();
+   else
+   {
+    --v;
+
+    // //  equivalent to
+     //    *svs.result.qba = n8_to_qba(v);
+     //    svs.result.confirm();
+    svs.result.from_n8(v);
+   }
+   qDebug() << "update = " << v;
+  };
+}
+
+
+void test1_process_cb(DgDb_Database_Instance& ddi)
+{
+ ddi.process_info_record("test1-info") << [](Sv_2 svs)
+  {
+   QString k = svs.key.qstring();
+   svs.result.from_qstring("v=100");
+   qDebug() << "create = 'v=100'";
+  } <<
+   [](Sv_3 svs)
+  {
+   QString k = svs.key.qstring();
+   QString v = svs.value.qstring_utf8();
+
+   s1 index= v.indexOf('=');
+   if(index != -1)
+   {
+    u1 num = v.mid(index + 1).toInt();
+    --num;
+    v.replace(index + 1, v.size() - index - 1, QString::number(num));
+//    v = v.left(index + 1);
+//    v += QString::number(num);
+    svs.result.from_qstring(v);
+   }
+   else
+     svs.result.noop();
 
    qDebug() << "update = " << v;
   };
 }
+
 
 
 int main(int argc, char *argv[])
@@ -578,6 +615,14 @@ int main(int argc, char *argv[])
  test_process_cb(ddi);
  test_process_cb(ddi);
  test_process_cb(ddi);
+ test_process_cb(ddi);
+ test_process_cb(ddi);
+
+ test1_process_cb(ddi);
+ test1_process_cb(ddi);
+ test1_process_cb(ddi);
+ test1_process_cb(ddi);
+ test1_process_cb(ddi);
 
 // ddi.process_info_record("test-info");
 

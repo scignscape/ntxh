@@ -30,6 +30,11 @@ struct SV_Wrapper
  n8 to_n8();
  void from_n8(n8 v);
 
+ void from_qstring(QString str);
+ QString qstring_utf8();
+
+ void noop();
+
  void confirm();
 };
 
