@@ -20,12 +20,14 @@ HEADERS += \
   $$SRC_DIR/axfi-annotation.h  \
   $$SRC_DIR/axfi-location-2d.h  \
   $$SRC_DIR/axfi-annotation-group.h  \
+  $$SRC_DIR/axfi-annotation-environment.h  \
 
 
 SOURCES += \
   $$SRC_DIR/axfi-annotation.cpp  \
   $$SRC_DIR/axfi-location-2d.cpp  \
   $$SRC_DIR/axfi-annotation-group.cpp  \
+  $$SRC_DIR/axfi-annotation-environment.cpp  \
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

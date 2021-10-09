@@ -157,7 +157,7 @@ int main(int argc, char *argv[])
   aim_files << qdi.fileInfo().absoluteFilePath();
  }
 
- QString af1 = aim_files.value(0);
+ QString af1 = aim_files.first();
  qDebug() << af1;
 
  AnnotationCollection* acc = test_load_annotations(DT_XML, af1.toStdString());

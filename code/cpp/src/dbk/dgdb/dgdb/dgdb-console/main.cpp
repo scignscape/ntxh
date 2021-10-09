@@ -260,7 +260,8 @@ void test1_process_cb(DgDb_Database_Instance& ddi)
    QString k = svs.key.qstring();
    svs.result.from_qstring("v=100");
    qDebug() << "create = 'v=100'";
-  } <<
+  }
+   <<
    [](Sv_3 svs)
   {
    QString k = svs.key.qstring();

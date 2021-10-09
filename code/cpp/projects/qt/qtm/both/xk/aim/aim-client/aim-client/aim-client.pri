@@ -32,12 +32,12 @@ DEFINES += DEFAULT_DEV_DGDB_FOLDER=\\\"$$ROOT_DIR/../dev/consoles/dgdb/instances
 
 DEFINES += USE_KANS
 
+INCLUDEPATH += $$IAT_MODEL_SRC_GROUP_DIR
 
 INCLUDEPATH += $$DGDB_SRC_GROUP_DIR
 
 INCLUDEPATH += $$DGDB_SRC_GROUP_DIR/tkrzw
 
-INCLUDEPATH += $$IAT_MODEL_SRC_GROUP_DIR # this is AXFI ... rename?
 
 INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR
 
@@ -48,12 +48,11 @@ INCLUDEPATH += $$WHITEDB_SRC_GROUP_DIR
 
 
 HEADERS += \
-  $$SRC_DIR/demo-class.h \
+  $$SRC_DIR/dh-annotation-environment.h \
 
 
 SOURCES += \
-  $$SRC_DIR/main.cpp \
-  $$SRC_DIR/demo-class.cpp \
+  $$SRC_DIR/dh-annotation-environment.cpp \
 
 
 # #  for dcmtk OFString = std::string ...
@@ -62,14 +61,10 @@ DEFINES += HAVE_STL_STRING
 
 
 
-TEMPLATE = app
-
 LIBS += -L$$TARGETSDIR  -laimlib -ldcmsr -lofstd -loflog -ldcmdata \
    -ldcmimage -ldcmimgle
 
-
-LIBS += -L$$TARGETSDIR  -laim-client -laxfi
-
+LIBS += -L$$TARGETSDIR  -laxfi
 
 LIBS += -lrt
 

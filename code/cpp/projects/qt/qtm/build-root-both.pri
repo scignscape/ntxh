@@ -124,6 +124,8 @@ WHITEDB_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/whitedb/whitedb
 
 RZ_KAUVIR_SRC_GROUP_DIR = $$SRC_ROOT_DIR/sk/rz/rz-kauvir
 
+IAT_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/iat/iat
+IAT_MODEL_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/iat/iat-model
 
 QUA_ZIP_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/quazip
 DCMTK_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/dcmtk
@@ -132,7 +134,7 @@ ANGELSCRIPT_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/angelscript
 
 SCIGNSTAGE_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/QScign/ScignStage
 
-DgDb_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/dgdb
+DGDB_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/dgdb
 
 
 HTXN_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/htxn/htxn
@@ -140,7 +142,7 @@ MPF_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/htxn/mosaic
 CWL_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/cwl
 GTAGML_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/gtagml/gtagml
 
-DgDb_WHITE_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/dgdb-white
+DGDB_WHITE_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/dgdb-white
 
 DGH_SDI_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/dgh-sdi
 
