@@ -72,6 +72,7 @@ using namespace _class_DH_Location_Structure;
 
 #include "aim-client/dh-annotation-environment.h"
 #include "axfi/axfi-annotation-environment.h"
+#include "axfi/axfi-annotation-folder.h"
 
 
 enum TestDocumentType{
@@ -217,24 +218,15 @@ int main1(int argc, char *argv[])
 }
 
 
-int main(int argc, char *argv[])
-{
- AXFI_Annotation_Environment ae;
- ae.set_folder(AIM_DATA_FOLDER);
- qDebug() << ae.folder();
-
- DH_Annotation_Environment dae(&ae);
-}
-
 int main2(int argc, char *argv[])
 {
  AXFI_Annotation_Environment ae;
- ae.set_folder(AIM_DATA_FOLDER);
- qDebug() << ae.folder();
+// ae.set_folder(AIM_DATA_FOLDER);
+// qDebug() << ae.folder();
 
  DH_Annotation_Environment dae(&ae);
 
- DgDb_Database_Instance ddi(DEFAULT_DEV_DGDB_FOLDER "/t1");
+ DgDb_Database_Instance& ddi = *dae.dgdb(DEFAULT_DEV_DGDB_FOLDER "/t1");
 
  ddi.Config.flags.avoid_record_pointers = true;
  ddi.Config.flags.tkrzw_auto_commit = true;
@@ -242,15 +234,54 @@ int main2(int argc, char *argv[])
  ddi.Config.flags.scratch_mode = true;
  ddi.Config.flags.reset_tkrzw = true;
 
- ddi.init_dtb_package();
- ddi.init_type_system();
- ddi.check_construct_files();
- ddi.check_interns_dbm();
- ddi.check_nodes_dbm();
- ddi.init_indices();
- ddi.read_hypernode_count_status();
- ddi.read_interns_count_status();
- ddi.init_dwb_blocks();
+ dae.init_database();
+}
+
+int main(int argc, char *argv[])
+{
+ AXFI_Annotation_Environment ae;
+
+ AXFI_Annotation_Folder* af = ae.add_folder(AIM_DATA_FOLDER);
+// qDebug() << ae.folder();
+// //DH_Annotation_Environment dae(&ae);
+
+ if(af->is_empty())
+   return 0;
+
+ QString af1 = af->aim_files().first();
+
+
+// QString folder = AIM_DATA_FOLDER;
+// QString af1 = aim_files.first();
+// qDebug() << af1;
+
+ AnnotationCollection* acc = test_load_annotations(DT_XML, af1.toStdString());
+
+
+}
+
+int main3(int argc, char *argv[])
+{
+ AXFI_Annotation_Environment ae;
+// ae.set_folder(AIM_DATA_FOLDER);
+// qDebug() << ae.folder();
+
+ DH_Annotation_Environment dae(&ae);
+
+ DgDb_Database_Instance& ddi = *dae.dgdb(DEFAULT_DEV_DGDB_FOLDER "/t1");
+
+ //ddi.set_private_folder_path(DEFAULT_DEV_DGDB_FOLDER "/t1");
+
+ //DgDb_Database_Instance ddi(DEFAULT_DEV_DGDB_FOLDER "/t1");
+
+ ddi.Config.flags.avoid_record_pointers = true;
+ ddi.Config.flags.tkrzw_auto_commit = true;
+ //ddi.Config.flags.local_scratch_mode = true;
+ ddi.Config.flags.scratch_mode = true;
+ ddi.Config.flags.reset_tkrzw = true;
+
+ dae.init_database();
+
 
  qDebug() << "blocks ftok key: " << ddi.ftok_key("blocks");
 

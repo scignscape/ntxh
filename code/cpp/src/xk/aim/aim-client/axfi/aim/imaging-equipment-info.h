@@ -4,8 +4,8 @@
 //     (See accompanying file LICENSE_1_0.txt or copy at
 //           http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef DH_ANNOTATION_ENVIRONMENT__H
-#define DH_ANNOTATION_ENVIRONMENT__H
+#ifndef IMAGING_EQUIPMENT_INFO__H
+#define IMAGING_EQUIPMENT_INFO__H
 
 #include "accessors.h"
 
@@ -41,34 +41,30 @@
 //(u1&), Test_Enum ,test_enum    )field(,\
 //(u1&), Test_Enum_Flags ,test_enum_flags)
 
-class AXFI_Annotation_Environment;
-class DgDb_Database_Instance;
-
-
-class DH_Annotation_Environment
+class Imaging_Equipment_Info
 {
- AXFI_Annotation_Environment* axfi_env_;
- DgDb_Database_Instance* dgdb_;
+ QString manufacturer_name_;
+ QString manufacturer_model_name_;
+ QString software_version_;
+ QString device_serial_number_;
 
 
 public:
 
- DH_Annotation_Environment(AXFI_Annotation_Environment* axfi_env);
+ Imaging_Equipment_Info();
 
 
- ACCESSORS(AXFI_Annotation_Environment* ,axfi_env)
- ACCESSORS(DgDb_Database_Instance* ,dgdb)
-
- DgDb_Database_Instance* dgdb(QString path);
+ ACCESSORS(QString ,manufacturer_name)
+ ACCESSORS(QString ,manufacturer_model_name)
+ ACCESSORS(QString ,software_version)
+ ACCESSORS(QString ,device_serial_number)
 
  void supply_data(QByteArray& qba);
  void absorb_data(const QByteArray& qba);
-
- void init_database();
 
 
 };
 
 
 
-#endif // DEMO_CLASS__H 
+#endif // IMAGING_EQUIPMENT_INFO__H

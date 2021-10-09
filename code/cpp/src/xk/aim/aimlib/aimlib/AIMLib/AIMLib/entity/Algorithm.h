@@ -46,7 +46,7 @@ namespace aim_lib
 		virtual ~Algorithm(void);
 
 		const std::string& GetName() const;
-		const iso_21090::CDVector& GetType() const;
+  const iso_21090::CDVector& GetType() const;
 		const iso_21090::II* GetUniqueIdentifier() const;
 		const std::string& GetVersion() const;
 		const std::string& GetDescription() const;

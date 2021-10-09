@@ -4,8 +4,8 @@
 //     (See accompanying file LICENSE_1_0.txt or copy at
 //           http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef DH_ANNOTATION_ENVIRONMENT__H
-#define DH_ANNOTATION_ENVIRONMENT__H
+#ifndef USER_INFO__H
+#define USER_INFO__H
 
 #include "accessors.h"
 
@@ -41,34 +41,31 @@
 //(u1&), Test_Enum ,test_enum    )field(,\
 //(u1&), Test_Enum_Flags ,test_enum_flags)
 
-class AXFI_Annotation_Environment;
-class DgDb_Database_Instance;
-
-
-class DH_Annotation_Environment
+class User_Info
 {
- AXFI_Annotation_Environment* axfi_env_;
- DgDb_Database_Instance* dgdb_;
+ QString name_; // DICOM Pname
+ QString login_name_;
+ QString role_in_trial_;
+ u4 number_within_role_in_trial_;
 
 
 public:
 
- DH_Annotation_Environment(AXFI_Annotation_Environment* axfi_env);
+ User_Info();
 
 
- ACCESSORS(AXFI_Annotation_Environment* ,axfi_env)
- ACCESSORS(DgDb_Database_Instance* ,dgdb)
+ ACCESSORS(QString ,name)
+ ACCESSORS(QString ,login_name)
+ ACCESSORS(QString ,role_in_trial)
+ ACCESSORS(u4 ,number_within_role_in_trial)
 
- DgDb_Database_Instance* dgdb(QString path);
 
  void supply_data(QByteArray& qba);
  void absorb_data(const QByteArray& qba);
-
- void init_database();
 
 
 };
 
 
 
-#endif // DEMO_CLASS__H 
+#endif // USER_INFO__H

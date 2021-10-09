@@ -4,8 +4,8 @@
 //     (See accompanying file LICENSE_1_0.txt or copy at
 //           http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef DH_ANNOTATION_ENVIRONMENT__H
-#define DH_ANNOTATION_ENVIRONMENT__H
+#ifndef AXFI_ANNOTATION_ENVIRONMENT__H
+#define AXFI_ANNOTATION_ENVIRONMENT__H
 
 #include "accessors.h"
 
@@ -41,34 +41,26 @@
 //(u1&), Test_Enum ,test_enum    )field(,\
 //(u1&), Test_Enum_Flags ,test_enum_flags)
 
-class AXFI_Annotation_Environment;
-class DgDb_Database_Instance;
+class AXFI_Annotation_Group;
+class AXFI_Annotation_Folder;
 
-
-class DH_Annotation_Environment
+class AXFI_Annotation_Environment
 {
- AXFI_Annotation_Environment* axfi_env_;
- DgDb_Database_Instance* dgdb_;
-
+ QMap<QString, AXFI_Annotation_Folder*> folders_;
+ //AXFI_Annotation_Group* axfi_annotation_group_;
 
 public:
 
- DH_Annotation_Environment(AXFI_Annotation_Environment* axfi_env);
+ AXFI_Annotation_Environment();
 
-
- ACCESSORS(AXFI_Annotation_Environment* ,axfi_env)
- ACCESSORS(DgDb_Database_Instance* ,dgdb)
-
- DgDb_Database_Instance* dgdb(QString path);
+ AXFI_Annotation_Folder* add_folder(QString path);
 
  void supply_data(QByteArray& qba);
  void absorb_data(const QByteArray& qba);
-
- void init_database();
 
 
 };
 
 
 
-#endif // DEMO_CLASS__H 
+#endif // AXFI_ANNOTATION_ENVIRONMENT__H
