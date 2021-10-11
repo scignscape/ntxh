@@ -76,7 +76,8 @@ using namespace _class_DH_Location_Structure;
 
 #include "axfi/dh/dhax-annotation-environment.h"
 #include "axfi/dh/dhax-annotation-folder.h"
-
+#include "axfi/dh/dhax-annotation-group.h"
+#include "axfi/dh/dhax-annotation-instance.h"
 
 
 
@@ -85,11 +86,15 @@ int main(int argc, char *argv[])
  DHAX_Annotation_Environment dae;
  dae.default_extensions();
 
- DHAX_Annotation_Folder* af = dae.add_image_folder(AIM_DATA_FOLDER);
- if(af->images_is_empty())
+ DHAX_Annotation_Folder* daf = dae.add_image_folder(AIM_IMAGE_FOLDER);
+ if(daf->images_is_empty())
    return 0;
 
- QString fp = af->image_files().first();
+ QString fp = daf->image_files().first();
+
+ DHAX_Annotation_Group* dag = dae.add_annotation_group(fp);
+
+ DHAX_Annotation_Instance* dai = dag->add_annotation();
 }
 
 

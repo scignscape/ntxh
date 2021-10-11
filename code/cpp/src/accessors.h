@@ -159,6 +159,13 @@ ACCESSORS__GET(type, name)
 #endif
 
 
+#ifndef ACCESSORS__GSDECLARE
+#define ACCESSORS__GSDECLARE(type, name) \
+ type get_##name() const; \
+ ACCESSORS__SDECLARE(type, name)
+#endif
+
+
 #ifndef ACCESSORS
 #define ACCESSORS(type, name) \
  ACCESSORS__GET(MACRO_PASTE(type), name) \

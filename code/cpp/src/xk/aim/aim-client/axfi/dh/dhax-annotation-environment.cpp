@@ -14,6 +14,7 @@
 #include "dgdb/dgdb-database-instance.h"
 
 #include "dhax-annotation-folder.h"
+#include "dhax-annotation-group.h"
 
 
 #define DDI DgDb_Database_Instance& ddi = *dgdb_;
@@ -44,6 +45,14 @@ DHAX_Annotation_Folder* DHAX_Annotation_Environment::add_image_folder(QString pa
  DHAX_Annotation_Folder* result = new DHAX_Annotation_Folder;
  result->read_path(path, image_file_extensions_);
  image_folders_[path] = result;
+ return result;
+}
+
+
+DHAX_Annotation_Group* DHAX_Annotation_Environment::add_annotation_group(QString path)
+{
+ DHAX_Annotation_Group* result = new DHAX_Annotation_Group;
+ result->set_target_path(path);
  return result;
 }
 

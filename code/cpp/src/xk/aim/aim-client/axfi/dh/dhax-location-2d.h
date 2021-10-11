@@ -27,15 +27,15 @@
 
 class DHAX_Location_2d
 {
- n8 c1_;
- n8 c2_;
+ u4 c1_;
+ u4 c2_;
 
 public:
 
- DHAX_Location_2d(n8 c1, n8 c2);
+ DHAX_Location_2d(u4 c1, u4 c2);
 
- ACCESSORS(n8 ,c1)
- ACCESSORS(n8 ,c2)
+ ACCESSORS(u4 ,c1)
+ ACCESSORS(u4 ,c2)
 
  QString to_string();
 

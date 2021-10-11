@@ -45,6 +45,7 @@ class AXFI_Annotation_Environment;
 class DgDb_Database_Instance;
 
 class DHAX_Annotation_Folder;
+class DHAX_Annotation_Group;
 
 
 class DHAX_Annotation_Environment
@@ -67,6 +68,8 @@ public:
 
  DHAX_Annotation_Folder* add_data_folder(QString path);
  DHAX_Annotation_Folder* add_image_folder(QString path);
+
+ DHAX_Annotation_Group* add_annotation_group(QString path);
 
  void default_extensions();
 

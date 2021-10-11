@@ -36,11 +36,12 @@ HEADERS += \
   $$SRC_DIR/aim/image-annotation-info.h \
   $$SRC_DIR/aim/image-annotation-collection-info.h \
   $$SRC_DIR/al-wrap.h \
-  $$SRC_DIR/dh/dhax-annotation.h \
   $$SRC_DIR/dh/dhax-annotation-target.h \
   $$SRC_DIR/dh/dhax-location-2d.h \
   $$SRC_DIR/dh/dhax-annotation-environment.h \
   $$SRC_DIR/dh/dhax-annotation-folder.h \
+  $$SRC_DIR/dh/dhax-annotation-group.h \
+  $$SRC_DIR/dh/dhax-annotation-instance.h \
 
 
 
@@ -54,13 +55,12 @@ SOURCES += \
   $$SRC_DIR/aim/imaging-equipment-info.cpp  \
   $$SRC_DIR/aim/image-annotation-info.cpp \
   $$SRC_DIR/aim/image-annotation-collection-info.cpp \
-  $$SRC_DIR/dh/dhax-annotation.cpp \
   $$SRC_DIR/dh/dhax-annotation-target.cpp \
   $$SRC_DIR/dh/dhax-location-2d.cpp \
   $$SRC_DIR/dh/dhax-annotation-environment.cpp \
   $$SRC_DIR/dh/dhax-annotation-folder.cpp \
-
-
+  $$SRC_DIR/dh/dhax-annotation-group.cpp \
+  $$SRC_DIR/dh/dhax-annotation-instance.cpp \
 
 
 

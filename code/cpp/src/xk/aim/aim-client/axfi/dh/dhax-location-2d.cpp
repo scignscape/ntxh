@@ -8,7 +8,7 @@
 #include "dhax-location-2d.h"
 
 
-DHAX_Location_2d::DHAX_Location_2d(n8 c1, n8 c2)
+DHAX_Location_2d::DHAX_Location_2d(u4 c1, u4 c2)
  :  c1_(c1), c2_(c2)
 {
 
