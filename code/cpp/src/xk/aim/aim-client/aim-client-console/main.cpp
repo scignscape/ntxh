@@ -70,9 +70,28 @@ using namespace _class_DH_Location_Structure;
 
 #include "demo-class.h"
 
-#include "aim-client/dh-annotation-environment.h"
+#include "aim-client/dh-annotation-bridge.h"
 #include "axfi/axfi-annotation-environment.h"
 #include "axfi/axfi-annotation-folder.h"
+
+#include "axfi/dh/dhax-annotation-environment.h"
+#include "axfi/dh/dhax-annotation-folder.h"
+
+
+
+
+int main(int argc, char *argv[])
+{
+ DHAX_Annotation_Environment dae;
+ dae.default_extensions();
+
+ DHAX_Annotation_Folder* af = dae.add_image_folder(AIM_DATA_FOLDER);
+ if(af->images_is_empty())
+   return 0;
+
+ QString fp = af->image_files().first();
+}
+
 
 
 enum TestDocumentType{
@@ -224,9 +243,9 @@ int main2(int argc, char *argv[])
 // ae.set_folder(AIM_DATA_FOLDER);
 // qDebug() << ae.folder();
 
- DH_Annotation_Environment dae(&ae);
+ DH_Annotation_Bridge dab(&ae);
 
- DgDb_Database_Instance& ddi = *dae.dgdb(DEFAULT_DEV_DGDB_FOLDER "/t1");
+ DgDb_Database_Instance& ddi = *dab.dgdb(DEFAULT_DEV_DGDB_FOLDER "/t1");
 
  ddi.Config.flags.avoid_record_pointers = true;
  ddi.Config.flags.tkrzw_auto_commit = true;
@@ -234,10 +253,10 @@ int main2(int argc, char *argv[])
  ddi.Config.flags.scratch_mode = true;
  ddi.Config.flags.reset_tkrzw = true;
 
- dae.init_database();
+ dab.init_database();
 }
 
-int main(int argc, char *argv[])
+int main4(int argc, char *argv[])
 {
  AXFI_Annotation_Environment ae;
 
@@ -255,7 +274,8 @@ int main(int argc, char *argv[])
 // QString af1 = aim_files.first();
 // qDebug() << af1;
 
- AnnotationCollection* acc = test_load_annotations(DT_XML, af1.toStdString());
+ Image_Annotation_Collection_Info* iac = //test_
+   ae.load_xml_annotations(af1);
 
 
 }
@@ -266,9 +286,9 @@ int main3(int argc, char *argv[])
 // ae.set_folder(AIM_DATA_FOLDER);
 // qDebug() << ae.folder();
 
- DH_Annotation_Environment dae(&ae);
+ DH_Annotation_Bridge dab(&ae);
 
- DgDb_Database_Instance& ddi = *dae.dgdb(DEFAULT_DEV_DGDB_FOLDER "/t1");
+ DgDb_Database_Instance& ddi = *dab.dgdb(DEFAULT_DEV_DGDB_FOLDER "/t1");
 
  //ddi.set_private_folder_path(DEFAULT_DEV_DGDB_FOLDER "/t1");
 
@@ -280,7 +300,7 @@ int main3(int argc, char *argv[])
  ddi.Config.flags.scratch_mode = true;
  ddi.Config.flags.reset_tkrzw = true;
 
- dae.init_database();
+ dab.init_database();
 
 
  qDebug() << "blocks ftok key: " << ddi.ftok_key("blocks");

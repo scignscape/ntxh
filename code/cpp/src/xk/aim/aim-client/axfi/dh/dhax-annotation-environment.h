@@ -4,8 +4,8 @@
 //     (See accompanying file LICENSE_1_0.txt or copy at
 //           http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef DH_ANNOTATION_ENVIRONMENT__H
-#define DH_ANNOTATION_ENVIRONMENT__H
+#ifndef DHAX_ANNOTATION_ENVIRONMENT__H
+#define DHAX_ANNOTATION_ENVIRONMENT__H
 
 #include "accessors.h"
 
@@ -44,31 +44,40 @@
 class AXFI_Annotation_Environment;
 class DgDb_Database_Instance;
 
+class DHAX_Annotation_Folder;
 
-class DH_Annotation_Environment
+
+class DHAX_Annotation_Environment
 {
- AXFI_Annotation_Environment* axfi_env_;
  DgDb_Database_Instance* dgdb_;
+
+ QMap<QString, DHAX_Annotation_Folder*> data_folders_;
+ QMap<QString, DHAX_Annotation_Folder*> image_folders_;
+ //AXFI_Annotation_Group* axfi_annotation_group_;
+
+ QStringList data_file_extensions_;
+ QStringList image_file_extensions_;
 
 
 public:
 
- DH_Annotation_Environment(AXFI_Annotation_Environment* axfi_env);
+ DHAX_Annotation_Environment();
 
-
- ACCESSORS(AXFI_Annotation_Environment* ,axfi_env)
  ACCESSORS(DgDb_Database_Instance* ,dgdb)
 
- DgDb_Database_Instance* dgdb(QString path);
+ DHAX_Annotation_Folder* add_data_folder(QString path);
+ DHAX_Annotation_Folder* add_image_folder(QString path);
+
+ void default_extensions();
 
  void supply_data(QByteArray& qba);
  void absorb_data(const QByteArray& qba);
 
+ DgDb_Database_Instance* dgdb(QString path);
+
  void init_database();
-
-
 };
 
 
 
-#endif // DEMO_CLASS__H 
+#endif // DHAX_ANNOTATION_ENVIRONMENT__H

@@ -10,12 +10,18 @@
 
 #include <QDataStream>
 
+#include "AIMLib/stdafx.h"
+#include "AIMLib/entity/User.h"
+
 
 User_Info::User_Info()
   :  number_within_role_in_trial_(0)
 {
 
 }
+
+AL_INIT(User)
+
 
 void User_Info::supply_data(QByteArray& qba)
 {

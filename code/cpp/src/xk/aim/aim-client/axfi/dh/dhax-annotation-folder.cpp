@@ -6,27 +6,34 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#include "imaging-equipment-info.h"
+#include "dhax-annotation-folder.h"
 
 #include <QDataStream>
-
-#include "AIMLib/stdafx.h"
-
-#include "AIMLib/entity/Equipment.h"
+#include <QDirIterator>
 
 
-Imaging_Equipment_Info::Imaging_Equipment_Info()
- // :  axfi_annotation_group_(new AXFI_Annotation_Group)
+
+DHAX_Annotation_Folder::DHAX_Annotation_Folder()
 {
 
 }
 
-//void Imaging_Equipment_Info AL_INIT
 
-//AL_INIT(Imaging_Equipment_Info)
-AL_INIT(Equipment)
+void DHAX_Annotation_Folder::read_path(QString path, QStringList extensions)
+{
+ path_ = path;
 
-void Imaging_Equipment_Info::supply_data(QByteArray& qba)
+ QDirIterator qdi(path, {"*.xml"});
+
+ while(qdi.hasNext())
+ {
+  qdi.next();
+  //aim_files_ << qdi.fileInfo().canonicalFilePath();
+ }
+
+}
+
+void DHAX_Annotation_Folder::supply_data(QByteArray& qba)
 {
  QDataStream qds(&qba, QIODevice::WriteOnly);
 // qds << a_string_ << a_number_;
@@ -39,7 +46,7 @@ void Imaging_Equipment_Info::supply_data(QByteArray& qba)
 
 }
 
-void Imaging_Equipment_Info::absorb_data(const QByteArray& qba)
+void DHAX_Annotation_Folder::absorb_data(const QByteArray& qba)
 {
  QDataStream qds(qba);
 // qds >> a_string_ >> a_number_;

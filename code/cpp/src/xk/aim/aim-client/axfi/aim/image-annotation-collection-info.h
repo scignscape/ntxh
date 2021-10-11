@@ -4,14 +4,12 @@
 //     (See accompanying file LICENSE_1_0.txt or copy at
 //           http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef IMAGING_EQUIPMENT_INFO__H
-#define IMAGING_EQUIPMENT_INFO__H
+#ifndef Image_Annotation_Collection_Info__H
+#define Image_Annotation_Collection_Info__H
 
 #include "accessors.h"
 
 #include "global-types.h"
-
-#include "al-wrap.h"
 
 
 #include <QString>
@@ -19,6 +17,10 @@
 
 #include <QDateTime>
 
+#include "al-wrap.h"
+
+#include "aim/imaging-equipment-info.h"
+#include "aim/user-info.h"
 
 
  // //  defines the serialization order ...
@@ -40,53 +42,33 @@
  Demo_Class::Test_Enum_Flags ,test_enum_flags )\
 
 
+AL_WRAP_DECL(Image_Annotation_Collection_Info ,ImageAnnotationCollection)
+
 //(u1&), Test_Enum ,test_enum    )field(,\
 //(u1&), Test_Enum_Flags ,test_enum_flags)
 
-
-
-AL_WRAP_DECL(Imaging_Equipment_Info ,Equipment)
-
-//class Imaging_Equipment_Info;
-//namespace aim_lib{ class Equipment; } \
-//template<> struct wrapper_for<aim_lib::Equipment> { typedef Imaging_Equipment_Info _class; };
-
-
-//namespace aim_lib{ class Equipment; }
-
-//using namespace aim_lib;
-
-class Imaging_Equipment_Info
+class Image_Annotation_Collection_Info
 {
- QString manufacturer_name_;
- QString manufacturer_model_name_;
- QString software_version_;
- QString device_serial_number_;
+ QString description_; //  for annotation collection _description
+ QDateTime datetime_; //  for annotation collection _dateTime
+
+ Imaging_Equipment_Info equipment_;
+ User_Info user_;
 
 
 public:
 
- AL_WRAP_CLASS(Equipment)
+ Image_Annotation_Collection_Info();
 
-// class _al {
-//   friend class Imaging_Equipment_Info;
-//   Equipment* object_;
-
-// public:
-
-//   ACCESSORS(Equipment* ,object)
-// };
-
-// _al al;
-// void alinit();
-
- Imaging_Equipment_Info();
+ AL_WRAP_CLASS(ImageAnnotationCollection)
 
 
- ACCESSORS(QString ,manufacturer_name)
- ACCESSORS(QString ,manufacturer_model_name)
- ACCESSORS(QString ,software_version)
- ACCESSORS(QString ,device_serial_number)
+ ACCESSORS(QString ,description) //  for annotation collection _description
+ ACCESSORS(QDateTime ,datetime) //  for annotation collection _dateTime
+
+ ACCESSORS__RGET(Imaging_Equipment_Info ,equipment)
+ ACCESSORS__RGET(User_Info ,user)
+
 
  void supply_data(QByteArray& qba);
  void absorb_data(const QByteArray& qba);
@@ -96,4 +78,4 @@ public:
 
 
 
-#endif // IMAGING_EQUIPMENT_INFO__H
+#endif // Image_Annotation_Collection_Info__H

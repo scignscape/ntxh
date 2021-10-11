@@ -13,6 +13,21 @@
 
 #include "axfi-annotation-folder.h"
 
+#include "AIMLib/AIMCommon.h"
+
+#include "AIMLib/external/CD.h"
+#include "AIMLib/external/II.h"
+#include "AIMLib/AimHeaders.h"
+
+#include "AIMLib/entity/ImageAnnotationCollection.h"
+#include "AIMLib/operations/BaseModel.h"
+#include "AIMLib/operations/DcmModel.h"
+#include "AIMLib/operations/XmlModel.h"
+
+#include "AIMLib/entity/AnnotationCollection.h"
+
+#include "aim/image-annotation-collection-info.h"
+
 
 AXFI_Annotation_Environment::AXFI_Annotation_Environment()
  // :  axfi_annotation_group_(new AXFI_Annotation_Group)
@@ -28,6 +43,36 @@ AXFI_Annotation_Folder* AXFI_Annotation_Environment::add_folder(QString path)
  return result;
 }
 
+Image_Annotation_Collection_Info*
+  AXFI_Annotation_Environment::load_xml_annotations(QString file_path)
+{
+ aim_lib::XmlModel xmlm;
+ aim_lib::AnnotationCollection* ac = xmlm.ReadAnnotationCollectionFromFile
+   (file_path.toStdString());
+
+
+ aim_lib::AnnotationCollection::AnnotationCollectionType act = ac->GetAnnotationCollectionType();
+ if(act == aim_lib::AnnotationCollection::ACT_ImageAnnotationCollection)
+ {
+  Image_Annotation_Collection_Info* result = new Image_Annotation_Collection_Info;
+  aim_lib::ImageAnnotationCollection* iac = static_cast<aim_lib::ImageAnnotationCollection*>(ac);
+  result->alinit(iac);
+  result->equipment().alinit(const_cast<aim_lib::Equipment*>(iac->GetEquipment()));
+  result->user().alinit(const_cast<aim_lib::User*>(iac->GetUser()));
+  result->set_description(QString::fromStdString(iac->GetDescription()));
+  result->set_datetime(convert_aim_datetime(iac->GetDateTime()));
+  return result;
+ }
+ return nullptr;
+}
+
+QDateTime AXFI_Annotation_Environment::convert_aim_datetime(const aim_lib::DateTime& dt)
+{
+ QDateTime result;
+ result.setDate(QDate(dt.GetYear(), dt.GetMonth(), dt.GetDay()));
+ result.setTime(QTime(dt.GetHour(), dt.GetMinute(), dt.GetSecond()));
+ return result;
+}
 
 void AXFI_Annotation_Environment::supply_data(QByteArray& qba)
 {

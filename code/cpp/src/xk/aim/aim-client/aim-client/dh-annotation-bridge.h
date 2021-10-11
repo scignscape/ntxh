@@ -4,14 +4,12 @@
 //     (See accompanying file LICENSE_1_0.txt or copy at
 //           http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef IMAGING_EQUIPMENT_INFO__H
-#define IMAGING_EQUIPMENT_INFO__H
+#ifndef DH_ANNOTATION_BRIDGE__H
+#define DH_ANNOTATION_BRIDGE__H
 
 #include "accessors.h"
 
 #include "global-types.h"
-
-#include "al-wrap.h"
 
 
 #include <QString>
@@ -43,57 +41,34 @@
 //(u1&), Test_Enum ,test_enum    )field(,\
 //(u1&), Test_Enum_Flags ,test_enum_flags)
 
+class AXFI_Annotation_Environment;
+class DgDb_Database_Instance;
 
 
-AL_WRAP_DECL(Imaging_Equipment_Info ,Equipment)
-
-//class Imaging_Equipment_Info;
-//namespace aim_lib{ class Equipment; } \
-//template<> struct wrapper_for<aim_lib::Equipment> { typedef Imaging_Equipment_Info _class; };
-
-
-//namespace aim_lib{ class Equipment; }
-
-//using namespace aim_lib;
-
-class Imaging_Equipment_Info
+class DH_Annotation_Bridge
 {
- QString manufacturer_name_;
- QString manufacturer_model_name_;
- QString software_version_;
- QString device_serial_number_;
+ AXFI_Annotation_Environment* axfi_env_;
+ DgDb_Database_Instance* dgdb_;
 
 
 public:
 
- AL_WRAP_CLASS(Equipment)
-
-// class _al {
-//   friend class Imaging_Equipment_Info;
-//   Equipment* object_;
-
-// public:
-
-//   ACCESSORS(Equipment* ,object)
-// };
-
-// _al al;
-// void alinit();
-
- Imaging_Equipment_Info();
+ DH_Annotation_Bridge(AXFI_Annotation_Environment* axfi_env);
 
 
- ACCESSORS(QString ,manufacturer_name)
- ACCESSORS(QString ,manufacturer_model_name)
- ACCESSORS(QString ,software_version)
- ACCESSORS(QString ,device_serial_number)
+ ACCESSORS(AXFI_Annotation_Environment* ,axfi_env)
+ ACCESSORS(DgDb_Database_Instance* ,dgdb)
+
+ DgDb_Database_Instance* dgdb(QString path);
 
  void supply_data(QByteArray& qba);
  void absorb_data(const QByteArray& qba);
+
+ void init_database();
 
 
 };
 
 
 
-#endif // IMAGING_EQUIPMENT_INFO__H
+#endif // DH_ANNOTATION_BRIDGE__H

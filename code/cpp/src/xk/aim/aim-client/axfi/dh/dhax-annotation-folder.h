@@ -4,14 +4,12 @@
 //     (See accompanying file LICENSE_1_0.txt or copy at
 //           http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef IMAGING_EQUIPMENT_INFO__H
-#define IMAGING_EQUIPMENT_INFO__H
+#ifndef DHAX_ANNOTATION_FOLDER__H
+#define DHAX_ANNOTATION_FOLDER__H
 
 #include "accessors.h"
 
 #include "global-types.h"
-
-#include "al-wrap.h"
 
 
 #include <QString>
@@ -43,50 +41,29 @@
 //(u1&), Test_Enum ,test_enum    )field(,\
 //(u1&), Test_Enum_Flags ,test_enum_flags)
 
+class DHAX_Annotation_Group;
+class DHAX_Annotation_Folder;
 
-
-AL_WRAP_DECL(Imaging_Equipment_Info ,Equipment)
-
-//class Imaging_Equipment_Info;
-//namespace aim_lib{ class Equipment; } \
-//template<> struct wrapper_for<aim_lib::Equipment> { typedef Imaging_Equipment_Info _class; };
-
-
-//namespace aim_lib{ class Equipment; }
-
-//using namespace aim_lib;
-
-class Imaging_Equipment_Info
+class DHAX_Annotation_Folder
 {
- QString manufacturer_name_;
- QString manufacturer_model_name_;
- QString software_version_;
- QString device_serial_number_;
+ QString path_;
 
+ QStringList image_files_;
+ QStringList data_files_;
 
 public:
 
- AL_WRAP_CLASS(Equipment)
+ DHAX_Annotation_Folder();
 
-// class _al {
-//   friend class Imaging_Equipment_Info;
-//   Equipment* object_;
+ ACCESSORS(QString ,path)
+ ACCESSORS__CONST_RGET(QStringList ,data_files)
+ ACCESSORS__CONST_RGET(QStringList ,image_files)
 
-// public:
+ bool data_is_empty() { return data_files_.isEmpty(); }
+ bool images_is_empty() { return image_files_.isEmpty(); }
 
-//   ACCESSORS(Equipment* ,object)
-// };
+ void read_path(QString path, QStringList extensions);
 
-// _al al;
-// void alinit();
-
- Imaging_Equipment_Info();
-
-
- ACCESSORS(QString ,manufacturer_name)
- ACCESSORS(QString ,manufacturer_model_name)
- ACCESSORS(QString ,software_version)
- ACCESSORS(QString ,device_serial_number)
 
  void supply_data(QByteArray& qba);
  void absorb_data(const QByteArray& qba);
@@ -96,4 +73,4 @@ public:
 
 
 
-#endif // IMAGING_EQUIPMENT_INFO__H
+#endif // DHAX_ANNOTATION_ENVIRONMENT__H

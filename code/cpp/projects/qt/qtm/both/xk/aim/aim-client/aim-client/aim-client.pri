@@ -46,11 +46,11 @@ INCLUDEPATH += $$WHITEDB_SRC_GROUP_DIR
 
 
 HEADERS += \
-  $$SRC_DIR/dh-annotation-environment.h \
+  $$SRC_DIR/dh-annotation-bridge.h \
 
 
 SOURCES += \
-  $$SRC_DIR/dh-annotation-environment.cpp \
+  $$SRC_DIR/dh-annotation-bridge.cpp \
 
 
 # #  for dcmtk OFString = std::string ...

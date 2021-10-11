@@ -20,9 +20,6 @@
 
 #include "axfi-location-2d.h"
 
-#include "aim/imaging-equipment-info.h"
-#include "aim/user-info.h"
-
 
 #include <functional>
 
@@ -51,12 +48,6 @@ class AXFI_Annotation_Group
 
  n8 target_data_;
 
- QString description_; //  for annotation collection _description
- QDateTime datetime_; //  for annotation collection _dateTime
-
- Imaging_Equipment_Info equipment_;
- User_Info user_;
-
 
 public:
 
@@ -67,11 +58,6 @@ public:
  ACCESSORS(AXFI_Environment_Settings* ,specified_environment_settings)
  ACCESSORS(n8 ,target_data)
 
- ACCESSORS(QString ,description) //  for annotation collection _description
- ACCESSORS(QDateTime ,datetime) //  for annotation collection _dateTime
-
- ACCESSORS__RGET(Imaging_Equipment_Info ,equipment)
- ACCESSORS__RGET(User_Info ,user)
 
  template<typename OBJECT_Type>
  OBJECT_Type* target_data_as()

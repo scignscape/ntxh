@@ -44,6 +44,10 @@
 class AXFI_Annotation_Group;
 class AXFI_Annotation_Folder;
 
+class Image_Annotation_Collection_Info;
+
+namespace aim_lib { class DateTime; }
+
 class AXFI_Annotation_Environment
 {
  QMap<QString, AXFI_Annotation_Folder*> folders_;
@@ -54,6 +58,10 @@ public:
  AXFI_Annotation_Environment();
 
  AXFI_Annotation_Folder* add_folder(QString path);
+
+ Image_Annotation_Collection_Info* load_xml_annotations(QString file_path);
+
+ static QDateTime convert_aim_datetime(const aim_lib::DateTime& dt);
 
  void supply_data(QByteArray& qba);
  void absorb_data(const QByteArray& qba);

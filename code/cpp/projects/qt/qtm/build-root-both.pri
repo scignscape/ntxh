@@ -127,6 +127,8 @@ RZ_KAUVIR_SRC_GROUP_DIR = $$SRC_ROOT_DIR/sk/rz/rz-kauvir
 IAT_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/iat/iat
 IAT_MODEL_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/iat/iat-model
 
+AIMLIB_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/aim/aimlib
+
 QUA_ZIP_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/quazip
 DCMTK_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/dcmtk
 

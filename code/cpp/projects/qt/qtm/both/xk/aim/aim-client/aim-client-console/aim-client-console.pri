@@ -24,6 +24,8 @@ DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 include($$ROOT_DIR/../preferred/aim.pri)
 
 DEFINES += AIM_DATA_FOLDER=\\\"$$AIM_DATA_DIR\\\"
+DEFINES += AIM_IMAGE_FOLDER=\\\"$$AIM_IMAGE_DIR\\\"
+
 
 DEFINES += DEFAULT_DEV_TKRZW_FOLDER=\\\"$$ROOT_DIR/../dev/consoles/dgdb/tkrzw\\\"
 

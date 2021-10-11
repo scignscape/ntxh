@@ -17,6 +17,7 @@
 
 #include <QDateTime>
 
+#include "al-wrap.h"
 
 
  // //  defines the serialization order ...
@@ -38,6 +39,8 @@
  Demo_Class::Test_Enum_Flags ,test_enum_flags )\
 
 
+AL_WRAP_DECL(User_Info ,User)
+
 //(u1&), Test_Enum ,test_enum    )field(,\
 //(u1&), Test_Enum_Flags ,test_enum_flags)
 
@@ -52,6 +55,8 @@ class User_Info
 public:
 
  User_Info();
+
+ AL_WRAP_CLASS(User)
 
 
  ACCESSORS(QString ,name)

@@ -6,7 +6,7 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#include "dh-annotation-environment.h"
+#include "dh-annotation-bridge.h"
 
 #include <QDataStream>
 
@@ -18,20 +18,20 @@
 
 #define DDI DgDb_Database_Instance& ddi = *dgdb_;
 
-DH_Annotation_Environment::DH_Annotation_Environment(AXFI_Annotation_Environment* axfi_env)
+DH_Annotation_Bridge::DH_Annotation_Bridge(AXFI_Annotation_Environment* axfi_env)
   :  axfi_env_(axfi_env), dgdb_(new DgDb_Database_Instance)
 {
 
 }
 
-DgDb_Database_Instance* DH_Annotation_Environment::dgdb(QString path)
+DgDb_Database_Instance* DH_Annotation_Bridge::dgdb(QString path)
 {
  dgdb_->set_private_folder_path(path);
  return dgdb_;
 }
 
 
-void DH_Annotation_Environment::init_database()
+void DH_Annotation_Bridge::init_database()
 {
  DDI
  ddi.init_dtb_package();
@@ -46,7 +46,7 @@ void DH_Annotation_Environment::init_database()
 }
 
 
-void DH_Annotation_Environment::supply_data(QByteArray& qba)
+void DH_Annotation_Bridge::supply_data(QByteArray& qba)
 {
  QDataStream qds(&qba, QIODevice::WriteOnly);
 // qds << a_string_ << a_number_;
@@ -59,7 +59,7 @@ void DH_Annotation_Environment::supply_data(QByteArray& qba)
 
 }
 
-void DH_Annotation_Environment::absorb_data(const QByteArray& qba)
+void DH_Annotation_Bridge::absorb_data(const QByteArray& qba)
 {
  QDataStream qds(qba);
 // qds >> a_string_ >> a_number_;

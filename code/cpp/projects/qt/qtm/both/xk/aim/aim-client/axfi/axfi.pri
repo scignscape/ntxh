@@ -7,14 +7,23 @@
 
 include(../build-group.pri)
 
-QT += widgets
+QT += widgets xml
 
-INCLUDEPATH += $$SRC_DIR
+INCLUDEPATH += $$SRC_DIR  $$AIMLIB_SRC_GROUP_DIR/aimlib/AIMLib
+
+QMAKE_CC = gcc-7
+QMAKE_CXX = g++-7
+
+CONFIG += c++17
+
+message($$AIMLIB_SRC_GROUP_DIR)
 
 #INCLUDEPATH += $$SRC_GROUP_DIR
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
+INCLUDEPATH += $$DGDB_SRC_GROUP_DIR
 
+INCLUDEPATH += $$DGDB_SRC_GROUP_DIR/tkrzw
 
 HEADERS += \
   $$SRC_DIR/axfi-annotation.h  \
@@ -24,6 +33,14 @@ HEADERS += \
   $$SRC_DIR/axfi-annotation-folder.h  \
   $$SRC_DIR/aim/user-info.h  \
   $$SRC_DIR/aim/imaging-equipment-info.h  \
+  $$SRC_DIR/aim/image-annotation-info.h \
+  $$SRC_DIR/aim/image-annotation-collection-info.h \
+  $$SRC_DIR/al-wrap.h \
+  $$SRC_DIR/dh/dhax-annotation.h \
+  $$SRC_DIR/dh/dhax-annotation-target.h \
+  $$SRC_DIR/dh/dhax-location-2d.h \
+  $$SRC_DIR/dh/dhax-annotation-environment.h \
+  $$SRC_DIR/dh/dhax-annotation-folder.h \
 
 
 
@@ -35,6 +52,15 @@ SOURCES += \
   $$SRC_DIR/axfi-annotation-folder.cpp  \
   $$SRC_DIR/aim/user-info.cpp  \
   $$SRC_DIR/aim/imaging-equipment-info.cpp  \
+  $$SRC_DIR/aim/image-annotation-info.cpp \
+  $$SRC_DIR/aim/image-annotation-collection-info.cpp \
+  $$SRC_DIR/dh/dhax-annotation.cpp \
+  $$SRC_DIR/dh/dhax-annotation-target.cpp \
+  $$SRC_DIR/dh/dhax-location-2d.cpp \
+  $$SRC_DIR/dh/dhax-annotation-environment.cpp \
+  $$SRC_DIR/dh/dhax-annotation-folder.cpp \
+
+
 
 
 
