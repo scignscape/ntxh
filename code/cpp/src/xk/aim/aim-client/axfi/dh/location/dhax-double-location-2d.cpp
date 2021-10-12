@@ -5,21 +5,21 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#include "dhax-location-2d.h"
+#include "dhax-double-location-2d.h"
 
 
-DHAX_Location_2d::DHAX_Location_2d(u4 c1, u4 c2)
+DHAX_Double_Location_2d::DHAX_Double_Location_2d(double c1, double c2)
  :  c1_(c1), c2_(c2)
 {
 
 }
 
-QString DHAX_Location_2d::to_string()
+QString DHAX_Double_Location_2d::to_string()
 {
  return QString("%1;%2").arg(c1_).arg(c2_);
 }
 
-QPoint DHAX_Location_2d::to_qpoint()
+QPoint DHAX_Double_Location_2d::to_qpoint()
 {
  return { (int) c1_, (int) c2_ };
 }

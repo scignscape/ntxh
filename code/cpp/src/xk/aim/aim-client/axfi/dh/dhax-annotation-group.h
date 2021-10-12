@@ -18,7 +18,7 @@
 
 #include "global-types.h"
 
-#include "dhax-location-2d.h"
+#include "location/dhax-location-2d.h"
 
 
 #include <functional>

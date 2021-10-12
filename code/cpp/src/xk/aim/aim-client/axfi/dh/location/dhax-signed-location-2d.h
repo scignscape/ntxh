@@ -5,8 +5,8 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef DHAX_LOCATION_2D__H
-#define DHAX_LOCATION_2D__H
+#ifndef DHAX_SIGNED_LOCATION_2D__H
+#define DHAX_SIGNED_LOCATION_2D__H
 
 #include <QString>
 #include <QPoint>
@@ -25,21 +25,26 @@
 //KANS_(GTagML)
 
 
-class DHAX_Location_2d
+class DHAX_Signed_Location_2d
 {
- u4 c1_;
- u4 c2_;
+ s4 c1_;
+ s4 c2_;
 
 public:
 
- DHAX_Location_2d(u4 c1, u4 c2);
+ DHAX_Signed_Location_2d(s4 c1, s4 c2);
 
- ACCESSORS(u4 ,c1)
- ACCESSORS(u4 ,c2)
+ ACCESSORS(s4 ,c1)
+ ACCESSORS(s4 ,c2)
 
  QString to_string();
 
  QPoint to_qpoint();
+
+ n8 encode8();
+ void decode8(n8 compressed);
+ void check_decode8(n8 compressed);
+
 
  //?static void read_string(QString str, QVector<n8>& locations);
 

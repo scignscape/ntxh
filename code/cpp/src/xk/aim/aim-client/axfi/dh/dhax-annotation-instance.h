@@ -18,7 +18,7 @@
 
 #include "global-types.h"
 
-#include "dhax-location-2d.h"
+#include "location/dhax-location-2d.h"
 
 #include <functional>
 
@@ -42,7 +42,8 @@ public:
 
  DHAX_Annotation_Instance();
 
-// ACCESSORS(QString ,shape_designation)
+ ACCESSORS(QVector<n8> ,locations)
+
 // ACCESSORS__RGET(QStringList ,scoped_identifiers)
 // ACCESSORS(n8 ,opaque_shape_kind_code)
 // ACCESSORS(QString ,comment)
@@ -52,7 +53,7 @@ public:
 
 
  enum class Dimension_Scale {
-   N_A, Integer, Float, Ratio
+   Integer, Float, Ratio, Proper_Fraction
  };
 
  enum class Dimension_Units {
@@ -67,8 +68,19 @@ public:
  ACCESSORS__GSDECLARE(Dimension_Units ,dimension_units)
  ACCESSORS__GSDECLARE(Dimension_Scale ,dimension_scale)
 
+ bool is_signed();
+ void note_signed();
 
- void absorb_shape_point(const QPoint& qp);
+ void default_dimensions();
+
+ void add_shape_point(s4 c1, s4 c2);
+ void add_shape_point(u4 c1, u4 c2);
+ void add_shape_point(double c1, double c2);
+ void add_shape_point(float c1, float c2);
+
+ void add_signed_shape_point(s4 c1, s4 c2);
+
+// void absorb_shape_point(const QPoint& qp);
  QString to_compact_string();
  void locations_to_qpoints(QVector<QPoint>& result);
 

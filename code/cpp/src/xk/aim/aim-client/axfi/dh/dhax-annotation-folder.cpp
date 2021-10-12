@@ -23,11 +23,19 @@ void DHAX_Annotation_Folder::read_path(QString path, QStringList extensions)
 {
  path_ = path;
 
- QDirIterator qdi(path, {"*.xml"});
+ QStringList exts;
+ std::transform(extensions.begin(), extensions.end(), std::back_inserter(exts),
+   [](QString s) {return "*." + s;});
+
+ QDirIterator qdi(path, exts);
 
  while(qdi.hasNext())
  {
   qdi.next();
+  if(qdi.fileInfo().suffix() == "xml")
+    data_files_ << qdi.fileInfo().canonicalFilePath();
+  else
+    image_files_ <<  qdi.fileInfo().canonicalFilePath();
   //aim_files_ << qdi.fileInfo().canonicalFilePath();
  }
 

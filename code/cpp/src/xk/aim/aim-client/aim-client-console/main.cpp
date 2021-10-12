@@ -95,6 +95,12 @@ int main(int argc, char *argv[])
  DHAX_Annotation_Group* dag = dae.add_annotation_group(fp);
 
  DHAX_Annotation_Instance* dai = dag->add_annotation();
+ dai->default_dimensions();
+ dai->add_shape_point(5,5);
+
+ DHAX_Location_2d* loc = (DHAX_Location_2d*) dai->locations().first();
+ n8 enc = loc->encode8();
+ loc->check_decode8(enc);
 }
 
 
