@@ -62,8 +62,9 @@ public:
  bool data_is_empty() { return data_files_.isEmpty(); }
  bool images_is_empty() { return image_files_.isEmpty(); }
 
- void read_path(QString path, QStringList extensions);
-
+ void read_image_path(QString path, QStringList extensions);
+ void read_data_path(QString path, QStringList extensions);
+ void read_path(QString path, QStringList extensions, QStringList& target);
 
  void supply_data(QByteArray& qba);
  void absorb_data(const QByteArray& qba);

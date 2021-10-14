@@ -36,7 +36,15 @@ class DHAX_Annotation_Instance
  DHAX_Annotation_Group* group_;
  QString comment_;
 
- u1 composite_dimension_code_;
+ u2 composite_dimension_code_;
+
+ union {
+  QVector<u4>* int4;
+  QVector<n8>* int8;
+  QVector<float>* fl4;
+  QVector<double>* dbl8;
+  n8 single;
+ } shape_lengths_;
 
 public:
 
@@ -68,15 +76,34 @@ public:
  ACCESSORS__GSDECLARE(Dimension_Units ,dimension_units)
  ACCESSORS__GSDECLARE(Dimension_Scale ,dimension_scale)
 
+ ACCESSORS__GSDECLARE(Byte_Lengths ,shape_lengths_byte_lengths)
+ ACCESSORS__GSDECLARE(Dimension_Units ,shape_lengths_dimension_units)
+ ACCESSORS__GSDECLARE(Dimension_Scale ,shape_lengths_dimension_scale)
+
  bool is_signed();
  void note_signed();
 
  void default_dimensions();
+ void reuse_dimensions_for_shape_lengths();
+
+ bool single_shape_length();
+ void note_single_shape_length();
+
+ void init_shape_lengths();
+ void check_init_shape_lengths();
+ void set_shape_length(n8 len);
+ void set_shape_length(double len);
+ void set_shape_length(float len);
 
  void add_shape_point(s4 c1, s4 c2);
  void add_shape_point(u4 c1, u4 c2);
  void add_shape_point(double c1, double c2);
  void add_shape_point(float c1, float c2);
+
+ void add_shape_length(n8 len);
+ void add_shape_length(double len);
+ void add_shape_length(float len);
+
 
  void add_signed_shape_point(s4 c1, s4 c2);
 

@@ -18,8 +18,20 @@ DHAX_Annotation_Folder::DHAX_Annotation_Folder()
 
 }
 
+void DHAX_Annotation_Folder::read_image_path(QString path,
+  QStringList extensions)
+{
+ read_path(path, extensions, image_files_);
+}
 
-void DHAX_Annotation_Folder::read_path(QString path, QStringList extensions)
+void DHAX_Annotation_Folder::read_data_path(QString path,
+  QStringList extensions)
+{
+ read_path(path, extensions, data_files_);
+}
+
+void DHAX_Annotation_Folder::read_path(QString path,
+  QStringList extensions, QStringList& target)
 {
  path_ = path;
 
@@ -32,13 +44,8 @@ void DHAX_Annotation_Folder::read_path(QString path, QStringList extensions)
  while(qdi.hasNext())
  {
   qdi.next();
-  if(qdi.fileInfo().suffix() == "xml")
-    data_files_ << qdi.fileInfo().canonicalFilePath();
-  else
-    image_files_ <<  qdi.fileInfo().canonicalFilePath();
-  //aim_files_ << qdi.fileInfo().canonicalFilePath();
+  target << qdi.fileInfo().canonicalFilePath();
  }
-
 }
 
 void DHAX_Annotation_Folder::supply_data(QByteArray& qba)

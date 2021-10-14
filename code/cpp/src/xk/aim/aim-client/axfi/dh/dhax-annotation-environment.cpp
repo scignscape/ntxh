@@ -35,7 +35,7 @@ void DHAX_Annotation_Environment::default_extensions()
 DHAX_Annotation_Folder* DHAX_Annotation_Environment::add_data_folder(QString path)
 {
  DHAX_Annotation_Folder* result = new DHAX_Annotation_Folder;
- result->read_path(path, data_file_extensions_);
+ result->read_data_path(path, data_file_extensions_);
  data_folders_[path] = result;
  return result;
 }
@@ -43,7 +43,7 @@ DHAX_Annotation_Folder* DHAX_Annotation_Environment::add_data_folder(QString pat
 DHAX_Annotation_Folder* DHAX_Annotation_Environment::add_image_folder(QString path)
 {
  DHAX_Annotation_Folder* result = new DHAX_Annotation_Folder;
- result->read_path(path, image_file_extensions_);
+ result->read_image_path(path, image_file_extensions_);
  image_folders_[path] = result;
  return result;
 }
