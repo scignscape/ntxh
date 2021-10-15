@@ -21,9 +21,14 @@ CONFIG += c++17
 
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
-include($$ROOT_DIR/../preferred/aim.pri)
+#include($$ROOT_DIR/../preferred/aim.pri)
+#DEFINES += AIM_DATA_FOLDER=\\\"$$AIM_DATA_DIR\\\"
 
-DEFINES += AIM_DATA_FOLDER=\\\"$$AIM_DATA_DIR\\\"
+include($$ROOT_DIR/../preferred/dhax.pri)
+
+DEFINES += DHAX_DATA_FOLDER=\\\"$$DHAX_DATA_DIR\\\"
+DEFINES += DHAX_IMAGE_FOLDER=\\\"$$DHAX_IMAGE_DIR\\\"
+
 
 DEFINES += DEFAULT_DEV_TKRZW_FOLDER=\\\"$$ROOT_DIR/../dev/consoles/dgdb/tkrzw\\\"
 
@@ -52,6 +57,13 @@ HEADERS += \
   $$SRC_DIR/dhax-gui-environment.h \
   $$SRC_DIR/dhax-graphics-frame.h \
   $$SRC_DIR/dhax-main-window-frame.h \
+  $$SRC_DIR/image-viewer/dhax-image-viewer.h \
+  $$SRC_DIR/image-viewer/dhax-image-scene-item.h \
+  $$SRC_DIR/image-viewer/dhax-display-image-data.h \
+  $$SRC_DIR/image-viewer/dhax-drawn-shape.h \
+  $$SRC_DIR/subwindows/range-slider.h \
+  $$SRC_DIR/subwindows/shape-select-frame.h \
+  $$SRC_DIR/subwindows/zoom-and-navigate-frame.h \
 
 
 SOURCES += \
@@ -61,6 +73,16 @@ SOURCES += \
   $$SRC_DIR/dhax-gui-environment.cpp \
   $$SRC_DIR/dhax-graphics-frame.cpp \
   $$SRC_DIR/dhax-main-window-frame.cpp \
+  $$SRC_DIR/image-viewer/dhax-image-viewer.cpp \
+  $$SRC_DIR/image-viewer/dhax-image-scene-item.cpp \
+  $$SRC_DIR/image-viewer/dhax-display-image-data.cpp \
+  $$SRC_DIR/image-viewer/dhax-drawn-shape.cpp \
+  $$SRC_DIR/image-viewer/dhax-image-scene-item.mouse-events.cpp \
+  $$SRC_DIR/subwindows/range-slider.cpp \
+  $$SRC_DIR/subwindows/shape-select-frame.cpp \
+  $$SRC_DIR/subwindows/zoom-and-navigate-frame.cpp \
+
+
 
 #  $$SRC_DIR/dhax-gui.cpp \
 
@@ -75,6 +97,8 @@ LIBS += -L$$TARGETSDIR  -laimlib -ldcmsr -lofstd -loflog -ldcmdata \
    -ldcmimage -ldcmimgle
 
 LIBS += -L$$TARGETSDIR  -laxfi
+
+#LIBS += -L$$TARGETSDIR  -laimlib
 
 LIBS += -lrt
 

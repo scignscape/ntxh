@@ -12,13 +12,23 @@
 class DHAX_Main_Window;
 class DHAX_Graphics_View;
 class DHAX_Main_Window_Frame;
+class DHAX_Graphics_Frame;
+class DHAX_Graphics_Scene;
 
+class DHAX_Annotation_Environment;
+class DHAX_Image_Viewer;
+
+#include <QBoxLayout>
 
 class DHAX_GUI_Environment
 {
  DHAX_Main_Window* main_window_;
  DHAX_Graphics_View* graphics_view_;
  DHAX_Main_Window_Frame* main_window_frame_;
+ DHAX_Graphics_Scene* graphics_scene_;
+ DHAX_Graphics_Frame* graphics_frame_;
+ DHAX_Annotation_Environment* annotation_environment_;
+ DHAX_Image_Viewer* image_viewer_;
 
 public:
 
@@ -26,9 +36,15 @@ public:
 
  void init_main_window();
  void init_graphics_view();
+ void init_image_viewer();
+ void init_graphics_scene();
  void init_graphics_frame();
+ void init_graphics_frame_layout(QBoxLayout::Direction qbd, QBoxLayout::Direction secqbd);
  void init_main_window_frame();
+ void init_main_window_frame_layout(QBoxLayout::Direction qbd);
+ void add_image(QString path);
  void show_main_window();
+ DHAX_Annotation_Environment* init_annotation_environment();
 
 };
 

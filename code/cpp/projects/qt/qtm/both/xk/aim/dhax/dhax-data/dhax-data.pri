@@ -9,8 +9,6 @@ include(../build-group.pri)
 
 QT += xml widgets
 
-TEMPLATE = app
-
 INCLUDEPATH += $$SRC_DIR
 
 INCLUDEPATH += $$SRC_PROSET_DIR/aimlib/aimlib/AIMLib/
@@ -24,6 +22,7 @@ CONFIG += c++17
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
 #include($$ROOT_DIR/../preferred/aim.pri)
+#DEFINES += AIM_DATA_FOLDER=\\\"$$AIM_DATA_DIR\\\"
 
 include($$ROOT_DIR/../preferred/dhax.pri)
 
@@ -50,12 +49,30 @@ INCLUDEPATH += $$SRC_GROUP_DIR/tkrzw
 INCLUDEPATH += $$WHITEDB_SRC_GROUP_DIR
 
 
-
 HEADERS += \
+  $$SRC_DIR/ann/dhax-annotation-target.h \
+  $$SRC_DIR/ann/dhax-annotation-environment.h \
+  $$SRC_DIR/ann/dhax-annotation-folder.h \
+  $$SRC_DIR/ann/dhax-annotation-group.h \
+  $$SRC_DIR/ann/dhax-annotation-instance.h \
+  $$SRC_DIR/ann/location/dhax-location-2d.h \
+  $$SRC_DIR/ann/location/dhax-signed-location-2d.h \
+  $$SRC_DIR/ann/location/dhax-float-location-2d.h \
+  $$SRC_DIR/ann/location/dhax-double-location-2d.h \
+
 
 
 SOURCES += \
-  $$SRC_DIR/main.cpp \
+  $$SRC_DIR/ann/dhax-annotation-target.cpp \
+  $$SRC_DIR/ann/dhax-annotation-environment.cpp \
+  $$SRC_DIR/ann/dhax-annotation-folder.cpp \
+  $$SRC_DIR/ann/dhax-annotation-group.cpp \
+  $$SRC_DIR/ann/dhax-annotation-instance.cpp \
+  $$SRC_DIR/ann/location/dhax-location-2d.cpp \
+  $$SRC_DIR/ann/location/dhax-signed-location-2d.cpp \
+  $$SRC_DIR/ann/location/dhax-float-location-2d.cpp \
+  $$SRC_DIR/ann/location/dhax-double-location-2d.cpp \
+
 
 
 # #  for dcmtk OFString = std::string ...
@@ -63,7 +80,6 @@ DEFINES += HAVE_STD_STRING
 DEFINES += HAVE_STL_STRING
 
 
-LIBS += -L$$TARGETSDIR  -ldhax-gui
 
 LIBS += -L$$TARGETSDIR  -laimlib -ldcmsr -lofstd -loflog -ldcmdata \
    -ldcmimage -ldcmimgle
