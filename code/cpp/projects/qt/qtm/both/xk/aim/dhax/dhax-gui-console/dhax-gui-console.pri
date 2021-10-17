@@ -63,7 +63,7 @@ DEFINES += HAVE_STD_STRING
 DEFINES += HAVE_STL_STRING
 
 
-LIBS += -L$$TARGETSDIR  -ldhax-gui
+LIBS += -L$$TARGETSDIR  -ldhax-gui -ldhax-data
 
 LIBS += -L$$TARGETSDIR  -laimlib -ldcmsr -lofstd -loflog -ldcmdata \
    -ldcmimage -ldcmimgle

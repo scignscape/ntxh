@@ -15,10 +15,46 @@
 #include <QDebug>
 
 DHAX_Annotation_Instance::DHAX_Annotation_Instance()
-  :  shape_lengths_({.int4=nullptr})
+  :  shape_lengths_({.int4=nullptr}), composite_shape_code_(0)
 {
 
 }
+
+
+void DHAX_Annotation_Instance::init_as(QRectF& qrf)
+{
+
+}
+
+u2 DHAX_Annotation_Instance::get_shape_point_count()
+{
+ return locations_.size();
+}
+
+u2 DHAX_Annotation_Instance::get_shape_length_count()
+{
+ if(single_shape_length())
+   return 1;
+
+ if(!shape_lengths_.int4)
+   return 0;
+
+ if(get_shape_lengths_dimension_scale() == Dimension_Scale::Float)
+ {
+  if(get_shape_lengths_byte_lengths() == Byte_Lengths::Eight)
+    return shape_lengths_.dbl8->size();
+  else
+    return shape_lengths_.fl4->size();
+ }
+ else
+ {
+  if(get_shape_lengths_byte_lengths() == Byte_Lengths::Eight)
+    return shape_lengths_.int8->size();
+  else
+    return shape_lengths_.int4->size();
+ }
+}
+
 
 void DHAX_Annotation_Instance::check_init_shape_lengths()
 {
@@ -90,6 +126,58 @@ void DHAX_Annotation_Instance::set_shape_length(n8 len)
   shape_lengths_.single = len4;
  }
 }
+
+DHAX_Annotation_Instance::Colinear
+  DHAX_Annotation_Instance::check_colinear(n8 loc1, n8 loc2)
+{
+ //DHAX_Location_2d* loc = (DHAX_Location_2d*) nn;
+ QPointF p1 = ((DHAX_Location_2d*) loc1)->to_qpoint();
+ QPointF p2 = ((DHAX_Location_2d*) loc2)->to_qpoint();
+ if(p1.x() == p2.x())
+   return Colinear::Horizontal;
+ if(p1.y() == p2.y())
+   return Colinear::Vertical;
+ return  Colinear::Linear_At_Angle;
+}
+
+
+DHAX_Annotation_Instance::Colinear
+  DHAX_Annotation_Instance::check_colinear_vh(n8 loc1,
+  n8 loc2, n8 loc3)
+{
+ Colinear co1 = check_colinear(loc1, loc2);
+ Colinear co2 = check_colinear(loc2, loc3);
+
+ if(co1 == Colinear::Horizontal)
+ {
+  if(co2 == Colinear::Horizontal)
+    return Colinear::Multiple_Horizontal;
+  if(co2 == Colinear::Vertical)
+    return Colinear::Horizontal_Then_Vertical;
+  return Colinear::N_A;
+ }
+
+ if(co2 == Colinear::Vertical)
+ {
+  if(co2 == Colinear::Horizontal)
+    return Colinear::Horizontal_Then_Vertical;
+  if(co2 == Colinear::Vertical)
+    return Colinear::Multiple_Vertical;
+  return Colinear::N_A;
+ }
+
+ return Colinear::TBD;
+
+// //DHAX_Location_2d* loc = (DHAX_Location_2d*) nn;
+// QPointF p1 = ((DHAX_Location_2d*) loc1)->to_qpoint();
+// QPointF p2 = ((DHAX_Location_2d*) loc2)->to_qpoint();
+// if(p1.x() == p2.x())
+//   return Colinear::Horizontal;
+// if(p1.y() == p2.y())
+//   return Colinear::Vertical;
+// return  Colinear::Linear_At_Angle;
+}
+
 
 
 void DHAX_Annotation_Instance::locations_to_qpoints(QVector<QPoint>& result)

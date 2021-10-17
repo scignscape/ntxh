@@ -38,13 +38,19 @@ int main(int argc, char *argv[])
    return 0;
 
  QString fp = daf->image_files().first();
- dge.add_image(fp);
+ dge.show_image(fp);
 
  DHAX_Annotation_Group* dag = dae.add_annotation_group(fp);
 
  DHAX_Annotation_Instance* dai = dag->add_annotation();
  dai->default_dimensions();
+ dai->init_polygon();
+
  dai->add_shape_point(5,5);
+ dai->add_shape_point(25,35);
+ //?dai->add_shape_point(15,45);
+
+ dge.show_annotation_on_current_image(dai);
 
 // DHAX_Location_2d* loc = (DHAX_Location_2d*) dai->locations().first();
 // n8 enc = loc->encode8();

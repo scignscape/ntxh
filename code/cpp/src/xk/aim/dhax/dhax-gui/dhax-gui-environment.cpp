@@ -14,6 +14,7 @@
 #include "dhax-graphics-scene.h"
 
 #include "dhax-data/ann/dhax-annotation-environment.h"
+#include "dhax-data/ann/dhax-annotation-instance.h"
 
 #include "dhax-gui/image-viewer/dhax-image-viewer.h"
 
@@ -79,7 +80,19 @@ void DHAX_GUI_Environment::init_main_window_frame_layout(QBoxLayout::Direction q
  main_window_frame_->setLayout(qbl);
 }
 
-void DHAX_GUI_Environment::add_image(QString path)
+
+void DHAX_GUI_Environment::show_annotation_on_current_image(
+  DHAX_Annotation_Instance* dai)
+{
+ if(dai->fits<QGraphicsRectItem>())
+ {
+  QRectF qrf;
+  dai->init_as(qrf);
+  QGraphicsRectItem* qgri = graphics_scene_->addRect(qrf);
+ }
+}
+
+void DHAX_GUI_Environment::show_image(QString path)
 {
  image_viewer_->load_image(path);
 // QPixmap qpm(path);

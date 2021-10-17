@@ -38,6 +38,8 @@ class DHAX_Annotation_Instance
 
  u2 composite_dimension_code_;
 
+ u1 composite_shape_code_;
+
  union {
   QVector<u4>* int4;
   QVector<n8>* int8;

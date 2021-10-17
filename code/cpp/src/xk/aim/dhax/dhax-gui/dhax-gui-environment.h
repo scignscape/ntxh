@@ -17,6 +17,7 @@ class DHAX_Graphics_Scene;
 
 class DHAX_Annotation_Environment;
 class DHAX_Image_Viewer;
+class DHAX_Annotation_Instance;
 
 #include <QBoxLayout>
 
@@ -42,10 +43,10 @@ public:
  void init_graphics_frame_layout(QBoxLayout::Direction qbd, QBoxLayout::Direction secqbd);
  void init_main_window_frame();
  void init_main_window_frame_layout(QBoxLayout::Direction qbd);
- void add_image(QString path);
+ void show_image(QString path);
  void show_main_window();
  DHAX_Annotation_Environment* init_annotation_environment();
-
+ void show_annotation_on_current_image(DHAX_Annotation_Instance* dai);
 };
 
 
