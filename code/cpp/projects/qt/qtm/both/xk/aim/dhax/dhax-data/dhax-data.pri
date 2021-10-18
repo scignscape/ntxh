@@ -68,6 +68,7 @@ SOURCES += \
   $$SRC_DIR/ann/dhax-annotation-folder.cpp \
   $$SRC_DIR/ann/dhax-annotation-group.cpp \
   $$SRC_DIR/ann/dhax-annotation-instance.cpp \
+  $$SRC_DIR/ann/dhax-annotation-instance.ic-rect.cpp \
   $$SRC_DIR/ann/location/dhax-location-2d.cpp \
   $$SRC_DIR/ann/location/dhax-signed-location-2d.cpp \
   $$SRC_DIR/ann/location/dhax-float-location-2d.cpp \

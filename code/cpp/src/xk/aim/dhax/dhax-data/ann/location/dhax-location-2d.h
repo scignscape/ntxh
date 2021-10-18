@@ -40,6 +40,7 @@ public:
  QString to_string();
 
  QPoint to_qpoint();
+ QPointF to_qpointf();
 
  n8 encode8();
  void decode8(n8 compressed);

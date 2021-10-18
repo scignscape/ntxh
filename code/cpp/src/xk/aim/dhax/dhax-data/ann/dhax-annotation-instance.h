@@ -43,8 +43,11 @@ class DHAX_Annotation_Instance
 
  u1 internal_codes_;
 
+ static constexpr u1 internal_code_checked_qrect = 128;
+
  enum class _Internal_Codes { //_init_as_qrectf_internal_codes {
    N_A,
+   Error,
    Declared_As_Rectangle_two_corners,
    Declared_As_Rectangle_hside_and_length,
    Declared_As_Rectangle_vside_and_length,
@@ -66,7 +69,7 @@ class DHAX_Annotation_Instance
    Declared_As_Rectangle_flat_vertical_center,
    Declared_As_Rectangle_flat_horizontal,
    Declared_As_Rectangle_flat_horizontal_center,
-  Declared_As_Rectangle_TBD,
+   Declared_As_Rectangle_TBD,
  };
 
  union {
@@ -110,6 +113,12 @@ public:
   // //
   composite_shape_code_ = 1;
  }
+
+// void init_rectangle()
+// {
+//  init_polygon(1);
+// }
+
 
  void init_polygon(u1 sides)
  {
@@ -227,6 +236,16 @@ public:
  void default_dimensions();
  void reuse_dimensions_for_shape_lengths();
 
+// QPair<QPoint, QPoint> to_tlbr_points(const QVector<QPoint>& vec);
+// QPair<QPointF, QPointF> to_tlbr_points(const QVector<QPointF>& vec);
+ static void to_tlbr_points(QVector<QPoint>& vec);
+ static void to_tlbr_points(QVector<QPointF>& vec);
+
+ bool float_dimensions()
+ {
+  return get_dimension_scale() == Dimension_Scale::Float;
+ }
+
  bool single_shape_length();
  void note_single_shape_length();
 
@@ -254,6 +273,7 @@ public:
 // void absorb_shape_point(const QPoint& qp);
  QString to_compact_string();
  void locations_to_qpoints(QVector<QPoint>& result);
+ void locations_to_qpoints(QVector<QPointF>& result);
 
  template<typename T>
  inline bool fits()
@@ -262,6 +282,7 @@ public:
  }
 
  void init_as(QRectF& qrf);
+ void init_as(QRect& qr);
 };
 
 template<>
@@ -269,6 +290,7 @@ inline bool DHAX_Annotation_Instance::fits<QGraphicsRectItem>()
 {
  if(open_shape_flag())
    return false;
+ internal_codes_ = internal_code_checked_qrect;
  if(composite_shape_code_ & 1) // polygon flag
  {
   u2 point_count = get_shape_point_count();
@@ -289,7 +311,7 @@ inline bool DHAX_Annotation_Instance::fits<QGraphicsRectItem>()
     {
      // //  always considered to define QRectF (even if on same
       //    vertical or horizontal line)
-     internal_codes_ = (u1) _Internal_Codes::Declared_As_Rectangle_two_corners;
+     internal_codes_ |= (u1) _Internal_Codes::Declared_As_Rectangle_two_corners;
      return true;
     }
     else //  first length is width or height
@@ -298,17 +320,17 @@ inline bool DHAX_Annotation_Instance::fits<QGraphicsRectItem>()
      switch (co)
      {
      case Colinear::Horizontal:
-      internal_codes_ = center_flag()?
+      internal_codes_ |= center_flag()?
          (u1) _Internal_Codes::Declared_As_Rectangle_hside_and_length_center :
          (u1) _Internal_Codes::Declared_As_Rectangle_hside_and_length;
       return true;
      case Colinear::Vertical:
-      internal_codes_ = center_flag()?
+      internal_codes_ |= center_flag()?
         (u1) _Internal_Codes::Declared_As_Rectangle_vside_and_length_center :
         (u1) _Internal_Codes::Declared_As_Rectangle_vside_and_length;
       return true;
      case Colinear::Linear_At_Angle:
-      internal_codes_ = center_flag()?
+      internal_codes_ |= center_flag()?
         (u1) _Internal_Codes::Declared_As_Rectangle_side_and_length_center :
         (u1) _Internal_Codes::Declared_As_Rectangle_side_and_length;
       return false;
@@ -320,21 +342,21 @@ inline bool DHAX_Annotation_Instance::fits<QGraphicsRectItem>()
    {
     if(length_count == 0) //  unit square horiztonal/vertical aligned
     {
-     internal_codes_ = center_flag()?
+     internal_codes_ |= center_flag()?
         (u1) _Internal_Codes::Declared_As_Rectangle_unit_square_at_center :
         (u1) _Internal_Codes::Declared_As_Rectangle_unit_square_at_corner;
      return true;
     }
     else if(length_count == 1)
     {
-     internal_codes_ = center_flag()?
+     internal_codes_ |= center_flag()?
        (u1) _Internal_Codes::Declared_As_Rectangle_unit_square_at_center :
        (u1) _Internal_Codes::Declared_As_Rectangle_unit_square_at_corner;
      return true;
     }
     else
     {
-     internal_codes_ = center_flag()?
+     internal_codes_ |= center_flag()?
        (u1) _Internal_Codes::Declared_As_Rectangle_center_and_two_lengths :
        (u1) _Internal_Codes::Declared_As_Rectangle_corner_and_two_lengths;
      return true;
@@ -345,39 +367,39 @@ inline bool DHAX_Annotation_Instance::fits<QGraphicsRectItem>()
     Colinear co = check_colinear_vh(locations_[0], locations_[1], locations_[2]);
     if(co == Colinear::Horizontal_Then_Vertical)
     {
-     internal_codes_ = center_flag()?
+     internal_codes_ |= center_flag()?
        (u1) _Internal_Codes::Declared_As_Rectangle_horizontal_then_vertical_center :
        (u1) _Internal_Codes::Declared_As_Rectangle_horizontal_then_vertical;
      return true;
     }
     if(co == Colinear::Vertical_Then_Horizontal)
     {
-     internal_codes_ = center_flag()?
+     internal_codes_ |= center_flag()?
        (u1) _Internal_Codes::Declared_As_Rectangle_vertical_then_horizontal_center :
        (u1) _Internal_Codes::Declared_As_Rectangle_vertical_then_horizontal;
      return true;
     }
     if(co == Colinear::Multiple_Horizontal)
     {
-     internal_codes_ = center_flag()?
+     internal_codes_ |= center_flag()?
        (u1) _Internal_Codes::Declared_As_Rectangle_flat_horizontal_center :
        (u1) _Internal_Codes::Declared_As_Rectangle_flat_horizontal;
      return true;
     }
     if(co == Colinear::Multiple_Vertical)
     {
-     internal_codes_ = center_flag()?
+     internal_codes_ |= center_flag()?
        (u1) _Internal_Codes::Declared_As_Rectangle_flat_vertical_center :
        (u1) _Internal_Codes::Declared_As_Rectangle_flat_vertical;
      return true;
     }
     if(co == Colinear::TBD)
     {
-     internal_codes_ = (u1) _Internal_Codes::Declared_As_Rectangle_TBD;
+     internal_codes_ |= (u1) _Internal_Codes::Declared_As_Rectangle_TBD;
      return false;
     }
     // //  will we ever get here?
-    internal_codes_ = 0;
+    internal_codes_ |= (u1) _Internal_Codes::Error;
     return false;
    }
   }

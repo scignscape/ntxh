@@ -44,7 +44,10 @@ int main(int argc, char *argv[])
 
  DHAX_Annotation_Instance* dai = dag->add_annotation();
  dai->default_dimensions();
- dai->init_polygon();
+
+// dai->init_polygon();
+
+ dai->init_rectangle();
 
  dai->add_shape_point(5,5);
  dai->add_shape_point(25,35);

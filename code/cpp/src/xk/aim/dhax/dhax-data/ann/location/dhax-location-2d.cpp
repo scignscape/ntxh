@@ -26,6 +26,11 @@ QPoint DHAX_Location_2d::to_qpoint()
  return { (int) c1_, (int) c2_ };
 }
 
+QPointF DHAX_Location_2d::to_qpointf()
+{
+ return { (float) c1_, (float) c2_ };
+}
+
 n8 DHAX_Location_2d::encode8()
 {
  return ( (n8) c1_ << 32) | c2_;

@@ -20,12 +20,6 @@ DHAX_Annotation_Instance::DHAX_Annotation_Instance()
 
 }
 
-
-void DHAX_Annotation_Instance::init_as(QRectF& qrf)
-{
-
-}
-
 u2 DHAX_Annotation_Instance::get_shape_point_count()
 {
  return locations_.size();
@@ -186,6 +180,42 @@ void DHAX_Annotation_Instance::locations_to_qpoints(QVector<QPoint>& result)
  {
   DHAX_Location_2d* loc = (DHAX_Location_2d*) nn;
   QPoint qp = loc->to_qpoint();
+  result.push_back(qp);
+ }
+}
+
+template <typename T>
+void _to_tlbr_points(QVector<T>& vec)
+{
+ vec.resize(2);
+ T p1 = vec[0];
+ T p2 = vec[1];
+ vec[0] = T(qMin(p1.x(), p2.x()), qMin(p1.y(), p2.y()));
+ vec[1] = T(qMax(p1.x(), p2.x()), qMax(p1.y(), p2.y()));
+}
+
+
+void DHAX_Annotation_Instance::to_tlbr_points(QVector<QPoint>& vec)
+{
+ _to_tlbr_points(vec);
+// vec.resize(2);
+// QPoint p1 = vec[0];
+// QPoint p2 = vec[1];
+// vec[0] = QPoint(qMin(p1.x(), p2.x()), qMin(p1.y(), p2.y()));
+// vec[1] = QPoint(qMax(p1.x(), p2.x()), qMax(p1.y(), p2.y()));
+}
+
+void DHAX_Annotation_Instance::to_tlbr_points(QVector<QPointF>& vec)
+{
+ _to_tlbr_points(vec);
+}
+
+void DHAX_Annotation_Instance::locations_to_qpoints(QVector<QPointF>& result)
+{
+ for(n8 nn : locations_)
+ {
+  DHAX_Location_2d* loc = (DHAX_Location_2d*) nn;
+  QPointF qp = loc->to_qpointf();
   result.push_back(qp);
  }
 }

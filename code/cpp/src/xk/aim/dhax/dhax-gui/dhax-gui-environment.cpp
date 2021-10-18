@@ -84,11 +84,21 @@ void DHAX_GUI_Environment::init_main_window_frame_layout(QBoxLayout::Direction q
 void DHAX_GUI_Environment::show_annotation_on_current_image(
   DHAX_Annotation_Instance* dai)
 {
+ bool fl = dai->float_dimensions();
  if(dai->fits<QGraphicsRectItem>())
  {
-  QRectF qrf;
-  dai->init_as(qrf);
-  QGraphicsRectItem* qgri = graphics_scene_->addRect(qrf);
+  if(fl)
+  {
+   QRectF qrf;
+   dai->init_as(qrf);
+   QGraphicsRectItem* qgri = graphics_scene_->addRect(qrf);
+  }
+  else
+  {
+   QRect qr;
+   dai->init_as(qr);
+   QGraphicsRectItem* qgri = graphics_scene_->addRect(qr);
+  }
  }
 }
 
