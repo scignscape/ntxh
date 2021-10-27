@@ -2,7 +2,7 @@
 
 #include "display-drawn-shape.h"
 
-#include "iat-model/axfi/axfi-annotation.h"
+#include "iat-model/iat-axfi/axfi-annotation.h"
 
 
 Display_Drawn_Shape::Display_Drawn_Shape(Shape_Kinds Shape_Kinds)

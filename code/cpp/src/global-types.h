@@ -25,6 +25,13 @@
  } \
 
 
+#define ENUM_PLUS_MACRO(e) \
+ friend u1 operator +(e lhs) \
+ { \
+  return (u1) lhs; \
+ } \
+
+
 
 inline char* q_to_std(const QString& qs)
 {

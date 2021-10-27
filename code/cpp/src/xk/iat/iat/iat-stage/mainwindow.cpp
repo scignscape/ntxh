@@ -50,7 +50,7 @@ USING_KANS(TextIO);
 
 #include "rpdf/webgl-view-dialog.h"
 
-#include "iat-model/axfi/axfi-annotation.h"
+#include "iat-model/iat-axfi/axfi-annotation.h"
 
 #include "zoom-and-navigate-frame.h"
 
@@ -241,7 +241,7 @@ Special_Input_Dialog::Special_Input_Dialog(int* autogen_index,
 
 using namespace std;
 
-#include "iat-model/axfi/axfi-annotation-group.h"
+#include "iat-model/iat-axfi/axfi-annotation-group.h"
 
 void MainWindow::check_init_axfi_annotation_group()
 {
@@ -303,6 +303,8 @@ MainWindow::MainWindow(QWidget *parent) :
  udp_outgoing_socket_ = nullptr;
  import_info_message_box_ = nullptr;
 
+ forge_session_ = nullptr;
+
  meshlab_import_count_ = new u4;
  *meshlab_import_count_ = 0;
 
@@ -342,6 +344,7 @@ MainWindow::MainWindow(QWidget *parent) :
  action_view_3d = new QAction("View 3d (MeshLab)", this);
  action_view_cad = new QAction("View CAD/3d (FreeCAD)", this);
 
+ action_forge = new QAction("Run Forge API Workflow", this);
 
  actionQuit = new QAction("Quit", this);
  actionInstructions = new QAction("Instructions", this);
@@ -356,6 +359,9 @@ MainWindow::MainWindow(QWidget *parent) :
  file_menu_->addAction(action_view_3d);
  file_menu_->addAction(action_view_360);
  file_menu_->addAction(action_view_cad);
+
+ file_menu_->addSeparator();
+ file_menu_->addAction(action_forge);
 
 
  file_menu_->addSeparator();
@@ -405,6 +411,23 @@ MainWindow::MainWindow(QWidget *parent) :
  connect(action_view_contours, SIGNAL(triggered()), this, SLOT(on_action_view_contours_triggered()));
  connect(action_view_3d, SIGNAL(triggered()), this, SLOT(on_action_view_3d_triggered()));
  connect(action_view_cad, SIGNAL(triggered()), this, SLOT(on_action_view_cad_triggered()));
+
+ connect(action_forge, SIGNAL(triggered()), this, SLOT(on_action_forge_triggered()));
+
+ connect(this, &MainWindow::forge_workflow_completed, [this](int result)
+ {
+  QString message;
+  if(result)
+  {
+   message = "Workflow completed but a problem was reported.";
+  }
+  else
+  {
+   message = "Workflow completed successfully.";
+  }
+
+  QMessageBox::information(this, "Workflow Completed", message);
+ });
 
  autogen_index_ = 0;
  axfi_annotation_group_ = nullptr;
@@ -746,6 +769,26 @@ void MainWindow::on_actionAnnotate_Multiple_Image_triggered()
   }
   else doBackUp(); //in caso di interruzioni
  }
+}
+
+#include "iat/iat-forge/forge-session.h"
+#include "iat/iat-forge/forge-api-workflow.h"
+#include "iat/iat-forge/forge-runtime.h"
+
+void MainWindow::on_action_forge_triggered()
+{
+ forge_session_ = new Forge_Session;
+ QPair<Forge_Runtime*, Forge_API_Workflow*> pr = init_forge(*forge_session_);
+
+ QString path = QFileDialog::getOpenFileName(nullptr, "Select Workflow",
+   forge_session_->default_upload_folder());
+ pr.second->parse_calls_from_file(path);
+
+ int& result = pr.second->run_calls([this]()
+ {
+  Q_EMIT forge_workflow_completed(0);
+  return 0;
+ });
 }
 
 void MainWindow::on_action_view_cad_triggered()

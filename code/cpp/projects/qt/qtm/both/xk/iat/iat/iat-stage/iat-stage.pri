@@ -146,7 +146,12 @@ SOURCES += \
 
 
 
-LIBS += -L$$TARGETSDIR -laxfi
+#LIBS += -L$$TARGETSDIR -laxfi  -laimlib
+
+LIBS += -L$$TARGETSDIR -liat-axfi
+
+LIBS += -L$$TARGETSDIR -liat-forge
+
 
 LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
   -lchasm-lib-33 -lchasm-lib-43

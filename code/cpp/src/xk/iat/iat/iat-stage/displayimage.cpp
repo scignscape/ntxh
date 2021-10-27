@@ -22,7 +22,7 @@
 //Cambiare colore alla shape selezionata
 //Per quanto riguarda l'eliminazione di una shape, la sua gestione ¨ lasciata alla classe parent.
 
-#include "iat-model/axfi/axfi-annotation.h"
+#include "iat-model/iat-axfi/axfi-annotation.h"
 
 
 void DisplayImage::reset_scale(r8 factor)

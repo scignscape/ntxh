@@ -27,6 +27,8 @@ class WebGL_View_Dialog;
 class QUdpSocket;
 class QMessageBox;
 
+class Forge_Session;
+
 
 class MainWindow : public QMainWindow
 {
@@ -60,10 +62,13 @@ private:
 
  QVector<r8> freecad_position_data_;
 
+ Forge_Session* forge_session_;
+
  QAction* action_view_360;
 
  QAction* action_view_3d;
  QAction* action_view_cad;
+ QAction* action_forge;
 
  QAction* actionAnnotate_Single_Image;
  QAction* action_load_annotations;
@@ -196,6 +201,10 @@ public:
  void init_display_scene_item(DisplayImage_Scene_Item* si);
 
 
+Q_SIGNALS:
+
+ void forge_workflow_completed(int result);
+
 private Q_SLOTS:
 
  void on_actionOptions_triggered(); //metodo legato al comando Options
@@ -210,6 +219,7 @@ private Q_SLOTS:
  void on_action_view_3d_triggered();
  void on_action_view_cad_triggered();
 
+ void on_action_forge_triggered();
 
  void on_actionCreate_List_triggered(); //metodo legato al comando Create List (WIP)
  void on_actionInstructions_triggered(); //metodo legato al comando Instructions
