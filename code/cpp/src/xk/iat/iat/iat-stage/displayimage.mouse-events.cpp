@@ -168,6 +168,14 @@ void DisplayImage_Scene_Item::handle_mouse_event<
  QMenu* menu = new QMenu(nullptr);
  menu->setAttribute(Qt::WA_DeleteOnClose);
 
+ if(data_->active_curve())
+ {
+  menu->addAction("Draw Bezier", [this]
+  {
+   Q_EMIT draw_bezier_requested();
+  });
+ }
+
  if(meshlab_import_count_ && *meshlab_import_count_)
  {
   menu->addAction("MeshLab Import Info", [this]
@@ -245,12 +253,15 @@ void DisplayImage_Scene_Item::handle_mouse_event<
    Q_EMIT save_notation_requested(true);
   });
 
+  menu->addAction("Convert to Bezier/Spline Curve", [this]
+  {
+   Q_EMIT convert_notation_requested();
+  });
+
 
   menu->addAction("Cancel Notation", [this]
   {
-   data_->check_clear_last_canceled_drawn_shapes();
-   data_->cancel_current_drawn_shape();
-
+   cancel_notation();
    update();
   });
  }

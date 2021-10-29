@@ -20,7 +20,7 @@
 //Lo spostamento di una shape
 //Lo spostamento di un punto appartenente ad una shape
 //Cambiare colore alla shape selezionata
-//Per quanto riguarda l'eliminazione di una shape, la sua gestione ¨ lasciata alla classe parent.
+//Per quanto riguarda l'eliminazione di una shape, la sua gestione lasciata alla classe parent.
 
 #include "iat-model/iat-axfi/axfi-annotation.h"
 
@@ -71,6 +71,32 @@ void DisplayImage::recenter_scroll_top_left()
  scrolled_image_view_->centerOn(pos);
 }
 
+void DisplayImage_Scene_Item::cancel_notation()
+{
+ data_->check_clear_last_canceled_drawn_shapes();
+ data_->cancel_current_drawn_shape();
+}
+
+void DisplayImage::draw_circle(const QPointF& center,
+  r8 radius, QColor clr, u1 index)
+{
+ QBrush qbr(clr);
+ QGraphicsEllipseItem* el = scrolled_image_scene_->addEllipse(center.x() - radius,
+   center.y() - radius, radius * 2, radius * 2, QPen(), qbr);
+ el->setParentItem(scrolled_image_pixmap_item_);
+ el->setFlags(QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemIsMovable);
+
+ qDebug() << "EL tl = " << el->rect().topLeft();
+
+ if(index)
+  controls_[index] = {el, radius};
+}
+
+void DisplayImage::cancel_notation()
+{
+ image_scene_item_->cancel_notation();
+ image_scene_item_->update();
+}
 
 void DisplayImage::load_image(QString file_path)
 {
@@ -235,6 +261,7 @@ void DisplayImage_Data::reset_drawn_shapes()
 DisplayImage_Data::DisplayImage_Data()
 {
  current_drawn_shape_ = nullptr;
+ active_curve_ = nullptr;
 
  multi_draw = false;
 
@@ -367,8 +394,6 @@ void DisplayImage_Data::setShapeSelected(QString in_shapeID)
 //assegna l'elenco delle shape disegnate sull'immagine, invocato da MainWindow
 void DisplayImage_Data::setEdits(QList<shape> inputEdits)
 {
- //la natura di inputEdist pu² essere diversa
- //l'invocazione, per², viene fatta per permettere alla classe di lavorare sulla copia originale dei dati
  if(!inputEdits.isEmpty())
    allEdits_ = inputEdits;
  else
@@ -394,8 +419,6 @@ void DisplayImage_Data::resizeEdits(int resize)
 //rimuove tutti i dati temporanei e quelli relativi all'immagine su cui si stava lavorando, annotazioni comprese. Invocato da MainWindow
 void DisplayImage_Data::clear_image()
 {
- //fa quello che farebbe reset, ma in pi¹ cancella tutte le annotazioni
- //invocato esplicitamente anche per cancellare tutte le annotazioni
  if(!allEdits_.isEmpty())
    allEdits_.clear();
  reset();

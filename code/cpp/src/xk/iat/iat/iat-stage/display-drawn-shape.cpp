@@ -64,6 +64,16 @@ void Display_Drawn_Shape::init_from_axfi_annotation(AXFI_Annotation& axa, r8 res
 
 }
 
+
+Display_Drawn_Shape* Display_Drawn_Shape::to_curve()
+{
+ Display_Drawn_Shape* result = new Display_Drawn_Shape;
+ result->points_ = points_;
+ result->set_shape_kind(Shape_Kinds::Curve);
+ return result;
+}
+
+
 AXFI_Annotation* Display_Drawn_Shape::to_axfi_annotation(r8 resize_factor)
 {
  AXFI_Annotation* result = new AXFI_Annotation;

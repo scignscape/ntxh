@@ -118,6 +118,8 @@ HEADERS += \
   $$SRC_DIR/rpdf/signal-generator.h \
   $$SRC_DIR/bim-select-dialog.h \
   $$SCIGNSTAGE_SRC_GROUP_DIR/ScignStage-ling/subwindows/scignstage-clickable-label.h  \
+  $$SRC_DIR/libspline/aaCurve.h \
+  $$SRC_DIR/libspline/spline.h \
 
 
 
@@ -143,6 +145,10 @@ SOURCES += \
   $$SRC_DIR/rpdf/signal-generator.cpp \
   $$SRC_DIR/bim-select-dialog.cpp \
   $$SCIGNSTAGE_SRC_GROUP_DIR/ScignStage-ling/subwindows/scignstage-clickable-label.cpp  \
+  $$SRC_DIR/libspline/aaCurve.cpp \
+  $$SRC_DIR/libspline/spline.cpp \
+
+
 
 
 

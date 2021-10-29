@@ -67,7 +67,10 @@ class DisplayImage : public QWidget
 
   MainWindow* main_window_;
 
+  QMap<u1, QPair<QGraphicsEllipseItem*, r8>> controls_;
+
   void recenter_image();
+
 
 public:
 
@@ -77,8 +80,23 @@ public:
  ACCESSORS__GET(DisplayImage_Data* ,display_image_data)
  ACCESSORS(MainWindow* ,main_window)
 
+ ACCESSORS(MACRO_PASTE(QMap<u1, QPair<QGraphicsEllipseItem*, r8>>) ,controls)
+
+ QPointF control_center(u1 index)
+ {
+  qDebug() << "EL tl = " << controls_[index].first->pos();//.topLeft();
+
+  QGraphicsEllipseItem* el = controls_[index].first;
+
+  return {el->rect().topLeft().x() + el->pos().x() + controls_[index].second,
+     el->rect().topLeft().y() + el->pos().y() + controls_[index].second};
+ }
+
  void recenter_scroll_center();
  void recenter_scroll_top_left();
+
+ void draw_circle(const QPointF& center, r8 radius, QColor clr, u1 index);
+ void cancel_notation();
 
  explicit DisplayImage(QWidget *parent = nullptr); //costruttore
 
@@ -129,6 +147,8 @@ class DisplayImage_Data
  QString shapeID_; //l'id della shape che l'utente ha selezionato in quel momento
 
  QVector<QPair<QPoint, QPoint>> point_pairs_;
+
+ Display_Drawn_Shape* active_curve_;
 
 public:
 
@@ -192,6 +212,7 @@ private:
 public:
 
  ACCESSORS(Display_Drawn_Shape* ,current_drawn_shape)
+ ACCESSORS(Display_Drawn_Shape* ,active_curve)
 
  ACCESSORS__RGET(QStack<Display_Drawn_Shape*> ,held_drawn_shapes)
  ACCESSORS__RGET(QList<Display_Drawn_Shape*> ,last_canceled_drawn_shapes)
@@ -315,6 +336,7 @@ private:
 
  QVector<QPair<AXFI_Annotation*, r8>> saved_axfi_annotations_;
 
+
 // QGraphics
 
  enum class Mouse_Event_Modes { N_A, Left_Edit, Left_Move,
@@ -344,6 +366,7 @@ private:
 
  void paintEvent_draw_vertex_handles(const QVector<const QPoint*>& points, QPainter& painter);
 
+
 public:
 
  enum shapes{ square, ellipse, polygon }; //le tre forme che può avere una shape, enumerate per evitare confusione
@@ -359,11 +382,14 @@ public:
  ACCESSORS(u4* ,meshlab_import_count)
  ACCESSORS(u4* ,freecad_import_count)
 
+
 public:
 
  explicit DisplayImage_Scene_Item(QWidget *parent = 0);
 
  void reset_background_to_original_position();
+
+ void cancel_notation();
 
  void add_axfi_annotation(AXFI_Annotation* axa, r8 resize_factor)
  {
@@ -378,6 +404,9 @@ Q_SIGNALS:
  void setTuple(QString); //signals per la classe MainWindow. Speidisce l'id della shape selezionata dall'utente in caso di modifica/spostamento o aggiunta
 
  void save_notation_requested(bool);
+
+ void convert_notation_requested();
+
  void polygon_complete_and_save_notation_requested();
  void polygon_save_notation_requested();
  void complete_polygon_requested();
@@ -385,6 +414,8 @@ Q_SIGNALS:
  void meshlab_reset_requested();
  void freecad_import_info_requested();
  void freecad_reset_requested();
+
+ void draw_bezier_requested();
 
 protected:
  void paintEvent(QPaintEvent *); //metodo per la stampa su schermo di tutte le annotazioni e le varie operazioni effettuate dall'utente

@@ -20,7 +20,7 @@ public:
 
  enum class Shape_Kinds
  {
-  N_A, Rectangle, Ellipse, Polygon, Polyline
+  N_A, Rectangle, Ellipse, Polygon, Polyline, Curve
  };
 
 private:
@@ -32,6 +32,13 @@ public:
  Display_Drawn_Shape(Shape_Kinds Shape_Kinds = Shape_Kinds::N_A);
 
  void init_from_axfi_annotation(AXFI_Annotation& axa, r8 resize_factor);
+
+ Display_Drawn_Shape* to_curve();
+
+ void add_point(const QPointF& p)
+ {
+  points_.push_back(p.toPoint());
+ }
 
  void reset();
  void reset_all();

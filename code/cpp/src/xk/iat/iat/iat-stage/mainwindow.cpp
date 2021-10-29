@@ -265,6 +265,9 @@ void MainWindow::init_display_scene_item(DisplayImage_Scene_Item* si)
 
  connect(display_scene_item_,SIGNAL(save_notation_requested(bool)), this, SLOT(handle_save_notation_requested(bool)));
 
+ connect(display_scene_item_,SIGNAL(convert_notation_requested()),
+   this, SLOT(handle_convert_notation_requested()));
+
  connect(display_scene_item_,SIGNAL(polygon_save_notation_requested()), this, SLOT(handle_polygon_save_notation_requested()));
  connect(display_scene_item_,SIGNAL(polygon_complete_and_save_notation_requested()), this,
    SLOT(handle_polygon_complete_and_save_notation_requested()));
@@ -274,6 +277,9 @@ void MainWindow::init_display_scene_item(DisplayImage_Scene_Item* si)
 
  connect(display_scene_item_, SIGNAL(meshlab_import_info_requested()), this,
    SLOT(show_meshlab_import_info()));
+
+ connect(display_scene_item_, SIGNAL(draw_bezier_requested()), this,
+   SLOT(handle_draw_bezier_requested()));
 
  connect(display_scene_item_, SIGNAL(meshlab_reset_requested()), this,
    SLOT(send_meshlab_reset()));
@@ -697,6 +703,86 @@ void MainWindow::load_image(QString file_path)
   }
   else doBackUp(); //in caso di interruzione viene cancellato tutte ed eseguito il ripristino dei dati
  }
+
+}
+
+#include "libspline/aaCurve.h"
+#include "libspline/spline.h"
+
+void MainWindow::handle_draw_bezier_requested()
+{
+ qDebug() << "draw_bezier_";
+
+ Display_Drawn_Shape* cdds = display_image_data_->active_curve();
+
+ QPoint _p1 = cdds->points()[0];
+ QPoint _p2 = cdds->points()[1];
+ QPoint _mid = cdds->points()[2];
+
+ QPoint p1 = display_image_->control_center(1).toPoint();
+ QPoint mid = display_image_->control_center(2).toPoint();
+ QPoint p2 = display_image_->control_center(3).toPoint();
+
+ qDebug() << "_p1 = " << _p1;
+ qDebug() << "_p2 = " << _p2;
+ qDebug() << "_mid = " << _mid;
+
+ qDebug() << "p1 = " << p1;
+ qDebug() << "p2 = " << p2;
+ qDebug() << "mid = " << mid;
+
+ std::vector<aaAaa::aaSpline> splines;
+
+ aaAaa::aaSpline spline;
+ spline.addKnots(aaAaa::aaPoint(p1.x(), p1.y()));
+ spline.addKnots(aaAaa::aaPoint(mid.x(), mid.y()));
+ spline.addKnots(aaAaa::aaPoint(p2.x(), p2.y()));
+
+ aaAaa::aaCurvePtr pspline = aaAaa::aaCurveFactory::createCurve(spline);
+
+ aaAaa::aaSpline::KnotsList::iterator beg = spline.knots.begin();
+ aaAaa::aaSpline::KnotsList::reverse_iterator rbeg = spline.knots.rbegin();
+
+ static const int Y_FACTOR = 1;
+ double m_deltaT = 0.1;
+
+ double t = (*beg).t;
+ double v = (*beg).y;
+ //glVertex3f(t, v * Y_FACTOR, Z_VALUE);
+ t += m_deltaT;
+
+ while(t < (*rbeg).t - m_deltaT){
+     pspline->getValue(t, v);
+     if(spline.bLimited){
+//         if(v > m_spline_data.limit_top)
+//             v = m_spline_data.limit_top;
+//         else if(v < m_spline_data.limit_bottom)
+//             v = m_spline_data.limit_bottom;
+     }
+
+     qDebug() << "t = " << t;
+     qDebug() << "v = " << v;
+
+     QPoint ptv(t, v);
+     display_image_->draw_circle(ptv, 8, Qt::cyan, 0);
+
+//     glVertex3f(t, v * Y_FACTOR, Z_VALUE);
+     t += m_deltaT;
+ }
+
+ t = (*rbeg).t;
+ v = (*rbeg).y;
+
+
+
+
+// spline.name = "R";
+// splines.push_back(spline);
+
+// spline.name = "G";
+// spline.setLimit(0, 255, 255, 0);
+// splines.push_back(spline);
+
 
 }
 
@@ -2021,6 +2107,35 @@ void MainWindow::handle_complete_polygon_requested()
  display_image_data_->complete_polygon();
 }
 
+void MainWindow::handle_convert_notation_requested()
+{
+ Display_Drawn_Shape* dds = display_image_data_->current_drawn_shape();
+
+ Display_Drawn_Shape* cdds = dds->to_curve();
+
+ qDebug() << "points = " << cdds->points();
+
+ if(dds->points().size() < 2)
+   return;
+
+ const QPoint& p1 = cdds->points()[0];
+ const QPoint& p2 = cdds->points()[1];
+
+ const QPoint& p3 = (p1 + p2) / 2;
+
+ cdds->add_point(p3);
+
+ display_image_->draw_circle(p1, 6, Qt::yellow, 1);
+ display_image_->draw_circle(p2, 6, Qt::yellow, 3);
+ display_image_->draw_circle(p3, 6, Qt::red, 2);
+
+ display_image_->cancel_notation();
+
+ display_image_data_->set_active_curve(cdds);
+
+
+
+}
 
 void MainWindow::handle_save_notation_requested(bool with_comment)
 {

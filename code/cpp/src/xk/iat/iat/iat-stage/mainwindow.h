@@ -219,6 +219,9 @@ private Q_SLOTS:
  void on_action_view_3d_triggered();
  void on_action_view_cad_triggered();
 
+ void handle_convert_notation_requested();
+ void handle_draw_bezier_requested();
+
  void on_action_forge_triggered();
 
  void on_actionCreate_List_triggered(); //metodo legato al comando Create List (WIP)

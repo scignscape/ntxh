@@ -309,7 +309,8 @@ void Forge_Runtime::get_download_file_name()
  }
  else
  {
-  QDialog::DialogCode ret = (QDialog::DialogCode) qid->exec();
+  QDialog::DialogCode ret = QDialog::Accepted; //(QDialog::DialogCode)
+  qid->open(); //qid->exec();
   if(ret == QDialog::Accepted)
   {
    if(text->isEmpty())
