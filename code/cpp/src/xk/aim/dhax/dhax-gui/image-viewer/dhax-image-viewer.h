@@ -67,6 +67,7 @@ public:
 
  ACCESSORS(DHAX_Graphics_View* ,scrolled_image_view)
  ACCESSORS(DHAX_Graphics_Scene* ,scrolled_image_scene)
+ ACCESSORS(QGraphicsProxyWidget* ,scrolled_image_pixmap_item)
 
  void recenter_scroll_center();
  void recenter_scroll_top_left();

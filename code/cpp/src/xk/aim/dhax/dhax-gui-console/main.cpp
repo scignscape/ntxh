@@ -16,6 +16,8 @@
 #include "dhax-data/ann/dhax-annotation-folder.h"
 #include "dhax-data/ann/dhax-annotation-group.h"
 
+#include "dhax-gui/virtual-packages/graphics-scene-demo.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -41,7 +43,10 @@ int main(int argc, char *argv[])
  QString fp = daf->image_files().first();
  dge.show_image(fp);
 
- dge.load_new_virtual_package_object("Demo_Virtual_Package");
+ dge.load_new_virtual_package_object("Graphics_Scene_Demo");
+ Graphics_Scene_Demo* gsd = (Graphics_Scene_Demo*) dge.last_loaded_vpo();
+
+ gsd->add_triple_dots(10, 10, 50, 50, 90, 90);
 
  dge.show_main_window();
  return qapp.exec();

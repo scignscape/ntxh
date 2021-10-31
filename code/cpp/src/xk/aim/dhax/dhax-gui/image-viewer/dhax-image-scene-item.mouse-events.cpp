@@ -151,31 +151,31 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
  QMenu* menu = new QMenu(nullptr);
  menu->setAttribute(Qt::WA_DeleteOnClose);
 
- if(meshlab_import_count_ && *meshlab_import_count_)
- {
-  menu->addAction("MeshLab Import Info", [this]
-  {
-   Q_EMIT meshlab_import_info_requested();
-  });
+// if(meshlab_import_count_ && *meshlab_import_count_)
+// {
+//  menu->addAction("MeshLab Import Info", [this]
+//  {
+//   Q_EMIT meshlab_import_info_requested();
+//  });
 
-  menu->addAction("MeshLab Reset", [this]
-  {
-   Q_EMIT meshlab_reset_requested();
-  });
- }
+//  menu->addAction("MeshLab Reset", [this]
+//  {
+//   Q_EMIT meshlab_reset_requested();
+//  });
+// }
 
- if(freecad_import_count_ && *freecad_import_count_)
- {
-  menu->addAction("FreeCAD Import Info", [this]
-  {
-   Q_EMIT freecad_import_info_requested();
-  });
+// if(freecad_import_count_ && *freecad_import_count_)
+// {
+//  menu->addAction("FreeCAD Import Info", [this]
+//  {
+//   Q_EMIT freecad_import_info_requested();
+//  });
 
-  menu->addAction("FreeCAD Reset", [this]
-  {
-   Q_EMIT freecad_reset_requested();
-  });
- }
+//  menu->addAction("FreeCAD Reset", [this]
+//  {
+//   Q_EMIT freecad_reset_requested();
+//  });
+// }
 
 
  if(!data_->point_pairs_.isEmpty())
@@ -237,6 +237,31 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
    update();
   });
  }
+
+ menu->addAction("Draw Bezier", [this]
+ {
+  Q_EMIT draw_bezier_requested();
+ });
+
+ menu->addAction("Draw Cubic", [this]
+ {
+  Q_EMIT draw_cubic_path_requested();
+ });
+
+ menu->addAction("Draw Quad", [this]
+ {
+  Q_EMIT draw_quad_path_requested();
+ });
+
+ menu->addAction("Draw Arc", [this]
+ {
+  //Q_EMIT draw_quad_path_requested();
+ });
+
+ menu->addAction("Hide Diagonal", [this]
+ {
+  //Q_EMIT draw_quad_path_requested();
+ });
 
  QPoint pos = this_proxy_widget_->mapToScene(mev->pos()).toPoint();
  QPoint pos1 = containing_image_view_->mapFromScene(pos);

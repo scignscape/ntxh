@@ -140,6 +140,11 @@ Q_SIGNALS:
  void freecad_import_info_requested();
  void freecad_reset_requested();
 
+ void draw_bezier_requested();
+ void draw_cubic_path_requested();
+ void draw_quad_path_requested();
+
+
 protected:
  void paintEvent(QPaintEvent *); //metodo per la stampa su schermo di tutte le annotazioni e le varie operazioni effettuate dall'utente
  void mousePressEvent(QMouseEvent *mouseEvent); //metodo per la gestione del click da parte dell'utente

@@ -8,6 +8,12 @@
 #ifndef DHAX_GUI_ENVIRONMENT__H
 #define DHAX_GUI_ENVIRONMENT__H
 
+#include "accessors.h"
+
+#include <QBoxLayout>
+
+#include <QMap>
+
 
 class DHAX_Main_Window;
 class DHAX_Graphics_View;
@@ -19,7 +25,6 @@ class DHAX_Annotation_Environment;
 class DHAX_Image_Viewer;
 class DHAX_Annotation_Instance;
 
-#include <QBoxLayout>
 
 class DHAX_GUI_Environment
 {
@@ -31,9 +36,14 @@ class DHAX_GUI_Environment
  DHAX_Annotation_Environment* annotation_environment_;
  DHAX_Image_Viewer* image_viewer_;
 
+ void* last_loaded_vpo_;
+ QMap<QString, void*> loaded_vpos_;
+
 public:
 
  DHAX_GUI_Environment();
+
+ ACCESSORS(void* ,last_loaded_vpo)
 
  void init_main_window();
  void init_main_window_menus();
@@ -48,6 +58,9 @@ public:
  void show_main_window();
  DHAX_Annotation_Environment* init_annotation_environment();
  void show_annotation_on_current_image(DHAX_Annotation_Instance* dai);
+
+ void load_new_virtual_package_object(QString class_name);
+
 };
 
 

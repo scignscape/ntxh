@@ -18,6 +18,8 @@
 
 #include "dhax-gui/image-viewer/dhax-image-viewer.h"
 
+#include "virtual-packages/graphics-scene-demo.h"
+
 #include <QBoxLayout>
 #include <QLabel>
 
@@ -27,7 +29,8 @@ DHAX_GUI_Environment::DHAX_GUI_Environment()
      main_window_frame_(nullptr),
      graphics_scene_(nullptr),
      graphics_frame_(nullptr),
-     image_viewer_(nullptr)
+     image_viewer_(nullptr),
+     last_loaded_vpo_(nullptr)
 {
 
 }
@@ -49,6 +52,20 @@ void DHAX_GUI_Environment::init_main_window()
 void DHAX_GUI_Environment::init_main_window_menus()
 {
  main_window_->init_menus();
+}
+
+
+void DHAX_GUI_Environment::load_new_virtual_package_object(QString class_name)
+{
+ // // temp hard-coded
+ if(class_name == "Graphics_Scene_Demo")
+ {
+  Graphics_Scene_Demo* vpo = new Graphics_Scene_Demo;
+  loaded_vpos_["Graphics_Scene_Demo"] = vpo;
+  last_loaded_vpo_ = vpo;
+  vpo->set_scene(graphics_scene_);
+  vpo->set_image_display_scene_item(image_viewer_->image_scene_item());
+ }
 }
 
 
