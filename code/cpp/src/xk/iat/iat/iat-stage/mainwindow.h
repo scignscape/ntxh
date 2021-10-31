@@ -220,7 +220,10 @@ private Q_SLOTS:
  void on_action_view_cad_triggered();
 
  void handle_convert_notation_requested();
- void handle_draw_bezier_requested();
+ void handle_draw_bezier();
+
+ void handle_draw_cubic_path();
+ void handle_draw_quad_path();
 
  void on_action_forge_triggered();
 

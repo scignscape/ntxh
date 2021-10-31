@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
  QApplication qapp(argc, argv);
  DHAX_GUI_Environment dge;
  dge.init_main_window();
+ dge.init_main_window_menus();
  dge.init_main_window_frame();
  dge.init_graphics_view();
  dge.init_graphics_scene();
@@ -40,26 +41,34 @@ int main(int argc, char *argv[])
  QString fp = daf->image_files().first();
  dge.show_image(fp);
 
- DHAX_Annotation_Group* dag = dae.add_annotation_group(fp);
+ dge.load_new_virtual_package_object("Demo_Virtual_Package");
 
- DHAX_Annotation_Instance* dai = dag->add_annotation();
- dai->default_dimensions();
-
-// dai->init_polygon();
-
- dai->init_rectangle();
-
- dai->add_shape_point(5,5);
- dai->add_shape_point(25,35);
- //?dai->add_shape_point(15,45);
-
- dge.show_annotation_on_current_image(dai);
-
-// DHAX_Location_2d* loc = (DHAX_Location_2d*) dai->locations().first();
-// n8 enc = loc->encode8();
-// loc->check_decode8(enc);
-
- //dge.add_image(DHAX_IMAGE_FOLDER "/t1.png");
  dge.show_main_window();
  return qapp.exec();
 }
+
+
+//{
+// DHAX_Annotation_Group* dag = dae.add_annotation_group(fp);
+
+// DHAX_Annotation_Instance* dai = dag->add_annotation();
+// dai->default_dimensions();
+
+//// dai->init_polygon();
+
+// dai->init_rectangle();
+
+// dai->add_shape_point(5,5);
+// dai->add_shape_point(25,35);
+// //?dai->add_shape_point(15,45);
+
+// dge.show_annotation_on_current_image(dai);
+
+//// DHAX_Location_2d* loc = (DHAX_Location_2d*) dai->locations().first();
+//// n8 enc = loc->encode8();
+//// loc->check_decode8(enc);
+
+// //dge.add_image(DHAX_IMAGE_FOLDER "/t1.png");
+// dge.show_main_window();
+// return qapp.exec();
+//}

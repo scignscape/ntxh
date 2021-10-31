@@ -279,7 +279,13 @@ void MainWindow::init_display_scene_item(DisplayImage_Scene_Item* si)
    SLOT(show_meshlab_import_info()));
 
  connect(display_scene_item_, SIGNAL(draw_bezier_requested()), this,
-   SLOT(handle_draw_bezier_requested()));
+   SLOT(handle_draw_bezier()));
+
+ connect(display_scene_item_, SIGNAL(draw_cubic_path_requested()), this,
+   SLOT(handle_draw_cubic_path()));
+
+ connect(display_scene_item_, SIGNAL(draw_quad_path_requested()), this,
+   SLOT(handle_draw_quad_path()));
 
  connect(display_scene_item_, SIGNAL(meshlab_reset_requested()), this,
    SLOT(send_meshlab_reset()));
@@ -505,7 +511,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
  display_image_ = new DisplayImage(main_frame_);
 
- display_image_->setMinimumHeight(300);
+ display_image_->setMinimumHeight(400);
 
  display_image_->set_main_window(this);
 
@@ -706,13 +712,109 @@ void MainWindow::load_image(QString file_path)
 
 }
 
+
+void MainWindow::handle_draw_cubic_path()
+{
+ Display_Drawn_Shape* cdds = display_image_data_->active_curve();
+
+ QPoint _p1 = cdds->points()[0];
+ QPoint _p2 = cdds->points()[1];
+ QPoint _mid = cdds->points()[2];
+
+ QPoint p1 = display_image_->control_center(1).toPoint();
+ QPoint mid = display_image_->control_center(2).toPoint();
+ QPoint p2 = display_image_->control_center(3).toPoint();
+
+ display_image_->draw_circle(p1, 2, Qt::cyan, Qt::transparent, 0);
+ display_image_->draw_circle(mid, 2, Qt::cyan, Qt::transparent, 0);
+ display_image_->draw_circle(p2, 2, Qt::cyan, Qt::transparent, 0);
+
+ QPainterPath path;
+
+// display_image_->scrolled_image_pixmap_item()->mapToScene()
+
+ path.moveTo(p1);
+ path.cubicTo(mid, mid, p2);
+
+ QGraphicsPathItem* ppi = display_image_->scrolled_image_scene()->addPath(path,
+   QPen(QColor(25, 79, 106), 1, Qt::SolidLine,
+   Qt::FlatCap, Qt::MiterJoin), QBrush(QColor(5, 122, 163, 100)));
+
+ ppi->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
+ ppi->setParentItem(display_image_->scrolled_image_pixmap_item());
+
+
+// Display_Drawn_Shape* cdds = display_image_data_->active_curve();
+
+// QPoint _p1 = cdds->points()[0];
+// QPoint _p2 = cdds->points()[1];
+// QPoint _mid = cdds->points()[2];
+
+// QPoint p1 = display_image_->control_center(1).toPoint();
+// QPoint mid = display_image_->control_center(2).toPoint();
+// QPoint p2 = display_image_->control_center(3).toPoint();
+
+// QPainterPath path;
+
+// path.moveTo(0, 0);
+// path.cubicTo(p1, mid, p2);
+
+// QGraphicsPathItem* ppi = display_image_->scrolled_image_scene()->addPath(path,
+//   QPen(QColor(79, 106, 25), 1, Qt::SolidLine,
+//   Qt::FlatCap, Qt::MiterJoin), QBrush(QColor(122, 163, 39)));
+
+// ppi->setFlags(QGraphicsItem::ItemIsMovable);
+
+ // QGraphicsPathItem* ppi = new QGraphicsPathItem(path, display_scene_item_);
+
+// QPainter painter(display_scene_item_);
+// painter.setPen(QPen(QColor(79, 106, 25), 1, Qt::SolidLine,
+//                     Qt::FlatCap, Qt::MiterJoin));
+// painter.setBrush(QColor(122, 163, 39));
+
+// painter.drawPath(path);
+ //path.cubicTo(0, 99,  50, 50,  0, 0);
+}
+
+void MainWindow::handle_draw_quad_path()
+{
+
+ Display_Drawn_Shape* cdds = display_image_data_->active_curve();
+
+ QPoint _p1 = cdds->points()[0];
+ QPoint _p2 = cdds->points()[1];
+ QPoint _mid = cdds->points()[2];
+
+ QPoint p1 = display_image_->control_center(1).toPoint();
+ QPoint mid = display_image_->control_center(2).toPoint();
+ QPoint p2 = display_image_->control_center(3).toPoint();
+
+ display_image_->draw_circle(p1, 2, Qt::cyan, Qt::transparent, 0);
+ display_image_->draw_circle(mid, 2, Qt::cyan, Qt::transparent, 0);
+ display_image_->draw_circle(p2, 2, Qt::cyan, Qt::transparent, 0);
+
+ QPainterPath path;
+
+// display_image_->scrolled_image_pixmap_item()->mapToScene()
+
+ path.moveTo(p1);
+ path.quadTo(mid, p2);
+
+ QGraphicsPathItem* ppi = display_image_->scrolled_image_scene()->addPath(path,
+   QPen(QColor(79, 106, 25), 1, Qt::SolidLine,
+   Qt::FlatCap, Qt::MiterJoin), QBrush(QColor(39, 122, 163, 100)));
+
+ ppi->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
+ ppi->setParentItem(display_image_->scrolled_image_pixmap_item());
+
+}
+
+
 #include "libspline/aaCurve.h"
 #include "libspline/spline.h"
 
-void MainWindow::handle_draw_bezier_requested()
+void MainWindow::handle_draw_bezier()
 {
- qDebug() << "draw_bezier_";
-
  Display_Drawn_Shape* cdds = display_image_data_->active_curve();
 
  QPoint _p1 = cdds->points()[0];
@@ -760,11 +862,11 @@ void MainWindow::handle_draw_bezier_requested()
 //             v = m_spline_data.limit_bottom;
      }
 
-     qDebug() << "t = " << t;
-     qDebug() << "v = " << v;
+//     qDebug() << "t = " << t;
+//     qDebug() << "v = " << v;
 
      QPoint ptv(t, v);
-     display_image_->draw_circle(ptv, 8, Qt::cyan, 0);
+     display_image_->draw_circle(ptv, 2, Qt::cyan, Qt::transparent, 0);
 
 //     glVertex3f(t, v * Y_FACTOR, Z_VALUE);
      t += m_deltaT;
@@ -774,6 +876,56 @@ void MainWindow::handle_draw_bezier_requested()
  v = (*rbeg).y;
 
 
+ {
+  aaAaa::aaSpline spline;
+  spline.addKnots(aaAaa::aaPoint(_p1.x(), _p1.y()));
+  spline.addKnots(aaAaa::aaPoint(_mid.x(), _mid.y()));
+  spline.addKnots(aaAaa::aaPoint(_p2.x(), _p2.y()));
+
+  aaAaa::aaCurvePtr pspline = aaAaa::aaCurveFactory::createCurve(spline);
+
+  aaAaa::aaSpline::KnotsList::iterator beg = spline.knots.begin();
+  aaAaa::aaSpline::KnotsList::reverse_iterator rbeg = spline.knots.rbegin();
+
+  static const int Y_FACTOR = 1;
+  double m_deltaT = 0.1;
+
+  double t = (*beg).t;
+  double v = (*beg).y;
+  //glVertex3f(t, v * Y_FACTOR, Z_VALUE);
+  t += m_deltaT;
+
+  double c = 100;
+
+  while(t < (*rbeg).t - m_deltaT){
+      pspline->getValue(t, v);
+      if(spline.bLimited){
+ //         if(v > m_spline_data.limit_top)
+ //             v = m_spline_data.limit_top;
+ //         else if(v < m_spline_data.limit_bottom)
+ //             v = m_spline_data.limit_bottom;
+      }
+
+ //     qDebug() << "t = " << t;
+ //     qDebug() << "v = " << v;
+
+
+      QPoint ptv(t, v);
+      display_image_->draw_circle(ptv, 2, QColor(c, c + 40, 200, 140), Qt::transparent, 0);
+
+      c += 0.03;
+
+ //     glVertex3f(t, v * Y_FACTOR, Z_VALUE);
+      t += m_deltaT;
+  }
+
+  t = (*rbeg).t;
+  v = (*rbeg).y;
+
+
+
+
+ }
 
 
 // spline.name = "R";
@@ -2125,9 +2277,9 @@ void MainWindow::handle_convert_notation_requested()
 
  cdds->add_point(p3);
 
- display_image_->draw_circle(p1, 6, Qt::yellow, 1);
- display_image_->draw_circle(p2, 6, Qt::yellow, 3);
- display_image_->draw_circle(p3, 6, Qt::red, 2);
+ display_image_->draw_circle(p1, 6, Qt::yellow, Qt::black, 1);
+ display_image_->draw_circle(p2, 6, Qt::yellow, Qt::black, 3);
+ display_image_->draw_circle(p3, 6, Qt::red, Qt::black, 2);
 
  display_image_->cancel_notation();
 

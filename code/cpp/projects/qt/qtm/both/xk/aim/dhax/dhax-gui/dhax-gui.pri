@@ -51,12 +51,14 @@ INCLUDEPATH += $$WHITEDB_SRC_GROUP_DIR
 
 
 HEADERS += \
-  $$SRC_DIR/dhax-main-window.h \
+  $$SRC_DIR/main-window/dhax-main-window.h \
+  $$SRC_DIR/main-window/dhax-main-window-frame.h \
+  $$SRC_DIR/main-window/dhax-main-window-data.h \
+  $$SRC_DIR/main-window/dhax-main-window-menus.h \
   $$SRC_DIR/dhax-graphics-view.h \
   $$SRC_DIR/dhax-graphics-scene.h \
   $$SRC_DIR/dhax-gui-environment.h \
   $$SRC_DIR/dhax-graphics-frame.h \
-  $$SRC_DIR/dhax-main-window-frame.h \
   $$SRC_DIR/image-viewer/dhax-image-viewer.h \
   $$SRC_DIR/image-viewer/dhax-image-scene-item.h \
   $$SRC_DIR/image-viewer/dhax-display-image-data.h \
@@ -64,15 +66,21 @@ HEADERS += \
   $$SRC_DIR/subwindows/range-slider.h \
   $$SRC_DIR/subwindows/shape-select-frame.h \
   $$SRC_DIR/subwindows/zoom-and-navigate-frame.h \
+  $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-data.h \
+  $$SRC_DIR/integration/freecad/dhax-freecad-integration-data.h \
+  $$SRC_DIR/integration/forge-api/dhax-forge-api-integration-data.h \
+  $$SRC_DIR/virtual-packages/graphics-scene-demo.h \
 
 
 SOURCES += \
-  $$SRC_DIR/dhax-main-window.cpp \
+  $$SRC_DIR/main-window/dhax-main-window.cpp \
+  $$SRC_DIR/main-window/dhax-main-window-frame.cpp \
+  $$SRC_DIR/main-window/dhax-main-window-data.cpp \
+  $$SRC_DIR/main-window/dhax-main-window-menus.cpp \
   $$SRC_DIR/dhax-graphics-view.cpp \
   $$SRC_DIR/dhax-graphics-scene.cpp \
   $$SRC_DIR/dhax-gui-environment.cpp \
   $$SRC_DIR/dhax-graphics-frame.cpp \
-  $$SRC_DIR/dhax-main-window-frame.cpp \
   $$SRC_DIR/image-viewer/dhax-image-viewer.cpp \
   $$SRC_DIR/image-viewer/dhax-image-scene-item.cpp \
   $$SRC_DIR/image-viewer/dhax-display-image-data.cpp \
@@ -81,7 +89,10 @@ SOURCES += \
   $$SRC_DIR/subwindows/range-slider.cpp \
   $$SRC_DIR/subwindows/shape-select-frame.cpp \
   $$SRC_DIR/subwindows/zoom-and-navigate-frame.cpp \
-
+  $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-data.cpp \
+  $$SRC_DIR/integration/freecad/dhax-freecad-integration-data.cpp \
+  $$SRC_DIR/integration/forge-api/dhax-forge-api-integration-data.cpp \
+  $$SRC_DIR/virtual-packages/graphics-scene-demo.cpp \
 
 
 #  $$SRC_DIR/dhax-gui.cpp \

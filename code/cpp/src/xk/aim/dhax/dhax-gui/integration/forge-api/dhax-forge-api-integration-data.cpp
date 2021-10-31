@@ -5,21 +5,11 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#ifndef DHAX_MAIN_WINDOW__H
-#define DHAX_MAIN_WINDOW__H
+#include "dhax-forge-api-integration-data.h"
 
-#include <QMainWindow>
 
-class DHAX_Main_Window : public QMainWindow
+DHAX_FORGE_API_Integration_Data::DHAX_FORGE_API_Integration_Data()
+  :  forge_session_(nullptr)
 {
 
-public:
-
- DHAX_Main_Window();
-
-};
-
-
-#endif //  DHAX_MAIN_WINDOW__H
-
-
+}

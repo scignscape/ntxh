@@ -78,15 +78,14 @@ void DisplayImage_Scene_Item::cancel_notation()
 }
 
 void DisplayImage::draw_circle(const QPointF& center,
-  r8 radius, QColor clr, u1 index)
+  r8 radius, QColor brush_color, QColor pen_color, u1 index)
 {
- QBrush qbr(clr);
+ QBrush qbr(brush_color);
+ QPen qpen(pen_color);
  QGraphicsEllipseItem* el = scrolled_image_scene_->addEllipse(center.x() - radius,
-   center.y() - radius, radius * 2, radius * 2, QPen(), qbr);
+   center.y() - radius, radius * 2, radius * 2, qpen, qbr);
  el->setParentItem(scrolled_image_pixmap_item_);
  el->setFlags(QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemIsMovable);
-
- qDebug() << "EL tl = " << el->rect().topLeft();
 
  if(index)
   controls_[index] = {el, radius};

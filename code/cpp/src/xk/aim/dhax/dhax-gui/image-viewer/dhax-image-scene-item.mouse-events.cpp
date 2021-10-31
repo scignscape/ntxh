@@ -12,7 +12,7 @@
 #include <QGraphicsProxyWidget>
 #include <QMenu>
 
-#include "dhax-main-window.h"
+#include "main-window/dhax-main-window.h"
 
 #include "dhax-graphics-view.h"
 

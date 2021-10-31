@@ -80,12 +80,13 @@ public:
  ACCESSORS__GET(DisplayImage_Data* ,display_image_data)
  ACCESSORS(MainWindow* ,main_window)
 
+ ACCESSORS(QGraphicsScene* ,scrolled_image_scene)
+ ACCESSORS(QGraphicsProxyWidget* ,scrolled_image_pixmap_item)
+
  ACCESSORS(MACRO_PASTE(QMap<u1, QPair<QGraphicsEllipseItem*, r8>>) ,controls)
 
  QPointF control_center(u1 index)
  {
-  qDebug() << "EL tl = " << controls_[index].first->pos();//.topLeft();
-
   QGraphicsEllipseItem* el = controls_[index].first;
 
   return {el->rect().topLeft().x() + el->pos().x() + controls_[index].second,
@@ -95,7 +96,8 @@ public:
  void recenter_scroll_center();
  void recenter_scroll_top_left();
 
- void draw_circle(const QPointF& center, r8 radius, QColor clr, u1 index);
+ void draw_circle(const QPointF& center, r8 radius, QColor brush_color,
+   QColor pen_color, u1 index);
  void cancel_notation();
 
  explicit DisplayImage(QWidget *parent = nullptr); //costruttore
@@ -416,6 +418,8 @@ Q_SIGNALS:
  void freecad_reset_requested();
 
  void draw_bezier_requested();
+ void draw_cubic_path_requested();
+ void draw_quad_path_requested();
 
 protected:
  void paintEvent(QPaintEvent *); //metodo per la stampa su schermo di tutte le annotazioni e le varie operazioni effettuate dall'utente

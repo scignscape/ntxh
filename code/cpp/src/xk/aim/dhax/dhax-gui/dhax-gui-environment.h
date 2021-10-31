@@ -36,6 +36,7 @@ public:
  DHAX_GUI_Environment();
 
  void init_main_window();
+ void init_main_window_menus();
  void init_graphics_view();
  void init_image_viewer();
  void init_graphics_scene();

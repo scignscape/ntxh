@@ -168,13 +168,37 @@ void DisplayImage_Scene_Item::handle_mouse_event<
  QMenu* menu = new QMenu(nullptr);
  menu->setAttribute(Qt::WA_DeleteOnClose);
 
+// static int temp = 0;
+// if(!temp)
+//{ ++temp;
  if(data_->active_curve())
  {
   menu->addAction("Draw Bezier", [this]
   {
    Q_EMIT draw_bezier_requested();
   });
+
+  menu->addAction("Draw Cubic", [this]
+  {
+   Q_EMIT draw_cubic_path_requested();
+  });
+
+  menu->addAction("Draw Quad", [this]
+  {
+   Q_EMIT draw_quad_path_requested();
+  });
+
+  menu->addAction("Draw Arc", [this]
+  {
+   //Q_EMIT draw_quad_path_requested();
+  });
+
+  menu->addAction("Hide Diagonal", [this]
+  {
+   //Q_EMIT draw_quad_path_requested();
+  });
  }
+//}
 
  if(meshlab_import_count_ && *meshlab_import_count_)
  {

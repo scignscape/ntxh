@@ -7,9 +7,9 @@
 
 #include "dhax-gui-environment.h"
 
-#include "dhax-main-window.h"
+#include "main-window/dhax-main-window.h"
 #include "dhax-graphics-view.h"
-#include "dhax-main-window-frame.h"
+#include "main-window/dhax-main-window-frame.h"
 #include "dhax-graphics-frame.h"
 #include "dhax-graphics-scene.h"
 
@@ -45,6 +45,12 @@ void DHAX_GUI_Environment::init_main_window()
 {
  main_window_ = new DHAX_Main_Window;
 }
+
+void DHAX_GUI_Environment::init_main_window_menus()
+{
+ main_window_->init_menus();
+}
+
 
 void DHAX_GUI_Environment::init_graphics_view()
 {
