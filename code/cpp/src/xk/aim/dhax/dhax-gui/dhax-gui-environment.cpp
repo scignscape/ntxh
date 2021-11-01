@@ -10,8 +10,11 @@
 #include "main-window/dhax-main-window.h"
 #include "dhax-graphics-view.h"
 #include "main-window/dhax-main-window-frame.h"
+#include "main-window/dhax-main-window-controller.h"
 #include "dhax-graphics-frame.h"
 #include "dhax-graphics-scene.h"
+
+#include "dhax-signal-generator.h"
 
 #include "dhax-data/ann/dhax-annotation-environment.h"
 #include "dhax-data/ann/dhax-annotation-instance.h"
@@ -22,6 +25,10 @@
 
 #include <QBoxLayout>
 #include <QLabel>
+
+#include <QDebug>
+
+#include <type_traits>
 
 DHAX_GUI_Environment::DHAX_GUI_Environment()
   :  main_window_(nullptr),
@@ -54,6 +61,43 @@ void DHAX_GUI_Environment::init_main_window_menus()
  main_window_->init_menus();
 }
 
+void DHAX_GUI_Environment::init_main_window_controller()
+{
+ main_window_controller_ = new DHAX_Main_Window_Controller;
+ main_window_controller_->set_application_main_window(main_window_);
+}
+
+//#define self_connect(x) x->connect(x,
+
+void DHAX_GUI_Environment::init_main_window_signal_generator()
+{
+ main_window_->init_signal_generator();
+
+// self_connect(main_window_->signal_generator())
+//   SIGNAL(take_screenshot_requested()),
+//   main_window_controller_, SLOT(handle_take_screenshot_requested()));
+
+// main_window_->signal_generator()->connect(main_window_->signal_generator(),
+//   SIGNAL(take_screenshot_requested()),
+//   main_window_controller_, SLOT(handle_take_screenshot_requested()));
+
+ main_window_->signal_generator()->self_connect(SIGNAL(take_screenshot_requested()),
+  main_window_controller_, SLOT(handle_take_screenshot_requested()));
+
+#define _self_connect_(x, y, z, w) x->self_connect_(\
+ &decltype(x)::y, z, w)
+
+ DHAX_Signal_Generator sg = *main_window_->signal_generator();
+
+ _self_connect_(*main_window_->signal_generator(),
+   take_screenshot_requested,
+   main_window_controller_, []()
+ {
+  qDebug() << "OK";
+ });
+
+
+}
 
 void DHAX_GUI_Environment::load_new_virtual_package_object(QString class_name)
 {

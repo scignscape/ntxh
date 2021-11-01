@@ -34,6 +34,7 @@ DEFINES += DEFAULT_DEV_TKRZW_FOLDER=\\\"$$ROOT_DIR/../dev/consoles/dgdb/tkrzw\\\
 
 DEFINES += DEFAULT_DEV_DGDB_FOLDER=\\\"$$ROOT_DIR/../dev/consoles/dgdb/instances\\\"
 
+DEFINES += SCREENSHOTS_FOLDER=\\\"$$ROOT_DIR/../dev/screenshots\\\"
 
 DEFINES += USE_KANS
 
@@ -55,10 +56,12 @@ HEADERS += \
   $$SRC_DIR/main-window/dhax-main-window-frame.h \
   $$SRC_DIR/main-window/dhax-main-window-data.h \
   $$SRC_DIR/main-window/dhax-main-window-menus.h \
+  $$SRC_DIR/main-window/dhax-main-window-controller.h \
   $$SRC_DIR/dhax-graphics-view.h \
   $$SRC_DIR/dhax-graphics-scene.h \
   $$SRC_DIR/dhax-gui-environment.h \
   $$SRC_DIR/dhax-graphics-frame.h \
+  $$SRC_DIR/dhax-signal-generator.h \
   $$SRC_DIR/image-viewer/dhax-image-viewer.h \
   $$SRC_DIR/image-viewer/dhax-image-scene-item.h \
   $$SRC_DIR/image-viewer/dhax-display-image-data.h \
@@ -77,10 +80,12 @@ SOURCES += \
   $$SRC_DIR/main-window/dhax-main-window-frame.cpp \
   $$SRC_DIR/main-window/dhax-main-window-data.cpp \
   $$SRC_DIR/main-window/dhax-main-window-menus.cpp \
+  $$SRC_DIR/main-window/dhax-main-window-controller.cpp \
   $$SRC_DIR/dhax-graphics-view.cpp \
   $$SRC_DIR/dhax-graphics-scene.cpp \
   $$SRC_DIR/dhax-gui-environment.cpp \
   $$SRC_DIR/dhax-graphics-frame.cpp \
+  $$SRC_DIR/dhax-signal-generator.cpp \
   $$SRC_DIR/image-viewer/dhax-image-viewer.cpp \
   $$SRC_DIR/image-viewer/dhax-image-scene-item.cpp \
   $$SRC_DIR/image-viewer/dhax-display-image-data.cpp \

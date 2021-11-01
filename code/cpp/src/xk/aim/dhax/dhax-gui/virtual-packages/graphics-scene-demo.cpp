@@ -11,6 +11,7 @@
 
 #include "image-viewer/dhax-image-scene-item.h"
 
+
 #include <QGraphicsEllipseItem>
 
 #include <QDebug>
@@ -55,13 +56,13 @@ void Graphics_Scene_Demo::add_triple_dots(r8 x1, r8 y1, r8 x2, r8 y2, r8 x3, r8 
    &DHAX_Image_Scene_Item::draw_cubic_path_requested,
    [this]()
  {
-  draw_cubic_path();
+  draw_curve_path("cubic");
  });
 
  image_display_scene_item_->connect(image_display_scene_item_, &DHAX_Image_Scene_Item::draw_quad_path_requested,
    [this]()
  {
-  draw_cubic_path();
+  draw_curve_path("quad");
  });
 
   // void draw_cubic_path_requested();
@@ -77,12 +78,41 @@ void Graphics_Scene_Demo::add_triple_dots(r8 x1, r8 y1, r8 x2, r8 y2, r8 x3, r8 
 
 }
 
-void Graphics_Scene_Demo::draw_cubic_path()
+void Graphics_Scene_Demo::draw_curve_path(QString kind)
 {
- qDebug() << "draw cubic ...";
+ QPoint p1 = control_center(1).toPoint();
+ QPoint mid = control_center(2).toPoint();
+ QPoint p2 = control_center(3).toPoint();
+
+ draw_circle(p1, 2, Qt::cyan, Qt::transparent, 0);
+ draw_circle(mid, 2, Qt::cyan, Qt::transparent, 0);
+ draw_circle(p2, 2, Qt::cyan, Qt::transparent, 0);
+
+ QPainterPath path;
+
+
+
+// display_image_->scrolled_image_pixmap_item()->mapToScene()
+
+ path.moveTo(p1);
+
+ if(kind == "cubic")
+   path.cubicTo(mid, mid, p2);
+ else if(kind == "quad")
+   path.quadTo(mid, p2);
+ else
+ {
+  qDebug() << "Unknown path kind! Falling back on drawing a line.";
+  path.lineTo(mid);
+  path.moveTo(mid);
+  path.lineTo(p2);
+ }
+
+ QGraphicsPathItem* ppi = scene_->addPath(path,
+   QPen(QColor(25, 79, 106), 1, Qt::SolidLine,
+   Qt::FlatCap, Qt::MiterJoin), QBrush(QColor(5, 122, 163, 100)));
+
+ ppi->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
+ ppi->setParentItem(image_display_scene_item_->this_proxy_widget());
 }
 
-void Graphics_Scene_Demo::draw_quad_path()
-{
-
-}

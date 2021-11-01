@@ -20,8 +20,7 @@
 #include <QGraphicsProxyWidget>
 
 class DHAX_Graphics_Scene;
-
-#include "image-viewer/dhax-image-scene-item.h"
+class DHAX_Image_Scene_Item;
 
 
 class Graphics_Scene_Demo
@@ -30,7 +29,7 @@ class Graphics_Scene_Demo
 // QGraphicsProxyWidget* image_display_scene_item_;
  DHAX_Image_Scene_Item* image_display_scene_item_;
 
- QMap<u1, QPair<QGraphicsEllipseItem*, r8>> controls_;
+ QMap<u1, QPair<QGraphicsItem*, r8>> controls_;
 
 public:
 
@@ -40,12 +39,19 @@ public:
 // ACCESSORS(QGraphicsProxyWidget* ,image_display_scene_item)
  ACCESSORS(DHAX_Image_Scene_Item* ,image_display_scene_item)
 
+ QPointF control_center(u1 index)
+ {
+  QGraphicsEllipseItem* el = (QGraphicsEllipseItem*) controls_[index].first;
+
+  return {el->rect().topLeft().x() + el->pos().x() + controls_[index].second,
+     el->rect().topLeft().y() + el->pos().y() + controls_[index].second};
+ }
+
  void add_triple_dots(r8 x1, r8 y1, r8 x2, r8 y2, r8 x3, r8 y3);
  void draw_circle(const QPointF& center,
    r8 radius, QColor brush_color, QColor pen_color, u1 index);
 
- void draw_cubic_path();
- void draw_quad_path();
+ void draw_curve_path(QString kind);
 
 };
 

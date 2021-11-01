@@ -24,11 +24,12 @@ class DHAX_Graphics_Scene;
 class DHAX_Annotation_Environment;
 class DHAX_Image_Viewer;
 class DHAX_Annotation_Instance;
-
+class DHAX_Main_Window_Controller;
 
 class DHAX_GUI_Environment
 {
  DHAX_Main_Window* main_window_;
+ DHAX_Main_Window_Controller* main_window_controller_;
  DHAX_Graphics_View* graphics_view_;
  DHAX_Main_Window_Frame* main_window_frame_;
  DHAX_Graphics_Scene* graphics_scene_;
@@ -47,6 +48,7 @@ public:
 
  void init_main_window();
  void init_main_window_menus();
+ void init_main_window_controller();
  void init_graphics_view();
  void init_image_viewer();
  void init_graphics_scene();
@@ -58,6 +60,7 @@ public:
  void show_main_window();
  DHAX_Annotation_Environment* init_annotation_environment();
  void show_annotation_on_current_image(DHAX_Annotation_Instance* dai);
+ void init_main_window_signal_generator();
 
  void load_new_virtual_package_object(QString class_name);
 

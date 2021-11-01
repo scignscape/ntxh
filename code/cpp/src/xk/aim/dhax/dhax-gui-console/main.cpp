@@ -24,6 +24,8 @@ int main(int argc, char *argv[])
  QApplication qapp(argc, argv);
  DHAX_GUI_Environment dge;
  dge.init_main_window();
+ dge.init_main_window_controller();
+ dge.init_main_window_signal_generator();
  dge.init_main_window_menus();
  dge.init_main_window_frame();
  dge.init_graphics_view();

@@ -14,6 +14,17 @@
 #include <functional>
 
 
+#define USE_SELF_CONNECT_normal \
+ template<typename ... ARGS> \
+ void self_connect(ARGS ... args) \
+ { \
+  connect(this, args...); \
+ } \
+
+
+#define USE_SELF_CONNECT(x) USE_SELF_CONNECT_##x
+
+
 #define ENUM_FLAGS_OP_MACROS(e) \
  friend constexpr Test_Enum_Flags operator|(e lhs, e rhs) \
  { \
