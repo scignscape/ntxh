@@ -22,7 +22,45 @@
  } \
 
 
+#define USE_SELF_CONNECT_lambda \
+template<typename MFN_Type> \
+auto _self_connect(MFN_Type mfn) \
+{ \
+ return _self_connect_package<decltype (this), MFN_Type>{this, mfn}; \
+} \
+
+
 #define USE_SELF_CONNECT(x) USE_SELF_CONNECT_##x
+
+//#define _self_connect_(x, y, z, w) x->self_connect_(\
+//  &std::remove_reference<decltype(*x)>::type::y, z, w)
+
+template<typename OBJ_Type, typename MFN_Type>
+struct _self_connect_package
+{
+ OBJ_Type _this;
+ MFN_Type mfn;
+ template<typename LAMBDA_Type>
+ void operator<<(LAMBDA_Type lam)
+ {
+  _this->self_connect(mfn, lam);
+ }
+};
+
+
+#define _self_connect_(x, y) \
+  x->_self_connect(&std::remove_reference<decltype(*x)>::type::y)
+
+
+//#define selfconnect_(x, y, z) x->self_connect_(\
+//  &std::remove_reference<decltype(*x)>::type::y, z,
+
+//#define selfconnect_(x, y) x->self_connect_(\
+//  &std::remove_reference<decltype(*x)>::type::y,
+
+//#define _selfconnect )
+
+//#define lambda_(x, y) x, y)
 
 
 #define ENUM_FLAGS_OP_MACROS(e) \

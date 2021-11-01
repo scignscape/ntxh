@@ -73,29 +73,14 @@ void DHAX_GUI_Environment::init_main_window_signal_generator()
 {
  main_window_->init_signal_generator();
 
-// self_connect(main_window_->signal_generator())
-//   SIGNAL(take_screenshot_requested()),
-//   main_window_controller_, SLOT(handle_take_screenshot_requested()));
-
-// main_window_->signal_generator()->connect(main_window_->signal_generator(),
-//   SIGNAL(take_screenshot_requested()),
-//   main_window_controller_, SLOT(handle_take_screenshot_requested()));
-
  main_window_->signal_generator()->self_connect(SIGNAL(take_screenshot_requested()),
   main_window_controller_, SLOT(handle_take_screenshot_requested()));
 
-#define _self_connect_(x, y, z, w) x->self_connect_(\
- &decltype(x)::y, z, w)
-
- DHAX_Signal_Generator sg = *main_window_->signal_generator();
-
- _self_connect_(*main_window_->signal_generator(),
-   take_screenshot_requested,
-   main_window_controller_, []()
- {
-  qDebug() << "OK";
- });
-
+ _self_connect_(main_window_->signal_generator() ,take_screenshot_requested)
+   << []()
+   {
+    qDebug() << "OK";
+   };
 
 }
 
