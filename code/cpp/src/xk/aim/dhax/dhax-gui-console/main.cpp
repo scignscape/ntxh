@@ -24,9 +24,9 @@ int main(int argc, char *argv[])
  QApplication qapp(argc, argv);
  DHAX_GUI_Environment dge;
  dge.init_main_window();
- dge.init_main_window_controller();
+ dge.init_main_window_receiver();
  dge.init_main_window_signal_generator();
- dge.init_main_window_menus();
+ dge.init_menu_system();
  dge.init_main_window_frame();
  dge.init_graphics_view();
  dge.init_graphics_scene();
@@ -34,21 +34,22 @@ int main(int argc, char *argv[])
  dge.init_graphics_frame();
  dge.init_graphics_frame_layout(QBoxLayout::TopToBottom, QBoxLayout::LeftToRight);
  dge.init_main_window_frame_layout(QBoxLayout::TopToBottom);
+ dge.init_main_window_controller();
 
- DHAX_Annotation_Environment& dae = *dge.init_annotation_environment();
- dae.default_extensions();
+// DHAX_Annotation_Environment& dae = *dge.init_annotation_environment();
+// dae.default_extensions();
 
- DHAX_Annotation_Folder* daf = dae.add_image_folder(DHAX_IMAGE_FOLDER);
- if(daf->images_is_empty())
-   return 0;
+// DHAX_Annotation_Folder* daf = dae.add_image_folder(DHAX_IMAGE_FOLDER);
+// if(daf->images_is_empty())
+//   return 0;
 
- QString fp = daf->image_files().first();
- dge.show_image(fp);
+// QString fp = daf->image_files().first();
+// dge.show_image(fp);
 
- dge.load_new_virtual_package_object("Graphics_Scene_Demo");
- Graphics_Scene_Demo* gsd = (Graphics_Scene_Demo*) dge.last_loaded_vpo();
+// dge.load_new_virtual_package_object("Graphics_Scene_Demo");
+// Graphics_Scene_Demo* gsd = (Graphics_Scene_Demo*) dge.last_loaded_vpo();
 
- gsd->add_triple_dots(10, 10, 50, 50, 90, 90);
+// gsd->add_triple_dots(10, 10, 50, 50, 90, 90);
 
  dge.show_main_window();
  return qapp.exec();

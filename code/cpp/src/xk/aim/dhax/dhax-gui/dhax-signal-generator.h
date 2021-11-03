@@ -28,10 +28,12 @@ public:
 
  //void hold(QObject* obj);
  void emit_take_screenshot_requested();
+ void emit_load_image_requested();
 
 Q_SIGNALS:
 
  void take_screenshot_requested();
+ void load_image_requested();
 };
 
 #endif // DHAX_SIGNAL_GENERATOR__H

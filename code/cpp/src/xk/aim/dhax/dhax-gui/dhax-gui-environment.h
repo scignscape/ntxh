@@ -25,11 +25,16 @@ class DHAX_Annotation_Environment;
 class DHAX_Image_Viewer;
 class DHAX_Annotation_Instance;
 class DHAX_Main_Window_Controller;
+class DHAX_Main_Window_Receiver;
+class DHAX_Menu_System;
+
 
 class DHAX_GUI_Environment
 {
  DHAX_Main_Window* main_window_;
+ DHAX_Menu_System* menu_system_;
  DHAX_Main_Window_Controller* main_window_controller_;
+ DHAX_Main_Window_Receiver* main_window_receiver_;
  DHAX_Graphics_View* graphics_view_;
  DHAX_Main_Window_Frame* main_window_frame_;
  DHAX_Graphics_Scene* graphics_scene_;
@@ -47,8 +52,9 @@ public:
  ACCESSORS(void* ,last_loaded_vpo)
 
  void init_main_window();
- void init_main_window_menus();
+ void init_menu_system();
  void init_main_window_controller();
+ void init_main_window_receiver();
  void init_graphics_view();
  void init_image_viewer();
  void init_graphics_scene();

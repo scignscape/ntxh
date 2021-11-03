@@ -11,6 +11,7 @@
 #include "dhax-graphics-view.h"
 #include "main-window/dhax-main-window-frame.h"
 #include "main-window/dhax-main-window-controller.h"
+#include "main-window/dhax-main-window-receiver.h"
 #include "dhax-graphics-frame.h"
 #include "dhax-graphics-scene.h"
 
@@ -23,6 +24,8 @@
 
 #include "virtual-packages/graphics-scene-demo.h"
 
+#include "main-window/dhax-menu-system.h"
+
 #include <QBoxLayout>
 #include <QLabel>
 
@@ -32,6 +35,7 @@
 
 DHAX_GUI_Environment::DHAX_GUI_Environment()
   :  main_window_(nullptr),
+     menu_system_(nullptr),
      graphics_view_(nullptr),
      main_window_frame_(nullptr),
      graphics_scene_(nullptr),
@@ -56,15 +60,29 @@ void DHAX_GUI_Environment::init_main_window()
  main_window_ = new DHAX_Main_Window;
 }
 
-void DHAX_GUI_Environment::init_main_window_menus()
+void DHAX_GUI_Environment::init_menu_system()
 {
- main_window_->init_menus();
+ menu_system_ = new DHAX_Menu_System;
+ menu_system_->set_main_window(main_window_);
+ menu_system_->init_menus();
+
 }
 
 void DHAX_GUI_Environment::init_main_window_controller()
 {
  main_window_controller_ = new DHAX_Main_Window_Controller;
  main_window_controller_->set_application_main_window(main_window_);
+ main_window_controller_->set_zoom_frame(graphics_frame_->zoom_frame());
+ main_window_controller_->set_display_image_data(graphics_frame_->display_image_data());
+ main_window_controller_->set_image_viewer(image_viewer_);
+ main_window_controller_->set_main_window_receiver(main_window_receiver_);
+ main_window_receiver_->set_main_window_controller(main_window_controller_);
+}
+
+void DHAX_GUI_Environment::init_main_window_receiver()
+{
+ main_window_receiver_ = new DHAX_Main_Window_Receiver;
+ main_window_receiver_->set_application_main_window(main_window_);
 }
 
 //#define self_connect(x) x->connect(x,
@@ -74,13 +92,16 @@ void DHAX_GUI_Environment::init_main_window_signal_generator()
  main_window_->init_signal_generator();
 
  main_window_->signal_generator()->self_connect(SIGNAL(take_screenshot_requested()),
-  main_window_controller_, SLOT(handle_take_screenshot_requested()));
+  main_window_receiver_, SLOT(handle_take_screenshot_requested()));
 
- _self_connect_(main_window_->signal_generator() ,take_screenshot_requested)
-   << []()
-   {
-    qDebug() << "OK";
-   };
+ main_window_->signal_generator()->self_connect(SIGNAL(load_image_requested()),
+  main_window_receiver_, SLOT(handle_load_image_requested()));
+
+// _self_connect_(main_window_->signal_generator() ,take_screenshot_requested)
+//   << []()
+//   {
+//    qDebug() << "OK";
+//   };
 
 }
 

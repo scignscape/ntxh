@@ -9,6 +9,7 @@
 #define DHAX_MESHLAB_INTEGRATION_DATA__H
 
 #include "global-types.h"
+#include "accessors.h"
 
 #include <QQuaternion>
 
@@ -24,6 +25,8 @@ class DHAX_Meshlab_Integration_Data
 public:
 
  DHAX_Meshlab_Integration_Data();
+
+ ACCESSORS(u4* ,meshlab_import_count)
 
 };
 

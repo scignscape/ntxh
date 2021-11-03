@@ -8,6 +8,10 @@
 #ifndef DHAX_MAIN_WINDOW_DATA__H
 #define DHAX_MAIN_WINDOW_DATA__H
 
+
+#include "accessors.h"
+
+
 #include <QMainWindow>
 
 class DHAX_Meshlab_Integration_Data;
@@ -24,6 +28,10 @@ class DHAX_Main_Window_Data
 public:
 
  DHAX_Main_Window_Data();
+
+ ACCESSORS(DHAX_Meshlab_Integration_Data* ,meshlab_integration)
+ ACCESSORS(DHAX_FreeCAD_Integration_Data* ,freecad_integration)
+ ACCESSORS(DHAX_FORGE_API_Integration_Data* ,forge_api_integration)
 
 };
 

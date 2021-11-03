@@ -8,6 +8,7 @@
 #ifndef DHAX_FREECAD_INTEGRATION_DATA__H
 #define DHAX_FREECAD_INTEGRATION_DATA__H
 
+#include "accessors.h"
 #include "global-types.h"
 
 #include <QVector>
@@ -16,16 +17,17 @@
 
 class DHAX_FreeCAD_Integration_Data
 {
- u4* freecad_import_count_;
  QString freecad_file_path_;
 
  QVector<r8> freecad_position_data_;
+ u4* freecad_import_count_;
 
 
 public:
 
  DHAX_FreeCAD_Integration_Data();
 
+ ACCESSORS(u4* ,freecad_import_count)
 };
 
 

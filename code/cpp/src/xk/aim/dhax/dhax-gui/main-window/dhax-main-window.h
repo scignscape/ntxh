@@ -23,7 +23,7 @@ class DHAX_Signal_Generator;
 class DHAX_Main_Window : public QMainWindow
 {
  DHAX_Main_Window_Data* main_window_data_;
- DHAX_Main_Window_Menus* menus_;
+ //DHAX_Main_Window_Menus* menus_;
  DHAX_Signal_Generator* signal_generator_;
 
 public:
@@ -31,6 +31,7 @@ public:
  DHAX_Main_Window();
 
  ACCESSORS(DHAX_Signal_Generator* ,signal_generator)
+ ACCESSORS(DHAX_Main_Window_Data* ,main_window_data)
 
 
  void init_menus();

@@ -23,7 +23,7 @@ class DHAX_Image_Viewer;
 
 class DHAX_Graphics_Frame : public QFrame
 {
-Q_OBJECT
+ Q_OBJECT
 
  QBoxLayout* main_layout_;
  QBoxLayout* secondary_layout_;
@@ -42,6 +42,8 @@ public:
  ACCESSORS(DHAX_Graphics_View* ,graphics_view)
  ACCESSORS(DHAX_Display_Image_Data* ,display_image_data)
  ACCESSORS(DHAX_Image_Viewer* ,image_viewer)
+
+ ACCESSORS(Zoom_and_Navigate_Frame* ,zoom_frame)
 
  void setup_shape_rectangle();
  void setup_shape_polygon();

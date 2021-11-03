@@ -56,7 +56,9 @@ HEADERS += \
   $$SRC_DIR/main-window/dhax-main-window-frame.h \
   $$SRC_DIR/main-window/dhax-main-window-data.h \
   $$SRC_DIR/main-window/dhax-main-window-menus.h \
+  $$SRC_DIR/main-window/dhax-menu-system.h \
   $$SRC_DIR/main-window/dhax-main-window-controller.h \
+  $$SRC_DIR/main-window/dhax-main-window-receiver.h \
   $$SRC_DIR/dhax-graphics-view.h \
   $$SRC_DIR/dhax-graphics-scene.h \
   $$SRC_DIR/dhax-gui-environment.h \
@@ -81,6 +83,8 @@ SOURCES += \
   $$SRC_DIR/main-window/dhax-main-window-data.cpp \
   $$SRC_DIR/main-window/dhax-main-window-menus.cpp \
   $$SRC_DIR/main-window/dhax-main-window-controller.cpp \
+  $$SRC_DIR/main-window/dhax-main-window-receiver.cpp \
+  $$SRC_DIR/main-window/dhax-menu-system.cpp \
   $$SRC_DIR/dhax-graphics-view.cpp \
   $$SRC_DIR/dhax-graphics-scene.cpp \
   $$SRC_DIR/dhax-gui-environment.cpp \
