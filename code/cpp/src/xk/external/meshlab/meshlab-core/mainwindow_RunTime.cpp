@@ -2651,7 +2651,7 @@ void MainWindow::send_export_notate(QString file_name,
   axfi_out_socket_->bind(QHostAddress::LocalHost, 1234);
  }
 
- QString text = QString("%1*%2*%3*%4").arg(axfi_mesh_path_).arg(file_name).arg(track_info).arg(scale_info);
+ QString text = QString("+MeshLab+%1*%2*%3*%4").arg(axfi_mesh_path_).arg(file_name).arg(track_info).arg(scale_info);
 
  axfi_restore_data_ = text;
 

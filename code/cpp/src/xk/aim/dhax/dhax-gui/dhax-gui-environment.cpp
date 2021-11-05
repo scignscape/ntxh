@@ -22,9 +22,15 @@
 
 #include "dhax-gui/image-viewer/dhax-image-viewer.h"
 
+#include "network/dhax-udp-controller.h"
+
 #include "virtual-packages/graphics-scene-demo.h"
 
 #include "main-window/dhax-menu-system.h"
+
+#include "application/dhax-application-controller.h"
+
+#include "main-window/dhax-main-window-data.h"
 
 #include <QBoxLayout>
 #include <QLabel>
@@ -35,12 +41,15 @@
 
 DHAX_GUI_Environment::DHAX_GUI_Environment()
   :  main_window_(nullptr),
+     main_window_controller_(nullptr),
+     application_controller_(nullptr),
      menu_system_(nullptr),
      graphics_view_(nullptr),
      main_window_frame_(nullptr),
      graphics_scene_(nullptr),
      graphics_frame_(nullptr),
      image_viewer_(nullptr),
+     udp_controller_(nullptr),
      last_loaded_vpo_(nullptr)
 {
 
@@ -60,12 +69,48 @@ void DHAX_GUI_Environment::init_main_window()
  main_window_ = new DHAX_Main_Window;
 }
 
+
+void DHAX_GUI_Environment::init_integration_controllers()
+{
+ application_controller_->init_integration_controllers();
+}
+
+
+void DHAX_GUI_Environment::init_udp_controller()
+{
+ udp_controller_ = new DHAX_UDP_Controller;
+ udp_controller_->set_signal_generator(main_window_->signal_generator());
+
+ main_window_->signal_generator()->connect(main_window_->signal_generator(),
+   &DHAX_Signal_Generator::received_datagram,
+   [this](QByteArray qba)
+ {
+  application_controller_->dispatch_datagram(qba);
+ });
+}
+
 void DHAX_GUI_Environment::init_menu_system()
 {
  menu_system_ = new DHAX_Menu_System;
  menu_system_->set_main_window(main_window_);
  menu_system_->init_menus();
 
+}
+
+
+void DHAX_GUI_Environment::init_main_window_data()
+{
+ main_window_->set_main_window_data(new DHAX_Main_Window_Data);
+}
+
+
+void DHAX_GUI_Environment::init_application_controller()
+{
+ application_controller_ = new DHAX_Application_Controller;
+ application_controller_->set_udp_controller(udp_controller_);
+ application_controller_->init_udp_controller();
+ application_controller_->set_main_window_controller(main_window_controller_);
+ application_controller_->set_application_main_window(main_window_);
 }
 
 void DHAX_GUI_Environment::init_main_window_controller()

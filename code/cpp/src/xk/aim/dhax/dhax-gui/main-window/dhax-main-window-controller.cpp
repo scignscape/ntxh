@@ -35,7 +35,8 @@
 DHAX_Main_Window_Controller::DHAX_Main_Window_Controller()
   :  display_image_data_(nullptr),
      zoom_frame_(nullptr),
-     image_scene_item_(nullptr), main_window_receiver_(nullptr)
+     image_scene_item_(nullptr),
+     main_window_receiver_(nullptr)
 {
 
 }
@@ -48,8 +49,10 @@ void DHAX_Main_Window_Controller::init_image_scene_item(DHAX_Image_Scene_Item *s
 
  si->set_meshlab_import_count(application_main_window_->
    main_window_data()->meshlab_integration()->meshlab_import_count());
- si->set_freecad_import_count(application_main_window_->
-   main_window_data()->freecad_integration()->freecad_import_count());
+
+//?
+// si->set_freecad_import_count(application_main_window_->
+//   main_window_data()->freecad_integration()->freecad_import_count());
 
 
 //?

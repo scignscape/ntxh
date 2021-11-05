@@ -7,7 +7,7 @@
 
 include(../build-group.pri)
 
-QT += xml widgets
+QT += xml widgets network
 
 INCLUDEPATH += $$SRC_DIR
 
@@ -59,6 +59,8 @@ HEADERS += \
   $$SRC_DIR/main-window/dhax-menu-system.h \
   $$SRC_DIR/main-window/dhax-main-window-controller.h \
   $$SRC_DIR/main-window/dhax-main-window-receiver.h \
+  $$SRC_DIR/application/dhax-application-controller.h \
+  $$SRC_DIR/application/dhax-application-receiver.h \
   $$SRC_DIR/dhax-graphics-view.h \
   $$SRC_DIR/dhax-graphics-scene.h \
   $$SRC_DIR/dhax-gui-environment.h \
@@ -71,10 +73,13 @@ HEADERS += \
   $$SRC_DIR/subwindows/range-slider.h \
   $$SRC_DIR/subwindows/shape-select-frame.h \
   $$SRC_DIR/subwindows/zoom-and-navigate-frame.h \
+  $$SRC_DIR/integration/dhax-integration-controller.h \
   $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-data.h \
+  $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-controller.h \
   $$SRC_DIR/integration/freecad/dhax-freecad-integration-data.h \
   $$SRC_DIR/integration/forge-api/dhax-forge-api-integration-data.h \
   $$SRC_DIR/virtual-packages/graphics-scene-demo.h \
+  $$SRC_DIR/network/dhax-udp-controller.h \
 
 
 SOURCES += \
@@ -85,6 +90,8 @@ SOURCES += \
   $$SRC_DIR/main-window/dhax-main-window-controller.cpp \
   $$SRC_DIR/main-window/dhax-main-window-receiver.cpp \
   $$SRC_DIR/main-window/dhax-menu-system.cpp \
+  $$SRC_DIR/application/dhax-application-controller.cpp \
+  $$SRC_DIR/application/dhax-application-receiver.cpp \
   $$SRC_DIR/dhax-graphics-view.cpp \
   $$SRC_DIR/dhax-graphics-scene.cpp \
   $$SRC_DIR/dhax-gui-environment.cpp \
@@ -98,10 +105,13 @@ SOURCES += \
   $$SRC_DIR/subwindows/range-slider.cpp \
   $$SRC_DIR/subwindows/shape-select-frame.cpp \
   $$SRC_DIR/subwindows/zoom-and-navigate-frame.cpp \
+  $$SRC_DIR/integration/dhax-integration-controller.cpp \
   $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-data.cpp \
+  $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-controller.cpp \
   $$SRC_DIR/integration/freecad/dhax-freecad-integration-data.cpp \
   $$SRC_DIR/integration/forge-api/dhax-forge-api-integration-data.cpp \
   $$SRC_DIR/virtual-packages/graphics-scene-demo.cpp \
+  $$SRC_DIR/network/dhax-udp-controller.cpp \
 
 
 #  $$SRC_DIR/dhax-gui.cpp \

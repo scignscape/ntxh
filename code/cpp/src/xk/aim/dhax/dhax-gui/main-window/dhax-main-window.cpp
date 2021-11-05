@@ -12,7 +12,7 @@
 
 
 DHAX_Main_Window::DHAX_Main_Window()
-  :  QMainWindow()
+  :  QMainWindow(), main_window_data_(nullptr)
 {
 
 }

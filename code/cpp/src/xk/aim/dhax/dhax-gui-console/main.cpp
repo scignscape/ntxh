@@ -34,7 +34,11 @@ int main(int argc, char *argv[])
  dge.init_graphics_frame();
  dge.init_graphics_frame_layout(QBoxLayout::TopToBottom, QBoxLayout::LeftToRight);
  dge.init_main_window_frame_layout(QBoxLayout::TopToBottom);
+ dge.init_main_window_data();
  dge.init_main_window_controller();
+ dge.init_application_controller();
+ dge.init_integration_controllers();
+ dge.init_udp_controller();
 
 // DHAX_Annotation_Environment& dae = *dge.init_annotation_environment();
 // dae.default_extensions();

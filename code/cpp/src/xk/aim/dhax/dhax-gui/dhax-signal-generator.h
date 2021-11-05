@@ -29,11 +29,13 @@ public:
  //void hold(QObject* obj);
  void emit_take_screenshot_requested();
  void emit_load_image_requested();
+ void emit_received_datagram(QByteArray qba);
 
 Q_SIGNALS:
 
  void take_screenshot_requested();
  void load_image_requested();
+ void received_datagram(QByteArray qba);
 };
 
 #endif // DHAX_SIGNAL_GENERATOR__H

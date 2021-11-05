@@ -15,10 +15,13 @@
 
 class DHAX_Meshlab_Integration_Data
 {
+ friend class DHAX_Meshlab_Integration_Controller;
+
  QQuaternion meshlab_track_info_;
  r4 meshlab_scale_info_;
  QVector3D meshlab_center_position_;
  QString meshlab_file_path_;
+ QString mesh_file_path_;
  u4* meshlab_import_count_;
 
 
@@ -27,6 +30,8 @@ public:
  DHAX_Meshlab_Integration_Data();
 
  ACCESSORS(u4* ,meshlab_import_count)
+
+ void init_import_count();
 
 };
 

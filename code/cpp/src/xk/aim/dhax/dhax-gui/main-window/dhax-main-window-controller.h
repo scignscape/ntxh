@@ -32,7 +32,7 @@ class DHAX_Main_Window_Controller //: public QObject
  DHAX_Image_Viewer* image_viewer_;
  DHAX_Image_Scene_Item* image_scene_item_;
  DHAX_Main_Window_Receiver* main_window_receiver_;
-
+\
 public:
 
  DHAX_Main_Window_Controller();

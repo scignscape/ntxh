@@ -27,7 +27,9 @@ class DHAX_Annotation_Instance;
 class DHAX_Main_Window_Controller;
 class DHAX_Main_Window_Receiver;
 class DHAX_Menu_System;
-
+class DHAX_UDP_Controller;
+class DHAX_Application_Controller;
+class DHAX_Integration_Controller;
 
 class DHAX_GUI_Environment
 {
@@ -35,12 +37,14 @@ class DHAX_GUI_Environment
  DHAX_Menu_System* menu_system_;
  DHAX_Main_Window_Controller* main_window_controller_;
  DHAX_Main_Window_Receiver* main_window_receiver_;
+ DHAX_Application_Controller* application_controller_;
  DHAX_Graphics_View* graphics_view_;
  DHAX_Main_Window_Frame* main_window_frame_;
  DHAX_Graphics_Scene* graphics_scene_;
  DHAX_Graphics_Frame* graphics_frame_;
  DHAX_Annotation_Environment* annotation_environment_;
  DHAX_Image_Viewer* image_viewer_;
+ DHAX_UDP_Controller* udp_controller_;
 
  void* last_loaded_vpo_;
  QMap<QString, void*> loaded_vpos_;
@@ -54,9 +58,13 @@ public:
  void init_main_window();
  void init_menu_system();
  void init_main_window_controller();
+ void init_application_controller();
+ void init_integration_controllers();
  void init_main_window_receiver();
+ void init_main_window_data();
  void init_graphics_view();
  void init_image_viewer();
+ void init_udp_controller();
  void init_graphics_scene();
  void init_graphics_frame();
  void init_graphics_frame_layout(QBoxLayout::Direction qbd, QBoxLayout::Direction secqbd);
@@ -69,6 +77,7 @@ public:
  void init_main_window_signal_generator();
 
  void load_new_virtual_package_object(QString class_name);
+
 
 };
 
