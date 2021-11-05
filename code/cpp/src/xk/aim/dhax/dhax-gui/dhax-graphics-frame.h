@@ -13,6 +13,8 @@
 
 #include "accessors.h"
 
+#include "global-types.h"
+
 
 class Shape_Select_Frame;
 class Zoom_and_Navigate_Frame;
@@ -54,6 +56,11 @@ public:
 Q_SIGNALS:
 
  void close_requested(bool);
+
+public Q_SLOTS:
+
+ void handle_zoom_factor_changed(r8);
+
 
 };
 

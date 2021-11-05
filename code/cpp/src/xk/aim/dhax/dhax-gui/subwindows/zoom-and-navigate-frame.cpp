@@ -132,6 +132,10 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  main_layout_ = new QVBoxLayout;
 
+// main_layout_->setContentsMargins(0,0,0,0);
+// main_layout_->setSpacing(2);
+// main_layout_->setMargin(0);
+
 // main_layout_->addWidget(zoom_slider_[0]);
 
 // main_layout_->addStretch(1);

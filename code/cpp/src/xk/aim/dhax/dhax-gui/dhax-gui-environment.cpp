@@ -193,9 +193,19 @@ void DHAX_GUI_Environment::init_graphics_frame_layout(QBoxLayout::Direction qbd,
 void DHAX_GUI_Environment::init_main_window_frame_layout(QBoxLayout::Direction qbd)
 {
  QBoxLayout* qbl = new QBoxLayout(qbd);
+
+ qbl->setContentsMargins(0,0,0,0);
+ qbl->setMargin(0);
+ qbl->setSpacing(0);
+
+ main_window_frame_->setFrameShape(QFrame::NoFrame);
+ main_window_frame_->setLineWidth(0);
+
  if(graphics_frame_)
    qbl->addWidget(graphics_frame_);
  main_window_frame_->setLayout(qbl);
+
+
 }
 
 
