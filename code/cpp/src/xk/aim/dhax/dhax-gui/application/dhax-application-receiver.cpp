@@ -9,6 +9,8 @@
 //#include "dhax-main-window.h"
 //#include "dhax-main-window-controller.h"
 
+#include "dhax-application-controller.h"
+
 #include <QMenuBar>
 
 #include <QGuiApplication>
@@ -25,6 +27,28 @@ DHAX_Application_Receiver::DHAX_Application_Receiver()
 
 }
 
+
+void DHAX_Application_Receiver::handle_send_freecad_reset_requested()
+{
+ application_controller_->send_freecad_reset();
+}
+
+
+void DHAX_Application_Receiver::handle_send_meshlab_reset_requested()
+{
+ application_controller_->send_meshlab_reset();
+}
+
+
+void DHAX_Application_Receiver::handle_save_notation_requested(bool with_comment)
+{
+
+}
+
+void DHAX_Application_Receiver:: handle_polygon_save_notation_requested()
+{
+
+}
 
 //void DHAX_Main_Window_Receiver::handle_take_screenshot_requested()
 //{

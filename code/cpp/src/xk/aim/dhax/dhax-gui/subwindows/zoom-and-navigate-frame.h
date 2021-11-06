@@ -80,6 +80,9 @@ public:
  ACCESSORS(void* ,image_data)
  ACCESSORS(AXFI_Annotation* ,current_selected_annotation)
 
+ USE_SELF_CONNECT(normal)
+ USE_SELF_CONNECT(lambda)
+
  void reset_with_image_data(void* image_data);
  void reset_current_selected_annotation(AXFI_Annotation* axa);
 

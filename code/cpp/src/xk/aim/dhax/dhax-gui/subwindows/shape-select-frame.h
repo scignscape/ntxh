@@ -12,6 +12,8 @@
 
 #include <QTabWidget>
 
+#include "global-types.h"
+
 
 class Shape_Select_Frame : public QFrame
 {
@@ -50,6 +52,10 @@ class Shape_Select_Frame : public QFrame
 public:
 
  Shape_Select_Frame(QWidget* parent);
+
+ USE_SELF_CONNECT(normal)
+ USE_SELF_CONNECT(lambda)
+
 
  QString current_shape_selection();
 

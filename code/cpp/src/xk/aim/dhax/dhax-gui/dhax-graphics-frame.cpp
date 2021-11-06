@@ -14,6 +14,8 @@
 #include "image-viewer/dhax-display-image-data.h"
 #include "image-viewer/dhax-image-viewer.h"
 
+#include "global-types.h"
+
 
 DHAX_Graphics_Frame::DHAX_Graphics_Frame(QWidget* parent)
   :  QFrame(parent), main_layout_(nullptr),
@@ -68,46 +70,52 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
 
  setLayout(main_layout_);
 
- connect(zoom_frame_, SIGNAL(zoom_factor_changed(r8)), this, SLOT(handle_zoom_factor_changed(r8)));
+ zoom_frame_->self_connect(SIGNAL(zoom_factor_changed(r8)), this, SLOT(handle_zoom_factor_changed(r8)));
 
- connect(shape_select_frame_, SIGNAL(save_requested(bool)), this, SLOT(handle_save_requested(bool)));
+ shape_select_frame_->self_connect(SIGNAL(save_requested(bool)), this, SLOT(handle_save_requested(bool)));
 
- connect(shape_select_frame_, SIGNAL(close_requested(bool)), this, SIGNAL(close_requested(bool)));
+ shape_select_frame_->self_connect(SIGNAL(close_requested(bool)), this, SIGNAL(close_requested(bool)));
 
 
- connect(zoom_frame_, &Zoom_and_Navigate_Frame::image_top_left_button_clicked, [this](bool)
+ _self_connect_(zoom_frame_ ,image_top_left_button_clicked)
+   << [this](bool)
  {
   image_viewer_->recenter_scroll_top_left();
- });
+ };
 
- connect(zoom_frame_, &Zoom_and_Navigate_Frame::center_image_button_clicked, [this](bool)
+ _self_connect_(zoom_frame_ ,center_image_button_clicked)
+   << [this](bool)
  {
   image_viewer_->recenter_scroll_center();
- });
+ };
 
- connect(zoom_frame_, &Zoom_and_Navigate_Frame::pan_mode_changed, [this](bool mode)
+ _self_connect_(zoom_frame_ ,pan_mode_changed)
+   << [this](bool mode)
  {
   if(mode)
     display_image_data_->set_pan_mode();
   else
     display_image_data_->unset_pan_mode();
- });
+ };
 
- connect(zoom_frame_, &Zoom_and_Navigate_Frame::multi_draw_set, [this]()
+ _self_connect_(zoom_frame_ ,multi_draw_set)
+   << [this]()
  {
   display_image_data_->set_multi_draw();
- });
+ };
 
- connect(zoom_frame_, &Zoom_and_Navigate_Frame::multi_draw_unset, [this]()
+ _self_connect_(zoom_frame_ ,multi_draw_unset)
+   << [this]()
  {
   display_image_data_->unset_multi_draw();
- });
+ };
+
 
  // assume a rectangle to begin with ...
  setup_shape_rectangle();
 
- connect(shape_select_frame_,
-   &Shape_Select_Frame::shape_selection_changed, [this](QString sel)
+ _self_connect_(shape_select_frame_ ,shape_selection_changed)
+   << [this](QString sel)
  {
   if(sel == "Rectangle")
     setup_shape_rectangle();
@@ -115,7 +123,7 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
     setup_shape_polygon();
   else if(sel == "Ellipse")
     setup_shape_ellipse();
- });
+ };
 }
 
 

@@ -32,6 +32,8 @@
 
 #include "main-window/dhax-main-window-data.h"
 
+#include "application/dhax-application-receiver.h"
+
 #include <QBoxLayout>
 #include <QLabel>
 
@@ -111,6 +113,7 @@ void DHAX_GUI_Environment::init_application_controller()
  application_controller_->init_udp_controller();
  application_controller_->set_main_window_controller(main_window_controller_);
  application_controller_->set_application_main_window(main_window_);
+ application_controller_->set_application_receiver(application_receiver_);
 }
 
 void DHAX_GUI_Environment::init_main_window_controller()
@@ -121,6 +124,7 @@ void DHAX_GUI_Environment::init_main_window_controller()
  main_window_controller_->set_display_image_data(graphics_frame_->display_image_data());
  main_window_controller_->set_image_viewer(image_viewer_);
  main_window_controller_->set_main_window_receiver(main_window_receiver_);
+ main_window_controller_->set_application_controller(application_controller_);
  main_window_receiver_->set_main_window_controller(main_window_controller_);
 }
 
@@ -128,6 +132,12 @@ void DHAX_GUI_Environment::init_main_window_receiver()
 {
  main_window_receiver_ = new DHAX_Main_Window_Receiver;
  main_window_receiver_->set_application_main_window(main_window_);
+}
+
+void DHAX_GUI_Environment::init_application_receiver()
+{
+ application_receiver_ = new DHAX_Application_Receiver;
+ //application_receiver_->set_application_main_window(main_window_);
 }
 
 //#define self_connect(x) x->connect(x,

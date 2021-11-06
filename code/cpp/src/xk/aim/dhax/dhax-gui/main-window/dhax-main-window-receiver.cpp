@@ -26,6 +26,44 @@ DHAX_Main_Window_Receiver::DHAX_Main_Window_Receiver()
 }
 
 
+void DHAX_Main_Window_Receiver::handle_draw_bezier_requested()
+{
+
+}
+
+
+void DHAX_Main_Window_Receiver::handle_draw_cubic_path_requested()
+{
+
+}
+
+
+void DHAX_Main_Window_Receiver::handle_draw_quad_path_requested()
+{
+
+
+}
+
+
+
+void DHAX_Main_Window_Receiver::handle_complete_polygon_requested()
+{
+
+}
+
+
+void DHAX_Main_Window_Receiver::handle_meshlab_import_info_requested()
+{
+
+}
+
+
+void DHAX_Main_Window_Receiver::handle_freecad_import_info_requested()
+{
+
+}
+
+
 void DHAX_Main_Window_Receiver::handle_take_screenshot_requested()
 {
  main_window_controller_->take_screenshot();

@@ -21,6 +21,8 @@
 #include "integration/meshlab/dhax-meshlab-integration-data.h"
 #include "integration/freecad/dhax-freecad-integration-data.h"
 
+#include "application/dhax-application-controller.h"
+
 #include <QMenuBar>
 
 #include <QGuiApplication>
@@ -36,7 +38,8 @@ DHAX_Main_Window_Controller::DHAX_Main_Window_Controller()
   :  display_image_data_(nullptr),
      zoom_frame_(nullptr),
      image_scene_item_(nullptr),
-     main_window_receiver_(nullptr)
+     main_window_receiver_(nullptr),
+     application_controller_(nullptr)
 {
 
 }
@@ -44,11 +47,14 @@ DHAX_Main_Window_Controller::DHAX_Main_Window_Controller()
 
 void DHAX_Main_Window_Controller::init_image_scene_item(DHAX_Image_Scene_Item *si)
 {
-
  image_scene_item_ = si;
+
+ application_controller_->init_image_scene_item(si);
 
  si->set_meshlab_import_count(application_main_window_->
    main_window_data()->meshlab_integration()->meshlab_import_count());
+
+// application_controller_
 
 //?
 // si->set_freecad_import_count(application_main_window_->
@@ -58,49 +64,49 @@ void DHAX_Main_Window_Controller::init_image_scene_item(DHAX_Image_Scene_Item *s
 //?
 // image_scene_item_->setGeometry(0,0,0,0);
 // image_scene_item_->setObjectName(QString::fromUtf8("ImageDisplayWidget"));
+// // //
 
 
  //image_scene_item_->self_connect()
- image_scene_item_->connect(image_scene_item_,SIGNAL(save_notation_requested(bool)),
-   main_window_receiver_, SLOT(handle_save_notation_requested(bool)));
 
- image_scene_item_->connect(image_scene_item_,SIGNAL(convert_notation_requested()),
-   main_window_receiver_, SLOT(handle_convert_notation_requested()));
+// image_scene_item_->connect(image_scene_item_,SIGNAL(save_notation_requested(bool)),
+//   main_window_receiver_, SLOT(handle_save_notation_requested(bool)));
 
- image_scene_item_->connect(image_scene_item_,SIGNAL(polygon_save_notation_requested()),
-   main_window_receiver_, SLOT(handle_polygon_save_notation_requested()));
- image_scene_item_->connect(image_scene_item_,SIGNAL(polygon_complete_and_save_notation_requested()),
-   main_window_receiver_, SLOT(handle_polygon_complete_and_save_notation_requested()));
+// image_scene_item_->connect(image_scene_item_,SIGNAL(convert_notation_requested()),
+//   main_window_receiver_, SLOT(handle_convert_notation_requested()));
 
- image_scene_item_->connect(image_scene_item_, SIGNAL(complete_polygon_requested()),
+// image_scene_item_->connect(image_scene_item_,SIGNAL(polygon_save_notation_requested()),
+//   main_window_receiver_, SLOT(handle_polygon_save_notation_requested()));
+// image_scene_item_->connect(image_scene_item_,SIGNAL(polygon_complete_and_save_notation_requested()),
+//   main_window_receiver_, SLOT(handle_polygon_complete_and_save_notation_requested()));
+
+ image_scene_item_->self_connect(SIGNAL(complete_polygon_requested()),
    main_window_receiver_, SLOT(handle_complete_polygon_requested()));
 
- image_scene_item_->connect(image_scene_item_, SIGNAL(meshlab_import_info_requested()),
-   main_window_receiver_, SLOT(show_meshlab_import_info()));
+ image_scene_item_->self_connect(SIGNAL(meshlab_import_info_requested()),
+   main_window_receiver_, SLOT(handle_meshlab_import_info_requested()));
+   //show_meshlab_import_info
 
- image_scene_item_->connect(image_scene_item_, SIGNAL(draw_bezier_requested()),
+ image_scene_item_->self_connect(SIGNAL(draw_bezier_requested()),
    main_window_receiver_,
    SLOT(handle_draw_bezier()));
 
- image_scene_item_->connect(image_scene_item_, SIGNAL(draw_cubic_path_requested()),
+ image_scene_item_->self_connect(SIGNAL(draw_cubic_path_requested()),
    main_window_receiver_,
    SLOT(handle_draw_cubic_path()));
 
- image_scene_item_->connect(image_scene_item_, SIGNAL(draw_quad_path_requested()),
+ image_scene_item_->self_connect(SIGNAL(draw_quad_path_requested()),
    main_window_receiver_,
    SLOT(handle_draw_quad_path()));
 
- image_scene_item_->connect(image_scene_item_, SIGNAL(meshlab_reset_requested()),
-   main_window_receiver_,
-   SLOT(send_meshlab_reset()));
+// image_scene_item_->self_connect(SIGNAL(meshlab_reset_requested()),
+//   main_window_receiver_,
+//   SLOT(send_meshlab_reset()));
 
- image_scene_item_->connect(image_scene_item_, SIGNAL(freecad_import_info_requested()),
-   main_window_receiver_,
-   SLOT(show_freecad_import_info()));
+// image_scene_item_->self_connect(SIGNAL(freecad_import_info_requested()),
+//   main_window_receiver_,
+//   SLOT(show_freecad_import_info()));
 
- image_scene_item_->connect(image_scene_item_, SIGNAL(freecad_reset_requested()),
-   main_window_receiver_,
-   SLOT(send_freecad_reset()));
 
 }
 

@@ -32,6 +32,9 @@
 #include "main-window/dhax-main-window-controller.h"
 #include "main-window/dhax-main-window-data.h"
 
+#include "image-viewer/dhax-image-scene-item.h"
+#include "application/dhax-application-receiver.h"
+
 #include <QMenuBar>
 
 #include <QGuiApplication>
@@ -46,13 +49,68 @@
 DHAX_Application_Controller::DHAX_Application_Controller()
   :  application_main_window_(nullptr),
      main_window_controller_(nullptr),
-
-
+     application_receiver_(nullptr),
     // display_image_data_(nullptr),
 //     zoom_frame_(nullptr),
 //     image_scene_item_(nullptr),
 //     main_window_receiver_(nullptr),
      udp_controller_(nullptr)
+{
+
+}
+
+
+void DHAX_Application_Controller::init_image_scene_item(DHAX_Image_Scene_Item* si)
+{
+ si->self_connect(SIGNAL(save_notation_requested(bool)),
+   application_receiver_, SLOT(handle_save_notation_requested(bool)));
+
+ si->self_connect(SIGNAL(convert_notation_requested()),
+   application_receiver_, SLOT(handle_convert_notation_requested()));
+
+ si->self_connect(SIGNAL(save_notation_requested(bool)),
+   application_receiver_, SLOT(handle_save_notation_requested(bool)));
+
+ si->self_connect(SIGNAL(convert_notation_requested()),
+   application_receiver_, SLOT(handle_convert_notation_requested()));
+
+// si->self_connect(&DHAX_Image_Scene_Item::convert_notation_requested,
+//   application_receiver_, SLOT(handle_convert_notation_requested()));
+
+
+ si->self_connect(SIGNAL(polygon_save_notation_requested()),
+   application_receiver_, SLOT(handle_polygon_save_notation_requested()));
+
+//?
+// si->self_connect(&DHAX_Image_Scene_Item::polygon_save_notation_requested,
+//   application_receiver_, &DHAX_Application_Receiver::handle_polygon_save_notation_requested);
+
+
+
+ si->self_connect(SIGNAL(polygon_complete_and_save_notation_requested()),
+   application_receiver_, SLOT(handle_polygon_complete_and_save_notation_requested()));
+
+
+ si->self_connect(SIGNAL(meshlab_reset_requested()),
+   application_receiver_,
+   SLOT(send_meshlab_reset()));
+
+
+ si->self_connect(SIGNAL(freecad_reset_requested()),
+   application_receiver_,
+   SLOT(send_freecad_reset()));
+
+
+ //init_image_scene_item
+}
+
+
+void DHAX_Application_Controller::send_freecad_reset()
+{
+
+}
+
+void DHAX_Application_Controller::send_meshlab_reset()
 {
 
 }

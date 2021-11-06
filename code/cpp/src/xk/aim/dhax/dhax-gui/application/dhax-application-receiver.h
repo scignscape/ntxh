@@ -31,6 +31,11 @@ public:
 
 public Q_SLOTS:
 
+ void handle_save_notation_requested(bool with_comment);
+ void handle_polygon_save_notation_requested();
+ void handle_send_freecad_reset_requested();
+ void handle_send_meshlab_reset_requested();
+
 // void handle_take_screenshot_requested();
 // void handle_load_image_requested();
 

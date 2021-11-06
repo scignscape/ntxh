@@ -19,7 +19,7 @@ class Zoom_and_Navigate_Frame;
 class DHAX_Image_Viewer;
 class DHAX_Image_Scene_Item;
 class DHAX_Main_Window_Receiver;
-
+class DHAX_Application_Controller;
 
 class DHAX_Main_Window_Controller //: public QObject
 {
@@ -32,7 +32,8 @@ class DHAX_Main_Window_Controller //: public QObject
  DHAX_Image_Viewer* image_viewer_;
  DHAX_Image_Scene_Item* image_scene_item_;
  DHAX_Main_Window_Receiver* main_window_receiver_;
-\
+ DHAX_Application_Controller* application_controller_;
+
 public:
 
  DHAX_Main_Window_Controller();
@@ -42,6 +43,7 @@ public:
  ACCESSORS(DHAX_Display_Image_Data* ,display_image_data)
  ACCESSORS(DHAX_Image_Viewer* ,image_viewer)
  ACCESSORS(DHAX_Main_Window_Receiver* ,main_window_receiver)
+ ACCESSORS(DHAX_Application_Controller* ,application_controller)
 
  void take_screenshot();
  void load_image();

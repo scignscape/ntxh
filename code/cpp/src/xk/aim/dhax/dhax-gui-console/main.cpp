@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
  DHAX_GUI_Environment dge;
  dge.init_main_window();
  dge.init_main_window_receiver();
+ dge.init_application_receiver();
  dge.init_main_window_signal_generator();
  dge.init_menu_system();
  dge.init_main_window_frame();
@@ -35,8 +36,8 @@ int main(int argc, char *argv[])
  dge.init_graphics_frame_layout(QBoxLayout::TopToBottom, QBoxLayout::LeftToRight);
  dge.init_main_window_frame_layout(QBoxLayout::TopToBottom);
  dge.init_main_window_data();
- dge.init_main_window_controller();
  dge.init_application_controller();
+ dge.init_main_window_controller();
  dge.init_integration_controllers();
  dge.init_udp_controller();
 

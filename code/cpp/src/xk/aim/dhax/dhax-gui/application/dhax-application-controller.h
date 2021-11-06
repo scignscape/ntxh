@@ -24,6 +24,7 @@ class DHAX_UDP_Controller;
 
 class DHAX_Integration_Controller;
 class DHAX_Main_Window_Controller;
+class DHAX_Application_Receiver;
 
 class DHAX_Application_Controller //: public QObject
 {
@@ -32,6 +33,8 @@ class DHAX_Application_Controller //: public QObject
  DHAX_Main_Window* application_main_window_;
 
  DHAX_Main_Window_Controller* main_window_controller_;
+ DHAX_Main_Window_Receiver* main_window_receiver_;
+ DHAX_Application_Receiver* application_receiver_;
 
 // QString current_image_file_path_;
 // DHAX_Display_Image_Data* display_image_data_;
@@ -54,6 +57,7 @@ public:
 // ACCESSORS(DHAX_Main_Window_Receiver* ,main_window_receiver)
  ACCESSORS(DHAX_UDP_Controller* ,udp_controller)
  ACCESSORS(DHAX_Main_Window_Controller* ,main_window_controller)
+ ACCESSORS(DHAX_Application_Receiver* ,application_receiver)
 
 // void take_screenshot();
 // void load_image();
@@ -65,6 +69,12 @@ public:
  void init_integration_controllers();
 
  void load_image(QString file_path);
+
+ void init_image_scene_item(DHAX_Image_Scene_Item *si);
+
+ void send_freecad_reset();
+ void send_meshlab_reset();
+
 
 };
 

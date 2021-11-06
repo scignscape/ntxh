@@ -101,6 +101,11 @@ private:
 
 public:
 
+ DHAX_Image_Scene_Item(QWidget *parent = 0);
+
+ USE_SELF_CONNECT(normal)
+ USE_SELF_CONNECT(lambda)
+
  ACCESSORS(DHAX_Display_Image_Data* ,data)
  ACCESSORS(QGraphicsProxyWidget* ,this_proxy_widget)
  ACCESSORS(QPointF ,original_position)
@@ -109,9 +114,6 @@ public:
  ACCESSORS(u4* ,meshlab_import_count)
  ACCESSORS(u4* ,freecad_import_count)
 
-public:
-
- DHAX_Image_Scene_Item(QWidget *parent = 0);
 
  enum shapes{ square, ellipse, polygon };
 
