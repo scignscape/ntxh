@@ -45,11 +45,47 @@ void DHAX_Menu_System::init_menus()
 
  DHAX_Signal_Generator* sg = main_window_->signal_generator();
 
- QMenu* file = menus_->menu("File");
- file->addAction("Load Image", [sg]
+ DHAX_Menu& file_menu = *menus_->menu("File");
+ file_menu.add_action("Load Image") << [sg]
  {
   sg->emit_load_image_requested();
- });
+ };
+
+ file_menu.addSeparator();
+ //file_menu.addAction(action_load_annotations);
+
+ file_menu.add_action("View Contours (Open CV)") << [sg]
+ {
+  sg->emit_view_contours_requested();
+ };
+
+ file_menu.add_action("View 3D (MeshLab)") << [sg]
+ {
+  sg->emit_view_3d_requested();
+ };
+
+ file_menu.add_action("View 360 (Matterport)") << [sg]
+ {
+  sg->emit_view_360_requested();
+ };
+
+ file_menu.add_action("View CAD/3D (FreeCAD)") << [sg]
+ {
+  sg->emit_view_cad_requested();
+ };
+
+ file_menu.addSeparator();
+
+ file_menu.add_action("Run Forge Workflow (Forge API)") << [sg]
+ {
+  sg->emit_run_forge_workflow_requested();
+ };
+
+ file_menu.addSeparator();
+ file_menu.add_action("Quit") << [sg]
+ {
+  sg->emit_quit_requested();
+ };
 
 
  QMenu* tools = menus_->menu("Tools");

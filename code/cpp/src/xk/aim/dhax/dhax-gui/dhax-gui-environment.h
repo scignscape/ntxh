@@ -31,6 +31,7 @@ class DHAX_UDP_Controller;
 class DHAX_Application_Controller;
 class DHAX_Integration_Controller;
 class DHAX_Application_Receiver;
+class DHAX_External_Application_Controller;
 
 
 class DHAX_GUI_Environment
@@ -41,6 +42,7 @@ class DHAX_GUI_Environment
  DHAX_Main_Window_Receiver* main_window_receiver_;
  DHAX_Application_Receiver* application_receiver_;
  DHAX_Application_Controller* application_controller_;
+ DHAX_External_Application_Controller* external_application_controller_;
  DHAX_Graphics_View* graphics_view_;
  DHAX_Main_Window_Frame* main_window_frame_;
  DHAX_Graphics_Scene* graphics_scene_;
@@ -62,6 +64,7 @@ public:
  void init_menu_system();
  void init_main_window_controller();
  void init_application_controller();
+ void init_external_application_controller();
  void init_integration_controllers();
  void init_main_window_receiver();
  void init_application_receiver();

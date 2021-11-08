@@ -21,11 +21,18 @@ QMAKE_CXX = g++-7
 CONFIG += c++17
 
 
+#defined(FEATURE_IFC ,var) {
+# DEFINES += $$FEATURE_IFC
+# include($$ROOT_DIR/../preferred/occt.pri)
+#}
+
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
 #include($$ROOT_DIR/../preferred/aim.pri)
 
 include($$ROOT_DIR/../preferred/dhax.pri)
+
+include($$ROOT_DIR/../preferred/opencv.pri)
 
 DEFINES += DHAX_DATA_FOLDER=\\\"$$DHAX_DATA_DIR\\\"
 DEFINES += DHAX_IMAGE_FOLDER=\\\"$$DHAX_IMAGE_DIR\\\"
@@ -74,12 +81,24 @@ LIBS += -L$$TARGETSDIR  -laxfi
 LIBS += -lrt
 
 
+LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
+  -lchasm-lib-33 -lchasm-lib-43
+
+
+LIBS += -L$$TARGETSDIR  -ldgi-opencv
+
+
 LIBS += -L$$TARGETSDIR -ldgdb
 
 LIBS += -L$$TARGETSDIR -ltkrzw -llz4  -llzma -lz
 
 LIBS += -L$$TARGETSDIR -lwhitedb
 
+
+
+LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_imgcodecs
+LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_core
+LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_imgproc
 
 
 #LIBS += -L$$TARGETSDIR -laimlib
@@ -97,6 +116,25 @@ INCLUDEPATH += $$DCMTK_DIR/dcm-config/include
 INCLUDEPATH += $$DCMTK_DIR/dcmsr/include
 INCLUDEPATH += $$DCMTK_DIR/dcmdata/include
 INCLUDEPATH += $$DCMTK_DIR/oflog/include
+
+
+defined(FEATURE_IFC ,var) {
+
+DEFINES += $$FEATURE_IFC
+
+LIBS += $$TARGETSDIR/libifc-multi.a
+
+LIBS += $$TARGETSDIR/libifc-2x3.a \
+  $$TARGETSDIR/libifc-4.a \
+  $$TARGETSDIR/libifc-4x1.a \
+  $$TARGETSDIR/libifc-4x2.a \
+  $$TARGETSDIR/libifc-4x3_rc1.a \
+  $$TARGETSDIR/libifc-4x3_rc2.a \
+  $$TARGETSDIR/libifc-4x3_rc3.a \
+  $$TARGETSDIR/libifc-4x3_rc4.a \
+
+}
+
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

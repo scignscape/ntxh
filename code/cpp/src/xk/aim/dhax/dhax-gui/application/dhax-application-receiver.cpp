@@ -10,6 +10,7 @@
 //#include "dhax-main-window-controller.h"
 
 #include "dhax-application-controller.h"
+#include "dhax-external-application-controller.h"
 
 #include <QMenuBar>
 
@@ -28,34 +29,61 @@ DHAX_Application_Receiver::DHAX_Application_Receiver()
 }
 
 
-void DHAX_Application_Receiver::handle_send_freecad_reset_requested()
+void DHAX_Application_Receiver::handle_freecad_reset()
 {
  application_controller_->send_freecad_reset();
 }
 
 
-void DHAX_Application_Receiver::handle_send_meshlab_reset_requested()
+void DHAX_Application_Receiver::handle_meshlab_reset()
 {
  application_controller_->send_meshlab_reset();
 }
 
 
-void DHAX_Application_Receiver::handle_save_notation_requested(bool with_comment)
+void DHAX_Application_Receiver::handle_convert_notation()
 {
 
 }
 
-void DHAX_Application_Receiver:: handle_polygon_save_notation_requested()
+
+void DHAX_Application_Receiver::handle_save_notation(bool with_comment)
 {
 
 }
 
-//void DHAX_Main_Window_Receiver::handle_take_screenshot_requested()
-//{
-// main_window_controller_->take_screenshot();
-//}
 
-//void DHAX_Main_Window_Receiver::handle_load_image_requested()
-//{
-// main_window_controller_->load_image();
-//}
+void DHAX_Application_Receiver::handle_polygon_complete_and_save_notation()
+{
+
+}
+
+
+void DHAX_Application_Receiver::handle_polygon_save_notation()
+{
+
+}
+
+void DHAX_Application_Receiver::handle_view_contours()
+{
+ application_controller_->view_contours();
+}
+
+void DHAX_Application_Receiver::handle_view_3d()
+{
+ external_application_controller_->view_3d();
+}
+
+void DHAX_Application_Receiver::handle_view_360()
+{
+ external_application_controller_->view_360();
+}
+
+void DHAX_Application_Receiver::handle_view_cad()
+{
+ external_application_controller_->view_cad();
+}
+
+void DHAX_Application_Receiver::handle_run_forge_workflow()
+{
+}

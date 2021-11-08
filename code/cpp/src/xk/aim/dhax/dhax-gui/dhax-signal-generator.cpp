@@ -23,3 +23,34 @@ void DHAX_Signal_Generator::emit_load_image_requested()
 {
  Q_EMIT load_image_requested();
 }
+
+void DHAX_Signal_Generator::emit_view_contours_requested()
+{
+ Q_EMIT view_contours_requested();
+}
+
+void DHAX_Signal_Generator::emit_view_3d_requested()
+{
+ Q_EMIT view_3d_requested();
+}
+
+void DHAX_Signal_Generator::emit_view_360_requested()
+{
+ Q_EMIT view_360_requested();
+}
+
+void DHAX_Signal_Generator::emit_view_cad_requested()
+{
+ Q_EMIT view_cad_requested();
+}
+
+void DHAX_Signal_Generator::emit_run_forge_workflow_requested()
+{
+ Q_EMIT run_forge_workflow_requested();
+}
+
+void DHAX_Signal_Generator::emit_quit_requested()
+{
+ Q_EMIT quit_requested();
+}
+

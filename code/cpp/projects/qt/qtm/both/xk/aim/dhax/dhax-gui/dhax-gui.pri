@@ -7,7 +7,8 @@
 
 include(../build-group.pri)
 
-QT += xml widgets network
+QT += xml widgets network webenginewidgets
+
 
 INCLUDEPATH += $$SRC_DIR
 
@@ -18,6 +19,12 @@ QMAKE_CXX = g++-7
 
 CONFIG += c++17
 
+FEATURE_IFC = "USE_IFC"
+
+#defined(FEATURE_IFC ,var) {
+# DEFINES += $$FEATURE_IFC
+# include($$ROOT_DIR/../preferred/occt.pri)
+#}
 
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
@@ -28,6 +35,10 @@ include($$ROOT_DIR/../preferred/dhax.pri)
 
 DEFINES += DHAX_DATA_FOLDER=\\\"$$DHAX_DATA_DIR\\\"
 DEFINES += DHAX_IMAGE_FOLDER=\\\"$$DHAX_IMAGE_DIR\\\"
+
+DEFINES += DEFAULT_DHAX_TEMP_FOLDER=\\\"$$DHAX_TEMP_DIR\\\"
+DEFINES += DEFAULT_DGI_TEMP_FOLDER=\\\"$$DGI_TEMP_DIR\\\"
+
 
 
 DEFINES += DEFAULT_DEV_TKRZW_FOLDER=\\\"$$ROOT_DIR/../dev/consoles/dgdb/tkrzw\\\"
@@ -42,6 +53,7 @@ INCLUDEPATH += $$DGDB_SRC_GROUP_DIR
 
 INCLUDEPATH += $$DGDB_SRC_GROUP_DIR/tkrzw
 
+INCLUDEPATH += $$DGDB_WHITE_SRC_GROUP_DIR
 
 INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR
 
@@ -49,6 +61,15 @@ INCLUDEPATH += $$SRC_GROUP_DIR/tkrzw
 
 INCLUDEPATH += $$WHITEDB_SRC_GROUP_DIR
 
+INCLUDEPATH += $$CHASM_SRC_GROUP_DIR
+
+
+include($$ROOT_DIR/../preferred/opencv.pri)
+
+INCLUDEPATH += $$OPENCV_SRC_DIR/modules/core/include
+INCLUDEPATH += $$OPENCV_SRC_DIR/modules/imgproc/include
+INCLUDEPATH += $$OPENCV_SRC_DIR/modules/imgcodecs/include
+INCLUDEPATH += $$OPENCV_BUILD_DIR
 
 
 HEADERS += \
@@ -60,6 +81,7 @@ HEADERS += \
   $$SRC_DIR/main-window/dhax-main-window-controller.h \
   $$SRC_DIR/main-window/dhax-main-window-receiver.h \
   $$SRC_DIR/application/dhax-application-controller.h \
+  $$SRC_DIR/application/dhax-external-application-controller.h \
   $$SRC_DIR/application/dhax-application-receiver.h \
   $$SRC_DIR/dhax-graphics-view.h \
   $$SRC_DIR/dhax-graphics-scene.h \
@@ -80,6 +102,14 @@ HEADERS += \
   $$SRC_DIR/integration/forge-api/dhax-forge-api-integration-data.h \
   $$SRC_DIR/virtual-packages/graphics-scene-demo.h \
   $$SRC_DIR/network/dhax-udp-controller.h \
+  $$SRC_DIR/rpdf/rpdf-web-engine-page.h \
+  $$SRC_DIR/rpdf/rpdf-web-engine-view.h \
+  $$SRC_DIR/rpdf/webgl-view-dialog.h \
+  $$SRC_DIR/rpdf/context-menu-provider.h \
+  $$SRC_DIR/rpdf/url-or-event-pattern.h \
+  $$SRC_DIR/rpdf/pattern-matcher-runtime.h \
+  $$SRC_DIR/rpdf/my-page.h \
+  $$SRC_DIR/rpdf/signal-generator.h \
 
 
 SOURCES += \
@@ -92,6 +122,7 @@ SOURCES += \
   $$SRC_DIR/main-window/dhax-menu-system.cpp \
   $$SRC_DIR/application/dhax-application-controller.cpp \
   $$SRC_DIR/application/dhax-application-receiver.cpp \
+  $$SRC_DIR/application/dhax-external-application-controller.cpp \
   $$SRC_DIR/dhax-graphics-view.cpp \
   $$SRC_DIR/dhax-graphics-scene.cpp \
   $$SRC_DIR/dhax-gui-environment.cpp \
@@ -112,6 +143,14 @@ SOURCES += \
   $$SRC_DIR/integration/forge-api/dhax-forge-api-integration-data.cpp \
   $$SRC_DIR/virtual-packages/graphics-scene-demo.cpp \
   $$SRC_DIR/network/dhax-udp-controller.cpp \
+  $$SRC_DIR/rpdf/rpdf-web-engine-page.cpp \
+  $$SRC_DIR/rpdf/rpdf-web-engine-view.cpp \
+  $$SRC_DIR/rpdf/webgl-view-dialog.cpp \
+  $$SRC_DIR/rpdf/context-menu-provider.cpp \
+  $$SRC_DIR/rpdf/url-or-event-pattern.cpp \
+  $$SRC_DIR/rpdf/pattern-matcher-runtime.cpp \
+  $$SRC_DIR/rpdf/my-page.cpp \
+  $$SRC_DIR/rpdf/signal-generator.cpp \
 
 
 #  $$SRC_DIR/dhax-gui.cpp \
@@ -133,11 +172,27 @@ LIBS += -L$$TARGETSDIR  -laxfi
 LIBS += -lrt
 
 
+LIBS += -L$$TARGETSDIR  -ldgi-opencv
+
+
+LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
+  -lchasm-lib-33 -lchasm-lib-43
+
+
+include($$ROOT_DIR/../preferred/freecad.pri)
+
+DEFINES += FREECAD_BIN_FOLDER=\\\"$$FREECAD_BIN_DIR\\\"
+
+
 LIBS += -L$$TARGETSDIR -ldgdb
 
 LIBS += -L$$TARGETSDIR -ltkrzw -llz4  -llzma -lz
 
 LIBS += -L$$TARGETSDIR -lwhitedb
+
+
+LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
+  -lchasm-lib-33 -lchasm-lib-43
 
 
 
@@ -156,6 +211,25 @@ INCLUDEPATH += $$DCMTK_DIR/dcm-config/include
 INCLUDEPATH += $$DCMTK_DIR/dcmsr/include
 INCLUDEPATH += $$DCMTK_DIR/dcmdata/include
 INCLUDEPATH += $$DCMTK_DIR/oflog/include
+
+
+
+defined(FEATURE_IFC ,var) {
+
+DEFINES += $$FEATURE_IFC
+
+LIBS += $$TARGETSDIR/libifc-multi.a
+
+LIBS += $$TARGETSDIR/libifc-2x3.a \
+  $$TARGETSDIR/libifc-4.a \
+  $$TARGETSDIR/libifc-4x1.a \
+  $$TARGETSDIR/libifc-4x2.a \
+  $$TARGETSDIR/libifc-4x3_rc1.a \
+  $$TARGETSDIR/libifc-4x3_rc2.a \
+  $$TARGETSDIR/libifc-4x3_rc3.a \
+  $$TARGETSDIR/libifc-4x3_rc4.a \
+
+}
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

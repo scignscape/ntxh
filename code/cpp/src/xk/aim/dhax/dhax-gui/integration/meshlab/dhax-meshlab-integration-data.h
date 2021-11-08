@@ -31,6 +31,12 @@ public:
 
  ACCESSORS(u4* ,meshlab_import_count)
 
+ ACCESSORS__RGET(QQuaternion ,meshlab_track_info)
+ ACCESSORS(r4 ,meshlab_scale_info)
+ ACCESSORS__RGET(QVector3D ,meshlab_center_position)
+ ACCESSORS(QString ,meshlab_file_path)
+ ACCESSORS(QString ,mesh_file_path)
+
  void init_import_count();
 
 };

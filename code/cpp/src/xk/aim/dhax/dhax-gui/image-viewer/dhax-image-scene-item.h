@@ -146,6 +146,8 @@ Q_SIGNALS:
  void draw_cubic_path_requested();
  void draw_quad_path_requested();
 
+ void convert_notation_requested();
+
 
 protected:
  void paintEvent(QPaintEvent *); //metodo per la stampa su schermo di tutte le annotazioni e le varie operazioni effettuate dall'utente

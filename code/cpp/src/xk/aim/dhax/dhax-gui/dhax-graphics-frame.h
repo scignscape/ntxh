@@ -56,6 +56,7 @@ public:
 Q_SIGNALS:
 
  void close_requested(bool);
+ void save_requested();
 
 public Q_SLOTS:
 

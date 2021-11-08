@@ -33,6 +33,8 @@
 #include "main-window/dhax-main-window-data.h"
 
 #include "application/dhax-application-receiver.h"
+#include "application/dhax-external-application-controller.h"
+
 
 #include <QBoxLayout>
 #include <QLabel>
@@ -45,6 +47,7 @@ DHAX_GUI_Environment::DHAX_GUI_Environment()
   :  main_window_(nullptr),
      main_window_controller_(nullptr),
      application_controller_(nullptr),
+     external_application_controller_(nullptr),
      menu_system_(nullptr),
      graphics_view_(nullptr),
      main_window_frame_(nullptr),
@@ -105,15 +108,23 @@ void DHAX_GUI_Environment::init_main_window_data()
  main_window_->set_main_window_data(new DHAX_Main_Window_Data);
 }
 
+void DHAX_GUI_Environment::init_external_application_controller()
+{
+ external_application_controller_ = new DHAX_External_Application_Controller;
+ application_receiver_->set_external_application_controller(external_application_controller_);
+ external_application_controller_->set_application_controller(application_controller_);
+ external_application_controller_->set_application_main_window(main_window_);
+}
 
 void DHAX_GUI_Environment::init_application_controller()
 {
  application_controller_ = new DHAX_Application_Controller;
  application_controller_->set_udp_controller(udp_controller_);
  application_controller_->init_udp_controller();
- application_controller_->set_main_window_controller(main_window_controller_);
  application_controller_->set_application_main_window(main_window_);
  application_controller_->set_application_receiver(application_receiver_);
+ application_receiver_->set_application_controller(application_controller_);
+ application_receiver_->set_application_main_window(main_window_);
 }
 
 void DHAX_GUI_Environment::init_main_window_controller()
@@ -126,6 +137,7 @@ void DHAX_GUI_Environment::init_main_window_controller()
  main_window_controller_->set_main_window_receiver(main_window_receiver_);
  main_window_controller_->set_application_controller(application_controller_);
  main_window_receiver_->set_main_window_controller(main_window_controller_);
+ application_controller_->set_main_window_controller(main_window_controller_);
 }
 
 void DHAX_GUI_Environment::init_main_window_receiver()
@@ -147,16 +159,41 @@ void DHAX_GUI_Environment::init_main_window_signal_generator()
  main_window_->init_signal_generator();
 
  main_window_->signal_generator()->self_connect(SIGNAL(take_screenshot_requested()),
-  main_window_receiver_, SLOT(handle_take_screenshot_requested()));
+  main_window_receiver_, SLOT(handle_take_screenshot()));
 
  main_window_->signal_generator()->self_connect(SIGNAL(load_image_requested()),
-  main_window_receiver_, SLOT(handle_load_image_requested()));
+  main_window_receiver_, SLOT(handle_load_image()));
 
-// _self_connect_(main_window_->signal_generator() ,take_screenshot_requested)
-//   << []()
-//   {
-//    qDebug() << "OK";
-//   };
+ main_window_->signal_generator()->self_connect(SIGNAL(view_contours_requested()),
+  application_receiver_, SLOT(handle_view_contours()));
+
+ main_window_->signal_generator()->self_connect(SIGNAL(view_3d_requested()),
+  application_receiver_, SLOT(handle_view_3d()));
+
+ main_window_->signal_generator()->self_connect(SIGNAL(view_360_requested()),
+  application_receiver_, SLOT(handle_view_360()));
+
+ main_window_->signal_generator()->self_connect(SIGNAL(view_cad_requested()),
+  application_receiver_, SLOT(handle_view_cad()));
+
+ main_window_->signal_generator()->self_connect(SIGNAL(run_forge_workflow_requested()),
+  application_receiver_, SLOT(handle_run_forge_workflow()));
+
+// void view_contours_requested();
+// void view_3d_requested();
+// void view_360_requested();
+// void view_cad_requested();
+// void run_forge_workflow_requested();
+
+// main_window_->signal_generator()->self_connect(SIGNAL(quit_requested()),
+//  main_window_receiver_, SLOT(handle_load_image()));
+
+ _self_connect_(main_window_->signal_generator() ,quit_requested)
+   << [this]()
+ {
+  main_window_->close();
+ };
+
 
 }
 

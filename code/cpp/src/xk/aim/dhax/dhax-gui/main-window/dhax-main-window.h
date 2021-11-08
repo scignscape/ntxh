@@ -11,6 +11,8 @@
 
 #include <QMainWindow>
 
+#include <QMessageBox>
+
 #include "accessors.h"
 
 
@@ -25,6 +27,7 @@ class DHAX_Main_Window : public QMainWindow
  DHAX_Main_Window_Data* main_window_data_;
  //DHAX_Main_Window_Menus* menus_;
  DHAX_Signal_Generator* signal_generator_;
+ QMessageBox* import_info_message_box_;
 
 public:
 
@@ -36,6 +39,9 @@ public:
 
  void init_menus();
  void init_signal_generator();
+
+ void show_meshlab_import_info();
+
 
 
 };

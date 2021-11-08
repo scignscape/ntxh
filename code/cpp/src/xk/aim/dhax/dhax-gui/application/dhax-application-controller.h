@@ -11,6 +11,8 @@
 
 #include "accessors.h"
 
+#include "global-types.h"
+
 #include <QString>
 #include <QMap>
 
@@ -64,6 +66,8 @@ public:
 // void load_image(QString file_path);
 // void init_image_scene_item(DHAX_Image_Scene_Item* si);
 
+ static void r8_vector_to_qba(const QVector<r8>& data, QByteArray& qba);
+
  void init_udp_controller();
  void dispatch_datagram(QByteArray qba);
  void init_integration_controllers();
@@ -74,11 +78,13 @@ public:
 
  void send_freecad_reset();
  void send_meshlab_reset();
+ void view_contours();
 
+ void handle_view_contour_info(QString path);
 
 };
 
 
-#endif //  DHAX_MAIN_WINDOW_MENUS__H
+#endif //  DHAX_APPLICATION_CONTROLLER__H
 
 

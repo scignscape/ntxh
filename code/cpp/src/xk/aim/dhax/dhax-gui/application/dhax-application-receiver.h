@@ -14,6 +14,7 @@
 
 class DHAX_Main_Window;
 class DHAX_Application_Controller;
+class DHAX_External_Application_Controller;
 
 class DHAX_Application_Receiver : public QObject
 {
@@ -21,6 +22,7 @@ class DHAX_Application_Receiver : public QObject
 
  DHAX_Main_Window* application_main_window_;
  DHAX_Application_Controller* application_controller_;
+ DHAX_External_Application_Controller* external_application_controller_;
 
 public:
 
@@ -28,16 +30,27 @@ public:
 
  ACCESSORS(DHAX_Main_Window* ,application_main_window)
  ACCESSORS(DHAX_Application_Controller* ,application_controller)
+ ACCESSORS(DHAX_External_Application_Controller* ,external_application_controller)
 
 public Q_SLOTS:
 
- void handle_save_notation_requested(bool with_comment);
- void handle_polygon_save_notation_requested();
- void handle_send_freecad_reset_requested();
- void handle_send_meshlab_reset_requested();
+ void handle_save_notation(bool with_comment);
+ void handle_polygon_save_notation();
+ void handle_freecad_reset();
+ void handle_meshlab_reset();
+ void handle_convert_notation();
+ void handle_polygon_complete_and_save_notation();
 
-// void handle_take_screenshot_requested();
-// void handle_load_image_requested();
+ void handle_view_contours();
+ void handle_view_3d();
+ void handle_view_360();
+ void handle_view_cad();
+
+ void handle_run_forge_workflow();
+
+
+// void handle_take_screenshot();
+// void handle_load_image();
 
 };
 

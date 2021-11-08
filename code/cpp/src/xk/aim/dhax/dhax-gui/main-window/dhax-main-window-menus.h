@@ -15,11 +15,35 @@
 
 class DHAX_Main_Window;
 
+class DHAX_Menu : public QMenu
+{
+ struct _add_action_package {
+  DHAX_Menu* _this;
+  QString label;
+
+  template<typename FN_Type>
+  void operator <<(FN_Type fn)
+  {
+   _this->addAction(label, fn);
+  }
+ };
+
+public:
+
+ DHAX_Menu() {};
+
+ _add_action_package add_action(QString label)
+ {
+  return {this, label};
+ }
+
+};
+
 class DHAX_Main_Window_Menus
 {
  DHAX_Main_Window* parent_;
 
- QMap<QString, QMenu*> menus_;
+ QMap<QString, DHAX_Menu*> menus_;
 
 // QMenu* help_menu_;
 // QMenu* tools_menu_;
@@ -31,7 +55,7 @@ public:
  ACCESSORS(DHAX_Main_Window* ,parent)
 
  void init_menu(QString label);
- QMenu* menu(QString label);
+ DHAX_Menu* menu(QString label);
 
 };
 

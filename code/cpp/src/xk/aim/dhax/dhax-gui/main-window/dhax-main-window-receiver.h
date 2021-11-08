@@ -31,15 +31,15 @@ public:
 
 public Q_SLOTS:
 
- void handle_take_screenshot_requested();
- void handle_load_image_requested();
- void handle_complete_polygon_requested();
- void handle_meshlab_import_info_requested();
- void handle_freecad_import_info_requested();
+ void handle_take_screenshot();
+ void handle_load_image();
+ void handle_complete_polygon();
+ void handle_meshlab_import_info();
+ void handle_freecad_import_info();
 
- void handle_draw_bezier_requested();
- void handle_draw_cubic_path_requested();
- void handle_draw_quad_path_requested();
+ void handle_draw_bezier();
+ void handle_draw_cubic_path();
+ void handle_draw_quad_path();
 
 
 };

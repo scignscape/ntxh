@@ -12,12 +12,14 @@
 
 #include "accessors.h"
 
+#include "global-types.h"
+
 
 class DHAX_Signal_Generator;
 
 class DHAX_UDP_Controller
 {
- QUdpSocket udp_outgoing_socket_;
+ QUdpSocket* udp_outgoing_socket_;
  QUdpSocket udp_incoming_socket_;
 
  DHAX_Signal_Generator* signal_generator_;
@@ -27,9 +29,15 @@ public:
  DHAX_UDP_Controller();
 
  ACCESSORS__CONST_RGET(QUdpSocket ,udp_incoming_socket)
- ACCESSORS__CONST_RGET(QUdpSocket ,udp_outgoing_socket)
+ ACCESSORS__GET(QUdpSocket* ,udp_outgoing_socket)
 
  ACCESSORS(DHAX_Signal_Generator* ,signal_generator)
+
+ static void wrap_udp(QByteArray& qba, u1 msg_flags = 1);
+
+ void check_init_outgoing_socket();
+ void send_datagram(const QByteArray& qba);
+ void wrap_and_send_datagram(QByteArray& qba, u1 msg_flags = 1);
 
 };
 

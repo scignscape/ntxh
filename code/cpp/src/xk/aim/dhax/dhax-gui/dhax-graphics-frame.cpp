@@ -72,7 +72,11 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
 
  zoom_frame_->self_connect(SIGNAL(zoom_factor_changed(r8)), this, SLOT(handle_zoom_factor_changed(r8)));
 
- shape_select_frame_->self_connect(SIGNAL(save_requested(bool)), this, SLOT(handle_save_requested(bool)));
+ _self_connect_(shape_select_frame_ ,save_requested)
+   << [this] (bool)
+ {
+  Q_EMIT save_requested();
+ };
 
  shape_select_frame_->self_connect(SIGNAL(close_requested(bool)), this, SIGNAL(close_requested(bool)));
 

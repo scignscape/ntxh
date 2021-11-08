@@ -26,19 +26,19 @@ DHAX_Main_Window_Receiver::DHAX_Main_Window_Receiver()
 }
 
 
-void DHAX_Main_Window_Receiver::handle_draw_bezier_requested()
+void DHAX_Main_Window_Receiver::handle_draw_bezier()
 {
 
 }
 
 
-void DHAX_Main_Window_Receiver::handle_draw_cubic_path_requested()
+void DHAX_Main_Window_Receiver::handle_draw_cubic_path()
 {
 
 }
 
 
-void DHAX_Main_Window_Receiver::handle_draw_quad_path_requested()
+void DHAX_Main_Window_Receiver::handle_draw_quad_path()
 {
 
 
@@ -46,30 +46,30 @@ void DHAX_Main_Window_Receiver::handle_draw_quad_path_requested()
 
 
 
-void DHAX_Main_Window_Receiver::handle_complete_polygon_requested()
+void DHAX_Main_Window_Receiver::handle_complete_polygon()
 {
 
 }
 
 
-void DHAX_Main_Window_Receiver::handle_meshlab_import_info_requested()
+void DHAX_Main_Window_Receiver::handle_meshlab_import_info()
+{
+ application_main_window_->show_meshlab_import_info();
+}
+
+
+void DHAX_Main_Window_Receiver::handle_freecad_import_info()
 {
 
 }
 
 
-void DHAX_Main_Window_Receiver::handle_freecad_import_info_requested()
-{
-
-}
-
-
-void DHAX_Main_Window_Receiver::handle_take_screenshot_requested()
+void DHAX_Main_Window_Receiver::handle_take_screenshot()
 {
  main_window_controller_->take_screenshot();
 }
 
-void DHAX_Main_Window_Receiver::handle_load_image_requested()
+void DHAX_Main_Window_Receiver::handle_load_image()
 {
  main_window_controller_->load_image();
 }

@@ -81,10 +81,10 @@ void DHAX_Main_Window_Controller::init_image_scene_item(DHAX_Image_Scene_Item *s
 //   main_window_receiver_, SLOT(handle_polygon_complete_and_save_notation_requested()));
 
  image_scene_item_->self_connect(SIGNAL(complete_polygon_requested()),
-   main_window_receiver_, SLOT(handle_complete_polygon_requested()));
+   main_window_receiver_, SLOT(handle_complete_polygon()));
 
  image_scene_item_->self_connect(SIGNAL(meshlab_import_info_requested()),
-   main_window_receiver_, SLOT(handle_meshlab_import_info_requested()));
+   main_window_receiver_, SLOT(handle_meshlab_import_info()));
    //show_meshlab_import_info
 
  image_scene_item_->self_connect(SIGNAL(draw_bezier_requested()),
