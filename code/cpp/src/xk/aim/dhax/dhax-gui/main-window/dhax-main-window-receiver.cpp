@@ -60,7 +60,7 @@ void DHAX_Main_Window_Receiver::handle_meshlab_import_info()
 
 void DHAX_Main_Window_Receiver::handle_freecad_import_info()
 {
-
+ application_main_window_->show_freecad_import_info();
 }
 
 

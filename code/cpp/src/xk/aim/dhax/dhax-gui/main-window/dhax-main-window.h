@@ -41,8 +41,7 @@ public:
  void init_signal_generator();
 
  void show_meshlab_import_info();
-
-
+ void show_freecad_import_info();
 
 };
 

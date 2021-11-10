@@ -47,6 +47,9 @@ public:
 
  ACCESSORS(Zoom_and_Navigate_Frame* ,zoom_frame)
 
+ USE_SELF_CONNECT(normal)
+ USE_SELF_CONNECT(lambda)
+
  void setup_shape_rectangle();
  void setup_shape_polygon();
  void setup_shape_ellipse();

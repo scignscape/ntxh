@@ -15,9 +15,14 @@
 #include <QDebug>
 
 DHAX_Annotation_Instance::DHAX_Annotation_Instance()
-  :  shape_lengths_({.int4=nullptr}), composite_shape_code_(0)
+  :  shape_lengths_({.int4=nullptr}), composite_shape_code_(0), prelim_shape_points_(nullptr)
 {
 
+}
+
+QString DHAX_Annotation_Instance::scoped_identifiers_to_string()
+{
+ return scoped_identifiers_.join(':');
 }
 
 u2 DHAX_Annotation_Instance::get_shape_point_count()
@@ -565,3 +570,81 @@ void DHAX_Annotation_Instance::add_shape_point(float c1, float c2)
  }
 }
 
+#define LINE_DIVIDER_STR "|"
+#define LINE_SUBDIVIDER_STR "^"
+
+void DHAX_Annotation_Instance::from_compact_string(QString cs)
+{
+ QStringList parts = cs.split(LINE_DIVIDER_STR);
+
+ if(parts.isEmpty())
+   return;
+
+ QString ids = parts.takeFirst();
+ scoped_identifiers_ = ids.split(LINE_SUBDIVIDER_STR);
+
+ if(parts.isEmpty())
+   return;
+
+ shape_designation_ = parts.takeFirst();
+
+ if(parts.isEmpty())
+   return;
+
+// opaque_shape_kind_code_ = parts.takeFirst().toLongLong();
+
+// if(parts.isEmpty())
+//   return;
+
+ composite_dimension_code_ = parts.takeFirst().toUInt();
+ if(parts.isEmpty())
+   return;
+
+ composite_shape_code_ = parts.takeFirst().toUInt();
+ if(parts.isEmpty())
+   return;
+
+ internal_codes_ = parts.takeFirst().toUInt();
+ if(parts.isEmpty())
+   return;
+
+ QString locs = parts.takeFirst();
+
+ // // prelim or locations?
+ if(!locs.isEmpty())
+ {
+  check_init_prelim_shape_points();
+  QStringList prelim_points = locs.split(':');
+  for(QString prelim_point : prelim_points)
+  {
+   QStringList ps = prelim_point.split(',');
+   prelim_shape_points_->push_back(QPoint(ps.value(0).toInt(), ps.value(1).toInt()));
+  }
+ }
+
+// QString locs = parts.takeFirst();
+// AXFI_Location_2d::read_string(locs, locations_);
+}
+
+QString DHAX_Annotation_Instance::to_compact_string()
+{
+ QString result = scoped_identifiers_.join(LINE_SUBDIVIDER_STR);
+ result += QString("|%1|%2|%3|%4|").arg(shape_designation_)
+   .arg(composite_dimension_code_)
+   .arg(composite_shape_code_).arg(internal_codes_);
+ if(prelim_shape_points_ && !prelim_shape_points_->isEmpty())
+ {
+  for(QPoint qp : *prelim_shape_points_)
+  {
+   result += QString("%1,%2:").arg(qp.x()).arg(qp.y());
+  }
+  result.chop(1);
+ }
+// for(n8 nn : locations_)
+// {
+//  AXFI_Location_2d* loc = (AXFI_Location_2d*) nn;
+//  result += loc->to_string() + ":";
+// }
+ return result;
+
+}

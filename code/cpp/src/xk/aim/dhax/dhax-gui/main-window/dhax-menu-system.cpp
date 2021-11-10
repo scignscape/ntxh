@@ -52,6 +52,11 @@ void DHAX_Menu_System::init_menus()
  };
 
  file_menu.addSeparator();
+ file_menu.add_action("Load Notes") << [sg]
+ {
+  sg->emit_load_notes_requested();
+ };
+
  //file_menu.addAction(action_load_annotations);
 
  file_menu.add_action("View Contours (Open CV)") << [sg]

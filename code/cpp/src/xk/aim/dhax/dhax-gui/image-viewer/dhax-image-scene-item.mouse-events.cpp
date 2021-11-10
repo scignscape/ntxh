@@ -164,18 +164,18 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
   });
  }
 
-// if(freecad_import_count_ && *freecad_import_count_)
-// {
-//  menu->addAction("FreeCAD Import Info", [this]
-//  {
-//   Q_EMIT freecad_import_info_requested();
-//  });
+ if(freecad_import_count_ && *freecad_import_count_)
+ {
+  menu->addAction("FreeCAD Import Info", [this]
+  {
+   Q_EMIT freecad_import_info_requested();
+  });
 
-//  menu->addAction("FreeCAD Reset", [this]
-//  {
-//   Q_EMIT freecad_reset_requested();
-//  });
-// }
+  menu->addAction("FreeCAD Reset", [this]
+  {
+   Q_EMIT freecad_reset_requested();
+  });
+ }
 
 
  if(!data_->point_pairs_.isEmpty())

@@ -28,6 +28,10 @@ DHAX_Application_Receiver::DHAX_Application_Receiver()
 
 }
 
+void DHAX_Application_Receiver::handle_load_notes()
+{
+ application_controller_->load_notes();
+}
 
 void DHAX_Application_Receiver::handle_freecad_reset()
 {
@@ -49,7 +53,7 @@ void DHAX_Application_Receiver::handle_convert_notation()
 
 void DHAX_Application_Receiver::handle_save_notation(bool with_comment)
 {
-
+ application_controller_->save_current_notation(with_comment);
 }
 
 
@@ -61,7 +65,7 @@ void DHAX_Application_Receiver::handle_polygon_complete_and_save_notation()
 
 void DHAX_Application_Receiver::handle_polygon_save_notation()
 {
-
+ //?application_controller_->save_current_notation(false);
 }
 
 void DHAX_Application_Receiver::handle_view_contours()
@@ -86,4 +90,5 @@ void DHAX_Application_Receiver::handle_view_cad()
 
 void DHAX_Application_Receiver::handle_run_forge_workflow()
 {
+ external_application_controller_->run_forge_workflow();
 }

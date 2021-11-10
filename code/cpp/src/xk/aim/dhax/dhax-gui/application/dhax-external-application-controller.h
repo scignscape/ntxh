@@ -51,6 +51,7 @@ public:
  void view_3d();
  void view_360();
  void view_cad();
+ void run_forge_workflow();
 
 
 };

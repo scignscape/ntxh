@@ -33,6 +33,8 @@ class Forge_API_Workflow
 
  void register_wzpage_step(QWizardPage* page);
 
+ QMap<QString, QString> custom_envs_;
+
 public:
 
  Forge_API_Workflow(Forge_Runtime* forge_runtime);
@@ -44,6 +46,8 @@ public:
  void next_call();
  void next_wzcall(QWizardPage* page);
  int& run_calls(std::function<int()> cb);
+
+ void add_custom_env_value(QString key, QString value);
 
 };
 

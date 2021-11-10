@@ -13,6 +13,8 @@ QT += xml widgets network webenginewidgets
 INCLUDEPATH += $$SRC_DIR
 
 INCLUDEPATH += $$SRC_PROSET_DIR/aimlib/aimlib/AIMLib/
+INCLUDEPATH += $$SRC_KERNEL_DIR/iat/iat/
+
 
 QMAKE_CC = gcc-7
 QMAKE_CXX = g++-7
@@ -63,6 +65,31 @@ INCLUDEPATH += $$WHITEDB_SRC_GROUP_DIR
 
 INCLUDEPATH += $$CHASM_SRC_GROUP_DIR
 
+#FORGE
+
+DEFINES += LIBCRYPTO_FILE_NAME=\\\"$$ROOT_DIR/../ssl/install/ldir/libcrypto.so.1.1\\\"
+DEFINES += LIBSSL_FILE_NAME=\\\"$$ROOT_DIR/../ssl/install/ldir/libssl.so.1.1\\\"
+
+DEFINES += DEFAULT_FORGE_UPLOAD_FOLDER=\\\"$$ROOT_DIR/../forge\\\"
+
+DEFINES += DEFAULT_FORGE_TEMP_FOLDER=\\\"$$ROOT_DIR/../forge/temp\\\"
+
+
+DEFINES += FORGE_IMAGE_FOLDER=\\\"$$ROOT_DIR/../forge/images\\\"
+
+DEFINES += FORGE_CREDENTIALS_FOLDER=\\\"$$ROOT_DIR/../forge/credentials\\\"
+
+## This is needed for adding to the QInputDialog layout in Special_Dialog ...
+QT_HEADER_LOCATION = $$[QT_INSTALL_HEADERS]
+
+INCLUDEPATH += $${QT_HEADER_LOCATION}/QtCore/$$[QT_VERSION]
+INCLUDEPATH += $${QT_HEADER_LOCATION}/QtGui/$$[QT_VERSION]
+INCLUDEPATH += $${QT_HEADER_LOCATION}/QtWidgets/$$[QT_VERSION]
+
+INCLUDEPATH += $${QT_HEADER_LOCATION}/QtGui/$$[QT_VERSION]/QtGui
+INCLUDEPATH += $${QT_HEADER_LOCATION}/QtCore/$$[QT_VERSION]/QtCore
+INCLUDEPATH += $${QT_HEADER_LOCATION}/QtWidgets/$$[QT_VERSION]/QtWidgets
+
 
 include($$ROOT_DIR/../preferred/opencv.pri)
 
@@ -81,6 +108,7 @@ HEADERS += \
   $$SRC_DIR/main-window/dhax-main-window-controller.h \
   $$SRC_DIR/main-window/dhax-main-window-receiver.h \
   $$SRC_DIR/application/dhax-application-controller.h \
+  $$SRC_DIR/application/dhax-forge-controller.h \
   $$SRC_DIR/application/dhax-external-application-controller.h \
   $$SRC_DIR/application/dhax-application-receiver.h \
   $$SRC_DIR/dhax-graphics-view.h \
@@ -95,10 +123,12 @@ HEADERS += \
   $$SRC_DIR/subwindows/range-slider.h \
   $$SRC_DIR/subwindows/shape-select-frame.h \
   $$SRC_DIR/subwindows/zoom-and-navigate-frame.h \
+  $$SRC_DIR/subwindows/clickable-label.h \
   $$SRC_DIR/integration/dhax-integration-controller.h \
   $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-data.h \
   $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-controller.h \
   $$SRC_DIR/integration/freecad/dhax-freecad-integration-data.h \
+  $$SRC_DIR/integration/freecad/dhax-freecad-integration-controller.h \
   $$SRC_DIR/integration/forge-api/dhax-forge-api-integration-data.h \
   $$SRC_DIR/virtual-packages/graphics-scene-demo.h \
   $$SRC_DIR/network/dhax-udp-controller.h \
@@ -110,6 +140,7 @@ HEADERS += \
   $$SRC_DIR/rpdf/pattern-matcher-runtime.h \
   $$SRC_DIR/rpdf/my-page.h \
   $$SRC_DIR/rpdf/signal-generator.h \
+  $$SRC_DIR/rpdf/bim-select-dialog.h \
 
 
 SOURCES += \
@@ -121,6 +152,7 @@ SOURCES += \
   $$SRC_DIR/main-window/dhax-main-window-receiver.cpp \
   $$SRC_DIR/main-window/dhax-menu-system.cpp \
   $$SRC_DIR/application/dhax-application-controller.cpp \
+  $$SRC_DIR/application/dhax-forge-controller.cpp \
   $$SRC_DIR/application/dhax-application-receiver.cpp \
   $$SRC_DIR/application/dhax-external-application-controller.cpp \
   $$SRC_DIR/dhax-graphics-view.cpp \
@@ -136,10 +168,12 @@ SOURCES += \
   $$SRC_DIR/subwindows/range-slider.cpp \
   $$SRC_DIR/subwindows/shape-select-frame.cpp \
   $$SRC_DIR/subwindows/zoom-and-navigate-frame.cpp \
+  $$SRC_DIR/subwindows/clickable-label.cpp \
   $$SRC_DIR/integration/dhax-integration-controller.cpp \
   $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-data.cpp \
   $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-controller.cpp \
   $$SRC_DIR/integration/freecad/dhax-freecad-integration-data.cpp \
+  $$SRC_DIR/integration/freecad/dhax-freecad-integration-controller.cpp \
   $$SRC_DIR/integration/forge-api/dhax-forge-api-integration-data.cpp \
   $$SRC_DIR/virtual-packages/graphics-scene-demo.cpp \
   $$SRC_DIR/network/dhax-udp-controller.cpp \
@@ -151,7 +185,7 @@ SOURCES += \
   $$SRC_DIR/rpdf/pattern-matcher-runtime.cpp \
   $$SRC_DIR/rpdf/my-page.cpp \
   $$SRC_DIR/rpdf/signal-generator.cpp \
-
+  $$SRC_DIR/rpdf/bim-select-dialog.cpp \
 
 #  $$SRC_DIR/dhax-gui.cpp \
 
@@ -177,6 +211,10 @@ LIBS += -L$$TARGETSDIR  -ldgi-opencv
 
 LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
   -lchasm-lib-33 -lchasm-lib-43
+
+
+LIBS += -L$$TARGETSDIR -liat-forge
+
 
 
 include($$ROOT_DIR/../preferred/freecad.pri)

@@ -61,30 +61,51 @@ QPoint _coordinate_scaling(const QPoint& init_point, r8 resize_factor)
  return new_point;
 }
 
+void DHAX_Drawn_Shape::parse_shape_kind(QString text)
+{
+ static QMap<QString, Shape_Kinds> static_map {
+  {"Rectangle", Shape_Kinds::Rectangle},
+  {"Ellipse", Shape_Kinds::Ellipse},
+  {"Polygon", Shape_Kinds::Polygon},
+  {"Polyline", Shape_Kinds::Polyline},
+ };
+ shape_kind_ = static_map.value(text, Shape_Kinds::N_A);
+}
+
+
 void DHAX_Drawn_Shape::init_from_dhax_annotation(DHAX_Annotation_Instance& dai, r8 resize_factor)
 {
 //? shape_kind_ = (Shape_Kinds) dai.opaque_shape_kind_code();
- QVector<QPoint> points;
- dai.locations_to_qpoints(points);
+
+ parse_shape_kind(dai.shape_designation());
+
+
+ QVector<QPoint>* prelim_points = dai.prelim_shape_points();
+
+//? dai.locations_to_qpoints(points);
 
  //points_.resize(points.size());
- std::copy(points.begin(), points.end(), std::back_inserter(points_));
-
+ if(prelim_points)
+   std::copy(prelim_points->begin(), prelim_points->end(), std::back_inserter(points_));
 }
 
-DHAX_Annotation_Instance* DHAX_Drawn_Shape::to_dhax_annotation(r8 resize_factor)
+DHAX_Annotation_Instance* DHAX_Drawn_Shape::to_dhax_annotation() //r8 resize_factor)
 {
  DHAX_Annotation_Instance* result = new DHAX_Annotation_Instance;
 
-// result->set_shape_designation(shape_kind_to_string());
+ result->set_shape_designation(shape_kind_to_string());
 
 // result->set_opaque_shape_kind_code((n8) shape_kind_);
 
-// for(const QPoint& point : points_)
-// {
-//  QPoint sp = _coordinate_scaling(point, resize_factor);
-//  result->absorb_shape_point(sp);
-// }
+ r8 resize_factor = 1;
+
+ result->check_init_prelim_shape_points();
+
+ for(const QPoint& point : points_)
+ {
+  QPoint sp = _coordinate_scaling(point, resize_factor);
+  result->add_prelim_shape_point(sp);
+ }
 
  return result;
 }

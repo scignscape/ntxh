@@ -91,7 +91,7 @@ void DHAX_Image_Scene_Item::paintEvent_draw_annotation(DHAX_Annotation_Instance&
 {
  DHAX_Drawn_Shape dds;
  dds.init_from_dhax_annotation(dai, resize_factor);
- paintEvent_draw_drawn_shape(&dds, {}, //dai.scoped_identifiers_to_string(),
+ paintEvent_draw_drawn_shape(&dds, dai.scoped_identifiers_to_string(),
    painter, pen, shape_pen);
 }
 

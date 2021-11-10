@@ -13,6 +13,7 @@
 #include "dhax-main-window-data.h"
 
 #include "integration/meshlab/dhax-meshlab-integration-data.h"
+#include "integration/freecad/dhax-freecad-integration-data.h"
 
 #include <QSpacerItem>
 #include <QGridLayout>
@@ -29,6 +30,50 @@ DHAX_Main_Window::DHAX_Main_Window()
 void DHAX_Main_Window::init_signal_generator()
 {
  signal_generator_ = new DHAX_Signal_Generator;
+}
+
+
+void DHAX_Main_Window::show_freecad_import_info()
+{
+ DHAX_FreeCAD_Integration_Data& fid = *main_window_data_->freecad_integration();
+
+ QString dt = QString(R"(Temp File Path: %1
+Camera Position: %2, %3, %4
+Camera Rotation: %5, %6, %7; %8)")
+   .arg(fid.freecad_file_path())
+   .arg(fid.freecad_position_data().value(0))
+   .arg(fid.freecad_position_data().value(1))
+   .arg(fid.freecad_position_data().value(2))
+   .arg(fid.freecad_position_data().value(3))
+   .arg(fid.freecad_position_data().value(4))
+   .arg(fid.freecad_position_data().value(5))
+   .arg(fid.freecad_position_data().value(6))
+   ;
+
+ dt += QString(R"(
+Aspect Ratio: %1
+Near Distance: %2
+Far Distance: %3
+Focal Distance: %4)")
+   .arg(fid.freecad_position_data().value(7))
+   .arg(fid.freecad_position_data().value(8))
+   .arg(fid.freecad_position_data().value(9))
+   .arg(fid.freecad_position_data().value(10));
+
+
+ if(import_info_message_box_)
+   delete import_info_message_box_;
+
+ import_info_message_box_ = new QMessageBox(this);
+ import_info_message_box_->setText("FreeCAD Import");
+ import_info_message_box_->setInformativeText(R"(Hit "Show Details" for information about the FreeCAD snapshot recently imported)");
+ import_info_message_box_->setDetailedText(dt);
+ QSpacerItem* horizontalSpacer = new QSpacerItem(600, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+ QGridLayout* layout = (QGridLayout*)import_info_message_box_->layout();
+ layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+
+ import_info_message_box_->show();
+
 }
 
 

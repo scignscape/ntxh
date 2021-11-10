@@ -12,6 +12,8 @@
 
 #include "dhax-application-controller.h"
 
+#include "dhax-forge-controller.h"
+
 #include "textio.h"
 
 USING_KANS(TextIO)
@@ -94,4 +96,11 @@ void DHAX_External_Application_Controller::view_cad()
 
  QProcess cmd;
  cmd.startDetached(ap, {});
+}
+
+
+void DHAX_External_Application_Controller::run_forge_workflow()
+{
+ DHAX_Forge_Controller* dfc = application_controller_->check_init_forge_controller();
+ dfc->run_workflow();
 }

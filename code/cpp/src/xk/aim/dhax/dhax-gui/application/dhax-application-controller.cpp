@@ -4,6 +4,8 @@
 //     (See accompanying file LICENSE_1_0.txt or copy at
 //           http://www.boost.org/LICENSE_1_0.txt)
 
+//?
+
 #include "dhax-application-controller.h"
 
 //#include "dhax-main-window.h"
@@ -24,7 +26,7 @@
 #include "integration/freecad/dhax-freecad-integration-data.h"
 
 #include "integration/meshlab/dhax-meshlab-integration-controller.h"
-//#include "integration/freecad/dhax-freecad-integration-controller.h"
+#include "integration/freecad/dhax-freecad-integration-controller.h"
 
 #include "integration/dhax-integration-controller.h"
 
@@ -35,12 +37,24 @@
 #include "image-viewer/dhax-image-scene-item.h"
 #include "application/dhax-application-receiver.h"
 
+#include <QMessageBox>
+
+
 #include "textio.h"
 
 USING_KANS(TextIO)
 
+
 #include "dgi-opencv/dgi-image.h"
 #include "dgi-opencv/dgi-demo-frame.h"
+
+
+// //  this has to be included after dgi-image.h ...
+ //    (because of "_flags" macro conflict ...)
+#include "dhax-data/ann/dhax-annotation-instance.h"
+
+
+#include "dhax-forge-controller.h"
 
 USING_KANS(DGI)
 
@@ -58,17 +72,373 @@ USING_KANS(DGI)
 
 #include <QFileDialog>
 
+#include <QInputDialog>
+#include <QDialogButtonBox>
+#include <QComboBox>
+#include <QPlainTextEdit>
+
+
+class Special_Input_Dialog : public QInputDialog
+{
+ u4* autogen_index_;
+
+ // // these are only used if the dialog
+  //   also has a multiline input field ....
+ QString* short_text_;
+ QLineEdit* short_text_input_field_;
+ QWidget* input_widget_;
+
+public:
+
+ Special_Input_Dialog(u4* autogen_index,
+   QWidget* parent = nullptr, QString* short_text = nullptr);
+
+ void customMenuRequested(QPoint pos);
+
+ static QString get_text(u4* autogen_index, QWidget *parent,
+   const QString &title, const QString &label, QString* short_text = nullptr,
+   QLineEdit::EchoMode echo = QLineEdit::Normal,
+   const QString &text = QString(), bool *ok = nullptr,
+                 Qt::WindowFlags flags = Qt::WindowFlags(),
+                 Qt::InputMethodHints inputMethodHints = Qt::ImhNone);
+
+};
+
+// //  Note: this is all for mixing a QLineEdit and QTextEdit
+ //    in the input dialog.  Obviously depending on internal
+ //    Qt implementation details and might be better as a
+ //    hand-rolled dialog box (except it's good to keep the
+ //    interface similar to QInputDilog as much as possible ...)
+
+#include "private/qdialog_p.h"
+
+class QPlainTextEdit;
+class QSpinBox;
+class QDoubleSpinBox;
+class QInputDialogListView;
+
+// //  All we need here is the d->mainLayout which is VBox ...
+class QInputDialogPrivate : public QDialogPrivate
+{
+ Q_DECLARE_PUBLIC(QInputDialog)
+
+public:
+    QInputDialogPrivate();
+
+    void ensureLayout();
+    void ensureLineEdit();
+    void ensurePlainTextEdit();
+    void ensureComboBox();
+    void ensureListView();
+    void ensureIntSpinBox();
+    void ensureDoubleSpinBox();
+    void ensureEnabledConnection(QAbstractSpinBox *spinBox);
+    void setInputWidget(QWidget *widget);
+    void chooseRightTextInputWidget();
+    void setComboBoxText(const QString &text);
+    void setListViewText(const QString &text);
+    QString listViewText() const;
+    void ensureLayout() const { const_cast<QInputDialogPrivate *>(this)->ensureLayout(); }
+    bool useComboBoxOrListView() const { return comboBox && comboBox->count() > 0; }
+    void _q_textChanged(const QString &text);
+    void _q_plainTextEditTextChanged();
+    void _q_currentRowChanged(const QModelIndex &newIndex, const QModelIndex &oldIndex);
+
+    mutable QLabel *label;
+    mutable QDialogButtonBox *buttonBox;
+    mutable QLineEdit *lineEdit;
+    mutable QPlainTextEdit *plainTextEdit;
+    mutable QSpinBox *intSpinBox;
+    mutable QDoubleSpinBox *doubleSpinBox;
+    mutable QComboBox *comboBox;
+    mutable QInputDialogListView *listView;
+    mutable QWidget *inputWidget;
+    mutable QVBoxLayout *mainLayout;
+    QInputDialog::InputDialogOptions opts;
+    QString textValue;
+    QPointer<QObject> receiverToDisconnectOnClose;
+    QByteArray memberToDisconnectOnClose;
+};
+
+
+QString Special_Input_Dialog::get_text(u4* autogen_index, QWidget *parent,
+  const QString &title, const QString &label, QString* short_text,
+  QLineEdit::EchoMode mode, const QString &text, bool *ok,
+  Qt::WindowFlags flags, Qt::InputMethodHints inputMethodHints)
+{
+ Special_Input_Dialog* dialog = new Special_Input_Dialog(autogen_index,
+   parent, short_text); //, flags);
+
+ dialog->setWindowTitle(title);
+ dialog->setLabelText(label);
+ dialog->setTextValue(text);
+ dialog->setTextEchoMode(mode);
+ dialog->setInputMethodHints(inputMethodHints);
+
+ if(dialog->short_text_)
+ {
+  // //  setOptions causes ensureLayout(), so we're good for that ...
+  dialog->setOptions(QInputDialog::UsePlainTextEditForTextInput);
+
+  QInputDialogPrivate* d = reinterpret_cast<QInputDialogPrivate*>(dialog->QInputDialog::d_ptr.data());
+
+  dialog->input_widget_ = qobject_cast<QWidget*>(d->plainTextEdit);
+
+  dialog->short_text_input_field_ = new QLineEdit(dialog);
+  d->mainLayout->insertWidget(1, dialog->short_text_input_field_);
+
+  connect(dialog->short_text_input_field_, &QLineEdit::textChanged,
+    [dialog](const QString& text)
+  {
+   *dialog->short_text_ = text;
+  });
+
+  QLabel* comment = new QLabel("Enter Comment Text:", dialog);
+  d->mainLayout->insertWidget(2, comment);
+
+ }
+
+ const int ret = dialog->exec();
+ if (ok)
+   *ok = !!ret;
+ if (ret)
+ {
+  return dialog->textValue();
+ }
+ else
+ {
+  return QString();
+ }
+}
+
+#include "rpdf/bim-select-dialog.h"
+
+Special_Input_Dialog::Special_Input_Dialog(u4* autogen_index,
+  QWidget* parent, QString* short_text)
+    :  QInputDialog(parent), autogen_index_(autogen_index),
+      short_text_(short_text),  short_text_input_field_(nullptr),
+      input_widget_(nullptr)
+{
+ setContextMenuPolicy(Qt::CustomContextMenu);
+
+ connect(this, &Special_Input_Dialog::customContextMenuRequested,
+   [this](QPoint pos)
+ {
+  qDebug() << "pos: " << pos;
+
+  QMenu* menu = new QMenu(this);//
+
+  menu->addAction("Autogenerate", [this]
+  {
+   QString text = QString("auto_%1").arg(++*this->autogen_index_);
+   if(short_text_input_field_)
+     short_text_input_field_->setText(text);
+   else
+     setTextValue(text);
+  });
+
+  menu->addAction("Open IFC Dialog", [this]
+  {
+   BIM_Select_Dialog* bsd = new BIM_Select_Dialog(this);
+   connect(bsd, &BIM_Select_Dialog::text_chosen, [this](QString text)
+   {
+    QPlainTextEdit* qpte = qobject_cast<QPlainTextEdit*>(input_widget_);
+    //QTextCursor text_cursor = QTextCursor(qpte->document());
+    qpte->textCursor().insertText(text);
+    //text_cursor.insertText(text);
+
+   });
+   bsd->show();
+
+  });
+
+
+  menu->popup(mapToGlobal(pos));
+ });
+}
+// // //   end Special_Input_Dialog
+
+
 
 DHAX_Application_Controller::DHAX_Application_Controller()
   :  application_main_window_(nullptr),
      main_window_controller_(nullptr),
      application_receiver_(nullptr),
+     forge_controller_(nullptr),
     // display_image_data_(nullptr),
 //     zoom_frame_(nullptr),
 //     image_scene_item_(nullptr),
 //     main_window_receiver_(nullptr),
-     udp_controller_(nullptr)
+     udp_controller_(nullptr),
+     autogen_index_(0)
 {
+
+}
+
+DHAX_Forge_Controller* DHAX_Application_Controller::check_init_forge_controller()
+{
+ if(!forge_controller_)
+ {
+  forge_controller_ = new DHAX_Forge_Controller;
+  forge_controller_->init_ssl();
+ }
+
+ return forge_controller_;
+}
+
+void DHAX_Application_Controller::load_notes()
+{
+ DHAX_Image_Scene_Item* dsi = main_window_controller_->image_scene_item();
+
+ if(!dsi)
+ {
+  QMessageBox::warning(application_main_window_, "Load Image First",
+    "Please load an image before attempting to load annotations");
+  return;
+ }
+
+ //?cleanWindow();
+
+ QString path = main_window_controller_->current_image_file_path();
+
+ QFileInfo qfi(path);
+ QString apath = qfi.absoluteFilePath();
+ QString file_path = QFileDialog::getOpenFileName(application_main_window_,
+   "Select Notes File", apath);
+
+ if(file_path.isEmpty())
+   return;
+
+ txt_filename_path_ = file_path;
+
+ QFile file(txt_filename_path_);
+
+ if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+   return;
+
+ QString line = file.readLine();
+
+ if(!(line=="--AXFI--\n"))
+   return;
+
+ line = file.readLine();
+ QString image_filename_path = line;
+
+ r8 current_resize_factor = 0;
+
+ DHAX_Annotation_Instance* current_annotation_instance = nullptr;
+
+ QString mesh_position;
+ QString mesh_file_path;
+
+ QString annotation_start_line;
+
+ while(!file.atEnd())
+ {
+  line = file.readLine();
+
+  if(line.isEmpty())
+    continue;
+
+  if(line.startsWith("%%"))
+  {
+   annotation_start_line = line;
+   continue;
+  }
+  if(annotation_start_line.isEmpty())
+  {
+   if(line.startsWith('*'))
+     mesh_position = line.mid(1);
+   else
+     mesh_file_path = line;
+   continue;
+  }
+
+  if(line.startsWith('%'))
+  {
+   current_resize_factor = line.mid(1).toDouble();
+   continue;
+  }
+
+  if(line.startsWith('`'))
+  {
+   if(current_annotation_instance)
+   {
+    current_annotation_instance->set_comment(line.mid(1).replace('`', '\n'));
+   }
+   continue;
+  }
+
+  current_annotation_instance = new DHAX_Annotation_Instance;
+  current_annotation_instance->from_compact_string(line);
+
+  //? display_scene_item_->add_axfi_annotation(current_annotation, current_resize_factor);
+
+ }
+
+ dsi->add_dhax_annotation(current_annotation_instance, current_resize_factor);
+}
+
+
+
+void DHAX_Application_Controller::handle_save_requested()
+{
+ QString path = main_window_controller_->current_image_file_path();
+
+ QFileInfo qfi(path);
+ QDir qd = qfi.absoluteDir();
+ QString cbn = qfi.completeBaseName();
+
+ QString apath = qd.absoluteFilePath(cbn + ".notes.txt");
+
+ QString file_path = QFileDialog::getSaveFileName(application_main_window_, "Select File Name", apath);
+ if(file_path.isEmpty())
+   return;
+
+ QFile file(file_path);
+ if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    return;
+
+ QTextStream ofs(&file);
+ ofs << "--AXFI--\n";
+ QString imageName = path;
+ ofs << imageName << "\n";
+
+ if(DHAX_Meshlab_Integration_Data* mid = application_main_window_->main_window_data()->meshlab_integration())
+ {
+  //?
+  // if(!mid.mesh_position().isEmpty())
+  //   ofs << '*' << mesh_position_ << '\n';
+
+   if(!mid->mesh_file_path().isEmpty())
+     ofs << mid->mesh_file_path() << '\n';
+ }
+
+
+ ofs << "%%\n";
+
+ r8 current_resize_factor = 0;
+
+ DHAX_Image_Scene_Item* dsi = main_window_controller_->image_scene_item();
+
+ for(const QPair<DHAX_Annotation_Instance*, r8>& pr : dsi->saved_dhax_annotations())
+ {
+  if(pr.second != current_resize_factor)
+  {
+   current_resize_factor = pr.second;
+   ofs << "%" << current_resize_factor << "\n";
+  }
+  DHAX_Annotation_Instance* dai = pr.first;
+  QString compact = dai->to_compact_string();
+  ofs << compact << '\n';
+  QString comment = dai->comment();
+  if(!comment.isEmpty())
+  {
+   comment.replace('\n', '`');
+   ofs << '`' << comment << '\n';
+  }
+
+ }
 
 }
 
@@ -81,8 +451,8 @@ void DHAX_Application_Controller::init_image_scene_item(DHAX_Image_Scene_Item* s
  si->self_connect(SIGNAL(convert_notation_requested()),
    application_receiver_, SLOT(handle_convert_notation()));
 
- si->self_connect(SIGNAL(save_notation_requested(bool)),
-   application_receiver_, SLOT(handle_save_notation(bool)));
+// si->self_connect(SIGNAL(save_notation_requested(bool)),
+//   application_receiver_, SLOT(handle_save_notation(bool)));
 
 // si->self_connect(SIGNAL(convert_notation_requested()),
 //   application_receiver_, SLOT(handle_convert_notation()));
@@ -131,10 +501,18 @@ void DHAX_Application_Controller::r8_vector_to_qba(const QVector<r8>& data, QByt
 }
 
 
-
 void DHAX_Application_Controller::send_freecad_reset()
 {
+ DHAX_FreeCAD_Integration_Data& fid = *application_main_window_->main_window_data()->freecad_integration();
 
+ if(fid.freecad_position_data().isEmpty())
+   return;
+
+ QByteArray qba;
+
+ r8_vector_to_qba(fid.freecad_position_data(), qba);
+
+ udp_controller_->wrap_and_send_datagram(qba);
 }
 
 void DHAX_Application_Controller::send_meshlab_reset()
@@ -179,6 +557,16 @@ void DHAX_Application_Controller::init_integration_controllers()
  integration_controllers_["meshlab"] = meshlab;
  meshlab->set_application_controller(this);
  meshlab->set_integration_data(md);
+
+ DHAX_FreeCAD_Integration_Data* fd = new DHAX_FreeCAD_Integration_Data;
+ application_main_window_->main_window_data()->set_freecad_integration(fd);
+ fd->init_import_count();
+
+ DHAX_FreeCAD_Integration_Controller* freecad = new DHAX_FreeCAD_Integration_Controller;
+ integration_controllers_["freecad"] = freecad;
+ freecad->set_application_controller(this);
+ freecad->set_integration_data(fd);
+
  //meshlab->set_integration_data()
 }
 
@@ -186,8 +574,64 @@ void DHAX_Application_Controller::init_integration_controllers()
 void DHAX_Application_Controller::init_udp_controller()
 {
  //udp_controller_->
+
+
 }
 
+
+void DHAX_Application_Controller::save_current_notation(bool with_comment)
+{
+ DHAX_Drawn_Shape* dds = main_window_controller_->display_image_data()->current_drawn_shape();
+// Display_Drawn_Shape* dds = display_image_data_->current_drawn_shape();
+
+ if(!dds)
+   return;
+
+ DHAX_Annotation_Instance* dai = dds->to_dhax_annotation(); //resize_factor_);
+
+ //?zoom_frame_->reset_current_selected_annotation(axa);
+
+ bool ok = false;
+
+ QString* short_text = nullptr;
+
+ QString name;
+
+ if(with_comment)
+   short_text = &name;
+
+ QString dlg_result = Special_Input_Dialog::get_text(&autogen_index_,
+   application_main_window_, "Need a Shape Name",
+   "Enter text here providing a Shape Name (or right-click to autogenerate)",
+   short_text, QLineEdit::Normal, QString(), &ok, 0);
+
+//  QString name = Special_Input_Dialog::getMultiLineText(this, "Need a Shape Name",
+//    "Enter text here providing a Shape Name (or right-click to autogenerate)");
+
+ if(!with_comment)
+   name = dlg_result;
+
+ if(ok)
+ {
+  dai->add_scoped_identifier(name);
+
+  if(with_comment)
+    dai->set_comment(dlg_result);
+ }
+
+ //display_scene_item_->add
+
+// check_init_axfi_annotation_group();
+// axfi_annotation_group_->add_annotation(axa);
+
+ DHAX_Image_Scene_Item* dsi = main_window_controller_->image_scene_item();
+ dsi->add_dhax_annotation(dai, 0);
+
+// display_scene_item_->add_axfi_annotation(axa, resize_factor_);
+
+//? display_image_data_->reset_drawn_shapes();
+
+}
 
 void DHAX_Application_Controller::dispatch_datagram(QByteArray qba)
 {

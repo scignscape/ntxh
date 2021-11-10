@@ -45,6 +45,7 @@ public:
  ACCESSORS(DHAX_Main_Window_Receiver* ,main_window_receiver)
  ACCESSORS(DHAX_Application_Controller* ,application_controller)
  ACCESSORS(QString ,current_image_file_path)
+ ACCESSORS(DHAX_Image_Scene_Item* ,image_scene_item)
 
  void take_screenshot();
  void load_image();

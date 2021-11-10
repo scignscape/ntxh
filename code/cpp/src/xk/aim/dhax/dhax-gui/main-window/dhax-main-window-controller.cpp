@@ -54,6 +54,9 @@ void DHAX_Main_Window_Controller::init_image_scene_item(DHAX_Image_Scene_Item *s
  si->set_meshlab_import_count(application_main_window_->
    main_window_data()->meshlab_integration()->meshlab_import_count());
 
+ si->set_freecad_import_count(application_main_window_->
+   main_window_data()->freecad_integration()->freecad_import_count());
+
 // application_controller_
 
 //?
@@ -86,6 +89,9 @@ void DHAX_Main_Window_Controller::init_image_scene_item(DHAX_Image_Scene_Item *s
  image_scene_item_->self_connect(SIGNAL(meshlab_import_info_requested()),
    main_window_receiver_, SLOT(handle_meshlab_import_info()));
    //show_meshlab_import_info
+
+ image_scene_item_->self_connect(SIGNAL(freecad_import_info_requested()),
+   main_window_receiver_, SLOT(handle_freecad_import_info()));
 
  image_scene_item_->self_connect(SIGNAL(draw_bezier_requested()),
    main_window_receiver_,

@@ -85,6 +85,8 @@ LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
   -lchasm-lib-33 -lchasm-lib-43
 
 
+LIBS += -L$$TARGETSDIR -liat-forge
+
 LIBS += -L$$TARGETSDIR  -ldgi-opencv
 
 

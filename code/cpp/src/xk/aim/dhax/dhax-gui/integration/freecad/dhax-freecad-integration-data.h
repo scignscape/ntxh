@@ -17,6 +17,8 @@
 
 class DHAX_FreeCAD_Integration_Data
 {
+ friend class DHAX_FreeCAD_Integration_Controller;
+
  QString freecad_file_path_;
 
  QVector<r8> freecad_position_data_;
@@ -28,6 +30,11 @@ public:
  DHAX_FreeCAD_Integration_Data();
 
  ACCESSORS(u4* ,freecad_import_count)
+ ACCESSORS__RGET(QVector<r8> ,freecad_position_data)
+ ACCESSORS(QString ,freecad_file_path)
+
+ void init_import_count();
+
 };
 
 

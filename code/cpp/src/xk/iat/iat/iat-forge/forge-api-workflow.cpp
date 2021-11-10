@@ -120,6 +120,13 @@ void Forge_API_Workflow::parse_calls_from_file(QString path)
  }
 }
 
+
+void Forge_API_Workflow::add_custom_env_value(QString key, QString value)
+{
+ custom_envs_[key] = value;
+}
+
+
 void Forge_API_Workflow::parse_calls(QString proc)
 {
  s4 index = 0;
@@ -159,9 +166,14 @@ void Forge_API_Workflow::parse_calls(QString proc)
      QString value = qsl.takeFirst();
      if(value.startsWith("%<") && value.endsWith('>'))
      {
-      static auto envs = QProcessEnvironment::systemEnvironment();
       value = value.mid(2, value.size() - 3);
-      value = envs.value(value, value);
+      if(custom_envs_.contains(value))
+        value = custom_envs_[value];
+      else
+      {
+       static auto envs = QProcessEnvironment::systemEnvironment();
+       value = envs.value(value, value);
+      }
      }
      fn1 f_1 = forge_runtime_->find_f1_method(key);
      if(f_1)

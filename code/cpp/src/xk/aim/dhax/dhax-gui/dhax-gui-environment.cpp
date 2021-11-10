@@ -164,6 +164,9 @@ void DHAX_GUI_Environment::init_main_window_signal_generator()
  main_window_->signal_generator()->self_connect(SIGNAL(load_image_requested()),
   main_window_receiver_, SLOT(handle_load_image()));
 
+ main_window_->signal_generator()->self_connect(SIGNAL(load_notes_requested()),
+  application_receiver_, SLOT(handle_load_notes()));
+
  main_window_->signal_generator()->self_connect(SIGNAL(view_contours_requested()),
   application_receiver_, SLOT(handle_view_contours()));
 
@@ -293,6 +296,12 @@ void DHAX_GUI_Environment::init_main_window_frame()
 void DHAX_GUI_Environment::init_graphics_frame()
 {
  graphics_frame_ = new DHAX_Graphics_Frame;
+
+ _self_connect_(graphics_frame_ ,save_requested)
+    <<  [this]()
+ {
+  application_controller_->handle_save_requested();
+ };
 }
 
 void DHAX_GUI_Environment::init_graphics_scene()

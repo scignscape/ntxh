@@ -28,6 +28,8 @@ class DHAX_Integration_Controller;
 class DHAX_Main_Window_Controller;
 class DHAX_Application_Receiver;
 
+class DHAX_Forge_Controller;
+
 class DHAX_Application_Controller //: public QObject
 {
  //Q_OBJECT
@@ -38,6 +40,8 @@ class DHAX_Application_Controller //: public QObject
  DHAX_Main_Window_Receiver* main_window_receiver_;
  DHAX_Application_Receiver* application_receiver_;
 
+ DHAX_Forge_Controller* forge_controller_;
+
 // QString current_image_file_path_;
 // DHAX_Display_Image_Data* display_image_data_;
 // Zoom_and_Navigate_Frame* zoom_frame_;
@@ -47,6 +51,13 @@ class DHAX_Application_Controller //: public QObject
  DHAX_UDP_Controller* udp_controller_;
 
  QMap<QString, DHAX_Integration_Controller*> integration_controllers_;
+
+ u4 autogen_index_;
+
+ //?
+// QString mesh_position_;
+// QString mesh_file_path_;
+ QString txt_filename_path_;
 
 public:
 
@@ -61,6 +72,8 @@ public:
  ACCESSORS(DHAX_Main_Window_Controller* ,main_window_controller)
  ACCESSORS(DHAX_Application_Receiver* ,application_receiver)
 
+ ACCESSORS(DHAX_Forge_Controller* ,forge_controller)
+
 // void take_screenshot();
 // void load_image();
 // void load_image(QString file_path);
@@ -68,11 +81,14 @@ public:
 
  static void r8_vector_to_qba(const QVector<r8>& data, QByteArray& qba);
 
+ DHAX_Forge_Controller* check_init_forge_controller();
+
  void init_udp_controller();
  void dispatch_datagram(QByteArray qba);
  void init_integration_controllers();
 
  void load_image(QString file_path);
+ void load_notes();
 
  void init_image_scene_item(DHAX_Image_Scene_Item *si);
 
@@ -81,6 +97,8 @@ public:
  void view_contours();
 
  void handle_view_contour_info(QString path);
+ void save_current_notation(bool with_comment);
+ void handle_save_requested();
 
 };
 

@@ -38,6 +38,11 @@ class DHAX_Annotation_Instance
  DHAX_Annotation_Group* group_;
  QString comment_;
 
+ QStringList scoped_identifiers_;
+ QString shape_designation_;
+ QVector<QPoint>* prelim_shape_points_;
+
+
  u2 composite_dimension_code_;
  u1 composite_shape_code_;
 
@@ -86,12 +91,30 @@ public:
 
  ACCESSORS(QVector<n8> ,locations)
 
-// ACCESSORS__RGET(QStringList ,scoped_identifiers)
+ ACCESSORS__RGET(QStringList ,scoped_identifiers)
+
 // ACCESSORS(n8 ,opaque_shape_kind_code)
 // ACCESSORS(QString ,comment)
 
  ACCESSORS(DHAX_Annotation_Group* ,group)
  ACCESSORS(QString ,comment)
+
+ QString scoped_identifiers_to_string();
+ ACCESSORS(QString ,shape_designation)
+
+ ACCESSORS(QVector<QPoint>* ,prelim_shape_points)
+
+ void check_init_prelim_shape_points()
+ {
+  if(!prelim_shape_points_)
+    prelim_shape_points_ = new QVector<QPoint>;
+ }
+
+ void add_prelim_shape_point(const QPoint& qp)
+ {
+  prelim_shape_points_->push_back(qp);
+ }
+
 
  enum class Non_Linear_Shape_Kinds {
    Ellipse, QPath, Curve, Other
@@ -107,6 +130,10 @@ public:
  Colinear check_colinear(n8 loc1, n8 loc2);
  Colinear check_colinear_vh(n8 loc1, n8 loc2, n8 loc3);
 
+ void add_scoped_identifier(QString sid)
+ {
+  scoped_identifiers_.push_back(sid);
+ }
 
  void init_polygon()
  {
@@ -263,6 +290,8 @@ public:
  void add_shape_length(n8 len);
  void add_shape_length(double len);
  void add_shape_length(float len);
+
+ void from_compact_string(QString cs);
 
 
  void add_signed_shape_point(s4 c1, s4 c2);

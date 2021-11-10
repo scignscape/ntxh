@@ -42,9 +42,11 @@ public:
  void reset();
  void reset_all();
 
- DHAX_Annotation_Instance* to_dhax_annotation(r8 resize_factor);
+ DHAX_Annotation_Instance* to_dhax_annotation(); //r8 resize_factor);
 
  QString shape_kind_to_string();
+
+ void parse_shape_kind(QString text);
 
  ACCESSORS__RGET(QVector<QPoint> ,points)
  ACCESSORS(Shape_Kinds ,shape_kind)
