@@ -21,12 +21,13 @@ QMAKE_CXX = g++-7
 
 CONFIG += c++17
 
+
 FEATURE_IFC = "USE_IFC"
 
-#defined(FEATURE_IFC ,var) {
-# DEFINES += $$FEATURE_IFC
-# include($$ROOT_DIR/../preferred/occt.pri)
-#}
+defined(FEATURE_IFC ,var) {
+ DEFINES += $$FEATURE_IFC
+ include($$ROOT_DIR/../preferred/occt.pri)
+}
 
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
@@ -141,6 +142,8 @@ HEADERS += \
   $$SRC_DIR/rpdf/my-page.h \
   $$SRC_DIR/rpdf/signal-generator.h \
   $$SRC_DIR/rpdf/bim-select-dialog.h \
+  $$SRC_DIR/libspline/aaCurve.h \
+  $$SRC_DIR/libspline/spline.h \
 
 
 SOURCES += \
@@ -186,6 +189,8 @@ SOURCES += \
   $$SRC_DIR/rpdf/my-page.cpp \
   $$SRC_DIR/rpdf/signal-generator.cpp \
   $$SRC_DIR/rpdf/bim-select-dialog.cpp \
+  $$SRC_DIR/libspline/aaCurve.cpp \
+  $$SRC_DIR/libspline/spline.cpp \
 
 #  $$SRC_DIR/dhax-gui.cpp \
 
@@ -251,10 +256,9 @@ INCLUDEPATH += $$DCMTK_DIR/dcmdata/include
 INCLUDEPATH += $$DCMTK_DIR/oflog/include
 
 
-
+# ### For IFC (Industry Foundation Classes)
 defined(FEATURE_IFC ,var) {
-
-DEFINES += $$FEATURE_IFC
+ DEFINES += $$FEATURE_IFC
 
 LIBS += $$TARGETSDIR/libifc-multi.a
 
@@ -267,7 +271,44 @@ LIBS += $$TARGETSDIR/libifc-2x3.a \
   $$TARGETSDIR/libifc-4x3_rc3.a \
   $$TARGETSDIR/libifc-4x3_rc4.a \
 
+LIBS += \
+ -lboost_program_options \
+ -lboost_system \
+ -lboost_program_options \
+ -lboost_regex \
+ -lboost_thread \
+ -lboost_date_time \
+ -lboost_chrono \
+ -lboost_atomic \
+ -lpthread \
+ -lxml2
+
+LIBS += -L$$OCCT_LIB_DIR \
+ -lTKernel \
+ -lTKMath \
+ -lTKBRep \
+ -lTKGeomBase \
+ -lTKGeomAlgo \
+ -lTKG3d \
+ -lTKG2d \
+ -lTKShHealing \
+ -lTKTopAlgo \
+ -lTKMesh \
+ -lTKPrim \
+ -lTKBool \
+ -lTKBO \
+ -lTKFillet \
+ -lTKSTEP \
+ -lTKSTEPBase \
+ -lTKSTEPAttr \
+ -lTKXSBase \
+ -lTKSTEP209 \
+ -lTKIGES \
+ -lTKOffset \
+ -lTKHLR
+
 }
+
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

@@ -121,6 +121,7 @@ class DHAX_Display_Image_Data
   QList<shape> allEdits_; //lista di tutte le shape che si stanno disegnando sull'immagine
 
   DHAX_Drawn_Shape* current_drawn_shape_;
+  DHAX_Drawn_Shape* active_curve_;
 
   QStack<DHAX_Drawn_Shape*> held_drawn_shapes_;
 
@@ -129,6 +130,8 @@ class DHAX_Display_Image_Data
  public:
 
   ACCESSORS(DHAX_Drawn_Shape* ,current_drawn_shape)
+  ACCESSORS(DHAX_Drawn_Shape* ,active_curve)
+
 
   ACCESSORS__RGET(QStack<DHAX_Drawn_Shape*> ,held_drawn_shapes)
   ACCESSORS__RGET(QList<DHAX_Drawn_Shape*> ,last_canceled_drawn_shapes)

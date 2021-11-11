@@ -52,6 +52,9 @@ public:
  void load_image(QString file_path);
  void init_image_scene_item(DHAX_Image_Scene_Item* si);
 
+ void draw_demo_bezier();
+ void draw_demo_cubic();
+ void draw_demo_quad();
 };
 
 

@@ -21,12 +21,13 @@ class DHAX_Annotation_Instance;
 class DHAX_Drawn_Shape
 {
  QVector<QPoint> points_;
+ QVector<QPoint> extra_points_;
 
 public:
 
  enum class Shape_Kinds
  {
-  N_A, Rectangle, Ellipse, Polygon, Polyline
+  N_A, Rectangle, Ellipse, Polygon, Polyline, Curve
  };
 
 private:
@@ -48,7 +49,13 @@ public:
 
  void parse_shape_kind(QString text);
 
+ void add_extra_point(const QPoint& qp)
+ {
+  extra_points_.push_back(qp);
+ }
+
  ACCESSORS__RGET(QVector<QPoint> ,points)
+ ACCESSORS__RGET(QVector<QPoint> ,extra_points)
  ACCESSORS(Shape_Kinds ,shape_kind)
 };
 

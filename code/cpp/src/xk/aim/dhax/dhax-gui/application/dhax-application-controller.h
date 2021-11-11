@@ -99,6 +99,12 @@ public:
  void handle_view_contour_info(QString path);
  void save_current_notation(bool with_comment);
  void handle_save_requested();
+ void convert_notation_to_curve();
+
+#ifdef USE_IFC
+ void run_ifc_convert();
+#endif
+
 
 };
 

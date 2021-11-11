@@ -47,8 +47,15 @@ void DHAX_Application_Receiver::handle_meshlab_reset()
 
 void DHAX_Application_Receiver::handle_convert_notation()
 {
-
+ application_controller_->convert_notation_to_curve();
 }
+
+#ifdef USE_IFC
+void DHAX_Application_Receiver::handle_ifc_convert()
+{
+ application_controller_->run_ifc_convert();
+}
+#endif
 
 
 void DHAX_Application_Receiver::handle_save_notation(bool with_comment)

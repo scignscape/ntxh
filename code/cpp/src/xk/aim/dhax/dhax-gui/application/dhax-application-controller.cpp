@@ -13,7 +13,8 @@
 //#include "image-viewer/dhax-display-image-data.h"
 //#include "subwindows/zoom-and-navigate-frame.h"
 
-//#include "image-viewer/dhax-image-viewer.h"
+//
+#include "image-viewer/dhax-image-viewer.h"
 
 //#include "image-viewer/dhax-image-scene-item.h"
 
@@ -275,6 +276,20 @@ DHAX_Application_Controller::DHAX_Application_Controller()
 
 }
 
+#ifdef USE_IFC
+extern int ifc_convert_run_main(QApplication* qapp);
+
+
+void DHAX_Application_Controller::run_ifc_convert()
+{
+ QApplication* qapp = qApp;
+ ifc_convert_run_main(qapp);
+}
+
+#endif
+
+
+
 DHAX_Forge_Controller* DHAX_Application_Controller::check_init_forge_controller()
 {
  if(!forge_controller_)
@@ -437,8 +452,45 @@ void DHAX_Application_Controller::handle_save_requested()
    comment.replace('\n', '`');
    ofs << '`' << comment << '\n';
   }
-
  }
+}
+
+
+void DHAX_Application_Controller::convert_notation_to_curve()
+{
+ DHAX_Drawn_Shape* dds = main_window_controller_->display_image_data()->current_drawn_shape();
+ if(!dds)
+   return;
+
+ //DHAX_Drawn_Shape* cdds =
+ dds->set_shape_kind(DHAX_Drawn_Shape::Shape_Kinds::Curve);
+
+ const QPoint& p1 = dds->points()[0];
+ const QPoint& p2 = dds->points()[1];
+
+ QPoint p3 = (p1 + p2) / 2;
+
+ dds->add_extra_point(p3);
+
+ DHAX_Image_Viewer& image_viewer = *main_window_controller_->image_viewer();
+
+ image_viewer.draw_circle(p1, 6, Qt::yellow, Qt::black, 1);
+ image_viewer.draw_circle(p2, 6, Qt::yellow, Qt::black, 3);
+ image_viewer.draw_circle(p3, 6, Qt::red, Qt::black, 2);
+
+ main_window_controller_->display_image_data()->set_active_curve(dds);
+
+ image_viewer.cancel_notation();
+
+ image_viewer.update();
+
+ //display_image_data_->set_active_curve(cdds);
+
+
+
+
+ //qDebug() << "points = " << cdds->points();
+
 
 }
 

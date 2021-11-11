@@ -49,6 +49,9 @@ public Q_SLOTS:
 
  void handle_run_forge_workflow();
 
+#ifdef USE_IFC
+ void handle_ifc_convert();
+#endif
 
 // void handle_take_screenshot();
 // void handle_load_image();

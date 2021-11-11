@@ -28,20 +28,19 @@ DHAX_Main_Window_Receiver::DHAX_Main_Window_Receiver()
 
 void DHAX_Main_Window_Receiver::handle_draw_bezier()
 {
-
+ main_window_controller_->draw_demo_bezier();
 }
 
 
 void DHAX_Main_Window_Receiver::handle_draw_cubic_path()
 {
-
+ main_window_controller_->draw_demo_cubic();
 }
 
 
 void DHAX_Main_Window_Receiver::handle_draw_quad_path()
 {
-
-
+ main_window_controller_->draw_demo_quad();
 }
 
 

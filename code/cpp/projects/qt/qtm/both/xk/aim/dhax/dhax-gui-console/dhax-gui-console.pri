@@ -20,11 +20,13 @@ QMAKE_CXX = g++-7
 
 CONFIG += c++17
 
+FEATURE_IFC = "USE_IFC"
 
-#defined(FEATURE_IFC ,var) {
-# DEFINES += $$FEATURE_IFC
-# include($$ROOT_DIR/../preferred/occt.pri)
-#}
+defined(FEATURE_IFC ,var) {
+ DEFINES += $$FEATURE_IFC
+ include($$ROOT_DIR/../preferred/occt.pri)
+}
+
 
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
@@ -120,9 +122,12 @@ INCLUDEPATH += $$DCMTK_DIR/dcmdata/include
 INCLUDEPATH += $$DCMTK_DIR/oflog/include
 
 
+# ### For IFC (Industry Foundation Classes)
 defined(FEATURE_IFC ,var) {
 
-DEFINES += $$FEATURE_IFC
+message(Using IFC Libraries)
+
+ DEFINES += $$FEATURE_IFC
 
 LIBS += $$TARGETSDIR/libifc-multi.a
 
@@ -134,6 +139,42 @@ LIBS += $$TARGETSDIR/libifc-2x3.a \
   $$TARGETSDIR/libifc-4x3_rc2.a \
   $$TARGETSDIR/libifc-4x3_rc3.a \
   $$TARGETSDIR/libifc-4x3_rc4.a \
+
+LIBS += \
+ -lboost_program_options \
+ -lboost_system \
+ -lboost_program_options \
+ -lboost_regex \
+ -lboost_thread \
+ -lboost_date_time \
+ -lboost_chrono \
+ -lboost_atomic \
+ -lpthread \
+ -lxml2
+
+LIBS += -L$$OCCT_LIB_DIR \
+ -lTKernel \
+ -lTKMath \
+ -lTKBRep \
+ -lTKGeomBase \
+ -lTKGeomAlgo \
+ -lTKG3d \
+ -lTKG2d \
+ -lTKShHealing \
+ -lTKTopAlgo \
+ -lTKMesh \
+ -lTKPrim \
+ -lTKBool \
+ -lTKBO \
+ -lTKFillet \
+ -lTKSTEP \
+ -lTKSTEPBase \
+ -lTKSTEPAttr \
+ -lTKXSBase \
+ -lTKSTEP209 \
+ -lTKIGES \
+ -lTKOffset \
+ -lTKHLR
 
 }
 

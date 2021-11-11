@@ -182,6 +182,12 @@ void DHAX_GUI_Environment::init_main_window_signal_generator()
  main_window_->signal_generator()->self_connect(SIGNAL(run_forge_workflow_requested()),
   application_receiver_, SLOT(handle_run_forge_workflow()));
 
+
+#ifdef USE_IFC
+ main_window_->signal_generator()->self_connect(SIGNAL(ifc_convert_requested()),
+  application_receiver_, SLOT(handle_ifc_convert()));
+#endif
+
 // void view_contours_requested();
 // void view_3d_requested();
 // void view_360_requested();

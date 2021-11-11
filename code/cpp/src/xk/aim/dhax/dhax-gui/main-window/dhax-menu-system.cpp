@@ -93,10 +93,20 @@ void DHAX_Menu_System::init_menus()
  };
 
 
- QMenu* tools = menus_->menu("Tools");
- tools->addAction("Take Screenshot", [sg]
+ DHAX_Menu& tools = *menus_->menu("Tools");
+
+#ifdef USE_IFC
+ tools.add_action("IFC Convert ...") << [sg]
+ {
+  //QApplication* qapp = qApp;
+  sg->emit_ifc_convert_requested();
+  //ifc_convert_run_main(qapp);
+ };
+#endif
+
+ tools.add_action("Take Screenshot") << [sg]
  {
   sg->emit_take_screenshot_requested();
- });
+ };
 
 }

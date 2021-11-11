@@ -39,6 +39,9 @@ public:
  void emit_run_forge_workflow_requested();
  void emit_quit_requested();
 
+#ifdef USE_IFC
+ void emit_ifc_convert_requested();
+#endif
 
 Q_SIGNALS:
 
@@ -53,6 +56,11 @@ Q_SIGNALS:
  void view_cad_requested();
  void run_forge_workflow_requested();
  void quit_requested();
+
+#ifdef USE_IFC
+ void ifc_convert_requested();
+#endif
+
 
 };
 

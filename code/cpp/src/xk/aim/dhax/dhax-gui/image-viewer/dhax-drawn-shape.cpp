@@ -68,6 +68,7 @@ void DHAX_Drawn_Shape::parse_shape_kind(QString text)
   {"Ellipse", Shape_Kinds::Ellipse},
   {"Polygon", Shape_Kinds::Polygon},
   {"Polyline", Shape_Kinds::Polyline},
+  {"Curve", Shape_Kinds::Curve},
  };
  shape_kind_ = static_map.value(text, Shape_Kinds::N_A);
 }

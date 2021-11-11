@@ -117,6 +117,8 @@ public:
 
  enum shapes{ square, ellipse, polygon };
 
+ void cancel_notation();
+
 
  void reset_background_to_original_position();
 

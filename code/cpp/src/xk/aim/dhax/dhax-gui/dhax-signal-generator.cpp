@@ -13,6 +13,12 @@ void DHAX_Signal_Generator::emit_received_datagram(QByteArray qba)
  Q_EMIT received_datagram(qba);
 }
 
+#ifdef USE_IFC
+void DHAX_Signal_Generator::emit_ifc_convert_requested()
+{
+ Q_EMIT ifc_convert_requested();
+}
+#endif
 
 void DHAX_Signal_Generator::emit_take_screenshot_requested()
 {

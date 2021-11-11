@@ -81,6 +81,26 @@ void DHAX_Image_Viewer::recenter_scroll_top_left()
 }
 
 
+void DHAX_Image_Viewer::cancel_notation()
+{
+ image_scene_item_->cancel_notation();
+}
+
+
+void DHAX_Image_Viewer::draw_circle(const QPointF& center,
+  r8 radius, QColor brush_color, QColor pen_color, u1 index)
+{
+ QBrush qbr(brush_color);
+ QPen qpen(pen_color);
+ QGraphicsEllipseItem* el = scrolled_image_scene_->addEllipse(center.x() - radius,
+   center.y() - radius, radius * 2, radius * 2, qpen, qbr);
+ el->setParentItem(scrolled_image_pixmap_item_);
+ el->setFlags(QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemIsMovable);
+
+ if(index)
+   controls_[index] = {el, radius};
+}
+
 void DHAX_Image_Viewer::load_image(QString file_path)
 {
 // main_layout_->removeWidget(scrolled_image_view_);

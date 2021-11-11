@@ -205,10 +205,11 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
 
   menu->addAction("Cancel Notation", [this]
   {
-   data_->check_clear_last_canceled_drawn_shapes();
-   data_->cancel_current_drawn_shape();
+   cancel_notation();
+//   data_->check_clear_last_canceled_drawn_shapes();
+//   data_->cancel_current_drawn_shape();
 
-   update();
+//   update();
   });
 
  }
@@ -228,17 +229,22 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
    Q_EMIT save_notation_requested(true);
   });
 
+  menu->addAction("Convert Notation", [this]
+  {
+   Q_EMIT  convert_notation_requested();
+  });
 
   menu->addAction("Cancel Notation", [this]
   {
-   data_->check_clear_last_canceled_drawn_shapes();
-   data_->cancel_current_drawn_shape();
+   cancel_notation();
+//   data_->check_clear_last_canceled_drawn_shapes();
+//   data_->cancel_current_drawn_shape();
 
-   update();
+//   update();
   });
  }
 
- if(false) // what goes here?
+ if(data_->active_curve())
  {
   menu->addAction("Draw Bezier", [this]
   {

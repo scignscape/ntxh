@@ -23,6 +23,8 @@
 
 #include "application/dhax-application-controller.h"
 
+#include "dhax-graphics-scene.h"
+
 #include <QMenuBar>
 
 #include <QGuiApplication>
@@ -32,6 +34,8 @@
 #include <QScreen>
 
 #include <QFileDialog>
+
+#include <QGraphicsProxyWidget>
 
 
 DHAX_Main_Window_Controller::DHAX_Main_Window_Controller()
@@ -115,6 +119,197 @@ void DHAX_Main_Window_Controller::init_image_scene_item(DHAX_Image_Scene_Item *s
 
 
 }
+
+
+#include "libspline/aaCurve.h"
+#include "libspline/spline.h"
+
+void DHAX_Main_Window_Controller::draw_demo_bezier()
+{
+ DHAX_Drawn_Shape* cdds = display_image_data_->active_curve();
+ if(!cdds)
+   return;
+
+ QPoint _p1 = cdds->points()[0];
+ QPoint _p2 = cdds->points()[1];
+ QPoint _mid = cdds->extra_points()[0];
+
+
+ QPoint p1 = image_viewer_->control_center(1).toPoint();
+ QPoint mid = image_viewer_->control_center(2).toPoint();
+ QPoint p2 = image_viewer_->control_center(3).toPoint();
+
+ qDebug() << "_p1 = " << _p1;
+ qDebug() << "_p2 = " << _p2;
+ qDebug() << "_mid = " << _mid;
+
+ qDebug() << "p1 = " << p1;
+ qDebug() << "p2 = " << p2;
+ qDebug() << "mid = " << mid;
+
+ std::vector<aaAaa::aaSpline> splines;
+
+ aaAaa::aaSpline spline;
+ spline.addKnots(aaAaa::aaPoint(p1.x(), p1.y()));
+ spline.addKnots(aaAaa::aaPoint(mid.x(), mid.y()));
+ spline.addKnots(aaAaa::aaPoint(p2.x(), p2.y()));
+
+ aaAaa::aaCurvePtr pspline = aaAaa::aaCurveFactory::createCurve(spline);
+
+ aaAaa::aaSpline::KnotsList::iterator beg = spline.knots.begin();
+ aaAaa::aaSpline::KnotsList::reverse_iterator rbeg = spline.knots.rbegin();
+
+ static const int Y_FACTOR = 1;
+ double m_deltaT = 0.1;
+
+ double t = (*beg).t;
+ double v = (*beg).y;
+ //glVertex3f(t, v * Y_FACTOR, Z_VALUE);
+ t += m_deltaT;
+
+ while(t < (*rbeg).t - m_deltaT){
+     pspline->getValue(t, v);
+     if(spline.bLimited){
+//         if(v > m_spline_data.limit_top)
+//             v = m_spline_data.limit_top;
+//         else if(v < m_spline_data.limit_bottom)
+//             v = m_spline_data.limit_bottom;
+     }
+
+//     qDebug() << "t = " << t;
+//     qDebug() << "v = " << v;
+
+     QPoint ptv(t, v);
+     image_viewer_->draw_circle(ptv, 2, Qt::cyan, Qt::transparent, 0);
+
+//     glVertex3f(t, v * Y_FACTOR, Z_VALUE);
+     t += m_deltaT;
+ }
+
+ t = (*rbeg).t;
+ v = (*rbeg).y;
+
+
+ {
+  aaAaa::aaSpline spline;
+  spline.addKnots(aaAaa::aaPoint(_p1.x(), _p1.y()));
+  spline.addKnots(aaAaa::aaPoint(_mid.x(), _mid.y()));
+  spline.addKnots(aaAaa::aaPoint(_p2.x(), _p2.y()));
+
+  aaAaa::aaCurvePtr pspline = aaAaa::aaCurveFactory::createCurve(spline);
+
+  aaAaa::aaSpline::KnotsList::iterator beg = spline.knots.begin();
+  aaAaa::aaSpline::KnotsList::reverse_iterator rbeg = spline.knots.rbegin();
+
+  static const int Y_FACTOR = 1;
+  double m_deltaT = 0.1;
+
+  double t = (*beg).t;
+  double v = (*beg).y;
+  //glVertex3f(t, v * Y_FACTOR, Z_VALUE);
+  t += m_deltaT;
+
+  double c = 100;
+
+  while(t < (*rbeg).t - m_deltaT){
+      pspline->getValue(t, v);
+      if(spline.bLimited){
+ //         if(v > m_spline_data.limit_top)
+ //             v = m_spline_data.limit_top;
+ //         else if(v < m_spline_data.limit_bottom)
+ //             v = m_spline_data.limit_bottom;
+      }
+
+ //     qDebug() << "t = " << t;
+ //     qDebug() << "v = " << v;
+
+
+      QPoint ptv(t, v);
+      image_viewer_->draw_circle(ptv, 2, QColor(c, c + 40, 200, 140), Qt::transparent, 0);
+
+      c += 0.03;
+
+ //     glVertex3f(t, v * Y_FACTOR, Z_VALUE);
+      t += m_deltaT;
+  }
+
+  t = (*rbeg).t;
+  v = (*rbeg).y;
+ }
+}
+
+
+void DHAX_Main_Window_Controller::draw_demo_cubic()
+{
+ DHAX_Drawn_Shape* cdds = display_image_data_->active_curve();
+ if(!cdds)
+   return;
+
+ QPoint _p1 = cdds->points()[0];
+ QPoint _p2 = cdds->points()[1];
+ QPoint _mid = cdds->extra_points()[0];
+
+ QPoint p1 = image_viewer_->control_center(1).toPoint();
+ QPoint mid = image_viewer_->control_center(2).toPoint();
+ QPoint p2 = image_viewer_->control_center(3).toPoint();
+
+ image_viewer_->draw_circle(p1, 2, Qt::cyan, Qt::transparent, 0);
+ image_viewer_->draw_circle(mid, 2, Qt::cyan, Qt::transparent, 0);
+ image_viewer_->draw_circle(p2, 2, Qt::cyan, Qt::transparent, 0);
+
+ QPainterPath path;
+
+// display_image_->scrolled_image_pixmap_item()->mapToScene()
+
+ path.moveTo(p1);
+ path.cubicTo(mid, mid, p2);
+
+ QGraphicsPathItem* ppi = image_viewer_->scrolled_image_scene()->addPath(path,
+   QPen(QColor(25, 79, 106), 1, Qt::SolidLine,
+   Qt::FlatCap, Qt::MiterJoin), QBrush(QColor(5, 122, 163, 100)));
+
+ ppi->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
+ ppi->setParentItem(image_viewer_->scrolled_image_pixmap_item()); //image_scene_item_->this_proxy_widget()->graphicsItem());
+
+    //image_viewer_->scrolled_image_pixmap_item());
+
+}
+
+
+void DHAX_Main_Window_Controller::draw_demo_quad()
+{
+ DHAX_Drawn_Shape* cdds = display_image_data_->active_curve();
+ if(!cdds)
+   return;
+
+ QPoint _p1 = cdds->points()[0];
+ QPoint _p2 = cdds->points()[1];
+ QPoint _mid = cdds->extra_points()[0];
+
+ QPoint p1 = image_viewer_->control_center(1).toPoint();
+ QPoint mid = image_viewer_->control_center(2).toPoint();
+ QPoint p2 = image_viewer_->control_center(3).toPoint();
+
+ image_viewer_->draw_circle(p1, 2, Qt::cyan, Qt::transparent, 0);
+ image_viewer_->draw_circle(mid, 2, Qt::cyan, Qt::transparent, 0);
+ image_viewer_->draw_circle(p2, 2, Qt::cyan, Qt::transparent, 0);
+
+ QPainterPath path;
+
+// display_image_->scrolled_image_pixmap_item()->mapToScene()
+
+ path.moveTo(p1);
+ path.quadTo(mid, p2);
+
+ QGraphicsPathItem* ppi = image_viewer_->scrolled_image_scene()->addPath(path,
+   QPen(QColor(79, 106, 25), 1, Qt::SolidLine,
+   Qt::FlatCap, Qt::MiterJoin), QBrush(QColor(39, 122, 163, 100)));
+
+ ppi->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
+ ppi->setParentItem(image_viewer_->scrolled_image_pixmap_item());
+
+}
+
 
 void DHAX_Main_Window_Controller::load_image()
 {

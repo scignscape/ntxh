@@ -56,6 +56,10 @@ class DHAX_Image_Viewer : public QWidget
 
  void recenter_image();
 
+ // //  what should be the item class here?
+ QMap<u1, QPair<QGraphicsEllipseItem*, r8>> controls_;
+
+
 public:
 
  DHAX_Image_Viewer(QWidget *parent = nullptr);
@@ -69,12 +73,26 @@ public:
  ACCESSORS(DHAX_Graphics_Scene* ,scrolled_image_scene)
  ACCESSORS(QGraphicsProxyWidget* ,scrolled_image_pixmap_item)
 
+
+ QPointF control_center(u1 index)
+ {
+  QGraphicsEllipseItem* el = controls_[index].first;
+
+  return {el->rect().topLeft().x() + el->pos().x() + controls_[index].second,
+     el->rect().topLeft().y() + el->pos().y() + controls_[index].second};
+ }
+
  void recenter_scroll_center();
  void recenter_scroll_top_left();
 
 
  void load_image(QString file_path);
  void reset_scale(r8 factor);
+
+ void cancel_notation();
+
+ void draw_circle(const QPointF& center, r8 radius, QColor brush_color,
+   QColor pen_color, u1 index);
 
 
 };

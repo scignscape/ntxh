@@ -34,6 +34,14 @@ DHAX_Image_Scene_Item::DHAX_Image_Scene_Item(QWidget *parent) : QWidget(parent)
 
 }
 
+void DHAX_Image_Scene_Item::cancel_notation()
+{
+ data_->check_clear_last_canceled_drawn_shapes();
+ data_->cancel_current_drawn_shape();
+
+ update();
+}
+
 
 void DHAX_Image_Scene_Item::paintEvent_draw_vertex_handles(
   const QVector<const QPoint*>& points, QPainter& painter)
