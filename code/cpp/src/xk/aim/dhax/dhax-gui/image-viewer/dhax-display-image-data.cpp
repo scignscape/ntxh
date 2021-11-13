@@ -54,9 +54,11 @@ DHAX_Display_Image_Data::DHAX_Display_Image_Data()
  checked_ = false;
  editing_ = false;
  nameSelected_ = false;
- drawingSquareEnabled_ = false;
- drawingEllipseEnabled_ = false;
- drawingPolygonEnabled_ = false;
+
+ enabled_shape_kind_ = Shape_Kinds::N_A;
+// drawingSquareEnabled_ = false;
+// drawingEllipseEnabled_ = false;
+// drawingPolygonEnabled_ = false;
  pointPosition_ = 0;
  shapePosition_ = -1;
  shapeID_.clear();
@@ -100,9 +102,14 @@ void DHAX_Display_Image_Data::complete_polygon()
 {
  DHAX_Drawn_Shape* dds = check_current_drawn_shape(DHAX_Drawn_Shape::Shape_Kinds::Non_Regular_Polygon);
 
+ QPoint last_point;
  for(const QPair<QPoint, QPoint>& pr : point_pairs_)
  {
-  dds->points() << pr.first; // << pr.second;
+  if(pr.first != last_point)
+    dds->points() << pr.first;
+  if(pr.second != pr.first)
+    dds->points() << pr.second;
+  last_point = pr.second;
  }
 
  point_pairs_.clear();
@@ -116,23 +123,29 @@ void DHAX_Display_Image_Data::setView(QImage image)
 
 void DHAX_Display_Image_Data::enableSquareDraw()
 {
- drawingSquareEnabled_ = true;
- drawingEllipseEnabled_ = false;
- drawingPolygonEnabled_ = false;
+ enabled_shape_kind_ = DHAX_Display_Image_Data::Shape_Kinds::Rectangle;
+
+// drawingSquareEnabled_ = true;
+// drawingEllipseEnabled_ = false;
+// drawingPolygonEnabled_ = false;
 }
 
 void DHAX_Display_Image_Data::enableEllipseDraw()
 {
- drawingEllipseEnabled_ = true;
- drawingSquareEnabled_ = false;
- drawingPolygonEnabled_ = false;
+ enabled_shape_kind_ = DHAX_Display_Image_Data::Shape_Kinds::Ellipse;
+
+// drawingEllipseEnabled_ = true;
+// drawingSquareEnabled_ = false;
+// drawingPolygonEnabled_ = false;
 }
 
 void DHAX_Display_Image_Data::enablePolygonDraw()
 {
- drawingPolygonEnabled_ = true;
- drawingSquareEnabled_ = false;
- drawingEllipseEnabled_ = false;
+ enabled_shape_kind_ = DHAX_Display_Image_Data::Shape_Kinds::Non_Regular_Polygon;
+
+// drawingPolygonEnabled_ = true;
+// drawingSquareEnabled_ = false;
+// drawingEllipseEnabled_ = false;
 }
 
 void DHAX_Display_Image_Data::enableHighlight(bool enable)

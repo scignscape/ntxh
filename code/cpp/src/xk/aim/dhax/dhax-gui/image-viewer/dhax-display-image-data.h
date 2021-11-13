@@ -18,6 +18,8 @@
 
 #include "dhax-drawn-shape.h"
 
+//#include "dhax-data/ann/dhax-annotation-instance.h"
+
 class DHAX_Graphics_Scene;
 class DHAX_Graphics_View;
 
@@ -42,9 +44,13 @@ class DHAX_Display_Image_Data
   bool checked_;
   bool editing_;
   bool nameSelected_;
-  bool drawingSquareEnabled_;
-  bool drawingEllipseEnabled_;
-  bool drawingPolygonEnabled_;
+
+  typedef DHAX_Drawn_Shape::Shape_Kinds Shape_Kinds;
+
+  Shape_Kinds enabled_shape_kind_;
+//  bool drawingSquareEnabled_;
+//  bool drawingEllipseEnabled_;
+//  bool drawingPolygonEnabled_;
 
   int pointPosition_;
   int shapePosition_;
@@ -83,16 +89,17 @@ class DHAX_Display_Image_Data
 
   void setView(QImage image);
 
-  DHAX_Drawn_Shape::Shape_Kinds current_enabled_shape_kind()
+  Shape_Kinds current_enabled_shape_kind()
   {
-   if(drawingSquareEnabled_)
-     return DHAX_Drawn_Shape::Shape_Kinds::Rectangle;
-   if(drawingEllipseEnabled_)
-     return DHAX_Drawn_Shape::Shape_Kinds::Ellipse;
-   if(drawingPolygonEnabled_)
-     return DHAX_Drawn_Shape::Shape_Kinds::Non_Regular_Polygon;
+   return enabled_shape_kind_;
+//   if(drawingSquareEnabled_)
+//     return DHAX_Drawn_Shape::Shape_Kinds::Rectangle;
+//   if(drawingEllipseEnabled_)
+//     return DHAX_Drawn_Shape::Shape_Kinds::Ellipse;
+//   if(drawingPolygonEnabled_)
+//     return DHAX_Drawn_Shape::Shape_Kinds::Non_Regular_Polygon;
 
-   return DHAX_Drawn_Shape::Shape_Kinds::N_A;
+//   return DHAX_Drawn_Shape::Shape_Kinds::N_A;
   }
 
   void set_pan_mode()

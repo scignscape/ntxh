@@ -101,7 +101,9 @@ DHAX_Annotation_Instance* DHAX_Drawn_Shape::to_dhax_annotation() //r8 resize_fac
 {
  DHAX_Annotation_Instance* result = new DHAX_Annotation_Instance;
 
- result->set_shape_designation(shape_kind_to_string());
+ result->qpoint_dimensions();
+
+ result->set_shape_designation(QString("(%1)").arg(shape_kind_to_string()));
 
  switch(shape_kind_)
  {

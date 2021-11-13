@@ -248,8 +248,10 @@ void DHAX_Image_Scene_Item::paintEvent(QPaintEvent*)
    painter.drawImage(0, 0, data_->m_background_); //riempe lo sfonfo con l'immagine scelta dall'utente
 
  if(!data_->editing_)
- {
-  if(data_->drawingSquareEnabled_ && data_->isMoving_)
+ {          //drawingSquareEnabled_
+  if(data_->current_enabled_shape_kind()
+       == DHAX_Display_Image_Data::Shape_Kinds::Rectangle
+       && data_->isMoving_)
   {
    data_->points_.clear();
    data_->points_ << data_->mStartPoint_ << QPoint(data_->mStartPoint_.rx(),data_->mEndPoint_.ry())
@@ -269,7 +271,10 @@ void DHAX_Image_Scene_Item::paintEvent(QPaintEvent*)
 
    }
   }
-  if(data_->drawingEllipseEnabled_ && data_->isMoving_)
+                //drawingEllipseEnabled_
+  if(data_->current_enabled_shape_kind()
+       == DHAX_Display_Image_Data::Shape_Kinds::Ellipse
+       && data_->isMoving_)
   {
    data_->points_.clear();
    data_->points_ << data_->mStartPoint_ << QPoint(data_->mStartPoint_.rx(), data_->mEndPoint_.ry())
@@ -584,7 +589,10 @@ void DHAX_Image_Scene_Item::mouseMoveEvent(QMouseEvent *mouseEvent)
    }
   }
  }
- if(data_->drawingPolygonEnabled_ && data_->points_.size() >= 3)
+
+ if(data_->current_enabled_shape_kind()
+      == DHAX_Display_Image_Data::Shape_Kinds::Ellipse
+      && data_->points_.size() >= 3)
  {
   if(mouseEvent->pos().x() >= data_->points_.first().x() - data_->radius_ &&
      mouseEvent->pos().x() <= data_->points_.first().x() + data_->radius_ &&
@@ -608,7 +616,9 @@ void DHAX_Image_Scene_Item::mouseDoubleClickEvent(QMouseEvent *mouseEvent)
 
  if(mouseEvent->button() == Qt::LeftButton)
  {
-  if(data_->drawingPolygonEnabled_ && data_->points_.size() >= 3)
+  if(data_->current_enabled_shape_kind()
+       == DHAX_Display_Image_Data::Shape_Kinds::Non_Regular_Polygon
+       && data_->points_.size() >= 3)
   {
    data_->isMoving_ = false;
    DHAX_Display_Image_Data::shape another;

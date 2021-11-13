@@ -266,7 +266,7 @@ public:
  };
 
  enum class Dimension_Units {
-   N_A, Px, Pc, In, Pt, Cm, Mm
+   N_A, Px, Pc, In, Pt, Cm, Mm, QPoint_or_QPointF
  };
 
  enum class Byte_Lengths {
@@ -286,6 +286,10 @@ public:
 
  void default_dimensions();
  void reuse_dimensions_for_shape_lengths();
+
+ void qpoint_dimensions();
+ void qpointf_dimensions();
+
 
 // QPair<QPoint, QPoint> to_tlbr_points(const QVector<QPoint>& vec);
 // QPair<QPointF, QPointF> to_tlbr_points(const QVector<QPointF>& vec);

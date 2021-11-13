@@ -15,7 +15,9 @@
 #include <QDebug>
 
 DHAX_Annotation_Instance::DHAX_Annotation_Instance()
-  :  shape_lengths_({.int4=nullptr}), composite_shape_code_(0)//, prelim_shape_points_(nullptr)
+  :  shape_lengths_({.int4=nullptr}),
+     composite_shape_code_(0),
+     composite_dimension_code_(0)//, prelim_shape_points_(nullptr)
 {
 
 }
@@ -240,6 +242,39 @@ void DHAX_Annotation_Instance::default_dimensions()
   code = composite_dimension_code_;
  }
 }
+
+void DHAX_Annotation_Instance::qpoint_dimensions()
+{
+ static u2 code = 0;
+ if(code)
+   composite_dimension_code_ = code;
+ else
+ {
+  // //  init for this object and keep the result for others
+  set_dimension_units(Dimension_Units::QPoint_or_QPointF);
+  set_dimension_scale(Dimension_Scale::Integer);
+  set_byte_lengths(Byte_Lengths::Four);
+  reuse_dimensions_for_shape_lengths();
+  code = composite_dimension_code_;
+ }
+}
+
+void DHAX_Annotation_Instance::qpointf_dimensions()
+{
+ static u2 code = 0;
+ if(code)
+   composite_dimension_code_ = code;
+ else
+ {
+  // //  init for this object and keep the result for others
+  set_dimension_units(Dimension_Units::QPoint_or_QPointF);
+  set_dimension_scale(Dimension_Scale::Float);
+  set_byte_lengths(Byte_Lengths::Four);
+  reuse_dimensions_for_shape_lengths();
+  code = composite_dimension_code_;
+ }
+}
+
 
 void DHAX_Annotation_Instance::reuse_dimensions_for_shape_lengths()
 {
