@@ -18,7 +18,7 @@ DHAX_Location_2d::DHAX_Location_2d(u4 c1, u4 c2)
 
 QString DHAX_Location_2d::to_string()
 {
- return QString("%1;%2").arg(c1_).arg(c2_);
+ return QString("%1,%2").arg(c1_).arg(c2_);
 }
 
 QPoint DHAX_Location_2d::to_qpoint()

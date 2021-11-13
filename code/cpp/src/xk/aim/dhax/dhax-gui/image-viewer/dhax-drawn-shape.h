@@ -16,6 +16,8 @@
 
 #include "global-types.h"
 
+#include "dhax-data/ann/dhax-annotation-instance.h"
+
 class DHAX_Annotation_Instance;
 
 class DHAX_Drawn_Shape
@@ -25,14 +27,17 @@ class DHAX_Drawn_Shape
 
 public:
 
- enum class Shape_Kinds
- {
-  N_A, Rectangle, Ellipse, Polygon, Polyline, Curve
- };
+ typedef DHAX_Annotation_Instance::Compact_Shape_Kind_Summary Shape_Kinds;
+// enum class Shape_Kinds
+// {
+//  N_A, Rectangle, Ellipse, Polygon, Polyline, Curve
+// };
 
 private:
 
+ //Shape_Kinds shape_kind_;
  Shape_Kinds shape_kind_;
+ //DHAX_Annotation_Instance::Compact_Shape_Kind_Summary shape_kind_;
 
 public:
 

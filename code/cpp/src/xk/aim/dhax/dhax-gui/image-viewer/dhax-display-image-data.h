@@ -90,7 +90,7 @@ class DHAX_Display_Image_Data
    if(drawingEllipseEnabled_)
      return DHAX_Drawn_Shape::Shape_Kinds::Ellipse;
    if(drawingPolygonEnabled_)
-     return DHAX_Drawn_Shape::Shape_Kinds::Polygon;
+     return DHAX_Drawn_Shape::Shape_Kinds::Non_Regular_Polygon;
 
    return DHAX_Drawn_Shape::Shape_Kinds::N_A;
   }

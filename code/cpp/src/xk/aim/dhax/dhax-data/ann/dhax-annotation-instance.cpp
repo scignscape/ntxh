@@ -15,7 +15,7 @@
 #include <QDebug>
 
 DHAX_Annotation_Instance::DHAX_Annotation_Instance()
-  :  shape_lengths_({.int4=nullptr}), composite_shape_code_(0), prelim_shape_points_(nullptr)
+  :  shape_lengths_({.int4=nullptr}), composite_shape_code_(0)//, prelim_shape_points_(nullptr)
 {
 
 }
@@ -570,6 +570,39 @@ void DHAX_Annotation_Instance::add_shape_point(float c1, float c2)
  }
 }
 
+
+DHAX_Annotation_Instance::Compact_Shape_Kind_Summary
+  DHAX_Annotation_Instance::check_compact_representation(u1 csc, u1* num_sides)
+{
+ if(csc & 1)
+ {
+  // //  most polygons
+  u1 psc = get_raw_polygon_side_count(csc);
+  switch(psc)
+  {
+  case 0: return Compact_Shape_Kind_Summary::Non_Regular_Polygon; // qDebug() << "PSC: Non-Regular"; break;
+  case 1: return Compact_Shape_Kind_Summary::Rectangle; // qDebug() << "PSC: Rectangle"; break;
+  case 2: return Compact_Shape_Kind_Summary::Arrow; // qDebug() << "PSC: Arrow"; break;
+  case 31: return Compact_Shape_Kind_Summary::Diamond; // qDebug() << "PSC: Diamond"; break;
+  default: if(num_sides) *num_sides = psc; return Compact_Shape_Kind_Summary::Regular_Polygon;//qDebug() << "PSC: Regular Polygon with " << psc << " sides"; break;
+    // raw_polygon_sides >= 3:  regular polygon
+  }
+ }
+ else
+ {
+  // //  most polygons
+  Non_Linear_Shape_Kinds nsc = get_non_linear_shape_kind(csc);
+  switch(nsc)
+  {
+  case Non_Linear_Shape_Kinds::Curve: return Compact_Shape_Kind_Summary::Curve; //qDebug() << "NSC: Curve"; break;
+  case Non_Linear_Shape_Kinds::Ellipse: return Compact_Shape_Kind_Summary::Ellipse; //qDebug() << "NSC: Ellipse"; break;
+  case Non_Linear_Shape_Kinds::QPath: return Compact_Shape_Kind_Summary::QPath; // qDebug() << "NSC: QPath"; break;
+  case Non_Linear_Shape_Kinds::Other: return Compact_Shape_Kind_Summary::Other_Non_Linear; // qDebug() << "NSC: Other"; break;
+  }
+ }
+}
+
+
 #define LINE_DIVIDER_STR "|"
 #define LINE_SUBDIVIDER_STR "^"
 
@@ -608,17 +641,20 @@ void DHAX_Annotation_Instance::from_compact_string(QString cs)
  if(parts.isEmpty())
    return;
 
+ //check_compact_representation();
+
  QString locs = parts.takeFirst();
 
  // // prelim or locations?
  if(!locs.isEmpty())
  {
-  check_init_prelim_shape_points();
-  QStringList prelim_points = locs.split(':');
+//?  check_init_prelim_shape_points();
+  QStringList prelim_points = locs.split(';');
   for(QString prelim_point : prelim_points)
   {
    QStringList ps = prelim_point.split(',');
-   prelim_shape_points_->push_back(QPoint(ps.value(0).toInt(), ps.value(1).toInt()));
+   add_shape_point(ps.value(0).toInt(), ps.value(1).toInt());
+   //prelim_shape_points_->push_back(QPoint(ps.value(0).toInt(), ps.value(1).toInt()));
   }
  }
 
@@ -632,14 +668,24 @@ QString DHAX_Annotation_Instance::to_compact_string()
  result += QString("|%1|%2|%3|%4|").arg(shape_designation_)
    .arg(composite_dimension_code_)
    .arg(composite_shape_code_).arg(internal_codes_);
- if(prelim_shape_points_ && !prelim_shape_points_->isEmpty())
- {
-  for(QPoint qp : *prelim_shape_points_)
+
+  for(n8 nn : locations_)
   {
-   result += QString("%1,%2:").arg(qp.x()).arg(qp.y());
+   DHAX_Location_2d* loc = (DHAX_Location_2d*) nn;
+   result += loc->to_string() + ";";
   }
   result.chop(1);
- }
+
+
+// if(prelim_shape_points_ && !prelim_shape_points_->isEmpty())
+// {
+//  for(QPoint qp : *prelim_shape_points_)
+//  {
+//   result += QString("%1,%2:").arg(qp.x()).arg(qp.y());
+//  }
+//  result.chop(1);
+// }
+
 // for(n8 nn : locations_)
 // {
 //  AXFI_Location_2d* loc = (AXFI_Location_2d*) nn;

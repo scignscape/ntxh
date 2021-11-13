@@ -41,6 +41,7 @@ public Q_SLOTS:
  void handle_meshlab_reset();
  void handle_convert_notation();
  void handle_polygon_complete_and_save_notation();
+ void handle_polygon_complete_and_save_notation_with_comment();
 
  void handle_view_contours();
  void handle_view_3d();

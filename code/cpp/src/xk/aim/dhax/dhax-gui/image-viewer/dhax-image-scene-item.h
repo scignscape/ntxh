@@ -137,6 +137,7 @@ Q_SIGNALS:
 
  void save_notation_requested(bool);
  void polygon_complete_and_save_notation_requested();
+ void polygon_complete_and_save_notation_with_comment_requested();
  void polygon_save_notation_requested();
  void complete_polygon_requested();
  void meshlab_import_info_requested();

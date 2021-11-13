@@ -47,7 +47,7 @@ void DHAX_Main_Window_Receiver::handle_draw_quad_path()
 
 void DHAX_Main_Window_Receiver::handle_complete_polygon()
 {
-
+ main_window_controller_->complete_polygon();
 }
 
 

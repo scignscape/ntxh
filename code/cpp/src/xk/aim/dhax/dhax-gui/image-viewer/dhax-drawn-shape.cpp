@@ -36,7 +36,8 @@ QString DHAX_Drawn_Shape::shape_kind_to_string()
  {
  case Shape_Kinds::Rectangle: return "Rectangle";
  case Shape_Kinds::Ellipse: return "Ellipse";
- case Shape_Kinds::Polygon: return "Polygon";
+ //case Shape_Kinds::Polygon: return "Polygon";
+ case Shape_Kinds::Non_Regular_Polygon: return "Polygon";
  case Shape_Kinds::Polyline: return "Polyline";
 
  default: return {};
@@ -66,7 +67,8 @@ void DHAX_Drawn_Shape::parse_shape_kind(QString text)
  static QMap<QString, Shape_Kinds> static_map {
   {"Rectangle", Shape_Kinds::Rectangle},
   {"Ellipse", Shape_Kinds::Ellipse},
-  {"Polygon", Shape_Kinds::Polygon},
+  //{"Polygon", Shape_Kinds::Polygon},
+  {"Polygon", Shape_Kinds::Non_Regular_Polygon},
   {"Polyline", Shape_Kinds::Polyline},
   {"Curve", Shape_Kinds::Curve},
  };
@@ -78,16 +80,21 @@ void DHAX_Drawn_Shape::init_from_dhax_annotation(DHAX_Annotation_Instance& dai, 
 {
 //? shape_kind_ = (Shape_Kinds) dai.opaque_shape_kind_code();
 
- parse_shape_kind(dai.shape_designation());
+// parse_shape_kind(dai.shape_designation());
 
+ shape_kind_ = dai.check_compact_representation();
 
- QVector<QPoint>* prelim_points = dai.prelim_shape_points();
+// QVector<QPoint>* prelim_points = dai.prelim_shape_points();
+// if(prelim_points)
+//   std::copy(prelim_points->begin(), prelim_points->end(), std::back_inserter(points_));
 
 //? dai.locations_to_qpoints(points);
 
  //points_.resize(points.size());
- if(prelim_points)
-   std::copy(prelim_points->begin(), prelim_points->end(), std::back_inserter(points_));
+
+ QVector<QPoint> qps;
+ dai.locations_to_qpoints(qps);
+ std::copy(qps.begin(), qps.end(), std::back_inserter(points_));
 }
 
 DHAX_Annotation_Instance* DHAX_Drawn_Shape::to_dhax_annotation() //r8 resize_factor)
@@ -96,17 +103,36 @@ DHAX_Annotation_Instance* DHAX_Drawn_Shape::to_dhax_annotation() //r8 resize_fac
 
  result->set_shape_designation(shape_kind_to_string());
 
+ switch(shape_kind_)
+ {
+ case Shape_Kinds::Rectangle: result->init_rectangle(); break;
+ case Shape_Kinds::Ellipse: result->init_ellipse(); break;// return "Ellipse";
+ case Shape_Kinds::Non_Regular_Polygon: result->init_polygon(); break;
+ default: break;
+  //case Shape_Kinds::Polygon: return "Polygon";
+ }
+
 // result->set_opaque_shape_kind_code((n8) shape_kind_);
 
  r8 resize_factor = 1;
 
- result->check_init_prelim_shape_points();
+ //?result->check_init_prelim_shape_points();
 
+ QVector<QPoint> qps;
  for(const QPoint& point : points_)
  {
   QPoint sp = _coordinate_scaling(point, resize_factor);
-  result->add_prelim_shape_point(sp);
+  result->add_shape_point(sp.x(), sp.y());
+  //qps.push_back(sp);
  }
+
+
+// for(const QPoint& point : points_)
+// {
+//  QPoint sp = _coordinate_scaling(point, resize_factor);
+//  result->add_prelim_shape_point(sp);
+// }
+
 
  return result;
 }

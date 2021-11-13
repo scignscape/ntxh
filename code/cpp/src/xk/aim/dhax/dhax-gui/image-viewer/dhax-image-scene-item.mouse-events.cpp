@@ -75,7 +75,7 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
    update();
   }
   break;
- case DHAX_Drawn_Shape::Shape_Kinds::Polygon:
+ case DHAX_Drawn_Shape::Shape_Kinds::Non_Regular_Polygon:
   {
    data_->point_pairs_.push_back({mev->pos(), mev->pos()});
    data_->isMoving_ = true;
@@ -97,7 +97,7 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
  {
  default: break;
 
- case DHAX_Drawn_Shape::Shape_Kinds::Polygon:
+ case DHAX_Drawn_Shape::Shape_Kinds::Non_Regular_Polygon:
   {
    data_->point_pairs_.last().second = mev->pos();
    data_->isMoving_ = false;
@@ -201,6 +201,7 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
 
   menu->addAction("Complete and Save with Comment", [this]
   {
+   Q_EMIT polygon_complete_and_save_notation_with_comment_requested();
   });
 
   menu->addAction("Cancel Notation", [this]

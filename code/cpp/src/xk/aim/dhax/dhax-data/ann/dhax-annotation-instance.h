@@ -40,7 +40,8 @@ class DHAX_Annotation_Instance
 
  QStringList scoped_identifiers_;
  QString shape_designation_;
- QVector<QPoint>* prelim_shape_points_;
+
+ //?QVector<QPoint>* prelim_shape_points_;
 
 
  u2 composite_dimension_code_;
@@ -102,18 +103,23 @@ public:
  QString scoped_identifiers_to_string();
  ACCESSORS(QString ,shape_designation)
 
- ACCESSORS(QVector<QPoint>* ,prelim_shape_points)
+//? ACCESSORS(QVector<QPoint>* ,prelim_shape_points)
+// void check_init_prelim_shape_points()
+// {
+//  if(!prelim_shape_points_)
+//    prelim_shape_points_ = new QVector<QPoint>;
+// }
 
- void check_init_prelim_shape_points()
- {
-  if(!prelim_shape_points_)
-    prelim_shape_points_ = new QVector<QPoint>;
- }
+// void add_prelim_shape_point(const QPoint& qp)
+// {
+//  prelim_shape_points_->push_back(qp);
+// }
 
- void add_prelim_shape_point(const QPoint& qp)
- {
-  prelim_shape_points_->push_back(qp);
- }
+ enum class Compact_Shape_Kind_Summary {
+   N_A, Non_Regular_Polygon, Rectangle, Arrow,
+   Regular_Polygon, Diamond, Polyline,
+   Ellipse, QPath, Curve, Other_Non_Linear
+ };
 
 
  enum class Non_Linear_Shape_Kinds {
@@ -188,6 +194,10 @@ public:
   return composite_shape_code_ >> 6;
  }
 
+ static u1 get_raw_polygon_side_count(u1 csc)
+ {
+  return csc >> 3;
+ }
 
  // raw_polygon_sides = 0:  non-regular
  // raw_polygon_sides = 1:  rectangle
@@ -196,8 +206,10 @@ public:
  // raw_polygon_sides >= 3:  regular polygon
  u1 get_raw_polygon_side_count()
  {
-  return composite_shape_code_ >> 3;
+  return get_raw_polygon_side_count(composite_shape_code_);
  }
+
+
 
  void init_rectangle()
  {
@@ -220,6 +232,18 @@ public:
  void init_ellipse()
  {
   set_non_linear_shape_kind(Non_Linear_Shape_Kinds::Ellipse);
+ }
+
+ static Non_Linear_Shape_Kinds get_non_linear_shape_kind(u1 csc)
+ {
+  u1 sc = csc >> 3;
+  sc &= 3;
+  return (Non_Linear_Shape_Kinds) sc;
+ }
+
+ Non_Linear_Shape_Kinds get_non_linear_shape_kind()
+ {
+  return get_non_linear_shape_kind(composite_shape_code_);
  }
 
 // bool shape_is_open();
@@ -271,6 +295,12 @@ public:
  bool float_dimensions()
  {
   return get_dimension_scale() == Dimension_Scale::Float;
+ }
+
+ static Compact_Shape_Kind_Summary check_compact_representation(u1 csc, u1* num_sides = nullptr);
+ Compact_Shape_Kind_Summary check_compact_representation(u1* num_sides = nullptr)
+ {
+  return check_compact_representation(composite_shape_code_, num_sides);
  }
 
  bool single_shape_length();

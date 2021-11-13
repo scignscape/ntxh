@@ -98,11 +98,11 @@ void DHAX_Display_Image_Data::setColorsThickness(int in_radius, int in_thickness
 
 void DHAX_Display_Image_Data::complete_polygon()
 {
- DHAX_Drawn_Shape* dds = check_current_drawn_shape(DHAX_Drawn_Shape::Shape_Kinds::Polygon);
+ DHAX_Drawn_Shape* dds = check_current_drawn_shape(DHAX_Drawn_Shape::Shape_Kinds::Non_Regular_Polygon);
 
  for(const QPair<QPoint, QPoint>& pr : point_pairs_)
  {
-  dds->points() << pr.first << pr.second;
+  dds->points() << pr.first; // << pr.second;
  }
 
  point_pairs_.clear();

@@ -35,7 +35,6 @@
 #include "main-window/dhax-main-window-controller.h"
 #include "main-window/dhax-main-window-data.h"
 
-#include "image-viewer/dhax-image-scene-item.h"
 #include "application/dhax-application-receiver.h"
 
 #include <QMessageBox>
@@ -53,6 +52,7 @@ USING_KANS(TextIO)
 // //  this has to be included after dgi-image.h ...
  //    (because of "_flags" macro conflict ...)
 #include "dhax-data/ann/dhax-annotation-instance.h"
+#include "image-viewer/dhax-image-scene-item.h"
 
 
 #include "dhax-forge-controller.h"
@@ -525,6 +525,8 @@ void DHAX_Application_Controller::init_image_scene_item(DHAX_Image_Scene_Item* s
  si->self_connect(SIGNAL(polygon_complete_and_save_notation_requested()),
    application_receiver_, SLOT(handle_polygon_complete_and_save_notation()));
 
+ si->self_connect(SIGNAL(polygon_complete_and_save_notation_with_comment_requested()),
+   application_receiver_, SLOT(handle_polygon_complete_and_save_notation()));
 
  si->self_connect(SIGNAL(meshlab_reset_requested()),
    application_receiver_,
@@ -628,6 +630,12 @@ void DHAX_Application_Controller::init_udp_controller()
  //udp_controller_->
 
 
+}
+
+void DHAX_Application_Controller::handle_complate_and_save_requested(bool with_comment)
+{
+ main_window_controller_->complete_polygon();
+ save_current_notation(with_comment);
 }
 
 

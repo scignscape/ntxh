@@ -121,6 +121,19 @@ void DHAX_Main_Window_Controller::init_image_scene_item(DHAX_Image_Scene_Item *s
 }
 
 
+void DHAX_Main_Window_Controller::complete_polygon()
+{
+ display_image_data_->complete_polygon();
+ image_scene_item_->update();
+
+// DHAX_Drawn_Shape* dds = display_image_data_->current_drawn_shape();
+// if(!dds)
+//   return;
+// dds->points().push_back(dds->points().first());
+
+}
+
+
 #include "libspline/aaCurve.h"
 #include "libspline/spline.h"
 
@@ -209,7 +222,18 @@ void DHAX_Main_Window_Controller::draw_demo_bezier()
   //glVertex3f(t, v * Y_FACTOR, Z_VALUE);
   t += m_deltaT;
 
+  static u1 color_min = 100;
+  static u1 color_max = 210;
+  static u1 color_inc = color_max - color_min;
+
   double c = 100;
+
+  double max = (*rbeg).t - m_deltaT;
+  double color_change = max - t;
+  double increments = color_change / m_deltaT;
+  double increment = color_inc / increments;
+
+  qDebug() << "inc = " << increment;
 
   while(t < (*rbeg).t - m_deltaT){
       pspline->getValue(t, v);
@@ -227,7 +251,7 @@ void DHAX_Main_Window_Controller::draw_demo_bezier()
       QPoint ptv(t, v);
       image_viewer_->draw_circle(ptv, 2, QColor(c, c + 40, 200, 140), Qt::transparent, 0);
 
-      c += 0.03;
+      c += increment;
 
  //     glVertex3f(t, v * Y_FACTOR, Z_VALUE);
       t += m_deltaT;

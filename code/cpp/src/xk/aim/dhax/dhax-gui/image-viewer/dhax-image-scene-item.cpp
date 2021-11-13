@@ -202,7 +202,7 @@ void DHAX_Image_Scene_Item::paintEvent_draw_drawn_shape(DHAX_Drawn_Shape* dds,
   }
   break;
 
- case DHAX_Drawn_Shape::Shape_Kinds::Polygon:
+ case DHAX_Drawn_Shape::Shape_Kinds::Non_Regular_Polygon:
   {
    u1 count = 0;
    QPoint last;
