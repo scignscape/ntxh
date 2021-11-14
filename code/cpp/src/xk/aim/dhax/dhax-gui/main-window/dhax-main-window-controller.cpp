@@ -121,6 +121,13 @@ void DHAX_Main_Window_Controller::init_image_scene_item(DHAX_Image_Scene_Item *s
 }
 
 
+
+void DHAX_Main_Window_Controller::init_polyline()
+{
+ display_image_data_->init_polyline();
+}
+
+
 void DHAX_Main_Window_Controller::complete_polygon()
 {
  display_image_data_->complete_polygon();

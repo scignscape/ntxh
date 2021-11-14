@@ -147,7 +147,9 @@ class DHAX_Display_Image_Data
 
   void reset_drawn_shapes();
 
+  void init_polygon_or_polyline(DHAX_Drawn_Shape* dds);
   void complete_polygon();
+  void init_polyline();
 
   void check_clear_last_canceled_drawn_shapes()
   {

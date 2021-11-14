@@ -74,10 +74,11 @@ void DHAX_Application_Receiver::handle_polygon_complete_and_save_notation_with_c
  application_controller_->handle_complate_and_save_requested(true);
 }
 
-void DHAX_Application_Receiver::handle_polygon_save_notation()
+void DHAX_Application_Receiver::handle_polyline_save_notation(bool with_comment)
 {
- //?application_controller_->save_current_notation(false);
+ application_controller_->handle_polyline_save_requested(with_comment);
 }
+
 
 void DHAX_Application_Receiver::handle_view_contours()
 {

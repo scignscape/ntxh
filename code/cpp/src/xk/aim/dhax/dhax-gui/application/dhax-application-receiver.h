@@ -35,7 +35,8 @@ public:
 public Q_SLOTS:
 
  void handle_save_notation(bool with_comment);
- void handle_polygon_save_notation();
+ void handle_polyline_save_notation(bool with_comment);
+ //void handle_polyline_save_notation_with_comment();
  void handle_freecad_reset();
  void handle_load_notes();
  void handle_meshlab_reset();

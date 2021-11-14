@@ -53,6 +53,7 @@ public:
  void init_image_scene_item(DHAX_Image_Scene_Item* si);
 
  void complete_polygon();
+ void init_polyline();
 
 
  void draw_demo_bezier();

@@ -611,6 +611,10 @@ DHAX_Annotation_Instance::Compact_Shape_Kind_Summary
 {
  if(csc & 1)
  {
+  if(csc & 2)
+    // //  polyline ("open" flag is set)
+    return Compact_Shape_Kind_Summary::Polyline;
+
   // //  most polygons
   u1 psc = get_raw_polygon_side_count(csc);
   switch(psc)

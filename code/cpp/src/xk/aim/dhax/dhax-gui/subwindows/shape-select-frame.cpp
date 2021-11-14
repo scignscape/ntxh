@@ -5,6 +5,10 @@
 
 #include <QDebug>
 
+#include <QStandardItemModel>
+#include <QStandardItem>
+
+
 
 Shape_Select_Frame::Shape_Select_Frame(QWidget* parent)
   :  QFrame(parent)
@@ -57,6 +61,14 @@ Shape_Select_Frame::Shape_Select_Frame(QWidget* parent)
  generic_shape_options_->addItem("Ellipse");
  generic_shape_options_->addItem("Polygon");
  generic_shape_options_->addItem("N_A");
+
+ QStandardItemModel* model = qobject_cast<QStandardItemModel*>(generic_shape_options_->model());
+
+ int index = generic_shape_options_->findText("N_A");
+
+ QStandardItem* item = model->item(index);
+ item->setFlags(item->flags() & ~Qt::ItemIsEnabled);
+
 
  connect(generic_shape_options_, &QComboBox::currentTextChanged,
    [this] {update_shape_selection();});

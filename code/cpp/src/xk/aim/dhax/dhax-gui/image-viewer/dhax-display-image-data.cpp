@@ -98,10 +98,8 @@ void DHAX_Display_Image_Data::setColorsThickness(int in_radius, int in_thickness
 }
 
 
-void DHAX_Display_Image_Data::complete_polygon()
+void DHAX_Display_Image_Data::init_polygon_or_polyline(DHAX_Drawn_Shape* dds)
 {
- DHAX_Drawn_Shape* dds = check_current_drawn_shape(DHAX_Drawn_Shape::Shape_Kinds::Non_Regular_Polygon);
-
  QPoint last_point;
  for(const QPair<QPoint, QPoint>& pr : point_pairs_)
  {
@@ -113,7 +111,19 @@ void DHAX_Display_Image_Data::complete_polygon()
  }
 
  point_pairs_.clear();
+}
 
+void DHAX_Display_Image_Data::init_polyline()
+{
+ DHAX_Drawn_Shape* dds = check_current_drawn_shape(DHAX_Drawn_Shape::Shape_Kinds::Polyline);
+ init_polygon_or_polyline(dds);
+}
+
+
+void DHAX_Display_Image_Data::complete_polygon()
+{
+ DHAX_Drawn_Shape* dds = check_current_drawn_shape(DHAX_Drawn_Shape::Shape_Kinds::Non_Regular_Polygon);
+ init_polygon_or_polyline(dds);
 }
 
 void DHAX_Display_Image_Data::setView(QImage image)

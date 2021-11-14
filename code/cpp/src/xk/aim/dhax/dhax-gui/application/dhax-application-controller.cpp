@@ -513,8 +513,11 @@ void DHAX_Application_Controller::init_image_scene_item(DHAX_Image_Scene_Item* s
 //   application_receiver_, SLOT(handle_convert_notation()));
 
 
- si->self_connect(SIGNAL(polygon_save_notation_requested()),
-   application_receiver_, SLOT(handle_polygon_save_notation()));
+ si->self_connect(SIGNAL(polyline_save_notation_requested(bool)),
+   application_receiver_, SLOT(handle_polyline_save_notation(bool)));
+
+// si->self_connect(SIGNAL(polyline_save_notation_with_comment_requested()),
+//   application_receiver_, SLOT(handle_polyline_save_notation_with_comment()));
 
 //?
 // si->self_connect(&DHAX_Image_Scene_Item::polygon_save_notation,
@@ -637,6 +640,13 @@ void DHAX_Application_Controller::handle_complate_and_save_requested(bool with_c
  main_window_controller_->complete_polygon();
  save_current_notation(with_comment);
 }
+
+void DHAX_Application_Controller::handle_polyline_save_requested(bool with_comment)
+{
+ main_window_controller_->init_polyline();
+ save_current_notation(with_comment);
+}
+
 
 
 void DHAX_Application_Controller::save_current_notation(bool with_comment)

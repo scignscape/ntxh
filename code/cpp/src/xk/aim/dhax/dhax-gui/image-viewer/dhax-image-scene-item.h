@@ -75,7 +75,7 @@ private:
  enum class Mouse_Event_Modes { N_A, Left_Edit, Left_Move,
    Left_Init, Right_Edit, Right_Move, Right_Init,
    Left_Move_Release, Left_Edit_Release,
-   Right_Click_Iso   };
+   Right_Click_Iso, Right_Click_Temp_Release   };
 
  template<Mouse_Event_Modes mem>
  void handle_mouse_event(QMouseEvent* mev);
@@ -98,6 +98,9 @@ private:
    QPen& pen, QPen& shape_pen, r8 resize_factor);
 
  void paintEvent_draw_vertex_handles(const QVector<const QPoint*>& points, QPainter& painter);
+
+ void _left_init(const QPoint& pos);
+ void _left_move_release(const QPoint& pos);
 
 public:
 
@@ -138,8 +141,12 @@ Q_SIGNALS:
  void save_notation_requested(bool);
  void polygon_complete_and_save_notation_requested();
  void polygon_complete_and_save_notation_with_comment_requested();
- void polygon_save_notation_requested();
+
+ void polyline_save_notation_requested(bool);
+// void polyline_save_notation_with_comment_requested();
+
  void complete_polygon_requested();
+
  void meshlab_import_info_requested();
  void meshlab_reset_requested();
  void freecad_import_info_requested();

@@ -102,6 +102,8 @@ public:
  void convert_notation_to_curve();
 
  void handle_complate_and_save_requested(bool with_comment);
+ void handle_polyline_save_requested(bool with_comment);
+
 
 #ifdef USE_IFC
  void run_ifc_convert();

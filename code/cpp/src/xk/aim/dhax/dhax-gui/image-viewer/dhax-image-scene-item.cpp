@@ -152,6 +152,7 @@ void DHAX_Image_Scene_Item::paintEvent_draw_drawn_shape(DHAX_Drawn_Shape* dds,
 // painter.drawText(QPoint(data_->allEdits_[i].shapePoints.first().rx()+5,
 //   data_->allEdits_[i].shapePoints.first().ry()-3), data_->allEdits_.at(i).id);
 
+ bool polyline = false;
 
  switch (dds->shape_kind())
  {
@@ -202,6 +203,10 @@ void DHAX_Image_Scene_Item::paintEvent_draw_drawn_shape(DHAX_Drawn_Shape* dds,
   }
   break;
 
+ case DHAX_Drawn_Shape::Shape_Kinds::Polyline:
+  polyline = true;
+  // fallthrough
+  [[fallthrough]];
  case DHAX_Drawn_Shape::Shape_Kinds::Non_Regular_Polygon:
   {
    u1 count = 0;
@@ -220,7 +225,7 @@ void DHAX_Image_Scene_Item::paintEvent_draw_drawn_shape(DHAX_Drawn_Shape* dds,
     painter.drawLine(last, qp);
     last = qp;
    }
-   if(count > 2)
+   if((count > 2) && !polyline)
      painter.drawLine(last, dds->points().first());
    paintEvent_draw_vertex_handles(ptrs, painter);
   }
@@ -516,8 +521,15 @@ void DHAX_Image_Scene_Item::mouseReleaseEvent(QMouseEvent* mev)
 
  else if(mev->button() == Qt::RightButton)
  {
+  Qt::MouseButtons mbs = mev->buttons();
+
+  if( (data_->isMoving_) && (mbs & Qt::LeftButton))
+  {
+   mem = Mouse_Event_Modes::Right_Click_Temp_Release;
+  }
   // //  any other possibilities?
-  mem = Mouse_Event_Modes::Right_Click_Iso;
+  else
+    mem = Mouse_Event_Modes::Right_Click_Iso;
  }
 
  _handle_mouse_event(mev, mem);
@@ -530,7 +542,7 @@ void DHAX_Image_Scene_Item::mouseReleaseEvent(QMouseEvent* mev)
   {
    data_->isMoving_ = false;
    data_->editing_ = false; //fine
-   onLineDraw(data_->allEdits_); //signal per MainWindow
+   onLineDraw(data_->allEdits_);
    data_->pointPosition_ = 0;
    data_->shapePosition_ = -1;
   }
@@ -538,7 +550,7 @@ void DHAX_Image_Scene_Item::mouseReleaseEvent(QMouseEvent* mev)
   {
    data_->mEndPoint_ = mev->pos();
    data_->shapeMoving_ = false; //fine
-   onLineDraw(data_->allEdits_); //signal per MainWindow
+   onLineDraw(data_->allEdits_);
    data_->mStartPoint_ = QPoint();
    data_->mEndPoint_ = QPoint();
    data_->shapePosition_ = -1;

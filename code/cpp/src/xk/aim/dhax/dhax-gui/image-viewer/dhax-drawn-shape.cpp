@@ -110,6 +110,7 @@ DHAX_Annotation_Instance* DHAX_Drawn_Shape::to_dhax_annotation() //r8 resize_fac
  case Shape_Kinds::Rectangle: result->init_rectangle(); break;
  case Shape_Kinds::Ellipse: result->init_ellipse(); break;// return "Ellipse";
  case Shape_Kinds::Non_Regular_Polygon: result->init_polygon(); break;
+ case Shape_Kinds::Polyline: result->init_polyline(); break;
  default: break;
   //case Shape_Kinds::Polygon: return "Polygon";
  }

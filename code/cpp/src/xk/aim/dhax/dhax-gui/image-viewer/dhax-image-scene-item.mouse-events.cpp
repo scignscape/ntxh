@@ -31,9 +31,8 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
 
 }
 
-template<>
-void DHAX_Image_Scene_Item::handle_mouse_event<
-  DHAX_Image_Scene_Item::Mouse_Event_Modes::Left_Init>(QMouseEvent* mev)
+
+void DHAX_Image_Scene_Item::_left_init(const QPoint& pos)
 {
  if(data_->multi_draw)
  {
@@ -69,15 +68,15 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
   {
      // //  don't need to test for this here ...
      //if(data_->mStartPoint_.isNull())
-   data_->mStartPoint_ = mev->pos();
-   data_->mEndPoint_ = mev->pos();
+   data_->mStartPoint_ = pos; //mev->pos();
+   data_->mEndPoint_ = pos; //mev->pos();
    data_->isMoving_ = true;
    update();
   }
   break;
  case DHAX_Drawn_Shape::Shape_Kinds::Non_Regular_Polygon:
   {
-   data_->point_pairs_.push_back({mev->pos(), mev->pos()});
+   data_->point_pairs_.push_back({pos, pos}); //{mev->pos(), mev->pos()});
    data_->isMoving_ = true;
    update();
   }
@@ -87,7 +86,14 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
 
 template<>
 void DHAX_Image_Scene_Item::handle_mouse_event<
-  DHAX_Image_Scene_Item::Mouse_Event_Modes::Left_Move_Release>(QMouseEvent* mev)
+  DHAX_Image_Scene_Item::Mouse_Event_Modes::Left_Init>(QMouseEvent* mev)
+{
+ _left_init(mev->pos());
+ //qDebug() << "Left_Init ...";
+
+}
+
+void DHAX_Image_Scene_Item::_left_move_release(const QPoint& pos)
 {
  DHAX_Drawn_Shape::Shape_Kinds sk = data_->current_enabled_shape_kind();
 
@@ -99,7 +105,7 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
 
  case DHAX_Drawn_Shape::Shape_Kinds::Non_Regular_Polygon:
   {
-   data_->point_pairs_.last().second = mev->pos();
+   data_->point_pairs_.last().second = pos;
    data_->isMoving_ = false;
   }
   break;
@@ -107,12 +113,55 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
  case DHAX_Drawn_Shape::Shape_Kinds::Ellipse:
  case DHAX_Drawn_Shape::Shape_Kinds::Rectangle:
   {
-   dds->points() << data_->mStartPoint_ << mev->pos();
+   dds->points() << data_->mStartPoint_ << pos;
    data_->isMoving_ = false;
   }
   break;
  }
 }
+
+template<>
+void DHAX_Image_Scene_Item::handle_mouse_event<
+  DHAX_Image_Scene_Item::Mouse_Event_Modes::Left_Move_Release>(QMouseEvent* mev)
+{
+ _left_move_release(mev->pos());
+}
+
+// //   right click temp release is like releasing the
+ //     left button and then immediately pressing it again ...
+template<>
+void DHAX_Image_Scene_Item::handle_mouse_event<
+  DHAX_Image_Scene_Item::Mouse_Event_Modes::Right_Click_Temp_Release>(QMouseEvent* mev)
+{
+ _left_move_release(mev->pos());
+ _left_init(mev->pos());
+}
+
+// DHAX_Drawn_Shape::Shape_Kinds sk = data_->current_enabled_shape_kind();
+
+// DHAX_Drawn_Shape* dds = data_->check_current_drawn_shape(); //get_current_drawn_shape_
+
+// switch(sk)
+// {
+// default: break;
+
+// case DHAX_Drawn_Shape::Shape_Kinds::Non_Regular_Polygon:
+//  {
+//   data_->point_pairs_.last().second = mev->pos();
+//   data_->isMoving_ = false;
+//  }
+//  break;
+
+// case DHAX_Drawn_Shape::Shape_Kinds::Ellipse:
+// case DHAX_Drawn_Shape::Shape_Kinds::Rectangle:
+//  {
+//   dds->points() << data_->mStartPoint_ << mev->pos();
+//   data_->isMoving_ = false;
+//  }
+//  break;
+// }
+//}
+
 
 template<>
 void DHAX_Image_Scene_Item::handle_mouse_event<
@@ -177,7 +226,7 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
   });
  }
 
-
+ // //  point_pairs_ means a (presumptively non-regular) polygon
  if(!data_->point_pairs_.isEmpty())
  {
   menu->addAction("Complete Polygon", [this]
@@ -187,7 +236,7 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
 
   menu->addAction("Save Notation", [this]
   {
-   Q_EMIT polygon_save_notation_requested();
+   Q_EMIT polyline_save_notation_requested(false);
   });
 
   menu->addAction("Complete and Save", [this]
@@ -197,6 +246,7 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
 
   menu->addAction("Save Notation with Comment", [this]
   {
+   Q_EMIT polyline_save_notation_requested(true);
   });
 
   menu->addAction("Complete and Save with Comment", [this]
@@ -286,11 +336,17 @@ void DHAX_Image_Scene_Item::_handle_mouse_event(QMouseEvent* mev, Mouse_Event_Mo
  switch(mem)
  {
 #define TEMP_MACRO(x) case Mouse_Event_Modes::x: handle_mouse_event<Mouse_Event_Modes::x>(mev); return;
-  TEMP_MACRO(Left_Edit)TEMP_MACRO(Left_Move)TEMP_MACRO(Left_Init)
-  TEMP_MACRO(Right_Edit)TEMP_MACRO(Right_Move)TEMP_MACRO(Right_Init)
-  TEMP_MACRO(Left_Move_Release)TEMP_MACRO(Left_Edit_Release)
+  TEMP_MACRO(Left_Edit)
+  TEMP_MACRO(Left_Move)
+  TEMP_MACRO(Left_Init)
+  TEMP_MACRO(Right_Edit)
+  TEMP_MACRO(Right_Move)
+  TEMP_MACRO(Right_Init)
+  TEMP_MACRO(Left_Move_Release)
+  TEMP_MACRO(Left_Edit_Release)
   TEMP_MACRO(Right_Click_Iso)
-   default:break;
+  TEMP_MACRO(Right_Click_Temp_Release)
+  default:break;
  }
 }
 
