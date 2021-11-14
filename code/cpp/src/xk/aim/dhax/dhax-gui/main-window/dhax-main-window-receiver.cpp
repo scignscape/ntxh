@@ -44,6 +44,10 @@ void DHAX_Main_Window_Receiver::handle_draw_quad_path()
 }
 
 
+void DHAX_Main_Window_Receiver::handle_get_annotation_comments(DHAX_Annotation_Instance* dai)
+{
+ main_window_controller_->show_annotation_comments(dai);
+}
 
 void DHAX_Main_Window_Receiver::handle_complete_polygon()
 {

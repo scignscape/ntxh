@@ -200,6 +200,7 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
  QMenu* menu = new QMenu(nullptr);
  menu->setAttribute(Qt::WA_DeleteOnClose);
 
+
  if(meshlab_import_count_ && *meshlab_import_count_)
  {
   menu->addAction("MeshLab Import Info", [this]
@@ -225,6 +226,16 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
    Q_EMIT freecad_reset_requested();
   });
  }
+
+ DHAX_Annotation_Instance* dai = get_annotation_comments();
+ if(dai)
+ {
+  menu->addAction("Get Comments", [this, dai]
+  {
+   Q_EMIT get_annotation_comments_requested(dai);
+  });
+ }
+
 
  // //  point_pairs_ means a (presumptively non-regular) polygon
  if(!data_->point_pairs_.isEmpty())

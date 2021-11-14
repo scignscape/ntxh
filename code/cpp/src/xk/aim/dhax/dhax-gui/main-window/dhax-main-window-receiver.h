@@ -14,6 +14,7 @@
 
 class DHAX_Main_Window;
 class DHAX_Main_Window_Controller;
+class DHAX_Annotation_Instance;
 
 class DHAX_Main_Window_Receiver : public QObject
 {
@@ -41,6 +42,7 @@ public Q_SLOTS:
  void handle_draw_cubic_path();
  void handle_draw_quad_path();
 
+ void handle_get_annotation_comments(DHAX_Annotation_Instance* dai);
 
 };
 

@@ -30,9 +30,25 @@ DHAX_Image_Scene_Item::DHAX_Image_Scene_Item(QWidget *parent) : QWidget(parent)
  setBackgroundRole(QPalette::Window);
  setAcceptDrops(true);
  setMouseTracking(true);
-
-
 }
+
+
+DHAX_Annotation_Instance* DHAX_Image_Scene_Item::get_annotation_comments()
+{
+ if(saved_dhax_annotations_.isEmpty())
+   return nullptr;//{};
+ for(QPair<DHAX_Annotation_Instance*, double> pr : saved_dhax_annotations_)
+ {
+  if(pr.first)
+  {
+   if(pr.first->comment().isEmpty())
+    continue;
+   return pr.first;
+  }
+ }
+ return nullptr;//{};
+}
+
 
 void DHAX_Image_Scene_Item::cancel_notation()
 {

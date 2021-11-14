@@ -529,7 +529,7 @@ void DHAX_Application_Controller::init_image_scene_item(DHAX_Image_Scene_Item* s
    application_receiver_, SLOT(handle_polygon_complete_and_save_notation()));
 
  si->self_connect(SIGNAL(polygon_complete_and_save_notation_with_comment_requested()),
-   application_receiver_, SLOT(handle_polygon_complete_and_save_notation()));
+   application_receiver_, SLOT(handle_polygon_complete_and_save_notation_with_comment()));
 
  si->self_connect(SIGNAL(meshlab_reset_requested()),
    application_receiver_,

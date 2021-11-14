@@ -20,6 +20,7 @@ class DHAX_Image_Viewer;
 class DHAX_Image_Scene_Item;
 class DHAX_Main_Window_Receiver;
 class DHAX_Application_Controller;
+class DHAX_Annotation_Instance;
 
 class DHAX_Main_Window_Controller //: public QObject
 {
@@ -51,6 +52,8 @@ public:
  void load_image();
  void load_image(QString file_path);
  void init_image_scene_item(DHAX_Image_Scene_Item* si);
+
+ void show_annotation_comments(DHAX_Annotation_Instance* dai);
 
  void complete_polygon();
  void init_polyline();

@@ -49,6 +49,14 @@ DHAX_Main_Window_Controller::DHAX_Main_Window_Controller()
 }
 
 
+void DHAX_Main_Window_Controller::show_annotation_comments(DHAX_Annotation_Instance* dai)
+{
+ QString text = dai->comment();
+ QMessageBox::information(application_main_window_, dai->scoped_identifiers_to_string(),
+   dai->comment());
+}
+
+
 void DHAX_Main_Window_Controller::init_image_scene_item(DHAX_Image_Scene_Item *si)
 {
  image_scene_item_ = si;
@@ -89,6 +97,10 @@ void DHAX_Main_Window_Controller::init_image_scene_item(DHAX_Image_Scene_Item *s
 
  image_scene_item_->self_connect(SIGNAL(complete_polygon_requested()),
    main_window_receiver_, SLOT(handle_complete_polygon()));
+
+ image_scene_item_->self_connect(SIGNAL(get_annotation_comments_requested(DHAX_Annotation_Instance*)),
+   main_window_receiver_, SLOT(handle_get_annotation_comments(DHAX_Annotation_Instance*)));
+
 
  image_scene_item_->self_connect(SIGNAL(meshlab_import_info_requested()),
    main_window_receiver_, SLOT(handle_meshlab_import_info()));

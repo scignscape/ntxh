@@ -130,6 +130,8 @@ public:
   saved_dhax_annotations_.push_back({dai, resize_factor});
  }
 
+ DHAX_Annotation_Instance* get_annotation_comments();
+
  ACCESSORS(MACRO_PASTE(QVector<QPair<DHAX_Annotation_Instance*, r8>>) ,saved_dhax_annotations)
 
 Q_SIGNALS:
@@ -143,7 +145,8 @@ Q_SIGNALS:
  void polygon_complete_and_save_notation_with_comment_requested();
 
  void polyline_save_notation_requested(bool);
-// void polyline_save_notation_with_comment_requested();
+
+ void get_annotation_comments_requested(DHAX_Annotation_Instance*);
 
  void complete_polygon_requested();
 
