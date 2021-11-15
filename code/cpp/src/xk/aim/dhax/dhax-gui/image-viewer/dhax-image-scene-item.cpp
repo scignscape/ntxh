@@ -49,6 +49,15 @@ DHAX_Annotation_Instance* DHAX_Image_Scene_Item::get_annotation_comments()
  return nullptr;//{};
 }
 
+void DHAX_Image_Scene_Item::uncancel_notation(DHAX_Drawn_Shape* dds)
+{
+ data_->set_current_drawn_shape(dds);
+ data_->last_canceled_drawn_shapes().takeLast();
+// data_->check_clear_last_canceled_drawn_shapes();
+// data_->cancel_current_drawn_shape();
+
+ update();
+}
 
 void DHAX_Image_Scene_Item::cancel_notation()
 {
@@ -66,36 +75,52 @@ void DHAX_Image_Scene_Item::paintEvent_draw_vertex_handles(
  QPoint pr(r, r);
  QPoint pr1(r - 1, r - 1);
 
+ u1 i = 0;
  for(const QPoint* const point : points)
  {
-  QRect rect(*point - pr, *point + pr1);
-  painter.fillRect(rect, QColor(data_->sqRed_, data_->sqGreen_, data_->sqBlue_));
+//  QRect rect(*point - pr, *point + pr1);
+//  painter.fillRect(rect, QColor(data_->sqRed_, data_->sqGreen_, data_->sqBlue_));
+
+  draw_control_square(*point, painter, ++i);
+
  }
 }
 
 void DHAX_Image_Scene_Item::paintEvent_draw_point_pairs(QVector<QPair<QPoint, QPoint>>& pairs, QPainter& painter,
-  QPen& pen, QPen& shape_pen)
+  QPen& pen, QPen& shape_pen, QPen& back_pen)
 {
  u1 count = 0;
  QPoint sec;
 
+ QPen local_pen;
+ QBrush local_brush;
+
  if(true) //  drawn shape is selected ...
  {
-  painter.setPen(shape_pen);
-  painter.setBrush(QBrush(QColor(data_->shapeRed_, data_->shapeGreen_, data_->shapeBlue_), Qt::Dense6Pattern));
+  local_pen = shape_pen;
+  local_brush = QBrush(QColor(data_->shapeRed_, data_->shapeGreen_, data_->shapeBlue_), Qt::Dense6Pattern);
  }
  else
  {
-  painter.setPen(pen);
-  painter.setBrush(QBrush(QColor(data_->myRed_, data_->myGreen_, data_->myBlue_), Qt::Dense6Pattern));
+  local_pen = pen;
+  local_brush = QBrush(QColor(data_->myRed_, data_->myGreen_, data_->myBlue_), Qt::Dense6Pattern);
  }
 
  for(QPair<QPoint, QPoint>& pr : pairs)
  {
-  painter.drawLine(pr.first, pr.second);
 
+  painter.setPen(back_pen);
+  painter.setBrush(QBrush());
+  painter.drawLine(pr.first, pr.second);
   if(count)
     painter.drawLine(sec, pr.first);
+
+  painter.setPen(local_pen);
+  painter.setBrush(local_brush);
+  painter.drawLine(pr.first, pr.second);
+  if(count)
+    painter.drawLine(sec, pr.first);
+
 
   ++count;
   sec = pr.second;
@@ -256,11 +281,81 @@ void DHAX_Image_Scene_Item::paintEvent_draw_drawn_shape(DHAX_Drawn_Shape* dds,
 }
 
 
+void DHAX_Image_Scene_Item::draw_control_square(const QPoint& center,
+  QPainter& painter, u1 wind)
+{
+ int r = data_->radius_;
+ QPoint pr(r, r);
+ QPoint pr1(r - 1, r - 1);
+
+ QRect rect(center - pr, center + pr1);
+ //painter.fillRect(rect, QColor(data_->sqRed_, data_->sqGreen_, data_->sqBlue_));
+
+ //QRect rect(center.x() - data_->radius_, center.y() - data_->radius_, data_->radius_*2, data_->radius_*2);
+
+ u1 sgradient_base = 0;
+ u1 sgradient_mid = 100;
+ u1 wind_multiple = 30;
+ QConicalGradient sgradient;
+ sgradient.setAngle(wind * wind_multiple);
+ sgradient.setCenter(center);//.x() - data_->radius_/2,
+                     //center.y() - data_->radius_/2);
+ sgradient.setColorAt(0.0, QColor(data_->sqRed_,data_->sqGreen_,data_->sqBlue_));
+ sgradient.setColorAt(0.15, QColor(data_->sqRed_,data_->sqGreen_,data_->sqBlue_));
+ sgradient.setColorAt(0.2, QColor(sgradient_mid,sgradient_mid,sgradient_base));
+ sgradient.setColorAt(0.25, QColor(data_->sqRed_,data_->sqGreen_,data_->sqBlue_));
+ sgradient.setColorAt(0.5, QColor(data_->sqRed_,data_->sqGreen_,data_->sqBlue_));
+ sgradient.setColorAt(0.55, QColor(sgradient_mid,sgradient_base,sgradient_mid));
+ sgradient.setColorAt(0.6, QColor(data_->sqRed_,data_->sqGreen_,data_->sqBlue_));
+ sgradient.setColorAt(0.8, QColor(data_->sqRed_,data_->sqGreen_,data_->sqBlue_));
+ sgradient.setColorAt(0.85, QColor(sgradient_base,sgradient_mid,sgradient_mid));
+ sgradient.setColorAt(0.9, QColor(data_->sqRed_,data_->sqGreen_,data_->sqBlue_));
+ sgradient.setColorAt(1, QColor(data_->sqRed_,data_->sqGreen_,data_->sqBlue_));
+ painter.fillRect(rect, sgradient);
+}
+
+
 void DHAX_Image_Scene_Item::paintEvent(QPaintEvent*)
 {
  QPainter painter(this);
  QPen myPen(QColor(data_->myRed_, data_->myGreen_,data_->myBlue_), data_->thickness_, Qt::SolidLine); //myPen per tutte le shape
- QPen shapePen(QColor(data_->shapeRed_, data_->shapeGreen_, data_->shapeBlue_), data_->thickness_, Qt::SolidLine); //shapePen e per la shape selezionata dall'utente
+
+ u1 gradient_base = 140;
+ QConicalGradient gradient;
+ gradient.setSpread(QGradient::ReflectSpread);
+ gradient.setCenter( ((rect().topLeft() + rect().center())/2) );
+ gradient.setAngle(-65);
+   gradient.setColorAt(0, QColor(data_->shapeRed_,gradient_base,gradient_base,data_->shapeAlpha_));
+   gradient.setColorAt(0.05, QColor(data_->shapeRed_,data_->shapeGreen_,gradient_base,data_->shapeAlpha_));
+   gradient.setColorAt(0.1, QColor(data_->shapeRed_,data_->shapeGreen_,data_->shapeBlue_,data_->shapeAlpha_));
+   gradient.setColorAt(0.15, QColor(gradient_base, data_->shapeGreen_, data_->shapeBlue_,data_->shapeAlpha_));
+   gradient.setColorAt(0.2, QColor(gradient_base, data_->shapeGreen_, gradient_base,data_->shapeAlpha_));
+   gradient.setColorAt(0.25, QColor(data_->shapeRed_, data_->shapeGreen_, gradient_base,data_->shapeAlpha_));
+   gradient.setColorAt(0.3, QColor(data_->shapeRed_, gradient_base, data_->shapeBlue_,data_->shapeAlpha_));
+   gradient.setColorAt(0.35, QColor(gradient_base, gradient_base, data_->shapeBlue_,data_->shapeAlpha_));
+   gradient.setColorAt(0.4, QColor(0,255,0,data_->shapeAlpha_));
+   gradient.setColorAt(0.45, QColor(255,255,0,data_->shapeAlpha_));
+   gradient.setColorAt(0.5, QColor(0,255,255,data_->shapeAlpha_));
+   gradient.setColorAt(0.55, QColor(255,255,0,data_->shapeAlpha_));
+   gradient.setColorAt(0.6, QColor(0,255,0,data_->shapeAlpha_));
+   gradient.setColorAt(0.65, QColor(gradient_base, gradient_base, data_->shapeBlue_,data_->shapeAlpha_));
+   gradient.setColorAt(0.7, QColor(data_->shapeRed_, gradient_base, data_->shapeBlue_,data_->shapeAlpha_));
+   gradient.setColorAt(0.75, QColor(data_->shapeRed_, data_->shapeGreen_, gradient_base,data_->shapeAlpha_));
+   gradient.setColorAt(0.8, QColor(gradient_base, data_->shapeGreen_, gradient_base,data_->shapeAlpha_));
+   gradient.setColorAt(0.85, QColor(gradient_base, data_->shapeGreen_, data_->shapeBlue_,data_->shapeAlpha_));
+   gradient.setColorAt(0.9, QColor(data_->shapeRed_,data_->shapeGreen_,data_->shapeBlue_,data_->shapeAlpha_));
+   gradient.setColorAt(0.95, QColor(data_->shapeRed_,data_->shapeGreen_,gradient_base,data_->shapeAlpha_));
+   gradient.setColorAt(1, QColor(data_->shapeRed_,gradient_base,gradient_base,data_->shapeAlpha_));
+
+
+//   auto p = QPen(gradient, 4.0);
+   QPen shapePen(gradient, data_->thickness_, Qt::DashDotDotLine); //shapePen
+
+//   QPen back_pen(QColor(25,255,225,data_->shapeBackAlpha_), data_->back_thickness_, Qt::SolidLine); //shapePen
+//   QPen back_pen(QColor(255,55,25,data_->shapeBackAlpha_), data_->back_thickness_, Qt::SolidLine); //shapePen
+   QPen back_pen(QColor(125,215,255,data_->shapeBackAlpha_), data_->back_thickness_, Qt::SolidLine); //shapePen
+
+// QPen shapePen(QColor(data_->shapeRed_, data_->shapeGreen_, data_->shapeBlue_), data_->thickness_, Qt::SolidLine);
  myPen.setCapStyle(Qt::RoundCap);
  shapePen.setCapStyle(Qt::RoundCap);
  painter.setPen(shapePen);
@@ -281,12 +376,29 @@ void DHAX_Image_Scene_Item::paintEvent(QPaintEvent*)
    QRect square(data_->mStartPoint_.rx(), data_->mStartPoint_.ry(),
      (data_->mEndPoint_.rx() - data_->mStartPoint_.rx()), (data_->mEndPoint_.ry()-data_->mStartPoint_.ry()));
 
+   painter.setPen(back_pen);
    painter.drawRect(square);
+
+   painter.setPen(shapePen);
+   painter.drawRect(square);
+
 
    for(int i=0; i < data_->points_.size(); ++i)
    {
-    QRect rect(data_->points_[i].rx() - data_->radius_, data_->points_[i].ry() - data_->radius_, data_->radius_*2, data_->radius_*2);
-    painter.fillRect(rect, QColor(data_->sqRed_, data_->sqGreen_, data_->sqBlue_));
+    draw_control_square(data_->points_[i], painter, i + 1);
+
+//    QRect rect(data_->points_[i].rx() - data_->radius_, data_->points_[i].ry() - data_->radius_, data_->radius_*2, data_->radius_*2);
+
+//    u1 sgradient_base = 0;
+//    QConicalGradient sgradient;
+//    sgradient.setCenter(data_->points_[i].rx() - data_->radius_/2,
+//                        data_->points_[i].ry() - data_->radius_/2);
+//    sgradient.setColorAt(0, QColor(sgradient_base,sgradient_base,sgradient_base));
+//    sgradient.setColorAt(1, QColor(data_->sqRed_,data_->sqGreen_,data_->sqBlue_));
+//    //sgradient.setColorAt(1, QColor(sgradient_base,sgradient_base,sgradient_base));
+//    painter.fillRect(rect, sgradient);
+
+    //painter.fillRect(rect, QColor(data_->sqRed_, data_->sqGreen_, data_->sqBlue_));
 
     //qDebug() << "fr: " << rect;
 
@@ -300,13 +412,23 @@ void DHAX_Image_Scene_Item::paintEvent(QPaintEvent*)
    data_->points_.clear();
    data_->points_ << data_->mStartPoint_ << QPoint(data_->mStartPoint_.rx(), data_->mEndPoint_.ry())
      << data_->mEndPoint_ << QPoint(data_->mEndPoint_.rx(), data_->mStartPoint_.ry());
+
    QRect ellipse(data_->mStartPoint_.rx(), data_->mStartPoint_.ry(),
      (data_->mEndPoint_.rx() - data_->mStartPoint_.rx()), (data_->mEndPoint_.ry() - data_->mStartPoint_.ry()));
+
+
+   painter.setPen(back_pen);
    painter.drawEllipse(ellipse);
+
+   painter.setPen(shapePen);
+   painter.drawEllipse(ellipse);
+
+
    for(int i=0; i<data_->points_.size(); ++i)
    {
-    QRect rect(data_->points_[i].rx() - data_->radius_, data_->points_[i].ry() - data_->radius_, data_->radius_*2, data_->radius_*2);
-    painter.fillRect(rect, QColor(data_->sqRed_, data_->sqGreen_, data_->sqBlue_));
+    draw_control_square(data_->points_[i], painter, i + 1);
+//    QRect rect(data_->points_[i].rx() - data_->radius_, data_->points_[i].ry() - data_->radius_, data_->radius_*2, data_->radius_*2);
+//    painter.fillRect(rect, QColor(data_->sqRed_, data_->sqGreen_, data_->sqBlue_));
    }
   }
 
@@ -377,7 +499,7 @@ void DHAX_Image_Scene_Item::paintEvent(QPaintEvent*)
  if(!data_->point_pairs_.isEmpty())
  {
   paintEvent_draw_point_pairs(data_->point_pairs_, painter,
-    myPen, shapePen);
+    myPen, shapePen, back_pen);
  }
 
  if(!data_->held_drawn_shapes_.isEmpty())

@@ -56,6 +56,7 @@ class DHAX_Display_Image_Data
   int shapePosition_;
   int radius_;
   int thickness_;
+  int back_thickness_;
   int myRed_;
   int myGreen_;
   int myBlue_;
@@ -65,6 +66,8 @@ class DHAX_Display_Image_Data
   int shapeRed_;
   int shapeGreen_;
   int shapeBlue_;
+  int shapeAlpha_;
+  int shapeBackAlpha_;
 
   QImage m_background_;
   QPoint mStartPoint_;
@@ -145,6 +148,10 @@ class DHAX_Display_Image_Data
 
   DHAX_Drawn_Shape* get_current_drawn_shape();
 
+  DHAX_Drawn_Shape* get_last_canceled_drawn_shape();
+
+
+
   void reset_drawn_shapes();
 
   void init_polygon_or_polyline(DHAX_Drawn_Shape* dds);
@@ -179,6 +186,7 @@ class DHAX_Display_Image_Data
    last_canceled_drawn_shapes_.push_back(current_drawn_shape_);
    current_drawn_shape_ = nullptr;
    points_.clear();
+   point_pairs_.clear();
   }
 
   void check_hold_drawn_shape()

@@ -83,7 +83,7 @@ private:
  void _handle_mouse_event(QMouseEvent* mev, Mouse_Event_Modes mem);
 
  void paintEvent_draw_point_pairs(QVector<QPair<QPoint, QPoint>>& pairs, QPainter& painter,
-   QPen& pen, QPen& shape_pen);
+   QPen& pen, QPen& shape_pen, QPen& back_pen);
 
  void paintEvent_draw_drawn_shape(DHAX_Drawn_Shape* dds, QString text,
    QPainter& painter, QPen& pen, QPen& shape_pen);
@@ -121,7 +121,7 @@ public:
  enum shapes{ square, ellipse, polygon };
 
  void cancel_notation();
-
+ void uncancel_notation(DHAX_Drawn_Shape* dds);
 
  void reset_background_to_original_position();
 
@@ -129,6 +129,8 @@ public:
  {
   saved_dhax_annotations_.push_back({dai, resize_factor});
  }
+
+ void draw_control_square(const QPoint& center, QPainter& painter, u1 wind);
 
  DHAX_Annotation_Instance* get_annotation_comments();
 
@@ -149,6 +151,8 @@ Q_SIGNALS:
  void get_annotation_comments_requested(DHAX_Annotation_Instance*);
 
  void complete_polygon_requested();
+
+//? void uncancel_requested(DHAX_Drawn_Shape*);
 
  void meshlab_import_info_requested();
  void meshlab_reset_requested();

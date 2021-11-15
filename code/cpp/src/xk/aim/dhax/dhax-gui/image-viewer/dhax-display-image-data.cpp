@@ -21,6 +21,12 @@ DHAX_Drawn_Shape* DHAX_Display_Image_Data::get_current_drawn_shape()
  return nullptr;
 }
 
+DHAX_Drawn_Shape* DHAX_Display_Image_Data::get_last_canceled_drawn_shape()
+{
+ if(last_canceled_drawn_shapes_.isEmpty())
+   return nullptr;
+ return last_canceled_drawn_shapes_.last();
+}
 
 void DHAX_Display_Image_Data::reset_drawn_shapes()
 {
@@ -68,16 +74,20 @@ DHAX_Display_Image_Data::DHAX_Display_Image_Data()
 void DHAX_Display_Image_Data::defaultColorsThickness()
 {
  radius_ = 6;
- thickness_ = 3;
+ thickness_ = 2;
+ back_thickness_ = 4;
  myRed_ = 255;
  myGreen_ = 0;
  myBlue_ = 0;
  sqRed_ = 255;
  sqGreen_ = 255;
  sqBlue_ = 255;
- shapeRed_ = 0;
+ shapeRed_ = 240;
  shapeGreen_ = 255;
- shapeBlue_ = 0;
+ shapeBlue_ = 160;
+ shapeAlpha_ = 255;
+ shapeBackAlpha_ = 125;
+
 }
 
 void DHAX_Display_Image_Data::setColorsThickness(int in_radius, int in_thickness, int in_myRed, int in_myGreen, int in_MyBlue,

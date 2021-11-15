@@ -200,6 +200,15 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
  QMenu* menu = new QMenu(nullptr);
  menu->setAttribute(Qt::WA_DeleteOnClose);
 
+ DHAX_Drawn_Shape* ldds = data_->get_last_canceled_drawn_shape();
+
+ if(ldds)
+ {
+  menu->addAction("Undo Cancel Notation", [this,ldds]
+  {
+   uncancel_notation(ldds);
+  });
+ }
 
  if(meshlab_import_count_ && *meshlab_import_count_)
  {
