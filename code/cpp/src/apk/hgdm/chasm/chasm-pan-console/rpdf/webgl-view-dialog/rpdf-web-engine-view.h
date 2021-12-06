@@ -34,6 +34,13 @@ class RPDF_Web_Engine_View : public QWebEngineView
 
  QDialog* parent_dialog_;
 
+ QMouseEvent* current_mouse_event_;
+ QContextMenuEvent* current_context_menu_event_;
+
+protected:
+
+ bool eventFilter(QObject *object, QEvent *event);
+
 public:
 
  RPDF_Web_Engine_View(QDialog* parent_dialog);
@@ -49,6 +56,7 @@ public:
 
  void check_url_patterns(QString url);
 
+ void run_shot_context_menu(const QPoint& pos);
 
 };
 
