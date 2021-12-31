@@ -33,6 +33,10 @@
 #include "TileCompositor.h"
 #include "PDFCore.h"
 
+// // dhax
+#include "dhax/dhax-annotation-editor.h"
+
+
 
 //------------------------------------------------------------------------
 // PDFCore
@@ -40,6 +44,10 @@
 
 PDFCore::PDFCore(SplashColorMode colorMode, int bitmapRowPad,
    GBool reverseVideo, SplashColorPtr paperColor) {
+
+ // //  dhax
+ dae_ = nullptr;
+
   GString *initialZoom;
   int z, i;
 
@@ -1381,7 +1389,14 @@ GBool PDFCore::findU(Unicode *u, int len, GBool caseSensitive,
   rect = NULL;
   xMin = yMin = xMax = yMax = 0;
   topPage = tileMap->getFirstPage();
-  pg = topPage;
+
+  if(dae_)
+  {
+   dae_->reset_search_minmax();
+   pg = dae_->target_search_page();
+  }
+  else
+    pg = topPage;
   if (next) {
     if (textPage >= 1 && textPage <= doc->getNumPages()) {
       startAtLast = gTrue;
@@ -1534,6 +1549,10 @@ GBool PDFCore::findU(Unicode *u, int len, GBool caseSensitive,
 
   // found: change the selection
  found:
+  if(dae_)
+  {
+   dae_->reset_search_minmax(xMin, yMin, xMax, yMax);
+  }
   setSelection(pg, (int)floor(xMin), (int)floor(yMin),
         (int)ceil(xMax), (int)ceil(yMax));
 

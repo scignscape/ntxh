@@ -1,0 +1,43 @@
+
+#ifndef PDF_DOCUMENT_STATE__H
+#define PDF_DOCUMENT_STATE__H
+
+#include <QLabel>
+#include <QRectF>
+
+
+#include <QMenu>
+#include <QAction>
+#include <QRubberBand>
+
+#include <QPixmap>
+
+#include <QGraphicsView>
+#include <QGraphicsRectItem>
+
+#include "accessors.h"
+
+#include "global-types.h"
+
+class PDF_Document_State
+{
+ u4 current_page_;
+ u4 current_print_page_;
+ QString current_print_page_string_;
+
+ r8 current_scale_factor_;
+
+
+public:
+
+ PDF_Document_State();
+
+ ACCESSORS(u4 ,current_page)
+ ACCESSORS(r8 ,current_scale_factor)
+
+ void reset_pages();
+
+
+};
+
+#endif

@@ -29,6 +29,7 @@ public:
  //void hold(QObject* obj);
  void emit_take_screenshot_requested();
  void emit_load_image_requested();
+ void emit_load_pdf_requested();
  void emit_load_notes_requested();
  void emit_received_datagram(QByteArray qba);
 
@@ -46,6 +47,7 @@ public:
 Q_SIGNALS:
 
  void take_screenshot_requested();
+ void load_pdf_requested();
  void load_image_requested();
  void load_notes_requested();
  void received_datagram(QByteArray qba);

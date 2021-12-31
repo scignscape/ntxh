@@ -266,6 +266,39 @@ inline QString soft_group_box_style_sheet_()
         )";
 }
 
+inline QString tight_soft_group_box_style_sheet_()
+{
+ return R"(
+        QGroupBox {
+            border: 1px solid silver;
+            border-radius: 3px;
+            margin-top: 13px; padding:-1px -1px -1px -1px;
+        }
+        QGroupBox::title {
+        subcontrol-origin:  margin;
+            subcontrol-position: top left;
+            padding: -1px 2px 0 %1px;        }
+
+        )";
+}
+
+inline QString tight_left_soft_group_box_style_sheet_()
+{
+ return R"(
+        QGroupBox {
+            border: 1px solid silver;
+            border-radius: 3px;
+            margin-bottom: 3px; padding:-1px -1px 7px -1px;
+        }
+        QGroupBox::title { font-size:9pt;
+        subcontrol-origin:  margin;
+            subcontrol-position: bottom left;
+            padding: 0px 2px -6px %1px;        }
+
+        )";
+}
+
+
 inline QString mini_tab_style_sheet_()
 {
  return "QTabBar::tab {"
@@ -457,6 +490,34 @@ inline QString colorful_toggle_button_mixed_style_sheet_()
  "stop:1 #A64166"
  ");"
  "}"
+
+   "QPushButton[temp-down=\"true\"] {"
+   " border:none; "
+      "background-color: qlineargradient("
+      "x1:0, y1:0, x2:0, y2:1,"
+      "stop:0 #A64166,"
+      "stop:0.03 #E95289,"
+      "stop:0.04 #E95289,"
+      "stop:1 #A64166"
+      ");"
+   " border-left: 4px groove #F6F1F6; "
+   " border-right: 4px ridge #F6F1F6; "
+   "}\n"
+
+
+
+
+//   " border:none;"
+//   " border-left: 4px groove #A64166; "
+//   " border-right: 4px ridge #A64166; "
+//   "background-color: qlineargradient("
+//   "x1:0, y1:0, x2:0, y2:1,"
+//   "stop:0 #C5D8FA,"
+//   "stop:0.03 #E95289,"
+//   "stop:0.04 #E95289,"
+//   "stop:1 #A64166"
+//   ");"
+//   "}"
 
  "QPushButton:checked:hover {"
  "border:1px solid #EFE7F7;"

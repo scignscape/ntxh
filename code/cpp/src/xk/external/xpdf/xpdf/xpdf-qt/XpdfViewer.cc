@@ -67,6 +67,9 @@
 
 #include "textio.h"
 
+#include "dhax/dhax-annotation-editor.h"
+
+
 USING_KANS(TextIO)
 
 void process_sdi_file(XpdfWidget* pdf, int idx, QString file_name)
@@ -950,6 +953,12 @@ GBool XpdfViewer::open(QString fileName, int page, QString destName,
   lastFileOpened = fileName;
 
   ngml_loader_->load_pages(currentTab->pdf, fileName);
+
+  if(DHAX_Annotation_Editor* dae = ngml_loader_->dhax_annotation_editor())
+  {
+   dae->set_file_name(fileName);
+   dae->check_file_specific_path();
+  }
 
   return gTrue;
 }
@@ -3166,6 +3175,7 @@ void XpdfViewer::addTab() {
    int pg;
    double x, y;
 
+
 //   int xx, yy;
 //   pdf->convertWindowToDevCoords(p.x(), p.y(),
 //          &pg, &xx, &yy);
@@ -3175,6 +3185,24 @@ void XpdfViewer::addTab() {
           &pg, &x, &y);
 //   qDebug() << "Coords: " << x << ", " << y
 //     << "(" << (x * 65536) << ", " << (y * 65536) << ")";
+
+
+   if(DHAX_Annotation_Editor* dae = ngml_loader_->dhax_annotation_editor())
+   {
+    if(!dae->search_cb())
+    {
+     currentTab->pdf->core->dae_ = dae;
+     dae->set_search_cb([this](QString text)
+     {
+      findEdit->setText(text);
+      currentTab->pdf->find(text);
+     });
+    }
+
+    dae->context_menu(qm, p, pg, {x, y});
+
+   }
+
 
    QPair<int, int> start_index = {0, 0};
    QPair<int, int> end_index = {0, 0};
@@ -3402,7 +3430,6 @@ void XpdfViewer::addTab() {
    QPoint g = pdf->mapToGlobal(p);
    qm->popup(g);
   });
-
 
 
   pdf->enableHyperlinks(false);

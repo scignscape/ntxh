@@ -164,6 +164,9 @@ void DHAX_GUI_Environment::init_main_window_signal_generator()
  main_window_->signal_generator()->self_connect(SIGNAL(load_image_requested()),
   main_window_receiver_, SLOT(handle_load_image()));
 
+ main_window_->signal_generator()->self_connect(SIGNAL(load_pdf_requested()),
+  main_window_receiver_, SLOT(handle_load_pdf()));
+
  main_window_->signal_generator()->self_connect(SIGNAL(load_notes_requested()),
   application_receiver_, SLOT(handle_load_notes()));
 

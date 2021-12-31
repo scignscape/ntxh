@@ -19,15 +19,29 @@ USING_KANS(TextIO)
 
 //NGML_SDI_Page::NGML_SDI_Page(u4 number)
 
+#include "dhax/dhax-annotation-editor.h"
 
-NGML_Loader::NGML_Loader()
+
+NGML_Loader::NGML_Loader() :
+   dhax_annotation_editor_(nullptr)
 {
+ init_dhax_annotation_editor();
 }
+
+
+void NGML_Loader::init_dhax_annotation_editor()
+{
+ dhax_annotation_editor_ = new DHAX_Annotation_Editor;
+}
+
 
 
 QPair<QString, QString> NGML_Loader::get_landmark_string(int page, int x, int y,
   QPair<int, int>& id, QPair<int, int>& start_index, QPair<int, int>& end_index, QString& file)
 {
+ if(elements_.size() <= page - 1)
+   return {};
+
  QMapIterator<QPair<int, int>, element> it(elements_[page - 1]);
 
  QString result1, result2;

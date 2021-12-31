@@ -30,6 +30,11 @@ void DHAX_Signal_Generator::emit_load_image_requested()
  Q_EMIT load_image_requested();
 }
 
+void DHAX_Signal_Generator::emit_load_pdf_requested()
+{
+ Q_EMIT load_pdf_requested();
+}
+
 void DHAX_Signal_Generator::emit_load_notes_requested()
 {
  Q_EMIT load_notes_requested();

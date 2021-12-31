@@ -37,6 +37,11 @@ public:
   return {this, label};
  }
 
+ DHAX_Menu* add_nested_menu(QString label)
+ {
+  return static_cast<DHAX_Menu*>(addMenu(label));
+ }
+
 };
 
 class DHAX_Main_Window_Menus

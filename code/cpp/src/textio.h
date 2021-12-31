@@ -155,6 +155,17 @@ inline void save_file(QString path, QString text)
  outfile.close();
 }
 
+inline void append_to_file(QString path, QString div, QString text)
+{
+ QFile outfile(path);
+ if (!outfile.open(QIODevice::Append | QIODevice::Text))
+   return;
+ QTextStream outstream(&outfile);
+ outstream << div;
+ outstream << text;
+ outfile.close();
+}
+
 inline void save_file(QString path, QStringList& texts)
 {
  QFile outfile(path);

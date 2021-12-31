@@ -41,6 +41,10 @@ class TileCache;
 class TileCompositor;
 class PDFCore;
 
+// //  dhax
+class DHAX_Annotation_Editor;
+
+
 //------------------------------------------------------------------------
 // PDFHistory
 //------------------------------------------------------------------------
@@ -74,6 +78,9 @@ enum SelectMode {
 
 class PDFCore {
 public:
+
+ // //
+  DHAX_Annotation_Editor* dae_;
 
   PDFCore(SplashColorMode colorMode, int bitmapRowPad,
    GBool reverseVideo, SplashColorPtr paperColor);

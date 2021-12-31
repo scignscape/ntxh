@@ -75,6 +75,9 @@ DEFINES += HAVE_STL_STRING
 
 LIBS += -L$$TARGETSDIR  -ldhax-gui -ldhax-data
 
+LIBS += -L$$POPPLER_LIB_DIR -lpoppler-qt5
+
+
 LIBS += -L$$TARGETSDIR  -laimlib -ldcmsr -lofstd -loflog -ldcmdata \
    -ldcmimage -ldcmimgle
 

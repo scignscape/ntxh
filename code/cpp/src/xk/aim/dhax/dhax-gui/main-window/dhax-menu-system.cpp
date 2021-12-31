@@ -46,6 +46,11 @@ void DHAX_Menu_System::init_menus()
  DHAX_Signal_Generator* sg = main_window_->signal_generator();
 
  DHAX_Menu& file_menu = *menus_->menu("File");
+ file_menu.add_action("Load PDF") << [sg]
+ {
+  sg->emit_load_pdf_requested();
+ };
+
  file_menu.add_action("Load Image") << [sg]
  {
   sg->emit_load_image_requested();
@@ -64,17 +69,23 @@ void DHAX_Menu_System::init_menus()
   sg->emit_view_contours_requested();
  };
 
- file_menu.add_action("View 3D (MeshLab)") << [sg]
+ DHAX_Menu* launch_3D_menu = file_menu.add_nested_menu("Launch 3D");
+
+// launch_3D_menu->addAction("View 3D (MeshLab)");
+// launch_3D_menu->addAction("View 360 (Matterport)");
+// launch_3D_menu->addAction("View CAD (FreeCAD)");
+
+ launch_3D_menu->add_action("View 3D (MeshLab)") << [sg]
  {
   sg->emit_view_3d_requested();
  };
 
- file_menu.add_action("View 360 (Matterport)") << [sg]
+ launch_3D_menu->add_action("View 360 (Matterport)") << [sg]
  {
   sg->emit_view_360_requested();
  };
 
- file_menu.add_action("View CAD/3D (FreeCAD)") << [sg]
+ launch_3D_menu->add_action("View CAD (FreeCAD)") << [sg]
  {
   sg->emit_view_cad_requested();
  };

@@ -1,7 +1,0 @@
-$$ document-title := Cognitive Transform Grammar
-$$ local-title := section3
-
-$& LakoffJohnson %% (1:main) 822 844
-$& OrlinVakarelov %% (1:main) 77512 77538
-$& VakarelovAgent %% (1:main) 77539 77540
-

@@ -6,6 +6,9 @@
 
 include(../build-group.pri)
 
+QT += widgets
+
+
 TEMPLATE = app
 
 
@@ -26,8 +29,11 @@ SOURCES += \
 
 
 
+
 LIBS += -L$$TARGETSDIR -lxpdf  -lquazip
 
+
+DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
 include($$ROOT_DIR/../preferred/xpdf.pri)
 # uncomment to use default versions of these libraries,

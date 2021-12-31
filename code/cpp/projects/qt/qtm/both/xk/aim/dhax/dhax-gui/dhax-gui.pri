@@ -36,6 +36,9 @@ DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
 include($$ROOT_DIR/../preferred/dhax.pri)
 
+include($$ROOT_DIR/../preferred/poppler.pri)
+
+
 DEFINES += DHAX_DATA_FOLDER=\\\"$$DHAX_DATA_DIR\\\"
 DEFINES += DHAX_IMAGE_FOLDER=\\\"$$DHAX_IMAGE_DIR\\\"
 
@@ -100,6 +103,9 @@ INCLUDEPATH += $$OPENCV_SRC_DIR/modules/imgcodecs/include
 INCLUDEPATH += $$OPENCV_BUILD_DIR
 
 
+INCLUDEPATH += $$POPPLER_INCLUDE_DIR
+
+
 HEADERS += \
   $$SRC_DIR/main-window/dhax-main-window.h \
   $$SRC_DIR/main-window/dhax-main-window-frame.h \
@@ -108,6 +114,9 @@ HEADERS += \
   $$SRC_DIR/main-window/dhax-menu-system.h \
   $$SRC_DIR/main-window/dhax-main-window-controller.h \
   $$SRC_DIR/main-window/dhax-main-window-receiver.h \
+  $$SRC_DIR/pdf-viewer/pdf-document-controller.h \
+  $$SRC_DIR/pdf-viewer/pdf-document-info.h \
+  $$SRC_DIR/pdf-viewer/pdf-document-state.h \
   $$SRC_DIR/application/dhax-application-controller.h \
   $$SRC_DIR/application/dhax-forge-controller.h \
   $$SRC_DIR/application/dhax-external-application-controller.h \
@@ -122,9 +131,9 @@ HEADERS += \
   $$SRC_DIR/image-viewer/dhax-display-image-data.h \
   $$SRC_DIR/image-viewer/dhax-drawn-shape.h \
   $$SRC_DIR/subwindows/range-slider.h \
-  $$SRC_DIR/subwindows/shape-select-frame.h \
-  $$SRC_DIR/subwindows/zoom-and-navigate-frame.h \
   $$SRC_DIR/subwindows/clickable-label.h \
+  $$SRC_DIR/pleneviews/shape-select-frame.h \
+  $$SRC_DIR/pleneviews/zoom-and-navigate-frame.h \
   $$SRC_DIR/integration/dhax-integration-controller.h \
   $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-data.h \
   $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-controller.h \
@@ -154,6 +163,9 @@ SOURCES += \
   $$SRC_DIR/main-window/dhax-main-window-controller.cpp \
   $$SRC_DIR/main-window/dhax-main-window-receiver.cpp \
   $$SRC_DIR/main-window/dhax-menu-system.cpp \
+  $$SRC_DIR/pdf-viewer/pdf-document-controller.cpp \
+  $$SRC_DIR/pdf-viewer/pdf-document-info.cpp \
+  $$SRC_DIR/pdf-viewer/pdf-document-state.cpp \
   $$SRC_DIR/application/dhax-application-controller.cpp \
   $$SRC_DIR/application/dhax-forge-controller.cpp \
   $$SRC_DIR/application/dhax-application-receiver.cpp \
@@ -169,9 +181,9 @@ SOURCES += \
   $$SRC_DIR/image-viewer/dhax-drawn-shape.cpp \
   $$SRC_DIR/image-viewer/dhax-image-scene-item.mouse-events.cpp \
   $$SRC_DIR/subwindows/range-slider.cpp \
-  $$SRC_DIR/subwindows/shape-select-frame.cpp \
-  $$SRC_DIR/subwindows/zoom-and-navigate-frame.cpp \
   $$SRC_DIR/subwindows/clickable-label.cpp \
+  $$SRC_DIR/pleneviews/shape-select-frame.cpp \
+  $$SRC_DIR/pleneviews/zoom-and-navigate-frame.cpp \
   $$SRC_DIR/integration/dhax-integration-controller.cpp \
   $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-data.cpp \
   $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-controller.cpp \
@@ -205,6 +217,8 @@ LIBS += -L$$TARGETSDIR  -laimlib -ldcmsr -lofstd -loflog -ldcmdata \
    -ldcmimage -ldcmimgle
 
 LIBS += -L$$TARGETSDIR  -laxfi
+
+LIBS += -L$$POPPLER_LIB_DIR -lpoppler-qt5
 
 #LIBS += -L$$TARGETSDIR  -laimlib
 

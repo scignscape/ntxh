@@ -87,6 +87,11 @@ public:
 
 
  void load_image(QString file_path);
+
+ void load_image(QPixmap pixmap);
+
+ void complete_load_image();
+
  void reset_scale(r8 factor);
 
  void cancel_notation();
@@ -94,6 +99,7 @@ public:
  void draw_circle(const QPointF& center, r8 radius, QColor brush_color,
    QColor pen_color, u1 index);
 
+ void mouseMoveEvent(QMouseEvent *mouseEvent);
 
 };
 

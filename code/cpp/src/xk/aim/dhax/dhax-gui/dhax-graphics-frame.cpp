@@ -6,8 +6,8 @@
 
 #include "dhax-graphics-frame.h"
 
-#include "subwindows/shape-select-frame.h"
-#include "subwindows/zoom-and-navigate-frame.h"
+#include "pleneviews/shape-select-frame.h"
+#include "pleneviews/zoom-and-navigate-frame.h"
 
 #include "dhax-graphics-view.h"
 
@@ -16,6 +16,8 @@
 
 #include "global-types.h"
 
+#include <QDebug>
+#include <QMetaObject>
 
 DHAX_Graphics_Frame::DHAX_Graphics_Frame(QWidget* parent)
   :  QFrame(parent), main_layout_(nullptr),
@@ -46,7 +48,16 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
  secondary_layout_->addItem(sp);
  secondary_layout_->setStretch(1, 1);
  //secondary_layout_->addStretch(1);
- secondary_layout_->addWidget(shape_select_frame_);
+ //secondary_layout_->addWidget(shape_select_frame_, Qt::AlignTop);
+
+// //top_layout_->addWidget(shape_select_frame_, Qt::AlignTop);
+ QVBoxLayout* shape_select_frame_position_layout = new QVBoxLayout;
+ shape_select_frame_position_layout->addWidget(shape_select_frame_);
+ shape_select_frame_position_layout->addStretch();
+ //shape_select_frame_position_layout->addSpacing(400);
+ secondary_layout_->addLayout(shape_select_frame_position_layout);
+// // top_layout_->addStretch(1);
+
 
  setFrameShape(QFrame::NoFrame);
  setLineWidth(0);
@@ -59,7 +70,34 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
  main_layout_->addLayout(secondary_layout_);
 
  if(graphics_view_)
-   main_layout_->addWidget(graphics_view_, 1);
+ {
+  main_layout_->addWidget(graphics_view_, 1);
+
+  graphics_view_->set_mouse_keyboard_modifiers_callback([this]
+    (DHAX_Mouse_Keyboard_Data mkd)
+  {
+   if(mkd.Shift_left())
+     zoom_frame_->indicate_temporary_pan_mode();
+
+   else if(mkd.Unshift_left() || mkd.Unleft())
+     zoom_frame_->unindicate_temporary_pan_mode();
+
+
+//   qDebug() << "ks = " << ks;
+
+//   if(qmo == &DHAX_Graphics_View::staticMetaObject)
+//   {
+//    qDebug() << qmo->className();
+//    static const QMetaObject* s = &DHAX_Mouse_Keyboard_Protocol::staticMetaObject;
+//    qDebug() << s->className();
+//    if(qmo->inherits(s))
+//    {
+//     qDebug() << "qmo->className();";
+//    }
+//   }
+
+  });
+ }
 
  main_layout_->setContentsMargins(0,0,0,0);
  main_layout_->setMargin(0);

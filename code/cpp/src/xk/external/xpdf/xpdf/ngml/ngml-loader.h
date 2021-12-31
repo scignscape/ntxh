@@ -21,6 +21,8 @@
 
 class XpdfWidget;
 
+class DHAX_Annotation_Editor;
+
 class NGML_Loader
 {
  struct element
@@ -82,6 +84,7 @@ class NGML_Loader
  QString unzip_folder_;
 
 
+ DHAX_Annotation_Editor* dhax_annotation_editor_;
 
 
  // QMap<QPair<int, int>, QString> welements_;
@@ -89,6 +92,8 @@ class NGML_Loader
 public:
  
  NGML_Loader();
+
+ ACCESSORS(DHAX_Annotation_Editor* ,dhax_annotation_editor)
 
  void load_pages(XpdfWidget* pdf, QString file_name);
 
@@ -103,6 +108,8 @@ public:
  void check_unzip_folder(QString zip_file_path);
 
  void load_marks(QString landmark_file, QString path);
+
+ void init_dhax_annotation_editor();
 
  void check_subdocument(QString landmark_file);
 

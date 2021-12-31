@@ -9,7 +9,7 @@
 #include "dhax-main-window.h"
 
 #include "image-viewer/dhax-display-image-data.h"
-#include "subwindows/zoom-and-navigate-frame.h"
+#include "pleneviews/zoom-and-navigate-frame.h"
 
 #include "image-viewer/dhax-image-viewer.h"
 
@@ -24,6 +24,8 @@
 #include "application/dhax-application-controller.h"
 
 #include "dhax-graphics-scene.h"
+
+#include "pdf-viewer/pdf-document-controller.h"
 
 #include <QMenuBar>
 
@@ -43,7 +45,8 @@ DHAX_Main_Window_Controller::DHAX_Main_Window_Controller()
      zoom_frame_(nullptr),
      image_scene_item_(nullptr),
      main_window_receiver_(nullptr),
-     application_controller_(nullptr)
+     application_controller_(nullptr),
+     document_controller_(nullptr)
 {
 
 }
@@ -353,10 +356,36 @@ void DHAX_Main_Window_Controller::draw_demo_quad()
 
 }
 
+void DHAX_Main_Window_Controller::check_init_document_controller()
+{
+ if(!document_controller_)
+   document_controller_ = new PDF_Document_Controller;
+}
+
+void DHAX_Main_Window_Controller::load_pdf()
+{
+ QString ws =  ROOT_FOLDER "/../pdf";
+
+ QString filters = "PDF Files (*.pdf)";
+
+ QString file_path = QFileDialog::getOpenFileName(application_main_window_, "Open Image", ws, filters);
+
+ if(file_path.isEmpty())
+   return;
+
+ check_init_document_controller();
+
+ document_controller_->load_document(file_path);
+
+ QPair dpis {image_viewer_->physicalDpiX(), image_viewer_->physicalDpiY()};
+ document_controller_->load_page(dpis);
+
+ image_viewer_->load_image(document_controller_->pixmap());
+
+}
 
 void DHAX_Main_Window_Controller::load_image()
 {
- // // set it temporarily
  QString ws =  ROOT_FOLDER "/../pics";
 
  QString filters = "Images (*.jpg *.png *.bmp)";

@@ -323,6 +323,9 @@ void Page::display(OutputDev *out, double hDPI, double vDPI,
 	       abortCheckCbk, abortCheckCbkData);
 }
 
+
+#include <QDebug>
+
 void Page::displaySlice(OutputDev *out, double hDPI, double vDPI,
 			int rotate, GBool useMediaBox, GBool crop,
 			int sliceX, int sliceY, int sliceW, int sliceH,
@@ -378,6 +381,9 @@ void Page::displaySlice(OutputDev *out, double hDPI, double vDPI,
   // draw (non-form) annotations
   if (globalParams->getDrawAnnotations()) {
     annotList = new Annots(doc, getAnnots(&obj));
+
+    //qDebug() << "annotList size = " << annotList;
+
     obj.free();
     annotList->generateAnnotAppearances();
     if (annotList->getNumAnnots() > 0) {

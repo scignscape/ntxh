@@ -17,6 +17,7 @@ include($$ROOT_DIR/../preferred/gui.pri)
 include($$ROOT_DIR/../preferred/xpdf.pri)
 
 
+
 RESOURCES += \
     $$SRC_DIR/xpdf-qt/icons.qrc
 
@@ -223,6 +224,37 @@ HEADERS += \
 
 SOURCES += \
   $$SRC_DIR/ngml/ngml-loader.cpp \
+
+
+## This is needed for adding to the QInputDialog layout in Special_Dialog ...
+QT_HEADER_LOCATION = $$[QT_INSTALL_HEADERS]
+
+INCLUDEPATH += $${QT_HEADER_LOCATION}/QtCore/$$[QT_VERSION]
+INCLUDEPATH += $${QT_HEADER_LOCATION}/QtGui/$$[QT_VERSION]
+INCLUDEPATH += $${QT_HEADER_LOCATION}/QtWidgets/$$[QT_VERSION]
+
+INCLUDEPATH += $${QT_HEADER_LOCATION}/QtGui/$$[QT_VERSION]/QtGui
+INCLUDEPATH += $${QT_HEADER_LOCATION}/QtCore/$$[QT_VERSION]/QtCore
+INCLUDEPATH += $${QT_HEADER_LOCATION}/QtWidgets/$$[QT_VERSION]/QtWidgets
+
+
+
+
+HEADERS += \
+  $$SRC_DIR/dhax/dhax-annotation-editor.h \
+
+
+SOURCES += \
+  $$SRC_DIR/dhax/dhax-annotation-editor.cpp \
+
+
+
+SOURCES += \
+  $$SRC_DIR/dhax/pdf-comment-dialog.cpp
+
+
+HEADERS += \
+  $$SRC_DIR/dhax/pdf-comment-dialog.h
 
 
 SOURCES += \

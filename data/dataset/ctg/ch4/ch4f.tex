@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage{pdfpages}
+
+\usepackage[top=0in, bottom=0in, left=0in, right=0in]{geometry}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{xparse}
+\usepackage{ifthen}
+
+
+
+\colorlet{lineclr}{red!60!green}
+\colorlet{lineclrr}{lineclr!80!orange}
+
+\newcommand{\toptext}{{\color{lineclr!60!purple}(top page %
+{\the\numexpr\value{page}-2})}}
+
+\newcommand{\linetext}[1]{{\color{lineclrr!60!black}%
+\fontsize{8}{9}\selectfont\textbf{#1}%
+}}
+
+\newcommand{\lnnodes}[3]{%
+\node at (3, -#1 * 1.01 + 0.5){#2};
+\node at (25.2, -#1 * 1.01 + 0.5){#3};
+%\node at (15.1, -#1 * 0.58 - 0.05){#2};
+%\node at (27.32, -#1 * 0.58 - 0.05){#3};
+}
+
+\begin{document}
+\includepdf[fitpaper,pages=1-,pagecommand={
+\begin{tikzpicture}
+%\node [anchor=west] (top) at (0,2){\toptext};
+\node (topm) at (12,2){\toptext};
+%\node (topr) at (27,2){\toptext};
+\lnnodes{-1}{\linetext{LH}}{\linetext{RH}}
+%\lnnodes{30}{\linetext{LX}}{\linetext{RX}}
+\foreach \i in {0,...,29}
+{
+\pgfmathtruncatemacro{\label}{\i + 1}
+\pgfmathtruncatemacro{\rlabel}{\i + 31}
+\lnnodes{\i}{\linetext{\label}}{\linetext{\rlabel}}
+}
+\end{tikzpicture}
+}]{Chapter4.pdf}
+
+\end{document}

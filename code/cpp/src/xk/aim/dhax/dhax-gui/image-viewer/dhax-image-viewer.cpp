@@ -15,6 +15,7 @@
 
 
 #include <QGraphicsProxyWidget>
+#include <QDebug>
 
 
 DHAX_Image_Viewer::DHAX_Image_Viewer(QWidget* parent)
@@ -36,6 +37,12 @@ void DHAX_Image_Viewer::reset_scale(r8 factor)
 {
  scrolled_image_pixmap_item_->setScale(factor);
  recenter_image();
+}
+
+
+void DHAX_Image_Viewer::mouseMoveEvent(QMouseEvent *mouseEvent)
+{
+ qDebug() << " ... ";
 }
 
 
@@ -101,21 +108,14 @@ void DHAX_Image_Viewer::draw_circle(const QPointF& center,
    controls_[index] = {el, radius};
 }
 
-void DHAX_Image_Viewer::load_image(QString file_path)
+void DHAX_Image_Viewer::load_image(QPixmap pixmap)
 {
-// main_layout_->removeWidget(scrolled_image_view_);
-// scrolled_image_view_ = new QGraphicsView(this);
+ scrolled_image_pixmap_ = new QPixmap(pixmap);
+ complete_load_image();
+}
 
-
-// main_layout_->addWidget(scrolled_image_view_);
-
-// scrolled_image_view_->setScene(scrolled_image_scene_);
-
-//// main_layout_->update();
-
-
- scrolled_image_pixmap_ = new QPixmap(file_path);
-
+void DHAX_Image_Viewer::complete_load_image()
+{
  int sipw = scrolled_image_pixmap_->width();
  int siph = scrolled_image_pixmap_->height();
 
@@ -175,5 +175,24 @@ void DHAX_Image_Viewer::load_image(QString file_path)
 
  //?
  recenter_scroll_center();
+}
+
+
+void DHAX_Image_Viewer::load_image(QString file_path)
+{
+// main_layout_->removeWidget(scrolled_image_view_);
+// scrolled_image_view_ = new QGraphicsView(this);
+
+
+// main_layout_->addWidget(scrolled_image_view_);
+
+// scrolled_image_view_->setScene(scrolled_image_scene_);
+
+//// main_layout_->update();
+
+
+ scrolled_image_pixmap_ = new QPixmap(file_path);
+
+ complete_load_image();
 
 }

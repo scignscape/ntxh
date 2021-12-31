@@ -167,11 +167,11 @@ Q_SIGNALS:
 
 
 protected:
- void paintEvent(QPaintEvent *); //metodo per la stampa su schermo di tutte le annotazioni e le varie operazioni effettuate dall'utente
- void mousePressEvent(QMouseEvent *mouseEvent); //metodo per la gestione del click da parte dell'utente
- void mouseReleaseEvent(QMouseEvent *mouseEvent); //metodo per la gestione del rilascio del tasto premuto dall'utente
- void mouseMoveEvent(QMouseEvent *mouseEvent); //metodo per gestione del movimento del mouse e la posizione del puntatore sull'immagine
- void mouseDoubleClickEvent(QMouseEvent *mouseEvent); //metodo per la gestione del doppio click dell'utente
+ void paintEvent(QPaintEvent *);
+ void mousePressEvent(QMouseEvent *mouseEvent);
+ void mouseReleaseEvent(QMouseEvent *mouseEvent);
+ void mouseMoveEvent(QMouseEvent *mouseEvent);
+ void mouseDoubleClickEvent(QMouseEvent *mouseEvent);
 
 
 };

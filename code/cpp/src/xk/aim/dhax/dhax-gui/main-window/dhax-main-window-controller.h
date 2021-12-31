@@ -22,6 +22,8 @@ class DHAX_Main_Window_Receiver;
 class DHAX_Application_Controller;
 class DHAX_Annotation_Instance;
 
+class PDF_Document_Controller;
+
 class DHAX_Main_Window_Controller //: public QObject
 {
  //Q_OBJECT
@@ -34,6 +36,8 @@ class DHAX_Main_Window_Controller //: public QObject
  DHAX_Image_Scene_Item* image_scene_item_;
  DHAX_Main_Window_Receiver* main_window_receiver_;
  DHAX_Application_Controller* application_controller_;
+
+ PDF_Document_Controller* document_controller_;
 
 public:
 
@@ -48,8 +52,11 @@ public:
  ACCESSORS(QString ,current_image_file_path)
  ACCESSORS(DHAX_Image_Scene_Item* ,image_scene_item)
 
+ void check_init_document_controller();
+
  void take_screenshot();
  void load_image();
+ void load_pdf();
  void load_image(QString file_path);
  void init_image_scene_item(DHAX_Image_Scene_Item* si);
 
