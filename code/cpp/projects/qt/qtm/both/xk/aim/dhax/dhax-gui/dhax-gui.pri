@@ -134,6 +134,7 @@ HEADERS += \
   $$SRC_DIR/subwindows/clickable-label.h \
   $$SRC_DIR/pleneviews/shape-select-frame.h \
   $$SRC_DIR/pleneviews/zoom-and-navigate-frame.h \
+  $$SRC_DIR/pleneviews/page-and-search-frame.h \
   $$SRC_DIR/integration/dhax-integration-controller.h \
   $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-data.h \
   $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-controller.h \
@@ -184,6 +185,7 @@ SOURCES += \
   $$SRC_DIR/subwindows/clickable-label.cpp \
   $$SRC_DIR/pleneviews/shape-select-frame.cpp \
   $$SRC_DIR/pleneviews/zoom-and-navigate-frame.cpp \
+  $$SRC_DIR/pleneviews/page-and-search-frame.cpp \
   $$SRC_DIR/integration/dhax-integration-controller.cpp \
   $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-data.cpp \
   $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-controller.cpp \

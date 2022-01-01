@@ -22,23 +22,28 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  last_zoom_position_ = -1;
  last_annotation_zoom_position_ = -1;
 
- QString s1 = QString("%1").arg(QChar(5184));
- zoom_in_button_ = new QPushButton(s1, this);
- zoom_in_button_->setStyleSheet("QPushButton{font-size: 12pt;"
-                                "font-weight: bold;"
-                                "color: brown;}");
-// zoom_in_button_->setFont(zif);
- zoom_in_button_->setMaximumWidth(25);
- zoom_in_button_->setMaximumHeight(15);
+ zoom_in_button_ = new QPushButton(this);
+ zoom_out_button_ = new QPushButton(this);
+ make_back_button(zoom_out_button_);
+ make_forward_button(zoom_in_button_);
+
+// QString s1 = QString("%1").arg(QChar(5184));
+// zoom_in_button_ = new QPushButton(s1, this);
+// zoom_in_button_->setStyleSheet("QPushButton{font-size: 12pt;"
+//                                "font-weight: bold;"
+//                                "color: brown;}");
+//// zoom_in_button_->setFont(zif);
+// zoom_in_button_->setMaximumWidth(25);
+// zoom_in_button_->setMaximumHeight(15);
 
 
- QString s2 = QString("%1").arg(QChar(5189));
- zoom_out_button_ = new QPushButton(s2, this);
- zoom_out_button_->setStyleSheet("QPushButton{font-size: 12pt;"
-                                "font-weight: bold; padding:0px; "
-                                "color: brown;}");
- zoom_out_button_->setMaximumWidth(25);
- zoom_out_button_->setMaximumHeight(15);
+// QString s2 = QString("%1").arg(QChar(5189));
+// zoom_out_button_ = new QPushButton(s2, this);
+// zoom_out_button_->setStyleSheet("QPushButton{font-size: 12pt;"
+//                                "font-weight: bold; padding:0px; "
+//                                "color: brown;}");
+// zoom_out_button_->setMaximumWidth(25);
+// zoom_out_button_->setMaximumHeight(15);
 
  zoom_buttons_layout_ = new QHBoxLayout;
 

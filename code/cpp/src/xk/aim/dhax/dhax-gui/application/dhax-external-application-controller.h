@@ -23,6 +23,7 @@ class DHAX_Image_Viewer;
 class DHAX_Image_Scene_Item;
 class DHAX_Main_Window_Receiver;
 class DHAX_UDP_Controller;
+class Page_and_Search_Frame;
 
 class DHAX_Integration_Controller;
 class DHAX_Main_Window_Controller;

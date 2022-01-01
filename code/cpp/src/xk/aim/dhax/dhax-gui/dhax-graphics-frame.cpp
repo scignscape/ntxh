@@ -8,6 +8,7 @@
 
 #include "pleneviews/shape-select-frame.h"
 #include "pleneviews/zoom-and-navigate-frame.h"
+#include "pleneviews/page-and-search-frame.h"
 
 #include "dhax-graphics-view.h"
 
@@ -34,6 +35,12 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
  main_layout_ = new QBoxLayout(qbd);
  secondary_layout_ = new QBoxLayout(secqbd);
 
+ page_and_search_frame_ = new Page_and_Search_Frame(this);
+ page_and_search_frame_->setFrameShape(QFrame::Box);
+ page_and_search_frame_->setLineWidth(1);
+ secondary_layout_->addWidget(page_and_search_frame_);
+
+
  shape_select_frame_ = new Shape_Select_Frame(this);
  zoom_frame_ = new Zoom_and_Navigate_Frame(this);
 
@@ -41,7 +48,7 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
  zoom_frame_->setLineWidth(0);
 
  secondary_layout_->addWidget(zoom_frame_);
- secondary_layout_->setStretch(0,40);
+ secondary_layout_->setStretch(1,40);
  zoom_frame_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
  //QSpacerItem* sp = new QSpacerItem(0, 0, QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
  QSpacerItem* sp = new QSpacerItem(0, 0, QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);

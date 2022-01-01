@@ -21,6 +21,7 @@ class Zoom_and_Navigate_Frame;
 class DHAX_Graphics_View;
 class DHAX_Display_Image_Data;
 class DHAX_Image_Viewer;
+class Page_and_Search_Frame;
 
 
 class DHAX_Graphics_Frame : public QFrame
@@ -29,8 +30,9 @@ class DHAX_Graphics_Frame : public QFrame
 
  QBoxLayout* main_layout_;
  QBoxLayout* secondary_layout_;
- Shape_Select_Frame* shape_select_frame_;
+ Page_and_Search_Frame* page_and_search_frame_;
  Zoom_and_Navigate_Frame* zoom_frame_;
+ Shape_Select_Frame* shape_select_frame_;
  DHAX_Graphics_View* graphics_view_;
  DHAX_Image_Viewer* image_viewer_;
  DHAX_Display_Image_Data* display_image_data_;
@@ -46,6 +48,7 @@ public:
  ACCESSORS(DHAX_Image_Viewer* ,image_viewer)
 
  ACCESSORS(Zoom_and_Navigate_Frame* ,zoom_frame)
+ ACCESSORS(Page_and_Search_Frame* ,page_and_search_frame)
 
  USE_SELF_CONNECT(normal)
  USE_SELF_CONNECT(lambda)
