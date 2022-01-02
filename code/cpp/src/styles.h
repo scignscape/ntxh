@@ -20,13 +20,72 @@ inline QString back_forward_button_style_sheet_()
    color: brown;})";
 }
 
+inline QString light_checkable_button_style_sheet_()
+{
+ return R"(
+   QPushButton{font-size: %1pt;
+   font-weight: %2;
+   color: %3;})";
+}
+
+inline QString light_checkable_button_style_sheet_orange_()
+{
+ return light_checkable_button_style_sheet_().arg(9).arg("bold").arg("#E55B2C");
+}
+
 inline QString light_back_forward_button_style_sheet_()
 {
  return R"(
-   QPushButton{font-size: 13pt;
-   font-weight: bold;
-   color: #3366cf;})";
+   QPushButton{font-size: %1pt;
+   font-weight: %2;
+   color: %3;})";
 }
+
+inline QString light_back_forward_button_style_sheet_blue_()
+{
+ return light_back_forward_button_style_sheet_().arg(13).arg("bold").arg("#3366cf");
+}
+
+inline QString light_back_forward_button_style_sheet_red_()
+{
+ return light_back_forward_button_style_sheet_().arg(9).arg("bold").arg("#af3f73");
+}
+
+inline QString light_back_forward_button_style_sheet_green_()
+{
+ return light_back_forward_button_style_sheet_().arg(13).arg("normal").arg("#116f63");
+}
+
+template<typename WIDGET_Type>
+inline void make_up_button(WIDGET_Type* w)
+{
+ QString unicode = QString(QChar(0x219F));
+ w->setText(unicode);
+ w->setStyleSheet(light_back_forward_button_style_sheet_red_());
+ w->setMaximumWidth(20);
+ w->setMaximumHeight(15);
+}
+
+template<typename WIDGET_Type>
+inline void make_down_button(WIDGET_Type* w)
+{
+ QString unicode = QString(QChar(0x21A1));
+ w->setText(unicode);
+ w->setStyleSheet(light_back_forward_button_style_sheet_red_());
+ w->setMaximumWidth(20);
+ w->setMaximumHeight(15);
+}
+
+template<typename WIDGET_Type>
+inline void make_top_down_button(WIDGET_Type* w)
+{
+ QString unicode = QString(QChar(0x21A7));
+ w->setText(unicode);
+ w->setStyleSheet(light_back_forward_button_style_sheet_red_());
+ w->setMaximumWidth(20);
+ w->setMaximumHeight(15);
+}
+
 
 template<typename WIDGET_Type>
 inline void make_back_button(WIDGET_Type* w)
@@ -42,50 +101,29 @@ inline void make_back_button(WIDGET_Type* w)
 template<typename WIDGET_Type>
 inline void make_light_back_button(WIDGET_Type* w)
 {
+ QString unicode = QString::fromUtf8(QByteArray::fromHex("F09FA0B8"));
+ w->setText(unicode);
+ w->setStyleSheet(light_back_forward_button_style_sheet_blue_());
+ w->setMaximumWidth(20);
+ w->setMaximumHeight(15);
+}
+
+template<typename WIDGET_Type>
+inline void make_light_special_back_button(WIDGET_Type* w)
+{
  QString unicode = QString(QChar(0x21E0));
  w->setText(unicode);
- w->setStyleSheet(light_back_forward_button_style_sheet_());
- w->setMaximumWidth(20);
+ w->setStyleSheet(light_back_forward_button_style_sheet_green_());
+ w->setMaximumWidth(19);
  w->setMaximumHeight(15);
 }
-
-template<typename WIDGET_Type>
-inline void make_up_button(WIDGET_Type* w)
-{
- QString unicode = QString(QChar(0x27F0));
- w->setText(unicode);
- w->setStyleSheet(light_back_forward_button_style_sheet_());
- w->setMaximumWidth(20);
- w->setMaximumHeight(15);
-}
-
-template<typename WIDGET_Type>
-inline void make_down_button(WIDGET_Type* w)
-{
- QString unicode = QString(QChar(0x27F1));
- w->setText(unicode);
- w->setStyleSheet(light_back_forward_button_style_sheet_());
- w->setMaximumWidth(20);
- w->setMaximumHeight(15);
-}
-
-template<typename WIDGET_Type>
-inline void make_top_down_button(WIDGET_Type* w)
-{
- QString unicode = QString(QChar(0x21A7));
- w->setText(unicode);
- w->setStyleSheet(light_back_forward_button_style_sheet_());
- w->setMaximumWidth(20);
- w->setMaximumHeight(15);
-}
-
 
 template<typename WIDGET_Type>
 inline void make_light_double_back_button(WIDGET_Type* w)
 {
  QString unicode = QString(QChar(0x219E));
  w->setText(unicode);
- w->setStyleSheet(light_back_forward_button_style_sheet_());
+ w->setStyleSheet(light_back_forward_button_style_sheet_blue_());
  w->setMaximumWidth(20);
  w->setMaximumHeight(15);
 }
@@ -104,10 +142,20 @@ inline void make_forward_button(WIDGET_Type* w)
 template<typename WIDGET_Type>
 inline void make_light_forward_button(WIDGET_Type* w)
 {
- QString unicode = QString(QChar(0x279C));
+ QString unicode = QString::fromUtf8(QByteArray::fromHex("F09FA0BA"));
  w->setText(unicode);
- w->setStyleSheet(light_back_forward_button_style_sheet_());
+ w->setStyleSheet(light_back_forward_button_style_sheet_blue_());
  w->setMaximumWidth(20);
+ w->setMaximumHeight(15);
+}
+
+template<typename WIDGET_Type>
+inline void make_light_special_forward_button(WIDGET_Type* w)
+{
+ QString unicode = QString(QChar(0x21E2));
+ w->setText(unicode);
+ w->setStyleSheet(light_back_forward_button_style_sheet_green_());
+ w->setMaximumWidth(19);
  w->setMaximumHeight(15);
 }
 
@@ -116,7 +164,7 @@ inline void make_light_double_forward_button(WIDGET_Type* w)
 {
  QString unicode = QString(QChar(0x21A0));
  w->setText(unicode);
- w->setStyleSheet(light_back_forward_button_style_sheet_());
+ w->setStyleSheet(light_back_forward_button_style_sheet_blue_());
  w->setMaximumWidth(20);
  w->setMaximumHeight(15);
 }
