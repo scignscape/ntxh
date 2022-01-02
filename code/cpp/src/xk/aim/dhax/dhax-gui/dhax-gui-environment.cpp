@@ -132,6 +132,7 @@ void DHAX_GUI_Environment::init_main_window_controller()
  main_window_controller_ = new DHAX_Main_Window_Controller;
  main_window_controller_->set_application_main_window(main_window_);
  main_window_controller_->set_zoom_frame(graphics_frame_->zoom_frame());
+ main_window_controller_->set_page_and_search_frame(graphics_frame_->page_and_search_frame());
  main_window_controller_->set_display_image_data(graphics_frame_->display_image_data());
  main_window_controller_->set_image_viewer(image_viewer_);
  main_window_controller_->set_main_window_receiver(main_window_receiver_);

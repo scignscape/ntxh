@@ -17,9 +17,30 @@ Page_and_Search_Frame::Page_and_Search_Frame(QWidget* parent)
 
  page_select_ = new QComboBox(this);
  page_select_->setMinimumWidth(50);
+ //page_select_->setMaximumWidth(80);
+ page_select_->setMaxVisibleItems(3);
+ page_select_->setStyleSheet("combobox-popup: 0;");
 
+ connect(page_select_, QOverload<s4>::of(&QComboBox::currentIndexChanged), [this](s4 index)
+ {
+  if(info_.total_pages() == 0)
+    return;
+
+  Q_EMIT page_select_requested((u4)index + 1);
+ });
+
+
+ page_select_->addItem("N/A");
  page_select_label_  = new QLabel("Page", this);
 
+// page_max_label_text_ = QString("%1%%%1").arg(QChar(0x279C));
+
+ page_max_label_text_ = QString("%1").prepend(QChar(0x279C));
+ page_max_label_ = new QLabel(page_max_label_text_.arg(0));
+ page_max_label_->setMinimumWidth(20);
+
+ page_max_label_->setStyleSheet(color_label_style_sheet_orange_());
+ page_max_label_->setToolTip("Total pages/images in the current document/image series");
 
  page_select_and_navigate_layout_ = new QHBoxLayout;
  page_select_and_navigate_layout_left_ = new QVBoxLayout;
@@ -29,6 +50,7 @@ Page_and_Search_Frame::Page_and_Search_Frame(QWidget* parent)
  page_select_layout_->addWidget(page_select_label_);
  page_select_layout_->addSpacing(3);
  page_select_layout_->addWidget(page_select_);
+ page_select_layout_->addWidget(page_max_label_);
  page_select_layout_->addStretch();
  page_select_and_navigate_layout_left_->addLayout(page_select_layout_);
 
@@ -41,10 +63,18 @@ Page_and_Search_Frame::Page_and_Search_Frame(QWidget* parent)
 // main_layout_->addSpacing(4);
 
  page_navigate_layout_ = new QHBoxLayout;
+
  page_back_button_ = new QPushButton(this);
+ page_back_button_->setToolTip("Page Back");
+
  page_forward_button_ = new QPushButton(this);
+ page_forward_button_->setToolTip("Page Forward");
+
  page_first_button_ = new QPushButton(this);
+ page_first_button_->setToolTip("First Page");
+
  page_last_button_ = new QPushButton(this);
+ page_last_button_->setToolTip("Last Page");
 
  make_light_double_back_button(page_first_button_);
  make_light_back_button(page_back_button_);
@@ -131,8 +161,11 @@ Page_and_Search_Frame::Page_and_Search_Frame(QWidget* parent)
  search_layout_->addSpacing(3);
 
  search_up_button_ = new QPushButton(this);
+ search_up_button_->setToolTip("Search Up");
  search_down_button_ = new QPushButton(this);
+ search_down_button_->setToolTip("Search Down");
  search_from_top_button_ = new QPushButton(this);
+ search_from_top_button_->setToolTip("Search From Top");
 
  make_up_button(search_up_button_);
  make_down_button(search_down_button_);
@@ -170,4 +203,16 @@ Page_and_Search_Frame::Page_and_Search_Frame(QWidget* parent)
 
  setMaximumHeight(140);
 
+}
+
+
+void Page_and_Search_Frame::reset_page_count(u4 last_page)
+{
+ info_.set_total_pages(last_page);
+ page_max_label_->setText(page_max_label_text_.arg(last_page));
+ page_select_->clear();
+ for(u4 i = 1; i <= last_page; ++i)
+ {
+  page_select_->addItem(QString::number(i));
+ }
 }

@@ -28,9 +28,22 @@ inline QString light_checkable_button_style_sheet_()
    color: %3;})";
 }
 
+inline QString color_label_style_sheet_()
+{
+ return R"(
+   QLabel{font-size: %1pt;
+   font-weight: %2;
+   color: %3;})";
+}
+
 inline QString light_checkable_button_style_sheet_orange_()
 {
  return light_checkable_button_style_sheet_().arg(9).arg("bold").arg("#E55B2C");
+}
+
+inline QString color_label_style_sheet_orange_()
+{
+ return color_label_style_sheet_().arg(8).arg("normal").arg("#B52B1A");
 }
 
 inline QString light_back_forward_button_style_sheet_()

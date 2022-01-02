@@ -16,10 +16,29 @@
 
 #include "global-types.h"
 
+#include "accessors.h"
+
+class Page_and_Search_Frame_Info
+{
+ QStringList print_page_numbers_;
+ QMap<QString, u4> special_print_page_map_;
+ u4 total_pages_;
+ u4 print_pages_state_;
+
+public:
+
+ Page_and_Search_Frame_Info() : total_pages_(0), print_pages_state_(0) {}
+
+ ACCESSORS(u4 ,total_pages)
+ ACCESSORS(u4 ,print_pages_state)
+
+};
 
 class Page_and_Search_Frame : public QFrame
 {
  Q_OBJECT
+
+ Page_and_Search_Frame_Info info_;
 
  QVBoxLayout* main_layout_;
 
@@ -32,6 +51,8 @@ class Page_and_Search_Frame : public QFrame
  QLabel* page_print_or_pdf_label_;
  QComboBox* page_select_;
  QLabel* page_select_label_;
+ QLabel* page_max_label_;
+ QString page_max_label_text_;
 
  QHBoxLayout* page_navigate_layout_;
  QPushButton* page_back_button_;
@@ -65,6 +86,8 @@ public:
 
  USE_SELF_CONNECT(normal)
  USE_SELF_CONNECT(lambda)
+
+ void reset_page_count(u4 last_page);
 
 
 Q_SIGNALS:

@@ -42,7 +42,7 @@
 
 DHAX_Main_Window_Controller::DHAX_Main_Window_Controller()
   :  display_image_data_(nullptr),
-     zoom_frame_(nullptr),
+     zoom_frame_(nullptr), page_and_search_frame_(nullptr),
      image_scene_item_(nullptr),
      main_window_receiver_(nullptr),
      application_controller_(nullptr),
@@ -359,7 +359,18 @@ void DHAX_Main_Window_Controller::draw_demo_quad()
 void DHAX_Main_Window_Controller::check_init_document_controller()
 {
  if(!document_controller_)
-   document_controller_ = new PDF_Document_Controller;
+ {
+  document_controller_ = new PDF_Document_Controller;
+  document_controller_->set_page_and_search_frame(page_and_search_frame_);
+ }
+}
+
+void DHAX_Main_Window_Controller::delayed_image_viewer_recenter_scroll_top_left()
+{
+ QTimer::singleShot(0, [this]
+ {
+  image_viewer_->recenter_scroll_top_left();
+ });
 }
 
 void DHAX_Main_Window_Controller::load_pdf()
@@ -382,6 +393,7 @@ void DHAX_Main_Window_Controller::load_pdf()
 
  image_viewer_->load_image(document_controller_->pixmap());
 
+ delayed_image_viewer_recenter_scroll_top_left();
 }
 
 void DHAX_Main_Window_Controller::load_image()
@@ -414,11 +426,7 @@ void DHAX_Main_Window_Controller::load_image(QString file_path)
 
  init_image_scene_item(image_viewer_->image_scene_item());
 
- QTimer::singleShot(0, [this]
- {
-  image_viewer_->recenter_scroll_top_left();
- });
-
+ delayed_image_viewer_recenter_scroll_top_left();
 
 }
 

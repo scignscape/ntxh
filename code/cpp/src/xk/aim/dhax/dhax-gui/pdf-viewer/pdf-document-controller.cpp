@@ -3,6 +3,8 @@
 
 #include "pdf-document-controller.h"
 
+#include "pleneviews/page-and-search-frame.h"
+
 #include "pdf-document-info.h"
 
 //#include "multiline-rubber-band.h"
@@ -32,7 +34,7 @@
 
 
 PDF_Document_Controller::PDF_Document_Controller()
- : document_(nullptr)
+ : document_(nullptr), page_and_search_frame_(nullptr)
   // context_menu_rubber_band_(nullptr),
   // current_multistep_annotation_(nullptr)
 {
@@ -92,6 +94,7 @@ void PDF_Document_Controller::load_document(QString file_path)
   info_->set_file_path(file_path);
 
   u4 np = doc->numPages();
+  page_and_search_frame_->reset_page_count(np);
 
   //scenes_.clear();
   for(int i = 0; i < doc->numPages(); i++)

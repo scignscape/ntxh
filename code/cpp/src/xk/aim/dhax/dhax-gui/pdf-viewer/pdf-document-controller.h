@@ -38,6 +38,7 @@ class QScrollArea;
 class DHAX_PDF_View_Dialog;
 
 class PDF_Document_Info;
+class Page_and_Search_Frame;
 
 
 class PDF_Document_Controller //: public QGraphicsView //QLabel
@@ -60,6 +61,8 @@ class PDF_Document_Controller //: public QGraphicsView //QLabel
 
  QVector<PDF_Document_Info*> prior_info_;
 
+ Page_and_Search_Frame* page_and_search_frame_;
+
 
 public:
 
@@ -67,6 +70,8 @@ public:
 
  ACCESSORS(Poppler::Document* ,document)
  ACCESSORS(QPixmap ,pixmap)
+ ACCESSORS(Page_and_Search_Frame* ,page_and_search_frame)
+
 
  QMatrix matrix() const;
  qreal scale() const;
