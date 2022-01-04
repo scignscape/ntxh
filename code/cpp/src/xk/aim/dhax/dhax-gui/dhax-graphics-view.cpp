@@ -19,20 +19,51 @@ DHAX_Graphics_View::DHAX_Graphics_View(QWidget* parent)
 }
 
 
-void DHAX_Graphics_View::mouseReleaseEvent(QMouseEvent* mouseEvent)
+void DHAX_Graphics_View::activate_hand_drag_mode()
 {
- Qt::KeyboardModifiers ks = QGuiApplication::keyboardModifiers();
- Qt::MouseButtons bs = mouseEvent->buttons();
- mouse_keyboard_data_.check_update(bs, ks, mouse_keyboard_modifiers_callback_);
-
+ setDragMode(ScrollHandDrag);
+ setInteractive(false);
 }
 
 
-void DHAX_Graphics_View::mouseMoveEvent(QMouseEvent* mouseEvent)
+void DHAX_Graphics_View::deactivate_hand_drag_mode()
+{
+ setDragMode(ScrollHandDrag);
+ setInteractive(true);
+}
+
+
+void DHAX_Graphics_View::mousePressEvent(QMouseEvent* mev)
 {
  Qt::KeyboardModifiers ks = QGuiApplication::keyboardModifiers();
- Qt::MouseButtons bs = mouseEvent->buttons();
+ Qt::MouseButtons bs = mev->buttons();
  mouse_keyboard_data_.check_update(bs, ks, mouse_keyboard_modifiers_callback_);
+ this->QGraphicsView::mousePressEvent(mev);
+}
+
+void DHAX_Graphics_View::mouseReleaseEvent(QMouseEvent* mev)
+{
+ Qt::KeyboardModifiers ks = QGuiApplication::keyboardModifiers();
+ Qt::MouseButtons bs = mev->buttons();
+ mouse_keyboard_data_.check_update(bs, ks, mouse_keyboard_modifiers_callback_);
+
+ this->QGraphicsView::mouseReleaseEvent(mev);
+
+ //mev->ignore();
+ //return;
+}
+
+
+void DHAX_Graphics_View::mouseMoveEvent(QMouseEvent* mev)
+{
+ Qt::KeyboardModifiers ks = QGuiApplication::keyboardModifiers();
+ Qt::MouseButtons bs = mev->buttons();
+ mouse_keyboard_data_.check_update(bs, ks, mouse_keyboard_modifiers_callback_);
+
+ this->QGraphicsView::mouseMoveEvent(mev);
+ //mev->ignore();
+ //return;
+
 
 // if(ks != Qt::NoModifier)
 // {

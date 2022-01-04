@@ -1,6 +1,8 @@
 
 #include "zoom-and-navigate-frame.h"
 
+#include "styles.h"
+
 #include <QDebug>
 #include <QLabel>
 
@@ -13,7 +15,11 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  image_data_ = nullptr;
  current_selected_annotation_ = nullptr;
 
- QString button_style_sheet = colorful_small_button_style_sheet_();
+ QString _button_style_sheet = colorful_small_button_style_sheet_();
+ auto button_style_sheet = [_button_style_sheet](u1 sz = 10)
+ {
+  return _button_style_sheet.arg(sz);
+ };
 
  handle_zoom_ok_ = false;
  initial_zoom_position_ = 25;
@@ -50,12 +56,12 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  reset_zoom_button_ = new QPushButton("Reset Zoom", this);
  reset_zoom_button_->setMaximumWidth(85);
 
- reset_zoom_button_->setStyleSheet(button_style_sheet);
+ reset_zoom_button_->setStyleSheet(button_style_sheet());
 
 
  repeat_zoom_button_ = new QPushButton("Repeat Zoom", this);
  repeat_zoom_button_->setMaximumWidth(85);
- repeat_zoom_button_->setStyleSheet(button_style_sheet);
+ repeat_zoom_button_->setStyleSheet(button_style_sheet());
  repeat_zoom_button_->setEnabled(false);
 
  zoom_buttons_layout_->addWidget(repeat_zoom_button_);
@@ -160,7 +166,7 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  reset_all_button_ = new QPushButton("Reset (All)", this);
  reset_all_button_->setMaximumWidth(85);
 
- reset_all_button_->setStyleSheet(button_style_sheet);
+ reset_all_button_->setStyleSheet(button_style_sheet());
  reset_all_button_->setEnabled(false);
 
  connect(reset_all_button_, SIGNAL(clicked(bool)), this, SLOT(handle_reset_all(bool)));
@@ -186,14 +192,26 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  main_layout_->addStretch(2);
 
- image_top_left_button_ = new QPushButton("Image Top Left", this);
- image_top_left_button_->setMinimumWidth(110);
+ //image_top_left_button_ = new QPushButton("Image Top Left", this);
+ image_top_left_button_ = new QPushButton(QChar(0x2751), this);
+// image_top_left_button_ = new QPushButton(QChar(0x29C9), this);
 
- image_top_left_button_->setStyleSheet(button_style_sheet);
 
- center_image_button_ = new QPushButton("Center Image", this);
- center_image_button_->setMinimumWidth(110);
- center_image_button_->setStyleSheet(button_style_sheet);
+
+ set_multiline_tooltip(image_top_left_button_, "Image Top Left",
+   "Positions image so that its top-left corner coincides with top-left corner of the viewport.");
+ image_top_left_button_->setMinimumWidth(50);
+ image_top_left_button_->setMaximumHeight(20);
+
+ image_top_left_button_->setStyleSheet(button_style_sheet(12));
+
+ center_image_button_ = new QPushButton(QChar(0x29C9), this);
+ center_image_button_->setMinimumWidth(50);
+ center_image_button_->setMaximumHeight(20);
+ set_multiline_tooltip(center_image_button_, "Center Image",
+   "Positions image so that the viewport is centered on its center.");
+
+ center_image_button_->setStyleSheet(button_style_sheet(15));
 
 
  connect(image_top_left_button_, SIGNAL(clicked(bool)),
@@ -215,14 +233,72 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
     Q_EMIT multi_draw_set();
  });
 
- pan_mode_button_ = new QPushButton("Pan Mode", this);
- pan_mode_button_->setMinimumWidth(75);
+ pan_mode_button_ = new QPushButton("Pan/Pull Mode", this);
+
+ set_multiline_tooltip(pan_mode_button_, "Set Pan or Pull Mode",
+   R"(
+Pan Mode (first click, or left check box) scrolls the viewport by dragging the image;
+Pull Mode (second click, or right check box) moves the image/page relative to its margins
+   )");
+
+ pan_mode_button_->setMinimumWidth(95);
+ pan_mode_button_->setMaximumWidth(95);
+ pan_mode_button_->setMinimumHeight(21);
+ pan_mode_button_->setMaximumHeight(21);
  pan_mode_button_->setCheckable(true);
  pan_mode_button_->setChecked(false);
  pan_mode_button_->setStyleSheet(colorful_toggle_button_mixed_style_sheet_());
- connect(pan_mode_button_, SIGNAL(clicked(bool)), this, SIGNAL(pan_mode_changed(bool)));
+ connect(pan_mode_button_, &QPushButton::clicked,  [this](bool state)
+ {
+  // // ckb state: pull mode = 1  temp pull mode = 2  temp pan mode = 3
+  if(state)
+  {
+   // //  pull mode
+   if(pan_mode_button_->property("ckb-state").toUInt() == 1)
+   {
+    pan_mode_button_->setProperty("ckb-state", 0);
+    pan_mode_button_->setChecked(false);
+    pan_mode_button_->setStyleSheet(colorful_toggle_button_mixed_style_sheet_());
+    pull_mode_ckb_->setChecked(false);
+    Q_EMIT pull_mode_changed(false);
+    return;
+   }
+  }
+  else
+  {
+   pan_mode_button_->setProperty("ckb-state", 1);
+   pan_mode_button_->setStyleSheet(colorful_toggle_button_mixed_style_sheet_());
+   pan_mode_ckb_->setChecked(false);
+   pull_mode_ckb_->setChecked(true);
+   Q_EMIT pull_mode_changed(true);
+   return;
+  }
+
+  pan_mode_ckb_->setChecked(state);
+  Q_EMIT pan_mode_changed(state);
+ });
 
  pan_mode_ckb_ = new QCheckBox(" ", this);
+ set_multiline_tooltip(pan_mode_ckb_, "Pan Mode",
+   R"(
+Scrolls the viewport when dragging the image; can be temprarily
+activated by pressing the <i>shift</i> or <i>meta</i> key while moving the mouse
+   )");
+
+ connect(pan_mode_ckb_, &QPushButton::clicked,
+    [this](bool state)
+ {
+  pan_mode_button_->setChecked(state);
+  if(state)
+  {
+   if(pull_mode_ckb_->isChecked())
+   {
+    pan_mode_button_->setProperty("ckb-state", 0);
+    pull_mode_ckb_->setChecked(false);
+   }
+  }
+  Q_EMIT pan_mode_changed(state);
+ });
 
  QString ckb_stylesheet = R"(QCheckBox::indicator {
                           subcontrol-position: %1 bottom;
@@ -230,13 +306,54 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  pan_mode_ckb_->setStyleSheet(ckb_stylesheet.arg("right"));
 
+// pull_mode_button_ = new QPushButton("Pull Mode", this);
+// pull_mode_button_->setMaximumWidth(75);
+// pull_mode_button_->setCheckable(true);
+// pull_mode_button_->setChecked(false);
+// pull_mode_button_->setStyleSheet(colorful_toggle_button_mixed_style_sheet_());
+// connect(pull_mode_button_, &QPushButton::clicked,  [this](bool state)
+// {
+//  pull_mode_ckb_->setChecked(state);
+//  Q_EMIT pull_mode_changed(state);
+// });
+
+ pull_mode_ckb_ = new QCheckBox(" ", this);
+ set_multiline_tooltip(pull_mode_ckb_, "Pull Mode",
+   R"(
+In this mode, dragging causes the image to move relative to its
+margins (top/left margins decrease while bottom/right increase or vice-verse);
+can be temprarily activated by pressing the <i>control</i> or
+<i>shift</i>+<i>meta</i> key(s) while moving the mouse
+   )");
+
+ connect(pull_mode_ckb_, &QPushButton::clicked,
+    [this](bool state)
+ {
+  if(pan_mode_ckb_->isChecked())
+  {
+   pan_mode_ckb_->setChecked(false);
+  }
+
+//  pull_mode_button_->setChecked(state);
+  pan_mode_button_->setChecked(false);
+  pan_mode_button_->setProperty("ckb-state", (u1)state);
+  pan_mode_button_->setStyleSheet(colorful_toggle_button_mixed_style_sheet_());
+
+  Q_EMIT pull_mode_changed(state);
+ });
+
+ pull_mode_ckb_->setStyleSheet(ckb_stylesheet.arg("left"));
+
+
 //? position_buttons_layout_ = new QHBoxLayout;
  position_buttons_layout_ = new QGridLayout;
 
- position_buttons_layout_->addWidget(pan_mode_ckb_, 0, 0, 2, 1, Qt::AlignRight);
- position_buttons_layout_->addWidget(pan_mode_button_, 0, 1, 3, 1, Qt::AlignLeft);
- position_buttons_layout_->addWidget(image_top_left_button_, 0, 3, 2, 1);
- position_buttons_layout_->addWidget(center_image_button_, 0, 4, 2, 1);
+ position_buttons_layout_->addWidget(pan_mode_ckb_, 0, 0, 2, 1);//, Qt::AlignRight);
+ position_buttons_layout_->addWidget(pan_mode_button_, 0, 1, 3, 1);//, Qt::AlignLeft);
+ position_buttons_layout_->addWidget(pull_mode_ckb_, 0, 2, 2, 1);//, Qt::AlignLeft);
+// position_buttons_layout_->addWidget(pull_mode_button_, 0, 3, 3, 1, Qt::AlignLeft);
+ position_buttons_layout_->addWidget(image_top_left_button_, 0, 4, 2, 1);
+ position_buttons_layout_->addWidget(center_image_button_, 0, 6, 2, 1);
 
 // QVBoxLayout* mdlayout = new QVBoxLayout;
 // QLabel* mdlabel = new QLabel("Multi-Draw", this);
@@ -250,15 +367,23 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 // mdlayout->setSpacing(0);
 // position_buttons_layout_->addLayout(mdlayout, 0, 5, 3, 1);
 
-multi_draw_ckb_->setText("Multi-Draw");
+ position_buttons_layout_->setMargin(0);
+ position_buttons_layout_->setContentsMargins(0,0,0,0);
+ position_buttons_layout_->setSpacing(0);
 
-multi_draw_ckb_->setStyleSheet(ckb_stylesheet.arg("left"));
 
- position_buttons_layout_->addWidget(multi_draw_ckb_, 0, 6, 2, 1, Qt::AlignTop);
+ multi_draw_ckb_->setText("Multi-Draw");
+
+ multi_draw_ckb_->setStyleSheet(ckb_stylesheet.arg("left"));
+
+ position_buttons_layout_->addWidget(multi_draw_ckb_, 0, 8, 2, 1, Qt::AlignTop);
 // position_buttons_layout_->addWidget(mdlabel, 1, 5, 1, 1, Qt::AlignTop);
 
- position_buttons_layout_->setColumnStretch(2, 1);
- position_buttons_layout_->setColumnStretch(5, 1);
+ position_buttons_layout_->setColumnStretch(3, 1);
+ position_buttons_layout_->setColumnMinimumWidth(3, 3);
+ position_buttons_layout_->setColumnMinimumWidth(5, 3);
+ position_buttons_layout_->setColumnStretch(7, 1);
+ position_buttons_layout_->setColumnMinimumWidth(7, 10);
 
 //? position_buttons_layout_->addWidget(pan_mode_button_);
 // position_buttons_layout_->addStretch();
@@ -285,27 +410,39 @@ multi_draw_ckb_->setStyleSheet(ckb_stylesheet.arg("left"));
 
 }
 
-
-void Zoom_and_Navigate_Frame::indicate_temporary_pan_mode()
+void Zoom_and_Navigate_Frame::indicate_temporary_pull_mode()
 {
- pan_mode_button_->setProperty("temp-down", true);
+ pan_mode_button_->setProperty("ckb-state", 2);
  pan_mode_button_->setStyleSheet(colorful_toggle_button_mixed_style_sheet_());
-
- //pan_mode_button_->setChecked(true);
 }
 
 
+void Zoom_and_Navigate_Frame::indicate_temporary_pan_mode()
+{
+ pan_mode_button_->setProperty("ckb-state", 3);
+ pan_mode_button_->setStyleSheet(colorful_toggle_button_mixed_style_sheet_());
+}
+
+void Zoom_and_Navigate_Frame::unindicate_temporary_pull_mode()
+{
+ pan_mode_button_->setProperty("ckb-state", 0);
+ pan_mode_button_->setStyleSheet(colorful_toggle_button_mixed_style_sheet_());
+}
+
 void Zoom_and_Navigate_Frame::unindicate_temporary_pan_mode()
 {
- pan_mode_button_->setProperty("temp-down", false);
+ pan_mode_button_->setProperty("ckb-state", 0);
  pan_mode_button_->setStyleSheet(colorful_toggle_button_mixed_style_sheet_());
+}
 
- // pan_mode_button_->setChecked(false);
+void Zoom_and_Navigate_Frame::unindicate_temporary_modes()
+{
+ pan_mode_button_->setProperty("ckb-state", 0);
+ pan_mode_button_->setStyleSheet(colorful_toggle_button_mixed_style_sheet_());
 }
 
 void Zoom_and_Navigate_Frame::reset_with_image_data(void* image_data)
 {
-
  image_data_ = image_data;
 
 // ((ctkRangeSlider*) zoom_slider_[0])->setMinimumValue(initial_zoom_position_);

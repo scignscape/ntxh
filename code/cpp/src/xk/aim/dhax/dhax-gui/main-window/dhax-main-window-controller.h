@@ -13,6 +13,8 @@
 
 #include <QString>
 
+#include "global-types.h"
+
 class DHAX_Main_Window;
 class DHAX_Display_Image_Data;
 class Zoom_and_Navigate_Frame;
@@ -68,6 +70,10 @@ public:
  void load_pdf();
  void load_image(QString file_path);
  void init_image_scene_item(DHAX_Image_Scene_Item* si);
+
+ void reinit_pdf_page_view(u4 page);
+ void init_pdf_page_view();
+
 
  void show_annotation_comments(DHAX_Annotation_Instance* dai);
 

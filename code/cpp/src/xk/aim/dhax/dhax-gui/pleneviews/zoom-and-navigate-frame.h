@@ -41,6 +41,10 @@ class Zoom_and_Navigate_Frame : public QFrame
 
  QPushButton* pan_mode_button_;
  QCheckBox* pan_mode_ckb_;
+
+// QPushButton* pull_mode_button_;
+ QCheckBox* pull_mode_ckb_;
+
  QCheckBox* multi_draw_ckb_;
 //? QHBoxLayout* bottom_layout_;
 
@@ -96,6 +100,11 @@ public:
  void indicate_temporary_pan_mode();
  void unindicate_temporary_pan_mode();
 
+ void indicate_temporary_pull_mode();
+ void unindicate_temporary_pull_mode();
+
+ void unindicate_temporary_modes();
+
 Q_SIGNALS:
 
  void zoom_factor_changed(r8 factor);
@@ -105,6 +114,7 @@ Q_SIGNALS:
 
  void reset_notes_zoom_requested(bool);
  void pan_mode_changed(bool);
+ void pull_mode_changed(bool);
 
  void multi_draw_unset();
  void multi_draw_set();

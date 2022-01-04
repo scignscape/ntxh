@@ -27,6 +27,11 @@ ACCESSORS__GET(type, name)
 #endif
 
 
+#ifndef ACCESSORS_get
+#define ACCESSORS_get(type, name) \
+ type name() const { return name##_; }
+#endif
+
 #ifndef ACCESSORS__GET
 #define ACCESSORS__GET(type, name) \
  type name() const { return name##_; }
@@ -78,13 +83,28 @@ ACCESSORS__GET(type, name)
  type& name() { return name##_; }
 #endif
 
+#ifndef ACCESSORS_rget
+#define ACCESSORS_rget(type, name) \
+ type& name() { return name##_; }
+#endif
+
 #ifndef ACCESSORS__RGET_CONST
 #define ACCESSORS__RGET_CONST(type, name) \
  type& name() const { return (type&) name##_; }
 #endif
 
+#ifndef ACCESSORS_rget_const
+#define ACCESSORS_rget_const(type, name) \
+ type& name() const { return (type&) name##_; }
+#endif
+
 #ifndef ACCESSORS__CONST_RGET
 #define ACCESSORS__CONST_RGET(type, name) \
+ const type& name() const { return name##_; }
+#endif
+
+#ifndef ACCESSORS_const_rget
+#define ACCESSORS_const_rget(type, name) \
  const type& name() const { return name##_; }
 #endif
 
@@ -115,9 +135,19 @@ ACCESSORS__GET(type, name)
  void set_##name(type _arg_) { name##_ = _arg_; }
 #endif
 
+#ifndef ACCESSORS_set
+#define ACCESSORS_set(type, name) \
+ void set_##name(type _arg_) { name##_ = _arg_; }
+#endif
+
 
 #ifndef ACCESSORS__SETR
 #define ACCESSORS__SETR(type, name) \
+ auto& set_##name(type _arg_) { name##_ = _arg_; return *this; }
+#endif
+
+#ifndef ACCESSORS_setr
+#define ACCESSORS_setr(type, name) \
  auto& set_##name(type _arg_) { name##_ = _arg_; return *this; }
 #endif
 
@@ -128,11 +158,16 @@ ACCESSORS__GET(type, name)
 #endif
 
 
+#ifndef ACCESSORS_setp
+#define ACCESSORS_setp(type, name) \
+ auto set_##name(type _arg_) { name##_ = _arg_; return this; }
+#endif
+
+
 #ifndef Q_INVOKABLE__ACCESSORS__SET
 #define Q_INVOKABLE__ACCESSORS__SET(type, name) \
  void Q_INVOKABLE set_##name(type _arg_) { name##_ = _arg_; }
 #endif
-
 
 
 #ifndef ACCESSORS__SDECLARE
@@ -168,8 +203,8 @@ ACCESSORS__GET(type, name)
 
 #ifndef ACCESSORS
 #define ACCESSORS(type, name) \
- ACCESSORS__GET(MACRO_PASTE(type), name) \
- ACCESSORS__SET(MACRO_PASTE(type), name)
+ ACCESSORS_get(MACRO_PASTE(type), name) \
+ ACCESSORS_set(MACRO_PASTE(type), name)
 #endif
 
 

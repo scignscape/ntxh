@@ -48,6 +48,14 @@ void PDF_Document_Controller::load_page(QPair<u4, u4> physical_dpis)
    load_page(current_page, state_.current_scale_factor(), physical_dpis);
 }
 
+
+void PDF_Document_Controller::switch_to_page(u4 page)
+{
+ state_.set_current_page(page);
+ load_page(page, state_.current_scale_factor(), state_.current_physical_dpis());
+}
+
+
 void PDF_Document_Controller::load_page(u4 page, r8 scale_factor, QPair<u4, u4> physical_dpis)
 {
  //image_ = document_->page(page);
@@ -56,6 +64,8 @@ void PDF_Document_Controller::load_page(u4 page, r8 scale_factor, QPair<u4, u4> 
 
  if(!pg)
    return;
+
+ state_.set_current_physical_dpis(physical_dpis);
 
  image_ = pg->renderToImage(scale_factor * physical_dpis.first, scale_factor * physical_dpis.second);
 

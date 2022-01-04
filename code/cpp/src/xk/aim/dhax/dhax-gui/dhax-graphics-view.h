@@ -46,12 +46,24 @@ public:
  {
   if(ks.testFlag(Qt::ShiftModifier))
     components_ |= (u2) State_Components::Shift_Key_Pressed;
+
+  if(ks.testFlag(Qt::MetaModifier))
+    components_ |= (u2) State_Components::Meta_Key_Pressed;
+
+  if(ks.testFlag(Qt::ControlModifier))
+    components_ |= (u2) State_Components::Control_Key_Pressed;
  }
 
  void release_qt_keyboard_modifiers(Qt::KeyboardModifiers ks)
  {
   if(ks.testFlag(Qt::ShiftModifier))
     components_ ^= (u2) State_Components::Shift_Key_Pressed;
+
+  if(ks.testFlag(Qt::MetaModifier))
+    components_ ^= (u2) State_Components::Meta_Key_Pressed;
+
+  if(ks.testFlag(Qt::ControlModifier))
+    components_ ^= (u2) State_Components::Control_Key_Pressed;
  }
 
  void read_mouse_buttons(Qt::MouseButtons bs)
@@ -111,10 +123,53 @@ public:
   return (components_ & mask) == mask;
  }
 
+ bool Meta_left()
+ {
+  static u2 mask = ((u2) State_Components::Mouse_Left_Button_Pressed) |
+    ((u2) State_Components::Meta_Key_Pressed);
+  return (components_ & mask) == mask;
+ }
+
+ bool Unmeta_left()
+ {
+  static u2 mask = ((u2) State_Components::Mouse_Left_Button_Pressed) |
+    ((u2) State_Components::Meta_Key_Released);
+  return (components_ & mask) == mask;
+ }
+
+ bool Unmeta_unleft()
+ {
+  static u2 mask = ((u2) State_Components::Mouse_Left_Button_Released) |
+    ((u2) State_Components::Meta_Key_Released);
+  return (components_ & mask) == mask;
+ }
+
+
  bool Unleft()
  {
   static u2 mask = (u2) State_Components::Mouse_Left_Button_Released;
   return (components_ & mask);
+ }
+
+ bool Ctrl_left()
+ {
+  static u2 mask = ((u2) State_Components::Mouse_Left_Button_Pressed) |
+    ((u2) State_Components::Control_Key_Pressed);
+  return (components_ & mask) == mask;
+ }
+
+ bool Unctrl_left()
+ {
+  static u2 mask = ((u2) State_Components::Mouse_Left_Button_Pressed) |
+    ((u2) State_Components::Control_Key_Released);
+  return (components_ & mask) == mask;
+ }
+
+ bool Unctrl_unleft()
+ {
+  static u2 mask = ((u2) State_Components::Mouse_Left_Button_Released) |
+    ((u2) State_Components::Control_Key_Released);
+  return (components_ & mask) == mask;
  }
 
  void check_update(Qt::MouseButtons bs, Qt::KeyboardModifiers ks,
@@ -135,8 +190,19 @@ public:
           && (components_ & (u2) State_Components::Shift_Key_Pressed))
   {
    temp_components_ = 0; // ^= (u2) State_Components::Shift_Key_Pressed;
-   //?components_ |= (u2) State_Components::Shift_Key_Pressed;
   }
+
+  if((prior_components_ & (u2) State_Components::Control_Key_Pressed)
+   && !(components_ & (u2) State_Components::Control_Key_Pressed))
+  {
+   components_ |= (u2) State_Components::Control_Key_Released;
+  }
+  else if(!(prior_components_ & (u2) State_Components::Control_Key_Pressed)
+          && (components_ & (u2) State_Components::Control_Key_Pressed))
+  {
+   temp_components_ = 0; // ^= (u2) State_Components::Shift_Key_Pressed;
+  }
+
 
   if((prior_components_ & (u2) State_Components::Mouse_Left_Button_Pressed)
    && !(components_ & (u2) State_Components::Mouse_Left_Button_Pressed))
@@ -147,7 +213,6 @@ public:
           && (components_ & (u2) State_Components::Mouse_Left_Button_Pressed))
   {
    temp_components_ = 0; // ^= (u2) State_Components::Shift_Key_Pressed;
-   //?components_ |= (u2) State_Components::Shift_Key_Pressed;
   }
 
   if(components_ != temp_components_)
@@ -171,8 +236,9 @@ class DHAX_Graphics_View :  public QGraphicsView
 
 protected:
 
- void mouseMoveEvent(QMouseEvent* mouseEvent) Q_DECL_OVERRIDE;
- void mouseReleaseEvent(QMouseEvent* mouseEvent) Q_DECL_OVERRIDE;
+ void mousePressEvent(QMouseEvent* mev) Q_DECL_OVERRIDE;
+ void mouseMoveEvent(QMouseEvent* mev) Q_DECL_OVERRIDE;
+ void mouseReleaseEvent(QMouseEvent* mev) Q_DECL_OVERRIDE;
 
 
 public:
@@ -181,6 +247,9 @@ public:
 
  ACCESSORS(std::function<void(DHAX_Mouse_Keyboard_Data)>
    ,mouse_keyboard_modifiers_callback)
+
+ void activate_hand_drag_mode();
+ void deactivate_hand_drag_mode();
 
 };
 

@@ -16,6 +16,8 @@
 
 #include "dhax-graphics-view.h"
 
+#include "dhax-graphics-scene.h"
+
 
 template<>
 void DHAX_Image_Scene_Item::handle_mouse_event<

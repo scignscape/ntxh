@@ -27,6 +27,8 @@ class PDF_Document_State
 
  r8 current_scale_factor_;
 
+ QPair<u4, u4> current_physical_dpis_;
+
 
 public:
 
@@ -34,6 +36,7 @@ public:
 
  ACCESSORS(u4 ,current_page)
  ACCESSORS(r8 ,current_scale_factor)
+ ACCESSORS(MACRO_PASTE(QPair<u4, u4>) ,current_physical_dpis)
 
  void reset_pages();
 

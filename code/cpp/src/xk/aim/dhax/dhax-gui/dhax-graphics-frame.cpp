@@ -83,11 +83,36 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
   graphics_view_->set_mouse_keyboard_modifiers_callback([this]
     (DHAX_Mouse_Keyboard_Data mkd)
   {
-   if(mkd.Shift_left())
-     zoom_frame_->indicate_temporary_pan_mode();
+   if(mkd.Unleft())
+   {
+    zoom_frame_->unindicate_temporary_modes();
+   }
 
-   else if(mkd.Unshift_left() || mkd.Unleft())
-     zoom_frame_->unindicate_temporary_pan_mode();
+   else if(mkd.Ctrl_left() || (mkd.Meta_left() && mkd.Shift_left()))
+   {
+    zoom_frame_->indicate_temporary_pull_mode();
+    display_image_data_->set_pull_mode();
+   }
+
+   else if(mkd.Shift_left() || mkd.Meta_left())
+   {
+    zoom_frame_->indicate_temporary_pan_mode();
+    display_image_data_->set_pan_mode();
+    graphics_view_->activate_hand_drag_mode();
+   }
+
+   else if(mkd.Unshift_left() || mkd.Unmeta_left())
+   {
+    zoom_frame_->unindicate_temporary_pan_mode();
+    display_image_data_->unset_pan_mode();
+    graphics_view_->deactivate_hand_drag_mode();
+   }
+
+   else if(mkd.Unctrl_left())
+   {
+    zoom_frame_->unindicate_temporary_pull_mode();
+    display_image_data_->unset_pull_mode();
+   }
 
 
 //   qDebug() << "ks = " << ks;
@@ -142,9 +167,34 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
    << [this](bool mode)
  {
   if(mode)
-    display_image_data_->set_pan_mode();
+  {
+   display_image_data_->unset_pull_mode();
+   display_image_data_->set_pan_mode();
+   graphics_view_->activate_hand_drag_mode();
+  }
   else
+  {
+   display_image_data_->unset_pan_mode();
+   graphics_view_->deactivate_hand_drag_mode();
+  }
+ };
+
+ _self_connect_(zoom_frame_ ,pull_mode_changed)
+   << [this](bool mode)
+ {
+  if(mode)
+  {
+   if(display_image_data_->pan_mode())
+   {
     display_image_data_->unset_pan_mode();
+    graphics_view_->deactivate_hand_drag_mode();
+   }
+   display_image_data_->set_pull_mode();
+  }
+  else
+  {
+   display_image_data_->unset_pull_mode();
+  }
  };
 
  _self_connect_(zoom_frame_ ,multi_draw_set)

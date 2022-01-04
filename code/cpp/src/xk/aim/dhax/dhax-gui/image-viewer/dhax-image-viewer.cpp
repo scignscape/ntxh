@@ -142,7 +142,9 @@ void DHAX_Image_Viewer::complete_load_image()
 
  image_scene_item_->setParent(nullptr);
 
- QGraphicsProxyWidget* w =  scrolled_image_scene_->addWidget(image_scene_item_);
+ //QGraphicsProxyWidget* w =  scrolled_image_scene_->addWidget(image_scene_item_);
+
+ _Proxy_Widget* w = scrolled_image_scene_->add_proxy_widget(image_scene_item_);
  w->setPos(sipw/2,siph/2);
 
  QGraphicsRectItem* background_center_rectangle = scrolled_image_scene_->addRect(

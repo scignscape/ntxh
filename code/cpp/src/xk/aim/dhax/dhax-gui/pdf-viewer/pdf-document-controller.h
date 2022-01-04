@@ -82,6 +82,7 @@ public:
 
  void load_document(QString file_path);
 
+ void switch_to_page(u4 page);
  void load_page(QPair<u4, u4> physical_dpis);
  void load_page(u4 page, r8 scale_factor, QPair<u4, u4> physical_dpis);
 

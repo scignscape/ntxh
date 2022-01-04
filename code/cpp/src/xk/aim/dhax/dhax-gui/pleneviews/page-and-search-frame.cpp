@@ -23,6 +23,11 @@ Page_and_Search_Frame::Page_and_Search_Frame(QWidget* parent)
 
  connect(page_select_, QOverload<s4>::of(&QComboBox::currentIndexChanged), [this](s4 index)
  {
+  // //  we need to filter out spurious calls
+   //    not caused by actual user actions ...
+  if(index == -1)
+   return;
+
   if(info_.total_pages() == 0)
     return;
 
@@ -208,11 +213,21 @@ Page_and_Search_Frame::Page_and_Search_Frame(QWidget* parent)
 
 void Page_and_Search_Frame::reset_page_count(u4 last_page)
 {
- info_.set_total_pages(last_page);
+ // //  we want to signal that no user actions
+  //    are triggering the page_select_ index
+  //    while page_select_ itself is being updated
+ info_.set_total_pages(0);
+
  page_max_label_->setText(page_max_label_text_.arg(last_page));
  page_select_->clear();
  for(u4 i = 1; i <= last_page; ++i)
  {
   page_select_->addItem(QString::number(i));
  }
+
+ // //  only now can we set this value
+  //    because the zero serves to
+  //    prevent spurious page_select_
+  //    actions as indicated above
+ info_.set_total_pages(last_page);
 }

@@ -51,7 +51,8 @@ DHAX_Display_Image_Data::DHAX_Display_Image_Data()
 
  multi_draw = false;
 
- pan_mode = false;
+ pan_mode_ = false;
+ pull_mode_ = false;
 
  isMoving_ = false;
  isPressed_ = false;

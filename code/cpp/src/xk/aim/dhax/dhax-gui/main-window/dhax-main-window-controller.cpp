@@ -9,7 +9,9 @@
 #include "dhax-main-window.h"
 
 #include "image-viewer/dhax-display-image-data.h"
+
 #include "pleneviews/zoom-and-navigate-frame.h"
+#include "pleneviews/page-and-search-frame.h"
 
 #include "image-viewer/dhax-image-viewer.h"
 
@@ -60,7 +62,7 @@ void DHAX_Main_Window_Controller::show_annotation_comments(DHAX_Annotation_Insta
 }
 
 
-void DHAX_Main_Window_Controller::init_image_scene_item(DHAX_Image_Scene_Item *si)
+void DHAX_Main_Window_Controller::init_image_scene_item(DHAX_Image_Scene_Item* si)
 {
  image_scene_item_ = si;
 
@@ -362,6 +364,15 @@ void DHAX_Main_Window_Controller::check_init_document_controller()
  {
   document_controller_ = new PDF_Document_Controller;
   document_controller_->set_page_and_search_frame(page_and_search_frame_);
+
+  _self_connect_(page_and_search_frame_ ,page_select_requested)
+    << [this](u4 page)
+  {
+   document_controller_->switch_to_page(page);
+   reinit_pdf_page_view(page);
+  // display_image_data_->unset_multi_draw();
+  };
+
  }
 }
 
@@ -391,8 +402,17 @@ void DHAX_Main_Window_Controller::load_pdf()
  QPair dpis {image_viewer_->physicalDpiX(), image_viewer_->physicalDpiY()};
  document_controller_->load_page(dpis);
 
- image_viewer_->load_image(document_controller_->pixmap());
+ init_pdf_page_view();
+}
 
+void DHAX_Main_Window_Controller::reinit_pdf_page_view(u4 page)
+{
+ init_pdf_page_view();
+}
+
+void DHAX_Main_Window_Controller::init_pdf_page_view()
+{
+ image_viewer_->load_image(document_controller_->pixmap());
  delayed_image_viewer_recenter_scroll_top_left();
 }
 

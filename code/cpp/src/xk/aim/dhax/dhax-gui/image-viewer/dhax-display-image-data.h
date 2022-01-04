@@ -33,7 +33,8 @@ class DHAX_Display_Image_Data
 {
   friend class DHAX_Image_Scene_Item;
 
-  bool pan_mode;
+  bool pan_mode_;
+  bool pull_mode_;
 
   bool multi_draw;
 
@@ -105,14 +106,32 @@ class DHAX_Display_Image_Data
 //   return DHAX_Drawn_Shape::Shape_Kinds::N_A;
   }
 
+  ACCESSORS__GET(bool ,pan_mode)
+  ACCESSORS__GET(bool ,pull_mode)
+
+  inline bool pan_or_pull_mode()
+  {
+   return pan_mode() || pull_mode();
+  }
+
   void set_pan_mode()
   {
-   pan_mode = true;
+   pan_mode_ = true;
   }
 
   void unset_pan_mode()
   {
-   pan_mode = false;
+   pan_mode_ = false;
+  }
+
+  void set_pull_mode()
+  {
+   pull_mode_ = true;
+  }
+
+  void unset_pull_mode()
+  {
+   pull_mode_ = false;
   }
 
   void set_multi_draw()

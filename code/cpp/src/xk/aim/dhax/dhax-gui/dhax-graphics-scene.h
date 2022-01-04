@@ -10,12 +10,47 @@
 
 #include <QGraphicsScene>
 
+#include <QDebug>
+
+#include <QGraphicsProxyWidget>
+#include <QGraphicsSceneMouseEvent>
+
+class _Proxy_Widget : public QGraphicsProxyWidget
+{
+public:
+
+ void mousePressEvent(QGraphicsSceneMouseEvent* mev) Q_DECL_OVERRIDE
+ {
+  qDebug() << "smev = " << mev;
+  this->QGraphicsProxyWidget::mousePressEvent(mev);
+ }
+
+ void mouseMoveEvent(QGraphicsSceneMouseEvent* mev) Q_DECL_OVERRIDE
+ {
+  qDebug() << "mmev = " << mev;
+  this->QGraphicsProxyWidget::mouseMoveEvent(mev);
+ }
+
+ void mouseReleaseEvent(QGraphicsSceneMouseEvent* mev) Q_DECL_OVERRIDE
+ {
+  qDebug() << "rmev = " << mev;
+  this->QGraphicsProxyWidget::mouseReleaseEvent(mev);
+ }
+
+};
+
+
 class DHAX_Graphics_Scene : public QGraphicsScene
 {
 
 public:
 
  DHAX_Graphics_Scene();
+
+ _Proxy_Widget* add_proxy_widget(QWidget* w)
+ {
+  return (_Proxy_Widget*) addWidget(w);
+ }
 
 };
 

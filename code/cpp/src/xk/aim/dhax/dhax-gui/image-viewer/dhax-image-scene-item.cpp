@@ -16,6 +16,8 @@
 #include <QPainter>
 #include <QDebug>
 
+#include <QGuiApplication>
+
 
 void DHAX_Image_Scene_Item::reset_background_to_original_position()
 {
@@ -611,13 +613,21 @@ void DHAX_Image_Scene_Item::paintEvent(QPaintEvent*)
  }
 }
 
+
+
 void DHAX_Image_Scene_Item::mousePressEvent(QMouseEvent* mev)
 {
 // return;
 
- if(data_->pan_mode)
+ if(data_->pan_or_pull_mode())
  {
+  //this_proxy_widget_->
+  // ((_Proxy_Widget*)this_proxy_widget_)->mousePressEvent(mev);
+  qDebug() << "mev = " << mev;
+
+  //mev->accept(); //ignore();
   mev->ignore();
+
   return;
  }
 
@@ -641,7 +651,7 @@ void DHAX_Image_Scene_Item::mouseReleaseEvent(QMouseEvent* mev)
 {
 // return;
 
- if(data_->pan_mode)
+ if(data_->pan_or_pull_mode())
  {
   mev->ignore();
   return;
@@ -697,14 +707,16 @@ void DHAX_Image_Scene_Item::mouseReleaseEvent(QMouseEvent* mev)
  }
 }
 
-void DHAX_Image_Scene_Item::mouseMoveEvent(QMouseEvent *mouseEvent)
+void DHAX_Image_Scene_Item::mouseMoveEvent(QMouseEvent* mev) //mouseEvent)
 {
 // QGraphicsView* v = qobject_cast<QGraphicsView*>(parent());
 // v->mouseMoveEvent(mouseEvent);
 
- if(data_->pan_mode)
+ if(data_->pan_or_pull_mode())
  {
-  mouseEvent->ignore();
+
+  //?
+   mev->ignore();
   return;
  }
 
@@ -714,11 +726,11 @@ void DHAX_Image_Scene_Item::mouseMoveEvent(QMouseEvent *mouseEvent)
   // //  added polygon logic
   if(data_->point_pairs_.isEmpty())
   {
-   data_->mEndPoint_ = mouseEvent->pos();
+   data_->mEndPoint_ = mev->pos();
   }
   else
   {
-   data_->point_pairs_.last().second = mouseEvent->pos();
+   data_->point_pairs_.last().second = mev->pos();
   }
 
   update();
@@ -730,10 +742,10 @@ void DHAX_Image_Scene_Item::mouseMoveEvent(QMouseEvent *mouseEvent)
   {
    for(int j=0; j < data_->allEdits_.at(i).shapePoints.size(); ++j)
    {
-    if(mouseEvent->pos().x() >= data_->allEdits_[i].shapePoints[j].x() - data_->radius_ &&
-       mouseEvent->pos().x() <= data_->allEdits_[i].shapePoints[j].x() + data_->radius_ &&
-       mouseEvent->pos().y() >= data_->allEdits_[i].shapePoints[j].y() - data_->radius_ &&
-       mouseEvent->pos().y() <= data_->allEdits_[i].shapePoints[j].y() + data_->radius_)
+    if(mev->pos().x() >= data_->allEdits_[i].shapePoints[j].x() - data_->radius_ &&
+       mev->pos().x() <= data_->allEdits_[i].shapePoints[j].x() + data_->radius_ &&
+       mev->pos().y() >= data_->allEdits_[i].shapePoints[j].y() - data_->radius_ &&
+       mev->pos().y() <= data_->allEdits_[i].shapePoints[j].y() + data_->radius_)
          data_->mTempPoint_ = data_->allEdits_.at(i).shapePoints.at(j);
     update();
    }
@@ -744,10 +756,10 @@ void DHAX_Image_Scene_Item::mouseMoveEvent(QMouseEvent *mouseEvent)
       == DHAX_Display_Image_Data::Shape_Kinds::Ellipse
       && data_->points_.size() >= 3)
  {
-  if(mouseEvent->pos().x() >= data_->points_.first().x() - data_->radius_ &&
-     mouseEvent->pos().x() <= data_->points_.first().x() + data_->radius_ &&
-     mouseEvent->pos().y() >= data_->points_.first().y() - data_->radius_ &&
-     mouseEvent->pos().y() <= data_->points_.first().y() + data_->radius_)
+  if(mev->pos().x() >= data_->points_.first().x() - data_->radius_ &&
+     mev->pos().x() <= data_->points_.first().x() + data_->radius_ &&
+     mev->pos().y() >= data_->points_.first().y() - data_->radius_ &&
+     mev->pos().y() <= data_->points_.first().y() + data_->radius_)
   {
    data_->mTempPoint_ = data_->points_.first();
    update();
@@ -758,7 +770,7 @@ void DHAX_Image_Scene_Item::mouseMoveEvent(QMouseEvent *mouseEvent)
 void DHAX_Image_Scene_Item::mouseDoubleClickEvent(QMouseEvent *mouseEvent)
 {
 
- if(data_->pan_mode)
+ if(data_->pan_or_pull_mode())
  {
   mouseEvent->ignore();
   return;

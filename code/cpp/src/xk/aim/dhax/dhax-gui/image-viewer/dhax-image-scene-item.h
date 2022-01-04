@@ -11,6 +11,7 @@
 #include <QFrame>
 #include <QBoxLayout>
 #include <QGraphicsRectItem>
+#include <QDebug>
 
 #include "accessors.h"
 
@@ -27,6 +28,8 @@ class DHAX_Main_Window;
 class DHAX_Annotation_Instance;
 
 class DHAX_Drawn_Shape;
+
+class _Proxy_Widget;
 
 class DHAX_Image_Scene_Item : public QWidget
 {
@@ -57,7 +60,8 @@ private:
 
  DHAX_Display_Image_Data* data_;
 
- QGraphicsProxyWidget* this_proxy_widget_;
+// QGraphicsProxyWidget* this_proxy_widget_;
+ _Proxy_Widget* this_proxy_widget_;
 
  QGraphicsItem* background_item_;
 
@@ -110,7 +114,11 @@ public:
  USE_SELF_CONNECT(lambda)
 
  ACCESSORS(DHAX_Display_Image_Data* ,data)
- ACCESSORS(QGraphicsProxyWidget* ,this_proxy_widget)
+
+ ACCESSORS(_Proxy_Widget* ,this_proxy_widget)
+ //ACCESSORS(QGraphicsProxyWidget* ,this_proxy_widget)
+
+
  ACCESSORS(QPointF ,original_position)
  ACCESSORS(QGraphicsItem* ,background_item)
  ACCESSORS(DHAX_Graphics_View* ,containing_image_view)
@@ -168,7 +176,7 @@ Q_SIGNALS:
 
 protected:
  void paintEvent(QPaintEvent *);
- void mousePressEvent(QMouseEvent *mouseEvent);
+ void mousePressEvent(QMouseEvent* mouseEvent);
  void mouseReleaseEvent(QMouseEvent *mouseEvent);
  void mouseMoveEvent(QMouseEvent *mouseEvent);
  void mouseDoubleClickEvent(QMouseEvent *mouseEvent);
