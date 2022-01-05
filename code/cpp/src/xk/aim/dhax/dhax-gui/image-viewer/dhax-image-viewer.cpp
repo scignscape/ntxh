@@ -147,13 +147,17 @@ void DHAX_Image_Viewer::complete_load_image()
  _Proxy_Widget* w = scrolled_image_scene_->add_proxy_widget(image_scene_item_);
  w->setPos(sipw/2,siph/2);
 
- QGraphicsRectItem* background_center_rectangle = scrolled_image_scene_->addRect(
+ //?
+ if(background_center_rectangle_)
+   delete background_center_rectangle_;
+
+ background_center_rectangle_ = scrolled_image_scene_->addRect(
    (sipw/2) - 10, (siph/2) - 10, sipw + 20, siph + 20);
 
- image_scene_item_->set_original_position(background_center_rectangle->pos());
+ image_scene_item_->set_original_position(background_center_rectangle_->pos());
 
- background_center_rectangle->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
- background_center_rectangle->setBrush(Qt::darkCyan);
+ background_center_rectangle_->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
+ reset_background_center_rectangle_color();
 
 // QGraphicsRectItem* foreground_center_rectangle_ = scrolled_image_scene_->addRect(
 //   (sipw/2) - 10, (siph/2) - 10, sipw, siph);
@@ -167,10 +171,10 @@ void DHAX_Image_Viewer::complete_load_image()
  //foreground_center_rectangle
 
 
- w->graphicsItem()->setParentItem(background_center_rectangle);
+ w->graphicsItem()->setParentItem(background_center_rectangle_);
 
  image_scene_item_->set_this_proxy_widget(w);
- image_scene_item_->set_background_item(background_center_rectangle);
+ image_scene_item_->set_background_item(background_center_rectangle_);
 
 
  scrolled_image_pixmap_item_ = w;
@@ -179,6 +183,10 @@ void DHAX_Image_Viewer::complete_load_image()
  recenter_scroll_center();
 }
 
+void DHAX_Image_Viewer::reset_background_center_rectangle_color()
+{
+ background_center_rectangle_->setBrush(application_colors_->value("image-background-center-rectangle-color"));
+}
 
 void DHAX_Image_Viewer::load_image(QString file_path)
 {

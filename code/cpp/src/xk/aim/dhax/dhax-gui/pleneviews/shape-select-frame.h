@@ -14,13 +14,17 @@
 
 #include "global-types.h"
 
+class QLabel;
+
 
 class Shape_Select_Frame : public QFrame
 {
  Q_OBJECT
 
  QFrame* main_tab_;
+
  QFrame* clear_last_all_tab_;
+ QFrame* image_setup_tab_;
 
  QTabWidget* main_tab_widget_;
 
@@ -33,6 +37,32 @@ class Shape_Select_Frame : public QFrame
  QGridLayout* main_tab_layout_;
 
  QVBoxLayout* clear_last_all_tab_layout_;
+
+ QVBoxLayout* image_setup_tab_layout_;
+
+ QLabel* image_path_label_;
+ QLineEdit* image_path_line_edit_;
+ QPushButton* image_path_show_folder_button_;
+ QHBoxLayout* image_path_layout_;
+
+ QLabel* vertical_margin_label_;
+
+ QCheckBox* vertical_margin_percent_check_box_;
+ QLabel* vertical_margin_percent_check_box_label_;
+
+ QComboBox* vertical_margin_combo_box_;
+ QHBoxLayout* vertical_margin_layout_;
+
+ //QLabel* sides_margin_label_;
+ QCheckBox* sides_margin_check_box_;
+ QLabel* sides_margin_check_box_label_;
+ QComboBox* sides_margin_combo_box_;
+
+ QHBoxLayout* border_layout_;
+ QLabel* border_label_;
+ QComboBox* border_combo_box_;
+ QLabel* border_color_label_;
+ QPushButton* border_color_button_;
 
  QCheckBox* domain_shape_ckb_;
  QComboBox* domain_shape_options_;
@@ -47,8 +77,18 @@ class Shape_Select_Frame : public QFrame
  QCheckBox* highlight_ckb_;
 
  QHBoxLayout* save_button_layout_;
+ QCheckBox* auto_store_check_box_;
+ QPushButton* store_button_;
  QPushButton* save_button_;
  QPushButton* close_button_;
+
+ QPushButton* auto_store_config_button_;
+ QPushButton* cloud_store_button_;
+ QCheckBox* cloud_store_check_box_;
+
+ QHBoxLayout* save_and_close_layout_;
+ QVBoxLayout* save_layout_;
+ QLabel* auto_store_label_;
 
 public:
 
@@ -61,6 +101,9 @@ public:
  QString current_shape_selection();
 
  void update_shape_selection();
+
+ void set_border_color_button_color(QColor c);
+
 
  void set_clear_selected_btn_disabled()
  {
@@ -113,12 +156,15 @@ public:
   return clear_all_btn_->isEnabled();
  }
 
+ void update_image_path(QString path, u4 page_number = 0);
 
 Q_SIGNALS:
 
  void shape_selection_changed(QString new_selection);
  void save_requested(bool);
  void close_requested(bool);
+
+ void image_path_show_folder_requested(bool);
 
 };
 

@@ -11,6 +11,8 @@
 
 
 #include <QString>
+#include <QPushButton>
+#include <QColor>
 
 inline QString back_forward_button_style_sheet_()
 {
@@ -270,11 +272,18 @@ inline QString basic_button_style_sheet_()
  ;
 }
 
+inline void fill_solid_color_button(QPushButton* b, QColor c,
+  int width = 20, int height = 12)
+{
+ QPixmap pixmap(width, height);
+ pixmap.fill(c);
+ QIcon icon(pixmap);
+ b->setIcon(icon);
+}
 
 inline QString colorful_toggle_button_quiet_style_sheet_()
 {
  return
-
    "QPushButton {"
    "background-color: qlineargradient("
    "x1:0, y1:0, x2:0, y2:1,"
@@ -578,12 +587,12 @@ inline QString colorful_button_style_sheet_()
    "  border-bottom: 1px solid #CEF51D; "
    " border-radius: 6px; "
    " background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-   "  stop: 0 white, stop: 0.1 #C0C0C0, stop: 0.6 #CC"
-   "C6BC, stop: 0.8 #ECCFA0, stop: 0.9 darkred,  stop: 1 brown"
+   "  stop: 0 white, stop: 0.1 #C0C0C0, stop: 0.6 #CCC6BC,"
+   "  stop: 0.8 #ECCFA0, stop: 0.9 darkred,  stop: 1 brown"
    "); min-width: 80px; }";
 }
 
-inline QString soft_colorful_button_style_sheet_()
+inline QString soft_small_colorful_button_style_sheet_()
 {
  return
    "QPushButton:hover {background:rgb(240,190,150);"
@@ -591,12 +600,18 @@ inline QString soft_colorful_button_style_sheet_()
    " border-right: 4px ridge rgb(240,190,150); "
    "}\n"
    "QPushButton{color:black;  padding:1px;  border: 1px solid rgb(180,60,15); "
+   " font-size:%1pt; "
    "  border-bottom: 1px solid #0E15CD; "
    " border-radius: 3px; "
    " background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
    "  stop: 0 red,  stop: 0.08 white,  stop: 0.2 #E0E0C0, stop: 0.6 #EEE6CC"
    "  stop: 0.8 #FCEFE0, stop: 0.95 white,  stop: 1 brown"
    "); }";
+}
+
+inline QString soft_colorful_button_style_sheet_()
+{
+ return soft_small_colorful_button_style_sheet_().arg(10);
 }
 
 
@@ -824,10 +839,12 @@ inline QString colorful_small_button_style_sheet_()
    ;
 }
 
-inline QString colorful_small_button_style_sheet_alt_()
+inline QString light_small_button_style_sheet_()
 {
  return
-   "QPushButton {background:rgb(160,190,230);min-width: 11px;"
+   "QPushButton {"
+   " background:rgb(160,190,230);min-width: 11px;"
+   " font-size: %1pt; "
    " padding-left:2;padding-right:2;padding-top:0;padding-bottom:0;"
    " border-left: 4px groove rgb(240,190,150); "
    " border-right: 4px ridge rgb(240,190,150); "
@@ -841,16 +858,43 @@ inline QString colorful_small_button_style_sheet_alt_()
    ;
 }
 
+inline QString light_small_thin_button_style_sheet_()
+{
+ return
+   "QPushButton {"
+   " background:rgb(204,210,230);min-width: 11px;"
+   " font-size: %1pt; "
+   " padding-left:2;padding-right:2;padding-top:0;padding-bottom:0;"
+   " border-top:1px solid white; "
+   " border-bottom:none; "
+   " border-left: 2px groove rgb(240,190,150); "
+   " border-right: 2px ridge rgb(240,190,150); "
+   "}\n"
+
+   "QPushButton:hover {background:rgb(190,0,230);min-width:11px;"
+   " border-radius: 4px;padding-left:2;padding-right:2;padding-top:0;padding-bottom:0;"
+   " border-left: 2px groove rgb(240,90,240); "
+   " border-right: 2px ridge rgb(240,90,240); "
+   "}\n"
+   ;
+}
+
+
+inline QString colorful_small_button_style_sheet_alt_()
+{
+ return light_small_button_style_sheet_().arg(10);
+}
+
 
 inline QString make_basic_style_sheet_()
 {
  QString result = "QMainWindow{background:coral}"
-               "QWidget{background:none;color:black}"
-               "QMenu::item{color:black}"
-               "QMenu::item:selected{ "
-               " background-color: rgb(66, 206, 244); "
-               " } "
-               ;
+                  "QWidget{background:none;color:black}"
+                  "QMenu::item{color:black}"
+                  "QMenu::item:selected{ "
+                  " background-color: rgb(66, 206, 244); "
+                  " } "
+   ;
 
  result += basic_button_style_sheet_();
  result += tab_style_sheet_();

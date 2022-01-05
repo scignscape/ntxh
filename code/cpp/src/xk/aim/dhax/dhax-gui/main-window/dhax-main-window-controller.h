@@ -17,8 +17,11 @@
 
 class DHAX_Main_Window;
 class DHAX_Display_Image_Data;
+
 class Zoom_and_Navigate_Frame;
 class Page_and_Search_Frame;
+class Shape_Select_Frame;
+
 class DHAX_Image_Viewer;
 class DHAX_Image_Scene_Item;
 class DHAX_Main_Window_Receiver;
@@ -36,6 +39,7 @@ class DHAX_Main_Window_Controller //: public QObject
  QString current_image_file_path_;
  DHAX_Display_Image_Data* display_image_data_;
  Zoom_and_Navigate_Frame* zoom_frame_;
+ Shape_Select_Frame* shape_select_frame_;
  Page_and_Search_Frame* page_and_search_frame_;
  DHAX_Image_Viewer* image_viewer_;
  DHAX_Image_Scene_Item* image_scene_item_;
@@ -51,6 +55,7 @@ public:
  ACCESSORS(DHAX_Main_Window* ,application_main_window)
  ACCESSORS(Zoom_and_Navigate_Frame* ,zoom_frame)
  ACCESSORS(Page_and_Search_Frame* ,page_and_search_frame)
+ ACCESSORS(Shape_Select_Frame* ,shape_select_frame)
  ACCESSORS(DHAX_Display_Image_Data* ,display_image_data)
  ACCESSORS(DHAX_Image_Viewer* ,image_viewer)
  ACCESSORS(DHAX_Main_Window_Receiver* ,main_window_receiver)

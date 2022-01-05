@@ -15,6 +15,7 @@
 
 #include <QString>
 #include <QMap>
+#include <QDir>
 
 class DHAX_Main_Window;
 class DHAX_Display_Image_Data;
@@ -97,10 +98,18 @@ public:
  void send_meshlab_reset();
  void view_contours();
 
+ QString get_current_image_folder();
+ QString get_current_image_complete_base_name();
+ QDir get_current_image_dir();
+
+ void handle_image_path_show_folder_requested();
+
  void handle_view_contour_info(QString path);
  void save_current_notation(bool with_comment);
  void handle_save_requested();
  void convert_notation_to_curve();
+
+
 
  void handle_complate_and_save_requested(bool with_comment);
  void handle_polyline_save_requested(bool with_comment);

@@ -28,7 +28,7 @@ void DHAX_Graphics_View::activate_hand_drag_mode()
 
 void DHAX_Graphics_View::deactivate_hand_drag_mode()
 {
- setDragMode(ScrollHandDrag);
+ setDragMode(NoDrag);
  setInteractive(true);
 }
 

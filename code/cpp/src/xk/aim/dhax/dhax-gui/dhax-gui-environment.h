@@ -51,6 +51,8 @@ class DHAX_GUI_Environment
  DHAX_Image_Viewer* image_viewer_;
  DHAX_UDP_Controller* udp_controller_;
 
+ QMap<QString, QColor>* application_colors_;
+
  void* last_loaded_vpo_;
  QMap<QString, void*> loaded_vpos_;
 
@@ -60,6 +62,7 @@ public:
 
  ACCESSORS(void* ,last_loaded_vpo)
 
+ void init_application_colors();
  void init_main_window();
  void init_menu_system();
  void init_main_window_controller();

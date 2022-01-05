@@ -38,6 +38,7 @@
 #include "application/dhax-application-receiver.h"
 
 #include <QMessageBox>
+#include <QDesktopServices>
 
 
 #include "textio.h"
@@ -396,14 +397,45 @@ void DHAX_Application_Controller::load_notes()
 
 
 
-void DHAX_Application_Controller::handle_save_requested()
+QDir DHAX_Application_Controller::get_current_image_dir()
 {
  QString path = main_window_controller_->current_image_file_path();
 
  QFileInfo qfi(path);
- QDir qd = qfi.absoluteDir();
- QString cbn = qfi.completeBaseName();
+ return qfi.absoluteDir();
+}
 
+QString DHAX_Application_Controller::get_current_image_folder()
+{
+ QString path = main_window_controller_->current_image_file_path();
+
+ QFileInfo qfi(path);
+ return qfi.absolutePath();
+}
+
+QString DHAX_Application_Controller::get_current_image_complete_base_name()
+{
+ QString path = main_window_controller_->current_image_file_path();
+
+ QFileInfo qfi(path);
+ return qfi.completeBaseName();
+}
+
+
+void DHAX_Application_Controller::handle_image_path_show_folder_requested()
+{
+ QString f = get_current_image_folder();
+ QString path = QString::fromLatin1("file://%1").arg(f);
+ QDesktopServices::openUrl(QUrl::fromLocalFile(f));
+}
+
+
+void DHAX_Application_Controller::handle_save_requested()
+{
+ QString path = main_window_controller_->current_image_file_path();
+ QString cbn = get_current_image_complete_base_name();
+
+ QDir qd = get_current_image_dir();
  QString apath = qd.absoluteFilePath(cbn + ".notes.txt");
 
  QString file_path = QFileDialog::getSaveFileName(application_main_window_, "Select File Name", apath);

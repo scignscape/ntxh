@@ -42,6 +42,9 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
 
 
  shape_select_frame_ = new Shape_Select_Frame(this);
+ shape_select_frame_->set_border_color_button_color(application_colors_->value("image-background-center-rectangle-color"));
+
+
  zoom_frame_ = new Zoom_and_Navigate_Frame(this);
 
  zoom_frame_->setFrameShape(QFrame::NoFrame);
@@ -86,6 +89,15 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
    if(mkd.Unleft())
    {
     zoom_frame_->unindicate_temporary_modes();
+    if(display_image_data_->pan_mode())
+    {
+     display_image_data_->unset_pan_mode();
+     graphics_view_->deactivate_hand_drag_mode();
+    }
+    else if(display_image_data_->pull_mode())
+    {
+     display_image_data_->unset_pull_mode();
+    }
    }
 
    else if(mkd.Ctrl_left() || (mkd.Meta_left() && mkd.Shift_left()))
@@ -101,17 +113,17 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
     graphics_view_->activate_hand_drag_mode();
    }
 
+   else if(mkd.Unctrl_left() || (mkd.Unmeta_left() && mkd.Unshift_left()))
+   {
+    zoom_frame_->unindicate_temporary_pull_mode();
+    display_image_data_->unset_pull_mode();
+   }
+
    else if(mkd.Unshift_left() || mkd.Unmeta_left())
    {
     zoom_frame_->unindicate_temporary_pan_mode();
     display_image_data_->unset_pan_mode();
     graphics_view_->deactivate_hand_drag_mode();
-   }
-
-   else if(mkd.Unctrl_left())
-   {
-    zoom_frame_->unindicate_temporary_pull_mode();
-    display_image_data_->unset_pull_mode();
    }
 
 
@@ -148,8 +160,13 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
   Q_EMIT save_requested();
  };
 
- shape_select_frame_->self_connect(SIGNAL(close_requested(bool)), this, SIGNAL(close_requested(bool)));
+ _self_connect_(shape_select_frame_ ,image_path_show_folder_requested)
+   << [this] (bool)
+ {
+  Q_EMIT image_path_show_folder_requested();
+ };
 
+ shape_select_frame_->self_connect(SIGNAL(close_requested(bool)), this, SIGNAL(close_requested(bool)));
 
  _self_connect_(zoom_frame_ ,image_top_left_button_clicked)
    << [this](bool)

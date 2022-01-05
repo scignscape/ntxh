@@ -42,6 +42,9 @@ class DHAX_Image_Viewer : public QWidget
  QGraphicsProxyWidget* scrolled_image_pixmap_item_;
 
  QGraphicsRectItem* background_rectangle_;
+ QGraphicsRectItem* background_center_rectangle_;
+
+ const QMap<QString, QColor>* application_colors_;
 
  int background_rectangle_center_x_;
  int background_rectangle_center_y_;
@@ -73,6 +76,9 @@ public:
  ACCESSORS(DHAX_Graphics_Scene* ,scrolled_image_scene)
  ACCESSORS(QGraphicsProxyWidget* ,scrolled_image_pixmap_item)
 
+ ACCESSORS(MACRO_PASTE(const QMap<QString, QColor>*) ,application_colors)
+
+ void reset_background_center_rectangle_color();
 
  QPointF control_center(u1 index)
  {

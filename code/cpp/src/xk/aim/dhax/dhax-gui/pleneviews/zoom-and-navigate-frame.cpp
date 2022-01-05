@@ -6,7 +6,11 @@
 #include <QDebug>
 #include <QLabel>
 
+#include <QDir>
+
 #include "styles.h"
+
+#include "QFontIcon/qfonticon.h"
 
 
 Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
@@ -53,13 +57,13 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  zoom_buttons_layout_ = new QHBoxLayout;
 
- reset_zoom_button_ = new QPushButton("Reset Zoom", this);
+ reset_zoom_button_ = new QPushButton("Reset", this);
  reset_zoom_button_->setMaximumWidth(85);
 
  reset_zoom_button_->setStyleSheet(button_style_sheet());
 
 
- repeat_zoom_button_ = new QPushButton("Repeat Zoom", this);
+ repeat_zoom_button_ = new QPushButton("Repeat", this);
  repeat_zoom_button_->setMaximumWidth(85);
  repeat_zoom_button_->setStyleSheet(button_style_sheet());
  repeat_zoom_button_->setEnabled(false);
@@ -278,6 +282,21 @@ Pull Mode (second click, or right check box) moves the image/page relative to it
   Q_EMIT pan_mode_changed(state);
  });
 
+ QString check_path;
+
+ // //  set up icons
+ {
+  QString path = QDir::currentPath();
+
+  check_path = path + "/_check_icon.png";
+
+  QFontIcon::addFont(":/fontawesome.ttf");
+
+  QIcon check = FIcon(QChar(0x2713));
+  QPixmap p = check.pixmap(13, 13);
+  p.save(check_path);
+ }
+
  pan_mode_ckb_ = new QCheckBox(" ", this);
  set_multiline_tooltip(pan_mode_ckb_, "Pan Mode",
    R"(
@@ -301,10 +320,26 @@ activated by pressing the <i>shift</i> or <i>meta</i> key while moving the mouse
  });
 
  QString ckb_stylesheet = R"(QCheckBox::indicator {
-                          subcontrol-position: %1 bottom;
-                      })";
+  subcontrol-position: %1 bottom;
+ }
+ )";
 
- pan_mode_ckb_->setStyleSheet(ckb_stylesheet.arg("right"));
+ QString ckb_color_stylesheet = R"(
+QCheckBox::indicator {
+subcontrol-position: %1 bottom; border:1px solid %2;
+   }
+QCheckBox::indicator:checked {
+image: url(%3);
+   }
+QCheckBox::indicator:unchecked {
+  image: none;
+   }
+   )";
+
+ pan_mode_ckb_->setStyleSheet(ckb_color_stylesheet
+   .arg("right").arg("#E95289").arg(check_path));
+
+// qDebug() << ckb_color_stylesheet_red.arg("right").arg(check_path);
 
 // pull_mode_button_ = new QPushButton("Pull Mode", this);
 // pull_mode_button_->setMaximumWidth(75);
@@ -342,7 +377,8 @@ can be temprarily activated by pressing the <i>control</i> or
   Q_EMIT pull_mode_changed(state);
  });
 
- pull_mode_ckb_->setStyleSheet(ckb_stylesheet.arg("left"));
+ pull_mode_ckb_->setStyleSheet(ckb_color_stylesheet
+   .arg("left").arg("#60AC8F").arg(check_path));
 
 
 //? position_buttons_layout_ = new QHBoxLayout;

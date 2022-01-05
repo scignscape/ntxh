@@ -57,9 +57,15 @@ DHAX_GUI_Environment::DHAX_GUI_Environment()
      udp_controller_(nullptr),
      last_loaded_vpo_(nullptr)
 {
-
 }
 
+void DHAX_GUI_Environment::init_application_colors()
+{
+ application_colors_ = new QMap<QString, QColor>
+ {
+  {"image-background-center-rectangle-color", Qt::darkCyan}
+ };
+}
 
 DHAX_Annotation_Environment*
  DHAX_GUI_Environment::init_annotation_environment()
@@ -133,6 +139,7 @@ void DHAX_GUI_Environment::init_main_window_controller()
  main_window_controller_->set_application_main_window(main_window_);
  main_window_controller_->set_zoom_frame(graphics_frame_->zoom_frame());
  main_window_controller_->set_page_and_search_frame(graphics_frame_->page_and_search_frame());
+ main_window_controller_->set_shape_select_frame(graphics_frame_->shape_select_frame());
  main_window_controller_->set_display_image_data(graphics_frame_->display_image_data());
  main_window_controller_->set_image_viewer(image_viewer_);
  main_window_controller_->set_main_window_receiver(main_window_receiver_);
@@ -306,12 +313,20 @@ void DHAX_GUI_Environment::init_main_window_frame()
 void DHAX_GUI_Environment::init_graphics_frame()
 {
  graphics_frame_ = new DHAX_Graphics_Frame;
+ graphics_frame_->set_application_colors(application_colors_);
 
  _self_connect_(graphics_frame_ ,save_requested)
     <<  [this]()
  {
   application_controller_->handle_save_requested();
  };
+
+ _self_connect_(graphics_frame_ ,image_path_show_folder_requested)
+    <<  [this]()
+ {
+  application_controller_->handle_image_path_show_folder_requested();
+ };
+
 }
 
 void DHAX_GUI_Environment::init_graphics_scene()
@@ -333,6 +348,10 @@ void DHAX_GUI_Environment::init_image_viewer()
 
  image_viewer_->set_scrolled_image_view(graphics_view_);
  image_viewer_->set_scrolled_image_scene(graphics_scene_);
+
+ image_viewer_->set_application_colors(application_colors_);
+ //QMap<QString, QColor>*
+
 
 }
 

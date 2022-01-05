@@ -206,6 +206,18 @@ SOURCES += \
   $$SRC_DIR/libspline/aaCurve.cpp \
   $$SRC_DIR/libspline/spline.cpp \
 
+
+QFontIcon_SRC_DIR = $$SRC_ROOT_DIR/external/QFontIcon-master/QFontIcon
+
+INCLUDEPATH += $$QFontIcon_SRC_DIR/../
+
+HEADERS += $$QFontIcon_SRC_DIR/qfonticon.h
+
+SOURCES += $$QFontIcon_SRC_DIR/qfonticon.cpp
+
+RESOURCES += $$QFontIcon_SRC_DIR/../resource.qrc
+
+
 #  $$SRC_DIR/dhax-gui.cpp \
 
 

@@ -12,6 +12,7 @@
 
 #include "pleneviews/zoom-and-navigate-frame.h"
 #include "pleneviews/page-and-search-frame.h"
+#include "pleneviews/shape-select-frame.h"
 
 #include "image-viewer/dhax-image-viewer.h"
 
@@ -44,7 +45,9 @@
 
 DHAX_Main_Window_Controller::DHAX_Main_Window_Controller()
   :  display_image_data_(nullptr),
-     zoom_frame_(nullptr), page_and_search_frame_(nullptr),
+     zoom_frame_(nullptr),
+     shape_select_frame_(nullptr),
+     page_and_search_frame_(nullptr),
      image_scene_item_(nullptr),
      main_window_receiver_(nullptr),
      application_controller_(nullptr),
@@ -436,6 +439,8 @@ void DHAX_Main_Window_Controller::load_image(QString file_path)
 {
  current_image_file_path_ = file_path;
  display_image_data_->setNameSelected(true);
+
+ shape_select_frame_->update_image_path(file_path);
 
  zoom_frame_->reset_with_image_data(&current_image_file_path_);
 
