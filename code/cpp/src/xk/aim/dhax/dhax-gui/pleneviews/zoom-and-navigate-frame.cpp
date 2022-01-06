@@ -224,7 +224,7 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  connect(center_image_button_, SIGNAL(clicked(bool)),
    this, SIGNAL(center_image_button_clicked(bool)));
 
- multi_draw_ckb_ = new QCheckBox("Multi-Draw", this);
+ multi_draw_ckb_ = new QCheckBox(" ", this);
 
  //?bottom_layout_ = new QHBoxLayout;
 
@@ -237,7 +237,7 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
     Q_EMIT multi_draw_set();
  });
 
- pan_mode_button_ = new QPushButton("Pan/Pull Mode", this);
+ pan_mode_button_ = new QPushButton("Pan/Pull", this);
 
  set_multiline_tooltip(pan_mode_button_, "Set Pan or Pull Mode",
    R"(
@@ -245,8 +245,8 @@ Pan Mode (first click, or left check box) scrolls the viewport by dragging the i
 Pull Mode (second click, or right check box) moves the image/page relative to its margins
    )");
 
- pan_mode_button_->setMinimumWidth(95);
- pan_mode_button_->setMaximumWidth(95);
+ pan_mode_button_->setMinimumWidth(65);
+ pan_mode_button_->setMaximumWidth(65);
  pan_mode_button_->setMinimumHeight(21);
  pan_mode_button_->setMaximumHeight(21);
  pan_mode_button_->setCheckable(true);
@@ -324,6 +324,13 @@ activated by pressing the <i>shift</i> or <i>meta</i> key while moving the mouse
  }
  )";
 
+ QString ckb_basic_stylesheet = R"(
+QCheckBox::indicator {
+subcontrol-position: %1 bottom;
+   }
+   )";
+
+
  QString ckb_color_stylesheet = R"(
 QCheckBox::indicator {
 subcontrol-position: %1 bottom; border:1px solid %2;
@@ -338,6 +345,8 @@ QCheckBox::indicator:unchecked {
 
  pan_mode_ckb_->setStyleSheet(ckb_color_stylesheet
    .arg("right").arg("#E95289").arg(check_path));
+
+ pan_mode_ckb_->setMaximumWidth(15);
 
 // qDebug() << ckb_color_stylesheet_red.arg("right").arg(check_path);
 
@@ -380,6 +389,26 @@ can be temprarily activated by pressing the <i>control</i> or
  pull_mode_ckb_->setStyleSheet(ckb_color_stylesheet
    .arg("left").arg("#60AC8F").arg(check_path));
 
+ pull_mode_ckb_->setMaximumWidth(15);
+
+ QString two_line_label_stylesheet = R"(
+   QLabel{font-size:7pt;}
+   )";
+
+ margin_pull_mode_ckb_  = new QCheckBox(" ", this);
+ margin_pull_mode_ckb_->setMaximumWidth(15);
+ margin_pull_mode_ckb_->setStyleSheet(ckb_basic_stylesheet.arg("right"));
+ margin_pull_mode_ckb_label_ = new QLabel("Margin\nAdjust", this);
+ margin_pull_mode_ckb_label_->setStyleSheet(two_line_label_stylesheet);
+// margin_pull_mode_ckb_label_->setMaximumWidth(25);
+
+ set_multiline_tooltip(margin_pull_mode_ckb_label_, "Use Pull Mode to Adjust Sides/Margins",
+   "When checked, pulling the image/page against its background "
+   "will cause the margins to temporarily change, with the option "
+   "of keeping those changes.  Use this feature as an alternative "
+   "to setting vertical and/or side margins manually."); //, 7);
+
+ margin_pull_mode_ckb_->setToolTip(margin_pull_mode_ckb_label_->toolTip());
 
 //? position_buttons_layout_ = new QHBoxLayout;
  position_buttons_layout_ = new QGridLayout;
@@ -387,9 +416,11 @@ can be temprarily activated by pressing the <i>control</i> or
  position_buttons_layout_->addWidget(pan_mode_ckb_, 0, 0, 2, 1);//, Qt::AlignRight);
  position_buttons_layout_->addWidget(pan_mode_button_, 0, 1, 3, 1);//, Qt::AlignLeft);
  position_buttons_layout_->addWidget(pull_mode_ckb_, 0, 2, 2, 1);//, Qt::AlignLeft);
+ position_buttons_layout_->addWidget(margin_pull_mode_ckb_, 0, 3, 2, 1);//, Qt::AlignLeft);
+ position_buttons_layout_->addWidget(margin_pull_mode_ckb_label_, 0, 4, 2, 1);//, Qt::AlignLeft);
 // position_buttons_layout_->addWidget(pull_mode_button_, 0, 3, 3, 1, Qt::AlignLeft);
- position_buttons_layout_->addWidget(image_top_left_button_, 0, 4, 2, 1);
- position_buttons_layout_->addWidget(center_image_button_, 0, 6, 2, 1);
+ position_buttons_layout_->addWidget(image_top_left_button_, 0, 6, 2, 1);
+ position_buttons_layout_->addWidget(center_image_button_, 0, 8, 2, 1);
 
 // QVBoxLayout* mdlayout = new QVBoxLayout;
 // QLabel* mdlabel = new QLabel("Multi-Draw", this);
@@ -408,18 +439,22 @@ can be temprarily activated by pressing the <i>control</i> or
  position_buttons_layout_->setSpacing(0);
 
 
- multi_draw_ckb_->setText("Multi-Draw");
-
+ multi_draw_ckb_->setMaximumWidth(15);
  multi_draw_ckb_->setStyleSheet(ckb_stylesheet.arg("left"));
 
- position_buttons_layout_->addWidget(multi_draw_ckb_, 0, 8, 2, 1, Qt::AlignTop);
+ multi_draw_ckb_label_ = new QLabel("Multi\nDraw", this);
+ multi_draw_ckb_label_->setStyleSheet(two_line_label_stylesheet);
+
+
+ position_buttons_layout_->addWidget(multi_draw_ckb_, 0, 10, 2, 1); //, Qt::AlignTop);
+ position_buttons_layout_->addWidget(multi_draw_ckb_label_, 0, 11, 2, 1);// Qt::AlignTop);
 // position_buttons_layout_->addWidget(mdlabel, 1, 5, 1, 1, Qt::AlignTop);
 
- position_buttons_layout_->setColumnStretch(3, 1);
- position_buttons_layout_->setColumnMinimumWidth(3, 3);
+ position_buttons_layout_->setColumnStretch(5, 1);
  position_buttons_layout_->setColumnMinimumWidth(5, 3);
- position_buttons_layout_->setColumnStretch(7, 1);
- position_buttons_layout_->setColumnMinimumWidth(7, 10);
+ position_buttons_layout_->setColumnMinimumWidth(7, 3);
+ position_buttons_layout_->setColumnStretch(9, 1);
+// position_buttons_layout_->setColumnMinimumWidth(8, 10);
 
 //? position_buttons_layout_->addWidget(pan_mode_button_);
 // position_buttons_layout_->addStretch();

@@ -42,7 +42,7 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
 
 
  shape_select_frame_ = new Shape_Select_Frame(this);
- shape_select_frame_->set_border_color_button_color(application_colors_->value("image-background-center-rectangle-color"));
+ shape_select_frame_->update_border_color_button_color(application_colors_->value("image-background-center-rectangle-color"));
 
 
  zoom_frame_ = new Zoom_and_Navigate_Frame(this);
@@ -164,6 +164,12 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
    << [this] (bool)
  {
   Q_EMIT image_path_show_folder_requested();
+ };
+
+ _self_connect_(shape_select_frame_ ,change_border_color_requested)
+   << [this] (bool)
+ {
+  Q_EMIT change_image_border_color_requested();
  };
 
  shape_select_frame_->self_connect(SIGNAL(close_requested(bool)), this, SIGNAL(close_requested(bool)));

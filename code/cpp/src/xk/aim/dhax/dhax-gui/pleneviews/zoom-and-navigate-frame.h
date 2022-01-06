@@ -45,7 +45,11 @@ class Zoom_and_Navigate_Frame : public QFrame
 // QPushButton* pull_mode_button_;
  QCheckBox* pull_mode_ckb_;
 
+ QCheckBox* margin_pull_mode_ckb_;
+ QLabel* margin_pull_mode_ckb_label_;
+
  QCheckBox* multi_draw_ckb_;
+ QLabel* multi_draw_ckb_label_;
 //? QHBoxLayout* bottom_layout_;
 
  QSlider* zoom_slider_[3];

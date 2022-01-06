@@ -53,7 +53,6 @@ class Shape_Select_Frame : public QFrame
  QComboBox* vertical_margin_combo_box_;
  QHBoxLayout* vertical_margin_layout_;
 
- //QLabel* sides_margin_label_;
  QCheckBox* sides_margin_check_box_;
  QLabel* sides_margin_check_box_label_;
  QComboBox* sides_margin_combo_box_;
@@ -102,8 +101,11 @@ public:
 
  void update_shape_selection();
 
- void set_border_color_button_color(QColor c);
+ void update_border_color_button_color(QColor c);
 
+ void switch_to_margins_percent();
+ void switch_to_margins_non_percent();
+ void populate_margins_non_percent();
 
  void set_clear_selected_btn_disabled()
  {
@@ -165,6 +167,7 @@ Q_SIGNALS:
  void close_requested(bool);
 
  void image_path_show_folder_requested(bool);
+ void change_border_color_requested(bool);
 
 };
 

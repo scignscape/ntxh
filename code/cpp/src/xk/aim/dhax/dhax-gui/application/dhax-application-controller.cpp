@@ -8,6 +8,8 @@
 
 #include "dhax-application-controller.h"
 
+#include <QColorDialog>
+
 //#include "dhax-main-window.h"
 
 //#include "image-viewer/dhax-display-image-data.h"
@@ -15,6 +17,10 @@
 
 //
 #include "image-viewer/dhax-image-viewer.h"
+
+#include "dhax-graphics-frame.h"
+
+#include "pleneviews/shape-select-frame.h"
 
 //#include "image-viewer/dhax-image-scene-item.h"
 
@@ -78,6 +84,8 @@ USING_KANS(DGI)
 #include <QDialogButtonBox>
 #include <QComboBox>
 #include <QPlainTextEdit>
+
+#include "QtColorWidgets/color_dialog.hpp"
 
 
 class Special_Input_Dialog : public QInputDialog
@@ -419,6 +427,35 @@ QString DHAX_Application_Controller::get_current_image_complete_base_name()
 
  QFileInfo qfi(path);
  return qfi.completeBaseName();
+}
+
+
+void DHAX_Application_Controller::handle_change_image_border_color_requested()
+{
+ //QColor c = QColorDialog::getColor();
+
+ color_widgets::ColorDialog dlg;
+
+ dlg.exec();
+
+ QColor c = dlg.color();
+
+ if(!c.isValid())
+   return;
+
+ QColor& ref = (*graphics_frame_->application_colors())["image-background-center-rectangle-color"];
+
+ if(c == ref)
+   return;
+
+ ref = c;
+
+ graphics_frame_->shape_select_frame()->update_border_color_button_color(c);
+
+ //application_main_window_->
+
+ //qDebug() << c;
+ //application_colors_;
 }
 
 

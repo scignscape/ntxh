@@ -125,6 +125,7 @@ void DHAX_GUI_Environment::init_external_application_controller()
 void DHAX_GUI_Environment::init_application_controller()
 {
  application_controller_ = new DHAX_Application_Controller;
+ application_controller_->set_graphics_frame(graphics_frame_);
  application_controller_->set_udp_controller(udp_controller_);
  application_controller_->init_udp_controller();
  application_controller_->set_application_main_window(main_window_);
@@ -325,6 +326,12 @@ void DHAX_GUI_Environment::init_graphics_frame()
     <<  [this]()
  {
   application_controller_->handle_image_path_show_folder_requested();
+ };
+
+ _self_connect_(graphics_frame_ ,change_image_border_color_requested)
+    <<  [this]()
+ {
+  application_controller_->handle_change_image_border_color_requested();
  };
 
 }

@@ -98,18 +98,33 @@ subcontrol-position: left;}
  image_setup_tab_layout_->addLayout(border_layout_);
 
 
-
- vertical_margin_label_ = new QLabel("Margins", this);
+ vertical_margin_label_ = new QLabel("Margin", this);
  vertical_margin_combo_box_ = new QComboBox;
- vertical_margin_combo_box_->setMaximumWidth(40);
+ vertical_margin_combo_box_->setMaximumWidth(45);
+
+ vertical_margin_combo_box_->setEditable(true);
 
  vertical_margin_combo_box_->setContentsMargins(0,0,0,0);
+
+ vertical_margin_combo_box_->setMaxVisibleItems(11);
+ vertical_margin_combo_box_->setStyleSheet("combobox-popup: 0;");
+
 
  vertical_margin_percent_check_box_label_ = new QLabel("%", this);
  vertical_margin_percent_check_box_label_->setToolTip("Set margins as percent of image dimensions");
  vertical_margin_percent_check_box_label_->setMaximumWidth(10);
  vertical_margin_percent_check_box_ = new QCheckBox(" ", this);
  vertical_margin_percent_check_box_->setMaximumWidth(15);
+
+
+ connect(vertical_margin_percent_check_box_, &QCheckBox::clicked,
+   [this](bool state)
+ {
+  if(state)
+    switch_to_margins_percent();
+  else
+    switch_to_margins_non_percent();
+ });
 
  vertical_margin_layout_ = new QHBoxLayout;
  vertical_margin_layout_->addWidget(vertical_margin_label_);
@@ -132,6 +147,9 @@ subcontrol-position: left;}
  border_color_label_ = new QLabel("Color", this);
  border_color_button_ = new QPushButton(this);
  border_color_button_->setMaximumWidth(30);
+
+ connect(border_color_button_, SIGNAL(clicked(bool)),
+   this, SIGNAL(change_border_color_requested(bool)));
 
  vertical_margin_layout_->addSpacing(5);
 
@@ -352,7 +370,33 @@ subcontrol-position: left;}
 }
 
 
-void Shape_Select_Frame::set_border_color_button_color(QColor c)
+void Shape_Select_Frame::switch_to_margins_percent()
+{
+ vertical_margin_combo_box_->clear();
+
+ for(u1 i = 0; i <= 100; ++i)
+ {
+  vertical_margin_combo_box_->addItem(QString::number(i));
+ }
+
+}
+
+void Shape_Select_Frame::switch_to_margins_non_percent()
+{
+ vertical_margin_combo_box_->clear();
+ populate_margins_non_percent();
+}
+
+void Shape_Select_Frame::populate_margins_non_percent()
+{
+ for(u1 i = 0; i <= 250; i += 5)
+ {
+  vertical_margin_combo_box_->addItem(QString::number(i));
+ }
+}
+
+
+void Shape_Select_Frame::update_border_color_button_color(QColor c)
 {
  fill_solid_color_button(border_color_button_, c);
 }

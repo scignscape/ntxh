@@ -30,6 +30,8 @@ class DHAX_Integration_Controller;
 class DHAX_Main_Window_Controller;
 class DHAX_Application_Receiver;
 
+class DHAX_Graphics_Frame;
+
 class DHAX_Forge_Controller;
 
 class DHAX_Application_Controller //: public QObject
@@ -54,6 +56,8 @@ class DHAX_Application_Controller //: public QObject
 
  QMap<QString, DHAX_Integration_Controller*> integration_controllers_;
 
+ DHAX_Graphics_Frame* graphics_frame_;
+
  u4 autogen_index_;
 
  //?
@@ -75,6 +79,8 @@ public:
  ACCESSORS(DHAX_Application_Receiver* ,application_receiver)
 
  ACCESSORS(DHAX_Forge_Controller* ,forge_controller)
+
+ ACCESSORS(DHAX_Graphics_Frame* ,graphics_frame)
 
 // void take_screenshot();
 // void load_image();
@@ -103,6 +109,7 @@ public:
  QDir get_current_image_dir();
 
  void handle_image_path_show_folder_requested();
+ void handle_change_image_border_color_requested();
 
  void handle_view_contour_info(QString path);
  void save_current_notation(bool with_comment);

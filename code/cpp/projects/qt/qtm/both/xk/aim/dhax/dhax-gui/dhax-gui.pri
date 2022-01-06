@@ -208,14 +208,47 @@ SOURCES += \
 
 
 QFontIcon_SRC_DIR = $$SRC_ROOT_DIR/external/QFontIcon-master/QFontIcon
-
 INCLUDEPATH += $$QFontIcon_SRC_DIR/../
-
 HEADERS += $$QFontIcon_SRC_DIR/qfonticon.h
-
 SOURCES += $$QFontIcon_SRC_DIR/qfonticon.cpp
-
 RESOURCES += $$QFontIcon_SRC_DIR/../resource.qrc
+
+
+QtColorWidgets_SRC_DIR = $$SRC_ROOT_DIR/external/Qt-Color-Widgets-master
+INCLUDEPATH += $$QtColorWidgets_SRC_DIR/include
+FORMS += $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_dialog.ui
+
+
+HEADERS += \
+  $$QtColorWidgets_SRC_DIR/include/QtColorWidgets/color_dialog.hpp \
+  $$QtColorWidgets_SRC_DIR/include/QtColorWidgets/color_wheel.hpp \
+  $$QtColorWidgets_SRC_DIR/include/QtColorWidgets/hue_slider.hpp \
+  $$QtColorWidgets_SRC_DIR/include/QtColorWidgets/gradient_slider.hpp \
+  $$QtColorWidgets_SRC_DIR/include/QtColorWidgets/color_preview.hpp \
+  $$QtColorWidgets_SRC_DIR/include/QtColorWidgets/color_line_edit.hpp \
+  $$QtColorWidgets_SRC_DIR/include/QtColorWidgets/color_utils.hpp \
+  $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_names.hpp \
+
+
+SOURCES += \
+  $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_dialog.cpp \
+  $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_wheel.cpp \
+  $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/hue_slider.cpp \
+  $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/gradient_slider.cpp \
+  $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_preview.cpp \
+  $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_line_edit.cpp \
+  $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_utils.cpp \
+  $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_names.cpp \
+
+RESOURCES += \
+  $$QtColorWidgets_SRC_DIR/resources/QtColorWidgets/color_widgets.qrc
+
+# $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/utils.cpp \
+
+
+#  $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_dialog.cpp \
+#  $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_dialog.cpp \
+
 
 
 #  $$SRC_DIR/dhax-gui.cpp \
