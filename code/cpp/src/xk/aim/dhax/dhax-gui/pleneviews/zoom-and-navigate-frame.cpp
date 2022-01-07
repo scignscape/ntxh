@@ -403,10 +403,10 @@ can be temprarily activated by pressing the <i>control</i> or
 // margin_pull_mode_ckb_label_->setMaximumWidth(25);
 
  set_multiline_tooltip(margin_pull_mode_ckb_label_, "Use Pull Mode to Adjust Sides/Margins",
-   "When checked, pulling the image/page against its background "
-   "will cause the margins to temporarily change, with the option "
-   "of keeping those changes.  Use this feature as an alternative "
-   "to setting vertical and/or side margins manually."); //, 7);
+   R"(When checked, pulling the image/page against its background
+   will cause the margins to temporarily change, with the option
+   of keeping those changes.  Use this feature as an alternative
+   to setting vertical and/or side margins manually.)"); //, 7);
 
  margin_pull_mode_ckb_->setToolTip(margin_pull_mode_ckb_label_->toolTip());
 
@@ -445,6 +445,14 @@ can be temprarily activated by pressing the <i>control</i> or
  multi_draw_ckb_label_ = new QLabel("Multi\nDraw", this);
  multi_draw_ckb_label_->setStyleSheet(two_line_label_stylesheet);
 
+ set_multiline_tooltip(multi_draw_ckb_label_, "Multi-Draw Mode",
+   R"(When checked, clicking on a page/image while a provisional
+   annotation is visible will have the effect of preserving
+   that part of the annotation and creating a disjoint
+   annotation shape with multiple segments, rather
+   than delete the prior-creaeted shape and replacing it
+   with a new one.)");
+ multi_draw_ckb_->setToolTip(multi_draw_ckb_label_->toolTip());
 
  position_buttons_layout_->addWidget(multi_draw_ckb_, 0, 10, 2, 1); //, Qt::AlignTop);
  position_buttons_layout_->addWidget(multi_draw_ckb_label_, 0, 11, 2, 1);// Qt::AlignTop);

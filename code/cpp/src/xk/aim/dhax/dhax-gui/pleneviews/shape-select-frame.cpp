@@ -103,12 +103,95 @@ subcontrol-position: left;}
  vertical_margin_combo_box_->setMaximumWidth(45);
 
  vertical_margin_combo_box_->setEditable(true);
+ vertical_margin_combo_box_->setCompleter(nullptr);
 
  vertical_margin_combo_box_->setContentsMargins(0,0,0,0);
 
  vertical_margin_combo_box_->setMaxVisibleItems(11);
  vertical_margin_combo_box_->setStyleSheet("combobox-popup: 0;");
 
+// connect(vertical_margin_combo_box_, &QComboBox::currentTextChanged,
+//   [this](QString text)
+// {
+//  qDebug() << "text = " << text;
+//  if(vertical_margin_percent_check_box_->isChecked())
+//  {
+//   u1 percent = vertical_margin_combo_box_->currentIndex();
+//   qDebug() << "percent = " << percent;
+//  }
+//  else
+//  {
+
+//  }
+// });
+
+ connect(vertical_margin_combo_box_, QOverload<int>::of(&QComboBox::currentIndexChanged),
+   [this](int index)
+ {
+  bool and_sides = !sides_margin_check_box_->isChecked();
+
+  if(vertical_margin_percent_check_box_->isChecked())
+  {
+   u1 percent = vertical_margin_combo_box_->currentIndex();
+   vertical_margin_combo_box_data_.current_alt_selected_index = percent;
+   Q_EMIT change_vertical_margin_percent_requested(percent, and_sides);
+   return;
+  }
+
+//  if(vertical_margin_combo_box_data_.status_Pre_Init())
+//  {
+//   qDebug() << "V: " << (int) vertical_margin_combo_box_data_.status;
+//   vertical_margin_combo_box_data_.mark_initialized();
+//   return;
+//  }
+
+  auto [new_value, old_new] = vertical_margin_combo_box_data_.callback_over_increment_data(
+    vertical_margin_combo_box_, index, (u1) 5);
+
+  if(old_new != (u1)-1)
+    Q_EMIT new_vertical_margin_value_rescinded(old_new);
+
+  Q_EMIT change_vertical_margin_requested(new_value, and_sides);
+
+//  if(vertical_margin_combo_box_data_.status_Processing_Non_Standard_Item())
+//  {
+//   if(index > vertical_margin_combo_box_data_.max_index)
+//   {
+//    const QSignalBlocker bl(vertical_margin_combo_box_);
+//    vertical_margin_combo_box_->removeItem(vertical_margin_combo_box_data_.temp_in_process_index);
+//    vertical_margin_combo_box_data_.clear_temp_in_process_index();
+//    --index;
+//   }
+//   else
+//   {
+//    vertical_margin_combo_box_data_.clear_processing_non_standard();
+//    return;
+//   }
+//  }
+
+//  if(index > vertical_margin_combo_box_data_.max_index)
+//  {
+//   vertical_margin_combo_box_data_.mark_processing_non_standard();
+//   u1 new_value = (u1) vertical_margin_combo_box_->currentText().toUInt();
+//   u1 insert = (new_value / 5) + 1;
+//   (*vertical_margin_combo_box_data_.extra_numbers())[insert] = new_value;
+//   const QSignalBlocker bl(vertical_margin_combo_box_);
+//   vertical_margin_combo_box_->removeItem(index);
+//   vertical_margin_combo_box_->insertItem(insert, QString::number(new_value));
+//   vertical_margin_combo_box_data_.temp_in_process_index = insert;
+//   vertical_margin_combo_box_data_.current_selected_index = insert;
+//   //    vertical_margin_combo_box_data_.current_selected_index = insert;
+//   //    ++vertical_margin_combo_box_data_.max_index;
+
+//   vertical_margin_combo_box_->setCurrentIndex(insert);
+//   //mark_processing_non_standard();
+//   //vertical_margin_combo_box_->model()->sort(0);
+//  }
+//  else
+//  {
+//   vertical_margin_combo_box_data_.current_selected_index = index;
+//  }
+ });
 
  vertical_margin_percent_check_box_label_ = new QLabel("%", this);
  vertical_margin_percent_check_box_label_->setToolTip("Set margins as percent of image dimensions");
@@ -133,6 +216,7 @@ subcontrol-position: left;}
  vertical_margin_layout_->addWidget(vertical_margin_percent_check_box_label_, 0, Qt::AlignRight);
  vertical_margin_layout_->addWidget(vertical_margin_percent_check_box_, 0, Qt::AlignLeft);
 
+ populate_margins_non_percent();
 
  // vertical_margin_layout_->addStretch();
  vertical_margin_layout_->setMargin(0);
@@ -372,6 +456,10 @@ subcontrol-position: left;}
 
 void Shape_Select_Frame::switch_to_margins_percent()
 {
+ vertical_margin_combo_box_data_.clear_processing_non_standard();
+
+ QSignalBlocker sb(vertical_margin_combo_box_);
+
  vertical_margin_combo_box_->clear();
 
  for(u1 i = 0; i <= 100; ++i)
@@ -379,19 +467,51 @@ void Shape_Select_Frame::switch_to_margins_percent()
   vertical_margin_combo_box_->addItem(QString::number(i));
  }
 
+ if(vertical_margin_combo_box_data_.current_alt_selected_index != (u1)-1)
+   vertical_margin_combo_box_->setCurrentIndex(vertical_margin_combo_box_data_.current_alt_selected_index);
+
+ vertical_margin_combo_box_->setValidator(ComboBox_Data::int_validator(0, 100));
 }
 
 void Shape_Select_Frame::switch_to_margins_non_percent()
 {
- vertical_margin_combo_box_->clear();
- populate_margins_non_percent();
+ populate_margins_non_percent(true);
 }
 
-void Shape_Select_Frame::populate_margins_non_percent()
+void Shape_Select_Frame::populate_margins_non_percent(bool clear)
 {
+ QSignalBlocker sb(vertical_margin_combo_box_);
+
+ if(clear)
+   vertical_margin_combo_box_->clear();
+
+ vertical_margin_combo_box_->setValidator(ComboBox_Data::int_validator(0, 500));
+
+
  for(u1 i = 0; i <= 250; i += 5)
  {
   vertical_margin_combo_box_->addItem(QString::number(i));
+ }
+
+ if(vertical_margin_combo_box_data_.extra_items)
+ {
+  QMapIterator<u1, u2> it(*vertical_margin_combo_box_data_.extra_numbers());
+  while (it.hasNext())
+  {
+   it.next();
+   vertical_margin_combo_box_->insertItem(it.key(), QString::number(it.value()));
+  }
+ }
+
+ if(vertical_margin_combo_box_data_.status_Pre_Init())
+ {
+  vertical_margin_combo_box_data_.mark_initialized();
+  vertical_margin_combo_box_data_.max_index = 50;
+  vertical_margin_combo_box_data_.current_selected_index = 0;
+ }
+ else
+ {
+  vertical_margin_combo_box_->setCurrentIndex(vertical_margin_combo_box_data_.current_selected_index);
  }
 }
 
