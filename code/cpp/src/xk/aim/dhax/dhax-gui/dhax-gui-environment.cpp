@@ -334,6 +334,8 @@ void DHAX_GUI_Environment::init_graphics_frame()
   application_controller_->handle_change_image_border_color_requested();
  };
 
+ _self_connect_(graphics_frame_ ,change_image_margins_requested)
+    << _bind_2_(application_controller_ ,handle_change_image_margins_requested);
 }
 
 void DHAX_GUI_Environment::init_graphics_scene()

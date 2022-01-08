@@ -13,6 +13,8 @@
 
 #include "global-types.h"
 
+#include "dhax-application-state.h"
+
 #include <QString>
 #include <QMap>
 #include <QDir>
@@ -34,9 +36,9 @@ class DHAX_Graphics_Frame;
 
 class DHAX_Forge_Controller;
 
-class DHAX_Application_Controller //: public QObject
+class DHAX_Application_Controller
 {
- //Q_OBJECT
+ DHAX_Application_State application_state_;
 
  DHAX_Main_Window* application_main_window_;
 
@@ -91,6 +93,8 @@ public:
 
  DHAX_Forge_Controller* check_init_forge_controller();
 
+ void change_image_margins(QVector<u1> margins, u1 cim);
+
  void init_udp_controller();
  void dispatch_datagram(QByteArray qba);
  void init_integration_controllers();
@@ -110,6 +114,8 @@ public:
 
  void handle_image_path_show_folder_requested();
  void handle_change_image_border_color_requested();
+ void handle_change_image_margins_requested(QVector<u1> values, u1 context);
+
 
  void handle_view_contour_info(QString path);
  void save_current_notation(bool with_comment);

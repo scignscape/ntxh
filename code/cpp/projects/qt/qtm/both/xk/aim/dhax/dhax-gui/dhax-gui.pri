@@ -121,6 +121,7 @@ HEADERS += \
   $$SRC_DIR/application/dhax-forge-controller.h \
   $$SRC_DIR/application/dhax-external-application-controller.h \
   $$SRC_DIR/application/dhax-application-receiver.h \
+  $$SRC_DIR/application/dhax-application-state.h \
   $$SRC_DIR/dhax-graphics-view.h \
   $$SRC_DIR/dhax-graphics-scene.h \
   $$SRC_DIR/dhax-gui-environment.h \
@@ -168,6 +169,7 @@ SOURCES += \
   $$SRC_DIR/pdf-viewer/pdf-document-info.cpp \
   $$SRC_DIR/pdf-viewer/pdf-document-state.cpp \
   $$SRC_DIR/application/dhax-application-controller.cpp \
+  $$SRC_DIR/application/dhax-application-state.cpp \
   $$SRC_DIR/application/dhax-forge-controller.cpp \
   $$SRC_DIR/application/dhax-application-receiver.cpp \
   $$SRC_DIR/application/dhax-external-application-controller.cpp \

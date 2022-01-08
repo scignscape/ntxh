@@ -429,6 +429,68 @@ QString DHAX_Application_Controller::get_current_image_complete_base_name()
  return qfi.completeBaseName();
 }
 
+void DHAX_Application_Controller::handle_change_image_margins_requested(QVector<u1> values,
+  u1 context)
+{
+ DHAX_Application_State::Image_Margins& im = application_state_.image_margins();
+
+ DHAX_Graphics_Frame::Change_Image_Margins cim = (DHAX_Graphics_Frame::Change_Image_Margins) context;
+
+ switch(cim)
+ {
+ case DHAX_Graphics_Frame::Change_Image_Margins::Vertical:
+  im.top = im.bottom = values.value(0); break;
+ case DHAX_Graphics_Frame::Change_Image_Margins::Vertical2:
+  im.top = values.value(0); im.bottom = values.value(1); break;
+ case DHAX_Graphics_Frame::Change_Image_Margins::Horizontal:
+  im.left = im.right = values.value(0); break;
+ case DHAX_Graphics_Frame::Change_Image_Margins::Horizontal2:
+  im.left = values.value(0); im.right = values.value(1); break;
+ case DHAX_Graphics_Frame::Change_Image_Margins::Vertical_and_Horizontal:
+  im.top = im.bottom = im.left = im.right = values.value(0);
+  break;
+ case DHAX_Graphics_Frame::Change_Image_Margins::Vertical_and_Horizontal2:
+  im.top = im.bottom = values.value(0);
+  im.left = im.right = values.value(1);
+  break;
+ case DHAX_Graphics_Frame::Change_Image_Margins::Vertical_and_Horizontal4:
+  im.top = values.value(0); im.bottom = values.value(1);
+  im.left = values.value(3); im.right = values.value(4);
+  break;
+
+ case DHAX_Graphics_Frame::Change_Image_Margins::Vertical_Percent:
+  im.percent.top = im.percent.bottom = values.value(0); break;
+ case DHAX_Graphics_Frame::Change_Image_Margins::Vertical2_Percent:
+  im.percent.top = values.value(0); im.percent.bottom = values.value(1); break;
+ case DHAX_Graphics_Frame::Change_Image_Margins::Horizontal_Percent:
+  im.percent.left = im.percent.right = values.value(0); break;
+ case DHAX_Graphics_Frame::Change_Image_Margins::Horizontal2_Percent:
+  im.percent.left = values.value(0); im.percent.right = values.value(1); break;
+ case DHAX_Graphics_Frame::Change_Image_Margins::Vertical_and_Horizontal_Percent:
+  im.percent.top = im.percent.bottom = im.percent.left = im.percent.right = values.value(0);
+  break;
+ case DHAX_Graphics_Frame::Change_Image_Margins::Vertical_and_Horizontal2_Percent:
+  im.percent.top = im.percent.bottom = values.value(0);
+  im.percent.left = im.percent.right = values.value(1);
+  break;
+ case DHAX_Graphics_Frame::Change_Image_Margins::Vertical_and_Horizontal4_Percent:
+  im.percent.top = values.value(0); im.percent.bottom = values.value(1);
+  im.percent.left = values.value(3); im.percent.right = values.value(4);
+  break;
+
+ case DHAX_Graphics_Frame::Change_Image_Margins::Image_Border1:
+  im.border.top = im.border.bottom = im.border.left = im.border.right = values.value(0);
+  break;
+ case DHAX_Graphics_Frame::Change_Image_Margins::Image_Border2:
+  im.border.top = im.border.bottom = values.value(0);
+  im.border.left = im.border.right = values.value(1);
+  break;
+ case DHAX_Graphics_Frame::Change_Image_Margins::Image_Border4:
+  im.border.top = values.value(0); im.border.bottom = values.value(1);
+  im.border.left = values.value(3); im.border.right = values.value(4);
+  break;
+ }
+}
 
 void DHAX_Application_Controller::handle_change_image_border_color_requested()
 {

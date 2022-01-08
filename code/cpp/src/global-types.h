@@ -53,6 +53,66 @@ struct _self_connect_package
 #define _self_connect_(x, y) \
   x->_self_connect(&std::remove_reference<decltype(*x)>::type::y)
 
+#define _bind_0_(x, y) \
+  std::bind(&std::remove_reference<decltype(*x)>::type::y, x)
+
+#define _std_placeholders_1 std::placeholders::_1
+#define _std_placeholders_2 std::placeholders::_1, std::placeholders::_2
+#define _std_placeholders_3 std::placeholders::_1, std::placeholders::_2, \
+  std::placeholders::_3
+
+#define _std_placeholders_4 std::placeholders::_1, std::placeholders::_2, \
+  std::placeholders::_3, std::placeholders::_4
+#define _std_placeholders_5 std::placeholders::_1, std::placeholders::_2, \
+  std::placeholders::_3, std::placeholders::_4, std::placeholders::_5
+#define _std_placeholders_6 std::placeholders::_1, std::placeholders::_2, \
+  std::placeholders::_3, std::placeholders::_4, std::placeholders::_5, \
+  std::placeholders::_6
+#define _std_placeholders_7 std::placeholders::_1, std::placeholders::_2, \
+  std::placeholders::_3, std::placeholders::_4, std::placeholders::_5, \
+  std::placeholders::_6, std::placeholders::_7
+#define _std_placeholders_8 std::placeholders::_1, std::placeholders::_2, \
+  std::placeholders::_3, std::placeholders::_4, std::placeholders::_5, \
+  std::placeholders::_6, std::placeholders::_7, std::placeholders::_8
+#define _std_placeholders_9 std::placeholders::_1, std::placeholders::_2, \
+  std::placeholders::_3, std::placeholders::_4, std::placeholders::_5, \
+  std::placeholders::_6, std::placeholders::_7, std::placeholders::_8, \
+  std::placeholders::_9
+
+#define _bind_1_(x, y) \
+  std::bind(&std::remove_reference<decltype(*x)>::type::y, x, std_placeholders_1)
+
+#define _bind_2_(x, y) \
+  std::bind(&std::remove_reference<decltype(*x)>::type::y, x, \
+  _std_placeholders_2)
+
+#define _bind_3_(x, y) \
+  std::bind(&std::remove_reference<decltype(*x)>::type::y, x, \
+  _std_placeholders_3)
+
+#define _bind_4_(x, y) \
+  std::bind(&std::remove_reference<decltype(*x)>::type::y, x, \
+  _std_placeholders_4)
+
+#define _bind_5_(x, y) \
+  std::bind(&std::remove_reference<decltype(*x)>::type::y, x, \
+  _std_placeholders_5)
+
+#define _bind_6_(x, y) \
+  std::bind(&std::remove_reference<decltype(*x)>::type::y, x, \
+  _std_placeholders_6)
+
+#define _bind_7_(x, y) \
+  std::bind(&std::remove_reference<decltype(*x)>::type::y, x, \
+  _std_placeholders_7)
+
+#define _bind_8_(x, y) \
+  std::bind(&std::remove_reference<decltype(*x)>::type::y, x, \
+  _std_placeholders_8)
+
+#define _bind_9_(x, y) \
+  std::bind(&std::remove_reference<decltype(*x)>::type::y, x, \
+  _std_placeholders_9)
 
 //#define selfconnect_(x, y, z) x->self_connect_(\
 //  &std::remove_reference<decltype(*x)>::type::y, z,

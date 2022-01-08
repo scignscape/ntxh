@@ -172,6 +172,24 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
   Q_EMIT change_image_border_color_requested();
  };
 
+
+ _self_connect_(shape_select_frame_ ,change_vertical_margin_percent_requested)
+   << [this] (u1 xy, bool and_sides)
+ {
+  if(and_sides)
+    Q_EMIT change_image_margins_requested({xy},
+       (u1) Change_Image_Margins::Vertical_and_Horizontal_Percent);
+
+  else
+    Q_EMIT change_image_margins_requested({xy, xy},
+       (u1) Change_Image_Margins::Vertical_Percent);
+
+  //Q_EMIT change_image_border_color_requested();
+ };
+
+
+ //change_vertical_margin_percent_requested
+
  shape_select_frame_->self_connect(SIGNAL(close_requested(bool)), this, SIGNAL(close_requested(bool)));
 
  _self_connect_(zoom_frame_ ,image_top_left_button_clicked)

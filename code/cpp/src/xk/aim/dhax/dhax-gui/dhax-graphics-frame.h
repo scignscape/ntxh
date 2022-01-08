@@ -64,6 +64,16 @@ public:
  void setup_shape_ellipse();
  void setup_highlight(bool checked);
 
+ enum class Change_Image_Margins {
+   Vertical, Vertical2, Horizontal, Horizontal2, Vertical_and_Horizontal,
+   Vertical_and_Horizontal2, Vertical_and_Horizontal4,
+   Vertical_Percent, Vertical2_Percent, Horizontal_Percent,
+   Horizontal2_Percent, Vertical_and_Horizontal_Percent,
+   Vertical_and_Horizontal2_Percent, Vertical_and_Horizontal4_Percent,
+   Image_Border1, Image_Border2, Image_Border4,
+ };
+
+
 
 Q_SIGNALS:
 
@@ -71,6 +81,7 @@ Q_SIGNALS:
  void save_requested();
  void image_path_show_folder_requested();
  void change_image_border_color_requested();
+ void change_image_margins_requested(QVector<u1>, u1);
 
 
 public Q_SLOTS:
