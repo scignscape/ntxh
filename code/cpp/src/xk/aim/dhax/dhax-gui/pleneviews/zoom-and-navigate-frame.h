@@ -12,10 +12,30 @@
 #include <QButtonGroup>
 #include <QGroupBox>
 
+#include <QDebug>
+#include <QString>
+
 //
 #include "subwindows/range-slider.h"
 
 #include "global-types.h"
+
+#include "styles.h"
+
+//#define SIGMA_INCLUDES(inc) inc(sigma-multiline, sigma-test)
+
+//#define SIGMA_INCLUDES \
+//#include "sigma-multiline.h"\
+//#include "sigma-test.h"\
+
+
+//#define SIGMA_INC  "sigmas/sigma-multiline.h"
+
+//#define SIGMA_INC(inc)  inc(sigma-multiline) //, sigma-test)
+//#ifdef SIGMA_INC
+
+//#define SIGMA_INC(sigma-multiline) //  inc(sigma-multiline) //, sigma-test)
+//#endif
 
 #include "accessors.h"
 
@@ -26,6 +46,11 @@ class QLabel;
 class Zoom_and_Navigate_Frame : public QFrame
 {
  Q_OBJECT
+
+ #define _sigma_ns_(global)
+ #define _my_sigma_(includes) \
+ includes(tooltip, sigma-test)
+ #include "sigma.h"
 
  QPushButton* zoom_in_button_;
  QPushButton* zoom_out_button_;

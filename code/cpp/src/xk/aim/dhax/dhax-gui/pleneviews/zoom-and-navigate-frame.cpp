@@ -402,13 +402,17 @@ can be temprarily activated by pressing the <i>control</i> or
  margin_pull_mode_ckb_label_->setStyleSheet(two_line_label_stylesheet);
 // margin_pull_mode_ckb_label_->setMaximumWidth(25);
 
- set_multiline_tooltip(margin_pull_mode_ckb_label_, "Use Pull Mode to Adjust Sides/Margins",
+ sigma(margin_pull_mode_ckb_label_)->set_multiline_tooltip(
+   "Use Pull Mode to Adjust Sides/Margins",
    R"(When checked, pulling the image/page against its background
    will cause the margins to temporarily change, with the option
    of keeping those changes.  Use this feature as an alternative
-   to setting vertical and/or side margins manually.)"); //, 7);
+   to setting vertical and/or side margins manually.)");
 
- margin_pull_mode_ckb_->setToolTip(margin_pull_mode_ckb_label_->toolTip());
+ sigma(margin_pull_mode_ckb_label_, margin_pull_mode_ckb_)->share_tooltip();
+
+
+ //margin_pull_mode_ckb_->setToolTip(margin_pull_mode_ckb_label_->toolTip());
 
 //? position_buttons_layout_ = new QHBoxLayout;
  position_buttons_layout_ = new QGridLayout;

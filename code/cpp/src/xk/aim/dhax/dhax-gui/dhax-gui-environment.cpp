@@ -317,22 +317,13 @@ void DHAX_GUI_Environment::init_graphics_frame()
  graphics_frame_->set_application_colors(application_colors_);
 
  _self_connect_(graphics_frame_ ,save_requested)
-    <<  [this]()
- {
-  application_controller_->handle_save_requested();
- };
+    << _bind_0_(application_controller_ ,handle_save_requested);
 
  _self_connect_(graphics_frame_ ,image_path_show_folder_requested)
-    <<  [this]()
- {
-  application_controller_->handle_image_path_show_folder_requested();
- };
+    << _bind_0_(application_controller_ ,handle_image_path_show_folder_requested);
 
  _self_connect_(graphics_frame_ ,change_image_border_color_requested)
-    <<  [this]()
- {
-  application_controller_->handle_change_image_border_color_requested();
- };
+    << _bind_0_(application_controller_ ,handle_change_image_border_color_requested);
 
  _self_connect_(graphics_frame_ ,change_image_margins_requested)
     << _bind_2_(application_controller_ ,handle_change_image_margins_requested);

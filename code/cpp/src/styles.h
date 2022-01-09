@@ -71,6 +71,23 @@ inline QString light_back_forward_button_style_sheet_green_()
  return light_back_forward_button_style_sheet_().arg(13).arg("normal").arg("#116f63");
 }
 
+template<typename WIDGET1_Type, typename WIDGET2_Type>
+inline void share_tooltip(WIDGET1_Type* w1, WIDGET2_Type* w2)
+{
+ w2->setToolTip(w1->toolTip());
+}
+
+//template<typename WIDGET1_Type, typename WIDGET2_Type>
+//inline void share_tooltip(WIDGET1_Type* w1, WIDGET2_Type* w2)
+//{
+// w2->setToolTip(w1->toolTip());
+//}
+
+//template<typename WIDGET1_Type, typename WIDGET2_Type>
+//inline void share_tooltip(QPair<WIDGET1_Type*, WIDGET2_Type*>* ws)
+//{
+// share_tooltip(ws->first, ws->second);
+//}
 
 template<typename WIDGET_Type>
 inline void set_multiline_tooltip(WIDGET_Type* w, QString top, QString bottom)
