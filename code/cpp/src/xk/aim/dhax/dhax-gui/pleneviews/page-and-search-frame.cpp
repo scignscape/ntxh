@@ -81,10 +81,10 @@ Page_and_Search_Frame::Page_and_Search_Frame(QWidget* parent)
  page_last_button_ = new QPushButton(this);
  page_last_button_->setToolTip("Last Page");
 
- make_light_double_back_button(page_first_button_);
- make_light_back_button(page_back_button_);
- make_light_forward_button(page_forward_button_);
- make_light_double_forward_button(page_last_button_);
+ sigma(page_first_button_)->make_light_double_back_button();
+ sigma(page_back_button_)->make_light_back_button();
+ sigma(page_forward_button_)->make_light_forward_button();
+ sigma(page_last_button_)->make_light_double_forward_button();
 
  page_navigate_layout_->addWidget(page_first_button_);
  page_navigate_layout_->addSpacing(2);
@@ -142,8 +142,8 @@ Page_and_Search_Frame::Page_and_Search_Frame(QWidget* parent)
 
  special_back_button_ = new QPushButton(this);
  special_forward_button_ = new QPushButton(this);
- make_light_special_back_button(special_back_button_);
- make_light_special_forward_button(special_forward_button_);
+ sigma(special_back_button_)->make_light_special_back_button();
+ sigma(special_forward_button_)->make_light_special_forward_button();
 
  special_navigate_layout_->addWidget(special_select_);
  special_navigate_layout_->addSpacing(3);
@@ -172,9 +172,9 @@ Page_and_Search_Frame::Page_and_Search_Frame(QWidget* parent)
  search_from_top_button_ = new QPushButton(this);
  search_from_top_button_->setToolTip("Search From Top");
 
- make_up_button(search_up_button_);
- make_down_button(search_down_button_);
- make_top_down_button(search_from_top_button_);
+ sigma(search_up_button_)->make_up_button();
+ sigma(search_down_button_)->make_down_button();
+ sigma(search_from_top_button_)->make_top_down_button();
 
  search_layout_->addWidget(search_up_button_);
  search_layout_->addSpacing(2);

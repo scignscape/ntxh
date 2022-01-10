@@ -49,7 +49,7 @@ class Zoom_and_Navigate_Frame : public QFrame
 
  #define _sigma_ns_(global)
  #define _my_sigma_(includes) \
- includes(tooltip, sigma-test)
+ includes(tooltip, buttons)
  #include "sigma.h"
 
  QPushButton* zoom_in_button_;

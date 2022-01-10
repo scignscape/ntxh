@@ -5,7 +5,7 @@
 //    (See accompanying file LICENSE_1_0.txt or copy at
 //          http://www.boost.org/LICENSE_1_0.txt)
 
-
+//make_up_button
 void sigma_test(QString arg)
 {
  qDebug() << "Sigma test: " << arg;

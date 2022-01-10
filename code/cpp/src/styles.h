@@ -14,6 +14,8 @@
 #include <QPushButton>
 #include <QColor>
 
+#include "global-types.h"
+
 inline QString back_forward_button_style_sheet_()
 {
  return R"(
@@ -99,20 +101,58 @@ inline void set_multiline_tooltip(WIDGET_Type* w, QString top, QString bottom)
 }
 
 template<typename WIDGET_Type>
+inline void make_unicode_text(WIDGET_Type* w, u4 code_point)
+{
+ u2 low = code_point & 0x0000FFFF;
+ if(low == code_point)
+ {
+  // // only two bytes
+  QString unicode = QString(QChar(low));
+  w->setText(unicode);
+ }
+ else
+ {
+  code_point >>= 16;
+  const u1 array[4]  {(u1)(code_point >> 8), (u1)(code_point & 0xFF), (u1)(low >> 8), (u1)(low & 0xFF)};
+  QString unicode = QString::fromUtf8((const char*)array, 4);
+  w->setText(unicode);
+ }
+}
+
+template<typename WIDGET_Type>
+inline void make_unicode_text(WIDGET_Type* w, u4 code_point, QString style_sheet)
+{
+ make_unicode_text(w, code_point);
+ w->setStyleSheet(style_sheet);
+}
+
+template<typename WIDGET_Type>
+inline void make_unicode_text(WIDGET_Type* w, u4 code_point,
+  QString style_sheet, u1 width, u1 height)
+{
+ make_unicode_text(w, code_point);
+ w->setStyleSheet(style_sheet);
+ w->setMaximumWidth(width);
+ w->setMaximumHeight(height);
+}
+
+template<typename WIDGET_Type>
 inline void make_up_button(WIDGET_Type* w)
 {
- QString unicode = QString(QChar(0x219F));
- w->setText(unicode);
- w->setStyleSheet(light_back_forward_button_style_sheet_red_());
- w->setMaximumWidth(20);
- w->setMaximumHeight(15);
+ make_unicode_text(w, 0x219F, light_back_forward_button_style_sheet_red_(), 20, 15);
+// QString unicode = QString(QChar(0x219F));
+// w->setText(unicode);
+// w->setStyleSheet(light_back_forward_button_style_sheet_red_());
+// w->setMaximumWidth(20);
+// w->setMaximumHeight(15);
 }
 
 template<typename WIDGET_Type>
 inline void make_down_button(WIDGET_Type* w)
 {
- QString unicode = QString(QChar(0x21A1));
- w->setText(unicode);
+ make_unicode_text(w, 0x21A1);
+// QString unicode = QString(QChar(0x21A1));
+// w->setText(unicode);
  w->setStyleSheet(light_back_forward_button_style_sheet_red_());
  w->setMaximumWidth(20);
  w->setMaximumHeight(15);
@@ -121,8 +161,9 @@ inline void make_down_button(WIDGET_Type* w)
 template<typename WIDGET_Type>
 inline void make_top_down_button(WIDGET_Type* w)
 {
- QString unicode = QString(QChar(0x21A7));
- w->setText(unicode);
+ make_unicode_text(w, 0x21A7);
+// QString unicode = QString(QChar(0x21A7));
+// w->setText(unicode);
  w->setStyleSheet(light_back_forward_button_style_sheet_red_());
  w->setMaximumWidth(20);
  w->setMaximumHeight(15);
@@ -133,8 +174,9 @@ template<typename WIDGET_Type>
 inline void make_back_button(WIDGET_Type* w)
 {
  //QString unicode = QString("%1").arg(QChar(5189));
- QString unicode = QString(QChar(0x27F8));
- w->setText(unicode);
+ make_unicode_text(w, 0x27F8);
+// QString unicode = QString(QChar(0x27F8));
+// w->setText(unicode);
  w->setStyleSheet(back_forward_button_style_sheet_());
  w->setMaximumWidth(25);
  w->setMaximumHeight(15);
@@ -143,8 +185,9 @@ inline void make_back_button(WIDGET_Type* w)
 template<typename WIDGET_Type>
 inline void make_light_back_button(WIDGET_Type* w)
 {
- QString unicode = QString::fromUtf8(QByteArray::fromHex("F09FA0B8"));
- w->setText(unicode);
+ make_unicode_text(w, 0xF09FA0B8);
+// QString unicode = QString::fromUtf8(QByteArray::fromHex("F09FA0B8"));
+// w->setText(unicode);
  w->setStyleSheet(light_back_forward_button_style_sheet_blue_());
  w->setMaximumWidth(20);
  w->setMaximumHeight(15);
@@ -153,8 +196,9 @@ inline void make_light_back_button(WIDGET_Type* w)
 template<typename WIDGET_Type>
 inline void make_light_special_back_button(WIDGET_Type* w)
 {
- QString unicode = QString(QChar(0x21E0));
- w->setText(unicode);
+ make_unicode_text(w, 0x21E0);
+// QString unicode = QString(QChar(0x21E0));
+// w->setText(unicode);
  w->setStyleSheet(light_back_forward_button_style_sheet_green_());
  w->setMaximumWidth(19);
  w->setMaximumHeight(15);
@@ -163,8 +207,9 @@ inline void make_light_special_back_button(WIDGET_Type* w)
 template<typename WIDGET_Type>
 inline void make_light_double_back_button(WIDGET_Type* w)
 {
- QString unicode = QString(QChar(0x219E));
- w->setText(unicode);
+ make_unicode_text(w, 0x219E);
+// QString unicode = QString(QChar(0x219E));
+// w->setText(unicode);
  w->setStyleSheet(light_back_forward_button_style_sheet_blue_());
  w->setMaximumWidth(20);
  w->setMaximumHeight(15);
@@ -174,8 +219,10 @@ template<typename WIDGET_Type>
 inline void make_forward_button(WIDGET_Type* w)
 {
 // QString unicode = QString("%1").arg(QChar(5184));
- QString unicode = QString(QChar(0x27F9));
- w->setText(unicode);
+
+ make_unicode_text(w, 0x27F9);
+// QString unicode = QString(QChar(0x27F9));
+// w->setText(unicode);
  w->setStyleSheet(back_forward_button_style_sheet_());
  w->setMaximumWidth(25);
  w->setMaximumHeight(15);
@@ -184,8 +231,9 @@ inline void make_forward_button(WIDGET_Type* w)
 template<typename WIDGET_Type>
 inline void make_light_forward_button(WIDGET_Type* w)
 {
- QString unicode = QString::fromUtf8(QByteArray::fromHex("F09FA0BA"));
- w->setText(unicode);
+ make_unicode_text(w, 0xF09FA0BA);
+// QString unicode = QString::fromUtf8(QByteArray::fromHex("F09FA0BA"));
+// w->setText(unicode);
  w->setStyleSheet(light_back_forward_button_style_sheet_blue_());
  w->setMaximumWidth(20);
  w->setMaximumHeight(15);
@@ -194,8 +242,9 @@ inline void make_light_forward_button(WIDGET_Type* w)
 template<typename WIDGET_Type>
 inline void make_light_special_forward_button(WIDGET_Type* w)
 {
- QString unicode = QString(QChar(0x21E2));
- w->setText(unicode);
+ make_unicode_text(w, 0x21E2);
+// QString unicode = QString(QChar(0x21E2));
+// w->setText(unicode);
  w->setStyleSheet(light_back_forward_button_style_sheet_green_());
  w->setMaximumWidth(19);
  w->setMaximumHeight(15);
@@ -204,12 +253,14 @@ inline void make_light_special_forward_button(WIDGET_Type* w)
 template<typename WIDGET_Type>
 inline void make_light_double_forward_button(WIDGET_Type* w)
 {
- QString unicode = QString(QChar(0x21A0));
- w->setText(unicode);
+ make_unicode_text(w, 0x21A0);
+// QString unicode = QString(QChar(0x21A0));
+// w->setText(unicode);
  w->setStyleSheet(light_back_forward_button_style_sheet_blue_());
  w->setMaximumWidth(20);
  w->setMaximumHeight(15);
 }
+
 
 inline QString basic_button_style_sheet_()
 {

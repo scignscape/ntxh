@@ -18,6 +18,8 @@
 
 #include "accessors.h"
 
+#include "styles.h"
+
 class Page_and_Search_Frame_Info
 {
  QStringList print_page_numbers_;
@@ -37,6 +39,12 @@ public:
 class Page_and_Search_Frame : public QFrame
 {
  Q_OBJECT
+
+ #define _sigma_ns_(global)
+ #define _my_sigma_(includes) \
+ includes(buttons)
+ #include "sigma.h"
+
 
  Page_and_Search_Frame_Info info_;
 
@@ -84,8 +92,7 @@ public:
 
  Page_and_Search_Frame(QWidget* parent);
 
- USE_SELF_CONNECT(normal)
- USE_SELF_CONNECT(lambda)
+ USE_SELF_CONNECT(normal, lambda)
 
  void reset_page_count(u4 last_page);
 

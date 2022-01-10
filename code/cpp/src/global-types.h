@@ -15,6 +15,8 @@
 
 #include <functional>
 
+#include "global-macros.h"
+
 
 #define USE_SELF_CONNECT_normal \
  template<typename ... ARGS> \
@@ -32,10 +34,12 @@ auto _self_connect(MFN_Type mfn) \
 } \
 
 
-#define USE_SELF_CONNECT(x) USE_SELF_CONNECT_##x
+#define USE_SELF_CONNECT_1(x) USE_SELF_CONNECT_##x
+#define USE_SELF_CONNECT_2(x, y) USE_SELF_CONNECT_##x USE_SELF_CONNECT_##y
 
-//#define _self_connect_(x, y, z, w) x->self_connect_(\
-//  &std::remove_reference<decltype(*x)>::type::y, z, w)
+#define USE_SELF_CONNECT(...) \
+  _preproc_CONCAT(USE_SELF_CONNECT_, _preproc_NUM_ARGS (__VA_ARGS__))(__VA_ARGS__)
+
 
 template<typename OBJ_Type, typename MFN_Type>
 struct _self_connect_package

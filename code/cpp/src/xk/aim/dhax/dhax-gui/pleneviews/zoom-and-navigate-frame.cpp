@@ -34,8 +34,8 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  zoom_in_button_ = new QPushButton(this);
  zoom_out_button_ = new QPushButton(this);
- make_back_button(zoom_out_button_);
- make_forward_button(zoom_in_button_);
+ sigma(zoom_out_button_)->make_back_button();
+ sigma(zoom_in_button_)->make_forward_button();
 
 // QString s1 = QString("%1").arg(QChar(5184));
 // zoom_in_button_ = new QPushButton(s1, this);
@@ -202,7 +202,7 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
 
 
- set_multiline_tooltip(image_top_left_button_, "Image Top Left",
+ sigma(image_top_left_button_)->set_multiline_tooltip("Image Top Left",
    "Positions image so that its top-left corner coincides with top-left corner of the viewport.");
  image_top_left_button_->setMinimumWidth(50);
  image_top_left_button_->setMaximumHeight(20);
@@ -212,7 +212,7 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  center_image_button_ = new QPushButton(QChar(0x29C9), this);
  center_image_button_->setMinimumWidth(50);
  center_image_button_->setMaximumHeight(20);
- set_multiline_tooltip(center_image_button_, "Center Image",
+ sigma(center_image_button_)->set_multiline_tooltip("Center Image",
    "Positions image so that the viewport is centered on its center.");
 
  center_image_button_->setStyleSheet(button_style_sheet(15));
@@ -239,7 +239,7 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  pan_mode_button_ = new QPushButton("Pan/Pull", this);
 
- set_multiline_tooltip(pan_mode_button_, "Set Pan or Pull Mode",
+ sigma(pan_mode_button_)->set_multiline_tooltip("Set Pan or Pull Mode",
    R"(
 Pan Mode (first click, or left check box) scrolls the viewport by dragging the image;
 Pull Mode (second click, or right check box) moves the image/page relative to its margins
@@ -298,7 +298,7 @@ Pull Mode (second click, or right check box) moves the image/page relative to it
  }
 
  pan_mode_ckb_ = new QCheckBox(" ", this);
- set_multiline_tooltip(pan_mode_ckb_, "Pan Mode",
+ sigma(pan_mode_ckb_)->set_multiline_tooltip("Pan Mode",
    R"(
 Scrolls the viewport when dragging the image; can be temprarily
 activated by pressing the <i>shift</i> or <i>meta</i> key while moving the mouse
@@ -362,7 +362,7 @@ QCheckBox::indicator:unchecked {
 // });
 
  pull_mode_ckb_ = new QCheckBox(" ", this);
- set_multiline_tooltip(pull_mode_ckb_, "Pull Mode",
+ sigma(pull_mode_ckb_)->set_multiline_tooltip("Pull Mode",
    R"(
 In this mode, dragging causes the image to move relative to its
 margins (top/left margins decrease while bottom/right increase or vice-verse);
