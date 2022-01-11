@@ -93,6 +93,50 @@ class Shape_Select_Frame : public QFrame
  QVBoxLayout* save_layout_;
  QLabel* auto_store_label_;
 
+ //struct
+ template<typename OBJECT_Type>
+ struct connector
+ {
+  //template<typename ...Args>
+  template<typename ftype>
+  struct slot_type
+  {
+   typedef ftype pmfn; //   (OBJECT_Type::*pmfn)(Args...);
+   static pmfn get_pmfn(QString fname, pmfn add = nullptr)
+   {
+    static QMap<QString, pmfn> static_map;
+    pmfn result = static_map.value(fname);
+    if(add)
+    {
+     static_map[fname] = add;
+    }
+    return result;
+   }
+  };
+  OBJECT_Type* obj;
+
+  template<typename SOBJECT_Type, typename ...Args>
+  static void add_pmfn(QString name, void (SOBJECT_Type::*add)(Args...))
+  {
+   //typedef void (SOBJECT_Type::*ft)(Args...);
+   slot_type<void (OBJECT_Type::*)(Args...)>::get_pmfn(name, add);
+  }
+
+  //template<typename THIS_Type, typename FN_Type> //, typename ...ARGS>
+  template<typename THIS_Type, typename ...Args>
+  void Cnct(QString mfn, THIS_Type* _this, void(THIS_Type::*fn)(Args...) )
+  {
+   auto _mfn = slot_type<void(OBJECT_Type::*)(Args...)>::get_pmfn(mfn);
+   //typename slot_type<bool>::pmfn _mfn
+   //  = slot_type<bool>::get_pmfn(mfn);
+   obj->connect(obj, _mfn, _this, fn);
+  }
+ };
+
+ template<typename OBJECT_Type>
+ connector<OBJECT_Type>
+ Cc(OBJECT_Type* obj) { return {obj}; }
+
 public:
 
  Shape_Select_Frame(QWidget* parent);

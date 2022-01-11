@@ -232,8 +232,43 @@ subcontrol-position: left;}
  border_color_button_ = new QPushButton(this);
  border_color_button_->setMaximumWidth(30);
 
- connect(border_color_button_, SIGNAL(clicked(bool)),
-   this, SIGNAL(change_border_color_requested(bool)));
+// connect(border_color_button_, SIGNAL(clicked(bool)),
+//   this, SIGNAL(change_border_color_requested(bool)));
+
+// connect(border_color_button_, &QPushButton::clicked,
+//   this, &std::remove_reference<decltype(*this)>::type::change_border_color_requested);
+
+ //connect_to_this(border_color_button_, &QPushButton::clicked, change_border_color_requested);
+ //sigma(border_color_button_)->connect_to_this(&QPushButton::clicked, change_border_color_requested);
+
+ //Connect(border_color_button_, &QPushButton::clicked)->to_this(change_border_color_requested);
+
+ connector<QPushButton>::add_pmfn("clicked", &QPushButton::clicked);
+
+ //Cc((QPushButton*)nullptr).slot_type<bool>get_pmfn("clicked", &QPushButton::clicked);
+
+// Cc(border_color_button_).Cnct<QAbstractButton, Shape_Select_Frame,
+//   decltype (&Shape_Select_Frame::change_border_color_requested), bool>("clicked", this, &Shape_Select_Frame::change_border_color_requested);
+
+
+ Cc(border_color_button_).Cnct("clicked", this, &Shape_Select_Frame::change_border_color_requested);
+
+
+// pmfns_[{"QPushButton", "clicked"}] = (pmfn) &QPushButton::clicked;
+
+// connect(border_color_button_, pmfns_[{"QPushButton", "clicked"}], this,
+//   &Shape_Select_Frame::change_border_color_requested);
+
+//  border_color_button_ >- Connect(,QPushButton::clicked,) -> to_this(change_border_color_requested);
+// border_color_button_ >- Connect(,clicked,) -> to_this(change_border_color_requested);
+
+
+ // -- Connect(border_color_button_ ,clicked) -> to_this(change_border_color_requested);
+
+ //Connect(border_color_button_ ,clicked) -> to_this(change_border_color_requested)
+
+ //border_color_button_ - Connect(QPushButton ,clicked) -> to_this(change_border_color_requested);
+
 
  vertical_margin_layout_->addSpacing(5);
 

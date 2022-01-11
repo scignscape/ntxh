@@ -118,6 +118,160 @@ struct _self_connect_package
   std::bind(&std::remove_reference<decltype(*x)>::type::y, x, \
   _std_placeholders_9)
 
+
+#define connect_to_this(x, y, z) \
+  connect(x, y, this, &std::remove_reference<decltype(*this)>::type::z)
+
+
+template<typename MEMBER_Fn, typename THIS_Type, typename FN_Type>
+struct _Connect_triple
+{
+ MEMBER_Fn _mfn;
+ THIS_Type* _this;
+ FN_Type _fn;
+
+ _Connect_triple& operator--()
+ {
+  return *this;
+ }
+
+ _Connect_triple& operator-()
+ {
+  return *this;
+ }
+
+ _Connect_triple& operator!()
+ {
+  return *this;
+ }
+
+ template<typename OBJECT_Type>
+ friend void operator- (OBJECT_Type* lhs,
+   _Connect_triple<MEMBER_Fn, THIS_Type, FN_Type> triple)
+ {
+  lhs->connect(lhs, triple._mfn, triple._this, triple._fn);
+ }
+
+ template<typename OBJECT_Type>
+ friend void operator/ (OBJECT_Type* lhs,
+   _Connect_triple<MEMBER_Fn, THIS_Type, FN_Type> triple)
+ {
+  lhs->connect(lhs, triple._mfn, triple._this, triple._fn);
+ }
+
+ template<typename OBJECT_Type>
+ friend void operator> (OBJECT_Type* lhs,
+   _Connect_triple<MEMBER_Fn, THIS_Type, FN_Type> triple)
+ {
+  lhs->connect(lhs, triple._mfn, triple._this, triple._fn);
+ }
+
+ template<typename OBJECT_Type>
+ friend void operator< (OBJECT_Type* lhs,
+   _Connect_triple<MEMBER_Fn, THIS_Type, FN_Type> triple)
+ {
+  lhs->connect(lhs, triple._mfn, triple._this, triple._fn);
+ }
+
+ template<typename OBJECT_Type>
+ friend void operator>> (OBJECT_Type* lhs,
+   _Connect_triple<MEMBER_Fn, THIS_Type, FN_Type> triple)
+ {
+  lhs->connect(lhs, triple._mfn, triple._this, triple._fn);
+ }
+
+ template<typename OBJECT_Type>
+ friend void operator| (OBJECT_Type* lhs,
+   _Connect_triple<MEMBER_Fn, THIS_Type, FN_Type> triple)
+ {
+  lhs->connect(lhs, triple._mfn, triple._this, triple._fn);
+ }
+
+};
+
+template<typename OBJECT_Type, typename MEMBER_Fn, typename THIS_Type, typename FN_Type>
+struct _Connect_quad
+{
+ OBJECT_Type* _lhs;
+ MEMBER_Fn _mfn;
+ THIS_Type* _this;
+ FN_Type _fn;
+
+ void operator--()
+ {
+  _lhs->connect(_lhs, _mfn, _this, _fn);
+ }
+};
+
+template<typename OBJECT_Type, typename MEMBER_Fn>
+struct _Connect_precursor
+{
+ OBJECT_Type* _lhs;
+ MEMBER_Fn _mfn;
+
+ _Connect_precursor* operator ->()
+ {
+  return this;
+ }
+
+ template<typename THIS_Type, typename FN_Type>
+ _Connect_quad<OBJECT_Type, MEMBER_Fn, THIS_Type, FN_Type> _to_this(THIS_Type* _this, FN_Type fn)
+ {
+  return {_lhs, _mfn, _this, fn};
+ }
+
+};
+
+template<typename MEMBER_Fn>
+struct _Connect
+{
+ MEMBER_Fn _mfn;
+
+ _Connect* operator ->()
+ {
+  return this;
+ }
+
+ template<typename THIS_Type, typename FN_Type>
+ _Connect_triple<MEMBER_Fn, THIS_Type, FN_Type> _to_this(THIS_Type* _this, FN_Type fn)
+ {
+  return {_mfn, _this, fn};
+ }
+
+};
+
+#define to_this(x) \
+  _to_this(this, &std::remove_reference<decltype(*this)>::type::x)
+
+template<typename MEMBER_Fn>
+_Connect<MEMBER_Fn> _Connect_(MEMBER_Fn mfn)
+{
+ return {mfn};
+}
+
+template<typename OBJECT_Type, typename MEMBER_Fn>
+_Connect_precursor<OBJECT_Type, MEMBER_Fn> _pre_Connect_(OBJECT_Type* obj, MEMBER_Fn mfn)
+{
+ return {obj, mfn};
+}
+
+#define _Connect_3(dummy1,_1,dummy2) _Connect_(&_1)
+
+
+#define _Connect_2(_1, _2) \
+  _pre_Connect_(_1, &std::remove_reference<decltype(*_1)>::type::_2)
+
+
+//#define _Connect_2(_1, _2) \
+//  _1 - _Connect_(&std::remove_reference<decltype(*_1)>::type::_2)
+
+
+#define _Connect_1(_1) _Connect_(_1)
+
+#define Connect(...) \
+  _preproc_CONCAT(_Connect_, _preproc_NUM_ARGS (__VA_ARGS__))(__VA_ARGS__)
+
+
 //#define selfconnect_(x, y, z) x->self_connect_(\
 //  &std::remove_reference<decltype(*x)>::type::y, z,
 
