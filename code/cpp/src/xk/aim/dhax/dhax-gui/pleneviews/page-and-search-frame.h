@@ -16,6 +16,8 @@
 
 #include "global-types.h"
 
+#include "self-connect.h"
+
 #include "accessors.h"
 
 #include "styles.h"

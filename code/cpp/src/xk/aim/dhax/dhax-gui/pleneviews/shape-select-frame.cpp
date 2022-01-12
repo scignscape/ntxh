@@ -3,12 +3,18 @@
 
 #include "styles.h"
 
+#include "stash-signals.h"
+#include "self-connect.h"
+
+
 #include <QDebug>
 
 #include <QStandardItemModel>
 #include <QStandardItem>
 #include <QLabel>
 #include <QLineEdit>
+
+#include <QPushButton>
 
 
 
@@ -243,15 +249,27 @@ subcontrol-position: left;}
 
  //Connect(border_color_button_, &QPushButton::clicked)->to_this(change_border_color_requested);
 
- connector<QPushButton>::add_pmfn("clicked", &QPushButton::clicked);
+ //connector<QPushButton>::add_pmfn("clicked", &QPushButton::clicked);
+
+// _saved_mfn_connector<QPushButton>::add_signal("clicked", &QPushButton::clicked);
+
+// stash_signal(QPushButton::clicked);
+// stash_signal(QPushButton,clicked);
+
+// SIGNAL_Type
 
  //Cc((QPushButton*)nullptr).slot_type<bool>get_pmfn("clicked", &QPushButton::clicked);
 
 // Cc(border_color_button_).Cnct<QAbstractButton, Shape_Select_Frame,
 //   decltype (&Shape_Select_Frame::change_border_color_requested), bool>("clicked", this, &Shape_Select_Frame::change_border_color_requested);
 
+ //_saved_mfn_connector_precursor prec({"clicked"});
+ //prec->_to_this(this, &Shape_Select_Frame::change_border_color_requested);
 
- Cc(border_color_button_).Cnct("clicked", this, &Shape_Select_Frame::change_border_color_requested);
+
+ border_color_button_ > Connect(clicked) -> to_this(change_border_color_requested);
+
+// Cc(border_color_button_).Cnct("clicked", this, &Shape_Select_Frame::change_border_color_requested);
 
 
 // pmfns_[{"QPushButton", "clicked"}] = (pmfn) &QPushButton::clicked;

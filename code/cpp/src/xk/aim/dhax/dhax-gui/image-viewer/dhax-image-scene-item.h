@@ -19,6 +19,8 @@
 
 #include "dhax-display-image-data.h"
 
+#include "self-connect.h"
+
 class DHAX_Graphics_Scene;
 class DHAX_Graphics_View;
 

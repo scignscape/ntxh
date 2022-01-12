@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
  QApplication qapp(argc, argv);
  DHAX_GUI_Environment dge;
  dge.init_application_colors();
+ dge.init_stashed_signals();
  dge.init_main_window();
  dge.init_main_window_receiver();
  dge.init_application_receiver();

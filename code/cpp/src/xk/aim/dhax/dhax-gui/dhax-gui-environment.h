@@ -63,6 +63,7 @@ public:
  ACCESSORS(void* ,last_loaded_vpo)
 
  void init_application_colors();
+ void init_stashed_signals();
  void init_main_window();
  void init_menu_system();
  void init_main_window_controller();

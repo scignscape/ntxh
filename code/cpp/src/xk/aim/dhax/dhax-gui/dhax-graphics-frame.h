@@ -15,6 +15,9 @@
 
 #include "global-types.h"
 
+#include "self-connect.h"
+
+
 
 class Shape_Select_Frame;
 class Zoom_and_Navigate_Frame;

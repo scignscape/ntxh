@@ -22,6 +22,9 @@
 
 #include "styles.h"
 
+#include "self-connect.h"
+
+
 //#define SIGMA_INCLUDES(inc) inc(sigma-multiline, sigma-test)
 
 //#define SIGMA_INCLUDES \

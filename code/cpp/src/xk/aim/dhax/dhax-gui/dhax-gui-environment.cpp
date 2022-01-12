@@ -41,7 +41,11 @@
 
 #include <QDebug>
 
+#include <QPushButton>
+
 #include <type_traits>
+
+#include "stash-signals.h"
 
 DHAX_GUI_Environment::DHAX_GUI_Environment()
   :  main_window_(nullptr),
@@ -57,6 +61,15 @@ DHAX_GUI_Environment::DHAX_GUI_Environment()
      udp_controller_(nullptr),
      last_loaded_vpo_(nullptr)
 {
+}
+
+
+void DHAX_GUI_Environment::init_stashed_signals()
+{
+// _stash_signal_strip_name<_signal_class<decltype(&QPushButton::clicked)>::_type,
+//   decltype(&QPushButton::clicked)>("QPushButton::clicked", &QPushButton::clicked);
+ stash_signal(QPushButton::clicked);
+ stash_signal(QPushButton,clicked);
 }
 
 void DHAX_GUI_Environment::init_application_colors()

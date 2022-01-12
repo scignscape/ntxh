@@ -8,6 +8,7 @@
 
 #include "accessors.h"
 #include "global-types.h"
+#include "self-connect.h"
 
 
 
