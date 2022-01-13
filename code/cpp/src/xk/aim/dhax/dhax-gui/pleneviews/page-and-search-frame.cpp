@@ -8,6 +8,9 @@
 #include <QStandardItemModel>
 #include <QStandardItem>
 
+#include "stash-signals.h"
+#include "stash-signals-alt-base.h"
+#include "self-connect.h"
 
 
 Page_and_Search_Frame::Page_and_Search_Frame(QWidget* parent)
@@ -21,7 +24,11 @@ Page_and_Search_Frame::Page_and_Search_Frame(QWidget* parent)
  page_select_->setMaxVisibleItems(3);
  page_select_->setStyleSheet("combobox-popup: 0;");
 
- connect(page_select_, QOverload<s4>::of(&QComboBox::currentIndexChanged), [this](s4 index)
+// connect(page_select_, QOverload<s4>::of(&QComboBox::currentIndexChanged), [this](s4 index)
+
+ page_select_
+   >> lConnect(s4 overload_of QComboBox::currentIndexChanged)
+   << [this](s4 index)
  {
   // //  we need to filter out spurious calls
    //    not caused by actual user actions ...
@@ -32,7 +39,7 @@ Page_and_Search_Frame::Page_and_Search_Frame(QWidget* parent)
     return;
 
   Q_EMIT page_select_requested((u4)index + 1);
- });
+ };
 
 
  page_select_->addItem("N/A");

@@ -13,6 +13,11 @@
 #include "QFontIcon/qfonticon.h"
 
 
+#include "stash-signals.h"
+#include "stash-signals-alt-base.h"
+#include "self-connect.h"
+
+
 Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
   :  QFrame(parent)
 {
@@ -82,12 +87,16 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  zoom_buttons_layout_->addWidget(reset_zoom_button_);
 
- connect(repeat_zoom_button_, SIGNAL(clicked(bool)), this, SLOT(handle_repeat_zoom(bool)));
+ //connect(repeat_zoom_button_, SIGNAL(clicked(bool)), this, SLOT(handle_repeat_zoom(bool)));
+// connect(zoom_out_button_, SIGNAL(clicked(bool)), this, SLOT(handle_zoom_out_discrete(bool)));
+// connect(reset_zoom_button_, SIGNAL(clicked(bool)), this, SLOT(handle_reset_zoom(bool)));
+// connect(zoom_in_button_, SIGNAL(clicked(bool)), this, SLOT(handle_zoom_in_discrete(bool)));
 
- connect(reset_zoom_button_, SIGNAL(clicked(bool)), this, SLOT(handle_reset_zoom(bool)));
+ repeat_zoom_button_ >> Connect(clicked) -> to_this(handle_repeat_zoom);
+ reset_zoom_button_ >> Connect(clicked) -> to_this(handle_reset_zoom);
 
- connect(zoom_in_button_, SIGNAL(clicked(bool)), this, SLOT(handle_zoom_in_discrete(bool)));
- connect(zoom_out_button_, SIGNAL(clicked(bool)), this, SLOT(handle_zoom_out_discrete(bool)));
+ zoom_out_button_ >> Connect(clicked) -> to_this(handle_zoom_out_discrete);
+ zoom_in_button_ >> Connect(clicked) -> to_this(handle_zoom_in_discrete);
 
 
 // zoom_slider_[2] = nullptr;
@@ -101,22 +110,30 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
 
 
- connect(zoom_slider_[0], SIGNAL(minimumValueChanged(int)), this,
-   SLOT(handle_zoom_minimum_value_changed(int)));
+// connect(zoom_slider_[0], SIGNAL(minimumValueChanged(int)), this,
+//   SLOT(handle_zoom_minimum_value_changed(int)));
 
- connect(zoom_slider_[0], SIGNAL(maximumValueChanged(int)), this,
-   SLOT(handle_zoom_maximum_value_changed(int)));
+// connect(zoom_slider_[0], SIGNAL(maximumValueChanged(int)), this,
+//   SLOT(handle_zoom_maximum_value_changed(int)));
 
 
- connect(zoom_slider_[1], SIGNAL(minimumValueChanged(int)), this,
-   SLOT(handle_top_zoom_minimum_value_changed(int)));
+// connect(zoom_slider_[1], SIGNAL(minimumValueChanged(int)), this,
+//   SLOT(handle_top_zoom_minimum_value_changed(int)));
 
- connect(zoom_slider_[1], SIGNAL(maximumValueChanged(int)), this,
-   SLOT(handle_top_zoom_maximum_value_changed(int)));
+// connect(zoom_slider_[1], SIGNAL(maximumValueChanged(int)), this,
+//   SLOT(handle_top_zoom_maximum_value_changed(int)));
 
- connect(zoom_slider_[2], SIGNAL(valueChanged(int)), this,
-   SLOT(handle_annotation_zoom_value_changed(int)));
+// connect(zoom_slider_[2], SIGNAL(valueChanged(int)), this,
+//   SLOT(handle_annotation_zoom_value_changed(int)));
 
+
+ zoom_slider_[0] >> Connect(minimumValueChanged) -> to_this(handle_zoom_minimum_value_changed);
+ zoom_slider_[0] >> Connect(maximumValueChanged) -> to_this(handle_zoom_maximum_value_changed);
+
+ zoom_slider_[1] >> Connect(minimumValueChanged) -> to_this(handle_top_zoom_minimum_value_changed);
+ zoom_slider_[1] >> Connect(maximumValueChanged) -> to_this(handle_top_zoom_maximum_value_changed);
+
+ zoom_slider_[1] >> Connect(valueChanged) -> to_this(handle_annotation_zoom_value_changed);
 
  zoom_slider_[2]->setEnabled(false);
 
@@ -173,8 +190,9 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  reset_all_button_->setStyleSheet(button_style_sheet());
  reset_all_button_->setEnabled(false);
 
- connect(reset_all_button_, SIGNAL(clicked(bool)), this, SLOT(handle_reset_all(bool)));
+ // connect(reset_all_button_, SIGNAL(clicked(bool)), this, SLOT(handle_reset_all(bool)));
 
+ reset_all_button_ >> Connect(clicked) -> to_this(handle_reset_all);
 
  zoom_sliders_top_group_box_layout_->addWidget(reset_all_button_);
 
@@ -218,24 +236,29 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  center_image_button_->setStyleSheet(button_style_sheet(15));
 
 
- connect(image_top_left_button_, SIGNAL(clicked(bool)),
-   this, SIGNAL(image_top_left_button_clicked(bool)));
+// connect(image_top_left_button_, SIGNAL(clicked(bool)),
+//   this, SIGNAL(image_top_left_button_clicked(bool)));
 
- connect(center_image_button_, SIGNAL(clicked(bool)),
-   this, SIGNAL(center_image_button_clicked(bool)));
+// connect(center_image_button_, SIGNAL(clicked(bool)),
+//   this, SIGNAL(center_image_button_clicked(bool)));
+
+ image_top_left_button_ >> Connect(clicked) -> to_this(image_top_left_button_clicked);
+ center_image_button_ >> Connect(clicked) -> to_this(center_image_button_clicked);
 
  multi_draw_ckb_ = new QCheckBox(" ", this);
 
  //?bottom_layout_ = new QHBoxLayout;
 
- connect(multi_draw_ckb_, &QCheckBox::stateChanged,
+ multi_draw_ckb_ >> lConnect(QCheckBox::stateChanged)
+   <<
+// connect(multi_draw_ckb_, &QCheckBox::stateChanged,
    [this](int st)
  {
   if(st == Qt::Unchecked)
     Q_EMIT multi_draw_unset();
   else if(st == Qt::Checked)
     Q_EMIT multi_draw_set();
- });
+ };
 
  pan_mode_button_ = new QPushButton("Pan/Pull", this);
 
@@ -252,7 +275,10 @@ Pull Mode (second click, or right check box) moves the image/page relative to it
  pan_mode_button_->setCheckable(true);
  pan_mode_button_->setChecked(false);
  pan_mode_button_->setStyleSheet(colorful_toggle_button_mixed_style_sheet_());
- connect(pan_mode_button_, &QPushButton::clicked,  [this](bool state)
+
+// connect(pan_mode_button_, &QPushButton::clicked,  [this](bool state)
+
+ pan_mode_button_ >> lConnect(QPushButton::clicked) << [this](bool state)
  {
   // // ckb state: pull mode = 1  temp pull mode = 2  temp pan mode = 3
   if(state)
@@ -280,7 +306,7 @@ Pull Mode (second click, or right check box) moves the image/page relative to it
 
   pan_mode_ckb_->setChecked(state);
   Q_EMIT pan_mode_changed(state);
- });
+ };
 
  QString check_path;
 
@@ -304,7 +330,9 @@ Scrolls the viewport when dragging the image; can be temprarily
 activated by pressing the <i>shift</i> or <i>meta</i> key while moving the mouse
    )");
 
- connect(pan_mode_ckb_, &QPushButton::clicked,
+// connect(pan_mode_ckb_, &QPushButton::clicked,
+
+ pan_mode_ckb_ >> lConnect(QPushButton::clicked) <<
     [this](bool state)
  {
   pan_mode_button_->setChecked(state);
@@ -317,7 +345,7 @@ activated by pressing the <i>shift</i> or <i>meta</i> key while moving the mouse
    }
   }
   Q_EMIT pan_mode_changed(state);
- });
+ };
 
  QString ckb_stylesheet = R"(QCheckBox::indicator {
   subcontrol-position: %1 bottom;
@@ -370,8 +398,10 @@ can be temprarily activated by pressing the <i>control</i> or
 <i>shift</i>+<i>meta</i> key(s) while moving the mouse
    )");
 
- connect(pull_mode_ckb_, &QPushButton::clicked,
-    [this](bool state)
+// connect(pull_mode_ckb_, &QPushButton::clicked,
+
+ pull_mode_ckb_ >> lConnect(QPushButton::clicked)
+   << [this](bool state)
  {
   if(pan_mode_ckb_->isChecked())
   {
@@ -384,7 +414,7 @@ can be temprarily activated by pressing the <i>control</i> or
   pan_mode_button_->setStyleSheet(colorful_toggle_button_mixed_style_sheet_());
 
   Q_EMIT pull_mode_changed(state);
- });
+ };
 
  pull_mode_ckb_->setStyleSheet(ckb_color_stylesheet
    .arg("left").arg("#60AC8F").arg(check_path));
@@ -449,7 +479,7 @@ can be temprarily activated by pressing the <i>control</i> or
  multi_draw_ckb_label_ = new QLabel("Multi\nDraw", this);
  multi_draw_ckb_label_->setStyleSheet(two_line_label_stylesheet);
 
- set_multiline_tooltip(multi_draw_ckb_label_, "Multi-Draw Mode",
+ sigma(multi_draw_ckb_label_) -> set_multiline_tooltip("Multi-Draw Mode",
    R"(When checked, clicking on a page/image while a provisional
    annotation is visible will have the effect of preserving
    that part of the annotation and creating a disjoint

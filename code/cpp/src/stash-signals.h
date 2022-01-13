@@ -137,6 +137,11 @@ struct _saved_mfn_connector_triple
  //FN_Type fn;
  void(THIS_Type::*fn)(Args...);
 
+ _saved_mfn_connector_triple& operator-()
+ {
+  return *this;
+ }
+
  template<typename OBJECT_Type>
  friend void operator > (OBJECT_Type* lhs, const _saved_mfn_connector_triple& rhs)
  {
@@ -144,6 +149,15 @@ struct _saved_mfn_connector_triple
   smc.resolve_connection//<THIS_Type, Args...>
     (rhs.signal_name, rhs._this, rhs.fn);
  }
+
+ template<typename OBJECT_Type>
+ friend void operator >> (OBJECT_Type* lhs, const _saved_mfn_connector_triple& rhs)
+ {
+  _saved_mfn_connector<OBJECT_Type> smc{lhs};
+  smc.resolve_connection//<THIS_Type, Args...>
+    (rhs.signal_name, rhs._this, rhs.fn);
+ }
+
 
 };
 
@@ -287,8 +301,14 @@ struct _Connect
 
 };
 
-#define to_this(x) \
+
+#define to_this_1(x) \
   _to_this(this, &std::remove_reference<decltype(*this)>::type::x)
+
+
+#define to_this(...) \
+  _preproc_CONCAT(to_this_, _preproc_NUM_ARGS (__VA_ARGS__))(__VA_ARGS__)
+
 
 template<typename MEMBER_Fn>
 _Connect<MEMBER_Fn> _Connect_(MEMBER_Fn mfn)

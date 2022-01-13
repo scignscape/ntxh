@@ -55,8 +55,12 @@ Shape_Select_Frame::Shape_Select_Frame(QWidget* parent)
  image_path_show_folder_button_->setMaximumWidth(40);
  image_path_show_folder_button_->setStyleSheet(button_style_sheet());
 
- connect(image_path_show_folder_button_, SIGNAL(clicked(bool)),
-   this, SIGNAL(image_path_show_folder_requested(bool)));
+// connect(image_path_show_folder_button_, SIGNAL(clicked(bool)),
+//   this, SIGNAL(image_path_show_folder_requested(bool)));
+
+ image_path_show_folder_button_
+   >> Connect(clicked)
+   -> to_this(image_path_show_folder_requested);
 
  image_path_layout_ = new QHBoxLayout;
 
@@ -132,8 +136,16 @@ subcontrol-position: left;}
 //  }
 // });
 
- connect(vertical_margin_combo_box_, QOverload<int>::of(&QComboBox::currentIndexChanged),
-   [this](int index)
+// connect(vertical_margin_combo_box_, QOverload<int>::of(&QComboBox::currentIndexChanged),
+//   [this](int index)
+
+// _lConnect_(vertical_margin_combo_box_, QOverload<int>::of(&QComboBox::currentIndexChanged))
+
+// vertical_margin_combo_box_ >> lConnect(QOverload<int>::of(&QComboBox::currentIndexChanged))
+
+ vertical_margin_combo_box_
+   >> lConnect(int overload_of QComboBox::currentIndexChanged)
+   to_lambda[this](int index)
  {
   bool and_sides = !sides_margin_check_box_->isChecked();
 
@@ -198,7 +210,7 @@ subcontrol-position: left;}
 //  {
 //   vertical_margin_combo_box_data_.current_selected_index = index;
 //  }
- });
+ };
 
  vertical_margin_percent_check_box_label_ = new QLabel("%", this);
  vertical_margin_percent_check_box_label_->setToolTip("Set margins as percent of image dimensions");
@@ -207,14 +219,18 @@ subcontrol-position: left;}
  vertical_margin_percent_check_box_->setMaximumWidth(15);
 
 
- connect(vertical_margin_percent_check_box_, &QCheckBox::clicked,
-   [this](bool state)
+// connect(vertical_margin_percent_check_box_, &QCheckBox::clicked,
+//   [this](bool state)
+
+ vertical_margin_percent_check_box_
+   >> lConnect(QCheckBox::clicked)
+   << [this](bool state)
  {
   if(state)
     switch_to_margins_percent();
   else
     switch_to_margins_non_percent();
- });
+ };
 
  vertical_margin_layout_ = new QHBoxLayout;
  vertical_margin_layout_->addWidget(vertical_margin_label_);
@@ -268,7 +284,9 @@ subcontrol-position: left;}
  //prec->_to_this(this, &Shape_Select_Frame::change_border_color_requested);
 
 
- border_color_button_ > Connect(clicked) -> to_this(change_border_color_requested);
+ border_color_button_
+   >> Connect(clicked)
+   -> to_this(change_border_color_requested);
 
 // Cc(border_color_button_).Cnct("clicked", this, &Shape_Select_Frame::change_border_color_requested);
 

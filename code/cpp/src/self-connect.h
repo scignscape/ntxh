@@ -18,6 +18,59 @@
 #include "global-macros.h"
 
 
+template<typename OBJECT_Type, typename SIGNAL_Type>
+struct lConnect_precursor
+{
+ OBJECT_Type* obj;
+ SIGNAL_Type signal;
+
+ template<typename LAMBDA_Type>
+ void operator <<(LAMBDA_Type l)
+ {
+  obj->connect(obj, signal, l);
+ }
+};
+
+template<typename SIGNAL_Type>
+struct lConnect_signal
+{
+ SIGNAL_Type signal;
+
+ template<typename OBJECT_Type>
+ friend lConnect_precursor<OBJECT_Type, SIGNAL_Type>
+   operator>>(OBJECT_Type* obj, lConnect_signal rhs)
+ {
+  return {obj, rhs.signal};
+ }
+};
+
+template<typename SIGNAL_Type>
+lConnect_signal<SIGNAL_Type> _lConnect(SIGNAL_Type s)
+{
+ return {s};
+}
+
+template<typename OBJECT_Type, typename SIGNAL_Type>
+lConnect_precursor<OBJECT_Type, SIGNAL_Type> _lConnect_(OBJECT_Type* obj, SIGNAL_Type signal)
+{
+ return {obj, signal};
+}
+
+#define  to_lambda_this << [this]
+#define  to_lambda <<
+
+#define overload_of ,
+
+#define lConnect_2(x, y) _lConnect(QOverload<x>::of(&y))
+
+#define lConnect_1(x) _lConnect(&x)
+
+#define lConnect(...) \
+  _preproc_CONCAT(lConnect_, _preproc_NUM_ARGS (__VA_ARGS__))(__VA_ARGS__)
+
+
+
+
 #define USE_SELF_CONNECT_normal \
  template<typename ... ARGS> \
  void self_connect(ARGS ... args) \
