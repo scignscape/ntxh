@@ -4,6 +4,7 @@
 #include "styles.h"
 
 #include "stash-signals.h"
+#include "stash-signals-alt-base.h"
 #include "self-connect.h"
 
 

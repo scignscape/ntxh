@@ -14,13 +14,52 @@
 #include <QPair>
 #include <QSet>
 
+#include <QObject>
+
+#include <QAbstractButton>
+#include <QPushButton>
+
+template <typename> struct _signal_class;
+
+template <typename OBJECT_Type, typename ...Args>
+struct _signal_class<void (OBJECT_Type::*)(Args...)>
+{
+ typedef OBJECT_Type _type;
+};
+
+
+struct no_alt_base
+{
+
+};
+
+template<typename OBJECT_Type>
+struct _alt_base
+{
+ using _type = no_alt_base;
+};
+
+#define STASH_SIGNALS_ALT_BASE(x, y) \
+template<> struct _alt_base<x> { \
+ using _type = y; };
+
+
+//template<>
+//struct _alt_base<QPushButton>
+//{
+// using _type = QAbstractButton;
+//};
+
 
 template<typename OBJECT_Type>
 struct _saved_mfn_connector
 {
- template<typename SIGNAL_Type>
+ //template<typename SIGNAL_Type>
+ template<typename SIGNAL_OBJECT_Type, typename ...SIGNAL_Args>
  struct signal_type
  {
+  typedef void (SIGNAL_OBJECT_Type::*SIGNAL_Type)(SIGNAL_Args...);
+  typedef SIGNAL_Type (*get_signal_type)(QString, SIGNAL_Type);
   static SIGNAL_Type get_signal(QString fname, SIGNAL_Type add = nullptr)
   {
    static QMap<QString, SIGNAL_Type> static_map;
@@ -31,6 +70,22 @@ struct _saved_mfn_connector
    }
    return result;
   }
+
+  //template<typename ALT_OBJECT_Type, typename ALT_SIGNAL_Type>
+  static get_signal_type get_alt() //get_signal_type alt = nullptr)
+  {
+   static get_signal_type result = nullptr;
+   if(!result)
+   {
+    //typedef QAbstractButton Alt_base;
+    typedef typename _alt_base<OBJECT_Type>::_type Alt_base;
+    result = (get_signal_type) &_saved_mfn_connector<Alt_base>::template signal_type<Alt_base, SIGNAL_Args...>::get_signal;;
+   }
+   return result;
+   //typedef void (QAbstractButton::*alt_SIGNAL_Type)(SIGNAL_Args...);
+   //return (get_signal_type) &_saved_mfn_connector<QAbstractButton>::signal_type<QAbstractButton, SIGNAL_Args...>::get_signal;
+  }
+
  };
  OBJECT_Type* obj;
 
@@ -38,19 +93,40 @@ struct _saved_mfn_connector
  static void add_signal(QString name, void (SOBJECT_Type::*add)(Args...))
  {
   //typedef void (SOBJECT_Type::*ft)(Args...);
-  signal_type<void (OBJECT_Type::*)(Args...)>::get_signal(name, add);
+  // signal_type<void (OBJECT_Type::*)(Args...)>::get_signal(name, add);
+  signal_type<OBJECT_Type, Args...>::get_signal(name, add);
+
  }
 
  //template<typename THIS_Type, typename FN_Type> //, typename ...ARGS>
  template<typename THIS_Type, typename ...Args>
  void resolve_connection(QString mfn, THIS_Type* _this, void(THIS_Type::*fn)(Args...) )
  {
-  auto _mfn = signal_type<void(OBJECT_Type::*)(Args...)>::get_signal(mfn);
+ // auto _mfn = signal_type<void(OBJECT_Type::*)(Args...)>::get_signal(mfn);
+  auto _mfn = signal_type<OBJECT_Type, Args...>::get_signal(mfn);
+
+
   //typename signal_type<bool>::pmfn _mfn
   //  = signal_type<bool>::get_pmfn(mfn);
-  obj->connect(obj, _mfn, _this, fn);
+
+  if(_mfn)
+    obj->connect(obj, _mfn, _this, fn);
+
+  else
+  {
+   auto alt = signal_type<OBJECT_Type, Args...>::get_alt();
+   //auto alt = signal_type<void(OBJECT_Type::*)(Args...)>::get_alt();
+   //auto _mfn1 = signal_type<void(OBJECT_Type::*)(Args...)>::get_alt()(mfn, nullptr);
+   auto _mfn1 = alt(mfn, nullptr);
+   if(_mfn1)
+     obj->connect(obj, _mfn1, _this, fn);
+  }
+
+
  }
 };
+
+//void signal_baseclass()
 
 template<typename THIS_Type, typename ...Args> //, typename FN_Type>
 struct _saved_mfn_connector_triple
@@ -226,19 +302,14 @@ _Connect_precursor<OBJECT_Type, MEMBER_Fn> _pre_Connect_(OBJECT_Type* obj, MEMBE
  return {obj, mfn};
 }
 
-template <typename> struct _signal_class;
-
-template <typename OBJECT_Type, typename ...Args>
-struct _signal_class<void (OBJECT_Type::*)(Args...)>
-{
- typedef OBJECT_Type _type;
-};
-
 
 template<typename OBJECT_Type, typename SIGNAL_Type>
 void _stash_signal(QString name, SIGNAL_Type signal)
 {
  _saved_mfn_connector<OBJECT_Type>::add_signal(name, signal);
+
+ //_saved_mfn_connector<_saved_mfn_connector_fiat_base>::add_signal(name, signal);
+
 }
 
 template<typename OBJECT_Type, typename SIGNAL_Type>
@@ -251,8 +322,6 @@ void _stash_signal(QString class_name, QString name, SIGNAL_Type signal)
 
  _saved_mfn_connector<OBJECT_Type>::add_signal(name, signal);
 }
-
-#include <QSet>
 
 template<typename OBJECT_Type, typename SIGNAL_Type>
 void _stash_signal_strip_name(QString name, SIGNAL_Type signal)
@@ -271,7 +340,7 @@ void _stash_signal_strip_name(QString name, SIGNAL_Type signal)
 
 
 #define stash_signal_1(x) \
-  _stash_signal_strip_name<_signal_class<decltype(&x)>::_type, decltype(&x)>(#x, &x)
+  _stash_signal_strip_name<_signal_class<decltype(&x)>::_type, decltype(&x)>(#x, &x) \
 
 #define stash_signal_2(x, y) \
   _stash_signal<x, decltype(&x::y)>(#x, #y, &x::y)
