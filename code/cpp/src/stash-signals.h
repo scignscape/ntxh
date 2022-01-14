@@ -19,6 +19,9 @@
 #include <QAbstractButton>
 #include <QPushButton>
 
+#include <functional>
+#include <type_traits>
+
 template <typename> struct _signal_class;
 
 template <typename OBJECT_Type, typename ...Args>
@@ -54,7 +57,6 @@ template<> struct _alt_base<x> { \
 template<typename OBJECT_Type>
 struct _saved_mfn_connector
 {
- //template<typename SIGNAL_Type>
  template<typename SIGNAL_OBJECT_Type, typename ...SIGNAL_Args>
  struct signal_type
  {
@@ -71,7 +73,6 @@ struct _saved_mfn_connector
    return result;
   }
 
-  //template<typename ALT_OBJECT_Type, typename ALT_SIGNAL_Type>
   static get_signal_type get_alt() //get_signal_type alt = nullptr)
   {
    static get_signal_type result = nullptr;
@@ -82,10 +83,7 @@ struct _saved_mfn_connector
     result = (get_signal_type) &_saved_mfn_connector<Alt_base>::template signal_type<Alt_base, SIGNAL_Args...>::get_signal;;
    }
    return result;
-   //typedef void (QAbstractButton::*alt_SIGNAL_Type)(SIGNAL_Args...);
-   //return (get_signal_type) &_saved_mfn_connector<QAbstractButton>::signal_type<QAbstractButton, SIGNAL_Args...>::get_signal;
   }
-
  };
  OBJECT_Type* obj;
 
@@ -121,9 +119,97 @@ struct _saved_mfn_connector
    if(_mfn1)
      obj->connect(obj, _mfn1, _this, fn);
   }
-
-
  }
+
+// template<typename LAMBDA_Arg, typename LAMBDA_Type,
+//   typename CONV_Type, bool conv_ok>
+// bool resolve_lambda_connection(QString mfn, CONV_Type conv);
+
+ template<typename ...LAMBDA_Args>
+ bool _resolve_lambda_connection(QString mfn, std::function<void(LAMBDA_Args...)> fn)
+ {
+  auto _mfn = signal_type<OBJECT_Type, LAMBDA_Args...>::get_signal(mfn);
+
+  if(_mfn)
+  {
+   obj->connect(obj, _mfn, fn);
+   return true;
+  }
+  else
+  {
+   auto alt = signal_type<OBJECT_Type, LAMBDA_Args...>::get_alt();
+   //auto alt = signal_type<void(OBJECT_Type::*)(Args...)>::get_alt();
+   //auto _mfn1 = signal_type<void(OBJECT_Type::*)(Args...)>::get_alt()(mfn, nullptr);
+   auto _mfn1 = alt(mfn, nullptr);
+   if(_mfn1)
+   {
+    obj->connect(obj, _mfn1, fn);
+    return true;
+   }
+  }
+  return false;
+ }
+
+// template<typename LAMBDA_Type, typename LAMBDA_Arg,
+//   typename = typename std::enable_if<std::is_convertible<LAMBDA_Type,
+//   std::function<void(LAMBDA_Arg)>>::value>::type>
+// bool resolve_lambda_connection(QString mfn, std::function<void(LAMBDA_Arg)> fn)
+// {
+//  return _resolve_lambda_connection(mfn, fn);
+// }
+
+// template<typename LAMBDA_Type, typename LAMBDA_Arg,
+//   typename = typename std::enable_if<!std::is_convertible<LAMBDA_Type,
+//   std::function<void(LAMBDA_Arg)>>::value>::type>
+// bool resolve_lambda_connection(QString mfn, LAMBDA_Type fn)
+// {
+//  return false;
+// }
+
+#ifndef MACRO_PASTE
+#define MACRO_PASTE(...) __VA_ARGS__
+#endif
+
+#define TEMP_MACRO(num, typename_args, args) \
+ template<typename LAMBDA_Type, typename_args, \
+   typename = typename std::enable_if<std::is_convertible<LAMBDA_Type, \
+   std::function<void(args)>>::value>::type> \
+ bool resolve_lambda_connection_##num(QString mfn, std::function<void(args)> fn) \
+ { \
+  return _resolve_lambda_connection(mfn, fn); \
+ } \
+ template<typename LAMBDA_Type, typename_args, \
+   typename = typename std::enable_if<!std::is_convertible<LAMBDA_Type, \
+   std::function<void(args)>>::value>::type> \
+ bool resolve_lambda_connection_##num(QString, LAMBDA_Type) \
+ { \
+  return false; \
+ } \
+
+TEMP_MACRO(1, typename a1, a1)
+TEMP_MACRO(2, MACRO_PASTE(typename a1, typename a2), MACRO_PASTE(a1, a2))
+TEMP_MACRO(3, MACRO_PASTE(typename a1, typename a2, typename a3),
+           MACRO_PASTE(a1, a2, a3))
+TEMP_MACRO(4, MACRO_PASTE(typename a1, typename a2, typename a3, typename a4),
+           MACRO_PASTE(a1, a2, a3, a4))
+
+#undef TEMP_MACRO
+
+
+ template<typename LAMBDA_Type, typename = typename std::enable_if<std::is_convertible<LAMBDA_Type,
+   std::function<void()>>::value>::type>
+ bool resolve_lambda_connection_0(QString mfn, std::function<void()> fn)
+ {
+  return _resolve_lambda_connection(mfn, fn);
+ }
+
+ template<typename LAMBDA_Type, typename = typename std::enable_if<!std::is_convertible<LAMBDA_Type,
+   std::function<void()>>::value>::type>
+ bool resolve_lambda_connection_0(QString mfn, LAMBDA_Type fn)
+ {
+  return false;
+ }
+
 };
 
 //void signal_baseclass()
@@ -157,9 +243,80 @@ struct _saved_mfn_connector_triple
   smc.resolve_connection//<THIS_Type, Args...>
     (rhs.signal_name, rhs._this, rhs.fn);
  }
-
-
 };
+
+template<typename FPtr>
+struct arg1_traits_impl;
+
+template<typename A1>
+struct arg1_traits_impl<void (*)(A1)>{typedef A1 arg1_type;};
+
+
+template<typename OBJECT_Type, typename ...Args> //, typename FN_Type>
+struct _saved_fn_connector_double
+{
+ OBJECT_Type* obj;
+ QString signal_name;
+
+ template<typename ...LAMBDA_Args>
+ void operator << (std::function<void(LAMBDA_Args...)> rhs)
+ {
+  _saved_mfn_connector<OBJECT_Type> smc{obj};
+  smc.resolve_lambda_connection//<THIS_Type, Args...>
+    (signal_name, rhs);
+ }
+
+ template<typename LAMBDA_Type>
+ bool resolve_lambda_connection(LAMBDA_Type fn)
+ {
+  _saved_mfn_connector<OBJECT_Type> smc{obj};
+  return smc.template resolve_lambda_connection_0<LAMBDA_Type>(signal_name, fn);
+ }
+
+#define TEMP_MACRO(num, typename_args, args) \
+  template<typename LAMBDA_Type, typename_args>  \
+  bool resolve_lambda_connection(LAMBDA_Type fn) \
+  { \
+   _saved_mfn_connector<OBJECT_Type> smc{obj}; \
+   return smc.template resolve_lambda_connection_##num<LAMBDA_Type, \
+     args>(signal_name, fn); \
+  } \
+
+TEMP_MACRO(1, typename a1, a1)
+TEMP_MACRO(2, MACRO_PASTE(typename a1, typename a2), MACRO_PASTE(a1, a2))
+TEMP_MACRO(3, MACRO_PASTE(typename a1, typename a2, typename a3), MACRO_PASTE(a1, a2, a3))
+TEMP_MACRO(4, MACRO_PASTE(typename a1, typename a2, typename a3, typename a4), MACRO_PASTE(a1, a2, a3, a4))
+
+#define STASH_SIGNAL_ARG_TYPES(...) \
+   _preproc_CONCAT(STASH_SIGNAL_ARG_TYPES_, _preproc_NUM_ARGS (__VA_ARGS__))(__VA_ARGS__)
+
+#define STASH_SIGNAL_ARG_TYPES_1(a1) else if(resolve_lambda_connection<LAMBDA_Type, a1>(rhs));
+#define STASH_SIGNAL_ARG_TYPES_2(a1, a2) \
+   else if(resolve_lambda_connection<LAMBDA_Type, a1, a2>(rhs));
+#define STASH_SIGNAL_ARG_TYPES_3(a1, a2, a3) \
+   else if(resolve_lambda_connection<LAMBDA_Type, a1, a2, a3>(rhs));
+#define STASH_SIGNAL_ARG_TYPES_4(a1, a2, a3, a4) \
+   else if(resolve_lambda_connection<LAMBDA_Type, a1, a2, a3, a4>(rhs));
+#define STASH_SIGNAL_ARG_TYPES_5(a1, a2, a3, a4, a5) \
+   else if(resolve_lambda_connection<LAMBDA_Type, a1, a2, a3, a4, a5>(rhs));
+
+ template<typename LAMBDA_Type>
+ void operator << (LAMBDA_Type rhs)
+ {
+  if(resolve_lambda_connection<LAMBDA_Type>(rhs));
+
+  // //  this file should have lines like
+   //      STASH_SIGNAL_ARG_TYPES(bool)
+   //      STASH_SIGNAL_ARG_TYPES(QString)
+   //      STASH_SIGNAL_ARG_TYPES(QString, QString)
+   //    which expand to e.g.
+   //      else if(resolve_lambda_connection<LAMBDA_Type, bool>(rhs));
+   //      else if(resolve_lambda_connection<LAMBDA_Type, QString>(rhs));
+   //      else if(resolve_lambda_connection<LAMBDA_Type, QString, QString>(rhs));
+  #include "stash-signal-arg-types.h"
+ }
+};
+
 
 struct _saved_mfn_connector_precursor
 {
@@ -176,12 +333,13 @@ struct _saved_mfn_connector_precursor
   return {signal_name, _this, fn};
  }
 
+ template<typename OBJECT_Type>
+ friend _saved_fn_connector_double<OBJECT_Type> operator>>(OBJECT_Type* lhs,
+   _saved_mfn_connector_precursor rhs)
+ {
+  return {lhs, rhs.signal_name};
+ }
 };
-
-
-//template<typename OBJECT_Type>
-//connector<OBJECT_Type>
-//Cc(OBJECT_Type* obj) { return {obj}; }
 
 
 template<typename MEMBER_Fn, typename THIS_Type, typename FN_Type>
@@ -238,7 +396,10 @@ struct _Connect_triple
  friend void operator>> (OBJECT_Type* lhs,
    _Connect_triple<MEMBER_Fn, THIS_Type, FN_Type> triple)
  {
-  lhs->connect(lhs, triple._mfn, triple._this, triple._fn);
+  if(triple._this)
+    lhs->connect(lhs, triple._mfn, triple._this, triple._fn);
+  else
+    lhs->connect(lhs, triple._mfn, triple._fn);
  }
 
  template<typename OBJECT_Type>
@@ -246,6 +407,71 @@ struct _Connect_triple
    _Connect_triple<MEMBER_Fn, THIS_Type, FN_Type> triple)
  {
   lhs->connect(lhs, triple._mfn, triple._this, triple._fn);
+ }
+
+};
+
+template<typename MEMBER_Fn, typename FN_Type>
+struct _Connect_double
+{
+ MEMBER_Fn _mfn;
+ FN_Type _fn;
+
+ _Connect_double& operator--()
+ {
+  return *this;
+ }
+
+ _Connect_double& operator-()
+ {
+  return *this;
+ }
+
+ _Connect_double& operator!()
+ {
+  return *this;
+ }
+
+ template<typename OBJECT_Type>
+ friend void operator- (OBJECT_Type* lhs,
+   _Connect_double<MEMBER_Fn, FN_Type> triple)
+ {
+  lhs->connect(lhs, triple._mfn, triple._fn);
+ }
+
+ template<typename OBJECT_Type>
+ friend void operator/ (OBJECT_Type* lhs,
+   _Connect_double<MEMBER_Fn, FN_Type> triple)
+ {
+  lhs->connect(lhs, triple._mfn, triple._fn);
+ }
+
+ template<typename OBJECT_Type>
+ friend void operator> (OBJECT_Type* lhs,
+   _Connect_double<MEMBER_Fn, FN_Type> triple)
+ {
+  lhs->connect(lhs, triple._mfn, triple._fn);
+ }
+
+ template<typename OBJECT_Type>
+ friend void operator< (OBJECT_Type* lhs,
+   _Connect_double<MEMBER_Fn, FN_Type> triple)
+ {
+  lhs->connect(lhs, triple._mfn, triple._fn);
+ }
+
+ template<typename OBJECT_Type>
+ friend void operator>> (OBJECT_Type* lhs,
+   _Connect_double<MEMBER_Fn, FN_Type> triple)
+ {
+  lhs->connect(lhs, triple._mfn, triple._fn);
+ }
+
+ template<typename OBJECT_Type>
+ friend void operator| (OBJECT_Type* lhs,
+   _Connect_double<MEMBER_Fn, FN_Type> triple)
+ {
+  lhs->connect(lhs, triple._mfn, triple._fn);
  }
 
 };
@@ -299,6 +525,13 @@ struct _Connect
   return {_mfn, _this, fn};
  }
 
+ template<typename FN_Type>
+ _Connect_double<MEMBER_Fn, FN_Type> operator<<(FN_Type fn)
+ {
+  return {_mfn, fn};
+ }
+
+
 };
 
 
@@ -327,9 +560,6 @@ template<typename OBJECT_Type, typename SIGNAL_Type>
 void _stash_signal(QString name, SIGNAL_Type signal)
 {
  _saved_mfn_connector<OBJECT_Type>::add_signal(name, signal);
-
- //_saved_mfn_connector<_saved_mfn_connector_fiat_base>::add_signal(name, signal);
-
 }
 
 template<typename OBJECT_Type, typename SIGNAL_Type>

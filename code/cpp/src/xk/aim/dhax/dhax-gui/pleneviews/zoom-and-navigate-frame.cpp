@@ -278,7 +278,15 @@ Pull Mode (second click, or right check box) moves the image/page relative to it
 
 // connect(pan_mode_button_, &QPushButton::clicked,  [this](bool state)
 
- pan_mode_button_ >> lConnect(QPushButton::clicked) << [this](bool state)
+// pan_mode_button_ > Connect(QPushButton::clicked) << [this](bool state)
+
+ pan_mode_button_ >> Connect(clicked) << [this](bool state)
+ {
+
+ };
+
+#ifdef HIDE
+ pan_mode_button_ >> Connect(clicked) << [this](bool state)
  {
   // // ckb state: pull mode = 1  temp pull mode = 2  temp pan mode = 3
   if(state)
@@ -306,7 +314,8 @@ Pull Mode (second click, or right check box) moves the image/page relative to it
 
   pan_mode_ckb_->setChecked(state);
   Q_EMIT pan_mode_changed(state);
- };
+ } ;
+#endif
 
  QString check_path;
 
@@ -399,6 +408,10 @@ can be temprarily activated by pressing the <i>control</i> or
    )");
 
 // connect(pull_mode_ckb_, &QPushButton::clicked,
+
+  // //?
+ pull_mode_ckb_ >> Connect(QPushButton::clicked)
+   -> to_this(handle_reset_all);
 
  pull_mode_ckb_ >> lConnect(QPushButton::clicked)
    << [this](bool state)
