@@ -369,7 +369,7 @@ void DHAX_Main_Window_Controller::check_init_document_controller()
   document_controller_->set_page_and_search_frame(page_and_search_frame_);
 
   _self_connect_(page_and_search_frame_ ,page_select_requested)
-    << [this](u4 page)
+    to_lambda[this](u4 page)
   {
    document_controller_->switch_to_page(page);
    reinit_pdf_page_view(page);

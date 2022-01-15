@@ -13,6 +13,8 @@
 #include "dhax-graphics-scene.h"
 #include "dhax-graphics-view.h"
 
+#include "application/dhax-application-state.h"
+
 
 #include <QGraphicsProxyWidget>
 #include <QDebug>
@@ -116,11 +118,38 @@ void DHAX_Image_Viewer::load_image(QPixmap pixmap)
 
 void DHAX_Image_Viewer::complete_load_image()
 {
- int sipw = scrolled_image_pixmap_->width();
- int siph = scrolled_image_pixmap_->height();
+ u4 sipw = scrolled_image_pixmap_->width();
+ u4 siph = scrolled_image_pixmap_->height();
 
+ const DHAX_Application_State::Image_Margins& im = application_state_->image_margins();
 
- background_rectangle_ = scrolled_image_scene_->addRect(0, 0, sipw * 2, siph * 2);
+ u4 background_w, background_h, margin_l, margin_r, margin_t, margin_b,
+   margin_with_border_l, margin_with_border_t, image_with_border_w, image_with_border_h;
+
+ if(im.via_percent())
+ {
+  margin_l = (im.percent.left / 100) * sipw;
+  margin_r = (im.percent.right / 100) * sipw;
+  margin_t = (im.percent.top / 100) * siph;
+  margin_b = (im.percent.bottom / 100) * siph;
+ }
+
+ else
+ {
+  margin_l = im.left;
+  margin_r = im.right;
+  margin_t = im.top;
+  margin_b = im.bottom;
+ }
+
+ background_w = sipw + margin_l + margin_r;
+ background_h = siph + margin_t + margin_b;
+ margin_with_border_l = margin_l - im.border.left;
+ margin_with_border_t = margin_t - im.border.top;
+ image_with_border_w = sipw + im.border.left + im.border.right;
+ image_with_border_h = siph + im.border.top + im.border.bottom;
+
+ background_rectangle_ = scrolled_image_scene_->addRect(0, 0, background_w, background_h);
 
  background_rectangle_center_x_ = background_rectangle_->boundingRect().x() +
    (background_rectangle_->boundingRect().width() / 2);
@@ -145,14 +174,17 @@ void DHAX_Image_Viewer::complete_load_image()
  //QGraphicsProxyWidget* w =  scrolled_image_scene_->addWidget(image_scene_item_);
 
  _Proxy_Widget* w = scrolled_image_scene_->add_proxy_widget(image_scene_item_);
- w->setPos(sipw/2,siph/2);
+
+ //?w->setPos(sipw/2,siph/2);
+ w->setPos(margin_l, margin_t);
 
  //?
  if(background_center_rectangle_)
    delete background_center_rectangle_;
 
  background_center_rectangle_ = scrolled_image_scene_->addRect(
-   (sipw/2) - 10, (siph/2) - 10, sipw + 20, siph + 20);
+   margin_with_border_l, margin_with_border_t,
+   image_with_border_w, image_with_border_h);
 
  image_scene_item_->set_original_position(background_center_rectangle_->pos());
 
@@ -185,7 +217,7 @@ void DHAX_Image_Viewer::complete_load_image()
 
 void DHAX_Image_Viewer::reset_background_center_rectangle_color()
 {
- background_center_rectangle_->setBrush(application_colors_->value("image-background-center-rectangle-color"));
+ background_center_rectangle_->setBrush(application_state_->application_colors()->value("image-background-center-rectangle-color"));
 }
 
 void DHAX_Image_Viewer::load_image(QString file_path)

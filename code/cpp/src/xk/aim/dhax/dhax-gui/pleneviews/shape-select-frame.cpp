@@ -7,6 +7,8 @@
 #include "stash-signals-alt-base.h"
 #include "self-connect.h"
 
+#include "new-child.h"
+
 
 #include <QDebug>
 
@@ -144,7 +146,7 @@ subcontrol-position: left;}
 // vertical_margin_combo_box_ >> lConnect(QOverload<int>::of(&QComboBox::currentIndexChanged))
 
  vertical_margin_combo_box_
-   >> lConnect(int overload_of QComboBox::currentIndexChanged)
+   >> Connect(int overload_of QComboBox::currentIndexChanged)
    to_lambda[this](int index)
  {
   bool and_sides = !sides_margin_check_box_->isChecked();
@@ -223,8 +225,8 @@ subcontrol-position: left;}
 //   [this](bool state)
 
  vertical_margin_percent_check_box_
-   >> lConnect(QCheckBox::clicked)
-   << [this](bool state)
+   >> Connect(clicked)
+   to_lambda[this](bool state)
  {
   if(state)
     switch_to_margins_percent();
@@ -369,9 +371,11 @@ subcontrol-position: left;}
  item->setFlags(item->flags() & ~Qt::ItemIsEnabled);
 
 
- connect(generic_shape_options_, &QComboBox::currentTextChanged,
-   [this] {update_shape_selection();});
+// connect(generic_shape_options_, &QComboBox::currentTextChanged,
+//   [this] {update_shape_selection();});
 
+ generic_shape_options_ >> Connect(currentTextChanged)
+   to_lambda[this]{update_shape_selection();};
 
  generic_shape_ckb_ = new QCheckBox("Generic\nShape", this);
 // main_tab_layout_->addWidget(generic_shape_ckb_);
@@ -396,8 +400,9 @@ subcontrol-position: left;}
 
  generic_shape_ckb_->setChecked(true);
 
- connect(shape_ckb_group_, &QButtonGroup::idClicked,
-   [this](int id)
+ //    connect(shape_ckb_group_, &QButtonGroup::idClicked,
+ shape_ckb_group_ >> Connect(idClicked)
+   to_lambda[this](int id)
  {
   int ii = -2 - id;
   if(ii) // generic
@@ -411,7 +416,7 @@ subcontrol-position: left;}
    domain_shape_options_->setEnabled(true);
   }
   update_shape_selection();
- });
+ };
 
  domain_shape_options_->setEnabled(false);
 
@@ -421,33 +426,60 @@ subcontrol-position: left;}
 
  //main_layout_->addStretch();
 
- clear_last_all_tab_layout_->addWidget(clear_selected_btn_);
+// clear_last_all_tab_layout_->addWidget(clear_selected_btn_);
 
- QHBoxLayout* clear_last_all_layout = new QHBoxLayout;
- clear_last_all_layout->addWidget(clear_last_btn_);
- clear_last_all_layout->addWidget(clear_all_btn_);
+ clear_last_all_layout_1_ = new QHBoxLayout;
+ clear_last_all_layout_2_ = new QHBoxLayout;
+ clear_last_all_layout_3_ = new QHBoxLayout;
 
- clear_last_all_tab_layout_->addLayout(clear_last_all_layout);
+ scene_label_ = new_child(QLabel)("Scene");
 
- highlight_ckb_ = new QCheckBox("Highlight", this);
- clear_last_all_tab_layout_->addWidget(highlight_ckb_);
+ //scene_color_button_ = new QPushButton(this);
+ scene_color_button_ = new_child(QPushButton);
+ scene_color_button_->setMaximumWidth(30);
+
+
+ clear_last_all_layout_1_->addWidget(scene_label_);
+ clear_last_all_layout_1_->addWidget(scene_color_button_);
+ clear_last_all_layout_1_->addStretch();
+
+
+ clear_last_all_layout_2_->addWidget(clear_last_btn_);
+ clear_last_all_layout_2_->addWidget(clear_all_btn_);
+
+ highlight_ckb_ = new_child(QCheckBox)("Highlight");
+ clear_last_all_layout_3_->addWidget(highlight_ckb_);
+ clear_last_all_layout_3_->addStretch();
+ clear_last_all_layout_3_->addWidget(clear_selected_btn_);
+ clear_last_all_layout_3_->addStretch();
+
+ clear_last_all_tab_layout_->addLayout(clear_last_all_layout_1_);
+ clear_last_all_tab_layout_->addLayout(clear_last_all_layout_2_);
+ clear_last_all_tab_layout_->addLayout(clear_last_all_layout_3_);
+
+ //highlight_ckb_ = new QCheckBox("Highlight", this);
+
 
  clear_last_all_tab_->setLayout(clear_last_all_tab_layout_);
 
- auto_store_check_box_ = new QCheckBox(this);
- store_button_ = new QPushButton("Store", this);
+ //auto_store_check_box_ = new QCheckBox(this);
+ auto_store_check_box_ = new_child(QCheckBox);
+
+ //store_button_ = new QPushButton("Store", this);
+ store_button_ = new_child(QPushButton)("Store");
  store_button_->setMinimumWidth(45);
  store_button_->setMaximumWidth(45);
  store_button_->setMaximumHeight(15);
  store_button_->setStyleSheet(soft_small_colorful_button_style_sheet_().arg(8));
 
- save_button_ = new QPushButton("Save", this);
+// save_button_ = new QPushButton("Save", this);
+ save_button_ = new_child(QPushButton)("Save");
  save_button_->setMinimumWidth(55);
  save_button_->setMaximumWidth(55);
  save_button_->setMaximumHeight(15);
  save_button_->setStyleSheet(soft_small_colorful_button_style_sheet_().arg(8));
 
- close_button_ = new QPushButton("Close", this);
+ close_button_ = new_child(QPushButton)("Close");
  close_button_->setMinimumWidth(55);
  close_button_->setMaximumWidth(55);
  close_button_->setStyleSheet(soft_colorful_button_style_sheet_());
@@ -509,8 +541,11 @@ subcontrol-position: left;}
 
  main_layout_->addStretch();
 
- connect(save_button_, SIGNAL(clicked(bool)), this, SIGNAL(save_requested(bool)));
- connect(close_button_, SIGNAL(clicked(bool)), this, SIGNAL(close_requested(bool)));
+ save_button_ >> Connect(clicked) -> to_this(save_requested);
+ close_button_ >> Connect(clicked) -> to_this(close_requested);
+
+// connect(save_button_, SIGNAL(clicked(bool)), this, SIGNAL(save_requested(bool)));
+// connect(close_button_, SIGNAL(clicked(bool)), this, SIGNAL(close_requested(bool)));
 
  setLayout(main_layout_);
 
@@ -591,6 +626,11 @@ void Shape_Select_Frame::populate_margins_non_percent(bool clear)
 void Shape_Select_Frame::update_border_color_button_color(QColor c)
 {
  fill_solid_color_button(border_color_button_, c);
+}
+
+void Shape_Select_Frame::update_scene_color_button_color(QColor c)
+{
+ fill_solid_color_button(scene_color_button_, c);
 }
 
 

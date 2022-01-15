@@ -40,6 +40,11 @@ class Shape_Select_Frame : public QFrame
  QGridLayout* main_tab_layout_;
 
  QVBoxLayout* clear_last_all_tab_layout_;
+ QLabel* scene_label_;
+ QPushButton* scene_color_button_;
+ QHBoxLayout* clear_last_all_layout_1_;
+ QHBoxLayout* clear_last_all_layout_2_;
+ QHBoxLayout* clear_last_all_layout_3_;
 
  QVBoxLayout* image_setup_tab_layout_;
 
@@ -110,6 +115,7 @@ public:
  void update_shape_selection();
 
  void update_border_color_button_color(QColor c);
+ void update_scene_color_button_color(QColor c);
 
  void switch_to_margins_percent();
  void switch_to_margins_non_percent();

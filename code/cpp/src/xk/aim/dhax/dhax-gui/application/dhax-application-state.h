@@ -34,7 +34,7 @@ public:
   Border border;
   Percent percent;
 
-  bool via_percent() { return percent.top >= 0; }
+  bool via_percent() const { return percent.top >= 0; }
 
   Image_Margins ()
     :  top(0), bottom(0), left(0), right(0),
@@ -45,6 +45,7 @@ public:
 private:
 
  Image_Margins image_margins_;
+ QMap<QString, QColor>* application_colors_;
 
 
 public:
@@ -52,6 +53,7 @@ public:
  DHAX_Application_State();
 
  ACCESSORS__RGET(Image_Margins ,image_margins)
+ ACCESSORS(MACRO_PASTE(QMap<QString, QColor>*) ,application_colors)
 };
 
 

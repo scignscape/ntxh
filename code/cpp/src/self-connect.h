@@ -18,58 +18,6 @@
 #include "global-macros.h"
 
 
-template<typename OBJECT_Type, typename SIGNAL_Type>
-struct lConnect_precursor
-{
- OBJECT_Type* obj;
- SIGNAL_Type signal;
-
- template<typename LAMBDA_Type>
- void operator <<(LAMBDA_Type l)
- {
-  obj->connect(obj, signal, l);
- }
-};
-
-template<typename SIGNAL_Type>
-struct lConnect_signal
-{
- SIGNAL_Type signal;
-
- template<typename OBJECT_Type>
- friend lConnect_precursor<OBJECT_Type, SIGNAL_Type>
-   operator>>(OBJECT_Type* obj, lConnect_signal rhs)
- {
-  return {obj, rhs.signal};
- }
-};
-
-template<typename SIGNAL_Type>
-lConnect_signal<SIGNAL_Type> _lConnect(SIGNAL_Type s)
-{
- return {s};
-}
-
-template<typename OBJECT_Type, typename SIGNAL_Type>
-lConnect_precursor<OBJECT_Type, SIGNAL_Type> _lConnect_(OBJECT_Type* obj, SIGNAL_Type signal)
-{
- return {obj, signal};
-}
-
-#define  to_lambda_this << [this]
-#define  to_lambda <<
-
-#define overload_of ,
-
-#define lConnect_2(x, y) _lConnect(QOverload<x>::of(&y))
-
-#define lConnect_1(x) _lConnect(&x)
-
-#define lConnect(...) \
-  _preproc_CONCAT(lConnect_, _preproc_NUM_ARGS (__VA_ARGS__))(__VA_ARGS__)
-
-
-
 
 #define USE_SELF_CONNECT_normal \
  template<typename ... ARGS> \
@@ -172,8 +120,32 @@ struct _self_connect_package
   _std_placeholders_9)
 
 
+#define _to_bind_0_(...) << _bind_0_(__VA_ARGS__)
+#define _to_bind_1_(...) << _bind_1_(__VA_ARGS__)
+#define _to_bind_2_(...) << _bind_2_(__VA_ARGS__)
+
+#define _to_bind_3_(...) << _bind_3_(__VA_ARGS__)
+#define _to_bind_4_(...) << _bind_4_(__VA_ARGS__)
+#define _to_bind_5_(...) << _bind_5_(__VA_ARGS__)
+
+#define _to_bind_6_(...) << _bind_6_(__VA_ARGS__)
+#define _to_bind_7_(...) << _bind_7_(__VA_ARGS__)
+#define _to_bind_8_(...) << _bind_8_(__VA_ARGS__)
+
+#ifndef to_lambda
+#define to_lambda <<
+#endif
+
 #define connect_to_this(x, y, z) \
   connect(x, y, this, &std::remove_reference<decltype(*this)>::type::z)
+
+
+#define make_default_signal_name(x)  x##_requested
+#define make_default_slot_name(x)  handle_##x
+
+#define minimal_self_connect(x) \
+  _self_connect_(self_connect_sender, make_default_signal_name(x)) \
+     _to_bind_0_(self_connect_receiver, make_default_slot_name(x))
 
 
 

@@ -42,6 +42,11 @@
 #include <QDebug>
 
 #include <QPushButton>
+#include <QCheckBox>
+#include <QComboBox>
+#include <QSlider>
+#include <QButtonGroup>
+#include "subwindows/range-slider.h"
 
 #include <type_traits>
 
@@ -67,14 +72,24 @@ DHAX_GUI_Environment::DHAX_GUI_Environment()
 void DHAX_GUI_Environment::init_stashed_signals()
 {
  stash_signal(QPushButton::clicked);
+ stash_signal(QCheckBox::stateChanged);
+ stash_signal(QCheckBox::clicked);
+ stash_signal(QComboBox::currentTextChanged);
+ stash_signal(ctkRangeSlider::minimumValueChanged);
+ stash_signal(ctkRangeSlider::maximumValueChanged);
+ stash_signal(ctkRangeSlider::valueChanged);
+ stash_signal(QSlider::valueChanged);
+ stash_signal(QButtonGroup::idClicked);
 }
 
-void DHAX_GUI_Environment::init_application_colors()
+void DHAX_GUI_Environment::init_application_state()
 {
- application_colors_ = new QMap<QString, QColor>
+ application_state_ = new DHAX_Application_State;
+ application_state_->set_application_colors(new QMap<QString, QColor>
  {
-  {"image-background-center-rectangle-color", Qt::darkCyan}
- };
+  {"image-background-center-rectangle-color", Qt::darkCyan},
+  {"scene-background-center", Qt::lightGray},
+ });
 }
 
 DHAX_Annotation_Environment*
@@ -177,54 +192,36 @@ void DHAX_GUI_Environment::init_main_window_signal_generator()
 {
  main_window_->init_signal_generator();
 
- main_window_->signal_generator()->self_connect(SIGNAL(take_screenshot_requested()),
-  main_window_receiver_, SLOT(handle_take_screenshot()));
+// _self_connect_(main_window_->signal_generator() ,take_screenshot_requested)
+//    _to_bind_0_(main_window_receiver_ ,handle_take_screenshot);
 
- main_window_->signal_generator()->self_connect(SIGNAL(load_image_requested()),
-  main_window_receiver_, SLOT(handle_load_image()));
+ #define self_connect_sender  main_window_->signal_generator()
+ #define self_connect_receiver  main_window_receiver_
 
- main_window_->signal_generator()->self_connect(SIGNAL(load_pdf_requested()),
-  main_window_receiver_, SLOT(handle_load_pdf()));
+ minimal_self_connect(take_screenshot);
+ minimal_self_connect(load_image);
+ minimal_self_connect(load_pdf);
 
- main_window_->signal_generator()->self_connect(SIGNAL(load_notes_requested()),
-  application_receiver_, SLOT(handle_load_notes()));
+ #undef self_connect_receiver
+ #define self_connect_receiver  application_receiver_
 
- main_window_->signal_generator()->self_connect(SIGNAL(view_contours_requested()),
-  application_receiver_, SLOT(handle_view_contours()));
+ minimal_self_connect(load_notes);
+ minimal_self_connect(view_contours);
+ minimal_self_connect(view_3d);
+ minimal_self_connect(view_360);
+ minimal_self_connect(view_cad);
+ minimal_self_connect(run_forge_workflow);
 
- main_window_->signal_generator()->self_connect(SIGNAL(view_3d_requested()),
-  application_receiver_, SLOT(handle_view_3d()));
-
- main_window_->signal_generator()->self_connect(SIGNAL(view_360_requested()),
-  application_receiver_, SLOT(handle_view_360()));
-
- main_window_->signal_generator()->self_connect(SIGNAL(view_cad_requested()),
-  application_receiver_, SLOT(handle_view_cad()));
-
- main_window_->signal_generator()->self_connect(SIGNAL(run_forge_workflow_requested()),
-  application_receiver_, SLOT(handle_run_forge_workflow()));
-
+ _self_connect_(main_window_->signal_generator() ,quit_requested)
+   to_lambda[this]()
+ {
+  main_window_->close();
+ };
 
 #ifdef USE_IFC
  main_window_->signal_generator()->self_connect(SIGNAL(ifc_convert_requested()),
   application_receiver_, SLOT(handle_ifc_convert()));
 #endif
-
-// void view_contours_requested();
-// void view_3d_requested();
-// void view_360_requested();
-// void view_cad_requested();
-// void run_forge_workflow_requested();
-
-// main_window_->signal_generator()->self_connect(SIGNAL(quit_requested()),
-//  main_window_receiver_, SLOT(handle_load_image()));
-
- _self_connect_(main_window_->signal_generator() ,quit_requested)
-   << [this]()
- {
-  main_window_->close();
- };
-
 
 }
 
@@ -265,7 +262,10 @@ void DHAX_GUI_Environment::init_graphics_frame_layout(QBoxLayout::Direction qbd,
    graphics_view_->setScene(graphics_scene_);
 
  QObject::connect(graphics_frame_, &DHAX_Graphics_Frame::close_requested,
-    [this](bool) {main_window_->close();});
+    [this](bool)
+ {
+  main_window_->close();
+ });
 }
 
 void DHAX_GUI_Environment::init_main_window_frame_layout(QBoxLayout::Direction qbd)
@@ -324,19 +324,19 @@ void DHAX_GUI_Environment::init_main_window_frame()
 void DHAX_GUI_Environment::init_graphics_frame()
 {
  graphics_frame_ = new DHAX_Graphics_Frame;
- graphics_frame_->set_application_colors(application_colors_);
+ graphics_frame_->set_application_colors(application_state_->application_colors());
 
  _self_connect_(graphics_frame_ ,save_requested)
-    << _bind_0_(application_controller_ ,handle_save_requested);
+    _to_bind_0_(application_controller_ ,handle_save_requested);
 
  _self_connect_(graphics_frame_ ,image_path_show_folder_requested)
-    << _bind_0_(application_controller_ ,handle_image_path_show_folder_requested);
+    _to_bind_0_(application_controller_ ,handle_image_path_show_folder_requested);
 
  _self_connect_(graphics_frame_ ,change_image_border_color_requested)
-    << _bind_0_(application_controller_ ,handle_change_image_border_color_requested);
+    _to_bind_0_(application_controller_ ,handle_change_image_border_color_requested);
 
  _self_connect_(graphics_frame_ ,change_image_margins_requested)
-    << _bind_2_(application_controller_ ,handle_change_image_margins_requested);
+    _to_bind_2_(application_controller_ ,handle_change_image_margins_requested);
 }
 
 void DHAX_GUI_Environment::init_graphics_scene()
@@ -359,7 +359,7 @@ void DHAX_GUI_Environment::init_image_viewer()
  image_viewer_->set_scrolled_image_view(graphics_view_);
  image_viewer_->set_scrolled_image_scene(graphics_scene_);
 
- image_viewer_->set_application_colors(application_colors_);
+ image_viewer_->set_application_state(application_state_);
  //QMap<QString, QColor>*
 
 

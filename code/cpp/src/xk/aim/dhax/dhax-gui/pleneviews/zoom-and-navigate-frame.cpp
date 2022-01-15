@@ -249,10 +249,11 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  //?bottom_layout_ = new QHBoxLayout;
 
- multi_draw_ckb_ >> lConnect(QCheckBox::stateChanged)
-   <<
-// connect(multi_draw_ckb_, &QCheckBox::stateChanged,
-   [this](int st)
+ // connect(multi_draw_ckb_, &QCheckBox::stateChanged,
+ // multi_draw_ckb_ >> lConnect(QCheckBox::stateChanged)
+
+ multi_draw_ckb_ >> Connect(stateChanged)
+   to_lambda[this](int st)
  {
   if(st == Qt::Unchecked)
     Q_EMIT multi_draw_unset();
@@ -278,15 +279,9 @@ Pull Mode (second click, or right check box) moves the image/page relative to it
 
 // connect(pan_mode_button_, &QPushButton::clicked,  [this](bool state)
 
-// pan_mode_button_ > Connect(QPushButton::clicked) << [this](bool state)
+// pan_mode_button_ > Connect(QPushButton::clicked) to_lambda[this](bool state)
 
- pan_mode_button_ >> Connect(clicked) << [this](bool state)
- {
-
- };
-
-#ifdef HIDE
- pan_mode_button_ >> Connect(clicked) << [this](bool state)
+ pan_mode_button_ >> Connect(clicked) to_lambda[this](bool state)
  {
   // // ckb state: pull mode = 1  temp pull mode = 2  temp pan mode = 3
   if(state)
@@ -314,8 +309,7 @@ Pull Mode (second click, or right check box) moves the image/page relative to it
 
   pan_mode_ckb_->setChecked(state);
   Q_EMIT pan_mode_changed(state);
- } ;
-#endif
+ };
 
  QString check_path;
 
@@ -341,7 +335,7 @@ activated by pressing the <i>shift</i> or <i>meta</i> key while moving the mouse
 
 // connect(pan_mode_ckb_, &QPushButton::clicked,
 
- pan_mode_ckb_ >> lConnect(QPushButton::clicked) <<
+ pan_mode_ckb_ >> Connect(clicked) <<
     [this](bool state)
  {
   pan_mode_button_->setChecked(state);
@@ -410,11 +404,11 @@ can be temprarily activated by pressing the <i>control</i> or
 // connect(pull_mode_ckb_, &QPushButton::clicked,
 
   // //?
- pull_mode_ckb_ >> Connect(QPushButton::clicked)
+ pull_mode_ckb_ >> Connect(clicked)
    -> to_this(handle_reset_all);
 
- pull_mode_ckb_ >> lConnect(QPushButton::clicked)
-   << [this](bool state)
+ pull_mode_ckb_ >> Connect(clicked)
+   to_lambda[this](bool state)
  {
   if(pan_mode_ckb_->isChecked())
   {

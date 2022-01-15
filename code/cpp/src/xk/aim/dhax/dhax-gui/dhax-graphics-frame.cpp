@@ -43,6 +43,7 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
 
  shape_select_frame_ = new Shape_Select_Frame(this);
  shape_select_frame_->update_border_color_button_color(application_colors_->value("image-background-center-rectangle-color"));
+ shape_select_frame_->update_scene_color_button_color(application_colors_->value("scene-background-color"));
 
 
  zoom_frame_ = new Zoom_and_Navigate_Frame(this);
@@ -155,26 +156,26 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
  zoom_frame_->self_connect(SIGNAL(zoom_factor_changed(r8)), this, SLOT(handle_zoom_factor_changed(r8)));
 
  _self_connect_(shape_select_frame_ ,save_requested)
-   << [this] (bool)
+   to_lambda[this] (bool)
  {
   Q_EMIT save_requested();
  };
 
  _self_connect_(shape_select_frame_ ,image_path_show_folder_requested)
-   << [this] (bool)
+   to_lambda[this] (bool)
  {
   Q_EMIT image_path_show_folder_requested();
  };
 
  _self_connect_(shape_select_frame_ ,change_border_color_requested)
-   << [this] (bool)
+   to_lambda[this] (bool)
  {
   Q_EMIT change_image_border_color_requested();
  };
 
 
  _self_connect_(shape_select_frame_ ,change_vertical_margin_percent_requested)
-   << [this] (u1 xy, bool and_sides)
+   to_lambda[this] (u1 xy, bool and_sides)
  {
   if(and_sides)
     Q_EMIT change_image_margins_requested({xy},
@@ -193,19 +194,19 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
  shape_select_frame_->self_connect(SIGNAL(close_requested(bool)), this, SIGNAL(close_requested(bool)));
 
  _self_connect_(zoom_frame_ ,image_top_left_button_clicked)
-   << [this](bool)
+   to_lambda[this](bool)
  {
   image_viewer_->recenter_scroll_top_left();
  };
 
  _self_connect_(zoom_frame_ ,center_image_button_clicked)
-   << [this](bool)
+   to_lambda[this](bool)
  {
   image_viewer_->recenter_scroll_center();
  };
 
  _self_connect_(zoom_frame_ ,pan_mode_changed)
-   << [this](bool mode)
+   to_lambda[this](bool mode)
  {
   if(mode)
   {
@@ -221,7 +222,7 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
  };
 
  _self_connect_(zoom_frame_ ,pull_mode_changed)
-   << [this](bool mode)
+   to_lambda[this](bool mode)
  {
   if(mode)
   {
@@ -239,13 +240,13 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
  };
 
  _self_connect_(zoom_frame_ ,multi_draw_set)
-   << [this]()
+   to_lambda[this]()
  {
   display_image_data_->set_multi_draw();
  };
 
  _self_connect_(zoom_frame_ ,multi_draw_unset)
-   << [this]()
+   to_lambda[this]()
  {
   display_image_data_->unset_multi_draw();
  };
@@ -255,7 +256,7 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
  setup_shape_rectangle();
 
  _self_connect_(shape_select_frame_ ,shape_selection_changed)
-   << [this](QString sel)
+   to_lambda[this](QString sel)
  {
   if(sel == "Rectangle")
     setup_shape_rectangle();

@@ -28,7 +28,7 @@ Page_and_Search_Frame::Page_and_Search_Frame(QWidget* parent)
 
  page_select_
    >> lConnect(s4 overload_of QComboBox::currentIndexChanged)
-   << [this](s4 index)
+   to_lambda[this](s4 index)
  {
   // //  we need to filter out spurious calls
    //    not caused by actual user actions ...

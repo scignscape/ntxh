@@ -205,7 +205,7 @@ TEMP_MACRO(4, MACRO_PASTE(typename a1, typename a2, typename a3, typename a4),
 
  template<typename LAMBDA_Type, typename = typename std::enable_if<!std::is_convertible<LAMBDA_Type,
    std::function<void()>>::value>::type>
- bool resolve_lambda_connection_0(QString mfn, LAMBDA_Type fn)
+ bool resolve_lambda_connection_0(QString, LAMBDA_Type)
  {
   return false;
  }
@@ -597,6 +597,59 @@ void _stash_signal_strip_name(QString name, SIGNAL_Type signal)
 
 #define stash_signal(...) \
   _preproc_CONCAT(stash_signal_, _preproc_NUM_ARGS (__VA_ARGS__))(__VA_ARGS__)
+
+
+
+template<typename OBJECT_Type, typename SIGNAL_Type>
+struct lConnect_precursor
+{
+ OBJECT_Type* obj;
+ SIGNAL_Type signal;
+
+ template<typename LAMBDA_Type>
+ void operator <<(LAMBDA_Type l)
+ {
+  obj->connect(obj, signal, l);
+ }
+};
+
+template<typename SIGNAL_Type>
+struct lConnect_signal
+{
+ SIGNAL_Type signal;
+
+ template<typename OBJECT_Type>
+ friend lConnect_precursor<OBJECT_Type, SIGNAL_Type>
+   operator>>(OBJECT_Type* obj, lConnect_signal rhs)
+ {
+  return {obj, rhs.signal};
+ }
+};
+
+template<typename SIGNAL_Type>
+lConnect_signal<SIGNAL_Type> _lConnect(SIGNAL_Type s)
+{
+ return {s};
+}
+
+template<typename OBJECT_Type, typename SIGNAL_Type>
+lConnect_precursor<OBJECT_Type, SIGNAL_Type> _lConnect_(OBJECT_Type* obj, SIGNAL_Type signal)
+{
+ return {obj, signal};
+}
+
+#define  to_lambda_this << [this]
+#define  to_lambda <<
+
+#define overload_of ,,,
+
+#define lConnect_4(x, dummy1, dummy2, y) _lConnect(QOverload<x>::of(&y))
+
+#define lConnect(...) \
+  _preproc_CONCAT(lConnect_, _preproc_NUM_ARGS (__VA_ARGS__))(__VA_ARGS__)
+
+#define _Connect_4(x, dummy1, dummy2, y) _lConnect(QOverload<x>::of(&y))
+
 
 #define _Connect_3(dummy1,_1,dummy2) _Connect_(_1)
 
