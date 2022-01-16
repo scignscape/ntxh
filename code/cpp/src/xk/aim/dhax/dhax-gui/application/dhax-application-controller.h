@@ -13,7 +13,6 @@
 
 #include "global-types.h"
 
-#include "dhax-application-state.h"
 
 #include <QString>
 #include <QMap>
@@ -36,9 +35,11 @@ class DHAX_Graphics_Frame;
 
 class DHAX_Forge_Controller;
 
+class DHAX_Application_State;
+
 class DHAX_Application_Controller
 {
- DHAX_Application_State application_state_;
+ DHAX_Application_State* application_state_;
 
  DHAX_Main_Window* application_main_window_;
 
@@ -79,6 +80,7 @@ public:
  ACCESSORS(DHAX_UDP_Controller* ,udp_controller)
  ACCESSORS(DHAX_Main_Window_Controller* ,main_window_controller)
  ACCESSORS(DHAX_Application_Receiver* ,application_receiver)
+ ACCESSORS(DHAX_Application_State* ,application_state)
 
  ACCESSORS(DHAX_Forge_Controller* ,forge_controller)
 
@@ -112,9 +114,12 @@ public:
  QString get_current_image_complete_base_name();
  QDir get_current_image_dir();
 
- void handle_image_path_show_folder_requested();
- void handle_change_image_border_color_requested();
- void handle_change_image_margins_requested(QVector<u1> values, u1 context);
+ QColor handle_change_color(QString application_role);
+
+ void handle_image_path_show_folder();
+ void handle_change_image_border_color();
+ void handle_change_scene_background_color();
+ void handle_change_image_margins(QVector<u1> values, u1 context);
 
 
  void handle_view_contour_info(QString path);

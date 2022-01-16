@@ -8,6 +8,9 @@
 
 #include "dhax-application-controller.h"
 
+#include "dhax-application-state.h"
+
+
 #include <QColorDialog>
 
 //#include "dhax-main-window.h"
@@ -19,6 +22,8 @@
 #include "image-viewer/dhax-image-viewer.h"
 
 #include "dhax-graphics-frame.h"
+
+#include "dhax-graphics-scene.h"
 
 #include "pleneviews/shape-select-frame.h"
 
@@ -274,6 +279,7 @@ DHAX_Application_Controller::DHAX_Application_Controller()
   :  application_main_window_(nullptr),
      main_window_controller_(nullptr),
      application_receiver_(nullptr),
+     application_state_(nullptr),
      forge_controller_(nullptr),
     // display_image_data_(nullptr),
 //     zoom_frame_(nullptr),
@@ -429,10 +435,10 @@ QString DHAX_Application_Controller::get_current_image_complete_base_name()
  return qfi.completeBaseName();
 }
 
-void DHAX_Application_Controller::handle_change_image_margins_requested(QVector<u1> values,
+void DHAX_Application_Controller::handle_change_image_margins(QVector<u1> values,
   u1 context)
 {
- DHAX_Application_State::Image_Margins& im = application_state_.image_margins();
+ DHAX_Application_State::Image_Margins& im = application_state_->image_margins();
 
  DHAX_Graphics_Frame::Change_Image_Margins cim = (DHAX_Graphics_Frame::Change_Image_Margins) context;
 
@@ -492,10 +498,8 @@ void DHAX_Application_Controller::handle_change_image_margins_requested(QVector<
  }
 }
 
-void DHAX_Application_Controller::handle_change_image_border_color_requested()
+QColor DHAX_Application_Controller::handle_change_color(QString application_role)
 {
- //QColor c = QColorDialog::getColor();
-
  color_widgets::ColorDialog dlg;
 
  dlg.exec();
@@ -503,25 +507,38 @@ void DHAX_Application_Controller::handle_change_image_border_color_requested()
  QColor c = dlg.color();
 
  if(!c.isValid())
-   return;
+   return {};
 
- QColor& ref = (*graphics_frame_->application_colors())["image-background-center-rectangle-color"];
+ QColor& ref = graphics_frame_->application_color(application_role);
+   //(*graphics_frame_->application_colors())[application_role];
 
  if(c == ref)
-   return;
+   return {};
 
  ref = c;
 
- graphics_frame_->shape_select_frame()->update_border_color_button_color(c);
+ return c;
+}
 
- //application_main_window_->
+void DHAX_Application_Controller::handle_change_scene_background_color()
+{
+ QColor c = handle_change_color("scene-background-color");
+ if(c.isValid())
+ {
+  graphics_frame_->shape_select_frame()->update_scene_color_button_color(c);
+  graphics_frame_->graphics_scene()->set_background_color(c);
+ }
+}
 
- //qDebug() << c;
- //application_colors_;
+void DHAX_Application_Controller::handle_change_image_border_color()
+{
+ QColor c = handle_change_color("image-background-center-rectangle-color");
+ if(c.isValid())
+   graphics_frame_->shape_select_frame()->update_border_color_button_color(c);
 }
 
 
-void DHAX_Application_Controller::handle_image_path_show_folder_requested()
+void DHAX_Application_Controller::handle_image_path_show_folder()
 {
  QString f = get_current_image_folder();
  QString path = QString::fromLatin1("file://%1").arg(f);

@@ -182,6 +182,7 @@ Q_SIGNALS:
 
  void image_path_show_folder_requested(bool);
  void change_border_color_requested(bool);
+ void change_scene_color_requested(bool);
 
  void change_vertical_margin_percent_requested(u1, bool);
  void change_vertical_margin_requested(u1, bool);

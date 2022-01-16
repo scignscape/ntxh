@@ -52,11 +52,22 @@ struct _self_connect_package
  {
   _this->self_connect(mfn, lam);
  }
+
+ template<typename T1, typename T2>
+ void operator()(T1 t1, T2 t2)
+ {
+  _this->self_connect(mfn, t1, t2);
+ }
+
 };
 
+#ifndef _to_this_
+#define _to_this_(x) \
+ (this, &std::remove_pointer<decltype(this)>::type::x)
+#endif
 
 #define _self_connect_(x, y) \
-  x->_self_connect(&std::remove_reference<decltype(*x)>::type::y)
+  x->_self_connect(&std::remove_pointer<decltype(x)>::type::y)
 
 #define _bind_0_(x, y) \
   std::bind(&std::remove_reference<decltype(*x)>::type::y, x)
@@ -136,6 +147,11 @@ struct _self_connect_package
 #define to_lambda <<
 #endif
 
+#ifndef to_lambda_this
+#define to_lambda_this << [this]
+#endif
+
+
 #define connect_to_this(x, y, z) \
   connect(x, y, this, &std::remove_reference<decltype(*this)>::type::z)
 
@@ -146,6 +162,53 @@ struct _self_connect_package
 #define minimal_self_connect(x) \
   _self_connect_(self_connect_sender, make_default_signal_name(x)) \
      _to_bind_0_(self_connect_receiver, make_default_slot_name(x))
+
+
+#ifndef coemit
+#define coemit(x){x();}
+#endif
+
+#ifndef to_coemit_signature_and_signal
+#define to_coemit_signature_and_signal(x, ...) \
+to_lambda_this (x) coemit(__VA_ARGS__)
+#endif
+
+#ifndef to_coemit_2
+#define to_coemit_2(x, y) \
+ to_coemit_signature_and_signal(x, y)
+#endif
+
+#ifndef to_coemit_1
+#define to_coemit_1(x) \
+ to_coemit_TYPE_##x
+#endif
+
+#ifndef to_coemit_TYPE_bool
+#define to_coemit_TYPE_bool(...) \
+to_coemit_signature_and_signal(bool, __VA_ARGS__)
+#endif
+
+#ifndef to_coemit_TYPE_void
+#define to_coemit_TYPE_void(...) \
+to_coemit_signature_and_signal(, __VA_ARGS__)
+#endif
+
+#ifndef to_coemit_TYPE_
+#define to_coemit_TYPE_(...) \
+to_coemit_signature_and_signal(, __VA_ARGS__)
+#endif
+
+#ifndef to_coemit
+#define to_coemit(...) \
+ _preproc_CONCAT(to_coemit_, _preproc_NUM_ARGS (__VA_ARGS__))(__VA_ARGS__)
+#endif
+
+
+//to_lambda_this (bool) coemit(x)
+
+//#ifndef to_coemit_bool
+//#define to_coemit_bool to_coemit_(bool, x)
+//#endif
 
 
 

@@ -53,6 +53,8 @@
 #include "stash-signals.h"
 #include "stash-signals-alt-base.h"
 
+#include "application/dhax-application-state.h"
+
 DHAX_GUI_Environment::DHAX_GUI_Environment()
   :  main_window_(nullptr),
      main_window_controller_(nullptr),
@@ -88,7 +90,7 @@ void DHAX_GUI_Environment::init_application_state()
  application_state_->set_application_colors(new QMap<QString, QColor>
  {
   {"image-background-center-rectangle-color", Qt::darkCyan},
-  {"scene-background-center", Qt::lightGray},
+  {"scene-background-color", Qt::lightGray},
  });
 }
 
@@ -150,6 +152,7 @@ void DHAX_GUI_Environment::init_external_application_controller()
 void DHAX_GUI_Environment::init_application_controller()
 {
  application_controller_ = new DHAX_Application_Controller;
+ application_controller_->set_application_state(application_state_);
  application_controller_->set_graphics_frame(graphics_frame_);
  application_controller_->set_udp_controller(udp_controller_);
  application_controller_->init_udp_controller();
@@ -157,6 +160,21 @@ void DHAX_GUI_Environment::init_application_controller()
  application_controller_->set_application_receiver(application_receiver_);
  application_receiver_->set_application_controller(application_controller_);
  application_receiver_->set_application_main_window(main_window_);
+
+ _self_connect_(graphics_frame_ ,save_requested)
+    _to_bind_0_(application_controller_ ,handle_save_requested);
+
+ _self_connect_(graphics_frame_ ,image_path_show_folder_requested)
+    _to_bind_0_(application_controller_ ,handle_image_path_show_folder);
+
+ _self_connect_(graphics_frame_ ,change_image_border_color_requested)
+    _to_bind_0_(application_controller_ ,handle_change_image_border_color);
+
+ _self_connect_(graphics_frame_ ,change_scene_background_color_requested)
+    _to_bind_0_(application_controller_ ,handle_change_scene_background_color);
+
+ _self_connect_(graphics_frame_ ,change_image_margins_requested)
+    _to_bind_2_(application_controller_ ,handle_change_image_margins);
 }
 
 void DHAX_GUI_Environment::init_main_window_controller()
@@ -252,6 +270,9 @@ void DHAX_GUI_Environment::init_graphics_frame_layout(QBoxLayout::Direction qbd,
  if(graphics_view_)
    graphics_frame_->set_graphics_view(graphics_view_);
 
+ if(graphics_scene_)
+   graphics_frame_->set_graphics_scene(graphics_scene_);
+
  if(image_viewer_)
  {
   graphics_frame_->set_image_viewer(image_viewer_);
@@ -325,24 +346,13 @@ void DHAX_GUI_Environment::init_graphics_frame()
 {
  graphics_frame_ = new DHAX_Graphics_Frame;
  graphics_frame_->set_application_colors(application_state_->application_colors());
-
- _self_connect_(graphics_frame_ ,save_requested)
-    _to_bind_0_(application_controller_ ,handle_save_requested);
-
- _self_connect_(graphics_frame_ ,image_path_show_folder_requested)
-    _to_bind_0_(application_controller_ ,handle_image_path_show_folder_requested);
-
- _self_connect_(graphics_frame_ ,change_image_border_color_requested)
-    _to_bind_0_(application_controller_ ,handle_change_image_border_color_requested);
-
- _self_connect_(graphics_frame_ ,change_image_margins_requested)
-    _to_bind_2_(application_controller_ ,handle_change_image_margins_requested);
 }
 
 void DHAX_GUI_Environment::init_graphics_scene()
 {
  graphics_scene_ = new DHAX_Graphics_Scene;
- main_window_->setCentralWidget(main_window_frame_);
+ graphics_scene_->set_background_color(
+   application_state_->application_color("scene-background-color"));
 }
 
 void DHAX_GUI_Environment::show_main_window()

@@ -52,6 +52,8 @@ public:
   return (_Proxy_Widget*) addWidget(w);
  }
 
+ void set_background_color(QColor c);
+
 };
 
 #endif //  DHAX_GRAPHICS_SCENE__H

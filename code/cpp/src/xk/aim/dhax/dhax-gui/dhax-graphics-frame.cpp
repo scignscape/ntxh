@@ -17,6 +17,9 @@
 
 #include "global-types.h"
 
+#include "self-connect.h"
+#include "stash-signals.h"
+
 #include <QDebug>
 #include <QMetaObject>
 
@@ -24,7 +27,7 @@ DHAX_Graphics_Frame::DHAX_Graphics_Frame(QWidget* parent)
   :  QFrame(parent), main_layout_(nullptr),
      shape_select_frame_(nullptr), display_image_data_(nullptr),
      zoom_frame_(nullptr), image_viewer_(nullptr),
-     graphics_view_(nullptr), secondary_layout_(nullptr)
+     graphics_view_(nullptr), graphics_scene_(nullptr), secondary_layout_(nullptr)
 {
 
 }
@@ -155,24 +158,36 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
 
  zoom_frame_->self_connect(SIGNAL(zoom_factor_changed(r8)), this, SLOT(handle_zoom_factor_changed(r8)));
 
+ connect(shape_select_frame_, &Shape_Select_Frame::save_requested,
+   this, &DHAX_Graphics_Frame::save_requested);
+
+
  _self_connect_(shape_select_frame_ ,save_requested)
-   to_lambda[this] (bool)
- {
-  Q_EMIT save_requested();
- };
+   _to_this_(save_requested);
 
  _self_connect_(shape_select_frame_ ,image_path_show_folder_requested)
-   to_lambda[this] (bool)
- {
-  Q_EMIT image_path_show_folder_requested();
- };
+   to_coemit(bool)(image_path_show_folder_requested);
 
  _self_connect_(shape_select_frame_ ,change_border_color_requested)
-   to_lambda[this] (bool)
- {
-  Q_EMIT change_image_border_color_requested();
- };
+   to_coemit(bool)(change_image_border_color_requested);
 
+ _self_connect_(shape_select_frame_ ,change_scene_color_requested)
+   _to_this_(change_scene_background_color_requested);
+
+// shape_select_frame_->_self_connect(&Shape_Select_Frame::change_scene_color_requested)
+//   (this, &DHAX_Graphics_Frame::change_scene_background_color_requested);
+
+//?   to_coemit(bool)(change_scene_background_color_requested);
+
+
+   // _self_connect_(shape_select_frame_ ,change_scene_color_requested)
+   //   to_lambda[this] (bool) coemit(change_scene_background_color_requested);
+// _self_connect_(shape_select_frame_ ,change_scene_color_requested)
+//   to_lambda_coemit (bool) re(change_scene_background_color_requested());
+
+// {
+//  Q_EMIT change_scene_background_color_requested();
+// };
 
  _self_connect_(shape_select_frame_ ,change_vertical_margin_percent_requested)
    to_lambda[this] (u1 xy, bool and_sides)
@@ -194,16 +209,17 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
  shape_select_frame_->self_connect(SIGNAL(close_requested(bool)), this, SIGNAL(close_requested(bool)));
 
  _self_connect_(zoom_frame_ ,image_top_left_button_clicked)
-   to_lambda[this](bool)
- {
-  image_viewer_->recenter_scroll_top_left();
- };
+   to_coemit(void)(image_viewer_->recenter_scroll_top_left);
+//   to_lambda[this](bool)
+// {
+//  image_viewer_->recenter_scroll_top_left();
+// };
 
  _self_connect_(zoom_frame_ ,center_image_button_clicked)
-   to_lambda[this](bool)
- {
-  image_viewer_->recenter_scroll_center();
- };
+   to_coemit()(image_viewer_->recenter_scroll_center);
+// {
+//  image_viewer_->recenter_scroll_center();
+// };
 
  _self_connect_(zoom_frame_ ,pan_mode_changed)
    to_lambda[this](bool mode)

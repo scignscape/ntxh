@@ -15,7 +15,10 @@ DHAX_Graphics_Scene::DHAX_Graphics_Scene()
 //       gradient.setColorAt(0.6, QColor::fromRgb(255, 0, 0));
 //       gradient.setColorAt(0.2, QColor::fromRgb(0, 0, 0));
 //       gradient.setColorAt(0, QColor::fromRgb(0, 200, 0));
-
- QBrush* brush = new QBrush(Qt::lightGray);
- setBackgroundBrush(*brush);
 }
+
+void DHAX_Graphics_Scene::set_background_color(QColor c)
+{
+ setBackgroundBrush(QBrush(c));
+}
+

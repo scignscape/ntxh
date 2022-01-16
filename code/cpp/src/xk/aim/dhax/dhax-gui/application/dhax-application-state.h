@@ -16,6 +16,7 @@
 #include <QString>
 #include <QMap>
 #include <QDir>
+#include <QColor>
 
 class DHAX_Application_State
 {
@@ -54,6 +55,11 @@ public:
 
  ACCESSORS__RGET(Image_Margins ,image_margins)
  ACCESSORS(MACRO_PASTE(QMap<QString, QColor>*) ,application_colors)
+
+ QColor& application_color(QString key)
+ {
+  return (*application_colors_)[key];
+ }
 };
 
 

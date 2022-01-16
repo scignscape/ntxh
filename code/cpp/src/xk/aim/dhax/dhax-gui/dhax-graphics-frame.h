@@ -22,6 +22,7 @@
 class Shape_Select_Frame;
 class Zoom_and_Navigate_Frame;
 class DHAX_Graphics_View;
+class DHAX_Graphics_Scene;
 class DHAX_Display_Image_Data;
 class DHAX_Image_Viewer;
 class Page_and_Search_Frame;
@@ -37,6 +38,7 @@ class DHAX_Graphics_Frame : public QFrame
  Zoom_and_Navigate_Frame* zoom_frame_;
  Shape_Select_Frame* shape_select_frame_;
  DHAX_Graphics_View* graphics_view_;
+ DHAX_Graphics_Scene* graphics_scene_;
  DHAX_Image_Viewer* image_viewer_;
  DHAX_Display_Image_Data* display_image_data_;
 
@@ -49,6 +51,7 @@ public:
  void init_layout(QBoxLayout::Direction qbd, QBoxLayout::Direction secqbd);
 
  ACCESSORS(DHAX_Graphics_View* ,graphics_view)
+ ACCESSORS(DHAX_Graphics_Scene* ,graphics_scene)
  ACCESSORS(DHAX_Display_Image_Data* ,display_image_data)
  ACCESSORS(DHAX_Image_Viewer* ,image_viewer)
 
@@ -57,6 +60,11 @@ public:
  ACCESSORS(Shape_Select_Frame* ,shape_select_frame)
 
  ACCESSORS(MACRO_PASTE(QMap<QString, QColor>*) ,application_colors)
+
+ QColor& application_color(QString key)
+ {
+  return (*application_colors_)[key];
+ }
 
 
  USE_SELF_CONNECT(normal)
@@ -84,6 +92,7 @@ Q_SIGNALS:
  void save_requested();
  void image_path_show_folder_requested();
  void change_image_border_color_requested();
+ void change_scene_background_color_requested();
  void change_image_margins_requested(QVector<u1>, u1);
 
 
@@ -91,6 +100,7 @@ public Q_SLOTS:
 
  void handle_zoom_factor_changed(r8);
 
+ //void test(void* testt);
 
 };
 

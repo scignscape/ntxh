@@ -128,10 +128,10 @@ void DHAX_Image_Viewer::complete_load_image()
 
  if(im.via_percent())
  {
-  margin_l = (im.percent.left / 100) * sipw;
-  margin_r = (im.percent.right / 100) * sipw;
-  margin_t = (im.percent.top / 100) * siph;
-  margin_b = (im.percent.bottom / 100) * siph;
+  margin_l = ((r8)im.percent.left / 100) * sipw;
+  margin_r = ((r8)im.percent.right / 100) * sipw;
+  margin_t = ((r8)im.percent.top / 100) * siph;
+  margin_b = ((r8)im.percent.bottom / 100) * siph;
  }
 
  else

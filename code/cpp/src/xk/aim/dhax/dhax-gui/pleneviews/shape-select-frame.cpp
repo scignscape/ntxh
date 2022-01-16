@@ -286,9 +286,7 @@ subcontrol-position: left;}
  //prec->_to_this(this, &Shape_Select_Frame::change_border_color_requested);
 
 
- border_color_button_
-   >> Connect(clicked)
-   -> to_this(change_border_color_requested);
+ border_color_button_ >> Connect(clicked) -> to_this(change_border_color_requested);
 
 // Cc(border_color_button_).Cnct("clicked", this, &Shape_Select_Frame::change_border_color_requested);
 
@@ -438,11 +436,11 @@ subcontrol-position: left;}
  scene_color_button_ = new_child(QPushButton);
  scene_color_button_->setMaximumWidth(30);
 
+ scene_color_button_ >> Connect(clicked) -> to_this(change_scene_color_requested);
 
  clear_last_all_layout_1_->addWidget(scene_label_);
  clear_last_all_layout_1_->addWidget(scene_color_button_);
  clear_last_all_layout_1_->addStretch();
-
 
  clear_last_all_layout_2_->addWidget(clear_last_btn_);
  clear_last_all_layout_2_->addWidget(clear_all_btn_);
