@@ -119,6 +119,7 @@ public:
  void handle_image_path_show_folder();
  void handle_change_image_border_color();
  void handle_change_scene_background_color();
+ void handle_change_scene_margins_color();
  void handle_change_image_margins(QVector<u1> values, u1 context);
 
 

@@ -53,6 +53,7 @@ public:
  }
 
  void set_background_color(QColor c);
+// void set_foreground_color(QColor c);
 
 };
 

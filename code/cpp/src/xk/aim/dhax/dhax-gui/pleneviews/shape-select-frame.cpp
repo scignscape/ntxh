@@ -9,6 +9,8 @@
 
 #include "new-child.h"
 
+#include "QFontIcon/qfonticon.h"
+
 
 #include <QDebug>
 
@@ -41,9 +43,9 @@ Shape_Select_Frame::Shape_Select_Frame(QWidget* parent)
 
  main_tab_widget_ = new QTabWidget(this);
 
- main_tab_widget_->addTab(main_tab_, "Notes");
- main_tab_widget_->addTab(image_setup_tab_, "Image");
  main_tab_widget_->addTab(clear_last_all_tab_, "Editing");
+ main_tab_widget_->addTab(image_setup_tab_, "Image");
+ main_tab_widget_->addTab(main_tab_, "Notes");
 
 
  image_setup_tab_layout_ = new QVBoxLayout;
@@ -430,24 +432,96 @@ subcontrol-position: left;}
  clear_last_all_layout_2_ = new QHBoxLayout;
  clear_last_all_layout_3_ = new QHBoxLayout;
 
- scene_label_ = new_child(QLabel)("Scene");
+// constrict_spacing(clear_last_all_layout_1_);
+// constrict_spacing(clear_last_all_layout_3_);
 
- //scene_color_button_ = new QPushButton(this);
+ sigma(clear_last_all_layout_1_)->constrict_spacing();
+ sigma(clear_last_all_layout_3_)->constrict_spacing();
+
+ scene_label_ = new_child(QLabel)("Scene");
  scene_color_button_ = new_child(QPushButton);
  scene_color_button_->setMaximumWidth(30);
-
  scene_color_button_ >> Connect(clicked) -> to_this(change_scene_color_requested);
 
+ back_label_ = new_child(QLabel)("Back");
+ back_color_button_ = new_child(QPushButton);
+ back_color_button_->setMaximumWidth(30);
+ back_color_button_ >> Connect(clicked) -> to_this(change_back_color_requested);
+
+ QFontIcon::addFont(":/fontawesome.ttf");
+
+ border_visible_button_ = new_child(QPushButton);//(QChar(0x2680));
+ QIcon border_visible_button_icon = QFontIcon::icon(QChar(0x2680),
+   checkable_button_orange_color(), 1);
+ border_visible_button_->setIcon(border_visible_button_icon);
+ border_visible_button_->setCheckable(true);
+ border_visible_button_->setChecked(false);
+ border_visible_button_->setMaximumWidth(30);
+ //border_visible_button_->setMinimumHeight(21);
+ //
+
+ sigma(border_visible_button_)->set_multiline_tooltip("Image \"thick\" border is visible",
+   R"(When this button is "on" a relatively thick border will be
+placed around each image (the color and thickness of this border can
+be set via controls on the "Image" tab which is just right of this "Editing" tab).
+Thick-border mode can be
+fixed permanently (or at least until the button is reset) by
+clicking this button while in its "off" state.  Preserving
+the border's visibility might be desirable for visually
+separating the image from marginal annotations.  In some contexts
+the border may also become temporarily visible (e.g., while moving
+the image against its background).)");
+
+ border_visible_button_->setStyleSheet(light_checkable_button_style_sheet_orange_hover_());
+
+
+ clear_last_all_layout_1_->addWidget(border_visible_button_);
+ clear_last_all_layout_1_->addStretch();
  clear_last_all_layout_1_->addWidget(scene_label_);
  clear_last_all_layout_1_->addWidget(scene_color_button_);
- clear_last_all_layout_1_->addStretch();
+ clear_last_all_layout_1_->addWidget(back_label_);
+ clear_last_all_layout_1_->addWidget(back_color_button_);
 
  clear_last_all_layout_2_->addWidget(clear_last_btn_);
  clear_last_all_layout_2_->addWidget(clear_all_btn_);
 
- highlight_ckb_ = new_child(QCheckBox)("Highlight");
- clear_last_all_layout_3_->addWidget(highlight_ckb_);
+// highlight_ckb_ = new_child(QCheckBox)("Highlight");
+// clear_last_all_layout_3_->addWidget(highlight_ckb_);
+
+ image_pen_visible_button_ = new_child(QPushButton);//(QChar(0x1F58A));
+ sigma(image_pen_visible_button_)->make_unicode_text(0xf09f968b);
+
+ image_pen_visible_button_->setCheckable(true);
+ image_pen_visible_button_->setChecked(false);
+ image_pen_visible_button_->setMaximumWidth(20);
+ image_pen_visible_button_->setStyleSheet(dark_checkable_button_style_sheet_thick_orange_());
+
+ sigma(image_pen_visible_button_)->add_style_sheet(light_checkable_button_style_sheet_orange_hover_());
+ sigma(image_pen_visible_button_)->set_multiline_tooltip("Always show image \"pen\" (thin border)",
+   R"(When this button is "on" (via pressing the button
+while in its normal state) each image will be displayed with a thin border
+(whose color can be set via the immediately adjacebt button to the right of this one).
+Note that this is different from the thicker border which also surrounds the image but
+is visibible in different circumstances (such as when preparing to
+move the image against its background).  When this current button is "off" the thin border
+would be seen only when forming an empty frame in anticipation of an image
+being loaded from a series.)");
+
+
+ //  + light_checkable_button_style_sheet_orange_hover_());
+
+ image_pen_color_button_ = new_child(QPushButton);
+ image_pen_color_button_->setMaximumWidth(30);
+ image_pen_color_button_ >> Connect(clicked) -> to_this(change_image_pen_color_requested);
+
+ clear_last_all_layout_3_->addWidget(image_pen_visible_button_);
+ clear_last_all_layout_3_->addWidget(image_pen_color_button_);
  clear_last_all_layout_3_->addStretch();
+
+ cosigma(clear_last_all_layout_3_)->add_vertical_separator_line();
+
+ //clear_last_all_layout_3_->addWidget(clear_last_all_layout_3_separator_line);
+
  clear_last_all_layout_3_->addWidget(clear_selected_btn_);
  clear_last_all_layout_3_->addStretch();
 
@@ -455,7 +529,6 @@ subcontrol-position: left;}
  clear_last_all_tab_layout_->addLayout(clear_last_all_layout_2_);
  clear_last_all_tab_layout_->addLayout(clear_last_all_layout_3_);
 
- //highlight_ckb_ = new QCheckBox("Highlight", this);
 
 
  clear_last_all_tab_->setLayout(clear_last_all_tab_layout_);
@@ -629,6 +702,16 @@ void Shape_Select_Frame::update_border_color_button_color(QColor c)
 void Shape_Select_Frame::update_scene_color_button_color(QColor c)
 {
  fill_solid_color_button(scene_color_button_, c);
+}
+
+void Shape_Select_Frame::update_back_color_button_color(QColor c)
+{
+ fill_solid_color_button(back_color_button_, c);
+}
+
+void Shape_Select_Frame::update_image_pen_color_button_color(QColor c)
+{
+ fill_solid_color_button(image_pen_color_button_, c);
 }
 
 

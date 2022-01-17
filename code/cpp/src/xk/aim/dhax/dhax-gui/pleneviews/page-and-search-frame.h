@@ -44,7 +44,7 @@ class Page_and_Search_Frame : public QFrame
 
  #define _sigma_ns_(global)
  #define _my_sigma_(includes) \
- includes(buttons)
+ includes(buttons, layout, tooltip, stylesheet)
  #include "sigma.h"
 
 

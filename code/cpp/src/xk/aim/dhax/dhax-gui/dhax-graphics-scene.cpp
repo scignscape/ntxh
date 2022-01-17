@@ -22,3 +22,7 @@ void DHAX_Graphics_Scene::set_background_color(QColor c)
  setBackgroundBrush(QBrush(c));
 }
 
+//void DHAX_Graphics_Scene::set_foreground_color(QColor c)
+//{
+// setForegroundBrush(QBrush(c));
+//}

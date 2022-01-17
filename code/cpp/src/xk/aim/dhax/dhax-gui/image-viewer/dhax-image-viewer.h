@@ -83,6 +83,7 @@ public:
  //?ACCESSORS(MACRO_PASTE(const QMap<QString, QColor>*) ,application_colors)
 
  void reset_background_center_rectangle_color();
+ void reset_background_rectangle_color();
 
  QPointF control_center(u1 index)
  {

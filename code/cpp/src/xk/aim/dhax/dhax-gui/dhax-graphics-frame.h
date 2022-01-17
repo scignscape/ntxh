@@ -93,6 +93,7 @@ Q_SIGNALS:
  void image_path_show_folder_requested();
  void change_image_border_color_requested();
  void change_scene_background_color_requested();
+ void change_scene_margins_color_requested();
  void change_image_margins_requested(QVector<u1>, u1);
 
 

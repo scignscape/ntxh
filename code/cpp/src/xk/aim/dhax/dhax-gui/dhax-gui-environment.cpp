@@ -91,6 +91,9 @@ void DHAX_GUI_Environment::init_application_state()
  {
   {"image-background-center-rectangle-color", Qt::darkCyan},
   {"scene-background-color", Qt::lightGray},
+  {"scene-margins-color", Qt::white},
+  {"image-pen-color", Qt::darkMagenta},
+
  });
 }
 
@@ -172,6 +175,9 @@ void DHAX_GUI_Environment::init_application_controller()
 
  _self_connect_(graphics_frame_ ,change_scene_background_color_requested)
     _to_bind_0_(application_controller_ ,handle_change_scene_background_color);
+
+ _self_connect_(graphics_frame_ ,change_scene_margins_color_requested)
+    _to_bind_0_(application_controller_ ,handle_change_scene_margins_color);
 
  _self_connect_(graphics_frame_ ,change_image_margins_requested)
     _to_bind_2_(application_controller_ ,handle_change_image_margins);
@@ -353,6 +359,8 @@ void DHAX_GUI_Environment::init_graphics_scene()
  graphics_scene_ = new DHAX_Graphics_Scene;
  graphics_scene_->set_background_color(
    application_state_->application_color("scene-background-color"));
+// graphics_scene_->set_foreground_color(
+//   application_state_->application_color("scene-margins-color"));
 }
 
 void DHAX_GUI_Environment::show_main_window()

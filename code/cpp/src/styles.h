@@ -13,8 +13,15 @@
 #include <QString>
 #include <QPushButton>
 #include <QColor>
+#include <QFrame>
 
 #include "global-types.h"
+
+template<typename WIDGET_Type>
+inline void add_style_sheet(WIDGET_Type* w, QString ss)
+{
+ w->setStyleSheet(w->styleSheet() + ss);
+}
 
 inline QString back_forward_button_style_sheet_()
 {
@@ -32,6 +39,22 @@ inline QString light_checkable_button_style_sheet_()
    color: %3;})";
 }
 
+inline QString light_checkable_button_style_sheet_ul_()
+{
+ return R"(
+   QPushButton{font-size: %1pt;
+   font-weight: %2;
+   text-decoration: underline;
+   color: %3;})";
+}
+
+inline QString light_checkable_button_style_sheet_hover_()
+{
+ return R"(QPushButton{}
+   QPushButton:hover{border: %2px %1 %3; })";
+}
+
+
 inline QString color_label_style_sheet_()
 {
  return R"(
@@ -40,9 +63,59 @@ inline QString color_label_style_sheet_()
    color: %3;})";
 }
 
+inline QString checkable_button_orange()
+{
+ return "#E55B2C";
+}
+
+inline QColor checkable_button_orange_color()
+{
+ return QColor(checkable_button_orange());
+}
+
+inline QString checkable_button_dark_orange()
+{
+ return "#A51B09";
+}
+
+inline QColor checkable_button_dark_orange_color()
+{
+ return QColor(checkable_button_dark_orange());
+}
+
 inline QString light_checkable_button_style_sheet_orange_()
 {
  return light_checkable_button_style_sheet_().arg(9).arg("bold").arg("#E55B2C");
+}
+
+inline QString light_checkable_button_style_sheet_orange_hover_()
+{
+ return light_checkable_button_style_sheet_hover_().arg("ridge").arg(2).arg(checkable_button_dark_orange());
+}
+
+inline QString light_checkable_button_style_sheet_thick_orange_()
+{
+ return light_checkable_button_style_sheet_().arg(10).arg("bold").arg("#E55B2C");
+}
+
+inline QString light_checkable_button_style_sheet_thick_orange_ul_()
+{
+ return light_checkable_button_style_sheet_ul_().arg(10).arg("normal").arg("#E55B2C");
+}
+
+inline QString light_checkable_button_style_sheet_orange_ul_()
+{
+ return light_checkable_button_style_sheet_ul_().arg(9).arg("bold").arg("#E55B2C");
+}
+
+inline QString dark_checkable_button_style_sheet_thick_orange_()
+{
+ return light_checkable_button_style_sheet_ul_().arg(12).arg("bold").arg("#A51B09");
+}
+
+inline QString light_checkable_button_style_sheet_thin_orange_()
+{
+ return light_checkable_button_style_sheet_().arg(8).arg("normal").arg("#E55B2C");
 }
 
 inline QString color_label_style_sheet_orange_()
@@ -90,6 +163,45 @@ inline void share_tooltip(WIDGET1_Type* w1, WIDGET2_Type* w2)
 //{
 // share_tooltip(ws->first, ws->second);
 //}
+
+template<typename WIDGET_Type, typename LAYOUT_Type>
+inline void add_vertical_separator_line(WIDGET_Type* w, LAYOUT_Type* layout)
+{
+ QFrame* line = new QFrame(w);
+ line->setFrameShape(QFrame::VLine); // Horizontal line
+ line->setFrameShadow(QFrame::Sunken);
+ line->setLineWidth(1);
+ layout->addWidget(line);
+}
+
+template<typename WIDGET_Type, typename LAYOUT_Type>
+inline void add_horizontal_separator_line(WIDGET_Type* w, LAYOUT_Type* layout)
+{
+ QFrame* line = new QFrame(w);
+ line->setFrameShape(QFrame::HLine); // Horizontal line
+ line->setFrameShadow(QFrame::Sunken);
+ line->setLineWidth(1);
+ layout->addWidget(line);
+}
+
+
+//template<typename LAYOUT_Type>
+//inline void add_vertical_separator_line(LAYOUT_Type* layout)
+//{
+// QFrame* line = new QFrame(nullptr);
+// line->setFrameShape(QFrame::VLine); // Horizontal line
+// line->setFrameShadow(QFrame::Sunken);
+// line->setLineWidth(1);
+// layout->addWidget(line);
+//}
+
+template<typename LAYOUT_Type>
+inline void constrict_spacing(LAYOUT_Type* layout)
+{
+ layout->setMargin(0);
+ layout->setContentsMargins(0,0,0,0);
+ layout->setSpacing(0);
+}
 
 template<typename WIDGET_Type>
 inline void set_multiline_tooltip(WIDGET_Type* w, QString top, QString bottom)
@@ -1120,5 +1232,7 @@ inline  QString toggle_button_style_sheet_()
 "  ); min-width: 80px; } ";
 
 }
+
+
 
 #endif

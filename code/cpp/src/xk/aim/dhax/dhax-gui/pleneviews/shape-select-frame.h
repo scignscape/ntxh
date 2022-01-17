@@ -16,6 +16,7 @@
 
 #include "self-connect.h"
 
+#include "styles.h"
 
 class QLabel;
 
@@ -23,6 +24,11 @@ class QLabel;
 class Shape_Select_Frame : public QFrame
 {
  Q_OBJECT
+
+#define _sigma_ns_(global)
+#define _my_sigma_(includes) \
+includes(tooltip, layout, buttons, stylesheet)
+#include "sigma.h"
 
  QFrame* main_tab_;
 
@@ -40,8 +46,15 @@ class Shape_Select_Frame : public QFrame
  QGridLayout* main_tab_layout_;
 
  QVBoxLayout* clear_last_all_tab_layout_;
+
  QLabel* scene_label_;
  QPushButton* scene_color_button_;
+
+ QLabel* back_label_;
+ QPushButton* back_color_button_;
+
+ QPushButton* border_visible_button_;
+
  QHBoxLayout* clear_last_all_layout_1_;
  QHBoxLayout* clear_last_all_layout_2_;
  QHBoxLayout* clear_last_all_layout_3_;
@@ -84,8 +97,11 @@ class Shape_Select_Frame : public QFrame
  QButtonGroup* shape_ckb_group_;
 
  // QString current_shape_selection_;
+ //QCheckBox* highlight_ckb_;
 
- QCheckBox* highlight_ckb_;
+ QPushButton* image_pen_visible_button_;
+ QPushButton* image_pen_color_button_;
+
 
  QHBoxLayout* save_button_layout_;
  QCheckBox* auto_store_check_box_;
@@ -116,6 +132,8 @@ public:
 
  void update_border_color_button_color(QColor c);
  void update_scene_color_button_color(QColor c);
+ void update_back_color_button_color(QColor c);
+ void update_image_pen_color_button_color(QColor c);
 
  void switch_to_margins_percent();
  void switch_to_margins_non_percent();
@@ -150,11 +168,11 @@ public:
 
  void set_highlight_ckb_disabled()
  {
-  highlight_ckb_->setDisabled(true);
+//  highlight_ckb_->setDisabled(true);
  }
  void set_highlight_ckb_enabled()
  {
-  highlight_ckb_->setDisabled(false);
+//  highlight_ckb_->setDisabled(false);
  }
 
  bool clear_selected_btn_is_enabled()
@@ -183,6 +201,8 @@ Q_SIGNALS:
  void image_path_show_folder_requested(bool);
  void change_border_color_requested(bool);
  void change_scene_color_requested(bool);
+ void change_back_color_requested(bool);
+ void change_image_pen_color_requested(bool);
 
  void change_vertical_margin_percent_requested(u1, bool);
  void change_vertical_margin_requested(u1, bool);

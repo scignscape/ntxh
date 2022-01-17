@@ -47,6 +47,8 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
  shape_select_frame_ = new Shape_Select_Frame(this);
  shape_select_frame_->update_border_color_button_color(application_colors_->value("image-background-center-rectangle-color"));
  shape_select_frame_->update_scene_color_button_color(application_colors_->value("scene-background-color"));
+ shape_select_frame_->update_back_color_button_color(application_colors_->value("scene-margins-color"));
+ shape_select_frame_->update_image_pen_color_button_color(application_colors_->value("image-pen-color"));
 
 
  zoom_frame_ = new Zoom_and_Navigate_Frame(this);
@@ -174,6 +176,9 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
  _self_connect_(shape_select_frame_ ,change_scene_color_requested)
    _to_this_(change_scene_background_color_requested);
 
+ _self_connect_(shape_select_frame_ ,change_back_color_requested)
+   _to_this_(change_scene_margins_color_requested);
+
 // shape_select_frame_->_self_connect(&Shape_Select_Frame::change_scene_color_requested)
 //   (this, &DHAX_Graphics_Frame::change_scene_background_color_requested);
 
@@ -203,6 +208,19 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
   //Q_EMIT change_image_border_color_requested();
  };
 
+ _self_connect_(shape_select_frame_ ,change_vertical_margin_requested)
+   to_lambda[this] (u1 xy, bool and_sides)
+ {
+  if(and_sides)
+    Q_EMIT change_image_margins_requested({xy},
+       (u1) Change_Image_Margins::Vertical_and_Horizontal);
+
+  else
+    Q_EMIT change_image_margins_requested({xy, xy},
+       (u1) Change_Image_Margins::Vertical);
+
+  //Q_EMIT change_image_border_color_requested();
+ };
 
  //change_vertical_margin_percent_requested
 

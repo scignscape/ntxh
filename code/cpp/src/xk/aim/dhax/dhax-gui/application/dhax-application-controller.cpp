@@ -530,6 +530,16 @@ void DHAX_Application_Controller::handle_change_scene_background_color()
  }
 }
 
+void DHAX_Application_Controller::handle_change_scene_margins_color()
+{
+ QColor c = handle_change_color("scene-margins-color");
+ if(c.isValid())
+ {
+  graphics_frame_->shape_select_frame()->update_back_color_button_color(c);
+  //?graphics_frame_->graphics_scene()->set_foreground_color(c);
+ }
+}
+
 void DHAX_Application_Controller::handle_change_image_border_color()
 {
  QColor c = handle_change_color("image-background-center-rectangle-color");

@@ -221,7 +221,7 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
 
  sigma(image_top_left_button_)->set_multiline_tooltip("Image Top Left",
-   "Positions image so that its top-left corner coincides with top-left corner of the viewport.");
+   "Positions the viewport that its top-left corner coincides with top-left corner of the image.");
  image_top_left_button_->setMinimumWidth(50);
  image_top_left_button_->setMaximumHeight(20);
 
@@ -231,7 +231,7 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  center_image_button_->setMinimumWidth(50);
  center_image_button_->setMaximumHeight(20);
  sigma(center_image_button_)->set_multiline_tooltip("Center Image",
-   "Positions image so that the viewport is centered on its center.");
+   "Positions the viewport so that the image appears centered.");
 
  center_image_button_->setStyleSheet(button_style_sheet(15));
 

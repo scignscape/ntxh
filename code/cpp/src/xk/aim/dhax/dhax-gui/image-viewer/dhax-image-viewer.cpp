@@ -150,6 +150,7 @@ void DHAX_Image_Viewer::complete_load_image()
  image_with_border_h = siph + im.border.top + im.border.bottom;
 
  background_rectangle_ = scrolled_image_scene_->addRect(0, 0, background_w, background_h);
+ reset_background_rectangle_color();
 
  background_rectangle_center_x_ = background_rectangle_->boundingRect().x() +
    (background_rectangle_->boundingRect().width() / 2);
@@ -213,6 +214,11 @@ void DHAX_Image_Viewer::complete_load_image()
 
  //?
  recenter_scroll_center();
+}
+
+void DHAX_Image_Viewer::reset_background_rectangle_color()
+{
+ background_rectangle_->setBrush(application_state_->application_colors()->value("scene-margins-color"));
 }
 
 void DHAX_Image_Viewer::reset_background_center_rectangle_color()

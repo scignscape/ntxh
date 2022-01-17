@@ -32,6 +32,8 @@ SOFTWARE.
 #include <QtCore>
 #include <QPalette>
 
+#include "accessors.h"
+
 class QFontIcon;
 class QFontIconEngine;
 #define FIcon(code) QFontIcon::icon(code)
@@ -48,12 +50,18 @@ public:
     void setLetter(const QChar& letter);
     // You can set a base color. I don't advice. Keep system color
     void setBaseColor(const QColor& baseColor);
+
+
+    ACCESSORS(double ,height)
+
     virtual QIconEngine* clone() const;
 
 private:
     QString mFontFamily;
     QChar mLetter;
     QColor mBaseColor;
+
+    double height_;
 };
 
 class QFontIcon : public QObject
@@ -64,8 +72,23 @@ public:
     // add Font. By default, the first one is used
     static bool addFont(const QString& filename);
     static QFontIcon * instance();
+
+    // //  height added ...
     // main methods. Return icons from code
-    static QIcon icon(const QChar& code, const QColor& baseColor = QColor(),const QString& family = QString());
+    static QIcon icon(const QChar& code, const QColor& baseColor = QColor(),
+      const QString& family = QString(), double height = 0.8);
+
+    static QIcon icon(const QChar& code, const QColor& baseColor,
+      double height)
+    {
+     return icon(code, baseColor, QString(), height);
+    }
+
+    static QIcon icon(const QChar& code, double height)
+    {
+     return icon(code, QColor(), QString(), height);
+    }
+
     // return added fonts
     const QStringList& families() const;
 

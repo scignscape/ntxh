@@ -49,7 +49,8 @@ QFontIcon *QFontIcon::instance()
     return mInstance;
 }
 
-QIcon QFontIcon::icon(const QChar &code, const QColor &baseColor, const QString &family)
+QIcon QFontIcon::icon(const QChar &code, const QColor &baseColor,
+  const QString &family, double height)
 {
     if (instance()->families().isEmpty())
     {
@@ -66,6 +67,7 @@ QIcon QFontIcon::icon(const QChar &code, const QColor &baseColor, const QString 
     engine->setFontFamily(useFamily);
     engine->setLetter(code);
     engine->setBaseColor(baseColor);
+    engine->set_height(height);
     return QIcon(engine);
 
 
@@ -97,7 +99,7 @@ QFontIcon::~QFontIcon()
 
 
 QFontIconEngine::QFontIconEngine()
-    :QIconEngine()
+    :QIconEngine(), height_(0.8)
 {
 
 }
@@ -110,7 +112,7 @@ void QFontIconEngine::paint(QPainter *painter, const QRect &rect, QIcon::Mode mo
 {
     Q_UNUSED(state);
     QFont font = QFont(mFontFamily);
-    int drawSize = qRound(rect.height() * 0.8);
+    int drawSize = qRound(rect.height() * height_);
     font.setPixelSize(drawSize);
 
     QColor penColor;
@@ -167,6 +169,7 @@ QIconEngine *QFontIconEngine::clone() const
     QFontIconEngine * engine = new QFontIconEngine;
     engine->setFontFamily(mFontFamily);
     engine->setBaseColor(mBaseColor);
+    engine->set_height(height_);
     return engine;
 }
 

@@ -649,4 +649,47 @@ sigma(THIS1_Type o1, THIS2_Type o2)
    new QPair<THIS1_Type, THIS2_Type>(o1, o2));
 }
 
+
+#ifndef left_cosigma_spec
+#define left_cosigma_spec(x) \
+ sigma(nullptr, x)
+#endif
+
+#ifndef left_cosigma_2
+#define left_cosigma_2(x, y) \
+left_cosigma_spec_##x(y)
+#endif
+
+#ifndef left_cosigma_1
+#define left_cosigma_1(x) \
+ sigma(this, x)
+#endif
+
+#ifndef right_cosigma_spec
+#define right_cosigma_spec(x) \
+ sigma(x, nullptr)
+#endif
+
+#ifndef right_cosigma_2
+#define right_cosigma_2(x, y) \
+right_cosigma_spec_##x(y)
+#endif
+
+#ifndef right_cosigma_1
+#define right_cosigma_1(x) \
+ sigma(x, this)
+#endif
+
+
+#ifndef cosigma
+#define cosigma(...) \
+_preproc_CONCAT(left_cosigma_, _preproc_NUM_ARGS (__VA_ARGS__))(__VA_ARGS__)
+#endif
+
+#ifndef _cosigma
+#define _cosigma(...) \
+_preproc_CONCAT(right_cosigma_, _preproc_NUM_ARGS (__VA_ARGS__))(__VA_ARGS__)
+#endif
+
+
 #endif //_SIGMA_INCLUDE_BLOCK

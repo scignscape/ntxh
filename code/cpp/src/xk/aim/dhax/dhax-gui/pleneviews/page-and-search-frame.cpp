@@ -12,6 +12,8 @@
 #include "stash-signals-alt-base.h"
 #include "self-connect.h"
 
+#include "new-child.h"
+
 
 Page_and_Search_Frame::Page_and_Search_Frame(QWidget* parent)
   :  QFrame(parent)
@@ -122,12 +124,14 @@ Page_and_Search_Frame::Page_and_Search_Frame(QWidget* parent)
  page_select_and_navigate_layout_right_->setAlignment(page_print_or_pdf_, Qt::AlignRight);
  page_select_and_navigate_layout_right_->setAlignment(page_print_or_pdf_label_, Qt::AlignRight);
 
- QFrame* line = new QFrame(this);
- line->setFrameShape(QFrame::HLine); // Horizontal line
- line->setFrameShadow(QFrame::Sunken);
- line->setLineWidth(1);
+// QFrame* line = new QFrame(this);
+// line->setFrameShape(QFrame::HLine); // Horizontal line
+// line->setFrameShadow(QFrame::Sunken);
+// line->setLineWidth(1);
+// page_select_and_navigate_layout_right_->addWidget(line);
 
- page_select_and_navigate_layout_right_->addWidget(line);
+ cosigma(page_select_and_navigate_layout_right_)->add_horizontal_separator_line();
+
 
  page_select_and_navigate_layout_right_->addSpacing(2);
 
@@ -192,12 +196,19 @@ Page_and_Search_Frame::Page_and_Search_Frame(QWidget* parent)
 // search_case_sensitive_ = new QCheckBox(this);
 // search_case_sensitive_->setToolTip("Case Sensitive Search");
 
- search_case_sensitive_button_ = new QPushButton("Aa", this);
- search_case_sensitive_button_->setToolTip("Case Sensitive Search");
+ search_case_sensitive_button_ = new_child(QPushButton)("Aa");
+ sigma(search_case_sensitive_button_)->set_multiline_tooltip("Case Sensitive Search",
+   R"(When this button is "on" (via pressing the button
+while in its normal state) PDF searches will be case-sensitive.
+Turning the button "off" (by clicking it again) will revert to case-insensitive searching.)");
+
+ //search_case_sensitive_button_->setToolTip("Case Sensitive Search");
  search_case_sensitive_button_->setCheckable(true);
  search_case_sensitive_button_->setChecked(false);
 
  search_case_sensitive_button_->setStyleSheet(light_checkable_button_style_sheet_orange_());
+ sigma(search_case_sensitive_button_)->add_style_sheet(light_checkable_button_style_sheet_orange_hover_());
+
 
  search_case_sensitive_button_->setMaximumHeight(15);
  search_case_sensitive_button_->setMaximumWidth(22);
