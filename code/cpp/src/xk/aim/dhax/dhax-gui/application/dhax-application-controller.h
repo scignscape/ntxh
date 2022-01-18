@@ -122,6 +122,11 @@ public:
  void handle_change_scene_margins_color();
  void handle_change_image_margins(QVector<u1> values, u1 context);
 
+void handle_set_border_visible();
+void handle_unset_border_visible();
+
+void handle_set_image_pen_visible();
+void handle_unset_image_pen_visible();
 
  void handle_view_contour_info(QString path);
  void save_current_notation(bool with_comment);

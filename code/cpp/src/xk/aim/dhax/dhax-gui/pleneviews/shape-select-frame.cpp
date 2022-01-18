@@ -97,6 +97,34 @@ subcontrol-position: left;}
  border_label_ = new QLabel("Border", this);
  border_combo_box_ = new QComboBox(this);
  border_combo_box_->setMaximumWidth(40);
+ border_combo_box_->setEditable(true);
+ border_combo_box_->setCompleter(nullptr);
+
+ border_combo_box_->setContentsMargins(0,0,0,0);
+
+ border_combo_box_->setMaxVisibleItems(5);
+ border_combo_box_->setStyleSheet("combobox-popup: 0;");
+
+ border_combo_box_->setValidator(ComboBox_Data::int_validator(0, 99));
+
+ border_combo_box_data_.max_index = 40;
+ for(u1 i = 0; i <= border_combo_box_data_.max_index; ++i)
+ {
+  border_combo_box_->addItem(QString::number(i));
+ }
+
+ border_combo_box_
+   >> Connect(int overload_of QComboBox::currentIndexChanged)
+   to_lambda[this](int index)
+ {
+  //qDebug() << "index = " << index;
+  if(index > border_combo_box_data_.max_index)
+    ; //  handle added value ...
+  else
+    Q_EMIT change_border_width_requested((u1) index);
+
+  //qDebug() << "mindex = " << border_combo_box_data_.max_index;
+ };
 
  border_layout_ = new QHBoxLayout;
  border_layout_->setMargin(0);
@@ -459,6 +487,7 @@ subcontrol-position: left;}
  border_visible_button_->setMaximumWidth(30);
  //border_visible_button_->setMinimumHeight(21);
  //
+ border_visible_button_ >> Connect(clicked) -> to_this(change_border_visible_state_requested);
 
  sigma(border_visible_button_)->set_multiline_tooltip("Image \"thick\" border is visible",
    R"(When this button is "on" a relatively thick border will be
@@ -507,6 +536,7 @@ move the image against its background).  When this current button is "off" the t
 would be seen only when forming an empty frame in anticipation of an image
 being loaded from a series.)");
 
+ image_pen_visible_button_ >> Connect(clicked) -> to_this(change_image_pen_visible_state_requested);
 
  //  + light_checkable_button_style_sheet_orange_hover_());
 

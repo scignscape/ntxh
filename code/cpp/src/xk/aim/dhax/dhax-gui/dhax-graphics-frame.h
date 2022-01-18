@@ -96,6 +96,14 @@ Q_SIGNALS:
  void change_scene_margins_color_requested();
  void change_image_margins_requested(QVector<u1>, u1);
 
+// void change_borde_width_requested();
+
+ void set_border_visible_requested();
+ void unset_border_visible_requested();
+
+ void set_image_pen_visible_requested();
+ void unset_image_pen_visible_requested();
+
 
 public Q_SLOTS:
 

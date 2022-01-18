@@ -179,6 +179,25 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
  _self_connect_(shape_select_frame_ ,change_back_color_requested)
    _to_this_(change_scene_margins_color_requested);
 
+ _self_connect_(shape_select_frame_ ,change_border_visible_state_requested)
+   to_lambda[this] (bool state)
+ {
+  if(state)
+    Q_EMIT set_border_visible_requested();
+  else
+    Q_EMIT unset_border_visible_requested();
+ };
+
+ _self_connect_(shape_select_frame_ ,change_image_pen_visible_state_requested)
+   to_lambda[this] (bool state)
+ {
+  if(state)
+    Q_EMIT set_image_pen_visible_requested();
+  else
+    Q_EMIT unset_image_pen_visible_requested();
+ };
+
+
 // shape_select_frame_->_self_connect(&Shape_Select_Frame::change_scene_color_requested)
 //   (this, &DHAX_Graphics_Frame::change_scene_background_color_requested);
 
@@ -193,6 +212,13 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
 // {
 //  Q_EMIT change_scene_background_color_requested();
 // };
+
+ _self_connect_(shape_select_frame_ ,change_border_width_requested)
+   to_lambda[this] (u1 width)
+ {
+  Q_EMIT change_image_margins_requested({width},
+     (u1) Change_Image_Margins::Image_Border1);
+ };
 
  _self_connect_(shape_select_frame_ ,change_vertical_margin_percent_requested)
    to_lambda[this] (u1 xy, bool and_sides)

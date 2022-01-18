@@ -85,6 +85,8 @@ includes(tooltip, layout, buttons, stylesheet)
  QHBoxLayout* border_layout_;
  QLabel* border_label_;
  QComboBox* border_combo_box_;
+ ComboBox_Data border_combo_box_data_;
+
  QLabel* border_color_label_;
  QPushButton* border_color_button_;
 
@@ -203,6 +205,11 @@ Q_SIGNALS:
  void change_scene_color_requested(bool);
  void change_back_color_requested(bool);
  void change_image_pen_color_requested(bool);
+
+ void change_border_visible_state_requested(bool);
+ void change_image_pen_visible_state_requested(bool);
+
+ void change_border_width_requested(u1 width);
 
  void change_vertical_margin_percent_requested(u1, bool);
  void change_vertical_margin_requested(u1, bool);

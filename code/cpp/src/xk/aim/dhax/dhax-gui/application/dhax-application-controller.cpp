@@ -8,6 +8,12 @@
 
 #include "dhax-application-controller.h"
 
+#include "dgi-opencv/dgi-image.h"
+#include "dgi-opencv/dgi-demo-frame.h"
+
+// //  this has to be included after dgi-image.h ...
+ //    (because of "_flags" macro conflict ...)
+
 #include "dhax-application-state.h"
 
 
@@ -56,13 +62,6 @@
 
 USING_KANS(TextIO)
 
-
-#include "dgi-opencv/dgi-image.h"
-#include "dgi-opencv/dgi-demo-frame.h"
-
-
-// //  this has to be included after dgi-image.h ...
- //    (because of "_flags" macro conflict ...)
 #include "dhax-data/ann/dhax-annotation-instance.h"
 #include "image-viewer/dhax-image-scene-item.h"
 
@@ -496,7 +495,38 @@ void DHAX_Application_Controller::handle_change_image_margins(QVector<u1> values
   im.border.left = values.value(3); im.border.right = values.value(4);
   break;
  }
+
+ if(graphics_frame_->image_viewer())
+ {
+  graphics_frame_->image_viewer()->update_image_margins(im);
+ }
 }
+
+void DHAX_Application_Controller::handle_set_border_visible()
+{
+ application_state_->flags.image_border_visible_fixed = true;
+
+ graphics_frame_->image_viewer()->reset_background_center_rectangle_color();
+}
+
+void DHAX_Application_Controller::handle_unset_border_visible()
+{
+ application_state_->flags.image_border_visible_fixed = false;
+
+ graphics_frame_->image_viewer()->reset_background_center_rectangle_color();
+}
+
+void DHAX_Application_Controller::handle_set_image_pen_visible()
+{
+ application_state_->flags.image_pen_visible = true;
+}
+
+void DHAX_Application_Controller::handle_unset_image_pen_visible()
+{
+ application_state_->flags.image_pen_visible = false;
+}
+
+
 
 QColor DHAX_Application_Controller::handle_change_color(QString application_role)
 {

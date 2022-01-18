@@ -16,6 +16,8 @@
 
 #include "global-types.h"
 
+#include "application/dhax-application-state.h"
+
 class DHAX_Graphics_Scene;
 class DHAX_Graphics_View;
 
@@ -96,6 +98,8 @@ public:
  void recenter_scroll_center();
  void recenter_scroll_top_left();
 
+ //QPair<u4, u4> update_image_margins(const DHAX_Application_State::Image_Margins& im);
+ void update_image_margins(const DHAX_Application_State::Image_Margins& im);
 
  void load_image(QString file_path);
 

@@ -179,6 +179,18 @@ void DHAX_GUI_Environment::init_application_controller()
  _self_connect_(graphics_frame_ ,change_scene_margins_color_requested)
     _to_bind_0_(application_controller_ ,handle_change_scene_margins_color);
 
+ _self_connect_(graphics_frame_ ,set_border_visible_requested)
+    _to_bind_0_(application_controller_ ,handle_set_border_visible);
+
+ _self_connect_(graphics_frame_ ,unset_border_visible_requested)
+    _to_bind_0_(application_controller_ ,handle_unset_border_visible);
+
+ _self_connect_(graphics_frame_ ,set_image_pen_visible_requested)
+    _to_bind_0_(application_controller_ ,handle_set_image_pen_visible);
+
+ _self_connect_(graphics_frame_ ,unset_image_pen_visible_requested)
+    _to_bind_0_(application_controller_ ,handle_unset_image_pen_visible);
+
  _self_connect_(graphics_frame_ ,change_image_margins_requested)
     _to_bind_2_(application_controller_ ,handle_change_image_margins);
 }

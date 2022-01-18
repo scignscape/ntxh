@@ -116,12 +116,13 @@ void DHAX_Image_Viewer::load_image(QPixmap pixmap)
  complete_load_image();
 }
 
-void DHAX_Image_Viewer::complete_load_image()
+void DHAX_Image_Viewer::update_image_margins(const DHAX_Application_State::Image_Margins& im)
 {
+ if(!scrolled_image_pixmap_)
+   return;
+
  u4 sipw = scrolled_image_pixmap_->width();
  u4 siph = scrolled_image_pixmap_->height();
-
- const DHAX_Application_State::Image_Margins& im = application_state_->image_margins();
 
  u4 background_w, background_h, margin_l, margin_r, margin_t, margin_b,
    margin_with_border_l, margin_with_border_t, image_with_border_w, image_with_border_h;
@@ -142,6 +143,15 @@ void DHAX_Image_Viewer::complete_load_image()
   margin_b = im.bottom;
  }
 
+ if(margin_l < im.border.left)
+   margin_l = im.border.left;
+ if(margin_r < im.border.right)
+   margin_r = im.border.right;
+ if(margin_t < im.border.top)
+   margin_t = im.border.top;
+ if(margin_b < im.border.bottom)
+   margin_b = im.border.bottom;
+
  background_w = sipw + margin_l + margin_r;
  background_h = siph + margin_t + margin_b;
  margin_with_border_l = margin_l - im.border.left;
@@ -149,8 +159,77 @@ void DHAX_Image_Viewer::complete_load_image()
  image_with_border_w = sipw + im.border.left + im.border.right;
  image_with_border_h = siph + im.border.top + im.border.bottom;
 
- background_rectangle_ = scrolled_image_scene_->addRect(0, 0, background_w, background_h);
+ background_rectangle_->setRect(0, 0, background_w, background_h);
+ background_center_rectangle_->setRect(margin_with_border_l, margin_with_border_t,
+   image_with_border_w, image_with_border_h);
+
+ scrolled_image_pixmap_item_->setPos(margin_l, margin_t);
+}
+
+void DHAX_Image_Viewer::complete_load_image()
+{
+ u4 sipw = scrolled_image_pixmap_->width();
+ u4 siph = scrolled_image_pixmap_->height();
+
+ const DHAX_Application_State::Image_Margins& im = application_state_->image_margins();
+
+// u4 background_w, background_h, margin_l, margin_r, margin_t, margin_b,
+//   margin_with_border_l, margin_with_border_t, image_with_border_w, image_with_border_h;
+
+// if(im.via_percent())
+// {
+//  margin_l = ((r8)im.percent.left / 100) * sipw;
+//  margin_r = ((r8)im.percent.right / 100) * sipw;
+//  margin_t = ((r8)im.percent.top / 100) * siph;
+//  margin_b = ((r8)im.percent.bottom / 100) * siph;
+// }
+
+// else
+// {
+//  margin_l = im.left;
+//  margin_r = im.right;
+//  margin_t = im.top;
+//  margin_b = im.bottom;
+// }
+
+// if(margin_l < im.border.left)
+//   margin_l = im.border.left;
+// if(margin_r < im.border.right)
+//   margin_r = im.border.right;
+// if(margin_t < im.border.top)
+//   margin_t = im.border.top;
+// if(margin_b < im.border.bottom)
+//   margin_b = im.border.bottom;
+
+// background_w = sipw + margin_l + margin_r;
+// background_h = siph + margin_t + margin_b;
+// margin_with_border_l = margin_l - im.border.left;
+// margin_with_border_t = margin_t - im.border.top;
+// image_with_border_w = sipw + im.border.left + im.border.right;
+// image_with_border_h = siph + im.border.top + im.border.bottom;
+
+ background_rectangle_ = scrolled_image_scene_->addRect(0, 0, 0, 0);
+ //background_rectangle_ = scrolled_image_scene_->addRect(0, 0, background_w, background_h);
+
+ if(background_center_rectangle_)
+   delete background_center_rectangle_;
+
+//?
+// if(image_with_border_w % 2)
+//   ++image_with_border_w;
+
+// if(image_with_border_h % 2)
+//   ++image_with_border_h;
+
+ background_center_rectangle_ = scrolled_image_scene_->addRect(0, 0, 0, 0);
+
+// background_center_rectangle_ = scrolled_image_scene_->addRect(
+//   margin_with_border_l, margin_with_border_t,
+//   image_with_border_w, image_with_border_h);
+
  reset_background_rectangle_color();
+
+ background_rectangle_->setPen(Qt::NoPen);
 
  background_rectangle_center_x_ = background_rectangle_->boundingRect().x() +
    (background_rectangle_->boundingRect().width() / 2);
@@ -167,7 +246,6 @@ void DHAX_Image_Viewer::complete_load_image()
  image_scene_item_->set_data(display_image_data_);
  image_scene_item_->set_containing_image_view(scrolled_image_view_);
 
-
  image_scene_item_->resize(sipw, siph);
 
  image_scene_item_->setParent(nullptr);
@@ -176,21 +254,17 @@ void DHAX_Image_Viewer::complete_load_image()
 
  _Proxy_Widget* w = scrolled_image_scene_->add_proxy_widget(image_scene_item_);
 
- //?w->setPos(sipw/2,siph/2);
- w->setPos(margin_l, margin_t);
+ //w->setPen(QColor::red);
+
 
  //?
- if(background_center_rectangle_)
-   delete background_center_rectangle_;
-
- background_center_rectangle_ = scrolled_image_scene_->addRect(
-   margin_with_border_l, margin_with_border_t,
-   image_with_border_w, image_with_border_h);
 
  image_scene_item_->set_original_position(background_center_rectangle_->pos());
 
  background_center_rectangle_->setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
  reset_background_center_rectangle_color();
+
+ background_center_rectangle_->setPen(Qt::NoPen); //application_state_->application_color("image-pen-color"));
 
 // QGraphicsRectItem* foreground_center_rectangle_ = scrolled_image_scene_->addRect(
 //   (sipw/2) - 10, (siph/2) - 10, sipw, siph);
@@ -212,6 +286,13 @@ void DHAX_Image_Viewer::complete_load_image()
 
  scrolled_image_pixmap_item_ = w;
 
+ update_image_margins(im);
+
+ //QPointF top_left = update_image_margins(im);
+
+ //?w->setPos(sipw/2,siph/2);
+ //w->setPos(top_left);
+
  //?
  recenter_scroll_center();
 }
@@ -223,7 +304,10 @@ void DHAX_Image_Viewer::reset_background_rectangle_color()
 
 void DHAX_Image_Viewer::reset_background_center_rectangle_color()
 {
- background_center_rectangle_->setBrush(application_state_->application_colors()->value("image-background-center-rectangle-color"));
+ if(application_state_->flags.image_border_visible_fixed | application_state_->flags.image_border_visible_temp)
+   background_center_rectangle_->setBrush(application_state_->application_colors()->value("image-background-center-rectangle-color"));
+ else
+   background_center_rectangle_->setBrush(Qt::NoBrush);
 }
 
 void DHAX_Image_Viewer::load_image(QString file_path)

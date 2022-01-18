@@ -8,6 +8,7 @@
 #include "dhax-application-state.h"
 
 DHAX_Application_State::DHAX_Application_State()
+  :  Flags(0)
 {
 
 }

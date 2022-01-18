@@ -11,6 +11,8 @@
 
 #include "accessors.h"
 
+#include "flags.h"
+
 #include "global-types.h"
 
 #include <QString>
@@ -21,6 +23,12 @@
 class DHAX_Application_State
 {
 public:
+
+ flags_(1)
+  bool image_border_visible_fixed:1;
+  bool image_border_visible_temp:1;
+  bool image_pen_visible:1;
+ _flags
 
  struct Image_Margins
  {

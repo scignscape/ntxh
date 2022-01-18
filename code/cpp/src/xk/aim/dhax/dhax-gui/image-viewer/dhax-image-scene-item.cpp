@@ -360,10 +360,13 @@ void DHAX_Image_Scene_Item::paintEvent(QPaintEvent*)
 // QPen shapePen(QColor(data_->shapeRed_, data_->shapeGreen_, data_->shapeBlue_), data_->thickness_, Qt::SolidLine);
  myPen.setCapStyle(Qt::RoundCap);
  shapePen.setCapStyle(Qt::RoundCap);
+
  painter.setPen(shapePen);
+
  painter.setBrush(QBrush(QColor(data_->shapeRed_, data_->shapeGreen_, data_->shapeBlue_),Qt::Dense6Pattern)); //permette a painter di creare shape traslucide
+
  if(!data_->m_background_.isNull())
-   painter.drawImage(0, 0, data_->m_background_); //riempe lo sfonfo con l'immagine scelta dall'utente
+   painter.drawImage(0, 0, data_->m_background_);
 
  if(!data_->editing_)
  {          //drawingSquareEnabled_
