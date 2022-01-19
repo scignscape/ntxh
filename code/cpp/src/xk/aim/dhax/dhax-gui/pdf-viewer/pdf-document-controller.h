@@ -24,6 +24,8 @@
 
 #include "pdf-document-state.h"
 
+#include "image-viewer/dhax-drawn-shape.h"
+
 class MultiLine_Rubber_Band;
 class Arrow_Annotation;
 
@@ -88,7 +90,8 @@ public:
 
  QList<QUrl> url_list_;
 
- MultiStep_Annotation_Base* init_multistep_annotation(const QPointF posf, QWidget* parent = nullptr);
+ MultiStep_Annotation_Base* init_multistep_annotation(QWidget* parent,
+   const QPointF posf, DHAX_Annotation_Instance::Compact_Shape_Kind_Summary shape_kind);
 
 //    int currentPage;
 //    QPoint dragPosition;

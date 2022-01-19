@@ -36,6 +36,7 @@ DHAX_Image_Scene_Item::DHAX_Image_Scene_Item(QWidget *parent) : QWidget(parent)
 {
  containing_image_view_ = nullptr;
  current_multistep_annotation_ = nullptr;
+ current_completed_multistep_annotation_ = nullptr;
 
  setAutoFillBackground(true);
  setBackgroundRole(QPalette::Window);
@@ -669,7 +670,8 @@ void DHAX_Image_Scene_Item::mousePressEvent(QMouseEvent* mev)
    {
     PDF_Document_Controller* pdc = containing_image_view_->document_controller();
 
-    current_multistep_annotation_ = pdc->init_multistep_annotation(posf, this);
+    current_multistep_annotation_ = pdc->init_multistep_annotation(this, posf,
+      data_->current_enabled_shape_kind());
     current_multistep_annotation_->show();
    }
   }
@@ -745,6 +747,9 @@ void DHAX_Image_Scene_Item::mouseReleaseEvent(QMouseEvent* mev)
   {
    if(current_multistep_annotation_)
      current_multistep_annotation_->finish_third_phase(mev->pos());
+
+   current_completed_multistep_annotation_ = current_multistep_annotation_;
+   current_multistep_annotation_ = nullptr;
   }
 
   return;

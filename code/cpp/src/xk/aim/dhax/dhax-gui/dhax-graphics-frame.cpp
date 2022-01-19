@@ -313,17 +313,24 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
 
 
  // assume a rectangle to begin with ...
- setup_shape_rectangle();
+ setup_rectangle_shape();
 
  _self_connect_(shape_select_frame_ ,shape_selection_changed)
    to_lambda[this](QString sel)
  {
   if(sel == "Rectangle")
-    setup_shape_rectangle();
+    setup_rectangle_shape();
   else if(sel == "Polygon")
-    setup_shape_polygon();
+    setup_polygon_shape();
   else if(sel == "Ellipse")
-    setup_shape_ellipse();
+    setup_ellipse_shape();
+  else if(sel == "Multi-Line")
+    setup_multiline_shape();
+  else if(sel == "Arrow")
+    setup_arrow_shape();
+  else if(sel == "Measurement")
+    setup_measurement_shape();
+
  };
 }
 
@@ -336,22 +343,40 @@ void DHAX_Graphics_Frame::handle_zoom_factor_changed(r8 factor)
 }
 
 
-void DHAX_Graphics_Frame::setup_shape_rectangle()
+void DHAX_Graphics_Frame::setup_rectangle_shape()
 {
  display_image_data_->reset();
- display_image_data_->enableSquareDraw();
+ display_image_data_->enable_rectangle_shape();
 }
 
-void DHAX_Graphics_Frame::setup_shape_polygon()
+void DHAX_Graphics_Frame::setup_polygon_shape()
 {
  display_image_data_->reset();
- display_image_data_->enablePolygonDraw();
+ display_image_data_->enable_polygon_shape();
 }
 
-void DHAX_Graphics_Frame::setup_shape_ellipse()
+void DHAX_Graphics_Frame::setup_ellipse_shape()
 {
  display_image_data_->reset();
- display_image_data_->enableEllipseDraw();
+ display_image_data_->enable_ellipse_shape();
+}
+
+void DHAX_Graphics_Frame::setup_multiline_shape()
+{
+ display_image_data_->reset();
+ display_image_data_->enable_multiline_shape();
+}
+
+void DHAX_Graphics_Frame::setup_arrow_shape()
+{
+ display_image_data_->reset();
+ display_image_data_->enable_arrow_shape();
+}
+
+void DHAX_Graphics_Frame::setup_measurement_shape()
+{
+ display_image_data_->reset();
+ display_image_data_->enable_measurement_shape();
 }
 
 void DHAX_Graphics_Frame::setup_highlight(bool checked)

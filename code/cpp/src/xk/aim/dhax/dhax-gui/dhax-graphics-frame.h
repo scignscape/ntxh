@@ -70,9 +70,14 @@ public:
  USE_SELF_CONNECT(normal)
  USE_SELF_CONNECT(lambda)
 
- void setup_shape_rectangle();
- void setup_shape_polygon();
- void setup_shape_ellipse();
+ void setup_rectangle_shape();
+ void setup_polygon_shape();
+ void setup_ellipse_shape();
+ void setup_multiline_shape();
+ void setup_arrow_shape();
+ void setup_measurement_shape();
+
+
  void setup_highlight(bool checked);
 
  enum class Change_Image_Margins {

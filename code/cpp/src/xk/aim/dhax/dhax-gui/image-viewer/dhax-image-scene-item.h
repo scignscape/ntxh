@@ -79,6 +79,8 @@ private:
  QVector<QPair<DHAX_Annotation_Instance*, r8>> saved_dhax_annotations_;
 
  MultiStep_Annotation_Base* current_multistep_annotation_;
+ MultiStep_Annotation_Base* current_completed_multistep_annotation_;
+
 
  QPointF active_right_mouse_drag_origin_;
  QPointF active_left_mouse_drag_origin_;

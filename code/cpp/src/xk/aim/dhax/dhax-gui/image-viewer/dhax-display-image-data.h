@@ -236,9 +236,17 @@ class DHAX_Display_Image_Data
   void defaultColorsThickness();
 
   void setColorsThickness(int in_radius, int in_thickness, int in_myRed, int in_myGreen, int in_MyBlue, int in_sqRed, int in_sqGreen, int in_sqBlue, int in_shapeRed, int in_shapeGreen, int in_shapeBlue);
-  void enableSquareDraw();
-  void enableEllipseDraw();
-  void enablePolygonDraw();
+
+//  void enableSquareDraw();
+//  void enableEllipseDraw();
+//  void enablePolygonDraw();
+  void enable_rectangle_shape();
+  void enable_ellipse_shape();
+  void enable_polygon_shape();
+  void enable_multiline_shape();
+  void enable_arrow_shape();
+  void enable_measurement_shape();
+
   void enableHighlight(bool enable);
   void setNameSelected(bool enable);
   void setShapeSelected(QString in_shapeID);

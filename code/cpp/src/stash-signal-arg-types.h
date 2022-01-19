@@ -9,8 +9,8 @@
  //    for an explanation
 
 STASH_SIGNAL_ARG_TYPES(bool)
-STASH_SIGNAL_ARG_TYPES(QString)
-STASH_SIGNAL_ARG_TYPES(QString, QString)
+STASH_SIGNAL_ARG_TYPES(const QString&)
+STASH_SIGNAL_ARG_TYPES(const QString&, const QString&)
 STASH_SIGNAL_ARG_TYPES(int)
 STASH_SIGNAL_ARG_TYPES(int, int)
 STASH_SIGNAL_ARG_TYPES(int, int, int, int)

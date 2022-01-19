@@ -381,7 +381,10 @@ subcontrol-position: left;}
  shape_ckb_group_->addButton(domain_shape_ckb_);
 
  connect(domain_shape_options_, &QComboBox::currentTextChanged,
-   [this] {update_shape_selection();});
+   [this]
+ {
+  update_shape_selection();
+ });
 
 // main_tab_layout_->addStretch();
 
@@ -389,6 +392,11 @@ subcontrol-position: left;}
  generic_shape_options_->addItem("Rectangle");
  generic_shape_options_->addItem("Ellipse");
  generic_shape_options_->addItem("Polygon");
+
+ generic_shape_options_->addItem("Multi-Line");
+ generic_shape_options_->addItem("Arrow");
+ generic_shape_options_->addItem("Measurement");
+
  generic_shape_options_->addItem("N_A");
 
  QStandardItemModel* model = qobject_cast<QStandardItemModel*>(generic_shape_options_->model());
@@ -403,7 +411,17 @@ subcontrol-position: left;}
 //   [this] {update_shape_selection();});
 
  generic_shape_options_ >> Connect(currentTextChanged)
-   to_lambda[this]{update_shape_selection();};
+   to_lambda[this](QString)
+ {
+  update_shape_selection();
+ };
+
+// connect(generic_shape_options_, &QComboBox::currentTextChanged,
+//   [this]
+// {
+//  update_shape_selection();
+// });
+
 
  generic_shape_ckb_ = new QCheckBox("Generic\nShape", this);
 // main_tab_layout_->addWidget(generic_shape_ckb_);
@@ -756,7 +774,7 @@ void Shape_Select_Frame::update_image_path(QString path, u4 page_number)
 void Shape_Select_Frame::update_shape_selection()
 {
  QString sel = current_shape_selection();
- emit shape_selection_changed(sel);
+ Q_EMIT shape_selection_changed(sel);
 }
 
 

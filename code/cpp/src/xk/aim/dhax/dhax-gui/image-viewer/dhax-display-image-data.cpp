@@ -142,7 +142,22 @@ void DHAX_Display_Image_Data::setView(QImage image)
  m_background_ = image;
 }
 
-void DHAX_Display_Image_Data::enableSquareDraw()
+void DHAX_Display_Image_Data::enable_multiline_shape()
+{
+ enabled_shape_kind_ = DHAX_Display_Image_Data::Shape_Kinds::Multiline;
+}
+
+void DHAX_Display_Image_Data::enable_measurement_shape()
+{
+ enabled_shape_kind_ = DHAX_Display_Image_Data::Shape_Kinds::Measurement;
+}
+
+void DHAX_Display_Image_Data::enable_arrow_shape()
+{
+ enabled_shape_kind_ = DHAX_Display_Image_Data::Shape_Kinds::Arrow;
+}
+
+void DHAX_Display_Image_Data::enable_rectangle_shape()
 {
  enabled_shape_kind_ = DHAX_Display_Image_Data::Shape_Kinds::Rectangle;
 
@@ -151,7 +166,7 @@ void DHAX_Display_Image_Data::enableSquareDraw()
 // drawingPolygonEnabled_ = false;
 }
 
-void DHAX_Display_Image_Data::enableEllipseDraw()
+void DHAX_Display_Image_Data::enable_ellipse_shape()
 {
  enabled_shape_kind_ = DHAX_Display_Image_Data::Shape_Kinds::Ellipse;
 
@@ -160,7 +175,7 @@ void DHAX_Display_Image_Data::enableEllipseDraw()
 // drawingPolygonEnabled_ = false;
 }
 
-void DHAX_Display_Image_Data::enablePolygonDraw()
+void DHAX_Display_Image_Data::enable_polygon_shape()
 {
  enabled_shape_kind_ = DHAX_Display_Image_Data::Shape_Kinds::Non_Regular_Polygon;
 

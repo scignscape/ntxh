@@ -117,8 +117,8 @@ public:
 
  enum class Compact_Shape_Kind_Summary {
    N_A, Non_Regular_Polygon, Rectangle, Arrow,
-   Regular_Polygon, Diamond, Polyline,
-   Ellipse, QPath, Curve, Other_Non_Linear
+   Regular_Polygon, Multiline, Polyline, //?Measurement,  //?Diamond, Polyline,
+   Ellipse, QPath, Curve, Measurement, Other_Non_Linear,
  };
 
 

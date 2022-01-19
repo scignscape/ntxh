@@ -44,10 +44,24 @@ PDF_Document_Controller::PDF_Document_Controller()
 
 }
 
-MultiStep_Annotation_Base* PDF_Document_Controller::init_multistep_annotation(const QPointF posf, QWidget* parent)
+MultiStep_Annotation_Base* PDF_Document_Controller::init_multistep_annotation(
+  QWidget* parent, const QPointF posf,
+  DHAX_Annotation_Instance::Compact_Shape_Kind_Summary shape_kind)
 {
- current_multistep_annotation_ = new MultiLine_Rubber_Band(QRubberBand::Rectangle, posf, parent);
-   // current_multistep_annotation_ = new Rotateable_Arrow_Annotation(posf, parent);
+ current_multistep_annotation_ = nullptr;
+ switch(shape_kind)
+ {
+ case DHAX_Annotation_Instance::Compact_Shape_Kind_Summary::Arrow:
+  current_multistep_annotation_ = new Rotateable_Arrow_Annotation(posf, parent);
+  break;
+
+ case DHAX_Annotation_Instance::Compact_Shape_Kind_Summary::Multiline:
+  current_multistep_annotation_ = new MultiLine_Rubber_Band(QRubberBand::Rectangle, posf, parent);
+  break;
+
+ default: break;
+ }
+
  //dragPosition = event->pos();
  //current_multistep_annotation_->show();
  return current_multistep_annotation_;
