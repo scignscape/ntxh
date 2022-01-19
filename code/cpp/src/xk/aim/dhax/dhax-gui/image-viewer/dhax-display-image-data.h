@@ -28,10 +28,14 @@ class DHAX_Display_Image_Data;
 class DHAX_Main_Window;
 class DHAX_Annotation_Instance;
 
+class DHAX_Application_State;
+
 
 class DHAX_Display_Image_Data
 {
   friend class DHAX_Image_Scene_Item;
+
+ DHAX_Application_State* application_state_;
 
   bool pan_mode_;
   bool pull_mode_;
@@ -160,6 +164,8 @@ class DHAX_Display_Image_Data
 
   ACCESSORS(DHAX_Drawn_Shape* ,current_drawn_shape)
   ACCESSORS(DHAX_Drawn_Shape* ,active_curve)
+
+  ACCESSORS(DHAX_Application_State* ,application_state)
 
 
   ACCESSORS__RGET(QStack<DHAX_Drawn_Shape*> ,held_drawn_shapes)

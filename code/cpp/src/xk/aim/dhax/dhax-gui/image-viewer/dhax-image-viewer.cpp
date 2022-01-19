@@ -15,6 +15,8 @@
 
 #include "application/dhax-application-state.h"
 
+#include "pdf-viewer/pdf-document-controller.h"
+
 
 #include <QGraphicsProxyWidget>
 #include <QDebug>
@@ -30,9 +32,18 @@ DHAX_Image_Viewer::DHAX_Image_Viewer(QWidget* parent)
      main_layout_(0),
      image_scene_item_(nullptr),
      display_image_data_(new DHAX_Display_Image_Data),
-     main_window_(nullptr)
+     main_window_(nullptr), document_controller_(nullptr)
 {
 }
+
+void DHAX_Image_Viewer::load_pdf_pixmap(PDF_Document_Controller* document_controller)
+{
+ document_controller_ = document_controller;
+ load_image(document_controller->pixmap());
+ scrolled_image_view_->set_document_controller(document_controller);
+
+}
+
 
 
 void DHAX_Image_Viewer::reset_scale(r8 factor)
@@ -245,6 +256,8 @@ void DHAX_Image_Viewer::complete_load_image()
  image_scene_item_ = new DHAX_Image_Scene_Item;// (this);
  image_scene_item_->set_data(display_image_data_);
  image_scene_item_->set_containing_image_view(scrolled_image_view_);
+
+ image_scene_item_->temp = this;
 
  image_scene_item_->resize(sipw, siph);
 

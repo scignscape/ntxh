@@ -155,6 +155,9 @@ HEADERS += \
   $$SRC_DIR/rpdf/bim-select-dialog.h \
   $$SRC_DIR/libspline/aaCurve.h \
   $$SRC_DIR/libspline/spline.h \
+  $$SRC_DIR/aforms/multiline-rubber-band.h \
+  $$SRC_DIR/aforms/rotateable-arrow-annotation.h \
+  $$SRC_DIR/aforms/multistep-annotation-base.h \
 
 
 SOURCES += \
@@ -207,6 +210,9 @@ SOURCES += \
   $$SRC_DIR/rpdf/bim-select-dialog.cpp \
   $$SRC_DIR/libspline/aaCurve.cpp \
   $$SRC_DIR/libspline/spline.cpp \
+  $$SRC_DIR/aforms/multiline-rubber-band.cpp \
+  $$SRC_DIR/aforms/rotateable-arrow-annotation.cpp \
+  $$SRC_DIR/aforms/multistep-annotation-base.cpp \
 
 
 QFontIcon_SRC_DIR = $$SRC_ROOT_DIR/external/QFontIcon-master/QFontIcon

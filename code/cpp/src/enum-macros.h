@@ -34,20 +34,24 @@
  { \
   return lhs = (e) (lhs ^ rhs); \
  } \
- friend constexpr e operator,(e& lhs, e rhs) \
- { \
-  if(lhs & rhs) lhs = (e) (lhs ^ rhs); \
-  return lhs; \
- } \
- friend constexpr e operator,(e& lhs, u1 rhs) \
- { \
-  if(lhs & rhs) lhs = (e) (lhs ^ rhs); \
-  return lhs; \
- } \
  friend constexpr u1 operator&(e lhs, e rhs) \
  { \
   return (u1) lhs & (u1) rhs; \
  } \
+
+
+
+//friend constexpr e operator,(e& lhs, e rhs) \
+//{ \
+// if(lhs & rhs) lhs = (e) (lhs ^ rhs); \
+// return lhs; \
+//} \
+
+//friend constexpr e operator,(e& lhs, u1 rhs) \
+//{ \
+// if(lhs & rhs) lhs = (e) (lhs ^ rhs); \
+// return lhs; \
+//} \
 
 
 #define ENUM_PLUS_MACRO(e) \

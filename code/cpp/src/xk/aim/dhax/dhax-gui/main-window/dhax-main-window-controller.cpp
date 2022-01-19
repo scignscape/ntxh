@@ -406,6 +406,8 @@ void DHAX_Main_Window_Controller::load_pdf()
  document_controller_->load_page(dpis);
 
  init_pdf_page_view();
+
+ application_controller_->application_state()->flags.pdf_mode = true;
 }
 
 void DHAX_Main_Window_Controller::reinit_pdf_page_view(u4 page)
@@ -415,7 +417,7 @@ void DHAX_Main_Window_Controller::reinit_pdf_page_view(u4 page)
 
 void DHAX_Main_Window_Controller::init_pdf_page_view()
 {
- image_viewer_->load_image(document_controller_->pixmap());
+ image_viewer_->load_pdf_pixmap(document_controller_); //->pixmap());
  delayed_image_viewer_recenter_scroll_top_left();
 }
 

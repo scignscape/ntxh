@@ -25,6 +25,7 @@ class DHAX_Application_State
 public:
 
  flags_(1)
+  bool pdf_mode:1;
   bool image_border_visible_fixed:1;
   bool image_border_visible_temp:1;
   bool image_pen_visible:1;

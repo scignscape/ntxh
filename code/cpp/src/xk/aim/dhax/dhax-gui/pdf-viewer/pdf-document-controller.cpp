@@ -5,6 +5,9 @@
 
 #include "pleneviews/page-and-search-frame.h"
 
+#include "aforms/multiline-rubber-band.h"
+#include "aforms/rotateable-arrow-annotation.h"
+
 #include "pdf-document-info.h"
 
 //#include "multiline-rubber-band.h"
@@ -40,6 +43,16 @@ PDF_Document_Controller::PDF_Document_Controller()
 {
 
 }
+
+MultiStep_Annotation_Base* PDF_Document_Controller::init_multistep_annotation(const QPointF posf, QWidget* parent)
+{
+ current_multistep_annotation_ = new MultiLine_Rubber_Band(QRubberBand::Rectangle, posf, parent);
+   // current_multistep_annotation_ = new Rotateable_Arrow_Annotation(posf, parent);
+ //dragPosition = event->pos();
+ //current_multistep_annotation_->show();
+ return current_multistep_annotation_;
+}
+
 
 void PDF_Document_Controller::load_page(QPair<u4, u4> physical_dpis)
 {

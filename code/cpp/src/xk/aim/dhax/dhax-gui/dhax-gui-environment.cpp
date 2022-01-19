@@ -22,6 +22,8 @@
 
 #include "dhax-gui/image-viewer/dhax-image-viewer.h"
 
+#include "dhax-gui/image-viewer/dhax-display-image-data.h"
+
 #include "network/dhax-udp-controller.h"
 
 #include "virtual-packages/graphics-scene-demo.h"
@@ -390,6 +392,8 @@ void DHAX_GUI_Environment::init_image_viewer()
  image_viewer_->set_scrolled_image_scene(graphics_scene_);
 
  image_viewer_->set_application_state(application_state_);
+ image_viewer_->display_image_data()->set_application_state(application_state_);
+
  //QMap<QString, QColor>*
 
 

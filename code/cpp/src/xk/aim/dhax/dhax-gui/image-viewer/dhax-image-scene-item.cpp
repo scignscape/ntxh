@@ -11,6 +11,14 @@
 
 #include "dhax-data/ann/dhax-annotation-instance.h"
 
+#include "application/dhax-application-state.h"
+
+#include "dhax-graphics-view.h"
+
+#include "pdf-viewer/pdf-document-controller.h"
+
+#include "aforms/multistep-annotation-base.h"
+
 #include <QGraphicsProxyWidget>
 
 #include <QPainter>
@@ -27,6 +35,7 @@ void DHAX_Image_Scene_Item::reset_background_to_original_position()
 DHAX_Image_Scene_Item::DHAX_Image_Scene_Item(QWidget *parent) : QWidget(parent)
 {
  containing_image_view_ = nullptr;
+ current_multistep_annotation_ = nullptr;
 
  setAutoFillBackground(true);
  setBackgroundRole(QPalette::Window);
@@ -320,6 +329,13 @@ void DHAX_Image_Scene_Item::draw_control_square(const QPoint& center,
 void DHAX_Image_Scene_Item::paintEvent(QPaintEvent*)
 {
  QPainter painter(this);
+ if(data_->application_state()->flags.pdf_mode)
+ {
+  if(!data_->m_background_.isNull())
+    painter.drawImage(0, 0, data_->m_background_);
+  return;
+ }
+
  QPen myPen(QColor(data_->myRed_, data_->myGreen_,data_->myBlue_), data_->thickness_, Qt::SolidLine); //myPen per tutte le shape
 
  u1 gradient_base = 140;
@@ -620,6 +636,57 @@ void DHAX_Image_Scene_Item::paintEvent(QPaintEvent*)
 
 void DHAX_Image_Scene_Item::mousePressEvent(QMouseEvent* mev)
 {
+ if(data_->application_state()->flags.pdf_mode)
+ {
+  const QPointF posf = mev->pos();
+
+  if(mev->button() == Qt::MouseButton::RightButton)
+  {
+   if(active_left_mouse_drag_origin_.isNull())
+   {
+    // context menu?
+   }
+   else
+   {
+    //?current_arrow_annotation_->init_tip_phase(posf);
+    current_multistep_annotation_->init_second_phase(posf);
+    active_right_mouse_drag_origin_ = posf;
+
+ //   rubberBand->init_double_band(posf);
+ //   active_right_mouse_drag_origin_ = posf;
+   }
+
+  }
+  else if(mev->button() == Qt::MouseButton::LeftButton)
+  {
+   active_left_mouse_drag_origin_ = posf;
+
+   if(current_multistep_annotation_)
+   {
+    current_multistep_annotation_->reset_geometry(posf);
+   }
+   else
+   {
+    PDF_Document_Controller* pdc = containing_image_view_->document_controller();
+
+    current_multistep_annotation_ = pdc->init_multistep_annotation(posf, this);
+    current_multistep_annotation_->show();
+   }
+  }
+
+  //return;
+
+//  qDebug() << "m pos = " << mev->pos();
+
+
+  //MultiStep_Annotation_Base* current_multistep_annotation_
+
+  //containing_image_view_->
+
+  return;
+ }
+
+
 // return;
 
  if(data_->pan_or_pull_mode())
@@ -653,6 +720,41 @@ void DHAX_Image_Scene_Item::mousePressEvent(QMouseEvent* mev)
 void DHAX_Image_Scene_Item::mouseReleaseEvent(QMouseEvent* mev)
 {
 // return;
+ if(data_->application_state()->flags.pdf_mode)
+ {
+  if(mev->button() == Qt::MiddleButton)
+  {
+   qDebug() << "middle ...";
+  }
+  if(mev->button() == Qt::RightButton &&
+    !active_left_mouse_drag_origin_.isNull())
+  {
+   active_right_mouse_drag_origin_ = {};
+
+   if(current_multistep_annotation_)
+     current_multistep_annotation_->finish_second_phase(mev->pos());
+
+  //?  if(rubberBand)
+  //?    rubberBand->finish_double_band(qme->pos());
+   return;
+  }
+
+
+  if(mev->button() == Qt::LeftButton &&
+    !active_left_mouse_drag_origin_.isNull())
+  {
+   if(current_multistep_annotation_)
+     current_multistep_annotation_->finish_third_phase(mev->pos());
+  }
+
+  return;
+
+  if(mev->button() == Qt::RightButton)
+  {
+
+  }
+
+ }
 
  if(data_->pan_or_pull_mode())
  {
@@ -712,6 +814,20 @@ void DHAX_Image_Scene_Item::mouseReleaseEvent(QMouseEvent* mev)
 
 void DHAX_Image_Scene_Item::mouseMoveEvent(QMouseEvent* mev) //mouseEvent)
 {
+ if(data_->application_state()->flags.pdf_mode)
+ {
+  //return;
+
+
+  //QMou  mev->buttons();
+  if(current_multistep_annotation_)
+  {
+   current_multistep_annotation_->adjust_geometry(mev->pos());
+   current_multistep_annotation_->repaint();
+  }
+  return;
+ }
+
 // QGraphicsView* v = qobject_cast<QGraphicsView*>(parent());
 // v->mouseMoveEvent(mouseEvent);
 

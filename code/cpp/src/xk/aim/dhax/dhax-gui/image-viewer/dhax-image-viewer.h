@@ -27,6 +27,9 @@ class DHAX_Main_Window;
 
 class DHAX_Application_State;
 
+class PDF_Document_Controller;
+
+
 
 class DHAX_Image_Viewer : public QWidget
 {
@@ -61,6 +64,8 @@ class DHAX_Image_Viewer : public QWidget
 
  DHAX_Main_Window* main_window_;
 
+ PDF_Document_Controller* document_controller_;
+
  void recenter_image();
 
  // //  what should be the item class here?
@@ -82,10 +87,14 @@ public:
 
  ACCESSORS(DHAX_Application_State* ,application_state)
 
+ ACCESSORS(PDF_Document_Controller* ,document_controller)
+
  //?ACCESSORS(MACRO_PASTE(const QMap<QString, QColor>*) ,application_colors)
 
  void reset_background_center_rectangle_color();
  void reset_background_rectangle_color();
+
+ void load_pdf_pixmap(PDF_Document_Controller* document_controller);
 
  QPointF control_center(u1 index)
  {

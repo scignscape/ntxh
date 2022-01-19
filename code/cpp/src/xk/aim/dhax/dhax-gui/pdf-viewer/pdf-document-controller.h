@@ -88,6 +88,8 @@ public:
 
  QList<QUrl> url_list_;
 
+ MultiStep_Annotation_Base* init_multistep_annotation(const QPointF posf, QWidget* parent = nullptr);
+
 //    int currentPage;
 //    QPoint dragPosition;
 //    MultiLine_Rubber_Band* rubberBand;

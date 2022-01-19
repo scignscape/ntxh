@@ -13,7 +13,7 @@
 
 
 DHAX_Graphics_View::DHAX_Graphics_View(QWidget* parent)
-  :  QGraphicsView(parent)
+  :  QGraphicsView(parent), document_controller_(nullptr)
 {
  mouse_keyboard_data_.set_containing_metaobject(this->metaObject());
 }

@@ -29,6 +29,8 @@ class DHAX_Main_Window;
 
 class DHAX_Annotation_Instance;
 
+class MultiStep_Annotation_Base;
+
 class DHAX_Drawn_Shape;
 
 class _Proxy_Widget;
@@ -75,6 +77,11 @@ private:
  u4* freecad_import_count_;
 
  QVector<QPair<DHAX_Annotation_Instance*, r8>> saved_dhax_annotations_;
+
+ MultiStep_Annotation_Base* current_multistep_annotation_;
+
+ QPointF active_right_mouse_drag_origin_;
+ QPointF active_left_mouse_drag_origin_;
 
 // QGraphics
 
@@ -126,6 +133,8 @@ public:
  ACCESSORS(DHAX_Graphics_View* ,containing_image_view)
  ACCESSORS(u4* ,meshlab_import_count)
  ACCESSORS(u4* ,freecad_import_count)
+
+ QWidget* temp;
 
 
  enum shapes{ square, ellipse, polygon };
