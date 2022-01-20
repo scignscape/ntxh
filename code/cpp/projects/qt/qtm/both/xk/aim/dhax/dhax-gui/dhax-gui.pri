@@ -157,6 +157,7 @@ HEADERS += \
   $$SRC_DIR/libspline/spline.h \
   $$SRC_DIR/aforms/multiline-rubber-band.h \
   $$SRC_DIR/aforms/rotateable-arrow-annotation.h \
+  $$SRC_DIR/aforms/measurement-annotation.h \
   $$SRC_DIR/aforms/multistep-annotation-base.h \
 
 
@@ -212,6 +213,7 @@ SOURCES += \
   $$SRC_DIR/libspline/spline.cpp \
   $$SRC_DIR/aforms/multiline-rubber-band.cpp \
   $$SRC_DIR/aforms/rotateable-arrow-annotation.cpp \
+  $$SRC_DIR/aforms/measurement-annotation.cpp \
   $$SRC_DIR/aforms/multistep-annotation-base.cpp \
 
 

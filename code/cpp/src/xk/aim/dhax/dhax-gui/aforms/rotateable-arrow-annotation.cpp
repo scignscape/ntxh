@@ -90,10 +90,10 @@ void Rotateable_Arrow_Annotation::adjust_geometry(const QPointF& pos)
    return;
   }
  }
- else if(current_corner_pair_direction_ & Corner_Pair_Directions::Third_Phase)
- {
+// else if(current_corner_pair_direction_ & Corner_Pair_Directions::Third_Phase)
+// {
 
- }
+// }
 }
 
 void Rotateable_Arrow_Annotation::reset_geometry(const QPointF& sc)

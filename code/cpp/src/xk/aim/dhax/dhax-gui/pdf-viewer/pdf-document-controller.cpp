@@ -7,6 +7,7 @@
 
 #include "aforms/multiline-rubber-band.h"
 #include "aforms/rotateable-arrow-annotation.h"
+#include "aforms/measurement-annotation.h"
 
 #include "pdf-document-info.h"
 
@@ -57,6 +58,10 @@ MultiStep_Annotation_Base* PDF_Document_Controller::init_multistep_annotation(
 
  case DHAX_Annotation_Instance::Compact_Shape_Kind_Summary::Multiline:
   current_multistep_annotation_ = new MultiLine_Rubber_Band(QRubberBand::Rectangle, posf, parent);
+  break;
+
+ case DHAX_Annotation_Instance::Compact_Shape_Kind_Summary::Measurement:
+  current_multistep_annotation_ = new Measurement_Annotation(posf, parent);
   break;
 
  default: break;
