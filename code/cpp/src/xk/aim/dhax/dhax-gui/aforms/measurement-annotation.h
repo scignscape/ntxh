@@ -27,8 +27,11 @@ class Measurement_Annotation //
  u1 top_line_width_;
  u1 bottom_line_width_;
 
- s1 horizontal_extension_;
- s1 vertical_extension_;
+ s2 horizontal_extension_;
+ s2 vertical_extension_;
+
+ void _check_outer_adjust(u1 index, s2 amount);
+
 
 protected:
 

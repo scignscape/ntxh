@@ -12,12 +12,70 @@
 Measurement_Annotation::Measurement_Annotation(const QPointF& sc, QWidget* p) :
     MultiStep_Annotation_Base(p), left_line_width_(5),
     right_line_width_(5), top_line_width_(3),
-    bottom_line_width_(3), horizontal_extension_(0), vertical_extension_(0)
+    bottom_line_width_(3),
+    horizontal_extension_(0), vertical_extension_(0)
 {
  inner_.setTopLeft(sc);
  inner_.setBottomRight(sc);
  if(p)
    setGeometry(p->geometry());
+}
+
+
+void Measurement_Annotation::_check_outer_adjust(u1 index, s2 amount)
+{
+ s2 adjust = 0;
+ switch(index)
+ {
+ case 1:
+  if(amount < 0)
+  {
+   horizontal_extension_ = -amount;
+   adjust = -amount;
+  }
+  else
+    horizontal_extension_ = amount;
+  break;
+
+ case 2:
+  if(amount < 0)
+  {
+   vertical_extension_ = -amount;
+   adjust = -amount;
+  }
+  else
+    vertical_extension_ = amount;
+  break;
+
+ case 3:
+  if(amount < 0)
+  {
+   horizontal_extension_ = -amount;
+   adjust = amount;
+  }
+  else
+    horizontal_extension_ = amount;
+  break;
+
+ case 4:
+  if(amount < 0)
+  {
+   vertical_extension_ = -amount;
+   adjust = amount;
+  }
+  else
+    vertical_extension_ = amount;
+  break;
+
+ default: break;
+ }
+
+ if(adjust != 0)
+ {
+  s2 amounts[4] = {0,0,0,0};
+  amounts[index - 1] = adjust;
+  outer_.adjust(amounts[0], amounts[1], amounts[2], amounts[3]);
+ }
 }
 
 void Measurement_Annotation::adjust_geometry(const QPointF& pos)
@@ -40,43 +98,43 @@ void Measurement_Annotation::adjust_geometry(const QPointF& pos)
   case Corner_Pair_Directions::Down_Right:
    h = pos.x() - outer_.bottomRight().x();
    v = pos.y() - outer_.bottomRight().y();
-   qDebug() << "h: " << h;
-   qDebug() << "v: " << v;
+
+   if(h != 0)
+     _check_outer_adjust(3, h);
+   if(v != 0)
+     _check_outer_adjust(4, v);
 
    break;
   case Corner_Pair_Directions::Up_Right:
    h = pos.x() - outer_.topRight().x();
    v = outer_.topRight().y() - pos.y();
+   if(h != 0)
+     _check_outer_adjust(3, h);
+   if(v != 0)
+     _check_outer_adjust(2, v);
+
    break;
   case Corner_Pair_Directions::Down_Left:
    h = outer_.bottomLeft().x() - pos.x();
    v = pos.y() - outer_.bottomLeft().y();
+
+   if(h != 0)
+     _check_outer_adjust(1, h);
+   if(v != 0)
+     _check_outer_adjust(4, v);
    break;
+
   case Corner_Pair_Directions::Up_Left:
    h = outer_.topLeft().x() - pos.x();
    v = outer_.topLeft().y() - pos.y();
+
+   if(h != 0)
+     _check_outer_adjust(1, h);
+   if(v != 0)
+     _check_outer_adjust(2, v);
    break;
+
   default: break;
-  }
-  if(h != 0)
-  {
-   if(h > 5)
-     qDebug() << 5;
-   if(h > 0x1f)
-     h = 0x1f;
-   if(horizontal_extension_ < 0)
-     horizontal_extension_ = -((-horizontal_extension_) | h);
-   else
-     horizontal_extension_ |= h;
-  }
-  if(v != 0)
-  {
-   if(v > 0x1f)
-     v = 0x1f;
-   if(vertical_extension_ < 0)
-     vertical_extension_ = -((-vertical_extension_) | v);
-   else
-     vertical_extension_ |= v;
   }
  }
  else if(current_corner_pair_direction_ & Corner_Pair_Directions::Second_Phase)
@@ -98,16 +156,12 @@ void Measurement_Annotation::adjust_geometry(const QPointF& pos)
    break;
   case Corner_Pair_Directions::Up_Left:
    outer_.setTopLeft(pos);
-   outer_.setBottomRight(inner_.topLeft() + inner_.bottomRight() - outer_.bottomRight());
+   outer_.setBottomRight(inner_.bottomRight() + inner_.topLeft() - outer_.topLeft());
    break;
   default:
    return;
   }
  }
-// else if(current_corner_pair_direction_ & Corner_Pair_Directions::Third_Phase)
-// {
-
-// }
 }
 
 void Measurement_Annotation::reset_geometry(const QPointF& sc)
@@ -144,33 +198,6 @@ void Measurement_Annotation::finish_outer_phase(const QPointF& pos)
  current_corner_pair_direction_ ^= Corner_Pair_Directions::Second_Phase;
  current_corner_pair_direction_ |= Corner_Pair_Directions::Third_Phase;
 
- switch (cpd)
- {
- case Corner_Pair_Directions::Down_Right:
-  horizontal_extension_ = 0x40;
-  vertical_extension_ = 0x20;
-  break;
- case Corner_Pair_Directions::Up_Right:
-  horizontal_extension_ = 0x40;
-  vertical_extension_ = -0x20;
-  break;
- case Corner_Pair_Directions::Down_Left:
-  horizontal_extension_ = -0x40;
-  vertical_extension_ = 0x20;
-  break;
- case Corner_Pair_Directions::Up_Left:
-  horizontal_extension_ = -0x40;
-  vertical_extension_ = -0x20;
-  break;
- default:
-  break;
-// case Corner_Pair_Directions::Down_Right_Down:
-// case Corner_Pair_Directions::Down_Left_Down:
-//  break;
-// case Corner_Pair_Directions::Up_Right_Up:
-// case Corner_Pair_Directions::Up_Left_Up:
-//  break;
- }
 }
 
 
@@ -228,75 +255,11 @@ void Measurement_Annotation::process_paint_event(QPaintEvent* event, QPainter& p
   QLine left_line(_inner.left(), _outer.top(), _inner.left(), _outer.bottom());
   QLine right_line(_inner.right(), _outer.top(), _inner.right(), _outer.bottom());
 
-
   if(!(current_corner_pair_direction_ & Corner_Pair_Directions::Second_Phase))
   {
-
-   qDebug() << "horizontal_extension_ = " << horizontal_extension_;
-   qDebug() << "vertical_extension_ = " << vertical_extension_;
-
-
-   s1 hext = 0, vext = 0, hextl = 0, vextl = 0;
-   if(horizontal_extension_ < 0)
-   {
-    hext = -horizontal_extension_;
-    hextl = hext & 0x1f;
-    hext = hextl - hext;
-   }
-   else if(horizontal_extension_ > 0)
-   {
-    if(horizontal_extension_ > 70)
-      qDebug() << "70";
-    hext = horizontal_extension_;
-    hextl = hext & 0x1f;
-    hext = hext - hextl;
-   }
-   if(vertical_extension_ < 0)
-   {
-    vext = -vertical_extension_;
-    vextl = vext & 0x1f;
-    vext = vextl - vext;
-   }
-   else if(vertical_extension_ > 0)
-   {
-    vext = vertical_extension_;
-    vextl = vext & 0x1f;
-    vext = vext - vextl;
-   }
-
-   qDebug() << "hext = " << hext;
-   qDebug() << "vext = " << vext;
-   qDebug() << "hext + vext = " << hext + vext;
-   qDebug() << "hextl = " << hextl;
-   qDebug() << "vextl = " << vextl;
-
-   switch(hext + vext)
-   {
-   case 0: default: break;
-   case -0x40 + -0x20:
-    move_p1x(left_line, -hextl);
-    move_p1y(top_line, -vextl);
-    break;
-   case -0x40 + 0x20:
-    move_p1x(left_line, -hextl);
-    move_p2y(top_line, vextl);
-    break;
-   case 0x40 + -0x20:
-    move_p1x(top_line, -hextl);
-    move_p1y(left_line, -vextl);
-    break;
-   case 0x40 + 0x20:
-    move_p1x(top_line, -hextl);
-    move_p1y(left_line, -vextl);
-
-    qDebug() << "hl = " << hextl;
-    qDebug() << "vl = " << vextl;
-
-    break;
-   }
+   move_p1x(top_line, -horizontal_extension_);
+   move_p1y(left_line, -vertical_extension_);
   }
-
-
 
   QPen store_pen = painter.pen();
   QPen emph_pen = QPen(QColor(200, 20, 20, 100));
@@ -347,8 +310,6 @@ void Measurement_Annotation::process_paint_event(QPaintEvent* event, QPainter& p
   painter.setPen(store_pen);
   painter.drawRect(_inner);
 
-
-
   //  s1 cpd = (current_corner_pair_direction_ & Corner_Pair_Directions::Direction_Only);
 //  QVector<QPoint> points;
 //  switch(cpd)
@@ -356,3 +317,93 @@ void Measurement_Annotation::process_paint_event(QPaintEvent* event, QPainter& p
 //  }
  }
 }
+
+
+
+// switch (cpd)
+// {
+// case Corner_Pair_Directions::Down_Right:
+//  horizontal_extension_ = 0x40;
+//  vertical_extension_ = 0x20;
+//  break;
+// case Corner_Pair_Directions::Up_Right:
+//  horizontal_extension_ = 0x40;
+//  vertical_extension_ = -0x20;
+//  break;
+// case Corner_Pair_Directions::Down_Left:
+//  horizontal_extension_ = -0x40;
+//  vertical_extension_ = 0x20;
+//  break;
+// case Corner_Pair_Directions::Up_Left:
+//  horizontal_extension_ = -0x40;
+//  vertical_extension_ = -0x20;
+//  break;
+// default:
+//  break;
+// case Corner_Pair_Directions::Down_Right_Down:
+// case Corner_Pair_Directions::Down_Left_Down:
+//  break;
+// case Corner_Pair_Directions::Up_Right_Up:
+// case Corner_Pair_Directions::Up_Left_Up:
+//  break;
+// }
+
+//   s1 hext = 0, vext = 0, hextl = 0, vextl = 0;
+//   if(horizontal_extension_ < 0)
+//   {
+//    hext = -horizontal_extension_;
+//    hextl = hext & 0x1f;
+//    hext = hextl - hext;
+//   }
+//   else if(horizontal_extension_ > 0)
+//   {
+//    if(horizontal_extension_ > 70)
+//      qDebug() << "70";
+//    hext = horizontal_extension_;
+//    hextl = hext & 0x1f;
+//    hext = hext - hextl;
+//   }
+//   if(vertical_extension_ < 0)
+//   {
+//    vext = -vertical_extension_;
+//    vextl = vext & 0x1f;
+//    vext = vextl - vext;
+//   }
+//   else if(vertical_extension_ > 0)
+//   {
+//    vext = vertical_extension_;
+//    vextl = vext & 0x1f;
+//    vext = vext - vextl;
+//   }
+
+//   qDebug() << "hext = " << hext;
+//   qDebug() << "vext = " << vext;
+//   qDebug() << "hext + vext = " << hext + vext;
+//   qDebug() << "hextl = " << hextl;
+//   qDebug() << "vextl = " << vextl;
+
+//   switch(hext + vext)
+//   {
+//   case 0: default: break;
+//   case -0x40 + -0x20:
+//    move_p1x(left_line, -hextl);
+//    move_p1y(top_line, -vextl);
+//    break;
+//   case -0x40 + 0x20:
+//    move_p1x(left_line, -hextl);
+//    move_p2y(top_line, vextl);
+//    break;
+//   case 0x40 + -0x20:
+//    move_p1x(top_line, -hextl);
+//    move_p1y(left_line, -vextl);
+//    break;
+//   case 0x40 + 0x20:
+//    move_p1x(top_line, -hextl);
+//    move_p1y(left_line, -vextl);
+
+//    qDebug() << "hl = " << hextl;
+//    qDebug() << "vl = " << vextl;
+
+//    break;
+//   }
+

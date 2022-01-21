@@ -8,6 +8,8 @@
 #include "aforms/multiline-rubber-band.h"
 #include "aforms/rotateable-arrow-annotation.h"
 #include "aforms/measurement-annotation.h"
+#include "aforms/simple/simple-rectangle-annotation.h"
+#include "aforms/simple/simple-ellipse-annotation.h"
 
 #include "pdf-document-info.h"
 
@@ -62,6 +64,14 @@ MultiStep_Annotation_Base* PDF_Document_Controller::init_multistep_annotation(
 
  case DHAX_Annotation_Instance::Compact_Shape_Kind_Summary::Measurement:
   current_multistep_annotation_ = new Measurement_Annotation(posf, parent);
+  break;
+
+ case DHAX_Annotation_Instance::Compact_Shape_Kind_Summary::Rectangle:
+  current_multistep_annotation_ = new Simple_Rectangle_Annotation(posf, parent);
+  break;
+
+ case DHAX_Annotation_Instance::Compact_Shape_Kind_Summary::Ellipse:
+  current_multistep_annotation_ = new Simple_Ellipse_Annotation(posf, parent);
   break;
 
  default: break;

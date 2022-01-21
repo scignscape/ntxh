@@ -107,6 +107,130 @@ void MultiStep_Annotation_Base::map_from_parent(const QRectF& source,
 // }
 //}
 
+void MultiStep_Annotation_Base::init_shape_brush(QBrush& brush, Qt::BrushStyle& style, u1 density_level)
+{
+ init_solid_shape_brush(brush, style, density_level);
+}
+
+void MultiStep_Annotation_Base::init_dotted_shape_brush(QBrush& brush, Qt::BrushStyle& style, u1 density_level)
+{
+// shapeRed_ = 240;
+// shapeGreen_ = 255;
+// shapeBlue_ = 160;
+
+ u1 _tmpRed_ = 240, _tmpGreen_ = 255, _tmpBlue_ = 160, _tmpAlpha_ = 200;
+
+ switch (density_level)
+ {
+ default: break;
+ case 0: style = Qt::SolidPattern; break;
+ case 1: style = Qt::Dense1Pattern; break;
+ case 2: style = Qt::Dense2Pattern; break;
+ case 3: style = Qt::Dense3Pattern; break;
+ case 4: style = Qt::Dense4Pattern; break;
+ case 5: style = Qt::Dense5Pattern; break;
+ case 6: style = Qt::Dense6Pattern; break;
+ case 7: style = Qt::Dense7Pattern; break;
+ }
+
+ brush = QBrush(QColor(_tmpRed_, _tmpGreen_, _tmpBlue_, _tmpAlpha_), style);
+}
+
+void MultiStep_Annotation_Base::init_solid_shape_brush(QBrush& brush, Qt::BrushStyle& style, u1 density_level)
+{
+ u1 _tmpRed_ = 55, _tmpGreen_ = 55, _tmpBlue_ = 55, _tmpAlpha_ = 100;
+ switch (density_level)
+ {
+ default: break;
+ case 0: style = Qt::SolidPattern; break;
+ case 1: style = Qt::Dense1Pattern; break;
+ case 2: style = Qt::Dense2Pattern; break;
+ case 3: style = Qt::Dense3Pattern; break;
+ case 4: style = Qt::Dense4Pattern; break;
+ case 5: style = Qt::Dense5Pattern; break;
+ case 6: style = Qt::Dense6Pattern; break;
+ case 7: style = Qt::Dense7Pattern; break;
+ }
+
+ brush = QBrush(QColor(_tmpRed_, _tmpGreen_, _tmpBlue_, _tmpAlpha_), style);
+}
+
+void MultiStep_Annotation_Base::init_vertex_handle_brush(QBrush& brush)
+{
+
+}
+
+
+void MultiStep_Annotation_Base::draw_control_square(const QPoint& center,
+  QPainter& painter, u1 wind, u1 radius, QColor color)
+{
+ QPoint pr(radius, radius);
+ QPoint pr1(radius - 1, radius - 1);
+
+ QRect rect(center - pr, center + pr1);
+ //painter.fillRect(rect, QColor(data_->sqRed_, data_->sqGreen_, data_->sqBlue_));
+
+ //QRect rect(center.x() - data_->radius_, center.y() - data_->radius_, data_->radius_*2, data_->radius_*2);
+
+ u1 sgradient_base = 0;
+ u1 sgradient_mid = 100;
+ u1 wind_multiple = 30;
+ QConicalGradient sgradient;
+ sgradient.setAngle(wind * wind_multiple);
+ sgradient.setCenter(center);//.x() - data_->radius_/2,
+                     //center.y() - data_->radius_/2);
+ sgradient.setColorAt(0.0, color);
+ sgradient.setColorAt(0.15, color);
+ sgradient.setColorAt(0.2, QColor(sgradient_mid,sgradient_mid,sgradient_base));
+ sgradient.setColorAt(0.25, color);
+ sgradient.setColorAt(0.5, color);
+ sgradient.setColorAt(0.55, QColor(sgradient_mid,sgradient_base,sgradient_mid));
+ sgradient.setColorAt(0.6, color);
+ sgradient.setColorAt(0.8, color);
+ sgradient.setColorAt(0.85, QColor(sgradient_base,sgradient_mid,sgradient_mid));
+ sgradient.setColorAt(0.9, color);
+ sgradient.setColorAt(1, color);
+ painter.fillRect(rect, sgradient);
+
+}
+
+
+void MultiStep_Annotation_Base::draw_vertex_handles(const QVector<const QPoint*>& points,
+   QPainter& painter, u1 radius)
+{
+// QBrush brush;
+// init_vertex_handle_brush(brush);
+
+ //QColor highlight(data_->sqRed_,data_->sqGreen_,data_->sqBlue_)
+ QColor highlight(250,250,250);
+
+ u1 i = 0;
+ for(const QPoint* const point : points)
+ {
+  draw_control_square(*point, painter, ++i, radius, highlight);
+ }
+}
+
+void MultiStep_Annotation_Base::draw_vertex_handles(QPainter& painter, u1 radius)
+{
+
+}
+
+void MultiStep_Annotation_Base::init_shape_pen(QConicalGradient& gradient, QPen& pen)
+{
+ init_solid_shape_pen(gradient, pen); //, Qt::DashDotDotLine); //shapePen
+}
+
+void MultiStep_Annotation_Base::init_solid_shape_pen(QConicalGradient& gradient, QPen& pen)
+{
+ pen = QPen(gradient, 4); //, Qt::DashDotDotLine); //shapePen
+}
+
+void MultiStep_Annotation_Base::init_dotted_shape_pen(QConicalGradient& gradient, QPen& pen)
+{
+ pen = QPen(gradient, 4, Qt::DashDotDotLine); //shapePen
+}
+
 void MultiStep_Annotation_Base::paintEvent(QPaintEvent *event)
 {
 
@@ -148,13 +272,20 @@ void MultiStep_Annotation_Base::paintEvent(QPaintEvent *event)
    gradient.setColorAt(0.95, QColor(_tmpRed_,_tmpGreen_,gradient_base,_tmpAlpha_));
    gradient.setColorAt(1, QColor(_tmpRed_,gradient_base,gradient_base,_tmpAlpha_));
 
-   QPen shapePen(gradient, 4);//, Qt::DashDotDotLine); //shapePen
+   QPen shapePen; //(gradient, 4); //, Qt::DashDotDotLine); //shapePen
+
+ init_shape_pen(gradient, shapePen);
  myPen.setCapStyle(Qt::RoundCap);
  shapePen.setCapStyle(Qt::RoundCap);
 
 
  painter.setPen(shapePen);
- painter.setBrush(QBrush(QColor(_tmpRed_, _tmpGreen_, _tmpBlue_, 100)));
+ QBrush shape_brush;
+ Qt::BrushStyle style;
+ init_shape_brush(shape_brush, style);
+ painter.setBrush(shape_brush);
 
  process_paint_event(event, painter);
+
+ draw_vertex_handles(painter);
 }

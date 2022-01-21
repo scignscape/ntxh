@@ -38,6 +38,8 @@ protected:
 
  Corner_Pair_Directions current_corner_pair_direction_;
 
+ void draw_control_square(const QPoint& center, QPainter& painter,
+   u1 wind, u1 radius, QColor color);
 
  void map_from_parent(const QRectF& source, QRect& result);
 // void map_from_parent_plus_x(const QRectF& source, r8 x_delta, QRect& result);
@@ -77,6 +79,26 @@ public:
  virtual void finish_third_phase(const QPointF& pos);
 
  virtual void show();
+
+ virtual void init_shape_pen(QConicalGradient& gradient, QPen& pen);
+ virtual void init_dotted_shape_pen(QConicalGradient& gradient, QPen& pen);
+ virtual void init_solid_shape_pen(QConicalGradient& gradient, QPen& pen);
+
+ virtual void init_shape_brush(QBrush& brush, Qt::BrushStyle& style, u1 density_level = 0);
+ virtual void init_dotted_shape_brush(QBrush& brush, Qt::BrushStyle& style, u1 density_level = 6);
+ virtual void init_solid_shape_brush(QBrush& brush, Qt::BrushStyle& style, u1 density_level = 0);
+
+ virtual void draw_vertex_handles(const QVector<const QPoint*>& points,
+   QPainter& painter, u1 radius);
+
+ virtual u1 get_vertex_handles_radius() { return 8; }
+
+ virtual void draw_vertex_handles(QPainter& painter, u1 radius);
+ virtual void init_vertex_handle_brush(QBrush& brush);
+ virtual void draw_vertex_handles(QPainter& painter)
+ {
+  draw_vertex_handles(painter, get_vertex_handles_radius());
+ }
 
 protected:
 
