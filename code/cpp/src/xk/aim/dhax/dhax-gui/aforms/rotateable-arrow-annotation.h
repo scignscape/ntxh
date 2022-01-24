@@ -41,7 +41,7 @@ protected:
 
 public:
 
- Rotateable_Arrow_Annotation(const QPointF& sc, QWidget* p = nullptr);
+ Rotateable_Arrow_Annotation(DHAX_Mouse_Interaction_Data& mouse_interaction_data, const QPointF& sc, QWidget* p = nullptr);
 
  ACCESSORS__RGET(QRectF ,shaft)
  ACCESSORS__RGET(QRectF ,tip)

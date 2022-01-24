@@ -32,17 +32,42 @@ DHAX_Image_Viewer::DHAX_Image_Viewer(QWidget* parent)
      main_layout_(0),
      image_scene_item_(nullptr),
      display_image_data_(new DHAX_Display_Image_Data),
-     main_window_(nullptr), document_controller_(nullptr)
+     main_window_(nullptr),
+     pdf_document_controller_(nullptr),
+     image_document_controller_(nullptr)
 {
 }
 
 void DHAX_Image_Viewer::load_pdf_pixmap(PDF_Document_Controller* document_controller)
 {
- document_controller_ = document_controller;
+ pdf_document_controller_ = document_controller;
  load_image(document_controller->pixmap());
- scrolled_image_view_->set_document_controller(document_controller);
+ scrolled_image_view_->set_pdf_document_controller(document_controller);
+}
+
+void DHAX_Image_Viewer::load_image_pixmap(QPixmap pixmap, Image_Document_Controller* document_controller)
+{
+ scrolled_image_pixmap_ = new QPixmap(pixmap);
+
+ image_document_controller_ = document_controller;
+ scrolled_image_view_->set_image_document_controller(document_controller);
+
+ complete_load_image();
+}
+
+void DHAX_Image_Viewer::load_image(QString file_path, Image_Document_Controller* document_controller)
+{
+ scrolled_image_pixmap_ = new QPixmap(file_path);
+
+ image_document_controller_ = document_controller;
+ scrolled_image_view_->set_image_document_controller(document_controller);
+
+ complete_load_image();
 
 }
+
+
+//scrolled_image_view_->set_pdf_document_controller(document_controller);
 
 
 
@@ -323,21 +348,3 @@ void DHAX_Image_Viewer::reset_background_center_rectangle_color()
    background_center_rectangle_->setBrush(Qt::NoBrush);
 }
 
-void DHAX_Image_Viewer::load_image(QString file_path)
-{
-// main_layout_->removeWidget(scrolled_image_view_);
-// scrolled_image_view_ = new QGraphicsView(this);
-
-
-// main_layout_->addWidget(scrolled_image_view_);
-
-// scrolled_image_view_->setScene(scrolled_image_scene_);
-
-//// main_layout_->update();
-
-
- scrolled_image_pixmap_ = new QPixmap(file_path);
-
- complete_load_image();
-
-}

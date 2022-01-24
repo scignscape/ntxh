@@ -130,7 +130,9 @@ HEADERS += \
   $$SRC_DIR/image-viewer/dhax-image-viewer.h \
   $$SRC_DIR/image-viewer/dhax-image-scene-item.h \
   $$SRC_DIR/image-viewer/dhax-display-image-data.h \
+  $$SRC_DIR/image-viewer/dhax-mouse-interaction-data.h \
   $$SRC_DIR/image-viewer/dhax-drawn-shape.h \
+  $$SRC_DIR/image-viewer/image-document-controller.h \
   $$SRC_DIR/subwindows/range-slider.h \
   $$SRC_DIR/subwindows/clickable-label.h \
   $$SRC_DIR/pleneviews/shape-select-frame.h \
@@ -163,6 +165,7 @@ HEADERS += \
   $$SRC_DIR/aforms/simple-annotation-base.h \
   $$SRC_DIR/aforms/simple/simple-rectangle-annotation.h \
   $$SRC_DIR/aforms/simple/simple-ellipse-annotation.h \
+  $$SRC_DIR/aforms/simple/simple-polyline-annotation.h \
 
 
 SOURCES += \
@@ -188,9 +191,11 @@ SOURCES += \
   $$SRC_DIR/dhax-signal-generator.cpp \
   $$SRC_DIR/image-viewer/dhax-image-viewer.cpp \
   $$SRC_DIR/image-viewer/dhax-image-scene-item.cpp \
-  $$SRC_DIR/image-viewer/dhax-display-image-data.cpp \
+  $$SRC_DIR/image-viewer/dhax-mouse-interaction-data.cpp \
   $$SRC_DIR/image-viewer/dhax-drawn-shape.cpp \
   $$SRC_DIR/image-viewer/dhax-image-scene-item.mouse-events.cpp \
+  $$SRC_DIR/image-viewer/image-document-controller.cpp \
+  $$SRC_DIR/image-viewer/dhax-display-image-data.cpp \
   $$SRC_DIR/subwindows/range-slider.cpp \
   $$SRC_DIR/subwindows/clickable-label.cpp \
   $$SRC_DIR/pleneviews/shape-select-frame.cpp \
@@ -223,6 +228,7 @@ SOURCES += \
   $$SRC_DIR/aforms/simple-annotation-base.cpp \
   $$SRC_DIR/aforms/simple/simple-rectangle-annotation.cpp \
   $$SRC_DIR/aforms/simple/simple-ellipse-annotation.cpp \
+  $$SRC_DIR/aforms/simple/simple-polyline-annotation.cpp \
 
 
 QFontIcon_SRC_DIR = $$SRC_ROOT_DIR/external/QFontIcon-master/QFontIcon

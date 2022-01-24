@@ -16,6 +16,7 @@
 #include "dhax-graphics-view.h"
 
 #include "pdf-viewer/pdf-document-controller.h"
+#include "image-document-controller.h"
 
 #include "aforms/multistep-annotation-base.h"
 
@@ -32,7 +33,8 @@ void DHAX_Image_Scene_Item::reset_background_to_original_position()
  background_item_->setPos(original_position_);
 }
 
-DHAX_Image_Scene_Item::DHAX_Image_Scene_Item(QWidget *parent) : QWidget(parent)
+DHAX_Image_Scene_Item::DHAX_Image_Scene_Item(QWidget *parent)
+  : QWidget(parent), current_mouse_interaction_data_(nullptr)
 {
  containing_image_view_ = nullptr;
  current_multistep_annotation_ = nullptr;
@@ -637,7 +639,20 @@ void DHAX_Image_Scene_Item::paintEvent(QPaintEvent*)
 
 void DHAX_Image_Scene_Item::mousePressEvent(QMouseEvent* mev)
 {
- if(data_->application_state()->flags.pdf_mode)
+ if(data_->pan_or_pull_mode())
+ {
+  //this_proxy_widget_->
+  // ((_Proxy_Widget*)this_proxy_widget_)->mousePressEvent(mev);
+  qDebug() << "mev = " << mev;
+
+  //mev->accept(); //ignore();
+  mev->ignore();
+
+  return;
+ }
+
+ n8 mode_data_request_code = 0;
+ if(data_->application_state()->flags.pdf_mode || data_->application_state()->flags.image_mode)
  {
   const QPointF posf = mev->pos();
 
@@ -653,7 +668,7 @@ void DHAX_Image_Scene_Item::mousePressEvent(QMouseEvent* mev)
     current_multistep_annotation_->init_second_phase(posf);
     active_right_mouse_drag_origin_ = posf;
 
- //   rubberBand->init_double_band(posf);
+ //   rubberBand->init_double_band(posf);chael Lee Aday
  //   active_right_mouse_drag_origin_ = posf;
    }
 
@@ -666,15 +681,30 @@ void DHAX_Image_Scene_Item::mousePressEvent(QMouseEvent* mev)
    {
     current_multistep_annotation_->reset_geometry(posf);
    }
-   else
+   else if(data_->application_state()->flags.pdf_mode)
    {
-    PDF_Document_Controller* pdc = containing_image_view_->document_controller();
+    PDF_Document_Controller* pdc = containing_image_view_->pdf_document_controller();
+    current_mouse_interaction_data_ = &pdc->mouse_interaction_data();
 
     current_multistep_annotation_ = pdc->init_multistep_annotation(this, posf,
       data_->current_enabled_shape_kind());
-    current_multistep_annotation_->show();
    }
+   else
+   {
+    Image_Document_Controller* idc = containing_image_view_->image_document_controller();
+
+    current_mouse_interaction_data_ = &idc->mouse_interaction_data();
+
+    current_multistep_annotation_ = idc->init_multistep_annotation(this, posf,
+      data_->current_enabled_shape_kind());
+   }
+   current_multistep_annotation_->show();
   }
+
+  current_multistep_annotation_->pressed_mode_data_request_code(mev, mode_data_request_code);
+
+  if(!mode_data_request_code)
+    return;
 
   //return;
 
@@ -685,29 +715,23 @@ void DHAX_Image_Scene_Item::mousePressEvent(QMouseEvent* mev)
 
   //containing_image_view_->
 
-  return;
  }
 
+// if(data_->application_state()->flags.image_mode)
+// {
+
+// }
 
 // return;
 
- if(data_->pan_or_pull_mode())
- {
-  //this_proxy_widget_->
-  // ((_Proxy_Widget*)this_proxy_widget_)->mousePressEvent(mev);
-  qDebug() << "mev = " << mev;
-
-  //mev->accept(); //ignore();
-  mev->ignore();
-
-  return;
- }
 
  Mouse_Event_Modes mem = Mouse_Event_Modes::N_A;
 
  if(mev->button() == Qt::LeftButton) //  !data_->editing_ && !data_->shapeMoving_
  {
-  if(data_->editing_)
+  if(current_mouse_interaction_data_->flags.needs_resume)
+    mem = Mouse_Event_Modes::Left_Resume;
+  else if(data_->editing_)
     mem = Mouse_Event_Modes::Left_Edit;
   else if(data_->shapeMoving_)
     mem = Mouse_Event_Modes::Left_Move;
@@ -715,19 +739,38 @@ void DHAX_Image_Scene_Item::mousePressEvent(QMouseEvent* mev)
     mem = Mouse_Event_Modes::Left_Init;
  }
 
- _handle_mouse_event(mev, mem);
+ _handle_mouse_event(mev, mem, mode_data_request_code);
+ _check_ui_update();
+}
+
+void DHAX_Image_Scene_Item::_check_ui_update()
+{
+ if(current_mouse_interaction_data_->flags.ui_needs_update)
+ {
+  update();
+  current_mouse_interaction_data_->flags.ui_needs_update = false;
+ }
 }
 
 
 void DHAX_Image_Scene_Item::mouseReleaseEvent(QMouseEvent* mev)
 {
 // return;
- if(data_->application_state()->flags.pdf_mode)
+ if(data_->pan_or_pull_mode())
+ {
+  mev->ignore();
+  return;
+ }
+
+ n8 mode_data_request_code = 0;
+
+ if(data_->application_state()->flags.pdf_mode || data_->application_state()->flags.image_mode)
  {
   if(mev->button() == Qt::MiddleButton)
   {
    qDebug() << "middle ...";
   }
+
   if(mev->button() == Qt::RightButton &&
     !active_left_mouse_drag_origin_.isNull())
   {
@@ -743,28 +786,30 @@ void DHAX_Image_Scene_Item::mouseReleaseEvent(QMouseEvent* mev)
 
 
   if(mev->button() == Qt::LeftButton &&
-    !active_left_mouse_drag_origin_.isNull())
+    !active_left_mouse_drag_origin_.isNull() &&
+    !current_mouse_interaction_data_->flags.mouse_moving)
   {
    if(current_multistep_annotation_)
      current_multistep_annotation_->finish_third_phase(mev->pos());
 
    current_completed_multistep_annotation_ = current_multistep_annotation_;
    current_multistep_annotation_ = nullptr;
+
+   //? what about released_mode_data_request_code?
+   return;
   }
 
-  return;
+
+  current_multistep_annotation_->released_mode_data_request_code(mev, mode_data_request_code);
+
+  if(!mode_data_request_code)
+    return;
 
   if(mev->button() == Qt::RightButton)
   {
 
   }
 
- }
-
- if(data_->pan_or_pull_mode())
- {
-  mev->ignore();
-  return;
  }
 
  Mouse_Event_Modes mem = Mouse_Event_Modes::N_A;
@@ -775,6 +820,12 @@ void DHAX_Image_Scene_Item::mouseReleaseEvent(QMouseEvent* mev)
   {
    mem = Mouse_Event_Modes::Left_Move_Release;
   }
+
+  if(current_mouse_interaction_data_->flags.mouse_moving)
+  {
+   mem = Mouse_Event_Modes::Left_Move_Release;
+  }
+
  }
 
  else if(mev->button() == Qt::RightButton)
@@ -790,7 +841,7 @@ void DHAX_Image_Scene_Item::mouseReleaseEvent(QMouseEvent* mev)
     mem = Mouse_Event_Modes::Right_Click_Iso;
  }
 
- _handle_mouse_event(mev, mem);
+ _handle_mouse_event(mev, mem, mode_data_request_code);
 
  return;
 
@@ -819,7 +870,16 @@ void DHAX_Image_Scene_Item::mouseReleaseEvent(QMouseEvent* mev)
 
 void DHAX_Image_Scene_Item::mouseMoveEvent(QMouseEvent* mev) //mouseEvent)
 {
- if(data_->application_state()->flags.pdf_mode)
+ if(data_->pan_or_pull_mode())
+ {
+  //?
+   mev->ignore();
+  return;
+ }
+
+ n8 mode_data_request_code = 0;
+
+ if(data_->application_state()->flags.pdf_mode || data_->application_state()->flags.image_mode)
  {
   //return;
 
@@ -829,20 +889,27 @@ void DHAX_Image_Scene_Item::mouseMoveEvent(QMouseEvent* mev) //mouseEvent)
   {
    current_multistep_annotation_->adjust_geometry(mev->pos());
    current_multistep_annotation_->repaint();
+
+   current_multistep_annotation_->moved_mode_data_request_code(mev, mode_data_request_code);
   }
-  return;
  }
+
+ if(!mode_data_request_code)
+   return;
 
 // QGraphicsView* v = qobject_cast<QGraphicsView*>(parent());
 // v->mouseMoveEvent(mouseEvent);
 
- if(data_->pan_or_pull_mode())
- {
+ Mouse_Event_Modes mem = Mouse_Event_Modes::N_A;
 
-  //?
-   mev->ignore();
-  return;
+ if(current_mouse_interaction_data_->flags.mouse_moving)
+ {
+  mem = Mouse_Event_Modes::Left_Move;
  }
+
+ _handle_mouse_event(mev, mem, mode_data_request_code);
+
+ return;
 
  if(data_->isMoving_ || data_->shapeMoving_)
  {

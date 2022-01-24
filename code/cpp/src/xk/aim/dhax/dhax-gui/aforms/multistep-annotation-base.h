@@ -9,6 +9,9 @@
 
 #include "accessors.h"
 
+#include "dhax-annotation-presentation-data.h"
+
+class DHAX_Mouse_Interaction_Data;
 
 class MultiStep_Annotation_Base //
   : public QWidget
@@ -38,6 +41,8 @@ protected:
 
  Corner_Pair_Directions current_corner_pair_direction_;
 
+ DHAX_Annotation_Presentation_Data presentation_data_;
+
  void draw_control_square(const QPoint& center, QPainter& painter,
    u1 wind, u1 radius, QColor color);
 
@@ -65,13 +70,34 @@ protected:
 
  void wheelEvent(QWheelEvent *event) Q_DECL_OVERRIDE;
 
+ DHAX_Mouse_Interaction_Data& mouse_interaction_data_;
 
 public:
 
- MultiStep_Annotation_Base(QWidget* p = nullptr);
+ MultiStep_Annotation_Base(DHAX_Mouse_Interaction_Data& mouse_interaction_data,
+   QWidget* p = nullptr);
 
  virtual void adjust_geometry(const QPointF& pos) = 0;
  virtual void reset_geometry(const QPointF& sc = {}) = 0;
+
+ virtual void pressed_mode_data_request_code(QMouseEvent*, n8&) { }
+ virtual void released_mode_data_request_code(QMouseEvent*, n8&) { }
+ virtual void moved_mode_data_request_code(QMouseEvent*, n8&) { }
+
+
+ // //  These won't be called unless a subclass overrides the
+  //    mode_data_request_code() so there's no harm in providing
+  //    a default implementation which just forwards to a handler
+  //    that only needs the mouse event position
+ virtual void fulfill_left_init(QMouseEvent* mev, n8 mode_data_request);
+ virtual void fulfill_left_move(QMouseEvent* mev, n8 mode_data_request);
+ virtual void fulfill_left_move_release(QMouseEvent* mev, n8 mode_data_request);
+ virtual void fulfill_left_resume(QMouseEvent* mev, n8 mode_data_request);
+
+ virtual void fulfill_left_init(const QPoint&, n8) { }
+ virtual void fulfill_left_move(const QPoint&, n8) { }
+ virtual void fulfill_left_resume(const QPoint&, n8) { }
+ virtual void fulfill_left_move_release(const QPoint&, n8) { }
 
 
  virtual void init_second_phase(const QPointF& pos);
@@ -87,6 +113,11 @@ public:
  virtual void init_shape_brush(QBrush& brush, Qt::BrushStyle& style, u1 density_level = 0);
  virtual void init_dotted_shape_brush(QBrush& brush, Qt::BrushStyle& style, u1 density_level = 6);
  virtual void init_solid_shape_brush(QBrush& brush, Qt::BrushStyle& style, u1 density_level = 0);
+
+ virtual u1 get_vertex_handle_wind_offset()
+ {
+  return 0;
+ }
 
  virtual void draw_vertex_handles(const QVector<const QPoint*>& points,
    QPainter& painter, u1 radius);

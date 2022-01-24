@@ -7,9 +7,10 @@
 
 #include "global-types.h"
 
-MultiLine_Rubber_Band::MultiLine_Rubber_Band(QRubberBand::Shape s,
+MultiLine_Rubber_Band::MultiLine_Rubber_Band(DHAX_Mouse_Interaction_Data& mouse_interaction_data,
+    QRubberBand::Shape s,
     const QPointF& sc, QWidget *p) :
-    MultiStep_Annotation_Base(p), // new QRubberBand(s, p) ), //QRubberBand(s,p),
+    MultiStep_Annotation_Base(mouse_interaction_data, p), // new QRubberBand(s, p) ), //QRubberBand(s,p),
       //current_corner_pair_direction_(Corner_Pair_Directions::First_Phase),
       inner_starting_corner_(sc), outer_end_corner_(sc)
 {

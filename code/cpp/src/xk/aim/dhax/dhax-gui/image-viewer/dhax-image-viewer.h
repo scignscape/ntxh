@@ -28,6 +28,7 @@ class DHAX_Main_Window;
 class DHAX_Application_State;
 
 class PDF_Document_Controller;
+class Image_Document_Controller;
 
 
 
@@ -64,13 +65,15 @@ class DHAX_Image_Viewer : public QWidget
 
  DHAX_Main_Window* main_window_;
 
- PDF_Document_Controller* document_controller_;
+ PDF_Document_Controller* pdf_document_controller_;
+ Image_Document_Controller* image_document_controller_;
 
  void recenter_image();
 
  // //  what should be the item class here?
  QMap<u1, QPair<QGraphicsEllipseItem*, r8>> controls_;
 
+ void load_image(QPixmap pixmap);
 
 public:
 
@@ -87,7 +90,8 @@ public:
 
  ACCESSORS(DHAX_Application_State* ,application_state)
 
- ACCESSORS(PDF_Document_Controller* ,document_controller)
+ ACCESSORS(PDF_Document_Controller* ,pdf_document_controller)
+ ACCESSORS(Image_Document_Controller* ,image_document_controller)
 
  //?ACCESSORS(MACRO_PASTE(const QMap<QString, QColor>*) ,application_colors)
 
@@ -110,9 +114,10 @@ public:
  //QPair<u4, u4> update_image_margins(const DHAX_Application_State::Image_Margins& im);
  void update_image_margins(const DHAX_Application_State::Image_Margins& im);
 
- void load_image(QString file_path);
+ void load_image(QString file_path, Image_Document_Controller* document_controller);
 
- void load_image(QPixmap pixmap);
+ void load_image_pixmap(QPixmap pixmap, Image_Document_Controller* document_controller);
+
 
  void complete_load_image();
 

@@ -9,8 +9,9 @@
 
 #include "global-types.h"
 
-Rotateable_Arrow_Annotation::Rotateable_Arrow_Annotation(const QPointF& sc, QWidget* p) :
-    MultiStep_Annotation_Base(p), tip_point_width_(0), tip_point_width_delta_(1),
+Rotateable_Arrow_Annotation::Rotateable_Arrow_Annotation(DHAX_Mouse_Interaction_Data& mouse_interaction_data,
+    const QPointF& sc, QWidget* p) :
+    MultiStep_Annotation_Base(mouse_interaction_data, p), tip_point_width_(0), tip_point_width_delta_(1),
     tip_corner_bend_(0), tip_corner_bend_delta_(1), rotation_(0)
 {
  shaft_.setTopLeft(sc);

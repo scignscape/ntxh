@@ -790,6 +790,7 @@ void DHAX_Application_Controller::send_meshlab_reset()
 void DHAX_Application_Controller::load_image(QString file_path)
 {
  main_window_controller_->load_image(file_path);
+
 }
 
 void DHAX_Application_Controller::init_integration_controllers()

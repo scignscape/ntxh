@@ -349,12 +349,12 @@ void DHAX_GUI_Environment::show_annotation_on_current_image(
  }
 }
 
-void DHAX_GUI_Environment::show_image(QString path)
-{
- image_viewer_->load_image(path);
-// QPixmap qpm(path);
-// graphics_scene_->addPixmap(qpm);
-}
+//void DHAX_GUI_Environment::show_image(QString path)
+//{
+// image_viewer_->load_image(path);
+//// QPixmap qpm(path);
+//// graphics_scene_->addPixmap(qpm);
+//}
 
 void DHAX_GUI_Environment::init_main_window_frame()
 {

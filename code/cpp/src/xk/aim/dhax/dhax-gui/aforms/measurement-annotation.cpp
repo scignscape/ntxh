@@ -9,8 +9,9 @@
 
 #include "global-types.h"
 
-Measurement_Annotation::Measurement_Annotation(const QPointF& sc, QWidget* p) :
-    MultiStep_Annotation_Base(p), left_line_width_(5),
+Measurement_Annotation::Measurement_Annotation(DHAX_Mouse_Interaction_Data& mouse_interaction_data,
+    const QPointF& sc, QWidget* p) :
+    MultiStep_Annotation_Base(mouse_interaction_data, p), left_line_width_(5),
     right_line_width_(5), top_line_width_(3),
     bottom_line_width_(3),
     horizontal_extension_(0), vertical_extension_(0)

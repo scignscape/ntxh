@@ -22,7 +22,7 @@ protected:
 
 public:
 
- Simple_Annotation_Base(const QPointF& sc, QWidget* p = nullptr);
+ Simple_Annotation_Base(DHAX_Mouse_Interaction_Data& mouse_interaction_data, const QPointF& sc, QWidget* p = nullptr);
 
  virtual void adjust_geometry(const QPointF& pos) Q_DECL_OVERRIDE;
 
@@ -42,6 +42,15 @@ public:
   else
     init_dotted_shape_brush(brush, style, density_level);
  }
+
+ virtual u1 get_vertex_handle_wind_offset() Q_DECL_OVERRIDE
+ {
+  return scaffold_.width() - scaffold_.height();
+//  QLineF l1(scaffold_.topLeft(), scaffold_.topRight());
+//  QLineF l2(scaffold_.topLeft(), scaffold_.bottomRight());
+//  return l1.angleTo(l2) * 3;
+ }
+
 
  virtual void init_second_phase(const QPointF &pos) Q_DECL_OVERRIDE
  {

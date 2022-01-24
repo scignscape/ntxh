@@ -19,7 +19,7 @@ class Simple_Rectangle_Annotation : public Simple_Annotation_Base
 
 public:
 
- Simple_Rectangle_Annotation(const QPointF& sc, QWidget* p = nullptr);
+ Simple_Rectangle_Annotation(DHAX_Mouse_Interaction_Data& mouse_interaction_data, const QPointF& sc, QWidget* p = nullptr);
 
 
 protected:

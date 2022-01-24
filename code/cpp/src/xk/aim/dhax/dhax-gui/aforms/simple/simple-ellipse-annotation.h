@@ -19,7 +19,7 @@ class Simple_Ellipse_Annotation : public Simple_Annotation_Base
 
 public:
 
- Simple_Ellipse_Annotation(const QPointF& sc, QWidget* p = nullptr);
+ Simple_Ellipse_Annotation(DHAX_Mouse_Interaction_Data& mouse_interaction_data, const QPointF& sc, QWidget* p = nullptr);
 
 
 protected:

@@ -21,7 +21,9 @@
 #include <QDebug>
 //#include <QGadget>
 
+
 class PDF_Document_Controller;
+class Image_Document_Controller;
 
 
 
@@ -238,7 +240,8 @@ class DHAX_Graphics_View :  public QGraphicsView
 
  DHAX_Mouse_Keyboard_Data mouse_keyboard_data_;
 
- PDF_Document_Controller* document_controller_;
+ PDF_Document_Controller* pdf_document_controller_;
+ Image_Document_Controller* image_document_controller_;
 
 
 protected:
@@ -255,7 +258,8 @@ public:
  ACCESSORS(std::function<void(DHAX_Mouse_Keyboard_Data)>
    ,mouse_keyboard_modifiers_callback)
 
- ACCESSORS(PDF_Document_Controller* ,document_controller)
+ ACCESSORS(PDF_Document_Controller* ,pdf_document_controller)
+ ACCESSORS(Image_Document_Controller* ,image_document_controller)
 
  void activate_hand_drag_mode();
  void deactivate_hand_drag_mode();

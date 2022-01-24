@@ -9,8 +9,9 @@
 
 #include "global-types.h"
 
-Simple_Annotation_Base::Simple_Annotation_Base(const QPointF& sc, QWidget* p) :
-      MultiStep_Annotation_Base(p)
+Simple_Annotation_Base::Simple_Annotation_Base(DHAX_Mouse_Interaction_Data& mouse_interaction_data,
+   const QPointF& sc, QWidget* p) :
+   MultiStep_Annotation_Base(mouse_interaction_data, p)
 {
  if(p)
    setGeometry(p->geometry());

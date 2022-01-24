@@ -11,6 +11,8 @@
 
 #include "multistep-annotation-base.h"
 
+class DHAX_Mouse_Interaction_Data;
+
 class MultiLine_Rubber_Band : public MultiStep_Annotation_Base //, public QRubberBand
 {
  Q_OBJECT
@@ -53,7 +55,7 @@ class MultiLine_Rubber_Band : public MultiStep_Annotation_Base //, public QRubbe
 
 public:
 
- MultiLine_Rubber_Band (QRubberBand::Shape s, const QPointF& sc, QWidget* p = nullptr);
+ MultiLine_Rubber_Band (DHAX_Mouse_Interaction_Data& mouse_interaction_data, QRubberBand::Shape s, const QPointF& sc, QWidget* p = nullptr);
 
  ACCESSORS(QPointF ,inner_starting_corner)
  ACCESSORS(QPointF ,outer_starting_corner)

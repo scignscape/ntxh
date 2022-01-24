@@ -10,6 +10,8 @@
 
 #include "image-viewer/dhax-display-image-data.h"
 
+#include "image-viewer/image-document-controller.h"
+
 #include "pleneviews/zoom-and-navigate-frame.h"
 #include "pleneviews/page-and-search-frame.h"
 #include "pleneviews/shape-select-frame.h"
@@ -51,7 +53,8 @@ DHAX_Main_Window_Controller::DHAX_Main_Window_Controller()
      image_scene_item_(nullptr),
      main_window_receiver_(nullptr),
      application_controller_(nullptr),
-     document_controller_(nullptr)
+     pdf_document_controller_(nullptr),
+     image_document_controller_(nullptr)
 {
 
 }
@@ -333,9 +336,10 @@ void DHAX_Main_Window_Controller::draw_demo_quad()
  if(!cdds)
    return;
 
- QPoint _p1 = cdds->points()[0];
- QPoint _p2 = cdds->points()[1];
- QPoint _mid = cdds->extra_points()[0];
+//?
+// QPoint _p1 = cdds->points()[0];
+// QPoint _p2 = cdds->points()[1];
+// QPoint _mid = cdds->extra_points()[0];
 
  QPoint p1 = image_viewer_->control_center(1).toPoint();
  QPoint mid = image_viewer_->control_center(2).toPoint();
@@ -361,17 +365,25 @@ void DHAX_Main_Window_Controller::draw_demo_quad()
 
 }
 
-void DHAX_Main_Window_Controller::check_init_document_controller()
+void DHAX_Main_Window_Controller::check_init_image_document_controller()
 {
- if(!document_controller_)
+ if(!image_document_controller_)
  {
-  document_controller_ = new PDF_Document_Controller;
-  document_controller_->set_page_and_search_frame(page_and_search_frame_);
+  image_document_controller_ = new Image_Document_Controller;
+ }
+}
+
+void DHAX_Main_Window_Controller::check_init_pdf_document_controller()
+{
+ if(!pdf_document_controller_)
+ {
+  pdf_document_controller_ = new PDF_Document_Controller;
+  pdf_document_controller_->set_page_and_search_frame(page_and_search_frame_);
 
   _self_connect_(page_and_search_frame_ ,page_select_requested)
     to_lambda[this](u4 page)
   {
-   document_controller_->switch_to_page(page);
+   pdf_document_controller_->switch_to_page(page);
    reinit_pdf_page_view(page);
   // display_image_data_->unset_multi_draw();
   };
@@ -387,29 +399,6 @@ void DHAX_Main_Window_Controller::delayed_image_viewer_recenter_scroll_top_left(
  });
 }
 
-void DHAX_Main_Window_Controller::load_pdf()
-{
- QString ws =  ROOT_FOLDER "/../pdf";
-
- QString filters = "PDF Files (*.pdf)";
-
- QString file_path = QFileDialog::getOpenFileName(application_main_window_, "Open Image", ws, filters);
-
- if(file_path.isEmpty())
-   return;
-
- check_init_document_controller();
-
- document_controller_->load_document(file_path);
-
- QPair dpis {image_viewer_->physicalDpiX(), image_viewer_->physicalDpiY()};
- document_controller_->load_page(dpis);
-
- init_pdf_page_view();
-
- application_controller_->application_state()->flags.pdf_mode = true;
-}
-
 void DHAX_Main_Window_Controller::reinit_pdf_page_view(u4 page)
 {
  init_pdf_page_view();
@@ -417,8 +406,31 @@ void DHAX_Main_Window_Controller::reinit_pdf_page_view(u4 page)
 
 void DHAX_Main_Window_Controller::init_pdf_page_view()
 {
- image_viewer_->load_pdf_pixmap(document_controller_); //->pixmap());
+ image_viewer_->load_pdf_pixmap(pdf_document_controller_); //->pixmap());
  delayed_image_viewer_recenter_scroll_top_left();
+}
+
+void DHAX_Main_Window_Controller::load_pdf()
+{
+ QString ws =  ROOT_FOLDER "/../pdf";
+
+ QString filters = "PDF Files (*.pdf)";
+
+ QString file_path = QFileDialog::getOpenFileName(application_main_window_, "Open PDF", ws, filters);
+
+ if(file_path.isEmpty())
+   return;
+
+ check_init_pdf_document_controller();
+
+ pdf_document_controller_->load_document(file_path);
+
+ QPair dpis {image_viewer_->physicalDpiX(), image_viewer_->physicalDpiY()};
+ pdf_document_controller_->load_page(dpis);
+
+ init_pdf_page_view();
+
+ application_controller_->application_state()->flags.pdf_mode = true;
 }
 
 void DHAX_Main_Window_Controller::load_image()
@@ -426,9 +438,11 @@ void DHAX_Main_Window_Controller::load_image()
  QString ws =  ROOT_FOLDER "/../pics";
 
  QString filters = "Images (*.jpg *.png *.bmp)";
- QFileDialog qdialog;
 
- QString file_path = qdialog.getOpenFileName(application_main_window_, "Open Image", ws, filters);
+// QFileDialog qdialog;
+// QString file_path = qdialog.getOpenFileName(application_main_window_, "Open Image", ws, filters);
+
+ QString file_path = QFileDialog::getOpenFileName(application_main_window_, "Open Image", ws, filters);
 
  if(!file_path.isNull())
  {
@@ -446,12 +460,17 @@ void DHAX_Main_Window_Controller::load_image(QString file_path)
 
  zoom_frame_->reset_with_image_data(&current_image_file_path_);
 
- image_viewer_->load_image(current_image_file_path_);
+ check_init_image_document_controller();
+
+ image_viewer_->load_image(current_image_file_path_, image_document_controller_);
 
 // display_->update();
 // display_->repaint();
 
  init_image_scene_item(image_viewer_->image_scene_item());
+
+
+ application_controller_->application_state()->flags.image_mode = true;
 
  delayed_image_viewer_recenter_scroll_top_left();
 

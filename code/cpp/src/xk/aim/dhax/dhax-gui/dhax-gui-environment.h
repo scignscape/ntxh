@@ -83,7 +83,9 @@ public:
  void init_graphics_frame_layout(QBoxLayout::Direction qbd, QBoxLayout::Direction secqbd);
  void init_main_window_frame();
  void init_main_window_frame_layout(QBoxLayout::Direction qbd);
- void show_image(QString path);
+
+ //?void show_image(QString path);
+
  void show_main_window();
  DHAX_Annotation_Environment* init_annotation_environment();
  void show_annotation_on_current_image(DHAX_Annotation_Instance* dai);

@@ -14,6 +14,8 @@
 
 #include "main-window/dhax-main-window.h"
 
+#include "aforms/multistep-annotation-base.h"
+
 #include "dhax-graphics-view.h"
 
 #include "dhax-graphics-scene.h"
@@ -21,17 +23,29 @@
 
 template<>
 void DHAX_Image_Scene_Item::handle_mouse_event<
-  DHAX_Image_Scene_Item::Mouse_Event_Modes::Left_Edit>(QMouseEvent* mev)
+  DHAX_Image_Scene_Item::Mouse_Event_Modes::Left_Edit>(QMouseEvent* mev, n8 mode_data_request)
 {
 
 }
 
 template<>
 void DHAX_Image_Scene_Item::handle_mouse_event<
-  DHAX_Image_Scene_Item::Mouse_Event_Modes::Left_Move>(QMouseEvent* mev)
+  DHAX_Image_Scene_Item::Mouse_Event_Modes::Left_Move>(QMouseEvent* mev, n8 mode_data_request)
 {
-
+ if(current_multistep_annotation_)
+   current_multistep_annotation_->fulfill_left_move(mev, mode_data_request);
 }
+
+template<>
+void DHAX_Image_Scene_Item::handle_mouse_event<
+  DHAX_Image_Scene_Item::Mouse_Event_Modes::Left_Resume>(QMouseEvent* mev, n8 mode_data_request)
+{
+ if(current_multistep_annotation_)
+ {
+  current_multistep_annotation_->fulfill_left_resume(mev, mode_data_request);
+ }
+}
+
 
 
 void DHAX_Image_Scene_Item::_left_init(const QPoint& pos)
@@ -88,15 +102,23 @@ void DHAX_Image_Scene_Item::_left_init(const QPoint& pos)
 
 template<>
 void DHAX_Image_Scene_Item::handle_mouse_event<
-  DHAX_Image_Scene_Item::Mouse_Event_Modes::Left_Init>(QMouseEvent* mev)
+  DHAX_Image_Scene_Item::Mouse_Event_Modes::Left_Init>(QMouseEvent* mev, n8 mode_data_request)
 {
- _left_init(mev->pos());
+ if(current_multistep_annotation_)
+   current_multistep_annotation_->fulfill_left_init(mev, mode_data_request);
+
+//? _left_init(mev->pos());
+
+
  //qDebug() << "Left_Init ...";
 
 }
 
 void DHAX_Image_Scene_Item::_left_move_release(const QPoint& pos)
 {
+// current_multistep_annotation_->fulfill_left_init(mev, mode_data_request);
+
+
  DHAX_Drawn_Shape::Shape_Kinds sk = data_->current_enabled_shape_kind();
 
  DHAX_Drawn_Shape* dds = data_->check_current_drawn_shape(); //get_current_drawn_shape_
@@ -124,16 +146,18 @@ void DHAX_Image_Scene_Item::_left_move_release(const QPoint& pos)
 
 template<>
 void DHAX_Image_Scene_Item::handle_mouse_event<
-  DHAX_Image_Scene_Item::Mouse_Event_Modes::Left_Move_Release>(QMouseEvent* mev)
+  DHAX_Image_Scene_Item::Mouse_Event_Modes::Left_Move_Release>(QMouseEvent* mev, n8 mode_data_request)
 {
- _left_move_release(mev->pos());
+ if(current_multistep_annotation_)
+   current_multistep_annotation_->fulfill_left_move_release(mev, mode_data_request);
+ //_left_move_release(mev->pos());
 }
 
 // //   right click temp release is like releasing the
  //     left button and then immediately pressing it again ...
 template<>
 void DHAX_Image_Scene_Item::handle_mouse_event<
-  DHAX_Image_Scene_Item::Mouse_Event_Modes::Right_Click_Temp_Release>(QMouseEvent* mev)
+  DHAX_Image_Scene_Item::Mouse_Event_Modes::Right_Click_Temp_Release>(QMouseEvent* mev, n8 mode_data_request)
 {
  _left_move_release(mev->pos());
  _left_init(mev->pos());
@@ -167,28 +191,28 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
 
 template<>
 void DHAX_Image_Scene_Item::handle_mouse_event<
-  DHAX_Image_Scene_Item::Mouse_Event_Modes::Left_Edit_Release>(QMouseEvent* mev)
+  DHAX_Image_Scene_Item::Mouse_Event_Modes::Left_Edit_Release>(QMouseEvent* mev, n8 mode_data_request)
 {
 
 }
 
 template<>
 void DHAX_Image_Scene_Item::handle_mouse_event<
-  DHAX_Image_Scene_Item::Mouse_Event_Modes::Right_Edit>(QMouseEvent* mev)
+  DHAX_Image_Scene_Item::Mouse_Event_Modes::Right_Edit>(QMouseEvent* mev, n8 mode_data_request)
 {
 
 }
 
 template<>
 void DHAX_Image_Scene_Item::handle_mouse_event<
-  DHAX_Image_Scene_Item::Mouse_Event_Modes::Right_Move>(QMouseEvent* mev)
+  DHAX_Image_Scene_Item::Mouse_Event_Modes::Right_Move>(QMouseEvent* mev, n8 mode_data_request)
 {
 
 }
 
 template<>
 void DHAX_Image_Scene_Item::handle_mouse_event<
-  DHAX_Image_Scene_Item::Mouse_Event_Modes::Right_Init>(QMouseEvent* mev)
+  DHAX_Image_Scene_Item::Mouse_Event_Modes::Right_Init>(QMouseEvent* mev, n8 mode_data_request)
 {
 
 }
@@ -197,7 +221,8 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
 
 template<>
 void DHAX_Image_Scene_Item::handle_mouse_event<
-  DHAX_Image_Scene_Item::Mouse_Event_Modes::Right_Click_Iso>(QMouseEvent* mev)
+  DHAX_Image_Scene_Item::Mouse_Event_Modes::Right_Click_Iso>(QMouseEvent* mev,
+  n8 mode_data_request)
 {
  QMenu* menu = new QMenu(nullptr);
  menu->setAttribute(Qt::WA_DeleteOnClose);
@@ -353,14 +378,16 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
 
 
 
-void DHAX_Image_Scene_Item::_handle_mouse_event(QMouseEvent* mev, Mouse_Event_Modes mem)
+void DHAX_Image_Scene_Item::_handle_mouse_event(QMouseEvent* mev,
+  Mouse_Event_Modes mem, n8 mode_data_request)
 {
  switch(mem)
  {
-#define TEMP_MACRO(x) case Mouse_Event_Modes::x: handle_mouse_event<Mouse_Event_Modes::x>(mev); return;
+#define TEMP_MACRO(x) case Mouse_Event_Modes::x: handle_mouse_event<Mouse_Event_Modes::x>(mev, mode_data_request); return;
   TEMP_MACRO(Left_Edit)
   TEMP_MACRO(Left_Move)
   TEMP_MACRO(Left_Init)
+  TEMP_MACRO(Left_Resume)
   TEMP_MACRO(Right_Edit)
   TEMP_MACRO(Right_Move)
   TEMP_MACRO(Right_Init)

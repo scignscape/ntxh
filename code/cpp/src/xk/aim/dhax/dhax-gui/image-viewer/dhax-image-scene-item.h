@@ -31,6 +31,8 @@ class DHAX_Annotation_Instance;
 
 class MultiStep_Annotation_Base;
 
+class DHAX_Mouse_Interaction_Data;
+
 class DHAX_Drawn_Shape;
 
 class _Proxy_Widget;
@@ -85,17 +87,19 @@ private:
  QPointF active_right_mouse_drag_origin_;
  QPointF active_left_mouse_drag_origin_;
 
+ DHAX_Mouse_Interaction_Data* current_mouse_interaction_data_;
+
 // QGraphics
 
  enum class Mouse_Event_Modes { N_A, Left_Edit, Left_Move,
-   Left_Init, Right_Edit, Right_Move, Right_Init,
+   Left_Init, Left_Resume, Right_Edit, Right_Move, Right_Init,
    Left_Move_Release, Left_Edit_Release,
    Right_Click_Iso, Right_Click_Temp_Release   };
 
  template<Mouse_Event_Modes mem>
- void handle_mouse_event(QMouseEvent* mev);
+ void handle_mouse_event(QMouseEvent* mev, n8 mode_data_request);
 
- void _handle_mouse_event(QMouseEvent* mev, Mouse_Event_Modes mem);
+ void _handle_mouse_event(QMouseEvent* mev, Mouse_Event_Modes mem, n8 mode_data_request);
 
  void paintEvent_draw_point_pairs(QVector<QPair<QPoint, QPoint>>& pairs, QPainter& painter,
    QPen& pen, QPen& shape_pen, QPen& back_pen);
@@ -116,6 +120,8 @@ private:
 
  void _left_init(const QPoint& pos);
  void _left_move_release(const QPoint& pos);
+
+ void _check_ui_update();
 
 public:
 

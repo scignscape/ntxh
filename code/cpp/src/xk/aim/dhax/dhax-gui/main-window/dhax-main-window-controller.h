@@ -29,6 +29,7 @@ class DHAX_Application_Controller;
 class DHAX_Annotation_Instance;
 
 class PDF_Document_Controller;
+class Image_Document_Controller;
 
 
 class DHAX_Main_Window_Controller //: public QObject
@@ -46,7 +47,8 @@ class DHAX_Main_Window_Controller //: public QObject
  DHAX_Main_Window_Receiver* main_window_receiver_;
  DHAX_Application_Controller* application_controller_;
 
- PDF_Document_Controller* document_controller_;
+ PDF_Document_Controller* pdf_document_controller_;
+ Image_Document_Controller* image_document_controller_;
 
 public:
 
@@ -63,7 +65,8 @@ public:
  ACCESSORS(QString ,current_image_file_path)
  ACCESSORS(DHAX_Image_Scene_Item* ,image_scene_item)
 
- void check_init_document_controller();
+ void check_init_pdf_document_controller();
+ void check_init_image_document_controller();
 
  // //  for some reason delaying this call
   //    using a 0-second QTimer is necessary

@@ -26,6 +26,8 @@
 
 #include "image-viewer/dhax-drawn-shape.h"
 
+#include "image-viewer/dhax-mouse-interaction-data.h"
+
 class MultiLine_Rubber_Band;
 class Arrow_Annotation;
 
@@ -65,6 +67,7 @@ class PDF_Document_Controller //: public QGraphicsView //QLabel
 
  Page_and_Search_Frame* page_and_search_frame_;
 
+ DHAX_Mouse_Interaction_Data mouse_interaction_data_;
 
 public:
 
@@ -74,6 +77,7 @@ public:
  ACCESSORS(QPixmap ,pixmap)
  ACCESSORS(Page_and_Search_Frame* ,page_and_search_frame)
 
+ ACCESSORS__RGET(DHAX_Mouse_Interaction_Data ,mouse_interaction_data)
 
  QMatrix matrix() const;
  qreal scale() const;

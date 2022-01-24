@@ -40,7 +40,7 @@ protected:
 
 public:
 
- Measurement_Annotation(const QPointF& sc, QWidget* p = nullptr);
+ Measurement_Annotation(DHAX_Mouse_Interaction_Data& mouse_interaction_data, const QPointF& sc, QWidget* p = nullptr);
 
  ACCESSORS__RGET(QRectF ,inner)
  ACCESSORS__RGET(QRectF ,outer)

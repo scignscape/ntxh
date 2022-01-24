@@ -39,6 +39,8 @@
 //#include "multiline-rubber-band.h"
 
 
+#include "image-viewer/dhax-mouse-interaction-data.h"
+
 PDF_Document_Controller::PDF_Document_Controller()
  : document_(nullptr), page_and_search_frame_(nullptr)
   // context_menu_rubber_band_(nullptr),
@@ -52,26 +54,30 @@ MultiStep_Annotation_Base* PDF_Document_Controller::init_multistep_annotation(
   DHAX_Annotation_Instance::Compact_Shape_Kind_Summary shape_kind)
 {
  current_multistep_annotation_ = nullptr;
+
+ // //  temp ...
+ static DHAX_Mouse_Interaction_Data mouse_interaction_data;
+
  switch(shape_kind)
  {
  case DHAX_Annotation_Instance::Compact_Shape_Kind_Summary::Arrow:
-  current_multistep_annotation_ = new Rotateable_Arrow_Annotation(posf, parent);
+  current_multistep_annotation_ = new Rotateable_Arrow_Annotation(mouse_interaction_data, posf, parent);
   break;
 
  case DHAX_Annotation_Instance::Compact_Shape_Kind_Summary::Multiline:
-  current_multistep_annotation_ = new MultiLine_Rubber_Band(QRubberBand::Rectangle, posf, parent);
+  current_multistep_annotation_ = new MultiLine_Rubber_Band(mouse_interaction_data, QRubberBand::Rectangle, posf, parent);
   break;
 
  case DHAX_Annotation_Instance::Compact_Shape_Kind_Summary::Measurement:
-  current_multistep_annotation_ = new Measurement_Annotation(posf, parent);
+  current_multistep_annotation_ = new Measurement_Annotation(mouse_interaction_data, posf, parent);
   break;
 
  case DHAX_Annotation_Instance::Compact_Shape_Kind_Summary::Rectangle:
-  current_multistep_annotation_ = new Simple_Rectangle_Annotation(posf, parent);
+  current_multistep_annotation_ = new Simple_Rectangle_Annotation(mouse_interaction_data, posf, parent);
   break;
 
  case DHAX_Annotation_Instance::Compact_Shape_Kind_Summary::Ellipse:
-  current_multistep_annotation_ = new Simple_Ellipse_Annotation(posf, parent);
+  current_multistep_annotation_ = new Simple_Ellipse_Annotation(mouse_interaction_data, posf, parent);
   break;
 
  default: break;
