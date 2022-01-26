@@ -13,6 +13,10 @@
 
 #include "application/dhax-application-state.h"
 
+#include "aforms/measurement-dialogs/simple/simple-rectangle-measurement-dialog.h"
+
+#include "aforms/simple/simple-rectangle-annotation.h"
+
 #include "dhax-graphics-view.h"
 
 #include "pdf-viewer/pdf-document-controller.h"
@@ -661,6 +665,7 @@ void DHAX_Image_Scene_Item::mousePressEvent(QMouseEvent* mev)
    if(active_left_mouse_drag_origin_.isNull())
    {
     // context menu?
+    return;
    }
    else
    {
@@ -697,7 +702,9 @@ void DHAX_Image_Scene_Item::mousePressEvent(QMouseEvent* mev)
 
     current_multistep_annotation_ = idc->init_multistep_annotation(this, posf,
       data_->current_enabled_shape_kind());
+
    }
+   current_multistep_annotation_->set_image_rectf( data_->m_background_.rect() );
    current_multistep_annotation_->show();
   }
 
@@ -742,6 +749,13 @@ void DHAX_Image_Scene_Item::mousePressEvent(QMouseEvent* mev)
  _handle_mouse_event(mev, mem, mode_data_request_code);
  _check_ui_update();
 }
+
+
+void DHAX_Image_Scene_Item::show_context_menu(const QPoint& pos)
+{
+ //popup
+}
+
 
 void DHAX_Image_Scene_Item::_check_ui_update()
 {
@@ -795,15 +809,21 @@ void DHAX_Image_Scene_Item::mouseReleaseEvent(QMouseEvent* mev)
    current_completed_multistep_annotation_ = current_multistep_annotation_;
    current_multistep_annotation_ = nullptr;
 
+   context_menu_prep_state_.flags.pending_annotation_confirm = true;
+
+   active_left_mouse_drag_origin_ = QPointF();
+
+
    //? what about released_mode_data_request_code?
    return;
   }
 
-
-  current_multistep_annotation_->released_mode_data_request_code(mev, mode_data_request_code);
-
-  if(!mode_data_request_code)
-    return;
+  if(current_multistep_annotation_)
+  {
+   current_multistep_annotation_->released_mode_data_request_code(mev, mode_data_request_code);
+   if(!mode_data_request_code)
+     return;
+  }
 
   if(mev->button() == Qt::RightButton)
   {
@@ -985,5 +1005,13 @@ void DHAX_Image_Scene_Item::mouseDoubleClickEvent(QMouseEvent *mouseEvent)
    update();
   }
  }
+}
+
+void DHAX_Image_Scene_Item::show_annotation_measurements_dialog(const QPoint& pos)
+{
+ Simple_Rectangle_Measurement_Dialog* dlg = new Simple_Rectangle_Measurement_Dialog(
+   static_cast<Simple_Rectangle_Annotation*>(current_completed_multistep_annotation_), this);
+ qDebug() << dlg->windowTitle();
+ dlg->show();
 }
 

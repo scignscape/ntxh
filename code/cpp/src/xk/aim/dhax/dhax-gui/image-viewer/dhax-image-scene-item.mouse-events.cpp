@@ -20,6 +20,8 @@
 
 #include "dhax-graphics-scene.h"
 
+#include "dhax-mouse-interaction-data.h"
+
 
 template<>
 void DHAX_Image_Scene_Item::handle_mouse_event<
@@ -227,6 +229,30 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
  QMenu* menu = new QMenu(nullptr);
  menu->setAttribute(Qt::WA_DeleteOnClose);
 
+ QPoint pos = this_proxy_widget_->mapToScene(mev->pos()).toPoint();
+ QPoint pos1 = containing_image_view_->mapFromScene(pos);
+ QPoint pos2 = containing_image_view_->viewport()->mapToGlobal(pos1);
+
+
+
+ //if(current_mouse_interaction_data_->flags.)
+ if(context_menu_prep_state_.flags.pending_annotation_confirm)
+ {
+  menu->addAction("Confirm Annotation", [this]
+  {
+  });
+
+  menu->addAction("Cancel Annotation", [this]
+  {
+  });
+
+  menu->addAction("Measurements ...", [this, &pos2]
+  {
+   show_annotation_measurements_dialog(pos2);
+  });
+
+ }
+
  DHAX_Drawn_Shape* ldds = data_->get_last_canceled_drawn_shape();
 
  if(ldds)
@@ -370,10 +396,7 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
   });
  }
 
- QPoint pos = this_proxy_widget_->mapToScene(mev->pos()).toPoint();
- QPoint pos1 = containing_image_view_->mapFromScene(pos);
-
- menu->popup(containing_image_view_->viewport()->mapToGlobal(pos1));
+ menu->popup(pos2);
 }
 
 

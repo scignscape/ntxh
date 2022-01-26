@@ -72,10 +72,16 @@ protected:
 
  DHAX_Mouse_Interaction_Data& mouse_interaction_data_;
 
+ QRectF image_rectf_;
+// u2 image_width_;
+// u2 image_height_;
+
 public:
 
  MultiStep_Annotation_Base(DHAX_Mouse_Interaction_Data& mouse_interaction_data,
    QWidget* p = nullptr);
+
+ ACCESSORS(QRectF ,image_rectf)
 
  virtual void adjust_geometry(const QPointF& pos) = 0;
  virtual void reset_geometry(const QPointF& sc = {}) = 0;
@@ -141,7 +147,13 @@ protected:
 
  virtual void paintEvent(QPaintEvent* event) Q_DECL_OVERRIDE;
 
+//   32 33 34  35 36 37  38 39 40  41 42 43  44 45 46  47 48 49  50 51 52  53 54 55  56 57 58  59
+//   11 11 11  12 12 12  13 13 13  14 14 14  15 15 15  16 16 16  17 17 17  18 18 18  19 19 19  20
+//
 
+//   32 33 34 35  36 37 38  39 40 41  42 43 44  45 46 47  48 49 50  51 52 53  54 55 56  57 58 59
+//   11 11 11 11  12 12 12  13 13 13  14 14 14  15 15 15  16 16 16  17 17 17  18 18 18  19 19 19
+//
 
 public Q_SLOTS:
 

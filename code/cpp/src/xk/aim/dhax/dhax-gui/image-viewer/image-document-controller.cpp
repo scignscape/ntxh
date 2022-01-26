@@ -85,6 +85,7 @@ MultiStep_Annotation_Base* Image_Document_Controller::init_multistep_annotation(
 
  //dragPosition = event->pos();
  //current_multistep_annotation_->show();
+ //current_multistep_annotation_->set_image_rectf()
  return current_multistep_annotation_;
 }
 

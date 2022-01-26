@@ -19,6 +19,8 @@
 
 #include "dhax-display-image-data.h"
 
+#include "context-menu-prep-state.h"
+
 #include "self-connect.h"
 
 class DHAX_Graphics_Scene;
@@ -89,6 +91,8 @@ private:
 
  DHAX_Mouse_Interaction_Data* current_mouse_interaction_data_;
 
+ Context_Menu_Prep_State context_menu_prep_state_;
+
 // QGraphics
 
  enum class Mouse_Event_Modes { N_A, Left_Edit, Left_Move,
@@ -122,6 +126,10 @@ private:
  void _left_move_release(const QPoint& pos);
 
  void _check_ui_update();
+
+ void show_context_menu(const QPoint& pos);
+
+ void show_annotation_measurements_dialog(const QPoint& pos);
 
 public:
 
