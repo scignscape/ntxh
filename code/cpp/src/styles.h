@@ -14,6 +14,7 @@
 #include <QPushButton>
 #include <QColor>
 #include <QFrame>
+#include <QLabel>
 
 #include "global-types.h"
 
@@ -459,6 +460,17 @@ inline void fill_solid_color_button(QPushButton* b, QColor c,
  pixmap.fill(c);
  QIcon icon(pixmap);
  b->setIcon(icon);
+}
+
+inline void fill_solid_color_label(QLabel* lbl, QColor c,
+  int width = 20, int height = 12)
+{
+ //lbl->setText(QString("<span style='border-radius: 15px;background-color: #%1>%1</span>").arg(QString::number(c.rgb(), 16)));
+
+
+ lbl->setText(QString("%1").arg(QString::number(c.rgb(), 16)));
+
+ lbl->setStyleSheet(QString("QLabel { background-color: #%1; color:white }").arg(QString::number(c.rgb(), 16)));
 }
 
 inline QString colorful_toggle_button_quiet_style_sheet_()

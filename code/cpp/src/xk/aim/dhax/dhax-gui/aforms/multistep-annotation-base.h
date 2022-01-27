@@ -72,7 +72,7 @@ protected:
 
  DHAX_Mouse_Interaction_Data& mouse_interaction_data_;
 
- QRectF image_rectf_;
+ QImage* containing_image_;
 // u2 image_width_;
 // u2 image_height_;
 
@@ -81,7 +81,7 @@ public:
  MultiStep_Annotation_Base(DHAX_Mouse_Interaction_Data& mouse_interaction_data,
    QWidget* p = nullptr);
 
- ACCESSORS(QRectF ,image_rectf)
+ ACCESSORS(QImage* ,containing_image)
 
  virtual void adjust_geometry(const QPointF& pos) = 0;
  virtual void reset_geometry(const QPointF& sc = {}) = 0;

@@ -72,6 +72,10 @@ public:
 
  Measurements& get_measurements();
 
+ QColor get_color_mean();
+ QRectF against_image_coords();
+
+
 protected:
 
 

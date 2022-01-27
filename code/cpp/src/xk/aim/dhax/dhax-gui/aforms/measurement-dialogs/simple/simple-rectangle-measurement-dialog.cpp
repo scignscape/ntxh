@@ -13,9 +13,35 @@
 #include "subwindows/clickable-label.h"
 
 
+#include <QPainter>
+#include <QPainterPath>
+#include <QPen>
+
+
 QString add_ratio_glyph(QString s)
 {
- return s + QString(" (%1)").arg(QChar(0x2236));
+ return s + QString(" (%1)").arg(QChar(0x223A));
+}
+
+
+void Solid_Color_Label::paintEvent(QPaintEvent* e)
+{
+ QPainter p(this);
+ p.setRenderHint(QPainter::Antialiasing);
+ QPainterPath path;
+ path.addRoundedRect(QRectF(1, 1, width_, height_), corners_, corners_);
+ p.setPen(Qt::NoPen);
+ p.fillPath(path, color_);
+ p.drawPath(path);
+
+ QFont font;
+ font.setPixelSize(font_pixel_size_);
+
+ QPen pen(Qt::black, 1);
+ p.setPen(pen);
+ p.setFont(font);
+ p.drawText(width_ + text_offset_, height_ - ((height_ - font_pixel_size_) / 2),
+   QString("Hex: %1").arg(QString::number(color_.rgb(), 16).mid(2)));
 }
 
 
@@ -29,7 +55,8 @@ Simple_Rectangle_Measurement_Dialog::Simple_Rectangle_Measurement_Dialog(Simple_
 
  info_scroll_area_ = new QScrollArea(this);
 
- info_scroll_area_->setLayout(info_layout_);
+ info_frame_ = new QFrame(this);
+
 
  Simple_Rectangle_Annotation::Measurements& ms = ann->get_measurements();
 
@@ -69,7 +96,6 @@ Simple_Rectangle_Measurement_Dialog::Simple_Rectangle_Measurement_Dialog(Simple_
  parameter_labels_[Parameters::u2_bottom_margin] = new_QLabel(ms.margins[D::bottom]);
  parameter_labels_[Parameters::u2_bottom_left_margin] = new_QLabel(ms.margins[D::bottom_left]);
 
-
  parameter_labels_[Parameters::r8_left_margin_against_image] = new_QLabel(ms.margins_against_image[D::left]);
  parameter_labels_[Parameters::r8_top_left_margin_against_image] = new_QLabel(ms.margins_against_image[D::top_left]);
  parameter_labels_[Parameters::r8_top_margin_against_image] = new_QLabel(ms.margins_against_image[D::top]);
@@ -97,10 +123,10 @@ Simple_Rectangle_Measurement_Dialog::Simple_Rectangle_Measurement_Dialog(Simple_
  info_layout_->addRow("Image Width/Height", parameter_labels_[Parameters::r8_image_wh_ratio]);
  info_layout_->addRow("Image Height/Width", parameter_labels_[Parameters::r8_image_hw_ratio]);
 
- info_layout_->addRow(add_ratio_glyph("Width/Height"), parameter_labels_[Parameters::r8_width_against_image]);
- info_layout_->addRow(add_ratio_glyph("Height/Width"), parameter_labels_[Parameters::r8_height_against_image]);
- info_layout_->addRow(add_ratio_glyph("Image Width/Height"), parameter_labels_[Parameters::r8_perimeter_against_image]);
- info_layout_->addRow(add_ratio_glyph("Image Height/Width"), parameter_labels_[Parameters::r8_area_against_image]);
+ info_layout_->addRow(add_ratio_glyph("Width"), parameter_labels_[Parameters::r8_width_against_image]);
+ info_layout_->addRow(add_ratio_glyph("Height"), parameter_labels_[Parameters::r8_height_against_image]);
+ info_layout_->addRow(add_ratio_glyph("Perimeter"), parameter_labels_[Parameters::r8_perimeter_against_image]);
+ info_layout_->addRow(add_ratio_glyph("Area"), parameter_labels_[Parameters::r8_area_against_image]);
 
 
  info_layout_->addRow("Left Margin", parameter_labels_[Parameters::u2_left_margin]); //  = new_QLabel(ms.margins[D::left]);
@@ -124,7 +150,24 @@ Simple_Rectangle_Measurement_Dialog::Simple_Rectangle_Measurement_Dialog(Simple_
  info_layout_->addRow(add_ratio_glyph("Bottom Margin"), parameter_labels_[Parameters::r8_bottom_margin_against_image]); //  = new_QLabel(ms.margins_against_image[D::bottom]);
  info_layout_->addRow(add_ratio_glyph("Bottom Left Margin"), parameter_labels_[Parameters::r8_bottom_left_margin_against_image]); //  = new_QLabel(ms.margins_against_image[D::bottom_left]);
 
+ QColor qc = ann->get_color_mean();
 
+ solid_color_labels_.resize(1);
+ //solid_color_labels_[0] = new QLabel(this);
+ solid_color_labels_[0] = new Solid_Color_Label(qc);
+
+ //qDebug() << "qc = " << qc;
+
+ //fill_solid_color_label(solid_color_labels_[0], qc);
+
+ info_layout_->addRow("Additive Color Mean", solid_color_labels_[0]);
+
+
+ info_frame_->setLayout(info_layout_);
+
+ info_scroll_area_->setWidget(info_frame_);
+
+ //info_scroll_area_->setWidgetResizable(true);
 
  main_layout_->addWidget(info_scroll_area_);
 

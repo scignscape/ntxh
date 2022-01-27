@@ -704,7 +704,8 @@ void DHAX_Image_Scene_Item::mousePressEvent(QMouseEvent* mev)
       data_->current_enabled_shape_kind());
 
    }
-   current_multistep_annotation_->set_image_rectf( data_->m_background_.rect() );
+   //current_multistep_annotation_->set_image_rectf( data_->m_background_.rect() );
+   current_multistep_annotation_->set_containing_image(&data_->m_background_);
    current_multistep_annotation_->show();
   }
 
@@ -1010,8 +1011,8 @@ void DHAX_Image_Scene_Item::mouseDoubleClickEvent(QMouseEvent *mouseEvent)
 void DHAX_Image_Scene_Item::show_annotation_measurements_dialog(const QPoint& pos)
 {
  Simple_Rectangle_Measurement_Dialog* dlg = new Simple_Rectangle_Measurement_Dialog(
-   static_cast<Simple_Rectangle_Annotation*>(current_completed_multistep_annotation_), this);
- qDebug() << dlg->windowTitle();
+   static_cast<Simple_Rectangle_Annotation*>(current_completed_multistep_annotation_), nullptr);
+ //qDebug() << dlg->windowTitle();
  dlg->show();
 }
 

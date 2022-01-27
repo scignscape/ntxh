@@ -12,7 +12,7 @@
 MultiStep_Annotation_Base::MultiStep_Annotation_Base(DHAX_Mouse_Interaction_Data& mouse_interaction_data,
     QWidget* p) :
     QWidget(p), current_corner_pair_direction_(Corner_Pair_Directions::First_Phase),
-    mouse_interaction_data_(mouse_interaction_data)
+    mouse_interaction_data_(mouse_interaction_data), containing_image_(nullptr)
 {
  if(p)
    setGeometry(p->geometry());
