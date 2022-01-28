@@ -1012,6 +1012,11 @@ void DHAX_Image_Scene_Item::show_annotation_measurements_dialog(const QPoint& po
 {
  Simple_Rectangle_Measurement_Dialog* dlg = new Simple_Rectangle_Measurement_Dialog(
    static_cast<Simple_Rectangle_Annotation*>(current_completed_multistep_annotation_), nullptr);
+
+ dlg->set_image_file_path(image_file_path_);
+
+ //dlg->generate_overlay_file();
+
  //qDebug() << dlg->windowTitle();
  dlg->show();
 }

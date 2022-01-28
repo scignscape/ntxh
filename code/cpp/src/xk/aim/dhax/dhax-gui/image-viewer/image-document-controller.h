@@ -55,11 +55,15 @@ class Image_Document_Controller //: public QGraphicsView //QLabel
 
  DHAX_Mouse_Interaction_Data mouse_interaction_data_;
 
+ QString current_file_path_;
+
 public:
 
  Image_Document_Controller();
 
  ACCESSORS__RGET(DHAX_Mouse_Interaction_Data ,mouse_interaction_data)
+
+ ACCESSORS(QString ,current_file_path)
 
  MultiStep_Annotation_Base* init_multistep_annotation(QWidget* parent,
    const QPointF posf, DHAX_Annotation_Instance::Compact_Shape_Kind_Summary shape_kind);

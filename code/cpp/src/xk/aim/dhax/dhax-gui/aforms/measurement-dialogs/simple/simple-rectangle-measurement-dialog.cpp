@@ -10,12 +10,18 @@
 #include <QDebug>
 #include <QMessageBox>
 
+#include <QFileDialog>
+
+#include <QMenu>
+
 #include "subwindows/clickable-label.h"
 
 
 #include <QPainter>
 #include <QPainterPath>
 #include <QPen>
+
+#include <QFileInfo>
 
 
 QString add_ratio_glyph(QString s)
@@ -45,10 +51,12 @@ void Solid_Color_Label::paintEvent(QPaintEvent* e)
 }
 
 
+
 Simple_Rectangle_Measurement_Dialog::Simple_Rectangle_Measurement_Dialog(Simple_Rectangle_Annotation* ann,
   QWidget* parent)
   :  QDialog(parent)
 {
+ annotation_ = ann;
  main_layout_ = new QVBoxLayout;
 
  info_layout_ = new QFormLayout;
@@ -154,7 +162,15 @@ Simple_Rectangle_Measurement_Dialog::Simple_Rectangle_Measurement_Dialog(Simple_
 
  solid_color_labels_.resize(1);
  //solid_color_labels_[0] = new QLabel(this);
- solid_color_labels_[0] = new Solid_Color_Label(qc);
+ solid_color_labels_[0] = new Solid_Color_Label(qc, 0, "additive-color-mean");
+
+ connect(solid_color_labels_[0], &Solid_Color_Label::customContextMenuRequested,
+   this, &Simple_Rectangle_Measurement_Dialog::show_solid_color_label_context_menu);
+
+/*   [this] (const QPoint& pos)
+ {
+  qDebug() << "pos = " << pos;
+// }*/
 
  //qDebug() << "qc = " << qc;
 
@@ -210,6 +226,75 @@ Simple_Rectangle_Measurement_Dialog::Simple_Rectangle_Measurement_Dialog(Simple_
  setLayout(main_layout_);
 }
 
+
+void Simple_Rectangle_Measurement_Dialog::create_overlay_file(QString path, QColor color)
+{
+ Simple_Rectangle_Annotation::Measurements& ms = annotation_->get_measurements();
+
+ using D = Simple_Rectangle_Annotation::Directions;
+
+ u2 piw = ms.image_width;
+ u2 pih = ms.image_height;
+ u2 pw = ms.width;
+ u2 ph = ms.height;
+ u2 mt = ms.margins[D::top];
+ u2 ml = ms.margins[D::left];
+
+ QPixmap qpx(piw + 20, pih + 20);
+ QPainter pr(&qpx);
+ pr.setBrush(Qt::white);
+ pr.drawRect(10, 10, piw, pih);
+ QBrush br;
+ br.setStyle(Qt::Dense2Pattern);
+ QPen pen;
+ pen.setWidth(10);
+ pen.setBrush(br);
+ pr.setPen(pen);
+ pr.drawRect(qpx.rect());
+ pr.setPen(Qt::NoPen);
+ pr.setBrush(color);
+ pr.drawRect(mt + 10, ml + 10, pw, ph);
+
+// QFileInfo qfi(image_file_path_);
+
+// QString baseName = qfi.completeBaseName();
+
+// qDebug() << baseName;
+
+ //QString path = image_file_path_ + ".overlay.png"; //+ qfi.suffix();
+ qpx.save(path);
+}
+
+void Simple_Rectangle_Measurement_Dialog::generate_overlay_file(Solid_Color_Label* scl)
+{
+ QFileInfo qfi(image_file_path_);
+ static QString path_pattern = "%1/%2-overlay.%3.png";
+ QString path = path_pattern.arg(qfi.absolutePath()).arg(qfi.completeBaseName()).arg(scl->role());
+ qDebug() << path;
+
+ QString sel = QFileDialog::getSaveFileName(this, "Enter or Select File Name", path);
+ if(sel.isEmpty())
+   return;
+
+ create_overlay_file(sel, scl->color());
+}
+
+
+void Simple_Rectangle_Measurement_Dialog::show_solid_color_label_context_menu(const QPoint& pos)
+{
+ QMenu* menu = new QMenu(this);//
+
+ Solid_Color_Label* scl = qobject_cast<Solid_Color_Label*>(sender());
+
+ menu->addAction("Generate Overlay File", [this, scl]
+ {
+  generate_overlay_file(scl); // scl->color();
+ });
+
+ qDebug() << "pos = " << pos;
+
+ menu->popup(scl->mapToGlobal(pos));
+}
 
 Simple_Rectangle_Measurement_Dialog::~Simple_Rectangle_Measurement_Dialog()
 {

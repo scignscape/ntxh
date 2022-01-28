@@ -462,6 +462,8 @@ void DHAX_Main_Window_Controller::load_image(QString file_path)
 
  check_init_image_document_controller();
 
+ image_document_controller_->set_current_file_path(current_image_file_path_);
+
  image_viewer_->load_image(current_image_file_path_, image_document_controller_);
 
 // display_->update();

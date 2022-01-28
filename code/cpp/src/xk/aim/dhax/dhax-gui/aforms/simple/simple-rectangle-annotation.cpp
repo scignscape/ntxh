@@ -192,6 +192,9 @@ QColor Simple_Rectangle_Annotation::get_color_mean()
   image_line = (QRgb *) containing_image_->scanLine(y);
   for(u2 x = x1; x < x2 ; ++x)
   {
+   QColor c(image_line[x]);
+//   qDebug() << "x = " << x << ", y = " << y << ": " << qRed(image_line[x]) << " | "
+//     << qGreen(image_line[x]) << "|" << qBlue(image_line[x]);
    ++red_counts[qRed(image_line[x])];
    ++green_counts[qGreen(image_line[x])];
    ++blue_counts[qBlue(image_line[x])];
@@ -208,8 +211,11 @@ QColor Simple_Rectangle_Annotation::get_color_mean()
 
 
  u1 red_mean = _maxes_averaged(red_counts, maxes);
+ maxes.clear();
  u1 green_mean = _maxes_averaged(green_counts, maxes);
+ maxes.clear();
  u1 blue_mean = _maxes_averaged(blue_counts, maxes);
+ maxes.clear();
 
  return QColor(red_mean, green_mean, blue_mean);
 }

@@ -93,6 +93,8 @@ private:
 
  Context_Menu_Prep_State context_menu_prep_state_;
 
+ QString image_file_path_;
+
 // QGraphics
 
  enum class Mouse_Event_Modes { N_A, Left_Edit, Left_Move,
@@ -149,6 +151,8 @@ public:
  ACCESSORS(DHAX_Graphics_View* ,containing_image_view)
  ACCESSORS(u4* ,meshlab_import_count)
  ACCESSORS(u4* ,freecad_import_count)
+
+ ACCESSORS(QString ,image_file_path)
 
  QWidget* temp;
 
