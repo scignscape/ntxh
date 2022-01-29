@@ -169,10 +169,21 @@ RET_Type _maxes_averaged(COUNTS_Type& counts, INDICES_Type& indices)
  return (RET_Type) result / count;
 }
 
-QColor Simple_Rectangle_Annotation::get_color_mean()
+QColor Simple_Rectangle_Annotation::get_occurant_color_mean(u1 number_of_iterations, u1 rounding_factor)
 {
- //QVector<int> MainWindow::get_mean_rgb_for_img(const QImage img){
+ QVector<u4> red_counts(256);
+ QVector<u4> green_counts(256);
+ QVector<u4> blue_counts(256);
 
+ QVector<u4> rgb[3]{red_counts, green_counts, blue_counts};
+
+ get_occurants_vectors(rgb);
+
+ return get_occurant_color_mean(rgb, number_of_iterations, rounding_factor);
+}
+
+void Simple_Rectangle_Annotation::get_occurants_vectors(QVector<u4> (&result) [3])
+{
  QRectF ai = against_image_coords();
 
  u2 x1 = ai.topLeft().x() * containing_image_->width();
@@ -183,9 +194,6 @@ QColor Simple_Rectangle_Annotation::get_color_mean()
 
  QRgb* image_line;
 
- QVector<u4> red_counts(256);
- QVector<u4> green_counts(256);
- QVector<u4> blue_counts(256);
 
  for(u2 y = y1 ; y < y2 ; ++y)
  {
@@ -195,27 +203,80 @@ QColor Simple_Rectangle_Annotation::get_color_mean()
    QColor c(image_line[x]);
 //   qDebug() << "x = " << x << ", y = " << y << ": " << qRed(image_line[x]) << " | "
 //     << qGreen(image_line[x]) << "|" << qBlue(image_line[x]);
-   ++red_counts[qRed(image_line[x])];
-   ++green_counts[qGreen(image_line[x])];
-   ++blue_counts[qBlue(image_line[x])];
+   ++result[0][qRed(image_line[x])];
+   ++result[1][qGreen(image_line[x])];
+   ++result[2][qBlue(image_line[x])];
   }
  }
+}
 
- QVector<u1> maxes;
-// auto it = std::max_element(red_counts.begin(), red_counts.end());
-// while (it != red_counts.end())
-// {
-//  maxes.push_back(std::distance(red_counts.begin(), it));
-//  it = std::find(std::next(it), red_counts.end(), *it);
-// }
+QVector<u4> _simplify_by_rounding(const QVector<u4>& original, u1 rounding_factor)
+{
+ if(rounding_factor <= 1)
+   return original;
 
+ u1 size = original.size() / rounding_factor + (bool) original.size() % rounding_factor;
+ QVector<u4> result(size);
 
- u1 red_mean = _maxes_averaged(red_counts, maxes);
- maxes.clear();
- u1 green_mean = _maxes_averaged(green_counts, maxes);
- maxes.clear();
- u1 blue_mean = _maxes_averaged(blue_counts, maxes);
- maxes.clear();
+ auto it = original.begin();
+ s2 rest = 255;
+ for(u1 index = 0; //oindex = 0,
+      //rest = 255;
+   rest > 0; //oindex += rounding_factor,
+     rest -= rounding_factor, ++index)
+ {
+  u1 gap = qMin(rounding_factor, (u1) rest);
+  if(index > 0)
+    it = std::next(it, gap);
+  result[index] = std::accumulate(it, std::next(it, gap), (u4) 0);
+ }
+ return result;
+}
+
+QColor Simple_Rectangle_Annotation::get_occurant_color_mean(QVector<u4> rgb[3], u1 number_of_iterations, u1 rounding_factor)
+{
+ //QVector<int> MainWindow::get_mean_rgb_for_img(const QImage img){
+
+ static QVector<u1> maxes;
+
+ static auto cut = [](QVector<u4>& source)
+ {
+  for(u1 index : maxes)
+  {
+   source[index] = 0;
+  }
+ };
+
+ QVector<u1> red_max_occurants(number_of_iterations);
+ QVector<u1> green_max_occurants(number_of_iterations);
+ QVector<u1> blue_max_occurants(number_of_iterations);
+
+ QVector<u4> red_counts = _simplify_by_rounding(rgb[0], rounding_factor);
+ QVector<u4> green_counts = _simplify_by_rounding(rgb[1], rounding_factor);
+ QVector<u4> blue_counts = _simplify_by_rounding(rgb[2], rounding_factor);
+
+ for(u1 i = 0; i < number_of_iterations; ++i)
+ {
+  u1 red_max_occurant = _maxes_averaged(red_counts, maxes);
+  red_max_occurants[i] = red_max_occurant;
+  cut(red_counts);
+  maxes.clear();
+  u1 green_max_occurant = _maxes_averaged(green_counts, maxes);
+  green_max_occurants[i] = green_max_occurant;
+  cut(green_counts);
+  maxes.clear();
+  u1 blue_max_occurant = _maxes_averaged(blue_counts, maxes);
+  blue_max_occurants[i] = blue_max_occurant;
+  cut(blue_counts);
+  maxes.clear();
+ }
+
+ u1 red_mean =
+   (std::accumulate(red_max_occurants.begin(), red_max_occurants.end(), (u4) 0) / number_of_iterations) * rounding_factor;
+ u1 green_mean =
+   (std::accumulate(green_max_occurants.begin(), green_max_occurants.end(), (u4) 0) / number_of_iterations) * rounding_factor;
+ u1 blue_mean =
+   (std::accumulate(blue_max_occurants.begin(), blue_max_occurants.end(), (u4) 0) / number_of_iterations) * rounding_factor;
 
  return QColor(red_mean, green_mean, blue_mean);
 }

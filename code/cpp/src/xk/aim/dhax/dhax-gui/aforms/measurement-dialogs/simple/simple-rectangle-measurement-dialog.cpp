@@ -158,7 +158,7 @@ Simple_Rectangle_Measurement_Dialog::Simple_Rectangle_Measurement_Dialog(Simple_
  info_layout_->addRow(add_ratio_glyph("Bottom Margin"), parameter_labels_[Parameters::r8_bottom_margin_against_image]); //  = new_QLabel(ms.margins_against_image[D::bottom]);
  info_layout_->addRow(add_ratio_glyph("Bottom Left Margin"), parameter_labels_[Parameters::r8_bottom_left_margin_against_image]); //  = new_QLabel(ms.margins_against_image[D::bottom_left]);
 
- QColor qc = ann->get_color_mean();
+ QColor qc = ann->get_occurant_color_mean();
 
  solid_color_labels_.resize(1);
  //solid_color_labels_[0] = new QLabel(this);
@@ -176,7 +176,7 @@ Simple_Rectangle_Measurement_Dialog::Simple_Rectangle_Measurement_Dialog(Simple_
 
  //fill_solid_color_label(solid_color_labels_[0], qc);
 
- info_layout_->addRow("Additive Color Mean", solid_color_labels_[0]);
+ info_layout_->addRow("Occurant Color Mean (10 iterations)", solid_color_labels_[0]);
 
 
  info_frame_->setLayout(info_layout_);
@@ -291,10 +291,60 @@ void Simple_Rectangle_Measurement_Dialog::show_solid_color_label_context_menu(co
   generate_overlay_file(scl); // scl->color();
  });
 
+ menu->addAction("Generate Occurant Color Mean Summary File", [this, scl]
+ {
+  generate_occurant_color_mean_summary_file(); // scl->color();
+ });
+
  qDebug() << "pos = " << pos;
 
  menu->popup(scl->mapToGlobal(pos));
 }
+
+void Simple_Rectangle_Measurement_Dialog::generate_occurant_color_mean_summary_file()
+{
+ QFileInfo qfi(image_file_path_);
+ static QString path_pattern = "%1/%2-o-means.png";
+ QString path = path_pattern.arg(qfi.absolutePath()).arg(qfi.completeBaseName());
+ qDebug() << path;
+
+ QString sel = QFileDialog::getSaveFileName(this, "Enter or Select File Name", path);
+ if(sel.isEmpty())
+   return;
+
+ QColor colors[9][9];
+
+ QVector<u4> red_counts(256);
+ QVector<u4> green_counts(256);
+ QVector<u4> blue_counts(256);
+
+ QVector<u4> rgb[3]{red_counts, green_counts, blue_counts};
+
+ annotation_->get_occurants_vectors(rgb);
+
+ for(u1 r = 1, row = 0; row < 9; ++row, r += 2) // rounding factor from 1 to 17  (17 * 15 = 255)
+ {
+  for(u1 i = 1, col = 0; col < 9; ++col, i += 3) // iterations from 1 to 25
+  {
+   QColor c = annotation_->get_occurant_color_mean(rgb, i, r);
+   colors[row][col] = c;
+  }
+ }
+
+ QPixmap qpx(270, 270);
+ QPainter pr(&qpx);
+ pr.setPen(Qt::NoPen);
+ for(u1 x = 0, row = 0; row < 9; ++row, x += 30)
+ {
+  for(u1 y = 0, col = 0; col < 9; ++col, y += 30)
+  {
+   pr.setBrush(colors[row][col]);
+   pr.drawRect(x, y, 30, 30);
+  }
+ }
+ qpx.save(path);
+}
+
 
 Simple_Rectangle_Measurement_Dialog::~Simple_Rectangle_Measurement_Dialog()
 {

@@ -94,6 +94,8 @@ class Simple_Rectangle_Measurement_Dialog : public QDialog
  void show_solid_color_label_context_menu(const QPoint& pos);
  void generate_overlay_file(Solid_Color_Label* scl);
 
+ void generate_occurant_color_mean_summary_file();
+
 
 public:
 

@@ -72,8 +72,11 @@ public:
 
  Measurements& get_measurements();
 
- QColor get_color_mean();
+ QColor get_occurant_color_mean(u1 number_of_iterations = 10, u1 rounding_factor = 1);
+ QColor get_occurant_color_mean(QVector<u4> rgb[3], u1 number_of_iterations, u1 rounding_factor);
  QRectF against_image_coords();
+
+ void get_occurants_vectors(QVector<u4> (&result) [3]);
 
 
 protected:
