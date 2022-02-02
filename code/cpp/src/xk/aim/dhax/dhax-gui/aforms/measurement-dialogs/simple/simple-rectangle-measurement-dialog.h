@@ -72,6 +72,10 @@ class Simple_Rectangle_Measurement_Dialog : public QDialog
 // QVector<Solid_Color_Label*> parameter_labels_;
 
 
+ QVector<u4> (*color_mean_counts_) [3];
+
+// int test[3];
+// int* ttest;
 
 // QLabel* width_label_;
 // QLabel* height_label_;

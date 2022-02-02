@@ -280,3 +280,18 @@ QColor Simple_Rectangle_Annotation::get_occurant_color_mean(QVector<u4> rgb[3], 
 
  return QColor(red_mean, green_mean, blue_mean);
 }
+
+QColor Simple_Rectangle_Annotation::get_additive_color_mean(QVector<u4> rgb[3])
+{
+ n8 sums [3] {0};
+ n8 counts [3] {0};
+
+ for(u2 index = 0; index < 256; ++index)
+   for(u1 c = 0; c < 3; ++c)
+   {
+    sums[c] += rgb[c][index] * index;
+    counts[c] += rgb[c][index];
+   }
+
+ return QColor((int) sums[0] / counts[0], (int) sums[1] / counts[1], (int) sums[2] / counts[2]);
+}

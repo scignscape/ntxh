@@ -78,6 +78,8 @@ public:
 
  void get_occurants_vectors(QVector<u4> (&result) [3]);
 
+ QColor get_additive_color_mean(QVector<u4> rgb[3]);
+
 
 protected:
 

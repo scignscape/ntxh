@@ -54,7 +54,7 @@ void Solid_Color_Label::paintEvent(QPaintEvent* e)
 
 Simple_Rectangle_Measurement_Dialog::Simple_Rectangle_Measurement_Dialog(Simple_Rectangle_Annotation* ann,
   QWidget* parent)
-  :  QDialog(parent)
+  :  QDialog(parent), color_mean_counts_(nullptr)
 {
  annotation_ = ann;
  main_layout_ = new QVBoxLayout;
@@ -158,19 +158,47 @@ Simple_Rectangle_Measurement_Dialog::Simple_Rectangle_Measurement_Dialog(Simple_
  info_layout_->addRow(add_ratio_glyph("Bottom Margin"), parameter_labels_[Parameters::r8_bottom_margin_against_image]); //  = new_QLabel(ms.margins_against_image[D::bottom]);
  info_layout_->addRow(add_ratio_glyph("Bottom Left Margin"), parameter_labels_[Parameters::r8_bottom_left_margin_against_image]); //  = new_QLabel(ms.margins_against_image[D::bottom_left]);
 
+
+// color_mean_counts_ = new QVector<u4> [3];
+// color_mean_counts_[0] = QVector<u4> {256};
+// color_mean_counts_[1] = QVector<u4> {256};
+// color_mean_counts_[2] = QVector<u4> {256};
+
+// QVector<u4> red_counts(256);
+// QVector<u4> green_counts(256);
+// QVector<u4> blue_counts(256);
+
+ //QVector<u4> rgb[3]{red_counts, green_counts, blue_counts};
+
+ //QVector<u4> (*rgb) [3] = new QVector<u4> [3]{red_counts, green_counts, blue_counts};
+// QVector<u4> (*rgb) [3] = (QVector<u4> (*)[3]) malloc(3 * sizeof(QVector<u4>));
+
+ color_mean_counts_ = (QVector<u4> (*) [3]) new QVector<u4> [3] {QVector<u4>(256), QVector<u4>(256), QVector<u4>(256)};
+// *color_mean_counts_[0] = QVector<u4>(256);
+// *color_mean_counts_[1] = QVector<u4>(256);
+// *color_mean_counts_[2] = QVector<u4>(256);
+
+   //new QVector<u4> [3]{red_counts, green_counts, blue_counts};
+
+ annotation_->get_occurants_vectors(*color_mean_counts_);
+
+// ann->get_occurants_vectors(color_mean_counts_);
+// QColor qc = ann->get_occurant_color_mean(color_mean_counts_);
+
+ //ttest = new int[3];
+
  QColor qc = ann->get_occurant_color_mean();
 
- solid_color_labels_.resize(1);
- //solid_color_labels_[0] = new QLabel(this);
- solid_color_labels_[0] = new Solid_Color_Label(qc, 0, "additive-color-mean");
+ solid_color_labels_.resize(2);
+ solid_color_labels_[0] = new Solid_Color_Label(qc, 0, "occurant-color-mean");
 
  connect(solid_color_labels_[0], &Solid_Color_Label::customContextMenuRequested,
    this, &Simple_Rectangle_Measurement_Dialog::show_solid_color_label_context_menu);
 
-/*   [this] (const QPoint& pos)
- {
-  qDebug() << "pos = " << pos;
-// }*/
+//   [this] (const QPoint& pos)
+// {
+//  qDebug() << "pos = " << pos;
+// }
 
  //qDebug() << "qc = " << qc;
 
@@ -178,6 +206,15 @@ Simple_Rectangle_Measurement_Dialog::Simple_Rectangle_Measurement_Dialog(Simple_
 
  info_layout_->addRow("Occurant Color Mean (10 iterations)", solid_color_labels_[0]);
 
+ QColor qc1 = ann->get_additive_color_mean(*color_mean_counts_);
+
+ //solid_color_labels_[0] = new QLabel(this);
+ solid_color_labels_[1] = new Solid_Color_Label(qc1, 1, "additive-color-mean");
+
+ connect(solid_color_labels_[1], &Solid_Color_Label::customContextMenuRequested,
+   this, &Simple_Rectangle_Measurement_Dialog::show_solid_color_label_context_menu);
+
+ info_layout_->addRow("Additive Color Mean", solid_color_labels_[1]);
 
  info_frame_->setLayout(info_layout_);
 
@@ -314,29 +351,30 @@ void Simple_Rectangle_Measurement_Dialog::generate_occurant_color_mean_summary_f
 
  QColor colors[9][9];
 
- QVector<u4> red_counts(256);
- QVector<u4> green_counts(256);
- QVector<u4> blue_counts(256);
-
- QVector<u4> rgb[3]{red_counts, green_counts, blue_counts};
-
- annotation_->get_occurants_vectors(rgb);
+ QColor am = annotation_->get_additive_color_mean(*color_mean_counts_);
 
  for(u1 r = 1, row = 0; row < 9; ++row, r += 2) // rounding factor from 1 to 17  (17 * 15 = 255)
  {
   for(u1 i = 1, col = 0; col < 9; ++col, i += 3) // iterations from 1 to 25
   {
-   QColor c = annotation_->get_occurant_color_mean(rgb, i, r);
+   QColor c = annotation_->get_occurant_color_mean(*color_mean_counts_, i, r); //*color_mean_counts
    colors[row][col] = c;
   }
  }
 
- QPixmap qpx(270, 270);
+ QPixmap qpx(270, 300);
  QPainter pr(&qpx);
  pr.setPen(Qt::NoPen);
- for(u1 x = 0, row = 0; row < 9; ++row, x += 30)
+
+ pr.setBrush(Qt::white);
+ pr.drawRect(0, 0, 270, 30);
+
+ pr.setBrush(am);
+ pr.drawRect(2, 2, 266, 27);
+
+ for(u2 x = 0, row = 0; row < 9; ++row, x += 30)
  {
-  for(u1 y = 0, col = 0; col < 9; ++col, y += 30)
+  for(u2 y = 30, col = 0; col < 9; ++col, y += 30)
   {
    pr.setBrush(colors[row][col]);
    pr.drawRect(x, y, 30, 30);
@@ -348,5 +386,5 @@ void Simple_Rectangle_Measurement_Dialog::generate_occurant_color_mean_summary_f
 
 Simple_Rectangle_Measurement_Dialog::~Simple_Rectangle_Measurement_Dialog()
 {
-
+ delete [] color_mean_counts_;
 }
