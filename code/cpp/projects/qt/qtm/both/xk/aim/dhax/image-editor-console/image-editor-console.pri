@@ -14,6 +14,12 @@ TEMPLATE = app
 INCLUDEPATH += $$SRC_DIR
 
 
+QMAKE_CC = gcc-7
+QMAKE_CXX = g++-7
+
+CONFIG += c++17
+
+
 DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 
 include($$ROOT_DIR/../preferred/dhax.pri)

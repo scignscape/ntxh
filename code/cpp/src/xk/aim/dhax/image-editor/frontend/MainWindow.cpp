@@ -4,6 +4,7 @@
 //?#include "ui_MainWindow.h"
 
 #include "backend/CommandPattern/dhax/extend-mod-3-command.h"
+#include "backend/CommandPattern/dhax/quantize-3x3-command.h"
 
 
 #include <QFileDialog>
@@ -21,6 +22,7 @@
 
 
 #include "InputDialog.h"
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -86,7 +88,7 @@ MainWindow::MainWindow(QWidget *parent) :
  heuristic_mask_action_ = new QAction("Heuristic Masl", this);
 
  extend_mod_3_action_ = new QAction("Extend Mod 3 Action", this);
-
+ quantize_3x3_action_ = new QAction("Quantize 3x3", this);
 
 
  connect(open_action_, &QAction::triggered, this, &MainWindow::on_actionOpen_triggered);
@@ -101,6 +103,7 @@ MainWindow::MainWindow(QWidget *parent) :
  connect(heuristic_mask_action_, &QAction::triggered, this, &MainWindow::handle_heuristic_mask);
 
  connect(extend_mod_3_action_, &QAction::triggered, this, &MainWindow::handle_extend_mod_3);
+ connect(quantize_3x3_action_, &QAction::triggered, this, &MainWindow::handle_quantize_3x3);
 
  connect(edge_detect_action_, &QAction::triggered, this, &MainWindow::on_actionEdge_detect_triggered);
 
@@ -115,6 +118,7 @@ MainWindow::MainWindow(QWidget *parent) :
   menu->addAction(edge_detect_action_);
   menu->addAction(heuristic_mask_action_);
   menu->addAction(extend_mod_3_action_);
+  menu->addAction(quantize_3x3_action_);
 
 
 
@@ -327,6 +331,56 @@ void MainWindow::handle_extend_mod_3()
   pending_save_modifications_ = true;
  }
 }
+
+void MainWindow::handle_quantize_3x3()
+{
+ if(active_image_)
+ {
+  Quantize_3x3_Command* cmd = new Quantize_3x3_Command(*active_image_);
+  std::shared_ptr<ICommand> c1(cmd);
+  command_manager_.execute(c1);
+  qDebug() << "quantize 3x3";
+  active_image_->updateBuffer();
+  pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
+
+  secondary_pixel_buffer_ = cmd->sample_compress_pixel_buffer();
+  u2 scw = cmd->sample_compress_width();
+  u2 sch = cmd->sample_compress_height();
+
+  Extend_Mod_3_Command::proceed(scw, sch, secondary_pixel_buffer_, scw, sch);
+
+//  Quantize_3x3_Command::re_extend(secondary_pixel_buffer_, tertiary_pixel_buffer_,
+//    scw, sch, 3);
+
+  Quantize_3x3_Command::reset_sample_compress_pixel_buffer(tertiary_pixel_buffer_, scw, sch);
+  Quantize_3x3_Command::proceed(scw, sch, secondary_pixel_buffer_, tertiary_pixel_buffer_);
+
+  Quantize_3x3_Command::re_extend(tertiary_pixel_buffer_, secondary_pixel_buffer_,
+    scw / 3, sch / 3, 3);
+
+  Quantize_3x3_Command::re_extend(secondary_pixel_buffer_, tertiary_pixel_buffer_,
+    scw, sch, 3);
+
+
+//  active_image_->getPixelBuffer() = secondary_pixel_buffer_;
+//  active_image_->setW(scw);
+//  active_image_->setH(sch);
+
+
+//  Quantize_3x3_Command::re_extend(secondary_pixel_buffer_, tertiary_pixel_buffer_,
+//    scw, sch, 3);
+
+  active_image_->getPixelBuffer() = tertiary_pixel_buffer_;
+  active_image_->setW(scw * 3);
+  active_image_->setH(sch * 3);
+
+  active_image_->updateBuffer();
+  pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
+
+  pending_save_modifications_ = true;
+ }
+}
+
 
 void MainWindow::handle_heuristic_mask()
 {

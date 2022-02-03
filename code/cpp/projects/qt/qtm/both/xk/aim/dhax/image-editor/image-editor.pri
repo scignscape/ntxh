@@ -70,6 +70,7 @@ HEADERS += \
   $$SRC_DIR/backend/CommandPattern/sharpenCommand.h \
   $$SRC_DIR/backend/CommandPattern/utils.h \
   $$SRC_DIR/backend/CommandPattern/dhax/extend-mod-3-command.h \
+  $$SRC_DIR/backend/CommandPattern/dhax/quantize-3x3-command.h \
   $$SRC_DIR/backend/Image.h \
   $$SRC_DIR/backend/Pixel.h \
   $$SRC_DIR/backend/utils.h \
@@ -98,6 +99,7 @@ SOURCES += \
   $$SRC_DIR/backend/CommandPattern/sharpenCommand.cpp \
   $$SRC_DIR/backend/CommandPattern/utils.cpp \
   $$SRC_DIR/backend/CommandPattern/dhax/extend-mod-3-command.cpp \
+  $$SRC_DIR/backend/CommandPattern/dhax/quantize-3x3-command.cpp \
   $$SRC_DIR/backend/Image.cpp \
   $$SRC_DIR/backend/Pixel.cpp \
   $$SRC_DIR/backend/utils.cpp \

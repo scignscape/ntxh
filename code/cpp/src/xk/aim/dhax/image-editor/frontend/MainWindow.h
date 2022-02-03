@@ -11,6 +11,7 @@
 #include "../backend/CommandPattern/Commands.h"
 
 #include "accessors.h"
+#include "global-types.h"
 
 #include <QDialog>
 
@@ -37,6 +38,7 @@ class MainWindow : public QMainWindow
  QAction* edge_detect_action_;
  QAction* heuristic_mask_action_;
  QAction* extend_mod_3_action_;
+ QAction* quantize_3x3_action_;
 
  QWidget* central_widget_;
 
@@ -58,6 +60,9 @@ class MainWindow : public QMainWindow
  QLabel* image_name_;
  QLabel* image_size_;
 
+ std::vector<Pixel> secondary_pixel_buffer_;
+ std::vector<Pixel> tertiary_pixel_buffer_;
+
 protected:
 
  void closeEvent(QCloseEvent *event) override;
@@ -73,9 +78,13 @@ public:
 
  ACCESSORS(QString ,default_image_folder)
 
+
+
+
 private slots:
  void handle_heuristic_mask();
  void handle_extend_mod_3();
+ void handle_quantize_3x3();
 
  void on_actionOpen_triggered();
 
