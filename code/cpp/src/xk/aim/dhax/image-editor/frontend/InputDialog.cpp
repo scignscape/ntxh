@@ -49,27 +49,32 @@ InputDialog::InputDialog(QWidget* parent, const QList<QString>& field_labels, co
 
  QFormLayout* layout = new QFormLayout(this);
 
- u1 index = 0;
- for(const QString& field : field_labels)
+ for(const Input_Field& infield : input_fields)
  {
+  QString field = field_labels[infield.label_index];
   QLabel* label = new QLabel(field, this);
-  QSpinBox* edit = new QSpinBox(this);
 
-  Input_Field infield = input_fields_[index];
-  if(infield.int_min == 0 && infield.int_max == 0)
+  if(infield.int_min == infield.int_max)
   {
-   edit->setMinimum(infield.double_min);
-   edit->setMaximum(infield.double_max);
+   QDoubleSpinBox* dedit = new QDoubleSpinBox(this);
+   dedit->setMinimum(infield.double_min);
+   dedit->setMaximum(infield.double_max);
+   dedit->setSingleStep(infield.increment);
+   dedit->setValue(infield.default_value);
+   dedit->setDecimals(2 - infield.int_min);
+   layout->insertRow(infield.layout_index, label, dedit);
+   values_ << dedit;
   }
   else
   {
+   QSpinBox* edit = new QSpinBox(this);
    edit->setMinimum(infield.int_min);
    edit->setMaximum(infield.int_max);
+   edit->setValue((s4)infield.default_value);
+   edit->setSingleStep((s4)infield.increment);
+   layout->insertRow(infield.layout_index, label, edit);
+   values_ << edit;
   }
-  edit->setSingleStep(infield.increment);
-  edit->setValue(0);
-  layout->addRow(label, edit);
-  values_ << edit;
  }
 
  QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
@@ -87,22 +92,50 @@ InputDialog::InputDialog(QWidget* parent, const QList<QString>& field_labels, co
 }
 
 
-QList<int> InputDialog::getFields(QWidget *parent, QList<QString> fields, int min, int max, int step, bool *ok)
+QList<QPair<int, double>>
+InputDialog::getFields(QWidget* parent, QList<QString>& field_labels, QVector<Input_Field>& input_fields, bool *ok)
 {
- InputDialog* dialog = new InputDialog(fields, min, max, step, parent);
+ InputDialog* dialog = new InputDialog(parent, field_labels, input_fields);
 
- QList<int> list;
+ QList<QPair<int, double>> result;
 
  bool okInput = dialog->exec();
 
- if(okInput){
+ if(okInput)
+ {
   *ok = okInput;
   foreach(auto value, dialog->values_)
   {
-   list << value->value();
+   if(QSpinBox* sb = qobject_cast<QSpinBox*>(value))
+     result << QPair<int, double>{((QSpinBox*)value)->value(), 0.};
+   else
+     result << QPair<int, double>{0, ((QDoubleSpinBox*)value)->value()};
   }
  }
 
  dialog->deleteLater();
- return list;
+ return result;
 }
+
+
+QList<int> InputDialog::getFields(QWidget *parent, QList<QString>& fields, int min, int max, int step, bool *ok)
+{
+ InputDialog* dialog = new InputDialog(fields, min, max, step, parent);
+
+ QList<int> result;
+
+ bool okInput = dialog->exec();
+
+ if(okInput)
+ {
+  *ok = okInput;
+  foreach(auto value, dialog->values_)
+  {
+   result << ((QSpinBox*)value)->value();
+  }
+ }
+
+ dialog->deleteLater();
+ return result;
+}
+

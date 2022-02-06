@@ -388,15 +388,25 @@ void MainWindow::handle_shear_transform(Skew_Shear_Rotate ssr)
     bool ok = false;
     QList<QString> fields = {"Horizontal Skew", "Horizontal Shear",
        "Vertical Skew", "Vertical Shear", "Rotate"};
-    QList<int> values = InputDialog::getFields(this,
-                                               fields,
-                                               0, 255, 1, &ok);
+
+    QVector<InputDialog::Input_Field> infields;
+
+    InputDialog::_infield(20, 1, -180, 180).index_into(infields);
+    InputDialog::_infield(0.2, 0.01, {-255, 255}, -1).index_into(infields);
+    InputDialog::_infield(0, 1, -180, 180).index_into(infields);
+    InputDialog::_infield(0, 0.01, {-255, 255}, -1).index_into(infields);
+    InputDialog::_infield(0, 1, -180, 180).index_into(infields);
+
+    QList<QPair<int, double>> values = InputDialog::getFields(this, fields, infields, &ok);
+//    QList<int> values = InputDialog::getFields(this,
+//                                               fields,
+//                                               0, 255, 1, &ok);
     if(ok)
     {
-     xrotate = values[0] + values[4]; //QInputDialog::getDouble(this, "Enter Rotation", "Amount:", 20, -180, 180, 1, &okd, Qt::WindowFlags(), 1);
-     yrotate = values[2] + values[4];
-     xshear = values[1];
-     yshear = values[3];
+     xrotate = values[0].first + values[4].first; //QInputDialog::getDouble(this, "Enter Rotation", "Amount:", 20, -180, 180, 1, &okd, Qt::WindowFlags(), 1);
+     yrotate = values[2].first + values[4].first;
+     xshear = values[1].second;
+     yshear = values[3].second;
      break;
     }
    }
