@@ -71,12 +71,14 @@ HEADERS += \
   $$SRC_DIR/backend/CommandPattern/utils.h \
   $$SRC_DIR/backend/CommandPattern/dhax/extend-mod-3-command.h \
   $$SRC_DIR/backend/CommandPattern/dhax/quantize-3x3-command.h \
+  $$SRC_DIR/backend/CommandPattern/dhax/shear-command.h \
   $$SRC_DIR/backend/Image.h \
   $$SRC_DIR/backend/Pixel.h \
   $$SRC_DIR/backend/utils.h \
   $$SRC_DIR/frontend/InputDialog.h \
   $$SRC_DIR/frontend/MainWindow.h \
   $$SRC_DIR/frontend/main-window-dialog.h \
+
 
 RESOURCES += \
   $$SRC_DIR/frontend/resources.qrc
@@ -100,6 +102,7 @@ SOURCES += \
   $$SRC_DIR/backend/CommandPattern/utils.cpp \
   $$SRC_DIR/backend/CommandPattern/dhax/extend-mod-3-command.cpp \
   $$SRC_DIR/backend/CommandPattern/dhax/quantize-3x3-command.cpp \
+  $$SRC_DIR/backend/CommandPattern/dhax/shear-command.cpp \
   $$SRC_DIR/backend/Image.cpp \
   $$SRC_DIR/backend/Pixel.cpp \
   $$SRC_DIR/backend/utils.cpp \

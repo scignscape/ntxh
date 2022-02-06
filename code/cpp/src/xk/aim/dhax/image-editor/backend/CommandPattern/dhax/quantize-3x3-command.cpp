@@ -60,9 +60,13 @@ Pixel _average(std::vector<Pixel>& pixel_buffer, u1 range, u2 x, u2 y, u2 w)
 
 
 void Quantize_3x3_Command::reset_sample_compress_pixel_buffer(std::vector<Pixel>& pixel_buffer,
-  u2 pre_compress_width, u2 pre_compress_height)
+  u2 pre_compress_width, u2 pre_compress_height, u2& post_compress_width, u2& post_compress_height, u1 range)
 {
- pixel_buffer.reserve(pre_compress_width * pre_compress_height);
+ pixel_buffer.clear();
+ post_compress_width = pre_compress_width / range;
+ post_compress_height = pre_compress_height / range;
+
+ pixel_buffer.reserve(post_compress_width * post_compress_height);
 }
 
 void Quantize_3x3_Command::reset_sample_compress_pixel_buffer(u2 pre_compress_width, u2 pre_compress_height)

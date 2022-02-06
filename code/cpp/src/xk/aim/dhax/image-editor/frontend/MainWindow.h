@@ -32,6 +32,9 @@ class MainWindow : public QMainWindow
  QAction* zoom_dec_action_;
  QAction* zoom_adapt_action_;
  QAction* grayscale_action_;
+ QAction* contrast_action_;
+ QAction* brightness_action_;
+ QAction* color_mask_action_;
  QAction* blur_action_;
  QAction* sharpen_action_;
  QAction* emboss_action_;
@@ -39,6 +42,15 @@ class MainWindow : public QMainWindow
  QAction* heuristic_mask_action_;
  QAction* extend_mod_3_action_;
  QAction* quantize_3x3_action_;
+ QAction* quantize_9x9_action_;
+ QAction* quantize_27x27_action_;
+ QAction* xshear_action_;
+ QAction* yshear_action_;
+ QAction* xskew_action_;
+ QAction* yskew_action_;
+ QAction* rotate_action_;
+ QAction* skew_shear_action_;
+
 
  QWidget* central_widget_;
 
@@ -63,6 +75,10 @@ class MainWindow : public QMainWindow
  std::vector<Pixel> secondary_pixel_buffer_;
  std::vector<Pixel> tertiary_pixel_buffer_;
 
+ enum class Skew_Shear_Rotate {
+   N_A, XSkew, YSkew, XShear, YShear, Rotate, Generic
+ };
+
 protected:
 
  void closeEvent(QCloseEvent *event) override;
@@ -85,6 +101,9 @@ private slots:
  void handle_heuristic_mask();
  void handle_extend_mod_3();
  void handle_quantize_3x3();
+ void handle_quantize_9x9();
+ void handle_quantize_27x27();
+ void handle_shear_transform(Skew_Shear_Rotate ssr);
 
  void on_actionOpen_triggered();
 

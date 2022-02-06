@@ -26,6 +26,18 @@ void Image::pureFilename() {
     filename = qFilename.fileName();
 }
 
+void Image::reconstruct_pixel_buffer(const QImage& new_image)
+{
+ pixelBuffer.clear();
+ w = new_image.width();
+ h = new_image.height();
+ for (int y = 0; y < h; y++) //rows
+   for (int x = 0; x < w; x++)
+   { //columns
+    pixelBuffer.emplace_back(Pixel::fromQColor(new_image.pixelColor(x, y)));
+   }
+}
+
 void Image::initPixelBuffer() {
     for (int y = 0; y < h; y++) //rows
         for (int x = 0; x < w; x++) { //columns

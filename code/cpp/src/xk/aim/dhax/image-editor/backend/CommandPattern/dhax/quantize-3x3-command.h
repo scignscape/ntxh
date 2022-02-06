@@ -25,7 +25,9 @@ private:
  u1 range_;
 
  void proceed(u1 range);
+
  void reset_sample_compress_pixel_buffer(u2 pre_compress_width, u2 pre_compress_height);
+
 
 public:
  explicit Quantize_3x3_Command(Image& image, u1 range = 3);
@@ -36,14 +38,15 @@ public:
  ACCESSORS(u2 ,sample_compress_height)
 
  static void re_extend(std::vector<Pixel>& source, std::vector<Pixel>& target,
-    u2 source_width, u2 source_height, u1 factor);
+    u2 source_width, u2 source_height, u1 factor = 3);
 
  static void proceed(u2 w, u2 h,
    std::vector<Pixel>& pixel_buffer, std::vector<Pixel>& sample_compress_pixel_buffer, u1 range = 3);
 
 
- static void reset_sample_compress_pixel_buffer(std::vector<Pixel>& pixel_buffer,
-   u2 pre_compress_width, u2 pre_compress_height);
+ static void reset_sample_compress_pixel_buffer(std::vector<Pixel>& pixel_buffer, u2 pre_compress_width,
+   u2 pre_compress_height, u2& post_compress_width, u2& post_compress_height, u1 range = 3);
+
 
  void execute() override;
 

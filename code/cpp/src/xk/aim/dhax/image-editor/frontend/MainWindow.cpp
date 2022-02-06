@@ -5,6 +5,11 @@
 
 #include "backend/CommandPattern/dhax/extend-mod-3-command.h"
 #include "backend/CommandPattern/dhax/quantize-3x3-command.h"
+#include "backend/CommandPattern/dhax/shear-command.h"
+
+#include "backend/CommandPattern/contrastCommand.h"
+#include "backend/CommandPattern/brightnessCommand.h"
+#include "backend/CommandPattern/colorMaskCommand.h"
 
 
 #include <QFileDialog>
@@ -13,6 +18,8 @@
 #include <QInputDialog>
 #include <QList>
 #include <QGraphicsView>
+
+#include <QInputDialog>
 
 #include <QMenu>
 
@@ -89,13 +96,27 @@ MainWindow::MainWindow(QWidget *parent) :
 
  extend_mod_3_action_ = new QAction("Extend Mod 3 Action", this);
  quantize_3x3_action_ = new QAction("Quantize 3x3", this);
+ quantize_9x9_action_ = new QAction("Quantize 9x9", this);
+ quantize_27x27_action_ = new QAction("Quantize 27x27", this);
 
+ xshear_action_ = new QAction("Horizontal Shear Transform", this);
+ yshear_action_ = new QAction("Vertical Shear Transform", this);
+ xskew_action_ = new QAction("Horizontal Skew Transform", this);
+ yskew_action_ = new QAction("Vertical Skew Transform", this);
+ rotate_action_ = new QAction("Rotate", this);
+ contrast_action_ = new QAction("Contrast", this);
+ brightness_action_ = new QAction("Brightness", this);
+ color_mask_action_ = new QAction("Color Mask", this);
+ skew_shear_action_ = new QAction("Skew/Shear", this);
 
  connect(open_action_, &QAction::triggered, this, &MainWindow::on_actionOpen_triggered);
  connect(zoom_inc_action_, &QAction::triggered, this, &MainWindow::on_actionZoomInc_triggered);
  connect(zoom_dec_action_, &QAction::triggered, this, &MainWindow::on_actionZoomDec_triggered);
  connect(zoom_adapt_action_, &QAction::triggered, this, &MainWindow::on_actionZoom_Adapt_triggered);
  connect(grayscale_action_, &QAction::triggered, this, &MainWindow::on_actionGrayscale_triggered);
+ connect(contrast_action_, &QAction::triggered, this, &MainWindow::on_actionContrast_triggered);
+ connect(brightness_action_, &QAction::triggered, this, &MainWindow::on_actionBrightness_triggered);
+ connect(color_mask_action_, &QAction::triggered, this, &MainWindow::on_actionColormask_triggered);
 
  connect(blur_action_, &QAction::triggered, this, &MainWindow::on_actionBlur_triggered);
  connect(sharpen_action_, &QAction::triggered, this, &MainWindow::on_actionSharpen_triggered);
@@ -104,6 +125,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
  connect(extend_mod_3_action_, &QAction::triggered, this, &MainWindow::handle_extend_mod_3);
  connect(quantize_3x3_action_, &QAction::triggered, this, &MainWindow::handle_quantize_3x3);
+ connect(quantize_9x9_action_, &QAction::triggered, this, &MainWindow::handle_quantize_9x9);
+ connect(quantize_27x27_action_, &QAction::triggered, this, &MainWindow::handle_quantize_27x27);
+
+ connect(xshear_action_, &QAction::triggered, this, [this]{handle_shear_transform(Skew_Shear_Rotate::XShear);});
+ connect(yshear_action_, &QAction::triggered, this, [this]{handle_shear_transform(Skew_Shear_Rotate::YShear);});
+ connect(xskew_action_, &QAction::triggered, this, [this]{handle_shear_transform(Skew_Shear_Rotate::XSkew);});
+ connect(yskew_action_, &QAction::triggered, this, [this]{handle_shear_transform(Skew_Shear_Rotate::YSkew);});
+ connect(rotate_action_, &QAction::triggered, this, [this]{handle_shear_transform(Skew_Shear_Rotate::Rotate);});
+ connect(skew_shear_action_, &QAction::triggered, this, [this]{handle_shear_transform(Skew_Shear_Rotate::Generic);});
 
  connect(edge_detect_action_, &QAction::triggered, this, &MainWindow::on_actionEdge_detect_triggered);
 
@@ -112,6 +142,9 @@ MainWindow::MainWindow(QWidget *parent) :
   QMenu* menu = new QMenu(this);
   menu->addAction(open_action_);
   menu->addAction(grayscale_action_);
+  menu->addAction(contrast_action_);
+  menu->addAction(brightness_action_);
+  menu->addAction(color_mask_action_);
   menu->addAction(blur_action_);
   menu->addAction(sharpen_action_);
   menu->addAction(emboss_action_);
@@ -119,8 +152,14 @@ MainWindow::MainWindow(QWidget *parent) :
   menu->addAction(heuristic_mask_action_);
   menu->addAction(extend_mod_3_action_);
   menu->addAction(quantize_3x3_action_);
-
-
+  menu->addAction(quantize_9x9_action_);
+  menu->addAction(quantize_27x27_action_);
+  menu->addAction(xshear_action_);
+  menu->addAction(yshear_action_);
+  menu->addAction(xskew_action_);
+  menu->addAction(yskew_action_);
+  menu->addAction(rotate_action_);
+  menu->addAction(skew_shear_action_);
 
   menu->popup(graphics_view_->mapToGlobal(pos));
  });
@@ -318,6 +357,65 @@ void MainWindow::on_actionRedo_triggered()
 {
 }
 
+
+void MainWindow::handle_shear_transform(Skew_Shear_Rotate ssr)
+{
+ if(active_image_)
+ {
+  bool okd;
+  r8 xshear = 0, yshear = 0, xrotate = 0, yrotate = 0;
+  switch (ssr)
+  {
+  case Skew_Shear_Rotate::N_A: return;
+  case Skew_Shear_Rotate::XSkew:
+   xrotate = QInputDialog::getDouble(this, "Enter Skew Factor", "Amount:", 20, -180, 180, 1, &okd, Qt::WindowFlags(), 1);
+   break;
+  case Skew_Shear_Rotate::XShear:
+   xshear = QInputDialog::getDouble(this, "Enter Shear Factor", "Amount:", 0.2, -255, 255, 3, &okd, Qt::WindowFlags(), 0.01);
+   break;
+  case Skew_Shear_Rotate::YSkew:
+   yrotate = QInputDialog::getDouble(this, "Enter Skew Factor", "Amount:", 20, -180, 180, 1, &okd, Qt::WindowFlags(), 1);
+   break;
+  case Skew_Shear_Rotate::YShear:
+   yshear = QInputDialog::getDouble(this, "Enter Shear Factor", "Amount:", 0.2, -255, 255, 3, &okd, Qt::WindowFlags(), 0.01);
+   break;
+  case Skew_Shear_Rotate::Rotate:
+   xrotate = QInputDialog::getDouble(this, "Enter Rotation", "Amount:", 20, -180, 180, 1, &okd, Qt::WindowFlags(), 1);
+   yrotate = xrotate;
+   break;
+  case Skew_Shear_Rotate::Generic:
+   {
+    bool ok = false;
+    QList<QString> fields = {"Horizontal Skew", "Horizontal Shear",
+       "Vertical Skew", "Vertical Shear", "Rotate"};
+    QList<int> values = InputDialog::getFields(this,
+                                               fields,
+                                               0, 255, 1, &ok);
+    if(ok)
+    {
+     xrotate = values[0] + values[4]; //QInputDialog::getDouble(this, "Enter Rotation", "Amount:", 20, -180, 180, 1, &okd, Qt::WindowFlags(), 1);
+     yrotate = values[2] + values[4];
+     xshear = values[1];
+     yshear = values[3];
+     break;
+    }
+   }
+  }
+
+  //= QInputDialog::getDouble(this, "Enter Shear Factor", "Amouny:", 1.1, -255, 255, 3, &okd, Qt::WindowFlags(), 0.1);
+
+  std::shared_ptr<ICommand> c1(new Shear_Command(*active_image_, xshear, yshear, xrotate, yrotate));
+  command_manager_.execute(c1);
+  qDebug() << "shear_transform";
+  active_image_->updateBuffer();
+  pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
+
+  pending_save_modifications_ = true;
+ }
+
+}
+
+
 void MainWindow::handle_extend_mod_3()
 {
  if(active_image_)
@@ -332,6 +430,111 @@ void MainWindow::handle_extend_mod_3()
  }
 }
 
+void MainWindow::handle_quantize_9x9()
+{
+ if(active_image_)
+ {
+  Quantize_3x3_Command* cmd = new Quantize_3x3_Command(*active_image_);
+  std::shared_ptr<ICommand> c1(cmd);
+  command_manager_.execute(c1);
+  qDebug() << "quantize 27x27";
+
+  //secondary_pixel_buffer_ = cmd->sample_compress_pixel_buffer();
+
+  std::vector<Pixel> compressed_1 = cmd->sample_compress_pixel_buffer();
+  u2 compressed_w_1 = cmd->sample_compress_width();
+  u2 compressed_h_1 = cmd->sample_compress_height();
+  std::vector<Pixel> compressed_2;
+  Extend_Mod_3_Command::proceed(compressed_w_1, compressed_h_1, compressed_1, compressed_w_1, compressed_h_1);
+
+  u2 compressed_w_2;
+  u2 compressed_h_2;
+  Quantize_3x3_Command::reset_sample_compress_pixel_buffer(compressed_2, compressed_w_1, compressed_h_1,
+    compressed_w_2, compressed_h_2);
+
+  Quantize_3x3_Command::proceed(compressed_w_1, compressed_h_1, compressed_1, compressed_2);
+  std::vector<Pixel> undo_1;
+
+  Quantize_3x3_Command::re_extend(compressed_1, undo_1,
+    compressed_w_1, compressed_h_1);
+
+  active_image_->getPixelBuffer() = undo_1;
+  active_image_->setW(compressed_w_1 * 3);
+  active_image_->setH(compressed_h_1 * 3);
+
+  active_image_->updateBuffer();
+  pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
+
+  pending_save_modifications_ = true;
+
+ }
+
+}
+
+
+void MainWindow::handle_quantize_27x27()
+{
+ if(active_image_)
+ {
+  Quantize_3x3_Command* cmd = new Quantize_3x3_Command(*active_image_);
+  std::shared_ptr<ICommand> c1(cmd);
+  command_manager_.execute(c1);
+  qDebug() << "quantize 27x27";
+
+  //secondary_pixel_buffer_ = cmd->sample_compress_pixel_buffer();
+
+  std::vector<Pixel> compressed_1 = cmd->sample_compress_pixel_buffer();
+  u2 compressed_w_1 = cmd->sample_compress_width();
+  u2 compressed_h_1 = cmd->sample_compress_height();
+  std::vector<Pixel> compressed_2;
+
+  Extend_Mod_3_Command::proceed(compressed_w_1, compressed_h_1, compressed_1, compressed_w_1, compressed_h_1);
+
+  u2 compressed_w_2;
+  u2 compressed_h_2;
+  Quantize_3x3_Command::reset_sample_compress_pixel_buffer(compressed_2, compressed_w_1, compressed_h_1,
+    compressed_w_2, compressed_h_2);
+
+  Quantize_3x3_Command::proceed(compressed_w_1, compressed_h_1, compressed_1, compressed_2);
+
+
+  Extend_Mod_3_Command::proceed(compressed_w_2, compressed_h_2, compressed_2, compressed_w_2, compressed_h_2);
+
+  std::vector<Pixel> compressed_3;
+
+  u2 compressed_w_3;
+  u2 compressed_h_3;
+  Quantize_3x3_Command::reset_sample_compress_pixel_buffer(compressed_3, compressed_w_2, compressed_h_2,
+    compressed_w_3, compressed_h_3);
+
+  Quantize_3x3_Command::proceed(compressed_w_2, compressed_h_2, compressed_2, compressed_3);
+
+//  std::vector<Pixel> undo_3;
+  std::vector<Pixel> undo_2;
+  std::vector<Pixel> undo_1;
+
+//  Quantize_3x3_Command::re_extend(compressed_3, undo_3,
+//    compressed_w_3, compressed_h_3);
+
+  Quantize_3x3_Command::re_extend(compressed_2, undo_2,
+    compressed_w_2, compressed_h_2);
+
+  Quantize_3x3_Command::re_extend(undo_2, undo_1,
+    compressed_w_2 * 3, compressed_h_2 * 3);
+
+  active_image_->getPixelBuffer() = undo_1;
+  active_image_->setW(compressed_w_2 * 9);
+  active_image_->setH(compressed_h_2 * 9);
+
+  active_image_->updateBuffer();
+  pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
+
+  pending_save_modifications_ = true;
+ }
+
+
+}
+
 void MainWindow::handle_quantize_3x3()
 {
  if(active_image_)
@@ -342,41 +545,6 @@ void MainWindow::handle_quantize_3x3()
   qDebug() << "quantize 3x3";
   active_image_->updateBuffer();
   pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
-
-  secondary_pixel_buffer_ = cmd->sample_compress_pixel_buffer();
-  u2 scw = cmd->sample_compress_width();
-  u2 sch = cmd->sample_compress_height();
-
-  Extend_Mod_3_Command::proceed(scw, sch, secondary_pixel_buffer_, scw, sch);
-
-//  Quantize_3x3_Command::re_extend(secondary_pixel_buffer_, tertiary_pixel_buffer_,
-//    scw, sch, 3);
-
-  Quantize_3x3_Command::reset_sample_compress_pixel_buffer(tertiary_pixel_buffer_, scw, sch);
-  Quantize_3x3_Command::proceed(scw, sch, secondary_pixel_buffer_, tertiary_pixel_buffer_);
-
-  Quantize_3x3_Command::re_extend(tertiary_pixel_buffer_, secondary_pixel_buffer_,
-    scw / 3, sch / 3, 3);
-
-  Quantize_3x3_Command::re_extend(secondary_pixel_buffer_, tertiary_pixel_buffer_,
-    scw, sch, 3);
-
-
-//  active_image_->getPixelBuffer() = secondary_pixel_buffer_;
-//  active_image_->setW(scw);
-//  active_image_->setH(sch);
-
-
-//  Quantize_3x3_Command::re_extend(secondary_pixel_buffer_, tertiary_pixel_buffer_,
-//    scw, sch, 3);
-
-  active_image_->getPixelBuffer() = tertiary_pixel_buffer_;
-  active_image_->setW(scw * 3);
-  active_image_->setH(sch * 3);
-
-  active_image_->updateBuffer();
-  pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
-
   pending_save_modifications_ = true;
  }
 }
@@ -495,14 +663,83 @@ void MainWindow::on_actionAbout_Qt_triggered()
 
 void MainWindow::on_actionContrast_triggered()
 {
+ if(active_image_)
+ {
+  bool ok = false;
+  QList<QString> field = {"Contrast"};
+  QList<int> input = InputDialog::getFields(this,
+                                            field,
+                                            -100, 100, 10, &ok);
+
+  if(ok){
+   int inputValue = input[0];
+   std::shared_ptr<ICommand>c1(new contrastCommand(*active_image_, inputValue));
+   command_manager_.execute(c1);
+   active_image_->updateBuffer();
+   pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
+
+   pending_save_modifications_ = true;
+   //         ui->actionSave->setEnabled(true);
+   //         ui->actionUndo->setEnabled(true);
+   //         ui->actionRedo->setEnabled(false);
+  }
+ }
 }
 
 void MainWindow::on_actionBrightness_triggered()
 {
+ if(active_image_)
+ {
+  bool ok = false;
+  QList<QString> field = {"Brightness"};
+  QList<int> input = InputDialog::getFields(this,
+                                            field,
+                                            -100, 100, 10, &ok);
+
+  if(ok)
+  {
+   int inputValue = input[0];
+   std::shared_ptr<ICommand>c1(new brightnessCommand(*active_image_, inputValue));
+   command_manager_.execute(c1);
+   active_image_->updateBuffer();
+   pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
+
+   pending_save_modifications_ = true;
+   //         ui->actionSave->setEnabled(true);
+   //         ui->actionUndo->setEnabled(true);
+   //         ui->actionRedo->setEnabled(false);
+  }
+ }
 }
+
 
 void MainWindow::on_actionColormask_triggered()
 {
+ if(active_image_)
+ {
+  bool ok = false;
+  QList<QString> fields = {"Red", "Green", "Blue"};
+  QList<int> values = InputDialog::getFields(this,
+                                             fields,
+                                             0, 255, 1, &ok);
+
+  if(ok)
+  {
+   int r = values[0];
+   int g = values[1];
+   int b = values[2];
+
+   std::shared_ptr<ICommand> c1(new colorMaskCommand(*active_image_, r, g, b));
+   command_manager_.execute(c1);
+   active_image_->updateBuffer();
+   pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
+
+   pending_save_modifications_ = true;
+   //         ui->actionSave->setEnabled(true);
+   //         ui->actionUndo->setEnabled(true);
+   //         ui->actionRedo->setEnabled(false);
+  }
+ }
 }
 
 void MainWindow::on_actionScale_triggered()

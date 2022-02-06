@@ -38,6 +38,8 @@ public:
 
     size_t getSize() const;
 
+    void reconstruct_pixel_buffer(const QImage& new_image);
+
     int getW() const;
 
     int getH() const;
