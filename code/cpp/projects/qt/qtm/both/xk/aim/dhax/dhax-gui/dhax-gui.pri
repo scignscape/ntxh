@@ -311,6 +311,7 @@ LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
 
 LIBS += -L$$TARGETSDIR -liat-forge
 
+LIBS += -L$$TARGETSDIR  -limage-editor
 
 
 include($$ROOT_DIR/../preferred/freecad.pri)

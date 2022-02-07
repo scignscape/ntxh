@@ -16,6 +16,9 @@
 
 #include "dhax-application-state.h"
 
+#include "image-editor/frontend/MainWindow.h"
+#include "image-editor/frontend/main-window-dialog.h"
+
 
 #include <QColorDialog>
 
@@ -728,6 +731,9 @@ void DHAX_Application_Controller::init_image_scene_item(DHAX_Image_Scene_Item* s
    application_receiver_,
    SLOT(handle_freecad_reset()));
 
+ si->self_connect(SIGNAL(edit_image_requested()),
+   application_receiver_,
+   SLOT(handle_edit_image()));
 
  //init_image_scene_item
 }
@@ -837,6 +843,16 @@ void DHAX_Application_Controller::handle_polyline_save_requested(bool with_comme
 }
 
 
+void DHAX_Application_Controller::handle_edit_image_requested()
+{
+ Main_Window_Dialog* dlg = new Main_Window_Dialog(application_main_window_);
+
+ dlg->set_default_image_folder(DHAX_IMAGE_FOLDER);
+
+ dlg->set_default_image_file(main_window_controller_->current_image_file_path());
+
+ dlg->show();
+}
 
 void DHAX_Application_Controller::save_current_notation(bool with_comment)
 {

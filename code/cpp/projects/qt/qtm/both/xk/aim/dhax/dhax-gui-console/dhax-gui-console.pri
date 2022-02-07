@@ -82,6 +82,7 @@ LIBS += -L$$TARGETSDIR  -laimlib -ldcmsr -lofstd -loflog -ldcmdata \
    -ldcmimage -ldcmimgle
 
 LIBS += -L$$TARGETSDIR  -laxfi
+LIBS += -L$$TARGETSDIR  -limage-editor
 
 LIBS += -lrt
 

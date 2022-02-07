@@ -50,6 +50,9 @@ INCLUDEPATH += $$SRC_GROUP_DIR/tkrzw
 
 INCLUDEPATH += $$WHITEDB_SRC_GROUP_DIR
 
+QtColorWidgets_SRC_DIR = $$SRC_ROOT_DIR/external/Qt-Color-Widgets-master
+INCLUDEPATH += $$QtColorWidgets_SRC_DIR/include
+FORMS += $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_dialog.ui
 
 HEADERS += \
   $$SRC_DIR/backend/CommandPattern/CommandManager.h \
@@ -76,6 +79,7 @@ HEADERS += \
   $$SRC_DIR/backend/Pixel.h \
   $$SRC_DIR/backend/utils.h \
   $$SRC_DIR/frontend/InputDialog.h \
+  $$SRC_DIR/frontend/color-range-dialog.h \
   $$SRC_DIR/frontend/MainWindow.h \
   $$SRC_DIR/frontend/main-window-dialog.h \
 
@@ -107,6 +111,7 @@ SOURCES += \
   $$SRC_DIR/backend/Pixel.cpp \
   $$SRC_DIR/backend/utils.cpp \
   $$SRC_DIR/frontend/InputDialog.cpp \
+  $$SRC_DIR/frontend/color-range-dialog.cpp \
   $$SRC_DIR/frontend/MainWindow.cpp \
   $$SRC_DIR/frontend/main-window-dialog.cpp \
 

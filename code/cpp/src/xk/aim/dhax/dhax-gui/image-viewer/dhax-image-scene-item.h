@@ -190,6 +190,7 @@ Q_SIGNALS:
  void get_annotation_comments_requested(DHAX_Annotation_Instance*);
 
  void complete_polygon_requested();
+ void edit_image_requested();
 
 //? void uncancel_requested(DHAX_Drawn_Shape*);
 

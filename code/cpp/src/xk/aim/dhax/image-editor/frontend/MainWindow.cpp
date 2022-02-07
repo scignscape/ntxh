@@ -11,6 +11,8 @@
 #include "backend/CommandPattern/brightnessCommand.h"
 #include "backend/CommandPattern/colorMaskCommand.h"
 
+#include "frontend/color-range-dialog.h"
+
 
 #include <QFileDialog>
 #include <QDebug>
@@ -29,6 +31,8 @@
 
 
 #include "InputDialog.h"
+
+#include "QtColorWidgets/color_dialog.hpp"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -107,7 +111,8 @@ MainWindow::MainWindow(QWidget *parent) :
  contrast_action_ = new QAction("Contrast", this);
  brightness_action_ = new QAction("Brightness", this);
  color_mask_action_ = new QAction("Color Mask", this);
- skew_shear_action_ = new QAction("Skew/Shear", this);
+ skew_shear_action_ = new QAction("Skew/Shear", this); 
+ heuristic_color_mask_action_ = new QAction("Heuristic Color Mask", this);
 
  connect(open_action_, &QAction::triggered, this, &MainWindow::on_actionOpen_triggered);
  connect(zoom_inc_action_, &QAction::triggered, this, &MainWindow::on_actionZoomInc_triggered);
@@ -122,6 +127,8 @@ MainWindow::MainWindow(QWidget *parent) :
  connect(sharpen_action_, &QAction::triggered, this, &MainWindow::on_actionSharpen_triggered);
  connect(emboss_action_, &QAction::triggered, this, &MainWindow::on_actionEmboss_triggered);
  connect(heuristic_mask_action_, &QAction::triggered, this, &MainWindow::handle_heuristic_mask);
+
+ connect(heuristic_color_mask_action_, &QAction::triggered, this, &MainWindow::handle_heuristic_color_mask);
 
  connect(extend_mod_3_action_, &QAction::triggered, this, &MainWindow::handle_extend_mod_3);
  connect(quantize_3x3_action_, &QAction::triggered, this, &MainWindow::handle_quantize_3x3);
@@ -160,6 +167,7 @@ MainWindow::MainWindow(QWidget *parent) :
   menu->addAction(yskew_action_);
   menu->addAction(rotate_action_);
   menu->addAction(skew_shear_action_);
+  menu->addAction(heuristic_color_mask_action_);
 
   menu->popup(graphics_view_->mapToGlobal(pos));
  });
@@ -211,6 +219,62 @@ MainWindow::~MainWindow()
  //   delete ui;
 }
 
+
+void MainWindow::open_image_file(QString path)
+{
+ active_image_.reset(new Image(path));
+
+ if(active_image_->isValid())
+ {
+  qDebug() << active_image_->getFilename();
+
+  scene_->clear();
+  pixmap_item_ = scene_->addPixmap(QPixmap::fromImage(active_image_->getQImage()));
+  scene_->setSceneRect(0, 0, active_image_->getW(), active_image_->getH());
+  graphics_view_->setScene(scene_);
+
+  graphics_view_->show();
+
+  updateStatusBar();
+  //ui->statusbar->show();
+  graphics_view_->fitInView(pixmap_item_, Qt::KeepAspectRatio);
+
+  //            ui->actionRedo->setEnabled(false);
+  //            ui->actionUndo->setEnabled(false);
+  //            ui->actionSave->setEnabled(false);
+  //            ui->actionSave_as->setEnabled(true);
+  //            ui->actionZoomInc->setEnabled(true);
+  //            ui->actionZoomDec->setEnabled(true);
+  //            ui->actionZoom_Adapt->setEnabled(true);
+  //            ui->menuEdit->setEnabled(true);
+  //            ui->menuFilters->setEnabled(true);
+  pending_save_modifications_ = false;
+ }
+ else
+ {
+  //            activeImage.reset();
+  //            scene.clear();
+  //            ui->graphicsView->hide();
+  //            ui->statusbar->hide();
+
+  //            ui->actionSave->setEnabled(false);
+  //            ui->actionSave_as->setEnabled(false);
+  //            ui->actionRedo->setEnabled(false);
+  //            ui->actionUndo->setEnabled(false);
+  //            ui->actionZoomInc->setEnabled(false);
+  //            ui->actionZoomDec->setEnabled(false);
+  //            ui->actionZoom_Adapt->setEnabled(false);
+  //            ui->menuEdit->setEnabled(false);
+  //            ui->menuFilters->setEnabled(false);
+
+  QMessageBox::critical(this, APP_NAME,
+                        "The image is not Valid.",
+                        QMessageBox::Ok);
+ }
+
+}
+
+
 void MainWindow::on_actionOpen_triggered()
 {
  QString imagePath = QFileDialog::getOpenFileName(this,
@@ -218,57 +282,8 @@ void MainWindow::on_actionOpen_triggered()
 
  if(!imagePath.isEmpty())
  {
-  active_image_.reset(new Image(imagePath));
-
-  if(active_image_->isValid())
-  {
-   qDebug() << active_image_->getFilename();
-
-   scene_->clear();
-   pixmap_item_ = scene_->addPixmap(QPixmap::fromImage(active_image_->getQImage()));
-   scene_->setSceneRect(0, 0, active_image_->getW(), active_image_->getH());
-   graphics_view_->setScene(scene_);
-
-   graphics_view_->show();
-
-   updateStatusBar();
-   //ui->statusbar->show();
-   graphics_view_->fitInView(pixmap_item_, Qt::KeepAspectRatio);
-
-   //            ui->actionRedo->setEnabled(false);
-   //            ui->actionUndo->setEnabled(false);
-   //            ui->actionSave->setEnabled(false);
-   //            ui->actionSave_as->setEnabled(true);
-   //            ui->actionZoomInc->setEnabled(true);
-   //            ui->actionZoomDec->setEnabled(true);
-   //            ui->actionZoom_Adapt->setEnabled(true);
-   //            ui->menuEdit->setEnabled(true);
-   //            ui->menuFilters->setEnabled(true);
-   pending_save_modifications_ = false;
-  }
-  else
-  {
-   //            activeImage.reset();
-   //            scene.clear();
-   //            ui->graphicsView->hide();
-   //            ui->statusbar->hide();
-
-   //            ui->actionSave->setEnabled(false);
-   //            ui->actionSave_as->setEnabled(false);
-   //            ui->actionRedo->setEnabled(false);
-   //            ui->actionUndo->setEnabled(false);
-   //            ui->actionZoomInc->setEnabled(false);
-   //            ui->actionZoomDec->setEnabled(false);
-   //            ui->actionZoom_Adapt->setEnabled(false);
-   //            ui->menuEdit->setEnabled(false);
-   //            ui->menuFilters->setEnabled(false);
-
-   QMessageBox::critical(this, APP_NAME,
-                         "The image is not Valid.",
-                         QMessageBox::Ok);
-  }
+  open_image_file(imagePath);
  }
-
 }
 
 void MainWindow::zoomUpdate(bool increment)
@@ -557,6 +572,28 @@ void MainWindow::handle_quantize_3x3()
   pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
   pending_save_modifications_ = true;
  }
+}
+
+
+void MainWindow::handle_heuristic_color_mask()
+{
+ QColor c;
+ {
+  color_widgets::ColorDialog dlg;
+
+  dlg.exec();
+
+  c = dlg.color();
+ }
+
+ if(!c.isValid())
+   return;
+
+ Color_Range_Dialog* dlg = new Color_Range_Dialog(c, this);
+
+ dlg->show();
+
+\
 }
 
 

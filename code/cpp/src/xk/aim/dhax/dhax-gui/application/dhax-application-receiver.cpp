@@ -64,6 +64,11 @@ void DHAX_Application_Receiver::handle_save_notation(bool with_comment)
 }
 
 
+void DHAX_Application_Receiver::handle_edit_image()
+{
+ application_controller_->handle_edit_image_requested();
+}
+
 void DHAX_Application_Receiver::handle_polygon_complete_and_save_notation()
 {
  application_controller_->handle_complate_and_save_requested(false);

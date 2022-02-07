@@ -33,6 +33,8 @@ class Rotateable_Arrow_Annotation //
  QPointF rotation_center_;
  QPoint mapped_rotation_center_;
 
+ r8 shaft_offset_;
+ r8 shaft_offset_delta_;
 
 protected:
 

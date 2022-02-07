@@ -60,6 +60,12 @@ Main_Window_Dialog::Main_Window_Dialog(QWidget* parent)
 }
 
 
+void Main_Window_Dialog::set_default_image_file(QString f)
+{
+ main_window_->open_image_file(f);
+}
+
+
 void Main_Window_Dialog::set_default_image_folder(QString f)
 {
  main_window_->set_default_image_folder(f);

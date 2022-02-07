@@ -50,6 +50,7 @@ class MainWindow : public QMainWindow
  QAction* yskew_action_;
  QAction* rotate_action_;
  QAction* skew_shear_action_;
+ QAction* heuristic_color_mask_action_;
 
 
  QWidget* central_widget_;
@@ -94,16 +95,17 @@ public:
 
  ACCESSORS(QString ,default_image_folder)
 
-
-
+ void open_image_file(QString path);
 
 private slots:
+
  void handle_heuristic_mask();
  void handle_extend_mod_3();
  void handle_quantize_3x3();
  void handle_quantize_9x9();
  void handle_quantize_27x27();
  void handle_shear_transform(Skew_Shear_Rotate ssr);
+ void handle_heuristic_color_mask();
 
  void on_actionOpen_triggered();
 

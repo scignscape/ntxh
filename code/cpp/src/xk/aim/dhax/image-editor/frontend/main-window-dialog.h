@@ -34,6 +34,7 @@ public:
  Main_Window_Dialog(QWidget* parent = nullptr);
 
  void set_default_image_folder(QString f);
+ void set_default_image_file(QString f);
 
 };
 

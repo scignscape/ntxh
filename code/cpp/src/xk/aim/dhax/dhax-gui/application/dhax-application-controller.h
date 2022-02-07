@@ -104,6 +104,8 @@ public:
  void load_image(QString file_path);
  void load_notes();
 
+ void handle_edit_image_requested();
+
  void init_image_scene_item(DHAX_Image_Scene_Item *si);
 
  void send_freecad_reset();

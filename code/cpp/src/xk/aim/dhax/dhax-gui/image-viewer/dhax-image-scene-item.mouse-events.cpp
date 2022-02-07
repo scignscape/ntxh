@@ -396,6 +396,11 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
   });
  }
 
+ menu->addAction("Edit Image ...", [this]
+ {
+  Q_EMIT edit_image_requested();
+ });
+
  menu->popup(pos2);
 }
 

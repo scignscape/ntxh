@@ -283,7 +283,9 @@ void DHAX_Image_Viewer::complete_load_image()
  image_scene_item_ = new DHAX_Image_Scene_Item;// (this);
  image_scene_item_->set_data(display_image_data_);
  image_scene_item_->set_containing_image_view(scrolled_image_view_);
- image_scene_item_->set_image_file_path(image_document_controller_->current_file_path());
+
+ if(image_document_controller_)
+   image_scene_item_->set_image_file_path(image_document_controller_->current_file_path());
 
  image_scene_item_->temp = this;
 
