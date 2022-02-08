@@ -107,6 +107,9 @@ private slots:
  void handle_shear_transform(Skew_Shear_Rotate ssr);
  void handle_heuristic_color_mask();
 
+ void handle_heuristic_color_mask(QColor c, u1 offset, QColor background,
+   u1 background_opacity, u1 metric_code);
+
  void on_actionOpen_triggered();
 
  void on_actionSave_triggered();

@@ -54,6 +54,7 @@ QtColorWidgets_SRC_DIR = $$SRC_ROOT_DIR/external/Qt-Color-Widgets-master
 INCLUDEPATH += $$QtColorWidgets_SRC_DIR/include
 FORMS += $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_dialog.ui
 
+
 HEADERS += \
   $$SRC_DIR/backend/CommandPattern/CommandManager.h \
   $$SRC_DIR/backend/CommandPattern/Commands.h \
@@ -75,6 +76,7 @@ HEADERS += \
   $$SRC_DIR/backend/CommandPattern/dhax/extend-mod-3-command.h \
   $$SRC_DIR/backend/CommandPattern/dhax/quantize-3x3-command.h \
   $$SRC_DIR/backend/CommandPattern/dhax/shear-command.h \
+  $$SRC_DIR/backend/CommandPattern/dhax/heuristic-color-mask-command.h \
   $$SRC_DIR/backend/Image.h \
   $$SRC_DIR/backend/Pixel.h \
   $$SRC_DIR/backend/utils.h \
@@ -107,6 +109,7 @@ SOURCES += \
   $$SRC_DIR/backend/CommandPattern/dhax/extend-mod-3-command.cpp \
   $$SRC_DIR/backend/CommandPattern/dhax/quantize-3x3-command.cpp \
   $$SRC_DIR/backend/CommandPattern/dhax/shear-command.cpp \
+  $$SRC_DIR/backend/CommandPattern/dhax/heuristic-color-mask-command.cpp \
   $$SRC_DIR/backend/Image.cpp \
   $$SRC_DIR/backend/Pixel.cpp \
   $$SRC_DIR/backend/utils.cpp \

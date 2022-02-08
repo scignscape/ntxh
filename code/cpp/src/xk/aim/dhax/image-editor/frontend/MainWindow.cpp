@@ -6,6 +6,7 @@
 #include "backend/CommandPattern/dhax/extend-mod-3-command.h"
 #include "backend/CommandPattern/dhax/quantize-3x3-command.h"
 #include "backend/CommandPattern/dhax/shear-command.h"
+#include "backend/CommandPattern/dhax/heuristic-color-mask-command.h"
 
 #include "backend/CommandPattern/contrastCommand.h"
 #include "backend/CommandPattern/brightnessCommand.h"
@@ -31,8 +32,6 @@
 
 
 #include "InputDialog.h"
-
-#include "QtColorWidgets/color_dialog.hpp"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -128,7 +127,7 @@ MainWindow::MainWindow(QWidget *parent) :
  connect(emboss_action_, &QAction::triggered, this, &MainWindow::on_actionEmboss_triggered);
  connect(heuristic_mask_action_, &QAction::triggered, this, &MainWindow::handle_heuristic_mask);
 
- connect(heuristic_color_mask_action_, &QAction::triggered, this, &MainWindow::handle_heuristic_color_mask);
+ connect(heuristic_color_mask_action_, &QAction::triggered, this, QOverload<>::of(&MainWindow::handle_heuristic_color_mask));
 
  connect(extend_mod_3_action_, &QAction::triggered, this, &MainWindow::handle_extend_mod_3);
  connect(quantize_3x3_action_, &QAction::triggered, this, &MainWindow::handle_quantize_3x3);
@@ -575,25 +574,48 @@ void MainWindow::handle_quantize_3x3()
 }
 
 
+void MainWindow::handle_heuristic_color_mask(QColor c, u1 offset, QColor background,
+  u1 background_opacity, u1 metric_code)
+{
+ qDebug() << "c = " << c;
+ qDebug() << "offset = " << offset;
+ background.setAlpha(background_opacity);
+ qDebug() << "background = " << background;
+ qDebug() << "mc = " << metric_code;
+
+// return;
+ Heuristic_Color_Mask_Command* cmd = new Heuristic_Color_Mask_Command(*active_image_, c,
+   background, offset, metric_code);
+ std::shared_ptr<ICommand> c1(cmd);
+ command_manager_.execute(c1);
+ qDebug() << "quantize 3x3";
+ active_image_->updateBuffer();
+ pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
+ pending_save_modifications_ = true;
+}
+
 void MainWindow::handle_heuristic_color_mask()
 {
- QColor c;
- {
-  color_widgets::ColorDialog dlg;
-
-  dlg.exec();
-
-  c = dlg.color();
- }
-
- if(!c.isValid())
-   return;
-
- Color_Range_Dialog* dlg = new Color_Range_Dialog(c, this);
+ Color_Range_Dialog* dlg = new Color_Range_Dialog(QColor(250, 225, 0), this);
 
  dlg->show();
 
-\
+ connect(dlg, &Color_Range_Dialog::accepted, [this, dlg]()
+ {
+  QColor c = dlg->central_color();
+  u1 offset = dlg->offset();
+  QColor b = dlg->background_color();
+  u1 o = dlg->background_opacity();
+  u1 metric_code = dlg->get_metric_code();
+  handle_heuristic_color_mask(c, offset, b, o, metric_code);
+  dlg->close();
+ });
+
+ connect(dlg, &Color_Range_Dialog::rejected, [this, dlg]()
+ {
+  dlg->close();
+ });
+
 }
 
 

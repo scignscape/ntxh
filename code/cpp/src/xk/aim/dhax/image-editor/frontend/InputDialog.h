@@ -3,6 +3,8 @@
 
 #include <QSpinBox>
 #include <QDialog>
+#include <QPushButton>
+#include <QDialogButtonBox>
 
 #include "global-types.h"
 
@@ -11,6 +13,12 @@ class QLabel;
 class InputDialog : public QDialog
 {
  Q_OBJECT
+
+
+ QDialogButtonBox* button_box_;
+ QPushButton* button_ok_;
+ QPushButton* button_cancel_;
+
 
 public:
 

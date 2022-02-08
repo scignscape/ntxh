@@ -14,11 +14,15 @@ class Main_Window_Dialog : public QDialog
 {
  Q_OBJECT
 
+ QDialogButtonBox* button_box_;
+ QPushButton* button_ok_;
+ QPushButton* button_cancel_;
+
 
  QVBoxLayout* main_layout_;
  MainWindow* main_window_;
 
- QDialogButtonBox* button_box_;
+// QDialogButtonBox* button_box_;
 // QPushButton* button_ok_;
 //// QPushButton* button_cancel_;
 //// QPushButton* button_proceed_;

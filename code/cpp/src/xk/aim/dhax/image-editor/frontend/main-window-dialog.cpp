@@ -12,6 +12,8 @@
 
 #include "MainWindow.h"
 
+#include "styles.h"
+
 
 //heap is managed by parent Widget (no leak), implementation with smart ptr is not suitable in this case.
 //objects are used over the scope of this class.
@@ -44,8 +46,31 @@ Main_Window_Dialog::Main_Window_Dialog(QWidget* parent)
 
 // main_layout_->addWidget(main_window_);
 
- button_box_ = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
-                               Qt::Horizontal, this);
+// button_box_ = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
+//                               Qt::Horizontal, this);
+
+ button_box_ = new QDialogButtonBox(this);
+
+ button_ok_ = new QPushButton("OK");
+ //? button_proceed_ = new QPushButton("Proceed");
+ button_cancel_ = new QPushButton("Cancel");
+
+ button_ok_->setDefault(false);
+ button_ok_->setAutoDefault(false);
+
+ button_cancel_->setDefault(true);
+
+ button_ok_->setStyleSheet(basic_button_style_sheet_());
+ button_cancel_->setStyleSheet(basic_button_style_sheet_());
+
+ //?button_ok_->setEnabled(false);
+ button_box_->addButton(button_ok_, QDialogButtonBox::AcceptRole);
+ //?button_box_->addButton(button_proceed_, QDialogButtonBox::ApplyRole);
+ button_box_->addButton(button_cancel_, QDialogButtonBox::RejectRole);
+
+
+ connect(button_box_, SIGNAL(accepted()), this, SLOT(accept()));
+ connect(button_box_, SIGNAL(rejected()), this, SLOT(close()));
 
  main_layout_->addWidget(button_box_);
 

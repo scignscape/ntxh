@@ -6,6 +6,8 @@
 #include <QFormLayout>
 #include <QDebug>
 
+#include "styles.h"
+
 //heap is managed by parent Widget (no leak), implementation with smart ptr is not suitable in this case.
 //objects are used over the scope of this class.
 
@@ -27,15 +29,41 @@ InputDialog::InputDialog(const QList<QString>& field_labels, int min, int max, i
   values_ << edit;
  }
 
- QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
-                                                    Qt::Horizontal, this);
+ button_box_ = new QDialogButtonBox(this);
 
- layout->addWidget(buttonBox);
+ //?url_label_ = new QLabel(this);
+  //?url_label_->setText(url);
 
- connect(buttonBox, &QDialogButtonBox::accepted,
+// name_qle_ = new QLineEdit(this);
+
+ button_ok_ = new QPushButton("OK");
+ //? button_proceed_ = new QPushButton("Proceed");
+ button_cancel_ = new QPushButton("Cancel");
+
+ button_ok_->setDefault(false);
+ button_ok_->setAutoDefault(false);
+
+ //?button_proceed_->setDefault(false);
+ //?button_proceed_->setAutoDefault(false);
+
+ button_cancel_->setDefault(true);
+
+ button_ok_->setStyleSheet(basic_button_style_sheet_());
+ button_cancel_->setStyleSheet(basic_button_style_sheet_());
+
+
+ //?button_ok_->setEnabled(false);
+ button_box_->addButton(button_ok_, QDialogButtonBox::AcceptRole);
+ //?button_box_->addButton(button_proceed_, QDialogButtonBox::ApplyRole);
+ button_box_->addButton(button_cancel_, QDialogButtonBox::RejectRole);
+
+
+ layout->addWidget(button_box_);
+
+ connect(button_box_, &QDialogButtonBox::accepted,
          this, &InputDialog::accept);
 
- connect(buttonBox, &QDialogButtonBox::rejected,
+ connect(button_box_, &QDialogButtonBox::rejected,
          this, &InputDialog::reject);
 
  setLayout(layout);
@@ -77,15 +105,41 @@ InputDialog::InputDialog(QWidget* parent, const QList<QString>& field_labels, co
   }
  }
 
- QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
-                                                    Qt::Horizontal, this);
+ button_box_ = new QDialogButtonBox(this);
 
- layout->addWidget(buttonBox);
+ //?url_label_ = new QLabel(this);
+  //?url_label_->setText(url);
 
- connect(buttonBox, &QDialogButtonBox::accepted,
+// name_qle_ = new QLineEdit(this);
+
+ button_ok_ = new QPushButton("OK");
+ //? button_proceed_ = new QPushButton("Proceed");
+ button_cancel_ = new QPushButton("Cancel");
+
+ button_ok_->setDefault(false);
+ button_ok_->setAutoDefault(false);
+
+ //?button_proceed_->setDefault(false);
+ //?button_proceed_->setAutoDefault(false);
+
+ button_cancel_->setDefault(true);
+
+ button_ok_->setStyleSheet(basic_button_style_sheet_());
+ button_cancel_->setStyleSheet(basic_button_style_sheet_());
+
+
+ //?button_ok_->setEnabled(false);
+ button_box_->addButton(button_ok_, QDialogButtonBox::AcceptRole);
+ //?button_box_->addButton(button_proceed_, QDialogButtonBox::ApplyRole);
+ button_box_->addButton(button_cancel_, QDialogButtonBox::RejectRole);
+
+
+ layout->addWidget(button_box_);
+
+ connect(button_box_, &QDialogButtonBox::accepted,
          this, &InputDialog::accept);
 
- connect(buttonBox, &QDialogButtonBox::rejected,
+ connect(button_box_, &QDialogButtonBox::rejected,
          this, &InputDialog::reject);
 
  setLayout(layout);
