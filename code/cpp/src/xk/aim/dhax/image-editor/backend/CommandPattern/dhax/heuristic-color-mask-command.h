@@ -33,6 +33,9 @@ public:
   Exact_Match = 7
  };
 
+ void proceed(std::vector<Pixel>& pixel_buffer,
+   u2 w, u2 h, Metric_Codes mc);
+
  void execute() override;
 
  void undo() override;

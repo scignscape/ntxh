@@ -77,6 +77,7 @@ HEADERS += \
   $$SRC_DIR/backend/CommandPattern/dhax/quantize-3x3-command.h \
   $$SRC_DIR/backend/CommandPattern/dhax/shear-command.h \
   $$SRC_DIR/backend/CommandPattern/dhax/heuristic-color-mask-command.h \
+  $$SRC_DIR/backend/CommandPattern/dhax/simple-calculate-command.h \
   $$SRC_DIR/backend/Image.h \
   $$SRC_DIR/backend/Pixel.h \
   $$SRC_DIR/backend/utils.h \
@@ -110,6 +111,7 @@ SOURCES += \
   $$SRC_DIR/backend/CommandPattern/dhax/quantize-3x3-command.cpp \
   $$SRC_DIR/backend/CommandPattern/dhax/shear-command.cpp \
   $$SRC_DIR/backend/CommandPattern/dhax/heuristic-color-mask-command.cpp \
+  $$SRC_DIR/backend/CommandPattern/dhax/simple-calculate-command.cpp \
   $$SRC_DIR/backend/Image.cpp \
   $$SRC_DIR/backend/Pixel.cpp \
   $$SRC_DIR/backend/utils.cpp \

@@ -23,7 +23,7 @@
 Color_Range_Dialog::Color_Range_Dialog(QColor central_color, QWidget* parent)
   :  QDialog(parent)
 {
- offset_ = 15;
+ offset_ = 50;
 
  main_layout_ = new QGridLayout;
 
@@ -69,6 +69,7 @@ Color_Range_Dialog::Color_Range_Dialog(QColor central_color, QWidget* parent)
  connect(central_color_select_button_, &QPushButton::clicked, [this]()
  {
   color_widgets::ColorDialog dlg(this);
+  dlg.setColor(central_color_);
   dlg.exec();
   QColor c = dlg.color();
 

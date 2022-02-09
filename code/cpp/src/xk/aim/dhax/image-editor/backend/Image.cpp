@@ -8,7 +8,9 @@
 
 using namespace std;
 
-Image::Image(const QString &path) : rawImage(path), path(path), isImageValid(true) {
+Image::Image(const QString &path)
+  : rawImage(path), path(path), isImageValid(true), reduction_(nullptr)
+{
     if(rawImage.isNull()){
         isImageValid = false;
     }
@@ -24,6 +26,23 @@ Image::Image(const QString &path) : rawImage(path), path(path), isImageValid(tru
 void Image::pureFilename() {
     QFileInfo qFilename(path);
     filename = qFilename.fileName();
+}
+
+void Image::init_reduction(std::vector<Pixel>& buffer, s2 width, s2 height)
+{
+ reduction_ = new Reduction{buffer, width, height};
+}
+
+void Image::push_reduction()
+{
+ if(reduction_)
+   reduction_stack_.push(reduction_);
+}
+
+void Image::pop_reduction()
+{
+ if(!reduction_stack_.isEmpty())
+   reduction_ = reduction_stack_.pop();
 }
 
 void Image::reconstruct_pixel_buffer(const QImage& new_image)
@@ -71,6 +90,14 @@ int Image::getW() const{
 
 int Image::getH() const{
     return h;
+}
+
+int* Image::getWptr(){
+    return &w;
+}
+
+int* Image::getHptr(){
+    return &h;
 }
 
 void Image::setW(int w){

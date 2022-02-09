@@ -11,7 +11,8 @@
 //heap is managed by parent Widget (no leak), implementation with smart ptr is not suitable in this case.
 //objects are used over the scope of this class.
 
-InputDialog::InputDialog(const QList<QString>& field_labels, int min, int max, int step, QWidget *parent) : QDialog(parent),
+InputDialog::InputDialog(const QList<QString>& field_labels, int min, int max, int step,
+  QWidget *parent, int initial_value) : QDialog(parent),
   field_labels_(field_labels), min_(min), max_(max), step_(step)
 {
 
@@ -24,7 +25,7 @@ InputDialog::InputDialog(const QList<QString>& field_labels, int min, int max, i
   edit->setMinimum(min);
   edit->setMaximum(max);
   edit->setSingleStep(step);
-  edit->setValue(0);
+  edit->setValue(initial_value);
   layout->addRow(label, edit);
   values_ << edit;
  }
@@ -172,9 +173,10 @@ InputDialog::getFields(QWidget* parent, QList<QString>& field_labels, QVector<In
 }
 
 
-QList<int> InputDialog::getFields(QWidget *parent, QList<QString>& fields, int min, int max, int step, bool *ok)
+QList<int> InputDialog::getFields(QWidget *parent, QList<QString>& fields, int min,
+  int max, int step, bool *ok, int initial_value)
 {
- InputDialog* dialog = new InputDialog(fields, min, max, step, parent);
+ InputDialog* dialog = new InputDialog(fields, min, max, step, parent, initial_value);
 
  QList<int> result;
 

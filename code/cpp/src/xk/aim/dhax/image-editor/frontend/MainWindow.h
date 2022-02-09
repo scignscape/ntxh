@@ -51,6 +51,7 @@ class MainWindow : public QMainWindow
  QAction* rotate_action_;
  QAction* skew_shear_action_;
  QAction* heuristic_color_mask_action_;
+ QAction* calculate_action_;
 
 
  QWidget* central_widget_;
@@ -106,6 +107,8 @@ private slots:
  void handle_quantize_27x27();
  void handle_shear_transform(Skew_Shear_Rotate ssr);
  void handle_heuristic_color_mask();
+ void handle_calculate_action();
+
 
  void handle_heuristic_color_mask(QColor c, u1 offset, QColor background,
    u1 background_opacity, u1 metric_code);

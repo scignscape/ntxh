@@ -7,6 +7,7 @@
 #include "backend/CommandPattern/dhax/quantize-3x3-command.h"
 #include "backend/CommandPattern/dhax/shear-command.h"
 #include "backend/CommandPattern/dhax/heuristic-color-mask-command.h"
+#include "backend/CommandPattern/dhax/simple-calculate-command.h"
 
 #include "backend/CommandPattern/contrastCommand.h"
 #include "backend/CommandPattern/brightnessCommand.h"
@@ -84,7 +85,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
  central_widget_->setLayout(main_layout_);
 
- pixmap_item_ = nullptr; //new QGraphicsPixmapItem(this);
+ pixmap_item_ = nullptr; //new QGraphicspixmap_item_(this);
  scene_ = new QGraphicsScene(this);
 
  graphics_view_->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -112,6 +113,10 @@ MainWindow::MainWindow(QWidget *parent) :
  color_mask_action_ = new QAction("Color Mask", this);
  skew_shear_action_ = new QAction("Skew/Shear", this); 
  heuristic_color_mask_action_ = new QAction("Heuristic Color Mask", this);
+ calculate_action_ = new QAction("Calculate (1D/2D)", this);
+
+ connect(undo_action_, &QAction::triggered, this, &MainWindow::on_actionUndo_triggered);
+ connect(redo_action_, &QAction::triggered, this, &MainWindow::on_actionRedo_triggered);
 
  connect(open_action_, &QAction::triggered, this, &MainWindow::on_actionOpen_triggered);
  connect(zoom_inc_action_, &QAction::triggered, this, &MainWindow::on_actionZoomInc_triggered);
@@ -133,6 +138,8 @@ MainWindow::MainWindow(QWidget *parent) :
  connect(quantize_3x3_action_, &QAction::triggered, this, &MainWindow::handle_quantize_3x3);
  connect(quantize_9x9_action_, &QAction::triggered, this, &MainWindow::handle_quantize_9x9);
  connect(quantize_27x27_action_, &QAction::triggered, this, &MainWindow::handle_quantize_27x27);
+
+ connect(calculate_action_, &QAction::triggered, this, &MainWindow::handle_calculate_action);
 
  connect(xshear_action_, &QAction::triggered, this, [this]{handle_shear_transform(Skew_Shear_Rotate::XShear);});
  connect(yshear_action_, &QAction::triggered, this, [this]{handle_shear_transform(Skew_Shear_Rotate::YShear);});
@@ -167,13 +174,14 @@ MainWindow::MainWindow(QWidget *parent) :
   menu->addAction(rotate_action_);
   menu->addAction(skew_shear_action_);
   menu->addAction(heuristic_color_mask_action_);
+  menu->addAction(calculate_action_);
 
   menu->popup(graphics_view_->mapToGlobal(pos));
  });
 
 
  //active_image_ = nullptr;
- //CommandManager command_manager_;
+ //command_manager_ command_manager_;
 
 
 //    ui->setupUi(this);
@@ -251,7 +259,7 @@ void MainWindow::open_image_file(QString path)
  }
  else
  {
-  //            activeImage.reset();
+  //            active_image_.reset();
   //            scene.clear();
   //            ui->graphicsView->hide();
   //            ui->statusbar->hide();
@@ -282,6 +290,8 @@ void MainWindow::on_actionOpen_triggered()
  if(!imagePath.isEmpty())
  {
   open_image_file(imagePath);
+
+  scene_->setSceneRect(0, 0, active_image_->getW(), active_image_->getH());
  }
 }
 
@@ -365,10 +375,44 @@ void MainWindow::on_actionFlip_y_triggered()
 
 void MainWindow::on_actionUndo_triggered()
 {
+ if(active_image_ && !command_manager_.isUndoStackEmpty()) {
+     command_manager_.undo();
+     active_image_->updateBuffer();
+     pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
+     updateStatusBar();
+     scene_->setSceneRect(0, 0, active_image_->getW(), active_image_->getH());
+     on_actionZoom_Adapt_triggered();
+
+     //?pendingSaveModifications = true;
+     redo_action_->setEnabled(true);
+     //?pendingSaveModifications = true;
+     //?save_action_->setEnabled(true);
+
+     if(command_manager_.isUndoStackEmpty())
+        undo_action_->setEnabled(false);
+
+ }
 }
 
 void MainWindow::on_actionRedo_triggered()
 {
+ if(active_image_ && !command_manager_.isRedoStackEmpty()) {
+     command_manager_.redo();
+     active_image_->updateBuffer();
+     pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
+     updateStatusBar();
+     scene_->setSceneRect(0, 0, active_image_->getW(), active_image_->getH());
+     on_actionZoom_Adapt_triggered();
+
+     //pendingSaveModifications = true;
+     undo_action_->setEnabled(true);
+     //pendingSaveModifications = true;
+     //save_action_->setEnabled(true);
+
+     if(command_manager_.isRedoStackEmpty())
+       redo_action_->setEnabled(false);
+ }
+
 }
 
 
@@ -461,7 +505,7 @@ void MainWindow::handle_quantize_9x9()
   Quantize_3x3_Command* cmd = new Quantize_3x3_Command(*active_image_);
   std::shared_ptr<ICommand> c1(cmd);
   command_manager_.execute(c1);
-  qDebug() << "quantize 27x27";
+  qDebug() << "quantize 9x9";
 
   //secondary_pixel_buffer_ = cmd->sample_compress_pixel_buffer();
 
@@ -496,11 +540,34 @@ void MainWindow::handle_quantize_9x9()
 }
 
 
+void MainWindow::handle_calculate_action()
+{
+ if(active_image_)
+ {
+  bool ok;
+  QList<QString> fields = {"1D Length Threshold", "2D Minor Threshold", "2D Major Threshold"};
+  QList<int> input = InputDialog::getFields(this,
+                                            fields,
+                                            0, 255, 1, &ok, 3);
+
+  qDebug() << input;
+  Simple_Calculate_Command* cmd = new Simple_Calculate_Command(*active_image_,
+    QColor(), QColor("black"), QColor("white"), input);
+  std::shared_ptr<ICommand> c1(cmd);
+  command_manager_.execute(c1);
+  qDebug() << "quantize 9x9";
+
+ }
+}
+
 void MainWindow::handle_quantize_27x27()
 {
  if(active_image_)
  {
   Quantize_3x3_Command* cmd = new Quantize_3x3_Command(*active_image_);
+
+  cmd->ICommand::force_redo(quantize_27x27_action_);
+
   std::shared_ptr<ICommand> c1(cmd);
   command_manager_.execute(c1);
   qDebug() << "quantize 27x27";
@@ -540,6 +607,8 @@ void MainWindow::handle_quantize_27x27()
 //  Quantize_3x3_Command::re_extend(compressed_3, undo_3,
 //    compressed_w_3, compressed_h_3);
 
+  active_image_->init_reduction(compressed_3, compressed_w_3, compressed_h_3);
+
   Quantize_3x3_Command::re_extend(compressed_2, undo_2,
     compressed_w_2, compressed_h_2);
 
@@ -549,6 +618,8 @@ void MainWindow::handle_quantize_27x27()
   active_image_->getPixelBuffer() = undo_1;
   active_image_->setW(compressed_w_2 * 9);
   active_image_->setH(compressed_h_2 * 9);
+
+
 
   active_image_->updateBuffer();
   pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
@@ -588,7 +659,7 @@ void MainWindow::handle_heuristic_color_mask(QColor c, u1 offset, QColor backgro
    background, offset, metric_code);
  std::shared_ptr<ICommand> c1(cmd);
  command_manager_.execute(c1);
- qDebug() << "quantize 3x3";
+ qDebug() << "heuristic color mask";
  active_image_->updateBuffer();
  pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
  pending_save_modifications_ = true;

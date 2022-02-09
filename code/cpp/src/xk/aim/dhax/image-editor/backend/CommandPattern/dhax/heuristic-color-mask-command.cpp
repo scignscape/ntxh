@@ -63,14 +63,26 @@ void Heuristic_Color_Mask_Command::proceed()
  u2 w = image_.getW();
  u2 h = image_.getH();
 
- bool is_foreground;
  Metric_Codes mc = (Metric_Codes) metric_code_;
+
+ proceed(pixel_buffer_, w, h, mc);
+
+ if(Image::Reduction* ir = image_.reduction())
+ {
+  proceed(ir->buffer, ir->width, ir->height, mc);
+ }
+}
+
+void Heuristic_Color_Mask_Command::proceed(std::vector<Pixel>& pixel_buffer,
+  u2 w, u2 h, Metric_Codes mc)
+{
+ bool is_foreground;
 
  for(u2 y = 0; y < h; ++y)
  {
   for(u2 x = 0; x < w; ++x)
   {
-   Pixel& px = pixel_buffer_[y * w + x];
+   Pixel& px = pixel_buffer[y * w + x];
    if(mc == Metric_Codes::Exact_Match)
      is_foreground = foreground_ == Pixel::toQColor(px);
    else

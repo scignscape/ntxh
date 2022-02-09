@@ -21,8 +21,11 @@ void CommandManager::undo() {
 void CommandManager::redo() {
     if (!redoStack.empty()) {
         redoStack.top()->redo();
-        undoStack.push(redoStack.top());
-        redoStack.pop();
+        if(!redoStack.empty())
+        {
+         undoStack.push(redoStack.top());
+         redoStack.pop();
+        }
     }
 }
 

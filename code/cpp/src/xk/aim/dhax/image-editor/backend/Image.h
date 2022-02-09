@@ -7,55 +7,84 @@
 #include "Pixel.h"
 #include <vector>
 
+#include <QStack>
+
+#include "global-types.h"
+
+#include "accessors.h"
+
 using namespace std;
 
-class Image {
+class Image
+{
+public:
+ struct Reduction {
+   std::vector<Pixel> buffer;
+   s2 width;
+   s2 height;
+ };
+
+ void init_reduction(std::vector<Pixel>& buffer, s2 width, s2 height);
+ void push_reduction();
+ void pop_reduction();
 
 private:
-    QImage rawImage; //stores backend data infos
-    QString path;
-    QString filename;
-    int w;
-    int h;
-    std::vector<Pixel> pixelBuffer;
-    size_t size{0};
-    bool isImageValid;
 
-    void initPixelBuffer();
-    void pureFilename();
+ QImage rawImage; //stores backend data infos
+ QString path;
+ QString filename;
+ int w;
+ int h;
+ std::vector<Pixel> pixelBuffer;
+ size_t size{0};
+ bool isImageValid;
+
+ Reduction* reduction_;
+
+ QStack<Reduction*> reduction_stack_;
+
+ void initPixelBuffer();
+ void pureFilename();
 
 public:
-    explicit Image(const QString &path);
 
-    bool save(const QString &outPath, int quality = -1); //-1 auto compression //0-100 quality range
-    Image(Image &image) = delete;
+ explicit Image(const QString &path);
 
-    QString getPath() const;
+ ACCESSORS__GET(Reduction* ,reduction)
 
-    QString getFilename() const;
+ bool save(const QString &outPath, int quality = -1); //-1 auto compression //0-100 quality range
+ Image(Image &image) = delete;
 
-    std::vector<Pixel>& getPixelBuffer();
+ QString getPath() const;
 
-    size_t getSize() const;
+ QString getFilename() const;
 
-    void reconstruct_pixel_buffer(const QImage& new_image);
+ std::vector<Pixel>& getPixelBuffer();
 
-    int getW() const;
+ size_t getSize() const;
 
-    int getH() const;
+ void reconstruct_pixel_buffer(const QImage& new_image);
 
-    void setW(int w);
-    void setH(int h);
+ int getW() const;
 
-    void setPath(QString path);
+ int getH() const;
 
-    void swapDimension();
 
-    void updateBuffer();
+ int* getWptr();
+ int* getHptr();
 
-    QImage& getQImage();
+ void setW(int w);
+ void setH(int h);
 
-    bool isValid() const;
+ void setPath(QString path);
+
+ void swapDimension();
+
+ void updateBuffer();
+
+ QImage& getQImage();
+
+ bool isValid() const;
 };
 
 

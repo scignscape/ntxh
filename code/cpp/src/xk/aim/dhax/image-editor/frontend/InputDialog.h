@@ -81,7 +81,8 @@ public:
   return {0, 0, default_value, decimal, decimal, double_min_max.first, double_min_max.second, increment};
  }
 
- static QList<int> getFields(QWidget *parent, QList<QString>& field_labels, int min, int max, int step, bool *ok);
+ static QList<int> getFields(QWidget *parent, QList<QString>& field_labels, int min, int max, int step,
+   bool *ok, int initial_value = 0);
 
  static QList<QPair<int, double>>
    getFields(QWidget* parent, QList<QString>& field_labels, QVector<Input_Field>& input_fields, bool *ok);
@@ -91,7 +92,8 @@ public:
 
 private:
 
- explicit InputDialog(const QList<QString>& field_labels, int min=0, int max=100, int step=1, QWidget *parent = nullptr);
+ explicit InputDialog(const QList<QString>& field_labels, int min=0, int max=100, int step=1,
+   QWidget *parent = nullptr, int initial_value = 0);
 
  InputDialog(QWidget* parent, const QList<QString>& field_labels, const QVector<Input_Field>& input_fields);
 

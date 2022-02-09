@@ -16,8 +16,13 @@ private:
 
  Image& image_;
  std::vector<Pixel>& pixel_buffer_;
+ int* width_;
+ int* height_;
  std::vector<Pixel> backup_pixel_buffer_;
  std::vector<Pixel> sample_compress_pixel_buffer_;
+
+ int backup_width_;
+ int backup_height_;
 
  u2 sample_compress_width_;
  u2 sample_compress_height_;
@@ -53,6 +58,8 @@ public:
  void undo() override;
 
  void redo() override;
+
+ void force_redo() override;
 };
 
 

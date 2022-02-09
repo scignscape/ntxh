@@ -11,12 +11,19 @@
 #include <QString>
 #include <QDebug>
 
+#include <QAction>
+
 
 Quantize_3x3_Command::Quantize_3x3_Command(Image& image, u1 range)
  : image_(image), sample_compress_height_(0), sample_compress_width_(0),
     pixel_buffer_(image.getPixelBuffer()), range_(range)
 {
+ force_redo_ = nullptr;
  backup_pixel_buffer_ = pixel_buffer_;
+ width_ = image_.getWptr();
+ height_ = image_.getHptr();
+ backup_width_ = *width_;
+ backup_height_ = *height_;
 }
 
 void Quantize_3x3_Command::execute()
@@ -27,13 +34,25 @@ void Quantize_3x3_Command::execute()
 void Quantize_3x3_Command::undo()
 {
  pixel_buffer_ = backup_pixel_buffer_;
+ if(width_)
+   *width_ = backup_width_;
+ if(height_)
+   *height_ = backup_height_;
 }
 
 void Quantize_3x3_Command::redo()
 {
- execute();
+ if(force_redo_)
+   force_redo();
+ else
+   execute();
 }
 
+void Quantize_3x3_Command::force_redo()
+{
+ QAction& action = *force_redo_;
+ action.trigger();
+}
 
 // //  x and y are the top-left corner of the box
 Pixel _average(std::vector<Pixel>& pixel_buffer, u1 range, u2 x, u2 y, u2 w)
