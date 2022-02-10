@@ -25,7 +25,10 @@ class MainWindow : public QMainWindow
 
  QString default_image_folder_;
 
+ QAction* set_scene_background_color_action_;
  QAction* open_action_;
+ QAction* save_action_;
+ QAction* save_as_action_;
  QAction* undo_action_;
  QAction* redo_action_;
  QAction* zoom_inc_action_;
@@ -109,6 +112,8 @@ private slots:
  void handle_heuristic_color_mask();
  void handle_calculate_action();
 
+
+ void handle_set_scene_background_color();
 
  void handle_heuristic_color_mask(QColor c, u1 offset, QColor background,
    u1 background_opacity, u1 metric_code);

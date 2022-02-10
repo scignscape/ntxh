@@ -14,6 +14,9 @@ uint8_t Pixel::getB() const { return b; }
 
 uint8_t Pixel::getA() const { return a; }
 
+uint16_t Pixel::get_color_sum() const {
+  return (255 * 3) - (r + g + b); }
+
 QColor Pixel::toQColor(const Pixel &oldc) {
     QColor newc(oldc.getR(), oldc.getG(), oldc.getB(), oldc.getA());
     return newc;

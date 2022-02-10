@@ -18,17 +18,29 @@ private:
  QColor foreground_;
  QColor new_foreground_;
  QColor background_;
- QList<int> threshold_;
+
+ u1 length_threshold_;
+ u1 minor_threshold_;
+ u1 major_threshold_;
+
+ u2 reduction_scale_;
+
+ u4 length_count_;
+
 
  void proceed();
 
 public:
 
  explicit Simple_Calculate_Command(Image& image,
-   QColor foreground, QColor new_foreground, QColor background, QList<int> threshold);
+   QColor foreground, QColor new_foreground, QColor background,
+   u2 reduction_scale,
+   QList<int> threshold);
 
- void proceed(std::vector<Pixel>& pixel_buffer,
-   u2 w, u2 h);
+// void proceed(std::vector<Pixel>& pixel_buffer,
+//   u2 w, u2 h);
+
+ void proceed(Image::Reduction& ir, std::vector<Pixel>& result);
 
  void execute() override;
 

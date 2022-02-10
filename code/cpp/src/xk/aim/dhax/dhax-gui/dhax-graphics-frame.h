@@ -76,6 +76,7 @@ public:
  void setup_multiline_shape();
  void setup_arrow_shape();
  void setup_measurement_shape();
+ void setup_skew_rhombus_shape();
 
 
  void setup_highlight(bool checked);

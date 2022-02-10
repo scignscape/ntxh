@@ -396,6 +396,7 @@ subcontrol-position: left;}
  generic_shape_options_->addItem("Multi-Line");
  generic_shape_options_->addItem("Arrow");
  generic_shape_options_->addItem("Measurement");
+ generic_shape_options_->addItem("Skew/Rhombus");
 
  generic_shape_options_->addItem("N_A");
 

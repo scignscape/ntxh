@@ -160,6 +160,7 @@ HEADERS += \
   $$SRC_DIR/libspline/spline.h \
   $$SRC_DIR/aforms/dhax-annotation-presentation-data.h \
   $$SRC_DIR/aforms/multiline-rubber-band.h \
+  $$SRC_DIR/aforms/skew-rhombus-annotation.h \
   $$SRC_DIR/aforms/rotateable-arrow-annotation.h \
   $$SRC_DIR/aforms/measurement-annotation.h \
   $$SRC_DIR/aforms/multistep-annotation-base.h \
@@ -228,6 +229,7 @@ SOURCES += \
   $$SRC_DIR/aforms/multiline-rubber-band.cpp \
   $$SRC_DIR/aforms/rotateable-arrow-annotation.cpp \
   $$SRC_DIR/aforms/measurement-annotation.cpp \
+  $$SRC_DIR/aforms/skew-rhombus-annotation.cpp \
   $$SRC_DIR/aforms/multistep-annotation-base.cpp \
   $$SRC_DIR/aforms/simple-annotation-base.cpp \
   $$SRC_DIR/aforms/simple/simple-rectangle-annotation.cpp \
@@ -269,6 +271,7 @@ SOURCES += \
   $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_line_edit.cpp \
   $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_utils.cpp \
   $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_names.cpp \
+
 
 RESOURCES += \
   $$QtColorWidgets_SRC_DIR/resources/QtColorWidgets/color_widgets.qrc

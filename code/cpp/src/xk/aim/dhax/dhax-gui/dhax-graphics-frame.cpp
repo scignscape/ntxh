@@ -330,6 +330,8 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
     setup_arrow_shape();
   else if(sel == "Measurement")
     setup_measurement_shape();
+  else if(sel == "Skew/Rhombus")
+    setup_skew_rhombus_shape();
 
  };
 }
@@ -371,6 +373,12 @@ void DHAX_Graphics_Frame::setup_arrow_shape()
 {
  display_image_data_->reset();
  display_image_data_->enable_arrow_shape();
+}
+
+void DHAX_Graphics_Frame::setup_skew_rhombus_shape()
+{
+ display_image_data_->reset();
+ display_image_data_->enable_skew_rhombus_shape();
 }
 
 void DHAX_Graphics_Frame::setup_measurement_shape()

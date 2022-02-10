@@ -114,4 +114,4 @@ public Q_SLOTS:
 
 };
 
-#endif // MultiStep_RUBBER_BAND__H
+#endif // MULTILINE_RUBBER_BAND__H

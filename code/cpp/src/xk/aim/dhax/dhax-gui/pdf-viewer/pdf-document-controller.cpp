@@ -8,6 +8,7 @@
 #include "aforms/multiline-rubber-band.h"
 #include "aforms/rotateable-arrow-annotation.h"
 #include "aforms/measurement-annotation.h"
+#include "aforms/skew-rhombus-annotation.h"
 #include "aforms/simple/simple-rectangle-annotation.h"
 #include "aforms/simple/simple-ellipse-annotation.h"
 
@@ -78,6 +79,10 @@ MultiStep_Annotation_Base* PDF_Document_Controller::init_multistep_annotation(
 
  case DHAX_Annotation_Instance::Compact_Shape_Kind_Summary::Ellipse:
   current_multistep_annotation_ = new Simple_Ellipse_Annotation(mouse_interaction_data, posf, parent);
+  break;
+
+ case DHAX_Annotation_Instance::Compact_Shape_Kind_Summary::Skew_Rhombus:
+  current_multistep_annotation_ = new Skew_Rhombus_Annotation(mouse_interaction_data, posf, parent);
   break;
 
  default: break;

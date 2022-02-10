@@ -152,6 +152,11 @@ void DHAX_Display_Image_Data::enable_measurement_shape()
  enabled_shape_kind_ = DHAX_Display_Image_Data::Shape_Kinds::Measurement;
 }
 
+void DHAX_Display_Image_Data::enable_skew_rhombus_shape()
+{
+ enabled_shape_kind_ = DHAX_Display_Image_Data::Shape_Kinds::Skew_Rhombus;
+}
+
 void DHAX_Display_Image_Data::enable_arrow_shape()
 {
  enabled_shape_kind_ = DHAX_Display_Image_Data::Shape_Kinds::Arrow;

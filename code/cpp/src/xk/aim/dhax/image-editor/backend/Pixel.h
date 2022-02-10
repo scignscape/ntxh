@@ -32,6 +32,9 @@ public:
 
     uint8_t getA() const;
 
+    uint16_t get_color_sum() const;
+
+
     void setPixel(int r, int g, int b, int a);
 
     static QColor toQColor(const Pixel &);

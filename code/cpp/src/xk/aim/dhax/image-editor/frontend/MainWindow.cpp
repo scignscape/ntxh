@@ -16,6 +16,9 @@
 #include "frontend/color-range-dialog.h"
 
 
+#include "QtColorWidgets/color_dialog.hpp"
+
+
 #include <QFileDialog>
 #include <QDebug>
 #include <QMessageBox>
@@ -90,7 +93,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
  graphics_view_->setContextMenuPolicy(Qt::CustomContextMenu);
 
+ set_scene_background_color_action_ = new QAction("Select scene background color", this);
+
  open_action_ = new QAction("Open File", this);
+ save_action_ = new QAction("Save File", this);
+ save_as_action_ = new QAction("Save As ...", this);
  grayscale_action_ = new QAction("Grayscale", this);
  blur_action_ = new QAction("Blur", this);
  sharpen_action_ = new QAction("Sharpen", this);
@@ -118,7 +125,11 @@ MainWindow::MainWindow(QWidget *parent) :
  connect(undo_action_, &QAction::triggered, this, &MainWindow::on_actionUndo_triggered);
  connect(redo_action_, &QAction::triggered, this, &MainWindow::on_actionRedo_triggered);
 
+ connect(set_scene_background_color_action_, &QAction::triggered, this, &MainWindow::handle_set_scene_background_color);
+
  connect(open_action_, &QAction::triggered, this, &MainWindow::on_actionOpen_triggered);
+ connect(save_as_action_, &QAction::triggered, this, &MainWindow::on_actionSave_as_triggered);
+
  connect(zoom_inc_action_, &QAction::triggered, this, &MainWindow::on_actionZoomInc_triggered);
  connect(zoom_dec_action_, &QAction::triggered, this, &MainWindow::on_actionZoomDec_triggered);
  connect(zoom_adapt_action_, &QAction::triggered, this, &MainWindow::on_actionZoom_Adapt_triggered);
@@ -153,7 +164,9 @@ MainWindow::MainWindow(QWidget *parent) :
  connect(graphics_view_, &QGraphicsView::customContextMenuRequested, [this](const QPoint& pos)
  {
   QMenu* menu = new QMenu(this);
+  menu->addAction(set_scene_background_color_action_);
   menu->addAction(open_action_);
+  menu->addAction(save_as_action_);
   menu->addAction(grayscale_action_);
   menu->addAction(contrast_action_);
   menu->addAction(brightness_action_);
@@ -224,6 +237,30 @@ void MainWindow::resizeEvent(QResizeEvent* rev)
 MainWindow::~MainWindow()
 {
  //   delete ui;
+}
+
+
+void MainWindow::handle_set_scene_background_color()
+{
+// QBrush br(QColor("gray"));
+// scene_->setBackgroundBrush(br);
+
+// graphics_view_->setBackgroundBrush(br);
+// central_widget_->setStyleSheet("background-color:red;");
+
+ color_widgets::ColorDialog dlg(this);
+ dlg.setColor(QColor("gray"));
+ dlg.exec();
+ QColor c = dlg.color();
+
+ if(!c.isValid())
+   return;
+
+ if(c == scene_->backgroundBrush().color())
+   return;
+
+ central_widget_->setStyleSheet(QString("background-color:%1;").arg(c.name()));
+
 }
 
 
@@ -336,6 +373,30 @@ void MainWindow::updateStatusBar()
 
 void MainWindow::on_actionSave_as_triggered()
 {
+ if(active_image_)
+ {
+  // active_image_->getFilename(),
+
+  QString filename = QFileDialog::getSaveFileName(this, "Enter or Select File Name",
+                                                  default_image_folder_,
+                                                  tr("Images (*.jpg *.png *.bmp)"));
+
+  if(!filename.isEmpty())
+  {
+   if(active_image_->save(filename)) {
+    active_image_->setPath(filename);
+    updateStatusBar();
+
+    pending_save_modifications_ = false;
+    save_action_->setEnabled(false);
+   }
+   else{
+    QMessageBox::critical(this, APP_NAME,
+                          "The path is not valid. Please check the image format.",
+                          QMessageBox::Ok);
+   }
+  }
+ }
 }
 
 
@@ -552,10 +613,14 @@ void MainWindow::handle_calculate_action()
 
   qDebug() << input;
   Simple_Calculate_Command* cmd = new Simple_Calculate_Command(*active_image_,
-    QColor(), QColor("black"), QColor("white"), input);
+    QColor(), QColor("black"), QColor("white"), 27, input);
   std::shared_ptr<ICommand> c1(cmd);
   command_manager_.execute(c1);
-  qDebug() << "quantize 9x9";
+  qDebug() << "simple calculate";
+
+  active_image_->updateBuffer();
+  pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
+  pending_save_modifications_ = true;
 
  }
 }

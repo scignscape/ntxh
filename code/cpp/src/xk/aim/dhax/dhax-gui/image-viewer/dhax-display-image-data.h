@@ -246,6 +246,7 @@ class DHAX_Display_Image_Data
   void enable_multiline_shape();
   void enable_arrow_shape();
   void enable_measurement_shape();
+  void enable_skew_rhombus_shape();
 
   void enableHighlight(bool enable);
   void setNameSelected(bool enable);
