@@ -110,6 +110,12 @@ void DHAX_Image_Viewer::recenter_image()
 }
 
 
+void DHAX_Image_Viewer::recenter_image_against_margins()
+{
+ recenter_image();
+}
+
+
 void DHAX_Image_Viewer::recenter_scroll_center()
 {
  if(!image_scene_item_)
@@ -135,6 +141,11 @@ void DHAX_Image_Viewer::recenter_scroll_top_left()
  pos += {width/2, height/2};
 
  scrolled_image_view_->centerOn(pos);
+}
+
+QSize DHAX_Image_Viewer::get_scrolled_image_pixmap_size()
+{
+ return scrolled_image_pixmap_->size();
 }
 
 

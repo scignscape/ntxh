@@ -353,9 +353,12 @@ subcontrol-position: left;}
  clear_last_btn_->setEnabled(false);
  clear_all_btn_->setEnabled(false);
 
- //main_tab_layout_ = new QVBoxLayout;
- main_tab_layout_ = new QGridLayout;
+ main_tab_layout_ = new QVBoxLayout;
+// main_tab_layout_ = new QGridLayout;
  main_layout_ = new QVBoxLayout;
+
+ main_tab_layout1_ = new QHBoxLayout;
+ main_tab_layout2_ = new QHBoxLayout;
 
  domain_shape_options_ = new QComboBox(this);
  domain_shape_options_->addItem("select ...");
@@ -368,8 +371,8 @@ subcontrol-position: left;}
  domain_shape_ckb_ = new QCheckBox("Registered\nMarking", this);
 //  main_tab_layout_->addWidget(domain_shape_ckb_);
 //  main_tab_layout_->addWidget(domain_shape_options_);
-  main_tab_layout_->addWidget(domain_shape_ckb_, 0, 0);
-  main_tab_layout_->addWidget(domain_shape_options_, 0, 1);
+  main_tab_layout1_->addWidget(domain_shape_ckb_);//, 0, 0);
+  main_tab_layout1_->addWidget(domain_shape_options_);//, 0, 1);
 
 
   //?main_tab_layout_->setColumnMinimumWidth(0, 150);
@@ -395,7 +398,7 @@ subcontrol-position: left;}
 
  generic_shape_options_->addItem("Multi-Line");
  generic_shape_options_->addItem("Arrow");
- generic_shape_options_->addItem("Measurement");
+ generic_shape_options_->addItem("Measure");
  generic_shape_options_->addItem("Skew/Rhombus");
 
  generic_shape_options_->addItem("N_A");
@@ -427,13 +430,16 @@ subcontrol-position: left;}
  generic_shape_ckb_ = new QCheckBox("Generic\nShape", this);
 // main_tab_layout_->addWidget(generic_shape_ckb_);
 // main_tab_layout_->addWidget(generic_shape_options_);
- main_tab_layout_->addWidget(generic_shape_ckb_, 1, 0);
- main_tab_layout_->addWidget(generic_shape_options_, 1, 1);
+ main_tab_layout2_->addWidget(generic_shape_ckb_);//, 1, 0);
+ main_tab_layout2_->addWidget(generic_shape_options_);//, 1);
+
+ main_tab_layout_->addLayout(main_tab_layout1_);
+ main_tab_layout_->addLayout(main_tab_layout2_);
 
  //main_tab_layout_->setRowH(1, 1);
 
  QSpacerItem* verticalSpacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
- main_tab_layout_->addItem(verticalSpacer, 2, 0, 1, 2, Qt::AlignTop);
+ main_tab_layout_->addItem(verticalSpacer);//, 2, 0, 1, 2, Qt::AlignTop);
 
  main_tab_layout_->setMargin(0);
  main_tab_layout_->setContentsMargins(QMargins(10,0,10,0));

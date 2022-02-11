@@ -66,6 +66,7 @@ public:
   return (*application_colors_)[key];
  }
 
+ QSize get_scrolled_image_pixmap_size();
 
  USE_SELF_CONNECT(normal)
  USE_SELF_CONNECT(lambda)
@@ -101,6 +102,9 @@ Q_SIGNALS:
  void change_scene_background_color_requested();
  void change_scene_margins_color_requested();
  void change_image_margins_requested(QVector<u1>, u1);
+
+ void expand_window_requested();
+ void unexpand_window_requested();
 
 // void change_borde_width_requested();
 

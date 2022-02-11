@@ -265,6 +265,28 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
 
  _self_connect_(zoom_frame_ ,center_image_button_clicked)
    to_coemit()(image_viewer_->recenter_scroll_center);
+
+ _self_connect_(zoom_frame_ ,replace_center_image_button_clicked)
+   to_coemit()(image_viewer_->recenter_image_against_margins);
+
+
+ _self_connect_(zoom_frame_ ,expand_window_button_clicked)
+   to_coemit()(expand_window_requested);
+
+//   to_lambda[this](bool)
+// {
+//  Q_EMIT expand_window_requested();
+// };
+
+ _self_connect_(zoom_frame_ ,unexpand_window_button_clicked)
+   to_coemit()(unexpand_window_requested);
+
+//   to_lambda[this](bool)
+// {
+//  Q_EMIT unexpand_window_requested();
+// };
+
+
 // {
 //  image_viewer_->recenter_scroll_center();
 // };
@@ -368,6 +390,10 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
  };
 }
 
+QSize DHAX_Graphics_Frame::get_scrolled_image_pixmap_size()
+{
+ return image_viewer_->get_scrolled_image_pixmap_size();
+}
 
 void DHAX_Graphics_Frame::handle_zoom_factor_changed(r8 factor)
 {

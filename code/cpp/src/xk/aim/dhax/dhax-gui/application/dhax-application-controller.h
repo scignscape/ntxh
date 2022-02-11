@@ -18,6 +18,8 @@
 #include <QMap>
 #include <QDir>
 
+#include <QSize>
+
 class DHAX_Main_Window;
 class DHAX_Display_Image_Data;
 class Zoom_and_Navigate_Frame;
@@ -62,6 +64,8 @@ class DHAX_Application_Controller
  DHAX_Graphics_Frame* graphics_frame_;
 
  u4 autogen_index_;
+
+ QSize old_main_window_size_;
 
  //?
 // QString mesh_position_;
@@ -124,11 +128,14 @@ public:
  void handle_change_scene_margins_color();
  void handle_change_image_margins(QVector<u1> values, u1 context);
 
-void handle_set_border_visible();
-void handle_unset_border_visible();
+ void handle_set_border_visible();
+ void handle_unset_border_visible();
 
-void handle_set_image_pen_visible();
-void handle_unset_image_pen_visible();
+ void handle_set_image_pen_visible();
+ void handle_unset_image_pen_visible();
+
+ void handle_expand_window();
+ void handle_unexpand_window();
 
  void handle_view_contour_info(QString path);
  void save_current_notation(bool with_comment);

@@ -411,6 +411,18 @@ void DHAX_Application_Controller::load_notes()
  dsi->add_dhax_annotation(current_annotation_instance, current_resize_factor);
 }
 
+void DHAX_Application_Controller::handle_expand_window()
+{
+ QSize sz = graphics_frame_->get_scrolled_image_pixmap_size().grownBy(QMargins(100, 200, 0, 0));
+ old_main_window_size_ = application_main_window_->size();
+ application_main_window_->resize(old_main_window_size_.expandedTo(sz));
+}
+
+void DHAX_Application_Controller::handle_unexpand_window()
+{
+ if(old_main_window_size_.isValid())
+   application_main_window_->resize(old_main_window_size_);
+}
 
 
 QDir DHAX_Application_Controller::get_current_image_dir()

@@ -95,6 +95,8 @@ public:
 
  //?ACCESSORS(MACRO_PASTE(const QMap<QString, QColor>*) ,application_colors)
 
+ QSize get_scrolled_image_pixmap_size();
+
  void reset_background_center_rectangle_color();
  void reset_background_rectangle_color();
 
@@ -108,6 +110,7 @@ public:
      el->rect().topLeft().y() + el->pos().y() + controls_[index].second};
  }
 
+ void recenter_image_against_margins();
  void recenter_scroll_center();
  void recenter_scroll_top_left();
 

@@ -196,8 +196,19 @@ void DHAX_GUI_Environment::init_application_controller()
  _self_connect_(graphics_frame_ ,unset_image_pen_visible_requested)
     _to_bind_0_(application_controller_ ,handle_unset_image_pen_visible);
 
+ _self_connect_(graphics_frame_ ,expand_window_requested)
+    _to_bind_0_(application_controller_ ,handle_expand_window);
+
+ _self_connect_(graphics_frame_ ,unexpand_window_requested)
+    _to_bind_0_(application_controller_ ,handle_unexpand_window);
+
+ _self_connect_(graphics_frame_ ,unset_image_pen_visible_requested)
+    _to_bind_0_(application_controller_ ,handle_unset_image_pen_visible);
+
+
  _self_connect_(graphics_frame_ ,change_image_margins_requested)
     _to_bind_2_(application_controller_ ,handle_change_image_margins);
+
 }
 
 void DHAX_GUI_Environment::init_main_window_controller()

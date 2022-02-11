@@ -62,6 +62,38 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  zoom_buttons_layout_ = new QHBoxLayout;
 
+ zoom_buttons_layout_->setSpacing(0);
+ zoom_buttons_layout_->setContentsMargins(0,0,0,0);
+
+
+ //0x2725
+ expand_window_button_ = new QPushButton(QChar(0x2725), this);
+ expand_window_button_->setMaximumWidth(25);
+ expand_window_button_->setMaximumHeight(20);
+ sigma(expand_window_button_)->set_multiline_tooltip("Expand Window",
+   "Expands the window to cover the image.");
+ expand_window_button_->setStyleSheet(button_style_sheet(8));
+
+ //0x2725
+ unexpand_window_button_ = new QPushButton(QChar(0x2727), this);
+ unexpand_window_button_->setMaximumWidth(25);
+ unexpand_window_button_->setMaximumHeight(20);
+ sigma(unexpand_window_button_)->set_multiline_tooltip("Undo Expand Window",
+   "Restores window to its smaller size before a recent expansion.");
+ unexpand_window_button_->setStyleSheet(button_style_sheet(10));
+
+// sigma(unexpand_window_button_)->set_multiline_tooltip("Expand Image to Window",
+//   "Expands the image as large as possible without resizing the window.");
+
+ expand_window_button_ >> Connect(clicked) -> to_this(expand_window_button_clicked);
+ unexpand_window_button_ >> Connect(clicked) -> to_this(unexpand_window_button_clicked);
+
+
+ zoom_buttons_layout_->addWidget(expand_window_button_);
+ zoom_buttons_layout_->addSpacing(2);
+ zoom_buttons_layout_->addWidget(unexpand_window_button_);
+ zoom_buttons_layout_->addStretch();
+
  reset_zoom_button_ = new QPushButton("Reset", this);
  reset_zoom_button_->setMaximumWidth(85);
 
@@ -236,6 +268,17 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  center_image_button_->setStyleSheet(button_style_sheet(15));
 
 
+
+  //0x2725
+ replace_center_image_button_ = new QPushButton(QChar(0x2726), this);
+ replace_center_image_button_->setMinimumWidth(50);
+ replace_center_image_button_->setMaximumHeight(20);
+ sigma(replace_center_image_button_)->set_multiline_tooltip("Re-Center Image",
+   "Moves the image so that it is centered relative to its margins.");
+
+ replace_center_image_button_->setStyleSheet(button_style_sheet(11));
+
+
 // connect(image_top_left_button_, SIGNAL(clicked(bool)),
 //   this, SIGNAL(image_top_left_button_clicked(bool)));
 
@@ -244,6 +287,7 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  image_top_left_button_ >> Connect(clicked) -> to_this(image_top_left_button_clicked);
  center_image_button_ >> Connect(clicked) -> to_this(center_image_button_clicked);
+ replace_center_image_button_ >> Connect(clicked) -> to_this(replace_center_image_button_clicked);
 
  multi_draw_ckb_ = new QCheckBox(" ", this);
 
@@ -460,6 +504,7 @@ can be temprarily activated by pressing the <i>control</i> or
 // position_buttons_layout_->addWidget(pull_mode_button_, 0, 3, 3, 1, Qt::AlignLeft);
  position_buttons_layout_->addWidget(image_top_left_button_, 0, 6, 2, 1);
  position_buttons_layout_->addWidget(center_image_button_, 0, 8, 2, 1);
+ position_buttons_layout_->addWidget(replace_center_image_button_, 0, 10, 2, 1);
 
 // QVBoxLayout* mdlayout = new QVBoxLayout;
 // QLabel* mdlabel = new QLabel("Multi-Draw", this);
@@ -493,14 +538,16 @@ can be temprarily activated by pressing the <i>control</i> or
    with a new one.)");
  multi_draw_ckb_->setToolTip(multi_draw_ckb_label_->toolTip());
 
- position_buttons_layout_->addWidget(multi_draw_ckb_, 0, 10, 2, 1); //, Qt::AlignTop);
- position_buttons_layout_->addWidget(multi_draw_ckb_label_, 0, 11, 2, 1);// Qt::AlignTop);
+ position_buttons_layout_->addWidget(multi_draw_ckb_, 0, 12, 2, 1); //, Qt::AlignTop);
+ position_buttons_layout_->addWidget(multi_draw_ckb_label_, 0, 13, 2, 1);// Qt::AlignTop);
 // position_buttons_layout_->addWidget(mdlabel, 1, 5, 1, 1, Qt::AlignTop);
 
  position_buttons_layout_->setColumnStretch(5, 1);
  position_buttons_layout_->setColumnMinimumWidth(5, 3);
  position_buttons_layout_->setColumnMinimumWidth(7, 3);
- position_buttons_layout_->setColumnStretch(9, 1);
+ position_buttons_layout_->setColumnMinimumWidth(9, 3);
+ position_buttons_layout_->setColumnMinimumWidth(11, 3);
+ position_buttons_layout_->setColumnStretch(11, 1);
 // position_buttons_layout_->setColumnMinimumWidth(8, 10);
 
 //? position_buttons_layout_->addWidget(pan_mode_button_);

@@ -42,8 +42,10 @@ includes(tooltip, layout, buttons, stylesheet)
  QPushButton* clear_all_btn_;
 
  QVBoxLayout* main_layout_;
- //QVBoxLayout* main_tab_layout_;
- QGridLayout* main_tab_layout_;
+
+ QVBoxLayout* main_tab_layout_;
+ QHBoxLayout* main_tab_layout1_;
+ QHBoxLayout* main_tab_layout2_;
 
  QVBoxLayout* clear_last_all_tab_layout_;
 

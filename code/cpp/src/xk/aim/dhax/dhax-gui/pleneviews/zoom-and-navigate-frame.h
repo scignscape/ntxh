@@ -63,9 +63,13 @@ class Zoom_and_Navigate_Frame : public QFrame
  QPushButton* reset_zoom_button_;
  QPushButton* repeat_zoom_button_;
 
+ QPushButton* expand_window_button_;
+ QPushButton* unexpand_window_button_;
 
  QPushButton* image_top_left_button_;
  QPushButton* center_image_button_;
+ QPushButton* replace_center_image_button_;
+
 
  QPushButton* pan_mode_button_;
  QCheckBox* pan_mode_ckb_;
@@ -141,6 +145,10 @@ Q_SIGNALS:
 
  void zoom_factor_changed(r8 factor);
 
+ void expand_window_button_clicked(bool);
+ void unexpand_window_button_clicked(bool);
+
+ void replace_center_image_button_clicked(bool);
  void center_image_button_clicked(bool);
  void image_top_left_button_clicked(bool);
 
