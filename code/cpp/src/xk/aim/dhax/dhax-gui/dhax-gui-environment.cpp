@@ -75,15 +75,18 @@ DHAX_GUI_Environment::DHAX_GUI_Environment()
 
 void DHAX_GUI_Environment::init_stashed_signals()
 {
- stash_signal(QPushButton::clicked);
- stash_signal(QCheckBox::stateChanged);
- stash_signal(QCheckBox::clicked);
- stash_signal(QComboBox::currentTextChanged);
- stash_signal(ctkRangeSlider::minimumValueChanged);
- stash_signal(ctkRangeSlider::maximumValueChanged);
- stash_signal(ctkRangeSlider::valueChanged);
- stash_signal(QSlider::valueChanged);
- stash_signal(QButtonGroup::idClicked);
+ #include "stash-signals-list.h"
+
+// stash_signal(QPushButton::clicked);
+// stash_signal(QCheckBox::stateChanged);
+// stash_signal(QCheckBox::clicked);
+// stash_signal(QComboBox::currentTextChanged);
+// stash_signal(ctkRangeSlider::minimumValueChanged);
+// stash_signal(ctkRangeSlider::maximumValueChanged);
+// stash_signal(ctkRangeSlider::valueChanged);
+// stash_signal(QSlider::valueChanged);
+// stash_signal(QAbstractSlider::valueChanged);
+// stash_signal(QButtonGroup::idClicked);
 }
 
 void DHAX_GUI_Environment::init_application_state()

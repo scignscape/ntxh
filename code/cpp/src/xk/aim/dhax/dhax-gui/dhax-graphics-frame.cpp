@@ -158,10 +158,14 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
 
  setLayout(main_layout_);
 
- zoom_frame_->self_connect(SIGNAL(zoom_factor_changed(r8)), this, SLOT(handle_zoom_factor_changed(r8)));
+//? zoom_frame_->self_connect(SIGNAL(zoom_factor_changed(r8)), this, SLOT(handle_zoom_factor_changed(r8)));
 
- connect(shape_select_frame_, &Shape_Select_Frame::save_requested,
-   this, &DHAX_Graphics_Frame::save_requested);
+// connect(shape_select_frame_, &Shape_Select_Frame::save_requested,
+//   this, &DHAX_Graphics_Frame::save_requested);
+
+
+ _self_connect_(zoom_frame_ ,zoom_factor_changed)
+   _to_this_(handle_zoom_factor_changed);
 
 
  _self_connect_(shape_select_frame_ ,save_requested)
@@ -270,15 +274,28 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
  {
   if(mode)
   {
-   display_image_data_->unset_pull_mode();
-   display_image_data_->set_pan_mode();
+   display_image_data_->unset_fixed_pull_mode();
+   display_image_data_->set_fixed_pan_mode();
    graphics_view_->activate_hand_drag_mode();
   }
   else
   {
-   display_image_data_->unset_pan_mode();
+   display_image_data_->unset_fixed_pan_mode();
    graphics_view_->deactivate_hand_drag_mode();
   }
+
+//  if(mode)
+//  {
+//   display_image_data_->unset_pull_mode();
+//   display_image_data_->set_pan_mode();
+//   graphics_view_->activate_hand_drag_mode();
+//  }
+//  else
+//  {
+//   display_image_data_->unset_pan_mode();
+//   graphics_view_->deactivate_hand_drag_mode();
+//  }
+
  };
 
  _self_connect_(zoom_frame_ ,pull_mode_changed)
@@ -286,17 +303,32 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
  {
   if(mode)
   {
-   if(display_image_data_->pan_mode())
+   if(display_image_data_->pan_modes())
    {
-    display_image_data_->unset_pan_mode();
+    display_image_data_->unset_pan_modes();
     graphics_view_->deactivate_hand_drag_mode();
    }
-   display_image_data_->set_pull_mode();
+   display_image_data_->set_fixed_pull_mode();
   }
   else
   {
-   display_image_data_->unset_pull_mode();
+   display_image_data_->unset_pull_modes();
   }
+
+//  if(mode)
+//  {
+//   if(display_image_data_->pan_mode())
+//   {
+//    display_image_data_->unset_pan_mode();
+//    graphics_view_->deactivate_hand_drag_mode();
+//   }
+//   display_image_data_->set_pull_mode();
+//  }
+//  else
+//  {
+//   display_image_data_->unset_pull_mode();
+//  }
+
  };
 
  _self_connect_(zoom_frame_ ,multi_draw_set)

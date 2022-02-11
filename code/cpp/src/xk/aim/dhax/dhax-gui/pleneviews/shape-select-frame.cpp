@@ -548,7 +548,7 @@ the image against its background).)");
  sigma(image_pen_visible_button_)->set_multiline_tooltip("Always show image \"pen\" (thin border)",
    R"(When this button is "on" (via pressing the button
 while in its normal state) each image will be displayed with a thin border
-(whose color can be set via the immediately adjacebt button to the right of this one).
+(whose color can be set via the immediately adjacent button to the right of this one).
 Note that this is different from the thicker border which also surrounds the image but
 is visibible in different circumstances (such as when preparing to
 move the image against its background).  When this current button is "off" the thin border

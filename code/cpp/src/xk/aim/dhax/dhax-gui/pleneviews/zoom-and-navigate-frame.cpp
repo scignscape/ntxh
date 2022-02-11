@@ -127,13 +127,13 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 //   SLOT(handle_annotation_zoom_value_changed(int)));
 
 
- zoom_slider_[0] >> Connect(minimumValueChanged) -> to_this(handle_zoom_minimum_value_changed);
- zoom_slider_[0] >> Connect(maximumValueChanged) -> to_this(handle_zoom_maximum_value_changed);
+ (ctkRangeSlider*)zoom_slider_[0] >> Connect(minimumValueChanged) -> to_this(handle_zoom_minimum_value_changed);
+ (ctkRangeSlider*)zoom_slider_[0] >> Connect(maximumValueChanged) -> to_this(handle_zoom_maximum_value_changed);
 
- zoom_slider_[1] >> Connect(minimumValueChanged) -> to_this(handle_top_zoom_minimum_value_changed);
- zoom_slider_[1] >> Connect(maximumValueChanged) -> to_this(handle_top_zoom_maximum_value_changed);
+ (ctkRangeSlider*)zoom_slider_[1] >> Connect(minimumValueChanged) -> to_this(handle_top_zoom_minimum_value_changed);
+ (ctkRangeSlider*)zoom_slider_[1] >> Connect(maximumValueChanged) -> to_this(handle_top_zoom_maximum_value_changed);
 
- zoom_slider_[1] >> Connect(valueChanged) -> to_this(handle_annotation_zoom_value_changed);
+ (ctkRangeSlider*)zoom_slider_[1] >> Connect(valueChanged) -> to_this(handle_annotation_zoom_value_changed);
 
  zoom_slider_[2]->setEnabled(false);
 
@@ -404,8 +404,6 @@ can be temprarily activated by pressing the <i>control</i> or
 // connect(pull_mode_ckb_, &QPushButton::clicked,
 
   // //?
- pull_mode_ckb_ >> Connect(clicked)
-   -> to_this(handle_reset_all);
 
  pull_mode_ckb_ >> Connect(clicked)
    to_lambda[this](bool state)
@@ -527,6 +525,7 @@ can be temprarily activated by pressing the <i>control</i> or
  setLayout(main_layout_);
 
  //setMaximumHeight(190);
+
 
 }
 
@@ -689,7 +688,7 @@ void Zoom_and_Navigate_Frame::direct_adjust_zoom(int z)
 
  qreal adj_ratio = vr * (2.0/5.0);
 
- //qDebug() << "ar = " << adj_ratio ;
+//? qDebug() << "ar = " << adj_ratio ;
 
  Q_EMIT(zoom_factor_changed(adj_ratio));
 
@@ -708,6 +707,7 @@ void Zoom_and_Navigate_Frame::adjust_zoom(int z)
 
  direct_adjust_zoom(z);
 
+ //?
  recenter_image();
 }
 

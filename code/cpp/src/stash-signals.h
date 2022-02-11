@@ -573,8 +573,10 @@ void _stash_signal(QString class_name, QString name, SIGNAL_Type signal)
  _saved_mfn_connector<OBJECT_Type>::add_signal(name, signal);
 }
 
+
 template<typename OBJECT_Type, typename SIGNAL_Type>
-void _stash_signal_strip_name(QString name, SIGNAL_Type signal)
+void _stash_signal_strip_name(//QString hint,
+                              QString name, SIGNAL_Type signal)
 {
  static QSet<QString> already_stashed;
  if(already_stashed.contains(name))
@@ -591,6 +593,7 @@ void _stash_signal_strip_name(QString name, SIGNAL_Type signal)
 
 #define stash_signal_1(x) \
   _stash_signal_strip_name<_signal_class<decltype(&x)>::_type, decltype(&x)>(#x, &x) \
+
 
 #define stash_signal_2(x, y) \
   _stash_signal<x, decltype(&x::y)>(#x, #y, &x::y)

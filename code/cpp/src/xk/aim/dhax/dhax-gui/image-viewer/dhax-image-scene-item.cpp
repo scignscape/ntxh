@@ -645,10 +645,6 @@ void DHAX_Image_Scene_Item::mousePressEvent(QMouseEvent* mev)
 {
  if(data_->pan_or_pull_mode())
  {
-  //this_proxy_widget_->
-  // ((_Proxy_Widget*)this_proxy_widget_)->mousePressEvent(mev);
-  qDebug() << "mev = " << mev;
-
   //mev->accept(); //ignore();
   mev->ignore();
 
@@ -770,7 +766,6 @@ void DHAX_Image_Scene_Item::_check_ui_update()
 
 void DHAX_Image_Scene_Item::mouseReleaseEvent(QMouseEvent* mev)
 {
-// return;
  if(data_->pan_or_pull_mode())
  {
   mev->ignore();
@@ -891,10 +886,10 @@ void DHAX_Image_Scene_Item::mouseReleaseEvent(QMouseEvent* mev)
 
 void DHAX_Image_Scene_Item::mouseMoveEvent(QMouseEvent* mev) //mouseEvent)
 {
+
  if(data_->pan_or_pull_mode())
  {
-  //?
-   mev->ignore();
+  mev->ignore();
   return;
  }
 

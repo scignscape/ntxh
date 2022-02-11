@@ -533,7 +533,11 @@ void DHAX_Application_Controller::handle_unset_image_pen_visible()
 
 QColor DHAX_Application_Controller::handle_change_color(QString application_role)
 {
+ QColor& ref = graphics_frame_->application_color(application_role);
+
  color_widgets::ColorDialog dlg;
+
+ dlg.setColor(ref);
 
  dlg.exec();
 
@@ -542,7 +546,7 @@ QColor DHAX_Application_Controller::handle_change_color(QString application_role
  if(!c.isValid())
    return {};
 
- QColor& ref = graphics_frame_->application_color(application_role);
+ //QColor& ref = graphics_frame_->application_color(application_role);
    //(*graphics_frame_->application_colors())[application_role];
 
  if(c == ref)
@@ -569,6 +573,7 @@ void DHAX_Application_Controller::handle_change_scene_margins_color()
  if(c.isValid())
  {
   graphics_frame_->shape_select_frame()->update_back_color_button_color(c);
+  graphics_frame_->image_viewer()->reset_background_rectangle_color();
   //?graphics_frame_->graphics_scene()->set_foreground_color(c);
  }
 }
@@ -577,7 +582,11 @@ void DHAX_Application_Controller::handle_change_image_border_color()
 {
  QColor c = handle_change_color("image-background-center-rectangle-color");
  if(c.isValid())
-   graphics_frame_->shape_select_frame()->update_border_color_button_color(c);
+ {
+  graphics_frame_->shape_select_frame()->update_border_color_button_color(c);
+  graphics_frame_->image_viewer()->reset_background_center_rectangle_color();
+  //graphics_frame_->
+ }
 }
 
 

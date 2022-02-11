@@ -19,6 +19,8 @@ DHAX_Graphics_View::DHAX_Graphics_View(QWidget* parent)
 
 {
  mouse_keyboard_data_.set_containing_metaobject(this->metaObject());
+
+ //?activate_hand_drag_mode();
 }
 
 

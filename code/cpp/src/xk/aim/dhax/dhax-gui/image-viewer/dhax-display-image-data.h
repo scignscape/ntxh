@@ -12,6 +12,8 @@
 #include <QBoxLayout>
 #include <QStack>
 
+#include <QDebug>
+
 #include "accessors.h"
 
 #include "global-types.h"
@@ -39,6 +41,9 @@ class DHAX_Display_Image_Data
 
   bool pan_mode_;
   bool pull_mode_;
+
+  bool fixed_pan_mode_;
+  bool fixed_pull_mode_;
 
   bool multi_draw;
 
@@ -112,10 +117,22 @@ class DHAX_Display_Image_Data
 
   ACCESSORS__GET(bool ,pan_mode)
   ACCESSORS__GET(bool ,pull_mode)
+  ACCESSORS__GET(bool ,fixed_pan_mode)
+  ACCESSORS__GET(bool ,fixed_pull_mode)
+
+  inline bool pan_modes()
+  {
+   return pan_mode() || fixed_pan_mode();
+  }
+
+  inline bool pull_modes()
+  {
+   return pull_mode() || fixed_pull_mode();
+  }
 
   inline bool pan_or_pull_mode()
   {
-   return pan_mode() || pull_mode();
+   return pan_mode() || pull_mode() || fixed_pan_mode() || fixed_pull_mode();
   }
 
   void set_pan_mode()
@@ -123,9 +140,25 @@ class DHAX_Display_Image_Data
    pan_mode_ = true;
   }
 
+  void set_fixed_pan_mode()
+  {
+   fixed_pan_mode_ = true;
+  }
+
   void unset_pan_mode()
   {
    pan_mode_ = false;
+  }
+
+  void unset_fixed_pan_mode()
+  {
+   fixed_pan_mode_ = false;
+  }
+
+  void unset_pan_modes()
+  {
+   unset_pan_mode();
+   unset_fixed_pan_mode();
   }
 
   void set_pull_mode()
@@ -133,9 +166,25 @@ class DHAX_Display_Image_Data
    pull_mode_ = true;
   }
 
+  void set_fixed_pull_mode()
+  {
+   fixed_pull_mode_ = true;
+  }
+
   void unset_pull_mode()
   {
    pull_mode_ = false;
+  }
+
+  void unset_fixed_pull_mode()
+  {
+   fixed_pull_mode_ = false;
+  }
+
+  void unset_pull_modes()
+  {
+   unset_pull_mode();
+   unset_fixed_pull_mode();
   }
 
   void set_multi_draw()
