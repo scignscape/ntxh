@@ -94,41 +94,42 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
   {
    if(mkd.Unleft())
    {
-    zoom_frame_->unindicate_temporary_modes();
-    if(display_image_data_->pan_mode())
+    if(display_image_data_->temporary_pan_mode())
     {
-     display_image_data_->unset_pan_mode();
+     zoom_frame_->unindicate_temporary_modes();
+     display_image_data_->unset_temporary_pan_mode();
      graphics_view_->deactivate_hand_drag_mode();
     }
-    else if(display_image_data_->pull_mode())
+    else if(display_image_data_->temporary_pull_mode())
     {
-     display_image_data_->unset_pull_mode();
+     zoom_frame_->unindicate_temporary_modes();
+     display_image_data_->unset_temporary_pull_mode();
     }
    }
 
    else if(mkd.Ctrl_left() || (mkd.Meta_left() && mkd.Shift_left()))
    {
     zoom_frame_->indicate_temporary_pull_mode();
-    display_image_data_->set_pull_mode();
+    display_image_data_->set_temporary_pull_mode();
    }
 
    else if(mkd.Shift_left() || mkd.Meta_left())
    {
     zoom_frame_->indicate_temporary_pan_mode();
-    display_image_data_->set_pan_mode();
+    display_image_data_->set_temporary_pan_mode();
     graphics_view_->activate_hand_drag_mode();
    }
 
    else if(mkd.Unctrl_left() || (mkd.Unmeta_left() && mkd.Unshift_left()))
    {
     zoom_frame_->unindicate_temporary_pull_mode();
-    display_image_data_->unset_pull_mode();
+    display_image_data_->unset_temporary_pull_mode();
    }
 
    else if(mkd.Unshift_left() || mkd.Unmeta_left())
    {
     zoom_frame_->unindicate_temporary_pan_mode();
-    display_image_data_->unset_pan_mode();
+    display_image_data_->unset_temporary_pan_mode();
     graphics_view_->deactivate_hand_drag_mode();
    }
 
@@ -201,6 +202,14 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
     Q_EMIT unset_image_pen_visible_requested();
  };
 
+ _self_connect_(shape_select_frame_ ,edit_transform_open_automatically_requested)
+   to_lambda[this] (bool state)
+ {
+  if(state)
+    Q_EMIT set_edit_transform_open_automatically_requested();
+  else
+    Q_EMIT unset_edit_transform_open_automatically_requested();
+ };
 
 // shape_select_frame_->_self_connect(&Shape_Select_Frame::change_scene_color_requested)
 //   (this, &DHAX_Graphics_Frame::change_scene_background_color_requested);

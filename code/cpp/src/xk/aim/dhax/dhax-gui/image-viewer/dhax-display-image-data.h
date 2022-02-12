@@ -39,8 +39,8 @@ class DHAX_Display_Image_Data
 
  DHAX_Application_State* application_state_;
 
-  bool pan_mode_;
-  bool pull_mode_;
+  bool temporary_pan_mode_;
+  bool temporary_pull_mode_;
 
   bool fixed_pan_mode_;
   bool fixed_pull_mode_;
@@ -115,29 +115,29 @@ class DHAX_Display_Image_Data
 //   return DHAX_Drawn_Shape::Shape_Kinds::N_A;
   }
 
-  ACCESSORS__GET(bool ,pan_mode)
-  ACCESSORS__GET(bool ,pull_mode)
+  ACCESSORS__GET(bool ,temporary_pan_mode)
+  ACCESSORS__GET(bool ,temporary_pull_mode)
   ACCESSORS__GET(bool ,fixed_pan_mode)
   ACCESSORS__GET(bool ,fixed_pull_mode)
 
   inline bool pan_modes()
   {
-   return pan_mode() || fixed_pan_mode();
+   return temporary_pan_mode() || fixed_pan_mode();
   }
 
   inline bool pull_modes()
   {
-   return pull_mode() || fixed_pull_mode();
+   return temporary_pull_mode() || fixed_pull_mode();
   }
 
   inline bool pan_or_pull_mode()
   {
-   return pan_mode() || pull_mode() || fixed_pan_mode() || fixed_pull_mode();
+   return temporary_pan_mode() || temporary_pull_mode() || fixed_pan_mode() || fixed_pull_mode();
   }
 
-  void set_pan_mode()
+  void set_temporary_pan_mode()
   {
-   pan_mode_ = true;
+   temporary_pan_mode_ = true;
   }
 
   void set_fixed_pan_mode()
@@ -145,9 +145,9 @@ class DHAX_Display_Image_Data
    fixed_pan_mode_ = true;
   }
 
-  void unset_pan_mode()
+  void unset_temporary_pan_mode()
   {
-   pan_mode_ = false;
+   temporary_pan_mode_ = false;
   }
 
   void unset_fixed_pan_mode()
@@ -157,13 +157,13 @@ class DHAX_Display_Image_Data
 
   void unset_pan_modes()
   {
-   unset_pan_mode();
+   unset_temporary_pan_mode();
    unset_fixed_pan_mode();
   }
 
-  void set_pull_mode()
+  void set_temporary_pull_mode()
   {
-   pull_mode_ = true;
+   temporary_pull_mode_ = true;
   }
 
   void set_fixed_pull_mode()
@@ -171,9 +171,9 @@ class DHAX_Display_Image_Data
    fixed_pull_mode_ = true;
   }
 
-  void unset_pull_mode()
+  void unset_temporary_pull_mode()
   {
-   pull_mode_ = false;
+   temporary_pull_mode_ = false;
   }
 
   void unset_fixed_pull_mode()
@@ -183,7 +183,7 @@ class DHAX_Display_Image_Data
 
   void unset_pull_modes()
   {
-   unset_pull_mode();
+   unset_temporary_pull_mode();
    unset_fixed_pull_mode();
   }
 

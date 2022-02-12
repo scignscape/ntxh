@@ -114,6 +114,9 @@ Q_SIGNALS:
  void set_image_pen_visible_requested();
  void unset_image_pen_visible_requested();
 
+ void set_edit_transform_open_automatically_requested();
+ void unset_edit_transform_open_automatically_requested();
+
 
 public Q_SLOTS:
 

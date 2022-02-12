@@ -162,6 +162,22 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  (ctkRangeSlider*)zoom_slider_[0] >> Connect(minimumValueChanged) -> to_this(handle_zoom_minimum_value_changed);
  (ctkRangeSlider*)zoom_slider_[0] >> Connect(maximumValueChanged) -> to_this(handle_zoom_maximum_value_changed);
 
+ sigma(zoom_slider_[0])->set_multiline_tooltip("Zoom View", R"(
+Zooms the view in or out to create the appearance of the
+image and any notes/annotations becoming larger or smaller.
+Use the sliders on the previous line to enlarge the notes or image independently.)");
+
+
+ sigma(zoom_slider_[1])->set_multiline_tooltip("Zoom Image", R"(
+Zooms the image in or out to change image size appears
+and also modifies the annoations' scale relative to the ground image.
+This scale difference will be stored as part of the annotations' intrinsic data.)");
+
+ sigma(zoom_slider_[2])->set_multiline_tooltip("Zoom Notes", R"(
+Resizes annotations by defining a scale factor relative to the ground image.
+This scale difference will be stored as part of the annotations' intrinsic data.)");
+
+
  (ctkRangeSlider*)zoom_slider_[1] >> Connect(minimumValueChanged) -> to_this(handle_top_zoom_minimum_value_changed);
  (ctkRangeSlider*)zoom_slider_[1] >> Connect(maximumValueChanged) -> to_this(handle_top_zoom_maximum_value_changed);
 
@@ -175,14 +191,24 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
  ((ctkRangeSlider*) zoom_slider_[1])->setMinimumValue(initial_zoom_position_);
  ((ctkRangeSlider*) zoom_slider_[1])->setMaximumValue(100 - initial_zoom_position_);
 
- zoom_sliders_group_box_ = new QGroupBox("Zoom (Image)", this);
- zoom_sliders_top_group_box_ = new QGroupBox("Notes/Image", this);
+ zoom_sliders_group_box_ = new QGroupBox("Zoom (View)", this);
+ zoom_sliders_top_group_box_ = new QGroupBox("Notes OR Image", this);
+
 
 // zoom_sliders_group_box_->setStyleSheet(soft_group_box_style_sheet_().arg(99));
 // zoom_sliders_top_group_box_->setStyleSheet(soft_group_box_style_sheet_().arg(12));
 
  zoom_sliders_group_box_->setStyleSheet(tight_soft_group_box_style_sheet_().arg(83));
  zoom_sliders_top_group_box_->setStyleSheet(tight_left_soft_group_box_style_sheet_().arg(5));
+
+ sigma(zoom_slider_[0], zoom_sliders_group_box_)->share_tooltip();
+
+ sigma(zoom_sliders_top_group_box_)->set_multiline_tooltip("Zoom Notes or Image Independently",
+   R"(Uses these sliders to schange both the visible appearance of the image and
+annotations and also the scale factor of annotations relative to their
+ground image.  This scale difference will be
+stored as part of the annotations' intrinsic data.)");
+
 
  // zoom_sliders_group_box_[1] = new QGroupBox("Notes", this);
 // zoom_sliders_group_box_[2] = new QGroupBox("Notes and Image", this);
@@ -254,13 +280,14 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
  sigma(image_top_left_button_)->set_multiline_tooltip("Image Top Left",
    "Positions the viewport that its top-left corner coincides with top-left corner of the image.");
- image_top_left_button_->setMinimumWidth(50);
+ image_top_left_button_->setMinimumWidth(35);
+ image_top_left_button_->setMaximumWidth(35);
  image_top_left_button_->setMaximumHeight(20);
-
  image_top_left_button_->setStyleSheet(button_style_sheet(12));
 
  center_image_button_ = new QPushButton(QChar(0x29C9), this);
- center_image_button_->setMinimumWidth(50);
+ center_image_button_->setMinimumWidth(45);
+ center_image_button_->setMaximumWidth(45);
  center_image_button_->setMaximumHeight(20);
  sigma(center_image_button_)->set_multiline_tooltip("Center Image",
    "Positions the viewport so that the image appears centered.");
@@ -271,7 +298,8 @@ Zoom_and_Navigate_Frame::Zoom_and_Navigate_Frame(QWidget* parent)
 
   //0x2725
  replace_center_image_button_ = new QPushButton(QChar(0x2726), this);
- replace_center_image_button_->setMinimumWidth(50);
+ replace_center_image_button_->setMinimumWidth(45);
+ replace_center_image_button_->setMaximumWidth(45);
  replace_center_image_button_->setMaximumHeight(20);
  sigma(replace_center_image_button_)->set_multiline_tooltip("Re-Center Image",
    "Moves the image so that it is centered relative to its margins.");

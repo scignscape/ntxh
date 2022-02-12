@@ -39,11 +39,16 @@ class DHAX_Forge_Controller;
 
 class DHAX_Application_State;
 
+class Main_Window_Dialog;
+typedef Main_Window_Dialog Image_Editor_Dialog_Window;
+
 class DHAX_Application_Controller
 {
  DHAX_Application_State* application_state_;
 
  DHAX_Main_Window* application_main_window_;
+
+ Image_Editor_Dialog_Window* current_image_editor_dialog_window_;
 
  DHAX_Main_Window_Controller* main_window_controller_;
  DHAX_Main_Window_Receiver* main_window_receiver_;
@@ -71,6 +76,9 @@ class DHAX_Application_Controller
 // QString mesh_position_;
 // QString mesh_file_path_;
  QString txt_filename_path_;
+
+ Image_Editor_Dialog_Window* open_image_editor_dialog_window();
+
 
 public:
 
@@ -133,6 +141,9 @@ public:
 
  void handle_set_image_pen_visible();
  void handle_unset_image_pen_visible();
+
+ void handle_set_edit_transform_open_automatically();
+ void handle_unset_edit_transform_open_automatically();
 
  void handle_expand_window();
  void handle_unexpand_window();

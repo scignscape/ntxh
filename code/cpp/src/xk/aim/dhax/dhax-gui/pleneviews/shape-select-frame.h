@@ -37,9 +37,13 @@ includes(tooltip, layout, buttons, stylesheet)
 
  QTabWidget* main_tab_widget_;
 
- QPushButton* clear_selected_btn_;
- QPushButton* clear_last_btn_;
- QPushButton* clear_all_btn_;
+ QPushButton* margin_mode_button_;
+ QPushButton* margin_mode_view_button_;
+
+ QLabel* clear_label_;
+ QPushButton* clear_selected_button_;
+ QPushButton* clear_last_button_;
+ QPushButton* clear_all_button_;
 
  QVBoxLayout* main_layout_;
 
@@ -56,10 +60,16 @@ includes(tooltip, layout, buttons, stylesheet)
  QPushButton* back_color_button_;
 
  QPushButton* border_visible_button_;
+ QPushButton* edit_transform_button_;
 
  QHBoxLayout* clear_last_all_layout_1_;
  QHBoxLayout* clear_last_all_layout_2_;
  QHBoxLayout* clear_last_all_layout_3_;
+
+ QHBoxLayout* clear_last_all_layout_23_;
+ QVBoxLayout* clear_last_all_layout_23_left_;
+ QVBoxLayout* clear_last_all_layout_23_right_;
+
 
  QVBoxLayout* image_setup_tab_layout_;
 
@@ -143,31 +153,31 @@ public:
  void switch_to_margins_non_percent();
  void populate_margins_non_percent(bool clear = false);
 
- void set_clear_selected_btn_disabled()
+ void set_clear_selected_button_disabled()
  {
-  clear_selected_btn_->setDisabled(true);
+  clear_selected_button_->setDisabled(true);
  }
- void set_clear_selected_btn_enabled()
+ void set_clear_selected_button_enabled()
  {
-  clear_selected_btn_->setEnabled(true);
- }
-
- void set_clear_last_btn_disabled()
- {
-  clear_last_btn_->setDisabled(true);
- }
- void set_clear_last_btn_enabled()
- {
-  clear_last_btn_->setDisabled(false);
+  clear_selected_button_->setEnabled(true);
  }
 
- void set_clear_all_btn_disabled()
+ void set_clear_last_button_disabled()
  {
-  clear_last_btn_->setDisabled(true);
+  clear_last_button_->setDisabled(true);
  }
- void set_clear_all_btn_enabled()
+ void set_clear_last_button_enabled()
  {
-  clear_last_btn_->setDisabled(false);
+  clear_last_button_->setDisabled(false);
+ }
+
+ void set_clear_all_button_disabled()
+ {
+  clear_last_button_->setDisabled(true);
+ }
+ void set_clear_all_button_enabled()
+ {
+  clear_last_button_->setDisabled(false);
  }
 
  void set_highlight_ckb_disabled()
@@ -179,19 +189,19 @@ public:
 //  highlight_ckb_->setDisabled(false);
  }
 
- bool clear_selected_btn_is_enabled()
+ bool clear_selected_button_is_enabled()
  {
-  return clear_selected_btn_->isEnabled();
+  return clear_selected_button_->isEnabled();
  }
 
- bool clear_last_btn_is_enabled()
+ bool clear_last_button_is_enabled()
  {
-  return clear_last_btn_->isEnabled();
+  return clear_last_button_->isEnabled();
  }
 
- bool clear_all_btn_is_enabled()
+ bool clear_all_button_is_enabled()
  {
-  return clear_all_btn_->isEnabled();
+  return clear_all_button_->isEnabled();
  }
 
  void update_image_path(QString path, u4 page_number = 0);
@@ -201,6 +211,8 @@ Q_SIGNALS:
  void shape_selection_changed(QString new_selection);
  void save_requested(bool);
  void close_requested(bool);
+
+ void edit_transform_open_automatically_requested(bool);
 
  void image_path_show_folder_requested(bool);
  void change_border_color_requested(bool);

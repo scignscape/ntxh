@@ -112,7 +112,12 @@ void DHAX_Image_Viewer::recenter_image()
 
 void DHAX_Image_Viewer::recenter_image_against_margins()
 {
- recenter_image();
+// DHAX_Application_State::Image_Margins& im = application_state_->image_margins();
+// update_image_margins(im);
+
+ image_scene_item_->reset_background_to_original_position();
+
+ //recenter_image();
 }
 
 
@@ -121,7 +126,7 @@ void DHAX_Image_Viewer::recenter_scroll_center()
  if(!image_scene_item_)
    return;
 
- image_scene_item_->reset_background_to_original_position();
+//? image_scene_item_->reset_background_to_original_position();
 
  scrolled_image_view_->centerOn(background_rectangle_center_x_, background_rectangle_center_y_);
 }
@@ -132,7 +137,7 @@ void DHAX_Image_Viewer::recenter_scroll_top_left()
  if(!image_scene_item_)
    return;
 
- image_scene_item_->reset_background_to_original_position();
+//? image_scene_item_->reset_background_to_original_position();
 
  qreal width = scrolled_image_view_->viewport()->width();
  qreal height = scrolled_image_view_->viewport()->height();

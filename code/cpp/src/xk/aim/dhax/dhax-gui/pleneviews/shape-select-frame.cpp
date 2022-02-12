@@ -346,12 +346,15 @@ subcontrol-position: left;}
 
  image_setup_tab_->setLayout(image_setup_tab_layout_);
 
- clear_selected_btn_ = new QPushButton("Clear Selected", this);
- clear_last_btn_ = new QPushButton("Clear Last", this);
- clear_all_btn_ = new QPushButton("Clear All", this);
+ //margin_mode_button_ = new QPushButton("Clear Selected", this);
 
- clear_last_btn_->setEnabled(false);
- clear_all_btn_->setEnabled(false);
+ clear_selected_button_ = new QPushButton("Selected", this);
+ clear_last_button_ = new QPushButton("Last", this);
+ clear_all_button_ = new QPushButton("Clear All", this);
+
+ clear_last_button_->setEnabled(false);
+ clear_all_button_->setEnabled(false);
+ clear_selected_button_->setEnabled(false);
 
  main_tab_layout_ = new QVBoxLayout;
 // main_tab_layout_ = new QGridLayout;
@@ -479,7 +482,7 @@ subcontrol-position: left;}
 
  //main_layout_->addStretch();
 
-// clear_last_all_tab_layout_->addWidget(clear_selected_btn_);
+// clear_last_all_tab_layout_->addWidget(clear_selected_button_);
 
  clear_last_all_layout_1_ = new QHBoxLayout;
  clear_last_all_layout_2_ = new QHBoxLayout;
@@ -494,23 +497,25 @@ subcontrol-position: left;}
  scene_label_ = new_child(QLabel)("Scene");
  scene_color_button_ = new_child(QPushButton);
  scene_color_button_->setMaximumWidth(30);
+ scene_color_button_->setMaximumHeight(15);
  scene_color_button_ >> Connect(clicked) -> to_this(change_scene_color_requested);
 
  back_label_ = new_child(QLabel)("Back");
  back_color_button_ = new_child(QPushButton);
  back_color_button_->setMaximumWidth(30);
+ back_color_button_->setMaximumHeight(15);
  back_color_button_ >> Connect(clicked) -> to_this(change_back_color_requested);
 
  QFontIcon::addFont(":/fontawesome.ttf");
 
  border_visible_button_ = new_child(QPushButton);//(QChar(0x2680));
- QIcon border_visible_button_icon = QFontIcon::icon(QChar(0x2680),
+ QIcon border_visible_button_icon = QFontIcon::icon(QChar(0x2680), //QChar(10609
    checkable_button_orange_color(), 1);
  border_visible_button_->setIcon(border_visible_button_icon);
  border_visible_button_->setCheckable(true);
  border_visible_button_->setChecked(false);
  border_visible_button_->setMaximumWidth(30);
- //border_visible_button_->setMinimumHeight(21);
+ border_visible_button_->setMinimumHeight(15);
  //
  border_visible_button_ >> Connect(clicked) -> to_this(change_border_visible_state_requested);
 
@@ -529,6 +534,31 @@ the image against its background).)");
  border_visible_button_->setStyleSheet(light_checkable_button_style_sheet_orange_hover_());
 
 
+ edit_transform_button_ = new_child(QPushButton)("e/t");//(QChar(0x2680));
+// QIcon border_visible_button_icon = QFontIcon::icon(QChar(0x2680),
+//   checkable_button_orange_color(), 1);
+// border_visible_button_->setIcon(border_visible_button_icon);
+ edit_transform_button_->setCheckable(true);
+ edit_transform_button_->setChecked(false);
+ edit_transform_button_->setMaximumWidth(30);
+ edit_transform_button_->setMaximumHeight(15);
+ edit_transform_button_->setStyleSheet(light_checkable_button_style_sheet_orange_hover_());
+ sigma(edit_transform_button_)->set_multiline_tooltip("Image Edit/Transform",
+   R"(When this button is "on" the image edit/transform dialog window,
+which can be used to modify an image in preparation for analysis
+and to define image-processing pipelines, will be opened automatically
+when a new image is loaded into the main window.  Setting this button
+to the "on" position will open the edit/transform window if it
+has not been opened previously.  This window can also be acivated via a
+context menu option (in the context of the image display).)");
+
+ //border_visible_button_->setMinimumHeight(15);
+ //
+ edit_transform_button_ >> Connect(clicked) -> to_this(edit_transform_open_automatically_requested);
+
+
+ clear_last_all_layout_1_->addWidget(edit_transform_button_);
+ clear_last_all_layout_1_->addStretch();
  clear_last_all_layout_1_->addWidget(border_visible_button_);
  clear_last_all_layout_1_->addStretch();
  clear_last_all_layout_1_->addWidget(scene_label_);
@@ -536,11 +566,57 @@ the image against its background).)");
  clear_last_all_layout_1_->addWidget(back_label_);
  clear_last_all_layout_1_->addWidget(back_color_button_);
 
- clear_last_all_layout_2_->addWidget(clear_last_btn_);
- clear_last_all_layout_2_->addWidget(clear_all_btn_);
+ margin_mode_view_button_ = new_child(QPushButton)(QChar(10613));
+ margin_mode_view_button_->setCheckable(true);
+ margin_mode_view_button_->setChecked(false);
+ margin_mode_view_button_->setMaximumWidth(25);
+ margin_mode_view_button_->setStyleSheet(dark_checkable_button_style_sheet_thick_orange_());
+ sigma(margin_mode_view_button_)->add_style_sheet(light_checkable_button_style_sheet_orange_hover_());
+ sigma(margin_mode_view_button_)->set_multiline_tooltip("Margin Annotation-Description Display",
+   R"(When this button is "on", descriptive text for annotations will be shown
+on the left or right hand margins whether or not the original
+annotations were created in this manner or instead were designed
+to be viewed superimposed on the image or PDF page content.)");
+
+ margin_mode_button_ = new_child(QPushButton)(QChar(10609));
+ margin_mode_button_->setCheckable(true);
+ margin_mode_button_->setChecked(false);
+ margin_mode_button_->setMaximumWidth(25);
+ margin_mode_button_->setStyleSheet(dark_checkable_button_style_sheet_thick_orange_());
+ sigma(margin_mode_button_)->add_style_sheet(light_checkable_button_style_sheet_orange_hover_());
+ sigma(margin_mode_button_)->set_multiline_tooltip("Margin Annotation-Description Mode",
+   R"(When this button is "on", descriptive text for annotations will be automatically
+placed on the left or right hand margins (whichever is closer)
+outside the image or PDF page proper, as opposed to this text hovering
+above the image content when it is visible at all.)");
+
+
+// clear_last_all_layout_2_->addWidget(margin_mode_view_button_);
+// clear_last_all_layout_2_->addWidget(margin_mode_button_);
+// clear_last_all_layout_2_->addStretch();
+
+
+ clear_last_button_->setMaximumWidth(50);
+ clear_selected_button_->setMaximumWidth(70);
+ clear_all_button_->setMaximumWidth(70);
+
+ clear_label_ = new QLabel("Clear:");
+ clear_label_->setMaximumWidth(70);
+
+ clear_last_all_layout_2_->addSpacing(2);
+ cosigma(clear_last_all_layout_2_)->add_vertical_separator_line();
+ clear_last_all_layout_2_->addSpacing(4);
+ clear_last_all_layout_2_->addStretch();
+ clear_last_all_layout_2_->addWidget(clear_label_);
+ clear_last_all_layout_2_->addSpacing(1);
+ clear_last_all_layout_2_->addWidget(clear_last_button_);
+ clear_last_all_layout_2_->addSpacing(4);
+ clear_last_all_layout_2_->addWidget(clear_selected_button_);
 
 // highlight_ckb_ = new_child(QCheckBox)("Highlight");
 // clear_last_all_layout_3_->addWidget(highlight_ckb_);
+
+
 
  image_pen_visible_button_ = new_child(QPushButton);//(QChar(0x1F58A));
  sigma(image_pen_visible_button_)->make_unicode_text(0xf09f968b);
@@ -569,6 +645,10 @@ being loaded from a series.)");
  image_pen_color_button_->setMaximumWidth(30);
  image_pen_color_button_ >> Connect(clicked) -> to_this(change_image_pen_color_requested);
 
+// clear_last_all_layout_3_->addWidget(margin_mode_button_);
+// clear_last_all_layout_3_->addStretch();
+
+ clear_last_all_layout_3_->addStretch();
  clear_last_all_layout_3_->addWidget(image_pen_visible_button_);
  clear_last_all_layout_3_->addWidget(image_pen_color_button_);
  clear_last_all_layout_3_->addStretch();
@@ -577,12 +657,50 @@ being loaded from a series.)");
 
  //clear_last_all_layout_3_->addWidget(clear_last_all_layout_3_separator_line);
 
- clear_last_all_layout_3_->addWidget(clear_selected_btn_);
  clear_last_all_layout_3_->addStretch();
+ clear_last_all_layout_3_->addWidget(clear_all_button_);
+
+
+ clear_last_all_layout_23_ = new QHBoxLayout;
+
+
+ clear_last_all_layout_23_left_ = new QVBoxLayout;
+
+ clear_last_all_layout_23_left_->addStretch();
+ clear_last_all_layout_23_left_->addWidget(margin_mode_view_button_);
+ clear_last_all_layout_23_left_->addSpacing(2);
+ clear_last_all_layout_23_left_->addWidget(margin_mode_button_);
+ clear_last_all_layout_23_left_->addStretch();
+
+ sigma(clear_last_all_layout_23_left_)->constrict_spacing();
+
+ clear_last_all_layout_23_right_ = new QVBoxLayout;
+
+ clear_last_all_layout_23_right_->addLayout(clear_last_all_layout_2_);
+ clear_last_all_layout_23_right_->addSpacing(5);
+ clear_last_all_layout_23_right_->addLayout(clear_last_all_layout_3_);
+// clear_last_all_layout_23_right_->setMargin(0);
+// clear_last_all_layout_23_right_->setContentsMargins(0,0,0,0);
+// clear_last_all_layout_23_right_->setSpacing(0);
+
+ QFrame* frame23 = new QFrame(this);
+ frame23->setLayout(clear_last_all_layout_23_left_);
+ // // maybe a cosigma to convert a layout to a frame
+
+ frame23->setFrameShape(QFrame::Box); // Horizontal line
+ frame23->setFrameShadow(QFrame::Sunken);
+ frame23->setLineWidth(1);
+
+ clear_last_all_layout_23_->addWidget(frame23);
+ //clear_last_all_layout_23_->addLayout(clear_last_all_layout_23_left_);
+ clear_last_all_layout_23_->addLayout(clear_last_all_layout_23_right_);
+ sigma(clear_last_all_layout_23_)->constrict_spacing();
+
 
  clear_last_all_tab_layout_->addLayout(clear_last_all_layout_1_);
- clear_last_all_tab_layout_->addLayout(clear_last_all_layout_2_);
- clear_last_all_tab_layout_->addLayout(clear_last_all_layout_3_);
+// clear_last_all_tab_layout_->addLayout(clear_last_all_layout_2_);
+// clear_last_all_tab_layout_->addLayout(clear_last_all_layout_3_);
+ clear_last_all_tab_layout_->addLayout(clear_last_all_layout_23_);
 
 
 

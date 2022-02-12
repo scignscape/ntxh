@@ -283,6 +283,7 @@ DHAX_Application_Controller::DHAX_Application_Controller()
      application_receiver_(nullptr),
      application_state_(nullptr),
      forge_controller_(nullptr),
+     current_image_editor_dialog_window_(nullptr),
     // display_image_data_(nullptr),
 //     zoom_frame_(nullptr),
 //     image_scene_item_(nullptr),
@@ -541,6 +542,17 @@ void DHAX_Application_Controller::handle_unset_image_pen_visible()
  application_state_->flags.image_pen_visible = false;
 }
 
+void DHAX_Application_Controller::handle_set_edit_transform_open_automatically()
+{
+ application_state_->flags.open_edit_transform_window_automatically = true;
+ if(!current_image_editor_dialog_window_)
+   current_image_editor_dialog_window_ = open_image_editor_dialog_window();
+}
+
+void DHAX_Application_Controller::handle_unset_edit_transform_open_automatically()
+{
+ application_state_->flags.open_edit_transform_window_automatically = false;
+}
 
 
 QColor DHAX_Application_Controller::handle_change_color(QString application_role)
@@ -864,15 +876,24 @@ void DHAX_Application_Controller::handle_polyline_save_requested(bool with_comme
 }
 
 
-void DHAX_Application_Controller::handle_edit_image_requested()
+Image_Editor_Dialog_Window* DHAX_Application_Controller::open_image_editor_dialog_window()
 {
- Main_Window_Dialog* dlg = new Main_Window_Dialog(application_main_window_);
+ Image_Editor_Dialog_Window* dlg = new Image_Editor_Dialog_Window(application_main_window_);
 
  dlg->set_default_image_folder(DHAX_IMAGE_FOLDER);
 
  dlg->set_default_image_file(main_window_controller_->current_image_file_path());
 
  dlg->show();
+
+ return dlg;
+}
+
+void DHAX_Application_Controller::handle_edit_image_requested()
+{
+ Image_Editor_Dialog_Window* dlg = open_image_editor_dialog_window();
+ if(!current_image_editor_dialog_window_)
+   current_image_editor_dialog_window_ = dlg;
 }
 
 void DHAX_Application_Controller::save_current_notation(bool with_comment)
