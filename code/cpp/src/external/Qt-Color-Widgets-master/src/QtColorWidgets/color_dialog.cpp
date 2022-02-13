@@ -31,6 +31,8 @@
 
 #include "QtColorWidgets/color_utils.hpp"
 
+#include "styles.h"
+
 #include <QDebug>
 namespace color_widgets {
 
@@ -63,7 +65,7 @@ ColorDialog::ColorDialog(QWidget *parent, Qt::WindowFlags f) :
 {
     p->ui.setupUi(this);
 
-    setAcceptDrops(true);
+    setAcceptDrops(true);this->setStyleSheet( "QInputDialog {background-color: red;}" );
 
 #ifdef Q_OS_ANDROID
     connect(
@@ -79,6 +81,9 @@ ColorDialog::ColorDialog(QWidget *parent, Qt::WindowFlags f) :
     QPushButton *pickButton = p->ui.buttonBox->addButton(tr("Pick"), QDialogButtonBox::ActionRole);
     pickButton->setIcon(QIcon::fromTheme(QStringLiteral("color-picker")));
 #endif
+
+    p->ui.buttonBox->setStyleSheet(basic_button_style_sheet_());
+
 
     setButtonMode(OkApplyCancel);
 
@@ -296,6 +301,7 @@ void ColorDialog::on_buttonBox_clicked(QAbstractButton *btn)
     case QDialogButtonBox::ApplyRole:
         // Explicitly select the color
         p->ui.preview->setComparisonColor(color());
+        selected_color_ = color();
         Q_EMIT colorSelected(color());
         break;
 

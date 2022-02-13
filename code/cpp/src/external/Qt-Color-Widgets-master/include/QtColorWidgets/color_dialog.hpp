@@ -47,6 +47,9 @@ class QCP_EXPORT ColorDialog : public QDialog
      */
     Q_PROPERTY(bool alphaEnabled READ alphaEnabled WRITE setAlphaEnabled NOTIFY alphaEnabledChanged)
 
+
+ QColor selected_color_;
+
 public:
     enum ButtonMode {
         OkCancel,
@@ -62,6 +65,12 @@ public:
      * Get currently selected color
      */
     QColor color() const;
+
+    QColor selected_color() const
+    {
+     return selected_color_;
+    }
+
 
     /**
      * Set the display mode for the color preview

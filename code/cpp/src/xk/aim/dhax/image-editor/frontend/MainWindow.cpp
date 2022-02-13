@@ -18,6 +18,8 @@
 
 #include "QtColorWidgets/color_dialog.hpp"
 
+#include "styles.h"
+
 
 #include <QFileDialog>
 #include <QDebug>
@@ -251,7 +253,7 @@ void MainWindow::handle_set_scene_background_color()
  color_widgets::ColorDialog dlg(this);
  dlg.setColor(QColor("gray"));
  dlg.exec();
- QColor c = dlg.color();
+ QColor c = dlg.selected_color();
 
  if(!c.isValid())
    return;
@@ -482,7 +484,13 @@ void MainWindow::handle_shear_transform(Skew_Shear_Rotate ssr)
  if(active_image_)
  {
   bool okd;
-  r8 xshear = 0, yshear = 0, xrotate = 0, yrotate = 0;
+  r8 xshear = 0, yshear = 0, xrotate = 0, yrotate = 0,
+     xshear_c = 0, yshear_c = 0, rotate = 0;
+
+//  QInputDialog ind;
+
+  this->setStyleSheet(basic_button_style_sheet_());
+
   switch (ssr)
   {
   case Skew_Shear_Rotate::N_A: return;
@@ -499,33 +507,40 @@ void MainWindow::handle_shear_transform(Skew_Shear_Rotate ssr)
    yshear = QInputDialog::getDouble(this, "Enter Shear Factor", "Amount:", 0.2, -255, 255, 3, &okd, Qt::WindowFlags(), 0.01);
    break;
   case Skew_Shear_Rotate::Rotate:
-   xrotate = QInputDialog::getDouble(this, "Enter Rotation", "Amount:", 20, -180, 180, 1, &okd, Qt::WindowFlags(), 1);
-   yrotate = xrotate;
+   rotate = QInputDialog::getDouble(this, "Enter Rotation", "Amount:", 20, -180, 180, 1, &okd, Qt::WindowFlags(), 1);
    break;
   case Skew_Shear_Rotate::Generic:
    {
-    bool ok = false;
     QList<QString> fields = {"Horizontal Skew", "Horizontal Shear",
-       "Vertical Skew", "Vertical Shear", "Rotate"};
+       "Horizontal Shear (centered)",
+       "Vertical Skew", "Vertical Shear",
+       "Vertical Shear (centered)", "Co-Rotate",
+       "Rotate"};
 
     QVector<InputDialog::Input_Field> infields;
 
     InputDialog::_infield(20, 1, -180, 180).index_into(infields);
     InputDialog::_infield(0.2, 0.01, {-255, 255}, -1).index_into(infields);
-    InputDialog::_infield(0, 1, -180, 180).index_into(infields);
     InputDialog::_infield(0, 0.01, {-255, 255}, -1).index_into(infields);
     InputDialog::_infield(0, 1, -180, 180).index_into(infields);
+    InputDialog::_infield(0, 0.01, {-255, 255}, -1).index_into(infields);
+    InputDialog::_infield(0, 0.01, {-255, 255}, -1).index_into(infields);
+    InputDialog::_infield(0, 1, -180, 180).index_into(infields);
+    InputDialog::_infield(0, 1, -180, 180).index_into(infields);
 
-    QList<QPair<int, double>> values = InputDialog::getFields(this, fields, infields, &ok);
+    QList<QPair<int, double>> values = InputDialog::getFields(this, fields, infields, &okd);
 //    QList<int> values = InputDialog::getFields(this,
 //                                               fields,
 //                                               0, 255, 1, &ok);
-    if(ok)
+    if(okd)
     {
-     xrotate = values[0].first + values[4].first; //QInputDialog::getDouble(this, "Enter Rotation", "Amount:", 20, -180, 180, 1, &okd, Qt::WindowFlags(), 1);
-     yrotate = values[2].first + values[4].first;
+     xrotate = values[0].first + values[6].first; //QInputDialog::getDouble(this, "Enter Rotation", "Amount:", 20, -180, 180, 1, &okd, Qt::WindowFlags(), 1);
+     yrotate = values[3].first + values[6].first;
      xshear = values[1].second;
-     yshear = values[3].second;
+     xshear_c = values[2].second;
+     yshear = values[4].second;
+     yshear_c = values[5].second;
+     rotate = values[7].first;
      break;
     }
    }
@@ -533,15 +548,19 @@ void MainWindow::handle_shear_transform(Skew_Shear_Rotate ssr)
 
   //= QInputDialog::getDouble(this, "Enter Shear Factor", "Amouny:", 1.1, -255, 255, 3, &okd, Qt::WindowFlags(), 0.1);
 
-  std::shared_ptr<ICommand> c1(new Shear_Command(*active_image_, xshear, yshear, xrotate, yrotate));
-  command_manager_.execute(c1);
-  qDebug() << "shear_transform";
-  active_image_->updateBuffer();
-  pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
+  if(okd)
+  {
+   std::shared_ptr<ICommand> c1(new Shear_Command(*active_image_, xshear, xshear_c,
+      yshear, yshear_c, xrotate, yrotate, rotate));
+   command_manager_.execute(c1);
+   qDebug() << "shear_transform";
+   active_image_->updateBuffer();
+   pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
 
-  pending_save_modifications_ = true;
+   pending_save_modifications_ = true;
+  }
+
  }
-
 }
 
 
