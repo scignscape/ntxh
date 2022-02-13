@@ -182,20 +182,22 @@ void Rotateable_Arrow_Annotation::finish_tip_phase(const QPointF& pos)
  case Corner_Pair_Directions::Up_Right:
   rotation_center_ =
     ((shaft_.topLeft() + shaft_.bottomLeft()) / 2)
-    + QPointF(shaft_.height() / 2, 0)
-    ;
+    + QPointF(shaft_.height() / 2, 0);
   break;
  case Corner_Pair_Directions::Down_Left:
  case Corner_Pair_Directions::Up_Left:
-  rotation_center_ = (shaft_.topRight() + shaft_.bottomRight()) / 2;
+  rotation_center_ = ((shaft_.topRight() + shaft_.bottomRight()) / 2)
+    - QPointF(shaft_.height() / 2, 0);
   break;
  case Corner_Pair_Directions::Down_Right_Down:
  case Corner_Pair_Directions::Down_Left_Down:
-  rotation_center_ = (shaft_.topLeft() + shaft_.topRight()) / 2;
+  rotation_center_ = ((shaft_.topLeft() + shaft_.topRight()) / 2)
+    + QPointF(0, shaft_.width() / 2);
   break;
  case Corner_Pair_Directions::Up_Right_Up:
  case Corner_Pair_Directions::Up_Left_Up:
-  rotation_center_ = (shaft_.bottomLeft() + shaft_.bottomRight()) / 2;
+  rotation_center_ = ((shaft_.bottomLeft() + shaft_.bottomRight()) / 2)
+    - QPointF(0, shaft_.width() / 2);
   break;
  }
 
@@ -207,47 +209,50 @@ void Rotateable_Arrow_Annotation::finish_tip_phase(const QPointF& pos)
 
 void Rotateable_Arrow_Annotation::wheelEvent(QWheelEvent* event)
 {
- switch (_spaceship(event->angleDelta().y()))
+ Qt::KeyboardModifiers mods = event->modifiers();
+
+ if(mods & (Qt::ShiftModifier | Qt::ControlModifier))
  {
- case 1: shaft_offset_ -= shaft_offset_delta_;
-   repaint();
-  break;
- case -1: shaft_offset_ += shaft_offset_delta_; repaint(); break;
- default: return;
- }
-
- qDebug() << "shaft_offset_: " << shaft_offset_;
-
- event->accept();
- return;
-
- if( event->buttons() & Qt::RightButton )
- {
-  switch (_spaceship(event->angleDelta().y()))
+  if(mods & Qt::ShiftModifier)
   {
-  case 1: if(tip_point_width_ > 0)
+   switch (_spaceship(event->angleDelta().y()))
    {
-    tip_point_width_ -= tip_point_width_delta_;
-    repaint();
+   case 1: if(tip_point_width_ > 0)
+    {
+     tip_point_width_ -= tip_point_width_delta_;
+     repaint();
+    }
+    break;
+   case -1: tip_point_width_ += tip_point_width_delta_; repaint(); break;
+   default: return;
    }
-   break;
-  case -1: tip_point_width_ += tip_point_width_delta_; repaint(); break;
-  default: return;
+  }
+  else if(mods & Qt::ControlModifier)
+  {
+   switch (_spaceship(event->angleDelta().y()))
+   {
+   case 1: if(tip_corner_bend_ > 0)
+    {
+     tip_corner_bend_ -= tip_corner_bend_delta_;
+     repaint();
+    }
+    break;
+   case -1: tip_corner_bend_ += tip_corner_bend_delta_; repaint(); break;
+   default: return;
+   }
   }
  }
  else
  {
   switch (_spaceship(event->angleDelta().y()))
   {
-  case 1: if(tip_corner_bend_ > 0)
-   {
-    tip_corner_bend_ -= tip_corner_bend_delta_;
+  case 1: shaft_offset_ -= shaft_offset_delta_;
     repaint();
-   }
    break;
-  case -1: tip_corner_bend_ += tip_corner_bend_delta_; repaint(); break;
+  case -1: shaft_offset_ += shaft_offset_delta_; repaint(); break;
   default: return;
   }
+  event->accept();
  }
 }
 
@@ -313,9 +318,9 @@ void Rotateable_Arrow_Annotation::process_paint_event(QPaintEvent* event, QPaint
   case (s1) Corner_Pair_Directions::Down_Right_Down:
    {
     points = QVector<QPoint>{
-      _shaft.topRight(), _shaft.bottomRight(), _tip.topRight() - bend,
+      _shaft.topRight() + QPoint(shaft_offset_, 0), _shaft.bottomRight(), _tip.topRight() - bend,
       ((_tip.bottomRight() + _tip.bottomLeft()) / 2),
-       _tip.topLeft() - bend, _shaft.bottomLeft(), _shaft.topLeft()
+       _tip.topLeft() - bend, _shaft.bottomLeft(), _shaft.topLeft() - QPoint(shaft_offset_, 0)
       };
    }
    break;
@@ -323,19 +328,19 @@ void Rotateable_Arrow_Annotation::process_paint_event(QPaintEvent* event, QPaint
    {
     QPoint mid = ((_tip.bottomLeft() + _tip.bottomRight()) / 2);
     points = QVector<QPoint>{
-      _shaft.topRight(), _shaft.bottomRight(), _tip.topRight() - bend,
+      _shaft.topRight() + QPoint(shaft_offset_, 0), _shaft.bottomRight(), _tip.topRight() - bend,
       mid + QPoint(tip_point_width_, 0),
       mid - QPoint(tip_point_width_, 0),
-      _tip.topLeft() - bend, _shaft.bottomLeft(), _shaft.topLeft()
+      _tip.topLeft() - bend, _shaft.bottomLeft(), _shaft.topLeft() - QPoint(shaft_offset_, 0)
       };
    }
    break;
   case (s1) Corner_Pair_Directions::Up_Right_Up:
    {
     points = QVector<QPoint>{
-      _shaft.bottomRight(), _shaft.topRight(), _tip.bottomRight() + bend,
+      _shaft.bottomRight() + QPoint(shaft_offset_, 0), _shaft.topRight(), _tip.bottomRight() + bend,
       ((_tip.topRight() + _tip.topLeft()) / 2),
-       _tip.bottomLeft() + bend, _shaft.topLeft(), _shaft.bottomLeft()
+       _tip.bottomLeft() + bend, _shaft.topLeft(), _shaft.bottomLeft() - QPoint(shaft_offset_, 0)
       };
    }
    break;
@@ -343,19 +348,19 @@ void Rotateable_Arrow_Annotation::process_paint_event(QPaintEvent* event, QPaint
    {
     QPoint mid = ((_tip.topLeft() + _tip.topRight()) / 2);
     points = QVector<QPoint>{
-      _shaft.bottomRight(), _shaft.topRight(), _tip.bottomRight() + bend,
+      _shaft.bottomRight() + QPoint(shaft_offset_, 0), _shaft.topRight(), _tip.bottomRight() + bend,
       mid + QPoint(tip_point_width_, 0),
       mid - QPoint(tip_point_width_, 0),
-      _tip.bottomLeft() + bend, _shaft.topLeft(), _shaft.bottomLeft()
+      _tip.bottomLeft() + bend, _shaft.topLeft(), _shaft.bottomLeft() - QPoint(shaft_offset_, 0)
       };
    }
    break;
   case (s1) Corner_Pair_Directions::Down_Left_Down:
    {
     points = QVector<QPoint>{
-      _shaft.topLeft(), _shaft.bottomLeft(), _tip.topLeft() - bend,
+      _shaft.topLeft() - QPoint(shaft_offset_, 0), _shaft.bottomLeft(), _tip.topLeft() - bend,
       ((_tip.bottomLeft() + _tip.bottomRight()) / 2),
-       _tip.topRight() - bend, _shaft.bottomRight(), _shaft.topRight()
+       _tip.topRight() - bend, _shaft.bottomRight(), _shaft.topRight() + QPoint(shaft_offset_, 0)
       };
    }
    break;
@@ -363,19 +368,19 @@ void Rotateable_Arrow_Annotation::process_paint_event(QPaintEvent* event, QPaint
    {
     QPoint mid = ((_tip.bottomLeft() + _tip.bottomRight()) / 2);
     points = QVector<QPoint>{
-      _shaft.topLeft(), _shaft.bottomLeft(), _tip.topLeft() - bend,
+      _shaft.topLeft() - QPoint(shaft_offset_, 0), _shaft.bottomLeft(), _tip.topLeft() - bend,
       mid - QPoint(tip_point_width_, 0),
       mid + QPoint(tip_point_width_, 0),
-      _tip.topRight() - bend, _shaft.bottomRight(), _shaft.topRight()
+      _tip.topRight() - bend, _shaft.bottomRight(), _shaft.topRight() + QPoint(shaft_offset_, 0)
       };
    }
    break;
   case (s1) Corner_Pair_Directions::Up_Left_Up:
    {
     points = QVector<QPoint>{
-      _shaft.bottomLeft(), _shaft.topLeft(), _tip.bottomLeft() + bend,
+      _shaft.bottomLeft() - QPoint(shaft_offset_, 0), _shaft.topLeft(), _tip.bottomLeft() + bend,
       ((_tip.topLeft() + _tip.topRight()) / 2),
-       _tip.bottomRight() + bend, _shaft.topRight(), _shaft.bottomRight()
+       _tip.bottomRight() + bend, _shaft.topRight(), _shaft.bottomRight() + QPoint(shaft_offset_, 0)
       };
    }
    break;
@@ -383,10 +388,10 @@ void Rotateable_Arrow_Annotation::process_paint_event(QPaintEvent* event, QPaint
    {
     QPoint mid = ((_tip.topLeft() + _tip.topRight()) / 2);
     points = QVector<QPoint>{
-      _shaft.bottomLeft(), _shaft.topLeft(), _tip.bottomLeft() + bend,
+      _shaft.bottomLeft() - QPoint(shaft_offset_, 0), _shaft.topLeft(), _tip.bottomLeft() + bend,
       mid - QPoint(tip_point_width_, 0),
       mid + QPoint(tip_point_width_, 0),
-       _tip.bottomRight() + bend, _shaft.topRight(), _shaft.bottomRight()
+       _tip.bottomRight() + bend, _shaft.topRight(), _shaft.bottomRight() + QPoint(shaft_offset_, 0)
       };
    }
    break;
@@ -396,10 +401,10 @@ void Rotateable_Arrow_Annotation::process_paint_event(QPaintEvent* event, QPaint
     QPoint mid = ((_tip.topLeft() + _tip.bottomLeft()) / 2);
 
     points = QVector<QPoint>{
-      _shaft.topRight() - QPoint(shaft_offset_, 0), _shaft.topLeft(), _tip.topRight() + bend,
+      _shaft.topRight() - QPoint(0, shaft_offset_), _shaft.topLeft(), _tip.topRight() + bend,
       mid - QPoint(0, tip_point_width_),
       mid + QPoint(0, tip_point_width_),
-      _tip.bottomRight() + bend, _shaft.bottomLeft(), _shaft.bottomRight() + QPoint(shaft_offset_, 0)
+      _tip.bottomRight() + bend, _shaft.bottomLeft(), _shaft.bottomRight() + QPoint(0, shaft_offset_)
       };
    }
    break;
@@ -407,9 +412,9 @@ void Rotateable_Arrow_Annotation::process_paint_event(QPaintEvent* event, QPaint
   case (s1) Corner_Pair_Directions::Up_Left:
    {
     points = QVector<QPoint>{
-      _shaft.topRight() - QPoint(shaft_offset_, 0), _shaft.topLeft(), _tip.topRight() + bend,
+      _shaft.topRight() - QPoint(0, shaft_offset_), _shaft.topLeft(), _tip.topRight() + bend,
       ((_tip.topLeft() + _tip.bottomLeft()) / 2),
-      _tip.bottomRight() + bend, _shaft.bottomLeft(), _shaft.bottomRight() + QPoint(shaft_offset_, 0)
+      _tip.bottomRight() + bend, _shaft.bottomLeft(), _shaft.bottomRight() + QPoint(0, shaft_offset_)
       };
    }
    break;
