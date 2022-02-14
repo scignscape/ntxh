@@ -101,6 +101,11 @@ public:
 
  void open_image_file(QString path);
 
+ void fit_image_in_view();
+ void reset_scene_rectangle();
+
+ void adjust_window_size(QSize& sz);
+
 private slots:
 
  void handle_heuristic_mask();

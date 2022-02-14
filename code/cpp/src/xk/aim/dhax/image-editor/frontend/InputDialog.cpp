@@ -82,6 +82,12 @@ InputDialog::InputDialog(QWidget* parent, const QList<QString>& field_labels, co
  {
   QString field = field_labels[infield.label_index];
   QLabel* label = new QLabel(field, this);
+  QPushButton* zbutton = new QPushButton("0", this);
+  zbutton->setStyleSheet(light_small_thin_white_button_style_sheet_().arg(7));
+  zbutton->setMaximumHeight(18);
+  zbutton->setMaximumWidth(18);
+//  zbutton->setMinimumWidth(42);
+  QHBoxLayout* hbl = new QHBoxLayout;
 
   if(infield.int_min == infield.int_max)
   {
@@ -90,8 +96,21 @@ InputDialog::InputDialog(QWidget* parent, const QList<QString>& field_labels, co
    dedit->setMaximum(infield.double_max);
    dedit->setSingleStep(infield.increment);
    dedit->setValue(infield.default_value);
+   if(infield.default_value == 0)
+     zbutton->setProperty("suppressed", true);
    dedit->setDecimals(2 - infield.int_min);
-   layout->insertRow(infield.layout_index, label, dedit);
+   hbl->addWidget(dedit);
+   hbl->addWidget(zbutton);
+   connect(zbutton, &QPushButton::clicked, [dedit](bool)
+   {
+    dedit->setValue(0);
+   });
+   connect(dedit, QOverload<double>::of(&QDoubleSpinBox::valueChanged), [zbutton](double v)
+   {
+    zbutton->setProperty("suppressed", v == 0);
+    zbutton->setStyleSheet(zbutton->styleSheet());
+   });
+   layout->insertRow(infield.layout_index, label, hbl);
    values_ << dedit;
   }
   else
@@ -101,7 +120,20 @@ InputDialog::InputDialog(QWidget* parent, const QList<QString>& field_labels, co
    edit->setMaximum(infield.int_max);
    edit->setValue((s4)infield.default_value);
    edit->setSingleStep((s4)infield.increment);
-   layout->insertRow(infield.layout_index, label, edit);
+   hbl->addWidget(edit);
+   hbl->addWidget(zbutton);
+   if(infield.default_value == 0)
+     zbutton->setProperty("suppressed", true);
+   connect(zbutton, &QPushButton::clicked, [edit](bool)
+   {
+    edit->setValue(0);
+   });
+   connect(edit, QOverload<int>::of(&QSpinBox::valueChanged), [zbutton](double v)
+   {
+    zbutton->setProperty("suppressed", v == 0);
+    zbutton->setStyleSheet(zbutton->styleSheet());
+   });
+   layout->insertRow(infield.layout_index, label, hbl);
    values_ << edit;
   }
  }

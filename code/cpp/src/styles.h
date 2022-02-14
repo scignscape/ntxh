@@ -213,6 +213,7 @@ inline void set_multiline_tooltip(WIDGET_Type* w, QString top, QString bottom)
 )").arg(top).arg(bottom));
 }
 
+
 template<typename WIDGET_Type>
 inline void make_unicode_text(WIDGET_Type* w, u4 code_point)
 {
@@ -378,7 +379,7 @@ inline void make_light_double_forward_button(WIDGET_Type* w)
 inline QString basic_button_style_sheet_()
 {
  return
- "QPushButton:default {"
+ "QPushButton:default { qproperty-icon: url(\"\"); "
  "background-color: qlineargradient("
  "x1:0, y1:0, x2:0, y2:1,"
  "stop:0 #C5D8FA,"
@@ -1068,6 +1069,41 @@ inline QString light_small_thin_button_style_sheet_()
    " border-left: 2px groove rgb(240,90,240); "
    " border-right: 2px ridge rgb(240,90,240); "
    "}\n"
+   ;
+}
+
+inline QString light_small_thin_white_button_style_sheet_()
+{
+ return
+   "QPushButton {"
+   " color:blue; "
+   " background:rgb(214,230,250);min-width: 11px;"
+   " font-size: %1pt; "
+   " padding-left:2;padding-right:2;padding-top:0;padding-bottom:0;"
+   " border-top:1px solid white; "
+   " border-bottom:none; "
+   " border-left: 1px groove rgb(240,190,10); "
+   " border-right: 1px ridge rgb(240,190,10); "
+   "}\n"
+
+   "QPushButton:hover {background:rgb(190,0,230);min-width:11px;"
+   " border-radius: 4px;padding-left:2;padding-right:2;padding-top:0;padding-bottom:0;"
+   " border-left: 2px groove rgb(240,90,240); "
+   " border-right: 2px ridge rgb(240,90,240); "
+   "}\n"
+
+   "QPushButton[suppressed=true]:hover {background:rgb(140,135,140);min-width:11px;"
+   " border-radius: 14px;padding-left:2;padding-right:2;padding-top:0;padding-bottom:0;"
+   " border-left: 2px groove rgb(190,233,230); "
+   " border-right: 2px ridge rgb(190,233,230); "
+   "}\n"
+
+   "QPushButton[suppressed=true] {background:rgb(227,222,227);min-width:11px;"
+   " border-radius: 14px;padding-left:2;padding-right:2;padding-top:0;padding-bottom:0;"
+   " border-left: 2px groove rgb(190,233,230); "
+   " border-right: 2px ridge rgb(190,233,230); "
+   "}\n"
+
    ;
 }
 

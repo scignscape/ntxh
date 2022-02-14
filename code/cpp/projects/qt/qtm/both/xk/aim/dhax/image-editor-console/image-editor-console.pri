@@ -63,6 +63,12 @@ QtColorWidgets_SRC_DIR = $$SRC_ROOT_DIR/external/Qt-Color-Widgets-master
 INCLUDEPATH += $$QtColorWidgets_SRC_DIR/include
 FORMS += $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_dialog.ui
 
+QFontIcon_SRC_DIR = $$SRC_ROOT_DIR/external/QFontIcon-master/QFontIcon
+INCLUDEPATH += $$QFontIcon_SRC_DIR/../
+HEADERS += $$QFontIcon_SRC_DIR/qfonticon.h
+SOURCES += $$QFontIcon_SRC_DIR/qfonticon.cpp
+RESOURCES += $$QFontIcon_SRC_DIR/../resource.qrc
+
 
 HEADERS += \
   $$QtColorWidgets_SRC_DIR/include/QtColorWidgets/color_dialog.hpp \

@@ -31,6 +31,9 @@
 
 #include "QtColorWidgets/color_utils.hpp"
 
+#include "QFontIcon/qfonticon.h"
+
+
 #include "styles.h"
 
 #include <QDebug>
@@ -65,7 +68,28 @@ ColorDialog::ColorDialog(QWidget *parent, Qt::WindowFlags f) :
 {
     p->ui.setupUi(this);
 
-    setAcceptDrops(true);this->setStyleSheet( "QInputDialog {background-color: red;}" );
+    setAcceptDrops(true);
+
+    setButtonMode(OkApplyCancel);
+
+    for(QAbstractButton* b : p->ui.buttonBox->buttons())
+    {
+     if(b->text() == "Apply")
+       continue;
+//     if(b->text().contains("Pick"))
+//       b->setIcon(pick_icon);
+//     else
+     b->setIcon(QIcon());
+     b->setStyleSheet(basic_button_style_sheet_());
+//     QPushButton* pb = qobject_cast<QPushButton*>(b);
+//     qDebug() << "bn: " << pb->icon().name();
+//     qDebug() << "bl: " << b->text();
+//     pb->setIcon(border_visible_button_icon);
+//     qDebug() << "bn: " << pb->icon().name();
+    }
+
+
+
 
 #ifdef Q_OS_ANDROID
     connect(
@@ -78,14 +102,23 @@ ColorDialog::ColorDialog(QWidget *parent, Qt::WindowFlags f) :
     p->screen_rotation();
 #else
     // Add "pick color" button
-    QPushButton *pickButton = p->ui.buttonBox->addButton(tr("Pick"), QDialogButtonBox::ActionRole);
+    QPushButton* pickButton = p->ui.buttonBox->addButton("", QDialogButtonBox::ActionRole);
     pickButton->setIcon(QIcon::fromTheme(QStringLiteral("color-picker")));
+    pickButton->setMaximumHeight(19);
+    pickButton->setStyleSheet("QPushButton{}");
 #endif
 
+    QFontIcon::addFont(":/fontawesome.ttf");
+
+    make_unicode_text(pickButton, 0xF09F948D);
+    pickButton->setText(pickButton->text().prepend(tr("Pick ")));
+
+    QIcon pick_icon = QFontIcon::icon(QChar(8682),
+      checkable_button_orange_color(), 1);
+
+    pickButton->setIcon(pick_icon);
+
     p->ui.buttonBox->setStyleSheet(basic_button_style_sheet_());
-
-
-    setButtonMode(OkApplyCancel);
 
     connect(p->ui.wheel, &ColorWheel::colorSpaceChanged, this, &ColorDialog::colorSpaceChanged);
     connect(p->ui.wheel, &ColorWheel::selectorShapeChanged, this, &ColorDialog::wheelShapeChanged);

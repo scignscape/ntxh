@@ -80,6 +80,10 @@ public:
 
  QColor get_additive_color_mean(QVector<u4> rgb[3]);
 
+ QString kind_name() Q_DECL_OVERRIDE
+ {
+  return "Simple-Rectangle";
+ }
 
 protected:
 

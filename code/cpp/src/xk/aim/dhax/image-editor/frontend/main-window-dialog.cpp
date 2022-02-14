@@ -88,8 +88,19 @@ Main_Window_Dialog::Main_Window_Dialog(QWidget* parent)
 void Main_Window_Dialog::set_default_image_file(QString f)
 {
  main_window_->open_image_file(f);
+ main_window_->reset_scene_rectangle();
 }
 
+void Main_Window_Dialog::set_window_dimensions(const QSize& size)
+{
+ QSize sz = size;
+ main_window_->adjust_window_size(sz);
+
+ resize(sz);
+ main_window_->fit_image_in_view();
+ //connect(main_window_, MainWindow::)
+ //main_window_->on_actionZoom_Adapt_triggered();
+}
 
 void Main_Window_Dialog::set_default_image_folder(QString f)
 {
@@ -99,5 +110,5 @@ void Main_Window_Dialog::set_default_image_folder(QString f)
 
 void Main_Window_Dialog::resizeEvent(QResizeEvent* rev)
 {
- //?main_window_->resize(size().width() - 40, size().height() - 140);
+ //? main_window_->resize(size().width() - 40, size().height() - 140);
 }

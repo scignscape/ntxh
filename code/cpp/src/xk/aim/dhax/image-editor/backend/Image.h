@@ -73,6 +73,16 @@ public:
  int* getWptr();
  int* getHptr();
 
+ double get_aspect_ratio()
+ {
+  return (double) w / h;
+ }
+
+ double get_inverse_aspect_ratio()
+ {
+  return (double) h / w;
+ }
+
  void setW(int w);
  void setH(int h);
 

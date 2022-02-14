@@ -35,6 +35,12 @@ public:
  ACCESSORS(r8 ,rotation)
  ACCESSORS(s2 ,y_offset)
 
+ QPair<r8, r8> get_offset_angle();
+
+ QString kind_name() Q_DECL_OVERRIDE
+ {
+  return "Skew/Rhombus";
+ }
 
  virtual void reset_geometry(const QPointF& sc = {}) Q_DECL_OVERRIDE;
 

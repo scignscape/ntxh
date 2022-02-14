@@ -5,6 +5,8 @@
 
 #include <QDebug>
 
+#include <QtMath>
+
 #include "global-types.h"
 
 Skew_Rhombus_Annotation::Skew_Rhombus_Annotation(DHAX_Mouse_Interaction_Data& mouse_interaction_data,
@@ -129,6 +131,14 @@ void Skew_Rhombus_Annotation::finish_expansion_phase(const QPointF& pos)
 {
  current_corner_pair_direction_ ^= Corner_Pair_Directions::Third_Phase;
  current_corner_pair_direction_ |= Corner_Pair_Directions::Fourth_Phase;
+}
+
+
+QPair<r8, r8> Skew_Rhombus_Annotation::get_offset_angle()
+{
+ double inv = x_offset_ / scaffold_.height();
+ r8 ang = qAtan(inv);
+ return {qRadiansToDegrees(ang), -inv};
 }
 
 

@@ -40,6 +40,9 @@ public:
  void set_default_image_folder(QString f);
  void set_default_image_file(QString f);
 
+ void set_window_dimensions(const QSize& size);
+
+
 };
 
 #endif // MAIN_WINDOW_DIALOG__H

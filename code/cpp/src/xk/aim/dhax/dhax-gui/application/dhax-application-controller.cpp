@@ -885,6 +885,7 @@ Image_Editor_Dialog_Window* DHAX_Application_Controller::open_image_editor_dialo
  dlg->set_default_image_file(main_window_controller_->current_image_file_path());
 
  dlg->show();
+ dlg->set_window_dimensions(application_main_window_->size());
 
  return dlg;
 }

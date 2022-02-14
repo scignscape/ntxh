@@ -320,6 +320,11 @@ void MainWindow::open_image_file(QString path)
 
 }
 
+void MainWindow::reset_scene_rectangle()
+{
+ if(active_image_)
+   scene_->setSceneRect(0, 0, active_image_->getW(), active_image_->getH());
+}
 
 void MainWindow::on_actionOpen_triggered()
 {
@@ -329,8 +334,7 @@ void MainWindow::on_actionOpen_triggered()
  if(!imagePath.isEmpty())
  {
   open_image_file(imagePath);
-
-  scene_->setSceneRect(0, 0, active_image_->getW(), active_image_->getH());
+  //reset_scene_rectangle();
  }
 }
 
@@ -401,11 +405,24 @@ void MainWindow::on_actionSave_as_triggered()
  }
 }
 
+void MainWindow::fit_image_in_view()
+{
+ graphics_view_->fitInView(pixmap_item_, Qt::KeepAspectRatio);
+}
+
+void MainWindow::adjust_window_size(QSize& sz)
+{
+ sz.setWidth(qMin(400, sz.width()));
+ if(active_image_)
+   sz.setHeight(active_image_->get_inverse_aspect_ratio() * (sz.width() + 100));
+ else
+   sz.setHeight(qMin(300, sz.width()));
+}
 
 void MainWindow::on_actionZoom_Adapt_triggered()
 {
  if(active_image_)
-   graphics_view_->fitInView(pixmap_item_, Qt::KeepAspectRatio);
+   fit_image_in_view();
 }
 
 void MainWindow::on_actionZoomInc_triggered()

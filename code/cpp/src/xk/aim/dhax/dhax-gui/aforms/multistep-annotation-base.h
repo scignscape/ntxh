@@ -112,6 +112,8 @@ public:
 
  virtual void show();
 
+ virtual QString kind_name(){return {};}
+
  virtual void init_shape_pen(QConicalGradient& gradient, QPen& pen);
  virtual void init_dotted_shape_pen(QConicalGradient& gradient, QPen& pen);
  virtual void init_solid_shape_pen(QConicalGradient& gradient, QPen& pen);

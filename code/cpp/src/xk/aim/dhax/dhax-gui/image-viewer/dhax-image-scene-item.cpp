@@ -16,6 +16,7 @@
 #include "aforms/measurement-dialogs/simple/simple-rectangle-measurement-dialog.h"
 
 #include "aforms/simple/simple-rectangle-annotation.h"
+#include "aforms/skew-rhombus-annotation.h"
 
 #include "dhax-graphics-view.h"
 
@@ -28,6 +29,8 @@
 
 #include <QPainter>
 #include <QDebug>
+
+#include <QMessageBox>
 
 #include <QGuiApplication>
 
@@ -1005,14 +1008,27 @@ void DHAX_Image_Scene_Item::mouseDoubleClickEvent(QMouseEvent *mouseEvent)
 
 void DHAX_Image_Scene_Item::show_annotation_measurements_dialog(const QPoint& pos)
 {
- Simple_Rectangle_Measurement_Dialog* dlg = new Simple_Rectangle_Measurement_Dialog(
-   static_cast<Simple_Rectangle_Annotation*>(current_completed_multistep_annotation_), nullptr);
+ QString kn = current_completed_multistep_annotation_->kind_name();
+ if(kn == "Simple-Rectangle")
+ {
+  Simple_Rectangle_Annotation* sra = static_cast<Simple_Rectangle_Annotation*>(current_completed_multistep_annotation_);
+  Simple_Rectangle_Measurement_Dialog* dlg = new Simple_Rectangle_Measurement_Dialog(
+   sra, nullptr);
 
- dlg->set_image_file_path(image_file_path_);
+  dlg->set_image_file_path(image_file_path_);
+  dlg->show();
+ }
+
+ else if(kn == "Skew/Rhombus")
+ {
+  Skew_Rhombus_Annotation* sra = static_cast<Skew_Rhombus_Annotation*>(current_completed_multistep_annotation_);
+  QPair<r8, r8> ang_sh = sra->get_offset_angle();
+  static QString msg{"Shape angle corresponds to a skew/rotate of angle %1 or shear of factor %2"};
+  QMessageBox::information(nullptr, "Shear/Rotate Information", msg.arg(ang_sh.first).arg(ang_sh.second));
+ }
 
  //dlg->generate_overlay_file();
 
  //qDebug() << dlg->windowTitle();
- dlg->show();
 }
 
