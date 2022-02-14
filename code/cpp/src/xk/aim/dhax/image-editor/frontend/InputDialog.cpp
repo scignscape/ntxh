@@ -6,6 +6,8 @@
 #include <QFormLayout>
 #include <QDebug>
 
+#include <QEventLoop>
+
 #include "styles.h"
 
 //heap is managed by parent Widget (no leak), implementation with smart ptr is not suitable in this case.
@@ -186,7 +188,18 @@ InputDialog::getFields(QWidget* parent, QList<QString>& field_labels, QVector<In
 
  QList<QPair<int, double>> result;
 
- bool okInput = dialog->exec();
+ bool okInput = false;
+
+ QEventLoop loop;
+ connect(dialog, &QDialog::finished, [&loop, &okInput](int result)
+ {
+  okInput = result == QDialog::Accepted;
+  loop.exit();
+ });
+
+ dialog->show();
+
+ loop.exec();
 
  if(okInput)
  {

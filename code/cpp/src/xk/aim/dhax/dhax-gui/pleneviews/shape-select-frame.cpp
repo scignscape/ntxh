@@ -401,7 +401,7 @@ subcontrol-position: left;}
 
  generic_shape_options_->addItem("Multi-Line");
  generic_shape_options_->addItem("Arrow");
- generic_shape_options_->addItem("Measure");
+ generic_shape_options_->addItem("Measurement");
  generic_shape_options_->addItem("Skew/Rhombus");
 
  generic_shape_options_->addItem("N_A");
@@ -501,10 +501,21 @@ subcontrol-position: left;}
  scene_color_button_ >> Connect(clicked) -> to_this(change_scene_color_requested);
 
  back_label_ = new_child(QLabel)("Back");
+
+ sigma(back_label_)->set_multiline_tooltip("Set Image Background Color",
+   R"(This button shows the current image background.  Click the
+button to select a new color for this background.<br>Note that the
+image background is different from the scene background, and will only
+be visible when the current PDF page or image has non-zero margins (allowing notes/annotations
+to extend beyond the page/image borders).)");
+
+
  back_color_button_ = new_child(QPushButton);
  back_color_button_->setMaximumWidth(30);
  back_color_button_->setMaximumHeight(15);
  back_color_button_ >> Connect(clicked) -> to_this(change_back_color_requested);
+
+ sigma(back_label_, back_color_button_)->share_tooltip();
 
  QFontIcon::addFont(":/fontawesome.ttf");
 
