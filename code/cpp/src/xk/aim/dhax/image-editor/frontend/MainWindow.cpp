@@ -105,7 +105,7 @@ MainWindow::MainWindow(QWidget *parent) :
  sharpen_action_ = new QAction("Sharpen", this);
  emboss_action_ = new QAction("Emboss", this);
  edge_detect_action_ = new QAction("Edge Detect", this);
- heuristic_mask_action_ = new QAction("Heuristic Masl", this);
+ heuristic_mask_action_ = new QAction("Heuristic Mask", this);
 
  extend_mod_3_action_ = new QAction("Extend Mod 3 Action", this);
  quantize_3x3_action_ = new QAction("Quantize 3x3", this);
