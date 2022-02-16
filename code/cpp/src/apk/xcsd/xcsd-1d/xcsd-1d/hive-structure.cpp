@@ -15,6 +15,50 @@
 
 USING_XCNS(XCSD)
 
+//template<typename GALAXY_Type>
+//typename GALAXY_Type::element_type&
+//Hive_Structure<GALAXY_Type>::get_element(Hive_Structure::numeric_index_type ind)
+//{
+// int layer_index = ind % layer_size();
+
+// int layer_order = fixed_size()? 0 :
+//   ind / layer_size();
+
+// Hive_Layer* hl = nullptr;
+
+// if(fixed_size())
+//   hl = layer_ptr();
+// else
+// {
+//  Hive_Layer_Block* hlb = block_package_->first_block_;
+//  numeric_index_type lcount = block_package_->block_size_;
+//  int block_index = layer_order % lcount;
+//  int block_order = layer_order / lcount;
+//  int order = 0;
+//  while(order < block_order)
+//  {
+//   if(!hlb->next)
+//   {
+//    Hive_Layer* new_hl = new Hive_Layer[lcount];
+//    for(int i = 0; i < lcount; ++i)
+//      new_hl[i] = {nullptr};
+//    Hive_Layer_Block* new_hb = new Hive_Layer_Block{new_hl, nullptr};
+//    hlb->next = new_hb;
+//   }
+//   hlb = hlb->next;
+//   ++order;
+//  }
+//  hl = &(hlb->layers)[block_index];
+//  if(hl->elements == nullptr)
+//  {
+//   hl->elements = new element_type[layer_size()];
+//  }
+// }
+// return &(hl->elements)[layer_index];
+//}
+
+
+#ifdef HIDE
 Hive_Structure::Hive_Structure()
  :  block_size_(0), total_size_(0),
    value_size_(0), first_block_(nullptr)
@@ -203,3 +247,5 @@ void Hive_Structure::decrement_iterator(iterator& hit)
  else
    --hit.inner_index;
 }
+
+#endif // HIDE

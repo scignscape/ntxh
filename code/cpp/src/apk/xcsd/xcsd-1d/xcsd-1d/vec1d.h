@@ -19,7 +19,7 @@ class Vec1d : public _Vec1d<VAL_Type>,
 {
 public:
 
- Vec1d(quint8 bsz = 16)
+ Vec1d(u1 bsz = 16)
   :  _Vec1d<VAL_Type>(bsz),
     each_holders<Vec1d<VAL_Type>, VAL_Type, INDEX_Type, PR_Type>({{*this}})
  {

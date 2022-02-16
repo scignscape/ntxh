@@ -5,18 +5,35 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 
-#include "xcsd-1d/vec1d.h"
-#include "xcsd-1d/stk1d.h"
-#include "xcsd-1d/que1d.h"
-#include "xcsd-1d/deq1d.h"
-#include "xcsd-1d/dsk1d.h"
-#include "xcsd-1d/arr1d.h"
+//#include "xcsd-1d/vec1d.h"
+//#include "xcsd-1d/stk1d.h"
+//#include "xcsd-1d/que1d.h"
+//#include "xcsd-1d/deq1d.h"
+//#include "xcsd-1d/dsk1d.h"
+//#include "xcsd-1d/arr1d.h"
+
+#include "xcsd-1d/hive-structure.h"
 
 
 #include <QDebug>
 
 USING_XCNS(XCSD)
 
+
+int main(int argc, char **argv)
+{
+ Hive_Structure<hive_galaxy<int>> hs(16, 16);
+ int& x = hs.get_element(8);
+
+ x = 55;
+
+ int y = hs.get_element(8);
+
+ qDebug() << "y = " << y;
+}
+
+
+#ifdef HIDE
 int main8(int argc, char **argv)
 {
  Que1d<int> q1d;
@@ -275,3 +292,5 @@ int main1(int argc, char **argv)
 
  return 0;
 }
+
+#endif //def HIDE

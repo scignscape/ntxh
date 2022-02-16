@@ -12,10 +12,17 @@
 #include "xcsd-1d/dsk1d.h"
 #include "xcsd-1d/arr1d.h"
 
+#include "xcsd/mat2sd3x3.h"
+
 
 #include <QDebug>
 
 USING_XCNS(XCSD)
+
+int main9(int argc, char **argv)
+{
+
+}
 
 int main8(int argc, char **argv)
 {
