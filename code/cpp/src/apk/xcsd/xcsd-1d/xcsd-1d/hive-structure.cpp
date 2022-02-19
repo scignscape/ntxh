@@ -7,6 +7,8 @@
 
 #include "hive-structure.h"
 
+#include "global-types.h"
+
 #include <QVector>
 #include <QString>
 #include <QMap>
@@ -14,6 +16,9 @@
 #include <QDebug>
 
 USING_XCNS(XCSD)
+
+
+
 
 //template<typename GALAXY_Type>
 //typename GALAXY_Type::element_type&

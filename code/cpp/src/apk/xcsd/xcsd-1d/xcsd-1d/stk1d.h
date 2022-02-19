@@ -24,14 +24,15 @@
 
 XCNS_(XCSD)
 
-template<typename VAL_Type, typename INDEX_Type = u2, typename PR_Type = _pr_break>
+template<typename VAL_Type, typename INDEX_Types = index_types<s2>, typename PR_Type = _pr_break>
 class Stk1d : protected _Vec1d<VAL_Type>,
-  public each_holders<Stk1d<VAL_Type>, VAL_Type, INDEX_Type, PR_Type>
+  public each_holders<Stk1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>
 {
 public:
 
- Stk1d(quint8 bsz = 16)
-  :  _Vec1d<VAL_Type>(bsz), each_holders<Stk1d<VAL_Type>, VAL_Type, INDEX_Type, PR_Type>({{*this}})
+ Stk1d(typename INDEX_Types::Numeric_Nested_Index_type layer_size = 16,
+       typename INDEX_Types::Numeric_Nested_Index_type block_size = 16)
+  :  _Vec1d<VAL_Type>(layer_size, block_size), each_holders<Stk1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
  {
  }
 
@@ -56,7 +57,7 @@ public:
   _Vec1d<VAL_Type>::_reach(fn);
  }
 
- void _each(std::function<void(VAL_Type& v, const INDEX_Type& index)> fn)
+ void _each(std::function<void(VAL_Type& v, const typename INDEX_Types::Numeric_Index_type& index)> fn)
  {
   _Vec1d<VAL_Type>::_reach(fn);
  }
@@ -66,7 +67,8 @@ public:
   return _Vec1d<VAL_Type>::_pr_reach(fn);
  }
 
- PR_Type _pr_each(std::function<typename PR_Type::level_type(VAL_Type& v, const INDEX_Type& index)> fn)
+ PR_Type _pr_each(std::function<typename PR_Type::level_type(VAL_Type& v,
+   const typename INDEX_Types::Numeric_Index_type& index)> fn)
  {
   return _Vec1d<VAL_Type>::_pr_reach(fn);
  }

@@ -13,15 +13,16 @@
 
 XCNS_(XCSD)
 
-template<typename VAL_Type, typename INDEX_Type = u2, typename PR_Type = _pr_break>
+template<typename VAL_Type, typename INDEX_Types = index_types<s2>, typename PR_Type = _pr_break>
 class Vec1d : public _Vec1d<VAL_Type>,
-   public each_holders<Vec1d<VAL_Type>, VAL_Type, INDEX_Type, PR_Type>
+   public each_holders<Vec1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>
 {
 public:
 
- Vec1d(u1 bsz = 16)
-  :  _Vec1d<VAL_Type>(bsz),
-    each_holders<Vec1d<VAL_Type>, VAL_Type, INDEX_Type, PR_Type>({{*this}})
+ Vec1d(typename INDEX_Types::Numeric_Nested_Index_type layer_size = 16,
+       typename INDEX_Types::Numeric_Nested_Index_type block_size = 16)
+  :  _Vec1d<VAL_Type>(layer_size, block_size),
+    each_holders<Vec1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
  {
  }
 

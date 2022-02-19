@@ -49,6 +49,7 @@ HEADERS += \
   $$SRC_DIR/vec1d.h \
   $$SRC_DIR/_vec1d.h \
   $$SRC_DIR/hive-structure.h \
+  $$SRC_DIR/hive-structure.templates.h \
   $$SRC_DIR/_each-holders.h \
 
 

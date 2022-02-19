@@ -26,7 +26,7 @@
 
 #define deffn(ty, arg) [](ty** def) \
 { \
- static int _def = arg; \
+ static ty _def = arg; \
  *def = &_def; \
 } \
 
@@ -47,28 +47,31 @@ struct _pr_break
  typedef s1 level_type;
 };
 
-template<typename VAL_Type, typename INDEX_Type, typename PR_Type = _pr_break>
+template<typename VAL_Type, typename INDEX_Types, typename PR_Type = _pr_break>
 class Deq1d;
 
 
-template<typename VAL_Type, typename INDEX_Type = u2,
+template<typename VAL_Type, typename INDEX_Types = index_types<s2>, typename NESTED_INDEX_Type = u2,
          typename PR_Type = _pr_break>
 class _Vec1d
 {
+ using nnx = typename INDEX_Types::Numeric_Nested_Index_type;
+ using nx = typename INDEX_Types::Numeric_Nested_Index_type;
+
  std::function<void(VAL_Type**)> default_fn_;
 
 protected:
 
- friend class Deq1d<VAL_Type, INDEX_Type>;
- Hive_Structure* hive_structure_;
+ friend class Deq1d<VAL_Type, INDEX_Types>;
+ Hive_Structure<INDEX_Types>* hive_structure_;
 
 public:
 
- _Vec1d(quint8 bsz = 16)
-  :  hive_structure_(new Hive_Structure),
+ _Vec1d(nnx layer_size = 16, nnx block_size = 16)
+  :  hive_structure_(new Hive_Structure<INDEX_Types>(layer_size, block_size)),
     default_fn_(nullptr)
  {
-  hive_structure_->set_block_size(bsz);
+  //hive_structure_->set_layer_size(la);
   hive_structure_->set_value_size(sizeof(VAL_Type));
  }
 
@@ -92,11 +95,11 @@ public:
   hive_structure_->increment_total_size();
  }
 
- void _each_from_index(u4 ix,
+ void _each_from_index(nx nix,
    std::function<void(VAL_Type& v)> fn)
  {
-  Hive_Structure::iterator hit = Hive_Structure::iterator::start();
-  hive_structure_->position_iterator(hit, ix);
+  typename Hive_Structure<INDEX_Types>::iterator hit = Hive_Structure<INDEX_Types>::iterator::start();
+  hive_structure_->position_iterator(hit, nix);
   while(!hit.end())
   {
    VAL_Type* pv = (VAL_Type*) hive_structure_->get_iterator_location(hit);
@@ -105,12 +108,12 @@ public:
   }
  }
 
- PR_Type _pr_each_from_index(u4 ix,
+ PR_Type _pr_each_from_index(nx nix,
    std::function<void(VAL_Type& v)> fn)
  {
-  Hive_Structure::iterator hit = Hive_Structure::iterator::start();
-  hive_structure_->position_iterator(hit, ix);
-  INDEX_Type index = 0;
+  typename Hive_Structure<INDEX_Types>::iterator hit = Hive_Structure<INDEX_Types>::iterator::start();
+  hive_structure_->position_iterator(hit, nix);
+  nx index = 0;
   typename PR_Type::level_type l = -1;
   while(!hit.end())
   {
@@ -124,12 +127,12 @@ public:
   return {index, l};
  }
 
- void _each_from_index(u4 ix,
-   std::function<void(VAL_Type& v, const INDEX_Type& index)> fn)
+ void _each_from_index(nx nix,
+   std::function<void(VAL_Type& v, const INDEX_Types& index)> fn)
  {
-  Hive_Structure::iterator hit = Hive_Structure::iterator::start();
-  hive_structure_->position_iterator(hit, ix);
-  INDEX_Type index = 0;
+  typename Hive_Structure<INDEX_Types>::iterator hit = Hive_Structure<INDEX_Types>::iterator::start();
+  hive_structure_->position_iterator(hit, nix);
+  typename INDEX_Types::Numeric_Index_type index = 0;
   while(!hit.end())
   {
    VAL_Type* pv = (VAL_Type*) hive_structure_->get_iterator_location(hit);
@@ -139,12 +142,12 @@ public:
   }
  }
 
- PR_Type _pr_each_from_index(u4 ix,
-   std::function<typename PR_Type::level_type(VAL_Type& v, const INDEX_Type& index)> fn)
+ PR_Type _pr_each_from_index(nx nix,
+   std::function<typename PR_Type::level_type(VAL_Type& v, const typename INDEX_Types::Numeric_Index_type& index)> fn)
  {
-  Hive_Structure::iterator hit = Hive_Structure::iterator::start();
-  hive_structure_->position_iterator(hit, ix);
-  INDEX_Type index = 0;
+  typename Hive_Structure<INDEX_Types>::iterator hit = Hive_Structure<INDEX_Types>::iterator::start();
+  hive_structure_->position_iterator(hit, nix);
+  typename INDEX_Types::Numeric_Index_type index = 0;
   typename PR_Type::level_type l = -1;
   while(!hit.end())
   {
@@ -175,17 +178,22 @@ public:
   return *vv;
  }
 
- VAL_Type& at_index(u4 index)
+ VAL_Type& at_index(nx nix)
  {
-  VAL_Type* vv = (VAL_Type*) hive_structure_->get_indexed_location(index);
+  VAL_Type* vv = (VAL_Type*) hive_structure_->get_indexed_location(nix);
   if(!vv)
     default_fn_(&vv);
   return *vv;
  }
 
+ VAL_Type get_element(nx nix)
+ {
+  return at_index(nix);
+ }
+
  void _each(std::function<void(VAL_Type& v)> fn)
  {
-  Hive_Structure::iterator hit = Hive_Structure::iterator::start();
+  typename Hive_Structure<INDEX_Types>::iterator hit = Hive_Structure<INDEX_Types>::iterator::start();
   hive_structure_->check_start_iterator(hit);
   while(!hit.end())
   {
@@ -197,9 +205,9 @@ public:
 
  PR_Type _pr_each(std::function<typename PR_Type::level_type(VAL_Type& v)> fn)
  {
-  Hive_Structure::iterator hit = Hive_Structure::iterator::start();
+  typename Hive_Structure<INDEX_Types>::iterator hit = Hive_Structure<INDEX_Types>::iterator::start();
   hive_structure_->check_start_iterator(hit);
-  INDEX_Type index = 0;
+  typename INDEX_Types::Numeric_Index_type index = 0;
   typename PR_Type::level_type l = -1;
   while(!hit.end())
   {
@@ -214,9 +222,10 @@ public:
  }
 
  PR_Type _pr_each(std::function<typename PR_Type::level_type(VAL_Type& v,
-   const INDEX_Type& index)> fn, INDEX_Type index = 0)
+     const typename INDEX_Types::Numeric_Index_type& index)> fn,
+   typename INDEX_Types::Numeric_Index_type index = 0)
  {
-  Hive_Structure::iterator hit = Hive_Structure::iterator::start();
+  typename Hive_Structure<INDEX_Types>::iterator hit = Hive_Structure<INDEX_Types>::iterator::start();
   hive_structure_->check_start_iterator(hit);
   typename PR_Type::level_type l = -1;
   while(!hit.end())
@@ -231,10 +240,10 @@ public:
   return {index, l};
  }
 
- void _each(std::function<void(VAL_Type& v, const INDEX_Type& index)> fn,
-   INDEX_Type index = 0)
+ void _each(std::function<void(VAL_Type& v, const typename INDEX_Types::Numeric_Index_type& index)> fn,
+   typename INDEX_Types::Numeric_Index_type index = 0)
  {
-  Hive_Structure::iterator hit = Hive_Structure::iterator::start();
+  typename Hive_Structure<INDEX_Types>::iterator hit = Hive_Structure<INDEX_Types>::iterator::start();
   hive_structure_->check_start_iterator(hit);
   while(!hit.end())
   {
@@ -247,7 +256,7 @@ public:
 
  void _reach(std::function<void(VAL_Type& v)> fn, u4* bottom = nullptr)
  {
-  Hive_Structure::iterator hit = Hive_Structure::iterator::start();
+  typename Hive_Structure<INDEX_Types>::iterator hit = Hive_Structure<INDEX_Types>::iterator::start();
   hive_structure_->check_start_iterator(hit);
   hive_structure_->reverse_iterator(hit);
   while(!hit.end())
@@ -268,12 +277,12 @@ public:
   _reach(fn, &bottom);
  }
 
- void _reach(std::function<void(VAL_Type& v, const INDEX_Type& index)> fn,
+ void _reach(std::function<void(VAL_Type& v, const typename INDEX_Types::Numeric_Index_type& index)> fn,
    u4* bottom = nullptr)
  {
-  Hive_Structure::iterator hit = Hive_Structure::iterator::start();
+  typename Hive_Structure<INDEX_Types>::iterator hit = Hive_Structure<INDEX_Types>::iterator::start();
   hive_structure_->reverse_iterator(hit);
-  INDEX_Type index = 0;
+  typename INDEX_Types::Numeric_Index_type index = 0;
   while(!hit.end())
   {
    VAL_Type* pv = (VAL_Type*) hive_structure_->get_iterator_location(hit);
@@ -288,7 +297,7 @@ public:
   }
  }
 
- void _reach_to_index(std::function<void(VAL_Type& v, const INDEX_Type& index)> fn,
+ void _reach_to_index(std::function<void(VAL_Type& v, const typename INDEX_Types::Numeric_Index_type& index)> fn,
    u4 bottom)
  {
   _reach(fn, &bottom);
@@ -296,9 +305,9 @@ public:
 
  PR_Type _pr_reach(std::function<typename PR_Type::level_type(VAL_Type& v)> fn, u4* bottom = nullptr)
  {
-  Hive_Structure::iterator hit = Hive_Structure::iterator::start();
+  typename Hive_Structure<INDEX_Types>::iterator hit = Hive_Structure<INDEX_Types>::iterator::start();
   hive_structure_->reverse_iterator(hit);
-  INDEX_Type index = 0;
+  typename INDEX_Types::Numeric_Index_type index = 0;
   typename PR_Type::level_type l = -1;
   while(!hit.end())
   {
@@ -324,11 +333,11 @@ public:
  }
 
  PR_Type _pr_reach(std::function<typename PR_Type::level_type(VAL_Type& v,
-   const INDEX_Type& index)> fn, u4* bottom = nullptr)
+   const typename INDEX_Types::Numeric_Index_type& index)> fn, u4* bottom = nullptr)
  {
-  Hive_Structure::iterator hit = Hive_Structure::iterator::start();
+  typename Hive_Structure<INDEX_Types>::iterator hit = Hive_Structure<INDEX_Types>::iterator::start();
   hive_structure_->reverse_iterator(hit);
-  INDEX_Type index = 0;
+  typename INDEX_Types::Numeric_Index_type index = 0;
   typename PR_Type::level_type l = -1;
   while(!hit.end())
   {
@@ -348,7 +357,7 @@ public:
  }
 
  PR_Type _pr_reach_to_index(std::function<typename PR_Type::level_type(VAL_Type& v,
-   const INDEX_Type& index)> fn, u4 bottom)
+   const typename INDEX_Types::Numeric_Index_type& index)> fn, u4 bottom)
  {
   return _pr_reach(fn, &bottom);
  }

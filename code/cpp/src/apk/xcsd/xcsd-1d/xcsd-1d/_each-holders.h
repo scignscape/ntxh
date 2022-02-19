@@ -62,8 +62,12 @@ template<typename VEC_Type, typename VAL_Type,
 struct each_holders
 {
  union{
+// _each_holder<VEC_Type, VAL_Type, typename INDEX_types::Numeric_Index_type, PR_Type> each;
+// _reach_holder<VEC_Type, VAL_Type, typename INDEX_types::Numeric_Index_type, PR_Type> reach;
+
  _each_holder<VEC_Type, VAL_Type, INDEX_type, PR_Type> each;
  _reach_holder<VEC_Type, VAL_Type, INDEX_type, PR_Type> reach;
+
  _set_default_holder<VEC_Type, VAL_Type> set_default;
  };
 };

@@ -19,30 +19,71 @@
 
 #include "xcns.h"
 
+#include <limits>
+
 XCNS_(XCSD)
 
-template<typename T, typename Numeric_Index_type = signed short>
-struct hive_galaxy
+//template<typename T, typename Numeric_Index_type = signed short>
+//struct hive_galaxy
+//{
+// typedef T element_type;
+//// typedef T index_type;
+//// typedef T type_descriptor_type;
+// typedef Numeric_Index_type nx;
+//};
+
+template <typename T, typename NT = s2>
+struct index_types
 {
- typedef T element_type;
-// typedef T index_type;
-// typedef T type_descriptor_type;
- typedef Numeric_Index_type numeric_index_type;
+ typedef T Numeric_Index_type;
+ typedef T Numeric_Nested_Index_type;
 };
 
-template<typename GALAXY_Type>
+template <typename T>
+T _lower_bound()
+{
+ return std::numeric_limits<T>::lowest();
+}
+
+template <typename T>
+T _upper_bound()
+{
+ return std::numeric_limits<T>::highest();
+}
+
+//template <>
+//s2 _lower_bound()
+//{
+// return std::numeric_limits<s2>::lowest();
+//}
+
+
+//template<typename Numeric_Index_type = signed short,
+//  typename Numeric_Nested_Index_type = Numeric_Index_type>
+
+
+//template<typename NUMERIC_INDEX_Type = signed short,
+//  typename NUMERIC_NESTED_INDEX_Type = NUMERIC_INDEX_Type>
+
+template<typename INDEX_Types>
 class Hive_Structure
 {
 public:
 
- typedef typename GALAXY_Type::element_type element_type;
+ typedef typename INDEX_Types::Numeric_Index_type Numeric_Index_type;
+ typedef typename INDEX_Types::Numeric_Nested_Index_type Numeric_Nested_Index_type;
+
+ typedef typename INDEX_Types::Numeric_Index_type nx;
+ typedef typename INDEX_Types::Numeric_Nested_Index_type nnx;
+
+// typedef typename GALAXY_Type::element_type element_type;
 // typedef typename GALAXY_Type::index_type index_type;
- typedef typename GALAXY_Type::numeric_index_type numeric_index_type;
+// typedef typename GALAXY_Type::nx nx;
 // typedef typename GALAXY_Type::type_descriptor_type type_descriptor_type;
 
  struct Hive_Layer
  {
-  element_type* elements_;
+  void* elements_;
  };
 
  struct Hive_Layer_Block
@@ -54,16 +95,16 @@ public:
  struct Hive_Layer_Array_Package
  {
   Hive_Layer layer_;
-  numeric_index_type size_;
-  numeric_index_type min_index_;
+  nnx size_;
+//  nnx min_index_;
  };
 
  struct Hive_Layer_Block_Package
  {
   Hive_Layer_Block* first_block_;
-  numeric_index_type block_size_;
-  numeric_index_type min_index_;
-  numeric_index_type max_index_;
+  nnx block_size_;
+//  nnx min_index_;
+//  nnx max_index_;
  };
 
 
@@ -79,7 +120,9 @@ public:
   Hive_Layer single_layer_;
  };
 
- numeric_index_type size_;
+ nnx layer_size_;
+ nnx value_size_;
+ nx total_size_;
 
 public:
 
@@ -88,133 +131,203 @@ public:
 //  Hypocell_Array_Package* array_package_;
 //  Hypocell cell_;
 // };
-// numeric_index_type size_;
+// nx size_;
 
- Hive_Structure(numeric_index_type layer_size, numeric_index_type block_size)
+ Hive_Structure(nnx layer_size, nnx block_size)
   :  block_package_(new Hive_Layer_Block_Package(
-                     {new Hive_Layer_Block{new Hive_Layer[block_size], nullptr}, block_size, 0, 0})), size_(-layer_size)
+      {new Hive_Layer_Block{new Hive_Layer[block_size], nullptr}, block_size})), //?, 0, 0
+      layer_size_(-layer_size), value_size_(QT_POINTER_SIZE), total_size_(0)
  {
-  for(numeric_index_type i = 0; i < block_size; ++i)
+  for(nnx i = 0; i < block_size; ++i)
   {
    block_package_->first_block_->layers_[i] = {nullptr};
   }
  }
 
 
- Hive_Structure(Hive_Layer_Block_Package* block_package, numeric_index_type size)
-  :  block_package_(block_package), size_(-size)
+ Hive_Structure(Hive_Layer_Block_Package* block_package, nnx size)
+  :  block_package_(block_package), layer_size_(-size), value_size_(QT_POINTER_SIZE), total_size_(0)
  {
  }
 
  Hive_Structure(Hive_Layer_Array_Package* array_package)
-  :  array_package_(array_package), size_(0)
+  :  array_package_(array_package), layer_size_(0), value_size_(QT_POINTER_SIZE), total_size_(0)
  {
  }
 
- Hive_Structure(Hive_Layer layer, numeric_index_type size)
-  :  single_layer_(layer), size_(size)
+ Hive_Structure(Hive_Layer layer, nnx size)
+  :  single_layer_(layer), layer_size_(size), value_size_(QT_POINTER_SIZE), total_size_(0)
  {
  }
 
  Hive_Structure()
-  :  block_package_(nullptr), size_(0)
+  :  block_package_(nullptr), layer_size_(0), value_size_(QT_POINTER_SIZE), total_size_(0)
  {
  }
 
- numeric_index_type layer_size()
- {
-  if(size_ < 0)
-    return -size_;
-  if(size_ == 0)
-    return array_package_->size_;
-  return size_;
- }
+ ACCESSORS(nnx ,value_size)
+ ACCESSORS(nx ,total_size)
 
- Hive_Layer* layer_ptr()
+ Hive_Layer* get_fixed_size_layer()
  {
-  if(size_ == 0)
+  if(layer_size_ == 0)
     return &array_package_->layer_;
   return &single_layer_;
  }
 
- bool fixed_size()
+ nnx get_block_number(Numeric_Index_type nix)
  {
-  return size_ >= 0;
+  return nix / ((nx) block_size() * layer_size());
  }
 
- void check_max_index(numeric_index_type ind)
+ nnx get_block_position(Numeric_Index_type nix)
  {
-  if(size_ < 0)
+  return nix % ((nx) block_size() * layer_size());
+ }
+
+ nnx get_layer_order(Numeric_Index_type nix)
+ {
+  return get_block_position(nix) / layer_size();
+ }
+
+ nnx get_inner_index(Numeric_Index_type nix)
+ {
+  return nix % layer_size();
+ }
+
+ nnx block_size()
+ {
+  if(layer_size_ < 0)
+    return block_package_->block_size_;
+  return 0;
+ }
+
+ Numeric_Nested_Index_type layer_size()
+ {
+  if(layer_size_ < 0)
+    return -layer_size_;
+  if(layer_size_ == 0)
+    return array_package_->size_;
+  return layer_size_;
+ }
+
+ Hive_Layer* layer_ptr()
+ {
+  if(layer_size_ == 0)
+    return &array_package_->layer_;
+  return &single_layer_;
+ }
+
+ Hive_Layer* get_layer_by_layer_order(nnx block_number, nnx layer_order);
+
+ void check_init_layer(Hive_Layer* hl)
+ {
+  if(!hl->elements_)
+    hl->elements_ = malloc(value_size_ * layer_size());
+ }
+
+ Hive_Layer* new_hive_layers();
+
+ bool fixed_size()
+ {
+  return layer_size_ >= 0;
+ }
+
+ void delete_block(Hive_Layer_Block* hlb)
+ {
+  for(nnx i = 0; i < block_package_->block_size_; ++i)
+  {
+   if(hlb->layers_[i].elements_)
+     delete hlb->layers_[i].elements_;
+  }
+ }
+
+ void check_max_index(nx ind)
+ {
+  if(layer_size_ < 0)
   {
    if(block_package_->max_index_ < ind)
      block_package_->max_index_ = ind;
   }
  }
 
- numeric_index_type get_minimum_array_index()
+ static nx the_invalid_index()
  {
-  if(size_ < 0)
+  return _lower_bound<Numeric_Index_type>();
+ }
+
+ static nx the_invalid_upper_index()
+ {
+  return _upper_bound<Numeric_Index_type>();
+ }
+
+
+ nx get_minimum_array_index()
+ {
+  if(layer_size_ < 0)
     return block_package_->min_index_;
-  if(size_ == 0)
+  if(layer_size_ == 0)
     return array_package_->min_index;
   return 0;
  }
 
- void set_maximum_array_index(numeric_index_type ind)
+ void set_maximum_array_index(nx ind)
  {
-  if(size_ < 0)
+  if(layer_size_ < 0)
     block_package_->max_index_ = ind;
 //   if(size_ == 0)
 //     return 0; // array_package_->max_index;
 //   return 0;
  }
 
- numeric_index_type get_maximum_array_index()
+ nx get_maximum_array_index()
  {
-  if(size_ < 0)
+  if(layer_size_ < 0)
     return block_package_->max_index_;
-  if(size_ == 0)
+  if(layer_size_ == 0)
     return 0; // array_package_->max_index;
   return 0;
  }
 
- numeric_index_type normalized_array_index(numeric_index_type ind)
+ nx normalized_array_index(nx ind)
  {
-  if(size_ < 0)
+  if(layer_size_ < 0)
   {
-   numeric_index_type minin = block_package_->min_index_;
-   numeric_index_type maxin = block_package_->max_index_;
+   nx minin = block_package_->min_index_;
+   nx maxin = block_package_->max_index_;
 
    ind += minin;
    maxin += minin;
    if(ind > maxin)
      ind = minin;
   }
-  else if(size_ == 0)
+  else if(layer_size_ == 0)
   {
-   numeric_index_type minin = array_package_->min_index;
+   nx minin = array_package_->min_index;
    ind += minin;
    ind %= array_package_->size;
   }
   return ind;
  }
 
- element_type& get_element(numeric_index_type index);
+ //element_type& get_element(nx index);
+ void* get_location(nx index);
 
  struct iterator
  {
-  u4 block_index;
-  u2 inner_index;
-  u4 total_index;
+  nnx inner_index;
+  nnx layer_order;
+  nnx block_number;
+  nx total_index;
 
   static iterator start()
   {
-   return iterator{0,0,0};
+   return iterator{0,0,0,0};
   }
 
   bool end()
   {
-   return total_index == -1;
+   return total_index == the_invalid_index();
   }
 
  };
@@ -232,11 +345,14 @@ public:
  void* get_push_back_location();
  void* get_back_location();
 
- void* get_indexed_location(u4 index);
- void* get_indexed_location(u4 blkn, u2 blki);
- void* get_indexed_location_unchecked(u4 index);
+ void* get_indexed_location(nx nix);
+ void* get_indexed_location(nnx block_number, nnx layer_order, nnx inner_index);
+ void* get_indexed_location_unchecked(nx nix);
 
- Hive_Layer_Block* check_init_blocks(u4 max);
+ Hive_Layer* get_layer_for_indexed_location(nnx block_number, nnx layer_order);
+
+ Hive_Layer_Block* check_init_blocks(nnx max);
+ Hive_Layer_Block* get_block_by_number(nnx desired_block_number);
 
  void* get_iterator_location(iterator& hit);
 
@@ -244,7 +360,7 @@ public:
  void increment_total_size();
  void reverse_iterator(iterator& hit);
  void decrement_iterator(iterator& hit);
- void position_iterator(iterator& hit, u4 ix);
+ void position_iterator(iterator& hit, Numeric_Index_type nix);
 
  void check_start_iterator(iterator& hit);
 
@@ -254,47 +370,14 @@ public:
 
 };
 
-template<typename GALAXY_Type>
-typename GALAXY_Type::element_type&
-Hive_Structure<GALAXY_Type>::get_element(Hive_Structure::numeric_index_type ind)
-{
- int layer_index = ind % layer_size();
+_XCNS(XCSD)
 
- int layer_order = fixed_size()? 0 :
-   ind / layer_size();
+#include "hive-structure.templates.h"
 
- Hive_Layer* hl = nullptr;
+USING_XCNS(XCSD)
 
- if(fixed_size())
-   hl = layer_ptr();
- else
- {
-  Hive_Layer_Block* hlb = block_package_->first_block_;
-  numeric_index_type lcount = block_package_->block_size_;
-  int block_index = layer_order % lcount;
-  int block_order = layer_order / lcount;
-  int order = 0;
-  while(order < block_order)
-  {
-   if(!hlb->next_)
-   {
-    Hive_Layer* new_hl = new Hive_Layer[lcount];
-    for(int i = 0; i < lcount; ++i)
-      new_hl[i] = {nullptr};
-    Hive_Layer_Block* new_hb = new Hive_Layer_Block{new_hl, nullptr};
-    hlb->next_ = new_hb;
-   }
-   hlb = hlb->next_;
-   ++order;
-  }
-  hl = &(hlb->layers_)[block_index];
-  if(hl->elements_ == nullptr)
-  {
-   hl->elements_ = new element_type[layer_size()];
-  }
- }
- return (hl->elements_)[layer_index];
-}
+using Hive_Structure_s2 = Hive_Structure<index_types<s2>>;
+using Hive_Structure_s4 = Hive_Structure<index_types<s4>>;
 
 
 
@@ -370,7 +453,6 @@ public:
 
 #endif
 
-_XCNS(XCSD)
 
 
 #endif // HIVE_STRUCTURE__H

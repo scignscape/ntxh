@@ -23,9 +23,9 @@
 
 XCNS_(XCSD)
 
-template<typename VAL_Type, typename INDEX_Type = quint16, typename PR_Type = _pr_break>
-class Desk1d :
-  public each_holders<Desk1d<VAL_Type>, VAL_Type, INDEX_Type, PR_Type>
+template<typename VAL_Type, typename INDEX_Types = index_types<s2>, typename PR_Type = _pr_break>
+class Dsk1d :
+  public each_holders<Dsk1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>
 {
 protected:
 
@@ -35,26 +35,26 @@ protected:
 public:
 
 
- Desk1d()
+ Dsk1d()
   :  front_vec_(_Vec1d<VAL_Type>()),
      back_vec_(_Vec1d<VAL_Type>()),
-     each_holders<Desk1d<VAL_Type>, VAL_Type, INDEX_Type, PR_Type>({{*this}})
+     each_holders<Dsk1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
  {
 
  }
 
- Desk1d(u1 bsz)
+ Dsk1d(u1 bsz)
   :  front_vec_(_Vec1d<VAL_Type>(bsz)),
      back_vec_(_Vec1d<VAL_Type>(bsz)),
-     each_holders<Desk1d<VAL_Type>, VAL_Type, INDEX_Type, PR_Type>({{*this}})
+     each_holders<Dsk1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
  {
 
  }
 
- Desk1d(u1 bsz, u1 fbsz)
+ Dsk1d(u1 bsz, u1 fbsz)
   :  front_vec_(_Vec1d<VAL_Type>(bsz)),
      back_vec_(_Vec1d<VAL_Type>(fbsz)),
-     each_holders<Desk1d<VAL_Type>, VAL_Type, INDEX_Type, PR_Type>({{*this}})
+     each_holders<Dsk1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
  {
 
  }
@@ -106,7 +106,7 @@ public:
   back_vec_._each(fn);
  }
 
- void _each(std::function<void(VAL_Type& v, const INDEX_Type& index)> fn)
+ void _each(std::function<void(VAL_Type& v, const typename INDEX_Types::Numeric_Index_type& index)> fn)
  {
   front_vec_._reach(fn);
   back_vec_._each(fn, front_vec_.size());
@@ -120,7 +120,8 @@ public:
   return back_vec_._pr_each(fn);
  }
 
- PR_Type _pr_each(std::function<typename PR_Type::level_type(VAL_Type& v, const INDEX_Type& index)> fn)
+ PR_Type _pr_each(std::function<typename PR_Type::level_type(VAL_Type& v, const
+   typename INDEX_Types::Numeric_Index_type& index)> fn)
  {
   PR_Type result = front_vec_._pr_reach(fn);
   if(result.level >= 0)
@@ -134,7 +135,7 @@ public:
   front_vec_._each(fn);
  }
 
- void _reach(std::function<void(VAL_Type& v, const INDEX_Type& index)> fn)
+ void _reach(std::function<void(VAL_Type& v, const typename INDEX_Types::Numeric_Index_type& index)> fn)
  {
   back_vec_._reach(fn);
   front_vec_._each(fn, back_vec_.size());
@@ -148,7 +149,8 @@ public:
   return front_vec_._pr_each(fn);
  }
 
- PR_Type _pr_reach(std::function<typename PR_Type::level_type(VAL_Type& v, const INDEX_Type& index)> fn)
+ PR_Type _pr_reach(std::function<typename PR_Type::level_type(VAL_Type& v,
+   const typename INDEX_Types::Numeric_Index_type& index)> fn)
  {
   PR_Type result = back_vec_._pr_reach(fn);
   if(result.level >= 0)
