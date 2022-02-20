@@ -48,11 +48,86 @@ void* Hive_Structure<INDEX_Types>
 }
 
 template<typename INDEX_Types>
+void Hive_Structure<INDEX_Types>
+  ::resize(nx nix)
+{
+ set_total_size(nix);
+ pre_iterator pre = parse_location(nix - 1);
+ Hive_Layer* hl = get_layer_by_layer_order(pre.block_number, pre.layer_order);
+ check_init_layer(hl);
+}
+
+
+
+template<typename INDEX_Types>
 void* Hive_Structure<INDEX_Types>
   ::get_indexed_location(nnx block_number, nnx layer_order, nnx inner_index)
 {
  Hive_Layer* hl = get_layer_for_indexed_location(block_number, layer_order);
  return &((u1*)hl->elements_)[value_size_ * inner_index];
+}
+
+
+template<typename INDEX_Types>
+void* Hive_Structure<INDEX_Types>::contiguous(nx nix1, nx nix2, QVector<QPair<void*, nx>>* breakdown)
+{
+ void* result = contiguous(nix1, nix2);
+ if(result)
+   return result;
+
+ if(fixed_size())
+   return nullptr;
+
+// pre_iterator pre1 = parse_location(nix1);
+// pre_iterator pre2 = parse_location(nix2);
+// nx
+
+ nx layer_start = get_layer_rank(nix1);
+ nx layer_end = get_layer_rank(nix2);
+
+ nnx ls = layer_size();
+ Hive_Layer* hl1 = get_layer_by_layer_rank(layer_start);
+ nnx ii = get_inner_index(nix1);
+ breakdown->push_back({&((u1*)hl1->elements_)[ii * value_size_], ls - ii});
+
+ nnx offset = 1;
+ while(layer_start + offset < layer_end)
+ {
+  Hive_Layer* hl = get_layer_by_layer_rank(layer_start + offset);
+  breakdown->push_back({&((u1*)hl->elements_)[0], ls});
+  ++offset;
+ }
+
+ Hive_Layer* hl2 = get_layer_by_layer_rank(layer_end);
+ breakdown->push_back({&((u1*)hl2->elements_)[0], get_inner_index(nix2)});
+
+ return nullptr;
+}
+
+
+template<typename INDEX_Types>
+void* Hive_Structure<INDEX_Types>::contiguous(nx nix1, nx nix2)
+{
+ if(layer_size_ > 0)
+   return &((u1*)(single_layer_.elements_))[nix1 * value_size_];
+
+ if(layer_size_ == 0)
+ {
+  // // is this all?
+  return &((u1*)(array_package_->layer_.elements_))[nix1 * value_size_];
+ }
+
+ pre_iterator pre1 = parse_location(nix1);
+ pre_iterator pre2 = parse_location(nix2);
+
+ if( (pre1.block_number == pre2.block_number)
+    && (pre1.layer_order == pre2.layer_order) )
+ {
+  return &((u1*)(get_layer_by_layer_order(pre1.block_number, pre1.layer_order)->elements_))
+    [pre1.inner_index * value_size_];
+ }
+
+ return nullptr;
 }
 
 
@@ -223,6 +298,17 @@ void Hive_Structure<INDEX_Types>::decrement_iterator(iterator& hit)
 }
 
 template<typename INDEX_Types>
+typename Hive_Structure<INDEX_Types>::pre_iterator
+Hive_Structure<INDEX_Types>::parse_location(nx nix)
+{
+ return{
+   get_block_number(nix),
+   get_layer_order(nix),
+   get_inner_index(nix)
+ };
+}
+
+template<typename INDEX_Types>
 void Hive_Structure<INDEX_Types>::position_iterator(iterator& hit, Numeric_Index_type nix)
 {
  if(nix >= total_size_)
@@ -231,10 +317,13 @@ void Hive_Structure<INDEX_Types>::position_iterator(iterator& hit, Numeric_Index
   return;
  }
  hit.total_index = nix;
- hit.block_number = get_block_number(nix); // (nnx)(nix / ((nx) block_size() * layer_size()));
- hit.layer_order = get_layer_order(nix); //(nnx)(nix / layer_size()) % block_size();
- hit.inner_index = get_inner_index(nix); // nix % layer_size();
+ pre_iterator pre = parse_location(nix);
+ hit.block_number = pre.block_number; // (nnx)(nix / ((nx) block_size() * layer_size()));
+ hit.layer_order = pre.layer_order; //(nnx)(nix / layer_size()) % block_size();
+ hit.inner_index = pre.inner_index; // nix % layer_size();
 }
+
+
 
 template<typename INDEX_Types>
 void Hive_Structure<INDEX_Types>::reverse_iterator(iterator& hit)
@@ -333,11 +422,14 @@ void* Hive_Structure<INDEX_Types>::get_indexed_location_unchecked(typename INDEX
 {
  if(fixed_size())
    return get_fixed_size_layer();
- nnx inner_index = get_inner_index(nix);
- nnx layer_order = get_layer_order(nix);
- nnx block_number = get_block_number(nix);
 
- return get_indexed_location(block_number, layer_order, inner_index);
+ pre_iterator pre = parse_location(nix);
+
+// nnx inner_index = get_inner_index(nix);
+// nnx layer_order = get_layer_order(nix);
+// nnx block_number = get_block_number(nix);
+
+ return get_indexed_location(pre.block_number, pre.layer_order, pre.inner_index);
 }
 
 

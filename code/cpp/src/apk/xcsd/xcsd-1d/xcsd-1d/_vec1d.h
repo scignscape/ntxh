@@ -32,6 +32,12 @@
 
 #define defzfn(ty) deffn(ty, 0)
 
+
+#ifndef QString_number
+#define QString_number(ty) \
+  [](ty _t_y_){ return QString::number(_t_y_);}
+#endif
+
 //#define _default_fn(ty ,arg) set_default_fn(deffn(ty, arg))
 //#define _default_z(ty) _default_fn(ty ,0)
 
@@ -56,7 +62,7 @@ template<typename VAL_Type, typename INDEX_Types = index_types<s2>, typename NES
 class _Vec1d
 {
  using nnx = typename INDEX_Types::Numeric_Nested_Index_type;
- using nx = typename INDEX_Types::Numeric_Nested_Index_type;
+ using nx = typename INDEX_Types::Numeric_Index_type;
 
  std::function<void(VAL_Type**)> default_fn_;
 
@@ -67,6 +73,9 @@ protected:
 
 public:
 
+ using Numeric_Nested_Index_type = typename INDEX_Types::Numeric_Nested_Index_type;
+ using Numeric_Index_type = typename INDEX_Types::Numeric_Index_type;
+
  _Vec1d(nnx layer_size = 16, nnx block_size = 16)
   :  hive_structure_(new Hive_Structure<INDEX_Types>(layer_size, block_size)),
     default_fn_(nullptr)
@@ -75,10 +84,67 @@ public:
   hive_structure_->set_value_size(sizeof(VAL_Type));
  }
 
- u4 size()
+ typedef typename Hive_Structure<INDEX_Types>::pre_iterator pre_iterator;
+ typedef typename Hive_Structure<INDEX_Types>::iterator iterator;
+
+ pre_iterator parse_location(nx nix)
+ {
+  return hive_structure_->parse_location(nix);
+ }
+
+ VAL_Type* contiguous(nx nix1, nx nix2)
+ {
+  return (VAL_Type*) hive_structure_->contiguous(nix1, nix2);
+ }
+
+ VAL_Type* contiguous(nx nix1, nx nix2, QVector<QPair<VAL_Type*, nx>>& breakdown)
+ {
+  return (VAL_Type*) hive_structure_->contiguous(nix1, nix2,
+    (QVector<QPair<void*, nx>>*) &breakdown);
+ }
+
+
+
+
+ QString to_qstring(nx nix1, nx nix2, std::function<QString(const VAL_Type& v)> fn,
+   QString gap = " ", s2 chop = -1)
+ {
+  QString result;
+  for(nx nix = nix1; nix <= nix2; ++nix)
+  {
+   result += fn(get_element(nix)) + gap;
+  }
+  if(!result.isEmpty())
+  {
+   if(chop == -1)
+     chop = gap.size();
+   if(chop > 0)
+     result.chop(chop);
+  }
+  return result;
+ }
+
+ QString to_qstring(std::function<QString(const VAL_Type& v)> fn,
+   QString gap = " ", s2 chop = -1)
+ {
+  return to_qstring(0, size() - 1, fn, gap, chop);
+ }
+
+ nx size()
  {
   return hive_structure_->total_size();
  }
+
+ void declare_size(nx size)
+ {
+  hive_structure_->set_total_size(size);
+ }
+
+ void resize(nx size)
+ {
+  hive_structure_->resize(size);
+ }
+
 
  void _set_default(std::function<void(VAL_Type**)> fn)
  {
@@ -184,6 +250,28 @@ public:
   if(!vv)
     default_fn_(&vv);
   return *vv;
+ }
+
+ VAL_Type* location(nx nix)
+ {
+  return (VAL_Type*) hive_structure_->get_indexed_location(nix);
+ }
+
+
+ void fill(iterator it, const VAL_Type& v, iterator bound)
+ {
+  iterator hit = it;
+  while(hit.within(bound))
+  {
+   VAL_Type* pv = (VAL_Type*) hive_structure_->get_iterator_location(hit);
+   *pv = v;
+   hive_structure_->increment_iterator(hit);
+  }
+ }
+
+ iterator iterator_at(nx nix)
+ {
+  return hive_structure_->iterator_at(nix);
  }
 
  VAL_Type get_element(nx nix)

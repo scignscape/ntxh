@@ -17,10 +17,15 @@ template<typename VAL_Type, typename INDEX_Types = index_types<s2>, typename PR_
 class Vec1d : public _Vec1d<VAL_Type>,
    public each_holders<Vec1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>
 {
+ using nnx = typename INDEX_Types::Numeric_Nested_Index_type;
+ using nx = typename INDEX_Types::Numeric_Nested_Index_type;
+ using val_t = VAL_Type;
+
 public:
 
- Vec1d(typename INDEX_Types::Numeric_Nested_Index_type layer_size = 16,
-       typename INDEX_Types::Numeric_Nested_Index_type block_size = 16)
+ using Value_type = VAL_Type;
+
+ Vec1d(nnx layer_size = 16, nnx block_size = 16)
   :  _Vec1d<VAL_Type>(layer_size, block_size),
     each_holders<Vec1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
  {

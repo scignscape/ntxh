@@ -190,6 +190,11 @@ public:
   return get_block_position(nix) / layer_size();
  }
 
+ nx get_layer_rank(Numeric_Index_type nix)
+ {
+  return nix / layer_size();
+ }
+
  nnx get_inner_index(Numeric_Index_type nix)
  {
   return nix % layer_size();
@@ -219,6 +224,10 @@ public:
  }
 
  Hive_Layer* get_layer_by_layer_order(nnx block_number, nnx layer_order);
+ Hive_Layer* get_layer_by_layer_rank(nnx layer_rank)
+ {
+  return get_layer_by_layer_order(layer_rank / block_size(), layer_rank % block_size());
+ }
 
  void check_init_layer(Hive_Layer* hl)
  {
@@ -311,13 +320,30 @@ public:
  }
 
  //element_type& get_element(nx index);
- void* get_location(nx index);
+ void* get_location(nx nix);
+
+ struct pre_iterator
+ {
+  nnx block_number;
+  nnx layer_order;
+  nnx inner_index;
+
+  QString to_qstring()
+  {
+   return QString("Block Number: %1\nLayer Order: %2\nInner Index: %3")
+     .arg(block_number).arg(layer_order).arg(inner_index);
+  }
+ };
+
+ void resize(nx nix);
+
+ pre_iterator parse_location(nx nix);
 
  struct iterator
  {
-  nnx inner_index;
-  nnx layer_order;
   nnx block_number;
+  nnx layer_order;
+  nnx inner_index;
   nx total_index;
 
   static iterator start()
@@ -325,13 +351,32 @@ public:
    return iterator{0,0,0,0};
   }
 
+  bool within(const iterator& rhs)
+  {
+   if(end())
+     return false;
+   return total_index < rhs.total_index;
+  }
+
   bool end()
   {
    return total_index == the_invalid_index();
   }
 
+  iterator _end()
+  {
+   return iterator{block_number, layer_order, inner_index, the_invalid_upper_index()};
+  }
+
  };
 
+ iterator iterator_at(nx nix)
+ {
+  pre_iterator pre = parse_location(nix);
+  return {pre.block_number, pre.layer_order, pre.inner_index, nix};
+ }
+
+ //void fill(iterator it, const VAL_Type& v, iterator bound)
 
 // Hive_Structure();
 
@@ -341,6 +386,11 @@ public:
 // ACCESSORS(u2, value_size)
 
 // ACCESSORS(Hive_Block*, first_block)
+
+ void* contiguous(nx nix1, nx nix2);
+ void* contiguous(nx nix1, nx nix2, QVector<QPair<void*, nx>>* breakdown);
+
+
 
  void* get_push_back_location();
  void* get_back_location();

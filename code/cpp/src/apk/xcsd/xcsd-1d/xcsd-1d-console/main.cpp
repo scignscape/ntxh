@@ -17,19 +17,85 @@
 
 #include <QDebug>
 
+#include <QVector>
+
 USING_XCNS(XCSD)
 
-int main(int argc, char **argv)
+int main1(int argc , char **argv)
 {
- Vec1d<u1> vec;
-  // vec.default_to(0);
- vec.set_default_fn(defzfn(u1));
- vec.push_back(15);
- u1 x = vec.get_element(0);
- qDebug() << "x = " << x;
+ Vec1d<int> vec(6, 3);
+
+ QVector<int> test {2, 3, 4, 5, 6, 7};
+
+ vec.resize(11);
+
+ vec.each <<= [](int& i, s2 ix)
+ {
+  i = ix - 1;
+  return-1;
+ };
+ qDebug() << vec.to_qstring(QString_number(int));
+
+ QVector<QPair<int*, s2>> breakdown;
+ if(int* it = vec.contiguous(4, 9, breakdown))
+ {
+  std::copy(test.begin(), test.end(), it);
+ }
+ else
+ {
+  auto it1 = test.begin();
+  for(QPair<int*, s2> pr : breakdown)
+  {
+   std::copy(it1, it1 + pr.second, pr.first);
+   it1 += pr.second;
+  }
+ }
+
+ qDebug() << vec.to_qstring(QString_number(int));
+
+ return 0;
 }
 
-int main1(int argc, char **argv)
+int main(int argc , char **argv)
+{
+ Vec1d<int> vec(10, 7);
+
+ QVector<int> test {2, 3, 4, 5, 6, 7};
+
+ vec.resize(30);
+
+ vec.each <<= [](int& i, s2 ix)
+ {
+  i = ix - 1;
+  return-1;
+ };
+ qDebug() << vec.to_qstring(QString_number(int));
+
+ if(int* it = vec.contiguous(4, 9))
+ {
+  std::copy(test.begin(), test.end(), it);
+ }
+ qDebug() << vec.to_qstring(QString_number(int));
+
+ QVector<QPair<int*, s2>> breakdown;
+ if(int* it = vec.contiguous(18, 23, breakdown))
+ {
+  std::copy(test.begin(), test.end(), it);
+ }
+ else
+ {
+  auto it1 = test.begin();
+  for(QPair<int*, s2> pr : breakdown)
+  {
+   std::copy(it1, it1 + pr.second, pr.first);
+   it1 += pr.second;
+  }
+ }
+
+ qDebug() << vec.to_qstring(QString_number(int));
+}
+
+void test1()
 {
  //Hive_Structure<hive_galaxy<int>> hs(16, 16);
 
@@ -46,7 +112,7 @@ int main1(int argc, char **argv)
 }
 
 
-int main8(int argc, char **argv)
+void test2()
 {
  Que1d<int> q1d;
 
@@ -55,10 +121,10 @@ int main8(int argc, char **argv)
  qDebug() << q1d.head();
  qDebug() << q1d.tail();
 
- return 0;
+
 }
 
-int main7(int argc, char **argv)
+void test3()
 {
  Deq1d<int> d1d;
 
@@ -80,10 +146,10 @@ int main7(int argc, char **argv)
 
 
  qDebug() << "ok";
- return 0;
+
 }
 
-int main6(int argc, char **argv)
+void test4()
 {
  Que1d<int> q1d;
 
@@ -104,11 +170,11 @@ int main6(int argc, char **argv)
  });
 
  qDebug() << "ok";
- return 0;
+
 }
 
 
-int main5(int argc, char **argv)
+void test5()
 {
  Stk1d<int> s1d(5);
 
@@ -140,10 +206,10 @@ int main5(int argc, char **argv)
  });
 
  qDebug() << "ok";
- return 0;
+
 }
 
-int main4a(int argc, char **argv)
+void test6()
 {
  Dsk1d<int> d1d;
 
@@ -162,11 +228,11 @@ int main4a(int argc, char **argv)
 
  qDebug() << "ok";
 
- return 0;
+
 }
 
 
-int main4(int argc, char **argv)
+void test7()
 {
  Deq1d<int> d1d;
 
@@ -184,10 +250,10 @@ int main4(int argc, char **argv)
 
  qDebug() << "ok";
 
- return 0;
+
 }
 
-int main3(int argc, char **argv)
+void test8()
 {
  Que1d<int> q1d;
 
@@ -206,10 +272,10 @@ int main3(int argc, char **argv)
  qDebug() << q1d.head();
  qDebug() << q1d.tail();
 
- return 0;
+
 }
 
-int main2(int argc, char **argv)
+void test9()
 {
  Stk1d<int> s1d;
  s1d.set_default <= defzfn(int);
@@ -228,11 +294,11 @@ int main2(int argc, char **argv)
  qDebug() << s1d.bottom();
 
  qDebug() << "ok";
- return 0;
+
 }
 
 
-int main11(int argc, char **argv)
+void test10()
 {
  Arr1d<int> a1d(4);
 
@@ -266,12 +332,25 @@ int main11(int argc, char **argv)
 
  qDebug() << a1d.last();
  qDebug() << a1d.first();
+}
 
- return 0;
+void test11()
+{
+ Vec1d<u1> vec(5, 5);
+  // vec.default_to(0);
+ vec.set_default_fn(defzfn(u1));
+ vec.at_index(67) = 111;
+ u1 x11 = vec.get_element(67);
+ qDebug() << "x11 = " << x11;
+
+ Vec1d<u1>::pre_iterator pre = vec.parse_location(67);
+
+ qDebug() << "pre= " << pre.to_qstring();
+
 }
 
 
-int main12(int argc, char **argv)
+void test12()
 {
  Vec1d<int> v1d;
 
@@ -301,7 +380,61 @@ int main12(int argc, char **argv)
 
  qDebug() << v1d.last();
  qDebug() << v1d.first();
+}
+
+void test13()
+{
+ Vec1d<u1> vec;
+  // vec.default_to(0);
+ vec.set_default_fn(defzfn(u1));
+ vec.push_back(15);
+ u1 x = vec.get_element(0);
+ qDebug() << "x = " << x;
+}
+
+int main2(int argc , char **argv)
+{
+ qDebug() << "\n\ntest 1";
+ test1();
+
+ qDebug() << "\n\ntest 2";
+ test2();
+
+ qDebug() << "\n\ntest 3";
+ test3();
+
+ qDebug() << "\n\ntest 4";
+ test4();
+
+ qDebug() << "\n\ntest 5";
+ test5();
+
+ qDebug() << "\n\ntest 6";
+ test6();
+
+ qDebug() << "\n\ntest 7";
+ test7();
+
+ qDebug() << "\n\ntest 8";
+ test8();
+
+ qDebug() << "\n\ntest 9";
+ test9();
+
+ qDebug() << "\n\ntest 10";
+ test10();
+
+ qDebug() << "\n\ntest 11";
+ test11();
+
+ qDebug() << "\n\ntest 12";
+ test12();
+
+ qDebug() << "\n\ntest 13";
+ test13();
+// test1();
+// test1();
+// test1();
 
  return 0;
 }
-
