@@ -75,6 +75,7 @@ public:
 
  using Numeric_Nested_Index_type = typename INDEX_Types::Numeric_Nested_Index_type;
  using Numeric_Index_type = typename INDEX_Types::Numeric_Index_type;
+ using Element_type = VAL_Type;
 
  _Vec1d(nnx layer_size = 16, nnx block_size = 16)
   :  hive_structure_(new Hive_Structure<INDEX_Types>(layer_size, block_size)),

@@ -21,6 +21,123 @@
 
 #include <limits>
 
+
+#ifndef Contiguous_breakdown_
+#define Contiguous_breakdown_(_fn_, \
+  _Contiguous_it1_, _Contiguous_it2_, _Contiguous_it3_,\
+  _Non_Contiguous_it0_, \
+  _Non_Contiguous_it1_, _Non_Contiguous_it2_, _Non_Contiguous_it3_,\
+  _coll_, _ty1_, _ty2_, _start_, _end_) \
+do{\
+QVector<QPair<_ty1_*, _ty2_>> _breakdown_; \
+if(_ty1_* Contiguous_it = _coll_.contiguous(_start_, _end_, _breakdown_)) \
+{ \
+ _fn_(_Contiguous_it1_, _Contiguous_it2_, _Contiguous_it3_); \
+} \
+else \
+{ \
+ auto Non_Contiguous_it = _Non_Contiguous_it0_; \
+ for(QPair<_ty1_*, _ty2_> pr : _breakdown_) \
+ { \
+  _fn_(_Non_Contiguous_it1_, _Non_Contiguous_it2_, _Non_Contiguous_it3_); \
+  Non_Contiguous_it += pr.second; \
+ } \
+}} while(0)
+#endif
+
+
+
+#ifndef _Contiguous_breakdown_
+#define _Contiguous_breakdown_(_fn_, _target_, _coll_, _ty1_, _ty2_, _start_, _end_) \
+{ \
+ QVector<QPair<_ty1_*, _ty2_>> _breakdown_; \
+ if(_ty1_* it = _coll_.contiguous(_start_, _end_, _breakdown_)) \
+ { \
+  _fn_(it, it + _end_, _target_.begin()); \
+ } \
+ else \
+ { \
+  auto it1 = _target_.begin(); \
+  for(QPair<_ty1_*, _ty2_> pr : _breakdown_) \
+  { \
+   _fn_(pr.first, pr.first + pr.second, it1); \
+   it1 += pr.second; \
+  } \
+}} while(0)
+#endif
+
+
+#ifndef Contiguous_breakdown_source_
+#define Contiguous_breakdown_source_(_fn_, _target_, _coll_, _ty1_, _ty2_, _start_, _end_) \
+Contiguous_breakdown_(_fn_, \
+  (Contiguous_it), (Contiguous_it + _end_ + 1 - _start_), _target_.begin(), \
+  _target_.begin(), \
+  pr.first, pr.first + pr.second, Non_Contiguous_it, \
+  _coll_, _ty1_, _ty2_, _start_, _end_)
+#endif
+
+
+#ifndef Contiguous_breakdown_target_
+#define Contiguous_breakdown_target_(_fn_, _source_, _coll_, _ty1_, _ty2_, _start_, _end_) \
+Contiguous_breakdown_(_fn_,\
+  _source_.begin(), _source_.end(), Contiguous_it, \
+  _source_.begin(), \
+  Non_Contiguous_it, Non_Contiguous_it + pr.second, pr.first, \
+  _coll_, _ty1_, _ty2_, _start_, _end_)
+#endif
+
+
+
+//do{\
+//QVector<QPair<_ty1_*, _ty2_>> _breakdown_; \
+//if(_ty1_* it = _coll_.contiguous(_start_, _end_, _breakdown_)) \
+//{ \
+// _fn_(_source_.begin(), _source_.end(), it); \
+//} \
+//else \
+//{ \
+// auto it1 = _source_.begin(); \
+// for(QPair<_ty1_*, _ty2_> pr : _breakdown_) \
+// { \
+//  _fn_(it1, it1 + pr.second, pr.first); \
+//  it1 += pr.second; \
+// } \
+//}} while(0)
+
+#ifndef Contiguous_breakdown_target
+#define Contiguous_breakdown_target(_fn_, _source_, _coll_, _start_, _end_) \
+  Contiguous_breakdown_target_(_fn_, _source_, _coll_, typename decltype(_coll_)::Element_type, \
+  typename decltype(_coll_)::Numeric_Index_type, _start_, _end_)
+#endif
+
+#ifndef Contiguous_breakdown_source
+#define Contiguous_breakdown_source(_fn_, _source_, _coll_, _start_, _end_) \
+  Contiguous_breakdown_source_(_fn_, _source_, _coll_, typename decltype(_coll_)::Element_type, \
+  typename decltype(_coll_)::Numeric_Index_type, _start_, _end_)
+#endif
+
+
+#ifndef Action_scan
+#define Action_scan(_fn_, _source_, _coll_, _start_, _end_) \
+  Contiguous_breakdown_target(_fn_, _source_, _coll_, _start_, _end_)
+#endif
+
+#ifndef Action_span
+#define Action_span(_fn_, _target_, _coll_, _start_, _end_) \
+  Contiguous_breakdown_source(_fn_, _target_, _coll_, _start_, _end_)
+#endif
+
+
+
+//Contiguous_breakdown(std::copy, test2, vec, 19, 20);
+
+
+//#ifndef Contiguous_breakdown
+//#define Contiguous_breakdown(_fn_, _source_, _coll_, _start_, _end_) \
+//  Contiguous_breakdown_(_fn_, _source_, _coll_, val_t, \
+//  nx, _start_, _end_)
+//#endif
+
 XCNS_(XCSD)
 
 //template<typename T, typename Numeric_Index_type = signed short>

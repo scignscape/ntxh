@@ -99,7 +99,7 @@ void* Hive_Structure<INDEX_Types>::contiguous(nx nix1, nx nix2, QVector<QPair<vo
  }
 
  Hive_Layer* hl2 = get_layer_by_layer_rank(layer_end);
- breakdown->push_back({&((u1*)hl2->elements_)[0], get_inner_index(nix2)});
+ breakdown->push_back({&((u1*)hl2->elements_)[0], get_inner_index(nix2) + 1});
 
  return nullptr;
 }

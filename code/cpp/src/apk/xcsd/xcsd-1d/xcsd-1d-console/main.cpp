@@ -56,13 +56,19 @@ int main1(int argc , char **argv)
  return 0;
 }
 
-int main(int argc , char **argv)
+int main01(int argc , char **argv)
 {
  Vec1d<int> vec(10, 7);
 
- QVector<int> test {2, 3, 4, 5, 6, 7};
+ QVector<int> test1 {104, 105, 106, 107, 108, 109};
+ QVector<int> test2 {219, 220};
+ QVector<int> test3 {330, 331};
+ QVector<int> test3a {1330, 1331, 1332, 1333, 1334, 1335, 1336, 1337, 1338, 1339, 1340};
+ QVector<int> test4 {438, 439, 440, 441, 442, 443, 444,
+                     445, 446, 447, 448, 449, 450, 451};
+ QVector<int> test5 ;
 
- vec.resize(30);
+ vec.resize(60);
 
  vec.each <<= [](int& i, s2 ix)
  {
@@ -73,27 +79,152 @@ int main(int argc , char **argv)
 
  if(int* it = vec.contiguous(4, 9))
  {
-  std::copy(test.begin(), test.end(), it);
+  std::copy(test1.begin(), test1.end(), it);
  }
- qDebug() << vec.to_qstring(QString_number(int));
+ qDebug() << "test 1: " << vec.to_qstring(QString_number(int));
 
- QVector<QPair<int*, s2>> breakdown;
- if(int* it = vec.contiguous(18, 23, breakdown))
  {
-  std::copy(test.begin(), test.end(), it);
- }
- else
- {
-  auto it1 = test.begin();
-  for(QPair<int*, s2> pr : breakdown)
+  QVector<QPair<int*, s2>> breakdown;
+  if(int* it = vec.contiguous(19, 20, breakdown))
   {
-   std::copy(it1, it1 + pr.second, pr.first);
-   it1 += pr.second;
+   //std::copy(test.begin(), test.end(), it);
+  }
+  else
+  {
+   auto it1 = test2.begin();
+   for(QPair<int*, s2> pr : breakdown)
+   {
+    std::copy(it1, it1 + pr.second, pr.first);
+    it1 += pr.second;
+   }
   }
  }
+ qDebug() << "test 2: " << vec.to_qstring(QString_number(int));
 
- qDebug() << vec.to_qstring(QString_number(int));
+ {
+  QVector<QPair<int*, s2>> breakdown;
+  if(int* it = vec.contiguous(30, 31, breakdown))
+  {
+   std::copy(test3.begin(), test3.end(), it);
+  }
+  else
+  {
+   auto it1 = test3.begin();
+   for(QPair<int*, s2> pr : breakdown)
+   {
+    std::copy(it1, it1 + pr.second, pr.first);
+    it1 += pr.second;
+   }
+  }
+ }
+ qDebug() << "test 3: " <<  vec.to_qstring(QString_number(int));
+
+ {
+  QVector<QPair<int*, s2>> breakdown;
+  if(int* it = vec.contiguous(38, 51, breakdown))
+  {
+   //std::copy(test.begin(), test.end(), it);
+  }
+  else
+  {
+   auto it1 = test4.begin();
+   for(QPair<int*, s2> pr : breakdown)
+   {
+    std::copy(it1, it1 + pr.second, pr.first);
+    it1 += pr.second;
+   }
+  }
+ }
+ qDebug() << "test 4: " <<  vec.to_qstring(QString_number(int));
+
+
+ {
+  QVector<QPair<int*, s2>> breakdown;
+  if(int* it = vec.contiguous(30, 40, breakdown))
+  {
+   //std::copy(test.begin(), test.end(), it);
+  }
+  else
+  {
+   auto it1 = test3a.begin();
+   for(QPair<int*, s2> pr : breakdown)
+   {
+    std::copy(it1, it1 + pr.second, pr.first);
+    it1 += pr.second;
+   }
+  }
+ }
+ qDebug() <<  "test 3a: " << vec.to_qstring(QString_number(int));
+
+ test5.resize(17);
+
+ {
+  QVector<QPair<int*, s2>> breakdown;
+  if(int* it = vec.contiguous(5, 21, breakdown))
+  {
+   std::copy(it, it + 21, test1.begin());
+  }
+  else
+  {
+   auto it1 = test5.begin();
+   for(QPair<int*, s2> pr : breakdown)
+   {
+    std::copy(pr.first, pr.first + pr.second, it1);
+    it1 += pr.second;
+   }
+  }
+ }
+ qDebug() << "test5 = " << test5;
 }
+
+
+int main(int argc , char **argv)
+{
+ Vec1d<int> vec(10, 7);
+
+ QVector<int> test1 {104, 105, 106, 107, 108, 109};
+ QVector<int> test2 {219, 220};
+ QVector<int> test3 {330, 331};
+ QVector<int> test3a {1330, 1331, 1332, 1333, 1334, 1335, 1336, 1337, 1338, 1339, 1340};
+ QVector<int> test4 {438, 439, 440, 441, 442, 443, 444,
+                     445, 446, 447, 448, 449, 450, 451};
+ QVector<int> test5 ;
+ QVector<int> test6 ;
+
+ vec.resize(60);
+
+ vec.each <<= [](int& i, s2 ix)
+ {
+  i = ix - 1;
+  return-1;
+ };
+ qDebug() << vec.to_qstring(QString_number(int));
+
+ Action_scan(std::copy, test1, vec, 4, 9);
+ qDebug() << "test 1: " << vec.to_qstring(QString_number(int));
+
+ Action_scan(std::copy, test2, vec, 19, 20);
+ qDebug() << "test 2: " << vec.to_qstring(QString_number(int));
+
+ Action_scan(std::copy, test3, vec, 30, 31);
+ qDebug() << "test 3: " <<  vec.to_qstring(QString_number(int));
+
+ Action_scan(std::copy, test4, vec, 38, 51);
+ qDebug() << "test 4: " <<  vec.to_qstring(QString_number(int));
+
+
+ Action_scan(std::copy, test3a, vec, 30, 40);  // vec is target
+ qDebug() <<  "test 3a: " << vec.to_qstring(QString_number(int));
+
+ test5.resize(7);
+ Action_span(std::copy, test5, vec, 1, 7); // vec is source
+ qDebug() << "test5 = " << test5;
+
+ test6.resize(17);
+ Action_span(std::copy, test6, vec, 5, 21);
+ qDebug() << "test6 = " << test6;
+}
+
 
 void test1()
 {

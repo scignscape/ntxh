@@ -151,7 +151,7 @@ public:
  }
 
  void retire();
- void reset_no_retire(Mat2d& rhs);
+ void reset_no_retire(const Mat2d& rhs);
  void reset(const Mat2d& rhs);
 
 
