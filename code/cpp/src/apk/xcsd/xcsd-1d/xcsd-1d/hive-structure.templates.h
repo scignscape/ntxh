@@ -57,7 +57,38 @@ void Hive_Structure<INDEX_Types>
  check_init_layer(hl);
 }
 
+template<typename INDEX_Types>
+void* Hive_Structure<INDEX_Types>
+  ::rebound(nx nix)
+{
+ if(layer_size_ < 0)
+ {
+  if(total_size() <= nix)
+  {
+   resize(nix + 1);
+   return get_location(nix);
+  }
+  return nullptr;
+ }
+ // // any other cases?
+ return nullptr;
+}
 
+template<typename INDEX_Types>
+void* Hive_Structure<INDEX_Types>
+  ::fetch(nx nix)
+{
+ return get_indexed_location(nix);
+}
+
+template<typename INDEX_Types>
+void* Hive_Structure<INDEX_Types>
+  ::get(nx nix)
+{
+ if(nix >= total_size())
+   return nullptr;
+ return fetch(nix);
+}
 
 template<typename INDEX_Types>
 void* Hive_Structure<INDEX_Types>

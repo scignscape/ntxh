@@ -45,6 +45,23 @@
 
 XCNS_(XCSD)
 
+template<class OBJ_Type>
+typename std::enable_if<std::is_default_constructible<OBJ_Type>::value, void>::type
+_check_construct(OBJ_Type** obj)
+{
+ if(!*obj)
+   *obj = new OBJ_Type;    // default-construct Obj
+}
+
+template<class OBJ_Type>
+typename std::enable_if<!std::is_default_constructible<OBJ_Type>::value, void>::type
+_check_construct(OBJ_Type**)
+{
+}
+
+
+
+
 struct _pr_break
 {
  u2 index;
@@ -98,13 +115,42 @@ public:
   return (VAL_Type*) hive_structure_->contiguous(nix1, nix2);
  }
 
+ void rebound(nx nix, const VAL_Type& v)
+ {
+  if(void* pv = hive_structure_->rebound(nix))
+    *(VAL_Type*)pv = v;
+ }
+
+ void rebound_first(const VAL_Type& v)
+ {
+  rebound(0, v);
+ }
+
  VAL_Type* contiguous(nx nix1, nx nix2, QVector<QPair<VAL_Type*, nx>>& breakdown)
  {
   return (VAL_Type*) hive_structure_->contiguous(nix1, nix2,
     (QVector<QPair<void*, nx>>*) &breakdown);
  }
 
+ static void default_construct_if_needed_and_possible(VAL_Type** result)
+ {
+  _check_construct<VAL_Type>(result);
+ }
 
+ VAL_Type* fetch(nx nix)
+ {
+  return (VAL_Type*) hive_structure_->fetch(nix);
+ }
+
+ VAL_Type* get(nx nix)
+ {
+  return (VAL_Type*) hive_structure_->get(nix);
+ }
+
+ bool is_empty()
+ {
+  return hive_structure_->total_size() == 0;
+ }
 
 
  QString to_qstring(nx nix1, nx nix2, std::function<QString(const VAL_Type& v)> fn,
@@ -452,6 +498,7 @@ public:
  }
 
 };
+
 
 _XCNS(XCSD)
 

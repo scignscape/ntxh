@@ -42,6 +42,7 @@ DEFINES += USE_KANS
 HEADERS += \
   $$SRC_DIR/mat2d.h \
   $$SRC_DIR/mat2d.templates.h \
+  $$SRC_DIR/mat2d.templates.special-modes.h \
 
 
 

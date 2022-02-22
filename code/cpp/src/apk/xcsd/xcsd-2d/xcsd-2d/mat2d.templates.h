@@ -1,6 +1,8 @@
 
 #include "mat2d.h"
 
+#include <QFile>
+#include <QDataStream>
 
 template<typename COLL_Type>
 Mat2d<COLL_Type>::Mat2d(nx r, nx c, nnx layer_size, nnx block_size)
@@ -13,10 +15,72 @@ Mat2d<COLL_Type>::Mat2d(nx r, nx c, nnx layer_size, nnx block_size)
 }
 
 template<typename COLL_Type>
+typename COLL_Type::Numeric_Index_type Mat2d<COLL_Type>::n_rows() const
+{
+ return n_rows_ >> 1;
+}
+
+template<typename COLL_Type>
+void Mat2d<COLL_Type>::set_n_rows(nx n_rows)
+{
+ n_rows_ = n_rows << 1;
+}
+
+template<typename COLL_Type>
+typename COLL_Type::Numeric_Index_type
+Mat2d<COLL_Type>::n_cols() const
+{
+ if(n_cols_ <= 1)
+   return n_rows();
+ return n_cols_ >> 1;
+}
+
+template<typename COLL_Type>
+void Mat2d<COLL_Type>::set_n_cols(nx n_cols)
+{
+ n_cols_ = n_cols << 1;
+}
+
+//template<typename OBJ_Type,
+//  typename Test = std::enable_if<std::is_default_constructible<OBJ_Type>::value>>
+//void _construct_(OBJ_Type* obj);
+
+
+
+template<typename COLL_Type>
+typename COLL_Type::Value_type*
+Mat2d<COLL_Type>::_defaultv(val_t** reset)
+{
+ static r8* result = nullptr;
+ if(reset)
+   result = *reset;
+ else
+   COLL_Type::default_construct_if_needed_and_possible(&result);
+  //_check_construct<COLL_Type::Value_type>(result);
+ return result;
+}
+
+
+template<typename COLL_Type>
 void Mat2d<COLL_Type>::set_default_value(val_t defaultv)
 {
  elems_->first() = defaultv;
 }
+
+
+template<typename COLL_Type>
+void Mat2d<COLL_Type>::data_to_qvector(QVector<val_t>& result)
+{
+ result.resize(total_size() + 1);
+ Action_scan(std::copy, result, (*elems_), 0, total_size());
+}
+
+template<typename COLL_Type>
+void Mat2d<COLL_Type>::data_from_qvector(const QVector<val_t>& source)
+{
+ Action_span(std::copy, source, (*elems_), 0, total_size());
+}
+
 
 
 //QVector_Matrix_val_t::QVector_Matrix_val_t(nx r, nx c, val_t defaultv)
@@ -553,5 +617,198 @@ void Mat2d<COLL_Type>::get_row(nx r, QVector<val_t>& row)
 // {
 //  row[i] = elems_->value(index);
 // }
+}
+
+template<typename COLL_Type>
+Mat2d<COLL_Type>* Mat2d<COLL_Type>::new_from_dimensions()
+{
+ return new Mat2d(n_rows(), n_cols());
+}
+
+template<typename COLL_Type>
+void Mat2d<COLL_Type>::save_to_datastream(QDataStream& qds)
+{
+ QVector<val_t> elems_vector;
+ data_to_qvector(elems_vector);
+ qds << n_rows_ << n_cols_ << elems_vector;
+}
+
+template<typename COLL_Type>
+void Mat2d<COLL_Type>::load_from_datastream(QDataStream& qds)
+{
+ //elems_ = new QVector<r8>;
+ QVector<val_t> elems_vector;
+ qds >> n_rows_ >> n_cols_ >> elems_vector;
+ data_from_qvector(elems_vector);
+}
+
+template<typename COLL_Type>
+void Mat2d<COLL_Type>::save_to_file(QString path)
+{
+ QFile qf(path);
+ if(!qf.open( QIODevice::WriteOnly ))
+   return;
+ QDataStream qds(&qf);
+ save_to_datastream(qds);
+ qf.close();
+}
+
+template<typename COLL_Type>
+void Mat2d<COLL_Type>::load_from_file(QString path)
+{
+ QFile qf(path);
+ if(!qf.open( QIODevice::ReadOnly ))
+   return;
+ QDataStream qds(&qf);
+ load_from_datastream(qds);
+ qf.close();
+}
+
+template<typename COLL_Type>
+typename COLL_Type::Numeric_Index_type
+Mat2d<COLL_Type>::get_sym_index(nx r, nx c)
+{
+ // // assumes r, c are in bounds
+ nx result = 0;
+
+ if(is_cmajor())
+ {
+  if(c < r)
+    // //  treat them as if they're flipped
+    result = ( (r * (r - 1)) / 2 ) + c;
+  else
+    result = ( (c * (c - 1)) / 2 ) + r;
+ }
+ else
+ {
+  if(c < r)
+    // //  treat them as if they're flipped
+    result = ( (c - 1)*n_cols() ) - ( (c - 2)*(c - 1) )/2 + (r - (c - 1));
+  else
+    result = ( (r - 1)*n_cols() ) - ( (r - 2)*(r - 1) )/2 + (c - (r - 1)) ;
+ }
+ return result;
+}
+
+#include "mat2d.templates.special-modes.h"
+
+template<typename COLL_Type>
+typename COLL_Type::Numeric_Index_type
+Mat2d<COLL_Type>::total_size()
+{
+ if(is_symmetric())
+   return _Mat2d_special_mode<COLL_Type>::_Sym(this)._total_size();
+ if(is_skew_symmetric())
+   return _Mat2d_special_mode<COLL_Type>::_Skew(this)._total_size();
+ if(is_diagonal())
+   return _Mat2d_special_mode<COLL_Type>::_Diag(this)._total_size();
+
+ return n_rows() * n_cols();
+}
+
+template<typename COLL_Type>
+typename COLL_Type::Value_type*
+Mat2d<COLL_Type>::fetch(nx r, nx c)
+{
+ if(is_symmetric())
+   return _Mat2d_special_mode<COLL_Type>::_Sym(this)._fetch(r, c);
+ if(is_skew_symmetric())
+   return _Mat2d_special_mode<COLL_Type>::_Skew(this)._fetch(r, c);
+ if(is_diagonal())
+   return _Mat2d_special_mode<COLL_Type>::_Diag(this)._fetch(r, c);
+
+ if(elems_)
+ {
+  nx nix = 0;
+  if(r <= n_rows())
+  {
+   if(c <= n_cols())
+   {
+    nix = _get_normal_index(r, c); // ((r - 1) * n_cols()) + c;
+    if(nix >= (nx) elems_->size())
+      nix = 0;
+   }
+  }
+  return elems_->fetch(nix);
+ }
+// elems_ = new QVector<r8>(1);
+// (*elems_)[0] = *_defaultv();
+// return &(*elems_)[0];
+}
+
+template<typename COLL_Type>
+const typename COLL_Type::Value_type&
+Mat2d<COLL_Type>::at(nx r, nx c)
+{
+ if(is_symmetric())
+   return _Mat2d_special_mode<COLL_Type>::_Sym(this)._at(r, c);
+ if(is_skew_symmetric())
+   return _Mat2d_special_mode<COLL_Type>::_Skew(this)._at(r, c);
+ if(is_diagonal())
+   return _Mat2d_special_mode<COLL_Type>::_Diag(this)._at(r, c);
+
+ return *fetch(r, c);
+}
+
+// // keep this?
+template<typename COLL_Type>
+typename COLL_Type::Value_type
+Mat2d<COLL_Type>::get_value(nx r, nx c)
+{
+if(is_skew_symmetric() && (c < r))
+  return -at(c, r);
+return at(r, c);
+}
+
+template<typename COLL_Type>
+typename COLL_Type::Value_type
+Mat2d<COLL_Type>::get_at(nx r, nx c)
+{
+if(is_skew_symmetric() && (c < r))
+  return -at(c, r);
+return at(r, c);
+}
+
+template<typename COLL_Type>
+typename COLL_Type::Value_type
+Mat2d<COLL_Type>::get_at_index(nx nix)
+{
+ if(elems_)
+ {
+  if(nix < elems_->total_size())
+    return elems_->fetch(nix);
+  if(elems_->is_empty())
+    return *_defaultv();
+  return elems_->first();
+ }
+ return *_defaultv();
+}
+
+
+template<typename COLL_Type>
+typename COLL_Type::Value_type*
+Mat2d<COLL_Type>::get(nx r, nx c)
+{
+ if(is_symmetric())
+   return _Mat2d_special_mode<COLL_Type>::_Sym(this)._get(r, c);
+ if(is_skew_symmetric())
+   return _Mat2d_special_mode<COLL_Type>::_Skew(this)._get(r, c);
+ if(is_diagonal())
+   return _Mat2d_special_mode<COLL_Type>::_Diag(this)._get(r, c);
+
+ if(elems_)
+ {
+  if(r > n_rows())
+    return nullptr;
+  if(c > n_cols())
+    return nullptr;
+
+  nx nix = _get_normal_index(r, c); // ((r - 1) * n_cols()) + c;
+  if(nix >= (nx) elems_->total_size())
+    return nullptr;
+
+  return elems_->fetch(nix);
+ }
+ return nullptr;
 }
 

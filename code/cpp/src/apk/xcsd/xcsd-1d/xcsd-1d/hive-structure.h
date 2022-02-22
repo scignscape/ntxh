@@ -454,6 +454,10 @@ public:
 
  void resize(nx nix);
 
+ void* rebound(nx nix);
+ void* fetch(nx nix);
+ void* get(nx nix);
+
  pre_iterator parse_location(nx nix);
 
  struct iterator

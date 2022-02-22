@@ -18,6 +18,18 @@ XCNS_(XCSD)
 // template<typename VAL_Type, typename = index_types<s2>,
 //typename = _pr_break> class
 
+enum class Mat2d_special_mode {
+ Sym, Skew, Diag
+};
+
+enum class Mat2d_special_mode_x {
+ N_A, Sym, Skew, Diag, ED, Sym_ED, Skew_ED, Diag_ED,
+};
+
+enum class Mat2d_special_mode_for_raw_data {
+ Normal, ED, CM, ED_CM
+};
+
 template<typename COLL_Type>
 class Mat2d
 {
@@ -38,29 +50,17 @@ class Mat2d
  };
 
 
- enum class special_mode {
-  Sym, Skew, Diag
- };
-
- enum class special_mode_x {
-  N_A, Sym, Skew, Diag, ED, Sym_ED, Skew_ED, Diag_ED,
- };
-
- enum class special_mode_for_raw_data {
-  Normal, ED, CM, ED_CM
- };
-
  struct _from_raw_data_special
  {
   Mat2d& _this;
-  special_mode_for_raw_data mfrd;
+  Mat2d_special_mode_for_raw_data mfrd;
 
   _from_raw_data_special cmajor()
   {
-   return ( (mfrd == special_mode_for_raw_data::ED)
-       || (mfrd == special_mode_for_raw_data::ED_CM) )
-     ? _from_raw_data_special{_this, special_mode_for_raw_data::ED_CM}
-     : _from_raw_data_special{_this, special_mode_for_raw_data::CM};
+   return ( (mfrd == Mat2d_special_mode_for_raw_data::ED)
+       || (mfrd == Mat2d_special_mode_for_raw_data::ED_CM) )
+     ? _from_raw_data_special{_this, Mat2d_special_mode_for_raw_data::ED_CM}
+     : _from_raw_data_special{_this, Mat2d_special_mode_for_raw_data::CM};
   }
 
   void cmajor(const QByteArray& qba, QPair<nx, nx> dims = {0, 0}, val_t defaultv = 0);
@@ -87,26 +87,27 @@ class Mat2d
 
  };
 
- template<special_mode>
- const val_t& _at(nx r, nx c);
+//?
+// template<special_mode>
+// const val_t& _at(nx r, nx c);
 
- template<special_mode>
- val_t* _get(nx r, nx c);
+// template<special_mode>
+// val_t* _get(nx r, nx c);
 
- template<special_mode>
- val_t* _fetch(nx r, nx c);
+// template<special_mode>
+// val_t* _fetch(nx r, nx c);
 
- template<special_mode>
- val_t _value(nx r, nx c);
+// template<special_mode>
+// val_t _value(nx r, nx c);
 
- template<special_mode>
- val_t _value(nx r, nx c, val_t defaultv);
+// template<special_mode>
+// val_t _value(nx r, nx c, val_t defaultv);
 
- template<special_mode>
- nx _total_size();
+// template<special_mode>
+// nx _total_size();
 
- template<special_mode>
- nx _get_index(nx r, nx c);
+// template<special_mode>
+// nx _get_index(nx r, nx c);
 
  nx _get_normal_index(nx r, nx c);
 
@@ -114,7 +115,7 @@ class Mat2d
 
  void default_init(nx len);
 
- static val_t* _defaultv();
+ static val_t* _defaultv(val_t** reset = nullptr);
 
  void _to_raw_data(QByteArray& qba, nx offset, nx count);
 
@@ -125,7 +126,7 @@ class Mat2d
    QPair<nx, nx> dims, nx total_size = 0);
 
  void _from_raw_data(const QByteArray& qba, QPair<nx, nx> dims,
-   val_t defaultv, special_mode_x smx);
+   val_t defaultv, Mat2d_special_mode_x smx);
 
  COLL_Type* elems_;
 
@@ -153,6 +154,9 @@ public:
  void retire();
  void reset_no_retire(const Mat2d& rhs);
  void reset(const Mat2d& rhs);
+
+ void data_to_qvector(QVector<val_t>& result);
+ void data_from_qvector(const QVector<val_t>& source);
 
 
  void get_row(nx r, QVector<val_t>& row);
@@ -292,7 +296,7 @@ public:
 
  _from_raw_data_special from_raw_data()
  {
-  return {*this, special_mode_for_raw_data::Normal};
+  return {*this, Mat2d_special_mode_for_raw_data::Normal};
  }
 
  void multiply(const QVector<val_t>& vec, QVector<val_t>& result);
@@ -340,6 +344,63 @@ public:
 
 
 };
+
+//template<typename COLL_Type>
+//template<special_mode>
+//const val_t& _at(nx r, nx c);
+
+// template<special_mode>
+// val_t* _get(nx r, nx c);
+
+// template<special_mode>
+// val_t* _fetch(nx r, nx c);
+
+// template<special_mode>
+// val_t _value(nx r, nx c);
+
+// template<special_mode>
+// val_t _value(nx r, nx c, val_t defaultv);
+
+ // typename Mat2d<COLL_Type>::special_mode sm>
+
+template<typename COLL_Type>
+struct _Mat2d_special_mode
+{
+ using nx = typename COLL_Type::Numeric_Index_type;
+ using val_t = typename COLL_Type::Value_type;
+ struct _Sym
+ {
+  Mat2d<COLL_Type>* _this;
+  nx _total_size();
+  nx _get_index(nx r, nx c);
+  val_t* _fetch(nx r, nx c);
+  val_t* _get(nx r, nx c);
+  val_t& _at(nx r, nx c);
+ };
+ struct _Skew
+ {
+  Mat2d<COLL_Type>* _this;
+  nx _total_size();
+  nx _get_index(nx r, nx c);
+  val_t* _fetch(nx r, nx c);
+  val_t* _get(nx r, nx c);
+  val_t& _at(nx r, nx c);
+ };
+ struct _Diag
+ {
+  Mat2d<COLL_Type>* _this;
+  nx _total_size();
+  nx _get_index(nx r, nx c);
+  val_t* _fetch(nx r, nx c);
+  val_t* _get(nx r, nx c);
+  val_t& _at(nx r, nx c);
+ };
+
+};
+
+// template<special_mode>
+// nx _get_index(nx r, nx c);
+
 
 _XCNS(XCSD)
 
