@@ -46,15 +46,32 @@
 XCNS_(XCSD)
 
 template<class OBJ_Type>
-typename std::enable_if<std::is_default_constructible<OBJ_Type>::value, void>::type
+typename
+std::enable_if<std::is_default_constructible<OBJ_Type>::value
+&& !std::is_arithmetic<OBJ_Type>::value, void>::type
 _check_construct(OBJ_Type** obj)
 {
  if(!*obj)
-   *obj = new OBJ_Type;    // default-construct Obj
+ {
+  *obj = new OBJ_Type();    // default-construct Obj
+ }
 }
 
 template<class OBJ_Type>
-typename std::enable_if<!std::is_default_constructible<OBJ_Type>::value, void>::type
+typename
+std::enable_if<std::is_default_constructible<OBJ_Type>::value
+&& std::is_arithmetic<OBJ_Type>::value, void>::type
+_check_construct(OBJ_Type** obj)
+{
+ if(!*obj)
+ {
+  *obj = new OBJ_Type();    // default-construct Obj
+  **obj = 0;
+ }
+}
+
+template<class OBJ_Type>
+typename std::enable_if<!std::is_default_constructible<OBJ_Type>::value>::type
 _check_construct(OBJ_Type**)
 {
 }
@@ -132,10 +149,79 @@ public:
     (QVector<QPair<void*, nx>>*) &breakdown);
  }
 
+ static VAL_Type** check_init_default_value()
+ {
+  static VAL_Type** result = nullptr;
+  if(!result)
+  {
+   VAL_Type* v;
+   default_construct_if_needed_and_possible(result);
+  }
+  if(!result)
+  {
+   *result = (VAL_Type*)calloc(1, sizeof (VAL_Type));
+  }
+  return result;
+ }
+
  static void default_construct_if_needed_and_possible(VAL_Type** result)
  {
   _check_construct<VAL_Type>(result);
  }
+
+ VAL_Type* fetch_at(nx nix, nx alt)
+ {
+  //VAL_Type** default_value = check_init_default_value();
+
+ // return (VAL_Type*) hive_structure_->fetch_at(nix, alt);
+  return (VAL_Type*) hive_structure_->fetch(nix, alt);
+
+  u1* cv;
+  static VAL_Type* default_value = nullptr;
+  default_construct_if_needed_and_possible(&default_value);
+  if(default_value)
+    cv = (u1*) default_value;
+  else
+    cv = (u1*) calloc(1, sizeof (VAL_Type));
+
+//?  return (VAL_Type*) hive_structure_->fetch_at(nix, alt, cv); //(u1*) default_value);
+ }
+
+ VAL_Type* fetch_at(nx nix, nx alt, VAL_Type v)
+ {
+  return (VAL_Type*) hive_structure_->fetch_at(nix, alt, (u1*) &v);
+ }
+
+ VAL_Type* fetch(nx nix, nx alt)
+ {
+  return (VAL_Type*) hive_structure_->fetch(nix, alt);
+ }
+
+ VAL_Type* fetch(nx nix, nx alt, Out_of_Bounds_Resolution_Flags oob)
+ {
+  u1 value_type_specific_options = oob
+    & Out_of_Bounds_Resolution_Flags::Value_Type_Specific_Options;
+  // //  with no Value_Type_Specific_Options
+   //    the hive_structure_ can handle the other flags
+  if(value_type_specific_options == 0)
+    return (VAL_Type*) hive_structure_->fetch(nix, alt, oob);
+
+  VAL_Type* result = hive_structure_->get(nix);
+
+  if(result)
+    return result;
+
+  switch(value_type_specific_options)
+  {
+  case (u1) Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function:
+    if(default_fn_)
+    {
+
+    }
+  }
+
+ }
+
 
  VAL_Type* fetch(nx nix)
  {

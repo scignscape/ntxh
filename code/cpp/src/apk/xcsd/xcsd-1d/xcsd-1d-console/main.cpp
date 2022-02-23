@@ -177,8 +177,67 @@ int main01(int argc , char **argv)
  qDebug() << "test5 = " << test5;
 }
 
+enum class t_e { s1, s2, s3 };
+
+class t_c
+{
+public:
+
+ int s1, s2, s3;
+
+ t_c(int ss) : s1(1), s2(2), s3(ss) {}
+
+
+};
 
 int main(int argc , char **argv)
+{
+// Vec1d<t_e> vec1(10, 7);
+// t_e* te = vec1.fetch_at(1, 0);
+// qDebug() << "te = " << (int) *te;
+
+// Vec1d<t_c> vec2(10, 7);
+// t_c* tc = vec2.fetch_at(1, 0);
+// qDebug() << "tc = " << tc->s2;
+
+ Vec1d<int> vec(10, 7);
+
+ vec.set_default <= defzfn(int);
+
+ vec.resize(60);
+
+ vec.each <<= [](int& i, s2 ix)
+ {
+  i = ix - 1;
+  return-1;
+ };
+
+ //qDebug() << vec.to_qstring(QString_number(int));
+
+ int* x = vec.fetch(65, 60,
+   Out_of_Bounds_Resolution_Flags::Automatic_Rebound
+   | Out_of_Bounds_Resolution_Flags::Prefer_Initialize_to_Zero
+   | Out_of_Bounds_Resolution_Flags::Defer_to_Alternate_Fallback_Index);
+
+ if(x)
+   qDebug() << "x = " << *x;
+
+ else
+   qDebug() << "out of bounds ...";
+
+ int* y = vec.fetch(65, 60, Out_of_Bounds_Resolution_Flags::Use_Alternate_Fallback_Index);
+
+ if(y)
+   qDebug() << "y = " << *y;
+
+ else
+   qDebug() << "out of bounds ...";
+
+
+ return 0;
+}
+
+int main02(int argc , char **argv)
 {
  Vec1d<int> vec(10, 7);
 

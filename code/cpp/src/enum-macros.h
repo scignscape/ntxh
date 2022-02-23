@@ -9,36 +9,38 @@
 #define ENUM_MACROS__H
 
 
-#define ENUM_FLAGS_OP_MACROS(e) \
- friend constexpr e operator|(e lhs, e rhs) \
+#define ENUM_FLAGS_OP_MACROS_(e, f) \
+ f e operator|(e lhs, e rhs) \
  { \
   return (e) ( (u1) lhs | (u1) rhs ); \
  } \
- friend constexpr e operator|=(e& lhs, e rhs) \
+ f e operator|=(e& lhs, e rhs) \
  { \
   return lhs = (e) (lhs | rhs); \
  } \
- friend constexpr u1 operator^(e lhs, e rhs) \
+ f u1 operator^(e lhs, e rhs) \
  { \
   return (u1) lhs ^ (u1) rhs; \
  } \
- friend constexpr u1 operator^(e lhs, u1 rhs) \
+ f u1 operator^(e lhs, u1 rhs) \
  { \
   return (u1) lhs ^ (u1) rhs; \
  } \
- friend constexpr e operator^=(e& lhs, e rhs) \
+ f e operator^=(e& lhs, e rhs) \
  { \
   return lhs = (e) (lhs ^ rhs); \
  } \
- friend constexpr e operator^=(e& lhs, u1 rhs) \
+ f e operator^=(e& lhs, u1 rhs) \
  { \
   return lhs = (e) (lhs ^ rhs); \
  } \
- friend constexpr u1 operator&(e lhs, e rhs) \
+ f u1 operator&(e lhs, e rhs) \
  { \
   return (u1) lhs & (u1) rhs; \
  } \
 
+ #define ENUM_FLAGS_OP_MACROS(e) ENUM_FLAGS_OP_MACROS_(e, friend constexpr)
+ #define ENUM_FLAGS_OP_MACROS_FREESTANDING(e) ENUM_FLAGS_OP_MACROS_(e,)
 
 
 //friend constexpr e operator,(e& lhs, e rhs) \

@@ -13,6 +13,8 @@
 
 #include "global-types.h"
 
+#include "enum-macros.h"
+
 #include <QVector>
 #include <QString>
 #include <QMap>
@@ -182,10 +184,54 @@ T _upper_bound()
 //template<typename NUMERIC_INDEX_Type = signed short,
 //  typename NUMERIC_NESTED_INDEX_Type = NUMERIC_INDEX_Type>
 
+enum class Out_of_Bounds_Resolution_Flags : u1 {
+  N_A = 0,
+  Use_Exceptions = 1,
+  Automatic_Rebound = 2,
+  Use_Default_Value_Pointer = 4,
+  Call_Default_Value_Function = 8,
+  Call_Default_Constructor_if_Possible = 16,
+  Prefer_Initialize_to_Zero = 32,
+  Use_Alternate_Fallback_Index = 64,
+  Defer_to_Alternate_Fallback_Index = 128,
+
+  Value_Type_Specific_Options = Use_Default_Value_Pointer | Call_Default_Value_Function
+    | Call_Default_Constructor_if_Possible,
+
+  Alternate_Fallback_Index_Options =
+    Use_Alternate_Fallback_Index | Defer_to_Alternate_Fallback_Index,
+
+
+};
+
+ENUM_FLAGS_OP_MACROS_FREESTANDING(Out_of_Bounds_Resolution_Flags)
+
+
 template<typename INDEX_Types>
 class Hive_Structure
 {
 public:
+
+
+// enum class Out_of_Bounds_Resolution_Flags : u1 {
+//   N_A = 0,
+//   Use_Exceptions = 1,
+//   Automatic_Rebound = 2,
+//   Use_Default_Value_Pointer = 4,
+//   Call_Default_Value_Function = 8,
+//   Call_Default_Constructor_if_Possible = 16,
+//   Prefer_Initialize_to_Zero = 32,
+//   Use_Alternate_Fallback_Index = 64,
+//   Defer_to_Alternate_Fallback_Index = 128,
+
+//   Alternate_Fallback_Index_Options =
+//     Use_Alternate_Fallback_Index | Defer_to_Alternate_Fallback_Index,
+
+
+// };
+
+// ENUM_FLAGS_OP_MACROS(Out_of_Bounds_Resolution_Flags)
+
 
  typedef typename INDEX_Types::Numeric_Index_type Numeric_Index_type;
  typedef typename INDEX_Types::Numeric_Nested_Index_type Numeric_Nested_Index_type;
@@ -197,6 +243,7 @@ public:
 // typedef typename GALAXY_Type::index_type index_type;
 // typedef typename GALAXY_Type::nx nx;
 // typedef typename GALAXY_Type::type_descriptor_type type_descriptor_type;
+
 
  struct Hive_Layer
  {
@@ -241,6 +288,8 @@ public:
  nnx value_size_;
  nx total_size_;
 
+ Out_of_Bounds_Resolution_Flags default_out_of_bounds_resolution_flags_;
+
 public:
 
 // union {
@@ -253,7 +302,8 @@ public:
  Hive_Structure(nnx layer_size, nnx block_size)
   :  block_package_(new Hive_Layer_Block_Package(
       {new Hive_Layer_Block{new Hive_Layer[block_size], nullptr}, block_size})), //?, 0, 0
-      layer_size_(-layer_size), value_size_(QT_POINTER_SIZE), total_size_(0)
+      layer_size_(-layer_size), value_size_(QT_POINTER_SIZE), total_size_(0),
+      default_out_of_bounds_resolution_flags_(Out_of_Bounds_Resolution_Flags::N_A)
  {
   for(nnx i = 0; i < block_size; ++i)
   {
@@ -263,27 +313,39 @@ public:
 
 
  Hive_Structure(Hive_Layer_Block_Package* block_package, nnx size)
-  :  block_package_(block_package), layer_size_(-size), value_size_(QT_POINTER_SIZE), total_size_(0)
+  :  block_package_(block_package), layer_size_(-size), value_size_(QT_POINTER_SIZE), total_size_(0),
+     default_out_of_bounds_resolution_flags_(Out_of_Bounds_Resolution_Flags::N_A)
  {
  }
 
  Hive_Structure(Hive_Layer_Array_Package* array_package)
-  :  array_package_(array_package), layer_size_(0), value_size_(QT_POINTER_SIZE), total_size_(0)
+  :  array_package_(array_package), layer_size_(0), value_size_(QT_POINTER_SIZE), total_size_(0),
+     default_out_of_bounds_resolution_flags_(Out_of_Bounds_Resolution_Flags::N_A)
  {
  }
 
  Hive_Structure(Hive_Layer layer, nnx size)
-  :  single_layer_(layer), layer_size_(size), value_size_(QT_POINTER_SIZE), total_size_(0)
+  :  single_layer_(layer), layer_size_(size), value_size_(QT_POINTER_SIZE), total_size_(0),
+     default_out_of_bounds_resolution_flags_(Out_of_Bounds_Resolution_Flags::N_A)
  {
  }
 
  Hive_Structure()
-  :  block_package_(nullptr), layer_size_(0), value_size_(QT_POINTER_SIZE), total_size_(0)
+  :  block_package_(nullptr), layer_size_(0), value_size_(QT_POINTER_SIZE), total_size_(0),
+     default_out_of_bounds_resolution_flags_(Out_of_Bounds_Resolution_Flags::N_A)
  {
  }
 
  ACCESSORS(nnx ,value_size)
  ACCESSORS(nx ,total_size)
+
+ void* get_zeroed_location()
+ {
+  static void* result = nullptr;
+  if(!result)
+    result = calloc(1, value_size_);
+  return result;
+ }
 
  Hive_Layer* get_fixed_size_layer()
  {
@@ -454,8 +516,28 @@ public:
 
  void resize(nx nix);
 
+ void rebound_to(nx nix)
+ {
+  set_total_size(nix + 1);
+ }
+
  void* rebound(nx nix);
- void* fetch(nx nix);
+
+ void* fetch(nx nix, nx alt, Out_of_Bounds_Resolution_Flags oob);
+ void* fetch(nx nix, Out_of_Bounds_Resolution_Flags oob)
+ {
+  fetch(nix, 0, oob);
+ }
+
+ void* fetch_at(nx nix, Out_of_Bounds_Resolution_Flags oob);
+
+ void* fetch(nx nix, nx alt)
+ {
+  fetch(nix, alt, default_out_of_bounds_resolution_flags_);
+ }
+
+ //void* fetch_at(nx nix, nx alt, u1* val);
+
  void* get(nx nix);
 
  pre_iterator parse_location(nx nix);
@@ -518,6 +600,10 @@ public:
 
  void* get_indexed_location(nx nix);
  void* get_indexed_location(nnx block_number, nnx layer_order, nnx inner_index);
+
+ void* get_raw_indexed_location(nx nix);
+ void* get_raw_indexed_location(nnx block_number, nnx layer_order, nnx inner_index);
+
  void* get_indexed_location_unchecked(nx nix);
 
  Hive_Layer* get_layer_for_indexed_location(nnx block_number, nnx layer_order);
