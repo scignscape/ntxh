@@ -151,6 +151,8 @@ XCNS_(XCSD)
 // typedef Numeric_Index_type nx;
 //};
 
+
+
 template <typename T, typename NT = s2>
 struct index_types
 {
@@ -186,14 +188,14 @@ T _upper_bound()
 
 enum class Out_of_Bounds_Resolution_Flags : u1 {
   N_A = 0,
-  Use_Exceptions = 1,
-  Automatic_Rebound = 2,
-  Use_Default_Value_Pointer = 4,
-  Call_Default_Value_Function = 8,
-  Call_Default_Constructor_if_Possible = 16,
-  Prefer_Initialize_to_Zero = 32,
-  Use_Alternate_Fallback_Index = 64,
-  Defer_to_Alternate_Fallback_Index = 128,
+  Automatic_Rebound = 1,
+  Prefer_Initialize_to_Zero = 2,
+  Use_Alternate_Fallback_Index = 4,
+  Defer_to_Alternate_Fallback_Index = 8,
+  Call_Default_Value_Function = 16,
+  Use_Default_Value_Pointer = 32,
+  Call_Default_Constructor_if_Possible = 64,
+  Use_Exceptions = 128,
 
   Value_Type_Specific_Options = Use_Default_Value_Pointer | Call_Default_Value_Function
     | Call_Default_Constructor_if_Possible,
@@ -201,10 +203,34 @@ enum class Out_of_Bounds_Resolution_Flags : u1 {
   Alternate_Fallback_Index_Options =
     Use_Alternate_Fallback_Index | Defer_to_Alternate_Fallback_Index,
 
+  Try_Default_Function_then_Pointer = Call_Default_Value_Function
+     | Use_Default_Value_Pointer,
+
+ Try_Default_Function_then_Constructor = Call_Default_Value_Function
+     | Call_Default_Constructor_if_Possible,
+
+ Try_Default_Pointer_then_Constructor = Use_Default_Value_Pointer
+     | Call_Default_Constructor_if_Possible,
 
 };
 
 ENUM_FLAGS_OP_MACROS_FREESTANDING(Out_of_Bounds_Resolution_Flags)
+
+bool get_permutation_numbers(u1 code, u1& first, u1& second, u1& third, u1& fourth);
+bool get_permutation_numbers(u1 code, u1& first, u1& second, u1& third);
+
+s1 get_permutation_code(u1& mask, Out_of_Bounds_Resolution_Flags first,
+  Out_of_Bounds_Resolution_Flags second,
+  Out_of_Bounds_Resolution_Flags third, Out_of_Bounds_Resolution_Flags fourth);
+s1 get_permutation_code(u1& mask, Out_of_Bounds_Resolution_Flags first,
+  Out_of_Bounds_Resolution_Flags second,
+  Out_of_Bounds_Resolution_Flags third);
+s1 get_permutation_code(u1& mask, Out_of_Bounds_Resolution_Flags first,
+  Out_of_Bounds_Resolution_Flags second);
+
+void parse_permutation_code(u1 code, u1 mask,
+  Out_of_Bounds_Resolution_Flags& first, Out_of_Bounds_Resolution_Flags& second,
+  Out_of_Bounds_Resolution_Flags& third, Out_of_Bounds_Resolution_Flags& fourth);
 
 
 template<typename INDEX_Types>

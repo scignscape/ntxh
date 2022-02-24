@@ -192,6 +192,35 @@ public:
 
 int main(int argc , char **argv)
 {
+ u1 mask1;
+ s1 pc1 = get_permutation_code(mask1,
+   Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function,
+   Out_of_Bounds_Resolution_Flags::Use_Exceptions,
+   Out_of_Bounds_Resolution_Flags::Use_Default_Value_Pointer,
+   Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible);
+
+ qDebug() << "pc1 = " << pc1;
+
+
+ u1 mask2;
+ s1 pc2 = get_permutation_code(mask2,
+   Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function,
+   Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible,
+   Out_of_Bounds_Resolution_Flags::Use_Default_Value_Pointer);
+
+ qDebug() << "pc2 = " << pc2;
+
+ Out_of_Bounds_Resolution_Flags pc11, pc12, pc13, pc14, pc21, pc22, pc23, pc24;
+
+ parse_permutation_code(pc1, mask1, pc11, pc12, pc13, pc14);
+ parse_permutation_code(pc2, mask2, pc21, pc21, pc22, pc24);
+
+ return 0;
+
+}
+
+int main03(int argc , char **argv)
+{
 // Vec1d<t_e> vec1(10, 7);
 // t_e* te = vec1.fetch_at(1, 0);
 // qDebug() << "te = " << (int) *te;
@@ -202,7 +231,9 @@ int main(int argc , char **argv)
 
  Vec1d<int> vec(10, 7);
 
- vec.set_default <= defzfn(int);
+ //vec.set_default <= deffn(int, 9);
+
+ vec.static_default_value(81);
 
  vec.resize(60);
 
@@ -214,10 +245,12 @@ int main(int argc , char **argv)
 
  //qDebug() << vec.to_qstring(QString_number(int));
 
- int* x = vec.fetch(65, 60,
-   Out_of_Bounds_Resolution_Flags::Automatic_Rebound
-   | Out_of_Bounds_Resolution_Flags::Prefer_Initialize_to_Zero
-   | Out_of_Bounds_Resolution_Flags::Defer_to_Alternate_Fallback_Index);
+// int* x = vec.fetch(65, 60,
+//   Out_of_Bounds_Resolution_Flags::Automatic_Rebound
+//   | Out_of_Bounds_Resolution_Flags::Prefer_Initialize_to_Zero
+//   | Out_of_Bounds_Resolution_Flags::Defer_to_Alternate_Fallback_Index);
+
+ int* x = vec.fetch(65, 60, Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible);
 
  if(x)
    qDebug() << "x = " << *x;

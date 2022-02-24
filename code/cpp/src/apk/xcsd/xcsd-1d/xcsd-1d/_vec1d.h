@@ -23,14 +23,24 @@
 
 #include "_each-holders.h"
 
+#include "global-macros.h"
 
-#define deffn(ty, arg) [](ty** def) \
+
+#define deffn_2(ty, arg) [](ty** def) \
 { \
  static ty _def = arg; \
  *def = &_def; \
 } \
 
-#define defzfn(ty) deffn(ty, 0)
+#define defzfn(ty) deffn_2(ty, 0)
+
+#define deffn_1(ty) defzfn(ty)
+
+#define deffn(...) \
+  _preproc_CONCAT(deffn_, _preproc_NUM_ARGS (__VA_ARGS__))(__VA_ARGS__)
+
+
+
 
 
 #ifndef QString_number
@@ -143,6 +153,30 @@ public:
   rebound(0, v);
  }
 
+ static VAL_Type* static_default_value(VAL_Type* v = nullptr)
+ {
+  static VAL_Type* result = nullptr;
+  if(v)
+    result = v;
+
+  return result;
+ }
+
+ void static_default_value(const VAL_Type& v)
+ {
+  static VAL_Type sv = v;
+  static_default_value(&sv);
+ }
+
+ void use_default_value(const VAL_Type& v)
+ {
+  static VAL_Type pv = v;
+  set_default_fn([](VAL_Type** ppv)
+  {
+   *ppv = &pv;
+  });
+ }
+
  VAL_Type* contiguous(nx nix1, nx nix2, QVector<QPair<VAL_Type*, nx>>& breakdown)
  {
   return (VAL_Type*) hive_structure_->contiguous(nix1, nix2,
@@ -206,7 +240,7 @@ public:
   if(value_type_specific_options == 0)
     return (VAL_Type*) hive_structure_->fetch(nix, alt, oob);
 
-  VAL_Type* result = hive_structure_->get(nix);
+  VAL_Type* result = (VAL_Type*) hive_structure_->get(nix);
 
   if(result)
     return result;
@@ -215,10 +249,46 @@ public:
   {
   case (u1) Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function:
     if(default_fn_)
-    {
+      default_fn_(&result);
+   break;
+  case (u1) Out_of_Bounds_Resolution_Flags::Use_Default_Value_Pointer:
+    result = static_default_value();
+   break;
+  case (u1) Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible:
+    default_construct_if_needed_and_possible(&result);
+   break;
+  case (u1) Out_of_Bounds_Resolution_Flags::Try_Default_Function_then_Pointer:
+   if(default_fn_)
+     default_fn_(&result);
+   else
+     result = static_default_value();
+   break;
+  case (u1) Out_of_Bounds_Resolution_Flags::Try_Default_Function_then_Constructor:
+   if(default_fn_)
+     default_fn_(&result);
+   else
+     default_construct_if_needed_and_possible(&result);
+   break;
 
-    }
+  case (u1) Out_of_Bounds_Resolution_Flags::Value_Type_Specific_Options:
+   if(default_fn_)
+   {
+    default_fn_(&result);
+    break;
+   }
+   [[fallthrough]];
+   // //  otherwise fallthrough ...
+  case (u1) Out_of_Bounds_Resolution_Flags::Try_Default_Pointer_then_Constructor:
+   result = static_default_value();
+   default_construct_if_needed_and_possible(&result);
+   break;
+
+
+
+
   }
+
+  return result;
 
  }
 
