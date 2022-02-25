@@ -192,6 +192,41 @@ public:
 
 int main(int argc , char **argv)
 {
+ //u1 enc = encode_reduction_flags(Out_of_Bounds_Resolution_Flags::Use_Exceptions);
+ u1 enc = encode_reduction_flags(
+    Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function,
+    Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible);
+
+ //  Out_of_Bounds_Resolution_Flags::Use_Default_Value_Pointer;
+//    Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible);
+
+ //   Out_of_Bounds_Resolution_Flags::Use_Exceptions);
+
+ // Call_Default_Constructor_if_Possible
+// Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function,
+
+ qDebug() << "enc = " << enc;
+
+ enc = 59;
+
+ Out_of_Bounds_Resolution_Flags f1;
+ Out_of_Bounds_Resolution_Flags f2;
+ Out_of_Bounds_Resolution_Flags f3;
+ Out_of_Bounds_Resolution_Flags f4;
+
+ u1 count = decode_reduction_flags(enc, f1, f2, f3, f4);
+
+ qDebug() << "f1 = " << (u1) f1;
+ qDebug() << "f2 = " << (u1) f2;
+ qDebug() << "f3 = " << (u1) f3;
+ qDebug() << "f4 = " << (u1) f4;
+
+ return 0;
+
+}
+
+int main05(int argc , char **argv)
+{
  u1 mask1;
  s1 pc1 = get_permutation_code(mask1,
    Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function,
@@ -213,7 +248,7 @@ int main(int argc , char **argv)
  Out_of_Bounds_Resolution_Flags pc11, pc12, pc13, pc14, pc21, pc22, pc23, pc24;
 
  parse_permutation_code(pc1, mask1, pc11, pc12, pc13, pc14);
- parse_permutation_code(pc2, mask2, pc21, pc21, pc22, pc24);
+ parse_permutation_code(pc2, mask2, pc21, pc22, pc23, pc24);
 
  return 0;
 

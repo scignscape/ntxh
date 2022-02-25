@@ -186,7 +186,7 @@ T _upper_bound()
 //template<typename NUMERIC_INDEX_Type = signed short,
 //  typename NUMERIC_NESTED_INDEX_Type = NUMERIC_INDEX_Type>
 
-enum class Out_of_Bounds_Resolution_Flags : u1 {
+enum class Out_of_Bounds_Resolution_Flags : u2 {
   N_A = 0,
   Automatic_Rebound = 1,
   Prefer_Initialize_to_Zero = 2,
@@ -216,6 +216,35 @@ enum class Out_of_Bounds_Resolution_Flags : u1 {
 
 ENUM_FLAGS_OP_MACROS_FREESTANDING(Out_of_Bounds_Resolution_Flags)
 
+u2 octal(u1 a1, u1 a2)
+{
+ return a2 + 8*a1;
+}
+
+u2 octal(u1 a1, u1 a2, u1 a3)
+{
+ return a3 + 8*a2 + 64*a1;
+}
+
+u2 octal(u1 a1, u1 a2, u1 a3, u1 a4)
+{
+ return a4 + 8*a3 + 64*a2 + 512*a1;
+}
+
+
+u1 monotone(Out_of_Bounds_Resolution_Flags f)
+{
+ u1 mshifted = (u1) f >> 4;
+ return (mshifted == 8)? 4:
+  (mshifted == 4)? 3: mshifted;
+}
+
+Out_of_Bounds_Resolution_Flags demonotone(u1 m)
+{
+ return (Out_of_Bounds_Resolution_Flags)
+   (((m == 4)? 8: (m == 3)? 4: m) << 4);
+}
+
 bool get_permutation_numbers(u1 code, u1& first, u1& second, u1& third, u1& fourth);
 bool get_permutation_numbers(u1 code, u1& first, u1& second, u1& third);
 
@@ -231,6 +260,210 @@ s1 get_permutation_code(u1& mask, Out_of_Bounds_Resolution_Flags first,
 void parse_permutation_code(u1 code, u1 mask,
   Out_of_Bounds_Resolution_Flags& first, Out_of_Bounds_Resolution_Flags& second,
   Out_of_Bounds_Resolution_Flags& third, Out_of_Bounds_Resolution_Flags& fourth);
+
+u1 encode_reduction_flags(Out_of_Bounds_Resolution_Flags f1);
+u1 encode_reduction_flags(Out_of_Bounds_Resolution_Flags f1,
+  Out_of_Bounds_Resolution_Flags f2);
+u1 encode_reduction_flags(Out_of_Bounds_Resolution_Flags f1,
+  Out_of_Bounds_Resolution_Flags f2,
+  Out_of_Bounds_Resolution_Flags f3);
+u1 encode_reduction_flags(Out_of_Bounds_Resolution_Flags f1,
+  Out_of_Bounds_Resolution_Flags f2,
+  Out_of_Bounds_Resolution_Flags f3,
+  Out_of_Bounds_Resolution_Flags f4);
+
+u1 decode_reduction_flags(u1 encoding,
+  Out_of_Bounds_Resolution_Flags& f1,
+  Out_of_Bounds_Resolution_Flags& f2,
+  Out_of_Bounds_Resolution_Flags& f3,
+  Out_of_Bounds_Resolution_Flags& f4);
+
+
+u2 encode_double_reduction_flags_0_1(Out_of_Bounds_Resolution_Flags f21);
+u2 encode_double_reduction_flags_0_2(Out_of_Bounds_Resolution_Flags f21,
+  Out_of_Bounds_Resolution_Flags f22);
+u2 encode_double_reduction_flags_0_3(Out_of_Bounds_Resolution_Flags f21,
+  Out_of_Bounds_Resolution_Flags f22,
+  Out_of_Bounds_Resolution_Flags f23);
+u2 encode_double_reduction_flags_0_4(Out_of_Bounds_Resolution_Flags f21,
+  Out_of_Bounds_Resolution_Flags f22,
+  Out_of_Bounds_Resolution_Flags f23,
+  Out_of_Bounds_Resolution_Flags f24);
+
+
+u2 encode_double_reduction_flags_1_0(Out_of_Bounds_Resolution_Flags f11);
+u2 encode_double_reduction_flags_1_1(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f21);
+u2 encode_double_reduction_flags_1_2(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f21,
+  Out_of_Bounds_Resolution_Flags f22);
+u2 encode_double_reduction_flags_1_3(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f21,
+  Out_of_Bounds_Resolution_Flags f22,
+  Out_of_Bounds_Resolution_Flags f23);
+u2 encode_double_reduction_flags_1_4(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f21,
+  Out_of_Bounds_Resolution_Flags f22,
+  Out_of_Bounds_Resolution_Flags f23,
+  Out_of_Bounds_Resolution_Flags f24);
+
+u2 encode_double_reduction_flags_2_0(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f12);
+u2 encode_double_reduction_flags_2_1(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f12,
+  Out_of_Bounds_Resolution_Flags f21);
+u2 encode_double_reduction_flags_2_2(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f12,
+  Out_of_Bounds_Resolution_Flags f21,
+  Out_of_Bounds_Resolution_Flags f22);
+u2 encode_double_reduction_flags_2_3(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f12,
+  Out_of_Bounds_Resolution_Flags f21,
+  Out_of_Bounds_Resolution_Flags f22,
+  Out_of_Bounds_Resolution_Flags f23);
+u2 encode_double_reduction_flags_2_4(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f12,
+  Out_of_Bounds_Resolution_Flags f21,
+  Out_of_Bounds_Resolution_Flags f22,
+  Out_of_Bounds_Resolution_Flags f23,
+  Out_of_Bounds_Resolution_Flags f24);
+
+u2 encode_double_reduction_flags_3_0(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f12,
+  Out_of_Bounds_Resolution_Flags f13);
+u2 encode_double_reduction_flags_3_1(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f12,
+  Out_of_Bounds_Resolution_Flags f13,
+  Out_of_Bounds_Resolution_Flags f21);
+u2 encode_double_reduction_flags_3_2(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f12,
+  Out_of_Bounds_Resolution_Flags f13,
+  Out_of_Bounds_Resolution_Flags f21,
+  Out_of_Bounds_Resolution_Flags f22);
+u2 encode_double_reduction_flags_3_3(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f12,
+  Out_of_Bounds_Resolution_Flags f13,
+  Out_of_Bounds_Resolution_Flags f21,
+  Out_of_Bounds_Resolution_Flags f22,
+  Out_of_Bounds_Resolution_Flags f23);
+u2 encode_double_reduction_flags_3_4(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f12,
+  Out_of_Bounds_Resolution_Flags f13,
+  Out_of_Bounds_Resolution_Flags f21,
+  Out_of_Bounds_Resolution_Flags f22,
+  Out_of_Bounds_Resolution_Flags f23,
+  Out_of_Bounds_Resolution_Flags f24);
+
+u2 encode_double_reduction_flags_4_0(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f12,
+  Out_of_Bounds_Resolution_Flags f13,
+  Out_of_Bounds_Resolution_Flags f14);
+u2 encode_double_reduction_flags_4_1(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f12,
+  Out_of_Bounds_Resolution_Flags f13,
+  Out_of_Bounds_Resolution_Flags f14,
+  Out_of_Bounds_Resolution_Flags f21);
+u2 encode_double_reduction_flags_4_2(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f12,
+  Out_of_Bounds_Resolution_Flags f13,
+  Out_of_Bounds_Resolution_Flags f14,
+  Out_of_Bounds_Resolution_Flags f21,
+  Out_of_Bounds_Resolution_Flags f22);
+u2 encode_double_reduction_flags_4_3(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f12,
+  Out_of_Bounds_Resolution_Flags f13,
+  Out_of_Bounds_Resolution_Flags f14,
+  Out_of_Bounds_Resolution_Flags f21,
+  Out_of_Bounds_Resolution_Flags f22,
+  Out_of_Bounds_Resolution_Flags f23);
+u2 encode_double_reduction_flags_4_4(Out_of_Bounds_Resolution_Flags f11,
+  Out_of_Bounds_Resolution_Flags f12,
+  Out_of_Bounds_Resolution_Flags f13,
+  Out_of_Bounds_Resolution_Flags f14,
+  Out_of_Bounds_Resolution_Flags f21,
+  Out_of_Bounds_Resolution_Flags f22,
+  Out_of_Bounds_Resolution_Flags f23,
+  Out_of_Bounds_Resolution_Flags f24);
+
+u2 encode_double_reduction_flags(s1 split, Out_of_Bounds_Resolution_Flags f1,
+  Out_of_Bounds_Resolution_Flags f2,
+  Out_of_Bounds_Resolution_Flags f3,
+  Out_of_Bounds_Resolution_Flags f4,
+  Out_of_Bounds_Resolution_Flags f5,
+  Out_of_Bounds_Resolution_Flags f6,
+  Out_of_Bounds_Resolution_Flags f7,
+  Out_of_Bounds_Resolution_Flags f8)
+{
+ if(split == 4)
+   return encode_double_reduction_flags_4_4(f1, f2, f3, f4, f5, f6, f7, f8);
+ return 0;
+}
+
+u2 encode_double_reduction_flags(s1 split, Out_of_Bounds_Resolution_Flags f1,
+  Out_of_Bounds_Resolution_Flags f2,
+  Out_of_Bounds_Resolution_Flags f3,
+  Out_of_Bounds_Resolution_Flags f4,
+  Out_of_Bounds_Resolution_Flags f5,
+  Out_of_Bounds_Resolution_Flags f6,
+  Out_of_Bounds_Resolution_Flags f7);
+
+u2 encode_double_reduction_flags(s1 split, Out_of_Bounds_Resolution_Flags f1,
+  Out_of_Bounds_Resolution_Flags f2,
+  Out_of_Bounds_Resolution_Flags f3,
+  Out_of_Bounds_Resolution_Flags f4,
+  Out_of_Bounds_Resolution_Flags f5,
+  Out_of_Bounds_Resolution_Flags f6);
+
+u2 encode_double_reduction_flags(s1 split, Out_of_Bounds_Resolution_Flags f1,
+  Out_of_Bounds_Resolution_Flags f2,
+  Out_of_Bounds_Resolution_Flags f3,
+  Out_of_Bounds_Resolution_Flags f4,
+  Out_of_Bounds_Resolution_Flags f5);
+
+u2 encode_double_reduction_flags(s1 split, Out_of_Bounds_Resolution_Flags f1,
+  Out_of_Bounds_Resolution_Flags f2,
+  Out_of_Bounds_Resolution_Flags f3,
+  Out_of_Bounds_Resolution_Flags f4);
+
+u2 encode_double_reduction_flags(s1 split, Out_of_Bounds_Resolution_Flags f1,
+  Out_of_Bounds_Resolution_Flags f2,
+  Out_of_Bounds_Resolution_Flags f3);
+
+u2 encode_double_reduction_flags(s1 split, Out_of_Bounds_Resolution_Flags f1,
+  Out_of_Bounds_Resolution_Flags f2);
+
+
+u2 encode_double_reduction_flags(s1 split, Out_of_Bounds_Resolution_Flags f1,
+  Out_of_Bounds_Resolution_Flags f2,
+  Out_of_Bounds_Resolution_Flags f3,
+  Out_of_Bounds_Resolution_Flags f4,
+  Out_of_Bounds_Resolution_Flags f5);
+
+u2 encode_double_reduction_flags_shared(Out_of_Bounds_Resolution_Flags f1,
+  Out_of_Bounds_Resolution_Flags f2,
+  Out_of_Bounds_Resolution_Flags f3,
+  Out_of_Bounds_Resolution_Flags f4)
+{
+ return encode_double_reduction_flags(4, f1, f2, f3, f4, f1, f2, f3, f4);
+}
+
+u2 encode_double_reduction_flags_shared(Out_of_Bounds_Resolution_Flags f1,
+  Out_of_Bounds_Resolution_Flags f2,
+  Out_of_Bounds_Resolution_Flags f3)
+{
+ return encode_double_reduction_flags(3, f1, f2, f3, f1, f2, f3);
+}
+
+u2 encode_double_reduction_flags_shared(Out_of_Bounds_Resolution_Flags f1,
+  Out_of_Bounds_Resolution_Flags f2)
+{
+ return encode_double_reduction_flags(2, f1, f2, f1, f2);
+}
+
+u2 encode_double_reduction_flags_shared(Out_of_Bounds_Resolution_Flags f1)
+{
+ return encode_double_reduction_flags(1, f1, f1);
+}
 
 
 template<typename INDEX_Types>
