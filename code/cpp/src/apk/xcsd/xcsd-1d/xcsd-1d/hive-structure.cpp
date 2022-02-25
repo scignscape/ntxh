@@ -446,6 +446,7 @@ u1 _decode_reduction_flags_alt(u1 encoding,
 
 }
 
+
 u1 decode_reduction_flags(u1 encoding,
   Out_of_Bounds_Resolution_Flags& f1,
   Out_of_Bounds_Resolution_Flags& f2,
@@ -476,6 +477,46 @@ u1 decode_reduction_flags(u1 encoding,
  parse_permutation_code(encoding, mask, f1, f2, f3, f4);
  return 3; // 3 non-N_A's
 }
+
+u1 decode_fallback_reduction_flags(u1 encoding,
+  Out_of_Bounds_Resolution_Flags& f1,
+  Out_of_Bounds_Resolution_Flags& f2,
+  Out_of_Bounds_Resolution_Flags& f3,
+  Out_of_Bounds_Resolution_Flags& f4)
+{
+ if(encoding == 15)
+   return 0;
+ if(encoding < 6)
+ {
+  u1 mask = 7 << 4; //?(u1)demonotone(1) | (u1)demonotone(2) | (u1)demonotone(3);
+  parse_permutation_code(encoding + 24, mask, f1, f2, f3, f4);
+  return 3; // 3 non-N_A's
+ }
+ if(encoding < 12)
+ {
+  u1 m1, m2;
+  bool odd = encoding & 1;
+  switch (encoding / 2)
+  {
+  case 3: m1 = 1; m2 = 2; break;
+  case 4: m1 = 1; m2 = 3; break;
+  case 5: m1 = 2; m2 = 3; break;
+  default: return 0;
+  }
+  if(odd)
+    std::swap(m1, m2);
+
+  f1 = (Out_of_Bounds_Resolution_Flags) demonotone(m1);
+  f2 = (Out_of_Bounds_Resolution_Flags) demonotone(m2);
+
+  return 2; // 3 non-N_A's
+ }
+ encoding -= 11;
+ f1 = demonotone(encoding);
+ return 1;
+}
+
+
 
 u1 encode_reduction_flags(Out_of_Bounds_Resolution_Flags f1)
 {
@@ -516,6 +557,46 @@ u1 encode_reduction_flags(Out_of_Bounds_Resolution_Flags f1,
  result += alt_index;
  return result;
 }
+
+u1 encode_fallback_reduction_flags(Out_of_Bounds_Resolution_Flags f1)
+{
+ u1 m1 = monotone(f1);
+ return m1 + 11;
+}
+
+u1 encode_fallback_reduction_flags(Out_of_Bounds_Resolution_Flags f1,
+  Out_of_Bounds_Resolution_Flags f2)
+{
+ u1 m1 = monotone(f1);
+ u1 m2 = monotone(f2);
+
+ u2 oct = octal(m1, m2);
+
+ switch (oct)
+ {
+ case 012: return 6; // normal permutation interpretation
+ case 021: return 7; // normal permutation interpretation
+ case 013: return 8; // alt permutation interpretation
+ case 031: return 9; // alt permutation interpretation
+ case 023: return 10; // alt permutation interpretation
+ case 032: return 11; // alt permutation interpretation
+ default: return 0;
+ }
+
+}
+
+
+u1 encode_fallback_reduction_flags(Out_of_Bounds_Resolution_Flags f1,
+  Out_of_Bounds_Resolution_Flags f2,
+  Out_of_Bounds_Resolution_Flags f3)
+{
+ u1 mask = 0;
+ s1 enc = get_permutation_code(mask, f1, f2, f3);
+ if(enc == -1)
+   return 0;
+ return enc - 24;
+}
+
 
 u1 encode_reduction_flags(Out_of_Bounds_Resolution_Flags f1,
   Out_of_Bounds_Resolution_Flags f2,

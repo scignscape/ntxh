@@ -190,12 +190,12 @@ enum class Out_of_Bounds_Resolution_Flags : u2 {
   N_A = 0,
   Automatic_Rebound = 1,
   Prefer_Initialize_to_Zero = 2,
-  Use_Alternate_Fallback_Index = 4,
+  Use_Exceptions = 4,
   Defer_to_Alternate_Fallback_Index = 8,
   Call_Default_Value_Function = 16,
   Use_Default_Value_Pointer = 32,
   Call_Default_Constructor_if_Possible = 64,
-  Use_Exceptions = 128,
+  Use_Alternate_Fallback_Index = 128,
 
   Value_Type_Specific_Options = Use_Default_Value_Pointer | Call_Default_Value_Function
     | Call_Default_Constructor_if_Possible,
@@ -272,12 +272,24 @@ u1 encode_reduction_flags(Out_of_Bounds_Resolution_Flags f1,
   Out_of_Bounds_Resolution_Flags f3,
   Out_of_Bounds_Resolution_Flags f4);
 
+u1 encode_fallback_reduction_flags(Out_of_Bounds_Resolution_Flags f1);
+u1 encode_fallback_reduction_flags(Out_of_Bounds_Resolution_Flags f1,
+  Out_of_Bounds_Resolution_Flags f2);
+u1 encode_fallback_reduction_flags(Out_of_Bounds_Resolution_Flags f1,
+  Out_of_Bounds_Resolution_Flags f2,
+  Out_of_Bounds_Resolution_Flags f3);
+
 u1 decode_reduction_flags(u1 encoding,
   Out_of_Bounds_Resolution_Flags& f1,
   Out_of_Bounds_Resolution_Flags& f2,
   Out_of_Bounds_Resolution_Flags& f3,
   Out_of_Bounds_Resolution_Flags& f4);
 
+u1 decode_fallback_reduction_flags(u1 encoding,
+  Out_of_Bounds_Resolution_Flags& f1,
+  Out_of_Bounds_Resolution_Flags& f2,
+  Out_of_Bounds_Resolution_Flags& f3,
+  Out_of_Bounds_Resolution_Flags& f4);
 
 u2 encode_double_reduction_flags_0_1(Out_of_Bounds_Resolution_Flags f21);
 u2 encode_double_reduction_flags_0_2(Out_of_Bounds_Resolution_Flags f21,

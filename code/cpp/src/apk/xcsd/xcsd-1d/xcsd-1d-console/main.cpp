@@ -192,8 +192,43 @@ public:
 
 int main(int argc , char **argv)
 {
- //u1 enc = encode_reduction_flags(Out_of_Bounds_Resolution_Flags::Use_Exceptions);
- u1 enc = encode_reduction_flags(
+ u2 enc = encode_fallback_reduction_flags(
+   Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible);
+
+//   Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible);
+
+ qDebug() << "enc = " << enc;
+
+ Out_of_Bounds_Resolution_Flags f1;
+ Out_of_Bounds_Resolution_Flags f2;
+ Out_of_Bounds_Resolution_Flags f3;
+ Out_of_Bounds_Resolution_Flags f4;
+
+ u1 count = decode_fallback_reduction_flags(enc, f1, f2, f3, f4);
+
+ qDebug() << "f1 = " << (u1) f1;
+ qDebug() << "f2 = " << (u1) f2;
+ qDebug() << "f3 = " << (u1) f3;
+ qDebug() << "f4 = " << (u1) f4;
+
+ return 0;
+}
+
+int main07(int argc , char **argv)
+{
+ u2 enc = encode_double_reduction_flags(1, Out_of_Bounds_Resolution_Flags::Use_Alternate_Fallback_Index,
+    Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function,
+    Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible);
+
+ qDebug() << "enc = " << enc;
+
+ return 0;
+}
+
+int main06(int argc , char **argv)
+{
+ u1 enc = encode_reduction_flags(Out_of_Bounds_Resolution_Flags::Use_Alternate_Fallback_Index);
+ u1 enc1 = encode_reduction_flags(
     Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function,
     Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible);
 
@@ -207,7 +242,7 @@ int main(int argc , char **argv)
 
  qDebug() << "enc = " << enc;
 
- enc = 59;
+// enc = 59;
 
  Out_of_Bounds_Resolution_Flags f1;
  Out_of_Bounds_Resolution_Flags f2;
