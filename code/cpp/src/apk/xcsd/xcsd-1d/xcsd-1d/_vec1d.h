@@ -203,12 +203,12 @@ public:
   _check_construct<VAL_Type>(result);
  }
 
- VAL_Type* fetch_at(nx nix, nx alt)
+ VAL_Type* fetch_at(nx nix, nx fallback)
  {
   //VAL_Type** default_value = check_init_default_value();
 
- // return (VAL_Type*) hive_structure_->fetch_at(nix, alt);
-  return (VAL_Type*) hive_structure_->fetch(nix, alt);
+ // return (VAL_Type*) hive_structure_->fetch_at(nix, fallback);
+  return (VAL_Type*) hive_structure_->fetch(nix, fallback);
 
   u1* cv;
   static VAL_Type* default_value = nullptr;
@@ -218,27 +218,27 @@ public:
   else
     cv = (u1*) calloc(1, sizeof (VAL_Type));
 
-//?  return (VAL_Type*) hive_structure_->fetch_at(nix, alt, cv); //(u1*) default_value);
+//?  return (VAL_Type*) hive_structure_->fetch_at(nix, fallback, cv); //(u1*) default_value);
  }
 
- VAL_Type* fetch_at(nx nix, nx alt, VAL_Type v)
+ VAL_Type* fetch_at(nx nix, nx fallback, VAL_Type v)
  {
-  return (VAL_Type*) hive_structure_->fetch_at(nix, alt, (u1*) &v);
+  return (VAL_Type*) hive_structure_->fetch_at(nix, fallback, (u1*) &v);
  }
 
- VAL_Type* fetch(nx nix, nx alt)
+ VAL_Type* fetch(nx nix, nx fallback)
  {
-  return (VAL_Type*) hive_structure_->fetch(nix, alt);
+  return (VAL_Type*) hive_structure_->fetch(nix, fallback);
  }
 
- VAL_Type* fetch(nx nix, nx alt, Out_of_Bounds_Resolution_Flags oob)
+ VAL_Type* fetch(nx nix, nx fallback, Out_of_Bounds_Resolution_Flags oob)
  {
   u1 value_type_specific_options = oob
     & Out_of_Bounds_Resolution_Flags::Value_Type_Specific_Options;
   // //  with no Value_Type_Specific_Options
    //    the hive_structure_ can handle the other flags
   if(value_type_specific_options == 0)
-    return (VAL_Type*) hive_structure_->fetch(nix, alt, oob);
+    return (VAL_Type*) hive_structure_->fetch(nix, fallback, oob);
 
   VAL_Type* result = (VAL_Type*) hive_structure_->get(nix);
 

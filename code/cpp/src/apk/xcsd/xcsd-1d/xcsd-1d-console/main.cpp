@@ -190,9 +190,9 @@ public:
 
 };
 
-int main(int argc , char **argv)
+int main08(int argc , char **argv)
 {
- u2 enc = encode_fallback_reduction_flags(
+ u2 enc = encode_fallback_mitigation_flags(
    Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible);
 
 //   Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible);
@@ -204,7 +204,7 @@ int main(int argc , char **argv)
  Out_of_Bounds_Resolution_Flags f3;
  Out_of_Bounds_Resolution_Flags f4;
 
- u1 count = decode_fallback_reduction_flags(enc, f1, f2, f3, f4);
+ u1 count = decode_fallback_mitigation_flags(enc, f1, f2, f3, f4);
 
  qDebug() << "f1 = " << (u1) f1;
  qDebug() << "f2 = " << (u1) f2;
@@ -214,21 +214,71 @@ int main(int argc , char **argv)
  return 0;
 }
 
-int main07(int argc , char **argv)
+int main(int argc , char **argv)
 {
- u2 enc = encode_double_reduction_flags(1, Out_of_Bounds_Resolution_Flags::Use_Alternate_Fallback_Index,
-    Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function,
-    Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible);
+ u2 enc = on_out_of_bounds(Out_of_Bounds_Resolution_Flags::Use_Alternate_Fallback_Index,
+   Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function);
+
+//   [Out_of_Bounds_Resolution_Flags::Use_Exceptions | Out_of_Bounds_Resolution_Flags::Automatic_Rebound];
+
+ //    (Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible)
+
+
+// u2 enc = encode_double_mitigation_flags(1, Out_of_Bounds_Resolution_Flags::Use_Alternate_Fallback_Index,
+//    Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function,
+//    Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible);
+
+// u2 enc = encode_double_mitigation_flags(0, Out_of_Bounds_Resolution_Flags::Use_Alternate_Fallback_Index);
+
+// u2 enc = encode_double_mitigation_flags(1, Out_of_Bounds_Resolution_Flags::Use_Alternate_Fallback_Index,
+//    Out_of_Bounds_Resolution_Flags::Use_Default_Value_Pointer,
+//    Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible);
+
+// u2 enc = 0;
 
  qDebug() << "enc = " << enc;
 
+ Out_of_Bounds_Resolution_Flags f11;
+ Out_of_Bounds_Resolution_Flags f12;
+ Out_of_Bounds_Resolution_Flags f13;
+ Out_of_Bounds_Resolution_Flags f14;
+
+ Out_of_Bounds_Resolution_Flags f21;
+ Out_of_Bounds_Resolution_Flags f22;
+ Out_of_Bounds_Resolution_Flags f23;
+ Out_of_Bounds_Resolution_Flags f24;
+
+ Out_of_Bounds_Resolution_Flags supplement;
+
+
+// std::pair<u1, u1> pr = decode_double_mitigation_flags(enc, supplement,
+//   f11, f12, f13, f14, f21, f22, f23, f24);
+
+ _On_Out_of_Bounds_Pack p = decode_out_of_bounds(enc);
+
+ std::pair<u1, u1> pr = p.unpack(supplement, f11, f12, f13, f14, f21, f22, f23, f24);
+
+ qDebug() << "supplement = " << (u1) supplement;
+
+ qDebug() << "f11 = " << (u1) f11;
+ qDebug() << "f12 = " << (u1) f12;
+ qDebug() << "f13 = " << (u1) f13;
+ qDebug() << "f14 = " << (u1) f14;
+
+ qDebug() << "f21 = " << (u1) f21;
+ qDebug() << "f22 = " << (u1) f22;
+ qDebug() << "f23 = " << (u1) f23;
+ qDebug() << "f24 = " << (u1) f24;
+
+ qDebug() << "pr = " << pr;
  return 0;
 }
 
+
 int main06(int argc , char **argv)
 {
- u1 enc = encode_reduction_flags(Out_of_Bounds_Resolution_Flags::Use_Alternate_Fallback_Index);
- u1 enc1 = encode_reduction_flags(
+ u1 enc = encode_mitigation_flags(Out_of_Bounds_Resolution_Flags::Use_Alternate_Fallback_Index);
+ u1 enc1 = encode_mitigation_flags(
     Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function,
     Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible);
 
@@ -249,7 +299,7 @@ int main06(int argc , char **argv)
  Out_of_Bounds_Resolution_Flags f3;
  Out_of_Bounds_Resolution_Flags f4;
 
- u1 count = decode_reduction_flags(enc, f1, f2, f3, f4);
+ u1 count = decode_mitigation_flags(enc, f1, f2, f3, f4);
 
  qDebug() << "f1 = " << (u1) f1;
  qDebug() << "f2 = " << (u1) f2;

@@ -78,18 +78,18 @@ void* Hive_Structure<INDEX_Types>
 
 //template<typename INDEX_Types>
 //void* Hive_Structure<INDEX_Types>
-//  ::fetch_at(nx nix, nx alt, u1* val)
+//  ::fetch_at(nx nix, nx fallback, u1* val)
 //{
-// void* result = fetch(nix, alt);
+// void* result = fetch(nix, fallback);
 // if(!result)
 // {
-//  result = get_indexed_location_unchecked(alt);
+//  result = get_indexed_location_unchecked(fallback);
 //  memcpy(result, val, value_size_);
-//  rebound_to(alt);
+//  rebound_to(fallback);
 // }
 // return result;
 //// if(nix >= total_size())
-////   return get(alt);
+////   return get(fallback);
 //// return get_indexed_location(nix);
 //}
 
@@ -133,16 +133,16 @@ void* Hive_Structure<INDEX_Types>
 
 template<typename INDEX_Types>
 void* Hive_Structure<INDEX_Types>
-  ::fetch(nx nix, nx alt, Out_of_Bounds_Resolution_Flags oob)
+  ::fetch(nx nix, nx fallback, Out_of_Bounds_Resolution_Flags oob)
 {
  if(nix < total_size())
    return get_raw_indexed_location(nix);
 
- if( (oob & Out_of_Bounds_Resolution_Flags::Alternate_Fallback_Index_Options)
-    == (u1) Out_of_Bounds_Resolution_Flags::Defer_to_Alternate_Fallback_Index)
- {
-  return fetch_at(alt, oob);
- }
+// if( (oob & Out_of_Bounds_Resolution_Flags::Alternate_Fallback_Index_Options)
+//    == (u1) Out_of_Bounds_Resolution_Flags::Defer_to_Alternate_Fallback_Index)
+// {
+//  return fetch_at(fallback, oob);
+// }
 
  void* result_after_rebound = nullptr;
  void* result_without_rebound = nullptr;
@@ -165,23 +165,23 @@ void* Hive_Structure<INDEX_Types>
   // //  the next question is whether to try initializing the
    //    fallback if it too is missing ...
 
-  if(oob & Out_of_Bounds_Resolution_Flags::Defer_to_Alternate_Fallback_Index)
+  if(oob & Out_of_Bounds_Resolution_Flags::Fallback_Automatic_Rebound) //Defer_to_Alternate_Fallback_Index)
   {
    // //  having both Use_Alternate_Fallback_Index and
      //    Defer_to_Alternate_Fallback_Index set indicates
      //    that the fallback strategies are intended for the alternate
      //    after rebounding for the provided index
-   default_value_ptr = fetch_at(alt, oob);
+   default_value_ptr = fetch_at(fallback, oob);
    // //  don't try to use other oob flags if they're intended for the alternate ...
    goto check_memcpy;
   }
 
   else
     // //  In this case (without Defer_to_Alternate_Fallback_Index)
-     //    we just assume the alt index is valid, or at least
+     //    we just assume the fallback index is valid, or at least
      //    don't try to initialize it (maybe get the default
      //    from somewhere else, depending on the other flags)
-    default_value_ptr = fetch_at(alt, Out_of_Bounds_Resolution_Flags::N_A);
+    default_value_ptr = fetch_at(fallback, Out_of_Bounds_Resolution_Flags::N_A);
  }
 
  if(!default_value_ptr)
