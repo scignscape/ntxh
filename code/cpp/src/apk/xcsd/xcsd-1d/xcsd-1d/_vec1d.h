@@ -231,21 +231,52 @@ public:
   return (VAL_Type*) hive_structure_->fetch(nix, fallback);
  }
 
- VAL_Type* fetch(nx nix, nx fallback, Out_of_Bounds_Resolution_Flags oob)
+ VAL_Type* _fetch(nx nix, Out_of_Bounds_Resolution_Flags oobf,
+   Out_of_Bounds_Resolution_Flags supplement = Out_of_Bounds_Resolution_Flags::N_A)
  {
-  u1 value_type_specific_options = oob
+  u1 value_type_specific_options = oobf
     & Out_of_Bounds_Resolution_Flags::Value_Type_Specific_Options;
+
   // //  with no Value_Type_Specific_Options
    //    the hive_structure_ can handle the other flags
-  if(value_type_specific_options == 0)
-    return (VAL_Type*) hive_structure_->fetch(nix, fallback, oob);
+//  if(value_type_specific_options == 0)
+//    return (VAL_Type*) hive_structure_->fetch(nix, oobf | supplement);
 
   VAL_Type* result = (VAL_Type*) hive_structure_->get(nix);
 
   if(result)
     return result;
 
-  switch(value_type_specific_options)
+
+//  // //  now we (may) need to provide a new value for the memory area
+//  if(oob & Out_of_Bounds_Resolution_Flags::Use_Alternate_Fallback_Index)
+//  {
+//   // //  this means we're getting value from the fallback
+
+//   // //  the next question is whether to try initializing the
+//    //    fallback if it too is missing ...
+
+//   if(oob & Out_of_Bounds_Resolution_Flags::Fallback_Automatic_Rebound) //Defer_to_Alternate_Fallback_Index)
+//   {
+//    // //  having both Use_Alternate_Fallback_Index and
+//      //    Defer_to_Alternate_Fallback_Index set indicates
+//      //    that the fallback strategies are intended for the alternate
+//      //    after rebounding for the provided index
+//    default_value_ptr = fetch_at(fallback, oob);
+//    // //  don't try to use other oob flags if they're intended for the alternate ...
+//    goto check_memcpy;
+//   }
+
+//   else
+//     // //  In this case (without Defer_to_Alternate_Fallback_Index)
+//      //    we just assume the fallback index is valid, or at least
+//      //    don't try to initialize it (maybe get the default
+//      //    from somewhere else, depending on the other flags)
+//     default_value_ptr = fetch_at(fallback, Out_of_Bounds_Resolution_Flags::N_A);
+//  }
+
+
+  switch((u1)oobf)
   {
   case (u1) Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function:
     if(default_fn_)
@@ -257,41 +288,110 @@ public:
   case (u1) Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible:
     default_construct_if_needed_and_possible(&result);
    break;
-  case (u1) Out_of_Bounds_Resolution_Flags::Try_Default_Function_then_Pointer:
-   if(default_fn_)
-     default_fn_(&result);
-   else
-     result = static_default_value();
-   break;
-  case (u1) Out_of_Bounds_Resolution_Flags::Try_Default_Function_then_Constructor:
-   if(default_fn_)
-     default_fn_(&result);
-   else
-     default_construct_if_needed_and_possible(&result);
-   break;
+//  case (u1) Out_of_Bounds_Resolution_Flags::Try_Default_Function_then_Pointer:
+//   if(default_fn_)
+//     default_fn_(&result);
+//   else
+//     result = static_default_value();
+//   break;
+//  case (u1) Out_of_Bounds_Resolution_Flags::Try_Default_Function_then_Constructor:
+//   if(default_fn_)
+//     default_fn_(&result);
+//   else
+//     default_construct_if_needed_and_possible(&result);
+//   break;
 
-  case (u1) Out_of_Bounds_Resolution_Flags::Value_Type_Specific_Options:
-   if(default_fn_)
-   {
-    default_fn_(&result);
-    break;
-   }
-   [[fallthrough]];
-   // //  otherwise fallthrough ...
-  case (u1) Out_of_Bounds_Resolution_Flags::Try_Default_Pointer_then_Constructor:
-   result = static_default_value();
-   default_construct_if_needed_and_possible(&result);
-   break;
-
-
-
-
+//  case (u1) Out_of_Bounds_Resolution_Flags::Value_Type_Specific_Options:
+//   if(default_fn_)
+//   {
+//    default_fn_(&result);
+//    break;
+//   }
+//   [[fallthrough]];
+//   // //  otherwise fallthrough ...
+//  case (u1) Out_of_Bounds_Resolution_Flags::Try_Default_Pointer_then_Constructor:
+//   result = static_default_value();
+//   default_construct_if_needed_and_possible(&result);
+//   break;
   }
 
   return result;
-
  }
 
+ static nx the_invalid_index()
+ {
+  return _the_invalid_index<nx>();
+ }
+
+ static nx the_invalid_upper_index()
+ {
+  return _the_invalid_upper_index<nx>();
+ }
+
+ VAL_Type* _fetch_via_fallback(nx fallback, u1 count,
+   Out_of_Bounds_Resolution_Flags oob[4], Out_of_Bounds_Resolution_Flags supplement)
+ {
+  VAL_Type* result = nullptr;
+  for(u1 u = 0; u < count; ++u)
+  {
+   qDebug() << u << "f2 = " << (u1) oob[u];
+   result = _fetch(fallback, oob[u]);
+   if(result)
+     break;
+  }
+  if(result && (supplement & Out_of_Bounds_Resolution_Flags::Fallback_Automatic_Rebound))
+    hive_structure_->rebound(fallback, result);
+  else
+  {
+   if(supplement & Out_of_Bounds_Resolution_Flags::Fallback_Automatic_Rebound)
+   {
+    supplement ^= Out_of_Bounds_Resolution_Flags::Fallback_Automatic_Rebound;
+    supplement |= Out_of_Bounds_Resolution_Flags::Automatic_Rebound;
+   }
+   else if(supplement & Out_of_Bounds_Resolution_Flags::Fallback_Automatic_Rebound)
+     supplement ^= Out_of_Bounds_Resolution_Flags::Automatic_Rebound;
+   result = (VAL_Type*) hive_structure_->fetch(fallback, supplement);
+  }
+  return result;
+ }
+
+ VAL_Type* fetch(nx nix, _On_Out_of_Bounds_Pack oob, nx fallback = the_invalid_index())
+ {
+  Out_of_Bounds_Resolution_Flags supplement;
+
+  Out_of_Bounds_Resolution_Flags f1 [4];// {Out_of_Bounds_Resolution_Flags::N_A};
+  Out_of_Bounds_Resolution_Flags f2 [4];// {Out_of_Bounds_Resolution_Flags::N_A};
+
+  std::pair<u1, u1> pr = oob.unpack(supplement, f1[0], f1[1], f1[2], f1[3], f2[0], f2[1], f2[2], f2[3]);
+
+  VAL_Type* result = nullptr;
+
+  for(u1 u = 0; u < oob.for_index_length; ++u)
+  {
+   if(f1[u] == Out_of_Bounds_Resolution_Flags::Use_Alternate_Fallback_Index)
+   {
+    if(fallback == the_invalid_index())
+      continue;
+    if(fallback == the_invalid_upper_index())
+      continue;
+    result = _fetch_via_fallback(fallback, oob.for_fallback_length, f2, supplement);
+   }
+   else
+     result = _fetch(nix, f1[u], supplement);
+   if(result)
+     break;
+   qDebug() << u << " f1 = " << (u1) f1[u];
+  }
+
+  if(result && (supplement & Out_of_Bounds_Resolution_Flags::Automatic_Rebound))
+    hive_structure_->rebound(nix, result);
+  else
+    result = (VAL_Type*) hive_structure_->fetch(nix, supplement);
+
+  return result;
+
+  //fetch()
+ }
 
  VAL_Type* fetch(nx nix)
  {

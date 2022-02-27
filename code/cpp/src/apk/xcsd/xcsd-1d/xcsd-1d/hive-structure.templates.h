@@ -110,7 +110,7 @@ void* Hive_Structure<INDEX_Types>
   result_after_rebound = rebound(nix);
  }
 
- if(oob & Out_of_Bounds_Resolution_Flags::Prefer_Initialize_to_Zero)
+ if(oob & Out_of_Bounds_Resolution_Flags::Accept_Initialize_to_Zero)
  {
   default_value_ptr = get_zeroed_location();
  }
@@ -130,19 +130,18 @@ void* Hive_Structure<INDEX_Types>
  return result_without_rebound;
 }
 
-
-template<typename INDEX_Types>
-void* Hive_Structure<INDEX_Types>
-  ::fetch(nx nix, nx fallback, Out_of_Bounds_Resolution_Flags oob)
-{
- if(nix < total_size())
-   return get_raw_indexed_location(nix);
-
 // if( (oob & Out_of_Bounds_Resolution_Flags::Alternate_Fallback_Index_Options)
 //    == (u1) Out_of_Bounds_Resolution_Flags::Defer_to_Alternate_Fallback_Index)
 // {
 //  return fetch_at(fallback, oob);
 // }
+
+template<typename INDEX_Types>
+void* Hive_Structure<INDEX_Types>
+  ::fetch_out_of_bounds(nx nix, Out_of_Bounds_Resolution_Flags oob)
+{
+ if(nix < total_size())
+   return get_raw_indexed_location(nix);
 
  void* result_after_rebound = nullptr;
  void* result_without_rebound = nullptr;
@@ -157,53 +156,26 @@ void* Hive_Structure<INDEX_Types>
     return nullptr;
  }
 
- // //  now we (may) need to provide a new value for the memory area
- if(oob & Out_of_Bounds_Resolution_Flags::Use_Alternate_Fallback_Index)
- {
-  // //  this means we're getting value from the fallback
-
-  // //  the next question is whether to try initializing the
-   //    fallback if it too is missing ...
-
-  if(oob & Out_of_Bounds_Resolution_Flags::Fallback_Automatic_Rebound) //Defer_to_Alternate_Fallback_Index)
-  {
-   // //  having both Use_Alternate_Fallback_Index and
-     //    Defer_to_Alternate_Fallback_Index set indicates
-     //    that the fallback strategies are intended for the alternate
-     //    after rebounding for the provided index
-   default_value_ptr = fetch_at(fallback, oob);
-   // //  don't try to use other oob flags if they're intended for the alternate ...
-   goto check_memcpy;
-  }
-
-  else
-    // //  In this case (without Defer_to_Alternate_Fallback_Index)
-     //    we just assume the fallback index is valid, or at least
-     //    don't try to initialize it (maybe get the default
-     //    from somewhere else, depending on the other flags)
-    default_value_ptr = fetch_at(fallback, Out_of_Bounds_Resolution_Flags::N_A);
- }
 
  if(!default_value_ptr)
  {
   if(oob & Out_of_Bounds_Resolution_Flags::Use_Exceptions)
-   throw ; // throw what?
+    throw ; // throw what?
 
-  if(oob & Out_of_Bounds_Resolution_Flags::Prefer_Initialize_to_Zero)
+  if(oob & Out_of_Bounds_Resolution_Flags::Accept_Initialize_to_Zero)
   {
    default_value_ptr = get_zeroed_location();
   }
  }
 
-check_memcpy:
-  if(default_value_ptr)
-  {
-   if(result_after_rebound)
-     memcpy(result_after_rebound, default_value_ptr, value_size_);
+ if(default_value_ptr)
+ {
+  if(result_after_rebound)
+    memcpy(result_after_rebound, default_value_ptr, value_size_);
 
-   else
-     result_without_rebound = default_value_ptr;
-  }
+  else
+    result_without_rebound = default_value_ptr;
+ }
 
  if(result_after_rebound)
  {
@@ -214,6 +186,15 @@ check_memcpy:
  return result_without_rebound;
 
  //return get_indexed_location(nix);
+}
+
+template<typename INDEX_Types>
+void* Hive_Structure<INDEX_Types>
+  ::fetch(nx nix, Out_of_Bounds_Resolution_Flags oob)
+{
+ if(nix < total_size())
+   return get_raw_indexed_location(nix);
+ return fetch_out_of_bounds(nix, oob);
 }
 
 template<typename INDEX_Types>

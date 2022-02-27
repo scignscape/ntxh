@@ -163,15 +163,28 @@ struct index_types
 };
 
 template <typename T>
-T _lower_bound()
+T _lower_limit()
 {
- return std::numeric_limits<T>::lowest();
+ return std::numeric_limits<T>::min();
 }
 
 template <typename T>
-T _upper_bound()
+T _the_invalid_index()
 {
- return std::numeric_limits<T>::highest();
+ return _lower_limit<T>();
+}
+
+
+template <typename T>
+T _upper_limit()
+{
+ return std::numeric_limits<T>::max();
+}
+
+template <typename T>
+T _the_invalid_upper_index()
+{
+ return _upper_limit<T>();
 }
 
 //template <>
@@ -191,16 +204,25 @@ T _upper_bound()
 enum class Out_of_Bounds_Resolution_Flags : u2 {
   N_A = 0,
 
-  Automatic_Rebound = 1,
-  Fallback_Automatic_Rebound = 2,
-  Prefer_Initialize_to_Zero = 4,
-  Use_Exceptions = 8,
+  Use_Exceptions = 1,
+  Accept_Initialize_to_Zero = 2,
+
+  // //  because 1 and 2 are not compatible the combination of the
+   //    two can serve as a separate flag ...
+  Fallback_Initialize_to_Zero = 3,
+  // //  rebound-related flags
+   //
+  Automatic_Rebound = 4,
+  Fallback_Automatic_Rebound = 8,
+
   Call_Default_Value_Function = 16,
   Use_Default_Value_Pointer = 32,
   Call_Default_Constructor_if_Possible = 64,
   Use_Alternate_Fallback_Index = 128,
 
-  Index_and_Fallback_Shared_Options = 15,
+//  Fallback_Initialize_to_Zero = 256,
+
+ // Index_and_Fallback_Shared_Options = 15,
 
   Value_Type_Specific_Options = Use_Default_Value_Pointer | Call_Default_Value_Function
     | Call_Default_Constructor_if_Possible,
@@ -512,6 +534,8 @@ struct _On_Out_of_Bounds_Pack
  u1 f23:4;
  u1 f24;
 
+ Out_of_Bounds_Resolution_Flags get_supplement() { return (Out_of_Bounds_Resolution_Flags) supplement; }
+
  std::pair<u1, u1> unpack(
    Out_of_Bounds_Resolution_Flags& _supplement,
    Out_of_Bounds_Resolution_Flags& _f11,
@@ -661,7 +685,7 @@ struct _On_Out_of_Bounds
 
   default: break;
   }
-  u2 s1 = supplement & Out_of_Bounds_Resolution_Flags::Index_and_Fallback_Shared_Options; // mask to first four options
+  u2 s1 = 0; //?supplement & Out_of_Bounds_Resolution_Flags::Index_and_Fallback_Shared_Options; // mask to first four options
   u2 s = s1 << 10;
   return result | s;
  }
@@ -919,12 +943,12 @@ public:
 
  static nx the_invalid_index()
  {
-  return _lower_bound<Numeric_Index_type>();
+  return _the_invalid_index<Numeric_Index_type>();
  }
 
  static nx the_invalid_upper_index()
  {
-  return _upper_bound<Numeric_Index_type>();
+  return _the_invalid_upper_index<Numeric_Index_type>();
  }
 
 
@@ -1001,18 +1025,26 @@ public:
 
  void* rebound(nx nix);
 
- void* fetch(nx nix, nx fallback, Out_of_Bounds_Resolution_Flags oob);
- void* fetch(nx nix, Out_of_Bounds_Resolution_Flags oob)
+ void rebound(nx nix, void* pv)
  {
-  fetch(nix, 0, oob);
+  void* spot = rebound(nix);
+  memcpy(spot, pv, value_size());
  }
+
+// void* fetch(nx nix, nx fallback, Out_of_Bounds_Resolution_Flags oob);
+
+ void* fetch_out_of_bounds(nx nix, Out_of_Bounds_Resolution_Flags oob);
+ void* fetch(nx nix, Out_of_Bounds_Resolution_Flags oob);
+// {
+//  fetch(nix, 0, oob);
+// }
 
  void* fetch_at(nx nix, Out_of_Bounds_Resolution_Flags oob);
 
- void* fetch(nx nix, nx fallback)
- {
-  fetch(nix, fallback, default_out_of_bounds_resolution_flags_);
- }
+// void* fetch(nx nix, nx fallback)
+// {
+//  fetch(nix, fallback, default_out_of_bounds_resolution_flags_);
+// }
 
  //void* fetch_at(nx nix, nx fallback, u1* val);
 

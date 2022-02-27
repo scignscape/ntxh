@@ -216,6 +216,21 @@ int main08(int argc , char **argv)
 
 int main(int argc , char **argv)
 {
+ Vec1d<int> vec(10, 7);
+
+ u2 enc = on_out_of_bounds(Out_of_Bounds_Resolution_Flags::Use_Default_Value_Pointer,
+   Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function);
+
+ _On_Out_of_Bounds_Pack p = decode_out_of_bounds(enc);
+
+
+ vec.fetch(2, p);
+
+ return 0;
+}
+
+int main09(int argc , char **argv)
+{
  u2 enc = on_out_of_bounds(Out_of_Bounds_Resolution_Flags::Use_Alternate_Fallback_Index,
    Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function);
 
@@ -370,7 +385,7 @@ int main03(int argc , char **argv)
 //   | Out_of_Bounds_Resolution_Flags::Prefer_Initialize_to_Zero
 //   | Out_of_Bounds_Resolution_Flags::Defer_to_Alternate_Fallback_Index);
 
- int* x = vec.fetch(65, 60, Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible);
+ int* x = 0; //?vec.fetch(65, Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible, 60);
 
  if(x)
    qDebug() << "x = " << *x;
@@ -378,7 +393,7 @@ int main03(int argc , char **argv)
  else
    qDebug() << "out of bounds ...";
 
- int* y = vec.fetch(65, 60, Out_of_Bounds_Resolution_Flags::Use_Alternate_Fallback_Index);
+ int* y = 0;//?vec.fetch(65, 60, Out_of_Bounds_Resolution_Flags::Use_Alternate_Fallback_Index);
 
  if(y)
    qDebug() << "y = " << *y;
