@@ -218,13 +218,22 @@ int main(int argc , char **argv)
 {
  Vec1d<int> vec(10, 7);
 
+ vec.set_default <= [](int** def)
+ {
+  static int _def = 64;
+  *def = &_def;
+ };
+
+
  u2 enc = on_out_of_bounds(Out_of_Bounds_Resolution_Flags::Use_Default_Value_Pointer,
    Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function);
 
  _On_Out_of_Bounds_Pack p = decode_out_of_bounds(enc);
 
 
- vec.fetch(2, p);
+ int* x = vec.fetch(2, p);
+
+ qDebug() << "x = " << *x;
 
  return 0;
 }

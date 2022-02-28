@@ -140,9 +140,6 @@ template<typename INDEX_Types>
 void* Hive_Structure<INDEX_Types>
   ::fetch_out_of_bounds(nx nix, Out_of_Bounds_Resolution_Flags oob)
 {
- if(nix < total_size())
-   return get_raw_indexed_location(nix);
-
  void* result_after_rebound = nullptr;
  void* result_without_rebound = nullptr;
  void* default_value_ptr = nullptr;
@@ -157,16 +154,12 @@ void* Hive_Structure<INDEX_Types>
  }
 
 
- if(!default_value_ptr)
+ if(oob & Out_of_Bounds_Resolution_Flags::Accept_Initialize_to_Zero)
  {
-  if(oob & Out_of_Bounds_Resolution_Flags::Use_Exceptions)
-    throw ; // throw what?
-
-  if(oob & Out_of_Bounds_Resolution_Flags::Accept_Initialize_to_Zero)
-  {
-   default_value_ptr = get_zeroed_location();
-  }
+  default_value_ptr = get_zeroed_location();
  }
+ else if(oob & Out_of_Bounds_Resolution_Flags::Use_Exceptions)
+  throw ; // throw what?
 
  if(default_value_ptr)
  {
