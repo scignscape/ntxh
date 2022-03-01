@@ -534,18 +534,27 @@ enum class Out_of_Bounds_Resolution_Flags : u2 {
   Fallback_Initialize_to_Zero = 3,
   // //  rebound-related flags
    //
-  Automatic_Rebound = 4,
-  Fallback_Automatic_Rebound = 8,
+
+  Accept_Default_Value_Nullptr = 4,
+
+  Automatic_Rebound = 8,
+  Fallback_Automatic_Rebound = 16,
+
+  Delay_Mitigation_on_Fallback = 32,
+
 
   Automatic_Rebound_and_Accept_Zeroed_Memory = Accept_Initialize_to_Zero | Automatic_Rebound,
 
-  Call_Default_Value_Function = 16,
-  Use_Default_Value_Pointer = 32,
-  Call_Default_Constructor_if_Possible = 64,
-  Use_Alternate_Fallback_Index = 128,
+  Call_Default_Value_Function = 64,
+  Use_Default_Value_Pointer = 128,
+  Call_Default_Constructor_if_Possible = 256,
+  Use_Alternate_Fallback_Index = 512,
 
-  Delay_Mitigation_on_Fallback = 256,
-  Accept_Default_Value_Nullptr = 512,
+// Call_Default_Value_Function = 16,
+// Use_Default_Value_Pointer = 32,
+// Call_Default_Constructor_if_Possible = 64,
+// Use_Alternate_Fallback_Index = 128,
+
 
  //  Apply_Mitigation_to_Default_Fallback = 512,
 
@@ -585,10 +594,11 @@ u2 octal(u1 a1, u1 a2, u1 a3, u1 a4)
  return a4 + 8*a3 + 64*a2 + 512*a1;
 }
 
+constexpr u1 monotone_offset = 6;
 
 u1 monotone(Out_of_Bounds_Resolution_Flags f)
 {
- u1 mshifted = (u1) f >> 4;
+ u1 mshifted = (u2) f >> monotone_offset;
  return (mshifted == 8)? 4:
   (mshifted == 4)? 3: mshifted;
 }
@@ -596,7 +606,7 @@ u1 monotone(Out_of_Bounds_Resolution_Flags f)
 Out_of_Bounds_Resolution_Flags demonotone(u1 m)
 {
  return (Out_of_Bounds_Resolution_Flags)
-   (((m == 4)? 8: (m == 3)? 4: m) << 4);
+   ((u2) ((m == 4)? 8: (m == 3)? 4: m) << monotone_offset);
 }
 
 bool get_permutation_numbers(u1 code, u1& first, u1& second, u1& third, u1& fourth);
@@ -875,14 +885,14 @@ struct _On_Out_of_Bounds_Pack
    Out_of_Bounds_Resolution_Flags& _f24)
  {
   _supplement = (Out_of_Bounds_Resolution_Flags) supplement,
-  _f11 = (Out_of_Bounds_Resolution_Flags) (f11 << 4);
-  _f12 = (Out_of_Bounds_Resolution_Flags) (f12 << 4);
-  _f13 = (Out_of_Bounds_Resolution_Flags) (f13 << 4);
-  _f14 = (Out_of_Bounds_Resolution_Flags) (f14 << 4);
-  _f21 = (Out_of_Bounds_Resolution_Flags) (f21 << 4);
-  _f22 = (Out_of_Bounds_Resolution_Flags) (f22 << 4);
-  _f23 = (Out_of_Bounds_Resolution_Flags) (f23 << 4);
-  _f24 = (Out_of_Bounds_Resolution_Flags) (f24 << 4);
+  _f11 = (Out_of_Bounds_Resolution_Flags) (f11 << monotone_offset);
+  _f12 = (Out_of_Bounds_Resolution_Flags) (f12 << monotone_offset);
+  _f13 = (Out_of_Bounds_Resolution_Flags) (f13 << monotone_offset);
+  _f14 = (Out_of_Bounds_Resolution_Flags) (f14 << monotone_offset);
+  _f21 = (Out_of_Bounds_Resolution_Flags) (f21 << monotone_offset);
+  _f22 = (Out_of_Bounds_Resolution_Flags) (f22 << monotone_offset);
+  _f23 = (Out_of_Bounds_Resolution_Flags) (f23 << monotone_offset);
+  _f24 = (Out_of_Bounds_Resolution_Flags) (f24 << monotone_offset);
   return {(u1)for_index_encoding, (u1)for_fallback_encoding};
  }
 };
@@ -908,8 +918,11 @@ _On_Out_of_Bounds_Pack decode_out_of_bounds(u2 enc)
  std::pair<u1, u1> encs = parse_double_mitigation_flags_encoding(enc);
 
  return { pr.first, pr.second, (u1) supplement,
-  encs.first, (u1)((u1) f11 >> 4), (u1)((u1) f12 >> 4), (u1)((u1) f13 >> 4), (u1)((u1) f14 >> 4),
-  encs.second, (u1)((u1) f21 >> 4), (u1)((u1) f22 >> 4), (u1)((u1) f23 >> 4), (u1)((u1) f24 >> 4)
+  encs.first, (u1)((u2) f11 >> monotone_offset), (u1)((u2) f12 >> monotone_offset),
+    (u1)((u2) f13 >> monotone_offset), (u1)((u2) f14 >> monotone_offset),
+  encs.second, (u1)((u1) f21 >> monotone_offset),
+    (u1)((u2) f22 >> monotone_offset), (u1)((u2) f23 >> monotone_offset),
+    (u1)((u2) f24 >> monotone_offset)
   };
 
 }

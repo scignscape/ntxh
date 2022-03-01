@@ -206,10 +206,10 @@ int main08(int argc , char **argv)
 
  u1 count = decode_fallback_mitigation_flags(enc, f1, f2, f3, f4);
 
- qDebug() << "f1 = " << (u1) f1;
- qDebug() << "f2 = " << (u1) f2;
- qDebug() << "f3 = " << (u1) f3;
- qDebug() << "f4 = " << (u1) f4;
+ qDebug() << "f1 = " << (u2) f1;
+ qDebug() << "f2 = " << (u2) f2;
+ qDebug() << "f3 = " << (u2) f3;
+ qDebug() << "f4 = " << (u2) f4;
 
  return 0;
 }
@@ -288,15 +288,15 @@ int main09(int argc , char **argv)
 
  qDebug() << "supplement = " << (u1) supplement;
 
- qDebug() << "f11 = " << (u1) f11;
- qDebug() << "f12 = " << (u1) f12;
- qDebug() << "f13 = " << (u1) f13;
- qDebug() << "f14 = " << (u1) f14;
+ qDebug() << "f11 = " << (u2) f11;
+ qDebug() << "f12 = " << (u2) f12;
+ qDebug() << "f13 = " << (u2) f13;
+ qDebug() << "f14 = " << (u2) f14;
 
- qDebug() << "f21 = " << (u1) f21;
- qDebug() << "f22 = " << (u1) f22;
- qDebug() << "f23 = " << (u1) f23;
- qDebug() << "f24 = " << (u1) f24;
+ qDebug() << "f21 = " << (u2) f21;
+ qDebug() << "f22 = " << (u2) f22;
+ qDebug() << "f23 = " << (u2) f23;
+ qDebug() << "f24 = " << (u2) f24;
 
  qDebug() << "pr = " << pr;
  return 0;
@@ -329,10 +329,10 @@ int main06(int argc , char **argv)
 
  u1 count = decode_mitigation_flags(enc, f1, f2, f3, f4);
 
- qDebug() << "f1 = " << (u1) f1;
- qDebug() << "f2 = " << (u1) f2;
- qDebug() << "f3 = " << (u1) f3;
- qDebug() << "f4 = " << (u1) f4;
+ qDebug() << "f1 = " << (u2) f1;
+ qDebug() << "f2 = " << (u2) f2;
+ qDebug() << "f3 = " << (u2) f3;
+ qDebug() << "f4 = " << (u2) f4;
 
  return 0;
 
