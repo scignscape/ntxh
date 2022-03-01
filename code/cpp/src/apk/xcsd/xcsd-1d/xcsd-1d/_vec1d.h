@@ -281,17 +281,30 @@ public:
   case (u1) Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function:
     if(default_fn_)
     {
-     ops.check_position(Fetch_Location_Options::_default_function_temporary);
-     default_fn_((VAL_Type**) ops.positional_location);
+     //ops.check_position(Fetch_Location_Options::_default_function_temporary);
+     ops.premise =  Fetch_Location_Options::default_function;
+     default_fn_((VAL_Type**) ops.primary_location);
+//     ops.check_position(Fetch_Location_Options::_default_function_temporary);
+//     default_fn_((VAL_Type**) ops.positional_location);
     }
    break;
   case (u1) Out_of_Bounds_Resolution_Flags::Use_Default_Value_Pointer:
-    ops.check_position(Fetch_Location_Options::_default_value_pointer);
-    *ops.positional_location = static_default_value();
+//    ops.premise = Fetch_Location_Options::default_value_pointer;
+    ops.primary(Fetch_Location_Options::default_value_pointer) = (void**) static_default_value();
+
+//    ops.premise = Fetch_Location_Options::default_value_pointer;
+//    ops.primary_location = (void**) static_default_value();
+
+//    ops.temporary_value_holder =
+//    ops.check_position(Fetch_Location_Options::_default_value_pointer);
+//    *ops.positional_location = static_default_value();
    break;
   case (u1) Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible:
-   ops.check_position(Fetch_Location_Options::_default_constructor_temporary);
-   default_construct_if_needed_and_possible((VAL_Type**) ops.positional_location);
+    ops.premise = Fetch_Location_Options::default_constructor_temporary;
+    ops.activate_temporary_value_holder();
+    default_construct_if_needed_and_possible((VAL_Type**) ops.primary_location);
+//   ops.check_position(Fetch_Location_Options::_default_constructor_temporary);
+//   default_construct_if_needed_and_possible((VAL_Type**) ops.positional_location);
    break;
 //  case (u1) Out_of_Bounds_Resolution_Flags::Try_Default_Function_then_Pointer:
 //   if(default_fn_)
@@ -333,12 +346,12 @@ public:
 
  void _fetch_via_fallback(nx fallback, Fetch_Location_Options& flocops)
  {
-  flocops.current_location(Fetch_Location_Options::_fallback_location) = hive_structure_->get(fallback);
+  flocops.temporary(Fetch_Location_Options::fallback_location) = hive_structure_->get(fallback);
  }
 
  void _fetch_via_index(nx nix, Fetch_Location_Options& flocops)
  {
-  flocops.current_location(Fetch_Location_Options::_index_location) = hive_structure_->get(nix);
+  flocops.temporary(Fetch_Location_Options::index_location) = hive_structure_->get(nix);
  }
 
  void _fetch_via_fallback(nx fallback, Fetch_Location_Options& flocops, u1 count,
@@ -376,7 +389,7 @@ public:
 
   _fetch_via_index(nix, flocops);
 
-  if((result = (VAL_Type*) flocops.index_location))
+  if((result = (VAL_Type*) flocops.get_value()))
     return result;
 
   Out_of_Bounds_Resolution_Flags supplement;
@@ -389,13 +402,14 @@ public:
   if(supplement & Out_of_Bounds_Resolution_Flags::Automatic_Rebound_and_Accept_Zeroed_Memory)
   {
    // // this combination guarantees we'll have space in the hive_structure
-   flocops.current_location(Fetch_Location_Options::_rebound_index_location) = hive_structure_->rebound(nix);
-   flocops.current_to_primary();
+   flocops.prioriy(Fetch_Location_Options::rebound_index_location) = hive_structure_->rebound(nix);
   }
 
 
   bool fallback_is_valid = !(fallback == the_invalid_index() || fallback == the_invalid_upper_index());
   bool possible_fallback_mitigation = oob.for_fallback_length; // i.e., it's > 0;
+
+  void** default_value_pointer_location;
 
   for(u1 u = 0; u < oob.for_index_length; ++u)
   {
@@ -420,7 +434,9 @@ public:
    else
    {
     _fetch_out_of_bounds(nix, flocops, f1[u]); //, supplement);
-    result = (VAL_Type*) flocops.get_current_location();
+    result = (VAL_Type*) flocops.get_value();
+    if(flocops.premise == Fetch_Location_Options::default_value_pointer)
+      default_value_pointer_location = flocops.primary_location;
    }
    if(result)
      break;

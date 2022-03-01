@@ -201,154 +201,327 @@ T _the_invalid_upper_index()
 //template<typename NUMERIC_INDEX_Type = signed short,
 //  typename NUMERIC_NESTED_INDEX_Type = NUMERIC_INDEX_Type>
 
+//struct Fetch_Location_Options
+//{
+// enum {
+//  N_A = 0,
+//  _index_location = 1,
+//  _fallback_location = 2,
+//  _rebound_index_location = 4,
+//  _rebound_fallback_location = 8,
+//  _default_value_pointer = 16,
+//  _default_function_temporary = 32,
+//  _default_constructor_temporary = 64,
+// };
+
+// void* index_location;
+// void* fallback_location;
+// void* rebound_index_location;
+// void* rebound_fallback_location;
+// void* default_value_pointer;
+// void* default_function_temporary;
+// void* default_constructor_temporary;
+// void** primary_location;
+// void** positional_location;
+
+// u1 current_location_option;
+// u1 current_positional_redirect;
+// u1 current_active_position;
+
+// Fetch_Location_Options()
+//  : index_location(nullptr),
+//    fallback_location(nullptr),
+//    rebound_index_location(nullptr),
+//    rebound_fallback_location(nullptr),
+//    default_value_pointer(nullptr),
+//    default_function_temporary(nullptr),
+//    default_constructor_temporary(nullptr),
+//    primary_location(nullptr),
+//    positional_location(nullptr),
+//    current_location_option(0),
+//    current_positional_redirect(0),
+//    current_active_position(0)
+// {}
+
+// void check_current(u1 c)
+// {
+//  if(get_location(c)) //  i.e., the pointer there is not nullptr
+//    current_location_option = c;
+//  else if(positional_location)
+//  {
+//   if(*positional_location)
+//     current_location_option = c;
+//  }
+// }
+
+// void check_position(u1 c)
+// {
+//  if(primary_location)
+//  {
+//   positional_location = primary_location;
+//   current_positional_redirect = c;
+//   current_active_position = N_A;
+//  }
+//  else
+//  {
+//   positional_location = get_location_ptr(c);
+//   current_positional_redirect = N_A;
+//   current_active_position = c;
+//  }
+// }
+
+// u1 aggregation_location_options()
+// {
+//  u1 result = 0;
+//  if(index_location) result |= _index_location;
+//  if(fallback_location) result |= _fallback_location;
+//  if(rebound_index_location) result |= _rebound_index_location;
+//  if(rebound_fallback_location) result |= _rebound_fallback_location;
+
+//  if(default_value_pointer) result |= _default_value_pointer;
+//  if(default_function_temporary) result |= _default_function_temporary;
+//  if(default_constructor_temporary) result |= _default_constructor_temporary;
+
+//  return result;
+// }
+
+// void current_to_primary()
+// {
+//  primary_location = get_current_location_ptr();
+// }
+
+// void** get_location_ptr(u1 c)
+// {
+//  switch (c)
+//  {
+//  case _index_location: return &index_location;
+//  case _fallback_location: return &fallback_location;
+//  case _rebound_index_location: return &rebound_index_location;
+//  case _rebound_fallback_location: return &rebound_fallback_location;
+//  case _default_value_pointer: return &default_value_pointer;
+//  case _default_function_temporary: return &default_function_temporary;
+//  case _default_constructor_temporary: return &default_constructor_temporary;
+//  default: return nullptr;
+//  }
+// }
+
+// void** get_current_location_ptr()
+// {
+//  return get_location_ptr(current_location_option);
+// }
+
+
+// void* get_location(u1 c)
+// {
+//  void** pv = get_location_ptr(c);
+//  if(pv)
+//    return *pv;
+//  return nullptr;
+// }
+
+// void* get_current_location()
+// {
+//  return get_location(current_location_option);
+// }
+
+// struct _opeq_pack {
+//  Fetch_Location_Options& _this;
+//  u1 c;
+//  void operator = (void* v)
+//  {
+//   if(!v)
+//     return;
+//   switch (c)
+//   {
+//   case _index_location: _this.index_location = v; break;
+//   case _fallback_location: _this.fallback_location = v; break;
+//   case _rebound_index_location: _this.rebound_index_location = v; break;
+//   case _rebound_fallback_location: _this.rebound_fallback_location = v; break;
+//   case _default_value_pointer: _this.default_value_pointer = v; break;
+//   case _default_function_temporary: _this.default_function_temporary = v; break;
+//   case _default_constructor_temporary: _this.default_constructor_temporary = v; break;
+//   default: return;
+//   }
+//   _this.current_location_option = c;
+//  };
+
+// };
+// _opeq_pack current_location(u1 c) { return {*this, c}; }
+
+//};
+
+
 struct Fetch_Location_Options
 {
- enum {
+ enum Premise {
   N_A = 0,
-  _index_location = 1,
-  _fallback_location = 2,
-  _rebound_index_location = 4,
-  _rebound_fallback_location = 8,
-  _default_value_pointer = 16,
-  _default_function_temporary = 32,
-  _default_constructor_temporary = 64,
+  index_location = 1,
+  fallback_location = 2,
+  rebound_index_location = 4,
+  rebound_fallback_location = 8,
+  default_value_pointer = 16,
+  default_function = 32,
+  default_constructor_temporary = 64,
  };
 
- void* index_location;
- void* fallback_location;
- void* rebound_index_location;
- void* rebound_fallback_location;
- void* default_value_pointer;
- void* default_function_temporary;
- void* default_constructor_temporary;
+ void* priority_location;
  void** primary_location;
- void** positional_location;
+ void* temporary_value_holder;
 
- u1 current_location_option;
- u1 current_positional_redirect;
- u1 current_active_position;
+ void activate_temporary_value_holder()
+ {
+  primary_location = &temporary_value_holder;
+ }
+
+ void deactivate_temporary_value_holder()
+ {
+  primary_location = nullptr;
+  temporary_value_holder = nullptr;
+ }
+
+ Premise premise;
+ Premise priority_location_premise;
 
  Fetch_Location_Options()
-  : index_location(nullptr),
-    fallback_location(nullptr),
-    rebound_index_location(nullptr),
-    rebound_fallback_location(nullptr),
-    default_value_pointer(nullptr),
-    default_function_temporary(nullptr),
-    default_constructor_temporary(nullptr),
+  : priority_location(nullptr),
     primary_location(nullptr),
-    positional_location(nullptr),
-    current_location_option(0),
-    current_positional_redirect(0),
-    current_active_position(0)
+    temporary_value_holder(nullptr),
+    premise(Premise::N_A),
+    priority_location_premise(Premise::N_A)
  {}
 
- void check_current(u1 c)
- {
-  if(get_location(c)) //  i.e., the pointer there is not nullptr
-    current_location_option = c;
-  else if(positional_location)
-  {
-   if(*positional_location)
-     current_location_option = c;
-  }
- }
+// void check_current(u1 c)
+// {
+//  if(get_location(c)) //  i.e., the pointer there is not nullptr
+//    current_location_option = c;
+//  else if(positional_location)
+//  {
+//   if(*positional_location)
+//     current_location_option = c;
+//  }
+// }
 
- void check_position(u1 c)
- {
-  if(primary_location)
-  {
-   positional_location = primary_location;
-   current_positional_redirect = c;
-   current_active_position = N_A;
-  }
-  else
-  {
-   positional_location = get_location_ptr(c);
-   current_positional_redirect = N_A;
-   current_active_position = c;
-  }
- }
+// void check_position(u1 c)
+// {
+//  if(primary_location)
+//  {
+//   positional_location = primary_location;
+//   current_positional_redirect = c;
+//   current_active_position = N_A;
+//  }
+//  else
+//  {
+//   positional_location = get_location_ptr(c);
+//   current_positional_redirect = N_A;
+//   current_active_position = c;
+//  }
+// }
 
- u1 aggregation_location_options()
- {
-  u1 result = 0;
-  if(index_location) result |= _index_location;
-  if(fallback_location) result |= _fallback_location;
-  if(rebound_index_location) result |= _rebound_index_location;
-  if(rebound_fallback_location) result |= _rebound_fallback_location;
+// u1 aggregation_location_options()
+// {
+//  u1 result = 0;
+//  if(index_location) result |= _index_location;
+//  if(fallback_location) result |= _fallback_location;
+//  if(rebound_index_location) result |= _rebound_index_location;
+//  if(rebound_fallback_location) result |= _rebound_fallback_location;
 
-  if(default_value_pointer) result |= _default_value_pointer;
-  if(default_function_temporary) result |= _default_function_temporary;
-  if(default_constructor_temporary) result |= _default_constructor_temporary;
+//  if(default_value_pointer) result |= _default_value_pointer;
+//  if(default_function_temporary) result |= _default_function_temporary;
+//  if(default_constructor_temporary) result |= _default_constructor_temporary;
 
-  return result;
- }
+//  return result;
+// }
 
- void current_to_primary()
- {
-  primary_location = get_current_location_ptr();
- }
+// void current_to_primary()
+// {
+//  primary_location = get_current_location_ptr();
+// }
 
- void** get_location_ptr(u1 c)
- {
-  switch (c)
-  {
-  case _index_location: return &index_location;
-  case _fallback_location: return &fallback_location;
-  case _rebound_index_location: return &rebound_index_location;
-  case _rebound_fallback_location: return &rebound_fallback_location;
-  case _default_value_pointer: return &default_value_pointer;
-  case _default_function_temporary: return &default_function_temporary;
-  case _default_constructor_temporary: return &default_constructor_temporary;
-  default: return nullptr;
-  }
- }
+// void** get_location_ptr(u1 c)
+// {
+//  switch (c)
+//  {
+//  case _index_location: return &index_location;
+//  case _fallback_location: return &fallback_location;
+//  case _rebound_index_location: return &rebound_index_location;
+//  case _rebound_fallback_location: return &rebound_fallback_location;
+//  case _default_value_pointer: return &default_value_pointer;
+//  case _default_function_temporary: return &default_function_temporary;
+//  case _default_constructor_temporary: return &default_constructor_temporary;
+//  default: return nullptr;
+//  }
+// }
 
- void** get_current_location_ptr()
- {
-  return get_location_ptr(current_location_option);
- }
+// void** get_current_location_ptr()
+// {
+//  return get_location_ptr(current_location_option);
+// }
 
 
- void* get_location(u1 c)
- {
-  void** pv = get_location_ptr(c);
-  if(pv)
-    return *pv;
-  return nullptr;
- }
+// void* get_location(u1 c)
+// {
+//  void** pv = get_location_ptr(c);
+//  if(pv)
+//    return *pv;
+//  return nullptr;
+// }
 
- void* get_current_location()
- {
-  return get_location(current_location_option);
- }
+// void* get_current_location()
+// {
+//  return get_location(current_location_option);
+// }
 
- struct _opeq_pack {
+ struct temporary_opeq_pack {
   Fetch_Location_Options& _this;
   u1 c;
   void operator = (void* v)
   {
    if(!v)
      return;
-   switch (c)
-   {
-   case _index_location: _this.index_location = v; break;
-   case _fallback_location: _this.fallback_location = v; break;
-   case _rebound_index_location: _this.rebound_index_location = v; break;
-   case _rebound_fallback_location: _this.rebound_fallback_location = v; break;
-   case _default_value_pointer: _this.default_value_pointer = v; break;
-   case _default_function_temporary: _this.default_function_temporary = v; break;
-   case _default_constructor_temporary: _this.default_constructor_temporary = v; break;
-   default: return;
-   }
-   _this.current_location_option = c;
-  };
-
+   _this.temporary_value_holder = v;
+   _this.premise = (Premise) c;
+  }
  };
- _opeq_pack current_location(u1 c) { return {*this, c}; }
+
+ struct priority_opeq_pack {
+  Fetch_Location_Options& _this;
+  u1 c;
+  void operator = (void* v)
+  {
+   if(!v)
+     return;
+   _this.priority_location = v;
+   _this.priority_location_premise = (Premise) c;
+  }
+ };
+
+
+ struct primary_opeq_pack {
+  Fetch_Location_Options& _this;
+  u1 c;
+  void operator = (void** v)
+  {
+   if(!v)
+     return;
+   _this.primary_location = v;
+   _this.premise = (Premise) c;
+  }
+ };
+
+ temporary_opeq_pack temporary(u1 c) { return {*this, c}; }
+ primary_opeq_pack primary(u1 c) { return {*this, c}; }
+ priority_opeq_pack prioriy(u1 c) { return {*this, c}; }
+
+ void* get_value()
+ {
+  if(primary_location)
+    return *primary_location;
+  else
+    return temporary_value_holder;
+ }
 
 };
+
 
 enum class Out_of_Bounds_Resolution_Flags : u2 {
   N_A = 0,
@@ -372,7 +545,9 @@ enum class Out_of_Bounds_Resolution_Flags : u2 {
   Use_Alternate_Fallback_Index = 128,
 
   Delay_Mitigation_on_Fallback = 256,
-//  Apply_Mitigation_to_Default_Fallback = 512,
+  Accept_Default_Value_Nullptr = 512,
+
+ //  Apply_Mitigation_to_Default_Fallback = 512,
 
  // Index_and_Fallback_Shared_Options = 15,
 

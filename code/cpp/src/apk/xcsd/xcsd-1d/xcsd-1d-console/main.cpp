@@ -220,7 +220,7 @@ int main(int argc , char **argv)
 
  vec.set_default <= [](int** def)
  {
-  static int _def = 64;
+  static int _def = 44;
   *def = &_def;
  };
 
@@ -234,6 +234,10 @@ int main(int argc , char **argv)
  int* x = vec.fetch(2, p);
 
  qDebug() << "x = " << *x;
+
+ int* x1 = vec.fetch(2, p);
+
+ qDebug() << "x1 = " << *x1;
 
  return 0;
 }
