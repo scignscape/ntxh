@@ -399,10 +399,11 @@ public:
 
   std::pair<u1, u1> pr = oob.unpack(supplement, f1[0], f1[1], f1[2], f1[3], f2[0], f2[1], f2[2], f2[3]);
 
-  if(supplement & Out_of_Bounds_Resolution_Flags::Automatic_Rebound_and_Accept_Zeroed_Memory)
+  if( (supplement & Out_of_Bounds_Resolution_Flags::Automatic_Rebound_and_Accept_Zeroed_Memory)
+     == (u2) Out_of_Bounds_Resolution_Flags::Automatic_Rebound_and_Accept_Zeroed_Memory )
   {
    // // this combination guarantees we'll have space in the hive_structure
-   flocops.prioriy(Fetch_Location_Options::rebound_index_location) = hive_structure_->rebound(nix);
+   flocops.priority(Fetch_Location_Options::rebound_index_location) = hive_structure_->rebound(nix);
   }
 
 
@@ -419,7 +420,7 @@ public:
       continue;
 
     _fetch_via_fallback(fallback, flocops);
-    result = (VAL_Type*) flocops.fallback_location;
+    result = (VAL_Type*) flocops.temporary_value_holder;
 
     if(!result)
     {
@@ -443,24 +444,32 @@ public:
    qDebug() << u << " f1 = " << (u1) f1[u];
   }
 
-  if((supplement & Out_of_Bounds_Resolution_Flags::Delay_Mitigation_on_Fallback)
+  while(!result)
+  {
+   if((supplement & Out_of_Bounds_Resolution_Flags::Delay_Mitigation_on_Fallback)
      && fallback_is_valid
      && possible_fallback_mitigation)
+   {
     _fetch_via_fallback(fallback, flocops, oob.for_fallback_length, f2,
       (Out_of_Bounds_Resolution_Flags) (supplement & Out_of_Bounds_Resolution_Flags::Fallback_Automatic_Rebound));
+    result = (VAL_Type*) flocops.get_value();
+   }
+   if(result) break;
 
    // //  the last possibility is a pointer to all-zeros.
    if(supplement & Out_of_Bounds_Resolution_Flags::Accept_Initialize_to_Zero)
-     hive_structure_->get_zeroed_location();
+   {
+    flocops.primary(Fetch_Location_Options::zeroed_location) = hive_structure_->get_zeroed_location();
+    result = *(VAL_Type**) flocops.primary_location;
+   }
 
-  if(!result)
-  {
-   // //  the last possibility is a pointer to all-zeros.
-
+   break;
   }
 
-  if(result && (supplement & Out_of_Bounds_Resolution_Flags::Automatic_Rebound))
-    hive_structure_->rebound(nix, result);
+  flocops.reconcile_priority(hive_structure_->value_size());
+
+//  if(result && (supplement & Out_of_Bounds_Resolution_Flags::Automatic_Rebound))
+//    hive_structure_->rebound(nix, result);
 
 //  if(result)
 //    return result;

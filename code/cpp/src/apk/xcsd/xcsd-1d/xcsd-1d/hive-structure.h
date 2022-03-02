@@ -362,6 +362,7 @@ struct Fetch_Location_Options
   default_value_pointer = 16,
   default_function = 32,
   default_constructor_temporary = 64,
+  zeroed_location = 128,
  };
 
  void* priority_location;
@@ -381,6 +382,7 @@ struct Fetch_Location_Options
 
  Premise premise;
  Premise priority_location_premise;
+
 
  Fetch_Location_Options()
   : priority_location(nullptr),
@@ -510,7 +512,7 @@ struct Fetch_Location_Options
 
  temporary_opeq_pack temporary(u1 c) { return {*this, c}; }
  primary_opeq_pack primary(u1 c) { return {*this, c}; }
- priority_opeq_pack prioriy(u1 c) { return {*this, c}; }
+ priority_opeq_pack priority(u1 c) { return {*this, c}; }
 
  void* get_value()
  {
@@ -518,6 +520,14 @@ struct Fetch_Location_Options
     return *primary_location;
   else
     return temporary_value_holder;
+ }
+
+ void reconcile_priority(u1 size)
+ {
+  if(priority_location)
+  {
+   memcpy(priority_location, get_value(), size);
+  }
  }
 
 };
@@ -542,6 +552,7 @@ enum class Out_of_Bounds_Resolution_Flags : u2 {
 
   Delay_Mitigation_on_Fallback = 32,
 
+  Index_and_Fallback_Shared_Options = 63,
 
   Automatic_Rebound_and_Accept_Zeroed_Memory = Accept_Initialize_to_Zero | Automatic_Rebound,
 
@@ -1020,12 +1031,10 @@ struct _On_Out_of_Bounds
               for_fallback[0], for_fallback[1], for_fallback[2], for_fallback[3]);
    break;
 
-
-
-
   default: break;
   }
-  u2 s1 = 0; //?supplement & Out_of_Bounds_Resolution_Flags::Index_and_Fallback_Shared_Options; // mask to first four options
+  u2 s1 = supplement &
+    Out_of_Bounds_Resolution_Flags::Index_and_Fallback_Shared_Options; // mask to first four options
   u2 s = s1 << 10;
   return result | s;
  }
@@ -1181,12 +1190,12 @@ public:
  ACCESSORS(nnx ,value_size)
  ACCESSORS(nx ,total_size)
 
- void* get_zeroed_location()
+ void** get_zeroed_location()
  {
   static void* result = nullptr;
   if(!result)
     result = calloc(1, value_size_);
-  return result;
+  return &result;
  }
 
  Hive_Layer* get_fixed_size_layer()
