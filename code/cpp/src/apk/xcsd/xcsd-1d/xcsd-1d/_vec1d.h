@@ -63,7 +63,11 @@ _check_construct(OBJ_Type** obj)
 {
  if(!*obj)
  {
-  *obj = new OBJ_Type();    // default-construct Obj
+  static OBJ_Type* static_obj = nullptr;
+  if(!static_obj)
+    static_obj = new OBJ_Type();
+  void* vo = static_obj; // for debugging
+  *obj = static_obj;    // default-construct Obj
  }
 }
 
@@ -75,7 +79,11 @@ _check_construct(OBJ_Type** obj)
 {
  if(!*obj)
  {
-  *obj = new OBJ_Type();    // default-construct Obj
+  static OBJ_Type* static_obj = nullptr;
+  if(!static_obj)
+    static_obj = new OBJ_Type();
+  void* vo = static_obj; // for debugging
+  *obj = static_obj;    // default-construct Obj
   **obj = 0;
  }
 }
@@ -231,7 +239,7 @@ public:
   return (VAL_Type*) hive_structure_->fetch(nix, fallback);
  }
 
- VAL_Type* _fetch_out_of_bounds(nx nix, Fetch_Location_Options& ops, Out_of_Bounds_Resolution_Flags oobf)
+ void _fetch_out_of_bounds(nx nix, Fetch_Location_Options& ops, Out_of_Bounds_Resolution_Flags oobf)
   // Out_of_Bounds_Resolution_Flags supplement = Out_of_Bounds_Resolution_Flags::N_A)
  {
 //  u1 value_type_specific_options = oobf
@@ -282,7 +290,7 @@ public:
     if(default_fn_)
     {
      //ops.check_position(Fetch_Location_Options::_default_function_temporary);
-     ops.premise =  Fetch_Location_Options::default_function;
+     ops.primary_location_premise =  Fetch_Location_Options::default_function;
      default_fn_((VAL_Type**) ops.primary_location);
 //     ops.check_position(Fetch_Location_Options::_default_function_temporary);
 //     default_fn_((VAL_Type**) ops.positional_location);
@@ -300,7 +308,7 @@ public:
 //    *ops.positional_location = static_default_value();
    break;
   case (u1) Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible:
-    ops.premise = Fetch_Location_Options::default_constructor_temporary;
+    ops.primary_location_premise = Fetch_Location_Options::default_constructor_temporary;
     ops.activate_temporary_value_holder();
     default_construct_if_needed_and_possible((VAL_Type**) ops.primary_location);
 //   ops.check_position(Fetch_Location_Options::_default_constructor_temporary);
@@ -361,7 +369,8 @@ public:
   for(u1 u = 0; u < count; ++u)
   {
    qDebug() << u << "f2 = " << (u1) oob[u];
-   result = _fetch_out_of_bounds(fallback, flocops, oob[u]);
+   _fetch_out_of_bounds(fallback, flocops, oob[u]);
+   result = (VAL_Type*) flocops.get_value();
    if(result)
      break;
   }
@@ -392,6 +401,8 @@ public:
   if((result = (VAL_Type*) flocops.get_value()))
     return result;
 
+  flocops.activate_out_of_hive_location();
+
   Out_of_Bounds_Resolution_Flags supplement;
 
   Out_of_Bounds_Resolution_Flags f1 [4];// {Out_of_Bounds_Resolution_Flags::N_A};
@@ -399,18 +410,21 @@ public:
 
   std::pair<u1, u1> pr = oob.unpack(supplement, f1[0], f1[1], f1[2], f1[3], f2[0], f2[1], f2[2], f2[3]);
 
+  bool may_need_rebound_copy = (supplement & Out_of_Bounds_Resolution_Flags::Automatic_Rebound);
+  bool need_rebound_copy = false;
+
   if( (supplement & Out_of_Bounds_Resolution_Flags::Automatic_Rebound_and_Accept_Zeroed_Memory)
-     == (u2) Out_of_Bounds_Resolution_Flags::Automatic_Rebound_and_Accept_Zeroed_Memory )
+     == (u2) Out_of_Bounds_Resolution_Flags::Automatic_Rebound_and_Accept_Zeroed_Memory)
   {
    // // this combination guarantees we'll have space in the hive_structure
-   flocops.priority(Fetch_Location_Options::rebound_index_location) = hive_structure_->rebound(nix);
+   flocops.in_hive(Fetch_Location_Options::rebound_index_location) = hive_structure_->rebound(nix);
   }
 
 
   bool fallback_is_valid = !(fallback == the_invalid_index() || fallback == the_invalid_upper_index());
   bool possible_fallback_mitigation = oob.for_fallback_length; // i.e., it's > 0;
 
-  void** default_value_pointer_location;
+  void** default_value_pointer_location = nullptr;
 
   for(u1 u = 0; u < oob.for_index_length; ++u)
   {
@@ -427,20 +441,30 @@ public:
      if(supplement & Out_of_Bounds_Resolution_Flags::Delay_Mitigation_on_Fallback)
        continue;
      if(possible_fallback_mitigation)
-       _fetch_via_fallback(fallback, flocops, oob.for_fallback_length, f2,
-         (Out_of_Bounds_Resolution_Flags)
-         (supplement & Out_of_Bounds_Resolution_Flags::Fallback_Automatic_Rebound));
+     {
+      _fetch_via_fallback(fallback, flocops, oob.for_fallback_length, f2,
+        (Out_of_Bounds_Resolution_Flags)
+        (supplement & Out_of_Bounds_Resolution_Flags::Fallback_Automatic_Rebound));
+      result = (VAL_Type*) flocops.get_value();
+     }
     }
    }
    else
    {
     _fetch_out_of_bounds(nix, flocops, f1[u]); //, supplement);
     result = (VAL_Type*) flocops.get_value();
-    if(flocops.premise == Fetch_Location_Options::default_value_pointer)
+    if(flocops.primary_location_premise == Fetch_Location_Options::default_value_pointer)
       default_value_pointer_location = flocops.primary_location;
    }
    if(result)
-     break;
+   {
+    if( //(flocops.premise == Fetch_Location_Options::default_constructor_temporary)
+        //&&
+      (flocops.in_hive_location_premise == Fetch_Location_Options::N_A)
+      && may_need_rebound_copy )
+      need_rebound_copy = true;
+    break;
+   }
    qDebug() << u << " f1 = " << (u1) f1[u];
   }
 
@@ -466,7 +490,16 @@ public:
    break;
   }
 
-  flocops.reconcile_priority(hive_structure_->value_size());
+  if(need_rebound_copy)
+  {
+   // // we can't do a simple rebound because
+    //   fallback rebound might cause the hive to resize
+   result = (VAL_Type*) hive_structure_->check_rebound(nix, result);
+  }
+  else
+  {
+   flocops.reconcile_in_hive_location(hive_structure_->value_size(), (void**)&result);
+  }
 
 //  if(result && (supplement & Out_of_Bounds_Resolution_Flags::Automatic_Rebound))
 //    hive_structure_->rebound(nix, result);
@@ -850,3 +883,4 @@ public:
 _XCNS(XCSD)
 
 #endif // _VEC1D__H
+

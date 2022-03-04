@@ -365,7 +365,8 @@ struct Fetch_Location_Options
   zeroed_location = 128,
  };
 
- void* priority_location;
+ void* in_hive_location;
+ void* out_of_hive_location;
  void** primary_location;
  void* temporary_value_holder;
 
@@ -380,17 +381,32 @@ struct Fetch_Location_Options
   temporary_value_holder = nullptr;
  }
 
- Premise premise;
- Premise priority_location_premise;
+ void activate_out_of_hive_location()
+ {
+  primary_location = &out_of_hive_location;
+ }
 
+ void deactivate_out_of_hive_location()
+ {
+  primary_location = nullptr;
+ }
+
+ Premise primary_location_premise;
+ Premise in_hive_location_premise;
+ Premise out_of_hive_location_premise;
+ Premise temporary_location_premise;
 
  Fetch_Location_Options()
-  : priority_location(nullptr),
+  : in_hive_location(nullptr),
+    out_of_hive_location(nullptr),
     primary_location(nullptr),
     temporary_value_holder(nullptr),
-    premise(Premise::N_A),
-    priority_location_premise(Premise::N_A)
- {}
+    primary_location_premise(Premise::N_A),
+    in_hive_location_premise(Premise::N_A),
+    out_of_hive_location_premise(Premise::N_A),
+    temporary_location_premise(Premise::N_A)
+ {
+ }
 
 // void check_current(u1 c)
 // {
@@ -481,19 +497,31 @@ struct Fetch_Location_Options
    if(!v)
      return;
    _this.temporary_value_holder = v;
-   _this.premise = (Premise) c;
+   _this.temporary_location_premise = (Premise) c;
   }
  };
 
- struct priority_opeq_pack {
+ struct in_hive_opeq_pack {
   Fetch_Location_Options& _this;
   u1 c;
   void operator = (void* v)
   {
    if(!v)
      return;
-   _this.priority_location = v;
-   _this.priority_location_premise = (Premise) c;
+   _this.in_hive_location = v;
+   _this.in_hive_location_premise = (Premise) c;
+  }
+ };
+
+ struct out_of_hive_opeq_pack {
+  Fetch_Location_Options& _this;
+  u1 c;
+  void operator = (void* v)
+  {
+   if(!v)
+     return;
+   _this.out_of_hive_location = v;
+   _this.out_of_hive_location_premise = (Premise) c;
   }
  };
 
@@ -506,27 +534,33 @@ struct Fetch_Location_Options
    if(!v)
      return;
    _this.primary_location = v;
-   _this.premise = (Premise) c;
+   _this.primary_location_premise = (Premise) c;
   }
  };
 
  temporary_opeq_pack temporary(u1 c) { return {*this, c}; }
  primary_opeq_pack primary(u1 c) { return {*this, c}; }
- priority_opeq_pack priority(u1 c) { return {*this, c}; }
+ in_hive_opeq_pack in_hive(u1 c) { return {*this, c}; }
 
  void* get_value()
  {
+  void* pl = primary_location; //  for debugging
   if(primary_location)
-    return *primary_location;
-  else
-    return temporary_value_holder;
+  {
+   if(*primary_location)
+     return *primary_location;
+  }
+
+  return temporary_value_holder;
  }
 
- void reconcile_priority(u1 size)
+ void reconcile_in_hive_location(u1 size, void** result = nullptr)
  {
-  if(priority_location)
+  if(in_hive_location)
   {
-   memcpy(priority_location, get_value(), size);
+   memcpy(in_hive_location, get_value(), size);
+   if(result)
+     *result = in_hive_location;
   }
  }
 
@@ -555,6 +589,8 @@ enum class Out_of_Bounds_Resolution_Flags : u2 {
   Index_and_Fallback_Shared_Options = 63,
 
   Automatic_Rebound_and_Accept_Zeroed_Memory = Accept_Initialize_to_Zero | Automatic_Rebound,
+
+ // Highest_Value_Before_Actions = 32,
 
   Call_Default_Value_Function = 64,
   Use_Default_Value_Pointer = 128,
@@ -587,6 +623,21 @@ enum class Out_of_Bounds_Resolution_Flags : u2 {
      | Call_Default_Constructor_if_Possible,
 
 };
+
+
+#define _oob_N_A    Out_of_Bounds_Resolution_Flags::N_A
+#define _oob_Use_Exceptions    Out_of_Bounds_Resolution_Flags::Use_Exceptions
+#define _oob_Accept_Initialize_to_Zero   Out_of_Bounds_Resolution_Flags::Accept_Initialize_to_Zero
+#define _oob_Fallback_Initialize_to_Zero   Out_of_Bounds_Resolution_Flags::Fallback_Initialize_to_Zero
+#define _oob_Accept_Default_Value_Nullptr   Out_of_Bounds_Resolution_Flags::Accept_Default_Value_Nullptr
+#define _oob_Automatic_Rebound   Out_of_Bounds_Resolution_Flags::Automatic_Rebound
+#define _oob_Fallback_Automatic_Rebound   Out_of_Bounds_Resolution_Flags::Fallback_Automatic_Rebound
+#define _oob_Delay_Mitigation_on_Fallback   Out_of_Bounds_Resolution_Flags::Delay_Mitigation_on_Fallback
+#define _oob_Call_Default_Value_Function   Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function
+#define _oob_Use_Default_Value_Pointer   Out_of_Bounds_Resolution_Flags::Use_Default_Value_Pointer
+#define _oob_Call_Default_Constructor_if_Possible   Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible
+#define _oob_Use_Alternate_Fallback_Index   Out_of_Bounds_Resolution_Flags::Use_Alternate_Fallback_Index
+
 
 ENUM_FLAGS_OP_MACROS_FREESTANDING(Out_of_Bounds_Resolution_Flags)
 
@@ -679,6 +730,7 @@ u1 decode_fallback_mitigation_flags(u1 encoding,
   Out_of_Bounds_Resolution_Flags& f3,
   Out_of_Bounds_Resolution_Flags& f4);
 
+u2 encode_double_mitigation_flags_0_0();
 u2 encode_double_mitigation_flags_0_1(Out_of_Bounds_Resolution_Flags f21);
 u2 encode_double_mitigation_flags_0_2(Out_of_Bounds_Resolution_Flags f21,
   Out_of_Bounds_Resolution_Flags f22);
@@ -870,7 +922,7 @@ struct _On_Out_of_Bounds_Pack
 {
  u1 for_index_length:3;
  u1 for_fallback_length:3;
- u1 supplement:4;
+ u1 supplement:6;
  u1 for_index_encoding:6;
  u1 f11:4;
  u1 f12:4;
@@ -959,10 +1011,19 @@ struct _On_Out_of_Bounds
 
  operator u2()
  {
+  s2 no_action_flag = 0;
   u2 result = 0;
   u2 sizes = octal((u1)for_index.size(), (u1)for_fallback.size());
   switch(sizes)
   {
+  case 0: // // we need a signal that a 0 in the primary
+           //   mitigation means no action, not a permutation
+
+          // // Assume it makes no sense to delay mitigation on
+           //   fallback if no mitigation is attempted in the first place
+   no_action_flag = (u2) _oob_Delay_Mitigation_on_Fallback;
+   result = encode_double_mitigation_flags_0_0();
+   break;
   case 010: result = encode_double_mitigation_flags(0, for_index[0]);
    break;
   case 020: result = encode_double_mitigation_flags(0, for_index[0], for_index[1]);
@@ -972,13 +1033,13 @@ struct _On_Out_of_Bounds
   case 040: result = encode_double_mitigation_flags(0, for_index[0], for_index[1], for_index[2], for_index[3]);
    break;
 
-  case 001: result = encode_double_mitigation_flags(-1, for_index[0]);
+  case 001: result = encode_double_mitigation_flags(-1, for_fallback[0]);
    break;
-  case 002: result = encode_double_mitigation_flags(-1, for_index[0], for_index[1]);
+  case 002: result = encode_double_mitigation_flags(-1, for_fallback[0], for_fallback[1]);
    break;
-  case 003: result = encode_double_mitigation_flags(-1, for_index[0], for_index[1], for_index[2]);
+  case 003: result = encode_double_mitigation_flags(-1, for_fallback[0], for_fallback[1], for_fallback[2]);
    break;
-  case 004: result = encode_double_mitigation_flags(-1, for_index[0], for_index[1], for_index[2], for_index[3]);
+  case 004: result = encode_double_mitigation_flags(-1, for_fallback[0], for_fallback[1], for_fallback[2], for_fallback[3]);
    break;
 
   case 011: result = encode_double_mitigation_flags(1, for_index[0], for_fallback[0]);
@@ -1035,6 +1096,7 @@ struct _On_Out_of_Bounds
   }
   u2 s1 = supplement &
     Out_of_Bounds_Resolution_Flags::Index_and_Fallback_Shared_Options; // mask to first four options
+  s1 |= no_action_flag;
   u2 s = s1 << 10;
   return result | s;
  }
@@ -1056,6 +1118,10 @@ _On_Out_of_Bounds on_out_of_bounds(Out_of_Bounds_Resolution_Flags f1)
  return on_out_of_bounds(std::vector<Out_of_Bounds_Resolution_Flags>{f1});
 }
 
+_On_Out_of_Bounds on_out_of_bounds()
+{
+ return {{}, {}, Out_of_Bounds_Resolution_Flags::N_A};
+}
 
 
 template<typename INDEX_Types>
@@ -1377,6 +1443,15 @@ public:
  void* rebound(nx nix, void* pv)
  {
   void* spot = rebound(nix);
+  memcpy(spot, pv, value_size());
+  return spot;
+ }
+
+ void* check_rebound(nx nix, void* pv)
+ {
+  void* spot = rebound(nix);
+  if(!spot)
+    spot = get_indexed_location_unchecked(nix);
   memcpy(spot, pv, value_size());
   return spot;
  }

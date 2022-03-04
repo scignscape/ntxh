@@ -190,6 +190,8 @@ s1 get_permutation_code(u1& mask, Out_of_Bounds_Resolution_Flags first, Out_of_B
 void parse_permutation_code(u1 code, u1 mask, Out_of_Bounds_Resolution_Flags& first, Out_of_Bounds_Resolution_Flags& second,
   Out_of_Bounds_Resolution_Flags& third, Out_of_Bounds_Resolution_Flags& fourth)
 {
+ u2 preshift = (u2) (1 << (monotone_offset - 1)); //Out_of_Bounds_Resolution_Flags::Highest_Value_Before_Actions;
+
  u1 mshifted = mask >> 4;
  first = second = third = fourth = Out_of_Bounds_Resolution_Flags::N_A;
  if(mshifted == 0)
@@ -249,15 +251,15 @@ void parse_permutation_code(u1 code, u1 mask, Out_of_Bounds_Resolution_Flags& fi
   bool ok = get_permutation_numbers(code - 24, p1, p2, p3);
   if(!ok)
     return;
-  first = (p1 == 1)?(Out_of_Bounds_Resolution_Flags) ((u2)8 << low)
-        : (p1 == 2)?(Out_of_Bounds_Resolution_Flags) ((u2)8 << mid)
-        : (Out_of_Bounds_Resolution_Flags) ((u2)8 << high);
-  second = (p2 == 1)?(Out_of_Bounds_Resolution_Flags) ((u2)8 << low)
-         : (p2 == 2)?(Out_of_Bounds_Resolution_Flags) ((u2)8 << mid)
-         : (Out_of_Bounds_Resolution_Flags) ((u2)8 << high);
-  third = (p3 == 1)?(Out_of_Bounds_Resolution_Flags) ((u2)8 << low)
-         : (p3 == 2)?(Out_of_Bounds_Resolution_Flags) ((u2)8 << mid)
-         : (Out_of_Bounds_Resolution_Flags) ((u2)8 << high);
+  first = (p1 == 1)?(Out_of_Bounds_Resolution_Flags) (preshift << low)
+        : (p1 == 2)?(Out_of_Bounds_Resolution_Flags) (preshift << mid)
+        : (Out_of_Bounds_Resolution_Flags) (preshift << high);
+  second = (p2 == 1)?(Out_of_Bounds_Resolution_Flags) (preshift << low)
+         : (p2 == 2)?(Out_of_Bounds_Resolution_Flags) (preshift << mid)
+         : (Out_of_Bounds_Resolution_Flags) (preshift << high);
+  third = (p3 == 1)?(Out_of_Bounds_Resolution_Flags) (preshift << low)
+         : (p3 == 2)?(Out_of_Bounds_Resolution_Flags) (preshift << mid)
+         : (Out_of_Bounds_Resolution_Flags) (preshift << high);
   return;
  }
 
@@ -276,10 +278,10 @@ void parse_permutation_code(u1 code, u1 mask, Out_of_Bounds_Resolution_Flags& fi
  if(!ok)
    return;
 
- first = (Out_of_Bounds_Resolution_Flags) ((u2)8 << p1);
- second = (Out_of_Bounds_Resolution_Flags) ((u2)8 << p2);
- third = (Out_of_Bounds_Resolution_Flags) ((u2)8 << p3);
- fourth = (Out_of_Bounds_Resolution_Flags) ((u2)8 << p4);
+ first = (Out_of_Bounds_Resolution_Flags) (preshift << p1);
+ second = (Out_of_Bounds_Resolution_Flags) (preshift << p2);
+ third = (Out_of_Bounds_Resolution_Flags) (preshift << p3);
+ fourth = (Out_of_Bounds_Resolution_Flags) (preshift << p4);
 }
 
 u2 encode_double_mitigation_flags(Out_of_Bounds_Resolution_Flags index,
@@ -491,10 +493,24 @@ std::pair<u1, u1> decode_double_mitigation_flags(u2 encoding,
  supplement = (Out_of_Bounds_Resolution_Flags) (supp >> 10);
  encoding &= ~supp;
  u1 fallback_enc = encoding >> 6; // 0b0011'1111
- u1 result_first = decode_mitigation_flags(enc, f11, f12, f13, f14);
- u1 result_second = decode_fallback_mitigation_flags(fallback_enc, f21, f22, f23, f24);
 
- return std::make_pair(result_first, result_second);
+ // //  check for the no-action signal ...
+  // // maybe fallback_enc == 15 as another test ..
+ if((enc == 0) && (supplement & Out_of_Bounds_Resolution_Flags::Delay_Mitigation_on_Fallback))
+ {
+  u2 mask = ~(u2)Out_of_Bounds_Resolution_Flags::Delay_Mitigation_on_Fallback;
+  supplement = (Out_of_Bounds_Resolution_Flags) ((u2) supplement & mask);
+  u1 result_first = 0;
+  f11 = f12 = f13 = f14 = Out_of_Bounds_Resolution_Flags::N_A;
+  u1 result_second = decode_fallback_mitigation_flags(fallback_enc, f21, f22, f23, f24);
+  return std::make_pair(result_first, result_second);
+ }
+ else
+ {
+  u1 result_first = decode_mitigation_flags(enc, f11, f12, f13, f14);
+  u1 result_second = decode_fallback_mitigation_flags(fallback_enc, f21, f22, f23, f24);
+  return std::make_pair(result_first, result_second);
+ }
 }
 
 u1 decode_mitigation_flags(u1 encoding,
@@ -712,10 +728,14 @@ u1 encode_mitigation_flags(Out_of_Bounds_Resolution_Flags f1,
 
 }
 
+u2 encode_double_mitigation_flags_0_0()
+{
+ return (15 << 6);
+}
 
 u2 encode_double_mitigation_flags_0_1(Out_of_Bounds_Resolution_Flags f21)
 {
-
+ return encode_fallback_mitigation_flags(f21) << 6;
 }
 
 
@@ -724,14 +744,14 @@ u2 encode_double_mitigation_flags_0_1(Out_of_Bounds_Resolution_Flags f21)
 u2 encode_double_mitigation_flags_0_2(Out_of_Bounds_Resolution_Flags f21,
   Out_of_Bounds_Resolution_Flags f22)
 {
-
+ return encode_fallback_mitigation_flags(f21, f22) << 6;
 }
 
 u2 encode_double_mitigation_flags_0_3(Out_of_Bounds_Resolution_Flags f21,
   Out_of_Bounds_Resolution_Flags f22,
   Out_of_Bounds_Resolution_Flags f23)
 {
-
+ return encode_fallback_mitigation_flags(f21, f22, f23) << 6;
 }
 
 u2 encode_double_mitigation_flags_0_4(Out_of_Bounds_Resolution_Flags f21,
@@ -739,7 +759,7 @@ u2 encode_double_mitigation_flags_0_4(Out_of_Bounds_Resolution_Flags f21,
   Out_of_Bounds_Resolution_Flags f23,
   Out_of_Bounds_Resolution_Flags f24)
 {
-
+ return encode_fallback_mitigation_flags(f21, f22, f23) << 6;
 }
 
 

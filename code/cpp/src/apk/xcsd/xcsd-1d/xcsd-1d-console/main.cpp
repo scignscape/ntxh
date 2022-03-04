@@ -216,14 +216,118 @@ int main08(int argc , char **argv)
 
 int main(int argc , char **argv)
 {
+ Vec1d<int> vec(5, 2);
+
+
+ int d = 56;
+
+ Vec1d<int>::static_default_value(&d);
+
+ vec.set_default <= [](int** def)
+ {
+  static int _def = 44;
+  *def = &_def;
+ };
+
+ //vec.first() = 7;
+// vec.push_back(76);
+
+ u2 enc = on_out_of_bounds(//
+  // Out_of_Bounds_Resolution_Flags::Use_Default_Value_Pointer //,
+   //_oob_Call_Default_Value_Function
+    // _oob_Call_Default_Constructor_if_Possible
+                           //,
+                           _oob_Use_Alternate_Fallback_Index
+                           )
+   (
+    _oob_Use_Default_Value_Pointer
+//    _oob_Call_Default_Value_Function
+    )
+   [_oob_Automatic_Rebound
+//   |
+//    _oob_Fallback_Automatic_Rebound
+//    |
+//    _oob_Accept_Initialize_to_Zero
+   ]
+   ;
+
+ _On_Out_of_Bounds_Pack p = decode_out_of_bounds(enc);
+
+// Out_of_Bounds_Resolution_Flags f1;
+// Out_of_Bounds_Resolution_Flags f2;
+// Out_of_Bounds_Resolution_Flags f3;
+// Out_of_Bounds_Resolution_Flags f4;
+
+// u1 count = decode_mitigation_flags(0, f1, f2, f3, f4);
+
+
+ int* x = vec.fetch(2, p, 10);
+
+ void* vx = x;
+
+ qDebug() << "x = " << *x;
+
+// *x = 66;
+
+//  int* x1 = vec.fetch(2, p);
+
+//  qDebug() << "x1 = " << *x1;
+
+//  void* vx1 = x1;
+
+
+  u2 enc1 = on_out_of_bounds(//
+   // Out_of_Bounds_Resolution_Flags::Use_Default_Value_Pointer //,
+    //_oob_Call_Default_Value_Function
+     // _oob_Call_Default_Constructor_if_Possible
+                            //,
+                            _oob_Use_Alternate_Fallback_Index
+                            )
+    (
+//     _oob_Use_Default_Value_Pointer
+     _oob_Call_Default_Value_Function
+     );
+  _On_Out_of_Bounds_Pack p1 = decode_out_of_bounds(enc1);
+
+
+  int* x2 = vec.fetch(14, p1, 10);
+
+  qDebug() << "x2 = " << *x2;
+
+  void* vx2 = x2;
+
+
+  int* x3 = vec.fetch(15, p1, 10);
+
+  qDebug() << "x2 = " << *x2;
+
+  void* vx3 = x3;
+
+
+
+  int* x4 = vec.get(10);
+
+  qDebug() << "x4 = " << *x4;
+
+  void* vx4 = x4;
+
+
+// int* x1 = vec.get(2);
+
+// qDebug() << "x1 = " << *x1;
+
+ return 0;
+}
+
+int main111(int argc , char **argv)
+{
  Vec1d<int> vec(10, 7);
 
-// vec.set_default <= [](int** def)
-// {
-//  static int _def = 44;
-//  *def = &_def;
-// };
-
+ vec.set_default <= [](int** def)
+ {
+  static int _def = 44;
+  *def = &_def;
+ };
 
  u2 enc = on_out_of_bounds(Out_of_Bounds_Resolution_Flags::Use_Default_Value_Pointer,
    Out_of_Bounds_Resolution_Flags::Call_Default_Value_Function)
@@ -233,14 +337,16 @@ int main(int argc , char **argv)
  _On_Out_of_Bounds_Pack p = decode_out_of_bounds(enc);
 
 
-
  int* x = vec.fetch(2, p);
 
  qDebug() << "x = " << *x;
 
 
- u2 enc1 = on_out_of_bounds(Out_of_Bounds_Resolution_Flags::Use_Alternate_Fallback_Index,
-   Out_of_Bounds_Resolution_Flags::Use_Default_Value_Pointer);
+
+
+ u2 enc1 = on_out_of_bounds(_oob_Call_Default_Value_Function, _oob_Use_Alternate_Fallback_Index)
+   (_oob_Call_Default_Value_Function)
+   [_oob_Delay_Mitigation_on_Fallback];
 
  _On_Out_of_Bounds_Pack p1 = decode_out_of_bounds(enc1);
 
