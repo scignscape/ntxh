@@ -641,31 +641,31 @@ enum class Out_of_Bounds_Resolution_Flags : u2 {
 
 ENUM_FLAGS_OP_MACROS_FREESTANDING(Out_of_Bounds_Resolution_Flags)
 
-u2 octal(u1 a1, u1 a2)
+inline u2 octal(u1 a1, u1 a2)
 {
  return a2 + 8*a1;
 }
 
-u2 octal(u1 a1, u1 a2, u1 a3)
+inline u2 octal(u1 a1, u1 a2, u1 a3)
 {
  return a3 + 8*a2 + 64*a1;
 }
 
-u2 octal(u1 a1, u1 a2, u1 a3, u1 a4)
+inline u2 octal(u1 a1, u1 a2, u1 a3, u1 a4)
 {
  return a4 + 8*a3 + 64*a2 + 512*a1;
 }
 
 constexpr u1 monotone_offset = 6;
 
-u1 monotone(Out_of_Bounds_Resolution_Flags f)
+inline u1 monotone(Out_of_Bounds_Resolution_Flags f)
 {
  u1 mshifted = (u2) f >> monotone_offset;
  return (mshifted == 8)? 4:
   (mshifted == 4)? 3: mshifted;
 }
 
-Out_of_Bounds_Resolution_Flags demonotone(u1 m)
+inline Out_of_Bounds_Resolution_Flags demonotone(u1 m)
 {
  return (Out_of_Bounds_Resolution_Flags)
    ((u2) ((m == 4)? 8: (m == 3)? 4: m) << monotone_offset);
@@ -837,7 +837,7 @@ u2 encode_double_mitigation_flags_4_4(Out_of_Bounds_Resolution_Flags f11,
   Out_of_Bounds_Resolution_Flags f23,
   Out_of_Bounds_Resolution_Flags f24);
 
-u2 encode_double_mitigation_flags(s1 split, Out_of_Bounds_Resolution_Flags f1,
+inline u2 encode_double_mitigation_flags(s1 split, Out_of_Bounds_Resolution_Flags f1,
   Out_of_Bounds_Resolution_Flags f2,
   Out_of_Bounds_Resolution_Flags f3,
   Out_of_Bounds_Resolution_Flags f4,
@@ -892,7 +892,7 @@ u2 encode_double_mitigation_flags(s1 split, Out_of_Bounds_Resolution_Flags f1,
   Out_of_Bounds_Resolution_Flags f4,
   Out_of_Bounds_Resolution_Flags f5);
 
-u2 encode_double_mitigation_flags_shared(Out_of_Bounds_Resolution_Flags f1,
+inline u2 encode_double_mitigation_flags_shared(Out_of_Bounds_Resolution_Flags f1,
   Out_of_Bounds_Resolution_Flags f2,
   Out_of_Bounds_Resolution_Flags f3,
   Out_of_Bounds_Resolution_Flags f4)
@@ -900,20 +900,20 @@ u2 encode_double_mitigation_flags_shared(Out_of_Bounds_Resolution_Flags f1,
  return encode_double_mitigation_flags(4, f1, f2, f3, f4, f1, f2, f3, f4);
 }
 
-u2 encode_double_mitigation_flags_shared(Out_of_Bounds_Resolution_Flags f1,
+inline u2 encode_double_mitigation_flags_shared(Out_of_Bounds_Resolution_Flags f1,
   Out_of_Bounds_Resolution_Flags f2,
   Out_of_Bounds_Resolution_Flags f3)
 {
  return encode_double_mitigation_flags(3, f1, f2, f3, f1, f2, f3);
 }
 
-u2 encode_double_mitigation_flags_shared(Out_of_Bounds_Resolution_Flags f1,
+inline u2 encode_double_mitigation_flags_shared(Out_of_Bounds_Resolution_Flags f1,
   Out_of_Bounds_Resolution_Flags f2)
 {
  return encode_double_mitigation_flags(2, f1, f2, f1, f2);
 }
 
-u2 encode_double_mitigation_flags_shared(Out_of_Bounds_Resolution_Flags f1)
+inline u2 encode_double_mitigation_flags_shared(Out_of_Bounds_Resolution_Flags f1)
 {
  return encode_double_mitigation_flags(1, f1, f1);
 }
@@ -960,7 +960,7 @@ struct _On_Out_of_Bounds_Pack
  }
 };
 
-_On_Out_of_Bounds_Pack decode_out_of_bounds(u2 enc)
+inline _On_Out_of_Bounds_Pack decode_out_of_bounds(u2 enc)
 {
  Out_of_Bounds_Resolution_Flags f11;
  Out_of_Bounds_Resolution_Flags f12;
@@ -1102,7 +1102,7 @@ struct _On_Out_of_Bounds
  }
 };
 
-_On_Out_of_Bounds on_out_of_bounds(std::vector<Out_of_Bounds_Resolution_Flags> fs)
+inline _On_Out_of_Bounds on_out_of_bounds(std::vector<Out_of_Bounds_Resolution_Flags> fs)
 {
  return {fs, {}, Out_of_Bounds_Resolution_Flags::N_A};
 }
@@ -1113,12 +1113,12 @@ _On_Out_of_Bounds on_out_of_bounds(Out_of_Bounds_Resolution_Flags f1, Args... ar
  return on_out_of_bounds({f1, args ...});
 }
 
-_On_Out_of_Bounds on_out_of_bounds(Out_of_Bounds_Resolution_Flags f1)
+inline _On_Out_of_Bounds on_out_of_bounds(Out_of_Bounds_Resolution_Flags f1)
 {
  return on_out_of_bounds(std::vector<Out_of_Bounds_Resolution_Flags>{f1});
 }
 
-_On_Out_of_Bounds on_out_of_bounds()
+inline _On_Out_of_Bounds on_out_of_bounds()
 {
  return {{}, {}, Out_of_Bounds_Resolution_Flags::N_A};
 }

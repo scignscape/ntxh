@@ -404,4 +404,4 @@ struct _Mat2d_special_mode
 
 _XCNS(XCSD)
 
-#endif // ARR1D__H
+#endif // MAT2D__H

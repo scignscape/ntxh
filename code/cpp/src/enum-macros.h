@@ -40,7 +40,7 @@
  } \
 
  #define ENUM_FLAGS_OP_MACROS(e) ENUM_FLAGS_OP_MACROS_(e, friend constexpr)
- #define ENUM_FLAGS_OP_MACROS_FREESTANDING(e) ENUM_FLAGS_OP_MACROS_(e,)
+ #define ENUM_FLAGS_OP_MACROS_FREESTANDING(e) ENUM_FLAGS_OP_MACROS_(e,inline)
 
 
 //friend constexpr e operator,(e& lhs, e rhs) \

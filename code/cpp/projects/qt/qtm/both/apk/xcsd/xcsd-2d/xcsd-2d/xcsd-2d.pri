@@ -8,7 +8,7 @@
 PROJECT_NAME = xcsd-2d
 
 
-QT -= gui
+#QT -= gui
 
 include(../build-group.pri)
 
@@ -38,16 +38,22 @@ CONFIG += no_keywords
 
 DEFINES += USE_KANS
 
+DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
+
+DEFINES += USE_XSNS
+
 
 HEADERS += \
   $$SRC_DIR/mat2d.h \
   $$SRC_DIR/mat2d.templates.h \
   $$SRC_DIR/mat2d.templates.special-modes.h \
+  $$SRC_DIR/xcsd-image.h \
 
 
 
 SOURCES += \
   $$SRC_DIR/mat2d.cpp \
+  $$SRC_DIR/xcsd-image.cpp \
 
 
 
