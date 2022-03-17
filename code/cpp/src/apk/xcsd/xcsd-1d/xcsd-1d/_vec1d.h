@@ -129,13 +129,34 @@ public:
  using Numeric_Index_type = typename INDEX_Types::Numeric_Index_type;
  using Element_type = VAL_Type;
 
- _Vec1d(nnx layer_size = 16, nnx block_size = 16)
+ _Vec1d(nnx layer_size = 15, nnx block_size = 17)
   :  hive_structure_(new Hive_Structure<INDEX_Types>(layer_size, block_size)),
     default_fn_(nullptr)
  {
   //hive_structure_->set_layer_size(la);
   hive_structure_->set_value_size(sizeof(VAL_Type));
  }
+
+ _Vec1d(std::initializer_list<nx> initial_size)
+  :  hive_structure_(nullptr),
+    default_fn_(nullptr)
+ {
+  if(initial_size.size() > 0)
+  {
+   hive_structure_ = new Hive_Structure<INDEX_Types>(15, 17);
+   hive_structure_->set_value_size(sizeof(VAL_Type));
+  }
+  //hive_structure_->set_layer_size(la);
+ }
+
+ void init_static_hive(nx size)
+ {
+  hive_structure_ = new Hive_Structure<INDEX_Types>();
+  hive_structure_->set_value_size(sizeof(VAL_Type));
+  hive_structure_->init_single_layer(size);
+ }
+
+
 
  typedef typename Hive_Structure<INDEX_Types>::pre_iterator pre_iterator;
  typedef typename Hive_Structure<INDEX_Types>::iterator iterator;
@@ -676,6 +697,12 @@ public:
   VAL_Type* vv = (VAL_Type*) hive_structure_->get_indexed_location(nix);
   if(!vv)
     default_fn_(&vv);
+  return *vv;
+ }
+
+ VAL_Type& get_at(nx nix)
+ {
+  VAL_Type* vv = (VAL_Type*) hive_structure_->get_indexed_location(nix);
   return *vv;
  }
 

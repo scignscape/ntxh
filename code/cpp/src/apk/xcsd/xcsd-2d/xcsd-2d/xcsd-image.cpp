@@ -1,9 +1,15 @@
 
 #include "xcsd-image.h"
 
+#include "xcsd-tierbox.h"
+
 USING_XCNS(XCSD)
 
 XCSD_Image::XCSD_Image()
+  :  tier_counts_({0,0}),
+     horizontal_outer_sizes_({0,0}),
+     vertical_outer_sizes_({0,0}),
+     tierbox_count_(0), tierboxes_(nullptr)
 {
 
 }
@@ -12,6 +18,102 @@ void XCSD_Image::load_image(QString path)
 {
  image_.load(path);
 }
+
+void XCSD_Image::init_tierboxes()
+{
+ tierboxes_ = new Vec1d<XCSD_TierBox*>({tierbox_count_});
+ u4 total_count = 0;
+
+ u1 non_full_h = 0, non_full_v = 0;
+ for(u2 r = 0; r < tier_counts_.width; ++r)
+ {
+  if(r == 0)
+    non_full_h = horizontal_outer_sizes_.left;
+  else if(r == tier_counts_.width - 1)
+    non_full_h = horizontal_outer_sizes_.right;
+
+  for(u2 c = 0; c < tier_counts_.height; ++c)
+  {
+   XCSD_TierBox* trb = new XCSD_TierBox;
+   if(non_full_h > 0)
+   {
+    trb->set_non_full_h(non_full_h);
+    if(r == 0)
+      trb->set_non_full_left();
+   }
+   if(c == 0)
+   {
+    non_full_v = vertical_outer_sizes_.top;
+    if(non_full_v > 0)
+    {
+     trb->set_non_full_v(non_full_v);
+     trb->set_non_full_up();
+    }
+   }
+   else if(c == tier_counts_.height - 1)
+   {
+    non_full_v = vertical_outer_sizes_.bottom;
+    if(non_full_v > 0)
+      trb->set_non_full_v(non_full_v);
+   }
+   trb->init_boxes();
+   tierboxes_->get_at(total_count) = trb;
+   ++total_count;
+  }
+  non_full_h = 0; non_full_v = 0;
+ }
+}
+
+void XCSD_Image::init_tier_counts()
+{
+ u2 w = image_.width();
+ u2 h = image_.height();
+
+ u2 ws = w / 27;
+ u2 hs = h / 27;
+
+ u2 w0 = w % 27 / 2;
+ u2 h0 = h % 27 / 2;
+ //return {(u2)image_.width(), (u2)image_.height()};
+
+ if(w0 == 0)
+ {
+  if((w % 27) == 1)
+  {
+   ++ws;
+   horizontal_outer_sizes_.right = 1;
+  }
+ }
+ else
+ {
+  ws += 2;
+  horizontal_outer_sizes_ = {w0, (u2) (w0 + ((w % 27) % 2))};
+ }
+
+ if(h0 == 0)
+ {
+  if((h % 27) == 1)
+  {
+   ++hs;
+   vertical_outer_sizes_.bottom = 1;
+  }
+ }
+ else
+ {
+  hs += 2;
+  vertical_outer_sizes_ = {h0, (u2) (h0 + ((h % 27) % 2))};
+ }
+
+ tier_counts_ = {ws, hs};
+ tierbox_count_ = tier_counts_.area();
+}
+
+
+//void XCSD_Image::init_tierbox_counts()
+//{
+
+//}
+
 
 void XCSD_Image::get_255_palatte(QVector<QColor>& vec)
 {

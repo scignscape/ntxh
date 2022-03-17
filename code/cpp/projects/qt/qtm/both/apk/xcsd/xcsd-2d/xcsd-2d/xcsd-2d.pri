@@ -48,12 +48,13 @@ HEADERS += \
   $$SRC_DIR/mat2d.templates.h \
   $$SRC_DIR/mat2d.templates.special-modes.h \
   $$SRC_DIR/xcsd-image.h \
-
+  $$SRC_DIR/xcsd-tierbox.h \
 
 
 SOURCES += \
   $$SRC_DIR/mat2d.cpp \
   $$SRC_DIR/xcsd-image.cpp \
+  $$SRC_DIR/xcsd-tierbox.cpp \
 
 
 

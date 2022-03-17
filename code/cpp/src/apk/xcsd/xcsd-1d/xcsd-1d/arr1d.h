@@ -23,8 +23,8 @@ class Arr1d : public _Vec1d<VAL_Type>,
 
 public:
 
- Arr1d(u4 length, typename INDEX_Types::Numeric_Nested_Index_type layer_size = 16,
-       typename INDEX_Types::Numeric_Nested_Index_type block_size = 16)
+ Arr1d(u4 length, typename INDEX_Types::Numeric_Nested_Index_type layer_size = 15,
+       typename INDEX_Types::Numeric_Nested_Index_type block_size = 17)
   :  _Vec1d<VAL_Type>(layer_size, block_size),
     each_holders<Arr1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}}),
     length_(length)

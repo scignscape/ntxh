@@ -25,11 +25,30 @@ public:
 
  using Value_type = VAL_Type;
 
- Vec1d(nnx layer_size = 16, nnx block_size = 16)
+ Vec1d(nnx layer_size = 15, nnx block_size = 17)
   :  _Vec1d<VAL_Type>(layer_size, block_size),
     each_holders<Vec1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
  {
  }
+
+ Vec1d(std::initializer_list<nx> initial_size, nnx layer_size, nnx block_size)
+  :  _Vec1d<VAL_Type>(layer_size, block_size),
+    each_holders<Vec1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
+ {
+  if(initial_size.size() > 0)
+    this->resize(*initial_size.begin());
+ }
+
+ Vec1d(std::initializer_list<nx> initial_size)
+  :  _Vec1d<VAL_Type>(initial_size),
+    each_holders<Vec1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
+ {
+  if(initial_size.size() > 0)
+  {
+   this->resize(*initial_size.begin());
+  }
+ }
+
 
 };
 

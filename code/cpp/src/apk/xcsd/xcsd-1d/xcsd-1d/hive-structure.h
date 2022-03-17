@@ -1256,6 +1256,12 @@ public:
  ACCESSORS(nnx ,value_size)
  ACCESSORS(nx ,total_size)
 
+ void init_single_layer(nx size)
+ {
+  layer_size_ = size;
+  single_layer_.elements_ = malloc(value_size_ * size);
+ }
+
  void** get_zeroed_location()
  {
   static void* result = nullptr;

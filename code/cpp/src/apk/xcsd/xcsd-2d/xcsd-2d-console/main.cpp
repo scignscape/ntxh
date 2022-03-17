@@ -32,84 +32,95 @@ int main(int argc , char **argv)
 
  qDebug() << "image = " << xcsd.image().text();
 
+ xcsd.init_tier_counts();
+ xcsd.init_tierboxes();
+
  QImage& image = xcsd.image();
 
  u2 w = image.width();
  u2 h = image.height();
 
- qDebug() << "w = " << w % 27 / 2;
- qDebug() << "h = " << h % 27 / 2;
+ qDebug() << "w = " << w / 27;
+ qDebug() << "h = " << h / 27;
 
  u2 l0 = w % 27 / 2;
  u2 h0 = h % 27 / 2;
 
- QPixmap pixmap = QPixmap::fromImage(image);
-
- QPainter painter(&pixmap);
-
- painter.setPen(QColor::fromRgb(215, 255, 255));
- painter.setBrush(QColor::fromRgb(255, 255, 255));
-
- for(u2 x = l0; x < w; x += 27)
- {
-  for(u2 y = 0; y < h; ++y)
-  {
-   QRgb rgb = image.pixel(x, y);
-
-   u1 r = qRed(rgb);
-   u1 g = qGreen(rgb);
-   u1 b = qBlue(rgb);
-
-   r = qMin(r + 60, 255);
-   g = qMin(g + 60, 255);
-   b = qMin(b + 60, 255);
-
-   //QRgb rgb1 = QColor::fromRgb(255, g, b).rgb();
-
-   painter.setPen(QColor::fromRgb(r, g, b));
-
-   painter.drawPoint(x, y);
-
-   //painter.drawLine(0, y, w, y);
-  }
-  //painter.drawLine(x, 0, x, h);
- }
-
- for(u2 y = h0; y < h; y += 27)
- {
-  for(u2 x = 0; x < w; ++x)
-  {
-   //painter.drawLine(0, y, w, y);
-   QRgb rgb = image.pixel(x, y);
-
-   u1 r = qRed(rgb);
-   u1 g = qGreen(rgb);
-   u1 b = qBlue(rgb);
-
-   r = qMin(r + 60, 255);
-   g = qMin(g + 60, 255);
-   b = qMin(b + 60, 255);
-
-   //QRgb rgb1 = QColor::fromRgb(255, g, b).rgb();
-
-   painter.setPen(QColor::fromRgb(r, g, b));
-
-   painter.drawPoint(x, y);
-  }
- }
-
-
- pixmap.save(ROOT_FOLDER "/../pics/angle.grid.png");
-
- //  QPixmap pixmap = QPixmap::fromImage(image);
- //  QPainter painter(&pixmap);
-
+ qDebug() << "l0 = " << l0;
+ qDebug() << "h0 = " << h0;
 
 
  return 0;
 }
 
 // // // // // // //
+
+
+
+
+//QPixmap pixmap = QPixmap::fromImage(image);
+
+//QPainter painter(&pixmap);
+
+//painter.setPen(QColor::fromRgb(215, 255, 255));
+//painter.setBrush(QColor::fromRgb(255, 255, 255));
+
+//for(u2 x = l0; x < w; x += 27)
+//{
+// for(u2 y = 0; y < h; ++y)
+// {
+//  QRgb rgb = image.pixel(x, y);
+
+//  u1 r = qRed(rgb);
+//  u1 g = qGreen(rgb);
+//  u1 b = qBlue(rgb);
+
+//  r = qMin(r + 60, 255);
+//  g = qMin(g + 60, 255);
+//  b = qMin(b + 60, 255);
+
+//  //QRgb rgb1 = QColor::fromRgb(255, g, b).rgb();
+
+//  painter.setPen(QColor::fromRgb(r, g, b));
+
+//  painter.drawPoint(x, y);
+
+//  //painter.drawLine(0, y, w, y);
+// }
+// //painter.drawLine(x, 0, x, h);
+//}
+
+//for(u2 y = h0; y < h; y += 27)
+//{
+// for(u2 x = 0; x < w; ++x)
+// {
+//  //painter.drawLine(0, y, w, y);
+//  QRgb rgb = image.pixel(x, y);
+
+//  u1 r = qRed(rgb);
+//  u1 g = qGreen(rgb);
+//  u1 b = qBlue(rgb);
+
+//  r = qMin(r + 60, 255);
+//  g = qMin(g + 60, 255);
+//  b = qMin(b + 60, 255);
+
+//  //QRgb rgb1 = QColor::fromRgb(255, g, b).rgb();
+
+//  painter.setPen(QColor::fromRgb(r, g, b));
+
+//  painter.drawPoint(x, y);
+// }
+//}
+
+
+//pixmap.save(ROOT_FOLDER "/../pics/angle.grid.png");
+
+////  QPixmap pixmap = QPixmap::fromImage(image);
+////  QPainter painter(&pixmap);
+
+
+
 
 
 void show_255_palatte(QVector<QColor>& vec, QString path,
