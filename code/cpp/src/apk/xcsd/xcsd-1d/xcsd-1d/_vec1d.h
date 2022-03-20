@@ -118,6 +118,8 @@ class _Vec1d
 
  std::function<void(VAL_Type**)> default_fn_;
 
+ //static void default_default_fn_(VAL_Type**) {}
+
 protected:
 
  friend class Deq1d<VAL_Type, INDEX_Types>;
@@ -130,17 +132,19 @@ public:
  using Element_type = VAL_Type;
 
  _Vec1d(nnx layer_size = 15, nnx block_size = 17)
-  :  hive_structure_(new Hive_Structure<INDEX_Types>(layer_size, block_size)),
-    default_fn_(nullptr)
+  :  hive_structure_(new Hive_Structure<INDEX_Types>(layer_size, block_size))
+     , default_fn_(nullptr) //&default_default_fn_)
  {
+  //default_fn_ = nullptr;
   //hive_structure_->set_layer_size(la);
   hive_structure_->set_value_size(sizeof(VAL_Type));
  }
 
  _Vec1d(std::initializer_list<nx> initial_size)
-  :  hive_structure_(nullptr),
-    default_fn_(nullptr)
+  :  hive_structure_(nullptr)
+     ,  default_fn_(nullptr)
  {
+  //default_fn_ = nullptr;
   if(initial_size.size() > 0)
   {
    hive_structure_ = new Hive_Structure<INDEX_Types>(15, 17);
@@ -154,6 +158,7 @@ public:
   hive_structure_ = new Hive_Structure<INDEX_Types>();
   hive_structure_->set_value_size(sizeof(VAL_Type));
   hive_structure_->init_single_layer(size);
+  hive_structure_->resize(size);
  }
 
 

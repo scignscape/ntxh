@@ -52,9 +52,12 @@ void Hive_Structure<INDEX_Types>
   ::resize(nx nix)
 {
  set_total_size(nix);
- pre_iterator pre = parse_location(nix - 1);
- Hive_Layer* hl = get_layer_by_layer_order(pre.block_number, pre.layer_order);
- check_init_layer(hl);
+ if(layer_size_ < 0)
+ {
+  pre_iterator pre = parse_location(nix - 1);
+  Hive_Layer* hl = get_layer_by_layer_order(pre.block_number, pre.layer_order);
+  check_init_layer(hl);
+ }
 }
 
 template<typename INDEX_Types>

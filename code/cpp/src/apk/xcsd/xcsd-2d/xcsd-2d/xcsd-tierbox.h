@@ -26,6 +26,7 @@ XCNS_(XCSD)
 struct Box3x3_8bytepx
 {
  Arr1d<n8> pixels;
+ Box3x3_8bytepx();
 };
 
 struct Box9x9_8bytepx

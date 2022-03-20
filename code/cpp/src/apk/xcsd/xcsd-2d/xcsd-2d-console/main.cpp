@@ -7,6 +7,8 @@
 
 #include "xcsd-2d/xcsd-image.h"
 
+#include "xcsd-2d/xcsd-tierbox.h"
+
 #include <QPixmap>
 #include <QPainter>
 
@@ -21,37 +23,50 @@ int main(int argc , char **argv)
 {
  //Mat2d<Vec1d<int>> mat;
 
- QGuiApplication app(argc, argv);
+// Box9x9_8bytepx* box = new Box9x9_8bytepx;
+
+// return 0;
+
+// QGuiApplication app(argc, argv);
 
 
  XCSD_Image xcsd;
 
- xcsd.load_image(ROOT_FOLDER "/../pics/angle.jpg");
+ //xcsd.load_image(ROOT_FOLDER "/../pics/angle.jpg");
+ xcsd.load_image(ROOT_FOLDER "/../pi/t1-30x30.png");
 
- xcsd.image().setText("test", "result");
-
- qDebug() << "image = " << xcsd.image().text();
+ //xcsd.image().setText("test", "result");
+ // qDebug() << "image = " << xcsd.image().text();
 
  xcsd.init_tier_counts();
  xcsd.init_tierboxes();
 
- QImage& image = xcsd.image();
+ rc2 rc = xcsd.get_tierbox_at_ground_position_RC2(4, 4);
 
- u2 w = image.width();
- u2 h = image.height();
+ qDebug() << "rc = " << rc;
 
- qDebug() << "w = " << w / 27;
- qDebug() << "h = " << h / 27;
+ //XCSD_TierBox* trb = xcsd.get_tierbox_at_ground_position(4, 4);
 
- u2 l0 = w % 27 / 2;
- u2 h0 = h % 27 / 2;
+// QImage& image = xcsd.image();
 
- qDebug() << "l0 = " << l0;
- qDebug() << "h0 = " << h0;
+// u2 w = image.width();
+// u2 h = image.height();
+
+// qDebug() << "w = " << w / 27;
+// qDebug() << "h = " << h / 27;
+
+// u2 l0 = w % 27 / 2;
+// u2 h0 = h % 27 / 2;
+
+// qDebug() << "l0 = " << l0;
+// qDebug() << "h0 = " << h0;
+
 
 
  return 0;
 }
+
+
 
 // // // // // // //
 

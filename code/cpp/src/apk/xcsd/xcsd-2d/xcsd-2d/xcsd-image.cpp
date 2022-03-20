@@ -19,6 +19,51 @@ void XCSD_Image::load_image(QString path)
  image_.load(path);
 }
 
+XCSD_TierBox* XCSD_Image::get_tierbox_at_ground_position(u2 x, u2 y)
+{
+
+}
+
+
+SDI_Position XCSD_Image::get_sdi_at_ground_position(u2 x, u2 y)
+{
+
+}
+
+
+rc2 XCSD_Image::get_tierbox_at_ground_position_RC2(u2 x, u2 y)
+{
+ rc2 result {0,0};
+
+ if(horizontal_outer_sizes_.left > 0)
+ {
+  if(x <= horizontal_outer_sizes_.left)
+    result.r = 0;
+  else
+  {
+   result.r = 1;
+   x -= horizontal_outer_sizes_.left;
+  }
+ }
+ x /= 27;
+ result.r += x;
+
+ if(vertical_outer_sizes_.top > 0)
+ {
+  if(y <= vertical_outer_sizes_.top)
+    result.c = 0;
+  else
+  {
+   result.c = 1;
+   y -= vertical_outer_sizes_.top;
+  }
+ }
+ y /= 27;
+ result.c += y;
+ return result;
+}
+
+
 void XCSD_Image::init_tierboxes()
 {
  tierboxes_ = new Vec1d<XCSD_TierBox*>({tierbox_count_});

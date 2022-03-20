@@ -19,17 +19,36 @@ template<typename VAL_Type, typename INDEX_Types = index_types<s2>, typename PR_
 class Arr1d : public _Vec1d<VAL_Type>,
    public each_holders<Arr1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>
 {
+ using nnx = typename INDEX_Types::Numeric_Nested_Index_type;
+ using nx = typename INDEX_Types::Numeric_Nested_Index_type;
+ using val_t = VAL_Type;
+
  u4 length_;
 
 public:
 
- Arr1d(u4 length, typename INDEX_Types::Numeric_Nested_Index_type layer_size = 15,
+ Arr1d(std::initializer_list<nx> length, typename INDEX_Types::Numeric_Nested_Index_type layer_size,
        typename INDEX_Types::Numeric_Nested_Index_type block_size = 17)
   :  _Vec1d<VAL_Type>(layer_size, block_size),
-    each_holders<Arr1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}}),
-    length_(length)
+    each_holders<Arr1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
+    //length_(length)
  {
+  if(length.size() > 0)
+    length_ = *length.begin();
  }
+
+ Arr1d(std::initializer_list<nx> length)
+  :  _Vec1d<VAL_Type>({0}),
+    each_holders<Arr1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
+    //length_(length)
+ {
+  if(length.size() > 0)
+  {
+   length_ = *length.begin();
+   this->init_static_hive(length_);
+  }
+ }
+
 
  u4 push_back(const VAL_Type& v)
  {

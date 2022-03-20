@@ -24,6 +24,8 @@ XCNS_(XCSD)
 
 #define Ty_DEF_MACRO(ty, size, asize, field1, field2) \
  struct ty##size { u##size field1, field2; \
+   template<typename T> friend T& operator<<(T& lhs, const ty##size& rhs) \
+   { return lhs << QString("(%1, %2)").arg(rhs.field1).arg(rhs.field2); } \
    asize area() {return field1 * field2;} };
 
 #define Tys_DEF_MACRO(ty, size, asize, field1, field2) \
@@ -34,6 +36,10 @@ Ty_DEF_MACRO(wh, 2, u4, width, height)
 Ty_DEF_MACRO(wh, 4, n8, width, height)
 Ty_DEF_MACRO(xy, 2, u4, x, y)
 Ty_DEF_MACRO(xy, 4, n8, x, y)
+Ty_DEF_MACRO(rc, 2, u4, r, c)
+Ty_DEF_MACRO(rc, 4, n8, r, c)
+Ty_DEF_MACRO(hv, 2, u4, h, v)
+Ty_DEF_MACRO(hv, 4, n8, h, v)
 Ty_DEF_MACRO(lr, 2, u4, left, right)
 Ty_DEF_MACRO(lr, 4, n8, left, right)
 Ty_DEF_MACRO(pr, 2, u4,first, second)
@@ -45,6 +51,10 @@ Tys_DEF_MACRO(wh, 2, u4, width, height)
 Tys_DEF_MACRO(wh, 4, n8, width, height)
 Tys_DEF_MACRO(xy, 2, u4, x, y)
 Tys_DEF_MACRO(xy, 4, n8, x, y)
+Tys_DEF_MACRO(rc, 2, u4, r, c)
+Tys_DEF_MACRO(rc, 4, n8, r, c)
+Tys_DEF_MACRO(hv, 2, u4, h, v)
+Tys_DEF_MACRO(hv, 4, n8, h, v)
 Tys_DEF_MACRO(lr, 2, u4, left, right)
 Tys_DEF_MACRO(lr, 4, n8, left, right)
 Tys_DEF_MACRO(pr, 2, u4, first, second)
@@ -67,6 +77,10 @@ Mod_DEF_MACRO(wh2)
 Mod_DEF_MACRO(wh4)
 Mod_DEF_MACRO(xy2)
 Mod_DEF_MACRO(xy4)
+Mod_DEF_MACRO(rc2)
+Mod_DEF_MACRO(rc4)
+Mod_DEF_MACRO(hv2)
+Mod_DEF_MACRO(hv4)
 Mod_DEF_MACRO(lr2)
 Mod_DEF_MACRO(lr4)
 Mod_DEF_MACRO(pr2)
@@ -75,6 +89,13 @@ Mod_DEF_MACRO(tb2)
 Mod_DEF_MACRO(tb4)
 
 class XCSD_TierBox;
+
+struct SDI_Position
+{
+ rc2 tier;
+ hv2 mid;
+ xy2 ground;
+};
 
 class XCSD_Image
 {
@@ -98,6 +119,12 @@ public:
  ACCESSORS(lr2 ,horizontal_outer_sizes)
  ACCESSORS(tb2 ,vertical_outer_sizes)
 
+
+ XCSD_TierBox* get_tierbox_at_ground_position(u2 x, u2 y);
+
+ rc2 get_tierbox_at_ground_position_RC2(u2 x, u2 y);
+
+ SDI_Position get_sdi_at_ground_position(u2 x, u2 y);
 
  void load_image(QString path);
 

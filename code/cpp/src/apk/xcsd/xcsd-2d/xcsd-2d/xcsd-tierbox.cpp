@@ -1,11 +1,27 @@
 
 #include "xcsd-tierbox.h"
 
+Box3x3_8bytepx::Box3x3_8bytepx()
+ :  pixels({9})
+{
+ for(u1 count = 0; count < 9; ++count)
+ {
+  pixels.get_at(count) = 0;
+ }
+}
 
 Box9x9_8bytepx::Box9x9_8bytepx()
- :  vec_3x3({})
+ :  vec_3x3({0})
 {
-
+ vec_3x3.init_static_hive(9);
+ for(u1 count = 0; count < 9; ++count)
+ {
+  Box3x3_8bytepx* ptr = vec_3x3.get(count);
+  Box3x3_8bytepx* box = new (ptr) Box3x3_8bytepx;
+  //vec_3x3.get_at(count) = box
+//  Box3x3_8bytepx* box = new Box3x3_8bytepx;
+//  Box3x3_8bytepx* box1 = new (ptr) Box3x3_8bytepx;
+ }
 }
 
 
