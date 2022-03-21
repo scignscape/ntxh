@@ -24,41 +24,75 @@ XCNS_(XCSD)
 
 #define Ty_DEF_MACRO(ty, size, asize, field1, field2) \
  struct ty##size { u##size field1, field2; \
+   using field_type = u##size; \
    template<typename T> friend T& operator<<(T& lhs, const ty##size& rhs) \
-   { return lhs << QString("(%1, %2)").arg(rhs.field1).arg(rhs.field2); } \
+   { lhs << "(" << rhs.field1 << ", " << rhs.field2 << ")"; return lhs; } \
+   template<typename T> ty##size operator<<(T val) \
+   { return {field1 << val, field2 << val}; } \
+   template<typename T> ty##size operator>>(T val) \
+   { return {field1 >> val, field2 >> val}; } \
+   template<typename T> ty##size operator&(T val) \
+   { return {field1 & val, field2 & val}; } \
+   template<typename T> T _to() \
+   { return {(typename T::field_type)field1, (typename T::field_type)field2}; } \
    asize area() {return field1 * field2;} };
 
 #define Tys_DEF_MACRO(ty, size, asize, field1, field2) \
 struct ty##size##s { s##size field1, field2; \
+   using field_type = u##size; \
+   template<typename T> friend T& operator<<(T& lhs, const ty##size##s& rhs) \
+   { lhs << "(" << rhs.field1 << ", " << rhs.field2 << ")"; return lhs; } \
+   template<typename T> ty##size##s operator<<(T val) \
+   { return {field1 << val, field2 << val}; } \
+   template<typename T> ty##size##s operator>>(T val) \
+   { return {field1 >> val, field2 >> val}; } \
+   template<typename T> ty##size##s operator&(T val) \
+   { return {field1 & val, field2 & val}; } \
+   template<typename T> T _to() \
+   { return {(typename T::field_type)field1, (typename T::field_type)field2}; } \
    asize area() {return field1 * field2;} };
 
+Ty_DEF_MACRO(wh, 1, u2, width, height)
 Ty_DEF_MACRO(wh, 2, u4, width, height)
 Ty_DEF_MACRO(wh, 4, n8, width, height)
+Ty_DEF_MACRO(xy, 1, u2, x, y)
 Ty_DEF_MACRO(xy, 2, u4, x, y)
 Ty_DEF_MACRO(xy, 4, n8, x, y)
+Ty_DEF_MACRO(rc, 1, u2, r, c)
 Ty_DEF_MACRO(rc, 2, u4, r, c)
 Ty_DEF_MACRO(rc, 4, n8, r, c)
+Ty_DEF_MACRO(hv, 1, u2, h, v)
 Ty_DEF_MACRO(hv, 2, u4, h, v)
 Ty_DEF_MACRO(hv, 4, n8, h, v)
+Ty_DEF_MACRO(lr, 1, u2, left, right)
 Ty_DEF_MACRO(lr, 2, u4, left, right)
 Ty_DEF_MACRO(lr, 4, n8, left, right)
+Ty_DEF_MACRO(pr, 1, u2,first, second)
 Ty_DEF_MACRO(pr, 2, u4,first, second)
 Ty_DEF_MACRO(pr, 4, n8, first, second)
+Ty_DEF_MACRO(tb, 1, u2, top, bottom)
 Ty_DEF_MACRO(tb, 2, u4, top, bottom)
 Ty_DEF_MACRO(tb, 4, n8, first, second)
 
+Tys_DEF_MACRO(wh, 1, u2, width, height)
 Tys_DEF_MACRO(wh, 2, u4, width, height)
 Tys_DEF_MACRO(wh, 4, n8, width, height)
+Tys_DEF_MACRO(xy, 1, u2, x, y)
 Tys_DEF_MACRO(xy, 2, u4, x, y)
 Tys_DEF_MACRO(xy, 4, n8, x, y)
+Tys_DEF_MACRO(rc, 1, u2, r, c)
 Tys_DEF_MACRO(rc, 2, u4, r, c)
 Tys_DEF_MACRO(rc, 4, n8, r, c)
+Tys_DEF_MACRO(hv, 1, u2, h, v)
 Tys_DEF_MACRO(hv, 2, u4, h, v)
 Tys_DEF_MACRO(hv, 4, n8, h, v)
+Tys_DEF_MACRO(lr, 1, u2, left, right)
 Tys_DEF_MACRO(lr, 2, u4, left, right)
 Tys_DEF_MACRO(lr, 4, n8, left, right)
+Tys_DEF_MACRO(pr, 1, u2, first, second)
 Tys_DEF_MACRO(pr, 2, u4, first, second)
 Tys_DEF_MACRO(pr, 4, n8, first, second)
+Tys_DEF_MACRO(tb, 1, u2, top, bottom)
 Tys_DEF_MACRO(tb, 2, u4, top, bottom)
 Tys_DEF_MACRO(tb, 4, n8, first, second)
 
@@ -73,18 +107,25 @@ struct Mod
 #define Mod_DEF_MACRO(ty) \
 template<> struct Mod<ty> { using Unsigned = ty##s; };
 
+Mod_DEF_MACRO(wh1)
 Mod_DEF_MACRO(wh2)
 Mod_DEF_MACRO(wh4)
+Mod_DEF_MACRO(xy1)
 Mod_DEF_MACRO(xy2)
 Mod_DEF_MACRO(xy4)
+Mod_DEF_MACRO(rc1)
 Mod_DEF_MACRO(rc2)
 Mod_DEF_MACRO(rc4)
+Mod_DEF_MACRO(hv1)
 Mod_DEF_MACRO(hv2)
 Mod_DEF_MACRO(hv4)
+Mod_DEF_MACRO(lr1)
 Mod_DEF_MACRO(lr2)
 Mod_DEF_MACRO(lr4)
+Mod_DEF_MACRO(pr1)
 Mod_DEF_MACRO(pr2)
 Mod_DEF_MACRO(pr4)
+Mod_DEF_MACRO(tb1)
 Mod_DEF_MACRO(tb2)
 Mod_DEF_MACRO(tb4)
 
@@ -93,8 +134,30 @@ class XCSD_TierBox;
 struct SDI_Position
 {
  rc2 tier;
- hv2 mid;
- xy2 ground;
+ hv1 mid;
+ hv2 mid_rep;
+ xy1 full_ground;
+
+ template<typename T>
+ friend T& operator<<(T& lhs, const SDI_Position& rhs)
+ {
+  lhs << "(" << rhs.tier << ", " << rhs.full_ground
+      << ": " << rhs.mid << "; " << rhs.mid_rep << ")";
+  return lhs;
+ }
+
+ void init_mid();
+ static void init_mid(u1 arg, u1& binary, u2& decimal);
+
+ xy1s get_mid1();
+ xy1s get_mid2();
+ xy1s get_ground();
+
+ static xy1s ternary_to_semi_balanced(xy1 xy)
+ {
+  return { xy.x == 3? (s1)-1:(s1)xy.x, xy.y == 3? (s1)-1:(s1)xy.y};
+ }
+
 };
 
 class XCSD_Image

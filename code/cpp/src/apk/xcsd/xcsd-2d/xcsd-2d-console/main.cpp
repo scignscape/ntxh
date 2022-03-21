@@ -41,9 +41,21 @@ int main(int argc , char **argv)
  xcsd.init_tier_counts();
  xcsd.init_tierboxes();
 
- rc2 rc = xcsd.get_tierbox_at_ground_position_RC2(4, 4);
+ //rc2 rc = xcsd.get_tierbox_at_ground_position_RC2(4, 4);
 
- qDebug() << "rc = " << rc;
+ //qDebug() << "rc = " << rc;
+
+ SDI_Position sdi = xcsd.get_sdi_at_ground_position(18, 19);
+
+ qDebug() << "sdi = " << sdi;
+
+ xy1s m1 = sdi.get_mid1();
+ xy1s m2 = sdi.get_mid2();
+ xy1s gr = sdi.get_ground();
+
+ qDebug() << "m1 = " << m1;
+ qDebug() << "m2 = " << m2;
+ qDebug() << "gr = " << gr;
 
  //XCSD_TierBox* trb = xcsd.get_tierbox_at_ground_position(4, 4);
 

@@ -24,10 +24,100 @@ XCSD_TierBox* XCSD_Image::get_tierbox_at_ground_position(u2 x, u2 y)
 
 }
 
+void SDI_Position::init_mid(u1 arg, u1& binary, u2& decimal)
+{
+ binary = 0; decimal = 3000;
+ u1 bin = 16, dec = 100, pow = 9;
+ for(u1 i = 0; i < 3; ++i)
+ {
+  u1 digit = arg / pow;
+  binary += digit * bin;
+  decimal += digit * dec;
+  arg %= pow;
+  pow /= 3;
+  dec /= 10;
+  bin /= 4;
+ }
+}
+
+void SDI_Position::init_mid()
+{
+ init_mid(full_ground.x, mid.h, mid_rep.h);
+ init_mid(full_ground.y, mid.v, mid_rep.v);
+}
+
+xy1s SDI_Position::get_mid1()
+{
+ xy1 xy = (mid._to<xy1>() >> 4) & 3;
+ //{(u1)((mid.h >> 4) & 3), (u1)((mid.v >> 4) & 3)};
+ return ternary_to_semi_balanced(xy);
+}
+
+xy1s SDI_Position::get_mid2()
+{
+ xy1 xy = (mid._to<xy1>() >> 2) & 3;
+  // xy1 xy = {(u1)((mid.h >> 2) & 3), (u1)((mid.v >> 2) & 3)};
+ return ternary_to_semi_balanced(xy);
+}
+
+xy1s SDI_Position::get_ground()
+{
+ xy1 xy = mid._to<xy1>() & 3;
+  // xy1 xy = {(u1)(mid.h & 3), (u1)(mid.v & 3)};
+ return ternary_to_semi_balanced(xy);
+}
+
+
 
 SDI_Position XCSD_Image::get_sdi_at_ground_position(u2 x, u2 y)
 {
+ SDI_Position result{ {0,0}, {0,0}, {0,0}, {0,0} };
 
+ s1 x_offset = -1, y_offset = -1;
+
+ if(horizontal_outer_sizes_.left > 0)
+ {
+  if(x < horizontal_outer_sizes_.left)
+  {
+   result.tier.r = 0;
+   x_offset = x;
+  }
+  else
+  {
+   result.tier.r = 1;
+   x -= horizontal_outer_sizes_.left;
+  }
+ }
+ if(x_offset == -1)
+   x_offset = x % 27;
+ result.full_ground.x = x_offset;
+
+ x /= 27;
+ result.tier.r += x;
+
+ if(vertical_outer_sizes_.top > 0)
+ {
+  if(y < vertical_outer_sizes_.top)
+  {
+   result.tier.c = 0;
+   y_offset = y;
+  }
+  else
+  {
+   result.tier.c = 1;
+   y -= vertical_outer_sizes_.top;
+  }
+ }
+ if(y_offset == -1)
+   y_offset = y % 27;
+ result.full_ground.y = y_offset;
+
+ y /= 27;
+ result.tier.c += y;
+
+ result.init_mid();
+
+ return result;
 }
 
 
