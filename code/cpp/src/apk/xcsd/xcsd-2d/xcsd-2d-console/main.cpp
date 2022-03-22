@@ -45,7 +45,11 @@ int main(int argc , char **argv)
 
  //qDebug() << "rc = " << rc;
 
- SDI_Position sdi = xcsd.get_sdi_at_ground_position(18, 19);
+// SDI_Position sdi = xcsd.get_sdi_at_ground_position(18, 19);
+
+ //SDI_Position sdi = sdi_octal(4, 0111, 5, 0222);
+
+ SDI_Position sdi = sdi_octal(4'0111_sdi, 5'0222_sdi);
 
  qDebug() << "sdi = " << sdi;
 
@@ -56,6 +60,10 @@ int main(int argc , char **argv)
  qDebug() << "m1 = " << m1;
  qDebug() << "m2 = " << m2;
  qDebug() << "gr = " << gr;
+
+
+// QVector<n8> pixels;
+// xcsd.get_pixels()
 
  //XCSD_TierBox* trb = xcsd.get_tierbox_at_ground_position(4, 4);
 
