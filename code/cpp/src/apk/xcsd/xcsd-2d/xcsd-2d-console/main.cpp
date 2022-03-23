@@ -48,8 +48,8 @@ int main(int argc , char **argv)
 // SDI_Position sdi = xcsd.get_sdi_at_ground_position(18, 19);
 
  //SDI_Position sdi = sdi_octal(4, 0111, 5, 0222);
-
- SDI_Position sdi = sdi_octal(4'0111_sdi, 5'0222_sdi);
+ //SDI_Position sdi = sdi_octal(4'0111_sdi, 5'0222_sdi);
+ SDI_Position sdi = 4'5'999_sd2;
 
  qDebug() << "sdi = " << sdi;
 

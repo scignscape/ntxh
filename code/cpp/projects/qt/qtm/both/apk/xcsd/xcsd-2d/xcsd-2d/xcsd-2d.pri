@@ -47,13 +47,19 @@ HEADERS += \
   $$SRC_DIR/mat2d.h \
   $$SRC_DIR/mat2d.templates.h \
   $$SRC_DIR/mat2d.templates.special-modes.h \
+  $$SRC_DIR/xcsd-sdi-structures.h \
   $$SRC_DIR/xcsd-image.h \
+  $$SRC_DIR/xcsd-image-geometry.h \
+  $$SRC_DIR/xcsd-image-data.h \
   $$SRC_DIR/xcsd-tierbox.h \
 
 
 SOURCES += \
   $$SRC_DIR/mat2d.cpp \
+  $$SRC_DIR/xcsd-sdi-structures.cpp \
   $$SRC_DIR/xcsd-image.cpp \
+  $$SRC_DIR/xcsd-image-geometry.cpp \
+  $$SRC_DIR/xcsd-image-data.cpp \
   $$SRC_DIR/xcsd-tierbox.cpp \
 
 
