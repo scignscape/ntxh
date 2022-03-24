@@ -64,9 +64,10 @@ inline constexpr u1 _ctz(int x)
 
 #define Tys_DEF_MACRO(ty, size, asize, field1, field2) \
 struct ty##size##s { s##size field1, field2; \
-   using field_type = u##size; \
+   using field_type = s##size; \
    template<typename T> friend T& operator<<(T& lhs, const ty##size##s& rhs) \
    { lhs << "(" << rhs.field1 << ", " << rhs.field2 << ")"; return lhs; } \
+   bool is_nonnegative() { return field1 >= 0 && field2 >= 0; } \
    template<typename T> ty##size##s operator<<(T val) \
    { return {field1 << val, field2 << val}; } \
    template<typename T> ty##size##s operator>>(T val) \
@@ -143,6 +144,90 @@ Tys_DEF_MACRO(tb, 1, u2, top, bottom)
 Tys_DEF_MACRO(tb, 2, u4, top, bottom)
 Tys_DEF_MACRO(tb, 4, n8, first, second)
 
+
+
+#define Ty3_DEF_MACRO(ty, ty2, size, asize, field1, field2, field3) \
+ struct ty##size { u##size field1, field2, field3; \
+   using field_type = u##size; \
+   template<typename T> friend T& operator<<(T& lhs, const ty##size& rhs) \
+   { lhs << "(" << rhs.field1 << ", " << rhs.field2 << ", " << rhs.field3 << ")"; return lhs; } \
+   ty2##size fold_in() { return {field1, field3}; } \
+   template<typename T> ty##size operator<<(T val) \
+   { return {field1 << val, field2 << val, field3 << val}; } \
+   template<typename T> ty##size operator>>(T val) \
+   { return {field1 >> val, field2 >> val, field3 >> val}; } \
+   template<typename T> ty##size operator&(T val) \
+   { return {field1 & val, field2 & val, field3 & val}; } \
+   template<typename T> ty##size operator*(T val) \
+   { return {field1 * val, field2 * val, field3 * val}; } \
+   template<typename T> ty##size operator+(T val) \
+   { return {field1 + val, field2 + val, field3 + val}; } \
+   ty##size operator+(ty##size rhs) \
+   { return {(u##size)(field1 + rhs.field1), (u##size)(field2 + rhs.field2), (u##size)(field3 + rhs.field3)}; } \
+   ty##size operator-(ty##size rhs) \
+   { return {(u##size)(field1 - rhs.field1), (u##size)(field2 - rhs.field2), (u##size)(field3 - rhs.field3)}; } \
+   ty##size operator*(ty##size rhs) \
+   { return {(u##size)(field1 * rhs.field1), (u##size)(field2 * rhs.field2), (u##size)(field3 * rhs.field3)}; } \
+   ty##size operator/(ty##size rhs) \
+   { return {(u##size)(field1 / rhs.field1), (u##size)(field2 / rhs.field2), (u##size)(field3 / rhs.field3)}; } \
+   ty##size operator%(ty##size rhs) \
+   { return {(u##size)(field1 % rhs.field1), (u##size)(field2 % rhs.field2), (u##size)(field3 % rhs.field3)}; } \
+   template<typename T> ty##size operator||(T val) \
+   { return {field1 < val? field1 : val, field2 < val? field2 : val, field3 < val? field3 : val}; } \
+   template<typename T> ty##size operator&&(T val) \
+   { return {(field1 & val) >> _ctz(val), (field2 & val) >> _ctz(val), (field3 & val) >> _ctz(val)}; } \
+   template<typename T> T _to() \
+   { return {(typename T::field_type)field1, (typename T::field_type)field2, (typename T::field_type)field3}; } \
+   asize product() {return field1 * field2 * field3;} };
+
+#define Ty3s_DEF_MACRO(ty, ty2, size, asize, field1, field2, field3) \
+struct ty##size##s { s##size field1, field2, field3; \
+   using field_type = s##size; \
+   template<typename T> friend T& operator<<(T& lhs, const ty##size##s& rhs) \
+   { lhs << "(" << rhs.field1 << ", " << rhs.field2 << ", " << rhs.field3 << ")"; return lhs; } \
+   ty2##size##s fold_in() { return {field1, field3}; } \
+   bool is_nonnegative() { return field1 >= 0 && field2 >= 0 && field3 >= 0; } \
+   template<typename T> ty##size##s operator<<(T val) \
+   { return {field1 << val, field2 << val, field3 << val}; } \
+   template<typename T> ty##size##s operator>>(T val) \
+   { return {field1 >> val, field2 >> val, field3 >> val}; } \
+   template<typename T> ty##size##s operator&(T val) \
+   { return {field1 & val, field2 & val, field3 & val}; } \
+   template<typename T> ty##size##s operator*(T val) \
+   { return {field1 * val, field2 * val, field3 * val}; } \
+   template<typename T> ty##size##s operator+(T val) \
+   { return {field1 + val, field2 + val, field3 + val}; } \
+   ty##size##s operator+(ty##size##s rhs) \
+   { return {(s##size)(field1 + rhs.field1), (s##size)(field2 + rhs.field2), (s##size)(field3 + rhs.field3)}; } \
+   ty##size##s operator-(ty##size##s rhs) \
+   { return {(s##size)(field1 - rhs.field1), (s##size)(field2 - rhs.field2), (s##size)(field3 - rhs.field3)}; } \
+   ty##size##s operator*(ty##size##s rhs) \
+   { return {(s##size)(field1 * rhs.field1), (s##size)(field2 * rhs.field2), (s##size)(field3 * rhs.field3)}; } \
+   ty##size##s operator/(ty##size##s rhs) \
+   { return {(s##size)(field1 / rhs.field1), (s##size)(field2 / rhs.field2), (s##size)(field3 / rhs.field3)}; } \
+   ty##size##s operator%(ty##size##s rhs) \
+   { return {(s##size)(field1 % rhs.field1), (s##size)(field2 % rhs.field2), (s##size)(field3 % rhs.field3)}; } \
+   template<typename T> ty##size##s operator||(T val) \
+   { return {field1 < val? field1 : val, field2 < val? field2 : val, field3 < val? field3 : val}; } \
+   template<typename T> T _to() \
+   { return {(typename T::field_type)field1, (typename T::field_type)field2}; } \
+   asize product() {return std::abs(field1 * field2 * field3);} };
+
+Ty3_DEF_MACRO(lmr, lr, 1, u2, left, main, right)
+Ty3_DEF_MACRO(lmr, lr, 2, u4, left, main, right)
+Ty3_DEF_MACRO(lmr, lr, 4, n8, left, main, right)
+
+Ty3_DEF_MACRO(tmb, tb, 1, u2, top, main, bottom)
+Ty3_DEF_MACRO(tmb, tb, 2, u4, top, main, bottom)
+Ty3_DEF_MACRO(tmb, tb, 4, n8, top, main, bottom)
+
+Ty3s_DEF_MACRO(lmr, lr, 1, u2, left, main, right)
+Ty3s_DEF_MACRO(lmr, lr, 2, u4, left, main, right)
+Ty3s_DEF_MACRO(lmr, lr, 4, n8, left, main, right)
+
+Ty3s_DEF_MACRO(tmb, tb, 1, u2, top, main, bottom)
+Ty3s_DEF_MACRO(tmb, tb, 2, u4, top, main, bottom)
+Ty3s_DEF_MACRO(tmb, tb, 4, n8, top, main, bottom)
 
 inline u2 _ring_count(rc2 pos, wh2 size)
 {

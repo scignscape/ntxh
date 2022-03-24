@@ -156,8 +156,10 @@ void XCSD_Image::init_tierboxes()
 // }
 }
 
-void XCSD_Image::init_tier_counts()
+void XCSD_Image::init_tier_counts(XCSD_Image_Geometry::TierGrid_Preferances pref)
 {
+ geometry_.init_tier_counts(pref);
+
 // u2 w = image_.width();
 // u2 h = image_.height();
 

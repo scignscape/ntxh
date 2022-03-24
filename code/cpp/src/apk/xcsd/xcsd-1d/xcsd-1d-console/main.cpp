@@ -786,7 +786,7 @@ void test9()
 
 void test10()
 {
- Arr1d<int> a1d(4);
+ Arr1d<int> a1d({4});
 
  a1d.set_default <= defzfn(int);
 

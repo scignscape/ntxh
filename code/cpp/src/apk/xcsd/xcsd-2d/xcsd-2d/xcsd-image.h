@@ -58,7 +58,8 @@ public:
   return {(u2)image_.width(), (u2)image_.height()};
  }
 
- void init_tier_counts();
+ void init_tier_counts(XCSD_Image_Geometry::TierGrid_Preferances pref);
+
  void init_tierboxes();
 
  void get_255_palatte(QVector<QColor>& vec);

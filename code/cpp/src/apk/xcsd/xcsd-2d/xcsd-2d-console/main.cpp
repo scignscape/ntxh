@@ -18,8 +18,31 @@
 USING_XCNS(XCSD)
 
 
-
 int main(int argc , char **argv)
+{
+ XCSD_Image_Geometry xcsg;
+
+// xcsg.set_total_size(54, 108);
+ xcsg.set_total_size(160, 90);
+
+ xcsg.init_tier_counts(XCSD_Image_Geometry::TierGrid_Preferances::Minimize_Outer_Tiers);
+
+ qDebug() << "full = " << xcsg.full_tier_counts();
+ qDebug() << "overall = " << xcsg.overall_tier_counts();
+
+ qDebug() << "outer h = " << xcsg.horizontal_outer_sizes();
+ qDebug() << "outer v = " << xcsg.vertical_outer_sizes();
+
+ TierBox_Location tbl = xcsg.get_tierbox_location_from_ground_position(35, 35);
+
+ qDebug() << "tbl = " << tbl.rc();
+
+
+ return 0;
+}
+
+
+int main3(int argc , char **argv)
 {
  //Mat2d<Vec1d<int>> mat;
 
@@ -38,8 +61,8 @@ int main(int argc , char **argv)
  //xcsd.image().setText("test", "result");
  // qDebug() << "image = " << xcsd.image().text();
 
- xcsd.init_tier_counts();
- xcsd.init_tierboxes();
+// xcsd.init_tier_counts();
+// xcsd.init_tierboxes();
 
  //rc2 rc = xcsd.get_tierbox_at_ground_position_RC2(4, 4);
 

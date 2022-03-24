@@ -26,6 +26,10 @@
  { \
   return (u1) lhs ^ (u1) rhs; \
  } \
+ f u1 operator>>(e lhs, u1 rhs) \
+ { \
+  return (u1) lhs >> (u1) rhs; \
+ } \
  f e operator^=(e& lhs, e rhs) \
  { \
   return lhs = (e) (lhs ^ rhs); \
@@ -37,6 +41,10 @@
  f u1 operator&(e lhs, e rhs) \
  { \
   return (u1) lhs & (u1) rhs; \
+ } \
+ f u1 operator&(e lhs, u1 rhs) \
+ { \
+  return (u1) lhs & rhs; \
  } \
 
  #define ENUM_FLAGS_OP_MACROS(e) ENUM_FLAGS_OP_MACROS_(e, friend constexpr)
