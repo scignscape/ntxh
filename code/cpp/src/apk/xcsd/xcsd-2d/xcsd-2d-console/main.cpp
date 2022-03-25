@@ -1,4 +1,10 @@
 
+//           Copyright Nathaniel Christen 2019.
+//  Distributed under the Boost Software License, Version 1.0.
+//     (See accompanying file LICENSE_1_0.txt or copy at
+//           http://www.boost.org/LICENSE_1_0.txt)
+
+
 #include "xcsd-2d/mat2d.h"
 
 #include "xcsd-2d/mat2d.templates.h"
@@ -20,6 +26,8 @@ USING_XCNS(XCSD)
 
 int main(int argc , char **argv)
 {
+ QGuiApplication app(argc, argv);
+
  XCSD_Image_Geometry xcsg;
 
 // xcsg.set_total_size(54, 108);
@@ -27,16 +35,21 @@ int main(int argc , char **argv)
 
  xcsg.init_tier_counts(XCSD_Image_Geometry::TierGrid_Preferances::Minimize_Outer_Tiers);
 
- qDebug() << "full = " << xcsg.full_tier_counts();
- qDebug() << "overall = " << xcsg.overall_tier_counts();
+ xcsg.draw_tier_summary(ROOT_FOLDER "/../tiers/t1.png");
 
- qDebug() << "outer h = " << xcsg.horizontal_outer_sizes();
- qDebug() << "outer v = " << xcsg.vertical_outer_sizes();
+// qDebug() << "full = " << xcsg.full_tier_counts();
+// qDebug() << "overall = " << xcsg.overall_tier_counts();
 
- TierBox_Location tbl = xcsg.get_tierbox_location_from_ground_position(35, 35);
+// qDebug() << "outer h = " << xcsg.horizontal_outer_sizes();
+// qDebug() << "outer v = " << xcsg.vertical_outer_sizes();
 
- qDebug() << "tbl = " << tbl.rc();
+// TierBox_Location tbl = xcsg.get_tierbox_location_from_ground_position(80, 60);
 
+// qDebug() << "tbl = " << tbl.rc();
+
+// xcsg.calculate_tier_ring(tbl);
+
+// qDebug() << "ring = " << tbl.tier_ring();
 
  return 0;
 }

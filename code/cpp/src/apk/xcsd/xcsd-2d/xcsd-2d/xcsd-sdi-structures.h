@@ -44,6 +44,14 @@ inline constexpr u1 _ctz(int x)
    { return {field1 * val, field2 * val}; } \
    template<typename T> ty##size operator+(T val) \
    { return {field1 + val, field2 + val}; } \
+   ty##size plus(ty##size rhs) \
+   { return {(u##size)(field1 + rhs.field1), (u##size)(field2 + rhs.field2)}; } \
+   template<typename T> ty##size plus(T vals) \
+   { return plus(vals.template _to<ty##size>()); } \
+   ty##size add(ty##size rhs) \
+   { *this = {(u##size)(field1 + rhs.field1), (u##size)(field2 + rhs.field2)}; return *this;} \
+   template<typename T> ty##size add(T vals) \
+   { return add(vals.template _to<ty##size>()); } \
    ty##size operator+(ty##size rhs) \
    { return {(u##size)(field1 + rhs.field1), (u##size)(field2 + rhs.field2)}; } \
    ty##size operator-(ty##size rhs) \
@@ -60,6 +68,10 @@ inline constexpr u1 _ctz(int x)
    { return {(field1 & val) >> _ctz(val), (field2 & val) >> _ctz(val)}; } \
    template<typename T> T _to() \
    { return {(typename T::field_type)field1, (typename T::field_type)field2}; } \
+   ty##size _transposed() \
+   { return {field2, field1}; } \
+   template<typename T> T _transposed_to() \
+   { return _transposed()._to<T>(); } \
    asize area() {return field1 * field2;} };
 
 #define Tys_DEF_MACRO(ty, size, asize, field1, field2) \
@@ -76,7 +88,7 @@ struct ty##size##s { s##size field1, field2; \
    { return {field1 & val, field2 & val}; } \
    template<typename T> ty##size##s operator*(T val) \
    { return {field1 * val, field2 * val}; } \
-   template<typename T> ty##size##s operator+(T val) \
+   template<typename T, typename T1> ty##size##s operator+(T val) \
    { return {field1 + val, field2 + val}; } \
    ty##size##s operator+(ty##size##s rhs) \
    { return {(s##size)(field1 + rhs.field1), (s##size)(field2 + rhs.field2)}; } \
@@ -88,10 +100,22 @@ struct ty##size##s { s##size field1, field2; \
    { return {(s##size)(field1 / rhs.field1), (s##size)(field2 / rhs.field2)}; } \
    ty##size##s operator%(ty##size##s rhs) \
    { return {(s##size)(field1 % rhs.field1), (s##size)(field2 % rhs.field2)}; } \
+   ty##size##s plus(ty##size##s rhs) \
+   { return {(s##size)(field1 + rhs.field1), (s##size)(field2 + rhs.field2)}; } \
+   template<typename T> ty##size##s plus(T vals) \
+   { return plus(vals.template _to<ty##size##s>()); } \
+   ty##size##s add(ty##size##s rhs) \
+   { *this = {(s##size)(field1 + rhs.field1), (s##size)(field2 + rhs.field2)}; return *this;} \
+   template<typename T> ty##size##s add(T vals) \
+   { return add(vals.template _to<ty##size##s>()); } \
    template<typename T> ty##size##s operator||(T val) \
    { return {field1 < val? field1 : val, field2 < val? field2 : val}; } \
    template<typename T> T _to() \
    { return {(typename T::field_type)field1, (typename T::field_type)field2}; } \
+   ty##size##s _transposed() \
+   { return {field2, field1}; } \
+   template<typename T> T _transposed_to() \
+   { return _transposed()._to<T>(); } \
    asize area() {return field1 * field2;} };
 
 Ty_DEF_MACRO(wh, 1, u2, width, height)
@@ -112,6 +136,12 @@ Ty_DEF_MACRO(hv, 4, n8, h, v)
 Ty_DEF_MACRO(lr, 1, u2, left, right)
 Ty_DEF_MACRO(lr, 2, u4, left, right)
 Ty_DEF_MACRO(lr, 4, n8, left, right)
+Ty_DEF_MACRO(lt, 1, u2, left, top)
+Ty_DEF_MACRO(lt, 2, u4, left, top)
+Ty_DEF_MACRO(lt, 4, n8, left, top)
+Ty_DEF_MACRO(tl, 1, u2, top, left)
+Ty_DEF_MACRO(tl, 2, u4, top, left)
+Ty_DEF_MACRO(tl, 4, n8, top, left)
 Ty_DEF_MACRO(pr, 1, u2,first, second)
 Ty_DEF_MACRO(pr, 2, u4,first, second)
 Ty_DEF_MACRO(pr, 4, n8, first, second)
@@ -137,6 +167,12 @@ Tys_DEF_MACRO(hv, 4, n8, h, v)
 Tys_DEF_MACRO(lr, 1, u2, left, right)
 Tys_DEF_MACRO(lr, 2, u4, left, right)
 Tys_DEF_MACRO(lr, 4, n8, left, right)
+Tys_DEF_MACRO(lt, 1, u2, left, top)
+Tys_DEF_MACRO(lt, 2, u4, left, top)
+Tys_DEF_MACRO(lt, 4, n8, left, top)
+Tys_DEF_MACRO(tl, 1, u2, top, left)
+Tys_DEF_MACRO(tl, 2, u4, top, left)
+Tys_DEF_MACRO(tl, 4, n8, top, left)
 Tys_DEF_MACRO(pr, 1, u2, first, second)
 Tys_DEF_MACRO(pr, 2, u4, first, second)
 Tys_DEF_MACRO(pr, 4, n8, first, second)
@@ -266,6 +302,12 @@ Mod_DEF_MACRO(hv4)
 Mod_DEF_MACRO(lr1)
 Mod_DEF_MACRO(lr2)
 Mod_DEF_MACRO(lr4)
+Mod_DEF_MACRO(lt1)
+Mod_DEF_MACRO(lt2)
+Mod_DEF_MACRO(lt4)
+Mod_DEF_MACRO(tl1)
+Mod_DEF_MACRO(tl2)
+Mod_DEF_MACRO(tl4)
 Mod_DEF_MACRO(pr1)
 Mod_DEF_MACRO(pr2)
 Mod_DEF_MACRO(pr4)

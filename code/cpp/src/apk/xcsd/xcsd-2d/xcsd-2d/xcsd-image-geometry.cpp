@@ -1,7 +1,15 @@
 
+//           Copyright Nathaniel Christen 2019.
+//  Distributed under the Boost Software License, Version 1.0.
+//     (See accompanying file LICENSE_1_0.txt or copy at
+//           http://www.boost.org/LICENSE_1_0.txt)
+
+
 #include "xcsd-image-geometry.h"
 
 #include "xcsd-tierbox.h"
+
+#include <QPainter>
 
 USING_XCNS(XCSD)
 
@@ -15,6 +23,34 @@ XCSD_Image_Geometry::XCSD_Image_Geometry()
 {
 
 }
+
+void XCSD_Image_Geometry::_calculate_tier_ring_Full(TierBox_Location& tbl)
+{
+ u2 distance_from_edge = std::max({(u2) tbl.r(),
+   (u2) tbl.c(), (u2) (full_tier_counts_.height - tbl.r() - 1),
+   (u2) (full_tier_counts_.width - tbl.c() - 1)});
+
+ u1 tier_ring = 0;
+
+ if(distance_from_edge == tbl.c())
+   tier_ring = (full_tier_counts_.width / 2) - distance_from_edge;
+ else if(distance_from_edge == tbl.r())
+   tier_ring = (full_tier_counts_.height / 2) - distance_from_edge;
+ else if(distance_from_edge == full_tier_counts_.height - tbl.r() - 1)
+   tier_ring = distance_from_edge - (full_tier_counts_.width / 2);
+ else
+   tier_ring = distance_from_edge - (full_tier_counts_.height / 2);
+
+ tbl.set_tier_ring(tier_ring);
+}
+
+
+void XCSD_Image_Geometry::calculate_tier_ring(TierBox_Location& tbl)
+{
+ if(tbl.is_full_tier())
+   _calculate_tier_ring_Full(tbl);
+}
+
 
 TierBox_Location XCSD_Image_Geometry::get_tierbox_location_from_ground_position(u2 x, u2 y)
 {
@@ -142,6 +178,89 @@ void XCSD_Image_Geometry::reconcile_overall_tier_counts()
  if(vertical_outer_sizes_.top > 0)
    ++overall_tier_counts_.height;
 }
+
+void XCSD_Image_Geometry::for_each_horizontal_gridline(std::function<void(Gridline&)> fn)
+{
+ u1 offset = horizontal_outer_sizes_.left;
+ for(u2 i = 0; i <= full_tier_counts_.width; ++i)
+ {
+  Gridline gl {HVD_Options::Horizontal, i, (u2)(i * tierbox_width + offset)};
+  fn(gl);
+ }
+}
+
+void XCSD_Image_Geometry::for_each_vertical_gridline(std::function<void(Gridline&)> fn)
+{
+ u1 offset = vertical_outer_sizes_.top;
+ for(u2 i = 0; i <= full_tier_counts_.height; ++i)
+ {
+  Gridline gl {HVD_Options::Vertical, i, (u2)(i * tierbox_width + offset)};
+  fn(gl);
+ }
+}
+
+void XCSD_Image_Geometry::for_each_full_tierbox(std::function<void(Grid_TierBox&)> fn)
+{
+// u1 offset = vertical_outer_sizes_.top;
+ tl2 tl{vertical_outer_sizes_.top, horizontal_outer_sizes_.left};
+// u4 area = full_tier_counts_.area();
+
+ tl2 offsets = tl || 1;
+ for(u2 r = 0; r <= full_tier_counts_.height; ++r)
+ {
+  for(u2 c = 0; c <= full_tier_counts_.width; ++c)
+  {
+   rc2 rc{r, c};
+   rc.add(offsets);
+   TierBox_Location tbl(rc._to<rc2s>());
+   calculate_tier_ring(tbl);
+   Grid_TierBox gtb({tbl, ((rc * tierbox_width).plus(tl))._transposed_to<xy2>()});
+   fn(gtb);
+  }
+ }
+}
+
+
+void XCSD_Image_Geometry::draw_tier_summary(QString path)
+{
+ u1 mag = 4;
+ wh2 summary_image_size = total_size_ * mag;
+ QImage image(summary_image_size.width, summary_image_size.height, QImage::Format_Mono);
+ image.fill(1);
+
+ QPainter painter;
+ painter.begin(&image);
+
+ for_each_horizontal_gridline([&painter, &summary_image_size, mag](Gridline& gl)
+ {
+  painter.drawLine(0, gl.ground_index * mag,
+    summary_image_size.width, gl.ground_index * mag);
+ });
+
+ for_each_vertical_gridline([&painter, &summary_image_size, mag](Gridline& gl)
+ {
+  painter.drawLine(gl.ground_index * mag, 0,
+    gl.ground_index * mag, summary_image_size.height);
+ });
+
+ for_each_full_tierbox([&painter, mag](Grid_TierBox& gtb)
+ {
+  xy2 xy = gtb.ground_center * mag;
+  QString str = QString("%1,%2")//:%3")
+    .arg(gtb.loc.r()).arg(gtb.loc.c())
+    //.arg((s1)gtb.loc.tier_ring())
+    ;
+  painter.drawText(xy.x, xy.y, str);
+  //qDebug() << "xy = " << xy << " str = " << str;
+  });
+
+ painter.end();
+
+ image.save(path);
+}
+
+
+
 
 void XCSD_Image_Geometry::init_tier_counts(TierGrid_Preferances pref)
 {

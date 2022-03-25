@@ -44,6 +44,12 @@ class XCSD_Image_Geometry
 {
 public:
 
+ enum class HVD_Options {  Horizontal, Vertical, Diagonal,
+   Horizontal_Positive, Horizontal_Negative,
+   Vertical_Positive, Vertical_Negative,
+   Diagonal_0, Diagonal_1, Diagonal_2, Diagonal_3
+          };
+
  enum class TierGrid_Preferances {
    N_A = 0,
    Even_H = 1,
@@ -62,6 +68,16 @@ public:
 
  ENUM_FLAGS_OP_MACROS(TierGrid_Preferances)
 
+ struct Gridline {
+  HVD_Options hvd;
+  u2 tier_index;
+  u2 ground_index;
+ };
+
+ struct Grid_TierBox {
+   TierBox_Location loc;
+   xy2 ground_center;
+ };
 
 private:
 
@@ -91,7 +107,14 @@ public:
 
  static constexpr u1 tierbox_width = 27;
 
+ void for_each_horizontal_gridline(std::function<void(Gridline&)> fn);
+ void for_each_vertical_gridline(std::function<void(Gridline&)> fn);
+ void for_each_full_tierbox(std::function<void(Grid_TierBox&)> fn);
+
  TierBox_Location get_tierbox_location_from_ground_position(u2 x, u2 y);
+
+ void calculate_tier_ring(TierBox_Location& tbl);
+ void _calculate_tier_ring_Full(TierBox_Location& tbl);
 
  void set_total_size(u2 w, u2 h)
  {
@@ -108,6 +131,7 @@ public:
  void init_tier_counts(TierGrid_Preferances pref);
  void init_tierboxes();
 
+ void draw_tier_summary(QString path);
 
 
 };
