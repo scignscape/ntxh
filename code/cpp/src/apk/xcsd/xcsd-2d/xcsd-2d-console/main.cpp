@@ -35,7 +35,7 @@ int main(int argc , char **argv)
 
  xcsg.init_tier_counts(XCSD_Image_Geometry::TierGrid_Preferances::Minimize_Outer_Tiers);
 
- xcsg.draw_tier_summary(ROOT_FOLDER "/../tiers/t1.png");
+ xcsg.draw_tier_summary(ROOT_FOLDER "/../tiers/t1.png", 3);
 
 // qDebug() << "full = " << xcsg.full_tier_counts();
 // qDebug() << "overall = " << xcsg.overall_tier_counts();

@@ -14,20 +14,28 @@
 
 #include "enum-macros.h"
 
+#include <vector>
+
 
 XCNS_(XCSD)
 
 class TierBox_Location
 {
  rc2s rc_;
- u1 tier_ring_;
+ //u1 tier_ring_;
+ u4 mch_code_;
 
 public:
 
- explicit TierBox_Location(rc2s rc) : rc_(rc), tier_ring_(0) {}
+ explicit TierBox_Location(rc2s rc) : rc_(rc), mch_code_(0) {}
 
- ACCESSORS(u1 ,tier_ring)
+ ACCESSORS(u4 ,mch_code)
  ACCESSORS(rc2s ,rc)
+
+ void set_mch_code(pr2s mch);
+ pr2s get_mch_code();
+
+ pr2s mch_distance_from(const TierBox_Location& rhs);
 
  s2 r() { return rc_.r; }
  s2 c() { return rc_.c; }
@@ -63,7 +71,12 @@ public:
    Maximize_Outer_Tiers = 68,
    Minimize_Outer_Tiers_H = 8,
    Minimize_Outer_Tiers_V = 128,
-   Minimize_Outer_Tiers = 136
+   Minimize_Outer_Tiers = 136,
+
+   Even_H_Even_V = Even_H | Even_V,
+   Even_H_Odd_V = Even_H | Odd_V,
+   Odd_H_Even_V = Odd_H | Even_V,
+   Odd_H_Odd_V = Odd_V | Odd_H,
  };
 
  ENUM_FLAGS_OP_MACROS(TierGrid_Preferances)
@@ -77,6 +90,10 @@ public:
  struct Grid_TierBox {
    TierBox_Location loc;
    xy2 ground_center;
+   xy2 top_left();
+   xy2 top_right();
+   xy2 bottom_left();
+   xy2 bottom_right();
  };
 
 private:
@@ -93,7 +110,11 @@ private:
 
  TierGrid_Preferances actual_tiergrid_setting_;
 
+ std::vector<TierBox_Location> directed_centers_;
+
  void reconcile_overall_tier_counts();
+ void reconcile_actual_tiergrid_setting();
+ void init_directed_centers();
 
 public:
 
@@ -105,6 +126,8 @@ public:
  ACCESSORS(lr2 ,horizontal_outer_sizes)
  ACCESSORS(tb2 ,vertical_outer_sizes)
 
+ std::vector<TierBox_Location> get_directed_centers();
+
  static constexpr u1 tierbox_width = 27;
 
  void for_each_horizontal_gridline(std::function<void(Gridline&)> fn);
@@ -113,8 +136,10 @@ public:
 
  TierBox_Location get_tierbox_location_from_ground_position(u2 x, u2 y);
 
- void calculate_tier_ring(TierBox_Location& tbl);
- void _calculate_tier_ring_Full(TierBox_Location& tbl);
+ TierBox_Location get_directed_center(TierBox_Location& tbl);
+
+ void calculate_mch_code(TierBox_Location& tbl);
+ void _calculate_mch_code_Full(TierBox_Location& tbl);
 
  void set_total_size(u2 w, u2 h)
  {
@@ -131,7 +156,7 @@ public:
  void init_tier_counts(TierGrid_Preferances pref);
  void init_tierboxes();
 
- void draw_tier_summary(QString path);
+ void draw_tier_summary(QString path, u1 magnification);
 
 
 };
