@@ -34,6 +34,10 @@ public:
 
  void set_mch_code(pr2s mch);
  pr2s get_mch_code();
+ prr2 get_mch_code_normalized();
+
+ u1 get_mch_clock_code();
+ static u1 get_mch_clock_code(pr2s pr);
 
  pr2s mch_distance_from(const TierBox_Location& rhs);
 
@@ -156,7 +160,7 @@ public:
  void init_tier_counts(TierGrid_Preferances pref);
  void init_tierboxes();
 
- void draw_tier_summary(QString path, u1 magnification);
+ void draw_tier_summary(QString path, r8 magnification, u1 circle_radius);
 
 
 };

@@ -31,17 +31,19 @@ int main(int argc , char **argv)
  XCSD_Image_Geometry xcsg;
 
 // xcsg.set_total_size(54, 108);
- xcsg.set_total_size(160, 90);
+// xcsg.set_total_size(160, 90);
+
+ xcsg.set_total_size(304, 194);
 
  xcsg.init_tier_counts(XCSD_Image_Geometry::TierGrid_Preferances::Minimize_Outer_Tiers);
 
- xcsg.draw_tier_summary(ROOT_FOLDER "/../tiers/t1.png", 3);
+ xcsg.draw_tier_summary(ROOT_FOLDER "/../tiers/t1.png", 2.5, 4);
 
-// qDebug() << "full = " << xcsg.full_tier_counts();
-// qDebug() << "overall = " << xcsg.overall_tier_counts();
+ qDebug() << "full = " << xcsg.full_tier_counts();
+ qDebug() << "overall = " << xcsg.overall_tier_counts();
 
-// qDebug() << "outer h = " << xcsg.horizontal_outer_sizes();
-// qDebug() << "outer v = " << xcsg.vertical_outer_sizes();
+ qDebug() << "outer h = " << xcsg.horizontal_outer_sizes();
+ qDebug() << "outer v = " << xcsg.vertical_outer_sizes();
 
 // TierBox_Location tbl = xcsg.get_tierbox_location_from_ground_position(80, 60);
 
@@ -96,6 +98,7 @@ int main3(int argc , char **argv)
  qDebug() << "m1 = " << m1;
  qDebug() << "m2 = " << m2;
  qDebug() << "gr = " << gr;
+
 
 
 // QVector<n8> pixels;

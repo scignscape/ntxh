@@ -30,15 +30,17 @@ XCSD_Image_Geometry::XCSD_Image_Geometry()
 
 pr2s TierBox_Location::mch_distance_from(const TierBox_Location& rhs)
 {
- rc2s raw = rhs.rc_.minus(rc_);
- pr2s raw_sp = rhs.rc_.spaceship_mask()._to<pr2s>();
+ rc2s raw = rc_.minus(rhs.rc_);
+ pr2s raw_sp = raw.spaceship_mask()._to<pr2s>();
  rc2 raw_abs = raw.abs();
  pr2 chebychev = raw_abs.lesser_which()._to<pr2>();
  u2 manhattan = raw_abs.inner_sum();
  pr2s result = {(s2)manhattan, (s2)(manhattan - chebychev.first)};
  result.multiply(raw_sp);
- if(chebychev.second == 1)
-   result.transpose();
+ if(chebychev.second == 0 && !raw.has_zero())
+   result._Transpose();
+// if(chebychev.second == 0 && !raw.is_coequal())
+//   result._Transpose();
  return result;
 }
 
@@ -66,7 +68,7 @@ void XCSD_Image_Geometry::_calculate_mch_code_Full(TierBox_Location& tbl)
 
 void XCSD_Image_Geometry::init_directed_centers()
 {
- rc2s first = (full_tier_counts_/2).transposed()._to<rc2s>();
+ rc2s first = (full_tier_counts_/2)._transposed()._to<rc2s>();
  std::deque<rc2s> deq {{first}};
  //directed_centers_.push_back(TierBox_Location(first));
  switch (actual_tiergrid_setting_)
@@ -109,6 +111,26 @@ TierBox_Location XCSD_Image_Geometry::get_directed_center(TierBox_Location& tbl)
  case TierGrid_Preferances::Odd_H_Odd_V:
    // // simplest case because there's only one center
   return directed_centers_[0];
+
+ case TierGrid_Preferances::Odd_H_Even_V:
+  if(tbl.r() < (full_tier_counts_.height / 2))
+    return directed_centers_[0];
+  return directed_centers_[1];
+
+ case TierGrid_Preferances::Even_H_Odd_V:
+  if(tbl.r() < (full_tier_counts_.width / 2))
+    return directed_centers_[0];
+  return directed_centers_[1];
+
+ case TierGrid_Preferances::Even_H_Even_V:
+  if(tbl.rc() < (full_tier_counts_ / 2)._transposed())
+    return directed_centers_[0];
+  if(tbl.rc() > (full_tier_counts_ / 2)._transposed())
+    return directed_centers_[3];
+  if(tbl.r() < (full_tier_counts_.width / 2))
+    return directed_centers_[1];
+  return directed_centers_[2];
+
  default: break;
  }
 }
@@ -326,6 +348,16 @@ void XCSD_Image_Geometry::for_each_full_tierbox(std::function<void(Grid_TierBox&
 void TierBox_Location::set_mch_code(pr2s mch)
 {
  mch_code_ = mch.binary_merge();
+
+//   (u4)mch.first << 16;
+////  (((u4)mch.first << (16)) | (u4)mch.second);
+
+// mch_code_ |= (u4)(u2)mch.second;
+
+// s2 mc = (s2)(u2)(mch_code_ >> 16);
+// s2 mc1 = (mch_code_ & ~(u2)0);
+
+// s2 tt = mc - mc1;
 }
 
 pr2s TierBox_Location::get_mch_code()
@@ -333,15 +365,78 @@ pr2s TierBox_Location::get_mch_code()
  return {(s2)(mch_code_ >> 16), (s2)(mch_code_ & ~(u2)0)};
 }
 
+u1 TierBox_Location::get_mch_clock_code(pr2s pr)
+{
+ if(pr.has_zero())
+ {
+  qDebug() << "pr = " << pr;
+ }
 
-void XCSD_Image_Geometry::draw_tier_summary(QString path, u1 magnification)
+ if(pr.is_zeros())
+   return 0;
+
+ u1 mask = 0;
+
+ pr2 abs = pr.abs();
+
+ if(abs.is_ascending())
+ {
+  mask |= 4;
+  pr._Transpose();
+  abs._Transpose();
+ }
+ if(pr.first < 0)
+   mask |= 2;
+ if(pr.second < 0)
+   mask |= 1;
+
+// return mask;
+
+ // //  6 -> 16  2 -> 4  4 -> 8  0 -> 12
+ static u1 cycle_ortho[4] = {12, 4, 8, 16};
+
+ if(pr.second == 0)
+ {
+  return cycle_ortho[mask / 2];
+ }
+
+ // 3 -> 2  2 -> 6  0 -> 10  1 -> 14
+ static u1 cycle_diag[4] = {10, 14, 6, 2};
+
+ if(abs.first == (abs.second * 2))
+ {
+  return cycle_diag[mask];
+ }
+
+ // //  7 -> 1  3 -> 3   2 -> 5   6 -> 7
+  //    4 -> 9  0 -> 11  1 -> 13  5 -> 15
+ static u1 cycle[8] = {11, 13, 5, 3, 9, 15, 7, 1};
+
+ return cycle[mask];
+}
+
+u1 TierBox_Location::get_mch_clock_code()
+{
+ return get_mch_clock_code(get_mch_code());
+}
+
+
+prr2 TierBox_Location::get_mch_code_normalized()
+{
+ pr2s mch = get_mch_code();
+ pr2 result = mch.abs().make_ascending();
+ u1 clk = get_mch_clock_code(mch);
+ return {result.first, result.second, clk};
+}
+
+
+void XCSD_Image_Geometry::draw_tier_summary(QString path, r8 magnification, u1 circle_radius)
 {
  static xy2s text_pixel_offset {2, -1};
- static u1 circle_radius = 2;
 
  wh2 summary_image_size = total_size_ * magnification;
- QImage image(summary_image_size.width, summary_image_size.height, QImage::Format_Mono);
- image.fill(1);
+ QImage image(summary_image_size.width, summary_image_size.height, QImage::Format_RGB16);
+ image.fill(-1);
 
  QPainter painter;
  painter.begin(&image);
@@ -358,17 +453,32 @@ void XCSD_Image_Geometry::draw_tier_summary(QString path, u1 magnification)
     gl.ground_index * magnification, summary_image_size.height);
  });
 
- for_each_full_tierbox([&painter, magnification](Grid_TierBox& gtb)
+ for_each_full_tierbox([&painter, magnification, circle_radius](Grid_TierBox& gtb)
  {
   xy2 xyc = gtb.ground_center * magnification;
+
+  //pr2s mch_code = gtb.loc.get_mch_code();
+
+  prr2 mch = gtb.loc.get_mch_code_normalized();
+
+  if(mch.first == 0)
+  {
+   if(mch.second == 0)
+     painter.setBrush(Qt::yellow);
+   else
+     painter.setBrush(Qt::red);
+  }
+  else if(mch.second == mch.first * 2)
+    painter.setBrush(Qt::cyan);
+
   painter.drawEllipse(QPoint(xyc.x, xyc.y), circle_radius, circle_radius);
 
-  pr2s mch_code = gtb.loc.get_mch_code();
+  painter.setBrush(Qt::NoBrush);
 
   xy2 xy = gtb.bottom_left()._to<xy2s>().plus(text_pixel_offset)._to<xy2>() * magnification;
-  QString str = QString("%1,%2:%3-%4")
+  QString str = QString("%1,%2:%3;%4=%5")
     .arg(gtb.loc.r()).arg(gtb.loc.c())
-    .arg(mch_code.first).arg(mch_code.second)
+    .arg(mch.first).arg(mch.second).arg(mch.third)
     ;
   painter.drawText(xy.x, xy.y, str);
   //qDebug() << "xy = " << xy << " str = " << str;
@@ -392,8 +502,8 @@ void XCSD_Image_Geometry::init_tier_counts(TierGrid_Preferances pref)
 
  full_tier_counts_ = {lmr.main, tmb.main};
 
- horizontal_outer_sizes_ = lmr.fold_in();
- vertical_outer_sizes_ = tmb.fold_in();
+ horizontal_outer_sizes_ = lmr.drop_mid();
+ vertical_outer_sizes_ = tmb.drop_mid();
 
  reconcile_actual_tiergrid_setting();
  init_directed_centers();

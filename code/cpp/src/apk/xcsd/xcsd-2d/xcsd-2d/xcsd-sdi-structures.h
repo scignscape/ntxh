@@ -46,8 +46,15 @@ inline constexpr u1 _ctz(int x)
    u##size inner_zdifference() const { return field1 < field2? 0 : field1 - field2; } \
    u##size inner_product() const { return field1 * field2; } \
    u##size inner_ratio() const { return field2 != 0? field1 / field2 : 0; } \
-   ty##size transposed() const { return {field2, field1}; } \
-   ty##size transpose() { *this = this->transposed(); } \
+   ty##size _transposed() const { return {field2, field1}; } \
+   ty##size& _Transpose() { *this = this->_transposed(); return *this; } \
+   bool is_coequal() { return field1 == field2; } \
+   bool is_descending() { return field2 < field1; } \
+   bool is_ascending() { return field1 < field2; } \
+   bool is_zeros() const { return (field1 == 0) && (field2 == 0); } \
+   bool has_zero() const { return (field1 == 0) || (field2 == 0); } \
+   ty##size& make_descending() { if(is_ascending()) _Transpose(); return *this;} \
+   ty##size& make_ascending() { if(is_descending()) _Transpose(); return *this;} \
    u##size lesser() { return field1 < field2? field1 : field2; } \
    u##size greater() { return field1 < field2? field2 : field1; } \
    ty##size lesser_which() { return (field1 < field2) ? \
@@ -86,17 +93,17 @@ inline constexpr u1 _ctz(int x)
    { return {field1 < val? 0: field1 - val, field2 + val}; } \
    template<typename T> ty##size plus(T vals) const \
    { return plus(vals.template _to<ty##size>()); } \
-   ty##size add(ty##size rhs) \
+   ty##size& add(ty##size rhs) \
    { *this = {(u##size)(field1 + rhs.field1), (u##size)(field2 + rhs.field2)}; return *this;} \
-   template<typename T> ty##size add(T vals) \
+   template<typename T> ty##size& add(T vals) \
    { return add(vals.template _to<ty##size>()); } \
    ty##size minus(ty##size rhs) const \
    { return {(u##size)(field1 - rhs.field1), (u##size)(field2 - rhs.field2)}; } \
    template<typename T> ty##size minus(T vals) const \
    { return minus(vals.template _to<ty##size>()); } \
-   ty##size subtract(ty##size rhs) \
+   ty##size& subtract(ty##size rhs) \
    { *this = this->minus(rhs); return *this;} \
-   template<typename T> ty##size subtract(T vals) \
+   template<typename T> ty##size& subtract(T vals) \
    { return subtract(vals.template _to<ty##size>()); } \
    ty##size operator+(ty##size rhs) \
    { return {(u##size)(field1 + rhs.field1), (u##size)(field2 + rhs.field2)}; } \
@@ -112,26 +119,40 @@ inline constexpr u1 _ctz(int x)
    { return {(u##size)(field1 * rhs.field1), (u##size)(field2 * rhs.field2)}; } \
    template<typename T> ty##size times(T vals) const\
    { return times(vals.template _to<ty##size>()); } \
-   ty##size multiply(ty##size rhs) \
+   ty##size& multiply(ty##size rhs) \
    { *this = this->times(rhs); return *this;} \
-   template<typename T> ty##size multiply(T vals) \
+   template<typename T> ty##size& multiply(T vals) \
    { return multiply(vals.template _to<ty##size>()); } \
    ty##size over(ty##size rhs) const\
    { return {(u##size)(field1 / rhs.field1), (u##size)(field2 / rhs.field2)}; } \
    template<typename T> ty##size over(T vals) const\
    { return over(vals.template _to<ty##size>()); } \
-   ty##size divide(ty##size rhs) \
+   ty##size& divide(ty##size rhs) \
    { *this = this->over(rhs); return *this;} \
-   template<typename T> ty##size divide(T vals) \
+   template<typename T> ty##size& divide(T vals) \
    { return divide(vals.template _to<ty##size>()); } \
+   bool operator<(ty##size rhs) \
+   { return field1 < rhs.field1 && field2 < rhs.field2; } \
+   template<typename T> bool operator<(T vals) \
+   { return operator<(vals.template _to<ty##size>()); } \
+   bool operator<=(ty##size rhs) \
+   { return field1 <= rhs.field1 && field2 <= rhs.field2; } \
+   template<typename T> bool operator<=(T vals) \
+   { return operator<=(vals.template _to<ty##size>()); } \
+   bool operator>(ty##size rhs) \
+   { return field1 > rhs.field1 && field2 > rhs.field2; } \
+   template<typename T> bool operator>(T vals) \
+   { return operator>(vals.template _to<ty##size>()); } \
+   bool operator>=(ty##size rhs) \
+   { return field1 >= rhs.field1 && field2 >= rhs.field2; } \
+   template<typename T> bool operator>=(T vals) \
+   { return operator>=(vals.template _to<ty##size>()); } \
    template<typename T> ty##size operator||(T val) const \
    { return {field1 < val? field1 : val, field2 < val? field2 : val}; } \
    template<typename T> ty##size operator&&(T val) const \
    { return {(field1 & val) >> _ctz(val), (field2 & val) >> _ctz(val)}; } \
    template<typename T> T _to() \
    { return {(typename T::field_type)field1, (typename T::field_type)field2}; } \
-   ty##size _transposed() \
-   { return {field2, field1}; } \
    template<typename T> T _transposed_to() \
    { return _transposed()._to<T>(); } \
    asize area() {return field1 * field2;} };
@@ -153,7 +174,7 @@ inline constexpr u1 _ctz(int x)
 struct ty##size; \
 struct ty##size##s { s##size field1, field2; \
    using field_type = s##size; \
-   asize binary_merge() { return (asize) field1 << (8 * size) | field2; } \
+   asize binary_merge() { return (asize)(u##size)field1 << (8 * size) | (u##size)field2; } \
    s##size spaceship() { return field1 < field2? -1 : field1 > field2? 1:0; } \
    ty##size abs() const { return {field1 < 0? -field1 : field1, field2 < 0? -field2 : field2}; } \
    ty##size##s spaceship_mask() const \
@@ -162,8 +183,15 @@ struct ty##size##s { s##size field1, field2; \
    s##size inner_difference() const { return field1 - field2; } \
    s##size inner_product() const { return field1 * field2; } \
    s##size inner_ratio() const { return field2 != 0? field1 / field2 : 0; } \
-   ty##size##s transposed() const { return {field2, field1}; } \
-   ty##size##s transpose() { *this = this->transposed(); } \
+   ty##size##s _transposed() const { return {field2, field1}; } \
+   ty##size##s& _Transpose() { *this = this->_transposed(); return *this; } \
+   bool is_coequal() { return field1 == field2; } \
+   bool is_descending() const { return field2 < field1; } \
+   bool is_ascending() const { return field1 < field2; } \
+   bool is_zeros() const { return (field1 == 0) && (field2 == 0); } \
+   bool has_zero() const { return (field1 == 0) || (field2 == 0); } \
+   ty##size##s& make_descending() { if(is_ascending()) _Transpose(); return *this;} \
+   ty##size##s& make_ascending() { if(is_descending()) _Transpose(); return *this;} \
    s##size lesser() const { return field1 < field2? field1 : field2; } \
    s##size greater() const { return field1 < field2? field2 : field1; } \
    ty##size##s lesser_which() const { return field1 < field2? \
@@ -231,12 +259,26 @@ struct ty##size##s { s##size field1, field2; \
    { *this = this->over(rhs); return *this;} \
    template<typename T> ty##size##s divide(T vals) \
    { return divide(vals.template _to<ty##size##s>()); } \
+   bool operator<(ty##size##s rhs) \
+   { return field1 < rhs.field1 && field2 < rhs.field2; } \
+   template<typename T> bool operator<(T vals) \
+   { return operator<(vals.template _to<ty##size##s>()); } \
+   bool operator<=(ty##size##s rhs) \
+   { return field1 <= rhs.field1 && field2 <= rhs.field2; } \
+   template<typename T> bool operator<=(T vals) \
+   { return operator<=(vals.template _to<ty##size##s>()); } \
+   bool operator>(ty##size##s rhs) \
+   { return field1 > rhs.field1 && field2 > rhs.field2; } \
+   template<typename T> bool operator>(T vals) \
+   { return operator>(vals.template _to<ty##size##s>()); } \
+   bool operator>=(ty##size##s rhs) \
+   { return field1 >= rhs.field1 && field2 >= rhs.field2; } \
+   template<typename T> bool operator>=(T vals) \
+   { return operator>=(vals.template _to<ty##size##s>()); } \
    template<typename T> ty##size##s operator||(T val) const \
    { return {field1 < val? field1 : val, field2 < val? field2 : val}; } \
    template<typename T> T _to() \
    { return {(typename T::field_type)field1, (typename T::field_type)field2}; } \
-   ty##size##s _transposed() \
-   { return {field2, field1}; } \
    template<typename T> T _transposed_to() \
    { return _transposed()._to<T>(); } \
    asize area() {return field1 * field2;} };
@@ -310,7 +352,9 @@ Tys_DEF_MACRO(tb, 4, n8, first, second)
    using field_type = u##size; \
    template<typename T> friend T& operator<<(T& lhs, const ty##size& rhs) \
    { lhs << "(" << rhs.field1 << ", " << rhs.field2 << ", " << rhs.field3 << ")"; return lhs; } \
-   ty2##size fold_in() { return {field1, field3}; } \
+   ty2##size drop_first() { return {field2, field3}; } \
+   ty2##size drop_mid() { return {field1, field3}; } \
+   ty2##size drop_last() { return {field1, field2}; } \
    template<typename T> ty##size operator<<(T val) const \
    { return {field1 << val, field2 << val, field3 << val}; } \
    template<typename T> ty##size operator>>(T val) const \
@@ -344,7 +388,9 @@ struct ty##size##s { s##size field1, field2, field3; \
    using field_type = s##size; \
    template<typename T> friend T& operator<<(T& lhs, const ty##size##s& rhs) \
    { lhs << "(" << rhs.field1 << ", " << rhs.field2 << ", " << rhs.field3 << ")"; return lhs; } \
-   ty2##size##s fold_in() { return {field1, field3}; } \
+   ty2##size##s drop_first() { return {field2, field3}; } \
+   ty2##size##s drop_mid() { return {field1, field3}; } \
+   ty2##size##s drop_last() { return {field1, field2}; } \
    bool is_nonnegative() { return field1 >= 0 && field2 >= 0 && field3 >= 0; } \
    template<typename T> ty##size##s operator<<(T val) const \
    { return {field1 << val, field2 << val, field3 << val}; } \
@@ -380,6 +426,10 @@ Ty3_DEF_MACRO(tmb, tb, 1, u2, top, main, bottom)
 Ty3_DEF_MACRO(tmb, tb, 2, u4, top, main, bottom)
 Ty3_DEF_MACRO(tmb, tb, 4, n8, top, main, bottom)
 
+Ty3_DEF_MACRO(prr, pr, 1, u2, first, second, third)
+Ty3_DEF_MACRO(prr, pr, 2, u4, first, second, third)
+Ty3_DEF_MACRO(prr, pr, 4, n8, first, second, third)
+
 Ty3s_DEF_MACRO(lmr, lr, 1, u2, left, main, right)
 Ty3s_DEF_MACRO(lmr, lr, 2, u4, left, main, right)
 Ty3s_DEF_MACRO(lmr, lr, 4, n8, left, main, right)
@@ -387,6 +437,10 @@ Ty3s_DEF_MACRO(lmr, lr, 4, n8, left, main, right)
 Ty3s_DEF_MACRO(tmb, tb, 1, u2, top, main, bottom)
 Ty3s_DEF_MACRO(tmb, tb, 2, u4, top, main, bottom)
 Ty3s_DEF_MACRO(tmb, tb, 4, n8, top, main, bottom)
+
+Ty3s_DEF_MACRO(prr, pr, 1, u2, first, second, third)
+Ty3s_DEF_MACRO(prr, pr, 2, u4, first, second, third)
+Ty3s_DEF_MACRO(prr, pr, 4, n8, first, second, third)
 
 inline u2 _ring_count(rc2 pos, wh2 size)
 {
