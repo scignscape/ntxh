@@ -34,10 +34,10 @@ public:
 
  void set_mch_code(pr2s mch);
  pr2s get_mch_code();
- prr2 get_mch_code_normalized();
+ prr2 get_mch_code_normalized(u1 size_even_odd_code, u1* mask = nullptr);
 
- u1 get_mch_clock_code();
- static u1 get_mch_clock_code(pr2s pr);
+ u1 get_mch_clock_code(u1 size_even_odd_code, u1* mask = nullptr);
+ static u1 get_mch_clock_code(pr2s pr, u1 size_even_odd_code, u1* mask = nullptr);
 
  pr2s mch_distance_from(const TierBox_Location& rhs);
 
@@ -133,6 +133,8 @@ public:
  std::vector<TierBox_Location> get_directed_centers();
 
  static constexpr u1 tierbox_width = 27;
+
+ u1 get_size_even_odd_code();
 
  void for_each_horizontal_gridline(std::function<void(Gridline&)> fn);
  void for_each_vertical_gridline(std::function<void(Gridline&)> fn);

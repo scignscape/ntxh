@@ -33,11 +33,19 @@ int main(int argc , char **argv)
 // xcsg.set_total_size(54, 108);
 // xcsg.set_total_size(160, 90);
 
+ //
  xcsg.set_total_size(304, 194);
+ //xcsg.set_total_size(284, 194);
+ //xcsg.set_total_size(284, 174);
 
  xcsg.init_tier_counts(XCSD_Image_Geometry::TierGrid_Preferances::Minimize_Outer_Tiers);
 
- xcsg.draw_tier_summary(ROOT_FOLDER "/../tiers/t1.png", 2.5, 4);
+ xcsg.draw_tier_summary(QString(ROOT_FOLDER "/../tiers/t%1x%2.png")
+   .arg(xcsg.total_size().width).arg(xcsg.total_size().height), 4, 8);
+
+// xcsg.draw_tier_summary(ROOT_FOLDER "/../tiers/t284x194.png", 2.5, 4);
+// xcsg.draw_tier_summary(ROOT_FOLDER "/../tiers/t284x194.png", 2.5, 4);
+// xcsg.draw_tier_summary(ROOT_FOLDER "/../tiers/t284x194.png", 2.5, 4);
 
  qDebug() << "full = " << xcsg.full_tier_counts();
  qDebug() << "overall = " << xcsg.overall_tier_counts();

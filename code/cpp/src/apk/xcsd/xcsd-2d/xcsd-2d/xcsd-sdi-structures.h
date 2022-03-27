@@ -41,6 +41,10 @@ inline constexpr u1 _ctz(int x)
    s##size spaceship() { return field1 < field2? -1 : field1 > field2? 1:0; } \
    ty##size spaceship_mask() const \
    { return {field1 < 0? -1 : field1 > 0, field2 < 0? -1 : field2 > 0}; } \
+   ty##size zeros_mask() const \
+   { return {field1 == 0, field2 == 0}; } \
+   ty##size nonzeros_mask() const \
+   { return {field1 != 0, field2 != 0}; } \
    u##size inner_sum() const { return field1 + field2; } \
    u##size inner_difference() const { return field1 - field2; } \
    u##size inner_zdifference() const { return field1 < field2? 0 : field1 - field2; } \
@@ -61,7 +65,7 @@ inline constexpr u1 _ctz(int x)
      ty##size{field1, 0} : ty##size{field2, 1}; } \
    ty##size greater_which() { return (field1 < field2) ? \
      ty##size{field2, 1} : ty##size{field1, 0}; } \
-   template<typename T> friend T& operator<<(T& lhs, const ty##size& rhs) \
+   template<typename T> friend T operator<<(T lhs, const ty##size& rhs) \
    { lhs << "(" << rhs.field1 << ", " << rhs.field2 << ")"; return lhs; } \
    template<typename T> ty##size operator<<(T val) const \
    { return {field1 << val, field2 << val}; } \
@@ -135,6 +139,10 @@ inline constexpr u1 _ctz(int x)
    { return field1 < rhs.field1 && field2 < rhs.field2; } \
    template<typename T> bool operator<(T vals) \
    { return operator<(vals.template _to<ty##size>()); } \
+   bool operator==(ty##size rhs) \
+   { return field1 == rhs.field1 && field2 == rhs.field2; } \
+   template<typename T> bool operator==(T vals) \
+   { return operator==(vals.template _to<ty##size>()); } \
    bool operator<=(ty##size rhs) \
    { return field1 <= rhs.field1 && field2 <= rhs.field2; } \
    template<typename T> bool operator<=(T vals) \
@@ -179,6 +187,10 @@ struct ty##size##s { s##size field1, field2; \
    ty##size abs() const { return {field1 < 0? -field1 : field1, field2 < 0? -field2 : field2}; } \
    ty##size##s spaceship_mask() const \
    { return {field1 < 0? -1 : field1 > 0, field2 < 0? -1 : field2 > 0}; } \
+   ty##size##s zeros_mask() const \
+   { return {field1 == 0, field2 == 0}; } \
+   ty##size##s nonzeros_mask() const \
+   { return {field1 != 0, field2 != 0}; } \
    s##size inner_sum() const { return field1 + field2; } \
    s##size inner_difference() const { return field1 - field2; } \
    s##size inner_product() const { return field1 * field2; } \
@@ -198,7 +210,7 @@ struct ty##size##s { s##size field1, field2; \
      ty##size##s{field1, 0} : ty##size##s{field2, 1}; } \
    ty##size##s greater_which() const { return field1 < field2? \
      ty##size##s{field2, 1} : ty##size##s{field1, 0}; } \
-   template<typename T> friend T& operator<<(T& lhs, const ty##size##s& rhs) \
+   template<typename T> friend T operator<<(T lhs, const ty##size##s& rhs) \
    { lhs << "(" << rhs.field1 << ", " << rhs.field2 << ")"; return lhs; } \
    bool is_nonnegative() { return field1 >= 0 && field2 >= 0; } \
    template<typename T> ty##size##s operator<<(T val) const \
@@ -269,6 +281,10 @@ struct ty##size##s { s##size field1, field2; \
    { return operator<=(vals.template _to<ty##size##s>()); } \
    bool operator>(ty##size##s rhs) \
    { return field1 > rhs.field1 && field2 > rhs.field2; } \
+   bool operator==(ty##size##s rhs) \
+   { return field1 == rhs.field1 && field2 == rhs.field2; } \
+   template<typename T> bool operator==(T vals) \
+   { return operator==(vals.template _to<ty##size##s>()); } \
    template<typename T> bool operator>(T vals) \
    { return operator>(vals.template _to<ty##size##s>()); } \
    bool operator>=(ty##size##s rhs) \

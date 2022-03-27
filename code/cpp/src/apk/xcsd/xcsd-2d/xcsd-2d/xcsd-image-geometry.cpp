@@ -11,6 +11,8 @@
 
 #include <QPainter>
 
+#include <QDebug>
+
 #include <deque>
 
 USING_XCNS(XCSD)
@@ -31,14 +33,20 @@ XCSD_Image_Geometry::XCSD_Image_Geometry()
 pr2s TierBox_Location::mch_distance_from(const TierBox_Location& rhs)
 {
  rc2s raw = rc_.minus(rhs.rc_);
+
  pr2s raw_sp = raw.spaceship_mask()._to<pr2s>();
+ raw_sp.add(raw.zeros_mask());
  rc2 raw_abs = raw.abs();
- pr2 chebychev = raw_abs.lesser_which()._to<pr2>();
+ pr2 chebychev = raw_abs.greater_which()._to<pr2>();
  u2 manhattan = raw_abs.inner_sum();
  pr2s result = {(s2)manhattan, (s2)(manhattan - chebychev.first)};
+ if(chebychev.second == 1) // && !raw.has_zero())
+ {
+  result._Transpose();
+  if(raw.r != 0)
+    raw_sp._Transpose();
+ }
  result.multiply(raw_sp);
- if(chebychev.second == 0 && !raw.has_zero())
-   result._Transpose();
 // if(chebychev.second == 0 && !raw.is_coequal())
 //   result._Transpose();
  return result;
@@ -78,19 +86,19 @@ void XCSD_Image_Geometry::init_directed_centers()
    break;
  case TierGrid_Preferances::Even_H_Odd_V:
    // // also the one to the left
-   deq.push_front(first.subtract({0, 1}));
+   deq.push_front(first.minus({0, 1}));
    break;
 
  case TierGrid_Preferances::Odd_H_Even_V:
    // // also the one to the left
-   deq.push_front(first.subtract({1, 0}));
+   deq.push_front(first.minus({1, 0}));
    break;
 
  case TierGrid_Preferances::Even_H_Even_V:
    // // also the one to the left
-   deq.push_front(first.subtract({1, 1}));
-   deq.push_front(first.subtract({0, 1}));
-   deq.push_front(first.subtract({1, 0}));
+   deq.push_front(first.minus({0, 1}));
+   deq.push_front(first.minus({1, 0}));
+   deq.push_front(first.minus({1, 1}));
    break;
 
  default: break;
@@ -118,18 +126,18 @@ TierBox_Location XCSD_Image_Geometry::get_directed_center(TierBox_Location& tbl)
   return directed_centers_[1];
 
  case TierGrid_Preferances::Even_H_Odd_V:
-  if(tbl.r() < (full_tier_counts_.width / 2))
+  if(tbl.c() < (full_tier_counts_.width / 2))
     return directed_centers_[0];
   return directed_centers_[1];
 
  case TierGrid_Preferances::Even_H_Even_V:
   if(tbl.rc() < (full_tier_counts_ / 2)._transposed())
     return directed_centers_[0];
-  if(tbl.rc() > (full_tier_counts_ / 2)._transposed())
+  if(tbl.rc() >= (full_tier_counts_ / 2)._transposed())
     return directed_centers_[3];
-  if(tbl.r() < (full_tier_counts_.width / 2))
-    return directed_centers_[1];
-  return directed_centers_[2];
+  if(tbl.c() < (full_tier_counts_.width / 2))
+    return directed_centers_[2];
+  return directed_centers_[1];
 
  default: break;
  }
@@ -365,7 +373,7 @@ pr2s TierBox_Location::get_mch_code()
  return {(s2)(mch_code_ >> 16), (s2)(mch_code_ & ~(u2)0)};
 }
 
-u1 TierBox_Location::get_mch_clock_code(pr2s pr)
+u1 TierBox_Location::get_mch_clock_code(pr2s pr, u1 size_even_odd_code, u1* mask)
 {
  if(pr.has_zero())
  {
@@ -375,68 +383,111 @@ u1 TierBox_Location::get_mch_clock_code(pr2s pr)
  if(pr.is_zeros())
    return 0;
 
- u1 mask = 0;
+ u1 _mask = 0;
 
  pr2 abs = pr.abs();
 
  if(abs.is_ascending())
  {
-  mask |= 4;
+  _mask |= 4;
   pr._Transpose();
   abs._Transpose();
  }
  if(pr.first < 0)
-   mask |= 2;
+   _mask |= 2;
  if(pr.second < 0)
-   mask |= 1;
+   _mask |= 1;
+
+ if(mask)
+   *mask = _mask;
 
 // return mask;
 
- // //  6 -> 16  2 -> 4  4 -> 8  0 -> 12
- static u1 cycle_ortho[4] = {12, 4, 8, 16};
+ // // size_even_odd_code :
+  //   0 = e_e  1 = e_o  2 = o_e  3 = o_o
 
- if(pr.second == 0)
+ // //  6 -> 0  2 -> 6  4 -> 12  0 -> 18
+ static u1 cycle_ortho[4][4] =
+  {
+   {12, 4, 8, 16},
+   {12, 4, 8, 16},
+   {12, 4, 8, 16},
+   {18, 6, 12, 0}
+ };
+
+ if(pr.has_zero())
  {
-  return cycle_ortho[mask / 2];
+  return cycle_ortho[size_even_odd_code][_mask/2];
  }
 
- // 3 -> 2  2 -> 6  0 -> 10  1 -> 14
- static u1 cycle_diag[4] = {10, 14, 6, 2};
+ // 3 -> 3  2 -> 9  0 -> 15  1 -> 21
+ static u1 cycle_diag[4][4] =
+  {
+   {10, 14, 6, 2},
+   {10, 14, 6, 2},
+   {10, 14, 6, 2},
+   {15, 21, 9, 3},
+ };
+
+
+
 
  if(abs.first == (abs.second * 2))
  {
-  return cycle_diag[mask];
+  return cycle_diag[size_even_odd_code][_mask];
  }
 
- // //  7 -> 1  3 -> 3   2 -> 5   6 -> 7
-  //    4 -> 9  0 -> 11  1 -> 13  5 -> 15
- static u1 cycle[8] = {11, 13, 5, 3, 9, 15, 7, 1};
+ // //  7 -> 2  3 -> 4   2 -> 8   6 -> 10
+  //    4 -> 14  0 -> 16  1 -> 20  5 -> 22
+ static u1 cycle[4][8] = {
+  {11, 13, 5, 3, 9, 15, 7, 1},
+  {11, 13, 5, 3, 9, 15, 7, 1},
+  {11, 13, 5, 3, 9, 15, 7, 1},
+  {16, 20, 8, 4, 14, 22, 10, 2},
+ };
 
- return cycle[mask];
+ return cycle[size_even_odd_code][_mask];
 }
 
-u1 TierBox_Location::get_mch_clock_code()
+u1 TierBox_Location::get_mch_clock_code(u1 size_even_odd_code, u1* mask)
 {
- return get_mch_clock_code(get_mch_code());
+ return get_mch_clock_code(get_mch_code(), size_even_odd_code, mask);
 }
 
 
-prr2 TierBox_Location::get_mch_code_normalized()
+prr2 TierBox_Location::get_mch_code_normalized(u1 size_even_odd_code, u1* mask)
 {
  pr2s mch = get_mch_code();
  pr2 result = mch.abs().make_ascending();
- u1 clk = get_mch_clock_code(mch);
+ u1 clk = get_mch_clock_code(mch, size_even_odd_code, mask);
  return {result.first, result.second, clk};
 }
 
+u1 XCSD_Image_Geometry::get_size_even_odd_code()
+{
+ switch (actual_tiergrid_setting_)
+ {
+ case TierGrid_Preferances::Even_H_Even_V: return 0;
+ case TierGrid_Preferances::Even_H_Odd_V: return 1;
+ case TierGrid_Preferances::Odd_H_Even_V: return 2;
+ case TierGrid_Preferances::Odd_H_Odd_V: return 3;
+ default: return 0;
+ }
+}
 
 void XCSD_Image_Geometry::draw_tier_summary(QString path, r8 magnification, u1 circle_radius)
 {
- static xy2s text_pixel_offset {2, -1};
+ static xy2s bl_text_pixel_offset {1, -6};
+ static xy2s bl1_text_pixel_offset {1, -1};
+ static xy2s tl_text_pixel_offset {1, 3};
+ static xy2s br_text_pixel_offset {-5, -4};
+ static xy2s tr_text_pixel_offset {-3, 4};
 
  wh2 summary_image_size = total_size_ * magnification;
  QImage image(summary_image_size.width, summary_image_size.height, QImage::Format_RGB16);
  image.fill(-1);
+
+ u1 size_even_odd_code = get_size_even_odd_code();
 
  QPainter painter;
  painter.begin(&image);
@@ -453,13 +504,20 @@ void XCSD_Image_Geometry::draw_tier_summary(QString path, r8 magnification, u1 c
     gl.ground_index * magnification, summary_image_size.height);
  });
 
- for_each_full_tierbox([&painter, magnification, circle_radius](Grid_TierBox& gtb)
+ for_each_full_tierbox([this, &painter, magnification,
+   circle_radius, size_even_odd_code](Grid_TierBox& gtb)
  {
+  xy2s extra_trtext_pixel_offset {0, 0};
+  xy2s extra_brtext_pixel_offset {0, 0};
+
+  bool is_notation_center = (gtb.loc.rc() == directed_centers_[0].rc());
+
   xy2 xyc = gtb.ground_center * magnification;
 
   //pr2s mch_code = gtb.loc.get_mch_code();
 
-  prr2 mch = gtb.loc.get_mch_code_normalized();
+  u1 mask;
+  prr2 mch = gtb.loc.get_mch_code_normalized(size_even_odd_code, &mask);
 
   if(mch.first == 0)
   {
@@ -475,12 +533,60 @@ void XCSD_Image_Geometry::draw_tier_summary(QString path, r8 magnification, u1 c
 
   painter.setBrush(Qt::NoBrush);
 
-  xy2 xy = gtb.bottom_left()._to<xy2s>().plus(text_pixel_offset)._to<xy2>() * magnification;
-  QString str = QString("%1,%2:%3;%4=%5")
+  pr2s raw_mch = gtb.loc.get_mch_code();
+
+  QString tl_text = QString("%1,%2")
     .arg(gtb.loc.r()).arg(gtb.loc.c())
-    .arg(mch.first).arg(mch.second).arg(mch.third)
     ;
-  painter.drawText(xy.x, xy.y, str);
+
+  QString bl_text = QString("%1,%2")
+    .arg(mch.first).arg(mch.second)//.arg(mch.third)
+    //.arg(raw_mch.first).arg(raw_mch.second)
+     //.arg(raw_mch.first).arg(raw_mch.second).arg(mask)
+    ;
+
+  QString bl1_text = QString("%1 %2")
+    //.arg(mch.first).arg(mch.second)//.arg(mch.third)
+    .arg(raw_mch.first).arg(raw_mch.second)
+     //.arg(raw_mch.first).arg(raw_mch.second).arg(mask)
+    ;
+
+  QString tr_text = QString::number(mask)
+    ;
+
+  QString br_text = QString::number(mch.third)
+    ;
+
+  if(is_notation_center)
+  {
+   extra_trtext_pixel_offset.x = -9;
+   extra_brtext_pixel_offset.x = -3;
+
+   bl_text.prepend("mch=");
+   bl1_text.prepend("raw= ");
+
+   tr_text.prepend("mask=");
+   br_text.prepend("clk ");
+  }
+  else if(br_text.length() == 1)
+    extra_brtext_pixel_offset.x = 1;
+   // br_text.prepend('0');
+
+  xy2 bl_xy = gtb.bottom_left()._to<xy2s>().plus(bl_text_pixel_offset)._to<xy2>() * magnification;
+  xy2 bl1_xy = gtb.bottom_left()._to<xy2s>().plus(bl1_text_pixel_offset)._to<xy2>() * magnification;
+  xy2 tl_xy = gtb.top_left()._to<xy2s>().plus(tl_text_pixel_offset)._to<xy2>() * magnification;
+  xy2 br_xy = gtb.bottom_right()._to<xy2s>().plus(br_text_pixel_offset)
+    .plus(extra_brtext_pixel_offset)._to<xy2>() * magnification;
+  xy2 tr_xy = gtb.top_right()._to<xy2s>().plus(tr_text_pixel_offset)
+    .plus(extra_trtext_pixel_offset)._to<xy2>() * magnification;
+
+  painter.drawText(bl1_xy.x, bl1_xy.y, bl1_text);
+  painter.drawText(bl_xy.x, bl_xy.y, bl_text);
+  painter.drawText(tl_xy.x, tl_xy.y, tl_text);
+
+  painter.drawText(br_xy.x, br_xy.y, br_text);
+  painter.drawText(tr_xy.x, tr_xy.y, tr_text);
+
   //qDebug() << "xy = " << xy << " str = " << str;
   });
 
