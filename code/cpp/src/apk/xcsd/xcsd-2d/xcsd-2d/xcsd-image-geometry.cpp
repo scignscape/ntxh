@@ -377,7 +377,7 @@ u1 TierBox_Location::get_mch_clock_code(pr2s pr, u1 size_even_odd_code, u1* mask
 {
  if(pr.has_zero())
  {
-  qDebug() << "pr = " << pr;
+//  qDebug() << "pr = " << pr;
  }
 
  if(pr.is_zeros())
@@ -406,12 +406,14 @@ u1 TierBox_Location::get_mch_clock_code(pr2s pr, u1 size_even_odd_code, u1* mask
  // // size_even_odd_code :
   //   0 = e_e  1 = e_o  2 = o_e  3 = o_o
 
- // //  6 -> 0  2 -> 6  4 -> 12  0 -> 18
  static u1 cycle_ortho[4][4] =
   {
-   {12, 4, 8, 16},
-   {12, 4, 8, 16},
-   {12, 4, 8, 16},
+   {18, 6, 12, 0},
+  // {12, 4, 8, 16},
+  // //  6 -> 0  2 -> 6  4 -> 12  0 -> 18
+   {18, 6, 12, 0},
+   {18, 6, 12, 0},
+  // //  6 -> 0  2 -> 6  4 -> 12  0 -> 18
    {18, 6, 12, 0}
  };
 
@@ -423,9 +425,10 @@ u1 TierBox_Location::get_mch_clock_code(pr2s pr, u1 size_even_odd_code, u1* mask
  // 3 -> 3  2 -> 9  0 -> 15  1 -> 21
  static u1 cycle_diag[4][4] =
   {
-   {10, 14, 6, 2},
-   {10, 14, 6, 2},
-   {10, 14, 6, 2},
+   {15, 21, 9, 3},
+   //{10, 14, 6, 2},
+   {15, 21, 9, 3},
+   {15, 21, 9, 3},
    {15, 21, 9, 3},
  };
 
@@ -440,9 +443,10 @@ u1 TierBox_Location::get_mch_clock_code(pr2s pr, u1 size_even_odd_code, u1* mask
  // //  7 -> 2  3 -> 4   2 -> 8   6 -> 10
   //    4 -> 14  0 -> 16  1 -> 20  5 -> 22
  static u1 cycle[4][8] = {
-  {11, 13, 5, 3, 9, 15, 7, 1},
-  {11, 13, 5, 3, 9, 15, 7, 1},
-  {11, 13, 5, 3, 9, 15, 7, 1},
+  {16, 20, 8, 4, 14, 22, 10, 2},
+  //{11, 13, 5, 3, 9, 15, 7, 1},
+  {16, 20, 8, 4, 14, 22, 10, 2},
+  {16, 20, 8, 4, 14, 22, 10, 2},
   {16, 20, 8, 4, 14, 22, 10, 2},
  };
 
@@ -454,6 +458,141 @@ u1 TierBox_Location::get_mch_clock_code(u1 size_even_odd_code, u1* mask)
  return get_mch_clock_code(get_mch_code(), size_even_odd_code, mask);
 }
 
+//u1 TierBox_Location::get_orthogonal_quadrant_from_mch_code(u1 size_even_odd_code, u1 quadrant_code, prr2 mch_code)
+//{
+
+//}
+
+void TierBox_Location::reconcile_mch_quadrant(u1 size_even_odd_code, u1 quadrant_code,
+  u2& clk //prr2& mch_code
+  )
+{
+ if(size_even_odd_code == 3)
+   return;
+
+ u1 orthogonal_quadrant = clk / 6;
+
+ if((size_even_odd_code > 0)
+   && ((size_even_odd_code % 2) != (orthogonal_quadrant % 2)))
+   return;
+
+ // //  make it clockwise ...
+ if(quadrant_code == 2)
+   quadrant_code = 3;
+ else if(quadrant_code == 3)
+  quadrant_code = 2;
+
+ s1 offset = (quadrant_code == orthogonal_quadrant)? 1 : -1; //1 - 2 * (orthogonal_quadrant % 2);
+ clk += offset;
+
+// if((s1) mch_code.third == -1)
+//   mch_code.third += 24;
+}
+// return;
+
+//// s1 offset = (orthogonal_quadrant % 2)? 1 : -1; //1 - 2 * (orthogonal_quadrant % 2);
+
+
+// if(size_even_odd_code == 0)
+// {
+//  mch_code.third += offset;
+////  if(quadrant_code == orthogonal_quadrant)
+////    ++mch_code.third;
+////  else
+////   --mch_code.third;
+
+//  if((s1) mch_code.third == -1)
+//    mch_code.third += 24;
+
+//  return;
+// }
+
+// if(size_even_odd_code == 1)
+// {
+//  if(orthogonal_quadrant % 2)
+//    mch_code.third += offset;
+
+////  if(orthogonal_quadrant % 2)
+////  {
+////   if(quadrant_code == orthogonal_quadrant)
+////     ++mch_code.third;
+////   else
+////    --mch_code.third;
+////  }
+
+//  if((s1) mch_code.third == -1)
+//    mch_code.third += 24;
+
+//  return;
+// }
+//  if(quadrant_code == 0 && orthogonal_quadrant == 1)
+//    --mch_code.third;
+//  else if(quadrant_code == 1 && orthogonal_quadrant == 1)
+//    ++mch_code.third;
+//  else if(quadrant_code == 2 && orthogonal_quadrant == 3)
+//    --mch_code.third;
+//  else if(quadrant_code == 3 && orthogonal_quadrant == 3)
+//    ++mch_code.third;
+
+//  if((s1) mch_code.third == -1)
+//    mch_code.third += 24;
+
+// if(size_even_odd_code == 2)
+// {
+//  if(orthogonal_quadrant % 2 == 0)
+//    mch_code.third += offset;
+
+////  if(orthogonal_quadrant % 2)
+////  {
+////   if(quadrant_code == orthogonal_quadrant)
+////     ++mch_code.third;
+////   else
+////    --mch_code.third;
+////  }
+
+//  if((s1) mch_code.third == -1)
+//    mch_code.third += 24;
+
+//  return;
+// }
+
+
+// switch(quadrant_code)
+// {
+// case 0:
+//  if(size_even_odd_code == 1 && orthogonal_quadrant == 1)
+//    --mch_code.third;
+//  else if(size_even_odd_code == 2 && orthogonal_quadrant == 0)
+//    ++mch_code.third;
+//  break;
+// case 1:
+//  if(size_even_odd_code == 1 && orthogonal_quadrant == 1)
+//    ++mch_code.third;
+//  else if(size_even_odd_code == 2 && orthogonal_quadrant == 2)
+//    --mch_code.third;
+//  else if(size_even_odd_code == 2 && orthogonal_quadrant == 3)
+//    ++mch_code.third;
+//  break;
+// case 3:
+//  if(size_even_odd_code == 1 && orthogonal_quadrant == 3)
+//    ++mch_code.third;
+//  else if(size_even_odd_code == 2 && orthogonal_quadrant == 2)
+//    ++mch_code.third;
+//  else if(size_even_odd_code == 2 && orthogonal_quadrant == 0)
+//    mch_code.third = 23;
+//  break;
+// case 2:
+//  if(size_even_odd_code == 1 && orthogonal_quadrant == 3)
+//    --mch_code.third;
+//  else if(size_even_odd_code == 2 && orthogonal_quadrant == 2)
+//    ++mch_code.third;
+//  break;
+// }
+
+// if((s1) mch_code.third == -1)
+//   mch_code.third %= 24;
+
+//}
 
 prr2 TierBox_Location::get_mch_code_normalized(u1 size_even_odd_code, u1* mask)
 {
@@ -512,6 +651,20 @@ void XCSD_Image_Geometry::draw_tier_summary(QString path, r8 magnification, u1 c
 
   bool is_notation_center = (gtb.loc.rc() == directed_centers_[0].rc());
 
+  rc2s quadrant = gtb.loc.rc() - directed_centers_.back().rc();
+
+//  qDebug() << "quadrant = " << quadrant;
+
+  rc2s quadrant_mask = quadrant.spaceship_mask().plus(quadrant.zeros_mask());
+
+  u1 quadrant_code = quadrant_mask.floor(0).times({2, 1}).inner_sum();
+
+//  qDebug() << "quadrant_code = " << quadrant_code;
+
+ // u3
+
+
+
   xy2 xyc = gtb.ground_center * magnification;
 
   //pr2s mch_code = gtb.loc.get_mch_code();
@@ -524,7 +677,11 @@ void XCSD_Image_Geometry::draw_tier_summary(QString path, r8 magnification, u1 c
    if(mch.second == 0)
      painter.setBrush(Qt::yellow);
    else
-     painter.setBrush(Qt::red);
+   {
+    painter.setBrush(Qt::red);
+    TierBox_Location::reconcile_mch_quadrant(size_even_odd_code, quadrant_code, mch.third);
+
+   }
   }
   else if(mch.second == mch.first * 2)
     painter.setBrush(Qt::cyan);
@@ -656,3 +813,61 @@ void XCSD_Image_Geometry::init_tier_counts(TierGrid_Preferances pref)
 // tierbox_count_ = tier_counts_.area();
 }
 
+
+
+//case 0:
+// if(size_even_odd_code == 1 && orthogonal_quadrant == 1)
+//   --mch_code.third;
+// else if(size_even_odd_code == 2 && orthogonal_quadrant == 0)
+//   ++mch_code.third;
+// else if(size_even_odd_code == 0)
+// { qDebug() << "0 - " << orthogonal_quadrant;
+////   mch_code.third += offset;
+//  if(orthogonal_quadrant == 1)
+//    --mch_code.third;
+//  else // 2
+//    ++mch_code.third;
+// }
+// break;
+//case 1:
+// if(size_even_odd_code == 1 && orthogonal_quadrant == 1)
+//   ++mch_code.third;
+// else if(size_even_odd_code == 2 && orthogonal_quadrant == 2)
+//   --mch_code.third;
+// else if(size_even_odd_code == 2 && orthogonal_quadrant == 3)
+//   ++mch_code.third;
+// else if(size_even_odd_code == 0)
+// { qDebug() << "1 - " << orthogonal_quadrant;
+//  if(orthogonal_quadrant == 1)
+//    ++mch_code.third;
+//  else // == 2
+//    --mch_code.third;
+// }
+// break;
+//case 2:
+// if(size_even_odd_code == 1 && orthogonal_quadrant == 3)
+//   ++mch_code.third;
+// else if(size_even_odd_code == 2 && orthogonal_quadrant == 2)
+//   ++mch_code.third;
+// else if(size_even_odd_code == 2 && orthogonal_quadrant == 0)
+//   mch_code.third = 23;
+// else if(size_even_odd_code == 0)
+// { qDebug() << "2 - " << orthogonal_quadrant;
+//  if(orthogonal_quadrant == 3)
+//    ++mch_code.third;
+//  else // == 4
+//    --mch_code.third; // mch_code.third = 23;
+// }
+// break;
+//case 3:
+// if(size_even_odd_code == 1 && orthogonal_quadrant == 3)
+//   --mch_code.third;
+// else if(size_even_odd_code == 2 && orthogonal_quadrant == 2)
+//   ++mch_code.third;
+// else if(size_even_odd_code == 0)
+// { qDebug() << "3 - " << orthogonal_quadrant;
+//  if(orthogonal_quadrant == 2)
+//    ++mch_code.third;
+//  else // == 3
+//    --mch_code.third;
+// }

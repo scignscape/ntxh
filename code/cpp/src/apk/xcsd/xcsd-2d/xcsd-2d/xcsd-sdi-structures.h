@@ -157,6 +157,8 @@ inline constexpr u1 _ctz(int x)
    { return operator>=(vals.template _to<ty##size>()); } \
    template<typename T> ty##size operator||(T val) const \
    { return {field1 < val? field1 : val, field2 < val? field2 : val}; } \
+   template<typename T> ty##size floor(T val) const \
+   { return {field1 < val? val : field1, field2 < val? val : field2}; } \
    template<typename T> ty##size operator&&(T val) const \
    { return {(field1 & val) >> _ctz(val), (field2 & val) >> _ctz(val)}; } \
    template<typename T> T _to() \
@@ -293,6 +295,8 @@ struct ty##size##s { s##size field1, field2; \
    { return operator>=(vals.template _to<ty##size##s>()); } \
    template<typename T> ty##size##s operator||(T val) const \
    { return {field1 < val? field1 : val, field2 < val? field2 : val}; } \
+   template<typename T> ty##size##s floor(T val) const \
+   { return {field1 < val? val : field1, field2 < val? val : field2}; } \
    template<typename T> T _to() \
    { return {(typename T::field_type)field1, (typename T::field_type)field2}; } \
    template<typename T> T _transposed_to() \

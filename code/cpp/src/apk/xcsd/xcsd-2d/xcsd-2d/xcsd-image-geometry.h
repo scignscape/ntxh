@@ -39,6 +39,10 @@ public:
  u1 get_mch_clock_code(u1 size_even_odd_code, u1* mask = nullptr);
  static u1 get_mch_clock_code(pr2s pr, u1 size_even_odd_code, u1* mask = nullptr);
 
+ static void reconcile_mch_quadrant(u1 size_even_odd_code, u1 quadrant_code, u2& clk);
+// static u1 get_orthogonal_quadrant_from_mch_code(u1 size_even_odd_code, u1 quadrant_code, prr2 mch_code);
+
+
  pr2s mch_distance_from(const TierBox_Location& rhs);
 
  s2 r() { return rc_.r; }
