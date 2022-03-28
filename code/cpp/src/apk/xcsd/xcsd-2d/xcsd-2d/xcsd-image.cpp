@@ -30,6 +30,10 @@ XCSD_TierBox* XCSD_Image::get_tierbox_at_ground_position(u2 x, u2 y)
 
 }
 
+void XCSD_Image::init_geometry()
+{
+ geometry_.set_total_size(get_wh());
+}
 
 
 SDI_Position XCSD_Image::get_sdi_at_ground_position(u2 x, u2 y)

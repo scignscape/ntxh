@@ -34,10 +34,11 @@ public:
 
  void set_mch_code(pr2s mch);
  pr2s get_mch_code();
- prr2 get_mch_code_normalized(u1 size_even_odd_code, u1* mask = nullptr);
+ prr2 get_mch_code_normalized(//u1 size_even_odd_code,
+                              u1* mask = nullptr);
 
- u1 get_mch_clock_code(u1 size_even_odd_code, u1* mask = nullptr);
- static u1 get_mch_clock_code(pr2s pr, u1 size_even_odd_code, u1* mask = nullptr);
+ u1 get_mch_clock_code(u1* mask = nullptr);
+ static u1 get_mch_clock_code(pr2s pr, u1* mask = nullptr);
 
  static void reconcile_mch_quadrant(u1 size_even_odd_code, u1 quadrant_code, u2& clk);
 // static u1 get_orthogonal_quadrant_from_mch_code(u1 size_even_odd_code, u1 quadrant_code, prr2 mch_code);
@@ -88,6 +89,17 @@ public:
  };
 
  ENUM_FLAGS_OP_MACROS(TierGrid_Preferances)
+
+ struct MCH_Info {
+   u2 tier_ring;
+   u2 inner_pushout;
+   u1 clock_index;
+   u4 area_threshold;
+
+   MCH_Info(const prr2& mch, u1 size_even_odd_code, u1 quadrant_code);
+
+   static u1 get_compressed_clock_index(u1 clk, u1 size_even_odd_code, u1 quadrant_code);
+ };
 
  struct Gridline {
   HVD_Options hvd;
@@ -166,7 +178,8 @@ public:
  void init_tier_counts(TierGrid_Preferances pref);
  void init_tierboxes();
 
- void draw_tier_summary(QString path, r8 magnification, u1 circle_radius);
+ void draw_tier_summary(QString path, QString path1,
+   r8 magnification, u1 circle_radius);
 
 
 };

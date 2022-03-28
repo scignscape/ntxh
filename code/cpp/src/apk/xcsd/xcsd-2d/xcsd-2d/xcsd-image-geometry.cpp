@@ -373,12 +373,12 @@ pr2s TierBox_Location::get_mch_code()
  return {(s2)(mch_code_ >> 16), (s2)(mch_code_ & ~(u2)0)};
 }
 
-u1 TierBox_Location::get_mch_clock_code(pr2s pr, u1 size_even_odd_code, u1* mask)
+u1 TierBox_Location::get_mch_clock_code(pr2s pr, u1* mask)
 {
- if(pr.has_zero())
- {
-//  qDebug() << "pr = " << pr;
- }
+// if(pr.has_zero())
+// {
+////  qDebug() << "pr = " << pr;
+// }
 
  if(pr.is_zeros())
    return 0;
@@ -406,56 +406,43 @@ u1 TierBox_Location::get_mch_clock_code(pr2s pr, u1 size_even_odd_code, u1* mask
  // // size_even_odd_code :
   //   0 = e_e  1 = e_o  2 = o_e  3 = o_o
 
- static u1 cycle_ortho[4][4] =
-  {
-   {18, 6, 12, 0},
-  // {12, 4, 8, 16},
-  // //  6 -> 0  2 -> 6  4 -> 12  0 -> 18
-   {18, 6, 12, 0},
-   {18, 6, 12, 0},
-  // //  6 -> 0  2 -> 6  4 -> 12  0 -> 18
-   {18, 6, 12, 0}
- };
+// static u1 cycle_ortho[4][4] =
+//  {
+//   {18, 6, 12, 0},
+//  // {12, 4, 8, 16},
+//  // //  6 -> 0  2 -> 6  4 -> 12  0 -> 18
+//   {18, 6, 12, 0},
+//   {18, 6, 12, 0},
+//  // //  6 -> 0  2 -> 6  4 -> 12  0 -> 18
+//   {18, 6, 12, 0}
+// };
 
+ // //  6 -> 1  2 -> 7  4 -> 13  0 -> 19
+ static u1 cycle_ortho[4] = {19, 7, 13, 1};
  if(pr.has_zero())
  {
-  return cycle_ortho[size_even_odd_code][_mask/2];
+  return cycle_ortho[_mask/2];
  }
 
- // 3 -> 3  2 -> 9  0 -> 15  1 -> 21
- static u1 cycle_diag[4][4] =
-  {
-   {15, 21, 9, 3},
-   //{10, 14, 6, 2},
-   {15, 21, 9, 3},
-   {15, 21, 9, 3},
-   {15, 21, 9, 3},
- };
-
-
-
+ // 3 -> 4  2 -> 10  0 -> 16  1 -> 22
+ static u1 cycle_diag[4] = {16, 22, 10, 4};
 
  if(abs.first == (abs.second * 2))
  {
-  return cycle_diag[size_even_odd_code][_mask];
+  return cycle_diag[_mask];
  }
 
- // //  7 -> 2  3 -> 4   2 -> 8   6 -> 10
-  //    4 -> 14  0 -> 16  1 -> 20  5 -> 22
- static u1 cycle[4][8] = {
-  {16, 20, 8, 4, 14, 22, 10, 2},
+ // //  7 -> 3  3 -> 5   2 -> 9   6 -> 11
+  //    4 -> 15  0 -> 17  1 -> 21  5 -> 23
+ static u1 cycle[8] = {17, 21, 9, 5, 15, 23, 11, 3};
   //{11, 13, 5, 3, 9, 15, 7, 1},
-  {16, 20, 8, 4, 14, 22, 10, 2},
-  {16, 20, 8, 4, 14, 22, 10, 2},
-  {16, 20, 8, 4, 14, 22, 10, 2},
- };
 
- return cycle[size_even_odd_code][_mask];
+ return cycle[_mask];
 }
 
-u1 TierBox_Location::get_mch_clock_code(u1 size_even_odd_code, u1* mask)
+u1 TierBox_Location::get_mch_clock_code(u1* mask)
 {
- return get_mch_clock_code(get_mch_code(), size_even_odd_code, mask);
+ return get_mch_clock_code(get_mch_code(), mask);
 }
 
 //u1 TierBox_Location::get_orthogonal_quadrant_from_mch_code(u1 size_even_odd_code, u1 quadrant_code, prr2 mch_code)
@@ -470,7 +457,7 @@ void TierBox_Location::reconcile_mch_quadrant(u1 size_even_odd_code, u1 quadrant
  if(size_even_odd_code == 3)
    return;
 
- u1 orthogonal_quadrant = clk / 6;
+ u1 orthogonal_quadrant = (clk - 1) / 6;
 
  if((size_even_odd_code > 0)
    && ((size_even_odd_code % 2) != (orthogonal_quadrant % 2)))
@@ -484,6 +471,9 @@ void TierBox_Location::reconcile_mch_quadrant(u1 size_even_odd_code, u1 quadrant
 
  s1 offset = (quadrant_code == orthogonal_quadrant)? 1 : -1; //1 - 2 * (orthogonal_quadrant % 2);
  clk += offset;
+
+ if(clk == 0)
+   clk = 24;
 
 // if((s1) mch_code.third == -1)
 //   mch_code.third += 24;
@@ -594,11 +584,11 @@ void TierBox_Location::reconcile_mch_quadrant(u1 size_even_odd_code, u1 quadrant
 
 //}
 
-prr2 TierBox_Location::get_mch_code_normalized(u1 size_even_odd_code, u1* mask)
+prr2 TierBox_Location::get_mch_code_normalized(u1* mask)
 {
  pr2s mch = get_mch_code();
  pr2 result = mch.abs().make_ascending();
- u1 clk = get_mch_clock_code(mch, size_even_odd_code, mask);
+ u1 clk = get_mch_clock_code(mch, mask);
  return {result.first, result.second, clk};
 }
 
@@ -614,7 +604,103 @@ u1 XCSD_Image_Geometry::get_size_even_odd_code()
  }
 }
 
-void XCSD_Image_Geometry::draw_tier_summary(QString path, r8 magnification, u1 circle_radius)
+u1 XCSD_Image_Geometry::MCH_Info::get_compressed_clock_index(u1 clk,
+  u1 size_even_odd_code, u1 quadrant_code                                                        )
+{
+ // //  make it clockwise ...
+ if(quadrant_code == 2)
+   quadrant_code = 3;
+ else if(quadrant_code == 3)
+  quadrant_code = 2;
+
+ s1 adj = clk - 4;
+
+ if(clk == 0)
+ {
+  if(size_even_odd_code == 0)
+    return quadrant_code;
+  else if(size_even_odd_code < 2)
+    return 1 - (quadrant_code % 2);
+  else
+    return 0;
+ }
+
+ if((adj % 6) == 0)
+   return adj / 6;
+
+ if( (clk % 2) && ((clk - 1) % 6))
+ {
+  u1 uclk = (clk - 3) / 2;
+  if(uclk > 2)
+    return uclk - (uclk - 2) / 3  - 1;
+  return uclk;
+ }
+
+ pr1s adj_1_4;
+
+ switch (size_even_odd_code)
+ {
+ case 0:
+ {
+  u1 uclk = clk % 6? clk + 1 : clk - 1;
+  s1 sclk = (uclk / 3);
+  if(clk % 6)
+   --sclk;
+  return (u1) (sclk % 8);
+ }
+ case 1:
+  if(clk % 2) // 1, 13
+   return (clk - 1) / 4;
+  else if(clk % 6) // 8, 20            // !% ?
+   adj_1_4 = {3, -12}; //return 3 + ((clk - 12) / 4);
+  else  // 6, 18
+   adj_1_4 = {-1, 2}; //return ((clk + 2) / 4) - 1;
+  break;
+ case 2:
+  if(clk % 2) // 7, 19
+   adj_1_4 = {1, -7}; //return 1 + ((clk - 7) / 4);
+  else if(clk % 6) // 2, 14
+   return (clk - 2) / 4;
+  else // 12, 24
+   adj_1_4 = {2, -12};
+  break;//return 2 + ((clk - 12) / 4);
+ case 3:
+  return (clk - 1) / 6;
+ default:
+  break;
+ }
+
+ // //  return adj_1_4.times({4, 1}).plus({0, (s1)clk}).divide({1, 4}).inner_sum();
+ return adj_1_4.first + ((clk + adj_1_4.second) / 4);
+}
+
+XCSD_Image_Geometry::MCH_Info::MCH_Info(const prr2& mch, u1 size_even_odd_code,
+  u1 quadrant_code)
+{
+ tier_ring = mch.second - mch.first;
+ inner_pushout = mch.first;
+
+ if(tier_ring == 0)
+   area_threshold = 0;
+ else
+ {
+  u4 sq = (2 * tier_ring) - 1;
+  u4 sqh = sq + 1 - (size_even_odd_code & 1);
+  u4 sqv = sq + 1 - ((size_even_odd_code >> 1) & 1);
+  area_threshold = sqh * sqv;
+  //area_threshold = (2 * (tier_ring + 1));
+ }
+
+ clock_index = get_compressed_clock_index(mch.third, size_even_odd_code, quadrant_code);
+
+ //s1 adj = mch.third - 4;
+
+ //u1 clk = mch.third;
+
+}
+
+void XCSD_Image_Geometry::draw_tier_summary(QString path, QString path1,
+  r8 magnification, u1 circle_radius)
 {
  static xy2s bl_text_pixel_offset {1, -6};
  static xy2s bl1_text_pixel_offset {1, -1};
@@ -626,24 +712,36 @@ void XCSD_Image_Geometry::draw_tier_summary(QString path, r8 magnification, u1 c
  QImage image(summary_image_size.width, summary_image_size.height, QImage::Format_RGB16);
  image.fill(-1);
 
+ QImage image1(summary_image_size.width, summary_image_size.height, QImage::Format_RGB16);
+ image1.fill(-1);
+
  u1 size_even_odd_code = get_size_even_odd_code();
 
  QPainter painter;
  painter.begin(&image);
 
- for_each_horizontal_gridline([&painter, &summary_image_size, magnification](Gridline& gl)
+ QPainter painter1;
+ painter1.begin(&image1);
+
+ for_each_horizontal_gridline([&painter, &painter1, &summary_image_size, magnification](Gridline& gl)
  {
   painter.drawLine(0, gl.ground_index * magnification,
     summary_image_size.width, gl.ground_index * magnification);
+
+  painter1.drawLine(0, gl.ground_index * magnification,
+    summary_image_size.width, gl.ground_index * magnification);
  });
 
- for_each_vertical_gridline([&painter, &summary_image_size, magnification](Gridline& gl)
+ for_each_vertical_gridline([&painter, &painter1, &summary_image_size, magnification](Gridline& gl)
  {
   painter.drawLine(gl.ground_index * magnification, 0,
     gl.ground_index * magnification, summary_image_size.height);
+
+  painter1.drawLine(gl.ground_index * magnification, 0,
+    gl.ground_index * magnification, summary_image_size.height);
  });
 
- for_each_full_tierbox([this, &painter, magnification,
+ for_each_full_tierbox([this, &painter, &painter1, magnification,
    circle_radius, size_even_odd_code](Grid_TierBox& gtb)
  {
   xy2s extra_trtext_pixel_offset {0, 0};
@@ -670,31 +768,44 @@ void XCSD_Image_Geometry::draw_tier_summary(QString path, r8 magnification, u1 c
   //pr2s mch_code = gtb.loc.get_mch_code();
 
   u1 mask;
-  prr2 mch = gtb.loc.get_mch_code_normalized(size_even_odd_code, &mask);
+  prr2 mch = gtb.loc.get_mch_code_normalized(&mask);
+
 
   if(mch.first == 0)
   {
    if(mch.second == 0)
-     painter.setBrush(Qt::yellow);
+   {
+    painter.setBrush(Qt::yellow);
+    painter1.setBrush(Qt::yellow);
+   }
    else
    {
     painter.setBrush(Qt::red);
+    painter1.setBrush(Qt::red);
     TierBox_Location::reconcile_mch_quadrant(size_even_odd_code, quadrant_code, mch.third);
-
    }
   }
   else if(mch.second == mch.first * 2)
-    painter.setBrush(Qt::cyan);
+  {
+   painter.setBrush(Qt::cyan);
+   painter1.setBrush(Qt::cyan);
+  }
 
   painter.drawEllipse(QPoint(xyc.x, xyc.y), circle_radius, circle_radius);
+  painter1.drawEllipse(QPoint(xyc.x, xyc.y), circle_radius, circle_radius);
 
   painter.setBrush(Qt::NoBrush);
+  painter1.setBrush(Qt::NoBrush);
+
+  MCH_Info mchi(mch, size_even_odd_code, quadrant_code);
 
   pr2s raw_mch = gtb.loc.get_mch_code();
 
   QString tl_text = QString("%1,%2")
     .arg(gtb.loc.r()).arg(gtb.loc.c())
     ;
+
+  QString tl_text1 = QString::number(mchi.area_threshold);
 
   QString bl_text = QString("%1,%2")
     .arg(mch.first).arg(mch.second)//.arg(mch.third)
@@ -714,9 +825,16 @@ void XCSD_Image_Geometry::draw_tier_summary(QString path, r8 magnification, u1 c
   QString br_text = QString::number(mch.third)
     ;
 
+  QString br_text1 = QString::number(mchi.tier_ring); //mch.drop_last()._transposed().inner_difference());
+//  QString bl_text1 = QString("%1 %2").arg(mchi.inner_pushout)
+//    .arg(mchi.clock_index); //mch.drop_last()._transposed().inner_difference());
+
+  QString bl_text1 = QString::number(mchi.inner_pushout); //mch.drop_last()._transposed().inner_difference());
+  QString bl1_text1 = QString::number(mchi.clock_index); //mch.drop_last()._transposed().inner_difference());
+
   if(is_notation_center)
   {
-   extra_trtext_pixel_offset.x = -9;
+   extra_trtext_pixel_offset.x = -11;
    extra_brtext_pixel_offset.x = -3;
 
    bl_text.prepend("mch=");
@@ -724,6 +842,12 @@ void XCSD_Image_Geometry::draw_tier_summary(QString path, r8 magnification, u1 c
 
    tr_text.prepend("mask=");
    br_text.prepend("clk ");
+
+   tl_text1.prepend("ath ");
+   br_text1.prepend("r ");
+
+   bl_text1.prepend("psh= ");
+   bl1_text1.prepend("index= ");
   }
   else if(br_text.length() == 1)
     extra_brtext_pixel_offset.x = 1;
@@ -744,12 +868,19 @@ void XCSD_Image_Geometry::draw_tier_summary(QString path, r8 magnification, u1 c
   painter.drawText(br_xy.x, br_xy.y, br_text);
   painter.drawText(tr_xy.x, tr_xy.y, tr_text);
 
+  painter1.drawText(tl_xy.x, tl_xy.y, tl_text1);
+  painter1.drawText(br_xy.x, br_xy.y, br_text1);
+  painter1.drawText(bl_xy.x, bl_xy.y, bl_text1);
+  painter1.drawText(bl1_xy.x, bl1_xy.y, bl1_text1);
+
   //qDebug() << "xy = " << xy << " str = " << str;
   });
 
  painter.end();
+ painter1.end();
 
  image.save(path);
+ image1.save(path1);
 }
 
 
@@ -871,3 +1002,121 @@ void XCSD_Image_Geometry::init_tier_counts(TierGrid_Preferances pref)
 //  else // == 3
 //    --mch_code.third;
 // }
+
+
+
+//XCSD_Image_Geometry::MCH_Info::MCH_Info(const prr2& mch, u1 size_even_odd_code, u1 quadrant_code)
+//{
+// tier_ring = mch.second - mch.first;
+// inner_pushout = mch.first;
+
+// clock_index = 0;
+
+// // //  make it clockwise ...
+// if(quadrant_code == 2)
+//   quadrant_code = 3;
+// else if(quadrant_code == 3)
+//  quadrant_code = 2;
+
+// //s1 adj = mch.third - 4;
+
+// u1 clk = mch.third;
+
+// s1 adj = clk - 4;
+
+//// if(mch.first == 0)
+//// {
+////  if(mch.second == 0)
+//  if(clk == 0)
+//  {
+//   if(size_even_odd_code == 0)
+//     clock_index = quadrant_code;
+//   else if(size_even_odd_code < 2)
+//    clock_index = 1 - (quadrant_code % 2);
+//  }
+
+////   else if(clk % 2)
+////   {
+////    clock_index = 100 + ((clk - 3) / 2);
+////   }
+
+//  else if((adj % 6) == 0)
+//  {
+
+// //  if(adj % 6)
+// //    ;
+// //  else // clk = 4, 10, 16, 22
+//   clock_index = adj / 6;
+//  }
+
+//  else if( (clk % 2) && ((clk - 1) % 6))
+//  {
+//   u1 uclk = (clk - 3) / 2;
+//   if(uclk > 2)
+//     clock_index = uclk - (uclk - 2) / 3  - 1;
+//   else clock_index = uclk;
+//   //clock_index = 100 + ((clk - 3) / 2);
+//  }
+
+
+//  else
+////   if //(mch.first == 0) //
+////   (  ((clk % 2) == 0)   //((clk % 2 == 0) && ((clk - 4) % 6))
+
+////    ||  ((clk - 1) % 6) == 0
+////   )
+//    // 6,8, 12,14, 18,20  24,2
+//  {
+//   u1 uclk;
+//   s1 sclk;
+//   switch (size_even_odd_code)
+//   {
+//   case 0:
+//    uclk = clk % 6? clk + 1 : clk - 1;
+//    sclk = (uclk / 3);
+//    if(clk % 6)
+//      --sclk;
+//    clock_index = (u1) (sclk % 8);
+//    break;
+//   case 1:
+//    if(clk % 2) // 1, 13
+//      clock_index = (clk - 1) / 4;
+//    else if(clk % 6) // 8, 20            // !% ?
+//      clock_index = 3 + ((clk - 12) / 4);
+//    else  // 6, 18
+//      clock_index = ((clk + 2) / 4) - 1;
+//    break;
+//   case 2:
+//    if(clk % 2) // 7, 19
+//      clock_index = 1 + ((clk - 7) / 4);
+//    else if(clk % 6) // 2, 14
+//      clock_index = (clk - 2) / 4;
+//    else // 12, 24
+//      clock_index = 2 + ((clk - 12) / 4);
+//    break;
+//   case 3:
+//      clock_index = (clk - 1) / 6;
+//    break;
+//   default:
+//    break;
+
+//   }
+//  }
+
+// //}
+
+//   //static u1 index[4] {};
+////   switch (size_even_odd_code)
+////   {
+////   case 0: clock_index = quadrant_code; break;
+////   case 1: clock_index = 1 - quadrant_code % 2; break;
+////   case 2: clock_index = 1 - quadrant_code % 2; break;
+////   default: break;
+////   }
+
+// //red
+// //u1 index[4][25] =
+
+//}
+
+

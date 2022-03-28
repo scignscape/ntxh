@@ -38,6 +38,7 @@ public:
  XCSD_Image();
 
  ACCESSORS__RGET(QImage ,image)
+ ACCESSORS__RGET(XCSD_Image_Geometry ,geometry)
 
 
  XCSD_TierBox* get_tierbox_at_ground_position(u2 x, u2 y);
@@ -60,6 +61,7 @@ public:
 
  void init_tier_counts(XCSD_Image_Geometry::TierGrid_Preferances pref);
 
+ void init_geometry();
  void init_tierboxes();
 
  void get_255_palatte(QVector<QColor>& vec);
