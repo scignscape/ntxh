@@ -604,8 +604,23 @@ u1 XCSD_Image_Geometry::get_size_even_odd_code()
  }
 }
 
+//u4 XCSD_Image_Geometry::MCH_Info::get_area_threshold_adjustment(wh2 tier_size,
+//  u1 size_even_odd_code, u1 quadrant_code)
+//{
+// if(margin_code == 0)
+//   return 0;
+
+// // //  make it clockwise ...
+// if(quadrant_code == 2)
+//   quadrant_code = 3;
+// else if(quadrant_code == 3)
+//  quadrant_code = 2;
+
+// return 0;
+//}
+
 u1 XCSD_Image_Geometry::MCH_Info::get_compressed_clock_index(u1 clk,
-  u1 size_even_odd_code, u1 quadrant_code                                                        )
+  u1 size_even_odd_code, u1 quadrant_code)
 {
  // //  make it clockwise ...
  if(quadrant_code == 2)
@@ -674,9 +689,21 @@ u1 XCSD_Image_Geometry::MCH_Info::get_compressed_clock_index(u1 clk,
  return adj_1_4.first + ((clk + adj_1_4.second) / 4);
 }
 
-XCSD_Image_Geometry::MCH_Info::MCH_Info(const prr2& mch, u1 size_even_odd_code,
-  u1 quadrant_code)
+XCSD_Image_Geometry::MCH_Info::MCH_Info(const prr2& mch, const prr2& margin_info,
+   u2 lesser_side, u1 size_even_odd_code, u1 quadrant_code)
 {
+ margin_code = (u1) margin_info.first;
+ margin_gap = margin_info.second;
+
+ qDebug() << "margin code = " << margin_code << ", full_margin = " << margin_info.third;
+
+ if(margin_code == 0)
+   area_threshold_adjustment = 0;
+ else
+ {
+  area_threshold_adjustment = (margin_gap - 1) * lesser_side * 2;
+ }
+
  tier_ring = mch.second - mch.first;
  inner_pushout = mch.first;
 
@@ -684,19 +711,157 @@ XCSD_Image_Geometry::MCH_Info::MCH_Info(const prr2& mch, u1 size_even_odd_code,
    area_threshold = 0;
  else
  {
-  u4 sq = (2 * tier_ring) - 1;
-  u4 sqh = sq + 1 - (size_even_odd_code & 1);
-  u4 sqv = sq + 1 - ((size_even_odd_code >> 1) & 1);
+  u4 sq, sqh, sqv;
+
+  if(margin_code == 0 || margin_gap == 1) //? (2 * tier_ring) - 1 : lesser_side;
+  {
+   sq = (2 * tier_ring) - 1;
+   // //  the -1 + 1 is mathematically redundant here
+    //    but expresses that sq represents the square
+    //    side spanned by the tier ring
+   sqh = sq + 1 - (size_even_odd_code & 1);
+   sqv = sq + 1 - ((size_even_odd_code >> 1) & 1);
+  }
+  else
+  {
+   sq = lesser_side;
+   sqh = sq - (size_even_odd_code & 1);
+   sqv = sq - ((size_even_odd_code >> 1) & 1);
+  }
+
+
+  qDebug() << "seoc = " << size_even_odd_code;
+
+  qDebug() << "sq = " << sq << ", sqh = " << sqh << ", sqv = " << sqv;
+
   area_threshold = sqh * sqv;
   //area_threshold = (2 * (tier_ring + 1));
  }
+ area_threshold += area_threshold_adjustment;
 
  clock_index = get_compressed_clock_index(mch.third, size_even_odd_code, quadrant_code);
-
+ //get_area_threshold_adjustment(tier_size, size_even_odd_code, quadrant_code);
  //s1 adj = mch.third - 4;
 
  //u1 clk = mch.third;
 
+}
+
+prr2 XCSD_Image_Geometry::get_margin_info(const TierBox_Location& loc)
+{
+ if(full_tier_counts_.is_coequal())
+   return {0, 0, 0};
+
+ //u1 size_even_odd_code = get_size_even_odd_code();
+
+
+ u1 lmod = full_tier_counts_.width % 2;
+ u1 hmod = full_tier_counts_.height % 2;
+
+// qDebug() << "seoc = " << size_even_odd_code;
+// qDebug() << "hmod = " << hmod;
+// qDebug() << "lmod = " << lmod;
+
+ u1 adj = hmod & lmod;
+
+ u1 margin_code = 0;
+ u2 full_margin = 0;
+ u2 margin_gap = 0;
+
+
+ if(full_tier_counts_.is_ascending())
+ {
+  // //  portrait-like
+  u2 r = loc.r();
+  u2 top = full_tier_counts_._transposed().inner_difference() / 2;
+  full_margin = top;
+
+  if(r < top + hmod - adj)
+  {
+   margin_code = 2;
+   margin_gap = top + hmod - adj - r;
+  }
+
+  if(r > top + full_tier_counts_.width + lmod - 1 - adj)
+  {
+   margin_code = 4;
+   // margin_gap = r - (top + full_tier_counts_.width + lmod - 1 - adj);
+   margin_gap = r - top - full_tier_counts_.width - lmod + 1 + adj;
+  }
+
+  //?
+
+ }
+ else
+ {
+ // //  landscape-like
+  u2 c = loc.c();
+  u2 left = full_tier_counts_.inner_difference() / 2;
+
+  full_margin = left;
+
+  if(c < left + lmod - adj)
+  {
+   margin_code = 1;
+   margin_gap = left + lmod - adj - c;
+  }
+
+  if(c > left + full_tier_counts_.height + hmod - 1 - adj)
+  {
+   margin_code = 3;
+   //margin_gap = c - (left + full_tier_counts_.height + hmod - 1 - adj);
+   margin_gap = c - left - full_tier_counts_.height - hmod + 1 + adj;
+  }
+
+ }
+ return {margin_code, margin_gap, full_margin};
+
+#ifdef HIDE
+ switch(size_even_odd_code)
+ {
+ case 0:
+  if(c < left + lmod)  // lh = 00
+    return 1;
+  else if(c > left + full_tier_counts_.height + hmod - 1)
+    return 3;
+  break;
+ case 1:
+  if(c < left + lmod)    // lh = 01
+    return 1;
+  else if(c > left + full_tier_counts_.height + hmod - 1)
+    return 3;
+  break;
+// case 2:
+//  if(c < left)
+//    return 1;
+//  else if(c >= left + full_tier_counts_.height)
+//    return 3;
+//  break;
+
+//  if(c < left + (full_tier_counts_.width % 2))
+//    return 1;
+//  else if(c > left + full_tier_counts_.height)
+//    return 3;
+//  break;
+ case 2:   // lh = 10
+  if(c < left + lmod)
+    return 1;
+  else if(c > left + full_tier_counts_.height + hmod - 1)
+    return 3;
+  break;
+ case 3:
+  adj = 1; // lh = 11
+  if(c < left + lmod - adj)
+    return 1;
+  else if(c > left + full_tier_counts_.height + hmod - 1 + adj)
+    return 3;
+  break;
+ default: break;
+ }
+
+
+ return 0;
+#endif
 }
 
 void XCSD_Image_Geometry::draw_tier_summary(QString path, QString path1,
@@ -706,7 +871,7 @@ void XCSD_Image_Geometry::draw_tier_summary(QString path, QString path1,
  static xy2s bl1_text_pixel_offset {1, -1};
  static xy2s tl_text_pixel_offset {1, 3};
  static xy2s br_text_pixel_offset {-5, -4};
- static xy2s tr_text_pixel_offset {-3, 4};
+ static xy2s tr_text_pixel_offset {-3, 6};
 
  wh2 summary_image_size = total_size_ * magnification;
  QImage image(summary_image_size.width, summary_image_size.height, QImage::Format_RGB16);
@@ -797,7 +962,10 @@ void XCSD_Image_Geometry::draw_tier_summary(QString path, QString path1,
   painter.setBrush(Qt::NoBrush);
   painter1.setBrush(Qt::NoBrush);
 
-  MCH_Info mchi(mch, size_even_odd_code, quadrant_code);
+  prr2 margin_info = get_margin_info(gtb.loc);
+
+  MCH_Info mchi(mch, margin_info, full_tier_counts_.lesser(),
+    size_even_odd_code, quadrant_code);
 
   pr2s raw_mch = gtb.loc.get_mch_code();
 
@@ -805,7 +973,8 @@ void XCSD_Image_Geometry::draw_tier_summary(QString path, QString path1,
     .arg(gtb.loc.r()).arg(gtb.loc.c())
     ;
 
-  QString tl_text1 = QString::number(mchi.area_threshold);
+  QString tl_text1 = QString("%1 %2 + %3")
+    .arg(mchi.area_threshold).arg(mchi.margin_gap).arg(mchi.area_threshold_adjustment);
 
   QString bl_text = QString("%1,%2")
     .arg(mch.first).arg(mch.second)//.arg(mch.third)
@@ -820,6 +989,9 @@ void XCSD_Image_Geometry::draw_tier_summary(QString path, QString path1,
     ;
 
   QString tr_text = QString::number(mask)
+    ;
+
+  QString tr_text1 = QString::number(mchi.margin_code);
     ;
 
   QString br_text = QString::number(mch.third)
@@ -843,6 +1015,7 @@ void XCSD_Image_Geometry::draw_tier_summary(QString path, QString path1,
    tr_text.prepend("mask=");
    br_text.prepend("clk ");
 
+   tr_text1.prepend("mrgn ");
    tl_text1.prepend("ath ");
    br_text1.prepend("r ");
 
@@ -868,6 +1041,7 @@ void XCSD_Image_Geometry::draw_tier_summary(QString path, QString path1,
   painter.drawText(br_xy.x, br_xy.y, br_text);
   painter.drawText(tr_xy.x, tr_xy.y, tr_text);
 
+  painter1.drawText(tr_xy.x, tr_xy.y, tr_text1);
   painter1.drawText(tl_xy.x, tl_xy.y, tl_text1);
   painter1.drawText(br_xy.x, br_xy.y, br_text1);
   painter1.drawText(bl_xy.x, bl_xy.y, bl_text1);

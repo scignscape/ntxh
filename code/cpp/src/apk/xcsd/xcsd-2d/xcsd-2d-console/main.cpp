@@ -40,6 +40,7 @@ int main(int argc , char **argv)
  //
  xcsg.set_total_size(284, 174);
 
+ //xcsg.set_total_size(174, 284);
 
 // XCSD_Image xcsd;
 // // xcsd.load_image(ROOT_FOLDER "/../pics/angle.jpg");

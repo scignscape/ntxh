@@ -46,8 +46,8 @@ public:
 
  pr2s mch_distance_from(const TierBox_Location& rhs);
 
- s2 r() { return rc_.r; }
- s2 c() { return rc_.c; }
+ s2 r() const { return rc_.r; }
+ s2 c() const { return rc_.c; }
 
  bool is_full_tier()
  {
@@ -95,10 +95,15 @@ public:
    u2 inner_pushout;
    u1 clock_index;
    u4 area_threshold;
+   u4 area_threshold_adjustment;
+   u1 margin_code;
+   u2 margin_gap;
 
-   MCH_Info(const prr2& mch, u1 size_even_odd_code, u1 quadrant_code);
+   MCH_Info(const prr2& mch, const prr2& margin_info, u2 lesser_side, u1 size_even_odd_code, u1 quadrant_code);
 
    static u1 get_compressed_clock_index(u1 clk, u1 size_even_odd_code, u1 quadrant_code);
+   //u4 get_area_threshold_adjustment(wh2 tier_size, u1 size_even_odd_code, u1 quadrant_code);
+
  };
 
  struct Gridline {
@@ -151,6 +156,8 @@ public:
  static constexpr u1 tierbox_width = 27;
 
  u1 get_size_even_odd_code();
+
+ prr2 get_margin_info(const TierBox_Location& loc);
 
  void for_each_horizontal_gridline(std::function<void(Gridline&)> fn);
  void for_each_vertical_gridline(std::function<void(Gridline&)> fn);
