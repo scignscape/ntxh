@@ -128,14 +128,12 @@ public:
      Size_Even_Odd_Info& size_even_odd_info, u1 quadrant_code);
 
    static u1 get_compressed_clock_index(u1 clk, u1 size_even_odd_code, u1 quadrant_code);
-   //u4 get_area_threshold_adjustment(wh2 tier_size, u1 size_even_odd_code, u1 quadrant_code);
-
  };
 
  struct Gridline {
-  HVD_Options hvd;
-  u2 tier_index;
-  u2 ground_index;
+   HVD_Options hvd;
+   u2 tier_index;
+   u2 ground_index;
  };
 
  struct Grid_TierBox {

@@ -29,18 +29,32 @@ int main(int argc , char **argv)
  QGuiApplication app(argc, argv);
 
  XCSD_Image_Geometry xcsg;
-// xcsg.set_total_size(54, 108);
+//xcsg.set_total_size(54, 108);
 // xcsg.set_total_size(160, 90);
 
- //xcsg.set_total_size(304, 194);
- //
-xcsg.set_total_size(284, 194);
- //
- //
- //xcsg.set_total_size(304, 174);
- //xcsg.set_total_size(284, 174);
+ // landscape
+ // xcsg.set_total_size(304, 194);
+ // xcsg.set_total_size(304 + 54, 194 + 54);
+ // xcsg.set_total_size(284, 194);
+ // xcsg.set_total_size(284 + 54, 194 + 54);
+ // xcsg.set_total_size(304, 174);
+ // xcsg.set_total_size(304 + 54, 174 + 54);
+ // xcsg.set_total_size(284, 174);
 
- //xcsg.set_total_size(174, 284);
+ // portrait
+ // xcsg.set_total_size(194, 304);
+ // xcsg.set_total_size(194 + 54, 304 + 54);
+ // xcsg.set_total_size(194, 284);
+ // xcsg.set_total_size(194 + 54, 284 + 54);
+ // xcsg.set_total_size(174, 304);
+ // xcsg.set_total_size(174 + 54, 304 + 54);
+ // xcsg.set_total_size(174, 284);
+
+ // square
+ // xcsg.set_total_size(194, 194);
+ //
+ xcsg.set_total_size(284, 284);
+ // xcsg.set_total_size(304, 304);
 
 // XCSD_Image xcsd;
 // // xcsd.load_image(ROOT_FOLDER "/../pics/angle.jpg");
