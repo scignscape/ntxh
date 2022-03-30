@@ -90,16 +90,42 @@ public:
 
  ENUM_FLAGS_OP_MACROS(TierGrid_Preferances)
 
+ struct Size_Even_Odd_Info {
+  u1 size_even_odd_code;
+  u1 v_center_adjustment;
+  u1 h_center_adjustment;
+  u1 full_ortho_cycle_size;
+  u1 margin_ortho_cycle_size;
+
+  void landscape();
+  void portrait();
+
+  Size_Even_Odd_Info(u1 code)
+  {
+   size_even_odd_code = code;
+   v_center_adjustment = 1 - (size_even_odd_code % 2); // 1 extra center row
+   h_center_adjustment = 1 - ((size_even_odd_code >> 1) % 2); // 1 extra center column
+
+   full_ortho_cycle_size = 4 + 2 * v_center_adjustment + 2 * h_center_adjustment;
+   margin_ortho_cycle_size = 0;
+  }
+ };
+
  struct MCH_Info {
    u2 tier_ring;
    u2 inner_pushout;
-   u1 clock_index;
+   u1 compressed_clock_index;
+   u1 full_clock_index;
+   u1 clock_index_adjustment;
    u4 area_threshold;
    u4 area_threshold_adjustment;
+   u4 full_tier_index;
    u1 margin_code;
    u2 margin_gap;
+   u2 intra_tier_ring_index;
 
-   MCH_Info(const prr2& mch, const prr2& margin_info, u2 lesser_side, u1 size_even_odd_code, u1 quadrant_code);
+   MCH_Info(const prr2& mch, const prr2& margin_info, u2 lesser_side,
+     Size_Even_Odd_Info& size_even_odd_info, u1 quadrant_code);
 
    static u1 get_compressed_clock_index(u1 clk, u1 size_even_odd_code, u1 quadrant_code);
    //u4 get_area_threshold_adjustment(wh2 tier_size, u1 size_even_odd_code, u1 quadrant_code);
@@ -157,7 +183,7 @@ public:
 
  u1 get_size_even_odd_code();
 
- prr2 get_margin_info(const TierBox_Location& loc);
+ prr2 get_margin_info(const TierBox_Location& loc, u1 quadrant_code);
 
  void for_each_horizontal_gridline(std::function<void(Gridline&)> fn);
  void for_each_vertical_gridline(std::function<void(Gridline&)> fn);
