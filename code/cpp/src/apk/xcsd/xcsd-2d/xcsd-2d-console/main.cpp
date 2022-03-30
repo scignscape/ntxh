@@ -33,12 +33,12 @@ int main(int argc , char **argv)
 // xcsg.set_total_size(160, 90);
 
  //xcsg.set_total_size(304, 194);
- //xcsg.set_total_size(284, 194);
+ //
+xcsg.set_total_size(284, 194);
  //
  //
- //
- xcsg.set_total_size(304, 174);
- // xcsg.set_total_size(284, 174);
+ //xcsg.set_total_size(304, 174);
+ //xcsg.set_total_size(284, 174);
 
  //xcsg.set_total_size(174, 284);
 
