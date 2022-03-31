@@ -24,23 +24,25 @@
 XCNS_(XCSD)
 
 template<typename VAL_Type, typename INDEX_Types = index_types<s2>, typename PR_Type>
-class Deq1d : protected _Vec1d<VAL_Type>,
-  public each_holders<Deq1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>
+class Deq1d : protected _Vec1d<VAL_Type, INDEX_Types, PR_Type>,
+  public each_holders<Deq1d<VAL_Type, INDEX_Types, PR_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>
 {
+ using self_type = Deq1d<VAL_Type, INDEX_Types, PR_Type>;
+
  u2 offset_;
 
 public:
 
  Deq1d(typename INDEX_Types::Numeric_Nested_Index_type layer_size = 16,
        typename INDEX_Types::Numeric_Nested_Index_type block_size = 16)
-  :  _Vec1d<VAL_Type>(layer_size, block_size), offset_(0),
-    each_holders<Deq1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
+  :  _Vec1d<VAL_Type, INDEX_Types, PR_Type>(layer_size, block_size), offset_(0),
+    each_holders<self_type, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
  {
  }
 
  void set_default_fn(std::function<void(VAL_Type**)> fn)
  {
-  _Vec1d<VAL_Type>::set_default_fn(fn);
+  _Vec1d<VAL_Type, INDEX_Types, PR_Type>::set_default_fn(fn);
  }
 
  void _set_default(std::function<void(VAL_Type**)> fn)
@@ -81,68 +83,68 @@ public:
  void _each(std::function<void(VAL_Type& v)> fn)
  {
   if(offset_ == 0)
-    _Vec1d<VAL_Type>::_each(fn);
+    _Vec1d<VAL_Type, INDEX_Types, PR_Type>::_each(fn);
   else
-    _Vec1d<VAL_Type>::_each_from_index(offset_, fn);
+    _Vec1d<VAL_Type, INDEX_Types, PR_Type>::_each_from_index(offset_, fn);
  }
 
  void _each(std::function<void(VAL_Type& v, const typename INDEX_Types::Numeric_Index_type& index)> fn)
  {
   if(offset_ == 0)
-    _Vec1d<VAL_Type>::_each(fn);
+    _Vec1d<VAL_Type, INDEX_Types, PR_Type>::_each(fn);
   else
-    _Vec1d<VAL_Type>::_each_from_index(offset_, fn);
+    _Vec1d<VAL_Type, INDEX_Types, PR_Type>::_each_from_index(offset_, fn);
  }
 
  PR_Type _pr_each(std::function<typename PR_Type::level_type(VAL_Type& v)> fn)
  {
   if(offset_ == 0)
-    return _Vec1d<VAL_Type>::_pr_each(fn);
+    return _Vec1d<VAL_Type, INDEX_Types, PR_Type>::_pr_each(fn);
   else
-    return _Vec1d<VAL_Type>::_pr_each_from_index(offset_, fn);
+    return _Vec1d<VAL_Type, INDEX_Types, PR_Type>::_pr_each_from_index(offset_, fn);
  }
 
  PR_Type _pr_each(std::function<typename PR_Type::level_type(VAL_Type& v,
    const typename INDEX_Types::Numeric_Index_type& index)> fn)
  {
   if(offset_ == 0)
-    return _Vec1d<VAL_Type>::_pr_each(fn);
+    return _Vec1d<VAL_Type, INDEX_Types, PR_Type>::_pr_each(fn);
   else
-    return _Vec1d<VAL_Type>::_pr_each_from_index(offset_, fn);
+    return _Vec1d<VAL_Type, INDEX_Types, PR_Type>::_pr_each_from_index(offset_, fn);
  }
 
  void _reach(std::function<void(VAL_Type& v)> fn)
  {
   if(offset_ == 0)
-    _Vec1d<VAL_Type>::_reach(fn);
+    _Vec1d<VAL_Type, INDEX_Types, PR_Type>::_reach(fn);
   else
-    _Vec1d<VAL_Type>::_reach_to_index(offset_, fn);
+    _Vec1d<VAL_Type, INDEX_Types, PR_Type>::_reach_to_index(offset_, fn);
  }
 
  void _reach(std::function<void(VAL_Type& v,
    const typename INDEX_Types::Numeric_Index_type& index)> fn)
  {
   if(offset_ == 0)
-    _Vec1d<VAL_Type>::_reach(fn);
+    _Vec1d<VAL_Type, INDEX_Types, PR_Type>::_reach(fn);
   else
-    _Vec1d<VAL_Type>::_reach_to_index(offset_, fn);
+    _Vec1d<VAL_Type, INDEX_Types, PR_Type>::_reach_to_index(offset_, fn);
  }
 
  PR_Type _pr_reach(std::function<typename PR_Type::level_type(VAL_Type& v)> fn)
  {
   if(offset_ == 0)
-    return _Vec1d<VAL_Type>::_pr_reach(fn);
+    return _Vec1d<VAL_Type, INDEX_Types, PR_Type>::_pr_reach(fn);
   else
-    return _Vec1d<VAL_Type>::_pr_reach_to_index(fn, offset_);
+    return _Vec1d<VAL_Type, INDEX_Types, PR_Type>::_pr_reach_to_index(fn, offset_);
  }
 
  PR_Type _pr_reach(std::function<typename PR_Type::level_type(VAL_Type& v,
    const typename INDEX_Types::Numeric_Index_type& index)> fn)
  {
   if(offset_ == 0)
-    return _Vec1d<VAL_Type>::_pr_reach(fn);
+    return _Vec1d<VAL_Type, INDEX_Types, PR_Type>::_pr_reach(fn);
   else
-    return _Vec1d<VAL_Type>::_pr_reach_to_index(fn, offset_);
+    return _Vec1d<VAL_Type, INDEX_Types, PR_Type>::_pr_reach_to_index(fn, offset_);
  }
 
  VAL_Type& back()

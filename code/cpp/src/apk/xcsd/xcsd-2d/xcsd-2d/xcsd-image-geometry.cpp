@@ -295,6 +295,7 @@ xy2 XCSD_Image_Geometry::Grid_TierBox::top_left()
  return ground_center.double_zminus(tierbox_width / 2);
 }
 
+// //  these will need an offset on the + if tierbox_width is even ...
 xy2 XCSD_Image_Geometry::Grid_TierBox::top_right()
 {
  return ground_center.plus_and_zminus(tierbox_width / 2);
@@ -358,7 +359,7 @@ void TierBox_Location::set_mch_code(pr2s mch)
  mch_code_ = mch.binary_merge();
 
 //   (u4)mch.first << 16;
-////  (((u4)mch.first << (16)) | (u4)mch.second);
+//  (((u4)mch.first << (16)) | (u4)mch.second);
 
 // mch_code_ |= (u4)(u2)mch.second;
 
@@ -368,7 +369,7 @@ void TierBox_Location::set_mch_code(pr2s mch)
 // s2 tt = mc - mc1;
 }
 
-pr2s TierBox_Location::get_mch_code()
+pr2s TierBox_Location::get_mch_code() const
 {
  return {(s2)(mch_code_ >> 16), (s2)(mch_code_ & ~(u2)0)};
 }
@@ -584,7 +585,7 @@ void TierBox_Location::reconcile_mch_quadrant(u1 size_even_odd_code, u1 quadrant
 
 //}
 
-prr2 TierBox_Location::get_mch_code_normalized(u1* mask)
+prr2 TierBox_Location::get_mch_code_normalized(u1* mask) const
 {
  pr2s mch = get_mch_code();
  pr2 result = mch.abs().make_ascending();
@@ -885,6 +886,57 @@ void XCSD_Image_Geometry::Size_Even_Odd_Info::portrait()
  margin_ortho_cycle_size = 2 * (1 + h_center_adjustment);
 }
 
+u4 XCSD_Image_Geometry::get_tierbox_index(const Grid_TierBox& gtb,
+  Size_Even_Odd_Info size_even_odd_info)
+{
+ //static constexpr u2 tierbox_pixel_size = 27*27;
+
+ rc2s quadrant = gtb.loc.rc() - directed_centers_.back().rc();
+
+//  qDebug() << "quadrant = " << quadrant;
+
+ rc2s quadrant_mask = quadrant.spaceship_mask().plus(quadrant.zeros_mask());
+
+ u1 quadrant_code = quadrant_mask.floor(0).times({2, 1}).inner_sum();
+
+//  qDebug() << "quadrant_code = " << quadrant_code;
+
+// u3
+ //pr2s mch_code = gtb.loc.get_mch_code();
+
+ prr2 mch = gtb.loc.get_mch_code_normalized();
+
+ if(mch.first == 0)
+ {
+  if(mch.second > 0)
+  {
+   TierBox_Location::reconcile_mch_quadrant(size_even_odd_info.size_even_odd_code,
+     quadrant_code, mch.third);
+  }
+ }
+
+ prr2 margin_info = get_margin_info(gtb.loc, quadrant_code);
+
+ MCH_Info mchi(mch, margin_info, full_tier_counts_.lesser(),
+   size_even_odd_info, quadrant_code);
+
+ return mchi.full_tier_index;
+ //pr2s raw_mch = gtb.loc.get_mch_code();
+
+}
+
+XCSD_Image_Geometry::Iteration_Environment::Iteration_Environment(u1 size_even_odd_code)
+  :  size_even_odd_info(size_even_odd_code)
+{
+
+}
+
+XCSD_Image_Geometry::Iteration_Environment
+XCSD_Image_Geometry::formulate_iteration_environment()
+{
+ u1 size_even_odd_code = get_size_even_odd_code();
+ return Iteration_Environment(size_even_odd_code);
+}
 
 
 void XCSD_Image_Geometry::draw_tier_summary(QString path, QString path1,

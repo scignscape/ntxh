@@ -16,9 +16,12 @@
 XCNS_(XCSD)
 
 template<typename VAL_Type, typename INDEX_Types = index_types<s2>, typename PR_Type = _pr_break>
-class Arr1d : public _Vec1d<VAL_Type>,
-   public each_holders<Arr1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>
+class Arr1d : public _Vec1d<VAL_Type, INDEX_Types, PR_Type>,
+  public each_holders<Arr1d<VAL_Type, INDEX_Types, PR_Type>,
+    VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>
 {
+ using self_type = Arr1d<VAL_Type, INDEX_Types, PR_Type>;
+
  using nnx = typename INDEX_Types::Numeric_Nested_Index_type;
  using nx = typename INDEX_Types::Numeric_Nested_Index_type;
  using val_t = VAL_Type;
@@ -30,7 +33,7 @@ public:
  Arr1d(std::initializer_list<nx> length, typename INDEX_Types::Numeric_Nested_Index_type layer_size,
        typename INDEX_Types::Numeric_Nested_Index_type block_size = 17)
   :  _Vec1d<VAL_Type>(layer_size, block_size),
-    each_holders<Arr1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
+    each_holders<self_type, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
     //length_(length)
  {
   if(length.size() > 0)
@@ -38,8 +41,8 @@ public:
  }
 
  Arr1d(std::initializer_list<nx> length)
-  :  _Vec1d<VAL_Type>({0}),
-    each_holders<Arr1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
+  :  _Vec1d<VAL_Type, INDEX_Types, PR_Type>({0}),
+    each_holders<self_type, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
     //length_(length)
  {
   if(length.size() > 0)
@@ -58,6 +61,12 @@ public:
   u4 result = sz - length_;
   _Vec1d<VAL_Type>::push_back(v);
   return result;
+ }
+
+ void init_raw_data(u4 start_index, u4 length, VAL_Type const* source)
+ {
+  n8* start = this->get(start_index);
+  memcpy(start, source, length * this->hive_structure_->value_size());
  }
 
 };

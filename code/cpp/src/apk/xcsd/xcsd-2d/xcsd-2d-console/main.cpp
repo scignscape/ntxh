@@ -28,7 +28,7 @@ int main(int argc , char **argv)
 {
  QGuiApplication app(argc, argv);
 
- XCSD_Image_Geometry xcsg;
+// XCSD_Image_Geometry xcsg;
 //xcsg.set_total_size(54, 108);
 // xcsg.set_total_size(160, 90);
 
@@ -52,23 +52,27 @@ int main(int argc , char **argv)
 
  // square
  // xcsg.set_total_size(194, 194);
- //
- xcsg.set_total_size(284, 284);
+ // xcsg.set_total_size(284, 284);
  // xcsg.set_total_size(304, 304);
 
-// XCSD_Image xcsd;
-// // xcsd.load_image(ROOT_FOLDER "/../pics/angle.jpg");
-// //xcsd.load_image(ROOT_FOLDER "/../pi/t1-30x30.png");
-// xcsd.init_geometry();
-// XCSD_Image_Geometry& xcsg = xcsd.geometry();
+ XCSD_Image xcsd;
+ xcsd.load_image(ROOT_FOLDER "/../pics/angle.jpg");
+ //xcsd.load_image(ROOT_FOLDER "/../pi/t1-30x30.png");
+ xcsd.init_geometry();
+ XCSD_Image_Geometry& xcsg = xcsd.geometry();
 
  xcsg.init_tier_counts(XCSD_Image_Geometry::TierGrid_Preferances::Minimize_Outer_Tiers);
 
- xcsg.draw_tier_summary(QString(ROOT_FOLDER "/../tiers/t%1x%2.png")
-     .arg(xcsg.total_size().width).arg(xcsg.total_size().height),
-   QString(ROOT_FOLDER "/../tiers/t%1x%2-seq.png")
-     .arg(xcsg.total_size().width).arg(xcsg.total_size().height),
-                        3.3, 8);
+// xcsg.draw_tier_summary(QString(ROOT_FOLDER "/../tiers/t%1x%2.png")
+//     .arg(xcsg.total_size().width).arg(xcsg.total_size().height),
+//   QString(ROOT_FOLDER "/../tiers/t%1x%2-seq.png")
+//     .arg(xcsg.total_size().width).arg(xcsg.total_size().height),
+//                        3.3, 8);
+
+
+ xcsd.init_pixel_data();
+
+ xcsd.save_full_tier_image(QString(ROOT_FOLDER "/../tiers/ft1.png"));
 
 // xcsg.draw_tier_summary(ROOT_FOLDER "/../tiers/t284x194.png", 2.5, 4);
 // xcsg.draw_tier_summary(ROOT_FOLDER "/../tiers/t284x194.png", 2.5, 4);

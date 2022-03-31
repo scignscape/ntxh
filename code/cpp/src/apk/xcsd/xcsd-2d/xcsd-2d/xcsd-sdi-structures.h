@@ -135,25 +135,25 @@ inline constexpr u1 _ctz(int x)
    { *this = this->over(rhs); return *this;} \
    template<typename T> ty##size& divide(T vals) \
    { return divide(vals.template _to<ty##size>()); } \
-   bool operator<(ty##size rhs) \
+   bool operator<(ty##size rhs) const \
    { return field1 < rhs.field1 && field2 < rhs.field2; } \
-   template<typename T> bool operator<(T vals) \
+   template<typename T> bool operator<(T vals) const \
    { return operator<(vals.template _to<ty##size>()); } \
-   bool operator==(ty##size rhs) \
+   bool operator==(ty##size rhs) const \
    { return field1 == rhs.field1 && field2 == rhs.field2; } \
-   template<typename T> bool operator==(T vals) \
+   template<typename T> bool operator==(T vals) const \
    { return operator==(vals.template _to<ty##size>()); } \
-   bool operator<=(ty##size rhs) \
+   bool operator<=(ty##size rhs) const \
    { return field1 <= rhs.field1 && field2 <= rhs.field2; } \
-   template<typename T> bool operator<=(T vals) \
+   template<typename T> bool operator<=(T vals) const \
    { return operator<=(vals.template _to<ty##size>()); } \
-   bool operator>(ty##size rhs) \
+   bool operator>(ty##size rhs) const \
    { return field1 > rhs.field1 && field2 > rhs.field2; } \
-   template<typename T> bool operator>(T vals) \
+   template<typename T> bool operator>(T vals) const \
    { return operator>(vals.template _to<ty##size>()); } \
-   bool operator>=(ty##size rhs) \
+   bool operator>=(ty##size rhs) const \
    { return field1 >= rhs.field1 && field2 >= rhs.field2; } \
-   template<typename T> bool operator>=(T vals) \
+   template<typename T> bool operator>=(T vals) const \
    { return operator>=(vals.template _to<ty##size>()); } \
    template<typename T> ty##size operator||(T val) const \
    { return {field1 < val? field1 : val, field2 < val? field2 : val}; } \
@@ -273,25 +273,25 @@ struct ty##size##s { s##size field1, field2; \
    { *this = this->over(rhs); return *this;} \
    template<typename T> ty##size##s divide(T vals) \
    { return divide(vals.template _to<ty##size##s>()); } \
-   bool operator<(ty##size##s rhs) \
+   bool operator<(ty##size##s rhs) const \
    { return field1 < rhs.field1 && field2 < rhs.field2; } \
-   template<typename T> bool operator<(T vals) \
+   template<typename T> bool operator<(T vals) const \
    { return operator<(vals.template _to<ty##size##s>()); } \
-   bool operator<=(ty##size##s rhs) \
+   bool operator<=(ty##size##s rhs) const \
    { return field1 <= rhs.field1 && field2 <= rhs.field2; } \
-   template<typename T> bool operator<=(T vals) \
+   template<typename T> bool operator<=(T vals) const \
    { return operator<=(vals.template _to<ty##size##s>()); } \
-   bool operator>(ty##size##s rhs) \
+   bool operator>(ty##size##s rhs) const \
    { return field1 > rhs.field1 && field2 > rhs.field2; } \
-   bool operator==(ty##size##s rhs) \
+   bool operator==(ty##size##s rhs) const \
    { return field1 == rhs.field1 && field2 == rhs.field2; } \
-   template<typename T> bool operator==(T vals) \
+   template<typename T> bool operator==(T vals) const \
    { return operator==(vals.template _to<ty##size##s>()); } \
-   template<typename T> bool operator>(T vals) \
+   template<typename T> bool operator>(T vals) const \
    { return operator>(vals.template _to<ty##size##s>()); } \
-   bool operator>=(ty##size##s rhs) \
+   bool operator>=(ty##size##s rhs) const \
    { return field1 >= rhs.field1 && field2 >= rhs.field2; } \
-   template<typename T> bool operator>=(T vals) \
+   template<typename T> bool operator>=(T vals) const \
    { return operator>=(vals.template _to<ty##size##s>()); } \
    template<typename T> ty##size##s operator||(T val) const \
    { return {field1 < val? field1 : val, field2 < val? field2 : val}; } \
@@ -318,6 +318,9 @@ Ty_DEF_MACRO(rc, 4, n8, r, c)
 Ty_DEF_MACRO(hv, 1, u2, h, v)
 Ty_DEF_MACRO(hv, 2, u4, h, v)
 Ty_DEF_MACRO(hv, 4, n8, h, v)
+Ty_DEF_MACRO(ab, 1, u2, a, b)
+Ty_DEF_MACRO(ab, 2, u4, a, b)
+Ty_DEF_MACRO(ab, 4, n8, a, b)
 Ty_DEF_MACRO(lr, 1, u2, left, right)
 Ty_DEF_MACRO(lr, 2, u4, left, right)
 Ty_DEF_MACRO(lr, 4, n8, left, right)
@@ -349,6 +352,9 @@ Tys_DEF_MACRO(rc, 4, n8, r, c)
 Tys_DEF_MACRO(hv, 1, u2, h, v)
 Tys_DEF_MACRO(hv, 2, u4, h, v)
 Tys_DEF_MACRO(hv, 4, n8, h, v)
+Tys_DEF_MACRO(ab, 1, u2, a, b)
+Tys_DEF_MACRO(ab, 2, u4, a, b)
+Tys_DEF_MACRO(ab, 4, n8, a, b)
 Tys_DEF_MACRO(lr, 1, u2, left, right)
 Tys_DEF_MACRO(lr, 2, u4, left, right)
 Tys_DEF_MACRO(lr, 4, n8, left, right)
@@ -496,6 +502,9 @@ Mod_DEF_MACRO(rc4)
 Mod_DEF_MACRO(hv1)
 Mod_DEF_MACRO(hv2)
 Mod_DEF_MACRO(hv4)
+Mod_DEF_MACRO(ab1)
+Mod_DEF_MACRO(ab2)
+Mod_DEF_MACRO(ab4)
 Mod_DEF_MACRO(lr1)
 Mod_DEF_MACRO(lr2)
 Mod_DEF_MACRO(lr4)

@@ -25,36 +25,38 @@ XCNS_(XCSD)
 
 template<typename VAL_Type, typename INDEX_Types = index_types<s2>, typename PR_Type = _pr_break>
 class Dsk1d :
-  public each_holders<Dsk1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>
+  public each_holders<Dsk1d<VAL_Type, INDEX_Types, PR_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>
 {
+ using self_type = Dsk1d<VAL_Type, INDEX_Types, PR_Type>;
+
 protected:
 
- _Vec1d<VAL_Type> front_vec_;
- _Vec1d<VAL_Type> back_vec_;
+ _Vec1d<VAL_Type, INDEX_Types, PR_Type> front_vec_;
+ _Vec1d<VAL_Type, INDEX_Types, PR_Type> back_vec_;
 
 public:
 
 
  Dsk1d()
-  :  front_vec_(_Vec1d<VAL_Type>()),
-     back_vec_(_Vec1d<VAL_Type>()),
-     each_holders<Dsk1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
+  :  front_vec_(_Vec1d<VAL_Type, INDEX_Types, PR_Type>()),
+     back_vec_(_Vec1d<VAL_Type, INDEX_Types, PR_Type>()),
+     each_holders<self_type, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
  {
 
  }
 
  Dsk1d(u1 bsz)
-  :  front_vec_(_Vec1d<VAL_Type>(bsz)),
-     back_vec_(_Vec1d<VAL_Type>(bsz)),
-     each_holders<Dsk1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
+  :  front_vec_(_Vec1d<VAL_Type, INDEX_Types, PR_Type>(bsz)),
+     back_vec_(_Vec1d<VAL_Type, INDEX_Types, PR_Type>(bsz)),
+     each_holders<self_type, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
  {
 
  }
 
  Dsk1d(u1 bsz, u1 fbsz)
-  :  front_vec_(_Vec1d<VAL_Type>(bsz)),
-     back_vec_(_Vec1d<VAL_Type>(fbsz)),
-     each_holders<Dsk1d<VAL_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
+  :  front_vec_(_Vec1d<VAL_Type, INDEX_Types, PR_Type>(bsz)),
+     back_vec_(_Vec1d<VAL_Type, INDEX_Types, PR_Type>(fbsz)),
+     each_holders<self_type, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
  {
 
  }

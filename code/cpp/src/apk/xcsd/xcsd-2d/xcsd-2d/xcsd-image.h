@@ -53,6 +53,12 @@ public:
 
  //get_pixel_vector(SDI_Position )
 
+ void image_tierbox_to_sdi_pixel_map(const QImage& ci, std::map<ab1, std::vector<n8>>& result);
+
+ void data_tierbox_to_sdi_pixel_map(u4 tierbox_index, std::map<ab1, std::vector<n8>>& result);
+
+ void tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
+   QImage& target, XCSD_Image_Geometry::Iteration_Environment ienv);
 
  wh2 get_wh()
  {
@@ -64,7 +70,11 @@ public:
  void init_geometry();
  void init_tierboxes();
 
+ void init_pixel_data();
+
  void get_255_palatte(QVector<QColor>& vec);
+
+ void save_full_tier_image(QString path);
 
 
 

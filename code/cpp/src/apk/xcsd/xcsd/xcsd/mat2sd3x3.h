@@ -17,7 +17,7 @@ XCNS_(XCSD)
 
 template<typename PARCEL_Type, typename VAL_Type, typename INDEX_Type = u2, typename PR_Type = _pr_break>
 class Arr1d : public _Vec1d<VAL_Type>,
-   public each_holders<Arr1d<VAL_Type>, VAL_Type, INDEX_Type, PR_Type>
+   public each_holders<Arr1d<VAL_Type, INDEX_Types, PR_Type>, VAL_Type, INDEX_Type, PR_Type>
 {
  u4 length_;
 
@@ -25,7 +25,7 @@ public:
 
  Arr1d(u4 length, quint8 bsz = 16)
   :  _Vec1d<VAL_Type>(bsz),
-    each_holders<Arr1d<VAL_Type>, VAL_Type, INDEX_Type, PR_Type>({{*this}}),
+    each_holders<self_type, VAL_Type, INDEX_Type, PR_Type>({{*this}}),
     length_(length)
  {
  }

@@ -35,6 +35,173 @@ void XCSD_Image::init_geometry()
  geometry_.set_total_size(get_wh());
 }
 
+void XCSD_Image::init_pixel_data()
+{
+ static u2 box_area = tierbox_width * tierbox_width;
+
+ data_.init_pixels(geometry_.total_size());
+
+ XCSD_Image_Geometry::Iteration_Environment ienv = geometry_.formulate_iteration_environment();
+
+ geometry_.for_each_full_tierbox([this, &ienv](XCSD_Image_Geometry::Grid_TierBox& gtb)
+ {
+  u4 index = geometry_.get_tierbox_index(gtb, ienv.size_even_odd_info);
+  u4 threshold = index * box_area;
+  xy2 tl = gtb.top_left();
+  qDebug() << "tl = " << tl;
+  QImage ci = image_.copy(tl.x, tl.y, tierbox_width, tierbox_width);
+  if(ci.format() != QImage::Format_ARGB32)
+  {
+   ci = ci.convertToFormat(QImage::Format_ARGB32);
+  }
+
+  std::map<ab1, std::vector<n8>> sdi;
+
+  image_tierbox_to_sdi_pixel_map(ci, sdi);
+
+  for(u1 a = 1; a <= 9; ++a)
+   for(u1 b = 1; b <= 9; ++b)
+   {
+    const std::vector<n8>& data3x3 = sdi[{a,b}];
+    data_.copy_pixels(threshold, data3x3);
+   }
+ });
+}
+
+
+void XCSD_Image::image_tierbox_to_sdi_pixel_map(const QImage& ci, std::map<ab1, std::vector<n8>>& result)
+{
+ u1 a = 0, b = 0;
+ for(u1 ar = 0; ar < 3; ++ar)
+ {
+  ++a;
+  for(u1 ac = 0; ac < 3; ++ac)
+  {
+   ++a;
+   for(u1 br = 0; br < 3; ++br)
+   {
+    ++b;
+    for(u1 bc = 0; bc < 3; ++bc)
+    {
+     ++b;
+     xy1 rows {br, ar};
+     xy1 cols {bc, ac};
+     xy1 tl = {cols.times({3, 9}).inner_sum(), rows.times({3, 9}).inner_sum()};
+     for(u1 y = 0; y < 3; ++y)
+     {
+      const QRgb* scan = (const QRgb*) ci.scanLine(tl.y + y);
+      scan += tl.x;
+      for(u1 x = 0; x < 3; ++x)
+      {
+       const QRgb& qpixel = *(scan + x);
+       n8 pixel = 0;
+
+       // //  the (n8) casts here are strictly speaking unnecessary
+        //    but could become necessary with something other
+        //    than 1-byte rgba ...
+       pixel |= (n8)qRed(qpixel);
+       pixel |= (n8)qGreen(qpixel) << 8;
+       pixel |= (n8)qBlue(qpixel) << 16;
+       pixel |= (n8)qAlpha(qpixel) << 24;
+
+       result[{a,b}].push_back(pixel);
+      }
+     }
+    }
+   }
+  }
+ }
+}
+
+
+void XCSD_Image::save_full_tier_image(QString path)
+{
+ static u2 box_area = tierbox_width * tierbox_width;
+
+ XCSD_Image_Geometry::Iteration_Environment ienv = geometry_.formulate_iteration_environment();
+
+ QImage target_image(image_.width(), image_.height(), image_.format());
+
+ geometry_.for_each_full_tierbox([this, &ienv, &target_image](XCSD_Image_Geometry::Grid_TierBox& gtb)
+ {
+  QImage ti(tierbox_width, tierbox_width, QImage::Format_ARGB32);
+  tierbox_to_qimage(gtb, ti, ienv);
+ });
+}
+
+void XCSD_Image::data_tierbox_to_sdi_pixel_map(u4 tierbox_index,
+  std::map<ab1, std::vector<n8>>& result)
+{
+ static u2 box_area = tierbox_width * tierbox_width;
+ u4 threshold = tierbox_index * box_area;
+
+ u1 a = 0, b = 0;
+ for(u1 ar = 0; ar < 3; ++ar)
+ {
+  ++a;
+  for(u1 ac = 0; ac < 3; ++ac)
+  {
+   ++a;
+   for(u1 br = 0; br < 3; ++br)
+   {
+    ++b;
+    for(u1 bc = 0; bc < 3; ++bc)
+    {
+     ++b;
+     xy1 rows {br, ar};
+     xy1 cols {bc, ac};
+     xy1 tl = {cols.times({3, 9}).inner_sum(), rows.times({3, 9}).inner_sum()};
+
+     u1 inner_index = 0;
+
+     // data to std vec ... starting at threshold + tl ...
+
+     for(u1 y = 0; y < 3; ++y)
+     {
+      const QRgb* scan; // = (const QRgb*) ci.scanLine(tl.y + y);
+      scan += tl.x;
+      for(u1 x = 0; x < 3; ++x)
+      {
+       const QRgb& qpixel = *(scan + x);
+       n8 pixel = 0;
+
+       // //  the (n8) casts here are strictly speaking unnecessary
+       //    but could become necessary with something other
+       //    than 1-byte rgba ...
+       pixel |= (n8)qRed(qpixel);
+       pixel |= (n8)qGreen(qpixel) << 8;
+       pixel |= (n8)qBlue(qpixel) << 16;
+       pixel |= (n8)qAlpha(qpixel) << 24;
+
+       result[{a,b}].push_back(pixel);
+      }
+     }
+
+    }
+   }
+  }
+ }
+
+}
+
+
+void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
+  QImage& target, XCSD_Image_Geometry::Iteration_Environment ienv)
+{
+ static u2 box_area = tierbox_width * tierbox_width;
+
+ u4 index = geometry_.get_tierbox_index(gtb, ienv.size_even_odd_info);
+
+ std::map<ab1, std::vector<n8>> sdi;
+ data_tierbox_to_sdi_pixel_map(index, sdi);
+
+
+   //xy2 tl = gtb.top_left();
+
+
+}
+
+
 
 SDI_Position XCSD_Image::get_sdi_at_ground_position(u2 x, u2 y)
 {

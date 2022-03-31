@@ -33,9 +33,9 @@ public:
  ACCESSORS(rc2s ,rc)
 
  void set_mch_code(pr2s mch);
- pr2s get_mch_code();
+ pr2s get_mch_code() const;
  prr2 get_mch_code_normalized(//u1 size_even_odd_code,
-                              u1* mask = nullptr);
+                              u1* mask = nullptr) const;
 
  u1 get_mch_clock_code(u1* mask = nullptr);
  static u1 get_mch_clock_code(pr2s pr, u1* mask = nullptr);
@@ -145,6 +145,12 @@ public:
    xy2 bottom_right();
  };
 
+ struct Iteration_Environment {
+   Size_Even_Odd_Info size_even_odd_info;
+
+   Iteration_Environment(u1 size_even_odd_code);
+ };
+
 private:
 
  wh2 total_size_;
@@ -174,6 +180,8 @@ public:
  ACCESSORS(wh2 ,full_tier_counts)
  ACCESSORS(lr2 ,horizontal_outer_sizes)
  ACCESSORS(tb2 ,vertical_outer_sizes)
+
+ Iteration_Environment formulate_iteration_environment();
 
  std::vector<TierBox_Location> get_directed_centers();
 
@@ -212,7 +220,7 @@ public:
  void draw_tier_summary(QString path, QString path1,
    r8 magnification, u1 circle_radius);
 
-
+ u4 get_tierbox_index(const Grid_TierBox& gtb, Size_Even_Odd_Info size_even_odd_info);
 };
 
 

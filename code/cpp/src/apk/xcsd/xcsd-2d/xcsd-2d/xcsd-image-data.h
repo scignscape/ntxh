@@ -14,6 +14,9 @@
 
 #include "xcsd-1d/vec1d.h"
 
+#include "xcsd-1d/arr1d.h"
+
+#include "xcsd-sdi-structures.h"
 
 XCNS_(XCSD)
 
@@ -23,10 +26,16 @@ class XCSD_Image_Data
 {
  Vec1d<XCSD_TierBox*>* tierboxes_;
 
+ Arr1d<n8, index_types<s4>, _pr_break>* pixel_data_;
+
 public:
 
  XCSD_Image_Data();
 
+ void init_pixels(wh2 total_ground_size);
+ void init_pixel_run(u4 start_index, u4 length, n8 const* source);
+
+ void copy_pixels(u4 start_index, const std::vector<n8>& vec);
 
 };
 
