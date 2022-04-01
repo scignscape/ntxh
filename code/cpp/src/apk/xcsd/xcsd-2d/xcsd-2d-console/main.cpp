@@ -72,7 +72,8 @@ int main(int argc , char **argv)
 
  xcsd.init_pixel_data();
 
- xcsd.save_full_tier_image(QString(ROOT_FOLDER "/../tiers/ft1.png"));
+ xcsd.save_full_tier_image(ROOT_FOLDER "/../tiers/ft1.png",
+   ROOT_FOLDER "/../tiers/tk1");
 
 // xcsg.draw_tier_summary(ROOT_FOLDER "/../tiers/t284x194.png", 2.5, 4);
 // xcsg.draw_tier_summary(ROOT_FOLDER "/../tiers/t284x194.png", 2.5, 4);

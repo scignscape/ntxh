@@ -334,6 +334,15 @@ void XCSD_Image_Geometry::for_each_vertical_gridline(std::function<void(Gridline
 
 void XCSD_Image_Geometry::for_each_full_tierbox(std::function<void(Grid_TierBox&)> fn)
 {
+ _for_each_full_tierbox([fn](Grid_TierBox& gtb) -> s1
+ {
+  fn(gtb);
+  return 0;
+ });
+}
+
+s1 XCSD_Image_Geometry::_for_each_full_tierbox(std::function<s1(Grid_TierBox&)> fn)
+{
 // u1 offset = vertical_outer_sizes_.top;
  tl2 tl{vertical_outer_sizes_.top, horizontal_outer_sizes_.left};
 // u4 area = full_tier_counts_.area();
@@ -349,9 +358,12 @@ void XCSD_Image_Geometry::for_each_full_tierbox(std::function<void(Grid_TierBox&
    calculate_mch_code(tbl);
    tbl.rc().add(offsets);
    Grid_TierBox gtb({tbl, ((rc * tierbox_width).plus(tl) + ((tierbox_width / 2) + 1))._transposed_to<xy2>()});
-   fn(gtb);
+   s1 _break = fn(gtb);
+   if(_break != 0)
+     return _break;
   }
  }
+ return 0;
 }
 
 void TierBox_Location::set_mch_code(pr2s mch)
@@ -937,6 +949,7 @@ XCSD_Image_Geometry::formulate_iteration_environment()
  u1 size_even_odd_code = get_size_even_odd_code();
  return Iteration_Environment(size_even_odd_code);
 }
+
 
 
 void XCSD_Image_Geometry::draw_tier_summary(QString path, QString path1,

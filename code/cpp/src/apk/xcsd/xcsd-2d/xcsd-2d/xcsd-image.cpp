@@ -55,32 +55,30 @@ void XCSD_Image::init_pixel_data()
    ci = ci.convertToFormat(QImage::Format_ARGB32);
   }
 
-  std::map<ab1, std::vector<n8>> sdi;
+  std::map<s1, std::vector<n8>> sdi;
 
   image_tierbox_to_sdi_pixel_map(ci, sdi);
 
   for(u1 a = 1; a <= 9; ++a)
    for(u1 b = 1; b <= 9; ++b)
    {
-    const std::vector<n8>& data3x3 = sdi[{a,b}];
+    const std::vector<n8>& data3x3 = sdi[(ab1{a,b}).to_base(10)];
     data_.copy_pixels(threshold, data3x3);
    }
  });
 }
 
 
-void XCSD_Image::image_tierbox_to_sdi_pixel_map(const QImage& ci, std::map<ab1, std::vector<n8>>& result)
+void XCSD_Image::image_tierbox_to_sdi_pixel_map(const QImage& ci, std::map<s1, std::vector<n8>>& result)
 {
  u1 a = 0, b = 0;
  for(u1 ar = 0; ar < 3; ++ar)
  {
-  ++a;
   for(u1 ac = 0; ac < 3; ++ac)
   {
    ++a;
    for(u1 br = 0; br < 3; ++br)
    {
-    ++b;
     for(u1 bc = 0; bc < 3; ++bc)
     {
      ++b;
@@ -102,9 +100,9 @@ void XCSD_Image::image_tierbox_to_sdi_pixel_map(const QImage& ci, std::map<ab1, 
        pixel |= (n8)qRed(qpixel);
        pixel |= (n8)qGreen(qpixel) << 8;
        pixel |= (n8)qBlue(qpixel) << 16;
-       pixel |= (n8)qAlpha(qpixel) << 24;
+       pixel |= (n8)(255 - qAlpha(qpixel)) << 24;
 
-       result[{a,b}].push_back(pixel);
+       result[(ab1{a,b}).to_base(10)].push_back(pixel);
       }
      }
     }
@@ -114,7 +112,7 @@ void XCSD_Image::image_tierbox_to_sdi_pixel_map(const QImage& ci, std::map<ab1, 
 }
 
 
-void XCSD_Image::save_full_tier_image(QString path)
+void XCSD_Image::save_full_tier_image(QString path, QString info_folder)
 {
  static u2 box_area = tierbox_width * tierbox_width;
 
@@ -122,60 +120,43 @@ void XCSD_Image::save_full_tier_image(QString path)
 
  QImage target_image(image_.width(), image_.height(), image_.format());
 
- geometry_.for_each_full_tierbox([this, &ienv, &target_image](XCSD_Image_Geometry::Grid_TierBox& gtb)
+ geometry_.for_each_full_tierbox_(
+    [this, &ienv, &target_image, &info_folder](XCSD_Image_Geometry::Grid_TierBox& gtb) -> s1
  {
   QImage ti(tierbox_width, tierbox_width, QImage::Format_ARGB32);
+  ti.fill(0);
+
   tierbox_to_qimage(gtb, ti, ienv);
+  QString path = QString("%1/%2-%3.png").arg(info_folder).arg(gtb.loc.r()).arg(gtb.loc.c());
+  qDebug() << "path = " << path;
+  ti.save(path);
+  return-1;
  });
 }
 
 void XCSD_Image::data_tierbox_to_sdi_pixel_map(u4 tierbox_index,
-  std::map<ab1, std::vector<n8>>& result)
+  std::map<s1, std::vector<n8>>& result)
 {
  static u2 box_area = tierbox_width * tierbox_width;
  u4 threshold = tierbox_index * box_area;
 
- u1 a = 0, b = 0;
+ u1 b, a = 0, gi = 0; // gi = ground index
  for(u1 ar = 0; ar < 3; ++ar)
  {
-  ++a;
   for(u1 ac = 0; ac < 3; ++ac)
   {
-   ++a;
+   ++a; b = 0;
    for(u1 br = 0; br < 3; ++br)
    {
-    ++b;
     for(u1 bc = 0; bc < 3; ++bc)
     {
      ++b;
-     xy1 rows {br, ar};
-     xy1 cols {bc, ac};
-     xy1 tl = {cols.times({3, 9}).inner_sum(), rows.times({3, 9}).inner_sum()};
+     std::vector<n8> pixels;
+     data_.get_pixel_run(threshold + gi, 9, pixels);
+     result[(ab1{a,b}).to_base(10)] = pixels;
 
-     u1 inner_index = 0;
-
+     gi += 9;
      // data to std vec ... starting at threshold + tl ...
-
-     for(u1 y = 0; y < 3; ++y)
-     {
-      const QRgb* scan; // = (const QRgb*) ci.scanLine(tl.y + y);
-      scan += tl.x;
-      for(u1 x = 0; x < 3; ++x)
-      {
-       const QRgb& qpixel = *(scan + x);
-       n8 pixel = 0;
-
-       // //  the (n8) casts here are strictly speaking unnecessary
-       //    but could become necessary with something other
-       //    than 1-byte rgba ...
-       pixel |= (n8)qRed(qpixel);
-       pixel |= (n8)qGreen(qpixel) << 8;
-       pixel |= (n8)qBlue(qpixel) << 16;
-       pixel |= (n8)qAlpha(qpixel) << 24;
-
-       result[{a,b}].push_back(pixel);
-      }
-     }
 
     }
    }
@@ -185,20 +166,86 @@ void XCSD_Image::data_tierbox_to_sdi_pixel_map(u4 tierbox_index,
 }
 
 
+//xy1 rows {br, ar};
+//xy1 cols {bc, ac};
+//xy1 tl = {cols.times({3, 9}).inner_sum(), rows.times({3, 9}).inner_sum()};
+
+//u1 inner_index = 0;
+
+//for(u1 y = 0; y < 3; ++y)
+//{
+// const QRgb* scan; // = (const QRgb*) ci.scanLine(tl.y + y);
+// scan += tl.x;
+// for(u1 x = 0; x < 3; ++x)
+// {
+//  const QRgb& qpixel = *(scan + x);
+//  n8 pixel = 0;
+
+//  // //  the (n8) casts here are strictly speaking unnecessary
+//  //    but could become necessary with something other
+//  //    than 1-byte rgba ...
+//  pixel |= (n8)qRed(qpixel);
+//  pixel |= (n8)qGreen(qpixel) << 8;
+//  pixel |= (n8)qBlue(qpixel) << 16;
+//  pixel |= (n8)qAlpha(qpixel) << 24;
+
+//  result[{a,b}].push_back(pixel);
+// }
+//}
+
+
 void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
   QImage& target, XCSD_Image_Geometry::Iteration_Environment ienv)
 {
- static u2 box_area = tierbox_width * tierbox_width;
+ //static u2 box_area = tierbox_width * tierbox_width;
 
  u4 index = geometry_.get_tierbox_index(gtb, ienv.size_even_odd_info);
 
- std::map<ab1, std::vector<n8>> sdi;
+ std::map<s1, std::vector<n8>> sdi;
  data_tierbox_to_sdi_pixel_map(index, sdi);
 
+ for(auto const& [ab_s1, vec]: sdi)
+ {
+  qDebug() << "ab_s1 = " << ab_s1;
+
+  ab1 ab = {(u1)((u1)ab_s1 / 10), (u1)((u1)ab_s1 % 10)};
+
+  // // rc here is 0 - 3
+  rc1 arc = {(u1)((ab.a - 1) / 3), (u1)(ab.a % 3)};
+  rc1 brc = {(u1)((ab.b - 1) / 3), (u1)(ab.b % 3)};
+
+  u1 tl_scan_row = arc.r * 9 + brc.r * 3;
+
+  u1 tl_scan_column = arc.c * 9 + brc.c * 3;
+
+  u1 vi = 0; // vector index
+  for(u1 y = 0; y < 3; ++y)
+  {
+   QRgb* img_pixels = (QRgb*) target.scanLine(tl_scan_row + y);
+
+   qDebug() << "i = " << *img_pixels;
+
+   img_pixels += tl_scan_column;
+   for(u1 x = 0; x < 3; ++x)
+   {
+    n8 pixel = vec[vi];
+    qDebug() << "pixel = " << pixel;
+    *img_pixels = qRgba(
+       (u1)(pixel & 255), (u1)((pixel >> 8) & 255),
+       (u1)((pixel >> 16) & 255),
+       (u1)(255 - ((pixel >> 24) & 255))
+       );
+    ++img_pixels;
+
+    qDebug() << "vi = " << vi;
+
+    ++vi;
+   }
+  }
+
+ }
 
    //xy2 tl = gtb.top_left();
-
-
 }
 
 

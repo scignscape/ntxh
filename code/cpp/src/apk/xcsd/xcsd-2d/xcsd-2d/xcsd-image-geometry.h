@@ -171,6 +171,8 @@ private:
  void reconcile_actual_tiergrid_setting();
  void init_directed_centers();
 
+ s1 _for_each_full_tierbox(std::function<s1(Grid_TierBox&)> fn);
+
 public:
 
  XCSD_Image_Geometry();
@@ -193,6 +195,11 @@ public:
 
  void for_each_horizontal_gridline(std::function<void(Gridline&)> fn);
  void for_each_vertical_gridline(std::function<void(Gridline&)> fn);
+
+ inline s1 for_each_full_tierbox_(std::function<s1(Grid_TierBox&)> fn)
+ {
+  return _for_each_full_tierbox(fn);
+ }
  void for_each_full_tierbox(std::function<void(Grid_TierBox&)> fn);
 
  TierBox_Location get_tierbox_location_from_ground_position(u2 x, u2 y);

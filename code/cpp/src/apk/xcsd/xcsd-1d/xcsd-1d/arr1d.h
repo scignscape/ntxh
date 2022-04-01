@@ -69,6 +69,12 @@ public:
   memcpy(start, source, length * this->hive_structure_->value_size());
  }
 
+ void fetch_raw_data(u4 start_index, u4 length, VAL_Type* target)
+ {
+  n8* start = this->get(start_index);
+  memcpy(target, start, length * this->hive_structure_->value_size());
+ }
+
 };
 
 _XCNS(XCSD)

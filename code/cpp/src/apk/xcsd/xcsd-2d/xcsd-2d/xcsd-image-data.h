@@ -36,6 +36,7 @@ public:
  void init_pixel_run(u4 start_index, u4 length, n8 const* source);
 
  void copy_pixels(u4 start_index, const std::vector<n8>& vec);
+ void get_pixel_run(u4 start_index, u4 length, std::vector<n8>& result);
 
 };
 

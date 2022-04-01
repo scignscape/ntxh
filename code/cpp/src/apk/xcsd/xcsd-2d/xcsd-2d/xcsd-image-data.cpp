@@ -22,6 +22,13 @@ void XCSD_Image_Data::init_pixels(wh2 total_ground_size)
  pixel_data_ = new Arr1d<n8, index_types<s4>>({(s4)area});
 }
 
+void XCSD_Image_Data::get_pixel_run(u4 start_index, u4 length, std::vector<n8>& result)
+{
+ if(result.size() < length)
+   result.resize(length);
+ pixel_data_->fetch_raw_data(start_index, length, result.data());
+}
+
 void XCSD_Image_Data::init_pixel_run(u4 start_index, u4 length, n8 const* source)
 {
  pixel_data_->init_raw_data(start_index, length, source);

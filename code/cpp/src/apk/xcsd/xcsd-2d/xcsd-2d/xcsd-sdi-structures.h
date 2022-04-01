@@ -38,6 +38,8 @@ inline constexpr u1 _ctz(int x)
  struct ty##size { u##size field1, field2; \
    using field_type = u##size; \
    asize binary_merge() { return (asize) field1 << (8 * size) | field2; } \
+   asize to_base(u1 arithmetic_base) { \
+     return (asize) field1 * arithmetic_base + (asize) field2; } \
    s##size spaceship() { return field1 < field2? -1 : field1 > field2? 1:0; } \
    ty##size spaceship_mask() const \
    { return {field1 < 0? -1 : field1 > 0, field2 < 0? -1 : field2 > 0}; } \
