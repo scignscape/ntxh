@@ -70,7 +70,7 @@ int main(int argc , char **argv)
 //                        3.3, 8);
 
 
- xcsd.init_pixel_data();
+ xcsd.init_pixel_data(ROOT_FOLDER "/../tiers/ti1");
 
  xcsd.save_full_tier_image(ROOT_FOLDER "/../tiers/ft1.png",
    ROOT_FOLDER "/../tiers/tk1");

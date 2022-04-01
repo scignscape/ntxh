@@ -32,6 +32,7 @@ class XCSD_Image
  XCSD_Image_Data data_;
  XCSD_Image_Geometry geometry_;
 
+ rc2s initial_setup_tierbox_;
 
 public:
 
@@ -57,8 +58,8 @@ public:
 
  void data_tierbox_to_sdi_pixel_map(u4 tierbox_index, std::map<s1, std::vector<n8>>& result);
 
- void tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
-   QImage& target, XCSD_Image_Geometry::Iteration_Environment ienv);
+ void tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb, QImage& target,
+   XCSD_Image_Geometry::Iteration_Environment ienv, QString info_folder = {});
 
  wh2 get_wh()
  {
@@ -70,7 +71,7 @@ public:
  void init_geometry();
  void init_tierboxes();
 
- void init_pixel_data();
+ void init_pixel_data(QString info_folder = {});
 
  void get_255_palatte(QVector<QColor>& vec);
 

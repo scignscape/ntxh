@@ -9,6 +9,10 @@
 
 #include "xcsd-tierbox.h"
 
+#include "textio.h"
+
+USING_KANS(TextIO)
+
 USING_XCNS(XCSD)
 
 XCSD_Image::XCSD_Image()
@@ -35,7 +39,7 @@ void XCSD_Image::init_geometry()
  geometry_.set_total_size(get_wh());
 }
 
-void XCSD_Image::init_pixel_data()
+void XCSD_Image::init_pixel_data(QString info_folder)
 {
  static u2 box_area = tierbox_width * tierbox_width;
 
@@ -43,10 +47,22 @@ void XCSD_Image::init_pixel_data()
 
  XCSD_Image_Geometry::Iteration_Environment ienv = geometry_.formulate_iteration_environment();
 
- geometry_.for_each_full_tierbox([this, &ienv](XCSD_Image_Geometry::Grid_TierBox& gtb)
+ geometry_.for_each_full_tierbox([this, &ienv, &info_folder](XCSD_Image_Geometry::Grid_TierBox& gtb)
  {
+  QString info_path;
+  QString info_string;
+
+  if(!info_folder.isEmpty())
+  {
+   info_path = QString("%1/%2-%3.txt").arg(info_folder).arg(gtb.loc.r()).arg(gtb.loc.c());
+   info_string = QString("Full tierbox %2 %3\n\n").arg(gtb.loc.r()).arg(gtb.loc.c());
+  }
+
   u4 index = geometry_.get_tierbox_index(gtb, ienv.size_even_odd_info);
   u4 threshold = index * box_area;
+
+  u2 threshold_offset = 0;
+
   xy2 tl = gtb.top_left();
   qDebug() << "tl = " << tl;
   QImage ci = image_.copy(tl.x, tl.y, tierbox_width, tierbox_width);
@@ -57,14 +73,33 @@ void XCSD_Image::init_pixel_data()
 
   std::map<s1, std::vector<n8>> sdi;
 
+  // temporary
+  initial_setup_tierbox_ = gtb.loc.rc();
+
   image_tierbox_to_sdi_pixel_map(ci, sdi);
 
   for(u1 a = 1; a <= 9; ++a)
    for(u1 b = 1; b <= 9; ++b)
    {
     const std::vector<n8>& data3x3 = sdi[(ab1{a,b}).to_base(10)];
-    data_.copy_pixels(threshold, data3x3);
+    data_.copy_pixels(threshold + threshold_offset, data3x3);
+
+    threshold_offset += 9;
+
+    if(!info_string.isEmpty())
+    {
+     info_string += QString("\nSDI location %1\n").arg(ab1{a,b}.to_base(10));
+     u1 vi = 0;
+     for(u1 y = 0; y < 3; ++y)
+     {
+      info_string += QString(" %1 %2 %3\n").arg(data3x3[vi], 16, 16, QChar('0'))
+        .arg(data3x3[vi + 1], 16, 16, QChar('0')).arg(data3x3[vi + 2], 16, 16, QChar('0'));
+      vi += 3;
+     }
+    }
    }
+
+ save_file(info_path, info_string);
  });
 }
 
@@ -76,7 +111,7 @@ void XCSD_Image::image_tierbox_to_sdi_pixel_map(const QImage& ci, std::map<s1, s
  {
   for(u1 ac = 0; ac < 3; ++ac)
   {
-   ++a;
+   ++a; b = 0;
    for(u1 br = 0; br < 3; ++br)
    {
     for(u1 bc = 0; bc < 3; ++bc)
@@ -85,14 +120,28 @@ void XCSD_Image::image_tierbox_to_sdi_pixel_map(const QImage& ci, std::map<s1, s
      xy1 rows {br, ar};
      xy1 cols {bc, ac};
      xy1 tl = {cols.times({3, 9}).inner_sum(), rows.times({3, 9}).inner_sum()};
+
      for(u1 y = 0; y < 3; ++y)
      {
       const QRgb* scan = (const QRgb*) ci.scanLine(tl.y + y);
+
       scan += tl.x;
       for(u1 x = 0; x < 3; ++x)
       {
        const QRgb& qpixel = *(scan + x);
        n8 pixel = 0;
+
+       QString tr = QString("%1%2").arg(initial_setup_tierbox_.r,2,10,QChar('0'))
+         .arg(initial_setup_tierbox_.c,2,10,QChar('0'));
+
+
+       QString test = QString("%1a%2%3c%4b%5%6c%7%8%9").arg(tr, 4)
+         .arg(a).arg(ar).arg(ac).arg(b).arg(br).arg(bc).arg(x).arg(y);
+
+       pixel = test.toLongLong(nullptr, 16);
+       //pixel = 0x20202020;
+
+       pixel = 0;
 
        // //  the (n8) casts here are strictly speaking unnecessary
         //    but could become necessary with something other
@@ -101,6 +150,10 @@ void XCSD_Image::image_tierbox_to_sdi_pixel_map(const QImage& ci, std::map<s1, s
        pixel |= (n8)qGreen(qpixel) << 8;
        pixel |= (n8)qBlue(qpixel) << 16;
        pixel |= (n8)(255 - qAlpha(qpixel)) << 24;
+
+       pixel |= (n8)(tl.y + y) << 40;
+       pixel |= (n8)(tl.x) << 48;
+
 
        result[(ab1{a,b}).to_base(10)].push_back(pixel);
       }
@@ -120,17 +173,17 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder)
 
  QImage target_image(image_.width(), image_.height(), image_.format());
 
- geometry_.for_each_full_tierbox_(
+ geometry_.for_each_full_tierbox(
     [this, &ienv, &target_image, &info_folder](XCSD_Image_Geometry::Grid_TierBox& gtb) -> s1
  {
   QImage ti(tierbox_width, tierbox_width, QImage::Format_ARGB32);
   ti.fill(0);
 
-  tierbox_to_qimage(gtb, ti, ienv);
+  tierbox_to_qimage(gtb, ti, ienv, info_folder);
   QString path = QString("%1/%2-%3.png").arg(info_folder).arg(gtb.loc.r()).arg(gtb.loc.c());
   qDebug() << "path = " << path;
   ti.save(path);
-  return-1;
+  //return-1;
  });
 }
 
@@ -195,7 +248,7 @@ void XCSD_Image::data_tierbox_to_sdi_pixel_map(u4 tierbox_index,
 
 
 void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
-  QImage& target, XCSD_Image_Geometry::Iteration_Environment ienv)
+  QImage& target, XCSD_Image_Geometry::Iteration_Environment ienv, QString info_folder)
 {
  //static u2 box_area = tierbox_width * tierbox_width;
 
@@ -203,6 +256,15 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
 
  std::map<s1, std::vector<n8>> sdi;
  data_tierbox_to_sdi_pixel_map(index, sdi);
+
+ QString info_path;
+ QString info_string;
+
+ if(!info_folder.isEmpty())
+ {
+  info_path = QString("%1/%2-%3.txt").arg(info_folder).arg(gtb.loc.r()).arg(gtb.loc.c());
+  info_string = QString("Full tierbox %2 %3\n\n\n").arg(gtb.loc.r()).arg(gtb.loc.c());
+ }
 
  for(auto const& [ab_s1, vec]: sdi)
  {
@@ -217,6 +279,9 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
   u1 tl_scan_row = arc.r * 9 + brc.r * 3;
 
   u1 tl_scan_column = arc.c * 9 + brc.c * 3;
+
+  if(!info_string.isEmpty())
+    info_string += QString("SDI location %1\n").arg(ab_s1);
 
   u1 vi = 0; // vector index
   for(u1 y = 0; y < 3; ++y)
@@ -237,16 +302,25 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
        );
     ++img_pixels;
 
-    qDebug() << "vi = " << vi;
+    if(!info_string.isEmpty())
+      info_string += QString(" %1").arg(vec[vi], 16, 16, QChar('0'));
 
     ++vi;
    }
-  }
+   if(!info_string.isEmpty())
+     info_string += "\n";
 
+//    qDebug() << "vi = " << vi;
+  }
+  if(!info_string.isEmpty())
+    info_string += "\n";
  }
 
-   //xy2 tl = gtb.top_left();
+ save_file(info_path, info_string);
 }
+
+   //xy2 tl = gtb.top_left();
+
 
 
 
