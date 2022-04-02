@@ -9,6 +9,8 @@
 
 #include "xcsd-tierbox.h"
 
+#include <QPainter>
+
 #include "textio.h"
 
 USING_KANS(TextIO)
@@ -64,12 +66,14 @@ void XCSD_Image::init_pixel_data(QString info_folder)
   u2 threshold_offset = 0;
 
   xy2 tl = gtb.top_left();
-  qDebug() << "tl = " << tl;
+
   QImage ci = image_.copy(tl.x, tl.y, tierbox_width, tierbox_width);
   if(ci.format() != QImage::Format_ARGB32)
   {
    ci = ci.convertToFormat(QImage::Format_ARGB32);
   }
+
+  ci.save(info_path + ".png");
 
   std::map<s1, std::vector<n8>> sdi;
 
@@ -82,6 +86,7 @@ void XCSD_Image::init_pixel_data(QString info_folder)
    for(u1 b = 1; b <= 9; ++b)
    {
     const std::vector<n8>& data3x3 = sdi[(ab1{a,b}).to_base(10)];
+
     data_.copy_pixels(threshold + threshold_offset, data3x3);
 
     threshold_offset += 9;
@@ -151,9 +156,10 @@ void XCSD_Image::image_tierbox_to_sdi_pixel_map(const QImage& ci, std::map<s1, s
        pixel |= (n8)qBlue(qpixel) << 16;
        pixel |= (n8)(255 - qAlpha(qpixel)) << 24;
 
-       pixel |= (n8)(tl.y + y) << 40;
-       pixel |= (n8)(tl.x) << 48;
-
+//       pixel |= (n8)14 << 40;
+//       pixel |= (n8)(tl.y + y) << 44;
+//       pixel |= (n8)(tl.x + x) << 52;
+//       pixel |= (n8)14 << 60;
 
        result[(ab1{a,b}).to_base(10)].push_back(pixel);
       }
@@ -167,24 +173,36 @@ void XCSD_Image::image_tierbox_to_sdi_pixel_map(const QImage& ci, std::map<s1, s
 
 void XCSD_Image::save_full_tier_image(QString path, QString info_folder)
 {
- static u2 box_area = tierbox_width * tierbox_width;
+ //static u2 box_area = tierbox_width * tierbox_width;
 
  XCSD_Image_Geometry::Iteration_Environment ienv = geometry_.formulate_iteration_environment();
 
  QImage target_image(image_.width(), image_.height(), image_.format());
 
+ QColor fillc(0,200,0);
+ target_image.fill(fillc);
+
+
+ QPainter painter(&target_image);
+
  geometry_.for_each_full_tierbox(
-    [this, &ienv, &target_image, &info_folder](XCSD_Image_Geometry::Grid_TierBox& gtb) -> s1
+    [this, &ienv, &painter, &info_folder](XCSD_Image_Geometry::Grid_TierBox& gtb)
  {
   QImage ti(tierbox_width, tierbox_width, QImage::Format_ARGB32);
-  ti.fill(0);
+
 
   tierbox_to_qimage(gtb, ti, ienv, info_folder);
   QString path = QString("%1/%2-%3.png").arg(info_folder).arg(gtb.loc.r()).arg(gtb.loc.c());
-  qDebug() << "path = " << path;
   ti.save(path);
+
+  QPoint tl(gtb.top_left().as_qpoint());
+
+  painter.drawImage(tl, ti);
+
   //return-1;
  });
+
+ target_image.save(path);
 }
 
 void XCSD_Image::data_tierbox_to_sdi_pixel_map(u4 tierbox_index,
@@ -193,7 +211,8 @@ void XCSD_Image::data_tierbox_to_sdi_pixel_map(u4 tierbox_index,
  static u2 box_area = tierbox_width * tierbox_width;
  u4 threshold = tierbox_index * box_area;
 
- u1 b, a = 0, gi = 0; // gi = ground index
+ u1 b, a = 0;
+ u2 threshold_offset = 0;
  for(u1 ar = 0; ar < 3; ++ar)
  {
   for(u1 ac = 0; ac < 3; ++ac)
@@ -204,11 +223,12 @@ void XCSD_Image::data_tierbox_to_sdi_pixel_map(u4 tierbox_index,
     for(u1 bc = 0; bc < 3; ++bc)
     {
      ++b;
+
      std::vector<n8> pixels;
-     data_.get_pixel_run(threshold + gi, 9, pixels);
+     data_.get_pixel_run(threshold + threshold_offset, 9, pixels);
      result[(ab1{a,b}).to_base(10)] = pixels;
 
-     gi += 9;
+     threshold_offset += 9;
      // data to std vec ... starting at threshold + tl ...
 
     }
@@ -268,33 +288,36 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
 
  for(auto const& [ab_s1, vec]: sdi)
  {
-  qDebug() << "ab_s1 = " << ab_s1;
-
   ab1 ab = {(u1)((u1)ab_s1 / 10), (u1)((u1)ab_s1 % 10)};
 
+  if(!info_string.isEmpty())
+    info_string += QString("SDI location %1\n").arg(ab_s1);
+
+  ab = ab.double_minus(1);
+
+
+
   // // rc here is 0 - 3
-  rc1 arc = {(u1)((ab.a - 1) / 3), (u1)(ab.a % 3)};
-  rc1 brc = {(u1)((ab.b - 1) / 3), (u1)(ab.b % 3)};
+  rc1 arc = {(u1)(ab.a / 3), (u1)(ab.a % 3)};
+  rc1 brc = {(u1)(ab.b / 3), (u1)(ab.b % 3)};
 
   u1 tl_scan_row = arc.r * 9 + brc.r * 3;
 
   u1 tl_scan_column = arc.c * 9 + brc.c * 3;
 
-  if(!info_string.isEmpty())
-    info_string += QString("SDI location %1\n").arg(ab_s1);
+
+
 
   u1 vi = 0; // vector index
   for(u1 y = 0; y < 3; ++y)
   {
    QRgb* img_pixels = (QRgb*) target.scanLine(tl_scan_row + y);
 
-   qDebug() << "i = " << *img_pixels;
-
    img_pixels += tl_scan_column;
    for(u1 x = 0; x < 3; ++x)
    {
     n8 pixel = vec[vi];
-    qDebug() << "pixel = " << pixel;
+    // qDebug() << "pixel = " << (pixel & 0x00FFFFFF);
     *img_pixels = qRgba(
        (u1)(pixel & 255), (u1)((pixel >> 8) & 255),
        (u1)((pixel >> 16) & 255),

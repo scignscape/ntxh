@@ -94,6 +94,8 @@ public:
   u1 size_even_odd_code;
   u1 v_center_adjustment;
   u1 h_center_adjustment;
+  u1 v_center_area_threshold_adjustment;
+  s1 h_center_area_threshold_adjustment;
   u1 full_ortho_cycle_size;
   u1 margin_ortho_cycle_size;
 
@@ -107,7 +109,7 @@ public:
    h_center_adjustment = 1 - ((size_even_odd_code >> 1) % 2); // 1 extra center column
 
    full_ortho_cycle_size = 4 + 2 * v_center_adjustment + 2 * h_center_adjustment;
-   margin_ortho_cycle_size = 0;
+   v_center_area_threshold_adjustment = h_center_area_threshold_adjustment = margin_ortho_cycle_size = 0;
   }
  };
 

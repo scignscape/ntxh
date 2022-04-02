@@ -23,6 +23,21 @@
 
 USING_XCNS(XCSD)
 
+int main6(int argc , char **argv)
+{
+ QGuiApplication app(argc, argv);
+
+ XCSD_Image_Geometry xcsg;
+ xcsg.set_total_size(27 * 9, 27 * 5);
+
+ xcsg.init_tier_counts(XCSD_Image_Geometry::TierGrid_Preferances::Minimize_Outer_Tiers);
+
+ xcsg.draw_tier_summary(QString(ROOT_FOLDER "/../test/t%1x%2.png")
+     .arg(xcsg.total_size().width).arg(xcsg.total_size().height),
+   QString(ROOT_FOLDER "/../test/t%1x%2-seq.png")
+     .arg(xcsg.total_size().width).arg(xcsg.total_size().height),
+                        3.3, 8);
+}
 
 int main(int argc , char **argv)
 {
@@ -55,25 +70,42 @@ int main(int argc , char **argv)
  // xcsg.set_total_size(284, 284);
  // xcsg.set_total_size(304, 304);
 
+ // xcsd.load_image(ROOT_FOLDER "/../test/angle7.png");
+
+ XCSD_Image xcsd1;
+
+ xcsd1.load_image(ROOT_FOLDER "/../test/angle7.png");
+ QImage src = xcsd1.image();
+ QImage copy = src.copy(0, 0, src.width() - 27 * 3,
+                        src.height() - 27 * 2);
+ copy.save(ROOT_FOLDER "/../test/angle.png");
+
+ // return 0;
+
+
  XCSD_Image xcsd;
- xcsd.load_image(ROOT_FOLDER "/../pics/angle.jpg");
+ xcsd.load_image(ROOT_FOLDER "/../test/angle.png");
+
+// xcsd.load_image(ROOT_FOLDER "/../test/t1-36x36b.png");
+// xcsd.load_image(ROOT_FOLDER "/../test/t1-27x27.png");
+// xcsd.load_image(ROOT_FOLDER "/../pics/angle.grid.png");
  //xcsd.load_image(ROOT_FOLDER "/../pi/t1-30x30.png");
  xcsd.init_geometry();
  XCSD_Image_Geometry& xcsg = xcsd.geometry();
 
  xcsg.init_tier_counts(XCSD_Image_Geometry::TierGrid_Preferances::Minimize_Outer_Tiers);
 
-// xcsg.draw_tier_summary(QString(ROOT_FOLDER "/../tiers/t%1x%2.png")
+// xcsg.draw_tier_summary(QString(ROOT_FOLDER "/../test/t%1x%2.png")
 //     .arg(xcsg.total_size().width).arg(xcsg.total_size().height),
-//   QString(ROOT_FOLDER "/../tiers/t%1x%2-seq.png")
+//   QString(ROOT_FOLDER "/../test/t%1x%2-seq.png")
 //     .arg(xcsg.total_size().width).arg(xcsg.total_size().height),
 //                        3.3, 8);
 
 
- xcsd.init_pixel_data(ROOT_FOLDER "/../tiers/ti1");
+ xcsd.init_pixel_data(ROOT_FOLDER "/../test/ti1");
 
- xcsd.save_full_tier_image(ROOT_FOLDER "/../tiers/ft1.png",
-   ROOT_FOLDER "/../tiers/tk1");
+ xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft1.png",
+   ROOT_FOLDER "/../test/tk1");
 
 // xcsg.draw_tier_summary(ROOT_FOLDER "/../tiers/t284x194.png", 2.5, 4);
 // xcsg.draw_tier_summary(ROOT_FOLDER "/../tiers/t284x194.png", 2.5, 4);

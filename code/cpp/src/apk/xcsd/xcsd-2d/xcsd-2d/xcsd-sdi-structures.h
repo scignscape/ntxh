@@ -47,6 +47,7 @@ inline constexpr u1 _ctz(int x)
    { return {field1 == 0, field2 == 0}; } \
    ty##size nonzeros_mask() const \
    { return {field1 != 0, field2 != 0}; } \
+   QPoint as_qpoint() { return {(int) field1, (int) field2}; } \
    u##size inner_sum() const { return field1 + field2; } \
    u##size inner_difference() const { return field1 - field2; } \
    u##size inner_zdifference() const { return field1 < field2? 0 : field1 - field2; } \
@@ -195,6 +196,7 @@ struct ty##size##s { s##size field1, field2; \
    { return {field1 == 0, field2 == 0}; } \
    ty##size##s nonzeros_mask() const \
    { return {field1 != 0, field2 != 0}; } \
+   QPoint as_qpoint() { return {(int) field1, (int) field2}; } \
    s##size inner_sum() const { return field1 + field2; } \
    s##size inner_difference() const { return field1 - field2; } \
    s##size inner_product() const { return field1 * field2; } \

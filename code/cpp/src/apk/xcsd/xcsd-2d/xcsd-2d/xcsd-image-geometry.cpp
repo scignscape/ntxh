@@ -236,7 +236,7 @@ lmr2 _split_lmr_odd_pref(u2 size, u1 box_width)
 lmr2 _split_lmr_min_pref(u2 size, u1 box_width)
 {
  u1 margins = size % (box_width * 2);
- if(margins > box_width)
+ if(margins >= box_width)
   return _split_lmr_odd_pref(size, box_width);
  else
   return _split_lmr_even_pref(size, box_width);
@@ -357,7 +357,8 @@ s1 XCSD_Image_Geometry::_for_each_full_tierbox(std::function<s1(Grid_TierBox&)> 
    TierBox_Location tbl(rc._to<rc2s>());
    calculate_mch_code(tbl);
    tbl.rc().add(offsets);
-   Grid_TierBox gtb({tbl, ((rc * tierbox_width).plus(tl) + ((tierbox_width / 2) + 1))._transposed_to<xy2>()});
+
+   Grid_TierBox gtb({tbl, ((rc * tierbox_width).plus(tl) + (tierbox_width / 2))._transposed_to<xy2>()});
    s1 _break = fn(gtb);
    if(_break != 0)
      return _break;
@@ -394,7 +395,11 @@ u1 TierBox_Location::get_mch_clock_code(pr2s pr, u1* mask)
 // }
 
  if(pr.is_zeros())
+ {
+  if(mask)
+    *mask = 0;
    return 0;
+ }
 
  u1 _mask = 0;
 
@@ -788,8 +793,8 @@ XCSD_Image_Geometry::MCH_Info::MCH_Info(const prr2& mch, const prr2& margin_info
  else
  {
   sq = lesser_side;
-  sqh = sq  - (size_even_odd_code & 1);
-  sqv = sq  - ((size_even_odd_code >> 1) & 1);
+  sqh = sq + size_even_odd_info.h_center_area_threshold_adjustment;// - (size_even_odd_code & 1);
+  sqv = sq + size_even_odd_info.v_center_area_threshold_adjustment;// - ((size_even_odd_code >> 1) & 1);
  }
 
  area_threshold = sqh * sqv;
@@ -891,11 +896,23 @@ prr2 XCSD_Image_Geometry::get_margin_info(const TierBox_Location& loc, u1 quadra
 void XCSD_Image_Geometry::Size_Even_Odd_Info::landscape()
 {
  margin_ortho_cycle_size = 2 * (1 + v_center_adjustment);
+
+ if(size_even_odd_code == 1)
+   h_center_area_threshold_adjustment = 1;
+
+ else if(size_even_odd_code == 2)
+   h_center_area_threshold_adjustment = -1;
 }
 
 void XCSD_Image_Geometry::Size_Even_Odd_Info::portrait()
 {
  margin_ortho_cycle_size = 2 * (1 + h_center_adjustment);
+
+ if(size_even_odd_code == 2)
+   v_center_area_threshold_adjustment = 1;
+
+ else if(size_even_odd_code == 1)
+   v_center_area_threshold_adjustment = -1;
 }
 
 u4 XCSD_Image_Geometry::get_tierbox_index(const Grid_TierBox& gtb,
@@ -947,7 +964,14 @@ XCSD_Image_Geometry::Iteration_Environment
 XCSD_Image_Geometry::formulate_iteration_environment()
 {
  u1 size_even_odd_code = get_size_even_odd_code();
- return Iteration_Environment(size_even_odd_code);
+ Iteration_Environment result(size_even_odd_code);
+
+ if(full_tier_counts_.is_ascending()) // w < h
+   result.size_even_odd_info.portrait();
+ else if(full_tier_counts_.is_descending()) // w > h
+   result.size_even_odd_info.landscape();
+
+ return result;
 }
 
 
