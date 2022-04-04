@@ -60,6 +60,9 @@ inline constexpr u1 _ctz(int x)
    bool is_ascending() { return field1 < field2; } \
    bool is_zeros() const { return (field1 == 0) && (field2 == 0); } \
    bool has_zero() const { return (field1 == 0) || (field2 == 0); } \
+   u1 quadrant_code_against(const ty##size& rhs) const; \
+   template<typename T> u1 quadrant_code_against(const T& rhs) const \
+   { return quadrant_code_against(rhs.template _to<ty##size>()); } \
    ty##size& make_descending() { if(is_ascending()) _Transpose(); return *this;} \
    ty##size& make_ascending() { if(is_descending()) _Transpose(); return *this;} \
    u##size lesser() { return field1 < field2? field1 : field2; } \
@@ -146,6 +149,10 @@ inline constexpr u1 _ctz(int x)
    { return field1 == rhs.field1 && field2 == rhs.field2; } \
    template<typename T> bool operator==(T vals) const \
    { return operator==(vals.template _to<ty##size>()); } \
+ bool operator!=(ty##size rhs) const \
+ { return !(operator==(rhs)); } \
+ template<typename T> bool operator!=(T vals) const \
+ { return operator!=(vals.template _to<ty##size>()); } \
    bool operator<=(ty##size rhs) const \
    { return field1 <= rhs.field1 && field2 <= rhs.field2; } \
    template<typename T> bool operator<=(T vals) const \
@@ -208,6 +215,11 @@ struct ty##size##s { s##size field1, field2; \
    bool is_ascending() const { return field1 < field2; } \
    bool is_zeros() const { return (field1 == 0) && (field2 == 0); } \
    bool has_zero() const { return (field1 == 0) || (field2 == 0); } \
+   u1 quadrant_code_against(const ty##size##s& rhs) const \
+   { return (*this - rhs).spaceship_mask().plus((*this - rhs).zeros_mask()) \
+   .floor(0).times({2, 1}).inner_sum(); } \
+   template<typename T> u1 quadrant_code_against(const T& rhs) const \
+   { return  quadrant_code_against(rhs.template _to<ty##size##s>()); } \
    ty##size##s& make_descending() { if(is_ascending()) _Transpose(); return *this;} \
    ty##size##s& make_ascending() { if(is_descending()) _Transpose(); return *this;} \
    s##size lesser() const { return field1 < field2? field1 : field2; } \
@@ -287,6 +299,10 @@ struct ty##size##s { s##size field1, field2; \
    { return operator<=(vals.template _to<ty##size##s>()); } \
    bool operator>(ty##size##s rhs) const \
    { return field1 > rhs.field1 && field2 > rhs.field2; } \
+ bool operator!=(ty##size##s rhs) const \
+ { return !(operator==(rhs)); } \
+ template<typename T> bool operator!=(T vals) const \
+ { return operator!=(vals.template _to<ty##size##s>()); } \
    bool operator==(ty##size##s rhs) const \
    { return field1 == rhs.field1 && field2 == rhs.field2; } \
    template<typename T> bool operator==(T vals) const \
@@ -310,6 +326,9 @@ struct ty##size##s { s##size field1, field2; \
 Ty_DEF_MACRO(wh, 1, u2, width, height)
 Ty_DEF_MACRO(wh, 2, u4, width, height)
 Ty_DEF_MACRO(wh, 4, n8, width, height)
+Ty_DEF_MACRO(bb, 1, u2, byte, bit)
+Ty_DEF_MACRO(bb, 2, u4, byte, bit)
+Ty_DEF_MACRO(bb, 4, n8, byte, bit)
 Ty_DEF_MACRO(args, 1, u2, arg1, arg2)
 Ty_DEF_MACRO(args, 2, u4, arg1, arg2)
 Ty_DEF_MACRO(args, 4, n8, arg1, arg2)
@@ -344,6 +363,9 @@ Ty_DEF_MACRO(tb, 4, n8, first, second)
 Tys_DEF_MACRO(wh, 1, u2, width, height)
 Tys_DEF_MACRO(wh, 2, u4, width, height)
 Tys_DEF_MACRO(wh, 4, n8, width, height)
+Tys_DEF_MACRO(bb, 1, u2, byte, bit)
+Tys_DEF_MACRO(bb, 2, u4, byte, bit)
+Tys_DEF_MACRO(bb, 4, n8, byte, bit)
 Tys_DEF_MACRO(args, 1, u2, arg1, arg2)
 Tys_DEF_MACRO(args, 2, u4, arg1, arg2)
 Tys_DEF_MACRO(args, 4, n8, arg1, arg2)
@@ -494,6 +516,9 @@ template<> struct Mod<ty> { using Unsigned = ty##s; };
 Mod_DEF_MACRO(wh1)
 Mod_DEF_MACRO(wh2)
 Mod_DEF_MACRO(wh4)
+Mod_DEF_MACRO(bb1)
+Mod_DEF_MACRO(bb2)
+Mod_DEF_MACRO(bb4)
 Mod_DEF_MACRO(args1)
 Mod_DEF_MACRO(args2)
 Mod_DEF_MACRO(args4)

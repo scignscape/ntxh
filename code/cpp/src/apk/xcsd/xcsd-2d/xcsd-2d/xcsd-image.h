@@ -41,6 +41,7 @@ public:
  ACCESSORS__RGET(QImage ,image)
  ACCESSORS__RGET(XCSD_Image_Geometry ,geometry)
 
+ QColor pixel_number_to_qcolor(n8 pixel);
 
  XCSD_TierBox* get_tierbox_at_ground_position(u2 x, u2 y);
 
@@ -56,10 +57,13 @@ public:
 
  void image_tierbox_to_sdi_pixel_map(const QImage& ci, std::map<s1, std::vector<n8>>& result);
 
- void data_tierbox_to_sdi_pixel_map(u4 tierbox_index, std::map<s1, std::vector<n8>>& result);
+ u4 data_tierbox_to_sdi_pixel_map(u4 tierbox_index, std::map<s1, std::vector<n8>>& result);
 
  void tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb, QImage& target,
-   XCSD_Image_Geometry::Iteration_Environment ienv, QString info_folder = {});
+   XCSD_Image_Geometry::Iteration_Environment ienv,
+   u4* data_index, n8** data_start,
+   XCSD_Image_Geometry::MCH_Info* mchi,
+   QString info_folder); // = {});
 
  wh2 get_wh()
  {
@@ -75,7 +79,10 @@ public:
 
  void get_255_palatte(QVector<QColor>& vec);
 
- void save_full_tier_image(QString path, QString info_folder = {});
+ void save_full_tier_image(QString path, QString info_folder = {},
+   std::function<void(QImage&, XCSD_Image_Geometry::Grid_TierBox&,
+     XCSD_Image_Geometry::Iteration_Environment, u4, n8*,
+     const XCSD_Image_Geometry::MCH_Info&, QString, u1)> cb = nullptr);
 
 
 

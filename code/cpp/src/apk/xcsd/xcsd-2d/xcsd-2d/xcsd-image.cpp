@@ -60,7 +60,7 @@ void XCSD_Image::init_pixel_data(QString info_folder)
    info_string = QString("Full tierbox %2 %3\n\n").arg(gtb.loc.r()).arg(gtb.loc.c());
   }
 
-  u4 index = geometry_.get_tierbox_index(gtb, ienv.size_even_odd_info);
+  u4 index = geometry_.get_tierbox_index(gtb, ienv.size_even_odd_info, nullptr);
   u4 threshold = index * box_area;
 
   u2 threshold_offset = 0;
@@ -171,41 +171,69 @@ void XCSD_Image::image_tierbox_to_sdi_pixel_map(const QImage& ci, std::map<s1, s
 }
 
 
-void XCSD_Image::save_full_tier_image(QString path, QString info_folder)
+void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
+  std::function<void(QImage&, XCSD_Image_Geometry::Grid_TierBox&,
+    XCSD_Image_Geometry::Iteration_Environment, u4, n8*, // data_index,
+    const XCSD_Image_Geometry::MCH_Info&, QString, u1)> cb)
 {
  //static u2 box_area = tierbox_width * tierbox_width;
 
  XCSD_Image_Geometry::Iteration_Environment ienv = geometry_.formulate_iteration_environment();
 
- QImage target_image(image_.width(), image_.height(), image_.format());
+ QPainter painter;
 
- QColor fillc(0,200,0);
- target_image.fill(fillc);
+ QImage target_image;
 
-
- QPainter painter(&target_image);
+ if(!path.isEmpty())
+ {
+  target_image = QImage(image_.width(), image_.height(), image_.format());
+  QColor fillc(0,200,0);
+  target_image.fill(fillc);
+  painter.begin(&target_image);
+ }
 
  geometry_.for_each_full_tierbox(
-    [this, &ienv, &painter, &info_folder](XCSD_Image_Geometry::Grid_TierBox& gtb)
+    [this, &path, cb, &ienv, &painter, &info_folder](XCSD_Image_Geometry::Grid_TierBox& gtb)
  {
   QImage ti(tierbox_width, tierbox_width, QImage::Format_ARGB32);
 
+  XCSD_Image_Geometry::MCH_Info mchi;
+  //pr2s mch;
 
-  tierbox_to_qimage(gtb, ti, ienv, info_folder);
-  QString path = QString("%1/%2-%3.png").arg(info_folder).arg(gtb.loc.r()).arg(gtb.loc.c());
-  ti.save(path);
+  u4 data_index;
 
-  QPoint tl(gtb.top_left().as_qpoint());
+  n8* data_start;
 
-  painter.drawImage(tl, ti);
+  tierbox_to_qimage(gtb, ti, ienv, &data_index, &data_start, &mchi, info_folder);
+
+  if(!info_folder.isEmpty())
+  {
+   QString path = QString("%1/%2-%3.png").arg(info_folder).arg(gtb.loc.r()).arg(gtb.loc.c());
+   ti.save(path);
+  }
+
+  if(cb)
+  {
+   cb(ti, gtb, ienv, data_index, data_start, mchi,  info_folder, tierbox_width);
+  }
+
+  if(!path.isEmpty())
+  {
+   QPoint tl(gtb.top_left().as_qpoint());
+   painter.drawImage(tl, ti);
+  }
 
   //return-1;
  });
 
- target_image.save(path);
+ if(!path.isEmpty())
+ {
+  painter.end();
+  target_image.save(path);
+ }
 }
 
-void XCSD_Image::data_tierbox_to_sdi_pixel_map(u4 tierbox_index,
+u4 XCSD_Image::data_tierbox_to_sdi_pixel_map(u4 tierbox_index,
   std::map<s1, std::vector<n8>>& result)
 {
  static u2 box_area = tierbox_width * tierbox_width;
@@ -236,6 +264,7 @@ void XCSD_Image::data_tierbox_to_sdi_pixel_map(u4 tierbox_index,
   }
  }
 
+ return threshold;
 }
 
 
@@ -268,14 +297,32 @@ void XCSD_Image::data_tierbox_to_sdi_pixel_map(u4 tierbox_index,
 
 
 void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
-  QImage& target, XCSD_Image_Geometry::Iteration_Environment ienv, QString info_folder)
+  QImage& target, XCSD_Image_Geometry::Iteration_Environment ienv,
+  u4* data_index, n8** data_start, //pr2s* mch,
+  XCSD_Image_Geometry::MCH_Info* mchi,  QString info_folder)
 {
  //static u2 box_area = tierbox_width * tierbox_width;
 
- u4 index = geometry_.get_tierbox_index(gtb, ienv.size_even_odd_info);
+ u4 index = geometry_.get_tierbox_index(gtb, ienv.size_even_odd_info, mchi);
 
  std::map<s1, std::vector<n8>> sdi;
- data_tierbox_to_sdi_pixel_map(index, sdi);
+
+ u4 di = data_tierbox_to_sdi_pixel_map(index, sdi);
+
+
+ if(data_index)
+ {
+  *data_index = di;
+  if((di != (u4) -1) && data_start)
+    *data_start = data_.get_pixel_data_start(di);
+ }
+
+
+
+// static u4 deflt;
+// (data_index? *data_index : deflt) =
+//   data_tierbox_to_sdi_pixel_map(index, sdi);
+
 
  QString info_path;
  QString info_string;
@@ -339,12 +386,18 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
     info_string += "\n";
  }
 
- save_file(info_path, info_string);
+ if(!info_path.isEmpty())
+   save_file(info_path, info_string);
 }
 
    //xy2 tl = gtb.top_left();
 
 
+QColor XCSD_Image::pixel_number_to_qcolor(n8 pixel)
+{
+ return QColor(pixel & 255, (pixel >> 8) & 255, (pixel >> 16) & 255,
+   255 - ((pixel >> 24) & 255));
+}
 
 
 SDI_Position XCSD_Image::get_sdi_at_ground_position(u2 x, u2 y)

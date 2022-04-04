@@ -72,13 +72,13 @@ int main(int argc , char **argv)
 
  // xcsd.load_image(ROOT_FOLDER "/../test/angle7.png");
 
- XCSD_Image xcsd1;
+// XCSD_Image xcsd1;
 
- xcsd1.load_image(ROOT_FOLDER "/../test/angle7.png");
- QImage src = xcsd1.image();
- QImage copy = src.copy(0, 0, src.width() - 27 * 3,
-                        src.height() - 27 * 2);
- copy.save(ROOT_FOLDER "/../test/angle.png");
+// xcsd1.load_image(ROOT_FOLDER "/../test/angle7.png");
+// QImage src = xcsd1.image();
+// QImage copy = src.copy(0, 0, src.width() - 27 * 3,
+//                        src.height() - 27 * 2);
+// copy.save(ROOT_FOLDER "/../test/angle.png");
 
  // return 0;
 
@@ -104,8 +104,532 @@ int main(int argc , char **argv)
 
  xcsd.init_pixel_data(ROOT_FOLDER "/../test/ti1");
 
- xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft1.png",
-   ROOT_FOLDER "/../test/tk1");
+ if(0)
+ xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft2.png",
+   {}, //ROOT_FOLDER "/../test/tk1",
+   [](QImage& ti, XCSD_Image_Geometry::Grid_TierBox& gtb,
+      XCSD_Image_Geometry::Iteration_Environment ienv,
+      u4 data_index, n8* data_start ,//pr2s mch,
+      const XCSD_Image_Geometry::MCH_Info& mchi,
+      QString info_folder, u1 tierbox_w)
+ {
+  QPainter painter(&ti);
+
+  QFont font = painter.font();
+  font.setPointSize(7);
+  painter.setFont(font);
+
+  u1 dir = mchi.get_clock_index_to_direction();
+
+  QColor hcolor(200, 0, 50);
+  QColor vcolor(230, 200, 50);
+  QColor dcolor(170, 200, 0);
+
+  QColor hcolortr(200, 0, 50, 100);
+  QColor vcolortr(230, 200, 50, 100);
+
+  QPoint tl = ti.rect().topLeft();
+  QPoint tr = ti.rect().topRight();
+  QPoint bl = ti.rect().bottomLeft();
+  QPoint br = ti.rect().bottomRight();
+  QPoint tc = (tl + tr) / 2;
+  QPoint bc = (bl + br) / 2;
+  QPoint lc = (tl + bl) / 2;
+  QPoint rc = (tr + br) / 2;
+  QPoint cc = ti.rect().center();
+
+
+  switch (mchi.get_clock_index_to_direction())
+  {
+  case 1:
+   painter.setPen(hcolor);
+   painter.drawLine(lc, rc - QPoint{4,0});
+   painter.setPen(hcolortr);
+   painter.drawLine(lc, rc);
+   break;
+
+  case 5:
+   painter.setPen(hcolor);
+   painter.drawLine(lc + QPoint{4,0}, rc);
+   painter.setPen(hcolortr);
+   painter.drawLine(lc, rc);
+   break;
+
+  case 2:
+   painter.setPen(QPen(dcolor,1));
+   painter.drawLine(tl, br);
+   painter.setPen(hcolor);
+   painter.drawLine(cc - QPoint{3,0},lc);
+   painter.setPen(vcolor);
+   painter.drawLine(cc - QPoint{0,3},tc);
+   break;
+
+  case 4:
+   painter.setPen(QPen(dcolor,1));
+   painter.drawLine(bl, tr);
+   painter.setPen(hcolor);
+   painter.drawLine(cc + QPoint{3,0},rc);
+   painter.setPen(vcolor);
+   painter.drawLine(cc - QPoint{0,3},tc);
+   break;
+
+  case 6:
+   painter.setPen(QPen(dcolor,1));
+   painter.drawLine(tl, br);
+   painter.setPen(hcolor);
+   painter.drawLine(cc + QPoint{3,0},rc);
+   painter.setPen(vcolor);
+   painter.drawLine(cc + QPoint{0,3},bc);
+   break;
+
+  case 3:
+   painter.setPen(vcolor);
+   painter.drawLine(tc, bc - QPoint{0,4});
+   painter.setPen(vcolortr);
+   painter.drawLine(tc, bc);
+   break;
+
+  case 7:
+   painter.setPen(vcolor);
+   painter.drawLine(tc + QPoint{0,4}, bc);
+   painter.setPen(vcolortr);
+   painter.drawLine(tc, bc);
+   break;
+
+  case 8:
+   painter.setPen(QPen(dcolor,1));
+   painter.drawLine(bl, tr);
+   painter.setPen(hcolor);
+   painter.drawLine(cc - QPoint{3,0},lc);
+   painter.setPen(vcolor);
+   painter.drawLine(cc + QPoint{0,3},bc);
+   break;
+
+  case 0:
+   painter.setPen(Qt::yellow);
+   painter.drawEllipse(ti.rect().center(), 4, 4);
+   break;
+
+  default: break;
+
+  }
+
+
+  painter.setPen(QColor(100,220,220));
+  //painter.drawText(2, 25, QString("%1").arg(dir));
+  painter.drawText(4, 25, QString("%1,%2").arg(gtb.loc.r()).arg(gtb.loc.c()));
+ });
+
+ if(0)
+ xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft3.png",
+   {}, //ROOT_FOLDER "/../test/tk1",
+   [&xcsg](QImage& ti, XCSD_Image_Geometry::Grid_TierBox& gtb,
+      XCSD_Image_Geometry::Iteration_Environment ienv,
+      u4 data_index, n8* data_start ,  //pr2s mch,
+      const XCSD_Image_Geometry::MCH_Info& mchi,
+      QString info_folder, u1 tierbox_w)
+ {
+  QPainter painter(&ti);
+
+  pr2s mch = gtb.loc.get_mch_code();
+  u2 dist = mch.abs().greater();
+  u2 half_side = xcsg.full_tier_counts().greater() / 2;
+
+  r8 prop = (r8) dist / half_side;
+
+  u1 coffset = prop * 50;
+
+  qDebug() << "half = " << half_side << "prop = " << prop << " dist = " << dist << " coffset = " << coffset;
+
+  painter.setBrush(QColor(100, dist * 20, dist * 20, 100));
+  //painter.drawText(2, 25, QString("%1").arg(dir));
+  painter.drawRect(ti.rect());
+
+  painter.setPen(QColor(100,220,220));
+  painter.drawText(2, 25, QString("%1").arg(dist));
+
+ });
+
+
+ // // //
+ xcsd.save_full_tier_image({}, // ROOT_FOLDER "/../test/ft9.png",
+   {}, //ROOT_FOLDER "/../test/tk1",
+   [&xcsg, &xcsd](QImage& ti, XCSD_Image_Geometry::Grid_TierBox& gtb,
+      XCSD_Image_Geometry::Iteration_Environment ienv,
+      u4 data_index, n8* data_start ,  //pr2s mch,
+      const XCSD_Image_Geometry::MCH_Info& mchi,
+      QString info_folder, u1 tierbox_w)
+ {
+  if(gtb.loc.rc() != rc2s{16,25})
+    return;
+
+  std::map<s1, std::vector<n8>> sdi;
+
+  xcsd.data_tierbox_to_sdi_pixel_map(mchi.full_tier_index, sdi);
+
+  u1 mult = 40;
+
+  QImage si(tierbox_w * mult, tierbox_w * mult, QImage::Format_ARGB32);
+  QPainter painter(&si);
+
+  for(auto const& [ab_s1, vec]: sdi)
+  {
+   ab1 ab = {(u1)((u1)ab_s1 / 10), (u1)((u1)ab_s1 % 10)};
+   ab = ab.double_minus(1);
+
+   // // rc here is 0 - 3
+   rc1 arc = {(u1)(ab.a / 3), (u1)(ab.a % 3)};
+   rc1 brc = {(u1)(ab.b / 3), (u1)(ab.b % 3)};
+
+   u1 tl_scan_row = arc.r * 9 + brc.r * 3;
+   u1 tl_scan_column = arc.c * 9 + brc.c * 3;
+
+   u1 vi = 0; // vector index
+   for(u1 y = 0; y < 3; ++y)
+   {
+    //QRgb* img_pixels = (QRgb*) target.scanLine(tl_scan_row + y);
+    //img_pixels += tl_scan_column;
+    for(u1 x = 0; x < 3; ++x)
+    {
+     n8 pixel = vec[vi];
+
+     QColor clr = xcsd.pixel_number_to_qcolor(pixel);
+     painter.setBrush(clr);
+     painter.drawRect((tl_scan_column + x) * mult,
+       (tl_scan_row + y) * mult, mult - 3, mult - 3);
+
+     ++vi;
+    }
+   }
+  }
+  si.save(ROOT_FOLDER "/../test/diagram.png");
+  return;
+
+//  pr2s mch = gtb.loc.get_mch_code();
+//  u2 dist = mch.abs().make_descending().inner_difference();
+
+  u2 pixel_count = tierbox_w * tierbox_w;
+
+  //n8 data = xcsd.get_data_at_start_index(data_index, )
+  //for()
+
+  for(u2 i = 0; i < pixel_count; ++i)
+  {
+   u1 t1 = i / 81;
+   u1 _t1 = i % 81;
+   u1 t2 = _t1 / 9;
+   u1 _t2 = _t1 % 9;
+   u1 t3 = _t2 / 3;
+   u1 _t3 = _t2 % 3;
+
+   u1 t1r = t1 / 3;
+   u1 t1c = t1 % 3;
+   u1 t2x = t2 / 3;
+   u1 t2y = t2 % 3;
+   u1 t3x = t3;
+   u1 t3y = _t3;
+
+   u1 x = t1c * 9 + t2x * 3 + t3x;
+   u1 y = t1r * 9 + t2y * 3 + t3y;
+
+   qDebug() << "x = " << x << " y = " << y;
+   n8 pixel = data_start[i];
+
+   QColor clr = xcsd.pixel_number_to_qcolor(pixel);
+
+   painter.setBrush(clr);
+
+   painter.drawRect(x * mult, y * mult, mult - 3, mult - 3);
+  }
+
+ });
+
+ if(0)
+ xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft4.png",
+   {}, //ROOT_FOLDER "/../test/tk1",
+   [&xcsg](QImage& ti, XCSD_Image_Geometry::Grid_TierBox& gtb,
+      XCSD_Image_Geometry::Iteration_Environment ienv,
+      u4 data_index, n8* data_start ,  //pr2s mch,
+      const XCSD_Image_Geometry::MCH_Info& mchi,
+      QString info_folder, u1 tierbox_w)
+ {
+  QPainter painter(&ti);
+
+  pr2s mch = gtb.loc.get_mch_code();
+  u2 dist = mch.abs().make_descending().inner_difference();
+
+//  u2 half_side = xcsg.full_tier_counts().greater() / 2;
+//  r8 prop = (r8) dist / half_side;
+//  u1 coffset = prop * 50;
+//  qDebug() << "half = " << half_side << "prop = " << prop << " dist = " << dist << " coffset = " << coffset;
+
+  painter.setBrush(QColor(dist * 20, dist * 20, 100, 100));
+  //painter.drawText(2, 25, QString("%1").arg(dir));
+  painter.drawRect(ti.rect());
+
+  painter.setPen(QColor(100,220,220));
+  painter.drawText(2, 25, QString("%1").arg(dist));
+
+ });
+
+ if(0)
+ xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft6.png",
+   {}, //ROOT_FOLDER "/../test/tk1",
+   [&xcsg, &xcsd](QImage& ti, XCSD_Image_Geometry::Grid_TierBox& gtb,
+      XCSD_Image_Geometry::Iteration_Environment ienv,
+      u4 data_index, n8* data_start ,  //pr2s mch,
+      const XCSD_Image_Geometry::MCH_Info& mchi,
+      QString info_folder, u1 tierbox_w)
+ {
+
+  rc2s quadrant = gtb.loc.rc() - xcsg.directed_centers().back().rc();
+  rc2s quadrant_mask = quadrant.spaceship_mask();
+
+  QPainter painter(&ti);
+
+
+  pr2s mch = gtb.loc.get_mch_code();
+  u2 dist = mch.abs().greater();
+  u2 half_side = xcsg.full_tier_counts().greater() / 2;
+  u2 manh = mch.abs().make_descending().inner_difference();
+
+  r8 prop = (r8) dist / half_side;
+
+  u1 coffset = prop * 50;
+
+  u2 comp = (dist + manh) / 2;
+
+  qDebug() << "half = " << half_side << "prop = " << prop << " dist = " << dist << " coffset = " << coffset;
+
+//  painter.setBrush(QColor(0, dist * 16, dist * 16, 100));
+//  //painter.drawText(2, 25, QString("%1").arg(dir));
+//  painter.drawRect(ti.rect());
+
+//  painter.setBrush(QColor(manh * 16, manh * 16, 0, 100));
+//  painter.drawRect(ti.rect());
+
+  u1 dmagn = 20;
+  u1 mmagn = 20;
+  u1 cmagn = 9;
+  u1 ccmagn = 7;
+
+  u1 mmmagn = 10;
+
+  s2 radj = mchi.tier_ring * quadrant_mask.r;
+  s2 cadj = mchi.inner_pushout * quadrant_mask.c;
+
+
+  painter.setBrush(QColor(255, 255 - dist * dmagn, 255 - dist * dmagn, 100));
+  painter.drawRect(ti.rect());
+
+  painter.setBrush(QColor(255 - manh * mmagn, 255 - manh * mmagn, 255, 255 - manh * mmmagn));
+  painter.drawRect(ti.rect());
+
+  painter.setBrush(QColor(comp * cmagn, comp * cmagn, 100, comp * ccmagn + 30));
+  painter.drawRect(ti.rect());
+
+  QFont font = painter.font();
+  font.setPointSize(8);
+  painter.setFont(font);
+
+  painter.setPen(QColor(220,40,60));
+  painter.drawText(2, 12, QString("%1 %2").arg(mchi.inner_pushout).arg(mchi.tier_ring)); //.arg(comp));
+
+  font.setPointSize(6);
+  painter.setFont(font);
+
+
+  painter.setPen(QColor(100,220,220));
+  painter.drawText(2, 25, QString("%1 %2").arg(radj).arg(cadj)); //.arg(comp));
+
+ });
+
+ if(0)
+ xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft7.png",
+   {}, //ROOT_FOLDER "/../test/tk1",
+   [&xcsg, &xcsd](QImage& ti, XCSD_Image_Geometry::Grid_TierBox& gtb,
+      XCSD_Image_Geometry::Iteration_Environment ienv,
+      u4 data_index, n8* data_start ,  //pr2s mch,
+      const XCSD_Image_Geometry::MCH_Info& mchi,
+      QString info_folder, u1 tierbox_w)
+ {
+
+  if(gtb.loc.c() == 16 && gtb.loc.r() == 12)
+  {
+   QPainter painter(&ti);
+   QBrush br(QColor(240, 210, 70, 229), Qt::DiagCrossPattern);
+   painter.setBrush(br);
+   painter.setPen(Qt::NoPen);
+   painter.drawRect(ti.rect());
+   QBrush br1(QColor(240, 210, 70, 199));
+   painter.setBrush(br1);
+   painter.drawRect(ti.rect());
+  }
+  else if(gtb.loc.r() == 12)
+  {
+   QPainter painter(&ti);
+   QBrush br(QColor(240, 110, 170, 189), Qt::BDiagPattern);
+   painter.setBrush(br);
+   painter.setPen(Qt::NoPen);
+   painter.drawRect(ti.rect());
+   QBrush br1(QColor(240, 110, 170, 49));
+   painter.setBrush(br1);
+   painter.drawRect(ti.rect());
+  }
+  else if(gtb.loc.c() == 16)
+  {
+   QPainter painter(&ti);
+   QBrush br(QColor(240, 240, 40, 189), Qt::FDiagPattern);
+   painter.setBrush(br);
+   painter.setPen(Qt::NoPen);
+   painter.drawRect(ti.rect());
+   QBrush br1(QColor(240, 240, 40, 49));
+   painter.setBrush(br1);
+   painter.drawRect(ti.rect());
+  }
+ });
+
+ if(0)
+ xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft8.png",
+   {}, //ROOT_FOLDER "/../test/tk1",
+   [&xcsg, &xcsd](QImage& ti, XCSD_Image_Geometry::Grid_TierBox& gtb,
+      XCSD_Image_Geometry::Iteration_Environment ienv,
+      u4 data_index, n8* data_start ,  //pr2s mch,
+      const XCSD_Image_Geometry::MCH_Info& mchi,
+      QString info_folder, u1 tierbox_w)
+ {
+  QString maskss {
+   "kbff-fbkk-kkkk-kkkk_"
+   "kbff-ffbk-kkkk-kkkk_"
+   "bfff-ffff-bkkk-skkk_"
+   "kkbf-ffff-ffff-sfff_"
+
+   "kkks-ffff-ffff-ffff_"
+   "kkkb-ffff-ffff-ffff_"
+   "kkbf-fffb-ksff-fffb_"
+   "kkbf-fffk-kbff-ffbk"
+  };
+
+  QMap<QChar, u1> codes { {'k', 0}, {'b', 2}, {'s', 1}, {'f', 3} };
+
+  maskss.replace('-', "");
+
+  QStringList qsl = maskss.split('_');
+
+  n8 masks [4] {0,0,0,0};
+
+  for(u1 half = 0; half < 8; half += 4)
+  {
+   for(u1 r = 0; r < 4; ++r)
+   {
+    for(u1 c = 0; c < 16; ++c)
+    {
+     QChar ch = qsl[half + r][c];
+     u1 code = codes[ch];
+
+     bb1 bb{(u1)(7 - (c % 8)), (u1)((3 - r) * 2)};
+
+//     u1 byte = 7 - (c % 8);
+//     u1 bit = (3 - r) * 2;
+
+     //u1 offset =  bb.times(bb1{8,1}).inner_sum(); // 8 * byte + bit;
+
+     u1 offset =  8 * bb.byte + bb.bit;
+
+     n8 ofc = ((n8) code) << offset;
+
+     masks[(half / 2) + (c / 8)] |= ofc;
+    }
+   }
+  }
+
+  if( gtb.loc.c() >= 16 && gtb.loc.r() >= 8
+     && gtb.loc.c() < 32 && gtb.loc.r() < 16 )
+  {
+   u1 qc = gtb.loc.rc().quadrant_code_against(rc2s{12, 24});
+
+   n8 mask = masks[qc];  //0xFFFF'FFFF'FFFF'FFFF; //  0b11'11'11'11'11'11'11'11'11'11'11'11'11'11'11'11;
+
+   bb1 bb = gtb.loc.rc()._transposed().minus(rc2s{16,8})._to<bb1>();
+   bb.byte %= 8;
+   bb.byte = 7 - bb.byte;
+
+   bb.bit %= 4;
+   bb.bit = 3 - bb.bit;
+   bb.bit *= 2;
+   u1 adj = (mask >> (bb.byte * 8)) & 255;
+   adj >>= bb.bit;
+   adj &= 3;
+
+   QPainter painter(&ti);
+
+   switch(adj)
+   {
+   case 0:
+    {
+     QBrush br(QColor(24, 24, 40, 119), Qt::Dense2Pattern);
+     painter.setBrush(br);
+     painter.setPen(Qt::NoPen);
+     painter.drawRect(ti.rect());
+     QBrush br1(QColor(24, 24, 40, 89));
+     painter.setBrush(br1);
+     painter.drawRect(ti.rect());
+    }
+    break;
+   case 3:
+    {
+     QBrush br(QColor(224, 224, 240, 189), Qt::Dense2Pattern);
+     painter.setBrush(br);
+     painter.setPen(Qt::NoPen);
+     painter.drawRect(ti.rect());
+     QBrush br1(QColor(224, 224, 240, 89));
+     painter.setBrush(br1);
+     painter.drawRect(ti.rect());
+    }
+    break;
+   case 2:
+    {
+     QBrush br(QColor(124, 124, 124, 219), Qt::Dense4Pattern);
+     painter.setBrush(br);
+     painter.setPen(Qt::NoPen);
+     painter.drawRect(ti.rect());
+     QBrush br1(QColor(124, 124, 124, 89));
+     painter.setBrush(br1);
+     painter.drawRect(ti.rect());
+    }
+    break;
+   case 1:
+    {
+     QBrush br(QColor(12, 124, 124, 219), Qt::Dense4Pattern);
+     painter.setBrush(br);
+     painter.setPen(Qt::NoPen);
+     painter.drawRect(ti.rect());
+     QBrush br1(QColor(12, 124, 124, 89));
+     painter.setBrush(br1);
+     painter.drawRect(ti.rect());
+    }
+    break;
+   }
+
+   QFont font = painter.font();
+   font.setPointSize(8);
+   painter.setFont(font);
+
+   painter.setPen(QColor(220,40,60));
+   painter.drawText(2, 12, QString("%1 %2").arg(bb.byte).arg(bb.bit)); //.arg(comp));
+
+   font.setPointSize(6);
+   painter.setFont(font);
+
+   if(adj == 3)
+     painter.setPen(QColor(50,120,120));
+   else
+     painter.setPen(QColor(100,220,220));
+   painter.drawText(2, 25, QString("%1 %2")
+     .arg(adj).arg(qc)); //.arg(comp));
+
+  }
+ });
 
 // xcsg.draw_tier_summary(ROOT_FOLDER "/../tiers/t284x194.png", 2.5, 4);
 // xcsg.draw_tier_summary(ROOT_FOLDER "/../tiers/t284x194.png", 2.5, 4);

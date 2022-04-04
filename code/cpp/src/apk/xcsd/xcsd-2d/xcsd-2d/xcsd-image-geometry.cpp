@@ -916,7 +916,7 @@ void XCSD_Image_Geometry::Size_Even_Odd_Info::portrait()
 }
 
 u4 XCSD_Image_Geometry::get_tierbox_index(const Grid_TierBox& gtb,
-  Size_Even_Odd_Info size_even_odd_info)
+  Size_Even_Odd_Info size_even_odd_info, MCH_Info* mchi)
 {
  //static constexpr u2 tierbox_pixel_size = 27*27;
 
@@ -946,10 +946,13 @@ u4 XCSD_Image_Geometry::get_tierbox_index(const Grid_TierBox& gtb,
 
  prr2 margin_info = get_margin_info(gtb.loc, quadrant_code);
 
- MCH_Info mchi(mch, margin_info, full_tier_counts_.lesser(),
+ MCH_Info _mchi(mch, margin_info, full_tier_counts_.lesser(),
    size_even_odd_info, quadrant_code);
 
- return mchi.full_tier_index;
+ if(mchi)
+   *mchi = _mchi;
+
+ return _mchi.full_tier_index;
  //pr2s raw_mch = gtb.loc.get_mch_code();
 
 }

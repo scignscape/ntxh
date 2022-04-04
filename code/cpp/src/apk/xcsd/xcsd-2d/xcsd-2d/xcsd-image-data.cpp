@@ -29,6 +29,11 @@ void XCSD_Image_Data::get_pixel_run(u4 start_index, u4 length, std::vector<n8>& 
  pixel_data_->fetch_raw_data(start_index, length, result.data());
 }
 
+n8* XCSD_Image_Data::get_pixel_data_start(u4 start_index)
+{
+ return pixel_data_->get(start_index);
+}
+
 void XCSD_Image_Data::init_pixel_run(u4 start_index, u4 length, n8 const* source)
 {
  pixel_data_->init_raw_data(start_index, length, source);

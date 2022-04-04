@@ -126,10 +126,28 @@ public:
    u2 margin_gap;
    u2 intra_tier_ring_index;
 
+   MCH_Info(){}
+
    MCH_Info(const prr2& mch, const prr2& margin_info, u2 lesser_side,
      Size_Even_Odd_Info& size_even_odd_info, u1 quadrant_code);
 
    static u1 get_compressed_clock_index(u1 clk, u1 size_even_odd_code, u1 quadrant_code);
+
+   u1 get_clock_index_to_direction() const
+   {
+    if(full_clock_index == 0)
+      return 0;
+
+    u1 adj = (full_clock_index + 2) % 24;
+    u1 mod = adj % 6;
+    u1 div = adj / 6;
+
+    if(mod == 0)
+      return 2 * ((div + 3) % 4) + 2; // figuring +3%4 is like --%4 without sign issues
+      //return 2 * (div? --div: 3) + 2;
+
+    return 2 * div + 1;
+   }
  };
 
  struct Gridline {
@@ -185,6 +203,8 @@ public:
  ACCESSORS(lr2 ,horizontal_outer_sizes)
  ACCESSORS(tb2 ,vertical_outer_sizes)
 
+ ACCESSORS__CONST_RGET(std::vector<TierBox_Location> ,directed_centers)
+
  Iteration_Environment formulate_iteration_environment();
 
  std::vector<TierBox_Location> get_directed_centers();
@@ -229,7 +249,8 @@ public:
  void draw_tier_summary(QString path, QString path1,
    r8 magnification, u1 circle_radius);
 
- u4 get_tierbox_index(const Grid_TierBox& gtb, Size_Even_Odd_Info size_even_odd_info);
+ u4 get_tierbox_index(const Grid_TierBox& gtb,
+   Size_Even_Odd_Info size_even_odd_info, MCH_Info* mchi);
 };
 
 
