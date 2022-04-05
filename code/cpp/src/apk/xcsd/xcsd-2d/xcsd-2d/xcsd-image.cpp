@@ -234,7 +234,7 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
 }
 
 u4 XCSD_Image::data_tierbox_to_sdi_pixel_map(u4 tierbox_index,
-  std::map<s1, std::vector<n8>>& result)
+  std::map<s1, std::pair<u2, std::vector<n8>>>& result)
 {
  static u2 box_area = tierbox_width * tierbox_width;
  u4 threshold = tierbox_index * box_area;
@@ -254,7 +254,7 @@ u4 XCSD_Image::data_tierbox_to_sdi_pixel_map(u4 tierbox_index,
 
      std::vector<n8> pixels;
      data_.get_pixel_run(threshold + threshold_offset, 9, pixels);
-     result[(ab1{a,b}).to_base(10)] = pixels;
+     result[(ab1{a,b}).to_base(10)] = {threshold_offset, pixels};
 
      threshold_offset += 9;
      // data to std vec ... starting at threshold + tl ...
@@ -305,7 +305,7 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
 
  u4 index = geometry_.get_tierbox_index(gtb, ienv.size_even_odd_info, mchi);
 
- std::map<s1, std::vector<n8>> sdi;
+ std::map<s1, std::pair<u2, std::vector<n8>>> sdi;
 
  u4 di = data_tierbox_to_sdi_pixel_map(index, sdi);
 
@@ -333,7 +333,7 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
   info_string = QString("Full tierbox %2 %3\n\n\n").arg(gtb.loc.r()).arg(gtb.loc.c());
  }
 
- for(auto const& [ab_s1, vec]: sdi)
+ for(auto const& [ab_s1, thr_vec]: sdi)
  {
   ab1 ab = {(u1)((u1)ab_s1 / 10), (u1)((u1)ab_s1 % 10)};
 
@@ -363,7 +363,7 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
    img_pixels += tl_scan_column;
    for(u1 x = 0; x < 3; ++x)
    {
-    n8 pixel = vec[vi];
+    n8 pixel = thr_vec.second[vi];
     // qDebug() << "pixel = " << (pixel & 0x00FFFFFF);
     *img_pixels = qRgba(
        (u1)(pixel & 255), (u1)((pixel >> 8) & 255),
@@ -373,7 +373,7 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
     ++img_pixels;
 
     if(!info_string.isEmpty())
-      info_string += QString(" %1").arg(vec[vi], 16, 16, QChar('0'));
+      info_string += QString(" %1").arg(thr_vec.second[vi], 16, 16, QChar('0'));
 
     ++vi;
    }
