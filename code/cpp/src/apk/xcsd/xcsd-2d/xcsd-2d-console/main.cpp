@@ -251,6 +251,7 @@ int main(int argc , char **argv)
  });
 
 
+// if(0)
  // // //
  xcsd.save_full_tier_image({}, // ROOT_FOLDER "/../test/ft9.png",
    {}, //ROOT_FOLDER "/../test/tk1",
@@ -275,14 +276,29 @@ int main(int argc , char **argv)
   QImage si(tierbox_w * mult, tierbox_w * mult, QImage::Format_ARGB32);
   QPainter painter(&si);
 
+#ifdef HIDE
   for(auto const& [ab_s1, thr_vec]: sdi)
   {
    ab1 ab = {(u1)((u1)ab_s1 / 10), (u1)((u1)ab_s1 % 10)};
    ab = ab.double_minus(1);
 
-   // // rc here is 0 - 3
+//   // // rc here is 0 - 3
    rc1 arc = {(u1)(ab.a / 3), (u1)(ab.a % 3)};
    rc1 brc = {(u1)(ab.b / 3), (u1)(ab.b % 3)};
+
+
+//   u2 thro_1 =  3 * brc.r + brc.c;
+//   u2 thro_2 =  9 * thro_1;
+
+//   u2 thro_3 =  3 * arc.r + arc.c;
+//   u2 thro_4 =  81 * thro_3;
+
+//   u2 thro = thro_2 + thro_4;
+    u2 thro = XCSD_Image_Geometry::sdi_index_to_ground_offset(ab_s1);
+
+//   qDebug() << "thro = " << thro << " thr = " << thr_vec.first;
+
+
 
    u1 tl_scan_row = arc.r * 9 + brc.r * 3;
    u1 tl_scan_column = arc.c * 9 + brc.c * 3;
@@ -296,11 +312,18 @@ int main(int argc , char **argv)
     {
      go_xy1 coords{(u1)(tl_scan_column + x), (u1)(tl_scan_row + y)};
 
+     u2 thro1 = XCSD_Image_Geometry::ground_offset_coords_to_ground_offset(coords);
+
+//     qDebug() << "thro1 = " << thro1; // << " thr = " << thr_vec.first;
+
 //     go_xy1 coords_off = coords.minus({1,1});
 
-     qDebug() << "coords = " << coords;
+//     qDebug() << "coords = " << coords;
 
-     n8 pixel = thr_vec.second[vi];
+//     n8 pixel = thr_vec.second[vi];
+
+     n8 pixel = *(data_start + thro1); //xcsd.get_pixel_at_ground_index(data_index);
+
 
      QColor clr = xcsd.pixel_number_to_qcolor(pixel);
 
@@ -459,11 +482,178 @@ int main(int argc , char **argv)
   }
   si.save(ROOT_FOLDER "/../test/diagram.png");
   return;
+#endif
 
-//  pr2s mch = gtb.loc.get_mch_code();
-//  u2 dist = mch.abs().make_descending().inner_difference();
+  pr2s mch = gtb.loc.get_mch_code();
+  u2 dist = mch.abs().make_descending().inner_difference();
+
+//  for(u1 y = 0; y < 27; ++y)
+//  {
+//   for(u1 x = 0; x < 27; ++x)
+//   {
+
+   for(u2 index = 0; index < 729; ++index)
+   {
+    //s2 thro1 = XCSD_Image_Geometry::ground_offset_to_sdi3(index);
+
+    go_xy1 coords = XCSD_Image_Geometry::ground_offset_to_ground_offset_coords(index);
+
+    qDebug() << "coords = " << coords;
+
+    ab1 ab = XCSD_Image_Geometry::ground_offset_coords_to_sdi_coords(coords);
+
+    u1 x = coords.go_x;
+    u1 y = coords.go_y;
+
+    //u2 index = XCSD_Image_Geometry::ground_offset_coords_to_ground_offset(coords);
+
+    n8 pixel = *(data_start + index); //xcsd.get_pixel_at_ground_index(data_index);
+
+    u1 tl_scan_row = y - y % 3;
+    u1 tl_scan_column = x - x % 3;
+
+    u1 vi = 3 * (y % 3) + (x % 3);  // vector index
+
+    QColor clr = xcsd.pixel_number_to_qcolor(pixel);
+
+    painter.setPen(Qt::NoPen);
+
+    xy2 local {(u2)(coords.go_x * mult), (u2)(coords.go_y * mult)};
+
+
+    if(coords.go_x % 3 == 1 && coords.go_y % 3 == 1)
+    {
+     painter.setBrush(Qt::lightGray);
+     painter.drawRect(local.x, local.y, mult, mult) ;
+
+     painter.setBrush(Qt::white);
+     painter.drawRect(local.x + 2 * mag,
+       local.y + 20 * mag, mult - 4 * mag, mult - 22 * mag);
+    }
+    else
+    {
+     painter.setBrush(Qt::white);
+     painter.drawRect(local.x, local.y, mult, mult) ;
+    }
+
+    //     painter.drawRect(local.x + 1 * mag,
+ //       local.y + 1 * mag, mult - 1 * mag, mult - 1 * mag) ;
+
+    painter.setBrush(clr);
+
+    painter.drawRect(local.x + 4 * mag,
+      local.y + 21 * mag, mult - 8 * mag, mult - 29 * mag);
+
+    painter.setPen(QColor(40,120,70));
+
+    QFont font = painter.font();
+    font.setPointSize(5 * mag);
+    painter.setFont(font);
+
+    painter.drawText(local.x + 3 * mag, local.y + 8 * mag,
+      QString("%1").arg(coords.go_x));
+    painter.drawText(local.x + 3 * mag, local.y + 17 * mag,
+      QString("%1").arg(coords.go_y));
+
+    font.setPointSize(6 * mag);
+    painter.setFont(font);
+
+    painter.setPen(QColor(140,0,30));
+    painter.drawText(local.x + 15 * mag, local.y + 10 * mag,
+      QString("%1")
+        .arg(clr.red()));
+
+    painter.setPen(QColor(0,140,30));
+    painter.drawText(local.x + 31 * mag, local.y + 10 * mag,
+      QString("%1")
+        .arg(clr.green()));
+
+    painter.setPen(QColor(30,0,140));
+    painter.drawText(local.x + 15 * mag, local.y + 19 * mag,
+      QString("%1")
+        .arg(clr.blue()));
+
+    painter.setPen(QColor(30,30,14));
+    painter.drawText(local.x + 31 * mag, local.y + 19 * mag,
+      QString("%1")
+        .arg(255 - clr.alpha()));
+
+
+    font.setPointSize(5 * mag);
+    painter.setFont(font);
+
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(QColor(255,255,255,200));
+    painter.drawRect(local.x + 26 * mag, local.y + 19 * mag, 20 * mag, 9 * mag);
+    painter.drawRect(local.x + 4 * mag, local.y + mult - 15 * mag, 13 * mag, 8 * mag);
+
+    painter.setBrush(QColor(225,225,255,255));
+    painter.drawEllipse(local.x + 22 * mag, local.y + mult - 18 * mag, 19 * mag, 7 * mag);
+
+    painter.setPen(Qt::black);
+    painter.drawText(local.x + 27 * mag, local.y + 26 * mag, "rgba");
+
+    font.setPointSize(4);
+    painter.drawText(local.x + 23 * mag, local.y + mult - 11 * mag,
+      QString("+%1").arg(index));
+
+    font.setPointSize(5);
+    painter.setPen(Qt::darkYellow);
+    painter.drawText(local.x + 5 * mag, local.y + mult - 9 * mag, "hsv");
+
+    painter.setPen(Qt::darkYellow);
+    painter.drawText(local.x + 4 * mag, local.y + mult - 3 * mag,
+      QString("%1 %2 %3")
+        .arg(clr.hue()).arg(clr.saturation()).arg(clr.value()));
+
+      //clr.hslHue()
+
+    if(coords.go_x % 9 == 0)
+    {
+     if(coords.go_x > 0)
+     {
+      painter.setPen(QPen(Qt::red, 3));
+      painter.drawLine(local.x, local.y, local.x, local.y + mult);
+     }
+    }
+    else if(coords.go_x % 3 == 0)
+    {
+     painter.setPen(QPen(Qt::darkMagenta, 2 * mag));
+     painter.drawLine(local.x, local.y, local.x, local.y + mult);
+    }
+    else
+    {
+     painter.setPen(QPen(Qt::darkBlue, 1 * mag));
+     painter.drawLine(local.x, local.y, local.x, local.y + mult);
+    }
+
+    if(coords.go_y % 9 == 0)
+    {
+     if(coords.go_y > 0)
+     {
+      painter.setPen(QPen(Qt::red, 3));
+      painter.drawLine(local.x, local.y, local.x + mult, local.y);
+     }
+    }
+    else if(coords.go_y % 3 == 0)
+    {
+     painter.setPen(QPen(Qt::darkMagenta, 2 * mag));
+     painter.drawLine(local.x, local.y, local.x + mult, local.y);
+    }
+    else
+    {
+     painter.setPen(QPen(Qt::darkBlue, 1 * mag));
+     painter.drawLine(local.x, local.y, local.x + mult, local.y);
+    }
+
+   }
+//  }
+
+  si.save(ROOT_FOLDER "/../test/diagram.png");
+  return;
 
 #ifdef HIDE
+
   u2 pixel_count = tierbox_w * tierbox_w;
 
   //n8 data = xcsd.get_data_at_start_index(data_index, )
@@ -528,6 +718,8 @@ int main(int argc , char **argv)
 
  });
 
+ // // //
+
  if(0)
  xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft6.png",
    {}, //ROOT_FOLDER "/../test/tk1",
@@ -565,7 +757,8 @@ int main(int argc , char **argv)
 //  painter.drawRect(ti.rect());
 
   u1 dmagn = 20;
-  u1 mmagn = 20;
+  u1 mmagn = 12;
+  u1 smmagn = 20;
   u1 cmagn = 9;
   u1 ccmagn = 7;
 
@@ -574,11 +767,16 @@ int main(int argc , char **argv)
   s2 radj = mchi.tier_ring * quadrant_mask.r;
   s2 cadj = mchi.inner_pushout * quadrant_mask.c;
 
+  painter.setPen(Qt::NoPen);
 
-  painter.setBrush(QColor(255, 255 - dist * dmagn, 255 - dist * dmagn, 100));
+  painter.setBrush(QColor(255, 255 - dist * dmagn, 255 - dist * dmagn, 130));
   painter.drawRect(ti.rect());
 
-  painter.setBrush(QColor(255 - manh * mmagn, 255 - manh * mmagn, 255, 255 - manh * mmmagn));
+  if(manh < 13)
+    painter.setBrush(QColor(255 - manh * mmagn, 255 - manh * mmagn, 255, 255 - manh * mmmagn));
+  else
+    painter.setBrush(QColor(255 - manh * smmagn, 255 - manh * smmagn, 255, 255 - manh * mmmagn));
+
   painter.drawRect(ti.rect());
 
   painter.setBrush(QColor(comp * cmagn, comp * cmagn, 100, comp * ccmagn + 30));

@@ -622,6 +622,93 @@ u1 XCSD_Image_Geometry::get_size_even_odd_code()
  }
 }
 
+u2 XCSD_Image_Geometry::sdi_index_to_ground_offset(const ab1& sdi)
+{
+ // // rc here is 0 - 3
+ rc1 arc = {(u1)(sdi.a / 3), (u1)(sdi.a % 3)};
+ rc1 brc = {(u1)(sdi.b / 3), (u1)(sdi.b % 3)};
+
+ return 81 * (3 * arc.r + arc.c) + 9 * (3 * brc.r + brc.c);
+}
+
+
+ab1 XCSD_Image_Geometry::ground_offset_coords_to_sdi_coords(const go_xy1& coords)
+{
+ u1 gc = coords.go_x % 3;
+ u1 bc = (coords.go_x / 3) % 3;
+ u1 ac = (coords.go_x / 9) % 3;
+
+ u1 gr = coords.go_y % 3;
+ u1 br = (coords.go_y / 3) % 3;
+ u1 ar = (coords.go_y / 9) % 3;
+
+ return {(u1)(ar * 3 + ac), (u1)(br * 3 + bc)};
+}
+
+go_xy1 XCSD_Image_Geometry::ground_offset_to_ground_offset_coords(u2 index)
+{
+ u2 digit1 = index % 3;
+ u2 digit2 = (index / 3) % 3;
+ u2 digit3 = (index / 9) % 3;
+ u2 digit4 = (index / 27) % 3;
+ u2 digit5 = (index / 81) % 3;
+ u2 digit6 = (index / 243) % 3;
+
+ return {(u1)(9 * digit5 + 3 * digit3 + digit1),
+   (u1)(9 * digit6 + 3 * digit4 + digit2)};
+
+}
+
+u2 XCSD_Image_Geometry::ground_offset_to_sdi3(u2 index)
+{
+ u2 digit1 = index % 3;
+ u2 digit2 = (index / 3) % 3;
+ u2 digit3 = (index / 9) % 3;
+ u2 digit4 = (index / 27) % 3;
+ u2 digit5 = (index / 81) % 3;
+ u2 digit6 = (index / 243) % 3;
+
+
+ // u1 bc = (coords.go_x / 3) % 3;
+// u1 ac = (coords.go_x / 9) % 3;
+
+}
+
+
+u2 XCSD_Image_Geometry::ground_offset_coords_to_ground_offset(const go_xy1& coords)
+{
+ u1 gc = coords.go_x % 3;
+// u1 bc = (coords.go_x / 3) % 3;
+// u1 ac = (coords.go_x / 9) % 3;
+
+ u1 gr = coords.go_y % 3;
+// u1 br = (coords.go_y / 3) % 3;
+// u1 ar = (coords.go_y / 9) % 3;
+
+// u2 go = sdi_index_to_ground_offset({(u1)(ar * 3 + ac), (u1)(br * 3 + bc)});
+
+ ab1 ab = ground_offset_coords_to_sdi_coords(coords);
+ u2 go = sdi_index_to_ground_offset(ab);
+
+ return go + gr * 3 + gc;
+}
+
+
+// u2 thro_1 =  3 * brc.r + brc.c;
+// u2 thro_2 =  9 * thro_1;
+
+// u2 thro_3 =  3 * arc.r + arc.c;
+// u2 thro_4 =  81 * thro_3;
+
+// u2 thro = thro_2 + thro_4;
+//}
+
+u2 XCSD_Image_Geometry::sdi_index_to_ground_offset(s1 sdi)
+{
+ ab1 ab = {(u1)((u1)sdi / 10), (u1)((u1)sdi % 10)};
+ return sdi_index_to_ground_offset( ab.double_minus(1) );
+}
+
 u1 XCSD_Image_Geometry::MCH_Info::get_compressed_clock_index(u1 clk,
   u1 size_even_odd_code, u1 quadrant_code)
 {

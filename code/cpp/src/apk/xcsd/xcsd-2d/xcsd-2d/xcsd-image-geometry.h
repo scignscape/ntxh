@@ -211,6 +211,13 @@ public:
 
  static constexpr u1 tierbox_width = 27;
 
+ static u2 sdi_index_to_ground_offset(const ab1& sdi);
+ static u2 sdi_index_to_ground_offset(s1 sdi);
+ static u2 ground_offset_coords_to_ground_offset(const go_xy1& coords);
+ static ab1 ground_offset_coords_to_sdi_coords(const go_xy1& coords);
+ static u2 ground_offset_to_sdi3(u2 index);
+ static go_xy1 ground_offset_to_ground_offset_coords(u2 index);
+
  u1 get_size_even_odd_code();
 
  prr2 get_margin_info(const TierBox_Location& loc, u1 quadrant_code);
