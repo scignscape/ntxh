@@ -145,8 +145,8 @@ TierBox_Location XCSD_Image_Geometry::get_directed_center(TierBox_Location& tbl)
 
 void XCSD_Image_Geometry::init_outer_ring_positions()
 {
- init_outer_ring_positions();
-
+ init_outer_ring_position_array();
+ init_outer_ring_offset_array();
 }
 
 //case Outer_Ring_Positions::Landscape::Top_Left_Corner:
@@ -242,6 +242,27 @@ u2 XCSD_Image_Geometry::get_outer_ring_area_size(Outer_Ring_Positions::Portrait 
 
 }
 
+u2 XCSD_Image_Geometry::get_outer_ring_position_start(Outer_Ring_Positions::Landscape lpos)
+{
+ return outer_ring_positions_.index_pairs[(u1)lpos].start;
+}
+
+u2 XCSD_Image_Geometry::get_outer_ring_position_start(Outer_Ring_Positions::Portrait ppos)
+{
+ return outer_ring_positions_.index_pairs[(u1)ppos].start;
+}
+
+u2 XCSD_Image_Geometry::get_outer_ring_position_end(Outer_Ring_Positions::Landscape lpos)
+{
+ return outer_ring_positions_.index_pairs[(u1)lpos].end;
+}
+
+u2 XCSD_Image_Geometry::get_outer_ring_position_end(Outer_Ring_Positions::Portrait ppos)
+{
+ return outer_ring_positions_.index_pairs[(u1)ppos].end;
+}
+
+
 void XCSD_Image_Geometry::init_outer_ring_offset_array()
 {
  if(full_tier_counts_.is_ascending()) // w < h
@@ -264,6 +285,12 @@ void XCSD_Image_Geometry::init_outer_ring_offset_array()
   }
   outer_ring_positions_.total_offset = offset;
  }
+}
+
+
+u4 XCSD_Image_Geometry::get_total_full_tierbox_area()
+{
+ return full_tier_counts_.area() * tierbox_width * tierbox_width;
 }
 
 
@@ -613,6 +640,63 @@ void XCSD_Image_Geometry::for_each_full_tierbox(std::function<void(Grid_TierBox&
   fn(gtb);
   return 0;
  });
+}
+
+void XCSD_Image_Geometry::for_each_outer_ring_area(std::function<void(u1, Outer_Ring_Area_Flags)> fn)
+{
+ _for_each_outer_ring_area([fn](u1 index, Outer_Ring_Area_Flags area_flags) -> s1
+ {
+  fn(index, area_flags);
+  return 0;
+ });
+}
+
+s1 XCSD_Image_Geometry::_for_each_outer_ring_area(std::function<s1(u1, Outer_Ring_Area_Flags)> fn)
+{
+ //for(u1 )
+ if(full_tier_counts_.width < full_tier_counts_.height)
+ {
+
+ }
+ else //  w >= h
+ {
+  for(u1 index = 0; index < 16; ++index)
+  {
+   Outer_Ring_Area_Flags area_flags = Outer_Ring_Area_Flags::Normal_Landscape;
+   if(index == (u1) Outer_Ring_Positions::Landscape::Top_Left_Corner)
+     area_flags = Outer_Ring_Area_Flags::Top_Left_Corner_Landscape;
+   else if(index == (u1) Outer_Ring_Positions::Landscape::Bottom_Left_Corner)
+    area_flags = Outer_Ring_Area_Flags::Bottom_Left_Corner_Landscape;
+   else if(index == (u1) Outer_Ring_Positions::Landscape::Top_Right_Corner)
+    area_flags = Outer_Ring_Area_Flags::Bottom_Right_Corner_Landscape;
+   else if(index == (u1) Outer_Ring_Positions::Landscape::Top_Right_Corner)
+    area_flags = Outer_Ring_Area_Flags::Bottom_Right_Corner_Landscape;
+
+   return fn(index, area_flags);
+  }
+ }
+}
+
+wh2 XCSD_Image_Geometry::get_outer_ring_rect_wh_for(Outer_Ring_Area_Flags area_flags,
+  u1 index, QPoint* qpoint)
+{
+ switch (area_flags)
+ {
+ case Outer_Ring_Area_Flags::Normal_Landscape:
+  switch(index)
+  {
+  case (u1) Outer_Ring_Positions::Landscape::Top_Left_Top:
+   if(qpoint)
+     *qpoint = {outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+     Landscape::Top_Left_Top].start, 0};
+   return {outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+     Landscape::Top_Left_Top].inner_difference(), vertical_outer_sizes_.top};
+  }
+
+  break;
+
+ }
+ return {0, 0};
 }
 
 s1 XCSD_Image_Geometry::_for_each_full_tierbox(std::function<s1(Grid_TierBox&)> fn)

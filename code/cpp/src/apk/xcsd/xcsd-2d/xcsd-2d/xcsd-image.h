@@ -34,6 +34,8 @@ class XCSD_Image
 
  rc2s initial_setup_tierbox_;
 
+ void _init_outer_ring_pixel_data_landscaoe();
+
 public:
 
  XCSD_Image();
@@ -42,6 +44,8 @@ public:
  ACCESSORS__RGET(XCSD_Image_Geometry ,geometry)
 
  QColor pixel_number_to_qcolor(n8 pixel);
+
+ static n8 qrgb_to_pixel_number(QRgb rgb);
 
  XCSD_TierBox* get_tierbox_at_ground_position(u2 x, u2 y);
 

@@ -39,6 +39,14 @@ void XCSD_Image_Data::init_pixel_run(u4 start_index, u4 length, n8 const* source
  pixel_data_->init_raw_data(start_index, length, source);
 }
 
+void XCSD_Image_Data::init_single_pixel(u4 index, n8 pixel_number)
+{
+ n8* pos = pixel_data_->get(index);
+ if(pos)
+   *pos = pixel_number;
+}
+
+
 void XCSD_Image_Data::copy_pixels(u4 start_index, const std::vector<n8>& vec)
 {
  init_pixel_run(start_index, vec.size(), vec.data());

@@ -47,6 +47,8 @@ void XCSD_Image::init_pixel_data(QString info_folder)
 
  data_.init_pixels(geometry_.total_size());
 
+ init_outer_ring_pixel_data();
+
  XCSD_Image_Geometry::Iteration_Environment ienv = geometry_.formulate_iteration_environment();
 
  geometry_.for_each_full_tierbox([this, &ienv, &info_folder](XCSD_Image_Geometry::Grid_TierBox& gtb)
@@ -108,10 +110,83 @@ void XCSD_Image::init_pixel_data(QString info_folder)
  });
 
 
+
 }
+
 
 void XCSD_Image::init_outer_ring_pixel_data()
 {
+ _init_outer_ring_pixel_data_landscaoe();
+}
+
+
+n8 XCSD_Image::qrgb_to_pixel_number(QRgb rgb)
+{
+ n8 result = 0;
+
+ // //  the (n8) casts here are strictly speaking unnecessary
+  //    but could become necessary with something other
+  //    than 1-byte rgba ...
+ result |= (n8)qRed(rgb);
+ result |= (n8)qGreen(rgb) << 8;
+ result |= (n8)qBlue(rgb) << 16;
+ result |= (n8)(255 - qAlpha(rgb)) << 24;
+
+ return result;
+}
+
+void XCSD_Image::_init_outer_ring_pixel_data_landscaoe()
+{
+ u4 offset = geometry_.get_total_full_tierbox_area();
+
+ u1 height = geometry_.vertical_outer_sizes().top;
+// u1 tw = image_.width();
+
+ u2 start_Top_Left_Corner = 0;
+ u2 end_Top_Left_Corner = geometry_.get_outer_ring_position_end(
+   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Corner);
+ u2 start_Top_Left_Top = geometry_.get_outer_ring_position_start(
+   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Top);
+ u2 end_Top_Left_Top = geometry_.get_outer_ring_position_end(
+   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Top);
+ u2 start_Top_Center = geometry_.get_outer_ring_position_start(
+   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Center);
+ u2 end_Top_Center = geometry_.get_outer_ring_position_end(
+   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Center);
+ u2 start_Top_Right_Top = geometry_.get_outer_ring_position_start(
+   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Right_Top);
+ u2 end_Top_Right_Top = geometry_.get_outer_ring_position_end(
+   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Right_Top);
+
+  // note start at the end here
+ u2 start_Top_Right_Corner = geometry_.get_outer_ring_position_end(
+   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Right_Corner);
+ u2 end_Top_Right_Corner = image_.width();
+
+// for(u1 x = start_Top_Left_Corner; x < end_Top_Left_Corner; ++x)
+// {
+//  QRgb* data = (QRgb*) image_.constScanLine(y);
+//  QRgb pixel = data[x];
+// }
+
+
+ u4 mark_offset = 0;
+ for(u2 y = 0; y < height; ++y)
+ {
+  mark_offset = geometry_.outer_ring_positions().offset_for(
+    XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left);
+  QRgb* scanline = (QRgb*) image_.constScanLine(y);
+
+  for(u2 x = start_Top_Left_Top; x < end_Top_Left_Top; ++x)
+  {
+   QRgb qpixel = scanline[x];
+   n8 pixel = qrgb_to_pixel_number(qpixel);
+   data_.init_single_pixel(offset + mark_offset, pixel);
+  }
+
+  ++mark_offset;
+ }
+
 
 }
 
@@ -146,21 +221,23 @@ void XCSD_Image::image_tierbox_to_sdi_pixel_map(const QImage& ci, std::map<s1, s
          .arg(initial_setup_tierbox_.c,2,10,QChar('0'));
 
 
-       QString test = QString("%1a%2%3c%4b%5%6c%7%8%9").arg(tr, 4)
-         .arg(a).arg(ar).arg(ac).arg(b).arg(br).arg(bc).arg(x).arg(y);
+//       QString test = QString("%1a%2%3c%4b%5%6c%7%8%9").arg(tr, 4)
+//         .arg(a).arg(ar).arg(ac).arg(b).arg(br).arg(bc).arg(x).arg(y);
 
-       pixel = test.toLongLong(nullptr, 16);
+//       pixel = test.toLongLong(nullptr, 16);
        //pixel = 0x20202020;
 
-       pixel = 0;
+       pixel = qrgb_to_pixel_number(qpixel);
 
-       // //  the (n8) casts here are strictly speaking unnecessary
-        //    but could become necessary with something other
-        //    than 1-byte rgba ...
-       pixel |= (n8)qRed(qpixel);
-       pixel |= (n8)qGreen(qpixel) << 8;
-       pixel |= (n8)qBlue(qpixel) << 16;
-       pixel |= (n8)(255 - qAlpha(qpixel)) << 24;
+//       pixel = 0;
+
+//       // //  the (n8) casts here are strictly speaking unnecessary
+//        //    but could become necessary with something other
+//        //    than 1-byte rgba ...
+//       pixel |= (n8)qRed(qpixel);
+//       pixel |= (n8)qGreen(qpixel) << 8;
+//       pixel |= (n8)qBlue(qpixel) << 16;
+//       pixel |= (n8)(255 - qAlpha(qpixel)) << 24;
 
 //       pixel |= (n8)14 << 40;
 //       pixel |= (n8)(tl.y + y) << 44;
@@ -197,6 +274,56 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
   target_image.fill(fillc);
   painter.begin(&target_image);
  }
+
+ u4 outer_ring_offset = geometry_.full_tier_counts().area() * tierbox_width  * tierbox_width;
+ //if(geometry_.full_tier_counts().)
+
+ geometry_.for_each_outer_ring_area(
+    [this, &path, cb, &ienv, &painter, &info_folder](u1 index, XCSD_Image_Geometry::Outer_Ring_Area_Flags area_flags)
+ {
+  switch (area_flags)
+  {
+  case XCSD_Image_Geometry::Outer_Ring_Area_Flags::Normal_Landscape:
+   {
+    u4 mark_offset = geometry_.outer_ring_positions().offset_for(
+      (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index);
+
+    QPoint qpoint;
+    wh2 rect_wh = geometry_.get_outer_ring_rect_wh_for(area_flags, index, &qpoint);
+
+    if(rect_wh != wh2{0,0})
+    {
+     QImage outer_ring_image(rect_wh.width, rect_wh.height, QImage::Format_ARGB32);
+
+     QColor fillc(0,100,0);
+     outer_ring_image.fill(fillc);
+
+     for(u2 y = 0; y < rect_wh.height; ++y)
+     {
+      //QRgb* scanline = target_image.scanLine(y);
+
+      for(u2 x = 0; x < rect_wh.width; ++x)
+      {
+
+
+      }
+     }
+
+     painter.drawImage(qpoint, outer_ring_image);
+
+    }
+
+
+//    u2 rect_height = geometry_.outer_ring_positions().rect_height_for(
+//       (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index);
+
+
+   }
+   break;
+  default: break;
+
+  }
+ });
 
  geometry_.for_each_full_tierbox(
     [this, &path, cb, &ienv, &painter, &info_folder](XCSD_Image_Geometry::Grid_TierBox& gtb)

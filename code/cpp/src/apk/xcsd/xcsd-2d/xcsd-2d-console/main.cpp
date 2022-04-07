@@ -103,10 +103,23 @@ int main(int argc , char **argv)
 
  xcsg.init_outer_ring_positions();
 
- xcsd.init_pixel_data(ROOT_FOLDER "/../test/ti1");
+ xcsd.init_pixel_data(ROOT_FOLDER "/../test/ti12");
 
+ xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft12.png",
+   {}, //ROOT_FOLDER "/../test/tk1",
+   [](QImage& ti, XCSD_Image_Geometry::Grid_TierBox& gtb,
+      XCSD_Image_Geometry::Iteration_Environment ienv,
+      u4 data_index, n8* data_start ,//pr2s mch,
+      const XCSD_Image_Geometry::MCH_Info& mchi,
+      QString info_folder, u1 tierbox_w)
+ {
 
+ });
 
+ return 0;
+}
+
+#ifdef HIDE
  if(0)
  xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft2.png",
    {}, //ROOT_FOLDER "/../test/tk1",
@@ -1182,7 +1195,7 @@ if(0)
 
  return 0;
 }
-
+#endif
 
 int main3(int argc , char **argv)
 {

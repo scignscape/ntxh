@@ -90,6 +90,13 @@ public:
 
  ENUM_FLAGS_OP_MACROS(TierGrid_Preferances)
 
+ enum class Outer_Ring_Area_Flags {
+   N_A = 0, Normal_Landscape, Normal_Portrait,
+   Top_Left_Corner_Landscape, Top_Left_Corner_Portrait,
+   Bottom_Left_Corner_Landscape, Bottom_Left_Corner_Portrait,
+   Bottom_Right_Corner_Landscape, Bottom_Right_Corner_Portrait,
+ };
+
  struct Outer_Ring_Positions {
   enum class Landscape : u1 {
     Top_Left_Corner, Top_Left, Center_Left, Bottom_Left, Bottom_Left_Corner,
@@ -110,13 +117,17 @@ public:
 //  ENUM_FLAGS_OP_MACROS(Portrait)
 
   se2 index_pairs[16];
-  u2 offsets[16];
-  u2 total_offset;
+  u4 offsets[16];
+  u4 total_offset;
 
   Outer_Ring_Positions() : index_pairs{ {0,0} },
     //{0,0}, {0,0}, {0,0}, {0,0}, {0,0},
     //{0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0} },
     offsets {0}, total_offset (0) {}
+
+  u4 offset_for(Landscape lpos) const { return offsets[(u1)lpos]; }
+  u4 offset_for(Portrait ppos) const { return offsets[(u1)ppos]; }
+
  };
 
  struct Size_Even_Odd_Info {
@@ -223,6 +234,7 @@ private:
  void init_directed_centers();
 
  s1 _for_each_full_tierbox(std::function<s1(Grid_TierBox&)> fn);
+ s1 _for_each_outer_ring_area(std::function<s1(u1, Outer_Ring_Area_Flags)> fn);
 
 public:
 
@@ -236,6 +248,8 @@ public:
 
  ACCESSORS__CONST_RGET(std::vector<TierBox_Location> ,directed_centers)
 
+ ACCESSORS__CONST_RGET(Outer_Ring_Positions ,outer_ring_positions)
+
  Iteration_Environment formulate_iteration_environment();
 
  std::vector<TierBox_Location> get_directed_centers();
@@ -247,7 +261,19 @@ public:
  u2 get_outer_ring_area_size(Outer_Ring_Positions::Landscape l_area);
  u2 get_outer_ring_area_size(Outer_Ring_Positions::Portrait p_area);
 
+ u2 get_outer_ring_position_start(Outer_Ring_Positions::Landscape lpos);
+ u2 get_outer_ring_position_start(Outer_Ring_Positions::Portrait ppos);
+ u2 get_outer_ring_position_end(Outer_Ring_Positions::Landscape lpos);
+ u2 get_outer_ring_position_end(Outer_Ring_Positions::Portrait ppos);
+
+ wh2 get_outer_ring_rect_wh_for(Outer_Ring_Area_Flags area_flags,
+   u1 index, QPoint* qpoint = nullptr);
+//  u2 rect_width_for(Outer_Ring_Area_Flags area_flags, Portrait ppos);
+
+
  static constexpr u1 tierbox_width = 27;
+
+ u4 get_total_full_tierbox_area();
 
  static u2 sdi_index_to_ground_offset(const ab1& sdi);
  static u2 sdi_index_to_ground_offset(s1 sdi);
@@ -268,6 +294,14 @@ public:
   return _for_each_full_tierbox(fn);
  }
  void for_each_full_tierbox(std::function<void(Grid_TierBox&)> fn);
+
+ inline s1 for_each_outer_ring_area_(std::function<s1(u1, Outer_Ring_Area_Flags)> fn)
+ {
+  return _for_each_outer_ring_area(fn);
+ }
+ void for_each_outer_ring_area(std::function<void(u1, Outer_Ring_Area_Flags)> fn);
+
+
 
  TierBox_Location get_tierbox_location_from_ground_position(u2 x, u2 y);
 

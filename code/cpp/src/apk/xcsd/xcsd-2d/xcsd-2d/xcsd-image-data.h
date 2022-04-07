@@ -35,6 +35,8 @@ public:
  void init_pixels(wh2 total_ground_size);
  void init_pixel_run(u4 start_index, u4 length, n8 const* source);
 
+ void init_single_pixel(u4 index, n8 pixel_number);
+
  n8* get_pixel_data_start(u4 start_index);
 
  void copy_pixels(u4 start_index, const std::vector<n8>& vec);
