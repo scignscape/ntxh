@@ -106,8 +106,14 @@ void XCSD_Image::init_pixel_data(QString info_folder)
 
  save_file(info_path, info_string);
  });
+
+
 }
 
+void XCSD_Image::init_outer_ring_pixel_data()
+{
+
+}
 
 void XCSD_Image::image_tierbox_to_sdi_pixel_map(const QImage& ci, std::map<s1, std::vector<n8>>& result)
 {

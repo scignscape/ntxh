@@ -84,7 +84,7 @@ int main(int argc , char **argv)
 
 
  XCSD_Image xcsd;
- xcsd.load_image(ROOT_FOLDER "/../test/angle.png");
+ xcsd.load_image(ROOT_FOLDER "/../test/anglex.png");
 
 // xcsd.load_image(ROOT_FOLDER "/../test/t1-36x36b.png");
 // xcsd.load_image(ROOT_FOLDER "/../test/t1-27x27.png");
@@ -101,8 +101,11 @@ int main(int argc , char **argv)
 //     .arg(xcsg.total_size().width).arg(xcsg.total_size().height),
 //                        3.3, 8);
 
+ xcsg.init_outer_ring_positions();
 
  xcsd.init_pixel_data(ROOT_FOLDER "/../test/ti1");
+
+
 
  if(0)
  xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft2.png",
@@ -255,6 +258,7 @@ int main(int argc , char **argv)
  // // //
 
 
+if(0)
  xcsd.save_full_tier_image({}, // ROOT_FOLDER "/../test/ft9.png",
    {}, //ROOT_FOLDER "/../test/tk1",
    [&xcsg, &xcsd](QImage& ti, XCSD_Image_Geometry::Grid_TierBox& gtb,
@@ -485,6 +489,7 @@ int main(int argc , char **argv)
   return;
  });
 
+ if(0)
  xcsd.save_full_tier_image({}, // ROOT_FOLDER "/../test/ft9.png",
    {}, //ROOT_FOLDER "/../test/tk1",
    [&xcsg, &xcsd](QImage& ti, XCSD_Image_Geometry::Grid_TierBox& gtb,
@@ -670,6 +675,7 @@ int main(int argc , char **argv)
   si.save(ROOT_FOLDER "/../test/diagram2.png");
  });
 
+ if(0)
  xcsd.save_full_tier_image({}, // ROOT_FOLDER "/../test/ft9.png",
    {}, //ROOT_FOLDER "/../test/tk1",
    [&xcsg, &xcsd](QImage& ti, XCSD_Image_Geometry::Grid_TierBox& gtb,

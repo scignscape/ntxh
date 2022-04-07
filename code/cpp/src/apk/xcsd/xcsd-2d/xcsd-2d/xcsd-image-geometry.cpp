@@ -143,6 +143,156 @@ TierBox_Location XCSD_Image_Geometry::get_directed_center(TierBox_Location& tbl)
  }
 }
 
+void XCSD_Image_Geometry::init_outer_ring_positions()
+{
+ u1 size_even_odd_code = get_size_even_odd_code();
+
+ if(full_tier_counts_.is_ascending()) // w < h
+ {
+  // even v = 0, 2
+
+
+ }
+ else // w >= h
+ {
+  // even h = 0, 1
+  // even v = 0, 2
+//  u1 center_width_h = 6 + (size_even_odd_code / 2);
+//  u1 center_width_v = 6 - (size_even_odd_code % 2);
+
+  hv1 center_width {(u1)(6 + (size_even_odd_code / 2)),
+     (u1)(6 - (size_even_odd_code % 2))};
+
+  center_width *= 27;
+
+  u1 corner_width = 3 * 27;
+
+  u2 top_mark = horizontal_outer_sizes_.left;
+
+  top_mark += corner_width;
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Top_Left_Corner].end = top_mark;
+
+  ++top_mark;
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Top_Left_Top].start = top_mark;
+
+  u2 hgap = total_size_.width - horizontal_outer_sizes_.inner_sum()
+    - center_width.h;
+
+  u2 hgapl = hgap / 2;
+  u2 hgapr = hgapl + horizontal_outer_sizes_.transposed_inner_difference();
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Top_Left_Top].end_at_plus(hgapl);
+
+  top_mark += hgapl + 1;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Top_Center].start = top_mark;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Top_Center].end_at_plus(center_width.h);
+
+  top_mark += center_width.h + 1;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Top_Right_Top].start = top_mark;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Top_Right_Top].end_at_plus(hgapr);
+
+  top_mark += hgapr + 1;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Top_Right_Corner].end = top_mark;
+
+
+  u2 left_mark = vertical_outer_sizes_.top;
+
+  left_mark += corner_width;
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Top_Left_Corner].start = left_mark;
+
+  ++left_mark;
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Top_Left_Top].start = left_mark;
+
+  u2 vgap = total_size_.width - vertical_outer_sizes_.inner_sum()
+    - center_width.v;
+
+  u2 vgapt = vgap / 2;
+  u2 vgapb = vgapt + vertical_outer_sizes_.transposed_inner_difference();
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Top_Left].end_at_plus(vgapt);
+
+  left_mark += vgapt + 1;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Center_Left].start = left_mark;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Center_Left].end_at_plus(center_width.v);
+
+  left_mark += center_width.v + 1;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Bottom_Left].start = left_mark;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Bottom_Left].end_at_plus(vgapb);
+
+  left_mark += vgapb + 1;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Bottom_Left_Corner].start = left_mark;
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Bottom_Left_Corner].end =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Top_Left_Corner].end;
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Bottom_Left_Bottom] =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Top_Left_Top];
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Bottom_Center] =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Top_Center];
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Bottom_Right_Bottom] =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Top_Right_Top];
+
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Top_Right] =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Top_Left];
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Center_Right] =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Center_Left];
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Bottom_Right] =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Bottom_Left];
+
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Bottom_Right_Corner].start =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Bottom_Left_Corner].start;
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Bottom_Right_Corner].end =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Bottom_Left_Corner].end;
+
+  //index_pairs[]
+
+ }
+}
 
 void XCSD_Image_Geometry::calculate_mch_code(TierBox_Location& tbl)
 {

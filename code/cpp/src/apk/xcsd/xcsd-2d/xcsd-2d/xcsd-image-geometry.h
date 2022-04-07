@@ -90,6 +90,31 @@ public:
 
  ENUM_FLAGS_OP_MACROS(TierGrid_Preferances)
 
+ struct Outer_Ring_Positions {
+  enum class Landscape : u1 {
+    Top_Left_Corner, Top_Left, Center_Left, Bottom_Left, Bottom_Left_Corner,
+    Top_Right_Corner, Top_Right, Center_Right, Bottom_Right, Bottom_Right_Corner,
+
+    Top_Left_Top, Top_Center, Top_Right_Top,
+    Bottom_Left_Bottom, Bottom_Center, Bottom_Right_Bottom,
+  };
+//  ENUM_FLAGS_OP_MACROS(Landscape)
+
+  enum class Portrait : u1 {
+    Top_Left_Corner, Top_Left_Top, Top_Center, Top_Right_Top, Top_Right_Corner,
+    Bottom_Left_Corner, Bottom_Left_Bottom, Bottom_Center, Bottom_Right_Bottom, Bottom_Right_Corner,
+
+    Top_Left, Center_Left, Bottom_Left,
+    Top_Right, Center_Right, Bottom_Right,
+  };
+//  ENUM_FLAGS_OP_MACROS(Portrait)
+
+  se2 index_pairs[16];
+
+  Outer_Ring_Positions() : index_pairs{ {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0},
+    {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0} } {}
+ };
+
  struct Size_Even_Odd_Info {
   u1 size_even_odd_code;
   u1 v_center_adjustment;
@@ -187,6 +212,8 @@ private:
 
  std::vector<TierBox_Location> directed_centers_;
 
+ Outer_Ring_Positions outer_ring_positions_;
+
  void reconcile_overall_tier_counts();
  void reconcile_actual_tiergrid_setting();
  void init_directed_centers();
@@ -208,6 +235,8 @@ public:
  Iteration_Environment formulate_iteration_environment();
 
  std::vector<TierBox_Location> get_directed_centers();
+
+ void init_outer_ring_positions();
 
  static constexpr u1 tierbox_width = 27;
 

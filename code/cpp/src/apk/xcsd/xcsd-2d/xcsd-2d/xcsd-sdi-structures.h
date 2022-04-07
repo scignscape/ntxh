@@ -50,7 +50,9 @@ inline constexpr u1 _ctz(int x)
    QPoint as_qpoint() { return {(int) field1, (int) field2}; } \
    u##size inner_sum() const { return field1 + field2; } \
    u##size inner_difference() const { return field1 - field2; } \
+   u##size transposed_inner_difference() const { return field2 - field1; } \
    u##size inner_zdifference() const { return field1 < field2? 0 : field1 - field2; } \
+   u##size transposed_inner_zdifference() const { return field2 < field1? 0 : field2 - field1; } \
    u##size inner_product() const { return field1 * field2; } \
    u##size inner_ratio() const { return field2 != 0? field1 / field2 : 0; } \
    ty##size _transposed() const { return {field2, field1}; } \
@@ -81,6 +83,18 @@ inline constexpr u1 _ctz(int x)
    { return {field1 & val, field2 & val}; } \
    template<typename T> ty##size operator*(T val) const \
    { return {field1 * val, field2 * val}; } \
+ template<typename T> ty##size& operator*=(T val) \
+ { field1 *= val; field2 *= val; return *this; } \
+ template<typename T> ty##size& end_at_times(T val) \
+ { field2 = field1 * val; return *this; } \
+ template<typename T> ty##size& end_at_plus(T val) \
+ { field2 = field1 + val; return *this; } \
+ template<typename T> ty##size& end_at_minus(T val) \
+ { field2 = field1 - val; return *this; } \
+ template<typename T> ty##size& end_at_zminus(T val) \
+ { field2 = field1 <= val? 0 : field1 - val; return *this; } \
+ template<typename T> ty##size& end_at_over(T val) \
+ { field2 = field1 / val; return *this; } \
    template<typename T> ty##size operator+(T val) const \
    { return {field1 + val, field2 + val}; } \
    template<typename T> ty##size operator/(T val) const \
@@ -206,6 +220,9 @@ struct ty##size##s { s##size field1, field2; \
    QPoint as_qpoint() { return {(int) field1, (int) field2}; } \
    s##size inner_sum() const { return field1 + field2; } \
    s##size inner_difference() const { return field1 - field2; } \
+   s##size transposed_inner_difference() const { return field2 - field1; } \
+   s##size inner_zdifference() const { return field1 <= field2 ? 0 : field1 - field2; } \
+   s##size transposed_inner_zdifference() const { return field2 <= field1 ? 0 : field2 - field1; } \
    s##size inner_product() const { return field1 * field2; } \
    s##size inner_ratio() const { return field2 != 0? field1 / field2 : 0; } \
    ty##size##s _transposed() const { return {field2, field1}; } \
@@ -253,6 +270,18 @@ struct ty##size##s { s##size field1, field2; \
    { return {(s##size)(field1 - rhs.field1), (s##size)(field2 - rhs.field2)}; } \
    ty##size##s operator*(ty##size##s rhs) const\
    { return {(s##size)(field1 * rhs.field1), (s##size)(field2 * rhs.field2)}; } \
+ template<typename T> ty##size##s& operator*=(T val) \
+ { field1 *= val; field2 *= val; return *this; } \
+ template<typename T> ty##size##s& end_at_times(T val) \
+ { field2 = field1 * val; return *this; } \
+ template<typename T> ty##size##s& end_at_plus(T val) \
+ { field2 = field1 + val; return *this; } \
+ template<typename T> ty##size##s& end_at_minus(T val) \
+ { field2 = field1 - val; return *this; } \
+ template<typename T> ty##size##s& end_at_zminus(T val) \
+ { field2 = field1 <= val? 0 : field1 - val; return *this; } \
+ template<typename T> ty##size##s& end_at_over(T val) \
+ { field2 = field1 / val; return *this; } \
    ty##size##s operator/(ty##size##s rhs) const\
    { return {(s##size)(field1 / rhs.field1), (s##size)(field2 / rhs.field2)}; } \
    ty##size##s operator%(ty##size##s rhs) const\
@@ -350,6 +379,9 @@ Ty_DEF_MACRO(ab, 4, n8, a, b)
 Ty_DEF_MACRO(lr, 1, u2, left, right)
 Ty_DEF_MACRO(lr, 2, u4, left, right)
 Ty_DEF_MACRO(lr, 4, n8, left, right)
+Ty_DEF_MACRO(se, 1, u2, start, end)
+Ty_DEF_MACRO(se, 2, u4, start, end)
+Ty_DEF_MACRO(se, 4, n8, start, end)
 Ty_DEF_MACRO(lt, 1, u2, left, top)
 Ty_DEF_MACRO(lt, 2, u4, left, top)
 Ty_DEF_MACRO(lt, 4, n8, left, top)
@@ -399,6 +431,9 @@ Tys_DEF_MACRO(tl, 4, n8, top, left)
 Tys_DEF_MACRO(pr, 1, u2, first, second)
 Tys_DEF_MACRO(pr, 2, u4, first, second)
 Tys_DEF_MACRO(pr, 4, n8, first, second)
+Tys_DEF_MACRO(se, 1, u2, start, end)
+Tys_DEF_MACRO(se, 2, u4, start, end)
+Tys_DEF_MACRO(se, 4, n8, start, end)
 Tys_DEF_MACRO(tb, 1, u2, top, bottom)
 Tys_DEF_MACRO(tb, 2, u4, top, bottom)
 Tys_DEF_MACRO(tb, 4, n8, first, second)
@@ -555,6 +590,9 @@ Mod_DEF_MACRO(tl4)
 Mod_DEF_MACRO(pr1)
 Mod_DEF_MACRO(pr2)
 Mod_DEF_MACRO(pr4)
+Mod_DEF_MACRO(se1)
+Mod_DEF_MACRO(se2)
+Mod_DEF_MACRO(se4)
 Mod_DEF_MACRO(tb1)
 Mod_DEF_MACRO(tb2)
 Mod_DEF_MACRO(tb4)
