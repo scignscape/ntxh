@@ -145,6 +145,130 @@ TierBox_Location XCSD_Image_Geometry::get_directed_center(TierBox_Location& tbl)
 
 void XCSD_Image_Geometry::init_outer_ring_positions()
 {
+ init_outer_ring_positions();
+
+}
+
+//case Outer_Ring_Positions::Landscape::Top_Left_Corner:
+//case Outer_Ring_Positions::Landscape::Top_Left:
+//case Outer_Ring_Positions::Landscape::Center_Left:
+//case Outer_Ring_Positions::Landscape::Bottom_Left:
+//case Outer_Ring_Positions::Landscape::Bottom_Left_Corner:
+
+//case Outer_Ring_Positions::Landscape::Top_Right_Corner:
+//case Outer_Ring_Positions::Landscape::Top_Right:
+//case Outer_Ring_Positions::Landscape::Center_Right:
+//case Outer_Ring_Positions::Landscape::Bottom_Right:
+//case Outer_Ring_Positions::Landscape::Bottom_Right_Corner:
+
+//case Outer_Ring_Positions::Landscape::Top_Left_Top:
+//case Outer_Ring_Positions::Landscape::Top_Center:
+//case Outer_Ring_Positions::Landscape::Top_Right_Top:
+
+//case Outer_Ring_Positions::Landscape::Bottom_Left_Bottom:
+//case Outer_Ring_Positions::Landscape::Bottom_Center:
+//case Outer_Ring_Positions::Landscape::Bottom_Right_Bottom:
+
+
+u2 XCSD_Image_Geometry::get_outer_ring_area_size(Outer_Ring_Positions::Landscape l_area)
+{
+ switch(l_area)
+ {
+ case Outer_Ring_Positions::Landscape::Top_Left_Top:
+ case Outer_Ring_Positions::Landscape::Top_Center:
+ case Outer_Ring_Positions::Landscape::Top_Right_Top:
+  return outer_ring_positions_.index_pairs[(u1)l_area].inner_difference()
+    * vertical_outer_sizes_.top;
+
+ case Outer_Ring_Positions::Landscape::Bottom_Left_Bottom:
+ case Outer_Ring_Positions::Landscape::Bottom_Center:
+ case Outer_Ring_Positions::Landscape::Bottom_Right_Bottom:
+  return outer_ring_positions_.index_pairs[(u1)l_area].inner_difference()
+    * vertical_outer_sizes_.bottom;
+
+ case Outer_Ring_Positions::Landscape::Top_Left:
+ case Outer_Ring_Positions::Landscape::Center_Left:
+ case Outer_Ring_Positions::Landscape::Bottom_Left:
+  return outer_ring_positions_.index_pairs[(u1)l_area].inner_difference()
+    * horizontal_outer_sizes_.left;
+
+ case Outer_Ring_Positions::Landscape::Top_Right:
+ case Outer_Ring_Positions::Landscape::Center_Right:
+ case Outer_Ring_Positions::Landscape::Bottom_Right:
+  return outer_ring_positions_.index_pairs[(u1)l_area].inner_difference()
+    * horizontal_outer_sizes_.right;
+
+ case Outer_Ring_Positions::Landscape::Top_Left_Corner:
+    // // starting at left  ending at top
+  return (outer_ring_positions_.index_pairs[(u1)l_area].start
+    * vertical_outer_sizes_.top) +
+    (outer_ring_positions_.index_pairs[(u1)l_area].end
+    * horizontal_outer_sizes_.left) -
+    // //  this would be counted twice
+    (horizontal_outer_sizes_.left * vertical_outer_sizes_.top);
+
+ case Outer_Ring_Positions::Landscape::Bottom_Left_Corner:
+    // // starting at left  ending at bottom
+  return (outer_ring_positions_.index_pairs[(u1)l_area].start
+    * vertical_outer_sizes_.bottom) +
+    (outer_ring_positions_.index_pairs[(u1)l_area].end
+    * horizontal_outer_sizes_.left) -
+    // //  this would be counted twice
+    (horizontal_outer_sizes_.left * vertical_outer_sizes_.bottom);
+
+ case Outer_Ring_Positions::Landscape::Top_Right_Corner:
+    // // starting at right  ending at top
+  return (outer_ring_positions_.index_pairs[(u1)l_area].start
+    * vertical_outer_sizes_.top) +
+    (outer_ring_positions_.index_pairs[(u1)l_area].end
+    * horizontal_outer_sizes_.right) -
+    // //  this would be counted twice
+    (horizontal_outer_sizes_.right * vertical_outer_sizes_.top);
+
+
+ case Outer_Ring_Positions::Landscape::Bottom_Right_Corner:
+    // // starting at right  ending at top
+  return (outer_ring_positions_.index_pairs[(u1)l_area].start
+    * vertical_outer_sizes_.bottom) +
+    (outer_ring_positions_.index_pairs[(u1)l_area].end
+    * horizontal_outer_sizes_.right) -
+    // //  this would be counted twice
+    (horizontal_outer_sizes_.right * vertical_outer_sizes_.bottom);
+ }
+}
+
+u2 XCSD_Image_Geometry::get_outer_ring_area_size(Outer_Ring_Positions::Portrait p_area)
+{
+
+}
+
+void XCSD_Image_Geometry::init_outer_ring_offset_array()
+{
+ if(full_tier_counts_.is_ascending()) // w < h
+ {
+  u2 offset = 0;
+  for(u1 i = 0; i < 16; ++i)
+  {
+   outer_ring_positions_.offsets[i] = offset;
+   offset += get_outer_ring_area_size((Outer_Ring_Positions::Portrait)i);
+  }
+  outer_ring_positions_.total_offset = offset;
+ }
+ else // w >= h
+ {
+  u2 offset = 0;
+  for(u1 i = 0; i < 16; ++i)
+  {
+   outer_ring_positions_.offsets[i] = offset;
+   offset += get_outer_ring_area_size((Outer_Ring_Positions::Landscape)i);
+  }
+  outer_ring_positions_.total_offset = offset;
+ }
+}
+
+
+void XCSD_Image_Geometry::init_outer_ring_position_array()
+{
  u1 size_even_odd_code = get_size_even_odd_code();
 
  if(full_tier_counts_.is_ascending()) // w < h

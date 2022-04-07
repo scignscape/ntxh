@@ -110,9 +110,13 @@ public:
 //  ENUM_FLAGS_OP_MACROS(Portrait)
 
   se2 index_pairs[16];
+  u2 offsets[16];
+  u2 total_offset;
 
-  Outer_Ring_Positions() : index_pairs{ {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0},
-    {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0} } {}
+  Outer_Ring_Positions() : index_pairs{ {0,0} },
+    //{0,0}, {0,0}, {0,0}, {0,0}, {0,0},
+    //{0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0} },
+    offsets {0}, total_offset (0) {}
  };
 
  struct Size_Even_Odd_Info {
@@ -237,6 +241,11 @@ public:
  std::vector<TierBox_Location> get_directed_centers();
 
  void init_outer_ring_positions();
+ void init_outer_ring_position_array();
+ void init_outer_ring_offset_array();
+
+ u2 get_outer_ring_area_size(Outer_Ring_Positions::Landscape l_area);
+ u2 get_outer_ring_area_size(Outer_Ring_Positions::Portrait p_area);
 
  static constexpr u1 tierbox_width = 27;
 
