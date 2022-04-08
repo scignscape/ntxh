@@ -293,7 +293,7 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
     wh2 secondary_rect_wh = geometry_.get_secondary_outer_ring_rect_wh_for(area_flags, index, &secondary_qpoint);
 
     qpoint = &primary_qpoint;
-    for(wh2 rect_wh = primary_rect_wh; qpoint != &secondary_qpoint; rect_wh = secondary_rect_wh)
+    for(wh2 rect_wh = primary_rect_wh ;; rect_wh = secondary_rect_wh)
     {
      if(rect_wh != wh2{0,0})
      {
@@ -302,22 +302,26 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
       QColor fillc(0,100,0);
       outer_ring_image.fill(fillc);
 
-      for(u2 y = 0; y < rect_wh.height; ++y)
-      {
-       //QRgb* scanline = target_image.scanLine(y);
+//      if(index == 10 || index == 13)
+//         qDebug() << index;
 
-       for(u2 x = 0; x < rect_wh.width; ++x)
-       {
+//      for(u2 y = 0; y < rect_wh.height; ++y)
+//      {
+//       //QRgb* scanline = target_image.scanLine(y);
+
+//       for(u2 x = 0; x < rect_wh.width; ++x)
+//       {
 
 
-       }
-      }
+//       }
+//      }
 
+//    if(index == 4 || index >= 9)
       painter.drawImage(*qpoint, outer_ring_image);
 
      }
-//     if(qpoint == &secondary_qpoint)
-//       break;
+     if(qpoint == &secondary_qpoint)
+       break;
      qpoint = &secondary_qpoint;
     }
 //    u2 rect_height = geometry_.outer_ring_positions().rect_height_for(

@@ -52,6 +52,8 @@ inline constexpr u1 _ctz(int x)
    u##size inner_difference() const { return field1 - field2; } \
    u##size transposed_inner_difference() const { return field2 - field1; } \
    u##size inner_zdifference() const { return field1 < field2? 0 : field1 - field2; } \
+   u##size inner_positive_difference() const { return field1 < field2? field2 - field1 : field1 - field2; } \
+   u##size inner_span() const { return (u##size)(inner_positive_difference() + 1); } \
    u##size transposed_inner_zdifference() const { return field2 < field1? 0 : field2 - field1; } \
    u##size inner_product() const { return field1 * field2; } \
    u##size inner_ratio() const { return field2 != 0? field1 / field2 : 0; } \
@@ -220,9 +222,11 @@ struct ty##size##s { s##size field1, field2; \
    QPoint as_qpoint() { return {(int) field1, (int) field2}; } \
    s##size inner_sum() const { return field1 + field2; } \
    s##size inner_difference() const { return field1 - field2; } \
+   u##size inner_positive_difference() const { return field1 < field2? field2 - field1 : field1 - field2; } \
+   u##size inner_span() const { return (u##size)(inner_positive_difference() + 1); } \
    s##size transposed_inner_difference() const { return field2 - field1; } \
-   s##size inner_zdifference() const { return field1 <= field2 ? 0 : field1 - field2; } \
-   s##size transposed_inner_zdifference() const { return field2 <= field1 ? 0 : field2 - field1; } \
+   u##size inner_zdifference() const { return field1 <= field2 ? 0 : field1 - field2; } \
+   u##size transposed_inner_zdifference() const { return field2 <= field1 ? 0 : field2 - field1; } \
    s##size inner_product() const { return field1 * field2; } \
    s##size inner_ratio() const { return field2 != 0? field1 / field2 : 0; } \
    ty##size##s _transposed() const { return {field2, field1}; } \
