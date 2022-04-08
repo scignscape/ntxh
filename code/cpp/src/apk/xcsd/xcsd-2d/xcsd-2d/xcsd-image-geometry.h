@@ -93,6 +93,7 @@ public:
  enum class Outer_Ring_Area_Flags {
    N_A = 0, Normal_Landscape, Normal_Portrait,
    Top_Left_Corner_Landscape, Top_Left_Corner_Portrait,
+   Top_Right_Corner_Landscape, Top_Right_Corner_Portrait,
    Bottom_Left_Corner_Landscape, Bottom_Left_Corner_Portrait,
    Bottom_Right_Corner_Landscape, Bottom_Right_Corner_Portrait,
  };
@@ -268,6 +269,10 @@ public:
 
  wh2 get_outer_ring_rect_wh_for(Outer_Ring_Area_Flags area_flags,
    u1 index, QPoint* qpoint = nullptr);
+
+ wh2 get_secondary_outer_ring_rect_wh_for(Outer_Ring_Area_Flags area_flags,
+   u1 index, QPoint* qpoint = nullptr);
+
 //  u2 rect_width_for(Outer_Ring_Area_Flags area_flags, Portrait ppos);
 
 

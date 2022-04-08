@@ -281,48 +281,54 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
  geometry_.for_each_outer_ring_area(
     [this, &path, cb, &ienv, &painter, &info_folder](u1 index, XCSD_Image_Geometry::Outer_Ring_Area_Flags area_flags)
  {
-  switch (area_flags)
-  {
-  case XCSD_Image_Geometry::Outer_Ring_Area_Flags::Normal_Landscape:
-   {
+//  switch (area_flags)
+//  {
+//  case XCSD_Image_Geometry::Outer_Ring_Area_Flags::Normal_Landscape:
+//   {
     u4 mark_offset = geometry_.outer_ring_positions().offset_for(
       (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index);
 
-    QPoint qpoint;
-    wh2 rect_wh = geometry_.get_outer_ring_rect_wh_for(area_flags, index, &qpoint);
+    QPoint *qpoint, primary_qpoint, secondary_qpoint;
+    wh2 primary_rect_wh = geometry_.get_outer_ring_rect_wh_for(area_flags, index, &primary_qpoint);
+    wh2 secondary_rect_wh = geometry_.get_secondary_outer_ring_rect_wh_for(area_flags, index, &secondary_qpoint);
 
-    if(rect_wh != wh2{0,0})
+    qpoint = &primary_qpoint;
+    for(wh2 rect_wh = primary_rect_wh; qpoint != &secondary_qpoint; rect_wh = secondary_rect_wh)
     {
-     QImage outer_ring_image(rect_wh.width, rect_wh.height, QImage::Format_ARGB32);
-
-     QColor fillc(0,100,0);
-     outer_ring_image.fill(fillc);
-
-     for(u2 y = 0; y < rect_wh.height; ++y)
+     if(rect_wh != wh2{0,0})
      {
-      //QRgb* scanline = target_image.scanLine(y);
+      QImage outer_ring_image(rect_wh.width, rect_wh.height, QImage::Format_ARGB32);
 
-      for(u2 x = 0; x < rect_wh.width; ++x)
+      QColor fillc(0,100,0);
+      outer_ring_image.fill(fillc);
+
+      for(u2 y = 0; y < rect_wh.height; ++y)
       {
+       //QRgb* scanline = target_image.scanLine(y);
+
+       for(u2 x = 0; x < rect_wh.width; ++x)
+       {
 
 
+       }
       }
+
+      painter.drawImage(*qpoint, outer_ring_image);
+
      }
-
-     painter.drawImage(qpoint, outer_ring_image);
-
+//     if(qpoint == &secondary_qpoint)
+//       break;
+     qpoint = &secondary_qpoint;
     }
-
-
 //    u2 rect_height = geometry_.outer_ring_positions().rect_height_for(
 //       (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index);
 
 
-   }
-   break;
-  default: break;
+//   }
+//   break;
+//  default: break;
 
-  }
+//  }
  });
 
  geometry_.for_each_full_tierbox(
