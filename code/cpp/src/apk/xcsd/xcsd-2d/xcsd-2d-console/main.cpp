@@ -114,7 +114,41 @@ int main(int argc , char **argv)
       QString info_folder, u1 tierbox_w)
  {
 
- });
+ },
+ [](QImage& ti, s1 index)
+ {
+//  bool secondary;
+//  if((secondary = (index < 0)))
+//    index = 1 + index;
+
+//  qDebug() << "index = " << index;
+//  qDebug() << "s = " << secondary;
+
+
+//  if(index == 2 || index == 11)
+//  {
+//   QPainter painter(&ti);
+//   painter.setBrush(Qt::darkRed);
+//   painter.setPen(Qt::white);
+//   painter.drawRect(ti.rect());
+//  }
+//  else if(index == 0)
+//  {
+//   QPainter painter(&ti);
+//   painter.setBrush(Qt::darkMagenta);
+//   painter.setPen(QPen(Qt::white, 2));
+//   if(secondary)
+//     painter.drawRect(1, 1, ti.width() - 1, ti.height() - 1);
+//   else
+//   {
+//    painter.drawRect(6, 1, ti.width() - 6, ti.height() - 1);
+//    painter.setBrush(QBrush(Qt::magenta, Qt::BrushStyle::Dense1Pattern));
+//    painter.setPen(Qt::white);
+//    painter.drawRect(0, 0, 5, 9);
+//   }
+//  }
+ }
+ );
 
  return 0;
 }

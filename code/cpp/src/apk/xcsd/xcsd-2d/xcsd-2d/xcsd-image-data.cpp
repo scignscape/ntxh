@@ -41,10 +41,29 @@ void XCSD_Image_Data::init_pixel_run(u4 start_index, u4 length, n8 const* source
 
 void XCSD_Image_Data::init_single_pixel(u4 index, n8 pixel_number)
 {
+ if(index == 1198625)
+   qDebug() << index;
+
+ if(index == 950315)
+   qDebug() << index;
+
+
  n8* pos = pixel_data_->get(index);
  if(pos)
    *pos = pixel_number;
 }
+
+n8 XCSD_Image_Data::get_single_pixel(u4 index)
+{
+ if(index == 930372)
+   qDebug() << index;
+
+ n8* result = get_pixel_data_start(index);
+ if(result)
+   return *result;
+ return 0;
+}
+
 
 
 void XCSD_Image_Data::copy_pixels(u4 start_index, const std::vector<n8>& vec)

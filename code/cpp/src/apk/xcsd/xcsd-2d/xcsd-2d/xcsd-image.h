@@ -35,6 +35,8 @@ class XCSD_Image
  rc2s initial_setup_tierbox_;
 
  void _init_outer_ring_pixel_data_landscaoe();
+ void _init_outer_ring_pixel_data(u4 start_offset,
+   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape area_index, se2 x_se, mm2 y_mm);
 
 public:
 
@@ -44,6 +46,8 @@ public:
  ACCESSORS__RGET(XCSD_Image_Geometry ,geometry)
 
  QColor pixel_number_to_qcolor(n8 pixel);
+
+ QRgb pixel_number_to_qrgb(n8 pixel);
 
  static n8 qrgb_to_pixel_number(QRgb rgb);
 
@@ -90,7 +94,8 @@ public:
  void save_full_tier_image(QString path, QString info_folder = {},
    std::function<void(QImage&, XCSD_Image_Geometry::Grid_TierBox&,
      XCSD_Image_Geometry::Iteration_Environment, u4, n8*,
-     const XCSD_Image_Geometry::MCH_Info&, QString, u1)> cb = nullptr);
+     const XCSD_Image_Geometry::MCH_Info&, QString, u1)> cb = nullptr,
+   std::function<void(QImage&, s1)> ocb = nullptr);
 
 
 

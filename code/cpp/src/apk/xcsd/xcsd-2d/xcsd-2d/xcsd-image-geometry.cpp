@@ -172,65 +172,66 @@ void XCSD_Image_Geometry::init_outer_ring_positions()
 
 u2 XCSD_Image_Geometry::get_outer_ring_area_size(Outer_Ring_Positions::Landscape l_area)
 {
+ // //  inner span, not inner difference ...
  switch(l_area)
  {
  case Outer_Ring_Positions::Landscape::Top_Left_Top:
  case Outer_Ring_Positions::Landscape::Top_Center:
  case Outer_Ring_Positions::Landscape::Top_Right_Top:
-  return outer_ring_positions_.index_pairs[(u1)l_area].inner_difference()
+  return outer_ring_positions_.index_pairs[(u1)l_area].inner_span()
     * vertical_outer_sizes_.top;
 
  case Outer_Ring_Positions::Landscape::Bottom_Left_Bottom:
  case Outer_Ring_Positions::Landscape::Bottom_Center:
  case Outer_Ring_Positions::Landscape::Bottom_Right_Bottom:
-  return outer_ring_positions_.index_pairs[(u1)l_area].inner_difference()
+  return outer_ring_positions_.index_pairs[(u1)l_area].inner_span()
     * vertical_outer_sizes_.bottom;
 
  case Outer_Ring_Positions::Landscape::Top_Left:
  case Outer_Ring_Positions::Landscape::Center_Left:
  case Outer_Ring_Positions::Landscape::Bottom_Left:
-  return outer_ring_positions_.index_pairs[(u1)l_area].inner_difference()
+  return outer_ring_positions_.index_pairs[(u1)l_area].inner_span()
     * horizontal_outer_sizes_.left;
 
  case Outer_Ring_Positions::Landscape::Top_Right:
  case Outer_Ring_Positions::Landscape::Center_Right:
  case Outer_Ring_Positions::Landscape::Bottom_Right:
-  return outer_ring_positions_.index_pairs[(u1)l_area].inner_difference()
+  return outer_ring_positions_.index_pairs[(u1)l_area].inner_span()
     * horizontal_outer_sizes_.right;
 
  case Outer_Ring_Positions::Landscape::Top_Left_Corner:
     // // starting at left  ending at top
-  return (outer_ring_positions_.index_pairs[(u1)l_area].start
+  return ((outer_ring_positions_.index_pairs[(u1)l_area].start + 1)
     * vertical_outer_sizes_.top) +
-    (outer_ring_positions_.index_pairs[(u1)l_area].end
+    ((outer_ring_positions_.index_pairs[(u1)l_area].end + 1)
     * horizontal_outer_sizes_.left) -
     // //  this would be counted twice
     (horizontal_outer_sizes_.left * vertical_outer_sizes_.top);
 
  case Outer_Ring_Positions::Landscape::Bottom_Left_Corner:
     // // starting at left  ending at bottom
-  return (outer_ring_positions_.index_pairs[(u1)l_area].start
+  return ((outer_ring_positions_.index_pairs[(u1)l_area].end + 1)
     * vertical_outer_sizes_.bottom) +
-    (outer_ring_positions_.index_pairs[(u1)l_area].end
+    ((total_size_.height - outer_ring_positions_.index_pairs[(u1)l_area].start)
     * horizontal_outer_sizes_.left) -
     // //  this would be counted twice
     (horizontal_outer_sizes_.left * vertical_outer_sizes_.bottom);
 
  case Outer_Ring_Positions::Landscape::Top_Right_Corner:
     // // starting at right  ending at top
-  return (outer_ring_positions_.index_pairs[(u1)l_area].start
+  return ((total_size_.width - outer_ring_positions_.index_pairs[(u1)l_area].end)
     * vertical_outer_sizes_.top) +
-    (outer_ring_positions_.index_pairs[(u1)l_area].end
+    ((outer_ring_positions_.index_pairs[(u1)l_area].start + 1)
     * horizontal_outer_sizes_.right) -
     // //  this would be counted twice
     (horizontal_outer_sizes_.right * vertical_outer_sizes_.top);
 
 
  case Outer_Ring_Positions::Landscape::Bottom_Right_Corner:
-    // // starting at right  ending at top
-  return (outer_ring_positions_.index_pairs[(u1)l_area].start
+    // // starting at right  ending at bottom
+  return ((total_size_.width - outer_ring_positions_.index_pairs[(u1)l_area].end)
     * vertical_outer_sizes_.bottom) +
-    (outer_ring_positions_.index_pairs[(u1)l_area].end
+    ((total_size_.height - outer_ring_positions_.index_pairs[(u1)l_area].start)
     * horizontal_outer_sizes_.right) -
     // //  this would be counted twice
     (horizontal_outer_sizes_.right * vertical_outer_sizes_.bottom);
@@ -311,14 +312,14 @@ void XCSD_Image_Geometry::init_outer_ring_position_array()
 //  u1 center_width_h = 6 + (size_even_odd_code / 2);
 //  u1 center_width_v = 6 - (size_even_odd_code % 2);
 
-  hv1 center_width {(u1)(6 + (size_even_odd_code / 2)),
-     (u1)(6 - (size_even_odd_code % 2))};
+  hv1 center_width {(u1)(9 + (size_even_odd_code / 2)),
+     (u1)(9 - (size_even_odd_code % 2))};
 
   center_width *= 27;
 
-  u1 corner_width = 3 * 27;
+  u1 corner_width = 6 * 27;
 
-  u2 top_mark = horizontal_outer_sizes_.left;
+  u2 top_mark = horizontal_outer_sizes_.left - 1;
 
   top_mark += corner_width;
 
@@ -334,29 +335,29 @@ void XCSD_Image_Geometry::init_outer_ring_position_array()
     - center_width.h - (corner_width * 2);
 
   u2 hgapl = hgap / 2;
-  u2 hgapr = hgapl + horizontal_outer_sizes_.transposed_inner_difference();
+  u2 hgapr = hgapl + horizontal_outer_sizes_.inner_positive_difference();
 
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
-    Landscape::Top_Left_Top].end_at_plus(hgapl);
+    Landscape::Top_Left_Top].end_at_plus(hgapl - 1);
 
-  top_mark += hgapl + 1;
+  top_mark += hgapl;
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
     Landscape::Top_Center].start = top_mark;
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
-    Landscape::Top_Center].end_at_plus(center_width.h);
+    Landscape::Top_Center].end_at_plus(center_width.h - 1);
 
-  top_mark += center_width.h + 1;
+  top_mark += center_width.h;
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
     Landscape::Top_Right_Top].start = top_mark;
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
-    Landscape::Top_Right_Top].end_at_plus(hgapr);
+    Landscape::Top_Right_Top].end_at_plus(hgapr - 1);
 
-  top_mark += hgapr + 1;
+  top_mark += hgapr;
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
     Landscape::Top_Right_Corner].end = top_mark;
 
 
-  u2 left_mark = vertical_outer_sizes_.top;
+  u2 left_mark = vertical_outer_sizes_.top - 1;
 
   left_mark += corner_width;
 
@@ -372,24 +373,24 @@ void XCSD_Image_Geometry::init_outer_ring_position_array()
     - center_width.v - (corner_width * 2);
 
   u2 vgapt = vgap / 2;
-  u2 vgapb = vgapt + vertical_outer_sizes_.transposed_inner_difference();
+  u2 vgapb = vgapt + vertical_outer_sizes_.inner_positive_difference();
 
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
-    Landscape::Top_Left].end_at_plus(vgapt);
+    Landscape::Top_Left].end_at_plus(vgapt - 1);
 
-  left_mark += vgapt + 1;
+  left_mark += vgapt;
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
     Landscape::Center_Left].start = left_mark;
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
-    Landscape::Center_Left].end_at_plus(center_width.v);
+    Landscape::Center_Left].end_at_plus(center_width.v - 1);
 
-  left_mark += center_width.v + 1;
+  left_mark += center_width.v;
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
     Landscape::Bottom_Left].start = left_mark;
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
-    Landscape::Bottom_Left].end_at_plus(vgapb);
+    Landscape::Bottom_Left].end_at_plus(vgapb - 1);
 
-  left_mark += vgapb + 1;
+  left_mark += vgapb;
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
     Landscape::Bottom_Left_Corner].start = left_mark;
 
@@ -727,6 +728,7 @@ wh2 XCSD_Image_Geometry::get_secondary_outer_ring_rect_wh_for(Outer_Ring_Area_Fl
 wh2 XCSD_Image_Geometry::get_outer_ring_rect_wh_for(Outer_Ring_Area_Flags area_flags,
   u1 index, QPoint* qpoint)
 {
+ // //  span or transposed_inner_difference?
  switch (area_flags)
  {
  case Outer_Ring_Area_Flags::Normal_Landscape:

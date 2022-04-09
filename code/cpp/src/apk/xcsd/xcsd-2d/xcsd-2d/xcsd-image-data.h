@@ -39,6 +39,8 @@ public:
 
  n8* get_pixel_data_start(u4 start_index);
 
+ n8 get_single_pixel(u4 index);
+
  void copy_pixels(u4 start_index, const std::vector<n8>& vec);
  void get_pixel_run(u4 start_index, u4 length, std::vector<n8>& result);
 
