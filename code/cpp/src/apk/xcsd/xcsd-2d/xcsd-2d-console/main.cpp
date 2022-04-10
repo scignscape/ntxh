@@ -84,7 +84,7 @@ int main(int argc , char **argv)
 
 
  XCSD_Image xcsd;
- xcsd.load_image(ROOT_FOLDER "/../test/anglex.png");
+ xcsd.load_image(ROOT_FOLDER "/../test/angley.png");
 
 // xcsd.load_image(ROOT_FOLDER "/../test/t1-36x36b.png");
 // xcsd.load_image(ROOT_FOLDER "/../test/t1-27x27.png");

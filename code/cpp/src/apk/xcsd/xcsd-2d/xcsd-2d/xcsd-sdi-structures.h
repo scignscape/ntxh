@@ -187,11 +187,11 @@ inline constexpr u1 _ctz(int x)
    { return {field1 < val? val : field1, field2 < val? val : field2}; } \
    template<typename T> ty##size operator&&(T val) const \
    { return {(field1 & val) >> _ctz(val), (field2 & val) >> _ctz(val)}; } \
-   template<typename T> T _to() \
+   template<typename T> T _to() const \
    { return {(typename T::field_type)field1, (typename T::field_type)field2}; } \
-   template<typename T> T _transposed_to() \
+   template<typename T> T _transposed_to() const \
    { return _transposed()._to<T>(); } \
-   asize area() {return field1 * field2;} };
+   asize area() const {return field1 * field2;} };
 
 
 //template<typename T, typename T1> ty##size##s operator+(T val) \
@@ -350,11 +350,11 @@ struct ty##size##s { s##size field1, field2; \
    { return {field1 < val? field1 : val, field2 < val? field2 : val}; } \
    template<typename T> ty##size##s floor(T val) const \
    { return {field1 < val? val : field1, field2 < val? val : field2}; } \
-   template<typename T> T _to() \
+   template<typename T> T _to() const \
    { return {(typename T::field_type)field1, (typename T::field_type)field2}; } \
-   template<typename T> T _transposed_to() \
+   template<typename T> T _transposed_to() const \
    { return _transposed()._to<T>(); } \
-   asize area() {return field1 * field2;} };
+   asize area() const {return field1 * field2;} };
 
 Ty_DEF_MACRO(wh, 1, u2, width, height)
 Ty_DEF_MACRO(wh, 2, u4, width, height)
@@ -482,7 +482,7 @@ Tys_DEF_MACRO(tb, 4, n8, first, second)
    { return {field1 < val? field1 : val, field2 < val? field2 : val, field3 < val? field3 : val}; } \
    template<typename T> ty##size operator&&(T val) const \
    { return {(field1 & val) >> _ctz(val), (field2 & val) >> _ctz(val), (field3 & val) >> _ctz(val)}; } \
-   template<typename T> T _to() \
+   template<typename T> T _to() const \
    { return {(typename T::field_type)field1, (typename T::field_type)field2, (typename T::field_type)field3}; } \
    asize product() {return field1 * field2 * field3;} };
 
@@ -517,7 +517,7 @@ struct ty##size##s { s##size field1, field2, field3; \
    { return {(s##size)(field1 % rhs.field1), (s##size)(field2 % rhs.field2), (s##size)(field3 % rhs.field3)}; } \
    template<typename T> ty##size##s operator||(T val) const \
    { return {field1 < val? field1 : val, field2 < val? field2 : val, field3 < val? field3 : val}; } \
-   template<typename T> T _to() \
+   template<typename T> T _to() const \
    { return {(typename T::field_type)field1, (typename T::field_type)field2}; } \
    asize product() {return std::abs(field1 * field2 * field3);} };
 

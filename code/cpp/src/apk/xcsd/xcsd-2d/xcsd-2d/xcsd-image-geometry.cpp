@@ -202,9 +202,9 @@ u2 XCSD_Image_Geometry::get_outer_ring_area_size(Outer_Ring_Positions::Landscape
  case Outer_Ring_Positions::Landscape::Top_Left_Corner:
     // // starting at left  ending at top
   return ((outer_ring_positions_.index_pairs[(u1)l_area].start + 1)
-    * vertical_outer_sizes_.top) +
+    * horizontal_outer_sizes_.left) +
     ((outer_ring_positions_.index_pairs[(u1)l_area].end + 1)
-    * horizontal_outer_sizes_.left) -
+    * vertical_outer_sizes_.top) -
     // //  this would be counted twice
     (horizontal_outer_sizes_.left * vertical_outer_sizes_.top);
 
@@ -701,8 +701,8 @@ wh2 XCSD_Image_Geometry::get_secondary_outer_ring_rect_wh_for(Outer_Ring_Area_Fl
 
  case Outer_Ring_Area_Flags::Bottom_Left_Corner_Landscape:
   if(qpoint)
-    *qpoint = {horizontal_outer_sizes_.left, total_size_.height - vertical_outer_sizes_.bottom};
-  return {(u2)(outer_ring_positions_.index_pairs[index].end - horizontal_outer_sizes_.left + 1),
+    *qpoint = {0, total_size_.height - vertical_outer_sizes_.bottom};
+  return {(u2)(outer_ring_positions_.index_pairs[index].end + 1),
     vertical_outer_sizes_.bottom};
 
  case Outer_Ring_Area_Flags::Top_Right_Corner_Landscape:
@@ -715,8 +715,8 @@ wh2 XCSD_Image_Geometry::get_secondary_outer_ring_rect_wh_for(Outer_Ring_Area_Fl
   if(qpoint)
     *qpoint = {outer_ring_positions_.index_pairs[index].end,
       total_size_.height - vertical_outer_sizes_.bottom};
-  return {(u2)(total_size_.width - horizontal_outer_sizes_.right
-    - outer_ring_positions_.index_pairs[index].end),
+  return {(u2)(total_size_.width - //horizontal_outer_sizes_.right
+    outer_ring_positions_.index_pairs[index].end),
     vertical_outer_sizes_.bottom};
 
   default: break;
@@ -775,6 +775,7 @@ wh2 XCSD_Image_Geometry::get_outer_ring_rect_wh_for(Outer_Ring_Area_Flags area_f
   if(qpoint)
     *qpoint = {0, outer_ring_positions_.index_pairs[index].start};
   return {horizontal_outer_sizes_.left, (u2)(total_size_.height -
+    vertical_outer_sizes_.bottom -
     outer_ring_positions_.index_pairs[index].start)};
 
  case Outer_Ring_Area_Flags::Top_Right_Corner_Landscape:
@@ -786,7 +787,7 @@ wh2 XCSD_Image_Geometry::get_outer_ring_rect_wh_for(Outer_Ring_Area_Flags area_f
  case Outer_Ring_Area_Flags::Bottom_Right_Corner_Landscape:
   if(qpoint)
     *qpoint = {total_size_.width - horizontal_outer_sizes_.right, outer_ring_positions_.index_pairs[index].start};
-  return {horizontal_outer_sizes_.right, (u2)(total_size_.height -
+  return {horizontal_outer_sizes_.right, (u2)(total_size_.height - vertical_outer_sizes_.bottom -
     outer_ring_positions_.index_pairs[index].start)};
  }
  return {0, 0};

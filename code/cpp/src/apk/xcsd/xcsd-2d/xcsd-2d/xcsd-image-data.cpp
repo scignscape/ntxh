@@ -41,10 +41,10 @@ void XCSD_Image_Data::init_pixel_run(u4 start_index, u4 length, n8 const* source
 
 void XCSD_Image_Data::init_single_pixel(u4 index, n8 pixel_number)
 {
- if(index == 1198625)
+ if(index == 945328)
    qDebug() << index;
 
- if(index == 950315)
+ if(index == 945329)
    qDebug() << index;
 
 
@@ -55,7 +55,7 @@ void XCSD_Image_Data::init_single_pixel(u4 index, n8 pixel_number)
 
 n8 XCSD_Image_Data::get_single_pixel(u4 index)
 {
- if(index == 930372)
+ if(index == 943005)
    qDebug() << index;
 
  n8* result = get_pixel_data_start(index);
