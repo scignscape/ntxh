@@ -138,13 +138,8 @@ void XCSD_Image::_init_outer_ring_pixel_data(u4 start_offset,
   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape area_index,
   se2 x_se, mm2 y_mm)
 {
-// if((u1)area_index != 9)
-//   return;
-
- qDebug() << " now index = " << (u1) area_index;
-
- QImage ci = image_.copy(x_se.start, y_mm.min, x_se.inner_span(), y_mm.inner_span());
- ci.save(QString("/home/nlevisrael/gits/ctg-temp/test/tmp/temp-%1.png").arg((u1)area_index));
+// QImage ci = image_.copy(x_se.start, y_mm.min, x_se.inner_span(), y_mm.inner_span());
+// ci.save(QString("/home/nlevisrael/gits/ctg-temp/test/tmp/temp-%1.png").arg((u1)area_index));
  for(u2 y = y_mm.min; y <= y_mm.max; ++y)
  {
   QRgb* scanline = (QRgb*) image_.constScanLine(y);
@@ -156,8 +151,7 @@ void XCSD_Image::_init_outer_ring_pixel_data(u4 start_offset,
    n8 pixel = qrgb_to_pixel_number(qpixel);
    data_.init_single_pixel(start_offset + mark_offset, pixel);
 
-//   if((u1)area_index == 15)
-     qDebug() << "x = " << x << "y = " << y << " index = " << start_offset + mark_offset << " pixel = " << pixel;
+   //  qDebug() << "x = " << x << "y = " << y << " index = " << start_offset + mark_offset << " pixel = " << pixel;
 
    ++mark_offset;
   }
@@ -167,40 +161,6 @@ void XCSD_Image::_init_outer_ring_pixel_data(u4 start_offset,
 void XCSD_Image::_init_outer_ring_pixel_data_landscaoe()
 {
  u4 offset = geometry_.get_total_full_tierbox_area();
-
-// u1 tw = image_.width();
-
- u2 start_Top_Left_Corner = 0;
- u2 end_Top_Left_Corner = geometry_.get_outer_ring_position_end(
-   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Corner);
-
-
- u2 start_Top_Left_Top = geometry_.get_outer_ring_position_start(
-   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Top);
- u2 end_Top_Left_Top = geometry_.get_outer_ring_position_end(
-   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Top);
- u2 start_Top_Center = geometry_.get_outer_ring_position_start(
-   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Center);
- u2 end_Top_Center = geometry_.get_outer_ring_position_end(
-   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Center);
- u2 start_Top_Right_Top = geometry_.get_outer_ring_position_start(
-   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Right_Top);
- u2 end_Top_Right_Top = geometry_.get_outer_ring_position_end(
-   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Right_Top);
-
-  // note start at the end here
- u2 start_Top_Right_Corner = geometry_.get_outer_ring_position_end(
-   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Right_Corner);
- u2 end_Top_Right_Corner = image_.width();
-
-// for(u1 x = start_Top_Left_Corner; x < end_Top_Left_Corner; ++x)
-// {
-//  QRgb* data = (QRgb*) image_.constScanLine(y);
-//  QRgb pixel = data[x];
-// }
-
-
- u4 mark_offset = 0;
 
  u1 height = geometry_.vertical_outer_sizes().top;
  u2 total_bottom = geometry_.total_size().height - 1;
@@ -261,9 +221,6 @@ void XCSD_Image::_init_outer_ring_pixel_data_landscaoe()
  _init_outer_ring_pixel_data(offset + area, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
    x_se, y_mm);
 
-
-//#ifdef HIDE
- //x_se = {width_from_right, total_right};
  for(index = 6; index <= 8; ++index)
  {
   current_pair = geometry_.outer_ring_positions().index_pairs[index];
@@ -277,14 +234,11 @@ void XCSD_Image::_init_outer_ring_pixel_data_landscaoe()
  _init_outer_ring_pixel_data(offset, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
    x_se, y_mm);
 
-// x_se = {(u2)(width_from_right), total_right};
-
  area = x_se.inner_span() * y_mm.inner_span();
  x_se.start = current_pair.end;
  y_mm = {height_from_bottom, total_bottom};
  _init_outer_ring_pixel_data(offset + area, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
    x_se, y_mm);
-
 
  y_mm = {0, (u2)(height - 1)};
  for(index = 10; index <= 12; ++index)
@@ -302,103 +256,6 @@ void XCSD_Image::_init_outer_ring_pixel_data_landscaoe()
   _init_outer_ring_pixel_data(offset, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
     current_pair, y_mm);
  }
-//#endif //def HIDE
-
-
-  qDebug() << " now done";
-
-// u1 index = 13;
-//   _init_outer_ring_pixel_data(offset, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
-//    geometry_.outer_ring_positions().index_pairs[index], {height_from_bottom, bottom});
-
-// _init_outer_ring_pixel_data(offset, XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Corner,
-//   {start_Top_Left_Corner, end_Top_Left_Corner}, {0, (u1)(height - 1)});
-
-
-// _init_outer_ring_pixel_data(offset, XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Top,
-//   {start_Top_Left_Top, end_Top_Left_Top}, {0, (u1)(height - 1)});
-
-// _init_outer_ring_pixel_data(offset, XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Center,
-//   {start_Top_Center, end_Top_Center}, {0, (u1)(height - 1)});
-
-// _init_outer_ring_pixel_data(offset, XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Right_Top,
-//   {start_Top_Right_Top, end_Top_Right_Top}, {0, (u1)(height - 1)});
-
-
-
-// _init_outer_ring_pixel_data(offset, XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Corner,
-//   {start_Top_Left_Corner, end_Top_Left_Corner}, {0, (u1)(height - 1)});
-
-// _init_outer_ring_pixel_data(offset, XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Top,
-//   {start_Top_Left_Top, end_Top_Left_Top}, {0, (u1)(height - 1)});
-
-// _init_outer_ring_pixel_data(offset, XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Center,
-//   {start_Top_Center, end_Top_Center}, {0, (u1)(height - 1)});
-
-// _init_outer_ring_pixel_data(offset, XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Right_Top,
-//   {start_Top_Right_Top, end_Top_Right_Top}, {0, (u1)(height - 1)});
-
-
-
-
- //for(u2 y = 0; y < height; ++y)
-// for(u2 y = 0; y < height; ++y)
-// {
-//  QRgb* scanline = (QRgb*) image_.constScanLine(y);
-
-//    mark_offset = geometry_.outer_ring_positions().offset_for(
-//      XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Corner)
-//      + y * (end_Top_Left_Corner - start_Top_Left_Corner + 1);
-//    for(u2 x = start_Top_Left_Corner; x <= end_Top_Left_Corner; ++x)
-//    {
-//     QRgb qpixel = scanline[x];
-//     n8 pixel = qrgb_to_pixel_number(qpixel);
-//     data_.init_single_pixel(offset + mark_offset, pixel);
-
-//     qDebug() << "x = " << x << "y = " << y << " index = " << offset + mark_offset << " pixel = " << pixel;
-
-//     ++mark_offset;
-//    }
-
-
-//  mark_offset = geometry_.outer_ring_positions().offset_for(
-//    XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Top);
-//  for(u2 x = start_Top_Left_Top; x < end_Top_Left_Top; ++x)
-//  {
-//   QRgb qpixel = scanline[x];
-//   n8 pixel = qrgb_to_pixel_number(qpixel);
-//   data_.init_single_pixel(offset + mark_offset, pixel);
-//   ++mark_offset;
-//  }
-
-#ifdef HIDE
-  mark_offset = geometry_.outer_ring_positions().offset_for(
-    XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Center)
-    + y * (end_Top_Center - start_Top_Center);
-  for(u2 x = start_Top_Center; x <= end_Top_Center; ++x) //x < end_Top_Center; ++x)
-  {
-   QRgb qpixel = scanline[x];
-
-//   n8 ntest00 = data_.get_single_pixel(949352);
-//   qDebug() << "ntest00 = " << ntest00;
-
-   n8 pixel = qrgb_to_pixel_number(qpixel);
-
-//   if(x < start_Top_Center + 50)
-//   {
-    qDebug() << "x = " << x << "y = " << y << " index = " << offset + mark_offset << " pixel = " << pixel;
-
-    data_.init_single_pixel(offset + mark_offset, pixel);
-//   }
-
-//   n8 ntest01 = data_.get_single_pixel(949352);
-//   qDebug() << "ntest01 = " << ntest01;
-
-   ++mark_offset;
-  }
-#endif
-
-// }
 
 }
 
@@ -472,11 +329,6 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
     const XCSD_Image_Geometry::MCH_Info&, QString, u1)> cb,
   std::function<void(QImage&, s1)> ocb)
 {
- //static u2 box_area = tierbox_width * tierbox_width;
-
- n8 ntest2 = data_.get_single_pixel(949352);
- qDebug() << "ntes2 = " << ntest2;
-
 
  XCSD_Image_Geometry::Iteration_Environment ienv = geometry_.formulate_iteration_environment();
 
@@ -499,96 +351,46 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
     [this, &path, ocb, &ienv, &painter,
      outer_ring_offset, &info_folder](u1 index, XCSD_Image_Geometry::Outer_Ring_Area_Flags area_flags)
  {
-//  switch (area_flags)
-//  {
-//  case XCSD_Image_Geometry::Outer_Ring_Area_Flags::Normal_Landscape:
-//   {
-    u4 mark_offset = geometry_.outer_ring_positions().offset_for(
-      (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index);
+  u4 mark_offset = geometry_.outer_ring_positions().offset_for(
+    (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index);
 
-    QPoint *qpoint, primary_qpoint, secondary_qpoint;
-    wh2 primary_rect_wh = geometry_.get_outer_ring_rect_wh_for(area_flags, index, &primary_qpoint);
-    wh2 secondary_rect_wh = geometry_.get_secondary_outer_ring_rect_wh_for(area_flags, index, &secondary_qpoint);
+  QPoint *qpoint, primary_qpoint, secondary_qpoint;
+  wh2 primary_rect_wh = geometry_.get_outer_ring_rect_wh_for(area_flags, index, &primary_qpoint);
+  wh2 secondary_rect_wh = geometry_.get_secondary_outer_ring_rect_wh_for(area_flags, index, &secondary_qpoint);
 
-//    secondary_rect_wh =
-//        geometry_.get_secondary_outer_ring_rect_wh_for(area_flags, index, &secondary_qpoint);
+  qpoint = &primary_qpoint;
 
-    qpoint = &primary_qpoint;
+  u4 local_offset = 0;
+  s1 sindex = index;
+  for(wh2 rect_wh = primary_rect_wh ;; rect_wh = secondary_rect_wh)
+  {
+   if(rect_wh != wh2{0,0})
+   {
+    QImage outer_ring_image(rect_wh.width, rect_wh.height, QImage::Format_ARGB32);
 
-    u4 local_offset = 0;
-    s1 sindex = index;
-    for(wh2 rect_wh = primary_rect_wh ;; rect_wh = secondary_rect_wh)
+    QColor fillc(0,100,0);
+    outer_ring_image.fill(fillc);
+
+    for(u2 y = 0; y < rect_wh.height; ++y)
     {
-     if(rect_wh != wh2{0,0})
+     QRgb* scanline = (QRgb*) outer_ring_image.scanLine(y);
+
+     for(u2 x = 0; x < rect_wh.width; ++x)
      {
-      QImage outer_ring_image(rect_wh.width, rect_wh.height, QImage::Format_ARGB32);
+      n8 pixel_number = data_.get_single_pixel(outer_ring_offset + mark_offset + local_offset);
+      QRgb rgb = pixel_number_to_qrgb(pixel_number);
+      scanline[x] = rgb;
 
-      QColor fillc(0,100,0);
-      outer_ring_image.fill(fillc);
-
-      for(u2 y = 0; y < rect_wh.height; ++y)
-      {
-       QRgb* scanline = (QRgb*) outer_ring_image.scanLine(y);
-
-       for(u2 x = 0; x < rect_wh.width; ++x)
-       {
-        n8 pixel_number = data_.get_single_pixel(outer_ring_offset + mark_offset + local_offset);
-        QRgb rgb = pixel_number_to_qrgb(pixel_number);
-
-        if(x == 1352)
-           qDebug() << " !x = " << x;
-
-        if(index == 9)
-        {
-         qDebug() << "x = " << x << " y = " << y << " xindex = " << outer_ring_offset + mark_offset + local_offset
-                  << " pixel = " << pixel_number;
-
-         //if(y < 3)
-//           scanline[x] = rgb;
-
-        }
-
-//?        scanline[x] = rgb;
-
-//?
-//        if(index < 5) // || index == 3 || index == 2)
-//  if(index == 9)
-        scanline[x] = rgb;
-
-        ++local_offset;
-       }
-      }
-
-//      if(ocb)
-//      {
-//       ocb(outer_ring_image, sindex);
-//      }
-
-      if(index == 15)
-      {
-//       QRgb* scanline = (QRgb*) outer_ring_image.scanLine(0);
-//       scanline[0] = 0;
-
-       outer_ring_image.save("/home/nlevisrael/gits/ctg-temp/test/temp.png");
-      }
-
-      painter.drawImage(*qpoint, outer_ring_image);
-
+      ++local_offset;
      }
-     if(sindex < 0)
-       break;
-     qpoint = &secondary_qpoint;
-     sindex = -index - 1;
     }
-//    u2 rect_height = geometry_.outer_ring_positions().rect_height_for(
-//       (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index);
-
-
-//   }
-//   break;
-//  default: break;
-
-//  }
+    painter.drawImage(*qpoint, outer_ring_image);
+   }
+   if(sindex < 0)
+     break;
+   qpoint = &secondary_qpoint;
+   sindex = -index - 1;
+  }
  });
 
  geometry_.for_each_full_tierbox(
@@ -1102,3 +904,130 @@ void XCSD_Image::get_255_palatte(QVector<QColor>& vec)
 // qDebug() << "vec: " << vec;
 
 //}
+//// u1 tw = image_.width();
+
+// u2 start_Top_Left_Corner = 0;
+// u2 end_Top_Left_Corner = geometry_.get_outer_ring_position_end(
+//   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Corner);
+
+
+// u2 start_Top_Left_Top = geometry_.get_outer_ring_position_start(
+//   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Top);
+// u2 end_Top_Left_Top = geometry_.get_outer_ring_position_end(
+//   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Top);
+// u2 start_Top_Center = geometry_.get_outer_ring_position_start(
+//   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Center);
+// u2 end_Top_Center = geometry_.get_outer_ring_position_end(
+//   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Center);
+// u2 start_Top_Right_Top = geometry_.get_outer_ring_position_start(
+//   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Right_Top);
+// u2 end_Top_Right_Top = geometry_.get_outer_ring_position_end(
+//   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Right_Top);
+
+//  // note start at the end here
+// u2 start_Top_Right_Corner = geometry_.get_outer_ring_position_end(
+//   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Right_Corner);
+// u2 end_Top_Right_Corner = image_.width();
+
+//// for(u1 x = start_Top_Left_Corner; x < end_Top_Left_Corner; ++x)
+//// {
+////  QRgb* data = (QRgb*) image_.constScanLine(y);
+////  QRgb pixel = data[x];
+//// }
+
+
+// u4 mark_offset = 0;
+
+// u1 index = 13;
+//   _init_outer_ring_pixel_data(offset, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
+//    geometry_.outer_ring_positions().index_pairs[index], {height_from_bottom, bottom});
+
+// _init_outer_ring_pixel_data(offset, XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Corner,
+//   {start_Top_Left_Corner, end_Top_Left_Corner}, {0, (u1)(height - 1)});
+
+
+// _init_outer_ring_pixel_data(offset, XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Top,
+//   {start_Top_Left_Top, end_Top_Left_Top}, {0, (u1)(height - 1)});
+
+// _init_outer_ring_pixel_data(offset, XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Center,
+//   {start_Top_Center, end_Top_Center}, {0, (u1)(height - 1)});
+
+// _init_outer_ring_pixel_data(offset, XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Right_Top,
+//   {start_Top_Right_Top, end_Top_Right_Top}, {0, (u1)(height - 1)});
+
+
+
+// _init_outer_ring_pixel_data(offset, XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Corner,
+//   {start_Top_Left_Corner, end_Top_Left_Corner}, {0, (u1)(height - 1)});
+
+// _init_outer_ring_pixel_data(offset, XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Top,
+//   {start_Top_Left_Top, end_Top_Left_Top}, {0, (u1)(height - 1)});
+
+// _init_outer_ring_pixel_data(offset, XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Center,
+//   {start_Top_Center, end_Top_Center}, {0, (u1)(height - 1)});
+
+// _init_outer_ring_pixel_data(offset, XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Right_Top,
+//   {start_Top_Right_Top, end_Top_Right_Top}, {0, (u1)(height - 1)});
+
+
+
+
+ //for(u2 y = 0; y < height; ++y)
+// for(u2 y = 0; y < height; ++y)
+// {
+//  QRgb* scanline = (QRgb*) image_.constScanLine(y);
+
+//    mark_offset = geometry_.outer_ring_positions().offset_for(
+//      XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Corner)
+//      + y * (end_Top_Left_Corner - start_Top_Left_Corner + 1);
+//    for(u2 x = start_Top_Left_Corner; x <= end_Top_Left_Corner; ++x)
+//    {
+//     QRgb qpixel = scanline[x];
+//     n8 pixel = qrgb_to_pixel_number(qpixel);
+//     data_.init_single_pixel(offset + mark_offset, pixel);
+
+//     qDebug() << "x = " << x << "y = " << y << " index = " << offset + mark_offset << " pixel = " << pixel;
+
+//     ++mark_offset;
+//    }
+
+
+//  mark_offset = geometry_.outer_ring_positions().offset_for(
+//    XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Left_Top);
+//  for(u2 x = start_Top_Left_Top; x < end_Top_Left_Top; ++x)
+//  {
+//   QRgb qpixel = scanline[x];
+//   n8 pixel = qrgb_to_pixel_number(qpixel);
+//   data_.init_single_pixel(offset + mark_offset, pixel);
+//   ++mark_offset;
+//  }
+
+#ifdef HIDE
+  mark_offset = geometry_.outer_ring_positions().offset_for(
+    XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Center)
+    + y * (end_Top_Center - start_Top_Center);
+  for(u2 x = start_Top_Center; x <= end_Top_Center; ++x) //x < end_Top_Center; ++x)
+  {
+   QRgb qpixel = scanline[x];
+
+//   n8 ntest00 = data_.get_single_pixel(949352);
+//   qDebug() << "ntest00 = " << ntest00;
+
+   n8 pixel = qrgb_to_pixel_number(qpixel);
+
+//   if(x < start_Top_Center + 50)
+//   {
+    qDebug() << "x = " << x << "y = " << y << " index = " << offset + mark_offset << " pixel = " << pixel;
+
+    data_.init_single_pixel(offset + mark_offset, pixel);
+//   }
+
+//   n8 ntest01 = data_.get_single_pixel(949352);
+//   qDebug() << "ntest01 = " << ntest01;
+
+   ++mark_offset;
+  }
+#endif
+
+// }
+

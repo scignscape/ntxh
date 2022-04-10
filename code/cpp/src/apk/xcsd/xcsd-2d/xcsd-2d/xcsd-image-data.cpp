@@ -41,13 +41,6 @@ void XCSD_Image_Data::init_pixel_run(u4 start_index, u4 length, n8 const* source
 
 void XCSD_Image_Data::init_single_pixel(u4 index, n8 pixel_number)
 {
- if(index == 945328)
-   qDebug() << index;
-
- if(index == 945329)
-   qDebug() << index;
-
-
  n8* pos = pixel_data_->get(index);
  if(pos)
    *pos = pixel_number;
@@ -55,9 +48,6 @@ void XCSD_Image_Data::init_single_pixel(u4 index, n8 pixel_number)
 
 n8 XCSD_Image_Data::get_single_pixel(u4 index)
 {
- if(index == 943005)
-   qDebug() << index;
-
  n8* result = get_pixel_data_start(index);
  if(result)
    return *result;
