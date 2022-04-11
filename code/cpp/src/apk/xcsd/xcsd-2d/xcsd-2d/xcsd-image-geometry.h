@@ -129,6 +129,8 @@ public:
   u4 offset_for(Landscape lpos) const { return offsets[(u1)lpos]; }
   u4 offset_for(Portrait ppos) const { return offsets[(u1)ppos]; }
 
+  u4 offset_for_area_index(u1 index) const { return offsets[index]; }
+
  };
 
  struct Size_Even_Odd_Info {

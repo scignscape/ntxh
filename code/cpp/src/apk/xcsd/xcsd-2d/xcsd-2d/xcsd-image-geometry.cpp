@@ -337,16 +337,21 @@ void XCSD_Image_Geometry::init_outer_ring_position_array()
   u2 hgapl = hgap / 2;
   u2 hgapr = hgapl + horizontal_outer_sizes_.inner_positive_difference();
 
+  u1 center_width_extra_h = 1 - (full_tier_counts_.width % 2);
+//?  hgapr -= center_width_extra_h;
+
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
     Landscape::Top_Left_Top].end_at_plus(hgapl - 1);
 
   top_mark += hgapl;
+
+
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
     Landscape::Top_Center].start = top_mark;
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
-    Landscape::Top_Center].end_at_plus(center_width.h - 1);
+    Landscape::Top_Center].end_at_plus(center_width.h + center_width_extra_h - 1);
 
-  top_mark += center_width.h;
+  top_mark += center_width.h + center_width_extra_h;
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
     Landscape::Top_Right_Top].start = top_mark;
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
@@ -375,16 +380,21 @@ void XCSD_Image_Geometry::init_outer_ring_position_array()
   u2 vgapt = vgap / 2;
   u2 vgapb = vgapt + vertical_outer_sizes_.inner_positive_difference();
 
+  u1 center_width_extra_v = 1 - (full_tier_counts_.width % 2);
+//?  vgapb -= center_width_extra_v;
+
+
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
     Landscape::Top_Left].end_at_plus(vgapt - 1);
 
   left_mark += vgapt;
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
     Landscape::Center_Left].start = left_mark;
-  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
-    Landscape::Center_Left].end_at_plus(center_width.v - 1);
 
-  left_mark += center_width.v;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Landscape::Center_Left].end_at_plus(center_width.v + center_width_extra_v - 1);
+
+  left_mark += center_width.v + center_width_extra_v;
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
     Landscape::Bottom_Left].start = left_mark;
   outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::

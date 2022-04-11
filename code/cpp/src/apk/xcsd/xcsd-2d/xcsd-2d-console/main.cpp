@@ -85,6 +85,7 @@ int main(int argc , char **argv)
 
  XCSD_Image xcsd;
  xcsd.load_image(ROOT_FOLDER "/../test/angley.png");
+ //xcsd.load_image(ROOT_FOLDER "/../test/ft12.png");
 
 // xcsd.load_image(ROOT_FOLDER "/../test/t1-36x36b.png");
 // xcsd.load_image(ROOT_FOLDER "/../test/t1-27x27.png");
@@ -105,7 +106,7 @@ int main(int argc , char **argv)
 
  xcsd.init_pixel_data(ROOT_FOLDER "/../test/ti12");
 
- xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft12.png",
+ xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft12a.png",
    {}, //ROOT_FOLDER "/../test/tk1",
    [](QImage& ti, XCSD_Image_Geometry::Grid_TierBox& gtb,
       XCSD_Image_Geometry::Iteration_Environment ienv,

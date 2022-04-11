@@ -35,7 +35,6 @@ class XCSD_Image
  rc2s initial_setup_tierbox_;
 
  void _init_outer_ring_pixel_data_landscaoe();
- void _init_outer_ring_pixel_data_landscaoe_sym();
 
  void _init_outer_ring_pixel_data(u4 start_offset,
    XCSD_Image_Geometry::Outer_Ring_Positions::Landscape area_index, se2 x_se, mm2 y_mm);
@@ -49,13 +48,12 @@ class XCSD_Image
 //   XCSD_Image_Geometry::Outer_Ring_Positions::Landscape area_index_end, se2 x_se, mm2 y_mm);
 
  void _init_outer_ring_side_pixel_data(u4 start_offset,
-   se1 area_index_se, pr4 outside_xareas, pr1 outside);
+   se1 area_index_se//?, pr1 outside)
+   );
 
  void _init_outer_ring_side_pixel_data(u4 start_offset,
-   se1 area_index_se, pr4 outside_xareas, mm2 y_mm);
-
- void _init_outer_ring_side_pixel_data(u4 start_offset,
-   se1 area_index_se, pr4 outside_xareas, pr1 outside, mm2 y_mm, u1 index_gap = 1, u2 x_ses [4] = nullptr);
+   se1 area_index_se, //?pr1 outside,
+                                       mm2 y_mm, u1 index_gap = 1, u2 x_ses [4] = nullptr);
 
 
  void _init_outer_ring_pixel_data(QRgb* scanline,

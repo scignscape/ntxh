@@ -191,7 +191,10 @@ inline constexpr u1 _ctz(int x)
    { return {(typename T::field_type)field1, (typename T::field_type)field2}; } \
    template<typename T> T _transposed_to() const \
    { return _transposed()._to<T>(); } \
-   asize area() const {return field1 * field2;} };
+   asize area() const {return field1 * field2;} \
+   template<typename T> ty##size& operator+=(T val) \
+   { *this = {field1 + val, field2 + val}; return *this; } \
+   }; \
 
 
 //template<typename T, typename T1> ty##size##s operator+(T val) \
