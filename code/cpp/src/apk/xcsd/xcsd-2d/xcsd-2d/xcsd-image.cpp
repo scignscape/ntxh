@@ -173,7 +173,7 @@ void XCSD_Image::_init_outer_ring_pixel_data(QRgb* scanline,
 //}
 
 
-void XCSD_Image::_init_outer_ring_side_pixel_data(u4 start_offset,
+void XCSD_Image::_init_outer_ring_pixel_data(u4 start_offset,
   se1 area_index_se, pr4 outside_xareas, pr1 outside, mm2 y_mm, u1 index_gap, u2 x_ses [4])
 {
  // : se2{0, geometry_.horizontal_outer_sizes().left};
@@ -225,7 +225,7 @@ void XCSD_Image::_init_outer_ring_side_pixel_data(u4 start_offset,
 }
 
 
-void XCSD_Image::_init_outer_ring_side_pixel_data(u4 start_offset,
+void XCSD_Image::_init_outer_ring_pixel_data(u4 start_offset,
   se1 area_index_se, pr4 outside_xareas, pr1 outside)
 {
  u2 x_ses [4] {0, (u2)(geometry_.horizontal_outer_sizes().left - 1),
@@ -235,18 +235,26 @@ void XCSD_Image::_init_outer_ring_side_pixel_data(u4 start_offset,
  se2 first_pair = geometry_.outer_ring_positions().index_pairs[area_index_se.start];
  mm2 y_mm = first_pair._to<mm2>();
 
- _init_outer_ring_side_pixel_data(start_offset, area_index_se,
+ _init_outer_ring_pixel_data(start_offset, area_index_se,
    outside_xareas, outside, y_mm, area_index_se.transposed_inner_difference(), x_ses);
 }
 
-void XCSD_Image::_init_outer_ring_side_pixel_data(u4 start_offset,
+void XCSD_Image::_init_outer_ring_pixel_data(u4 start_offset,
+  se1 area_index_se)
+{
+ _init_outer_ring_pixel_data(start_offset,
+   area_index_se, {0, 0}, pr1 {0, 0});
+}
+
+
+void XCSD_Image::_init_outer_ring_pixel_data(u4 start_offset,
   se1 area_index_se, pr4 outside_xareas, mm2 y_mm)
 {
  u2 x_ses [4] {0, (u2)(geometry_.horizontal_outer_sizes().left - 1),
    (u2)(geometry_.total_size().width - geometry_.horizontal_outer_sizes().right),
    (u2)(geometry_.total_size().width - 1)};
 
- _init_outer_ring_side_pixel_data(start_offset, area_index_se,
+ _init_outer_ring_pixel_data(start_offset, area_index_se,
     outside_xareas, {0, 0}, y_mm, area_index_se.transposed_inner_difference(), x_ses);
 }
 
@@ -312,97 +320,66 @@ void XCSD_Image::_init_outer_ring_pixel_data_landscaoe_sym()
 {
  u4 offset = geometry_.get_total_full_tierbox_area();
 
- u1 height = geometry_.vertical_outer_sizes().top;
- u2 total_bottom = geometry_.total_size().height - 1;
- u2 height_from_bottom = geometry_.total_size().height - geometry_.vertical_outer_sizes().bottom;
+ //u1 height = geometry_.vertical_outer_sizes().top;
+ u1 long_strip_width = geometry_.vertical_outer_sizes().top;
+ u1 short_strip_width = geometry_.horizontal_outer_sizes().left;
 
- u1 left = geometry_.horizontal_outer_sizes().left;
-// u1 right = geometry_.horizontal_outer_sizes().right;
+ u2 total_longer_side = geometry_.total_size().width - 1;
+ u2 total_longer_side_without_strip = geometry_.total_size().width - geometry_.horizontal_outer_sizes().right;
 
- u2 total_right = geometry_.total_size().width - 1;
- u2 width_from_right = geometry_.total_size().width - geometry_.horizontal_outer_sizes().right;
+ u2 total_shorter_side = geometry_.total_size().height - 1;
+ u2 total_shorter_side_without_strip = geometry_.total_size().height - geometry_.vertical_outer_sizes().bottom;
 
- u1 index = 0;
+
+ _init_outer_ring_pixel_data(offset, se1{0, 5});
+ _init_outer_ring_pixel_data(offset, se1{1, 6});
+ _init_outer_ring_pixel_data(offset, se1{2, 7});
+
+ u1 index = 3;
 
  se2 current_pair = geometry_.outer_ring_positions().index_pairs[index];
  se2 x_se = {0, current_pair.end};
- mm2 y_mm = {0, (u2)(height - 1)};
+ mm2 y_mm = {0, (u2)(long_strip_width - 1)};
 
-// _init_outer_ring_pixel_data(offset, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
-//    x_se, y_mm);
+ pr4 xareas_prior, xareas_later;
 
- u4 area; pr4 xareas_top;
+ xareas_prior.first = x_se.inner_span() * y_mm.inner_span();
 
- xareas_top.first = area = x_se.inner_span() * y_mm.inner_span();
- x_se.end = left - 1;
- y_mm = {(u2)(y_mm.max + 1), current_pair.start};
-
-// _init_outer_ring_pixel_data(offset + area, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
-//   x_se, y_mm);
-
-
- _init_outer_ring_side_pixel_data(offset, se1{1, 6}, {0, 0}, pr1{0, 0}
-                                  );
- _init_outer_ring_side_pixel_data(offset, se1{2, 7}, {0, 0}, pr1{0, 0}
-                                  );
- _init_outer_ring_side_pixel_data(offset, se1{3, 8}, {0, 0}, pr1{0, 0}
-                                  );
-
- pr4 xareas_bottom;
+// y_mm = {(u2)(y_mm.max + 1), current_pair.start};
 
  index = 4;
  current_pair = geometry_.outer_ring_positions().index_pairs[index];
- y_mm = {current_pair.start, (u2)(height_from_bottom - 1)};
-// _init_outer_ring_pixel_data(offset, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
-//   x_se, y_mm);
+ y_mm = {current_pair.start, (u2)(total_shorter_side_without_strip - 1)};
+ x_se.end = short_strip_width - 1;
+ xareas_later.first = x_se.inner_span() * y_mm.inner_span();
 
- xareas_bottom.first = area = x_se.inner_span() * y_mm.inner_span();
- y_mm = {(u2)(y_mm.max + 1), total_bottom};
- x_se.end = current_pair.end;
- //_init_outer_ring_pixel_data(offset + area, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
- //   x_se, y_mm);
+// y_mm = {(u2)(y_mm.max + 1), total_bottom};
+// x_se.end = current_pair.end;
 
-
- index = 5;
+ index = 8;
  current_pair = geometry_.outer_ring_positions().index_pairs[index];
- y_mm = {0, (u2)(height - 1)};
- x_se = {current_pair.end, total_right};
-// _init_outer_ring_pixel_data(offset, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
-//   x_se, y_mm);
+ y_mm = {0, (u2)(long_strip_width - 1)};
+ x_se = {current_pair.end, total_longer_side};
+ xareas_prior.second = x_se.inner_span() * y_mm.inner_span();
 
- xareas_top.second = area = x_se.inner_span() * y_mm.inner_span();
- x_se.start = width_from_right;
- y_mm = {height, current_pair.start};
-// _init_outer_ring_pixel_data(offset + area, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
-//   x_se, y_mm);
-
-
- _init_outer_ring_side_pixel_data(offset, se1{0, 5}, xareas_top, y_mm
-                                  );
+ y_mm = {long_strip_width, current_pair.start};
+ _init_outer_ring_pixel_data(offset, se1{3, 8}, xareas_prior, y_mm);
 
 
  index = 9;
  current_pair = geometry_.outer_ring_positions().index_pairs[index];
- y_mm = {current_pair.start, (u2)(height_from_bottom - 1)};
-// _init_outer_ring_pixel_data(offset, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
-//   x_se, y_mm);
+ y_mm = {current_pair.start, (u2)(total_shorter_side_without_strip - 1)};
 
- _init_outer_ring_side_pixel_data(offset, se1{4, 9}, {0, 0}, y_mm
-                                  );
+ _init_outer_ring_pixel_data(offset, se1{4, 9}, {0, 0}, y_mm);
 
- xareas_bottom.second = area = x_se.inner_span() * y_mm.inner_span();
- x_se.start = current_pair.end;
- y_mm = {height_from_bottom, total_bottom};
-// _init_outer_ring_pixel_data(offset + area, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
-//   x_se, y_mm);
+ x_se.start = total_longer_side_without_strip;
+ xareas_later.second = x_se.inner_span() * y_mm.inner_span();
 
- y_mm = {0, (u2)(height - 1)};
- _init_outer_ring_side_pixel_data(offset, {10, 12}, {0, 0}, {0, 5},
-                                  y_mm);
+ y_mm = {0, (u2)(long_strip_width - 1)};
+ _init_outer_ring_pixel_data(offset, {10, 12}, {0, 0}, {3, 8}, y_mm);
 
- y_mm = {height_from_bottom, total_bottom};
- _init_outer_ring_side_pixel_data(offset, {13, 15}, xareas_bottom, {4, 9},
-                                  y_mm);
+ y_mm = {total_shorter_side_without_strip, total_shorter_side};
+ _init_outer_ring_pixel_data(offset, {13, 15}, xareas_later, {4, 9}, y_mm);
 }
 
 
@@ -424,7 +401,7 @@ void XCSD_Image::_init_outer_ring_pixel_data_landscaoe()
  u2 total_right = geometry_.total_size().width - 1;
  u2 width_from_right = geometry_.total_size().width - geometry_.horizontal_outer_sizes().right;
 
- u1 index = 0;
+ u1 index = 3;
 
  se2 current_pair = geometry_.outer_ring_positions().index_pairs[index];
  se2 x_se = {0, current_pair.end};
@@ -440,7 +417,7 @@ void XCSD_Image::_init_outer_ring_pixel_data_landscaoe()
  _init_outer_ring_pixel_data(offset + area, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
    x_se, y_mm);
 
- for(index = 1; index <= 3; ++index)
+ for(index = 0; index <= 2; ++index)
  {
   current_pair = geometry_.outer_ring_positions().index_pairs[index];
   _init_outer_ring_pixel_data(offset, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
@@ -460,7 +437,7 @@ void XCSD_Image::_init_outer_ring_pixel_data_landscaoe()
    x_se, y_mm);
 
 
- index = 5;
+ index = 8;
  current_pair = geometry_.outer_ring_positions().index_pairs[index];
  y_mm = {0, (u2)(height - 1)};
  x_se = { (u2)(current_pair.end), total_right};
@@ -473,7 +450,7 @@ void XCSD_Image::_init_outer_ring_pixel_data_landscaoe()
  _init_outer_ring_pixel_data(offset + area, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
    x_se, y_mm);
 
- for(index = 6; index <= 8; ++index)
+ for(index = 5; index <= 7; ++index)
  {
   current_pair = geometry_.outer_ring_positions().index_pairs[index];
   _init_outer_ring_pixel_data(offset, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,

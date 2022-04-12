@@ -100,11 +100,11 @@ public:
 
  struct Outer_Ring_Positions {
   enum class Landscape : u1 {
-    Top_Left_Corner, Top_Left, Center_Left, Bottom_Left, Bottom_Left_Corner,
-    Top_Right_Corner, Top_Right, Center_Right, Bottom_Right, Bottom_Right_Corner,
+    Center_Left, Top_Left, Bottom_Left, Top_Left_Corner, Bottom_Left_Corner,
+    Center_Right, Top_Right, Bottom_Right, Top_Right_Corner, Bottom_Right_Corner,
 
-    Top_Left_Top, Top_Center, Top_Right_Top,
-    Bottom_Left_Bottom, Bottom_Center, Bottom_Right_Bottom,
+    Top_Center, Top_Left_Top, Top_Right_Top,
+    Bottom_Center, Bottom_Left_Bottom, Bottom_Right_Bottom,
   };
 //  ENUM_FLAGS_OP_MACROS(Landscape)
 
