@@ -353,8 +353,8 @@ void XCSD_Image::_init_outer_ring_pixel_data_landscaoe_sym()
  index = 4;
  current_pair = geometry_.outer_ring_positions().index_pairs[index];
  y_mm = {current_pair.start, (u2)(height_from_bottom - 1)};
- _init_outer_ring_pixel_data(offset, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
-   x_se, y_mm);
+// _init_outer_ring_pixel_data(offset, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
+//   x_se, y_mm);
 
  xareas_bottom.first = area = x_se.inner_span() * y_mm.inner_span();
  y_mm = {(u2)(y_mm.max + 1), total_bottom};
@@ -384,8 +384,11 @@ void XCSD_Image::_init_outer_ring_pixel_data_landscaoe_sym()
  index = 9;
  current_pair = geometry_.outer_ring_positions().index_pairs[index];
  y_mm = {current_pair.start, (u2)(height_from_bottom - 1)};
- _init_outer_ring_pixel_data(offset, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
-   x_se, y_mm);
+// _init_outer_ring_pixel_data(offset, (XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index,
+//   x_se, y_mm);
+
+ _init_outer_ring_side_pixel_data(offset, se1{4, 9}, {0, 0}, y_mm
+                                  );
 
  xareas_bottom.second = area = x_se.inner_span() * y_mm.inner_span();
  x_se.start = current_pair.end;
