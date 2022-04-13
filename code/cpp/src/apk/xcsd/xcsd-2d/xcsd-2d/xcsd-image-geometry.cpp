@@ -240,6 +240,85 @@ u2 XCSD_Image_Geometry::get_outer_ring_area_size(Outer_Ring_Positions::Landscape
 
 u2 XCSD_Image_Geometry::get_outer_ring_area_size(Outer_Ring_Positions::Portrait p_area)
 {
+ // //  inner span, not inner difference ...
+ switch(p_area)
+ {
+ case Outer_Ring_Positions::Portrait::Top_Left:
+ case Outer_Ring_Positions::Portrait::Center_Left:
+ case Outer_Ring_Positions::Portrait::Bottom_Left:
+  return outer_ring_positions_.index_pairs[(u1)p_area].inner_span()
+    * horizontal_outer_sizes_.left;
+
+ case Outer_Ring_Positions::Portrait::Top_Right:
+ case Outer_Ring_Positions::Portrait::Center_Right:
+ case Outer_Ring_Positions::Portrait::Bottom_Right:
+  return outer_ring_positions_.index_pairs[(u1)p_area].inner_span()
+    * horizontal_outer_sizes_.right;
+
+ case Outer_Ring_Positions::Portrait::Top_Left_Top:
+ case Outer_Ring_Positions::Portrait::Top_Center:
+ case Outer_Ring_Positions::Portrait::Top_Right_Top:
+  return outer_ring_positions_.index_pairs[(u1)p_area].inner_span()
+    * vertical_outer_sizes_.top;
+
+ case Outer_Ring_Positions::Portrait::Bottom_Left_Bottom:
+ case Outer_Ring_Positions::Portrait::Bottom_Center:
+ case Outer_Ring_Positions::Portrait::Bottom_Right_Bottom:
+  return outer_ring_positions_.index_pairs[(u1)p_area].inner_span()
+    * vertical_outer_sizes_.bottom;
+
+ case Outer_Ring_Positions::Portrait::Top_Left_Corner:
+    // // starting at top  ending at left
+  return ((outer_ring_positions_.index_pairs[(u1)p_area].start + 1)
+    * vertical_outer_sizes_.top) +
+    ((outer_ring_positions_.index_pairs[(u1)p_area].end + 1)
+    * horizontal_outer_sizes_.left) -
+    // //  this would be counted twice
+    (vertical_outer_sizes_.top * horizontal_outer_sizes_.left);
+
+ case Outer_Ring_Positions::Portrait::Top_Right_Corner:
+    // // starting at top  ending at right
+
+ {
+  u2 aa = total_size_.width - outer_ring_positions_.index_pairs[(u1)p_area].start + 1;
+  u2 bb = outer_ring_positions_.index_pairs[(u1)p_area].end + 1;
+
+  u2 bb_ = bb - vertical_outer_sizes_.top;
+
+  u2 aaa = aa * vertical_outer_sizes_.top;
+  u2 bbb_ = bb_ * horizontal_outer_sizes_.right;
+
+  u2 add = aaa + bbb_;
+  u2 sub = horizontal_outer_sizes_.right * vertical_outer_sizes_.top;
+  u2 ssub = add + sub;
+ }
+  return ((total_size_.width - outer_ring_positions_.index_pairs[(u1)p_area].start + 1)
+    * vertical_outer_sizes_.top) +
+    ((outer_ring_positions_.index_pairs[(u1)p_area].end + 1)
+    * horizontal_outer_sizes_.right) -
+    // //  this would be counted twice
+    (horizontal_outer_sizes_.right * vertical_outer_sizes_.top);
+
+
+
+ case Outer_Ring_Positions::Portrait::Bottom_Left_Corner:
+    // // starting at bottom  ending at left
+  return ((outer_ring_positions_.index_pairs[(u1)p_area].end + 1)
+    * horizontal_outer_sizes_.left) +
+    ((total_size_.height - outer_ring_positions_.index_pairs[(u1)p_area].start)
+    * vertical_outer_sizes_.bottom) -
+    // //  this would be counted twice
+    (vertical_outer_sizes_.bottom * horizontal_outer_sizes_.left);
+
+ case Outer_Ring_Positions::Portrait::Bottom_Right_Corner:
+    // // starting at bottom  ending at right
+  return ((total_size_.width - outer_ring_positions_.index_pairs[(u1)p_area].start)
+    * vertical_outer_sizes_.bottom) +
+    ((total_size_.height - outer_ring_positions_.index_pairs[(u1)p_area].end)
+    * horizontal_outer_sizes_.right) -
+    // //  this would be counted twice
+    (horizontal_outer_sizes_.right * vertical_outer_sizes_.bottom);
+ }
 
 }
 
@@ -272,6 +351,7 @@ void XCSD_Image_Geometry::init_outer_ring_offset_array()
   for(u1 i = 0; i < 16; ++i)
   {
    outer_ring_positions_.offsets[i] = offset;
+   u2 as = get_outer_ring_area_size((Outer_Ring_Positions::Portrait)i);
    offset += get_outer_ring_area_size((Outer_Ring_Positions::Portrait)i);
   }
   outer_ring_positions_.total_offset = offset;
@@ -302,6 +382,150 @@ void XCSD_Image_Geometry::init_outer_ring_position_array()
  if(full_tier_counts_.is_ascending()) // w < h
  {
   // even v = 0, 2
+  hv1 center_width {(u1)(9 - (size_even_odd_code / 2)),
+     (u1)(9 + (size_even_odd_code % 2))};
+
+  center_width *= 27;
+
+  u1 corner_width = 6 * 27;
+
+  u2 left_mark = vertical_outer_sizes_.top - 1;
+
+  left_mark += corner_width;
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Left_Corner].end = left_mark;
+
+  ++left_mark;
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Left].start = left_mark;
+
+  u2 vgap = total_size_.height - vertical_outer_sizes_.inner_sum()
+    - center_width.v - (corner_width * 2);
+
+  u2 test = vgap + (corner_width * 2) + center_width.v + vertical_outer_sizes_.inner_sum();
+
+  u2 vgapt = vgap / 2;
+  u2 vgapb = vgapt + vertical_outer_sizes_.inner_positive_difference();
+
+  u1 center_width_extra_v = 1 - (full_tier_counts_.height % 2);
+//?  hgapr -= center_width_extra_h;
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Left].end_at_plus(vgapt - 1);
+
+  left_mark += vgapt;
+
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Center_Left].start = left_mark;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Center_Left].end_at_plus(center_width.v + center_width_extra_v - 1);
+
+  left_mark += center_width.v + center_width_extra_v;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Bottom_Left].start = left_mark;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Bottom_Left].end_at_plus(vgapb - 1);
+
+  left_mark += vgapb;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Bottom_Left_Corner].end = left_mark;
+
+
+  u2 top_mark = horizontal_outer_sizes_.left - 1;
+
+  top_mark += corner_width;
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Left_Corner].start = top_mark;
+
+  ++top_mark;
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Left_Top].start = top_mark;
+
+  u2 hgap = total_size_.width - horizontal_outer_sizes_.inner_sum()
+    - center_width.h - (corner_width * 2);
+
+  u2 hgapl = hgap / 2;
+  u2 hgapr = hgapl + horizontal_outer_sizes_.inner_positive_difference();
+
+  u1 center_width_extra_h = 1 - (full_tier_counts_.width % 2);
+//?  vgapb -= center_width_extra_v;
+
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Left_Top].end_at_plus(hgapl - 1);
+
+  top_mark += hgapl;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Center].start = top_mark;
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Center].end_at_plus(center_width.h + center_width_extra_h - 1);
+
+  top_mark += center_width.h + center_width_extra_h;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Right_Top].start = top_mark;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Right_Top].end_at_plus(hgapr - 1);
+
+  top_mark += hgapr;
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Right_Corner].start = top_mark;
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Right_Corner].end =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Left_Corner].end;
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Right] =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Left];
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Center_Right] =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Center_Left];
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Bottom_Right] =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Bottom_Left];
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Bottom_Left_Bottom] =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Left_Top];
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Bottom_Center] =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Center];
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Bottom_Right_Bottom] =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Right_Top];
+
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Bottom_Right_Corner].start =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Right_Corner].start;
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Bottom_Right_Corner].end =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Bottom_Left_Corner].end;
+
+  outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Bottom_Left_Corner].start =
+    outer_ring_positions_.index_pairs[(u1)Outer_Ring_Positions::
+    Portrait::Top_Left_Corner].start;
 
 
  }
@@ -673,6 +897,25 @@ s1 XCSD_Image_Geometry::_for_each_outer_ring_area(std::function<s1(u1, Outer_Rin
  if(full_tier_counts_.width < full_tier_counts_.height)
  {
 
+  for(u1 index = 0; index < 16; ++index)
+  {
+   Outer_Ring_Area_Flags area_flags = Outer_Ring_Area_Flags::Normal_Portrait;
+   if(index == (u1) Outer_Ring_Positions::Portrait::Top_Left_Corner)
+     area_flags = Outer_Ring_Area_Flags::Top_Left_Corner_Portrait;
+   else if(index == (u1) Outer_Ring_Positions::Portrait::Bottom_Left_Corner)
+    area_flags = Outer_Ring_Area_Flags::Bottom_Left_Corner_Portrait;
+   else if(index == (u1) Outer_Ring_Positions::Portrait::Top_Right_Corner)
+    area_flags = Outer_Ring_Area_Flags::Top_Right_Corner_Portrait;
+   else if(index == (u1) Outer_Ring_Positions::Portrait::Bottom_Right_Corner)
+    area_flags = Outer_Ring_Area_Flags::Bottom_Right_Corner_Portrait;
+
+   //return
+   s1 _break = fn(index, area_flags);
+   if(_break != 0)
+     return _break;
+  }
+
+
  }
  else //  w >= h
  {
@@ -709,17 +952,40 @@ wh2 XCSD_Image_Geometry::get_secondary_outer_ring_rect_wh_for(Outer_Ring_Area_Fl
   return {horizontal_outer_sizes_.left,
     (u2)(outer_ring_positions_.index_pairs[index].start - vertical_outer_sizes_.top + 1)};
 
+ case Outer_Ring_Area_Flags::Top_Left_Corner_Portrait:
+  if(qpoint)
+    *qpoint = {0, vertical_outer_sizes_.top};
+  return {horizontal_outer_sizes_.left,
+    (u2)(outer_ring_positions_.index_pairs[index].end - vertical_outer_sizes_.top + 1)};
+
+
  case Outer_Ring_Area_Flags::Bottom_Left_Corner_Landscape:
   if(qpoint)
     *qpoint = {0, total_size_.height - vertical_outer_sizes_.bottom};
   return {(u2)(outer_ring_positions_.index_pairs[index].end + 1),
     vertical_outer_sizes_.bottom};
 
+ case Outer_Ring_Area_Flags::Bottom_Left_Corner_Portrait:
+  if(qpoint)
+    *qpoint = {0, total_size_.height - vertical_outer_sizes_.bottom};
+  return {(u2)(outer_ring_positions_.index_pairs[index].start + 1),
+    vertical_outer_sizes_.bottom};
+
+
+
  case Outer_Ring_Area_Flags::Top_Right_Corner_Landscape:
   if(qpoint)
     *qpoint = {total_size_.width - horizontal_outer_sizes_.right, vertical_outer_sizes_.top};
   return {horizontal_outer_sizes_.right,
     (u2)(outer_ring_positions_.index_pairs[index].start - vertical_outer_sizes_.top + 1)};
+
+ case Outer_Ring_Area_Flags::Top_Right_Corner_Portrait:
+  if(qpoint)
+    *qpoint = {total_size_.width - horizontal_outer_sizes_.right, vertical_outer_sizes_.top};
+  return {horizontal_outer_sizes_.right,
+    (u2)(outer_ring_positions_.index_pairs[index].end - vertical_outer_sizes_.top + 1)};
+
+
 
  case Outer_Ring_Area_Flags::Bottom_Right_Corner_Landscape:
   if(qpoint)
@@ -728,6 +994,15 @@ wh2 XCSD_Image_Geometry::get_secondary_outer_ring_rect_wh_for(Outer_Ring_Area_Fl
   return {(u2)(total_size_.width - //horizontal_outer_sizes_.right
     outer_ring_positions_.index_pairs[index].end),
     vertical_outer_sizes_.bottom};
+
+ case Outer_Ring_Area_Flags::Bottom_Right_Corner_Portrait:
+  if(qpoint)
+    *qpoint = {outer_ring_positions_.index_pairs[index].start,
+      total_size_.height - vertical_outer_sizes_.bottom};
+  return {(u2)(total_size_.width - //horizontal_outer_sizes_.right
+    outer_ring_positions_.index_pairs[index].start),
+    vertical_outer_sizes_.bottom};
+
 
   default: break;
  }
@@ -741,6 +1016,40 @@ wh2 XCSD_Image_Geometry::get_outer_ring_rect_wh_for(Outer_Ring_Area_Flags area_f
  // //  span or transposed_inner_difference?
  switch (area_flags)
  {
+ case Outer_Ring_Area_Flags::Normal_Portrait:
+  switch(index)
+  {
+  case (u1) Outer_Ring_Positions::Portrait::Top_Left_Top:
+  case (u1) Outer_Ring_Positions::Portrait::Top_Center:
+  case (u1) Outer_Ring_Positions::Portrait::Top_Right_Top:
+   if(qpoint)
+     *qpoint = {outer_ring_positions_.index_pairs[index].start, 0};
+   return {outer_ring_positions_.index_pairs[index].inner_span(), vertical_outer_sizes_.top};
+
+  case (u1) Outer_Ring_Positions::Portrait::Bottom_Left_Bottom:
+  case (u1) Outer_Ring_Positions::Portrait::Bottom_Center:
+  case (u1) Outer_Ring_Positions::Portrait::Bottom_Right_Bottom:
+   if(qpoint)
+     *qpoint = {outer_ring_positions_.index_pairs[index].start, total_size_.height - vertical_outer_sizes_.bottom};
+   return {outer_ring_positions_.index_pairs[index].inner_span(), vertical_outer_sizes_.bottom};
+
+  case (u1) Outer_Ring_Positions::Portrait::Top_Left:
+  case (u1) Outer_Ring_Positions::Portrait::Center_Left:
+  case (u1) Outer_Ring_Positions::Portrait::Bottom_Left:
+   if(qpoint)
+     *qpoint = {0, outer_ring_positions_.index_pairs[index].start};
+   return {horizontal_outer_sizes_.left, outer_ring_positions_.index_pairs[index].inner_span()};
+
+  case (u1) Outer_Ring_Positions::Portrait::Top_Right:
+  case (u1) Outer_Ring_Positions::Portrait::Center_Right:
+  case (u1) Outer_Ring_Positions::Portrait::Bottom_Right:
+   if(qpoint)
+     *qpoint = {total_size_.width - horizontal_outer_sizes_.left, outer_ring_positions_.index_pairs[index].start};
+   return {horizontal_outer_sizes_.right, outer_ring_positions_.index_pairs[index].inner_span()};
+
+  default: break;
+  }
+
  case Outer_Ring_Area_Flags::Normal_Landscape:
   switch(index)
   {
@@ -781,6 +1090,12 @@ wh2 XCSD_Image_Geometry::get_outer_ring_rect_wh_for(Outer_Ring_Area_Flags area_f
     *qpoint = {0, 0};
   return {(u1)(outer_ring_positions_.index_pairs[index].end + 1), vertical_outer_sizes_.top};
 
+ case Outer_Ring_Area_Flags::Top_Left_Corner_Portrait:
+  if(qpoint)
+    *qpoint = {0, 0};
+  return {(u1)(outer_ring_positions_.index_pairs[index].start + 1), vertical_outer_sizes_.top};
+
+
  case Outer_Ring_Area_Flags::Bottom_Left_Corner_Landscape:
   if(qpoint)
     *qpoint = {0, outer_ring_positions_.index_pairs[index].start};
@@ -788,17 +1103,41 @@ wh2 XCSD_Image_Geometry::get_outer_ring_rect_wh_for(Outer_Ring_Area_Flags area_f
     vertical_outer_sizes_.bottom -
     outer_ring_positions_.index_pairs[index].start)};
 
+ case Outer_Ring_Area_Flags::Bottom_Left_Corner_Portrait:
+  if(qpoint)
+    *qpoint = {0, outer_ring_positions_.index_pairs[index].end};
+  return {horizontal_outer_sizes_.left, (u2)(total_size_.height -
+    vertical_outer_sizes_.bottom -
+    outer_ring_positions_.index_pairs[index].end)};
+
+
+
  case Outer_Ring_Area_Flags::Top_Right_Corner_Landscape:
   if(qpoint)
     *qpoint = {outer_ring_positions_.index_pairs[index].end, 0};
   return {(u2)(total_size_.width - outer_ring_positions_.index_pairs[index].end),
      vertical_outer_sizes_.top};
 
+ case Outer_Ring_Area_Flags::Top_Right_Corner_Portrait:
+  if(qpoint)
+    *qpoint = {outer_ring_positions_.index_pairs[index].start, 0};
+  return {(u2)(total_size_.width - outer_ring_positions_.index_pairs[index].start),
+     vertical_outer_sizes_.top};
+
+
+
  case Outer_Ring_Area_Flags::Bottom_Right_Corner_Landscape:
   if(qpoint)
     *qpoint = {total_size_.width - horizontal_outer_sizes_.right, outer_ring_positions_.index_pairs[index].start};
   return {horizontal_outer_sizes_.right, (u2)(total_size_.height - vertical_outer_sizes_.bottom -
     outer_ring_positions_.index_pairs[index].start)};
+
+ case Outer_Ring_Area_Flags::Bottom_Right_Corner_Portrait:
+  if(qpoint)
+    *qpoint = {total_size_.width - horizontal_outer_sizes_.right, outer_ring_positions_.index_pairs[index].end};
+  return {horizontal_outer_sizes_.right, (u2)(total_size_.height - vertical_outer_sizes_.bottom -
+    outer_ring_positions_.index_pairs[index].end)};
+
  }
  return {0, 0};
 }

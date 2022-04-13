@@ -37,6 +37,9 @@ class XCSD_Image
  void _init_outer_ring_pixel_data_landscaoe();
  void _init_outer_ring_pixel_data_landscaoe_sym();
 
+ void _init_outer_ring_pixel_data_portrait();
+ void _init_outer_ring_pixel_data_portrait_sym();
+
  void _init_outer_ring_pixel_data(u4 start_offset,
    XCSD_Image_Geometry::Outer_Ring_Positions::Landscape area_index, se2 x_se, mm2 y_mm);
 
@@ -60,9 +63,23 @@ class XCSD_Image
  void _init_outer_ring_pixel_data(u4 start_offset,
    se1 area_index_se, pr4 outside_xareas, pr1 outside, mm2 y_mm, u1 index_gap = 1, u2 x_ses [4] = nullptr);
 
+ void _init_outer_ring_pixel_data_portrait(u4 start_offset,
+   se1 area_index_se, pr4 outside_xareas, pr1 outside, mm2 y_mm, u1 index_gap = 1, u2 x_ses [4] = nullptr);
+
 
  void _init_outer_ring_pixel_data(QRgb* scanline,
    u4 mark_offset, u4 start_offset, se2 x_se);
+
+
+ void _init_outer_ring_pixel_data_portrait(u4 start_offset,
+   se1 area_index_se);
+
+ void _init_outer_ring_pixel_data_portrait(u4 start_offset,
+   se1 area_index_se, pr4 outside_xareas, pr1 outside);
+
+ void _init_outer_ring_pixel_data_portrait(u4 start_offset,
+   se1 area_index_se, pr4 outside_xareas, mm2 y_mm);
+
 
 public:
 

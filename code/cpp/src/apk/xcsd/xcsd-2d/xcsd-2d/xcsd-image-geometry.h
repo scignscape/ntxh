@@ -109,11 +109,11 @@ public:
 //  ENUM_FLAGS_OP_MACROS(Landscape)
 
   enum class Portrait : u1 {
-    Top_Left_Corner, Top_Left_Top, Top_Center, Top_Right_Top, Top_Right_Corner,
-    Bottom_Left_Corner, Bottom_Left_Bottom, Bottom_Center, Bottom_Right_Bottom, Bottom_Right_Corner,
+    Top_Center, Top_Left_Top, Top_Right_Top, Top_Left_Corner, Top_Right_Corner,
+    Bottom_Center, Bottom_Left_Bottom, Bottom_Right_Bottom, Bottom_Left_Corner, Bottom_Right_Corner,
 
-    Top_Left, Center_Left, Bottom_Left,
-    Top_Right, Center_Right, Bottom_Right,
+    Center_Left, Top_Left, Bottom_Left,
+    Center_Right, Top_Right, Bottom_Right,
   };
 //  ENUM_FLAGS_OP_MACROS(Portrait)
 
