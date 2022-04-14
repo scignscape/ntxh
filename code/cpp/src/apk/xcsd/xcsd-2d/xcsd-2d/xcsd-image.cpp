@@ -516,7 +516,7 @@ void XCSD_Image::_init_outer_ring_pixel_data_portrait_sym()
 
  u1 index = 3;
  se2 current_pair = geometry_.outer_ring_positions().index_pairs[index];
- y_mm = {0, short_strip_width};
+ y_mm = {0, (u2)(short_strip_width - 1)};
  se2 x_se {0, (u2)(current_pair.start)};
  xareas_top.first = y_mm.inner_span() * x_se.inner_span();
 
@@ -541,6 +541,8 @@ void XCSD_Image::_init_outer_ring_pixel_data_portrait_sym()
 
 
 //
+ y_mm = {short_strip_width, current_pair.end};
+
  _init_outer_ring_pixel_data_portrait(offset, se1{3, 4}, xareas_top, y_mm);
 
  index = 8;
@@ -574,11 +576,12 @@ void XCSD_Image::_init_outer_ring_pixel_data_portrait_sym()
 // _init_outer_ring_pixel_data_portrait(offset, se1{10, 13});
 
 
- return;
 
  _init_outer_ring_pixel_data_portrait(offset, se1{10, 13});
  _init_outer_ring_pixel_data_portrait(offset, se1{11, 14});
  _init_outer_ring_pixel_data_portrait(offset, se1{12, 15});
+
+ return;
 
  index = 3;
 
@@ -882,6 +885,9 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
     QColor fillc(0,100,0);
     outer_ring_image.fill(fillc);
 
+    if(index == 13)
+      qDebug() << index;
+
     for(u2 y = 0; y < rect_wh.height; ++y)
     {
      QRgb* scanline = (QRgb*) outer_ring_image.scanLine(y);
@@ -897,12 +903,16 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
     }
 
    // if(index <= 2 || (index >= 5 && index <= 7) )
-     if(index <= 9)
-     {
-      if(sindex >= 0)
-        painter.drawImage(*qpoint, outer_ring_image);
 
-     }
+//    if(index == 3)
+      painter.drawImage(*qpoint, outer_ring_image);
+
+//     if(index <= 9)
+//     {
+//      if(sindex >= 0)
+//        painter.drawImage(*qpoint, outer_ring_image);
+
+//     }
 
 //    if(index == 10)
 //      painter.drawImage(*qpoint, outer_ring_image);

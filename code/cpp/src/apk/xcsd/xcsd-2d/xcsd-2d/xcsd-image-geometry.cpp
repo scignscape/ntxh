@@ -278,20 +278,6 @@ u2 XCSD_Image_Geometry::get_outer_ring_area_size(Outer_Ring_Positions::Portrait 
 
  case Outer_Ring_Positions::Portrait::Top_Right_Corner:
     // // starting at top  ending at right
-
- {
-  u2 aa = total_size_.width - outer_ring_positions_.index_pairs[(u1)p_area].start + 1;
-  u2 bb = outer_ring_positions_.index_pairs[(u1)p_area].end + 1;
-
-  u2 bb_ = bb - vertical_outer_sizes_.top;
-
-  u2 aaa = aa * vertical_outer_sizes_.top;
-  u2 bbb_ = bb_ * horizontal_outer_sizes_.right;
-
-  u2 add = aaa + bbb_;
-  u2 sub = horizontal_outer_sizes_.right * vertical_outer_sizes_.top;
-  u2 ssub = add + sub;
- }
   return ((total_size_.width - outer_ring_positions_.index_pairs[(u1)p_area].start + 1)
     * vertical_outer_sizes_.top) +
     ((outer_ring_positions_.index_pairs[(u1)p_area].end + 1)
@@ -303,10 +289,24 @@ u2 XCSD_Image_Geometry::get_outer_ring_area_size(Outer_Ring_Positions::Portrait 
 
  case Outer_Ring_Positions::Portrait::Bottom_Left_Corner:
     // // starting at bottom  ending at left
-  return ((outer_ring_positions_.index_pairs[(u1)p_area].end + 1)
-    * horizontal_outer_sizes_.left) +
-    ((total_size_.height - outer_ring_positions_.index_pairs[(u1)p_area].start)
-    * vertical_outer_sizes_.bottom) -
+ {
+  u2 aa = outer_ring_positions_.index_pairs[(u1)p_area].start + 1;
+  u2 bb = total_size_.height - outer_ring_positions_.index_pairs[(u1)p_area].end;
+
+  u2 bb_ = bb - vertical_outer_sizes_.bottom;
+
+  u2 aaa = aa * vertical_outer_sizes_.bottom;
+  u2 bbb_ = bb_ * horizontal_outer_sizes_.right;
+  u2 bbb = bb_ * horizontal_outer_sizes_.left;
+
+  u2 add = aaa + bbb;
+  u2 sub = vertical_outer_sizes_.bottom * horizontal_outer_sizes_.left;
+  u2 ssub = add + sub;
+ }
+  return ((outer_ring_positions_.index_pairs[(u1)p_area].start + 1)
+    * vertical_outer_sizes_.bottom) +
+    ((total_size_.height - outer_ring_positions_.index_pairs[(u1)p_area].end)
+    * horizontal_outer_sizes_.left) -
     // //  this would be counted twice
     (vertical_outer_sizes_.bottom * horizontal_outer_sizes_.left);
 
@@ -1044,7 +1044,7 @@ wh2 XCSD_Image_Geometry::get_outer_ring_rect_wh_for(Outer_Ring_Area_Flags area_f
   case (u1) Outer_Ring_Positions::Portrait::Center_Right:
   case (u1) Outer_Ring_Positions::Portrait::Bottom_Right:
    if(qpoint)
-     *qpoint = {total_size_.width - horizontal_outer_sizes_.left, outer_ring_positions_.index_pairs[index].start};
+     *qpoint = {total_size_.width - horizontal_outer_sizes_.right, outer_ring_positions_.index_pairs[index].start};
    return {horizontal_outer_sizes_.right, outer_ring_positions_.index_pairs[index].inner_span()};
 
   default: break;
@@ -1078,7 +1078,7 @@ wh2 XCSD_Image_Geometry::get_outer_ring_rect_wh_for(Outer_Ring_Area_Flags area_f
   case (u1) Outer_Ring_Positions::Landscape::Center_Right:
   case (u1) Outer_Ring_Positions::Landscape::Bottom_Right:
    if(qpoint)
-     *qpoint = {total_size_.width - horizontal_outer_sizes_.left, outer_ring_positions_.index_pairs[index].start};
+     *qpoint = {total_size_.width - horizontal_outer_sizes_.right, outer_ring_positions_.index_pairs[index].start};
    return {horizontal_outer_sizes_.right, outer_ring_positions_.index_pairs[index].inner_span()};
 
   default: break;
