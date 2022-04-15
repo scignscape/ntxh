@@ -11,6 +11,8 @@
 
 #include "mat2d.templates.h"
 
+#include "xcsd-tierbox.h"
+
 USING_XCNS(XCSD)
 
 XCSD_Image_Data::XCSD_Image_Data()
@@ -81,10 +83,15 @@ void XCSD_Image_Data::init_tierboxes(XCSD_Image_Geometry* image_geometry)
    if(rc.outlies(counts.double_minus(1))) //r == 0 || c == 0 || r == counts.height - 1 || c == counts.width - 1)
    {
     rc.double_add(1);
-    (*tierboxes_)[r][c] = nullptr;
+    (*tierboxes_)[rc.r][rc.c] = nullptr;
     continue;
    }
 
+   // // rc is now +1 to work with Mat2d's 1-based indexing
+    //   while frc is -1 to exclude the outer ring
+   rc2 frc = rc.double_minus_then_add(1);
+   XCSD_TierBox* tbx = new XCSD_TierBox(frc);
+   (*tierboxes_)[rc.r][rc.c] = tbx;
   }
  }
 }

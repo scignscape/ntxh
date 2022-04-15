@@ -122,6 +122,8 @@ inline constexpr u1 _ctz(int x)
    { return {(u##size)(field1 + rhs.field1), (u##size)(field2 + rhs.field2)}; } \
    template<typename T> ty##size double_plus(T val) const \
    { return {field1 + val, field2 + val}; } \
+ template<typename T> ty##size double_minus_then_add(T val) \
+ { *this = {field1 + val, field2 + val}; return {field1 - val, field2 - val}; } \
  template<typename T> ty##size& double_add(T val) \
  { field1 += val; field2 += val; return *this; } \
    template<typename T> ty##size double_minus(T val) const \
@@ -298,6 +300,8 @@ struct ty##size##s { s##size field1, field2; \
    { return {(s##size)(field1 - rhs.field1), (s##size)(field2 - rhs.field2)}; } \
    ty##size##s operator*(ty##size##s rhs) const\
    { return {(s##size)(field1 * rhs.field1), (s##size)(field2 * rhs.field2)}; } \
+ template<typename T> ty##size##s double_minus_then_add(T val) \
+ { *this = {field1 + val, field2 + val}; return {field1 - val, field2 - val}; } \
  template<typename T> ty##size##s& double_add(T val) \
  { field1 += val; field2 += val; return this; } \
  ty##size##s& operator++() \

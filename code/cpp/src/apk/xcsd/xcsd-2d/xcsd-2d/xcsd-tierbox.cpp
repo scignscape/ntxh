@@ -32,11 +32,13 @@ Box9x9_8bytepx::Box9x9_8bytepx()
 
 
 
-XCSD_TierBox::XCSD_TierBox()
-  :  non_full_(0)
+XCSD_TierBox::XCSD_TierBox(rc2 position)
+  :  non_full_(0), position_(position)
 {
 
 }
+
+
 
 void XCSD_TierBox::init_boxes()
 {

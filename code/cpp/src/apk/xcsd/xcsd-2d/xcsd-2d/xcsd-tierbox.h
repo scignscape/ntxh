@@ -14,6 +14,8 @@
 #include "xcsd-1d/vec1d.h"
 #include "xcsd-1d/arr1d.h"
 
+#include "xcsd-sdi-structures.h"
+
 #include <QImage>
 
 #include "accessors.h"
@@ -37,15 +39,17 @@ struct Box9x9_8bytepx
 
 class XCSD_TierBox
 {
- u2 pixel_bytelength_;
+// u2 pixel_bytelength_;
 
  u2 non_full_;
-
  Vec1d<Box9x9_8bytepx> box9x9_;
+
+
+ rc2 position_;
 
 public:
 
- XCSD_TierBox();
+ XCSD_TierBox(rc2 position);
 
  ACCESSORS__DECLARE(u2 ,non_full_h)
  ACCESSORS__DECLARE(u2 ,non_full_v)
