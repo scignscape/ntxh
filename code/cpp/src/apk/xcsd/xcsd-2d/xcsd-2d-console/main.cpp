@@ -106,6 +106,8 @@ int main(int argc , char **argv)
 
  xcsd.init_pixel_data(ROOT_FOLDER "/../test/ti12");
 
+ xcsd.init_tierboxes();
+
  xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft13a.png",
    {}, //ROOT_FOLDER "/../test/tk1",
    [](QImage& ti, XCSD_Image_Geometry::Grid_TierBox& gtb,

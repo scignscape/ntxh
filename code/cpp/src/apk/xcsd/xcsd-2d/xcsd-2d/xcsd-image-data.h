@@ -16,17 +16,22 @@
 
 #include "xcsd-1d/arr1d.h"
 
+#include "mat2d.h"
+
 #include "xcsd-sdi-structures.h"
 
 XCNS_(XCSD)
 
 class XCSD_TierBox;
+class XCSD_Image_Geometry;
 
 class XCSD_Image_Data
 {
- Vec1d<XCSD_TierBox*>* tierboxes_;
+ Mat2d< Vec1d<XCSD_TierBox*> >* tierboxes_;
 
  Arr1d<n8, index_types<s4>, _pr_break>* pixel_data_;
+
+ XCSD_Image_Geometry* image_geometry_;
 
 public:
 
@@ -44,6 +49,7 @@ public:
  void copy_pixels(u4 start_index, const std::vector<n8>& vec);
  void get_pixel_run(u4 start_index, u4 length, std::vector<n8>& result);
 
+ void init_tierboxes(XCSD_Image_Geometry* image_geometry);
 
 };
 

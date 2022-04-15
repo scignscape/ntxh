@@ -59,11 +59,20 @@ inline constexpr u1 _ctz(int x)
    u##size inner_ratio() const { return field2 != 0? field1 / field2 : 0; } \
    ty##size _transposed() const { return {field2, field1}; } \
    ty##size& _Transpose() { *this = this->_transposed(); return *this; } \
+   u##size outlies(const ty##size& rhs) const { return this->has_zero()? 1 : \
+     rhs.has_zero_or_one()? 1 : this->first_match(rhs) - 1; } \
+   template<typename T> u##size outlies(const T& rhs) const \
+   { return outlies(rhs.template _to<ty##size>()); } \
+   u##size first_match(const ty##size& rhs) const { return  \
+     field1 == rhs.field1? field1 : field2 == rhs.field2? field2 : 0; } \
+   template<typename T> u##size first_match(const T& rhs) const { \
+     return first_match(rhs.template _to<ty##size>()); } \
    bool is_coequal() { return field1 == field2; } \
    bool is_descending() { return field2 < field1; } \
    bool is_ascending() { return field1 < field2; } \
    bool is_zeros() const { return (field1 == 0) && (field2 == 0); } \
    bool has_zero() const { return (field1 == 0) || (field2 == 0); } \
+   bool has_zero_or_one() const { return (field1 <= 1) || (field2 <= 1); } \
    u1 quadrant_code_against(const ty##size& rhs) const; \
    template<typename T> u1 quadrant_code_against(const T& rhs) const \
    { return quadrant_code_against(rhs.template _to<ty##size>()); } \
@@ -97,6 +106,14 @@ inline constexpr u1 _ctz(int x)
  { field2 = field1 <= val? 0 : field1 - val; return *this; } \
  template<typename T> ty##size& end_at_over(T val) \
  { field2 = field1 / val; return *this; } \
+ ty##size& operator++() \
+ { ++field1; ++field2; return *this; } \
+ template<typename T> ty##size& operator+=(T val) \
+ { field1 += val; field2 += val; return *this; } \
+ ty##size& operator--() \
+ { --field1; --field2; return *this; } \
+ template<typename T> ty##size& operator-=(T val) \
+ { field1 -= val; field2 -= val; return *this; } \
    template<typename T> ty##size operator+(T val) const \
    { return {field1 + val, field2 + val}; } \
    template<typename T> ty##size operator/(T val) const \
@@ -105,6 +122,8 @@ inline constexpr u1 _ctz(int x)
    { return {(u##size)(field1 + rhs.field1), (u##size)(field2 + rhs.field2)}; } \
    template<typename T> ty##size double_plus(T val) const \
    { return {field1 + val, field2 + val}; } \
+ template<typename T> ty##size& double_add(T val) \
+ { field1 += val; field2 += val; return *this; } \
    template<typename T> ty##size double_minus(T val) const \
    { return {field1 - val, field2 - val}; } \
    template<typename T> ty##size double_zminus(T val) const \
@@ -192,8 +211,10 @@ inline constexpr u1 _ctz(int x)
    template<typename T> T _transposed_to() const \
    { return _transposed()._to<T>(); } \
    asize area() const {return field1 * field2;} \
-   template<typename T> ty##size& operator+=(T val) \
-   { *this = {field1 + val, field2 + val}; return *this; } \
+   ty##size operator++(int) \
+   { *this = {field1 + 1, field2 + 1}; return {field1, field2}; } \
+   ty##size operator--(int) \
+   { *this = {field1 - 1, field2 - 1}; return {field1, field2}; } \
    }; \
 
 
@@ -277,6 +298,16 @@ struct ty##size##s { s##size field1, field2; \
    { return {(s##size)(field1 - rhs.field1), (s##size)(field2 - rhs.field2)}; } \
    ty##size##s operator*(ty##size##s rhs) const\
    { return {(s##size)(field1 * rhs.field1), (s##size)(field2 * rhs.field2)}; } \
+ template<typename T> ty##size##s& double_add(T val) \
+ { field1 += val; field2 += val; return this; } \
+ ty##size##s& operator++() \
+ { ++field1; ++field2; return *this; } \
+ template<typename T> ty##size##s& operator+=(T val) \
+ { field1 += val; field2 += val; return *this; } \
+ ty##size##s& operator--() \
+ { --field1; --field2; return *this; } \
+ template<typename T> ty##size##s& operator-=(T val) \
+ { field1 -= val; field2 -= val; return *this; } \
  template<typename T> ty##size##s& operator*=(T val) \
  { field1 *= val; field2 *= val; return *this; } \
  template<typename T> ty##size##s& end_at_times(T val) \
@@ -357,7 +388,14 @@ struct ty##size##s { s##size field1, field2; \
    { return {(typename T::field_type)field1, (typename T::field_type)field2}; } \
    template<typename T> T _transposed_to() const \
    { return _transposed()._to<T>(); } \
-   asize area() const {return field1 * field2;} };
+   asize area() const {return field1 * field2;} \
+   ty##size##s operator++(int) \
+   { *this = {field1 + 1, field2 + 1}; return {field1, field2}; } \
+   ty##size##s operator--(int) \
+   { *this = {field1 - 1, field2 - 1}; return {field1, field2}; } \
+   }; \
+
+
 
 Ty_DEF_MACRO(wh, 1, u2, width, height)
 Ty_DEF_MACRO(wh, 2, u4, width, height)

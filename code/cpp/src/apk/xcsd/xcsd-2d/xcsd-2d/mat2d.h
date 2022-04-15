@@ -11,6 +11,9 @@
 
 #include "xcsd-1d/_vec1d.h"
 
+//#include "xcsd-1d/vec1d.h"
+
+
 #include "accessors.h"
 
 XCNS_(XCSD)
@@ -31,6 +34,10 @@ enum class Mat2d_special_mode_for_raw_data {
 };
 
 template<typename COLL_Type>
+struct _Mat2d_special_mode;
+
+
+template<typename COLL_Type>
 class Mat2d
 {
  using nnx = typename COLL_Type::Numeric_Nested_Index_type;
@@ -46,7 +53,7 @@ class Mat2d
   nx row;
   val_t& operator[](nx c);
   val_t operator()(nx c);
-  val_t operator()(nx c, val_t defaultv);
+  val_t operator()(nx c, const val_t& defaultv);
  };
 
 
@@ -130,9 +137,11 @@ class Mat2d
 
  COLL_Type* elems_;
 
+ friend struct _Mat2d_special_mode<COLL_Type>;
+
 public:
 
- Mat2d(nx r = 0, nx c = 0, nnx layer_size = 16, nnx block_size = 16);
+ Mat2d(nx r = 0, nx c = 0, nnx layer_size = 15, nnx block_size = 17);
 
  void set_default_value(val_t defaultv);
 
@@ -144,9 +153,9 @@ public:
  Mat2d* percentile_breakdown(u1 max = 100);
  Mat2d* percentile_rescale(u1 max = 100);
 
- void fill(val_t value, val_t default_value, nnx layer_size = 16, nnx block_size = 16);
+ void fill(val_t value, val_t default_value, nnx layer_size = 15, nnx block_size = 17);
 
- void fill(val_t value = 0, nnx layer_size = 16, nnx block_size = 16)
+ void fill(val_t value = 0, nnx layer_size = 15, nnx block_size = 17)
  {
   fill(value, value, layer_size, block_size);
  }

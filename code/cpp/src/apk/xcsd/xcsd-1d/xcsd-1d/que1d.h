@@ -34,8 +34,8 @@ class Que1d : protected _Vec1d<VAL_Type, INDEX_Types, PR_Type>,
 
 public:
 
- Que1d(typename INDEX_Types::Numeric_Nested_Index_type layer_size = 16,
-       typename INDEX_Types::Numeric_Nested_Index_type block_size = 16)
+ Que1d(typename INDEX_Types::Numeric_Nested_Index_type layer_size = 15,
+       typename INDEX_Types::Numeric_Nested_Index_type block_size = 17)
   :  _Vec1d<VAL_Type, INDEX_Types, PR_Type>(layer_size, block_size), offset_(0),
     each_holders<self_type, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>({{*this}})
  {

@@ -7,11 +7,15 @@
 
 #include "xcsd-image-data.h"
 
+#include "xcsd-image-geometry.h"
+
+#include "mat2d.templates.h"
 
 USING_XCNS(XCSD)
 
 XCSD_Image_Data::XCSD_Image_Data()
-  :  tierboxes_(nullptr), pixel_data_(nullptr)
+  :  tierboxes_(nullptr), pixel_data_(nullptr),
+     image_geometry_(nullptr)
 {
 
 }
@@ -41,9 +45,6 @@ void XCSD_Image_Data::init_pixel_run(u4 start_index, u4 length, n8 const* source
 
 void XCSD_Image_Data::init_single_pixel(u4 index, n8 pixel_number)
 {
- if(index == 933984)
-   qDebug() << index;
-
  n8* pos = pixel_data_->get(index);
  if(pos)
    *pos = pixel_number;
@@ -51,9 +52,6 @@ void XCSD_Image_Data::init_single_pixel(u4 index, n8 pixel_number)
 
 n8 XCSD_Image_Data::get_single_pixel(u4 index)
 {
- if(index == 933984)
-   qDebug() << index;
-
  n8* result = get_pixel_data_start(index);
  if(result)
    return *result;
@@ -67,9 +65,27 @@ void XCSD_Image_Data::copy_pixels(u4 start_index, const std::vector<n8>& vec)
  init_pixel_run(start_index, vec.size(), vec.data());
 }
 
-// // //  this should be a raw copy ...
-//for(u1 i = 0; i < 9; ++i)
-//{
 
-//}
+void XCSD_Image_Data::init_tierboxes(XCSD_Image_Geometry* image_geometry)
+{
+ image_geometry_ = image_geometry;
+ wh2 counts = image_geometry_->full_tier_counts() + 2;
+ tierboxes_ = new Mat2d< Vec1d<XCSD_TierBox*> >(counts.height, counts.width);
+
+
+ for(u2 r = 0; r < counts.height; ++r)
+ {
+  for(u2 c = 0; c < counts.width; ++c)
+  {
+   rc2 rc {r, c};
+   if(rc.outlies(counts.double_minus(1))) //r == 0 || c == 0 || r == counts.height - 1 || c == counts.width - 1)
+   {
+    rc.double_add(1);
+    (*tierboxes_)[r][c] = nullptr;
+    continue;
+   }
+
+  }
+ }
+}
 

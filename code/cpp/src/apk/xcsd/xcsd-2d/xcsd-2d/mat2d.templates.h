@@ -57,7 +57,7 @@ template<typename COLL_Type>
 typename COLL_Type::Value_type*
 Mat2d<COLL_Type>::_defaultv(val_t** reset)
 {
- static r8* result = nullptr;
+ static val_t* result = nullptr;
  if(reset)
    result = *reset;
  else
@@ -72,6 +72,47 @@ void Mat2d<COLL_Type>::set_default_value(val_t defaultv)
 {
  elems_->first() = defaultv;
 }
+
+
+template<typename COLL_Type>
+typename Mat2d<COLL_Type>::nx Mat2d<COLL_Type>::_get_normal_index(nx r, nx c)
+{
+ if(is_cmajor())
+   return ((c - 1) * n_rows()) + r;
+ return ((r - 1) * n_cols()) + c;
+}
+
+
+template<typename COLL_Type>
+typename Mat2d<COLL_Type>::_one_opbracket
+  Mat2d<COLL_Type>::operator[](nx r)
+{
+ return {*this, r};
+}
+
+
+template<typename COLL_Type>
+typename Mat2d<COLL_Type>::val_t&
+  Mat2d<COLL_Type>::_one_opbracket::operator[](nx c)
+{
+ return *_this.fetch(row, c);
+}
+
+template<typename COLL_Type>
+typename Mat2d<COLL_Type>::val_t
+  Mat2d<COLL_Type>::_one_opbracket::operator()(nx c)
+{
+ return _this.get_value(row, c);
+}
+
+template<typename COLL_Type>
+typename Mat2d<COLL_Type>::val_t
+  Mat2d<COLL_Type>::_one_opbracket::operator()(nx c, const val_t& defaultv)
+{
+ return _this.value(row, c, defaultv);
+}
+
+
 
 
 template<typename COLL_Type>
@@ -162,7 +203,8 @@ Mat2d<COLL_Type>* Mat2d<COLL_Type>::percentile_breakdown(u1 max)
    val_t rr = get_at(r, c);
    val_t _percentile = (rr - extrema.first) / (extrema.second - extrema.first);
    u1 percentile = (_percentile * max) + 1;
-   //?++(*result)[percentile][c];
+   //?
+   ++(*result)[percentile][c];
   }
  }
  return result;
@@ -185,7 +227,8 @@ Mat2d<COLL_Type>* Mat2d<COLL_Type>::percentile_rescale(u1 max)
    val_t rr = get_at(r, c);
    val_t _percentile = (rr - extrema.first) / (extrema.second - extrema.first);
    u1 percentile = (_percentile * max) + 1;
-   //?(*result)[r][c] = percentile;
+   //?
+   (*result)[r][c] = percentile;
   }
  }
  return result;
@@ -717,11 +760,11 @@ typename COLL_Type::Value_type*
 Mat2d<COLL_Type>::fetch(nx r, nx c)
 {
  if(is_symmetric())
-   return _Mat2d_special_mode<COLL_Type>::_Sym(this)._fetch(r, c);
+   return typename _Mat2d_special_mode<COLL_Type>::_Sym{this}._fetch(r, c);
  if(is_skew_symmetric())
-   return _Mat2d_special_mode<COLL_Type>::_Skew(this)._fetch(r, c);
+   return typename _Mat2d_special_mode<COLL_Type>::_Skew{this}._fetch(r, c);
  if(is_diagonal())
-   return _Mat2d_special_mode<COLL_Type>::_Diag(this)._fetch(r, c);
+   return typename _Mat2d_special_mode<COLL_Type>::_Diag{this}._fetch(r, c);
 
  if(elems_)
  {

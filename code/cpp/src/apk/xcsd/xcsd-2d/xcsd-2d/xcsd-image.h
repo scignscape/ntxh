@@ -110,7 +110,6 @@ public:
 
  void init_outer_ring_pixel_data();
 
-
  u4 data_tierbox_to_sdi_pixel_map(u4 tierbox_index,
    std::map<s1, std::pair<u2, std::vector<n8>>>& result);
 

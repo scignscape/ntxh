@@ -85,8 +85,8 @@ _Mat2d_special_mode<COLL_Type>::_Sym::_fetch(nx r, nx c)
   nx pos = 0;
   if( (r <= _this->n_rows()) && (c <= _this->n_rows()) )
   {
-   pos = get_sym_index(r, c);
-   if(pos >= (u4) _this->elems_->size())
+   pos = _this->get_sym_index(r, c);
+   if(pos >= (nx) _this->elems_->size())
      pos = 0;
   }
   return _this->elems_->fetch(pos); // &(*elems_)[pos];
@@ -102,8 +102,8 @@ template<typename COLL_Type>
 typename COLL_Type::Value_type*
 _Mat2d_special_mode<COLL_Type>::_Skew::_fetch(nx r, nx c)
 {
- // //  note: have to negate ...
- return _Mat2d_special_mode<COLL_Type>::_Sym(_this)._fetch(r, c);
+ // //  note: have to negate by client code  ...
+ return _Mat2d_special_mode<COLL_Type>::_Sym{_this}._fetch(r, c);
 }
 
 template<typename COLL_Type>

@@ -545,7 +545,8 @@ public:
 
  VAL_Type* fetch(nx nix)
  {
-  return (VAL_Type*) hive_structure_->fetch(nix);
+  return (VAL_Type*) hive_structure_->fetch(nix,
+    Out_of_Bounds_Resolution_Flags::Call_Default_Constructor_if_Possible);
  }
 
  VAL_Type* get(nx nix)
