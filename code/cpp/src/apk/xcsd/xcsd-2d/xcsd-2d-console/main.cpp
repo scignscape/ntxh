@@ -84,7 +84,7 @@ int main(int argc , char **argv)
 
 
  XCSD_Image xcsd;
- xcsd.load_image(ROOT_FOLDER "/../test/anglez.png");
+ xcsd.load_image(ROOT_FOLDER "/../test/angley.png");
  //xcsd.load_image(ROOT_FOLDER "/../test/ft12.png");
 
 // xcsd.load_image(ROOT_FOLDER "/../test/t1-36x36b.png");
@@ -108,6 +108,7 @@ int main(int argc , char **argv)
 
  xcsd.init_tierboxes();
 
+#ifdef HIDE
  xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft13a.png",
    {}, //ROOT_FOLDER "/../test/tk1",
    [](QImage& ti, XCSD_Image_Geometry::Grid_TierBox& gtb,
@@ -152,7 +153,7 @@ int main(int argc , char **argv)
 //  }
  }
  );
-
+#endif
  return 0;
 }
 

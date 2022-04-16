@@ -780,9 +780,6 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
     QColor fillc(0,100,0);
     outer_ring_image.fill(fillc);
 
-    if(index == 13)
-      qDebug() << index;
-
     for(u2 y = 0; y < rect_wh.height; ++y)
     {
      QRgb* scanline = (QRgb*) outer_ring_image.scanLine(y);
@@ -1121,6 +1118,73 @@ rc2 XCSD_Image::get_tierbox_at_ground_position_RC2(u2 x, u2 y)
 void XCSD_Image::init_tierboxes()
 {
  data_.init_tierboxes(&geometry_);
+
+// for(u2 r = 0; r < geometry_.full_tier_counts().height; ++r)
+// {
+//  for(u2 c = 0; c < geometry_.full_tier_counts().width; ++c)
+//  {
+//   rc2 rc {r, c};
+//   XCSD_TierBox* box = data_.get_full_tierbox_at_position(rc);
+//   qDebug() << box->position();
+//  }
+// }
+
+ XCSD_Image_Geometry::Iteration_Environment ienv = geometry_.formulate_iteration_environment();
+
+ geometry_.for_each_full_tierbox([this, &ienv](XCSD_Image_Geometry::Grid_TierBox& gtb)
+ {
+  rc2 rc  = gtb.loc.rc()._to_unsigned();
+  XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
+
+  tbox->set_mch_code(gtb.loc.get_mch_code());
+
+  XCSD_Image_Geometry::MCH_Info mchi;
+
+  u4 index = geometry_.get_tierbox_index(gtb, ienv.size_even_odd_info, &mchi);
+
+  tbox->set_pixel_data_ground_index(index);
+
+  tbox->set_tier_ring(mchi.tier_ring);
+  tbox->set_inner_pushout(mchi.inner_pushout);
+  tbox->set_compressed_clock_index(mchi.compressed_clock_index);
+  tbox->set_full_clock_index(mchi.full_clock_index);
+  tbox->set_intra_tier_ring_index(mchi.intra_tier_ring_index);
+
+  if(index > 0)
+    return-1;
+
+  for(s1 inner_index = 10; inner_index < 100; ++inner_index)
+  {
+   XCSD_TierBox::_inner_box _ibox = tbox->get_inner_box(inner_index);
+
+   if(inner_index % 10)
+   {
+    XCSD_TierBox::_inner_box_3x3* ibox = _ibox._3x3;
+
+    u2 soffset = tbox->get_scanline_offset_for_inner_center(inner_index);
+    u2 goffset = tbox->get_ground_offset_for_inner_center(inner_index);
+    xy1 xy = tbox->get_ground_location_for_inner_center(inner_index);
+
+    qDebug()<< "\nindex: " << inner_index <<
+               ", soffset: " << soffset <<
+               ", goffset: " << goffset << ", xy: " << xy;
+
+    u2 soffset1 = tbox->get_scanline_offset_sdi(inner_index * 10 + 5);
+    u2 goffset1 = tbox->get_ground_offset_sdi(inner_index * 10 + 5);
+    xy1 xy1 = tbox->get_ground_location_sdi(inner_index * 10 + 5);
+
+    qDebug()<< "index + 5: " << inner_index * 10 + 5 <<
+               ", soffset1: " << soffset1 <<
+               ", goffset1: " << goffset1 << ", xy1: " << xy1;
+
+   }
+
+  }
+
+  qDebug() << tbox->matrix_position();
+  qDebug() << tbox->get_matrix_index_position();
+  qDebug() << tbox->get_grid_position();
+ });
 
 // tierboxes_ = new Vec1d<XCSD_TierBox*>({tierbox_count_});
 // u4 total_count = 0;

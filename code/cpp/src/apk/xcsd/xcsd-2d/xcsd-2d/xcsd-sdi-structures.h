@@ -37,6 +37,9 @@ inline constexpr u1 _ctz(int x)
  struct ty##size##s; \
  struct ty##size { u##size field1, field2; \
    using field_type = u##size; \
+   static u##size negative_to_zero(s##size x) { return x < 0? 0 : x; } \
+   inline ty##size##s  _to_signed() const; \
+   inline ty##size##s  _to_raw_signed() const; \
    asize binary_merge() { return (asize) field1 << (8 * size) | field2; } \
    asize to_base(u1 arithmetic_base) { \
      return (asize) field1 * arithmetic_base + (asize) field2; } \
@@ -60,7 +63,7 @@ inline constexpr u1 _ctz(int x)
    ty##size _transposed() const { return {field2, field1}; } \
    ty##size& _Transpose() { *this = this->_transposed(); return *this; } \
    u##size outlies(const ty##size& rhs) const { return this->has_zero()? 1 : \
-     rhs.has_zero_or_one()? 1 : this->first_match(rhs) - 1; } \
+     rhs.has_zero_or_one()? 1 : negative_to_zero((s##size)(this->first_match(rhs) - 1)); } \
    template<typename T> u##size outlies(const T& rhs) const \
    { return outlies(rhs.template _to<ty##size>()); } \
    u##size first_match(const ty##size& rhs) const { return  \
@@ -116,6 +119,8 @@ inline constexpr u1 _ctz(int x)
  { field1 -= val; field2 -= val; return *this; } \
    template<typename T> ty##size operator+(T val) const \
    { return {field1 + val, field2 + val}; } \
+ template<typename T> ty##size operator-(T val) const \
+ { return {field1 - val, field2 - val}; } \
    template<typename T> ty##size operator/(T val) const \
    { return (val == 0)? ty##size{0,0} : ty##size{field1 / val, field2 / val}; } \
    ty##size plus(ty##size rhs) const\
@@ -236,6 +241,11 @@ inline constexpr u1 _ctz(int x)
 struct ty##size; \
 struct ty##size##s { s##size field1, field2; \
    using field_type = s##size; \
+   static u##size negative_to_zero(s##size x) { return x < 0? 0 : x; } \
+   ty##size  _to_unsigned() const \
+   { return {negative_to_zero(field1), negative_to_zero(field2) }; } \
+   ty##size  _to_raw_unsigned() const \
+   { return {(u##size)field1, (u##size)field2 }; } \
    asize binary_merge() { return (asize)(u##size)field1 << (8 * size) | (u##size)field2; } \
    s##size spaceship() { return field1 < field2? -1 : field1 > field2? 1:0; } \
    ty##size abs() const { return {field1 < 0? -field1 : field1, field2 < 0? -field2 : field2}; } \
@@ -398,7 +408,10 @@ struct ty##size##s { s##size field1, field2; \
    ty##size##s operator--(int) \
    { *this = {field1 - 1, field2 - 1}; return {field1, field2}; } \
    }; \
-
+   ty##size##s  ty##size::_to_signed() const \
+   { return {(s##size)negative_to_zero((s##size)field1), (s##size)negative_to_zero((s##size)field2) }; } \
+   ty##size##s  ty##size::_to_raw_signed() const \
+   { return {(s##size)field1, (s##size)field2 }; } \
 
 
 Ty_DEF_MACRO(wh, 1, u2, width, height)

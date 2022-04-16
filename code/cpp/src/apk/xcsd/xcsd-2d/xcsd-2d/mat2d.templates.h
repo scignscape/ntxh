@@ -95,7 +95,7 @@ template<typename COLL_Type>
 typename Mat2d<COLL_Type>::val_t&
   Mat2d<COLL_Type>::_one_opbracket::operator[](nx c)
 {
- return *_this.fetch(row, c);
+ return *_this.get(row, c);
 }
 
 template<typename COLL_Type>
@@ -778,7 +778,7 @@ Mat2d<COLL_Type>::fetch(nx r, nx c)
       nix = 0;
    }
   }
-  return elems_->fetch(nix);
+  return elems_->get(nix);
  }
 // elems_ = new QVector<r8>(1);
 // (*elems_)[0] = *_defaultv();
@@ -790,11 +790,11 @@ const typename COLL_Type::Value_type&
 Mat2d<COLL_Type>::at(nx r, nx c)
 {
  if(is_symmetric())
-   return _Mat2d_special_mode<COLL_Type>::_Sym(this)._at(r, c);
+   return typename _Mat2d_special_mode<COLL_Type>::_Sym{this}._at(r, c);
  if(is_skew_symmetric())
-   return _Mat2d_special_mode<COLL_Type>::_Skew(this)._at(r, c);
+   return typename _Mat2d_special_mode<COLL_Type>::_Skew{this}._at(r, c);
  if(is_diagonal())
-   return _Mat2d_special_mode<COLL_Type>::_Diag(this)._at(r, c);
+   return typename _Mat2d_special_mode<COLL_Type>::_Diag{this}._at(r, c);
 
  return *fetch(r, c);
 }
@@ -805,7 +805,7 @@ typename COLL_Type::Value_type
 Mat2d<COLL_Type>::get_value(nx r, nx c)
 {
 if(is_skew_symmetric() && (c < r))
-  return -at(c, r);
+  return (val_t)  -(signed long) at(c, r);
 return at(r, c);
 }
 
@@ -825,7 +825,7 @@ Mat2d<COLL_Type>::get_at_index(nx nix)
  if(elems_)
  {
   if(nix < elems_->total_size())
-    return elems_->fetch(nix);
+    return elems_->get(nix);
   if(elems_->is_empty())
     return *_defaultv();
   return elems_->first();
@@ -839,11 +839,11 @@ typename COLL_Type::Value_type*
 Mat2d<COLL_Type>::get(nx r, nx c)
 {
  if(is_symmetric())
-   return _Mat2d_special_mode<COLL_Type>::_Sym(this)._get(r, c);
+   return typename _Mat2d_special_mode<COLL_Type>::_Sym{this}._get(r, c);
  if(is_skew_symmetric())
-   return _Mat2d_special_mode<COLL_Type>::_Skew(this)._get(r, c);
+   return typename _Mat2d_special_mode<COLL_Type>::_Skew{this}._get(r, c);
  if(is_diagonal())
-   return _Mat2d_special_mode<COLL_Type>::_Diag(this)._get(r, c);
+   return typename _Mat2d_special_mode<COLL_Type>::_Diag{this}._get(r, c);
 
  if(elems_)
  {
@@ -853,10 +853,10 @@ Mat2d<COLL_Type>::get(nx r, nx c)
     return nullptr;
 
   nx nix = _get_normal_index(r, c); // ((r - 1) * n_cols()) + c;
-  if(nix >= (nx) elems_->total_size())
+  if(nix >= (nx) elems_->size())
     return nullptr;
 
-  return elems_->fetch(nix);
+  return elems_->get(nix);
  }
  return nullptr;
 }

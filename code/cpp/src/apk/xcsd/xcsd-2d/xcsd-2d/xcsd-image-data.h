@@ -51,6 +51,8 @@ public:
 
  void init_tierboxes(XCSD_Image_Geometry* image_geometry);
 
+ XCSD_TierBox* get_full_tierbox_at_position(rc2 rc);
+
 };
 
 

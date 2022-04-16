@@ -141,7 +141,7 @@ _Mat2d_special_mode<COLL_Type>::_Sym::_get(nx r, nx c)
  if(c > _this->n_rows())
    return nullptr;
 
- nx nix = get_sym_index(r, c);
+ nx nix = _this->get_sym_index(r, c);
  if(nix >= (nx) _this->elems_->size())
    nix = 0;
 
@@ -157,7 +157,7 @@ typename COLL_Type::Value_type*
 _Mat2d_special_mode<COLL_Type>::_Skew::_get(nx r, nx c)
 {
  // //  note: have to negate ...
- return *_Mat2d_special_mode<COLL_Type>::_Sym(_this)._get(r, c);
+ return _Mat2d_special_mode<COLL_Type>::_Sym{_this}._get(r, c);
 }
 
 template<typename COLL_Type>
@@ -182,7 +182,7 @@ template<typename COLL_Type>
 typename COLL_Type::Value_type&
 _Mat2d_special_mode<COLL_Type>::_Sym::_at(nx r, nx c)
 {
- return *_Mat2d_special_mode<COLL_Type>::_Sym(_this)._fetch(r, c);
+ return *_Mat2d_special_mode<COLL_Type>::_Sym{_this}._fetch(r, c);
 }
 
 
@@ -191,14 +191,14 @@ typename COLL_Type::Value_type&
 _Mat2d_special_mode<COLL_Type>::_Skew::_at(nx r, nx c)
 {
  // //  note: have to negate ...
- return *_Mat2d_special_mode<COLL_Type>::_Skew(_this)._fetch(r, c);
+ return *_Mat2d_special_mode<COLL_Type>::_Skew{_this}._fetch(r, c);
 }
 
 template<typename COLL_Type>
 typename COLL_Type::Value_type&
 _Mat2d_special_mode<COLL_Type>::_Diag::_at(nx r, nx c)
 {
- return *_Mat2d_special_mode<COLL_Type>::_Diag(_this)._fetch(r, c);
+ return *_Mat2d_special_mode<COLL_Type>::_Diag{_this}._fetch(r, c);
 }
 
 

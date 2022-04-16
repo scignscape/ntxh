@@ -68,10 +68,19 @@ void XCSD_Image_Data::copy_pixels(u4 start_index, const std::vector<n8>& vec)
 }
 
 
+XCSD_TierBox* XCSD_Image_Data::get_full_tierbox_at_position(rc2 rc)
+{
+ return (*tierboxes_)[rc.r + 2](rc.c + 2);
+}
+
+
 void XCSD_Image_Data::init_tierboxes(XCSD_Image_Geometry* image_geometry)
 {
  image_geometry_ = image_geometry;
  wh2 counts = image_geometry_->full_tier_counts() + 2;
+
+ rc2 counts_outliers = counts._transposed_to<rc2>().double_minus(1);
+
  tierboxes_ = new Mat2d< Vec1d<XCSD_TierBox*> >(counts.height, counts.width);
 
 
@@ -80,12 +89,14 @@ void XCSD_Image_Data::init_tierboxes(XCSD_Image_Geometry* image_geometry)
   for(u2 c = 0; c < counts.width; ++c)
   {
    rc2 rc {r, c};
-   if(rc.outlies(counts.double_minus(1))) //r == 0 || c == 0 || r == counts.height - 1 || c == counts.width - 1)
+
+   if(rc.outlies(counts_outliers)) //r == 0 || c == 0 || r == counts.height - 1 || c == counts.width - 1)
    {
     rc.double_add(1);
     (*tierboxes_)[rc.r][rc.c] = nullptr;
     continue;
    }
+
 
    // // rc is now +1 to work with Mat2d's 1-based indexing
     //   while frc is -1 to exclude the outer ring
