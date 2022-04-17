@@ -49,7 +49,7 @@ class XCSD_TierBox
 
  pr2s mch_code_;
 
- u4 pixel_data_ground_index_;
+ u4 pixel_data_ground_offset_;
 
  u2 tier_ring_;
  u2 inner_pushout_;
@@ -57,6 +57,9 @@ class XCSD_TierBox
  u1 full_clock_index_;
  u2 intra_tier_ring_index_;
 
+ n8 reference_color_;
+
+ xy4 global_top_left_;
 
 public:
 
@@ -71,13 +74,17 @@ public:
  ACCESSORS(rc2 ,matrix_position)
  ACCESSORS(pr2s ,mch_code)
 
- ACCESSORS(u4 ,pixel_data_ground_index)
+ ACCESSORS(u4 ,pixel_data_ground_offset)
 
  ACCESSORS(u2 ,tier_ring)
  ACCESSORS(u2 ,inner_pushout)
  ACCESSORS(u1 ,compressed_clock_index)
  ACCESSORS(u1 ,full_clock_index)
  ACCESSORS(u2 ,intra_tier_ring_index)
+
+ ACCESSORS(n8 ,reference_color)
+
+ ACCESSORS(xy4 ,global_top_left)
 
  union _inner_box {
    Box3x3_8bytepx* _3x3;
@@ -112,6 +119,24 @@ public:
  static u2 get_ground_offset_for_inner_top_left(s1 index);
  static u2 get_ground_offset_for_inner_center(s1 index);
 
+ static u2 get_ground_offset_for_tierbox_center()
+ {
+  static u2 result = get_ground_offset_for_inner_center(55);
+  return result;
+ }
+
+ u2 get_ground_offset_for_tierbox_center(u2 tierbox_column_count, u1 tierbox_width)
+ {
+  return get_ground_offset(tierbox_column_count, tierbox_width) + get_ground_offset_for_tierbox_center();
+ }
+
+ u2 get_ground_offset(u2 tierbox_column_count, u1 tierbox_width)
+ {
+  rc2 gp = get_grid_position();
+  return (gp.r * tierbox_column_count + gp.c) * tierbox_width  * tierbox_width;
+ }
+
+
  static u2 get_ground_offset_sdi(s2 index);
 
  static bool normalize_sdi_index(s2& index);
@@ -119,14 +144,31 @@ public:
 
 //? xy1 get_inner_location_for_inner_index(s1 index);
 
- static xy1 get_ground_location_for_inner_top_left(s1 index);
- static xy1 get_ground_location_for_inner_center(s1 index)
+ static xy1 get_local_ground_location_for_inner_top_left(s1 index);
+ static xy1 get_local_ground_location_for_inner_center(s1 index)
  {
-  return get_ground_location_for_inner_top_left(index) + 1;
+  return get_local_ground_location_for_inner_top_left(index) + 1;
  }
 
  static u2 get_scanline_offset_sdi(s2 index);
- static xy1 get_ground_location_sdi(s2 index);
+ static xy1 get_local_ground_location_sdi(s2 index);
+
+ static xy1 get_local_ground_location_for_tierbox_center()
+ {
+  static xy1 result = get_local_ground_location_sdi(555);
+  return result;
+ }
+
+ xy4 get_image_ground_location_sdi(s2 index)
+ {
+  return global_top_left_.add(get_local_ground_location_sdi(index));
+ }
+
+ xy4 get_image_ground_location_for_tierbox_center()
+ {
+  static xy4 offset = get_local_ground_location_sdi(555)._to<xy4>();
+  return global_top_left_.add(offset);
+ }
 
 };
 

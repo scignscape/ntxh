@@ -1411,6 +1411,13 @@ prr2 TierBox_Location::get_mch_code_normalized(u1* mask) const
  return {result.first, result.second, clk};
 }
 
+xy4 XCSD_Image_Geometry::get_tierbox_scanline_top_left(Grid_TierBox& gtb)
+{
+ xy4 result {horizontal_outer_sizes_.left, vertical_outer_sizes_.top};
+ result.add(gtb.loc.rc()._transposed_to<xy4>() * tierbox_width);
+ return result;
+}
+
 u1 XCSD_Image_Geometry::get_size_even_odd_code()
 {
  switch (actual_tiergrid_setting_)
@@ -1435,6 +1442,19 @@ u2 XCSD_Image_Geometry::sdi_index_to_ground_offset(const ab1& sdi)
 
 ab1 XCSD_Image_Geometry::ground_offset_coords_to_sdi_coords(const go_xy1& coords)
 {
+ //u1 gc = coords.go_x % 3;
+ u1 bc = (coords.go_x / 3) % 3;
+ u1 ac = (coords.go_x / 9) % 3;
+
+ //u1 gr = coords.go_y % 3;
+ u1 br = (coords.go_y / 3) % 3;
+ u1 ar = (coords.go_y / 9) % 3;
+
+ return {(u1)(ar * 3 + ac), (u1)(br * 3 + bc)};
+}
+
+abg1 XCSD_Image_Geometry::ground_offset_coords_to_sdi3_coords(const go_xy1& coords)
+{
  u1 gc = coords.go_x % 3;
  u1 bc = (coords.go_x / 3) % 3;
  u1 ac = (coords.go_x / 9) % 3;
@@ -1443,7 +1463,7 @@ ab1 XCSD_Image_Geometry::ground_offset_coords_to_sdi_coords(const go_xy1& coords
  u1 br = (coords.go_y / 3) % 3;
  u1 ar = (coords.go_y / 9) % 3;
 
- return {(u1)(ar * 3 + ac), (u1)(br * 3 + bc)};
+ return {(u1)(ar * 3 + ac), (u1)(br * 3 + bc), (u1)(gr * 3 + gc)};
 }
 
 go_xy1 XCSD_Image_Geometry::ground_offset_to_ground_offset_coords(u2 index)
@@ -1475,6 +1495,14 @@ u2 XCSD_Image_Geometry::ground_offset_to_sdi3(u2 index)
 
 }
 
+u2 XCSD_Image_Geometry::ground_offset_coords_to_sdi3(const go_xy1& coords)
+{
+ abg1 abg = ground_offset_coords_to_sdi3_coords(coords);
+
+ abg.add(1);
+
+ return abg.vector_product(abg1 {100, 10, 1});
+}
 
 u2 XCSD_Image_Geometry::ground_offset_coords_to_ground_offset(const go_xy1& coords)
 {
@@ -1864,7 +1892,6 @@ XCSD_Image_Geometry::formulate_iteration_environment()
 
  return result;
 }
-
 
 
 void XCSD_Image_Geometry::draw_tier_summary(QString path, QString path1,

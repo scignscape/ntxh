@@ -1115,6 +1115,31 @@ rc2 XCSD_Image::get_tierbox_at_ground_position_RC2(u2 x, u2 y)
 }
 
 
+void XCSD_Image::draw_tierboxes_to_folder(QString path)
+{
+ geometry_.for_each_full_tierbox([this](XCSD_Image_Geometry::Grid_TierBox& gtb)
+ {
+  rc2 rc  = gtb.loc.rc()._to_unsigned();
+  XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
+
+  u4 tbox_offset = tbox->pixel_data_ground_offset();
+
+  for(u1 y = 0; y < 27; ++y)
+  {
+   for(u1 x = 0; x < 27; ++x)
+   {
+    go_xy1 go_xy {x, y};
+    s2 sdi = geometry_.ground_offset_coords_to_sdi3(go_xy);
+    u4 offset = (u4) tbox->get_ground_offset_sdi(sdi);
+    offset += tbox_offset;
+    n8 pixel = data_.get_single_pixel(offset);
+   }
+  }
+
+ });
+}
+
+
 void XCSD_Image::init_tierboxes()
 {
  data_.init_tierboxes(&geometry_);
@@ -1150,41 +1175,59 @@ void XCSD_Image::init_tierboxes()
   tbox->set_full_clock_index(mchi.full_clock_index);
   tbox->set_intra_tier_ring_index(mchi.intra_tier_ring_index);
 
-  if(index > 0)
-    return-1;
+  u2 offset = tbox->get_ground_offset_for_tierbox_center(
+    geometry_.full_tier_counts().width, tierbox_width);
 
-  for(s1 inner_index = 10; inner_index < 100; ++inner_index)
-  {
-   XCSD_TierBox::_inner_box _ibox = tbox->get_inner_box(inner_index);
+  n8 pixel = data_.get_single_pixel(offset);
 
-   if(inner_index % 10)
-   {
-    XCSD_TierBox::_inner_box_3x3* ibox = _ibox._3x3;
+  tbox->set_reference_color(pixel);
 
-    u2 soffset = tbox->get_scanline_offset_for_inner_center(inner_index);
-    u2 goffset = tbox->get_ground_offset_for_inner_center(inner_index);
-    xy1 xy = tbox->get_ground_location_for_inner_center(inner_index);
+  xy4 xy = geometry_.get_tierbox_scanline_top_left(gtb);
+  tbox->set_global_top_left(xy);
 
-    qDebug()<< "\nindex: " << inner_index <<
-               ", soffset: " << soffset <<
-               ", goffset: " << goffset << ", xy: " << xy;
+//  QColor qc = pixel_number_to_qcolor(pixel);
+//  qDebug() << tbox->matrix_position();
+//  qDebug() << tbox->get_matrix_index_position();
+//  qDebug() << tbox->get_grid_position();
+//  qDebug() << "offset = " << offset;
+//  qDebug() << "color = " << stringify_qcolor(qc);
+//  qDebug() << "pixel = " << pixel;
+//  qDebug() << "global = " << tbox->get_image_ground_location_for_tierbox_center();
 
-    u2 soffset1 = tbox->get_scanline_offset_sdi(inner_index * 10 + 5);
-    u2 goffset1 = tbox->get_ground_offset_sdi(inner_index * 10 + 5);
-    xy1 xy1 = tbox->get_ground_location_sdi(inner_index * 10 + 5);
-
-    qDebug()<< "index + 5: " << inner_index * 10 + 5 <<
-               ", soffset1: " << soffset1 <<
-               ", goffset1: " << goffset1 << ", xy1: " << xy1;
-
-   }
-
-  }
-
-  qDebug() << tbox->matrix_position();
-  qDebug() << tbox->get_matrix_index_position();
-  qDebug() << tbox->get_grid_position();
  });
+
+
+
+// if(index > 0)
+//   return-1;
+
+// for(s1 inner_index = 10; inner_index < 100; ++inner_index)
+// {
+//  XCSD_TierBox::_inner_box _ibox = tbox->get_inner_box(inner_index);
+
+//  if(inner_index % 10)
+//  {
+//   XCSD_TierBox::_inner_box_3x3* ibox = _ibox._3x3;
+
+//   u2 soffset = tbox->get_scanline_offset_for_inner_center(inner_index);
+//   u2 goffset = tbox->get_ground_offset_for_inner_center(inner_index);
+//   xy1 xy = tbox->get_ground_location_for_inner_center(inner_index);
+
+//   qDebug()<< "\nindex: " << inner_index <<
+//              ", soffset: " << soffset <<
+//              ", goffset: " << goffset << ", xy: " << xy;
+
+//   u2 soffset1 = tbox->get_scanline_offset_sdi(inner_index * 10 + 5);
+//   u2 goffset1 = tbox->get_ground_offset_sdi(inner_index * 10 + 5);
+//   xy1 xy1 = tbox->get_ground_location_sdi(inner_index * 10 + 5);
+
+//   qDebug()<< "index + 5: " << inner_index * 10 + 5 <<
+//              ", soffset1: " << soffset1 <<
+//              ", goffset1: " << goffset1 << ", xy1: " << xy1;
+
+//  }
+
+
 
 // tierboxes_ = new Vec1d<XCSD_TierBox*>({tierbox_count_});
 // u4 total_count = 0;

@@ -139,8 +139,12 @@ public:
      const XCSD_Image_Geometry::MCH_Info&, QString, u1)> cb = nullptr,
    std::function<void(QImage&, s1)> ocb = nullptr);
 
+ static QString stringify_qcolor(const QColor& qc)
+ {
+  return QString("%1:%2:%3;%4").arg(qc.red()).arg(qc.green()).arg(qc.blue()).arg(qc.alpha());
+ }
 
-
+ void draw_tierboxes_to_folder(QString path);
 
 };
 

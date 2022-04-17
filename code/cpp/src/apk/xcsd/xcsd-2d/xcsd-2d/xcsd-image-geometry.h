@@ -275,18 +275,25 @@ public:
  wh2 get_secondary_outer_ring_rect_wh_for(Outer_Ring_Area_Flags area_flags,
    u1 index, QPoint* qpoint = nullptr);
 
-//  u2 rect_width_for(Outer_Ring_Area_Flags area_flags, Portrait ppos);
-
-
  static constexpr u1 tierbox_width = 27;
+
+ xy4 get_tierbox_scanline_top_left(Grid_TierBox& gtb);
+
+//  u2 rect_width_for(Outer_Ring_Area_Flags area_flags, Portrait ppos);
 
  u4 get_total_full_tierbox_area();
 
  static u2 sdi_index_to_ground_offset(const ab1& sdi);
  static u2 sdi_index_to_ground_offset(s1 sdi);
  static u2 ground_offset_coords_to_ground_offset(const go_xy1& coords);
+
  static ab1 ground_offset_coords_to_sdi_coords(const go_xy1& coords);
+ static abg1 ground_offset_coords_to_sdi3_coords(const go_xy1& coords);
+
+
+ static u2 ground_offset_coords_to_sdi3(const go_xy1& coords);
  static u2 ground_offset_to_sdi3(u2 index);
+
  static go_xy1 ground_offset_to_ground_offset_coords(u2 index);
 
  u1 get_size_even_odd_code();

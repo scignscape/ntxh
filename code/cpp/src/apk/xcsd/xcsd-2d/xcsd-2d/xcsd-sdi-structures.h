@@ -516,6 +516,9 @@ Tys_DEF_MACRO(tb, 4, n8, first, second)
    ty2##size drop_first() { return {field2, field3}; } \
    ty2##size drop_mid() { return {field1, field3}; } \
    ty2##size drop_last() { return {field1, field2}; } \
+   u##size inner_sum() { return field1 + field2 + field3; } \
+ template<typename T> ty##size& add(T val) \
+ { field1 += val; field2 += val; field3 += val; return *this; } \
    template<typename T> ty##size operator<<(T val) const \
    { return {field1 << val, field2 << val, field3 << val}; } \
    template<typename T> ty##size operator>>(T val) const \
@@ -524,17 +527,19 @@ Tys_DEF_MACRO(tb, 4, n8, first, second)
    { return {field1 & val, field2 & val, field3 & val}; } \
    template<typename T> ty##size operator*(T val) const \
    { return {field1 * val, field2 * val, field3 * val}; } \
+ template<typename T> ty##size times(T val) const \
+ { return {field1 * val, field2 * val, field3 * val}; } \
    template<typename T> ty##size operator+(T val) const \
    { return {field1 + val, field2 + val, field3 + val}; } \
-   ty##size operator+(ty##size rhs) \
+   ty##size operator+(const ty##size rhs) const \
    { return {(u##size)(field1 + rhs.field1), (u##size)(field2 + rhs.field2), (u##size)(field3 + rhs.field3)}; } \
-   ty##size operator-(ty##size rhs) \
+   ty##size operator-(const ty##size rhs) const \
    { return {(u##size)(field1 - rhs.field1), (u##size)(field2 - rhs.field2), (u##size)(field3 - rhs.field3)}; } \
-   ty##size operator*(ty##size rhs) \
+   ty##size operator*(const ty##size rhs) const \
    { return {(u##size)(field1 * rhs.field1), (u##size)(field2 * rhs.field2), (u##size)(field3 * rhs.field3)}; } \
-   ty##size operator/(ty##size rhs) \
+   ty##size operator/(const ty##size rhs) const \
    { return {(u##size)(field1 / rhs.field1), (u##size)(field2 / rhs.field2), (u##size)(field3 / rhs.field3)}; } \
-   ty##size operator%(ty##size rhs) \
+   ty##size operator%(const ty##size rhs) const \
    { return {(u##size)(field1 % rhs.field1), (u##size)(field2 % rhs.field2), (u##size)(field3 % rhs.field3)}; } \
    template<typename T> ty##size operator||(T val) const \
    { return {field1 < val? field1 : val, field2 < val? field2 : val, field3 < val? field3 : val}; } \
@@ -542,7 +547,13 @@ Tys_DEF_MACRO(tb, 4, n8, first, second)
    { return {(field1 & val) >> _ctz(val), (field2 & val) >> _ctz(val), (field3 & val) >> _ctz(val)}; } \
    template<typename T> T _to() const \
    { return {(typename T::field_type)field1, (typename T::field_type)field2, (typename T::field_type)field3}; } \
+ u##size vector_product(const ty##size& rhs) const \
+    { return (*this * rhs).inner_sum(); } \
+ template<typename T> u##size vector_product(const T& rhs) const \
+ { return this->vector_product(rhs.template _to<ty##size>()); } \
    asize product() {return field1 * field2 * field3;} };
+
+
 
 #define Ty3s_DEF_MACRO(ty, ty2, size, asize, field1, field2, field3) \
 struct ty##size##s { s##size field1, field2, field3; \
@@ -552,6 +563,7 @@ struct ty##size##s { s##size field1, field2, field3; \
    ty2##size##s drop_first() { return {field2, field3}; } \
    ty2##size##s drop_mid() { return {field1, field3}; } \
    ty2##size##s drop_last() { return {field1, field2}; } \
+   u##size inner_sum() { return field1 + field2 + field3; } \
    bool is_nonnegative() { return field1 >= 0 && field2 >= 0 && field3 >= 0; } \
    template<typename T> ty##size##s operator<<(T val) const \
    { return {field1 << val, field2 << val, field3 << val}; } \
@@ -561,22 +573,30 @@ struct ty##size##s { s##size field1, field2, field3; \
    { return {field1 & val, field2 & val, field3 & val}; } \
    template<typename T> ty##size##s operator*(T val) const \
    { return {field1 * val, field2 * val, field3 * val}; } \
+ template<typename T> ty##size##s times(T val) const \
+ { return {field1 * val, field2 * val, field3 * val}; } \
    template<typename T> ty##size##s operator+(T val) const \
    { return {field1 + val, field2 + val, field3 + val}; } \
-   ty##size##s operator+(ty##size##s rhs) \
+ template<typename T> ty##size##s& add(T val) \
+ { field1 += val; field2 += val; field3 += val; return *this; } \
+   ty##size##s operator+(const ty##size##s rhs) const \
    { return {(s##size)(field1 + rhs.field1), (s##size)(field2 + rhs.field2), (s##size)(field3 + rhs.field3)}; } \
-   ty##size##s operator-(ty##size##s rhs) \
+   ty##size##s operator-(const ty##size##s rhs) const \
    { return {(s##size)(field1 - rhs.field1), (s##size)(field2 - rhs.field2), (s##size)(field3 - rhs.field3)}; } \
-   ty##size##s operator*(ty##size##s rhs) \
+   ty##size##s operator*(const ty##size##s rhs) const \
    { return {(s##size)(field1 * rhs.field1), (s##size)(field2 * rhs.field2), (s##size)(field3 * rhs.field3)}; } \
-   ty##size##s operator/(ty##size##s rhs) \
+   ty##size##s operator/(const ty##size##s rhs) const \
    { return {(s##size)(field1 / rhs.field1), (s##size)(field2 / rhs.field2), (s##size)(field3 / rhs.field3)}; } \
-   ty##size##s operator%(ty##size##s rhs) \
+   ty##size##s operator%(const ty##size##s rhs) const \
    { return {(s##size)(field1 % rhs.field1), (s##size)(field2 % rhs.field2), (s##size)(field3 % rhs.field3)}; } \
    template<typename T> ty##size##s operator||(T val) const \
    { return {field1 < val? field1 : val, field2 < val? field2 : val, field3 < val? field3 : val}; } \
    template<typename T> T _to() const \
    { return {(typename T::field_type)field1, (typename T::field_type)field2}; } \
+ s##size vector_product(const ty##size##s& rhs) const \
+    { return (*this * rhs).inner_sum(); } \
+ template<typename T> s##size vector_product(const T& rhs) const \
+ { return this->vector_product(rhs.template _to<ty##size##s>()); } \
    asize product() {return std::abs(field1 * field2 * field3);} };
 
 Ty3_DEF_MACRO(lmr, lr, 1, u2, left, main, right)
@@ -586,6 +606,10 @@ Ty3_DEF_MACRO(lmr, lr, 4, n8, left, main, right)
 Ty3_DEF_MACRO(tmb, tb, 1, u2, top, main, bottom)
 Ty3_DEF_MACRO(tmb, tb, 2, u4, top, main, bottom)
 Ty3_DEF_MACRO(tmb, tb, 4, n8, top, main, bottom)
+
+Ty3_DEF_MACRO(abg, ab, 1, u2, top, main, bottom)
+Ty3_DEF_MACRO(abg, ab, 2, u4, top, main, bottom)
+Ty3_DEF_MACRO(abg, ab, 4, n8, top, main, bottom)
 
 Ty3_DEF_MACRO(prr, pr, 1, u2, first, second, third)
 Ty3_DEF_MACRO(prr, pr, 2, u4, first, second, third)
@@ -598,6 +622,11 @@ Ty3s_DEF_MACRO(lmr, lr, 4, n8, left, main, right)
 Ty3s_DEF_MACRO(tmb, tb, 1, u2, top, main, bottom)
 Ty3s_DEF_MACRO(tmb, tb, 2, u4, top, main, bottom)
 Ty3s_DEF_MACRO(tmb, tb, 4, n8, top, main, bottom)
+
+Ty3s_DEF_MACRO(abg, ab, 1, u2, top, main, bottom)
+Ty3s_DEF_MACRO(abg, ab, 2, u4, top, main, bottom)
+Ty3s_DEF_MACRO(abg, ab, 4, n8, top, main, bottom)
+
 
 Ty3s_DEF_MACRO(prr, pr, 1, u2, first, second, third)
 Ty3s_DEF_MACRO(prr, pr, 2, u4, first, second, third)

@@ -108,6 +108,8 @@ int main(int argc , char **argv)
 
  xcsd.init_tierboxes();
 
+ xcsd.draw_tierboxes_to_folder(ROOT_FOLDER "/../test/test");
+
 #ifdef HIDE
  xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft13a.png",
    {}, //ROOT_FOLDER "/../test/tk1",

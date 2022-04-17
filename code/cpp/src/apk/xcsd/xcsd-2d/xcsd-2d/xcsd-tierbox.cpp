@@ -35,12 +35,14 @@ Box9x9_8bytepx::Box9x9_8bytepx()
 XCSD_TierBox::XCSD_TierBox(rc2 matrix_position)
   :  non_full_(0),
      matrix_position_(matrix_position), mch_code_({0,0}),
-     pixel_data_ground_index_(0),
+     pixel_data_ground_offset_(0),
      tier_ring_(0),
      inner_pushout_(0),
      compressed_clock_index_(0),
      full_clock_index_(0),
-     intra_tier_ring_index_(0)
+     intra_tier_ring_index_(0),
+     reference_color_(0),
+     global_top_left_({0,0})
 {
  init_boxes();
 }
@@ -133,7 +135,7 @@ void XCSD_TierBox::set_non_full_left(bool h)
 
 u2 XCSD_TierBox::get_scanline_offset_sdi(s2 index)
 {
- xy1 result = get_ground_location_sdi(index);
+ xy1 result = get_local_ground_location_sdi(index);
  return result.y * 27 + result.x;
 }
 
@@ -152,7 +154,7 @@ u2 XCSD_TierBox::get_ground_offset_sdi(s2 index)
 }
 
 
-xy1 XCSD_TierBox::get_ground_location_sdi(s2 index)
+xy1 XCSD_TierBox::get_local_ground_location_sdi(s2 index)
 {
  bool negate = normalize_sdi_index(index);
  s1 index10 = (s1)(index / 10);
@@ -168,7 +170,7 @@ xy1 XCSD_TierBox::get_ground_location_sdi(s2 index)
 
  --index;
 
- xy1 result = get_ground_location_for_inner_top_left(index10);
+ xy1 result = get_local_ground_location_for_inner_top_left(index10);
 
  return result.add({(u1)(index % 3), (u1)(index / 3)});
 
@@ -269,13 +271,13 @@ bool XCSD_TierBox::normalize_inner_index(s1& index)
 
 u2 XCSD_TierBox::get_scanline_offset_for_inner_top_left(s1 index)
 {
- xy1 loc = get_ground_location_for_inner_top_left(index);
+ xy1 loc = get_local_ground_location_for_inner_top_left(index);
  return loc.y * 27 + loc.x;
 }
 
 u2 XCSD_TierBox::get_scanline_offset_for_inner_center(s1 index)
 {
- xy1 loc = get_ground_location_for_inner_center(index);
+ xy1 loc = get_local_ground_location_for_inner_center(index);
  return loc.y * 27 + loc.x;
 }
 
@@ -312,7 +314,7 @@ u2 XCSD_TierBox::get_ground_offset_for_inner_center(s1 index)
  return get_ground_offset_for_inner_top_left(index) + 4;
 }
 
-xy1 XCSD_TierBox::get_ground_location_for_inner_top_left(s1 index)
+xy1 XCSD_TierBox::get_local_ground_location_for_inner_top_left(s1 index)
 {
  bool negate = normalize_inner_index(index);
 
