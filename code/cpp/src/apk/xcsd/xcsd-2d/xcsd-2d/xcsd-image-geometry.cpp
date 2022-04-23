@@ -1501,7 +1501,9 @@ u2 XCSD_Image_Geometry::ground_offset_coords_to_sdi3(const go_xy1& coords)
 
  abg.add(1);
 
- return abg.vector_product(abg1 {100, 10, 1});
+ // //  I put this here just to make sure vector_product works ok ...
+  //    return abg._to<abg2>().vector_product(abg2 {100, 10, 1});
+ return abg.to_base(10);
 }
 
 u2 XCSD_Image_Geometry::ground_offset_coords_to_ground_offset(const go_xy1& coords)

@@ -56,14 +56,15 @@ void XCSD_Image::init_pixel_data(QString info_folder)
   QString info_path;
   QString info_string;
 
-  if(!info_folder.isEmpty())
-  {
-   info_path = QString("%1/%2-%3.txt").arg(info_folder).arg(gtb.loc.r()).arg(gtb.loc.c());
-   info_string = QString("Full tierbox %2 %3\n\n").arg(gtb.loc.r()).arg(gtb.loc.c());
-  }
-
   u4 index = geometry_.get_tierbox_index(gtb, ienv.size_even_odd_info, nullptr);
   u4 threshold = index * box_area;
+
+  if(!info_folder.isEmpty())
+  {
+   info_path = QString("%1/%2-%3-%4.txt").arg(info_folder).arg(gtb.loc.r())
+     .arg(gtb.loc.c()).arg(threshold);
+   info_string = QString("Full tierbox %1 %2\n\n").arg(gtb.loc.r()).arg(gtb.loc.c());
+  }
 
   u2 threshold_offset = 0;
 
@@ -84,6 +85,8 @@ void XCSD_Image::init_pixel_data(QString info_folder)
 
   image_tierbox_to_sdi_pixel_map(ci, sdi);
 
+  u4 offset;
+
   for(u1 a = 1; a <= 9; ++a)
    for(u1 b = 1; b <= 9; ++b)
    {
@@ -91,16 +94,40 @@ void XCSD_Image::init_pixel_data(QString info_folder)
 
     data_.copy_pixels(threshold + threshold_offset, data3x3);
 
+    offset = threshold_offset;
     threshold_offset += 9;
 
     if(!info_string.isEmpty())
     {
+     abg1 abg {a,b,0};
+
      info_string += QString("\nSDI location %1\n").arg(ab1{a,b}.to_base(10));
      u1 vi = 0;
      for(u1 y = 0; y < 3; ++y)
      {
-      info_string += QString(" %1 %2 %3\n").arg(data3x3[vi], 16, 16, QChar('0'))
-        .arg(data3x3[vi + 1], 16, 16, QChar('0')).arg(data3x3[vi + 2], 16, 16, QChar('0'));
+      ++abg.g;
+      xy1 xy_0 = XCSD_TierBox::get_local_ground_location_sdi(abg.to_base(10));
+      ++abg.g;
+      xy1 xy_1 = XCSD_TierBox::get_local_ground_location_sdi(abg.to_base(10));
+      ++abg.g;
+      xy1 xy = XCSD_TierBox::get_local_ground_location_sdi(abg.to_base(10));
+
+
+//      info_string += QString(" %1 %2 %3\n").arg(data3x3[vi], 16, 16, QChar('0'))
+//        .arg(data3x3[vi + 1], 16, 16, QChar('0')).arg(data3x3[vi + 2], 16, 16, QChar('0'));
+
+      info_string += QString(" %1-%2:%3 %4-%5:%6 %7-%8:%9\n")
+        .arg(xy_0.to_qstring(2))
+        .arg(offset++, 3, 10, QChar('0'))
+        .arg(data3x3[vi], 16, 16, QChar('0'))
+        .arg(xy_1.to_qstring(2))
+        .arg(offset++, 3, 10, QChar('0'))
+        .arg(data3x3[vi + 1], 16, 16, QChar('0'))
+        .arg(xy.to_qstring(2))
+        .arg(offset++, 3, 10, QChar('0'))
+        .arg(data3x3[vi + 2], 16, 16, QChar('0'));
+
+
       vi += 3;
      }
     }
@@ -954,7 +981,7 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
 
  if(!info_folder.isEmpty())
  {
-  info_path = QString("%1/%2-%3.txt").arg(info_folder).arg(gtb.loc.r()).arg(gtb.loc.c());
+  info_path = QString("%1/%2-%3-%4.txt").arg(info_folder).arg(gtb.loc.r()).arg(gtb.loc.c()).arg(di);
   info_string = QString("Full tierbox %2 %3\n\n\n").arg(gtb.loc.r()).arg(gtb.loc.c());
  }
 
@@ -965,8 +992,9 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
   if(!info_string.isEmpty())
     info_string += QString("SDI location %1\n").arg(ab_s1);
 
-  ab = ab.double_minus(1);
+  abg1 abg{ab.a, ab.b, 0};
 
+  ab = ab.double_minus(1);
 
 
   // // rc here is 0 - 3
@@ -977,8 +1005,7 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
 
   u1 tl_scan_column = arc.c * 9 + brc.c * 3;
 
-
-
+  u4 offset = thr_vec.first;
 
   u1 vi = 0; // vector index
   for(u1 y = 0; y < 3; ++y)
@@ -988,6 +1015,9 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
    img_pixels += tl_scan_column;
    for(u1 x = 0; x < 3; ++x)
    {
+    ++abg.g;
+    xy1 xy = XCSD_TierBox::get_local_ground_location_sdi(abg.to_base(10));
+
     n8 pixel = thr_vec.second[vi];
     // qDebug() << "pixel = " << (pixel & 0x00FFFFFF);
     *img_pixels = qRgba(
@@ -998,7 +1028,10 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
     ++img_pixels;
 
     if(!info_string.isEmpty())
-      info_string += QString(" %1").arg(thr_vec.second[vi], 16, 16, QChar('0'));
+      info_string += QString(" %1-%2:%3").arg(xy.to_qstring(2))
+        .arg(offset, 3, 10, QChar('0')).arg(thr_vec.second[vi], 16, 16, QChar('0'));
+
+    ++offset;
 
     ++vi;
    }
@@ -1117,24 +1150,156 @@ rc2 XCSD_Image::get_tierbox_at_ground_position_RC2(u2 x, u2 y)
 
 void XCSD_Image::draw_tierboxes_to_folder(QString path)
 {
- geometry_.for_each_full_tierbox([this](XCSD_Image_Geometry::Grid_TierBox& gtb)
+ geometry_.for_each_full_tierbox([this, &path](XCSD_Image_Geometry::Grid_TierBox& gtb)
  {
   rc2 rc  = gtb.loc.rc()._to_unsigned();
   XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
 
+  u4 index= tbox->full_tier_index();
+
+  std::map<s1, std::pair<u2, std::vector<n8>>> sdi;
+  u4 di = data_tierbox_to_sdi_pixel_map(index, sdi);
   u4 tbox_offset = tbox->pixel_data_ground_offset();
+
+  if(tbox_offset != di)
+    qDebug() << " ! " << tbox_offset << " " << di;
+
+  QString info_string = QString("Full tierbox %1 %2\n\n").arg(rc.r).arg(rc.c);
+
+
+  QImage image(27, 27, QImage::Format_ARGB32);
+
+#ifdef HIDE
+
+  for(u1 a = 1; a <= 9; ++a)
+  {
+   for(u1 b = 1; b <= 9; ++b)
+   {
+    ab1 ab{a,b};
+    std::vector<n8> vec = sdi[ab.to_base(10)].second;
+
+    info_string += QString("\nSDI location %1\n").arg(ab1{a,b}.to_base(10));
+
+    n8 pixel0, pixel1;
+    u4 offset0, offset1;
+    xy1 xy_0, xy_1;
+
+    for(u1 g = 1; g <= 9; ++g)
+    {
+     abg1 abg {a, b, g};
+
+     s2 abgi = abg.to_base(10);
+
+     if(abgi == 256)
+       qDebug() << abgi;
+
+     xy1 xy = tbox->get_local_ground_location_sdi(abgi);
+
+     s2 sdii = geometry_.ground_offset_coords_to_sdi3(xy._to<go_xy1>());
+     u4 offset = (u4) tbox->get_ground_offset_sdi(sdii);
+
+     u4 toffset = offset + tbox_offset;
+
+     n8 pixel = data_.get_single_pixel(toffset);
+     //n8 pixel = vec[g - 1];
+
+     QRgb* scanline = (QRgb*) image.scanLine(xy.y);
+     scanline[xy.x] = pixel_number_to_qrgb(pixel);
+
+     if(g % 3 == 1)
+     {
+       pixel0 = pixel;
+       offset0 = offset;
+       xy_0 = xy;
+     }
+     else if(g % 3 == 2)
+     {
+       pixel1 = pixel;
+       offset1 = offset;
+       xy_1 = xy;
+     }
+     else
+     {
+      info_string += QString(" %1-%2:%3 %4-%5:%6 %7-%8:%9\n")
+        .arg(xy_0.to_qstring(2))
+        .arg(offset0, 3, 10, QChar('0'))
+        .arg(pixel0, 16, 16, QChar('0'))
+        .arg(xy_1.to_qstring(2))
+        .arg(offset1, 3, 10, QChar('0'))
+        .arg(pixel1, 16, 16, QChar('0'))
+        .arg(xy.to_qstring(2))
+        .arg(offset, 3, 10, QChar('0'))
+        .arg(pixel, 16, 16, QChar('0'));
+     }
+
+    }
+   }
+
+  }
+
+ #endif //def HIDE
+
+// #ifdef HIDE
+
+  n8 pixel0, pixel1;
+  u4 offset0, offset1;
+  xy1 xy_0, xy_1;
 
   for(u1 y = 0; y < 27; ++y)
   {
+   QRgb* scanline = (QRgb*) image.scanLine(y);
+
    for(u1 x = 0; x < 27; ++x)
    {
     go_xy1 go_xy {x, y};
     s2 sdi = geometry_.ground_offset_coords_to_sdi3(go_xy);
     u4 offset = (u4) tbox->get_ground_offset_sdi(sdi);
-    offset += tbox_offset;
-    n8 pixel = data_.get_single_pixel(offset);
+
+    u4 toffset = offset + tbox_offset;
+    n8 pixel = data_.get_single_pixel(toffset);
+    scanline[x] = pixel_number_to_qrgb(pixel);
+
+    if(x % 3 == 0)
+    {
+     xy_0 = go_xy._to<xy1>();
+     offset0 = offset;
+     pixel0 = pixel;
+    }
+    else if(x % 3 == 1)
+    {
+     xy_1 = go_xy._to<xy1>();
+     offset1 = offset;
+     pixel1 = pixel;
+    }
+    else
+    {
+     if(x % 9 == 2)
+       info_string += "\n";
+
+//     info_string += QString(" %1 %2 %3\n").arg(pixel0, 16, 16, QChar('0'))
+//       .arg(pixel1, 16, 16, QChar('0')).arg(pixel, 16, 16, QChar('0'));
+
+     info_string += QString(" %1-%2:%3 %4-%5:%6 %7-%8:%9\n")
+       .arg(xy_0.to_qstring(2))
+       .arg(offset0, 3, 10, QChar('0'))
+       .arg(pixel0, 16, 16, QChar('0'))
+       .arg(xy_1.to_qstring(2))
+       .arg(offset1, 3, 10, QChar('0'))
+       .arg(pixel1, 16, 16, QChar('0'))
+       .arg(go_xy.to_qstring(2))
+       .arg(offset, 3, 10, QChar('0'))
+       .arg(pixel, 16, 16, QChar('0'));
+
+    }
    }
   }
+ // #endif
+
+  QString local_path = QString("%1/%2-%3.png").arg(path).arg(tbox->grid_position_string()).arg(tbox_offset);
+  image.save(local_path);
+
+  QString local_info_path = QString("%1/%2-%3.txt").arg(path).arg(tbox->grid_position_string()).arg(tbox_offset);
+  save_file(local_info_path, info_string);
 
  });
 }
@@ -1167,7 +1332,9 @@ void XCSD_Image::init_tierboxes()
 
   u4 index = geometry_.get_tierbox_index(gtb, ienv.size_even_odd_info, &mchi);
 
-  tbox->set_pixel_data_ground_index(index);
+  tbox->set_pixel_data_ground_offset(index * tierbox_width * tierbox_width);
+
+  tbox->set_full_tier_index(index);
 
   tbox->set_tier_ring(mchi.tier_ring);
   tbox->set_inner_pushout(mchi.inner_pushout);

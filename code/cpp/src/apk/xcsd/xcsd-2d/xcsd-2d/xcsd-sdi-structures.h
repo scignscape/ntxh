@@ -57,6 +57,10 @@ inline constexpr u1 _ctz(int x)
    u##size inner_zdifference() const { return field1 < field2? 0 : field1 - field2; } \
    u##size inner_positive_difference() const { return field1 < field2? field2 - field1 : field1 - field2; } \
    u##size inner_span() const { return (u##size)(inner_positive_difference() + 1); } \
+   QString to_qstring(QString mid = "-") const \
+   { return QString("%1%2%3").arg(field1).arg(mid).arg(field2); } \
+   QString to_qstring(u1 len, QString mid = "-", u1 base = 10, QChar pad = QChar('0') ) const \
+   { return QString("%1%2%3").arg(field1, len, base, pad).arg(mid).arg(field2, len, base, pad); } \
    u##size transposed_inner_zdifference() const { return field2 < field1? 0 : field2 - field1; } \
    u##size inner_product() const { return field1 * field2; } \
    u##size inner_ratio() const { return field2 != 0? field1 / field2 : 0; } \
@@ -517,6 +521,9 @@ Tys_DEF_MACRO(tb, 4, n8, first, second)
    ty2##size drop_mid() { return {field1, field3}; } \
    ty2##size drop_last() { return {field1, field2}; } \
    u##size inner_sum() { return field1 + field2 + field3; } \
+   asize to_base(u1 arithmetic_base) { \
+     return (asize) field1 * arithmetic_base * arithmetic_base + \
+     (asize) field2 * arithmetic_base + (asize) field3; } \
  template<typename T> ty##size& add(T val) \
  { field1 += val; field2 += val; field3 += val; return *this; } \
    template<typename T> ty##size operator<<(T val) const \
@@ -563,6 +570,9 @@ struct ty##size##s { s##size field1, field2, field3; \
    ty2##size##s drop_first() { return {field2, field3}; } \
    ty2##size##s drop_mid() { return {field1, field3}; } \
    ty2##size##s drop_last() { return {field1, field2}; } \
+   asize to_base(u1 arithmetic_base) { \
+   return (asize) field1 * arithmetic_base * arithmetic_base + \
+   (asize) field2 * arithmetic_base + (asize) field3; } \
    u##size inner_sum() { return field1 + field2 + field3; } \
    bool is_nonnegative() { return field1 >= 0 && field2 >= 0 && field3 >= 0; } \
    template<typename T> ty##size##s operator<<(T val) const \
@@ -607,9 +617,9 @@ Ty3_DEF_MACRO(tmb, tb, 1, u2, top, main, bottom)
 Ty3_DEF_MACRO(tmb, tb, 2, u4, top, main, bottom)
 Ty3_DEF_MACRO(tmb, tb, 4, n8, top, main, bottom)
 
-Ty3_DEF_MACRO(abg, ab, 1, u2, top, main, bottom)
-Ty3_DEF_MACRO(abg, ab, 2, u4, top, main, bottom)
-Ty3_DEF_MACRO(abg, ab, 4, n8, top, main, bottom)
+Ty3_DEF_MACRO(abg, ab, 1, u2, a, b, g)
+Ty3_DEF_MACRO(abg, ab, 2, u4, a, b, g)
+Ty3_DEF_MACRO(abg, ab, 4, n8, a, b, g)
 
 Ty3_DEF_MACRO(prr, pr, 1, u2, first, second, third)
 Ty3_DEF_MACRO(prr, pr, 2, u4, first, second, third)
@@ -623,9 +633,9 @@ Ty3s_DEF_MACRO(tmb, tb, 1, u2, top, main, bottom)
 Ty3s_DEF_MACRO(tmb, tb, 2, u4, top, main, bottom)
 Ty3s_DEF_MACRO(tmb, tb, 4, n8, top, main, bottom)
 
-Ty3s_DEF_MACRO(abg, ab, 1, u2, top, main, bottom)
-Ty3s_DEF_MACRO(abg, ab, 2, u4, top, main, bottom)
-Ty3s_DEF_MACRO(abg, ab, 4, n8, top, main, bottom)
+Ty3s_DEF_MACRO(abg, ab, 1, u2, a, b, g)
+Ty3s_DEF_MACRO(abg, ab, 2, u4, a, b, g)
+Ty3s_DEF_MACRO(abg, ab, 4, n8, a, b, g)
 
 
 Ty3s_DEF_MACRO(prr, pr, 1, u2, first, second, third)

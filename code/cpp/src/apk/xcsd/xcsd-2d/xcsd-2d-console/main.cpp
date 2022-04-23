@@ -104,11 +104,15 @@ int main(int argc , char **argv)
 
  xcsg.init_outer_ring_positions();
 
- xcsd.init_pixel_data(ROOT_FOLDER "/../test/ti12");
+ xcsd.init_pixel_data(ROOT_FOLDER "/../test/tk1");
 
  xcsd.init_tierboxes();
 
  xcsd.draw_tierboxes_to_folder(ROOT_FOLDER "/../test/test");
+
+ xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft13a.png",
+   ROOT_FOLDER "/../test/ti1");
+
 
 #ifdef HIDE
  xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft13a.png",

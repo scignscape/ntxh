@@ -33,7 +33,7 @@ Box9x9_8bytepx::Box9x9_8bytepx()
 
 
 XCSD_TierBox::XCSD_TierBox(rc2 matrix_position)
-  :  non_full_(0),
+  :  non_full_(0), full_tier_index_(0),
      matrix_position_(matrix_position), mch_code_({0,0}),
      pixel_data_ground_offset_(0),
      tier_ring_(0),

@@ -44,6 +44,7 @@ class XCSD_TierBox
  u2 non_full_;
  Vec1d<Box9x9_8bytepx> box9x9_;
 
+ u4 full_tier_index_;
 
  rc2 matrix_position_;
 
@@ -70,6 +71,8 @@ public:
 
  ACCESSORS__DECLARE(bool ,non_full_up)
  ACCESSORS__DECLARE(bool ,non_full_left)
+
+ ACCESSORS(u4 ,full_tier_index)
 
  ACCESSORS(rc2 ,matrix_position)
  ACCESSORS(pr2s ,mch_code)
@@ -104,6 +107,16 @@ public:
  rc2 get_grid_position()
  {
   return matrix_position_ - 1;
+ }
+
+ QString grid_position_string()
+ {
+  return QString("%1-%2").arg(get_grid_position().r).arg(get_grid_position().c);
+ }
+
+ QString matrix_position_string()
+ {
+  return QString("%1-%2").arg(matrix_position_.r).arg(matrix_position_.c);
  }
 
  void set_non_full_up() { set_non_full_up(true); }
