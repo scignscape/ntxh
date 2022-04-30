@@ -1,0 +1,387 @@
+`section.Hypergraph Data Modeling and Virtual Machines`
+
+`p.
+I've suggested so far that flexible and expressive data modeling 
+is a good thing in principle, but haven't presented any 
+arguments `visavis; how that could be achieved.  
+Without sufficient care, the general topic of data-representation 
+paradigms can easily remain at the level of semi-formalized 
+`q.design patterns` or (concrete programming) best practices 
+%-- subject matter for developer's message boards and the like 
+but lacking a rigorous technical firmament to be 
+analyzed in depth.  I believe that investigation of data-repersentations 
+can be a scientific topic befitting in-depth analysis, not 
+just a semi-formal cadre of observations orbiting coding practice.  
+I do not expect that claim to be taken for granted, however; 
+anyone inclined to such a perspective should justify their 
+interest in data (meta)models by construction a sufficiently 
+rigorous environment in which to analyze them. 
+`p`
+
+
+`p.
+My earlier comments regarding application-level expressivity 
+perhaps suggest part of my rationale for stressing metamodels 
+%-- application-development criteria break apparent 
+equivalence between disparate representational paradigms 
+which may encode comparable data-spaces, but with divergent 
+levels of `q.convenience` from the application vantage point.  
+That is to say, one (at least potentially formal or formalizable) c
+criterion for comparing representational schema is the space 
+of data structures which competing schema can unambiguously 
+represent; one schema is richer (or more expressive) than another 
+if there are structures (with requisite concrete data and 
+associated semantics) that can be encoded (without collision 
+between nonidentical structures) in the first but not 
+the second.  I'd argue this amounts to a variation on the 
+notion in formal language theory that two languages 
+are analogous if anything which is a valid string in one 
+is valid in the other (respectively, invalid) and vice-versa; 
+except that when discussing `q.data structures` we are 
+working with a different universe of building-block elements 
+than `q.strings`/, which still need to be described 
+(as will become clear, I propose to articulate these 
+building-blocks in terms of hypergraphs).  Accepting 
+graphs in a generic sense as a theoretical `i.a priori`/, 
+we could say that two representational systems are 
+functionally analogous if anything which is a valid 
+graph-construction in one is valid in the other 
+(respectively, invalid) and vice-versa.  One would 
+then have to clarify what are `q.graph constructions`/.         
+`p`
+
+
+`p.
+From an `q.application-level` perspective, however, 
+representational paradigms can be compared not only 
+via structures they encode in an abstract sense, 
+but more concretely by the degree to which 
+applications can be extended with capabilities to 
+share data according to protocols derived form their 
+representational tactics.  This idea seems intuitively 
+well-motivated, but it rests on notions which perhaps do 
+not have an obvious formalization (akin to, say, equivalence 
+`visavis; a space of valid strings/graphs).  So, I will take a 
+moment to flesh it out.
+`p`
+
+
+`p.
+Prima facie, it should be uncontroversial to say that 
+convenience in application-development is desirable.  This 
+section of the book will entertain several Civil Eingeering 
+case-studies concerning reconstruction in Ukraine.  At this point 
+I'll just point out one contention to be addressed in 
+following chapters, that the scale of Ukrainian 
+destruction allows for rebuilding initiatives to be 
+carried out on an exceptionally large and holistic 
+scale.  This reconstruction calls for an interdisciplinary 
+mindset attuned to environmental impact, quality of life, and 
+cultural heritage alongside conventional architectural/engineering 
+concerns.  This is intriguing case-study insofar as 
+it concretizes scenarios where existing data-integration 
+methodology in Civil Eingeering Informatics (CEI) %-- how 
+`BIM; marries architectural design and structural engineering, 
+for example %-- can be extended to urban planning, sustainability, 
+even cultural preservation.  The computational infrastructure 
+leveraged when assessing structural integrity 
+of (digitized) architectural plans, that specific 
+analytic pipeline, can similarly be extended to 
+metrics of environmental impact, enery use, carbon 
+footprint, and myriad cultural and quality-of-life 
+targets.     
+`p`
+
+
+`p.
+Although such inter-disciplinary efforts wherein the 
+scope of CEI integration expands further %-- e.g., emphasizing 
+eco-friendly optimizations %-- have certianly 
+been embraced by the construction and architectural-design 
+industries in recent years, Ukraine points to how 
+such trends could still accelerate.  A widening 
+circle of parameters, from architecture and engineering 
+to ecology, culture, and civic design, will ideally be 
+recognized %-- and digitally prototyped, incorporated 
+into simulations and `q.digital twins` %-- by 
+technologies utilized toward reconstruction designs 
+(and later, potentially, by `q.smart city` data curation).  
+As of now this is hypothetical, of course, but 
+working on the assumption that such broad integration 
+is at least `i.desirable` we can derive something 
+like a concrete case-study, because we are contemplating an 
+expansion in specific applications' data-sharing capabilities 
+to accommodate newer, more multi-faceted information 
+spaces.     
+`p`
+
+
+`p.
+In other words, this is a hypothetical but in its own 
+way concrete working example: consider the suite of 
+software tools which are employed in construction-related 
+industries, and their existing interoperability 
+(via `IFC; objects, for instance).  Now consider the 
+goal of augmenting this functionality to support 
+thematically richer information profiles covering 
+civic, ecological, and cultural data-points alongside 
+(say) archiecture and structural engineering.  
+We then have (modulo a certain imaginative projection 
+presupposed by the whole thought-exercise) 
+real-world implementational questions to consider: 
+How readily can applications be updated to support 
+the relevant new data-sharing protocols?  How can 
+these protocols be standardized (and likewise 
+application code-bases be engineered) in anticipation 
+of quickly adopting to more ambitious interoperability 
+specifications?  What about supporting tools 
+(parsers, validators, reference implementations, 
+client libraries, even application-neutral `GUI; components) 
+that might be provided in conjunction with new data standards 
+to facilitate application-level adoption?
+`p`
+
+
+`p.
+These are the kind of contexts I had in mind a short while 
+ago when suggesting that application-integration is a functional 
+criterion for assessing data-representation formats, alongside 
+more `q.mathematical` criteria such as the space 
+of information structures (unambiguously) modeled via a 
+given format.  I'd like to keep case-studies 
+such as Ukrainian reconstruction present in the background 
+as a motivating example for following discussions 
+about data structures and representations. 
+`p`
+
+`subsection.Hypergraphs and Virtual Machines`
+`p.
+To extract a theoretical core from these hypothetically-concrete 
+case-studies, we can say that valid criteria for 
+assessing data metamodels derive in part from the 
+perspective of engineering application-level support 
+for new (or newly expanded) interoperability protocols.  
+That is, representational systems which engender 
+computational artifacts (parseers, for syntax, and 
+validators, for semantics, let's say) that can be 
+implemented, embedded, and leveraged by applications 
+as their capabilities are refined to support new 
+protovols are most effective when the amount of 
+effort consumed by the requisite programming 
+is minimized.  Data-sharing protocols should be 
+engineered to pass through application-integration 
+phases as quickly as possible, but likewise 
+applications should be architected to accommodate 
+new data-sharing initiatives without 
+substantial re-coding.  
+`p`
+
+
+`p.
+Generically, we can describe a metamodel as 
+relatively `q.expressive` to the degree that 
+data structures and their concomitant semantic 
+paradigms can be transparently encoded 
+according to modeling system's rules.  
+Expressivity might imply a level of 
+redundancy, or at least superficial 
+redundancy when viewed from the 
+sole perspective of data encoding.  
+For example, the `IFC; attribute/property 
+distinction might seem locally superfluous 
+in that asserting a given data-point via a 
+property rather than an attribute 
+(or vice-versa) does not appear to 
+convey greater information %-- the 
+information is borne by the 
+field's value, not by its property-or-attribute 
+classification.  However, the attribute/property 
+is of course not semantically vacuous; 
+its significance emerges in the larger 
+scale of schema-standardization and validation.  
+A metamodel which supports this larger semantic 
+cotnext is therefore sufficiently expressive 
+to properly encode `IFC; data; a less expressive model 
+(one which collapses attributes and properties 
+into a generic notion of `q.fields`/, say), would 
+fall short, at least without compensating 
+by leveraging its own formal resources 
+(e.g., classifying fields as attributes or 
+properties via `q.meta-data` fields).  
+Here we can appeal again to application-level 
+concerns: the paucity of less-expressive 
+systems would become evident insofar 
+as reifications, indirections, and other ad-hoc 
+solutions to representational blind-spots 
+can render application-integration more complex 
+and time-consuming.      
+`p`
+
+
+`p.
+Metamodels are more expressive to the degree that 
+they offer a greater range of representational parametes 
+with which structural and semantic conventions 
+might be communicated.  For example, `JSON; 
+(JavaScript Object Notation) can be deemed more 
+expressive than primitive list-based encodings 
+(e.g., `CSV;, or comma-separated values) because 
+`JSON; distinguishes arrays (which are like lists) 
+from `q.objects` (i.e., associative arrays, 
+lists indexed by field-names rather than numers).  
+In this sense `XML; is more expressive than 
+`JSON; insofar as elements' data can be asserted 
+via attributes or via nested 
+elements (for sake of argument, treating `XML; 
+as a de-facto superset of `JSON; wherein arrays 
+correspond to sequences of similarly-tagged child 
+nodes).  As that last parenthetical comment suggests, 
+there is a level of imprecise inevitable when 
+discussing issues such as the relative 
+expressiveness of real-world data formats; 
+these are concrete technological artifacts rather 
+than mathematical constructions, and therefore 
+do not necessarily lend themselves to a 
+quasi-mathematical meta-language.  Still, 
+we can analyze distinct 
+representation systems with some degree 
+of systematicity (sort of in the 
+register of `q.philosophy-of-information`/, 
+not `q.information-as-mathematical-system`/).      
+`p`
+
+
+`p.
+In the case of property graphs and/or hypergraphs, 
+data fields can be associated with an `q.object` 
+(in the sense of an integral data structure) 
+via properties (attributes on a node) or via 
+node-to-hypernode relations (sometimes called 
+`q.projections`/), a duality reminiscent 
+of property/attribute in `IFC;.  Graphs, 
+of course, have the further stipulation 
+that any two nodes (or hypernodes) may be 
+linked by edges (themselves equipped 
+with labels, label-namespaces, controlled 
+vocabularies, and potentially constraints/axioms 
+enforced by `q.Ontologies`/).  Formats such as 
+`XML; and `JSON; which are more `q.syntactically` 
+orienetd tend to be hierarchical, in that 
+any specific value in a `JSON; object or array may 
+itself be another object/array (rather than atomic 
+value) and likewise `XML; elements may have other 
+elements as children.  By contrast, formats 
+such as `RDF; and property graphs which are 
+more `q.semantically` focused tend to be 
+graph-like and encode semantic relations via 
+edges across nodes (rather than hierarchical nesting).  
+Hypergraph potentially combine both styles of 
+representation, with hypernodes containing 
+nodes hierarchically `i.and also` edges 
+between two (or two-or-more) nodes and/or hypernodes 
+(the precise rules as to which constructions are 
+possible will vary from one system to another, but 
+these are reasonable approximations). 
+`p`
+
+
+`p.
+Any representational system, as these examples point out, 
+provides a cerain `q.tableau` of parameters that 
+can be pressed into service when formalizing a protocol 
+for encoding specific kinds of data via structures 
+conformant to the specific system.  More expressive 
+systems have a wider arsenal of parameters; for 
+instance, along the lines of the above gloss, property 
+hypergraphs (with potentially iterative node/hypernode 
+relations) are more expressive than either property 
+graphs or document-style hierarchical trees 
+alone, because properties-on-nodes (as in `XML; attributes), 
+nested hierachies (hypernodes containing child nodes akin 
+to child `XML; elements), and inter-node connections 
+(as in Semantic Web labeled edges) are all potential 
+representational devices.  This chapter will accordingly 
+focus on property-hypergraphs as a general-purpose 
+metamodel, but the relevant point for the 
+moment is that expressivity can be `q.measured` via 
+the range of distinct representational parameters afforded by 
+the system, at least intuitively.
+`p`
+
+
+`p.
+This intuitive point can be made more precise, insofar as 
+I have deferred any rigorous definition for 
+`q.representational parameters`/.  That is to say, for a 
+reasonably systematic analysis of metamodels we should 
+specify building-blocks of constructions 
+recognized through any metamodel.  The overall 
+concept may be clear enough %-- in general, 
+the parameters of a modeling system are the full set 
+of structural elements that might potentially 
+be employed in fully describing any given 
+structure covered by the system %-- but one would 
+like a still tighter definition.  For this chapter, 
+I approach this problem from the 
+perspective of Virtual Machines.
+`p`
+
+
+`p.
+The correlation between Virtual Machines and 
+representational paradigms should be clear: suppose 
+we take any structure instantiating a particular 
+metamodel.  Presumably, such a structure 
+can be assembled over multiple stages.  Insofar 
+as node-hypernode inclusion is a constructional parameter, 
+for instance, then a structure can be modified 
+by a including a node within the scope of a hypernode.  
+Similarly, insofar as inter-node relations (via directed 
+edges or hyperedges) are significant constructions, 
+then a structure may be modified by adding an edge 
+between existing nodes.  In short, any structure 
+can be derived from the modification of precursor 
+structures.  The full set of structure-modifying 
+operations available for a given representational 
+paradigm can be enumerated as (at least on part of) 
+the opset of a hypothetical (or realized) 
+Virtual Machine.  As such, Virtual Machines 
+provide a potential formalizing environment 
+for analyzing data metamodels.  
+`p`
+
+`p.
+Conversely, data-models can serve as a prompt for 
+motivating the proper scope of a Virtual Machine 
+(hereafter abbreviated to `VM;).  That is, `VM; 
+may be designed subject to requirements that 
+they permit the accumulation of any data structure 
+conformant to a given metamodel.  Similarly, `VM;s 
+might be characerized in terms of how they support 
+various `q.calling conventions`/, in the sense of 
+protocols through which computational procedures 
+delegate to other procedures (supplying inputs, 
+reading outputs, spawning concurrent 
+execution paths, and so forth).  This chapter 
+will focus on `VM;s based on `i.hypergraph` 
+data models, employing such structures 
+both from the perspective of data-representations 
+and interlocking procedures (i.e., describing 
+procedures in terms of sequences of 
+calls to other procedures).   
+`p`
+
+`subsection.Virtual Machines and Database Engineering`
+`p.
+
+`p`
+
+
+
+
+`p.
+
+`p`
+
+
+
