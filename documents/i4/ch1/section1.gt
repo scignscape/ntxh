@@ -781,23 +781,255 @@ that signal the `i.kinds` of updates
 requested alongside the relevant new values 
 (notating, e.g., collections-context changes as 
 distinct from single-value morphisms).  
+Intuitively, flexible architectures 
+(e.g., hypergraphs) accelerate the requisite 
+implementations, although actually 
+supporting a query-interface satisfying 
+such ambitions depends on a confluence 
+of factors (e.g., underlying database 
+archiecture but also query-representation 
+and query-evaluation protocols and the 
+tools to compile code/text or procedurally-generated 
+queries to internally-represented structures 
+suitable for evaluation).
 `p`
 
 
-
-
+`p.
+This section's discussion has focused on 
+updating a single type-instance centering on 
+the point that complex intra-type layout implies 
+a diverse set of query-based update options.  
+An `UPDATE; statement in `SQL;, say, 
+only (directly) supports one 
+particular `q.genre` of updates (value-to-value 
+edits in one or more discrete columns).  Given application 
+state which can be expressed in terms of modifications 
+to existing persisted values, keeping the 
+back-end in sync entails accounting for the changes 
+embodies in the new application-state by 
+presenting the back-end engine with (in general) a 
+series of updates; the more flexibly updates 
+can be encoded, the less development time 
+need be expended figuring out how to 
+translate application-state changes to updates 
+the engine can process.  This is one reason why a 
+diversity of data-modeling parameters can 
+streamline application integration: a flexibly 
+tableau of recognized constructions implies that 
+applications can describe updates with 
+relatively less boilerplate destructuring.  
+Consider the multitude of `q.sites` where 
+data associated with a hypernode can 
+be asserted, in the context of property-hypergraphs; at least 
+(and some systems may have more elaborate 
+constructions as well) properties `i.on` a hypernode, 
+nodes `i.in` the hypernode, and edges `i.from` a 
+hypernode to its peers.  This articulation 
+of site-varieties is, self-evidently, also a 
+list of update-forms.  Having multiple protocols 
+for describing updates allows different forms of 
+updates to be recognized with distinct semantics.  
+For example %-- consider again the attribute/property 
+distinction in `IFC; %-- updates to `i.properties` 
+(which would in general be ad-hoc annotations 
+on a hypernode less strictly regulated than 
+nodes encompassed `i.in` hypernodes) could be 
+subject to different validators than updates 
+performed via node-insertion or (potentially 
+Ontology-constrained) edge-insertion.      
+`p`
 
 
 `p.
+In effect, multi-parameteric modeling 
+tableaus in the database `i.architecture` 
+propagate to multi-dimensional 
+options for encoding updates, which in 
+turn allows for coexisting update 
+protocols each with their own semantics.  
+Applications can then choose which 
+protocol most efficiently describes 
+any particular change in application-state.  
+`p`
+
+
+`p.
+Of course, these points `visavis; changing 
+`i.existing` database value have analogs 
+in the context of inserting `i.new` values.  
+Ideally, applications will have flexibility 
+in how encode data structure for insertion 
+into a back-end via database queries.  
+This is not only a matter of notating 
+all information which should be persisted, 
+but also providing cues to the engine 
+about how the new data should interact 
+with other records (e.g., using 
+primary keys or globally-unique 
+identifiers to secure inter-record 
+links analogous to %-- perhaps 
+translating %-- live-memory pointers) 
+and subsequent find/select queries.  
+What are the criteria through which 
+a database record, once deposited, should 
+be retrieved again in the future?  Most 
+database systems will give nodes/records 
+unique id's, but the whole point of 
+search queries may be that records 
+should be located based on known data 
+in contexts where an application does 
+`i.not` have the requisite `gid;. 
+`p`
+
+
+`p.
+Consider again the case-study of image-curation 
+software that could be used in a redevelopment/urban 
+planning context, such that photograph resources 
+include depictions of future building sites.  
+As suggested earlier, data associated with 
+each picture could reference construction-project 
+data (e.g., the number of units slated for 
+construction, or the identity of the firm contracted 
+to oversee the project), as well as, perhaps, 
+`q.generic` information (image format, dimensions, 
+color-depth, plus, say, `GIS; coordinates).  
+One consideration when designing such an application 
+would be how users would find images 
+that they hadn't seen before, or had not 
+revisted for an extended period of time 
+(so that the presumptive image `gid; is not 
+cached in recent history).  In would make sense 
+to track images by longitude and latitude, 
+for example, assuming that users would know such 
+data.  Perhaps street address (accounting for 
+the possibility that large-scale redevelopment 
+might alter the street grid so that pre-war 
+addresses, say, become obsolete; one might 
+still maintain a mapping from such addresses 
+to `GIS; coordinates so they remain useful 
+for queries); or (less granularly) by district 
+or city.  We can similarly envisage scenarios 
+where architectural details are mentioned 
+(`q.find images of sites within a 
+10-kilometer radius featuring planned 
+buildings over 4 stories tall`/).   
+`p`
+
+
+`p.
+For queries along these lines to work, 
+back-ends need to structure type-instances 
+such that (potentially large collections of) 
+values can be filtered into subsets 
+meeting specific criteria: `GIS; coordinates 
+restricted to a given locale, housing 
+matching a given contractor-name, and so forth.  
+When exporting info to a back-end, the 
+relevant details are not only the specific values 
+comprised by the new data but also 
+which fields may serve as eventual query-parameters, 
+and how they should be indexed.  
+Such `q.selectability` criteria have to be 
+encoded alongside persisted data structures 
+themselves, and convenient application-integration 
+entails supporting protocols for 
+noting pathways for query-retrieval 
+and doing so with minimal boilerplate code 
+(for analogous reasons as with update queries).  
+`p`
+
+
+`p.
+Of course, selection/retrieval and update protocols 
+tend to be defined on types rather than the type-instance 
+level.  To the degree that certain data-fields are 
+indexed and queryable (for retrieving instances 
+when their global id's are not at hand `i.a priori`/) 
+decisions as to which fields to thereby expose 
+tend to be made for each type %-- as part of the 
+type's design and contract %-- rather than 
+negotiated on a case-by-case basis per 
+instance (though note that properties in property-graphs 
+are possible exceptions; indeed this is one 
+rationale for property-graphs in the first place).  
+Similarly, type-level modeling tends to 
+define which update protocols to invoke for 
+different state-changes.  Accordingly, an expressive 
+query interface should allow stiuplations regarding 
+updates and searches to be described as attributes 
+of `i.types` as well as single instances (e.g., 
+records and/or hypernodes) and to be deferred 
+from instances to type-contracts (analogously, 
+inferred in instance-contexts by virtue of type 
+attributions).  An obvious corrolary here 
+is that query systems have to recognize type 
+descriptions as well as encodings of type-instances.  
+In effect, query languages need to include 
+`q.type-expression` languages where types' 
+attributes, internal organization, and 
+back-end protocols are duly notated (so that 
+type-information can be `q.loaded into` the 
+system and consulted as the engine resolves 
+how to accommodate insertions, updates, and 
+filtering for specific instances).  
 
 `p`
 
 
-
-
-
 `p.
-
+I will delay further discussion about type-descriptions 
+until after examining relevant Virtual Machine 
+concepts in greater detail.  Thus far I have 
+been alluding to `VM; in the context of query evaluation: 
+one way to implement query engines is to decompose 
+(the steps needed to execute) queries into 
+squences of primitive or `q.kernel` operations 
+supplied through a `VM;.  While this is a productive 
+facet of `VM; applications, it overlaps with equally 
+consequential issues concerning how `VM; model 
+procedures in general (not just those befitting the 
+profile of database queries).  Indeed, in general 
+a `VM; targeted at query-evaluation should either 
+natively extend to or solicit 
+(via some kind of native-function interface) 
+general-purpose procedures available within 
+computing environments where databases and 
+applications are situated, because (in principle) 
+the results from arbitrary procedures could 
+potentially be desired as query parameters.  
+If (assuming an object-oriented context) 
+back-ends warehouse records encapsulating 
+objects with their specific classes, any 
+methods called on candidate objects 
+(e.g., those not otherwise 
+filtered out via the suite of selection-criteria 
+in a retrieval query) might plausibly be 
+useful as means to narrow result-sets.  
+Object-databases proper point to how 
+full-fledged method calls may be 
+hard to optimize (database contents are 
+not typically `q.live` objects that can be 
+passed to methods directly), but 
+there is no reason `i.a prior` why queries 
+should be limited to optimizable  
+criteria (for instance, if selective 
+stipulations allow results to 
+be narrowed to a reasonably small 
+set of candidates, fully instantiating 
+such potential matches as live-memory 
+objects and calling methods accordingly 
+would be a reasonable execution strategy).  
+In short, even when we are primarily 
+interested in Virtual Machines pressed 
+into serve as query enges, it would 
+be incomplete to exclude consideration 
+of general-purpose procedure calls and 
+how these are descrived, validated, and 
+executed by concrete `VM;.  I therefore 
+turn to procedure-encoding considerations 
+in the remainder of this chapter. 
 `p`
 
 
