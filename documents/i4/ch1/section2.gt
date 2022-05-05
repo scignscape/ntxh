@@ -1,11 +1,799 @@
 `section.ChasmVM and the Digamma Calculus`
 `p.
+As a preliminary to analyses later in this 
+section, I will make a few comments which might 
+situate this discussion in the context of 
+topics covered elsewhere in this book.  Specifically, 
+I intend to motivate the discussion by appeal 
+to technologies related to industrial computing 
+and cyber-physical systems (`CPS;).
+`p`
+
+
+`p.
+One potential use-case for Virtual Machines is encapsulating 
+cyber-physical networks: we assume that `CPS; devices are 
+sensors and/or actuators managed remotely 
+by more-conventional computers.  In general, sensors measure 
+physical quantities (air quality in a room, say) whereas 
+actuators have tangible physical effects (optimizing air 
+quality by adjusting vents, say).  Neither kind of 
+device typically has extensive computational capabilities; 
+instead, data is routed from the devices to central 
+location which use software to process sensor data 
+and convey instructions to actuators.  These networks 
+can, in turn, cover multiple intermediate points 
+(consider `CPS; data warehoused in the cloud) but, 
+for exposition, we can focus on the essential end-points, 
+on one hand the devices themselves and on the other 
+software applications through which humans 
+monitor and, if desired, manipulate cyber-physical systems.  
+Focusing for discussion on sensors, the actual devices typically 
+do not perform calculations (they do not have the means 
+to execute computer code) but they `i.are` capable of 
+converting some physical quantity to digital 
+signals which computers proper can interpret.  
+Programmers developing `CPS; applications will rarely 
+interact with devices independently; instead, 
+the `q.physical` links with `CPS; networks`footnote.Which 
+of course can be physical only in an ethereal 
+sense, e.g., passing data via wireless services` will typically 
+be handled by low-level driver programs, which might 
+expose capabilities to access sensor readings through, 
+for instance, `C;-language functions.     
+`p`
+
+
+`p.
+Developers may employ Virtual Machines in the 
+`CPS; arena to streamline this process %-- instead 
+of programmers needing to write code which 
+interfaces with `C; drivers directly, 
+the low-level function calls can be managed 
+via virtual machines that interoperate 
+with higher-level applications in a language-agnostic 
+manner.  In this sense `CPS; `VM;s can be analogous 
+to database query languages, in their design and 
+rationales: just as query formats give 
+engineers the option of communicating with a database 
+from a diversity of application-environments, the 
+protocols for accessing `CPS; data could similarly 
+be encapsulated in `VM; operations.  Moreover, 
+as touched on above query engines can ideally 
+function either as standalone languages of their 
+own (processing query-code outside an application 
+context, e.g. on a command-line for debugging and 
+maintenance) or via query-factories programmable 
+from general-purpose languages; the situation is 
+comparable for `CPS;, and one could pursue the 
+same duality in how `CPS; network capabilities 
+are exposed (either through host languages or 
+special extra-application code).   
+`p`
+
+
+`p.
+If a `VM; is indeed devoted to specific Cyber-Physical 
+network (or group thereof) then a logical first step 
+when implementing the `VM; would be to articulate the 
+collection of procedures (through driver libraries, say) 
+to be encapsulated.  More likely, a more-generic 
+`VM; would be deployed in different contexts, each of 
+which (by targeting a specific group of `CPS; devices) 
+would work against particular groupings of driver code, 
+on a case-by-case basis.  The overall `VM; would thereby 
+introduce capabilities to interface with some 
+collection of kernel functions exposed by driver libraries, 
+with the actual integration to those procedures 
+finalized during deployment.  In any case, though, 
+the general pattern is that any particular deployment of a 
+(`CPS;-context) `VM; would be `q.seeded` with some 
+preliminary set of functions (i.e., built-in `VM; operations, 
+some perhaps added on in deployment).         
+`p`
+
+
+`p.
+At a minimum, in short, `VM;s should furnish functionality 
+imitating `q.kernel` driver or operating-system calls, 
+initializing input arguments with value passed from applications 
+and/or sending back to calling application procedures' results.  
+The `VM; accordingly bridges application-level and low-level 
+kernel functions, which involves not only encapsulating access 
+to low-level functionality but also negotiating the 
+discrepancy between relatively high-level and low-level 
+programming environments.  Most application programming 
+languages, for example, recognize constructs (e.g., 
+Object-Orientation, or functional programming via lambda 
+closures/call-continuations, plus exceptions, mutable references, 
+and so on) outside the scope of low-level code (even `C;).  Effective 
+`q.bridge` protocols allow applications to access `CPS; data 
+(as one category of low-level resources) within familiar 
+higher-level paradigms.  For example, programmers already 
+working in an Object-Oriented environment might reasonably 
+find it intuitive to apply object models to `CPS; elements, such 
+as individual devices.  Driver code most likely would not 
+recognize Object-Oriented calling conventions directly, so 
+a `VM; could be pressed into service to translate application-level 
+descriptions of procedure calls and their input parameters into 
+simpler binary packages which drivers can handle.   
+`p`
+
+
+`p.
+In this sense, a `VM; fitting these requirements would 
+simultaneously model `q.high level` calling conventions 
+and translate procedure-call requests between higher and 
+lower levels.  I make this point in the context of 
+`CPS;, but the idea would hold for many cases wherein 
+`VM;s encapsulate access to some integral set of 
+low-level functions (at least low-level relative to 
+applications that would benefit from the requisite 
+functionality).  Consider image-analysis: procedures 
+exposed via Computer Vision libraries are not directly 
+comparable to low-level driver code; they may themselves 
+be implemented in high-level languages like `Cpp;); nevertheless, 
+libraries such as `OpenCV; or `ITK; tend to demand a 
+rather complex scaffolding set up to enable analytic 
+procedures being called.  We could imagine circumstances 
+where wrapping complex image-processing pipelines in 
+a simpler `API; would be convenient for 
+code libraries managing image series.  For instance, 
+a database exposing image-processing operations through 
+query expressions would ideally support query-evaluation 
+covering Computer Vision capabilities 
+(going beyond obvious information one may want 
+to query from an image, such as dimensions and 
+color depth).
+`p`
+
+
+`p.
+Indeed, database queries, image-processing, and `CPS; network 
+administration each represent plausible 
+use-cases wherein `VM;s can serve as adapters 
+between application-style coding environments and 
+procedure-collections that are too specialized or low-level 
+to fit comfortably in application-development 
+norms.  These cases can overlap, of course; database 
+can track or warehouse `CPS; data such that queries monitoring 
+real-time device state would logically coexist with 
+queries against database content (presumably representing 
+temporally prior device info), or image databases can 
+support Computer Vision based queries.  The database-query 
+perspective points to an interesting heuristic 
+analogy, insofar as packaging procedure-calls from an 
+application environment to a lower-level context 
+resembles the task of packaging application-level 
+datatypes and updates into records and fields natively 
+recognized by a persistence engine.  Similar to how 
+live-memory data structures (objects, say, in 
+Object-Oriented environments where the relevant data 
+is interpreted in light of objects' polymorphic type, 
+which could be subclasses of their declared type) 
+are destructured for insertion into database sites, 
+high-level calling-conventions (again, Object-Orientation 
+provides useful examples insofar as `thisSlashSelf; 
+values are represented apart from other input parameters) 
+need to be restructured into the (generally simpler) 
+forms suitable for low-level functions (e.g., 
+moving `thisSlashSelf; to be an ordinary 
+parameter, which may require truncating 
+to base-class binary layouts, and some level of type-erasure).   
+`p`
+
+
+`p.
+Continuing this analogy, flexible database architectures 
+bridge application-level data types with persistent 
+data structures/records so that application code 
+can work with back-end values according 
+to the norms of application-context programming; 
+equivalently, `VM;s can wrap low-level 
+functions such that they fit the profile of 
+high-level procedures called according to 
+high-level conventions (with objects, exceptions, 
+and so forth).  A flexible `VM; would play 
+this bridge role in multiple contexts, perhaps 
+allowing native functions to be registered as 
+kernel operations and striving to be usable 
+from multiple host languages: that is, from one 
+`VM; we can envision encapsulating access 
+to a variety of procedure-collections 
+(examples I've cited here include functions 
+exposed `visavis; database queries, 
+image-processing, and `CPS; networks) and 
+routing descriptions of procedure-calls 
+from a variety of programming languages 
+(which might have object-oriented or 
+functional characteristics, or some combination).
+To the degree that such generality 
+is desired, `VM; should anticipate 
+integration with diverse application-level languages 
+preferring different calling-conventions and 
+procedural contracts. 
+`p`
+
+`p.
+One maxim for `VM; design, then, at least in 
+this sort of use-case context, is to 
+prioritize capabilities to model 
+and carry out procedure-calls described 
+through diverse calling-conventions, rather 
+than narrowing in on specific calling-conventions 
+which derive from a preferred programming 
+model (functional or Object-Oriented, say).  
+Object-Oriented conventions such as 
+method overrides/polymorphism and exceptions/exception-handling 
+might be natively expressed via the `VM;, but likewise 
+functional idioms such as lazy evaluation and overloading 
+based on type-state.  To clarify the last example:  
+procedures can potentially be given different implementations 
+by virtue of values' type-state at the moment of 
+call (essentially a more granular classification than 
+type-attribution itself), often mixing type-state with 
+value-destructuring.  A canonical example 
+would be procedures operating on list-style collections, 
+which in one overload would accept only `i.non-empty` 
+collections where the last (or first) element is passed 
+separately, alongside a structure representing 
+all other elements (this convention is ubiquitous 
+in recursive algorithms, since the `q.tail` can then 
+be passed to the same procedure recursively, 
+becoming destructured by the calling mechanism 
+into its own head-plus-tail pair; of course, procedures 
+implemented via this strategy also need an 
+overload taking an empty list, which serves as a 
+halting-point).  
+`p`
+
+`p.
+In short, an ambitious `VM; can ideally work with 
+a broad set of calling styles embraced by 
+diverse programming styles, e.g. object-methods, 
+exceptions, lazy evaluation, typestates, and 
+parameter-destructuring.  To this list 
+we might add dependent types and functional-reactive 
+idioms (e.g., so-called `q.signal/slot` conventions).  
+`p`
+
+
+`p.
+As might be obvious by this point, the kinds of `VM;s 
+I am envisioning bound to such requirements would 
+be relatively `q.high level`/, closer in spirit 
+to Interface (or Service) Description Languages than 
+low-level emulators of actual machine code.  This is consistent 
+with the spectrum of `VM; technology; while certainly 
+some `VM;s embrace the use-case of enabling 
+virtual `q.operating systems` or similar low-level 
+environments for portable code %-- where the 
+execution and runtime of `VM; instructions should 
+mimic machine-language steps %-- other flavors of 
+`VM;s are more concerned with engineering 
+language-neutral environments that interoperate 
+fluently with different kinds of programming front-ends.  
+The priority in such a case may still be cross-platform 
+flexibility, but the design goals emphasize 
+a desire for multiple origination-languages to 
+emit `VM; code (through factories if not text streams) 
+according to protocols which are in sync with 
+host-language conventions (`q.host` language in the 
+sense that `VM; capabilities can be embedded 
+via static or dynamic libraries linked against 
+software components, which in turn may 
+utilize such capabilities in different ways %-- via 
+scripts, queries, workflow descriptions, etc.). 
+`p`
+
+
+`p.
+Since not all `VM; actually aspire to multi-language 
+support to the open-ended degree implied here, 
+theories informing `VM; implementation do 
+not necessarily analyze data models or design 
+patterns targeted specifically at language 
+`q.agnosticity` (so to speak); a more common 
+scenario is that theoretical perspectives 
+emanate from coding paradigms which give 
+rise to distinct flavors of programming languages, 
+potentially at some level prosthelytizing for 
+favored paradigms rather than aiming for 
+broad generality (in the sense that `VM;s 
+`i.for functional languages`/, say, reflect a 
+general assumption that functional methodology 
+is in the general case a better coding style 
+than alternatives).  By contrast, I 
+am interested here in describing theoretical 
+`VM; models that remain nonjudgmental 
+as to which conventions are better in which 
+context (or to take the view that multiple 
+coding styles each have their own use-case 
+so should be supported as such).  A rigorous 
+`VM; `q.model` should have multiple 
+dimensions (addressing types and data-encoding, 
+for example), but of course an essential 
+concern is modeling procedure-calls and 
+calling-conventions, so I will sue 
+this topic as a starting-point for a 
+(relatively informal) system to 
+encapsulate `VM; details in a schematic fashion.     
+`p`
+
+`section.Hypergraph Models of Calling Conventions`
+`p.
+Theoretical (and applied) computer science often 
+approaches procedures from the viewpoint of mathematical 
+functions, essentially mapping that transform 
+inputs to outputs.  Codifying the principles of 
+`q.functionhood` in general forms the central project 
+of analyses that bridge math and computers 
+(e.g., lambda calaculus).  In terms of mathematical 
+`q.foundations`/, these various formulations 
+(including lambda calaculus and its derivatives 
+and, for instance, Combinatory Logic) entail 
+strategies for clarifying what are 
+sometimes called `q.applicative structures`/, 
+or generic patterns involving the `i.application` 
+of a function/procedure to one or more 
+arguments/parameters.  Since this is such a 
+basic phenomenon in the mathematical 
+realm, it is understandable that some 
+researchers in `q.philosophy` of mathematics 
+and its foundations would focus on applicative 
+structures (perhaps indirectly via, say, lambda 
+calculus) %-- even though mathematical 
+expressions are written down according to 
+a wide variety of conventions (consider formulae 
+for integration, for ratios, for polynomials, and so forth) 
+we can imaging a system which translates 
+mathematical terms to a more systematic logical 
+representation (which would presumably 
+resemble something like `lisp; code). 
+`p`
+
+
+`p.
+The concerns evoked by applicative structures are 
+not only orthographic, however, because there is 
+also a `i.semantic` dimension in the sense of 
+spaces of functional values qua semantic entities.  
+The problem of semantically characterizing 
+`i.a` function or procedure (e.g., as a calculational 
+process, or a %-- maybe time/context-depenent %-- 
+input-to-output mapping, or the like) us ibe 
+matter, but whatever our foundational semantic 
+theory in this sense it is natural to extend 
+it via functional composition (analogous to 
+how linguistic semantics involves the semantics 
+of nouns, and verbs, but more thoroughly also 
+the compositional principles of verbs together 
+with nounds yielding sentenecs/propositions).  
+The set of possible applicative structures 
+`q,generated` by some collection of functions 
+(or function-symbols) is analogous to the 
+set of discrete functional values that can be 
+defined by the combination of multiple functions 
+wherein the results of one function applied to 
+its arguments becomes in turn (one of the) 
+parameters of a different (or, recursively, the same) 
+function.  Systematically, an `q.applicative system` 
+would be a set of function-symbols alongside 
+`q.variable` symbols with a rule that applicative 
+`i.structures` include expressions of the form 
+`fxoneetc; where `xs; are variables, 
+and that for any applicative structure the modification 
+formed by replacing a variable-symbol with another 
+applicative structure is also an applicative structure.  
+Defined in terms of the close of such substitution operations. 
+applicative systems can be seen to follow a generative  
+pattern very similar to labeled trees %-- each 
+node is either a symbol-node or a branch with 
+its set of child-nodes %-- with the added detail 
+that labels are partitioned into two sets 
+(function and variable symbols, respectively) 
+such that left-most child nodes always have function-labels 
+and other non-branch nodes always have variable labels.  
+`p`
+
+
+`p.
+I'll make a couple of technical points about applicative 
+structures here, not so much because the mathematics 
+is particularly sophisticated or consequential but 
+so as to establish a baseline of comparison for 
+the graph-theoretic encoding of (generalizations of) 
+applicative structures I will discuss subsequently.
+
+`defin -> Applicative Systems ->> for any fixed 
+set of `i.function symbols` and `i.varaible symbols` 
+an `i.applicative structure` is any element of a 
+set which is the closure of the set of 
+primitive expressions (consisting of a function 
+symbol followed by a number of variable-symbols 
+which matches its arity, assuming we assign a 
+specific arity to each function, or else to any 
+number of variable-symbols) under substitution 
+operations wherein an applicative structure 
+is inserted in an enclosing structure taking the 
+place of a variable.  Applicative Systems 
+are then sets of function and variable 
+symbols (and possibly declartions of function-arity) 
+together the full set of possible applicative 
+structures generated on their basis.  For generality, 
+we can allow functions `f; to have dynamic range 
+arity (multiple integers `n; such that 
+`f; followed by `n; variables is a valid expression); 
+in this sense systems which do not recognize arity 
+limitations at all would implicitly allow arbitrary 
+range arity for all function symbols.`footnote.
+A `i.partial` applicative structure would be one 
+that belongs to an applicative system no subject to 
+arity restrictions but which is excluded when 
+arities are recognized, due to one or more function 
+symbols lacking a sufficient number of following 
+symbols or nested structures; partial applicative 
+structures in this sense can be semantically 
+interpreted as designating `q.meta-functions` which, 
+when the variables are replaced by fixed values, 
+reduce to actual functions whose parameters are 
+the missing symbols implied by insufficient arity 
+thresholds.  Of course, this discussion assumes 
+we also have a notion of `q.fixed values` being 
+assigned to functions as parameters).
+`footnote`  Note that the generative 
+rules allow for zero-arity functions, whose 
+semantics would be procedures that yield results 
+even without inputs (nested structures can be 
+wholly comprised of one single function symbol). ;;
+
+`anondefin.
+A given symbol may appear multiple times in an applicative 
+structure; the above definitions were formulated with the 
+idea that `q.the same` symbol in different positions 
+is, according to the generative rules, a different 
+symbol, but for clarity we can say that one 
+symbol can habe multiple `i.tokens` in a given 
+structure.  Each symbol-token has a 
+`i.nesting level` such that the nesting level of a 
+function-symbol matches that of variable-symbols 
+following it (that are not themselves part of a 
+further nested structure) and replacing a variable 
+with a nested strucuture forces the function symbol 
+at the left of the latter structure to have a 
+nesting level on greater than the replaced variable.  
+By the construction/generation process, there will always 
+be exactly one function-symbol with least nesting 
+level, which we can stipulate to be zero.  Symbol-tokens 
+also have `i.positional indices` defined  such that 
+function symbols are assigned index zero and variable-symbols 
+following them (incrementing across but skipping over nested structures) are 
+assigned successively greater index numbers.  Tokens are 
+uniquely identified by 
+a positional-index list whose length is 
+determined by (viz., one greater than) the token's 
+nesting-level, notating the tokens own positional-index 
+and also those that would be assigned to its 
+parent nodes (treating the structure as a tree) were 
+they tokens rather than nested structures).  Positional-index 
+lists induce an ordering on all tokens in an applicative 
+structure (comparing the first number in two respective 
+lists, then the second as a tie-breaker, and so forth; 
+akin to ordering leaf nodes on a tree where 
+left-ward and higher nodes are prior to those 
+below and/or to their right).  Applicative 
+strucures are `i.non-recursive` if each function-symbol 
+has only one token.  It is helpful to further 
+define non-`i.root`/-recursive structures as those 
+where the function-symbol whose token has 
+zero nestnig level appears only once.
+`anondefin`
+
+`anondefin.
+Applicative structures can be grouped into equivalence 
+classes wherein any structure in the class would 
+map onto a peer structure under a permutation of 
+the applicative system's variable symbol-set.  Since 
+we can give an ordernig to the variable-set, assume 
+each variable is assigned a number code, which 
+in turn allows us to define a `i.canonical presentation` 
+of an applicative structure by permuting its 
+variable-symbols so that tokens which are 
+prior (in the ordering based on positional indices 
+just described) are assigned symbols with lesser 
+codes, choosing each new symbol to be the one 
+with  lowest code value not yet used.  Each 
+applicative-structure equivalence-class is thereby 
+represented by one structure with 
+such canonical presentation, and we can restrict 
+attention to these structrures in particular.  
+Note that the generative rules for applicative 
+structures have to be separated into two 
+groups, because (in the general case) we 
+have to avoid unrelated symbols with the same 
+`q.label` colliding according to the generative 
+step whereby a nested structure is substituted 
+for a variable.  For a nested structure with its 
+own collection of variables, the structure may 
+need to be rewritten as an equivalent structure 
+(but with symbol-permutation) %-- not necessarily 
+(indeed not usually) one in canonical-presentation %-- 
+so that each nested symbol is different 
+from all symbols in the enclosing structure 
+(unless the symbol-representation is explicit, 
+i.e., the point is to model a function-application 
+where the same input value is used in multiple places). 
+ 
+`lemma-statement.For any fixed function-symbol and (ordered) variable-symbol 
+set there is exactly one (countably infinite) set of 
+finite applicative structures in canonical presentation 
+that can be generated from those symbols`
+
+`lemma-proof.
+I'll proceed by 
+`lemma-proof`
+
 
 `p`
 
 
 
 `p.
+There is a certain amount of mathematical bookkeeping 
+implicit in the above presentation, which might 
+obscure the fact that applicative structure are 
+very basic; they should indeed by seen as rudimentary 
+to the point of being rather uninteresting in themselves.  
+More involved systems however emerge by 
+relaxing certain conditions; for example, we 
+might consider allowing self-referntial applicative 
+structures that express infinite recusion.  
+The `q.De Bruijn` matrix form points to one 
+plausible avenue for modeling this process, because 
+negative matrix entries could be allowed 
+to `q.refer back` to prior rows, notating the 
+idea of instruction-sequences in a computing machine 
+looping back to prior instructions.  Other 
+classical developments (often phrased via 
+lambda calculus rather than applicative structures 
+`i.per se`/) involves encoding natural numbers 
+via repeated iterations of a single `q.successor` 
+function (one being the successor to zero, etc.), 
+such that %-- again appealing to matrix-notion 
+%-- there is a sequence of matrices encoding 
+the sequence of natural numbers.  Any application 
+of functions `i.to` natural numbers can then 
+be encoded alternately as a `i.substitution` 
+of these special matrices for the relevant variables.
+`p`
+
+
+`p.
+Additional applications of applicative-structure 
+theory turn on the notion that 
+applicative structures model function-composition 
+semantics.  To the degree that we can 
+(with suitable semantics) treat functions 
+as `i.values` %-- as points in an ambient 
+function `q.space` %-- then function can be 
+composed in various ways to generate new 
+such values.  In the simplest case (functions 
+of arity one), at least without recursion, 
+composition can be 
+analogous to an algebraic operation %-- 
+from `f; and `g; get `fofg; (and `goff;, which 
+is generally different).  Once one or more 
+function has arity two or greater, however, we 
+have a set of multiple composition-options 
+%-- `fxgx;, `fxgy;, `fgxy;, `fgxgx;, `fgxgy;, 
+for example, are all potential compositions 
+of a two-arity `f; with unary `g;, listing 
+only non-root-recursive structures where `f; 
+takes priority over `g; (the full list 
+as such is larger, and, if we allow unrestricted 
+recursion, infinite).  We can therefore 
+describe each form of composition via 
+applicative structures, yielding a more 
+complete description of function values' semantic 
+terrain than is designated via individual 
+function-symbols themselves (this discussion 
+leaves unaddressed the question of 
+whether there are function values that 
+can `i.not` be encoded via applicative structures).
+`p`
+
+
+`p.
+Depending on one's perspective, applicative structures 
+can be seen as either essentially semantic or 
+syntactic phenomena.  Syntactically, we can 
+treat these structures as characterizing 
+valid strings in a language comprised of 
+function and variable symbols, and one 
+single grouping construct (via nested 
+structures, which syntactically take 
+the form of sub-terms that can be grouped 
+into quasi-atomic units, substituting 
+for the actual atoms, viz., variables).  Certain 
+syntactic formations, however, also seem to have 
+semantic interpretations: as already observed, 
+the `fofg; (and `goff;) compositions correspond 
+to what are implicitly semantic relations, that 
+is, the composition of two functions to yield a 
+new function.  Moreover, mappings 
+`i.between` applicative structures sometimes 
+appear to express semantic relations: `goff; is 
+the compositional `i.inverse to` `fofg;, and 
+the inverse of one (say, binary) function `fxy; 
+can be notated as `fyx; %-- in short, we 
+can extend applicative systems to treat certain non-canonical 
+structures as notations for variation forms of 
+functions derived from their `q.base` forms by 
+substituting which argument is placed in which 
+position, the simplest example being `fxytofyx; 
+(note the similar point mentioned earlier, 
+that partial applicative structures can be 
+read as designating `q.meta`/-functions).
+The fact that some applicative structures 
+thereby have semantic interpretations 
+%-- even if we consider applicative 
+systems as essential syntactic constructions 
+(enumerations of valid expressions in a 
+certain simple class of formal languages) 
+%-- has led some researchers to 
+consider applicative strucures 
+(particularly in the guise of Combinatory 
+Logic) within fields as diverse as 
+linguistics and psychology.  Combinatory 
+Logic essentially uses a set of combinator 
+symbols (external to both function and variable 
+symbols) and string-reduction rules 
+to enumerate all applicative structures 
+generated by a system's intrinsic symbol-lists: 
+for any structure formed from symbnols 
+`fetcxetc; (`f;s and `x;s being functions 
+and variables respectively) there is a 
+combinator `Ccomb; such that the string 
+`Cfetcxetc; reduces to the relevant 
+structure (where `Ccomb; can itself be a string 
+other other, more primitive combinators).  
+In this context combinators play an 
+enumerative role analogous 
+to (what I am calling) De Bruijn 
+matrices (although I personally find   
+combinators' reduction rules feel  
+more ad-hoc than the state-machine-like 
+interpretation one can give to a  
+De Bruijn matrix; I'll leave the details 
+to a footnote).`footnote.
+An intuitive way to picture Combinatory 
+Logic is as follows: disregard the interpretation 
+of function/variable symbols as functions and 
+arguments, respective, and consider merely 
+symbol-strings as expressions in a formal 
+language.  Extend this language 
+with combinator-symbols that are associated 
+with reduction rules that impose a 
+partial order on the set of permissible 
+strings (such strings are differentiated 
+by a grouping operation, potentially nested, 
+as well as symbol-lists).  A canonical 
+exmple is the `Scomb; combinator such 
+that `Sfgx; `reduces; `fxparengx; (where `reduces; notates 
+reducing to) or the `Bcomb; that appears to connote 
+composition (seen as semantic): `Bfgx; `reduces; 
+`fparengx; (or the famous `q.Y` combinator, 
+which can be described by the rule `YgreducgYg;).  
+Noet that `q.reduction` here, however, at least 
+in the mathematical presentation of Combinatory 
+Logic, does not have an explicit semantic 
+interpretation, but merely notes that 
+some strings come before others in the 
+`reduces; partial order; moreover, 
+strings in the language contain 
+free-form admixtures of combinators, functions, and 
+variables, which have no apparent semantic 
+interpretation (the general premise being 
+that only `q.maximally` reduced strings should 
+be approached semantically).  I find these 
+details to render Combinatory Logic proper 
+somewhat counter-intuitive, at least on 
+its own terms (to be fair, though, 
+although some papers systematize Combinatory Logic 
+in isolation, it is more common to adopt 
+combinators as merely notational conveniences 
+for certain constructions in lambda calculus).      
+`footnote`  The linguistics-based interest 
+in Combinators evidently reflects the 
+idea that certain applicative structures 
+(and intra-structure morphisms) codify 
+compositions or modifications which express 
+semantic operators, and, in general, 
+certain applicative structure embody syntactic 
+constructions that are sufficiently common  
+or entrenched as to emerge as semantic 
+conventions, not just syntactic forms 
+(the underlying principle, articulated 
+for example in Construction Grammar, being that semantic 
+constructions originate at least in some 
+cases from recurring syntactic formations, 
+such that `i.syntax` `i.per se` %-- novel 
+phrases, say, which rely on grammar rather 
+than idiomatics to signal the intended 
+composition %-- represent forms that 
+are `i.not` sufficiently entrenched as to 
+have `q.automatic` meanings (like those 
+of single words, say) but instead need to be 
+parsed.  In this context Combinators 
+are at least intuitive emblems suggesting 
+how syntactic entrenchment yields semantic 
+conventions.  More generally, we can 
+also observe in the linguistic context 
+that the overall space of applicative structures 
+(over all words in a sentence, say) 
+can be partitioned into subspaces (semantic 
+entrenchment being one example, but 
+we can also analyze different applicative 
+structures as having more or less linguistic 
+coherence, based on criteria such as 
+verb-to-noun relations).  
+`p`
+
+
+`p.
+Apart from `i.syntactic` interpretations, 
+Applicative Structure can also be seen from 
+semantic angles in more narrowly 
+mathematical contexts, for example when 
+we consider properties `i.of` functions, 
+such as those derived from algorithm-theory.  
+For example, if `f; denotes a function which 
+can be evaluated through a calculation implemented 
+with guaranteed termination, the composing 
+`f; with another function with the same 
+property yields (or describes) a different 
+function which also by guarantee terminates 
+(simply allow `g;, say, to terminate, 
+then feed its value to `f;).  More generally, 
+we can take the applicative system 
+over a set of functions sharing properties 
+such as guaranteed-termination to be a 
+larger set with the same property.  In this 
+sense we can regard applicative structures 
+(perhaps via lambda calculus) as part of 
+the backbone for analyzing different kinds 
+of functionn-spaces according to algorithm-theoretic 
+properties or profiles (e.g., computability, 
+termination, different complexity classes, and the like).  
+These potential applications, alongside 
+those mentioned above in the context 
+of recursive function theory and infinite 
+recursion, as well as encoding number theory/arithmetic, 
+constitute some of the extensions 
+to underlying applicative-structure theory which 
+have some mathematical significance.   
+`p`
+
+
+`p.
+My concerns here are less mathematical, 
+so I will extend applicative 
+constructions in a different direction, 
+grounded in graph theory.  I will 
+suggest that applicative structures 
+have natural correlates among 
+(directed) graphs, and that this 
+setting is in some ways more intuitive 
+and less cumbersome than the 
+above presentation appealing to 
+notions like `q.substitution` and 
+function/variable `q.symbols`/.
+`p`
+
+
+`p.
 
 `p`
+
+
 
