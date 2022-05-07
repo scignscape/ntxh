@@ -320,7 +320,7 @@ this topic as a starting-point for a
 encapsulate `VM; details in a schematic fashion.     
 `p`
 
-`section.Hypergraph Models of Calling Conventions`
+`subsection.Applicative Structures and Mathematical Foundations`
 `p.
 Theoretical (and applied) computer science often 
 approaches procedures from the viewpoint of mathematical 
@@ -370,7 +370,7 @@ of nouns, and verbs, but more thoroughly also
 the compositional principles of verbs together 
 with nounds yielding sentenecs/propositions).  
 The set of possible applicative structures 
-`q,generated` by some collection of functions 
+`q.generated` by some collection of functions 
 (or function-symbols) is analogous to the 
 set of discrete functional values that can be 
 defined by the combination of multiple functions 
@@ -515,25 +515,229 @@ have to avoid unrelated symbols with the same
 step whereby a nested structure is substituted 
 for a variable.  For a nested structure with its 
 own collection of variables, the structure may 
-need to be rewritten as an equivalent structure 
+need to be rewritten (cf. lambda-calculus alpha-conversion) 
+as an equivalent structure 
 (but with symbol-permutation) %-- not necessarily 
 (indeed not usually) one in canonical-presentation %-- 
 so that each nested symbol is different 
 from all symbols in the enclosing structure 
 (unless the symbol-representation is explicit, 
 i.e., the point is to model a function-application 
-where the same input value is used in multiple places). 
- 
-`lemma-statement.For any fixed function-symbol and (ordered) variable-symbol 
-set there is exactly one (countably infinite) set of 
-finite applicative structures in canonical presentation 
-that can be generated from those symbols`
+where the same input value is copied in multiple places).
+`p`
+
+`p.
+Representing function-arguments via `q.variable` symbols 
+(which are understood to be substituted with values from 
+some domain in the context of `i.calling` functions) 
+is consistent with lambda calaculus, and with the 
+idea that applicative structures describe valid strings 
+in a language codifying notions of function-application.  
+However, it is possible to develop alternative representations 
+of the same structures, such as De Bruijn indices 
+(due to Nicolas de Bruijn) which in effect model argument-places 
+by numeric indices rather than symbols.  I propose 
+to use a similar convention based on the idea of 
+forming symbols which have numeric values but also 
+`q.colors`/.  Specifically, consider, first, characterizations 
+of the set of functions which may be identified 
+on the basis of one function-symbol %-- say, `fRed;, 
+which assume has a fixed arity `arity;, say, three.  
+Then `fRed; itself could be notated `fOneTwoThree; 
+(using the color red to signify function-symbols 
+and blue numbers for variable-symbols).  Given 
+`f; we implicitly also have a family of related functions 
+which are identical to `f; but operate on different domains, 
+taking argument-lists longer than `f;s arity but 
+ignoring the extra values: I propose denoting these 
+via `fOneTwoThreeGFour;, `fOneTwoThreeGFourFive;, etc. 
+using `i.gray`/-color numbers for discarded 
+extra elements.  Conversely, we can also form 
+functions with arity `i.less` than `f;s by 
+repeating numbers for the arguments; e.g., 
+`fOneTwoOne; or `fOneTwoTwo; where note that 
+numbers occurring multiple times are shaded in 
+light blue.  I'll refer to this as 
+`q.red-blue-gray` notation.  Schematically, 
+one can treat this as equivalent to 
+notation with symbols, each colored number 
+being just a symbol, except that the 
+colors allow grouping into ordered sets which 
+may be subject to further constraints.  
+Likewise, the function-symbols themselves 
+can be replaced by numbers encoding 
+any ordering of the list of available 
+function-symbols which form the core of 
+our applicative system.
+`p`
+
+
+`p.
+Suppose we start with any function-symbol list 
+%-- for instance, as earlier in this chapter 
+I alluded to collections of kernel 
+functions which `q.seed` a Virtual Machine 
+wrapping access to `CPS; networks.  
+Intuitively, it would seem to be natural 
+property of any computational or mathematical 
+(or even linguistic environment 
+for which a notation of `f; itself would 
+be meaningful %-- e.g., denotes a 
+possible computation, or a mathematical 
+function which yields a value when parameters 
+are fully specified %-- then so too 
+would be variants of `f; with greater 
+or lesser arity as notated (here) through 
+red-blue-gray strings.  In other words, 
+if we take some semantic predictate %-- say, 
+`i.describes a computation` %-- then we may 
+want to consider the full set of functions 
+which meet this criterion that can be 
+generated from some initial `q.seed` collection; 
+given `f; as a seed, notate the set of 
+functions (describable solely via `f;) 
+which describe a computation, for instance 
+(or replace `q.describe a computation` with 
+some other predicate).  We seem to have:
+
+`lemma-statement.
+Assuming `f; designates a function 
+with arity `arity;, there is a 
+unique list of red-blue-gray 
+strings which each describes 
+a function, mutually structurally 
+distinct, enumerating all functions 
+that can be described on the basis 
+of `f; alone (including `f; itself). 
+(Note that we are considering functions 
+generated only by extending or contracting 
+`f;s arity; a different 
+enumeration would involve recursive 
+descriptions where a call involving 
+`f; yields a value which is input 
+to another call involving `f;.) 
+`lemma-statement`
 
 `lemma-proof.
-I'll proceed by 
+Consider strings with exactly `arity; 
+(not necessarily distinct) variable-symbols.  
+Without generality, we can assume that 
+symbols (blue-colored numbers) will 
+lesser numeric value appear to the 
+left in their first token.  Let 
+`arityprimelessthanarity; be 
+the number of `i.distinct` variable-symbols 
+in a given string; i.e., the arity 
+of the function being described as a 
+variant of `f;, not `f; itself.  
+Then any permutation of `arity;-length 
+`arityprime; numbers (in the range 
+`onearityprime;) %-- restricted to cases 
+where the first occurance of smaller numbers 
+is always before the first occurance of 
+any larger number %-- describes a 
+structurally unique variant of `f;.  
+Analogously (distinguishing blue and 
+light-blue) the darker-blue-only 
+substrings are increasing by 
+starting at one, and light-blue 
+symbols can be freely interspersed 
+except that any light-blue `nlightblue; 
+has to follow the corresponding darker `ndarkblue;. 
+For each of these strings, consider the 
+strings themselves and then modifications 
+which add the gray-color 
+numbers starting with`arityprimeplusone;, and 
+so forth, where the gray-colored numbers 
+can only occur in an arithmetically (-by-one) 
+increasingly list.  Each string generated in 
+this fashion represents a structurally 
+distinct variation on `f;, suggesting 
+that the full set of strings generated 
+accordingly embodies all `f; variations, 
+at least those which could be notated 
+by a language that encodes function-calls 
+through symbols representing input parameters.   
 `lemma-proof`
 
+`anondefin.
+I will call a red-blue-gray string 
+`q.lambda feasible` if it satisfies the 
+restrictions employed above `visavis; 
+darker-blue and gray numbers.   
+`anondefin`
+`p`
 
+`p.
+Generalizing this analysis to something like lambda 
+calculus requires notating function-composition, 
+by substituting nested applicative 
+structures for variable-symbols.  For this 
+context I propose extending `q.red-blue-gray` 
+notation to include `q.black` numbers that stand in for 
+nested structures.  Call a `q.red-blue-gray-black matrix` 
+a set of rows formed from red, blue, gray, or black-colored 
+numbers (unline normal mathematical matrices the rows 
+need not have equal size, though if desired we 
+can always introduce a `q.dummy` symbol, e.g. a black 
+zero, to pad shorter rows on the left, yielding 
+something that looks like a normal matrix; likewise, 
+colored numbers can always be mapped on to disjoint 
+integer sub-sets, so we can if desired 
+treat red-blue-gray-black matrices as isomorphic 
+to normal integer-matrices). 
+
+`lemma-statement.
+For any fixed function-symbol and (ordered) variable-symbol 
+set there is exactly one (countably infinite) set of 
+finite applicative structures in canonical presentation 
+that can be generated from those symbols.
+`lemma-statement`
+
+`lemma-proof.
+I'll proceed by representing each applicative structure 
+via a red-blue-gray-black matrix.  The simplest applicative 
+structures have no nesting, just a function-symbol 
+followed by a list of variable-symbols.  
+Since we are attending strictly to canonical presentation, 
+we can permute the latter list so that 
+lower-numbered symbols appear to the left, and distinct 
+symbol-numbers are allocated incrementally.  
+Symbol-numbers in this context function similarly 
+to `q.De Bruijn indices` in the lambda calculus 
+(when formalized through de Bruijn's nonstandard notation).`footnote.
+See, e.g., `cite<x>;
+`footnote`  Lemma l1 argued that we can describe all 
+variations on an `f; `i.without` composition as the 
+set of `q.lamba-feasible` red-blue-gray strings with 
+`f; (which can be denoted by a red number as well as a 
+symbol) as the sole function notated.  According 
+to the construction rules generating applicative 
+structures, we then have to consider 
+substituting nested structures for variable 
+symbols.  Using red-blue-gray-black matrices, 
+encode such nesting by inserting a black-colored 
+number instead of a blue one, selecting 
+black numbers according to the rule 
+that lower numbers occur before (to the left 
+of and above) higher ones, and that the 
+black-number values map the index of subsequent 
+rows in the matrix; each row, then, is its 
+own red-blue-gray-black string.  Re-encode 
+blue numbers in nested structures by adding 
+to their value the smallest offset possible 
+without conflicting with blue numbers in earlier rows.  Call 
+red-blue-gray-black matrices subject to 
+these restrictions (on the black numbers 
+as well as lamdba-fasible restrictions for each row) 
+`q.lambda-feasible` matrices.  Based on their 
+construction, I claim the set of such 
+feasible matrices is isomorphic to the 
+set of applicative structures, so that 
+the lambda-feasible red-blue-gray-black matrices 
+offer a systematic enumeration of all 
+applicative structures. 
+`lemma-proof`
 `p`
 
 
@@ -774,7 +978,6 @@ to underlying applicative-structure theory which
 have some mathematical significance.   
 `p`
 
-
 `p.
 My concerns here are less mathematical, 
 so I will extend applicative 
@@ -789,6 +992,537 @@ above presentation appealing to
 notions like `q.substitution` and 
 function/variable `q.symbols`/.
 `p`
+
+`p.
+Outside of mathematics proper, there is still 
+some value in enumerating the full collection 
+of applicative structures (generated by a preliminary 
+function-list).  If we treat these structures as 
+syntactic phenomena, then intuitively a plausible 
+`i.semantics` for notions of function-application 
+would consider formally distinct applicative 
+structures as semantically distinct entities.  
+The mechanisms for enumerating distinct 
+structures may be less important than the 
+mere fact of having a well-defined algorithm for 
+producing and screening for all valid constructions.  
+I use (what I call) red-blue-gray-black matrices 
+to provide these criteria: intuitively, a reasonable 
+semantics for applicative structures would 
+recognize every formation described by a distinct 
+such matrix as a semantically distinct, and recognize 
+the set of lambda-feasible red-blue-gray-black matrices as a 
+complete listing of all valid strings in a language 
+that describes functions (for some meaning of `q.function`/) 
+derived from kernel `q.seed` functions by arity-expanion (via 
+unused arguments), projection (arite-reduction via 
+reusing parameters), and composition.  Later in the 
+section I will discuss more specitic semantics, 
+but the enumeration through red-blue-gray-black matrices 
+yields an initial picture of the space 
+over which such a semantics should quantify.  
+`p`
+
+`subsection.Hypergraph Models of Calling Conventions`
+`p.
+The definition of function-application modeled via 
+applicative structures (and similarly the lambda 
+calculus) should be deemed insufficiently 
+expressive for analyses related to modern programming 
+languages.  To be sure, in the above discussion 
+I was evasive about function's `q.semantics`/, 
+such that an imcomplete account of function 
+`q.application` `i.per se` is arguably warranted 
+by generality.  When turning to programming 
+languages in particular, however, we have more 
+detailed semantic notions to work with; for 
+instance, `i.functions` can be considered as 
+computational `i.processes` which follow 
+so `i,procedure` so as to (in general) derive 
+from output in the presence of given inputs.  
+Such an overview is still mostly intuitive 
+and informal, but it begins concretizing 
+the notion of `q.function` in `i.procedures` 
+which. presumably, in the general case 
+execute series of smaller steps in sequence 
+(contrast, say, to 
+regarding functions set-theoretically 
+as mathematical relations between inputs 
+and outputs, each function being a subset of 
+the total space of mappings conceivable 
+between its domain and codomain).  
+`p`
+
+
+`p.
+Given the functions-as-procedures paradigm, a first 
+step is to broaden the notion of applicative 
+structure appropriately to accommodate how 
+programming languages (though which precedures 
+are implemented) recognize multiiple 
+`i.forms` of inputs and outputs (objects vs. 
+ordinary parameters, say, or thrown exceptions 
+as opposed to ordinary return values).  To designate 
+these variations in forms of inputs/outputs, 
+I will describe procedures parameters as being 
+grouped into `q.channels`/, which can be interpreted 
+as gathering a node's adjacency set into 
+(potentially) two or more partitions.  I will 
+introduce some nonstandard terminology, 
+which is hopefully justified by the 
+Virtual Machine model which `q.drops out` of 
+the theory I'm sketching here, as a practical 
+use-case.  The central underlying notion 
+is to designate certain graphs as `q.syntagmatic` 
+insofar as they model procedures call with 
+(in general) multiple parameters grouped 
+into multiple `q.channels` (an explanation for the 
+choice of the terminology `i.syntagm` and `i.syntagmatic`/, 
+usually encountered in linguistics, is 
+offerred in Chapter 6 of `cite<CovidCancerCardiac>;).   
+
+`anondefin.
+A `i.channelized in-neighborhood` (we can 
+drop the `q.in-` when it is clear that out-neighborhoods 
+are no relevant) of a directed 
+graph is the in-neighborhood of one vertex `v; where 
+the edges incident to `v; are ordered and grouped into (typically) 
+one or more `i.channels`/.  A `q.channel` in this context 
+can be considered most generally any collection of edges 
+(focusing on the edges themselves, not their incident 
+nodes; in the case of labeled graphs channels 
+would then be, in effect, sets of label-tokens) but 
+define a `i.syntagmatic channel` as a channel all of 
+whose directed edges share the same target node; 
+by default `i.channel` and `i.syntagmatic channel` 
+can be used interchangeably.  The central 
+vertex `v; can be labeled with a string taken 
+from a prior collection of names (intuitively, 
+name of procedures insofar as graphs 
+diagram procedure-calls).  Channels 
+may also have `q.descriptive` labeles (which serve 
+to associate channels with channel `q.kinds`/).
+`anondefin`
+
+`anondefin.
+A `i.channel system` 
+on a directed graph is a set of criteria constraining 
+the legal channelized neighborhoods around any vertex; 
+example restrictions would be stipluations 
+that vertices cannot have multiple channels 
+with the same kind, or (in some context) 
+restricted to specific possible channel-kinds, 
+or that channels need some fixed number 
+or range of edges (e.g., a channel embodying 
+procedural `i.outputs` may be restricted to 
+have at most one edge).  More detailed 
+restrictions can apply to multiple 
+channels in interaction: consider modeling 
+the alternative between normal procedure `i.outputs` 
+and `i.exceptions`/: throwing an exception 
+precludes returning from a procedure normally, 
+and vice-versa.  In terms of channels this 
+means that a non-empty channel represeting 
+(normal) outputs precludes a non-empty 
+channel representing exceptions, and vice-versa 
+(more precisely, as clarified below, the two 
+channels cannot simultaneously have 
+edges out-incident to nodes with `i.non-void state`/).
+`anondefin`
+
+`anondefin.
+A `q.lamdba-restricted` channel system is one 
+specific system which it is convenient 
+to name ahead of time, intended to 
+mimic a minimal lambda calculus.  See the following lemma.
+`anondefin`
+`p`
+
+`p.
+Instead of an open-ended notion of `q.applicative 
+strucutures` we can speak of applicative 
+systems `i.constructed relative to` channel systems.  
+This more general sense of applicative 
+structures builds up incrementally from 
+channelized neighborhoods conformant to the 
+relevant channel system.  By way of 
+illustration, consider a graph-theoretic 
+encoding of `q.classical` applicative 
+structures (the form embodied in lambda calculus) 
+as defined earlier.  
+
+`lemma-statement.
+`q.Classical` applicative structures can 
+be modeled via channel systems with the 
+following characteristics: there are two 
+channel kinds %-- inputs and outputs %-- 
+and output channels must have exactly one edge.  
+Call channel systems subject to 
+these limitations `q.lambda-restricted` as 
+anticipated above.
+`lemma-statement`
+
+
+`lemma-proof.
+Proceeding by induction on the generative rules 
+for (the kind of) applicative structures 
+defined above.  The simplest case is 
+one function-symbol following by some number 
+of variable-symbols.  Express this via 
+a neighborhood with one `q.procedure` node 
+(standing for a procedure to be called) and a 
+collection of `q.argument-nodes` with edges 
+pointing in to the procedure-node (all these 
+edges grouped into one channel).  Next, we 
+expand outward to encode nesting (substituting 
+structures for single variables).  Consider 
+two channelized neighborhoods `None; and `Ntwo; restricted 
+to the channel system described in the lemma 
+statement (inputs plus exactly one output).  
+We can form a connection from `Ntwo; to 
+`None; by inserting an edge between 
+the vertex in `Ntwo; which is adjacent 
+(in the outgoing sense) to the single 
+output-channel edge in `Ntwo; and 
+one of the input-channel edges in `None;.  
+That is, the out-adjecent vertex in `Ntwo; 
+will now have two out-edges, one targeting 
+the function node in `Ntwo; and one 
+targeting an argument node in `None;.  
+Introducing these connecting edges 
+is structurally analogous to `q.substituting` 
+nested structures for variables.  
+I'll clarify that claim with a further definition.   
+`lemma-proof`
+
+`anondefin.
+The `i.syntagmatic neighborhood-set` of a 
+vertex is an expansion of channelized in-neighborhoods 
+by connecting a different neighborhood 
+to an initial neighborhood via an edge between 
+a `q.peripheral` node in each neighborhood 
+(i.e., excluding the vertex in-adjacent to 
+other nodes in the neighborhood).  Because 
+each channelized neigborhood can have its own syntagmatic neighborhood-set 
+these structures can model nesting.  Stipulate 
+that any syntagmatic neighborhood-set proper has exactly 
+one channelized neighborhood which does `i.not` have a 
+connection to another neighborhood; i.e., all of its 
+vertices have at most one out-edge.  Call the central 
+node of this neighborhood central for the neighborhood-set 
+overall, and stipulate that syntagmatic neighborhood-sets 
+must be `i.connected` in the sense that the central 
+node of each component channelized neighborhood must 
+be connected to the central node (via paths 
+allowing either in- or out-adjacency). 
+`anondefin`
+
+`anondefin.
+An `i.input ring` around a syntagmatic neighborhood-set 
+is a collection of labeled nodes (each with distinct 
+labels) that are not otherwise parts of the construction.  
+Consider the ring nodes to be connected with (non-procedural) 
+nodes via a `q.supplication` edge (intuitively, to 
+represent the idea that the node is associated with a 
+value based on its supplier-node's label); two nodes 
+adjacent to the same ring node via such edges 
+have `q.shared supplication`/.
+`anondefin`
+
+`lemma-statement.
+Syntagmatic neighborhood-sets within a 
+channel-system restricted to output/input kinds 
+(and max-one output channels) can be unambiguously 
+encoded via matrices equivalent to `q.De Bruijn` 
+matrices represented earlier for applicative 
+structures in canonical presentation. 
+`lemma-statement`
+
+
+`lemma-proof.
+Label procedure-nodes (i.e., center-nodes) with 
+numbers based on their string labels (assigning 
+like numbers to like strings).  
+Edges in channelized neighborhoods 
+are ordered, so form matrix rows by notating the 
+procedure-number followed by numbers assigned 
+to argument-nodes; if an argument-node 
+shares supplication with a different node already 
+numerically labeled, adopt that number, otherwise 
+adopt the least available numeric label.  This 
+applies only to argument-nodes which are not 
+connected to other nodes across syntagmatic 
+neighborhood-set connections.  In the latter 
+case, label the `q.nested` channelized neighborhood 
+with numbers (starting at one for the central node 
+overall and incrementing as needed) and, 
+for argument-nodes connected to other neighborhoods, 
+insert a negative integer whose absolute 
+value is the external neighborhood's index number.  
+Create a matrix row for each channelized 
+neighborhood, in order of their index numbers.  
+The resulting matrix (zero-padding on the left as 
+needed) will structurally mimic `q.De Bruijn` 
+matrices in the context of applicative 
+structures outlined above.
+`lemma-proof`
+
+`theorem-statement.
+Applicative structures as presented earlier and syntagmatic 
+neighborhood-sets within a lambda-restricted channel 
+system are isomorphic to the same set of lambda-feasible 
+De Bruijn matrices, assuming they share the same 
+set of function-symbols/procedure-labels.  
+`theorem-statement`
+
+`theorem-proof.
+Lemmas () and () detail the construction of 
+De Bruijn matrices from applicative structures 
+and syntagmatic neighborhood-sets restrictively.  
+I claim that comparing the two constructions 
+documents that each step in the construction 
+would modify the resulting matrices in 
+equivalent ways, and so the set of 
+matrices generated from applicative structures 
+will be identical to that generated from 
+syntagmatic neighborhood-sets %-- both are 
+precisely the lambda-feasible matrices 
+according to the earlier definition of 
+lambda-feasibility which precludes infinite 
+recursion.  
+`theorem-proof`
+
+In other words, lambda-restricted syntagmatic 
+neighborhood-sets are a graph-theoretic encoding 
+of applicative structures in the classical 
+lambda-calculus sense.
+`p`
+
+
+`p.
+I have formally reviewed `q.classical` applicative structures, 
+however, primarily to demonstrate that 
+within the context of channel systems these 
+structures represent only one (relatively restricted) 
+model of function/procedure-application, characterized 
+by a simplified (input/output) channel semantics 
+(plus at most one output per function).  The constructions 
+for channelized neighborhoods and syntagmatic neighborhood-sets 
+can be naturally extended to more expressive channel systems, 
+yielding (so I claim) grpah representations which are 
+more consistent with actual programming languages 
+(whereas lambda calculus models a kind of abstract 
+programming language for purposes of mathematical 
+treatment).    
+`p`
+
+
+`p.
+There are at least two significant extensions which can be 
+made when transitioning from `q.lambda-restricted` channel 
+systems to ones that are more free-form: first, 
+channels can have multiple kinds (beyond just 
+input and output) and, second, it is possible 
+for the output to one procedure to be a 
+`i.function value` which in turn is applied to 
+other arguments.  The latter scenario implies 
+that an output node (in one neighborhood) 
+can be linked (via a directed edge) to 
+the `i.central` node of a different neighborhood, 
+not just to one of its argument nodes 
+(in this case the central node would not be 
+labeled with a string denoting a function-name, 
+but rather would erceive a function-value 
+from that output edge).   
+
+`defin -> Syntagmatic Graphs ->> Consider syntagmatic 
+neighborhood-sets as above, with the following 
+generalizations: each component syntagmatic neighborhood-set 
+may have channels of multiple kinds (though we can 
+maintain the stipulation that each neighborhood has at 
+most one channel of each kind), and the central/procedural 
+node of a neighborhood may have an incoming edge that 
+passes a function value assigned to that node.  
+This latter possibility can be accommodated by defining a 
+special `q.function value` channel kind which can be 
+occupied by at most one edge; the non-central node 
+incident to that edge can be considered a special 
+form of argument node, one which has an incoming 
+edge from another neighborhood (representing a 
+passed function-value), but instead of this 
+argument node being an `i.input` parameter to 
+the central-node's procedure, it is a function 
+value representing the actual procedure which 
+that node iconifies.  This formation would thereby 
+model situations where nodes encapsulate numerous 
+possible procedures and the actual procedure 
+designated is dynamicall calculated (presumably 
+just prior to the function-call which is 
+notated via the syntagmatic graph). ;;
+`p`
+
+
+`subsection.Semantic Interpretation of Syntagmatic Graphs`
+`p.
+Intuitively, each syntagmatic graph describes a structure connecting 
+one or more procedure-calls, interconnected by parameter 
+passing %-- outputs from one procedure become inputs to another.  
+Working in a more flexible `q.channel system`/, however, 
+the connections between such calls may have more 
+subtle relationships than output-to-input chaining.  
+For example, multiple nodes in a syntagmatic 
+graph may represent the same `q.variable` which in turn 
+might be modified by one procedure, so an input given a 
+new value by a procedure and then passed to another 
+procedure is a form of inter-procedure precedence %-- the 
+effects of the first are consequential to the second %-- 
+even if the two are not linked by an explicit 
+output-to-input handoff.  There are the kinds 
+of scenarios that a procedure-call semantics 
+reflection actual programming languages (as opposed 
+more strictly mathematical function theories) should adress.
+`p`
+
+
+`p.
+Assuming we remain within the context of applicative structures 
+proper, the point of these formations is to represent 
+the idea of functions (in some sense) which take input 
+values.  Notating this process via variable-symbols 
+allows function composition (and arity-reducing projections) 
+to be described; thus we have `q.substitution`/, 
+replacing variable-symbols with concrete values.  When 
+all free variables in an expression describing 
+(potentially nested) function-applications are 
+thus substituted, we have sufficient information to 
+evaluate the function, or %-- in the sense of 
+lambda-calculus `q.beta` reduction %-- reduce 
+(or `q.collapse`/) the 
+aggregate expression to a single resulting value.  
+This is the central dynamic figures by applicative 
+structures in their simpler, classical sense 
+%-- input parameters yield applications which 
+`q.reduce` the inputs to a single output value, 
+that may in turn be input to other functions.  
+Chaining inputs and outputs in this sense 
+engenders a model of computations as graphs, 
+where edges encode have values travel 
+between applications, with multiple inputs 
+potentially each being outputs from 
+multiple precursor function-applications.
+`p`
+
+
+
+`p.
+The semantic interpretation I adopt here for `q.syntagmatic` 
+graphs is noticeably different than this model 
+(I have analyzed the specific differences in `cite<Chapter6>;).  
+Rather than taking input/output as a fundamental 
+divide within function-parameters, I consider 
+more general channel systems here.  Note that in 
+contrast to (more typical) graph-representations 
+of computation where outputs are marked by 
+directed edges `i.away from` procedure nodes, 
+in Syntagmatic Graphs all edges point `i.into` 
+procedure-nodes, including those embodying 
+`q.outputs` (`cite<Chapter6>; has some comments 
+about why this can make sense).  More elaborate 
+rationales for the notational and interpretive 
+differences between Syntagmatic Graphs and 
+other procedure-models is tangential to the 
+current chapter, so I'll focus instead 
+on outlining the semantic interpretation itself. 
+
+`anondefin.
+Call a `i.marking` of a Syntagmatic 
+Graph` to be an association between 
+some of its nodes and a collection of typed 
+values, against some type system.  Markings 
+might be context-dependent; that is, a 
+graph could be subject to multiple 
+markings concurrently, each restricted 
+to one context.  I'll say that values 
+are `i.bound to` nodes, but indirectly, 
+as explained in the following.
+`anondefin`
+
+`anondefin.
+Syntagmatic Graph nodes can be associated with 
+`i.types` and `i.states`/.  For the present, 
+I will not rigorously define `q.types`/, but 
+I'll comment that types are introduced 
+`visavis; nodes `i.through` states.  
+For any type, each possible instance of that type 
+is a potential `i.state` for Syntagmatic Graph nodes, 
+the state of being `q.occupied` by that specific 
+value.  However, not every node-state need correspond 
+to a type.  In particular, nodes can have a state 
+corresponding to a `q.void` or lack-of-value.
+`anondefin`
+
+That is, I approach the notion of `q.void` as a `i.state` 
+possibly evinced by nodes, rather than through type 
+systems themselves.  That is, we do not need 
+a `q.bottom` or `q.nothing` type with some 
+special value selected (essentially by fiat) 
+to reperesent non-initialization or pre-initialization.  
+I find it more semantically coherent to 
+express such `q.nothing` states as the 
+state of `i.having no value`/, rather than 
+as the presence of a construed `q.nothing` value 
+(and nothing-type which it instantiates).
+`p`
+
+
+`p.
+Against this background, the semantics of procedure-calls 
+can be expressed via before-and-after states 
+for each argument-node incident to a procedure-node.  
+The procedure's semantics is, as such, 
+the cumulative state-changes, or `i.change in marking state`/, 
+effectuated by the procedure.  In a general case, 
+some of these changes will be void (no-value state) nodes 
+transitioning to having a value; these would 
+typically correspond to `q.output` nodes in 
+classical applicative models.  However 
+%-- accommodating scenarios like mutable references 
+%-- nodes with the state of binding to some value 
+could migrate to the state of binding to a `i.different` 
+value.  In general, notions such as input-versus-output 
+are expressed in this system `q.semantically` as a 
+manifestation of state-changes, rather than 
+`q.syntactically` as edge-direction or arrows assigning 
+different directions to inputs versus outputs.
+`p`
+
+
+`p.
+Roughly as an analog to `q.beta` reduction, I propose 
+the term `i.digamma` reduction to express 
+marking-state changes due to a procedure-call.  
+A digamma reduction is the cumulative state-change 
+in all nodes affected by the procedure (or, seen 
+syntactically, all nodes adjacent to the procedure-node).  
+For multi- (channelized) neighborhood Syntagmatic Graphs, 
+digamma reduction happens in multiple stages, each 
+contextualized to a single neighborhood.  Note 
+that I like the term `q.digamma reduction` partly 
+as an oblique referenec to `q.sigma` calculus 
+(an object-oriented extension to lambda calculus, 
+and the greek digamma numeric symbol looks like a enlarged 
+lower-case sigma) and partly because `q.gamma` is a common 
+symbol for graphs, so `q.digamma` suggests `q.two graphs`/, 
+or a computational interaction between one graph 
+assembling a procedure-call and one graph implementing it.      
+`p`
+
+
+`p.
+
+`p`
+
+
 
 
 `p.
