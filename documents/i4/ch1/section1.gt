@@ -275,7 +275,7 @@ such as `RDF; and property graphs which are
 more `q.semantically` focused tend to be 
 graph-like and encode semantic relations via 
 edges across nodes (rather than hierarchical nesting).  
-Hypergraph potentially combine both styles of 
+Hypergraphs potentially combine both styles of 
 representation, with hypernodes containing 
 nodes hierarchically `i.and also` edges 
 between two (or two-or-more) nodes and/or hypernodes 
@@ -974,7 +974,6 @@ type-information can be `q.loaded into` the
 system and consulted as the engine resolves 
 how to accommodate insertions, updates, and 
 filtering for specific instances).  
-
 `p`
 
 

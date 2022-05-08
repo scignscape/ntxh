@@ -328,9 +328,9 @@ functions, essentially mapping that transform
 inputs to outputs.  Codifying the principles of 
 `q.functionhood` in general forms the central project 
 of analyses that bridge math and computers 
-(e.g., lambda calculus).  In terms of mathematical 
+(e.g., lambda calaculus).  In terms of mathematical 
 `q.foundations`/, these various formulations 
-(including lambda calculus and its derivatives 
+(including lambda calaculus and its derivatives 
 and, for instance, Combinatory Logic) entail 
 strategies for clarifying what are 
 sometimes called `q.applicative structures`/, 
@@ -360,15 +360,15 @@ also a `i.semantic` dimension in the sense of
 spaces of functional values qua semantic entities.  
 The problem of semantically characterizing 
 `i.a` function or procedure (e.g., as a calculational 
-process, or a %-- maybe time/context-dependent %-- 
-input-to-output mapping, or the like) is one 
+process, or a %-- maybe time/context-depenent %-- 
+input-to-output mapping, or the like) us ibe 
 matter, but whatever our foundational semantic 
 theory in this sense it is natural to extend 
 it via functional composition (analogous to 
 how linguistic semantics involves the semantics 
 of nouns, and verbs, but more thoroughly also 
 the compositional principles of verbs together 
-with nouns yielding sentences/propositions).  
+with nounds yielding sentenecs/propositions).  
 The set of possible applicative structures 
 `q.generated` by some collection of functions 
 (or function-symbols) is analogous to the 
@@ -406,7 +406,7 @@ the graph-theoretic encoding of (generalizations of)
 applicative structures I will discuss subsequently.
 
 `defin -> Applicative Systems ->> for any fixed 
-set of `i.function symbols` and `i.variable symbols` 
+set of `i.function symbols` and `i.varaible symbols` 
 an `i.applicative structure` is any element of a 
 set which is the closure of the set of 
 primitive expressions (consisting of a function 
@@ -418,7 +418,7 @@ operations wherein an applicative structure
 is inserted in an enclosing structure taking the 
 place of a variable.  Applicative Systems 
 are then sets of function and variable 
-symbols (and possibly declarations of function-arity) 
+symbols (and possibly declartions of function-arity) 
 together the full set of possible applicative 
 structures generated on their basis.  For generality, 
 we can allow functions `f; to have dynamic range 
@@ -453,13 +453,13 @@ structure; the above definitions were formulated with the
 idea that `q.the same` symbol in different positions 
 is, according to the generative rules, a different 
 symbol, but for clarity we can say that one 
-symbol can have multiple `i.tokens` in a given 
+symbol can habe multiple `i.tokens` in a given 
 structure.  Each symbol-token has a 
 `i.nesting level` such that the nesting level of a 
 function-symbol matches that of variable-symbols 
 following it (that are not themselves part of a 
 further nested structure) and replacing a variable 
-with a nested structure forces the function symbol 
+with a nested strucuture forces the function symbol 
 at the left of the latter structure to have a 
 nesting level on greater than the replaced variable.  
 By the construction/generation process, there will always 
@@ -482,11 +482,11 @@ lists, then the second as a tie-breaker, and so forth;
 akin to ordering leaf nodes on a tree where 
 left-ward and higher nodes are prior to those 
 below and/or to their right).  Applicative 
-structures are `i.non-recursive` if each function-symbol 
+strucures are `i.non-recursive` if each function-symbol 
 has only one token.  It is helpful to further 
 define non-`i.root`/-recursive structures as those 
 where the function-symbol whose token has 
-zero nesting level appears only once.
+zero nestnig level appears only once.
 `anondefin`
 
 `anondefin.
@@ -494,7 +494,7 @@ Applicative structures can be grouped into equivalence
 classes wherein any structure in the class would 
 map onto a peer structure under a permutation of 
 the applicative system's variable symbol-set.  Since 
-we can give an ordering to the variable-set, assume 
+we can give an ordernig to the variable-set, assume 
 each variable is assigned a number code, which 
 in turn allows us to define a `i.canonical presentation` 
 of an applicative structure by permuting its 
@@ -506,7 +506,7 @@ with  lowest code value not yet used.  Each
 applicative-structure equivalence-class is thereby 
 represented by one structure with 
 such canonical presentation, and we can restrict 
-attention to these structures in particular.  
+attention to these structrures in particular.  
 Note that the generative rules for applicative 
 structures have to be separated into two 
 groups, because (in the general case) we 
@@ -530,7 +530,7 @@ where the same input value is copied in multiple places).
 Representing function-arguments via `q.variable` symbols 
 (which are understood to be substituted with values from 
 some domain in the context of `i.calling` functions) 
-is consistent with lambda calculus, and with the 
+is consistent with lambda calaculus, and with the 
 idea that applicative structures describe valid strings 
 in a language codifying notions of function-application.  
 However, it is possible to develop alternative representations 
@@ -589,7 +589,7 @@ are fully specified %-- then so too
 would be variants of `f; with greater 
 or lesser arity as notated (here) through 
 red-blue-gray strings.  In other words, 
-if we take some semantic predicate %-- say, 
+if we take some semantic predictate %-- say, 
 `i.describes a computation` %-- then we may 
 want to consider the full set of functions 
 which meet this criterion that can be 
@@ -633,8 +633,8 @@ variant of `f;, not `f; itself.
 Then any permutation of `arity;-length 
 `arityprime; numbers (in the range 
 `onearityprime;) %-- restricted to cases 
-where the first occurrence of smaller numbers 
-is always before the first occurrence of 
+where the first occurance of smaller numbers 
+is always before the first occurance of 
 any larger number %-- describes a 
 structurally unique variant of `f;.  
 Analogously (distinguishing blue and 
@@ -647,7 +647,7 @@ has to follow the corresponding darker `ndarkblue;.
 For each of these strings, consider the 
 strings themselves and then modifications 
 which add the gray-color 
-numbers starting with `arityprimeplusone;, and 
+numbers starting with`arityprimeplusone;, and 
 so forth, where the gray-colored numbers 
 can only occur in an arithmetically (-by-one) 
 increasingly list.  Each string generated in 
@@ -677,7 +677,7 @@ context I propose extending `q.red-blue-gray`
 notation to include `q.black` numbers that stand in for 
 nested structures.  Call a `q.red-blue-gray-black matrix` 
 a set of rows formed from red, blue, gray, or black-colored 
-numbers (unlike normal mathematical matrices the rows 
+numbers (unline normal mathematical matrices the rows 
 need not have equal size, though if desired we 
 can always introduce a `q.dummy` symbol, e.g. a black 
 zero, to pad shorter rows on the left, yielding 
@@ -709,7 +709,7 @@ to `q.De Bruijn indices` in the lambda calculus
 See, e.g., `cite<x>;
 `footnote`  Lemma l1 argued that we can describe all 
 variations on an `f; `i.without` composition as the 
-set of `q.lambda-feasible` red-blue-gray strings with 
+set of `q.lamba-feasible` red-blue-gray strings with 
 `f; (which can be denoted by a red number as well as a 
 symbol) as the sole function notated.  According 
 to the construction rules generating applicative 
@@ -729,7 +729,7 @@ to their value the smallest offset possible
 without conflicting with blue numbers in earlier rows.  Call 
 red-blue-gray-black matrices subject to 
 these restrictions (on the black numbers 
-as well as lamdba-feasible restrictions for each row) 
+as well as lamdba-fasible restrictions for each row) 
 `q.lambda-feasible` matrices.  Based on their 
 construction, I claim the set of such 
 feasible matrices is isomorphic to the 
@@ -750,8 +750,8 @@ very basic; they should indeed by seen as rudimentary
 to the point of being rather uninteresting in themselves.  
 More involved systems however emerge by 
 relaxing certain conditions; for example, we 
-might consider allowing self-referential applicative 
-structures that express infinite recursion.  
+might consider allowing self-referntial applicative 
+structures that express infinite recusion.  
 The `q.De Bruijn` matrix form points to one 
 plausible avenue for modeling this process, because 
 negative matrix entries could be allowed 
@@ -845,7 +845,7 @@ systems as essential syntactic constructions
 (enumerations of valid expressions in a 
 certain simple class of formal languages) 
 %-- has led some researchers to 
-consider applicative structures 
+consider applicative strucures 
 (particularly in the guise of Combinatory 
 Logic) within fields as diverse as 
 linguistics and psychology.  Combinatory 
@@ -854,7 +854,7 @@ symbols (external to both function and variable
 symbols) and string-reduction rules 
 to enumerate all applicative structures 
 generated by a system's intrinsic symbol-lists: 
-for any structure formed from symbols 
+for any structure formed from symbnols 
 `fetcxetc; (`f;s and `x;s being functions 
 and variables respectively) there is a 
 combinator `Ccomb; such that the string 
@@ -882,13 +882,13 @@ partial order on the set of permissible
 strings (such strings are differentiated 
 by a grouping operation, potentially nested, 
 as well as symbol-lists).  A canonical 
-example is the `Scomb; combinator such 
+exmple is the `Scomb; combinator such 
 that `Sfgx; `reduces; `fxparengx; (where `reduces; notates 
 reducing to) or the `Bcomb; that appears to connote 
 composition (seen as semantic): `Bfgx; `reduces; 
 `fparengx; (or the famous `q.Y` combinator, 
 which can be described by the rule `YgreducgYg;).  
-Note that `q.reduction` here, however, at least 
+Noet that `q.reduction` here, however, at least 
 in the mathematical presentation of Combinatory 
 Logic, does not have an explicit semantic 
 interpretation, but merely notes that 
@@ -966,7 +966,7 @@ larger set with the same property.  In this
 sense we can regard applicative structures 
 (perhaps via lambda calculus) as part of 
 the backbone for analyzing different kinds 
-of function-spaces according to algorithm-theoretic 
+of functionn-spaces according to algorithm-theoretic 
 properties or profiles (e.g., computability, 
 termination, different complexity classes, and the like).  
 These potential applications, alongside 
@@ -1014,10 +1014,10 @@ such matrix as a semantically distinct, and recognize
 the set of lambda-feasible red-blue-gray-black matrices as a 
 complete listing of all valid strings in a language 
 that describes functions (for some meaning of `q.function`/) 
-derived from kernel `q.seed` functions by arity-expansion (via 
-unused arguments), projection (arity-reduction via 
+derived from kernel `q.seed` functions by arity-expanion (via 
+unused arguments), projection (arite-reduction via 
 reusing parameters), and composition.  Later in the 
-section I will discuss more specific semantics, 
+section I will discuss more specitic semantics, 
 but the enumeration through red-blue-gray-black matrices 
 yields an initial picture of the space 
 over which such a semantics should quantify.  
@@ -1031,7 +1031,7 @@ calculus) should be deemed insufficiently
 expressive for analyses related to modern programming 
 languages.  To be sure, in the above discussion 
 I was evasive about function's `q.semantics`/, 
-such that an incomplete account of function 
+such that an imcomplete account of function 
 `q.application` `i.per se` is arguably warranted 
 by generality.  When turning to programming 
 languages in particular, however, we have more 
@@ -1058,8 +1058,8 @@ between its domain and codomain).
 Given the functions-as-procedures paradigm, a first 
 step is to broaden the notion of applicative 
 structure appropriately to accommodate how 
-programming languages (via which procedures 
-are implemented) recognize multiple 
+programming languages (though which precedures 
+are implemented) recognize multiiple 
 `i.forms` of inputs and outputs (objects vs. 
 ordinary parameters, say, or thrown exceptions 
 as opposed to ordinary return values).  To designate 
@@ -1079,7 +1079,7 @@ insofar as they model procedures call with
 into multiple `q.channels` (an explanation for the 
 choice of the terminology `i.syntagm` and `i.syntagmatic`/, 
 usually encountered in linguistics, is 
-offered in Chapter 6 of `cite<CovidCancerCardiac>;).   
+offerred in Chapter 6 of `cite<CovidCancerCardiac>;).   
 
 `anondefin.
 A `i.channelized in-neighborhood` (we can 
@@ -1100,7 +1100,7 @@ vertex `v; can be labeled with a string taken
 from a prior collection of names (intuitively, 
 name of procedures insofar as graphs 
 diagram procedure-calls).  Channels 
-may also have `q.descriptive` labels (which serve 
+may also have `q.descriptive` labeles (which serve 
 to associate channels with channel `q.kinds`/).
 `anondefin`
 
@@ -1108,7 +1108,7 @@ to associate channels with channel `q.kinds`/).
 A `i.channel system` 
 on a directed graph is a set of criteria constraining 
 the legal channelized neighborhoods around any vertex; 
-example restrictions would be stipulations 
+example restrictions would be stipluations 
 that vertices cannot have multiple channels 
 with the same kind, or (in some context) 
 restricted to specific possible channel-kinds, 
@@ -1122,7 +1122,7 @@ the alternative between normal procedure `i.outputs`
 and `i.exceptions`/: throwing an exception 
 precludes returning from a procedure normally, 
 and vice-versa.  In terms of channels this 
-means that a non-empty channel representing 
+means that a non-empty channel represeting 
 (normal) outputs precludes a non-empty 
 channel representing exceptions, and vice-versa 
 (more precisely, as clarified below, the two 
@@ -1140,7 +1140,7 @@ mimic a minimal lambda calculus.  See the following lemma.
 
 `p.
 Instead of an open-ended notion of `q.applicative 
-structures` we can speak of applicative 
+strucutures` we can speak of applicative 
 systems `i.constructed relative to` channel systems.  
 This more general sense of applicative 
 structures builds up incrementally from 
@@ -1185,7 +1185,7 @@ the vertex in `Ntwo; which is adjacent
 (in the outgoing sense) to the single 
 output-channel edge in `Ntwo; and 
 one of the input-channel edges in `None;.  
-That is, the out-adjacent vertex in `Ntwo; 
+That is, the out-adjecent vertex in `Ntwo; 
 will now have two out-edges, one targeting 
 the function node in `Ntwo; and one 
 targeting an argument node in `None;.  
@@ -1203,7 +1203,7 @@ to an initial neighborhood via an edge between
 a `q.peripheral` node in each neighborhood 
 (i.e., excluding the vertex in-adjacent to 
 other nodes in the neighborhood).  Because 
-each channelized neighborhood can have its own syntagmatic neighborhood-set 
+each channelized neigborhood can have its own syntagmatic neighborhood-set 
 these structures can model nesting.  Stipulate 
 that any syntagmatic neighborhood-set proper has exactly 
 one channelized neighborhood which does `i.not` have a 
@@ -1309,7 +1309,7 @@ by a simplified (input/output) channel semantics
 (plus at most one output per function).  The constructions 
 for channelized neighborhoods and syntagmatic neighborhood-sets 
 can be naturally extended to more expressive channel systems, 
-yielding (so I claim) graph representations which are 
+yielding (so I claim) grpah representations which are 
 more consistent with actual programming languages 
 (whereas lambda calculus models a kind of abstract 
 programming language for purposes of mathematical 
@@ -1332,7 +1332,7 @@ the `i.central` node of a different neighborhood,
 not just to one of its argument nodes 
 (in this case the central node would not be 
 labeled with a string denoting a function-name, 
-but rather would receive a function-value 
+but rather would erceive a function-value 
 from that output edge).   
 
 `defin -> Syntagmatic Graphs ->> Consider syntagmatic 
@@ -1356,7 +1356,7 @@ value representing the actual procedure which
 that node iconifies.  This formation would thereby 
 model situations where nodes encapsulate numerous 
 possible procedures and the actual procedure 
-designated is dynamically calculated (presumably 
+designated is dynamicall calculated (presumably 
 just prior to the function-call which is 
 notated via the syntagmatic graph). ;;
 `p`
@@ -1364,15 +1364,14 @@ notated via the syntagmatic graph). ;;
 
 `subsection.Semantic Interpretation of Syntagmatic Graphs`
 `p.
-Intuitively, each Syntagmatic Graph describes a structure connecting 
+Intuitively, each syntagmatic graph describes a structure connecting 
 one or more procedure-calls, interconnected by parameter 
 passing %-- outputs from one procedure become inputs to another.  
 Working in a more flexible `q.channel system`/, however, 
 the connections between such calls may have more 
 subtle relationships than output-to-input chaining.  
 For example, multiple nodes in a syntagmatic 
-graph may represent the same `q.variable` 
-(cf. `q.shared supplication` nodes from earlier) which in turn 
+graph may represent the same `q.variable` which in turn 
 might be modified by one procedure, so an input given a 
 new value by a procedure and then passed to another 
 procedure is a form of inter-procedure precedence %-- the 
@@ -1381,7 +1380,7 @@ even if the two are not linked by an explicit
 output-to-input handoff.  There are the kinds 
 of scenarios that a procedure-call semantics 
 reflection actual programming languages (as opposed 
-more strictly mathematical function theories) should address.
+more strictly mathematical function theories) should adress.
 `p`
 
 
@@ -1425,12 +1424,12 @@ more general channel systems here.  Note that in
 contrast to (more typical) graph-representations 
 of computation where outputs are marked by 
 directed edges `i.away from` procedure nodes, 
-in Syntagmatic Graphs (hereafter `SG;s) all edges point `i.into` 
+in Syntagmatic Graphs all edges point `i.into` 
 procedure-nodes, including those embodying 
 `q.outputs` (`cite<Chapter6>; has some comments 
 about why this can make sense).  More elaborate 
 rationales for the notational and interpretive 
-differences between `SG;s and 
+differences between Syntagmatic Graphs and 
 other procedure-models is tangential to the 
 current chapter, so I'll focus instead 
 on outlining the semantic interpretation itself. 
@@ -1467,7 +1466,7 @@ possibly evinced by nodes, rather than through type
 systems themselves.  That is, we do not need 
 a `q.bottom` or `q.nothing` type with some 
 special value selected (essentially by fiat) 
-to represent non-initialization or pre-initialization.  
+to reperesent non-initialization or pre-initialization.  
 I find it more semantically coherent to 
 express such `q.nothing` states as the 
 state of `i.having no value`/, rather than 
@@ -1505,558 +1504,17 @@ marking-state changes due to a procedure-call.
 A digamma reduction is the cumulative state-change 
 in all nodes affected by the procedure (or, seen 
 syntactically, all nodes adjacent to the procedure-node).  
-For multi- (channelized) neighborhood `SG;s, 
+For multi- (channelized) neighborhood Syntagmatic Graphs, 
 digamma reduction happens in multiple stages, each 
 contextualized to a single neighborhood.  Note 
 that I like the term `q.digamma reduction` partly 
-as an oblique reference to `q.sigma` calculus 
+as an oblique referenec to `q.sigma` calculus 
 (an object-oriented extension to lambda calculus, 
-and the Greek digamma numeric symbol looks like a enlarged 
+and the greek digamma numeric symbol looks like a enlarged 
 lower-case sigma) and partly because `q.gamma` is a common 
 symbol for graphs, so `q.digamma` suggests `q.two graphs`/, 
 or a computational interaction between one graph 
 assembling a procedure-call and one graph implementing it.      
-`p`
-
-
-`p.
-Semantically, then, `SG;s model digamma 
-reductions `i.in sequence`/, each localized to 
-individual channelized neighborhoods.  This 
-idea can then be extended to sequences of 
-`SG;s in turn.  We are getting closer 
-to representing actual computer code; one further 
-step might then be incorporating something like 
-`q.stack frames`/.  Assuming that `SG;s 
-are represented `i.in sequence` and moreover 
-that such sequences occur in the context 
-of a `i.symbol scope`/, or an environment 
-where string labels can serve as `q.carriers` 
-for typed values; I'll sometimes refer to `q.`SG;-scopes`/, 
-scopes contextualizing `SG; sequences wherein symbols 
-designated carriers which (when in an initialized 
-state) hold concrete values.  In particular, assume that 
-carriers can reveal `q.carrier states` 
-reciprocating the states defined 
-on nodes earlier: for any type there is a 
-spectrum of states equivalent to each type-instance, 
-but there are also states involving 
-`i.lack` of typed values (the generic example 
-of such a state I'll call `i.pre-initialized`/).  
-The states available for carriers can be called 
-`q.type-based` in that they are organized around 
-typed values but include non-type states as well.
-`SG; nodes can then take on states 
-by associating with carriers such that 
-carrier-state propagates to the nodes.  
-Nodes are in `q.shared supplication` if 
-their carriers are syncronized to be 
-perpetually in the same state (this can be 
-considered a refinement of the earlier definition).
-Symbols in `SG;-scopes can derive from multiple 
-sources: assume that scopes' smybol-list can be 
-grouped into `i.declared` symbols internal to the 
-scope, `i.argument` symbols bound to 
-procedures' signatures, and (potentially) `i.global`.
-or perhaps `q.ambient` symbols 
-shared among multiple scopes (I'll use 
-`q.ambient` for the general case and `q.global` 
-for analogs to `q.global variables` in 
-typical programming language).  
-
-`defin -> Tripartite Scope ->>  I'll call `SG; scopes 
-`i.tripartite` in that they are mappings from symbol-names 
-to carriers (or groups of state-syncronized carriers) 
-with type-based states, and symbols can be 
-classified as `i.declared`/, `i.argument`/, 
-or `i.ambient`/.  The semantics of these groupings 
-will be clarified below. ;;
-
-`anondefin.
-I will say an `q.`SG;-described procedure` 
-(or just `q.procedure` when the `SG; topic is obvious) 
-is an `SG;-sequence unfolding in a tripartite scope 
-where argument-symbols are bound to values 
-held by carriers in a `i.different` procedure (or, 
-recursively, the same procedure in a different context, 
-viz., different symbol-bindings).  Such 
-interactions between `SG;-described procedures 
-models the semantics of procedure calls.  
-Of course, procedure-calls in turn are modeled by 
-channelized neighborhoods in individual `SG;s.  
-Specifically, channelized neighborhoods embody 
-procedure-calls wherein peripheral nodes' 
-carrier-states in the `i.calling` neighbothood 
-become the basis for initializing carriers 
-in the called procedure; specifically, 
-the carriers bound to argument symbols in the 
-latter's tripartite scope.  The switch 
-in execution context from the calling to the 
-called graph is analogous to binding symbols 
-to values in process calculii, or beta-substitution 
-in lambda calculus, except that carriers' 
-connections (via their argument nodes) to 
-procedure-nodes is organized via channels, 
-which can affect procedure-call semantics.  
-For example, it may be stipulated that 
-carriers in channels modeling `q.outputs` are 
-understood to be in pre-initialized state 
-for the duration of called procedures' 
-execution, and attempting to utilize 
-(e.g., read values from) such carriers 
-`i.within` the procedure is a logical error.  
-There are various ways of enforcing this 
-kind of restriction, of course, 
-but channels offer a convenient 
-representation of the relevant 
-constraints viewed under a semantic interpretation.
-`anondefin`
-`p`
-
-
-`p.
-We now have a semantic interpretation of channelized 
-neighborhoods: each such neighborhood embodies a 
-procedure-call, which entails binding call-site 
-carriers to procedures' argument symbols and 
-then carrying through other procedure 
-calls notated through `SG;s associated with 
-the `i.called` procedures.  When they are 
-finished, the original carriers will (potentially) 
-be in a modified state, so the called 
-procedure effectuates a `q.digamma reduction` 
-on carriers around the calling site.  
-State-changes then propagate across 
-channelized neighborhoods insofar as 
-values from output-like channels 
-in one neighborhood are handed off 
-to input-like channels in later-executed 
-neighborhoods.  Each `SG; has a 
-`q.top-level` neighborhood which is the 
-last to `q.execute` (viz., compel a 
-procedure-call) or, from a different 
-perspective, the root of a directed acyclic 
-graph showing carrier hand-offs and shared 
-supplication across channelized neighborhoods.  
-Note that output channels on the 
-top-level neighborhood cannot be 
-connected to other neighborhoods 
-in the form of procedure outputs become 
-inputs to a subsequent procedure 
-(there is none) %-- so either 
-top-level procedure-calls are 
-useful solely for their side-effects 
-or the carriers in their output-like 
-channels are bound to symbols in the 
-current scope.  In the general case, 
-I'll say that an `SG; is `i.anchored` 
-by one or more symbols if those 
-symbols (strictly, the carriers 
-associated with them) acquire values 
-from the `SG;s top-level neighborhood 
-(particularly from the channels 
-there which obey output-like semantics).  
-`p`
-
-`p.
-The mechanism just described constitutes 
-how `i.declared` symbols in an 
-`SG; tripartite scope can acquire values; 
-they become initialized from procedure-calls 
-enacted `i.in` the procedure, rather than 
-from arguments passed `i.to` the procedure 
-(or from an ambient space of values 
-visible from multiple scopes).  Once initialized, 
-declared symbols can then supply values 
-for procedures called `i.inside` a procedure 
-%--that is, an argument-symbol in one 
-procedure can derived from a declared symbol 
-in a calling procedure.  It is reasonable 
-to assume in the typical case that all procedure-symbols 
-(whether declared, argument, or ambient) hold 
-values which originate from a `i.declared` symbol 
-somewhere, so the anchoring-points 
-where declared symbols are first initialized 
-represent precisely the points in any holistic 
-collection of `SG;-described procedures where 
-new values are `q.intoduced` into the system.
-`p`
-
-
-`p.
-This last point has implications for how we 
-theorize `i.typed values` as well.  Implicitly 
-here I have assumed that we are operating in a 
-strongly-typed system where types and 
-values are interconnected: any value is a 
-`i.typed` value (the instantiation of a type) and 
-any type exists by virtue of its possible values.  
-I assume that in the general case types are 
-not equivalent to their `i.extensions`/, 
-that is, to any fixed set of values.  
-There are indeed some types whose extensions 
-are fully `q.enumerable`/, so we can specify 
-exactly how many possible instances a type has: 
-the type corresponding to signed one-byte 
-integers, for example, denotes precisely 
-the set of numbers at least -128 and at most 127 
-(the analogous range for `i.unsigned` bytes 
-is 0-255).  However, for types such as 
-`i.lists` of integers, the extension cannot 
-be specified `i.a priori`/, in the sense that 
-it is impossible to know from a specific 
-computing environment (at a specific moment 
-in time) whether or not a particular 
-value (here, a particular list of integers) 
-which logically fits the type's criteria 
-can in fact be represented.  The size of a list 
-which may be instantiated is limited by 
-factors such as the computer's available 
-memory; in theory, the extent of a collection-type 
-like `q.list of integers` is infinitely large, 
-because there is no rule to group 
-all potential such lists into a finite set 
-(if there were, take the longest list, an 
-an integer to the end, yielding a new 
-list which has no reason not to be included in the 
-first place).  I assume moreover that 
-we are working in a `i.non-constructive` type 
-environment where we cannot consider types' 
-extensions as a logical construction abstracted 
-from computational feasibility in concrete 
-computing environments.  We can discuss 
-types' `i.hypothetical` extension, which may indeed 
-be infinite, but I assume we need some 
-other mechanism to manage uncertainties 
-regarding types `i.actual` extension (in 
-some contexts, such as lazy-evaluated lists 
-or ranges, working directly with a logical 
-model abstracted from actual realizability 
-is appropriate, but in contrast to 
-functional-programming theory, for example, 
-I do not take such `q.constructive` formalizations 
-as an essential aspect to the relevant 
-type systems).`footnote.
-See `cite<CCC>;, chapter 4, for a more 
-extensive analysis of non-constructive 
-type systems and why assuming 
-that types are non-constructive in general 
-(rather than the opposite) is practically appropriate. 
-`footnote`
-`p`
-
-
-`p.
-So as to give a rigorous semantics to `i.non-constructive` 
-types, instead, I leverage the interconnections 
-between types, symbols, and `SG;-nodes insofar as 
-we are working in an `SG; context.  Recall the 
-heuristic that all symbols acquire values that 
-originate from declared symbols, which in turn 
-have a specific initialization-point 
-(although some symbols might be initialized 
-by non-constant reference, passed into a 
-procedure for initialization rather than 
-being bound to a procedure-result, the 
-values they are bound `i.to` in this 
-case will itself be determined 
-by an anchoring-initialization, either 
-in that procedure itself or some 
-other procedure called in turn; so, 
-even if not all declared symbols 
-receive their values via anchoring, 
-all declared symbols receive values 
-which `i.originate` from an anchoring 
-somewhere).  In other words, when we say 
-that a symbol has some type value, 
-we mean that a symbol's value is 
-derived from an initialization from anchoring 
-point, where a declared symbol's value 
-was set via digamma reduction at an anchoring 
-point %-- the symbol was associated with a node 
-which transitioned from a pre-initialized to a 
-type-bound state as a result of binding to nodes 
-in an output-like channel.  Symbols may be 
-`q.re-anchored`/, initialized to new values 
-due to anchoring points, but (assume we 
-work in a fixed-type environment) symbols 
-and carriers retain the same types 
-once they are initialized, so long as they 
-remain in an initialized state.  Types 
-themselves, then, can be construed 
-in terms of continuities in carrier-state: once 
-a carrier is initialized to be in a 
-state determined by a type-instance, it will 
-remain in states determined by the same type 
-so long as it is initialized at all; and 
-all initializations can be traced to 
-anchoring-points, together with 
-synchronization among states of distinct 
-carriers.  We do not need to theorize types' logical 
-extensions in general, because we aren't concerned 
-with the totality of a type's possible 
-values, only with the states directly 
-associated with the type at specific 
-anchoring-initialization sites. 
-`p`
-
-
-
-`p.
-Many programming languages distinguish between `i.constructors`/, 
-which are intrinsic to a type's definition, from other 
-procedures that return values of a given type.  
-To the degree that this distinction is in effect, 
-any value can be traced back specifically to a 
-`i.constructor` for its type.  To be sure, 
-a value might be bound to the output of a 
-`i.non`/-constructor procedure, but in 
-that case this return value will have 
-been formed initially by a constructor 
-proper called in that procedure, or perhaps 
-in a procedure it in turn calls, iteratively.  
-In a channel system we can leverage a comparable 
-distinction be defining a special kind of 
-channel, which functions like a normal 
-output except that procedures whose signature 
-includes such a channel are considered 
-to be constructors, or analogous to constructors 
-(in `cite<x>; I used the term `q.co-constructor` 
-to suggest allowing procedures being analyzed as if 
-they were constructors even in programming 
-contexts where, for technical reasons, they 
-would not be classified as such according to 
-a programming language whose code is being analyzed).  
-For generality I'll call procedures with 
-constructor channels `q.co-constructors` with the 
-assumption that different environments may be more 
-or less lenient in conditions where co-constructors 
-may be declared (only in code specifically 
-defining a type, say, in contexts where a narrower 
-policy is warranted, but without imposing restrictions 
-along these lines `i.a priori`/).
-`p`
-
-
-`p.
-The significance of co-constructor channels 
-is that they allow us to pinpoint the 
-specific anchorings where new typed values 
-are assigned `i.ab initio`/.  Assuming an 
-`SG; system uses co-constructors, 
-for any carrier in a type-bound state 
-we can be sure that the value traces back 
-to a digamma reduction on a carrier 
-specifically situated in a co-constructor 
-channel.  As such, our semantics 
-for types may not give a set-theoretic 
-account of types' extensions, but we 
-do have a mechanism for locating the 
-origination point for all 
-typed values.  In particular, values 
-are acquired via carrier state 
-changes localized to co-constructor 
-channels; such a change only occurs 
-when a procedure has completed with an 
-initialized value in that channel 
-available to be bound to its 
-eventual symbol.  Any value 
-therefore witnesses the fact that 
-a procedure with a co-constructor 
-channel completed and 
-triggered a state-change accordingly.  
-If a type system is designed to 
-recognize types as (associated with) 
-certain contracts, such that 
-a type being instantiated 
-confirms certain properties 
-about the value thereby 
-manifest, we can recognize 
-such contracts in an `SG;-style 
-system so long as co-constructors 
-adhere to type-specific contracts 
-in the course of depositing 
-values in a constructor channel.
-`p`
-
-`p.
-Once a carrier with a given type is initialized, 
-its value can of course be handed off to other 
-carriers assigned the same type (or potentially 
-a supertype thereof, or some other 
-related type wherein casting is possible).  
-Channel systems and `SG; representations 
-do not preclude polymorphism %-- 
-specifically, the labels assigned to procedure-nodes 
-need not uniquely identify one single 
-procedure available to be called, but may 
-instead provide a premise from which to 
-select one of numerous available 
-procedures, each with the same name %-- 
-so type resolution may come into effect: 
-if there are multiple candidate procedures, 
-the one whose signature best matches 
-the procedure-calls argument types is 
-selected.  In the context of channels, 
-such disambiguation extends to recognize 
-different channel-kinds, which become 
-part of a function's signature.  In 
-effect, each node in a channelized 
-neighborhood has a type (based on 
-its carrier-state) that might be 
-matched against candidate procedures' 
-signatures.  Types therefore a 
-consequential primarily in 
-the context of overload-resolution.  
-The issue here is not types' extension 
-per se (two types having the same extension 
-would have no bearing on their 
-appropriateness for matching 
-call-site neighborhoods to procedure 
-signatures; and co-extensive types 
-are no interconvertible unless such 
-casts are implicitly declared according 
-to the same conventions as casts between 
-types with different extensions).  However, 
-since successfully matching call-sites 
-to signatures implies that all 
-affected carriers' types are suitably 
-aligned, whatever guarantees on 
-carrier-states are implicit in 
-type-bound states becomes transferred from 
-the calling to the called procedure, insofar as 
-the formers' carrier-states carry over to 
-the latter's argument nodes.  Therefore, 
-carrier-states associated with being initialized 
-according to a given type propagate 
-from co-constructor anchorings across all 
-subsequent procedure-calls, with type-specific 
-guarantees propagated alongside.
-`p`
-
-`p.  
-In effect, types' semantics in such a framework 
-is based on the premise that once there 
-is an `i.originating` initialization 
-via digamma reduction in a co-constructor 
-channel then there is one specific carrier 
-whose state is thereby changed, and 
-subsequently (presumably) a series of 
-further procedure-calls where that 
-originating carrier's state become 
-synchronized with subsequent carriers 
-in subsequent procedure-calls.  
-Each type is essentially a premise 
-warranting the propagation of 
-this shared carrier-state: the type's 
-presence as a condition on procedure-signatures 
-or on declared symbols indicates that a 
-carrier whose state is synchronized in 
-accordance with such propagation would 
-be in a valid state according to the 
-expectations of the procedure 
-which uses the corresponding value.  
-For the sake of discussion, I'll 
-refer to this approach to the 
-issue of type-semantics as a 
-`i.propagation semantics`/, in contrast 
-to a `i.set-theoretic` semantics 
-which would construe types' semantic 
-interpretations in terms of their 
-extensions, or a `i.constructive` 
-semantics which would read type 
-semantics through the logic of 
-constructive patterns that could give 
-rise to values of a given type.   
-The essential point about 
-propagation semantics is that 
-type contracts would be checked 
-at origination points (to the degree 
-that they are in effect) and must be 
-presumed to have been enforced whenever 
-there is an originating digamma reduction 
-in the first place, and that subsequently 
-any use of a type as a polymorhpism-disambiguating 
-device should proceed under the assumption that 
-any carrier-state inherited as synchronized 
-with the state of an originating carrier 
-in this sense should be deemed a valid 
-state for the called procedure's purposes. 
-`p`
-
-
-`p.
-This discussion regarding type semantics has passed 
-over some non-trivial details, such as issues 
-of type casting and inheritance, which I will 
-briefly address in the next subsection.
-`p`
-
-
-`subsection.Syntagmatic Graph Sequences as a Virtual Machine Protocol`
-`p.
-A plausible objection to the above presentation is 
-that it is arguably burdened with a nontrivial list 
-of special terminology and representational 
-conventions to define constructions which are 
-not radically different from traditional 
-notions of, say, stack frames and lambda-abstraction.  
-Beyond just expanding from alternating inputs and outputs 
-to more flexible `q.channel` systems, I have 
-constructed a semantic interpretation for 
-these system based on formulations such as 
-type-based states and channelized neighborhoods, 
-without clarifying the theoretical merits of 
-this overall semantic presentation.  My contention 
-is that the full semantic details (not just, say, 
-extending applicative structures to richer 
-channel systems) become valuable in the 
-context of Virtual Machines.  I will 
-attempt to warrant this claim by addressing 
-`VM; implementation, in particular, 
-to conclude this chapter.
-`p`
-
-
-`p.
-I am representing Syntagmatic Graphs as hypergraphs, 
-partly because `i.channels` representing a grouping 
-operation (gathering multiple edges, by analogous 
-to hypernodes being sets of nodes %-- although 
-channels are not identical to hyper`i.edges`/, 
-wherein `i.one` edge spans multiple nodes), although 
-I leave open the possibility of `SG; nodes 
-having internal structure (i.e., becoming hypernodes).  
-However, such hypergraph representation is 
-mostly heuristic; technically, I consider 
-hypergraphs to be essentially a visual shorthand 
-for `i.virtual machine` constructions.  Here I appeal 
-to comments I made in Section 1: a hypergraph 
-(or, in essence, any strututred representation) 
-essentially iconifies the series of steps 
-needed to construct the graph in its precise state.  
-For example, focusing on channelized neighborhoods, 
-the elements of such structures %-- procedure nodes, 
-peripheral nodes, and channels %-- correlate with 
-operations setting out these details sequentially 
-(identifying a procedure node, e.g., by label; 
-identifying a channel-kind to serve as a 
-context for subsequent peripheral nodes; initializing 
-the latter nodes; switching to a different channel-kind 
-as needed; and so on).  This outline could be 
-expanded to Syntagmatic Graphs in general by aggregating 
-multiple channelized neighborhoods and then 
-asserting where carrier handoffs (via cross-neighorhood 
-edges) occur, to `SG;-sequences by constructing 
-multiple `SG;s along with their respective anchorings; 
-and finally to procedure-descriptions by enumerating 
-declared, argument, and ambient symbols in a 
-tripartite scope.  From this perspective, 
-`SG; procedures can be seen as compact representations 
-summarizing sequences of `VM; operations, or 
-perhaps as configurations which guide the construction of 
-`VM; procedures by defining and end-goal toward which 
-`VM; operations approach incrementally.        
 `p`
 
 
