@@ -26,7 +26,7 @@ perhaps suggest part of my rationale for stressing metamodels
 equivalence between disparate representational paradigms 
 which may encode comparable data-spaces, but with divergent 
 levels of `q.convenience` from the application vantage point.  
-That is to say, one (at least potentially formal or formalizable) c
+That is to say, one (at least potentially formal or formalizable) 
 criterion for comparing representational schema is the space 
 of data structures which competing schema can unambiguously 
 represent; one schema is richer (or more expressive) than another 
@@ -69,7 +69,7 @@ moment to flesh it out.
 `p.
 Prima facie, it should be uncontroversial to say that 
 convenience in application-development is desirable.  This 
-section of the book will entertain several Civil Eingeering 
+section of the book will entertain several Civil Engineering 
 case-studies concerning reconstruction in Ukraine.  At this point 
 I'll just point out one contention to be addressed in 
 following chapters, that the scale of Ukrainian 
@@ -80,14 +80,14 @@ mindset attuned to environmental impact, quality of life, and
 cultural heritage alongside conventional architectural/engineering 
 concerns.  This is intriguing case-study insofar as 
 it concretizes scenarios where existing data-integration 
-methodology in Civil Eingeering Informatics (CEI) %-- how 
+methodology in Civil Engineering Informatics (CEI) %-- how 
 `BIM; marries architectural design and structural engineering, 
 for example %-- can be extended to urban planning, sustainability, 
 even cultural preservation.  The computational infrastructure 
 leveraged when assessing structural integrity 
 of (digitized) architectural plans, that specific 
 analytic pipeline, can similarly be extended to 
-metrics of environmental impact, enery use, carbon 
+metrics of environmental impact, energy use, carbon 
 footprint, and myriad cultural and quality-of-life 
 targets.     
 `p`
@@ -96,7 +96,7 @@ targets.
 `p.
 Although such inter-disciplinary efforts wherein the 
 scope of CEI integration expands further %-- e.g., emphasizing 
-eco-friendly optimizations %-- have certianly 
+eco-friendly optimizations %-- have certainly 
 been embraced by the construction and architectural-design 
 industries in recent years, Ukraine points to how 
 such trends could still accelerate.  A widening 
@@ -125,7 +125,7 @@ industries, and their existing interoperability
 goal of augmenting this functionality to support 
 thematically richer information profiles covering 
 civic, ecological, and cultural data-points alongside 
-(say) archiecture and structural engineering.  
+(say) architecture and structural engineering.  
 We then have (modulo a certain imaginative projection 
 presupposed by the whole thought-exercise) 
 real-world implementational questions to consider: 
@@ -162,11 +162,11 @@ assessing data metamodels derive in part from the
 perspective of engineering application-level support 
 for new (or newly expanded) interoperability protocols.  
 That is, representational systems which engender 
-computational artifacts (parseers, for syntax, and 
+computational artifacts (parsers, for syntax, and 
 validators, for semantics, let's say) that can be 
 implemented, embedded, and leveraged by applications 
 as their capabilities are refined to support new 
-protovols are most effective when the amount of 
+protocols are most effective when the amount of 
 effort consumed by the requisite programming 
 is minimized.  Data-sharing protocols should be 
 engineered to pass through application-integration 
@@ -200,7 +200,7 @@ is of course not semantically vacuous;
 its significance emerges in the larger 
 scale of schema-standardization and validation.  
 A metamodel which supports this larger semantic 
-cotnext is therefore sufficiently expressive 
+context is therefore sufficiently expressive 
 to properly encode `IFC; data; a less expressive model 
 (one which collapses attributes and properties 
 into a generic notion of `q.fields`/, say), would 
@@ -220,7 +220,7 @@ and time-consuming.
 
 `p.
 Metamodels are more expressive to the degree that 
-they offer a greater range of representational parametes 
+they offer a greater range of representational parameters 
 with which structural and semantic conventions 
 might be communicated.  For example, `JSON; 
 (JavaScript Object Notation) can be deemed more 
@@ -228,7 +228,7 @@ expressive than primitive list-based encodings
 (e.g., `CSV;, or comma-separated values) because 
 `JSON; distinguishes arrays (which are like lists) 
 from `q.objects` (i.e., associative arrays, 
-lists indexed by field-names rather than numers).  
+lists indexed by field-names rather than numbers).  
 In this sense `XML; is more expressive than 
 `JSON; insofar as elements' data can be asserted 
 via attributes or via nested 
@@ -266,7 +266,7 @@ with labels, label-namespaces, controlled
 vocabularies, and potentially constraints/axioms 
 enforced by `q.Ontologies`/).  Formats such as 
 `XML; and `JSON; which are more `q.syntactically` 
-orienetd tend to be hierarchical, in that 
+oriented tend to be hierarchical, in that 
 any specific value in a `JSON; object or array may 
 itself be another object/array (rather than atomic 
 value) and likewise `XML; elements may have other 
@@ -287,7 +287,7 @@ these are reasonable approximations).
 
 `p.
 Any representational system, as these examples point out, 
-provides a cerain `q.tableau` of parameters that 
+provides a certain `q.tableau` of parameters that 
 can be pressed into service when formalizing a protocol 
 for encoding specific kinds of data via structures 
 conformant to the specific system.  More expressive 
@@ -297,7 +297,7 @@ hypergraphs (with potentially iterative node/hypernode
 relations) are more expressive than either property 
 graphs or document-style hierarchical trees 
 alone, because properties-on-nodes (as in `XML; attributes), 
-nested hierachies (hypernodes containing child nodes akin 
+nested hierarchies (hypernodes containing child nodes akin 
 to child `XML; elements), and inter-node connections 
 (as in Semantic Web labeled edges) are all potential 
 representational devices.  This chapter will accordingly 
@@ -357,7 +357,7 @@ motivating the proper scope of a Virtual Machine
 may be designed subject to requirements that 
 they permit the accumulation of any data structure 
 conformant to a given metamodel.  Similarly, `VM;s 
-might be characerized in terms of how they support 
+might be characterized in terms of how they support 
 various `q.calling conventions`/, in the sense of 
 protocols through which computational procedures 
 delegate to other procedures (supplying inputs, 
@@ -376,20 +376,20 @@ calls to other procedures).
 Virtual Machines can be useful tools for studying software-interoperability 
 insofar as both data-representations and communications protocols 
 can be modeled in terms of `VM;s (at least as abstract summaries 
-of working code; or, more amibitiously, application-networking 
+of working code; or, more ambitiously, application-networking 
 frameworks can be provide actual `VM;s through which applications 
 can route their networking logic, analogous to query languages 
 as host-language-agnostic conduits for database access).  In this 
-context `VM; models overlap with constructions pertianing to 
+context `VM; models overlap with constructions pertaining to 
 interoperability between applications and database engines.  
 Consider the general setup of database systems: applications 
-store data structures for future reuse by passsing some 
+store data structures for future reuse by passing some 
 (suitably encoded) serialization of the relevant information 
 to a database, which arranges the data into a layout 
 optimized for storage and retrieval/querying.  Typically the 
 database will attempt not merely to preserve the presented 
 data structure for future reconstruction, but will 
-index or descructure it in such a manner that such specific 
+index or destructure it in such a manner that such specific 
 data can be selected as matching a future query.     
 `p`
 
@@ -443,9 +443,9 @@ might involve users viewing individual images,
 previewing image-series depicted via thumbnails, 
 searching for images (based on criteria such as 
 street address, city/district name, or perhaps 
-`GIS; coordinates), swithing between 2D image 
+`GIS; coordinates), switching between `TwoD; image 
 and 3D street views, and %-- once in the context 
-of a specific picture %-- viewing annotatioms 
+of a specific picture %-- viewing annotations 
 and other associated data in tabular or 
 otherwise structured forms (e.g., tables or key-value 
 pairs displayed through independent `GUI; windows 
@@ -492,12 +492,12 @@ data.
 
 
 `p.
-Continuing this sepcific (hypothetical) example, the 
-envisage scenario has image-viewport comoonents 
+Continuing this specific (hypothetical) example, the 
+envisage scenario has image-viewport components 
 serve as an entry-point for a diversity of 
 civil/architectural information; presumably 
 the specific kinds of data available will vary 
-from one image to anotehr, and users will 
+from one image to another, and users will 
 signal through interactive `GUI; features 
 their interest in accessing certain branches of 
 the available data over others.  That is, assume 
@@ -506,7 +506,7 @@ package that automatically accompanies each image,
 but instead that data and images are linked on a 
 dynamically changing case-by-case basis.  That setup 
 would call for a coding strategy which works to 
-organize the avilable information and 
+organize the available information and 
 user-interaction pragmatics coherently.  
 The resulting software-design choices would, 
 moreover, propagate to `GUI; and database designs 
@@ -533,7 +533,7 @@ of residential units targeted, renderings of building
 designs, contractors, contact information, and so forth.  
 Presumably, such data would only be applicable 
 to images showing blocks or plots where such plans 
-are in the works; and moreoever such images would link 
+are in the works; and moreover such images would link 
 to other forms of data as well (about, say, utilities 
 grids).  As part of the empirical background, in 
 effect, one might conclude that various facts 
@@ -598,7 +598,7 @@ distributed over (potentially) multiple database
 For sake of argument, consider an update (or part thereof) consolidated 
 into a single (application-level) datatype instance; e.g., 
 one object of a given `Cpp; class.  Quite possibly, there is 
-no one-to-one correspondance between application objects and 
+no one-to-one correspondence between application objects and 
 database values or records, particularly if the classes 
 in questions contain many data fields and/or multiple 
 one-to-many relationships and values which are more 
@@ -626,7 +626,7 @@ constructions.
 Modifying a database entails conveying a package 
 of database between applications and the database 
 engine; the structure of this `communique; 
-in turn reflecting database archiceture.  
+in turn reflecting database architecture.  
 The `SQL; `INSERT; 
 statement, for example, derives its form 
 from the layout of table-base data models:  
@@ -638,7 +638,7 @@ relational algebra is a relatively crude or inflexible
 meta-model derives, it would seem, in large part 
 from the quantity of bridge code needed to implement 
 database updates through query commands such as 
-`INSERT; that are restricuted to the relational 
+`INSERT; that are restricted to the relational 
 architecture.  To the extent that hypergraph 
 engines (for example) are more flexible in principle, 
 this advantage only becomes concretely 
@@ -652,7 +652,7 @@ biolerplate code.
 
 `p.
 As I alluded to earlier, hypergraph data models 
-have comparitely greater parameters available 
+have comparatively greater parameters available 
 for representing information; in particular, 
 this implies that we have greater 
 flexibility in formulating queries 
@@ -670,12 +670,12 @@ through an embedded domain-specific language,
 as one finds with `LINQ; `visavis; `CSharp; and 
 its emulations in other languages).  On the 
 other hand, in the best case scenario a database 
-would `i.also` support a query langauge that 
+would `i.also` support a query language that 
 could be executed as text strings outside of an 
 application context (and without relying on a 
 host programming language), for examining 
 the contents of a database in situations removed 
-from application-based access (debgging, analytics, 
+from application-based access (debugging, analytics, 
 general admin functionality, and so forth).   
 In other words, ideally engines will encompass 
 a query engine that works with query-structured 
@@ -787,7 +787,7 @@ implementations, although actually
 supporting a query-interface satisfying 
 such ambitions depends on a confluence 
 of factors (e.g., underlying database 
-archiecture but also query-representation 
+architecture but also query-representation 
 and query-evaluation protocols and the 
 tools to compile code/text or procedurally-generated 
 queries to internally-represented structures 
@@ -842,7 +842,7 @@ Ontology-constrained) edge-insertion.
 
 
 `p.
-In effect, multi-parameteric modeling 
+In effect, multi-parametric modeling 
 tableaus in the database `i.architecture` 
 propagate to multi-dimensional 
 options for encoding updates, which in 
@@ -898,7 +898,7 @@ color-depth, plus, say, `GIS; coordinates).
 One consideration when designing such an application 
 would be how users would find images 
 that they hadn't seen before, or had not 
-revisted for an extended period of time 
+revisited for an extended period of time 
 (so that the presumptive image `gid; is not 
 cached in recent history).  In would make sense 
 to track images by longitude and latitude, 
@@ -957,13 +957,13 @@ rationale for property-graphs in the first place).
 Similarly, type-level modeling tends to 
 define which update protocols to invoke for 
 different state-changes.  Accordingly, an expressive 
-query interface should allow stiuplations regarding 
+query interface should allow stipulations regarding 
 updates and searches to be described as attributes 
 of `i.types` as well as single instances (e.g., 
 records and/or hypernodes) and to be deferred 
 from instances to type-contracts (analogously, 
 inferred in instance-contexts by virtue of type 
-attributions).  An obvious corrolary here 
+attributions).  An obvious corollary here 
 is that query systems have to recognize type 
 descriptions as well as encodings of type-instances.  
 In effect, query languages need to include 
@@ -984,7 +984,7 @@ concepts in greater detail.  Thus far I have
 been alluding to `VM; in the context of query evaluation: 
 one way to implement query engines is to decompose 
 (the steps needed to execute) queries into 
-squences of primitive or `q.kernel` operations 
+sequences of primitive or `q.kernel` operations 
 supplied through a `VM;.  While this is a productive 
 facet of `VM; applications, it overlaps with equally 
 consequential issues concerning how `VM; model 
@@ -1022,10 +1022,10 @@ objects and calling methods accordingly
 would be a reasonable execution strategy).  
 In short, even when we are primarily 
 interested in Virtual Machines pressed 
-into serve as query enges, it would 
+into serve as query engines, it would 
 be incomplete to exclude consideration 
 of general-purpose procedure calls and 
-how these are descrived, validated, and 
+how these are described, validated, and 
 executed by concrete `VM;.  I therefore 
 turn to procedure-encoding considerations 
 in the remainder of this chapter. 

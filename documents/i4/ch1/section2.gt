@@ -2061,9 +2061,638 @@ perhaps as configurations which guide the construction of
 
 
 `p.
-
+Ordinary `VM;s, of course, depend on such concepts as 
+stack frames and procedure calls; one of the fundamental 
+operations (or sequences thereof) typical `VM;s 
+carry out involves push input values onto a stack 
+and then redirecting to the address of a procedure 
+which uses them, at least insofar as the `VM; in 
+question emulates assembly code to provide a 
+runtime for higher-level programming languages.  
+Modeling procedure-calls via hypergraphs, and 
+in particular `i.channels` (in the sense I propose here) 
+adds representational parameters to this model, 
+by analogy to how hypergraphs present a richer 
+expressive tableau than other metamodels for 
+encoding data structures.  The benefits of added 
+metamodeling detail ni the procedire-call 
+context actually help illustrate why 
+expressivity pays dividends with respect to 
+data structures (e.g., in query evaluation) as well. 
 `p`
 
+
+`p.
+The primary rationale for `VM;s is to execute code, of course 
+(whether scripts, queries, or some other programming 
+category that does not feat neatly into one or the 
+other, such as workflows, or one or both ends of 
+remote-service functionality).  Secondarily, `VM; compilation 
+can support static code analysis even if the 
+intermediate code is not actually run.  Code analysis factors into 
+execution as well, at least to the degree that a 
+`VM; can internally support runtime checks and 
+guarantees %-- insert debugging breaks where certain 
+conditions are met, preventing code from running 
+in certain circumstances, allowing procedures 
+to make contract-like assumptions (stronger than 
+type-checks alone could enforce), and so on.  
+For example, stipulations that values should fit 
+within a fixed range (narrower than theoretical 
+posssible via their types) could potentially 
+be verified or implemented by weaving 
+`q.gatekeeping` code into `VM; operation-sequences.  
+In short, `VM;s acquire more flexible capabilities 
+%-- they present opportunities to implement Requirements 
+Engineering style features, even if only via 
+add-ons %-- to the degree that they present 
+op-sets and data models configured for static 
+and dynamic/runtime analysis.  These 
+observations motivate my proposals to augment 
+the modeling parameters for `VM;s (in procedure-call 
+contexts) via formulations such as 
+channels and carrier-state.  
+`p`
+
+
+`p.
+To be sure, a suite of static-analysis capabilities 
+is endemic to traditional (e.g., stack-based) 
+`VM;s as well (reachability, control paths, initialization 
+guarantees, etc.).  I would suggest, however, that 
+future generations of `VM; technology will seek 
+a broader scope `visavis; contexts where cde analysis 
+is applied, considering `GUI; programming, 
+Cyber-Physical Systems, multi-modal front-ends, 
+`AI; integration, and other capabilities that 
+may be unified under the rubric of `q.Industry 4.0`/.  
+Future `VM; architecture may be optimized 
+for the `i.intersection` of such User-Experience and 
+multi-modality concerns with traditional 
+static analysis and Requirements Engineering. 
+`p`
+
+
+`p.
+Consider the case of Channel Systems.  According 
+to the `SG; model I have outlined here, 
+procedure-calls are represented via channelized 
+neighborhoods, and in such neighborhoods 
+all edges incident to a central (`q.procedure`/) 
+node lie within a channel.  In `VM; translation, 
+this configuration implies that procedural 
+stack frames are split up into multiple channels, 
+so that whenever an argument is `q.pushed` as a 
+parameter for some near-future call this 
+action occurs in the context of a specific 
+channel-kind.  As a result, argument-push 
+operations can be analyzed in terms of semantic 
+procols specific to currently active 
+channel.  For example, `VM;s might want to 
+add extra information in the 
+context of channels representing `q.message receivers` 
+in Object-Oriented contexts (which 
+I have elsewhere called `q.sigma` channels, essentially 
+the `b.this` or `b.self` of languages like `Cpp;, `Java;, 
+and `Ruby;), particularly when such channels 
+contain more than one node (insofar as most languages 
+providing kernel functions accessed from a `VM; 
+do not allow multiple `b.this` objects; the 
+demo code for this part's chapters has examples of 
+how to emulate multi-sigma calls in `Cpp;, but 
+in general it would presumably take extra 
+effort to map multi-sigma `VM; calls to the underlying 
+native functions).  Moreover, channel-specific 
+semantics can be implemented on an extensible 
+basis, allowing the `VM;s to be augmented 
+with special-purpose channel kinds which supply their 
+own functionality for managing (in effect) stack 
+frames when such channels are active.
+`p`
+
+
+`p.
+Doubtless, some of the features enabled by channels 
+could be achieved via other means.  Channels, 
+however, present a convenient interface for 
+organizing the range of functionality 
+entailed by the relevent channel semantics.  
+Insofar as every argument-node in an `SG; 
+occurs in the context of a channel, before 
+any such nodes are set in place the `VM; 
+would first construct a channel of the 
+relevant kind; that is, there is a specific 
+operation to `q.open` a channel given its 
+kind.  This operation is therefore an `VM;-site 
+(for static or dynamic analysis) that 
+can be targeted by extension code enforcing or 
+examining channel semantics.  Once channels 
+are opened, operations exist to 
+indicate the type and value-source for nodes 
+added to the channel.  Because these latter 
+operations always occur in the context of a 
+specific channel-kind, they can be filtered or 
+re-implemented based on the channel kind 
+in effect, so extensions could modify the 
+treatment of certain channels while preserving 
+the underlying `VM; implementation in most 
+cases.  For example, a `VM; extension could 
+modify exception-handling protocols by 
+re-implementing operations for inserting 
+nodes into (or, on the call side, initializing 
+carriers in) special `q.exception` channels, 
+which are partitioned from `q.ordinary` 
+output channels (given the obvious behavioral contrast 
+between exiting via exceptions versus normal 
+returns).  Procedures typically involve multiple 
+channels, so there are `VM; operations 
+for `q.closing` one channel and opening another 
+of a different kind, which results in subsequent 
+operations occurring in the context of a 
+different semantics.  Explicitly introducing 
+channels as part of the underlying `VM; machinery 
+allows variegated channel-semantic protocols 
+to be implemented in an organized and extensible manner. 
+`p`
+
+
+`p.
+My earlier comments discussed overlapping concerns 
+of code-analysis with `AI;, multi-modal interface, 
+and other `q.Industry 4.0` concerns.  Last paragraph's 
+discussion regarding (for instance) special-purpose 
+channel semantics perhaps does not obviously 
+connect the idiosyncratic constructions endemic 
+to `SG; representation with concerns in the 
+latter sense, so I'll try to present a case 
+more concretely.  Consider first the 
+issue of `q.reactive programming` in `GUI; 
+contexts.  Analysis of procedures as a series 
+of calls to other procedures %-- what I am 
+calling `SG;-sequence decriptions %-- fails 
+to directly address how call-sequences 
+in this sense fit into over application execution.  
+In general, an application is not a one-dimensional 
+`i.program` which simply executes some sequence of 
+operations and then terminates.  Instead, applications 
+construct a graphical and runtime environment 
+and then wait for user-initiated actions, 
+responding accordingly, and resetting to a 
+passive state awaiting futher user actions.  
+Users signal their intention for applications 
+to take specific steps via interactions 
+which can generically be called 
+`i.gestures` (e.g., typing something 
+via a keypad, or clicking somewhere via 
+a mouse).  Gestures in turn are presented 
+to application code as `i.signals` that 
+are `i.handled` by implemented procedures.  
+The overall programming model entailed 
+by composing applications as collections 
+of procedures poised to handle signals 
+%-- rather than fixed operation-sequences 
+designed in advanced %-- is generically 
+called `i.reactive` programming.  Such a 
+programming model introduces a variety of 
+issues for `VM; implementation, to the 
+degree that `VM;s would be used to model/analyze 
+or execute reactive procedures.
+`p`
+
+
+`p.
+In particular, the central idea of reactive 
+programming is that certain procedures 
+are called (or initiated) in response 
+to signals (typically those 
+due to user gestures, though certain 
+signals may be prompted by non-user 
+changes to the current environment 
+which might be relevant for applications, 
+such as a sudden loss or gain of 
+internet connectivity).  Procedures 
+in this sense are not called `i.from other 
+procedures`/, so the normal analysis of 
+procedure-calls in terms of stack frames 
+being transferred from one site to another 
+has to be modified.  A canonical approach to 
+reactive programming involves `q.signals` 
+and `q.slots`/, with the idea that 
+instead of one procedure directly calling 
+calling another, procedures instead emit 
+`q.signals` that are `i.connected` to 
+other procedures, which in such contexts 
+become `q.slots`/.  Unlike hard-coded 
+procedure-calls, signal-to-slot connections 
+can be dynamically altered, created, or 
+suspended.  Such a mechanism depends on a 
+centralized routing component 
+to observe when a signal has been emitted 
+(for instance, added on to an `q.event queue`/) 
+and transfer control to one or more 
+slots registered as connected to that signal.  
+Insofar as a centralized processor in this 
+sense is active, it can also (in typical 
+application-runtime frameworks) 
+receive signals originating `i.outside` 
+the application, i.e., resulting from 
+external conditions apart from one 
+`i.procedure` emitting a signals.  Typically, 
+such external signals would result from 
+user-generated events, such as clicking a 
+mouse button or moving the mouse.      
+`p`
+
+
+`p.
+In effect, application code based on signals and 
+slots includes some procedures which are 
+called because they are registered as `q.slots` 
+whose signatures match signals that 
+may arise from `i.outide` the application 
+propert.  These procedures serve as `q.entry points` 
+where operations specific to the application 
+originate.  In other words, applications 
+are environments which, after an initial setup, 
+wait in suspension until external signals 
+initiate a chain of actions in response.  
+The details of such signals cannot be known 
+ahead of time %-- for example, one cannot 
+say which user gestures will occur (whether 
+the user first types something, or moves 
+the mouse, or clicks the mouse, etc.) nor 
+their specific details (which keyboard keys 
+are pressed, which mouse buttons are clicked, 
+where on-screen the mouse-cursor is located 
+in the latter event, etc.).  Application 
+code therefore needs to prepare for 
+multiple forms of external signals, 
+and to analyze their properties to respond 
+correctly (in accord with user intentions 
+and/or design requirements).  A left mouse click 
+with the cursor hovering over one `GUI; 
+element typically signifies a different user 
+intent than right-mouse clicks over a 
+different element, for example.
+`p`
+
+
+`p.
+The unique characteristics of reactive programming 
+have numerous consequences for `VM; design.  
+First, note that applications typically 
+implement many procedures so as to possess 
+requisite capabilities to handle user actions.  
+When and whether a given procedure is called 
+depends on user pragmatics; for instance, a 
+procedure involved in saving a file (at least a 
+file users know about, as opposed to, 
+e.g., a database-related file storing configuration 
+information) would only 
+be called in circumstances where users signal 
+their desire to save files they are 
+currently working on.  A well-organized code base 
+will specify which procedures could 
+potentially be called as the `i.initial` handler 
+responding to external signals.  This information 
+makes it possible to factor in external 
+signaling conditions during code-analysis.  
+For example, suppose file-saving is disabled 
+for some reason (e.g., the current user does not 
+have permission to modify the local file system).  
+In that case, procedures which are `i.only` called 
+within a call-chain leading from external 
+signals specific to saving files would become 
+effectively unreachable.  Notions such as 
+reachability and execution paths have 
+to be evaluated in the context of 
+procedures registered as external signal-handlers.
+`p`
+
+
+`p.
+Consider a scenario where an application, being upgraded, 
+is redesigned to support two different file-handling 
+models: one for local filesystems and one for cloud 
+storage.  Certain procedures (e.g., one to check 
+whether the file has been modified since the time 
+of last save) may be relevant for both scenarios; 
+others would only be active in contexts where 
+cloud-saving is possible (an open internet connection, say) 
+or, respectively, local file-system access.  Introducing 
+new procedures to manage the cloud-storage case 
+alters the applications inter-procedural `q.connectivity`/, 
+potentially requring analyses to be updated 
+with respect to conditions wherein a certain 
+procedure might be called (or might be 
+unreachable).  The fact that such information 
+`i.about` applications is subject to change 
+(insofar as applications are continually 
+refined or redesigned) indicates that information 
+`i.about` application code should be managed in a 
+systmatic fashion.  This might be 
+done through `VM; representations directly, 
+or at least source code and/or documentation 
+`i.available` to `VM; compilers can draw 
+meta-data from such sources.  In other words, 
+we can assume that applications are engineered 
+in coding environments where information 
+(including, for example, which procedures 
+play the role of external signal-handlers) 
+is detailed with enough rigor to be 
+read by `VM; compilers and/or runtimes.  
+For example, `VM; code could then internally 
+incorporate representations related 
+to reactive control flow and `GUI; objects 
+which iconify pragmas for initiating 
+application actions from users' points of view. 
+`p`
+
+
+`p.
+Analogous to `q.constructor channels` as 
+special-purpose sites notating the 
+origination of typed `i.values`/, a 
+channel-based `VM; could similarly support 
+special-purpose `i.input` channels 
+which carry external-signal data 
+(we might call these `q.reactive` channels).  
+In the same way that `q.co-constructors` 
+are declared by assembling constructor 
+channels, external-signal handlers could 
+then be identified through the presence 
+of reactive channels.  This makes it 
+easy to identify all execution points 
+where external signals could 
+trigger procedure-chains: simply observe 
+for whenever a reactive channel is `q.opened` 
+during the course of building a 
+channelized neighborhood.     
+`p`
+
+
+`p.
+External signals (as initiators of procedure-chains 
+that disrupt applications' passive `q.event-loop` 
+states) offer one example of how reactive programming 
+and `VM; design intersect, but there are 
+related scenarios that could also be mentioned.  
+For example, applications' `GUI;s are typically 
+seen as a `TwoD; visual extext populated with 
+viewable objects that are simultaneously 
+spaces to represent pieces of information to 
+users (e.g., text, via readable characters; 
+or numbers, via printed characters or indicators 
+like dials and sliders; or graphics, via image 
+or `ThreeD; displays) and origination-points 
+for user gestures (e.g., scrolling on a slider 
+to increase/decrease a value).  My above comments 
+touched on the latter capabilities, but 
+interpreting user gestures depends on the 
+information currently presented through the 
+relevant `GUI; control.  As such, it is 
+useful to track systematically how 
+`GUI;s are populated with data.  A useful 
+maxim is that each class representing 
+distinct `GUI; controls should be 
+paired with a separate class representing 
+the data which is visible within 
+such controls.  This is straightforward 
+if a control (or in general a `GUI; `q.gadget`/) 
+indicates one simple quantity (consider a slider 
+that adjusts the zoom-level for viewing an image), 
+but even more complex `GUI; areas whose display 
+is spread over multiple subcontrols can be associated 
+with a multi-field datatype.  Two datatypes 
+are then closely interconnected: one represents 
+some data-aggregate from a computational 
+perspective (ensuring that all fields are properly 
+initialized, packaging the data for persistence 
+or serialization, and so forth) while the 
+other trasnlates the same information into 
+visual indicators for user interaction.  
+To the degree that `GUI; and application-level 
+datatypes are closely aligned, `VM; code 
+can be annotated to mark and leverage such 
+alignment.      
+`p`
+
+
+`p.
+In general %-- continuing these `GUI;-related 
+examples %-- inter-connections between `GUI; 
+components, user actions, and the datatypes 
+shown and affected by either tend to appear 
+in multiple contexts.  Consider (as above) 
+an image zoom level, indicated (and adjusted) 
+by a slider-contol.  It is not uncommon for 
+zooming (in and out) also to be initiated by 
+small arrows adjacent to a slider, or by 
+context-menu options on image-displays themselves, 
+or by keystroke sequences like control-plus either 
+plus or minus (holding the `q.control` key and 
+tapping the plur or minus keys to increase 
+or decrease zoom).  Preumably altering zoom levels 
+via these other gestures should cause the 
+zoom-slider to be adjusted propertionately.  
+There are, then, potentially five different 
+gestures which might affect zoom levels, each associated 
+with `GUI; controls in different ways: directly 
+interacting with either a slider or arrow buttons, 
+or via a context menu (within an image-display), plus 
+via keyboard actions.  Such interrelationships 
+should be tracked with some degree of rigor to 
+maintain a consistent `q.User Experience`/.  
+For example, a common pattern in `GUI; programming 
+is top implement `q.tool tips`/, or floating text 
+blurbs that appear when users hover over `GUI; controls, 
+explaining the purpose and pragmatics associated 
+with the control itself.  Insofar as multiple controls 
+can be used for image-zoom, each should be 
+provided tool-tip text accordingly; it would 
+be useful to confirm that policies along these 
+links are sustained in an application code-base, 
+ideally via static code-analysis.  Important 
+gesture/feature connections need be programmed 
+in multiple contexts, apart from the underlying 
+signal-handlers themselves, including tool-tips, 
+help-menu information, documentation, application 
+history and undo/redo capabilities, 
+notifications (e.g., small labels sometimes 
+displayed near the bottom of application
+windows clarifying recent actions, such as a 
+string confirming that an image was zoom to a particular 
+percentage) and unit or integration testing.     
+`p`
+
+
+`p.
+Or, consider again issues with application upgrades.  
+In the example I suggested `visavis; cloud versus 
+filesystem saves, there may be multiple controls 
+and data types associated with the cloud 
+functionality, including windows where 
+users register credentials to access a cloud 
+service and strings giving a remote path 
+for files on cloud servers %-- each of the 
+`GUI; elements presenting the corresponding strings 
+(path names, users names, passwords, etc.) are 
+logically interconnected by their common utility 
+in the guise of cloud file backup.  Meanwhile, the 
+`q.image zoom` case can likewise be extended to 
+hypothetical `q.upgrade` examples: consider the 
+fact that some image displays use modified 
+`i.mouse gestures` for zooms, such as cursor up/down 
+with a key pressed, often the shift key (these 
+pragmas are borrowed from `ThreeD; displays, which try 
+to fit the 6 or 12 degrees of freedom in `ThreeD; graphics 
+to conventional mouse and keyboard gestures 
+%-- rotations; zoom; and translations, i.e. moving 
+parallel to x, y, or z axes; each of which can 
+occur within the model or within the `q.camera` %-- using 
+the keyboard to compensate for mouse-move gestures 
+have only `i.two` degrees of freedom).  Consider an 
+application which decides to support this latter 
+`ThreeD;-style zoom gesture added on to prior 
+functionality; this decision would propagate to 
+concerns such as those itemized at the end 
+of last paragraph (test suites, documentation, 
+help menus, undo/redo, etc.).  Applications
+which tend to be intuitive and responsive 
+from a User Experience point of view 
+%-- where it is easy for users to understand 
+how to initiate their desired actions 
+by interacting with the software, and 
+to learn the requisite steps when they 
+do not know the pragmas ahead to time 
+%-- consistently model the full 
+network of interconnections between 
+application-level capabilities, 
+`GUI; display elements, and user pragmatics.
+`p`
+
+
+`p.
+It is also worth pointing out that such 
+goals overlap with database engineering.  
+Controls to set zoom levels may be 
+factored in to a database profile 
+insofar as the optimal (or most recent) 
+zoom level for viewing an image might 
+be stored as one metadata-point in an 
+image database.  Similarly, a file's 
+cloud-hosted save-path would be a relevant 
+piece of information to track in a database 
+for which that file is an external resource-object.  
+Cyber-Physical networks belong in the 
+discussion as well: `CPS; devices, for 
+example, tend to have quantitative 
+profiles (data ranges and measurement units) 
+which would be relevant both for database 
+persistence and for `GUI; admin controls.  
+When a `GUI; indicator models 
+`CPS; sensor readings or actuator settings 
+(a thermostate temperature level, say) the 
+relevant value-range and units 
+(e.g., Fahrenheit or Celcius) should 
+be explicated in `GUI; code (obviously, an 
+indicator needs to know how each value to 
+be displayed compares to valid minima/maxima, 
+and should identify and clarify for 
+the user, perhaps supporting alternation between, 
+Fahrenheit/Celcius, or metric/imperial, and so forth).
+`p`
+
+
+`p.
+User Experience (`UX;) sometimes appears to be treated 
+as if it were a stylistic and subjective 
+dimension to software engineering more 
+than a technical or mathematical problem, but 
+effective User Interface design %-- and its 
+interceonnections with such theses as database 
+engineering and `CPD; networks %-- hopefully 
+show that rigorous `UX; engineering requires 
+highly structured models of software and `GUI; 
+components, as well as application-level data types, 
+with their interconnections and value-synchronizations.  
+There are various ways to enforce disciplined 
+engineering standards to sustain quality `UX;, 
+but at least one set of tools for this 
+purpose can derive from `VM; resources 
+%-- whether in the form of script-like layers 
+interposed between `GUI; elements and application 
+procedures, or runtimes for unit-testing and 
+prototyping, or representations of application 
+code for static analysis (or some combination).   
+`p`
+
+
+`p.
+I contend that trends such as Industry 4.0 
+foretell an increasing convergence between 
+technologies related to User Experience and 
+User Interface, Cyber-Physical Systems, `ThreeD; 
+graphics, and Requirements Engineering.  
+The forces behind such dynamics reflect 
+how digitization and computer analytics 
+has the power to increasingly shapes 
+industries such as manufacturing, architecture, 
+green tech, and scientific research.  Modern graphics 
+cards can fluidly display interactive `ThreeD; 
+models of industrial parts (on a small scale) 
+to building renderings and urban designs 
+(on a large scale) and everything in between, allowing 
+users to visualize planned or manufactured objects/spaces 
+for design, training, or simulations.  Digital `q.twins`/, 
+moreover, serve as presentations or anchoring-points for 
+data-aggregates specifying objects' or designs' 
+requirements and specifications.  The digital twin 
+concept implicitly posits relationships 
+between an object's or design's `ThreeD; spatial 
+form and its functional purpose, material/mechanical 
+properties, fault tolerance, energy consumptions, and 
+similar usability and quality-assurance metrics.  
+Stakeholders can use software both to form 
+visual images of materials and spaces as 
+physical environments and as functionally 
+organized systems, with software being able 
+to migrate between more geometric (e.g., `ThreeD; 
+rendering) and more data-oriented (e.g., specs-table) 
+modes.  Given these application capabilities, digital 
+platforms can simulate and analyze physical 
+and/or functional systems with an unprecedented 
+degree of computational accuracy and, simultaneously, 
+user interaction, allowing software ecosystems to be 
+a larger presence in industria/architectural 
+(and etc.) planning, construction, and maintenance. 
+`p`
+
+
+`p.
+I do not sketch this account from the 
+point of view of advocacy, but instead 
+to point out that maximizing the benefits 
+of existing digitization capabilities 
+depends on software which systematically 
+and interactive unifies visualization 
+and data curation/analytic aspects 
+(e.g., `ThreeD; graphics alongside 
+specs presentations), which in turn 
+calls for advanced database and 
+application-development capabilities, 
+at least if software fitting these 
+characterizations is to be developed 
+in a cost-effective, extensible/adaptible, 
+and widely available manner.  I have emphasized 
+how Virtual Machine engineering can fit into 
+this overall seachange in application-development 
+requirements and standards, with amore 
+holistic attention to such details 
+as database query-processing and `GUI; 
+design than were, arguably, emphasized 
+by earlier `VM; paradigms.  
+`p`
 
 
 

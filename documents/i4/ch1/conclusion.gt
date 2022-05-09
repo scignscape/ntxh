@@ -1,0 +1,263 @@
+`section.Conclusion`
+
+`p.
+My discussion at the end of last section centered 
+on `GUI; design/implementation, and %-- given 
+this books overarching industrial and `AI; themes 
+%-- it seems appropriate to conclude the chapter 
+by pointing out the overlap between the former 
+and latter subject-areas.  In terms of `q.Industry 4.0`/, 
+one plausible anticipation %--reprising also 
+the trends I mentioned last paragraph %-- is an 
+increasing emphasis on `i.multi-model` User 
+Experience.  People will likely interact 
+with software in an expanding variety of 
+ways, such as voice and touch alongside 
+existing popular interaction modes.
+`p`
+
+
+`p.
+It is not uncommon in recent years to read suggestions 
+that technologies such as touch-screens %-- 
+whether on phone apps or `i.in-situ` interactive 
+displays (checking tranit info from a large-screen 
+display at the station, say) %-- are rendering 
+(now-) traditional `q.mouse-and-keyboard` interaction 
+modes `q.obsolete`/.  My comments about 
+multi-modality are `i.not` intended to reprise 
+these sorts of claims, because I think they 
+miss an important point: the interactions associated 
+with desktop applications in many ways 
+represent excellent technological design.  
+THe mouse-and-keyboard setup fits comfortably 
+into the physical space around personal computers 
+and permits intuitive, precise gesture.  Compared 
+to mouse pragmatics, touchscreens (for example) 
+actually feel clunky and coarse-grained.  
+In this sense `q.mouse-and-keyboard` is not 
+so much outdated as a benchmark: it is true 
+that this specific configration is impractical 
+for many `i.in situ` cases where people will be 
+using software in a transit hub, say, 
+or a construction site, or smart-home control 
+screen.  The mouse/keyboard paradigm 
+is old-fashioned at least in the sense that 
+it is bound to a certain form of computer 
+equipment and does not obviously translate 
+to future computing scenarios where software 
+is built in to our ambient environments.  
+The problem however is to design new 
+equipment which has a comparable acuity 
+and usability `i.to` mouse-and-keyboard 
+setups, and arguably to emulate these 
+as best as possible; i.e., the fact 
+that desktop-computer pragmatics does 
+not translate to `i.in-situ` modalities 
+should be considered a deficit to overcome, 
+not a feature reelgating desktop comptuers to obscurity.
+`p`
+
+
+`p.
+Multi-modality, in short, is still an evolving 
+field of technology.  Ideas such as `q.stylus` 
+pens may emulate the exactitude of mouse-clicks 
+and on-screen cursors %-- allowing 
+for dense, feature-rich front-ends %-- but they apparently feel 
+for many users difficult to haptically 
+maniuplate; touch-gestures may feel more 
+natural, but they are fuzzier (forcing 
+simplified displays).  An intriguing 
+form of multi-modality involves voice commands 
+(eschewing manual gestures entirely), but 
+it is not obvious how to avoid users' sense 
+of having to give extra thought into 
+vocalizing commands when their intentions 
+can be signaled by a tiny movement 
+(e.g., a mouse click), leaving aside the 
+question of ensuring sufficiently accurate 
+Speech Technology for seamless 
+`HCI;.  Discussions about speech-based 
+`HCI; sometimes give the impression that 
+the impediments are solely in this latter 
+`NLP; dimension, but even if we have 
+almost perfect computational capabilities 
+to transcribe and parse speech, I find 
+it hardly self-evident that pragmatics 
+where we `i.talk to` computers will be 
+(in general cases) a more intuitive 
+style of `HCI; than physical gestures.  
+Psychologically, we comport to spoken 
+language in the guise of sentences and 
+speech-turns, unfolding multiple ideas 
+in sequential patterns.  Language has a 
+different structure than fine-motor 
+skills, and most `HCI; gesture lack 
+language's temporality and strucuturation; 
+instead, we interact with computers 
+optimally via multiple tiny 
+gestures in isolation, like clicking a 
+mouse, then moving it a short distance, 
+and clicking again.  We should question 
+whether this highly discrete environment 
+for performing purposeful gestures 
+translates readily to a spoken environment. 
+`p`
+
+
+`p.
+When contemplating future multi-modal `HCI;, 
+one reasonable question is how aggressively 
+`AI; can be harnessed in this context.  The 
+example of spoken-command interfaces 
+point to how `AI; `i.could potentially` 
+engender new multi-modal capabilities, because in 
+principle we can bring (via `AI;) much 
+more nuanced interpretations of user 
+actions than would be possible otherwise.  
+On the other hand, for reasons I just sketched 
+`AI; at least in the `NLP; context 
+isn't guaranteed to imprmove on more 
+mechanical `HCI; options.  We can, of course, 
+imagine other scenarios %-- robots with 
+interactive displays, for example, that reconfigure 
+their shape to make gesture-based interactions 
+most convient for users (adjusting based on someone's 
+height, for example), perhaps deploying 
+`AI; to anticipate user preferences.  
+It is equally possible, however, that the 
+key to optimal `HCI; `q.in the field` 
+will come from new interactive devices that 
+have features resembling (say) a mouse, 
+or trackballs, but adapted to more free-form 
+utilization in more physically open-ended 
+spaces.  In short, within Industry 4.0 we 
+can expect an increasing emphasis on software 
+`i.in situ` %-- digital tools that are coextensive 
+with sites where we perform activities, using 
+applications as enhancements to real-world 
+places and equipment rather than sequestered 
+in computer terminals %-- but we need 
+to figure out how to implement 
+`HCI; in such free-form contexts in ways that 
+do not minimize applications' `i.own` value.  
+Usability from the mechanical/enactive point of 
+view is not the same as application design 
+optimized frmo the perspective of making 
+many software features available to users 
+in a convenient manner.  There are many 
+application paradigms %-- context menus, 
+tooltips, keyboard modifiers and shortcuts, 
+mouseover effects and other pragmatic cues 
+%-- which help organize software 
+functionality so that applications can 
+expose many capabilities while still 
+being intuitive and learnable from the 
+user's point of view.  Replicating 
+this kind of feature-availability 
+`i.in situ` in industrial, architectural, or 
+immersive settings is a difficult problem, and 
+a different one than merely creating 
+interactive modes (like voice-activation 
+or touch-screens) that feel efficient if 
+we consider only the effort to a single 
+command, as opposed to using applications 
+for multiple and varied functionality.  
+`p`
+
+`p.
+I will not speculate here on optimal 
+physical designs for future multi-modal systems.  
+My point is rather that the technology 
+should be considered still very open-ended, 
+so we cannot predict `i.a priori` how 
+application-development paradigms will 
+need to evolve in consort with multi-modal 
+`HCI;.  Rather than focus on any one 
+specific interactive mode, then, a 
+useful strategy would be to 
+advance application-level software engineering 
+so that new `HCI; ideas and devices can 
+be integrated with existing application 
+code and convention as readily as possible.  
+I would argue that this goal, in turn, 
+should direct us to optimize the 
+building-block levels which are 
+essential to software implementation in 
+whatever `HCI; guise %-- database architecture, 
+data sharing, `GUI; modeling, Requirements 
+Engineering, and so forth; in this 
+chapter I have focused on `VM; engineering  
+as a means to this end. 
+`p`
+
+`p.
+As a final comment about `AI;, concerns I raised 
+about how best to incorporate `AI; capabilities 
+into `HCI; pragmatics potentially 
+reveal larger questions about modeing 
+the connection between `AI; and computing 
+environmments in general.  A lot of 
+discussion about `AI; seems to take place 
+in a vacuum, as if there mere existence 
+of new `AI; or Machine-Learning driven 
+capabilities automtatically translates 
+to software improvements.  However, the benefits 
+of `AI; depend on insights gleaned 
+from `AI;-related technology being 
+presented to `i.people` in informative, 
+productive ways.  This, in turn, calls 
+for interrogating how `AI; capabilities 
+become situated relative to applications: 
+how are data derived from `AI; visualized 
+and documented?  How can we double-check 
+`AI;?  How can users initiate computational 
+processes where `AI: is one of or the 
+main driving force?   
+`p`
+
+
+`p.
+These questions are phrased from users' 
+point of view, but analogous concerns 
+present themselves around programming 
+itself: how should applications 
+be `i.developed` in the context 
+of `AI; integration?  How should 
+`AI; components be invoked operationally?  
+How should the parameters, initial 
+conditions, input data, or anticipated 
+goals for an `AI; process be declared 
+ahead of time?  How should `AI; results 
+be encoded, alongwith information 
+`i.about` the `AI; process, such as 
+degree of certainty, and how should 
+applications guide and fine-tune 
+`AI; processes underway (e.g., request to 
+optimize either for time or for accuracy)? 
+`p`
+
+
+`p.
+These are broad questions in the context 
+of `AI; proper, but we can consider 
+some of the details more specifically 
+by narrowing to certain capabilities 
+`i.within` `AI;, such as Computer Vision, 
+which will be a theme of the next 
+chapter.  I do not intend to 
+insinuate that image-processing 
+in general is a canonical example 
+of `AI; overall, or even that everything 
+broadly conceived in the scope of 
+quantitative image-analysis should be 
+considered `q.part` of `AI;, but 
+in any case image-processing serves as either a 
+useful proxy or case-study for 
+`AI; in the application-integration context.  
+This topic, then, will be revisted in 
+the next chapter.   
+`p`
+
+
