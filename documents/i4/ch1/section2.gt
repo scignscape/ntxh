@@ -787,7 +787,7 @@ composition can be
 analogous to an algebraic operation %-- 
 from `f; and `g; get `fofg; (and `goff;, which 
 is generally different).  Once one or more 
-function has arity two or greater, however, we 
+functions has arity two or greater, however, we 
 have a set of multiple composition-options 
 %-- `fxgx;, `fxgy;, `fgxy;, `fgxgx;, `fgxgy;, 
 for example, are all potential compositions 
@@ -860,7 +860,7 @@ and variables respectively) there is a
 combinator `Ccomb; such that the string 
 `Cfetcxetc; reduces to the relevant 
 structure (where `Ccomb; can itself be a string 
-other other, more primitive combinators).  
+of other, more primitive combinators).  
 In this context combinators play an 
 enumerative role analogous 
 to (what I am calling) De Bruijn 
@@ -2170,10 +2170,48 @@ own functionality for managing (in effect) stack
 frames when such channels are active.
 `p`
 
+`p.
+Furthermore, channels can act as a grouping mechanism 
+tieing together procedure arguments which are logically 
+interconnected (to a greater degree than merely co-existing 
+as arguments).  An example would be unit/scale-decorated 
+types: suppose a function calculates a formula which 
+requires two arguments with the same dimension and measurement 
+units (kilometers, say) plus a third argument which 
+is just a scalar; evidently the first two arguments are 
+mutually constrained in a fashion distinct from the third.  
+Or consider a calculation with a scalar plus two mathematical vectors 
+which should have the same length %-- the latter condition 
+might be modeled with a dependent-type construction on the second 
+vector, or some runtime check for the two vectors together, 
+in either case demarcating the vectors as paired arguments 
+distinct from the scalar.  One strategy to satisfy these 
+runtime use-cases would be to implement channel semantics
+where special guarantees (finer than type-checking alone) 
+are enforced while the channels are being populated.`footnote.
+In this case the one-channel-kind-per-neighborhood restriction 
+might be relaxed, since mutual connections could exist 
+between (say) some input parameters and not others; or 
+one could adopt something like `q.subchannels` which 
+semantically refine the channels around them.
+`footnote`
+`p`
 
 `p.
 Doubtless, some of the features enabled by channels 
-could be achieved via other means.  Channels, 
+could be achieved via other means.`footnote.
+For example, 
+aggregating input parameters as mentioned last paragraph 
+might be achieved alternatively via explicit 
+dependent typing or via smashing tuples into 
+single (aggregate) arguments.  However, depedent 
+types are notoriously difficult to implement 
+in the context of Software Language Engineering, 
+and the latter alternative could be syntactically 
+unwieldy (if done explicitly in source code) 
+or complex in its own right to implement 
+(if done behind the scenes).
+`footnote`  Channels, 
 however, present a convenient interface for 
 organizing the range of functionality 
 entailed by the relevent channel semantics.  
@@ -2610,8 +2648,8 @@ as if it were a stylistic and subjective
 dimension to software engineering more 
 than a technical or mathematical problem, but 
 effective User Interface design %-- and its 
-interceonnections with such theses as database 
-engineering and `CPD; networks %-- hopefully 
+interconnections with such themes as database 
+engineering and `CPS; networks %-- hopefully 
 show that rigorous `UX; engineering requires 
 highly structured models of software and `GUI; 
 components, as well as application-level data types, 
