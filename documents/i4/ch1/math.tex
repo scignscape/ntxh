@@ -1,19 +1,46 @@
 
-\newcommand{\v}{\ensuremath{v}}
-\newcommand{\f}{\ensuremath{f}}
-\newcommand{\g}{\ensuremath{g}}
+%\newcommand{\ttr}[1]{\hspace*{0pt}\raisebox{-1pt}{\texttt{\Large{#1}}}\hspace{0pt}}
+\newcommand{\ttr}[1]{\raisebox{-.5pt}{\resizebox{7pt}{!}{{\texttt{{#1}}}}}}
+
+\newcommand{\vx}{\ttr{v}}
+\newcommand{\f}{\ttr{f}}
+\newcommand{\g}{\ttr{g}}
+
+
+\newcommand{\nary}{\ensuremath{n}-ary}
 
 \newcommand{\arity}{\ensuremath{a}}
+
+\usepackage{textcomp}
+
 \newcommand{\arityPrime}{\ensuremath{a{\textquotesingle}}}
+\newcommand{\arityprime}{\ensuremath{a{\textquotesingle}}}
 
 \newcommand{\arityprimelessthanarity}{\ensuremath{\arityPrime{} < \arity{}}}
 
-\newcommand{\onearityprime}{\ensuremath{1 ... \arityPrime{}}}
+\newcommand{\onearityprime}{\ensuremath{1 \ldots{} \arityPrime{}}}
 
 \newcommand{\arityprimeplusone}{\ensuremath{\arityPrime{} + 1}}
 
 \newcommand{\nlightblue}{\textcolor{cyan!60!black}{\ensuremath{n}}}
 \newcommand{\ndarkblue}{\textcolor{blue!50!black}{\ensuremath{n}}}
+
+\newcommand{\emsm}[1]{\resizebox{!}{6pt}{\ensuremath{#1}}}
+
+
+
+\newcommand{\fRed}{\textcolor{red!60!black}{\ttr{f}}}
+\newcommand{\fOneTwoThree}{\fRed\textcolor{blue!50!black}{\emsm{123}}}
+\newcommand{\fOneTwoThreeGFour}{\fOneTwoThree\textcolor{black!50}{\emsm{4}}}
+\newcommand{\fOneTwoThreeGFourFive}{\fOneTwoThree\textcolor{black!50}{\emsm{45}}}
+
+\newcommand{\enmlightblue}[1]{\textcolor{cyan!60!black}{\emsm{#1}}}
+\newcommand{\enmdarkblue}[1]{\textcolor{blue!50!black}{\emsm{#1}}}
+
+
+\newcommand{\fOneTwoOne}{\fRed\enmlightblue{1}\enmdarkblue{2}\enmlightblue{1}}
+\newcommand{\fOneTwoTwo}{\fRed\enmdarkblue{1}\enmlightblue{2}\enmlightblue{2}}
+
 
 
 \newcommand{\goff}{\ensuremath{g \circ{} f}}
@@ -25,10 +52,10 @@
 \newcommand{\Ntwo}{\ensuremath{N_2}}
 
 \newcommand{\fxgx}{\ensuremath{fx(gx)}}
-\newcommand{\fxgx}{\ensuremath{fx(gy)}}
-\newcommand{\fxgx}{\ensuremath{f(gx)y)}}
-\newcommand{\fxgx}{\ensuremath{f(gx)(gx)}}
-\newcommand{\fxgx}{\ensuremath{f(gx)(gy)}}
+\newcommand{\fxgy}{\ensuremath{fx(gy)}}
+\newcommand{\fgxy}{\ensuremath{f(gx)y)}}
+\newcommand{\fgxgx}{\ensuremath{f(gx)(gx)}}
+\newcommand{\fgxgy}{\ensuremath{f(gx)(gy)}}
 
 \newcommand{\fxy}{\ensuremath{fxy}}
 \newcommand{\fyx}{\ensuremath{fyx}}
@@ -48,7 +75,7 @@
 \newcommand{\Bcomb}{\combinator{B}}
 \newcommand{\Ycomb}{\combinator{Y}}
 
-\newcommand{\reduces}{\ensuremath{\rangle{}--}}
+\newcommand{\reduces}{\makebox{\ensuremath{\rangle{}\hspace*{-2pt}}{---}}}
 
 \newcommand{\Sfgx}{\ensuremath{\Scomb{}fgx}}
 \newcommand{\fxparengx}{\ensuremath{fx(gx)}}

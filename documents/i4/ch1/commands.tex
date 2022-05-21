@@ -44,12 +44,17 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 \newcommand{\acronymResizeBox}[1]{#1}
 
 \include{acronyms}
+\include{math}
+%fRed
+
 
 \renewcommand{\b}[1]{\textbf{#1}}
 
 \let{\OldI}{\i}
 \renewcommand{\i}[1]{\textit{#1}}
 
+
+\newcommand{\Schutzenberger}{Sch\"utzenberger}
 
 
 \newcommand{\communique}{communiqu\'e}
@@ -68,6 +73,66 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 
 
 
+%\newcommand{\anondefin}[1]{\begin{definition}#1\end{definition}}
 
+\usepackage{amsthm}
+\theoremstyle{definition}
+
+%\usepackage{ntheorem}
+%\theorembodyfont{\upshape}
+%\newtheorem{definition}{Definition}
+
+\newtheorem*{definition*}{Definition}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+
+\newtheorem{lemma}{Lemma}
+
+\usepackage{setspace}
+
+\usepackage{changepage}
+
+
+\newcommand{\spac}[2]{{\begin{spacing}{#1}#2\end{spacing}}}
+
+\newcommand{\lmargspac}[5]{\begin{adjustwidth}{#1}{0pt}\spac{#2}{%
+\noindent\hspace*{-#1}#3\hspace{#4}#5}\end{adjustwidth}}
+
+\newcommand{\lemmastatement}[1]{\vspace{10pt}%
+\begin{lemma}%\spac{1.1}{\small{#1}}
+\lmargspac{3pt}{1.1}{}{}{%
+\small{#1}}
+\end{lemma}
+\vspace{-10pt}}
+
+\newcommand{\theoremstatement}[1]{\begin{theorem}#1\end{theorem}}
+
+\newcommand{\lemmaproof}[1]{\lmargspac{3pt}{1.1}{\textit{\textbf{Proof}}}{16}{%
+\small{#1}}}
+
+
+\newcommand{\theoremproof}[1]{\noindent\textit{\textbf{Proof}} #1}
+
+
+%\newcommand{\anondefin}[1]{\begin{definition*}#1\end{definition*}}
+
+\newcommand{\anondefin}[1]{%\vspace{2pt}%
+\begin{definition*}
+\lmargspac{5pt}{1.1}{}{}{%
+\small{#1}}
+\end{definition*}
+%\vspace{-30pt}
+}
+
+\newcommand{\defin}[2]{%\vspace{2pt}%
+\begin{definition*}
+\lmargspac{5pt}{1.1}{}{}{%
+\small{\textit{#1}: #2}}
+\end{definition*}
+%\vspace{-30pt}
+}
+
+
+%\newcommand{\defin}[2]{\begin{definition}\textit{#1}: #2\end{definition}}
 
 

@@ -30,14 +30,14 @@ these sorts of claims, because I think they
 miss an important point: the interactions associated 
 with desktop applications in many ways 
 represent excellent technological design.  
-THe mouse-and-keyboard setup fits comfortably 
+The mouse-and-keyboard setup fits comfortably 
 into the physical space around personal computers 
 and permits intuitive, precise gesture.  Compared 
 to mouse pragmatics, touchscreens (for example) 
 actually feel clunky and coarse-grained.  
 In this sense `q.mouse-and-keyboard` is not 
 so much outdated as a benchmark: it is true 
-that this specific configration is impractical 
+that this specific configuration is impractical 
 for many `i.in situ` cases where people will be 
 using software in a transit hub, say, 
 or a construction site, or smart-home control 
@@ -55,7 +55,7 @@ as best as possible; i.e., the fact
 that desktop-computer pragmatics does 
 not translate to `i.in-situ` modalities 
 should be considered a deficit to overcome, 
-not a feature reelgating desktop comptuers to obscurity.
+not a feature relegating desktop computers to obscurity.
 `p`
 
 
@@ -66,7 +66,7 @@ pens may emulate the exactitude of mouse-clicks
 and on-screen cursors %-- allowing 
 for dense, feature-rich front-ends %-- but they apparently feel 
 for many users difficult to haptically 
-maniuplate; touch-gestures may feel more 
+manipulate; touch-gestures may feel more 
 natural, but they are fuzzier (forcing 
 simplified displays).  An intriguing 
 form of multi-modality involves voice commands 
@@ -118,12 +118,12 @@ more nuanced interpretations of user
 actions than would be possible otherwise.  
 On the other hand, for reasons I just sketched 
 `AI; at least in the `NLP; context 
-isn't guaranteed to imprmove on more 
+isn't guaranteed to improve on more 
 mechanical `HCI; options.  We can, of course, 
 imagine other scenarios %-- robots with 
 interactive displays, for example, that reconfigure 
 their shape to make gesture-based interactions 
-most convient for users (adjusting based on someone's 
+most convenient for users (adjusting based on someone's 
 height, for example), perhaps deploying 
 `AI; to anticipate user preferences.  
 It is equally possible, however, that the 
@@ -144,7 +144,7 @@ to figure out how to implement
 do not minimize applications' `i.own` value.  
 Usability from the mechanical/enactive point of 
 view is not the same as application design 
-optimized frmo the perspective of making 
+optimized from the perspective of making 
 many software features available to users 
 in a convenient manner.  There are many 
 application paradigms %-- context menus, 
@@ -196,13 +196,13 @@ as a means to this end.
 As a final comment about `AI;, concerns I raised 
 about how best to incorporate `AI; capabilities 
 into `HCI; pragmatics potentially 
-reveal larger questions about modeing 
+reveal larger questions about modeling 
 the connection between `AI; and computing 
-environmments in general.  A lot of 
+environments in general.  A lot of 
 discussion about `AI; seems to take place 
 in a vacuum, as if there mere existence 
 of new `AI; or Machine-Learning driven 
-capabilities automtatically translates 
+capabilities automatically translates 
 to software improvements.  However, the benefits 
 of `AI; depend on insights gleaned 
 from `AI;-related technology being 
@@ -213,7 +213,7 @@ become situated relative to applications:
 how are data derived from `AI; visualized 
 and documented?  How can we double-check 
 `AI;?  How can users initiate computational 
-processes where `AI: is one of or the 
+processes where `AI;: is one of or the 
 main driving force?   
 `p`
 
@@ -230,7 +230,7 @@ How should the parameters, initial
 conditions, input data, or anticipated 
 goals for an `AI; process be declared 
 ahead of time?  How should `AI; results 
-be encoded, alongwith information 
+be encoded, along with information 
 `i.about` the `AI; process, such as 
 degree of certainty, and how should 
 applications guide and fine-tune 
@@ -256,7 +256,7 @@ considered `q.part` of `AI;, but
 in any case image-processing serves as either a 
 useful proxy or case-study for 
 `AI; in the application-integration context.  
-This topic, then, will be revisted in 
+This topic, then, will be revisited in 
 the next chapter.   
 `p`
 
