@@ -10,7 +10,7 @@ paradigms can easily remain at the level of semi-formalized
 `q.design patterns` or (concrete programming) best practices 
 %-- subject matter for developer's message boards and the like 
 but lacking a rigorous technical firmament to be 
-analyzed in depth.  I believe that investigation of data-repersentations 
+analyzed in depth.  I believe that investigation of data-representations 
 can be a scientific topic befitting in-depth analysis, not 
 just a semi-formal cadre of observations orbiting coding practice.  
 I do not expect that claim to be taken for granted, however; 
@@ -647,7 +647,7 @@ evident to the degree that hypergraph databases
 support a query system such that updates (and 
 analogous modifications to a database instance) 
 are initiated with relatively less 
-biolerplate code.    
+boilerplate code.    
 `p`
 
 

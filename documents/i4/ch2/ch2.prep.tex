@@ -1,0 +1,56 @@
+\documentclass[11pt,twocolumn]{article}
+
+\input{commands}
+
+\input{ngml/ngml-setup-commands}
+\input{ngml/ngml-sdi-commands}
+\input{ngml/ngml-deco-commands}
+
+\AtEndDocument{\immediate\write18{cd /home/nlevisrael/gits/ntxh/ctg/ar/code/cpp/qmake-console/projects/gtagml/ngml-sdi-console; ./run.sh; cd -;}}
+
+
+
+%\AddToShipoutPicture{%
+%  \AtPageLowerLeft{%
+%    \hspace*{3pt}
+% \rotatebox{90}{%
+%        \begin{minipage}{\paperheight}
+%   \centering
+%   {\color{codegr!65}\textcopyright ~\today{} Nathaniel Christen}
+%        \end{minipage} %
+%      }
+%    } %
+%  }%
+
+%\raggedbottom{}
+% \phantom{x}
+
+\begin{document}
+
+
+{\setstretch{1.2}
+
+\twocolumn[\begin{@twocolumnfalse}
+{\begin{minipage}{7.75in}\begin{center}\begin{minipage}{5in}
+\sdiinput{abstract.gt}
+\end{minipage}\end{center}\end{minipage}}
+\end{@twocolumnfalse}]
+\thispagestyle{empty}
+\cleardoublepage{}
+
+
+\addcontentsline{toc}{section}{Chapter 2: VM and Image Analysis}
+
+\addtocounter{page}{-1}
+
+
+\sdiinput{intro.gt}
+
+\sdiinput{section1.gt}
+\sdiinput{section2.gt}
+\sdiinput{conclusion.gt}
+}
+
+\input{biblio}
+
+\end{document}

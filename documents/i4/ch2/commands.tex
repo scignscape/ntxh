@@ -48,9 +48,9 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 %fRed
 
 
-\renewcommand{\b}[1]{\textbf{#1}}
+\renewcommand{\b}[1]{\textbf{{\small{}#1}}}
 
-\let{\OldI}{\i}
+\let\OldI\i
 \renewcommand{\i}[1]{\textit{#1}}
 
 
@@ -140,6 +140,15 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 \newcommand{\SHRTMAX}{SHRT\_MAX}
 \newcommand{\INTMIN}{INT\_MIN}
 
+\usepackage{enumitem}
+
+\let\OldDescription\description
+
+\renewenvironment{description}
+  {\begin{OldDescription}[style=unboxed]}
+  {\end{OldDescription}}
+
+%\usepackage{listings}
 
 
 %\newcommand{\defin}[2]{\begin{definition}\textit{#1}: #2\end{definition}}

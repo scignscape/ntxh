@@ -1,0 +1,980 @@
+
+\section{Type-Theoretic Constructions at the Virtual Machine Level}
+\p{\:\+The types which lay at the foundation of almost any
+computer system's type hierarchy are integer and floating
+point values with different byte lengths \mdash{} often 1, 2, 4, and 8
+byte integers (distinguishing signed and unsigned types)
+and 4 or 8 byte floating-point numbers (decimal approximations).
+\> It is less common for relatively low-level environments,
+such as conventional Virtual Machines, to model \i{pairs} of
+integers or decimals as \q{base} types, assuming that such values
+would more likely be implemented as types in a high-level
+language (e.g., \b{std::pair} in \Cpp{}). \> However, number-pairs
+are such an essential component of image-processing operations
+that a \VM{} specifically targeting this domain would have
+reason to recognize pairs as equally fundamental to
+single values; since any pixel or location in an image
+needs two independent numbers to be identified, and since
+image-locations are the building blocks around which
+Computer Vision algorithms are constructed, such two-number
+pairs are if anything more \q{foundational} than single values.\;\<
+}
+
+\p{\:\+For similar reasons, one could equally argue that several
+\i{different} number-pair types are foundational.
+\> One consideration for image processing is that different
+Computer Vision libraries utilize different conventions
+about how positions within an image are to be notated.
+\> One detail which varies across platforms concerns where
+location-axes have their origin point: one could have
+the top-left corner correspond to the point (0, 0)
+\mdash{} with axes increasingly down and to the right \mdash{}
+or alternatively the origin at the bottom-right,
+or even the image center. \> Another question is whether
+the horizontal or vertical coordinates are notated first
+in a number-pair. \> These are not complex details, of course,
+but care must be taken to ensure that analytic procedures
+are called with the proper location-encoding, i.e., that
+there is alignment between libraries' and calling procedures
+with respect to location-coordinate conventions.\;\<
+}
+
+\p{\:\+Ensuring such alignment can be promoted via strong-typing: assuming that
+number-pair types are further narrowed to reflect coordinate
+conventions, only locations encoded according to the proper
+rules can be passed to analytic procedures. \> Such policies can
+include how coordinates are names: one common vocabulary for
+pairs, as in tables or spreadsheets, are to identify horizontal
+\q{lines} as \i{rows}, and vertical as \i{columns}. \> Moreover,
+row/column pairs usually notate the \i{row} coordinate first.
+\> Therefore, constraining a pair to be specifically \i{row/column}
+documents that the expected interpretation of the first coordinate
+is vertical (i.e., a vertical distance from the origin) and
+the second is horizontal. \> Conversely, a different popular
+convention (reflecting mathematical norms) is to label
+horizontal values as \b{x} and vertical as \b{y}. \> In
+this case, normally the \b{x} value comes \i{first};
+which illustrates possible confusion, because a number-pair
+would be interpreted differently depending on whether
+it is understood to be row/column (vertical then horizontal)
+or x/y (horizontal then vertical).\;\<
+}
+
+\p{\:\+To add further confusion, some procedure accept inputs in terms
+of \i{lengths}, e.g. width and height, where similar procedures
+would accept location-coordinates. \> So, without full context
+information, it is ambiguous whether a pair designates a coordinate
+or two length measures. \> Consider a procedure to calculate
+the average color or dominant color of some rectangular
+image-region, where the inputs must define a rectangle spanning
+the focus of the computation. \> That rectangle might be described
+via a pair of locations \mdash{} top-left and bottom-right corners, for
+instance \mdash{} or alternatively via \i{one} coordinate-pair
+and one length-pair, e.g., top-left \i{corner} plus \i{width}
+and \i{height}. \> In other words, the second number-pair
+might be a \i{location} (x/y or row/column) or might be
+\i{dimensions} (width/height). \> Confusion can be avoided
+by having a width/height type type distinct from
+location-types, analogous to distinguishing row/column
+from x/y location coordinates. \> At the same time, note
+also that some procedures might take number-pairs
+which do not model geometric quantities such as position
+or length, where terms like \q{width} or \q{column} could
+be misleading \mdash{} in the generic \Cpp{} \b{std::pair},
+for example, the first value is called \q{first} and the
+second \q{second}. \> For such \q{non-geometric} pairs
+one might indeed prefer still another pair-type
+with coordinates labeled as first/second, say.
+\> Indeed, code for the \XCSD{} format (for example)
+supports numerous variations on pair-types,
+including options based on start/end, top/bottom,
+left/right, horizontal/vertical, and above/below
+(e.g., if a pair's \Cpp{} type is, say,
+\b{tl2} \mdash{} meaning top/left, two-byte values \mdash{}
+the first coordinate would be accessed by a \b{.top}
+member and the second by \b{.left}).\;\<
+}
+
+\p{\:\+Even were a virtual machine to natively model number-pairs,
+theorists preferring relatively minimalist \VM{} design
+might think to provide one such pair-type (or perhaps
+several distinguished only by byte-length), anticipating
+that higher-level distinctions between conceptually
+distinct but structurally isomorphic types
+(like row/column, x/y, width/height, and first/second).
+\> Ensuring that strong pair-types are never mismatched
+would then be the responsibility of the compiler emitting
+\VM{} code, not the \VM{} runtime. \> Consider, however, that
+pair-labeling could reasonably be an issue within
+special contexts, such as query-evaluation: an image-database
+could, for example, allow for queries which
+invoke the rectangle-focused procedure mentioned
+above (along the lines of \q{find images whose central third
+rectangle color-averages} to nearly some given shade).
+\> Assuming type-level distinctions such as x/y vs. width/height
+are recognized by the query \i{language}, then query
+\i{evaluators} would of course at some stage ensure that
+an x/y coordinate is not passed to a rectangle \q{constructor}
+which expects width/height dimensions, say. \> Moreover,
+the \q{compilers} that would bridge \i{query} code to
+\VM{} instructions might be significantly different than
+those working on code from other genres, such as scripts
+(with notions of types, scopes, and variables closer
+in spirit to compiled programming languages). \> These
+circumstances could argue for stronger type distinctions
+being recognized even at the \VM{} level, at least to
+some degree of detail, to help guarantee that
+type-enforced conventions are applied in similar
+ways across all environments that user the \VM{},
+notwithstanding their distinct compilation
+models (database queries compared with scripts,
+for instance).\;\<
+}
+
+\p{\:\+From this perspective, then, assume that a \VM{} is
+indeed designed to model \i{several} number-pair types.
+\> This decision then immediately has implications
+for the \i{operations} supported through
+the \VM{}, because some operations seem
+intrinsic to managing paired quantities; for
+instance, transpose (switching the first and
+second values) and arithmetic operations
+(which might involve a single value \mdash{} altering
+both numbers by the same amount \mdash{} or a second
+number-pair, applying the relevant operation between
+the first and seconds pairwise). \> Here is a more complete
+list of some operations which might be used often
+when working with number-pairs, and would be candidates
+for native encoding in a \VM{} context:
+
+\begin{description}
+\item[(strictly) Ascending, descending, spaceship]  As boolean operators,
+return true if the second value is larger (respectively, smaller)
+than (or equal to, for the non-strictly versions) the first. \> The
+\q{spaceship} version (borrowing the terms from many
+high-level programming languages) would return 1, 0 or -1
+depending on whether the second value is greater, equal, or less than the first.
+
+\item[Zeros mask, nonzeros mask, nonnegative mask, spaceship mask]  Return pairs
+whose components are one or zero depending on whether
+the two input pair-values are zero (respectively, are not zero; and, are at least zero).
+\> Similarly, \q{spaceship mask} is a plausible name for a function
+that applies a unary spaceship operator to each coordinate in a
+pair: yielding a new pair, each member either 1, -1, or 0, depending
+on whether the respective number in the original pair is positive, negative, or zero.
+
+\item[Area, ratio]  Product of the two numbers (or perhaps
+absolute value of the product); respectively,
+ratio of the second to the first (or perhaps a version which
+transposes descending pairs before taking the ratio, so the
+result is always at least one, or vice-versa, so the result is at \i{most} one).
+
+\item[Binary merge]  Combines the two numbers into a single
+value occupying different bit-positions: as a unary function, takes
+an argument indicating how many bits to shift the first number,
+before adding (or performing a binary \b{or}) with the second.
+
+\item[Maximum, minimum, difference, positive-integer
+difference, gap]  Greater or lesser of the
+two numbers; or, return the second subtracted from the first
+(the \q{positive integer} variant would result always in a non-negative
+output, mapping negative differences to zero) ,
+or \q{gap} between the two numbers as an absolute value (i.e.,
+maximum minus minimum).
+
+\item[Duplicate, \q{end at}]  Given one number, constructs a
+pair by setting the second value with a desired gap greater
+than the first (or, allowing this parameter to default to
+zero, form a pair with two equal numbers); alternatively,
+modify the second number in an already-existing pair to
+conform to a gap.
+
+\item[Linear intersections]  Given two pairs,
+form a new pair which takes one value from each pair,
+analogous to the \dashbar{} or \bardash{} operators
+in diagram languages such as \b{tikz} (in effect, define a
+third point as the middle vertex of a right-triangle
+whose hypotenuse is the given two points, thus the
+intersection of two lines, one horizontal and one vertical,
+including the two input points;
+there can be two versions for such a function,
+corresponding to the two extra corners of a
+rectangle if the given two points are one diagonal,
+or equivalently which input has the horizontal
+line and which the vertical).
+\> As a variant form, take one pair and then two
+other pairs (defining a line) and calculate the
+nearest distance of the former to the latter.
+
+\item[As arithmetic base]  Treat the two numbers
+as components of a two-digit number in some base
+(provided as a parameter): multiply the first
+number by that input, and add the second. \> This
+operation can be extended to value-triples
+recognized as distinct data types analogous to pairs,
+where the first first number would be multiplied
+by the square of the input.
+
+\item[Floor, ceiling, fit in range]  Modifies a pair's components
+so they are at least (respectively, at most) some value.
+\> Similarly, given two pairs, modify the
+first pair (as needed) to satisfy range-restrictions
+expressed by the second pair. \> For example, alter
+each number (of the first pair) so that it is no
+less than the first coordinate of the second pair,
+and no greater than its second coordinate.
+
+\item[Binary insert]  Treating the first
+number as a bitset, encode the second number
+in a designated bit-sequence within it
+(as a unary operator, simply shift the second
+number left by some count of bits, applying
+binary or of the result to the first; as a
+two-argument function, the second input
+could specify an \i{end} bit, so in effect
+the second number would be truncated of rightmost
+bits as needed and then copied into the
+first using a bitmask-guarded \b{or} operation
+which only alters bits in the specified range.\;\<
+
+\end{description}
+}
+
+\p{\:\+Most of the aforementioned operations are used in the
+demo code associated with this chapter
+(largely for calculations related to the
+\XCSD{} image format), so this code can
+furnish examples of these operations
+employed in concrete code. \> One benefit of
+providing a relatively thorough suite of
+operators defined for number-pairs is
+encouraging programmers to think of
+algorithms in terms of operation-sequences
+on number pairs as integral units, not as
+sequences applied to the two pair-elements
+in isolation. \> Usually pairs designate some
+logically connected entity (e.g., a geometric
+point) and operations have an interpretation
+where it is conceptually accurate to consider
+the pair as one value in a two-coordinate
+space, rather than two separate numbers.
+\> As an example, \XCSD{} uses a function
+called \qquadrantcodeagainst{} which
+is defined (within a \Cpp{} macro) as a
+series of pair-operators: \quadrantcodeagainstimpl{}
+That code may not be more readable than an alternative
+which works with each coordinate separately,
+but it fits within a paradigm where we are
+encouraged to think of pairs as self-contained
+mathematical entities wherever possible.\;\<
+}
+
+\p{\:\+Although the names chosen for some of these operations
+might make more sense in some types' contexts
+than other (\q{area} as a label for the inner-product
+absolute value fits width/height better than
+row/column, for example), it seems reasonable
+to provide operators for all versions of structurally
+similar types absent compelling reasons to make
+specific exceptions. \> Moreover, distinctions
+such as row/column versus width/height
+(and x/y, first/second, top/left, etc.) are orthogonal
+to signed/unsigned, integer/float, and byte lengths for the components,
+so we can derive a fairly large number of \q{primitive}
+pair-types, reflecting different combinations of
+coordinate names, signed/unsigned, 1/2/4/8 bytes, and
+some floating-point-based types (albeit some operations
+applicable to integers, such as ones based on bitsets
+or binary encodings, would not carry over).
+\> On the principle that most operations available
+for one pair-type should be available for others, this
+results in quite a few duplicate operations differing
+only by input types. \> Assuming that high-level coding
+techniques such as templates are not available for
+\VM{} implementations, such a scenario seems to
+demand brute-force coding of multiple function-versions
+(perhaps aided by code generators). \> It is not
+difficult to maintain a function-pointer table with
+hundreds of entries if needed, so supporting this
+diversity of \q{primitive} operations does not
+impose a major overhead for a \VM{} runtime.
+\> However, once code-generators (and perhaps more
+complex grammars) are involved, the development
+environment for \i{implementing} a \VM{} runtime
+would become relatively more complex, and would
+need to be set up properly.\;\<
+}
+
+\p{\:\+Since we are not constrained by existing \VM{} or intermediate representations,
+there's room for creativity in how opsets are designed,
+in terms of their textual labels (or even their numeric opcodes)
+frmo the point of view of people reading \q{virtual assembly} code
+for the \VM{}, as well as runtime engineering
+(opcodes might have bit-flags carrying information about
+their respective operators, for example), with the
+idea of organizing groups of operations differing only
+by (e.g.) input/return types. \> Likewise, a well-designed
+\VM{} infrastructure can allow designers of high-level languages
+targeting the \VM{} some creativity as well.
+\> The pair-operator code for \XCSD{} mentioned above
+(which expands via macros to \Cpp{}, not a \VM{}, but
+could migrate to other contexts) is constrained by
+\Cpp{} syntax and operator-overloading, but other
+\VM{}-specific languages would be free to, for instance,
+create new binary operators for pairs. \> I alluded
+above to one example: the \b{tikz} \dashbar{} and \bardash{}
+could be used as syntactic atoms in a high-level language,
+compiling to line-intersection functions (analogous
+to the \Cppspaceship{} spaceship recently being
+added to the \Cpp{} operator set, in current specifications for
+that language). \> Similar comments could
+be made for other operators which seem common enough
+that they might warrant operator-like syntax (for readability)
+rather than function-call notation \mdash{} examples might be min/max,
+absolute value (applying the \abs{} operator to both components),
+floor/ceiling, ranges, and so forth.\;\<
+}
+
+\p{\:\+Also, a comparable
+custom-syntax scenario might apply to conventional
+arithmetic (and boolean/binary) operators, where
+it is necessary to distinguish an operation between a
+\i{pair} and a \i{single} value (e.g., multiplying both
+coordinates by the same scale) or another pair
+(e.g., vector multiplication\footnote{In the
+sense of Hadamard product; cf. Julia's
+\b{.*} operator.}), or \i{internally} within one pair.
+\> For instance, there are three important
+versions of, say, addition in a number-pair context:
+given \xypair{} there's \xypluss{} for some scalar
+\sval{}, or \xyplusab{} for pair \abpair{},
+or \xplusy{} (the \q{inner} sum). \> These
+alternatives would similarly exist for
+almost all \q{primitive} numeric operators
+for most coding languages, which would include
+arithmetic functions and also boolean
+calculations both in the true-false sense
+(e.g., treating positive or non-zero values
+as \b{true} and zeros as \b{false}) and bitwise
+manipulation, plus binary operations such as
+left- and right-shift. \> A high-level language
+might notate these variations via compound
+tokens combining one part or character
+representing the operation itself and
+another character (or characters)
+indicating a specific variant
+(as a hypothetical example, a bare \b{+} might
+represent addition \i{between} pairs, while
+\b{.+} represents \q{inner sum} and \b{.+}
+encodes addition with a duplicated scalar).\;\<
+}
+
+\p{\:\+Apart from overloading functions for many structurally
+similar types, there are further dimensions to the
+overlap between \VM{} operations, types, and code-management,
+some of which are indirectly posed by the previous
+examples. \> Consider the process of casting a pair
+from signed to unsigned. \> Plausibly, this might
+be achieved in several ways: first, take absolute values;
+second, map negatives to zero (essentially using a \q{floor}
+operator with parameter zero); or, third, simply
+reinterpret any negative value as the binary
+encoding of a positive value (so -1, say, would become
+the maximum integer of the corresponding unsigned type).
+\> Each of these could potentially be expressed as
+operators between pairs as well as type-cast logic;
+as such, one consideration when formulating a
+\VM{} underlying type system is to define operators
+which provide the calculations for type-casts
+(in case someone wants to achieve type-cast-like
+effects via a function-call, or perhaps to
+enable scenarios where the \VM{} could be configured
+to perform type casts in different ways by specifying
+a desired operator). \> Mire generally, it's worth
+noting how type-casts intersect with operator-application:
+consider an \q{inner difference} function which
+subtracts the second pair-value from a first.
+\> Assuming we sustain the principle that unsigned
+pairs should by default perform operations yielding
+other unsigned pairs/values, we might want the
+\i{non-negative} version of inner-difference,
+which in turn implies casting a signed result
+to unsigned. \> This is analogous to
+a \q{nonnegative-inner-difference} procedure
+which applies subtraction but with a floor
+of zero \mdash{} however, such a variation
+might \i{also} be useful in a signed
+(including a floating-point) environment,
+or as the nullary version of a unary operator
+which takes an inner-difference raised
+(as needed) to a floor which might be
+something \i{other} than zero, passed as a parameter.\;\<
+}
+
+\p{\:\+Similar ideas apply in the context of addition with
+possible overflow: should be consider addition
+involving one-byte integers to be capped at 255, or
+to \q{wrap around} past zero? \> The latter option
+does not make much sense in the case of colors, say
+(it would almost certainly be an error
+if an algorithm considered
+\q{pure black} zero to be one unit greater than \q{pure white}
+255), and moreover could be a notorious source of
+infinite-recursion bugs (cf. tests for \lteq{255},
+which might never revert to false, depending on the
+type involved). \> Types related to colors
+(in conventional one-byte-per-component encodings)
+are good examples of types for which basic arithmetic
+operations should almost always be guarded against
+overflow (addition maxed at 255 without circling
+around to zero, and subtraction floored at zero
+without negative-overflow back to 255). \> Conversely,
+in some contexts integer-maximum wraparound effects
+are exploited deliberately; analogously,
+casting an integer to a single byte
+(typically in the context of merging multiple
+values via bitmasks) performs a function
+analogous to zeroing out bits with index
+9 and greater.\;\<
+}
+
+\subsection{Issues with overflow/underflow and loop termination}
+\p{\:\+The overarching theme here reflects different conceptual
+roles played by numeric types. \> In the case of one-byte
+integers, for example, in some contexts the
+full 0-255 range represents meaningful values (e.g.,
+color), whereas elsewhere only a subset of this
+range is actually used. \> A ready example is enumerations,
+which might use \b{unsigned char}s as the
+base or \q{carrier} type but only define, say,
+ten values. \> Most instances of the underlying
+type therefore do not match any enumerated value;
+the \b{char} (i.e., 8-bit) type is used simply
+because most systems do not have types smaller
+than one byte (one cannot take the memory address
+of \q{half a byte}, for instance). \> At the
+same time, the numeric details of how enumerations
+are encoded can sometimes become consequential
+even for application-level code. \> Consider
+the relatively common situation where an
+\b{enum} (together with some other data) are
+encoded into a single (4-byte, say) integer where
+the enum is assigned a specific bit-range (if there
+are ten enumerated labels, say, the bitmask must
+allow four bits for the enum). \> A programmer would
+immediately know to left-shift the \b{enum}s
+value (cast to an integer as needed) by the
+requisite number of bits, but could easily
+forget that the left-shift applied to
+\b{char} could result in \i{another} \b{char} and
+therefore truncate bits on the left; the
+\b{enum} instead must be cast to \i{int} (or whatever
+type will encoded to shifted bits) even if the original
+base type is, say \b{unsigned char}.\;\<
+}
+
+\p{\:\+Similarly, consider using one-byte integers (say)
+in contexts where the underlying mathematics reflects
+modular arithmetic. \> An example is encoding directions
+(such as for labeling adjacency steps for inter-pixel
+color comparisons): a common option is to encode
+the eight options from top-left, top, top-right,
+etc., through bottom-right, via integers 0-8.
+\> On the other hand, these directions can also be
+derived via coordinate subtraction, spanning the
+eight pairs (-1, -1) through (1, 1) (excluding
+(0, 0)), so procedures may need to interconvert
+the pair-based and mod-8-based encodings. \> Still another
+possibility is to label directions such as
+\q{northwest} or \q{top-left} and so forth via a
+distinct enumeration class, where the enumeration
+labels would be mapped to corresponding numbers
+in the 0-8 ramge, but descriptive terms such as \q{left}
+might be more readable than numeric codes. \> A variation
+on this example would be that of notating directions between
+image-locations on a larger scale via 16 direction
+possibilities, incorporating those between strict
+orthogonal, horizontal, and vertical. \> Actually,
+the \XCSD{} code (mentioned earlier) in some
+contexts recognizes 24 different directions (to accommodate
+variations in even/odd pixel or region counts, where the center
+in an image-partition might correspond to a line of
+regions or to the gap between two regions). \> Such direction-codes
+are used in several calculations (mostly related to the
+proximity of regions to an image center) where arithmetic
+operations are performed on the underling numeric
+value (e.g., mapping a direction to its nearest strict diagonal
+counter-clockwise). \> Insofar as numeric codes represent
+directions, then \q{rotations} (via modular addition or subtraction)
+and modular wraparounds become mathematically significant.\;\<
+}
+
+\p{\:\+Modular integer-ranges can potentially be supported directly
+via a strong type system allowing programmers to explicitly
+define a (distinct) type for integers modulo 24, say.
+\> Alternatively, one might adopt something like \q{modular guarded}
+arithmetic (and binary, e.g. shift) operations, where each
+operation can be given an extra parameter to serve as a
+modular-arithmetic context (not that equally relevant
+for image-analysis and other geometric contexts might be
+variations on modular arithmetic where zero is
+sometimes replaced by the modulus, or results
+are \i{subtracted from} the modulus). \> Some of these
+arithmetic details could just be encoded relatively
+inelegantly by if-then branches and the like
+(\q{if(result > 24) ...} and so forth) but we have
+more flexibility on the \VM{} side to identify
+various forms of modular guards (perhaps via
+runtime flags that can be attached to ordinary
+integers) and of modular arithmetic in general
+(e.g., zero-to-modulus swaps).\;\<
+}
+
+\p{\:\+The main point here is to identify coder's rationales
+for employing specific types and to recognize situations
+where algorithms need to satisfy conditions more
+precise than the types alone express (an integer
+encodes mod-24 values, and enumeration is mapped
+to numeric quantities for geometric computations,
+such as mapping named directions under rotations/reflections,
+and so forth). \> Whereas these conceptual details
+might be merely implicit (or consigned to
+comments) in high-level source code, \VM{}s can
+treat such conditions more rigorously by
+annotating types, or flagging runtime values,
+or providing variants on common operations
+(e.g., a modular variant on arithmetic functions).
+\> Consider again integer-overflow situations: if a
+programmer is looping \i{up to} an integer maximum
+(say, 255) they might select a type for the
+looping variable to \i{avoid} overflows; so
+if a number \inum{}, say, is to represent
+one color-component and be used for a loop,
+the algorithm might declare \inum{} as a
+\i{short} (or a \i{signed short} to avoid
+negative wraparound) since 256 (and -1)
+then become expressible values,
+preserving the loop-termination. \> At this
+point however we have a \i{short} encoding a
+color-component whose only \i{conceptually}
+meaningful values are in the \b{char} ranges;
+if the \inum{} were used in a color-related
+computation it would need to be cast
+to its conceptually accurate \b{unsigned char}
+(aside from an extra coding step, consider
+how this could trip up code-review or compiler-warning
+sensitive processes). \> A more fluent solution might
+be to keep \inum{} itself as one-byte but cast
+it to \b{short} for the loop-test. \> This is an
+example of where a \VM{} could provide extra functionality
+beyond the reach of compilers targeting smaller-scoped
+assembly languages: consider a variation on inequality
+operators which would combine a (temporary) type-cast
+and boolean test into a single instruction. \> Having that
+form of test available in a \VM{} opset might
+inspire language designers to support it with
+distinct syntax, so that a pattern such as
+\q{cast-then-compare} \mdash{} which is more conceptually
+precise than using artificially larger types to avoid
+overflow/underflow conditions \mdash{} is directly supported
+by high-level code, potentially making it clearer
+and more widely adopted.\;\<
+}
+
+\p{\:\+In general, \VM{} engineers have opportunities to identify
+computationally similar but conceptually distinct
+operations. \> Consider a basic increment (\b{++})
+operation: this may occur in a context where the range of
+possible loop end-values (e.g., the size of a list) is
+well below the maximum expressible integer of a relevant
+type; but it may also occur (as in color-components)
+where we may be looping up to that maximum
+value, which itself serves as the loop-terminator
+(this in turn is the kind of situation where
+overflow errors due to \q{perpetual-truth} can occur \mdash{}
+comparisons of \b{unsigned char} against 256, say,
+never fail). \> The former use of the increment
+occurs in a context where there is an \i{a priori} range
+setting outliers on the loop (from the first to the last
+index in a list, say), whereas in the second case
+the type itself (e.g., all possible values for one
+color-component, in a format like \RGBthirtytwo{})
+sets a range-span. \> One can argue that the two
+uses of increment (and analogously decrement,
+especially in the context of unsigned types
+when looping down to zero)
+are conceptually different enough to warrant to two
+different \VM{} instructions, especially considering
+that extra care is appropriate for the second case
+(due to wraparound bugs).\;\<
+}
+
+\p{\:\+Similar attentiveness to operations' \q{conceptual}
+significance applies to functions on number-pairs
+as discussed above, especially in contexts where
+pairs represent logically integral values (such as
+locations within an image). \> When operations have a
+geometric interpretation (not just arithmetic)
+it is possible that they may be naturally
+presented in several different versions for
+different contexts, in the same way
+that modular arithmetic has multiple interpretations
+(including geometric ones related to directions and/or
+rotations). \> A \VM{} instruction set might
+therefore recognize these distinctions,
+providing a more flexible compilation-target
+and perhaps cueing higher-level language engineers
+to similarly acknowledge the relevant
+distinctions (e.g., via specialized syntax).
+\> Moreover, operation-variants and the type which
+they work on are conceptually interrelated,
+so engineers at both higher and lower levels
+should be attentive to type-system concerns
+interrelated with conceptually-distinguished
+low-level operations. \> This chapter thus far
+has presented examples in contexts
+such as modulus, integer overflow, and number-pair
+types; another set of examples derives
+from enumerations and their encoding strategies,
+which I address next.\;\<
+}
+
+\subsection{Different variations on enumeration types}
+\p{\:\+In the simplest sense, enumeration types
+represent sets of named values, which may have
+numeric codes (for the sake of storing instances
+in memory) but whose numeric representation has
+no particular significance. \> This setup, however
+\mdash{} where enums' actual encoding carries no semantic
+weight \mdash{} is only accurate in some contexts;
+elsewhere, there are various possibilities for
+enums bound more tightly to their numeric basis.
+\> For example, nominals representing days of the week,
+or months of the year, have a fixed sequence,
+which in turn is reflected in their encoding.
+\> These are examples of types where both named
+labels and a limited-range, modular-arithmetic
+representation have conceptual merit
+(consider the problem of \q{adding} some number
+of days or months, or iterating around a week, or year,
+cycle). \> Or, consider a collection of named color-values:
+each of these would be identified by a label, but may
+also be mapped to a numerically-encoded color space,
+so that quantitative inter-color operations could be
+implemented (measuring the distance between two
+named colors, for example, or mapping them to grayscale).
+\> Another case of consequential numeric encoding
+which can be illustrated in the color-values would be
+using enumerators as array indices: consider enums which
+labels the components of color-encodings according to
+different color spaces, such as \RGB{} (the enum labels
+would obviously be something like \redbluegreen{})
+or \HSV{} (hue, saturation, value). \> If colors
+(for these three-part models) are represented with
+three-valued arrays, then the enumerated component
+labels should map to 0, 1, or 2 so as to form array indices.\;\<
+}
+
+\p{\:\+Note that one use-case for enums is simply to introduce a
+collection of related labels into a programming environment,
+without necessarily implying that there is a single
+semantic or conceptual iterations which covers them
+all. \> For instance, it is plausible that an enum
+employed in the context of managing calendars (not just
+raw dates but schedules, appointments, and so on)
+would have labels for days (Sunday-Saturday) but
+\i{also}, say, \i{weekday} and \i{weekend}
+(in contexts such as \q{open weekdays} or \q{every weekend}).
+\> In this case, the numeric encoding for days-of-the-week
+would operate on two levels: most labels would be
+related sequentially (Sunday, Monday, etc.) but
+\q{weekday} and \q{weekend} would be grouping-labels
+instead, signifying collections (Monday to Friday and
+Saturday/Sunday respectively). \> A plausible implementation
+for such a type would be via bitmasks: assign the numbers
+1-64 (increasing over powers of two) to the seven
+weekdays (i.e., each code has exactly one bit set,
+in positions 1-7) and then assign
+the codes 31 (the bitmask of all five weekdays, assuming
+the lowest value is \q{Monday}) and
+96 (the bitwise combination of Saturday and Sunday)
+to \q{weekday} and \q{weekend}, respectively.
+\> Presumably, this kind of encoding would be
+most natural in a contexts where bitmasks could
+be employed to represent various combination
+of days (e.g., coding \q{Monday and Wednesday} as the
+bitwise merger of the Monday and Wednesday codes).
+\> Of course, this is only feasible in contexts
+where enumerations can be cast to integers
+(whether explicitly or implicitly).\;\<
+}
+
+\p{\:\+Mainstream programming languages evince different patterns
+with respect to mapping enums to numeric values.
+\> In \Cpp{}, for example, we can specify the
+\i{byte length} of an \b{enum} type by requesting a
+particular underlying type (e.g., \b{enum class e : unsigned char}
+forces each enum value to be represented by only 8 bits) but
+enums (at least \q{strong} \b{enum class} ones) do not
+automatically cast to integers. \> They can, however, be manually
+cast; or, integer-style arithmetic semantics can be
+added \i{to} enums via operator overloading. \> For other languages
+(Java, for instance) utilizing enums' numeric values is more
+difficult, whereas elsewhere (e.g., \Csharp{}) conversion to
+integers is automatic. \> This variation between languages
+reflects inconsistency across underlying semantics:
+enumerated nominals have different degrees of conceptual
+connection to an underlying arithmetic space in different contexts.
+\> There are, indeed, at least six possible options (I'm proposing
+non-standard terms for the final three items
+here, but hopefully the exposition will furnish
+rationales for the vocabulary chosen):
+
+\begin{description}
+\item[Raw nominals]  Collections of named labels (\q{nominals} in the
+statistics sense) which may be
+assigned numeric codes simply for purpose of computational representation,
+but where the actual numbers have no special meaning
+(an exception could be allowed for a label used as a \q{default}
+or fallback when a specific value is missing, which may be
+coded with a zero to coincide with defaults in other settings).
+
+\item[Cyclical or sequential enumerators]  This would cover cases
+where labels correspond to entities which have an implicit
+order (\q{ordinals} in statistics) so we can speak of one label
+coming \q{before} or \q{after} another in the sequence as
+conventionally understood. \> In some contexts we can also
+recognize \q{differences} (as in, Friday is four days past Monday)
+and wraparound (after Sunday we return to Monday, for instance),
+which in turn implies modular arithmetic.
+
+\item[Enumerators as \i{de facto} numeric constants]  A different
+use-case applies to labels which have a specific numeric code
+because they are intended to give a recognizable name to an actual numeric value.
+\> Of course, in some cases important numeric values which
+can be assigned descriptive names are independently introduced as
+constants, which does not involve a specific enumerator list
+\mdash{} for instance, \CCpp{} has macros such as
+\SHRTMAX{}, \INTMAX{}, \INTMIN{}, and the like which
+define maximum (respectively, minimum) values for different
+integer types; these are global constants which have some
+obvious logical interrelationship, but there does not appear
+to be any benefit in grouping together as a distinct \i{type}
+whose specific purpose is to identify just these values.
+\> On the other hand, consider a situation where we want to
+create a list of Latin1 codes for characters which have
+specific meanings in some formal context (e.g., the
+list of whitespace glyphs: space, tab, new line, form-feed,
+carriage-return). \> Here it is plausible that a procedure
+might accept a type which expresses a member of such a
+list (implementing actions for a code-generating grammar, say)
+while also each label needs to embody a specific constant
+value (we want to enumerator to translate directly to
+a corresponding \ASCII{} and Unicode number), which in
+a sense combines the sorts of contexts where global
+constants would be preferred and those more
+amenable to proper enums; if indeed an enum is chosen
+to represent the constants as a \i{type},
+the numeric values would of course have semantic
+significance (on the other hand, combinations
+of such values, e.g. via bitmasks, would \i{not}
+in general have meaningful semantics, so
+arithmetic operations between two labels
+might be suppressed in these cases.
+
+\item[Isolated bitmask enumerators]  Names which do not
+have intrinsic mathematical interpretations but which are
+assigned numeric codes built around powers of two,
+for the sake of notating combinations of such nominals via a single
+number. \> This kind of encoding is common for labels which
+represent \q{flags}, with the possibility of merging multiple
+flag-values or \q{activating} multiple flags at once. \> For a
+geometric-flavored example, suppose we want to specify alignment
+options relative to a bounding rectangle: the actual
+labels recognized by the enum might be \i{left}, \i{top}, \i{right},
+\i{bottom}, and \i{center}, but these labels could be
+used in combinations such as \q{top-left}, using the bitwise-or
+merger of codes for \i{top} and \i{left} to indicate alignment
+according to both of these directions. \> I call enums in this
+case \q{isolated} to suggest that \i{within the label-list itself}
+each nominal has a numeric code with no intrinsic meaning; it is
+only for creating \i{numeric} representations of
+combinations (like \topbarleft{} as a mathematical construction)
+that encodings' binary structure become significant.
+
+\item[\q{Fusional} bitmask enumerators]  I propose
+this terminology to express cases where some enumeration
+labels represent combinations of other labels. \> The difference
+between this case and the prior one is that here combinations
+are not only numeric \i{expressions} which can be interpreted as
+simultaneously declaring multiple nominals at once,
+but instead labels which are part of the enumerative collection
+itself can be assigned mathematical values which translate
+to sets of other labels. \> The weekday/weekend case would
+be one example, given a bitmask encoding such as proposed
+in item (2); or, suppose for item (3) we extend the \q{alignment}
+example such that \b{TopLeft} and other combinations are
+actual parts of the \b{enum}. \> Types in these scenarios
+have the ability to form labels for commonly-used collections
+of other nominals; consider, say, the type \b{Qt::TextInteractionFlag}
+(part of the \Qt{} application-development framework) which defines
+settings for how a \GUI{} control displaying natural-language
+texts allows for user actions (selecting, copying, following
+hypertext links, and so forth). \> In addition to
+several independent/isolated labels there are two
+bitmasks which are part of enumerator list: \b{TextBrowserInteraction}
+(which defines the most common fusion of interactions
+appropriate for controls playing the role of text browsers) and
+\b{TextEditorInteraction} (which, similarly, sets the defaults
+for text editors \mdash{} which differ from browsers in that text may
+be modified within the control, while it is being displayed).
+\> Of course, other flag-combination may also be used; but
+providing labels for the \i{most common} combinations
+helps to clarify the specific conceptual status of
+those fusions specifically.
+
+\item[Free-form or arithmetized enumerators]  This
+case would cover situations where numeric values associated
+with enum labels are significant, but for multiple or
+intersecting reasons not covered by the above items.
+\> Relevant examples can include cases where mathematical
+functions are applied to enum-values in some
+algorithmic contexts. \> Earlier I mentioned
+a 24-valued \q{direction} code employed internally
+by \XCSD{}; were these codes to be expressed via
+an enum, they would need a specific mapping to
+integers so as feed the enums directly into
+certain \XCSD{}-specific algorithms (related, for
+example, to the process of ordering image-regions
+based on proximity to the center and, secondarily,
+by clockwise progression \i{around} the center).
+\> For technical reasons (the details are not
+especially relevant here) these directions
+are coded by \i{signed} values in the range
+-1 through 22; there are specific computational
+reasons for this range in particular, indicating
+that the numeric codes are intrinsically
+associated with corresponding enum labels
+(it's not a matter of assigning numbers essentially
+at random, or merely in an increasing sequence to
+honor ordering and/or cyclicality). \> Other \q{free form}
+examples would come from situations where codes
+may be assigned with an eye to bitwise fusions,
+but not all labels fit that binary pattern.
+\> The above \q{alignment} examples can have variations
+which fit this last case; in \Qt{}, for example,
+the \b{Qt::AlignmentFlag} enum gathers into one
+type labels for vertical (\b{AlignTop}, \b{AlignBottom},
+\b{AlignVCenter}, and \b{AlignBaseline}) and
+horizontal (\b{AlignLeft}, \b{AlignRight},
+\b{AlignHCenter}, \b{AlignJustify}); and also
+for \i{one} named combination (\b{AlignCenter},
+which fuses \b{AlignVCenter} and \b{AlignHCenter}).
+\> In addition to these labels, the list includes
+a special flag which is only used for text in
+natural languages with a right-to-left writing system,
+and \q{mask} labels for convenience \mdash{} specifically,
+a mask which extracts the \i{horizontal} and another
+for the \i{vertical} component of an alignment
+code; those masks would be used mathematically
+to split a single code into two labels (indicating
+that the labels need specific numeric values to
+make the binary operations work properly).\;\<
+\end{description}
+}
+
+\p{\:\+As the \Qt{} alignment example shows, sometimes
+enumeration types have labels serving
+different conceptual roles: the \Qt{} type
+essentially combines horizontal and vertical
+options, plus a special supplemental flag, and a
+bitmask for convenience, into a single label-set.
+\> Proper numeric encoding is needed to orchestra the
+interplay of concepts and values involved here.
+\> More to the point, this example shows that
+expressing multiple concepts through a single
+label-collection increases the likelihood
+that numeric values will be significant.
+\> The \Qt{}.\;\<
+}
+
+\p{\:\+The various alternatives outlined here reflect a duality
+in the \q{conceptual} role of enums: in effect,
+enum types fulfill two distinct purposes, namely
+the use of mnemonic or descriptive \i{labels}
+(instead of raw numbers), on the one hand, and
+(on the other) isolating a specific range or group
+of numbers as a distinct \i{type}. \> These two roles
+can be combined in different ways for different
+enumerations, which in turn raises questions about the
+proper type-theoretic protocols appropriate
+for enums. \> For example, how should procedures
+whose signatures indicate parameters of an
+enum type work with inputs whose
+numeric values do not match any nominal
+label? \> Should compilers reject
+code where there is no algorithm to prove that a
+certain input conforms to the specific list
+of values associated with enum labels? \> Or should
+it allow values that can be formed from
+those matched to labels via boolean \b{or} operations
+(merging their respective bits) but reject others?
+\> Or, perhaps, map anomalous values to one \q{default} label?
+\> Moreover, we can distinguish cases where a compiler
+can verify that a value will \i{fail} via either
+of those constraints, as opposed to cases where
+the details are uncertain \mdash{} e.g., the enum
+may be obtained via serialization, or some
+other external source which may (or may not)
+endeavor to restrict values to \q{meaningful}
+options. \> These issues are also reflected
+by how enums are used by procedures which
+take them: if they are fed to \b{switch} statements,
+for example, then a \b{default} execution path
+could catch any values not matching named labels.\;\<
+}
+
+\p{\:\+In short, the enumeration mechanism
+is actually a combination of multiple semantic
+patterns, and these differences tend to get
+reflected at the point where procedures
+take inputs of enum types (rather than
+their underlying numeric types).
+\> In the \VM{} context, procedures could
+therefore indicate what \q{flavor} or
+enum type they expect through some sort
+of flag or annotation; instead of a single
+enum protocol, compilers (or a \VM{} runtime)
+could then fine-tune enum handling based
+on procedures' specifications. \> For example,
+a procedure could indicate that it should
+\i{only} be called with an integer
+value that matches an enum value, or
+that (as a runtime feature) anomalous
+values get mapped to one specific label.
+\> Moreover, enum \i{types} could be equipped with
+different varieties of integer-casts, distinguished
+between contexts in which coversions would be
+applied. \> In the most restrictive case, enums
+would never be cast to their underlying
+values except for a narrow set of low-level
+operations (such as serialization via binary packs);
+in the least restrictive, enums could be freely
+utilized as quantitative magnitudes, subject to
+a full suite of arithmetic, binary, and boolean
+operations. \> In between those extremes, enum
+types could be annotated to accept casts
+in certain circumstances but not others,
+or to support a proper subset of mathematical functions.\;\<
+}
+
+\p{\:\+This discussion has set forth some of the
+conceptual issues associated with enumerations,
+and before that with number-pair types.
+\> These examples serve primarily as case-studies;
+ultimately, I intend to ground the analysis
+in \VM{} engineering in particular.
+\> As such, I will transition to a more
+\VM{}-oriented (and, indeed, image-processing oriented)
+focus in the following section.\;\<
+}

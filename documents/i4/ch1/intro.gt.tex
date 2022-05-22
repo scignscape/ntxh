@@ -1,0 +1,295 @@
+\p{\:\+A recurring theme in the problem-domain
+related to applying computational theories and
+principles to concrete technology solutions
+\mdash{} in some sense, the computer scientists' analog
+to \q{translation medicine}, from bioinformatics
+\mdash{} is a certain familiar tension between private
+enterprise solipsism and a kind of collective drive
+toward open data standards and data sharing.
+\> The building-blocks of most industries'
+Information Technology are sourced by private
+companies, which tend to favor monolithic, isolated
+platforms \mdash{} not so much out of a deliberate
+preferenced for eschewing interopreability but
+rather because companies feel their products will
+be most desirable if they provide all rhw
+feature users need (rather than being just one of
+multiple solutions users take on) and therefore engineer
+each component as one unit within a suite of
+tools designed concurrently, rather than one
+component interacting with others with diverse
+origins, communicating via vendor-agnostic
+protocols. \> Such an attitude does not predispose
+technology to be engineered in a manner optimally
+conducive to \q{open data} models.\;\<
+}
+
+\p{\:\+On the other hand, it is also true that users
+tend to find monolithic platforms restrictive, so
+that in practice any one \IT{} product does coexist
+in an ecosystem with peers of disparate provenance.
+\> Most stakeholders therefore have a concrete
+interest in vendor-agnostic data-sharing protocols,
+which in turn improve the quality of individual products.
+\> From these situations arise standardization projects
+which tend to be spearheaded by \q{industry groups}
+and/or non-profits, aggregating the interests
+and perspectives of multiple organizations.
+\> These groups embody a collective interest rather than
+the priorities of any one party (but without being
+fully autonomous from the industry they represent).\;\<
+}
+
+\p{\:\+A common pattern emerging from the general tenor of
+these collaborations is that vendor-neutral data
+modeling/sharing protocols are \q{post hoc},
+derived from pre-existing domain-specific formats
+rather than more generic prototypes derived from
+theoretical foundations (like \XML{} or \RDF{}).
+\> In effect, data standards are not proscribed against a
+theoretical \i{tabula rasa} but rather formalize
+a data semantics which is already, to some degree
+of rigor, in use. \> These situations add an further
+layer of detail to data-modeling requirements insofar as
+we need to optimize both the effectiveness of data
+models qua technical artifacts and the (which may
+pull in the opposite direction) the easy by
+which existing \q{semantic} norms in the relevant
+domains are incorporated into formal schema.\;\<
+}
+
+\p{\:\+For a concrete example, consider various mechanisms used
+in different domains to document the level of
+stanrdization attached to data \q{fields} associated with
+\q{objects}, to use generic terms. \> For example, in
+Building Information Management (\BIM{}) \mdash{} specifically
+Industry Foundation Classes (\IFC{}) as a format
+for exchanging data between different parties involved
+in costruction design (architects and structural engineers,
+for example) \mdash{} data fields asserting properties
+of objects (in the sense of real-world
+physical materials incorporated into building designs)
+are classified as either \i{attributes} or \i{properties},
+with the distinction being that attributes are fixed within
+schemata for objects of any given kind, whereas property-sets
+can be introduced in objects' context more flexibly.
+\> In type-theoretic terms, attributes are immutable parameters
+in types' schema, such that objects of the same type have
+the same attributes, whereas properties are not bound to
+types with equal force (usage patterns might dictate
+that, for example, common type-instances share property-sets
+\i{in some context}, but these are not essential maxims
+of the type itself). \> A similar distinction is made in the
+context of \DICOM{} (Digital Imaging and Commmunications
+in Medicine) wherein \q{tags} (which have descriptive labels
+but also two-part numeric codes) are encoded using a system
+that distinguishes \q{Standard Data Elements} from
+\q{Private Data Elements}:
+tags encoded with a numeric pair whose \q{Group}
+(first) Number is odd.  \lPACS{} (Picture Archiving System) viewers
+(software that recognizes the \DICOM{} format) will ignore
+Private Data Elements by default, so the Standad/Private
+distinction is intrinsic to protocols through which
+\DICOM{} data is processed. \> This distinction is not
+functionally identical to \IFC{}: attributes/properties,
+but reveals similar motivations insofar as data specifications
+are also guidelines for implementing software which
+manages data structures conformant to a given standard.
+\> Standardization projects' tasks include definine requirements
+on software as well as data representation, and it is
+logistically significant to distinguish standardized
+parameters that software \i{should} recognize as a
+compliance-criterion from non-standard kinds of values
+that particular users or groups of users working
+within a given protocol may want to introduce internally.\;\<
+}
+
+\p{\:\+The \BIM{} attribute/property and \DICOM{} Private/Standard
+distinctions are suggestive illustrations of challenges
+encountered when applying generic data-modeling principles
+to specific domains. \> Most general-purpose representation
+frameworks (consider \XML{} and \RDF{}, for instance) lack a
+mechanism to directly express disjunction in parameters'
+level of standardization, as concretely found in these
+examples (not to imply that such details could
+not be represented indirectly, e.g. via meta-attributes
+or \DTD{} stipulations, but the point is that
+one is thereby leveraging the affordances of a
+given representation scheme to accommodate semantic
+distinctions not specifically anticipated by that
+scheme, rather than organically encoding the
+semantics to begin with). \> Also, note that for
+fields indexed by character-strings descriptive labels
+are designed to be meaningful for human users/readers, but
+in most modeling approaches labels do not have an
+\q{internal structure} recognized by the framework
+(at least if consider, say, \XML{} namespaces as separate
+labels from element names). \> The \DICOM{} pattern wherein
+two-part numeric codes are employed for something
+akin to namespace/element separation, and then the
+use of an odd/even to signal Private/Standard tag rules,
+is also an idiosyncratic formulation which does
+not have a natural correlate in multi-domain modeling protocols.\;\<
+}
+
+\p{\:\+Insofar as multi-domain frameworks aspire to
+provide technologies that can be used in multiple
+industrial/scientific sectors, such real-world data-modeling
+examples are relevant because they emphasize
+how modeling structures must adapt to existing conventions,
+rather than presuppose that all data will be mapped \i{a priori}
+to a canonical domain-neutral format. \> To be sure, software
+will often be specialized for a given domain to the extent
+that support for multiple noncompatible formats is superfluous;
+one could reasonably question whether there is a need for
+applications that simultaneously read \IFC{} and \DICOM{} formats
+(from the realms of architectural/structural engineering and
+bioimaging, respectively). \> Moreover, the transitiion from
+domain-specific to general-purpose formats is a common theme
+of standardization initiatives; given any popular
+industry-standard format with its own idiosyncratic syntax
+and semantics there is probably some project to \q{translate}
+those specifications (and data generated on their basis)
+to \XML{}, \RDF{}, and/or Semantic Web ontologies.\;\<
+}
+
+\p{\:\+Such points notwithstanding, however, note that there
+\i{are} technological categories which cut across multiple
+domain-areas. \> These include database engineering: it is
+not unreasable for a given database system to manage
+bioinformatics data in one application and architectural
+data in another. \> At least, teams implementing
+database solutions should anticipate deployment
+in a myriad of domain-specific contexts (unless the
+relevant database engine is expressly intended for a
+narrower audience). \> In this sense, it is not
+unreasable for a database engine to deployed in a
+range of contexts such that databases instances
+are populated with \BIM{} data in one place and
+\DICOM{} somewhere else; effectively ingesting and
+organically modeling semantic conventions would
+indeed, as such, involve technologies that
+extend across multiple modeling paradigms, such as
+both \IFC{} and \DICOM{} (perhaps via plugins or
+bridge code rather than the database kernel itself,
+but that still indicates how the database engine
+would need to accommodate multiple domain-specific
+semantic conevntions via a plugin and/or
+data-translation architectire).\;\<
+}
+
+\p{\:\+Nor are cross-domain standards like the Semantic Web a
+panacea; initiatives to update legacy models with
+trendier constructions such as \RDF{} and \OWL{} are
+often incomplete and under-supported; existing
+standards like \DICOM{} and \IFC{} often perpetuate
+precisely because the organizations maintaining
+such technologies as industry tools provide practically
+useful services and, accordingly, have more clout
+than outside groups seeking to upend their
+technical foundations. \> This does not merely
+reflect bureaucratic inertia, but also how
+domain-specific data-sharing standards are an
+organic outgrowth of industry practices, which
+may be represented less seamlessly in the
+conetxt of domain-neutral metamodels.
+\> For example, the attribute/property distinction
+is an intrinsic dimension to \IFC{} and is
+recognized and sustained from multiple angles,
+including User Interface design (\GUI{} components
+for managing attributes have a different layout
+and pragmatics than those for properties, in the
+context of \BIM{}/\IFC{} software) and validators.
+\> In short, the \q{semantics} which includes
+attributes/properties as a modeling parameters
+involves more than structural criteria on
+\IFC{} documents; more substantially,
+this \q{semantics} propagates to \UI{} and software
+engineering stipulations. \> The crosscutting concerns
+engendered via attributes/properties would need
+to be formalized even if the underlying
+data model were ported from a domain-specific
+framework (\IFC{}) to something more generic (e.g., Semantic
+Web formats).\;\<
+}
+
+\p{\:\+Similar points would apply (alongside database engineering) to
+Image Processing. \> Computer Vision libraries and Image Analysis
+pipelines are employed in multiple domain-specific contexts;
+certainly the core algorithms in (say) \OpenCV{} are leveraged
+in contexts as disparate as \AI{}-driven radiology and
+tracking building-construction progress. \> Support tools and
+utilities intended to streamline implementation and
+deployment of Computer Vision solution could well, then,
+be employed in many divergent fields with their own
+idiosyncratic data-metamodels.\;\<
+}
+
+\p{\:\+The \DICOM{} and \IFC{} cases I have mentioned here
+illustrate a larger point, which is that multi-purpose
+data-modeling frameworks should do more than simply
+allow data structures characteristic of multiple domains
+to be unambiguously encoded (and so serialized/deserialized).
+\> More substantially, metamodels should capture the spirit
+of modeling paradigms, the manner in which domain semantics
+interweave with application-level conventions and user
+expectations. \> Daa sharing is of course a prerequisite for
+software interoperability \mdash{} the first step in synchronizing
+applications is exchanging information \mdash{} data management platforms
+which add value to multi-application domains should do more
+than merely allow data-sharing to happen. \> An equally salient goal
+is limiting the amount of boilerplate code and
+additional development effort is needed for applications
+to interoperate according to standardized data-sharing protocols.\;\<
+}
+
+\p{\:\+These points may seem rather obvious and unworthy of extended discussion,
+but they are worthing stating openly because \mdash{} or at least
+one might argue \mdash{} the most popular data-representation
+formats seem to prioritize theoretically elegant models
+over application-focused convenience and flexibility/expressiveness.
+\> For example, excluding \JSON{} (which we might consider as a
+light-weight notation functionally analogous to a simplified
+\XML{}) the \IT{} community has seemingly gravitated to
+\XML{} and/or formats associated with the Semantic Web (particularly,
+\RDF{} and \OWL{}). \> These two paradigms have emerged as dominant
+technologies despite their eliding capabilities which
+other approaches that could be juxtaposed against them
+embrace \mdash{} cf., hypergraph databases as a multi-tier
+extension to \RDF{}-style labeled graphs, or \TagML{} (the
+Text-as-Graph Markup Language), \TEI{} (Text Encoding Initiative) and other
+Concurrent Markup languages which are functional supersets
+of \XML{}. \> These structures are (somewhat) more complex
+and may have a steeper learning curve than \XML{} or \RDF{},
+but (argualby at least) they provide a more expressive
+baseline for application-level semantics, implying that
+technologies built around these alternatives could be
+more effective from the perspective of extending
+application functionality with data-sharing capabilities
+as seamlessly as possible. \> I'll rcognize the counter-argument
+that hypernodes or Concurrent Markup (say) can be indirectly
+encoded \mdash{} via \RDF{} collections chains and zero-width
+landmark elements, respectively \mdash{} which would seem to
+mitigate the necessirty for accommodating such constructions via
+\i{alternative} representation formats. \> These claims could
+equally well be used to argue, contrariwise, that
+\RDF{} and \XML{} resort to ad-hoc patches for expressing
+semantic conventions that would better be formalized
+within the underlying representational tableau to begin
+with.\footnote{Meaning by \q{tableau} the set of modeling parameters
+through which semantic principles might be expressed
+structurally within the parameters of the relevant
+metamodel.\;\<
+}
+}
+
+\p{\:\+In effect, the leading data-representation technologies are not the
+last word whatever their paradigmatic status; we have room to
+investigate from theoretical and/or practical perspectives
+how a new generation of technologies could make
+data sharing and software interoperability even more effective.
+\> This chapter will introduce one possible approach toward
+implementing some sort of \q{next generation} technology
+along these lines; these ideas will be further clarified
+in the following two chapters.\;\<
+}

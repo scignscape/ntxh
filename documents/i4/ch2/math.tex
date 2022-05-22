@@ -1,14 +1,37 @@
 
 \newcommand{\qquadrantcodeagainst}{\q{quadrant\_code\_against}}
 
-\newcommand{\quadrantcodeagainstimpl}{\begin{alltt}u1 quadrant_code_against(const ty##size##s& rhs) const { return (*this - rhs).spaceship_mask().plus((*this - rhs).zeros_mask()).floor(0).times({2, 1}).inner_sum(); }\end{alltt}}
+
+\usepackage{listings}
+
+
+%\newsavebox{\mylisting}
+%\begin{lrbox}{\mylisting}
+%  \begin{lstlisting}
+%    foobar
+%  \end{lstlisting}%
+%\end{lrbox}
+
+
+
+\newcommand{\quadrantcodeagainstimpl}{
+\input{quad}
+}
+
+
+%u1 quadrant_code_against(const tysizes& rhs) const 
+%{
+% return (*this - rhs).spaceship_mask()
+%  .plus((*this - rhs).zeros_mask())
+%  .floor(0).times({2, 1}).inner_sum(); 
+
 
 \newcommand{\xypair}{\ensuremath{x, y}}
 \newcommand{\xypluss}{\ensuremath{x + s, y + s}}
 \newcommand{\abpair}{\ensuremath{a, b}}
 
 
-\newcommand{\sval}
+\newcommand{\sval}{\ensuremath{s}}
 
 \newcommand{\xyplusab}{\ensuremath{x + a, y + b}}
 \newcommand{\xplusy}{\ensuremath{x + y}}
@@ -19,6 +42,14 @@
 
 \newcommand{\bardash}{\ensuremath{|-}}
 \newcommand{\dashbar}{\ensuremath{-|}}
+
+
+\newcommand{\abs}{\b{abs}}
+
+\newcommand{\Cppspaceship}{$<=>$}
+
+\newcommand{\lteq}[1]{$<=$#1}
+
 
 
 

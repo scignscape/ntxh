@@ -1,0 +1,965 @@
+
+\section{Hypergraph Data Modeling and Virtual Machines}
+
+\p{\:\+I've suggested so far that flexible and expressive data modeling
+is a good thing in principle, but haven't presented any
+arguments \visavis{} how that could be achieved.
+\> Without sufficient care, the general topic of data-representation
+paradigms can easily remain at the level of semi-formalized
+\q{design patterns} or (concrete programming) best practices
+\mdash{} subject matter for developer's message boards and the like
+but lacking a rigorous technical firmament to be
+analyzed in depth. \> I believe that investigation of data-representations
+can be a scientific topic befitting in-depth analysis, not
+just a semi-formal cadre of observations orbiting coding practice.
+\> I do not expect that claim to be taken for granted, however;
+anyone inclined to such a perspective should justify their
+interest in data (meta)models by construction a sufficiently
+rigorous environment in which to analyze them.\;\<
+}
+
+\p{\:\+My earlier comments regarding application-level expressivity
+perhaps suggest part of my rationale for stressing metamodels
+\mdash{} application-development criteria break apparent
+equivalence between disparate representational paradigms
+which may encode comparable data-spaces, but with divergent
+levels of \q{convenience} from the application vantage point.
+\> That is to say, one (at least potentially formal or formalizable)
+criterion for comparing representational schema is the space
+of data structures which competing schema can unambiguously
+represent; one schema is richer (or more expressive) than another
+if there are structures (with requisite concrete data and
+associated semantics) that can be encoded (without collision
+between nonidentical structures) in the first but not
+the second. \> I'd argue this amounts to a variation on the
+notion in formal language theory that two languages
+are analogous if anything which is a valid string in one
+is valid in the other (respectively, invalid) and vice-versa;
+except that when discussing \q{data structures} we are
+working with a different universe of building-block elements
+than \q{strings}, which still need to be described
+(as will become clear, I propose to articulate these
+building-blocks in terms of hypergraphs). \> Accepting
+graphs in a generic sense as a theoretical \i{a priori},
+we could say that two representational systems are
+functionally analogous if anything which is a valid
+graph-construction in one is valid in the other
+(respectively, invalid) and vice-versa. \> One would
+then have to clarify what are \q{graph constructions}.\;\<
+}
+
+\p{\:\+From an \q{application-level} perspective, however,
+representational paradigms can be compared not only
+via structures they encode in an abstract sense,
+but more concretely by the degree to which
+applications can be extended with capabilities to
+share data according to protocols derived form their
+representational tactics. \> This idea seems intuitively
+well-motivated, but it rests on notions which perhaps do
+not have an obvious formalization (akin to, say, equivalence
+\visavis{} a space of valid strings/graphs). \> So, I will take a
+moment to flesh it out.\;\<
+}
+
+\p{\:\+Prima facie, it should be uncontroversial to say that
+convenience in application-development is desirable. \> This
+section of the book will entertain several Civil Engineering
+case-studies concerning reconstruction in Ukraine. \> At this point
+I'll just point out one contention to be addressed in
+following chapters, that the scale of Ukrainian
+destruction allows for rebuilding initiatives to be
+carried out on an exceptionally large and holistic
+scale. \> This reconstruction calls for an interdisciplinary
+mindset attuned to environmental impact, quality of life, and
+cultural heritage alongside conventional architectural/engineering
+concerns. \> This is intriguing case-study insofar as
+it concretizes scenarios where existing data-integration
+methodology in Civil Engineering Informatics (CEI) \mdash{} how
+\BIM{} marries architectural design and structural engineering,
+for example \mdash{} can be extended to urban planning, sustainability,
+even cultural preservation. \> The computational infrastructure
+leveraged when assessing structural integrity
+of (digitized) architectural plans, that specific
+analytic pipeline, can similarly be extended to
+metrics of environmental impact, energy use, carbon
+footprint, and myriad cultural and quality-of-life
+targets.\;\<
+}
+
+\p{\:\+Although such inter-disciplinary efforts wherein the
+scope of CEI integration expands further \mdash{} e.g., emphasizing
+eco-friendly optimizations \mdash{} have certainly
+been embraced by the construction and architectural-design
+industries in recent years, Ukraine points to how
+such trends could still accelerate. \> A widening
+circle of parameters, from architecture and engineering
+to ecology, culture, and civic design, will ideally be
+recognized \mdash{} and digitally prototyped, incorporated
+into simulations and \q{digital twins} \mdash{} by
+technologies utilized toward reconstruction designs
+(and later, potentially, by \q{smart city} data curation).
+\> As of now this is hypothetical, of course, but
+working on the assumption that such broad integration
+is at least \i{desirable} we can derive something
+like a concrete case-study, because we are contemplating an
+expansion in specific applications' data-sharing capabilities
+to accommodate newer, more multi-faceted information
+spaces.\;\<
+}
+
+\p{\:\+In other words, this is a hypothetical but in its own
+way concrete working example: consider the suite of
+software tools which are employed in construction-related
+industries, and their existing interoperability
+(via \IFC{} objects, for instance). \> Now consider the
+goal of augmenting this functionality to support
+thematically richer information profiles covering
+civic, ecological, and cultural data-points alongside
+(say) architecture and structural engineering.
+\> We then have (modulo a certain imaginative projection
+presupposed by the whole thought-exercise)
+real-world implementational questions to consider:
+How readily can applications be updated to support
+the relevant new data-sharing protocols? \> How can
+these protocols be standardized (and likewise
+application code-bases be engineered) in anticipation
+of quickly adopting to more ambitious interoperability
+specifications? \> What about supporting tools
+(parsers, validators, reference implementations,
+client libraries, even application-neutral \GUI{} components)
+that might be provided in conjunction with new data standards
+to facilitate application-level adoption?\;\<
+}
+
+\p{\:\+These are the kind of contexts I had in mind a short while
+ago when suggesting that application-integration is a functional
+criterion for assessing data-representation formats, alongside
+more \q{mathematical} criteria such as the space
+of information structures (unambiguously) modeled via a
+given format. \> I'd like to keep case-studies
+such as Ukrainian reconstruction present in the background
+as a motivating example for following discussions
+about data structures and representations.\;\<
+}
+
+\subsection{Hypergraphs and Virtual Machines}
+\p{\:\+To extract a theoretical core from these hypothetically-concrete
+case-studies, we can say that valid criteria for
+assessing data metamodels derive in part from the
+perspective of engineering application-level support
+for new (or newly expanded) interoperability protocols.
+\> That is, representational systems which engender
+computational artifacts (parsers, for syntax, and
+validators, for semantics, let's say) that can be
+implemented, embedded, and leveraged by applications
+as their capabilities are refined to support new
+protocols are most effective when the amount of
+effort consumed by the requisite programming
+is minimized. \> Data-sharing protocols should be
+engineered to pass through application-integration
+phases as quickly as possible, but likewise
+applications should be architected to accommodate
+new data-sharing initiatives without
+substantial re-coding.\;\<
+}
+
+\p{\:\+Generically, we can describe a metamodel as
+relatively \q{expressive} to the degree that
+data structures and their concomitant semantic
+paradigms can be transparently encoded
+according to modeling system's rules.
+\> Expressivity might imply a level of
+redundancy, or at least superficial
+redundancy when viewed from the
+sole perspective of data encoding.
+\> For example, the \IFC{} attribute/property
+distinction might seem locally superfluous
+in that asserting a given data-point via a
+property rather than an attribute
+(or vice-versa) does not appear to
+convey greater information \mdash{} the
+information is borne by the
+field's value, not by its property-or-attribute
+classification. \> However, the attribute/property
+is of course not semantically vacuous;
+its significance emerges in the larger
+scale of schema-standardization and validation.
+\> A metamodel which supports this larger semantic
+context is therefore sufficiently expressive
+to properly encode \IFC{} data; a less expressive model
+(one which collapses attributes and properties
+into a generic notion of \q{fields}, say), would
+fall short, at least without compensating
+by leveraging its own formal resources
+(e.g., classifying fields as attributes or
+properties via \q{meta-data} fields).
+\> Here we can appeal again to application-level
+concerns: the paucity of less-expressive
+systems would become evident insofar
+as reifications, indirections, and other ad-hoc
+solutions to representational blind-spots
+can render application-integration more complex
+and time-consuming.\;\<
+}
+
+\p{\:\+Metamodels are more expressive to the degree that
+they offer a greater range of representational parameters
+with which structural and semantic conventions
+might be communicated. \> For example, \JSON{}
+(JavaScript Object Notation) can be deemed more
+expressive than primitive list-based encodings
+(e.g., \CSV{}, or comma-separated values) because
+\JSON{} distinguishes arrays (which are like lists)
+from \q{objects} (i.e., associative arrays,
+lists indexed by field-names rather than numbers).
+\> In this sense \XML{} is more expressive than
+\JSON{} insofar as elements' data can be asserted
+via attributes or via nested
+elements (for sake of argument, treating \XML{}
+as a de-facto superset of \JSON{} wherein arrays
+correspond to sequences of similarly-tagged child
+nodes). \> As that last parenthetical comment suggests,
+there is a level of imprecise inevitable when
+discussing issues such as the relative
+expressiveness of real-world data formats;
+these are concrete technological artifacts rather
+than mathematical constructions, and therefore
+do not necessarily lend themselves to a
+quasi-mathematical meta-language. \> Still,
+we can analyze distinct
+representation systems with some degree
+of systematicity (sort of in the
+register of \q{philosophy-of-information},
+not \q{information-as-mathematical-system}).\;\<
+}
+
+\p{\:\+In the case of property graphs and/or hypergraphs,
+data fields can be associated with an \q{object}
+(in the sense of an integral data structure)
+via properties (attributes on a node) or via
+node-to-hypernode relations (sometimes called
+\q{projections}), a duality reminiscent
+of property/attribute in \IFC{}. \> Graphs,
+of course, have the further stipulation
+that any two nodes (or hypernodes) may be
+linked by edges (themselves equipped
+with labels, label-namespaces, controlled
+vocabularies, and potentially constraints/axioms
+enforced by \q{Ontologies}). \> Formats such as
+\XML{} and \JSON{} which are more \q{syntactically}
+oriented tend to be hierarchical, in that
+any specific value in a \JSON{} object or array may
+itself be another object/array (rather than atomic
+value) and likewise \XML{} elements may have other
+elements as children. \> By contrast, formats
+such as \RDF{} and property graphs which are
+more \q{semantically} focused tend to be
+graph-like and encode semantic relations via
+edges across nodes (rather than hierarchical nesting).
+\> Hypergraphs potentially combine both styles of
+representation, with hypernodes containing
+nodes hierarchically \i{and also} edges
+between two (or two-or-more) nodes and/or hypernodes
+(the precise rules as to which constructions are
+possible will vary from one system to another, but
+these are reasonable approximations).\;\<
+}
+
+\p{\:\+Any representational system, as these examples point out,
+provides a certain \q{tableau} of parameters that
+can be pressed into service when formalizing a protocol
+for encoding specific kinds of data via structures
+conformant to the specific system. \> More expressive
+systems have a wider arsenal of parameters; for
+instance, along the lines of the above gloss, property
+hypergraphs (with potentially iterative node/hypernode
+relations) are more expressive than either property
+graphs or document-style hierarchical trees
+alone, because properties-on-nodes (as in \XML{} attributes),
+nested hierarchies (hypernodes containing child nodes akin
+to child \XML{} elements), and inter-node connections
+(as in Semantic Web labeled edges) are all potential
+representational devices. \> This chapter will accordingly
+focus on property-hypergraphs as a general-purpose
+metamodel, but the relevant point for the
+moment is that expressivity can be \q{measured} via
+the range of distinct representational parameters afforded by
+the system, at least intuitively.\;\<
+}
+
+\p{\:\+This intuitive point can be made more precise, insofar as
+I have deferred any rigorous definition for
+\q{representational parameters}. \> That is to say, for a
+reasonably systematic analysis of metamodels we should
+specify building-blocks of constructions
+recognized through any metamodel. \> The overall
+concept may be clear enough \mdash{} in general,
+the parameters of a modeling system are the full set
+of structural elements that might potentially
+be employed in fully describing any given
+structure covered by the system \mdash{} but one would
+like a still tighter definition. \> For this chapter,
+I approach this problem from the
+perspective of Virtual Machines.\;\<
+}
+
+\p{\:\+The correlation between Virtual Machines and
+representational paradigms should be clear: suppose
+we take any structure instantiating a particular
+metamodel. \> Presumably, such a structure
+can be assembled over multiple stages. \> Insofar
+as node-hypernode inclusion is a constructional parameter,
+for instance, then a structure can be modified
+by a including a node within the scope of a hypernode.
+\> Similarly, insofar as inter-node relations (via directed
+edges or hyperedges) are significant constructions,
+then a structure may be modified by adding an edge
+between existing nodes. \> In short, any structure
+can be derived from the modification of precursor
+structures. \> The full set of structure-modifying
+operations available for a given representational
+paradigm can be enumerated as (at least on part of)
+the opset of a hypothetical (or realized)
+Virtual Machine. \> As such, Virtual Machines
+provide a potential formalizing environment
+for analyzing data metamodels.\;\<
+}
+
+\p{\:\+Conversely, data-models can serve as a prompt for
+motivating the proper scope of a Virtual Machine
+(hereafter abbreviated to \VM{}). \> That is, \VM{}
+may be designed subject to requirements that
+they permit the accumulation of any data structure
+conformant to a given metamodel. \> Similarly, \VM{}s
+might be characterized in terms of how they support
+various \q{calling conventions}, in the sense of
+protocols through which computational procedures
+delegate to other procedures (supplying inputs,
+reading outputs, spawning concurrent
+execution paths, and so forth). \> This chapter
+will focus on \VM{}s based on \i{hypergraph}
+data models, employing such structures
+both from the perspective of data-representations
+and interlocking procedures (i.e., describing
+procedures in terms of sequences of
+calls to other procedures).\;\<
+}
+
+\subsection{Virtual Machines and Database Engineering}
+\p{\:\+Virtual Machines can be useful tools for studying software-interoperability
+insofar as both data-representations and communications protocols
+can be modeled in terms of \VM{}s (at least as abstract summaries
+of working code; or, more ambitiously, application-networking
+frameworks can be provide actual \VM{}s through which applications
+can route their networking logic, analogous to query languages
+as host-language-agnostic conduits for database access). \> In this
+context \VM{} models overlap with constructions pertaining to
+interoperability between applications and database engines.
+\> Consider the general setup of database systems: applications
+store data structures for future reuse by passing some
+(suitably encoded) serialization of the relevant information
+to a database, which arranges the data into a layout
+optimized for storage and retrieval/querying. \> Typically the
+database will attempt not merely to preserve the presented
+data structure for future reconstruction, but will
+index or destructure it in such a manner that such specific
+data can be selected as matching a future query.\;\<
+}
+
+\p{\:\+At any moment in time, an application will be working with
+one or more data structure that might be called \q{live}; they
+are directly implicated in the state of the application at
+that moment. \> The current user (or a different user) might,
+accordingly, be interested in reconstructing that
+application-state (or some relevant subset thereof) at a
+future point in time; at which point database queries are
+typically necessary, because the relevant information is
+no longer in live memory. \> To be sure, a database does
+not necessarily store \q{application state} as such
+\mdash{} although developers can potentially
+create \q{application state objects} and persist
+those so that users can resume prior sessions \mdash{} but
+a typical rationale for persistent data storage
+in the first place is functionality supporting
+users' desire to resume prior work, return to
+previously-viewed files, and so forth. \> The
+individual values stored in a database derive their
+significance from how they interconnect
+in users' experience in the context of any application.\;\<
+}
+
+\p{\:\+As a concrete example, suppose we are considering an application
+which (at least as one of its features, and in the context
+of particular \GUI{} windows or components accessed through
+the software) supports viewing, tagging, and annotation
+\TwoD{} images (e.g., photographs). \> More precisely, suppose
+we are considering an image-processing application
+specifically implemented for Ukrainian reconstruction.
+\> A typical image for such an application might be a plot
+of land on which real estate will be rebuilt; potentially
+images would depict remnants of prior buildings that
+were destroyed, and/or could be annotated with
+data relevant to reconstruction designs
+(e.g., in recreating damaged neighborhoods
+a certain number of residential units might
+be targeted for each parcel of land or each block
+subject to redevelopment, perhaps optimized by
+models measuring the ideal urban density for
+that specific neighborhood based on environmental
+criteria, utility grids, public transit, and so forth).
+\> A typical session for such an software component
+might involve users viewing individual images,
+previewing image-series depicted via thumbnails,
+searching for images (based on criteria such as
+street address, city/district name, or perhaps
+\GIS{} coordinates), switching between \TwoD{} image
+and 3D street views, and \mdash{} once in the context
+of a specific picture \mdash{} viewing annotations
+and other associated data in tabular or
+otherwise structured forms (e.g., tables or key-value
+pairs displayed through independent \GUI{} windows
+floating above the graphics viewport).\;\<
+}
+
+\p{\:\+Assuming such an application works with relatively
+large image-collections (enough to be impractical
+for users simply to browse images in a filesystem
+folder, say), functionality for finding and tracking
+images would need to be based on some
+systematical query capabilities, i.e., some
+form of image database (which need not imply
+that images themselves are stored as database
+\q{blobs} \mdash{} binary large objects \mdash{} but
+at least that image file paths, feature sets
+for retrieval/similarity searches, metadata
+and formatting details, etc., can be hosted
+in a database so that images can be selected
+inside large series by variegated query strategies).
+\> Suppose an image depicts a city block where
+damaged buildings have to be replaced; data
+associated with the image could include
+estimates of the number of people who lived in
+that location prior to 2022 war; the number of
+residential units slated for redevelopment;
+cost estimates; links to public transit info,
+street views, data concerning utilities grid,
+etc. \> Plausibly, such data would be held
+in a database and loaded alongside the image,
+or in response to user actions signaling an
+interest in the relevant data-points. \> The
+database, in effect, is a means to an ends,
+whereas from a user's perspective the
+important detail is that the application
+can enter a state where multiple important
+data-points are visible side-by-side: users
+might view a photograph in one window juxtaposed
+with a window or windows showing civic/residential
+data.\;\<
+}
+
+\p{\:\+Continuing this specific (hypothetical) example, the
+envisage scenario has image-viewport components
+serve as an entry-point for a diversity of
+civil/architectural information; presumably
+the specific kinds of data available will vary
+from one image to another, and users will
+signal through interactive \GUI{} features
+their interest in accessing certain branches of
+the available data over others. \> That is, assume
+there is not a fixed metadata/associated information
+package that automatically accompanies each image,
+but instead that data and images are linked on a
+dynamically changing case-by-case basis. \> That setup
+would call for a coding strategy which works to
+organize the available information and
+user-interaction pragmatics coherently.
+\> The resulting software-design choices would,
+moreover, propagate to \GUI{} and database designs
+as well. \> Once some aggregate of data is identified
+as a coherent unit, this structural decision
+must be accounted for at the \GUI{} level
+(insofar as users request \i{that specific}
+data from application-states where they are
+viewing an image carrying the appropriate
+information) and the database integration
+(\q{that specific} data has to be
+queried from the larger database context when needed).
+\> In other words, the interaction between \GUI{}, database, and
+application logic is more complex than if each image were
+given a fixed set of data fields isolated from user pragmatics.\;\<
+}
+
+\p{\:\+By way of illustration, suppose one information-bundle that
+could be associated with (some) photographs outlines
+redevelopment plans: data points such as the number
+of residential units targeted, renderings of building
+designs, contractors, contact information, and so forth.
+\> Presumably, such data would only be applicable
+to images showing blocks or plots where such plans
+are in the works; and moreover such images would link
+to other forms of data as well (about, say, utilities
+grids). \> As part of the empirical background, in
+effect, one might conclude that various facts
+pertaining to individual reconstruction projects/contracts
+can both be aggregated (as interconnected data-points)
+and isolated from other information potentially
+relevant to an viewed image. \> In general, software
+design depends on sensitivity to how information spaces,
+practically speaking, can be carved and organized.
+\> The decision to isolate (say) construction-project
+data as integral units would be made against
+that kind of design/decision context. \> Having
+this topic reified as a specific \q{category} of data,
+say, affects \GUI{} programming and event-handling
+(because user-visible components must be implemented
+enabling users to access information in that
+category, which in turn yields signals like
+context-menu activations and the need for appropriate
+event-handlers) as well as database interop (insofar
+as such data has to be packaged in persistable forms).
+\> Subsequently, representations of such integral construction-project
+data (in the form of, e.g., a cluster of interrelated
+datatypes) would be manifest as software artifacts
+threaded through a code base.\;\<
+}
+
+\p{\:\+The specific patterns of data organization and programming-language
+types engineered for an application reflect practical
+concerns and aspirations to optimize User Experience; these patterns
+do not necessarily map neatly to native database
+architectures. \> Neither relational databases (built up from
+tables with fixed tuples of single-value columns) nor
+conventional graph databases (whose representations are confined to
+one layer of labeled edges) generically match the
+multivariate and multi-level structure of real-world information
+typically managed at the application level. \> This is why
+application-level data types generally need
+to be restructured and transformed when routed between applications
+and database back-ends.\;\<
+}
+
+\p{\:\+Software engineers are responsible for ensuring a proper
+synchronicity between application and database state, although
+(as intimated above) this does not (by and large) entail
+application-state being directly persisted in a back-end.
+\> Instead, back-end updates are a property of application-state at certain
+moments; insofar as users have performed edits or in general
+made changes resulting a mismatch between the data as
+currently seen by the user and what is stored in the database,
+the latter has to commit such changes for perpetuity.
+\> Update-worthy application-state then needs to be
+distributed over (potentially) multiple database
+\q{sites} which are collectively implicated in an update.\;\<
+}
+
+\p{\:\+For sake of argument, consider an update (or part thereof) consolidated
+into a single (application-level) datatype instance; e.g.,
+one object of a given \Cpp{} class. \> Quite possibly, there is
+no one-to-one correspondence between application objects and
+database values or records, particularly if the classes
+in questions contain many data fields and/or multiple
+one-to-many relationships and values which are more
+involved than simple strings or numbers (e.g., pointers
+to other objects). \> The structural mismatch between
+application data and database records is evident in
+technologies such as Object-Relation Mapping (\ORM{})
+\mdash{} or \q{Object Triple Mapping} for the Semantic Web \mdash{}
+marshaling data for relational databases or triplestores,
+respectively. \> Engines with more flexible
+representation paradigms, needing less reconstruction
+of application data exported to a back-end, can be
+advantageous precisely because data-persistence
+capabilities end up consuming less \q{boilerplate} code.
+\> Hypergraph databases are a case-in-point: the kind of
+complexity in datatypes' internal orgnanization
+(multiple multivariate fields for a single object,
+for instance) which give rise to \ORM{}/\OTM{}-style
+transforms map organically to hypernode or hyperedge
+constructions.\;\<
+}
+
+\p{\:\+Modifying a database entails conveying a package
+of database between applications and the database
+engine; the structure of this \communique{}
+in turn reflecting database architecture.
+\> The \SQL{} \INSERT{}
+statement, for example, derives its form
+from the layout of table-base data models:
+adding a record entails naming the table to which it
+will belong, which brings on board the specific
+list of fields (columns) whose values have
+to be accounted for in the query. \> Our impression that
+relational algebra is a relatively crude or inflexible
+meta-model derives, it would seem, in large part
+from the quantity of bridge code needed to implement
+database updates through query commands such as
+\INSERT{} that are restricted to the relational
+architecture. \> To the extent that hypergraph
+engines (for example) are more flexible in principle,
+this advantage only becomes concretely
+evident to the degree that hypergraph databases
+support a query system such that updates (and
+analogous modifications to a database instance)
+are initiated with relatively less
+boilerplate code.\;\<
+}
+
+\p{\:\+As I alluded to earlier, hypergraph data models
+have comparatively greater parameters available
+for representing information; in particular,
+this implies that we have greater
+flexibility in formulating queries
+to modify database instances. \> It's worth mentioning
+at this point that \q{queries} need not involve
+instructions passed to a database engine
+in the form of character strings (e.g.,
+\SQL{} code); indeed, forcing applications
+to build query code on the fly is a often
+an antipattern (spurring boilerplate code-bloat);
+better solutions involve query \q{factories} that
+assemble queries via procedure/method calls
+in a host programming language (perhaps
+through an embedded domain-specific language,
+as one finds with \LINQ{} \visavis{} \CSharp{} and
+its emulations in other languages). \> On the
+other hand, in the best case scenario a database
+would \i{also} support a query language that
+could be executed as text strings outside of an
+application context (and without relying on a
+host programming language), for examining
+the contents of a database in situations removed
+from application-based access (debugging, analytics,
+general admin functionality, and so forth).
+\> In other words, ideally engines will encompass
+a query engine that works with query-structured
+compiled \i{either} from application-code factories
+\i{or} standalone query code, which is one rationale
+for embracing a query-evaluation Virtual Machine.\;\<
+}
+
+\p{\:\+The specifics of database updates \mdash{} sticking again for
+sake of exposition to single type-instances \mdash{} depends
+of course on types' internal organization.
+\> For typically atomic types
+(like 1, 2, 4, or 8-byte integers) updates might
+only entail replacing one value with another, but
+more complex values (\q{objects}, in effect\footnote{Taking
+the perspective that in some systems objects are formally
+defined as aggregate structures (rather than atomic data-points)
+and, even if not precisely stipulated, object/atomic value
+distinctions tend to align \i{de facto} with object-classes
+against, say, built-in types (cf. \Cpp{})}) with multiple
+and/or multi-value data-fields updates can include
+adding or removing a value from a collections type-instance
+as well as altering such a value, and so on.
+\> For many compound types the collection of fields
+includes more than one which are in turn \q{collections}
+(e.g., vectors, stacks, queues, deques, and unordered sets/multi-sets,
+plus map-arrays that are pair-lists with possible nonduplication
+restrictions on the first element) subject to add/remove
+operations, in contrast to full-on value-to-value
+replacement. \> Some collections have modification-restrictions
+(e.g., values can only be added or removed from one or
+both ends of a list, or, as in typical \q{sets}, all added
+values must be unique) or enforce constraints such as
+monotone increase and decrease.\footnote{Consider a collections type
+\mdash{} a construction supported by the Virtual Machine I use for
+demo purposes (discussed below) \mdash{} which has only one insertion operation,
+but will automatically place new values either at the beginning or
+end of the list to preserve increase-direction; here,
+new values have to be either greater or less than all
+prior values. \> Or, automatically sorted lists need only
+one insertion operation because the insert procedure would
+deduce the proper insertion-point.
+}  All of these are potential paths toward
+legal mappings of type-instances between states
+which initialized typed value can take on, given their
+internal organization. \> Nor is this discussion complete;
+we could also mention reclassifying \q{union}-type values
+(whose instances can be one of several types) or
+various types depending on binary arithmetic
+(cf. tagged/\q{decorated} pointers, or
+enumerations whose value can be members of
+nominal-value lists \i{or} bitwise combinations
+thereof, or unions where multiple type-tags
+are valid by virtue of shared binary encoding,
+in effect using one tagged value to update another
+member of the union \mdash{} a simple case being
+integer/bitset unions where setting the
+integer automatically sets or clears corresponding
+fields in the bitset).\;\<
+}
+
+\p{\:\+The mechanisms for aggregating multiple values
+into individual type-instances tend to be
+much more complex for general-purpose programming
+languages such as \Cpp{} (see unions, pointers, arrays,
+multiple inheritance, enumerations and their
+base types, etc.) compared to databases
+(see \SQL{} or \RDF{} types); this is a proximate
+cause of complications in persisting application-level
+data. \> Conversely, databases with more refined
+type systems can (at least potentially) absorb
+application data more conveniently. \> For this
+to work in practice, however, the
+engine needs a query system which can
+duly leverage type-system expressivity; the issues
+involved here are well-demonstrated by
+update-queries as I've mentioned. \> Properly recognizing
+application-level intra-type organization
+depends on representing (and then
+exposing to a query interface) the full spectrum
+of morphisms through which a single type-instance
+might be updated.\;\<
+}
+
+\p{\:\+For complex types, an effective query-system would have
+update operations that are more targeted than
+just replacing one value with another
+\i{tout court}; instead, updates may only
+involve one or some subset of all data-fields,
+and (for multi-value fields) could involve
+insertions/deletes in a collections context
+rather than a direct value-change. \> The degree to
+which a database engine seamlessly interoperates
+with applications depends on the latter
+constructing data-packages (without undo effort)
+that signal the \i{kinds} of updates
+requested alongside the relevant new values
+(notating, e.g., collections-context changes as
+distinct from single-value morphisms).
+\> Intuitively, flexible architectures
+(e.g., hypergraphs) accelerate the requisite
+implementations, although actually
+supporting a query-interface satisfying
+such ambitions depends on a confluence
+of factors (e.g., underlying database
+architecture but also query-representation
+and query-evaluation protocols and the
+tools to compile code/text or procedurally-generated
+queries to internally-represented structures
+suitable for evaluation).\;\<
+}
+
+\p{\:\+This section's discussion has focused on
+updating a single type-instance centering on
+the point that complex intra-type layout implies
+a diverse set of query-based update options.
+\> An \UPDATE{} statement in \SQL{}, say,
+only (directly) supports one
+particular \q{genre} of updates (value-to-value
+edits in one or more discrete columns). \> Given application
+state which can be expressed in terms of modifications
+to existing persisted values, keeping the
+back-end in sync entails accounting for the changes
+embodies in the new application-state by
+presenting the back-end engine with (in general) a
+series of updates; the more flexibly updates
+can be encoded, the less development time
+need be expended figuring out how to
+translate application-state changes to updates
+the engine can process. \> This is one reason why a
+diversity of data-modeling parameters can
+streamline application integration: a flexibly
+tableau of recognized constructions implies that
+applications can describe updates with
+relatively less boilerplate destructuring.
+\> Consider the multitude of \q{sites} where
+data associated with a hypernode can
+be asserted, in the context of property-hypergraphs; at least
+(and some systems may have more elaborate
+constructions as well) properties \i{on} a hypernode,
+nodes \i{in} the hypernode, and edges \i{from} a
+hypernode to its peers. \> This articulation
+of site-varieties is, self-evidently, also a
+list of update-forms. \> Having multiple protocols
+for describing updates allows different forms of
+updates to be recognized with distinct semantics.
+\> For example \mdash{} consider again the attribute/property
+distinction in \IFC{} \mdash{} updates to \i{properties}
+(which would in general be ad-hoc annotations
+on a hypernode less strictly regulated than
+nodes encompassed \i{in} hypernodes) could be
+subject to different validators than updates
+performed via node-insertion or (potentially
+Ontology-constrained) edge-insertion.\;\<
+}
+
+\p{\:\+In effect, multi-parametric modeling
+tableaus in the database \i{architecture}
+propagate to multi-dimensional
+options for encoding updates, which in
+turn allows for coexisting update
+protocols each with their own semantics.
+\> Applications can then choose which
+protocol most efficiently describes
+any particular change in application-state.\;\<
+}
+
+\p{\:\+Of course, these points \visavis{} changing
+\i{existing} database value have analogs
+in the context of inserting \i{new} values.
+\> Ideally, applications will have flexibility
+in how encode data structure for insertion
+into a back-end via database queries.
+\> This is not only a matter of notating
+all information which should be persisted,
+but also providing cues to the engine
+about how the new data should interact
+with other records (e.g., using
+primary keys or globally-unique
+identifiers to secure inter-record
+links analogous to \mdash{} perhaps
+translating \mdash{} live-memory pointers)
+and subsequent find/select queries.
+\> What are the criteria through which
+a database record, once deposited, should
+be retrieved again in the future? \> Most
+database systems will give nodes/records
+unique id's, but the whole point of
+search queries may be that records
+should be located based on known data
+in contexts where an application does
+\i{not} have the requisite \gid{}.\;\<
+}
+
+\p{\:\+Consider again the case-study of image-curation
+software that could be used in a redevelopment/urban
+planning context, such that photograph resources
+include depictions of future building sites.
+\> As suggested earlier, data associated with
+each picture could reference construction-project
+data (e.g., the number of units slated for
+construction, or the identity of the firm contracted
+to oversee the project), as well as, perhaps,
+\q{generic} information (image format, dimensions,
+color-depth, plus, say, \GIS{} coordinates).
+\> One consideration when designing such an application
+would be how users would find images
+that they hadn't seen before, or had not
+revisited for an extended period of time
+(so that the presumptive image \gid{} is not
+cached in recent history). \> In would make sense
+to track images by longitude and latitude,
+for example, assuming that users would know such
+data. \> Perhaps street address (accounting for
+the possibility that large-scale redevelopment
+might alter the street grid so that pre-war
+addresses, say, become obsolete; one might
+still maintain a mapping from such addresses
+to \GIS{} coordinates so they remain useful
+for queries); or (less granularly) by district
+or city. \> We can similarly envisage scenarios
+where architectural details are mentioned
+(\q{find images of sites within a
+10-kilometer radius featuring planned
+buildings over 4 stories tall}).\;\<
+}
+
+\p{\:\+For queries along these lines to work,
+back-ends need to structure type-instances
+such that (potentially large collections of)
+values can be filtered into subsets
+meeting specific criteria: \GIS{} coordinates
+restricted to a given locale, housing
+matching a given contractor-name, and so forth.
+\> When exporting info to a back-end, the
+relevant details are not only the specific values
+comprised by the new data but also
+which fields may serve as eventual query-parameters,
+and how they should be indexed.
+\> Such \q{selectability} criteria have to be
+encoded alongside persisted data structures
+themselves, and convenient application-integration
+entails supporting protocols for
+noting pathways for query-retrieval
+and doing so with minimal boilerplate code
+(for analogous reasons as with update queries).\;\<
+}
+
+\p{\:\+Of course, selection/retrieval and update protocols
+tend to be defined on types rather than the type-instance
+level. \> To the degree that certain data-fields are
+indexed and queryable (for retrieving instances
+when their global id's are not at hand \i{a priori})
+decisions as to which fields to thereby expose
+tend to be made for each type \mdash{} as part of the
+type's design and contract \mdash{} rather than
+negotiated on a case-by-case basis per
+instance (though note that properties in property-graphs
+are possible exceptions; indeed this is one
+rationale for property-graphs in the first place).
+\> Similarly, type-level modeling tends to
+define which update protocols to invoke for
+different state-changes. \> Accordingly, an expressive
+query interface should allow stipulations regarding
+updates and searches to be described as attributes
+of \i{types} as well as single instances (e.g.,
+records and/or hypernodes) and to be deferred
+from instances to type-contracts (analogously,
+inferred in instance-contexts by virtue of type
+attributions). \> An obvious corollary here
+is that query systems have to recognize type
+descriptions as well as encodings of type-instances.
+\> In effect, query languages need to include
+\q{type-expression} languages where types'
+attributes, internal organization, and
+back-end protocols are duly notated (so that
+type-information can be \q{loaded into} the
+system and consulted as the engine resolves
+how to accommodate insertions, updates, and
+filtering for specific instances).\;\<
+}
+
+\p{\:\+I will delay further discussion about type-descriptions
+until after examining relevant Virtual Machine
+concepts in greater detail. \> Thus far I have
+been alluding to \VM{} in the context of query evaluation:
+one way to implement query engines is to decompose
+(the steps needed to execute) queries into
+sequences of primitive or \q{kernel} operations
+supplied through a \VM{}. \> While this is a productive
+facet of \VM{} applications, it overlaps with equally
+consequential issues concerning how \VM{} model
+procedures in general (not just those befitting the
+profile of database queries). \> Indeed, in general
+a \VM{} targeted at query-evaluation should either
+natively extend to or solicit
+(via some kind of native-function interface)
+general-purpose procedures available within
+computing environments where databases and
+applications are situated, because (in principle)
+the results from arbitrary procedures could
+potentially be desired as query parameters.
+\> If (assuming an object-oriented context)
+back-ends warehouse records encapsulating
+objects with their specific classes, any
+methods called on candidate objects
+(e.g., those not otherwise
+filtered out via the suite of selection-criteria
+in a retrieval query) might plausibly be
+useful as means to narrow result-sets.
+\> Object-databases proper point to how
+full-fledged method calls may be
+hard to optimize (database contents are
+not typically \q{live} objects that can be
+passed to methods directly), but
+there is no reason \i{a prior} why queries
+should be limited to optimizable
+criteria (for instance, if selective
+stipulations allow results to
+be narrowed to a reasonably small
+set of candidates, fully instantiating
+such potential matches as live-memory
+objects and calling methods accordingly
+would be a reasonable execution strategy).
+\> In short, even when we are primarily
+interested in Virtual Machines pressed
+into serve as query engines, it would
+be incomplete to exclude consideration
+of general-purpose procedure calls and
+how these are described, validated, and
+executed by concrete \VM{}. \> I therefore
+turn to procedure-encoding considerations
+in the remainder of this chapter.\;\<
+}

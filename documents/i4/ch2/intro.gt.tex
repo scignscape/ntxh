@@ -1,0 +1,112 @@
+\p{\:\+The previous chapter discussion Virtual Machine
+architecture in a rather abstract, mathematical
+sense. \> This chapter will try to make the
+analysis more concrete by considering
+how \VM{} technology could facilitate
+software engineering in the specific
+context of image-processing and Computer
+Vision. \> That is, I will use image-processing
+algorithms as a case-study in the sorts of
+workflow modeling and quantitative operations
+which might reasonably be incorporated in
+\VM{} designs, albeit a \VM{} specialized for
+a specific computational domain.\;\<
+}
+
+\p{\:\+More general-purpose \VM{}'s might be more
+\q{minimal} in the sense of providing relatively
+sparse instruction-sets, relying on higher-level
+code libraries (compiling to those instructions) for
+for specific domains, such as image processing.
+\> However, the discussion in these chapters generally
+envisions \VM{}s which are in a sense both narrower
+and more expansive: encapsulating functionality
+targeted at specific concerns (e.g., image analysis)
+but exposing potentially a large set of functions
+as primitive operations that could be expressed
+within \VM{} instructions directly.\;\<
+}
+
+\p{\:\+In the case of image-processing, there are literally
+hundreds of algorithms that might be run to
+transform, or extract information from, a
+\TwoD{} image (not to mention image-series, videos, or \ThreeD{}
+point clouds) so mapping each algorithm to kernel
+\VM{} instructions is of course impractical. \> Obviously,
+even an image-oriented \VM{} will have to provide
+some foreign-function interface where various algorithms
+could be registered and accessible through \VM{} code;
+the \VM{} runtime could accordingly be provided with
+foreign-function pointers through the
+application which hosts and initializes the \VM{}
+itself. \> On the other hand, there might be some
+operations related to image-processing which are
+so fundamental that they should be recognized
+by a domain-specific \VM{} automatically, without
+needing an extra step of loading \q{foreign}
+functions (providing the relevant capabilities).\;\<
+}
+
+\p{\:\+This chapter will use image-processing as a domain to
+examine some of the relevant issues along these
+lines. \> At the same time, extended consideration of
+Computer Vision mathematics is outside the scope of the
+chapter; I will attempt to orient the discussion to
+quantitative functionality that is relatively
+simple from an algorithmic point of view. \> In effect,
+I will concentrate on image-analysis techniques which
+are not necessarily representative of the most
+sophisticated strategies for Computer Vision, but they
+do present case-studies for the primary concerns of
+the current chapter, with respect to
+\VM{} design and integration with query engines and
+functional-reactive event handlers.
+\> For the sake of discussion, this chapter will base some examples
+on a novel, rather idiosyncratic image format that
+I call \q{ \XCSD{}} (the acronym stands for \q{Extensible
+Channel System} and \q{Subdivision Indexing}, to be
+clarified later). \> This is a format optimized for
+certain image-processing operations related to
+approximate segmentation and color-based (more than
+shape-based) background/foreground separations. \> I will
+orient the exposition around hypothetical \VM{}s for
+which \XCSD{} supplies the \q{native} image format,
+and which might be used with image databases
+(e.g., for query evaluation) storing content in this format.\;\<
+}
+
+\p{\:\+Preliminary to discussing algorithms directly related
+to images, I will review several themes arising in that
+context but applicable more broadly, within the
+overarching subject-matter of reasonable scope
+and operation-sets for (relatively high-level) \VM{}s.
+\> This initial discussion will highlight type-theoretic
+issues and primitive mathematical functionality
+that go beyond the ubiquitous integers, floats, and
+fundamental arithmetic capabilities that one would
+expect from any \VM{} (however broad or narrow in scope,
+and high-level or low-level in design). \> Whether or
+not these specific types and operations are appropriate
+for a specific \VM{}, given its goals and motivations,
+these examples will hopefully suggest how the question
+of what are legitimately \q{fundamental} or \q{low-level}
+types and calculations is open-ended. \> Numerous constructions
+usually associated with high-level languages that compile
+to \VM{}s or intermediate representations (perhaps only in a
+temporary sense in the course of being compiled to
+actual machine code) may prove to be worthy of
+direct support and implementation at the \VM{} level
+\mdash{} aside simply from convenience (insofar as certain
+high-level operations do not need to be repeatedly
+translated down to multiple \VM{} instructions)
+the specific conditions and rationales for the
+relevant high-level types can intersect with \VM{}
+opsets in ways that justify accommodating them
+directly. \> Again, this chapter will illustrate
+such points with concrete examples. \> Subsequently,
+I will situate the types and operations reviewed in the
+preliminary discussion in the context of image-processing,
+so that first analysis will extend into Computer Vision
+as a case-study for (what one might call)
+\q{domain-specific} \VM{} design.\;\<
+}

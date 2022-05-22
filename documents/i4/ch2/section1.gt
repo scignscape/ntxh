@@ -98,8 +98,8 @@ including options based on start/end, top/bottom,
 left/right, horizontal/vertical, and above/below 
 (e.g., if a pair's `Cpp; type is, say, 
 `b.tl2` %-- meaning top/left, two-byte values %-- 
-the first coordinate would be accessed by a `b/.top` 
-member and the second by `b/.left`/).
+the first coordinate would be accessed by a `b..top` 
+member and the second by `b..left`/).
 `p`
 
 
@@ -274,7 +274,7 @@ space, rather than two separate numbers.
 As an example, `XCSD; uses a function 
 called `qquadrantcodeagainst; which 
 is defined (within a `Cpp; macro) as a 
-series of pair-operators: `quadrantcodeagainstimpl;.  
+series of pair-operators: `quadrantcodeagainstimpl;  
 That code may not be more readable than an alternative 
 which works with each coordinate separately, 
 but it fits within a paradigm where we are 
@@ -342,7 +342,7 @@ create new binary operators for pairs.  I alluded
 above to one example: the `b.tikz` `dashbar; and `bardash; 
 could be used as syntactic atoms in a high-level language, 
 compiling to line-intersection functions (analogous 
-to the `b.<=>` spaceship recently being 
+to the `Cppspaceship; spaceship recently being 
 added to the `Cpp; operator set, in current specifications for 
 that language).  Similar comments could 
 be made for other operators which seem common enough 
@@ -359,10 +359,9 @@ arithmetic (and boolean/binary) operators, where
 it is necessary to distinguish an operation between a 
 `i.pair` and a `i.single` value (e.g., multiplying both 
 coordinates by the same scale) or another pair 
-(e.g., vector multiplication`footnote.
-In the sense of Hadamard product; cf. Julia's 
-`b/.*` operator.
-`footnote`), or `i.internally` within one pair.  
+(e.g., vector multiplication`footnote.In the 
+sense of Hadamard product; cf. Julia's 
+`b..*` operator.`/), or `i.internally` within one pair.  
 For instance, there are three important 
 versions of, say, addition in a number-pair context: 
 given `xypair; there's `xypluss; for some scalar 
@@ -382,9 +381,9 @@ tokens combining one part or character
 representing the operation itself and 
 another character (or characters) 
 indicating a specific variant 
-(as a hypothetical example, a bare `b/+` might 
+(as a hypothetical example, a bare `b.+` might 
 represent addition `i.between` pairs, while 
-`b/.+` represents `q.inner sum` and `b/.+` 
+`b..+` represents `q.inner sum` and `b..+` 
 encodes addition with a duplicated scalar).  
 `p`
 
@@ -442,7 +441,7 @@ does not make much sense in the case of colors, say
 if an algorithm considered 
 `q.pure black` zero to be one unit greater than `q.pure white` 
 255), and moreover could be a notorious source of 
-infinite-recursion bugs (cf. tests for `b.<=255`/, 
+infinite-recursion bugs (cf. tests for `lteq<255>;, 
 which might never revert to false, depending on the 
 type involved).  Types related to colors 
 (in conventional one-byte-per-component encodings) 
@@ -855,7 +854,7 @@ example such that `b.TopLeft` and other combinations are
 actual parts of the `b.enum`/.  Types in these scenarios 
 have the ability to form labels for commonly-used collections 
 of other nominals; consider, say, the type `b.Qt::TextInteractionFlag` 
-(part of the Qt application-development framework) which defines 
+(part of the `Qt; application-development framework) which defines 
 settings for how a `GUI; control displaying natural-language 
 texts allows for user actions (selecting, copying, following 
 hypertext links, and so forth).  In addition to 
