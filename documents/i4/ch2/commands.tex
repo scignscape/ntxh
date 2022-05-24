@@ -50,6 +50,11 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 
 \renewcommand{\b}[1]{\textbf{{\small{}#1}}}
 
+
+\newcommand{\qb}[1]{\q{\b{#1}}}
+
+\newcommand{\qtt}[1]{\q{\texttt{#1}}}
+
 \let\OldI\i
 \renewcommand{\i}[1]{\textit{#1}}
 
@@ -93,6 +98,22 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 \usepackage{changepage}
 
 
+\newtheorem*{observation*}{Observation}
+
+
+\newcommand{\anonobservation}[1]{\vspace{12pt}%
+\begin{observation*}
+\lmargspac{5pt}{1.1}{}{}{%
+\small{#1}}
+\end{observation*}
+%\vspace{-30pt}
+}
+
+\newcommand{\observationproof}[1]{\vspace{-10pt}%
+\lmargspac{5pt}{1.1}{}{}{\noindent{\small{}\textit{\textbf{Proof}} #1}}}
+
+
+
 \newcommand{\spac}[2]{{\begin{spacing}{#1}#2\end{spacing}}}
 
 \newcommand{\lmargspac}[5]{\begin{adjustwidth}{#1}{0pt}\spac{#2}{%
@@ -116,7 +137,7 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 
 %\newcommand{\anondefin}[1]{\begin{definition*}#1\end{definition*}}
 
-\newcommand{\anondefin}[1]{%\vspace{2pt}%
+\newcommand{\anondefin}[1]{\vspace{8pt}%
 \begin{definition*}
 \lmargspac{5pt}{1.1}{}{}{%
 \small{#1}}
@@ -136,9 +157,9 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 
 \newcommand{\Csharp}{C\#}
 
-\newcommand{\INTMAX}{INT\_MAX}
-\newcommand{\SHRTMAX}{SHRT\_MAX}
-\newcommand{\INTMIN}{INT\_MIN}
+\newcommand{\INTMAX}{{\small{}\texttt{INT\_MAX}}}
+\newcommand{\SHRTMAX}{{\small{}\texttt{SHRT\_MAX}}}
+\newcommand{\INTMIN}{{\small{}\texttt{INT\_MIN}}}
 
 \usepackage{enumitem}
 
@@ -147,6 +168,15 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 \renewenvironment{description}
   {\begin{OldDescription}[style=unboxed]}
   {\end{OldDescription}}
+
+
+\newcommand{\makeboxq}[1]{\makebox{\q{#1}}}
+
+
+\newcommand{\LatinOne}{\makebox{\texttt{Latin1}}}
+
+
+
 
 %\usepackage{listings}
 

@@ -5,9 +5,240 @@
 `p`
 
 
+`subsection.Manhattan/Chebychev distances and `q.Black-Grey` grids`
+`p.
+Earlier I mentioned that `XCSD; uses a `q.hybrid` combining Manhattan 
+and Chebychev distance metrics.  For the sake of discussion, I'll 
+call this combination an `MCH; distance-representation 
+(not a metric, `i.per se`/, because the result is a two-valued 
+pair rather than a scalar).  Formally, the `MCH; pair between 
+`xypair; and `abpair; is `xyabMCH;, where `mathM; and `mathC;  
+are the Manhattan and Chebychev distances (see the formulas 
+from last section).`footnote.
+Actually, `XCSD; uses a slightly different pair I'll 
+call `MCHprime; equaling `MCHprimepair;, but this 
+text's version of `smMCH; is more intuitive for exposition.  
+They are readily interconvertible: `MCHprimecovert;.
+`footnote`  Visually, the `MCH; merges how the 
+two component metrics `q.count steps`/: whereas the Manhattan 
+counts only orthogonal steps, and the Chebychev freely counts 
+`i.either` orthoginal and diagonal steps, the `MCH; 
+represents a path `i.first` along a diagnoal and then, 
+`q.turning` by 135 degrees, orthogonal steps outward.  
+The raw-number pairs can be supplemented with 
+one of eight directional indications as needed 
+(between two points the diagonal-then-orthogonal 
+path can have four initial direcitons and two 
+possible further directions for the orthogonal 
+component).  Picture `MCH; pairs as the 
+sum of a diagonal vector (sloping 
+at 45 degress from the relevant line) and 
+end-to-end with an orthogonal vector.      
+`p`
+
+
+`p.
+In order to document the relevant mathematical 
+properties of `MCH; I will introduce a couple 
+of auxiliary constructions related to discrete 
+geometry.  The main results I am leading uo 
+to are smmarized in Table 1 with respect to 
+finding locations equidistant from some point.  
+The math involved here is barely above grade-school 
+level, but there is some combinatorial trickiness 
+in fully enumerating all possibilities for 
+distance comparisons, so this  
+presentation hopefully does not seem unduly technical.  
+In particular, it is significant to contrast 
+locations (especially in image-processing) which 
+represent `i,pixels` themselves and which 
+represent boundary-points `i.between` pixels; 
+this comment would then generalize to overall 
+image-regions.  If a picture has odd pixel-sizes  
+both horizontally and vertically, the exact center 
+is one pixel; otherwise, it is the gap `i.between` 
+two pixels (for an even/odd mixture) or 
+four (in the both-even case).  This motivates 
+the following nodification to the notion 
+of discrete geometry on an integer grid or lattice:
+
+`anondefin.
+Call a `q.black-gray` grid a lattace with lines 
+grouped into two classes, `i.black` and `i.gray`/, 
+where each horiztonal (respectively, vertical) 
+black line is surrounded by two gray lines, and 
+vice versa (i.e., the two colors are interspersed).  
+The `q.points` on such a grid would lie at 
+intersections between lines, and given the 
+color-differences there are four kinds of 
+points: double-black (intersections of two 
+black lines), gray-black, black-gray, and 
+double-gray (reading the horizontal color 
+first, then vertical).  Unless 
+stated otherwise, I will refer to `MCH; distances 
+as comparisons between two intersection-points on a 
+black-gray grid.  In this context `q.points` discussed 
+without further qualification mean `q.grid points`/, 
+i.e., intersections between grid lines.
+`anondefin`
+
+The purpose of this kind of grid is to address 
+certain mereogeometric or meretopological situations 
+where distances can combine entities of differing 
+dimensions.  Consider a checkboard pattern; imagine 
+placing chess pieces either `i.inside` board squares 
+(corresponding to double-black grid points), 
+or along edges `i.between` squares (gray-black mixed) or 
+at corners where four squares intersect (double-grays).  
+The black-gray construction  distorts actual geometry 
+(if we picture gray and black as evenly spaced lines then 
+colors do not affect the dimensions of points or 
+lines involved, so the mereogeometric interpretation 
+is not visually implicit, but the point 
+of black-gray grids is for discrete geometric properties, 
+such as distance, which do not correspond to Euclidian 
+space anyhow).  I am particularly focused on the following:
+
+`anondefin.
+Call an `MCH; `i.cycle` on a black-gray grid to be a collection 
+of double-black points equidistant, by some specific value, from a central 
+point, within the context of a rectangle (possibly a square) 
+centered on that point.  If the stipulated center-point 
+is not double-black, calculate the shared `MCH; distance 
+according to the double-black point adjacent to  
+the center (either two points alongside, for black-gray or vice-versa, 
+or four points around, for double-gray) which is nearest to 
+each candidate double-black point.    
+`anondefin`
+
+Note that two `MCH; pairs are `q.equal` if both components 
+are equal (they may differ in the vector-directions).  
+If two `MCH; pairs are `i.not` equal, there is no 
+way for them to represent the same `i.Euclidean` 
+distance (assuming we treat the diagonal  
+and orthogonal vectors as immersed on a 
+Euclidean plane) so `MCH; provides a 
+reasonable alternative to Euclidean distances 
+with respect to ordering point-pairs in terms 
+of their respect distances, as mentioned 
+last section, or grouping those representing 
+the same Euclidean (and therefore `MCH;) distance.
+
+`anonobservation.
+An `MCH; cycle can have 1, 2, 4, or 8 points. 
+`anonobservation`
+
+`observationproof.
+Every point in an `MCH; cycle will have some pair 
+`diagorthopair; shared by all points, which will differ 
+by direction.  Since there are eight possible 
+directions attributable to each pair, a cycle 
+can have eight different points.  We then have 
+to identify cases where cycles will have 
+`i.fewer` points.  Note that if either 
+or both coordinates in the `MCH; pair are zero, 
+then the distinction between diagonal and/or 
+orthogonal directions goes away, eliminating 
+some points.  The 1-point case corresponds 
+to zeros for both diagonal `i.and` orthogonal 
+components on a double-black center (so there 
+is only one point, the center itself).  
+A double-zero on a black-gray or gray-black center  
+represents a length-two cycle (because 
+we consider the two double-black points around 
+the center) while a double-zero `MCH; for 
+a double-gray center engenders a length-four 
+cycle.  An `MCH; with one zero and one nonzero  
+component can have four directions (since both a 
+nonzero diagonal and an orthogonal 
+with `i.no` diagonal supports four) and therefore 
+represent four distinct points in a cylce 
+(this is another length-four case).  Moreover, 
+for any `MCH; with nonzero `i.orthogonal`/, 
+it is possible that half of the points in a full 
+cycle (within a sufficiently large rectangle) 
+are excluded because they lie outside the 
+bounds of the actual rectangle associated with the 
+specific cycle.  
+`observationproof`
+
+Note that there are severak factors influencing 
+the length of an `MCH; cycle: the dimensions 
+of the bounding rectangle (and the degree to 
+which one side is longer than another, causing 
+some cycles to `q.lose` points); whether 
+the center is double-black, double-gray, or a 
+combination; and the presence or absence 
+of zeros in the desired `MCH; distance: an 
+orthogonal zero, for example, results 
+in four points along two diagonals without an 
+additional orthogonal projections which could 
+extend either horizontally or verticlly; 
+as a result, the cycle can have only four 
+(not eight) points, but also it cannot be 
+contracted due to width/height discrepancies 
+in the bounding rectangle. 
+`p`
+
+
+`p.
+The reason why `XCSD; employs `MCH; cycles is to 
+itemize tierboxes which are equidistant from 
+the image center.  As mentioned earlier, 
+`XCSD; computes a memory-layout according to 
+which tierboxes closest to the center 
+occupy lower memory addresses, with pixel 
+data encoded in contiguous raw memory 
+expanding outward from that center.  
+This `q.expansion` is understood to 
+progress through `MCH; cycles.  
+The `MCH; format has a intrinsic ordering 
+based first on the total length (adding 
+orthogonal and then diagonal) and then, 
+for paths with the same sum result, 
+treating paths with fewer `i.diagonal` steps 
+as shorter (given that diagonal steps 
+are longer from a Euclidean perspective).  
+Given any collection of points around a center, 
+then we ccan partition the set into 
+`XCSD; cycles which have a natural 
+ordering between one another; moreover, `i.inside` 
+each cycle the points are distributed clockwise 
+or counter-clockwise (since the basis 
+for separating points is alternative 
+directions superimpose on a single directionless
+`MCH; pair).  The end result is a coherent 
+algorithm for ordering points subject 
+to constraints that points nearer to the center 
+should be placed before those further away.
+`p`
+
+`input<table1>;
+`p.   
+For `XCSD;, the `q.points` are actually 
+tierboxes (or gaps between them), but 
+this is consistent with black-gray grids 
+empbodying mereogemetric relations 
+through discrete/integer mathematics, 
+without the grid being a faithful 
+`i.representation` of the modeled 
+space's actual (Euclidean) geometry.  
+In short, the algorithms I have described 
+in the black-gray context work also 
+for the practical task in `XCSD; of 
+deriving the proper memory-layout 
+for image tierboxes (and, by 
+extension, individual pixel runs).  
+`p`
+
+
+
 `p.
 
 `p`
+
+
+
 
 
 

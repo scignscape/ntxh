@@ -32,12 +32,17 @@ One detail which varies across platforms concerns where
 location-axes have their origin point: one could have 
 the top-left corner correspond to the point (0, 0) 
 %-- with axes increasingly down and to the right %-- 
-or alternatively the origin at the bottom-right, 
-or even the image center.  Another question is whether 
+or alternatively the origin at the bottom-right 
+(actually, any of the corners) 
+or even the image center.
+`p` 
+
+`p.
+Another question is whether 
 the horizontal or vertical coordinates are notated first 
-in a number-pair.  These are not complex details, of course, 
+in a number-pair.  These are not particularly complex details, of course, 
 but care must be taken to ensure that analytic procedures 
-are called with the proper location-encoding, i.e., that 
+are called with the proper location-encoding; i.e., that 
 there is alignment between libraries' and calling procedures 
 with respect to location-coordinate conventions. 
 `p`
@@ -46,9 +51,10 @@ with respect to location-coordinate conventions.
 `p.
 Ensuring such alignment can be promoted via strong-typing: assuming that 
 number-pair types are further narrowed to reflect coordinate 
-conventions, only locations encoded according to the proper 
-rules can be passed to analytic procedures.  Such policies can 
-include how coordinates are names: one common vocabulary for 
+conventions, only locations encoded according to the target 
+expectations can be passed to the corresponding procedures.  
+Such policies might 
+include how coordinates are named: e.g., one common vocabulary for 
 pairs, as in tables or spreadsheets, are to identify horizontal 
 `q.lines` as `i.rows`/, and vertical as `i.columns`/.  Moreover, 
 row/column pairs usually notate the `i.row` coordinate first.  
@@ -67,13 +73,13 @@ or x/y (horizontal then vertical).
 
 
 `p.
-To add further confusion, some procedure accept inputs in terms 
-of `i.lengths`/, e.g. width and height, where similar procedures 
+To add further confusion, some procedures accept inputs in terms 
+of `i.lengths`/, e.g., width and height, where similar procedures 
 would accept location-coordinates.  So, without full context 
 information, it is ambiguous whether a pair designates a coordinate 
 or two length measures.  Consider a procedure to calculate 
-the average color or dominant color of some rectangular 
-image-region, where the inputs must define a rectangle spanning 
+the average color or dominant color within some region-bound, 
+where the inputs must define a rectangle spanning 
 the focus of the computation.  That rectangle might be described 
 via a pair of locations %-- top-left and bottom-right corners, for 
 instance %-- or alternatively via `i.one` coordinate-pair 
@@ -83,7 +89,11 @@ might be a `i.location` (x/y or row/column) or might be
 `i.dimensions` (width/height).  Confusion can be avoided 
 by having a width/height type type distinct from 
 location-types, analogous to distinguishing row/column 
-from x/y location coordinates.  At the same time, note 
+from x/y location coordinates.
+`p`
+
+`p.
+At the same time, note 
 also that some procedures might take number-pairs 
 which do not model geometric quantities such as position 
 or length, where terms like `q.width` or `q.column` could 
@@ -110,13 +120,13 @@ might think to provide one such pair-type (or perhaps
 several distinguished only by byte-length), anticipating 
 that higher-level distinctions between conceptually 
 distinct but structurally isomorphic types 
-(like row/column, x/y, width/height, and first/second).  
+(like `makebox.row/column`/, x/y, width/height, and first/second).  
 Ensuring that strong pair-types are never mismatched 
 would then be the responsibility of the compiler emitting 
 `VM; code, not the `VM; runtime.  Consider, however, that 
 pair-labeling could reasonably be an issue within 
 special contexts, such as query-evaluation: an image-database 
-could, for example, allow for queries which 
+might, for example, allow for queries which 
 invoke the rectangle-focused procedure mentioned 
 above (along the lines of `q.find images whose central third 
 rectangle color-averages` to nearly some given shade).  
@@ -124,8 +134,11 @@ Assuming type-level distinctions such as x/y vs. width/height
 are recognized by the query `i.language`/, then query 
 `i.evaluators` would of course at some stage ensure that 
 an x/y coordinate is not passed to a rectangle `q.constructor` 
-which expects width/height dimensions, say.  Moreover, 
-the `q.compilers` that would bridge `i.query` code to 
+which expects width/height dimensions, say.
+`p`
+
+`p.
+Moreover, the `q.compilers` that would bridge `i.query` code to 
 `VM; instructions might be significantly different than 
 those working on code from other genres, such as scripts 
 (with notions of types, scopes, and variables closer 
@@ -134,7 +147,7 @@ circumstances could argue for stronger type distinctions
 being recognized even at the `VM; level, at least to 
 some degree of detail, to help guarantee that 
 type-enforced conventions are applied in similar 
-ways across all environments that user the `VM;, 
+ways across all environments that use the `VM;, 
 notwithstanding their distinct compilation 
 models (database queries compared with scripts, 
 for instance).
@@ -162,7 +175,7 @@ for native encoding in a `VM; context:
 
 `item ->> (strictly) Ascending, descending, spaceship ;;  As boolean operators, 
 return true if the second value is larger (respectively, smaller) 
-than (or equal to, for the non-strictly versions) the first.  The 
+than (or equal to, for the non-`q.strictly` options) the first.  The 
 `q.spaceship` version (borrowing the terms from many 
 high-level programming languages) would return 1, 0 or -1 
 depending on whether the second value is greater, equal, or less than the first.  
@@ -195,11 +208,11 @@ or `q.gap` between the two numbers as an absolute value (i.e.,
 maximum minus minimum).   
 
 `item ->>  Duplicate, `q.end at` ;;  Given one number, constructs a 
-pair by setting the second value with a desired gap greater 
+pair by setting the second value to have a desired gap greater 
 than the first (or, allowing this parameter to default to 
 zero, form a pair with two equal numbers); alternatively, 
 modify the second number in an already-existing pair to 
-conform to a gap.    
+conform to such a gap.    
 
 `item ->>  Linear intersections ;;  Given two pairs, 
 form a new pair which takes one value from each pair, 
@@ -227,6 +240,71 @@ recognized as distinct data types analogous to pairs,
 where the first first number would be multiplied 
 by the square of the input.
 
+
+`item ->>  Manhattan, Chebychev, and other distances ;;  
+For cases where pairs represent `TwoD; locations 
+on an integer grid, there are several possible metrics 
+that could be used to represent lengths (via `i.integers`/) between 
+grid-points %-- of course, one could compute real-valued 
+Euclidean distances (approximated by floating-point numbers) 
+but I'll focus instead on formulae expressed solely 
+through integers (i.e., distances use the same type 
+as point-components themselves).  Familiar 
+choices are the `q.Manhattan` metric, which 
+calculates distances by counting orthogonal steps 
+leading from a start to an end point), or 
+the `q.Chebychev` metric, which counts the 
+minimum number of orthogonal `i.or` diagonol 
+steps, along grid intersections (a `q.grid-diagonal` 
+would be the shortest diagonal between two grid-points, 
+in effect two single orthogonal steps at right angles).
+Supposing `xypair; and `abpair; are two locations, 
+the Manhattan and Chebychev equations  
+would be `xyabM; and `xyabC;, respectively.  
+Also, the `XCSD; format 
+is built around a combination of these two 
+distance measures (analyzed in the next section).  
+One benefit of a Manhattan/Chebychev `q.hybrid` 
+(at least in the form discussed below) is an almost-Euclidean 
+precision with respect to ordering distances, 
+while retaining only integer-based expressions: specifically, 
+two location-pairs on an integer grid will only have the same Manhattan/Chebychev 
+hybrid distance if they have the same Euclidean distance 
+(and vice-versa).  
+In any case, each of these (Manhattan, Chebychev, and 
+the hybrid) are comparison operations 
+that would be appropriate for any 
+image-processing or geometry library.
+
+`item ->>  Integer-based line operations ;;  The previous 
+item reviewed several distance metrics appropriate 
+for discrete-geometric systems.  We can 
+similarly incorporate other computations 
+appropriate for geometric work restricted 
+to integer-based mathematics.  For example, 
+consider the problem of calculations 
+pertaining to the Bresenham's line 
+between to points (i.e., the points drawn 
+for graphics displays approximating a smooth 
+Euclidean line, accommodating the restriction 
+to a rectangular pixel-grid).  Given 
+two end-points and a single intermediate coordinate, 
+one might want to calculate the intersection 
+of the formers' Bresenham's line with the 
+horiztontal or vertical axis-translation through 
+the latter, or then go on to select some set 
+of points adjacent to that intersection on either 
+side (this last step would need information 
+about the line specifically; it could not be 
+ascertained indirectly via Euclidean calculations).`footnote.
+An example of where this sort of problem might 
+arise would be implementing mouseover effects where 
+we want to highlight some region of a 
+Bresenham's line as a visual cue for cursor-location 
+or the image-point where some action would take effect.
+`footnote`
+
+
 `item ->>  Floor, ceiling, fit in range ;;  Modifies a pair's components 
 so they are at least (respectively, at most) some value.  
 Similarly, given two pairs, modify the 
@@ -238,16 +316,16 @@ and no greater than its second coordinate.
 
 `item ->>  Binary insert ;;  Treating the first 
 number as a bitset, encode the second number 
-in a designated bit-sequence within it 
+through a designated bit-sequence within it 
 (as a unary operator, simply shift the second 
 number left by some count of bits, applying 
 binary or of the result to the first; as a 
 two-argument function, the second input 
 could specify an `i.end` bit, so in effect 
-the second number would be truncated of rightmost 
+the second number would be truncated of leftmost 
 bits as needed and then copied into the 
-first using a bitmask-guarded `b.or` operation 
-which only alters bits in the specified range.
+first using a bitmask-guarded `qb.or` operation 
+which only alters bits in the specified range).
  
 `description`
 `p`
@@ -258,7 +336,11 @@ demo code associated with this chapter
 (largely for calculations related to the 
 `XCSD; image format), so this code can 
 furnish examples of these operations 
-employed in concrete code.  One benefit of 
+employed in concrete situations.
+`p`
+
+`p.
+One benefit of 
 providing a relatively thorough suite of 
 operators defined for number-pairs is 
 encouraging programmers to think of 
@@ -275,17 +357,17 @@ As an example, `XCSD; uses a function
 called `qquadrantcodeagainst; which 
 is defined (within a `Cpp; macro) as a 
 series of pair-operators: `quadrantcodeagainstimpl;  
-That code may not be more readable than an alternative 
-which works with each coordinate separately, 
+That code may not be more readable than alternatives 
+which work with each coordinate separately, 
 but it fits within a paradigm where we are 
 encouraged to think of pairs as self-contained 
-mathematical entities wherever possible.  
+mathematical entities whenever possible.  
 `p`
 
 
 `p.
 Although the names chosen for some of these operations 
-might make more sense in some types' contexts 
+make more sense in some types' contexts 
 than other (`q.area` as a label for the inner-product 
 absolute value fits width/height better than 
 row/column, for example), it seems reasonable 
@@ -294,13 +376,16 @@ similar types absent compelling reasons to make
 specific exceptions.  Moreover, distinctions 
 such as row/column versus width/height 
 (and x/y, first/second, top/left, etc.) are orthogonal 
-to signed/unsigned, integer/float, and byte lengths for the components, 
-so we can derive a fairly large number of `q.primitive` 
+to signed/unsigned, integer/float, and byte lengths for the components.
+Accordingly, we can derive a fairly large number of `q.primitive` 
 pair-types, reflecting different combinations of 
 coordinate names, signed/unsigned, 1/2/4/8 bytes, and 
-some floating-point-based types (albeit some operations 
+floating-point-based types (albeit some operations 
 applicable to integers, such as ones based on bitsets 
-or binary encodings, would not carry over).  
+or binary encodings, would not carry over).
+`p`
+
+`p.
 On the principle that most operations available 
 for one pair-type should be available for others, this 
 results in quite a few duplicate operations differing 
@@ -355,25 +440,30 @@ floor/ceiling, ranges, and so forth.
 `p.
 Also, a comparable 
 custom-syntax scenario might apply to conventional 
-arithmetic (and boolean/binary) operators, where 
+arithmetic (and boolean/binary) operators in contexts where 
 it is necessary to distinguish an operation between a 
 `i.pair` and a `i.single` value (e.g., multiplying both 
-coordinates by the same scale) or another pair 
+coordinates by the same scale), or conversely another pair 
 (e.g., vector multiplication`footnote.In the 
 sense of Hadamard product; cf. Julia's 
-`b..*` operator.`/), or `i.internally` within one pair.  
+`b..*` operator.`/), or (alternatively 
+again) `i.internally` within one pair.  
 For instance, there are three important 
 versions of, say, addition in a number-pair context: 
-given `xypair; there's `xypluss; for some scalar 
+given `xypair; there is `xypluss; for some scalar 
 `sval;, or `xyplusab; for pair `abpair;, 
-or `xplusy; (the `q.inner` sum).  These 
+or (scalar) `xplusy; (the `q.inner` sum).
+`p`
+
+`p.
+These 
 alternatives would similarly exist for 
 almost all `q.primitive` numeric operators 
 for most coding languages, which would include 
 arithmetic functions and also boolean 
 calculations both in the true-false sense 
 (e.g., treating positive or non-zero values 
-as `b.true` and zeros as `b.false`/) and bitwise 
+as `qb.true` and zeros as `qb.false`/) and bitwise 
 manipulation, plus binary operations such as 
 left- and right-shift.  A high-level language 
 might notate these variations via compound 
@@ -383,7 +473,7 @@ another character (or characters)
 indicating a specific variant 
 (as a hypothetical example, a bare `b.+` might 
 represent addition `i.between` pairs, while 
-`b..+` represents `q.inner sum` and `b..+` 
+`b..+` represents `q.inner sum` and `b.+.` 
 encodes addition with a duplicated scalar).  
 `p`
 
@@ -403,19 +493,23 @@ the maximum integer of the corresponding unsigned type).
 Each of these could potentially be expressed as 
 operators between pairs as well as type-cast logic; 
 as such, one consideration when formulating a 
-`VM; underlying type system is to define operators 
+`VM;'s underlying type system is to define operators 
 which provide the calculations for type-casts 
 (in case someone wants to achieve type-cast-like 
 effects via a function-call, or perhaps to 
 enable scenarios where the `VM; could be configured 
 to perform type casts in different ways by specifying 
-a desired operator).  Mire generally, it's worth 
+a desired operator).
+`p`
+
+`p.
+More generally, it's worth 
 noting how type-casts intersect with operator-application: 
 consider an `q.inner difference` function which 
 subtracts the second pair-value from a first.  
 Assuming we sustain the principle that unsigned 
 pairs should by default perform operations yielding 
-other unsigned pairs/values, we might want the 
+other unsigned `makebox.pairs/values`/, we might want the 
 `i.non-negative` version of inner-difference, 
 which in turn implies casting a signed result 
 to unsigned.  This is analogous to 
@@ -431,6 +525,7 @@ something `i.other` than zero, passed as a parameter.
 `p`
 
 
+`subsection.Issues with overflow/underflow and loop termination`
 `p.
 Similar ideas apply in the context of addition with 
 possible overflow: should be consider addition 
@@ -459,7 +554,6 @@ analogous to zeroing out bits with index
 9 and greater.     
 `p`
 
-`subsection.Issues with overflow/underflow and loop termination`
 `p.
 The overarching theme here reflects different conceptual 
 roles played by numeric types.  In the case of one-byte 
@@ -514,7 +608,11 @@ possibility is to label directions such as
 distinct enumeration class, where the enumeration 
 labels would be mapped to corresponding numbers 
 in the 0-8 ramge, but descriptive terms such as `q.left` 
-might be more readable than numeric codes.  A variation 
+might be more readable than numeric codes.
+`p`
+
+`p.
+A variation 
 on this example would be that of notating directions between 
 image-locations on a larger scale via 16 direction 
 possibilities, incorporating those between strict 
@@ -541,28 +639,28 @@ define a (distinct) type for integers modulo 24, say.
 Alternatively, one might adopt something like `q.modular guarded` 
 arithmetic (and binary, e.g. shift) operations, where each 
 operation can be given an extra parameter to serve as a 
-modular-arithmetic context (not that equally relevant 
+modular-arithmetic context (note that equally relevant 
 for image-analysis and other geometric contexts might be 
 variations on modular arithmetic where zero is 
 sometimes replaced by the modulus, or results 
 are `i.subtracted from` the modulus).  Some of these 
 arithmetic details could just be encoded relatively 
 inelegantly by if-then branches and the like 
-(`q.if(result > 24) ...` and so forth) but we have 
+(`makeboxq.if(result `gt<24>;) ...` and so forth) but we have 
 more flexibility on the `VM; side to identify 
 various forms of modular guards (perhaps via 
 runtime flags that can be attached to ordinary 
 integers) and of modular arithmetic in general 
-(e.g., zero-to-modulus swaps).   
+(e.g., zero-to-modulus swaps). 
 `p`
 
 
 `p.
-The main point here is to identify coder's rationales 
+The main point here is to identify coders' rationales 
 for employing specific types and to recognize situations 
 where algorithms need to satisfy conditions more 
 precise than the types alone express (an integer 
-encodes mod-24 values, and enumeration is mapped 
+encodes mod-24 values, an enumeration is mapped 
 to numeric quantities for geometric computations, 
 such as mapping named directions under rotations/reflections, 
 and so forth).  Whereas these conceptual details 
@@ -571,10 +669,13 @@ comments) in high-level source code, `VM;s can
 treat such conditions more rigorously by 
 annotating types, or flagging runtime values, 
 or providing variants on common operations 
-(e.g., a modular variant on arithmetic functions).  
-Consider again integer-overflow situations: if a 
+(e.g., a modular variant on arithmetic functions).
+`p`
+
+`p. 
+Consider, again, integer-overflow situations: if a 
 programmer is looping `i.up to` an integer maximum 
-(say, 255) they might select a type for the 
+(e.g., 255) they might select a type for the 
 looping variable to `i.avoid` overflows; so 
 if a number `inum;, say, is to represent 
 one color-component and be used for a loop, 
@@ -633,7 +734,7 @@ sets a range-span.  One can argue that the two
 uses of increment (and analogously decrement, 
 especially in the context of unsigned types 
 when looping down to zero) 
-are conceptually different enough to warrant to two 
+are conceptually different enough to warrant two 
 different `VM; instructions, especially considering 
 that extra care is appropriate for the second case 
 (due to wraparound bugs).  
@@ -657,7 +758,10 @@ therefore recognize these distinctions,
 providing a more flexible compilation-target 
 and perhaps cueing higher-level language engineers 
 to similarly acknowledge the relevant 
-distinctions (e.g., via specialized syntax).  
+distinctions (e.g., via specialized syntax).
+`p`
+
+`p. 
 Moreover, operation-variants and the type which 
 they work on are conceptually interrelated, 
 so engineers at both higher and lower levels 
@@ -696,7 +800,10 @@ each of these would be identified by a label, but may
 also be mapped to a numerically-encoded color space, 
 so that quantitative inter-color operations could be 
 implemented (measuring the distance between two 
-named colors, for example, or mapping them to grayscale). 
+named colors, for example, or mapping them to grayscale).
+`p`
+
+`p.
 Another case of consequential numeric encoding 
 which can be illustrated in the color-values would be 
 using enumerators as array indices: consider enums which 
@@ -710,22 +817,27 @@ labels should map to 0, 1, or 2 so as to form array indices.
 `p`
 
 `p.
-Note that one use-case for enums is simply to introduce a 
+Also, some use-cases for enums are to introduce a 
 collection of related labels into a programming environment, 
 without necessarily implying that there is a single 
-semantic or conceptual iterations which covers them 
-all.  For instance, it is plausible that an enum 
+semantic or conceptual iterpretation that covers each of 
+them.  For instance, it is plausible that an enum 
 employed in the context of managing calendars (not just 
 raw dates but schedules, appointments, and so on) 
 would have labels for days (Sunday-Saturday) but 
 `i.also`/, say, `i.weekday` and `i.weekend` 
-(in contexts such as `q.open weekdays` or `q.every weekend`/).  
+(in contexts such as being open (all) weekdays, 
+or happening `q.every weekend`/).  
 In this case, the numeric encoding for days-of-the-week 
 would operate on two levels: most labels would be 
 related sequentially (Sunday, Monday, etc.) but 
 `q.weekday` and `q.weekend` would be grouping-labels 
 instead, signifying collections (Monday to Friday and 
-Saturday/Sunday respectively).  A plausible implementation 
+Saturday/Sunday respectively).
+`p`
+
+`p.
+A plausible implementation 
 for such a type would be via bitmasks: assign the numbers 
 1-64 (increasing over powers of two) to the seven 
 weekdays (i.e., each code has exactly one bit set, 
@@ -744,21 +856,64 @@ where enumerations can be cast to integers
 (whether explicitly or implicitly).  
 `p`
 
+`p.
+Meanwhile, note that bitmask-encoding would introduce 
+a further calculation step in contexts where days 
+of the week are sometimes also given by numbers.  
+In response, some code might prefer to use sequential 
+numbers and assign, say, 8 and 9 to `q.weekday` and `q.weekend`/.  
+Any procedures inputting a days-enum would therefore 
+need to check for these two idiosyncratic values 
+and branch accoringly.  This may be imperfect style 
+from a viewpoint that code which has numerous conditional 
+branches is harder to maintain and understand (compared to 
+mostly `q.branchless` programming).  On the other hand, 
+using a `q.bitmask` encoding would entail extra procedures 
+being implemented (for converting the 1-64 values to their 
+1-7 equivalents, perhaps via a `qtt.ffs`/, or `q.find first bit set` 
+operatio, almost equivalent to taking a base-2 logarithm). 
+Moreover, relying on numeric values to ascertain 
+details through the enum %-- `q.on Wednesday` 
+is not a matter of testing one enum value against `i.Wednesday`/'s 
+for `i.equality`/, but rather for nonzero bitwise-or, because 
+`q.weekday` includes Wednesday (in this sense 
+bitmasks make certain day-related logic very concise) %-- 
+forces the enum codes to have specific values, which 
+might feel dubious from a type-theoretic perspective 
+according to which enums should be proper `q.sum-over-unit` 
+types.  In effect, two different intuitions about 
+`q.elegant` (and maintainable/understandable) 
+programmng style are in tension, as far as restricting branching 
+`i.or` preferring enum types not bound to precise underlying 
+values.  My general point is that 
+these kinds of tensions tend to occur in contexts 
+where enums span concepts which (albeit interrelated) 
+have a variety of semantic interpretations, like 
+`i.Wednesday` versus `i.weekday`/.       
+`p`
 
 `p.
 Mainstream programming languages evince different patterns 
 with respect to mapping enums to numeric values.  
-In `Cpp;, for example, we can specify the 
+In `Cpp;, for example, although we can specify the 
 `i.byte length` of an `b.enum` type by requesting a 
 particular underlying type (e.g., `b.enum class e : unsigned char` 
-forces each enum value to be represented by only 8 bits) but 
-enums (at least `q.strong` `b.enum class` ones) do not 
-automatically cast to integers.  They can, however, be manually 
+forces each enum value to be represented by only 8 bits),  
+enums %-- at least `q.strong` `b.enum class` ones %-- do not 
+automatically `i.cast` to integers.  They can, however, be manually 
 cast; or, integer-style arithmetic semantics can be 
-added `i.to` enums via operator overloading.  For other languages 
-(Java, for instance) utilizing enums' numeric values is more 
+added `i.to` enums via operator overloading
+(in the `XCSD; code, the `ENUMOPS; macros expand to implementations 
+of operator overloads which make most arithmetic 
+operations available to enum values, for enumerations 
+that require them).  With other languages 
+(`Java;, for instance) utilizing enums' numeric values is more 
 difficult, whereas elsewhere (e.g., `Csharp;) conversion to 
-integers is automatic.  This variation between languages 
+integers is automatic.
+`p`
+
+`p.
+This variation between languages 
 reflects inconsistency across underlying semantics: 
 enumerated nominals have different degrees of conceptual 
 connection to an underlying arithmetic space in different contexts.  
@@ -774,7 +929,14 @@ assigned numeric codes simply for purpose of computational representation,
 but where the actual numbers have no special meaning 
 (an exception could be allowed for a label used as a `q.default` 
 or fallback when a specific value is missing, which may be 
-coded with a zero to coincide with defaults in other settings).
+coded with a zero to coincide with defaults in other settings); 
+this is the case that, technically, best matches the 
+type-theoretic understanding of enumerations (in terms 
+of summing unit types %-- those with exactly one instance %-- 
+so their sum is a collection of instances which have 
+no internal structure, at least apart from the means to distinguish 
+one from any other).  
+
 
 `item ->> Cyclical or sequential enumerators ;;  This would cover cases 
 where labels correspond to entities which have an implicit 
@@ -796,17 +958,18 @@ constants, which does not involve a specific enumerator list
 define maximum (respectively, minimum) values for different  
 integer types; these are global constants which have some 
 obvious logical interrelationship, but there does not appear 
-to be any benefit in grouping together as a distinct `i.type` 
+to be any benefit in grouping them 
+together as a distinct `i.type` 
 whose specific purpose is to identify just these values.  
 On the other hand, consider a situation where we want to 
-create a list of Latin1 codes for characters which have 
+create a list of `LatinOne; codes for characters which have 
 specific meanings in some formal context (e.g., the 
 list of whitespace glyphs: space, tab, new line, form-feed, 
 carriage-return).  Here it is plausible that a procedure 
 might accept a type which expresses a member of such a 
 list (implementing actions for a code-generating grammar, say) 
 while also each label needs to embody a specific constant 
-value (we want to enumerator to translate directly to 
+value (we want the enumerator to translate directly to 
 a corresponding `ASCII; and Unicode number), which in 
 a sense combines the sorts of contexts where global 
 constants would be preferred and those more 

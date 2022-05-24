@@ -26,14 +26,17 @@
 %  .floor(0).times({2, 1}).inner_sum(); 
 
 
-\newcommand{\xypair}{\ensuremath{x, y}}
-\newcommand{\xypluss}{\ensuremath{x + s, y + s}}
-\newcommand{\abpair}{\ensuremath{a, b}}
+\newcommand{\xypair}{\ensuremath{\{x, y\}}}
+\newcommand{\xypluss}{\ensuremath{\{x + s, y + s\}}}
+\newcommand{\abpair}{\ensuremath{\{a, b\}}}
+
+
+\newcommand{\diagorthopair}{\ensuremath{\{diagonal, orthogonal\}}}
 
 
 \newcommand{\sval}{\ensuremath{s}}
 
-\newcommand{\xyplusab}{\ensuremath{x + a, y + b}}
+\newcommand{\xyplusab}{\ensuremath{\{x + a, y + b\}}}
 \newcommand{\xplusy}{\ensuremath{x + y}}
 
 \newcommand{\inum}{\ensuremath{i}}
@@ -43,12 +46,42 @@
 \newcommand{\bardash}{\ensuremath{|-}}
 \newcommand{\dashbar}{\ensuremath{-|}}
 
+\newcommand{\ENUMOPS}{{\small{}\texttt{ENUM\_FLAGS\_OP}}}
 
-\newcommand{\abs}{\b{abs}}
+
+\newcommand{\abs}{\qb{abs}}
 
 \newcommand{\Cppspaceship}{$<=>$}
 
 \newcommand{\lteq}[1]{$<=$#1}
+\newcommand{\gt}[1]{$>$#1}
+
+\newcommand{\xyabM}{\ensuremath{|x-a|+|y-b|}}
+\newcommand{\xyabC}{\texttt{max(}\ensuremath{|x-a|,|y-b|\texttt{)}}}
+
+\newcommand{\MCH}{\textbf{\texttt{\small{MCH}}}}
+
+\newcommand{\smMCH}{\textbf{\texttt{\footnotesize{MCH}}}}
+
+\newcommand{\MCHprime}{\textbf{\texttt{\footnotesize{MCH$'$}}}}
+
+\newcommand{\MCHprimepair}{\ensuremath{\{C, M-C\}}}
+
+\newcommand{\xyabMCH}{\ensuremath{\{M-C, 2C - M\}}}
+
+\newcommand{\MCHprimecovert}{\MCHprime{} = \{\ensuremath{innersum}(\smMCH),  %
+\ensuremath{first}(\smMCH)\} and \smMCH{} = \{\ensuremath{second}(\MCHprime),%
+\ensuremath{\mathit{innerdifference}}(\MCHprime)\}} 
+
+
+
+
+
+
+\newcommand{\mathC}{\ensuremath{C}}
+\newcommand{\mathM}{\ensuremath{M}}
+
+
 
 
 
