@@ -1,9 +1,159 @@
 
-`section.Virtual Machines for image-processing operations and specifications`
+`section.Integrating Virtual Machine with image-processing operations`
 `p.
-
+This chapter's discussion has thus far focused no topics, 
+such as two-coordinate data types and enumerations, which 
+are only tangentially related to image-processing.  
+The current section will focus on images more specifically.  
+When considering `VM; `q.integration` with image-processing, 
+I refer primarily to setting up Virtual Machines with 
+inherent functionality related to invoking Computer Vision 
+algorithms.  Presumably many `VM;s will implement 
+a general-purpose Foreign Function Interface would would 
+support calls to native-implemented graphics-related 
+procedures (along with any other high-throughput 
+domain, where highly optimized code in languages such as 
+`C; or `Cpp; is preferable for performance reasons).  
+In the current context I intend to focus however 
+in `VM; which are explicitly oriented toward 
+image-procesing, where this specific problem-area 
+is a central design emphasis instead of one group 
+of foreign-function capabilities amongst others.  
+This means that the `VM; model will incorporate features 
+specifically relevant to image.  For example 
+%-- as already discussed last section %-- representations 
+of image locations and intra-image lengths, in 
+the form of distinct numeric-pair types, could 
+be incorporated as `q.kernel` data types for 
+the relevant `VM;.  This is a straightforward example 
+of how basic choices for `VM; design could be 
+influenced by image-related use cases.  I will present 
+other examples below.
 `p`
 
+`p.
+As is implicit in this discussion, the form of connections
+between `VM;s and image-processing which I will 
+emphasize here involve `VM;s `i.calling` Computer Vision 
+algorithms provided by external libraries.  
+A different notion of `q.overlap` between `VM; and 
+image-based engineering would be dedicated `VM;s 
+for `i.implementing` Computer Vision algorithms, 
+analogous to how Graphics Processing Units 
+provide computing environments tailored to 
+concerns such as ray-tracing and other 
+graphics-rendering calculations.  Designs for 
+compiling image-processing code `i.to` special-purpose 
+`VM;s, which are optimized for running such 
+algorithms very efficiently, constitutes a 
+separate topic, which is outside the 
+focus of this chapter (except indirectly 
+since calling conventions within such 
+algorithms might overlap with calling conventions 
+for initiating image-processing workflows or 
+workflow steps, the latter topic fitting more 
+within the bounds of invoking Computer Vision 
+capabilities externally from a `VM; context). 
+`p`
+
+`p.
+Image-analysis functionality can be grouped into 
+several areas, such as contour-detection, region morphology, 
+texture-description, diffusion analysis, and 
+methods related to color statistics (e.g., color histograms). 
+For purposes of exposition, this section will discuss 
+algorithms related to the `XCSD; format mentioned 
+earlier.  The basic focus of `XCSD; concerns how 
+pixel-data is stored in computer memory; in particular, 
+pixels are lined up into groups at different `q.tiers`/, 
+or nested levels of detail.  The `XCSD; code 
+accompanying this chapter supports three tiers, based on 
+powers of three; so `threebythree; pixel-boxes are 
+grouped together, as are `ninebynine; and 
+`twentysevenbytwentyseven;.  This structure is 
+noticeably different from conventional `q.matrix`/-based 
+image formats, where one entire row of pixels (spanning 
+the whole image-width) would typically be coded 
+in memory as one pixel-run (sometimes called a 
+`q.scanline`/), followed by each successive row 
+of pixels in turn.  This representation is of little 
+intrinsic value, however (apart from simply recording pixel-data; 
+that is, the `i,organization` of this value in memory 
+adds no further benefit) unless one is working 
+with sub-images spanning the whole distance from left to 
+right margins.  In `XCSD;, pixels are stored in memory 
+such that `threebythree; boxes represent one contiguous 
+chunk, and can be accessed via raw pointers (rather than 
+copying from scanline-based data to temporary buffers); 
+then, on higher tiers, the same applies to 
+`ninebynine; and `twentysevenbytwentyseven; groupings.      
+`p`
+
+`p.
+At the uppermost scale on this `q.tiered` system, the 
+`twentysevenbytwentyseven; boxes are called `q.tierboxes`/, 
+which are aligned in memory from the center of the 
+image outward.  The `XCSD; code uses calculations based 
+on the Manhattan-Chebychev hybrid distance representation 
+(mentioned earlier) to arrange tierboxes such that 
+contiguous pixel-runs correspond to meaningful 
+image regions, specifically, diamonds, octagons, 
+squares, and rectangles centered on the overall 
+image-center.  This provides a rationale 
+for tierbox memory-layout, clarified below in more 
+detail.  `i.Within` each tierbox, pixel-runs are 
+stored on `ninebynine; and `threebythree; scales.  
+The goal is to increase the likelihood that a 
+particular cluster of pixels of analytic interest 
+can be accessed as a raw pixel-run (via pointers 
+to start and end memory) without needed multiple 
+copy operations.  Also, `XCSD; allots memory 
+space for data associated specifically with 
+boxes on each level, from `threebythree; to 
+`twentysevenbytwentyseven;.  This allows 
+algorithms to consider the image on coarser-scales, 
+avoiding features on the individual-pixel level 
+that could be statistical `q.noise`/, as desired.  
+Pre-computed values such as color-averaged 
+can be recorded in the image data along side 
+pixel-level information itself.       
+`p`
+
+`p.
+The multi-level representation just described 
+gives rise to the notion of `q.subdivision` indexing, 
+wherein individual pixels can be access via their 
+location in nested three-by-three groupings rather 
+than absolute coordinates.  Such indexing is useful 
+in contexts where we may want to examine 
+image-features present at different level of detail; 
+shifting focus from the pixel-tier to the 
+`threebythree;, `ninebynine;, or tierbox levels 
+simply involves dropping subdivision-indexing coordinate.  
+Also, `XCSD; allots space for encoding 
+image-data of varying provenance (e.g., texture codes 
+or region-of-interest masks) alongside channels, 
+both at the pixel level and higher tiers (referred to 
+as `q.extension` channels).  The `XCSD; format can therefore 
+record analytic data internally, such as masks 
+on different tiers placing units on that tier 
+within (or on the border of) one or more regions-of-interest.
+`p`
+
+`p.
+The last two paragraphs have explained some featuers 
+and rationaled for `XCSD;, and mentioned the 
+origin of concepts like `q.extensible` channel-systems 
+and subdivision indexing, reflected in the format's 
+name.  The purpose of this chapter is not to 
+analyze `XCSD; itself in detail, but rather to 
+adopt it for case-studies in `VM; integration 
+with image-processing.  I will do this through 
+the lens of algorithms associated with `XCSD;, 
+which hopefully serve as representative examples 
+of how `VM;s can interface with algorithms 
+related to image-formats in general.  
+`p`
 
 `subsection.Manhattan/Chebychev distances and `q.Black-Grey` grids`
 `p.
@@ -48,10 +198,11 @@ The math involved here is barely above grade-school
 level, but there is some combinatorial trickiness 
 in fully enumerating all possibilities for 
 distance comparisons, so this  
-presentation hopefully does not seem unduly technical.  
+presentation hopefully does not seem more technical 
+than the subject warrants.  
 In particular, it is significant to contrast 
 locations (especially in image-processing) which 
-represent `i,pixels` themselves and which 
+represent `i.pixels` themselves and which 
 represent boundary-points `i.between` pixels; 
 this comment would then generalize to overall 
 image-regions.  If a picture has odd pixel-sizes  
@@ -124,6 +275,37 @@ of their respect distances, as mentioned
 last section, or grouping those representing 
 the same Euclidean (and therefore `MCH;) distance.
 
+
+`anonobservation.
+The `MCH; and Euclidean distances are similar with respect 
+to ordering point-pairs into lesser, equal, or greater 
+internal distances.   In particular, (i) for two `MCH; distances 
+which internally sum to the same number of steps, the 
+`MCH; and Euclidean orderings coincide.  Also, (ii) strict 
+equality between distances matches between both representations, 
+and (iii) if one `MCH; coordinate is held constant, or if both 
+either simultaneously increase or descrease, the 
+changing coordinates will increase or decrease with Euclidean distance.
+`anonobservation`
+
+`observationproof.
+Suppose we have a normal (one-color) grid of evenly-spaced 
+orthogonal lines separated by a fixed unit, 
+so we can assign them integer coordinates.  `input<mcheuclidproof>;
+`observationproof`
+
+`noindent;In short, `MCH; is a reasonable replacement for Euclidean distance 
+in many contexts because there are few situations where point-pairs 
+have greater `MCH; but less Euclidean distance, or vice-versa 
+(as shown by the above proof, the only scenario where 
+the two representations differ in this sense is that 
+an `MCH; pair which sums to fewer steps, but has 
+greater diagonal component %-- i.e., `kgtzero; from (5) 
+in the proof %-- may yield a greater Euclidean length 
+than an alternative `MCH; pair with more steps but less diagonal.
+Calculations such as those related to `MCH; cycles 
+are not affected by those discrepancies.
+
 `anonobservation.
 An `MCH; cycle can have 1, 2, 4, or 8 points. 
 `anonobservation`
@@ -162,14 +344,14 @@ bounds of the actual rectangle associated with the
 specific cycle.  
 `observationproof`
 
-Note that there are severak factors influencing 
+Note that there are several factors influencing 
 the length of an `MCH; cycle: the dimensions 
 of the bounding rectangle (and the degree to 
 which one side is longer than another, causing 
 some cycles to `q.lose` points); whether 
 the center is double-black, double-gray, or a 
 combination; and the presence or absence 
-of zeros in the desired `MCH; distance: an 
+of zeros in the desired `MCH; distance.  An 
 orthogonal zero, for example, results 
 in four points along two diagonals without an 
 additional orthogonal projections which could 
@@ -232,8 +414,260 @@ extension, individual pixel runs).
 `p`
 
 
+`p.
+One rationale for memory-layout oriented to an 
+image-center is to increase the likelihood 
+that the pixel-data for an image-region of 
+interest can be obtained simply via pointers 
+to the start and end of a memory-block 
+(without needing multiple copies into a 
+temporary buffer).  Due to the nature of 
+`MCH; cycles and ordering, a contiguous  
+pixel run (assuming it is aligned to tierbox 
+boundaries) would take on a diamond, octagon, 
+or square shape around the image-center 
+(or potentially a rectangle, if the 
+length of one side of the demarcated region 
+matches the shorter image dimension).  
+While many significant image-regions of 
+course will not be centered on the 
+full image's center point (or point-gap), 
+there are still situations where focusing 
+on pixels closer to the overall center 
+is desired.  For example, signals 
+extracted via image-analysis are more likely 
+to be significant for labeling, classifying, or 
+matching images when they emerge from an 
+image's central region more than its periphery.  
+The color spectrum or histogram weighted toward 
+the center typically bears more signifanec 
+than further from the center, for example, 
+and similarly for prominent contour-shapes, 
+textures, diffusion processes, and so forth. 
+`p`
+
 
 `p.
+Also, more simplistically, thumbnail or 
+preview image-summaries might need 
+to strip away peripheral content, 
+even if the image is also scaled 
+down.  This points to potential 
+benefits of center-orienetd memory layout.  
+Copying pixels (even multiple pixel-runs, 
+e.g., one per scanline) is not a very 
+time-consuming operation, especially in the 
+context of full-scale image-analysis, where 
+executing Computer Vision algorithms could 
+easily take much more time than setting 
+up an initial pixel-matrix.  However, 
+some image-processing may occur in contexts 
+such as image-databases where performance 
+delays may noticeably affect usability, 
+in context where it could be necessary to 
+work through hundreds or thousands of 
+images in response to one user query/action.  
+In these kinds of contexts, avoiding 
+even the relatively minor step of 
+pixel-copying can improve performance, 
+in situations where one wants to 
+construct thumbnails for hundreds 
+of pictures (matchng a query, say), 
+or perform basic analysis on a 
+large image-series.     
+`p`
+
+
+`p.
+For these reasons `XCSD; is designed as a format 
+particularly suited to hosting images in a database, 
+where basic operations such as image-compression, 
+calculating dominant colors, and building 
+image-thumbnails can be highly optimized.  
+It's also true that the `MCH; representation, 
+which I have described here in the context of 
+memory-layout, can have other benefits.  For 
+some analytic algorithms, for example, 
+having a near-Euclidean distance formula 
+on an integer grid may be useful.  Furthermore, 
+memory-organization based on `MCH; cycles 
+includes (partly to calculate the layout 
+ordering in the first place) numerous 
+data-points applicable to each 
+tierbox, such as distance and orientation 
+against the image center, information 
+which may have some meaning in certain 
+Computer Vision contexts.  For example, 
+the weight given to some color, texture, 
+or diffusion scale within the bounds 
+of a given tierbox %-- or perhaps as 
+compared between tierboxes %-- might be affected 
+by the tierboxes' distance from center, or from 
+image central-orthogonal or diagonal axes, 
+or angular distance from some 
+analytically significant line (consider a 
+trendline through control points suggesting a 
+foreground region).  Some contexts 
+may prefer angular distances measured 
+via integers (e.g., via `MCH;) rather than 
+Euclidean floating-point approximations.     
+`p`
+
+
+`p.
+These points are suggestive of potential 
+`MCH; use-cases; my goal here is not 
+to advocate for `MCH; `i.per se`/, 
+but simply to justify the claim that 
+this is the `i.sort` of construction 
+that we might want to engineer 
+in an image-processing context.  
+I therefore claim it is a reasonable 
+example for discussions within 
+image-analysis contexts.  That is, 
+I propose to use `MCH;-cycle ordering 
+and related algorithms as case-studies 
+for `VM; engineering which 
+encapsulates Computer Vision capabilities 
+((or an interface to them).  Even if 
+`MCH;-related computations are not 
+well representative of image-analysis 
+mathematics because they are relatively 
+simple from a quantitative point of view, 
+they allow (for this reason) 
+`VM; issues to be foregrounded without 
+the distracting presence of challenging 
+Computer Vision calculations.    
+`p`
+
+
+`section.Virtual-Machine integration for Mereogeometric operators`
+`p.
+The above discussion has hopefully motivated some details 
+concerning algorithms specific to 
+`XCSD;.  In particular, the ordering 
+of tierboxes around an image-center is 
+determined by `MCH; cycles for progressively 
+larger `MCH; values.  These and related calculations 
+give rise to a series of functions giving 
+basic quantitative information about tierboxes, such as:
+
+`description,
+`item ->> Translating tierboxes from row/column coordinates 
+to `MCH; pairs ;;  This results in a measurement of the 
+basic distance of the tierbox from one central tierbox 
+%-- 
+or one of two or four central tierboxes, depending 
+on even or odd tierbox row and column counts 
+(the even/odd details correspond to gray/black, 
+black/gray, or double-gray cases reviewed above 
+for `MCH; cycles on black-gray grids).
+
+`item ->> Mapping index numbers for a desired center-originating 
+ordering of tierboxes to `MCH; values ;;  Such an ordering 
+can be seeded by expanding outward according to Chebychev 
+distance, forming equivalence classes of Chebychev-equidistant 
+tierboxes.  Within each such class, `MCH; distances expand 
+outward from rows and columns passing through the image 
+center (or centers; again, tracking even-odd effects as 
+with black-gray grids) toward diagnols.  This algorithm 
+has to be adjusted for the case where the Chebychev distance 
+is greater than half the shorter image dimension 
+(in terms of tierbox-counts) so that the `MCH; cycle 
+is restricted to the image's longer axis.
+
+`item ->> Calculating tierbox positioning within each `MCH; cycle ;;  
+The choice of how to order tierboxes `i.within` one cylce 
+seems mostly arbitrary.  In `XCSD;, I chose to 
+order counter-clockwise from the left (for images with 
+landscape orientation) or top (for those with portrait 
+orientation, i.e., height greater than width).  My 
+reasoning was that if an image `i.were` to be chopped from 
+only one side, it may be slightly more likely 
+to cut from the right or from the bottom, given 
+that our vision tends to be oriented left-to-right 
+and top-to-bottom; in other words, we are inclined to 
+perceive a foreground focus leading from the center top/leftward 
+more than the opposite, increasingly the possibility 
+that it will be peripheral content toward the bottom/right that 
+is deemed expendable, if the image is chopped.  Shrinking an 
+image by deleting tierboxes toward the end of contiguous 
+memory requires no copying data, of course, which 
+provides a rationale for placing more-likely-expandable 
+tierboxes later in memory than earlier.   
+  
+`item ->>  Identify tierbox position within its `MCH; cycle 
+in terms of image-directions and octants ;;  In general an 
+image can be divided into eight wedge-shape slices 
+(i.e., octants) and members of a cycle for `MCH; without zeros 
+will lie in one such octant (those `i.with` zeros may 
+lie on the lines between octants, e.g., diagonals).  This is one 
+example of an algorithm utilizing the `q.direction` enumeration 
+I mentioned in the last section.  As explained there, `XCSD;'s 
+notion of direction has 24 options, corresponding to 
+length-8 and length-4 cycles (the latter representing 
+pure diagonals) and then distinct codes for pure orthogonals 
+(`MCH;s with diagonal component zero) distinguishing 
+even-odd permutations at the center point (as modeled 
+by different gray/black grid combinations).  Code 
+needs to translate formulae expressing how different 
+`MCH; pairs translate to one of these four direction-codes 
+(this furnishes an example of where enumerations need 
+precise numeric values, mentioned last section, because 
+these algorithms make some use of modulo and bitshift 
+operations when `q.collapsing` the 24 directions to 
+accommodate different `MCH; cycle-lengths).   
+
+`item ->>  Map `q.subdivision indexing` to orthogonal coordinates ;;  
+Inside tierboxes, `XCSD; recognizes indexes accross 
+`threebythree; and `ninebynine; tiers, mirroring the 
+actual memory layout.  For example, the center of each 
+tierbox is located via code `q.555`/.  Obviously, sometimes 
+it is convenient to access points or box-regions in a more 
+conventional x/y or row-column format, so one requisite 
+calculation is converting subdivision location codes 
+to orthogonal distances against tierbox corners and 
+those of the image overall.
+
+`item ->>  Compute color averages within box-regions of different 
+tiers ;;  One rationaly for the subdivision system is to 
+establish data structures for `threebythree; and `ninebynine; 
+boxes (as well as tierboxes) which proxy the collection of 
+pixels within them.  If an image is compressed by a factor 
+of three, of course, pixels `q.collapse inward` so `threebythree; 
+regions `i.become` pixels on the smaller scale.  Given a desired 
+color-averaging procedure, `XCSD; precomputes color means 
+so that `q.compressed` images are represented within the larger 
+image's memory, in case algorithms intend to work with 
+the smaller-scale images directly, or to analyze on several 
+scales at once.  Apart from color-averages, data from 
+different sources (e.g., region masks) can be attached as 
+an `q.extension channel` on multiple scales.  For example, a 
+numeric code designating one region of interest (in the 
+sense that a given pixel or box-region lies on that region's 
+interior) can be notated as a channel for individual 
+pixels, or boxes on the `threebythree;, `ninebynine;, or 
+`twentysevenbytwentyseven; tiers, or any combination 
+thereof.  The same applies to codes representing 
+textural patterns, annotations, or any other superimposed data.    
+
+`item ->> Applying algorithms to sets of tierboxes 
+(or other region-boxes) ;;  There are numerous 
+scenarios where subdividing images into smaller regions can produce 
+more efficient algorithms.  This includes pixel-based 
+computations (e.g., global color histograms) where pixels' contexts 
+`visavis; surrounding pixels is not considered, so images 
+can be subdivided simply for purposes of parallelization.  
+Other analyses %-- such as those involving `i.local` color 
+histograms %-- explicitly employ image-subdivisions as a 
+unit of computation.  Finally, some forms of image-processing 
+are based on a lattice of `q.seed` points, which in a 
+`q.subdivision indexing` scenario can readily be 
+provided as the centers of tierboxes, or `threebythree;s/`ninebynine;s.
+
+`description`
+    
+
 
 `p`
 

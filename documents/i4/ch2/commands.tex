@@ -175,7 +175,11 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 
 \newcommand{\LatinOne}{\makebox{\texttt{Latin1}}}
 
+\usepackage{array}
+\usepackage[originalparameters]{ragged2e}
+\newcolumntype{M}{>{\RaggedRight\setstretch{.5}}p{.2\textwidth}}
 
+\usepackage{longtable}
 
 
 %\usepackage{listings}

@@ -1,7 +1,10 @@
 
 
+\begin{table} [t]
 \begin{center}
-\begin{tabular}{ |p{6em}|p{5em}|p{.2\textwidth}| } 
+{
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{ |p{6em}|p{5em}|M| } 
 \multicolumn{1}{c}{center} & \multicolumn{1}{c}{zeros} & \multicolumn{1}{c}{lengths}\\
  double-black                 & none       & 4 or 8 (depending on bounding rectangle) \\ 
                               & diagonal   & 2 or 4 (depending on bounding rectangle) \\ 
@@ -19,5 +22,8 @@ double-gray                  & none       & 4 or 8 (depending on bounding rectan
                               & both       & 4  \\ 
 
 \end{tabular}
+}
+%
 \end{center}
-
+\caption{Possible \MCH{} cycles and cycle-lengths}
+\end{table}
