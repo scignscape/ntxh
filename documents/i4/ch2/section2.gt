@@ -302,7 +302,7 @@ the two representations differ in this sense is that
 an `MCH; pair which sums to fewer steps, but has 
 greater diagonal component %-- i.e., `kgtzero; from (5) 
 in the proof %-- may yield a greater Euclidean length 
-than an alternative `MCH; pair with more steps but less diagonal.
+than an alternative `MCH; pair with more steps but less diagonal).
 Calculations such as those related to `MCH; cycles 
 are not affected by those discrepancies.
 
@@ -334,7 +334,7 @@ cycle.  An `MCH; with one zero and one nonzero
 component can have four directions (since both a 
 nonzero diagonal and an orthogonal 
 with `i.no` diagonal supports four) and therefore 
-represent four distinct points in a cylce 
+represent four distinct points in a cycle 
 (this is another length-four case).  Moreover, 
 for any `MCH; with nonzero `i.orthogonal`/, 
 it is possible that half of the points in a full 
