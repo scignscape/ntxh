@@ -30,6 +30,14 @@ void DHAX_Signal_Generator::emit_load_image_requested()
  Q_EMIT load_image_requested();
 }
 
+void DHAX_Signal_Generator::emit_show_xcsd_scene_requested()
+{
+ Q_EMIT show_xcsd_scene_requested();
+}
+
+
+
+
 void DHAX_Signal_Generator::emit_load_pdf_requested()
 {
  Q_EMIT load_pdf_requested();

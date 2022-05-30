@@ -20,7 +20,12 @@ QMAKE_CXX = g++-7
 
 CONFIG += c++17
 
+
+DEFINES += USE_XCNS
+
+
 FEATURE_IFC = "USE_IFC"
+
 
 defined(FEATURE_IFC ,var) {
  DEFINES += $$FEATURE_IFC
@@ -73,7 +78,12 @@ DEFINES += HAVE_STD_STRING
 DEFINES += HAVE_STL_STRING
 
 
+LIBS += -L$$TARGETSDIR -lxcsd-1d -lxcsd-2d -lxcsd
+
+
 LIBS += -L$$TARGETSDIR  -ldhax-gui -ldhax-data
+
+
 
 LIBS += -L$$POPPLER_LIB_DIR -lpoppler-qt5
 

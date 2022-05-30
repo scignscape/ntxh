@@ -34,6 +34,8 @@ public:
  void emit_load_notes_requested();
  void emit_received_datagram(QByteArray qba);
 
+ void emit_show_xcsd_scene_requested();
+
  void emit_view_contours_requested();
  void emit_view_3d_requested();
  void emit_view_360_requested();
@@ -59,6 +61,8 @@ Q_SIGNALS:
  void view_cad_requested();
  void run_forge_workflow_requested();
  void quit_requested();
+
+ void show_xcsd_scene_requested();
 
 #ifdef USE_IFC
  void ifc_convert_requested();

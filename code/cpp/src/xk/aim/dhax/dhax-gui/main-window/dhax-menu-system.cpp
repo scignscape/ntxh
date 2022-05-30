@@ -56,6 +56,11 @@ void DHAX_Menu_System::init_menus()
   sg->emit_load_image_requested();
  };
 
+ file_menu.add_action("Load or Show Image as XCSD Scene") << [sg]
+ {
+  sg->emit_show_xcsd_scene_requested();
+ };
+
  file_menu.addSeparator();
  file_menu.add_action("Load Notes") << [sg]
  {

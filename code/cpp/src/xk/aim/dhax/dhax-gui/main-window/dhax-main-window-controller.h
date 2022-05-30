@@ -82,6 +82,7 @@ public:
  void reinit_pdf_page_view(u4 page);
  void init_pdf_page_view();
 
+ void show_xcsd_scene();
 
  void show_annotation_comments(DHAX_Annotation_Instance* dai);
 

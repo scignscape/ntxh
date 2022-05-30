@@ -34,6 +34,7 @@ public Q_SLOTS:
 
  void handle_take_screenshot();
  void handle_load_image();
+ void handle_show_xcsd_scene();
  void handle_load_pdf();
  void handle_complete_polygon();
  void handle_meshlab_import_info();

@@ -95,6 +95,13 @@ INCLUDEPATH += $${QT_HEADER_LOCATION}/QtCore/$$[QT_VERSION]/QtCore
 INCLUDEPATH += $${QT_HEADER_LOCATION}/QtWidgets/$$[QT_VERSION]/QtWidgets
 
 
+DEFINES += USE_XCNS
+
+INCLUDEPATH += $$XCSD_SRC_GROUP_DIR
+INCLUDEPATH += $$XCSD_SRC_GROUP_DIR/../xcsd-1d
+
+
+
 include($$ROOT_DIR/../preferred/opencv.pri)
 
 INCLUDEPATH += $$OPENCV_SRC_DIR/modules/core/include
@@ -291,6 +298,8 @@ RESOURCES += \
 DEFINES += HAVE_STD_STRING
 DEFINES += HAVE_STL_STRING
 
+
+LIBS += -L$$TARGETSDIR -lxcsd-1d -lxcsd-2d #-lxcsdx
 
 
 LIBS += -L$$TARGETSDIR  -laimlib -ldcmsr -lofstd -loflog -ldcmdata \

@@ -32,6 +32,17 @@
 
 #include "pdf-viewer/pdf-document-controller.h"
 
+#include "xcsd-2d/mat2d.h"
+
+#include "xcsd-2d/mat2d.templates.h"
+
+#include "xcsd-1d/vec1d.h"
+
+#include "xcsd-2d/xcsd-image.h"
+
+#include "xcsd-2d/xcsd-tierbox.h"
+
+
 #include <QMenuBar>
 
 #include <QGuiApplication>
@@ -433,11 +444,59 @@ void DHAX_Main_Window_Controller::load_pdf()
  application_controller_->application_state()->flags.pdf_mode = true;
 }
 
+
+
+void DHAX_Main_Window_Controller::show_xcsd_scene()
+{
+ if(current_image_file_path_.isEmpty())
+ {
+  load_image();
+ }
+
+ qDebug() << current_image_file_path_;
+
+
+ XCSD_Image xcsd;
+
+ //xcsd.load_image(ROOT_FOLDER "/../pics/angle.jpg");
+ xcsd.load_image(current_image_file_path_);
+
+// qDebug() << xcsd.
+
+ xcsd.init_geometry();
+ XCSD_Image_Geometry& xcsg = xcsd.geometry();
+
+ xcsg.init_tier_counts(XCSD_Image_Geometry::TierGrid_Preferances::Minimize_Outer_Tiers);
+
+// xcsg.draw_tier_summary(QString(ROOT_FOLDER "/../test/t%1x%2.png")
+//     .arg(xcsg.total_size().width).arg(xcsg.total_size().height),
+//   QString(ROOT_FOLDER "/../test/t%1x%2-seq.png")
+//     .arg(xcsg.total_size().width).arg(xcsg.total_size().height),
+//                        3.3, 8);
+
+ xcsg.init_outer_ring_positions();
+
+ xcsd.init_pixel_data(ROOT_FOLDER "/../test/ukraine");
+
+ xcsd.init_tierboxes();
+
+
+ xcsd.draw_tierboxes_to_folder(ROOT_FOLDER "/../test/ukraine/u");
+
+
+ xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ukraine/u1/t1.png",
+   ROOT_FOLDER "/../test/ukraine/u2");
+
+}
+
+
 void DHAX_Main_Window_Controller::load_image()
 {
- QString ws =  ROOT_FOLDER "/../pics";
+ //QString ws =  ROOT_FOLDER "/../pics";
+ // //  temporary ...
+ QString ws =  ROOT_FOLDER "/../pics/ukraine";
 
- QString filters = "Images (*.jpg *.png *.bmp)";
+ QString filters = "Images (*.jpg *.png *.bmp *.webp)";
 
 // QFileDialog qdialog;
 // QString file_path = qdialog.getOpenFileName(application_main_window_, "Open Image", ws, filters);

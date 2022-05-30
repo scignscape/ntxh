@@ -379,15 +379,29 @@ void XCSD_Image_Geometry::init_outer_ring_position_array()
 {
  u1 size_even_odd_code = get_size_even_odd_code();
 
+ u1 center_width_basis = 9;
+ u1 corner_width_basis = 6;
+
+ if( total_size_.lesser() < 800 )
+ {
+  center_width_basis = total_size_.lesser() / 100;
+  center_width_basis += (1 - (center_width_basis % 2));
+
+  corner_width_basis -= (9 - center_width_basis);
+  if(corner_width_basis < 2)
+    corner_width_basis = 2;
+ }
+
+
  if(full_tier_counts_.is_ascending()) // w < h
  {
   // even v = 0, 2
-  hv1 center_width {(u1)(9 - (size_even_odd_code / 2)),
-     (u1)(9 + (size_even_odd_code % 2))};
+  hv1 center_width {(u1)(center_width_basis - (size_even_odd_code / 2)),
+     (u1)(center_width_basis + (size_even_odd_code % 2))};
 
   center_width *= 27;
 
-  u1 corner_width = 6 * 27;
+  u1 corner_width = corner_width_basis * 27;
 
   u2 left_mark = vertical_outer_sizes_.top - 1;
 
@@ -536,12 +550,12 @@ void XCSD_Image_Geometry::init_outer_ring_position_array()
 //  u1 center_width_h = 6 + (size_even_odd_code / 2);
 //  u1 center_width_v = 6 - (size_even_odd_code % 2);
 
-  hv1 center_width {(u1)(9 + (size_even_odd_code / 2)),
-     (u1)(9 - (size_even_odd_code % 2))};
+  hv1 center_width {(u1)(center_width_basis + (size_even_odd_code / 2)),
+     (u1)(center_width_basis - (size_even_odd_code % 2))};
 
   center_width *= 27;
 
-  u1 corner_width = 6 * 27;
+  u1 corner_width = corner_width_basis * 27;
 
   u2 top_mark = horizontal_outer_sizes_.left - 1;
 

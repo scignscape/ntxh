@@ -154,4 +154,5 @@ QHP_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/qhp
 
 CHASM_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/hgdm/chasm
 
+XCSD_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/xcsd/xcsd-2d
 

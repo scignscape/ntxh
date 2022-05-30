@@ -84,7 +84,21 @@ int main(int argc , char **argv)
 
 
  XCSD_Image xcsd;
- xcsd.load_image(ROOT_FOLDER "/../test/angley.png");
+
+// xcsd.load_image(ROOT_FOLDER "/../test/anglez.png");
+//
+ xcsd.load_image(ROOT_FOLDER "/../ukraine/copy/sub1.png");
+// xcsd.load_image(ROOT_FOLDER "/../ukraine/copy/anglez.png");
+
+
+// xcsd.load_image("/home/nlevisrael/gits/ctg-temp/pics/ukraine/sub-buzz-742-1646084436-1.webp");
+
+// xcsd.image().save("/home/nlevisrael/gits/ctg-temp/pics/ukraine/sub.png");
+
+// xcsd.load_image("/home/nlevisrael/gits/ctg-temp/pics/ukraine/sub1.png");
+
+ //return 0;
+
  //xcsd.load_image(ROOT_FOLDER "/../test/ft12.png");
 
 // xcsd.load_image(ROOT_FOLDER "/../test/t1-36x36b.png");
@@ -102,16 +116,21 @@ int main(int argc , char **argv)
 //     .arg(xcsg.total_size().width).arg(xcsg.total_size().height),
 //                        3.3, 8);
 
+//?
  xcsg.init_outer_ring_positions();
 
- xcsd.init_pixel_data(ROOT_FOLDER "/../test/tk1");
+ xcsd.init_pixel_data(ROOT_FOLDER "/../test/ukr");
 
  xcsd.init_tierboxes();
 
- xcsd.draw_tierboxes_to_folder(ROOT_FOLDER "/../test/test");
+ xcsd.draw_tierboxes_to_folder(ROOT_FOLDER "/../test/ukr");
 
- xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft13a.png",
-   ROOT_FOLDER "/../test/ti1");
+// xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ft13a.png",
+//   ROOT_FOLDER "/../test/ti1");
+
+ xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ukr/u/t1.png",
+   ROOT_FOLDER "/../test/ukr/u1");
+
 
 
 #ifdef HIDE

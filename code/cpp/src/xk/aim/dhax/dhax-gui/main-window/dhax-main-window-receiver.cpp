@@ -77,6 +77,11 @@ void DHAX_Main_Window_Receiver::handle_load_image()
  main_window_controller_->load_image();
 }
 
+void DHAX_Main_Window_Receiver::handle_show_xcsd_scene()
+{
+ main_window_controller_->show_xcsd_scene();
+}
+
 void DHAX_Main_Window_Receiver::handle_load_pdf()
 {
  main_window_controller_->load_pdf();

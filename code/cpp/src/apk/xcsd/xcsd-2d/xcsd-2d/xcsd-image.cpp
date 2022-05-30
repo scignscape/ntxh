@@ -783,6 +783,7 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
  u4 outer_ring_offset = geometry_.full_tier_counts().area() * tierbox_width  * tierbox_width;
  //if(geometry_.full_tier_counts().)
 
+//#ifdef HIDE
  geometry_.for_each_outer_ring_area(
     [this, &path, ocb, &ienv, &painter,
      outer_ring_offset, &info_folder](u1 index, XCSD_Image_Geometry::Outer_Ring_Area_Flags area_flags)
@@ -843,6 +844,9 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
    sindex = -index - 1;
   }
  });
+
+//#endif //def HIDE
+
 
  geometry_.for_each_full_tierbox(
     [this, &path, cb, &ienv, &painter, &info_folder](XCSD_Image_Geometry::Grid_TierBox& gtb)
