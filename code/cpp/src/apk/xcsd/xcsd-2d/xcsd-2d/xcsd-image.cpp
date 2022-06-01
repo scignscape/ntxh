@@ -13,6 +13,8 @@
 
 #include "textio.h"
 
+#include "mat2d.templates.special-modes.h"
+
 USING_KANS(TextIO)
 
 USING_XCNS(XCSD)
@@ -1152,9 +1154,17 @@ rc2 XCSD_Image::get_tierbox_at_ground_position_RC2(u2 x, u2 y)
 }
 
 
-void XCSD_Image::draw_tierboxes_to_folder(QString path)
+void XCSD_Image::draw_tierboxes_to_folder(QString path, Mat2d<Vec1d<QString>>* paths)
 {
- geometry_.for_each_full_tierbox([this, &path](XCSD_Image_Geometry::Grid_TierBox& gtb)
+ if(paths)
+ {
+  paths->resize(geometry_.full_tier_counts()._transposed_to<pr2>());
+  //paths->set_dimensions(geometry_.full_tier_counts()._transposed_to<pr2>());
+
+  paths->fill_with_default(QString());
+ }
+
+ geometry_.for_each_full_tierbox([this, &path, paths](XCSD_Image_Geometry::Grid_TierBox& gtb)
  {
   rc2 rc  = gtb.loc.rc()._to_unsigned();
   XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
@@ -1302,10 +1312,17 @@ void XCSD_Image::draw_tierboxes_to_folder(QString path)
   QString local_path = QString("%1/%2-%3.png").arg(path).arg(tbox->grid_position_string()).arg(tbox_offset);
   image.save(local_path);
 
+  if(paths)
+  {
+   rc2 pos = tbox->matrix_position();
+   (*paths)[pos.r][pos.c] = local_path;// new QString(local_path);
+  }
+
   QString local_info_path = QString("%1/%2-%3.txt").arg(path).arg(tbox->grid_position_string()).arg(tbox_offset);
   save_file(local_info_path, info_string);
 
  });
+
 }
 
 

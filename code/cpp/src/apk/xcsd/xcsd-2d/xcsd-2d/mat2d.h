@@ -11,6 +11,8 @@
 
 #include "xcsd-1d/_vec1d.h"
 
+#include "xcsd-sdi-structures.h"
+
 //#include "xcsd-1d/vec1d.h"
 
 
@@ -153,7 +155,12 @@ public:
  Mat2d* percentile_breakdown(u1 max = 100);
  Mat2d* percentile_rescale(u1 max = 100);
 
- void fill(val_t value, val_t default_value, nnx layer_size = 15, nnx block_size = 17);
+ void fill(val_t value, val_t default_value, nnx layer_size = 15, nnx block_size = 17,
+   bool force = false);
+ void fill_with_default(val_t value, nnx layer_size = 15, nnx block_size = 17)
+ {
+  fill(value, value, layer_size, block_size, true);
+ }
 
  void fill(val_t value = 0, nnx layer_size = 15, nnx block_size = 17)
  {
@@ -291,6 +298,9 @@ public:
  static constexpr nx value_byte_size() { return 8; }
 
  _one_opbracket operator[](nx r);
+// {
+//  return {*this, r};
+// }
 
  void to_raw_data(QByteArray& qba);
  void to_raw_data_with_encoded_default(QByteArray& qba);
@@ -350,6 +360,21 @@ public:
  {
   resize(n_rows_, n_cols_);
  }
+
+ void set_dimensions(nx r, nx c);
+
+#define TEMP_MACRO(ty) \
+ void resize(ty pr) \
+ { resize(pr.first, pr.second); } \
+ void set_dimensions(ty pr) \
+ { set_dimensions(pr.first, pr.second); }
+
+ TEMP_MACRO(pr1)
+ TEMP_MACRO(pr1s)
+ TEMP_MACRO(pr2)
+ TEMP_MACRO(pr2s)
+ TEMP_MACRO(pr4)
+ TEMP_MACRO(pr4s)
 
 
 };

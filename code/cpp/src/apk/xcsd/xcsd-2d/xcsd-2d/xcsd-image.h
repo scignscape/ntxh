@@ -21,6 +21,8 @@
 #include "xcsd-image-data.h"
 #include "xcsd-image-geometry.h"
 
+#include "mat2d.templates.h"
+
 XCNS_(XCSD)
 
 
@@ -144,7 +146,7 @@ public:
   return QString("%1:%2:%3;%4").arg(qc.red()).arg(qc.green()).arg(qc.blue()).arg(qc.alpha());
  }
 
- void draw_tierboxes_to_folder(QString path);
+ void draw_tierboxes_to_folder(QString path, Mat2d<Vec1d<QString>>* paths = nullptr);
 
 };
 

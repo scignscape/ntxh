@@ -55,6 +55,7 @@
 
 #include <QGraphicsProxyWidget>
 
+#include <QGraphicsPixmapItem>
 
 DHAX_Main_Window_Controller::DHAX_Main_Window_Controller()
   :  display_image_data_(nullptr),
@@ -480,13 +481,27 @@ void DHAX_Main_Window_Controller::show_xcsd_scene()
 
  xcsd.init_tierboxes();
 
+ Mat2d<Vec1d<QString>> paths;
 
- xcsd.draw_tierboxes_to_folder(ROOT_FOLDER "/../test/ukraine/u");
+ xcsd.draw_tierboxes_to_folder(ROOT_FOLDER "/../test/ukraine/u", &paths);
 
 
  xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ukraine/u1/t1.png",
    ROOT_FOLDER "/../test/ukraine/u2");
 
+ image_scene_item_->setVisible(false);
+
+ for(u2 r = 1; r < paths.n_rows(); ++r)
+  for(u2 c = 1; c < paths.n_cols(); ++c)
+  {
+   QString qs = paths[r][c];
+   image_viewer_->scrolled_image_scene()->add_tierbox_pixmap(qs, {r, c}, c * 27, r * 27);
+  }
+
+
+ //QVector<QImage> images;
+
+ //Mat2d<QString>
 }
 
 

@@ -4,6 +4,7 @@
 //     (See accompanying file LICENSE_1_0.txt or copy at
 //           http://www.boost.org/LICENSE_1_0.txt)
 
+#pragma once
 
 #include "mat2d.h"
 
@@ -140,19 +141,53 @@ void Mat2d<COLL_Type>::data_from_qvector(const QVector<val_t>& source)
 
 
 template<typename COLL_Type>
+void Mat2d<COLL_Type>::resize(nx r, nx c)
+{
+ set_n_rows(r);
+ set_n_cols(c);
+ resize(r * c);
+}
+
+template<typename COLL_Type>
+void Mat2d<COLL_Type>::resize(nx total)
+{
+ if(!elems_)
+ {
+  elems_ = new COLL_Type();
+ }
+
+ elems_->resize(total + 1);
+}
+
+
+template<typename COLL_Type>
 void Mat2d<COLL_Type>::fill(val_t value, val_t default_value,
-  nnx layer_size, nnx block_size)
+  nnx layer_size, nnx block_size, bool force)
 {
  if(elems_)
  {
   nx s = elems_->size();
   elems_->resize(total_size() + 1);
-  if(value != 0)
+  if( (value != 0) || force )
   {
-   for(nx i = s; i < elems_->size(); ++i)
+   if(force)
    {
-    elems_->at_index(i) = value;
-    //(*elems_)[s] = value;
+    for(nx i = 0; i < elems_->size(); ++i)
+    {
+     // //  there should really be a separate process
+      //    for the operator new here, not just
+      //    calling this function with "force" ...
+     val_t* v = elems_->get(i);
+     val_t* vv = new (v) val_t(value);
+    }
+   }
+   else
+   {
+    for(nx i = s; i < elems_->size(); ++i)
+    {
+     elems_->at_index(i) = value;
+     //(*elems_)[s] = value;
+    }
    }
   }
  }
@@ -742,15 +777,22 @@ Mat2d<COLL_Type>::get_sym_index(nx r, nx c)
 #include "mat2d.templates.special-modes.h"
 
 template<typename COLL_Type>
+void Mat2d<COLL_Type>::set_dimensions(nx r, nx c)
+{
+ set_n_rows(r);
+ set_n_cols(c);
+}
+
+template<typename COLL_Type>
 typename COLL_Type::Numeric_Index_type
 Mat2d<COLL_Type>::total_size()
 {
  if(is_symmetric())
-   return _Mat2d_special_mode<COLL_Type>::_Sym(this)._total_size();
+   return typename _Mat2d_special_mode<COLL_Type>::_Sym{this}._total_size();
  if(is_skew_symmetric())
-   return _Mat2d_special_mode<COLL_Type>::_Skew(this)._total_size();
+   return typename _Mat2d_special_mode<COLL_Type>::_Skew{this}._total_size();
  if(is_diagonal())
-   return _Mat2d_special_mode<COLL_Type>::_Diag(this)._total_size();
+   return typename _Mat2d_special_mode<COLL_Type>::_Diag{this}._total_size();
 
  return n_rows() * n_cols();
 }

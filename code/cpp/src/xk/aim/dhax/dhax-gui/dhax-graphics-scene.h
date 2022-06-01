@@ -15,6 +15,12 @@
 #include <QGraphicsProxyWidget>
 #include <QGraphicsSceneMouseEvent>
 
+#include "global-types.h"
+
+#include "xcsd-2d/xcsd-sdi-structures.h"
+
+class XCSD_Tierbox_Scene_Item;
+
 class _Proxy_Widget : public QGraphicsProxyWidget
 {
 public:
@@ -42,6 +48,7 @@ public:
 
 class DHAX_Graphics_Scene : public QGraphicsScene
 {
+ QGraphicsRectItem* hover_rect_;
 
 public:
 
@@ -53,7 +60,14 @@ public:
  }
 
  void set_background_color(QColor c);
-// void set_foreground_color(QColor c);
+
+ void add_tierbox_pixmap(QString path, rc2 rc, u2 x_corner, u2 y_corner);
+
+ void handle_tierbox_hover_enter(XCSD_Tierbox_Scene_Item* xtsi);
+
+ void handle_tierbox_hover_leave(XCSD_Tierbox_Scene_Item* xtsi);
+
+ // void set_foreground_color(QColor c);
 
 };
 

@@ -5,6 +5,8 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
+#pragma once
+
 #include "mat2d.h"
 
 XCNS_(XCSD)
@@ -27,7 +29,7 @@ template<typename COLL_Type>
 typename COLL_Type::Numeric_Index_type
 _Mat2d_special_mode<COLL_Type>::_Skew::_total_size()
 {
- return _Mat2d_special_mode<COLL_Type>::_Sym(_this)._total_size();
+ return _Mat2d_special_mode<COLL_Type>::_Sym{_this}._total_size();
 // typename COLL_Type::Numeric_Index_type n = _this->n_rows();
 // return (n * (n + 1)) / 2;
 }
