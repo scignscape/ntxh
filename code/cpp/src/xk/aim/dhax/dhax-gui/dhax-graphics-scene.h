@@ -19,7 +19,15 @@
 
 #include "xcsd-2d/xcsd-sdi-structures.h"
 
+#include "xcsd-2d/xcsd-image.h"
+
+
 class XCSD_Tierbox_Scene_Item;
+
+//class XCSD_Outer_Ring_Info;
+
+class XCSD_Outer_Ring_Scene_Item;
+
 
 class _Proxy_Widget : public QGraphicsProxyWidget
 {
@@ -62,6 +70,7 @@ public:
  void set_background_color(QColor c);
 
  void add_tierbox_pixmap(QString path, rc2 rc, u2 x_corner, u2 y_corner);
+ void add_outer_pixmap(const XCSD_Outer_Ring_Info& xori, const QPoint& pos);
 
  void handle_tierbox_hover_enter(XCSD_Tierbox_Scene_Item* xtsi);
 

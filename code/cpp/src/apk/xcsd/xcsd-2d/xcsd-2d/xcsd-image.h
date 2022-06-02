@@ -26,6 +26,16 @@
 XCNS_(XCSD)
 
 
+struct XCSD_Outer_Ring_Info
+{
+ enum Position { Corner, Horizontal, Horizontal_Center, Vertical, Vertical_Center };
+
+ Position position;
+ QImage image;
+ QRect rect;
+ QRect extra;
+};
+
 
 class XCSD_Image
 {
@@ -35,6 +45,8 @@ class XCSD_Image
  XCSD_Image_Geometry geometry_;
 
  rc2s initial_setup_tierbox_;
+
+ QVector<XCSD_Outer_Ring_Info>* outer_ring_info_;
 
  void _init_outer_ring_pixel_data_landscaoe();
  void _init_outer_ring_pixel_data_landscaoe_sym();
@@ -89,6 +101,8 @@ public:
 
  ACCESSORS__RGET(QImage ,image)
  ACCESSORS__RGET(XCSD_Image_Geometry ,geometry)
+
+ ACCESSORS(QVector<XCSD_Outer_Ring_Info>* ,outer_ring_info)
 
  QColor pixel_number_to_qcolor(n8 pixel);
 
@@ -146,8 +160,10 @@ public:
   return QString("%1:%2:%3;%4").arg(qc.red()).arg(qc.green()).arg(qc.blue()).arg(qc.alpha());
  }
 
- void draw_tierboxes_to_folder(QString path, Mat2d<Vec1d<QString>>* paths = nullptr);
+ void draw_tierboxes_to_folder(QString path,
+   Mat2d<Vec1d<QString>>* paths = nullptr);
 
+ void init_outer_ring_info();
 };
 
 

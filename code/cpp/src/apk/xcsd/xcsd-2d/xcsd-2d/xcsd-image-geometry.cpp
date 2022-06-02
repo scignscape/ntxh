@@ -351,7 +351,7 @@ void XCSD_Image_Geometry::init_outer_ring_offset_array()
   for(u1 i = 0; i < 16; ++i)
   {
    outer_ring_positions_.offsets[i] = offset;
-   u2 as = get_outer_ring_area_size((Outer_Ring_Positions::Portrait)i);
+   //u2 as = get_outer_ring_area_size((Outer_Ring_Positions::Portrait)i);
    offset += get_outer_ring_area_size((Outer_Ring_Positions::Portrait)i);
   }
   outer_ring_positions_.total_offset = offset;

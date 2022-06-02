@@ -20,6 +20,7 @@ USING_KANS(TextIO)
 USING_XCNS(XCSD)
 
 XCSD_Image::XCSD_Image()
+  :  outer_ring_info_(nullptr)
 //  :  tier_counts_({0,0}),
 //     horizontal_outer_sizes_({0,0}),
 //     vertical_outer_sizes_({0,0}),
@@ -824,6 +825,61 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
      }
     }
 
+    if(outer_ring_info_)
+    {
+     QSize sz;
+     std::tie(sz.rwidth(), sz.rheight()) = rect_wh._tuple();
+
+     XCSD_Outer_Ring_Info::Position position;
+
+     if( (area_flags == XCSD_Image_Geometry::Outer_Ring_Area_Flags::Normal_Landscape)
+        || (area_flags == XCSD_Image_Geometry::Outer_Ring_Area_Flags::Normal_Portrait) )
+     {
+      if(geometry_.full_tier_counts().is_ascending()) // portrait
+      {
+       if( (index == (u1) XCSD_Image_Geometry::Outer_Ring_Positions::Portrait::Top_Center)
+          || (index == (u1) XCSD_Image_Geometry::Outer_Ring_Positions::Portrait::Bottom_Center) )
+         position = XCSD_Outer_Ring_Info::Horizontal_Center;
+       else if( (index == (u1) XCSD_Image_Geometry::Outer_Ring_Positions::Portrait::Center_Left)
+          || (index == (u1) XCSD_Image_Geometry::Outer_Ring_Positions::Portrait::Center_Right) )
+         position = XCSD_Outer_Ring_Info::Vertical_Center;
+      else if(index > 9) // relies on hard-coded enum values ...
+        position = XCSD_Outer_Ring_Info::Vertical;
+      else
+        position = XCSD_Outer_Ring_Info::Horizontal;
+      }
+      else // landscape (or square)
+      {
+       if( (index == (u1) XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Top_Center)
+          || (index == (u1) XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Bottom_Center) )
+         position = XCSD_Outer_Ring_Info::Horizontal_Center;
+       else if( (index == (u1) XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Center_Left)
+          || (index == (u1) XCSD_Image_Geometry::Outer_Ring_Positions::Landscape::Center_Right) )
+        position = XCSD_Outer_Ring_Info::Vertical_Center;
+      else if(index > 9) // relies on hard-coded enum values ...
+        position = XCSD_Outer_Ring_Info::Horizontal;
+      else
+        position = XCSD_Outer_Ring_Info::Vertical;
+      }
+     }
+     else
+       position = XCSD_Outer_Ring_Info::Corner;
+
+     if(rect_wh == secondary_rect_wh)
+     {
+      XCSD_Outer_Ring_Info& xori = outer_ring_info_->last();
+      xori.extra = QRect(*qpoint, sz);
+      outer_ring_info_->push_back({position, outer_ring_image, QRect(*qpoint, sz), xori.rect});
+     }
+     else
+       outer_ring_info_->push_back({position, outer_ring_image, QRect(*qpoint, sz), {}});
+
+//     else
+//     {
+//      outer_ring_info_->last().secondary = QRect(*qpoint, sz);
+//     }
+    }
+
    // if(index <= 2 || (index >= 5 && index <= 7) )
 
 //    if(index == 3)
@@ -1154,7 +1210,20 @@ rc2 XCSD_Image::get_tierbox_at_ground_position_RC2(u2 x, u2 y)
 }
 
 
-void XCSD_Image::draw_tierboxes_to_folder(QString path, Mat2d<Vec1d<QString>>* paths)
+void XCSD_Image::init_outer_ring_info()
+{
+ outer_ring_info_ = new QVector<XCSD_Outer_Ring_Info>;
+ //, QVector<XCSD_Outer_Ring_Info>* outer_ring_info
+// geometry_.for_each_outer_ring_area([this, outer_ring_info](u1 index,
+//   XCSD_Image_Geometry::Outer_Ring_Area_Flags area_flags)
+// {
+
+// });
+
+}
+
+void XCSD_Image::draw_tierboxes_to_folder(QString path,
+  Mat2d<Vec1d<QString>>* paths)
 {
  if(paths)
  {

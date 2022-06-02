@@ -175,6 +175,10 @@ public:
 
  ACCESSORS(MACRO_PASTE(QVector<QPair<DHAX_Annotation_Instance*, r8>>) ,saved_dhax_annotations)
 
+
+ void hide_for_xcsd();
+
+
 Q_SIGNALS:
 
  //?
@@ -204,7 +208,6 @@ Q_SIGNALS:
  void draw_quad_path_requested();
 
  void convert_notation_requested();
-
 
 protected:
  void paintEvent(QPaintEvent *);

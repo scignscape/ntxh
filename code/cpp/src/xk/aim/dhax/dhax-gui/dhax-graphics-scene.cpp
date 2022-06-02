@@ -8,6 +8,8 @@
 #include "dhax-graphics-scene.h"
 
 #include "subwindows/xcsd-tierbox-scene-item.h"
+#include "subwindows/xcsd-outer-ring-scene-item.h"
+
 
 
 DHAX_Graphics_Scene::DHAX_Graphics_Scene()
@@ -24,6 +26,120 @@ void DHAX_Graphics_Scene::set_background_color(QColor c)
 {
  setBackgroundBrush(QBrush(c));
 }
+
+
+
+
+
+void DHAX_Graphics_Scene::add_outer_pixmap(const XCSD_Outer_Ring_Info &xori,
+  const QPoint& pos)
+{
+ XCSD_Outer_Ring_Scene_Item* xorsi = new XCSD_Outer_Ring_Scene_Item(xori);
+
+ qDebug() << "xori rect = " << xori.rect;
+
+ xorsi->setPos(xori.rect.topLeft());
+
+ addItem(xorsi);
+
+ //return;
+
+ QGraphicsPolygonItem* qgpi;
+
+ QPoint tl;
+
+ if(xori.extra.isNull())
+ {
+  QRect rect(0, 0, xori.rect.width(), xori.rect.height());
+  QPolygon poly(rect);
+  qgpi = new QGraphicsPolygonItem(poly);
+  tl = xori.rect.topLeft();
+ }
+ else
+ {
+  QVector<QPoint> points;
+  points << xori.rect.topLeft() << xori.rect.topRight()
+    << xori.rect.bottomRight() << xori.rect.bottomLeft()
+    << xori.extra.topLeft() << xori.extra.topRight()
+    << xori.extra.bottomRight() << xori.extra.bottomLeft();
+
+  qDebug() << "\npoints1 = " << points;
+
+  std::sort(points.begin(), points.end(), [](const QPoint& lhs, const QPoint& rhs)
+  {
+   if(lhs.y() == rhs.y())
+     return lhs.x() < rhs.x();
+   return lhs.y() < rhs.y();
+  });
+
+  qDebug() << "\npoints2 = " << points;
+
+  tl = points.first();
+  for(QPoint& qp : points)
+    qp -= tl;
+
+  if(points[2].x() == points[4].x()) // left
+  {
+   points.takeAt(2);
+   points.takeAt(3);
+   points[3].ry() = points[2].y();
+
+   QPoint p4 = points.takeAt(4);
+   points.push_back(p4);
+  }
+  else // right
+  {
+   points.takeAt(3);
+   points.takeAt(4);
+   points[3].ry() = points[2].y();
+
+   // //  swap 2 and 5
+   QPoint p2 = points[2];
+   points[2] = points[5];
+   points[5] = p2;
+
+   // //  swap 3 and 4
+   QPoint p3 = points[3];
+   points[3] = points[4];
+   points[4] = p3;
+
+  }
+
+//  points.takeAt(4);
+
+
+  QPolygon poly(points);
+
+  qDebug() << "\npoints = " << points;
+
+  qgpi = new QGraphicsPolygonItem(poly);
+ }
+
+
+
+ QColor clr(200, 100, 150, 100);
+ QBrush qbr(clr);
+ qgpi->setBrush(qbr);
+ QPen qpen;
+//  qpen.setStyle(Qt::PenStyle::DashDotDotLine);
+ QColor clr1(0, 20, 15, 200);
+ qpen.setColor(clr1);
+ qpen.setWidthF(1.5);
+ qgpi->setPen(qpen);
+ addItem(qgpi);
+ qgpi->setZValue(1);
+
+ qgpi->setPos(tl); // + pos);
+
+ qgpi->setVisible(false);
+
+ xorsi->set_scene_hover_polygon(qgpi);
+
+ // scene_hover_rect_->setVisible(true);
+
+
+}
+
 
 void DHAX_Graphics_Scene::add_tierbox_pixmap(QString path, rc2 rc, u2 x_corner, u2 y_corner)
 {

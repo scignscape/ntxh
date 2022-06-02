@@ -21,6 +21,7 @@ class Arr1d : public _Vec1d<VAL_Type, INDEX_Types, PR_Type>,
     VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>
 {
  using self_type = Arr1d<VAL_Type, INDEX_Types, PR_Type>;
+ using base_type = _Vec1d<VAL_Type, INDEX_Types, PR_Type>;
 
  using nnx = typename INDEX_Types::Numeric_Nested_Index_type;
  using nx = typename INDEX_Types::Numeric_Nested_Index_type;
@@ -59,7 +60,7 @@ public:
   if(sz >= length_)
     return 0;
   u4 result = sz - length_;
-  _Vec1d<VAL_Type>::push_back(v);
+  base_type::push_back(v);
   return result;
  }
 

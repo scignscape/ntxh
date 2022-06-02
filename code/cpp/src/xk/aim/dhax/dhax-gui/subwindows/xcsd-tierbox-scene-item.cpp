@@ -22,12 +22,7 @@ XCSD_Tierbox_Scene_Item::XCSD_Tierbox_Scene_Item(DHAX_Graphics_Scene* containing
  setPixmap(pixmap);
  setAcceptHoverEvents(true);
 
- // u2 x_corner = row_column_pos_.c * 27;
- // u2 y_corner = row_column_pos_.r * 27;
-
- auto [x, y] = row_column_pos_._transposed() * 27;
- xy_corner_ = {x, y};
- // y_corner_ = y;
+ xy_corner_ = (row_column_pos_._transposed() * 27).as_qpoint();
 }
 
 
@@ -40,7 +35,7 @@ void XCSD_Tierbox_Scene_Item::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
 // u2 y_corner = row_column_pos_.r * 27;
 
  scene_hover_rect_->setVisible(true);
- scene_hover_rect_->setPos(xy_corner_); //x_corner_, y_corner_);
+ scene_hover_rect_->setPos(pos()); //x_corner_, y_corner_);
 
 }
 

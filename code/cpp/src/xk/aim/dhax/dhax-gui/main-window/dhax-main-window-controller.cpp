@@ -485,19 +485,45 @@ void DHAX_Main_Window_Controller::show_xcsd_scene()
 
  xcsd.draw_tierboxes_to_folder(ROOT_FOLDER "/../test/ukraine/u", &paths);
 
+ xcsd.init_outer_ring_info();
 
  xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ukraine/u1/t1.png",
    ROOT_FOLDER "/../test/ukraine/u2");
 
- image_scene_item_->setVisible(false);
 
- for(u2 r = 1; r < paths.n_rows(); ++r)
-  for(u2 c = 1; c < paths.n_cols(); ++c)
+
+ image_scene_item_->hide_for_xcsd(); //setVisible(false);
+
+ u1 lft = xcsd.geometry().horizontal_outer_sizes().left + image_scene_item_->pos().x();
+ u1 top = xcsd.geometry().vertical_outer_sizes().top + image_scene_item_->pos().y();
+
+
+ for(u2 r = 0; r < paths.n_rows(); ++r)
+  for(u2 c = 0; c < paths.n_cols(); ++c)
   {
-   QString qs = paths[r][c];
-   image_viewer_->scrolled_image_scene()->add_tierbox_pixmap(qs, {r, c}, c * 27, r * 27);
+   QString qs = paths[r + 1][c + 1];
+   image_viewer_->scrolled_image_scene()->add_tierbox_pixmap(qs, {r, c},
+     lft + c * 27, top + r * 27);
   }
 
+
+ QVector<XCSD_Outer_Ring_Info>& outer_ring_info = *xcsd.outer_ring_info();
+
+// int i = 0;
+
+ for(const XCSD_Outer_Ring_Info& xori : outer_ring_info)
+ {
+  image_viewer_->scrolled_image_scene()->add_outer_pixmap(xori, image_scene_item_->pos());
+
+//  ++i;
+
+//  if(i == 1)
+//    break;
+
+
+
+
+ }
 
  //QVector<QImage> images;
 

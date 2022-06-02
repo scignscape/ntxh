@@ -144,6 +144,7 @@ HEADERS += \
   $$SRC_DIR/subwindows/range-slider.h \
   $$SRC_DIR/subwindows/clickable-label.h \
   $$SRC_DIR/subwindows/xcsd-tierbox-scene-item.h \
+  $$SRC_DIR/subwindows/xcsd-outer-ring-scene-item.h \
   $$SRC_DIR/pleneviews/shape-select-frame.h \
   $$SRC_DIR/pleneviews/zoom-and-navigate-frame.h \
   $$SRC_DIR/pleneviews/page-and-search-frame.h \
@@ -212,6 +213,7 @@ SOURCES += \
   $$SRC_DIR/subwindows/range-slider.cpp \
   $$SRC_DIR/subwindows/clickable-label.cpp \
   $$SRC_DIR/subwindows/xcsd-tierbox-scene-item.cpp \
+  $$SRC_DIR/subwindows/xcsd-outer-ring-scene-item.cpp \
   $$SRC_DIR/pleneviews/shape-select-frame.cpp \
   $$SRC_DIR/pleneviews/zoom-and-navigate-frame.cpp \
   $$SRC_DIR/pleneviews/page-and-search-frame.cpp \

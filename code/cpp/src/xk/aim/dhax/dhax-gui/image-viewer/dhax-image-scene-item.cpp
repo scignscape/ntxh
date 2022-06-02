@@ -335,9 +335,19 @@ void DHAX_Image_Scene_Item::draw_control_square(const QPoint& center,
  painter.fillRect(rect, sgradient);
 }
 
+void DHAX_Image_Scene_Item::hide_for_xcsd()
+{
+ data_->application_state()->flags.xcsd_mode = true;
+}
+
 
 void DHAX_Image_Scene_Item::paintEvent(QPaintEvent*)
 {
+ if(data_->application_state()->flags.xcsd_mode)
+ {
+  return;
+ }
+
  QPainter painter(this);
  if(data_->application_state()->flags.pdf_mode)
  {

@@ -31,6 +31,7 @@ public:
   bool image_border_visible_temp:1;
   bool image_pen_visible:1;
   bool open_edit_transform_window_automatically:1;
+  bool xcsd_mode:1;
  _flags
 
  struct Image_Margins

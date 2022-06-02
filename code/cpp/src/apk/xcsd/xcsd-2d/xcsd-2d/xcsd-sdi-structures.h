@@ -51,6 +51,7 @@ inline constexpr u1 _ctz(int x)
    ty##size nonzeros_mask() const \
    { return {field1 != 0, field2 != 0}; } \
    QPoint as_qpoint() { return {(int) field1, (int) field2}; } \
+   const std::tuple<u##size, u##size> _tuple() { return {field1, field2}; } \
    u##size inner_sum() const { return field1 + field2; } \
    u##size inner_difference() const { return field1 - field2; } \
    u##size transposed_inner_difference() const { return field2 - field1; } \
@@ -260,6 +261,7 @@ struct ty##size##s { s##size field1, field2; \
    ty##size##s nonzeros_mask() const \
    { return {field1 != 0, field2 != 0}; } \
    QPoint as_qpoint() { return {(int) field1, (int) field2}; } \
+   std::tuple<s##size, s##size> _tuple() { return {field1, field2}; } \
    s##size inner_sum() const { return field1 + field2; } \
    s##size inner_difference() const { return field1 - field2; } \
    u##size inner_positive_difference() const { return field1 < field2? field2 - field1 : field1 - field2; } \

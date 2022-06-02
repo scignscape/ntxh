@@ -28,6 +28,7 @@ class Deq1d : protected _Vec1d<VAL_Type, INDEX_Types, PR_Type>,
   public each_holders<Deq1d<VAL_Type, INDEX_Types, PR_Type>, VAL_Type, typename INDEX_Types::Numeric_Index_type, PR_Type>
 {
  using self_type = Deq1d<VAL_Type, INDEX_Types, PR_Type>;
+ using base_type = _Vec1d<VAL_Type, INDEX_Types, PR_Type>;
 
  u2 offset_;
 
@@ -62,7 +63,7 @@ public:
 
  void push_back(const VAL_Type& v)
  {
-  _Vec1d<VAL_Type>::push_back(v);
+  base_type::push_back(v);
  }
 
  void push_front(const VAL_Type& v)
