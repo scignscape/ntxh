@@ -15,6 +15,8 @@
 
 #include "mat2d.templates.special-modes.h"
 
+#include "local-histogram-data.h"
+
 USING_KANS(TextIO)
 
 USING_XCNS(XCSD)
@@ -946,6 +948,305 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
   target_image.save(path);
  }
 }
+
+void XCSD_Image::set_individual_pixel_local_histogram_channels(n8& pixel)
+{
+ u1 red = (u1)(pixel & 255), green = (u1)((pixel >> 8) & 255),
+   blue = (u1)((pixel >> 16) & 255);
+ red >>= 3;
+ green >>= 3;
+ blue >>= 3;
+ u2 rgb555 = ((u2) red) | (((u2) green) << 5) | (((u2) blue) << 10);
+
+ static u1 temp = 0;
+// if(temp < 55)
+// {
+  qDebug() << temp << " rgb555 = " << rgb555 << ", pixel = " << pixel;
+
+//  qDebug() << "rgb555 1 = " << (((n8) rgb555) << 32);
+//  qDebug() << "pixel = " << pixel;
+  pixel |= (((n8) rgb555) << 32);
+
+//  qDebug() << "pixel2 = " << pixel;
+  ++temp;
+// }
+}
+
+void XCSD_Image::set_local_histograms_channels()
+{
+ geometry_.for_each_full_tierbox([this](XCSD_Image_Geometry::Grid_TierBox& gtb)
+ {
+  rc2 rc  = gtb.loc.rc()._to_unsigned();
+
+//  if(rc == rc2{0, 1})
+//    qDebug() << rc;
+
+// rc2 rc  = {6, 10};
+ XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
+
+  qDebug() << tbox->get_grid_position();
+
+  u4 offset = tbox->pixel_data_ground_offset();
+
+  n8* start = data_.get_pixel_data_start(offset);
+
+  for(u4 i = 0; i < tierbox_width * tierbox_width; ++i)
+  {
+   set_individual_pixel_local_histogram_channels(*start);
+   ++start;
+  }
+
+ });
+}
+
+QVector<Local_Histogram_Data>* XCSD_Image::calculate_local_histograms(QString path_template)
+{
+ set_local_histograms_channels();
+ u2 count = geometry_.full_tier_counts().inner_product();
+
+ QVector<Local_Histogram_Data>* result = new QVector<Local_Histogram_Data> (count);
+
+ init_local_histogram_vector(*result, path_template);
+ return result;
+}
+
+QColor XCSD_Image::rgb555_to_qcolor(u2 rgb555)
+{
+ u1 red = (u1) (rgb555 & 0b00011111);
+ u1 green = (u1) ((rgb555 >> 5) & 0b00011111);
+ u1 blue = (u1) ((rgb555 >> 10) & 0b00011111);
+
+// qDebug() << "red = " << red << ", green = " << green << ", blue = " << blue;
+
+ QColor rgb(red << 3, green << 3, blue << 3);
+ return rgb;
+}
+
+QVector<u2> XCSD_Image::rgb555_to_hsv(u2 rgb555)
+{
+// u1 red = (u1) (rgb555 & 0b00011111);
+// u1 green = (u1) ((rgb555 >> 5) & 0b00011111);
+// u1 blue = (u1) ((rgb555 >> 10) & 0b00011111);
+ QColor rgb = rgb555_to_qcolor(rgb555); // (red, green, blue);
+ return { (u1) rgb.hsvHue(),  (u1) rgb.hsvSaturation(),  (u1) rgb.value() };
+}
+
+void XCSD_Image::init_local_histogram_vector(QVector<Local_Histogram_Data>& result, QString path_template)
+{
+ u1 threshold = 255;
+
+ geometry_.for_each_full_tierbox([this, &result, &path_template](XCSD_Image_Geometry::Grid_TierBox& gtb)
+ {
+  rc2 rc  = gtb.loc.rc()._to_unsigned();
+
+// rc2 rc  = {6, 10};
+
+  XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
+
+  qDebug() << tbox->get_grid_position();
+
+  xy4 xy = tbox->get_image_ground_location_for_tierbox_center();
+//  qDebug() << "xy = " << xy;
+
+  u2 fti = tbox->full_tier_index();
+
+//  qDebug() << "index = " << fti;
+
+  u4 offset = tbox->pixel_data_ground_offset();
+
+  n8* start = data_.get_pixel_data_start(offset);
+
+  QMap<u2, u2>& rgb555_counts = result[fti].rgb555_map();
+  QMap<u1, u2>& hue_counts = result[fti].hue_map();
+  QMap<u1, QVector<pr2>>& combined = result[fti].combined_map();
+
+//  QMultiMap<u2, u2> inverse;
+
+
+  for(u4 i = 0; i < tierbox_width * tierbox_width; ++i)
+  {
+   n8 pixel = *start;
+//   qDebug() << "pixel = " << *start;
+//   qDebug() << "pixel1 = " << ((u4) pixel);
+//   qDebug() << "pixel1 = " << ((u2) (pixel >> 32));
+
+   u2 code = (u2) ( (*start) >> 32 );
+   u2 c = ++rgb555_counts[code];
+//   if(rgb_counts_max < c)
+//     rgb_counts_max = c;
+
+//   u1 hue = rgb555_to_hsv(code)[0];
+//   ++hue_counts[hue];
+
+   ++start;
+  }
+
+//  u2 sz = counts.size();
+//  QMapIterator<u2, u2> it (counts);
+//  while(it.hasNext())
+//  {
+//   it.next();
+//   u2 k = it.key();
+//   u2 v = it.value();
+//  }
+
+#ifdef HIDE
+  u2 sz = hue_counts.size();
+
+  QImage hue_summary(sz * 10, 800, QImage::Format_RGB32);
+  QPainter painter(&hue_summary);
+
+  painter.fillRect(hue_summary.rect(), Qt::white);
+
+  u2 h = 0;
+  for(u2 hue = 0; hue <= 255; ++hue)
+  {
+   auto it = hue_counts.find(hue);
+   if(it == hue_counts.end())
+    continue;
+
+   QColor color;
+   color.setHsv(hue, 200, 200);
+
+   QBrush qbr(color);
+   painter.setBrush(qbr);
+   painter.drawRect(h, 790 - it.value(), 9, it.value());
+   h += 10;
+
+//   break;
+  }
+#endif //def HIDE
+
+ u2 rgb_counts_max = std::max_element(rgb555_counts.begin(), rgb555_counts.end()).value();
+
+  u2 sz = rgb555_counts.size();
+
+  u2 image_height = 520;
+  u2 max_bin_height = 280;
+  u2 min_bin_height = 10;
+  u2 bin_base = 200;
+  u2 bin_width = 9;
+
+  u2 max_hue_height = 200;
+  u2 min_hue_height = 10;
+
+
+  QImage rgb555_summary(sz * 10, image_height, QImage::Format_RGB32);
+  QPainter painter(&rgb555_summary);
+
+  QPen pen = painter.pen();
+  pen.setWidth(1);
+
+  painter.setPen(pen);
+  painter.fillRect(rgb555_summary.rect(), Qt::white);
+
+  QFont font = painter.font() ;
+  font.setPointSize(7);
+  painter.setFont(font);
+
+  u2 h = 0;
+
+  QMapIterator<u2, u2> r_it(rgb555_counts);
+
+  while(r_it.hasNext())
+  {
+   r_it.next();
+
+   u1 hue = rgb555_to_hsv(r_it.key())[0];
+   hue_counts[hue] += r_it.value();
+
+//   combined[hue].push_back({r_it.key(), r_it.value()});
+   combined[hue].push_back(pr2().from_key_value_iterator(r_it));
+
+  }
+
+  for(u2 hue = 0; hue <= 255; ++hue)
+  {
+   auto it = combined.find(hue);
+   if(it == combined.end())
+     continue;
+
+//  }
+
+//  //QMapIterator<u2, QVector<pr2>> it(combined);
+//  //while(it.hasNext())
+//  {
+   //it.next();
+
+   for(pr2 pr : it.value())
+   {
+    u2 v = pr.second;
+    qDebug() << "k = " << it.key();
+
+    if(v > 30)
+      qDebug() << v;
+
+    QColor color = rgb555_to_qcolor(pr.first);
+
+//    qDebug() << "color = " << color;
+
+
+    u2 height = (((r8) pr.second) / rgb_counts_max) * (max_bin_height - min_bin_height);
+
+//    qDebug() << "v = " << v << ", height = " << height;
+
+    QRect rect(h, image_height - bin_base, bin_width, -(min_bin_height + height));
+//    qDebug() << "rect = " << rect;
+
+
+    QBrush qbr(color);
+    painter.setBrush(qbr);
+    painter.drawRect(rect);
+
+    if(hue < 10)
+      painter.drawText(rect.bottomLeft() - QPoint{-2, 2}, QString::number(hue));
+    else if(hue < 100)
+    {
+     painter.drawText(rect.bottomLeft() - QPoint{-2, 2}, QString::number(hue % 10));
+     painter.drawText(rect.bottomLeft() - QPoint{-2, 10},
+       QString::number( (hue / 10) %  10) );
+    }
+    else
+    {
+     painter.drawText(rect.bottomLeft() - QPoint{-2, 2}, QString::number(hue % 10));
+     painter.drawText(rect.bottomLeft() - QPoint{-2, 10},
+       QString::number( (hue / 10) %  10) );
+     painter.drawText(rect.bottomLeft() - QPoint{-2, 18},
+       QString::number( (hue / 100) %  10) );
+    }
+
+    u2 c = hue_counts[hue];
+
+
+    h += 10;
+
+
+
+   }
+
+//   break;
+  }
+
+  rgb555_summary.save(path_template.arg(rc.r).arg(rc.c));
+
+
+ });
+
+
+
+
+//  QImage ti(tierbox_width, tierbox_width, QImage::Format_ARGB32);
+
+//  XCSD_Image_Geometry::MCH_Info mchi;
+//  //pr2s mch;
+
+//  u4 data_index;
+
+//  n8* data_start;
+
+//  tierbox_to_qimage(gtb, ti, ienv, &data_index, &data_start, &mchi, info_folder);
+}
+
 
 u4 XCSD_Image::data_tierbox_to_sdi_pixel_map(u4 tierbox_index,
   std::map<s1, std::pair<u2, std::vector<n8>>>& result)

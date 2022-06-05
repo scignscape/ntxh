@@ -259,6 +259,7 @@ void DHAX_GUI_Environment::init_main_window_signal_generator()
  minimal_self_connect(take_screenshot);
  minimal_self_connect(load_image);
  minimal_self_connect(show_xcsd_scene);
+ minimal_self_connect(calculate_local_color_histograms);
  minimal_self_connect(load_pdf);
 
  #undef self_connect_receiver

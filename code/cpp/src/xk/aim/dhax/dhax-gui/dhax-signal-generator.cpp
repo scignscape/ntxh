@@ -35,6 +35,10 @@ void DHAX_Signal_Generator::emit_show_xcsd_scene_requested()
  Q_EMIT show_xcsd_scene_requested();
 }
 
+void DHAX_Signal_Generator::emit_calculate_local_color_histograms_requested()
+{
+ Q_EMIT calculate_local_color_histograms_requested();
+}
 
 
 

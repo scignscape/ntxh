@@ -23,6 +23,8 @@ XCSD_Tierbox_Scene_Item::XCSD_Tierbox_Scene_Item(DHAX_Graphics_Scene* containing
  setAcceptHoverEvents(true);
 
  xy_corner_ = (row_column_pos_._transposed() * 27).as_qpoint();
+
+
 }
 
 

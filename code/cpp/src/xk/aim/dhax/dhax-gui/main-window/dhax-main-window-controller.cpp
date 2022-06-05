@@ -66,7 +66,8 @@ DHAX_Main_Window_Controller::DHAX_Main_Window_Controller()
      main_window_receiver_(nullptr),
      application_controller_(nullptr),
      pdf_document_controller_(nullptr),
-     image_document_controller_(nullptr)
+     image_document_controller_(nullptr),
+     xcsd_image_(nullptr)
 {
 
 }
@@ -445,7 +446,21 @@ void DHAX_Main_Window_Controller::load_pdf()
  application_controller_->application_state()->flags.pdf_mode = true;
 }
 
+void DHAX_Main_Window_Controller::calculate_local_color_histograms()
+{
+ qDebug() << "local histograms ...";
 
+ //xcsd_image_->f
+
+ QFileInfo qfi(current_image_file_path_);
+ QDir qdir(qfi.absoluteDir());
+ qdir.mkdir("hist");
+ QString path = qdir.absoluteFilePath("hist") + "/%1-%2.png";
+
+
+ xcsd_image_->calculate_local_histograms(path);
+
+}
 
 void DHAX_Main_Window_Controller::show_xcsd_scene()
 {
@@ -457,15 +472,16 @@ void DHAX_Main_Window_Controller::show_xcsd_scene()
  qDebug() << current_image_file_path_;
 
 
- XCSD_Image xcsd;
+ //XCSD_Image xcsd;
+ xcsd_image_ = new XCSD_Image;
 
  //xcsd.load_image(ROOT_FOLDER "/../pics/angle.jpg");
- xcsd.load_image(current_image_file_path_);
+ xcsd_image_->load_image(current_image_file_path_);
 
 // qDebug() << xcsd.
 
- xcsd.init_geometry();
- XCSD_Image_Geometry& xcsg = xcsd.geometry();
+ xcsd_image_->init_geometry();
+ XCSD_Image_Geometry& xcsg = xcsd_image_->geometry();
 
  xcsg.init_tier_counts(XCSD_Image_Geometry::TierGrid_Preferances::Minimize_Outer_Tiers);
 
@@ -477,25 +493,25 @@ void DHAX_Main_Window_Controller::show_xcsd_scene()
 
  xcsg.init_outer_ring_positions();
 
- xcsd.init_pixel_data(ROOT_FOLDER "/../test/ukraine");
+ xcsd_image_->init_pixel_data(ROOT_FOLDER "/../test/ukraine");
 
- xcsd.init_tierboxes();
+ xcsd_image_->init_tierboxes();
 
  Mat2d<Vec1d<QString>> paths;
 
- xcsd.draw_tierboxes_to_folder(ROOT_FOLDER "/../test/ukraine/u", &paths);
+ xcsd_image_->draw_tierboxes_to_folder(ROOT_FOLDER "/../test/ukraine/u", &paths);
 
- xcsd.init_outer_ring_info();
+ xcsd_image_->init_outer_ring_info();
 
- xcsd.save_full_tier_image(ROOT_FOLDER "/../test/ukraine/u1/t1.png",
+ xcsd_image_->save_full_tier_image(ROOT_FOLDER "/../test/ukraine/u1/t1.png",
    ROOT_FOLDER "/../test/ukraine/u2");
 
 
 
  image_scene_item_->hide_for_xcsd(); //setVisible(false);
 
- u1 lft = xcsd.geometry().horizontal_outer_sizes().left + image_scene_item_->pos().x();
- u1 top = xcsd.geometry().vertical_outer_sizes().top + image_scene_item_->pos().y();
+ u1 lft = xcsg.horizontal_outer_sizes().left + image_scene_item_->pos().x();
+ u1 top = xcsg.vertical_outer_sizes().top + image_scene_item_->pos().y();
 
 
  for(u2 r = 0; r < paths.n_rows(); ++r)
@@ -507,7 +523,7 @@ void DHAX_Main_Window_Controller::show_xcsd_scene()
   }
 
 
- QVector<XCSD_Outer_Ring_Info>& outer_ring_info = *xcsd.outer_ring_info();
+ QVector<XCSD_Outer_Ring_Info>& outer_ring_info = *xcsd_image_->outer_ring_info();
 
 // int i = 0;
 

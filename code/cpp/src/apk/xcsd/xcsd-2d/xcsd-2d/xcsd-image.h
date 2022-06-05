@@ -25,6 +25,7 @@
 
 XCNS_(XCSD)
 
+class Local_Histogram_Data;
 
 struct XCSD_Outer_Ring_Info
 {
@@ -164,6 +165,14 @@ public:
    Mat2d<Vec1d<QString>>* paths = nullptr);
 
  void init_outer_ring_info();
+
+ QVector<Local_Histogram_Data>* calculate_local_histograms(QString path_template);
+ void set_individual_pixel_local_histogram_channels(n8& pixel);
+ void set_local_histograms_channels();
+ void init_local_histogram_vector(QVector<Local_Histogram_Data>& result, QString path_template);
+
+ static QVector<u2> rgb555_to_hsv(u2 rgb555);
+ static QColor rgb555_to_qcolor(u2 rgb555);
 };
 
 

@@ -37,6 +37,8 @@ inline constexpr u1 _ctz(int x)
  struct ty##size##s; \
  struct ty##size { u##size field1, field2; \
    using field_type = u##size; \
+ template<typename T> ty##size& from_key_value_iterator(T it) \
+ { field1 = it.key(); field2 = it.value(); return *this; } \
    static u##size negative_to_zero(s##size x) { return x < 0? 0 : x; } \
    inline ty##size##s  _to_signed() const; \
    inline ty##size##s  _to_raw_signed() const; \
@@ -246,6 +248,8 @@ inline constexpr u1 _ctz(int x)
 struct ty##size; \
 struct ty##size##s { s##size field1, field2; \
    using field_type = s##size; \
+ template<typename T> ty##size##s& from_key_value_iterator(T it) \
+ { field1 = it.key(); field2 = it.value(); return *this; } \
    static u##size negative_to_zero(s##size x) { return x < 0? 0 : x; } \
    ty##size  _to_unsigned() const \
    { return {negative_to_zero(field1), negative_to_zero(field2) }; } \

@@ -61,6 +61,11 @@ void DHAX_Menu_System::init_menus()
   sg->emit_show_xcsd_scene_requested();
  };
 
+ file_menu.add_action("Calculate Local Color Histograms") << [sg]
+ {
+  sg->emit_calculate_local_color_histograms_requested();
+ };
+
  file_menu.addSeparator();
  file_menu.add_action("Load Notes") << [sg]
  {

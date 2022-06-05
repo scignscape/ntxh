@@ -52,6 +52,7 @@ HEADERS += \
   $$SRC_DIR/xcsd-image-geometry.h \
   $$SRC_DIR/xcsd-image-data.h \
   $$SRC_DIR/xcsd-tierbox.h \
+  $$SRC_DIR/local-histogram-data.h \
 
 
 SOURCES += \
@@ -61,7 +62,7 @@ SOURCES += \
   $$SRC_DIR/xcsd-image-geometry.cpp \
   $$SRC_DIR/xcsd-image-data.cpp \
   $$SRC_DIR/xcsd-tierbox.cpp \
-
+  $$SRC_DIR/local-histogram-data.cpp \
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

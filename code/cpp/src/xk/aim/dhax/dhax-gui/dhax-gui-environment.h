@@ -93,6 +93,8 @@ public:
 
  void load_new_virtual_package_object(QString class_name);
 
+ void calculate_local_color_histograms();
+
 
 };
 

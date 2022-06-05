@@ -15,6 +15,10 @@
 
 #include "global-types.h"
 
+#include "xcsd-2d/xcsd-image.h"
+
+USING_XCNS(XCSD)
+
 class DHAX_Main_Window;
 class DHAX_Display_Image_Data;
 
@@ -50,6 +54,8 @@ class DHAX_Main_Window_Controller //: public QObject
  PDF_Document_Controller* pdf_document_controller_;
  Image_Document_Controller* image_document_controller_;
 
+ XCSD_Image* xcsd_image_;
+
 public:
 
  DHAX_Main_Window_Controller();
@@ -83,6 +89,7 @@ public:
  void init_pdf_page_view();
 
  void show_xcsd_scene();
+ void calculate_local_color_histograms();
 
  void show_annotation_comments(DHAX_Annotation_Instance* dai);
 
