@@ -981,7 +981,8 @@ void XCSD_Image::set_local_histograms_channels()
 //  if(rc == rc2{0, 1})
 //    qDebug() << rc;
 
-// rc2 rc  = {6, 10};
+// rc2 rc  = {0, 15};
+
  XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
 
   qDebug() << tbox->get_grid_position();
@@ -1039,7 +1040,7 @@ void XCSD_Image::init_local_histogram_vector(QVector<Local_Histogram_Data>& resu
  {
   rc2 rc  = gtb.loc.rc()._to_unsigned();
 
-// rc2 rc  = {6, 10};
+// rc2 rc  = {0, 15};
 
   XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
 
@@ -1122,9 +1123,9 @@ void XCSD_Image::init_local_histogram_vector(QVector<Local_Histogram_Data>& resu
   u2 sz = rgb555_counts.size();
 
   u2 image_height = 520;
-  u2 max_bin_height = 280;
+  u2 max_bin_height = 200;
   u2 min_bin_height = 10;
-  u2 bin_base = 200;
+  u2 bin_base = 260;
   u2 bin_width = 9;
 
   u2 max_hue_height = 200;
@@ -1160,6 +1161,10 @@ void XCSD_Image::init_local_histogram_vector(QVector<Local_Histogram_Data>& resu
 
   }
 
+  u2 hue_counts_max = std::max_element(hue_counts.begin(), hue_counts.end()).value();
+
+
+
   for(u2 hue = 0; hue <= 255; ++hue)
   {
    auto it = combined.find(hue);
@@ -1173,6 +1178,26 @@ void XCSD_Image::init_local_histogram_vector(QVector<Local_Histogram_Data>& resu
 //  {
    //it.next();
 
+   {
+    u2 most = std::max_element(it.value().begin(), it.value().end(),
+      UNARY_COMPARE_2(pr2))->first;
+    QColor color = rgb555_to_qcolor(most);
+
+//    qDebug() << "color = " << color;
+
+
+    u2 height = (((r8) hue_counts[hue]) / hue_counts_max) * (max_hue_height - min_hue_height);
+
+//    qDebug() << "v = " << v << ", height = " << height;
+
+    QRect rect(h, bin_base, ((bin_width + 1) * it.value().size()) - 1, min_hue_height + height);
+//    qDebug() << "rect = " << rect;
+
+    QBrush qbr(color);
+    painter.setBrush(qbr);
+    painter.drawRect(rect);
+
+   }
    for(pr2 pr : it.value())
    {
     u2 v = pr.second;
@@ -1190,7 +1215,7 @@ void XCSD_Image::init_local_histogram_vector(QVector<Local_Histogram_Data>& resu
 
 //    qDebug() << "v = " << v << ", height = " << height;
 
-    QRect rect(h, image_height - bin_base, bin_width, -(min_bin_height + height));
+    QRect rect(h, bin_base, bin_width, -(min_bin_height + height));
 //    qDebug() << "rect = " << rect;
 
 

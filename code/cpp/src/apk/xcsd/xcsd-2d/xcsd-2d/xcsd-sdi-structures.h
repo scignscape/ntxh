@@ -224,6 +224,10 @@ inline constexpr u1 _ctz(int x)
    { return {(typename T::field_type)field1, (typename T::field_type)field2}; } \
    template<typename T> T _transposed_to() const \
    { return _transposed()._to<T>(); } \
+   static bool _unary_compare_1(const ty##size& lhs, const ty##size& rhs) \
+   { return lhs.field1 < rhs.field1; } \
+   static bool _unary_compare_2(const ty##size& lhs, const ty##size& rhs) \
+   { return lhs.field2 < rhs.field2; } \
    asize area() const {return field1 * field2;} \
    ty##size operator++(int) \
    { *this = {field1 + 1, field2 + 1}; return {field1, field2}; } \
@@ -380,6 +384,10 @@ struct ty##size##s { s##size field1, field2; \
    { *this = this->over(rhs); return *this;} \
    template<typename T> ty##size##s divide(T vals) \
    { return divide(vals.template _to<ty##size##s>()); } \
+ static bool _unary_compare_1(const ty##size##s& lhs, const ty##size##s& rhs) \
+ { return lhs.field1 < rhs.field1; } \
+ static bool _unary_compare_2(const ty##size##s& lhs, const ty##size##s& rhs) \
+ { return lhs.field2 < rhs.field2; } \
    bool operator<(ty##size##s rhs) const \
    { return field1 < rhs.field1 && field2 < rhs.field2; } \
    template<typename T> bool operator<(T vals) const \
@@ -516,7 +524,8 @@ Tys_DEF_MACRO(tb, 1, u2, top, bottom)
 Tys_DEF_MACRO(tb, 2, u4, top, bottom)
 Tys_DEF_MACRO(tb, 4, n8, first, second)
 
-
+#define UNARY_COMPARE_1(ty) [](const ty& lhs, const ty& rhs) { return ty::_unary_compare_1(lhs, rhs); }
+#define UNARY_COMPARE_2(ty) [](const ty& lhs, const ty& rhs) { return ty::_unary_compare_2(lhs, rhs); }
 
 #define Ty3_DEF_MACRO(ty, ty2, size, asize, field1, field2, field3) \
  struct ty##size { u##size field1, field2, field3; \
