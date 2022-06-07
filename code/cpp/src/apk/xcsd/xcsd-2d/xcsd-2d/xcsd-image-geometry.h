@@ -261,6 +261,7 @@ public:
  void init_outer_ring_position_array();
  void init_outer_ring_offset_array();
 
+
  u2 get_outer_ring_area_size(Outer_Ring_Positions::Landscape l_area);
  u2 get_outer_ring_area_size(Outer_Ring_Positions::Portrait p_area);
 

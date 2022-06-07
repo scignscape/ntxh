@@ -9,6 +9,8 @@
 
 
 Local_Histogram_Data::Local_Histogram_Data()
+  :  largest_group_total_(0), largest_bin_(0)
 {
 
 }
+

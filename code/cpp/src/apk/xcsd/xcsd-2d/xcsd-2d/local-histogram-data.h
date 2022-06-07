@@ -25,22 +25,37 @@ XCNS_(XCSD)
 //class XCSD_XPixel;
 
 
+struct Histogram_Group_Summary
+{
+ u2 total;
+ u2 max;
+ QVector<pr2> counts;
+};
+
 
 class Local_Histogram_Data
 {
 
  QMap<u2, u2> rgb555_map_;
- QMap<u1, u2> hue_map_;
+ QMap<s2, u2> hue_map_;
 
- QMap<u1, QVector<pr2>> combined_map_;
+ QMap<s2, Histogram_Group_Summary> combined_map_;
+
+ u2 largest_group_total_;
+ u2 largest_bin_;
 
 public:
 
  Local_Histogram_Data();
 
  ACCESSORS__RGET(MACRO_PASTE(QMap<u2, u2>) ,rgb555_map)
- ACCESSORS__RGET(MACRO_PASTE(QMap<u1, u2>) ,hue_map)
- ACCESSORS__RGET(MACRO_PASTE(QMap<u1, QVector<pr2>>) ,combined_map)
+ ACCESSORS__RGET(MACRO_PASTE(QMap<s2, u2>) ,hue_map)
+ ACCESSORS__RGET(MACRO_PASTE(QMap<s2, Histogram_Group_Summary>) ,combined_map)
+ ACCESSORS__RGET_CONST(MACRO_PASTE(QMap<s2, Histogram_Group_Summary>) ,combined_map)
+
+ ACCESSORS(u2 ,largest_group_total)
+ ACCESSORS(u2 ,largest_bin)
+
 
 };
 

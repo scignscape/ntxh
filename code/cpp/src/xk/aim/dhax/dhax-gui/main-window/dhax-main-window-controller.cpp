@@ -42,6 +42,8 @@
 
 #include "xcsd-2d/xcsd-tierbox.h"
 
+#include "dialogs/xcsd-local-histogram-dialog.h"
+
 
 #include <QMenuBar>
 
@@ -458,7 +460,20 @@ void DHAX_Main_Window_Controller::calculate_local_color_histograms()
  QString path = qdir.absoluteFilePath("hist") + "/%1-%2.png";
 
 
- xcsd_image_->calculate_local_histograms(path);
+ QVector<Local_Histogram_Data>* histogram_data = xcsd_image_->calculate_local_histograms(path);
+
+ u2 fti = (u2) xcsd_image_->tierbox_index_to_full_tier_index({0, 21});
+
+ const Local_Histogram_Data& lhd = histogram_data->at(fti);
+
+ XCSD_Local_Histogram_Dialog* dlg = new XCSD_Local_Histogram_Dialog(application_main_window_,
+   {lhd.largest_group_total(), lhd.largest_bin()}, &lhd.combined_map());
+
+
+ dlg->setModal(false);
+ dlg->show();
+
+
 
 }
 

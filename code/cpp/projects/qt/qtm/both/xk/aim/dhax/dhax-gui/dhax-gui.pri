@@ -178,6 +178,7 @@ HEADERS += \
   $$SRC_DIR/aforms/simple/simple-ellipse-annotation.h \
   $$SRC_DIR/aforms/simple/simple-polyline-annotation.h \
   $$SRC_DIR/aforms/measurement-dialogs/simple/simple-rectangle-measurement-dialog.h \
+  $$SRC_DIR/dialogs/xcsd-local-histogram-dialog.h \
 
 
 
@@ -247,6 +248,7 @@ SOURCES += \
   $$SRC_DIR/aforms/simple/simple-ellipse-annotation.cpp \
   $$SRC_DIR/aforms/simple/simple-polyline-annotation.cpp \
   $$SRC_DIR/aforms/measurement-dialogs/simple/simple-rectangle-measurement-dialog.cpp \
+  $$SRC_DIR/dialogs/xcsd-local-histogram-dialog.cpp \
 
 
 

@@ -166,12 +166,14 @@ public:
 
  void init_outer_ring_info();
 
+ u4 tierbox_index_to_full_tier_index(rc2 rc);
+
  QVector<Local_Histogram_Data>* calculate_local_histograms(QString path_template);
  void set_individual_pixel_local_histogram_channels(n8& pixel);
  void set_local_histograms_channels();
  void init_local_histogram_vector(QVector<Local_Histogram_Data>& result, QString path_template);
 
- static QVector<u2> rgb555_to_hsv(u2 rgb555);
+ static QVector<s2> rgb555_to_hsv(u2 rgb555);
  static QColor rgb555_to_qcolor(u2 rgb555);
 };
 
