@@ -25,15 +25,12 @@ void XCSD_Local_Histogram_Dialog::Rect_Item::hoverEnterEvent(QGraphicsSceneHover
  int hh = color.hue();
  u1 s = color.hsvSaturation();
  u1 v = color.value();
- qDebug() << "hh = " << hh;
  //color.setHsv(360 - hh, s, v);
  color.setHsv(360 - hh, 200, 200);
 
- qDebug() << "hh1 = " << color.hsvHue();
-
  QPen pen;
  pen.setColor(color);
- pen.setWidth(9);
+ pen.setWidth(3);
  setPen(pen);
  update();
 }
@@ -117,23 +114,26 @@ XCSD_Local_Histogram_Dialog::XCSD_Local_Histogram_Dialog(QWidget* parent,
    QRect rect(h, bin_base_, bin_width_, -(min_bin_height_ + height));
 //    qDebug() << "rect = " << rect;
 
+   rect = rect.normalized();
 
    QBrush qbr(color);
 
-   Rect_Item* ri = new Rect_Item(rect, hue, color);
+   Rect_Item* ri = new Rect_Item(rect.normalized(), hue, color);
+
+   ri->setZValue(1);
 
    graphics_scene_->addItem(ri); //Rect(rect)->setBrush(qbr);
 
    QFont font;
    font.setPointSize(7);
    if(hue < 10)
-     graphics_scene_->addText(QString::number(hue), font)->setPos(rect.bottomLeft() - QPoint{-2, 2});
+     graphics_scene_->addText(QString::number(hue), font)->setPos(rect.topLeft() - QPoint{1, 18});
      //painter.drawText(rect.bottomLeft() - QPoint{-2, 2}, QString::number(hue));
    else if(hue < 100)
    {
-    graphics_scene_->addText(QString::number(hue % 10), font)->setPos(rect.bottomLeft() - QPoint{-2, 2});
+    graphics_scene_->addText(QString::number(hue % 10), font)->setPos(rect.topLeft() - QPoint{1, 18});
     graphics_scene_->addText(QString::number((hue / 10) % 10),
-      font)->setPos(rect.bottomLeft() - QPoint{-2, 10});
+      font)->setPos(rect.topLeft() - QPoint{1, 26});
 
 //    painter.drawText(rect.bottomLeft() - QPoint{-2, 2}, QString::number(hue % 10));
 //    painter.drawText(rect.bottomLeft() - QPoint{-2, 10},
@@ -141,11 +141,11 @@ XCSD_Local_Histogram_Dialog::XCSD_Local_Histogram_Dialog(QWidget* parent,
    }
    else
    {
-    graphics_scene_->addText(QString::number(hue % 10), font)->setPos(rect.bottomLeft() - QPoint{-1, 12});
+    graphics_scene_->addText(QString::number(hue % 10), font)->setPos(rect.topLeft() - QPoint{1, 18});
     graphics_scene_->addText(QString::number((hue / 10) % 10),
-      font)->setPos(rect.bottomLeft() - QPoint{-1, 20});
+      font)->setPos(rect.topLeft() - QPoint{1, 26});
     graphics_scene_->addText(QString::number((hue / 100) % 10),
-      font)->setPos(rect.bottomLeft() - QPoint{-1, 28});
+      font)->setPos(rect.topLeft() - QPoint{1, 34});
    }
    h += 10;
   }

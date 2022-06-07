@@ -460,7 +460,9 @@ void DHAX_Main_Window_Controller::calculate_local_color_histograms()
  QString path = qdir.absoluteFilePath("hist") + "/%1-%2.png";
 
 
- QVector<Local_Histogram_Data>* histogram_data = xcsd_image_->calculate_local_histograms(path);
+ QVector<Local_Histogram_Data>* histogram_data = xcsd_image_->calculate_local_histograms(); //path);
+
+ xcsd_image_->save_local_histogram_vector_to_folder(*histogram_data, path);
 
  u2 fti = (u2) xcsd_image_->tierbox_index_to_full_tier_index({0, 21});
 

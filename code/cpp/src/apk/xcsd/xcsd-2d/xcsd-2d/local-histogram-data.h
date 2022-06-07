@@ -49,7 +49,9 @@ public:
  Local_Histogram_Data();
 
  ACCESSORS__RGET(MACRO_PASTE(QMap<u2, u2>) ,rgb555_map)
+ ACCESSORS__RGET_CONST(MACRO_PASTE(QMap<u2, u2>) ,rgb555_map)
  ACCESSORS__RGET(MACRO_PASTE(QMap<s2, u2>) ,hue_map)
+ ACCESSORS__RGET_CONST(MACRO_PASTE(QMap<s2, u2>) ,hue_map)
  ACCESSORS__RGET(MACRO_PASTE(QMap<s2, Histogram_Group_Summary>) ,combined_map)
  ACCESSORS__RGET_CONST(MACRO_PASTE(QMap<s2, Histogram_Group_Summary>) ,combined_map)
 

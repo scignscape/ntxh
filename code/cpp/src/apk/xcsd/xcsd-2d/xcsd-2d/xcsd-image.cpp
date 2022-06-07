@@ -961,7 +961,7 @@ void XCSD_Image::set_individual_pixel_local_histogram_channels(n8& pixel)
  static u1 temp = 0;
 // if(temp < 55)
 // {
-  qDebug() << temp << " rgb555 = " << rgb555 << ", pixel = " << pixel;
+//  qDebug() << temp << " rgb555 = " << rgb555 << ", pixel = " << pixel;
 
 //  qDebug() << "rgb555 1 = " << (((n8) rgb555) << 32);
 //  qDebug() << "pixel = " << pixel;
@@ -974,18 +974,18 @@ void XCSD_Image::set_individual_pixel_local_histogram_channels(n8& pixel)
 
 void XCSD_Image::set_local_histograms_channels()
 {
-// geometry_.for_each_full_tierbox([this](XCSD_Image_Geometry::Grid_TierBox& gtb)
-// {
-//  rc2 rc  = gtb.loc.rc()._to_unsigned();
+ geometry_.for_each_full_tierbox([this](XCSD_Image_Geometry::Grid_TierBox& gtb)
+ {
+  rc2 rc  = gtb.loc.rc()._to_unsigned();
 
 //  if(rc == rc2{0, 1})
 //    qDebug() << rc;
 
- rc2 rc  = {0, 21};
+// rc2 rc  = {0, 21};
 
  XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
 
-  qDebug() << tbox->get_grid_position();
+//  qDebug() << tbox->get_grid_position();
 
   u4 offset = tbox->pixel_data_ground_offset();
 
@@ -997,17 +997,17 @@ void XCSD_Image::set_local_histograms_channels()
    ++start;
   }
 
-// });
+ });
 }
 
-QVector<Local_Histogram_Data>* XCSD_Image::calculate_local_histograms(QString path_template)
+QVector<Local_Histogram_Data>* XCSD_Image::calculate_local_histograms() //QString path_template)
 {
  set_local_histograms_channels();
  u2 count = geometry_.full_tier_counts().inner_product();
 
  QVector<Local_Histogram_Data>* result = new QVector<Local_Histogram_Data> (count);
 
- init_local_histogram_vector(*result, path_template);
+ init_local_histogram_vector(*result); //, path_template);
  return result;
 }
 
@@ -1032,19 +1032,129 @@ QVector<s2> XCSD_Image::rgb555_to_hsv(u2 rgb555)
  return { (s2) rgb.hsvHue(),  (s2) rgb.hsvSaturation(),  (s2) rgb.value() };
 }
 
-void XCSD_Image::init_local_histogram_vector(QVector<Local_Histogram_Data>& result, QString path_template)
+
+void XCSD_Image::save_local_histogram_vector_to_folder(const QVector<Local_Histogram_Data>& data,
+  QString path_template)
 {
- u1 threshold = 255;
-
-// geometry_.for_each_full_tierbox([this, &result, &path_template](XCSD_Image_Geometry::Grid_TierBox& gtb)
-// {
-//  rc2 rc  = gtb.loc.rc()._to_unsigned();
-
- rc2 rc  = {0, 21};
+ geometry_.for_each_full_tierbox([this, &data, &path_template](XCSD_Image_Geometry::Grid_TierBox& gtb)
+ {
+  rc2 rc  = gtb.loc.rc()._to_unsigned();
 
   XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
 
-  qDebug() << tbox->get_grid_position();
+  u2 fti = tbox->full_tier_index();
+
+  u2 image_height = 520;
+  u2 max_bin_height = 200;
+  u2 min_bin_height = 10;
+  u2 bin_base = 260;
+  u2 bin_width = 9;
+
+  u2 max_hue_height = 200;
+  u2 min_hue_height = 10;
+
+  QMap<u2, u2>& rgb555_counts = data[fti].rgb555_map();
+  QMap<s2, u2>& hue_counts = data[fti].hue_map();
+  QMap<s2, Histogram_Group_Summary>& combined = data[fti].combined_map();
+
+  u2 sz = rgb555_counts.size();
+
+  QImage rgb555_summary(sz * 10, image_height, QImage::Format_RGB32);
+  QPainter painter(&rgb555_summary);
+
+  QPen pen = painter.pen();
+  pen.setWidth(1);
+
+  painter.setPen(pen);
+  painter.fillRect(rgb555_summary.rect(), Qt::white);
+
+  QFont font = painter.font() ;
+  font.setPointSize(7);
+  painter.setFont(font);
+
+  u2 hue_counts_max = data[fti].largest_group_total();
+  u2 rgb_counts_max = data[fti].largest_bin();
+
+  u2 h = 0;
+
+  for(s2 hue = 0, go_on = 1; go_on; ++hue)
+  {
+   if(hue == 360)
+   {
+    hue = -1;
+    go_on = 0;
+   }
+
+   auto it = combined.find(hue);
+   if(it == combined.end())
+     continue;
+
+   QColor color = rgb555_to_qcolor(it.value().max);
+
+
+//    qDebug() << "color = " << color;
+
+
+   u2 height = (((r8) hue_counts[hue]) / hue_counts_max) * (max_hue_height - min_hue_height);
+
+//    qDebug() << "v = " << v << ", height = " << height;
+
+   QRect rect(h, bin_base, ((bin_width + 1) * it.value().counts.size()) - 1, min_hue_height + height);
+//    qDebug() << "rect = " << rect;
+
+   QBrush qbr(color);
+   painter.setBrush(qbr);
+   painter.drawRect(rect);
+
+   for(pr2 pr : it.value().counts)
+   {
+    u2 v = pr.second;
+    QColor color = rgb555_to_qcolor(pr.first);
+    u2 height = (((r8) pr.second) / rgb_counts_max) * (max_bin_height - min_bin_height);
+
+    QRect rect(h, bin_base, bin_width, -(min_bin_height + height));
+    QBrush qbr(color);
+    painter.setBrush(qbr);
+    painter.drawRect(rect);
+
+    if(hue < 10)
+      painter.drawText(rect.bottomLeft() - QPoint{-2, 2}, QString::number(hue));
+    else if(hue < 100)
+    {
+     painter.drawText(rect.bottomLeft() - QPoint{-2, 2}, QString::number(hue % 10));
+     painter.drawText(rect.bottomLeft() - QPoint{-2, 10},
+       QString::number( (hue / 10) %  10) );
+    }
+    else
+    {
+     painter.drawText(rect.bottomLeft() - QPoint{-2, 2}, QString::number(hue % 10));
+     painter.drawText(rect.bottomLeft() - QPoint{-2, 10},
+       QString::number( (hue / 10) %  10) );
+     painter.drawText(rect.bottomLeft() - QPoint{-2, 18},
+       QString::number( (hue / 100) %  10) );
+    }
+    h += 10;
+   }
+  }
+
+  rgb555_summary.save(path_template.arg(rc.r).arg(rc.c));
+
+ });
+}
+
+void XCSD_Image::init_local_histogram_vector(QVector<Local_Histogram_Data>& result)
+{
+ u1 threshold = 255;
+
+ geometry_.for_each_full_tierbox([this, &result](XCSD_Image_Geometry::Grid_TierBox& gtb)
+ {
+  rc2 rc  = gtb.loc.rc()._to_unsigned();
+
+// rc2 rc  = {0, 21};
+
+  XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
+
+//  qDebug() << tbox->get_grid_position();
 
   xy4 xy = tbox->get_image_ground_location_for_tierbox_center();
 //  qDebug() << "xy = " << xy;
@@ -1066,7 +1176,7 @@ void XCSD_Image::init_local_histogram_vector(QVector<Local_Histogram_Data>& resu
 
   for(u4 i = 0; i < tierbox_width * tierbox_width; ++i)
   {
-   n8 pixel = *start;
+//   n8 pixel = *start;
 //   qDebug() << "pixel = " << *start;
 //   qDebug() << "pixel1 = " << ((u4) pixel);
 //   qDebug() << "pixel1 = " << ((u2) (pixel >> 32));
@@ -1124,31 +1234,40 @@ void XCSD_Image::init_local_histogram_vector(QVector<Local_Histogram_Data>& resu
 
   u2 sz = rgb555_counts.size();
 
-  u2 image_height = 520;
-  u2 max_bin_height = 200;
-  u2 min_bin_height = 10;
-  u2 bin_base = 260;
-  u2 bin_width = 9;
 
-  u2 max_hue_height = 200;
-  u2 min_hue_height = 10;
+  QMapIterator<u2, u2> r_it(rgb555_counts);
 
+  while(r_it.hasNext())
+  {
+   r_it.next();
 
-  QImage rgb555_summary(sz * 10, image_height, QImage::Format_RGB32);
-  QPainter painter(&rgb555_summary);
+   s2 hue = rgb555_to_hsv(r_it.key())[0];
+   hue_counts[hue] += r_it.value();
 
-  QPen pen = painter.pen();
-  pen.setWidth(1);
+//   combined[hue].push_back({r_it.key(), r_it.value()});
+   combined[hue].counts.push_back(pr2().from_key_value_iterator(r_it));
 
-  painter.setPen(pen);
-  painter.fillRect(rgb555_summary.rect(), Qt::white);
+  }
 
-  QFont font = painter.font() ;
-  font.setPointSize(7);
-  painter.setFont(font);
+  u2 hue_counts_max = std::max_element(hue_counts.begin(), hue_counts.end()).value();
+  result[fti].set_largest_group_total(hue_counts_max);
 
-  u2 h = 0;
+  for(s2 hue = 0, go_on = 1; go_on; ++hue)
+  {
+   if(hue == 360)
+   {
+    hue = -1;
+    go_on = 0;
+   }
 
+   auto it = combined.find(hue);
+   if(it == combined.end())
+     continue;
+   it.value().max = std::max_element(it.value().counts.begin(), it.value().counts.end(),
+     UNARY_COMPARE_2(pr2))->first;
+   it.value().total = hue_counts[hue];
+  }
+#ifdef HIDE
   QMapIterator<u2, u2> r_it(rgb555_counts);
 
   while(r_it.hasNext())
@@ -1211,7 +1330,7 @@ void XCSD_Image::init_local_histogram_vector(QVector<Local_Histogram_Data>& resu
    }
    for(pr2 pr : it.value().counts)
    {
-    u2 v = pr.second;
+//    u2 v = pr.second;
 
     QColor color = rgb555_to_qcolor(pr.first);
 
@@ -1260,9 +1379,9 @@ void XCSD_Image::init_local_histogram_vector(QVector<Local_Histogram_Data>& resu
   }
 
   rgb555_summary.save(path_template.arg(rc.r).arg(rc.c));
+#endif
 
-
-// });
+ });
 
 
 
