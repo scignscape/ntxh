@@ -61,6 +61,9 @@ class Image_Document_Controller //: public QGraphicsView //QLabel
 
  QVector<Local_Histogram_Data>* local_histogram_data_;
 
+ u2 marked_foreground_pole_;
+ u2 marked_background_pole_;
+
 public:
 
  Image_Document_Controller();
@@ -69,6 +72,11 @@ public:
 
  ACCESSORS(QString ,current_file_path)
  ACCESSORS(QVector<Local_Histogram_Data>* ,local_histogram_data)
+
+
+ ACCESSORS(u2 ,marked_foreground_pole)
+ ACCESSORS(u2 ,marked_background_pole)
+
 
  MultiStep_Annotation_Base* init_multistep_annotation(QWidget* parent,
    const QPointF posf, DHAX_Annotation_Instance::Compact_Shape_Kind_Summary shape_kind);

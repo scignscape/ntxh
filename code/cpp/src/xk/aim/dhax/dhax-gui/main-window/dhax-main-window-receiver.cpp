@@ -98,6 +98,12 @@ void DHAX_Main_Window_Receiver::handle_save_local_color_histograms()
  main_window_controller_->save_local_color_histograms();
 }
 
+void DHAX_Main_Window_Receiver::handle_save_fg_gradient_trimap()
+{
+ main_window_controller_->save_fg_gradient_trimap();
+}
+
+
 
 void DHAX_Main_Window_Receiver::handle_load_pdf()
 {

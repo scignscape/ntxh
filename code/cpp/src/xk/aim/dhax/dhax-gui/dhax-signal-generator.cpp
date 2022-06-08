@@ -45,6 +45,10 @@ void DHAX_Signal_Generator::emit_save_local_color_histograms_requested()
  Q_EMIT save_local_color_histograms_requested();
 }
 
+void DHAX_Signal_Generator::emit_save_fg_gradient_trimap_requested()
+{
+ Q_EMIT save_fg_gradient_trimap_requested();
+}
 
 void DHAX_Signal_Generator::emit_load_pdf_requested()
 {

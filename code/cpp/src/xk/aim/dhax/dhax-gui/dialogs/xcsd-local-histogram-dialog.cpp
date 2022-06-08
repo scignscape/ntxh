@@ -11,9 +11,16 @@
 
 #include <QGraphicsRectItem>
 
-XCSD_Local_Histogram_Dialog::Rect_Item::Rect_Item(const QRect& rect, u2 h, QColor color)
-  :  QGraphicsRectItem(rect), hue(h), color_code(0)
+#include <QGraphicsSceneContextMenuEvent>
+#include <QMenu>
+
+
+XCSD_Local_Histogram_Dialog::Rect_Item::Rect_Item(Window_Rect_Item* parent,
+  const QRect& rect, u2 cc, QColor color)
+  :  QGraphicsRectItem(rect, parent), //hue(h),
+    color_code(cc)
 {
+ setParentItem(parent);
  QBrush qbr(color);
  setBrush(qbr);
  setAcceptHoverEvents(true);
@@ -45,10 +52,19 @@ void XCSD_Local_Histogram_Dialog::Rect_Item::hoverLeaveEvent(QGraphicsSceneHover
 }
 
 
+//void XCSD_Tierbox_Scene_Item::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+void XCSD_Local_Histogram_Dialog::Rect_Item::contextMenuEvent(QGraphicsSceneContextMenuEvent* event)
+{
+ get_parent_dialog()->context_menu(this, event);
+}
+
+
+
 XCSD_Local_Histogram_Dialog::XCSD_Local_Histogram_Dialog(QWidget* parent,
   pr2 totals, QMap<s2, Histogram_Group_Summary>* data)
   :  QDialog(parent)
 {
+
  image_height_ = 520;
  max_bin_height_  = 200;
  min_bin_height_  = 10;
@@ -62,6 +78,10 @@ XCSD_Local_Histogram_Dialog::XCSD_Local_Histogram_Dialog(QWidget* parent,
  auto [largest_group_total, largest_bin] = totals;
 
  graphics_scene_ = new QGraphicsScene(this);
+
+ parent_rect_item_ = new Window_Rect_Item(this);
+ graphics_scene_->addItem(parent_rect_item_);
+
  graphics_view_ = new QGraphicsView(this);
 
  graphics_view_->setScene(graphics_scene_);
@@ -89,8 +109,10 @@ XCSD_Local_Histogram_Dialog::XCSD_Local_Histogram_Dialog(QWidget* parent,
 //    qDebug() << "rect = " << rect;
 
 
-   Rect_Item* ri = new Rect_Item(rect, hue, color);
-   graphics_scene_->addItem(ri);
+   Rect_Item* ri = new Rect_Item(parent_rect_item_, rect, most, color);
+
+//?   graphics_scene_->addItem(ri);
+
 //   ri->setBrush(qbr);
 //   ri->setFlags(QGraphicsItem::ItemIsSelectable);
 
@@ -118,11 +140,11 @@ XCSD_Local_Histogram_Dialog::XCSD_Local_Histogram_Dialog(QWidget* parent,
 
    QBrush qbr(color);
 
-   Rect_Item* ri = new Rect_Item(rect.normalized(), hue, color);
+   Rect_Item* ri = new Rect_Item(parent_rect_item_, rect.normalized(), pr.first, color);
 
    ri->setZValue(1);
 
-   graphics_scene_->addItem(ri); //Rect(rect)->setBrush(qbr);
+//?   graphics_scene_->addItem(ri); //Rect(rect)->setBrush(qbr);
 
    QFont font;
    font.setPointSize(7);
@@ -158,4 +180,36 @@ XCSD_Local_Histogram_Dialog::XCSD_Local_Histogram_Dialog(QWidget* parent,
 
 }
 
+void XCSD_Local_Histogram_Dialog::context_menu(Rect_Item* ri, QGraphicsSceneContextMenuEvent* event)
+{
+ qDebug() << "event = " << event->pos();
+
+ QMenu* menu = new QMenu(this);//
+
+ menu->addAction("Mark as global foreground pole", [this, ri]
+ {
+  mark_global_foreground_pole_requested(ri->color_code);
+ });
+
+ menu->addAction("Mark as global background pole", [this, ri]
+ {
+  mark_global_background_pole_requested(ri->color_code);
+ });
+
+ menu->addAction("Mark as local foreground pole", [this, ri]
+ {
+  mark_local_foreground_pole_requested(ri->color_code);
+ });
+
+ menu->addAction("Mark as local background pole", [this, ri]
+ {
+  mark_local_background_pole_requested(ri->color_code);
+ });
+
+ QPoint p = graphics_view_->mapFromScene(event->pos().toPoint());
+ p = mapToGlobal(p);
+
+ menu->popup(p);
+
+}
 

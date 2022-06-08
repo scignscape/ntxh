@@ -43,7 +43,8 @@
 
 
 Image_Document_Controller::Image_Document_Controller()
-  :  local_histogram_data_(nullptr)
+  :  local_histogram_data_(nullptr),
+     marked_foreground_pole_(-1), marked_background_pole_(-1)
  //: document_(nullptr) //, page_and_search_frame_(nullptr)
   // context_menu_rubber_band_(nullptr),
   // current_multistep_annotation_(nullptr)

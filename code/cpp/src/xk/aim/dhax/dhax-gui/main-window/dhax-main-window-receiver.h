@@ -41,6 +41,8 @@ public Q_SLOTS:
  void handle_calculate_local_color_histograms();
  void handle_save_local_color_histograms();
 
+ void handle_save_fg_gradient_trimap();
+
  void handle_load_pdf();
  void handle_complete_polygon();
  void handle_meshlab_import_info();

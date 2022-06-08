@@ -64,7 +64,7 @@ public:
 
  void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) Q_DECL_OVERRIDE;
 
- void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) Q_DECL_OVERRIDE;
+ void contextMenuEvent(QGraphicsSceneContextMenuEvent* event) Q_DECL_OVERRIDE;
 // {
 //     QMenu menu;
 //     QAction *removeAction = menu.addAction("Remove");

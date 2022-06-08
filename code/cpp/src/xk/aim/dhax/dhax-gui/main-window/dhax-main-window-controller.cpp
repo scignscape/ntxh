@@ -449,6 +449,11 @@ void DHAX_Main_Window_Controller::load_pdf()
 }
 
 
+void DHAX_Main_Window_Controller::save_fg_gradient_trimap()
+{
+ qDebug() << "save_fg_gradient_trimap";
+}
+
 void DHAX_Main_Window_Controller::save_local_color_histograms()
 {
  qDebug() << "save local histograms ...";
@@ -492,6 +497,18 @@ void DHAX_Main_Window_Controller::show_local_color_histogram(rc2 rc)
    image_document_controller_->local_histogram_data()->at(fti);
  XCSD_Local_Histogram_Dialog* dlg = new XCSD_Local_Histogram_Dialog(application_main_window_,
    {lhd.largest_group_total(), lhd.largest_bin()}, &lhd.combined_map());
+
+ _self_connect_(dlg ,mark_global_foreground_pole_requested)
+  to_lambda[this] (u2 code)
+  {
+   image_document_controller_->set_marked_foreground_pole(code);
+  };
+
+ _self_connect_(dlg ,mark_global_background_pole_requested)
+  to_lambda[this] (u2 code)
+  {
+   image_document_controller_->set_marked_background_pole(code);
+  };
 
  dlg->setModal(false);
  dlg->show();

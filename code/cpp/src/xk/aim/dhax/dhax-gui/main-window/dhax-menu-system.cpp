@@ -41,6 +41,7 @@ void DHAX_Menu_System::init_menus()
 
  menus_->init_menu("File");
  menus_->init_menu("Histograms");
+ menus_->init_menu("Trimap");
  menus_->init_menu("Help");
  menus_->init_menu("Tools");
 
@@ -121,6 +122,14 @@ void DHAX_Menu_System::init_menus()
  hm.add_action("Save Local Color Histograms (diagrams)") << [sg]
  {
   sg->emit_save_local_color_histograms_requested();
+ };
+
+
+ DHAX_Menu& tm = *menus_->menu("Trimap");
+
+ tm.add_action("Save fg-gradient trimap") << [sg]
+ {
+  sg->save_fg_gradient_trimap_requested();
  };
 
 
