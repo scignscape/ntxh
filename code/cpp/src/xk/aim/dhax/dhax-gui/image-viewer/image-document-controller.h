@@ -28,6 +28,8 @@
 
 #include "image-viewer/dhax-mouse-interaction-data.h"
 
+#include "xcsd-2d/local-histogram-data.h"
+
 class MultiLine_Rubber_Band;
 class Arrow_Annotation;
 
@@ -57,6 +59,8 @@ class Image_Document_Controller //: public QGraphicsView //QLabel
 
  QString current_file_path_;
 
+ QVector<Local_Histogram_Data>* local_histogram_data_;
+
 public:
 
  Image_Document_Controller();
@@ -64,6 +68,7 @@ public:
  ACCESSORS__RGET(DHAX_Mouse_Interaction_Data ,mouse_interaction_data)
 
  ACCESSORS(QString ,current_file_path)
+ ACCESSORS(QVector<Local_Histogram_Data>* ,local_histogram_data)
 
  MultiStep_Annotation_Base* init_multistep_annotation(QWidget* parent,
    const QPointF posf, DHAX_Annotation_Instance::Compact_Shape_Kind_Summary shape_kind);

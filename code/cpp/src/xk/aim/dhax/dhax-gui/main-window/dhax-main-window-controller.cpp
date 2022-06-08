@@ -448,11 +448,10 @@ void DHAX_Main_Window_Controller::load_pdf()
  application_controller_->application_state()->flags.pdf_mode = true;
 }
 
-void DHAX_Main_Window_Controller::calculate_local_color_histograms()
-{
- qDebug() << "local histograms ...";
 
- //xcsd_image_->f
+void DHAX_Main_Window_Controller::save_local_color_histograms()
+{
+ qDebug() << "save local histograms ...";
 
  QFileInfo qfi(current_image_file_path_);
  QDir qdir(qfi.absoluteDir());
@@ -460,22 +459,42 @@ void DHAX_Main_Window_Controller::calculate_local_color_histograms()
  QString path = qdir.absoluteFilePath("hist") + "/%1-%2.png";
 
 
- QVector<Local_Histogram_Data>* histogram_data = xcsd_image_->calculate_local_histograms(); //path);
+}
 
- xcsd_image_->save_local_histogram_vector_to_folder(*histogram_data, path);
+void DHAX_Main_Window_Controller::calculate_local_color_histograms()
+{
+ qDebug() << "local histograms ...";
 
- u2 fti = (u2) xcsd_image_->tierbox_index_to_full_tier_index({0, 21});
+ //xcsd_image_->f
 
- const Local_Histogram_Data& lhd = histogram_data->at(fti);
 
+ QVector<Local_Histogram_Data>* data = xcsd_image_->calculate_local_histograms(); //path);
+ image_document_controller_->set_local_histogram_data(data);
+
+// xcsd_image_->save_local_histogram_vector_to_folder(*histogram_data, path);
+// u2 fti = (u2) xcsd_image_->tierbox_index_to_full_tier_index({0, 21});
+// const Local_Histogram_Data& lhd = histogram_data->at(fti);
+// XCSD_Local_Histogram_Dialog* dlg = new XCSD_Local_Histogram_Dialog(application_main_window_,
+//   {lhd.largest_group_total(), lhd.largest_bin()}, &lhd.combined_map());
+
+// dlg->setModal(false);
+// dlg->show();
+
+}
+
+
+
+void DHAX_Main_Window_Controller::show_local_color_histogram(rc2 rc)
+{
+
+ u2 fti = (u2) xcsd_image_->tierbox_index_to_full_tier_index(rc);
+ const Local_Histogram_Data& lhd =
+   image_document_controller_->local_histogram_data()->at(fti);
  XCSD_Local_Histogram_Dialog* dlg = new XCSD_Local_Histogram_Dialog(application_main_window_,
    {lhd.largest_group_total(), lhd.largest_bin()}, &lhd.combined_map());
 
-
  dlg->setModal(false);
  dlg->show();
-
-
 
 }
 

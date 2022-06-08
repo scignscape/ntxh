@@ -40,6 +40,7 @@ void DHAX_Menu_System::init_menus()
  menus_->set_parent(main_window_);
 
  menus_->init_menu("File");
+ menus_->init_menu("Histograms");
  menus_->init_menu("Help");
  menus_->init_menu("Tools");
 
@@ -61,10 +62,6 @@ void DHAX_Menu_System::init_menus()
   sg->emit_show_xcsd_scene_requested();
  };
 
- file_menu.add_action("Calculate Local Color Histograms") << [sg]
- {
-  sg->emit_calculate_local_color_histograms_requested();
- };
 
  file_menu.addSeparator();
  file_menu.add_action("Load Notes") << [sg]
@@ -111,6 +108,19 @@ void DHAX_Menu_System::init_menus()
  file_menu.add_action("Quit") << [sg]
  {
   sg->emit_quit_requested();
+ };
+
+
+ DHAX_Menu& hm = *menus_->menu("Histograms");
+
+ hm.add_action("Calculate Local Color Histograms") << [sg]
+ {
+  sg->emit_calculate_local_color_histograms_requested();
+ };
+
+ hm.add_action("Save Local Color Histograms (diagrams)") << [sg]
+ {
+  sg->emit_save_local_color_histograms_requested();
  };
 
 

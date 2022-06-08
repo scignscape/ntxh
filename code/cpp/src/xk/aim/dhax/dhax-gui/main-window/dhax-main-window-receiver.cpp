@@ -82,10 +82,20 @@ void DHAX_Main_Window_Receiver::handle_show_xcsd_scene()
  main_window_controller_->show_xcsd_scene();
 }
 
+void DHAX_Main_Window_Receiver::handle_show_local_histogram(rc2 rc)
+{
+ main_window_controller_->show_local_color_histogram(rc);
+}
+
 
 void DHAX_Main_Window_Receiver::handle_calculate_local_color_histograms()
 {
  main_window_controller_->calculate_local_color_histograms();
+}
+
+void DHAX_Main_Window_Receiver::handle_save_local_color_histograms()
+{
+ main_window_controller_->save_local_color_histograms();
 }
 
 

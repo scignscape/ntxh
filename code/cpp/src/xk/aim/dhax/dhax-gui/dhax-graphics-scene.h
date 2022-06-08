@@ -56,6 +56,8 @@ public:
 
 class DHAX_Graphics_Scene : public QGraphicsScene
 {
+ Q_OBJECT
+
  QGraphicsRectItem* hover_rect_;
 
 public:
@@ -72,11 +74,16 @@ public:
  void add_tierbox_pixmap(QString path, rc2 rc, u2 x_corner, u2 y_corner);
  void add_outer_pixmap(const XCSD_Outer_Ring_Info& xori, const QPoint& pos);
 
- void handle_tierbox_hover_enter(XCSD_Tierbox_Scene_Item* xtsi);
+ void handle_tierbox_context_menu_action(XCSD_Tierbox_Scene_Item* xtsi,
+   u1 code);
 
- void handle_tierbox_hover_leave(XCSD_Tierbox_Scene_Item* xtsi);
+// void handle_tierbox_hover_leave(XCSD_Tierbox_Scene_Item* xtsi);
 
  // void set_foreground_color(QColor c);
+
+Q_SIGNALS:
+
+ void show_tierbox_local_color_histogram_requested(rc2);
 
 };
 

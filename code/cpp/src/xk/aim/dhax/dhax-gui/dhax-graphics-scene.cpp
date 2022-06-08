@@ -175,24 +175,40 @@ void DHAX_Graphics_Scene::add_tierbox_pixmap(QString path, rc2 rc, u2 x_corner, 
 }
 
 
-void DHAX_Graphics_Scene::handle_tierbox_hover_leave(XCSD_Tierbox_Scene_Item* xtsi)
-{
- hover_rect_->setVisible(false);
-}
+//void DHAX_Graphics_Scene::handle_tierbox_hover_leave(XCSD_Tierbox_Scene_Item* xtsi)
+//{
+// hover_rect_->setVisible(false);
+//}
 
 
-void DHAX_Graphics_Scene::handle_tierbox_hover_enter(XCSD_Tierbox_Scene_Item* xtsi)
+void DHAX_Graphics_Scene::handle_tierbox_context_menu_action(XCSD_Tierbox_Scene_Item* xtsi,
+  u1 action_code)
 {
  rc2 rc = xtsi->row_column_pos();
 
- u2 x_corner = rc.c * 27;
- u2 y_corner = rc.r * 27;
+ //qobject_cast<DHAX_Graphics_Scene*>(this->v)
 
- hover_rect_->setVisible(true);
+ switch( (XCSD_Tierbox_Scene_Item::Action_Codes) action_code)
+ {
+ case XCSD_Tierbox_Scene_Item::Action_Codes::Show_Histogram:
+  {
+   rc2 rc = xtsi->row_column_pos();
+   Q_EMIT show_tierbox_local_color_histogram_requested(rc);
+  }
+  break;
 
- hover_rect_->setPos(x_corner, y_corner);
+ default:
+   break;
+ }
 
- qDebug() << "xy corner = " << x_corner << ", " << y_corner;
+// u2 x_corner = rc.c * 27;
+// u2 y_corner = rc.r * 27;
+
+// hover_rect_->setVisible(true);
+
+// hover_rect_->setPos(x_corner, y_corner);
+
+// qDebug() << "xy corner = " << x_corner << ", " << y_corner;
 }
 
 //void DHAX_Graphics_Scene::set_foreground_color(QColor c)

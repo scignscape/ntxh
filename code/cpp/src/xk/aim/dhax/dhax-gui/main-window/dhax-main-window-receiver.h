@@ -12,6 +12,8 @@
 
 #include "accessors.h"
 
+#include "xcsd-2d/xcsd-sdi-structures.h"
+
 class DHAX_Main_Window;
 class DHAX_Main_Window_Controller;
 class DHAX_Annotation_Instance;
@@ -35,7 +37,10 @@ public Q_SLOTS:
  void handle_take_screenshot();
  void handle_load_image();
  void handle_show_xcsd_scene();
+
  void handle_calculate_local_color_histograms();
+ void handle_save_local_color_histograms();
+
  void handle_load_pdf();
  void handle_complete_polygon();
  void handle_meshlab_import_info();
@@ -46,6 +51,8 @@ public Q_SLOTS:
  void handle_draw_quad_path();
 
  void handle_get_annotation_comments(DHAX_Annotation_Instance* dai);
+
+ void handle_show_local_histogram(rc2);
 
 };
 

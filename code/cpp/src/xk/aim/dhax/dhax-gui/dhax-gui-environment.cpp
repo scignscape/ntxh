@@ -230,6 +230,14 @@ void DHAX_GUI_Environment::init_main_window_controller()
  main_window_controller_->set_application_controller(application_controller_);
  main_window_receiver_->set_main_window_controller(main_window_controller_);
  application_controller_->set_main_window_controller(main_window_controller_);
+
+ // //  here?
+
+ QObject::connect(graphics_scene_,
+   &DHAX_Graphics_Scene::show_tierbox_local_color_histogram_requested,
+   main_window_receiver_,
+   &DHAX_Main_Window_Receiver::handle_show_local_histogram);
+
 }
 
 void DHAX_GUI_Environment::init_main_window_receiver()
@@ -260,6 +268,7 @@ void DHAX_GUI_Environment::init_main_window_signal_generator()
  minimal_self_connect(load_image);
  minimal_self_connect(show_xcsd_scene);
  minimal_self_connect(calculate_local_color_histograms);
+ minimal_self_connect(save_local_color_histograms);
  minimal_self_connect(load_pdf);
 
  #undef self_connect_receiver

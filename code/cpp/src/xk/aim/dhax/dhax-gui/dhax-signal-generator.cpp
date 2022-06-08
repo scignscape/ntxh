@@ -40,6 +40,10 @@ void DHAX_Signal_Generator::emit_calculate_local_color_histograms_requested()
  Q_EMIT calculate_local_color_histograms_requested();
 }
 
+void DHAX_Signal_Generator::emit_save_local_color_histograms_requested()
+{
+ Q_EMIT save_local_color_histograms_requested();
+}
 
 
 void DHAX_Signal_Generator::emit_load_pdf_requested()

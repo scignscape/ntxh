@@ -36,6 +36,7 @@ public:
 
  void emit_show_xcsd_scene_requested();
  void emit_calculate_local_color_histograms_requested();
+ void emit_save_local_color_histograms_requested();
 
  void emit_view_contours_requested();
  void emit_view_3d_requested();
@@ -64,7 +65,9 @@ Q_SIGNALS:
  void quit_requested();
 
  void show_xcsd_scene_requested();
+
  void calculate_local_color_histograms_requested();
+ void save_local_color_histograms_requested();
 
 #ifdef USE_IFC
  void ifc_convert_requested();

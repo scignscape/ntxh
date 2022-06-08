@@ -89,7 +89,10 @@ public:
  void init_pdf_page_view();
 
  void show_xcsd_scene();
+
  void calculate_local_color_histograms();
+ void save_local_color_histograms();
+ void show_local_color_histogram(rc2 rc);
 
  void show_annotation_comments(DHAX_Annotation_Instance* dai);
 
