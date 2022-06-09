@@ -1011,11 +1011,38 @@ QVector<Local_Histogram_Data>* XCSD_Image::calculate_local_histograms() //QStrin
  return result;
 }
 
+prr1 XCSD_Image::rgb_to_prr(u4 rgb)
+{
+ static const u1 mask = 255;
+
+ return {(u1) (rgb & mask),
+   (u1) ((rgb >> 8) & mask),
+   (u1) ((rgb >> 16) & mask)};
+
+}
+
+
+prr1 XCSD_Image::rgb555_to_prr(u2 rgb555)
+{
+// u1 red = (u1) (rgb555 & 0b00011111);
+// u1 green = (u1) ((rgb555 >> 5) & 0b00011111);
+// u1 blue = (u1) ((rgb555 >> 10) & 0b00011111);
+// return {red, green, blue};
+
+ static const u1 mask = 0b00011111;
+
+ return {(u1) (rgb555 & mask),
+   (u1) ((rgb555 >> 5) & mask),
+   (u1) ((rgb555 >> 10) & mask)};
+
+}
+
 QColor XCSD_Image::rgb555_to_qcolor(u2 rgb555)
 {
- u1 red = (u1) (rgb555 & 0b00011111);
- u1 green = (u1) ((rgb555 >> 5) & 0b00011111);
- u1 blue = (u1) ((rgb555 >> 10) & 0b00011111);
+ auto [red, green, blue] = rgb555_to_prr(rgb555);
+// u1 red = (u1) (rgb555 & 0b00011111);
+// u1 green = (u1) ((rgb555 >> 5) & 0b00011111);
+// u1 blue = (u1) ((rgb555 >> 10) & 0b00011111);
 
 // qDebug() << "red = " << red << ", green = " << green << ", blue = " << blue;
 
@@ -1141,6 +1168,46 @@ void XCSD_Image::save_local_histogram_vector_to_folder(const QVector<Local_Histo
 
  });
 }
+
+prr1 XCSD_Image::rgb555_color_distance(clrs2 colors)
+{
+ prr1 c1 = rgb555_to_prr(colors.color1);
+ prr1 c2 = rgb555_to_prr(colors.color1);
+ return c1.distance(c2);
+}
+
+prr1 XCSD_Image::rgb555_888_color_distance(u2 rgb555, u4 rgb)
+{
+ prr1 c1 = rgb555_to_prr(rgb555);
+ c1 <<= 3;
+ prr1 c2 = rgb_to_prr(rgb);
+
+ return c1.distance(c2);
+}
+
+
+void XCSD_Image::save_fb_gradient_trimap(fb2 poles, QString file_path)
+{
+ u1 avg = rgb555_color_distance(poles._to<clrs2>()).inner_average();
+
+ n8* pixel = data_.get_pixel_data_start();
+ u4 count = 0, sz = data_.get_pixel_data_length();
+
+ while(count++ < sz)
+ {
+  u4 rgb = (*pixel) & 0xFF'FF'FF;
+  prr1 dist1 = rgb555_888_color_distance(poles.fg, rgb);
+  prr1 dist2 = rgb555_888_color_distance(poles.bg, rgb);
+
+    //pixel & 255, (pixel >> 8) & 255, (pixel >> 16) & 255
+
+  ++pixel;
+ }
+
+ //data_.start();
+
+}
+
 
 void XCSD_Image::init_local_histogram_vector(QVector<Local_Histogram_Data>& result)
 {

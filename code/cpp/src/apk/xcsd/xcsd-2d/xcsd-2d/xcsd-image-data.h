@@ -42,7 +42,9 @@ public:
 
  void init_single_pixel(u4 index, n8 pixel_number);
 
- n8* get_pixel_data_start(u4 start_index);
+ n8* get_pixel_data_start(u4 start_index = 0);
+
+ u4 get_pixel_data_length();
 
  n8 get_single_pixel(u4 index);
 

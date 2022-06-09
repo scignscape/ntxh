@@ -177,6 +177,15 @@ public:
 
  static QVector<s2> rgb555_to_hsv(u2 rgb555);
  static QColor rgb555_to_qcolor(u2 rgb555);
+
+ static prr1 rgb555_color_distance(clrs2 colors);
+ static prr1 rgb555_to_prr(u2 rgb555);
+ static prr1 rgb_to_prr(u4 rgb);
+
+ static prr1 rgb555_888_color_distance(u2 rgb555, u4 rgb);
+
+ void save_fb_gradient_trimap(fb2 poles, QString file_path);
+
 };
 
 

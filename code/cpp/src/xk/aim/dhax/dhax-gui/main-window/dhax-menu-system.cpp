@@ -129,7 +129,7 @@ void DHAX_Menu_System::init_menus()
 
  tm.add_action("Save fg-gradient trimap") << [sg]
  {
-  sg->save_fg_gradient_trimap_requested();
+  sg->save_fb_gradient_trimap_requested();
  };
 
 

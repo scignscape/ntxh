@@ -438,6 +438,12 @@ Ty_DEF_MACRO(wh, 4, n8, width, height)
 Ty_DEF_MACRO(bb, 1, u2, byte, bit)
 Ty_DEF_MACRO(bb, 2, u4, byte, bit)
 Ty_DEF_MACRO(bb, 4, n8, byte, bit)
+Ty_DEF_MACRO(fb, 1, u2, fg, bg)
+Ty_DEF_MACRO(fb, 2, u4, fg, bg)
+Ty_DEF_MACRO(fb, 4, n8, fg, bg)
+Ty_DEF_MACRO(clrs, 1, u2, color1, color2)
+Ty_DEF_MACRO(clrs, 2, u4, color1, color2)
+Ty_DEF_MACRO(clrs, 4, n8, color1, color2)
 Ty_DEF_MACRO(mm, 1, u2, min, max)
 Ty_DEF_MACRO(mm, 2, u4, min, max)
 Ty_DEF_MACRO(mm, 4, n8, min, max)
@@ -487,6 +493,12 @@ Tys_DEF_MACRO(mm, 4, n8, min, max)
 Tys_DEF_MACRO(bb, 1, u2, byte, bit)
 Tys_DEF_MACRO(bb, 2, u4, byte, bit)
 Tys_DEF_MACRO(bb, 4, n8, byte, bit)
+Tys_DEF_MACRO(fb, 1, u2, fg, bg)
+Tys_DEF_MACRO(fb, 2, u4, fg, bg)
+Tys_DEF_MACRO(fb, 4, n8, fg, bg)
+Tys_DEF_MACRO(clrs, 1, u2, color1, color2)
+Tys_DEF_MACRO(clrs, 2, u4, color1, color2)
+Tys_DEF_MACRO(clrs, 4, n8, color1, color2)
 Tys_DEF_MACRO(args, 1, u2, arg1, arg2)
 Tys_DEF_MACRO(args, 2, u4, arg1, arg2)
 Tys_DEF_MACRO(args, 4, n8, arg1, arg2)
@@ -535,7 +547,11 @@ Tys_DEF_MACRO(tb, 4, n8, first, second)
    ty2##size drop_first() { return {field2, field3}; } \
    ty2##size drop_mid() { return {field1, field3}; } \
    ty2##size drop_last() { return {field1, field2}; } \
-   u##size inner_sum() { return field1 + field2 + field3; } \
+   ty##size distance(const ty##size& rhs) { return {field1 > rhs.field1? field1 - rhs.field1: \
+     rhs.field1 - field1, field2 > rhs.field1? field2 - rhs.field2: rhs.field2 - field2, \
+     field3 > rhs.field3? field3 - rhs.field3: rhs.field3 - field3 }; } \
+   asize inner_sum() { return field1 + field2 + field3; } \
+   u##size inner_average() { asize s = inner_sum(); return ((((s % 3) == 2)?(s+1):s) / 3); } \
    asize to_base(u1 arithmetic_base) { \
      return (asize) field1 * arithmetic_base * arithmetic_base + \
      (asize) field2 * arithmetic_base + (asize) field3; } \
@@ -543,6 +559,8 @@ Tys_DEF_MACRO(tb, 4, n8, first, second)
  { field1 += val; field2 += val; field3 += val; return *this; } \
    template<typename T> ty##size operator<<(T val) const \
    { return {field1 << val, field2 << val, field3 << val}; } \
+ template<typename T> ty##size& operator<<=(T val)  \
+ { field1 <<= val; field2 <<= val; field3 <<= val; return *this; } \
    template<typename T> ty##size operator>>(T val) const \
    { return {field1 >> val, field2 >> val, field3 >> val}; } \
    template<typename T> ty##size operator&(T val) const \

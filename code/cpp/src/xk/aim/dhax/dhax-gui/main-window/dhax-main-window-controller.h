@@ -94,7 +94,7 @@ public:
  void save_local_color_histograms();
  void show_local_color_histogram(rc2 rc);
 
- void save_fg_gradient_trimap();
+ void save_fb_gradient_trimap();
 
  void show_annotation_comments(DHAX_Annotation_Instance* dai);
 

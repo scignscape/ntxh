@@ -449,9 +449,17 @@ void DHAX_Main_Window_Controller::load_pdf()
 }
 
 
-void DHAX_Main_Window_Controller::save_fg_gradient_trimap()
+void DHAX_Main_Window_Controller::save_fb_gradient_trimap()
 {
- qDebug() << "save_fg_gradient_trimap";
+ //qDebug() << "save_fb_gradient_trimap";
+
+ QFileInfo qfi(current_image_file_path_);
+ QDir qdir(qfi.absoluteDir());
+ qdir.mkdir("trimap");
+ QString path = qdir.absoluteFilePath("trimap") + "/fg.png";
+
+ xcsd_image_->save_fb_gradient_trimap({image_document_controller_->marked_background_pole(),
+   image_document_controller_->marked_foreground_pole()}, path);
 }
 
 void DHAX_Main_Window_Controller::save_local_color_histograms()
