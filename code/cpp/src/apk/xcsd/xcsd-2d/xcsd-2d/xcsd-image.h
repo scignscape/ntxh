@@ -105,9 +105,18 @@ public:
 
  ACCESSORS(QVector<XCSD_Outer_Ring_Info>* ,outer_ring_info)
 
- QColor pixel_number_to_qcolor(n8 pixel);
+ enum Save_Mode {
+   Save_QRgb, Save_FB, Save_Palette
+ };
 
- QRgb pixel_number_to_qrgb(n8 pixel);
+ static QColor pixel_number_to_qcolor(n8 pixel);
+ static QColor pixel_number_fb_to_qcolor(n8 pixel);
+ QColor pixel_number_palette_to_qcolor(n8 pixel);
+
+ static QRgb pixel_number_to_qrgba(n8 pixel);
+ static QRgb pixel_number_to_qrgb(n8 pixel);
+ static QRgb pixel_number_fb_to_qrgb(n8 pixel);
+ QRgb pixel_number_palette_to_qrgb(n8 pixel);
 
  static n8 qrgb_to_pixel_number(QRgb rgb);
 
@@ -131,6 +140,7 @@ public:
    std::map<s1, std::pair<u2, std::vector<n8>>>& result);
 
  void tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb, QImage& target,
+   Save_Mode save_mode,
    XCSD_Image_Geometry::Iteration_Environment ienv,
    u4* data_index, n8** data_start,
    XCSD_Image_Geometry::MCH_Info* mchi,
@@ -150,7 +160,8 @@ public:
 
  void get_255_palatte(QVector<QColor>& vec);
 
- void save_full_tier_image(QString path, QString info_folder = {},
+ void save_full_tier_image(QString path, Save_Mode save_mode,
+    QString info_folder = {},
    std::function<void(QImage&, XCSD_Image_Geometry::Grid_TierBox&,
      XCSD_Image_Geometry::Iteration_Environment, u4, n8*,
      const XCSD_Image_Geometry::MCH_Info&, QString, u1)> cb = nullptr,
@@ -179,12 +190,14 @@ public:
  static QColor rgb555_to_qcolor(u2 rgb555);
 
  static prr1 rgb555_color_distance(clrs2 colors);
+ static prr1 rgb555_color_distance_expanded(clrs2 colors);
  static prr1 rgb555_to_prr(u2 rgb555);
  static prr1 rgb_to_prr(u4 rgb);
 
  static prr1 rgb555_888_color_distance(u2 rgb555, u4 rgb);
 
- void save_fb_gradient_trimap(fb2 poles, QString file_path);
+ void save_fb_gradient_trimap(fb2 poles, QString file_path,
+   QString folder);
 
 };
 

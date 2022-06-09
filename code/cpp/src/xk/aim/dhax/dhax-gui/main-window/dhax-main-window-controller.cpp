@@ -457,9 +457,14 @@ void DHAX_Main_Window_Controller::save_fb_gradient_trimap()
  QDir qdir(qfi.absoluteDir());
  qdir.mkdir("trimap");
  QString path = qdir.absoluteFilePath("trimap") + "/fg.png";
+ qdir.mkdir("trimap/test");
+ QString fpath = qdir.absoluteFilePath("trimap/test");
 
  xcsd_image_->save_fb_gradient_trimap({image_document_controller_->marked_background_pole(),
-   image_document_controller_->marked_foreground_pole()}, path);
+   image_document_controller_->marked_foreground_pole()}, path, fpath);
+
+
+
 }
 
 void DHAX_Main_Window_Controller::save_local_color_histograms()
@@ -565,7 +570,7 @@ void DHAX_Main_Window_Controller::show_xcsd_scene()
  xcsd_image_->init_outer_ring_info();
 
  xcsd_image_->save_full_tier_image(ROOT_FOLDER "/../test/ukraine/u1/t1.png",
-   ROOT_FOLDER "/../test/ukraine/u2");
+   XCSD_Image::Save_QRgb, ROOT_FOLDER "/../test/ukraine/u2");
 
 
 

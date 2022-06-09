@@ -11,6 +11,9 @@
 
 #include <QPainter>
 
+#include <cmath>
+
+
 #include "textio.h"
 
 #include "mat2d.templates.special-modes.h"
@@ -764,7 +767,9 @@ void XCSD_Image::image_tierbox_to_sdi_pixel_map(const QImage& ci, std::map<s1, s
 }
 
 
-void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
+void XCSD_Image::save_full_tier_image(QString path,
+  Save_Mode save_mode,
+  QString info_folder,
   std::function<void(QImage&, XCSD_Image_Geometry::Grid_TierBox&,
     XCSD_Image_Geometry::Iteration_Environment, u4, n8*, // data_index,
     const XCSD_Image_Geometry::MCH_Info&, QString, u1)> cb,
@@ -790,8 +795,8 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
 
 //#ifdef HIDE
  geometry_.for_each_outer_ring_area(
-    [this, &path, ocb, &ienv, &painter,
-     outer_ring_offset, &info_folder](u1 index, XCSD_Image_Geometry::Outer_Ring_Area_Flags area_flags)
+    [this, ocb, save_mode, &painter,
+     outer_ring_offset](u1 index, XCSD_Image_Geometry::Outer_Ring_Area_Flags area_flags)
  {
   u4 mark_offset = geometry_.outer_ring_positions().offset_for_area_index(index);
     //(XCSD_Image_Geometry::Outer_Ring_Positions::Landscape) index);
@@ -820,7 +825,18 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
      for(u2 x = 0; x < rect_wh.width; ++x)
      {
       n8 pixel_number = data_.get_single_pixel(outer_ring_offset + mark_offset + local_offset);
-      QRgb rgb = pixel_number_to_qrgb(pixel_number);
+
+      QRgb rgb;
+
+      if(save_mode == Save_QRgb)
+        rgb = pixel_number_to_qrgb(pixel_number);
+      else if(save_mode == Save_FB)
+        rgb = pixel_number_fb_to_qrgb(pixel_number);
+      else if(save_mode == Save_Palette)
+        rgb = pixel_number_palette_to_qrgb(pixel_number);
+      else
+        rgb = pixel_number_to_qrgb(pixel_number);
+
       scanline[x] = rgb;
 
       ++local_offset;
@@ -909,7 +925,7 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
 
 
  geometry_.for_each_full_tierbox(
-    [this, &path, cb, &ienv, &painter, &info_folder](XCSD_Image_Geometry::Grid_TierBox& gtb)
+    [this, save_mode, &path, cb, &ienv, &painter, &info_folder](XCSD_Image_Geometry::Grid_TierBox& gtb)
  {
   QImage ti(tierbox_width, tierbox_width, QImage::Format_ARGB32);
 
@@ -920,7 +936,7 @@ void XCSD_Image::save_full_tier_image(QString path, QString info_folder,
 
   n8* data_start;
 
-  tierbox_to_qimage(gtb, ti, ienv, &data_index, &data_start, &mchi, info_folder);
+  tierbox_to_qimage(gtb, ti, save_mode, ienv, &data_index, &data_start, &mchi, info_folder);
 
   if(!info_folder.isEmpty())
   {
@@ -1172,8 +1188,15 @@ void XCSD_Image::save_local_histogram_vector_to_folder(const QVector<Local_Histo
 prr1 XCSD_Image::rgb555_color_distance(clrs2 colors)
 {
  prr1 c1 = rgb555_to_prr(colors.color1);
- prr1 c2 = rgb555_to_prr(colors.color1);
+ prr1 c2 = rgb555_to_prr(colors.color2);
  return c1.distance(c2);
+}
+
+prr1 XCSD_Image::rgb555_color_distance_expanded(clrs2 colors)
+{
+ prr1 result = rgb555_color_distance(colors);
+ result <<= 3;
+ return result;
 }
 
 prr1 XCSD_Image::rgb555_888_color_distance(u2 rgb555, u4 rgb)
@@ -1186,23 +1209,59 @@ prr1 XCSD_Image::rgb555_888_color_distance(u2 rgb555, u4 rgb)
 }
 
 
-void XCSD_Image::save_fb_gradient_trimap(fb2 poles, QString file_path)
+void XCSD_Image::save_fb_gradient_trimap(fb2 poles, QString file_path, QString folder)
 {
- u1 avg = rgb555_color_distance(poles._to<clrs2>()).inner_average();
+ n8 sq = rgb555_color_distance_expanded(poles._to<clrs2>()).inner_sum_of_squares();
+ r8 distance = sqrt(sq);
 
  n8* pixel = data_.get_pixel_data_start();
  u4 count = 0, sz = data_.get_pixel_data_length();
 
+ u2 tierc = 0;
+ u2 tier = 0;
+
  while(count++ < sz)
  {
+  ++tierc;
+  if(tierc == 729)
+  {
+   ++tier;
+   tierc = 0;
+  }
+
   u4 rgb = (*pixel) & 0xFF'FF'FF;
   prr1 dist1 = rgb555_888_color_distance(poles.fg, rgb);
   prr1 dist2 = rgb555_888_color_distance(poles.bg, rgb);
+
+  r8 d1 = sqrt(dist1.inner_sum_of_squares());
+  r8 d2 = sqrt(dist2.inner_sum_of_squares());
+  r8 dd = d1 + d2;
+  r8 dd1 = (d1/dd) * distance;
+  r8 dd2 = (d2/dd) * distance;
+
+//  u1 fg = (r8) 255 * (1 - dd1);
+//  u1 bg = (r8) 255 * (1 - dd2);
+
+  u1 fg = (tier % 2)? 50 : 200;
+  u1 bg = 0;
+
+  n8 p = (*pixel);
+
+  //*pixel = 0;
+
+  *pixel = fg;
+
+//  (*pixel) |= (((n8) fg) << 40);
+//  (*pixel) |= (((n8) bg) << 48);
 
     //pixel & 255, (pixel >> 8) & 255, (pixel >> 16) & 255
 
   ++pixel;
  }
+
+ //QImage image;
+ save_full_tier_image(file_path, Save_FB, folder);
+ save_full_tier_image(file_path + ".test.png", Save_QRgb);
 
  //data_.start();
 
@@ -1530,7 +1589,8 @@ u4 XCSD_Image::data_tierbox_to_sdi_pixel_map(u4 tierbox_index,
 
 
 void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
-  QImage& target, XCSD_Image_Geometry::Iteration_Environment ienv,
+  QImage& target, Save_Mode save_mode,
+  XCSD_Image_Geometry::Iteration_Environment ienv,
   u4* data_index, n8** data_start, //pr2s* mch,
   XCSD_Image_Geometry::MCH_Info* mchi,  QString info_folder)
 {
@@ -1601,11 +1661,28 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
 
     n8 pixel = thr_vec.second[vi];
     // qDebug() << "pixel = " << (pixel & 0x00FFFFFF);
-    *img_pixels = qRgba(
-       (u1)(pixel & 255), (u1)((pixel >> 8) & 255),
-       (u1)((pixel >> 16) & 255),
-       (u1)(255 - ((pixel >> 24) & 255))
-       );
+
+    if(save_mode == Save_QRgb)
+      *img_pixels = pixel_number_to_qrgba(pixel);
+
+//      qRgba(
+//         (u1)(pixel & 255), (u1)((pixel >> 8) & 255),
+//         (u1)((pixel >> 16) & 255),
+//         (u1)(255 - ((pixel >> 24) & 255))
+//      );
+
+    else if(save_mode == Save_FB)
+     *img_pixels = pixel_number_fb_to_qrgb(pixel);
+
+//        qRgba(
+//        (u1)((pixel >> 40) & 255), 0,
+//        (u1)((pixel >> 48) & 255),
+//        255)
+
+    else if(save_mode == Save_Palette)
+      ;//?
+
+
     ++img_pixels;
 
     if(!info_string.isEmpty())
@@ -1638,10 +1715,42 @@ QColor XCSD_Image::pixel_number_to_qcolor(n8 pixel)
    255 - ((pixel >> 24) & 255));
 }
 
+QColor XCSD_Image::pixel_number_fb_to_qcolor(n8 pixel)
+{
+ return QColor((pixel >> 40) & 255, 0,
+   ((pixel >> 48) & 255));
+
+// return QColor((pixel >> 40) & 255, (pixel >> 40) & 255,
+//   (pixel >> 40) & 255);
+
+}
+
+QColor XCSD_Image::pixel_number_palette_to_qcolor(n8 pixel)
+{
+ // //?
+ return QColor();
+}
+
 QRgb XCSD_Image::pixel_number_to_qrgb(n8 pixel)
 {
  return pixel_number_to_qcolor(pixel).rgb();
 }
+
+QRgb XCSD_Image::pixel_number_to_qrgba(n8 pixel)
+{
+ return pixel_number_to_qcolor(pixel).rgba();
+}
+
+
+QRgb XCSD_Image::pixel_number_fb_to_qrgb(n8 pixel)
+{
+ return pixel_number_fb_to_qcolor(pixel).rgb();
+}
+
+ QRgb XCSD_Image::pixel_number_palette_to_qrgb(n8 pixel)
+ {
+  return pixel_number_palette_to_qcolor(pixel).rgb();
+ }
 
 
 SDI_Position XCSD_Image::get_sdi_at_ground_position(u2 x, u2 y)

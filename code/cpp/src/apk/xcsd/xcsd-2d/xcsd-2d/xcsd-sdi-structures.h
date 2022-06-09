@@ -551,6 +551,7 @@ Tys_DEF_MACRO(tb, 4, n8, first, second)
      rhs.field1 - field1, field2 > rhs.field1? field2 - rhs.field2: rhs.field2 - field2, \
      field3 > rhs.field3? field3 - rhs.field3: rhs.field3 - field3 }; } \
    asize inner_sum() { return field1 + field2 + field3; } \
+   n8 inner_sum_of_squares() { return field1*field1 + field2*field2 + field3*field3; } \
    u##size inner_average() { asize s = inner_sum(); return ((((s % 3) == 2)?(s+1):s) / 3); } \
    asize to_base(u1 arithmetic_base) { \
      return (asize) field1 * arithmetic_base * arithmetic_base + \
