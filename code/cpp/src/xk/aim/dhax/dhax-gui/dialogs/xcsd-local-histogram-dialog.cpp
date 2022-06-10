@@ -186,24 +186,24 @@ void XCSD_Local_Histogram_Dialog::context_menu(Rect_Item* ri, QGraphicsSceneCont
 
  QMenu* menu = new QMenu(this);//
 
- menu->addAction("Mark as global foreground pole", [this, ri]
- {
-  mark_global_foreground_pole_requested(ri->color_code);
- });
-
  menu->addAction("Mark as global background pole", [this, ri]
  {
   mark_global_background_pole_requested(ri->color_code);
  });
 
- menu->addAction("Mark as local foreground pole", [this, ri]
+ menu->addAction("Mark as global foreground pole", [this, ri]
  {
-  mark_local_foreground_pole_requested(ri->color_code);
+  mark_global_foreground_pole_requested(ri->color_code);
  });
 
  menu->addAction("Mark as local background pole", [this, ri]
  {
   mark_local_background_pole_requested(ri->color_code);
+ });
+
+ menu->addAction("Mark as local foreground pole", [this, ri]
+ {
+  mark_local_foreground_pole_requested(ri->color_code);
  });
 
  QPoint p = graphics_view_->mapFromScene(event->pos().toPoint());

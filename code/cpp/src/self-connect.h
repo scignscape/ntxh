@@ -96,7 +96,7 @@ struct _self_connect_package
   std::placeholders::_9
 
 #define _bind_1_(x, y) \
-  std::bind(&std::remove_reference<decltype(*x)>::type::y, x, std_placeholders_1)
+  std::bind(&std::remove_reference<decltype(*x)>::type::y, x, _std_placeholders_1)
 
 #define _bind_2_(x, y) \
   std::bind(&std::remove_reference<decltype(*x)>::type::y, x, \

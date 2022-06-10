@@ -21,6 +21,8 @@
 
 #include "xcsd-2d/xcsd-image.h"
 
+#include "self-connect.h"
+
 
 class XCSD_Tierbox_Scene_Item;
 
@@ -63,6 +65,9 @@ class DHAX_Graphics_Scene : public QGraphicsScene
 public:
 
  DHAX_Graphics_Scene();
+
+ USE_SELF_CONNECT(normal)
+ USE_SELF_CONNECT(lambda)
 
  _Proxy_Widget* add_proxy_widget(QWidget* w)
  {

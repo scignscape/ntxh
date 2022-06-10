@@ -456,7 +456,7 @@ void DHAX_Main_Window_Controller::save_fb_gradient_trimap()
  QFileInfo qfi(current_image_file_path_);
  QDir qdir(qfi.absoluteDir());
  qdir.mkdir("trimap");
- QString path = qdir.absoluteFilePath("trimap") + "/fg.png";
+ QString path = qdir.absoluteFilePath("trimap") + "/fg-%1.png";
  qdir.mkdir("trimap/test");
  QString fpath = qdir.absoluteFilePath("trimap/test");
 
@@ -504,6 +504,27 @@ void DHAX_Main_Window_Controller::calculate_local_color_histograms()
 
 void DHAX_Main_Window_Controller::show_local_color_histogram(rc2 rc)
 {
+ if(!xcsd_image_)
+ {
+  QMessageBox::information(application_main_window_, "XCSD Scene Needed",
+    "Please load an image as an XCSD scene first");
+  return;
+ }
+
+ if(!image_document_controller_->local_histogram_data())
+ {
+  if( QMessageBox::question(application_main_window_, "Missing histogram data",
+    "Histogram data needs to be calculated first.  Proceed with the calculation?") == QMessageBox::Yes)
+  {
+   calculate_local_color_histograms();
+  }
+  else
+    return;
+
+
+  //xcsd_image_
+
+ }
 
  u2 fti = (u2) xcsd_image_->tierbox_index_to_full_tier_index(rc);
  const Local_Histogram_Data& lhd =

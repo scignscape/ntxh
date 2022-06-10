@@ -71,7 +71,7 @@ void XCSD_Image::init_pixel_data(QString info_folder)
   {
    info_path = QString("%1/%2-%3-%4.txt").arg(info_folder).arg(gtb.loc.r())
      .arg(gtb.loc.c()).arg(threshold);
-   info_string = QString("Full tierbox %1 %2\n\n").arg(gtb.loc.r()).arg(gtb.loc.c());
+   info_string = QString("Full tierbox %1 %2 (%3)\n\n").arg(gtb.loc.r()).arg(gtb.loc.c()).arg(index);
   }
 
   u2 threshold_offset = 0;
@@ -830,8 +830,8 @@ void XCSD_Image::save_full_tier_image(QString path,
 
       if(save_mode == Save_QRgb)
         rgb = pixel_number_to_qrgb(pixel_number);
-      else if(save_mode == Save_FB)
-        rgb = pixel_number_fb_to_qrgb(pixel_number);
+      else if(save_mode >= Save_FB)
+        rgb = pixel_number_fb_to_qrgb(pixel_number, save_mode);
       else if(save_mode == Save_Palette)
         rgb = pixel_number_palette_to_qrgb(pixel_number);
       else
@@ -1211,24 +1211,18 @@ prr1 XCSD_Image::rgb555_888_color_distance(u2 rgb555, u4 rgb)
 
 void XCSD_Image::save_fb_gradient_trimap(fb2 poles, QString file_path, QString folder)
 {
- n8 sq = rgb555_color_distance_expanded(poles._to<clrs2>()).inner_sum_of_squares();
- r8 distance = sqrt(sq);
+
+// n8 sq = rgb555_color_distance_expanded(poles._to<clrs2>()).inner_sum_of_squares();
+// r8 distance = sqrt(sq);
 
  n8* pixel = data_.get_pixel_data_start();
  u4 count = 0, sz = data_.get_pixel_data_length();
 
- u2 tierc = 0;
- u2 tier = 0;
+// u2 tierc = 0;
+// u2 tier = 0;
 
  while(count++ < sz)
  {
-  ++tierc;
-  if(tierc == 729)
-  {
-   ++tier;
-   tierc = 0;
-  }
-
   u4 rgb = (*pixel) & 0xFF'FF'FF;
   prr1 dist1 = rgb555_888_color_distance(poles.fg, rgb);
   prr1 dist2 = rgb555_888_color_distance(poles.bg, rgb);
@@ -1236,32 +1230,46 @@ void XCSD_Image::save_fb_gradient_trimap(fb2 poles, QString file_path, QString f
   r8 d1 = sqrt(dist1.inner_sum_of_squares());
   r8 d2 = sqrt(dist2.inner_sum_of_squares());
   r8 dd = d1 + d2;
-  r8 dd1 = (d1/dd) * distance;
-  r8 dd2 = (d2/dd) * distance;
+  r8 dd1 = (d1/dd);// * distance;
+  r8 dd2 = (d2/dd);// * distance;
 
-//  u1 fg = (r8) 255 * (1 - dd1);
-//  u1 bg = (r8) 255 * (1 - dd2);
+  u1 fg = (r8) 255 * (1 - dd1);
+  u1 bg = (r8) 255 * (1 - dd2);
 
-  u1 fg = (tier % 2)? 50 : 200;
-  u1 bg = 0;
+//  u1 fg = (tier % 4) * 50 + 62;
+
+
+//  u1 bg = 0;
 
   n8 p = (*pixel);
 
-  //*pixel = 0;
+//  *pixel = 0;
 
-  *pixel = fg;
+//  *pixel = fg;
 
-//  (*pixel) |= (((n8) fg) << 40);
-//  (*pixel) |= (((n8) bg) << 48);
+  (*pixel) |= (((n8) fg) << 48);
+  (*pixel) |= (((n8) bg) << 56);
 
     //pixel & 255, (pixel >> 8) & 255, (pixel >> 16) & 255
 
   ++pixel;
+
+//  if(tierc == 728)
+//  {
+//   ++tier;
+//   tierc = 0;
+//  }
+//  else
+//   ++tierc;
+
  }
 
  //QImage image;
- save_full_tier_image(file_path, Save_FB, folder);
- save_full_tier_image(file_path + ".test.png", Save_QRgb);
+ save_full_tier_image(file_path.arg("fb"), Save_FB, folder);
+ save_full_tier_image(file_path.arg("fg"), Save_FG); //, folder);
+ save_full_tier_image(file_path.arg("bg"), Save_BG); //, folder);
+
+ save_full_tier_image(file_path.arg("original"), Save_QRgb);
 
  //data_.start();
 
@@ -1623,7 +1631,7 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
  if(!info_folder.isEmpty())
  {
   info_path = QString("%1/%2-%3-%4.txt").arg(info_folder).arg(gtb.loc.r()).arg(gtb.loc.c()).arg(di);
-  info_string = QString("Full tierbox %2 %3\n\n\n").arg(gtb.loc.r()).arg(gtb.loc.c());
+  info_string = QString("Full tierbox %1 %2 (%3)\n\n\n").arg(gtb.loc.r()).arg(gtb.loc.c()).arg(index);
  }
 
  for(auto const& [ab_s1, thr_vec]: sdi)
@@ -1671,8 +1679,8 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
 //         (u1)(255 - ((pixel >> 24) & 255))
 //      );
 
-    else if(save_mode == Save_FB)
-     *img_pixels = pixel_number_fb_to_qrgb(pixel);
+    else if(save_mode >= Save_FB)
+     *img_pixels = pixel_number_fb_to_qrgb(pixel, save_mode);
 
 //        qRgba(
 //        (u1)((pixel >> 40) & 255), 0,
@@ -1715,10 +1723,21 @@ QColor XCSD_Image::pixel_number_to_qcolor(n8 pixel)
    255 - ((pixel >> 24) & 255));
 }
 
-QColor XCSD_Image::pixel_number_fb_to_qcolor(n8 pixel)
+QColor XCSD_Image::pixel_number_fb_to_qcolor(n8 pixel, Save_Mode save_mode)
 {
- return QColor((pixel >> 40) & 255, 0,
-   ((pixel >> 48) & 255));
+ switch (save_mode)
+ {
+ case Save_FB:
+  return QColor((pixel >> 48) & 255, 0,
+    ((pixel >> 56) & 255));
+ case Save_BG:
+  return QColor(0, 0,
+    ((pixel >> 56) & 255));
+ case Save_FG:
+  return QColor((pixel >> 48) & 255, 0, 0);
+
+ default: return QColor();
+ }
 
 // return QColor((pixel >> 40) & 255, (pixel >> 40) & 255,
 //   (pixel >> 40) & 255);
@@ -1742,9 +1761,9 @@ QRgb XCSD_Image::pixel_number_to_qrgba(n8 pixel)
 }
 
 
-QRgb XCSD_Image::pixel_number_fb_to_qrgb(n8 pixel)
+QRgb XCSD_Image::pixel_number_fb_to_qrgb(n8 pixel, Save_Mode save_mode)
 {
- return pixel_number_fb_to_qcolor(pixel).rgb();
+ return pixel_number_fb_to_qcolor(pixel, save_mode).rgb();
 }
 
  QRgb XCSD_Image::pixel_number_palette_to_qrgb(n8 pixel)
@@ -1884,7 +1903,7 @@ void XCSD_Image::draw_tierboxes_to_folder(QString path,
   if(tbox_offset != di)
     qDebug() << " ! " << tbox_offset << " " << di;
 
-  QString info_string = QString("Full tierbox %1 %2\n\n").arg(rc.r).arg(rc.c);
+  QString info_string = QString("Full tierbox %1 %2 (%3)\n\n").arg(rc.r).arg(rc.c).arg(index);
 
 
   QImage image(27, 27, QImage::Format_ARGB32);

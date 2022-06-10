@@ -106,16 +106,16 @@ public:
  ACCESSORS(QVector<XCSD_Outer_Ring_Info>* ,outer_ring_info)
 
  enum Save_Mode {
-   Save_QRgb, Save_FB, Save_Palette
+   Save_QRgb, Save_Palette, Save_FB, Save_FG, Save_BG,
  };
 
  static QColor pixel_number_to_qcolor(n8 pixel);
- static QColor pixel_number_fb_to_qcolor(n8 pixel);
+ static QColor pixel_number_fb_to_qcolor(n8 pixel, Save_Mode save_mode);
  QColor pixel_number_palette_to_qcolor(n8 pixel);
 
  static QRgb pixel_number_to_qrgba(n8 pixel);
  static QRgb pixel_number_to_qrgb(n8 pixel);
- static QRgb pixel_number_fb_to_qrgb(n8 pixel);
+ static QRgb pixel_number_fb_to_qrgb(n8 pixel, Save_Mode save_mode);
  QRgb pixel_number_palette_to_qrgb(n8 pixel);
 
  static n8 qrgb_to_pixel_number(QRgb rgb);

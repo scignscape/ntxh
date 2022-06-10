@@ -233,10 +233,14 @@ void DHAX_GUI_Environment::init_main_window_controller()
 
  // //  here?
 
- QObject::connect(graphics_scene_,
-   &DHAX_Graphics_Scene::show_tierbox_local_color_histogram_requested,
-   main_window_receiver_,
-   &DHAX_Main_Window_Receiver::handle_show_local_histogram);
+ _self_connect_(graphics_scene_ ,DHAX_Graphics_Scene::show_tierbox_local_color_histogram_requested)
+   _to_bind_1_(main_window_receiver_ ,handle_show_local_histogram);
+
+
+// QObject::connect(graphics_scene_,
+//   &DHAX_Graphics_Scene::show_tierbox_local_color_histogram_requested,
+//   main_window_receiver_,
+//   &DHAX_Main_Window_Receiver::handle_show_local_histogram);
 
 }
 
