@@ -42,6 +42,7 @@ void DHAX_Menu_System::init_menus()
  menus_->init_menu("File");
  menus_->init_menu("Histograms");
  menus_->init_menu("Trimap");
+ menus_->init_menu("Matrix");
  menus_->init_menu("Help");
  menus_->init_menu("Tools");
 
@@ -127,11 +128,17 @@ void DHAX_Menu_System::init_menus()
 
  DHAX_Menu& tm = *menus_->menu("Trimap");
 
- tm.add_action("Save fg-gradient trimap") << [sg]
+ tm.add_action("Save fb-gradient trimap") << [sg]
  {
-  sg->save_fb_gradient_trimap_requested();
+  sg->emit_save_fb_gradient_trimap_requested();
  };
 
+ DHAX_Menu& mm = *menus_->menu("Matrix");
+
+ mm.add_action("Calculate fb-Gaussian Matrix Space") << [sg]
+ {
+  sg->emit_calculate_fb_gaussian_requested();
+ };
 
  DHAX_Menu& tools = *menus_->menu("Tools");
 

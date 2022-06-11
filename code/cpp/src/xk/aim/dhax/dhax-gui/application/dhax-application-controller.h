@@ -124,6 +124,8 @@ public:
  void send_meshlab_reset();
  void view_contours();
 
+ void calculate_fb_gaussian();
+
  QString get_current_image_folder();
  QString get_current_image_complete_base_name();
  QDir get_current_image_dir();

@@ -10,6 +10,7 @@
 #include "subwindows/xcsd-tierbox-scene-item.h"
 #include "subwindows/xcsd-outer-ring-scene-item.h"
 
+#include "dhax-graphics-frame.h"
 
 
 DHAX_Graphics_Scene::DHAX_Graphics_Scene()
@@ -122,10 +123,10 @@ void DHAX_Graphics_Scene::add_outer_pixmap(const XCSD_Outer_Ring_Info &xori,
  qgpi->setBrush(qbr);
  QPen qpen;
 //  qpen.setStyle(Qt::PenStyle::DashDotDotLine);
- QColor clr1(0, 20, 15, 200);
- qpen.setColor(clr1);
- qpen.setWidthF(1.5);
- qgpi->setPen(qpen);
+// QColor clr1(0, 20, 15, 200);
+// qpen.setColor(clr1);
+// qpen.setWidthF(1.5);
+ qgpi->setPen(Qt::NoPen);
  addItem(qgpi);
  qgpi->setZValue(1);
 
@@ -175,10 +176,11 @@ void DHAX_Graphics_Scene::add_tierbox_pixmap(QString path, rc2 rc, u2 x_corner, 
 }
 
 
-//void DHAX_Graphics_Scene::handle_tierbox_hover_leave(XCSD_Tierbox_Scene_Item* xtsi)
-//{
-// hover_rect_->setVisible(false);
-//}
+void DHAX_Graphics_Scene::handle_tierbox_hover_enter(XCSD_Tierbox_Scene_Item* xtsi)
+{
+ containing_graphics_frame_->show_info(QString("TierBox %1, %2")
+   .arg(xtsi->row_column_pos().r).arg(xtsi->row_column_pos().c));
+}
 
 
 void DHAX_Graphics_Scene::handle_tierbox_context_menu_action(XCSD_Tierbox_Scene_Item* xtsi,

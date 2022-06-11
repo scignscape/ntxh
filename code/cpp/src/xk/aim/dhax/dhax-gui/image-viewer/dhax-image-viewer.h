@@ -30,6 +30,8 @@ class DHAX_Application_State;
 class PDF_Document_Controller;
 class Image_Document_Controller;
 
+class DHAX_Graphics_Frame;
+
 
 
 class DHAX_Image_Viewer : public QWidget
@@ -96,6 +98,8 @@ public:
  //?ACCESSORS(MACRO_PASTE(const QMap<QString, QColor>*) ,application_colors)
 
  QSize get_scrolled_image_pixmap_size();
+
+ DHAX_Graphics_Frame* get_graphics_frame();
 
  void reset_background_center_rectangle_color();
  void reset_background_rectangle_color();

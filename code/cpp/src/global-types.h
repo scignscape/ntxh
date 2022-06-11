@@ -39,12 +39,24 @@ inline char* q_to_std_(QString qs)
 
 #define Q_TO_STD(qs) const_cast<char*>( qs.toStdString().c_str() )
 
+#define call_Stamp(ty) ty
 
+//#define call_Stamp_u2 u2
+
+
+#define NULL_CALL_STAMP 0
 
 typedef quint8 u1;
 typedef quint16 u2;
 typedef quint32 u4;
 typedef quint64 n8;
+
+struct call_Stamp_u2
+{
+ u2 value;
+ call_Stamp_u2(u2 v) : value(v){}
+ operator u2() { return value; }
+};
 
 typedef qint8 s1;
 typedef qint16 s2;

@@ -150,6 +150,14 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
   });
  }
 
+ info_label_ = new QLabel("No image", this);
+
+ info_label_->setStyleSheet("QLabel{background-color:rgb(234,247,255);"
+   "padding: 0px 0px 0px 40px;border-top: 2px ridge orange;"
+                            "font-size:7pt;color:rgb(80,60,70);}");
+
+ main_layout_->addWidget(info_label_);
+
  main_layout_->setContentsMargins(0,0,0,0);
  main_layout_->setMargin(0);
  main_layout_->setSpacing(0);
@@ -163,6 +171,8 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
 
 // connect(shape_select_frame_, &Shape_Select_Frame::save_requested,
 //   this, &DHAX_Graphics_Frame::save_requested);
+
+
 
 
  _self_connect_(zoom_frame_ ,zoom_factor_changed)
@@ -397,6 +407,13 @@ void DHAX_Graphics_Frame::init_layout(QBoxLayout::Direction qbd,
     setup_skew_rhombus_shape();
 
  };
+}
+
+//info_label_
+
+void DHAX_Graphics_Frame::show_info(QString text)
+{
+ info_label_->setText(text);
 }
 
 QSize DHAX_Graphics_Frame::get_scrolled_image_pixmap_size()

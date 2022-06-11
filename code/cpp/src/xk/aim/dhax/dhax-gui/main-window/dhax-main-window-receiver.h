@@ -34,23 +34,23 @@ public:
 
 public Q_SLOTS:
 
- void handle_take_screenshot();
- void handle_load_image();
- void handle_show_xcsd_scene();
+ void handle_take_screenshot(call_Stamp_u2, QString);
+ void handle_load_image(call_Stamp_u2);
+ void handle_show_xcsd_scene(call_Stamp_u2);
 
- void handle_calculate_local_color_histograms();
- void handle_save_local_color_histograms();
+ void handle_calculate_local_color_histograms(call_Stamp_u2);
+ void handle_save_local_color_histograms(call_Stamp_u2);
 
- void handle_save_fb_gradient_trimap();
+ void handle_save_fb_gradient_trimap(call_Stamp_u2);
 
- void handle_load_pdf();
- void handle_complete_polygon();
- void handle_meshlab_import_info();
- void handle_freecad_import_info();
+ void handle_load_pdf(call_Stamp_u2);
+ void handle_complete_polygon(call_Stamp_u2);
+ void handle_meshlab_import_info(call_Stamp_u2);
+ void handle_freecad_import_info(call_Stamp_u2);
 
- void handle_draw_bezier();
- void handle_draw_cubic_path();
- void handle_draw_quad_path();
+ void handle_draw_bezier(call_Stamp_u2);
+ void handle_draw_cubic_path(call_Stamp_u2);
+ void handle_draw_quad_path(call_Stamp_u2);
 
  void handle_get_annotation_comments(DHAX_Annotation_Instance* dai);
 

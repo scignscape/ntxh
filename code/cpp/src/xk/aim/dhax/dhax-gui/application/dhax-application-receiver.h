@@ -12,6 +12,8 @@
 
 #include "accessors.h"
 
+#include "global-types.h"
+
 class DHAX_Main_Window;
 class DHAX_Application_Controller;
 class DHAX_External_Application_Controller;
@@ -37,24 +39,25 @@ public Q_SLOTS:
  void handle_save_notation(bool with_comment);
  void handle_polyline_save_notation(bool with_comment);
  //void handle_polyline_save_notation_with_comment();
- void handle_freecad_reset();
- void handle_load_notes();
- void handle_meshlab_reset();
- void handle_convert_notation();
- void handle_polygon_complete_and_save_notation();
- void handle_polygon_complete_and_save_notation_with_comment();
+ void handle_freecad_reset(call_Stamp_u2);
+ void handle_load_notes(call_Stamp_u2);
+ void handle_meshlab_reset(call_Stamp_u2);
+ void handle_convert_notation(call_Stamp_u2);
+ void handle_polygon_complete_and_save_notation(call_Stamp_u2);
+ void handle_polygon_complete_and_save_notation_with_comment(call_Stamp_u2);
+ void handle_calculate_fb_gaussian(call_Stamp_u2);
 
- void handle_edit_image();
+ void handle_edit_image(call_Stamp_u2);
 
- void handle_view_contours();
- void handle_view_3d();
- void handle_view_360();
- void handle_view_cad();
+ void handle_view_contours(call_Stamp_u2);
+ void handle_view_3d(call_Stamp_u2);
+ void handle_view_360(call_Stamp_u2);
+ void handle_view_cad(call_Stamp_u2);
 
- void handle_run_forge_workflow();
+ void handle_run_forge_workflow(call_Stamp_u2);
 
 #ifdef USE_IFC
- void handle_ifc_convert();
+ void handle_ifc_convert(call_Stamp_u2);
 #endif
 
 // void handle_take_screenshot();

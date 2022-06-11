@@ -268,23 +268,25 @@ void DHAX_GUI_Environment::init_main_window_signal_generator()
  #define self_connect_sender  main_window_->signal_generator()
  #define self_connect_receiver  main_window_receiver_
 
- minimal_self_connect(take_screenshot);
- minimal_self_connect(load_image);
- minimal_self_connect(show_xcsd_scene);
- minimal_self_connect(calculate_local_color_histograms);
- minimal_self_connect(save_local_color_histograms);
- minimal_self_connect(save_fb_gradient_trimap);
- minimal_self_connect(load_pdf);
+ minimal_self_connect (1, with_callstamp) (take_screenshot);
+ minimal_self_connect (_with_callstamp_) (load_image);
+ minimal_self_connect (_with_callstamp_) (show_xcsd_scene);
+ minimal_self_connect (_with_callstamp_) (calculate_local_color_histograms);
+ minimal_self_connect (_with_callstamp_) (save_local_color_histograms);
+ minimal_self_connect (_with_callstamp_) (save_fb_gradient_trimap);
+ minimal_self_connect (_with_callstamp_) (load_pdf);
 
  #undef self_connect_receiver
  #define self_connect_receiver  application_receiver_
 
- minimal_self_connect(load_notes);
- minimal_self_connect(view_contours);
- minimal_self_connect(view_3d);
- minimal_self_connect(view_360);
- minimal_self_connect(view_cad);
- minimal_self_connect(run_forge_workflow);
+ minimal_self_connect (_with_callstamp_) (load_notes);
+ minimal_self_connect (_with_callstamp_) (view_contours);
+ minimal_self_connect (_with_callstamp_) (view_3d);
+ minimal_self_connect (_with_callstamp_) (view_360);
+ minimal_self_connect (_with_callstamp_) (view_cad);
+ minimal_self_connect (_with_callstamp_) (run_forge_workflow);
+ minimal_self_connect (_with_callstamp_) (calculate_fb_gaussian);
+
 
  _self_connect_(main_window_->signal_generator() ,quit_requested)
    to_lambda[this]()
@@ -293,8 +295,8 @@ void DHAX_GUI_Environment::init_main_window_signal_generator()
  };
 
 #ifdef USE_IFC
- main_window_->signal_generator()->self_connect(SIGNAL(ifc_convert_requested()),
-  application_receiver_, SLOT(handle_ifc_convert()));
+ main_window_->signal_generator()->self_connect(SIGNAL(ifc_convert_requested(call_Stamp_u2)),
+  application_receiver_, SLOT(handle_ifc_convert(call_Stamp_u2)));
 #endif
 
 }
@@ -327,7 +329,10 @@ void DHAX_GUI_Environment::init_graphics_frame_layout(QBoxLayout::Direction qbd,
    graphics_frame_->set_graphics_view(graphics_view_);
 
  if(graphics_scene_)
-   graphics_frame_->set_graphics_scene(graphics_scene_);
+ {
+  graphics_frame_->set_graphics_scene(graphics_scene_);
+  graphics_scene_->set_containing_graphics_frame(graphics_frame_);
+ }
 
  if(image_viewer_)
  {

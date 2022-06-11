@@ -11,6 +11,8 @@
 #include <QFrame>
 #include <QBoxLayout>
 
+#include <QLabel>
+
 #include "accessors.h"
 
 #include "global-types.h"
@@ -43,6 +45,8 @@ class DHAX_Graphics_Frame : public QFrame
  DHAX_Display_Image_Data* display_image_data_;
 
  QMap<QString, QColor>* application_colors_;
+
+ QLabel* info_label_;
 
 public:
 
@@ -79,6 +83,7 @@ public:
  void setup_measurement_shape();
  void setup_skew_rhombus_shape();
 
+ void show_info(QString text);
 
  void setup_highlight(bool checked);
 

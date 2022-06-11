@@ -159,9 +159,34 @@ struct _self_connect_package
 #define make_default_signal_name(x)  x##_requested
 #define make_default_slot_name(x)  handle_##x
 
-#define minimal_self_connect(x) \
+#define minimal_self_connect_0(x) \
   _self_connect_(self_connect_sender, make_default_signal_name(x)) \
      _to_bind_0_(self_connect_receiver, make_default_slot_name(x))
+
+#define minimal_self_connect_1(x) \
+  _self_connect_(self_connect_sender, make_default_signal_name(x)) \
+     _to_bind_1_(self_connect_receiver, make_default_slot_name(x))
+
+#define minimal_self_connect_2(x) \
+  _self_connect_(self_connect_sender, make_default_signal_name(x)) \
+     _to_bind_2_(self_connect_receiver, make_default_slot_name(x))
+
+#define minimal_self_connect__with_callstamp_(x) \
+  minimal_self_connect_1(x)
+
+#define minimal_self_connect_with_callstamp_1(x) \
+  minimal_self_connect_2(x)
+
+
+#define minimal_self_connect_ARGS_2(n, note) minimal_self_connect_##note##_##n
+
+#define minimal_self_connect_ARGS_1(n) minimal_self_connect_##n
+
+
+#define minimal_self_connect(...) \
+  _preproc_CONCAT(minimal_self_connect_ARGS_, _preproc_NUM_ARGS (__VA_ARGS__))(__VA_ARGS__)
+
+
 
 
 #ifndef coemit

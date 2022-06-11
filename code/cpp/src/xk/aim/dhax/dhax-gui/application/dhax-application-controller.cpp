@@ -724,8 +724,8 @@ void DHAX_Application_Controller::init_image_scene_item(DHAX_Image_Scene_Item* s
  si->self_connect(SIGNAL(save_notation_requested(bool)),
    application_receiver_, SLOT(handle_save_notation(bool)));
 
- si->self_connect(SIGNAL(convert_notation_requested()),
-   application_receiver_, SLOT(handle_convert_notation()));
+ si->self_connect(SIGNAL(convert_notation_requested(call_Stamp_u2)),
+   application_receiver_, SLOT(handle_convert_notation(call_Stamp_u2)));
 
 // si->self_connect(SIGNAL(save_notation_requested(bool)),
 //   application_receiver_, SLOT(handle_save_notation(bool)));
@@ -749,24 +749,24 @@ void DHAX_Application_Controller::init_image_scene_item(DHAX_Image_Scene_Item* s
 
 
 
- si->self_connect(SIGNAL(polygon_complete_and_save_notation_requested()),
-   application_receiver_, SLOT(handle_polygon_complete_and_save_notation()));
+ si->self_connect(SIGNAL(polygon_complete_and_save_notation_requested(call_Stamp_u2)),
+   application_receiver_, SLOT(handle_polygon_complete_and_save_notation(call_Stamp_u2)));
 
- si->self_connect(SIGNAL(polygon_complete_and_save_notation_with_comment_requested()),
-   application_receiver_, SLOT(handle_polygon_complete_and_save_notation_with_comment()));
+ si->self_connect(SIGNAL(polygon_complete_and_save_notation_with_comment_requested(call_Stamp_u2)),
+   application_receiver_, SLOT(handle_polygon_complete_and_save_notation_with_comment(call_Stamp_u2)));
 
- si->self_connect(SIGNAL(meshlab_reset_requested()),
+ si->self_connect(SIGNAL(meshlab_reset_requested(call_Stamp_u2)),
    application_receiver_,
-   SLOT(handle_meshlab_reset()));
+   SLOT(handle_meshlab_reset(call_Stamp_u2)));
 
 
- si->self_connect(SIGNAL(freecad_reset_requested()),
+ si->self_connect(SIGNAL(freecad_reset_requested(call_Stamp_u2)),
    application_receiver_,
-   SLOT(handle_freecad_reset()));
+   SLOT(handle_freecad_reset(call_Stamp_u2)));
 
- si->self_connect(SIGNAL(edit_image_requested()),
+ si->self_connect(SIGNAL(edit_image_requested(call_Stamp_u2)),
    application_receiver_,
-   SLOT(handle_edit_image()));
+   SLOT(handle_edit_image(call_Stamp_u2)));
 
  //init_image_scene_item
 }
@@ -862,6 +862,14 @@ void DHAX_Application_Controller::init_udp_controller()
 
 
 }
+
+void DHAX_Application_Controller::calculate_fb_gaussian()
+{
+ qDebug() << "calculate_fb_gaussian";
+
+}
+
+
 
 void DHAX_Application_Controller::handle_complate_and_save_requested(bool with_comment)
 {

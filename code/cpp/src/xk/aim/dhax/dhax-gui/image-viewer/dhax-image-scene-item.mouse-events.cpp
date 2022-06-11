@@ -267,12 +267,12 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
  {
   menu->addAction("MeshLab Import Info", [this]
   {
-   Q_EMIT meshlab_import_info_requested();
+   Q_EMIT meshlab_import_info_requested(NULL_CALL_STAMP);
   });
 
   menu->addAction("MeshLab Reset", [this]
   {
-   Q_EMIT meshlab_reset_requested();
+   Q_EMIT meshlab_reset_requested(NULL_CALL_STAMP);
   });
  }
 
@@ -280,12 +280,12 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
  {
   menu->addAction("FreeCAD Import Info", [this]
   {
-   Q_EMIT freecad_import_info_requested();
+   Q_EMIT freecad_import_info_requested(NULL_CALL_STAMP);
   });
 
   menu->addAction("FreeCAD Reset", [this]
   {
-   Q_EMIT freecad_reset_requested();
+   Q_EMIT freecad_reset_requested(NULL_CALL_STAMP);
   });
  }
 
@@ -304,7 +304,7 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
  {
   menu->addAction("Complete Polygon", [this]
   {
-   Q_EMIT complete_polygon_requested();
+   Q_EMIT complete_polygon_requested(NULL_CALL_STAMP);
   });
 
   menu->addAction("Save Notation", [this]
@@ -314,7 +314,7 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
 
   menu->addAction("Complete and Save", [this]
   {
-   Q_EMIT polygon_complete_and_save_notation_requested();
+   Q_EMIT polygon_complete_and_save_notation_requested(NULL_CALL_STAMP);
   });
 
   menu->addAction("Save Notation with Comment", [this]
@@ -324,7 +324,7 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
 
   menu->addAction("Complete and Save with Comment", [this]
   {
-   Q_EMIT polygon_complete_and_save_notation_with_comment_requested();
+   Q_EMIT polygon_complete_and_save_notation_with_comment_requested(NULL_CALL_STAMP);
   });
 
   menu->addAction("Cancel Notation", [this]
@@ -355,7 +355,7 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
 
   menu->addAction("Convert Notation", [this]
   {
-   Q_EMIT  convert_notation_requested();
+   Q_EMIT  convert_notation_requested(NULL_CALL_STAMP);
   });
 
   menu->addAction("Cancel Notation", [this]
@@ -372,17 +372,17 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
  {
   menu->addAction("Draw Bezier", [this]
   {
-   Q_EMIT draw_bezier_requested();
+   Q_EMIT draw_bezier_requested(NULL_CALL_STAMP);
   });
 
   menu->addAction("Draw Cubic", [this]
   {
-   Q_EMIT draw_cubic_path_requested();
+   Q_EMIT draw_cubic_path_requested(NULL_CALL_STAMP);
   });
 
   menu->addAction("Draw Quad", [this]
   {
-   Q_EMIT draw_quad_path_requested();
+   Q_EMIT draw_quad_path_requested(NULL_CALL_STAMP);
   });
 
   menu->addAction("Draw Arc", [this]
@@ -398,7 +398,7 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
 
  menu->addAction("Edit Image ...", [this]
  {
-  Q_EMIT edit_image_requested();
+  Q_EMIT edit_image_requested(NULL_CALL_STAMP);
  });
 
  menu->popup(pos2);

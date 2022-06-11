@@ -85,6 +85,8 @@ void XCSD_Tierbox_Scene_Item::hoverEnterEvent(QGraphicsSceneHoverEvent* event)
  scene_hover_rect_->setVisible(true);
  scene_hover_rect_->setPos(pos()); //x_corner_, y_corner_);
 
+ containing_scene_->handle_tierbox_hover_enter(this);
+
 }
 
 void XCSD_Tierbox_Scene_Item::hoverLeaveEvent(QGraphicsSceneHoverEvent* event)

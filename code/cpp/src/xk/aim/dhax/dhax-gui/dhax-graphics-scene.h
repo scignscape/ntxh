@@ -30,6 +30,8 @@ class XCSD_Tierbox_Scene_Item;
 
 class XCSD_Outer_Ring_Scene_Item;
 
+class DHAX_Graphics_Frame;
+
 
 class _Proxy_Widget : public QGraphicsProxyWidget
 {
@@ -61,6 +63,7 @@ class DHAX_Graphics_Scene : public QGraphicsScene
  Q_OBJECT
 
  QGraphicsRectItem* hover_rect_;
+ DHAX_Graphics_Frame* containing_graphics_frame_;
 
 public:
 
@@ -68,6 +71,8 @@ public:
 
  USE_SELF_CONNECT(normal)
  USE_SELF_CONNECT(lambda)
+
+ ACCESSORS(DHAX_Graphics_Frame* ,containing_graphics_frame)
 
  _Proxy_Widget* add_proxy_widget(QWidget* w)
  {
@@ -82,7 +87,7 @@ public:
  void handle_tierbox_context_menu_action(XCSD_Tierbox_Scene_Item* xtsi,
    u1 code);
 
-// void handle_tierbox_hover_leave(XCSD_Tierbox_Scene_Item* xtsi);
+ void handle_tierbox_hover_enter(XCSD_Tierbox_Scene_Item* xtsi);
 
  // void set_foreground_color(QColor c);
 

@@ -44,6 +44,8 @@
 
 #include "dialogs/xcsd-local-histogram-dialog.h"
 
+#include "dhax-graphics-frame.h"
+
 
 #include <QMenuBar>
 
@@ -121,31 +123,31 @@ void DHAX_Main_Window_Controller::init_image_scene_item(DHAX_Image_Scene_Item* s
 // image_scene_item_->connect(image_scene_item_,SIGNAL(polygon_complete_and_save_notation_requested()),
 //   main_window_receiver_, SLOT(handle_polygon_complete_and_save_notation_requested()));
 
- image_scene_item_->self_connect(SIGNAL(complete_polygon_requested()),
-   main_window_receiver_, SLOT(handle_complete_polygon()));
+ image_scene_item_->self_connect(SIGNAL(complete_polygon_requested(call_Stamp_u2)),
+   main_window_receiver_, SLOT(handle_complete_polygon(call_Stamp_u2)));
 
  image_scene_item_->self_connect(SIGNAL(get_annotation_comments_requested(DHAX_Annotation_Instance*)),
    main_window_receiver_, SLOT(handle_get_annotation_comments(DHAX_Annotation_Instance*)));
 
 
- image_scene_item_->self_connect(SIGNAL(meshlab_import_info_requested()),
-   main_window_receiver_, SLOT(handle_meshlab_import_info()));
+ image_scene_item_->self_connect(SIGNAL(meshlab_import_info_requested(call_Stamp_u2)),
+   main_window_receiver_, SLOT(handle_meshlab_import_info(call_Stamp_u2)));
    //show_meshlab_import_info
 
- image_scene_item_->self_connect(SIGNAL(freecad_import_info_requested()),
-   main_window_receiver_, SLOT(handle_freecad_import_info()));
+ image_scene_item_->self_connect(SIGNAL(freecad_import_info_requested(call_Stamp_u2)),
+   main_window_receiver_, SLOT(handle_freecad_import_info(call_Stamp_u2)));
 
- image_scene_item_->self_connect(SIGNAL(draw_bezier_requested()),
+ image_scene_item_->self_connect(SIGNAL(draw_bezier_requested(call_Stamp_u2)),
    main_window_receiver_,
-   SLOT(handle_draw_bezier()));
+   SLOT(handle_draw_bezier(call_Stamp_u2)));
 
- image_scene_item_->self_connect(SIGNAL(draw_cubic_path_requested()),
+ image_scene_item_->self_connect(SIGNAL(draw_cubic_path_requested(call_Stamp_u2)),
    main_window_receiver_,
-   SLOT(handle_draw_cubic_path()));
+   SLOT(handle_draw_cubic_path(call_Stamp_u2)));
 
- image_scene_item_->self_connect(SIGNAL(draw_quad_path_requested()),
+ image_scene_item_->self_connect(SIGNAL(draw_quad_path_requested(call_Stamp_u2)),
    main_window_receiver_,
-   SLOT(handle_draw_quad_path()));
+   SLOT(handle_draw_quad_path(call_Stamp_u2)));
 
 // image_scene_item_->self_connect(SIGNAL(meshlab_reset_requested()),
 //   main_window_receiver_,
@@ -558,6 +560,9 @@ void DHAX_Main_Window_Controller::show_xcsd_scene()
 
  qDebug() << current_image_file_path_;
 
+ image_viewer_->get_graphics_frame()->show_info(QString("Loaded image (as XCSD scene): %1")
+   .arg(current_image_file_path_));
+
 
  //XCSD_Image xcsd;
  xcsd_image_ = new XCSD_Image;
@@ -678,6 +683,9 @@ void DHAX_Main_Window_Controller::load_image(QString file_path)
  application_controller_->application_state()->flags.image_mode = true;
 
  delayed_image_viewer_recenter_scroll_top_left();
+
+ image_viewer_->get_graphics_frame()->show_info(QString("Loaded image: %1")
+   .arg(file_path));
 
 }
 

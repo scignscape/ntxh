@@ -186,28 +186,28 @@ Q_SIGNALS:
  void setTuple(QString);
 
  void save_notation_requested(bool);
- void polygon_complete_and_save_notation_requested();
- void polygon_complete_and_save_notation_with_comment_requested();
+ void polygon_complete_and_save_notation_requested(call_Stamp_u2);
+ void polygon_complete_and_save_notation_with_comment_requested(call_Stamp_u2);
 
  void polyline_save_notation_requested(bool);
 
  void get_annotation_comments_requested(DHAX_Annotation_Instance*);
 
- void complete_polygon_requested();
- void edit_image_requested();
+ void complete_polygon_requested(call_Stamp_u2);
+ void edit_image_requested(call_Stamp_u2);
 
 //? void uncancel_requested(DHAX_Drawn_Shape*);
 
- void meshlab_import_info_requested();
- void meshlab_reset_requested();
- void freecad_import_info_requested();
- void freecad_reset_requested();
+ void meshlab_import_info_requested(call_Stamp_u2);
+ void meshlab_reset_requested(call_Stamp_u2);
+ void freecad_import_info_requested(call_Stamp_u2);
+ void freecad_reset_requested(call_Stamp_u2);
 
- void draw_bezier_requested();
- void draw_cubic_path_requested();
- void draw_quad_path_requested();
+ void draw_bezier_requested(call_Stamp_u2);
+ void draw_cubic_path_requested(call_Stamp_u2);
+ void draw_quad_path_requested(call_Stamp_u2);
 
- void convert_notation_requested();
+ void convert_notation_requested(call_Stamp_u2);
 
 protected:
  void paintEvent(QPaintEvent *);

@@ -28,34 +28,39 @@ DHAX_Application_Receiver::DHAX_Application_Receiver()
 
 }
 
-void DHAX_Application_Receiver::handle_load_notes()
+void DHAX_Application_Receiver::handle_load_notes(call_Stamp_u2 callstamp)
 {
- application_controller_->load_notes();
+ application_controller_->load_notes(/*callstamp*/);
 }
 
-void DHAX_Application_Receiver::handle_freecad_reset()
+void DHAX_Application_Receiver::handle_freecad_reset(call_Stamp_u2 callstamp)
 {
- application_controller_->send_freecad_reset();
-}
-
-
-void DHAX_Application_Receiver::handle_meshlab_reset()
-{
- application_controller_->send_meshlab_reset();
+ application_controller_->send_freecad_reset(/*callstamp*/);
 }
 
 
-void DHAX_Application_Receiver::handle_convert_notation()
+void DHAX_Application_Receiver::handle_meshlab_reset(call_Stamp_u2 callstamp)
 {
- application_controller_->convert_notation_to_curve();
+ application_controller_->send_meshlab_reset(/*callstamp*/);
+}
+
+
+void DHAX_Application_Receiver::handle_convert_notation(call_Stamp_u2 callstamp)
+{
+ application_controller_->convert_notation_to_curve(/*callstamp*/);
 }
 
 #ifdef USE_IFC
-void DHAX_Application_Receiver::handle_ifc_convert()
+void DHAX_Application_Receiver::handle_ifc_convert(call_Stamp_u2 callstamp)
 {
- application_controller_->run_ifc_convert();
+ application_controller_->run_ifc_convert(/*callstamp*/);
 }
 #endif
+
+void DHAX_Application_Receiver::handle_calculate_fb_gaussian(call_Stamp_u2 callstamp)
+{
+ application_controller_->calculate_fb_gaussian(/*callstamp*/);
+}
 
 
 void DHAX_Application_Receiver::handle_save_notation(bool with_comment)
@@ -64,17 +69,17 @@ void DHAX_Application_Receiver::handle_save_notation(bool with_comment)
 }
 
 
-void DHAX_Application_Receiver::handle_edit_image()
+void DHAX_Application_Receiver::handle_edit_image(call_Stamp_u2 callstamp)
 {
- application_controller_->handle_edit_image_requested();
+ application_controller_->handle_edit_image_requested(/*callstamp*/);
 }
 
-void DHAX_Application_Receiver::handle_polygon_complete_and_save_notation()
+void DHAX_Application_Receiver::handle_polygon_complete_and_save_notation(call_Stamp_u2 callstamp)
 {
  application_controller_->handle_complate_and_save_requested(false);
 }
 
-void DHAX_Application_Receiver::handle_polygon_complete_and_save_notation_with_comment()
+void DHAX_Application_Receiver::handle_polygon_complete_and_save_notation_with_comment(call_Stamp_u2 callstamp)
 {
  application_controller_->handle_complate_and_save_requested(true);
 }
@@ -85,27 +90,27 @@ void DHAX_Application_Receiver::handle_polyline_save_notation(bool with_comment)
 }
 
 
-void DHAX_Application_Receiver::handle_view_contours()
+void DHAX_Application_Receiver::handle_view_contours(call_Stamp_u2 callstamp)
 {
- application_controller_->view_contours();
+ application_controller_->view_contours(/*callstamp*/);
 }
 
-void DHAX_Application_Receiver::handle_view_3d()
+void DHAX_Application_Receiver::handle_view_3d(call_Stamp_u2 callstamp)
 {
- external_application_controller_->view_3d();
+ external_application_controller_->view_3d(/*callstamp*/);
 }
 
-void DHAX_Application_Receiver::handle_view_360()
+void DHAX_Application_Receiver::handle_view_360(call_Stamp_u2 callstamp)
 {
- external_application_controller_->view_360();
+ external_application_controller_->view_360(/*callstamp*/);
 }
 
-void DHAX_Application_Receiver::handle_view_cad()
+void DHAX_Application_Receiver::handle_view_cad(call_Stamp_u2 callstamp)
 {
- external_application_controller_->view_cad();
+ external_application_controller_->view_cad(/*callstamp*/);
 }
 
-void DHAX_Application_Receiver::handle_run_forge_workflow()
+void DHAX_Application_Receiver::handle_run_forge_workflow(call_Stamp_u2 callstamp)
 {
- external_application_controller_->run_forge_workflow();
+ external_application_controller_->run_forge_workflow(/*callstamp*/);
 }

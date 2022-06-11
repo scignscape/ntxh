@@ -38,6 +38,7 @@ public:
  void emit_calculate_local_color_histograms_requested();
  void emit_save_local_color_histograms_requested();
  void emit_save_fb_gradient_trimap_requested();
+ void emit_calculate_fb_gaussian_requested();
 
  void emit_view_contours_requested();
  void emit_view_3d_requested();
@@ -52,28 +53,30 @@ public:
 
 Q_SIGNALS:
 
- void take_screenshot_requested();
- void load_pdf_requested();
- void load_image_requested();
- void load_notes_requested();
+ void take_screenshot_requested(call_Stamp_u2, QString);
+ void load_pdf_requested(call_Stamp_u2);
+ void load_image_requested(call_Stamp_u2);
+ void load_notes_requested(call_Stamp_u2);
  void received_datagram(QByteArray qba);
 
- void view_contours_requested();
- void view_3d_requested();
- void view_360_requested();
- void view_cad_requested();
- void run_forge_workflow_requested();
- void quit_requested();
+ void view_contours_requested(call_Stamp_u2);
+ void view_3d_requested(call_Stamp_u2);
+ void view_360_requested(call_Stamp_u2);
+ void view_cad_requested(call_Stamp_u2);
+ void run_forge_workflow_requested(call_Stamp_u2);
+ void quit_requested(call_Stamp_u2);
 
- void show_xcsd_scene_requested();
+ void show_xcsd_scene_requested(call_Stamp_u2);
 
- void calculate_local_color_histograms_requested();
- void save_local_color_histograms_requested();
- void save_fb_gradient_trimap_requested();
+ void calculate_local_color_histograms_requested(call_Stamp_u2);
+ void save_local_color_histograms_requested(call_Stamp_u2);
+ void save_fb_gradient_trimap_requested(call_Stamp_u2);
+
+ void calculate_fb_gaussian_requested(call_Stamp_u2);
 
 
 #ifdef USE_IFC
- void ifc_convert_requested();
+ void ifc_convert_requested(call_Stamp_u2);
 #endif
 
 

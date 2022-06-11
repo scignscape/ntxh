@@ -109,6 +109,11 @@ void DHAX_Image_Viewer::recenter_image()
  scrolled_image_pixmap_item_->setPos(new_left, new_top);
 }
 
+DHAX_Graphics_Frame* DHAX_Image_Viewer::get_graphics_frame()
+{
+ return scrolled_image_scene_->containing_graphics_frame();
+}
+
 
 void DHAX_Image_Viewer::recenter_image_against_margins()
 {
