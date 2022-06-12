@@ -126,9 +126,13 @@ public:
 
  void calculate_fb_gaussian();
 
+ void launch_edge_detection_dialog();
+
  QString get_current_image_folder();
  QString get_current_image_complete_base_name();
  QDir get_current_image_dir();
+ QString get_current_image_file_path();
+
 
  QColor handle_change_color(QString application_role);
 

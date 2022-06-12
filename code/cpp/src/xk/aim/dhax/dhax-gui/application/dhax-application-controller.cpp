@@ -19,6 +19,7 @@
 #include "image-editor/frontend/MainWindow.h"
 #include "image-editor/frontend/main-window-dialog.h"
 
+#include "edge-detection/edge-detection-dialog.h"
 
 #include <QColorDialog>
 
@@ -428,15 +429,20 @@ void DHAX_Application_Controller::handle_unexpand_window()
 
 QDir DHAX_Application_Controller::get_current_image_dir()
 {
- QString path = main_window_controller_->current_image_file_path();
+ QString path = get_current_image_file_path();
 
  QFileInfo qfi(path);
  return qfi.absoluteDir();
 }
 
+QString DHAX_Application_Controller::get_current_image_file_path()
+{
+ return main_window_controller_->current_image_file_path();
+}
+
 QString DHAX_Application_Controller::get_current_image_folder()
 {
- QString path = main_window_controller_->current_image_file_path();
+ QString path = get_current_image_file_path();
 
  QFileInfo qfi(path);
  return qfi.absolutePath();
@@ -444,7 +450,7 @@ QString DHAX_Application_Controller::get_current_image_folder()
 
 QString DHAX_Application_Controller::get_current_image_complete_base_name()
 {
- QString path = main_window_controller_->current_image_file_path();
+ QString path = get_current_image_file_path();
 
  QFileInfo qfi(path);
  return qfi.completeBaseName();
@@ -868,6 +874,21 @@ void DHAX_Application_Controller::calculate_fb_gaussian()
  qDebug() << "calculate_fb_gaussian";
 
 }
+
+void DHAX_Application_Controller::launch_edge_detection_dialog()
+{
+ qDebug() << "launch_edge_detection_dialog";
+
+ Edge_Detection_Dialog* dlg = new Edge_Detection_Dialog(
+   get_current_image_file_path(), application_main_window_);
+
+ dlg->show();
+
+}
+
+
+
+
 
 
 

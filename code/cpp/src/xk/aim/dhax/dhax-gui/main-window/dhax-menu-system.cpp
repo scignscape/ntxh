@@ -135,6 +135,11 @@ void DHAX_Menu_System::init_menus()
 
  DHAX_Menu& mm = *menus_->menu("Matrix");
 
+ mm.add_action("Launch Edge-Detection Dialog") << [sg]
+ {
+  sg->emit_launch_edge_detection_dialog_requested();
+ };
+
  mm.add_action("Calculate fb-Gaussian Matrix Space") << [sg]
  {
   sg->emit_calculate_fb_gaussian_requested();

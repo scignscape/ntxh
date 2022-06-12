@@ -46,6 +46,8 @@
 
 #include "dhax-graphics-frame.h"
 
+#include "self-connect.h"
+
 
 #include <QMenuBar>
 
@@ -123,31 +125,62 @@ void DHAX_Main_Window_Controller::init_image_scene_item(DHAX_Image_Scene_Item* s
 // image_scene_item_->connect(image_scene_item_,SIGNAL(polygon_complete_and_save_notation_requested()),
 //   main_window_receiver_, SLOT(handle_polygon_complete_and_save_notation_requested()));
 
- image_scene_item_->self_connect(SIGNAL(complete_polygon_requested(call_Stamp_u2)),
-   main_window_receiver_, SLOT(handle_complete_polygon(call_Stamp_u2)));
+// image_scene_item_->self_connect(SIGNAL(complete_polygon_requested(call_Stamp_u2)),
+//   main_window_receiver_, SLOT(handle_complete_polygon(call_Stamp_u2)));
 
- image_scene_item_->self_connect(SIGNAL(get_annotation_comments_requested(DHAX_Annotation_Instance*)),
-   main_window_receiver_, SLOT(handle_get_annotation_comments(DHAX_Annotation_Instance*)));
+ _self_connect_(image_scene_item_ ,complete_polygon_requested)
+   _to_bind_0 (with_callstamp) (main_window_receiver_ ,handle_complete_polygon);
+
+// image_scene_item_->self_connect(SIGNAL(get_annotation_comments_requested(DHAX_Annotation_Instance*)),
+//   main_window_receiver_, SLOT(handle_get_annotation_comments(DHAX_Annotation_Instance*)));
+
+ _self_connect_(image_scene_item_ ,get_annotation_comments_requested)
+   _to_bind_0 (with_callstamp) (main_window_receiver_ ,handle_get_annotation_comments);
 
 
- image_scene_item_->self_connect(SIGNAL(meshlab_import_info_requested(call_Stamp_u2)),
-   main_window_receiver_, SLOT(handle_meshlab_import_info(call_Stamp_u2)));
+// image_scene_item_->self_connect(SIGNAL(meshlab_import_info_requested(call_Stamp_u2)),
+//   main_window_receiver_, SLOT(handle_meshlab_import_info(call_Stamp_u2)));
    //show_meshlab_import_info
 
- image_scene_item_->self_connect(SIGNAL(freecad_import_info_requested(call_Stamp_u2)),
-   main_window_receiver_, SLOT(handle_freecad_import_info(call_Stamp_u2)));
+ _self_connect_(image_scene_item_ ,meshlab_import_info_requested)
+   _to_bind_0 (with_callstamp) (main_window_receiver_ ,handle_meshlab_import_info);
 
- image_scene_item_->self_connect(SIGNAL(draw_bezier_requested(call_Stamp_u2)),
-   main_window_receiver_,
-   SLOT(handle_draw_bezier(call_Stamp_u2)));
 
- image_scene_item_->self_connect(SIGNAL(draw_cubic_path_requested(call_Stamp_u2)),
-   main_window_receiver_,
-   SLOT(handle_draw_cubic_path(call_Stamp_u2)));
 
- image_scene_item_->self_connect(SIGNAL(draw_quad_path_requested(call_Stamp_u2)),
-   main_window_receiver_,
-   SLOT(handle_draw_quad_path(call_Stamp_u2)));
+// image_scene_item_->self_connect(SIGNAL(freecad_import_info_requested(call_Stamp_u2)),
+//   main_window_receiver_, SLOT(handle_freecad_import_info(call_Stamp_u2)));
+
+ _self_connect_(image_scene_item_ ,freecad_import_info_requested)
+   _to_bind_0 (with_callstamp) (main_window_receiver_ ,handle_freecad_import_info);
+
+
+// image_scene_item_->self_connect(SIGNAL(draw_bezier_requested(call_Stamp_u2)),
+//   main_window_receiver_,
+//   SLOT(handle_draw_bezier(call_Stamp_u2)));
+
+
+ _self_connect_(image_scene_item_ ,draw_bezier_requested)
+   _to_bind_0 (with_callstamp) (main_window_receiver_ ,handle_draw_bezier);
+
+
+
+// image_scene_item_->self_connect(SIGNAL(draw_cubic_path_requested(call_Stamp_u2)),
+//   main_window_receiver_,
+//   SLOT(handle_draw_cubic_path(call_Stamp_u2)));
+
+ _self_connect_(image_scene_item_ ,draw_cubic_path_requested)
+   _to_bind_0 (with_callstamp) (main_window_receiver_ ,handle_draw_cubic_path);
+
+
+
+// image_scene_item_->self_connect(SIGNAL(draw_quad_path_requested(call_Stamp_u2)),
+//   main_window_receiver_,
+//   SLOT(handle_draw_quad_path(call_Stamp_u2)));
+
+
+ _self_connect_(image_scene_item_ ,draw_quad_path_requested)
+   _to_bind_0 (with_callstamp) (main_window_receiver_ ,handle_draw_quad_path);
+
 
 // image_scene_item_->self_connect(SIGNAL(meshlab_reset_requested()),
 //   main_window_receiver_,

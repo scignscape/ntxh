@@ -179,7 +179,9 @@ HEADERS += \
   $$SRC_DIR/aforms/simple/simple-polyline-annotation.h \
   $$SRC_DIR/aforms/measurement-dialogs/simple/simple-rectangle-measurement-dialog.h \
   $$SRC_DIR/dialogs/xcsd-local-histogram-dialog.h \
-
+  $$SRC_DIR/edge-detection/edge-detection-dialog.h \
+  $$SRC_DIR/edge-detection/edge-detection-algorithms.h \
+  $$SRC_DIR/edge-detection/edge-detection-kernels.h \
 
 
 SOURCES += \
@@ -249,7 +251,8 @@ SOURCES += \
   $$SRC_DIR/aforms/simple/simple-polyline-annotation.cpp \
   $$SRC_DIR/aforms/measurement-dialogs/simple/simple-rectangle-measurement-dialog.cpp \
   $$SRC_DIR/dialogs/xcsd-local-histogram-dialog.cpp \
-
+  $$SRC_DIR/edge-detection/edge-detection-algorithms.cpp \
+  $$SRC_DIR/edge-detection/edge-detection-dialog.cpp \
 
 
 QFontIcon_SRC_DIR = $$SRC_ROOT_DIR/external/QFontIcon-master/QFontIcon
@@ -262,6 +265,9 @@ RESOURCES += $$QFontIcon_SRC_DIR/../resource.qrc
 QtColorWidgets_SRC_DIR = $$SRC_ROOT_DIR/external/Qt-Color-Widgets-master
 INCLUDEPATH += $$QtColorWidgets_SRC_DIR/include
 FORMS += $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_dialog.ui
+
+
+#FORMS += $$SRC_DIR/edge-detection/edge-detection-dialog.ui \
 
 
 HEADERS += \

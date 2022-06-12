@@ -286,6 +286,7 @@ void DHAX_GUI_Environment::init_main_window_signal_generator()
  minimal_self_connect (_with_callstamp_) (view_cad);
  minimal_self_connect (_with_callstamp_) (run_forge_workflow);
  minimal_self_connect (_with_callstamp_) (calculate_fb_gaussian);
+ minimal_self_connect (_with_callstamp_) (launch_edge_detection_dialog);
 
 
  _self_connect_(main_window_->signal_generator() ,quit_requested)

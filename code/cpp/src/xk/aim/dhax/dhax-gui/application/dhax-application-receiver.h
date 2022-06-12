@@ -49,6 +49,9 @@ public Q_SLOTS:
 
  void handle_edit_image(call_Stamp_u2);
 
+ void handle_launch_edge_detection_dialog(call_Stamp_u2);
+
+
  void handle_view_contours(call_Stamp_u2);
  void handle_view_3d(call_Stamp_u2);
  void handle_view_360(call_Stamp_u2);

@@ -18,6 +18,8 @@
 #include "global-macros.h"
 
 
+#define _AUTO_OBJECT_NAME_(x) x->setObjectName(QString::fromUtf8(#x).chopped(1));
+
 
 #define USE_SELF_CONNECT_normal \
  template<typename ... ARGS> \
@@ -151,6 +153,29 @@ struct _self_connect_package
 #define to_lambda_this << [this]
 #endif
 
+#define _to_bind_0_with_callstamp _to_bind_1_
+#define _to_bind_0(x) _to_bind_0_##x
+
+#define _to_bind_1_with_callstamp _to_bind_2_
+#define _to_bind_1(x) _to_bind_1_##x
+
+#define _to_bind_2_with_callstamp _to_bind_3_
+#define _to_bind_2(x) _to_bind_2_##x
+
+#define _to_bind_3_with_callstamp _to_bind_4_
+#define _to_bind_3(x) _to_bind_3_##x
+
+#define _to_bind_4_with_callstamp _to_bind_5_
+#define _to_bind_4(x) _to_bind_4_##x
+
+#define _to_bind_5_with_callstamp _to_bind_6_
+#define _to_bind_5(x) _to_bind_5_##x
+
+#define _to_bind_6_with_callstamp _to_bind_7_
+#define _to_bind_6(x) _to_bind_6_##x
+
+#define _to_bind_7_with_callstamp _to_bind_8_
+#define _to_bind_7(x) _to_bind_8_##x
 
 #define connect_to_this(x, y, z) \
   connect(x, y, this, &std::remove_reference<decltype(*this)>::type::z)

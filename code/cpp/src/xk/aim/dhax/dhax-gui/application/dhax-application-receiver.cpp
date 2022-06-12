@@ -63,6 +63,11 @@ void DHAX_Application_Receiver::handle_calculate_fb_gaussian(call_Stamp_u2 calls
 }
 
 
+void DHAX_Application_Receiver::handle_launch_edge_detection_dialog(call_Stamp_u2 callstamp)
+{
+ application_controller_->launch_edge_detection_dialog(/*callstamp*/);
+}
+
 void DHAX_Application_Receiver::handle_save_notation(bool with_comment)
 {
  application_controller_->save_current_notation(with_comment);

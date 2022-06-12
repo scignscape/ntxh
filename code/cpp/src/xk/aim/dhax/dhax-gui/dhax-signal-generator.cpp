@@ -60,6 +60,13 @@ void DHAX_Signal_Generator::emit_save_fb_gradient_trimap_requested()
  Q_EMIT save_fb_gradient_trimap_requested(++static_count);
 }
 
+
+void DHAX_Signal_Generator::emit_launch_edge_detection_dialog_requested()
+{
+ STATIC_COUNT
+ Q_EMIT launch_edge_detection_dialog_requested(++static_count);
+}
+
 void DHAX_Signal_Generator::emit_calculate_fb_gaussian_requested()
 {
  STATIC_COUNT
