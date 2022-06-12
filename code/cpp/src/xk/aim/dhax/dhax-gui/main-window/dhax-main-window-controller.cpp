@@ -498,7 +498,7 @@ void DHAX_Main_Window_Controller::save_fb_gradient_trimap()
  xcsd_image_->save_fb_gradient_trimap({image_document_controller_->marked_background_pole(),
    image_document_controller_->marked_foreground_pole()}, path, fpath);
 
-
+ application_controller_->view_trimap(path);
 
 }
 

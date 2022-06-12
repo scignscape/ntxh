@@ -179,6 +179,7 @@ HEADERS += \
   $$SRC_DIR/aforms/simple/simple-polyline-annotation.h \
   $$SRC_DIR/aforms/measurement-dialogs/simple/simple-rectangle-measurement-dialog.h \
   $$SRC_DIR/dialogs/xcsd-local-histogram-dialog.h \
+  $$SRC_DIR/dialogs/trimap-demo-frame.h \
   $$SRC_DIR/edge-detection/edge-detection-dialog.h \
   $$SRC_DIR/edge-detection/edge-detection-algorithms.h \
   $$SRC_DIR/edge-detection/edge-detection-kernels.h \
@@ -251,6 +252,7 @@ SOURCES += \
   $$SRC_DIR/aforms/simple/simple-polyline-annotation.cpp \
   $$SRC_DIR/aforms/measurement-dialogs/simple/simple-rectangle-measurement-dialog.cpp \
   $$SRC_DIR/dialogs/xcsd-local-histogram-dialog.cpp \
+  $$SRC_DIR/dialogs/trimap-demo-frame.cpp \
   $$SRC_DIR/edge-detection/edge-detection-algorithms.cpp \
   $$SRC_DIR/edge-detection/edge-detection-dialog.cpp \
 

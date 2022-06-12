@@ -1269,6 +1269,12 @@ void XCSD_Image::save_fb_gradient_trimap(fb2 poles, QString file_path, QString f
  save_full_tier_image(file_path.arg("fg"), Save_FG); //, folder);
  save_full_tier_image(file_path.arg("bg"), Save_BG); //, folder);
 
+ save_full_tier_image(file_path.arg("fbr"), Save_FB | Tier_Blur_3, folder);
+ save_full_tier_image(file_path.arg("fgr"), Save_FG | Tier_Blur_3); //, folder);
+ save_full_tier_image(file_path.arg("bgr"), Save_BG | Tier_Blur_3); //, folder);
+
+
+
  save_full_tier_image(file_path.arg("original"), Save_QRgb);
 
  //data_.start();
@@ -1604,6 +1610,14 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
 {
  //static u2 box_area = tierbox_width * tierbox_width;
 
+ u1 tier_blur_level = 0;
+
+ if(u1 code = save_mode & Tier_Blur_27)
+ {
+  save_mode = (Save_Mode) (save_mode - code);
+  tier_blur_level = code >> 6;
+ }
+
  u4 index = geometry_.get_tierbox_index(gtb, ienv.size_even_odd_info, mchi);
 
  std::map<s1, std::pair<u2, std::vector<n8>>> sdi;
@@ -1656,6 +1670,28 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
 
   u4 offset = thr_vec.first;
 
+  n8 _avg_3x3 = 0;
+  n8* blur_avg;
+  if(tier_blur_level == 0)
+    blur_avg = nullptr;
+
+  else
+  {
+   blur_avg = &_avg_3x3;
+   u2 averages[8] = {0}; // // seems we don't need more than 2 bytes for sum ...
+
+   for(u1 v = 0; v < 9; ++v)
+   {
+    n8 pixel = thr_vec.second[v];
+    for(u1 u = 0; u < 8; ++u)
+      averages[u] += (u1)(pixel >> (u << 3));
+   }
+   for(u1 u = 0; u < 8; ++u)
+   {
+    _avg_3x3 |= ((n8)((u1)(averages[u] / 9)) << (u << 3));
+   }
+  }
+
   u1 vi = 0; // vector index
   for(u1 y = 0; y < 3; ++y)
   {
@@ -1667,7 +1703,7 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
     ++abg.g;
     xy1 xy = XCSD_TierBox::get_local_ground_location_sdi(abg.to_base(10));
 
-    n8 pixel = thr_vec.second[vi];
+    n8 pixel = blur_avg? *blur_avg : thr_vec.second[vi];
     // qDebug() << "pixel = " << (pixel & 0x00FFFFFF);
 
     if(save_mode == Save_QRgb)

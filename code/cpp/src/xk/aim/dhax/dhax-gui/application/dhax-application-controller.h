@@ -124,6 +124,9 @@ public:
  void send_meshlab_reset();
  void view_contours();
 
+ void view_trimap(QString path);
+
+
  void calculate_fb_gaussian();
 
  void launch_edge_detection_dialog();

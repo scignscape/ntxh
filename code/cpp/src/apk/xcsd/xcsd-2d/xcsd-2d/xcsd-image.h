@@ -105,9 +105,13 @@ public:
 
  ACCESSORS(QVector<XCSD_Outer_Ring_Info>* ,outer_ring_info)
 
- enum Save_Mode {
+ enum Save_Mode : u1{
    Save_QRgb, Save_Palette, Save_FB, Save_FG, Save_BG,
+
+   Tier_Blur_3 = 64, Tier_Blur_9 = 128, Tier_Blur_27 = 192
  };
+
+ ENUM_FLAGS_OP_MACROS(Save_Mode)
 
  static QColor pixel_number_to_qcolor(n8 pixel);
  static QColor pixel_number_fb_to_qcolor(n8 pixel, Save_Mode save_mode);

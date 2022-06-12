@@ -58,6 +58,8 @@
 
 #include "application/dhax-application-receiver.h"
 
+#include "dialogs/trimap-demo-frame.h"
+
 #include <QMessageBox>
 #include <QDesktopServices>
 
@@ -1022,6 +1024,40 @@ void DHAX_Application_Controller::dispatch_datagram(QByteArray qba)
 }
 
 
+
+void DHAX_Application_Controller::view_trimap(QString path)
+{
+// QString path_fg = path.arg("fg");
+// QString path_bg = path.arg("bg");
+// QString path_fb = path.arg("fb");
+
+ QDialog* dlg = new QDialog(application_main_window_);
+
+ dlg->setWindowTitle("Contour View");
+
+ Trimap_Demo_Frame* fr = new Trimap_Demo_Frame(path, 200, 800, 300);
+
+ fr->setContextMenuPolicy(Qt::CustomContextMenu);
+
+ fr->connect(fr, &QFrame::customContextMenuRequested,
+   [this, fr](QPoint pos)
+ {
+  QMenu* menu = new QMenu(fr);
+  menu->addAction("View Contour Info", [this]
+  {
+   //?handle_view_contour_info(dgi->saved_csv_path());
+  });
+
+  menu->popup(fr->mapToGlobal(pos));
+ });
+
+ QVBoxLayout* vbl = new QVBoxLayout;
+ vbl->addWidget(fr);
+
+ dlg->setLayout(vbl);
+ dlg->show();
+
+}
 
 void DHAX_Application_Controller::view_contours()
 {
