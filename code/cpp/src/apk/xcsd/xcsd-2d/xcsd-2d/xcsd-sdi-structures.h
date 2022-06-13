@@ -88,6 +88,8 @@ inline constexpr u1 _ctz(int x)
    { return quadrant_code_against(rhs.template _to<ty##size>()); } \
    ty##size& make_descending() { if(is_ascending()) _Transpose(); return *this;} \
    ty##size& make_ascending() { if(is_descending()) _Transpose(); return *this;} \
+ static ty##size from_base_10(u##size num) { return {(u##size)((u1)num / 10), (u##size)((u1)num % 10)}; } \
+ static ty##size from_base_10(s##size num) { return {(u##size)((u1)num / 10), (u##size)((u1)num % 10)}; } \
    u##size lesser() { return field1 < field2? field1 : field2; } \
    u##size greater() { return field1 < field2? field2 : field1; } \
    ty##size lesser_which() { return (field1 < field2) ? \

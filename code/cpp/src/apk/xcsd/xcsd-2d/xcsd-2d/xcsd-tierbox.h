@@ -18,12 +18,15 @@
 
 #include <QImage>
 
+#include <set>
+
 #include "accessors.h"
 
 XCNS_(XCSD)
 
 //class XCSD_XPixel;
 
+class XCSD_Image;
 
 struct Box3x3_8bytepx
 {
@@ -62,6 +65,9 @@ class XCSD_TierBox
 
  xy4 global_top_left_;
 
+ //s2 checked_average_codes_ [3];
+ std::set<u1> checked_average_codes_;
+
 public:
 
  XCSD_TierBox(rc2 matrix_position);
@@ -98,6 +104,7 @@ public:
  typedef Box3x3_8bytepx _inner_box_3x3;
  typedef Box9x9_8bytepx _inner_box_9x9;
 
+ _inner_box_3x3* get_3x3_box(s1 ab_s1);
 
  rc2 get_matrix_index_position()
  {
@@ -137,6 +144,9 @@ public:
   static u2 result = get_ground_offset_for_inner_center(55);
   return result;
  }
+
+ void check_calculate_pixel_averages_1byte_level1(u1 start_byte, u1 end_byte,
+   XCSD_Image* image, n8* reset = nullptr);
 
  u2 get_ground_offset_for_tierbox_center(u2 tierbox_column_count, u1 tierbox_width)
  {

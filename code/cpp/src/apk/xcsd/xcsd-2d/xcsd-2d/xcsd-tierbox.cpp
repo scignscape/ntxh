@@ -7,6 +7,8 @@
 
 #include "xcsd-tierbox.h"
 
+#include "xcsd-image.h"
+
 Box3x3_8bytepx::Box3x3_8bytepx()
  :  color_average(0)
 {
@@ -47,7 +49,99 @@ XCSD_TierBox::XCSD_TierBox(rc2 matrix_position)
  init_boxes();
 }
 
+void XCSD_TierBox::check_calculate_pixel_averages_1byte_level1(u1 start_byte, u1 end_byte,
+  XCSD_Image* image, n8* reset)
+{
+ u1 code = (start_byte - 1);
+ u1 diff = end_byte - start_byte;
+ if(diff > 3)
+ {
+  // //  idea here is use highest bit combined with
+   //    no diff to signal diff unexpectedly large,
+   //    because the 8th-bit 2byte flag wouldn't
+   //    ordinarily use the diff bits
+  code |= 128;
+  diff -= 3;
+  if(diff > 3)
+    // //  so diff can't be more than 6 ...
+    diff = 3;
+ }
+ code |= diff << 3;
 
+ if(checked_average_codes_.count(code) > 0)
+   return;
+
+ checked_average_codes_.insert(code);
+
+ u4 fti = full_tier_index();
+
+ if(fti == 10)
+   qDebug() << " in " << fti;
+
+//  u4 offset = tbox->pixel_data_ground_offset();
+//  n8* start = data_.get_pixel_data_start(offset);
+//  std::map<s1, std::pair<u2, std::vector<n8>>> sdi;
+
+ std::map<s1, std::pair<u2, std::vector<n8>>> sdi;
+
+ //u4 start =
+
+ image->data_tierbox_to_sdi_pixel_map(fti, sdi);
+
+
+ for(auto const& [ab_s1, thr_vec]: sdi)
+ {
+  n8 avg_3x3 = 0;
+
+  u2 averages[8] = {0}; // // seems we don't need more than 2 bytes for sum ...
+
+  for(u1 v = 0; v < 9; ++v)
+  {
+   n8 pixel = thr_vec.second[v];
+
+   if(fti == 10 && ab_s1 == 12)
+     qDebug() << "v = " << v << ", pixel = " << pixel;
+
+   for(u1 u = 0; u < 8; ++u)
+   {
+     averages[u] += (u1)(pixel >> (u << 3));
+
+     if(fti == 10 && ab_s1 == 12)
+       qDebug() << " ! u = " << u << ", a = " << averages[u];
+   }
+  }
+  for(u1 u = 0; u < 8; ++u)
+  {
+   if(fti == 10 && ab_s1 == 12)
+     qDebug() << " !! u = " << u << ", avg_3x3 = " << avg_3x3;
+
+   avg_3x3 |= ((n8)((u1)(averages[u] / 9)) << (u << 3));
+
+   if(fti == 10 && ab_s1 == 12)
+     qDebug() << " ! u = " << u << ", avg_3x3 = " << avg_3x3;
+
+  }
+
+  XCSD_TierBox::_inner_box_3x3* box = get_3x3_box(ab_s1);
+
+  if(fti == 10 && ab_s1 == 12)
+    qDebug() << " ! box " << box << "at " << ab_s1 << " avg3x3 " << avg_3x3;
+
+  if(reset)
+    box->color_average = *reset;
+
+  box->color_average |= avg_3x3;
+ }
+
+}
+
+XCSD_TierBox::_inner_box_3x3* XCSD_TierBox::get_3x3_box(s1 ab_s1)
+{
+ ab1 ab = ab1::from_base_10(ab_s1).double_minus(1); // {(u1)((u1)ab_s1 / 10), (u1)((u1)ab_s1 % 10)};
+
+ _inner_box_9x9* abox = box9x9_.get(ab.a);
+ return abox->vec_3x3.get(ab.b);
+}
 
 void XCSD_TierBox::init_boxes()
 {

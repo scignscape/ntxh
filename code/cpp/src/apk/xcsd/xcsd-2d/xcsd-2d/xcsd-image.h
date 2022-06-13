@@ -162,6 +162,8 @@ public:
 
  void init_pixel_data(QString info_folder = {});
 
+ void calculate_pixel_averages_1byte(u1 start, u1 end, n8* reset = nullptr);
+
  void get_255_palatte(QVector<QColor>& vec);
 
  void save_full_tier_image(QString path, Save_Mode save_mode,
@@ -203,6 +205,7 @@ public:
  void save_fb_gradient_trimap(fb2 poles, QString file_path,
    QString folder);
 
+ XCSD_TierBox* get_tierbox_from_grid_tierbox(const XCSD_Image_Geometry::Grid_TierBox& gtb);
 };
 
 

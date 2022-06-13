@@ -141,7 +141,8 @@ void XCSD_Image::init_pixel_data(QString info_folder)
     }
    }
 
- save_file(info_path, info_string);
+  save_file(info_path, info_string);
+
  });
 
 
@@ -999,7 +1000,7 @@ void XCSD_Image::set_local_histograms_channels()
 
 // rc2 rc  = {0, 21};
 
- XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
+  XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
 
 //  qDebug() << tbox->get_grid_position();
 
@@ -1014,6 +1015,9 @@ void XCSD_Image::set_local_histograms_channels()
   }
 
  });
+
+ //?calculate_pixel_averages_1byte(7, 8);
+
 }
 
 QVector<Local_Histogram_Data>* XCSD_Image::calculate_local_histograms() //QString path_template)
@@ -1211,6 +1215,7 @@ prr1 XCSD_Image::rgb555_888_color_distance(u2 rgb555, u4 rgb)
 
 void XCSD_Image::save_fb_gradient_trimap(fb2 poles, QString file_path, QString folder)
 {
+ //? calculate_pixel_averages();
 
 // n8 sq = rgb555_color_distance_expanded(poles._to<clrs2>()).inner_sum_of_squares();
 // r8 distance = sqrt(sq);
@@ -1263,6 +1268,9 @@ void XCSD_Image::save_fb_gradient_trimap(fb2 poles, QString file_path, QString f
 //   ++tierc;
 
  }
+
+ calculate_pixel_averages_1byte(7, 8);
+
 
  //QImage image;
  save_full_tier_image(file_path.arg("fb"), Save_FB, folder);
@@ -1602,6 +1610,32 @@ u4 XCSD_Image::data_tierbox_to_sdi_pixel_map(u4 tierbox_index,
 //}
 
 
+
+void XCSD_Image::calculate_pixel_averages_1byte(u1 start, u1 end, n8* reset)
+{
+ geometry_.for_each_full_tierbox([this, start, end, reset](XCSD_Image_Geometry::Grid_TierBox& gtb)
+ {
+  rc2 rc  = gtb.loc.rc()._to_unsigned();
+
+//  if(rc == rc2{0, 1})
+//    qDebug() << rc;
+
+// rc2 rc  = {0, 21};
+
+  XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
+
+  tbox->check_calculate_pixel_averages_1byte_level1(start, end, this, reset);
+
+ });
+}
+
+
+XCSD_TierBox* XCSD_Image::get_tierbox_from_grid_tierbox(const XCSD_Image_Geometry::Grid_TierBox& gtb)
+{
+ rc2s rc = gtb.loc.rc();
+ return data_.get_full_tierbox_at_position(rc._to_raw_unsigned());
+}
+
 void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
   QImage& target, Save_Mode save_mode,
   XCSD_Image_Geometry::Iteration_Environment ienv,
@@ -1618,12 +1652,16 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
   tier_blur_level = code >> 6;
  }
 
- u4 index = geometry_.get_tierbox_index(gtb, ienv.size_even_odd_info, mchi);
+ u4 fti = geometry_.get_tierbox_index(gtb, ienv.size_even_odd_info, mchi);
 
  std::map<s1, std::pair<u2, std::vector<n8>>> sdi;
 
- u4 di = data_tierbox_to_sdi_pixel_map(index, sdi);
+ u4 di = data_tierbox_to_sdi_pixel_map(fti, sdi);
 
+ XCSD_TierBox* tbox = get_tierbox_from_grid_tierbox(gtb);
+
+// if(tier_blur_level > 0)
+//   tbox->check_calculate_pixel_averages_1byte_level1(7, 8, this);
 
  if(data_index)
  {
@@ -1645,7 +1683,7 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
  if(!info_folder.isEmpty())
  {
   info_path = QString("%1/%2-%3-%4.txt").arg(info_folder).arg(gtb.loc.r()).arg(gtb.loc.c()).arg(di);
-  info_string = QString("Full tierbox %1 %2 (%3)\n\n\n").arg(gtb.loc.r()).arg(gtb.loc.c()).arg(index);
+  info_string = QString("Full tierbox %1 %2 (%3)\n\n\n").arg(gtb.loc.r()).arg(gtb.loc.c()).arg(fti);
  }
 
  for(auto const& [ab_s1, thr_vec]: sdi)
@@ -1670,26 +1708,18 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
 
   u4 offset = thr_vec.first;
 
+  if(fti == 10 && ab_s1 == 12)
+    qDebug() << " in " << fti;
+
   n8 _avg_3x3 = 0;
   n8* blur_avg;
+
   if(tier_blur_level == 0)
     blur_avg = nullptr;
-
   else
   {
    blur_avg = &_avg_3x3;
-   u2 averages[8] = {0}; // // seems we don't need more than 2 bytes for sum ...
-
-   for(u1 v = 0; v < 9; ++v)
-   {
-    n8 pixel = thr_vec.second[v];
-    for(u1 u = 0; u < 8; ++u)
-      averages[u] += (u1)(pixel >> (u << 3));
-   }
-   for(u1 u = 0; u < 8; ++u)
-   {
-    _avg_3x3 |= ((n8)((u1)(averages[u] / 9)) << (u << 3));
-   }
+   _avg_3x3 = tbox->get_3x3_box(ab_s1)->color_average;
   }
 
   u1 vi = 0; // vector index
@@ -2103,10 +2133,17 @@ void XCSD_Image::init_tierboxes()
 
  XCSD_Image_Geometry::Iteration_Environment ienv = geometry_.formulate_iteration_environment();
 
+ static n8 calc_reset = 0;
+
  geometry_.for_each_full_tierbox([this, &ienv](XCSD_Image_Geometry::Grid_TierBox& gtb)
  {
-  rc2 rc  = gtb.loc.rc()._to_unsigned();
-  XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
+//  rc2 rc  = gtb.loc.rc()._to_unsigned();
+//  XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
+
+  XCSD_TierBox* tbox = get_tierbox_from_grid_tierbox(gtb);
+
+  //tbox->check_calculate_pixel_averages_1byte_level1(1, 4, this);
+
 
   tbox->set_mch_code(gtb.loc.get_mch_code());
 
@@ -2133,6 +2170,8 @@ void XCSD_Image::init_tierboxes()
 
   xy4 xy = geometry_.get_tierbox_scanline_top_left(gtb);
   tbox->set_global_top_left(xy);
+
+  tbox->check_calculate_pixel_averages_1byte_level1(1, 4, this, &calc_reset);
 
 //  QColor qc = pixel_number_to_qcolor(pixel);
 //  qDebug() << tbox->matrix_position();
