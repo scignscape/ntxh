@@ -35,46 +35,137 @@ Trimap_Demo_Frame::Trimap_Demo_Frame(QString path,
  fg_button_->setChecked(true);
  left_buttons_->addButton(fg_button_);
 
- bg_button_ = image_path_as_qbutton(this, path.arg("bg"), image_width_, image_height_);
- bg_label_ = image_path_as_qlabel(this, path.arg("bg"), large_image_width_, large_image_height_);
- left_layout_->addWidget(bg_button_, 1, 0);
- large_images_->addWidget(bg_label_);
- bg_button_->setCheckable(true);
- bg_button_->setChecked(true);
- left_buttons_->addButton(bg_button_);
-
- fb_button_ = image_path_as_qbutton(this, path.arg("fb"), image_width_, image_height_);
- fb_label_ = image_path_as_qlabel(this, path.arg("fb"), large_image_width_, large_image_height_);
- left_layout_->addWidget(fb_button_, 2, 0);
- large_images_->addWidget(fb_label_);
- fb_button_->setCheckable(true);
- fb_button_->setChecked(true);
- left_buttons_->addButton(fb_button_);
-
-
  fgr_button_ = image_path_as_qbutton(this, path.arg("fgr"), image_width_, image_height_);
  fgr_label_ = image_path_as_qlabel(this, path.arg("fgr"), large_image_width_, large_image_height_);
- left_layout_->addWidget(fgr_button_, 0, 1);
+ left_layout_->addWidget(fgr_button_, 1, 0);
  large_images_->addWidget(fgr_label_);
  fgr_button_->setCheckable(true);
- fgr_button_->setChecked(true);
+ fgr_button_->setChecked(false);
  left_buttons_->addButton(fgr_button_);
+
+ fg2r_button_ = image_path_as_qbutton(this, path.arg("fg2r"), image_width_, image_height_);
+ fg2r_label_ = image_path_as_qlabel(this, path.arg("fg2r"), large_image_width_, large_image_height_);
+ left_layout_->addWidget(fg2r_button_, 2, 0);
+ large_images_->addWidget(fg2r_label_);
+ fg2r_button_->setCheckable(true);
+ fg2r_button_->setChecked(false);
+ left_buttons_->addButton(fg2r_button_);
+
+ fg3r_button_ = image_path_as_qbutton(this, path.arg("fg3r"), image_width_, image_height_);
+ fg3r_label_ = image_path_as_qlabel(this, path.arg("fg3r"), large_image_width_, large_image_height_);
+ left_layout_->addWidget(fg3r_button_, 3, 0);
+ large_images_->addWidget(fg3r_label_);
+ fg3r_button_->setCheckable(true);
+ fg3r_button_->setChecked(false);
+ left_buttons_->addButton(fg3r_button_);
+
+
+ bg_button_ = image_path_as_qbutton(this, path.arg("bg"), image_width_, image_height_);
+ bg_label_ = image_path_as_qlabel(this, path.arg("bg"), large_image_width_, large_image_height_);
+ left_layout_->addWidget(bg_button_, 0, 1);
+ large_images_->addWidget(bg_label_);
+ bg_button_->setCheckable(true);
+ bg_button_->setChecked(false);
+ left_buttons_->addButton(bg_button_);
 
  bgr_button_ = image_path_as_qbutton(this, path.arg("bgr"), image_width_, image_height_);
  bgr_label_ = image_path_as_qlabel(this, path.arg("bgr"), large_image_width_, large_image_height_);
  left_layout_->addWidget(bgr_button_, 1, 1);
  large_images_->addWidget(bgr_label_);
  bgr_button_->setCheckable(true);
- bgr_button_->setChecked(true);
+ bgr_button_->setChecked(false);
  left_buttons_->addButton(bgr_button_);
+
+ bg2r_button_ = image_path_as_qbutton(this, path.arg("bg2r"), image_width_, image_height_);
+ bg2r_label_ = image_path_as_qlabel(this, path.arg("bg2r"), large_image_width_, large_image_height_);
+ left_layout_->addWidget(bg2r_button_, 2, 1);
+ large_images_->addWidget(bg2r_label_);
+ bg2r_button_->setCheckable(true);
+ bg2r_button_->setChecked(false);
+ left_buttons_->addButton(bg2r_button_);
+
+ bg3r_button_ = image_path_as_qbutton(this, path.arg("bg3r"), image_width_, image_height_);
+ bg3r_label_ = image_path_as_qlabel(this, path.arg("bg3r"), large_image_width_, large_image_height_);
+ left_layout_->addWidget(bg3r_button_, 3, 1);
+ large_images_->addWidget(bg3r_label_);
+ bg3r_button_->setCheckable(true);
+ bg3r_button_->setChecked(false);
+ left_buttons_->addButton(bg3r_button_);
+
+
+ fb_button_ = image_path_as_qbutton(this, path.arg("fb"), image_width_, image_height_);
+ fb_label_ = image_path_as_qlabel(this, path.arg("fb"), large_image_width_, large_image_height_);
+ left_layout_->addWidget(fb_button_, 0, 2);
+ large_images_->addWidget(fb_label_);
+ fb_button_->setCheckable(true);
+ fb_button_->setChecked(false);
+ left_buttons_->addButton(fb_button_);
 
  fbr_button_ = image_path_as_qbutton(this, path.arg("fbr"), image_width_, image_height_);
  fbr_label_ = image_path_as_qlabel(this, path.arg("fbr"), large_image_width_, large_image_height_);
- left_layout_->addWidget(fbr_button_, 2, 1);
+ left_layout_->addWidget(fbr_button_, 1, 2);
  large_images_->addWidget(fbr_label_);
  fbr_button_->setCheckable(true);
- fbr_button_->setChecked(true);
+ fbr_button_->setChecked(false);
  left_buttons_->addButton(fbr_button_);
+
+ fb2r_button_ = image_path_as_qbutton(this, path.arg("fb2r"), image_width_, image_height_);
+ fb2r_label_ = image_path_as_qlabel(this, path.arg("fb2r"), large_image_width_, large_image_height_);
+ left_layout_->addWidget(fb2r_button_, 2, 2);
+ large_images_->addWidget(fb2r_label_);
+ fb2r_button_->setCheckable(true);
+ fb2r_button_->setChecked(false);
+ left_buttons_->addButton(fb2r_button_);
+
+ fb3r_button_ = image_path_as_qbutton(this, path.arg("fb3r"), image_width_, image_height_);
+ fb3r_label_ = image_path_as_qlabel(this, path.arg("fb3r"), large_image_width_, large_image_height_);
+ left_layout_->addWidget(fb3r_button_, 3, 2);
+ large_images_->addWidget(fb3r_label_);
+ fb3r_button_->setCheckable(true);
+ fb3r_button_->setChecked(false);
+ left_buttons_->addButton(fb3r_button_);
+
+
+// bg_button_ = image_path_as_qbutton(this, path.arg("bg"), image_width_, image_height_);
+// bg_label_ = image_path_as_qlabel(this, path.arg("bg"), large_image_width_, large_image_height_);
+// left_layout_->addWidget(bg_button_, 1, 0);
+// large_images_->addWidget(bg_label_);
+// bg_button_->setCheckable(true);
+// bg_button_->setChecked(true);
+// left_buttons_->addButton(bg_button_);
+
+// fb_button_ = image_path_as_qbutton(this, path.arg("fb"), image_width_, image_height_);
+// fb_label_ = image_path_as_qlabel(this, path.arg("fb"), large_image_width_, large_image_height_);
+// left_layout_->addWidget(fb_button_, 2, 0);
+// large_images_->addWidget(fb_label_);
+// fb_button_->setCheckable(true);
+// fb_button_->setChecked(true);
+// left_buttons_->addButton(fb_button_);
+
+
+// fgr_button_ = image_path_as_qbutton(this, path.arg("fgr"), image_width_, image_height_);
+// fgr_label_ = image_path_as_qlabel(this, path.arg("fgr"), large_image_width_, large_image_height_);
+// left_layout_->addWidget(fgr_button_, 0, 1);
+// large_images_->addWidget(fgr_label_);
+// fgr_button_->setCheckable(true);
+// fgr_button_->setChecked(true);
+// left_buttons_->addButton(fgr_button_);
+
+// bgr_button_ = image_path_as_qbutton(this, path.arg("bgr"), image_width_, image_height_);
+// bgr_label_ = image_path_as_qlabel(this, path.arg("bgr"), large_image_width_, large_image_height_);
+// left_layout_->addWidget(bgr_button_, 1, 1);
+// large_images_->addWidget(bgr_label_);
+// bgr_button_->setCheckable(true);
+// bgr_button_->setChecked(true);
+// left_buttons_->addButton(bgr_button_);
+
+// fbr_button_ = image_path_as_qbutton(this, path.arg("fbr"), image_width_, image_height_);
+// fbr_label_ = image_path_as_qlabel(this, path.arg("fbr"), large_image_width_, large_image_height_);
+// left_layout_->addWidget(fbr_button_, 2, 1);
+// large_images_->addWidget(fbr_label_);
+// fbr_button_->setCheckable(true);
+// fbr_button_->setChecked(true);
+// left_buttons_->addButton(fbr_button_);
 
  connect(left_buttons_, static_cast<void(QButtonGroup::*)(int)>
          (&QButtonGroup::buttonClicked),

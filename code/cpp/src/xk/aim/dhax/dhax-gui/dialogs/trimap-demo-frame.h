@@ -37,12 +37,20 @@ class Trimap_Demo_Frame : public QFrame
  QButtonGroup* left_buttons_;
 
  QPushButton* fg_button_;
- QPushButton* bg_button_;
- QPushButton* fb_button_;
-
  QPushButton* fgr_button_;
+ QPushButton* fg2r_button_;
+ QPushButton* fg3r_button_;
+
+ QPushButton* bg_button_;
  QPushButton* bgr_button_;
+ QPushButton* bg2r_button_;
+ QPushButton* bg3r_button_;
+
+ QPushButton* fb_button_;
  QPushButton* fbr_button_;
+ QPushButton* fb2r_button_;
+ QPushButton* fb3r_button_;
+
 
 
  QGridLayout* left_layout_;
@@ -53,11 +61,19 @@ class Trimap_Demo_Frame : public QFrame
  QStackedWidget* large_images_;
 
  QLabel* fg_label_;
- QLabel* bg_label_;
- QLabel* fb_label_;
  QLabel* fgr_label_;
+ QLabel* fg2r_label_;
+ QLabel* fg3r_label_;
+
+ QLabel* bg_label_;
  QLabel* bgr_label_;
+ QLabel* bg2r_label_;
+ QLabel* bg3r_label_;
+
+ QLabel* fb_label_;
  QLabel* fbr_label_;
+ QLabel* fb2r_label_;
+ QLabel* fb3r_label_;
 
 
  u4 image_width_;

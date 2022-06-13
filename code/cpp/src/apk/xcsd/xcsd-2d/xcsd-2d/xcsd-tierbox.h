@@ -36,6 +36,7 @@ struct Box3x3_8bytepx
 
 struct Box9x9_8bytepx
 {
+ n8 color_average;
  Vec1d<Box3x3_8bytepx> vec_3x3;
  Box9x9_8bytepx();
 };
@@ -62,6 +63,7 @@ class XCSD_TierBox
  u2 intra_tier_ring_index_;
 
  n8 reference_color_;
+ n8 color_average_;
 
  xy4 global_top_left_;
 
@@ -92,6 +94,7 @@ public:
  ACCESSORS(u2 ,intra_tier_ring_index)
 
  ACCESSORS(n8 ,reference_color)
+ ACCESSORS(n8 ,color_average)
 
  ACCESSORS(xy4 ,global_top_left)
 
@@ -105,6 +108,7 @@ public:
  typedef Box9x9_8bytepx _inner_box_9x9;
 
  _inner_box_3x3* get_3x3_box(s1 ab_s1);
+ _inner_box_9x9* get_9x9_box(s1 a_s1);
 
  rc2 get_matrix_index_position()
  {
@@ -145,8 +149,18 @@ public:
   return result;
  }
 
+ void check_calculate_pixel_averages_1byte(u1 start_byte, u1 end_byte,
+   XCSD_Image* image, n8* reset = nullptr);
+
  void check_calculate_pixel_averages_1byte_level1(u1 start_byte, u1 end_byte,
    XCSD_Image* image, n8* reset = nullptr);
+
+ void check_calculate_pixel_averages_1byte_level2(u1 start_byte, u1 end_byte,
+   XCSD_Image* image, n8* reset = nullptr);
+
+ void check_calculate_pixel_averages_1byte_level3(u1 start_byte, u1 end_byte,
+   XCSD_Image* image, n8* reset = nullptr);
+
 
  u2 get_ground_offset_for_tierbox_center(u2 tierbox_column_count, u1 tierbox_width)
  {

@@ -43,11 +43,20 @@ XCSD_TierBox::XCSD_TierBox(rc2 matrix_position)
      compressed_clock_index_(0),
      full_clock_index_(0),
      intra_tier_ring_index_(0),
-     reference_color_(0),
+     reference_color_(0), color_average_(0),
      global_top_left_({0,0})
 {
  init_boxes();
 }
+
+void XCSD_TierBox::check_calculate_pixel_averages_1byte(u1 start_byte, u1 end_byte,
+  XCSD_Image* image, n8* reset)
+{
+ check_calculate_pixel_averages_1byte_level1(start_byte, end_byte, image, reset);
+ check_calculate_pixel_averages_1byte_level2(start_byte, end_byte, image, reset);
+ check_calculate_pixel_averages_1byte_level3(start_byte, end_byte, image, reset);
+}
+
 
 void XCSD_TierBox::check_calculate_pixel_averages_1byte_level1(u1 start_byte, u1 end_byte,
   XCSD_Image* image, n8* reset)
@@ -75,9 +84,6 @@ void XCSD_TierBox::check_calculate_pixel_averages_1byte_level1(u1 start_byte, u1
 
  u4 fti = full_tier_index();
 
- if(fti == 10)
-   qDebug() << " in " << fti;
-
 //  u4 offset = tbox->pixel_data_ground_offset();
 //  n8* start = data_.get_pixel_data_start(offset);
 //  std::map<s1, std::pair<u2, std::vector<n8>>> sdi;
@@ -99,33 +105,13 @@ void XCSD_TierBox::check_calculate_pixel_averages_1byte_level1(u1 start_byte, u1
   {
    n8 pixel = thr_vec.second[v];
 
-   if(fti == 10 && ab_s1 == 12)
-     qDebug() << "v = " << v << ", pixel = " << pixel;
-
-   for(u1 u = 0; u < 8; ++u)
-   {
+   for(u1 u = start_byte - 1; u < end_byte; ++u)
      averages[u] += (u1)(pixel >> (u << 3));
-
-     if(fti == 10 && ab_s1 == 12)
-       qDebug() << " ! u = " << u << ", a = " << averages[u];
-   }
   }
-  for(u1 u = 0; u < 8; ++u)
-  {
-   if(fti == 10 && ab_s1 == 12)
-     qDebug() << " !! u = " << u << ", avg_3x3 = " << avg_3x3;
-
-   avg_3x3 |= ((n8)((u1)(averages[u] / 9)) << (u << 3));
-
-   if(fti == 10 && ab_s1 == 12)
-     qDebug() << " ! u = " << u << ", avg_3x3 = " << avg_3x3;
-
-  }
+  for(u1 u = start_byte - 1; u < end_byte; ++u)
+    avg_3x3 |= ((n8)((u1)(averages[u] / 9)) << (u << 3));
 
   XCSD_TierBox::_inner_box_3x3* box = get_3x3_box(ab_s1);
-
-  if(fti == 10 && ab_s1 == 12)
-    qDebug() << " ! box " << box << "at " << ab_s1 << " avg3x3 " << avg_3x3;
 
   if(reset)
     box->color_average = *reset;
@@ -133,6 +119,79 @@ void XCSD_TierBox::check_calculate_pixel_averages_1byte_level1(u1 start_byte, u1
   box->color_average |= avg_3x3;
  }
 
+}
+
+void XCSD_TierBox::check_calculate_pixel_averages_1byte_level2(u1 start_byte, u1 end_byte,
+  XCSD_Image* image, n8* reset)
+{
+ for(u1 b = 0; b < 9; ++b)
+ {
+  _inner_box_9x9* box = box9x9_.get(b);
+
+  n8 avg_9x9 = 0;
+
+  u2 averages_9x9[8] = {0}; // // seems we don't need more than 2 bytes for sum ...
+
+  for(u1 v = 0; v < 9; ++v)
+  {
+   _inner_box_3x3* vbox = box->vec_3x3.get(v);
+
+   for(u1 u = start_byte - 1; u < end_byte; ++u)
+   {
+    n8 pixel = vbox->color_average;
+    averages_9x9[u] += (u1)(pixel >> (u << 3));
+   }
+  }
+
+  for(u1 u = start_byte - 1; u < end_byte; ++u)
+  {
+   avg_9x9 |= ((n8)((u1)(averages_9x9[u] / 9)) << (u << 3));
+  }
+
+  if(reset)
+    box->color_average = *reset;
+
+  box->color_average = avg_9x9;
+ }
+
+
+}
+
+void XCSD_TierBox::check_calculate_pixel_averages_1byte_level3(u1 start_byte, u1 end_byte,
+  XCSD_Image* image, n8* reset)
+{
+ if(reset)
+   color_average_ = *reset;
+
+ u2 averages_27x27[8] = {0}; // // seems we don't need more than 2 bytes for sum ...
+
+ n8 avg_27x27 = 0;
+
+ for(u1 b = 0; b < 9; ++b)
+ {
+  _inner_box_9x9* box = box9x9_.get(b);
+
+  for(u1 u = start_byte - 1; u < end_byte; ++u)
+  {
+   n8 pixel = box->color_average;
+   averages_27x27[u] += (u1)(pixel >> (u << 3));
+  }
+ }
+
+ for(u1 u = start_byte - 1; u < end_byte; ++u)
+ {
+  avg_27x27 |= ((n8)((u1)(averages_27x27[u] / 9)) << (u << 3));
+ }
+
+ color_average_ |= avg_27x27;
+
+
+}
+
+
+XCSD_TierBox::_inner_box_9x9* XCSD_TierBox::get_9x9_box(s1 a_s1)
+{
+ return box9x9_.get(a_s1 - 1);
 }
 
 XCSD_TierBox::_inner_box_3x3* XCSD_TierBox::get_3x3_box(s1 ab_s1)

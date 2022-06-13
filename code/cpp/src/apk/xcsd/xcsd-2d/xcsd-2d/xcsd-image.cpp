@@ -1277,10 +1277,18 @@ void XCSD_Image::save_fb_gradient_trimap(fb2 poles, QString file_path, QString f
  save_full_tier_image(file_path.arg("fg"), Save_FG); //, folder);
  save_full_tier_image(file_path.arg("bg"), Save_BG); //, folder);
 
- save_full_tier_image(file_path.arg("fbr"), Save_FB | Tier_Blur_3, folder);
+ save_full_tier_image(file_path.arg("fbr"), Save_FB | Tier_Blur_3);
  save_full_tier_image(file_path.arg("fgr"), Save_FG | Tier_Blur_3); //, folder);
  save_full_tier_image(file_path.arg("bgr"), Save_BG | Tier_Blur_3); //, folder);
 
+ save_full_tier_image(file_path.arg("fb2r"), Save_FB | Tier_Blur_9);
+ save_full_tier_image(file_path.arg("fg2r"), Save_FG | Tier_Blur_9); //, folder);
+ save_full_tier_image(file_path.arg("bg2r"), Save_BG | Tier_Blur_9); //, folder);
+
+
+ save_full_tier_image(file_path.arg("fb3r"), Save_FB | Tier_Blur_27);
+ save_full_tier_image(file_path.arg("fg3r"), Save_FG | Tier_Blur_27); //, folder);
+ save_full_tier_image(file_path.arg("bg3r"), Save_BG | Tier_Blur_27); //, folder);
 
 
  save_full_tier_image(file_path.arg("original"), Save_QRgb);
@@ -1624,7 +1632,7 @@ void XCSD_Image::calculate_pixel_averages_1byte(u1 start, u1 end, n8* reset)
 
   XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
 
-  tbox->check_calculate_pixel_averages_1byte_level1(start, end, this, reset);
+  tbox->check_calculate_pixel_averages_1byte(start, end, this, reset);
 
  });
 }
@@ -1708,18 +1716,20 @@ void XCSD_Image::tierbox_to_qimage(XCSD_Image_Geometry::Grid_TierBox& gtb,
 
   u4 offset = thr_vec.first;
 
-  if(fti == 10 && ab_s1 == 12)
-    qDebug() << " in " << fti;
-
-  n8 _avg_3x3 = 0;
+  n8 _avg = 0;
   n8* blur_avg;
 
   if(tier_blur_level == 0)
     blur_avg = nullptr;
   else
   {
-   blur_avg = &_avg_3x3;
-   _avg_3x3 = tbox->get_3x3_box(ab_s1)->color_average;
+   blur_avg = &_avg;
+   if(tier_blur_level == 1)
+     _avg = tbox->get_3x3_box(ab_s1)->color_average;
+   else if(tier_blur_level == 2)
+     _avg = tbox->get_9x9_box(abg.a)->color_average;
+   else
+     _avg = tbox->color_average();
   }
 
   u1 vi = 0; // vector index
@@ -2171,7 +2181,7 @@ void XCSD_Image::init_tierboxes()
   xy4 xy = geometry_.get_tierbox_scanline_top_left(gtb);
   tbox->set_global_top_left(xy);
 
-  tbox->check_calculate_pixel_averages_1byte_level1(1, 4, this, &calc_reset);
+  tbox->check_calculate_pixel_averages_1byte(1, 4, this, &calc_reset);
 
 //  QColor qc = pixel_number_to_qcolor(pixel);
 //  qDebug() << tbox->matrix_position();
