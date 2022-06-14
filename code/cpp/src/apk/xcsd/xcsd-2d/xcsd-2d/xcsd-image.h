@@ -164,7 +164,7 @@ public:
 
  void calculate_pixel_averages_1byte(u1 start, u1 end, n8* reset = nullptr);
 
- void get_255_palatte(QVector<QColor>& vec);
+ void get_255_palette(QVector<QColor>& vec);
 
  void save_full_tier_image(QString path, Save_Mode save_mode,
     QString info_folder = {},
@@ -201,6 +201,10 @@ public:
  static prr1 rgb_to_prr(u4 rgb);
 
  static prr1 rgb555_888_color_distance(u2 rgb555, u4 rgb);
+
+ void show_255_palette(QString path,
+   QString sorted_path, u1 box_width = 50, u1 padline_width = 8);
+
 
  void save_fb_gradient_trimap(fb2 poles, QString file_path,
    QString folder);

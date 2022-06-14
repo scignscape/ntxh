@@ -324,8 +324,10 @@ QString Simple_Rectangle_Measurement_Dialog::generate_overlay_file(Solid_Color_L
  {
   temp_dir.replace(0, 1, '/');
   QString dir = qfi.absolutePath() + temp_dir;
+
   QDir qd(dir);
   qd.mkpath(".");
+
   path = path_pattern.arg(dir).arg(qfi.completeBaseName()).arg(scl->role());
  }
  else
@@ -356,15 +358,17 @@ void Simple_Rectangle_Measurement_Dialog::show_solid_color_label_context_menu(co
 
  menu->addAction("Show Dialog", [this]
  {
+  QFileInfo qfi(image_file_path_);
+
   QStringList qsl;
-  QString path = generate_occurant_color_mean_summary_file("@proc"); // scl->color();
+  QString path = generate_occurant_color_mean_summary_file("@_proc/_Simple_Rectangle_Measurement_Dialog"); // scl->color();
   qsl << path;
-  path = generate_overlay_file(solid_color_labels_[0], "@proc"); // scl->color();
+  path = generate_overlay_file(solid_color_labels_[0], "@_proc/_Simple_Rectangle_Measurement_Dialog"); // scl->color();
   qsl << path;
-  path = generate_overlay_file(solid_color_labels_[1], "@proc"); // scl->color();
+  path = generate_overlay_file(solid_color_labels_[1], "@_proc/_Simple_Rectangle_Measurement_Dialog"); // scl->color();
   qsl << path;
 
-  Q_EMIT color_mean_dialog_requested(qsl);
+  Q_EMIT color_mean_dialog_requested(qfi.absolutePath(), qsl);
 
  });
 
@@ -375,7 +379,6 @@ void Simple_Rectangle_Measurement_Dialog::show_solid_color_label_context_menu(co
 
 QString Simple_Rectangle_Measurement_Dialog::generate_occurant_color_mean_summary_file(QString temp_dir)
 {
-
  QString path;
 
  QFileInfo qfi(image_file_path_);
@@ -395,8 +398,10 @@ QString Simple_Rectangle_Measurement_Dialog::generate_occurant_color_mean_summar
  {
   temp_dir.replace(0, 1, '/');
   QString dir = qfi.absolutePath() + temp_dir;
+
   QDir qd(dir);
-  qd.mkdir(".");
+  qd.mkpath(".");
+
   path = path_pattern.arg(dir).arg(qfi.completeBaseName());
  }
  else

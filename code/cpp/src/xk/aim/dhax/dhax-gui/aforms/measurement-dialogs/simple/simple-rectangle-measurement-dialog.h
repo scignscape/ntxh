@@ -114,7 +114,7 @@ public:
 
 Q_SIGNALS:
 
- void color_mean_dialog_requested(QStringList);
+ void color_mean_dialog_requested(QString, QStringList);
 
 };
 

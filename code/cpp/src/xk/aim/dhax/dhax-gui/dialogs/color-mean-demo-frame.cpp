@@ -51,20 +51,22 @@ Color_Mean_Demo_Frame::Color_Mean_Demo_Frame(QVector<QStringList> paths,
  labels_.resize(total);
 
 
- u1 u = 0;
+ u1 col = 0;
  for(QStringList qsl : paths)
  {
+  u1 row = 0;
   for(QString path : qsl)
   {
-   buttons_[u] = image_path_as_qbutton(this, path, image_width_, image_height_);
-   labels_[u] = image_path_as_qlabel(this, path, large_image_width_, large_image_height_);
-   left_layout_->addWidget(buttons_[u], u, 0);
-   large_images_->addWidget(labels_[u]);
-   buttons_[u]->setCheckable(true);
-   buttons_[u]->setChecked(false);
-   left_buttons_->addButton(buttons_[u]);
-   ++u;
+   buttons_[row] = image_path_as_qbutton(this, path, image_width_, image_height_);
+   labels_[row] = image_path_as_qlabel(this, path, large_image_width_, large_image_height_);
+   left_layout_->addWidget(buttons_[row], row, col);
+   large_images_->addWidget(labels_[row]);
+   buttons_[row]->setCheckable(true);
+   buttons_[row]->setChecked(false);
+   left_buttons_->addButton(buttons_[row]);
+   ++row;
   }
+  ++col;
  }
 
  buttons_[0]->setChecked(true);

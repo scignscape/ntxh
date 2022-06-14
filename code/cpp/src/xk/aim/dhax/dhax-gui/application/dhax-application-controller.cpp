@@ -767,7 +767,7 @@ void DHAX_Application_Controller::init_image_scene_item(DHAX_Image_Scene_Item* s
 
 
  _self_connect_(si ,color_mean_dialog_requested)
-   _to_bind_1_(application_receiver_ ,handle_launch_color_mean_dialog);
+   _to_bind_2_(application_receiver_ ,handle_launch_color_mean_dialog);
 
 // si->self_connect(SIGNAL(polyline_save_notation_with_comment_requested()),
 //   application_receiver_, SLOT(handle_polyline_save_notation_with_comment()));
@@ -1062,13 +1062,27 @@ void DHAX_Application_Controller::dispatch_datagram(QByteArray qba)
 
 }
 
-void DHAX_Application_Controller::launch_color_mean_dialog(QStringList qsl)
+void DHAX_Application_Controller::launch_color_mean_dialog(QString folder, QStringList qsl)
 {
+ QString dir_s = folder + "/_proc/_DHAX_Application_Controller";
+
+ QDir qd(dir_s);
+ qd.mkpath(".");
+
  QDialog* dlg = new QDialog(application_main_window_);
 
  dlg->setWindowTitle("Contour View");
 
- Color_Mean_Demo_Frame* fr = new Color_Mean_Demo_Frame({qsl}, 200, 800, 300);
+ QStringList pal {main_window_controller_->current_image_file_path(),
+   dir_s + "/pals.png", dir_s + "/pal.png"};
+
+ main_window_controller_->check_init_xcsd_image();
+
+ //QVector<QColor> vec;
+ XCSD_Image* xcsd = main_window_controller_->xcsd_image();
+ xcsd->show_255_palette(pal[1], pal[2]);
+
+ Color_Mean_Demo_Frame* fr = new Color_Mean_Demo_Frame({qsl, pal}, 200, 800, 300);
 
  fr->setContextMenuPolicy(Qt::CustomContextMenu);
 

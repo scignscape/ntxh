@@ -209,7 +209,7 @@ Q_SIGNALS:
 
  void convert_notation_requested(call_Stamp_u2);
 
- void color_mean_dialog_requested(QStringList);
+ void color_mean_dialog_requested(QString, QStringList);
 
 protected:
  void paintEvent(QPaintEvent *);

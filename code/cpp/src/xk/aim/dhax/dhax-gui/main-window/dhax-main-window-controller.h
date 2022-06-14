@@ -56,6 +56,8 @@ class DHAX_Main_Window_Controller //: public QObject
 
  XCSD_Image* xcsd_image_;
 
+ Mat2d<Vec1d<QString>> xcsd_paths_;
+
 public:
 
  DHAX_Main_Window_Controller();
@@ -70,6 +72,10 @@ public:
  ACCESSORS(DHAX_Application_Controller* ,application_controller)
  ACCESSORS(QString ,current_image_file_path)
  ACCESSORS(DHAX_Image_Scene_Item* ,image_scene_item)
+
+ ACCESSORS(XCSD_Image* ,xcsd_image)
+
+ void check_init_xcsd_image();
 
  void check_init_pdf_document_controller();
  void check_init_image_document_controller();

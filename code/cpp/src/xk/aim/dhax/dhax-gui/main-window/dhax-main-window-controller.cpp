@@ -584,20 +584,11 @@ void DHAX_Main_Window_Controller::show_local_color_histogram(rc2 rc)
 
 }
 
-void DHAX_Main_Window_Controller::show_xcsd_scene()
+void DHAX_Main_Window_Controller::check_init_xcsd_image()
 {
- if(current_image_file_path_.isEmpty())
- {
-  load_image();
- }
+ if(xcsd_image_)
+   return;
 
- qDebug() << current_image_file_path_;
-
- image_viewer_->get_graphics_frame()->show_info(QString("Loaded image (as XCSD scene): %1")
-   .arg(current_image_file_path_));
-
-
- //XCSD_Image xcsd;
  xcsd_image_ = new XCSD_Image;
 
  //xcsd.load_image(ROOT_FOLDER "/../pics/angle.jpg");
@@ -622,9 +613,8 @@ void DHAX_Main_Window_Controller::show_xcsd_scene()
 
  xcsd_image_->init_tierboxes();
 
- Mat2d<Vec1d<QString>> paths;
 
- xcsd_image_->draw_tierboxes_to_folder(ROOT_FOLDER "/../test/ukraine/u", &paths);
+ xcsd_image_->draw_tierboxes_to_folder(ROOT_FOLDER "/../test/ukraine/u", &xcsd_paths_);
 
  xcsd_image_->init_outer_ring_info();
 
@@ -633,16 +623,38 @@ void DHAX_Main_Window_Controller::show_xcsd_scene()
 
 
 
+}
+
+
+void DHAX_Main_Window_Controller::show_xcsd_scene()
+{
+ if(current_image_file_path_.isEmpty())
+ {
+  load_image();
+ }
+
+ check_init_xcsd_image();
+
+ XCSD_Image_Geometry& xcsg = xcsd_image_->geometry();
+
+ qDebug() << current_image_file_path_;
+
+ image_viewer_->get_graphics_frame()->show_info(QString("Loaded image (as XCSD scene): %1")
+   .arg(current_image_file_path_));
+
+
+ //XCSD_Image xcsd;
+
  image_scene_item_->hide_for_xcsd(); //setVisible(false);
 
  u1 lft = xcsg.horizontal_outer_sizes().left + image_scene_item_->pos().x();
  u1 top = xcsg.vertical_outer_sizes().top + image_scene_item_->pos().y();
 
 
- for(u2 r = 0; r < paths.n_rows(); ++r)
-  for(u2 c = 0; c < paths.n_cols(); ++c)
+ for(u2 r = 0; r < xcsd_paths_.n_rows(); ++r)
+  for(u2 c = 0; c < xcsd_paths_.n_cols(); ++c)
   {
-   QString qs = paths[r + 1][c + 1];
+   QString qs = xcsd_paths_[r + 1][c + 1];
    image_viewer_->scrolled_image_scene()->add_tierbox_pixmap(qs, {r, c},
      lft + c * 27, top + r * 27);
   }

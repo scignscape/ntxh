@@ -2323,7 +2323,7 @@ void XCSD_Image::init_tier_counts(XCSD_Image_Geometry::TierGrid_Preferances pref
 //}
 
 
-void XCSD_Image::get_255_palatte(QVector<QColor>& vec)
+void XCSD_Image::get_255_palette(QVector<QColor>& vec)
 {
  vec.resize(255);
 
@@ -2387,6 +2387,146 @@ void XCSD_Image::get_255_palatte(QVector<QColor>& vec)
 // }
 
 }
+
+void XCSD_Image::show_255_palette(QString path,
+  QString sorted_path,
+  u1 box_width,
+  u1 padline_width)
+{
+
+ QVector<QColor> vec; //(255);
+
+ get_255_palette(vec);
+
+
+ QPixmap pixmap(box_width * 30 + 20, box_width * 17);
+ QPainter painter(&pixmap);
+
+ u1 index = 0;
+
+ bool needs_padline = false;
+
+ painter.setPen(Qt::NoPen);
+
+ QMap<QRgb, u1> positions;
+
+ QMap<QRgb, QPoint> left_positions;
+
+ painter.setBrush(QColor(255, 255, 255));
+ painter.drawRect(0, 0, pixmap.width(), pixmap.height());
+
+ for(u1 y = 0; y < 17; ++y)
+ {
+  u2 top = y * box_width;
+
+  for(u1 x = 0; x < 15; ++x)
+  {
+   QColor c = vec[index];
+
+   positions[c.rgb()] = index;
+
+   if(y > 0)
+   {
+    if(y % 2)
+      needs_padline = (x < 14);
+    else
+      needs_padline = (x > 0);
+   }
+
+   painter.setBrush(c);
+
+
+   u2 left = x * box_width;
+
+   QRect full_rect(left, top, box_width, box_width);
+   left_positions[c.rgb()] = full_rect.center();
+
+   if(needs_padline)
+   {
+    painter.drawRect(left, top + padline_width, box_width, box_width - padline_width);
+//    painter.setBrush(QColor(255, 255, 255));
+//    painter.drawRect(left, top, box_width, padline_width);
+   }
+   else
+     painter.drawRect(left, top, box_width, box_width);
+
+   ++index;
+  }
+ }
+
+// pixmap.save(path);
+
+ QVector<QColor> vec1 = vec;
+
+ std::sort(vec1.begin(), vec1.end(), [](QColor lhs, QColor rhs)
+ {
+  return lhs.value() < rhs.value();
+ });
+
+// QPixmap pixmap1(box_width * 15, box_width * 17);
+// QPainter painter1(&pixmap1);
+
+ index = 0;
+
+ u2 xoffset = box_width * 15 + 20;
+
+ //bool needs_padline = false;
+
+ //QMap<QColor, u1> positions;
+
+ for(u1 y = 0; y < 17; ++y)
+ {
+  u2 top = y * box_width;
+
+  for(u1 x = 0; x < 15; ++x)
+  {
+   QColor c = vec1[index];
+
+
+   painter.setBrush(c);
+
+   u2 left = x * box_width + xoffset;
+
+//   if(needs_padline)
+//   {
+//    painter.drawRect(left, top + padline_width, box_width, box_width);
+//    painter.setBrush(QColor(255, 255, 255));
+//    painter.drawRect(left, top, box_width, padline_width);
+//   }
+//   else
+
+   QRect full_rect(left, top, box_width, box_width);
+
+   painter.setPen(Qt::NoPen);
+
+   painter.drawRect(full_rect);
+
+   QRgb rgb = c.rgb();
+   QPoint qp = left_positions[rgb];
+
+   u1 left_index = positions[rgb];
+
+   left_index /= 17;
+
+   QPen circle_pen = QPen(QColor(0, 0, 0));
+   circle_pen.setWidth(2);
+
+   painter.setPen(circle_pen);
+
+   painter.setBrush(QColor(255, 255, 255));
+
+   painter.drawEllipse(full_rect.center(), left_index, left_index);
+
+   ++index;
+  }
+ }
+
+// pixmap1.save(sorted_path);
+ pixmap.save(path);
+
+
+}
+
 
 // QImage i255 = image_.convertToFormat(QImage::Format_Indexed8, Qt::ColorOnly);
 
