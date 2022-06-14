@@ -167,6 +167,7 @@ public:
  void handle_complate_and_save_requested(bool with_comment);
  void handle_polyline_save_requested(bool with_comment);
 
+ void launch_color_mean_dialog(QStringList qsl);
 
 #ifdef USE_IFC
  void run_ifc_convert();

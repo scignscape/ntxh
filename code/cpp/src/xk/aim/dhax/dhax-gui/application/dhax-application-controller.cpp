@@ -59,6 +59,7 @@
 #include "application/dhax-application-receiver.h"
 
 #include "dialogs/trimap-demo-frame.h"
+#include "dialogs/color-mean-demo-frame.h"
 
 #include <QMessageBox>
 #include <QDesktopServices>
@@ -729,11 +730,20 @@ void DHAX_Application_Controller::convert_notation_to_curve()
 
 void DHAX_Application_Controller::init_image_scene_item(DHAX_Image_Scene_Item* si)
 {
- si->self_connect(SIGNAL(save_notation_requested(bool)),
-   application_receiver_, SLOT(handle_save_notation(bool)));
+// si->self_connect(SIGNAL(save_notation_requested(bool)),
+//   application_receiver_, SLOT(handle_save_notation(bool)));
 
- si->self_connect(SIGNAL(convert_notation_requested(call_Stamp_u2)),
-   application_receiver_, SLOT(handle_convert_notation(call_Stamp_u2)));
+ _self_connect_(si ,save_notation_requested)
+   _to_bind_1_(application_receiver_ ,handle_save_notation);
+
+
+
+// si->self_connect(SIGNAL(convert_notation_requested(call_Stamp_u2)),
+//   application_receiver_, SLOT(handle_convert_notation(call_Stamp_u2)));
+
+ _self_connect_(si ,convert_notation_requested)
+   _to_bind_1_(application_receiver_ ,handle_convert_notation);
+
 
 // si->self_connect(SIGNAL(save_notation_requested(bool)),
 //   application_receiver_, SLOT(handle_save_notation(bool)));
@@ -745,8 +755,19 @@ void DHAX_Application_Controller::init_image_scene_item(DHAX_Image_Scene_Item* s
 //   application_receiver_, SLOT(handle_convert_notation()));
 
 
- si->self_connect(SIGNAL(polyline_save_notation_requested(bool)),
-   application_receiver_, SLOT(handle_polyline_save_notation(bool)));
+// si->self_connect(SIGNAL(polyline_save_notation_requested(bool)),
+//   application_receiver_, SLOT(handle_polyline_save_notation(bool)));
+
+ _self_connect_(si ,polyline_save_notation_requested)
+   _to_bind_1_(application_receiver_ ,handle_polyline_save_notation);
+
+
+// si->self_connect(SIGNAL(color_mean_dialog_requested(QStringList)),
+//   application_receiver_, SLOT(handle_launch_color_mean_dialog(QStringList)));
+
+
+ _self_connect_(si ,color_mean_dialog_requested)
+   _to_bind_1_(application_receiver_ ,handle_launch_color_mean_dialog);
 
 // si->self_connect(SIGNAL(polyline_save_notation_with_comment_requested()),
 //   application_receiver_, SLOT(handle_polyline_save_notation_with_comment()));
@@ -756,25 +777,43 @@ void DHAX_Application_Controller::init_image_scene_item(DHAX_Image_Scene_Item* s
 //   application_receiver_, &DHAX_Application_Receiver::handle_polygon_save_notation);
 
 
+ _self_connect_(si ,polygon_complete_and_save_notation_requested)
+   _to_bind_1_(application_receiver_ ,handle_polygon_complete_and_save_notation);
 
- si->self_connect(SIGNAL(polygon_complete_and_save_notation_requested(call_Stamp_u2)),
-   application_receiver_, SLOT(handle_polygon_complete_and_save_notation(call_Stamp_u2)));
+// si->self_connect(SIGNAL(polygon_complete_and_save_notation_requested(call_Stamp_u2)),
+//   application_receiver_, SLOT(handle_polygon_complete_and_save_notation(call_Stamp_u2)));
 
- si->self_connect(SIGNAL(polygon_complete_and_save_notation_with_comment_requested(call_Stamp_u2)),
-   application_receiver_, SLOT(handle_polygon_complete_and_save_notation_with_comment(call_Stamp_u2)));
+// si->self_connect(SIGNAL(polygon_complete_and_save_notation_with_comment_requested(call_Stamp_u2)),
+//   application_receiver_, SLOT(handle_polygon_complete_and_save_notation_with_comment(call_Stamp_u2)));
 
- si->self_connect(SIGNAL(meshlab_reset_requested(call_Stamp_u2)),
-   application_receiver_,
-   SLOT(handle_meshlab_reset(call_Stamp_u2)));
+ _self_connect_(si ,polygon_complete_and_save_notation_with_comment_requested)
+   _to_bind_1_(application_receiver_ ,handle_polygon_complete_and_save_notation_with_comment);
 
 
- si->self_connect(SIGNAL(freecad_reset_requested(call_Stamp_u2)),
-   application_receiver_,
-   SLOT(handle_freecad_reset(call_Stamp_u2)));
 
- si->self_connect(SIGNAL(edit_image_requested(call_Stamp_u2)),
-   application_receiver_,
-   SLOT(handle_edit_image(call_Stamp_u2)));
+ _self_connect_(si ,meshlab_reset_requested)
+   _to_bind_1_(application_receiver_ ,handle_meshlab_reset);
+
+// si->self_connect(SIGNAL(meshlab_reset_requested(call_Stamp_u2)),
+//   application_receiver_,
+//   SLOT(handle_meshlab_reset(call_Stamp_u2)));
+
+
+// si->self_connect(SIGNAL(freecad_reset_requested(call_Stamp_u2)),
+//   application_receiver_,
+//   SLOT(handle_freecad_reset(call_Stamp_u2)));
+
+ _self_connect_(si ,freecad_reset_requested)
+   _to_bind_1_(application_receiver_ ,handle_freecad_reset);
+
+
+
+ _self_connect_(si ,edit_image_requested)
+   _to_bind_1_(application_receiver_ ,handle_edit_image);
+
+// si->self_connect(SIGNAL(edit_image_requested(call_Stamp_u2)),
+//   application_receiver_,
+//   SLOT(handle_edit_image(call_Stamp_u2)));
 
  //init_image_scene_item
 }
@@ -1023,7 +1062,35 @@ void DHAX_Application_Controller::dispatch_datagram(QByteArray qba)
 
 }
 
+void DHAX_Application_Controller::launch_color_mean_dialog(QStringList qsl)
+{
+ QDialog* dlg = new QDialog(application_main_window_);
 
+ dlg->setWindowTitle("Contour View");
+
+ Color_Mean_Demo_Frame* fr = new Color_Mean_Demo_Frame({qsl}, 200, 800, 300);
+
+ fr->setContextMenuPolicy(Qt::CustomContextMenu);
+
+// fr->connect(fr, &QFrame::customContextMenuRequested,
+//   [this, fr](QPoint pos)
+// {
+//  QMenu* menu = new QMenu(fr);
+//  menu->addAction("View Contour Info", [this]
+//  {
+//   //?handle_view_contour_info(dgi->saved_csv_path());
+//  });
+
+//  menu->popup(fr->mapToGlobal(pos));
+// });
+
+ QVBoxLayout* vbl = new QVBoxLayout;
+ vbl->addWidget(fr);
+
+ dlg->setLayout(vbl);
+ dlg->show();
+
+}
 
 void DHAX_Application_Controller::view_trimap(QString path)
 {
@@ -1033,23 +1100,23 @@ void DHAX_Application_Controller::view_trimap(QString path)
 
  QDialog* dlg = new QDialog(application_main_window_);
 
- dlg->setWindowTitle("Contour View");
+ dlg->setWindowTitle("Trimap View");
 
  Trimap_Demo_Frame* fr = new Trimap_Demo_Frame(path, 200, 800, 300);
 
  fr->setContextMenuPolicy(Qt::CustomContextMenu);
 
- fr->connect(fr, &QFrame::customContextMenuRequested,
-   [this, fr](QPoint pos)
- {
-  QMenu* menu = new QMenu(fr);
-  menu->addAction("View Contour Info", [this]
-  {
-   //?handle_view_contour_info(dgi->saved_csv_path());
-  });
+// fr->connect(fr, &QFrame::customContextMenuRequested,
+//   [this, fr](QPoint pos)
+// {
+//  QMenu* menu = new QMenu(fr);
+//  menu->addAction("View Contour Info", [this]
+//  {
+//   //?handle_view_contour_info(dgi->saved_csv_path());
+//  });
 
-  menu->popup(fr->mapToGlobal(pos));
- });
+//  menu->popup(fr->mapToGlobal(pos));
+// });
 
  QVBoxLayout* vbl = new QVBoxLayout;
  vbl->addWidget(fr);

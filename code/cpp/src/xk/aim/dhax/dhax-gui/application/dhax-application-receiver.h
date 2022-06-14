@@ -59,6 +59,9 @@ public Q_SLOTS:
 
  void handle_run_forge_workflow(call_Stamp_u2);
 
+ void handle_launch_color_mean_dialog(QStringList);
+
+
 #ifdef USE_IFC
  void handle_ifc_convert(call_Stamp_u2);
 #endif

@@ -1026,6 +1026,10 @@ void DHAX_Image_Scene_Item::show_annotation_measurements_dialog(const QPoint& po
    sra, nullptr);
 
   dlg->set_image_file_path(image_file_path_);
+
+  connect(dlg, &Simple_Rectangle_Measurement_Dialog::color_mean_dialog_requested,
+    this, &DHAX_Image_Scene_Item::color_mean_dialog_requested);
+
   dlg->show();
  }
 

@@ -73,6 +73,10 @@ void DHAX_Application_Receiver::handle_save_notation(bool with_comment)
  application_controller_->save_current_notation(with_comment);
 }
 
+void DHAX_Application_Receiver::handle_launch_color_mean_dialog(QStringList qsl)
+{
+ application_controller_->launch_color_mean_dialog(qsl);
+}
 
 void DHAX_Application_Receiver::handle_edit_image(call_Stamp_u2 callstamp)
 {

@@ -302,18 +302,39 @@ void Simple_Rectangle_Measurement_Dialog::create_overlay_file(QString path, QCol
  qpx.save(path);
 }
 
-void Simple_Rectangle_Measurement_Dialog::generate_overlay_file(Solid_Color_Label* scl)
+QString Simple_Rectangle_Measurement_Dialog::generate_overlay_file(Solid_Color_Label* scl, QString temp_dir)
 {
  QFileInfo qfi(image_file_path_);
+
+ QString path;
+
  static QString path_pattern = "%1/%2-overlay.%3.png";
- QString path = path_pattern.arg(qfi.absolutePath()).arg(qfi.completeBaseName()).arg(scl->role());
- qDebug() << path;
 
- QString sel = QFileDialog::getSaveFileName(this, "Enter or Select File Name", path);
- if(sel.isEmpty())
-   return;
+ if(temp_dir.isEmpty())
+ {
+  path = path_pattern.arg(qfi.absolutePath()).arg(qfi.completeBaseName()).arg(scl->role());
 
- create_overlay_file(sel, scl->color());
+  QString sel = QFileDialog::getSaveFileName(this, "Enter or Select File Name", path);
+  if(sel.isEmpty())
+   return {};
+
+  path = sel;
+ }
+ else if(temp_dir.startsWith('@'))
+ {
+  temp_dir.replace(0, 1, '/');
+  QString dir = qfi.absolutePath() + temp_dir;
+  QDir qd(dir);
+  qd.mkpath(".");
+  path = path_pattern.arg(dir).arg(qfi.completeBaseName()).arg(scl->role());
+ }
+ else
+   path = path_pattern.arg(temp_dir).arg(qfi.completeBaseName()).arg(scl->role());
+
+ create_overlay_file(path, scl->color());
+
+ return path;
+
 }
 
 
@@ -333,21 +354,54 @@ void Simple_Rectangle_Measurement_Dialog::show_solid_color_label_context_menu(co
   generate_occurant_color_mean_summary_file(); // scl->color();
  });
 
+ menu->addAction("Show Dialog", [this]
+ {
+  QStringList qsl;
+  QString path = generate_occurant_color_mean_summary_file("@proc"); // scl->color();
+  qsl << path;
+  path = generate_overlay_file(solid_color_labels_[0], "@proc"); // scl->color();
+  qsl << path;
+  path = generate_overlay_file(solid_color_labels_[1], "@proc"); // scl->color();
+  qsl << path;
+
+  Q_EMIT color_mean_dialog_requested(qsl);
+
+ });
+
  qDebug() << "pos = " << pos;
 
  menu->popup(scl->mapToGlobal(pos));
 }
 
-void Simple_Rectangle_Measurement_Dialog::generate_occurant_color_mean_summary_file()
+QString Simple_Rectangle_Measurement_Dialog::generate_occurant_color_mean_summary_file(QString temp_dir)
 {
+
+ QString path;
+
  QFileInfo qfi(image_file_path_);
  static QString path_pattern = "%1/%2-o-means.png";
- QString path = path_pattern.arg(qfi.absolutePath()).arg(qfi.completeBaseName());
- qDebug() << path;
 
- QString sel = QFileDialog::getSaveFileName(this, "Enter or Select File Name", path);
- if(sel.isEmpty())
-   return;
+
+ if(temp_dir.isEmpty())
+ {
+  path = path_pattern.arg(qfi.absolutePath()).arg(qfi.completeBaseName());
+  qDebug() << path;
+
+  QString sel = QFileDialog::getSaveFileName(this, "Enter or Select File Name", path);
+  if(sel.isEmpty())
+    return {};
+ }
+ else if(temp_dir.startsWith('@'))
+ {
+  temp_dir.replace(0, 1, '/');
+  QString dir = qfi.absolutePath() + temp_dir;
+  QDir qd(dir);
+  qd.mkdir(".");
+  path = path_pattern.arg(dir).arg(qfi.completeBaseName());
+ }
+ else
+   path = path_pattern.arg(temp_dir).arg(qfi.completeBaseName());
+
 
  QColor colors[9][9];
 
@@ -381,6 +435,8 @@ void Simple_Rectangle_Measurement_Dialog::generate_occurant_color_mean_summary_f
   }
  }
  qpx.save(path);
+
+ return path;
 }
 
 
