@@ -763,7 +763,9 @@ void DHAX_Main_Window_Controller::load_image(QString file_path)
  image_viewer_->get_graphics_frame()->show_info(QString("Loaded image: %1")
    .arg(file_path));
 
- wh2 dimensions = image_viewer_->get_dimensions();
+
+ // //  400 limit for initial height expansion ...
+ wh2 dimensions = image_viewer_->dimensions_maxed(400);
 
  application_main_window_->resize(application_main_window_->width(),
    dimensions.height + page_and_search_frame_->height());

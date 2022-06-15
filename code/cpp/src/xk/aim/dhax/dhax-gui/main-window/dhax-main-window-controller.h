@@ -75,6 +75,8 @@ public:
  ACCESSORS(QString ,current_image_file_path)
  ACCESSORS(DHAX_Image_Scene_Item* ,image_scene_item)
 
+ ACCESSORS(Image_Document_Controller* ,image_document_controller)
+
  ACCESSORS(XCSD_Image* ,xcsd_image)
 
  void check_init_xcsd_image();

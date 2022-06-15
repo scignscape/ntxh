@@ -127,7 +127,8 @@ public:
 
  void load_image_pixmap(QPixmap pixmap, Image_Document_Controller* document_controller);
 
- wh2 get_dimensions();
+ wh2 dimensions_maxed(u2 y_max);
+ wh2 dimensions_maxed(wh2 max);
 
 
  void complete_load_image();

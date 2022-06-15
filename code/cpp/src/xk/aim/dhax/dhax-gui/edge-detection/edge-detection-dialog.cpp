@@ -16,7 +16,17 @@ using namespace std;
 
 
 Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QWidget *parent) :
-  QDialog(parent)
+  Edge_Detection_Dialog(file_path, QColor(), QColor(), parent)
+{
+
+}
+
+
+
+Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path,
+  QColor background_pole, QColor foreground_pole, QWidget *parent) :
+  QDialog(parent), blur_factor_(0), background_pole_(background_pole),
+  foreground_pole_(foreground_pole)
 //    ui(new Ui::Edge_Detection_Dialog)
 {
  setObjectName("Edge_Detection_Dialog");
@@ -35,6 +45,8 @@ Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QWidget *parent)
 // main_layout_->setObjectName(QString::fromUtf8("verticalLayout"));
 
  view_group_box_ = new QGroupBox(this);
+
+ view_group_box_->setMaximumHeight(55);
 
 
  _AUTO_OBJECT_NAME_(view_group_box_) //->setObjectName(QString::fromUtf8("groupBox"));
@@ -111,6 +123,47 @@ Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QWidget *parent)
 // view_group_box_layout_->addStretch();
 
  view_group_box_layout_->addSpacing(28);
+
+ check_box_layout_ = new QVBoxLayout;
+
+ check_box_layout_->setContentsMargins(0,0,0,0);
+ check_box_layout_->setSpacing(0);
+
+ check_box_layout_->addStretch();
+
+ blur_check_box_ = new QCheckBox("Use Blur", this);
+ connect(blur_check_box_, &QCheckBox::toggled, [=](bool checked)
+ {
+  if(checked)
+    blur_factor_ = 1;
+  else
+    blur_factor_ = 0;
+ });
+
+ check_box_layout_->addWidget(blur_check_box_);
+
+
+ fb_poles_check_box_ = new QCheckBox("Use F/B Poles", this);
+ connect(fb_poles_check_box_, &QCheckBox::toggled, [=](bool checked)
+ {
+  if(checked)
+    ;
+  else
+    ;
+ });;
+
+ if(background_pole_.isValid() && foreground_pole_.isValid())
+   ;
+ else
+   fb_poles_check_box_->setEnabled(false);
+
+ check_box_layout_->addWidget(fb_poles_check_box_);
+
+ check_box_layout_->addStretch();
+
+ view_group_box_layout_->addLayout(check_box_layout_);
+
+ view_group_box_layout_->addSpacing(18);
 
  save_button_ = new QPushButton(view_group_box_);
 // save_button_->setObjectName(QString::fromUtf8("select_image_button_2"));
@@ -235,16 +288,16 @@ void Edge_Detection_Dialog::on_view_combo_box_currentIndexChanged(int index)
   display(original_);
   break;
  case 1:
-  display(canny(grayscale_, 1, 40, 120));
+  display(canny(grayscale_, 1, 40, 120, blur_factor_));
   break;
  default:
-  function<QImage(const QImage&)> functions[] = {
+  function<QImage(const QImage&, u1)> functions[] = {
    sobel,
    prewitt,
    roberts,
    scharr
   };
-  display(functions[index - 2](grayscale_));
+  display(functions[index - 2](grayscale_, blur_factor_));
   break;
  }
 }

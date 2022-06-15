@@ -14,6 +14,8 @@
 #include "aforms/simple/simple-ellipse-annotation.h"
 #include "aforms/simple/simple-polyline-annotation.h"
 
+#include "xcsd-2d/xcsd-image.h"
+
 //#include "pdf-document-info.h"
 
 //#include "multiline-rubber-band.h"
@@ -94,5 +96,19 @@ MultiStep_Annotation_Base* Image_Document_Controller::init_multistep_annotation(
  //current_multistep_annotation_->show();
  //current_multistep_annotation_->set_image_rectf()
  return current_multistep_annotation_;
+}
+
+
+QPair<QColor, QColor> Image_Document_Controller::get_fb_poles()
+{
+ QPair<QColor, QColor> result;
+
+ if(marked_foreground_pole_ != (u2) -1)
+   result.first = XCSD_Image::rgb555_to_qcolor(marked_foreground_pole_);
+
+ if(marked_background_pole_ != (u2) -1)
+   result.second = XCSD_Image::rgb555_to_qcolor(marked_background_pole_);
+
+ return result;
 }
 

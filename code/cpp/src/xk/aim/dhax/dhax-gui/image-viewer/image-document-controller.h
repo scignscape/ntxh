@@ -81,6 +81,8 @@ public:
  MultiStep_Annotation_Base* init_multistep_annotation(QWidget* parent,
    const QPointF posf, DHAX_Annotation_Instance::Compact_Shape_Kind_Summary shape_kind);
 
+ QPair<QColor, QColor> get_fb_poles();
+
 };
 
 #endif

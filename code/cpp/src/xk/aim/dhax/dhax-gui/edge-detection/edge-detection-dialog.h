@@ -7,6 +7,8 @@
 
 #include "edge-detection-kernels.h"
 
+#include "global-types.h"
+
 
 #include "self-connect.h"
 
@@ -21,10 +23,17 @@ class Edge_Detection_Dialog : public QDialog
 
  QVBoxLayout* main_layout_;
  QGroupBox* view_group_box_;
+
  QHBoxLayout* view_group_box_layout_;
+
  QPushButton* select_image_button_;
  QComboBox* view_combo_box_;
  QLabel* view_combo_box_label_;
+
+ QVBoxLayout* check_box_layout_;
+ QCheckBox* blur_check_box_;
+ QCheckBox* fb_poles_check_box_;
+
  QPushButton* save_button_;
  QPushButton* close_button_;
  QGraphicsView* image_;
@@ -35,6 +44,9 @@ class Edge_Detection_Dialog : public QDialog
  QImage original_, grayscale_, current_;
  QString filename_;
  QGraphicsScene* scene_;
+ u1 blur_factor_;
+
+ QColor background_pole_, foreground_pole_;
 
  void display(const QImage&);
  void resizeEvent(QResizeEvent*);
@@ -49,6 +61,7 @@ class Edge_Detection_Dialog : public QDialog
 public:
 
  explicit Edge_Detection_Dialog(QString file_path, QWidget* parent = nullptr);
+ Edge_Detection_Dialog(QString file_path, QColor background_pole, QColor foreground_pole, QWidget* parent = nullptr);
 
 
  USE_SELF_CONNECT(normal)

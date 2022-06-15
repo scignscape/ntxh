@@ -91,10 +91,30 @@ void DHAX_Image_Viewer::mouseMoveEvent(QMouseEvent *mouseEvent)
  qDebug() << " ... ";
 }
 
-wh2 DHAX_Image_Viewer::get_dimensions()
+wh2 DHAX_Image_Viewer::dimensions_maxed(u2 y_max)
 {
  QSize sz = get_scrolled_image_pixmap_size();
- return { (u2)sz.width(), (u2) sz.height()};
+ if(y_max == 0 || sz.height() < y_max)
+   return { (u2)sz.width(), (u2) sz.height()};
+ return { (u2)sz.width(), y_max};
+}
+
+wh2 DHAX_Image_Viewer::dimensions_maxed(wh2 max)
+{
+ if(max.width == 0)
+   return dimensions_maxed(max.width);
+
+ QSize sz = get_scrolled_image_pixmap_size();
+ if(max.width < sz.width())
+ {
+  if(max.height == 0 || sz.height() < max.height)
+    return { max.width, (u2) sz.height()};
+  return { max.width, max.height};
+ }
+ if(max.height == 0 || sz.height() < max.height)
+   return { (u2)sz.width(), (u2) sz.height()};
+ return { (u2)sz.width(), max.height};
+
 }
 
 void DHAX_Image_Viewer::recenter_image()

@@ -61,6 +61,8 @@
 #include "dialogs/trimap-demo-frame.h"
 #include "dialogs/color-mean-demo-frame.h"
 
+#include "image-viewer/image-document-controller.h"
+
 #include <QMessageBox>
 #include <QDesktopServices>
 
@@ -920,8 +922,12 @@ void DHAX_Application_Controller::launch_edge_detection_dialog()
 {
  qDebug() << "launch_edge_detection_dialog";
 
+ QPair<QColor, QColor> pr;
+ if(main_window_controller_->image_document_controller())
+   pr = main_window_controller_->image_document_controller()->get_fb_poles();
+
  Edge_Detection_Dialog* dlg = new Edge_Detection_Dialog(
-   get_current_image_file_path(), application_main_window_);
+   get_current_image_file_path(), pr.first, pr.second, application_main_window_);
 
  dlg->show();
 
