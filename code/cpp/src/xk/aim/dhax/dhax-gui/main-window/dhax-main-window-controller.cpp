@@ -48,6 +48,8 @@
 
 #include "self-connect.h"
 
+#include "styles.h"
+
 
 #include <QMenuBar>
 
@@ -489,11 +491,12 @@ void DHAX_Main_Window_Controller::save_fb_gradient_trimap()
  //qDebug() << "save_fb_gradient_trimap";
 
  QFileInfo qfi(current_image_file_path_);
- QDir qdir(qfi.absoluteDir());
- qdir.mkdir("trimap");
- QString path = qdir.absoluteFilePath("trimap") + "/fg-%1.png";
- qdir.mkdir("trimap/test");
- QString fpath = qdir.absoluteFilePath("trimap/test");
+ QDir qdir(qfi.absolutePath() + class_name_folder("/_proc") + "/trimap");
+
+ qdir.mkpath(".");
+ QString path = qdir.absolutePath() + "/fg-%1.png";
+ qdir.mkdir("test");
+ QString fpath = qdir.absoluteFilePath("test");
 
  xcsd_image_->save_fb_gradient_trimap({image_document_controller_->marked_background_pole(),
    image_document_controller_->marked_foreground_pole()}, path, fpath);
@@ -541,15 +544,40 @@ void DHAX_Main_Window_Controller::show_local_color_histogram(rc2 rc)
 {
  if(!xcsd_image_)
  {
-  QMessageBox::information(application_main_window_, "XCSD Scene Needed",
-    "Please load an image as an XCSD scene first");
+//  QMessageBox::information(application_main_window_, "XCSD Scene Needed",
+//    "Please load an image as an XCSD scene first");
+//  return;
+
+  QMessageBox msg(QMessageBox::Question, "Missing histogram data",
+    "Histogram data needs to be calculated first.  Proceed with the calculation?",
+    QMessageBox::Ok);
+
+  msg.button(QMessageBox::Ok)->setObjectName("Ok");
+
+  msg.setStyleSheet(qmessagebox_button_style_sheet());
+
+  msg.exec();
+
   return;
  }
 
  if(!image_document_controller_->local_histogram_data())
  {
-  if( QMessageBox::question(application_main_window_, "Missing histogram data",
-    "Histogram data needs to be calculated first.  Proceed with the calculation?") == QMessageBox::Yes)
+  QMessageBox msg(QMessageBox::Question, "Missing histogram data",
+    "Histogram data needs to be calculated first.  Proceed with the calculation?",
+    QMessageBox::Yes | QMessageBox::No);
+
+  msg.button(QMessageBox::Yes)->setObjectName("Yes");
+  msg.button(QMessageBox::No)->setObjectName("No");
+
+  msg.setStyleSheet(qmessagebox_button_style_sheet());
+
+  int response = msg.exec();
+
+  // QMessageBox::question(application_main_window_, "Missing histogram data",
+  // "Histogram data needs to be calculated first.  Proceed with the calculation?")
+
+  if(response == QMessageBox::Yes)
   {
    calculate_local_color_histograms();
   }
@@ -631,6 +659,9 @@ void DHAX_Main_Window_Controller::show_xcsd_scene()
  if(current_image_file_path_.isEmpty())
  {
   load_image();
+
+  if(current_image_file_path_.isEmpty())
+    return;
  }
 
  check_init_xcsd_image();
@@ -690,7 +721,7 @@ void DHAX_Main_Window_Controller::load_image()
  // //  temporary ...
  QString ws =  ROOT_FOLDER "/../pics/ukraine";
 
- QString filters = "Images (*.jpg *.png *.bmp *.webp)";
+ QString filters = "Images (*.jpg *.jpeg *.png *.bmp *.webp)";
 
 // QFileDialog qdialog;
 // QString file_path = qdialog.getOpenFileName(application_main_window_, "Open Image", ws, filters);
@@ -731,6 +762,12 @@ void DHAX_Main_Window_Controller::load_image(QString file_path)
 
  image_viewer_->get_graphics_frame()->show_info(QString("Loaded image: %1")
    .arg(file_path));
+
+ wh2 dimensions = image_viewer_->get_dimensions();
+
+ application_main_window_->resize(application_main_window_->width(),
+   dimensions.height + page_and_search_frame_->height());
+
 
 }
 

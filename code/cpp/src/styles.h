@@ -375,6 +375,84 @@ inline void make_light_double_forward_button(WIDGET_Type* w)
  w->setMaximumHeight(15);
 }
 
+inline QString qmessagebox_button_style_sheet()
+{
+ return
+ "QPushButton#Yes { width:70px; "
+ "background-color: qlineargradient("
+ "x1:0, y1:0, x2:0, y2:1,"
+ "stop:0 #C5D8FA,"
+ "stop:0.03 #F5E4FA,"
+ "stop:0.04 #F5E6FA,"
+ "stop:1 #F5E8FA"
+ ");"
+ "background-image: none;"
+ "border-image: none;"
+ "border-radius: 6px;"
+ "border-left: 1px ridge #3AFFAB;"
+ "border-right: 1px ridge #3AFFAB;"
+ "border-top: 2px solid #618281;"
+ "border-bottom: 2px solid #618281;"
+ "}"
+
+ "QPushButton  { width:70px; "
+ "background-color: qlineargradient("
+ "x1:0, y1:0, x2:0, y2:1,"
+ "stop:0 #C5D8FA,"
+ "stop:0.03 #F5E0FA,"
+ "stop:0.04 #F5E8FA,"
+ "stop:1 #F5E8BE"
+ ");"
+ "background-image: none;"
+ "border-image: none;"
+ "border-radius: 6px;"
+ "border-left: 2px ridge #3AFFAB;"
+ "border-right: 2px ridge #3AFFAB;"
+ "border-top: 2px ridge #C5D8FA;"
+ "border-bottom: 2px ridge #C5D8FA;"
+ "}"
+
+ "QPushButton#Ok { width:90px;"
+ "background-color: qlineargradient("
+ "x1:0, y1:0, x2:0, y2:1,"
+ "stop:0 #C5D8FA,"
+ "stop:0.01 #618281,"
+ "stop:0.02 #EDEDED,"
+ "stop:0.07 #EDEDED,"
+ "stop:0.09 #445A82,"
+ "stop:1 #616161"
+ ");"
+ "background-image: none;"
+ "border-image: none;"
+ "border: 1px solid #364767;"
+ "}"
+
+ "QPushButton:pressed, QPushButton#Yes:pressed {"
+ "background-color: qlineargradient("
+ "x1:0, y1:0, x2:0, y2:1,"
+ "stop:0 #445A82,"
+ "stop:0.03 #6182BD,"
+ "stop:0.04 #6182BD,"
+ "stop:1 #C5D8FA"
+ ");"
+ "background-image: none;"
+ "border-image: none;"
+ "border: 1px solid #364767;"
+ "}"
+
+ "QPushButton:hover, QPushButton#Yes:hover  {"
+ "border:1px solid #EFE7F7;"
+ "background-color: qlineargradient("
+ "x1:0, y1:0, x2:0, y2:1,"
+ "stop:0 #C5D8FA,"
+ "stop:0.03 #E95289,"
+ "stop:0.04 #E95289,"
+ "stop:1 #A64166"
+ ");"
+ "}"
+ ;
+}
+
 
 inline QString basic_button_style_sheet_()
 {

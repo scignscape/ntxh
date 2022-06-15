@@ -91,6 +91,11 @@ void DHAX_Image_Viewer::mouseMoveEvent(QMouseEvent *mouseEvent)
  qDebug() << " ... ";
 }
 
+wh2 DHAX_Image_Viewer::get_dimensions()
+{
+ QSize sz = get_scrolled_image_pixmap_size();
+ return { (u2)sz.width(), (u2) sz.height()};
+}
 
 void DHAX_Image_Viewer::recenter_image()
 {

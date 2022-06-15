@@ -176,6 +176,10 @@ n8 XCSD_Image::qrgb_to_pixel_number(QRgb rgb)
 void XCSD_Image::_init_outer_ring_pixel_data(QRgb* scanline,
   u4 mark_offset, u4 start_offset, se2 x_se)
 {
+ // //  too small?
+ if(!scanline)
+   return;
+
  for(u2 x = x_se.start; x <= x_se.end; ++x)
  {
   QRgb qpixel = scanline[x];
@@ -2398,9 +2402,16 @@ void XCSD_Image::show_255_palette(QString path,
 
  get_255_palette(vec);
 
+ u2 xoffset = 3; //box_width * 15 + 20;
 
- QPixmap pixmap(box_width * 30 + 20, box_width * 17);
+
+ QPixmap pixmap(box_width * 17 + xoffset * 2, box_width * 15);
+
+ QPixmap pixmap1(box_width * 17 + xoffset * 2, box_width * 15);
+
  QPainter painter(&pixmap);
+ QPainter painter1(&pixmap1);
+
 
  u1 index = 0;
 
@@ -2415,11 +2426,12 @@ void XCSD_Image::show_255_palette(QString path,
  painter.setBrush(QColor(255, 255, 255));
  painter.drawRect(0, 0, pixmap.width(), pixmap.height());
 
- for(u1 y = 0; y < 17; ++y)
+
+ for(u1 y = 0; y < 15; ++y)
  {
   u2 top = y * box_width;
 
-  for(u1 x = 0; x < 15; ++x)
+  for(u1 x = 0; x < 17; ++x)
   {
    QColor c = vec[index];
 
@@ -2436,7 +2448,7 @@ void XCSD_Image::show_255_palette(QString path,
    painter.setBrush(c);
 
 
-   u2 left = x * box_width;
+   u2 left = x * box_width + xoffset;
 
    QRect full_rect(left, top, box_width, box_width);
    left_positions[c.rgb()] = full_rect.center();
@@ -2468,22 +2480,21 @@ void XCSD_Image::show_255_palette(QString path,
 
  index = 0;
 
- u2 xoffset = box_width * 15 + 20;
 
  //bool needs_padline = false;
 
  //QMap<QColor, u1> positions;
 
- for(u1 y = 0; y < 17; ++y)
+ for(u1 y = 0; y < 15; ++y)
  {
   u2 top = y * box_width;
 
-  for(u1 x = 0; x < 15; ++x)
+  for(u1 x = 0; x < 17; ++x)
   {
    QColor c = vec1[index];
 
 
-   painter.setBrush(c);
+   painter1.setBrush(c);
 
    u2 left = x * box_width + xoffset;
 
@@ -2497,9 +2508,9 @@ void XCSD_Image::show_255_palette(QString path,
 
    QRect full_rect(left, top, box_width, box_width);
 
-   painter.setPen(Qt::NoPen);
+   painter1.setPen(Qt::NoPen);
 
-   painter.drawRect(full_rect);
+   painter1.drawRect(full_rect);
 
    QRgb rgb = c.rgb();
    QPoint qp = left_positions[rgb];
@@ -2511,17 +2522,17 @@ void XCSD_Image::show_255_palette(QString path,
    QPen circle_pen = QPen(QColor(0, 0, 0));
    circle_pen.setWidth(2);
 
-   painter.setPen(circle_pen);
+   painter1.setPen(circle_pen);
 
-   painter.setBrush(QColor(255, 255, 255));
+   painter1.setBrush(QColor(255, 255, 255));
 
-   painter.drawEllipse(full_rect.center(), left_index, left_index);
+   painter1.drawEllipse(full_rect.center(), left_index, left_index);
 
    ++index;
   }
  }
 
-// pixmap1.save(sorted_path);
+ pixmap1.save(sorted_path);
  pixmap.save(path);
 
 

@@ -18,6 +18,8 @@
 
 #include "application/dhax-application-state.h"
 
+#include "xcsd-2d/xcsd-sdi-structures.h"
+
 class DHAX_Graphics_Scene;
 class DHAX_Graphics_View;
 
@@ -124,6 +126,8 @@ public:
  void load_image(QString file_path, Image_Document_Controller* document_controller);
 
  void load_image_pixmap(QPixmap pixmap, Image_Document_Controller* document_controller);
+
+ wh2 get_dimensions();
 
 
  void complete_load_image();

@@ -103,6 +103,14 @@ public:
 // void load_image(QString file_path);
 // void init_image_scene_item(DHAX_Image_Scene_Item* si);
 
+ CLASS_NAME_FOLDER_FN(DHAX_Application_Controller)
+
+// QString class_name_folder(QString pre)
+// {
+//  return pre + "/_DHAX_Application_Controller";
+// }
+
+
  static void r8_vector_to_qba(const QVector<r8>& data, QByteArray& qba);
 
  DHAX_Forge_Controller* check_init_forge_controller();

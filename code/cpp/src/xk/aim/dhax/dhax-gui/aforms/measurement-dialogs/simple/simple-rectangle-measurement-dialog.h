@@ -54,6 +54,7 @@ class Simple_Rectangle_Measurement_Dialog : public QDialog
 {
  Q_OBJECT
 
+ CLASS_NAME_FOLDER_FN()
 
  Simple_Rectangle_Annotation* annotation_;
 

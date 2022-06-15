@@ -360,12 +360,16 @@ void Simple_Rectangle_Measurement_Dialog::show_solid_color_label_context_menu(co
  {
   QFileInfo qfi(image_file_path_);
 
+  //this->metaObject()->className();
+
+  QString cnf = class_name_folder("@_proc");
+
   QStringList qsl;
-  QString path = generate_occurant_color_mean_summary_file("@_proc/_Simple_Rectangle_Measurement_Dialog"); // scl->color();
+  QString path = generate_occurant_color_mean_summary_file(cnf); // scl->color();
   qsl << path;
-  path = generate_overlay_file(solid_color_labels_[0], "@_proc/_Simple_Rectangle_Measurement_Dialog"); // scl->color();
+  path = generate_overlay_file(solid_color_labels_[0], cnf); // scl->color();
   qsl << path;
-  path = generate_overlay_file(solid_color_labels_[1], "@_proc/_Simple_Rectangle_Measurement_Dialog"); // scl->color();
+  path = generate_overlay_file(solid_color_labels_[1], cnf); // scl->color();
   qsl << path;
 
   Q_EMIT color_mean_dialog_requested(qfi.absolutePath(), qsl);

@@ -1064,6 +1064,8 @@ void DHAX_Application_Controller::dispatch_datagram(QByteArray qba)
 
 void DHAX_Application_Controller::launch_color_mean_dialog(QString folder, QStringList qsl)
 {
+ QString cnf = class_name_folder("@_proc");
+
  QString dir_s = folder + "/_proc/_DHAX_Application_Controller";
 
  QDir qd(dir_s);
@@ -1116,7 +1118,7 @@ void DHAX_Application_Controller::view_trimap(QString path)
 
  dlg->setWindowTitle("Trimap View");
 
- Trimap_Demo_Frame* fr = new Trimap_Demo_Frame(path, 200, 800, 300);
+ Trimap_Demo_Frame* fr = new Trimap_Demo_Frame(path, 120, 900, 500);
 
  fr->setContextMenuPolicy(Qt::CustomContextMenu);
 

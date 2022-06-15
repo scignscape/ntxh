@@ -24,6 +24,26 @@
 #include "enum-macros.h"
 
 
+#define CLASS_NAME_FOLDER_FN_1(ty)  \
+inline QString class_name_folder(QString pre) \
+{ \
+ return pre + "/_" #ty; \
+} \
+
+
+
+#define CLASS_NAME_FOLDER_FN_0  \
+inline QString class_name_folder(QString pre) \
+{ \
+ return pre + "/_" + this->metaObject()->className(); \
+} \
+
+
+
+#define CLASS_NAME_FOLDER_FN(...) \
+  _preproc_CONCAT(CLASS_NAME_FOLDER_FN_, _preproc_NUM_ARGS (__VA_ARGS__))(__VA_ARGS__)
+
+
 inline char* q_to_std(const QString& qs)
 {
  return const_cast<char*>( qs.toStdString().c_str() );
