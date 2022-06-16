@@ -199,8 +199,12 @@ public:
  static prr1 rgb555_color_distance_expanded(clrs2 colors);
  static prr1 rgb555_to_prr(u2 rgb555);
  static prr1 rgb_to_prr(u4 rgb);
+ static prr1 qcolor_to_prr(const QColor& clr);
 
  static prr1 rgb555_888_color_distance(u2 rgb555, u4 rgb);
+
+ static prr1 rgb888_qcolor_distance(u4 rgb, const QColor& clr);
+ static fb1 collapse_fb_distances(const prr1& dist1, const prr1& dist2);
 
  void show_255_palette(QString path,
    QString sorted_path, u1 box_width = 50, u1 padline_width = 8);

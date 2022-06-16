@@ -144,18 +144,31 @@ Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path,
 
 
  fb_poles_check_box_ = new QCheckBox("Use F/B Poles", this);
- connect(fb_poles_check_box_, &QCheckBox::toggled, [=](bool checked)
- {
-  if(checked)
-    ;
-  else
-    ;
- });;
 
  if(background_pole_.isValid() && foreground_pole_.isValid())
-   ;
+ {
+  //QPair<QColor, QColor>* _poles = new QPair<QColor, QColor>(foreground_pole_, background_pole_);
+  poles_ = (n8) new QPair<QColor, QColor>(foreground_pole_, background_pole_);
+  ++poles_;
+  connect(fb_poles_check_box_, &QCheckBox::toggled, [=](bool checked)
+  {
+   if(checked)
+   {
+    if(poles_ % 2)
+      --poles_;
+   }
+   else
+   {
+    if((poles_ % 2) == 0)
+      ++poles_;
+   }
+  });;
+ }
  else
-   fb_poles_check_box_->setEnabled(false);
+ {
+  poles_ = 1;
+  fb_poles_check_box_->setEnabled(false);
+ }
 
  check_box_layout_->addWidget(fb_poles_check_box_);
 
@@ -271,7 +284,8 @@ void Edge_Detection_Dialog::load_file(QString file_path)
 }
 
 
-void Edge_Detection_Dialog::display(const QImage& image) {
+void Edge_Detection_Dialog::display(const QImage& image)
+{
  scene_->clear();
  scene_->addPixmap(QPixmap::fromImage(image));
  scene_->setSceneRect(image.rect());
@@ -283,21 +297,29 @@ void Edge_Detection_Dialog::display(const QImage& image) {
 
 void Edge_Detection_Dialog::on_view_combo_box_currentIndexChanged(int index)
 {
- switch (index) {
+ QPair<QColor, QColor>* poles = poles_? (poles_ % 2) ? nullptr :
+   (QPair<QColor, QColor>*) poles_ : nullptr;
+
+ const QImage& src = poles? original_ : grayscale_;
+
+ QImage::Format out_format = poles? QImage::Format_Grayscale8 : src.format();
+
+ switch (index)
+ {
  case 0:
   display(original_);
   break;
  case 1:
-  display(canny(grayscale_, 1, 40, 120, blur_factor_));
+  display(canny(src, 1, 40, 120, out_format, blur_factor_, poles));
   break;
  default:
-  function<QImage(const QImage&, u1)> functions[] = {
+  function<QImage(const QImage&, QImage::Format, u1, QPair<QColor, QColor>*)> functions[] = {
    sobel,
    prewitt,
    roberts,
    scharr
   };
-  display(functions[index - 2](grayscale_, blur_factor_));
+  display(functions[index - 2](src, out_format, blur_factor_, poles));
   break;
  }
 }

@@ -235,7 +235,12 @@ inline constexpr u1 _ctz(int x)
    { *this = {field1 + 1, field2 + 1}; return {field1, field2}; } \
    ty##size operator--(int) \
    { *this = {field1 - 1, field2 - 1}; return {field1, field2}; } \
-   }; \
+ template<typename T> T inner_ratio_to_unit(T factor) const \
+ { return factor * inner_ratio_to_unit(); } \
+ r8 inner_ratio_to_unit() const \
+ { if(field1 == field2) return 0.5; if(field1 < field2) return 0.5 \
+     - (((r8)field1) / field2); return 0.5 + (((r8)field2) / field1); } \
+ }; \
 
 
 //template<typename T, typename T1> ty##size##s operator+(T val) \
@@ -552,10 +557,10 @@ Tys_DEF_MACRO(tb, 4, n8, first, second)
    ty##size distance(const ty##size& rhs) { return {field1 > rhs.field1? field1 - rhs.field1: \
      rhs.field1 - field1, field2 > rhs.field1? field2 - rhs.field2: rhs.field2 - field2, \
      field3 > rhs.field3? field3 - rhs.field3: rhs.field3 - field3 }; } \
-   asize inner_sum() { return field1 + field2 + field3; } \
-   n8 inner_sum_of_squares() { return field1*field1 + field2*field2 + field3*field3; } \
-   u##size inner_average() { asize s = inner_sum(); return ((((s % 3) == 2)?(s+1):s) / 3); } \
-   asize to_base(u1 arithmetic_base) { \
+   asize inner_sum() const { return field1 + field2 + field3; } \
+   n8 inner_sum_of_squares() const{ return field1*field1 + field2*field2 + field3*field3; } \
+   u##size inner_average() const{ asize s = inner_sum(); return ((((s % 3) == 2)?(s+1):s) / 3); } \
+   asize to_base(u1 arithmetic_base) const { \
      return (asize) field1 * arithmetic_base * arithmetic_base + \
      (asize) field2 * arithmetic_base + (asize) field3; } \
  template<typename T> ty##size& add(T val) \

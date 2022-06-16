@@ -1216,6 +1216,35 @@ prr1 XCSD_Image::rgb555_888_color_distance(u2 rgb555, u4 rgb)
  return c1.distance(c2);
 }
 
+prr1 XCSD_Image::qcolor_to_prr(const QColor& clr)
+{
+ return {(u1)clr.red(), (u1)clr.green(), (u1)clr.blue()};
+}
+
+
+prr1 XCSD_Image::rgb888_qcolor_distance(u4 rgb, const QColor& clr)
+{
+ prr1 c1 = rgb_to_prr(rgb);
+ prr1 c2 = qcolor_to_prr(clr);
+ return c1.distance(c2);
+}
+
+
+fb1 XCSD_Image::collapse_fb_distances(const prr1& dist1, const prr1& dist2)
+{
+ r8 d1 = sqrt(dist1.inner_sum_of_squares());
+ r8 d2 = sqrt(dist2.inner_sum_of_squares());
+ r8 dd = d1 + d2;
+ r8 dd1 = (d1/dd);// * distance;
+ r8 dd2 = (d2/dd);// * distance;
+
+ u1 fg = (r8) 255 * (1 - dd1);
+ u1 bg = (r8) 255 * (1 - dd2);
+
+ return {fg, bg};
+
+}
+
 
 void XCSD_Image::save_fb_gradient_trimap(fb2 poles, QString file_path, QString folder)
 {
@@ -1236,14 +1265,7 @@ void XCSD_Image::save_fb_gradient_trimap(fb2 poles, QString file_path, QString f
   prr1 dist1 = rgb555_888_color_distance(poles.fg, rgb);
   prr1 dist2 = rgb555_888_color_distance(poles.bg, rgb);
 
-  r8 d1 = sqrt(dist1.inner_sum_of_squares());
-  r8 d2 = sqrt(dist2.inner_sum_of_squares());
-  r8 dd = d1 + d2;
-  r8 dd1 = (d1/dd);// * distance;
-  r8 dd2 = (d2/dd);// * distance;
-
-  u1 fg = (r8) 255 * (1 - dd1);
-  u1 bg = (r8) 255 * (1 - dd2);
+  fb1 fb = collapse_fb_distances(dist1, dist2);
 
 //  u1 fg = (tier % 4) * 50 + 62;
 
@@ -1256,8 +1278,8 @@ void XCSD_Image::save_fb_gradient_trimap(fb2 poles, QString file_path, QString f
 
 //  *pixel = fg;
 
-  (*pixel) |= (((n8) fg) << 48);
-  (*pixel) |= (((n8) bg) << 56);
+  (*pixel) |= (((n8) fb.fg) << 48);
+  (*pixel) |= (((n8) fb.bg) << 56);
 
     //pixel & 255, (pixel >> 8) & 255, (pixel >> 16) & 255
 

@@ -48,6 +48,9 @@ class Edge_Detection_Dialog : public QDialog
 
  QColor background_pole_, foreground_pole_;
 
+ //QPair<QColor, QColor>*
+ n8 poles_;
+
  void display(const QImage&);
  void resizeEvent(QResizeEvent*);
 

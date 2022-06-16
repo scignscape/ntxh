@@ -7,6 +7,8 @@
 
 #include "edge-detection-kernels.h"
 
+#include "xcsd-2d/xcsd-image.h"
+
 
 using namespace std;
 
@@ -39,20 +41,23 @@ void magnitude(QImage& input, const QImage& gx, const QImage& gy)
   gy_line = gy.constScanLine(y);
 
   for (int x = 0; x < input.width(); x++)
-   line[x] = qBound(0x00, static_cast<int>(hypot(gx_line[x], gy_line[x])), 0xFF);
+    line[x] = qBound(0x00, static_cast<int>(hypot(gx_line[x], gy_line[x])), 0xFF);
  }
 }
 
 
-QImage convolution(const auto& kernel, const QImage& image, u1 blur_factor)
+QImage convolution(const auto& kernel, const QImage& image,
+  QImage::Format out_format, u1 blur_factor,
+  QPair<QColor, QColor>* poles) // QImage::Format_Grayscale8)
 {
  int kw = kernel[0].size(), kh = kernel.size(),
    offsetx = kw / 2, offsety = kw / 2;
- QImage out(image.size(), image.format());
+ QImage out (image.size(), out_format); //image.format());
  float sum;
 
- quint8 *line;
- const quint8 *lookup_line;
+ quint8* line;
+ const quint8* lookup_line;
+ const QRgb* rgb_lookup_line;
 
  u1 start, end_offset, incr;
  if(blur_factor == 0)
@@ -60,10 +65,12 @@ QImage convolution(const auto& kernel, const QImage& image, u1 blur_factor)
  else
  { start = 1; end_offset = 1, incr = 3; }
 
+ //u1 byte_length_factor = poles? 3 : 1;
+
  for (int y = start; y < image.height() - end_offset; y += incr)
  {
   line = out.scanLine(y);
-  for (int x = start; x < image.width() - end_offset; x += incr)
+  for (int x = start; x < (image.width() - end_offset); x += incr)
   {
    sum = 0;
 
@@ -71,12 +78,34 @@ QImage convolution(const auto& kernel, const QImage& image, u1 blur_factor)
    {
     if (y + j < offsety || y + j >= image.height())
       continue;
+
     lookup_line = image.constScanLine(y + j - offsety);
+    rgb_lookup_line = (QRgb*) lookup_line;
+
     for (int i = 0; i < kw; i++)
     {
      if (x + i < offsetx || x + i >= image.width())
        continue;
-     sum += kernel[j][i] * lookup_line[x + i - offsetx];
+     if(poles)
+     {
+      QRgb rgb = rgb_lookup_line[x + i - offsetx];
+
+      QColor clr = QColor::fromRgb(rgb);
+//      qDebug() << "clr = " << clr;
+
+//      prr1 fprr = XCSD_Image::rgb888_qcolor_distance(rgb, poles->first);
+//      prr1 bprr = XCSD_Image::rgb888_qcolor_distance(rgb, poles->second);
+
+      prr1 fprr = XCSD_Image::rgb888_qcolor_distance(rgb, poles->first);
+      prr1 bprr = XCSD_Image::rgb888_qcolor_distance(rgb, poles->second);
+
+      fb1 fb = XCSD_Image::collapse_fb_distances(fprr, bprr);
+
+      u1 unit = fb.inner_ratio_to_unit(255);
+      sum += kernel[j][i] * unit;
+     }
+     else
+       sum += kernel[j][i] * lookup_line[x + i - offsetx];
     }
    }
 
@@ -142,12 +171,13 @@ QImage hysteresis(const QImage& image, float tmin, float tmax)
 }
 
 
-QImage canny(const QImage& input, float sigma, float tmin, float tmax, u1 blur_factor)
+QImage canny(const QImage& input, float sigma,
+  float tmin, float tmax, QImage::Format out_format, u1 blur_factor, QPair<QColor, QColor>* poles)
 {
- QImage res = convolution(gaussian_kernel(sigma), input, blur_factor), // Gaussian blur
-   // Gradients
-   gx = convolution(sobelx, res, blur_factor),
-   gy = convolution(sobely, res, blur_factor);
+ QImage res = convolution(gaussian_kernel(sigma), input, out_format, blur_factor, poles), // Gaussian blur
+     // Gradients
+   gx = convolution(sobelx, res, out_format, blur_factor, poles),
+   gy = convolution(sobely, res, out_format, blur_factor, poles);
 
  magnitude(res, gx, gy);
 
@@ -183,32 +213,36 @@ QImage canny(const QImage& input, float sigma, float tmin, float tmax, u1 blur_f
 }
 
 
-QImage sobel(const QImage& input, u1 blur_factor)
+QImage sobel(const QImage& input, QImage::Format out_format, u1 blur_factor, QPair<QColor, QColor>* poles)
 {
- QImage res(input.size(), input.format());
- magnitude(res, convolution(sobelx, input, blur_factor), convolution(sobely, input, blur_factor));
+ QImage res(input.size(), out_format);
+ magnitude(res, convolution(sobelx, input, out_format,
+   blur_factor, poles), convolution(sobely, input, out_format, blur_factor, poles));
  return res;
 }
 
 
-QImage prewitt(const QImage& input, u1 blur_factor)
+QImage prewitt(const QImage& input, QImage::Format out_format, u1 blur_factor, QPair<QColor, QColor>* poles)
 {
- QImage res(input.size(), input.format());
- magnitude(res, convolution(prewittx, input, blur_factor), convolution(prewitty, input, blur_factor));
+ QImage res(input.size(), out_format);
+ magnitude(res, convolution(prewittx, input, out_format,
+   blur_factor, poles), convolution(prewitty, input, out_format, blur_factor, poles));
  return res;
 }
 
-QImage roberts(const QImage& input, u1 blur_factor)
+QImage roberts(const QImage& input, QImage::Format out_format, u1 blur_factor, QPair<QColor, QColor>* poles)
 {
- QImage res(input.size(), input.format());
- magnitude(res, convolution(robertsx, input, blur_factor), convolution(robertsy, input, blur_factor));
+ QImage res(input.size(), out_format);
+ magnitude(res, convolution(robertsx, input, out_format,
+   blur_factor, poles), convolution(robertsy, input, out_format, blur_factor, poles));
  return res;
 }
 
 
-QImage scharr(const QImage& input, u1 blur_factor)
+QImage scharr(const QImage& input, QImage::Format out_format, u1 blur_factor, QPair<QColor, QColor>* poles)
 {
- QImage res(input.size(), input.format());
- magnitude(res, convolution(scharrx, input, blur_factor), convolution(scharry, input, blur_factor));
+ QImage res(input.size(), out_format);
+ magnitude(res, convolution(scharrx, input, out_format,
+   blur_factor, poles), convolution(scharry, input, out_format, blur_factor, poles));
  return res;
 }
