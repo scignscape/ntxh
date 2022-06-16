@@ -44,6 +44,7 @@ inline QString class_name_folder(QString pre) \
   _preproc_CONCAT(CLASS_NAME_FOLDER_FN_, _preproc_NUM_ARGS (__VA_ARGS__))(__VA_ARGS__)
 
 
+
 inline char* q_to_std(const QString& qs)
 {
  return const_cast<char*>( qs.toStdString().c_str() );

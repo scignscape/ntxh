@@ -27,7 +27,15 @@ class Edge_Detection_Dialog : public QDialog
  QHBoxLayout* view_group_box_layout_;
 
  QPushButton* select_image_button_;
+
  QComboBox* view_combo_box_;
+
+ QComboBox* canny_min_combo_box_;
+ QLabel* canny_min_combo_box_label_;
+ QComboBox* canny_max_combo_box_;
+ QLabel* canny_max_combo_box_label_;
+
+
  QLabel* view_combo_box_label_;
 
  QVBoxLayout* check_box_layout_;
@@ -41,10 +49,14 @@ class Edge_Detection_Dialog : public QDialog
 
  //Ui::Edge_Detection_Dialog* ui;
 
- QImage original_, grayscale_, current_;
+ QImage original_, grayscale_, original_grayscale_, current_;
  QString filename_;
  QGraphicsScene* scene_;
  u1 blur_factor_;
+
+ u1 canny_min_, canny_max_;
+
+ u2 images_count_;
 
  QColor background_pole_, foreground_pole_;
 
@@ -60,6 +72,10 @@ class Edge_Detection_Dialog : public QDialog
 
  void load_file(QString file_path);
 
+ void calculate_image(u1 index);
+ void recalculate_image();
+
+ CLASS_NAME_FOLDER_FN_0
 
 public:
 

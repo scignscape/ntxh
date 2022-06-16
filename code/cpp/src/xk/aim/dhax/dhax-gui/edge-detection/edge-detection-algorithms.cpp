@@ -53,6 +53,9 @@ QImage convolution(const auto& kernel, const QImage& image,
  int kw = kernel[0].size(), kh = kernel.size(),
    offsetx = kw / 2, offsety = kw / 2;
  QImage out (image.size(), out_format); //image.format());
+
+ out.fill(Qt::black);
+
  float sum;
 
  quint8* line;
