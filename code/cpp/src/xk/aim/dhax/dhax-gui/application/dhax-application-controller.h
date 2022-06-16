@@ -103,7 +103,10 @@ public:
 // void load_image(QString file_path);
 // void init_image_scene_item(DHAX_Image_Scene_Item* si);
 
- CLASS_NAME_FOLDER_FN(DHAX_Application_Controller)
+ //CLASS_NAME_FOLDER_FN(DHAX_Application_Controller)
+
+ CLASS_NAME_FN (classname ,DHAX_Application_Controller)
+
 
 // QString class_name_folder(QString pre)
 // {
@@ -143,6 +146,9 @@ public:
  QString get_current_image_complete_base_name();
  QDir get_current_image_dir();
  QString get_current_image_file_path();
+ QString get_current_image_q3x3_file_path();
+
+ static void q3x3(const QImage& src, QString path);
 
 
  QColor handle_change_color(QString application_role);

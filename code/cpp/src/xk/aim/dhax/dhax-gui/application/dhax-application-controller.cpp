@@ -445,6 +445,25 @@ QString DHAX_Application_Controller::get_current_image_file_path()
  return main_window_controller_->current_image_file_path();
 }
 
+QString DHAX_Application_Controller::get_current_image_q3x3_file_path()
+{
+ QString current = get_current_image_file_path();
+
+ QFileInfo qfi(current);
+ QDir qdir(qfi.absolutePath() + class_name_folder("/_proc"));
+
+ qdir.mkpath(".");
+ QString result = qdir.absoluteFilePath(QString("_q3x3.%1").arg(qfi.suffix()));
+
+ QImage src(current);
+
+ q3x3(src, result);
+
+ return result;
+ // image.save(path);
+
+}
+
 QString DHAX_Application_Controller::get_current_image_folder()
 {
  QString path = get_current_image_file_path();
@@ -926,8 +945,10 @@ void DHAX_Application_Controller::launch_edge_detection_dialog()
  if(main_window_controller_->image_document_controller())
    pr = main_window_controller_->image_document_controller()->get_fb_poles();
 
+ QString q3x3 = get_current_image_q3x3_file_path();
+
  Edge_Detection_Dialog* dlg = new Edge_Detection_Dialog(
-   get_current_image_file_path(), pr.first, pr.second, application_main_window_);
+   get_current_image_file_path(), q3x3, pr.first, pr.second, application_main_window_);
 
  dlg->show();
 
@@ -1211,3 +1232,12 @@ void DHAX_Application_Controller::handle_view_contour_info(QString path)
 {
 
 }
+
+void DHAX_Application_Controller::q3x3(const QImage& src, QString path)
+{
+ QImage copy = src.scaled(src.width() / 3, src.height() / 3);
+ copy = copy.scaled(src.width(), src.height());
+ copy.save(path);
+}
+
+

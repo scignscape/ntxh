@@ -11,6 +11,8 @@
 
 #include <QPainter>
 
+#include <QPainterPath>
+
 #include <cmath>
 
 
@@ -2541,14 +2543,37 @@ void XCSD_Image::show_255_palette(QString path,
 
    left_index /= 17;
 
-   QPen circle_pen = QPen(QColor(0, 0, 0));
-   circle_pen.setWidth(2);
+   QPen circle_pen = QPen(QColor(0, 20, 50));
+   circle_pen.setWidth(1);
 
    painter1.setPen(circle_pen);
 
    painter1.setBrush(QColor(255, 255, 255));
 
-   painter1.drawEllipse(full_rect.center(), left_index, left_index);
+   QPoint p1 = full_rect.center() + QPoint{left_index, left_index};
+   QPoint p2 = full_rect.center() + QPoint{left_index, -left_index};
+   QPoint p3 = full_rect.center() + QPoint{-left_index, -left_index};
+   QPoint p4 = full_rect.center() + QPoint{-left_index, left_index};
+
+   u1 cut = 4;
+
+   QVector<QPoint> points({p1 + QPoint{-cut, 0}, p1 + QPoint{0, -cut},
+     p2 + QPoint{0, cut}, p2 + QPoint{-cut, 0},
+     p3 + QPoint{cut, 0}, p3 + QPoint{0, cut},
+     p4 + QPoint{0, -cut}, p4 + QPoint{cut, 0}
+     });
+   QPolygon poly(points);
+
+   painter1.drawPolygon(points);
+
+//   QPainterPath path;
+//   path.moveTo(full_rect.center() + QPoint{0, left_index});
+//   path.lineTo(full_rect.topLeft());
+//   path.lineTo(full_rect.topRight());
+//   path.lineTo(rect.left() + (rect.width() / 2), rect.top());
+
+
+   //painter1.drawEllipse(full_rect.center(), left_index, left_index);
 
    ++index;
   }

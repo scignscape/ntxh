@@ -49,7 +49,7 @@ class Edge_Detection_Dialog : public QDialog
 
  //Ui::Edge_Detection_Dialog* ui;
 
- QImage original_, grayscale_, original_grayscale_, current_;
+ QImage original_, original_q3x3_, grayscale_, original_grayscale_, current_;
  QString filename_;
  QGraphicsScene* scene_;
  u1 blur_factor_;
@@ -75,12 +75,12 @@ class Edge_Detection_Dialog : public QDialog
  void calculate_image(u1 index);
  void recalculate_image();
 
- CLASS_NAME_FOLDER_FN_0
+ CLASS_NAME_FN (auto)
 
 public:
 
- explicit Edge_Detection_Dialog(QString file_path, QWidget* parent = nullptr);
- Edge_Detection_Dialog(QString file_path, QColor background_pole, QColor foreground_pole, QWidget* parent = nullptr);
+ explicit Edge_Detection_Dialog(QString file_path, QString file_path_q3x3,  QWidget* parent = nullptr);
+ Edge_Detection_Dialog(QString file_path, QString file_path_q3x3, QColor background_pole, QColor foreground_pole, QWidget* parent = nullptr);
 
 
  USE_SELF_CONNECT(normal)

@@ -43,6 +43,30 @@ inline QString class_name_folder(QString pre) \
 #define CLASS_NAME_FOLDER_FN(...) \
   _preproc_CONCAT(CLASS_NAME_FOLDER_FN_, _preproc_NUM_ARGS (__VA_ARGS__))(__VA_ARGS__)
 
+#define _CLASS_NAME_FOLDER_FN  CLASS_NAME_FOLDER_FN_0
+
+
+
+#define CLASS_NAME_FN_classname(ty)  \
+inline QString class_name_folder(QString pre) \
+{ \
+ return pre + "/_" #ty; \
+} \
+
+#define CLASS_NAME_FN_auto  \
+inline QString class_name_folder(QString pre) \
+{ \
+ return pre + "/_" + this->metaObject()->className(); \
+} \
+
+
+#define CLASS_NAME_FN_2(mode, arg)  CLASS_NAME_FN_##mode(arg)
+
+#define CLASS_NAME_FN_1(mode)  CLASS_NAME_FN_##mode
+
+
+#define CLASS_NAME_FN(...) \
+  _preproc_CONCAT(CLASS_NAME_FN_, _preproc_NUM_ARGS (__VA_ARGS__))(__VA_ARGS__)
 
 
 inline char* q_to_std(const QString& qs)

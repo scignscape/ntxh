@@ -58,7 +58,9 @@ class DHAX_Main_Window_Controller //: public QObject
 
  Mat2d<Vec1d<QString>> xcsd_paths_;
 
- CLASS_NAME_FOLDER_FN(DHAX_Main_Window_Controller)
+ //CLASS_NAME_FOLDER_FN(DHAX_Main_Window_Controller)
+
+ CLASS_NAME_FN (classname ,DHAX_Main_Window_Controller)
 
 public:
 

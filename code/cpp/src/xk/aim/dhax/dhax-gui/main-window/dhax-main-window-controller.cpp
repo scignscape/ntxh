@@ -523,6 +523,54 @@ void DHAX_Main_Window_Controller::calculate_local_color_histograms()
 
  //xcsd_image_->f
 
+ if(!image_scene_item_)
+ {
+//  QMessageBox::information(application_main_window_, "XCSD Scene Needed",
+//    "Please load an image as an XCSD scene first");
+//  return;
+
+  QMessageBox msg(QMessageBox::Question, "No image loaded",
+    "Load an image before invoking histogram functionality.",
+    QMessageBox::Ok);
+
+  msg.button(QMessageBox::Ok)->setObjectName("Ok");
+
+  msg.setStyleSheet(qmessagebox_button_style_sheet());
+
+  msg.exec();
+
+  return;
+ }
+
+ if(!xcsd_image_)
+ {
+  QMessageBox msg(QMessageBox::Question, "Load XCSD Scene",
+    "Histogram data requires an XCSD image format.  Proceed to load the current image as an XCSD scene?",
+    QMessageBox::Yes | QMessageBox::No);
+
+  msg.button(QMessageBox::Yes)->setObjectName("Yes");
+  msg.button(QMessageBox::No)->setObjectName("No");
+
+  msg.setStyleSheet(qmessagebox_button_style_sheet());
+
+  int response = msg.exec();
+
+  // QMessageBox::question(application_main_window_, "Missing histogram data",
+  // "Histogram data needs to be calculated first.  Proceed with the calculation?")
+
+  if(response == QMessageBox::Yes)
+  {
+   show_xcsd_scene();
+   //calculate_local_color_histograms();
+  }
+  else
+    return;
+
+
+  //xcsd_image_
+
+ }
+
 
  QVector<Local_Histogram_Data>* data = xcsd_image_->calculate_local_histograms(); //path);
  image_document_controller_->set_local_histogram_data(data);
@@ -548,8 +596,8 @@ void DHAX_Main_Window_Controller::show_local_color_histogram(rc2 rc)
 //    "Please load an image as an XCSD scene first");
 //  return;
 
-  QMessageBox msg(QMessageBox::Question, "Missing histogram data",
-    "Histogram data needs to be calculated first.  Proceed with the calculation?",
+  QMessageBox msg(QMessageBox::Question, "Missing XCSD Scene",
+    "The XCSD Scene was not found; try reloading.",
     QMessageBox::Ok);
 
   msg.button(QMessageBox::Ok)->setObjectName("Ok");

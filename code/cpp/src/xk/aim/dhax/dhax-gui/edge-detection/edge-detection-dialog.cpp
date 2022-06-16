@@ -15,15 +15,15 @@
 using namespace std;
 
 
-Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QWidget *parent) :
-  Edge_Detection_Dialog(file_path, QColor(), QColor(), parent)
+Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QString file_path_q3x3, QWidget* parent) :
+  Edge_Detection_Dialog(file_path, file_path_q3x3, QColor(), QColor(), parent)
 {
 
 }
 
 
 
-Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path,
+Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QString file_path_q3x3,
   QColor background_pole, QColor foreground_pole, QWidget *parent) :
   QDialog(parent), blur_factor_(0), images_count_(0), background_pole_(background_pole),
   foreground_pole_(foreground_pole)
@@ -279,6 +279,8 @@ Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path,
   filename_ = file_path;
   load_file(file_path);
 
+  original_q3x3_ = QImage(file_path_q3x3);
+
   QTimer::singleShot(0, [this]
   {
    image_->fitInView(scene_->sceneRect(), Qt::KeepAspectRatio);
@@ -379,6 +381,13 @@ void Edge_Detection_Dialog::recalculate_image()
 
   calculate_image(index);
  }
+ else
+ {
+  if(blur_factor_ == 0)
+    display(original_);
+  else
+    display(original_q3x3_);
+ }
 }
 
 void Edge_Detection_Dialog::calculate_image(u1 index)
@@ -393,7 +402,10 @@ void Edge_Detection_Dialog::calculate_image(u1 index)
  switch (index)
  {
  case 0:
-  display(original_);
+  if(blur_factor_ == 0)
+    display(original_);
+  else
+    display(original_q3x3_);
   break;
  case 1:
   display(canny(src, 1, canny_min_, canny_max_, out_format, blur_factor_, poles));
