@@ -93,7 +93,8 @@ QImage convolution(const auto& kernel, const QImage& image,
      {
       QRgb rgb = rgb_lookup_line[x + i - offsetx];
 
-      QColor clr = QColor::fromRgb(rgb);
+//      QColor clr = QColor::fromRgb(rgb);
+
 //      qDebug() << "clr = " << clr;
 
 //      prr1 fprr = XCSD_Image::rgb888_qcolor_distance(rgb, poles->first);
@@ -177,10 +178,10 @@ QImage hysteresis(const QImage& image, float tmin, float tmax)
 QImage canny(const QImage& input, float sigma,
   float tmin, float tmax, QImage::Format out_format, u1 blur_factor, QPair<QColor, QColor>* poles)
 {
- QImage res = convolution(gaussian_kernel(sigma), input, out_format, blur_factor, poles), // Gaussian blur
+ QImage res = convolution(gaussian_kernel(sigma), input, out_format, 0, poles), //, poles), // Gaussian blur
      // Gradients
-   gx = convolution(sobelx, res, out_format, blur_factor, poles),
-   gy = convolution(sobely, res, out_format, blur_factor, poles);
+   gx = convolution(sobelx, res, out_format, blur_factor, nullptr),
+   gy = convolution(sobely, res, out_format, blur_factor, nullptr);
 
  magnitude(res, gx, gy);
 

@@ -21,22 +21,22 @@ class Edge_Detection_Dialog : public QDialog
 {
  Q_OBJECT
 
+ CLASS_NAME_FN (auto)
+
  QVBoxLayout* main_layout_;
  QGroupBox* view_group_box_;
 
  QHBoxLayout* view_group_box_layout_;
 
  QPushButton* select_image_button_;
-
  QComboBox* view_combo_box_;
+ QLabel* view_combo_box_label_;
 
  QComboBox* canny_min_combo_box_;
  QLabel* canny_min_combo_box_label_;
  QComboBox* canny_max_combo_box_;
  QLabel* canny_max_combo_box_label_;
 
-
- QLabel* view_combo_box_label_;
 
  QVBoxLayout* check_box_layout_;
  QCheckBox* blur_check_box_;
@@ -49,7 +49,7 @@ class Edge_Detection_Dialog : public QDialog
 
  //Ui::Edge_Detection_Dialog* ui;
 
- QImage original_, original_q3x3_, grayscale_, original_grayscale_, current_;
+ QImage original_, original_q3x3_, original_grayscale_, grayscale_, current_;
  QString filename_;
  QGraphicsScene* scene_;
  u1 blur_factor_;
@@ -75,11 +75,9 @@ class Edge_Detection_Dialog : public QDialog
  void calculate_image(u1 index);
  void recalculate_image();
 
- CLASS_NAME_FN (auto)
-
 public:
 
- explicit Edge_Detection_Dialog(QString file_path, QString file_path_q3x3,  QWidget* parent = nullptr);
+ explicit Edge_Detection_Dialog(QString file_path, QString file_path_q3x3, QWidget* parent = nullptr);
  Edge_Detection_Dialog(QString file_path, QString file_path_q3x3, QColor background_pole, QColor foreground_pole, QWidget* parent = nullptr);
 
 

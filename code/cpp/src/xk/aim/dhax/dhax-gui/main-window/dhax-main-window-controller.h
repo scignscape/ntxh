@@ -17,6 +17,8 @@
 
 #include "xcsd-2d/xcsd-image.h"
 
+//#include "styled-messages.h"
+
 USING_XCNS(XCSD)
 
 class DHAX_Main_Window;
@@ -106,7 +108,7 @@ public:
  void save_local_color_histograms();
  void show_local_color_histogram(rc2 rc);
 
- void save_fb_gradient_trimap();
+ void show_fb_gradient_trimap();
 
  void show_annotation_comments(DHAX_Annotation_Instance* dai);
 

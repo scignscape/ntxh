@@ -50,6 +50,8 @@
 
 #include "styles.h"
 
+#include "styled-messages.h"
+
 
 #include <QMenuBar>
 
@@ -486,9 +488,105 @@ void DHAX_Main_Window_Controller::load_pdf()
 }
 
 
-void DHAX_Main_Window_Controller::save_fb_gradient_trimap()
+void DHAX_Main_Window_Controller::show_fb_gradient_trimap()
 {
- //qDebug() << "save_fb_gradient_trimap";
+ if(!image_scene_item_)
+ {
+//
+
+//  QMessageBox msg;
+
+//  sigma(&msg)->init_information("XCSD Scene Needed",
+//                               "Please load an image as an XCSD scene first.");
+
+////  QMessageBox_init_information(msg, "XCSD Scene Needed",
+////    "Please load an image as an XCSD scene first.");
+
+//  msg.exec();
+
+    QMessageBox_exec_information("XCSD Scene Needed",
+      "Please load an image as an XCSD scene first.");
+
+
+//  QMessageBox msg(QMessageBox::Question, "Background and/or Foreground Poles Have Not Been Set",
+//    "Foreground/Background functionality requires the two poles to be set from an XCSD Image.",
+//    QMessageBox::Ok);
+//  msg.button(QMessageBox::Ok)->setObjectName("Ok");
+//  msg.setStyleSheet(qmessagebox_button_style_sheet());
+
+//  msg.exec();
+
+
+//  QMessageBox::information(application_main_window_, "XCSD Scene Needed",
+//    "Please load an image as an XCSD scene first");
+//  return;
+
+//  QMessageBox msg(QMessageBox::Question, "No image loaded",
+//    "Load an image before invoking foreground/background functionality.",
+//    QMessageBox::Ok);
+
+//  msg.button(QMessageBox::Ok)->setObjectName("Ok");
+
+//  msg.setStyleSheet(qmessagebox_button_style_sheet());
+
+//  msg.exec();
+
+  return;
+ }
+
+ if(!xcsd_image_)
+ {
+//  QMessageBox msg;
+//  QMessageBox_init_question(msg, "Load XCSD Scene",
+//    "Histogram data requires an XCSD image format.  Proceed to load the current image as an XCSD scene?");
+
+  //  QMessageBox msg(QMessageBox::Question, "Load XCSD Scene",
+//    "Histogram data requires an XCSD image format.  Proceed to load the current image as an XCSD scene?",
+//    QMessageBox::Yes | QMessageBox::No);
+
+//  msg.button(QMessageBox::Yes)->setObjectName("Yes");
+//  msg.button(QMessageBox::No)->setObjectName("No");
+
+//  msg.setStyleSheet(qmessagebox_button_style_sheet());
+
+  int response = QMessageBox_exec_question("Load XCSD Scene",
+                                             "Histogram data requires an XCSD image format.  Proceed to load the current image as an XCSD scene?");
+
+
+  // QMessageBox::question(application_main_window_, "Missing histogram data",
+  // "Histogram data needs to be calculated first.  Proceed with the calculation?")
+
+  if(response == QMessageBox::Yes)
+  {
+   show_xcsd_scene();
+   //calculate_local_color_histograms();
+  }
+  else
+    return;
+
+  //xcsd_image_
+
+ }
+
+ if( (image_document_controller_->marked_background_pole() == (u2) -1)
+    || (image_document_controller_->marked_foreground_pole() == (u2) -1) )
+ {
+  //QMessageBox msg;
+  QMessageBox_exec_information("Background and/or Foreground Poles Have Not Been Set",
+    "Foreground/Background functionality requires the two poles to be set from an XCSD Image.");
+
+//  QMessageBox msg(QMessageBox::Question, "Background and/or Foreground Poles Have Not Been Set",
+//    "Foreground/Background functionality requires the two poles to be set from an XCSD Image.",
+//    QMessageBox::Ok);
+//  msg.button(QMessageBox::Ok)->setObjectName("Ok");
+//  msg.setStyleSheet(qmessagebox_button_style_sheet());
+
+//  msg.exec();
+
+  return;
+ }
+
+ //qDebug() << "show_fb_gradient_trimap";
 
  QFileInfo qfi(current_image_file_path_);
  QDir qdir(qfi.absolutePath() + class_name_folder("/_proc") + "/trimap");
@@ -529,31 +627,40 @@ void DHAX_Main_Window_Controller::calculate_local_color_histograms()
 //    "Please load an image as an XCSD scene first");
 //  return;
 
-  QMessageBox msg(QMessageBox::Question, "No image loaded",
-    "Load an image before invoking histogram functionality.",
-    QMessageBox::Ok);
+  //QMessageBox msg;
+  QMessageBox_exec_information("No image loaded", "Load an image before invoking histogram functionality.");
 
-  msg.button(QMessageBox::Ok)->setObjectName("Ok");
+//  (QMessageBox::Question, "No image loaded",
+//    "Load an image before invoking histogram functionality.",
+//    QMessageBox::Ok);
 
-  msg.setStyleSheet(qmessagebox_button_style_sheet());
+//  msg.button(QMessageBox::Ok)->setObjectName("Ok");
 
-  msg.exec();
+//  msg.setStyleSheet(qmessagebox_button_style_sheet());
+
+//  msg.exec();
 
   return;
  }
 
+ bool newly_loaded = false;
+
  if(!xcsd_image_)
  {
-  QMessageBox msg(QMessageBox::Question, "Load XCSD Scene",
-    "Histogram data requires an XCSD image format.  Proceed to load the current image as an XCSD scene?",
-    QMessageBox::Yes | QMessageBox::No);
+//  QMessageBox msg;
+  int response = QMessageBox_exec_question("Load XCSD Scene",
+    "Histogram data requires an XCSD image format.  Proceed to load the current image as an XCSD scene?");
 
-  msg.button(QMessageBox::Yes)->setObjectName("Yes");
-  msg.button(QMessageBox::No)->setObjectName("No");
+//  QMessageBox msg(QMessageBox::Question, "Load XCSD Scene",
+//    "Histogram data requires an XCSD image format.  Proceed to load the current image as an XCSD scene?",
+//    QMessageBox::Yes | QMessageBox::No);
 
-  msg.setStyleSheet(qmessagebox_button_style_sheet());
+//  msg.button(QMessageBox::Yes)->setObjectName("Yes");
+//  msg.button(QMessageBox::No)->setObjectName("No");
 
-  int response = msg.exec();
+//  msg.setStyleSheet(qmessagebox_button_style_sheet());
+
+//  int response = msg.exec();
 
   // QMessageBox::question(application_main_window_, "Missing histogram data",
   // "Histogram data needs to be calculated first.  Proceed with the calculation?")
@@ -566,6 +673,7 @@ void DHAX_Main_Window_Controller::calculate_local_color_histograms()
   else
     return;
 
+  newly_loaded = true;
 
   //xcsd_image_
 
@@ -584,6 +692,13 @@ void DHAX_Main_Window_Controller::calculate_local_color_histograms()
 // dlg->setModal(false);
 // dlg->show();
 
+ if(newly_loaded)
+ {
+  //QMessageBox msg;
+  QMessageBox_exec_information("Action Completed", "All XCSD and histogram data has been calculated.");
+  //msg.exec();
+ }
+
 }
 
 
@@ -596,31 +711,36 @@ void DHAX_Main_Window_Controller::show_local_color_histogram(rc2 rc)
 //    "Please load an image as an XCSD scene first");
 //  return;
 
-  QMessageBox msg(QMessageBox::Question, "Missing XCSD Scene",
-    "The XCSD Scene was not found; try reloading.",
-    QMessageBox::Ok);
+//  QMessageBox msg;
 
-  msg.button(QMessageBox::Ok)->setObjectName("Ok");
+  QMessageBox_exec_information("Missing XCSD Scene",
+    "The XCSD Scene was not found; try reloading.");
 
-  msg.setStyleSheet(qmessagebox_button_style_sheet());
+//  msg.button(QMessageBox::Ok)->setObjectName("Ok");
 
-  msg.exec();
+//  msg.setStyleSheet(qmessagebox_button_style_sheet());
+
+ // msg.exec();
 
   return;
  }
 
  if(!image_document_controller_->local_histogram_data())
  {
-  QMessageBox msg(QMessageBox::Question, "Missing histogram data",
-    "Histogram data needs to be calculated first.  Proceed with the calculation?",
-    QMessageBox::Yes | QMessageBox::No);
+//  QMessageBox msg;
+  int response = QMessageBox_exec_question("Missing histogram data",
+    "Histogram data needs to be calculated first.  Proceed with the calculation?");
 
-  msg.button(QMessageBox::Yes)->setObjectName("Yes");
-  msg.button(QMessageBox::No)->setObjectName("No");
+//  QMessageBox msg(QMessageBox::Question, "Missing histogram data",
+//    "Histogram data needs to be calculated first.  Proceed with the calculation?",
+//    QMessageBox::Yes | QMessageBox::No);
 
-  msg.setStyleSheet(qmessagebox_button_style_sheet());
+//  msg.button(QMessageBox::Yes)->setObjectName("Yes");
+//  msg.button(QMessageBox::No)->setObjectName("No");
 
-  int response = msg.exec();
+//  msg.setStyleSheet(qmessagebox_button_style_sheet());
+
+//  int response = msg.exec();
 
   // QMessageBox::question(application_main_window_, "Missing histogram data",
   // "Histogram data needs to be calculated first.  Proceed with the calculation?")

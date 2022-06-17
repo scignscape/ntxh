@@ -950,6 +950,9 @@ void DHAX_Application_Controller::launch_edge_detection_dialog()
  Edge_Detection_Dialog* dlg = new Edge_Detection_Dialog(
    get_current_image_file_path(), q3x3, pr.first, pr.second, application_main_window_);
 
+// Edge_Detection_Dialog* dlg = new Edge_Detection_Dialog(
+//   get_current_image_file_path(), pr.first, pr.second, application_main_window_);
+
  dlg->show();
 
 }

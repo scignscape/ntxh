@@ -61,7 +61,7 @@ void Simple_Calculate_Command::proceed()
    }
   }
 
-  static QString msg = "Total Foreground Length: %1, or %2% of width and %3% of height";
+  static QString msg = "Total Foreground Length: %1, or %2% of width \nand %3% of height";
 
   QMessageBox::information(nullptr, "Length and/or area calculations",
      msg.arg(length_count_).arg(QString::number(((r8)length_count_/ww)*100, 'f', 2))

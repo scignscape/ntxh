@@ -15,7 +15,7 @@
 using namespace std;
 
 
-Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QString file_path_q3x3, QWidget* parent) :
+Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QString file_path_q3x3, QWidget *parent) :
   Edge_Detection_Dialog(file_path, file_path_q3x3, QColor(), QColor(), parent)
 {
 
@@ -30,9 +30,6 @@ Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QString file_pat
 //    ui(new Ui::Edge_Detection_Dialog)
 {
  setObjectName("Edge_Detection_Dialog");
-
-
- image_ = nullptr;
 
  //    ui_->setupUi(this);
  scene_ = new QGraphicsScene(this);
@@ -94,7 +91,7 @@ Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QString file_pat
 
  view_group_box_layout_->addWidget(select_image_button_);
 // view_group_box_layout_->addStretch();
- view_group_box_layout_->addSpacing(10);
+ view_group_box_layout_->addSpacing(28);
 
  view_combo_box_label_ = new QLabel("View:", view_group_box_);
  view_combo_box_label_->setMaximumWidth(30);
@@ -125,7 +122,7 @@ Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QString file_pat
  view_group_box_layout_->addWidget(view_combo_box_);
 // view_group_box_layout_->addStretch();
 
- view_group_box_layout_->addSpacing(10);
+ view_group_box_layout_->addSpacing(15);
 
  canny_min_combo_box_ = new QComboBox(view_group_box_);
  for(u1 u = 10; u <= 220; u += 10)
@@ -150,6 +147,7 @@ Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QString file_pat
 
  view_group_box_layout_->addSpacing(4);
 
+
  canny_max_combo_box_ = new QComboBox(view_group_box_);
  for(u1 u = 20; u <= 240; u += 10)
  {
@@ -170,7 +168,7 @@ Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QString file_pat
  view_group_box_layout_->addWidget(canny_max_combo_box_label_);
  view_group_box_layout_->addWidget(canny_max_combo_box_);
 
- view_group_box_layout_->addSpacing(28);
+ view_group_box_layout_->addSpacing(15);
 
  check_box_layout_ = new QVBoxLayout;
 
@@ -180,7 +178,7 @@ Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QString file_pat
  check_box_layout_->addStretch();
 
  blur_check_box_ = new QCheckBox("Use Blur", this);
- connect(blur_check_box_, &QCheckBox::toggled, [this](bool checked)
+ connect(blur_check_box_, &QCheckBox::toggled, [=](bool checked)
  {
   if(checked)
     blur_factor_ = 1;
@@ -213,6 +211,7 @@ Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QString file_pat
       ++poles_;
    }
    recalculate_image();
+
   });
  }
  else
@@ -227,7 +226,7 @@ Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QString file_pat
 
  view_group_box_layout_->addLayout(check_box_layout_);
 
- view_group_box_layout_->addSpacing(10);
+ view_group_box_layout_->addSpacing(18);
 
  save_button_ = new QPushButton(view_group_box_);
 // save_button_->setObjectName(QString::fromUtf8("select_image_button_2"));
@@ -238,7 +237,8 @@ Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QString file_pat
  save_button_->setMaximumWidth(50);
 
  view_group_box_layout_->addWidget(save_button_);
- view_group_box_layout_->addSpacing(7);
+
+ view_group_box_layout_->addSpacing(5);
  view_group_box_layout_->addStretch();
 
  close_button_ = new QPushButton("Close", this);
@@ -333,9 +333,6 @@ void Edge_Detection_Dialog::load_file(QString file_path)
  display(original_);
  grayscale_ = original_.convertToFormat(QImage::Format_Grayscale8);
  original_grayscale_ = grayscale_;
-
- original_grayscale_ = original_.convertToFormat(QImage::Format_Grayscale8);
-
  view_combo_box_->setCurrentIndex(0);
 
  set_view_box_title(file_path);
@@ -353,6 +350,7 @@ void Edge_Detection_Dialog::display(const QImage& image)
  QString path = qdir.absoluteFilePath(QString::number(images_count_) + "." + qfi.suffix());
  image.save(path);
 
+
  scene_->clear();
  scene_->addPixmap(QPixmap::fromImage(image));
  scene_->setSceneRect(image.rect());
@@ -364,8 +362,7 @@ void Edge_Detection_Dialog::display(const QImage& image)
 
 void Edge_Detection_Dialog::on_view_combo_box_currentIndexChanged(int index)
 {
- qDebug() << "view index = " << index;
- calculate_image(index);
+  calculate_image(index);
 }
 
 void Edge_Detection_Dialog::recalculate_image()
@@ -375,9 +372,10 @@ void Edge_Detection_Dialog::recalculate_image()
  {
   //calculate_image(0);
   current_ = original_;
-  //grayscale_ = original_grayscale_;
+  //
+  grayscale_ = original_grayscale_;
 
-  grayscale_ = original_.convertToFormat(QImage::Format_Grayscale8);
+  //grayscale_ = original_.convertToFormat(QImage::Format_Grayscale8);
 
   calculate_image(index);
  }
@@ -389,6 +387,7 @@ void Edge_Detection_Dialog::recalculate_image()
     display(original_q3x3_);
  }
 }
+
 
 void Edge_Detection_Dialog::calculate_image(u1 index)
 {
@@ -417,8 +416,7 @@ void Edge_Detection_Dialog::calculate_image(u1 index)
    roberts,
    scharr
   };
-  //display(functions[index - 2](src, out_format, blur_factor_, poles));
-  display(functions[index - 2](original_grayscale_, out_format, blur_factor_, poles));
+  display(functions[index - 2](src, out_format, blur_factor_, poles));
   break;
  }
 }

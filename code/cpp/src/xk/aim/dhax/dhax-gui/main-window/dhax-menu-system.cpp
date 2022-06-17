@@ -128,9 +128,9 @@ void DHAX_Menu_System::init_menus()
 
  DHAX_Menu& tm = *menus_->menu("Trimap");
 
- tm.add_action("Save fb-Gradient Trimap") << [sg]
+ tm.add_action("Show fb-Gradient Trimap") << [sg]
  {
-  sg->emit_save_fb_gradient_trimap_requested();
+  sg->emit_show_fb_gradient_trimap_requested();
  };
 
  DHAX_Menu& mm = *menus_->menu("Matrix");
