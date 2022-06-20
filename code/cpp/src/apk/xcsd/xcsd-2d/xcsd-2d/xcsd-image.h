@@ -206,7 +206,7 @@ public:
  static prr1 rgb888_qcolor_distance(u4 rgb, const QColor& clr);
  static fb1 collapse_fb_distances(const prr1& dist1, const prr1& dist2);
 
- void show_255_palette(QString path,
+ QSize show_255_palette(QString path,
    QString sorted_path, u1 box_width = 50, u1 padline_width = 8);
 
 

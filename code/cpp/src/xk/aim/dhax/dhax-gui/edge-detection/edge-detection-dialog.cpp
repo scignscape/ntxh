@@ -125,18 +125,23 @@ Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QString file_pat
  view_group_box_layout_->addSpacing(15);
 
  canny_min_combo_box_ = new QComboBox(view_group_box_);
- for(u1 u = 10; u <= 220; u += 10)
  {
-  canny_min_combo_box_->addItem(QString::number(u));
- }
- canny_min_combo_box_ >> Connect(int overload_of QComboBox::currentIndexChanged)
-   to_lambda[this](int index)
- {
-  canny_min_ = 10 * (index + 1);
+  const QSignalBlocker blocker(canny_min_combo_box_);
 
-  if(image_ && (view_combo_box_->currentIndex() == 1))
-    recalculate_image(); //calculate_image(view_combo_box_->currentIndex());
- };
+  for(u1 u = 10; u <= 220; u += 10)
+  {
+   canny_min_combo_box_->addItem(QString::number(u));
+  }
+  canny_min_combo_box_ >> Connect(int overload_of QComboBox::currentIndexChanged)
+    to_lambda[this](int index)
+  {
+   canny_min_ = 10 * (index + 1);
+
+   if(image_ && (view_combo_box_->currentIndex() == 1))
+     recalculate_image(); //calculate_image(view_combo_box_->currentIndex());
+  };
+
+ }
 
  canny_min_combo_box_->setStyleSheet("combobox-popup: 0;");
  canny_min_combo_box_->setMaxVisibleItems(5);
@@ -149,18 +154,24 @@ Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QString file_pat
 
 
  canny_max_combo_box_ = new QComboBox(view_group_box_);
- for(u1 u = 20; u <= 240; u += 10)
- {
-  canny_max_combo_box_->addItem(QString::number(u));
- }
- canny_max_combo_box_ >> Connect(int overload_of QComboBox::currentIndexChanged)
-   to_lambda[this](int index)
- {
-  canny_max_ = 10 + (10 * (index + 1));
 
-  if(image_ && (view_combo_box_->currentIndex() == 1) )
-    recalculate_image(); //view_combo_box_->currentIndex());
- };
+ {
+  const QSignalBlocker blocker(canny_max_combo_box_);
+
+  for(u1 u = 20; u <= 240; u += 10)
+  {
+   canny_max_combo_box_->addItem(QString::number(u));
+  }
+  canny_max_combo_box_ >> Connect(int overload_of QComboBox::currentIndexChanged)
+    to_lambda[this](int index)
+  {
+   canny_max_ = 10 + (10 * (index + 1));
+
+   if(image_ && (view_combo_box_->currentIndex() == 1) )
+     recalculate_image(); //view_combo_box_->currentIndex());
+  };
+ }
+
  canny_max_combo_box_->setStyleSheet("combobox-popup: 0;");
  canny_max_combo_box_->setMaxVisibleItems(5);
  canny_max_combo_box_->setCurrentIndex(10);

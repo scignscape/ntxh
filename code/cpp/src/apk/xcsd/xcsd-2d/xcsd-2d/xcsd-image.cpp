@@ -2416,7 +2416,7 @@ void XCSD_Image::get_255_palette(QVector<QColor>& vec)
 
 }
 
-void XCSD_Image::show_255_palette(QString path,
+QSize XCSD_Image::show_255_palette(QString path,
   QString sorted_path,
   u1 box_width,
   u1 padline_width)
@@ -2543,28 +2543,48 @@ void XCSD_Image::show_255_palette(QString path,
 
    left_index /= 17;
 
-   QPen circle_pen = QPen(QColor(0, 20, 50));
+   QPen circle_pen = QPen(QColor(0, 20, 50, 90));
    circle_pen.setWidth(1);
-
-   painter1.setPen(circle_pen);
 
    painter1.setBrush(QColor(255, 255, 255));
 
-   QPoint p1 = full_rect.center() + QPoint{left_index, left_index};
-   QPoint p2 = full_rect.center() + QPoint{left_index, -left_index};
-   QPoint p3 = full_rect.center() + QPoint{-left_index, -left_index};
-   QPoint p4 = full_rect.center() + QPoint{-left_index, left_index};
+   if(left_index < 9)
+   {
+    painter1.setPen(circle_pen);
 
-   u1 cut = 4;
+    QPoint p1 = full_rect.center() + QPoint{left_index, left_index};
+    QPoint p2 = full_rect.center() + QPoint{left_index, -left_index};
+    QPoint p3 = full_rect.center() + QPoint{-left_index, -left_index};
+    QPoint p4 = full_rect.center() + QPoint{-left_index, left_index};
 
-   QVector<QPoint> points({p1 + QPoint{-cut, 0}, p1 + QPoint{0, -cut},
-     p2 + QPoint{0, cut}, p2 + QPoint{-cut, 0},
-     p3 + QPoint{cut, 0}, p3 + QPoint{0, cut},
-     p4 + QPoint{0, -cut}, p4 + QPoint{cut, 0}
-     });
-   QPolygon poly(points);
+//    u1 cut = 7;
 
-   painter1.drawPolygon(points);
+    QVector<QPoint> points({p1, p2, p3, p4});
+    QPolygon poly(points);
+
+    painter1.drawPolygon(points);
+   }
+   else
+   {
+    painter1.setPen(Qt::NoPen);
+
+    QPoint p1 = full_rect.center() + QPoint{left_index, left_index};
+    QPoint p2 = full_rect.center() + QPoint{left_index, -left_index};
+    QPoint p3 = full_rect.center() + QPoint{-left_index, -left_index};
+    QPoint p4 = full_rect.center() + QPoint{-left_index, left_index};
+
+    u1 cut = 5;
+
+    QVector<QPoint> points({p1 + QPoint{-cut, 0}, p1 + QPoint{0, -cut},
+      p2 + QPoint{0, cut}, p2 + QPoint{-cut, 0},
+      p3 + QPoint{cut, 0}, p3 + QPoint{0, cut},
+      p4 + QPoint{0, -cut}, p4 + QPoint{cut, 0}
+      });
+    QPolygon poly(points);
+
+    painter1.drawPolygon(points);
+   }
+
 
 //   QPainterPath path;
 //   path.moveTo(full_rect.center() + QPoint{0, left_index});
@@ -2582,6 +2602,7 @@ void XCSD_Image::show_255_palette(QString path,
  pixmap1.save(sorted_path);
  pixmap.save(path);
 
+ return pixmap1.size();
 
 }
 

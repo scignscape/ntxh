@@ -449,6 +449,9 @@ QString DHAX_Application_Controller::get_current_image_q3x3_file_path()
 {
  QString current = get_current_image_file_path();
 
+ if(current.isEmpty())
+   return {};
+
  QFileInfo qfi(current);
  QDir qdir(qfi.absolutePath() + class_name_folder("/_proc"));
 
@@ -1094,9 +1097,10 @@ void DHAX_Application_Controller::dispatch_datagram(QByteArray qba)
 
 void DHAX_Application_Controller::launch_color_mean_dialog(QString folder, QStringList qsl)
 {
- QString cnf = class_name_folder("@_proc");
+// QString cnf = class_name_folder("@_proc");
+// QString dir_s = folder + "/_proc/_DHAX_Application_Controller";
 
- QString dir_s = folder + "/_proc/_DHAX_Application_Controller";
+ QString dir_s = class_name_folder(folder + "/_proc/");
 
  QDir qd(dir_s);
  qd.mkpath(".");
@@ -1112,9 +1116,9 @@ void DHAX_Application_Controller::launch_color_mean_dialog(QString folder, QStri
 
  //QVector<QColor> vec;
  XCSD_Image* xcsd = main_window_controller_->xcsd_image();
- xcsd->show_255_palette(pal[1], pal[2]);
+ QSize sz = xcsd->show_255_palette(pal[1], pal[2]);
 
- Color_Mean_Demo_Frame* fr = new Color_Mean_Demo_Frame({qsl, pal}, 200, 800, 300);
+ Color_Mean_Demo_Frame* fr = new Color_Mean_Demo_Frame({qsl, pal}, 200, sz.width(), sz.height());
 
  fr->setContextMenuPolicy(Qt::CustomContextMenu);
 
