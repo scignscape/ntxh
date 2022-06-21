@@ -22,7 +22,7 @@ QMAKE_CXX = g++-7
 CONFIG += c++17
 
 
-## FEATURE_IFC = "USE_IFC"
+## FEATURE_IFC = USE_IFC
 
 defined(FEATURE_IFC ,var) {
  DEFINES += $$FEATURE_IFC
@@ -101,7 +101,7 @@ INCLUDEPATH += $$XCSD_SRC_GROUP_DIR
 INCLUDEPATH += $$XCSD_SRC_GROUP_DIR/../xcsd-1d
 
 
-## FEATURE_OpenCV = "USE_OpenCV"
+FEATURE_OpenCV = USE_OpenCV
 
 defined(FEATURE_OpenCV ,var) {
 

@@ -8,7 +8,10 @@
 
 #include "dhax-application-controller.h"
 
-#ifdef FEATURE_OpenCV
+#ifdef USE_OpenCV
+#include "dgi-opencv/dgi-image.h"
+#include "dgi-opencv/dgi-demo-frame.h"
+
 #include "dgi-opencv/dgi-image.h"
 #include "dgi-opencv/dgi-demo-frame.h"
 #endif
@@ -82,7 +85,7 @@ USING_KANS(TextIO)
 
 #include "dhax-forge-controller.h"
 
-#ifdef FEATURE_OpenCV
+#ifdef USE_OpenCV
 USING_KANS(DGI)
 #endif
 
@@ -1186,7 +1189,7 @@ void DHAX_Application_Controller::view_trimap(QString path)
 
 void DHAX_Application_Controller::view_contours()
 {
-#ifdef FEATURE_OpenCV
+#ifdef USE_OpenCV
  QString image_filename_path = main_window_controller_->current_image_file_path();
  if(image_filename_path.isEmpty())
    return;
@@ -1247,7 +1250,7 @@ void DHAX_Application_Controller::view_contours()
    "compiled with the OpenCV libaries, needed for the contour dialog.  "
    "Support for OpenCV can be enabled via the FEATURE_OpenCV qmake flag "
    "in this application's .pri file.");
-#endif
+#endif // USE_OpenCV
 }
 
 void DHAX_Application_Controller::handle_view_contour_info(QString path)

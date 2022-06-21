@@ -24,7 +24,7 @@ CONFIG += c++17
 DEFINES += USE_XCNS
 
 
-# FEATURE_IFC = "USE_IFC"
+# FEATURE_IFC = USE_IFC
 
 
 defined(FEATURE_IFC ,var) {
@@ -103,8 +103,6 @@ LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
 
 LIBS += -L$$TARGETSDIR -liat-forge
 
-LIBS += -L$$TARGETSDIR  -ldgi-opencv
-
 
 #LIBS += -L$$TARGETSDIR -ldgdb
 
@@ -114,12 +112,6 @@ LIBS += -L$$TARGETSDIR -llz4  -llzma -lz
 #LIBS += -L$$TARGETSDIR -lwhitedb
 
 
-
-LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_imgcodecs
-LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_core
-LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_imgproc
-
-
 #LIBS += -L$$TARGETSDIR -laimlib
 
 
@@ -127,7 +119,7 @@ LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_imgproc
 LIBS += -lxerces-c
 
 
-# FEATURE_OpenCV = 
+FEATURE_OpenCV = USE_OpenCV
 
 # ### For OpenCV 
 defined(FEATURE_OpenCV ,var) {
@@ -141,6 +133,13 @@ defined(FEATURE_OpenCV ,var) {
  INCLUDEPATH += $$DCMTK_DIR/dcmsr/include
  INCLUDEPATH += $$DCMTK_DIR/dcmdata/include
  INCLUDEPATH += $$DCMTK_DIR/oflog/include
+
+ LIBS += -L$$TARGETSDIR  -ldgi-opencv
+
+ LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_imgcodecs
+ LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_core
+ LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_imgproc
+
 }
 
 # ### For IFC (Industry Foundation Classes)
@@ -205,3 +204,4 @@ LIBS += -L$$OCCT_LIB_DIR \
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)
 mkpath($$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)
+
