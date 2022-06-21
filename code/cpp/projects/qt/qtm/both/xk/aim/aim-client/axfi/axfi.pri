@@ -70,7 +70,7 @@ SOURCES += \
 
 
 
-LIBS += -L$$TARGETSDIR  -laimlib
+#?LIBS += -L$$TARGETSDIR  -laimlib
 
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)

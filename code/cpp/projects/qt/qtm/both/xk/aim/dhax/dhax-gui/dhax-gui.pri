@@ -104,7 +104,11 @@ INCLUDEPATH += $$XCSD_SRC_GROUP_DIR/../xcsd-1d
 ## FEATURE_OpenCV = "USE_OpenCV"
 
 defined(FEATURE_OpenCV ,var) {
+
+ message(Using OpenCV)
+
  DEFINES += $$FEATURE_OpenCV
+
  include($$ROOT_DIR/../preferred/opencv.pri)
 
 
@@ -354,7 +358,7 @@ defined(FEATURE_OpenCV ,var) {
 #  -lchasm-lib-33 -lchasm-lib-43
 
 
-#?LIBS += -L$$TARGETSDIR -liat-forge
+LIBS += -L$$TARGETSDIR -liat-forge
 
 LIBS += -L$$TARGETSDIR  -limage-editor
 
@@ -377,7 +381,7 @@ LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
   -lchasm-lib-33 -lchasm-lib-43
 
 
-LIBS += -L$$TARGETSDIR -laimlib
+# LIBS += -L$$TARGETSDIR -laimlib
 
 
 # #  assumed xerces is installed ...

@@ -97,11 +97,11 @@ LIBS += -L$$TARGETSDIR  -limage-editor
 LIBS += -lrt
 
 
-#LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
-#  -lchasm-lib-33 -lchasm-lib-43
+LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
+  -lchasm-lib-33 -lchasm-lib-43
 
 
-#LIBS += -L$$TARGETSDIR -liat-forge
+LIBS += -L$$TARGETSDIR -liat-forge
 
 LIBS += -L$$TARGETSDIR  -ldgi-opencv
 
@@ -127,15 +127,21 @@ LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_imgproc
 LIBS += -lxerces-c
 
 
-DCMTK_DIR = $$DCMTK_SRC_GROUP_DIR
+# FEATURE_OpenCV = 
 
+# ### For OpenCV 
+defined(FEATURE_OpenCV ,var) {
 
-INCLUDEPATH += $$DCMTK_DIR/ofstd/include
-INCLUDEPATH += $$DCMTK_DIR/dcm-config/include
-INCLUDEPATH += $$DCMTK_DIR/dcmsr/include
-INCLUDEPATH += $$DCMTK_DIR/dcmdata/include
-INCLUDEPATH += $$DCMTK_DIR/oflog/include
+ message(Using OpenCV)
 
+ DCMTK_DIR = $$DCMTK_SRC_GROUP_DIR
+
+ INCLUDEPATH += $$DCMTK_DIR/ofstd/include
+ INCLUDEPATH += $$DCMTK_DIR/dcm-config/include
+ INCLUDEPATH += $$DCMTK_DIR/dcmsr/include
+ INCLUDEPATH += $$DCMTK_DIR/dcmdata/include
+ INCLUDEPATH += $$DCMTK_DIR/oflog/include
+}
 
 # ### For IFC (Industry Foundation Classes)
 defined(FEATURE_IFC ,var) {
