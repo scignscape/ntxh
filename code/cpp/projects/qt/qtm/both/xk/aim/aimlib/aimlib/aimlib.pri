@@ -26,8 +26,9 @@ DEFINES += HAVE_STD_STRING
 DEFINES += HAVE_STL_STRING
 
 
-LIBS += -L$$TARGETSDIR  -lofstd  -ldcmsr -loflog -ldcmdata \
-   -ldcmimage -ldcmimgle
+#LIBS += -L$$TARGETSDIR  -lofstd  -ldcmsr -loflog -ldcmdata \
+#   -ldcmimage -ldcmimgle
+
 
 # #  assumed xerces is installed ...
 LIBS += -lxerces-c

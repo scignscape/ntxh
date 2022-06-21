@@ -8,8 +8,10 @@
 
 #include "dhax-application-controller.h"
 
+#ifdef FEATURE_OpenCV
 #include "dgi-opencv/dgi-image.h"
 #include "dgi-opencv/dgi-demo-frame.h"
+#endif
 
 // //  this has to be included after dgi-image.h ...
  //    (because of "_flags" macro conflict ...)
@@ -63,6 +65,9 @@
 
 #include "image-viewer/image-document-controller.h"
 
+//?
+#include "styled-messages.h"
+
 #include <QMessageBox>
 #include <QDesktopServices>
 
@@ -77,7 +82,9 @@ USING_KANS(TextIO)
 
 #include "dhax-forge-controller.h"
 
+#ifdef FEATURE_OpenCV
 USING_KANS(DGI)
+#endif
 
 #include <QMenuBar>
 
@@ -331,7 +338,8 @@ void DHAX_Application_Controller::load_notes()
 
  if(!dsi)
  {
-  QMessageBox::warning(application_main_window_, "Load Image First",
+  // application_main_window_,
+  QMessageBox_exec_warning("Load Image First",
     "Please load an image before attempting to load annotations");
   return;
  }
@@ -1178,6 +1186,7 @@ void DHAX_Application_Controller::view_trimap(QString path)
 
 void DHAX_Application_Controller::view_contours()
 {
+#ifdef FEATURE_OpenCV
  QString image_filename_path = main_window_controller_->current_image_file_path();
  if(image_filename_path.isEmpty())
    return;
@@ -1233,6 +1242,12 @@ void DHAX_Application_Controller::view_contours()
 
  dlg->setLayout(vbl);
  dlg->show();
+#else
+ QMessageBox_exec_information("OpenCV Needed", "This application has not been "
+   "compiled with the OpenCV libaries, needed for the contour dialog.  "
+   "Support for OpenCV can be enabled via the FEATURE_OpenCV qmake flag "
+   "in this application's .pri file.");
+#endif
 }
 
 void DHAX_Application_Controller::handle_view_contour_info(QString path)

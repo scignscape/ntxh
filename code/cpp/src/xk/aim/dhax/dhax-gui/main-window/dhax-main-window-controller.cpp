@@ -85,8 +85,8 @@ DHAX_Main_Window_Controller::DHAX_Main_Window_Controller()
 
 void DHAX_Main_Window_Controller::show_annotation_comments(DHAX_Annotation_Instance* dai)
 {
- QString text = dai->comment();
- QMessageBox::information(application_main_window_, dai->scoped_identifiers_to_string(),
+ QString text = dai->comment(); //application_main_window_, ?
+ QMessageBox_exec_information(dai->scoped_identifiers_to_string(),
    dai->comment());
 }
 

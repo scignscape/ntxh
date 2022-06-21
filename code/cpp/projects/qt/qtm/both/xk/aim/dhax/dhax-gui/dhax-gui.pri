@@ -101,13 +101,29 @@ INCLUDEPATH += $$XCSD_SRC_GROUP_DIR
 INCLUDEPATH += $$XCSD_SRC_GROUP_DIR/../xcsd-1d
 
 
+## FEATURE_OpenCV = "USE_OpenCV"
 
-include($$ROOT_DIR/../preferred/opencv.pri)
+defined(FEATURE_OpenCV ,var) {
+ DEFINES += $$FEATURE_OpenCV
+ include($$ROOT_DIR/../preferred/opencv.pri)
 
-INCLUDEPATH += $$OPENCV_SRC_DIR/modules/core/include
-INCLUDEPATH += $$OPENCV_SRC_DIR/modules/imgproc/include
-INCLUDEPATH += $$OPENCV_SRC_DIR/modules/imgcodecs/include
-INCLUDEPATH += $$OPENCV_BUILD_DIR
+
+ INCLUDEPATH += $$OPENCV_SRC_DIR/modules/core/include
+ INCLUDEPATH += $$OPENCV_SRC_DIR/modules/imgproc/include
+ INCLUDEPATH += $$OPENCV_SRC_DIR/modules/imgcodecs/include
+ INCLUDEPATH += $$OPENCV_BUILD_DIR
+
+
+ DCMTK_DIR = $$DCMTK_SRC_GROUP_DIR
+
+ INCLUDEPATH += $$DCMTK_DIR/ofstd/include
+ INCLUDEPATH += $$DCMTK_DIR/dcm-config/include
+ INCLUDEPATH += $$DCMTK_DIR/dcmsr/include
+ INCLUDEPATH += $$DCMTK_DIR/dcmdata/include
+ INCLUDEPATH += $$DCMTK_DIR/oflog/include
+
+}
+
 
 
 INCLUDEPATH += $$POPPLER_INCLUDE_DIR
@@ -330,8 +346,9 @@ LIBS += -L$$POPPLER_LIB_DIR -lpoppler-qt5
 LIBS += -lrt
 
 
-#?LIBS += -L$$TARGETSDIR  -ldgi-opencv
-
+defined(FEATURE_OpenCV ,var) {
+ LIBS += -L$$TARGETSDIR  -ldgi-opencv
+}
 
 #LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
 #  -lchasm-lib-33 -lchasm-lib-43
@@ -356,26 +373,16 @@ LIBS += -L$$TARGETSDIR -llz4  -llzma -lz
 #?LIBS += -L$$TARGETSDIR -lwhitedb
 
 
-#?LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
-#?  -lchasm-lib-33 -lchasm-lib-43
+LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
+  -lchasm-lib-33 -lchasm-lib-43
 
 
-
-#LIBS += -L$$TARGETSDIR -laimlib
+LIBS += -L$$TARGETSDIR -laimlib
 
 
 # #  assumed xerces is installed ...
 LIBS += -lxerces-c
 
-
-DCMTK_DIR = $$DCMTK_SRC_GROUP_DIR
-
-
-INCLUDEPATH += $$DCMTK_DIR/ofstd/include
-INCLUDEPATH += $$DCMTK_DIR/dcm-config/include
-INCLUDEPATH += $$DCMTK_DIR/dcmsr/include
-INCLUDEPATH += $$DCMTK_DIR/dcmdata/include
-INCLUDEPATH += $$DCMTK_DIR/oflog/include
 
 
 # ### For IFC (Industry Foundation Classes)

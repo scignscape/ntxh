@@ -622,7 +622,7 @@ DHAX_Annotation_Instance::Compact_Shape_Kind_Summary
   case 0: return Compact_Shape_Kind_Summary::Non_Regular_Polygon; // qDebug() << "PSC: Non-Regular"; break;
   case 1: return Compact_Shape_Kind_Summary::Rectangle; // qDebug() << "PSC: Rectangle"; break;
   case 2: return Compact_Shape_Kind_Summary::Arrow; // qDebug() << "PSC: Arrow"; break;
-  case 31: return Compact_Shape_Kind_Summary::Diamond; // qDebug() << "PSC: Diamond"; break;
+  //?case 31: return Compact_Shape_Kind_Summary::Diamond; // qDebug() << "PSC: Diamond"; break;
   default: if(num_sides) *num_sides = psc; return Compact_Shape_Kind_Summary::Regular_Polygon;//qDebug() << "PSC: Regular Polygon with " << psc << " sides"; break;
     // raw_polygon_sides >= 3:  regular polygon
   }
