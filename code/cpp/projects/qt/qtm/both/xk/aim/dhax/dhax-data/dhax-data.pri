@@ -82,19 +82,20 @@ DEFINES += HAVE_STL_STRING
 
 
 
-LIBS += -L$$TARGETSDIR  -laimlib -ldcmsr -lofstd -loflog -ldcmdata \
-   -ldcmimage -ldcmimgle
+#LIBS += -L$$TARGETSDIR  -laimlib -ldcmsr -lofstd -loflog -ldcmdata \
+#   -ldcmimage -ldcmimgle
 
-LIBS += -L$$TARGETSDIR  -laxfi
+#LIBS += -L$$TARGETSDIR  -laxfi
 
 LIBS += -lrt
 
 
-LIBS += -L$$TARGETSDIR -ldgdb
+#LIBS += -L$$TARGETSDIR -ldgdb
 
-LIBS += -L$$TARGETSDIR -ltkrzw -llz4  -llzma -lz
+#LIBS += -L$$TARGETSDIR -ltkrzw -llz4  -llzma -lz
+LIBS += -L$$TARGETSDIR -llz4  -llzma -lz
 
-LIBS += -L$$TARGETSDIR -lwhitedb
+#LIBS += -L$$TARGETSDIR -lwhitedb
 
 
 
@@ -117,3 +118,4 @@ INCLUDEPATH += $$DCMTK_DIR/oflog/include
 
 message(choice: $$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)
 mkpath($$CPP_ROOT_DIR/targets/$$CHOICE_CODE/$$PROJECT_SET--$$PROJECT_GROUP--$$PROJECT_NAME)
+

@@ -787,6 +787,19 @@ void DHAX_Main_Window_Controller::check_init_xcsd_image()
 
  xcsd_image_ = new XCSD_Image;
 
+ QFileInfo qfi(current_image_file_path_);
+ QDir qdir(qfi.absolutePath() + class_name_folder("/_proc") + "/xcsd");
+
+ QString px = qdir.filePath("px");
+ QString px0 = qdir.filePath("px/0");
+ QString px1 = qdir.filePath("px/1");
+ QString px2 = qdir.filePath("px/2");
+
+ qdir.mkpath("px");
+ qdir.mkpath("px/0");
+ qdir.mkpath("px/1");
+ qdir.mkpath("px/2");
+
  //xcsd.load_image(ROOT_FOLDER "/../pics/angle.jpg");
  xcsd_image_->load_image(current_image_file_path_);
 
@@ -805,17 +818,17 @@ void DHAX_Main_Window_Controller::check_init_xcsd_image()
 
  xcsg.init_outer_ring_positions();
 
- xcsd_image_->init_pixel_data(ROOT_FOLDER "/../test/ukraine");
+ xcsd_image_->init_pixel_data(px); //ROOT_FOLDER "/../test/ukraine");
 
  xcsd_image_->init_tierboxes();
 
 
- xcsd_image_->draw_tierboxes_to_folder(ROOT_FOLDER "/../test/ukraine/u", &xcsd_paths_);
+ xcsd_image_->draw_tierboxes_to_folder(px1, &xcsd_paths_);
 
  xcsd_image_->init_outer_ring_info();
 
- xcsd_image_->save_full_tier_image(ROOT_FOLDER "/../test/ukraine/u1/t1.png",
-   XCSD_Image::Save_QRgb, ROOT_FOLDER "/../test/ukraine/u2");
+ xcsd_image_->save_full_tier_image(px1 + "/t1.png",
+   XCSD_Image::Save_QRgb, px2);
 
 
 

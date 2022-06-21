@@ -22,7 +22,7 @@ QMAKE_CXX = g++-7
 CONFIG += c++17
 
 
-FEATURE_IFC = "USE_IFC"
+## FEATURE_IFC = "USE_IFC"
 
 defined(FEATURE_IFC ,var) {
  DEFINES += $$FEATURE_IFC
@@ -318,8 +318,8 @@ DEFINES += HAVE_STL_STRING
 LIBS += -L$$TARGETSDIR -lxcsd-1d -lxcsd-2d #-lxcsdx
 
 
-LIBS += -L$$TARGETSDIR  -laimlib -ldcmsr -lofstd -loflog -ldcmdata \
-   -ldcmimage -ldcmimgle
+#LIBS += -L$$TARGETSDIR  -laimlib -ldcmsr -lofstd -loflog -ldcmdata \
+#   -ldcmimage -ldcmimgle
 
 LIBS += -L$$TARGETSDIR  -laxfi
 
@@ -330,14 +330,14 @@ LIBS += -L$$POPPLER_LIB_DIR -lpoppler-qt5
 LIBS += -lrt
 
 
-LIBS += -L$$TARGETSDIR  -ldgi-opencv
+#?LIBS += -L$$TARGETSDIR  -ldgi-opencv
 
 
-LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
-  -lchasm-lib-33 -lchasm-lib-43
+#LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
+#  -lchasm-lib-33 -lchasm-lib-43
 
 
-LIBS += -L$$TARGETSDIR -liat-forge
+#?LIBS += -L$$TARGETSDIR -liat-forge
 
 LIBS += -L$$TARGETSDIR  -limage-editor
 
@@ -347,15 +347,17 @@ include($$ROOT_DIR/../preferred/freecad.pri)
 DEFINES += FREECAD_BIN_FOLDER=\\\"$$FREECAD_BIN_DIR\\\"
 
 
-LIBS += -L$$TARGETSDIR -ldgdb
+#?LIBS += -L$$TARGETSDIR -ldgdb
 
-LIBS += -L$$TARGETSDIR -ltkrzw -llz4  -llzma -lz
+#LIBS += -L$$TARGETSDIR -ltkrzw -llz4  -llzma -lz
+LIBS += -L$$TARGETSDIR -llz4  -llzma -lz
 
-LIBS += -L$$TARGETSDIR -lwhitedb
+
+#?LIBS += -L$$TARGETSDIR -lwhitedb
 
 
-LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
-  -lchasm-lib-33 -lchasm-lib-43
+#?LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
+#?  -lchasm-lib-33 -lchasm-lib-43
 
 
 

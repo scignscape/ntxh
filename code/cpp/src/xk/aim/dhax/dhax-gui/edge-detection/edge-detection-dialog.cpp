@@ -3,7 +3,7 @@
 #include <functional>
 
 #include "edge-detection-dialog.h"
-#include "ui_edge-detection-dialog.h"
+//#include "ui_edge-detection-dialog.h"
 
 #include "edge-detection-algorithms.h"
 

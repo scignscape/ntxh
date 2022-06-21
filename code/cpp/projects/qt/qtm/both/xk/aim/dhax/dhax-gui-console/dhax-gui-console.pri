@@ -24,7 +24,7 @@ CONFIG += c++17
 DEFINES += USE_XCNS
 
 
-FEATURE_IFC = "USE_IFC"
+# FEATURE_IFC = "USE_IFC"
 
 
 defined(FEATURE_IFC ,var) {
@@ -88,29 +88,30 @@ LIBS += -L$$TARGETSDIR  -ldhax-gui -ldhax-data
 LIBS += -L$$POPPLER_LIB_DIR -lpoppler-qt5
 
 
-LIBS += -L$$TARGETSDIR  -laimlib -ldcmsr -lofstd -loflog -ldcmdata \
-   -ldcmimage -ldcmimgle
+#LIBS += -L$$TARGETSDIR  -laimlib -ldcmsr -lofstd -loflog -ldcmdata \
+#   -ldcmimage -ldcmimgle
 
-LIBS += -L$$TARGETSDIR  -laxfi
+#LIBS += -L$$TARGETSDIR  -laxfi
 LIBS += -L$$TARGETSDIR  -limage-editor
 
 LIBS += -lrt
 
 
-LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
-  -lchasm-lib-33 -lchasm-lib-43
+#LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \
+#  -lchasm-lib-33 -lchasm-lib-43
 
 
-LIBS += -L$$TARGETSDIR -liat-forge
+#LIBS += -L$$TARGETSDIR -liat-forge
 
 LIBS += -L$$TARGETSDIR  -ldgi-opencv
 
 
-LIBS += -L$$TARGETSDIR -ldgdb
+#LIBS += -L$$TARGETSDIR -ldgdb
 
-LIBS += -L$$TARGETSDIR -ltkrzw -llz4  -llzma -lz
+#LIBS += -L$$TARGETSDIR -ltkrzw
+LIBS += -L$$TARGETSDIR -llz4  -llzma -lz
 
-LIBS += -L$$TARGETSDIR -lwhitedb
+#LIBS += -L$$TARGETSDIR -lwhitedb
 
 
 
@@ -145,6 +146,7 @@ message(Using IFC Libraries)
 
 LIBS += $$TARGETSDIR/libifc-multi.a
 
+
 LIBS += $$TARGETSDIR/libifc-2x3.a \
   $$TARGETSDIR/libifc-4.a \
   $$TARGETSDIR/libifc-4x1.a \
@@ -153,6 +155,7 @@ LIBS += $$TARGETSDIR/libifc-2x3.a \
   $$TARGETSDIR/libifc-4x3_rc2.a \
   $$TARGETSDIR/libifc-4x3_rc3.a \
   $$TARGETSDIR/libifc-4x3_rc4.a \
+
 
 LIBS += \
  -lboost_program_options \

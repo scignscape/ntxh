@@ -11,6 +11,14 @@ include(../build-group.pri)
 QT += widgets network
 
 
+
+QMAKE_CC = gcc-7
+QMAKE_CXX = g++-7
+
+CONFIG += c++17
+
+
+
 DEFINES += LIBCRYPTO_FILE_NAME=\\\"$$ROOT_DIR/../ssl/install/ldir/libcrypto.so.1.1\\\"
 DEFINES += LIBSSL_FILE_NAME=\\\"$$ROOT_DIR/../ssl/install/ldir/libssl.so.1.1\\\"
 

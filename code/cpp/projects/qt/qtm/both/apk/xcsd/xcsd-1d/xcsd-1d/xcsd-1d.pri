@@ -58,7 +58,7 @@ SOURCES += \
   $$SRC_DIR/hive-structure.cpp \
 
 
-LIBS += -L$$TARGETSDIR -lxcsd-1d
+#LIBS += -L$$TARGETSDIR -lxcsd-1d
 
 
 
