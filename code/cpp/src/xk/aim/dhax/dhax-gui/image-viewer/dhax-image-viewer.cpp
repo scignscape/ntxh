@@ -29,6 +29,7 @@ DHAX_Image_Viewer::DHAX_Image_Viewer(QWidget* parent)
      scrolled_image_scene_(nullptr),
      scrolled_image_pixmap_item_(nullptr),
      background_rectangle_(nullptr),
+     background_center_rectangle_(nullptr),
      background_rectangle_center_x_(0),
      background_rectangle_center_y_(0),
      main_layout_(0),

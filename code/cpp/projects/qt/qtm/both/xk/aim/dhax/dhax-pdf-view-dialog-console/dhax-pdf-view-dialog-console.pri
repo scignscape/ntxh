@@ -20,8 +20,8 @@ INCLUDEPATH += $$SRC_GROUP_DIR/dhax-pdf-view-dialog
 INCLUDEPATH += /home/nlevisrael/gits/okular/poppler-install/include/poppler/qt5
 
 
-QMAKE_CC = gcc-7
-QMAKE_CXX = g++-7
+include($$ROOT_DIR/../preferred/compiler.pri)
+
 
 CONFIG += c++17
 

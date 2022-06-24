@@ -1,4 +1,9 @@
 
+//           Copyright Nathaniel Christen 2020.
+//  Distributed under the Boost Software License, Version 1.0.
+//     (See accompanying file LICENSE_1_0.txt or copy at
+//           http://www.boost.org/LICENSE_1_0.txt)
+
 #include "simple-rectangle-measurement-dialog.h"
 
 #include "aforms/simple/simple-rectangle-annotation.h"
@@ -264,6 +269,16 @@ Simple_Rectangle_Measurement_Dialog::Simple_Rectangle_Measurement_Dialog(Simple_
 }
 
 
+void Simple_Rectangle_Measurement_Dialog::check_reset_base_temp_folder(QString file_path)
+{
+ base_temp_folder_ = DEFAULT_DHAX_TEMP_FOLDER;
+ if(base_temp_folder_.isEmpty())
+ {
+  QFileInfo qfi(file_path);
+  base_temp_folder_ = qfi.absolutePath();
+ }
+}
+
 void Simple_Rectangle_Measurement_Dialog::create_overlay_file(QString path, QColor color)
 {
  Simple_Rectangle_Annotation::Measurements& ms = annotation_->get_measurements();
@@ -279,9 +294,17 @@ void Simple_Rectangle_Measurement_Dialog::create_overlay_file(QString path, QCol
 
  QPixmap qpx(piw + 20, pih + 20);
  QPainter pr(&qpx);
+
+// pr.setBrush(Qt::cyan);
+// pr.drawRect(qpx.rect());
+
+
  pr.setBrush(Qt::white);
  pr.drawRect(10, 10, piw, pih);
+
+
  QBrush br;
+ br.setColor(Qt::darkCyan);
  br.setStyle(Qt::Dense2Pattern);
  QPen pen;
  pen.setWidth(10);
@@ -358,7 +381,7 @@ void Simple_Rectangle_Measurement_Dialog::show_solid_color_label_context_menu(co
 
  menu->addAction("Show Dialog", [this]
  {
-  QFileInfo qfi(image_file_path_);
+  //QFileInfo qfi(image_file_path_);
 
   //this->metaObject()->className();
 
@@ -372,7 +395,7 @@ void Simple_Rectangle_Measurement_Dialog::show_solid_color_label_context_menu(co
   path = generate_overlay_file(solid_color_labels_[1], cnf); // scl->color();
   qsl << path;
 
-  Q_EMIT color_mean_dialog_requested(qfi.absolutePath(), qsl);
+  Q_EMIT color_mean_dialog_requested(base_temp_folder_, qsl);
 
  });
 
@@ -401,7 +424,7 @@ QString Simple_Rectangle_Measurement_Dialog::generate_occurant_color_mean_summar
  else if(temp_dir.startsWith('@'))
  {
   temp_dir.replace(0, 1, '/');
-  QString dir = qfi.absolutePath() + temp_dir;
+  QString dir = base_temp_folder_ + temp_dir;
 
   QDir qd(dir);
   qd.mkpath(".");

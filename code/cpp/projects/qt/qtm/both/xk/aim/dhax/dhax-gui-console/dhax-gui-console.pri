@@ -15,8 +15,8 @@ INCLUDEPATH += $$SRC_DIR
 
 INCLUDEPATH += $$SRC_PROSET_DIR/aimlib/aimlib/AIMLib/
 
-QMAKE_CC = gcc-7
-QMAKE_CXX = g++-7
+include($$ROOT_DIR/../preferred/compiler.pri)
+
 
 CONFIG += c++17
 

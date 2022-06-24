@@ -588,8 +588,9 @@ void DHAX_Main_Window_Controller::show_fb_gradient_trimap()
 
  //qDebug() << "show_fb_gradient_trimap";
 
- QFileInfo qfi(current_image_file_path_);
- QDir qdir(qfi.absolutePath() + class_name_folder("/_proc") + "/trimap");
+// QFileInfo qfi(current_image_file_path_);
+
+ QDir qdir(base_temp_folder_ + class_name_folder("/_proc") + "/trimap");
 
  qdir.mkpath(".");
  QString path = qdir.absolutePath() + "/fg-%1.png";
@@ -603,16 +604,27 @@ void DHAX_Main_Window_Controller::show_fb_gradient_trimap()
 
 }
 
+
+void DHAX_Main_Window_Controller::check_reset_base_temp_folder()
+{
+ base_temp_folder_ = DEFAULT_DHAX_TEMP_FOLDER;
+ if(base_temp_folder_.isEmpty())
+ {
+  QFileInfo qfi(current_image_file_path_);
+  base_temp_folder_ = qfi.absolutePath();
+ }
+}
+
+
 void DHAX_Main_Window_Controller::save_local_color_histograms()
 {
  qDebug() << "save local histograms ...";
 
- QFileInfo qfi(current_image_file_path_);
- QDir qdir(qfi.absoluteDir());
- qdir.mkdir("hist");
+ //QFileInfo qfi(current_image_file_path_);
+ QDir qdir(base_temp_folder_ + class_name_folder("/_info"));
+ qdir.mkdir("histpgra,s");
  QString path = qdir.absoluteFilePath("hist") + "/%1-%2.png";
-
-
+ // //?
 }
 
 void DHAX_Main_Window_Controller::calculate_local_color_histograms()
@@ -787,8 +799,8 @@ void DHAX_Main_Window_Controller::check_init_xcsd_image()
 
  xcsd_image_ = new XCSD_Image;
 
- QFileInfo qfi(current_image_file_path_);
- QDir qdir(qfi.absolutePath() + class_name_folder("/_proc") + "/xcsd");
+ //QFileInfo qfi(current_image_file_path_);
+ QDir qdir(base_temp_folder_ + class_name_folder("/_proc") + "/xcsd");
 
  QString px = qdir.filePath("px");
  QString px0 = qdir.filePath("px/0");
@@ -844,6 +856,8 @@ void DHAX_Main_Window_Controller::show_xcsd_scene()
   if(current_image_file_path_.isEmpty())
     return;
  }
+
+ check_reset_base_temp_folder();
 
  check_init_xcsd_image();
 

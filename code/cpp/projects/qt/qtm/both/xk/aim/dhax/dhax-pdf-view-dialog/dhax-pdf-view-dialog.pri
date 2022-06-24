@@ -19,8 +19,8 @@ include($$ROOT_DIR/../preferred/poppler.pri)
 INCLUDEPATH += $$POPPLER_INCLUDE_DIR
 
 
-QMAKE_CC = gcc-7
-QMAKE_CXX = g++-7
+include($$ROOT_DIR/../preferred/compiler.pri)
+
 
 CONFIG += c++17
 

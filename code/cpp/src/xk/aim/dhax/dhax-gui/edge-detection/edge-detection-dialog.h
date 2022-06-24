@@ -63,6 +63,8 @@ class Edge_Detection_Dialog : public QDialog
  //QPair<QColor, QColor>*
  n8 poles_;
 
+ QString base_temp_folder_;
+
  void display(const QImage&);
  void resizeEvent(QResizeEvent*);
 
@@ -71,6 +73,9 @@ class Edge_Detection_Dialog : public QDialog
  void set_view_box_title(QString file_path);
 
  void load_file(QString file_path);
+
+ void check_reset_base_temp_folder(QString file_path);
+
 
  void calculate_image(u1 index);
  void recalculate_image();

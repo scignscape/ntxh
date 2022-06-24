@@ -2450,6 +2450,9 @@ QSize XCSD_Image::show_255_palette(QString path,
  painter.setBrush(QColor(255, 255, 255));
  painter.drawRect(0, 0, pixmap.width(), pixmap.height());
 
+ painter1.setBrush(QColor(255, 255, 255));
+ painter1.drawRect(0, 0, pixmap1.width(), pixmap1.height());
+
 
  for(u1 y = 0; y < 15; ++y)
  {

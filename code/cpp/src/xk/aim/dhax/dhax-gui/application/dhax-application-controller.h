@@ -79,6 +79,11 @@ class DHAX_Application_Controller
 
  Image_Editor_Dialog_Window* open_image_editor_dialog_window();
 
+ QString proc_class_temp_folder_;
+
+ void check_reset_proc_class_temp_folder();
+
+ QDir get_proc_class_temp_dir();
 
 public:
 
@@ -144,6 +149,7 @@ public:
 
  QString get_current_image_folder();
  QString get_current_image_complete_base_name();
+ QString get_current_image_suffix();
  QDir get_current_image_dir();
  QString get_current_image_file_path();
  QString get_current_image_q3x3_file_path();

@@ -48,6 +48,8 @@ void DHAX_Display_Image_Data::reset_drawn_shapes()
 DHAX_Display_Image_Data::DHAX_Display_Image_Data()
 {
  current_drawn_shape_ = nullptr;
+ active_curve_ = nullptr;
+
 
  multi_draw = false;
 

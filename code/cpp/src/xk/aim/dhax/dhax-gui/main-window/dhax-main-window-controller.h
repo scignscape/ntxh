@@ -44,6 +44,9 @@ class DHAX_Main_Window_Controller //: public QObject
 
  DHAX_Main_Window* application_main_window_;
  QString current_image_file_path_;
+
+ QString base_temp_folder_;
+
  DHAX_Display_Image_Data* display_image_data_;
  Zoom_and_Navigate_Frame* zoom_frame_;
  Shape_Select_Frame* shape_select_frame_;
@@ -84,6 +87,9 @@ public:
  ACCESSORS(XCSD_Image* ,xcsd_image)
 
  void check_init_xcsd_image();
+
+ void check_reset_base_temp_folder();
+
 
  void check_init_pdf_document_controller();
  void check_init_image_document_controller();

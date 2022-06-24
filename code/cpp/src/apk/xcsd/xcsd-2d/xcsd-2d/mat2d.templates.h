@@ -160,6 +160,20 @@ void Mat2d<COLL_Type>::resize(nx total)
 }
 
 
+template<typename VALUE_Type>
+inline VALUE_Type _get_zero()
+{
+ return 0;
+}
+
+template<>
+inline QString _get_zero<QString>()
+{
+ return {};
+}
+
+
+
 template<typename COLL_Type>
 void Mat2d<COLL_Type>::fill(val_t value, val_t default_value,
   nnx layer_size, nnx block_size, bool force)
@@ -168,7 +182,7 @@ void Mat2d<COLL_Type>::fill(val_t value, val_t default_value,
  {
   nx s = elems_->size();
   elems_->resize(total_size() + 1);
-  if( (value != 0) || force )
+  if( (value != _get_zero<val_t>()) || force )
   {
    if(force)
    {

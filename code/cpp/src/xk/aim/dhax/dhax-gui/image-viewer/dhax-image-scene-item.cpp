@@ -41,7 +41,7 @@ void DHAX_Image_Scene_Item::reset_background_to_original_position()
 }
 
 DHAX_Image_Scene_Item::DHAX_Image_Scene_Item(QWidget *parent)
-  : QWidget(parent), current_mouse_interaction_data_(nullptr)
+  : QWidget(parent), data_(nullptr),  current_mouse_interaction_data_(nullptr)
 {
  containing_image_view_ = nullptr;
  current_multistep_annotation_ = nullptr;
@@ -1026,6 +1026,7 @@ void DHAX_Image_Scene_Item::show_annotation_measurements_dialog(const QPoint& po
    sra, nullptr);
 
   dlg->set_image_file_path(image_file_path_);
+  dlg->check_reset_base_temp_folder(image_file_path_);
 
   connect(dlg, &Simple_Rectangle_Measurement_Dialog::color_mean_dialog_requested,
     this, &DHAX_Image_Scene_Item::color_mean_dialog_requested);

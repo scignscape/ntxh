@@ -1,4 +1,9 @@
 
+//           Copyright Nathaniel Christen 2020.
+//  Distributed under the Boost Software License, Version 1.0.
+//     (See accompanying file LICENSE_1_0.txt or copy at
+//           http://www.boost.org/LICENSE_1_0.txt)
+
 #include "color-range-dialog.h"
 
 #include "styles.h"
@@ -23,6 +28,11 @@
 Color_Range_Dialog::Color_Range_Dialog(QColor central_color, QWidget* parent)
   :  QDialog(parent)
 {
+ setStyleSheet("QLabel{font-size:10pt;}"
+   "QLineEdit{font-size:10pt;}"
+   "QSpinBox{font-size:10pt;}"
+               );
+
  offset_ = 50;
 
  main_layout_ = new QGridLayout;
@@ -30,6 +40,7 @@ Color_Range_Dialog::Color_Range_Dialog(QColor central_color, QWidget* parent)
  details_layout_ = new QGridLayout;
 
  central_color_label_ = new QLabel("Central:", this);
+
  central_color_label_->setMaximumWidth(44);
 
  QString central_color_text = central_color.name();

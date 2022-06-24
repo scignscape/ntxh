@@ -25,8 +25,8 @@ include($$ROOT_DIR/../preferred/sysr.pri)
 
 DEFINES += USE_XCNS
 
-QMAKE_CC = gcc-7
-QMAKE_CXX = g++-7
+include($$ROOT_DIR/../preferred/compiler.pri)
+
 CONFIG += c++17
 
 INCLUDEPATH += $$SRC_DIR $$SRC_GROUP_DIR $$SRC_ROOT_DIR

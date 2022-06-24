@@ -307,7 +307,7 @@ DHAX_Application_Controller::DHAX_Application_Controller()
      udp_controller_(nullptr),
      autogen_index_(0)
 {
-
+ check_reset_proc_class_temp_folder();
 }
 
 #ifdef USE_IFC
@@ -322,6 +322,34 @@ void DHAX_Application_Controller::run_ifc_convert()
 
 #endif
 
+
+QDir DHAX_Application_Controller::get_proc_class_temp_dir()
+{
+ return QDir(proc_class_temp_folder_);
+}
+
+
+void DHAX_Application_Controller::check_reset_proc_class_temp_folder()
+{
+ //default_temp_folder_ = ;
+ QDir qdir;
+ if(QString(DEFAULT_DHAX_TEMP_FOLDER).isEmpty())
+ {
+  QString current = get_current_image_file_path();
+
+  // //  this procedure shouldn't be called without a current picture ...
+  if(current.isEmpty())
+    return;
+
+  QFileInfo qfi(current);
+  qdir = QDir(qfi.absolutePath() + class_name_folder("/_proc"));
+ }
+ else
+   qdir = QDir(DEFAULT_DHAX_TEMP_FOLDER + class_name_folder("/_proc"));
+
+ qdir.mkpath(".");
+ proc_class_temp_folder_ = qdir.absolutePath();
+}
 
 
 DHAX_Forge_Controller* DHAX_Application_Controller::check_init_forge_controller()
@@ -458,16 +486,22 @@ QString DHAX_Application_Controller::get_current_image_file_path()
 
 QString DHAX_Application_Controller::get_current_image_q3x3_file_path()
 {
+// QString current = get_current_image_file_path();
+
+// if(current.isEmpty())
+//   return {};
+
+// QFileInfo qfi(current);
+// QDir qdir(qfi.absolutePath() + class_name_folder("/_proc"));
+
+// qdir.mkpath(".");
+
  QString current = get_current_image_file_path();
+ //QFileInfo qfi(current);
 
- if(current.isEmpty())
-   return {};
+ QDir qdir = get_proc_class_temp_dir();
 
- QFileInfo qfi(current);
- QDir qdir(qfi.absolutePath() + class_name_folder("/_proc"));
-
- qdir.mkpath(".");
- QString result = qdir.absoluteFilePath(QString("_q3x3.%1").arg(qfi.suffix()));
+ QString result = qdir.absoluteFilePath(QString("_q3x3.%1").arg(get_current_image_suffix()));
 
  QImage src(current);
 
@@ -485,6 +519,16 @@ QString DHAX_Application_Controller::get_current_image_folder()
  QFileInfo qfi(path);
  return qfi.absolutePath();
 }
+
+
+QString DHAX_Application_Controller::get_current_image_suffix()
+{
+ QString path = get_current_image_file_path();
+
+ QFileInfo qfi(path);
+ return qfi.suffix();
+}
+
 
 QString DHAX_Application_Controller::get_current_image_complete_base_name()
 {

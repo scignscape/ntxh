@@ -289,6 +289,7 @@ Edge_Detection_Dialog::Edge_Detection_Dialog(QString file_path, QString file_pat
  {
   filename_ = file_path;
   load_file(file_path);
+  check_reset_base_temp_folder(file_path);
 
   original_q3x3_ = QImage(file_path_q3x3);
 
@@ -336,7 +337,19 @@ void Edge_Detection_Dialog::on_select_image_button_clicked(bool)
 {
  filename_ = QFileDialog::getOpenFileName(this, tr("Select a single image"), DHAX_IMAGE_FOLDER);
  load_file(filename_);
+ check_reset_base_temp_folder(filename_);
 }
+
+void Edge_Detection_Dialog::check_reset_base_temp_folder(QString file_path)
+{
+ base_temp_folder_ = DEFAULT_DHAX_TEMP_FOLDER;
+ if(base_temp_folder_.isEmpty())
+ {
+  QFileInfo qfi(file_path);
+  base_temp_folder_ = qfi.absolutePath();
+ }
+}
+
 
 void Edge_Detection_Dialog::load_file(QString file_path)
 {

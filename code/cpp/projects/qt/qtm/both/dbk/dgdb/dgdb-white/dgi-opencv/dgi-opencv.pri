@@ -10,6 +10,13 @@ include(../build-group.pri)
 QT  += core gui widgets
 
 
+QMAKE_CC = gcc-7
+QMAKE_CXX = g++-7
+
+CONFIG += c++17
+
+
+
 include($$ROOT_DIR/../preferred/opencv.pri)
 
 include($$ROOT_DIR/../preferred/sysr.pri)

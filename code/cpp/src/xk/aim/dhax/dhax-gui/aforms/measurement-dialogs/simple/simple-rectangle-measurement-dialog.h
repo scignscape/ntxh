@@ -90,6 +90,9 @@ class Simple_Rectangle_Measurement_Dialog : public QDialog
  QVector<Solid_Color_Label*> solid_color_labels_;
 
  QString image_file_path_;
+ QString base_temp_folder_;
+
+ //QDir get_default_temp_dir();
 
 
  template<typename NUM_Type>
@@ -111,6 +114,9 @@ public:
  ~Simple_Rectangle_Measurement_Dialog();
 
  ACCESSORS(QString ,image_file_path)
+ ACCESSORS(QString ,base_temp_folder)
+
+ void check_reset_base_temp_folder(QString file_path);
 
  void create_overlay_file(QString path, QColor color);
 
