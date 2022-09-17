@@ -101,7 +101,7 @@ INCLUDEPATH += $$XCSD_SRC_GROUP_DIR
 INCLUDEPATH += $$XCSD_SRC_GROUP_DIR/../xcsd-1d
 
 
-FEATURE_OpenCV = USE_OpenCV
+#?FEATURE_OpenCV = USE_OpenCV
 
 defined(FEATURE_OpenCV ,var) {
 
@@ -218,6 +218,7 @@ SOURCES += \
   $$SRC_DIR/pdf-viewer/pdf-document-info.cpp \
   $$SRC_DIR/pdf-viewer/pdf-document-state.cpp \
   $$SRC_DIR/application/dhax-application-controller.cpp \
+  $$SRC_DIR/application/dhax-application-controller.color-distance.cpp \
   $$SRC_DIR/application/dhax-application-state.cpp \
   $$SRC_DIR/application/dhax-forge-controller.cpp \
   $$SRC_DIR/application/dhax-application-receiver.cpp \

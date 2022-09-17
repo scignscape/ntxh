@@ -119,7 +119,7 @@ LIBS += -L$$TARGETSDIR -llz4  -llzma -lz
 LIBS += -lxerces-c
 
 
-FEATURE_OpenCV = USE_OpenCV
+##? FEATURE_OpenCV = USE_OpenCV
 
 # ### For OpenCV 
 defined(FEATURE_OpenCV ,var) {
@@ -134,7 +134,7 @@ defined(FEATURE_OpenCV ,var) {
  INCLUDEPATH += $$DCMTK_DIR/dcmdata/include
  INCLUDEPATH += $$DCMTK_DIR/oflog/include
 
- LIBS += -L$$TARGETSDIR  -ldgi-opencv
+#?? LIBS += -L$$TARGETSDIR  -ldgi-opencv
 
  LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_imgcodecs
  LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_core

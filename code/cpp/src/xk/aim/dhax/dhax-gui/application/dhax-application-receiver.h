@@ -50,6 +50,7 @@ public Q_SLOTS:
  void handle_edit_image(call_Stamp_u2);
 
  void handle_launch_edge_detection_dialog(call_Stamp_u2);
+ void handle_show_pixel_local_aggregate_color_distance(call_Stamp_u2);
 
 
  void handle_view_contours(call_Stamp_u2);

@@ -56,21 +56,21 @@ BIM_Select_Dialog::BIM_Select_Dialog(QWidget* parent)
  QStringList dg_links
  {
   "Ifc2x3",
-  "Ifc2x3",
+  //?"Ifc2x3",
   "Ifc4",
-  "Ifc4",
+  //?"Ifc4",
   "Ifc4x1",
-  "Ifc4x1",
+  //?"Ifc4x1",
   "Ifc4x2",
-  "Ifc4x2",
+  //?"Ifc4x2",
   "Ifc4x3_rc1",
-  "Ifc4x3_rc1",
+  //?"Ifc4x3_rc1",
   "Ifc4x3_rc2",
-  "Ifc4x3_rc2",
+  //?"Ifc4x3_rc2",
   "Ifc4x3_rc3",
-  "Ifc4x3_rc3",
+  //?"Ifc4x3_rc3",
   "Ifc4x3_rc4",
-  "Ifc4x3_rc4",
+  //?"Ifc4x3_rc4",
  };
 
  int j = 0;

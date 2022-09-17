@@ -50,6 +50,10 @@ class QCP_EXPORT ColorDialog : public QDialog
 
  QColor selected_color_;
 
+ QPushButton* hsl_button_;
+
+ void update_hsl_button(const QColor& col);
+
 public:
     enum ButtonMode {
         OkCancel,

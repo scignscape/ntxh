@@ -123,6 +123,8 @@ public:
 
  DHAX_Forge_Controller* check_init_forge_controller();
 
+ QString show_pixel_local_aggregate_color_distance();
+
  void change_image_margins(QVector<u1> margins, u1 cim);
 
  void init_udp_controller();

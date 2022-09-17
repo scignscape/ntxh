@@ -478,6 +478,12 @@ Ty_DEF_MACRO(lr, 4, n8, left, right)
 Ty_DEF_MACRO(se, 1, u2, start, end)
 Ty_DEF_MACRO(se, 2, u4, start, end)
 Ty_DEF_MACRO(se, 4, n8, start, end)
+
+Ty_DEF_MACRO(sv, 1, u2, sat, val)
+Ty_DEF_MACRO(sv, 2, u4, sat, val)
+Ty_DEF_MACRO(sv, 4, n8, sat, val)
+
+
 Ty_DEF_MACRO(lt, 1, u2, left, top)
 Ty_DEF_MACRO(lt, 2, u4, left, top)
 Ty_DEF_MACRO(lt, 4, n8, left, top)
@@ -490,6 +496,10 @@ Ty_DEF_MACRO(pr, 4, n8, first, second)
 Ty_DEF_MACRO(tb, 1, u2, top, bottom)
 Ty_DEF_MACRO(tb, 2, u4, top, bottom)
 Ty_DEF_MACRO(tb, 4, n8, first, second)
+
+Tys_DEF_MACRO(sv, 1, u2, sat, val)
+Tys_DEF_MACRO(sv, 2, u4, sat, val)
+Tys_DEF_MACRO(sv, 4, n8, sat, val)
 
 Tys_DEF_MACRO(wh, 1, u2, width, height)
 Tys_DEF_MACRO(wh, 2, u4, width, height)

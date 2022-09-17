@@ -98,6 +98,11 @@ MultiStep_Annotation_Base* Image_Document_Controller::init_multistep_annotation(
  return current_multistep_annotation_;
 }
 
+QString Image_Document_Controller::current_file_path_with_presuffix(QString pres)
+{
+ QFileInfo qfi(current_file_path_);
+ return qfi.absolutePath() + "/" + qfi.completeBaseName() + "." + pres + "." + qfi.suffix();
+}
 
 QPair<QColor, QColor> Image_Document_Controller::get_fb_poles()
 {

@@ -368,6 +368,15 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
   });
  }
 
+ //??
+ else
+ {
+  menu->addAction("Complete and Save", [this]
+  {
+   Q_EMIT polygon_complete_and_save_notation_requested(NULL_CALL_STAMP);
+  });
+ }
+
  if(data_->active_curve())
  {
   menu->addAction("Draw Bezier", [this]
@@ -400,6 +409,18 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
  {
   Q_EMIT edit_image_requested(NULL_CALL_STAMP);
  });
+
+ QMenu* m1 = menu->addMenu("Manufacturer/Energy Info ...");
+
+ m1->addAction("Windows");
+ m1->addAction("Insulation");
+ m1->addAction("Ventilation");
+ m1->addAction("Walls/Panels");
+ m1->addAction("Floors/Ceilings");
+ m1->addAction("Lighting");
+
+ menu->addAction("View IFC Graph");
+ menu->addAction("View Blueprints (Floor/Room)");
 
  menu->popup(pos2);
 }

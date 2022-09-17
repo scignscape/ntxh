@@ -43,6 +43,7 @@ void DHAX_Menu_System::init_menus()
  menus_->init_menu("Histograms");
  menus_->init_menu("Trimap");
  menus_->init_menu("Matrix");
+ menus_->init_menu("QHSV");
  menus_->init_menu("Help");
  menus_->init_menu("Tools");
 
@@ -144,6 +145,16 @@ void DHAX_Menu_System::init_menus()
  {
   sg->emit_calculate_fb_gaussian_requested();
  };
+
+
+ DHAX_Menu& qhsv_menu = *menus_->menu("QHSV");
+ qhsv_menu.add_action("Show pixel-local aggregate color distance")
+   << [sg]
+ {
+  sg->emit_show_pixel_local_aggregate_color_distance_requested();
+ };
+
+
 
  DHAX_Menu& tools = *menus_->menu("Tools");
 

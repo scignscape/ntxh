@@ -10,17 +10,30 @@
 
 #include <QUdpSocket>
 
+#include <QTcpSocket>
+#include <QTcpServer>
+
+//#include <QHttpServer>
+
 #include "accessors.h"
 
 #include "global-types.h"
+
+#include <QLocalServer>
 
 
 class DHAX_Signal_Generator;
 
 class DHAX_UDP_Controller
 {
+ QLocalServer socket_server_;
+ //socketServer.setSocketOptions(QLocalServer::UserAccessOption);
+
  QUdpSocket* udp_outgoing_socket_;
  QUdpSocket udp_incoming_socket_;
+
+ QTcpSocket tcp_incoming_socket_;
+ QTcpServer tcp_server_;
 
  DHAX_Signal_Generator* signal_generator_;
 

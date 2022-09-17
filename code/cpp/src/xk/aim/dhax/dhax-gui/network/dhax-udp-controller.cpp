@@ -9,9 +9,124 @@
 
 #include "dhax-signal-generator.h"
 
+#include <QLocalSocket>
+
+
 DHAX_UDP_Controller::DHAX_UDP_Controller()
   :  udp_outgoing_socket_(nullptr), signal_generator_(nullptr)
 {
+ //socket_server_.listen("/home/nlevisrael/gits/osm/inner-system/socket-files/qt-test/renderd.sock");
+
+ socket_server_.listen("/home/nlevisrael/gits/osm/inner-system/run/renderd/renderd.sock");
+
+
+ socket_server_.connect(&socket_server_, &QLocalServer::newConnection,
+     [this]()
+ {
+//  QString result = QString::fromLatin1(tcp_incoming_socket_.readAll());
+//  qDebug() << "Incoming Local " << result;
+
+  qDebug() << "New Local connection ";
+  QLocalSocket* clientConnection = socket_server_.nextPendingConnection();
+  //?QObject::connect(clientConnection, &QAbstractSocket::disconnected,
+  //?  clientConnection, &QObject::deleteLater);
+  clientConnection->write("AOK");
+  QObject::connect(clientConnection, &QTcpSocket::readyRead, [clientConnection, this]
+  {
+   QString result = QString::fromLatin1(clientConnection->readAll());
+   qDebug() << "Incoming Local " << result;
+
+   clientConnection->write(R"(HTTP/1.1 200 OK
+                           Content-Length: 13
+                           Content-Type: text/plain; charset=utf-8
+
+                           Hello World!)"
+                           );
+   clientConnection->flush();
+   //?clientConnection->disconnectFromHost();
+   clientConnection->close();
+
+//   QByteArray received;
+//   while(clientConnection->bytesAvailable())
+//   {
+//    received.append(clientConnection->readAll());
+//   }
+  });
+
+ });
+
+
+ int tcp_shost = 1237;
+
+
+ qDebug() << "Incoming server bound to host " << tcp_shost;
+ bool ok  = tcp_server_.listen(QHostAddress::LocalHost, tcp_shost);
+ if(!ok)
+    qDebug() << "listen failed";
+
+
+ tcp_server_.connect(&tcp_server_, &QTcpServer::newConnection,
+     [this]()
+ {
+  qDebug() << "New connection ";
+  QTcpSocket* clientConnection = tcp_server_.nextPendingConnection();
+  QObject::connect(clientConnection, &QAbstractSocket::disconnected,
+    clientConnection, &QObject::deleteLater);
+  clientConnection->write("AOK");
+  QObject::connect(clientConnection, &QTcpSocket::readyRead, [clientConnection, this]
+  {
+   QString result = QString::fromLatin1(clientConnection->readAll());
+   qDebug() << "Incoming TCP " << result;
+
+   clientConnection->write(R"(HTTP/1.1 200 OK
+                           Content-Length: 13
+                           Content-Type: text/plain; charset=utf-8
+
+                           Hello World=)"
+                           );
+   clientConnection->flush();
+   clientConnection->disconnectFromHost();
+   clientConnection->close();
+
+//   QByteArray received;
+//   while(clientConnection->bytesAvailable())
+//   {
+//    received.append(clientConnection->readAll());
+//   }
+  });
+
+//    QByteArray qba(512, ' ');
+//    tcp_incoming_socket_.read(qba.data(), 512);
+
+//    qDebug() << "Incoming TCP " << qba;
+
+    //signal_generator_->emit_received_datagram(qba);
+    //read_udp_socket(qba);
+ });
+
+
+
+ int tcp_host = 1357;
+
+ qDebug() << "Incoming socket bound to host " << tcp_host;
+ bool bok  = tcp_incoming_socket_.bind(QHostAddress::LocalHost, tcp_host);
+ if(!bok)
+    qDebug() << "bind failed";
+
+ tcp_incoming_socket_.connect(&tcp_incoming_socket_, &QTcpSocket::readyRead,
+     [this]()
+ {
+  QString result = QString::fromLatin1(tcp_incoming_socket_.readAll());
+  qDebug() << "Incoming TCP " << result;
+//    QByteArray qba(512, ' ');
+//    tcp_incoming_socket_.read(qba.data(), 512);
+
+//    qDebug() << "Incoming TCP " << qba;
+
+    //signal_generator_->emit_received_datagram(qba);
+    //read_udp_socket(qba);
+ });
+
  int host = 1234;
  qDebug() << "Incoming socket bound to host " << host;
  udp_incoming_socket_.bind(QHostAddress::LocalHost, host);

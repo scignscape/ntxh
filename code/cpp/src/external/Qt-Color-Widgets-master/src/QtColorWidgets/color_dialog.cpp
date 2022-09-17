@@ -88,6 +88,11 @@ ColorDialog::ColorDialog(QWidget *parent, Qt::WindowFlags f) :
 //     qDebug() << "bn: " << pb->icon().name();
     }
 
+    // Add "hsl" button
+    hsl_button_ = p->ui.buttonBox->addButton("hsl", QDialogButtonBox::ActionRole);
+    //pickButton->setIcon(QIcon::fromTheme(QStringLiteral("color-picker")));
+    hsl_button_->setMaximumHeight(19);
+    hsl_button_->setStyleSheet("QPushButton{background:white}");
 
 
 
@@ -106,11 +111,17 @@ ColorDialog::ColorDialog(QWidget *parent, Qt::WindowFlags f) :
     pickButton->setIcon(QIcon::fromTheme(QStringLiteral("color-picker")));
     pickButton->setMaximumHeight(19);
     pickButton->setStyleSheet("QPushButton{}");
+
+
+
+
 #endif
 
     QFontIcon::addFont(":/fontawesome.ttf");
 
     make_unicode_text(pickButton, 0xF09F948D);
+
+
     pickButton->setText(pickButton->text().prepend(tr("Pick ")));
 
     QIcon pick_icon = QFontIcon::icon(QChar(8682),
@@ -205,7 +216,7 @@ ColorDialog::ButtonMode ColorDialog::buttonMode() const
     return p->button_mode;
 }
 
-void ColorDialog::setColorInternal(const QColor &col)
+void ColorDialog::setColorInternal(const QColor& col)
 {
     /**
      * \note Unlike setColor, this is used to update the current color which
@@ -265,11 +276,23 @@ void ColorDialog::setColorInternal(const QColor &col)
 
     p->ui.preview->setColor(col);
 
+    // //
+    update_hsl_button(col);
+
     blockSignals(blocked);
     Q_FOREACH(QWidget* w, findChildren<QWidget*>())
         w->blockSignals(false);
 
     Q_EMIT colorChanged(col);
+
+
+}
+
+void ColorDialog::update_hsl_button(const QColor& col)
+{
+ int h, s, l;
+ col.getHsl(&h, &s, &l);
+ hsl_button_->setText(QString("%1,%2,%3").arg(h, 3).arg(s, 3).arg(l, 3));
 }
 
 void ColorDialog::set_hsv()

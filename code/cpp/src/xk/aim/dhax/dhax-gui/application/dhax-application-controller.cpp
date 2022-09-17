@@ -277,7 +277,11 @@ Special_Input_Dialog::Special_Input_Dialog(u4* autogen_index,
    {
     QPlainTextEdit* qpte = qobject_cast<QPlainTextEdit*>(input_widget_);
     //QTextCursor text_cursor = QTextCursor(qpte->document());
-    qpte->textCursor().insertText(text);
+
+
+    if(qpte)
+      qpte->textCursor().insertText(text);
+
     //text_cursor.insertText(text);
 
    });
@@ -848,6 +852,7 @@ void DHAX_Application_Controller::init_image_scene_item(DHAX_Image_Scene_Item* s
  _self_connect_(si ,color_mean_dialog_requested)
    _to_bind_2_(application_receiver_ ,handle_launch_color_mean_dialog);
 
+
 // si->self_connect(SIGNAL(polyline_save_notation_with_comment_requested()),
 //   application_receiver_, SLOT(handle_polyline_save_notation_with_comment()));
 
@@ -994,6 +999,8 @@ void DHAX_Application_Controller::calculate_fb_gaussian()
  qDebug() << "calculate_fb_gaussian";
 
 }
+
+
 
 void DHAX_Application_Controller::launch_edge_detection_dialog()
 {

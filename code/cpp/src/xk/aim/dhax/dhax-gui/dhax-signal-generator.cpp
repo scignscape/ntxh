@@ -73,6 +73,13 @@ void DHAX_Signal_Generator::emit_calculate_fb_gaussian_requested()
  Q_EMIT calculate_fb_gaussian_requested(++static_count);
 }
 
+void DHAX_Signal_Generator::emit_show_pixel_local_aggregate_color_distance_requested()
+{
+ STATIC_COUNT
+ Q_EMIT show_pixel_local_aggregate_color_distance_requested(++static_count);
+}
+
+
 
 void DHAX_Signal_Generator::emit_load_pdf_requested()
 {

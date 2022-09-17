@@ -77,6 +77,7 @@ public:
  ACCESSORS(u2 ,marked_foreground_pole)
  ACCESSORS(u2 ,marked_background_pole)
 
+ QString current_file_path_with_presuffix(QString pres);
 
  MultiStep_Annotation_Base* init_multistep_annotation(QWidget* parent,
    const QPointF posf, DHAX_Annotation_Instance::Compact_Shape_Kind_Summary shape_kind);

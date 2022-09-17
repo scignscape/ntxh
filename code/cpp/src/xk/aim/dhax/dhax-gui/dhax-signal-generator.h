@@ -41,6 +41,8 @@ public:
  void emit_calculate_fb_gaussian_requested();
  void emit_launch_edge_detection_dialog_requested();
 
+ void emit_show_pixel_local_aggregate_color_distance_requested();
+
 
  void emit_view_contours_requested();
  void emit_view_3d_requested();
@@ -76,6 +78,10 @@ Q_SIGNALS:
 
  void calculate_fb_gaussian_requested(call_Stamp_u2);
  void launch_edge_detection_dialog_requested(call_Stamp_u2);
+
+ void show_pixel_local_aggregate_color_distance_requested(call_Stamp_u2);
+
+
 
 #ifdef USE_IFC
  void ifc_convert_requested(call_Stamp_u2);
