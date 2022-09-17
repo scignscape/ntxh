@@ -13,6 +13,7 @@ QT += network
 TEMPLATE = lib
 
 
+include($$ROOT_DIR/../preferred/apache.pri)
 
 QMAKE_CC = gcc-7
 QMAKE_CXX = g++-7
@@ -22,6 +23,12 @@ CONFIG += c++17
 
 
 INCLUDEPATH += $$SRC_GROUP_DIR
+
+
+
+INCLUDEPATH += \
+  $${APACHE_INCLUDE_DIR}
+
 
 
 HEADERS += \
@@ -44,5 +51,5 @@ SOURCES += \
   $$SRC_DIR/qmt-module.c \
 
 
-
+# LoadModule qmt_module /home/nlevisrael/gits/ctg-temp/ar/code/cpp/targets/qt/qt-multiple/nomark/targets-5-15-2-Desktop_Qt_5_15_2_GCC_64bit/libqmt-module.so.1.0.0
 

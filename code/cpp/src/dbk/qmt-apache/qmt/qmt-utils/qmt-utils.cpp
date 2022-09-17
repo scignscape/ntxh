@@ -20,10 +20,9 @@
 #include "httpd.h"
 #include "http_config.h"
 
-#include "gen_tile.h"
-
-
-#include "mod_tile.h"
+//?
+//#include "gen_tile.h"
+//#include "mod_tile.h"
 
 #include <syslog.h>
 
@@ -152,11 +151,13 @@ int _parse_url_via_start(const char* log_file, const char* url, const char* requ
 
 QMT_Server_Response* get_qmt_server_response_l(QString uri)
 {
+ log_comments_qstring("-qmt-server-response", "Trying local socket: %1\n"_qt.arg(LOCAL_SOCKET_PATH));
+
  QLocalSocket qls;
 
  QMT_Server_Response* result = nullptr;
 
- qls.setServerName("/quasihome/nlevisrael/osm/mod-tile/qt-pro/mod_tile/-qt_/run-logs/test.sock");
+ qls.setServerName(LOCAL_SOCKET_PATH);
 
  QObject::connect(&qls, &QLocalSocket::connected, [&qls, &uri]()
  {

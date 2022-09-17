@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
 
  QLocalServer* qls = new QLocalServer;
 
- bool ok = qls->listen("/quasihome/nlevisrael/osm/mod-tile/qt-pro/mod_tile/-qt_/run-logs/test.sock");
+ bool ok = qls->listen(LOCAL_SOCKET_PATH);
 
  if(ok)
    qDebug() << "Listening ... ";

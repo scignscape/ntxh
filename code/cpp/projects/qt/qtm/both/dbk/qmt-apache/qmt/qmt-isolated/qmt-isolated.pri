@@ -7,6 +7,10 @@
 
 include(../build-group.pri)
 
+include($$ROOT_DIR/../preferred/apache.pri)
+
+
+TEMPLATE = app
 
 QT += network
 
@@ -17,7 +21,23 @@ QMAKE_CXX = g++-7
 CONFIG += c++17
 
 
+#PREFERRED_LOG_DIR=$${ROOT_DIR}/../qmt/run-logs
+#DEFINES += PREFERRED_LOG_FOLDER=\\\"$${PREFERRED_LOG_DIR}\\\"
+#DEFINES += PREFERRED_LOG_FILE=\\\"$${PREFERRED_LOG_DIR}/-qmt.txt\\\"
+#DEFINES += LOCAL_SOCKET_PATH=\\\"$${PREFERRED_LOG_DIR}/qmt--named.sock\\\"
+
+#message(local socket path: $$LOCAL_SOCKET_PATH)
+
+#include($$ROOT_DIR/../preferred/apache.pri)
+
+
 INCLUDEPATH += $$SRC_GROUP_DIR
+
+
+INCLUDEPATH += \
+  $${APACHE_INCLUDE_DIR}
+
+
 
 
 HEADERS += \
