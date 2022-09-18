@@ -1,0 +1,32 @@
+
+#ifndef QMT_PAINTER__H
+#define QMT_PAINTER__H
+
+#include <QString>
+
+#include <string>
+
+#include "qmt-accessors.h"
+
+#include "qmt-global-types.h"
+
+#include <QPainter>
+
+class QMT_Painter : public QPainter
+{
+ QImage* base_image_;
+
+public:
+
+ QMT_Painter(QImage* image);
+
+ void draw_rect();
+ void set_pen_width(u1 width);
+ void set_pen_color(const QColor& color);
+ void reset_pen_color(const QColor& color);
+ void set_pen(const QColor& color, u1 width);
+
+};
+
+
+#endif // QMT_PAINTER__H

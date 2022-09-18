@@ -26,7 +26,7 @@
 
 #include <syslog.h>
 
-#include "qmt-server/qmt-server-response.h"
+#include "qmt-server-response/qmt-server-response.h"
 
 #include "qmt-global-types.h"
 
@@ -239,6 +239,25 @@ int get_response_array(void* uri, char*** response, const char* log_file)
  QByteArray* raw = qsr->binary_content();
  int result = raw? raw->length() : 0;
 
+ bool raw_needs_delete = false;
+
+ log_comments_qstring("-qmt-response-array",
+   "qsr->content_file() %1 \n"_qt.arg(qsr->content_file()));
+
+ if(result == 0 && !(raw || qsr->content_file().isEmpty()))
+ {
+  QFile infile(qsr->content_file());
+  if(infile.open(QIODevice::ReadOnly))
+  {
+   raw_needs_delete = true;
+   raw = new QByteArray;
+   *raw = infile.readAll();
+   infile.close();
+
+   result = raw->length();
+  }
+ }
+
  if(result)
  {
   log_comments_qstring("-qmt-response-array", "Passing along raw binary\n");
@@ -246,6 +265,9 @@ int get_response_array(void* uri, char*** response, const char* log_file)
   char* cs = (char*) malloc(raw->length());
   memcpy(cs, raw->data(), raw->length());
   fields[0] = cs;
+
+  if(raw_needs_delete)
+    delete raw;
  }
  else //raw is empty
    fields[0] = 0;

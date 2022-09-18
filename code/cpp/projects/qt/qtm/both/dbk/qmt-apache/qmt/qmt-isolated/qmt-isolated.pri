@@ -40,22 +40,25 @@ INCLUDEPATH += \
 
 
 
-HEADERS += \
-  $$SRC_GROUP_DIR/qmt-utils/qmt-utils.h \
-  $$SRC_GROUP_DIR/qmt-utils/qmt-utils.hpp \
+#HEADERS += \
+#  $$SRC_GROUP_DIR/qmt-utils/qmt-utils.h \
+#  $$SRC_GROUP_DIR/qmt-utils/qmt-utils.hpp \
 
 
-HEADERS += \
-  $$SRC_GROUP_DIR/qmt-server/qmt-server-response.h \
-  $$SRC_GROUP_DIR/qmt-accessors.h \
-  $$SRC_GROUP_DIR/qmt-global-types.h \
+#HEADERS += \
+#  $$SRC_GROUP_DIR/qmt-server/qmt-server-response.h \
+#  $$SRC_GROUP_DIR/qmt-accessors.h \
+#  $$SRC_GROUP_DIR/qmt-global-types.h \
 
 
 SOURCES += \
   $$SRC_GROUP_DIR/qmt-utils/qmt-utils.cpp \
 
 SOURCES += \
-  $$SRC_GROUP_DIR/qmt-server/qmt-server-response.cpp \
   $$SRC_DIR/main.cpp \
+
+#$$SRC_GROUP_DIR/qmt-server/qmt-server-response.cpp \
+
+LIBS += -L$$TARGETSDIR -lqmt-main-server-response -lqmt-contextual-server-responses
 
 

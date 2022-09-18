@@ -37,18 +37,23 @@ HEADERS += \
 
 
 HEADERS += \
-  $$SRC_GROUP_DIR/qmt-server/qmt-server-response.h \
   $$SRC_GROUP_DIR/qmt-accessors.h \
   $$SRC_GROUP_DIR/qmt-global-types.h \
 
 
 SOURCES += \
   $$SRC_GROUP_DIR/qmt-utils/qmt-utils.cpp \
-  $$SRC_GROUP_DIR/qmt-server/qmt-server-response.cpp \
+
+
+#$$SRC_GROUP_DIR/qmt-server/qmt-server-response.cpp \
+#  $$SRC_GROUP_DIR/qmt-server/qmt-server-response.h \
 
 
 SOURCES += \
   $$SRC_DIR/qmt-module.c \
+
+
+#/home/nlevisrael/gits/ctg-temp/ar/code/cpp/src/dbk/qmt-apache/qmt/qmt-server/qmt-raw-file-server-response.h
 
 
 # LoadModule qmt_module /home/nlevisrael/gits/ctg-temp/ar/code/cpp/targets/qt/qt-multiple/nomark/targets-5-15-2-Desktop_Qt_5_15_2_GCC_64bit/libqmt-module.so.1.0.0
