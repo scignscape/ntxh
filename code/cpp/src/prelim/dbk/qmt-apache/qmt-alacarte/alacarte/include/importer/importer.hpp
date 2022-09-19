@@ -27,6 +27,8 @@
 class Configuration;
 class Geodata;
 
+class QString;
+
 class Importer
 {
 public:
@@ -35,7 +37,7 @@ public:
 	Importer(const shared_ptr<Configuration>& config);
 
 
-	TESTABLE shared_ptr<Geodata> importXML();
+ TESTABLE shared_ptr<Geodata> importXML(QString* new_source_file);
 
 private:
 	shared_ptr<Configuration> config;

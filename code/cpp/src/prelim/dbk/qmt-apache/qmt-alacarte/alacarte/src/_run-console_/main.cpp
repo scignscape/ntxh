@@ -19,41 +19,95 @@
 #include <QImage>
 #include <QPainter>
 
-#include <QGuiApplication>
+#include <QApplication>
 
 #include <QVector2D>
 
+#include <QFileDialog>
+#include <QFileInfo>
 
 static constexpr u2 mr_factor = 4;
 
 
+QString sub_or_parent_sibling_folder(QDir qdir, QString name)
+{
+ QString result = qdir.absoluteFilePath(name);
+ if(qdir.exists(result))
+   return result;
+
+ if(qdir.cdUp())
+  if(qdir.cdUp())
+  {
+   // //  same, idea two levels up ...
+   result = qdir.filePath(name);
+   if(qdir.exists(result))
+     return result;
+  }
+
+ return {};
+}
+
 int main(int argc, char* argv[])
 {
- QGuiApplication app(argc, argv);
+ QApplication app(argc, argv);
  app.processEvents();
 
- QString test_data_path = "/quasihome/nlevisrael/osm/alacarte/monaco/monaco-data.carte";
+ QString test_data_path = QFileDialog::getOpenFileName(nullptr, "Select Data File",
+   ALACARTE_FACTORY_FOLDER, "*.carte");
 
- QString stylesheet_folder_path = "/home/nlevisrael/gits/osm/alacarte-master/-qlog_/test-styles";
- QString stylesheet_path_name = "test-default";
+ if(test_data_path.isEmpty())
+   return 0; //= "/quasihome/nlevisrael/osm/alacarte/monaco/monaco-data.carte";
+
+ QFileInfo qfi(test_data_path);
+ QDir qd = qfi.absoluteDir();
+
+
+ QString stylesheet_folder_path = sub_or_parent_sibling_folder(qd, "styles");
+ if(stylesheet_folder_path.isEmpty())
+   return 0;
+
+ QString stylesheet_path_name = "default";
 
 // QString stylesheet_path_name = "ttest-default";
 
 
  //QString outfile = ALACARTE_QLOG_FOLDER;
- QString image_path = ALACARTE_QLOG_FOLDER "/test-render/img.png"_qt;
+
+ QString image_folder = sub_or_parent_sibling_folder(qd, "test-render");
+ if(image_folder.isEmpty())
+   return 0;
+
 
  QMT_Render_Broker qrb(test_data_path);
- qrb.set_current_out_file(image_path);
- qrb.set_x(8529);
- qrb.set_y(5974);
- qrb.set_zoom(14);
+
  qrb.set_stylesheet_folder_path(stylesheet_folder_path);
  qrb.set_stylesheet_path_name(stylesheet_path_name);
 
- qrb.generate_png();
+ u4 zoom_low = 14;
+ u4 zoom_high = 14;
 
+ u4 x_low = 8529;
+ u4 x_high = 8529;
 
+ u4 y_low = 5974;
+ u4 y_high = 5974;
+
+ for(u4 zoom = zoom_low; zoom <= zoom_high; ++zoom)
+  for(u4 x = x_low; x <= x_high; ++x)
+   for(u4 y = y_low; y <= y_high; ++y)
+   {
+    QString image_path = image_folder + "/%1-%2-%3-%4.png"_qt
+      .arg(qfi.completeBaseName()).arg(zoom).arg(x).arg(y);
+    qrb.set_current_out_file(image_path);
+
+    qrb.set_x(x);
+    qrb.set_y(y);
+    qrb.set_zoom(zoom);
+
+    qrb.generate_png();
+   }
+
+ return 0;
 }
 
 

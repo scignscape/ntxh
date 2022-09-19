@@ -4,18 +4,23 @@
 #     (See accompanying file LICENSE_1_0.txt or copy at
 #           http://www.boost.org/LICENSE_1_0.txt)
 
+include(../build-group.pri)
+
+
+QT += widgets gui
+
 
 TEMPLATE = app
 
 
-DEFINES += BOOST_LOG_DYN_LINK
-
+DEFINES += PROCESS_FOLDER=\\\"$$DESTDIR\\\"
 
 INCLUDEPATH += \
   $$SRC_GROUP_DIR/alacarte/include
 
 INCLUDEPATH += \
   $$SRC_GROUP_DIR/alacarte/extras
+
 
 
 
@@ -29,6 +34,7 @@ SOURCES += \
 
 
 LIBS += -L$$TARGETSDIR -lqmt-alacarte-lib
+
 
 LIBS += -lboost_program_options \
    -lboost_system  -lboost_filesystem \

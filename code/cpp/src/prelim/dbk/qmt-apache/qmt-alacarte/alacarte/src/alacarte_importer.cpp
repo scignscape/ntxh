@@ -29,7 +29,7 @@
 
 #include "importer/importer.hpp"
 
-
+#include <QApplication>
 
 
 /**
@@ -61,7 +61,8 @@ public:
 		config_desc.add_options()
 			(OPT(opt::logfile, "l"), value<string>()->default_value("alacarte_%N.log")/*->value_name("path")*/,										"specifies the logfile")
 			(OPT(opt::importer::path_to_osmdata, "i"),	value<string>()->required()/*->value_name("path")*/,								"path to a xml file containing osm data")
-			(OPT(opt::importer::path_to_geodata, "g"),	value<string>()->required()->default_value("ala.carte")/*->value_name("path")*/,	"path, where preprocessed data will be saved")
+   (OPT(opt::importer::path_to_geodata, "g"),	value<string>()->required() //->default_value("ala.carte") ->value_name("path")
+     ,	"path, where preprocessed data will be saved")
 			(OPT(opt::importer::check_xml_entities, "x"),	value<bool>()->required()->default_value(true)/*->value_name("path")*/,			
 				"Specifies weather the parser should not ignore unknown entities.")
 			(opt::importer::min_lat, value<double>(), "minimum node latitude")
@@ -93,8 +94,10 @@ protected:
 
 		shared_ptr<Geodata> geodata;
 
+  QString new_source_file;
+
 		try {
-			geodata = importer->importXML();
+   geodata = importer->importXML(&new_source_file);
 
 		} catch(excp::InputFormatException& e)
 		{
@@ -105,7 +108,18 @@ protected:
 			return;
 		}
 
-		geodata->save(config->get<string>(opt::importer::path_to_geodata));
+  std::string path = config->has(opt::importer::path_to_geodata)?
+    config->get<string>(opt::importer::path_to_geodata) : std::string {};
+
+  if(path.empty())
+  {
+   if(new_source_file.isEmpty())
+     exit(0);
+
+   path = (new_source_file + ".carte").toStdString();
+  }
+
+  geodata->save(path);
 	}
 
 };
@@ -116,6 +130,8 @@ protected:
 //! \cond internal
 int main(int argc, char** argv)
 {
+ QApplication qapp(argc, argv);
+
 	AlacarteImporterApp app;
 
 	return app.start(argc, argv);

@@ -29,6 +29,8 @@
 #include "utils/application.hpp"
 #include "general/configuration.hpp"
 
+#include <QDebug>
+
 using boost::make_shared;
 
 /**
@@ -117,7 +119,11 @@ void Application::appRun(int argc, char** argv)
 		return;
 	}
 
-	if(!startupDiagnostic(config)) return;
+ //?
+ if(!startupDiagnostic(config))
+   qDebug() << "startupDiagnostic false";
+  //return;
+
 	// now do what you have to do!
 	onRun(config);
 }
@@ -129,8 +135,13 @@ void Application::appRun(int argc, char** argv)
  **/
 void Application::initLog(const shared_ptr<Configuration>& config)
 {
+ std::string log_file = config->get<string>(opt::logfile);
+
+ if(log_file.empty())
+   log_file = DEFAULT_ALACARTE_IMPORTER_LOG_FILE;
+
 	fileLogger = logging::add_file_log(
-			keywords::file_name = config->get<string>(opt::logfile),
+   keywords::file_name = log_file, // config->get<string>(opt::logfile),
 			keywords::rotation_size = 10 * 1024 * 1024,
 			keywords::time_based_rotation = logging::sinks::file::rotation_at_time_point(0, 0, 0),
 			keywords::format = "<%TimeStamp%>: [%Channel%] %Severity%: %Message%"

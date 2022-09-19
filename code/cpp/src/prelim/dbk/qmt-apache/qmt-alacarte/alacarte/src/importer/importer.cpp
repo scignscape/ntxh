@@ -39,6 +39,14 @@
 #include "general/way.hpp"
 #include "general/relation.hpp"
 
+#include "global-types.h"
+
+#include <QFileDialog>
+
+#include <QMessageBox>
+#include <QDebug>
+#include <QProcess>
+
 
 using boost::filesystem::path;
 using nl = std::numeric_limits<double>;
@@ -545,7 +553,7 @@ Importer::Importer(const shared_ptr<Configuration>& config)
  *
  * @return created data containing the osm data
  **/
-shared_ptr<Geodata> Importer::importXML()
+shared_ptr<Geodata> Importer::importXML(QString* new_source_file)
 {
 	FloatRect bounds = {
 		FloatPoint(config->get(opt::importer::min_lon, -nl::max()), config->get(opt::importer::min_lat, -nl::max())),
@@ -555,7 +563,74 @@ shared_ptr<Geodata> Importer::importXML()
 	OsmXmlParser parser(!config->get<bool>(opt::importer::check_xml_entities), bounds);
 	shared_ptr<Geodata>	geodata = boost::make_shared<Geodata>();
 
-	path xml_file = config->get<string>(opt::importer::path_to_osmdata);
+
+ std::string _xml_file = config->has(opt::importer::path_to_osmdata)?
+   config->get<string>(opt::importer::path_to_osmdata) : std::string{};
+
+ if(_xml_file.empty())
+ {
+  QString new_file = QFileDialog::getOpenFileName(nullptr,
+    "Choose an osm (xml or pbf) file", DEFAULT_ALACARTE_IMPORTER_FILE_FOLDER,
+    "*.osm, *.pbf");
+  if(new_file.isEmpty())
+    exit(0);
+
+  if(new_file.endsWith("pbf"))
+  {
+   QFileInfo qfi(new_file);
+
+   QMessageBox::StandardButton sb = QMessageBox::information(nullptr, "Convert PBF File?",
+      "Hit OK to proceeed with converting this file preliminarily to XML "
+      "before the final conversion the alacarte internal format.",
+      QMessageBox::Ok | QMessageBox::Cancel);
+
+   if(sb == QMessageBox::Ok)
+   {
+    QString process_string = "%1/qmt-osmconverter %2 -o=%3/%4.osm"_qt
+      .arg(PROCESS_FOLDER).arg(new_file)
+      .arg(qfi.absolutePath()).arg(qfi.baseName());
+    //QString process_string = "qmt-osm-converter";
+    //qDebug() << process_string;
+
+    QProcess process;
+
+    // // Qt 6.0 and later would use startCommand instead of start
+     //   process.startCommand(process_string, QIODevice::ReadOnly);
+
+    qDebug() << "Process invocation: " << process_string;
+
+    process.start(process_string, QIODevice::ReadOnly);
+
+    process.waitForFinished(-1);
+
+    QString output(process.readAllStandardOutput());
+
+    qDebug() << "Process output: " << output;
+
+    QMessageBox::StandardButton sb1 = QMessageBox::information(nullptr,
+       "Continue the alacarte conversion?",
+       "The XML generation is complete.  Hit OK to proceeed with converting the XML file to "
+       "the alacarte internal format.",
+       QMessageBox::Ok | QMessageBox::Cancel);
+
+    if(sb1== QMessageBox::Ok)
+    {
+     new_file = qfi.absolutePath() + "/" + qfi.baseName();
+    }
+    else
+      exit(0);
+   }
+   else
+     exit(0);
+  }
+
+  _xml_file = new_file.toStdString();
+  *new_source_file = new_file;
+ };
+
+ qDebug() << "_xml_file = " << QString::fromStdString(_xml_file);
+
+ path xml_file = _xml_file;
 	LOG_SEV(importer_log, info) << "Start parsing...";
 	parser.parse(xml_file);
 

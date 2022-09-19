@@ -5,6 +5,9 @@
 #           http://www.boost.org/LICENSE_1_0.txt)
 
 
+include(../build-group.pri)
+
+
 QT += gui  #?widgets
 
 
@@ -42,13 +45,6 @@ DEFINES += BOOST_LOG_DYN_LINK
 
 
 DEFINES += DEFAULT_PORT=\\\"11213\\\"  # a-l-a-c
-
-ALACARTE_QLOG_DIR = /home/nlevisrael/gits/osm/alacarte-master/-qlog_
-
-DEFINES += ALACARTE_QLOG_FOLDER=\\\"$${ALACARTE_QLOG_DIR}\\\"
-DEFINES += ALACARTE_QLOG_FILE=\\\"$${ALACARTE_QLOG_DIR}/qlog.txt\\\"
-
-DEFINES += ALACARTE_QLOG_IMAGES_FOLDER=\\\"$${ALACARTE_QLOG_DIR}/images\\\"
 
 
 #DISTFILES += \

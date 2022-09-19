@@ -5,17 +5,13 @@
 #           http://www.boost.org/LICENSE_1_0.txt)
 
 
-
-DEFINES += ALACARTE_QLOG_FILE=\\\"/home/nlevisrael/gits/osm/alacarte-master/-qlog_/qlog.txt\\\"
+include(../build-group.pri)
 
 
 #DESTDIR = ../target
 
 
 DEFINES += QT_HOOK
-
-
-DEFINES += BOOST_LOG_DYN_LINK
 
 
 INCLUDEPATH += \

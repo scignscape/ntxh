@@ -85,7 +85,7 @@ Configuration::Configuration(	boost::program_options::options_description& cmd_d
 		directories.pop();
 	}
 
-	notify(options);
+ //?notify(options);
 }
 
 /**

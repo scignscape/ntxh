@@ -12,7 +12,7 @@
 #include <QIODevice>
 
 
-#include "qmt-server/qmt-server-response.h"
+#include "qmt-server-response/qmt-server-response.h"
 
 #include "qmt-utils/qmt-utils.hpp"
 
