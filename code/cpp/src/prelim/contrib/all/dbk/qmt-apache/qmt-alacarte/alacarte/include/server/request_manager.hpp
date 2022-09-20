@@ -62,9 +62,12 @@ public:
 
 	void stop();
 
+ void push_factory();
+ void pop_factory();
+
  void create_and_run_job(QMT_Tile_Object_Coordinates* coordinates_save_info, //int zoom, int x, int y,
    const string& format, const string& stylesheet_folder_path,
-   const string& stylesheet_path_name);
+   const string& stylesheet_path_name, bool pop_factory = false);
 
 	TESTABLE void enqueue(const shared_ptr<HttpRequest>& r);
 	TESTABLE void enqueue(const shared_ptr<MetaIdentifier>& ti);

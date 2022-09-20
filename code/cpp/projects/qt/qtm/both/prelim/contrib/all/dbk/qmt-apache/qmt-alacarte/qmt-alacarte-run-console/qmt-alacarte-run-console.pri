@@ -60,13 +60,10 @@ SOURCES += \
  $$SRC_GROUP_DIR/alacarte/src/_run-console_/qmt-render-broker.cpp \
 
 
-ALACARTE_QLOG_DIR = $$SRC_GROUP_DIR/alacarte/../alacarte-master/-qlog_
-
-DEFINES += ALACARTE_QLOG_FOLDER=\\\"$${ALACARTE_QLOG_DIR}\\\"
-
-DEFINES += ALACARTE_QLOG_FILE=\\\"$${ALACARTE_QLOG_DIR}/qlog.txt\\\"
-
-DEFINES += ALACARTE_QLOG_IMAGES_FOLDER=\\\"$${ALACARTE_QLOG_DIR}/images\\\"
+#ALACARTE_QLOG_DIR = $$SRC_GROUP_DIR/alacarte/../alacarte-master/-qlog_
+#DEFINES += ALACARTE_QLOG_FOLDER=\\\"$${ALACARTE_QLOG_DIR}\\\"
+#DEFINES += ALACARTE_QLOG_FILE=\\\"$${ALACARTE_QLOG_DIR}/qlog.txt\\\"
+#DEFINES += ALACARTE_QLOG_IMAGES_FOLDER=\\\"$${ALACARTE_QLOG_DIR}/images\\\"
 
 
 LIBS += -L$$TARGETSDIR -lqmt-alacarte-lib  -lqmt-alacarte-server-lib

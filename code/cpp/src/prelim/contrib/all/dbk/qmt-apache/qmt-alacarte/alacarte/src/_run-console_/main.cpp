@@ -1,4 +1,10 @@
 
+//           Copyright Nathaniel Christen 2020.
+//  Distributed under the Boost Software License, Version 1.0.
+//     (See accompanying file LICENSE_1_0.txt or copy at
+//           http://www.boost.org/LICENSE_1_0.txt)
+
+
 #include <QDebug>
 
 #include <QString>
@@ -138,52 +144,80 @@ int main(int argc, char* argv[])
   return 0;
  }
 
- u4 zoom_low = parse.value("zoom_low");
- u4 zoom_high = parse.value("zoom_high");
+ u4 zoom_min = parse.value("zoom_min");
+ u4 zoom_max = parse.value("zoom_max");
 
- if((zoom_high - zoom_low) > MAX_ZOOM_DIFF)
+ if((zoom_max - zoom_min) > MAX_ZOOM_DIFF)
  {
   qDebug() << "Too large a zoom differential; exiting";
   return 0;
  }
 
- u4 x_low = parse.value("x_low");
- u4 x_high = parse.value("x_high");
+ u4 x_min = parse.value("x_min");
+ u4 x_max = parse.value("x_max");
 
- if((x_high - x_low) > MAX_X_DIFF)
+ if((x_max - x_min) > MAX_X_DIFF)
  {
   qDebug() << "Too large a x differential; exiting";
   return 0;
  }
 
 
- u4 y_low = parse.value("y_low");
- u4 y_high = parse.value("y_high");
+ u4 y_min = parse.value("y_min");
+ u4 y_max = parse.value("y_max");
 
- if((y_high - y_low) > MAX_Y_DIFF)
+ if((y_max - y_min) > MAX_Y_DIFF)
  {
   qDebug() << "Too large a y differential; exiting";
   return 0;
  }
 
- for(u4 zoom = zoom_low; zoom <= zoom_high; ++zoom)
-  for(u4 x = x_low; x <= x_high; ++x)
-   for(u4 y = y_low; y <= y_high; ++y)
-   {
-    QMT_Render_Broker qrb(test_data_path);
-    qrb.set_stylesheet_folder_path(stylesheet_folder_path);
-    qrb.set_stylesheet_path_name(stylesheet_path_name);
+// for(u4 zoom = zoom_min; zoom <= zoom_max; ++zoom)
+//  for(u4 x = x_min; x <= x_max; ++x)
+//   for(u4 y = y_min; y <= y_max; ++y)
+//   {
+//    QMT_Render_Broker qrb(test_data_path);
+//    qrb.set_stylesheet_folder_path(stylesheet_folder_path);
+//    qrb.set_stylesheet_path_name(stylesheet_path_name);
 
-    QString image_path = image_folder + "/%1-%2-%3-%4.png"_qt
-      .arg(qfi.completeBaseName()).arg(zoom).arg(x).arg(y);
-    qrb.set_current_out_file(image_path);
+//    QString image_path = image_folder + "/%1|.png"_qt
+//      .arg(qfi.completeBaseName());
+//      //.arg(qfi.completeBaseName()).arg(zoom).arg(x).arg(y);
+//    qrb.set_out_file_pattern(image_path);
 
-    qrb.set_x(x);
-    qrb.set_y(y);
-    qrb.set_zoom(zoom);
+//    qrb.set_zoom_max(zoom);
+//    qrb.set_zoom_min(zoom);
 
-    qrb.generate_png();
-   }
+//    qrb.set_x_min(x);
+//    qrb.set_x_max(x);
+
+//    qrb.set_y_min(y);
+//    qrb.set_y_max(y);
+
+//    qrb.generate_png();
+
+//   }
+
+
+ QMT_Render_Broker qrb(test_data_path);
+ qrb.set_stylesheet_folder_path(stylesheet_folder_path);
+ qrb.set_stylesheet_path_name(stylesheet_path_name);
+
+ QString image_path = image_folder + "/%1|.png"_qt
+   .arg(qfi.completeBaseName());
+   //.arg(qfi.completeBaseName()).arg(zoom).arg(x).arg(y);
+ qrb.set_out_file_pattern(image_path);
+
+ qrb.set_zoom_min(zoom_min);
+ qrb.set_zoom_max(zoom_max);
+
+ qrb.set_x_min(x_min);
+ qrb.set_x_max(x_max);
+
+ qrb.set_y_min(y_min);
+ qrb.set_y_max(y_max);
+
+ qrb.generate_png();
 
  return 0;
 }

@@ -97,7 +97,21 @@ RequestManager::RequestManager(void* offline_context,
  offline_context_ = offline_context;
 #endif
 
+// factories.push(boost::make_shared<RenderCanvasFactory>());
+}
+
+void RequestManager::push_factory()
+{
+ factoriesMutex.lock();
  factories.push(boost::make_shared<RenderCanvasFactory>());
+ factoriesMutex.unlock();
+}
+
+void RequestManager::pop_factory()
+{
+ factoriesMutex.lock();
+ factories.pop();
+ factoriesMutex.unlock();
 }
 
 
@@ -314,7 +328,7 @@ bool RequestManager::nextUserRequest()
 
 void RequestManager::create_and_run_job(QMT_Tile_Object_Coordinates* coordinates_save_info, //int zoom, int x, int y,
   const string& format, const string& stylesheet_folder_path,
-  const string& stylesheet_path_name)
+  const string& stylesheet_path_name, bool _pop_factory)
 {
  // // for now don't try to newly parse a stylesheet via stylesheet_folder_path ...
 
@@ -329,10 +343,13 @@ void RequestManager::create_and_run_job(QMT_Tile_Object_Coordinates* coordinates
 
  shared_ptr<MetaIdentifier> mid = MetaIdentifier::Create(ti);
 
- factoriesMutex.lock();
+ if(_pop_factory)
+   factoriesMutex.lock();
  shared_ptr<RenderCanvasFactory> factory = factories.front();
- factories.pop();
- factoriesMutex.unlock();
+ if(_pop_factory)
+ {
+  pop_factory();
+ }
 
  shared_ptr<RenderCanvas> canvas = factory->getCanvas(ti->getImageFormat());
 
