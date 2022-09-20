@@ -9,5 +9,5 @@ PROJECT_NAME = ro-info-console
 
 include(../build-group.pri)
 
-include(../../../../../../both/$$PROJECT_AREA/$$PROJECT_KERNEL/$$PROJECT_SET/$$PROJECT_GROUP/$$PROJECT_NAME/$${PROJECT_NAME}.pri)
+include(../../../../../../../../both/$$PROJECT_AREA/contrib/$$PROJECT_CONTRIBUTOR/$$PROJECT_KERNEL/$$PROJECT_SET/$$PROJECT_GROUP/$$PROJECT_NAME/$${PROJECT_NAME}.pri)
 
