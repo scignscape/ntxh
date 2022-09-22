@@ -128,55 +128,12 @@ defined(ALT_PROJECT_NAME ,var) {
 QT_REPROZIP_SRC_DIR = $$ROOT_DIR/qt-reprozip
 QT_REPROZIP_BIN_DIR = $$QT_REPROZIP_SRC_DIR/bin
 
-#groups
-QRING_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/QScign/QRing
-RELAE_GRAPH_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/hgdm/relae-graph
-PHAON_GRAPH_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/hgdm/phaon-graph
-NTXH_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/hgdm/ntxh
-DSMAIN_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/dataset/dsmain
-SSQM_DSMAIN_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/ssqm/ssqm-dsmain
-XPDF_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/xpdf
-APPLICATION_MODEL_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/dataset/application-model
-CONFIG_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/dataset/config
-PHR_GRAPH_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/hgdm/phr-graph
-RELAE_GRAPH_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/hgdm/relae-graph
-PHAONIR_SRC_GROUP_DIR = $$SRC_ROOT_DIR/sk/phaonir/PhaonIR
-PHAONLIB_SRC_GROUP_DIR = $$SRC_ROOT_DIR/sk/phaonir/PhaonLib
-PHR_RUNTIME_SRC_GROUP_DIR = $$SRC_ROOT_DIR/sk/phaonir/phr-runtime
-TESTS_PHR_SRC_GROUP_DIR = $$SRC_ROOT_DIR/sk/rz/tests-phr
-WHITEDB_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/whitedb/whitedb
 
-RZ_KAUVIR_SRC_GROUP_DIR = $$SRC_ROOT_DIR/sk/rz/rz-kauvir
-
-IAT_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/iat/iat
-IAT_MODEL_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/iat/iat-model
-
-AIMLIB_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/aim/aimlib
-
-QUA_ZIP_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/quazip
-DCMTK_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/dcmtk
-
-ANGELSCRIPT_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/angelscript
-
-SCIGNSTAGE_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/QScign/ScignStage
-
-DGDB_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/dgdb
+include(./build-root-both--groups.pri)
 
 
-HTXN_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/htxn/htxn
-MPF_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/htxn/mosaic
-CWL_SRC_GROUP_DIR = $$SRC_ROOT_DIR/xk/external/cwl
-GTAGML_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/gtagml/gtagml
+# #  make this the default ... projects could override if necessary ...
 
-DGDB_WHITE_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/dgdb-white
+CONFIG += c++17
 
-DGH_SDI_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/dgh-sdi
-
-LEXPAIR_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/QScign/LexPair
-
-QHP_SRC_GROUP_DIR = $$SRC_ROOT_DIR/dbk/dgdb/qhp
-
-CHASM_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/hgdm/chasm
-
-XCSD_SRC_GROUP_DIR = $$SRC_ROOT_DIR/apk/xcsd/xcsd-2d
 
