@@ -6,9 +6,13 @@
 
 PROJECT_NAME = gtagml-console
 
+#QT -= gui
+
 include(../build-group.pri)
 
-QT -= gui
+
+DEFINES += HAVE_NO_QT_GUI_MODULE
+
 
 TEMPLATE = app
 

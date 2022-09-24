@@ -12,7 +12,6 @@ CONFIG   += console
 TEMPLATE = lib
 
 
-
 ####  These regex matches should identify the pertinent directories and
 ##    build settings for Qt and qmake, based on the qmake output directory
 ##    (assuming you're using shadow build).  If not, a workaround would be

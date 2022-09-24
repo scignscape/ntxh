@@ -72,11 +72,11 @@ Lanternfly_Main_Window::Lanternfly_Main_Window(QWidget *parent) :
 //?
 
  // //  New Jersey
-// lfr->center_on(-74.0435, 40.8859);
+ lfr->center_on(-74.0435, 40.8859);
 
  // //  Ukraine - kherson
  //?
- lfr->center_on(32.6169, 46.6354);
+// lfr->center_on(32.6169, 46.6354);
 
 
 

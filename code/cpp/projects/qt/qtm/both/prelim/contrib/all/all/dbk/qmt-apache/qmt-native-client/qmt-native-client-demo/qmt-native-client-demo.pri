@@ -7,6 +7,11 @@
 
 QT += widgets gui
 
+
+QT += location   network
+
+
+
 include(../build-group.pri)
 
 CONFIG += c++17
@@ -16,6 +21,11 @@ TEMPLATE = app
 
 #MAPGRAPHICS_MASTER = ../../../MapGraphics-master
 # http://localhost:6600/qmt-l/rs~png/~tiles/kherson/~osm-14-9674-5784
+
+include($$ROOT_DIR/../preferred/openssl.pri)
+
+#LIBS += /usr/lib/x86_64-linux-gnu/libssl.a
+
 
 
 INCLUDEPATH += \

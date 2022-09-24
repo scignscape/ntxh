@@ -9,7 +9,7 @@ PROJECT_NAME = xcsd-console
 
 include(../build-group.pri)
 
-QT -= gui
+#QT -= gui
 
 !contains(QT, gui){
 message($$PROJECT_NAME: $$QT)

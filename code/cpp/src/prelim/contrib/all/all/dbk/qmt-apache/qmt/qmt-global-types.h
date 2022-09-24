@@ -12,9 +12,9 @@
 #include <QMap>
 
 //?
-#ifndef HAVE_NO_QT_GUI_MODULE
-#include <QValidator>
-#endif
+//#ifndef HAVE_NO_QT_GUI_MODULE
+//#include <QValidator>
+//#endif
 
 #include <QPair>
 
@@ -177,6 +177,9 @@ struct Defaulting_To_Zero
 };
 
 #ifndef HAVE_NO_QT_GUI_MODULE
+
+#include <QValidator>
+
 struct ComboBox_Data
 {
  u1 max_index;

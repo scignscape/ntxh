@@ -53,6 +53,11 @@ int main(int argc, char *argv[])
  // paper_name = "icg";
  // paper_name = "itm";
 
+ // //  special for i4
+ QString folder = DEMO_DOCUMENT_FOLDER "/i4";
+ //?paper_name = "ch20";
+ paper_name = "ch2";
+
 
  mir.read_lines(QString(R"(
   .; the folder is just outside the archive
@@ -66,7 +71,7 @@ int main(int argc, char *argv[])
     :gt-copy-folder  %1/%2/gt-copy
     :do-first  intro.gt
    ;.
-   )").arg(DEMO_DOCUMENT_FOLDER).arg(paper_name) );
+   )").arg(folder).arg(paper_name) );
 
  mir.run_lines();
  return 0;

@@ -12,9 +12,9 @@
 #include <QMap>
 
 //?
-#ifndef HAVE_NO_QT_GUI_MODULE
-#include <QValidator>
-#endif
+//#ifndef HAVE_NO_QT_GUI_MODULE
+//#include <QValidator>
+//#endif
 
 #include <QPair>
 

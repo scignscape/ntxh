@@ -115,14 +115,88 @@ void OSMTileSource::fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate)
    //     host = "http://b.tile.openstreetmap.org/";
    //     url = "%1/%2/%3.png";
 
-   //?     host = "http://localhost:6600/qmt-l/rs~png/~tiles/kherson/~osm-";
-   hosts = QStringList{"http://localhost:6600/qmt/rI~png/~tiles/kherson/~osm-",
-     "http://localhost:6600/qmt/rS~png/~tiles/kherson/~osm-",
-     "http://b.tile.openstreetmap.org/"};
+   //?hosts = QStringList{"http://b.tile.openstreetmap.org/"};
 
-   urls = QStringList{"%1-%2-%3",
-     "%1-%2-%3",
-      "%1/%2/%3.png"};
+//?
+//   hosts = QStringList{"http://b.tile.openstreetmap.org/"};
+//   urls = QStringList{"%1/%2/%3.png"};
+
+//      hosts = QStringList{"https://tile.openstreetmap.org/"};
+//      urls = QStringList{"%1/%2/%3.png"};
+
+//         hosts = QStringList{"https://tile.openstreetmap.de/"};
+//         urls = QStringList{"%1/%2/%3.png"};
+
+//            hosts = QStringList{"https://tile.thunderforest.com/cycle/"};
+//            urls = QStringList{"%1/%2/%3.png"};
+
+//      hosts = QStringList{"https://b.tile.openstreetmap.fr/hot/"};
+//      urls = QStringList{"%1/%2/%3.png"};
+
+//      hosts = QStringList{"https://tile.thunderforest.com/transport/"};
+//      urls = QStringList{"%1/%2/%3.png"};
+
+//               hosts = QStringList{"https://api.wikiocity.com/r/raster/en/"};
+//               urls = QStringList{"%1/%2/%3.png"};
+
+//      hosts = QStringList{"https://tile.thunderforest.com/outdoors/"};
+//      urls = QStringList{"%1/%2/%3.png"};
+
+//      hosts = QStringList{"https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/"};
+//      urls = QStringList{"%1/%2/%3.png"};
+
+
+      //https://tile.tracestrack.com/en/{z}/{x}/{y}.png
+     // https://maps.geoapify.com/v1/tile/osm-bright-smooth/{z}/{x}/{y}.png
+
+//         hosts = QStringList{"https://tile.tracestrack.com/bus-route/"};
+//         urls = QStringList{"%1/%2/%3.png?key=bb0a959e5202daa5a0e923268a36b09e"};
+
+      // https://tile.waymarkedtrails.org/hiking/${z}/${x}/${y}.png
+      // https://tile.waymarkedtrails.org/cycling/${z}/${x}/${y}.png
+      // https://tile.tracestrack.com/bus-route/${z}/${x}/${y}.png
+      // https://tile.tracestrack.com/subway-route/${z}/${x}/${y}.png
+      // https://tile.tracestrack.com/train-route/${z}/${x}/${y}.png
+      // https://tile.tracestrack.com/bicycle-route/${z}/${x}/${y}.png
+
+
+   hosts = QStringList{"https://tile.waymarkedtrails.org/cycling/"};
+            urls = QStringList{"%1/%2/%3.png"};
+
+
+
+
+//   hosts = QStringList{"https://stamen-tiles.a.ssl.fastly.net/terrain/"};
+//   urls = QStringList{"%1/%2/%3.png"};
+
+//      hosts = QStringList{"https://stamen-tiles.a.ssl.fastly.net/watercolor/"};
+//      urls = QStringList{"%1/%2/%3.jpg"};
+
+//   hosts = QStringList{"https://gis.apfo.usda.gov/arcgis/rest/services/NAIP/USDA_CONUS_PRIME/ImageServer/tile/"};
+//   urls = QStringList{"%1/%3/%2"};
+
+
+//   hosts = QStringList{"https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/"};
+//   urls = QStringList{"%1/%3/%2"};
+
+// hosts = QStringList{"https://tile.opentopomap.org/"};
+// urls = QStringList{"%1/%2/%3.png"};
+
+
+//    hosts = QStringList{"https://b.tile-cyclosm.openstreetmap.fr/cyclosm/"};
+//    urls = QStringList{"%1/%2/%3.png"};
+
+
+
+//?
+//   hosts = QStringList{"http://localhost:6600/qmt/rI~png/~tiles/kherson/~osm-",
+//     "http://localhost:6600/qmt/rS~png/~tiles/kherson/~osm-",
+//     "http://b.tile.openstreetmap.org/"};
+
+//   urls = QStringList{"%1-%2-%3",
+//     "%1-%2-%3",
+//      "%1/%2/%3.png"};
+
 
   }
 
