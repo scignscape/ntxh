@@ -9,6 +9,8 @@
 
 #include "MapGraphicsView.h"
 
+#include "dialogs/tile-server-select-dialog.h"
+
 #include "global-types.h"
 
 #include <QMessageBox>
@@ -26,7 +28,9 @@ Main_Window_Controller::Main_Window_Controller(MapGraphicsView* view)
 
 void Main_Window_Controller::reset_map_style(QPoint qp)
 {
-
+ Tile_Server_Select_Dialog* tsd = new Tile_Server_Select_Dialog;
+ tsd->move(qp);
+ tsd->show();
 }
 
 void Main_Window_Controller::show_llcoords(QPoint qp)

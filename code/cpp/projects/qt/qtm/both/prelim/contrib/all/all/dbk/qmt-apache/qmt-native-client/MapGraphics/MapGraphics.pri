@@ -42,6 +42,7 @@ SOURCES += \
   $$SRC_DIR/LineObject.cpp \
   $$SRC_DIR/qmt/main-window-controller.cpp \
   $$SRC_DIR/qmt/qmt-gis-utils.cpp \
+  $$SRC_DIR/dialogs/tile-server-select-dialog.cpp \
 
 
 HEADERS += \
@@ -69,6 +70,9 @@ HEADERS += \
   $$SRC_DIR/LineObject.h \
   $$SRC_DIR/qmt/main-window-controller.h \
   $$SRC_DIR/qmt/qmt-gis-utils.h \
+  $$SRC_DIR/dialogs/tile-server-select-dialog.h \
+
+
 
 
 

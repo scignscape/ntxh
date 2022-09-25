@@ -35,14 +35,14 @@ Lanternfly_Main_Window::Lanternfly_Main_Window(QWidget *parent) :
 {
  setWindowTitle("Lanternfly Sighting Map");
 
- Lanternfly_Sighting_Dialog* lsd = new Lanternfly_Sighting_Dialog;
- lsd->show();
+// Lanternfly_Sighting_Dialog* lsd = new Lanternfly_Sighting_Dialog;
+// lsd->show();
 
- Lanternfly_Sighting_Filter_Dialog* lsfd = new Lanternfly_Sighting_Filter_Dialog;
- lsfd->show();
+// Lanternfly_Sighting_Filter_Dialog* lsfd = new Lanternfly_Sighting_Filter_Dialog;
+// lsfd->show();
 
- Lanternfly_Configuration_Dialog* lcd = new Lanternfly_Configuration_Dialog;
- lcd->show();
+// Lanternfly_Configuration_Dialog* lcd = new Lanternfly_Configuration_Dialog;
+// lcd->show();
 
  //    ui->setupUi(this);
 

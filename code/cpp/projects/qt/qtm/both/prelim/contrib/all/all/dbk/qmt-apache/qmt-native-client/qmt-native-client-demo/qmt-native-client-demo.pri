@@ -41,6 +41,7 @@ HEADERS += \
 
 
 
+
 SOURCES += \
   $$SRC_DIR/lanternfly/lanternfly-frame.cpp \
   $$SRC_DIR/lanternfly/lanternfly-sighting-dialog.cpp \
