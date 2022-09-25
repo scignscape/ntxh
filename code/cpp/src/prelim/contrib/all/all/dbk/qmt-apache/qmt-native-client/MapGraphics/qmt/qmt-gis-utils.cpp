@@ -25,14 +25,15 @@
 QMT_GIS_Utils::QMT_GIS_Utils()
   :  geo_service_provider_(nullptr)
 {
-
+ // //  use osm for default
+ reset_service_provider("osm");
 }
 
 void QMT_GIS_Utils::get_street_address_from_ll(QPointF ll,
   const Result_Callbacks& cbs)
 {
  QGeoCodeReply* gcr
-   = geo_coding_manager_->reverseGeocode(QGeoCoordinate(ll.x(), ll.y()));
+   = geo_coding_manager_->reverseGeocode(QGeoCoordinate(ll.y(), ll.x()));
 
  QObject::connect(gcr, &QGeoCodeReply::finished,
    [gcr, cbs]

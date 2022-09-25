@@ -48,6 +48,11 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
       main_window_controller_->show_llcoords(qp);
      });
 
+     menu->addAction("Lookup Street Address", [this, qp]()
+     {
+      main_window_controller_->llcoords_to_street_address(qp);
+     });
+
 //     menu->addAction("Launch Configuration Dialog");
 //     menu->addAction("Save Current Session");
 //     menu->addAction("Launch Filter/Search Dialog");
@@ -75,7 +80,7 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
       });
      });
 
-     menu->popup(qp);
+     menu->popup(this->mapToGlobal(qp));
 
      QPointF coords = this->mapToScene(qp);
 

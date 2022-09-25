@@ -197,7 +197,7 @@ int main5(int argc, char **argv)
 #include <QNetworkReply>
 #include <QNetworkAccessManager>
 
-int main7(int argc, char *argv[])
+int main4(int argc, char *argv[])
 {
  QApplication qapp(argc, argv);
 
@@ -293,11 +293,48 @@ int main7(int argc, char *argv[])
    return 0;
 
  QGeoLocation loc1 = reply_locations.first();
- r8 lat = loc1.coordinate().latitude();
- r8 lon = loc1.coordinate().longitude();
+ r8 lat1 = loc1.coordinate().latitude();
+ r8 lon1 = loc1.coordinate().longitude();
+
+ qDebug() << "lat 1 = " << lat1 << " and lon 1 = " << lon1;
+
+ r8 lat = -74.0271;
+ r8 lon = 40.8896;
+
+
+ QGeoLocation loc2;
+ loc2.setCoordinate(QGeoCoordinate(lat, lon));
+
 
  QGeoCodeReply* gcr
-   = gcm->reverseGeocode(loc1.coordinate());
+   = gcm->reverseGeocode(loc2.coordinate());
+
+ QObject::connect(gcr, &QGeoCodeReply::finished,
+   [&qel, gcr]
+ {
+
+  switch (gcr->error())
+  {
+   case QGeoCodeReply::NoError:
+     qDebug() << "address: " << gcr->locations().first().address().text();
+     break;
+#define CASE(ERROR) \
+    case QGeoCodeReply::ERROR: qDebug() << #ERROR << '\n'; break;
+    CASE(EngineNotSetError)
+    CASE(CommunicationError)
+    CASE(ParseError)
+    CASE(UnsupportedOptionError)
+    CASE(CombinationError)
+    CASE(UnknownError)
+#undef CASE
+    default: qDebug() << "Undocumented error!\n";
+  }
+
+  qDebug() << gcr->errorString();
+
+  qel.exit();
+ });
+
 
 
  qel.exec();
