@@ -30,6 +30,27 @@ void Main_Window_Controller::reset_map_style(QPoint qp)
 {
  Tile_Server_Select_Dialog* tsd = new Tile_Server_Select_Dialog;
  tsd->move(qp);
+
+ QObject::connect(tsd, &Tile_Server_Select_Dialog::update_requested, [this](QDialog* dlg,
+   Tile_Server_Select_Dialog::Summary summary)
+ {
+  qDebug() << "Host: %1\nUrl: %2\nAPI Key: %3"_qt
+    .arg(summary.host)
+    .arg(summary.url)
+    .arg(summary.api_key);
+
+  QSharedPointer<MapTileSource> mts = view_->tileSource();
+
+  mts->set_current_host(summary.host);
+
+  mts->set_current_url(summary.url.replace("@@", summary.api_key));
+   // mts->set_current_local_host(summary);
+
+  mts->update_hosts();
+
+  dlg->close();
+ });
+
  tsd->show();
 }
 

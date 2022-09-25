@@ -9,8 +9,12 @@
 #ifndef QMT_RESOURCE_INFO__H
 #define QMT_RESOURCE_INFO__H
 
-#include "qmt-accessors.h"
-#include "qmt-global-types.h"
+//#include "qmt-accessors.h"
+//#include "qmt-global-types.h"
+
+
+#include "accessors.h"
+#include "global-types.h"
 
 #include <QString>
 

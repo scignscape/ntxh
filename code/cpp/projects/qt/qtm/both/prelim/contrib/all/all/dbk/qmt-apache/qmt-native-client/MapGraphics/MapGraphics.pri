@@ -71,6 +71,7 @@ HEADERS += \
   $$SRC_DIR/qmt/main-window-controller.h \
   $$SRC_DIR/qmt/qmt-gis-utils.h \
   $$SRC_DIR/dialogs/tile-server-select-dialog.h \
+  $$SRC_DIR/dialogs/nlohmann-fifo-map.h \
 
 
 

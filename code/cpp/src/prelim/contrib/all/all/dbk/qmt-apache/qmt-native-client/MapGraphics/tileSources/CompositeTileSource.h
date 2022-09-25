@@ -53,12 +53,14 @@ public:
     bool getEnabledFlag(int index) const;
     void setEnabledFlag(int index, bool isEnabled);
 
+    virtual void update_hosts() Q_DECL_OVERRIDE;
 
 
 protected:
     virtual void fetchTile(quint32 x,
                            quint32 y,
-                           quint8 z);
+                           quint8 z) Q_DECL_OVERRIDE;
+
     
 signals:
     /*!

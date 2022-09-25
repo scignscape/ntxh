@@ -19,6 +19,8 @@
 #include <QDialog>
 #include <QTableWidget>
 
+#include <QStringList>
+
 #include <functional>
 
 class QDialogButtonBox;
@@ -50,11 +52,9 @@ class QComboBox;
 
 class Tile_Server_Select_Dialog : public QDialog
 {
-
  Q_OBJECT
 
  QDialogButtonBox* button_box_;
- QPushButton* button_ok_;
  QPushButton* button_cancel_;
  QPushButton* button_proceed_;
 
@@ -69,19 +69,31 @@ class Tile_Server_Select_Dialog : public QDialog
  QComboBox* overlay_combo_box_;
  QComboBox* local_server_combo_box_;
 
+ QStringList known_hosts_;
+ QStringList known_urls_;
+
+ QString current_host_;
+
  //QLabel* sentence_label_;
 
 public:
 
-
-
- Tile_Server_Select_Dialog(QWidget* parent = nullptr);
+ Tile_Server_Select_Dialog(QString current_host = {}, QWidget* parent = nullptr);
 
  ~Tile_Server_Select_Dialog();
 
+ struct Summary {
+  QString host;
+  QString url;
+  QString api_key;
+  QStringList overlays;
+ };
+
 Q_SIGNALS:
+
  void canceled(QDialog*);
- void accepted(QDialog*);
+ void update_requested(QDialog*, Summary);
+
  void take_screenshot_requested();
 
 public Q_SLOTS:
@@ -89,7 +101,7 @@ public Q_SLOTS:
 
  void accept();
  void cancel();
-
+ void proceed();
 
 };
 

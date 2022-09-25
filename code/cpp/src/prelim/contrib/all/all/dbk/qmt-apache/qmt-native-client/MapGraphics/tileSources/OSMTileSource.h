@@ -11,57 +11,58 @@ class QNetworkReply;
 
 class MAPGRAPHICSSHARED_EXPORT OSMTileSource : public MapTileSource
 {
-    Q_OBJECT
+ Q_OBJECT
 public:
-    enum OSMTileType
-    {
-        OSMTiles
-    };
+ enum OSMTileType
+ {
+  OSMTiles
+ };
 
 public:
-    explicit OSMTileSource(OSMTileSource::OSMTileType tileType = OSMTiles);
-    virtual ~OSMTileSource();
+ explicit OSMTileSource(OSMTileSource::OSMTileType tileType = OSMTiles);
+ virtual ~OSMTileSource();
 
-    virtual QPointF ll2qgs(const QPointF& ll, quint8 zoomLevel) const;
+ virtual QPointF ll2qgs(const QPointF& ll, quint8 zoomLevel) const;
 
-    virtual QPointF qgs2ll(const QPointF& qgs, quint8 zoomLevel) const;
+ virtual QPointF qgs2ll(const QPointF& qgs, quint8 zoomLevel) const;
 
-    virtual quint64 tilesOnZoomLevel(quint8 zoomLevel) const;
+ virtual quint64 tilesOnZoomLevel(quint8 zoomLevel) const;
 
-    virtual quint16 tileSize() const;
+ virtual quint16 tileSize() const;
 
-    virtual quint8 minZoomLevel(QPointF ll);
+ virtual quint8 minZoomLevel(QPointF ll);
 
-    virtual quint8 maxZoomLevel(QPointF ll);
+ virtual quint8 maxZoomLevel(QPointF ll);
 
-    virtual QString name() const;
+ virtual QString name() const;
 
-    virtual QString tileFileExtension() const;
+ virtual QString tileFileExtension() const;
 
 protected:
-    virtual void fetchTile(quint32 x,
-                           quint32 y,
-                           quint8 z);
+ virtual void fetchTile(quint32 x,
+                        quint32 y,
+                        quint8 z);
 
-    void fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate);
+ void fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate);
 
 
 private:
-    OSMTileSource::OSMTileType _tileType;
+ OSMTileSource::OSMTileType _tileType;
 
-    //Set used to ensure a tile with a certain cacheID isn't requested twice
-    QSet<QString> _pendingRequests;
+ //Set used to ensure a tile with a certain cacheID isn't requested twice
+ QSet<QString> _pendingRequests;
 
-    //Hash used to keep track of what cacheID goes with what reply
-    QHash<QNetworkReply *, QStringList> _pendingReplies;
-    
+ //Hash used to keep track of what cacheID goes with what reply
+ QHash<QNetworkReply*, QStringList> _pendingReplies;
+
+
 signals:
-    
+
 public slots:
 
 private slots:
-    void handleNetworkRequestFinished();
-    
+ void handleNetworkRequestFinished();
+
 };
 
 #endif // OSMTILESOURCE_H
