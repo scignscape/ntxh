@@ -19,9 +19,13 @@
 #include "guts/PrivateQGraphicsView.h"
 #include "guts/Conversions.h"
 
+#include "qmt/main-window-controller.h"
+
 MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
     QWidget(parent), coords_notify_callback_(nullptr)
 {
+ main_window_controller_ = new Main_Window_Controller(this);
+
     //Setup the given scene and set the default zoomLevel to 3
     this->setScene(scene);
     _zoomLevel = 2;
@@ -32,12 +36,24 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
       [this](const QPoint& qp)
     {
      QMenu* menu = new QMenu;
-     menu->addAction("Reopen Last Sighting");
-     menu->addAction("Launch Configuration Dialog");
-     menu->addAction("Save Current Session");
-     menu->addAction("Launch Filter/Search Dialog");
-     menu->addAction("Set Zoom/Pan Settings");
-     menu->addAction("View Coordinates and Civil-Geographic Info");
+
+
+     menu->addAction("Reset Map Style", [this, qp]()
+     {
+      main_window_controller_->reset_map_style(qp);
+     });
+
+     menu->addAction("Show Latitude/Longitude Coordinates", [this, qp]()
+     {
+      main_window_controller_->show_llcoords(qp);
+     });
+
+//     menu->addAction("Launch Configuration Dialog");
+//     menu->addAction("Save Current Session");
+//     menu->addAction("Launch Filter/Search Dialog");
+//     menu->addAction("Set Zoom/Pan Settings");
+//     menu->addAction("View Coordinates and Civil-Geographic Info");
+
      menu->addAction("Take Screenshot", [this]()
      {
       QScreen* screen = QGuiApplication::primaryScreen();

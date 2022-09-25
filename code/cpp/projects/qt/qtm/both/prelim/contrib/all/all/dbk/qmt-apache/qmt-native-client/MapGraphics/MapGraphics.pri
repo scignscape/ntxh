@@ -5,9 +5,7 @@
 #           http://www.boost.org/LICENSE_1_0.txt)
 
 
-QT += network sql
-
-QT += widgets
+QT += network sql location widgets
 
 TEMPLATE = lib
 
@@ -41,7 +39,10 @@ SOURCES += \
   $$SRC_DIR/guts/PrivateQGraphicsInfoSource.cpp \
   $$SRC_DIR/PolygonObject.cpp \
   $$SRC_DIR/Position.cpp \
-  $$SRC_DIR/LineObject.cpp
+  $$SRC_DIR/LineObject.cpp \
+  $$SRC_DIR/qmt/main-window-controller.cpp \
+  $$SRC_DIR/qmt/qmt-gis-utils.cpp \
+
 
 HEADERS += \
   $$SRC_DIR/MapGraphicsScene.h\
@@ -65,7 +66,9 @@ HEADERS += \
   $$SRC_DIR/guts/PrivateQGraphicsInfoSource.h \
   $$SRC_DIR/PolygonObject.h \
   $$SRC_DIR/Position.h \
-  $$SRC_DIR/LineObject.h
+  $$SRC_DIR/LineObject.h \
+  $$SRC_DIR/qmt/main-window-controller.h \
+  $$SRC_DIR/qmt/qmt-gis-utils.h \
 
 
 

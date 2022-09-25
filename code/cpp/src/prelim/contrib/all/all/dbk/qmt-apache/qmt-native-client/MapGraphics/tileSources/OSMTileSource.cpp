@@ -130,8 +130,8 @@ void OSMTileSource::fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate)
 //            hosts = QStringList{"https://tile.thunderforest.com/cycle/"};
 //            urls = QStringList{"%1/%2/%3.png"};
 
-//      hosts = QStringList{"https://b.tile.openstreetmap.fr/hot/"};
-//      urls = QStringList{"%1/%2/%3.png"};
+      hosts = QStringList{"https://b.tile.openstreetmap.fr/hot/"};
+      urls = QStringList{"%1/%2/%3.png"};
 
 //      hosts = QStringList{"https://tile.thunderforest.com/transport/"};
 //      urls = QStringList{"%1/%2/%3.png"};
@@ -142,7 +142,7 @@ void OSMTileSource::fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate)
 //      hosts = QStringList{"https://tile.thunderforest.com/outdoors/"};
 //      urls = QStringList{"%1/%2/%3.png"};
 
-//      hosts = QStringList{"https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/"};
+//?      hosts = QStringList{"https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/"};
 //      urls = QStringList{"%1/%2/%3.png"};
 
 
@@ -152,6 +152,16 @@ void OSMTileSource::fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate)
 //         hosts = QStringList{"https://tile.tracestrack.com/bus-route/"};
 //         urls = QStringList{"%1/%2/%3.png?key=bb0a959e5202daa5a0e923268a36b09e"};
 
+//   hosts = QStringList{"https://tile.tracestrack.com/base/"};
+//   urls = QStringList{"%1/%2/%3.png?key=bb0a959e5202daa5a0e923268a36b09e"};
+
+//         hosts = QStringList{"https://tile.tracestrack.com/en-name/"};
+//         urls = QStringList{"%1/%2/%3.png?key=bb0a959e5202daa5a0e923268a36b09e"};
+
+
+   // status line or log to show/monitor network traffic,
+   // including tile urls,
+
       // https://tile.waymarkedtrails.org/hiking/${z}/${x}/${y}.png
       // https://tile.waymarkedtrails.org/cycling/${z}/${x}/${y}.png
       // https://tile.tracestrack.com/bus-route/${z}/${x}/${y}.png
@@ -160,8 +170,8 @@ void OSMTileSource::fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate)
       // https://tile.tracestrack.com/bicycle-route/${z}/${x}/${y}.png
 
 
-   hosts = QStringList{"https://tile.waymarkedtrails.org/cycling/"};
-            urls = QStringList{"%1/%2/%3.png"};
+//   hosts = QStringList{"https://tile.waymarkedtrails.org/cycling/"};
+//            urls = QStringList{"%1/%2/%3.png"};
 
 
 
@@ -290,14 +300,18 @@ void OSMTileSource::handleNetworkRequestFinished()
   // //  this means the reply is an actual image
   //Convert the cacheID back into x,y,z tile coordinates
 
-  QImage * image = new QImage();
+  QImage image;// = new QImage();
 
-  if (!image->loadFromData(bytes))
+  if (!image.loadFromData(bytes))
   {
-   delete image;
+   //delete image;
    qWarning() << "Failed to make QImage from network bytes";
    return;
   }
+
+  // //  todo 256 should not be hard-coded
+  QImage* scaled_image = new QImage(image.scaled(256, 256));
+
 
   //Figure out how long the tile should be cached
   QDateTime expireTime;
@@ -317,7 +331,7 @@ void OSMTileSource::handleNetworkRequestFinished()
   }
 
   //Notify client of tile retrieval
-  this->prepareNewlyReceivedTile(x,y,z, image, expireTime);
+  this->prepareNewlyReceivedTile(x,y,z, scaled_image, expireTime);
  }
  else
  {

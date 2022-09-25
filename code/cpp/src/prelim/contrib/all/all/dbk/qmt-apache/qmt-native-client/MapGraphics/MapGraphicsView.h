@@ -22,6 +22,10 @@
 
 #include <functional>
 
+
+class Main_Window_Controller;
+
+
 class MAPGRAPHICSSHARED_EXPORT MapGraphicsView : public QWidget, public PrivateQGraphicsInfoSource
 {
     Q_OBJECT
@@ -109,6 +113,8 @@ private:
     quint8 _zoomLevel;
 
     DragMode _dragMode;
+
+    Main_Window_Controller* main_window_controller_;
 };
 
 inline uint qHash(const QPointF& key)

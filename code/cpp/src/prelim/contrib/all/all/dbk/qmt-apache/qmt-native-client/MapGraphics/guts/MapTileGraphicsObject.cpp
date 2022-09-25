@@ -3,6 +3,8 @@
 #include <QPainter>
 #include <QtDebug>
 
+#include "global-types.h"
+
 MapTileGraphicsObject::MapTileGraphicsObject(quint16 tileSize)
 {
     this->setTileSize(tileSize);
@@ -176,6 +178,9 @@ void MapTileGraphicsObject::handleTileRetrieved(quint32 x, quint32 y, quint8 z)
     //We have to do this here since we can't use QPixmaps in non-GUI threads (i.e., MapTileSource)
     QPixmap * tile = new QPixmap();
     *tile = QPixmap::fromImage(*image);
+
+//?    QPainter painter(tile);
+//    painter.drawText(20, 20, "%1, %2, %3"_qt.arg(x).arg(y).arg(z) );
 
     //Delete the QImage
     delete image;
