@@ -71,10 +71,21 @@ quint8 OSMTileSource::maxZoomLevel(QPointF ll)
 
 QString OSMTileSource::name() const
 {
+ QString current_host = current_host_;
+
+ if(current_host.startsWith("https://"))
+   current_host = current_host.mid(8);
+ else if(current_host.startsWith("http://"))
+   current_host = current_host.mid(7);
+ current_host.replace('/', '>')
+   .replace('.', '<');
+
+ //?.replace(':', '$')
+
  switch(_tileType)
  {
  case OSMTiles:
-  return "OpenStreetMap-Tiles";
+  return "OpenStreetMap-Tiles~" + current_host;
   break;
 
  default:
@@ -95,6 +106,14 @@ QString OSMTileSource::tileFileExtension() const
 void OSMTileSource::fetchTile(quint32 x, quint32 y, quint8 z)
 {
  fetchTile(x, y, z, 0);
+}
+
+
+void OSMTileSource::update_host_cache()
+{
+ _pendingReplies.clear();
+ _pendingRequests.clear();
+ this->MapTileSource::update_host_cache();
 }
 
 
@@ -123,10 +142,6 @@ void OSMTileSource::fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate)
    }
   }
 
-//  hosts = QStringList{"https://b.tile.openstreetmap.org/"};
-//  urls = QStringList{"%1/%2/%3.png"};
-
-
  fetchURL = urls[alternate].arg(QString::number(z),
                                    QString::number(x),
                                    QString::number(y));
@@ -137,12 +152,10 @@ void OSMTileSource::fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate)
  cacheID += ":" + QString::number(alternate);
 
  if (_pendingRequests.contains(cacheID))
-  return;
+   return;
  _pendingRequests.insert(cacheID);
 
  //Build the request
-
-
  qDebug() << "fetchURL = " << (hosts[alternate] + fetchURL);
 
  QNetworkRequest request(QUrl(hosts[alternate] + fetchURL));

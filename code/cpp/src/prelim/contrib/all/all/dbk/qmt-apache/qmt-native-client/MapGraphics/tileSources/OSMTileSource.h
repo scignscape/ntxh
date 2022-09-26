@@ -43,6 +43,9 @@ protected:
                         quint32 y,
                         quint8 z);
 
+ virtual void update_host_cache() Q_DECL_OVERRIDE;
+
+
  void fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate);
 
 

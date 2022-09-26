@@ -199,6 +199,8 @@ Tile_Server_Select_Dialog::Tile_Server_Select_Dialog(QString current_host, QWidg
 
 //top_buttons_layout_->addWidget(take_screenshot_button_);
 
+//?  https://www.openstreetmap.org/#map=16/40.8561/-73.9780&layers=T
+
 //   hosts = QStringList{"http://b.tile.openstreetmap.org/"};
 //   urls = QStringList{"%1/%2/%3.png"};
 

@@ -64,9 +64,11 @@ Lanternfly_Main_Window::Lanternfly_Main_Window(QWidget *parent) :
 
  lfr->set_tile_source(composite);
 
- composite->set_current_host("https://b.tile.openstreetmap.org/");
+ composite->set_current_host("https://b.tile.openstreetmap.fr/hot/");
+//? composite->set_current_host("https://b.tile.openstreetmap.org/");
  composite->set_current_url("%1/%2/%3.png");
  composite->update_hosts();
+ composite->update_host_cache();
 
  lfr->set_view_zoom_level(12);
  //view->setZoomLevel(12);

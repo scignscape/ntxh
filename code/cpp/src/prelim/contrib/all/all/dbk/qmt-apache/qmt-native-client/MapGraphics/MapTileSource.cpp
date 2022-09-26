@@ -11,7 +11,8 @@ const quint32 DEFAULT_CACHE_DAYS = 7;
 const quint64 MAX_DISK_CACHE_READ_ATTEMPTS = 100000;
 
 MapTileSource::MapTileSource() :
-  QObject(), _cacheExpirationsLoaded(false)
+  QObject(), _cacheExpirationsLoaded(false),
+  current_cache_({nullptr, nullptr, nullptr, {}})
 {
  this->setCacheMode(DiskAndMemCaching);
 
@@ -32,9 +33,68 @@ MapTileSource::MapTileSource() :
          SLOT(clearTempCache()));
 }
 
+void MapTileSource::update_host_cache()
+{
+// if(cacheMode() == NoCaching)
+//   return;
+
+ if(current_cache_.expirations_hash)
+   this->saveCacheExpirationsToDisk();
+
+ _cacheExpirationsLoaded = false;
+
+ auto it = caches_.find(current_host_);
+ if(it == caches_.end())
+ {
+  current_cache_ = _Cache { current_host_,
+    new QCache<QString, QImage>,
+    cacheMode() == NoCaching? nullptr : new QCache<QString, QImage>,
+    cacheMode() == NoCaching? nullptr : new QHash<QString, QDateTime>, {}
+  };
+  caches_[current_host_] = current_cache_;
+ }
+ else
+   current_cache_ = it.value();
+
+ if(cacheMode() != NoCaching)
+   loadCacheExpirationsFromDisk();
+
+// _Cache c = caches_.value(current_host_);
+// QCache<QString, QImage>* mem = memory_caches_.value(current_host_);
+// if(!mem)
+// {
+//  mem = new QCache<QString, QImage>;
+//  memory_caches_[current_host_] = mem;
+// }
+// current_cache_.memory_cache = mem;
+
+// QCache<QString, QImage>* temp = temp_caches_.value(current_host_);
+// if(!temp)
+// {
+//  temp = new QCache<QString, QImage>;
+//  temp_caches_[current_host_] = mem;
+// }
+// current_temp_cache_ = mem;
+
+   //*temp;
+
+// auto it = memory_caches_.find(current_host_);
+// if(it == memory_caches_.end())
+// {
+//  mem = new
+// }
+}
+
 MapTileSource::~MapTileSource()
 {
  this->saveCacheExpirationsToDisk();
+
+ for(_Cache c : caches_)
+ {
+  delete c.expirations_hash;
+  delete c.temp_cache;
+  delete c.memory_cache;
+ }
 }
 
 void MapTileSource::requestTile(quint32 x, quint32 y, quint8 z)
@@ -50,12 +110,12 @@ QImage *MapTileSource::getFinishedTile(quint32 x, quint32 y, quint8 z)
 {
  const QString cacheID = MapTileSource::createCacheID(x,y,z);
  QMutexLocker lock(&_tempCacheLock);
- if (!_tempCache.contains(cacheID))
+ if (!current_cache_.temp_cache->contains(cacheID))
  {
   qWarning() << "getFinishedTile() called, but the tile is not present";
   return 0;
  }
- return _tempCache.take(cacheID);
+ return current_cache_.temp_cache->take(cacheID);
 }
 
 MapTileSource::CacheMode MapTileSource::cacheMode() const
@@ -75,7 +135,7 @@ void MapTileSource::startTileRequest(quint32 x, quint32 y, quint8 z)
  if (this->cacheMode() == DiskAndMemCaching)
  {
   const QString cacheID = MapTileSource::createCacheID(x,y,z);
-  QImage * cached = this->fromMemCache(cacheID);
+  QImage* cached = this->fromMemCache(cacheID);
   if (!cached)
    cached = this->fromDiskCache(cacheID);
 
@@ -94,7 +154,8 @@ void MapTileSource::startTileRequest(quint32 x, quint32 y, quint8 z)
 //private slot
 void MapTileSource::clearTempCache()
 {
- _tempCache.clear();
+ if(current_cache_.temp_cache)
+   current_cache_.temp_cache->clear();
 }
 
 //protected static
@@ -126,11 +187,11 @@ bool MapTileSource::cacheID2xyz(const QString & string, quint32 *x, quint32 *y, 
  return ok;
 }
 
-QImage *MapTileSource::fromMemCache(const QString &cacheID)
+QImage* MapTileSource::fromMemCache(const QString &cacheID)
 {
- QImage * toRet = 0;
+ QImage* toRet = 0;
 
- if (_memoryCache.contains(cacheID))
+ if (current_cache_.memory_cache->contains(cacheID))
  {
   //Figure out when the tile we're loading from cache was supposed to expire
   QDateTime expireTime = this->getTileExpirationTime(cacheID);
@@ -138,12 +199,12 @@ QImage *MapTileSource::fromMemCache(const QString &cacheID)
   //If the cached tile is older than we would like, throw it out
   if (QDateTime::currentDateTimeUtc().secsTo(expireTime) <= 0)
   {
-   _memoryCache.remove(cacheID);
+   current_cache_.memory_cache->remove(cacheID);
   }
   //Otherwise, make a copy of the cached tile and return it to the caller
   else
   {
-   toRet = new QImage(*_memoryCache.object(cacheID));
+   toRet = new QImage(*current_cache_.memory_cache->object(cacheID));
   }
  }
 
@@ -155,7 +216,7 @@ void MapTileSource::toMemCache(const QString &cacheID, QImage *toCache, const QD
  if (toCache == 0)
   return;
 
- if (_memoryCache.contains(cacheID))
+ if (current_cache_.memory_cache->contains(cacheID))
   return;
 
  //Note when the tile will expire
@@ -163,7 +224,7 @@ void MapTileSource::toMemCache(const QString &cacheID, QImage *toCache, const QD
 
  //Make a copy of the QImage
  QImage * copy = new QImage(*toCache);
- _memoryCache.insert(cacheID,copy);
+ current_cache_.memory_cache->insert(cacheID,copy);
 }
 
 QImage *MapTileSource::fromDiskCache(const QString &cacheID)
@@ -255,7 +316,7 @@ void MapTileSource::prepareRetrievedTile(quint32 x, quint32 y, quint8 z, QImage 
 
  //Put it into the "temporary retrieval cache" so the user can grab it
  QMutexLocker lock(&_tempCacheLock);
- _tempCache.insert(MapTileSource::createCacheID(x,y,z),
+ current_cache_.temp_cache->insert(MapTileSource::createCacheID(x,y,z),
                    image);
  /*
       We must explicitly unlock the mutex before emitting tileRetrieved in case
@@ -290,13 +351,13 @@ QDateTime MapTileSource::getTileExpirationTime(const QString &cacheID)
  this->loadCacheExpirationsFromDisk();
 
  QDateTime expireTime;
- if (_cacheExpirations.contains(cacheID))
-  expireTime = _cacheExpirations.value(cacheID);
+ if (current_cache_.expirations_hash->contains(cacheID))
+  expireTime = current_cache_.expirations_hash->value(cacheID);
  else
  {
   qWarning() << "Tile" << cacheID << "has unknown expire time. Resetting to default of" << DEFAULT_CACHE_DAYS << "days.";
   expireTime = QDateTime::currentDateTimeUtc().addDays(DEFAULT_CACHE_DAYS);
-  _cacheExpirations.insert(cacheID,expireTime);
+  current_cache_.expirations_hash->insert(cacheID,expireTime);
  }
 
  return expireTime;
@@ -314,7 +375,7 @@ void MapTileSource::setTileExpirationTime(const QString &cacheID, QDateTime expi
   expireTime = QDateTime::currentDateTimeUtc().addDays(DEFAULT_CACHE_DAYS);
  }
 
- _cacheExpirations.insert(cacheID, expireTime);
+ current_cache_.expirations_hash->insert(cacheID, expireTime);
 }
 
 //private
@@ -338,6 +399,14 @@ QString MapTileSource::getDiskCacheFile(quint32 x, quint32 y, quint8 z) const
  return toRet;
 }
 
+
+QString MapTileSource::make_cache_expirations_file_path()
+{
+ QDir dir = this->getDiskCacheDirectory(0,0,0);
+ QString path = dir.absolutePath() % "/" % "cacheExpirations.db";
+ return path;
+}
+
 //private
 void MapTileSource::loadCacheExpirationsFromDisk()
 {
@@ -347,13 +416,11 @@ void MapTileSource::loadCacheExpirationsFromDisk()
  //If we try to do this and succeed or even fail, don't try again
  _cacheExpirationsLoaded = true;
 
- QDir dir = this->getDiskCacheDirectory(0,0,0);
- QString path = dir.absolutePath() % "/" % "cacheExpirations.db";
- _cacheExpirationsFile = path;
+ QString path = make_cache_expirations_file_path();
 
  QFile fp(path);
  if (!fp.exists())
-  return;
+   return;
 
  if (!fp.open(QIODevice::ReadOnly))
  {
@@ -361,16 +428,18 @@ void MapTileSource::loadCacheExpirationsFromDisk()
   return;
  }
 
+ current_cache_.expirations_file = path;
+
  QDataStream stream(&fp);
- stream >> _cacheExpirations;
+ stream >> *current_cache_.expirations_hash;
 }
 
 void MapTileSource::saveCacheExpirationsToDisk()
 {
- if (!_cacheExpirationsLoaded || _cacheExpirationsFile.isEmpty())
+ if (!_cacheExpirationsLoaded || current_cache_.expirations_file.isEmpty())
   return;
 
- QFile fp(_cacheExpirationsFile);
+ QFile fp(current_cache_.expirations_file);
 
  if (!fp.open(QIODevice::Truncate | QIODevice::WriteOnly))
  {
@@ -379,6 +448,6 @@ void MapTileSource::saveCacheExpirationsToDisk()
  }
 
  QDataStream stream(&fp);
- stream << _cacheExpirations;
- qDebug() << "Cache expirations saved to" << _cacheExpirationsFile;
+ stream << *current_cache_.expirations_hash;
+ qDebug() << "Cache expirations saved to" << current_cache_.expirations_file;
 }

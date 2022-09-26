@@ -25,102 +25,110 @@
 
 class Main_Window_Controller;
 
+class QMT_Client_Layer_Base;
+
 
 class MAPGRAPHICSSHARED_EXPORT MapGraphicsView : public QWidget, public PrivateQGraphicsInfoSource
 {
-    Q_OBJECT
+ Q_OBJECT
 public:
-    enum DragMode
-    {
-        NoDrag,
-        ScrollHandDrag,
-        RubberBandDrag
-    };
+ enum DragMode
+ {
+  NoDrag,
+  ScrollHandDrag,
+  RubberBandDrag
+ };
 
-    enum ZoomMode
-    {
-        CenterZoom,
-        MouseZoom
-    };
+ enum ZoomMode
+ {
+  CenterZoom,
+  MouseZoom,
+  Force_Reset
+ };
 
 public:
-    explicit MapGraphicsView(MapGraphicsScene * scene=0, QWidget * parent = 0);
-    virtual ~MapGraphicsView();
+ explicit MapGraphicsView(MapGraphicsScene * scene=0, QWidget * parent = 0);
+ virtual ~MapGraphicsView();
 
-    QPointF center() const;
-    void centerOn(const QPointF& pos);
-    void centerOn(qreal longitude, qreal latitude);
-    void centerOn(const MapGraphicsObject * item);
+ QPointF center() const;
+ void centerOn(const QPointF& pos);
+ void centerOn(qreal longitude, qreal latitude);
+ void centerOn(const MapGraphicsObject * item);
 
-    QPointF mapToScene(const QPoint viewPos) const;
+ void force_reset();
 
-    MapGraphicsView::DragMode dragMode() const;
-    void setDragMode(MapGraphicsView::DragMode);
+ QPointF mapToScene(const QPoint viewPos) const;
 
-    MapGraphicsScene * scene() const;
-    void setScene(MapGraphicsScene *);
+ MapGraphicsView::DragMode dragMode() const;
+ void setDragMode(MapGraphicsView::DragMode);
 
-    //pure-virtual from PrivateQGraphicsInfoSource
-    QSharedPointer<MapTileSource> tileSource() const;
+ MapGraphicsScene * scene() const;
+ void setScene(MapGraphicsScene *);
 
-    /**
+ //pure-virtual from PrivateQGraphicsInfoSource
+ QSharedPointer<MapTileSource> tileSource() const;
+
+ /**
      * @brief Sets the tile source that this view will pull from.
      * MapGraphicsView does NOT take ownership of the tile source.
      *
      * @param tSource
      */
-    void setTileSource(QSharedPointer<MapTileSource> tSource);
+ void setTileSource(QSharedPointer<MapTileSource> tSource);
 
-    //pure-virtual from PrivateQGraphicsInfoSource
-    quint8 zoomLevel() const;
-    void setZoomLevel(quint8 nZoom, ZoomMode zMode = CenterZoom);
+ //pure-virtual from PrivateQGraphicsInfoSource
+ quint8 zoomLevel() const;
+ void setZoomLevel(quint8 nZoom, ZoomMode zMode = CenterZoom);
 
-    void zoomIn(ZoomMode zMode = CenterZoom);
-    void zoomOut(ZoomMode zMode = CenterZoom);
+ void zoomIn(ZoomMode zMode = CenterZoom);
+ void zoomOut(ZoomMode zMode = CenterZoom);
 
-    void rotate(qreal rotation);
+ void rotate(qreal rotation);
 
-    std::function<void (const QPointF&)> coords_notify_callback_;
-    
+ std::function<void (const QPointF&)> coords_notify_callback_;
+
 signals:
-    void zoomLevelChanged(quint8 nZoom);
-    
+ void zoomLevelChanged(quint8 nZoom);
+
 public slots:
 
 protected slots:
-    virtual void handleChildMouseDoubleClick(QMouseEvent * event);
-    virtual void handleChildMouseMove(QMouseEvent * event);
-    virtual void handleChildMousePress(QMouseEvent * event);
-    virtual void handleChildMouseRelease(QMouseEvent * event);
-    virtual void handleChildViewContextMenu(QContextMenuEvent * event);
-    virtual void handleChildViewScrollWheel(QWheelEvent * event);
+ virtual void handleChildMouseDoubleClick(QMouseEvent * event);
+ virtual void handleChildMouseMove(QMouseEvent * event);
+ virtual void handleChildMousePress(QMouseEvent * event);
+ virtual void handleChildMouseRelease(QMouseEvent * event);
+ virtual void handleChildViewContextMenu(QContextMenuEvent * event);
+ virtual void handleChildViewScrollWheel(QWheelEvent * event);
 
 private slots:
-    void renderTiles();
+ void renderTiles();
 
 protected:
-    void doTileLayout();
-    void resetQGSSceneSize();
+ void doTileLayout();
+ void resetQGSSceneSize();
 
 private:
-    QPointer<MapGraphicsScene> _scene;
-    QPointer<QGraphicsView> _childView;
-    QPointer<QGraphicsScene> _childScene;
-    QSharedPointer<MapTileSource> _tileSource;
+ QPointer<MapGraphicsScene> _scene;
+ QPointer<QGraphicsView> _childView;
+ QPointer<QGraphicsScene> _childScene;
+ QSharedPointer<MapTileSource> _tileSource;
 
-    QSet<MapTileGraphicsObject *> _tileObjects;
+ QSet<MapTileGraphicsObject *> _tileObjects;
 
-    quint8 _zoomLevel;
+ quint8 _zoomLevel;
 
-    DragMode _dragMode;
+ DragMode _dragMode;
 
-    Main_Window_Controller* main_window_controller_;
+ Main_Window_Controller* main_window_controller_;
+
+ QMT_Client_Layer_Base* qmt_client_layer_base_;
+
 };
 
 inline uint qHash(const QPointF& key)
 {
-    const QString temp = QString::number(key.x()) % "," % QString::number(key.y());
-    return qHash(temp);
+ const QString temp = QString::number(key.x()) % "," % QString::number(key.y());
+ return qHash(temp);
 }
 
 #endif // MAPGRAPHICSVIEW_H

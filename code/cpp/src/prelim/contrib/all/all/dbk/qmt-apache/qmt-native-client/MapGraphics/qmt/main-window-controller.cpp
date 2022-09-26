@@ -47,6 +47,9 @@ void Main_Window_Controller::reset_map_style(QPoint qp)
    // mts->set_current_local_host(summary);
 
   mts->update_hosts();
+  mts->update_host_cache();
+
+  view_->force_reset();
 
   dlg->close();
  });

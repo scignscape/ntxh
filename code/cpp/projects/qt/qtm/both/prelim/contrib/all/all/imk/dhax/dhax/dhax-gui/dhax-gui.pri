@@ -280,17 +280,18 @@ SOURCES += \
   $$SRC_DIR/edge-detection/edge-detection-dialog.cpp \
 
 
-QFontIcon_SRC_DIR = $$SRC_ROOT_DIR/external/QFontIcon-master/QFontIcon
+QFontIcon_SRC_DIR = $$SRC_CONTRIB_DIR/external/QFontIcon-master/QFontIcon
 INCLUDEPATH += $$QFontIcon_SRC_DIR/../
 HEADERS += $$QFontIcon_SRC_DIR/qfonticon.h
 SOURCES += $$QFontIcon_SRC_DIR/qfonticon.cpp
 RESOURCES += $$QFontIcon_SRC_DIR/../resource.qrc
 
 
-QtColorWidgets_SRC_DIR = $$SRC_ROOT_DIR/external/Qt-Color-Widgets-master
+QtColorWidgets_SRC_DIR = $$SRC_CONTRIB_DIR/external/Qt-Color-Widgets-master
 INCLUDEPATH += $$QtColorWidgets_SRC_DIR/include
 FORMS += $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_dialog.ui
 
+message($$SRC_ROOT_DIR/external)
 
 #FORMS += $$SRC_DIR/edge-detection/edge-detection-dialog.ui \
 

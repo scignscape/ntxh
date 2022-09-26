@@ -1,5 +1,5 @@
-#ifndef MAPTILESOURCE_H
-#define MAPTILESOURCE_H
+#ifndef MAPTILESOURCE__H
+#define MAPTILESOURCE__H
 
 #include <QObject>
 #include <QPoint>
@@ -12,6 +12,8 @@
 #include <QFile>
 #include <QHash>
 
+#include <QMap>
+
 #include "accessors.h"
 
 #include "MapGraphics_global.h"
@@ -19,12 +21,15 @@
 class MAPGRAPHICSSHARED_EXPORT MapTileSource : public QObject
 {
  Q_OBJECT
+
 public:
+
  /**
      * @brief Enum used to describe how a MapTileSource should cache tiles, if at all. NoCaching does not
      * cache tiles at all. DiskAndMemCaching caches tiles on disk and in RAM
      *
      */
+
  enum CacheMode
  {
   NoCaching,
@@ -32,6 +37,7 @@ public:
  };
 
 public:
+
  explicit MapTileSource();
  virtual ~MapTileSource();
 
@@ -40,6 +46,8 @@ public:
  ACCESSORS(QString ,current_local_host)
 
  virtual void update_hosts() {};
+
+ virtual void update_host_cache();
 
  /**
      * @brief Causes the MapTileSource to request the tile (x,y) at zoom level z.
@@ -62,7 +70,7 @@ public:
      * @param z
      * @return QImage
      */
- QImage * getFinishedTile(quint32 x, quint32 y, quint8 z);
+ QImage* getFinishedTile(quint32 x, quint32 y, quint8 z);
 
  MapTileSource::CacheMode cacheMode() const;
 
@@ -312,6 +320,8 @@ private:
 
  void saveCacheExpirationsToDisk();
 
+ QString make_cache_expirations_file_path();
+
  bool _cacheExpirationsLoaded;
 
  /*
@@ -319,18 +329,33 @@ private:
       When we're destructing and need to serialize out we can use this instead of
       foolishly trying to call a pure-virtual method (name()) from the destructor
     */
- QString _cacheExpirationsFile;
 
  MapTileSource::CacheMode _cacheMode;
 
- //Temporary cache for QImage tiles waiting for the client to take them
- QCache<QString, QImage> _tempCache;
+// //Temporary cache for QImage tiles waiting for the client to take them
+// QCache<QString, QImage>* current_temp_cache_;
+// //The "real" cache, where tiles are saved in memory so we don't download them again
+// QCache<QString, QImage>* current_memory_cache_;
+
+ struct _Cache {
+   // //  the host is (at least for now) only for debugging purposes,
+    //    to see the origin of these caches ...
+   QString host;
+   QCache<QString, QImage>* temp_cache;
+   QCache<QString, QImage>* memory_cache;
+   QHash<QString, QDateTime>* expirations_hash;
+   QString expirations_file;
+ };
+
+ QMap<QString, _Cache> caches_;
+
+ _Cache current_cache_;
+
  QMutex _tempCacheLock;
 
- //The "real" cache, where tiles are saved in memory so we don't download them again
- QCache<QString, QImage> _memoryCache;
+// QMap<QString, QCache<QString, QImage>*> memory_caches_;
+// QString current_cache_expirations_file_;
 
- QHash<QString, QDateTime> _cacheExpirations;
 
 };
 

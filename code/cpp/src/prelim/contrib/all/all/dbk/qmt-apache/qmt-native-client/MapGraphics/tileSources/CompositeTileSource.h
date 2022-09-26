@@ -54,6 +54,7 @@ public:
     void setEnabledFlag(int index, bool isEnabled);
 
     virtual void update_hosts() Q_DECL_OVERRIDE;
+    virtual void update_host_cache() Q_DECL_OVERRIDE;
 
 
 protected:

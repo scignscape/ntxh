@@ -146,6 +146,12 @@ void MapTileGraphicsObject::setTileSource(QSharedPointer<MapTileSource> nSource)
     this->handleTileInvalidation();
 }
 
+void MapTileGraphicsObject::reset_tile_source()
+{
+ handleTileInvalidation();
+}
+
+
 //private slot
 void MapTileGraphicsObject::handleTileRetrieved(quint32 x, quint32 y, quint8 z)
 {

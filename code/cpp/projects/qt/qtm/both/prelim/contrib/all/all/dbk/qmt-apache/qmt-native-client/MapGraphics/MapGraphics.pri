@@ -7,6 +7,8 @@
 
 QT += network sql location widgets
 
+QT += webenginewidgets
+
 TEMPLATE = lib
 
 DEFINES += MAPGRAPHICS_LIBRARY
@@ -42,7 +44,11 @@ SOURCES += \
   $$SRC_DIR/LineObject.cpp \
   $$SRC_DIR/qmt/main-window-controller.cpp \
   $$SRC_DIR/qmt/qmt-gis-utils.cpp \
+  $$SRC_DIR/qmt/qmt-client-layer-base.cpp \
   $$SRC_DIR/dialogs/tile-server-select-dialog.cpp \
+  $$SRC_DIR/web-engine/qmt-web-engine-page.cpp \
+  $$SRC_DIR/web-engine/qmt-web-engine-view.cpp \
+  $$SRC_DIR/web-engine/qmt-my-page.cpp \
 
 
 HEADERS += \
@@ -70,9 +76,13 @@ HEADERS += \
   $$SRC_DIR/LineObject.h \
   $$SRC_DIR/qmt/main-window-controller.h \
   $$SRC_DIR/qmt/qmt-gis-utils.h \
+  $$SRC_DIR/qmt/qmt-client-layer-base.h \
   $$SRC_DIR/dialogs/tile-server-select-dialog.h \
   $$SRC_DIR/dialogs/nlohmann-fifo-map.h \
-
+  $$SRC_DIR/web-engine/qmt-web-engine-page.h \
+  $$SRC_DIR/web-engine/qmt-web-engine-view.h \
+  $$SRC_DIR/web-engine/qmt-my-page.h \
+  $$SRC_DIR/web-engine/qmt-client-layer-base.h \
 
 
 

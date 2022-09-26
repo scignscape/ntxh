@@ -38,8 +38,7 @@ HEADERS += \
   $$SRC_DIR/lanternfly/lanternfly-sighting-dialog.h \
   $$SRC_DIR/lanternfly/lanternfly-configuration-dialog.h \
   $$SRC_DIR/lanternfly/lanternfly-sighting-filter-dialog.h \
-
-
+  $$SRC_DIR/qmt-client-layer.h \
 
 
 SOURCES += \
@@ -49,6 +48,7 @@ SOURCES += \
   $$SRC_DIR/lanternfly/lanternfly-sighting-filter-dialog.cpp \
   $$SRC_DIR/main-window.cpp \
   $$SRC_DIR/main.cpp \
+  $$SRC_DIR/qmt-client-layer.cpp \
 
 
 LIBS += -L$$TARGETSDIR -lMapGraphics

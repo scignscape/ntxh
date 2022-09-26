@@ -25,6 +25,8 @@ public:
     QSharedPointer<MapTileSource> tileSource() const;
     void setTileSource(QSharedPointer<MapTileSource>);
 
+    void reset_tile_source();
+
 
 private slots:
     void handleTileRetrieved(quint32 x, quint32 y, quint8 z);
