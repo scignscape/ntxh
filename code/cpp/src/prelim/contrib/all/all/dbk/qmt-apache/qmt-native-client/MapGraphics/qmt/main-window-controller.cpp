@@ -18,12 +18,23 @@
 #include <QGeoLocation>
 #include <QGeoAddress>
 
+#include <QFileDialog>
+
 #include <QDebug>
 
 Main_Window_Controller::Main_Window_Controller(MapGraphicsView* view)
-  :  view_(view)
+  :  view_(view), info_files_(_auto_new(info_files_))
 {
 
+}
+
+
+void Main_Window_Controller::load_bus_data()
+{
+ QString path = QFileDialog::getOpenFileName(view_, "Select File (it should match \"stops.txt\"", ROOT_FOLDER);
+ if(path.isEmpty())
+   return;
+ set_info_file("bus", path);
 }
 
 void Main_Window_Controller::reset_map_style(QPoint qp)
@@ -103,7 +114,7 @@ void Main_Window_Controller::llcoords_to_street_address(QPoint qp)
        .arg(ll.x()).arg(ll.y()).arg(address.city()).arg(address.country()));
    mbox.setDetailedText(address_string);
 
-   mbox.exec();
+   mbox.show();
   }
   else
   {

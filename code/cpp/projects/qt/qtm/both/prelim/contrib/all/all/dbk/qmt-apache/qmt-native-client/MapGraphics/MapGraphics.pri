@@ -15,6 +15,8 @@ DEFINES += MAPGRAPHICS_LIBRARY
 
 DEFINES += SCREENSHOTS_FOLDER=\\\"../screenshots\\\"
 
+DEFINES += ROOT_FOLDER=\\\"$${ROOT_DIR}\\\"
+
 CONFIG += c++17
 
 INCLUDEPATH += $$SRC_PROSET_DIR
@@ -45,6 +47,7 @@ SOURCES += \
   $$SRC_DIR/qmt/main-window-controller.cpp \
   $$SRC_DIR/qmt/qmt-gis-utils.cpp \
   $$SRC_DIR/qmt/qmt-client-layer-base.cpp \
+  $$SRC_DIR/qmt/qmt-client-context-menu-handler-base.cpp \
   $$SRC_DIR/dialogs/tile-server-select-dialog.cpp \
   $$SRC_DIR/web-engine/qmt-web-engine-page.cpp \
   $$SRC_DIR/web-engine/qmt-web-engine-view.cpp \
@@ -77,14 +80,12 @@ HEADERS += \
   $$SRC_DIR/qmt/main-window-controller.h \
   $$SRC_DIR/qmt/qmt-gis-utils.h \
   $$SRC_DIR/qmt/qmt-client-layer-base.h \
+  $$SRC_DIR/qmt/qmt-client-context-menu-handler-base.h \
   $$SRC_DIR/dialogs/tile-server-select-dialog.h \
   $$SRC_DIR/dialogs/nlohmann-fifo-map.h \
   $$SRC_DIR/web-engine/qmt-web-engine-page.h \
   $$SRC_DIR/web-engine/qmt-web-engine-view.h \
   $$SRC_DIR/web-engine/qmt-my-page.h \
-  $$SRC_DIR/web-engine/qmt-client-layer-base.h \
-
-
 
 
 HEADERS += \

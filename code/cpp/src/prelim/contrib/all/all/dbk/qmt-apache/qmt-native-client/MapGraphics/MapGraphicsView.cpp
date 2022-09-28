@@ -26,6 +26,7 @@
 #include "qmt/main-window-controller.h"
 
 #include "qmt/qmt-client-layer-base.h"
+#include "qmt/qmt-client-context-menu-handler-base.h"
 
 #include "web-engine/qmt-web-engine-view.h"
 #include "web-engine/qmt-web-engine-page.h"
@@ -66,28 +67,39 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
    main_window_controller_->llcoords_to_street_address(qp);
   });
 
-  menu->addAction("Bus", [this, qp]()
+  menu->addAction("Load Bus Data", [this]()
+  {
+   main_window_controller_->load_bus_data();
+  });
+
+  menu->addAction("Find Bus Stops", [this, qp]()
   {
    QPointF ll = mapToScene(qp);
-   QString path = "/home/nlevisrael/gits/acle/bus_data/stops.txt";
+   QString path = main_window_controller_->get_info_file("bus");  //"/home/nlevisrael/gits/acle/bus_data/stops.txt";
    QFile infile(path);
 
    //QVector<QPair<QStringList, QPointF>> stops(10);
-   QVector<QByteArray> stops(10);
-   QVector<double> deltas(10);
+   if(!infile.open(QIODevice::ReadOnly))
+     return;
 
-   //double deltas[10];
-   double max_delta = 0;
-   u1 max_delta_index = 0;
-   u1 stops_active_size = 0;
-   u1 stops_max_size = stops.size();
+   static u1 stops_size = 20;
 
-   if(infile.open(QIODevice::ReadOnly))
+   QVector<QByteArray> stops(stops_size);
+   QVector<double> deltas(stops_size);
+
+   // // get stops_size closest stops
+    //   presumably this will be a separate procedure
    {
+    double max_delta = 0;
+    u1 max_delta_index = 0;
+    u1 stops_active_size = 0;
+    u1 stops_max_size = stops.size();
+
+
     //u1 count = 0;
     if(!infile.atEnd())
-      // //  read the header line
-      infile.readLine();
+     // //  read the header line
+     infile.readLine();
     while(!infile.atEnd())
     {
      QByteArray qba = infile.readLine();
@@ -116,7 +128,7 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
      else if(len < max_delta)
      {
       // //  replace the most distant match
-       //    don't bother sorting, we'll just calculate the new largest distance
+      //    don't bother sorting, we'll just calculate the new largest distance
       stops[max_delta_index] = qba;
       deltas[max_delta_index] = len;
       auto it = std::max_element(deltas.begin(), deltas.end());
@@ -124,84 +136,104 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
       max_delta = *it;
      }
     }
-    infile.close();
    }
+   infile.close();
 
    u1 index = 0;
    QVector<QPair<QList<r8>, QStringList>> info(stops.length());
    std::transform(stops.begin(), stops.end(), info.begin(),
-    [&deltas, &index] (const QByteArray qba) -> decltype (info.value(0))
+                  [&deltas, &index] (const QByteArray qba) -> decltype (info.value(0))
    {
     QList<QByteArray> fields = qba.split(',');
-    return {{ fields[5].toDouble(), fields[4].toDouble(), deltas[index++] },
-            { QString::fromLatin1(fields[0]),
-              QString::fromLatin1(fields[1]),QString::fromLatin1(fields[2]),
-              QString::fromLatin1(fields[3]) },
-            };
+    return {{ fields[4].toDouble(), fields[5].toDouble(), deltas[index++] },
+     { "", QString::fromLatin1(fields[0]),
+        QString::fromLatin1(fields[1]),QString::fromLatin1(fields[2]),
+        QString::fromLatin1(fields[3]) },
+    };
    });
    std::sort(info.begin(), info.end(), [](QPair<QList<r8>, QStringList>& lhs, QPair<QList<r8>, QStringList>& rhs)
    {
     return lhs.second[2] < rhs.second[2];
    });
+
+   if(!qmt_client_layer_base_->adopt_style("bus-stop"))
+   {
+    qreal diamond_scale = 4;
+    QPointF diamond_adj{0, 0};
+
+    QPolygonF diamond;// = new QPolygonF;
+    diamond << QPointF(-20, 110)/diamond_scale + diamond_adj;
+    diamond << QPointF(20, 110)/diamond_scale + diamond_adj;
+    diamond << QPointF(110, 20)/diamond_scale + diamond_adj;
+    diamond << QPointF(110, -20)/diamond_scale + diamond_adj;
+    diamond << QPointF(20, -110)/diamond_scale + diamond_adj;
+    diamond << QPointF(-20, -110)/diamond_scale + diamond_adj;
+    diamond << QPointF(-110, -20)/diamond_scale + diamond_adj;
+    diamond << QPointF(-110, 20)/diamond_scale + diamond_adj;
+    qmt_client_layer_base_->define_and_adopt_style("bus-stop",
+      "handle_bus_stop_context_menu",
+      {QColor(201, 159, 34)}, diamond); // 80, 105, 155
+   }
+
    qmt_client_layer_base_->add_d0_marks(info);
   });
 
-    menu->addAction("Composite", [this, qp]()
-    {
-     QPointF ll = mapToScene(qp);
-     u1 zl = zoomLevel();
+  menu->addAction("Show Bus Routes", [this, qp]()
+  {
+   QPointF ll = mapToScene(qp);
+   u1 zl = zoomLevel();
 
-     QMT_Web_Engine_View* wev = new QMT_Web_Engine_View(nullptr);
+   QMT_Web_Engine_View* wev = new QMT_Web_Engine_View(nullptr);
 
-     QMT_Web_Engine_Page* wep = new QMT_Web_Engine_Page(nullptr);
+   QMT_Web_Engine_Page* wep = new QMT_Web_Engine_Page(nullptr);
 
-     QObject::connect(wep, &QMT_Web_Engine_Page::urlChanged,[this](const QUrl &url){
-      qDebug() << "r:" << url.toString();
-      //? check_url_patterns(url.toString().prepend("urlChanged!"));
-     });
+   QObject::connect(wep, &QMT_Web_Engine_Page::urlChanged,[this](const QUrl &url){
+    qDebug() << "r:" << url.toString();
+    //? check_url_patterns(url.toString().prepend("urlChanged!"));
+   });
 
-     QObject::connect(wep, &QMT_Web_Engine_Page::navRequest,[this](const QUrl &url){
-      qDebug() << "req:" << url.toString();
-      //? check_url_patterns(url.toString().prepend("navRequest!"));
-     });
-
-
-     QObject::connect(wep, &QMT_Web_Engine_Page::linkHovered,[](const QUrl &url){
-      qDebug() << "H:" << url.toString();
-     });
+   QObject::connect(wep, &QMT_Web_Engine_Page::navRequest,[this](const QUrl &url){
+    qDebug() << "req:" << url.toString();
+    //? check_url_patterns(url.toString().prepend("navRequest!"));
+   });
 
 
-//     wev->page()->load(QUrl("https://www.openstreetmap.org/#map=%1/%2/%3&layers=T"_qt
-//       .arg(zl).arg(ll.y()).arg(ll.x())));
-//     wev->setPage(wep);
-
-     QMT_My_Page* myp = new QMT_My_Page;
-     QWebChannel* channel = new QWebChannel(wev);
-     channel->registerObject(QStringLiteral("content"), myp);
-     wep->setWebChannel(channel);
-
-     wev->setPage(wep);
-
-     wep->load(QUrl("https://www.openstreetmap.org/#map=%1/%2/%3&layers=T"_qt
-       .arg(zl).arg(ll.y()).arg(ll.x())));
-
-     //wep->show();
-     wev->show();
-    });
+   QObject::connect(wep, &QMT_Web_Engine_Page::linkHovered,[](const QUrl &url){
+    qDebug() << "H:" << url.toString();
+   });
 
 
+   //     wev->page()->load(QUrl("https://www.openstreetmap.org/#map=%1/%2/%3&layers=T"_qt
+   //       .arg(zl).arg(ll.y()).arg(ll.x())));
+   //     wev->setPage(wep);
+
+   QMT_My_Page* myp = new QMT_My_Page;
+   QWebChannel* channel = new QWebChannel(wev);
+   channel->registerObject(QStringLiteral("content"), myp);
+   wep->setWebChannel(channel);
+
+   wev->setPage(wep);
+
+   wep->load(QUrl("https://www.openstreetmap.org/#map=%1/%2/%3&layers=T"_qt
+                  .arg(zl).arg(ll.y()).arg(ll.x())));
+
+   //wep->show();
+   wev->show();
+  });
 
 
-//?
-//  menu->addAction("Composite", [this, qp]()
-//  {
-//   QDialog* d = new QDialog;
-//   QVBoxLayout* v = new QVBoxLayout;
-//   CompositeTileSourceConfigurationWidget* w = new CompositeTileSourceConfigurationWidget;
-//   v->addWidget(w);
-//   d->setLayout(v);
-//   d->show();
-//  });
+
+
+  //?
+  //  menu->addAction("Composite", [this, qp]()
+  //  {
+  //   QDialog* d = new QDialog;
+  //   QVBoxLayout* v = new QVBoxLayout;
+  //   CompositeTileSourceConfigurationWidget* w = new CompositeTileSourceConfigurationWidget;
+  //   v->addWidget(w);
+  //   d->setLayout(v);
+  //   d->show();
+  //  });
 
 
   //     menu->addAction("Launch Configuration Dialog");
@@ -235,7 +267,16 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
 
   QPointF coords = this->mapToScene(qp);
 
+  qDebug() << "qp = " << qp;
+
   qDebug() << "coords = " << coords;
+
+  QPoint qp1 = this->map_ll_to_view(coords);
+
+//  QPoint qp2 = _childView->mapFromScene(qp1);
+
+  qDebug() << "qp1 = " << qp1;
+
 
  }
  );
@@ -283,10 +324,16 @@ MapGraphicsView::~MapGraphicsView()
    //We have to process events while it's shutting down in case it uses signals/slots to shut down
    //Hint: it does
    QCoreApplication::processEvents(QEventLoop::ExcludeSocketNotifiers | QEventLoop::ExcludeUserInputEvents);
-   if (++count == maxCount)
-    break;
+   if(++count == maxCount)
+     break;
   }
  }
+}
+
+
+void MapGraphicsView::handle_context_menu(QGraphicsSceneContextMenuEvent* event, MapGraphicsObject* mgo)
+{
+ qmt_client_context_menu_handler_base_->handle_context_menu_on_mgo(event, mgo);
 }
 
 QPointF MapGraphicsView::center() const
@@ -298,13 +345,32 @@ QPointF MapGraphicsView::center() const
 void MapGraphicsView::centerOn(const QPointF &pos)
 {
  if (_tileSource.isNull())
-  return;
+   return;
 
  //Find the QGraphicsScene coordinate of the position and then tell the childView to center there
  QPointF qgsPos = _tileSource->ll2qgs(pos,this->zoomLevel());
 
  _childView->centerOn(qgsPos);
 }
+
+QPointF MapGraphicsView::map_ll_to_scene(const QPointF &pos)
+{
+ if (_tileSource.isNull())
+   return {};
+
+ return _tileSource->ll2qgs(pos,this->zoomLevel());
+}
+
+
+QPoint MapGraphicsView::map_ll_to_view(const QPointF &pos)
+{
+ QPointF qp = map_ll_to_scene(pos);
+ if(qp.isNull())
+   return {};
+ return _childView->mapFromScene(qp.toPoint());
+}
+
+
 
 void MapGraphicsView::centerOn(qreal longitude, qreal latitude)
 {
@@ -460,7 +526,7 @@ void MapGraphicsView::setTileSource(QSharedPointer<MapTileSource> tSource)
 
  //Update our tile displays (if any) about the new tile source
  foreach(MapTileGraphicsObject* tileObject, _tileObjects)
-   tileObject->setTileSource(tSource);
+  tileObject->setTileSource(tSource);
 }
 
 quint8 MapGraphicsView::zoomLevel() const
@@ -472,7 +538,7 @@ quint8 MapGraphicsView::zoomLevel() const
 void MapGraphicsView::force_reset()
 {
  for(MapTileGraphicsObject* tileObject : _tileObjects)
-   tileObject->reset_tile_source();
+  tileObject->reset_tile_source();
 
  setZoomLevel(_zoomLevel, Force_Reset);
 }
@@ -497,7 +563,7 @@ void MapGraphicsView::setZoomLevel(quint8 nZoom, ZoomMode zMode)
   //Change the zoom level
   nZoom = qMin(_tileSource->maxZoomLevel(),qMax(_tileSource->minZoomLevel(),nZoom));
   if (nZoom == _zoomLevel)
-    return;
+   return;
  }
 
  _zoomLevel = nZoom;
@@ -506,17 +572,17 @@ void MapGraphicsView::setZoomLevel(quint8 nZoom, ZoomMode zMode)
  //foreach(MapTileGraphicsObject * tileObject, _tileObjects)
  for(MapTileGraphicsObject* tileObject : _tileObjects)
  {
-//  if(zMode == Force_Reset)
-//  {
-//   delete tileObject;
-//  }
-//  else
-    tileObject->setVisible(false);
+  //  if(zMode == Force_Reset)
+  //  {
+  //   delete tileObject;
+  //  }
+  //  else
+  tileObject->setVisible(false);
  }
 
-//?
-// if(zMode == Force_Reset)
-//   _tileObjects.clear();
+ //?
+ // if(zMode == Force_Reset)
+ //   _tileObjects.clear();
 
  //Make sure the QGraphicsScene is the right size
  this->resetQGSSceneSize();
@@ -530,7 +596,7 @@ void MapGraphicsView::setZoomLevel(quint8 nZoom, ZoomMode zMode)
  if ( (zMode == MouseZoom) || (zMode == Force_Reset) )
   _childView->centerOn(mousePoint);
  else
-   this->centerOn(centerGeoPos);
+  this->centerOn(centerGeoPos);
 
  //Make MapGraphicsObjects update
  this->zoomLevelChanged(nZoom);
@@ -736,3 +802,13 @@ void MapGraphicsView::resetQGSSceneSize()
  if (_childScene->sceneRect().width() != dimension)
   _childScene->setSceneRect(0,0,dimension,dimension);
 }
+
+
+//      qmt_client_layer_base_->define_and_adopt_style("bus-stop",
+//        typeid(QGraphicsEllipseItem),
+//        { QColor(34, 159, 201) }, {30} ); // 80, 105, 155
+
+//      qmt_client_layer_base_->define_and_adopt_style("bus-stop",
+//        typeid(QGraphicsPolygonItem),
+//        { QColor(34, 159, 201) }, {30} ); // 80, 105, 155
+

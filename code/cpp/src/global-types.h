@@ -24,6 +24,10 @@
 #include "enum-macros.h"
 
 
+#define _auto_new(obj) \
+  new std::remove_pointer<decltype(obj)>::type
+
+
 #define CLASS_NAME_FOLDER_FN_1(ty)  \
 inline QString class_name_folder(QString pre) \
 { \

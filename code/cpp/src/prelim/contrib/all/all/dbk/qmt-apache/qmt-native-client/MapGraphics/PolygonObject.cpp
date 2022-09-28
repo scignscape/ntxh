@@ -6,8 +6,8 @@
 #include <QtDebug>
 #include <QKeyEvent>
 
-PolygonObject::PolygonObject(QPolygonF geoPoly, QColor fillColor, QObject *parent) :
-    MapGraphicsObject(parent), _geoPoly(geoPoly), _fillColor(fillColor)
+PolygonObject::PolygonObject(MapGraphicsView* containing_view, QPolygonF geoPoly, QColor fillColor, QObject *parent) :
+    MapGraphicsObject(containing_view, parent), _geoPoly(geoPoly), _fillColor(fillColor)
 {
     this->setFlag(MapGraphicsObject::ObjectIsMovable);
     this->setFlag(MapGraphicsObject::ObjectIsSelectable,false);
@@ -313,7 +313,7 @@ void PolygonObject::fixAddVertexCirclePos()
 //private
 CircleObject *PolygonObject::constructEditCircle()
 {
-    CircleObject * toRet = new CircleObject(8);
+    CircleObject * toRet = new CircleObject(containing_view_, 8);
     connect(toRet,
             SIGNAL(posChanged()),
             this,
@@ -344,7 +344,7 @@ void PolygonObject::destroyEditCircle(MapGraphicsObject *obj)
 //private
 CircleObject *PolygonObject::constructAddVertexCircle()
 {
-    CircleObject * toRet = new CircleObject(3,
+    CircleObject * toRet = new CircleObject(containing_view_, 3,
                                             true,
                                             QColor(100,100,100,255));
     toRet->setFlag(MapGraphicsObject::ObjectIsMovable,false);

@@ -10,39 +10,56 @@
 #include <QGraphicsItem>
 #include <QString>
 
+#include <QVariant>
+
 #include "MapGraphics_global.h"
+
+#include "accessors.h"
+
+class MapGraphicsView;
+
+
 
 class MAPGRAPHICSSHARED_EXPORT MapGraphicsObject : public QObject
 {
-    Q_OBJECT
+ Q_OBJECT
+
+protected:
+ MapGraphicsView* containing_view_;
+ void* style_params_;
+ QVariant client_data_;
 
 public:
-    enum MapGraphicsObjectFlag
-    {
-        ObjectIsMovable = 0x01,
-        ObjectIsSelectable = 0x02,
-        ObjectIsFocusable = 0x04
-    };
-    Q_DECLARE_FLAGS(MapGraphicsObjectFlags,MapGraphicsObjectFlag)
+ enum MapGraphicsObjectFlag
+ {
+  ObjectIsMovable = 0x01,
+  ObjectIsSelectable = 0x02,
+  ObjectIsFocusable = 0x04
+ };
+ Q_DECLARE_FLAGS(MapGraphicsObjectFlags,MapGraphicsObjectFlag)
 
-    //PrivateQGraphicsObject will call some of our protected event handlers that nobody else needs to touch
-    friend class PrivateQGraphicsObject;
+ //PrivateQGraphicsObject will call some of our protected event handlers that nobody else needs to touch
+ friend class PrivateQGraphicsObject;
 public:
-    explicit MapGraphicsObject(bool sizeIsZoomInvariant=false,MapGraphicsObject *parent = 0);
-    virtual ~MapGraphicsObject();
+ explicit MapGraphicsObject(MapGraphicsView* containing_view,
+   bool sizeIsZoomInvariant=false,MapGraphicsObject *parent = 0);
+ virtual ~MapGraphicsObject();
 
-    bool sizeIsZoomInvariant() const;
+ ACCESSORS(void* ,style_params)
+ ACCESSORS(QVariant ,client_data)
 
-    /*!
+ bool sizeIsZoomInvariant() const;
+
+ /*!
      \brief You need to implement this. If sizeIsZoomInvariant() is true, this should return the size of the
      rectangle you want in PIXELS. If false, this should return the size of the rectangle in METERS. The
      rectangle should be centered at (0,0) regardless.
 
      \return QRectF
     */
-    virtual QRectF boundingRect() const=0;
+ virtual QRectF boundingRect() const=0;
 
-    /*!
+ /*!
      \brief You can reimplement this if you want. Given a point in geographic coordinates (lat/lon),
      return true if the object contains that point. Return false otherwise. The default implementation just uses
      boundingRect() to decide.
@@ -50,9 +67,9 @@ public:
      \param geoPos
      \return bool
     */
-    virtual bool contains(const QPointF& geoPos) const;
+ virtual bool contains(const QPointF& geoPos) const;
 
-    /**
+ /**
      * @brief Paints the contents of the Object in ENU coordinates if the object is not zoom invariant.
      * If it is zoom invariant, the units are pixels. That is, this painter should operate in the same
      * units as returned by boundingRect().
@@ -62,108 +79,120 @@ public:
      * @param option
      * @param widget
      */
-    virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget=0)=0;
+ virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget=0)=0;
 
-    bool enabled() const;
-    void setEnabled(bool);
+ QPointF map_to_scene(const QPointF &pos);
+ QPointF map_pos_to_scene();
 
-    qreal opacity() const;
-    void setOpacity(qreal);
+ QPoint map_to_view(const QPointF &pos);
+ QPoint map_pos_to_view();
 
-    MapGraphicsObject * parent() const;
-    void setParent(MapGraphicsObject *);
+ bool enabled() const;
+ void setEnabled(bool);
 
-    const QPointF& pos() const;
-    virtual void setPos(const QPointF&);
+ qreal opacity() const;
+ void setOpacity(qreal);
 
-    qreal rotation() const;
-    void setRotation(qreal);
+ MapGraphicsObject * parent() const;
+ void setParent(MapGraphicsObject *);
 
-    bool visible() const;
-    void setVisible(bool);
+ const QPointF& pos() const;
+ virtual void setPos(const QPointF&);
 
-    qreal longitude() const;
-    void setLongitude(qreal);
+ qreal rotation() const;
+ void setRotation(qreal);
 
-    qreal latitude() const;
-    void setLatitude(qreal);
+ bool visible() const;
+ void setVisible(bool);
 
-    qreal zValue() const;
-    void setZValue(qreal);
+ qreal longitude() const;
+ void setLongitude(qreal);
 
-    bool isSelected() const;
-    void setSelected(bool);
+ qreal latitude() const;
+ void setLatitude(qreal);
 
-    QString toolTip() const;
-    void setToolTip(const QString& toolTip);
+ qreal zValue() const;
+ void setZValue(qreal);
 
-    void setFlag(MapGraphicsObjectFlag, bool enabled=true);
-    void setFlags(MapGraphicsObject::MapGraphicsObjectFlags);
-    MapGraphicsObject::MapGraphicsObjectFlags flags() const;
+ bool isSelected() const;
+ void setSelected(bool);
+
+ QString toolTip() const;
+ void setToolTip(const QString& toolTip);
+
+ void setFlag(MapGraphicsObjectFlag, bool enabled=true);
+
+ void clearFlag(MapGraphicsObjectFlag flag)
+ {
+  setFlag(flag, false);
+ }
+
+ void setFlags(MapGraphicsObject::MapGraphicsObjectFlags);
+ MapGraphicsObject::MapGraphicsObjectFlags flags() const;
 
 protected:
-    virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent * event);
-    virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value);
-    virtual void keyPressEvent(QKeyEvent * event);
-    virtual void keyReleaseEvent(QKeyEvent * event);
-    virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent * event);
-    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent * event);
-    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent * event);
-    virtual void wheelEvent(QGraphicsSceneWheelEvent * event);
+ virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent * event);
+ virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value);
+ virtual void keyPressEvent(QKeyEvent * event);
+ virtual void keyReleaseEvent(QKeyEvent * event);
+ virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent * event);
+ virtual void mouseMoveEvent(QGraphicsSceneMouseEvent * event);
+ virtual void mousePressEvent(QGraphicsSceneMouseEvent * event);
+ virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent * event);
+ virtual void wheelEvent(QGraphicsSceneWheelEvent * event);
 
-    
+
 signals:
-    void enabledChanged();
-    void opacityChanged();
-    void parentChanged();
-    void posChanged();
-    void rotationChanged();
-    void visibleChanged();
-    void zValueChanged();
-    void toolTipChanged(const QString& toolTip);
+ void enabledChanged();
+ void opacityChanged();
+ void parentChanged();
+ void posChanged();
+ void rotationChanged();
+ void visibleChanged();
+ void zValueChanged();
+ void toolTipChanged(const QString& toolTip);
 
-    void flagsChanged();
+ void flagsChanged();
 
-    //Please do not use this for now. It should only be used internally for now. Ugly, I know.
-    void selectedChanged();
+ //Please do not use this for now. It should only be used internally for now. Ugly, I know.
+ void selectedChanged();
 
-    void newObjectGenerated(MapGraphicsObject *);
+ void newObjectGenerated(MapGraphicsObject *);
 
-    /*!
+ /*!
      \brief Emitted when we'd like to be redrawn
     */
-    void redrawRequested();
+ void redrawRequested();
 
-    /*!
+ /*!
      \brief Emitted when this MapGraphicsObject wants keyboard focus. (to receive keyboard events)
     */
-    void keyFocusRequested();
+ void keyFocusRequested();
 
-    
+
 public slots:
 
 private slots:
-    void setConstructed();
+ void setConstructed();
 
 private:
-    bool _sizeIsZoomInvariant;
+ bool _sizeIsZoomInvariant;
 
-    bool _enabled;
-    qreal _opacity;
-    MapGraphicsObject * _parent;
-    QPointF _pos;
-    qreal _rotation;
-    bool _visible;
-    qreal _zValue;
-    bool _selected;
+ bool _enabled;
+ qreal _opacity;
+ MapGraphicsObject * _parent;
+ QPointF _pos;
+ qreal _rotation;
+ bool _visible;
+ qreal _zValue;
+ bool _selected;
 
-    QString _toolTip;
+ QString _toolTip;
 
-    MapGraphicsObject::MapGraphicsObjectFlags _flags;
+ MapGraphicsObject::MapGraphicsObjectFlags _flags;
 
-    bool _constructed;
-    
+ bool _constructed;
+
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(MapGraphicsObject::MapGraphicsObjectFlags)
 

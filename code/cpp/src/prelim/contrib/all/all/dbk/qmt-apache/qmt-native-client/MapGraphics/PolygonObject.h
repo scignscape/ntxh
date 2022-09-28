@@ -12,7 +12,7 @@ class MAPGRAPHICSSHARED_EXPORT PolygonObject : public MapGraphicsObject
 {
     Q_OBJECT
 public:
-    explicit PolygonObject(QPolygonF geoPoly, QColor fillColor = QColor(200,200,200,200), QObject *parent = 0);
+    explicit PolygonObject(MapGraphicsView* containing_view, QPolygonF geoPoly, QColor fillColor = QColor(200,200,200,200), QObject *parent = 0);
     virtual ~PolygonObject();
 
     //pure-virtual from MapGraphicsObject

@@ -24,21 +24,102 @@
 
 #include <QVariant>
 
-//class QMT_Server_Response;
+#include <QPolygonF>
 
+#include "accessors.h"
+
+#include "typeindex"
+
+#include "MapGraphicsScene.h"
+
+#include <typeinfo>
+
+class MapGraphicsScene;
+class MapGraphicsView;
+
+class CircleObject;
+class PolygonObject;
+class QPolygonF;
 
 class QMT_Client_Layer_Base
 {
+protected:
+ MapGraphicsScene* scene_;
+ MapGraphicsView* view_;
+
+ QMap<QString, void*> style_names_;
+
+ void* current_style_;
+
 public:
 
  virtual void add_d0_mark(r8 latitude, r8 longitude, QStringList text = {}) = 0;
  virtual void add_d0_mark(QList<r8> coords, QStringList text = {}) = 0;
- virtual void add_d0_marks(const QVector<QPair<QList<r8>, QStringList>>& coords_and_texts) = 0;
+ virtual void add_d0_marks(const QVector<QPair<QList<r8>, QStringList>>& coords_and_texts);
 
- QMT_Client_Layer_Base();
+// virtual void* define_style(QString name, std::type_index model,
+//   QVector<QColor> colors, QVector<r8> params, u1 complexity = 0) = 0;
+
+// virtual void* define_style(QString name, std::type_info& model,
+//   QVector<QColor> colors, QVector<r8> params, u1 complexity = 0)
+// {
+//  return define_style(name, std::type_index(model), colors, params, complexity);
+// }
+
+  virtual void* define_style(QString name, QString context_menu_handler, const std::type_info& model,
+    QVector<QColor> colors, QVector<r8> params, u1 complexity = 0) = 0;
+
+ virtual void* define_style(QString name, QString context_menu_handler,
+   QVector<QColor> colors, QPolygonF polygon) = 0;
+
+ virtual void* adopt_style(QString name);
+ virtual void* define_and_adopt_style(QString name, QString context_menu_handler, const std::type_info& model,
+   QVector<QColor> colors, QVector<r8> params, u1 complexity = 0);
+
+ virtual void* define_and_adopt_style(QString name, QString context_menu_handler,
+   QVector<QColor> colors, QPolygonF polygon);
+
+
+// virtual void* define_and_adopt_style(QString name, std::type_index model,
+//  QVector<QColor> colors, QVector<r8> params, u1 complexity = 0);
+
+// virtual void* define_and_adopt_style(QString name, std::type_info& model,
+//  QVector<QColor> colors, QVector<r8> params, u1 complexity = 0)
+// {
+//  return define_and_adopt_style(name, std::type_index(model), colors, params, complexity);
+// }
+
+
+ QMT_Client_Layer_Base(MapGraphicsScene* scene, MapGraphicsView* view);
+
+ CircleObject* add_circle_object(r8 latitude, r8 longitude, u2 radius, QColor color);
+
+ // //  currently we add polygons by adding a (maybe invisible) circle which,
+  //    if it is visible at all, can add detail to the icon.  The circle
+  //    object then takes responsibility for drawing the polygon
+ CircleObject* add_polygon_object(r8 latitude, r8 longitude,
+   QPolygonF* polygon, QColor color, r4 select_margin = 0);
+
+ template<typename OBJECT_Type>
+ OBJECT_Type* add_object(OBJECT_Type* obj)
+ {
+  scene_->addObject(obj);
+  return obj;
+ }
+
+ template<typename OBJECT_Type>
+ OBJECT_Type* add_object(r8 latitude, r8 longitude, OBJECT_Type* obj)
+ {
+  obj->setLatitude(latitude);
+  obj->setLongitude(longitude);
+  return add_object(obj);
+ }
+
+
+ ACCESSORS(MapGraphicsScene* ,scene)
 
 };
 
+// QMT_Client_Context_Menu_Handler
 
-
-#endif // QMT_GIS_UTILS__H
+#endif //QMT_CLIENT_LAYER_BASE__H

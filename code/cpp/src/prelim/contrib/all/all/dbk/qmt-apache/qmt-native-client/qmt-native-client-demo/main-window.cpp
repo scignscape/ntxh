@@ -99,7 +99,7 @@ Lanternfly_Main_Window::Lanternfly_Main_Window(QWidget *parent) :
 
  QColor spot_clr = QColor(80, 105, 155,  220);
 
- CircleObject* spotcircle = new CircleObject(125, false, spot_clr);
+ CircleObject* spotcircle = new CircleObject(lfr->view(), 125, false, spot_clr);
  spotcircle->setLatitude(40.86695);
  spotcircle->setLongitude(-74.01307);
  lfr->scene()->addObject(spotcircle);
@@ -185,7 +185,7 @@ Lanternfly_Main_Window::Lanternfly_Main_Window(QWidget *parent) :
   // circle->setLatitude(40.8859);
   // circle->setLongitude(-74.0435);
 
-  PolygonObject* poly = new PolygonObject(aqpf, area_clr);
+  PolygonObject* poly = new PolygonObject(lfr->view(), aqpf, area_clr);
 
   poly->setLatitude(aqpf.first().y());
   poly->setLongitude(aqpf.first().x());
@@ -199,7 +199,7 @@ Lanternfly_Main_Window::Lanternfly_Main_Window(QWidget *parent) :
 
  for(auto pr: locs)
  {
-  CircleObject* circle = new CircleObject(125, false, parks_clr);
+  CircleObject* circle = new CircleObject(lfr->view(), 125, false, parks_clr);
   circle->setFlags(0);
   circle->setLatitude(pr.second);
   circle->setLongitude(pr.first);
@@ -245,7 +245,7 @@ Lanternfly_Main_Window::Lanternfly_Main_Window(QWidget *parent) :
 
  for(auto pr: locs1)
  {
-  CircleObject* circle = new CircleObject(125, false, sq_clr);
+  CircleObject* circle = new CircleObject(lfr->view(), 125, false, sq_clr);
   circle->setFlags(0);
   circle->setLatitude(pr.second);
   circle->setLongitude(pr.first);

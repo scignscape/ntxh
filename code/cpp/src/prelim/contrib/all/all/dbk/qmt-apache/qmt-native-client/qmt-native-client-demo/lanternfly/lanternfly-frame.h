@@ -13,10 +13,15 @@
 #include <QVBoxLayout>
 #include <QLineEdit>
 
+#include "accessors.h"
+
 class MapGraphicsScene;
 class MapGraphicsView;
 
 class MapTileSource;
+
+class QMT_Client_Layer;
+class QMT_Client_Context_Menu_Handler;
 
 
 class Lanternfly_Frame : public QFrame
@@ -28,10 +33,15 @@ class Lanternfly_Frame : public QFrame
 
  QLineEdit* coords_line_edit_;
 
+ QMT_Client_Layer* client_layer_;
+ QMT_Client_Context_Menu_Handler* client_context_menu_handler_;
+
 
 public:
 
  Lanternfly_Frame();
+
+ ACCESSORS(MapGraphicsView* ,view)
 
  void set_tile_source(QSharedPointer<MapTileSource> src);
 

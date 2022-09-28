@@ -11,6 +11,8 @@
 #include "MapGraphicsView.h"
 #include "MapGraphicsScene.h"
 
+#include "qmt-client-layer.h"
+#include "qmt-client-context-menu-handler.h"
 
 Lanternfly_Frame::Lanternfly_Frame() : QFrame(nullptr)
 {
@@ -18,6 +20,12 @@ Lanternfly_Frame::Lanternfly_Frame() : QFrame(nullptr)
 
  scene_ = new MapGraphicsScene;
  view_ = new MapGraphicsView;
+
+ client_layer_ = new QMT_Client_Layer(scene_, view_);
+ view_->set_qmt_client_layer_base(client_layer_);
+
+ client_context_menu_handler_ = new QMT_Client_Context_Menu_Handler(view_);
+ view_->set_qmt_client_context_menu_handler_base(client_context_menu_handler_);
 
 
  view_->coords_notify_callback_ = [this](const QPointF qpf)

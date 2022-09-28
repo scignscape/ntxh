@@ -20,12 +20,15 @@
 #include "guts/MapTileGraphicsObject.h"
 #include "guts/PrivateQGraphicsInfoSource.h"
 
+#include "accessors.h"
+
 #include <functional>
 
 
 class Main_Window_Controller;
 
 class QMT_Client_Layer_Base;
+class QMT_Client_Context_Menu_Handler_Base;
 
 
 class MAPGRAPHICSSHARED_EXPORT MapGraphicsView : public QWidget, public PrivateQGraphicsInfoSource
@@ -83,16 +86,24 @@ public:
  void zoomIn(ZoomMode zMode = CenterZoom);
  void zoomOut(ZoomMode zMode = CenterZoom);
 
+ ACCESSORS(QMT_Client_Layer_Base* ,qmt_client_layer_base)
+ ACCESSORS(QMT_Client_Context_Menu_Handler_Base* ,qmt_client_context_menu_handler_base)
+
  void rotate(qreal rotation);
 
  std::function<void (const QPointF&)> coords_notify_callback_;
 
+ void handle_context_menu(QGraphicsSceneContextMenuEvent* event, MapGraphicsObject* mgo);
+ QPointF map_ll_to_scene(const QPointF &pos);
+ QPoint map_ll_to_view(const QPointF &pos);
+
+
 signals:
  void zoomLevelChanged(quint8 nZoom);
 
-public slots:
+public Q_SLOTS:
 
-protected slots:
+protected Q_SLOTS:
  virtual void handleChildMouseDoubleClick(QMouseEvent * event);
  virtual void handleChildMouseMove(QMouseEvent * event);
  virtual void handleChildMousePress(QMouseEvent * event);
@@ -100,7 +111,7 @@ protected slots:
  virtual void handleChildViewContextMenu(QContextMenuEvent * event);
  virtual void handleChildViewScrollWheel(QWheelEvent * event);
 
-private slots:
+private Q_SLOTS:
  void renderTiles();
 
 protected:
@@ -122,6 +133,7 @@ private:
  Main_Window_Controller* main_window_controller_;
 
  QMT_Client_Layer_Base* qmt_client_layer_base_;
+ QMT_Client_Context_Menu_Handler_Base* qmt_client_context_menu_handler_base_;
 
 };
 
