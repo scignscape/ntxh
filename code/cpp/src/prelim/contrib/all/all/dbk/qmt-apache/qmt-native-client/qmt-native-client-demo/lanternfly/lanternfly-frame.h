@@ -22,6 +22,7 @@ class MapTileSource;
 
 class QMT_Client_Layer;
 class QMT_Client_Context_Menu_Handler;
+class QMT_Client_Location_Focus;
 
 
 class Lanternfly_Frame : public QFrame
@@ -35,7 +36,7 @@ class Lanternfly_Frame : public QFrame
 
  QMT_Client_Layer* client_layer_;
  QMT_Client_Context_Menu_Handler* client_context_menu_handler_;
-
+ QMT_Client_Location_Focus* qmt_client_location_focus_;
 
 public:
 
@@ -48,6 +49,8 @@ public:
  void set_view_zoom_level(quint8 level);
 
  void center_on(qreal longitude, qreal latitude);
+
+ void adopt_location(QString name);
 
  MapGraphicsScene* scene()
  {

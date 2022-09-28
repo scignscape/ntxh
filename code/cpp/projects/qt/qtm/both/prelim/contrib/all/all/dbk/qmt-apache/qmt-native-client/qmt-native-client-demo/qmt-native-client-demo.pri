@@ -40,6 +40,7 @@ HEADERS += \
   $$SRC_DIR/lanternfly/lanternfly-sighting-filter-dialog.h \
   $$SRC_DIR/qmt-client-layer.h \
   $$SRC_DIR/qmt-client-context-menu-handler.h \
+  $$SRC_DIR/qmt-client-location-focus.h \
 
 
 SOURCES += \
@@ -51,6 +52,8 @@ SOURCES += \
   $$SRC_DIR/main.cpp \
   $$SRC_DIR/qmt-client-layer.cpp \
   $$SRC_DIR/qmt-client-context-menu-handler.cpp \
+  $$SRC_DIR/qmt-client-location-focus.cpp \
+
 
 
 LIBS += -L$$TARGETSDIR -lMapGraphics

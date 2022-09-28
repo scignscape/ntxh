@@ -51,6 +51,8 @@ public:
 
  void load_bus_data();
 
+ void load_incident_reports();
+
  void set_info_file(QString key, QString value)
  {
   (*info_files_)[key] = value;

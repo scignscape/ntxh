@@ -29,9 +29,17 @@ Main_Window_Controller::Main_Window_Controller(MapGraphicsView* view)
 }
 
 
+void Main_Window_Controller::load_incident_reports()
+{
+ QString path = QFileDialog::getOpenFileName(view_, "Select Incident Reports File", ROOT_FOLDER);
+ if(path.isEmpty())
+   return;
+ set_info_file("incidents", path);
+}
+
 void Main_Window_Controller::load_bus_data()
 {
- QString path = QFileDialog::getOpenFileName(view_, "Select File (it should match \"stops.txt\"", ROOT_FOLDER);
+ QString path = QFileDialog::getOpenFileName(view_, "Select File (it should match \"stops.txt\")", ROOT_FOLDER);
  if(path.isEmpty())
    return;
  set_info_file("bus", path);
