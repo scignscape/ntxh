@@ -106,6 +106,15 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
    {
     QPointF ll = mapToScene(qp);
     QString path = main_window_controller_->get_info_file("bus");  //"/home/nlevisrael/gits/acle/bus_data/stops.txt";
+
+    static u1 stops_size = 20;
+
+    QVector<QPair<QVector<r8>, QStringList>> info;
+
+    main_window_controller_->match_locations_in_text_file("/home/nlevisrael/gits/acle/bus_data/stops.txt",
+      ll.y(), ll.x(), stops_size, 4, 5, ',', info);
+
+#ifdef HIDE
     QFile infile(path);
 
     //QVector<QPair<QStringList, QPointF>> stops(10);
@@ -170,7 +179,7 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
     infile.close();
 
     u1 index = 0;
-    QVector<QPair<QList<r8>, QStringList>> info(stops.length());
+    QVector<QPair<QVector<r8>, QStringList>> info(stops.length());
     std::transform(stops.begin(), stops.end(), info.begin(),
                    [&deltas, &index] (const QByteArray qba) -> decltype (info.value(0))
     {
@@ -185,6 +194,7 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
     {
      return lhs.second[2] < rhs.second[2];
     });
+#endif
 
     if(!qmt_client_layer_base_->adopt_style("bus-stop"))
     {
@@ -257,6 +267,12 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
    {
     main_window_controller_->load_incident_reports();
    });
+
+   menu->addAction("Track Incidents", [this, qp]()
+   {
+    main_window_controller_->track_incidents();
+   });
+
   }
 
 

@@ -10,7 +10,9 @@
 #define MAIN_WINDOW_CONTROLLER__H
 
 //#include "qmt-accessors.h"
-//#include "qmt-global-types.h"
+//
+
+#include "global-types.h"
 
 #include "qmt-gis-utils.h"
 
@@ -52,6 +54,8 @@ public:
  void load_bus_data();
 
  void load_incident_reports();
+ void track_incidents();
+
 
  void set_info_file(QString key, QString value)
  {
@@ -62,6 +66,13 @@ public:
  {
   return info_files_->value(key);
  }
+
+ u4 match_locations_in_text_file(QString file_path, r8 query_latitude, r8 query_longitude,
+   u4 number_of_results, u1 latitude_column,
+   u1 longitude_column, u1 column_separator,
+   QVector<QPair<QVector<r8>, QStringList>>& results,
+   u1 number_of_header_lines = 1, QVector<u1> other_location_columns = {});
+
 
 // ACCESSORS(QString ,request_path)
 // ACCESSORS(QString ,actual_path)

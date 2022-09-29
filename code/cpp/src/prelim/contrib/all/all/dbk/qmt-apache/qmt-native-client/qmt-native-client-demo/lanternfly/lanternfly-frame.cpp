@@ -34,7 +34,7 @@ Lanternfly_Frame::Lanternfly_Frame() : QFrame(nullptr)
 
  view_->set_coords_notify_callback([this](const QPointF qpf)
  {
-  coords_line_edit_->setText(QString("%1,%2").arg(qpf.x()).arg(qpf.y()));
+  coords_line_edit_->setText(QString("%1,%2").arg(qpf.y()).arg(qpf.x()));
  });
 
  view_->setScene(scene_);

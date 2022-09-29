@@ -42,7 +42,10 @@ void QMT_Client_Context_Menu_Handler::handle_context_menu_on_mgo
  if(!mgo)
    // // in case it's deleted for some reason before the menu item is selected
    return;
- QStringList qsl = mgo->client_data().value<QStringList>();
+
+ QStringList qsl = mgo->client_data().value<QVector<QVariant>>()
+   .first().value<QStringList>();
+
  QString context_menu_handler = qsl.first();
  if(context_menu_handler.isEmpty())
    context_menu_handler = QMT_Client_Layer::get_context_menu_handler_name(mgo);
@@ -69,7 +72,8 @@ void QMT_Client_Context_Menu_Handler::handle_bus_stop_context_menu(QGraphicsScen
  QMenu* menu = new QMenu;
  menu->addAction("Get Stop Info", [mgo]
  {
-  QStringList qsl = mgo->client_data().value<QStringList>();
+  QStringList qsl = mgo->client_data().value<QVector<QVariant>>()
+    .first().value<QStringList>();
   qDebug() << "ON: " << qsl;
 
   QString msg = "Code %1\n\n%2\n\nLatitude: %3\nLongitude: %4"_qt

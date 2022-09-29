@@ -54,8 +54,8 @@ protected:
 public:
 
  virtual void add_d0_mark(r8 latitude, r8 longitude, QStringList text = {}) = 0;
- virtual void add_d0_mark(QList<r8> coords, QStringList text = {}) = 0;
- virtual void add_d0_marks(const QVector<QPair<QList<r8>, QStringList>>& coords_and_texts);
+ virtual void add_d0_mark(QVector<r8> coords, QStringList text = {}) = 0;
+ virtual void add_d0_marks(const QVector<QPair<QVector<r8>, QStringList>>& coords_and_texts);
 
 // virtual void* define_style(QString name, std::type_index model,
 //   QVector<QColor> colors, QVector<r8> params, u1 complexity = 0) = 0;

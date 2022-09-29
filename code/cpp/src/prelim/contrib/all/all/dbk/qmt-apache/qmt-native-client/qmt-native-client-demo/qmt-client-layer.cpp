@@ -102,7 +102,7 @@ QString QMT_Client_Layer::get_context_menu_handler_name(MapGraphicsObject* mgo)
  return {};
 }
 
-void QMT_Client_Layer::add_d0_mark(QList<r8> coords, QStringList text)
+void QMT_Client_Layer::add_d0_mark(QVector<r8> coords, QStringList text)
 {
  Style_Params* sp = (Style_Params*) current_style_;
 
@@ -127,7 +127,12 @@ void QMT_Client_Layer::add_d0_mark(QList<r8> coords, QStringList text)
  if(co)
  {
   co->set_style_params(sp);
-  co->set_client_data(QVariant(text));
+//  QPair<r8, QStringList> pr {coords.value(2), text};
+//  co->set_client_data(QVariant::fromValue<QPair<r8, QStringList>>(pr));
+
+  QVector<QVariant> vv {QVariant(text), QVariant(coords.value(2))};
+  co->set_client_data(QVariant::fromValue<QVector<QVariant>>(vv));
+
  }
 
 }
