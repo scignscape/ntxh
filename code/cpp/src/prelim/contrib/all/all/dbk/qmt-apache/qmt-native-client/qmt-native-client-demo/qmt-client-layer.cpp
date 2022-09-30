@@ -29,8 +29,28 @@ QMT_Client_Layer::QMT_Client_Layer(MapGraphicsScene* scene,  MapGraphicsView* vi
 {
 }
 
+
+void QMT_Client_Layer::set_params(Style_Params* sp,
+  QMap<QString, QVariant> params)
+{
+ if(params.contains("x-radius"))
+   sp->x_radius = params["x-radius"].toFloat();
+
+ if(params.contains("y-radius"))
+   sp->y_radius = params["y-radius"].toFloat();
+ else
+   sp->y_radius = sp->x_radius;
+
+ if(params.contains("pen-width"))
+   sp->pen_width = params["pen-width"].toFloat();
+
+ if(params.contains("select-margin"))
+   sp->select_margin = params["select-margin"].toFloat();
+}
+
+
 void* QMT_Client_Layer::define_style(QString name, QString context_menu_handler,
-  QVector<QColor> colors, QPolygonF polygon)
+  QVector<QColor> colors, QPolygonF polygon, QMap<QString, QVariant> params)
 {
  Style_Params* sp = new Style_Params;
  sp->brush_color = colors.value(0);
@@ -39,12 +59,15 @@ void* QMT_Client_Layer::define_style(QString name, QString context_menu_handler,
  sp->polygon = new QPolygonF(polygon);
  sp->context_menu_handler = context_menu_handler;
  sp->name = name;
+
+ set_params(sp, params);
+
  style_names_[name] = sp;
  return sp;
 }
 
 void* QMT_Client_Layer::define_style(QString name, QString context_menu_handler, const std::type_info& model,
-   QVector<QColor> colors, QVector<r8> params, u1 complexity)
+   QVector<QColor> colors, QMap<QString, QVariant> params, u1 complexity)
 {
  Known_Style_Models ksm = parse_style_model(model);
  u1 color_complexity = complexity >> 4,
@@ -57,14 +80,15 @@ void* QMT_Client_Layer::define_style(QString name, QString context_menu_handler,
  case Known_Style_Models::QGraphicsEllipse:
   sp->brush_color = colors.value(0);
   sp->pen_color = colors.value(1);
-  sp->x_radius = params.value(0);
-  sp->y_radius = params.value(1, sp->x_radius);
-  sp->pen_width = params.value(2);
+
+  set_params(sp, params);
+
   if( (shape_complexity == 0) && (sp->x_radius == sp->y_radius) )
     sp->model = Known_Style_Models::QGraphicsEllipse_Circle;
   else if (shape_complexity > 2)
     sp->model = Known_Style_Models::QGraphicsEllipse_Circle;
   break;
+
  default: break;
  }
 

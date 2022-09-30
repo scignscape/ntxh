@@ -67,17 +67,17 @@ public:
 // }
 
   virtual void* define_style(QString name, QString context_menu_handler, const std::type_info& model,
-    QVector<QColor> colors, QVector<r8> params, u1 complexity = 0) = 0;
+    QVector<QColor> colors, QMap<QString, QVariant> params = {}, u1 complexity = 0) = 0;
 
  virtual void* define_style(QString name, QString context_menu_handler,
-   QVector<QColor> colors, QPolygonF polygon) = 0;
+   QVector<QColor> colors, QPolygonF polygon, QMap<QString, QVariant> params = {}) = 0;
 
  virtual void* adopt_style(QString name);
  virtual void* define_and_adopt_style(QString name, QString context_menu_handler, const std::type_info& model,
-   QVector<QColor> colors, QVector<r8> params, u1 complexity = 0);
+   QVector<QColor> colors, QMap<QString, QVariant> params = {}, u1 complexity = 0);
 
  virtual void* define_and_adopt_style(QString name, QString context_menu_handler,
-   QVector<QColor> colors, QPolygonF polygon);
+   QVector<QColor> colors, QPolygonF polygon, QMap<QString, QVariant> params = {});
 
 
 // virtual void* define_and_adopt_style(QString name, std::type_index model,

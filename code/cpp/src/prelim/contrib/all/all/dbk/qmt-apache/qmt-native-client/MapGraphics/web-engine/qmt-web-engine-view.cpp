@@ -31,7 +31,7 @@ QMT_Web_Engine_View::QMT_Web_Engine_View(QDialog* parent_dialog)
   {
    QSize qs = page()->contentsSize().toSize();
    if(!qs.isEmpty())
-     resize(qs);
+     resize(qs.width(), height());
   }
  });
 

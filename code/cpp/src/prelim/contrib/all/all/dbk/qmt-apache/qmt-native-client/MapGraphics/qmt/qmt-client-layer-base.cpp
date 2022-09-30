@@ -78,16 +78,16 @@ void* QMT_Client_Layer_Base::adopt_style(QString name)
 }
 
 void* QMT_Client_Layer_Base::define_and_adopt_style(QString name, QString context_menu_handler, const std::type_info& model,
- QVector<QColor> colors, QVector<r8> params, u1 complexity)
+ QVector<QColor> colors, QMap<QString, QVariant> params, u1 complexity)
 {
  current_style_ = define_style(name, context_menu_handler, model, colors, params, complexity);
  return current_style_;
 }
 
 void* QMT_Client_Layer_Base::define_and_adopt_style(QString name, QString context_menu_handler,
-   QVector<QColor> colors, QPolygonF polygon)
+   QVector<QColor> colors, QPolygonF polygon, QMap<QString, QVariant> params)
 {
- current_style_ = define_style(name, context_menu_handler, colors, polygon);
+ current_style_ = define_style(name, context_menu_handler, colors, polygon, params);
  return current_style_;
 }
 

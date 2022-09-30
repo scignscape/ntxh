@@ -48,6 +48,9 @@ public Q_SLOTS:
  void handle_bus_stop_context_menu(QGraphicsSceneContextMenuEvent* event,
    MapGraphicsObject* mgo);
 
+ void handle_incident_context_menu(QGraphicsSceneContextMenuEvent* event,
+   MapGraphicsObject* mgo);
+
 };
 
 

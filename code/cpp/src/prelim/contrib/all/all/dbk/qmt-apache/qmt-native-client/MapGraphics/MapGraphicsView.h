@@ -87,10 +87,14 @@ public:
  void zoomIn(ZoomMode zMode = CenterZoom);
  void zoomOut(ZoomMode zMode = CenterZoom);
 
- ACCESSORS(QMT_Client_Layer_Base* ,qmt_client_layer_base)
+ ACCESSORS__SDECLARE(QMT_Client_Layer_Base* ,qmt_client_layer_base)
+
  ACCESSORS(QMT_Client_Context_Menu_Handler_Base* ,qmt_client_context_menu_handler_base)
+
  ACCESSORS(QMT_Client_Location_Focus_Base* ,qmt_client_location_focus_base)
  ACCESSORS(std::function<void (const QPointF&)> ,coords_notify_callback)
+
+ ACCESSORS(Main_Window_Controller* ,main_window_controller)
 
  void rotate(qreal rotation);
 

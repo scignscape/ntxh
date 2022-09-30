@@ -16,6 +16,8 @@
 
 #include "qmt-gis-utils.h"
 
+#include "accessors.h"
+
 #include <QString>
 #include <QList>
 
@@ -24,12 +26,14 @@
 //class QMT_Server_Response;
 
 class MapGraphicsView;
+class QMT_Client_Layer_Base;
 
 class Main_Window_Controller
 {
  QStringList map_styles_by_name_;
 
  MapGraphicsView* view_;
+ QMT_Client_Layer_Base* qmt_client_layer_base_;
 
  QMT_GIS_Utils gis_utils_;
 
@@ -46,15 +50,20 @@ public:
 
  Main_Window_Controller(MapGraphicsView* view);
 
+ ACCESSORS(QMT_Client_Layer_Base* ,qmt_client_layer_base)
+
  void reset_map_style(QPoint qp);
 
  void show_llcoords(QPoint qp);
  void llcoords_to_street_address(QPoint qp);
 
  void load_bus_data();
+ void find_bus_stops(r8 latitude, r8 longitude);
 
  void load_incident_reports();
- void track_incidents();
+ void track_incidents(r8 latitude, r8 longitude);
+
+ void load_web_engine_view(QUrl url);
 
 
  void set_info_file(QString key, QString value)
@@ -67,12 +76,21 @@ public:
   return info_files_->value(key);
  }
 
- u4 match_locations_in_text_file(QString file_path, r8 query_latitude, r8 query_longitude,
+ static u4 match_locations_in_text_file(QString file_path, r8 query_latitude, r8 query_longitude,
    u4 number_of_results, u1 latitude_column,
    u1 longitude_column, u1 column_separator,
    QVector<QPair<QVector<r8>, QStringList>>& results,
+   u4 allow_duplicates = 0,
    u1 number_of_header_lines = 1, QVector<u1> other_location_columns = {});
 
+ template<typename... ARGS>
+ u4 match_locations_in_info_file(QString key, ARGS&&... args)
+ {
+  QString file_path = get_info_file(key);
+  if(file_path.isEmpty())
+    return 0;
+  return match_locations_in_text_file(file_path, std::forward<ARGS>(args)...);
+ }
 
 // ACCESSORS(QString ,request_path)
 // ACCESSORS(QString ,actual_path)

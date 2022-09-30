@@ -71,14 +71,19 @@ class QMT_Client_Layer : public QMT_Client_Layer_Base
   return static_map.value(ti, Known_Style_Models::N_A);
  }
 
+ void set_params(Style_Params* sp, QMap<QString, QVariant> params);
+
 public:
 
  void add_d0_mark(r8 latitude, r8 longitude, QStringList text = {}) Q_DECL_OVERRIDE;
+
  void add_d0_mark(QVector<r8> coords, QStringList text = {}) Q_DECL_OVERRIDE;
+
  void* define_style(QString name, QString context_menu_handler, const std::type_info& model,
-   QVector<QColor> colors, QVector<r8> params, u1 complexity = 0) Q_DECL_OVERRIDE;
+   QVector<QColor> colors, QMap<QString, QVariant> params = {}, u1 complexity = 0) Q_DECL_OVERRIDE;
+
  void* define_style(QString name, QString context_menu_handler,
-   QVector<QColor> colors, QPolygonF) Q_DECL_OVERRIDE;
+   QVector<QColor> colors, QPolygonF, QMap<QString, QVariant> params = {}) Q_DECL_OVERRIDE;
 
  QMT_Client_Layer(MapGraphicsScene* scene, MapGraphicsView* view);
 
