@@ -154,7 +154,7 @@ void QMT_Client_Layer::add_d0_mark(QVector<r8> coords, QStringList text)
 //  QPair<r8, QStringList> pr {coords.value(2), text};
 //  co->set_client_data(QVariant::fromValue<QPair<r8, QStringList>>(pr));
 
-  QVector<QVariant> vv {QVariant(text), QVariant(coords.value(2))};
+  QVector<QVariant> vv {QVariant(text), QVariant(coords.value(2)), QVariant(coords.value(3))};
   co->set_client_data(QVariant::fromValue<QVector<QVariant>>(vv));
 
  }

@@ -61,7 +61,7 @@ public:
  void find_bus_stops(r8 latitude, r8 longitude);
 
  void load_incident_reports();
- void track_incidents(r8 latitude, r8 longitude);
+ void track_incidents(r8 latitude, r8 longitude, s4 allow_duplicates);
 
  void load_web_engine_view(QUrl url);
 
@@ -80,7 +80,7 @@ public:
    u4 number_of_results, u1 latitude_column,
    u1 longitude_column, u1 column_separator,
    QVector<QPair<QVector<r8>, QStringList>>& results,
-   u4 allow_duplicates = 0,
+   s4 allow_duplicates = 0,
    u1 number_of_header_lines = 1, QVector<u1> other_location_columns = {});
 
  template<typename... ARGS>

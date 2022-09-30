@@ -104,7 +104,7 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
 
    menu->addAction("Find Bus Stops", [this, qp]()
    {
-    main_window_controller_->set_info_file("bus", "/home/nlevisrael/gits/acle/bus_data/stops.txt");
+    //main_window_controller_->set_info_file("bus", "/home/nlevisrael/gits/acle/bus_data/stops.txt");
     QPointF ll = mapToScene(qp);
     main_window_controller_->find_bus_stops(ll.y(), ll.x());
    });
@@ -117,75 +117,30 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
     main_window_controller_->load_web_engine_view(QUrl("https://www.openstreetmap.org/#map=%1/%2/%3&layers=T"_qt
       .arg(zl).arg(ll.y()).arg(ll.x())));
 
-//    QMT_Web_Engine_View* wev = new QMT_Web_Engine_View(nullptr);
-//    QMT_Web_Engine_Page* wep = new QMT_Web_Engine_Page(nullptr);
-//    QObject::connect(wep, &QMT_Web_Engine_Page::urlChanged,[this](const QUrl &url){
-//     qDebug() << "r:" << url.toString();
-//     //? check_url_patterns(url.toString().prepend("urlChanged!"));
-//    });
-
-//    QObject::connect(wep, &QMT_Web_Engine_Page::navRequest,[this](const QUrl &url){
-//     qDebug() << "req:" << url.toString();
-//     //? check_url_patterns(url.toString().prepend("navRequest!"));
-//    });
-
-//    QObject::connect(wep, &QMT_Web_Engine_Page::linkHovered,[](const QUrl &url){
-//     qDebug() << "H:" << url.toString();
-//    });
-
-
-//    //     wev->page()->load(QUrl("https://www.openstreetmap.org/#map=%1/%2/%3&layers=T"_qt
-//    //       .arg(zl).arg(ll.y()).arg(ll.x())));
-//    //     wev->setPage(wep);
-
-//    QMT_My_Page* myp = new QMT_My_Page;
-//    QWebChannel* channel = new QWebChannel(wev);
-//    channel->registerObject(QStringLiteral("content"), myp);
-//    wep->setWebChannel(channel);
-
-//    wev->setPage(wep);
-
-//    wep->load(QUrl("https://www.openstreetmap.org/#map=%1/%2/%3&layers=T"_qt
-//                   .arg(zl).arg(ll.y()).arg(ll.x())));
-
-//    //wep->show();
-//    wev->show();
    });
   }
   else if(current_location_name == "Kherson")
   {
-   menu->addAction("Load Incident Reports", [this, qp]()
+   menu->addAction("Load Incident Reports", [this]()
    {
     main_window_controller_->load_incident_reports();
    });
 
-   menu->addAction("Track Incidents", [this, qp]()
+   QMenu* menu1 = menu->addMenu("Track Incidents");
+
+   menu1->addAction("From earliest", [this, qp]()
    {
     QPointF ll = mapToScene(qp);
-    main_window_controller_->track_incidents(ll.y(), ll.x());
+    main_window_controller_->track_incidents(ll.y(), ll.x(), -1);
+   });
+
+   menu1->addAction("From latest", [this, qp]()
+   {
+    QPointF ll = mapToScene(qp);
+    main_window_controller_->track_incidents(ll.y(), ll.x(), 1);
    });
 
   }
-
-
-
-  //?
-  //  menu->addAction("Composite", [this, qp]()
-  //  {
-  //   QDialog* d = new QDialog;
-  //   QVBoxLayout* v = new QVBoxLayout;
-  //   CompositeTileSourceConfigurationWidget* w = new CompositeTileSourceConfigurationWidget;
-  //   v->addWidget(w);
-  //   d->setLayout(v);
-  //   d->show();
-  //  });
-
-
-  //     menu->addAction("Launch Configuration Dialog");
-  //     menu->addAction("Save Current Session");
-  //     menu->addAction("Launch Filter/Search Dialog");
-  //     menu->addAction("Set Zoom/Pan Settings");
-  //     menu->addAction("View Coordinates and Civil-Geographic Info");
 
   menu->addAction("Take Screenshot", [this]()
   {
@@ -210,17 +165,17 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
 
   menu->popup(this->mapToGlobal(qp));
 
-  QPointF coords = this->mapToScene(qp);
+//  QPointF coords = this->mapToScene(qp);
 
-  qDebug() << "qp = " << qp;
+//  qDebug() << "qp = " << qp;
 
-  qDebug() << "coords = " << coords;
+//  qDebug() << "coords = " << coords;
 
-  QPoint qp1 = this->map_ll_to_view(coords);
+//  QPoint qp1 = this->map_ll_to_view(coords);
 
-  //  QPoint qp2 = _childView->mapFromScene(qp1);
+//  //  QPoint qp2 = _childView->mapFromScene(qp1);
 
-  qDebug() << "qp1 = " << qp1;
+//  qDebug() << "qp1 = " << qp1;
 
 
  }
@@ -848,3 +803,56 @@ void MapGraphicsView::resetQGSSceneSize()
     });
 #endif
 
+
+
+    //    QMT_Web_Engine_View* wev = new QMT_Web_Engine_View(nullptr);
+    //    QMT_Web_Engine_Page* wep = new QMT_Web_Engine_Page(nullptr);
+    //    QObject::connect(wep, &QMT_Web_Engine_Page::urlChanged,[this](const QUrl &url){
+    //     qDebug() << "r:" << url.toString();
+    //     //? check_url_patterns(url.toString().prepend("urlChanged!"));
+    //    });
+
+    //    QObject::connect(wep, &QMT_Web_Engine_Page::navRequest,[this](const QUrl &url){
+    //     qDebug() << "req:" << url.toString();
+    //     //? check_url_patterns(url.toString().prepend("navRequest!"));
+    //    });
+
+    //    QObject::connect(wep, &QMT_Web_Engine_Page::linkHovered,[](const QUrl &url){
+    //     qDebug() << "H:" << url.toString();
+    //    });
+
+
+    //    //     wev->page()->load(QUrl("https://www.openstreetmap.org/#map=%1/%2/%3&layers=T"_qt
+    //    //       .arg(zl).arg(ll.y()).arg(ll.x())));
+    //    //     wev->setPage(wep);
+
+    //    QMT_My_Page* myp = new QMT_My_Page;
+    //    QWebChannel* channel = new QWebChannel(wev);
+    //    channel->registerObject(QStringLiteral("content"), myp);
+    //    wep->setWebChannel(channel);
+
+    //    wev->setPage(wep);
+
+    //    wep->load(QUrl("https://www.openstreetmap.org/#map=%1/%2/%3&layers=T"_qt
+    //                   .arg(zl).arg(ll.y()).arg(ll.x())));
+
+    //    //wep->show();
+    //    wev->show();
+
+    //?
+    //  menu->addAction("Composite", [this, qp]()
+    //  {
+    //   QDialog* d = new QDialog;
+    //   QVBoxLayout* v = new QVBoxLayout;
+    //   CompositeTileSourceConfigurationWidget* w = new CompositeTileSourceConfigurationWidget;
+    //   v->addWidget(w);
+    //   d->setLayout(v);
+    //   d->show();
+    //  });
+
+
+    //     menu->addAction("Launch Configuration Dialog");
+    //     menu->addAction("Save Current Session");
+    //     menu->addAction("Launch Filter/Search Dialog");
+    //     menu->addAction("Set Zoom/Pan Settings");
+    //     menu->addAction("View Coordinates and Civil-Geographic Info");

@@ -73,22 +73,37 @@ void QMT_Client_Context_Menu_Handler::handle_incident_context_menu(QGraphicsScen
 
  QMenu* menu = new QMenu;
 
- QStringList qsl = mgo->client_data().value<QVector<QVariant>>()
-   .first().value<QStringList>();
+ QVector<QVariant> vv = mgo->client_data().value<QVector<QVariant>>();
+
+ QStringList qsl =
+   vv.first().value<QStringList>();
+
+ s4 incident_count = (s4) vv.value(2).toDouble();
+
+ qDebug() << "incident count = " << incident_count;
+
+ //QVector<
 
  QString event_date_string = qsl.value(2);
  QDate event_date = QDate::fromString(event_date_string, "dd-MMMM-yyyy");
  QString incident_category = qsl.value(3);
 
- menu->addAction("Get Incident Info", [mgo, qsl, event_date]
+ menu->addAction("Get Incident Info", [mgo, qsl, event_date, incident_count]
  {
   QString timestamp = qsl.value(4);
 
   QDateTime qdt = QDateTime::fromSecsSinceEpoch(timestamp.toULong());
 
-  QString msg = "ID# %1\n\nUploaded %2\n\nLatitude: %3\nLongitude: %4"_qt
+  QString incident_count_msg;
+  if(incident_count > 1)
+    incident_count_msg = QString("\n * The data also reports %1 earlier incidents.\n"_qt.arg(incident_count - 1));
+  else if(incident_count < -1)
+    incident_count_msg = QString("\n * The data also reports %1 later incidents.\n"_qt.arg(-1 - incident_count));
+
+
+  QString msg = "ID# %1\n\nUploaded %2\n%3\nLatitude: %4\nLongitude: %5"_qt
     .arg(qsl.value(1)).arg(qdt.toString("dddd, MMMM dd, yyyy (hh:mm:ss)"))
-    .arg(mgo->latitude()).arg(mgo->longitude());
+    .arg(incident_count_msg).arg(mgo->latitude()).arg(mgo->longitude());
 
   QMessageBox* mbox = new QMessageBox(QMessageBox::Information,
     "Incident Info",

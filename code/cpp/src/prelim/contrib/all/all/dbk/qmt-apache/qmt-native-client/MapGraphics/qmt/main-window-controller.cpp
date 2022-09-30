@@ -52,7 +52,7 @@ u4 Main_Window_Controller::match_locations_in_text_file(QString file_path,
   u4 number_of_results, u1 latitude_column,
   u1 longitude_column, u1 column_separator,
   QVector<QPair<QVector<r8>, QStringList>>& results,
-  u4 allow_duplicates,
+  s4 allow_duplicates,
   u1 number_of_header_lines, QVector<u1> other_location_columns)
 {
  QFile infile(file_path);
@@ -73,10 +73,14 @@ u4 Main_Window_Controller::match_locations_in_text_file(QString file_path,
 
  QVector<QPair<r8, r8>> llpair;
 
- if(allow_duplicates)
+ u4 abs_allow_duplicates = qAbs(allow_duplicates);
+ if(abs_allow_duplicates == 1)
+   abs_allow_duplicates = (u4) -1;
+
+ if(abs_allow_duplicates)
    llpair.resize(number_of_results);
 
- QMap<QPair<r8, r8>, u4> llcounts;
+ QMap<QPair<r8, r8>, QPair<u4, u4>> llcounts;
 
  double max_delta = 0;
  u4 max_delta_index = 0;
@@ -114,13 +118,17 @@ u4 Main_Window_Controller::match_locations_in_text_file(QString file_path,
   r8 latitude = qbas[latitude_column].toDouble();
   r8 longitude = qbas[longitude_column].toDouble();
 
-  if(allow_duplicates)
+  if(abs_allow_duplicates)
   {
    auto it = llcounts.find({latitude, longitude});
    if(it != llcounts.end())
    {
-    if((*it) < allow_duplicates)
-      ++*it;
+    if((*it).first < abs_allow_duplicates)
+    {
+     ++(*it).first;
+     if(allow_duplicates > 0)
+       matches[it->second] = qbas;
+    }
     continue;
    }
   }
@@ -136,9 +144,9 @@ u4 Main_Window_Controller::match_locations_in_text_file(QString file_path,
    matches[matches_active_size] = qbas;
    deltas[matches_active_size] = len;
 
-   if(allow_duplicates)
+   if(abs_allow_duplicates)
    {
-    llcounts.insert({latitude, longitude}, 1);
+    llcounts.insert({latitude, longitude}, {1, matches_active_size});
     llpair[matches_active_size] = {latitude, longitude};
    }
 
@@ -154,11 +162,11 @@ u4 Main_Window_Controller::match_locations_in_text_file(QString file_path,
    // //  replace the most distant match
    //    don't bother sorting, we'll just calculate the new largest distance
 
-   if(allow_duplicates)
+   if(abs_allow_duplicates)
    {
     QPair<r8, r8> old_pair = llpair[max_delta_index];
     llcounts.remove(old_pair);
-    llcounts.insert({latitude, longitude}, 1);
+    llcounts.insert({latitude, longitude}, {1, max_delta_index});
     llpair[max_delta_index] = {latitude, longitude};
    }
 
@@ -181,7 +189,7 @@ u4 Main_Window_Controller::match_locations_in_text_file(QString file_path,
  // //  for the distance
  u1 number_of_added_location_columns = 1;
 
- if(allow_duplicates)
+ if(abs_allow_duplicates)
    // //  An extra column for duplicate counts
     //
    ++number_of_added_location_columns;
@@ -202,7 +210,7 @@ u4 Main_Window_Controller::match_locations_in_text_file(QString file_path,
    [&deltas, &index, &llpair, &llcounts, number_of_extra_info_columns,
     &location_column_set, &other_location_columns, number_of_location_columns,
     number_of_added_location_columns, allow_duplicates,
-    latitude_column, longitude_column]
+    abs_allow_duplicates, latitude_column, longitude_column]
    (const QList<QByteArray> qbas) -> decltype (info.value(0))
  {
   u1 number_of_non_location_columns = qbas.size() - number_of_location_columns;
@@ -213,12 +221,16 @@ u4 Main_Window_Controller::match_locations_in_text_file(QString file_path,
 
   u1 f = 0;
 
-  if(allow_duplicates)
+  if(abs_allow_duplicates)
   {
    location_fields[f] = llpair[index].first;
    location_fields[++f] = llpair[index].second;
    location_fields[++f] = deltas[index];
-   location_fields[++f] = llcounts[llpair[index]];
+   if(allow_duplicates < 0)
+     // // have to do the double conversion first!
+     location_fields[++f] = -(r8)llcounts[llpair[index]].first;
+   else
+     location_fields[++f] = llcounts[llpair[index]].first;
   }
   else
   {
@@ -284,12 +296,12 @@ void Main_Window_Controller::load_web_engine_view(QUrl url)
  QMT_Web_Engine_Page* wep = new QMT_Web_Engine_Page(nullptr);
 
  QObject::connect(wep, &QMT_Web_Engine_Page::urlChanged,[this](const QUrl &url){
-  qDebug() << "r:" << url.toString();
+  qDebug() << "browse:" << url.toString();
   //? check_url_patterns(url.toString().prepend("urlChanged!"));
  });
 
  QObject::connect(wep, &QMT_Web_Engine_Page::navRequest,[this](const QUrl &url){
-  qDebug() << "req:" << url.toString();
+  qDebug() << "request:" << url.toString();
   //? check_url_patterns(url.toString().prepend("navRequest!"));
  });
 
@@ -297,11 +309,6 @@ void Main_Window_Controller::load_web_engine_view(QUrl url)
  QObject::connect(wep, &QMT_Web_Engine_Page::linkHovered,[](const QUrl &url){
   qDebug() << "H:" << url.toString();
  });
-
-
- //     wev->page()->load(QUrl("https://www.openstreetmap.org/#map=%1/%2/%3&layers=T"_qt
- //       .arg(zl).arg(ll.y()).arg(ll.x())));
- //     wev->setPage(wep);
 
  QMT_My_Page* myp = new QMT_My_Page;
  QWebChannel* channel = new QWebChannel(wev);
@@ -311,47 +318,40 @@ void Main_Window_Controller::load_web_engine_view(QUrl url)
  wev->setPage(wep);
 
  wep->load(url);
-
- //wep->show();
  wev->show();
 
 }
 
 
-void Main_Window_Controller::track_incidents(r8 latitude, r8 longitude)
+void Main_Window_Controller::track_incidents(r8 latitude, r8 longitude, s4 allow_duplicates)
 {
- QString path = "/home/nlevisrael/gits/acle/lat-lon.txt";
-
- QFile infile(path);
- if(!infile.open(QIODevice::ReadOnly))
-   return;
-
  // EVENT_ID_CNTY		EVENT_DATE			EVENT_TYPE		LATITUDE	LONGITUDE TIMESTAMP
 
  u1 matches_size = 30;
 
  QVector<QPair<QVector<r8>, QStringList>> info;
 
-// match_locations_in_info_file("incidents",
-//    latitude,  longitude, matches_size, 3, 4, ' ', info);
+ match_locations_in_info_file("incidents",
+    latitude,  longitude, matches_size, 3, 4, ' ', info, allow_duplicates);
 
- match_locations_in_text_file(path,
-    latitude, longitude, matches_size, 3, 4, ' ', info, (u4)-1);
+// QString path = "/home/nlevisrael/gits/acle/lat-lon.txt";
+// match_locations_in_text_file(path,
+//    latitude, longitude, matches_size, 3, 4, ' ', info, allow_duplicates);
 
  if(!qmt_client_layer_base_->adopt_style("incident"))
  {
-  qreal diamond_scale = 1;
+  qreal diamond_scale = 1.5;
   QPointF diamond_adj{0, 0};
 
   QPolygonF diamond;// = new QPolygonF;
-  diamond << QPointF(-240, 110)/diamond_scale + diamond_adj;
-  diamond << QPointF(240, 110)/diamond_scale + diamond_adj;
-  diamond << QPointF(110, 240)/diamond_scale + diamond_adj;
-  diamond << QPointF(110, -240)/diamond_scale + diamond_adj;
-  diamond << QPointF(240, -110)/diamond_scale + diamond_adj;
-  diamond << QPointF(-240, -110)/diamond_scale + diamond_adj;
-  diamond << QPointF(-110, -240)/diamond_scale + diamond_adj;
-  diamond << QPointF(-110, 240)/diamond_scale + diamond_adj;
+  diamond << QPointF(-240, 110)*diamond_scale + diamond_adj;
+  diamond << QPointF(240, 110)*diamond_scale + diamond_adj;
+  diamond << QPointF(110, 240)*diamond_scale + diamond_adj;
+  diamond << QPointF(110, -240)*diamond_scale + diamond_adj;
+  diamond << QPointF(240, -110)*diamond_scale + diamond_adj;
+  diamond << QPointF(-240, -110)*diamond_scale + diamond_adj;
+  diamond << QPointF(-110, -240)*diamond_scale + diamond_adj;
+  diamond << QPointF(-110, 240)*diamond_scale + diamond_adj;
   qmt_client_layer_base_->define_and_adopt_style("incident",
     "handle_incident_context_menu",
     {QColor(175, 104, 39)}, diamond,
@@ -376,7 +376,7 @@ void Main_Window_Controller::find_bus_stops(r8 latitude, r8 longitude)
 
  if(!qmt_client_layer_base_->adopt_style("bus-stop"))
  {
-  qreal diamond_scale = 4;
+  qreal diamond_scale = 2;
   QPointF diamond_adj{0, 0};
 
   QPolygonF diamond;// = new QPolygonF;
