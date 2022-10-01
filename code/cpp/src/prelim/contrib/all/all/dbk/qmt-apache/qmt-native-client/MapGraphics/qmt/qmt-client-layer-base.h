@@ -32,6 +32,8 @@
 
 #include "MapGraphicsScene.h"
 
+#include "qmt-data-set-base.h"
+
 #include <typeinfo>
 
 class MapGraphicsScene;
@@ -40,6 +42,8 @@ class MapGraphicsView;
 class CircleObject;
 class PolygonObject;
 class QPolygonF;
+
+class QMT_Data_Set_Base;
 
 class QMT_Client_Layer_Base
 {
@@ -54,8 +58,8 @@ protected:
 public:
 
  virtual void add_d0_mark(r8 latitude, r8 longitude, QStringList text = {}) = 0;
- virtual void add_d0_mark(QVector<r8> coords, QStringList text = {}) = 0;
- virtual void add_d0_marks(const QVector<QPair<QVector<r8>, QStringList>>& coords_and_texts);
+ virtual void add_d0_mark(QMT_Data_Set_Base::Match_Info& match_info) = 0;
+ virtual void add_d0_marks(QMT_Data_Set_Base* data_set);
 
 // virtual void* define_style(QString name, std::type_index model,
 //   QVector<QColor> colors, QVector<r8> params, u1 complexity = 0) = 0;

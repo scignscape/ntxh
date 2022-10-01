@@ -13,9 +13,12 @@ TEMPLATE = lib
 
 DEFINES += MAPGRAPHICS_LIBRARY
 
-DEFINES += SCREENSHOTS_FOLDER=\\\"../screenshots\\\"
+DEFINES += SCREENSHOTS_FOLDER=\\\"$${ROOT_DIR}/../screenshots\\\"
 
 DEFINES += ROOT_FOLDER=\\\"$${ROOT_DIR}\\\"
+
+DEFINES += EXAMPLE_DATA_FOLDER=\\\"$${ROOT_DIR}/example-data/nathaniel-christen/industry-4_0-section-5\\\"
+
 
 CONFIG += c++17
 
@@ -47,6 +50,7 @@ SOURCES += \
   $$SRC_DIR/qmt/main-window-controller.cpp \
   $$SRC_DIR/qmt/qmt-gis-utils.cpp \
   $$SRC_DIR/qmt/qmt-client-layer-base.cpp \
+  $$SRC_DIR/qmt/qmt-data-set-base.cpp \
   $$SRC_DIR/qmt/qmt-client-context-menu-handler-base.cpp \
   $$SRC_DIR/qmt/qmt-client-location-focus-base.cpp \
   $$SRC_DIR/dialogs/tile-server-select-dialog.cpp \
@@ -81,6 +85,7 @@ HEADERS += \
   $$SRC_DIR/qmt/main-window-controller.h \
   $$SRC_DIR/qmt/qmt-gis-utils.h \
   $$SRC_DIR/qmt/qmt-client-layer-base.h \
+  $$SRC_DIR/qmt/qmt-data-set-base.h \
   $$SRC_DIR/qmt/qmt-client-location-focus-base.h \
   $$SRC_DIR/qmt/qmt-client-context-menu-handler-base.h \
   $$SRC_DIR/dialogs/tile-server-select-dialog.h \

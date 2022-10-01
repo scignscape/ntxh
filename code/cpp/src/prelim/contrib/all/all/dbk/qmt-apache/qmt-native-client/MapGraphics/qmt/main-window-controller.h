@@ -18,10 +18,13 @@
 
 #include "accessors.h"
 
+#include "qmt-data-set-base.h"
+
 #include <QString>
 #include <QList>
 
 #include <QPoint>
+#include <QStack>
 
 //class QMT_Server_Response;
 
@@ -34,6 +37,8 @@ class Main_Window_Controller
 
  MapGraphicsView* view_;
  QMT_Client_Layer_Base* qmt_client_layer_base_;
+
+ QStack<QMT_Data_Set_Base*> active_data_sets_;
 
  QMT_GIS_Utils gis_utils_;
 
@@ -76,20 +81,22 @@ public:
   return info_files_->value(key);
  }
 
- static u4 match_locations_in_text_file(QString file_path, r8 query_latitude, r8 query_longitude,
-   u4 number_of_results, u1 latitude_column,
-   u1 longitude_column, u1 column_separator,
-   QVector<QPair<QVector<r8>, QStringList>>& results,
-   s4 allow_duplicates = 0,
-   u1 number_of_header_lines = 1, QVector<u1> other_location_columns = {});
+// static u4 match_locations_in_text_file(QString file_path, r8 query_latitude, r8 query_longitude,
+//   u4 number_of_results, u1 latitude_column,
+//   u1 longitude_column, u1 column_separator,
+//   QVector<QPair<QVector<r8>, QStringList>>& results,
+//   s4 allow_duplicates = 0,
+//   u1 number_of_header_lines = 1, QVector<u1> other_location_columns = {});
 
  template<typename... ARGS>
- u4 match_locations_in_info_file(QString key, ARGS&&... args)
+ u4 match_locations_in_info_file(QString key, QMT_Data_Set_Base* data_set,
+   ARGS&&... args)
  {
   QString file_path = get_info_file(key);
   if(file_path.isEmpty())
     return 0;
-  return match_locations_in_text_file(file_path, std::forward<ARGS>(args)...);
+  return data_set->match_locations_in_text_file(file_path,
+    std::forward<ARGS>(args)...);
  }
 
 // ACCESSORS(QString ,request_path)

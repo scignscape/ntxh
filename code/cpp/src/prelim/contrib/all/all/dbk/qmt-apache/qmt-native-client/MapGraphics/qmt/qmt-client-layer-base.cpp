@@ -91,8 +91,9 @@ void* QMT_Client_Layer_Base::define_and_adopt_style(QString name, QString contex
  return current_style_;
 }
 
-void QMT_Client_Layer_Base::add_d0_marks(const QVector<QPair<QVector<r8>, QStringList>>& coords_and_texts)
+void QMT_Client_Layer_Base::add_d0_marks(QMT_Data_Set_Base* data_set)
+  //const QVector<QPair<QVector<r8>, QStringList>>& coords_and_texts)
 {
- for(auto& pr : coords_and_texts)
-   add_d0_mark(pr.first, pr.second);
+ for(auto& match : data_set->current_matches())
+   add_d0_mark(match);
 }

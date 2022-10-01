@@ -102,7 +102,9 @@ void* QMT_Client_Layer::define_style(QString name, QString context_menu_handler,
 
 void QMT_Client_Layer::add_d0_mark(r8 latitude, r8 longitude, QStringList text)
 {
- add_d0_mark({latitude, longitude}, text);
+ QMT_Data_Set_Base::Match_Info match{
+   {{._r8=latitude}, {._r8=longitude}}, text};
+ add_d0_mark(match);
 }
 
 
@@ -126,8 +128,10 @@ QString QMT_Client_Layer::get_context_menu_handler_name(MapGraphicsObject* mgo)
  return {};
 }
 
-void QMT_Client_Layer::add_d0_mark(QVector<r8> coords, QStringList text)
+void QMT_Client_Layer::add_d0_mark(QMT_Data_Set_Base::Match_Info& match_info)
 {
+ QVector<QMT_Data_Set_Base::_r8_or_ptr>& coords = match_info.location_fields;
+
  Style_Params* sp = (Style_Params*) current_style_;
 
  CircleObject* co = nullptr;
@@ -138,11 +142,11 @@ void QMT_Client_Layer::add_d0_mark(QVector<r8> coords, QStringList text)
  switch (sp->model)
  {
  case Known_Style_Models::QGraphicsEllipse_Circle:
-   co = add_circle_object(coords[0], coords[1], sp->x_radius, sp->brush_color);
+   co = add_circle_object(coords[0]._r8, coords[1]._r8, sp->x_radius, sp->brush_color);
    break;
 
  case Known_Style_Models::QGraphicsPolygon:
-   co = add_polygon_object(coords[0], coords[1], sp->polygon, sp->brush_color,
+   co = add_polygon_object(coords[0]._r8, coords[1]._r8, sp->polygon, sp->brush_color,
      std::isnan(sp->select_margin)? default_select_margin : sp->select_margin);
    co->clearFlag(MapGraphicsObject::ObjectIsMovable);
    break;
@@ -154,7 +158,7 @@ void QMT_Client_Layer::add_d0_mark(QVector<r8> coords, QStringList text)
 //  QPair<r8, QStringList> pr {coords.value(2), text};
 //  co->set_client_data(QVariant::fromValue<QPair<r8, QStringList>>(pr));
 
-  QVector<QVariant> vv {QVariant(text), QVariant(coords.value(2)), QVariant(coords.value(3))};
+  QVector<QVariant> vv {QVariant(match_info.text_fields), QVariant(coords.value(2)._r8), QVariant(coords.value(3)._r8)};
   co->set_client_data(QVariant::fromValue<QVector<QVariant>>(vv));
 
  }
