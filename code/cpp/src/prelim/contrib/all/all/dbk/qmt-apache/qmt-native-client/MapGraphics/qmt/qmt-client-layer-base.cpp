@@ -95,5 +95,8 @@ void QMT_Client_Layer_Base::add_d0_marks(QMT_Client_Data_Set_Base* data_set)
   //const QVector<QPair<QVector<r8>, QStringList>>& coords_and_texts)
 {
  for(auto& match : data_set->current_matches())
-   add_d0_mark(match);
+ {
+  CircleObject* co = add_d0_mark(match);
+  data_set->bind_new_graphics_object(co);
+ }
 }

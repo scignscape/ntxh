@@ -10,7 +10,7 @@
 
 MapGraphicsObject::MapGraphicsObject(MapGraphicsView* containing_view,
    bool sizeIsZoomInvariant, MapGraphicsObject *parent)
- :  containing_view_(containing_view),
+ :  containing_view_(containing_view), move_increment_value_(0),
    _sizeIsZoomInvariant(sizeIsZoomInvariant),
    _constructed(false), style_params_(nullptr)
 {
@@ -307,9 +307,20 @@ void MapGraphicsObject::mousePressEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //protected
-void MapGraphicsObject::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{
- event->ignore();
+void MapGraphicsObject::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
+{ 
+ if(move_increment_value_ > 10)
+ {
+  reset_move_increment();
+  event->accept();
+
+  QPointF p = pos() + event->pos();
+
+  Q_EMIT move_registered(p);
+ }
+
+ else
+   event->ignore();
 }
 
 //protected

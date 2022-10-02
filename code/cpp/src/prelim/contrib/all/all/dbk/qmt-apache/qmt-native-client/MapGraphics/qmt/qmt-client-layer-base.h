@@ -57,8 +57,8 @@ protected:
 
 public:
 
- virtual void add_d0_mark(r8 latitude, r8 longitude, QStringList text = {}) = 0;
- virtual void add_d0_mark(QMT_Client_Data_Set_Base::Match_Info& match_info) = 0;
+ virtual CircleObject* add_d0_mark(r8 latitude, r8 longitude, QStringList text = {}) = 0;
+ virtual CircleObject* add_d0_mark(QMT_Client_Data_Set_Base::Match_Info& match_info) = 0;
  virtual void add_d0_marks(QMT_Client_Data_Set_Base* data_set);
 
 // virtual void* define_style(QString name, std::type_index model,

@@ -105,10 +105,10 @@ public:
  QPoint map_ll_to_view(const QPointF &pos);
 
 
-signals:
+Q_SIGNALS:
  void zoomLevelChanged(quint8 nZoom);
 
-public Q_SLOTS:
+ void preview_dialogs_requested(QString);
 
 protected Q_SLOTS:
  virtual void handleChildMouseDoubleClick(QMouseEvent * event);

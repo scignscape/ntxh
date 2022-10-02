@@ -22,6 +22,7 @@
 
 
 QMT_Client_Data_Set_Base::QMT_Client_Data_Set_Base()
+  :  current_bind_object_(nullptr), current_bind_vector_(nullptr)
 {
 
 }

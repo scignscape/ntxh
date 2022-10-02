@@ -18,6 +18,10 @@
 
 #include "main-window.h"
 
+#include "lanternfly-sighting-dialog.h"
+#include "lanternfly-configuration-dialog.h"
+#include "lanternfly-sighting-filter-dialog.h"
+
 
 Lanternfly_Frame::Lanternfly_Frame(Lanternfly_Main_Window* mw) : QFrame(mw)
 {
@@ -25,6 +29,44 @@ Lanternfly_Frame::Lanternfly_Frame(Lanternfly_Main_Window* mw) : QFrame(mw)
 
  scene_ = new MapGraphicsScene;
  view_ = new MapGraphicsView;
+
+ QObject::connect(view_, &MapGraphicsView::preview_dialogs_requested,
+    [](QString which)
+ {
+  QDialog* dlg = nullptr;
+
+  static QMap<QString, void(*)(QDialog*&)> options {
+
+#define TEMP_MACRO(x) \
+   { #x, [](QDialog*& result) \
+     {result = new x;} }, \
+
+   TEMP_MACRO(Lanternfly_Sighting_Dialog)
+   TEMP_MACRO(Lanternfly_Configuration_Dialog)
+   TEMP_MACRO(Lanternfly_Sighting_Filter_Dialog)
+
+#undef TEMP_MACRO
+  };
+
+  auto it = options.find(which);
+  if(it != options.end())
+  {
+   (*it)(dlg);
+   if(dlg)
+     dlg->show();
+  }
+ });
+
+ // Lanternfly_Sighting_Dialog* lsd = new Lanternfly_Sighting_Dialog;
+ // lsd->show();
+
+ // Lanternfly_Sighting_Filter_Dialog* lsfd = new Lanternfly_Sighting_Filter_Dialog;
+ // lsfd->show();
+
+ // Lanternfly_Configuration_Dialog* lcd = new Lanternfly_Configuration_Dialog;
+ // lcd->show();
+
+
 
  client_layer_ = new QMT_Client_Layer(scene_, view_);
  view_->set_qmt_client_layer_base(client_layer_);

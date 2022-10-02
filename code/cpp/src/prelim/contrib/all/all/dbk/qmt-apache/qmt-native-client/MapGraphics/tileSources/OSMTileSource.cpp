@@ -138,6 +138,16 @@ void OSMTileSource::fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate)
    }
    else
    {
+    hosts = QStringList{current_local_info_host_, current_local_host_, current_url_};
+    //   hosts = QStringList{"http://localhost:6600/qmt/rI~png/~tiles/kherson/~osm-",
+    //     "http://localhost:6600/qmt/rS~png/~tiles/kherson/~osm-",
+
+     urls = QStringList{current_local_info_url_, current_local_url_, current_url_};
+
+//       "%1-%2-%3",
+//         "%1-%2-%3",
+//          "%1/%2/%3.png"
+
     //?
    }
   }

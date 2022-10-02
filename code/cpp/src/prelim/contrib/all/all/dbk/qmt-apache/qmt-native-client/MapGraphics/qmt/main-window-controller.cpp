@@ -20,6 +20,8 @@
 #include "web-engine/qmt-web-engine-page.h"
 #include "web-engine/qmt-my-page.h"
 
+#include "CircleObject.h"
+
 
 #include <QMessageBox>
 
@@ -134,9 +136,89 @@ void Main_Window_Controller::track_incidents(r8 latitude, r8 longitude, s4 allow
 
 }
 
-
-void Main_Window_Controller::find_bus_stops(r8 latitude, r8 longitude)
+CircleObject* Main_Window_Controller::add_spot_location_marking(r8 latitude, r8 longitude)
 {
+ QPolygonF* qpf1 = new QPolygonF;
+ (*qpf1) << QPointF(-20, 110);
+ (*qpf1) << QPointF(20, 110);
+ (*qpf1) << QPointF(40, 40);
+ (*qpf1) << QPointF(110, 20);
+ (*qpf1) << QPointF(110, -20);
+ (*qpf1) << QPointF(40, -40);
+ (*qpf1) << QPointF(20, -110);
+ (*qpf1) << QPointF(-20, -110);
+ (*qpf1) << QPointF(-40, -40);
+ (*qpf1) << QPointF(-110, -20);
+ (*qpf1) << QPointF(-110, 20);
+ (*qpf1) << QPointF(-40, 40);
+
+ QColor spot_clr = QColor(201, 159, 34);
+
+ // QColor(201, 159, 34)
+
+ CircleObject* result = new CircleObject(view_, 125, false, spot_clr);
+ result->setLatitude(latitude);
+ result->setLongitude(longitude);
+ view_->scene()->addObject(result);
+ result->set_ref(qpf1);
+
+ return result;
+}
+
+void Main_Window_Controller::find_bus_stops(r8 latitude, r8 longitude, CircleObject* _spot)
+{
+ qDebug() << "lat = " << latitude;
+ qDebug() << "lon = " << longitude;
+
+ if(_spot)
+ {
+  active_data_sets_.pop();
+  if(QMT_Client_Data_Set_Base* data_set = _spot->client_data_set_base())
+  {
+   if(data_set->current_bind_vector())
+   {
+    for(CircleObject* co : *data_set->current_bind_vector())
+    {
+     view_->scene()->removeObject(co);
+     //co->setVisible(false);
+    }
+   }
+   //?
+   //?delete data_set;
+  }
+  _spot->setVisible(false);
+  view_->scene()->removeObject(_spot);
+  delete _spot;
+ }
+
+ CircleObject* spot = add_spot_location_marking(latitude, longitude);
+
+ spot->setFlags(MapGraphicsObject::ObjectIsSelectable);
+
+
+ QObject::connect(spot, &CircleObject::selectedChanged, [spot]()
+ {
+  if(spot->isSelected())
+    spot->setFlag(MapGraphicsObject::ObjectIsMovable);
+  else
+    spot->setFlag(MapGraphicsObject::ObjectIsMovable, false);
+ });
+
+  QObject::connect(spot, &CircleObject::posChanged, [spot]()
+  {
+   if(spot->isSelected())
+     spot->move_increment();
+  });
+
+  QObject::connect(spot, &CircleObject::move_registered, [spot, this](const QPointF& pos)
+  {
+   qDebug() << "pos = " << pos;
+   r8 lat = spot->latitude();
+   r8 lon = spot->longitude();
+   find_bus_stops(lat, lon, spot);
+  });
+
+
  //    QString path = main_window_controller_->get_info_file("bus");  //"/home/nlevisrael/gits/acle/bus_data/stops.txt";
  static u1 stops_size = 20;
 
@@ -156,8 +238,12 @@ void Main_Window_Controller::find_bus_stops(r8 latitude, r8 longitude)
   return;
  }
 
- active_data_sets_.push(data_set);
+ data_set->bind_to_spot_location(spot);
 
+ spot->set_client_data_set_base(data_set);
+
+
+ active_data_sets_.push(data_set);
 
  if(!qmt_client_layer_base_->adopt_style("bus-stop"))
  {
@@ -180,13 +266,15 @@ void Main_Window_Controller::find_bus_stops(r8 latitude, r8 longitude)
  }
  qmt_client_layer_base_->add_d0_marks(data_set);
 
+ view_->scene()->removeObject(spot);
+ view_->scene()->addObject(spot);
+
+
 }
 
 
 void Main_Window_Controller::load_bus_data()
 {
- qDebug() << "E: " << EXAMPLE_DATA_FOLDER;
-
  QString path = QFileDialog::getOpenFileName(view_, "Select File (it should match \"stops.txt\")",
    EXAMPLE_DATA_FOLDER);
  if(path.isEmpty())
@@ -225,6 +313,14 @@ void Main_Window_Controller::reset_map_style(QPoint qp)
  tsd->show();
 }
 
+void Main_Window_Controller::activate_local_tile_server()
+{
+ QSharedPointer<MapTileSource> mts = view_->tileSource();
+ mts->set_current_local_info_host("http://localhost:6600/qmt/rI~png/~tiles/kherson/~osm-");
+ mts->set_current_local_host("http://localhost:6600/qmt/rS~png/~tiles/kherson/~osm-");
+ mts->set_current_local_info_url("%1-%2-%3");
+ mts->set_current_local_url("%1-%2-%3");
+}
 
 void Main_Window_Controller::toggle_marking_outline_visibility()
 {

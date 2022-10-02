@@ -14,6 +14,8 @@
 
 #include "MapGraphics_global.h"
 
+#include "global-types.h"
+
 #include "accessors.h"
 
 class MapGraphicsView;
@@ -23,6 +25,8 @@ class MapGraphicsView;
 class MAPGRAPHICSSHARED_EXPORT MapGraphicsObject : public QObject
 {
  Q_OBJECT
+
+ u4 move_increment_value_;
 
 protected:
  MapGraphicsView* containing_view_;
@@ -80,6 +84,17 @@ public:
      * @param widget
      */
  virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget=0)=0;
+
+ void move_increment()
+ {
+  ++move_increment_value_;
+ }
+
+ void reset_move_increment()
+ {
+  move_increment_value_ = 0;
+ }
+
 
  QPointF map_to_scene(const QPointF &pos);
  QPointF map_pos_to_scene();
@@ -142,7 +157,7 @@ protected:
  virtual void wheelEvent(QGraphicsSceneWheelEvent * event);
 
 
-signals:
+Q_SIGNALS:
  void enabledChanged();
  void opacityChanged();
  void parentChanged();
@@ -151,6 +166,8 @@ signals:
  void visibleChanged();
  void zValueChanged();
  void toolTipChanged(const QString& toolTip);
+
+ void move_registered(const QPointF& pos);
 
  void flagsChanged();
 

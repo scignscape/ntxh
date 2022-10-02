@@ -95,6 +95,28 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
    main_window_controller_->toggle_marking_outline_visibility();
   });
 
+  QMenu* dialogs =  menu->addMenu("Preview Dialogs");
+
+  dialogs->addAction("Lanternfly Configuration", [this, qp]()
+  {
+   Q_EMIT preview_dialogs_requested("Lanternfly_Configuration_Dialog");
+  });
+
+  dialogs->addAction("Lanternfly Sighting", [this, qp]()
+  {
+   Q_EMIT preview_dialogs_requested("Lanternfly_Sighting_Dialog");
+  });
+
+  dialogs->addAction("Lanternfly Sighting Filter", [this, qp]()
+  {
+   Q_EMIT preview_dialogs_requested("Lanternfly_Sighting_Filter_Dialog");
+  });
+
+  menu->addAction("Activate Local Tile Server", [this, qp]()
+  {
+   main_window_controller_->activate_local_tile_server();
+  });
+
   QString current_location_name = qmt_client_location_focus_base_->current_location_name();
 
   // //  a hack to demo switching between features for different locations.

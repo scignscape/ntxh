@@ -100,11 +100,11 @@ void* QMT_Client_Layer::define_style(QString name, QString context_menu_handler,
  return sp;
 }
 
-void QMT_Client_Layer::add_d0_mark(r8 latitude, r8 longitude, QStringList text)
+CircleObject* QMT_Client_Layer::add_d0_mark(r8 latitude, r8 longitude, QStringList text)
 {
  QMT_Client_Data_Set_Base::Match_Info match{
    {{._r8=latitude}, {._r8=longitude}}, text};
- add_d0_mark(match);
+ return add_d0_mark(match);
 }
 
 
@@ -128,7 +128,7 @@ QString QMT_Client_Layer::get_context_menu_handler_name(MapGraphicsObject* mgo)
  return {};
 }
 
-void QMT_Client_Layer::add_d0_mark(QMT_Client_Data_Set_Base::Match_Info& match_info)
+CircleObject* QMT_Client_Layer::add_d0_mark(QMT_Client_Data_Set_Base::Match_Info& match_info)
 {
  QVector<QMT_Client_Data_Set_Base::_r8_or_ptr>& coords = match_info.location_fields;
 
@@ -162,6 +162,8 @@ void QMT_Client_Layer::add_d0_mark(QMT_Client_Data_Set_Base::Match_Info& match_i
   co->set_client_data(QVariant::fromValue<QVector<QVariant>>(vv));
 
  }
+
+ return co;
 
 }
 

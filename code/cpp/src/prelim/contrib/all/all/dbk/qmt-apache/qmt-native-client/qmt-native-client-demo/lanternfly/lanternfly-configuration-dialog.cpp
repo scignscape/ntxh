@@ -188,8 +188,8 @@ Lanternfly_Configuration_Dialog::Lanternfly_Configuration_Dialog(QWidget* parent
  inner_colors_layouts_[0]->addWidget(new QLabel("Transportation"));
  inner_colors_layouts_[0]->addWidget(adj_button(colors_buttons_[3], QColor(55, 90, 110, 255)));
 
- inner_colors_layouts_[1]->addWidget(new QLabel("Current Selected Map Item (if applicable)"));
- inner_colors_layouts_[1]->addWidget(adj_button(colors_buttons_[4], QColor(80, 105, 155, 220)));
+ inner_colors_layouts_[1]->addWidget(new QLabel("Current Selected Map Item/Location (if applicable)"));
+ inner_colors_layouts_[1]->addWidget(adj_button(colors_buttons_[4], QColor(201, 159, 34)));
  inner_colors_layouts_[1]->addStretch();
 
  for(auto* layout : inner_colors_layouts_)

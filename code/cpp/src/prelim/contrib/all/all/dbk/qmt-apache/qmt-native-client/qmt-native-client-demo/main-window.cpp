@@ -29,20 +29,11 @@
 #include "lanternfly/lanternfly-configuration-dialog.h"
 #include "lanternfly/lanternfly-sighting-filter-dialog.h"
 
-Lanternfly_Main_Window::Lanternfly_Main_Window(QWidget *parent) :
+Lanternfly_Main_Window::Lanternfly_Main_Window(QWidget* parent) :
   QMainWindow(parent)
 //    ui(new Ui::MainWindow)
 {
  setWindowTitle("Lanternfly Sighting Map");
-
-// Lanternfly_Sighting_Dialog* lsd = new Lanternfly_Sighting_Dialog;
-// lsd->show();
-
-// Lanternfly_Sighting_Filter_Dialog* lsfd = new Lanternfly_Sighting_Filter_Dialog;
-// lsfd->show();
-
-// Lanternfly_Configuration_Dialog* lcd = new Lanternfly_Configuration_Dialog;
-// lcd->show();
 
  //    ui->setupUi(this);
 

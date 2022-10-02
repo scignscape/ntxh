@@ -7,6 +7,7 @@
 #include "global-types.h"
 
 class MapGraphicsView;
+class QMT_Client_Data_Set_Base;
 
 class MAPGRAPHICSSHARED_EXPORT CircleObject : public MapGraphicsObject
 {
@@ -16,8 +17,12 @@ class MAPGRAPHICSSHARED_EXPORT CircleObject : public MapGraphicsObject
  u2 outline_code_;
  u2 held_outline_code_;
 
+ QMT_Client_Data_Set_Base* client_data_set_base_;
+
+
 public:
- explicit CircleObject(MapGraphicsView* containing_view, qreal radius,bool sizeIsZoomInvariant=true, QColor fillColor = QColor(0,0,0,0),MapGraphicsObject *parent = 0);
+ explicit CircleObject(MapGraphicsView* containing_view, qreal radius,
+   bool sizeIsZoomInvariant=true, QColor fillColor = QColor(0,0,0,0),MapGraphicsObject *parent = 0);
  virtual ~CircleObject();
 
  //pure-virtual from MapGraphicsObject
@@ -33,6 +38,8 @@ public:
  ACCESSORS(u2 ,outline_code)
  ACCESSORS(u2 ,held_outline_code)
  ACCESSORS(void* ,ref)
+ ACCESSORS(QMT_Client_Data_Set_Base* ,client_data_set_base)
+
 
  void swap_outline_code()
  {

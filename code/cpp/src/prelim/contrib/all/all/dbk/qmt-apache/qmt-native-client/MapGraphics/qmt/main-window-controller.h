@@ -68,13 +68,18 @@ public:
  void llcoords_to_street_address(QPoint qp);
 
  void load_bus_data();
- void find_bus_stops(r8 latitude, r8 longitude);
+ void find_bus_stops(r8 latitude, r8 longitude, CircleObject* spot = nullptr);
+
+ CircleObject* add_spot_location_marking(r8 latitude, r8 longitude);
+
 
  void load_incident_reports();
  void track_incidents(r8 latitude, r8 longitude, s4 allow_duplicates);
 
  void load_web_engine_view(QUrl url);
  void load_single_file_data_set();
+
+ void activate_local_tile_server();
 
  void toggle_marking_outline_visibility();
 

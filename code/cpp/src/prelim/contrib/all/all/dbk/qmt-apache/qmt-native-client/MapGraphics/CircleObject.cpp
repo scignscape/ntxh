@@ -8,7 +8,7 @@
 #include <QKeyEvent>
 
 CircleObject::CircleObject(MapGraphicsView* containing_view, qreal radius,bool sizeIsZoomInvariant, QColor fillColor, MapGraphicsObject *parent) :
-  MapGraphicsObject(containing_view, sizeIsZoomInvariant,parent),
+  MapGraphicsObject(containing_view, sizeIsZoomInvariant,parent), client_data_set_base_(nullptr),
   _fillColor(fillColor), ref_(nullptr), held_outline_code_(0), outline_code_(0)
 {
  _radius = qMax<qreal>(radius,0.01);

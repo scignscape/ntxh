@@ -65,6 +65,9 @@ protected:
 
  QVector<Match_Info> current_matches_;
 
+ QVector<CircleObject*>* current_bind_vector_;
+ CircleObject* current_bind_object_;
+
  virtual void read_ntxh_hypernode(NTXH_Graph& g, hypernode_type* h) = 0;
  virtual void prepare_ntxh_document(NTXH_Document& doc, QString file_path) = 0;
  virtual void conclude_ntxh_document(NTXH_Document& doc, QString file_path) = 0;
@@ -75,9 +78,12 @@ public:
 
  QMT_Client_Data_Set_Base();
 
+ virtual ~QMT_Client_Data_Set_Base() {}
 
  ACCESSORS(QString ,single_file_path)
  ACCESSORS(QString ,folder_path)
+
+ ACCESSORS(QVector<CircleObject*>* ,current_bind_vector)
 
  ACCESSORS__RGET(QVector<Match_Info> ,current_matches)
 
@@ -87,6 +93,18 @@ public:
  virtual void toggle_marking_outline_visibility(u4* count = nullptr) {}
 
  virtual u4 load_ok() = 0;
+
+ virtual void bind_new_graphics_object(CircleObject* co)
+ {
+  if(current_bind_vector_)
+    current_bind_vector_->push_back(co);
+ }
+
+ virtual void bind_to_spot_location(CircleObject* co)
+ {
+  current_bind_vector_ = new QVector<CircleObject*>;
+  current_bind_object_ = co;
+ }
 
  void load_ntxh_file(QString file_path);
 

@@ -45,6 +45,11 @@ public:
  ACCESSORS(QString ,current_url)
  ACCESSORS(QString ,current_local_host)
 
+ ACCESSORS(QString ,current_local_info_host)
+ ACCESSORS(QString ,current_local_url)
+ ACCESSORS(QString ,current_local_info_url)
+
+
  virtual void update_hosts() {};
 
  virtual void update_host_cache();
@@ -175,9 +180,8 @@ signals:
  void allTilesInvalidated();
 
 
-public slots:
 
-private slots:
+private Q_SLOTS:
  void startTileRequest(quint32 x, quint32 y, quint8 z);
  void clearTempCache();
 
@@ -186,7 +190,9 @@ protected:
  QString current_host_;
  QString current_url_;
  QString current_local_host_;
-
+ QString current_local_info_host_;
+ QString current_local_url_;
+ QString current_local_info_url_;
 
 
  /**
