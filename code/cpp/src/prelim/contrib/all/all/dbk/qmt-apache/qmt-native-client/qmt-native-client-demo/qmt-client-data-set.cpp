@@ -9,6 +9,8 @@
 
 #include "lanternfly-data-set.h"
 
+#include "CircleObject.h"
+
 #include "global-types.h"
 
 #include <QMessageBox>
@@ -22,7 +24,7 @@
 
 
 QMT_Client_Data_Set::QMT_Client_Data_Set(Lanternfly_Main_Window* main_window)
-  :  main_window_(main_window)
+  :  main_window_(main_window), last_load_status_(0)
 {
 
 }
@@ -40,9 +42,14 @@ void QMT_Client_Data_Set::prepare_ntxh_document(NTXH_Document& doc, QString file
 
 }
 
+u4 QMT_Client_Data_Set::load_ok()
+{
+ return last_load_status_;
+}
+
 void QMT_Client_Data_Set::conclude_ntxh_document(NTXH_Document& doc, QString file_path)
 {
-
+ last_load_status_ = current_content_base_->get_item_count();
 }
 
 void QMT_Client_Data_Set::read_ntxh_hypernode(NTXH_Graph& g, hypernode_type* h)
@@ -69,5 +76,18 @@ void QMT_Client_Data_Set::read_ntxh_hypernode(NTXH_Graph& g, hypernode_type* h)
 
 void QMT_Client_Data_Set::add_markings()
 {
- current_content_base_->add_markings(*main_window_);
+ current_content_base_->add_markings(*main_window_, all_markings_[current_content_base_]);
+}
+
+void QMT_Client_Data_Set::toggle_marking_outline_visibility(u4* count)
+{
+ for(QVector<CircleObject*> vec : all_markings_.values())
+ {
+  if(count)
+    *count += vec.size();
+  for(CircleObject* co : vec)
+  {
+   co->swap_outline_code();
+  }
+ }
 }

@@ -90,7 +90,13 @@ public:
  Lanternfly_Data_Set();
 
  void read_ntxh_hypernode(NTXH_Graph& g, hypernode_type* h) Q_DECL_OVERRIDE;
- void add_markings(Lanternfly_Main_Window& main_window) Q_DECL_OVERRIDE;
+ void add_markings(Lanternfly_Main_Window& main_window,
+   QVector<CircleObject*>& stash) Q_DECL_OVERRIDE;
+
+ u4 get_item_count() Q_DECL_OVERRIDE
+ {
+  return sightings_.size();
+ }
 
 // virtual QMT_Client_Data_Set_Base* make_new_unattached_child_data_set() Q_DECL_OVERRIDE;
 

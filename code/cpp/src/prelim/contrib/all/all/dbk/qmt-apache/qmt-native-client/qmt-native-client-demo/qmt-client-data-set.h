@@ -52,6 +52,10 @@ class QMT_Client_Data_Set : public QMT_Client_Data_Set_Base
  QMT_Data_Set_Content_Base* current_content_base_;
  Lanternfly_Main_Window* main_window_;
 
+ QMap<QMT_Data_Set_Content_Base*, QVector<CircleObject*>> all_markings_;
+
+ u4 last_load_status_;
+
 protected:
 
  virtual void read_ntxh_hypernode(NTXH_Graph& g, hypernode_type* h) Q_DECL_OVERRIDE;
@@ -73,6 +77,8 @@ public:
  virtual QMT_Client_Data_Set_Base* make_new_unattached_child_data_set() Q_DECL_OVERRIDE;
 
  virtual void add_markings() Q_DECL_OVERRIDE;
+ virtual void toggle_marking_outline_visibility(u4* count = nullptr) Q_DECL_OVERRIDE;
+ virtual u4 load_ok() Q_DECL_OVERRIDE;
 
 };
 

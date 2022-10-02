@@ -84,6 +84,10 @@ public:
  virtual QMT_Client_Data_Set_Base* make_new_unattached_child_data_set() = 0;
  virtual void add_markings() = 0;
 
+ virtual void toggle_marking_outline_visibility(u4* count = nullptr) {}
+
+ virtual u4 load_ok() = 0;
+
  void load_ntxh_file(QString file_path);
 
  u4 match_locations_in_text_file(QString file_path, r8 query_latitude, r8 query_longitude,

@@ -90,6 +90,11 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
    main_window_controller_->load_single_file_data_set();
   });
 
+  menu->addAction("Show/Hide Marking Outlines", [this, qp]()
+  {
+   main_window_controller_->toggle_marking_outline_visibility();
+  });
+
   QString current_location_name = qmt_client_location_focus_base_->current_location_name();
 
   // //  a hack to demo switching between features for different locations.

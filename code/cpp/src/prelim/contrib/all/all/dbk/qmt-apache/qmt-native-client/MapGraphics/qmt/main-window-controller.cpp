@@ -225,6 +225,18 @@ void Main_Window_Controller::reset_map_style(QPoint qp)
  tsd->show();
 }
 
+
+void Main_Window_Controller::toggle_marking_outline_visibility()
+{
+ u4 count = 0;
+ for(QMT_Client_Data_Set_Base* ds : active_data_sets_)
+   ds->toggle_marking_outline_visibility(&count);
+
+ if(count)
+   view_->force_reset();
+}
+
+
 void Main_Window_Controller::load_single_file_data_set()
 {
  QString infile = QFileDialog::getOpenFileName(nullptr, "Select File",
@@ -237,6 +249,8 @@ void Main_Window_Controller::load_single_file_data_set()
   QMT_Client_Data_Set_Base* ds = active_data_sets_.first()->make_new_unattached_child_data_set();
   ds->load_ntxh_file(infile);
   ds->add_markings();
+  if(ds->load_ok())
+    active_data_sets_.push(ds);
  }
 }
 

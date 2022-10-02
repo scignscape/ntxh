@@ -61,7 +61,10 @@ public:
  QMT_Data_Set_Content_Base();
 
  virtual void read_ntxh_hypernode(NTXH_Graph& g, hypernode_type* h) = 0;
- virtual void add_markings(Lanternfly_Main_Window& main_window) = 0;
+ virtual void add_markings(Lanternfly_Main_Window& main_window,
+   QVector<CircleObject*>& stash) = 0;
+
+ virtual u4 get_item_count() = 0;
 
 
 // virtual QMT_Client_Data_Set_Base* make_new_unattached_child_data_set() Q_DECL_OVERRIDE;

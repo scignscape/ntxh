@@ -76,6 +76,8 @@ public:
  void load_web_engine_view(QUrl url);
  void load_single_file_data_set();
 
+ void toggle_marking_outline_visibility();
+
  void set_info_file(QString key, QString value)
  {
   (*info_files_)[key] = value;

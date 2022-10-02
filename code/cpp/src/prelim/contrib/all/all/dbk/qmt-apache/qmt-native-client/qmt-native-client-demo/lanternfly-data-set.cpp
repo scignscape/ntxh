@@ -31,11 +31,14 @@ Lanternfly_Data_Set::Lanternfly_Data_Set()
 
 }
 
-void Lanternfly_Data_Set::add_markings(Lanternfly_Main_Window& main_window)
+void Lanternfly_Data_Set::add_markings(Lanternfly_Main_Window& main_window,
+  QVector<CircleObject*>& stash)
 {
  for(const Sighting& s : sightings_)
  {
   CircleObject* circle = nullptr;
+
+  void* ref = nullptr;
 
   switch (s.location_classification)
   {
@@ -51,7 +54,7 @@ void Lanternfly_Data_Set::add_markings(Lanternfly_Main_Window& main_window)
     static QColor parks_color = QColor(155, 0, 220, 220);
 
     circle = new CircleObject(main_window.lanternfly_frame()->view(), 125, false, parks_color);
-    circle->set_ref(qpf);
+    ref = qpf;
    }
    break;
 
@@ -78,8 +81,13 @@ void Lanternfly_Data_Set::add_markings(Lanternfly_Main_Window& main_window)
    circle->setLongitude(s.longitude);
    circle->set_outline_code(s.presentation_code);
    main_window.lanternfly_frame()->scene()->addObject(circle);
+   if(ref)
+     circle->set_ref(ref);
+   stash.push_back(circle);
   }
  }
+
+ main_window.lanternfly_frame()->update();
 }
 
 void Lanternfly_Data_Set::read_ntxh_hypernode(NTXH_Graph& g, hypernode_type* h)

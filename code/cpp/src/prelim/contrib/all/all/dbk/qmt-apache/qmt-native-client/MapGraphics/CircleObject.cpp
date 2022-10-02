@@ -8,14 +8,14 @@
 #include <QKeyEvent>
 
 CircleObject::CircleObject(MapGraphicsView* containing_view, qreal radius,bool sizeIsZoomInvariant, QColor fillColor, MapGraphicsObject *parent) :
-    MapGraphicsObject(containing_view, sizeIsZoomInvariant,parent),
-    _fillColor(fillColor), ref_(nullptr), outline_code_(0)
+  MapGraphicsObject(containing_view, sizeIsZoomInvariant,parent),
+  _fillColor(fillColor), ref_(nullptr), held_outline_code_(0), outline_code_(0)
 {
-    _radius = qMax<qreal>(radius,0.01);
+ _radius = qMax<qreal>(radius,0.01);
 
-    this->setFlag(MapGraphicsObject::ObjectIsSelectable);
-    this->setFlag(MapGraphicsObject::ObjectIsMovable);
-    this->setFlag(MapGraphicsObject::ObjectIsFocusable);
+ this->setFlag(MapGraphicsObject::ObjectIsSelectable);
+ this->setFlag(MapGraphicsObject::ObjectIsMovable);
+ this->setFlag(MapGraphicsObject::ObjectIsFocusable);
 }
 
 CircleObject::~CircleObject()
@@ -24,16 +24,16 @@ CircleObject::~CircleObject()
 
 QRectF CircleObject::boundingRect() const
 {
-    return QRectF(-1*_radius,
-                  -1*_radius,
-                  2*_radius,
-                  2*_radius);
+ return QRectF(-1*_radius,
+               -1*_radius,
+               2*_radius,
+               2*_radius);
 }
 
 void CircleObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    Q_UNUSED(option)
-    Q_UNUSED(widget)
+ Q_UNUSED(option)
+ Q_UNUSED(widget)
 
  if(ref_)
  {
@@ -42,9 +42,9 @@ void CircleObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
   painter->setBrush(_fillColor);
 
 
-//  painter->drawEllipse(QPointF(0,0),
-//                       200,
-//                       200);
+  //  painter->drawEllipse(QPointF(0,0),
+  //                       200,
+  //                       200);
 
   painter->drawPolygon(*pf);
 
@@ -60,13 +60,13 @@ void CircleObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
   {
    int outline_count = 0;
    if(outline_code_ & 2)
-     ++outline_count;
+    ++outline_count;
    if(outline_code_ & 4)
-     ++outline_count;
+    ++outline_count;
    if(outline_code_ & 8)
-     ++outline_count;
+    ++outline_count;
    if(outline_code_ & 16)
-     ++outline_count;
+    ++outline_count;
 
    int overall_width = 12 + outline_count * 3;
 
@@ -132,42 +132,42 @@ void CircleObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
    painter->drawEllipse(pf->boundingRect().center(), 24, 24);
   }
 
-//    (painter, option, widget);
+  //    (painter, option, widget);
   return;
 
  }
 
  //?qDebug() << "latLon = " << latLon << "; enu = " << enu;
 
-    painter->setRenderHint(QPainter::Antialiasing,true);
-    painter->setBrush(_fillColor);
-    painter->drawEllipse(QPointF(0,0),
-                         _radius,
-                         _radius);
+ painter->setRenderHint(QPainter::Antialiasing,true);
+ painter->setBrush(_fillColor);
+ painter->drawEllipse(QPointF(0,0),
+                      _radius,
+                      _radius);
 }
 
 qreal CircleObject::radius() const
 {
-    return _radius;
+ return _radius;
 }
 
 void CircleObject::setRadius(qreal radius)
 {
-    _radius = radius;
-    this->redrawRequested();
+ _radius = radius;
+ this->redrawRequested();
 }
 
 //protected
 //virtual from MapGraphicsObject
 void CircleObject::keyReleaseEvent(QKeyEvent *event)
 {
-    if (event->matches(QKeySequence::Delete))
-    {
-        this->deleteLater();
-        event->accept();
-    }
-    else
-        event->ignore();
+ if (event->matches(QKeySequence::Delete))
+ {
+  this->deleteLater();
+  event->accept();
+ }
+ else
+  event->ignore();
 }
 
 
