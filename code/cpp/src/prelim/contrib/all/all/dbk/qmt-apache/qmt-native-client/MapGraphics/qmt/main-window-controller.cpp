@@ -91,7 +91,7 @@ void Main_Window_Controller::track_incidents(r8 latitude, r8 longitude, s4 allow
 
 // QVector<QPair<QVector<r8>, QStringList>> info;
 
- QMT_Data_Set_Base* data_set = new QMT_Data_Set_Base;
+ QMT_Client_Data_Set_Base* data_set = active_data_sets_.first()->make_new_unattached_child_data_set();
 
  u4 count = match_locations_in_info_file("incidents", data_set,
     latitude, longitude, matches_size, 3, 4, ' ', allow_duplicates);
@@ -142,7 +142,8 @@ void Main_Window_Controller::find_bus_stops(r8 latitude, r8 longitude)
 
  //QVector<QPair<QVector<r8>, QStringList>> info;
 
- QMT_Data_Set_Base* data_set = new QMT_Data_Set_Base;
+ QMT_Client_Data_Set_Base* data_set = active_data_sets_.first()->make_new_unattached_child_data_set();
+   //new QMT_Data_Set_Base;
 
  u4 count = match_locations_in_info_file("bus", data_set,
    latitude, longitude, stops_size, 4, 5, ',');
@@ -174,7 +175,8 @@ void Main_Window_Controller::find_bus_stops(r8 latitude, r8 longitude)
   diamond << QPointF(-110, 20)/diamond_scale + diamond_adj;
   qmt_client_layer_base_->define_and_adopt_style("bus-stop",
     "handle_bus_stop_context_menu",
-    {QColor(201, 159, 34)}, diamond); // 80, 105, 155
+    {QColor(80, 105, 155)}, diamond); // 80, 105, 155
+    //? {QColor(201, 159, 34)}, diamond); // 80, 105, 155
  }
  qmt_client_layer_base_->add_d0_marks(data_set);
 
@@ -183,6 +185,8 @@ void Main_Window_Controller::find_bus_stops(r8 latitude, r8 longitude)
 
 void Main_Window_Controller::load_bus_data()
 {
+ qDebug() << "E: " << EXAMPLE_DATA_FOLDER;
+
  QString path = QFileDialog::getOpenFileName(view_, "Select File (it should match \"stops.txt\")",
    EXAMPLE_DATA_FOLDER);
  if(path.isEmpty())
@@ -219,6 +223,21 @@ void Main_Window_Controller::reset_map_style(QPoint qp)
  });
 
  tsd->show();
+}
+
+void Main_Window_Controller::load_single_file_data_set()
+{
+ QString infile = QFileDialog::getOpenFileName(nullptr, "Select File",
+   EXAMPLE_DATA_FOLDER);
+
+ QFileInfo qfi(infile);
+
+ if(qfi.suffix() == "ntxh")
+ {
+  QMT_Client_Data_Set_Base* ds = active_data_sets_.first()->make_new_unattached_child_data_set();
+  ds->load_ntxh_file(infile);
+  ds->add_markings();
+ }
 }
 
 void Main_Window_Controller::show_llcoords(QPoint qp)

@@ -14,8 +14,12 @@
 #include "qmt-client-layer.h"
 #include "qmt-client-context-menu-handler.h"
 #include "qmt-client-location-focus.h"
+#include "qmt-client-data-set.h"
 
-Lanternfly_Frame::Lanternfly_Frame() : QFrame(nullptr)
+#include "main-window.h"
+
+
+Lanternfly_Frame::Lanternfly_Frame(Lanternfly_Main_Window* mw) : QFrame(mw)
 {
  main_layout_ = new QVBoxLayout;
 
@@ -30,6 +34,9 @@ Lanternfly_Frame::Lanternfly_Frame() : QFrame(nullptr)
 
  qmt_client_location_focus_ = new QMT_Client_Location_Focus(this);
  view_->set_qmt_client_location_focus_base(qmt_client_location_focus_);
+
+ qmt_client_data_set_ = new QMT_Client_Data_Set(mw);
+ view_->set_qmt_client_data_set_base(qmt_client_data_set_);
 
 
  view_->set_coords_notify_callback([this](const QPointF qpf)

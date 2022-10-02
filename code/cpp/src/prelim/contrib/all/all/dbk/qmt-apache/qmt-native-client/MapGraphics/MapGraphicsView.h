@@ -30,6 +30,7 @@ class Main_Window_Controller;
 class QMT_Client_Layer_Base;
 class QMT_Client_Context_Menu_Handler_Base;
 class QMT_Client_Location_Focus_Base;
+class QMT_Client_Data_Set_Base;
 
 
 class MAPGRAPHICSSHARED_EXPORT MapGraphicsView : public QWidget, public PrivateQGraphicsInfoSource
@@ -88,6 +89,7 @@ public:
  void zoomOut(ZoomMode zMode = CenterZoom);
 
  ACCESSORS__SDECLARE(QMT_Client_Layer_Base* ,qmt_client_layer_base)
+ ACCESSORS__SDECLARE(QMT_Client_Data_Set_Base* ,qmt_client_data_set_base)
 
  ACCESSORS(QMT_Client_Context_Menu_Handler_Base* ,qmt_client_context_menu_handler_base)
 

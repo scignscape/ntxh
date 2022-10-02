@@ -9,7 +9,7 @@
 
 CircleObject::CircleObject(MapGraphicsView* containing_view, qreal radius,bool sizeIsZoomInvariant, QColor fillColor, MapGraphicsObject *parent) :
     MapGraphicsObject(containing_view, sizeIsZoomInvariant,parent),
-    _fillColor(fillColor), ref(nullptr), outline_code(0)
+    _fillColor(fillColor), ref_(nullptr), outline_code_(0)
 {
     _radius = qMax<qreal>(radius,0.01);
 
@@ -35,9 +35,9 @@ void CircleObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     Q_UNUSED(option)
     Q_UNUSED(widget)
 
- if(ref)
+ if(ref_)
  {
-  QPolygonF* pf = (QPolygonF*) ref;
+  QPolygonF* pf = (QPolygonF*) ref_;
   painter->setRenderHint(QPainter::Antialiasing,true);
   painter->setBrush(_fillColor);
 
@@ -48,7 +48,7 @@ void CircleObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 
   painter->drawPolygon(*pf);
 
-  if(outline_code & 64)
+  if(outline_code_ & 64)
   {
    QPen pen(QBrush(QColor(Qt::darkMagenta)), 15, Qt::DotLine);
    painter->setBrush(Qt::NoBrush);
@@ -56,16 +56,16 @@ void CircleObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
    painter->drawPolygon(*pf);
   }
 
-  if(outline_code & 30) // 2, 4, 8, 16
+  if(outline_code_ & 30) // 2, 4, 8, 16
   {
    int outline_count = 0;
-   if(outline_code & 2)
+   if(outline_code_ & 2)
      ++outline_count;
-   if(outline_code & 4)
+   if(outline_code_ & 4)
      ++outline_count;
-   if(outline_code & 8)
+   if(outline_code_ & 8)
      ++outline_count;
-   if(outline_code & 16)
+   if(outline_code_ & 16)
      ++outline_count;
 
    int overall_width = 12 + outline_count * 3;
@@ -80,7 +80,7 @@ void CircleObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     painter->drawPolygon(*pf);
    }
 
-   if(outline_code & 2)
+   if(outline_code_ & 2)
    {
     QPen pen(QBrush(QColor(Qt::darkGreen)), ring_width);
     painter->setBrush(Qt::NoBrush);
@@ -89,7 +89,7 @@ void CircleObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     ring_width -= one_ring_width;
    }
 
-   if(outline_code & 4)
+   if(outline_code_ & 4)
    {
     QPen pen(QBrush(QColor(Qt::darkRed)), ring_width);
     painter->setBrush(Qt::NoBrush);
@@ -98,7 +98,7 @@ void CircleObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     ring_width -= one_ring_width;
    }
 
-   if(outline_code & 8)
+   if(outline_code_ & 8)
    {
     QPen pen(QBrush(QColor(Qt::darkMagenta)), ring_width);
     painter->setBrush(Qt::NoBrush);
@@ -107,7 +107,7 @@ void CircleObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     ring_width -= one_ring_width;
    }
 
-   if(outline_code & 16)
+   if(outline_code_ & 16)
    {
     QPen pen(QBrush(QColor(Qt::cyan)), ring_width);
     painter->setBrush(Qt::NoBrush);
@@ -125,7 +125,7 @@ void CircleObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 
 
   }
-  if(outline_code & 1)
+  if(outline_code_ & 1)
   {
    painter->setBrush(QColor(Qt::red));
    painter->setPen(QPen(Qt::white, 3));
@@ -172,7 +172,7 @@ void CircleObject::keyReleaseEvent(QKeyEvent *event)
 
 
 
-//PolygonObject* po = (PolygonObject*) ref;
+//PolygonObject* po = (PolygonObject*) ref_;
 
 //QPolygonF geo = po->geoPoly();
 

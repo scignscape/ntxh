@@ -5,7 +5,7 @@
 //           http://www.boost.org/LICENSE_1_0.txt)
 
 
-#include "qmt-data-set-base.h"
+#include "qmt-client-data-set-base.h"
 
 //#include "MapGraphicsView.h"
 
@@ -20,13 +20,36 @@
 #include <QVector2D>
 
 
-QMT_Data_Set_Base::QMT_Data_Set_Base()
+
+QMT_Client_Data_Set_Base::QMT_Client_Data_Set_Base()
 {
 
 }
 
 
-u4 QMT_Data_Set_Base::match_locations_in_text_file(QString file_path,
+void QMT_Client_Data_Set_Base::load_ntxh_file(QString file_path)
+{
+ NTXH_Document doc(file_path);
+
+ prepare_ntxh_document(doc, file_path);
+
+ doc.parse();
+
+ typedef NTXH_Graph::hypernode_type hypernode_type;
+
+ NTXH_Graph& g = *doc.graph();
+ const QVector<hypernode_type*>& v = g.hypernodes();
+
+ for(hypernode_type* h : v)
+ {
+  read_ntxh_hypernode(g, h);
+ }
+
+ conclude_ntxh_document(doc, file_path);
+}
+
+
+u4 QMT_Client_Data_Set_Base::match_locations_in_text_file(QString file_path,
   r8 query_latitude, r8 query_longitude,
   u4 number_of_results, u1 latitude_column,
   u1 longitude_column, u1 column_separator,

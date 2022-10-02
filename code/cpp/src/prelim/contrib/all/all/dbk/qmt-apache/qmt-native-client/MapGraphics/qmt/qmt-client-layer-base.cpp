@@ -49,7 +49,7 @@ CircleObject* QMT_Client_Layer_Base::add_polygon_object(r8 latitude,
 {
  CircleObject* co = add_circle_object(latitude, longitude, select_margin, color);
 // PolygonObject* result = new PolygonObject(*polygon, color);
- co->ref = polygon;
+ co->set_ref(polygon);
  return co;
 // return add_object(latitude, longitude, result);
 }
@@ -91,7 +91,7 @@ void* QMT_Client_Layer_Base::define_and_adopt_style(QString name, QString contex
  return current_style_;
 }
 
-void QMT_Client_Layer_Base::add_d0_marks(QMT_Data_Set_Base* data_set)
+void QMT_Client_Layer_Base::add_d0_marks(QMT_Client_Data_Set_Base* data_set)
   //const QVector<QPair<QVector<r8>, QStringList>>& coords_and_texts)
 {
  for(auto& match : data_set->current_matches())

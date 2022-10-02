@@ -9,6 +9,10 @@ class MapGraphicsView;
 class MAPGRAPHICSSHARED_EXPORT CircleObject : public MapGraphicsObject
 {
     Q_OBJECT
+
+ void* ref_;
+ int outline_code_;
+
 public:
     explicit CircleObject(MapGraphicsView* containing_view, qreal radius,bool sizeIsZoomInvariant=true, QColor fillColor = QColor(0,0,0,0),MapGraphicsObject *parent = 0);
     virtual ~CircleObject();
@@ -22,9 +26,10 @@ public:
     qreal radius() const;
     void setRadius(qreal radius);
 
-    void* ref;
-    int outline_code;
-    
+
+    ACCESSORS(int ,outline_code)
+    ACCESSORS(void* ,ref)
+
 signals:
     
 public slots:

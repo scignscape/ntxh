@@ -77,7 +77,7 @@ public:
 
  void add_d0_mark(r8 latitude, r8 longitude, QStringList text = {}) Q_DECL_OVERRIDE;
 
- void add_d0_mark(QMT_Data_Set_Base::Match_Info& match_info) Q_DECL_OVERRIDE;
+ void add_d0_mark(QMT_Client_Data_Set_Base::Match_Info& match_info) Q_DECL_OVERRIDE;
 
  void* define_style(QString name, QString context_menu_handler, const std::type_info& model,
    QVector<QColor> colors, QMap<QString, QVariant> params = {}, u1 complexity = 0) Q_DECL_OVERRIDE;

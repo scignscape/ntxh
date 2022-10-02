@@ -50,10 +50,9 @@ Lanternfly_Main_Window::Lanternfly_Main_Window(QWidget *parent) :
  //    MapGraphicsScene* scene = new MapGraphicsScene(this);
  //    MapGraphicsView* view = new MapGraphicsView(scene,this);
 
- Lanternfly_Frame* lfr = new Lanternfly_Frame;
+ lanternfly_frame_ = new Lanternfly_Frame(this);
 
- //The view will be our central widget
- setCentralWidget(lfr);
+ setCentralWidget(lanternfly_frame_);
 
  //Setup some tile sources
  QSharedPointer<OSMTileSource> osmTiles(new OSMTileSource(OSMTileSource::OSMTiles), &QObject::deleteLater);
@@ -62,7 +61,7 @@ Lanternfly_Main_Window::Lanternfly_Main_Window(QWidget *parent) :
  composite->addSourceBottom(osmTiles);
  composite->addSourceTop(gridTiles);
 
- lfr->set_tile_source(composite);
+ lanternfly_frame_->set_tile_source(composite);
 
  composite->set_current_host("https://b.tile.openstreetmap.fr/hot/");
 //? composite->set_current_host("https://b.tile.openstreetmap.org/");
@@ -70,24 +69,24 @@ Lanternfly_Main_Window::Lanternfly_Main_Window(QWidget *parent) :
  composite->update_hosts();
  composite->update_host_cache();
 
- lfr->set_view_zoom_level(12);
+ lanternfly_frame_->set_view_zoom_level(12);
  //view->setZoomLevel(12);
  //view->centerOn(-74.0435, 40.8859);
-//? lfr->center_on(-74.0435, 40.8859);
+//? lanternfly_frame_->center_on(-74.0435, 40.8859);
 
 //?
 
  // //  New Jersey
- // lfr->center_on(-74.0435, 40.8859);
+ // lanternfly_frame_->center_on(-74.0435, 40.8859);
 
 
  // //  Ukraine - kherson
  //?
-// lfr->center_on(32.6169, 46.6354);
+// lanternfly_frame_->center_on(32.6169, 46.6354);
 
 
- lfr->adopt_location("Bergen$County");
-
+ lanternfly_frame_->adopt_location("Bergen$County");
+#ifdef HIDE
  QPolygonF* qpf1 = new QPolygonF;
  (*qpf1) << QPointF(-20, 110);
  (*qpf1) << QPointF(20, 110);
@@ -100,10 +99,12 @@ Lanternfly_Main_Window::Lanternfly_Main_Window(QWidget *parent) :
 
  QColor spot_clr = QColor(80, 105, 155,  220);
 
- CircleObject* spotcircle = new CircleObject(lfr->view(), 125, false, spot_clr);
+ // QColor(201, 159, 34)
+
+ CircleObject* spotcircle = new CircleObject(lanternfly_frame_->view(), 125, false, spot_clr);
  spotcircle->setLatitude(40.86695);
  spotcircle->setLongitude(-74.01307);
- lfr->scene()->addObject(spotcircle);
+ lanternfly_frame_->scene()->addObject(spotcircle);
  spotcircle->ref = qpf1;
 
  QVector<QPair<qreal, qreal>> locs {
@@ -186,25 +187,25 @@ Lanternfly_Main_Window::Lanternfly_Main_Window(QWidget *parent) :
   // circle->setLatitude(40.8859);
   // circle->setLongitude(-74.0435);
 
-  PolygonObject* poly = new PolygonObject(lfr->view(), aqpf, area_clr);
+  PolygonObject* poly = new PolygonObject(lanternfly_frame_->view(), aqpf, area_clr);
 
   poly->setLatitude(aqpf.first().y());
   poly->setLongitude(aqpf.first().x());
 
-// ??  lfr->scene()->addObject(poly);
+// ??  lanternfly_frame_->scene()->addObject(poly);
 
-
+  // QColor(201, 159, 34
   //QColor(55, 120, 240,  220)
 
  int locs_count = 0;
 
  for(auto pr: locs)
  {
-  CircleObject* circle = new CircleObject(lfr->view(), 125, false, parks_clr);
+  CircleObject* circle = new CircleObject(lanternfly_frame_->view(), 125, false, parks_clr);
   circle->setFlags(0);
   circle->setLatitude(pr.second);
   circle->setLongitude(pr.first);
-  lfr->scene()->addObject(circle);
+  lanternfly_frame_->scene()->addObject(circle);
 
   circle->ref = qpf;
 
@@ -246,11 +247,11 @@ Lanternfly_Main_Window::Lanternfly_Main_Window(QWidget *parent) :
 
  for(auto pr: locs1)
  {
-  CircleObject* circle = new CircleObject(lfr->view(), 125, false, sq_clr);
+  CircleObject* circle = new CircleObject(lanternfly_frame_->view(), 125, false, sq_clr);
   circle->setFlags(0);
   circle->setLatitude(pr.second);
   circle->setLongitude(pr.first);
-  lfr->scene()->addObject(circle);
+  lanternfly_frame_->scene()->addObject(circle);
 
   circle->ref = sqpf;
 
@@ -272,6 +273,7 @@ Lanternfly_Main_Window::Lanternfly_Main_Window(QWidget *parent) :
   ++locs_count;
 
  }
+#endif
 
  //QPointF
 }
@@ -324,10 +326,10 @@ PolygonObject* poly = new PolygonObject(qpf, QColor(155, 220, 0, 220));
 poly->setLatitude(40.8859);
 poly->setLongitude(-74.0435);
 
-lfr->scene()->addObject(poly);
+lanternfly_frame_->scene()->addObject(poly);
 
 // circle->ref = poly;
-// lfr->scene()->addObject(circle);
+// lanternfly_frame_->scene()->addObject(circle);
 //?#endif //def HIDE
 
 // QPolygonF qpf1;
@@ -336,7 +338,7 @@ lfr->scene()->addObject(poly);
 // qpf1 << QPointF(40.85619, -74.10337);
 
 // PolygonObject* poly1 = new PolygonObject(qpf1, QColor(9, 220, 155, 220));
-// lfr->scene()->addObject(poly1);
+// lanternfly_frame_->scene()->addObject(poly1);
 
 //  QPolygonF qpf1;
 //  qpf1 << QPointF(1, 1);
@@ -347,7 +349,7 @@ lfr->scene()->addObject(poly);
 //  PolygonObject* poly1 = new PolygonObject(qpf1, QColor(9, 220, 155, 220));
 //  poly1->setLatitude(40.8859);
 //  poly1->setLongitude(-74.0435);
-//  lfr->scene()->addObject(poly1);
+//  lanternfly_frame_->scene()->addObject(poly1);
 
 //?#ifdef HIDE
 
@@ -356,26 +358,26 @@ lfr->scene()->addObject(poly);
 //   //
 // circle1->setLatitude(poly->geoPoly().at(0).x());
 // circle1->setLongitude(poly->geoPoly().at(0).y());
-// lfr->scene()->addObject(circle1);
+// lanternfly_frame_->scene()->addObject(circle1);
 
 
 // CircleObject* circle2 = new CircleObject(125, false, QColor(155, 0, 220, 220));
 //   //
 // circle2->setLatitude(poly->geoPoly().at(1).x());
 // circle2->setLongitude(poly->geoPoly().at(1).y());
-// lfr->scene()->addObject(circle2);
+// lanternfly_frame_->scene()->addObject(circle2);
 
 
 // CircleObject* circle3 = new CircleObject(125, false, QColor(155, 0, 220, 220));
 //   //
 // circle3->setLatitude(poly->geoPoly().at(2).x());
 // circle3->setLongitude(poly->geoPoly().at(2).y());
-// lfr->scene()->addObject(circle3);
+// lanternfly_frame_->scene()->addObject(circle3);
 
 //?#endif //def HIDE
 
   //     circle->setLongitude(pr.first);
-  //     lfr->scene()->addObject(circle);
+  //     lanternfly_frame_->scene()->addObject(circle);
 
 
 

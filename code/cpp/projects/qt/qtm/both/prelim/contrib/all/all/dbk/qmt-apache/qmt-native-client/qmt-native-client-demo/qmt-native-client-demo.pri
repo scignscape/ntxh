@@ -26,6 +26,14 @@ include($$ROOT_DIR/../preferred/openssl.pri)
 
 #LIBS += /usr/lib/x86_64-linux-gnu/libssl.a
 
+DEFINES += EXAMPLE_DATA_FOLDER=\\\"$${ROOT_DIR}/example-data/nathaniel-christen/industry-4_0-section-5\\\"
+
+
+INCLUDEPATH += $$NTXH_SRC_GROUP_DIR
+INCLUDEPATH += $$NTXH_SRC_GROUP_DIR/ntxh
+INCLUDEPATH += $$RELAE_GRAPH_SRC_GROUP_DIR
+INCLUDEPATH += $$PHAON_GRAPH_SRC_GROUP_DIR
+
 
 
 INCLUDEPATH += \
@@ -41,6 +49,9 @@ HEADERS += \
   $$SRC_DIR/qmt-client-layer.h \
   $$SRC_DIR/qmt-client-context-menu-handler.h \
   $$SRC_DIR/qmt-client-location-focus.h \
+  $$SRC_DIR/qmt-client-data-set.h \
+  $$SRC_DIR/qmt-data-set-content-base.h \
+  $$SRC_DIR/lanternfly-data-set.h \
 
 
 SOURCES += \
@@ -53,10 +64,20 @@ SOURCES += \
   $$SRC_DIR/qmt-client-layer.cpp \
   $$SRC_DIR/qmt-client-context-menu-handler.cpp \
   $$SRC_DIR/qmt-client-location-focus.cpp \
+  $$SRC_DIR/qmt-client-data-set.cpp \
+  $$SRC_DIR/qmt-data-set-content-base.cpp \
+  $$SRC_DIR/lanternfly-data-set.cpp \
+
+
 
 
 
 LIBS += -L$$TARGETSDIR -lMapGraphics
+
+
+LIBS += -L$$TARGETSDIR  \
+  -lntxh  -lntxh-parser -lngml-sdi
+
 
 #HEADERS += \
 

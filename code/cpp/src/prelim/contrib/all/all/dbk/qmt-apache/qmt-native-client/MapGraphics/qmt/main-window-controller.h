@@ -18,7 +18,7 @@
 
 #include "accessors.h"
 
-#include "qmt-data-set-base.h"
+#include "qmt-client-data-set-base.h"
 
 #include <QString>
 #include <QList>
@@ -38,7 +38,7 @@ class Main_Window_Controller
  MapGraphicsView* view_;
  QMT_Client_Layer_Base* qmt_client_layer_base_;
 
- QStack<QMT_Data_Set_Base*> active_data_sets_;
+ QStack<QMT_Client_Data_Set_Base*> active_data_sets_;
 
  QMT_GIS_Utils gis_utils_;
 
@@ -57,6 +57,11 @@ public:
 
  ACCESSORS(QMT_Client_Layer_Base* ,qmt_client_layer_base)
 
+ void push_data_set(QMT_Client_Data_Set_Base* ds)
+ {
+  active_data_sets_.push(ds);
+ }
+
  void reset_map_style(QPoint qp);
 
  void show_llcoords(QPoint qp);
@@ -69,7 +74,7 @@ public:
  void track_incidents(r8 latitude, r8 longitude, s4 allow_duplicates);
 
  void load_web_engine_view(QUrl url);
-
+ void load_single_file_data_set();
 
  void set_info_file(QString key, QString value)
  {
@@ -89,7 +94,7 @@ public:
 //   u1 number_of_header_lines = 1, QVector<u1> other_location_columns = {});
 
  template<typename... ARGS>
- u4 match_locations_in_info_file(QString key, QMT_Data_Set_Base* data_set,
+ u4 match_locations_in_info_file(QString key, QMT_Client_Data_Set_Base* data_set,
    ARGS&&... args)
  {
   QString file_path = get_info_file(key);

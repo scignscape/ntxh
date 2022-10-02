@@ -11,17 +11,23 @@
 
 #include <QMainWindow>
 
-//namespace Ui {
-//class MainWindow;
-//}
+#include "accessors.h"
+
+class Lanternfly_Frame;
+
 
 class Lanternfly_Main_Window : public QMainWindow
 {
  Q_OBJECT
 
+ Lanternfly_Frame* lanternfly_frame_;
+
+
 public:
  explicit Lanternfly_Main_Window(QWidget *parent = 0);
  ~Lanternfly_Main_Window();
+
+ ACCESSORS(Lanternfly_Frame* ,lanternfly_frame)
 
 private slots:
  void on_actionExit_triggered();

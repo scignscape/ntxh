@@ -1,0 +1,282 @@
+
+
+- a=latitude  o=longitude  u=outline  c=location classification  
+  n=place name, data set name  d=district/city name
+  t=data set types
+.
+
+
+&type Data_Set {5}
+  :n:1 :t:2 ;
+
+
+&type Sighting {5}
+  :a:1 :o:2 :c:3 :p;4 ;
+
+
+&/
+
+!/ Data_Set
+$n: Lanternfly
+$t: Sighting
+/!
+
+!/ Sighting
+$a: -74.03678
+$o: 40.88516
+$c: park
+$n: Forchini
+$u: 64
+/!
+<+>
+
+!/ Sighting
+$a: -74.03460
+$o: 40.88043
+$c: park
+$n: Oscar E. Olson 
+$d: Bogota
+$u: 64
+/!
+<+>
+
+!/ Sighting
+$a: -74.03705
+$o: 40.89313
+$c: park
+$n: Johnson
+$u: 3
+/!
+<+>
+
+!/ Sighting
+$a: -74.04184
+$o: 40.89233
+$c: park
+$n: Anderson
+$u: 3
+/!
+<+>
+
+!/ Sighting
+$a: -74.05000
+$o: 40.89079
+$c: park
+$n: Carver
+$u: 5
+/!
+<+>
+
+!/ Sighting
+$a: -74.05314
+$o: 40.90588
+$c: park
+$n: Borg's Woods
+$u: 5
+/!
+<+>
+
+!/ Sighting
+$a: -74.04735
+$o: 40.91236
+$c: park
+$n: Staib
+$u: 7
+/!
+<+>
+
+!/ Sighting
+$a: -74.05299
+$o: 40.91114
+$c: park
+$n: Fireman's Memorial
+$u: 7
+/!
+<+>
+
+!/ Sighting
+$a: -74.02756
+$o: 40.89605
+$c: park
+$n: Phelp's
+$d: Teaneck
+$u: 8
+/!
+<+>
+
+!/ Sighting
+$a: -74.01814
+$o: 40.89134
+$c: park
+$n: Sagamore
+$d: Teaneck
+$u: 8
+/!
+<+>
+
+!/ Sighting
+$a: -74.00995
+$o: 40.896964
+$c: park
+$n: Milton A. Votee
+$d: Teaneck
+$u: 9
+/!
+<+>
+
+!/ Sighting
+$a: -74.00423
+$o: 40.90664
+$c: park
+$n: Windsor
+$d: Teaneck
+$u: 9
+/!
+<+>
+
+!/ Sighting
+$a: -73.99360
+$o: 40.89639
+$c: park
+$n: Argonne 
+$d: Teaneck/Englewood
+$u: 12
+/!
+<+>
+
+!/ Sighting
+$a: -73.98284
+$o: 40.89230
+$c: park
+$n: MacKay 
+$d: Englewood
+$u: 12
+/!
+<+>
+
+!/ Sighting
+$a: -74.08842
+$o: 40.90839
+$c: park
+$n: Saddle River County Park
+$d: Saddle Brook
+$u: 17
+/!
+<+>
+
+!/ Sighting
+$a: -74.07862
+$o: 40.90832
+$c: park
+$n: Carlock Field     
+$d: Rochelle Park
+$u: 17
+/!
+<+>
+
+!/ Sighting
+$a: -74.08250
+$o: 40.91954
+$c: park
+$n: Cliff Genarelli-Paramus Sports-Plex     
+$d: Paramus
+$u: 64
+/!
+<+>
+
+!/ Sighting
+$a: -74.02835
+$o: 40.91382
+$c: park
+$n: Clarence W. Brett Park at Historic New Bridge Landing
+$d: Teaneck
+$u: 64
+/!
+<+>
+
+!/ Sighting
+$a: -74.02276
+$o: 40.91473
+$c: park
+$n: Matthew Feldman Nature Preserve
+$d: Teaneck
+$u: 64
+/!
+<+>
+
+!/ Sighting
+$a: -74.02103
+$o: 40.91591
+$c: park
+$n: Continental Park
+$d: Teaneck
+$u: 64
+/!
+<+>
+
+!/ Sighting
+$a: -74.00858
+$o: 40.87471
+$c: park
+$n: Teaneck Creek Conservancy
+$d: Teaneck
+$u: 64
+/!
+<+>
+
+
+!/ Sighting
+$a: -74.05170
+$o: 40.87953
+$c: transit
+$n: Essex Street Station
+$d: Hackensack
+$u: 1
+/!
+<+>
+
+!/ Sighting
+$a: -74.04432
+$o: 40.89407
+$c: transit
+$n: Anderson Street Station
+$d: Hackensack
+$u: 2
+/!
+<+>
+
+!/ Sighting
+$a: -74.03505
+$o: 40.91029
+$c: transit
+$n: Newbridge Station
+$d: Newbridge
+$u: 4
+/!
+<+>
+
+!/ Sighting
+$a: -74.04244
+$o: 40.88201
+$c: transit
+$n: Hackensack Bus Terminal
+$d: Hackensack
+$u: 6
+/!
+<+>
+
+!/ Sighting
+$a: -74.07940
+$o: 40.91912
+$c: transit
+$n: Garden State Plaza Bus Terminal
+$d: Paramus
+$u: 10
+/!
+<+>
+
+/&
+
+
+
+

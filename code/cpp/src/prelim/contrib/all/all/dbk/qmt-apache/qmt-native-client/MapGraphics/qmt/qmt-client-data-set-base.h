@@ -6,8 +6,8 @@
 
 
 
-#ifndef QMT_DATA_SET_BASE__H
-#define QMT_DATA_SET_BASE__H
+#ifndef QMT_CLIENT_DATA_SET_BASE__H
+#define QMT_CLIENT_DATA_SET_BASE__H
 
 //#include "qmt-accessors.h"
 
@@ -32,6 +32,9 @@
 
 #include "MapGraphicsScene.h"
 
+#include "ntxh-parser/ntxh-document.h"
+
+
 #include <typeinfo>
 
 class MapGraphicsScene;
@@ -41,7 +44,7 @@ class CircleObject;
 class PolygonObject;
 class QPolygonF;
 
-class QMT_Data_Set_Base
+class QMT_Client_Data_Set_Base
 {
 public:
 
@@ -54,23 +57,34 @@ public:
  };
 
 protected:
+
+ typedef NTXH_Graph::hypernode_type hypernode_type;
+
  QString single_file_path_;
  QString folder_path_;
 
  QVector<Match_Info> current_matches_;
 
+ virtual void read_ntxh_hypernode(NTXH_Graph& g, hypernode_type* h) = 0;
+ virtual void prepare_ntxh_document(NTXH_Document& doc, QString file_path) = 0;
+ virtual void conclude_ntxh_document(NTXH_Document& doc, QString file_path) = 0;
 
 
 public:
 
 
- QMT_Data_Set_Base();
+ QMT_Client_Data_Set_Base();
 
 
  ACCESSORS(QString ,single_file_path)
  ACCESSORS(QString ,folder_path)
 
  ACCESSORS__RGET(QVector<Match_Info> ,current_matches)
+
+ virtual QMT_Client_Data_Set_Base* make_new_unattached_child_data_set() = 0;
+ virtual void add_markings() = 0;
+
+ void load_ntxh_file(QString file_path);
 
  u4 match_locations_in_text_file(QString file_path, r8 query_latitude, r8 query_longitude,
    u4 number_of_results, u1 latitude_column,
@@ -83,4 +97,4 @@ public:
 
 // QMT_Client_Context_Menu_Handler
 
-#endif //QMT_CLIENT_LAYER_BASE__H
+#endif //QMT_CLIENT_DATA_SET_BASE__H

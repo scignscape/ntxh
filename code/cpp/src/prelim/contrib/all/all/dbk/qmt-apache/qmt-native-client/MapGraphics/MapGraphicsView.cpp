@@ -85,6 +85,11 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
    main_window_controller_->show_llcoords(qp);
   });
 
+  menu->addAction("Load Single-File Data Set", [this, qp]()
+  {
+   main_window_controller_->load_single_file_data_set();
+  });
+
   QString current_location_name = qmt_client_location_focus_base_->current_location_name();
 
   // //  a hack to demo switching between features for different locations.
@@ -230,6 +235,11 @@ MapGraphicsView::~MapGraphicsView()
  }
 }
 
+void MapGraphicsView::set_qmt_client_data_set_base(QMT_Client_Data_Set_Base* qmt_client_data_set_base)
+{
+ //?qmt_client_data_set_base_ = qmt_client_data_set_base;
+ main_window_controller_->push_data_set(qmt_client_data_set_base);
+}
 
 void MapGraphicsView::set_qmt_client_layer_base(QMT_Client_Layer_Base* qmt_client_layer_base)
 {
