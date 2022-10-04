@@ -14,6 +14,8 @@
 
 #include "global-types.h"
 
+#include "combobox-data.h"
+
 #include "self-connect.h"
 
 #include "styles.h"

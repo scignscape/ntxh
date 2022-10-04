@@ -55,6 +55,19 @@ DEFINES += SCREENSHOTS_FOLDER=\\\"$$ROOT_DIR/../dev/screenshots\\\"
 
 DEFINES += USE_KANS
 
+
+
+INCLUDEPATH += $$AIMLIB_SRC_GROUP_DIR/../image-editor
+
+INCLUDEPATH += $$IAT_SRC_GROUP_DIR
+
+#INCLUDEPATH += /home/nlevisrael/gits/ctg-temp/ar/code/cpp/src/prelim/contrib/all/all/imk/xcsd/xcsd-gui/xcsd-histograms/dialogs/
+INCLUDEPATH += $$XCSD_GUI_SRC_GROUP_DIR
+INCLUDEPATH += $$XCSD_GUI_SRC_GROUP_DIR/xcsd-scene
+INCLUDEPATH += $$XCSD_GUI_SRC_GROUP_DIR/xcsd-histograms
+
+#/home/nlevisrael/gits/ctg-temp/ar/code/cpp/projects/qt/qtm/both/prelim/contrib/all/all/
+
 INCLUDEPATH += $$DGDB_SRC_GROUP_DIR
 
 INCLUDEPATH += $$DGDB_SRC_GROUP_DIR/tkrzw
@@ -99,6 +112,7 @@ DEFINES += USE_XCNS
 
 INCLUDEPATH += $$XCSD_SRC_GROUP_DIR
 INCLUDEPATH += $$XCSD_SRC_GROUP_DIR/../xcsd-1d
+INCLUDEPATH += $$XCSD_DATA_SRC_GROUP_DIR
 
 
 #?FEATURE_OpenCV = USE_OpenCV
@@ -163,8 +177,6 @@ HEADERS += \
   $$SRC_DIR/image-viewer/context-menu-prep-state.h \
   $$SRC_DIR/subwindows/range-slider.h \
   $$SRC_DIR/subwindows/clickable-label.h \
-  $$SRC_DIR/subwindows/xcsd-tierbox-scene-item.h \
-  $$SRC_DIR/subwindows/xcsd-outer-ring-scene-item.h \
   $$SRC_DIR/pleneviews/shape-select-frame.h \
   $$SRC_DIR/pleneviews/zoom-and-navigate-frame.h \
   $$SRC_DIR/pleneviews/page-and-search-frame.h \
@@ -238,8 +250,6 @@ SOURCES += \
   $$SRC_DIR/image-viewer/context-menu-prep-state.cpp \
   $$SRC_DIR/subwindows/range-slider.cpp \
   $$SRC_DIR/subwindows/clickable-label.cpp \
-  $$SRC_DIR/subwindows/xcsd-tierbox-scene-item.cpp \
-  $$SRC_DIR/subwindows/xcsd-outer-ring-scene-item.cpp \
   $$SRC_DIR/pleneviews/shape-select-frame.cpp \
   $$SRC_DIR/pleneviews/zoom-and-navigate-frame.cpp \
   $$SRC_DIR/pleneviews/page-and-search-frame.cpp \
@@ -273,11 +283,27 @@ SOURCES += \
   $$SRC_DIR/aforms/simple/simple-ellipse-annotation.cpp \
   $$SRC_DIR/aforms/simple/simple-polyline-annotation.cpp \
   $$SRC_DIR/aforms/measurement-dialogs/simple/simple-rectangle-measurement-dialog.cpp \
-  $$SRC_DIR/dialogs/xcsd-local-histogram-dialog.cpp \
   $$SRC_DIR/dialogs/trimap-demo-frame.cpp \
   $$SRC_DIR/dialogs/color-mean-demo-frame.cpp \
   $$SRC_DIR/edge-detection/edge-detection-algorithms.cpp \
   $$SRC_DIR/edge-detection/edge-detection-dialog.cpp \
+
+
+# # todo should these be subwindows?
+SOURCES += \
+  $$XCSD_GUI_SRC_GROUP_DIR/xcsd-scene/xcsd-tierbox-scene-item.cpp \
+  $$XCSD_GUI_SRC_GROUP_DIR/xcsd-scene/xcsd-outer-ring-scene-item.cpp \
+  $$XCSD_GUI_SRC_GROUP_DIR/xcsd-histograms/dialogs/xcsd-local-histogram-dialog.cpp \
+
+
+HEADERS += \
+  $$XCSD_GUI_SRC_GROUP_DIR/xcsd-scene/xcsd-tierbox-scene-item.h \
+  $$XCSD_GUI_SRC_GROUP_DIR/xcsd-scene/xcsd-outer-ring-scene-item.h \
+  $$XCSD_GUI_SRC_GROUP_DIR/xcsd-histograms/dialogs/xcsd-local-histogram-dialog.h \
+
+#$$SRC_DIR/subwindows/xcsd-tierbox-scene-item.h \
+#$$SRC_DIR/subwindows/xcsd-outer-ring-scene-item.h \
+
 
 
 QFontIcon_SRC_DIR = $$SRC_CONTRIB_DIR/external/QFontIcon-master/QFontIcon

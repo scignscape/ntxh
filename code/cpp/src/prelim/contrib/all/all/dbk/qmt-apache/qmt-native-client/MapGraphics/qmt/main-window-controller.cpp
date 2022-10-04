@@ -313,13 +313,16 @@ void Main_Window_Controller::reset_map_style(QPoint qp)
  tsd->show();
 }
 
-void Main_Window_Controller::activate_local_tile_server()
+void Main_Window_Controller::_activate_local_tile_server(const QString* local_socket_flag)
 {
  QSharedPointer<MapTileSource> mts = view_->tileSource();
- mts->set_current_local_info_host("http://localhost:6600/qmt/rI~png/~tiles/kherson/~osm-");
- mts->set_current_local_host("http://localhost:6600/qmt/rS~png/~tiles/kherson/~osm-");
+ mts->set_current_local_info_host("http://localhost:6600/qmt%1/rI~png/~tiles/kherson/~osm-"_qt
+   .arg(local_socket_flag? *local_socket_flag : ""));
+ mts->set_current_local_host("http://localhost:6600/qmt%1/rS~png/~tiles/kherson/~osm-"_qt
+   .arg(local_socket_flag? *local_socket_flag : ""));
  mts->set_current_local_info_url("%1-%2-%3");
  mts->set_current_local_url("%1-%2-%3");
+ mts->update_hosts();
 }
 
 void Main_Window_Controller::toggle_marking_outline_visibility()

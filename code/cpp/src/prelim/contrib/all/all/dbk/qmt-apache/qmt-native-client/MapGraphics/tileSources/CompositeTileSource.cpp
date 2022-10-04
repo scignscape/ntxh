@@ -280,6 +280,11 @@ void CompositeTileSource::update_hosts()
  child->set_current_host(current_host_);
  child->set_current_url(current_url_);
  child->set_current_local_host(current_local_host_);
+
+ child->set_current_local_url(current_local_url_);
+ child->set_current_local_info_host(current_local_info_host_);
+ child->set_current_local_info_url(current_local_info_url_);
+
 }
 
 void CompositeTileSource::update_host_cache()

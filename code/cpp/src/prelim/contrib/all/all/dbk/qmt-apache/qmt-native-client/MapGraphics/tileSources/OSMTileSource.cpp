@@ -136,9 +136,14 @@ void OSMTileSource::fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate)
     hosts = QStringList{current_host_};
     urls = QStringList{current_url_};
    }
+   else if(current_local_info_host_.isEmpty())
+   {
+    hosts = QStringList{current_local_host_, current_host_};
+    urls = QStringList{current_local_url_, current_url_};
+   }
    else
    {
-    hosts = QStringList{current_local_info_host_, current_local_host_, current_url_};
+    hosts = QStringList{current_local_info_host_, current_local_host_, current_host_};
     //   hosts = QStringList{"http://localhost:6600/qmt/rI~png/~tiles/kherson/~osm-",
     //     "http://localhost:6600/qmt/rS~png/~tiles/kherson/~osm-",
 
@@ -183,6 +188,8 @@ void OSMTileSource::fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate)
          SIGNAL(finished()),
          this,
          SLOT(handleNetworkRequestFinished()));
+
+
 }
 
 //private slot
@@ -219,21 +226,38 @@ void OSMTileSource::handleNetworkRequestFinished()
 
  _pendingRequests.remove(cacheID);
 
- //If there was a network error, ignore the reply
- if (reply->error() != QNetworkReply::NoError)
- {
-  qDebug() << "Network Error:" << reply->errorString();
-  return;
- }
-
- QByteArray bytes = reply->readAll();
-
  quint32 x,y,z;
  if (!MapTileSource::cacheID2xyz(cacheID,&x,&y,&z))
  {
   qWarning() << "Failed to convert cacheID" << cacheID << "back to xyz";
   return;
  }
+
+ if (reply->error() != QNetworkReply::NoError)
+ {
+  if(host.isEmpty())
+  {
+   //If there was a network error, ignore the reply
+   qDebug() << "Network Error:" << reply->errorString();
+   return;
+  }
+  if(host.size() == 1)
+  {
+   // // this means that we started with two hosts,
+    //   presumably one local and one not
+   fetchTile(x, y, z, 1);
+   return;
+  }
+  // // this is the intended setup where we start
+   //   with (at least) three hosts,
+   //   the first two being local and the
+   //   first for resource info
+  fetchTile(x, y, z, 2);
+  return;
+ }
+
+ QByteArray bytes = reply->readAll();
+
 
  if(host.isEmpty())
  {

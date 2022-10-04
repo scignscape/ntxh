@@ -112,9 +112,20 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
    Q_EMIT preview_dialogs_requested("Lanternfly_Sighting_Filter_Dialog");
   });
 
-  menu->addAction("Activate Local Tile Server", [this, qp]()
+  QMenu* local =  menu->addMenu("Activate Local Tile Server");
+
+  local->addAction("Apache Module (self-contained)", [this, qp]()
   {
    main_window_controller_->activate_local_tile_server();
+  });
+
+  local->addAction("Local-Socket Module (for demo/debug)", [this, qp]()
+  {
+   // //  passing nullptr here means we use a local socket with the
+    //    default flag in the url, currently "-l"
+    //    For a different flag pass either a QString or QString*
+    //    with the flag characters (cannot be empty).
+   main_window_controller_->activate_local_tile_server(nullptr);
   });
 
   QString current_location_name = qmt_client_location_focus_base_->current_location_name();

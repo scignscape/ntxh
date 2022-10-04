@@ -50,7 +50,7 @@ INCLUDEPATH += $$SRC_GROUP_DIR/tkrzw
 
 INCLUDEPATH += $$WHITEDB_SRC_GROUP_DIR
 
-QtColorWidgets_SRC_DIR = $$SRC_ROOT_DIR/external/Qt-Color-Widgets-master
+QtColorWidgets_SRC_DIR = $$SRC_CONTRIB_DIR/external/Qt-Color-Widgets-master
 INCLUDEPATH += $$QtColorWidgets_SRC_DIR/include
 FORMS += $$QtColorWidgets_SRC_DIR/src/QtColorWidgets/color_dialog.ui
 

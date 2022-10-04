@@ -51,6 +51,8 @@ class Main_Window_Controller
 
 // u4 size_;
 
+ void _activate_local_tile_server(const QString* local_socket_flag);
+
 public:
 
  Main_Window_Controller(MapGraphicsView* view);
@@ -79,7 +81,25 @@ public:
  void load_web_engine_view(QUrl url);
  void load_single_file_data_set();
 
- void activate_local_tile_server();
+ void activate_local_tile_server(QString local_socket_flag)
+ {
+  _activate_local_tile_server(&local_socket_flag);
+ }
+ void activate_local_tile_server()
+ {
+  static QString no_local_socket;
+  _activate_local_tile_server(&no_local_socket);
+ }
+ void activate_local_tile_server(QString* local_socket_flag)
+ {
+  if(local_socket_flag)
+    _activate_local_tile_server(local_socket_flag);
+  else
+  {
+   static QString default_local_socket_flag = "-l";
+   activate_local_tile_server(&default_local_socket_flag);
+  }
+ }
 
  void toggle_marking_outline_visibility();
 
