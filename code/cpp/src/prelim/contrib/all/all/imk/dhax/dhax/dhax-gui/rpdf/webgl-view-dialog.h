@@ -61,6 +61,8 @@ class WebGL_View_Dialog : public QDialog
 
  QMap<u2, URL_Or_Event_Pattern*> patterns_by_row_;
 
+ QRect first_video_capture_position_;
+
 public:
 
 
@@ -73,6 +75,7 @@ public:
 
  ACCESSORS__GET(Pattern_Matcher_Runtime* ,pm_runtime)
 
+ ACCESSORS__RGET(QRect ,first_video_capture_position)
 
  ACCESSORS(RPDF_Web_Engine_View* ,wev)
 
@@ -83,8 +86,12 @@ public:
 
  void check_url_patterns(QString url);
 
- void mouseReleaseEvent(QMouseEvent* mouseEvent) override;
- void mousePressEvent(QMouseEvent* mouseEvent) override;
+ void mouseReleaseEvent(QMouseEvent* mouseEvent) Q_DECL_OVERRIDE;
+ void mousePressEvent(QMouseEvent* mouseEvent) Q_DECL_OVERRIDE;
+
+ void resizeEvent(QResizeEvent* resize_event) Q_DECL_OVERRIDE;
+ void moveEvent(QMoveEvent* move_event) Q_DECL_OVERRIDE;
+
 
  void reset_tab_selection();
 
@@ -93,6 +100,7 @@ public:
 Q_SIGNALS:
 
  void url_patterns_changed();
+ void web_view_geometry_updated(QRect);
 
  void url_pattern_match(QString procedure_name, QString arguments);
 

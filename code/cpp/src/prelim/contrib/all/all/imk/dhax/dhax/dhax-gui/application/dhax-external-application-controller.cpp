@@ -83,6 +83,17 @@ void DHAX_External_Application_Controller::test_ssr_datagram()
  if(current_wgl_dialog_)
  {
   rect = current_wgl_dialog_->get_web_view_geometry();
+  if(current_wgl_dialog_->first_video_capture_position().isNull())
+  {
+   current_wgl_dialog_->first_video_capture_position() = rect;
+   QObject::connect(current_wgl_dialog_,
+     &WebGL_View_Dialog::web_view_geometry_updated,
+     [this](QRect r)
+   {
+    application_controller_->send_ssr_reset(r);
+   });
+  }
+
   qDebug() << "rect = " << rect;
   application_controller_->send_ssr_reset(rect);
  }

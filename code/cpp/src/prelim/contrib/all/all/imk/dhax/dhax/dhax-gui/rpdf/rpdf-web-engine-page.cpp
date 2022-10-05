@@ -119,14 +119,42 @@ void RPDF_Web_Engine_Page::emit_navRequest(const QUrl &url)
  Q_EMIT navRequest(url);
 }
 
+QString RPDF_Web_Engine_Page::last_youtube_link_as_non_embed()
+{
+ if(last_youtube_link_.isEmpty())
+   return {};
+
+ static QString prelim = "https://www.youtube.com/watch?v=";
+ return prelim + last_youtube_link_;
+}
+
+void RPDF_Web_Engine_Page::reset_last_youtube_link(const QUrl &url)
+{
+ qDebug() << "p = " << url.path();
+ if(url.path().startsWith("/embed/"))
+ {
+  if(int index = url.path().indexOf('?'))
+   last_youtube_link_ = url.path().mid(7, index - 7);
+ }
+
+ qDebug() << "l = " << last_youtube_link_;
+ qDebug() << "l = " << last_youtube_link_as_non_embed();
+
+
+}
+
 bool RPDF_Web_Engine_Page::acceptNavigationRequest(const QUrl &url,
                                                    NavigationType type, bool isMainFrame)
 {
+ QString host = url.host();
+ if(host == "www.youtube.com")
+   reset_last_youtube_link(url);
+
  //?
- qDebug()  << "url" << url;
+ qDebug()  << "!url" << url;
  if (type == QWebEnginePage::NavigationTypeLinkClicked)
  {
-  //?        qDebug() << url;
+          qDebug() << "?url" << url;
  }
  return true;
  // return false;

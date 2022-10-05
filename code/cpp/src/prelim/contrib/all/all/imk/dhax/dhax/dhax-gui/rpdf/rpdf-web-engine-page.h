@@ -27,6 +27,8 @@ class RPDF_Web_Engine_Page : public QWebEnginePage
 {
  Q_OBJECT
 
+ QString last_youtube_link_;
+
 public:
  RPDF_Web_Engine_Page();
  RPDF_Web_Engine_Page(RPDF_Web_Engine_Page* parent);
@@ -38,6 +40,10 @@ public:
  createWindow(QWebEnginePage::WebWindowType type) override;
 
  void emit_navRequest(const QUrl &url);
+
+ void reset_last_youtube_link(const QUrl &url);
+
+ QString last_youtube_link_as_non_embed();
 
 Q_SIGNALS:
 

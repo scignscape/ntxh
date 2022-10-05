@@ -42,6 +42,7 @@ class DHAX_External_Application_Controller //: public QObject
 
  QString save_area_folder_;
 
+
 public:
 
  DHAX_External_Application_Controller();
