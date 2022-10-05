@@ -19,7 +19,7 @@ void DHAX_FreeCAD_Integration_Data::init_import_count()
 {
  if(freecad_import_count_)
  {
-  qDebug() << "Re-initializing meshlab import count!";
+  qDebug() << "Re-initializing FreeCAD import count!";
  }
  static u4 static_u4 = 0;
  freecad_import_count_ = &static_u4;

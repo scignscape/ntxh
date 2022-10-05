@@ -53,6 +53,44 @@ void DHAX_External_Application_Controller::view_3d()
 
 }
 
+
+void DHAX_External_Application_Controller::prepare_video_recorder()
+{
+ qDebug() << "prepare_video_recorder";
+
+// QString cmd = "";
+
+ QDir qd(SSR_BIN_FOLDER);
+
+ QString ap = qd.absoluteFilePath("simplescreenrecorder");
+ qDebug() << "ap = " << ap;
+
+ QProcess cmd;
+ cmd.startDetached(ap, {});
+
+ QTimer::singleShot(2000, [this]()
+ {
+  test_ssr_datagram();
+ });
+}
+
+void DHAX_External_Application_Controller::test_ssr_datagram()
+{
+ qDebug() << "test ssr";
+
+ QRect rect;
+
+ if(current_wgl_dialog_)
+ {
+  rect = current_wgl_dialog_->get_web_view_geometry();
+  qDebug() << "rect = " << rect;
+  application_controller_->send_ssr_reset(rect);
+ }
+ else
+   application_controller_->send_ssr_reset("--------------");
+
+}
+
 void DHAX_External_Application_Controller::view_360()
 {
  if(current_wgl_dialog_)

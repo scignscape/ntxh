@@ -40,8 +40,11 @@ public Q_SLOTS:
  void handle_polyline_save_notation(bool with_comment);
  //void handle_polyline_save_notation_with_comment();
  void handle_freecad_reset(call_Stamp_u2);
+
  void handle_load_notes(call_Stamp_u2);
  void handle_meshlab_reset(call_Stamp_u2);
+ void handle_ssr_reset(QString msg, call_Stamp_u2);
+
  void handle_convert_notation(call_Stamp_u2);
  void handle_polygon_complete_and_save_notation(call_Stamp_u2);
  void handle_polygon_complete_and_save_notation_with_comment(call_Stamp_u2);
@@ -56,6 +59,8 @@ public Q_SLOTS:
  void handle_view_contours(call_Stamp_u2);
  void handle_view_3d(call_Stamp_u2);
  void handle_view_360(call_Stamp_u2);
+ void handle_prepare_video_recorder(call_Stamp_u2);
+ void handle_test_ssr_datagram(call_Stamp_u2);
  void handle_view_cad(call_Stamp_u2);
 
  void handle_run_forge_workflow(call_Stamp_u2);

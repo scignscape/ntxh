@@ -138,8 +138,12 @@ public:
 
  void init_image_scene_item(DHAX_Image_Scene_Item *si);
 
+ void send_ssr_reset(QRect window);
+ void send_ssr_reset(QString message);
+
  void send_freecad_reset();
  void send_meshlab_reset();
+
  void view_contours();
 
  void view_trimap(QString path);

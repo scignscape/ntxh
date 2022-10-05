@@ -52,6 +52,8 @@ public:
  void view_3d();
  void view_360();
  void view_cad();
+ void prepare_video_recorder();
+ void test_ssr_datagram();
  void run_forge_workflow();
 
 

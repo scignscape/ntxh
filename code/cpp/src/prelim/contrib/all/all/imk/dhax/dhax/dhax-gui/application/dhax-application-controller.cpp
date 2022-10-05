@@ -51,9 +51,13 @@
 
 #include "integration/meshlab/dhax-meshlab-integration-data.h"
 #include "integration/freecad/dhax-freecad-integration-data.h"
+#include "integration/ssr/dhax-ssr-integration-data.h"
 
 #include "integration/meshlab/dhax-meshlab-integration-controller.h"
 #include "integration/freecad/dhax-freecad-integration-controller.h"
+#include "integration/ssr/dhax-ssr-integration-controller.h"
+
+
 
 #include "integration/dhax-integration-controller.h"
 
@@ -916,6 +920,33 @@ void DHAX_Application_Controller::r8_vector_to_qba(const QVector<r8>& data, QByt
 }
 
 
+void DHAX_Application_Controller::send_ssr_reset(QString message)
+{
+ QByteArray qba = message.toLatin1();
+ udp_controller_->wrap_and_send_datagram(qba);
+}
+
+
+void DHAX_Application_Controller::send_ssr_reset(QRect window)
+{
+ DHAX_SSR_Integration_Data& sid = *application_main_window_->main_window_data()->ssr_integration();
+
+// if(sid.ssr_position_data().isEmpty())
+//   return;
+
+ QByteArray qba;
+
+ QDataStream qds(&qba, QIODevice::WriteOnly);
+
+ qds << window;
+
+ //r8_vector_to_qba(fid.freecad_position_data(), qba);
+
+ udp_controller_->wrap_and_send_datagram(qba);
+}
+
+
+
 void DHAX_Application_Controller::send_freecad_reset()
 {
  DHAX_FreeCAD_Integration_Data& fid = *application_main_window_->main_window_data()->freecad_integration();
@@ -974,6 +1005,7 @@ void DHAX_Application_Controller::init_integration_controllers()
  meshlab->set_application_controller(this);
  meshlab->set_integration_data(md);
 
+
  DHAX_FreeCAD_Integration_Data* fd = new DHAX_FreeCAD_Integration_Data;
  application_main_window_->main_window_data()->set_freecad_integration(fd);
  fd->init_import_count();
@@ -982,6 +1014,17 @@ void DHAX_Application_Controller::init_integration_controllers()
  integration_controllers_["freecad"] = freecad;
  freecad->set_application_controller(this);
  freecad->set_integration_data(fd);
+
+
+ DHAX_SSR_Integration_Data* ssrd = new DHAX_SSR_Integration_Data;
+ application_main_window_->main_window_data()->set_ssr_integration(ssrd);
+ md->init_import_count();
+
+ DHAX_SSR_Integration_Controller* ssr = new DHAX_SSR_Integration_Controller;
+ integration_controllers_["ssr"] = ssr;
+ ssr->set_application_controller(this);
+ ssr->set_integration_data(ssrd);
+
 
  //meshlab->set_integration_data()
 }

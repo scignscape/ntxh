@@ -102,6 +102,20 @@ void DHAX_Menu_System::init_menus()
 
  file_menu.addSeparator();
 
+ DHAX_Menu* ssr_menu = file_menu.add_nested_menu("Video Recorder (SimpleScreen)");
+
+ ssr_menu->add_action("Prepare Recorder (opens external window)") << [sg]
+ {
+  sg->emit_prepare_video_recorder_requested();
+ };
+
+ ssr_menu->add_action("Test datagram") << [sg]
+ {
+  sg->emit_test_ssr_datagram_requested();
+ };
+
+ file_menu.addSeparator();
+
  file_menu.add_action("Run Forge Workflow (Forge API)") << [sg]
  {
   sg->emit_run_forge_workflow_requested();

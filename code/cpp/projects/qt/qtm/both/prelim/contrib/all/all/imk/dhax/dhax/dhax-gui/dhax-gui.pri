@@ -185,6 +185,8 @@ HEADERS += \
   $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-controller.h \
   $$SRC_DIR/integration/freecad/dhax-freecad-integration-data.h \
   $$SRC_DIR/integration/freecad/dhax-freecad-integration-controller.h \
+  $$SRC_DIR/integration/ssr/dhax-ssr-integration-data.h \
+  $$SRC_DIR/integration/ssr/dhax-ssr-integration-controller.h \
   $$SRC_DIR/integration/forge-api/dhax-forge-api-integration-data.h \
   $$SRC_DIR/virtual-packages/graphics-scene-demo.h \
   $$SRC_DIR/network/dhax-udp-controller.h \
@@ -258,6 +260,8 @@ SOURCES += \
   $$SRC_DIR/integration/meshlab/dhax-meshlab-integration-controller.cpp \
   $$SRC_DIR/integration/freecad/dhax-freecad-integration-data.cpp \
   $$SRC_DIR/integration/freecad/dhax-freecad-integration-controller.cpp \
+  $$SRC_DIR/integration/ssr/dhax-ssr-integration-data.cpp \
+  $$SRC_DIR/integration/ssr/dhax-ssr-integration-controller.cpp \
   $$SRC_DIR/integration/forge-api/dhax-forge-api-integration-data.cpp \
   $$SRC_DIR/virtual-packages/graphics-scene-demo.cpp \
   $$SRC_DIR/network/dhax-udp-controller.cpp \
@@ -392,9 +396,10 @@ LIBS += -L$$TARGETSDIR  -limage-editor
 
 
 include($$ROOT_DIR/../preferred/freecad.pri)
-
 DEFINES += FREECAD_BIN_FOLDER=\\\"$$FREECAD_BIN_DIR\\\"
 
+include($$ROOT_DIR/../preferred/ssr.pri)
+DEFINES += SSR_BIN_FOLDER=\\\"$$SSR_BIN_DIR\\\"
 
 #?LIBS += -L$$TARGETSDIR -ldgdb
 

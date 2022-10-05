@@ -253,6 +253,14 @@ WebGL_View_Dialog::WebGL_View_Dialog(QWidget* parent)
 
 }
 
+
+QRect WebGL_View_Dialog::get_web_view_geometry()
+{
+ return wev_scroll_area_->geometry().translated
+   (wev_scroll_area_->mapToGlobal(QPoint(0, 0)));
+}
+
+
 void WebGL_View_Dialog::mouseReleaseEvent(QMouseEvent* mouseEvent)
 {
  mouseEvent->ignore();

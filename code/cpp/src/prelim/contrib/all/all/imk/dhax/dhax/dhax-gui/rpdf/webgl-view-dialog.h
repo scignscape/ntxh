@@ -88,6 +88,8 @@ public:
 
  void reset_tab_selection();
 
+ QRect get_web_view_geometry();
+
 Q_SIGNALS:
 
  void url_patterns_changed();

@@ -112,6 +112,22 @@ void DHAX_Signal_Generator::emit_view_360_requested()
  Q_EMIT view_360_requested(++static_count);
 }
 
+
+void DHAX_Signal_Generator::emit_prepare_video_recorder_requested()
+{
+ STATIC_COUNT
+ Q_EMIT prepare_video_recorder_requested(++static_count);
+}
+
+void DHAX_Signal_Generator::emit_test_ssr_datagram_requested()
+{
+ STATIC_COUNT
+ Q_EMIT test_ssr_datagram_requested(++static_count);
+}
+
+
+
+
 void DHAX_Signal_Generator::emit_view_cad_requested()
 {
  STATIC_COUNT

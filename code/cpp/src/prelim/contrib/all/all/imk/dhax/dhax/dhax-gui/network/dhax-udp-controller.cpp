@@ -17,6 +17,7 @@ DHAX_UDP_Controller::DHAX_UDP_Controller()
 {
  //socket_server_.listen("/home/nlevisrael/gits/osm/inner-system/socket-files/qt-test/renderd.sock");
 
+#ifdef HIDE
  socket_server_.listen("/home/nlevisrael/gits/osm/inner-system/run/renderd/renderd.sock");
 
 
@@ -54,7 +55,7 @@ DHAX_UDP_Controller::DHAX_UDP_Controller()
   });
 
  });
-
+#endif
 
  int tcp_shost = 1237;
 

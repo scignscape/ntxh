@@ -41,6 +41,9 @@ public:
  void emit_calculate_fb_gaussian_requested();
  void emit_launch_edge_detection_dialog_requested();
 
+ void emit_prepare_video_recorder_requested();
+ void emit_test_ssr_datagram_requested();
+
  void emit_show_pixel_local_aggregate_color_distance_requested();
 
 
@@ -66,6 +69,10 @@ Q_SIGNALS:
  void view_contours_requested(call_Stamp_u2);
  void view_3d_requested(call_Stamp_u2);
  void view_360_requested(call_Stamp_u2);
+
+ void prepare_video_recorder_requested(call_Stamp_u2);
+ void test_ssr_datagram_requested(call_Stamp_u2);
+
  void view_cad_requested(call_Stamp_u2);
  void run_forge_workflow_requested(call_Stamp_u2);
  void quit_requested(call_Stamp_u2);

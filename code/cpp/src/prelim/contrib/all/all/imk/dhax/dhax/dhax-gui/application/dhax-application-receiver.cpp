@@ -44,6 +44,12 @@ void DHAX_Application_Receiver::handle_meshlab_reset(call_Stamp_u2 callstamp)
  application_controller_->send_meshlab_reset(/*callstamp*/);
 }
 
+void DHAX_Application_Receiver::handle_ssr_reset(QString msg, call_Stamp_u2 callstamp)
+{
+ application_controller_->send_ssr_reset(msg/*callstamp*/);
+}
+
+
 
 void DHAX_Application_Receiver::handle_convert_notation(call_Stamp_u2 callstamp)
 {
@@ -115,6 +121,18 @@ void DHAX_Application_Receiver::handle_view_3d(call_Stamp_u2 callstamp)
 {
  external_application_controller_->view_3d(/*callstamp*/);
 }
+
+
+void DHAX_Application_Receiver::handle_prepare_video_recorder(call_Stamp_u2 callstamp)
+{
+ external_application_controller_->prepare_video_recorder(/*callstamp*/);
+}
+
+void DHAX_Application_Receiver::handle_test_ssr_datagram(call_Stamp_u2 callstamp)
+{
+ external_application_controller_->test_ssr_datagram(/*callstamp*/);
+}
+
 
 void DHAX_Application_Receiver::handle_view_360(call_Stamp_u2 callstamp)
 {
