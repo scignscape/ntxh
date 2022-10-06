@@ -63,6 +63,9 @@ DHAX_Video_Player_Dialog::DHAX_Video_Player_Dialog(QWidget* parent)
  connect(player_, &DHAX_Video_Player_Frame::full_video_size_requested,
   [this](QSize sz)
  {
+  last_smaller_screen_position_ = pos();
+  last_smaller_size_ = size();
+
   qDebug() << "full: " << sz;
   check_adjust_size(sz, 20);
  });
@@ -70,9 +73,11 @@ DHAX_Video_Player_Dialog::DHAX_Video_Player_Dialog(QWidget* parent)
  connect(player_, &DHAX_Video_Player_Frame::smaller_video_size_requested,
   [this](QSize sz)
  {
+  move(last_smaller_screen_position_);
+  resize(last_smaller_size_);
   qDebug() << " small: " << sz;
 
-  check_adjust_size(sz, 20);
+//  check_adjust_size(sz, 20);
  });
 
 //  QMediaPlaylist *playList = new QMediaPlaylist(this);
@@ -103,4 +108,3 @@ void DHAX_Video_Player_Dialog::play_local_video(QString file_path)
 {
  player_->play_local_video(file_path);
 }
-

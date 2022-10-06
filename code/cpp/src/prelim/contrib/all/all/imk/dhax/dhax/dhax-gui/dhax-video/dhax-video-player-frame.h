@@ -70,6 +70,9 @@ class DHAX_Video_Player_Frame : public QFrame
 
  int need_video_size_;
 
+ QGraphicsRectItem* full_size_rect_item_;
+ QGraphicsRectItem* smaller_size_rect_item_;
+
 protected:
 
  void resizeEvent(QResizeEvent* event);
@@ -80,7 +83,8 @@ public:
 
  void play_local_video(QString file_path);
 
- void request_full_size();
+ void reset_to_full_size();
+ void reset_to_smaller_size();
 
  void confirm_video_size();
 

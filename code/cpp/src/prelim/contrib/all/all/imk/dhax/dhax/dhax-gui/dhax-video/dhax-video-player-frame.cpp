@@ -8,7 +8,8 @@
 
 
 DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
-  :  QFrame(parent)
+  :  QFrame(parent), full_size_rect_item_(nullptr),
+     smaller_size_rect_item_(nullptr)
 {
 // setLayout(new QVBoxLayout);
 // layout()->setContentsMargins(0, 0, 0, 0);
@@ -144,13 +145,13 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
 
  connect(navigation_, &DHAX_Video_Navigation_Frame::full_size_requested, [this]()
  {
-  request_full_size();
+  reset_to_full_size();
 //      qDebug()<<"r clicked";
  });
 
  connect(navigation_, &DHAX_Video_Navigation_Frame::smaller_size_requested, [this]()
  {
-  Q_EMIT smaller_video_size_requested(last_smaller_size_.toSize());
+  reset_to_smaller_size();
  });
 
 // navigation_->show();
@@ -201,6 +202,11 @@ void DHAX_Video_Player_Frame::confirm_video_size()
 
  int new_width = sz.height() * ratio;
 
+ float left = (sz.width() / 2) - (new_width / 2);
+
+ smaller_size_rect_item_ = graphics_scene_->addRect(left,
+   video_item_->pos().y(),new_width,sz.height(),QPen(QBrush(c), 4));
+
  Q_EMIT video_size_established(QSize(new_width, sz.height()));
 
 // qDebug() << "sz = " << sz;
@@ -234,7 +240,22 @@ void DHAX_Video_Player_Frame::confirm_video_size()
 
 }
 
-void DHAX_Video_Player_Frame::request_full_size()
+void DHAX_Video_Player_Frame::reset_to_smaller_size()
+{
+ if(full_size_rect_item_)
+   graphics_scene_->removeItem(full_size_rect_item_);
+ if(smaller_size_rect_item_)
+   graphics_scene_->addItem(smaller_size_rect_item_);
+
+ video_item_->setSize(last_smaller_size_);
+
+ QRectF rect = graphics_scene_->itemsBoundingRect();
+ graphics_scene_->setSceneRect(rect);
+
+ Q_EMIT smaller_video_size_requested(last_smaller_size_.toSize());
+}
+
+void DHAX_Video_Player_Frame::reset_to_full_size()
 {
 // qDebug() << "new size: " << video_size_;
 // QSize sza = video_size_.grownBy(QMargins(5,5,5,5));
@@ -251,11 +272,19 @@ void DHAX_Video_Player_Frame::request_full_size()
 
  QColor c (200, 100, 10, 100);
 
- graphics_scene_->addRect(0, 0, szs.width(), szs.height(),
-   QPen(QBrush(c), 10), Qt::NoBrush);
+ if(smaller_size_rect_item_)
+   graphics_scene_->removeItem(smaller_size_rect_item_);
+
+ if(full_size_rect_item_)
+   graphics_scene_->addItem(full_size_rect_item_);
+ else
+   full_size_rect_item_ = graphics_scene_->addRect(0, 0, szs.width(), szs.height(),
+     QPen(QBrush(c), 10), Qt::NoBrush);
 
  last_smaller_size_ = video_item_->size();
+
  video_item_->setSize(video_size_);
+
 
  graphics_view_->resize(sza.toSize());
 
@@ -272,4 +301,3 @@ void DHAX_Video_Player_Frame::resizeEvent(QResizeEvent* event)
 // navigation_->move(video_widget_->rect().bottomRight() - navigation_->rect().bottomRight() + QPoint(0,10));
  QWidget::resizeEvent(event);
 }
-

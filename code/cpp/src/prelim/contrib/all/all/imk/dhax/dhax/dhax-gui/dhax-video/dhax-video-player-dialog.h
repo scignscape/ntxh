@@ -51,6 +51,9 @@ class DHAX_Video_Player_Dialog : public QDialog
  QPushButton* button_close_;
  QPushButton* button_cancel_;
 
+ QPoint last_smaller_screen_position_;
+ QSize last_smaller_size_;
+
 
  DHAX_Video_Player_Frame* player_;
 

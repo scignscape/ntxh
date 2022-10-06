@@ -18,7 +18,7 @@ class DHAX_Video_Navigation_Frame : public QFrame
  QPushButton* full_size_button_;
  QPushButton* smaller_size_button_;
 
- QVBoxLayout* top_layout_;
+ QHBoxLayout* top_layout_;
  QHBoxLayout* bottom_layout_;
  QHBoxLayout* main_layout_;
 

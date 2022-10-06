@@ -3,13 +3,14 @@
 
 
 #include <QDebug>
+#include <QLabel>
 
 DHAX_Video_Navigation_Frame::DHAX_Video_Navigation_Frame(QWidget* parent)
   :  QFrame(parent)
 {
  main_layout_ = new QHBoxLayout;
 
- top_layout_ = new QVBoxLayout;
+ top_layout_ = new QHBoxLayout;
  bottom_layout_ = new QHBoxLayout;
 
  main_layout_->setContentsMargins(0,0,0,0);
@@ -29,8 +30,17 @@ DHAX_Video_Navigation_Frame::DHAX_Video_Navigation_Frame(QWidget* parent)
  smaller_size_button_->setMaximumWidth(25);
  smaller_size_button_->setMaximumHeight(15);
 
- top_layout_->addWidget(full_size_button_);
- top_layout_->addWidget(smaller_size_button_);
+ QFrame* left = new QFrame(this);
+ left->setFrameStyle(QFrame::Panel | QFrame::Raised);
+
+
+ top_layout_->addWidget(full_size_button_);//, Qt::AlignBottom);
+ top_layout_->addWidget(smaller_size_button_);//, Qt::AlignTop);
+ left->setLayout(top_layout_);
+ left->setMaximumHeight(full_size_button_->height() + smaller_size_button_->height());
+
+ QFrame* right = new QFrame(this);
+ right->setFrameStyle(QFrame::Panel | QFrame::Raised);
 
  restart_button_ = new QPushButton("<", this);
  restart_button_->setMaximumWidth(25);
@@ -42,14 +52,18 @@ DHAX_Video_Navigation_Frame::DHAX_Video_Navigation_Frame(QWidget* parent)
  resume_button_->setMaximumWidth(25);
  resume_button_->setMaximumHeight(15);
 
- bottom_layout_->addStretch();
  bottom_layout_->addWidget(restart_button_);
  bottom_layout_->addWidget(pause_button_);
  bottom_layout_->addWidget(resume_button_);
 
+ right->setLayout(bottom_layout_);
 
- main_layout_->addLayout(top_layout_);
- main_layout_->addLayout(bottom_layout_);
+ main_layout_->addWidget(left);
+ main_layout_->addStretch();
+ main_layout_->addWidget(right);
+
+// main_layout_->addLayout(top_layout_);
+// main_layout_->addLayout(bottom_layout_);
  setLayout(main_layout_);
 
  connect(pause_button_, &QPushButton::clicked,
