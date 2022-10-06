@@ -70,6 +70,9 @@ Q_SIGNALS:
 
  void show_video_frame_requested(QString file_path);
 
+// void accept();
+// void reject();
+
 
 // void restart_requested();
 // void pause_requested();

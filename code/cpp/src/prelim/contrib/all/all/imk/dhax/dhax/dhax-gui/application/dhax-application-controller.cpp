@@ -929,18 +929,39 @@ void DHAX_Application_Controller::play_video(QString file_path)
   load_image(image_file_path);
  });
 
+ application_main_window_->connect(dialog, &QDialog::accepted, [this, dialog, file_path]()
+ {
+  QString new_path = QFileDialog::getSaveFileName(application_main_window_,
+    "Select a name to save the video (or cancel to skip)", ROOT_FOLDER "/..");
+
+  if(!new_path.isEmpty())
+  {
+   QFile::copy(file_path, new_path);
+  }
+  dialog->close();
+ });
+
+ application_main_window_->connect(dialog, &QDialog::rejected, [this, dialog]()
+ {
+  dialog->close();
+ });
+
+
+
+
+ qDebug() << "video = " << file_path;
+
  dialog->play_local_video(file_path);
  dialog->show();
- //qDebug() << "video = " << file_path;
 }
 
 void DHAX_Application_Controller::play_video()
 {
- play_video(QString());
-// QString fn = QFileDialog::getOpenFileName(application_main_window_, "Select Video",
-//   ROOT_FOLDER "/..");
-// if(!fn.isEmpty())
-//   play_video(fn);
+// play_video(QString());
+ QString fn = QFileDialog::getOpenFileName(application_main_window_, "Select Video",
+   ROOT_FOLDER "/..");
+ if(!fn.isEmpty())
+   play_video(fn);
 }
 
 
@@ -971,7 +992,7 @@ void DHAX_Application_Controller::handle_newly_downloaded_video(QString file_pat
   // If the filename contains target string - put it in the hitlist
   if(qfi1.baseName() == qfi.baseName())
   {
-   file_path = qfi1.absoluteFilePath();
+   match_file_path = qfi1.absoluteFilePath();
    break;
   }
  }

@@ -114,8 +114,7 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
 
  connect(navigation_, &DHAX_Video_Navigation_Frame::grab_frame_requested, [this]()
  {
-  media_player_->pause();
-  navigation_->set_play_button_to_resume();
+  pause();
 
   qDebug() << "pos: " << media_player_->position();
   QImage frame_image = current_video_frame_.image();
@@ -140,9 +139,8 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
 
  connect(navigation_, &DHAX_Video_Navigation_Frame::pause_requested, [this]()
  {
-  media_player_->pause();
-  navigation_->set_play_button_to_resume();
-//      qDebug()<<"p clicked";
+  pause();
+  //      qDebug()<<"p clicked";
  });
 
  connect(navigation_, &DHAX_Video_Navigation_Frame::resume_requested, [this]()
@@ -186,6 +184,12 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
 
 }
 
+void DHAX_Video_Player_Frame::pause()
+{
+ media_player_->pause();
+ navigation_->set_play_button_to_resume();
+}
+
 void DHAX_Video_Player_Frame::handle_send_video_frame_to_main_window(QLabel* l)
 {
  QString cnf = class_name_folder(DEFAULT_DHAX_TEMP_FOLDER "/_proc");
@@ -204,8 +208,8 @@ void DHAX_Video_Player_Frame::handle_send_video_frame_to_main_window(QLabel* l)
 
 void DHAX_Video_Player_Frame::play_local_video(QString file_path)
 {
- //?current_path_ = file_path;
- current_path_ = "/home/nlevisrael/gits/ctg-temp/stella/videos/test.mkv";
+ current_path_ = file_path;
+// current_path_ = "/home/nlevisrael/gits/ctg-temp/stella/videos/test.mkv";
  current_url_ =  QUrl::fromLocalFile(current_path_);
 
  media_player_->setMedia(current_url_);

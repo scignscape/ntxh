@@ -25,7 +25,7 @@ DHAX_Video_Player_Dialog::DHAX_Video_Player_Dialog(QWidget* parent)
  button_box_ = new QDialogButtonBox(this);
 
  button_close_ = new QPushButton("Close");
- button_suspend_ = new QPushButton("Proceed");
+ button_suspend_ = new QPushButton("Suspend");
  button_cancel_ = new QPushButton("Cancel");
 
  button_close_->setDefault(true);
@@ -37,11 +37,23 @@ DHAX_Video_Player_Dialog::DHAX_Video_Player_Dialog(QWidget* parent)
 
  button_box_->addButton(button_close_, QDialogButtonBox::AcceptRole);
  button_box_->addButton(button_suspend_, QDialogButtonBox::ActionRole);
- button_box_->addButton(button_cancel_, QDialogButtonBox::DestructiveRole);
+ button_box_->addButton(button_cancel_, QDialogButtonBox::RejectRole);
 
  //?connect(button_proceed_, SIGNAL(clicked()), this, SLOT(proceed()));
 // connect(button_box_, SIGNAL(accepted()), this, SLOT(accept()));
 // connect(button_box_, SIGNAL(rejected()), this, SLOT(close()));
+
+ connect(button_suspend_, &QPushButton::clicked, [this]()
+ {
+  player_->pause();
+  setWindowState(windowState() | Qt::WindowState::WindowMinimized);
+ });
+
+ connect(button_box_, &QDialogButtonBox::accepted, this,
+   &QDialog::accepted);
+
+ connect(button_box_, &QDialogButtonBox::rejected, this,
+   &QDialog::rejected);
 
  main_layout_->addWidget(button_box_);
 

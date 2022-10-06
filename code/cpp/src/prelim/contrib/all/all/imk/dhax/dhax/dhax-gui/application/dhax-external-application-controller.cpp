@@ -130,7 +130,8 @@ void DHAX_External_Application_Controller::view_360()
     QDateTime::currentDateTime().toString("/ddMMyyyy-hhmmss").prepend(YOU_TUBE_DOWNLOAD_FOLDER);
 
   QStringList options;
-  options << "-o" << outfile;
+  options << "-o" << outfile << "--skip-unavailable-fragments"
+    << "--no-continue" << "--no-part";
   options << url;
 
   qDebug() << "cmd = " << ap;

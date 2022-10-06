@@ -92,6 +92,8 @@ public:
 
  void confirm_video_size();
 
+ void pause();
+
  QSize get_navigation_size();
 
  void handle_send_video_frame_to_main_window(QLabel* l);
