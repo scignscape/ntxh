@@ -5,6 +5,12 @@
 //     (See accompanying file LICENSE_1_0.txt or copy at
 //           http://www.boost.org/LICENSE_1_0.txt)
 
+SIGMA_ADAPTER(make_restart_button)
+SIGMA_ADAPTER(make_resume_button)
+//SIGMA_ADAPTER(make_forward_button)
+SIGMA_ADAPTER(make_pause_button)
+SIGMA_ADAPTER(make_camera_button)
+SIGMA_ADAPTER(make_play_button)
 
 SIGMA_ADAPTER(make_up_button)
 SIGMA_ADAPTER(make_down_button)

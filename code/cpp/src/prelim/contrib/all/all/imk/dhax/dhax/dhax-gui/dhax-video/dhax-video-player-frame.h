@@ -37,6 +37,8 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 
+#include "global-types.h"
+
 
 class DHAX_Video_Navigation_Frame;
 
@@ -44,6 +46,8 @@ class DHAX_Video_Navigation_Frame;
 class DHAX_Video_Player_Frame : public QFrame
 {
  Q_OBJECT
+
+ CLASS_NAME_FN (auto)
 
  QVBoxLayout* main_layout_;
 
@@ -90,11 +94,15 @@ public:
 
  QSize get_navigation_size();
 
+ void handle_send_video_frame_to_main_window(QLabel* l);
+
+
 Q_SIGNALS:
 
  void video_size_established(QSize);
  void full_video_size_requested(QSize);
  void smaller_video_size_requested(QSize);
+ void show_video_frame_requested(QString file_path);
 
 // void restart_requested();
 // void pause_requested();

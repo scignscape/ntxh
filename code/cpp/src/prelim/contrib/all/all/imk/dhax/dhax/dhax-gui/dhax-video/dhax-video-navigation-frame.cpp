@@ -43,12 +43,22 @@ DHAX_Video_Navigation_Frame::DHAX_Video_Navigation_Frame(QWidget* parent)
  right->setFrameStyle(QFrame::Panel | QFrame::Raised);
 
  restart_button_ = new QPushButton("<", this);
+ restart_button_->setToolTip("Restart (from beginning)");
+ sigma(restart_button_)->make_restart_button();
  restart_button_->setMaximumWidth(25);
  restart_button_->setMaximumHeight(15);
+
  pause_button_ = new QPushButton("=", this);
+ pause_button_->setToolTip("Pause");
+ sigma(pause_button_)->make_pause_button();
  pause_button_->setMaximumWidth(25);
  pause_button_->setMaximumHeight(15);
+
  resume_button_  = new QPushButton(">", this);
+ resume_button_->setToolTip("Resume (from current frame)");
+ //?sigma(resume_button_)->make_resume_button();
+ set_play_button_to_play();
+// sigma(resume_button_)->make_play_button();
  resume_button_->setMaximumWidth(25);
  resume_button_->setMaximumHeight(15);
 
@@ -59,6 +69,15 @@ DHAX_Video_Navigation_Frame::DHAX_Video_Navigation_Frame(QWidget* parent)
  right->setLayout(bottom_layout_);
 
  main_layout_->addWidget(left);
+ main_layout_->addStretch();
+
+ grab_frame_button_ = new QPushButton("@", this);
+ grab_frame_button_->setToolTip("Pause and view current frame (enlarged)");
+ sigma(grab_frame_button_)->make_camera_button();
+ grab_frame_button_->setMaximumWidth(25);
+ grab_frame_button_->setMaximumHeight(15);
+
+ main_layout_->addWidget(grab_frame_button_);
  main_layout_->addStretch();
  main_layout_->addWidget(right);
 
@@ -81,4 +100,18 @@ DHAX_Video_Navigation_Frame::DHAX_Video_Navigation_Frame(QWidget* parent)
  connect(smaller_size_button_, &QPushButton::clicked,
    this, &DHAX_Video_Navigation_Frame::smaller_size_requested);
 
+ connect(grab_frame_button_, &QPushButton::clicked,
+   this, &DHAX_Video_Navigation_Frame::grab_frame_requested);
+
+}
+
+
+void DHAX_Video_Navigation_Frame::set_play_button_to_play()
+{
+ sigma(resume_button_)->make_play_button();
+}
+
+void DHAX_Video_Navigation_Frame::set_play_button_to_resume()
+{
+ sigma(resume_button_)->make_resume_button();
 }

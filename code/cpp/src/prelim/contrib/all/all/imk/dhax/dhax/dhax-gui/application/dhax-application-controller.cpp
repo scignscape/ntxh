@@ -922,6 +922,13 @@ void DHAX_Application_Controller::r8_vector_to_qba(const QVector<r8>& data, QByt
 void DHAX_Application_Controller::play_video(QString file_path)
 {
  DHAX_Video_Player_Dialog* dialog = new DHAX_Video_Player_Dialog;
+
+ application_main_window_->connect(dialog,
+   &DHAX_Video_Player_Dialog::show_video_frame_requested, [this](QString image_file_path)
+ {
+  load_image(image_file_path);
+ });
+
  dialog->play_local_video(file_path);
  dialog->show();
  //qDebug() << "video = " << file_path;

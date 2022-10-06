@@ -4,6 +4,10 @@
 
 #include <QGraphicsVideoItem>
 
+#include <QMenu>
+#include <QStyle>
+#include <QDir>
+
 #include "styles.h"
 
 
@@ -93,7 +97,7 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
 //  qint64 st = qvf.startTime();
 //  qint64 fn = st/40000;
 ////  qDebug() << fn;
-//  current_video_frame_ = qvf;
+  current_video_frame_ = qvf;
 
 //    QSize sz = media_player_->media().canonicalResource().resolution();
 //    qDebug() << "size = " << sz;
@@ -108,32 +112,45 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
 
  });
 
- connect(navigation_, &DHAX_Video_Navigation_Frame::pause_requested, [this]()
+ connect(navigation_, &DHAX_Video_Navigation_Frame::grab_frame_requested, [this]()
  {
-//      qDebug()<<"p clicked";
   media_player_->pause();
+  navigation_->set_play_button_to_resume();
 
   qDebug() << "pos: " << media_player_->position();
-
   QImage frame_image = current_video_frame_.image();
-
   QLabel* l = new QLabel;
   l->setPixmap(QPixmap::fromImage(frame_image));
+
+  l->setContextMenuPolicy(Qt::CustomContextMenu);
+
+  connect(l, &QLabel::customContextMenuRequested, [this, l](QPoint pos)
+  {
+   QMenu* m = new QMenu;
+   m->addAction("Send video frame to main window", [this, l]()
+   {
+    handle_send_video_frame_to_main_window(l);
+   });
+   m->popup(pos + l->pos() + QPoint(0,
+     QApplication::style()->pixelMetric(QStyle::PM_TitleBarHeight)));
+  });
+
   l->show();
+ });
 
-
-//   video_frame_grabber_->p
-
-//   video_probe_->startTimer();
-
-//   f->Display();
-
+ connect(navigation_, &DHAX_Video_Navigation_Frame::pause_requested, [this]()
+ {
+  media_player_->pause();
+  navigation_->set_play_button_to_resume();
+//      qDebug()<<"p clicked";
  });
 
  connect(navigation_, &DHAX_Video_Navigation_Frame::resume_requested, [this]()
  {
 //      qDebug()<<"r clicked";
   media_player_->play();
+  navigation_->set_play_button_to_play();
+
  });
 
  connect(navigation_, &DHAX_Video_Navigation_Frame::restart_requested, [this]()
@@ -167,6 +184,22 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
 //  current_path_ = "/home/nlevisrael/gits/ctg-temp/stella/videos/test.mp4";
 
 
+}
+
+void DHAX_Video_Player_Frame::handle_send_video_frame_to_main_window(QLabel* l)
+{
+ QString cnf = class_name_folder(DEFAULT_DHAX_TEMP_FOLDER "/_proc");
+
+ QDir qd(cnf);
+ if(!qd.exists())
+   qd.mkpath(".");
+
+ cnf += "/temp.png";
+ l->pixmap()->save(cnf);
+
+ qDebug() << "saving pixmap: " << cnf;
+
+ Q_EMIT show_video_frame_requested(cnf);
 }
 
 void DHAX_Video_Player_Frame::play_local_video(QString file_path)

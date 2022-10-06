@@ -47,6 +47,9 @@ DHAX_Video_Player_Dialog::DHAX_Video_Player_Dialog(QWidget* parent)
 
  setLayout(main_layout_);
 
+ connect(player_, &DHAX_Video_Player_Frame::show_video_frame_requested,
+  this, &DHAX_Video_Player_Dialog::show_video_frame_requested);
+
  connect(player_, &DHAX_Video_Player_Frame::video_size_established,
   [this](QSize sz)
  {

@@ -66,7 +66,10 @@ public:
  void play_local_video(QString file_path);
 
 
-//Q_SIGNALS:
+Q_SIGNALS:
+
+ void show_video_frame_requested(QString file_path);
+
 
 // void restart_requested();
 // void pause_requested();

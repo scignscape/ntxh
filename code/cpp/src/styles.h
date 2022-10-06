@@ -229,7 +229,15 @@ inline void make_unicode_text(WIDGET_Type* w, u4 code_point)
   code_point >>= 16;
   const u1 array[4]  {(u1)(code_point >> 8), (u1)(code_point & 0xFF), (u1)(low >> 8), (u1)(low & 0xFF)};
   QString unicode = QString::fromUtf8((const char*)array, 4);
+
+//?  const char16_t array[2] {code_point, low};
+//?  const char16_t array[2] {0xD83D, 0xDCF7};
+
+//  QString unicode = QString::fromUtf16(array, 2);
   w->setText(unicode);
+
+
+
  }
 }
 
@@ -249,6 +257,42 @@ inline void make_unicode_text(WIDGET_Type* w, u4 code_point,
  w->setMaximumWidth(width);
  w->setMaximumHeight(height);
 }
+
+template<typename WIDGET_Type>
+inline void make_pause_button(WIDGET_Type* w)
+{
+ make_unicode_text(w, 0x23F8, light_back_forward_button_style_sheet_red_(), 20, 15);
+}
+
+template<typename WIDGET_Type>
+inline void make_restart_button(WIDGET_Type* w)
+{
+ make_unicode_text(w, 0x21BA, light_back_forward_button_style_sheet_red_(), 20, 15);
+}
+
+template<typename WIDGET_Type>
+inline void make_play_button(WIDGET_Type* w)
+{
+ make_unicode_text(w, 0x21F4, light_back_forward_button_style_sheet_red_(), 20, 15);
+}
+
+template<typename WIDGET_Type>
+inline void make_resume_button(WIDGET_Type* w)
+{
+ make_unicode_text(w, 0x21FB, light_back_forward_button_style_sheet_red_(), 20, 15);
+}
+
+template<typename WIDGET_Type>
+inline void make_camera_button(WIDGET_Type* w)
+{
+ make_unicode_text(w, 0xF09F93B7, light_back_forward_button_style_sheet_red_(), 20, 15);
+}
+
+//template<typename WIDGET_Type>
+//inline void make_pause_button(WIDGET_Type* w)
+//{
+// make_unicode_text(w, 0x21FB, light_back_forward_button_style_sheet_red_(), 20, 15);
+//}
 
 template<typename WIDGET_Type>
 inline void make_up_button(WIDGET_Type* w)
