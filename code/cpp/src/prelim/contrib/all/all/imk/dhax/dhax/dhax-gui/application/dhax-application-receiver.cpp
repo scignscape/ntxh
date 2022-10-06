@@ -122,6 +122,10 @@ void DHAX_Application_Receiver::handle_view_3d(call_Stamp_u2 callstamp)
  external_application_controller_->view_3d(/*callstamp*/);
 }
 
+void DHAX_Application_Receiver::handle_play_video(call_Stamp_u2 callstamp)
+{
+ application_controller_->play_video(/*callstamp*/);
+}
 
 void DHAX_Application_Receiver::handle_prepare_video_recorder(call_Stamp_u2 callstamp)
 {

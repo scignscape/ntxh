@@ -10,6 +10,11 @@ include(../build-group.pri)
 QT += xml widgets network webenginewidgets
 
 
+QT += multimedia
+QT += multimediawidgets
+
+
+
 INCLUDEPATH += $$SRC_DIR
 
 INCLUDEPATH += $$SRC_PROSET_DIR/aimlib/aimlib/AIMLib/
@@ -20,6 +25,7 @@ include($$ROOT_DIR/../preferred/compiler.pri)
 
 
 CONFIG += c++17
+
 
 
 ## FEATURE_IFC = USE_IFC
@@ -37,6 +43,14 @@ DEFINES += ROOT_FOLDER=\\\"$$ROOT_DIR\\\"
 include($$ROOT_DIR/../preferred/dhax.pri)
 
 include($$ROOT_DIR/../preferred/poppler.pri)
+
+include($$ROOT_DIR/../preferred/you-tube.pri)
+
+
+DEFINES += YOU_TUBE_DOWNLOAD_CMD_FOLDER=\\\"$${YOU_TUBE_DOWNLOAD_CMD_DIR}\\\"
+DEFINES += YOU_TUBE_DOWNLOAD_EXE=\\\"$${YOU_TUBE_DOWNLOAD_EXE}\\\"
+DEFINES += YOU_TUBE_DOWNLOAD_FOLDER=\\\"$${YOU_TUBE_DOWNLOAD_DIR}\\\"
+
 
 
 DEFINES += DHAX_DATA_FOLDER=\\\"$$DHAX_DATA_DIR\\\"
@@ -218,6 +232,10 @@ HEADERS += \
   $$SRC_DIR/edge-detection/edge-detection-dialog.h \
   $$SRC_DIR/edge-detection/edge-detection-algorithms.h \
   $$SRC_DIR/edge-detection/edge-detection-kernels.h \
+  $$SRC_DIR/dhax-video/dhax-video-grabber.h \
+  $$SRC_DIR/dhax-video/dhax-video-navigation-frame.h \
+  $$SRC_DIR/dhax-video/dhax-video-player-frame.h \
+  $$SRC_DIR/dhax-video/dhax-video-player-dialog.h \
 
 
 SOURCES += \
@@ -291,6 +309,10 @@ SOURCES += \
   $$SRC_DIR/dialogs/color-mean-demo-frame.cpp \
   $$SRC_DIR/edge-detection/edge-detection-algorithms.cpp \
   $$SRC_DIR/edge-detection/edge-detection-dialog.cpp \
+  $$SRC_DIR/dhax-video/dhax-video-grabber.cpp \
+  $$SRC_DIR/dhax-video/dhax-video-navigation-frame.cpp \
+  $$SRC_DIR/dhax-video/dhax-video-player-frame.cpp \
+  $$SRC_DIR/dhax-video/dhax-video-player-dialog.cpp \
 
 
 # # todo should these be subwindows?

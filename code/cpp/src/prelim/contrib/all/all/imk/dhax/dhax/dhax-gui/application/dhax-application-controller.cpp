@@ -57,7 +57,7 @@
 #include "integration/freecad/dhax-freecad-integration-controller.h"
 #include "integration/ssr/dhax-ssr-integration-controller.h"
 
-
+#include "dhax-video/dhax-video-player-dialog.h"
 
 #include "integration/dhax-integration-controller.h"
 
@@ -919,11 +919,65 @@ void DHAX_Application_Controller::r8_vector_to_qba(const QVector<r8>& data, QByt
  }
 }
 
+void DHAX_Application_Controller::play_video(QString file_path)
+{
+ DHAX_Video_Player_Dialog* dialog = new DHAX_Video_Player_Dialog;
+ dialog->play_local_video(file_path);
+ dialog->show();
+ //qDebug() << "video = " << file_path;
+}
+
+void DHAX_Application_Controller::play_video()
+{
+ play_video(QString());
+// QString fn = QFileDialog::getOpenFileName(application_main_window_, "Select Video",
+//   ROOT_FOLDER "/..");
+// if(!fn.isEmpty())
+//   play_video(fn);
+}
+
 
 void DHAX_Application_Controller::send_ssr_reset(QString message)
 {
  QByteArray qba = message.toLatin1();
  udp_controller_->wrap_and_send_datagram(qba);
+}
+
+
+void DHAX_Application_Controller::handle_newly_downloaded_video(QString file_path)
+{
+ QFileInfo qfi(file_path);
+
+ // //  we have to search the directory because
+  //    the file_path may not include a suffix
+
+ QDir qd = qfi.dir();
+ //QFileInfoList hitList; // Container for matches
+ QDirIterator it(qd);
+
+ QFileInfoList qfis = qd.entryInfoList(QDir::Files, QDir::Reversed | QDir::Time);
+
+ QString match_file_path;
+
+ for (QFileInfo qfi1 : qfis)
+ {
+  // If the filename contains target string - put it in the hitlist
+  if(qfi1.baseName() == qfi.baseName())
+  {
+   file_path = qfi1.absoluteFilePath();
+   break;
+  }
+ }
+
+ QMessageBox::StandardButton reply = QMessageBox::question(application_main_window_, "Download Completed",
+   "The youtube video has been saved.  Would you like to view it now?");
+
+ if(reply == QMessageBox::Yes)
+ {
+  main_window_controller_->show_video(match_file_path);
+ }
+
+ qDebug() << "file_path = " << match_file_path;
 }
 
 

@@ -121,6 +121,10 @@ WebGL_View_Dialog::WebGL_View_Dialog(QWidget* parent)
  wev_->setPage(wep_);
 
  connect(wev_, SIGNAL(snapshot_saved(QString)), this, SIGNAL(snapshot_saved(QString)));
+ connect(wev_, SIGNAL(youtube_download_requested(QString)), this, SIGNAL(youtube_download_requested(QString)));
+
+// connect(wev_, &RPDF_Web_Engine_View::youtube_download_requested,
+//   this, &WebGL_View_Dialog::youtube_download_requested);
 
  //?this->winId();
 

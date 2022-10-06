@@ -90,6 +90,7 @@ public:
 
  void check_reset_base_temp_folder();
 
+ void show_video(QString file_path);
 
  void check_init_pdf_document_controller();
  void check_init_image_document_controller();

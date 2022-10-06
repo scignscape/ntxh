@@ -105,6 +105,7 @@ Q_SIGNALS:
  void url_pattern_match(QString procedure_name, QString arguments);
 
  void snapshot_saved(QString file_path);
+ void youtube_download_requested(QString url);
 
 
 };

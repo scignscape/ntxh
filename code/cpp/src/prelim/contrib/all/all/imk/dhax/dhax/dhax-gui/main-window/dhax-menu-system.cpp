@@ -100,6 +100,11 @@ void DHAX_Menu_System::init_menus()
   sg->emit_view_cad_requested();
  };
 
+ file_menu.add_action("Play Video") << [sg]
+ {
+  sg->emit_play_video_requested();
+ };
+
  file_menu.addSeparator();
 
  DHAX_Menu* ssr_menu = file_menu.add_nested_menu("Video Recorder (SimpleScreen)");

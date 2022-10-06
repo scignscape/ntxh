@@ -21,6 +21,8 @@
 
 #include <QLayout>
 
+#include "rpdf-web-engine-page.h"
+
 RPDF_Web_Engine_View::RPDF_Web_Engine_View(QDialog* parent_dialog)
  :  QWebEngineView(), parent_dialog_(parent_dialog), context_menu_provider_(nullptr),
     scroll_container_(nullptr)
@@ -105,7 +107,23 @@ void RPDF_Web_Engine_View::generate_context_menu(const QPoint& pos,
   // //
  }
 
+
+ RPDF_Web_Engine_Page* rpage = qobject_cast<RPDF_Web_Engine_Page*>(this->page());
+
  QMenu* menu = new QMenu(this);
+
+ QString yout = rpage? rpage->last_youtube_link_as_non_embed() : QString{};
+
+ if(!yout.isEmpty())
+ {
+  menu->addAction("Download/Save Youtube Video", [this, yout]()
+  {
+   Q_EMIT youtube_download_requested(yout);
+  });
+
+  menu->addSeparator();
+ }
+
  menu->addAction("2D Snapshot", [this]()
  {
   grab_snapshot();

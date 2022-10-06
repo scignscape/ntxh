@@ -118,6 +118,7 @@ public:
 //  return pre + "/_DHAX_Application_Controller";
 // }
 
+ void handle_newly_downloaded_video(QString file_path);
 
  static void r8_vector_to_qba(const QVector<r8>& data, QByteArray& qba);
 
@@ -148,6 +149,8 @@ public:
 
  void view_trimap(QString path);
 
+ void play_video();
+ void play_video(QString file_path);
 
  void calculate_fb_gaussian();
 

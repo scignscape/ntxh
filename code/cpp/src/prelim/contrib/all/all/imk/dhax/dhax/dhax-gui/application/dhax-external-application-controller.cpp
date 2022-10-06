@@ -116,6 +116,39 @@ void DHAX_External_Application_Controller::view_360()
 
  current_wgl_dialog_->setWindowTitle("360 Mode");
 
+ application_main_window_->connect(current_wgl_dialog_, &WebGL_View_Dialog::youtube_download_requested,
+   [this](QString url)
+ {
+  QString path = YOU_TUBE_DOWNLOAD_CMD_FOLDER;
+  qDebug() << "path = " << path;
+
+  QDir qd(path);
+
+  QString ap = qd.absoluteFilePath(YOU_TUBE_DOWNLOAD_EXE);
+
+  QString outfile =
+    QDateTime::currentDateTime().toString("/ddMMyyyy-hhmmss").prepend(YOU_TUBE_DOWNLOAD_FOLDER);
+
+  QStringList options;
+  options << "-o" << outfile;
+  options << url;
+
+  qDebug() << "cmd = " << ap;
+
+  QProcess* cmd = new QProcess;
+
+  application_main_window_->connect(cmd,
+    QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+    [outfile, this](int exit_code, QProcess::ExitStatus exit_status)
+  {
+   //?if(exit_status == QProcess::NormalExit)
+     application_controller_->handle_newly_downloaded_video(outfile);
+  });
+
+  cmd->start(ap, options);
+
+ });
+
  application_main_window_->connect(current_wgl_dialog_, &WebGL_View_Dialog::snapshot_saved,
    [this](QString file_path)
  {

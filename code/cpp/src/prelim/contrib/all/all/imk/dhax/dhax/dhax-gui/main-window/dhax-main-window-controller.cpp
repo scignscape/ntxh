@@ -83,6 +83,12 @@ DHAX_Main_Window_Controller::DHAX_Main_Window_Controller()
 }
 
 
+void DHAX_Main_Window_Controller::show_video(QString file_path)
+{
+ application_controller_->play_video(file_path);
+}
+
+
 void DHAX_Main_Window_Controller::show_annotation_comments(DHAX_Annotation_Instance* dai)
 {
  QString text = dai->comment(); //application_main_window_, ?

@@ -56,6 +56,8 @@ public Q_SLOTS:
  void handle_show_pixel_local_aggregate_color_distance(call_Stamp_u2);
 
 
+ void handle_play_video(call_Stamp_u2);
+
  void handle_view_contours(call_Stamp_u2);
  void handle_view_3d(call_Stamp_u2);
  void handle_view_360(call_Stamp_u2);

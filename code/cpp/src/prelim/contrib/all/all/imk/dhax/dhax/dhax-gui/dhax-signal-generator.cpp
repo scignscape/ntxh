@@ -126,6 +126,11 @@ void DHAX_Signal_Generator::emit_test_ssr_datagram_requested()
 }
 
 
+void DHAX_Signal_Generator::emit_play_video_requested()
+{
+ STATIC_COUNT
+ Q_EMIT play_video_requested(++static_count);
+}
 
 
 void DHAX_Signal_Generator::emit_view_cad_requested()

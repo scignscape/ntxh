@@ -83,6 +83,7 @@ public:
 Q_SIGNALS:
 
  void snapshot_saved(QString file_path);
+ void youtube_download_requested(QString url);
 
 };
 

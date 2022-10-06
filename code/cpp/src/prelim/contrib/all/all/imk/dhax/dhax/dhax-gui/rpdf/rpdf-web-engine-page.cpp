@@ -130,16 +130,15 @@ QString RPDF_Web_Engine_Page::last_youtube_link_as_non_embed()
 
 void RPDF_Web_Engine_Page::reset_last_youtube_link(const QUrl &url)
 {
- qDebug() << "p = " << url.path();
+// qDebug() << "p = " << url.path();
  if(url.path().startsWith("/embed/"))
  {
   if(int index = url.path().indexOf('?'))
    last_youtube_link_ = url.path().mid(7, index - 7);
  }
 
- qDebug() << "l = " << last_youtube_link_;
- qDebug() << "l = " << last_youtube_link_as_non_embed();
-
+// qDebug() << "l = " << last_youtube_link_;
+// qDebug() << "l = " << last_youtube_link_as_non_embed();
 
 }
 
