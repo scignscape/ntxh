@@ -24,20 +24,22 @@ DHAX_Video_Player_Dialog::DHAX_Video_Player_Dialog(QWidget* parent)
  main_layout_->addWidget(player_);
  button_box_ = new QDialogButtonBox(this);
 
- button_close_ = new QPushButton("Close");
+ button_save_ok_ = new QPushButton("Save/OK");
  button_suspend_ = new QPushButton("Suspend");
- button_cancel_ = new QPushButton("Cancel");
+ button_cancel_close_ = new QPushButton("Close");
 
- button_close_->setDefault(true);
+ button_save_ok_->setDefault(true);
 
- button_close_->setStyleSheet(basic_button_style_sheet_());
+ button_save_ok_->setStyleSheet(basic_button_style_sheet_());
  button_suspend_->setStyleSheet(basic_button_style_sheet_());
- button_cancel_->setStyleSheet(basic_button_style_sheet_());
+ button_cancel_close_->setStyleSheet(basic_button_style_sheet_());
 
 
- button_box_->addButton(button_close_, QDialogButtonBox::AcceptRole);
+ button_cancel_close_->setDefault(true);
+
+ button_box_->addButton(button_save_ok_, QDialogButtonBox::AcceptRole);
  button_box_->addButton(button_suspend_, QDialogButtonBox::ActionRole);
- button_box_->addButton(button_cancel_, QDialogButtonBox::RejectRole);
+ button_box_->addButton(button_cancel_close_, QDialogButtonBox::RejectRole);
 
  //?connect(button_proceed_, SIGNAL(clicked()), this, SLOT(proceed()));
 // connect(button_box_, SIGNAL(accepted()), this, SLOT(accept()));
@@ -105,6 +107,12 @@ DHAX_Video_Player_Dialog::DHAX_Video_Player_Dialog(QWidget* parent)
 
 
 }
+
+void DHAX_Video_Player_Dialog::halt()
+{
+ player_->halt();
+}
+
 
 void DHAX_Video_Player_Dialog::check_adjust_size(QSize sz, int height_margin)
 {

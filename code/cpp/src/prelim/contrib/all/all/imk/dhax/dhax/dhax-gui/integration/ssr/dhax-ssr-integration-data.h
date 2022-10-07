@@ -21,19 +21,19 @@ class DHAX_SSR_Integration_Data
 
  QString ssr_file_path_;
 
- QVector<r8> ssr_position_data_;
- u4* ssr_import_count_;
+ u4* ssr_read_count_;
+ u4* ssr_write_count_;
 
 
 public:
 
  DHAX_SSR_Integration_Data();
 
- ACCESSORS(u4* ,ssr_import_count)
- ACCESSORS__RGET(QVector<r8> ,ssr_position_data)
+ ACCESSORS(u4* ,ssr_read_count)
+ ACCESSORS(u4* ,ssr_write_count)
  ACCESSORS(QString ,ssr_file_path)
 
- void init_import_count();
+ void init_read_write_count();
 
 };
 

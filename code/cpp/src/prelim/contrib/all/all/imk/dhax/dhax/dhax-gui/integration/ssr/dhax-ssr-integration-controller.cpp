@@ -21,19 +21,8 @@ DHAX_SSR_Integration_Controller::DHAX_SSR_Integration_Controller()
 
 void DHAX_SSR_Integration_Controller::read_datagram(QString text)
 {
- QStringList qsl = text.split('*');
- integration_data_->ssr_file_path_ = qsl.takeFirst();
-
- if(!qsl.isEmpty())
- {
-  QStringList qsl1 =  qsl.takeFirst().split(';');
-  integration_data_->ssr_position_data_.resize(qsl1.size());
-  std::transform(qsl1.begin(), qsl1.end(), integration_data_->ssr_position_data_.begin(),
-    [](QString qs) { return qs.toDouble(); });
- }
-
- ++*integration_data_->ssr_import_count_;
- application_controller_->load_image(integration_data_->ssr_file_path_);
-
+ integration_data_->ssr_file_path_ = text;
+ application_controller_->offer_to_play_video(
+    "Play back the screen-recorded video now?", text);
 }
 

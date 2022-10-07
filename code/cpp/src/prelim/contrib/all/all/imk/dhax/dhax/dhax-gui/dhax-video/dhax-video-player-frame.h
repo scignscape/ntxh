@@ -77,6 +77,8 @@ class DHAX_Video_Player_Frame : public QFrame
  QGraphicsRectItem* full_size_rect_item_;
  QGraphicsRectItem* smaller_size_rect_item_;
 
+ u2 replay_count_;
+
 protected:
 
  void resizeEvent(QResizeEvent* event);
@@ -98,6 +100,7 @@ public:
 
  void handle_send_video_frame_to_main_window(QLabel* l);
 
+ void halt();
 
 Q_SIGNALS:
 

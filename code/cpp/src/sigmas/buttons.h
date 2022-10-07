@@ -7,7 +7,8 @@
 
 SIGMA_ADAPTER(make_restart_button)
 SIGMA_ADAPTER(make_resume_button)
-//SIGMA_ADAPTER(make_forward_button)
+SIGMA_ADAPTER(make_enlarge_button)
+SIGMA_ADAPTER(make_contract_button)
 SIGMA_ADAPTER(make_pause_button)
 SIGMA_ADAPTER(make_camera_button)
 SIGMA_ADAPTER(make_play_button)

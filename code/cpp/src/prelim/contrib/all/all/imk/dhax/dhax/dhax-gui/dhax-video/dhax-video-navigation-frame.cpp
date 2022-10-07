@@ -23,12 +23,14 @@ DHAX_Video_Navigation_Frame::DHAX_Video_Navigation_Frame(QWidget* parent)
  bottom_layout_->setMargin(0);
 
  full_size_button_ = new QPushButton("*", this);
- full_size_button_->setMaximumWidth(25);
- full_size_button_->setMaximumHeight(15);
+ full_size_button_->setToolTip("Enlarge video to full size");
+ sigma(full_size_button_)->make_enlarge_button();
+ full_size_button_->setMinimumWidth(22);
 
  smaller_size_button_ = new QPushButton("-", this);
- smaller_size_button_->setMaximumWidth(25);
- smaller_size_button_->setMaximumHeight(15);
+ smaller_size_button_->setToolTip("Shrink video to prior smaller size");
+ sigma(smaller_size_button_)->make_contract_button();
+ smaller_size_button_->setMinimumWidth(26);
 
  QFrame* left = new QFrame(this);
  left->setFrameStyle(QFrame::Panel | QFrame::Raised);
@@ -45,22 +47,16 @@ DHAX_Video_Navigation_Frame::DHAX_Video_Navigation_Frame(QWidget* parent)
  restart_button_ = new QPushButton("<", this);
  restart_button_->setToolTip("Restart (from beginning)");
  sigma(restart_button_)->make_restart_button();
- restart_button_->setMaximumWidth(25);
- restart_button_->setMaximumHeight(15);
 
  pause_button_ = new QPushButton("=", this);
  pause_button_->setToolTip("Pause");
  sigma(pause_button_)->make_pause_button();
- pause_button_->setMaximumWidth(25);
- pause_button_->setMaximumHeight(15);
 
  resume_button_  = new QPushButton(">", this);
- resume_button_->setToolTip("Resume (from current frame)");
+ resume_button_->setToolTip("Play/Resume (from current frame)");
  //?sigma(resume_button_)->make_resume_button();
  set_play_button_to_play();
 // sigma(resume_button_)->make_play_button();
- resume_button_->setMaximumWidth(25);
- resume_button_->setMaximumHeight(15);
 
  bottom_layout_->addWidget(restart_button_);
  bottom_layout_->addWidget(pause_button_);
@@ -74,8 +70,7 @@ DHAX_Video_Navigation_Frame::DHAX_Video_Navigation_Frame(QWidget* parent)
  grab_frame_button_ = new QPushButton("@", this);
  grab_frame_button_->setToolTip("Pause and view current frame (enlarged)");
  sigma(grab_frame_button_)->make_camera_button();
- grab_frame_button_->setMaximumWidth(25);
- grab_frame_button_->setMaximumHeight(15);
+ grab_frame_button_->setMinimumWidth(25);
 
  main_layout_->addWidget(grab_frame_button_);
  main_layout_->addStretch();

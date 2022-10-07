@@ -264,7 +264,8 @@ void WebGL_View_Dialog::resizeEvent(QResizeEvent* resize_event)
 
 void WebGL_View_Dialog::moveEvent(QMoveEvent* move_event)
 {
- Q_EMIT web_view_geometry_updated(get_web_view_geometry());
+ if(this->isVisible())
+   Q_EMIT web_view_geometry_updated(get_web_view_geometry());
 }
 
 

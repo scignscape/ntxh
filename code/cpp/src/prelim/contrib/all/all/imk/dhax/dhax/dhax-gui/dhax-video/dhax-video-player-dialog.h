@@ -48,8 +48,8 @@ class DHAX_Video_Player_Dialog : public QDialog
 
  QDialogButtonBox* button_box_;
  QPushButton* button_suspend_;
- QPushButton* button_close_;
- QPushButton* button_cancel_;
+ QPushButton* button_save_ok_;
+ QPushButton* button_cancel_close_;
 
  QPoint last_smaller_screen_position_;
  QSize last_smaller_size_;
@@ -64,6 +64,11 @@ public:
  DHAX_Video_Player_Dialog(QWidget* parent = nullptr);
 
  void play_local_video(QString file_path);
+ void halt();
+ void halt_and_close()
+ {
+  halt(); close();
+ }
 
 
 Q_SIGNALS:

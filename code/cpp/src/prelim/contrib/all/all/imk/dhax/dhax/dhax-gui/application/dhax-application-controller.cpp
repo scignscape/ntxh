@@ -919,6 +919,17 @@ void DHAX_Application_Controller::r8_vector_to_qba(const QVector<r8>& data, QByt
  }
 }
 
+
+void DHAX_Application_Controller::offer_to_play_video(QString text, QString file_path)
+{
+ QMessageBox::StandardButton reply = QMessageBox::question(application_main_window_, "Play Video?",
+   text);
+ if(reply == QMessageBox::Yes)
+ {
+  main_window_controller_->show_video(file_path);
+ }
+}
+
 void DHAX_Application_Controller::play_video(QString file_path)
 {
  DHAX_Video_Player_Dialog* dialog = new DHAX_Video_Player_Dialog;
@@ -938,12 +949,12 @@ void DHAX_Application_Controller::play_video(QString file_path)
   {
    QFile::copy(file_path, new_path);
   }
-  dialog->close();
+  dialog->halt_and_close();
  });
 
- application_main_window_->connect(dialog, &QDialog::rejected, [this, dialog]()
+ application_main_window_->connect(dialog, &QDialog::rejected, [dialog]()
  {
-  dialog->close();
+  dialog->halt_and_close();
  });
 
 
@@ -951,8 +962,8 @@ void DHAX_Application_Controller::play_video(QString file_path)
 
  qDebug() << "video = " << file_path;
 
- dialog->play_local_video(file_path);
  dialog->show();
+ dialog->play_local_video(file_path);
 }
 
 void DHAX_Application_Controller::play_video()
@@ -1020,6 +1031,7 @@ void DHAX_Application_Controller::send_ssr_reset(QRect window)
 
  QDataStream qds(&qba, QIODevice::WriteOnly);
 
+ qds << ++*sid.ssr_write_count();
  qds << window;
 
  //r8_vector_to_qba(fid.freecad_position_data(), qba);
@@ -1100,12 +1112,13 @@ void DHAX_Application_Controller::init_integration_controllers()
 
  DHAX_SSR_Integration_Data* ssrd = new DHAX_SSR_Integration_Data;
  application_main_window_->main_window_data()->set_ssr_integration(ssrd);
- md->init_import_count();
+ ssrd->init_read_write_count();
 
  DHAX_SSR_Integration_Controller* ssr = new DHAX_SSR_Integration_Controller;
  integration_controllers_["ssr"] = ssr;
  ssr->set_application_controller(this);
  ssr->set_integration_data(ssrd);
+
 
 
  //meshlab->set_integration_data()

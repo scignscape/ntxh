@@ -8,12 +8,14 @@
 #include <QStyle>
 #include <QDir>
 
+#include <QScrollBar>
+
 #include "styles.h"
 
 
 DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
   :  QFrame(parent), full_size_rect_item_(nullptr),
-     smaller_size_rect_item_(nullptr)
+     smaller_size_rect_item_(nullptr), replay_count_(0)
 {
 // setLayout(new QVBoxLayout);
 // layout()->setContentsMargins(0, 0, 0, 0);
@@ -44,8 +46,19 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
    &QGraphicsVideoItem::nativeSizeChanged, [this]()
  {
 //?  QSize sz = media_player_->media().canonicalResource().resolution();
-  QSize sz = media_player_->metaData("Resolution").value<QSize>();
-  qDebug() << "size = " << sz;
+//?  QSize sz = media_player_->metaData("Resolution").value<QSize>();
+  QSizeF szf = video_item_->nativeSize();
+
+  if(szf == QSize(0,0))
+  {
+   ++replay_count_;
+  }
+  else if(replay_count_ > 0)
+  {
+   graphics_view_->centerOn(video_item_);
+  }
+
+
  });
 
 // main_layout_->addWidget(video_widget_);
@@ -64,6 +77,17 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
 // {
 
 // });
+
+ connect(media_player_, &QMediaPlayer::stateChanged, [this](QMediaPlayer::State state)
+ {
+  if(state == QMediaPlayer::StoppedState)
+  {
+   qDebug() << "stopped";
+//   media_player_->setPosition(0);
+//   media_player_->play();
+   //video_probe_->
+  }
+ });
 
  video_probe_ = new QVideoProbe;
 
@@ -96,7 +120,7 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
 
 //  qint64 st = qvf.startTime();
 //  qint64 fn = st/40000;
-////  qDebug() << fn;
+//  qDebug() << fn;
   current_video_frame_ = qvf;
 
 //    QSize sz = media_player_->media().canonicalResource().resolution();
@@ -206,13 +230,25 @@ void DHAX_Video_Player_Frame::handle_send_video_frame_to_main_window(QLabel* l)
  Q_EMIT show_video_frame_requested(cnf);
 }
 
+
+void DHAX_Video_Player_Frame::halt()
+{
+ media_player_->stop();
+}
+
+
 void DHAX_Video_Player_Frame::play_local_video(QString file_path)
 {
  current_path_ = file_path;
 // current_path_ = "/home/nlevisrael/gits/ctg-temp/stella/videos/test.mkv";
  current_url_ =  QUrl::fromLocalFile(current_path_);
 
- media_player_->setMedia(current_url_);
+ QMediaPlaylist* play_list = new QMediaPlaylist();
+ media_player_->setPlaylist(play_list);
+ play_list->addMedia(QMediaContent(current_url_));
+ play_list->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
+
+// media_player_->setMedia(current_url_);
 
  // //  give it a bit of time
  need_video_size_ = 10; //
@@ -243,6 +279,8 @@ void DHAX_Video_Player_Frame::confirm_video_size()
 
  smaller_size_rect_item_ = graphics_scene_->addRect(left,
    video_item_->pos().y(),new_width,sz.height(),QPen(QBrush(c), 4));
+
+//? video_item_->setSize(smaller_size_rect_item_->rect().size());
 
  Q_EMIT video_size_established(QSize(new_width, sz.height()));
 
@@ -332,6 +370,8 @@ void DHAX_Video_Player_Frame::reset_to_full_size()
 
 void DHAX_Video_Player_Frame::resizeEvent(QResizeEvent* event)
 {
+ graphics_view_->centerOn(video_item_);
+
 //? setMaximumWidth(video_widget_->width() + 12);
 //? navigation_->move(p.x(), p.y() - 20);
 //? navigation_->move(rect().bottomRight() - navigation_->rect().bottomRight());// + QPoint(-40,-40));

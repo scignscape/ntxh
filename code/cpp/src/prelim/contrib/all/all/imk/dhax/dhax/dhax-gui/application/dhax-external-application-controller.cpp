@@ -16,6 +16,8 @@
 
 #include "textio.h"
 
+#include "styles.h"
+
 USING_KANS(TextIO)
 
 #include <QMenuBar>
@@ -29,6 +31,8 @@ USING_KANS(TextIO)
 #include <QFileDialog>
 
 #include <QProcess>
+
+#include <QProgressDialog>
 
 
 DHAX_External_Application_Controller::DHAX_External_Application_Controller()
@@ -126,27 +130,132 @@ void DHAX_External_Application_Controller::view_360()
 
   QString ap = qd.absoluteFilePath(YOU_TUBE_DOWNLOAD_EXE);
 
-  QString outfile =
-    QDateTime::currentDateTime().toString("/ddMMyyyy-hhmmss").prepend(YOU_TUBE_DOWNLOAD_FOLDER);
+  auto gd = []()
+  {
+   qDebug() << "----gd";
+   return "--get-duration";
+  };
+
+  auto gdu = [url]()
+  {
+   qDebug() << "----gdu";
+   return url;
+  };
 
   QStringList options;
-  options << "-o" << outfile << "--skip-unavailable-fragments"
-    << "--no-continue" << "--no-part";
-  options << url;
+//  options << "--get-duration";
+//  options << url;
 
-  qDebug() << "cmd = " << ap;
+  options << gd() << gdu();
+
+  qDebug() << " options = " << options;
 
   QProcess* cmd = new QProcess;
 
   application_main_window_->connect(cmd,
     QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
-    [outfile, this](int exit_code, QProcess::ExitStatus exit_status)
+    [this, cmd, ap, url](int exit_code, QProcess::ExitStatus exit_status)
   {
-   //?if(exit_status == QProcess::NormalExit)
-     application_controller_->handle_newly_downloaded_video(outfile);
-  });
+   static QSet<QProcess*> aborted_processes;
 
-  cmd->start(ap, options);
+   QByteArray qba = cmd->readAllStandardOutput();
+
+   if(aborted_processes.contains(cmd))
+     return;
+
+   cmd->close();
+   aborted_processes.insert(cmd);
+
+   QByteArrayList qbal = qba.split(':');
+   u2 duration = qbal.value(0).toUInt() * 60 + qbal.value(1).toUInt();
+
+   QProcess* cmd1 = new QProcess;
+
+   QString summary = QString("Downloading a video of %1 seconds (bar shows seconds ellapsed)").arg(duration);
+
+   QProgressDialog* qpd = new QProgressDialog(summary, "Cancel",
+     0, duration);
+
+   qpd->setStyleSheet(qmessagebox_button_style_sheet());
+
+
+   QTimer *timer = new QTimer(qpd);
+
+   qpd->connect(qpd, &QProgressDialog::canceled, [cmd1, timer, qpd]
+   {
+    timer->stop();
+    timer->deleteLater();
+    aborted_processes.insert(cmd1);
+    cmd1->close();
+    qpd->deleteLater();
+   });
+
+   qpd->connect(timer, &QTimer::timeout, [qpd]
+   {
+    qpd->setValue(qpd->value() + 1);
+   });
+
+   timer->start(1000);
+   qpd->show();
+
+
+   QString outfile =
+     QDateTime::currentDateTime().toString("/ddMMyyyy-hhmmss").prepend(YOU_TUBE_DOWNLOAD_FOLDER);
+
+   QStringList options1;
+   options1 << "-o" << outfile << "--skip-unavailable-fragments"
+       << "--no-continue" << "--no-part" << "--no-call-home";
+   options1 << url;
+
+   application_main_window_->connect(cmd1,
+     QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+     [outfile, this, qpd, cmd1, timer](int exit_code, QProcess::ExitStatus exit_status)
+   {
+    if(aborted_processes.contains(cmd1))
+      return;
+    qpd->close();
+    timer->stop();
+    qpd->deleteLater();
+    timer->deleteLater();
+
+    application_controller_->handle_newly_downloaded_video(outfile);
+   });
+
+   cmd1->start(ap, options1);
+
+
+//     qDebug() << " ============== ";
+//     qDebug() << "duration: " << duration;
+//     qDebug() << " ============== ";
+
+     //?if(exit_status == QProcess::NormalExit)
+     //?  application_controller_->handle_newly_downloaded_video(outfile);
+    });
+
+    cmd->start(ap, options);
+
+
+//  QString outfile =
+//    QDateTime::currentDateTime().toString("/ddMMyyyy-hhmmss").prepend(YOU_TUBE_DOWNLOAD_FOLDER);
+
+//  QStringList options;
+//  options << "-o" << outfile << "--skip-unavailable-fragments"
+//    << "--no-continue" << "--no-part" << "--no-call-home";
+//  options << url;
+
+//  qDebug() << "cmd = " << ap;
+
+//  QProcess* cmd = new QProcess;
+
+//  application_main_window_->connect(cmd,
+//    QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+//    [outfile, this](int exit_code, QProcess::ExitStatus exit_status)
+//  {
+//   //?if(exit_status == QProcess::NormalExit)
+//     application_controller_->handle_newly_downloaded_video(outfile);
+//  });
+
+//  cmd->start(ap, options);
 
  });
 

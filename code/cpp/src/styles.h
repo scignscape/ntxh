@@ -142,6 +142,32 @@ inline QString light_back_forward_button_style_sheet_red_()
  return light_back_forward_button_style_sheet_().arg(9).arg("bold").arg("#af3f73");
 }
 
+inline QString light_back_forward_button_style_sheet_red_darker_()
+{
+ return light_back_forward_button_style_sheet_().arg(11).arg("bold").arg("#9f4f43");
+}
+
+inline QString light_back_forward_button_style_sheet_red_darker_smaller_()
+{
+ return light_back_forward_button_style_sheet_().arg(8).arg("bold").arg("#9f4f43");
+}
+
+inline QString light_back_forward_button_style_sheet_red_darker_larger_(u1 font_size)
+{
+ return light_back_forward_button_style_sheet_().arg(font_size).arg("bold").arg("#9f4f43");
+}
+
+inline QString light_back_forward_button_style_sheet_red_darker_larger_non_bold_(u1 font_size)
+{
+ return light_back_forward_button_style_sheet_().arg(font_size).arg("normal").arg("#9f4f43");
+}
+
+inline QString light_back_forward_button_style_sheet_light_blue_larger_(u1 font_size)
+{
+ return light_back_forward_button_style_sheet_().arg(font_size).arg("normal").arg("#126fa3");
+}
+
+
 inline QString light_back_forward_button_style_sheet_green_()
 {
  return light_back_forward_button_style_sheet_().arg(13).arg("normal").arg("#116f63");
@@ -250,42 +276,76 @@ inline void make_unicode_text(WIDGET_Type* w, u4 code_point, QString style_sheet
 
 template<typename WIDGET_Type>
 inline void make_unicode_text(WIDGET_Type* w, u4 code_point,
-  QString style_sheet, u1 width, u1 height)
+  QString style_sheet, u1 width, u1 height, u1 repeat = 0)
 {
  make_unicode_text(w, code_point);
  w->setStyleSheet(style_sheet);
  w->setMaximumWidth(width);
  w->setMaximumHeight(height);
+ if(repeat)
+ {
+  QString txt = w->text().repeated(repeat + 1);
+  w->setText(txt);
+ }
 }
 
 template<typename WIDGET_Type>
 inline void make_pause_button(WIDGET_Type* w)
 {
- make_unicode_text(w, 0x23F8, light_back_forward_button_style_sheet_red_(), 20, 15);
+//? make_unicode_text(w, 0x27F1, light_back_forward_button_style_sheet_red_darker_(), 20, 15);
+// make_unicode_text(w, 0x2385, //0x22AA,
+//   light_back_forward_button_style_sheet_red_darker_larger_non_bold_(15), 20, 15);
+
+ make_unicode_text(w, 0x2980,  // 2385
+   light_back_forward_button_style_sheet_red_darker_larger_(15), 20, 15);
+
 }
 
 template<typename WIDGET_Type>
 inline void make_restart_button(WIDGET_Type* w)
 {
- make_unicode_text(w, 0x21BA, light_back_forward_button_style_sheet_red_(), 20, 15);
+ make_unicode_text(w, 0x21BA, light_back_forward_button_style_sheet_red_darker_(), 20, 15);
 }
 
 template<typename WIDGET_Type>
-inline void make_play_button(WIDGET_Type* w)
+inline void make_enlarge_button(WIDGET_Type* w)
 {
- make_unicode_text(w, 0x21F4, light_back_forward_button_style_sheet_red_(), 20, 15);
+ make_unicode_text(w, 0x26F6, light_back_forward_button_style_sheet_red_darker_larger_(14), 24, 17);
+}
+
+
+template<typename WIDGET_Type>
+inline void make_contract_button(WIDGET_Type* w)
+{
+ make_unicode_text(w, 0x2798,
+  light_back_forward_button_style_sheet_red_darker_smaller_(), 20, 15, /*repeated*/ 2);
 }
 
 template<typename WIDGET_Type>
 inline void make_resume_button(WIDGET_Type* w)
 {
- make_unicode_text(w, 0x21FB, light_back_forward_button_style_sheet_red_(), 20, 15);
+ make_unicode_text(w, 0x21F4,
+   light_back_forward_button_style_sheet_red_darker_larger_non_bold_(15), 20, 15);
+}
+
+template<typename WIDGET_Type>
+inline void make_play_button(WIDGET_Type* w)
+{
+ make_unicode_text(w, 0xF09FA0B6,
+   light_back_forward_button_style_sheet_red_darker_larger_non_bold_(16), 20, 15);
 }
 
 template<typename WIDGET_Type>
 inline void make_camera_button(WIDGET_Type* w)
 {
- make_unicode_text(w, 0xF09F93B7, light_back_forward_button_style_sheet_red_(), 20, 15);
+ make_unicode_text(w, 0xF09F93B7, light_back_forward_button_style_sheet_light_blue_larger_(16),
+   28, 16);
+
+// make_unicode_text(w, 0xF09F93B7, light_back_forward_button_style_sheet_light_blue_larger_(16),
+//   28, 16);
+
+// make_unicode_text(w, 0xF09F93B7, 2385 light_back_forward_button_style_sheet_red_larger_(),
+//   24, 17);
 }
 
 //template<typename WIDGET_Type>
