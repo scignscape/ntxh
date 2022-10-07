@@ -79,6 +79,9 @@ class DHAX_Video_Player_Frame : public QFrame
 
  u2 replay_count_;
 
+ QSize last_larger_video_size_;
+ QSizeF last_larger_graphics_view_size_;
+
 protected:
 
  void resizeEvent(QResizeEvent* event);
@@ -95,6 +98,8 @@ public:
  void confirm_video_size();
 
  void pause();
+
+ void recenter();
 
  QSize get_navigation_size();
 

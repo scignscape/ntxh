@@ -80,11 +80,24 @@ DHAX_Video_Player_Dialog::DHAX_Video_Player_Dialog(QWidget* parent)
  connect(player_, &DHAX_Video_Player_Frame::full_video_size_requested,
   [this](QSize sz)
  {
-  last_smaller_screen_position_ = pos();
-  last_smaller_size_ = size();
+  if(last_full_size_.isEmpty())
+  {
+   last_smaller_screen_position_ = pos();
+   last_smaller_size_ = size();
 
-  qDebug() << "full: " << sz;
-  check_adjust_size(sz, 20);
+   qDebug() << "full!!: " << sz;
+   check_adjust_size(sz, 20);
+
+   last_full_size_ = size();
+   qDebug() << "lfs1" << last_full_size_;
+
+  }
+  else
+  {
+   qDebug() << "lfs" << last_full_size_;
+    resize(last_full_size_);
+  }
+
  });
 
  connect(player_, &DHAX_Video_Player_Frame::smaller_video_size_requested,
@@ -119,13 +132,23 @@ void DHAX_Video_Player_Dialog::check_adjust_size(QSize sz, int height_margin)
  qDebug() << " sz: " << sz;
 
  QSize ns = player_->get_navigation_size();
+ qDebug() << " ns: " << ns;
+
+
  int h = sz.height() + button_box_->height() + ns.height();
  int w = qMax(sz.width(), button_box_->width());
  w = qMax(w, ns.width());
 
  this->resize(w, h + height_margin);
+ recenter();
 
 }
+
+void DHAX_Video_Player_Dialog::recenter()
+{
+ player_->recenter();
+}
+
 
 void DHAX_Video_Player_Dialog::play_local_video(QString file_path)
 {

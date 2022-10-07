@@ -53,6 +53,7 @@ class DHAX_Video_Player_Dialog : public QDialog
 
  QPoint last_smaller_screen_position_;
  QSize last_smaller_size_;
+ QSize last_full_size_;
 
 
  DHAX_Video_Player_Frame* player_;
@@ -70,6 +71,7 @@ public:
   halt(); close();
  }
 
+ void recenter();
 
 Q_SIGNALS:
 
