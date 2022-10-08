@@ -18,3 +18,13 @@ DHAX_Video_Annotation::DHAX_Video_Annotation()
 {
 
 }
+
+void DHAX_Video_Annotation::finalize_html_text()
+{
+ static QString html = "<div style=\"%1\">%2</div>";
+
+ html_text_ = html.arg(inner_style_sheet_)
+   .arg(text_);
+}
+
+

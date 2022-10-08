@@ -70,6 +70,12 @@ DEFINES += SCREENSHOTS_FOLDER=\\\"$$ROOT_DIR/../dev/screenshots\\\"
 DEFINES += USE_KANS
 
 
+# #  for ntxh ...
+INCLUDEPATH += $$NTXH_SRC_GROUP_DIR
+INCLUDEPATH += $$NTXH_SRC_GROUP_DIR/ntxh
+INCLUDEPATH += $$RELAE_GRAPH_SRC_GROUP_DIR
+INCLUDEPATH += $$PHAON_GRAPH_SRC_GROUP_DIR
+
 
 INCLUDEPATH += $$AIMLIB_SRC_GROUP_DIR/../image-editor
 
@@ -393,6 +399,11 @@ RESOURCES += \
 # #  for dcmtk OFString = std::string ...
 DEFINES += HAVE_STD_STRING
 DEFINES += HAVE_STL_STRING
+
+
+LIBS += -L$$TARGETSDIR  \
+  -lntxh  -lntxh-parser -lngml-sdi
+
 
 
 LIBS += -L$$TARGETSDIR -lxcsd-1d -lxcsd-2d #-lxcsdx

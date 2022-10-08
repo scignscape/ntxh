@@ -10,6 +10,7 @@
 #include "dhax-video-navigation-frame.h"
 
 #include "dhax-video-annotation-set.h"
+#include "dhax-video-annotation.h"
 
 #include <QGraphicsVideoItem>
 
@@ -157,19 +158,17 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
   l->show();
  });
 
- connect(navigation_, &DHAX_Video_Navigation_Frame::pause_requested, [this]()
- {
-  pause();
-  //      qDebug()<<"p clicked";
- });
+// connect(navigation_, &DHAX_Video_Navigation_Frame::pause_requested, [this]()
+// {
+//  pause();
+//  //      qDebug()<<"p clicked";
+// });
 
- connect(navigation_, &DHAX_Video_Navigation_Frame::resume_requested, [this]()
- {
-//      qDebug()<<"r clicked";
-  media_player_->play();
-  navigation_->set_play_button_to_play();
+ connect(navigation_, &DHAX_Video_Navigation_Frame::pause_requested, this,
+   &DHAX_Video_Player_Frame::pause);
 
- });
+ connect(navigation_, &DHAX_Video_Navigation_Frame::resume_requested, this,
+   &DHAX_Video_Player_Frame::resume);
 
  connect(navigation_, &DHAX_Video_Navigation_Frame::restart_requested, [this]()
  {
@@ -205,40 +204,66 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
 }
 
 
-void DHAX_Video_Player_Frame::connect_video_probe()
+void DHAX_Video_Player_Frame::handle_video_frame(const QVideoFrame& qvf)
 {
- connect(video_probe_, &QVideoProbe::videoFrameProbed, [this](const QVideoFrame& qvf)
-//  connect(video_frame_grabber_, &VideoFrameGrabber::frameAvailable, [this](QImage frame_image)
+ if(need_video_size_)
  {
-  if(need_video_size_)
+  --need_video_size_;
+  if(media_player_->isMetaDataAvailable())
   {
-   --need_video_size_;
-   if(media_player_->isMetaDataAvailable())
+   video_size_ = media_player_->metaData("Resolution").value<QSize>();
+   if(video_size_.isValid())
    {
-    video_size_ = media_player_->metaData("Resolution").value<QSize>();
-    if(video_size_.isValid())
-    {
-     need_video_size_ = 0;
-     confirm_video_size();
-    }
+    need_video_size_ = 0;
+    confirm_video_size();
    }
   }
+ }
 
-  qint64 st = qvf.startTime();
-  qint64 seconds = st/1000;
-  qint64 fn = st/40000;
+ qint64 st = qvf.startTime();
+ qint64 seconds = st/1000;
+ qint64 fn = st/40000;
 
-  ++current_frame_count_;
 
-  if((current_frame_count_ & 20) == 0)
+ if(annotation_set_)
+ {
+  if(void* edata = annotation_set_->get_data_by_end_frame(current_frame_count_))
   {
-   if(frame_number_text_)
-     update_frame_number_text();
+   QGraphicsTextItem* eti = (QGraphicsTextItem*) edata;// graphics_scene_->addText(dva->text());
+   eti->hide();
   }
+
+  DHAX_Video_Annotation* dva = annotation_set_->get_annotation_by_start_frame(current_frame_count_);
+  if(dva)
+  {
+   qDebug() << "inserting annotation for frame " << current_frame_count_;
+
+   qDebug() << *dva;
+
+   QGraphicsTextItem* ti = graphics_scene_->addText(dva->text());
+
+   annotation_set_->set_end_frame_data(dva->ending_frame_number(), ti);
+
+   ti->setPos(dva->corner_position());
+
+   qDebug() << "HH: " << dva->html_text();
+
+   ti->setHtml(dva->html_text());
+
+  }
+ }
+
+ ++current_frame_count_;
+
+ if((current_frame_count_ & 20) == 0)
+ {
+  if(frame_number_text_)
+    update_frame_number_text();
+ }
 
 
 //  qDebug() << fn;
-  current_video_frame_ = qvf;
+ current_video_frame_ = qvf;
 
 //    QSize sz = media_player_->media().canonicalResource().resolution();
 //    qDebug() << "size = " << sz;
@@ -251,13 +276,21 @@ void DHAX_Video_Player_Frame::connect_video_probe()
 //   l->setPixmap(QPixmap::fromImage(frame_image));
 //   l->show();
 
- });
+}
+
+
+void DHAX_Video_Player_Frame::connect_video_probe()
+{
+ connect(video_probe_, &QVideoProbe::videoFrameProbed, this,
+   &DHAX_Video_Player_Frame::handle_video_frame);
 }
 
 
 void DHAX_Video_Player_Frame::init_annotations()
 {
  annotation_set_ = new DHAX_Video_Annotation_Set;
+//? annotation_set_->load_sample_annotations();
+ qDebug() << "annotation_st" << *annotation_set_;
 }
 
 
@@ -265,7 +298,19 @@ void DHAX_Video_Player_Frame::load_annotations()
 {
  pause();
  init_annotations();
- qDebug( ) << "init_aaa";
+// qDebug( ) << "init_aaa";
+ //resume();
+
+// QString annotation_file = QFileDialog::getOpenFileName(this,
+//   "Select annotation file (.ntxh format)", ROOT_FOLDER "/..",
+//   "*.ntxh");
+
+  QString annotation_file = "/home/nlevisrael/gits/ctg-temp/video-annotations/t1.ntxh";
+
+ if(!annotation_file.isEmpty())
+ {
+  annotation_set_->load_annotation_file(annotation_file);
+ }
 }
 
 void DHAX_Video_Player_Frame::update_frame_number_text()
@@ -280,6 +325,13 @@ void DHAX_Video_Player_Frame::pause()
 {
  media_player_->pause();
  navigation_->set_play_button_to_resume();
+}
+
+
+void DHAX_Video_Player_Frame::resume()
+{
+ media_player_->play();
+ navigation_->set_play_button_to_play();
 }
 
 void DHAX_Video_Player_Frame::handle_send_video_frame_to_main_window(QLabel* l)
@@ -307,6 +359,8 @@ void DHAX_Video_Player_Frame::halt()
 
 void DHAX_Video_Player_Frame::play_local_video(QString file_path)
 {
+ load_annotations();
+
 // current_path_ = file_path;
 
  current_path_ = "/home/nlevisrael/gits/ctg-temp/stella/videos/test.mkv";

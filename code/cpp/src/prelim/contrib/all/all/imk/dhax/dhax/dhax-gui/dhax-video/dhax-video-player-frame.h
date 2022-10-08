@@ -123,6 +123,7 @@ public:
  void confirm_video_size();
 
  void pause();
+ void resume();
 
  void recenter();
 
@@ -132,9 +133,13 @@ public:
 
  void halt();
 
-public Q_SLOTS:
+//public Q_SLOTS:
 
  void load_annotations();
+
+//public Q_SLOTS:
+
+ void handle_video_frame(const QVideoFrame& qvf);
 
 Q_SIGNALS:
 
