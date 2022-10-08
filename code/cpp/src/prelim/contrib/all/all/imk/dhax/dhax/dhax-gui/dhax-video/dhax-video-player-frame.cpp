@@ -15,7 +15,8 @@
 
 DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
   :  QFrame(parent), full_size_rect_item_(nullptr),
-     smaller_size_rect_item_(nullptr), replay_count_(0)
+     smaller_size_rect_item_(nullptr),
+     replay_count_(0), current_frame_count_(0)
 {
 // setLayout(new QVBoxLayout);
 // layout()->setContentsMargins(0, 0, 0, 0);
@@ -42,6 +43,13 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
  video_item_ = new QGraphicsVideoItem;
  graphics_scene_->addItem(video_item_);
 
+ video_item_->setFlags(QGraphicsItem::ItemIsMovable);
+
+//? graphics_view_->setAlignment(Qt::AlignHCenter | Qt::AlignBaseline);
+
+
+ frame_number_text_ = nullptr;
+
  connect(video_item_,
    &QGraphicsVideoItem::nativeSizeChanged, [this]()
  {
@@ -52,6 +60,7 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
   if(szf == QSize(0,0))
   {
    ++replay_count_;
+   current_frame_count_ = 0;
   }
   else if(replay_count_ > 0)
   {
@@ -118,8 +127,19 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
    }
   }
 
-//  qint64 st = qvf.startTime();
-//  qint64 fn = st/40000;
+  qint64 st = qvf.startTime();
+  qint64 seconds = st/1000;
+  qint64 fn = st/40000;
+
+  ++current_frame_count_;
+
+  if((current_frame_count_ & 20) == 0)
+  {
+   if(frame_number_text_)
+     update_frame_number_text();
+  }
+
+
 //  qDebug() << fn;
   current_video_frame_ = qvf;
 
@@ -179,6 +199,8 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
  {
 //      qDebug()<<"r clicked";
   media_player_->setPosition(0);
+  current_frame_count_ = 0;
+  update_frame_number_text();
   media_player_->play();
  });
 
@@ -205,6 +227,14 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
 
 
 }
+
+void DHAX_Video_Player_Frame::update_frame_number_text()
+{
+ QString text = QString::number(current_frame_count_);
+//      "%1\n%2"_qt.arg(current_frame_count_).arg(seconds);
+ frame_number_text_->setPlainText(text);
+}
+
 
 void DHAX_Video_Player_Frame::pause()
 {
@@ -237,8 +267,11 @@ void DHAX_Video_Player_Frame::halt()
 
 void DHAX_Video_Player_Frame::play_local_video(QString file_path)
 {
- current_path_ = file_path;
-// current_path_ = "/home/nlevisrael/gits/ctg-temp/stella/videos/test.mkv";
+// current_path_ = file_path;
+
+ current_path_ = "/home/nlevisrael/gits/ctg-temp/stella/videos/test.mkv";
+
+
  current_url_ =  QUrl::fromLocalFile(current_path_);
 
  QMediaPlaylist* play_list = new QMediaPlaylist();
@@ -256,6 +289,14 @@ void DHAX_Video_Player_Frame::play_local_video(QString file_path)
  media_player_->play();
 
 
+
+ qDebug() << " SR1: " << graphics_scene_->sceneRect();
+ qDebug() << " IBR1: " << graphics_scene_->itemsBoundingRect();
+
+ QSizeF sz = video_item_->size(); //.grownBy(QMargins(5,5,5,5));
+ qDebug() << " SZ1: " << sz;
+
+
 // navigation_->show();
 }
 
@@ -268,49 +309,84 @@ void DHAX_Video_Player_Frame::confirm_video_size()
 {
  QColor c (200, 100, 10, 100);
 
+ qDebug() << " SR2: " << graphics_scene_->sceneRect();
+ qDebug() << " IBR2: " << graphics_scene_->itemsBoundingRect();
+
  QSizeF sz = video_item_->size(); //.grownBy(QMargins(5,5,5,5));
+ qDebug() << " SZ2: " << sz;
+
+
  double ratio = (double) video_size_.width() / video_size_.height();
 
- int new_width = sz.height() * ratio;
+ double new_width = sz.height() * ratio;
 
- float left = (sz.width() / 2) - (new_width / 2);
+ double left = (sz.width() / 2) - (new_width / 2);
+
+ double h_center = sz.width() / 2;
+
+ QRectF video_rect(left, video_item_->pos().y(), new_width, sz.height());
 
  smaller_size_rect_item_ = graphics_scene_->addRect(left,
    video_item_->pos().y(),new_width,sz.height(),QPen(QBrush(c), 4));
 
-//? video_item_->setSize(smaller_size_rect_item_->rect().size());
+ smaller_size_rect_item_->setParentItem(video_item_);
 
- Q_EMIT video_size_established(QSize(new_width, sz.height()));
+ QRectF framed_scene_rect = graphics_scene_->sceneRect();
 
-// qDebug() << "sz = " << sz;
-// qDebug() << "ratio = " << ratio;
-// qDebug() << "new w = " << new_width;
-// qDebug() << "szh = " << sz.height();
+ QColor text_bkg_color (110, 80, 20, 40);
+ QColor text_color (10, 80, 20, 255);
 
-//  QSizeF szs = video_item_->size().grownBy(QMargins(3,3,3,3));
-//  QSizeF sza = video_item_->size().grownBy(QMargins(5,5,5,5));
+// u1 frame_number_text_background_extra_height = 10;
 
-//  graphics_view_->resize(new_width + 7, sz.height() + 7);
+// frame_number_text_background_ = graphics_scene_->addRect(
+//   QRect(smaller_size_rect_item_->rect().bottomRight().toPoint() - QPoint(120, 2),
+//   smaller_size_rect_item_->rect().bottomRight().toPoint() + QPoint(-100, frame_number_text_background_extra_height)));
 
-//  this->resize(graphics_view_->size());
+// frame_number_text_background_ = graphics_scene_->addRect(
+//   QRect(smaller_size_rect_item_->rect().center().toPoint() - QPoint(20, 2),
+//   smaller_size_rect_item_->rect().center().toPoint()));
 
-//  graphics_scene_->addRect(video_item_->pos().x(), video_item_->pos().y(),
-//    new_width, sz.height(),
-//    QPen(QBrush(c), 10), Qt::NoBrush);
+  frame_number_text_background_ = graphics_scene_->addRect(
+    QRect(smaller_size_rect_item_->rect().topLeft().toPoint() + QPoint(-20, 5),
+    smaller_size_rect_item_->rect().topLeft().toPoint() + QPoint(3, 20)));
 
-// graphics_view_->resize(new_width, sz.height());
+ frame_number_text_background_->setParentItem(smaller_size_rect_item_);
 
-// QColor c (200, 100, 10, 100);
+ frame_number_text_background_->setBrush(QBrush(text_bkg_color));
+ frame_number_text_background_->setPen(Qt::NoPen);
 
-// graphics_scene_->addRect(0, 0, szs.width(), szs.height(),
-//   QPen(QBrush(c), 10), Qt::NoBrush);
+ frame_number_text_ = graphics_scene_->addText("0000");
+ frame_number_text_->setParentItem(frame_number_text_background_);
+ frame_number_text_->setPos(frame_number_text_background_->rect().topLeft());
 
-// graphics_view_->resize(sza.toSize());
+ frame_number_text_->setDefaultTextColor(text_color);
+ QFont font = frame_number_text_->font();
+ font.setPointSize(5);
+ frame_number_text_->setFont(font);
+
+ reset_graphics_scene_rect();
+
+ graphics_scene_->setSceneRect(framed_scene_rect);
+ initial_smaller_scene_rect_ = framed_scene_rect;
+
+ qDebug() << " SR4: " << graphics_scene_->sceneRect();
+ qDebug() << " IBR4: " << graphics_scene_->itemsBoundingRect();
+
+ double left_half = h_center - graphics_scene_->sceneRect().left();
+ double right_half = h_center - graphics_scene_->sceneRect().right();
+
+ qDebug() << " left half: " << left_half;
+ qDebug() << " right half: " << right_half;
+
+ Q_EMIT video_size_established(QSize(new_width, sz.height() ));
 
 
-// graphics_scene_->addRect(0, 0, video_size_.width(), video_size_.height(),
-//   QPen(QBrush(c), 10), Qt::NoBrush);
+}
 
+void DHAX_Video_Player_Frame::reset_graphics_scene_rect()
+{
+ QRectF rect = graphics_scene_->itemsBoundingRect();
+ graphics_scene_->setSceneRect(rect);
 }
 
 void DHAX_Video_Player_Frame::reset_to_smaller_size()
@@ -318,12 +394,20 @@ void DHAX_Video_Player_Frame::reset_to_smaller_size()
  if(full_size_rect_item_)
    graphics_scene_->removeItem(full_size_rect_item_);
  if(smaller_size_rect_item_)
-   graphics_scene_->addItem(smaller_size_rect_item_);
+ {
+  graphics_scene_->addItem(smaller_size_rect_item_);
+  smaller_size_rect_item_->setParentItem(video_item_);
+ }
+
+// frame_number_text_background_->show();
+// frame_number_text_->show();
+
 
  video_item_->setSize(last_smaller_size_);
 
- QRectF rect = graphics_scene_->itemsBoundingRect();
- graphics_scene_->setSceneRect(rect);
+ reset_graphics_scene_rect();
+
+ graphics_scene_->setSceneRect(initial_smaller_scene_rect_);
 
  Q_EMIT smaller_video_size_requested(last_smaller_size_.toSize());
 }
@@ -356,6 +440,9 @@ void DHAX_Video_Player_Frame::reset_to_full_size()
 
  if(true) //last_larger_video_size_.isEmpty())
  {
+//  frame_number_text_background_->hide();
+//  frame_number_text_->hide();
+
   last_smaller_size_ = video_item_->size();
 
   video_item_->setSize(video_size_);

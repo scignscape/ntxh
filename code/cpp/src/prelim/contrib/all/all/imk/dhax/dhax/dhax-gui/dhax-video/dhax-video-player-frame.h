@@ -60,11 +60,17 @@ class DHAX_Video_Player_Frame : public QFrame
  QGraphicsView* graphics_view_;
  QGraphicsScene* graphics_scene_;
 
- QMediaPlayer *media_player_;
+ QGraphicsTextItem* frame_number_text_;
+ QGraphicsRectItem* frame_number_text_background_;
+
+
+ QMediaPlayer* media_player_;
 
  QVideoProbe* video_probe_;
 
  QVideoFrame current_video_frame_;
+
+ u2 current_frame_count_;
 
  QUrl current_url_;
  QString current_path_;
@@ -82,9 +88,14 @@ class DHAX_Video_Player_Frame : public QFrame
  QSize last_larger_video_size_;
  QSizeF last_larger_graphics_view_size_;
 
-protected:
+ QRectF initial_smaller_scene_rect_;
+
+//?protected:
 
  void resizeEvent(QResizeEvent* event);
+ void reset_graphics_scene_rect();
+ void update_frame_number_text();
+
 
 public:
 

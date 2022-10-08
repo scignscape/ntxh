@@ -969,9 +969,11 @@ void DHAX_Application_Controller::play_video(QString file_path)
 void DHAX_Application_Controller::play_video()
 {
 // play_video(QString());
- QString fn = QFileDialog::getOpenFileName(application_main_window_, "Select Video",
-   ROOT_FOLDER "/..");
- if(!fn.isEmpty())
+
+//?
+ QString fn;// = QFileDialog::getOpenFileName(application_main_window_, "Select Video",
+//   ROOT_FOLDER "/..");
+// if(!fn.isEmpty())
    play_video(fn);
 }
 
