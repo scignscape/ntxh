@@ -1,6 +1,15 @@
 
+
+//           Copyright Nathaniel Christen 2020.
+//  Distributed under the Boost Software License, Version 1.0.
+//     (See accompanying file LICENSE_1_0.txt or copy at
+//           http://www.boost.org/LICENSE_1_0.txt)
+
+
 #include "dhax-video-player-frame.h"
 #include "dhax-video-navigation-frame.h"
+
+#include "dhax-video-annotation-set.h"
 
 #include <QGraphicsVideoItem>
 
@@ -14,7 +23,8 @@
 
 
 DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
-  :  QFrame(parent), full_size_rect_item_(nullptr),
+  :  QFrame(parent), annotation_set_(nullptr),
+     full_size_rect_item_(nullptr),
      smaller_size_rect_item_(nullptr),
      replay_count_(0), current_frame_count_(0)
 {
@@ -47,8 +57,18 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
 
 //? graphics_view_->setAlignment(Qt::AlignHCenter | Qt::AlignBaseline);
 
-
  frame_number_text_ = nullptr;
+
+
+ graphics_view_->setContextMenuPolicy(Qt::CustomContextMenu);
+
+ connect(graphics_view_, &QGraphicsView::customContextMenuRequested, [this](const QPoint& pos)
+ {
+  QMenu* menu = new QMenu(this);
+  menu->addAction("Load annotations", this, &DHAX_Video_Player_Frame::load_annotations);
+  menu->popup(mapToGlobal(pos));
+ });
+
 
  connect(video_item_,
    &QGraphicsVideoItem::nativeSizeChanged, [this]()
@@ -109,52 +129,8 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
   qDebug() << "probe bad";
  }
 
+ connect_video_probe();
 
- connect(video_probe_, &QVideoProbe::videoFrameProbed, [this](QVideoFrame qvf)
-//  connect(video_frame_grabber_, &VideoFrameGrabber::frameAvailable, [this](QImage frame_image)
- {
-  if(need_video_size_)
-  {
-   --need_video_size_;
-   if(media_player_->isMetaDataAvailable())
-   {
-    video_size_ = media_player_->metaData("Resolution").value<QSize>();
-    if(video_size_.isValid())
-    {
-     need_video_size_ = 0;
-     confirm_video_size();
-    }
-   }
-  }
-
-  qint64 st = qvf.startTime();
-  qint64 seconds = st/1000;
-  qint64 fn = st/40000;
-
-  ++current_frame_count_;
-
-  if((current_frame_count_ & 20) == 0)
-  {
-   if(frame_number_text_)
-     update_frame_number_text();
-  }
-
-
-//  qDebug() << fn;
-  current_video_frame_ = qvf;
-
-//    QSize sz = media_player_->media().canonicalResource().resolution();
-//    qDebug() << "size = " << sz;
-//    QSize sz1 = media_player_->metaData("Resolution").value<QSize>();
-//    qDebug() << "size1 = " << sz1;
-
-//   QImage frame_image = qvf.image();
-
-//   QLabel* l = new QLabel;
-//   l->setPixmap(QPixmap::fromImage(frame_image));
-//   l->show();
-
- });
 
  connect(navigation_, &DHAX_Video_Navigation_Frame::grab_frame_requested, [this]()
  {
@@ -226,6 +202,70 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
 //  current_path_ = "/home/nlevisrael/gits/ctg-temp/stella/videos/test.mp4";
 
 
+}
+
+
+void DHAX_Video_Player_Frame::connect_video_probe()
+{
+ connect(video_probe_, &QVideoProbe::videoFrameProbed, [this](const QVideoFrame& qvf)
+//  connect(video_frame_grabber_, &VideoFrameGrabber::frameAvailable, [this](QImage frame_image)
+ {
+  if(need_video_size_)
+  {
+   --need_video_size_;
+   if(media_player_->isMetaDataAvailable())
+   {
+    video_size_ = media_player_->metaData("Resolution").value<QSize>();
+    if(video_size_.isValid())
+    {
+     need_video_size_ = 0;
+     confirm_video_size();
+    }
+   }
+  }
+
+  qint64 st = qvf.startTime();
+  qint64 seconds = st/1000;
+  qint64 fn = st/40000;
+
+  ++current_frame_count_;
+
+  if((current_frame_count_ & 20) == 0)
+  {
+   if(frame_number_text_)
+     update_frame_number_text();
+  }
+
+
+//  qDebug() << fn;
+  current_video_frame_ = qvf;
+
+//    QSize sz = media_player_->media().canonicalResource().resolution();
+//    qDebug() << "size = " << sz;
+//    QSize sz1 = media_player_->metaData("Resolution").value<QSize>();
+//    qDebug() << "size1 = " << sz1;
+
+//   QImage frame_image = qvf.image();
+
+//   QLabel* l = new QLabel;
+//   l->setPixmap(QPixmap::fromImage(frame_image));
+//   l->show();
+
+ });
+}
+
+
+void DHAX_Video_Player_Frame::init_annotations()
+{
+ annotation_set_ = new DHAX_Video_Annotation_Set;
+}
+
+
+void DHAX_Video_Player_Frame::load_annotations()
+{
+ pause();
+ init_annotations();
+ qDebug( ) << "init_aaa";
 }
 
 void DHAX_Video_Player_Frame::update_frame_number_text()

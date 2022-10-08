@@ -236,6 +236,8 @@ HEADERS += \
   $$SRC_DIR/dhax-video/dhax-video-navigation-frame.h \
   $$SRC_DIR/dhax-video/dhax-video-player-frame.h \
   $$SRC_DIR/dhax-video/dhax-video-player-dialog.h \
+  $$SRC_DIR/dhax-video/dhax-video-annotation.h \
+  $$SRC_DIR/dhax-video/dhax-video-annotation-set.h \
 
 
 SOURCES += \
@@ -313,6 +315,10 @@ SOURCES += \
   $$SRC_DIR/dhax-video/dhax-video-navigation-frame.cpp \
   $$SRC_DIR/dhax-video/dhax-video-player-frame.cpp \
   $$SRC_DIR/dhax-video/dhax-video-player-dialog.cpp \
+  $$SRC_DIR/dhax-video/dhax-video-annotation.cpp \
+  $$SRC_DIR/dhax-video/dhax-video-annotation-set.cpp \
+
+
 
 
 # # todo should these be subwindows?

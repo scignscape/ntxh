@@ -1,4 +1,11 @@
 
+
+//           Copyright Nathaniel Christen 2020.
+//  Distributed under the Boost Software License, Version 1.0.
+//     (See accompanying file LICENSE_1_0.txt or copy at
+//           http://www.boost.org/LICENSE_1_0.txt)
+
+
 #ifndef DHAX_VIDEO_GRABBER__H
 #define DHAX_VIDEO_GRABBER__H
 
@@ -11,35 +18,36 @@
 
 class DHAX_Video_Grabber : public QAbstractVideoSurface
 {
-    Q_OBJECT
+ Q_OBJECT
 
 public:
-    DHAX_Video_Grabber(QWidget *widget, QObject *parent = 0);
 
-    QList<QVideoFrame::PixelFormat> supportedPixelFormats(
-            QAbstractVideoBuffer::HandleType handleType = QAbstractVideoBuffer::NoHandle) const;
-    bool isFormatSupported(const QVideoSurfaceFormat &format) const;
+ DHAX_Video_Grabber(QWidget *widget, QObject *parent = 0);
 
-    bool start(const QVideoSurfaceFormat &format);
-    void stop();
+ QList<QVideoFrame::PixelFormat> supportedPixelFormats(
+   QAbstractVideoBuffer::HandleType handleType = QAbstractVideoBuffer::NoHandle) const;
+ bool isFormatSupported(const QVideoSurfaceFormat &format) const;
 
-    bool present(const QVideoFrame &frame);
+ bool start(const QVideoSurfaceFormat &format);
+ void stop();
 
-    QRect videoRect() const { return targetRect; }
-    void updateVideoRect();
+ bool present(const QVideoFrame &frame);
 
-    void paint(QPainter *painter);
+ QRect videoRect() const { return targetRect; }
+ void updateVideoRect();
+
+ void paint(QPainter *painter);
 
 private:
-    QWidget *widget;
-    QImage::Format imageFormat;
-    QRect targetRect;
-    QSize imageSize;
-    QRect sourceRect;
-    QVideoFrame currentFrame;
+ QWidget *widget;
+ QImage::Format imageFormat;
+ QRect targetRect;
+ QSize imageSize;
+ QRect sourceRect;
+ QVideoFrame currentFrame;
 
 Q_SIGNALS:
-    void frameAvailable(QImage frame);
+ void frameAvailable(QImage frame);
 };
 
 #endif //DHAX_VIDEO_GRABBER__H

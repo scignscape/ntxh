@@ -1,4 +1,11 @@
 
+
+//           Copyright Nathaniel Christen 2020.
+//  Distributed under the Boost Software License, Version 1.0.
+//     (See accompanying file LICENSE_1_0.txt or copy at
+//           http://www.boost.org/LICENSE_1_0.txt)
+
+
 #ifndef DHAX_VIDEO_PLAYER_FRAME__H
 #define DHAX_VIDEO_PLAYER_FRAME__H
 
@@ -41,6 +48,7 @@
 
 
 class DHAX_Video_Navigation_Frame;
+class DHAX_Video_Annotation_Set;
 
 
 class DHAX_Video_Player_Frame : public QFrame
@@ -53,6 +61,8 @@ class DHAX_Video_Player_Frame : public QFrame
 
 
  DHAX_Video_Navigation_Frame* navigation_;
+
+ DHAX_Video_Annotation_Set* annotation_set_;
 
 // QVideoWidget *video_widget_;
 
@@ -96,6 +106,10 @@ class DHAX_Video_Player_Frame : public QFrame
  void reset_graphics_scene_rect();
  void update_frame_number_text();
 
+ void init_annotations();
+
+ void connect_video_probe();
+
 
 public:
 
@@ -117,6 +131,10 @@ public:
  void handle_send_video_frame_to_main_window(QLabel* l);
 
  void halt();
+
+public Q_SLOTS:
+
+ void load_annotations();
 
 Q_SIGNALS:
 
