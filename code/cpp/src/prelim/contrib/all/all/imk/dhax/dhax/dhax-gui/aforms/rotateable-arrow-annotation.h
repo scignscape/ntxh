@@ -23,6 +23,22 @@ class Rotateable_Arrow_Annotation //
 {
  Q_OBJECT
 
+ struct NTXH_Data {
+  s1 corner_pair_direction;
+  QPointF shaft_corner;
+  r8 shaft_width;
+  r8 shaft_length;
+  r8 tip_width;
+  r8 tip_length;
+  r8 tip_point_width;
+  r8 tip_corner_bend;
+  r8 rotation;
+  QPoint rotation_center;
+  r8 shaft_offset;
+  r8 shaft_offset_delta;
+ };
+
+ //?  r8 shaft_base_extension;
 
  QRectF shaft_;
  QRectF tip_;
@@ -57,6 +73,7 @@ public:
  Rotateable_Arrow_Annotation(const QByteArray& data);
 
  void as_polygon(QPolygonF& result);
+ void ntxh_data(NTXH_Data& result);
 
 
  ACCESSORS__RGET(QRectF ,shaft)

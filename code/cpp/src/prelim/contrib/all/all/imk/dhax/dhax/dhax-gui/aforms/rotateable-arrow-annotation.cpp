@@ -46,9 +46,9 @@ Rotateable_Arrow_Annotation::Rotateable_Arrow_Annotation(DHAX_Mouse_Interaction_
 
 void Rotateable_Arrow_Annotation::generate_ntxh(QString& result)
 {
- //rendered_polygon
  QPolygonF qpf;
  as_polygon(qpf);
+
 
  static QStringList fields {"shaft",
    "tip", "tip_point_width", "tip_point_width_delta",
@@ -61,13 +61,40 @@ void Rotateable_Arrow_Annotation::generate_ntxh(QString& result)
  QString text;
  QTextStream qts(&text);
 
-#define _SP_ << ' ' <<
+//#define _SP_ << ' ' <<
+ NTXH_Data nd;
+ ntxh_data(nd);
 
- qts << shaft_.top() _SP_ shaft_.right() _SP_ shaft_.bottom() _SP_
-   shaft_.left() _SP_ tip_.top() _SP_ tip_.right() _SP_ tip_.bottom() _SP_
-   tip_.left() _SP_ tip_point_width_ _SP_ tip_point_width_delta_ _SP_
-   tip_corner_bend_delta_ _SP_ rotation_ _SP_ mapped_rotation_center_.x() _SP_
-   mapped_rotation_center_.y() _SP_ shaft_offset_ _SP_ shaft_offset_delta_;
+#define fld(x) \
+  << #x ": " << nd.x << "\n"
+
+#define fld2(x, y, z) \
+  << #x "_" #y ": " << nd.x.y() << "\n" \
+  << #x "_" #z ": " << nd.x.z() << "\n" \
+
+
+// qts << shaft_.top() _SP_ shaft_.right() _SP_ shaft_.bottom() _SP_
+//   shaft_.left() _SP_ tip_.top() _SP_ tip_.right() _SP_ tip_.bottom() _SP_
+//   tip_.left() _SP_ tip_point_width_ _SP_ tip_point_width_delta_ _SP_
+//   tip_corner_bend_delta_ _SP_ rotation_ _SP_ mapped_rotation_center_.x() _SP_
+//   mapped_rotation_center_.y() _SP_ shaft_offset_ _SP_ shaft_offset_delta_;
+
+ qts
+   fld(corner_pair_direction)
+   fld2(shaft_corner ,x ,y)
+   fld(shaft_width)
+   fld(shaft_length)
+   fld(tip_width)
+   fld(tip_length)
+   fld(tip_point_width)
+   fld(tip_corner_bend)
+   fld(rotation)
+   fld2(rotation_center ,x ,y)
+   fld(shaft_offset)
+   fld(shaft_offset_delta)
+   ;
+
+ text.chop(1); // //  the last newline
 
  QByteArray qba;
  QDataStream qds(&qba, QIODevice::WriteOnly);
@@ -338,6 +365,24 @@ void Rotateable_Arrow_Annotation::set_gradient_center(QConicalGradient& gradient
  gradient.setCenter(shaft_.center());
 }
 
+
+void Rotateable_Arrow_Annotation::ntxh_data(NTXH_Data& result)
+{
+ QRect _shaft; map_from_parent(shaft_.normalized(), _shaft);
+ QRect _tip; map_from_parent(tip_.normalized(), _tip);
+
+ result.corner_pair_direction = (s1) current_corner_pair_direction_;
+ result.shaft_corner = _shaft.topLeft();
+ result.shaft_width = _shaft.height();
+ result.shaft_length = _shaft.width();
+ result.tip_width = _tip.height();
+ result.tip_length = _tip.width();
+ result.tip_corner_bend = tip_corner_bend_;
+ result.rotation = rotation_;
+ result.rotation_center = mapped_rotation_center_;
+ result.shaft_offset = shaft_offset_;
+ result.shaft_offset_delta = shaft_offset_delta_;
+}
 
 void Rotateable_Arrow_Annotation::as_polygon(QPolygonF& result)
 {
