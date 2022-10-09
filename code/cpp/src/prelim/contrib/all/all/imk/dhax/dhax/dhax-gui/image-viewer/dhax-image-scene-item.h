@@ -133,6 +133,8 @@ private:
 
  void show_annotation_measurements_dialog(const QPoint& pos);
 
+ void generate_annotation_ntxh();
+
 public:
 
  DHAX_Image_Scene_Item(QWidget *parent = 0);

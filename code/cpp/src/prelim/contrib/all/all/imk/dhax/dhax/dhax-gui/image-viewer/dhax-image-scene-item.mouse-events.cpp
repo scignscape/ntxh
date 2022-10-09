@@ -246,6 +246,11 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
   {
   });
 
+  menu->addAction("Generate NTXH", [this]
+  {
+   generate_annotation_ntxh();
+  });
+
   menu->addAction("Measurements ...", [this, &pos2]
   {
    show_annotation_measurements_dialog(pos2);
@@ -410,6 +415,7 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
   Q_EMIT edit_image_requested(NULL_CALL_STAMP);
  });
 
+#ifdef HIDE
  QMenu* m1 = menu->addMenu("Manufacturer/Energy Info ...");
 
  m1->addAction("Windows");
@@ -421,8 +427,10 @@ void DHAX_Image_Scene_Item::handle_mouse_event<
 
  menu->addAction("View IFC Graph");
  menu->addAction("View Blueprints (Floor/Room)");
+#endif
 
  menu->popup(pos2);
+
 }
 
 

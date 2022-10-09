@@ -22,6 +22,30 @@
 
 #include "styles.h"
 
+#include "aforms/rotateable-arrow-annotation.h"
+
+#define INIT_SHOW_HIDE(ty) \
+DHAX_Video_Player_Frame::_show_hide* ty##_show_hide \
+  = DHAX_Video_Player_Frame::init_show_hide<ty>();
+
+
+void show_hide_hide(DHAX_Video_Annotation* dva)
+{
+ DHAX_Video_Player_Frame::_show_hide* sh =
+   dva->scene_type_data_as<DHAX_Video_Player_Frame::_show_hide>();
+ sh->hide(dva->scene_data());
+}
+
+void show_hide_show(DHAX_Video_Annotation* dva)
+{
+ DHAX_Video_Player_Frame::_show_hide* sh =
+   dva->scene_type_data_as<DHAX_Video_Player_Frame::_show_hide>();
+ sh->show(dva->scene_data());
+}
+
+
+INIT_SHOW_HIDE(QGraphicsTextItem)
+
 
 DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
   :  QFrame(parent), annotation_set_(nullptr),
@@ -203,6 +227,24 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
 
 }
 
+template<typename T>
+T* DHAX_Video_Player_Frame::make_or_show_scene_annotation(DHAX_Video_Annotation* dva)
+{
+ T* result;
+ if(dva->scene_data_as(result))
+ {
+  show_hide_show(dva);
+ }
+ else
+ {
+  qDebug() << "inserting annotation for frame " << current_frame_count_;
+  qDebug() << *dva;
+  result = (T*) make_scene_annotation(dva);
+ }
+ return result;
+}
+
+
 
 void DHAX_Video_Player_Frame::handle_video_frame(const QVideoFrame& qvf)
 {
@@ -229,27 +271,21 @@ void DHAX_Video_Player_Frame::handle_video_frame(const QVideoFrame& qvf)
  {
   if(void* edata = annotation_set_->get_data_by_end_frame(current_frame_count_))
   {
-   QGraphicsTextItem* eti = (QGraphicsTextItem*) edata;// graphics_scene_->addText(dva->text());
-   eti->hide();
+   QGraphicsTextItem_show_hide->hide(edata);
   }
 
   DHAX_Video_Annotation* dva = annotation_set_->get_annotation_by_start_frame(current_frame_count_);
   if(dva)
   {
-   qDebug() << "inserting annotation for frame " << current_frame_count_;
-
-   qDebug() << *dva;
-
-   QGraphicsTextItem* ti = graphics_scene_->addText(dva->text());
-
-   annotation_set_->set_end_frame_data(dva->ending_frame_number(), ti);
-
-   ti->setPos(dva->corner_position());
-
-   qDebug() << "HH: " << dva->html_text();
-
-   ti->setHtml(dva->html_text());
-
+   QGraphicsItem* qgi;
+   if(dva->kind() == "text")
+   {
+    qgi = make_or_show_scene_annotation<QGraphicsTextItem>(dva);
+   }
+   else //if(dva->kind() == "arrow")
+   {
+    qgi = make_or_show_scene_annotation<QGraphicsItem>(dva);
+   }
   }
  }
 
@@ -279,6 +315,42 @@ void DHAX_Video_Player_Frame::handle_video_frame(const QVideoFrame& qvf)
 }
 
 
+void* DHAX_Video_Player_Frame::make_scene_text_annotation(DHAX_Video_Annotation* dva)
+{
+ QGraphicsTextItem* result = graphics_scene_->addText(dva->text());
+ annotation_set_->set_end_frame_data(dva->ending_frame_number(), result);
+ result->setPos(dva->corner_position());
+ result->setHtml(dva->html_text());
+ dva->set_scene_data(result);
+ dva->set_scene_type_data(QGraphicsTextItem_show_hide);
+ return result;
+}
+
+
+void* DHAX_Video_Player_Frame::make_scene_arrow_annotation(DHAX_Video_Annotation* dva)
+{
+ QByteArray qba = QByteArray::fromBase64(dva->data64().trimmed().toLatin1());
+
+ Rotateable_Arrow_Annotation raa(qba);
+
+ const QPolygonF& qpf = raa.rendered_polygon();
+
+ QBrush qbr(Qt::red);
+
+ QGraphicsPolygonItem* result = graphics_scene_->addPolygon(qpf, Qt::NoPen, qbr);
+ return result;
+}
+
+void* DHAX_Video_Player_Frame::make_scene_annotation(DHAX_Video_Annotation* dva)
+{
+ if(dva->kind() == "text")
+   return make_scene_text_annotation(dva);
+ else if(dva->kind() == "Rotateable_Arrow_Annotation")
+  return make_scene_arrow_annotation(dva);
+
+ return nullptr;
+}
+
 void DHAX_Video_Player_Frame::connect_video_probe()
 {
  connect(video_probe_, &QVideoProbe::videoFrameProbed, this,
@@ -293,6 +365,20 @@ void DHAX_Video_Player_Frame::init_annotations()
  qDebug() << "annotation_st" << *annotation_set_;
 }
 
+
+void DHAX_Video_Player_Frame::reset_annotation()
+{
+// //  this would by Qt 6 ...
+// for (auto [key, value]: annotation_set_->asKeyValueRange())
+// {
+//     // ...
+// }
+
+ for(DHAX_Video_Annotation& dva : annotation_set_->values())
+ {
+  show_hide_show(&dva);
+ }
+}
 
 void DHAX_Video_Player_Frame::load_annotations()
 {

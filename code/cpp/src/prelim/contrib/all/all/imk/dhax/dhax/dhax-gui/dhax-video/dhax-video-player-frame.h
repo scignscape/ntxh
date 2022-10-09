@@ -49,6 +49,7 @@
 
 class DHAX_Video_Navigation_Frame;
 class DHAX_Video_Annotation_Set;
+class DHAX_Video_Annotation;
 
 
 class DHAX_Video_Player_Frame : public QFrame
@@ -110,10 +111,35 @@ class DHAX_Video_Player_Frame : public QFrame
 
  void connect_video_probe();
 
+ void* make_scene_annotation(DHAX_Video_Annotation* dva);
+ void* make_scene_text_annotation(DHAX_Video_Annotation* dva);
+ void* make_scene_arrow_annotation(DHAX_Video_Annotation* dva);
+
+ template<typename T>
+ T* make_or_show_scene_annotation(DHAX_Video_Annotation* dva);
 
 public:
 
  DHAX_Video_Player_Frame(QWidget* parent = nullptr);
+
+ struct _show_hide {
+  void (*show)(void*);
+  void (*hide)(void*);
+ };
+
+ template<typename GRAPHICS_Type>
+ static _show_hide* init_show_hide()
+ {
+  return new _show_hide { [](void* ptr)
+   {
+    ((GRAPHICS_Type*) ptr) -> show();
+   }, [] (void* ptr)
+   {
+    ((GRAPHICS_Type*) ptr) -> hide();
+   }
+  };
+ }
+
 
  void play_local_video(QString file_path);
 
@@ -136,6 +162,7 @@ public:
 //public Q_SLOTS:
 
  void load_annotations();
+ void reset_annotation();
 
 //public Q_SLOTS:
 

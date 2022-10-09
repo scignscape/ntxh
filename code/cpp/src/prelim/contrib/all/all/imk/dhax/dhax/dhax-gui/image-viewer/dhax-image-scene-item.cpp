@@ -26,6 +26,8 @@
 #include "aforms/multistep-annotation-base.h"
 
 #include <QGraphicsProxyWidget>
+#include <QPushButton>
+#include <QClipboard>
 
 #include <QPainter>
 #include <QDebug>
@@ -1015,6 +1017,61 @@ void DHAX_Image_Scene_Item::mouseDoubleClickEvent(QMouseEvent *mouseEvent)
   }
  }
 }
+
+void DHAX_Image_Scene_Item::generate_annotation_ntxh()
+{
+//? QString kn = current_completed_multistep_annotation_->kind_name();
+
+ Image_Document_Controller* idc = containing_image_view_->image_document_controller();
+ QString ntxh;
+ idc->current_multistep_annotation()->generate_ntxh(ntxh);
+
+ QPoint pos = idc->current_multistep_annotation()->contentsRect().topLeft();
+
+ QMessageBox* mbox = new QMessageBox(this);
+
+// mbox->setP
+ mbox->setWindowTitle("Annotation NTXH");
+ mbox->setText(R"(Hit "Show Details" to preview, or "Ok" for copy-to-clipboard)");
+ mbox->setDetailedText(ntxh);
+
+ mbox->setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+ mbox->setDefaultButton(QMessageBox::Ok);
+
+// QPushButton* copy_button = new QPushButton("Copy", mbox);
+// QGridLayout* layout = (QGridLayout*)mbox->layout();
+// layout->addWidget(copy_button, layout->rowCount(), 0, 1, layout->columnCount());
+// QObject::connect(copy_button, &QPushButton::clicked, [ntxh]()
+// {
+//  QGuiApplication::clipboard()->setText(ntxh);
+// });
+
+ mbox->setAttribute(Qt::WA_DeleteOnClose); // delete pointer after close
+//? mbox->setModal(false);
+
+// QObject::connect(mbox, &QMessageBox::finished, [ntxh](int ret)
+// {
+//  if(ret == QMessageBox::Ok)
+//  {
+//   QGuiApplication::clipboard()->setText(ntxh);
+//  }
+// });
+
+ QMessageBox::StandardButton sb = (QMessageBox::StandardButton) mbox->exec();
+ if(sb == QMessageBox::Ok)
+ {
+  QGuiApplication::clipboard()->setText(ntxh);
+ }
+
+// if(kn == "Arrow")
+// {
+//  Simple_Rectangle_Annotation* sra = static_cast<Simple_Rectangle_Annotation*>(current_completed_multistep_annotation_);
+
+// }
+ //qDebug() << "kn = " << kn;
+
+}
+
 
 void DHAX_Image_Scene_Item::show_annotation_measurements_dialog(const QPoint& pos)
 {

@@ -77,6 +77,8 @@ public:
  ACCESSORS(u2 ,marked_foreground_pole)
  ACCESSORS(u2 ,marked_background_pole)
 
+ ACCESSORS(MultiStep_Annotation_Base* ,current_multistep_annotation) // current_arrow_annotation_;)
+
  QString current_file_path_with_presuffix(QString pres);
 
  MultiStep_Annotation_Base* init_multistep_annotation(QWidget* parent,

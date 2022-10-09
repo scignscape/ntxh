@@ -46,6 +46,8 @@ public:
 
  void read_ntxh_hypernode(NTXH_Graph& g, hypernode_type* h);
 
+ void parse_text_annotation_hypernode(NTXH_Graph& g, hypernode_type* h);
+ void parse_shape_annotation_hypernode(NTXH_Graph& g, hypernode_type* h);
 
 };
 

@@ -15,6 +15,7 @@
 
 
 DHAX_Video_Annotation::DHAX_Video_Annotation()
+  :  scene_data_(nullptr), scene_type_data_(nullptr)
 {
 
 }

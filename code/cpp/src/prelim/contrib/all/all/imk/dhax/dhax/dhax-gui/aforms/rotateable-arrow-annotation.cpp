@@ -1,13 +1,37 @@
 
+//           Copyright Nathaniel Christen 2020.
+//  Distributed under the Boost Software License, Version 1.0.
+//     (See accompanying file LICENSE_1_0.txt or copy at
+//           http://www.boost.org/LICENSE_1_0.txt)
+
+
 #include "rotateable-arrow-annotation.h"
 
 #include <QPainter>
+
+#include <QTextStream>
+#include <QRectF>
 
 #include <QDebug>
 
 #include <QWheelEvent>
 
 #include "global-types.h"
+
+#include "image-viewer/dhax-mouse-interaction-data.h"
+
+static DHAX_Mouse_Interaction_Data _no_data {};
+
+
+Rotateable_Arrow_Annotation::Rotateable_Arrow_Annotation(const QByteArray& data)
+  :  MultiStep_Annotation_Base(_no_data, nullptr)
+{
+ QDataStream qds(data);
+ qds >> rendered_polygon_ >> shaft_ >> tip_ >> tip_point_width_ >> tip_point_width_delta_
+   >> tip_corner_bend_delta_ >> rotation_ >> rotation_landmark_
+   >> rotation_center_ >> mapped_rotation_center_
+   >> shaft_offset_ >> shaft_offset_delta_;
+}
 
 Rotateable_Arrow_Annotation::Rotateable_Arrow_Annotation(DHAX_Mouse_Interaction_Data& mouse_interaction_data,
     const QPointF& sc, QWidget* p) :
@@ -18,6 +42,58 @@ Rotateable_Arrow_Annotation::Rotateable_Arrow_Annotation(DHAX_Mouse_Interaction_
  shaft_.setBottomRight(sc);
  if(p)
    setGeometry(p->geometry());
+}
+
+void Rotateable_Arrow_Annotation::generate_ntxh(QString& result)
+{
+ //rendered_polygon
+ QPolygonF qpf;
+ as_polygon(qpf);
+
+ static QStringList fields {"shaft",
+   "tip", "tip_point_width", "tip_point_width_delta",
+   "tip_corner_bend", "tip_corner_bend_delta",
+   "rotation", "rotation_landmark", "rotation_center",
+   "mapped_rotation_center", "shaft_offset",
+   "shaft_offset_delta"
+ };
+
+ QString text;
+ QTextStream qts(&text);
+
+#define _SP_ << ' ' <<
+
+ qts << shaft_.top() _SP_ shaft_.right() _SP_ shaft_.bottom() _SP_
+   shaft_.left() _SP_ tip_.top() _SP_ tip_.right() _SP_ tip_.bottom() _SP_
+   tip_.left() _SP_ tip_point_width_ _SP_ tip_point_width_delta_ _SP_
+   tip_corner_bend_delta_ _SP_ rotation_ _SP_ mapped_rotation_center_.x() _SP_
+   mapped_rotation_center_.y() _SP_ shaft_offset_ _SP_ shaft_offset_delta_;
+
+ QByteArray qba;
+ QDataStream qds(&qba, QIODevice::WriteOnly);
+ qds << qpf << shaft_ << tip_ << tip_point_width_ << tip_point_width_delta_
+   << tip_corner_bend_delta_ << rotation_ << rotation_landmark_
+   << rotation_center_ << mapped_rotation_center_
+   << shaft_offset_ << shaft_offset_delta_;
+
+ QByteArray qba64 = qba.toBase64();
+
+ static QString result_template =
+R"(
+!/ Shape_Annotation
+$k: Rotateable_Arrow_Annotation
+$s#
+$t.
+%1
+.
+$d.
+%2
+.
+/!
+<+>
+ )";
+
+ result = result_template.arg(text).arg(QString::fromLatin1(qba64));
 }
 
 void Rotateable_Arrow_Annotation::adjust_geometry(const QPointF& pos)
@@ -263,6 +339,165 @@ void Rotateable_Arrow_Annotation::set_gradient_center(QConicalGradient& gradient
 }
 
 
+void Rotateable_Arrow_Annotation::as_polygon(QPolygonF& result)
+{
+ QRect _shaft; map_from_parent(shaft_.normalized(), _shaft);
+ QRect _tip; map_from_parent(tip_.normalized(), _tip);
+
+ s1 cpd = (current_corner_pair_direction_ & Corner_Pair_Directions::Direction_Only);
+
+ if(tip_point_width_ > 0)
+   cpd = -cpd;
+
+ QPoint bend(tip_corner_bend_, 0);
+
+ if( (cpd & 1) == 0 )
+   // //  i.e. a down-right-down or similar
+   bend = bend.transposed();
+
+ QVector<QPoint> points;
+
+ switch(cpd)
+ {
+ case -(s1) Corner_Pair_Directions::Down_Right:
+ case -(s1) Corner_Pair_Directions::Up_Right:
+  {
+   QPoint mid = ((_tip.topRight() + _tip.bottomRight()) / 2);
+   points = QVector<QPoint>{
+     _shaft.topLeft() - QPoint(0, shaft_offset_), _tip.topLeft() - bend,
+     mid - QPoint(0, tip_point_width_),
+     mid + QPoint(0, tip_point_width_),
+     _tip.bottomLeft() - bend, _shaft.bottomRight(), _shaft.bottomLeft() + QPoint(0, shaft_offset_)
+     };
+  }
+  break;
+ case (s1) Corner_Pair_Directions::Down_Right:
+ case (s1) Corner_Pair_Directions::Up_Right:
+  {
+   points = QVector<QPoint>{
+     _shaft.topLeft() - QPoint(0, shaft_offset_), _shaft.topRight(), _tip.topLeft() - bend,
+     ((_tip.topRight() + _tip.bottomRight()) / 2),
+      _tip.bottomLeft() - bend, _shaft.bottomRight(), _shaft.bottomLeft() + QPoint(0, shaft_offset_)
+     };
+  }
+  break;
+ case (s1) Corner_Pair_Directions::Down_Right_Down:
+  {
+   points = QVector<QPoint>{
+     _shaft.topRight() + QPoint(shaft_offset_, 0), _shaft.bottomRight(), _tip.topRight() - bend,
+     ((_tip.bottomRight() + _tip.bottomLeft()) / 2),
+      _tip.topLeft() - bend, _shaft.bottomLeft(), _shaft.topLeft() - QPoint(shaft_offset_, 0)
+     };
+  }
+  break;
+ case -(s1) Corner_Pair_Directions::Down_Right_Down:
+  {
+   QPoint mid = ((_tip.bottomLeft() + _tip.bottomRight()) / 2);
+   points = QVector<QPoint>{
+     _shaft.topRight() + QPoint(shaft_offset_, 0), _shaft.bottomRight(), _tip.topRight() - bend,
+     mid + QPoint(tip_point_width_, 0),
+     mid - QPoint(tip_point_width_, 0),
+     _tip.topLeft() - bend, _shaft.bottomLeft(), _shaft.topLeft() - QPoint(shaft_offset_, 0)
+     };
+  }
+  break;
+ case (s1) Corner_Pair_Directions::Up_Right_Up:
+  {
+   points = QVector<QPoint>{
+     _shaft.bottomRight() + QPoint(shaft_offset_, 0), _shaft.topRight(), _tip.bottomRight() + bend,
+     ((_tip.topRight() + _tip.topLeft()) / 2),
+      _tip.bottomLeft() + bend, _shaft.topLeft(), _shaft.bottomLeft() - QPoint(shaft_offset_, 0)
+     };
+  }
+  break;
+ case -(s1) Corner_Pair_Directions::Up_Right_Up:
+  {
+   QPoint mid = ((_tip.topLeft() + _tip.topRight()) / 2);
+   points = QVector<QPoint>{
+     _shaft.bottomRight() + QPoint(shaft_offset_, 0), _shaft.topRight(), _tip.bottomRight() + bend,
+     mid + QPoint(tip_point_width_, 0),
+     mid - QPoint(tip_point_width_, 0),
+     _tip.bottomLeft() + bend, _shaft.topLeft(), _shaft.bottomLeft() - QPoint(shaft_offset_, 0)
+     };
+  }
+  break;
+ case (s1) Corner_Pair_Directions::Down_Left_Down:
+  {
+   points = QVector<QPoint>{
+     _shaft.topLeft() - QPoint(shaft_offset_, 0), _shaft.bottomLeft(), _tip.topLeft() - bend,
+     ((_tip.bottomLeft() + _tip.bottomRight()) / 2),
+      _tip.topRight() - bend, _shaft.bottomRight(), _shaft.topRight() + QPoint(shaft_offset_, 0)
+     };
+  }
+  break;
+ case -(s1) Corner_Pair_Directions::Down_Left_Down:
+  {
+   QPoint mid = ((_tip.bottomLeft() + _tip.bottomRight()) / 2);
+   points = QVector<QPoint>{
+     _shaft.topLeft() - QPoint(shaft_offset_, 0), _shaft.bottomLeft(), _tip.topLeft() - bend,
+     mid - QPoint(tip_point_width_, 0),
+     mid + QPoint(tip_point_width_, 0),
+     _tip.topRight() - bend, _shaft.bottomRight(), _shaft.topRight() + QPoint(shaft_offset_, 0)
+     };
+  }
+  break;
+ case (s1) Corner_Pair_Directions::Up_Left_Up:
+  {
+   points = QVector<QPoint>{
+     _shaft.bottomLeft() - QPoint(shaft_offset_, 0), _shaft.topLeft(), _tip.bottomLeft() + bend,
+     ((_tip.topLeft() + _tip.topRight()) / 2),
+      _tip.bottomRight() + bend, _shaft.topRight(), _shaft.bottomRight() + QPoint(shaft_offset_, 0)
+     };
+  }
+  break;
+ case -(s1) Corner_Pair_Directions::Up_Left_Up:
+  {
+   QPoint mid = ((_tip.topLeft() + _tip.topRight()) / 2);
+   points = QVector<QPoint>{
+     _shaft.bottomLeft() - QPoint(shaft_offset_, 0), _shaft.topLeft(), _tip.bottomLeft() + bend,
+     mid - QPoint(tip_point_width_, 0),
+     mid + QPoint(tip_point_width_, 0),
+      _tip.bottomRight() + bend, _shaft.topRight(), _shaft.bottomRight() + QPoint(shaft_offset_, 0)
+     };
+  }
+  break;
+ case -(s1) Corner_Pair_Directions::Down_Left:
+ case -(s1) Corner_Pair_Directions::Up_Left:
+  {
+   QPoint mid = ((_tip.topLeft() + _tip.bottomLeft()) / 2);
+
+   points = QVector<QPoint>{
+     _shaft.topRight() - QPoint(0, shaft_offset_), _shaft.topLeft(), _tip.topRight() + bend,
+     mid - QPoint(0, tip_point_width_),
+     mid + QPoint(0, tip_point_width_),
+     _tip.bottomRight() + bend, _shaft.bottomLeft(), _shaft.bottomRight() + QPoint(0, shaft_offset_)
+     };
+  }
+  break;
+ case (s1) Corner_Pair_Directions::Down_Left:
+ case (s1) Corner_Pair_Directions::Up_Left:
+  {
+   points = QVector<QPoint>{
+     _shaft.topRight() - QPoint(0, shaft_offset_), _shaft.topLeft(), _tip.topRight() + bend,
+     ((_tip.topLeft() + _tip.bottomLeft()) / 2),
+     _tip.bottomRight() + bend, _shaft.bottomLeft(), _shaft.bottomRight() + QPoint(0, shaft_offset_)
+     };
+  }
+  break;
+ }
+ QPolygonF poly(points);
+
+ if(current_corner_pair_direction_ & Corner_Pair_Directions::Third_or_Fourth_Phase)
+ {
+  poly = QTransform().translate(mapped_rotation_center_.x(), mapped_rotation_center_.y())
+    .rotate(rotation_).translate(-mapped_rotation_center_.x(), -mapped_rotation_center_.y())
+    .map(poly);
+ }
+
+ result = poly;
+}
+
+
 void Rotateable_Arrow_Annotation::process_paint_event(QPaintEvent* event, QPainter& painter)
 {
 
@@ -275,158 +510,9 @@ void Rotateable_Arrow_Annotation::process_paint_event(QPaintEvent* event, QPaint
  else if(current_corner_pair_direction_ &
    Corner_Pair_Directions::Phase_234)
  {
-  QRect _shaft; map_from_parent(shaft_.normalized(), _shaft);
-  QRect _tip; map_from_parent(tip_.normalized(), _tip);
+  QPolygonF poly;
+  as_polygon(poly);
 
-  s1 cpd = (current_corner_pair_direction_ & Corner_Pair_Directions::Direction_Only);
-
-  if(tip_point_width_ > 0)
-    cpd = -cpd;
-
-  QPoint bend(tip_corner_bend_, 0);
-
-  if( (cpd & 1) == 0 )
-    // //  i.e. a down-right-down or similar
-    bend = bend.transposed();
-
-  QVector<QPoint> points;
-
-  switch(cpd)
-  {
-  case -(s1) Corner_Pair_Directions::Down_Right:
-  case -(s1) Corner_Pair_Directions::Up_Right:
-   {
-    QPoint mid = ((_tip.topRight() + _tip.bottomRight()) / 2);
-    points = QVector<QPoint>{
-      _shaft.topLeft() - QPoint(0, shaft_offset_), _tip.topLeft() - bend,
-      mid - QPoint(0, tip_point_width_),
-      mid + QPoint(0, tip_point_width_),
-      _tip.bottomLeft() - bend, _shaft.bottomRight(), _shaft.bottomLeft() + QPoint(0, shaft_offset_)
-      };
-   }
-   break;
-  case (s1) Corner_Pair_Directions::Down_Right:
-  case (s1) Corner_Pair_Directions::Up_Right:
-   {
-    points = QVector<QPoint>{
-      _shaft.topLeft() - QPoint(0, shaft_offset_), _shaft.topRight(), _tip.topLeft() - bend,
-      ((_tip.topRight() + _tip.bottomRight()) / 2),
-       _tip.bottomLeft() - bend, _shaft.bottomRight(), _shaft.bottomLeft() + QPoint(0, shaft_offset_)
-      };
-   }
-   break;
-  case (s1) Corner_Pair_Directions::Down_Right_Down:
-   {
-    points = QVector<QPoint>{
-      _shaft.topRight() + QPoint(shaft_offset_, 0), _shaft.bottomRight(), _tip.topRight() - bend,
-      ((_tip.bottomRight() + _tip.bottomLeft()) / 2),
-       _tip.topLeft() - bend, _shaft.bottomLeft(), _shaft.topLeft() - QPoint(shaft_offset_, 0)
-      };
-   }
-   break;
-  case -(s1) Corner_Pair_Directions::Down_Right_Down:
-   {
-    QPoint mid = ((_tip.bottomLeft() + _tip.bottomRight()) / 2);
-    points = QVector<QPoint>{
-      _shaft.topRight() + QPoint(shaft_offset_, 0), _shaft.bottomRight(), _tip.topRight() - bend,
-      mid + QPoint(tip_point_width_, 0),
-      mid - QPoint(tip_point_width_, 0),
-      _tip.topLeft() - bend, _shaft.bottomLeft(), _shaft.topLeft() - QPoint(shaft_offset_, 0)
-      };
-   }
-   break;
-  case (s1) Corner_Pair_Directions::Up_Right_Up:
-   {
-    points = QVector<QPoint>{
-      _shaft.bottomRight() + QPoint(shaft_offset_, 0), _shaft.topRight(), _tip.bottomRight() + bend,
-      ((_tip.topRight() + _tip.topLeft()) / 2),
-       _tip.bottomLeft() + bend, _shaft.topLeft(), _shaft.bottomLeft() - QPoint(shaft_offset_, 0)
-      };
-   }
-   break;
-  case -(s1) Corner_Pair_Directions::Up_Right_Up:
-   {
-    QPoint mid = ((_tip.topLeft() + _tip.topRight()) / 2);
-    points = QVector<QPoint>{
-      _shaft.bottomRight() + QPoint(shaft_offset_, 0), _shaft.topRight(), _tip.bottomRight() + bend,
-      mid + QPoint(tip_point_width_, 0),
-      mid - QPoint(tip_point_width_, 0),
-      _tip.bottomLeft() + bend, _shaft.topLeft(), _shaft.bottomLeft() - QPoint(shaft_offset_, 0)
-      };
-   }
-   break;
-  case (s1) Corner_Pair_Directions::Down_Left_Down:
-   {
-    points = QVector<QPoint>{
-      _shaft.topLeft() - QPoint(shaft_offset_, 0), _shaft.bottomLeft(), _tip.topLeft() - bend,
-      ((_tip.bottomLeft() + _tip.bottomRight()) / 2),
-       _tip.topRight() - bend, _shaft.bottomRight(), _shaft.topRight() + QPoint(shaft_offset_, 0)
-      };
-   }
-   break;
-  case -(s1) Corner_Pair_Directions::Down_Left_Down:
-   {
-    QPoint mid = ((_tip.bottomLeft() + _tip.bottomRight()) / 2);
-    points = QVector<QPoint>{
-      _shaft.topLeft() - QPoint(shaft_offset_, 0), _shaft.bottomLeft(), _tip.topLeft() - bend,
-      mid - QPoint(tip_point_width_, 0),
-      mid + QPoint(tip_point_width_, 0),
-      _tip.topRight() - bend, _shaft.bottomRight(), _shaft.topRight() + QPoint(shaft_offset_, 0)
-      };
-   }
-   break;
-  case (s1) Corner_Pair_Directions::Up_Left_Up:
-   {
-    points = QVector<QPoint>{
-      _shaft.bottomLeft() - QPoint(shaft_offset_, 0), _shaft.topLeft(), _tip.bottomLeft() + bend,
-      ((_tip.topLeft() + _tip.topRight()) / 2),
-       _tip.bottomRight() + bend, _shaft.topRight(), _shaft.bottomRight() + QPoint(shaft_offset_, 0)
-      };
-   }
-   break;
-  case -(s1) Corner_Pair_Directions::Up_Left_Up:
-   {
-    QPoint mid = ((_tip.topLeft() + _tip.topRight()) / 2);
-    points = QVector<QPoint>{
-      _shaft.bottomLeft() - QPoint(shaft_offset_, 0), _shaft.topLeft(), _tip.bottomLeft() + bend,
-      mid - QPoint(tip_point_width_, 0),
-      mid + QPoint(tip_point_width_, 0),
-       _tip.bottomRight() + bend, _shaft.topRight(), _shaft.bottomRight() + QPoint(shaft_offset_, 0)
-      };
-   }
-   break;
-  case -(s1) Corner_Pair_Directions::Down_Left:
-  case -(s1) Corner_Pair_Directions::Up_Left:
-   {
-    QPoint mid = ((_tip.topLeft() + _tip.bottomLeft()) / 2);
-
-    points = QVector<QPoint>{
-      _shaft.topRight() - QPoint(0, shaft_offset_), _shaft.topLeft(), _tip.topRight() + bend,
-      mid - QPoint(0, tip_point_width_),
-      mid + QPoint(0, tip_point_width_),
-      _tip.bottomRight() + bend, _shaft.bottomLeft(), _shaft.bottomRight() + QPoint(0, shaft_offset_)
-      };
-   }
-   break;
-  case (s1) Corner_Pair_Directions::Down_Left:
-  case (s1) Corner_Pair_Directions::Up_Left:
-   {
-    points = QVector<QPoint>{
-      _shaft.topRight() - QPoint(0, shaft_offset_), _shaft.topLeft(), _tip.topRight() + bend,
-      ((_tip.topLeft() + _tip.bottomLeft()) / 2),
-      _tip.bottomRight() + bend, _shaft.bottomLeft(), _shaft.bottomRight() + QPoint(0, shaft_offset_)
-      };
-   }
-   break;
-  }
-  QPolygon poly(points);
-
-  if(current_corner_pair_direction_ & Corner_Pair_Directions::Third_or_Fourth_Phase)
-  {
-   poly = QTransform().translate(mapped_rotation_center_.x(), mapped_rotation_center_.y())
-     .rotate(rotation_).translate(-mapped_rotation_center_.x(), -mapped_rotation_center_.y())
-     .map(poly);
-  }
   painter.drawPolygon(poly);
 
   if(current_corner_pair_direction_ & Corner_Pair_Directions::Third_Phase)

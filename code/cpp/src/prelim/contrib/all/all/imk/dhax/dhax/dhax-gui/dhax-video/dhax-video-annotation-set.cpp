@@ -24,7 +24,7 @@ DHAX_Video_Annotation_Set::DHAX_Video_Annotation_Set()
 }
 
 
-void DHAX_Video_Annotation_Set::read_ntxh_hypernode(NTXH_Graph& g, hypernode_type* h)
+void DHAX_Video_Annotation_Set::parse_text_annotation_hypernode(NTXH_Graph& g, hypernode_type* h)
 {
  g.get_sfsr(h, {{1, 6}}, [this](QVector<QPair<QString, void*>>& prs)
  {
@@ -34,6 +34,7 @@ void DHAX_Video_Annotation_Set::read_ntxh_hypernode(NTXH_Graph& g, hypernode_typ
     end += start;
 
   DHAX_Video_Annotation dva;
+  dva.set_kind("text");
   dva.set_text(prs[2].first);
   dva.set_inner_style_sheet(prs[3].first);
   dva.set_starting_frame_number(start);
@@ -44,6 +45,44 @@ void DHAX_Video_Annotation_Set::read_ntxh_hypernode(NTXH_Graph& g, hypernode_typ
 
 //  QString name_description = prs[0].first;
  });
+
+}
+
+
+void DHAX_Video_Annotation_Set::parse_shape_annotation_hypernode(NTXH_Graph& g, hypernode_type* h)
+{
+ g.get_sfsr(h, {{1, 6}}, [this](QVector<QPair<QString, void*>>& prs)
+ {
+  u4 start = prs[1].first.toUInt();
+  u4 end = prs[2].first.toUInt();
+  if(prs[2].first.startsWith('+'))
+    end += start;
+
+//?  QString data64 = prs[5].first;
+
+  DHAX_Video_Annotation dva;
+  dva.set_kind(prs[0].first);
+  dva.set_starting_frame_number(start);
+  dva.set_ending_frame_number(end);
+  dva.set_data64(prs[4].first);
+  load_annotation(dva);
+
+//  QString name_description = prs[0].first;
+ });
+
+}
+
+
+
+void DHAX_Video_Annotation_Set::read_ntxh_hypernode(NTXH_Graph& g, hypernode_type* h)
+{
+ QString ty = h->type_descriptor().first;
+ if(ty == "Text_Annotation")
+   parse_text_annotation_hypernode(g, h);
+
+ else if(ty == "Shape_Annotation")
+   parse_shape_annotation_hypernode(g, h);
+
 
 }
 
