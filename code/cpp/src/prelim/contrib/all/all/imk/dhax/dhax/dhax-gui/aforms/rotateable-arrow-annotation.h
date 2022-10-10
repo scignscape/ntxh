@@ -24,6 +24,11 @@ class Rotateable_Arrow_Annotation //
  Q_OBJECT
 
  struct NTXH_Data {
+  QColor color;
+  r8 xscale;
+  r8 yscale;
+  r8 xtranslate;
+  r8 ytranslate;
   s1 corner_pair_direction;
   QPointF shaft_corner;
   r8 shaft_width;
@@ -60,6 +65,13 @@ class Rotateable_Arrow_Annotation //
 
  QPolygonF rendered_polygon_;
 
+ QColor fill_color_;
+ r8 xscale_, yscale_, xtranslate_, ytranslate_;
+
+ void generate_ntxh_data(NTXH_Data& result);
+ void read_from_ntxh_data(const NTXH_Data& nd);
+ void read_ntxh_data(QMap<QString, QStringList>& kv_map, NTXH_Data& result);
+
 
 protected:
 
@@ -72,9 +84,9 @@ public:
 
  Rotateable_Arrow_Annotation(const QByteArray& data);
 
- void as_polygon(QPolygonF& result);
- void ntxh_data(NTXH_Data& result);
+ Rotateable_Arrow_Annotation(QString kv_text);
 
+ void as_polygon(QPolygonF& result, NTXH_Data* nd = nullptr);
 
  ACCESSORS__RGET(QRectF ,shaft)
  ACCESSORS__RGET(QRectF ,tip)
@@ -82,7 +94,21 @@ public:
  ACCESSORS(r8 ,rotation)
 
  ACCESSORS__CONST_RGET(QPolygonF ,rendered_polygon)
+ ACCESSORS(QColor ,fill_color)
 
+ r8 get_xscale()
+ {
+  if(xscale_ == 0)
+    return 1;
+  return xscale_;
+ }
+
+ r8 get_yscale()
+ {
+  if(yscale_ == 0)
+    return 1;
+  return yscale_;
+ }
 
  void adjust_geometry(const QPointF& pos) Q_DECL_OVERRIDE;
 

@@ -24,19 +24,50 @@ static DHAX_Mouse_Interaction_Data _no_data {};
 
 
 Rotateable_Arrow_Annotation::Rotateable_Arrow_Annotation(const QByteArray& data)
-  :  MultiStep_Annotation_Base(_no_data, nullptr)
+  :  MultiStep_Annotation_Base(_no_data, nullptr),
+     xscale_(0), yscale_(0), xtranslate_(0), ytranslate_(0)
 {
  QDataStream qds(data);
  qds >> rendered_polygon_ >> shaft_ >> tip_ >> tip_point_width_ >> tip_point_width_delta_
    >> tip_corner_bend_delta_ >> rotation_ >> rotation_landmark_
    >> rotation_center_ >> mapped_rotation_center_
-   >> shaft_offset_ >> shaft_offset_delta_;
+   >> shaft_offset_ >> shaft_offset_delta_
+   >> fill_color_ >> xscale_ >> yscale_ >> xtranslate_ >> ytranslate_;
+
 }
+
+
+Rotateable_Arrow_Annotation::Rotateable_Arrow_Annotation(QString kv_text)
+ :  MultiStep_Annotation_Base(_no_data, nullptr),
+    xscale_(0), yscale_(0), xtranslate_(0), ytranslate_(0)
+{
+// kv_text = kv_text.simplified();
+// kv_text.replace(": ", ":");
+ QStringList lines = kv_text.split('\n', Qt::SkipEmptyParts);
+ QMap<QString, QStringList> split_tokens;
+ for(QString line : lines)
+ {
+  line = line.simplified();
+  line.replace(": ", " ");
+  QStringList tokens = line.split(' ');
+  if(tokens.isEmpty())
+     continue;
+  split_tokens[tokens.takeFirst()] = tokens;
+ }
+
+ NTXH_Data nd;
+ read_ntxh_data(split_tokens, nd);
+ read_from_ntxh_data(nd);
+ as_polygon(rendered_polygon_, &nd);
+
+}
+
 
 Rotateable_Arrow_Annotation::Rotateable_Arrow_Annotation(DHAX_Mouse_Interaction_Data& mouse_interaction_data,
     const QPointF& sc, QWidget* p) :
     MultiStep_Annotation_Base(mouse_interaction_data, p), tip_point_width_(0), tip_point_width_delta_(1),
-    tip_corner_bend_(0), tip_corner_bend_delta_(1), rotation_(0), shaft_offset_(0), shaft_offset_delta_(1)
+    tip_corner_bend_(0), tip_corner_bend_delta_(1), rotation_(0), shaft_offset_(0), shaft_offset_delta_(1),
+    xscale_(1), yscale_(1), xtranslate_(0), ytranslate_(0)
 {
  shaft_.setTopLeft(sc);
  shaft_.setBottomRight(sc);
@@ -46,8 +77,8 @@ Rotateable_Arrow_Annotation::Rotateable_Arrow_Annotation(DHAX_Mouse_Interaction_
 
 void Rotateable_Arrow_Annotation::generate_ntxh(QString& result)
 {
- QPolygonF qpf;
- as_polygon(qpf);
+// QPolygonF qpf;
+// as_polygon(qpf);
 
 
  static QStringList fields {"shaft",
@@ -63,14 +94,26 @@ void Rotateable_Arrow_Annotation::generate_ntxh(QString& result)
 
 //#define _SP_ << ' ' <<
  NTXH_Data nd;
- ntxh_data(nd);
+ generate_ntxh_data(nd);
 
 #define fld(x) \
   << #x ": " << nd.x << "\n"
 
 #define fld2(x, y, z) \
-  << #x "_" #y ": " << nd.x.y() << "\n" \
-  << #x "_" #z ": " << nd.x.z() << "\n" \
+  << #x ": " << nd.x.y() << " " << nd.x.z() << "\n" \
+
+#define fld3(x, y, z, n) \
+  << #n ": " << nd.y##x << " " \
+  << nd.z##x << "\n"
+
+
+ QString color;
+ if(fill_color_.isValid())
+   color = "color: %1 %2 %3 %4\n"_qt.arg(fill_color_.red())
+   .arg(fill_color_.green()).arg(fill_color_.blue())
+   .arg(fill_color_.alpha());
+ else
+   color = "color: 124.5 124.5 124.5\n";
 
 
 // qts << shaft_.top() _SP_ shaft_.right() _SP_ shaft_.bottom() _SP_
@@ -79,8 +122,15 @@ void Rotateable_Arrow_Annotation::generate_ntxh(QString& result)
 //   tip_corner_bend_delta_ _SP_ rotation_ _SP_ mapped_rotation_center_.x() _SP_
 //   mapped_rotation_center_.y() _SP_ shaft_offset_ _SP_ shaft_offset_delta_;
 
+ qts << color;
+
+ if( (get_xscale() == 1) && (get_yscale() == 1) )
+    qts << "scale: \n";
+ else
+   qts fld3(scale ,x ,y ,scale);
+
  qts
-   fld(corner_pair_direction)
+   fld3(translate ,x ,y ,tr)
    fld2(shaft_corner ,x ,y)
    fld(shaft_width)
    fld(shaft_length)
@@ -92,16 +142,21 @@ void Rotateable_Arrow_Annotation::generate_ntxh(QString& result)
    fld2(rotation_center ,x ,y)
    fld(shaft_offset)
    fld(shaft_offset_delta)
+   fld(corner_pair_direction)
    ;
+
+#undef fld
+#undef fld2
 
  text.chop(1); // //  the last newline
 
  QByteArray qba;
  QDataStream qds(&qba, QIODevice::WriteOnly);
- qds << qpf << shaft_ << tip_ << tip_point_width_ << tip_point_width_delta_
+ qds << shaft_ << tip_ << tip_point_width_ << tip_point_width_delta_
    << tip_corner_bend_delta_ << rotation_ << rotation_landmark_
    << rotation_center_ << mapped_rotation_center_
-   << shaft_offset_ << shaft_offset_delta_;
+   << shaft_offset_ << shaft_offset_delta_
+   << fill_color_ << xscale_ << yscale_ << xtranslate_ << ytranslate_;
 
  QByteArray qba64 = qba.toBase64();
 
@@ -365,12 +420,110 @@ void Rotateable_Arrow_Annotation::set_gradient_center(QConicalGradient& gradient
  gradient.setCenter(shaft_.center());
 }
 
+void Rotateable_Arrow_Annotation::read_ntxh_data(QMap<QString, QStringList>& kv_map, NTXH_Data& result)
+{
+ QStringList color_qsl = kv_map.value("color");
 
-void Rotateable_Arrow_Annotation::ntxh_data(NTXH_Data& result)
+ if(color_qsl.size() == 3)
+  result.color = QColor::fromRgbF(color_qsl.value(0).toFloat() / 255,
+    color_qsl.value(1).toFloat() / 255, color_qsl.value(2).toFloat() / 255 );
+ else
+  result.color = QColor::fromRgbF(color_qsl.value(0).toFloat() / 255,
+    color_qsl.value(1).toFloat() / 255, color_qsl.value(2).toFloat() / 255,
+    color_qsl.value(3).toFloat() / 255);
+
+
+ QStringList scale_qsl = kv_map.value("scale");
+ if(scale_qsl.size() > 1)
+ {
+  result.xscale = scale_qsl[0].toDouble();
+  result.yscale = scale_qsl[1].toDouble();
+ }
+ else
+   result.xscale = result.yscale = scale_qsl.value(0, "1").toDouble();
+
+
+ QStringList translate_qsl = kv_map.value("tr");
+ if(translate_qsl.size() > 1)
+ {
+  result.xtranslate = translate_qsl[0].toDouble();
+  result.ytranslate = translate_qsl[1].toDouble();
+ }
+ else
+   result.xtranslate = result.ytranslate = translate_qsl.value(0).toDouble();
+
+
+// result.shaft_corner = QPointF(kv_map.value("shaft_corner").value(0).toFloat(),
+//   kv_map.value("shaft_corner_y").value(0).toFloat());
+
+#define fld(ty, x) \
+ result.x = kv_map.value(#x).value(0).to##ty();
+
+#define fld2_QPointF(x) \
+ result.x = QPointF(kv_map.value(#x).value(0).toFloat(), \
+  kv_map.value(#x).value(1).toFloat());
+
+#define fld2_QPoint(x) \
+ result.x = QPoint(kv_map.value(#x).value(0).toInt(), \
+  kv_map.value(#x).value(1).toInt());
+
+ fld2_QPointF(shaft_corner)
+ fld2_QPoint(rotation_center)
+
+ fld(Int, corner_pair_direction)
+ fld(Double, shaft_width)
+ fld(Double, shaft_length)
+ fld(Double, tip_width)
+ fld(Double, tip_length)
+ fld(Double, rotation)
+ fld(Double, shaft_offset)
+ fld(Double, shaft_offset_delta)
+
+#undef fld
+#undef fld_QPointF
+#undef fld_QPoint
+
+// result.rotation_center = QPoint(kv_map.value("rotation_center_x").value(0).toInt(),
+//   kv_map.value("rotation_center_y").value(0).toInt());
+
+//  result.corner_pair_direction = kv_map.value("corner_pair_direction").value(0).toInt();
+}
+
+void Rotateable_Arrow_Annotation::read_from_ntxh_data(const NTXH_Data& nd)
+{
+ fill_color_ = nd.color;
+ xscale_ = nd.xscale;
+ yscale_ = nd.yscale;
+ xtranslate_ = nd.xtranslate;
+ ytranslate_ = nd.ytranslate;
+
+ current_corner_pair_direction_ = (Corner_Pair_Directions) nd.corner_pair_direction;
+ tip_corner_bend_ = nd.tip_corner_bend;
+ rotation_ = nd.rotation;
+ mapped_rotation_center_ = nd.rotation_center;
+ shaft_offset_ = nd.shaft_offset;
+ shaft_offset_delta_ = nd.shaft_offset_delta;
+
+ shaft_.setTopLeft(nd.shaft_corner);
+ shaft_.setHeight(nd.shaft_width);
+ shaft_.setWidth(nd.shaft_length);
+
+ tip_.setLeft(shaft_.right());
+ tip_.setTop(shaft_.center().y() - (nd.tip_width / 2));
+ tip_.setHeight(nd.tip_width);
+ tip_.setWidth(nd.tip_length);
+
+}
+
+
+void Rotateable_Arrow_Annotation::generate_ntxh_data(NTXH_Data& result)
 {
  QRect _shaft; map_from_parent(shaft_.normalized(), _shaft);
  QRect _tip; map_from_parent(tip_.normalized(), _tip);
 
+ result.color = fill_color_;
+ result.xscale = xscale_;
+ result.yscale = yscale_;
  result.corner_pair_direction = (s1) current_corner_pair_direction_;
  result.shaft_corner = _shaft.topLeft();
  result.shaft_width = _shaft.height();
@@ -382,12 +535,28 @@ void Rotateable_Arrow_Annotation::ntxh_data(NTXH_Data& result)
  result.rotation_center = mapped_rotation_center_;
  result.shaft_offset = shaft_offset_;
  result.shaft_offset_delta = shaft_offset_delta_;
+ result.xtranslate = xtranslate_;
+ result.ytranslate = ytranslate_;
+ result.color = fill_color_;
 }
 
-void Rotateable_Arrow_Annotation::as_polygon(QPolygonF& result)
+void Rotateable_Arrow_Annotation::as_polygon(QPolygonF& result, NTXH_Data* nd)
 {
- QRect _shaft; map_from_parent(shaft_.normalized(), _shaft);
- QRect _tip; map_from_parent(tip_.normalized(), _tip);
+ QRect _shaft, _tip;
+
+ r8 xscale = get_xscale();
+ r8 yscale = get_yscale();
+
+ if(nd)
+ {
+  _shaft = shaft_.toRect();
+  _tip = tip_.toRect();
+ }
+ else
+ {
+  map_from_parent(shaft_.normalized(), _shaft);
+  map_from_parent(tip_.normalized(), _tip);
+ }
 
  s1 cpd = (current_corner_pair_direction_ & Corner_Pair_Directions::Direction_Only);
 
@@ -532,11 +701,30 @@ void Rotateable_Arrow_Annotation::as_polygon(QPolygonF& result)
  }
  QPolygonF poly(points);
 
+ if(nd)
+ {
+  if( (xscale != 1) || (yscale != 1) )
+  {
+   poly = QTransform().translate(mapped_rotation_center_.x(), mapped_rotation_center_.y())
+     .scale(xscale, yscale).translate(-mapped_rotation_center_.x(), -mapped_rotation_center_.y())
+     .map(poly);
+  }
+ }
+
  if(current_corner_pair_direction_ & Corner_Pair_Directions::Third_or_Fourth_Phase)
  {
   poly = QTransform().translate(mapped_rotation_center_.x(), mapped_rotation_center_.y())
     .rotate(rotation_).translate(-mapped_rotation_center_.x(), -mapped_rotation_center_.y())
     .map(poly);
+ }
+
+ if(nd)
+ {
+  if(xtranslate_  || ytranslate_)
+  {
+   poly = QTransform().translate(xtranslate_, ytranslate_)
+     .map(poly);
+  }
  }
 
  result = poly;

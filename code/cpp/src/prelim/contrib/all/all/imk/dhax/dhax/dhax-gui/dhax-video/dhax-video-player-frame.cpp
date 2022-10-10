@@ -45,6 +45,7 @@ void show_hide_show(DHAX_Video_Annotation* dva)
 
 
 INIT_SHOW_HIDE(QGraphicsTextItem)
+INIT_SHOW_HIDE(QGraphicsEllipseItem)
 
 
 DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
@@ -269,9 +270,10 @@ void DHAX_Video_Player_Frame::handle_video_frame(const QVideoFrame& qvf)
 
  if(annotation_set_)
  {
-  if(void* edata = annotation_set_->get_data_by_end_frame(current_frame_count_))
+  QPair<void*, void*> pr = annotation_set_->get_data_by_end_frame(current_frame_count_);
+  if(pr.second)
   {
-   QGraphicsTextItem_show_hide->hide(edata);
+   ((_show_hide*)pr.first)->hide(pr.second);
   }
 
   DHAX_Video_Annotation* dva = annotation_set_->get_annotation_by_start_frame(current_frame_count_);
@@ -318,26 +320,62 @@ void DHAX_Video_Player_Frame::handle_video_frame(const QVideoFrame& qvf)
 void* DHAX_Video_Player_Frame::make_scene_text_annotation(DHAX_Video_Annotation* dva)
 {
  QGraphicsTextItem* result = graphics_scene_->addText(dva->text());
- annotation_set_->set_end_frame_data(dva->ending_frame_number(), result);
  result->setPos(dva->corner_position());
  result->setHtml(dva->html_text());
  dva->set_scene_data(result);
  dva->set_scene_type_data(QGraphicsTextItem_show_hide);
+ annotation_set_->set_end_frame_data(dva->ending_frame_number(),
+   //QGraphicsTextItem_show_hide,
+   *dva);
  return result;
 }
 
+void* DHAX_Video_Player_Frame::make_scene_circled_text_annotation(DHAX_Video_Annotation* dva)
+{
+ QGraphicsSimpleTextItem* ti = graphics_scene_->addSimpleText(dva->text());
+ ti->setPos(dva->corner_position());
+ ti->setText(dva->text());
+
+ QRectF qrf(0, 0, annotation_set_->circled_text_default_width(),
+   annotation_set_->circled_text_default_width());
+
+ qrf.moveCenter(dva->corner_position());
+
+ QBrush qbr(annotation_set_->circled_text_default_background_color());
+ QPen qpen(QBrush(annotation_set_->circled_text_default_outline_color()),
+   annotation_set_->circled_text_default_width());
+
+ QGraphicsEllipseItem* result = graphics_scene_->addEllipse(qrf, qpen, qbr);
+
+ ti->setParentItem(result);
+
+ dva->set_scene_data(result);
+ dva->set_scene_type_data(QGraphicsEllipseItem_show_hide);
+
+ annotation_set_->set_end_frame_data(dva->ending_frame_number(),
+   //?QGraphicsEllipseItem_show_hide,
+   *dva);
+
+ return result;
+}
 
 void* DHAX_Video_Player_Frame::make_scene_arrow_annotation(DHAX_Video_Annotation* dva)
 {
  QByteArray qba = QByteArray::fromBase64(dva->data64().trimmed().toLatin1());
+ QString kv_text = dva->kv_text();
 
- Rotateable_Arrow_Annotation raa(qba);
+ Rotateable_Arrow_Annotation raa = kv_text.isEmpty()?
+   Rotateable_Arrow_Annotation(qba) : Rotateable_Arrow_Annotation(kv_text);
 
  const QPolygonF& qpf = raa.rendered_polygon();
 
- QBrush qbr(Qt::red);
+ QBrush qbr(raa.fill_color());
+
+ qDebug() << raa.fill_color();
+ qDebug() << raa.get_xscale();
 
  QGraphicsPolygonItem* result = graphics_scene_->addPolygon(qpf, Qt::NoPen, qbr);
+// result->setScale(raa.get_scale());
  return result;
 }
 
@@ -345,6 +383,8 @@ void* DHAX_Video_Player_Frame::make_scene_annotation(DHAX_Video_Annotation* dva)
 {
  if(dva->kind() == "text")
    return make_scene_text_annotation(dva);
+ else if(dva->kind() == "circled")
+   return make_scene_circled_text_annotation(dva);
  else if(dva->kind() == "Rotateable_Arrow_Annotation")
   return make_scene_arrow_annotation(dva);
 

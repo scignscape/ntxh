@@ -114,6 +114,8 @@ class DHAX_Video_Player_Frame : public QFrame
  void* make_scene_annotation(DHAX_Video_Annotation* dva);
  void* make_scene_text_annotation(DHAX_Video_Annotation* dva);
  void* make_scene_arrow_annotation(DHAX_Video_Annotation* dva);
+ void* make_scene_circled_text_annotation(DHAX_Video_Annotation* dva);
+
 
  template<typename T>
  T* make_or_show_scene_annotation(DHAX_Video_Annotation* dva);

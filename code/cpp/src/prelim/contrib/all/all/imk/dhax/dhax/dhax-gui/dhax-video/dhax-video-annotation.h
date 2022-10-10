@@ -38,6 +38,7 @@ class DHAX_Video_Annotation
  void* scene_type_data_;
 
  QString data64_;
+ QString kv_text_;
 
 public:
 
@@ -51,6 +52,7 @@ public:
  ACCESSORS(QString ,inner_style_sheet)
  ACCESSORS(QPointF ,corner_position)
  ACCESSORS(QString ,html_text)
+ ACCESSORS(QString ,kv_text)
 
  ACCESSORS(void* ,scene_data)
  ACCESSORS(void* ,scene_type_data)

@@ -1028,7 +1028,7 @@ void DHAX_Image_Scene_Item::generate_annotation_ntxh()
 
  QPoint pos = idc->current_multistep_annotation()->contentsRect().topLeft();
 
- QMessageBox* mbox = new QMessageBox(this);
+ QMessageBox* mbox = new QMessageBox(containing_image_view_);
 
 // mbox->setP
  mbox->setWindowTitle("Annotation NTXH");
@@ -1038,13 +1038,57 @@ void DHAX_Image_Scene_Item::generate_annotation_ntxh()
  mbox->setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
  mbox->setDefaultButton(QMessageBox::Ok);
 
-// QPushButton* copy_button = new QPushButton("Copy", mbox);
-// QGridLayout* layout = (QGridLayout*)mbox->layout();
-// layout->addWidget(copy_button, layout->rowCount(), 0, 1, layout->columnCount());
-// QObject::connect(copy_button, &QPushButton::clicked, [ntxh]()
+ QPushButton* copy_button = new QPushButton("Copy", mbox);
+ copy_button->setEnabled(false);
+ QGridLayout* layout = (QGridLayout*)mbox->layout();
+ //QPushButton* btn = qobject_cast<QPushButton*>(
+
+ if(QLayoutItem* qli = layout->itemAtPosition(2, 0))
+ {
+  if(QWidget* qw = qli->widget())
+  {
+   if(QDialogButtonBox* bb = qobject_cast<QDialogButtonBox*>(qw))
+   {
+    if(QPushButton* show_details = qobject_cast<QPushButton*>(bb->buttons().last()))
+    {
+     qDebug() << show_details->text();
+     QObject::connect(show_details, &QPushButton::clicked, [copy_button]()
+     {
+      copy_button->setEnabled(true);
+     });
+
+    }
+   }
+  }
+ }
+
+
+// for(int i = 0; i < 4; ++i)
 // {
-//  QGuiApplication::clipboard()->setText(ntxh);
-// });
+//  for(int j = 0; j < 4; ++j)
+//  {
+//   qDebug() << " i j = " << i << " " << j;
+//   QLayoutItem* qli = layout->itemAtPosition(i, j); //->widget();
+//   if(qli)
+//   {
+//    QWidget* qw = qli->widget();
+//    if(qw)
+//      qDebug() << qw->metaObject()->className();
+//   }
+//  }
+// }
+
+
+// if(btn)
+// {
+//  qDebug() << btn -> text();
+// }
+
+ layout->addWidget(copy_button, layout->rowCount() - 1, layout->columnCount());
+ QObject::connect(copy_button, &QPushButton::clicked, [ntxh]()
+ {
+  QGuiApplication::clipboard()->setText(ntxh);
+ });
 
  mbox->setAttribute(Qt::WA_DeleteOnClose); // delete pointer after close
 //? mbox->setModal(false);

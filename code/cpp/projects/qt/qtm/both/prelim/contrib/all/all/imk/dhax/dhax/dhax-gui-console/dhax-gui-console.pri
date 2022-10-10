@@ -77,6 +77,10 @@ SOURCES += \
 DEFINES += HAVE_STD_STRING
 DEFINES += HAVE_STL_STRING
 
+LIBS += -L$$TARGETSDIR  \
+  -lntxh  -lntxh-parser -lngml-sdi
+
+
 
 LIBS += -L$$TARGETSDIR -lxcsd-1d -lxcsd-2d -lxcsd
 
