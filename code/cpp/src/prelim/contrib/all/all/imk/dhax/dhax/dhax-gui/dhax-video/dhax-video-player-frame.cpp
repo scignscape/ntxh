@@ -433,15 +433,15 @@ void DHAX_Video_Player_Frame::reset_annotation()
 void DHAX_Video_Player_Frame::load_annotations()
 {
  pause();
- init_annotations();
+// init_annotations();
 // qDebug( ) << "init_aaa";
  //resume();
 
-// QString annotation_file = QFileDialog::getOpenFileName(this,
-//   "Select annotation file (.ntxh format)", ROOT_FOLDER "/..",
-//   "*.ntxh");
+ QString annotation_file = QFileDialog::getOpenFileName(this,
+   "Select annotation file (.ntxh format)", ROOT_FOLDER "/..",
+   "*.ntxh");
 
-  QString annotation_file = "/home/nlevisrael/gits/ctg-temp/video-annotations/t1.ntxh";
+//  QString annotation_file = "/home/nlevisrael/gits/ctg-temp/video-annotations/t1.ntxh";
 
  if(!annotation_file.isEmpty())
  {
@@ -495,11 +495,10 @@ void DHAX_Video_Player_Frame::halt()
 
 void DHAX_Video_Player_Frame::play_local_video(QString file_path)
 {
- load_annotations();
+ init_annotations();
 
  current_path_ = file_path;
-//
- current_path_ = "/home/nlevisrael/gits/ctg-temp/stella/videos/test.mkv";
+// current_path_ = "/home/nlevisrael/gits/ctg-temp/stella/videos/test.mkv";
 
 
  current_url_ =  QUrl::fromLocalFile(current_path_);
