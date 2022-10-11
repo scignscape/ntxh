@@ -288,9 +288,6 @@ void DHAX_Video_Player_Frame::handle_video_frame(const QVideoFrame& qvf)
    {
     qgi = make_or_show_scene_annotation<QGraphicsItem>(dva);
    }
-//   graphics_scene_->update();
-//   graphics_view_->repaint();
-//   update();
   }
  }
 
@@ -449,12 +446,6 @@ void DHAX_Video_Player_Frame::load_annotations()
  if(!annotation_file.isEmpty())
  {
   annotation_set_->load_annotation_file(annotation_file);
-
-  if( navigation_->is_full_size_mode() )
-    reposition_larger_annotations_rect_item();
-  else
-    reposition_smaller_annotations_rect_item();
-
  }
 }
 
@@ -507,8 +498,8 @@ void DHAX_Video_Player_Frame::play_local_video(QString file_path)
  init_annotations();
 
  //current_path_ = file_path;
-//
 // current_path_ = "/home/nlevisrael/gits/ctg-temp/stella/videos/test.mkv";
+//
  current_path_ = "/home/nlevisrael/gits/ctg-temp/video-annotations/back/bus.mkv";
 
  current_url_ =  QUrl::fromLocalFile(current_path_);
@@ -585,6 +576,7 @@ QRect DHAX_Video_Player_Frame::get_web_view_geometry()
 
 
 
+#ifdef HIDE
 void DHAX_Video_Player_Frame::confirm_video_size()
 {
  QColor c (200, 100, 10, 100);
@@ -614,28 +606,25 @@ void DHAX_Video_Player_Frame::confirm_video_size()
  qDebug() << " SZ2: " << sz;
 
 
- double ratio, new_width, new_height, left, top;
+ double ratio, new_width, new_height, left, top; // h_center, v_center;
 
  if(video_size_.width() > video_size_.height())
  {
-  ratio = (double) video_size_.height() / video_size_.width();
-  new_width = sz.width();
-  new_height = new_width * ratio;
-  left = video_item_->pos().x();
-  top = (sz.height() / 2) - (new_height / 2);
+   ratio = video_size_.height() > video_size_.width();
+
  }
  else
  {
-  ratio = (double) video_size_.width() / video_size_.height();
-  new_height = sz.height();
-  new_width = new_height * ratio;
-  left = (sz.width() / 2) - (new_width / 2);
-  top = video_item_->pos().y();
+   ratio  = (double) video_size_.width() / video_size_.height();
+   new_height = sz.height();
+   new_width = sz.height() * ratio;
+   left = (sz.width() / 2) - (new_width / 2);
+   top = video_item_->pos().y();
+//   h_center = sz.width() / 2;
  }
 
-// double h_center = sz.width() / 2;
-
  annotation_set_->set_smaller_video_size(QSizeF(new_width, new_height));
+// annotation_set_->set_smaller_video_size(QSizeF(new_width, sz.height()));
  annotation_set_->set_larger_video_size(video_size_);
  annotation_set_->check_ratios();
 
@@ -710,14 +699,16 @@ void DHAX_Video_Player_Frame::confirm_video_size()
 
 
 }
+#endif
 
 
-#ifdef HIDE
+
+
+
+
 void DHAX_Video_Player_Frame::confirm_video_size()
 {
  QColor c (200, 100, 10, 100);
-
- navigation_->enter_smaller_size_mode();
 
 // {
 //  QBrush qbr(c);
@@ -744,7 +735,16 @@ void DHAX_Video_Player_Frame::confirm_video_size()
  qDebug() << " SZ2: " << sz;
 
 
- double ratio = (double) video_size_.width() / video_size_.height();
+ double ratio;
+
+ if(video_size_.width() > video_size_.height())
+ {
+   ratio = video_size_.height() > video_size_.width();
+
+
+ }
+ else
+   ratio  = (double) video_size_.width() / video_size_.height();
 
  double new_width = sz.height() * ratio;
 
@@ -823,12 +823,10 @@ void DHAX_Video_Player_Frame::confirm_video_size()
  qDebug() << " left half: " << left_half;
  qDebug() << " right half: " << right_half;
 
-
  Q_EMIT video_size_established(QSize(new_width, sz.height() ));
 
 
 }
-#endif
 
 void DHAX_Video_Player_Frame::reset_graphics_scene_rect()
 {
@@ -838,9 +836,7 @@ void DHAX_Video_Player_Frame::reset_graphics_scene_rect()
 
 void DHAX_Video_Player_Frame::reset_to_smaller_size()
 {
- navigation_->enter_smaller_size_mode();
-
-// annotations_rect_item_->setScale(1);
+ annotations_rect_item_->setScale(1);
  reposition_smaller_annotations_rect_item();
 
  if(full_size_rect_item_)
@@ -869,8 +865,6 @@ void DHAX_Video_Player_Frame::reset_to_smaller_size()
 
 void DHAX_Video_Player_Frame::reset_to_full_size()
 {
- navigation_->enter_full_size_mode();
-
  qDebug() << " ==== " << annotation_set_->sizes_ratio_x()
            << " --- " << annotation_set_->sizes_ratio_y() ;
 

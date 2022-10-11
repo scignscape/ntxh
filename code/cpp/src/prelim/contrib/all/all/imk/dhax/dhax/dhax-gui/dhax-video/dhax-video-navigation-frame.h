@@ -38,12 +38,21 @@ class DHAX_Video_Navigation_Frame : public QFrame
  QHBoxLayout* bottom_layout_;
  QHBoxLayout* main_layout_;
 
+ s1 current_mode_;
+
 public:
 
  DHAX_Video_Navigation_Frame(QWidget* parent = nullptr);
 
  void set_play_button_to_resume();
  void set_play_button_to_play();
+
+ void enter_full_size_mode();
+ void enter_smaller_size_mode();
+
+ bool is_full_size_mode();
+
+
  //?sigma(resume_button_)->make_resume_button();
 
 Q_SIGNALS:

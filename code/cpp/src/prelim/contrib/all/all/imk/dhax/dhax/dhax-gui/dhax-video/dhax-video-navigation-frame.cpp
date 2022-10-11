@@ -13,7 +13,7 @@
 #include <QLabel>
 
 DHAX_Video_Navigation_Frame::DHAX_Video_Navigation_Frame(QWidget* parent)
-  :  QFrame(parent)
+  :  QFrame(parent), current_mode_(0)
 {
  main_layout_ = new QHBoxLayout;
 
@@ -105,6 +105,25 @@ DHAX_Video_Navigation_Frame::DHAX_Video_Navigation_Frame(QWidget* parent)
  connect(grab_frame_button_, &QPushButton::clicked,
    this, &DHAX_Video_Navigation_Frame::grab_frame_requested);
 
+}
+
+void DHAX_Video_Navigation_Frame::enter_full_size_mode()
+{
+ current_mode_ = 1;
+ full_size_button_->setEnabled(false);
+ smaller_size_button_->setEnabled(true);
+}
+
+void DHAX_Video_Navigation_Frame::enter_smaller_size_mode()
+{
+ current_mode_ = -1;
+ full_size_button_->setEnabled(true);
+ smaller_size_button_->setEnabled(false);
+}
+
+bool DHAX_Video_Navigation_Frame::is_full_size_mode()
+{
+ return (current_mode_ == 1);
 }
 
 

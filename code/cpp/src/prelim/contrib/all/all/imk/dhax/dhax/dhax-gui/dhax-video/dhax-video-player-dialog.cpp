@@ -151,7 +151,7 @@ void DHAX_Video_Player_Dialog::reset_web_view_geometry(QResizeEvent* resize_even
 
  current_web_view_geometry_ = player_->get_web_view_geometry();
 
- qDebug() << "current wvg: " << current_web_view_geometry_;
+//? qDebug() << "current wvg: " << current_web_view_geometry_;
 
  if(!web_view_geometry_rubber_band_)
  {
