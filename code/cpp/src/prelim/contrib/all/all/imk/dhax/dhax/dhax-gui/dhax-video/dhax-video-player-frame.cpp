@@ -320,6 +320,7 @@ void DHAX_Video_Player_Frame::handle_video_frame(const QVideoFrame& qvf)
 void* DHAX_Video_Player_Frame::make_scene_text_annotation(DHAX_Video_Annotation* dva)
 {
  QGraphicsTextItem* result = graphics_scene_->addText(dva->text());
+ result->setParentItem(annotations_rect_item_);
  result->setPos(dva->corner_position());
  result->setHtml(dva->html_text());
  dva->set_scene_data(result);
@@ -348,6 +349,7 @@ void* DHAX_Video_Player_Frame::make_scene_circled_text_annotation(DHAX_Video_Ann
  QGraphicsEllipseItem* result = graphics_scene_->addEllipse(qrf, qpen, qbr);
 
  ti->setParentItem(result);
+ result->setParentItem(annotations_rect_item_);
 
  dva->set_scene_data(result);
  dva->set_scene_type_data(QGraphicsEllipseItem_show_hide);
@@ -403,6 +405,14 @@ void DHAX_Video_Player_Frame::init_annotations()
  annotation_set_ = new DHAX_Video_Annotation_Set;
 //? annotation_set_->load_sample_annotations();
  qDebug() << "annotation_st" << *annotation_set_;
+
+ annotations_rect_item_ = graphics_scene_->addRect(0,0,0,0,Qt::NoPen, Qt::NoBrush);
+ annotations_rect_item_->setZValue(1);
+
+// annotations_rect_item_->setPen(Qt::NoPen);
+// annotations_rect_item_->setBrush(Qt::NoBrush);
+
+// annotations_rect_item_->setScale(1.3);
 }
 
 
@@ -487,8 +497,8 @@ void DHAX_Video_Player_Frame::play_local_video(QString file_path)
 {
  load_annotations();
 
-// current_path_ = file_path;
-
+ current_path_ = file_path;
+//
  current_path_ = "/home/nlevisrael/gits/ctg-temp/stella/videos/test.mkv";
 
 
@@ -529,6 +539,24 @@ void DHAX_Video_Player_Frame::confirm_video_size()
 {
  QColor c (200, 100, 10, 100);
 
+// {
+//  QBrush qbr(c);
+//  QGraphicsEllipseItem* el1 = graphics_scene_->addEllipse(0, 0, 20, 20, QPen(), qbr);
+//  el1->setParentItem(annotations_rect_item_);
+//  QGraphicsEllipseItem* el2 = graphics_scene_->addEllipse(40, 40, 20, 20, QPen(), qbr);
+//  el2->setParentItem(annotations_rect_item_);
+//  QGraphicsEllipseItem* el3 = graphics_scene_->addEllipse(80, 80, 20, 20, QPen(), qbr);
+//  el3->setParentItem(annotations_rect_item_);
+//  QGraphicsEllipseItem* el4 = graphics_scene_->addEllipse(120, 120, 20, 20, QPen(), qbr);
+//  el4->setParentItem(annotations_rect_item_);
+
+//  QGraphicsEllipseItem* el5 = graphics_scene_->addEllipse(120, 220, 20, 20, QPen(), qbr);
+//  el5->setParentItem(annotations_rect_item_);
+
+
+// }
+
+
  qDebug() << " SR2: " << graphics_scene_->sceneRect();
  qDebug() << " IBR2: " << graphics_scene_->itemsBoundingRect();
 
@@ -544,10 +572,22 @@ void DHAX_Video_Player_Frame::confirm_video_size()
 
  double h_center = sz.width() / 2;
 
- QRectF video_rect(left, video_item_->pos().y(), new_width, sz.height());
+ annotation_set_->set_smaller_video_size(QSizeF(new_width, sz.height()));
+ annotation_set_->set_larger_video_size(video_size_);
+ annotation_set_->check_ratios();
 
- smaller_size_rect_item_ = graphics_scene_->addRect(left,
-   video_item_->pos().y(),new_width,sz.height(),QPen(QBrush(c), 4));
+
+ QRectF video_rect(left, video_item_->pos().y(), new_width, sz.height());
+ video_top_left_ = video_rect.topLeft();
+
+ annotations_rect_item_->setRect(video_rect.adjusted(2,2,-2,-2));
+
+// smaller_size_rect_item_ = graphics_scene_->addRect(left,
+//   video_item_->pos().y(),new_width,sz.height(),QPen(QBrush(c), 4));
+
+ smaller_size_rect_item_ = graphics_scene_->addRect(video_rect, QPen(QBrush(c), 4),
+   Qt::NoBrush);
+
 
  smaller_size_rect_item_->setParentItem(video_item_);
 
@@ -589,6 +629,8 @@ void DHAX_Video_Player_Frame::confirm_video_size()
  graphics_scene_->setSceneRect(framed_scene_rect);
  initial_smaller_scene_rect_ = framed_scene_rect;
 
+ reposition_smaller_annotations_rect_item();
+
  qDebug() << " SR4: " << graphics_scene_->sceneRect();
  qDebug() << " IBR4: " << graphics_scene_->itemsBoundingRect();
 
@@ -611,6 +653,9 @@ void DHAX_Video_Player_Frame::reset_graphics_scene_rect()
 
 void DHAX_Video_Player_Frame::reset_to_smaller_size()
 {
+ annotations_rect_item_->setScale(1);
+ reposition_smaller_annotations_rect_item();
+
  if(full_size_rect_item_)
    graphics_scene_->removeItem(full_size_rect_item_);
  if(smaller_size_rect_item_)
@@ -634,6 +679,39 @@ void DHAX_Video_Player_Frame::reset_to_smaller_size()
 
 void DHAX_Video_Player_Frame::reset_to_full_size()
 {
+ qDebug() << " ==== " << annotation_set_->sizes_ratio_x()
+           << " --- " << annotation_set_->sizes_ratio_y() ;
+
+
+// annotations_rect_item_->setTransform(annotation_set_->sizes_ratio_y());
+
+// annotations_rect_item_->setScale(annotation_set_->sizes_ratio_y());
+ reposition_larger_annotations_rect_item();
+
+
+// QColor c1 (250, 100, 210, 200);
+// {
+//  QBrush qbr(c1);
+//  QGraphicsEllipseItem* el1 = graphics_scene_->addEllipse(20, 20, 20, 20, QPen(), qbr);
+//  el1->setParentItem(annotations_rect_item_);
+//  QGraphicsEllipseItem* el2 = graphics_scene_->addEllipse(60, 60, 20, 20, QPen(), qbr);
+//  el2->setParentItem(annotations_rect_item_);
+//  QGraphicsEllipseItem* el3 = graphics_scene_->addEllipse(100, 100, 20, 20, QPen(), qbr);
+//  el3->setParentItem(annotations_rect_item_);
+//  QGraphicsEllipseItem* el4 = graphics_scene_->addEllipse(140, 140, 20, 20, QPen(), qbr);
+//  el4->setParentItem(annotations_rect_item_);
+
+//  QGraphicsEllipseItem* el5 = graphics_scene_->addEllipse(140, 220, 20, 20, QPen(), qbr);
+//  el5->setParentItem(annotations_rect_item_);
+
+//  QGraphicsEllipseItem* el6 = graphics_scene_->addEllipse(160, 1270, 20, 20, QPen(), QBrush(Qt::red));
+
+// }
+
+
+// annotations_rect_item_->setScale(annotation_set_->sizes_ratio_x());
+// qDebug() << " ===== MATRIX =====\n" << annotations_rect_item_->transform();
+
 // qDebug() << "new size: " << video_size_;
 // QSize sza = video_size_.grownBy(QMargins(5,5,5,5));
 // setMaximumWidth(sza.width());
@@ -680,6 +758,30 @@ void DHAX_Video_Player_Frame::reset_to_full_size()
  }
 
 }
+
+void DHAX_Video_Player_Frame::reposition_smaller_annotations_rect_item()
+{
+ QTransform tr; tr.scale(1, 1);
+ annotations_rect_item_->setTransform(tr);
+
+ annotations_rect_item_->setPos(video_top_left_ +
+   QPoint(annotation_set_->smaller_size_x_translation(),
+          annotation_set_->smaller_size_y_translation()));
+}
+
+void DHAX_Video_Player_Frame::reposition_larger_annotations_rect_item()
+{
+ QTransform tr; tr.scale(annotation_set_->sizes_ratio_x() *
+   annotation_set_->sizes_ratio_x_adjustment(),
+   annotation_set_->sizes_ratio_y() *
+   annotation_set_->sizes_ratio_y_adjustment());
+
+ annotations_rect_item_->setTransform(tr);
+
+ annotations_rect_item_->setPos(
+   annotation_set_->larger_size_x_translation(), annotation_set_->larger_size_y_translation());
+}
+
 
 void DHAX_Video_Player_Frame::recenter()
 {

@@ -48,6 +48,8 @@ DHAX_Video_Player_Dialog::DHAX_Video_Player_Dialog(QWidget* parent)
  button_box_->addButton(button_suspend_, QDialogButtonBox::ActionRole);
  button_box_->addButton(button_cancel_close_, QDialogButtonBox::RejectRole);
 
+ button_box_->setContentsMargins(2,0,0,4);
+
  //?connect(button_proceed_, SIGNAL(clicked()), this, SLOT(proceed()));
 // connect(button_box_, SIGNAL(accepted()), this, SLOT(accept()));
 // connect(button_box_, SIGNAL(rejected()), this, SLOT(close()));

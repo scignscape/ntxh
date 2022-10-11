@@ -38,6 +38,22 @@ class DHAX_Video_Annotation_Set : public QMap<u4, DHAX_Video_Annotation>
  u1 circled_text_default_width_;
  u1 circled_text_default_border_;
 
+ QSizeF smaller_video_size_;
+ QSizeF larger_video_size_;
+
+
+ r8 sizes_ratio_x_;
+ r8 sizes_ratio_y_;
+
+ r8 sizes_ratio_x_adjustment_;
+ r8 sizes_ratio_y_adjustment_;
+
+ s2 smaller_size_x_translation_;
+ s2 smaller_size_y_translation_;
+
+ s2 larger_size_x_translation_;
+ s2 larger_size_y_translation_;
+
 public:
 
  DHAX_Video_Annotation_Set();
@@ -49,6 +65,29 @@ public:
 
  ACCESSORS(r4 ,circled_text_default_font_size)
  ACCESSORS(u1 ,circled_text_default_width)
+
+ ACCESSORS(QSizeF ,smaller_video_size)
+ ACCESSORS(QSizeF ,larger_video_size)
+
+ ACCESSORS(s2 ,smaller_size_x_translation)
+ ACCESSORS(s2 ,smaller_size_y_translation)
+
+ ACCESSORS(s2 ,larger_size_x_translation)
+ ACCESSORS(s2 ,larger_size_y_translation)
+
+ ACCESSORS(r8 ,sizes_ratio_x)
+ ACCESSORS(r8 ,sizes_ratio_y)
+
+
+ ACCESSORS(r8 ,sizes_ratio_x_adjustment)
+ ACCESSORS(r8 ,sizes_ratio_y_adjustment)
+
+
+ void check_ratios()
+ {
+  sizes_ratio_x_ = larger_video_size_.width() / smaller_video_size_.width();
+  sizes_ratio_y_ = larger_video_size_.height() / smaller_video_size_.height();
+ }
 
 
  DHAX_Video_Annotation* get_annotation_by_start_frame(u4 key);
@@ -68,6 +107,7 @@ public:
  void parse_circled_text_annotation_hypernode(NTXH_Graph& g, hypernode_type* h);
  void parse_text_annotation_hypernode(NTXH_Graph& g, hypernode_type* h);
  void parse_shape_annotation_hypernode(NTXH_Graph& g, hypernode_type* h);
+ void parse_annotation_settings_hypernode(NTXH_Graph& g, hypernode_type* h);
 
 };
 

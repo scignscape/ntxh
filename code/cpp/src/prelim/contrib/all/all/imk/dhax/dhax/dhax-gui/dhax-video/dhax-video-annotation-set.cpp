@@ -20,11 +20,28 @@
 
 DHAX_Video_Annotation_Set::DHAX_Video_Annotation_Set()
   :  circled_text_default_font_size_(12),
-    circled_text_default_width_(0), circled_text_default_border_(2)
+    circled_text_default_width_(0), circled_text_default_border_(2),
+    sizes_ratio_x_(0), sizes_ratio_y_(0),
+    sizes_ratio_x_adjustment_(0), sizes_ratio_y_adjustment_(0)
 {
 
 }
 
+
+void DHAX_Video_Annotation_Set::parse_annotation_settings_hypernode(NTXH_Graph& g, hypernode_type* h)
+{
+ g.get_sfsr(h, {{1, 6}}, [this](QVector<QPair<QString, void*>>& prs)
+ {
+  sizes_ratio_x_adjustment_ = prs[0].first.toDouble();
+  sizes_ratio_y_adjustment_ = prs[1].first.toDouble();
+
+  smaller_size_x_translation_ = prs[2].first.toShort();
+  smaller_size_y_translation_ = prs[3].first.toShort();
+
+  larger_size_x_translation_ = prs[4].first.toShort();
+  larger_size_y_translation_ = prs[5].first.toShort();
+ });
+}
 
 void DHAX_Video_Annotation_Set::parse_text_annotation_hypernode(NTXH_Graph& g, hypernode_type* h)
 {
@@ -118,17 +135,40 @@ void DHAX_Video_Annotation_Set::parse_shape_annotation_hypernode(NTXH_Graph& g, 
 void DHAX_Video_Annotation_Set::read_ntxh_hypernode(NTXH_Graph& g, hypernode_type* h)
 {
  QString ty = h->type_descriptor().first;
- if(ty == "Text_Annotation")
-   parse_text_annotation_hypernode(g, h);
 
- else if(ty == "Shape_Annotation")
-   parse_shape_annotation_hypernode(g, h);
+// typedef void (DHAX_Video_Annotation_Set::*fn_type)();
+// fn_type fn = &DHAX_Video_Annotation_Set::parse_text_annotation_hypernode;
 
- else if(ty == "Circled_Text_Default")
-   parse_circled_text_default_hypernode(g, h);
+ static QMap<QString, void (DHAX_Video_Annotation_Set::*)
+   (NTXH_Graph&, hypernode_type*)> static_map
+ {
+#define TEMP_MACRO(x, y) {#x, &DHAX_Video_Annotation_Set::y},
+  TEMP_MACRO(Text_Annotation, parse_text_annotation_hypernode)
+  TEMP_MACRO(Shape_Annotation, parse_shape_annotation_hypernode)
+  TEMP_MACRO(Circled_Text_Default,  parse_circled_text_default_hypernode)
+  TEMP_MACRO(Circled_Text_Annotation,  parse_circled_text_annotation_hypernode)
+  TEMP_MACRO(Annotation_Settings,  parse_annotation_settings_hypernode)
+#undef TEMP_MACRO
+ };
 
- else if(ty == "Circled_Text_Annotation")
-   parse_circled_text_annotation_hypernode(g, h);
+ auto it = static_map.find(ty);
+ if(it != static_map.end())
+   (this->**it)(g, h);
+
+// if(ty == "Text_Annotation")
+//   parse_text_annotation_hypernode(g, h);
+
+// else if(ty == "Shape_Annotation")
+//   parse_shape_annotation_hypernode(g, h);
+
+// else if(ty == "Circled_Text_Default")
+//   parse_circled_text_default_hypernode(g, h);
+
+// else if(ty == "Circled_Text_Annotation")
+//   parse_circled_text_annotation_hypernode(g, h);
+
+// else if(ty == "Annotation_Settings")
+//   parse_annotation_settings_hypernode(g, h);
 
 }
 

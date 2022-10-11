@@ -94,6 +94,8 @@ class DHAX_Video_Player_Frame : public QFrame
  QGraphicsRectItem* full_size_rect_item_;
  QGraphicsRectItem* smaller_size_rect_item_;
 
+ QGraphicsRectItem* annotations_rect_item_;
+
  u2 replay_count_;
 
  QSize last_larger_video_size_;
@@ -119,6 +121,10 @@ class DHAX_Video_Player_Frame : public QFrame
 
  template<typename T>
  T* make_or_show_scene_annotation(DHAX_Video_Annotation* dva);
+
+ QPointF video_top_left_;
+ void reposition_larger_annotations_rect_item();
+ void reposition_smaller_annotations_rect_item();
 
 public:
 
