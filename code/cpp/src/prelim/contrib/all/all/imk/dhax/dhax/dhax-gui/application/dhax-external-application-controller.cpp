@@ -34,10 +34,13 @@ USING_KANS(TextIO)
 
 #include <QProgressDialog>
 
+#include "dhax-video/dhax-video-player-dialog.h"
+
 
 DHAX_External_Application_Controller::DHAX_External_Application_Controller()
   :  application_main_window_(nullptr),
-     application_controller_(nullptr), current_wgl_dialog_(nullptr)
+     application_controller_(nullptr),
+     current_wgl_dialog_(nullptr) //, current_video_player_dialog_(nullptr)
 {
  save_area_folder_ = ROOT_FOLDER "/../save-area";
 }
@@ -101,6 +104,31 @@ void DHAX_External_Application_Controller::test_ssr_datagram()
   qDebug() << "rect = " << rect;
   application_controller_->send_ssr_reset(rect);
  }
+ else if(DHAX_Video_Player_Dialog* dlg =
+   application_controller_->current_video_player_dialog())
+ {
+  rect = dlg->current_web_view_geometry();
+  if(dlg->first_video_capture_position().isNull())
+  {
+   dlg->first_video_capture_position() = rect;
+   QObject::connect(dlg,
+     &DHAX_Video_Player_Dialog::web_view_geometry_updated,
+     [this, dlg]()
+   {
+    QRect r = dlg->current_web_view_geometry();
+    if(!r.isEmpty())
+    {
+     qDebug() << "!r = " << r;
+     application_controller_->send_ssr_reset(r);
+    }
+   });
+  }
+
+  qDebug() << "rect = " << rect;
+  application_controller_->send_ssr_reset(rect);
+ }
+
+
  else
    application_controller_->send_ssr_reset("--------------");
 

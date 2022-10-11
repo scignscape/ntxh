@@ -313,7 +313,7 @@ DHAX_Application_Controller::DHAX_Application_Controller()
 //     image_scene_item_(nullptr),
 //     main_window_receiver_(nullptr),
      udp_controller_(nullptr),
-     autogen_index_(0)
+     autogen_index_(0), current_video_player_dialog_(nullptr)
 {
  check_reset_proc_class_temp_folder();
 }
@@ -932,15 +932,19 @@ void DHAX_Application_Controller::offer_to_play_video(QString text, QString file
 
 void DHAX_Application_Controller::play_video(QString file_path)
 {
- DHAX_Video_Player_Dialog* dialog = new DHAX_Video_Player_Dialog;
+ if(current_video_player_dialog_)
+   current_video_player_dialog_->deleteLater();
 
- application_main_window_->connect(dialog,
+ // //  do we need to allocate a new dialog or can we reuse?
+ current_video_player_dialog_ = new DHAX_Video_Player_Dialog;
+
+ application_main_window_->connect(current_video_player_dialog_,
    &DHAX_Video_Player_Dialog::show_video_frame_requested, [this](QString image_file_path)
  {
   load_image(image_file_path);
  });
 
- application_main_window_->connect(dialog, &QDialog::accepted, [this, dialog, file_path]()
+ application_main_window_->connect(current_video_player_dialog_, &QDialog::accepted, [this, file_path]()
  {
   QString new_path = QFileDialog::getSaveFileName(application_main_window_,
     "Select a name to save the video (or cancel to skip)", ROOT_FOLDER "/..");
@@ -949,21 +953,19 @@ void DHAX_Application_Controller::play_video(QString file_path)
   {
    QFile::copy(file_path, new_path);
   }
-  dialog->halt_and_close();
+  current_video_player_dialog_->halt_and_close();
  });
 
- application_main_window_->connect(dialog, &QDialog::rejected, [dialog]()
+ application_main_window_->connect(current_video_player_dialog_, &QDialog::rejected, [this]()
  {
-  dialog->halt_and_close();
+  current_video_player_dialog_->halt_and_close();
  });
-
-
 
 
  qDebug() << "video = " << file_path;
 
- dialog->show();
- dialog->play_local_video(file_path);
+ current_video_player_dialog_->show();
+ current_video_player_dialog_->play_local_video(file_path);
 }
 
 void DHAX_Application_Controller::play_video()

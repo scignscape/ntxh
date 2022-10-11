@@ -14,7 +14,7 @@
 
 
 DHAX_Video_Player_Dialog::DHAX_Video_Player_Dialog(QWidget* parent)
-  :  QDialog(parent)
+  :  QDialog(parent), web_view_geometry_rubber_band_(nullptr)
 {
 // setLayout(new QVBoxLayout);
 // layout()->setContentsMargins(0, 0, 0, 0);
@@ -84,6 +84,8 @@ DHAX_Video_Player_Dialog::DHAX_Video_Player_Dialog(QWidget* parent)
 //  w = qMax(w, ns.width());
 
 //  this->resize(w, h + 20);
+
+  reset_web_view_geometry(nullptr, nullptr);
  });
 
  connect(player_, &DHAX_Video_Player_Frame::full_video_size_requested,
@@ -107,6 +109,8 @@ DHAX_Video_Player_Dialog::DHAX_Video_Player_Dialog(QWidget* parent)
     resize(last_full_size_);
   }
 
+//?  reset_web_view_geometry();
+
  });
 
  connect(player_, &DHAX_Video_Player_Frame::smaller_video_size_requested,
@@ -116,6 +120,7 @@ DHAX_Video_Player_Dialog::DHAX_Video_Player_Dialog(QWidget* parent)
   resize(last_smaller_size_);
   qDebug() << " small: " << sz;
 
+//?  reset_web_view_geometry();
 //  check_adjust_size(sz, 20);
  });
 
@@ -135,6 +140,52 @@ void DHAX_Video_Player_Dialog::halt()
  player_->halt();
 }
 
+void DHAX_Video_Player_Dialog::reset_web_view_geometry(QResizeEvent* resize_event,
+  QMoveEvent* move_event)
+{
+ if(resize_event || move_event)
+ {
+  if(!web_view_geometry_rubber_band_)
+    return;
+ }
+
+ current_web_view_geometry_ = player_->get_web_view_geometry();
+
+ qDebug() << "current wvg: " << current_web_view_geometry_;
+
+ if(!web_view_geometry_rubber_band_)
+ {
+  // //  one purpose of the rubber band is for dev/debugging,
+   //    to visualize the on-screen video area.
+   //    Using this for actual users presumably
+   //    requires subclassing QRubberBand so there's
+   //    transparent or semi-transparent style options.
+  web_view_geometry_rubber_band_ = new QRubberBand(QRubberBand::Rectangle);
+  QPalette palette;
+  palette.setColor(QPalette::Active, QPalette::Highlight, QColor(60, 100, 90, 30));
+  web_view_geometry_rubber_band_->setPalette(palette);
+  // //  Don't show unless as a temporary source-code change
+   //    to visualize what's going on.
+   //  web_view_geometry_rubber_band_->show();
+ }
+
+ web_view_geometry_rubber_band_->setGeometry(current_web_view_geometry_); //.adjusted(5, 5, -5, -5));
+
+ Q_EMIT web_view_geometry_updated();
+}
+
+void DHAX_Video_Player_Dialog::resizeEvent(QResizeEvent* resize_event)
+{
+ reset_web_view_geometry(resize_event, nullptr);
+ Q_EMIT web_view_geometry_updated();
+}
+
+void DHAX_Video_Player_Dialog::moveEvent(QMoveEvent* move_event)
+{
+ reset_web_view_geometry(nullptr, move_event);
+ if(this->isVisible())
+   Q_EMIT web_view_geometry_updated();
+}
 
 void DHAX_Video_Player_Dialog::check_adjust_size(QSize sz, int height_margin)
 {

@@ -46,6 +46,7 @@
 
 #include "global-types.h"
 
+#include "accessors.h"
 
 class DHAX_Video_Navigation_Frame;
 class DHAX_Video_Annotation_Set;
@@ -103,6 +104,8 @@ class DHAX_Video_Player_Frame : public QFrame
 
  QRectF initial_smaller_scene_rect_;
 
+ QRect web_view_geometry_;
+
 //?protected:
 
  void resizeEvent(QResizeEvent* event);
@@ -122,13 +125,19 @@ class DHAX_Video_Player_Frame : public QFrame
  template<typename T>
  T* make_or_show_scene_annotation(DHAX_Video_Annotation* dva);
 
- QPointF video_top_left_;
+ QRectF video_rect_;
  void reposition_larger_annotations_rect_item();
  void reposition_smaller_annotations_rect_item();
+
+ QRectF graphics_view_visible_rect();
 
 public:
 
  DHAX_Video_Player_Frame(QWidget* parent = nullptr);
+
+ ACCESSORS(QRect ,web_view_geometry)
+
+ QRect get_web_view_geometry();
 
  struct _show_hide {
   void (*show)(void*);

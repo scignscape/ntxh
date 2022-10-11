@@ -39,6 +39,8 @@ class DHAX_Forge_Controller;
 
 class DHAX_Application_State;
 
+class DHAX_Video_Player_Dialog;
+
 class Main_Window_Dialog;
 typedef Main_Window_Dialog Image_Editor_Dialog_Window;
 
@@ -81,6 +83,9 @@ class DHAX_Application_Controller
 
  QString proc_class_temp_folder_;
 
+ DHAX_Video_Player_Dialog* current_video_player_dialog_;
+
+
  void check_reset_proc_class_temp_folder();
 
  QDir get_proc_class_temp_dir();
@@ -102,6 +107,8 @@ public:
  ACCESSORS(DHAX_Forge_Controller* ,forge_controller)
 
  ACCESSORS(DHAX_Graphics_Frame* ,graphics_frame)
+
+ ACCESSORS(DHAX_Video_Player_Dialog* ,current_video_player_dialog)
 
 // void take_screenshot();
 // void load_image();

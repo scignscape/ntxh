@@ -32,6 +32,7 @@ class DHAX_Application_Controller;
 
 
 class WebGL_View_Dialog;
+class DHAX_Video_Player_Dialog;
 
 class DHAX_External_Application_Controller //: public QObject
 {

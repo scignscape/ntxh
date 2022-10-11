@@ -52,7 +52,7 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
   :  QFrame(parent), annotation_set_(nullptr),
      full_size_rect_item_(nullptr),
      smaller_size_rect_item_(nullptr),
-     replay_count_(0), current_frame_count_(0)
+     replay_count_(0), current_frame_count_(0), graphics_view_(nullptr)
 {
 // setLayout(new QVBoxLayout);
 // layout()->setContentsMargins(0, 0, 0, 0);
@@ -535,6 +535,45 @@ QSize DHAX_Video_Player_Frame::get_navigation_size()
  return navigation_->size();
 }
 
+QRectF DHAX_Video_Player_Frame::graphics_view_visible_rect()
+{
+    QPointF tl(graphics_view_->horizontalScrollBar()->value(),
+      graphics_view_->verticalScrollBar()->value());
+    QPointF br = tl + graphics_view_->viewport()->rect().bottomRight();
+    QMatrix mat = graphics_view_->matrix().inverted();
+    return mat.mapRect(QRectF(tl,br));
+}
+
+QRect DHAX_Video_Player_Frame::get_web_view_geometry()
+{
+ if(!graphics_view_)
+   return {};
+
+ r8 vleft = web_view_geometry_.left();
+ r8 vtop = web_view_geometry_.top();
+
+ QPointF A = graphics_view_->mapToScene( QPoint(0, 0) );
+ QPointF B = graphics_view_->mapToScene( QPoint(
+         graphics_view_->viewport()->width(),
+         graphics_view_->viewport()->height() ));
+
+ QRectF ab( A, B );
+
+ QRect rr = graphics_view_->viewport()->rect();
+ QPoint tl = QPoint(vleft - ab.left(), vtop - ab.top());
+ QPoint tl_global =  graphics_view_->mapToGlobal(tl);
+
+ QPoint rr_global =  graphics_view_->mapToGlobal(rr.topLeft());
+
+ QRect tl_rect (tl_global, QSize(web_view_geometry_.width(),
+                                 web_view_geometry_.height()));
+ QRect rr_rect (rr_global, QSize(rr.width(), rr.height()));
+
+ QRect intersection = tl_rect.intersected(rr_rect);
+
+ return intersection;
+}
+
 void DHAX_Video_Player_Frame::confirm_video_size()
 {
  QColor c (200, 100, 10, 100);
@@ -577,15 +616,18 @@ void DHAX_Video_Player_Frame::confirm_video_size()
  annotation_set_->check_ratios();
 
 
- QRectF video_rect(left, video_item_->pos().y(), new_width, sz.height());
- video_top_left_ = video_rect.topLeft();
+ //QRectF
+ video_rect_ = QRectF(left, video_item_->pos().y(), new_width, sz.height());
+ //video_top_left_ = video_rect.topLeft();
 
- annotations_rect_item_->setRect(video_rect.adjusted(2,2,-2,-2));
+ web_view_geometry_ = video_rect_.toRect();
+
+ annotations_rect_item_->setRect(video_rect_.adjusted(2,2,-2,-2));
 
 // smaller_size_rect_item_ = graphics_scene_->addRect(left,
 //   video_item_->pos().y(),new_width,sz.height(),QPen(QBrush(c), 4));
 
- smaller_size_rect_item_ = graphics_scene_->addRect(video_rect, QPen(QBrush(c), 4),
+ smaller_size_rect_item_ = graphics_scene_->addRect(video_rect_, QPen(QBrush(c), 4),
    Qt::NoBrush);
 
 
@@ -669,6 +711,9 @@ void DHAX_Video_Player_Frame::reset_to_smaller_size()
 
 
  video_item_->setSize(last_smaller_size_);
+// web_view_geometry_ = last_smaller_size_;
+
+ web_view_geometry_ = video_rect_.toRect();
 
  reset_graphics_scene_rect();
 
@@ -736,6 +781,8 @@ void DHAX_Video_Player_Frame::reset_to_full_size()
    QPen(QBrush(c), 10), Qt::NoBrush);
  }
 
+ web_view_geometry_ = QRect(0, 0, video_size_.width(), video_size_.height());
+
  if(true) //last_larger_video_size_.isEmpty())
  {
 //  frame_number_text_background_->hide();
@@ -764,7 +811,7 @@ void DHAX_Video_Player_Frame::reposition_smaller_annotations_rect_item()
  QTransform tr; tr.scale(1, 1);
  annotations_rect_item_->setTransform(tr);
 
- annotations_rect_item_->setPos(video_top_left_ +
+ annotations_rect_item_->setPos(video_rect_.topLeft() +
    QPoint(annotation_set_->smaller_size_x_translation(),
           annotation_set_->smaller_size_y_translation()));
 }

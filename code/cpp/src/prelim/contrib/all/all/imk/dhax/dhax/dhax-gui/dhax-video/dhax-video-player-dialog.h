@@ -43,8 +43,13 @@
 
 #include <QDialogButtonBox>
 
+#include <QRubberBand>
+
+#include "accessors.h"
+
 
 class DHAX_Video_Player_Frame;
+
 
 
 class DHAX_Video_Player_Dialog : public QDialog
@@ -65,11 +70,25 @@ class DHAX_Video_Player_Dialog : public QDialog
 
  DHAX_Video_Player_Frame* player_;
 
+ QRubberBand* web_view_geometry_rubber_band_;
+
  void check_adjust_size(QSize sz, int height_margin);
+
+ QRect first_video_capture_position_;
+ QRect current_web_view_geometry_;
+
+ void reset_web_view_geometry(QResizeEvent* resize_event, QMoveEvent* move_event);
+
+ void resizeEvent(QResizeEvent* resize_event) Q_DECL_OVERRIDE;
+ void moveEvent(QMoveEvent* move_event) Q_DECL_OVERRIDE;
+
 
 public:
 
  DHAX_Video_Player_Dialog(QWidget* parent = nullptr);
+
+ ACCESSORS__RGET(QRect ,first_video_capture_position)
+ ACCESSORS__RGET(QRect ,current_web_view_geometry)
 
  void play_local_video(QString file_path);
  void halt();
@@ -80,9 +99,15 @@ public:
 
  void recenter();
 
+//public Q_SLOTS:
+
+// void web_view_geometry_updated();
+
 Q_SIGNALS:
 
  void show_video_frame_requested(QString file_path);
+
+ void web_view_geometry_updated();
 
 // void accept();
 // void reject();
