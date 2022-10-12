@@ -104,7 +104,7 @@ class DHAX_Video_Player_Frame : public QFrame
 
  QRectF initial_smaller_scene_rect_;
 
- QRect web_view_geometry_;
+ QRect scene_camera_view_geometry_;
 
 //?protected:
 
@@ -135,9 +135,9 @@ public:
 
  DHAX_Video_Player_Frame(QWidget* parent = nullptr);
 
- ACCESSORS(QRect ,web_view_geometry)
+ ACCESSORS(QRect ,scene_camera_view_geometry)
 
- QRect get_web_view_geometry();
+ QRect get_scene_camera_view_geometry();
 
  struct _show_hide {
   void (*show)(void*);

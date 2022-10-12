@@ -78,11 +78,22 @@ class Tile_Server_Select_Dialog : public QDialog
 
 public:
 
- Tile_Server_Select_Dialog(QString current_host = {}, QWidget* parent = nullptr);
+ Tile_Server_Select_Dialog(QString current_host = {}, QWidget* parent = nullptr)
+   :  Tile_Server_Select_Dialog(0, current_host, parent)
+ {
+ }
+
+ Tile_Server_Select_Dialog(int index, QWidget* parent = nullptr)
+   :  Tile_Server_Select_Dialog(index, {}, parent)
+ {
+ }
+
+ Tile_Server_Select_Dialog(int index, QString current_host, QWidget* parent);
 
  ~Tile_Server_Select_Dialog();
 
  struct Summary {
+  int index;
   QString host;
   QString url;
   QString api_key;

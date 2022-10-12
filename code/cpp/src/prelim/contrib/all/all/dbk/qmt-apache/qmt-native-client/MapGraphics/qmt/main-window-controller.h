@@ -46,6 +46,10 @@ class Main_Window_Controller
   //    for now leave it here but I'll make it a pointer so it can move easily
  QMap<QString, QString>* info_files_;
 
+ int current_map_style_index_;
+
+ CircleObject* current_location_spot_;
+
 // QString request_path_;
 // QString actual_path_;
 
@@ -72,13 +76,21 @@ public:
  void load_bus_data();
  void find_bus_stops(r8 latitude, r8 longitude, CircleObject* spot = nullptr);
 
+ void check_clear_data_layers(CircleObject* _spot);
+ void check_clear_data_layers()
+ {
+  check_clear_data_layers(current_location_spot_);
+ }
+
  CircleObject* add_spot_location_marking(r8 latitude, r8 longitude);
 
 
  void load_incident_reports();
  void track_incidents(r8 latitude, r8 longitude, s4 allow_duplicates);
 
- void load_web_engine_view(QUrl url);
+ void load_web_engine_view(QPoint pos, QUrl url);
+
+
  void load_single_file_data_set();
 
  void activate_local_tile_server(QString local_socket_flag)

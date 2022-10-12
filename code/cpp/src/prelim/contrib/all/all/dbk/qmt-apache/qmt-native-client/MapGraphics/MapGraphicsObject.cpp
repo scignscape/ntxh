@@ -12,7 +12,7 @@ MapGraphicsObject::MapGraphicsObject(MapGraphicsView* containing_view,
    bool sizeIsZoomInvariant, MapGraphicsObject *parent)
  :  containing_view_(containing_view), move_increment_value_(0),
    _sizeIsZoomInvariant(sizeIsZoomInvariant),
-   _constructed(false), style_params_(nullptr)
+   _constructed(false), style_params_(nullptr), index_code_(0)
 {
  //Set default properties and the parent that was passed as argument
  _enabled = true;

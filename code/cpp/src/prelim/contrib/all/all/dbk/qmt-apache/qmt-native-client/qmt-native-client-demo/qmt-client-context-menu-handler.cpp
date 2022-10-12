@@ -45,8 +45,24 @@ void QMT_Client_Context_Menu_Handler::handle_context_menu_on_mgo
    // // in case it's deleted for some reason before the menu item is selected
    return;
 
- QStringList qsl = mgo->client_data().value<QVector<QVariant>>()
-   .first().value<QStringList>();
+
+ QVector<QVariant> qvv = mgo->client_data().value<QVector<QVariant>>();
+
+ QStringList qsl;
+
+ if(!qvv.isEmpty())
+   qsl = qvv.first().value<QStringList>();
+
+ if(qsl.isEmpty())
+ {
+  QMenu* menu = new QMenu;
+  menu->addAction("code %1"_qt.arg(mgo->index_code()));
+
+  QPoint pos = event->pos().toPoint() + mgo->map_pos_to_view();
+  menu->popup(view_->mapToGlobal(pos));
+
+  return;
+ }
 
  QString context_menu_handler = qsl.first();
  if(context_menu_handler.isEmpty())
@@ -70,6 +86,8 @@ void QMT_Client_Context_Menu_Handler::handle_incident_context_menu(QGraphicsScen
   MapGraphicsObject* mgo)
 {
  QPoint pos = mgo->map_pos_to_view() + event->pos().toPoint();
+
+ QPointF epos = event->pos();
 
  QMenu* menu = new QMenu;
 
@@ -116,7 +134,7 @@ void QMT_Client_Context_Menu_Handler::handle_incident_context_menu(QGraphicsScen
  });
 
  menu->addAction("Search NPR by incident date (%1)"_qt
-   .arg(event_date.toString("M/d/yy")), [this, event_date]
+   .arg(event_date.toString("M/d/yy")), [this, epos, event_date]
  {
   QString url = "https://www.npr.org/search?query="
    "russia-ukraine-war-what-happened-today-%1-%2"_qt
@@ -127,11 +145,12 @@ void QMT_Client_Context_Menu_Handler::handle_incident_context_menu(QGraphicsScen
 
   qDebug() << "URL = " << url;
 
-  view_->main_window_controller()->load_web_engine_view(QUrl(url));
+  view_->main_window_controller()->load_web_engine_view(
+    view_->mapToGlobal(epos.toPoint()), QUrl(url));
  });
 
  menu->addAction("Search Google by incident date/category (%1)"_qt
-   .arg(incident_category), [this, incident_category, event_date]
+   .arg(incident_category), [this, epos, incident_category, event_date]
  {
   QString url = "https://www.google.com/search?q="
    "\"ukraine\"+\"%1\"+\"%2+%3+%4\""_qt.arg(incident_category)
@@ -144,7 +163,8 @@ void QMT_Client_Context_Menu_Handler::handle_incident_context_menu(QGraphicsScen
 
   qDebug() << "URL = " << url;
 
-  view_->main_window_controller()->load_web_engine_view(QUrl(url));
+  view_->main_window_controller()->load_web_engine_view(
+    view_->mapToGlobal(epos.toPoint()), QUrl(url));
  });
 
  menu->popup(view_->mapToGlobal(pos));

@@ -34,6 +34,7 @@ Lanternfly_Data_Set::Lanternfly_Data_Set()
 void Lanternfly_Data_Set::add_markings(Lanternfly_Main_Window& main_window,
   QVector<CircleObject*>& stash)
 {
+ u1 count = 0;
  for(const Sighting& s : sightings_)
  {
   CircleObject* circle = nullptr;
@@ -76,7 +77,8 @@ void Lanternfly_Data_Set::add_markings(Lanternfly_Main_Window& main_window,
 
   if(circle)
   {
-   circle->setFlags(0);
+   circle->set_index_code(++count);
+   circle->setFlags(MapGraphicsObject::ObjectIsSelectable);
    circle->setLatitude(s.latitude);
    circle->setLongitude(s.longitude);
    circle->set_outline_code(s.presentation_code);

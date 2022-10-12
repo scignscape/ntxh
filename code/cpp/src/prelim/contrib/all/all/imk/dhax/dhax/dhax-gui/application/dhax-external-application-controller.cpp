@@ -107,15 +107,15 @@ void DHAX_External_Application_Controller::test_ssr_datagram()
  else if(DHAX_Video_Player_Dialog* dlg =
    application_controller_->current_video_player_dialog())
  {
-  rect = dlg->current_web_view_geometry();
+  rect = dlg->current_scene_camera_view_geometry();
   if(dlg->first_video_capture_position().isNull())
   {
    dlg->first_video_capture_position() = rect;
    QObject::connect(dlg,
-     &DHAX_Video_Player_Dialog::web_view_geometry_updated,
+     &DHAX_Video_Player_Dialog::scene_camera_view_geometry_updated,
      [this, dlg]()
    {
-    QRect r = dlg->current_web_view_geometry();
+    QRect r = dlg->current_scene_camera_view_geometry();
     if(!r.isEmpty())
     {
      qDebug() << "!r = " << r;

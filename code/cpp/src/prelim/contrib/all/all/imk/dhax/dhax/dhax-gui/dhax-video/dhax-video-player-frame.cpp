@@ -79,7 +79,7 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
  video_item_ = new QGraphicsVideoItem;
  graphics_scene_->addItem(video_item_);
 
- video_item_->setFlags(QGraphicsItem::ItemIsMovable);
+//? video_item_->setFlags(QGraphicsItem::ItemIsMovable);
 
 //? graphics_view_->setAlignment(Qt::AlignHCenter | Qt::AlignBaseline);
 
@@ -296,7 +296,7 @@ void DHAX_Video_Player_Frame::handle_video_frame(const QVideoFrame& qvf)
 
  ++current_frame_count_;
 
- if((current_frame_count_ & 20) == 0)
+ if((current_frame_count_ % 20) == 0)
  {
   if(frame_number_text_)
     update_frame_number_text();
@@ -381,6 +381,9 @@ void* DHAX_Video_Player_Frame::make_scene_arrow_annotation(DHAX_Video_Annotation
 
  QGraphicsPolygonItem* result = graphics_scene_->addPolygon(qpf, Qt::NoPen, qbr);
 // result->setScale(raa.get_scale());
+
+ result->setParentItem(annotations_rect_item_);
+
  return result;
 }
 
@@ -506,10 +509,10 @@ void DHAX_Video_Player_Frame::play_local_video(QString file_path)
 {
  init_annotations();
 
- //current_path_ = file_path;
+ current_path_ = file_path;
 //
 // current_path_ = "/home/nlevisrael/gits/ctg-temp/stella/videos/test.mkv";
- current_path_ = "/home/nlevisrael/gits/ctg-temp/video-annotations/back/bus.mkv";
+// current_path_ = "/home/nlevisrael/gits/ctg-temp/video-annotations/back/bus.mkv";
 
  current_url_ =  QUrl::fromLocalFile(current_path_);
 
@@ -553,13 +556,13 @@ QRectF DHAX_Video_Player_Frame::graphics_view_visible_rect()
     return mat.mapRect(QRectF(tl,br));
 }
 
-QRect DHAX_Video_Player_Frame::get_web_view_geometry()
+QRect DHAX_Video_Player_Frame::get_scene_camera_view_geometry()
 {
  if(!graphics_view_)
    return {};
 
- r8 vleft = web_view_geometry_.left();
- r8 vtop = web_view_geometry_.top();
+ r8 vleft = scene_camera_view_geometry_.left();
+ r8 vtop = scene_camera_view_geometry_.top();
 
  QPointF A = graphics_view_->mapToScene( QPoint(0, 0) );
  QPointF B = graphics_view_->mapToScene( QPoint(
@@ -574,8 +577,8 @@ QRect DHAX_Video_Player_Frame::get_web_view_geometry()
 
  QPoint rr_global =  graphics_view_->mapToGlobal(rr.topLeft());
 
- QRect tl_rect (tl_global, QSize(web_view_geometry_.width(),
-                                 web_view_geometry_.height()));
+ QRect tl_rect (tl_global, QSize(scene_camera_view_geometry_.width(),
+                                 scene_camera_view_geometry_.height()));
  QRect rr_rect (rr_global, QSize(rr.width(), rr.height()));
 
  QRect intersection = tl_rect.intersected(rr_rect);
@@ -644,7 +647,7 @@ void DHAX_Video_Player_Frame::confirm_video_size()
  video_rect_ = QRectF(left, top, new_width, new_height);
  //video_top_left_ = video_rect.topLeft();
 
- web_view_geometry_ = video_rect_.toRect();
+ scene_camera_view_geometry_ = video_rect_.toRect();
 
  annotations_rect_item_->setRect(video_rect_.adjusted(2,2,-2,-2));
 
@@ -761,7 +764,7 @@ void DHAX_Video_Player_Frame::confirm_video_size()
  video_rect_ = QRectF(left, video_item_->pos().y(), new_width, sz.height());
  //video_top_left_ = video_rect.topLeft();
 
- web_view_geometry_ = video_rect_.toRect();
+ scene_camera_view_geometry_ = video_rect_.toRect();
 
  annotations_rect_item_->setRect(video_rect_.adjusted(2,2,-2,-2));
 
@@ -856,9 +859,9 @@ void DHAX_Video_Player_Frame::reset_to_smaller_size()
 
 
  video_item_->setSize(last_smaller_size_);
-// web_view_geometry_ = last_smaller_size_;
+// scene_camera_view_geometry_ = last_smaller_size_;
 
- web_view_geometry_ = video_rect_.toRect();
+ scene_camera_view_geometry_ = video_rect_.toRect();
 
  reset_graphics_scene_rect();
 
@@ -928,7 +931,7 @@ void DHAX_Video_Player_Frame::reset_to_full_size()
    QPen(QBrush(c), 10), Qt::NoBrush);
  }
 
- web_view_geometry_ = QRect(0, 0, video_size_.width(), video_size_.height());
+ scene_camera_view_geometry_ = QRect(0, 0, video_size_.width(), video_size_.height());
 
  if(true) //last_larger_video_size_.isEmpty())
  {
@@ -961,6 +964,9 @@ void DHAX_Video_Player_Frame::reposition_smaller_annotations_rect_item()
  annotations_rect_item_->setPos(video_rect_.topLeft() +
    QPoint(annotation_set_->smaller_size_x_translation(),
           annotation_set_->smaller_size_y_translation()));
+
+ graphics_view_->update();
+
 }
 
 void DHAX_Video_Player_Frame::reposition_larger_annotations_rect_item()
@@ -974,6 +980,8 @@ void DHAX_Video_Player_Frame::reposition_larger_annotations_rect_item()
 
  annotations_rect_item_->setPos(
    annotation_set_->larger_size_x_translation(), annotation_set_->larger_size_y_translation());
+
+ graphics_view_->update();
 }
 
 

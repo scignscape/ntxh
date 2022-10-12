@@ -27,11 +27,13 @@ class MAPGRAPHICSSHARED_EXPORT MapGraphicsObject : public QObject
  Q_OBJECT
 
  u4 move_increment_value_;
+ u4 index_code_;
 
 protected:
  MapGraphicsView* containing_view_;
  void* style_params_;
  QVariant client_data_;
+
 
 public:
  enum MapGraphicsObjectFlag
@@ -51,6 +53,7 @@ public:
 
  ACCESSORS(void* ,style_params)
  ACCESSORS(QVariant ,client_data)
+ ACCESSORS(u4 ,index_code)
 
  bool sizeIsZoomInvariant() const;
 

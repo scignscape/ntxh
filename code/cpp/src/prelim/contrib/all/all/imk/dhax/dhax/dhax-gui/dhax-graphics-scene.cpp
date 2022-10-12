@@ -165,7 +165,7 @@ void DHAX_Graphics_Scene::add_tierbox_pixmap(QString path, rc2 rc, u2 x_corner, 
 
  hover_rect_->setVisible(false);
 
- XCSD_Tierbox_Scene_Item* xtsi; //? = new XCSD_Tierbox_Scene_Item(this, path, rc);
+ XCSD_Tierbox_Scene_Item* xtsi = new XCSD_Tierbox_Scene_Item(this, path, rc);
 
  xtsi->set_scene_hover_rect(hover_rect_);
 

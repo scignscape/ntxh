@@ -6,7 +6,9 @@
 
 #include "xcsd-tierbox-scene-item.h"
 
-//?#include "dhax-graphics-scene.h"
+//?
+#include "dhax-graphics-scene.h"
+
 
 #include <QGraphicsSceneHoverEvent>
 #include <QGraphicsScene>
@@ -28,7 +30,7 @@ public:
 
 XCSD_Tierbox_Scene_Item::XCSD_Tierbox_Scene_Item(
   //?DHAX_Graphics_Scene* containing_scene,
-    XCSD_Graphics_Scene* containing_scene,
+    DHAX_Graphics_Scene* containing_scene,
   QString path, rc2 rc, QGraphicsItem* parent)
   :  QGraphicsPixmapItem(parent),
      containing_scene_(containing_scene), scene_hover_rect_(nullptr),

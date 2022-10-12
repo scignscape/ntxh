@@ -33,7 +33,8 @@
 #include <QDebug>
 
 Main_Window_Controller::Main_Window_Controller(MapGraphicsView* view)
-  :  view_(view), info_files_(_auto_new(info_files_))
+  :  view_(view), info_files_(_auto_new(info_files_)),
+     current_map_style_index_(-1), current_location_spot_(nullptr)
 {
  //qmt_client_layer_base_ = view_->qmt_client_layer_base();
 }
@@ -50,7 +51,7 @@ void Main_Window_Controller::load_incident_reports()
 
 
 
-void Main_Window_Controller::load_web_engine_view(QUrl url)
+void Main_Window_Controller::load_web_engine_view(QPoint pos, QUrl url)
 {
 
  QMT_Web_Engine_View* wev = new QMT_Web_Engine_View(nullptr);
@@ -80,6 +81,9 @@ void Main_Window_Controller::load_web_engine_view(QUrl url)
  wev->setPage(wep);
 
  wep->load(url);
+
+ wev->move(pos);
+
  wev->show();
 
 }
@@ -136,6 +140,36 @@ void Main_Window_Controller::track_incidents(r8 latitude, r8 longitude, s4 allow
 
 }
 
+
+void Main_Window_Controller::check_clear_data_layers(CircleObject* _spot)
+{
+ if(_spot)
+ {
+  active_data_sets_.pop();
+  if(QMT_Client_Data_Set_Base* data_set = _spot->client_data_set_base())
+  {
+   if(data_set->current_bind_vector())
+   {
+    for(CircleObject* co : *data_set->current_bind_vector())
+    {
+     if(co)
+       view_->scene()->removeObject(co);
+     //co->setVisible(false);
+    }
+   }
+   //?
+   //?delete data_set;
+  }
+  _spot->setVisible(false);
+  view_->scene()->removeObject(_spot);
+  //?delete _spot;
+ }
+
+ //_spot
+
+}
+
+
 CircleObject* Main_Window_Controller::add_spot_location_marking(r8 latitude, r8 longitude)
 {
  QPolygonF* qpf1 = new QPolygonF;
@@ -170,28 +204,11 @@ void Main_Window_Controller::find_bus_stops(r8 latitude, r8 longitude, CircleObj
  qDebug() << "lat = " << latitude;
  qDebug() << "lon = " << longitude;
 
- if(_spot)
- {
-  active_data_sets_.pop();
-  if(QMT_Client_Data_Set_Base* data_set = _spot->client_data_set_base())
-  {
-   if(data_set->current_bind_vector())
-   {
-    for(CircleObject* co : *data_set->current_bind_vector())
-    {
-     view_->scene()->removeObject(co);
-     //co->setVisible(false);
-    }
-   }
-   //?
-   //?delete data_set;
-  }
-  _spot->setVisible(false);
-  view_->scene()->removeObject(_spot);
-  delete _spot;
- }
+ check_clear_data_layers(_spot);
 
  CircleObject* spot = add_spot_location_marking(latitude, longitude);
+
+ current_location_spot_ = spot;
 
  spot->setFlags(MapGraphicsObject::ObjectIsSelectable);
 
@@ -284,7 +301,16 @@ void Main_Window_Controller::load_bus_data()
 
 void Main_Window_Controller::reset_map_style(QPoint qp)
 {
- Tile_Server_Select_Dialog* tsd = new Tile_Server_Select_Dialog;
+ // //  1 is the index for OpenStreetMap in the french style ...
+  //    (at least is is in the current Tile_Server_Select_Dialog
+  //    setup.  I suppose in more polished code we'd have some
+  //    kind of configuration to choose a default style)
+ static constexpr int preferred_map_style_index = 1;
+
+ if(current_map_style_index_ == -1)
+   current_map_style_index_ = preferred_map_style_index;
+
+ Tile_Server_Select_Dialog* tsd = new Tile_Server_Select_Dialog(current_map_style_index_);
  tsd->move(qp);
 
  QObject::connect(tsd, &Tile_Server_Select_Dialog::update_requested, [this](QDialog* dlg,
@@ -294,6 +320,8 @@ void Main_Window_Controller::reset_map_style(QPoint qp)
     .arg(summary.host)
     .arg(summary.url)
     .arg(summary.api_key);
+
+  current_map_style_index_ = summary.index;
 
   QSharedPointer<MapTileSource> mts = view_->tileSource();
 
@@ -366,13 +394,13 @@ void Main_Window_Controller::llcoords_to_street_address(QPoint qp)
 {
  QPointF ll = view_->mapToScene(qp);
 
- QMT_GIS_Utils::Result_Callbacks cbs; // {};
- cbs.failure = [](QVariant, QString error_string)
+ QMT_GIS_Utils::Result_Callbacks* cbs = new QMT_GIS_Utils::Result_Callbacks; // {};
+ cbs->failure = [](QVariant, QString error_string)
  {
   qDebug() << error_string;
  };
 
- cbs.success = [ll](QVariant qvar)
+ cbs->success = [ll](QVariant qvar)
  {
   QList<QGeoLocation> reply_locations =
     qvar.value<QList<QGeoLocation>>();
@@ -392,31 +420,37 @@ void Main_Window_Controller::llcoords_to_street_address(QPoint qp)
     .arg(address.street()).arg(address.postalCode()).arg(address.text());
   if(length == 1)
   {
-   QMessageBox mbox(QMessageBox::Information,
+   qDebug() << "Address length 1: " << address_string;
+
+   QMessageBox* mbox = new QMessageBox(QMessageBox::Information,
      "Geographic Location Lookup Result",
      "The lookup for latitude %1, longitude %2 returned with one result, "
      "in %3, %4."_qt
        .arg(ll.x()).arg(ll.y()).arg(address.city()).arg(address.country()));
-   mbox.setDetailedText(address_string);
+   mbox->setDetailedText(address_string);
 
-   mbox.show();
+   mbox->exec();
+   mbox->deleteLater();
   }
   else
   {
-   QMessageBox mbox(QMessageBox::Information,
+   qDebug() << "Address length 2 or greater: " << address_string;
+
+   QMessageBox* mbox = new QMessageBox(QMessageBox::Information,
      "Geographic Location Lookup Result",
      "The lookup for latitude %1, longitude %2 returned with %5 results. "
      "Here is the first, in %3, %4."_qt
        .arg(ll.x()).arg(ll.y()).arg(address.city()).arg(address.country()).arg(length));
-   mbox.setDetailedText(address_string);
+   mbox->setDetailedText(address_string);
 
-   mbox.exec();
+   mbox->exec();
+   mbox->deleteLater();
   }
 
  };
 
 
- gis_utils_.get_street_address_from_ll(ll, cbs);
+ gis_utils_.get_street_address_from_ll(ll, *cbs);
 
 }
 

@@ -106,11 +106,14 @@ public:
 
 
 Q_SIGNALS:
+
  void zoomLevelChanged(quint8 nZoom);
 
  void preview_dialogs_requested(QString);
 
+
 protected Q_SLOTS:
+
  virtual void handleChildMouseDoubleClick(QMouseEvent * event);
  virtual void handleChildMouseMove(QMouseEvent * event);
  virtual void handleChildMousePress(QMouseEvent * event);
@@ -118,7 +121,10 @@ protected Q_SLOTS:
  virtual void handleChildViewContextMenu(QContextMenuEvent * event);
  virtual void handleChildViewScrollWheel(QWheelEvent * event);
 
+
+
 private Q_SLOTS:
+
  void renderTiles();
 
 protected:

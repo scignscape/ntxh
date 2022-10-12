@@ -56,7 +56,7 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
 
   menu->addAction("Reset Map Style", [this, qp]()
   {
-   main_window_controller_->reset_map_style(qp);
+   main_window_controller_->reset_map_style(mapToGlobal(qp));
   });
 
   QStringList locs = qmt_client_location_focus_base_->get_short_choice_list();
@@ -128,6 +128,12 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
    main_window_controller_->activate_local_tile_server(nullptr);
   });
 
+  menu->addAction("Clear Data Layers", [this, qp]()
+  {
+   main_window_controller_->check_clear_data_layers();
+  });
+
+
   QString current_location_name = qmt_client_location_focus_base_->current_location_name();
 
   // //  a hack to demo switching between features for different locations.
@@ -157,11 +163,13 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
     QPointF ll = mapToScene(qp);
     u1 zl = zoomLevel();
 
-    main_window_controller_->load_web_engine_view(QUrl("https://www.openstreetmap.org/#map=%1/%2/%3&layers=T"_qt
+    main_window_controller_->load_web_engine_view(mapToGlobal(qp),
+      QUrl("https://www.openstreetmap.org/#map=%1/%2/%3&layers=T"_qt
       .arg(zl).arg(ll.y()).arg(ll.x())));
 
    });
   }
+
   else if(current_location_name == "Kherson")
   {
    menu->addAction("Load Incident Reports", [this]()
@@ -184,6 +192,17 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
    });
 
   }
+
+  menu->addAction("Street Map View (google)", [this, qp]()
+  {
+   QPointF ll = mapToScene(qp);
+   u1 zl = zoomLevel();
+
+   main_window_controller_->load_web_engine_view(mapToGlobal(qp),
+     QUrl("https://www.google.com/maps/@%1,%2,%3z"_qt
+     .arg(zl).arg(ll.y()).arg(ll.x())));
+
+  });
 
   menu->addAction("Take Screenshot", [this]()
   {

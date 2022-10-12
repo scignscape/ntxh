@@ -67,7 +67,8 @@
 
 #include <QComboBox>
 
-Tile_Server_Select_Dialog::Tile_Server_Select_Dialog(QString current_host, QWidget* parent)
+
+Tile_Server_Select_Dialog::Tile_Server_Select_Dialog(int index, QString current_host, QWidget* parent)
   : QDialog(parent)
 {
  button_box_ = new QDialogButtonBox(this);
@@ -131,9 +132,18 @@ Tile_Server_Select_Dialog::Tile_Server_Select_Dialog(QString current_host, QWidg
  for(QStringList* qsl: QVector<QStringList*> {&names, &known_hosts_, &known_urls_})
    transform(qsl);
 
- current_host_ = current_host.isEmpty()? known_hosts_.first() : current_host_;
 
  server_name_combo_box_->addItems(names);
+
+
+ if(index)
+ {
+  server_name_combo_box_->setCurrentIndex(index);
+  current_host_ = known_hosts_.value(index - 1);
+ }
+ else
+   current_host_ = current_host.isEmpty()? known_hosts_.first() : current_host_;
+
 
  auto connect_for_button_proceed_enabled = [this](QComboBox* cb)
  {
@@ -278,7 +288,7 @@ Tile_Server_Select_Dialog::Tile_Server_Select_Dialog(QString current_host, QWidg
 
 void Tile_Server_Select_Dialog::proceed()
 {
- u1 ci = server_name_combo_box_->currentIndex();
+ int ci = server_name_combo_box_->currentIndex();
  QString host = known_hosts_.value(ci);
  if(host == current_host_)
  {
@@ -286,7 +296,7 @@ void Tile_Server_Select_Dialog::proceed()
  }
 
  Q_EMIT update_requested(this, Summary{
-   host, known_urls_[ci], api_key_->text(), {}
+   ci, host, known_urls_[ci], api_key_->text(), {}
   });
 }
 

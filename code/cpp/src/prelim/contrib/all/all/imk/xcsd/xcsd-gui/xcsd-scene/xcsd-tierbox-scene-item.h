@@ -23,7 +23,9 @@
 
 #include "xcsd-2d/xcsd-sdi-structures.h"
 
-class XCSD_Graphics_Scene;
+//?class XCSD_Graphics_Scene;
+
+class DHAX_Graphics_Scene;
 
 class XCSD_Tierbox_Scene_Item : public QGraphicsPixmapItem
 {
@@ -31,7 +33,8 @@ class XCSD_Tierbox_Scene_Item : public QGraphicsPixmapItem
 
 private:
 
- XCSD_Graphics_Scene* containing_scene_;
+ //XCSD_Graphics_Scene* containing_scene_;
+ DHAX_Graphics_Scene* containing_scene_;
 
  QGraphicsRectItem* scene_hover_rect_;
 
@@ -46,7 +49,7 @@ private:
 
 public:
 
- XCSD_Tierbox_Scene_Item(XCSD_Graphics_Scene* containing_scene,
+ XCSD_Tierbox_Scene_Item(DHAX_Graphics_Scene* containing_scene,
    QString path, rc2 rc, QGraphicsItem* parent = nullptr);
 
 // USE_SELF_CONNECT(normal)
