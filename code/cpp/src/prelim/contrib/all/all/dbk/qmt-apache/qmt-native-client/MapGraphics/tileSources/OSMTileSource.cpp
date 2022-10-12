@@ -105,7 +105,7 @@ QString OSMTileSource::tileFileExtension() const
 //protected
 void OSMTileSource::fetchTile(quint32 x, quint32 y, quint8 z)
 {
- fetchTile(x, y, z, 0, 0);
+ fetchTile(x, y, z, 0, -1);
 }
 
 
@@ -166,8 +166,20 @@ void OSMTileSource::fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate, 
 
  cacheID += ":" + QString::number(alternate);
 
+ if(current_local_host_status_ < 0)
+ {
+  qDebug() << " (deactivated) cacheID: " << cacheID;
+ }
+
  if (_pendingRequests.contains(cacheID))
-   return;
+ {
+  if(current_local_host_status_ < 0)
+  {
+   qDebug() << "pending: " << cacheID;
+  }
+  else //?
+  return;
+ }
  _pendingRequests.insert(cacheID);
 
  //Build the request
@@ -222,6 +234,8 @@ void OSMTileSource::handleNetworkRequestFinished()
  qint64 forced_expiry = pr.second;
  QString cacheID = host.takeFirst();
 
+ QString ocacheID = cacheID;
+
  if(int index = cacheID.indexOf(':'))
    cacheID.chop(cacheID.length() - index);
 
@@ -266,6 +280,11 @@ void OSMTileSource::handleNetworkRequestFinished()
   // //  this means the reply is an actual image
   //Convert the cacheID back into x,y,z tile coordinates
 
+  if(current_local_host_status_ < 0)
+  {
+   qDebug() << " (deactivated) finished: " << ocacheID << " | " << cacheID;
+  }
+
   QImage image;// = new QImage();
 
   if (!image.loadFromData(bytes))
@@ -285,7 +304,7 @@ void OSMTileSource::handleNetworkRequestFinished()
   {
     qDebug() << "cache id should expire: " << cacheID;
 
-     expireTime = QDateTime::currentDateTimeUtc();
+     expireTime = QDateTime::fromSecsSinceEpoch(100'000);
   }
   else if(forced_expiry > 0)
     expireTime = QDateTime::currentDateTimeUtc().addSecs(forced_expiry);
@@ -309,6 +328,14 @@ void OSMTileSource::handleNetworkRequestFinished()
  }
  else
  {
+  if(current_local_host_status_ < 0)
+  {
+   qDebug() << "deactivated: " << ocacheID << " | " << cacheID;
+    // // deactivated ...
+   fetchTile(x, y, z, 2, -1);
+   return;
+  }
+
   // //  this means the reply is info
   QMT_Resource_Info qri;
   qri.absorb_data(bytes);

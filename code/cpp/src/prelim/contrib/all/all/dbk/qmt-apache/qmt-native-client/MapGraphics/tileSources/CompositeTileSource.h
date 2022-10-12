@@ -53,6 +53,7 @@ public:
     bool getEnabledFlag(int index) const;
     void setEnabledFlag(int index, bool isEnabled);
 
+    virtual void update_local_host_status() Q_DECL_OVERRIDE;
     virtual void update_hosts() Q_DECL_OVERRIDE;
     virtual void update_host_cache() Q_DECL_OVERRIDE;
 

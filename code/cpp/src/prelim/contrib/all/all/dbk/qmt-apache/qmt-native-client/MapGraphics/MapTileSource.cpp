@@ -12,6 +12,7 @@ const quint64 MAX_DISK_CACHE_READ_ATTEMPTS = 100000;
 
 MapTileSource::MapTileSource() :
   QObject(), _cacheExpirationsLoaded(false),
+  current_local_host_status_(0),
   current_cache_({nullptr, nullptr, nullptr, {}})
 {
  this->setCacheMode(DiskAndMemCaching);
@@ -220,7 +221,7 @@ void MapTileSource::toMemCache(const QString &cacheID, QImage *toCache, const QD
   return;
 
  //?
- if(expireTime <= QDateTime::currentDateTime())
+ if(expireTime == QDateTime::fromSecsSinceEpoch(100'000))
  {
   qDebug() << "cache id expired (mem): " << cacheID;
   return;
@@ -290,7 +291,7 @@ QImage *MapTileSource::fromDiskCache(const QString &cacheID)
 void MapTileSource::toDiskCache(const QString &cacheID, QImage *toCache, const QDateTime &expireTime)
 {
  //?
- if(expireTime <= QDateTime::currentDateTime())
+ if(expireTime ==  QDateTime::fromSecsSinceEpoch(100'000))
  {
   qDebug() << "cache id expired (disk): " << cacheID;
   return;

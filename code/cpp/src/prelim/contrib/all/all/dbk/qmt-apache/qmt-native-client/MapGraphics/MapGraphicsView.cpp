@@ -129,6 +129,13 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
    main_window_controller_->activate_local_tile_server(nullptr);
   });
 
+  local->addAction("Deactive", [this, qp]()
+  {
+   main_window_controller_->deactivate_local_tile_server();
+  });
+
+
+
   menu->addAction("Clear Data Layers", [this, qp]()
   {
    main_window_controller_->check_clear_data_layers();

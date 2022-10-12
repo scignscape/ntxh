@@ -341,6 +341,20 @@ void Main_Window_Controller::reset_map_style(QPoint qp)
  tsd->show();
 }
 
+
+void Main_Window_Controller::deactivate_local_tile_server()
+{
+ QSharedPointer<MapTileSource> mts = view_->tileSource();
+// mts->set_current_local_host({});
+// mts->set_current_local_info_host({});
+// mts->set_current_local_url({});
+// mts->set_current_local_info_url({});
+// mts->update_hosts();
+ mts->set_current_local_host_status(-1);
+ mts->update_local_host_status();
+}
+
+
 void Main_Window_Controller::_activate_local_tile_server(const QString* local_socket_flag)
 {
  QSharedPointer<MapTileSource> mts = view_->tileSource();

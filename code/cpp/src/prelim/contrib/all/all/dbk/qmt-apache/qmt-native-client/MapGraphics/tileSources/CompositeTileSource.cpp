@@ -273,6 +273,12 @@ void CompositeTileSource::setEnabledFlag(int index, bool isEnabled)
  this->allTilesInvalidated();
 }
 
+void CompositeTileSource::update_local_host_status()
+{
+ QSharedPointer<MapTileSource> child = _childSources.at(1);
+ child->set_current_local_host_status(current_local_host_status_);
+}
+
 void CompositeTileSource::update_hosts()
 {
  //?QSharedPointer<MapTileSource> child = _childSources.at(0);

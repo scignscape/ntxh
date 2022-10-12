@@ -49,8 +49,12 @@ public:
  ACCESSORS(QString ,current_local_url)
  ACCESSORS(QString ,current_local_info_url)
 
+ ACCESSORS(qint32 ,current_local_host_status)
+
 
  virtual void update_hosts() {};
+
+ virtual void update_local_host_status() {};
 
  virtual void update_host_cache();
 
@@ -186,6 +190,8 @@ private Q_SLOTS:
  void clearTempCache();
 
 protected:
+
+ qint32 current_local_host_status_;
 
  QString current_host_;
  QString current_url_;

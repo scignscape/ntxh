@@ -113,6 +113,8 @@ public:
   }
  }
 
+ void deactivate_local_tile_server();
+
  void toggle_marking_outline_visibility();
 
  void set_info_file(QString key, QString value)
