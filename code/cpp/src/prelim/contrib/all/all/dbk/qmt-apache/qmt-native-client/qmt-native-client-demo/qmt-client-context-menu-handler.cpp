@@ -38,6 +38,14 @@ QMT_Client_Context_Menu_Handler::QMT_Client_Context_Menu_Handler(MapGraphicsView
 }
 
 
+QPoint QMT_Client_Context_Menu_Handler::map_event_pos_to_global(
+  QGraphicsSceneContextMenuEvent* event, MapGraphicsObject* mgo)
+{
+ QPoint pos = event->pos().toPoint() + mgo->map_pos_to_view();
+ return view_->mapToGlobal(pos);
+}
+
+
 void QMT_Client_Context_Menu_Handler::handle_context_menu_on_mgo
   (QGraphicsSceneContextMenuEvent* event, MapGraphicsObject* mgo)
 {
@@ -58,8 +66,8 @@ void QMT_Client_Context_Menu_Handler::handle_context_menu_on_mgo
   QMenu* menu = new QMenu;
   menu->addAction("code %1"_qt.arg(mgo->index_code()));
 
-  QPoint pos = event->pos().toPoint() + mgo->map_pos_to_view();
-  menu->popup(view_->mapToGlobal(pos));
+  QPoint vpos = event->pos().toPoint() + mgo->map_pos_to_view();
+  menu->popup(vpos);
 
   return;
  }
@@ -85,7 +93,8 @@ void QMT_Client_Context_Menu_Handler::handle_context_menu_on_mgo
 void QMT_Client_Context_Menu_Handler::handle_incident_context_menu(QGraphicsSceneContextMenuEvent* event,
   MapGraphicsObject* mgo)
 {
- QPoint pos = mgo->map_pos_to_view() + event->pos().toPoint();
+// QPoint pos = mgo->map_pos_to_view() + event->pos().toPoint();
+ QPoint vpos = map_event_pos_to_global(event, mgo); //mgo->map_pos_to_view() + event->pos().toPoint();
 
  QPointF epos = event->pos();
 
@@ -167,7 +176,7 @@ void QMT_Client_Context_Menu_Handler::handle_incident_context_menu(QGraphicsScen
     view_->mapToGlobal(epos.toPoint()), QUrl(url));
  });
 
- menu->popup(view_->mapToGlobal(pos));
+ menu->popup(vpos);
 }
 
 

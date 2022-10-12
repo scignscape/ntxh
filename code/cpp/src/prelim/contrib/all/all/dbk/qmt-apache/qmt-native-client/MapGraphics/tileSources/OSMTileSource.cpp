@@ -105,7 +105,7 @@ QString OSMTileSource::tileFileExtension() const
 //protected
 void OSMTileSource::fetchTile(quint32 x, quint32 y, quint8 z)
 {
- fetchTile(x, y, z, 0);
+ fetchTile(x, y, z, 0, 0);
 }
 
 
@@ -117,7 +117,7 @@ void OSMTileSource::update_host_cache()
 }
 
 
-void OSMTileSource::fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate)
+void OSMTileSource::fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate, qint64 force_expiry)
 {
  MapGraphicsNetwork * network = MapGraphicsNetwork::getInstance();
 
@@ -182,7 +182,7 @@ void OSMTileSource::fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate)
 
  //Send the request and setupd a signal to ensure we're notified when it finishes
  QNetworkReply * reply = network->get(request);
- _pendingReplies.insert(reply,hosts);
+ _pendingReplies.insert(reply,{hosts, force_expiry});
 
  connect(reply,
          SIGNAL(finished()),
@@ -217,7 +217,9 @@ void OSMTileSource::handleNetworkRequestFinished()
  }
 
  //get the cacheID
- QStringList host = _pendingReplies.take(reply);
+ QPair<QStringList, qint64> pr = _pendingReplies.take(reply);
+ QStringList host = pr.first;
+ qint64 forced_expiry = pr.second;
  QString cacheID = host.takeFirst();
 
  if(int index = cacheID.indexOf(':'))
@@ -245,14 +247,14 @@ void OSMTileSource::handleNetworkRequestFinished()
   {
    // // this means that we started with two hosts,
     //   presumably one local and one not
-   fetchTile(x, y, z, 1);
+   fetchTile(x, y, z, 1, -1);
    return;
   }
   // // this is the intended setup where we start
    //   with (at least) three hosts,
    //   the first two being local and the
    //   first for resource info
-  fetchTile(x, y, z, 2);
+  fetchTile(x, y, z, 2, -1);
   return;
  }
 
@@ -279,7 +281,15 @@ void OSMTileSource::handleNetworkRequestFinished()
 
   //Figure out how long the tile should be cached
   QDateTime expireTime;
-  if (reply->hasRawHeader("Cache-Control"))
+  if(forced_expiry == 0)
+  {
+    qDebug() << "cache id should expire: " << cacheID;
+
+     expireTime = QDateTime::currentDateTimeUtc();
+  }
+  else if(forced_expiry > 0)
+    expireTime = QDateTime::currentDateTimeUtc().addSecs(forced_expiry);
+  else if (reply->hasRawHeader("Cache-Control"))
   {
    //We support the max-age directive only for now
    const QByteArray cacheControl = reply->rawHeader("Cache-Control");
@@ -309,10 +319,10 @@ void OSMTileSource::handleNetworkRequestFinished()
 
   if(qri.size() == (u4) -1)
    // //  use second alternate
-    fetchTile(x, y, z, 2);
+    fetchTile(x, y, z, 2, -1);
   else
     // //  use first alternate
-    fetchTile(x, y, z, 1);
+    fetchTile(x, y, z, 1, 0);
 
  }
 

@@ -81,9 +81,10 @@ Lanternfly_Frame::Lanternfly_Frame(Lanternfly_Main_Window* mw) : QFrame(mw)
  view_->set_qmt_client_data_set_base(qmt_client_data_set_);
 
 
- view_->set_coords_notify_callback([this](const QPointF qpf)
+ view_->set_coords_notify_callback([this](const QPointF qpf, quint8 zoom)
  {
-  coords_line_edit_->setText(QString("%1,%2").arg(qpf.y()).arg(qpf.x()));
+  coords_line_edit_->setText(QString("%1,%2    (%3)")
+    .arg(qpf.y()).arg(qpf.x()).arg(zoom));
  });
 
  view_->setScene(scene_);
@@ -106,7 +107,8 @@ void Lanternfly_Frame::adopt_location(QString name)
   {
    view_->coords_notify_callback()({
      qmt_client_location_focus_->current_central_longitude(),
-     qmt_client_location_focus_->current_central_latitude()});
+     qmt_client_location_focus_->current_central_latitude()},
+     view_->zoomLevel());
   }
  }
 }

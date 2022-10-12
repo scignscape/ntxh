@@ -46,7 +46,7 @@ protected:
  virtual void update_host_cache() Q_DECL_OVERRIDE;
 
 
- void fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate);
+ void fetchTile(quint32 x, quint32 y, quint8 z, quint8 alternate, qint64 force_expiry);
 
 
 private:
@@ -56,7 +56,7 @@ private:
  QSet<QString> _pendingRequests;
 
  //Hash used to keep track of what cacheID goes with what reply
- QHash<QNetworkReply*, QStringList> _pendingReplies;
+ QHash<QNetworkReply*, QPair<QStringList, qint64> > _pendingReplies;
 
 
 signals:

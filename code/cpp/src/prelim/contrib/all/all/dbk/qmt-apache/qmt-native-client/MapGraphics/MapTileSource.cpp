@@ -219,6 +219,14 @@ void MapTileSource::toMemCache(const QString &cacheID, QImage *toCache, const QD
  if (current_cache_.memory_cache->contains(cacheID))
   return;
 
+ //?
+ if(expireTime <= QDateTime::currentDateTime())
+ {
+  qDebug() << "cache id expired (mem): " << cacheID;
+  return;
+ }
+
+
  //Note when the tile will expire
  this->setTileExpirationTime(cacheID, expireTime);
 
@@ -281,6 +289,14 @@ QImage *MapTileSource::fromDiskCache(const QString &cacheID)
 
 void MapTileSource::toDiskCache(const QString &cacheID, QImage *toCache, const QDateTime &expireTime)
 {
+ //?
+ if(expireTime <= QDateTime::currentDateTime())
+ {
+  qDebug() << "cache id expired (disk): " << cacheID;
+  return;
+ }
+
+
  //Figure out x,y,z based on the cacheID
  quint32 x,y,z;
  if (!MapTileSource::cacheID2xyz(cacheID,&x,&y,&z))
@@ -329,7 +345,8 @@ void MapTileSource::prepareRetrievedTile(quint32 x, quint32 y, quint8 z, QImage 
  this->tileRetrieved(x,y,z);
 }
 
-void MapTileSource::prepareNewlyReceivedTile(quint32 x, quint32 y, quint8 z, QImage *image, QDateTime expireTime)
+void MapTileSource::prepareNewlyReceivedTile(quint32 x, quint32 y, quint8 z, QImage *image,
+  QDateTime expireTime)
 {
  //image->save("/home/nlevisrael/gits/lantern/img/t1.png");
  //Insert into caches when applicable

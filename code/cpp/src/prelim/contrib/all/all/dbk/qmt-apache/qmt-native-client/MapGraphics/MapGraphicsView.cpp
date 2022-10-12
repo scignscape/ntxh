@@ -73,7 +73,8 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
      {
       coords_notify_callback_({
         qmt_client_location_focus_base_->current_central_longitude(),
-        qmt_client_location_focus_base_->current_central_latitude()});
+        qmt_client_location_focus_base_->current_central_latitude()},
+        zoomLevel());
      }
     });
    }
@@ -616,7 +617,7 @@ void MapGraphicsView::handleChildMouseMove(QMouseEvent* event)
  //? qDebug() << "coords = " << coords;
 
  if(coords_notify_callback_)
-   coords_notify_callback_(coords);
+   coords_notify_callback_(coords, zoomLevel());
 
 
  event->setAccepted(false);
@@ -650,6 +651,13 @@ void MapGraphicsView::handleChildViewScrollWheel(QWheelEvent *event)
   this->zoomIn(MouseZoom);
  else
   this->zoomOut(MouseZoom);
+
+
+ QPoint qp = event->pos();
+ QPointF coords = this->mapToScene(qp);
+ if(coords_notify_callback_)
+   coords_notify_callback_(coords, zoomLevel());
+
 }
 
 //private slot

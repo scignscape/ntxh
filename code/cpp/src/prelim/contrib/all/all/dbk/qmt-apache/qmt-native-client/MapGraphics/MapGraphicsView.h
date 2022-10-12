@@ -94,7 +94,7 @@ public:
  ACCESSORS(QMT_Client_Context_Menu_Handler_Base* ,qmt_client_context_menu_handler_base)
 
  ACCESSORS(QMT_Client_Location_Focus_Base* ,qmt_client_location_focus_base)
- ACCESSORS(std::function<void (const QPointF&)> ,coords_notify_callback)
+ ACCESSORS(std::function<void (const QPointF&, quint8)> ,coords_notify_callback)
 
  ACCESSORS(Main_Window_Controller* ,main_window_controller)
 
@@ -149,7 +149,7 @@ private:
  QMT_Client_Context_Menu_Handler_Base* qmt_client_context_menu_handler_base_;
  QMT_Client_Location_Focus_Base* qmt_client_location_focus_base_;
 
- std::function<void (const QPointF&)> coords_notify_callback_;
+ std::function<void (const QPointF&, quint8)> coords_notify_callback_;
 
 };
 

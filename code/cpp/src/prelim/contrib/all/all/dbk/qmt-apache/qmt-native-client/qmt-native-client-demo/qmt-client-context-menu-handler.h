@@ -36,6 +36,9 @@ class QMT_Client_Context_Menu_Handler  :  public QMT_Client_Context_Menu_Handler
 {
  Q_OBJECT
 
+ QPoint map_event_pos_to_global(QGraphicsSceneContextMenuEvent* event, MapGraphicsObject* mgo);
+
+
 public:
 
  QMT_Client_Context_Menu_Handler(MapGraphicsView* view);
