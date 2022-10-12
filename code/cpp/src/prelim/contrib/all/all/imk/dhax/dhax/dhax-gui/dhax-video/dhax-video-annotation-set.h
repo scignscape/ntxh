@@ -54,6 +54,12 @@ class DHAX_Video_Annotation_Set : public QMap<u4, DHAX_Video_Annotation>
  s2 larger_size_x_translation_;
  s2 larger_size_y_translation_;
 
+ QMap<QString, DHAX_Video_Annotation*> annotations_by_id_;
+
+ DHAX_Video_Annotation* current_pause_annotation_;
+ QMap<DHAX_Video_Annotation*, QSet<DHAX_Video_Annotation*>>
+   anchored_ref_annotations_;
+
 public:
 
  DHAX_Video_Annotation_Set();
@@ -82,6 +88,17 @@ public:
  ACCESSORS(r8 ,sizes_ratio_x_adjustment)
  ACCESSORS(r8 ,sizes_ratio_y_adjustment)
 
+ ACCESSORS(DHAX_Video_Annotation* ,current_pause_annotation)
+
+ QSet<DHAX_Video_Annotation*> get_anchored_ref_annotations(DHAX_Video_Annotation* ref)
+ {
+  return anchored_ref_annotations_.value(ref);
+ }
+
+ QSet<DHAX_Video_Annotation*> get_current_anchored_ref_annotations()
+ {
+  return get_anchored_ref_annotations(current_pause_annotation_);
+ }
 
  void check_ratios()
  {
@@ -105,6 +122,7 @@ public:
 
  void parse_circled_text_default_hypernode(NTXH_Graph& g, hypernode_type* h);
  void parse_circled_text_annotation_hypernode(NTXH_Graph& g, hypernode_type* h);
+ void parse_pause_annotation_hypernode(NTXH_Graph& g, hypernode_type* h);
  void parse_text_annotation_hypernode(NTXH_Graph& g, hypernode_type* h);
  void parse_shape_annotation_hypernode(NTXH_Graph& g, hypernode_type* h);
  void parse_annotation_settings_hypernode(NTXH_Graph& g, hypernode_type* h);

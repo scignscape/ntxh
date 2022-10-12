@@ -228,6 +228,23 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
 
 }
 
+
+void DHAX_Video_Player_Frame::handle_pause_annotation(DHAX_Video_Annotation* dva)
+{
+ pause();
+
+ QSet<DHAX_Video_Annotation*> qset = annotation_set_->get_anchored_ref_annotations(dva);
+
+ if(!qset.isEmpty())
+ {
+  QList<DHAX_Video_Annotation*> list = qset.toList();
+  DHAX_Video_Annotation* dva1 = list.first();
+  make_scene_text_annotation(dva1);
+  current_paused_annotations_.push_back(dva1);
+ }
+
+}
+
 template<typename T>
 T* DHAX_Video_Player_Frame::make_or_show_scene_annotation(DHAX_Video_Annotation* dva)
 {
@@ -284,6 +301,10 @@ void DHAX_Video_Player_Frame::handle_video_frame(const QVideoFrame& qvf)
    {
     qgi = make_or_show_scene_annotation<QGraphicsTextItem>(dva);
    }
+   else if(dva->kind() == "pause")
+   {
+    handle_pause_annotation(dva);
+   }
    else //if(dva->kind() == "arrow")
    {
     qgi = make_or_show_scene_annotation<QGraphicsItem>(dva);
@@ -328,9 +349,12 @@ void* DHAX_Video_Player_Frame::make_scene_text_annotation(DHAX_Video_Annotation*
  result->setHtml(dva->html_text());
  dva->set_scene_data(result);
  dva->set_scene_type_data(QGraphicsTextItem_show_hide);
- annotation_set_->set_end_frame_data(dva->ending_frame_number(),
+
+ if(dva->ending_frame_number() != -1)
+   annotation_set_->set_end_frame_data(dva->ending_frame_number(),
    //QGraphicsTextItem_show_hide,
    *dva);
+
  return result;
 }
 
@@ -478,6 +502,11 @@ void DHAX_Video_Player_Frame::pause()
 
 void DHAX_Video_Player_Frame::resume()
 {
+ for(DHAX_Video_Annotation* dva : current_paused_annotations_)
+ {
+  show_hide_hide(dva);
+ }
+
  media_player_->play();
  navigation_->set_play_button_to_play();
 }

@@ -15,7 +15,9 @@
 
 
 DHAX_Video_Annotation::DHAX_Video_Annotation()
-  :  scene_data_(nullptr), scene_type_data_(nullptr)
+  :  ref_time_offset_(0), ref_annotation_(nullptr), scene_data_(nullptr),
+     starting_frame_number_(-1), ending_frame_number_(-1),
+     scene_type_data_(nullptr)
 {
 
 }

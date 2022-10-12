@@ -24,8 +24,12 @@ class DHAX_Video_Annotation
 {
  QString kind_;
 
- u4 starting_frame_number_;
- u4 ending_frame_number_;
+ QString id_;
+ QString ref_id_;
+ u4 ref_time_offset_;
+
+ s4 starting_frame_number_;
+ s4 ending_frame_number_;
 
  QString text_;
  QString inner_style_sheet_;
@@ -40,12 +44,14 @@ class DHAX_Video_Annotation
  QString data64_;
  QString kv_text_;
 
+ DHAX_Video_Annotation* ref_annotation_;
+
 public:
 
  DHAX_Video_Annotation();
 
- ACCESSORS(u4 ,starting_frame_number)
- ACCESSORS(u4 ,ending_frame_number)
+ ACCESSORS(s4 ,starting_frame_number)
+ ACCESSORS(s4 ,ending_frame_number)
 
  ACCESSORS(QString ,kind)
  ACCESSORS(QString ,text)
@@ -53,6 +59,13 @@ public:
  ACCESSORS(QPointF ,corner_position)
  ACCESSORS(QString ,html_text)
  ACCESSORS(QString ,kv_text)
+
+ ACCESSORS(QString ,id)
+ ACCESSORS(QString ,ref_id)
+ ACCESSORS(u4 ,ref_time_offset)
+
+
+ ACCESSORS(DHAX_Video_Annotation* ,ref_annotation)
 
  ACCESSORS(void* ,scene_data)
  ACCESSORS(void* ,scene_type_data)

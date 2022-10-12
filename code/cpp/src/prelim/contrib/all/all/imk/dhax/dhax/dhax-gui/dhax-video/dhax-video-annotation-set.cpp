@@ -22,7 +22,8 @@ DHAX_Video_Annotation_Set::DHAX_Video_Annotation_Set()
   :  circled_text_default_font_size_(12),
     circled_text_default_width_(0), circled_text_default_border_(2),
     sizes_ratio_x_(0), sizes_ratio_y_(0),
-    sizes_ratio_x_adjustment_(0), sizes_ratio_y_adjustment_(0)
+    sizes_ratio_x_adjustment_(0), sizes_ratio_y_adjustment_(0),
+    current_pause_annotation_(nullptr)
 {
 
 }
@@ -47,19 +48,50 @@ void DHAX_Video_Annotation_Set::parse_text_annotation_hypernode(NTXH_Graph& g, h
 {
  g.get_sfsr(h, {{1, 6}}, [this](QVector<QPair<QString, void*>>& prs)
  {
-  u4 start = prs[0].first.toUInt();
-  u4 end = prs[1].first.toUInt();
-  if(prs[1].first.startsWith('+'))
-    end += start;
 
   DHAX_Video_Annotation dva;
   dva.set_kind("text");
   dva.set_text(prs[2].first);
   dva.set_inner_style_sheet(prs[3].first);
-  dva.set_starting_frame_number(start);
-  dva.set_ending_frame_number(end);
   dva.set_corner_position(QPointF{prs[4].first.toFloat(), prs[5].first.toFloat()});
   dva.finalize_html_text();
+
+  QString s = prs[0].first;
+  QString e = prs[1].first;
+  if(s.startsWith('!'))
+  {
+   dva.set_ref_id(s.mid(1));
+
+   // //  convert 10ths of a second to milliseconds
+   dva.set_ref_time_offset(prs[1].first.toUInt() * 100);
+  }
+  else
+  {
+   u4 start = s.toInt();
+   u4 end = e == "*"? INT_MAX : e.toInt();
+   if(e.startsWith('+'))
+     end += start;
+
+   dva.set_starting_frame_number(start);
+   dva.set_ending_frame_number(end);
+  }
+
+  load_annotation(dva);
+
+//  QString name_description = prs[0].first;
+ });
+
+}
+
+
+void DHAX_Video_Annotation_Set::parse_pause_annotation_hypernode(NTXH_Graph& g, hypernode_type* h)
+{
+ g.get_sfsr(h, {{1, 2}}, [this](QVector<QPair<QString, void*>>& prs)
+ {
+  DHAX_Video_Annotation dva;
+  dva.set_starting_frame_number(prs[0].first.toInt());
+  dva.set_id(prs[1].first);
+  dva.set_kind("pause");
   load_annotation(dva);
 
 //  QString name_description = prs[0].first;
@@ -144,6 +176,7 @@ void DHAX_Video_Annotation_Set::read_ntxh_hypernode(NTXH_Graph& g, hypernode_typ
  {
 #define TEMP_MACRO(x, y) {#x, &DHAX_Video_Annotation_Set::y},
   TEMP_MACRO(Text_Annotation, parse_text_annotation_hypernode)
+  TEMP_MACRO(Pause_Annotation, parse_pause_annotation_hypernode)
   TEMP_MACRO(Shape_Annotation, parse_shape_annotation_hypernode)
   TEMP_MACRO(Circled_Text_Default,  parse_circled_text_default_hypernode)
   TEMP_MACRO(Circled_Text_Annotation,  parse_circled_text_annotation_hypernode)
@@ -195,6 +228,18 @@ void DHAX_Video_Annotation_Set::load_annotation_file(QString file_path)
 void DHAX_Video_Annotation_Set::load_annotation(DHAX_Video_Annotation& dva)
 {
  (*this)[dva.starting_frame_number()] = dva;
+
+ DHAX_Video_Annotation* copied_dva = &(*this)[dva.starting_frame_number()];
+
+ if(!dva.id().isEmpty())
+   annotations_by_id_[dva.id()] = copied_dva;
+
+ if(!dva.ref_id().isEmpty())
+  if(DHAX_Video_Annotation* ref = annotations_by_id_.value(dva.ref_id()))
+  {
+   dva.set_ref_annotation(ref);
+   anchored_ref_annotations_[ref].insert(copied_dva);
+  }
 }
 
 

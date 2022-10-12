@@ -106,6 +106,8 @@ class DHAX_Video_Player_Frame : public QFrame
 
  QRect scene_camera_view_geometry_;
 
+ QVector<DHAX_Video_Annotation*> current_paused_annotations_;
+
 //?protected:
 
  void resizeEvent(QResizeEvent* event);
@@ -120,6 +122,8 @@ class DHAX_Video_Player_Frame : public QFrame
  void* make_scene_text_annotation(DHAX_Video_Annotation* dva);
  void* make_scene_arrow_annotation(DHAX_Video_Annotation* dva);
  void* make_scene_circled_text_annotation(DHAX_Video_Annotation* dva);
+
+ void handle_pause_annotation(DHAX_Video_Annotation* dva);
 
 
  template<typename T>
