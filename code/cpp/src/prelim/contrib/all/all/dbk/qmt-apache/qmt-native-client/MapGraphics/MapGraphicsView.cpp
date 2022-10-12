@@ -206,9 +206,13 @@ MapGraphicsView::MapGraphicsView(MapGraphicsScene *scene, QWidget *parent) :
    QPointF ll = mapToScene(qp);
    u1 zl = zoomLevel();
 
+   QString u = "https://www.google.com/maps/@%1,%2,%3z"_qt
+     .arg(ll.y()).arg(ll.x()).arg(zl);
+
+   qDebug() << " u = " << u;
+
    main_window_controller_->load_web_engine_view(mapToGlobal(qp),
-     QUrl("https://www.google.com/maps/@%1,%2,%3z"_qt
-     .arg(zl).arg(ll.y()).arg(ll.x())));
+     QUrl(u));
 
   });
 

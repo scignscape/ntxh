@@ -401,7 +401,11 @@ void Main_Window_Controller::show_llcoords(QPoint qp)
 
  QString coords = "Latitude: %1, Longitude: %2"_qt.arg(ll.x()).arg(ll.y());
 
- QMessageBox::information(nullptr, "Coordinates: ", coords);
+ QMessageBox* mbox = new QMessageBox(QMessageBox::Information, "Coordinates: ", coords);
+
+ mbox->move(view_->mapToGlobal(qp));
+ mbox->exec();
+
 }
 
 void Main_Window_Controller::llcoords_to_street_address(QPoint qp)
@@ -414,7 +418,7 @@ void Main_Window_Controller::llcoords_to_street_address(QPoint qp)
   qDebug() << error_string;
  };
 
- cbs->success = [ll](QVariant qvar)
+ cbs->success = [ll, this, qp](QVariant qvar)
  {
   QList<QGeoLocation> reply_locations =
     qvar.value<QList<QGeoLocation>>();
@@ -442,6 +446,8 @@ void Main_Window_Controller::llcoords_to_street_address(QPoint qp)
      "in %3, %4."_qt
        .arg(ll.x()).arg(ll.y()).arg(address.city()).arg(address.country()));
    mbox->setDetailedText(address_string);
+
+   mbox->move(view_->mapToGlobal(qp));
 
    mbox->exec();
    mbox->deleteLater();
