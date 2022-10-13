@@ -1,0 +1,240 @@
+
+- s=start frame  e=end frame  t=text  y=style 
+  p=position 
+.
+
+
+&type Text_Annotation {6}
+  :s:1  :t:3  :y:4  :p:5 ;
+
+&type Shape_Annotation {5}
+  :k:1  :s:2  :t:4  :d:5 ;
+ 
+&type Circled_Text_Default {15}
+  :w:1
+  :background-color:2  :foreground-color:6
+  :outline-color:10  :font-size:14  :border:15 ;
+
+&type Circled_Text_Annotation {5}
+  :s:1  :t:3  :p:4 ;
+
+- s=start frame  i=id
+
+&type Pause_Annotation {5}
+  :s:1  :i:2 ;
+
+
+&type Annotation_Settings {6}
+  :sa:1  :tr-smaller:3 :tr-larger:5  ;
+
+
+&/
+
+
+!/ Annotation_Settings
+$sa#  1  1
+$tr-smaller#  0  0
+$tr-larger#  0  0  
+/!
+<+>
+
+
+!/ Circled_Text_Default
+$w: 12
+$background-color# 50 50 210 255
+$foreground-color# 150 50 10 255
+$outline-color# 150 50 10 255
+$font-size: 14
+$border: 2
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 30 +160
+$t. 
+XCSD Image Processing
+.
+$y.
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 3 220
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 190  +160
+$t. 
+The XCSD format predivides images into boxes, stored<br>
+in memory from the center outward, convenient for <br>
+central-region analysis and computing local histograms <br>
+(displays present box-boundaries as mouseover effects).
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 0 169
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 440  +220
+$t. 
+Interactive histograms allow histogram data<br>
+to be leveraged for color-sensitive<br>
+image-processing algorithms.
+.
+$y.
+ color:rgba(20,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(230,230,250,250);
+.
+$p# 12 184
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 1420  +210
+$t. 
+Revisiting the video-captured image shown<br>
+on the previous video ...
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 12 12
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 1690  +200
+$t. 
+Supplementing the prior toroidal-color segmentation, 
+here we apply histogram info for a foreground/<br>
+background probability map, hoping to create<br>
+watershed areas.
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 3 12
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 3800  +210
+$t. 
+Next we'll apply foreground/background<br>
+distribution as an extra parameter<br>
+on matrix-kernel edge-detection algorithms
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 12 131
+/!
+<+>
+
+
+
+
+!/ Text_Annotation
+$s# 5360  +210
+$t. 
+An edge-detection dialog lets us flip<br>
+through different algorithms, looking<br>
+for parameters that yield promising<br>
+binary images for one- or two-<br>
+dimensional feature extraction.
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 12 11
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 6690  +160
+$t. 
+Demonstrating some details of the<br>
+image-processing GUI
+.
+$y.
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,107,250);
+.
+$p# 6 190
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 7800  +210
+$t. 
+Images can be placed against a larger view-<br>
+panel (in case annotations need to extend<br>
+outside the image margins)
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 12 131
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 8740  +350
+$t. 
+In general, users can adjust image size,<br>
+position, and scene/view colors to create<br>
+an effective presentation via image-markup.
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 12 147
+/!
+<+>
+
+
+
+
+!/ Text_Annotation
+$s# 10410  10730
+$t. 
+Thanks For Watching!
+.
+$y.
+ color:rgba(0,26,17);;font-weight:bold;
+ background-color:rgba(120,0,47,210);
+.
+$p# 20 181
+/!
+<+>
+
+
+/&
+
+
+
+
+

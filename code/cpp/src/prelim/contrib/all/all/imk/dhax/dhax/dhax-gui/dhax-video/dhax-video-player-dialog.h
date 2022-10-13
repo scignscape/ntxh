@@ -90,7 +90,7 @@ public:
  ACCESSORS__RGET(QRect ,first_video_capture_position)
  ACCESSORS__RGET(QRect ,current_scene_camera_view_geometry)
 
- void play_local_video(QString file_path);
+ void play_local_video(QString file_path, QString annotations_file = {});
  void halt();
  void halt_and_close()
  {

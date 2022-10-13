@@ -162,7 +162,7 @@ public:
  }
 
 
- void play_local_video(QString file_path);
+ void play_local_video(QString file_path, QString annotations_file);
 
  void reset_to_full_size();
  void reset_to_smaller_size();
@@ -183,6 +183,9 @@ public:
 //public Q_SLOTS:
 
  void load_annotations();
+ void load_annotations_file(QString annotations_file);
+
+
  void reset_annotation();
 
 //public Q_SLOTS:

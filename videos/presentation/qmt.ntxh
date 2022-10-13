@@ -1,0 +1,446 @@
+
+- s=start frame  e=end frame  t=text  y=style 
+  p=position 
+.
+
+
+&type Text_Annotation {6}
+  :s:1  :t:3  :y:4  :p:5 ;
+
+&type Shape_Annotation {5}
+  :k:1  :s:2  :t:4  :d:5 ;
+ 
+&type Circled_Text_Default {15}
+  :w:1
+  :background-color:2  :foreground-color:6
+  :outline-color:10  :font-size:14  :border:15 ;
+
+&type Circled_Text_Annotation {5}
+  :s:1  :t:3  :p:4 ;
+
+- s=start frame  i=id
+
+&type Pause_Annotation {5}
+  :s:1  :i:2 ;
+
+
+&type Annotation_Settings {6}
+  :sa:1  :tr-smaller:3 :tr-larger:5  ;
+
+
+&/
+
+
+!/ Annotation_Settings
+$sa#  1  1
+$tr-smaller#  0  0
+$tr-larger#  0  0  
+/!
+<+>
+
+
+!/ Circled_Text_Default
+$w: 12
+$background-color# 50 50 210 255
+$foreground-color# 150 50 10 255
+$outline-color# 150 50 10 255
+$font-size: 14
+$border: 2
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 20 +100
+$t. 
+Standalone GIS Applications:<br>
+Interactive Features 
+.
+$y.
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 20 150
+/!
+<+>
+
+
+!/ Text_Annotation
+$s#  170  +90
+$t. 
+Choosing between different style formats
+.
+$y.
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 20 210
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s#  400  +150
+$t. 
+Applications should select/offer base-map<br>
+styles that do not conflict with supplemental<br>
+data layers specific to that application
+.
+$y.
+ color:rgba(120,10,37);font-size:10pt;
+ font-weight:bold;
+ background-color:rgba(200,200,200,50);
+.
+$p# 10 120
+/!
+<+>
+
+
+!/ Text_Annotation
+$s#  600  +150
+$t. 
+<p>
+Tile servers can support multiple applications<br>
+by rendering map-segments<br>through a variety of styles. 
+</p>
+.
+$y.
+ color:rgba(120,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(200,200,200,50);
+.
+$p# 10 160
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 780 820
+$t. 
+Obtaining GIS Information
+.
+$y.
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 20 150
+/!
+<+>
+
+
+!/ Text_Annotation
+$s#  880  +100
+$t. 
+Latitude and Longitude Coordinates. 
+.
+$y.
+ color:rgba(120,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(200,200,200,50);
+.
+$p# 20 210
+/!
+<+>
+
+
+!/ Text_Annotation
+$s#  1050  +120
+$t. 
+Converting Latitude and Longitude<br>
+to Street Addresses. 
+.
+$y.
+ color:rgba(120,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(200,200,200,50);
+.
+$p# 20 180
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s#  1250  +130
+$t. 
+Aside from showing address data to end-users,<br>
+these queries allow applications to serve as<br>
+front-ends to GIS databases. 
+.
+$y.
+ color:rgba(50,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(245,245,210,220);
+.
+$p# 20 160
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s#  1470  +100
+$t. 
+Locating Bus Routes and Bus Stops 
+.
+$y.
+ color:rgba(120,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(200,200,200,50);
+.
+$p# 20 150
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s#  1890  +100
+$t. 
+This display shows the 10 stops closest to the<br>
+chosen position, and is updated when the<br>&ldquo;anchor&rdquo;
+position changes. 
+.
+$y.
+ color:rgba(120,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(210,255,200,205);
+.
+$p# 20 30
+/!
+<+>
+
+
+!/ Text_Annotation
+$s#  2200  +100
+$t. 
+Alternatively, view total route data<br>
+mapped out in a separate window.
+.
+$y.
+ color:rgba(120,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(210,255,200,205);
+.
+$p# 20 30
+/!
+<+>
+
+
+!/ Text_Annotation
+$s#  2920  +120
+$t. 
+Another interactive option: explore<br>
+street-level maps in a separate window<br>(e.g., Googe Street Maps).
+.
+$y.
+ color:rgba(120,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(210,255,200,205);
+.
+$p# 20 90
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 3450 +148
+$t. 
+These use-cases have involved commonly-accessed<br>
+public data.  Many applications might<br>
+also work with special application-specific<br>
+data that would be superimposed as<br>
+data layers above the base maps. 
+.
+$y.
+ color:rgba(0,10,37);font-weight:bold;
+ background-color:rgba(230,219,247,250);
+.
+$p# 3 65
+/!
+<+>
+
+
+!/ Text_Annotation
+$s#  3910  +100
+$t. 
+Case Study: Mapping Lanternfly Sightings
+.
+$y.
+ color:rgba(120,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(200,200,200,50);
+.
+$p# 20 150
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s#  4420  +140
+$t. 
+Icon shapes, colors, and outlines/markings<br>
+can be designed to convey information about<br>
+each location/event (e.g., a lanternfly sighting)
+.
+$y.
+ color:rgba(50,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(245,245,210,220);
+.
+$p# 10 20
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 4800 +220
+$t. 
+Complex Dialog Boxes 
+.
+$y.
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 20 180
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s#  5300  +300
+$t. 
+A principal benefit of stand-alone GIS applications<br>
+is the possibility of presenting multi-part<br>
+data structures &mdash; 
+correlated with map locations &mdash;<br>
+via interactive, structured, self-contained windows.
+.
+$y.
+ color:rgba(50,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(245,245,210,220);
+.
+$p# 20 150
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 6620 +220
+$t. 
+Delegating a subset of tiles<br>
+to a local server 
+.
+$y.
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 50 50
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 7040 +210
+$t. 
+This sequence demonstrates a local apache-based<br>
+tile server which rendered some tiles for<br>
+Kherson, Ukraine with a special format (including<br>
+GIS boundary and mercatur-coordinate info, for<br> 
+sake of illustration).
+.
+$y.
+ color:rgba(0,10,37);;font-weight:normal;
+ background-color:rgba(240,220,7,150);
+.
+$p# 4 70
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 7450 +180
+$t. 
+De-activating the local server resets the map<br>
+so that subsequent tiles are obtained from the<br>
+default tile source, rather than locally redirected.
+.
+$y.
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 20 170
+/!
+<+>
+
+
+
+
+!/ Text_Annotation
+$s# 7700 +120
+$t. 
+Another local database: Humanitarian Data<br> 
+Exchange info about Russia/Ukrain hostilities,<br>
+refugees, and political events.
+.
+$y.
+ color:rgba(50,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(245,245,210,220);
+.
+$p# 20 170
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 8200 +120
+$t. 
+Viewing event-specific data through interactive<br>
+dialog boxes.
+.
+$y.
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 20 170
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 8700 +120
+$t. 
+This demo also shows examples of loading online<br>
+sources based on map coordinates; here, accessing<br>
+NPR's daily coverage of Ukraine event based on the<br>
+dates of location-specific records in the Humanitarian<br>
+database, and then generic Google search.  
+.
+$y.
+ color:rgba(50,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(145,245,210,220);
+.
+$p# 11 140
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 9620 +220
+$t. 
+Thanks For Watching!
+.
+$y.
+ color:rgba(0,160,117);;font-weight:bold;
+ background-color:rgba(200,0,87,10);
+.
+$p# 20 170
+/!
+<+>
+
+
+
+
+
+/&
+
+

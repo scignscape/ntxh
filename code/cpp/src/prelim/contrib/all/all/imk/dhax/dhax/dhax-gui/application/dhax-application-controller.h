@@ -159,7 +159,7 @@ public:
  void offer_to_play_video(QString text, QString file_path);
 
  void play_video();
- void play_video(QString file_path);
+ void play_video(QString file_path, QString annotations_file_path = {});
 
  void calculate_fb_gaussian();
 

@@ -210,7 +210,8 @@ void DHAX_Video_Player_Dialog::recenter()
 }
 
 
-void DHAX_Video_Player_Dialog::play_local_video(QString file_path)
+void DHAX_Video_Player_Dialog::play_local_video(QString file_path,
+  QString annotations_file)
 {
- player_->play_local_video(file_path);
+ player_->play_local_video(file_path, annotations_file);
 }

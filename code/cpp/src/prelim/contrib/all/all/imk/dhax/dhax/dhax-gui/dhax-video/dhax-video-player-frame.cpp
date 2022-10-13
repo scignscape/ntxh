@@ -463,26 +463,25 @@ void DHAX_Video_Player_Frame::reset_annotation()
 void DHAX_Video_Player_Frame::load_annotations()
 {
  pause();
-// init_annotations();
-// qDebug( ) << "init_aaa";
- //resume();
 
- QString annotation_file = QFileDialog::getOpenFileName(this,
+ QString annotations_file = QFileDialog::getOpenFileName(this,
    "Select annotation file (.ntxh format)", ROOT_FOLDER "/..",
    "*.ntxh");
 
-//  QString annotation_file = "/home/nlevisrael/gits/ctg-temp/video-annotations/t1.ntxh";
+ if(!annotations_file.isEmpty())
+   load_annotations_file(annotations_file);
+}
 
- if(!annotation_file.isEmpty())
- {
-  annotation_set_->load_annotation_file(annotation_file);
 
-  if( navigation_->is_full_size_mode() )
-    reposition_larger_annotations_rect_item();
-  else
-    reposition_smaller_annotations_rect_item();
+void DHAX_Video_Player_Frame::load_annotations_file(QString annotations_file)
+{
+ annotation_set_->load_annotation_file(annotations_file);
 
- }
+ if( navigation_->is_full_size_mode() )
+   reposition_larger_annotations_rect_item();
+ else
+   reposition_smaller_annotations_rect_item();
+
 }
 
 void DHAX_Video_Player_Frame::update_frame_number_text()
@@ -534,9 +533,12 @@ void DHAX_Video_Player_Frame::halt()
 }
 
 
-void DHAX_Video_Player_Frame::play_local_video(QString file_path)
+void DHAX_Video_Player_Frame::play_local_video(QString file_path, QString annotations_file)
 {
  init_annotations();
+
+ if(!annotations_file.isEmpty())
+   load_annotations_file(annotations_file);
 
  current_path_ = file_path;
 //
