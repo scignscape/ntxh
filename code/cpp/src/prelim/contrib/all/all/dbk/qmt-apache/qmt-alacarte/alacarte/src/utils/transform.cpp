@@ -36,6 +36,8 @@
 
 #include "qt-logger.h"
 
+#include "global-types.h"
+
 #define NORM (FACTOR * RADIUS/2.0)
 // earth radius WGS84
 #define RADIUS 6378137.0

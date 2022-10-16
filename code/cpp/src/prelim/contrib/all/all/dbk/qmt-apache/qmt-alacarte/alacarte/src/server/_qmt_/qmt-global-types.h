@@ -20,8 +20,8 @@
 
 #include <functional>
 
-#include "qmt-global-macros.h"
-#include "qmt-enum-macros.h"
+#include "global-macros.h"
+#include "enum-macros.h"
 
 
 #define CLASS_NAME_FOLDER_FN_1(ty)  \

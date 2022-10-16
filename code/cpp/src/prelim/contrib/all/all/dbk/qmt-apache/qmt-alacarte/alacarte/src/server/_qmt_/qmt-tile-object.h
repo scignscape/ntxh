@@ -6,9 +6,9 @@
 
 #include <string>
 
-#include "qmt-accessors.h"
+#include "accessors.h"
 
-#include "qmt-global-types.h"
+#include "global-types.h"
 
 
 struct QMT_Tile_Object_Coordinates

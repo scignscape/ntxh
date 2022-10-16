@@ -31,6 +31,9 @@
 
 #include "utils/precached_strings.hpp"
 
+#include <QDebug>
+
+
 #define OVERMERGE_IMPL(_attr)	if (templ-> _attr) {									\
 									templ-> _attr ->overwrite(obj, &(this-> _attr ));	\
 								}
@@ -182,7 +185,8 @@ void Style::finish(GeoObject* associatedObject, shared_ptr<const Stylesheet> sty
 	}
 
 	auto entry = associatedObject->getTags().find(precached_layer);
-	if (entry != associatedObject->getTags().end()) {
+ if (entry != associatedObject->getTags().end())
+ {
 		std::stringstream strstream(entry->second.str());
 		int layer;
 		strstream >> layer;

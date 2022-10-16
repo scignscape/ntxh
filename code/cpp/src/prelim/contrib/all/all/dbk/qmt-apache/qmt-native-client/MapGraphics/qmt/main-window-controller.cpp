@@ -358,10 +358,14 @@ void Main_Window_Controller::deactivate_local_tile_server()
 void Main_Window_Controller::_activate_local_tile_server(const QString* local_socket_flag)
 {
  QSharedPointer<MapTileSource> mts = view_->tileSource();
- mts->set_current_local_info_host("http://localhost:6600/qmt%1/rI~png/~tiles/kherson/~osm-"_qt
-   .arg(local_socket_flag? *local_socket_flag : ""));
- mts->set_current_local_host("http://localhost:6600/qmt%1/rS~png/~tiles/kherson/~osm-"_qt
-   .arg(local_socket_flag? *local_socket_flag : ""));
+
+ QString location = "nyc";
+//? QString location = "kherson";
+
+ mts->set_current_local_info_host("http://localhost:6600/qmt%1/rI~png/~tiles/%2/~osm-"_qt
+   .arg(local_socket_flag? *local_socket_flag : "").arg(location));
+ mts->set_current_local_host("http://localhost:6600/qmt%1/rS~png/~tiles/%2/~osm-"_qt
+   .arg(local_socket_flag? *local_socket_flag : "").arg(location));
  mts->set_current_local_info_url("%1-%2-%3");
  mts->set_current_local_url("%1-%2-%3");
  mts->update_hosts();

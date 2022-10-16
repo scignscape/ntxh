@@ -68,8 +68,12 @@ public:
 									| eaglexml::parse_validate_closing_tags
 									| eaglexml::parse_default;
 
-	//! Type, where osm ids stored in.
-	typedef uint64_t OsmIdType;
+
+ //! Type, where osm ids stored in.
+//?
+ typedef uint64_t OsmIdType;
+// typedef int64_t OsmIdType;
+
 
 public:
 	/**
@@ -128,7 +132,17 @@ public:
 		cache.observer(this);
 
 
-		try {
+  std::ifstream xml_stream1(xml_file.string());
+  eaglexml::stream_cache<> cache1(xml_stream1, 8 * 1024 * 1024);
+  eaglexml::xml_document<> document1;
+
+  cache1.segment_size(segmentSize);
+  cache1.max_segments_to_read(1);
+  cache1.observer(this);
+
+
+  try
+  {
 			// Init the xml parser
 			document.parse<parser_flags>(&cache);
 
@@ -137,12 +151,26 @@ public:
 			if(!osm)
 				BOOST_THROW_EXCEPTION(excp::InputFormatException() << excp::InfoXmlEntityName("<osm>")  << excp::InfoWhat("Missing \"<osm>\" xml node!"));
 
-			parseEntities(osm);
 
-		}catch(excp::InputFormatException& e) {
+   document1.parse<parser_flags>(&cache1);
+
+   eaglexml::xml_node<>* osm1 = document1.first_node("osm");
+
+   if(!osm1)
+    BOOST_THROW_EXCEPTION(excp::InputFormatException() << excp::InfoXmlEntityName("<osm>")  << excp::InfoWhat("Missing \"<osm>\" xml node!"));
+
+
+   parseEntities(osm, osm1);
+
+
+
+  }
+  catch(excp::InputFormatException& e)
+  {
 			e << excp::InfoFileName(xml_file.string());
 			throw;
-		}catch(eaglexml::parse_error& e)
+  }
+  catch(eaglexml::parse_error& e)
 		{
 			BOOST_THROW_EXCEPTION(excp::InputFormatException() << excp::InfoFileName(xml_file.string()) << excp::InfoWhat(e.what()));
 		}
@@ -197,32 +225,62 @@ private:
 	 *
 	 * @param osm_root osm-xml root node
 	 **/
-	void parseEntities(eaglexml::xml_node<>* osmRoot)
-	{
-		assert(osmRoot);
+ void parseEntities(eaglexml::xml_node<>* osmRoot, eaglexml::xml_node<>* osmRoot1)
+ {
+  assert(osmRoot);
 
-		std::map<std::string, void (OsmXmlParser::*)(eaglexml::xml_node<>*)> entities;
+  std::map<std::string, void (OsmXmlParser::*)(eaglexml::xml_node<>*)> entities;
 
-		// Entities that can be parsed
-		entities["bounds"] = &OsmXmlParser::parseBounds;
-		entities["node"] = &OsmXmlParser::parseNode;
-		entities["way"] = &OsmXmlParser::parseWay;
-		entities["relation"] = &OsmXmlParser::parseRelation;
+  // Entities that can be parsed
+  entities["bounds"] = &OsmXmlParser::parseBounds;
+
+  //?entities["node"] = &OsmXmlParser::parseNode;
+
+  entities["way"] = &OsmXmlParser::parseWay;
+  entities["relation"] = &OsmXmlParser::parseRelation;
+
+
+  // //  parse nodes first?
+  for(eaglexml::node_iterator<> it1(osmRoot1);
+      it1 != eaglexml::node_iterator<>();
+      ++it1)
+  {
+   if(strcmp(it1->name(), "node") == 0)
+   {
+    OsmXmlParser::parseNode(&*it1);
+   }
+  }
+
 
 		for(eaglexml::node_iterator<> it(osmRoot);
 			it != eaglexml::node_iterator<>();
 			++it)
 		{
-			auto entityIt = entities.find(it->name());
+   if(strcmp(it->name(), "node") == 0)
+   {
+    continue;
+    //OsmXmlParser::parseNode(&*it);
+   }
+
+   auto entityIt = entities.find(it->name());
 
 			if(!ignoreUnknownEntities && entityIt == entities.end())
-				BOOST_THROW_EXCEPTION(excp::InputFormatException() << excp::InfoXmlEntityName(it->name()) << excp::InfoWhat("Unknown entity in xml file!"));
+   {
+    qDebug() << "it -> name = " << it->name();
 
-			try{ 
+    continue;
+    //?BOOST_THROW_EXCEPTION(excp::InputFormatException() << excp::InfoXmlEntityName(it->name()) << excp::InfoWhat("Unknown entity in xml file!"));
+   }
+
+   try
+   {
 				(this->*(entityIt->second))(&*it);
-			}catch(excp::BadOsmIdException& e) {
+   }
+   catch(excp::BadOsmIdException& e)
+   {
 				const auto id = *boost::get_error_info<excp::InfoUnresolvableId>(e);
-				if (!clippedNodes.count(id)) {
+    if (!clippedNodes.count(id))
+    {
 					LOG_SEV(importer_log, warning) << "Bad osm id[" << id << "]. Entity is skipped!";
 				}
 			}
@@ -259,13 +317,16 @@ private:
 		extractAttributeFromNode("lat", node, &lat);
 
 		FloatPoint loc = {lon, lat};
-		if (clippingBounds.contains(loc)) {
+  if (clippingBounds.contains(loc))
+  {
 			DataMap<CachedString, CachedString> tags;
 			parseProperties<Node>(node->first_node(), &tags, nullptr, nullptr, nullptr, nullptr);
 
 			nodeIdMapping.insert(std::make_pair(id, NodeId(nodes->size())));
 			nodes->push_back(Node(loc, tags));
-		} else {
+  }
+  else
+  {
 			clippedNodes.insert(id);
 		}
 	}
@@ -566,6 +627,11 @@ shared_ptr<Geodata> Importer::importXML(QString* new_source_file)
 
  std::string _xml_file = config->has(opt::importer::path_to_osmdata)?
    config->get<string>(opt::importer::path_to_osmdata) : std::string{};
+
+
+// _xml_file = "/quasihome/nlevisrael/qmt-zola/alacarte/factory/places/manhattan/manh-data-nyzd.osm";
+ _xml_file = "/quasihome/nlevisrael/qmt-zola/alacarte/factory/places/nyc/nyc.osm";
+ *new_source_file = QString::fromStdString(_xml_file);
 
  if(_xml_file.empty())
  {

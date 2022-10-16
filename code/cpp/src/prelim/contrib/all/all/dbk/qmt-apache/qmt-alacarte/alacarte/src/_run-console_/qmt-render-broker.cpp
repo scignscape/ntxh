@@ -106,9 +106,10 @@ void QMT_Render_Broker::generate_png()
 
  QString pattern = out_file_pattern_.replace('|', "-%1-%2-%3");
 
- for(u4 zoom = zoom_min_; zoom <= zoom_max_; ++zoom)
-  for(u4 x = x_min_; x <= x_max_; ++x)
-   for(u4 y = y_min_; y <= y_max_; ++y)
+ for(u4 z = 0, zoom = zoom_min_; zoom <= zoom_max_; ++zoom, ++z)
+ {
+  for(u4 x = x_min_[z]; x <= x_max_[z]; ++x)
+   for(u4 y = y_min_[z]; y <= y_max_[z]; ++y)
    {
     QFileInfo qfi(pattern.arg(zoom).arg(x).arg(y));
 
@@ -120,6 +121,7 @@ void QMT_Render_Broker::generate_png()
     request_manager_->create_and_run_job(&coords, "png",
       stylesheet_folder_path_.toStdString(), sn.toStdString());
    }
+ }
 
  request_manager_->pop_factory();
 

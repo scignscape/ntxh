@@ -8,7 +8,7 @@
 
 #include "qmt-resource-info.h"
 
-#include "qmt-global-types.h"
+#include "global-types.h"
 
 #include <QDebug>
 

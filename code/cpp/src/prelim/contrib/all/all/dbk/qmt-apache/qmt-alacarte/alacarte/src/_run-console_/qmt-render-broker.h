@@ -13,9 +13,9 @@
 
 #include <string>
 
-#include "qmt-accessors.h"
+#include "accessors.h"
 
-#include "qmt-global-types.h"
+#include "global-types.h"
 
 #include <boost/smart_ptr/shared_ptr.hpp>
 
@@ -36,11 +36,11 @@ class QMT_Render_Broker
  u4 zoom_min_;
  u4 zoom_max_;
 
- u4 x_min_;
- u4 x_max_;
+ QVector<u4> x_min_;
+ QVector<u4> x_max_;
 
- u4 y_min_;
- u4 y_max_;
+ QVector<u4> y_min_;
+ QVector<u4> y_max_;
 
  boost::shared_ptr<RequestManager> request_manager_;
 
@@ -64,11 +64,11 @@ public:
  ACCESSORS(u4 ,zoom_min)
  ACCESSORS(u4 ,zoom_max)
 
- ACCESSORS(u4 ,x_min)
- ACCESSORS(u4 ,x_max)
+ ACCESSORS(QVector<u4> ,x_min)
+ ACCESSORS(QVector<u4> ,x_max)
 
- ACCESSORS(u4 ,y_min)
- ACCESSORS(u4 ,y_max)
+ ACCESSORS(QVector<u4> ,y_min)
+ ACCESSORS(QVector<u4> ,y_max)
 
  void generate_png();
 

@@ -28,7 +28,7 @@
 
 #include "qmt-server-response/qmt-server-response.h"
 
-#include "qmt-global-types.h"
+#include "global-types.h"
 
 
 extern "C" void log_comments(const char* file, const char* msg)

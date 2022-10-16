@@ -9,8 +9,8 @@
 #ifndef QMT_RAW_FILE_SERVER_RESPONSE__H
 #define QMT_RAW_FILE_SERVER_RESPONSE__H
 
-#include "qmt-accessors.h"
-#include "qmt-global-types.h"
+#include "accessors.h"
+#include "global-types.h"
 
 #include <QString>
 

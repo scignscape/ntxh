@@ -2,9 +2,9 @@
 #ifndef QMT_SERVER_RESPONSE__H
 #define QMT_SERVER_RESPONSE__H
 
-#include "qmt-accessors.h"
+#include "accessors.h"
 
-#include "qmt-global-types.h"
+#include "global-types.h"
 
 #include <QString>
 

@@ -12,9 +12,9 @@
 
 #include <string>
 
-#include "qmt-accessors.h"
+#include "accessors.h"
 
-#include "qmt-global-types.h"
+#include "global-types.h"
 
 #include <QPainter>
 

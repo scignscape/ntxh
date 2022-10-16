@@ -12,13 +12,15 @@
 
 #include <QtMath>
 
-#include "qmt-global-types.h"
+#include "global-types.h"
 #include "qt-logger.h"
 
 #include "qmt-painter.h"
 #include "qmt-paint-context.h"
 
 #include "qmt-render-broker.h"
+
+#include "utils/transform.hpp"
 
 
 
@@ -58,11 +60,17 @@ QMap<QString, u4> parse_min_max(QString text, QString& style)
  QMap<QString, u4> result;
  QStringList qsl = text.split(';', QString::SplitBehavior::SkipEmptyParts);
 
+ QMap<QString, r8> latlon;
+
+ r8 llminmax[4];
+
  for(QString line : qsl)
  {
   QStringList qsl1 = line.split('=');
 
   QString key = qsl1.value(0).trimmed();
+  if(key.isEmpty())
+    continue;
   QString value = qsl1.value(1).trimmed();
   if(key == "style")
   {
@@ -70,8 +78,56 @@ QMap<QString, u4> parse_min_max(QString text, QString& style)
      style = value;
    continue;
   }
-  result[key] = value.toUInt();
+  if(key.startsWith('l'))
+    latlon[key] = value.toDouble();
+  else
+    result[key] = value.toUInt();
  }
+
+ u4 zoom_min = result.value("zoom_min");
+ u4 zoom_max = result.value("zoom_max", zoom_min);
+
+ if(!latlon.isEmpty())
+ {
+  llminmax[0] = latlon.value("lx_min");
+  llminmax[1] = latlon.value("ly_min");
+  llminmax[2] = latlon.value("lx_max");
+  llminmax[3] = latlon.value("ly_max");
+ }
+
+ FloatPoint pmin, pmax;
+
+ coord_t cxmin, cymin, cxmax, cymax;
+
+ i4 txmin, tymin, txmax, tymax;
+
+ if(llminmax[0] && llminmax[1])
+ {
+  pmin.lon = llminmax[0]; // -73.8986;
+  pmin.lat = llminmax[1]; // 40.8862;
+  projectMercator(pmin, cxmin, cymin);
+
+  for(u4 zoom = zoom_min; zoom <= zoom_max; ++zoom)
+  {
+   mercatorToTile(cxmin, cymin, zoom, txmin, tymin);
+   result["x_min-%1"_qt.arg(zoom)] = txmin;
+   result["y_min-%1"_qt.arg(zoom)] = tymin;
+  }
+ }
+
+ if(llminmax[2] && llminmax[3])
+ {
+  pmax.lon = llminmax[2];
+  pmax.lat = llminmax[3];
+  projectMercator(pmax, cxmax, cymax);
+  for(u4 zoom = zoom_min; zoom <= zoom_max; ++zoom)
+  {
+   mercatorToTile(cxmax, cymax, zoom, txmax, tymax);
+   result["x_max-%1"_qt.arg(zoom)] = txmax;
+   result["y_max-%1"_qt.arg(zoom)] = tymax;
+  }
+ }
+
  return result;
 }
 
@@ -101,6 +157,8 @@ int main(int argc, char* argv[])
 
  QDir qd = qfi.absoluteDir();
 
+ QString qdn = qd.dirName();
+
  QString stylesheet_folder_path = sub_or_parent_sibling_folder(qd, "styles");
  if(stylesheet_folder_path.isEmpty())
  {
@@ -113,10 +171,10 @@ int main(int argc, char* argv[])
 
  //QString outfile = ALACARTE_QLOG_FOLDER;
 
- QString image_folder = sub_or_parent_sibling_folder(qd, "test-render");
+ QString image_folder = sub_or_parent_sibling_folder(qd, "%1-test-render"_qt.arg(qdn));
  if(image_folder.isEmpty())
  {
-  qDebug() << "Can't find image folder; exiting";
+  qDebug() << "Can't find image folder; exiting (" << qd << ")";
   return 0;
  }
 
@@ -153,24 +211,41 @@ int main(int argc, char* argv[])
   return 0;
  }
 
- u4 x_min = parse.value("x_min");
- u4 x_max = parse.value("x_max");
+ QVector<u4> x_min, y_min, x_max, y_max;
 
- if((x_max - x_min) > MAX_X_DIFF)
+ for(u4 zoom = zoom_min; zoom <= zoom_max; ++zoom)
  {
-  qDebug() << "Too large a x differential; exiting";
-  return 0;
+  u4 _x_min = parse.value("x_min-%1"_qt.arg(zoom));
+  u4 _x_max = parse.value("x_max-%1"_qt.arg(zoom));
+
+  if(_x_max < _x_min)
+    std::swap(_x_max, _x_min);
+
+  if((_x_max - _x_min) > MAX_X_DIFF)
+  {
+   qDebug() << "Too large a x differential; exiting";
+   return 0;
+  }
+
+  x_min.push_back(_x_min);
+  x_max.push_back(_x_max);
+
+  u4 _y_min = parse.value("y_min-%1"_qt.arg(zoom));
+  u4 _y_max = parse.value("y_max-%1"_qt.arg(zoom));
+
+  if(_y_max < _y_min)
+    std::swap(_y_max, _y_min);
+
+  if((_y_max - _y_min) > MAX_Y_DIFF)
+  {
+   qDebug() << "Too large a y differential; exiting";
+   return 0;
+  }
+
+  y_min.push_back(_y_min);
+  y_max.push_back(_y_max);
  }
 
-
- u4 y_min = parse.value("y_min");
- u4 y_max = parse.value("y_max");
-
- if((y_max - y_min) > MAX_Y_DIFF)
- {
-  qDebug() << "Too large a y differential; exiting";
-  return 0;
- }
 
 // for(u4 zoom = zoom_min; zoom <= zoom_max; ++zoom)
 //  for(u4 x = x_min; x <= x_max; ++x)

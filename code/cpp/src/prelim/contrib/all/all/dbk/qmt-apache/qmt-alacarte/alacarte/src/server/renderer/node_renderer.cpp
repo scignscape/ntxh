@@ -73,13 +73,21 @@ void NodeRenderer::casing(cairo_t* cr)
 
 void NodeRenderer::stroke(cairo_t* cr)
 {
+ float s_width = s->width;
+
 	// nothing to stroke
 	if (s->width <= 0.0)
-		return;
+  //??
+ {
+  //?
+  return;
+  //?s_width = 1;
+ }
+
 
 	cairo_save(cr);
 
-	cairo_arc(cr, location.x, location.y, s->width/2.0, 0, 2*boost::math::constants::pi<double>());
+ cairo_arc(cr, location.x, location.y, s_width/2.0, 0, 2*boost::math::constants::pi<double>());
 
 	cairo_set_source_rgba(cr, COLOR2RGBA(s->color));
 

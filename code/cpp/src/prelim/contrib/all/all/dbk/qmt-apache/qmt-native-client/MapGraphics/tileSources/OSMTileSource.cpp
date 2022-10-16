@@ -240,7 +240,8 @@ void OSMTileSource::handleNetworkRequestFinished()
    cacheID.chop(cacheID.length() - index);
 
 
- _pendingRequests.remove(cacheID);
+//? _pendingRequests.remove(cacheID);
+ _pendingRequests.remove(ocacheID);
 
  quint32 x,y,z;
  if (!MapTileSource::cacheID2xyz(cacheID,&x,&y,&z))
@@ -302,13 +303,15 @@ void OSMTileSource::handleNetworkRequestFinished()
   QDateTime expireTime;
   if(forced_expiry == 0)
   {
-    qDebug() << "cache id should expire: " << cacheID;
+//?    qDebug() << "cache id should expire: " << cacheID;
 
      expireTime = QDateTime::fromSecsSinceEpoch(100'000);
   }
   else if(forced_expiry > 0)
     expireTime = QDateTime::currentDateTimeUtc().addSecs(forced_expiry);
-  else if (reply->hasRawHeader("Cache-Control"))
+  else
+
+   if (reply->hasRawHeader("Cache-Control"))
   {
    //We support the max-age directive only for now
    const QByteArray cacheControl = reply->rawHeader("Cache-Control");

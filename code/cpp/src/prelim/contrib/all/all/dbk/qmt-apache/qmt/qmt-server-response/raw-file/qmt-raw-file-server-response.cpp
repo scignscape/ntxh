@@ -10,7 +10,7 @@
 
 #include "qmt-server-response.h"
 
-#include "qmt-global-types.h"
+#include "global-types.h"
 
 #include "qmt-resource-info.h"
 
@@ -41,6 +41,8 @@ void QMT_Raw_File_Server_Response::check_rename(QString& path, QString prepend)
 {
  // //  we know path starts with "/~" ...
 
+
+
  s2 index = path.indexOf('~', 2);
  if(index == -1)
    return;
@@ -52,7 +54,8 @@ void QMT_Raw_File_Server_Response::check_rename(QString& path, QString prepend)
 
  static QMap<QString, QStringList> rename_options;
 
- auto it = rename_options.find(pmid);
+//? auto it = rename_options.find(pmid);
+ auto it = rename_options.find(mid);
 
  if(it == rename_options.end())
  {
@@ -71,6 +74,9 @@ void QMT_Raw_File_Server_Response::check_rename(QString& path, QString prepend)
      rename_modification = qsl[0];
      rename_pattern = qsl[1];
     }
+
+    qDebug() << "Using rename file " << rename_file;
+
    }
   }
   else
@@ -155,7 +161,9 @@ void QMT_Raw_File_Server_Response::proceed(QString prepend)
     {
      size = file.size();  //when file does open.
      file.close();
+     qDebug() << "file = " << file << " size = " << size;
     }
+
     QMT_Resource_Info qri(url_path_, path, size);
     main_response_->init_resource_info_content(qri);
    }

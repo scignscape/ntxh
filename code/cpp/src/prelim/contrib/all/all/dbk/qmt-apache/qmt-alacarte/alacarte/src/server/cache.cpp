@@ -124,14 +124,18 @@ shared_ptr<Tile> Cache::getTile(const shared_ptr<TileIdentifier>& ti)
 	}  else {
 		// Cache miss
 		tile = boost::make_shared<Tile>(ti);
-		if (ti->getZoom() <= Config->get<int>(opt::server::cache_keep_tile)) {
+  if (ti->getZoom() <= Config->get<int>(opt::server::cache_keep_tile))
+  {
 			// Try to load prerendered image data from file.
 			boost::filesystem::path path = getTilePath(ti);
 			Tile::ImageType image = boost::make_shared<Tile::ImageType::element_type>();
-			try {
+   try
+   {
 				readFile(image, path);
 				tile->setImage(image);
-			} catch (excp::FileNotFoundException) {
+   }
+   catch (excp::FileNotFoundException)
+   {
 				LOG_SEV(cache_log, debug) << "readFile: Not found: " << path.string();
 			}
 		}

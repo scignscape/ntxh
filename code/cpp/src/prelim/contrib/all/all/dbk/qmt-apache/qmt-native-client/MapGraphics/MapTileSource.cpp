@@ -15,7 +15,11 @@ MapTileSource::MapTileSource() :
   current_local_host_status_(0),
   current_cache_({nullptr, nullptr, nullptr, {}})
 {
+//
  this->setCacheMode(DiskAndMemCaching);
+
+// this->setCacheMode(NoCaching);
+
 
  //We connect this signal/slot pair to communicate across threads.
  connect(this,
@@ -126,6 +130,8 @@ MapTileSource::CacheMode MapTileSource::cacheMode() const
 
 void MapTileSource::setCacheMode(MapTileSource::CacheMode nMode)
 {
+// this->setCacheMode(MapTileSource::NoCaching);
+// _cacheMode = MapTileSource::NoCaching;
  _cacheMode = nMode;
 }
 
@@ -147,6 +153,10 @@ void MapTileSource::startTileRequest(quint32 x, quint32 y, quint8 z)
    return;
   }
  }
+// else
+// {
+//  qDebug() << "No caching ...";
+// }
 
  //If we get here, the tile was not cached and we must try to retrieve it
  this->fetchTile(x,y,z);
@@ -223,7 +233,7 @@ void MapTileSource::toMemCache(const QString &cacheID, QImage *toCache, const QD
  //?
  if(expireTime == QDateTime::fromSecsSinceEpoch(100'000))
  {
-  qDebug() << "cache id expired (mem): " << cacheID;
+//?  qDebug() << "cache id expired (mem): " << cacheID;
   return;
  }
 
@@ -293,7 +303,10 @@ void MapTileSource::toDiskCache(const QString &cacheID, QImage *toCache, const Q
  //?
  if(expireTime ==  QDateTime::fromSecsSinceEpoch(100'000))
  {
-  qDebug() << "cache id expired (disk): " << cacheID;
+  //?
+  this->setTileExpirationTime(cacheID, QDateTime());
+
+//?  qDebug() << "cache id expired (disk): " << cacheID;
   return;
  }
 
