@@ -24,7 +24,7 @@
 
 USING_KANS(HGDMCore)
 
-class DHAX_Video_Annotation_Set : public QMap<u4, DHAX_Video_Annotation>
+class DHAX_Video_Annotation_Set : public QMap<s4, DHAX_Video_Annotation>
 {
  typedef NTXH_Graph::hypernode_type hypernode_type;
 
@@ -59,6 +59,8 @@ class DHAX_Video_Annotation_Set : public QMap<u4, DHAX_Video_Annotation>
  DHAX_Video_Annotation* current_pause_annotation_;
  QMap<DHAX_Video_Annotation*, QSet<DHAX_Video_Annotation*>>
    anchored_ref_annotations_;
+
+ s4 reffed_annotation_count_;
 
 public:
 
@@ -115,7 +117,7 @@ public:
 
  void load_sample_annotations();
 
- void load_annotation(DHAX_Video_Annotation& dva);
+ void load_annotation(const DHAX_Video_Annotation& dva);
  void load_annotation_file(QString file_path);
 
  void read_ntxh_hypernode(NTXH_Graph& g, hypernode_type* h);

@@ -46,6 +46,8 @@ class DHAX_Video_Annotation
 
  DHAX_Video_Annotation* ref_annotation_;
 
+ s4 pause_time_;
+
 public:
 
  DHAX_Video_Annotation();
@@ -63,6 +65,7 @@ public:
  ACCESSORS(QString ,id)
  ACCESSORS(QString ,ref_id)
  ACCESSORS(u4 ,ref_time_offset)
+ ACCESSORS(s4 ,pause_time)
 
 
  ACCESSORS(DHAX_Video_Annotation* ,ref_annotation)

@@ -51,7 +51,7 @@ INIT_SHOW_HIDE(QGraphicsEllipseItem)
 DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
   :  QFrame(parent), annotation_set_(nullptr),
      full_size_rect_item_(nullptr),
-     smaller_size_rect_item_(nullptr),
+     smaller_size_rect_item_(nullptr), current_reffed_annotations_index_(0),
      replay_count_(0), current_frame_count_(0), graphics_view_(nullptr)
 {
 // setLayout(new QVBoxLayout);
@@ -235,15 +235,83 @@ void DHAX_Video_Player_Frame::handle_pause_annotation(DHAX_Video_Annotation* dva
 
  QSet<DHAX_Video_Annotation*> qset = annotation_set_->get_anchored_ref_annotations(dva);
 
+ u4 rt = 0;
+ u4 rt_pos = 0;
+
+ current_reffed_annotations_index_ = 0;
+ current_reffed_annotations_list_.clear();
+
  if(!qset.isEmpty())
  {
   QList<DHAX_Video_Annotation*> list = qset.toList();
-  DHAX_Video_Annotation* dva1 = list.first();
-  make_scene_text_annotation(dva1);
-  current_paused_annotations_.push_back(dva1);
+
+  std::sort(list.begin(), list.end(), [](const DHAX_Video_Annotation* lhs,
+    const DHAX_Video_Annotation* rhs) //-> bool
+  { return lhs->ref_time_offset() < rhs->ref_time_offset(); });
+
+  for(DHAX_Video_Annotation* dva1 : list)
+  {
+   make_scene_text_annotation(dva1);
+   current_paused_annotations_.push_back(dva1);
+   u4 rt = dva1->ref_time_offset();
+   if(rt)
+   {
+    show_hide_hide(dva1);
+    current_reffed_annotations_list_.push_back(dva1);
+   }
+  }
  }
 
+ if(u4 pt = dva->pause_time())
+ {
+  if(current_reffed_annotations_list_.isEmpty())
+    QTimer::singleShot(pt, this, &DHAX_Video_Player_Frame::resume);
+  else
+    run_pause_reffed_annotations(nullptr, 0, 0);
+ }
 }
+
+//pt -= rt;
+//QTimer::singleShot(rt, [this, pt]()
+//{
+// DHAX_Video_Annotation* dva1 = current_reffed_annotations_list_ [current_reffed_annotations_index_];
+// show_hide_show(dva1);
+////    QTimer::singleShot(pt, this, &DHAX_Video_Player_Frame::resume);
+//});
+
+
+void DHAX_Video_Player_Frame::run_pause_reffed_annotations(DHAX_Video_Annotation* prior,
+  u2 current_ellapsed_time, u2 index)
+{
+ if(prior)
+ {
+  current_ellapsed_time += prior->ref_time_offset();
+ }
+ if(index == current_reffed_annotations_list_.size())
+ {
+  DHAX_Video_Annotation* dva0 = prior->ref_annotation();
+  QTimer::singleShot(dva0->pause_time() - current_ellapsed_time, this, &DHAX_Video_Player_Frame::resume);
+ }
+ else
+ {
+  DHAX_Video_Annotation* dva = current_reffed_annotations_list_[index];
+  u4 rto = dva->ref_time_offset();
+  QTimer::singleShot(rto, [this, dva, current_ellapsed_time, index, prior]()
+  {
+   if(prior)
+     show_hide_hide(prior);
+   show_hide_show(dva);
+   run_pause_reffed_annotations(dva, current_ellapsed_time, index + 1);
+//?   graphics_view_->update();
+
+ //    QTimer::singleShot(pt, this, &DHAX_Video_Player_Frame::resume);
+  });
+
+ }
+
+
+}
+
 
 template<typename T>
 T* DHAX_Video_Player_Frame::make_or_show_scene_annotation(DHAX_Video_Annotation* dva)

@@ -108,7 +108,13 @@ class DHAX_Video_Player_Frame : public QFrame
 
  QVector<DHAX_Video_Annotation*> current_paused_annotations_;
 
+ QList<DHAX_Video_Annotation*> current_reffed_annotations_list_;
+ u2 current_reffed_annotations_index_;
+
 //?protected:
+
+ void run_pause_reffed_annotations(DHAX_Video_Annotation* prior,
+   u2 current_ellapsed_time, u2 index);
 
  void resizeEvent(QResizeEvent* event);
  void reset_graphics_scene_rect();
