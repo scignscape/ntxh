@@ -44,6 +44,8 @@ class DHAX_Video_Annotation
  QString data64_;
  QString kv_text_;
 
+ QString element_name_;
+
  DHAX_Video_Annotation* ref_annotation_;
 
  s4 pause_time_;
@@ -57,6 +59,7 @@ public:
 
  ACCESSORS(QString ,kind)
  ACCESSORS(QString ,text)
+ ACCESSORS(QString ,element_name)
  ACCESSORS(QString ,inner_style_sheet)
  ACCESSORS(QPointF ,corner_position)
  ACCESSORS(QString ,html_text)

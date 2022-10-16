@@ -62,6 +62,8 @@ class DHAX_Video_Annotation_Set : public QMap<s4, DHAX_Video_Annotation>
 
  s4 reffed_annotation_count_;
 
+ QMap<QString, QString> reused_inner_style_sheets_;
+
 public:
 
  DHAX_Video_Annotation_Set();
@@ -91,6 +93,9 @@ public:
  ACCESSORS(r8 ,sizes_ratio_y_adjustment)
 
  ACCESSORS(DHAX_Video_Annotation* ,current_pause_annotation)
+
+ void parse_reused_style_sheet(QString& iss);
+ void fetch_reused_style_sheet(QString& iss);
 
  QSet<DHAX_Video_Annotation*> get_anchored_ref_annotations(DHAX_Video_Annotation* ref)
  {

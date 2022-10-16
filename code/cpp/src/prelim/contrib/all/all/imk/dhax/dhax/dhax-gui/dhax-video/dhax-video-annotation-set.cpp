@@ -44,16 +44,48 @@ void DHAX_Video_Annotation_Set::parse_annotation_settings_hypernode(NTXH_Graph& 
  });
 }
 
+void DHAX_Video_Annotation_Set::parse_reused_style_sheet(QString& iss)
+{
+ int index = iss.indexOf(')', 2);
+ if(index != -1)
+ {
+  QString key = iss.mid(2, index - 2);
+  iss = iss.mid(index + 1);
+  reused_inner_style_sheets_[key] = iss;
+ }
+}
+
+void DHAX_Video_Annotation_Set::fetch_reused_style_sheet(QString& iss)
+{
+ int index = iss.indexOf(']', 2);
+ if(index != -1)
+ {
+  QString key = iss.mid(2, index - 2);
+  iss = reused_inner_style_sheets_[key];
+ }
+}
+
 void DHAX_Video_Annotation_Set::parse_text_annotation_hypernode(NTXH_Graph& g, hypernode_type* h)
 {
- g.get_sfsr(h, {{1, 6}}, [this](QVector<QPair<QString, void*>>& prs)
+ g.get_sfsr(h, {{1, 7}}, [this](QVector<QPair<QString, void*>>& prs)
  {
 
   DHAX_Video_Annotation dva;
   dva.set_kind("text");
-  dva.set_text(prs[2].first);
-  dva.set_inner_style_sheet(prs[3].first);
-  dva.set_corner_position(QPointF{prs[4].first.toFloat(), prs[5].first.toFloat()});
+
+  dva.set_element_name(prs[2].first);
+
+  dva.set_text(prs[3].first);
+
+  QString iss = prs[4].first;
+  if(iss.startsWith("($"))
+    parse_reused_style_sheet(iss);
+  else if(iss.startsWith("[$"))
+    fetch_reused_style_sheet(iss);
+
+  dva.set_inner_style_sheet(iss);
+
+  dva.set_corner_position(QPointF{prs[5].first.toFloat(), prs[6].first.toFloat()});
   dva.finalize_html_text();
 
   QString s = prs[0].first;
@@ -91,7 +123,7 @@ void DHAX_Video_Annotation_Set::parse_pause_annotation_hypernode(NTXH_Graph& g, 
   DHAX_Video_Annotation dva;
   dva.set_starting_frame_number(prs[0].first.toInt());
   dva.set_id(prs[1].first);
-  dva.set_pause_time(prs[2].first.toInt());
+  dva.set_pause_time(prs[2].first.toInt() * 100);
   dva.set_kind("pause");
   load_annotation(dva);
 
