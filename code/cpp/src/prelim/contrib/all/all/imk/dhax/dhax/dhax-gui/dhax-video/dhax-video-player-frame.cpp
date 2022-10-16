@@ -50,7 +50,7 @@ INIT_SHOW_HIDE(QGraphicsEllipseItem)
 
 DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
   :  QFrame(parent), annotation_set_(nullptr),
-     full_size_rect_item_(nullptr),
+     full_size_rect_item_(nullptr), current_pause_timer_(nullptr),
      smaller_size_rect_item_(nullptr), current_reffed_annotations_index_(0),
      replay_count_(0), current_frame_count_(0), graphics_view_(nullptr)
 {
@@ -265,7 +265,9 @@ void DHAX_Video_Player_Frame::handle_pause_annotation(DHAX_Video_Annotation* dva
  if(u4 pt = dva->pause_time())
  {
   if(current_reffed_annotations_list_.isEmpty())
-    QTimer::singleShot(pt, this, &DHAX_Video_Player_Frame::resume);
+    this_reset_current_pause_timer(pt,
+     &DHAX_Video_Player_Frame::resume_from_pause_timer);
+//?    QTimer::singleShot(pt, this, &DHAX_Video_Player_Frame::resume);
   else
     run_pause_reffed_annotations(nullptr, 0, 0);
  }
@@ -279,6 +281,13 @@ void DHAX_Video_Player_Frame::handle_pause_annotation(DHAX_Video_Annotation* dva
 ////    QTimer::singleShot(pt, this, &DHAX_Video_Player_Frame::resume);
 //});
 
+//void DHAX_Video_Player_Frame::reset_current_pause_timer()
+//{
+// if(current_pause_timer_)
+//   delete current_pause_timer_;
+
+// QTimer::singleShot()
+//}
 
 void DHAX_Video_Player_Frame::run_pause_reffed_annotations(DHAX_Video_Annotation* prior,
   u2 current_ellapsed_time, u2 index)
@@ -290,13 +299,20 @@ void DHAX_Video_Player_Frame::run_pause_reffed_annotations(DHAX_Video_Annotation
  if(index == current_reffed_annotations_list_.size())
  {
   DHAX_Video_Annotation* dva0 = prior->ref_annotation();
-  QTimer::singleShot(dva0->pause_time() - current_ellapsed_time, this, &DHAX_Video_Player_Frame::resume);
+//  QTimer::singleShot(dva0->pause_time() - current_ellapsed_time, this, &DHAX_Video_Player_Frame::resume);
+
+  this_reset_current_pause_timer(dva0->pause_time() - current_ellapsed_time,
+    &DHAX_Video_Player_Frame::resume_from_pause_timer);
+
  }
  else
  {
   DHAX_Video_Annotation* dva = current_reffed_annotations_list_[index];
   u4 rto = dva->ref_time_offset();
-  QTimer::singleShot(rto, [this, dva, current_ellapsed_time, index, prior]()
+
+  //?QTimer::singleShot(rto, [this, dva, current_ellapsed_time, index, prior]()
+
+  reset_current_pause_timer(rto, [this, dva, current_ellapsed_time, index, prior]()
   {
    if(prior)
      show_hide_hide(prior);
@@ -562,13 +578,34 @@ void DHAX_Video_Player_Frame::update_frame_number_text()
 
 void DHAX_Video_Player_Frame::pause()
 {
+ if(current_pause_timer_)
+ {
+  current_pause_timer_->stop();
+  return;
+ }
+
  media_player_->pause();
  navigation_->set_play_button_to_resume();
+}
+
+void DHAX_Video_Player_Frame::resume_from_pause_timer()
+{
+ if(current_pause_timer_)
+   current_pause_timer_->deleteLater();
+
+ current_pause_timer_ = nullptr;
+ resume();
 }
 
 
 void DHAX_Video_Player_Frame::resume()
 {
+ if(current_pause_timer_)
+ {
+  current_pause_timer_->start();
+  return;
+ }
+
  for(DHAX_Video_Annotation* dva : current_paused_annotations_)
  {
   show_hide_hide(dva);

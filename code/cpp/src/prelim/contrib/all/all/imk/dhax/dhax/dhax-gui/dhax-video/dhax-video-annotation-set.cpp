@@ -44,24 +44,37 @@ void DHAX_Video_Annotation_Set::parse_annotation_settings_hypernode(NTXH_Graph& 
  });
 }
 
-void DHAX_Video_Annotation_Set::parse_reused_style_sheet(QString& iss)
+void DHAX_Video_Annotation_Set::check_text_macro(QString& text)
 {
- int index = iss.indexOf(')', 2);
+ if(text.startsWith("($"))
+   parse_text_macro(text);
+
+ // //  these leaves open the possibility
+  //    that the ($...) form could return
+  //    a [$...] form, which is probably
+  //    reasonable ...
+ if(text.startsWith("[$"))
+   fetch_text_macro(text);
+}
+
+void DHAX_Video_Annotation_Set::parse_text_macro(QString& text)
+{
+ int index = text.indexOf(')', 2);
  if(index != -1)
  {
-  QString key = iss.mid(2, index - 2);
-  iss = iss.mid(index + 1);
-  reused_inner_style_sheets_[key] = iss;
+  QString key = text.mid(2, index - 2);
+  text = text.mid(index + 1);
+  text_macros_[key] = text;
  }
 }
 
-void DHAX_Video_Annotation_Set::fetch_reused_style_sheet(QString& iss)
+void DHAX_Video_Annotation_Set::fetch_text_macro(QString& text)
 {
- int index = iss.indexOf(']', 2);
+ int index = text.indexOf(']', 2);
  if(index != -1)
  {
-  QString key = iss.mid(2, index - 2);
-  iss = reused_inner_style_sheets_[key];
+  QString key = text.mid(2, index - 2);
+  text = text_macros_[key];
  }
 }
 
@@ -73,15 +86,21 @@ void DHAX_Video_Annotation_Set::parse_text_annotation_hypernode(NTXH_Graph& g, h
   DHAX_Video_Annotation dva;
   dva.set_kind("text");
 
-  dva.set_element_name(prs[2].first);
+  QString en = prs[2].first;
+  check_text_macro(en);
+
+  int index = en.indexOf('@');
+  if(index != -1)
+  {
+   dva.set_font_size(en.mid(index + 1).trimmed());
+   en = en.mid(0, index).trimmed();
+  }
+  dva.set_element_name(en);
 
   dva.set_text(prs[3].first);
 
   QString iss = prs[4].first;
-  if(iss.startsWith("($"))
-    parse_reused_style_sheet(iss);
-  else if(iss.startsWith("[$"))
-    fetch_reused_style_sheet(iss);
+  check_text_macro(iss);
 
   dva.set_inner_style_sheet(iss);
 

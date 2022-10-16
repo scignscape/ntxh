@@ -43,6 +43,7 @@
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QTimer>
 
 #include "global-types.h"
 
@@ -111,6 +112,8 @@ class DHAX_Video_Player_Frame : public QFrame
  QList<DHAX_Video_Annotation*> current_reffed_annotations_list_;
  u2 current_reffed_annotations_index_;
 
+ QTimer* current_pause_timer_;
+
 //?protected:
 
  void run_pause_reffed_annotations(DHAX_Video_Annotation* prior,
@@ -140,6 +143,40 @@ class DHAX_Video_Player_Frame : public QFrame
  void reposition_smaller_annotations_rect_item();
 
  QRectF graphics_view_visible_rect();
+
+// template <typename ...Params>
+// void reset_current_pause_timer(Params&& ...params)
+// {
+//  if(current_pause_timer_)
+//    delete current_pause_timer_;
+// }
+
+// template<typename FN_Type>
+
+ void reset_current_pause_timer(u4 interval)
+ {
+  current_pause_timer_ = new QTimer(this);
+  current_pause_timer_->setInterval(interval);
+  current_pause_timer_->setSingleShot(true);
+ }
+
+ template<typename FN_Type>
+ void this_reset_current_pause_timer(u4 interval, FN_Type fn)
+ {
+  reset_current_pause_timer(interval);
+  connect(current_pause_timer_, &QTimer::timeout, this, fn);
+  current_pause_timer_->start();
+ }
+
+ template<typename FN_Type>
+ void reset_current_pause_timer(u4 interval, FN_Type fn)
+ {
+  reset_current_pause_timer(interval);
+  connect(current_pause_timer_, &QTimer::timeout, fn);
+  current_pause_timer_->start();
+ }
+
+ void resume_from_pause_timer();
 
 public:
 
