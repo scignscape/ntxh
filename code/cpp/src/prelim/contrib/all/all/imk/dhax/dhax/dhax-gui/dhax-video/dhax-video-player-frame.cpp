@@ -666,13 +666,14 @@ void DHAX_Video_Player_Frame::play_local_video(QString file_path, QString annota
 
  media_player_->play();
 
+ pause();
 
 
- qDebug() << " SR1: " << graphics_scene_->sceneRect();
- qDebug() << " IBR1: " << graphics_scene_->itemsBoundingRect();
+// qDebug() << " SR1: " << graphics_scene_->sceneRect();
+// qDebug() << " IBR1: " << graphics_scene_->itemsBoundingRect();
 
- QSizeF sz = video_item_->size(); //.grownBy(QMargins(5,5,5,5));
- qDebug() << " SZ1: " << sz;
+// QSizeF sz = video_item_->size(); //.grownBy(QMargins(5,5,5,5));
+// qDebug() << " SZ1: " << sz;
 
 
 // navigation_->show();
