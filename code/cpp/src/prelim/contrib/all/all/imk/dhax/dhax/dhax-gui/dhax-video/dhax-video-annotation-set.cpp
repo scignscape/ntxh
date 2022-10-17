@@ -44,37 +44,37 @@ void DHAX_Video_Annotation_Set::parse_annotation_settings_hypernode(NTXH_Graph& 
  });
 }
 
-void DHAX_Video_Annotation_Set::check_text_macro(QString& text)
+void DHAX_Video_Annotation_Set::check_text_macro(QString& text, int start)
 {
- if(text.startsWith("($"))
-   parse_text_macro(text);
+ if(text.midRef(start).startsWith("($"))
+   parse_text_macro(text, start);
 
  // //  these leaves open the possibility
   //    that the ($...) form could return
   //    a [$...] form, which is probably
   //    reasonable ...
- if(text.startsWith("[$"))
-   fetch_text_macro(text);
+ if(text.midRef(start).startsWith("[$"))
+   fetch_text_macro(text, start);
 }
 
-void DHAX_Video_Annotation_Set::parse_text_macro(QString& text)
+void DHAX_Video_Annotation_Set::parse_text_macro(QString& text, int start)
 {
- int index = text.indexOf(')', 2);
+ int index = text.indexOf(')', 2 + start);
  if(index != -1)
  {
-  QString key = text.mid(2, index - 2);
-  text = text.mid(index + 1);
-  text_macros_[key] = text;
+  QString key = text.mid((2 + start), index - (2 + start));
+  text_macros_[key] = text.mid(index + 1);
+  text = text.mid(0, start) + text.mid(index + 1);
  }
 }
 
-void DHAX_Video_Annotation_Set::fetch_text_macro(QString& text)
+void DHAX_Video_Annotation_Set::fetch_text_macro(QString& text, int start)
 {
- int index = text.indexOf(']', 2);
+ int index = text.indexOf(']', 2 + start);
  if(index != -1)
  {
-  QString key = text.mid(2, index - 2);
-  text = text_macros_[key];
+  QString key = text.mid(2 + start, index - (2 + start));
+  text = text.mid(0, start) + text_macros_[key];
  }
 }
 
@@ -89,7 +89,26 @@ void DHAX_Video_Annotation_Set::parse_text_annotation_hypernode(NTXH_Graph& g, h
   QString en = prs[2].first;
   check_text_macro(en);
 
-  int index = en.indexOf('@');
+  int index = en.indexOf('+');
+  {
+   if(index != -1)
+   {
+    QString ien = en.mid(index + 1).trimmed();
+    en = en.mid(0, index).trimmed();
+    index = ien.indexOf('|');
+    if(index != -1)
+    {
+     QString inner_bkg = ien.mid(index + 1).trimmed();
+     ien = ien.mid(0, index).simplified();
+     inner_bkg.replace(' ', "");
+     check_text_macro(inner_bkg, 0, 1);
+     dva.set_inner_element_background_color(inner_bkg);
+    }
+    dva.set_inner_element_name(ien);
+   }
+  }
+
+  index = en.indexOf('@');
   if(index != -1)
   {
    dva.set_font_size(en.mid(index + 1).trimmed());
@@ -141,6 +160,16 @@ void DHAX_Video_Annotation_Set::parse_pause_annotation_hypernode(NTXH_Graph& g, 
  {
   DHAX_Video_Annotation dva;
   dva.set_starting_frame_number(prs[0].first.toInt());
+
+  QString id = prs[1].first;
+
+  if(id.startsWith("+"))
+  {
+   QString key = id.mid(1);
+   u4 val = ++auto_ids_[key];
+   id += QString::number(val);
+  }
+
   dva.set_id(prs[1].first);
   dva.set_pause_time(prs[2].first.toInt() * 100);
   dva.set_kind("pause");

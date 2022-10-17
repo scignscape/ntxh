@@ -28,6 +28,9 @@ void DHAX_Video_Annotation::finalize_html_text()
 
  static QString font = "<span style=\"font-size:%1\">";
 
+// static QString inner = "<%1%2>"; // style=\"font-size:%1\">";
+// static QString inner = "<%1%2>"; // style=\"font-size:%1\">";
+
  QString text = text_;
 
  QString font_start, font_end;
@@ -42,6 +45,27 @@ void DHAX_Video_Annotation::finalize_html_text()
     font_start = font.arg(font_size_);
 
   font_end = "</span>";
+ }
+
+// QString pre_inner_element, post_inner_element;
+ QString ibc = inner_element_background_color_;
+ if(ibc.startsWith('>'))
+ {
+  ibc = ibc.mid(1);
+  font_start += "<br>";
+  font_end.prepend("<br>");
+//  pre_inner_element = "<br>";
+//  post_inner_element = "<br>";
+ }
+
+ if(!inner_element_name_.isEmpty())
+ {
+  if(ibc.isEmpty())
+    font_start += "<%1>"_qt.arg(inner_element_name_);
+  else
+    font_start += "<%1 style=\"background-color:%2\">"_qt
+     .arg(inner_element_name_).arg(ibc);
+  font_end.prepend("</%1>"_qt.arg(inner_element_name_));
  }
 
  text.replace("<|||", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
@@ -59,7 +83,7 @@ void DHAX_Video_Annotation::finalize_html_text()
 
  static int count = 0;
 
- if(count < 3)
+ if(count < 5)
    qDebug() << "html text: " << html_text_;
 
  ++count;

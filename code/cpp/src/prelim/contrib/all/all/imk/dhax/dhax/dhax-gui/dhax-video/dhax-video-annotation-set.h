@@ -64,10 +64,21 @@ class DHAX_Video_Annotation_Set : public QMap<s4, DHAX_Video_Annotation>
 
  QMap<QString, QString> text_macros_;
 
- void parse_text_macro(QString& text);
- void fetch_text_macro(QString& text);
+ QMap<QString, s4> auto_ids_;
 
- void check_text_macro(QString& text);
+ void parse_text_macro(QString& text, int start = 0);
+ void fetch_text_macro(QString& text, int start = 0);
+
+ void check_text_macro(QString& text, int start = 0);
+
+ void check_text_macro(QString& text, int start_start, int start_end)
+ {
+  for(int ss = start_start; ss <= start_end; ++ss)
+  {
+   check_text_macro(text, ss);
+  }
+ }
+
 
 public:
 

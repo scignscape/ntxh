@@ -45,6 +45,8 @@ class DHAX_Video_Annotation
  QString kv_text_;
 
  QString element_name_;
+ QString inner_element_name_;
+ QString inner_element_background_color_;
 
  QString font_size_;
 
@@ -69,6 +71,9 @@ public:
  ACCESSORS(QString ,kv_text)
 
  ACCESSORS(QString ,font_size)
+
+ ACCESSORS(QString ,inner_element_name)
+ ACCESSORS(QString ,inner_element_background_color)
 
 
  ACCESSORS(QString ,id)
