@@ -46,6 +46,7 @@ void show_hide_show(DHAX_Video_Annotation* dva)
 
 INIT_SHOW_HIDE(QGraphicsTextItem)
 INIT_SHOW_HIDE(QGraphicsEllipseItem)
+INIT_SHOW_HIDE(QGraphicsPolygonItem)
 
 
 DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
@@ -480,17 +481,50 @@ void* DHAX_Video_Player_Frame::make_scene_arrow_annotation(DHAX_Video_Annotation
  Rotateable_Arrow_Annotation raa = kv_text.isEmpty()?
    Rotateable_Arrow_Annotation(qba) : Rotateable_Arrow_Annotation(kv_text);
 
- const QPolygonF& qpf = raa.rendered_polygon();
+//? const QPolygonF& qpf = raa.rendered_polygon();
+ QPolygonF qpf = raa.rendered_polygon();
+
+// QPolygonF qpf = raa.rendered_polygon();
 
  QBrush qbr(raa.fill_color());
 
+  qDebug() << "\n\n\n===============\n\n";
+
  qDebug() << raa.fill_color();
  qDebug() << raa.get_xscale();
+ qDebug() << raa.get_yscale();
+ qDebug() << qpf;
 
- QGraphicsPolygonItem* result = graphics_scene_->addPolygon(qpf, Qt::NoPen, qbr);
+ qDebug() << "\n\n===============\n\n\n";
+
+ QColor pen_color = raa.fill_color();
+
+ pen_color.setGreen(qMax(pen_color.green() - 40, 0));
+ pen_color.setRed(qMax(pen_color.red() - 40, 0));
+ pen_color.setBlue(qMax(pen_color.blue() - 40, 0));
+
+ pen_color.setAlpha(140);
+
+ QPen pen;
+ pen.setColor(pen_color);
+ pen.setWidth(2);
+ pen.setCapStyle(Qt::FlatCap);
+
+
+ QGraphicsPolygonItem* result = new QGraphicsPolygonItem(qpf, annotations_rect_item_);
+ result->setPen(pen);
+ result->setBrush(qbr);
+
+   //graphics_scene_->addPolygon(qpf, pen, qbr);
 // result->setScale(raa.get_scale());
 
- result->setParentItem(annotations_rect_item_);
+ dva->set_scene_data(result);
+ dva->set_scene_type_data(QGraphicsPolygonItem_show_hide);
+
+ annotation_set_->set_end_frame_data(dva->ending_frame_number(),
+   //?QGraphicsEllipseItem_show_hide,
+   *dva);
+
 
  return result;
 }

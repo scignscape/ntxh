@@ -478,6 +478,8 @@ void Rotateable_Arrow_Annotation::read_ntxh_data(QMap<QString, QStringList>& kv_
  fld(Double, rotation)
  fld(Double, shaft_offset)
  fld(Double, shaft_offset_delta)
+ fld(Double, tip_point_width)
+ fld(Double, tip_corner_bend)
 
 #undef fld
 #undef fld_QPointF
@@ -497,6 +499,8 @@ void Rotateable_Arrow_Annotation::read_from_ntxh_data(const NTXH_Data& nd)
  xtranslate_ = nd.xtranslate;
  ytranslate_ = nd.ytranslate;
 
+ tip_point_width_ = nd.tip_point_width;
+
  current_corner_pair_direction_ = (Corner_Pair_Directions) nd.corner_pair_direction;
  tip_corner_bend_ = nd.tip_corner_bend;
  rotation_ = nd.rotation;
@@ -512,6 +516,11 @@ void Rotateable_Arrow_Annotation::read_from_ntxh_data(const NTXH_Data& nd)
  tip_.setTop(shaft_.center().y() - (nd.tip_width / 2));
  tip_.setHeight(nd.tip_width);
  tip_.setWidth(nd.tip_length);
+
+
+ //?
+ tip_point_width_delta_ = 1;
+ tip_corner_bend_delta_ = 1;
 
 }
 

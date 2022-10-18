@@ -68,12 +68,12 @@ void DHAX_Video_Annotation::finalize_html_text()
   font_end.prepend("</%1>"_qt.arg(inner_element_name_));
  }
 
- text.replace("<|||", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+ text.replace("<|||", "&nbsp;&nbsp;");
 
  text.replace("<||", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
  text.replace("<|", "&nbsp;");
 
- text.replace("|||>", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>");
+ text.replace("|||>", "&nbsp;&nbsp;<br>");
  text.replace("||>", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>");
  text.replace("|>", "&nbsp;<br>");
 
