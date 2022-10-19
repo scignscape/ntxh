@@ -4,11 +4,12 @@
 .
 
 
-&type Text_Annotation {6}
-  :s:1  :t:3  :y:4  :p:5 ;
+&type Text_Annotation {7}
+  :s:1  :e:3  :t:4  :y:5  :p:6 ;
 
 &type Shape_Annotation {5}
   :k:1  :s:2  :t:4  :d:5 ;
+
  
 &type Circled_Text_Default {15}
   :w:1
@@ -20,8 +21,9 @@
 
 - s=start frame  i=id
 
-&type Pause_Annotation {5}
-  :s:1  :i:2 ;
+
+&type Pause_Annotation {3}
+  :s:1  :i:2  :t:3 ;
 
 
 &type Annotation_Settings {6}
@@ -50,74 +52,239 @@ $border: 2
 <+>
 
 
-!/ Text_Annotation
-$s# 20 +100
-$t. 
-Standalone GIS Applications:<br>
-Interactive Features 
-.
-$y.
- color:rgba(0,10,37);;font-weight:bold;
- background-color:rgba(200,190,7,50);
-.
-$p# 20 150
-/!
-<+>
 
-
-!/ Text_Annotation
-$s#  170  +90
-$t. 
-Choosing between different style formats
-.
-$y.
- color:rgba(0,10,37);;font-weight:bold;
- background-color:rgba(200,190,7,50);
-.
-$p# 20 210
+!/ Pause_Annotation
+$s: 10 
+$i: p1
+$t: 710
 /!
 <+>
 
 
 
 !/ Text_Annotation
-$s#  400  +150
+$s#  !p1  5
+$e: ($dl) div @9
 $t. 
-Applications should select/offer base-map<br>
-styles that do not conflict with supplemental<br>
-data layers specific to that application
+|> 
+<|| This video will present our GIS/Digital  ||> 
+<|| Cartography platform, one that combines the ||> 
+<|| features and functionality of GIS tile servers ||> 
+<|| with geospatial application-development tools. ||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| Tile servers provide the base maps that GIS ||>
+<|| applications stream (from an online repository) ||>
+<|| and then utilize to construct domain-specific ||>
+<|| presentations, by superimposing custom data ||>
+<|| layers. <| Such layers can incorporate any ||>
+<|| information wherein data points or areas are  ||>
+<|| assigned/correlated with geographic coordinates. ||>
 .
 $y.
- color:rgba(120,10,37);font-size:10pt;
+($large-box)
+ color:rgb(10,90,137);;font-weight:normal;
+ background-color:rgba(245,245,210,220);
+.
+$p# 2 5
+/!
+<+>
+
+!/ Text_Annotation
+$s#  !p1  225
+$e: div @8
+$t. 
+|> 
+<|| The video will point out useful features of ||> 
+<|| standalone GIS applications &mdash; that is, ||> 
+<|| applications which run as isolated programs on a ||> 
+<|| desktop computer, rather than forcing users to ||> 
+<|| work through a web browser or through generic GIS ||>
+<|| platforms (for instance, ArcGIS or ArcGIS Online). ||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| Standalone applications engineered via these ||>
+<|| techniques can be more flexible, convenient, and ||>
+<|| responsive &mdash; as compared to web portals with ||>  
+<|| map displays &mdash; because they are more adaptable ||>
+<|| when managing domain-specific data sets, and ||>
+<|| because they offer a superior User Experience. ||>   
+.
+$y: [$large-box]
+$p# 2 4
+/!
+<+>
+
+
+!/ Text_Annotation
+$s#  !p1  230
+$e: div @8
+$t. 
+|> 
+<|| The video will show several examples of how stand- ||> 
+<|| alone GIS technology promotes a richer User   ||> 
+<|| Experience, and will also present several features of ||> 
+<|| tile servers that applications may employ as back ends. ||> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| This code base is unique in that it offers tile-server ||>
+<|| and application-development components via a unified ||>
+<|| toolkit, enabling applications to be paired with tile ||>
+<|| servers and renderers engineered alongside each ||>
+<|| application &mdash; yielding both integrated database ||>  
+<|| access via server-side data layers, and integrated ||> 
+<|| cartographic styles, to ensure that the base maps and ||> 
+<|| overlays are visually effective when seen in consort. ||>    
+.
+$y: [$large-box]
+$p# 1 3
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 20 +160
+$e: div  +span |> ($over-yellow) rgba(250,250,207,250)  
+$t. 
+<| Standalone GIS Applications: |>
+<| Interactive Features 
+.
+$y.
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 16 19
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 21 
+$i: +auto
+$t: 30
+/!
+<+>
+
+
+!/ Text_Annotation
+$s#  210  +172
+$e: div +span |> [$over-yellow] 
+$t. 
+<| Choosing between different style formats <|
+.
+$y.
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 15 25
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 211
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+
+
+!/ Text_Annotation
+$s#  400  470
+$e: div
+$t. 
+<| Applications should select or offer base map |>
+<| styles that do not conflict with supplemental |>
+<| data layers specific to that application
+.
+$y.
+($pg)
+ color:rgb(70,4,67);font-size:10pt;
  font-weight:bold;
- background-color:rgba(200,200,200,50);
+ background-color:rgba(200,200,200,220);
 .
-$p# 10 120
+$p# 3 22
+/!
+<+>
+
+!/ Pause_Annotation
+$s: 401
+$i: +auto
+$t: 100
 /!
 <+>
 
 
 !/ Text_Annotation
-$s#  600  +150
+$s#  490  555
+$e: div
 $t. 
-<p>
-Tile servers can support multiple applications<br>
-by rendering map-segments<br>through a variety of styles. 
-</p>
+<| Tile servers can support multiple |>
+<| applications by rendering map-segments |>
+<| through a variety of styles
 .
 $y.
- color:rgba(120,10,37);font-size:10;font-weight:bold;
- background-color:rgba(200,200,200,50);
+[$pg]
 .
-$p# 10 160
+$p# 11 22
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 491
+$i: +auto
+$t: 45
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 553
+$i: +auto
+$t: 45
+/!
+<+>
+
+!/ Text_Annotation
+$s#  560  565
+$e: div
+$t. 
+<| Here the user is previewing several different |>
+<| map styles, characterized by distinct |>
+<| color schemes and variegated iconography |>
+<| for cartographic elements  <|
+.
+$y.
+[$pg]
+.
+$p# 5 10
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 563
+$i: +auto
+$t: 90
 /!
 <+>
 
 
 !/ Text_Annotation
 $s# 780 820
+$e: div +span |> [$over-yellow]
 $t. 
-Obtaining GIS Information
+<| Obtaining GIS Information <|
 .
 $y.
  color:rgba(0,10,37);;font-weight:bold;
@@ -128,29 +295,22 @@ $p# 20 150
 <+>
 
 
-!/ Text_Annotation
-$s#  880  +100
-$t. 
-Latitude and Longitude Coordinates. 
-.
-$y.
- color:rgba(120,10,37);font-size:10;font-weight:bold;
- background-color:rgba(200,200,200,50);
-.
-$p# 20 210
+!/ Pause_Annotation
+$s: 781
+$i: +auto
+$t: 20
 /!
 <+>
 
 
 !/ Text_Annotation
-$s#  1050  +120
+$s#  880  +120
+$e: div
 $t. 
-Converting Latitude and Longitude<br>
-to Street Addresses. 
+<| Latitude and Longitude Coordinates <|
 .
 $y.
- color:rgba(120,10,37);font-size:10;font-weight:bold;
- background-color:rgba(200,200,200,50);
+[$pg]
 .
 $p# 20 180
 /!
@@ -159,281 +319,795 @@ $p# 20 180
 
 
 !/ Text_Annotation
-$s#  1250  +130
+$s#  1050  1320
+$e: div
 $t. 
-Aside from showing address data to end-users,<br>
-these queries allow applications to serve as<br>
-front-ends to GIS databases. 
+<| Converting a latitude-longitude coordinate |>
+<| pair to the closest street address <| 
+.
+$y.
+[$pg]
+.
+$p# 5 40
+/!
+<+>
+
+!/ Pause_Annotation
+$s: 1261
+$i: +auto
+$t: 30
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 1291
+$i: +auto
+$t: 30
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 1361
+$i: p2
+$t: 90
+/!
+<+>
+
+!/ Text_Annotation
+$s#  !p2  3
+$e: div @11
+$t. 
+<| Aside from showing address |>
+<| data to end users, these queries |>
+<| allow applications to serve as |>
+<| front-ends for geospatial databases |>
+<| and GIS information services <| 
 .
 $y.
  color:rgba(50,10,137);font-size:10;font-weight:normal;
  background-color:rgba(245,245,210,220);
 .
-$p# 20 160
+$p# 20 50
 /!
 <+>
 
 
 
 !/ Text_Annotation
-$s#  1470  +100
+$s#  1470  +230
+$e: div
 $t. 
-Locating Bus Routes and Bus Stops 
+<| Finding Bus Routes and Bus Stops <|
 .
 $y.
- color:rgba(120,10,37);font-size:10;font-weight:bold;
- background-color:rgba(200,200,200,50);
+[$pg]
 .
-$p# 20 150
+$p# 32 150
 /!
 <+>
 
 
 
 !/ Text_Annotation
-$s#  1890  +100
+$s#  1890  2060
+$e: div
 $t. 
-This display shows the 10 stops closest to the<br>
-chosen position, and is updated when the<br>&ldquo;anchor&rdquo;
-position changes. 
+<| This display shows a group of bus stops nearest |>
+<| to the chosen location, and is updated when |> 
+<| the &ldquo;anchor&rdquo; location changes (symbolized |>
+<| by the gold icon, which becomes outlined in |>
+<| black while it is moving or selected)   
 .
 $y.
- color:rgba(120,10,37);font-size:10;font-weight:bold;
+ color:rgb(120,10,37);font-size:10;font-weight:bold;
  background-color:rgba(210,255,200,205);
 .
-$p# 20 30
+$p# 8 14
 /!
 <+>
+
+
+
+!/ Shape_Annotation
+$k: Rotateable_Arrow_Annotation
+$s# 1888  1904
+$t.
+color: 204 76 47 
+scale: 0.17
+tr: -94 -308
+shaft_corner: 168 462
+shaft_width: 38
+shaft_length: 106
+tip_width: 92
+tip_length: 153
+tip_point_width: 0
+tip_corner_bend: 0
+rotation: 347.518
+rotation_center: 187 481
+shaft_offset: 6
+shaft_offset_delta: 1
+corner_pair_direction: -121
+.
+$d.
+QGUAAAAAAABAfOAAAAAAAEBaQAAAAAAAQEKAAAAAAABAcRAAAAAAAEB7MAAAAAAAQGMAAAAAAABAVsAAAAAAAAAAAAAAAAAAP/AAAAAAAAA/8AAAAAAAAEB1uEi5V16EQGdQAAAAAABAfggAAAAAAEB6kAAAAAAAQIBwAAAAAABAZ1AAAAAAAEB+CAAAAAAAAAAAuwAAAeFAGAAAAAAAAD/wAAAAAAAAAP//AAAAAAAAAAA/8AAAAAAAAD/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+.
+/!
+<+>
+ 
+
+
+!/ Shape_Annotation
+$k: Rotateable_Arrow_Annotation
+$s# 1916  1956
+$t.
+color: 204 76 47 
+scale: 0.17
+tr: -94 -308
+shaft_corner: 168 462
+shaft_width: 38
+shaft_length: 106
+tip_width: 92
+tip_length: 153
+tip_point_width: 0
+tip_corner_bend: 0
+rotation: 347.518
+rotation_center: 187 481
+shaft_offset: 6
+shaft_offset_delta: 1
+corner_pair_direction: -121
+.
+$d.
+QGUAAAAAAABAfOAAAAAAAEBaQAAAAAAAQEKAAAAAAABAcRAAAAAAAEB7MAAAAAAAQGMAAAAAAABAVsAAAAAAAAAAAAAAAAAAP/AAAAAAAAA/8AAAAAAAAEB1uEi5V16EQGdQAAAAAABAfggAAAAAAEB6kAAAAAAAQIBwAAAAAABAZ1AAAAAAAEB+CAAAAAAAAAAAuwAAAeFAGAAAAAAAAD/wAAAAAAAAAP//AAAAAAAAAAA/8AAAAAAAAD/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+.
+/!
+<+>
+ 
+
+
+!/ Shape_Annotation
+$k: Rotateable_Arrow_Annotation
+$s# 1986  1998
+$t.
+color: 204 76 47 
+scale: 0.22
+tr: -90 -344
+shaft_corner: 168 462
+shaft_width: 38
+shaft_length: 106
+tip_width: 92
+tip_length: 153
+tip_point_width: 0
+tip_corner_bend: 0
+rotation: 347.518
+rotation_center: 187 481
+shaft_offset: 6
+shaft_offset_delta: 1
+corner_pair_direction: -121
+.
+$d.
+QGUAAAAAAABAfOAAAAAAAEBaQAAAAAAAQEKAAAAAAABAcRAAAAAAAEB7MAAAAAAAQGMAAAAAAABAVsAAAAAAAAAAAAAAAAAAP/AAAAAAAAA/8AAAAAAAAEB1uEi5V16EQGdQAAAAAABAfggAAAAAAEB6kAAAAAAAQIBwAAAAAABAZ1AAAAAAAEB+CAAAAAAAAAAAuwAAAeFAGAAAAAAAAD/wAAAAAAAAAP//AAAAAAAAAAA/8AAAAAAAAD/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+.
+/!
+<+>
+ 
+
+
+!/ Shape_Annotation
+$k: Rotateable_Arrow_Annotation
+$s# 2009  2013
+$t.
+color: 204 76 47 
+scale: 0.22
+tr: -90 -344
+shaft_corner: 168 462
+shaft_width: 38
+shaft_length: 106
+tip_width: 92
+tip_length: 153
+tip_point_width: 0
+tip_corner_bend: 0
+rotation: 347.518
+rotation_center: 187 481
+shaft_offset: 6
+shaft_offset_delta: 1
+corner_pair_direction: -121
+.
+$d.
+QGUAAAAAAABAfOAAAAAAAEBaQAAAAAAAQEKAAAAAAABAcRAAAAAAAEB7MAAAAAAAQGMAAAAAAABAVsAAAAAAAAAAAAAAAAAAP/AAAAAAAAA/8AAAAAAAAEB1uEi5V16EQGdQAAAAAABAfggAAAAAAEB6kAAAAAAAQIBwAAAAAABAZ1AAAAAAAEB+CAAAAAAAAAAAuwAAAeFAGAAAAAAAAD/wAAAAAAAAAP//AAAAAAAAAAA/8AAAAAAAAD/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+.
+/!
+<+>
+ 
+
+
+!/ Pause_Annotation
+$s: 2010
+$i: +auto
+$t: 116
+/!
+<+>
+
 
 
 !/ Text_Annotation
 $s#  2200  +100
-$t. 
-Alternatively, view total route data<br>
-mapped out in a separate window.
+$e: div
+$t.
+<| Alternatively, users might want to |>
+<| view complete route information, |>
+<| mapped out in a separate window <|
 .
 $y.
- color:rgba(120,10,37);font-size:10;font-weight:bold;
+ color:rgb(120,10,37);font-size:10;font-weight:bold;
  background-color:rgba(210,255,200,205);
 .
-$p# 20 30
+$p# 24 14
+/!
+<+>
+
+!/ Pause_Annotation
+$s: 2270
+$i: +auto
+$t: 50
 /!
 <+>
 
 
+
 !/ Text_Annotation
-$s#  2920  +120
+$s#  2920  3180
+$e: div
 $t. 
-Another interactive option: explore<br>
-street-level maps in a separate window<br>(e.g., Googe Street Maps).
+|>
+<| Another interactive option: exploring |>
+<| street-level tours in a separate window |>
+<| (for example, Google Street Maps) |>
 .
 $y.
- color:rgba(120,10,37);font-size:10;font-weight:bold;
+ color:rgb(120,10,37);font-size:10;font-weight:bold;
  background-color:rgba(210,255,200,205);
 .
-$p# 20 90
+$p# 15 18
 /!
 <+>
 
 
 
 !/ Text_Annotation
-$s# 3450 +148
+$s#  3020  3178
+$e: div
 $t. 
-These use-cases have involved commonly-accessed<br>
-public data.  Many applications might<br>
-also work with special application-specific<br>
-data that would be superimposed as<br>
-data layers above the base maps. 
+<| The GIS application loads a Street Map window |>
+<| centered on the current map location &mdash; visible |>
+<| alongside the main application <span style='font-size:6pt'>GUI</span> &mdash; thereby |>
+<| providing convenient access to Street Map |>
+<| technology, because users would not need to |>
+<| launch a separate web browser and then |>
+<| manually navigate to their desired location <|
 .
 $y.
- color:rgba(0,10,37);font-weight:bold;
- background-color:rgba(230,219,247,250);
+ color:rgb(0,40,87);font-size:7pt;font-weight:normal;
+ background-color:rgba(255,255,255,247);
 .
-$p# 3 65
+$p# 41 93
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 3025
+$i: +auto
+$t: 130
 /!
 <+>
 
 
 !/ Text_Annotation
-$s#  3910  +100
+$s# 3460 3580
+$e: div
 $t. 
-Case Study: Mapping Lanternfly Sightings
+|>
+<| The use cases shown thus far have involved |>
+<| commonly-accessed public data, such as |>
+<| street addresses, street views, and transit |> 
+<| info. <| Many applications may also need |>
+<| to manage domain-specific information |>
+<| that would be superimposed in the form of |>
+<| data layers above the base maps, as |>
+<| depicted in the following case studies. |> 
 .
 $y.
- color:rgba(120,10,37);font-size:10;font-weight:bold;
- background-color:rgba(200,200,200,50);
+ color:rgba(0,10,37, 240);font-weight:bold;
+ background-color:rgba(226,224,229,244);
 .
-$p# 20 150
+$p# 14 41
+/!
+<+>
+
+!/ Pause_Annotation
+$s: 3560
+$i: +auto
+$t: 145
 /!
 <+>
 
 
-
 !/ Text_Annotation
-$s#  4420  +140
+$s#  3720  +435
+$e: div
 $t. 
-Icon shapes, colors, and outlines/markings<br>
-can be designed to convey information about<br>
-each location/event (e.g., a lanternfly sighting)
+<| Case Study: Mapping Lanternfly Reports <|
 .
 $y.
- color:rgba(50,10,137);font-size:10;font-weight:normal;
- background-color:rgba(245,245,210,220);
+[$pg]
 .
-$p# 10 20
+$p# 1 167
 /!
 <+>
 
 
 
 !/ Text_Annotation
-$s# 4800 +220
+$s#  4320  +140
+$e: div
 $t. 
-Complex Dialog Boxes 
-.
-$y.
- color:rgba(0,10,37);;font-weight:bold;
- background-color:rgba(200,190,7,50);
-.
-$p# 20 180
-/!
-<+>
-
-
-
-!/ Text_Annotation
-$s#  5300  +300
-$t. 
-A principal benefit of stand-alone GIS applications<br>
-is the possibility of presenting multi-part<br>
-data structures &mdash; 
-correlated with map locations &mdash;<br>
-via interactive, structured, self-contained windows.
-.
-$y.
- color:rgba(50,10,137);font-size:10;font-weight:normal;
- background-color:rgba(245,245,210,220);
-.
-$p# 20 150
-/!
-<+>
-
-
-
-!/ Text_Annotation
-$s# 6620 +220
-$t. 
-Delegating a subset of tiles<br>
-to a local server 
-.
-$y.
- color:rgba(0,10,37);;font-weight:bold;
- background-color:rgba(200,190,7,50);
-.
-$p# 50 50
-/!
-<+>
-
-
-
-!/ Text_Annotation
-$s# 7040 +210
-$t. 
-This sequence demonstrates a local apache-based<br>
-tile server which rendered some tiles for<br>
-Kherson, Ukraine with a special format (including<br>
-GIS boundary and mercatur-coordinate info, for<br> 
-sake of illustration).
-.
-$y.
- color:rgba(0,10,37);;font-weight:normal;
- background-color:rgba(240,220,7,150);
-.
-$p# 4 70
-/!
-<+>
-
-
-!/ Text_Annotation
-$s# 7450 +180
-$t. 
-De-activating the local server resets the map<br>
-so that subsequent tiles are obtained from the<br>
-default tile source, rather than locally redirected.
-.
-$y.
- color:rgba(0,10,37);;font-weight:bold;
- background-color:rgba(200,190,7,50);
-.
-$p# 20 170
-/!
-<+>
-
-
-
-
-!/ Text_Annotation
-$s# 7700 +120
-$t. 
-Another local database: Humanitarian Data<br> 
-Exchange info about Russia/Ukrain hostilities,<br>
-refugees, and political events.
+|>
+<| Icon shapes, colors, and outlines/markings |>
+<| could be designated to convey information about |>
+<| each location/event (e.g., a lanternfly sighting) |>
 .
 $y.
  color:rgba(50,10,137);font-size:10;font-weight:normal;
- background-color:rgba(245,245,210,220);
+ background-color:rgba(251,251,230,220);
 .
-$p# 20 170
+$p# 9 100
+/!
+<+>
+
+!/ Pause_Annotation
+$s: 4421
+$i: +auto
+$t: 70
 /!
 <+>
 
 
-
 !/ Text_Annotation
-$s# 8200 +120
+$s# 4680 4780
+$e: div +span |> [$over-yellow]
 $t. 
-Viewing event-specific data through interactive<br>
-dialog boxes.
+<| Complex Dialog Boxes <|
 .
 $y.
  color:rgba(0,10,37);;font-weight:bold;
  background-color:rgba(200,190,7,50);
 .
-$p# 20 170
+$p# 20 183
+/!
+<+>
+
+!/ Pause_Annotation
+$s: 4690
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+!/ Text_Annotation
+$s#  4900 5020
+$e: div
+$t. 
+<| Because data layers are superimposed |>
+<| on underlying base maps in real time, |>
+<| users can modify the colors and icon- |>
+<| styles for these overlays, if so desired  
+.
+$y.
+[$pg]
+.
+$p# 13 163
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 4940
+$i: +auto
+$t: 70
+/!
+<+>
+
+
+!/ Text_Annotation
+$s#  5330  +225
+$e: div @9
+$t. 
+<| A principal benefit of standalone GIS applications |>
+<| is the possibility of presenting multi-part |>
+<| data structures &mdash; correlated with map locations &mdash; |>
+<| via interactive, structured, self-contained windows |>
+  <span style='font-size:7pt'>
+  (often as dialog boxes, floating above the main application 
+  <span style='font-size:6pt'>GUI</span> window) 
+  </span>
+|> 
+.
+$y.
+ color:rgba(50,10,137);font-weight:normal;
+ background-color:rgba(245,245,210,220);
+.
+$p# 2 150
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 5390
+$i: +auto
+$t: 50
+/!
+<+>
+
+!/ Text_Annotation
+$s#  5890  6300
+$e: div
+$t. 
+<| Examining submitted lanternfly- |>
+<| sighting reports, each one pinned |> 
+<| to a specific location on the map <|
+.
+$y.
+[$pg]
+.
+$p# 19 168
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 6100
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+!/ Text_Annotation
+$s#  6468  6530
+$e: div
+$t. 
+<| Now switching to a different pre-defined  |>
+<| location (Southern Ukraine, in this |>
+<| case) where the GIS application has |>
+<| a locally-saved data set <|
+.
+$y.
+[$pg]
+.
+$p# 8 150
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 6519
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 6528
+$i: +auto
+$t: 40
 /!
 <+>
 
 
 
 !/ Text_Annotation
-$s# 8700 +120
+$s# 6580 +420
+$e: div +span |> [$over-yellow]
 $t. 
-This demo also shows examples of loading online<br>
-sources based on map coordinates; here, accessing<br>
-NPR's daily coverage of Ukraine event based on the<br>
-dates of location-specific records in the Humanitarian<br>
-database, and then generic Google search.  
+<| Delegating a subset of tiles |>
+<| to a local server <|
+.
+$y.
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 42 35
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 6946
+$i: +auto
+$t: 30
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 7040 +2
+$e: div @9
+$t. 
+|>
+<||| This sequence demonstrates a local Apache- |||>
+<||| based tile server which, when importing GIS |||> 
+<||| data, was programmed to render tiles for |||>
+<||| Kherson, Ukraine through a special |||>
+<||| cartographic format (incorporating segment- |||> 
+<||| boundary and Mercator-coordinate details, |||>
+<||| for the sake of illustration, that were |||>
+<||| superimposed via special callback-procedures |||>
+<||| during the tile-rendering process) |||>
+.
+$y.
+ color:rgba(38, 76, 125);;font-weight:normal;
+ background-color:rgba(249,244,240,235);
+.
+$p# 32 44
+/!
+<+>
+
+!/ Pause_Annotation
+$s: 7041
+$i: +auto
+$t: 160
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 7043 +20
+$e: div @9
+$t. 
+|>
+<||| The locally-rendered tiles are styled |||>
+<||| with a darker background color, for this |||> 
+<||| demo, so as to visualize the boundary- |||>
+<||| lines between these customized |||>
+<||| map-segments and the surrounding |||> 
+<||| tiles &mdash; themselves styled according to |||>
+<||| a conventional format (and without |||>
+<||| supplemental callbacks during the |||> 
+<||| course of the rendering pipeline) |||>
+.
+$y.
+ color:rgba(38, 76, 125);;font-weight:normal;
+ background-color:rgba(249,244,240,238);
+.
+$p# 38 45
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 7044
+$i: +auto
+$t: 150
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 7350 +88
+$e: span @9 
+$t. 
+<| De-activating the local server resets the map, |>
+<| so that subsequent tiles are obtained from the |>
+<| default tile source, rather than locally redirected
+.
+$y.
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 7 175
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 7400
+$i: +auto
+$t: 60
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 7600 +320
+$e: div
+$t. 
+|>
+<| Another local database: Humanitarian Data |> 
+<| Exchange information tracking Russia/Ukraine |>
+<| hostilities, refugees, and political events |>
+.
+$y.
+ color:rgba(61, 76, 105);font-size:10;font-weight:normal;
+ background-color:rgba(245,245,210,220);
+.
+$p# 20 155
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 7800
+$i: +auto
+$t: 30
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 8037
+$i: +auto
+$t: 30
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 8200 +90
+$e: div +span |> [$over-yellow]
+$t. 
+<| Viewing event-specific data through |>
+<| interactive dialog boxes <| 
+.
+$y.
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 20 130
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 8201
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 8322
+$i: +auto
+$t: 35
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 8342
+$i: +auto
+$t: 20
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 8354
+$i: +auto
+$t: 20
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 8431
+$i: +auto
+$t: 35
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 8510
+$i: +auto
+$t: 35
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 8830
+$i: +auto
+$t: 35
+/!
+<+>
+
+!/ Text_Annotation
+$s# 8900 8920
+$e: div @9
+$t. 
+|>
+<| This demo also shows examples of loading online |>
+<| sources based on map coordinates &mdash; here, accessing |>
+<| NPR's daily coverage of Ukraine events by taking the |>
+<| dates of location-specific records in the Humanitarian |>
+<| database, and then a generic Google search |> 
 .
 $y.
  color:rgba(50,10,137);font-size:10;font-weight:normal;
  background-color:rgba(145,245,210,220);
 .
-$p# 11 140
+$p# 0 90
 /!
 <+>
 
 
+!/ Pause_Annotation
+$s: 8901
+$i: +auto
+$t: 100
+/!
+<+>
+
+
+
+
 !/ Text_Annotation
-$s# 9620 +220
+$s#  8950  +434
+$e: div @8
 $t. 
-Thanks For Watching!
+<| The Humanitarian data set provides |>
+<| event-dates correlated with each icon |>
+<| positioned on the map, which here are |>
+<| being leveraged for web queries <| 
 .
 $y.
- color:rgba(0,160,117);;font-weight:bold;
- background-color:rgba(200,0,87,10);
+[$pg]
 .
-$p# 20 170
+$p# 8 175
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 9459
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 9465
+$i: +auto
+$t: 25
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 9620 +274
+$e: i @20 +span
+$t. 
+<| Thanks For Watching! |>
+.
+$y.
+ color:rgba(0,0,17);;font-weight:bold;
+ background-color:rgba(200,0,87,90);
+.
+$p# 5 170
 /!
 <+>
 

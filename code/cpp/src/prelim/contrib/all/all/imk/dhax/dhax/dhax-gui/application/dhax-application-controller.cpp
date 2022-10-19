@@ -978,12 +978,12 @@ void DHAX_Application_Controller::play_video()
 // if(!fn.isEmpty())
 //   play_video(fn);
 
- play_video("/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/qmt.mkv",
-   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/qmt.ntxh");
+// play_video("/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/qmt.mkv",
+//   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/qmt.ntxh");
 
 
-// play_video("/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/dhax.mkv",
-//   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/dhax.ntxh");
+ play_video("/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/dhax.mkv",
+   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/dhax.ntxh");
 
 
 // play_video("/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd.mkv",
