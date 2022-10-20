@@ -700,7 +700,7 @@ void DHAX_Video_Player_Frame::play_local_video(QString file_path, QString annota
 
  media_player_->play();
 
-// pause();
+ pause();
 
 
 // qDebug() << " SR1: " << graphics_scene_->sceneRect();
