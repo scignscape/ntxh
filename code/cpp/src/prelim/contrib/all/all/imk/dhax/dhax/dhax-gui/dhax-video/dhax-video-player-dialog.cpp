@@ -210,6 +210,25 @@ void DHAX_Video_Player_Dialog::recenter()
 }
 
 
+void DHAX_Video_Player_Dialog::play_local_videos(QStringList paths)
+{
+ QList<QPair<QString, QString>> new_paths;
+
+ std::transform(paths.begin(), paths.end(), std::back_inserter(new_paths),
+                [](QString p) -> QPair<QString, QString>
+ {
+  return {p, {}};
+ });
+
+ play_local_videos(new_paths);
+}
+
+void DHAX_Video_Player_Dialog::play_local_videos(QList<QPair<QString, QString>> paths)
+{
+ player_->play_local_videos(paths);
+}
+
+
 void DHAX_Video_Player_Dialog::play_local_video(QString file_path,
   QString annotations_file)
 {

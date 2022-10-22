@@ -930,7 +930,8 @@ void DHAX_Application_Controller::offer_to_play_video(QString text, QString file
  }
 }
 
-void DHAX_Application_Controller::play_video(QString file_path, QString annotations_file_path)
+void DHAX_Application_Controller::play_video(QString file_path,
+  QString annotations_file_path)
 {
  if(current_video_player_dialog_)
    current_video_player_dialog_->deleteLater();
@@ -965,7 +966,30 @@ void DHAX_Application_Controller::play_video(QString file_path, QString annotati
  qDebug() << "video = " << file_path;
 
  current_video_player_dialog_->show();
- current_video_player_dialog_->play_local_video(file_path, annotations_file_path);
+
+ QString v = file_path;
+ v.chop(4);
+
+ QString a = annotations_file_path;
+ a.chop(5);
+
+ current_video_player_dialog_->play_local_videos(
+//      v + "-2.mkv", a + "-2.ntxh"
+
+//    v + "-0.mkv", a + "-0.ntxh"
+   {
+     {v + "-000.mkv", a + "-000.ntxh"},
+     {v + "-00.mkv", a + "-00.ntxh"},
+     {v + "-1.mkv", a + "-1.ntxh"},
+     {v + "-0.mkv", a + "-0.ntxh"},
+     {v + "-2.mkv", a + "-2.ntxh"},
+     {v + ".mkv", a + ".ntxh"},
+
+    }
+    );
+
+
+//? current_video_player_dialog_->play_local_video(file_path, annotations_file_path);
 }
 
 void DHAX_Application_Controller::play_video()
@@ -978,16 +1002,16 @@ void DHAX_Application_Controller::play_video()
 // if(!fn.isEmpty())
 //   play_video(fn);
 
- play_video("/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/qmt.mkv",
-   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/qmt.ntxh");
+// play_video("/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/qmt.mkv",
+//   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/qmt.ntxh");
 
 
 // play_video("/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/dhax.mkv",
 //   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/dhax.ntxh");
 
 
-// play_video("/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd.mkv",
-//   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd.ntxh");
+ play_video("/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd.mkv",
+   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd.ntxh");
 
 }
 

@@ -374,7 +374,7 @@ void Simple_Rectangle_Measurement_Dialog::show_solid_color_label_context_menu(co
   generate_overlay_file(scl); // scl->color();
  });
 
- menu->addAction("Generate Occurant Color Mean Summary File", [this, scl]
+ menu->addAction("Generate Color-Mean Summary File", [this, scl]
  {
   generate_occurant_color_mean_summary_file(); // scl->color();
  });

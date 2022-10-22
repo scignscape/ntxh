@@ -1139,8 +1139,9 @@ void DHAX_Image_Scene_Item::show_annotation_measurements_dialog(const QPoint& po
  {
   Skew_Rhombus_Annotation* sra = static_cast<Skew_Rhombus_Annotation*>(current_completed_multistep_annotation_);
   QPair<r8, r8> ang_sh = sra->get_offset_angle();
-  static QString msg{"Shape angle corresponds to a skew/rotate of angle %1 or shear of factor %2"};
-  QMessageBox::information(nullptr, "Shear/Rotate Information", msg.arg(ang_sh.first).arg(ang_sh.second));
+  static QString msg{"Shape angle corresponds to a skew/rotate of angle %1 (transposed: %2) or shear of factor %3"};
+  QMessageBox::information(nullptr, "Shear/Rotate Information", msg.arg(ang_sh.first)
+                           .arg(90. + ang_sh.first).arg(ang_sh.second));
  }
 
  //dlg->generate_overlay_file();

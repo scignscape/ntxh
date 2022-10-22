@@ -91,6 +91,10 @@ public:
  ACCESSORS__RGET(QRect ,current_scene_camera_view_geometry)
 
  void play_local_video(QString file_path, QString annotations_file = {});
+
+ void play_local_videos(QStringList paths);
+ void play_local_videos(QList<QPair<QString, QString>> paths);
+
  void halt();
  void halt_and_close()
  {

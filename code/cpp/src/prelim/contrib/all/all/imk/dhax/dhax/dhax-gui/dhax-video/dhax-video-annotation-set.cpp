@@ -243,6 +243,14 @@ void DHAX_Video_Annotation_Set::parse_shape_annotation_hypernode(NTXH_Graph& g, 
 
 }
 
+DHAX_Video_Annotation_Set* DHAX_Video_Annotation_Set::reinit_and_delete()
+{
+ DHAX_Video_Annotation_Set* result = new DHAX_Video_Annotation_Set;
+ result->sizes_ratio_x_ = sizes_ratio_x_;
+ result->sizes_ratio_y_ = sizes_ratio_y_;
+ delete this;
+ return result;
+}
 
 
 void DHAX_Video_Annotation_Set::read_ntxh_hypernode(NTXH_Graph& g, hypernode_type* h)

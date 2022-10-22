@@ -1,0 +1,246 @@
+
+- s=start frame  e=end frame  t=text  y=style 
+  p=position 
+.
+
+
+- 
+
+!/ Text_Annotation
+$s# 20  930
+$e: div +i
+$t. 
+<| Thanks For Watching! <|
+.
+$y.
+ color:rgba(0,26,17);;font-weight:bold;
+ background-color:rgba(240,40,187,110);
+.
+$p# 40 181
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 300 600
+$e: div +span |> ($over-yellow) rgba(250,250,207,250)
+$t. 
+<| XCSD Image Processing <|
+.
+$y.
+($back2-yellow)
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 3 196
+/!
+<+>
+
+
+.
+
+
+
+&type Text_Annotation {7}
+  :s:1  :e:3  :t:4  :y:5  :p:6 ;
+
+
+&type Shape_Annotation {5}
+  :k:1  :s:2  :t:4  :d:5 ;
+ 
+&type Circled_Text_Default {15}
+  :w:1
+  :background-color:2  :foreground-color:6
+  :outline-color:10  :font-size:14  :border:15 ;
+
+&type Circled_Text_Annotation {5}
+  :s:1  :t:3  :p:4 ;
+
+- s=start frame  i=id
+
+
+
+&type Pause_Annotation {3}
+  :s:1  :i:2  :t:3 ;
+
+
+
+&type Annotation_Settings {6}
+  :sa:1  :tr-smaller:3 :tr-larger:5  ;
+
+
+&/
+
+
+!/ Annotation_Settings
+$sa#  1  1
+$tr-smaller#  0  0
+$tr-larger#  0  0  
+/!
+<+>
+
+
+!/ Circled_Text_Default
+$w: 12
+$background-color# 50 50 210 255
+$foreground-color# 150 50 10 255
+$outline-color# 150 50 10 255
+$font-size: 14
+$border: 2
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 2 
+$i: +auto
+$t: 60
+/!
+<+>
+
+!/ Text_Annotation
+$s# 1  90  
+$e: div @7
+$t. 
+||>
+<|| Previewing supporting files or ||>
+<|| diagrams that can be generated ||>
+<|| by an XCSD rendering engine, so ||> 
+<|| as to document image data, geometry, ||>
+<|| and debugging information as ||>
+<|| processed for the XCSD format ||>
+.
+$y.
+($back-plus-red)
+ color:rgb(90,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(250,255,250,240);
+.
+$p# 70 139
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 316 
+$i: +auto
+$t: 80
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 313 360  
+$e: div @7
+$t. 
+||>
+<|| This graphic illustrates the &ldquo;tierbox&rdquo; lines ||>
+<|| subdiving an XCSD image into 27x27 boxes ||>
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 56 139
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 605 
+$i: +auto
+$t: 30
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 460 606  
+$e: div @7
+$t. 
+||>
+<|| Here we see a visualization of the XCSD ||>
+<|| memory-layout, with image-data stored ||>
+<|| from the center of the image outward ||>
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 96 35
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 1012 
+$i: +auto
+$t: 110
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 1000  1013 
+$e: div @7
+$t. 
+||>
+<|| This screen shows a file (that can be ||>
+<|| generated for any XCSD image) which ||>
+<|| presents internal data about XCSD geometry, ||>
+<|| for purposes of debugging or low-level ||>
+<|| information about XCSD calculations ||>
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 56 139
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 1527 
+$i: +auto
+$t: 110
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 1514  1528 
+$e: div @7
+$t. 
+||>
+<|| This picture displays a graphic describing ||>
+<|| how tierbox-level classifications of ||>
+<|| region centers and boundaries can ||>
+<|| yield coarse-grained Object Proposals ||>
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 56 139
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 1630 
+$i: +auto
+$t: 60
+/!
+<+>
+
+
+/&
+
+
+
+
+

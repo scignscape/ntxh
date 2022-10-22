@@ -53,7 +53,8 @@ DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
   :  QFrame(parent), annotation_set_(nullptr),
      full_size_rect_item_(nullptr), current_pause_timer_(nullptr),
      smaller_size_rect_item_(nullptr), current_reffed_annotations_index_(0),
-     replay_count_(0), current_frame_count_(0), graphics_view_(nullptr)
+     replay_count_(0), current_frame_count_(0),
+     graphics_view_(nullptr), current_playlist_index_(0)
 {
 // setLayout(new QVBoxLayout);
 // layout()->setContentsMargins(0, 0, 0, 0);
@@ -361,6 +362,11 @@ void DHAX_Video_Player_Frame::handle_video_frame(const QVideoFrame& qvf)
    {
     need_video_size_ = 0;
     confirm_video_size();
+
+    // //  for setting up the capture ...
+    if(current_playlist_index_ == 0)
+      pause();
+
    }
   }
  }
@@ -402,7 +408,8 @@ void DHAX_Video_Player_Frame::handle_video_frame(const QVideoFrame& qvf)
 
  ++current_frame_count_;
 
- if((current_frame_count_ % 20) == 0)
+ static constexpr u2 frame_count_update_rate = 20;
+ if((current_frame_count_ % frame_count_update_rate) == 0)
  {
   if(frame_number_text_)
     update_frame_number_text();
@@ -593,6 +600,12 @@ void DHAX_Video_Player_Frame::load_annotations()
 
 void DHAX_Video_Player_Frame::load_annotations_file(QString annotations_file)
 {
+ if(annotation_set_)
+ {
+  //delete annotation_set_;
+  annotation_set_ = annotation_set_->reinit_and_delete(); //new DHAX_Video_Annotation_Set;
+ }
+
  annotation_set_->load_annotation_file(annotations_file);
 
  if( navigation_->is_full_size_mode() )
@@ -619,6 +632,10 @@ void DHAX_Video_Player_Frame::pause()
  }
 
  media_player_->pause();
+
+ if(frame_number_text_)
+   update_frame_number_text();
+
  navigation_->set_play_button_to_resume();
 }
 
@@ -671,15 +688,27 @@ void DHAX_Video_Player_Frame::halt()
  media_player_->stop();
 }
 
-
 void DHAX_Video_Player_Frame::play_local_video(QString file_path, QString annotations_file)
+{
+ play_local_videos({{file_path, annotations_file}});
+}
+
+void DHAX_Video_Player_Frame::play_local_videos(QList<QPair<QString, QString>> paths)
 {
  init_annotations();
 
- if(!annotations_file.isEmpty())
-   load_annotations_file(annotations_file);
+ if(paths.isEmpty())
+   return;
 
- current_path_ = file_path;
+ QString annotations_file = paths.first().second;
+
+ annotations_files_.push_back(annotations_file);
+ if(!annotations_file.isEmpty())
+ {
+  load_annotations_file(annotations_file);
+ }
+
+ current_path_ = paths.first().first;
 //
 // current_path_ = "/home/nlevisrael/gits/ctg-temp/stella/videos/test.mkv";
 // current_path_ = "/home/nlevisrael/gits/ctg-temp/video-annotations/back/bus.mkv";
@@ -689,18 +718,57 @@ void DHAX_Video_Player_Frame::play_local_video(QString file_path, QString annota
  QMediaPlaylist* play_list = new QMediaPlaylist();
  media_player_->setPlaylist(play_list);
  play_list->addMedia(QMediaContent(current_url_));
- play_list->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
+
+ if(paths.size() == 1)
+   play_list->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
+
+ else
+ {
+  play_list->setPlaybackMode(QMediaPlaylist::Sequential);
+  for(auto it = paths.begin() + 1; it != paths.end(); ++it)
+  {
+   play_list->addMedia(QMediaContent(QUrl::fromLocalFile(it->first)));
+   annotations_files_.push_back(it->second);
+  }
+
+  connect(play_list, &QMediaPlaylist::currentIndexChanged, [this](int position)
+  {
+   if( (position == 0) && (current_playlist_index_ == 0) )
+     return;
+
+   current_playlist_index_ = position;
+
+   qDebug() << "new playlist position: " << position;
+   QString annotations_file = annotations_files_.value(position);
+
+   //?
+   current_paused_annotations_.clear();
+   current_reffed_annotations_index_ = 0;
+
+   if(annotations_rect_item_)
+   {
+    graphics_scene_->removeItem(annotations_rect_item_);
+   }
+   annotations_rect_item_ = graphics_scene_->addRect(0,0,0,0,Qt::NoPen, Qt::NoBrush);
+   annotations_rect_item_->setZValue(1);
+
+   if(annotations_file.isEmpty())
+     annotation_set_->clear();
+   else
+     load_annotations_file(annotations_file);
+  });
+ }
+
 
 // media_player_->setMedia(current_url_);
 
  // //  give it a bit of time
- need_video_size_ = 10; //
+ //??? need_video_size_ = 10; //
 
 // ?check_adjust_size();
 
  media_player_->play();
 
- pause();
 
 
 // qDebug() << " SR1: " << graphics_scene_->sceneRect();
@@ -761,6 +829,9 @@ QRect DHAX_Video_Player_Frame::get_scene_camera_view_geometry()
 
 void DHAX_Video_Player_Frame::confirm_video_size()
 {
+ if(current_playlist_index_ > 0)
+   return;
+
  QColor c (200, 100, 10, 100);
 
 // {

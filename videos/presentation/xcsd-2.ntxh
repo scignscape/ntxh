@@ -1,0 +1,278 @@
+
+- s=start frame  e=end frame  t=text  y=style 
+  p=position 
+.
+
+
+- 
+
+!/ Text_Annotation
+$s# 20  930
+$e: div +i
+$t. 
+<| Thanks For Watching! <|
+.
+$y.
+ color:rgba(0,26,17);;font-weight:bold;
+ background-color:rgba(240,40,187,110);
+.
+$p# 40 181
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 300 600
+$e: div +span |> ($over-yellow) rgba(250,250,207,250)
+$t. 
+<| XCSD Image Processing <|
+.
+$y.
+($back2-yellow)
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 3 196
+/!
+<+>
+
+
+.
+
+
+
+&type Text_Annotation {7}
+  :s:1  :e:3  :t:4  :y:5  :p:6 ;
+
+
+&type Shape_Annotation {5}
+  :k:1  :s:2  :t:4  :d:5 ;
+ 
+&type Circled_Text_Default {15}
+  :w:1
+  :background-color:2  :foreground-color:6
+  :outline-color:10  :font-size:14  :border:15 ;
+
+&type Circled_Text_Annotation {5}
+  :s:1  :t:3  :p:4 ;
+
+- s=start frame  i=id
+
+
+
+&type Pause_Annotation {3}
+  :s:1  :i:2  :t:3 ;
+
+
+
+&type Annotation_Settings {6}
+  :sa:1  :tr-smaller:3 :tr-larger:5  ;
+
+
+&/
+
+
+!/ Annotation_Settings
+$sa#  1  1
+$tr-smaller#  0  0
+$tr-larger#  0  0  
+/!
+<+>
+
+
+!/ Circled_Text_Default
+$w: 12
+$background-color# 50 50 210 255
+$foreground-color# 150 50 10 255
+$outline-color# 150 50 10 255
+$font-size: 14
+$border: 2
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 30 
+$i: p1
+$t: 30
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 30 350
+$e: div +span |> ($over-yellow) rgba(250,250,207,250)
+$t. 
+<| Exploring Color Distributions <|
+.
+$y.
+($back2-blue)
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(7,190,200,50);
+.
+$p# 3 196
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 797 
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 374 
+$i: +auto
+$t: 120
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 373  375
+$e: div +span |> rgba(252,252,252,252)
+$t. 
+<| Starting with a rectangle annotation, |>
+<| we examine a variety of data points <| |>
+<| associated specifically with colors <|<|<|<|<| |>
+<| inside the image-area spanned by <|<|<|<| |>
+<| the marked&ndash;out rectangle (and also <| |>
+<| geometric observations concerning <| |>
+<| the rectangle itself) <|
+.
+$y.
+ color:rgba(4,110,37);font-size:7;font-weight:normal;
+ background-color:rgba(210,190,210,243);
+.
+$p# 44 70
+/!
+<+>
+
+
+
+
+
+!/ Pause_Annotation
+$s: 1052  
+$i: +auto
+$t: 120
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 1051  1095
+$e: div @7 +span |> rgba(252,252,252,252)
+$t. 
+<| Such preliminary data may be useful for <|<| |>
+<| writing post-processing code interpreting  |>
+<| the geometric properties of Regions of <|<|<|<| |>
+<| Interest inferred via segmentation and/or |> 
+<| feature-extraction algorithms <|<|
+.
+$y.
+ color:rgba(4,110,37);font-size:7;font-weight:normal;
+ background-color:rgba(210,190,210,243);
+.
+$p# 111 74
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 1863  
+$i: +auto
+$t: 20
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 2801 
+$i: +auto
+$t: 100
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 2800  1888 
+$e: div @7
+$t. 
+||>
+<|| These displays represent different ||>
+<|| strategies for visualizing color- ||>
+<|| distributions, outlining data that ||> 
+<|| is similar to local histograms but ||>
+<|| employing instead several different ||>
+<|| media to document most-frequent color ||>
+<|| values and their relative brightness ||>
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 30 39
+/!
+<+>
+
+
+
+
+
+!/ Pause_Annotation
+$s: 2241 
+$i: +auto
+$t: 30
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 2320  2699  
+$e: div @7
+$t. 
+||>
+<|| If desired, a variety of intermediate-stage ||>
+<|| processing steps might be saved as isolated  ||>
+<|| images and reviewed, in order to fine-tune ||> 
+<|| the relevant image-processing algorithms ||>
+.
+$y.
+($back-plus-red)
+ color:rgb(90,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(250,255,250,240);
+.
+$p# 50 39
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 2778  
+$i: +auto
+$t: 50
+/!
+<+>
+
+
+/&
+
+
+
+
+

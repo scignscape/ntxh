@@ -1,0 +1,201 @@
+
+- s=start frame  e=end frame  t=text  y=style 
+  p=position 
+.
+
+
+- 
+
+!/ Text_Annotation
+$s# 20  930
+$e: div +i
+$t. 
+<| Thanks For Watching! <|
+.
+$y.
+ color:rgba(0,26,17);;font-weight:bold;
+ background-color:rgba(240,40,187,110);
+.
+$p# 40 181
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 300 600
+$e: div +span |> ($over-yellow) rgba(250,250,207,250)
+$t. 
+<| XCSD Image Processing <|
+.
+$y.
+($back2-yellow)
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 3 196
+/!
+<+>
+
+
+.
+
+
+
+&type Text_Annotation {7}
+  :s:1  :e:3  :t:4  :y:5  :p:6 ;
+
+
+&type Shape_Annotation {5}
+  :k:1  :s:2  :t:4  :d:5 ;
+ 
+&type Circled_Text_Default {15}
+  :w:1
+  :background-color:2  :foreground-color:6
+  :outline-color:10  :font-size:14  :border:15 ;
+
+&type Circled_Text_Annotation {5}
+  :s:1  :t:3  :p:4 ;
+
+- s=start frame  i=id
+
+
+
+&type Pause_Annotation {3}
+  :s:1  :i:2  :t:3 ;
+
+
+
+&type Annotation_Settings {6}
+  :sa:1  :tr-smaller:3 :tr-larger:5  ;
+
+
+&/
+
+
+!/ Annotation_Settings
+$sa#  1  1
+$tr-smaller#  0  0
+$tr-larger#  0  0  
+/!
+<+>
+
+
+!/ Circled_Text_Default
+$w: 12
+$background-color# 50 50 210 255
+$foreground-color# 150 50 10 255
+$outline-color# 150 50 10 255
+$font-size: 14
+$border: 2
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 5 
+$i: +auto
+$t: 15
+/!
+<+>
+
+
+
+
+
+!/ Pause_Annotation
+$s: 10 
+$i: +auto
+$t: 130
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s#  8 90
+$e: ($dl) div @9
+$t. 
+|> 
+<|| This video will show features associated with ||> 
+<|| our XCSD image format, and with a demo ||> 
+<|| application that converts images into this ||>
+<|| format, then displays them (along with some ||>
+<|| image-processing data) interactively. ||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| XCSD facilitates several forms of image ||>
+<|| processing, including one method (that will be ||>
+<|| visualized in this video) involving calculations ||>
+<|| of local color histograms. <| The goal here is to ||>
+<|| associate certain colors with thematic roles ||>
+<|| within a given image, such as foreground ||>
+<|| and background image areas. ||>
+.
+$y.
+($large-box)
+ color:rgb(10,90,137);;font-weight:normal;
+ background-color:rgba(245,245,210,220);
+.
+$p# 3 5
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 92 
+$i: +auto
+$t: 10
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 98 
+$i: +auto
+$t: 150
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s#  95  100
+$e: div @8
+$t. 
+|> 
+<|| The application's histogram displays are similarly ||>
+<|| interactive, so that users can manually select colors ||>
+<|| assigned to thematic roles such as canonical ||>
+<|| foreground and background. ||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| Algorithms that are fine-tuned interactively can then ||>
+<|| be applied automatically across an image series. ||>  
+<|| For example, center and periphery histograms ||>
+<|| could be consulted to estimate foreground and ||> 
+<|| background poles without user input. <| In general, ||>
+<|| interactive histograms allow histogram data to be ||>
+<|| leveraged for color-sensitive (as compared to ||>
+<|| grayscale) Computer Vision algorithms. ||>
+.
+$y: [$large-box]
+$p# 0 12
+/!
+<+>
+
+
+
+
+/&
+
+
+
+
+

@@ -4,8 +4,74 @@
 .
 
 
-&type Text_Annotation {6}
-  :s:1  :t:3  :y:4  :p:5 ;
+-
+
+
+!/ Text_Annotation
+$s#  !p1  5
+$e: ($dl) div @9
+$t. 
+|> 
+<|| This video will show features associated with ||> 
+<|| our XCSD image format and with a demo ||> 
+<|| application that converts images into this ||>
+<|| format and displays them (along with some ||>
+<|| image-processing data) interactively. ||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| XCSD facilitates several forms of image ||>
+<|| processing, such as one method (that will be ||>
+<|| visualized in this video) involving calculations ||>
+<|| of local color histograms. <| The goal here is ||>
+<|| associating certain colors with thematic ||>
+<|| roles within an image, such as foreground  ||>
+<|| and background image areas. ||>
+/.
+$y.
+($large-box)
+ color:rgb(10,90,137);;font-weight:normal;
+ background-color:rgba(245,245,210,220);
+/.
+$p# 3 5
+/!
+<+>
+
+!/ Text_Annotation
+$s#  !p1  9
+$e: div @8
+$t. 
+|> 
+<|| The application's histogram display is interactive, ||>
+<|| so that users can manually select colors ||>
+<|| assigned to thematic roles such as canonical ||>
+<|| foreground and background. ||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| Algorithms that are fine-tuned interactively can then ||>
+<|| be applied automatically across an image series. ||>  
+<|| For example, center and periphery histograms ||>
+<|| could be consulted to estimate foreground and ||> 
+<|| background poles without user input. <| In general, ||>
+<|| interactive histograms allow histogram data to be ||>
+<|| leveraged for color-sensitive (as compared to ||>
+<|| grayscale) Computer Vision algorithms. ||>
+/.
+$y: [$large-box]
+$p# 1 4
+/!
+<+>
+
+.
+
+
+
+&type Text_Annotation {7}
+  :s:1  :e:3  :t:4  :y:5  :p:6 ;
+
 
 &type Shape_Annotation {5}
   :k:1  :s:2  :t:4  :d:5 ;
@@ -20,8 +86,11 @@
 
 - s=start frame  i=id
 
-&type Pause_Annotation {5}
-  :s:1  :i:2 ;
+
+
+&type Pause_Annotation {3}
+  :s:1  :i:2  :t:3 ;
+
 
 
 &type Annotation_Settings {6}
@@ -50,146 +119,429 @@ $border: 2
 <+>
 
 
+!/ Pause_Annotation
+$s: 10 
+$i: p1
+$t: 30
+/!
+<+>
+
+
+
 
 !/ Text_Annotation
-$s# 30 +160
+$s# 300 600
+$e: div +span |> ($over-yellow) rgba(250,250,207,250)
 $t. 
-XCSD Image Processing
+<| XCSD Image Processing <|
 .
 $y.
+($back2-blue)
  color:rgba(0,10,37);;font-weight:bold;
- background-color:rgba(200,190,7,50);
+ background-color:rgba(7,190,200,50);
 .
-$p# 3 220
+$p# 3 196
 /!
 <+>
 
 
 
 !/ Text_Annotation
-$s# 190  +160
+$s# 700  1000
+$e: div @7
 $t. 
-The XCSD format predivides images into boxes, stored<br>
-in memory from the center outward, convenient for <br>
-central-region analysis and computing local histograms <br>
-(displays present box-boundaries as mouseover effects).
+<|| The XCSD format pre-divides images into boxes, stored ||>
+<|| in memory from the center outward, convenient for ||>
+<|| central-region analysis and computing local histograms ||>
+<|| (displays present box-boundaries as mouseover effects) <|| 
 .
 $y.
  color:rgba(40,10,137);font-size:10;font-weight:normal;
  background-color:rgba(250,250,250,243);
 .
-$p# 0 169
+$p# 11 169
 /!
 <+>
 
 
+!/ Pause_Annotation
+$s: 701 
+$i: +auto
+$t: 50
+/!
+<+>
+
+
+
+
 !/ Text_Annotation
-$s# 440  +220
+$s# 1040  1120
+$e: div
 $t. 
-Interactive histograms allow histogram data<br>
-to be leveraged for color-sensitive<br>
-image-processing algorithms.
+<| Interactive Histograms <|
 .
 $y.
  color:rgba(20,10,37);font-size:10;font-weight:bold;
  background-color:rgba(230,230,250,250);
 .
-$p# 12 184
+$p# 20 144
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 1041 
+$i: +auto
+$t: 30
 /!
 <+>
 
 
 !/ Text_Annotation
-$s# 1420  +210
+$s# 1300  +340
+$e: div
 $t. 
-Revisiting the video-captured image shown<br>
-on the previous video ...
+<| Revisiting the video-captured image shown |>
+<| on the previous video ... <|
 .
 $y.
  color:rgba(40,10,137);font-size:10;font-weight:normal;
  background-color:rgba(250,250,250,243);
 .
-$p# 12 12
+$p# 17 180
 /!
 <+>
 
 
 !/ Text_Annotation
-$s# 1690  +200
+$s# 1849  1881
+$e: div +div
 $t. 
-Supplementing the prior toroidal-color segmentation, 
-here we apply histogram info for a foreground/<br>
-background probability map, hoping to create<br>
-watershed areas.
+||>
+<|| We can use histograms spanning small ||>
+<|| image-boxes to examine the most common ||> 
+<|| colors in that local region. <| Boxes that ||>
+<|| straddle the border between bonafide ||> 
+<|| image segments will tend to have ||>
+<|| histograms with multiple peaks along ||>
+<|| the &ldquo;hue &rdquo; axis of the HSV (hue, ||>
+<|| saturation, value) color model. ||>
+.
+$y.
+($back-plus-red)
+ color:rgb(90,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(250,255,250,240);
+.
+$p# 2 62
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 1851 
+$i: +auto
+$t: 70
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 2920  +30
+$e: div
+$t. 
+||>
+<|| Supplementing the prior toroidal-color ||>
+<|| segmentation, here we apply histogram info ||>
+<|| for a foreground/background probability ||>
+<|| map, hoping to create watershed areas ||>
 .
 $y.
  color:rgba(40,10,137);font-size:10;font-weight:normal;
  background-color:rgba(250,250,250,243);
 .
-$p# 3 12
+$p# 6 88
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 2921 
+$i: +auto
+$t: 70
 /!
 <+>
 
 
 
 !/ Text_Annotation
-$s# 3800  +210
+$s# 3500  3800
+$e: div
 $t. 
-Next we'll apply foreground/background<br>
-distribution as an extra parameter<br>
-on matrix-kernel edge-detection algorithms
+<| Feature-Detection Pipelines <|
+.
+$y.
+ color:rgba(20,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(230,230,250,250);
+.
+$p# 20 144
+/!
+<+>
+
+
+
+
+
+!/ Text_Annotation
+$s# 4020  4052
+$e: div +div
+$t. 
+<|| Next we'll apply ||>
+<|| foreground/background ||>
+<|| probability distribution ||>
+<|| as an extra parameter ||>
+<|| on matrix-kernel ||>
+<|| edge-detection <||
 .
 $y.
  color:rgba(40,10,137);font-size:10;font-weight:normal;
  background-color:rgba(250,250,250,243);
 .
-$p# 12 131
+$p# 120 51
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 4050 
+$i: +auto
+$t: 70
 /!
 <+>
 
 
 
+!/ Text_Annotation
+$s# 5240  5330
+$e: div +div
+$t. 
+||>
+<|| Foreground/Background probability ||>
+<|| refers to the classification of pixels ||> 
+<|| as relatively closer to a canonical ||>
+<|| foreground or background color, ||> 
+<|| respectively, which is one way to ||>
+<|| translate all pixel-colors to a single ||>
+<|| channel (one numeric value) ||>
+.
+$y.
+($back-plus-red)
+ color:rgb(90,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(250,255,250,240);
+.
+$p# 33 82
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 5242 
+$i: +auto
+$t: 80
+/!
+<+>
+
+
 
 !/ Text_Annotation
-$s# 5360  +210
+$s# 5360  5670
+$e: div
 $t. 
-An edge-detection dialog lets us flip<br>
-through different algorithms, looking<br>
-for parameters that yield promising<br>
-binary images for one- or two-<br>
-dimensional feature extraction.
+||>
+<|| An edge-detection dialog lets us flip ||>
+<|| through different algorithms ... ||>
 .
 $y.
  color:rgba(40,10,137);font-size:10;font-weight:normal;
  background-color:rgba(250,250,250,243);
 .
-$p# 12 11
+$p# 73 20
+/!
+<+>
+
+
+
+
+
+!/ Text_Annotation
+$s# 5610  5880
+$e: div
+$t.
+||> 
+<|| looking for parameters that ||>
+<|| yield promising binary images ||>
+<|| for one- or two-dimensional ||>
+<|| feature extraction ||>
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 94 76
+/!
+<+>
+
+
+
+
+!/ Text_Annotation
+$s# 5900  5960
+$e: div +div
+$t. 
+||>
+<|| Grayscale (which is akin to a white/black ||>
+<|| pole) and Foreground/Background poles ||>
+<|| are two alternatives for mapping colors ||> 
+<|| to a single scalar axis, for those edge- ||>
+<|| detection algorithms that work with ||>
+<|| single-channel representations ||>
+.
+$y.
+[$back-plus-red]
+.
+$p# 9 33
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 5942 
+$i: +auto
+$t: 70
 /!
 <+>
 
 
 
 !/ Text_Annotation
-$s# 6690  +160
+$s# 6070  6100
+$e: div @7
 $t. 
-Demonstrating some details of the<br>
-image-processing GUI
+||>
+<|| Once edge-detection methods have classified ||>
+<|| pixels such that those which appears to lie near ||>
+<|| Region of Interest boundaries can be identified, ||>
+<|| the set of such boundary-locations is then ||>
+<|| analyzed geometrically to isolate a narrower ||>
+<|| set of proper zero-dimensional Image Features ||>
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 30 38
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 6071 
+$i: +auto
+$t: 110
+/!
+<+>
+
+!/ Text_Annotation
+$s# 6440  6480
+$e: div +div
+$t. 
+||>
+<|| In this visual we can see a comparison ||>
+<|| of grayscale and Foreground/Background  ||>
+<|| edge-sensitivity, in the context of ||>
+<|| several canonical edge-detectors ||>
+<|| (both could be contrasted with the ||>
+<|| toroidal matrices yielding segmentations ||> 
+<|| akin to those shown at the end ||>
+<|| of our previous video) ||>
+.
+$y.
+[$back-plus-red]
+.
+$p# 9 3
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 6442 
+$i: +auto
+$t: 130
+/!
+<+>
+
+
+
+
+
+!/ Text_Annotation
+$s# 6770  +280
+$e: div
+$t. 
+||>
+<|| Demonstrating some details of the ||>
+<|| image-processing GUI ||>
+
 .
 $y.
  color:rgba(0,10,37);;font-weight:bold;
  background-color:rgba(200,190,107,250);
 .
-$p# 6 190
+$p# 46 90
 /!
 <+>
 
 
+
 !/ Text_Annotation
-$s# 7800  +210
+$s# 7220  +310
+$e: div
 $t. 
-Images can be placed against a larger view-<br>
-panel (in case annotations need to extend<br>
-outside the image margins)
+<|| The image-annotation tool can load graphics ||>
+<|| acquired from many different sources, not ||>
+<|| only photographs but also video frames, ||>
+<|| snapshots from 360&#176; tours and/or 3D ||>
+<|| graphics engines, or PDF document pages <|| 
+.
+$y.
+[$back-plus-red]
+.
+$p# 12 131
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 7221 
+$i: +auto
+$t: 130
+/!
+<+>
+
+
+
+
+
+!/ Text_Annotation
+$s# 7620  +310
+$e: div
+$t. 
+|||>
+<||| Images can be placed against a |||>
+<||| larger view-panel (in case |||>
+<||| annotations need to extend |||>
+<||| outside the image margins) |||>
 .
 $y.
  color:rgba(40,10,137);font-size:10;font-weight:normal;
@@ -200,18 +552,26 @@ $p# 12 131
 <+>
 
 
+
 !/ Text_Annotation
-$s# 8740  +350
+$s# 8010  8399
+$e: div
 $t. 
-In general, users can adjust image size,<br>
-position, and scene/view colors to create<br>
-an effective presentation via image-markup.
+||>
+<|| The pan/pull option toggles between ||>
+<|| interpreting &ldquo;move&rdquo; gestures as ||>
+<|| intending to relocate the viewport center ||>
+<|| over positions in the image (&ldquo;pan&rdquo; ||>
+<|| mode) and actually moving the image ||>
+<|| relative to its background rectangle, ||>
+<|| visible in annotated representations built ||> 
+<|| around the image (&ldquo;pull&rdquo; mode) ||>
 .
 $y.
  color:rgba(40,10,137);font-size:10;font-weight:normal;
  background-color:rgba(250,250,250,243);
 .
-$p# 12 147
+$p# 12 71
 /!
 <+>
 
@@ -219,15 +579,88 @@ $p# 12 147
 
 
 !/ Text_Annotation
-$s# 10410  10730
+$s# 8620  9183
+$e: div
 $t. 
-Thanks For Watching!
+||>
+<|| In general, users can adjust image ||>
+<|| size, position, and scene/view colors ||>
+<|| to create an effective presentation ||>
+<|| via image annotations ||>
+.
+$y.
+[$back-plus-red]
+.
+$p# 37 14
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 9320  9500
+$e: div
+$t. 
+|||>
+<||| HSV dialogs for choosing |||>
+<||| colors are a useful |||>
+<||| alternative to the |||>
+<||| more-familiar RGB |||>
+<||| selectors, because the |||> 
+<||| HSV color model is |||>
+<||| more visually intuitive |||>
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 137 88
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 9321 
+$i: +auto
+$t: 60
+/!
+<+>
+
+
+
+
+!/ Text_Annotation
+$s# 10100  10500
+$e: div
+$t. 
+<|| Combining images with annotations and/or ||>
+<|| background panels might be useful when ||>
+<|| incorporating pictures into slides, videos, ||>
+<|| or PDF documents <||
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 37 137
+/!
+<+>
+
+
+
+
+!/ Text_Annotation
+$s# 10610  10730
+$e: div +i
+$t. 
+<| Thanks For Watching! <|
 .
 $y.
  color:rgba(0,26,17);;font-weight:bold;
- background-color:rgba(120,0,47,210);
+ background-color:rgba(240,40,187,110);
 .
-$p# 20 181
+$p# 40 181
 /!
 <+>
 

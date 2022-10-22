@@ -918,9 +918,10 @@ void DHAX_Main_Window_Controller::show_xcsd_scene()
 
 void DHAX_Main_Window_Controller::load_image()
 {
- //QString ws =  ROOT_FOLDER "/../pics";
+ //
+ QString ws =  ROOT_FOLDER "/../pics";
  // //  temporary ...
- QString ws =  ROOT_FOLDER "/../pics/ukraine";
+ //QString ws =  ROOT_FOLDER "/../pics/ukraine";
 
  QString filters = "Images (*.jpg *.jpeg *.png *.bmp *.webp)";
 

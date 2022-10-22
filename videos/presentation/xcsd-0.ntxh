@@ -1,0 +1,389 @@
+
+- s=start frame  e=end frame  t=text  y=style 
+  p=position 
+.
+
+
+&type Text_Annotation {7}
+  :s:1  :e:3  :t:4  :y:5  :p:6 ;
+
+
+&type Shape_Annotation {5}
+  :k:1  :s:2  :t:4  :d:5 ;
+ 
+&type Circled_Text_Default {15}
+  :w:1
+  :background-color:2  :foreground-color:6
+  :outline-color:10  :font-size:14  :border:15 ;
+
+&type Circled_Text_Annotation {5}
+  :s:1  :t:3  :p:4 ;
+
+- s=start frame  i=id
+
+
+
+&type Pause_Annotation {3}
+  :s:1  :i:2  :t:3 ;
+
+
+
+&type Annotation_Settings {6}
+  :sa:1  :tr-smaller:3 :tr-larger:5  ;
+
+
+&/
+
+
+!/ Annotation_Settings
+$sa#  1  1
+$tr-smaller#  0  0
+$tr-larger#  0  0  
+/!
+<+>
+
+
+!/ Circled_Text_Default
+$w: 12
+$background-color# 50 50 210 255
+$foreground-color# 150 50 10 255
+$outline-color# 150 50 10 255
+$font-size: 14
+$border: 2
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 30 280
+$e: div +span |> ($over-blue) rgba(200, 200, 240, 153)
+$t. 
+<| A Demo Image-Processing Workflow <|
+.
+$y.
+($back2-blue)
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(7,190,200,50);
+.
+$p# 9 196
+/!
+<+>
+
+
+
+
+
+!/ Text_Annotation
+$s# 300  310
+$e: div
+$t. 
+|||>
+<||| In this demo we&rsquo;ll use image editing and |||>
+<||| annotation features to explore optimal |||>
+<||| parameters for an image-processing workflow. |||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<||| We will rotate the picture and white out all pixels |||>
+<||| that are not sufficiently close to a selected |||>
+<||| foreground pole, then &ldquo;quantize&rdquo; the image into |||>
+<||| blocks that can be counted individually. <|<| Then, |||> 
+<||| an algorithm will search for sufficiently long |||>
+<||| chains of those blocks as a way of filtering the |||>
+<||| ground-truth foreground and measuring its |||>
+<||| size relative to the picture as a whole. |||> 
+.
+$y.
+ color:rgba(40,10,37);font-size:10;font-weight:normal;
+ background-color:rgba(255,250,250,243);
+.
+$p# 3 10
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 301 
+$i: +auto
+$t: 140
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 1003 
+$i: +auto
+$t: 80
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 1380 
+$i: p0
+$t: 120
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 1378 1399  
+$e: div @7
+$t. 
+||>
+<|| We'll use a color-picker in the color-select dialog ||>
+<|| to choose a sample off the image which visually ||>
+<|| corresponds to a representative foreground color ||>
+<|| (here employing direct observation instead of local ||>
+<|| histograms such as shown later in the video) ||>
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 56 139
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 1488
+$i: +auto
+$t: 120
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 1467  1492
+$e: div @7
+$t. 
+||>
+<|| Analogous to upcoming demos with foreground ||>
+<|| and background poles, here we calculate distance ||>
+<|| relative to a canonical color (the foreground); ||>
+<|| except that, in contrast to the analyses we&rsquo;ll ||>
+<|| review later, now we do not consider a specific ||>
+<|| representative background color &mdash; as such ||>
+<|| this is a one- rather than two-pole algorithm ||>
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 48 49
+/!
+<+>
+
+
+
+
+
+!/ Pause_Annotation
+$s: 1994 
+$i: p1
+$t: 120
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 1991  2000
+$e: div @7
+$t. 
+||>
+<|| Our goal overall is to isolate the bronze pipes ||>
+<|| as foreground, and we can try a preliminary ||>
+<|| color-mask to verify that we chose a reasonable ||>
+<|| foreground color &mdash; in the actual workflow ||>
+<|| we would rotate and simplify the image first, ||>
+<|| before applying the color mask ||>
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 50 139
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 2151 
+$i: p2
+$t: 60
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 2150  2360  
+$e: div @7
+$t. 
+||>
+<|| Indeed, the pipe outline emerges ||>
+<|| here clearly, which is what we want ||>
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 20 119
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 3080 
+$i: +auto
+$t: 80
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 3199 
+$i: p3
+$t: 140
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 3198  3220  
+$e: div @7
+$t. 
+||>
+<|| We plugged in rotation numbers from the ||>
+<|| rhomboid annotation that we marked out ||>
+<|| earlier (the values reported in a &ldquo;measurement&rdquo; ||> 
+<|| message box, as seen before), information that ||>
+<|| gives us a guideline on how to rotate the ||>
+<|| picture such that the pipe-foreground aligns ||>
+<|| parallel to horizontal/vertical axes (which ||>
+<|| thereby simplifies our final step of estimating ||>
+<|| foreground area by counting block-lines) ||>
+.
+$y.
+($back-plus-red)
+ color:rgb(90,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(250,255,250,240);
+.
+$p# 20 98
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 3503 
+$i: p4
+$t: 140
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 3466 3530  
+$e: div @7
+$t. 
+||>
+<|| Quantizing simplifies the picture to rough ||>
+<|| outlines, which is a useful transformation ||>
+<|| in the context of the current workflow &mdash; ||>
+<|| one that seeks to measure only an inexact ||>
+<|| approximation of the foreground (i.e., an ||>
+<|| &ldquo;object proposal,&rdquo; something typically more ||>
+<|| coarse-grained than Regions of Interest ||>
+<|| derived from crisper image-segmentation ||>
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 20 48
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 3880 
+$i: p5
+$t: 120
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 3870 3900  
+$e: div @7
+$t. 
+||>
+<|| The workflow is almost complete; our ||>
+<|| last step is to select threshold numbers ||>
+<|| applied to the task of isolating proper ||>
+<|| foreground-blocks. <| Specifically, any row ||>
+<|| or column of blocks which have passed the ||>
+<|| color-distance test thus far will remain in ||>
+<|| the foreground-classification if the ||>
+<|| length of their chain (or the area of a ||> 
+<|| 2D chain) at least equals these threshold ||>
+<|| numbers. <| The chains that pass this final ||>
+<|| test will be seen in black after ||> 
+<|| the calculations return. ||>
+.
+$y.
+[$back-plus-red]
+.
+$p# 40 69
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 4106 
+$i: p6
+$t: 120
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 4070 4110  
+$e: div @7
+$t. 
+||>
+<|| For illustration, a simple message-box ||>
+<|| reports the end-result of the pipeline, ||>
+<|| although in practice these numbers would ||>
+<|| presumably be stored in a database and/or ||>
+<|| tracked as metadata for an image-series ||>
+.
+$y.
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 50 39
+/!
+<+>
+
+
+
+
+/&
+
+
+
+
+

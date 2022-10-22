@@ -114,6 +114,10 @@ class DHAX_Video_Player_Frame : public QFrame
 
  QTimer* current_pause_timer_;
 
+ QStringList annotations_files_;
+
+ u2 current_playlist_index_;
+
 //?protected:
 
  void run_pause_reffed_annotations(DHAX_Video_Annotation* prior,
@@ -206,6 +210,7 @@ public:
 
 
  void play_local_video(QString file_path, QString annotations_file);
+ void play_local_videos(QList<QPair<QString, QString>> paths);
 
  void reset_to_full_size();
  void reset_to_smaller_size();

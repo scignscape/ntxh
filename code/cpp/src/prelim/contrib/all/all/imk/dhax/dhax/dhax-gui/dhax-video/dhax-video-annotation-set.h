@@ -121,6 +121,8 @@ public:
   return get_anchored_ref_annotations(current_pause_annotation_);
  }
 
+ DHAX_Video_Annotation_Set* reinit_and_delete();
+
  void check_ratios()
  {
   sizes_ratio_x_ = larger_video_size_.width() / smaller_video_size_.width();
