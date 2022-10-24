@@ -560,8 +560,8 @@ $t.
 ||>
 <|| The pan/pull option toggles between ||>
 <|| interpreting &ldquo;move&rdquo; gestures as ||>
-<|| intending to relocate the viewport center ||>
-<|| over positions in the image (&ldquo;pan&rdquo; ||>
+<|| intending to relocate the viewport ||>
+<|| center over positions in the image (&ldquo;pan&rdquo; ||>
 <|| mode) and actually moving the image ||>
 <|| relative to its background rectangle, ||>
 <|| visible in annotated representations built ||> 
