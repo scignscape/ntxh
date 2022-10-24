@@ -1,0 +1,259 @@
+
+- s=start frame  e=end frame  t=text  y=style 
+  p=position 
+.
+
+
+&type Text_Annotation {7}
+  :s:1  :e:3  :t:4  :y:5  :p:6 ;
+
+&type Shape_Annotation {5}
+  :k:1  :s:2  :t:4  :d:5 ;
+
+ 
+&type Circled_Text_Default {15}
+  :w:1
+  :background-color:2  :foreground-color:6
+  :outline-color:10  :font-size:14  :border:15 ;
+
+&type Circled_Text_Annotation {5}
+  :s:1  :t:3  :p:4 ;
+
+- s=start frame  i=id
+
+
+
+&type Pause_Annotation {3}
+  :s:1  :i:2  :t:3 ;
+
+
+&type Annotation_Settings {6}
+  :sa:1  :tr-smaller:3 :tr-larger:5  ;
+
+
+&/
+
+
+!/ Annotation_Settings
+$sa#  1  1
+$tr-smaller#  0  0
+$tr-larger#  0  0  
+/!
+<+>
+
+
+!/ Circled_Text_Default
+$w: 12
+$background-color# 50 50 210 255
+$foreground-color# 150 50 10 255
+$outline-color# 150 50 10 255
+$font-size: 14
+$border: 2
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 256 
+$i: +auto
+$t: 110
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 234  363
+$e: div @7
+$t.
+|>
+<|| A similar example, now using MeshLab. ||>
+<|| We load a mesh file, then send a scene-shot ||>
+<|| to XCSD&rsquo;s demo application. <| We&rsquo;ll stay in  ||>
+<|| MeshLab for a few seconds, then show XCSD ||>
+<|| triggering a remote procedure whose ||>
+<|| purpose is resetting MeshLab&rsquo;s scene-view ||>
+<|| to the specific state in effect when that ||>
+<|| shot-image was captured. ||> 
+
+.
+$y.
+($back-white)
+ color:rgb(120,10,37);font-size:10;font-weight:normal;
+ background-color:rgba(250,255,250,253);
+.
+$p# 11 57
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 639 
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 637  664
+$e: div @7
+$t.
+|>
+<|| For the sake of illustration, we may as well grab ||>
+<|| a shot of the model-bridge from directly overhead||> 
+.
+$y.
+($back-red)
+ color:rgba(50,30,107);font-size:10;font-weight:normal;
+ background-color:rgba(200,105,137,250);
+.
+$p# 31 75
+/!
+<+>
+
+
+
+
+
+!/ Pause_Annotation
+$s: 1445 
+$i: +auto
+$t: 100
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 1444  1463
+$e: div @7
+$t.
+|>
+<|| The XCSD-MeshLab extension has encoded and ||>
+<|| shared data about scene geometry alongside the ||> 
+<|| image-snapshot &mdash; specifically, vectors representing ||>
+<|| position, zoom-level, and orientation of an object ||>
+<|| graphic that was displayed in MeshLab&rsquo;s viewer ||>
+.
+$y.
+[$back-white]
+.
+$p# 11 135
+/!
+<+>
+
+
+
+
+
+!/ Pause_Annotation
+$s: 1857 
+$i: +auto
+$t: 80
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 1913 
+$i: +auto
+$t: 150
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 1912  1925
+$e: div @8
+$t.
+|>
+<|| The XCSD application holds on to such ||> 
+<|| positional data, and on request could send ||>
+<|| it back to MeshLab, which would accordingly ||>
+<|| proceed to reposition the view to the same |>
+<|| configuration that yielded our snapshot ||>
+<|| image &mdash; the video shows back-and-forth ||>
+<|| communication along these lines with ||>
+<|| respect to a model of the London Bridge ||>
+<|| (XCSD's code base includes modifications ||>
+<|| to the MeshLab sources so as to implement||>
+<|| the functionality described here) ||>
+.
+$y.
+[$back-white]
+.
+$p# 11 35
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 2404 
+$i: +auto
+$t: 120
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 2401  2440
+$e: div @8
+$t.
+|>
+<|| At this point we have returned to the ||> 
+<|| MeshLab window ... note that the 3D ||>
+<|| view has reset to its earlier state, so ||>
+<|| the visible shot (its 3D scene as ||>
+<|| rendered according to the present ||>
+<|| camera and window settings) now ||>
+<|| matches the 2D image previously ||>
+<|| shared with XCSD&rsquo;s software ||> 
+.
+$y.
+[$back-white]
+.
+$p# 11 35
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 2545 
+$i: +auto
+$t: 39
+/!
+<+>
+
+
+
+
+!/ Text_Annotation
+$s# 2543 2643
+$e: div +i 
+$t. 
+<| Thanks For Watching! <|
+.
+$y.
+ color:rgba(0,26,17);;font-weight:bold;
+ background-color:rgba(240,40,187,110);
+.
+$p# 12 180
+/!
+<+>
+
+
+
+/&
+
+
+
+
+

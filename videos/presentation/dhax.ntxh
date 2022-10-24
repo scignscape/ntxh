@@ -57,7 +57,7 @@ $border: 2
 !/ Pause_Annotation
 $s: 10 
 $i: p1
-$t: 30
+$t: 320
 /!
 <+>
 
@@ -77,8 +77,8 @@ $t.
 &nbsp;&nbsp;
 &#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
 <br> 
-<|| The video reviews how embedded 3D tags can ||>
-<|| be utilized for interoperation between an ||>
+<|| The video reviews how embedded 3D tags ||>
+<|| can be utilized for interoperation between an ||>
 <|| OpenGL window and a host application ||>
 <|| (the case-study presented here will involve ||>
 <|| an embedded video being downloaded, but ||>
@@ -91,7 +91,7 @@ $y.
  border:ridge red 4px;
  background-color:rgba(254,254,244,250);
 .
-$p# 2 4
+$p# 3 4
 /!
 <+>
 
@@ -99,7 +99,7 @@ $p# 2 4
 
 
 !/ Text_Annotation
-$s#  !p1  12
+$s#  !p1  160
 $e: div @9
 $t. 
 |> 
@@ -108,17 +108,17 @@ $t.
 <|| as videos, extending the capabilities of ||> 
 <|| existing panoramic-photography engines, ||>
 <|| such as Matterport.  ||>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;
 &#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
 <br>
-<|| Then, the presentation will review ||>
-<|| how videos can be converted to image-series ||>
-<|| or sample images subject to Computer Vision ||>
-<|| programming, and introduces our novel ||>
-<|| image-representation format, which is ||>
-<|| optimized for a specific class ||>
-<|| of image-processing  algorithms. ||>
+<|| Then, the presentation will review how ||>
+<|| videos can be converted to image-series ||>
+<|| or sample images subject to Computer ||>
+<|| Vision programming, and introduces our ||>
+<|| novel image-representation format, which ||>
+<|| is optimized for a specific class of ||>
+<|| image-processing  algorithms. ||>
 .
 $y.
 [$large-box]
@@ -146,7 +146,7 @@ $p# 45 170
 
 
 !/ Text_Annotation
-$s# 700 1200
+$s# 700 1030
 $e: div  +span |> [$over-blue]
 $t. 
 <| and Generating Tour Videos ...  <|
@@ -161,24 +161,24 @@ $p# 29 123
 <+>
 
 !/ Text_Annotation
-$s# 1220 1342
+$s# 1100 1360
 $e: div +span  |> ($over-red) rgba(252,244,244,225)
 $t. 
 <| Interacting with Matterport Tags <| 
 .
 $y.
 ($back-red)
- color:rgba(50,10,137);font-size:10;font-weight:normal;
+ color:rgba(50,30,107);font-size:10;font-weight:normal;
  background-color:rgba(200,105,137,50);
 .
-$p# 20 149
+$p# 10 149
 /!
 <+>
 
 !/ Pause_Annotation
 $s: 1221 
 $i: +auto
-$t: 10
+$t: 3
 /!
 <+>
 
@@ -186,7 +186,7 @@ $t: 10
 !/ Pause_Annotation
 $s: 1261 
 $i: +auto
-$t: 10
+$t: 3
 /!
 <+>
 
@@ -194,7 +194,7 @@ $t: 10
 !/ Pause_Annotation
 $s: 1291 
 $i: +auto
-$t: 10
+$t: 3
 /!
 <+>
 
@@ -209,7 +209,7 @@ $t.
 <|| embedded file; technically, ||>
 <|| a file accessed via a web link ||> 
 <|| embedded in a Matterport tag. ||> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
 <br>
 <|| Because YouTube videos have a ||>
@@ -225,7 +225,7 @@ $y.
  color:rgb(10,120,137);font-size:10;font-weight:normal;
  background-color:rgba(250,255,252,253);
 .
-$p# 32 12
+$p# 32 6
 /!
 <+>
 
@@ -233,9 +233,20 @@ $p# 32 12
 !/ Pause_Annotation
 $s: 1426 
 $i: +auto
-$t: 80
+$t: 100
 /!
 <+>
+
+
+
+!/ Pause_Annotation
+$s: 1460 
+$i: +auto
+$t: 50
+/!
+<+>
+
+
 
 
 !/ Text_Annotation
@@ -246,11 +257,11 @@ $t.
 <|| This download demonstrates how a host ||>
 <|| application can intercept and respond to HTTP ||> 
 <|| requests embedded in 360&#176; tags. ||>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
 <br> 
-<|| In this example the URL identifiers link ||> 
+<|| In our current example the URL identifiers link ||> 
 <|| to an external (YouTube) address.  However, ||>
 <|| because hyperref links need not map to an ||>
 <|| actual web resource, tours could equally well ||>
@@ -265,16 +276,16 @@ $y.
  color:rgb(120,10,37);font-size:10;font-weight:normal;
  background-color:rgba(250,255,250,253);
 .
-$p# 11 9
+$p# 11 5
 /!
 <+>
 
 
 
 !/ Pause_Annotation
-$s: 1677
+$s: 1678
 $i: +auto
-$t: 100
+$t: 120
 /!
 <+>
 
@@ -309,14 +320,14 @@ $y.
  color:rgb(120,10,37);font-size:10;font-weight:bold;
  background-color:rgba(210,255,200,205);
 .
-$p# 20 95
+$p# 20 123
 /!
 <+>
 
 
 
 !/ Pause_Annotation
-$s: 2099 
+$s: 2139
 $i: +auto
 $t: 30
 /!
@@ -339,21 +350,22 @@ $p# 50 130
 
 
 !/ Text_Annotation
-$s# 2925  +100
+$s# 2905  +120
 $e: div +div
 $t. 
-<| Embedded-WebGL technology, such as |>
-<| seen here &mdash; part of our data |> 
-<| curation code &mdash; allows 3D tours |>
-<| to be captured directly (without user |> 
-<| intervention) from a GL window <| 
+||>
+<|| Embedded-WebGL technology, such as ||>
+<|| seen here &mdash; part of our data curation ||> 
+<|| code &mdash; allows 3D tours to be captured ||>
+<|| directly on video (without user ||> 
+<|| intervention) from a GL window ||>
 .
 $y.
 ($back-plus-red)
  color:rgb(90,10,37);font-size:10;font-weight:bold;
  background-color:rgba(250,255,250,240);
 .
-$p# 49 130
+$p# 33 102
 /!
 <+>
 
@@ -387,14 +399,15 @@ $p# 20 170
 $s# 3273  3560
 $e: div +div
 $t. 
-<| Direct video-capture is a feature |>
-<| that is not supported by traditional |> 
-<| 360-camera view engines <|
+||>
+<|| Direct video-capture is a feature ||>
+<|| that is not supported by traditional ||> 
+<|| 360&#176;-camera view engines ||>
 .
 $y.
 [$back-plus-red]
 .
-$p# 77 120
+$p# 57 97
 /!
 <+>
 
@@ -410,7 +423,7 @@ $t: 30
 
 !/ Text_Annotation
 $s# 3700  +210
-$e: div
+$e: div +div
 $t.
 <| This demo shows the video feed |>
 <| in preview mode, then saved <|
@@ -429,25 +442,25 @@ $p# 20 140
 $s# 3995 +495
 $e: div
 $t. 
-|>
-<| Recording a tour video enables architects, |>
-<| engineers, or property managers to |>
-<| progress through a building while |>
-<| following a tour-sequence of their choice |>
+||>
+<|| Recording a tour video enables architects, ||>
+<|| engineers, or property managers to ||>
+<|| progress through a building while ||>
+<|| following a tour-sequence of their choice ||>
 .
 $y.
 ($silver-back)
  color:rgba(50,10,137);font-size:10;font-weight:normal;
  background-color:rgba(204,232,230,227);
 .
-$p# 59 90
+$p# 49 90
 /!
 <+>
 
 
 !/ Text_Annotation
 $s# 4574 +220
-$e: div
+$e: div +div
 $t. 
 <| The saved video file will be transferred |>
 <| back to the main application window <|
@@ -468,12 +481,14 @@ $e: div
 $t. 
 |>
 <| As one can see, the video-inside-this-video |>
-<| is replaying the footage shown earlier: |>
+<| is replaying footage shown earlier: |>
 <| specifically, the application user is seen |>
 <| reviewing their video-capture feed |>
 .
 $y.
-[$silver-back]
+ color:rgba(99,80,37);font-size:10;font-weight:normal;
+ background-color:rgba(240,252,252,248);
+
 .
 $p# 28 90
 /!
@@ -485,11 +500,11 @@ $p# 28 90
 !/ Text_Annotation
 $s# 5940 +310
 $e: div
-$t. |>
-<| After the raw video is captured, |>
-<| it can be marked up using a custom |>
-<| annotation toolkit integrated |>
-<| with image-editing capabilities |>
+$t. |||>
+<||| After the raw video is captured, |||>
+<||| it can be marked up using a custom |||>
+<||| annotation toolkit integrated |||>
+<||| with image-editing capabilities |||>
 .
 $y.
 [$silver-back]
@@ -511,10 +526,10 @@ $t: 40
 
 
 !/ Text_Annotation
-$s# 6460 6645
+$s# 6590 6645
 $e: div +span  |> [$over-blue]
 $t. 
-Tracking Construction Progress
+<| Tracking Construction Progress <| 
 .
 $y.
 [$back2-blue]
@@ -524,14 +539,23 @@ $p# 20 170
 <+>
 
 
+!/ Pause_Annotation
+$s: 6594 
+$i: +auto
+$t: 30
+/!
+<+>
+
+
+
 
 !/ Text_Annotation
-$s# 6634 +310
+$s# 6714 7200
 $e: div +div
 $t. 
 <| This demo shows two videos |> 
 <| representing successive stages |>
-<| of a construction project. <|
+<| of a construction project <|
 .
 $y.
  color:rgba(50,10,137);font-size:10;font-weight:normal;
@@ -544,7 +568,7 @@ $p# 12 170
 
 
 !/ Text_Annotation
-$s# 7200  +430
+$s# 7300  +430
 $e: div +div
 $t. 
 <| While a video is being played, annotations |>
@@ -553,7 +577,7 @@ $t.
 $y.
 [$back-gray]
 .
-$p# 12 140
+$p# 12 112
 /!
 <+>
 
@@ -561,7 +585,7 @@ $p# 12 140
 
 
 !/ Text_Annotation
-$s# 7820  +400
+$s# 7798  +400
 $e: div +div
 $t. 
 <| Here we take a freeze-frame as an image |>
@@ -578,32 +602,31 @@ $p# 12 140
 
 
 !/ Text_Annotation
-$s# 8420  +200 
+$s# 8220  +400 
 $e: div +div
 $t. 
-<| We construct a demo overlay (here, |>
-<| an arrow), and copy the annotation-code |>
-<| so it could be used when |>
-<| marking up our video <|
+<| We construct a demo overlay (in this case, an |>
+<| arrow), and copy the annotation-code so that  |>
+<| it could be used when marking up our video <|
 .
 $y.
 [$back-gray]
 .
-$p# 12 140
+$p# 19 143
 /!
 <+>
 
 
 
 !/ Text_Annotation
-$s# 9220  9880
+$s# 9520  9724
 $e: div @8
 $t.
 |>
-<|| The annotation code base includes parsers ||>
-<|| for a custom graph-oriented markuo language ||> 
-<|| which can also be applied to tasks ||>
-<|| related to annotating videos and image-series. ||>
+<|| Our annotation code base includes parsers ||>
+<|| for a custom graph-oriented markup language ||> 
+<|| which can also be applied to tasks related ||>
+<|| to annotating videos and image-series. ||>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -613,34 +636,39 @@ $t.
 <|| this markup language offers a sophisticated ||>
 <|| framework for generating PDF documents, ||>
 <|| one which embeds linguistic information ||>
-<|| in PDF outputs.  With a suitable reader ||>
-<|| (including as source code), PDF engines ||>
+<|| in PDF outputs. <| With a suitable reader ||>
+<|| (included as source code), PDF engines ||>
 <|| can import this metadata to map sentence ||>
 <|| and paragraph boundaries to on-screen  ||> 
-<|| coordinates, as well as such discursive ||>
-<|| elements as tables, figures, or equations. ||>
+<|| coordinates, as well as map discursive ||>
+<|| elements such as tables, figures, or equations. ||>
 .
 $y.
 [$back-white]
- color:rgb(120,10,37);font-size:10;font-weight:normal;
- background-color:rgba(250,255,250,253);
 .
-$p# 11 1
+$p# 13 0
 /!
 <+>
 
 
 
+!/ Pause_Annotation
+$s: 9524 
+$i: +auto
+$t: 100
+/!
+<+>
+
+
 
 !/ Text_Annotation
-$s# 10620 +220
-$e: div 
+$s# 10312 10578
+$e: div +span |> [$over-blue]
 $t. 
-<| More on Video Editing ... |>
+<| More on Video Processing ... <|
 .
 $y.
- color:rgba(0,10,37);;font-weight:bold;
- background-color:rgba(200,190,7,50);
+[$back2-blue]
 .
 $p# 20 170
 /!
@@ -654,7 +682,7 @@ $s# 10620 +220
 $e: div +div
 $t. 
 <| Here we pull an image from a video |>
-<| of the same building, now completed. <|
+<| of the same building, now completed <|
 .
 $y.
 [$back-gray]
@@ -666,20 +694,21 @@ $p# 20 170
 
 
 !/ Text_Annotation
-$s# 10900  +410
+$s# 10900  +520
 $e: div +div
 $t. 
-<| The freeze-frame is exported to the |>
-<| main application window where it might |> 
-<| be edited, annotated, or analyzed |>
-<| using algorithms obtained via a |>
-<| built-in catalog including OpenCV, |>
-<| ITK, halide, and generic C++ resources. |> 
+|>
+<|| The freeze-frame is exported to the ||>
+<|| main application window, where it can ||> 
+<|| be edited, annotated, or analyzed ||>
+<|| using algorithms obtained via a ||>
+<|| built-in collection including OpenCV, ||>
+<|| ITK, halide, and generic C++ resources ||> 
 .
 $y.
 [$back-plus-red]
 .
-$p# 41 90
+$p# 30 89
 /!
 <+>
 
@@ -699,11 +728,11 @@ $s# 11520 +290
 $e: div
 $t. 
 |>
-<| The single image could then be subject to |>
-<| its own analysis, perhaps to set parameters |>
-<| for image-processing algorithms applied to |>
-<| sample pictures documenting |>
-<| construction progress. |>
+<| The single image could then be subject |>
+<| to its own analysis, perhaps to set |>
+<| parameters for image-processing algorithms |>
+<| applied to sample pictures documenting |>
+<| construction progress |>
 .
 $y.
 [$back-gray]
@@ -723,12 +752,48 @@ $t: 60
 
 
 
+
 !/ Text_Annotation
-$s# 12333 +90
+$s# 12155  12233
 $e: div
 $t. 
-<| Here we generate a preliminary analysis |>
-<| derived from an edge-detection technique |>
+||>
+<|| Color-enhanced intermediate files are useful ||>
+<|| for examining sucessive stages of an imaging ||>
+<|| pipeline, even if they are not themselves part ||>
+<|| of the analysis (that is, altered pictures such ||>
+<|| as those viewed here are generated to ||>
+<|| inform users of extracted analytic data, and ||>
+<|| are not actually processed themselves as part ||>
+<|| of a Computer Vision workflow) ||>
+.
+$y.
+[$silver-back]
+.
+$p# 13 37
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 12158 
+$i: +auto
+$t: 110
+/!
+<+>
+
+
+
+
+
+!/ Text_Annotation
+$s# 12333 +170
+$e: div +div
+$t. 
+<| Here we visualize a preliminary analysis |>
+<| derived from edge-detection techniques |>
 <| based on toroidal color models <|
 .
 $y.
@@ -742,7 +807,7 @@ $p# 12 170
 !/ Pause_Annotation
 $s: 12340 
 $i: +auto
-$t: 80
+$t: 100
 /!
 <+>
 
@@ -753,7 +818,7 @@ $s# 12600 +180
 $e: div +div
 $t. 
 <| Further analysis can proceed via the XCSD |>
-<| image format, shown on the next video. <|
+<| image format, shown on the next video <|
 .
 $y.
  color:rgb(120,10,37);font-size:10;font-weight:bold;
@@ -764,26 +829,36 @@ $p# 12 170
 <+>
 
 
-!/ Text_Annotation
-$s# 12800 +30
-$e: i @20 +span
-$t. 
-<| Thanks For Watching! |>
-.
-$y.
- color:rgba(0,0,17);;font-weight:bold;
- background-color:rgba(200,0,87,90);
-.
-$p# 5 170
+
+!/ Pause_Annotation
+$s: 12601 
+$i: +auto
+$t: 30
 /!
 <+>
 
 
 
 !/ Pause_Annotation
-$s: 12820 
+$s: 12832 
 $i: +auto
-$t: 100
+$t: 10
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 12830 12855
+$e: div  +span |> ($over-blue) rgba(200, 200, 240, 153)
+$t. 
+<| Importing Images  <|
+.
+$y.
+($back2-blue)
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(7,190,200,50);
+.
+$p# 29 123
 /!
 <+>
 

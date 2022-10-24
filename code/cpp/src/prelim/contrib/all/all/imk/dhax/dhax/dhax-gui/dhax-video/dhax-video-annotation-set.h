@@ -79,6 +79,9 @@ class DHAX_Video_Annotation_Set : public QMap<s4, DHAX_Video_Annotation>
   }
  }
 
+ QMap<s4, QPair<void*, void*>> carried_items_forward_;
+ QMap<s4, QPair<void*, void*>> carried_items_backward_;
+
 
 public:
 
@@ -110,6 +113,10 @@ public:
 
  ACCESSORS(DHAX_Video_Annotation* ,current_pause_annotation)
 
+ QPair<void*, void*> get_carried_item_at_frame(s4 count)
+ {
+  return carried_items_backward_.value(count);
+ }
 
  QSet<DHAX_Video_Annotation*> get_anchored_ref_annotations(DHAX_Video_Annotation* ref)
  {

@@ -248,6 +248,8 @@ DHAX_Video_Annotation_Set* DHAX_Video_Annotation_Set::reinit_and_delete()
  DHAX_Video_Annotation_Set* result = new DHAX_Video_Annotation_Set;
  result->sizes_ratio_x_ = sizes_ratio_x_;
  result->sizes_ratio_y_ = sizes_ratio_y_;
+ // //  note we're copying the forward to the backward ...
+ result->carried_items_backward_ = carried_items_forward_;
  delete this;
  return result;
 }

@@ -384,6 +384,13 @@ void DHAX_Video_Player_Frame::handle_video_frame(const QVideoFrame& qvf)
    ((_show_hide*)pr.first)->hide(pr.second);
   }
 
+//  pr = annotation_set_->get_carried_item_at_frame(current_frame_count_);
+//  if(pr.second)
+//  {
+//   ((_show_hide*)pr.first)->hide(pr.second);
+//  }
+
+
   DHAX_Video_Annotation* dva = annotation_set_->get_annotation_by_start_frame(current_frame_count_);
   if(dva)
   {
@@ -764,6 +771,8 @@ void DHAX_Video_Player_Frame::play_local_videos(QList<QPair<QString, QString>> p
 
  // //  give it a bit of time
  //??? need_video_size_ = 10; //
+ if(current_playlist_index_ == 0)
+   need_video_size_ = 5;
 
 // ?check_adjust_size();
 

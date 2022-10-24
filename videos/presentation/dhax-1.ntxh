@@ -1,0 +1,187 @@
+
+- s=start frame  e=end frame  t=text  y=style 
+  p=position 
+.
+
+
+&type Text_Annotation {7}
+  :s:1  :e:3  :t:4  :y:5  :p:6 ;
+
+&type Shape_Annotation {5}
+  :k:1  :s:2  :t:4  :d:5 ;
+
+ 
+&type Circled_Text_Default {15}
+  :w:1
+  :background-color:2  :foreground-color:6
+  :outline-color:10  :font-size:14  :border:15 ;
+
+&type Circled_Text_Annotation {5}
+  :s:1  :t:3  :p:4 ;
+
+- s=start frame  i=id
+
+
+
+&type Pause_Annotation {3}
+  :s:1  :i:2  :t:3 ;
+
+
+&type Annotation_Settings {6}
+  :sa:1  :tr-smaller:3 :tr-larger:5  ;
+
+
+&/
+
+
+!/ Annotation_Settings
+$sa#  1  1
+$tr-smaller#  0  0
+$tr-larger#  0  0  
+/!
+<+>
+
+
+!/ Circled_Text_Default
+$w: 12
+$background-color# 50 50 210 255
+$foreground-color# 150 50 10 255
+$outline-color# 150 50 10 255
+$font-size: 14
+$border: 2
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 16 
+$i: +auto
+$t: 50
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 1 30
+$e: div  +span |> ($over-blue) rgba(200, 200, 240, 153)
+$t. 
+<| Importing Images  <|
+.
+$y.
+($back2-blue)
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(7,190,200,50);
+.
+$p# 29 123
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 121 
+$i: +auto
+$t: 89
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 120  220
+$e: div @8
+$t. 
+|>
+<|| Similar to how the freeze-frame earlier ||>
+<|| in this video demonstrated that pictures ||> 
+<|| might be obtained from a 360&#176; tour, ||>
+<|| here we&rsquo;ll show a pair of examples ||> 
+<|| where images are acquired as camera ||>
+<|| shots from 3D and CAD graphics engines ||>
+.
+$y.
+($back-white)
+ color:rgb(10,120,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,255,252,253);
+.
+$p# 32 86
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 311 
+$i: +auto
+$t: 30
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 300  430
+$e: div @8
+$t. 
+|>
+<|| These examples show two applications, ||>
+<|| FreeCAD and MeshLab, which have been ||>
+<|| modified to interoperate with the ||>
+<|| XCSD demo application ||>
+.
+$y.
+[$back-white]
+.
+$p# 32 76
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 811 
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 809 1300
+$e: div @9 +div  | ($over-red) rgba(252,244,244,225)
+$t. 
+<| After opening a 3D design file in FreeCAD, here we <| |> 
+<| will send a sample scene view to the XCSD software <|
+.
+$y.
+($back-red)
+ color:rgba(50,30,107);font-size:10;font-weight:normal;
+ background-color:rgba(200,105,137,50);
+.
+$p# 2 158
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 1359 1750
+$e: div @6 +span  | ($over-red) rgba(252,244,244,225)
+$t. 
+<|| Now we can annotate and/or analyze the picture <||
+.
+$y.
+[$back-red]
+.
+$p# 45 158
+/!
+<+>
+
+
+
+/&
+
+
+
+
+
