@@ -43,7 +43,7 @@ $s#  !p1  9
 $e: div @8
 $t. 
 |> 
-<|| The application's histogram display is interactive, ||>
+<|| The application&rsquo;s histogram display is interactive, ||>
 <|| so that users can manually select colors ||>
 <|| assigned to thematic roles such as canonical ||>
 <|| foreground and background. ||>
@@ -205,8 +205,8 @@ $t.
 <| on the previous video ... <|
 .
 $y.
- color:rgba(40,10,137);font-size:10;font-weight:normal;
- background-color:rgba(250,250,250,243);
+ color:rgba(50,30,107);font-size:10;font-weight:normal;
+ background-color:rgba(200,105,137,250);
 .
 $p# 17 180
 /!
@@ -224,8 +224,8 @@ $t.
 <|| straddle the border between bonafide ||> 
 <|| image segments will tend to have ||>
 <|| histograms with multiple peaks along ||>
-<|| the &ldquo;hue &rdquo; axis of the HSV (hue, ||>
-<|| saturation, value) color model. ||>
+<|| the &ldquo;hue &rdquo; axis of the HSV (hue,saturation, ||>
+<|| value) color model. ||>
 .
 $y.
 ($back-plus-red)
@@ -275,7 +275,7 @@ $t: 70
 
 
 !/ Text_Annotation
-$s# 3500  3800
+$s# 3560  3810
 $e: div
 $t. 
 <| Feature-Detection Pipelines <|
@@ -296,7 +296,7 @@ $p# 20 144
 $s# 4020  4052
 $e: div +div
 $t. 
-<|| Next we'll apply ||>
+<|| Next we&rsquo;ll apply ||>
 <|| foreground/background ||>
 <|| probability distribution ||>
 <|| as an extra parameter ||>
@@ -429,9 +429,9 @@ $e: div @7
 $t. 
 ||>
 <|| Once edge-detection methods have classified ||>
-<|| pixels such that those which appears to lie near ||>
-<|| Region of Interest boundaries can be identified, ||>
-<|| the set of such boundary-locations is then ||>
+<|| pixels such that those which appear to lie near ||>
+<|| Region-of-Interest boundaries are properly ||>
+<|| identified, the set of such boundary-locations is then ||>
 <|| analyzed geometrically to isolate a narrower ||>
 <|| set of proper zero-dimensional Image Features ||>
 .
@@ -447,7 +447,7 @@ $p# 30 38
 !/ Pause_Annotation
 $s: 6071 
 $i: +auto
-$t: 110
+$t: 140
 /!
 <+>
 
@@ -462,7 +462,7 @@ $t.
 <|| several canonical edge-detectors ||>
 <|| (both could be contrasted with the ||>
 <|| toroidal matrices yielding segmentations ||> 
-<|| akin to those shown at the end ||>
+<|| analogous to those shown at the end ||>
 <|| of our previous video) ||>
 .
 $y.
@@ -516,7 +516,7 @@ $t.
 $y.
 [$back-plus-red]
 .
-$p# 12 131
+$p# 8 131
 /!
 <+>
 
@@ -538,8 +538,8 @@ $s# 7620  +310
 $e: div
 $t. 
 |||>
-<||| Images can be placed against a |||>
-<||| larger view-panel (in case |||>
+<||| Images can be placed against |||>
+<||| a larger view-panel (in case |||>
 <||| annotations need to extend |||>
 <||| outside the image margins) |||>
 .
@@ -643,7 +643,7 @@ $y.
  color:rgba(40,10,137);font-size:10;font-weight:normal;
  background-color:rgba(250,250,250,243);
 .
-$p# 37 137
+$p# 27 137
 /!
 <+>
 

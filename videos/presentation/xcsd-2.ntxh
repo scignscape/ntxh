@@ -176,7 +176,7 @@ $e: div @7 +span |> rgba(252,252,252,252)
 $t. 
 <| Such preliminary data may be useful for <|<| |>
 <| writing post-processing code interpreting  |>
-<| the geometric properties of Regions of <|<|<|<| |>
+<| the geometric properties of Regions-of&ndash; <|<| |>
 <| Interest inferred via segmentation and/or |> 
 <| feature-extraction algorithms <|<|
 .

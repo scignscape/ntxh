@@ -67,26 +67,26 @@ $s#  !p1  5
 $e: ($dl) div @9
 $t. 
 |> 
-<|| This video will present our GIS/Digital  ||> 
-<|| Cartography platform, one that combines the ||> 
-<|| features and functionality of GIS tile servers ||> 
-<|| with geospatial application-development tools. ||>
+<|||&nbsp;&nbsp; This video will present our GIS/Digital  ||> 
+<|||&nbsp;&nbsp; Cartography platform, one that combines the ||> 
+<|||&nbsp;&nbsp; features and functionality of GIS tile servers ||> 
+<|||&nbsp;&nbsp; with geospatial application-development tools. ||>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;
 &#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
 <br>
-<|| Tile servers provide the base maps that GIS ||>
-<|| applications stream (from an online repository) ||>
-<|| and then utilize to construct domain-specific ||>
-<|| presentations, by superimposing custom data ||>
-<|| layers. <| Such layers can incorporate any ||>
-<|| information wherein data points or areas are  ||>
-<|| assigned/correlated with geographic coordinates. ||>
+<|||&nbsp;&nbsp; Tile servers provide the base maps that GIS ||>
+<|||&nbsp;&nbsp; applications stream (from an online repository) ||>
+<|||&nbsp;&nbsp; and subsequently use to construct domain-specific ||>
+<|||&nbsp;&nbsp; presentations, by superimposing custom data ||>
+<|||&nbsp;&nbsp; layers. <| Such layers can incorporate any ||>
+<|||&nbsp;&nbsp; information wherein data points or areas are  ||>
+<|||&nbsp;&nbsp; assigned/correlated with geographic coordinates. ||>
 .
 $y.
 ($large-box)
  color:rgb(10,90,137);;font-weight:normal;
- background-color:rgba(245,245,210,220);
+ background-color:rgba(252,250,246,240);
 .
 $p# 2 5
 /!
@@ -100,8 +100,8 @@ $t.
 <|| The video will point out useful features of ||> 
 <|| standalone GIS applications &mdash; that is, ||> 
 <|| applications which run as isolated programs on a ||> 
-<|| desktop computer, rather than forcing users to ||> 
-<|| work through a web browser or through generic GIS ||>
+<|| desktop computer, rather than forcing users to work ||> 
+<|| through a web browser or through generic GIS ||>
 <|| platforms (for instance, ArcGIS or ArcGIS Online). ||>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;
@@ -125,25 +125,25 @@ $s#  !p1  230
 $e: div @8
 $t. 
 |> 
-<|| The video will show several examples of how stand- ||> 
-<|| alone GIS technology promotes a richer User   ||> 
-<|| Experience, and will also present several features of ||> 
-<|| tile servers that applications may employ as back ends. ||> 
+<|||&nbsp;&nbsp; The video will show several examples of how stand- ||> 
+<|||&nbsp;&nbsp; alone GIS technology promotes a richer User   ||> 
+<|||&nbsp;&nbsp; Experience, and will also present several features of ||> 
+<|||&nbsp;&nbsp; tile servers that applications may employ as back ends. ||> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;
 &#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
 <br>
-<|| This code base is unique in that it offers tile-server ||>
-<|| and application-development components via a unified ||>
-<|| toolkit, enabling applications to be paired with tile ||>
-<|| servers and renderers engineered alongside each ||>
-<|| application &mdash; yielding both integrated database ||>  
-<|| access via server-side data layers, and integrated ||> 
-<|| cartographic styles, to ensure that the base maps and ||> 
-<|| overlays are visually effective when seen in consort. ||>    
+<|||&nbsp;&nbsp; This code base is unique in that it offers tile-server ||>
+<|||&nbsp;&nbsp; and application-development components via a unified ||>
+<|||&nbsp;&nbsp; toolkit, enabling applications to be paired with tile ||>
+<|||&nbsp;&nbsp; servers and renderers engineered alongside each ||>
+<|||&nbsp;&nbsp; application &mdash; yielding both integrated database access ||>  
+<|||&nbsp;&nbsp; via server-side data layers, and integrated cartographic ||> 
+<|||&nbsp;&nbsp; styles, to ensure that the base maps and overlays ||> 
+<|||&nbsp;&nbsp; are visually effective when seen in juxtaposition. ||>    
 .
 $y: [$large-box]
-$p# 1 3
+$p# 0 3
 /!
 <+>
 
@@ -154,9 +154,10 @@ $s# 20 +160
 $e: div  +span |> ($over-yellow) rgba(250,250,207,250)  
 $t. 
 <| Standalone GIS Applications: |>
-<| Interactive Features 
+<| Interactive Features  <|
 .
 $y.
+($back2-yellow)
  color:rgba(0,10,37);;font-weight:bold;
  background-color:rgba(200,190,7,50);
 .
@@ -180,8 +181,9 @@ $t.
 <| Choosing between different style formats <|
 .
 $y.
+($back2-blue)
  color:rgba(0,10,37);;font-weight:bold;
- background-color:rgba(200,190,7,50);
+ background-color:rgba(7,190,200,50);
 .
 $p# 15 25
 /!
@@ -219,7 +221,16 @@ $p# 3 22
 !/ Pause_Annotation
 $s: 401
 $i: +auto
-$t: 100
+$t: 70
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 440
+$i: +auto
+$t: 65
 /!
 <+>
 
@@ -287,8 +298,7 @@ $t.
 <| Obtaining GIS Information <|
 .
 $y.
- color:rgba(0,10,37);;font-weight:bold;
- background-color:rgba(200,190,7,50);
+[$back2-blue]
 .
 $p# 20 150
 /!
@@ -423,7 +433,7 @@ shaft_length: 106
 tip_width: 92
 tip_length: 153
 tip_point_width: 0
-tip_corner_bend: 0
+tip_corner_bend: 7
 rotation: 347.518
 rotation_center: 187 481
 shaft_offset: 6
@@ -451,7 +461,7 @@ shaft_length: 106
 tip_width: 92
 tip_length: 153
 tip_point_width: 0
-tip_corner_bend: 0
+tip_corner_bend: 7
 rotation: 347.518
 rotation_center: 187 481
 shaft_offset: 6
@@ -479,7 +489,7 @@ shaft_length: 106
 tip_width: 92
 tip_length: 153
 tip_point_width: 0
-tip_corner_bend: 0
+tip_corner_bend: 7
 rotation: 347.518
 rotation_center: 187 481
 shaft_offset: 6
@@ -507,7 +517,7 @@ shaft_length: 106
 tip_width: 92
 tip_length: 153
 tip_point_width: 0
-tip_corner_bend: 0
+tip_corner_bend: 7
 rotation: 347.518
 rotation_center: 187 481
 shaft_offset: 6
@@ -614,8 +624,8 @@ $t.
 <| street addresses, street views, and transit |> 
 <| info. <| Many applications may also need |>
 <| to manage domain-specific information |>
-<| that would be superimposed in the form of |>
-<| data layers above the base maps, as |>
+<| that would be superimposed in the form |>
+<| of data layers above the base maps, as |>
 <| depicted in the following case studies. |> 
 .
 $y.
@@ -643,7 +653,7 @@ $t.
 $y.
 [$pg]
 .
-$p# 1 167
+$p# 5 167
 /!
 <+>
 
@@ -681,8 +691,7 @@ $t.
 <| Complex Dialog Boxes <|
 .
 $y.
- color:rgba(0,10,37);;font-weight:bold;
- background-color:rgba(200,190,7,50);
+[$back2-blue]
 .
 $p# 20 183
 /!
@@ -708,7 +717,7 @@ $t.
 $y.
 [$pg]
 .
-$p# 13 163
+$p# 13 153
 /!
 <+>
 
@@ -726,11 +735,11 @@ $s#  5330  +225
 $e: div @9
 $t. 
 <| A principal benefit of standalone GIS applications |>
-<| is the possibility of presenting multi-part |>
-<| data structures &mdash; correlated with map locations &mdash; |>
+<| is the possibility of presenting multi-part data |>
+<| structures &mdash; correlated with map locations &mdash; |>
 <| via interactive, structured, self-contained windows |>
   <span style='font-size:7pt'>
-  (often as dialog boxes, floating above the main application 
+  &nbsp;&nbsp;&nbsp;(often as dialog boxes, floating above the main application 
   <span style='font-size:6pt'>GUI</span> window) 
   </span>
 |> 
@@ -812,14 +821,13 @@ $t: 40
 
 !/ Text_Annotation
 $s# 6580 +420
-$e: div +span |> [$over-yellow]
+$e: div +span |> ($over-blue) rgba(200, 200, 240, 153)
 $t. 
 <| Delegating a subset of tiles |>
 <| to a local server <|
 .
 $y.
- color:rgba(0,10,37);;font-weight:bold;
- background-color:rgba(200,190,7,50);
+[$back2-blue]
 .
 $p# 42 35
 /!
@@ -841,7 +849,7 @@ $e: div @9
 $t. 
 |>
 <||| This sequence demonstrates a local Apache- |||>
-<||| based tile server which, when importing GIS |||> 
+<||| based tile server which, upon importing GIS |||> 
 <||| data, was programmed to render tiles for |||>
 <||| Kherson, Ukraine through a special |||>
 <||| cartographic format (incorporating segment- |||> 
@@ -871,11 +879,11 @@ $s# 7043 +20
 $e: div @9
 $t. 
 |>
-<||| The locally-rendered tiles are styled |||>
-<||| with a darker background color, for this |||> 
-<||| demo, so as to visualize the boundary- |||>
+<||| The locally-rendered tiles are styled, |||>
+<||| for this demo, with a darker background |||> 
+<||| color, so as to visualize the boundary- |||>
 <||| lines between these customized |||>
-<||| map-segments and the surrounding |||> 
+<||| map-segments and their surrounding |||> 
 <||| tiles &mdash; themselves styled according to |||>
 <||| a conventional format (and without |||>
 <||| supplemental callbacks during the |||> 
@@ -911,7 +919,7 @@ $y.
  color:rgba(0,10,37);;font-weight:bold;
  background-color:rgba(200,190,7,50);
 .
-$p# 7 175
+$p# 7 181
 /!
 <+>
 
@@ -970,8 +978,7 @@ $t.
 <| interactive dialog boxes <| 
 .
 $y.
- color:rgba(0,10,37);;font-weight:bold;
- background-color:rgba(200,190,7,50);
+[$back2-blue]
 .
 $p# 20 130
 /!
@@ -1003,7 +1010,7 @@ $t: 20
 
 
 !/ Pause_Annotation
-$s: 8354
+$s: 8382
 $i: +auto
 $t: 20
 /!
@@ -1040,9 +1047,9 @@ $t.
 |>
 <| This demo also shows examples of loading online |>
 <| sources based on map coordinates &mdash; here, accessing |>
-<| NPR's daily coverage of Ukraine events by taking the |>
+<| NPR&rsquo;s daily coverage of Ukraine events by taking the |>
 <| dates of location-specific records in the Humanitarian |>
-<| database, and then a generic Google search |> 
+<| database, and then running a generic Google search |> 
 .
 $y.
  color:rgba(50,10,137);font-size:10;font-weight:normal;

@@ -107,7 +107,7 @@ $t: 15
 !/ Pause_Annotation
 $s: 10 
 $i: +auto
-$t: 130
+$t: 140
 /!
 <+>
 
@@ -132,13 +132,13 @@ $t.
 <|| visualized in this video) involving calculations ||>
 <|| of local color histograms. <| The goal here is to ||>
 <|| associate certain colors with thematic roles ||>
-<|| within a given image, such as foreground ||>
-<|| and background image areas. ||>
+<|| operating within a given image, such as ||>
+<|| foreground and background image areas. ||>
 .
 $y.
 ($large-box)
  color:rgb(10,90,137);;font-weight:normal;
- background-color:rgba(245,245,210,220);
+ background-color:rgba(252,250,246,240);
 .
 $p# 3 5
 /!
@@ -157,7 +157,7 @@ $t: 10
 !/ Pause_Annotation
 $s: 98 
 $i: +auto
-$t: 150
+$t: 160
 /!
 <+>
 
@@ -168,13 +168,13 @@ $s#  95  100
 $e: div @8
 $t. 
 |> 
-<|| The application's histogram displays are similarly ||>
+<|| The application&rsquo;s histogram displays are similarly ||>
 <|| interactive, so that users can manually select colors ||>
 <|| assigned to thematic roles such as canonical ||>
 <|| foreground and background. ||>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;
-&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
 <br>
 <|| Algorithms that are fine-tuned interactively can then ||>
 <|| be applied automatically across an image series. ||>  
@@ -186,7 +186,7 @@ $t.
 <|| grayscale) Computer Vision algorithms. ||>
 .
 $y: [$large-box]
-$p# 0 12
+$p# 0 9
 /!
 <+>
 

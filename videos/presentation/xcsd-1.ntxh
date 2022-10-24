@@ -112,11 +112,10 @@ $t.
 <|| processed for the XCSD format ||>
 .
 $y.
-($back-plus-red)
- color:rgb(90,10,37);font-size:10;font-weight:bold;
- background-color:rgba(250,255,250,240);
+ color:rgba(0,10,37);
+ background-color:rgba(200,190,107,250);
 .
-$p# 70 139
+$p# 70 52
 /!
 <+>
 
@@ -135,7 +134,7 @@ $e: div @7
 $t. 
 ||>
 <|| This graphic illustrates the &ldquo;tierbox&rdquo; lines ||>
-<|| subdiving an XCSD image into 27x27 boxes ||>
+<|| subdiving an XCSD image into 27&times;27 boxes ||>
 .
 $y.
  color:rgba(40,10,137);font-size:10;font-weight:normal;

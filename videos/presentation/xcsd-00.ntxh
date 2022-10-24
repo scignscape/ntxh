@@ -94,7 +94,7 @@ $border: 2
 
 
 !/ Pause_Annotation
-$s: 26 
+$s: 32 
 $i: +auto
 $t: 150
 /!
@@ -102,15 +102,15 @@ $t: 150
 
 
 !/ Text_Annotation
-$s#  25  62
+$s#  31  62
 $e: div @8
 $t. 
 |> 
 <|| The XCSD code-base bundles a large variety of ||>
-<|| of Computer Vision algorithms, alongside the template ||>
-<|| GUI application &mdash; which in turn has a variety of  ||>
-<|| interactive windows supporting image editing, ||>
-<|| annotation, and analysis capabilities. ||>
+<|| of Computer Vision algorithms, alongside the ||>
+<|| template GUI application &mdash; which in turn has a ||>
+<|| variety of interactive windows supporting image ||>
+<|| editing, annotation, and analysis capabilities. ||>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;
 &#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
@@ -119,18 +119,49 @@ $t.
 <|| segmentation, where color details (as opposed to ||>
 <|| just grayscale intensity measures) are an intrinsic ||> 
 <|| factor in feature-extraction methods. <| Users can ||>
-<|| examine a sample image's color and geometric ||>
+<|| examine a sample image&rsquo;s color and geometric ||>
 <|| properties to design or fine-tune algorithms ||>
 <|| that are then applied to a larger image series. ||>
 .
 $y.
 ($large-box)
  color:rgb(10,90,137);;font-weight:normal;
- background-color:rgba(245,245,210,220);
+ background-color:rgba(252,250,246,250);
 .
 $p# 1 7
 /!
 <+>
+
+
+
+!/ Pause_Annotation
+$s: 562 
+$i: +auto
+$t: 10
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 539  0  
+$e: div @7
+$t. 
+||>
+<|| Previewing supporting files or ||>
+<|| diagrams that can be generated ||>
+<|| by an XCSD rendering engine, so ||> 
+<|| as to document image data, geometry, ||>
+<|| and debugging information as ||>
+<|| processed for the XCSD format ||>
+.
+$y.
+ color:rgba(0,10,37);
+ background-color:rgba(200,190,107,250);
+.
+$p# 70 52
+/!
+<+>
+
 
 
 

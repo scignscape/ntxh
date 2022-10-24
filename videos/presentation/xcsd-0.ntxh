@@ -66,7 +66,7 @@ $y.
  color:rgba(0,10,37);;font-weight:bold;
  background-color:rgba(7,190,200,50);
 .
-$p# 9 196
+$p# 13 175
 /!
 <+>
 
@@ -107,7 +107,7 @@ $p# 4 12
 !/ Pause_Annotation
 $s: 301 
 $i: +auto
-$t: 140
+$t: 160
 /!
 <+>
 
@@ -126,7 +126,7 @@ $t: 80
 !/ Pause_Annotation
 $s: 1380 
 $i: p0
-$t: 120
+$t: 150
 /!
 <+>
 
@@ -136,7 +136,7 @@ $s# 1378 1399
 $e: div @7
 $t. 
 ||>
-<|| We'll use a color-picker in the color-select dialog ||>
+<|| We&rsquo;ll use a color-picker in the color-select dialog ||>
 <|| to choose a sample off the image which visually ||>
 <|| corresponds to a representative foreground color ||>
 <|| (here employing direct observation instead of local ||>
@@ -201,9 +201,9 @@ $t.
 <|| Our goal overall is to isolate the bronze pipes ||>
 <|| as foreground, and we can try a preliminary ||>
 <|| color-mask to verify that we chose a reasonable ||>
-<|| foreground color &mdash; in the actual workflow ||>
+<|| foreground color. <| In the actual workflow, ||>
 <|| we will rotate and simplify the image first, ||>
-<|| before applying the color mask ||>
+<|| before applying our color mask. ||>
 .
 $y.
  color:rgba(40,10,137);font-size:10;font-weight:normal;
@@ -252,7 +252,7 @@ $t: 80
 
 
 !/ Pause_Annotation
-$s: 3199 
+$s: 3195 
 $i: p3
 $t: 150
 /!
@@ -260,7 +260,7 @@ $t: 150
 
 
 !/ Text_Annotation
-$s# 3198  3220  
+$s# 3194  3220  
 $e: div @7
 $t. 
 ||>
@@ -276,7 +276,7 @@ $t.
 .
 $y.
 ($back-plus-red)
- color:rgb(90,10,37);font-size:10;font-weight:bold;
+ color:rgb(90,10,37);font-size:10;
  background-color:rgba(250,255,250,240);
 .
 $p# 20 98
@@ -304,8 +304,8 @@ $t.
 <|| one that seeks to measure only an inexact ||>
 <|| approximation of the foreground (i.e., an ||>
 <|| &ldquo;object proposal,&rdquo; something typically more ||>
-<|| coarse-grained than Regions of Interest ||>
-<|| derived from crisper image-segmentation) ||>
+<|| coarse-grained than Regions-of-Interest ||>
+<|| derived from crisper image segmentation) ||>
 .
 $y.
  color:rgba(40,10,137);font-size:10;font-weight:normal;
@@ -320,7 +320,7 @@ $p# 20 48
 !/ Pause_Annotation
 $s: 3880 
 $i: p5
-$t: 140
+$t: 160
 /!
 <+>
 
@@ -338,10 +338,10 @@ $t.
 <|| color-distance test thus far will remain in ||>
 <|| the foreground-classification if the length ||>
 <|| of their &ldquo;tierbox&rdquo; chain (or the area of a ||> 
-<|| 2D chain) at least equals these threshold ||>
-<|| numbers. <| The chains that pass this final ||>
-<|| test will be seen in black after the ||> 
-<|| calculations return. ||>
+<|| 2D chain) at least equals one&rsquo;s assigned ||>
+<|| threshold numbers. <| The chains that pass ||>
+<|| this final test will be shown in black after ||> 
+<|| the calculations return. ||>
 .
 $y.
 [$back-plus-red]
