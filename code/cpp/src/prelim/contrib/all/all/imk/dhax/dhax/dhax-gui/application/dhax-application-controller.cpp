@@ -975,20 +975,20 @@ void DHAX_Application_Controller::play_video(QString file_path,
 
  current_video_player_dialog_->play_local_videos(
 
- {
-    {v + "-000.mkv", a + "-000.ntxh"},
-    {v + "-00.mkv", a + "-00.ntxh"},
-    {v + "-1.mkv", a + "-1.ntxh"},
-    {v + "-0.mkv", a + "-0.ntxh"},
-    {v + "-2.mkv", a + "-2.ntxh"},
-    {v + ".mkv", a + ".ntxh"},
- }
+// {
+//    {v + "-000.mkv", a + "-000.ntxh"},
+//    {v + "-00.mkv", a + "-00.ntxh"},
+//    {v + "-1.mkv", a + "-1.ntxh"},
+//    {v + "-0.mkv", a + "-0.ntxh"},
+//    {v + "-2.mkv", a + "-2.ntxh"},
+//    {v + ".mkv", a + ".ntxh"},
+// }
 
-//       {
-//         {v + ".mkv", a + ".ntxh"},
-//         {v + "-1.mkv", a + "-1.ntxh"},
-//         {v + "-2.mkv", a + "-2.ntxh"},
-//       }
+       {
+         {v + ".mkv", a + ".ntxh"},
+         {v + "-1.mkv", a + "-1.ntxh"},
+         {v + "-2.mkv", a + "-2.ntxh"},
+       }
 
 //        v + ".mkv", a + ".ntxh"
 //    v + "-2.mkv", a + "-2.ntxh"
@@ -1019,12 +1019,12 @@ void DHAX_Application_Controller::play_video()
 //   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/qmt.ntxh");
 
 
-// play_video("/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/dhax.mkv",
-//   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/dhax.ntxh");
+ play_video("/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/dhax.mkv",
+   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/dhax.ntxh");
 
 
- play_video("/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd.mkv",
-   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd.ntxh");
+// play_video("/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd.mkv",
+//   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd.ntxh");
 
 }
 

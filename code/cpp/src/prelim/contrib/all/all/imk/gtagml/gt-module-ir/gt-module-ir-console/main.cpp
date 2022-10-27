@@ -56,7 +56,8 @@ int main(int argc, char *argv[])
  // //  special for i4
  QString folder = DEMO_DOCUMENT_FOLDER "/i4";
  //?paper_name = "ch20";
- paper_name = "ch2";
+ //?paper_name = "ch2";
+ paper_name = "ch23";
 
 
  mir.read_lines(QString(R"(
