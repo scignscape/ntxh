@@ -23,6 +23,14 @@ INCLUDEPATH += $$SRC_KERNEL_DIR/iat/iat/
 
 include($$ROOT_DIR/../preferred/compiler.pri)
 
+include($$ROOT_DIR/../preferred/pdflatex.pri)
+
+
+DEFINES += PDFLATEX_EXE=\\\"$$PDFLATEX_EXE_FILE\\\"
+
+
+INCLUDEPATH += $${POPPLER_INCLUDE_DIR}
+
 
 CONFIG += c++17
 

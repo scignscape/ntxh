@@ -13,6 +13,7 @@
 
 #include "global-types.h"
 
+#include "dhax-video/dhax-video-player-dialog.h"
 
 #include <QString>
 #include <QMap>
@@ -158,8 +159,8 @@ public:
 
  void offer_to_play_video(QString text, QString file_path);
 
- void play_video();
- void play_video(QString file_path, QString annotations_file_path = {});
+ void play_video(DHAX_Video_Player_Dialog::Annotation_Settings s);
+ void play_video(DHAX_Video_Player_Dialog::Annotation_Settings s, QString file_path, QString annotations_file_path = {});
 
  void calculate_fb_gaussian();
 

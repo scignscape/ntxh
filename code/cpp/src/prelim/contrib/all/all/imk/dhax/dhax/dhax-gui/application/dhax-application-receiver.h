@@ -14,6 +14,8 @@
 
 #include "global-types.h"
 
+#include "dhax-video/dhax-video-player-dialog.h"
+
 class DHAX_Main_Window;
 class DHAX_Application_Controller;
 class DHAX_External_Application_Controller;
@@ -56,7 +58,7 @@ public Q_SLOTS:
  void handle_show_pixel_local_aggregate_color_distance(call_Stamp_u2);
 
 
- void handle_play_video(call_Stamp_u2);
+ void handle_play_video(call_Stamp_u2, DHAX_Video_Player_Dialog::Annotation_Settings);
 
  void handle_view_contours(call_Stamp_u2);
  void handle_view_3d(call_Stamp_u2);

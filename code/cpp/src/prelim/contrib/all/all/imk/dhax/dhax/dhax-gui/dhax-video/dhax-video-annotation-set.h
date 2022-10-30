@@ -28,6 +28,9 @@ class DHAX_Video_Annotation_Set : public QMap<s4, DHAX_Video_Annotation>
 {
  typedef NTXH_Graph::hypernode_type hypernode_type;
 
+ QString source_file_;
+ QString source_folder_;
+
  QMap<u4, QVector<QPair<void*, void*>>> end_frame_data_;
 
  QColor circled_text_default_background_color_;
@@ -82,6 +85,9 @@ class DHAX_Video_Annotation_Set : public QMap<s4, DHAX_Video_Annotation>
  QMap<s4, QPair<void*, void*>> carried_items_forward_;
  QMap<s4, QPair<void*, void*>> carried_items_backward_;
 
+ QVector<DHAX_Video_Annotation*> latex_annotation_group_;
+
+ void parse_latex_annotation(DHAX_Video_Annotation& dva, QString text);
 
 public:
 
@@ -112,6 +118,8 @@ public:
  ACCESSORS(r8 ,sizes_ratio_y_adjustment)
 
  ACCESSORS(DHAX_Video_Annotation* ,current_pause_annotation)
+
+ void compile_latex(QSizeF sz); //QPair<u4, u4> dpis);
 
  QPair<void*, void*> get_carried_item_at_frame(s4 count)
  {
@@ -145,7 +153,9 @@ public:
 
  void load_sample_annotations();
 
- void load_annotation(const DHAX_Video_Annotation& dva);
+ void load_annotation(const DHAX_Video_Annotation& dva,
+   QVector<DHAX_Video_Annotation*>* group = nullptr);
+
  void load_annotation_file(QString file_path);
 
  void read_ntxh_hypernode(NTXH_Graph& g, hypernode_type* h);
@@ -156,6 +166,7 @@ public:
  void parse_text_annotation_hypernode(NTXH_Graph& g, hypernode_type* h);
  void parse_shape_annotation_hypernode(NTXH_Graph& g, hypernode_type* h);
  void parse_annotation_settings_hypernode(NTXH_Graph& g, hypernode_type* h);
+ void parse_graphic_annotation_hypernode(NTXH_Graph& g, hypernode_type* h);
 
 };
 

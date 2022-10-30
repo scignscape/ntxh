@@ -13,8 +13,10 @@
 #include "styles.h"
 
 
-DHAX_Video_Player_Dialog::DHAX_Video_Player_Dialog(QWidget* parent)
-  :  QDialog(parent), scene_camera_view_geometry_rubber_band_(nullptr)
+DHAX_Video_Player_Dialog::DHAX_Video_Player_Dialog(Annotation_Settings s,
+  QWidget* parent)
+  :  QDialog(parent), annotation_settings_(s),
+     scene_camera_view_geometry_rubber_band_(nullptr)
 {
 // setLayout(new QVBoxLayout);
 // layout()->setContentsMargins(0, 0, 0, 0);

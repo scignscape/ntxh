@@ -10,6 +10,7 @@
 #include "global-types.h"
 #include "self-connect.h"
 
+#include "dhax-video/dhax-video-player-dialog.h"
 
 
 class DHAX_Signal_Generator : public QObject
@@ -44,7 +45,7 @@ public:
  void emit_prepare_video_recorder_requested();
  void emit_test_ssr_datagram_requested();
 
- void emit_play_video_requested();
+ void emit_play_video_requested(DHAX_Video_Player_Dialog::Annotation_Settings s);
 
  void emit_show_pixel_local_aggregate_color_distance_requested();
 
@@ -72,7 +73,7 @@ Q_SIGNALS:
  void view_3d_requested(call_Stamp_u2);
  void view_360_requested(call_Stamp_u2);
 
- void play_video_requested(call_Stamp_u2);
+ void play_video_requested(call_Stamp_u2, DHAX_Video_Player_Dialog::Annotation_Settings);
 
  void prepare_video_recorder_requested(call_Stamp_u2);
  void test_ssr_datagram_requested(call_Stamp_u2);

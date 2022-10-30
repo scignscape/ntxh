@@ -52,8 +52,12 @@ class DHAX_Video_Annotation
 
  DHAX_Video_Annotation* ref_annotation_;
 
-
  s4 pause_time_;
+
+ QString graphics_file_;
+ QString graphics_folder_;
+
+ QVector<QString> pdflatex_;
 
 public:
 
@@ -75,11 +79,45 @@ public:
  ACCESSORS(QString ,inner_element_name)
  ACCESSORS(QString ,inner_element_background_color)
 
+ ACCESSORS(QString ,graphics_file)
+ ACCESSORS(QString ,graphics_folder)
 
  ACCESSORS(QString ,id)
  ACCESSORS(QString ,ref_id)
  ACCESSORS(u4 ,ref_time_offset)
  ACCESSORS(s4 ,pause_time)
+
+
+ void set_pdflatex_shell(QString code)
+ {
+  pdflatex_.resize(3);
+  pdflatex_[0] = code;
+ }
+
+ QString get_pdflatex_shell()
+ {
+  return pdflatex_.value(0);
+ }
+
+ void set_pdflatex_pdf(QString path)
+ {
+  pdflatex_[1] = path;
+ }
+
+ QString get_pdflatex_pdf()
+ {
+  return pdflatex_.value(1);
+ }
+
+ void set_pdflatex_png(QString path)
+ {
+  pdflatex_[2] = path;
+ }
+
+ QString get_pdflatex_png()
+ {
+  return pdflatex_.value(2);
+ }
 
 
  ACCESSORS(DHAX_Video_Annotation* ,ref_annotation)

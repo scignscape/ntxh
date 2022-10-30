@@ -47,6 +47,8 @@ void show_hide_show(DHAX_Video_Annotation* dva)
 INIT_SHOW_HIDE(QGraphicsTextItem)
 INIT_SHOW_HIDE(QGraphicsEllipseItem)
 INIT_SHOW_HIDE(QGraphicsPolygonItem)
+INIT_SHOW_HIDE(QGraphicsPixmapItem)
+
 
 
 DHAX_Video_Player_Frame::DHAX_Video_Player_Frame(QWidget* parent)
@@ -397,7 +399,12 @@ void DHAX_Video_Player_Frame::handle_video_frame(const QVideoFrame& qvf)
    QGraphicsItem* qgi;
    if(dva->kind() == "text")
    {
-    qgi = make_or_show_scene_annotation<QGraphicsTextItem>(dva);
+    QString png = dva->get_pdflatex_png();
+
+    if(png.isEmpty())
+      qgi = make_or_show_scene_annotation<QGraphicsTextItem>(dva);
+    else
+      qgi = make_or_show_scene_annotation<QGraphicsPixmapItem>(dva);
    }
    else if(dva->kind() == "pause")
    {
@@ -437,6 +444,24 @@ void DHAX_Video_Player_Frame::handle_video_frame(const QVideoFrame& qvf)
 //   l->setPixmap(QPixmap::fromImage(frame_image));
 //   l->show();
 
+}
+
+
+void* DHAX_Video_Player_Frame::make_scene_pixmap_annotation(DHAX_Video_Annotation* dva)
+{
+ QPixmap pxm(dva->get_pdflatex_png());
+ QGraphicsPixmapItem* result = graphics_scene_->addPixmap(pxm);
+ result->setParentItem(annotations_rect_item_);
+ result->setPos(dva->corner_position());
+ dva->set_scene_data(result);
+ dva->set_scene_type_data(QGraphicsPixmapItem_show_hide);
+
+ if(dva->ending_frame_number() != -1)
+   annotation_set_->set_end_frame_data(dva->ending_frame_number(),
+   //QGraphicsTextItem_show_hide,
+   *dva);
+
+ return result;
 }
 
 
@@ -545,12 +570,35 @@ void* DHAX_Video_Player_Frame::make_scene_arrow_annotation(DHAX_Video_Annotation
 
 void* DHAX_Video_Player_Frame::make_scene_annotation(DHAX_Video_Annotation* dva)
 {
+
+// static QGraphicsPixmapItem* gpi = nullptr;
+
+// if(!gpi)
+// {
+//  QPixmap pm("/home/nlevisrael/gits/ctg-temp/dev/documents/out/test.png");
+
+//  gpi = graphics_scene_->addPixmap(pm);
+
+//// gpi->setZValue(100);
+
+//  gpi->setPos(40, 40);
+
+// }
+// pause();
+
+// return nullptr;
+
  if(dva->kind() == "text")
-   return make_scene_text_annotation(dva);
+ {
+  QString png = dva->get_pdflatex_png();
+  if(png.isEmpty())
+    return make_scene_text_annotation(dva);
+  return make_scene_pixmap_annotation(dva);
+ }
  else if(dva->kind() == "circled")
    return make_scene_circled_text_annotation(dva);
  else if(dva->kind() == "Rotateable_Arrow_Annotation")
-  return make_scene_arrow_annotation(dva);
+   return make_scene_arrow_annotation(dva);
 
  return nullptr;
 }
@@ -838,6 +886,7 @@ QRect DHAX_Video_Player_Frame::get_scene_camera_view_geometry()
 
 void DHAX_Video_Player_Frame::confirm_video_size()
 {
+
  if(current_playlist_index_ > 0)
    return;
 
@@ -893,6 +942,9 @@ void DHAX_Video_Player_Frame::confirm_video_size()
  annotation_set_->set_larger_video_size(video_size_);
  annotation_set_->check_ratios();
 
+ annotation_set_->compile_latex(QSizeF(new_width, new_height));
+
+ qDebug() << "larger video size: " << video_size_;
 
  //QRectF
  video_rect_ = QRectF(left, top, new_width, new_height);

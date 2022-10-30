@@ -46,6 +46,7 @@
 #include <QRubberBand>
 
 #include "accessors.h"
+#include "global-types.h"
 
 
 class DHAX_Video_Player_Frame;
@@ -77,6 +78,8 @@ class DHAX_Video_Player_Dialog : public QDialog
  QRect first_video_capture_position_;
  QRect current_scene_camera_view_geometry_;
 
+ u1 annotation_settings_;
+
  void reset_scene_camera_view_geometry(QResizeEvent* resize_event, QMoveEvent* move_event);
 
  void resizeEvent(QResizeEvent* resize_event) Q_DECL_OVERRIDE;
@@ -85,10 +88,21 @@ class DHAX_Video_Player_Dialog : public QDialog
 
 public:
 
- DHAX_Video_Player_Dialog(QWidget* parent = nullptr);
+ enum Annotation_Settings { No_Annotations, Load_Annotations,
+   Load_Annotations_With_Pause, Load_Annotations_Manually
+ };
+
+ DHAX_Video_Player_Dialog(Annotation_Settings s, QWidget* parent = nullptr);
+
 
  ACCESSORS__RGET(QRect ,first_video_capture_position)
  ACCESSORS__RGET(QRect ,current_scene_camera_view_geometry)
+
+
+ Annotation_Settings get_annotation_settings()
+ {
+  return (Annotation_Settings) annotation_settings_;
+ }
 
  void play_local_video(QString file_path, QString annotations_file = {});
 

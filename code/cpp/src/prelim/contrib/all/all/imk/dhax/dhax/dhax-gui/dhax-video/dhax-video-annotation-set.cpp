@@ -10,22 +10,26 @@
 
 #include "ntxh-parser/ntxh-document.h"
 
-
+//?
+#include <poppler/qt5/poppler-qt5.h>
 
 #include <QtWidgets>
 #include <qabstractvideosurface.h>
 #include <qvideosurfaceformat.h>
 
+#include "textio.h"
+
+USING_KANS(TextIO)
 
 
 DHAX_Video_Annotation_Set::DHAX_Video_Annotation_Set()
-  :  circled_text_default_font_size_(12), reffed_annotation_count_(0),
-    circled_text_default_width_(0), circled_text_default_border_(2),
-    sizes_ratio_x_(0), sizes_ratio_y_(0),
-    sizes_ratio_x_adjustment_(0), sizes_ratio_y_adjustment_(0),
-    current_pause_annotation_(nullptr)
+  :
+     circled_text_default_font_size_(12), reffed_annotation_count_(0),
+     circled_text_default_width_(0), circled_text_default_border_(2),
+     sizes_ratio_x_(0), sizes_ratio_y_(0),
+     sizes_ratio_x_adjustment_(0), sizes_ratio_y_adjustment_(0),
+     current_pause_annotation_(nullptr)
 {
-
 }
 
 
@@ -78,6 +82,147 @@ void DHAX_Video_Annotation_Set::fetch_text_macro(QString& text, int start)
  }
 }
 
+
+
+void DHAX_Video_Annotation_Set::parse_latex_annotation(DHAX_Video_Annotation& dva, QString text)
+{
+ int index = text.indexOf(';', 2);
+ if(index == -1)
+   return;
+
+ QString subfolder_name = text.mid(2, index - 2);
+ text = text.mid(index + 1);
+
+ qDebug() << "sn = " << subfolder_name;
+
+ QDir qd(source_folder_);
+
+ QString target_folder = qd.absoluteFilePath("tex-pdf");
+
+ QString path = "%1/%2-%3"_qt.arg(subfolder_name).arg(dva.starting_frame_number()).arg(dva.ending_frame_number());
+ qd.mkpath(path);
+
+ QString path1 = path;
+ path1.replace('/', '_');
+
+ QString tex_template = qd.absoluteFilePath("tex-template.tex");
+ QString sh_template = qd.absoluteFilePath("run-pdflatex-template.sh");
+
+ qd.cd("./" + path);
+
+
+ QString tex_text, sh_text;
+ load_file(tex_template, tex_text);
+ load_file(sh_template, sh_text);
+
+ tex_text.replace("%$text$%", text);
+ sh_text.replace("%cmd%", PDFLATEX_EXE);
+ sh_text.replace("%src%", qd.absoluteFilePath(path1));
+ sh_text.replace("%dir%", target_folder);
+
+
+// path1 += ".tex";
+
+ QString bash_file = qd.absoluteFilePath("run-pdflatex.sh");
+
+ //pdflatex_shell_ =
+
+ save_file(qd.absoluteFilePath(path1 + ".tex"), tex_text);
+ save_file(bash_file, sh_text);
+
+ QFile(bash_file).setPermissions(QFileDevice::ReadOwner
+   | QFileDevice::WriteOwner | QFileDevice::ExeOwner);
+
+ bash_file.prepend("/bin/sh -x ");
+
+ dva.set_pdflatex_shell(bash_file);
+
+ qd.cd(target_folder);
+ dva.set_pdflatex_pdf( qd.absoluteFilePath(path1 + ".pdf") );
+ qd.cdUp();
+ qd.cd("tex-png");
+ dva.set_pdflatex_png( qd.absoluteFilePath(path1 + ".png") );
+}
+
+
+void DHAX_Video_Annotation_Set::compile_latex(QSizeF sz) //QPair<u4, u4> dpis)
+{
+ for(DHAX_Video_Annotation* dva : latex_annotation_group_)
+ {
+  QString cmd = dva->get_pdflatex_shell();
+
+  if(QProcess::execute(cmd) < 0)
+  {
+   qDebug() << "Commmand failed: " << cmd;
+   continue;
+  }
+
+  QString pdf_path = dva->get_pdflatex_pdf();
+  QString png_path = dva->get_pdflatex_png();
+
+  qDebug() << "pdf path = " << pdf_path;
+
+  Poppler::Document* doc = Poppler::Document::load(pdf_path);
+  Poppler::Page* page = doc->page(0);
+
+  if(!page)
+  {
+   qDebug() << "No page ...";
+  }
+  else
+  {
+   qDebug() << "Using size: " << sz;
+
+  }
+
+  QString back = dva->inner_style_sheet();
+
+  qDebug() << "back = " << back;
+
+  QColor clr = QColor(back);
+
+  QRgb clr_rgb = clr.rgb();
+
+  QString dpi = dva->element_name();
+  QStringList dpis = dpi.split("/");
+
+  qDebug() << "dpis = " << dpis;
+
+  r4 dpi_array[4] = {dpis.value(0).toFloat(),
+    dpis.value(1).toFloat(), dpis.value(2).toFloat(), dpis.value(3).toFloat() };
+
+  for(u1 a = 1; a < 4; ++a)
+    if(dpi_array[a] == 0)
+      dpi_array[a] = dpi_array[a - 1];
+
+  QImage image = page->renderToImage(dpi_array[0], dpi_array[1], 0, 0, sz.width(), sz.height());
+
+  //image = image.createMaskFromColor(clr.rgb(), Qt::MaskInColor);
+
+  QImage image1(image.width(), image.height(), QImage::Format_ARGB32);
+  image1.fill(Qt::transparent);
+
+  for(int j = 0; j < image.height(); ++j)
+  {
+   QRgb* scanline = (QRgb*) image.scanLine(j);
+   QRgb* scanline1 = (QRgb*) image1.scanLine(j);
+   for(int i = 0; i < image.width(); ++i)
+   {
+    QRgb pixel = scanline[i];
+    if(pixel != clr_rgb)
+      scanline1[i] = pixel;
+   }
+  }
+
+
+  image1.save(png_path);
+  image.save(png_path + "x.png");
+
+ }
+}
+
+
+
 void DHAX_Video_Annotation_Set::parse_text_annotation_hypernode(NTXH_Graph& g, hypernode_type* h)
 {
  g.get_sfsr(h, {{1, 7}}, [this](QVector<QPair<QString, void*>>& prs)
@@ -116,8 +261,6 @@ void DHAX_Video_Annotation_Set::parse_text_annotation_hypernode(NTXH_Graph& g, h
   }
   dva.set_element_name(en);
 
-  dva.set_text(prs[3].first);
-
   QString iss = prs[4].first;
   check_text_macro(iss);
 
@@ -146,7 +289,19 @@ void DHAX_Video_Annotation_Set::parse_text_annotation_hypernode(NTXH_Graph& g, h
    dva.set_ending_frame_number(end);
   }
 
-  load_annotation(dva);
+  QString text = prs[3].first;
+
+  QVector<DHAX_Video_Annotation*>* group = nullptr;
+
+  if(text.startsWith("@@"))
+  {
+   parse_latex_annotation(dva, text);
+   group = &latex_annotation_group_;
+  }
+  else
+    dva.set_text(text);
+
+  load_annotation(dva, group);
 
 //  QString name_description = prs[0].first;
  });
@@ -218,6 +373,10 @@ void DHAX_Video_Annotation_Set::parse_circled_text_annotation_hypernode(NTXH_Gra
  });
 }
 
+void DHAX_Video_Annotation_Set::parse_graphic_annotation_hypernode(NTXH_Graph& g, hypernode_type* h)
+{
+
+}
 
 void DHAX_Video_Annotation_Set::parse_shape_annotation_hypernode(NTXH_Graph& g, hypernode_type* h)
 {
@@ -245,7 +404,7 @@ void DHAX_Video_Annotation_Set::parse_shape_annotation_hypernode(NTXH_Graph& g, 
 
 DHAX_Video_Annotation_Set* DHAX_Video_Annotation_Set::reinit_and_delete()
 {
- DHAX_Video_Annotation_Set* result = new DHAX_Video_Annotation_Set;
+ DHAX_Video_Annotation_Set* result = new DHAX_Video_Annotation_Set();
  result->sizes_ratio_x_ = sizes_ratio_x_;
  result->sizes_ratio_y_ = sizes_ratio_y_;
  // //  note we're copying the forward to the backward ...
@@ -269,6 +428,8 @@ void DHAX_Video_Annotation_Set::read_ntxh_hypernode(NTXH_Graph& g, hypernode_typ
   TEMP_MACRO(Text_Annotation, parse_text_annotation_hypernode)
   TEMP_MACRO(Pause_Annotation, parse_pause_annotation_hypernode)
   TEMP_MACRO(Shape_Annotation, parse_shape_annotation_hypernode)
+  TEMP_MACRO(Graphic_Annotation, parse_graphic_annotation_hypernode)
+
   TEMP_MACRO(Circled_Text_Default,  parse_circled_text_default_hypernode)
   TEMP_MACRO(Circled_Text_Annotation,  parse_circled_text_annotation_hypernode)
   TEMP_MACRO(Annotation_Settings,  parse_annotation_settings_hypernode)
@@ -299,6 +460,11 @@ void DHAX_Video_Annotation_Set::read_ntxh_hypernode(NTXH_Graph& g, hypernode_typ
 
 void DHAX_Video_Annotation_Set::load_annotation_file(QString file_path)
 {
+ source_file_ = file_path;
+
+ QFileInfo qfi(source_file_);
+ source_folder_ = qfi.absolutePath();
+
  NTXH_Document doc(file_path);
 
  doc.parse();
@@ -316,7 +482,8 @@ void DHAX_Video_Annotation_Set::load_annotation_file(QString file_path)
 
 }
 
-void DHAX_Video_Annotation_Set::load_annotation(const DHAX_Video_Annotation& dva)
+void DHAX_Video_Annotation_Set::load_annotation(const DHAX_Video_Annotation& dva,
+  QVector<DHAX_Video_Annotation*>* group)
 {
  if(dva.ref_id().isEmpty())
  {
@@ -326,6 +493,10 @@ void DHAX_Video_Annotation_Set::load_annotation(const DHAX_Video_Annotation& dva
 
   if(!dva.id().isEmpty())
     annotations_by_id_[dva.id()] = copied_dva;
+
+  if(group)
+    group->push_back(copied_dva);
+
  }
  else
  {

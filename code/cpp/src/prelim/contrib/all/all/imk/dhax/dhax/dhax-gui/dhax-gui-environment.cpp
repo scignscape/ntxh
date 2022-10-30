@@ -285,7 +285,11 @@ void DHAX_GUI_Environment::init_main_window_signal_generator()
  minimal_self_connect (_with_callstamp_) (view_360);
  minimal_self_connect (_with_callstamp_) (prepare_video_recorder);
  minimal_self_connect (_with_callstamp_) (test_ssr_datagram);
- minimal_self_connect (_with_callstamp_) (play_video);
+
+ minimal_self_connect (1, with_callstamp) (play_video);
+//  _self_connect_(main_window_->signal_generator() ,play_video_requested)
+//     _to_bind_2_(application_receiver_ ,handle_play_video);
+
 
  minimal_self_connect (_with_callstamp_) (view_cad);
  minimal_self_connect (_with_callstamp_) (run_forge_workflow);

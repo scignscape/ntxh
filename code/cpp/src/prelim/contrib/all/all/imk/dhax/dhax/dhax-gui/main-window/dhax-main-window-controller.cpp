@@ -85,7 +85,7 @@ DHAX_Main_Window_Controller::DHAX_Main_Window_Controller()
 
 void DHAX_Main_Window_Controller::show_video(QString file_path)
 {
- application_controller_->play_video(file_path);
+ application_controller_->play_video(DHAX_Video_Player_Dialog::No_Annotations, file_path);
 }
 
 
