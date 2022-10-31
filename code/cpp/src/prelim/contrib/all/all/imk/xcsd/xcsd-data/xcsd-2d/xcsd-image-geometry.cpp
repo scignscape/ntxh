@@ -382,14 +382,45 @@ void XCSD_Image_Geometry::init_outer_ring_position_array()
  u1 center_width_basis = 9;
  u1 corner_width_basis = 6;
 
- if( total_size_.lesser() < 800 )
+//? if( total_size_.lesser() < 800 )
+ if( total_size_.lesser() < 729 )
  {
-  center_width_basis = total_size_.lesser() / 100;
-  center_width_basis += (1 - (center_width_basis % 2));
+  // //   729 = 27*27; less than that, try
+   //     to balance out the segments
+  u1 basis = total_size_.lesser() / 27;
+  if(basis < 5)
+  {
+   // //  maybe just don't support too-small images ..
+   exit(0);
+  }
 
-  corner_width_basis -= (9 - center_width_basis);
-  if(corner_width_basis < 2)
-    corner_width_basis = 2;
+  switch(basis)
+  {
+  case 5: center_width_basis = 1; corner_width_basis = 1; break;
+  case 6: case 7:
+  case 8: center_width_basis = 2; corner_width_basis = 1; break;
+  case 9: case 10:
+  case 11: center_width_basis = 2; corner_width_basis = 2; break;
+  case 12: case 13:
+  case 14: center_width_basis = 3; corner_width_basis = 2; break;
+  case 15: case 16:
+  case 17: center_width_basis = 4; corner_width_basis = 2; break;
+  default:  center_width_basis = (basis / 3) - 2;
+   corner_width_basis = 3; break;
+
+//  case 18: case 19:
+//  case 20: center_width_basis = 4; corner_width_basis = 3; break;
+//  case 21: case 22:
+//  case 23: center_width_basis = 5; corner_width_basis = 3; break;
+//  case 24: case 25:
+//  case 26: center_width_basis = 6; corner_width_basis = 3; break;
+  }
+
+//  center_width_basis = total_size_.lesser() / 100;
+//  center_width_basis += (1 - (center_width_basis % 2));
+//  corner_width_basis -= (9 - center_width_basis);
+//  if(corner_width_basis < 2)
+//    corner_width_basis = 2;
  }
 
 

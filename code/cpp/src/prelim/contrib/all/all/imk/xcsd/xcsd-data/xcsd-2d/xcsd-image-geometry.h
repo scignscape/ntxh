@@ -137,7 +137,7 @@ public:
   u1 size_even_odd_code;
   u1 v_center_adjustment;
   u1 h_center_adjustment;
-  u1 v_center_area_threshold_adjustment;
+  s1 v_center_area_threshold_adjustment;
   s1 h_center_area_threshold_adjustment;
   u1 full_ortho_cycle_size;
   u1 margin_ortho_cycle_size;
