@@ -135,6 +135,25 @@ ACCESSORS__GET(type, name)
  void set_##name(type _arg_) { name##_ = _arg_; }
 #endif
 
+
+#ifndef ACCESSORS__SET_FNP
+#define ACCESSORS__SET_FNP(ret, type, name) \
+ void set_##name(ret (*_arg_) (type)) { name##_ = _arg_; }
+#endif
+
+#ifndef ACCESSORS__GET_FNP
+#define ACCESSORS__GET_FNP(ret, type, name) \
+ ret (*get_##name())(type) { return name##_; }
+#endif
+
+
+#ifndef ACCESSORS__FNP(ret, type, name)
+#define ACCESSORS__FNP(ret, type, name) \
+ ACCESSORS__SET_FNP(ret, type, name) \
+ ACCESSORS__GET_FNP(ret, type, name)
+#endif
+
+
 #ifndef ACCESSORS_set
 #define ACCESSORS_set(type, name) \
  void set_##name(type _arg_) { name##_ = _arg_; }

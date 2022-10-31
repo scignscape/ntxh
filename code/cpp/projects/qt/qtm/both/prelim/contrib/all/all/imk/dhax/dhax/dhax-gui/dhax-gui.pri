@@ -143,7 +143,8 @@ INCLUDEPATH += $$XCSD_SRC_GROUP_DIR/../xcsd-1d
 INCLUDEPATH += $$XCSD_DATA_SRC_GROUP_DIR
 
 
-#?FEATURE_OpenCV = USE_OpenCV
+#?
+FEATURE_OpenCV = USE_OpenCV
 
 defined(FEATURE_OpenCV ,var) {
 
@@ -153,12 +154,12 @@ defined(FEATURE_OpenCV ,var) {
 
  include($$ROOT_DIR/../preferred/opencv.pri)
 
+ INCLUDEPATH += $$OPENCV_INCLUDE_DIR
 
- INCLUDEPATH += $$OPENCV_SRC_DIR/modules/core/include
- INCLUDEPATH += $$OPENCV_SRC_DIR/modules/imgproc/include
- INCLUDEPATH += $$OPENCV_SRC_DIR/modules/imgcodecs/include
- INCLUDEPATH += $$OPENCV_BUILD_DIR
-
+# INCLUDEPATH += $$OPENCV_SRC_DIR/modules/core/include
+# INCLUDEPATH += $$OPENCV_SRC_DIR/modules/imgproc/include
+# INCLUDEPATH += $$OPENCV_SRC_DIR/modules/imgcodecs/include
+# INCLUDEPATH += $$OPENCV_BUILD_DIR
 
  DCMTK_DIR = $$DCMTK_SRC_GROUP_DIR
 
@@ -252,6 +253,7 @@ HEADERS += \
   $$SRC_DIR/dhax-video/dhax-video-player-dialog.h \
   $$SRC_DIR/dhax-video/dhax-video-annotation.h \
   $$SRC_DIR/dhax-video/dhax-video-annotation-set.h \
+  $$SRC_DIR/stats/dhax-stat-assessment.h \
 
 
 SOURCES += \
@@ -331,6 +333,8 @@ SOURCES += \
   $$SRC_DIR/dhax-video/dhax-video-player-dialog.cpp \
   $$SRC_DIR/dhax-video/dhax-video-annotation.cpp \
   $$SRC_DIR/dhax-video/dhax-video-annotation-set.cpp \
+  $$SRC_DIR/stats/dhax-stat-assessment.cpp \
+  $$SRC_DIR/stats/dhax-stat-assessment.demo-test.cpp \
 
 
 
@@ -407,6 +411,11 @@ RESOURCES += \
 # #  for dcmtk OFString = std::string ...
 DEFINES += HAVE_STD_STRING
 DEFINES += HAVE_STL_STRING
+
+
+
+DEFINES += DHAX_STAT_FOLDER=\\\"$${ROOT_DIR}/../dev/dhax-stats\\\"
+
 
 
 LIBS += -L$$TARGETSDIR  \
