@@ -132,7 +132,10 @@ public:
 
  DHAX_Forge_Controller* check_init_forge_controller();
 
+ QString pixel_local_aggregate_color_distance(QString file_path);
+ QString test_pixel_local_aggregate_color_distance();
  QString show_pixel_local_aggregate_color_distance();
+ void toroid_run_stats();
 
  void change_image_margins(QVector<u1> margins, u1 cim);
 

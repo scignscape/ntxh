@@ -43,7 +43,7 @@ void DHAX_Menu_System::init_menus()
  menus_->init_menu("Histograms");
  menus_->init_menu("Trimap");
  menus_->init_menu("Matrix");
- menus_->init_menu("QHSV");
+ menus_->init_menu("Toroid");
  menus_->init_menu("Help");
  menus_->init_menu("Tools");
 
@@ -183,11 +183,24 @@ void DHAX_Menu_System::init_menus()
  };
 
 
- DHAX_Menu& qhsv_menu = *menus_->menu("QHSV");
- qhsv_menu.add_action("Show pixel-local aggregate color distance")
+ DHAX_Menu& toroid_menu = *menus_->menu("Toroid");
+
+ toroid_menu.add_action("Run stats")
+   << [sg]
+ {
+  sg->emit_toroid_run_stats_requested();
+ };
+
+ toroid_menu.add_action("Show pixel-local aggregate color distance")
    << [sg]
  {
   sg->emit_show_pixel_local_aggregate_color_distance_requested();
+ };
+
+ toroid_menu.add_action("Test pixel-local aggregate color distance")
+   << [sg]
+ {
+  sg->emit_test_pixel_local_aggregate_color_distance_requested();
  };
 
 

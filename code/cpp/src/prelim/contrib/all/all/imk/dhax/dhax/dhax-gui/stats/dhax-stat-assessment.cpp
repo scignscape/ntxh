@@ -9,6 +9,7 @@
 
 
 DHAX_Stat_Assessment::DHAX_Stat_Assessment()
+  :  user_data_(nullptr), proc_(nullptr), follow_up_(nullptr)
 {
 
 }
@@ -27,10 +28,44 @@ void DHAX_Stat_Assessment::load_images()
  one_channel_image_ = cv::imread(one_channel_image_path_.toStdString(),
    cv::IMREAD_GRAYSCALE);
 
+ one_channel_display_image_ = cv::imread(one_channel_display_image_path_.toStdString());
+
+
 #else
 // //?  Anything here?
 #endif
 
+}
 
+
+void DHAX_Stat_Assessment::run()
+{
+ proc_(*this);
+}
+
+void DHAX_Stat_Assessment::check_follow_up()
+{
+ if(follow_up_)
+   follow_up_(*this);
+}
+
+
+
+QString DHAX_Stat_Assessment::get_full_1c_out_path(QString name_extra)
+{
+ QString result = full_image_path_;
+ return result.replace("-full", "-full-1c-" + name_extra);
+}
+
+QString DHAX_Stat_Assessment::get_full_out_path(QString name_extra)
+{
+ QString result = full_image_path_;
+ return result.replace("-full", "-full-" + name_extra);
+}
+
+QString DHAX_Stat_Assessment::get_1c_out_path(QString name_extra)
+{
+ QString result = one_channel_image_path_;
+ return result.replace("-1c", "-1c-" + name_extra);
 }
 

@@ -47,8 +47,9 @@ public:
 
  void emit_play_video_requested(DHAX_Video_Player_Dialog::Annotation_Settings s);
 
+ void emit_test_pixel_local_aggregate_color_distance_requested();
  void emit_show_pixel_local_aggregate_color_distance_requested();
-
+ void emit_toroid_run_stats_requested();
 
  void emit_view_contours_requested();
  void emit_view_3d_requested();
@@ -91,8 +92,9 @@ Q_SIGNALS:
  void calculate_fb_gaussian_requested(call_Stamp_u2);
  void launch_edge_detection_dialog_requested(call_Stamp_u2);
 
+ void test_pixel_local_aggregate_color_distance_requested(call_Stamp_u2);
  void show_pixel_local_aggregate_color_distance_requested(call_Stamp_u2);
-
+ void toroid_run_stats_requested(call_Stamp_u2);
 
 
 #ifdef USE_IFC

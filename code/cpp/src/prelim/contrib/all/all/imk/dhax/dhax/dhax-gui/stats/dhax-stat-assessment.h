@@ -36,12 +36,17 @@ class DHAX_Stat_Assessment
  QString one_channel_image_path_;
  QString one_channel_display_image_path_;
 
- typedef void (*proc_type) (DHAX_Stat_Assessment&);
+ QString algorithm_name_;
+
+// typedef void (*proc_type) (DHAX_Stat_Assessment&);
 
 // typedef std::function<void(DHAX_Stat_Assessment&)> proc_type;
 
  void (*proc_)(DHAX_Stat_Assessment&); // proc_;
+ void (*follow_up_)(DHAX_Stat_Assessment&); // proc_;
 // proc_type proc_;
+
+ void* user_data_;
 
 #ifdef USE_OpenCV
 
@@ -63,8 +68,43 @@ public:
  ACCESSORS(QString ,one_channel_image_path)
  ACCESSORS(QString ,one_channel_display_image_path)
 
+ ACCESSORS(QString ,algorithm_name)
+
+ ACCESSORS(void* ,user_data)
+
+
+ ACCESSORS(cv::Mat ,full_image)
+ ACCESSORS(cv::Mat ,gray_image)
+ ACCESSORS(cv::Mat ,one_channel_image)
+ ACCESSORS(cv::Mat ,one_channel_display_image)
+
+
+ QString get_full_1c_out_path(QString name_extra);
+ QString get_full_out_path(QString name_extra);
+ QString get_1c_out_path(QString name_extra);
+
+ QString get_full_out_path()
+ {
+  return get_full_out_path(algorithm_name_);
+ }
+
+ QString get_1c_out_path()
+ {
+  return get_1c_out_path(algorithm_name_);
+ }
+
+ QString get_full_1c_out_path()
+ {
+  return get_full_1c_out_path(algorithm_name_);
+ }
+
+
+ void run();
+
+ void check_follow_up();
 
  ACCESSORS__FNP(void, DHAX_Stat_Assessment& ,proc)
+ ACCESSORS__FNP(void, DHAX_Stat_Assessment& ,follow_up)
 
 // ACCESSORS__SET_FNP(void, DHAX_Stat_Assessment& ,proc)
 // ACCESSORS__GET_FNP(void, DHAX_Stat_Assessment& ,proc)

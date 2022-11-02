@@ -10,10 +10,9 @@ include(../build-group.pri)
 QT  += core gui widgets
 
 
-QMAKE_CC = gcc-7
-QMAKE_CXX = g++-7
-
-CONFIG += c++17
+#QMAKE_CC = gcc-7
+#QMAKE_CXX = g++-7
+#CONFIG += c++17
 
 
 
@@ -92,7 +91,8 @@ SOURCES += \
 
 
 
-LIBS += -L$$OPENCV_LIB_DIR/ -lopencv_core -lopencv_imgcodecs
-LIBS += -L$$OPENCV_LIB_DIR/ -lopencv_core -lopencv_core
-LIBS += -L$$OPENCV_LIB_DIR/ -lopencv_core -lopencv_imgproc
+LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_imgcodecs -lopencv_imgproc
+
+#LIBS += -L$$OPENCV_LIB_DIR/ -lopencv_core -lopencv_core
+#LIBS += -L$$OPENCV_LIB_DIR/ -lopencv_core -lopencv_imgproc
 

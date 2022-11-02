@@ -296,7 +296,9 @@ void DHAX_GUI_Environment::init_main_window_signal_generator()
  minimal_self_connect (_with_callstamp_) (calculate_fb_gaussian);
  minimal_self_connect (_with_callstamp_) (launch_edge_detection_dialog);
 
+ minimal_self_connect (_with_callstamp_) (test_pixel_local_aggregate_color_distance);
  minimal_self_connect (_with_callstamp_) (show_pixel_local_aggregate_color_distance);
+ minimal_self_connect (_with_callstamp_) (toroid_run_stats);
 
  _self_connect_(main_window_->signal_generator() ,quit_requested)
    to_lambda[this]()

@@ -75,6 +75,9 @@ DEFINES += DEFAULT_DEV_DGDB_FOLDER=\\\"$$ROOT_DIR/../dev/consoles/dgdb/instances
 
 DEFINES += SCREENSHOTS_FOLDER=\\\"$$ROOT_DIR/../dev/screenshots\\\"
 
+DEFINES += DHAX_STAT_FOLDER=\\\"$${ROOT_DIR}/../dev/dhax-stats\\\"
+
+
 DEFINES += USE_KANS
 
 
@@ -254,6 +257,7 @@ HEADERS += \
   $$SRC_DIR/dhax-video/dhax-video-annotation.h \
   $$SRC_DIR/dhax-video/dhax-video-annotation-set.h \
   $$SRC_DIR/stats/dhax-stat-assessment.h \
+  $$SRC_DIR/stats/stat-test-image.h \
 
 
 SOURCES += \
@@ -335,7 +339,7 @@ SOURCES += \
   $$SRC_DIR/dhax-video/dhax-video-annotation-set.cpp \
   $$SRC_DIR/stats/dhax-stat-assessment.cpp \
   $$SRC_DIR/stats/dhax-stat-assessment.demo-test.cpp \
-
+  $$SRC_DIR/stats/stat-test-image.cpp \
 
 
 
@@ -414,9 +418,6 @@ DEFINES += HAVE_STL_STRING
 
 
 
-DEFINES += DHAX_STAT_FOLDER=\\\"$${ROOT_DIR}/../dev/dhax-stats\\\"
-
-
 
 LIBS += -L$$TARGETSDIR  \
   -lntxh  -lntxh-parser -lngml-sdi
@@ -438,8 +439,19 @@ LIBS += -L$$POPPLER_LIB_DIR -lpoppler-qt5
 LIBS += -lrt
 
 
+DEFINES += USE_KANS
+
+
 defined(FEATURE_OpenCV ,var) {
+
+ message(Linking OpenCV)
+
  LIBS += -L$$TARGETSDIR  -ldgi-opencv
+
+ LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_imgcodecs -lopencv_imgproc
+
+ LIBS += -L$$OPENCV_LIB_DIR  -lopencv_xfeatures2d  \
+    -lopencv_features2d
 }
 
 #LIBS += -L$$TARGETSDIR -lchasm-lib -lchasm-lib-X1 -lchasm-lib-X2 \

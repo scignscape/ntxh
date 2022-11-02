@@ -123,28 +123,33 @@ LIBS += -L$$TARGETSDIR -llz4  -llzma -lz
 LIBS += -lxerces-c
 
 
-##? FEATURE_OpenCV = USE_OpenCV
+##?
+
+FEATURE_OpenCV = USE_OpenCV
 
 # ### For OpenCV 
 defined(FEATURE_OpenCV ,var) {
 
  message(Using OpenCV)
 
- DCMTK_DIR = $$DCMTK_SRC_GROUP_DIR
+ LIBS += -L$$TARGETSDIR  -ldgi-opencv
 
- INCLUDEPATH += $$DCMTK_DIR/ofstd/include
- INCLUDEPATH += $$DCMTK_DIR/dcm-config/include
- INCLUDEPATH += $$DCMTK_DIR/dcmsr/include
- INCLUDEPATH += $$DCMTK_DIR/dcmdata/include
- INCLUDEPATH += $$DCMTK_DIR/oflog/include
+ LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_imgcodecs -lopencv_imgproc
 
-#?? LIBS += -L$$TARGETSDIR  -ldgi-opencv
-
- LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_imgcodecs
- LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_core
- LIBS += -L$$OPENCV_LIB_DIR -lopencv_core -lopencv_imgproc
-
+ LIBS += -L$$OPENCV_LIB_DIR  -lopencv_xfeatures2d  \
+   -lopencv_features2d
 }
+
+
+
+#DCMTK_DIR = $$DCMTK_SRC_GROUP_DIR
+
+#INCLUDEPATH += $$DCMTK_DIR/ofstd/include
+#INCLUDEPATH += $$DCMTK_DIR/dcm-config/include
+#INCLUDEPATH += $$DCMTK_DIR/dcmsr/include
+#INCLUDEPATH += $$DCMTK_DIR/dcmdata/include
+#INCLUDEPATH += $$DCMTK_DIR/oflog/include
+
 
 # ### For IFC (Industry Foundation Classes)
 defined(FEATURE_IFC ,var) {

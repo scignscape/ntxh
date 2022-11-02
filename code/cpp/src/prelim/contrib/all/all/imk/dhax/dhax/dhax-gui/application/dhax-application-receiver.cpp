@@ -79,6 +79,16 @@ void DHAX_Application_Receiver::handle_show_pixel_local_aggregate_color_distance
  application_controller_->show_pixel_local_aggregate_color_distance(/*callstamp*/);
 }
 
+void DHAX_Application_Receiver::handle_test_pixel_local_aggregate_color_distance(call_Stamp_u2)
+{
+ application_controller_->test_pixel_local_aggregate_color_distance(/*callstamp*/);
+}
+
+void DHAX_Application_Receiver::handle_toroid_run_stats(call_Stamp_u2)
+{
+ application_controller_->toroid_run_stats(/*callstamp*/);
+}
+
 
 
 void DHAX_Application_Receiver::handle_save_notation(bool with_comment)

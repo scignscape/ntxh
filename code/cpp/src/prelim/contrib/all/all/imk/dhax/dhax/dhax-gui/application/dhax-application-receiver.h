@@ -56,6 +56,8 @@ public Q_SLOTS:
 
  void handle_launch_edge_detection_dialog(call_Stamp_u2);
  void handle_show_pixel_local_aggregate_color_distance(call_Stamp_u2);
+ void handle_test_pixel_local_aggregate_color_distance(call_Stamp_u2);
+ void handle_toroid_run_stats(call_Stamp_u2);
 
 
  void handle_play_video(call_Stamp_u2, DHAX_Video_Player_Dialog::Annotation_Settings);

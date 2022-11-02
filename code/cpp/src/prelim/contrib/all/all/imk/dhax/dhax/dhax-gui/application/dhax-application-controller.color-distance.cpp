@@ -6,10 +6,17 @@
 
 //?
 
+// //   this include should come first
+ //     to not conflict with "_flags" ...
+#include "stats/dhax-stat-assessment.h"
+
+
 #include "dhax-application-controller.h"
 
 #include "image-viewer/image-document-controller.h"
 #include "main-window/dhax-main-window-controller.h"
+
+#include "stats/stat-test-image.h"
 
 
 #include <QVector2D>
@@ -324,8 +331,45 @@ u1 hsv_color_distance(QRgb center_pixel, QRgb pixel)
 //QColor normalize_rgb
 
 
+void DHAX_Application_Controller::toroid_run_stats()
+{
+ DHAX_Stat_Assessment::run_demo_test(DHAX_STAT_FOLDER "/test", "i1", "png");
+}
+
+
 QString DHAX_Application_Controller::show_pixel_local_aggregate_color_distance()
 {
+ Image_Document_Controller* idc = main_window_controller_->image_document_controller();
+ if(!idc)
+   return {};
+
+ // QString fp = idc->current_file_path();
+
+ return pixel_local_aggregate_color_distance(idc->current_file_path());
+}
+
+QString DHAX_Application_Controller::test_pixel_local_aggregate_color_distance()
+{
+ QDir qd(DHAX_STAT_FOLDER "/test-dist");
+ QStringList images = qd.entryList(QDir::Files | QDir::Readable);
+
+ qDebug() << images;
+
+ QString likely_file = *std::min_element(images.begin(), images.end(),
+   [] (const QString& s1, const QString& s2)
+ {
+  return s1.length() < s2.length();
+ });
+
+ qDebug() << "Calculating color distance for " << likely_file;
+
+ return pixel_local_aggregate_color_distance(likely_file);
+}
+
+QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(QString file_path)
+{
+ Stat_Test_Image stat_image(file_path);
+
  static u1 corner_weights[3][3]
  {
   {3, 1, 1},
@@ -356,23 +400,19 @@ QString DHAX_Application_Controller::show_pixel_local_aggregate_color_distance()
      center_weights_total += center_weights[a][b];
  }
 
+// QString fp = idc->current_file_path();
 
- Image_Document_Controller* idc = main_window_controller_->image_document_controller();
- if(!idc)
-   return {};
+ QImage image(file_path);
 
- QString fp = idc->current_file_path();
- QImage image(fp);
-
- QString result_3 = idc->current_file_path_with_presuffix("gray-3-dist");
- QString result_5 = idc->current_file_path_with_presuffix("gray-5-dist");
- QString result = idc->current_file_path_with_presuffix("gray-7-dist");
- QString result_73 = idc->current_file_path_with_presuffix("gray-73-dist");
- QString result_7rgb = idc->current_file_path_with_presuffix("gray-7rgb-dist");
- QString result_8b = idc->current_file_path_with_presuffix("8b");
- QString result_8b_125_cyan = idc->current_file_path_with_presuffix("8b-125-cyan");
- QString result_8b_175_cyan = idc->current_file_path_with_presuffix("8b-175-cyan");
- QString result_8b_225_cyan = idc->current_file_path_with_presuffix("8b-225-cyan");
+ QString result_3 = stat_image.file_path_with_presuffix("gray-3-dist");
+ QString result_5 = stat_image.file_path_with_presuffix("gray-5-dist");
+ QString result = stat_image.file_path_with_presuffix("gray-7-dist");
+ QString result_73 = stat_image.file_path_with_presuffix("gray-73-dist");
+ QString result_7rgb = stat_image.file_path_with_presuffix("gray-7rgb-dist");
+ QString result_8b = stat_image.file_path_with_presuffix("8b");
+ QString result_8b_125_cyan = stat_image.file_path_with_presuffix("8b-125-cyan");
+ QString result_8b_175_cyan = stat_image.file_path_with_presuffix("8b-175-cyan");
+ QString result_8b_225_cyan = stat_image.file_path_with_presuffix("8b-225-cyan");
 
  wh2 wh = { (u2) image.width(), (u2) image.height()};
  wh -= 6;
