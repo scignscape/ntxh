@@ -367,11 +367,17 @@ QString DHAX_Application_Controller::test_pixel_local_aggregate_color_distance()
  qDebug() << "Calculating color distance for " << likely_file;
 
  XCSD_Image* xcsd = new XCSD_Image;
- xcsd->load_image(likely_file);
+ xcsd->load_image_all(likely_file);
 
  xcsd->autoset_fb_poles();
 
- return pixel_local_aggregate_color_distance(likely_file);
+ xcsd->check_set_fb_gradient_trimap_to_channels();
+
+ qDebug() << "Autoset background pole: " << xcsd->background_pole() <<
+             " and foreground pole: " << xcsd->foreground_pole();
+
+
+ return pixel_local_aggregate_color_distance(likely_file, xcsd);
 }
 
 

@@ -167,7 +167,12 @@ void DHAX_Menu_System::init_menus()
 
  tm.add_action("Show fb-Gradient Trimap") << [sg]
  {
-  sg->emit_show_fb_gradient_trimap_requested();
+  sg->emit_show_fb_gradient_trimap_requested(false);
+ };
+
+ tm.add_action("Show fb-Gradient Trimap (autoset poles)") << [sg]
+ {
+  sg->emit_show_fb_gradient_trimap_requested(true);
  };
 
  DHAX_Menu& mm = *menus_->menu("Matrix");

@@ -4,6 +4,7 @@
 //     (See accompanying file LICENSE_1_0.txt or copy at
 //           http://www.boost.org/LICENSE_1_0.txt)
 
+
 #include "dhax-main-window-receiver.h"
 
 #include "dhax-main-window.h"
@@ -98,9 +99,9 @@ void DHAX_Main_Window_Receiver::handle_save_local_color_histograms(call_Stamp_u2
  main_window_controller_->save_local_color_histograms(/*callstamp*/);
 }
 
-void DHAX_Main_Window_Receiver::handle_show_fb_gradient_trimap(call_Stamp_u2 callstamp)
+void DHAX_Main_Window_Receiver::handle_show_fb_gradient_trimap(call_Stamp_u2 callstamp, bool autoset)
 {
- main_window_controller_->show_fb_gradient_trimap(/*callstamp*/);
+ main_window_controller_->show_fb_gradient_trimap(/*callstamp*/ autoset);
 }
 
 

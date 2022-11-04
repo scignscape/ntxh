@@ -45,6 +45,17 @@ void XCSD_Image::load_image(QString path)
  image_.load(path);
 }
 
+void XCSD_Image::load_image_all(QString path)
+{
+ load_image(path);
+ init_geometry();
+ geometry_.init_tier_counts(XCSD_Image_Geometry::TierGrid_Preferances::Minimize_Outer_Tiers);
+ geometry_.init_outer_ring_positions();
+ init_pixel_data(); //ROOT_FOLDER "/../test/ukraine");
+ init_tierboxes();
+}
+
+
 XCSD_TierBox* XCSD_Image::get_tierbox_at_ground_position(u2 x, u2 y)
 {
 
@@ -94,7 +105,10 @@ void XCSD_Image::init_pixel_data(QString info_folder)
    ci = ci.convertToFormat(QImage::Format_ARGB32);
   }
 
-  ci.save(info_path + ".png");
+  if(!info_path.isEmpty())
+  {
+   ci.save(info_path + ".png");
+  }
 
   std::map<s1, std::vector<n8>> sdi;
 
@@ -151,7 +165,8 @@ void XCSD_Image::init_pixel_data(QString info_folder)
     }
    }
 
-  save_file(info_path, info_string);
+  if(!info_path.isEmpty())
+    save_file(info_path, info_string);
 
  });
 
@@ -1074,19 +1089,24 @@ void XCSD_Image::autoset_fb_poles(u1 center, QPair<u1, u1> tblr [4]) //{4, 4}, {
  s2 c_left = (geometry_.full_tier_counts().width / 2) - top.first;
  if(c_left < 0)
    c_left = 0;
- u2 c_right = c_left + top.first + top.second;
+ u2 c_right = c_left + top.first + top.second - 1;
  if(c_right > geometry_.full_tier_counts().width)
    c_right = geometry_.full_tier_counts().width;
 
  rc2 rc_left = {0, (u2) c_left};
  rc2 rc_right = {0, c_right};
 
- geometry_.for_each_full_tierbox(rc_left, rc_right, [this, &top_histograms](XCSD_Image_Geometry::Grid_TierBox& gtb)
+ u1 count = 0;
+ geometry_.for_each_full_tierbox(rc_left, rc_right, [this, &top_histograms, &count](XCSD_Image_Geometry::Grid_TierBox& gtb)
  {
   rc2 rc  = gtb.loc.rc()._to_unsigned();
   XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
+  //?
   u2 fti = tbox->full_tier_index();
-  calculate_tierbox_histogram(tbox, top_histograms[fti]);
+  qDebug() << "top: " << fti;
+
+  calculate_tierbox_histogram(tbox, top_histograms[count]);
+  ++count;
  });
 
  r8 center_avg_red = 0, center_avg_green = 0, center_avg_blue = 0,
@@ -1097,6 +1117,9 @@ void XCSD_Image::autoset_fb_poles(u1 center, QPair<u1, u1> tblr [4]) //{4, 4}, {
  for(const Local_Histogram_Data& lhd : center_histograms)
  {
   QColor color = lhd.get_ref_color();
+
+  qDebug() << "center color: " << color;
+
   center_avg_red += (u1) color.red();
   center_avg_green += (u1) color.green();
   center_avg_blue += (u1) color.blue();
@@ -1109,6 +1132,10 @@ void XCSD_Image::autoset_fb_poles(u1 center, QPair<u1, u1> tblr [4]) //{4, 4}, {
  for(const Local_Histogram_Data& lhd : top_histograms)
  {
   QColor color = lhd.get_ref_color();
+
+  qDebug() << "top color: " << color;
+
+
   top_avg_red += (u1) color.red();
   top_avg_green += (u1) color.green();
   top_avg_blue += (u1) color.blue();
@@ -1386,6 +1413,13 @@ void XCSD_Image::check_set_fb_gradient_trimap_to_channels()
   // set_fb_gradient_trimap_to_channels(poles);
 }
 
+
+void XCSD_Image::save_fb_gradient_trimap(QString file_path, QString folder)
+{
+ fb2 poles = {qcolor_to_rgb555(foreground_pole_), qcolor_to_rgb555(background_pole_)};
+
+ save_fb_gradient_trimap(poles, file_path, folder);
+}
 
 void XCSD_Image::save_fb_gradient_trimap(fb2 poles, QString file_path, QString folder)
 {

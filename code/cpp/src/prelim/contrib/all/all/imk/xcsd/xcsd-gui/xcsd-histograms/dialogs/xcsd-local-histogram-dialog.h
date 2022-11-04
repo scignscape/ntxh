@@ -92,7 +92,7 @@ class XCSD_Local_Histogram_Dialog : public QDialog
 public:
 
  XCSD_Local_Histogram_Dialog(QWidget* parent,
-   pr2 totals, //largest_group_total,
+   pr2 totals, QColor ref_color, //largest_group_total,
    QMap<s2, Histogram_Group_Summary>* data);
 
  USE_SELF_CONNECT(normal)

@@ -494,7 +494,7 @@ void DHAX_Main_Window_Controller::load_pdf()
 }
 
 
-void DHAX_Main_Window_Controller::show_fb_gradient_trimap()
+void DHAX_Main_Window_Controller::show_fb_gradient_trimap(bool autoset)
 {
  if(!image_scene_item_)
  {
@@ -574,7 +574,10 @@ void DHAX_Main_Window_Controller::show_fb_gradient_trimap()
 
  }
 
- if( (image_document_controller_->marked_background_pole() == (u2) -1)
+ if(autoset)
+   xcsd_image_->autoset_fb_poles();
+
+ else if( (image_document_controller_->marked_background_pole() == (u2) -1)
     || (image_document_controller_->marked_foreground_pole() == (u2) -1) )
  {
   //QMessageBox msg;
@@ -603,8 +606,17 @@ void DHAX_Main_Window_Controller::show_fb_gradient_trimap()
  qdir.mkdir("test");
  QString fpath = qdir.absoluteFilePath("test");
 
- xcsd_image_->save_fb_gradient_trimap({image_document_controller_->marked_background_pole(),
-   image_document_controller_->marked_foreground_pole()}, path, fpath);
+ if(autoset)
+   xcsd_image_->save_fb_gradient_trimap(path, fpath);
+
+// xcsd->check_set_fb_gradient_trimap_to_channels();
+
+// qDebug() << "Autoset background pole: " << xcsd->background_pole() <<
+//             " and foreground pole: " << xcsd->foreground_pole();
+
+ else
+   xcsd_image_->save_fb_gradient_trimap({image_document_controller_->marked_background_pole(),
+     image_document_controller_->marked_foreground_pole()}, path, fpath);
 
  application_controller_->view_trimap(path);
 
@@ -779,7 +791,7 @@ void DHAX_Main_Window_Controller::show_local_color_histogram(rc2 rc)
  const Local_Histogram_Data& lhd =
    image_document_controller_->local_histogram_data()->at(fti);
  XCSD_Local_Histogram_Dialog* dlg = new XCSD_Local_Histogram_Dialog(application_main_window_,
-   {lhd.largest_group_total(), lhd.largest_bin()}, &lhd.combined_map());
+   {lhd.largest_group_total(), lhd.largest_bin()}, lhd.get_ref_color(), &lhd.combined_map());
 
  _self_connect_(dlg ,mark_global_foreground_pole_requested)
   to_lambda[this] (u2 code)

@@ -38,7 +38,7 @@ public:
  void emit_show_xcsd_scene_requested();
  void emit_calculate_local_color_histograms_requested();
  void emit_save_local_color_histograms_requested();
- void emit_show_fb_gradient_trimap_requested();
+ void emit_show_fb_gradient_trimap_requested(bool autoset);
  void emit_calculate_fb_gaussian_requested();
  void emit_launch_edge_detection_dialog_requested();
 
@@ -87,7 +87,7 @@ Q_SIGNALS:
 
  void calculate_local_color_histograms_requested(call_Stamp_u2);
  void save_local_color_histograms_requested(call_Stamp_u2);
- void show_fb_gradient_trimap_requested(call_Stamp_u2);
+ void show_fb_gradient_trimap_requested(call_Stamp_u2, bool);
 
  void calculate_fb_gaussian_requested(call_Stamp_u2);
  void launch_edge_detection_dialog_requested(call_Stamp_u2);

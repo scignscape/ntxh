@@ -180,6 +180,7 @@ public:
  SDI_Position get_sdi_at_ground_position(u2 x, u2 y);
 
  void load_image(QString path);
+ void load_image_all(QString path);
 
  static constexpr u1 tierbox_width = 27;
 
@@ -271,6 +272,8 @@ public:
 
  void save_fb_gradient_trimap(fb2 poles, QString file_path,
    QString folder);
+
+ void save_fb_gradient_trimap(QString file_path, QString folder);
 
  void set_fb_gradient_trimap_to_channels(fb2 poles);
  void check_set_fb_gradient_trimap_to_channels();

@@ -61,7 +61,7 @@ void XCSD_Local_Histogram_Dialog::Rect_Item::contextMenuEvent(QGraphicsSceneCont
 
 
 XCSD_Local_Histogram_Dialog::XCSD_Local_Histogram_Dialog(QWidget* parent,
-  pr2 totals, QMap<s2, Histogram_Group_Summary>* data)
+  pr2 totals, QColor ref_color, QMap<s2, Histogram_Group_Summary>* data)
   :  QDialog(parent)
 {
 
@@ -98,10 +98,15 @@ XCSD_Local_Histogram_Dialog::XCSD_Local_Histogram_Dialog(QWidget* parent,
   if(it == data->end())
     continue;
 
+
+
   {
    Histogram_Group_Summary& hgs = it.value();
+
    u2 most = hgs.max;
+
    QColor color = XCSD_Image::rgb555_to_qcolor(most);
+
    u2 height = (((r8) hgs.total) / largest_group_total) * (max_group_height_ - min_group_height_);
 
    QRect rect(h, bin_base_,
@@ -126,7 +131,6 @@ XCSD_Local_Histogram_Dialog::XCSD_Local_Histogram_Dialog(QWidget* parent,
 
    QColor color = XCSD_Image::rgb555_to_qcolor(pr.first);
 
-//    qDebug() << "color = " << color;
 
 
    u2 height = (((r8) pr.second) / largest_bin) * (max_bin_height_ - min_bin_height_);
@@ -138,11 +142,21 @@ XCSD_Local_Histogram_Dialog::XCSD_Local_Histogram_Dialog(QWidget* parent,
 
    rect = rect.normalized();
 
-   QBrush qbr(color);
+//   QBrush qbr(color);
 
    Rect_Item* ri = new Rect_Item(parent_rect_item_, rect.normalized(), pr.first, color);
 
    ri->setZValue(1);
+
+   if(color == ref_color)
+   {
+    QPen pen;
+    pen.setWidth(3);
+    graphics_scene_->addEllipse(rect.left() - 2, rect.top() + 6,
+                                bin_width_ + 4, 5,
+                                pen);
+   }
+
 
 //?   graphics_scene_->addItem(ri); //Rect(rect)->setBrush(qbr);
 

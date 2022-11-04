@@ -1206,7 +1206,7 @@ wh2 XCSD_Image_Geometry::get_outer_ring_rect_wh_for(Outer_Ring_Area_Flags area_f
 
 s1 XCSD_Image_Geometry::_for_each_full_tierbox(std::function<s1(Grid_TierBox&)> fn)
 {
- return _for_each_full_tierbox({0, 0}, full_tier_counts_._transposed_to<rc2>(), fn);
+ return _for_each_full_tierbox({0, 0}, full_tier_counts_._transposed_to<rc2>() - 1, fn);
 }
 
 s1 XCSD_Image_Geometry::_for_each_full_tierbox(rc2 top_left, rc2 bottom_right,
@@ -1217,9 +1217,9 @@ s1 XCSD_Image_Geometry::_for_each_full_tierbox(rc2 top_left, rc2 bottom_right,
 // u4 area = full_tier_counts_.area();
 
  tl2 offsets = tl || 1;
- for(u2 r = top_left.r; r < bottom_right.r; ++r)
+ for(u2 r = top_left.r; r <= bottom_right.r; ++r)
  {
-  for(u2 c = top_left.c; c < bottom_right.c; ++c)
+  for(u2 c = top_left.c; c <= bottom_right.c; ++c)
   {
 
 //   for(u2 r = 0; r < full_tier_counts_.height; ++r)

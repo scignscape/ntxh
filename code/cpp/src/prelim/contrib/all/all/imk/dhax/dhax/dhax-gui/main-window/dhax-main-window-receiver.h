@@ -41,7 +41,7 @@ public Q_SLOTS:
  void handle_calculate_local_color_histograms(call_Stamp_u2);
  void handle_save_local_color_histograms(call_Stamp_u2);
 
- void handle_show_fb_gradient_trimap(call_Stamp_u2);
+ void handle_show_fb_gradient_trimap(call_Stamp_u2, bool);
 
  void handle_load_pdf(call_Stamp_u2);
  void handle_complete_polygon(call_Stamp_u2);
