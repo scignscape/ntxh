@@ -348,6 +348,7 @@ QString DHAX_Application_Controller::show_pixel_local_aggregate_color_distance()
  return pixel_local_aggregate_color_distance(idc->current_file_path());
 }
 
+
 QString DHAX_Application_Controller::test_pixel_local_aggregate_color_distance()
 {
  QDir qd(DHAX_STAT_FOLDER "/test-dist");
@@ -361,12 +362,21 @@ QString DHAX_Application_Controller::test_pixel_local_aggregate_color_distance()
   return s1.length() < s2.length();
  });
 
+ likely_file = qd.absoluteFilePath(likely_file);
+
  qDebug() << "Calculating color distance for " << likely_file;
+
+ XCSD_Image* xcsd = new XCSD_Image;
+ xcsd->load_image(likely_file);
+
+ xcsd->autoset_fb_poles();
 
  return pixel_local_aggregate_color_distance(likely_file);
 }
 
-QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(QString file_path)
+
+QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(
+  QString file_path, XCSD_Image* xcsd)
 {
  Stat_Test_Image stat_image(file_path);
 
@@ -407,23 +417,22 @@ QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(QStrin
  QString result_3 = stat_image.file_path_with_presuffix("gray-3-dist");
  QString result_5 = stat_image.file_path_with_presuffix("gray-5-dist");
  QString result = stat_image.file_path_with_presuffix("gray-7-dist");
- QString result_73 = stat_image.file_path_with_presuffix("gray-73-dist");
+
  QString result_7rgb = stat_image.file_path_with_presuffix("gray-7rgb-dist");
+
  QString result_8b = stat_image.file_path_with_presuffix("8b");
  QString result_8b_125_cyan = stat_image.file_path_with_presuffix("8b-125-cyan");
  QString result_8b_175_cyan = stat_image.file_path_with_presuffix("8b-175-cyan");
  QString result_8b_225_cyan = stat_image.file_path_with_presuffix("8b-225-cyan");
 
  wh2 wh = { (u2) image.width(), (u2) image.height()};
- wh -= 6;
+ wh2 wh_3 = wh - 3;
 
  QImage gray_3_image(wh.width, wh.height, QImage::Format_Grayscale8);
  QImage gray_5_image(wh.width, wh.height, QImage::Format_Grayscale8);
  QImage gray_7_image(wh.width, wh.height, QImage::Format_Grayscale8);
 
  QImage gray_7rgb_image(wh.width, wh.height, QImage::Format_RGB32);
-
- QImage gray_73_image(wh.width, wh.height, QImage::Format_Grayscale8);
 
  //?QImage cyan_8b_image(wh.width, wh.height, QImage::Format_RGB32);
 
@@ -435,13 +444,12 @@ QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(QStrin
  gray_5_image.fill(0);
  gray_7_image.fill(0);
  gray_7rgb_image.fill(0);
- gray_73_image.fill(0);
 
 //? gray_image.save(result);
 
 //? return {};
 
- rc2 rc {3, 3};
+//? rc2 rc {0, 0};
 
  //?u1* gray_pixel = gray_image.bits();
 
@@ -452,44 +460,64 @@ QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(QStrin
 
  for(u2 r = 0; r < wh.height; ++r)
  {
-  QRgb* line = (QRgb*) image.scanLine(rc.r);
-//  u1* gray_3_line = ( u1*) gray_3_image.scanLine(rc.r);
-//  u1* gray_5_line = ( u1*) gray_5_image.scanLine(rc.r);
-//  u1* gray_7_line = ( u1*) gray_7_image.scanLine(rc.r);
+  s1 r_offset_min, r_offset_max, c_offset_min, c_offset_max;
 
-//  QRgb* gray_3_line = (QRgb*) gray_3_image.scanLine(rc.r);
-//  QRgb* gray_5_line = (QRgb*) gray_5_image.scanLine(rc.r);
-//  QRgb* gray_7_line = (QRgb*) gray_7_image.scanLine(rc.r);
+  if(r < 3)
+    r_offset_min = -r;
+  else
+    r_offset_min = -3;
 
-    u1* gray_3_line = (u1*) gray_3_image.scanLine(r);
-    u1* gray_5_line = (u1*) gray_5_image.scanLine(r);
-    u1* gray_7_line = (u1*) gray_7_image.scanLine(r);
-    u1* gray_73_line = (u1*) gray_73_image.scanLine(r);
-    QRgb* gray_7rgb_line = (QRgb*) gray_7rgb_image.scanLine(r);
+  if(r > wh_3.height)
+    r_offset_max = r - wh_3.height;
+  else
+   r_offset_max = 3;
 
-    QRgb* cyan_8b_225_line = (QRgb*) cyan_8b_225_image.scanLine(r);
-    QRgb* cyan_8b_175_line = (QRgb*) cyan_8b_175_image.scanLine(r);
-    QRgb* cyan_8b_125_line = (QRgb*) cyan_8b_125_image.scanLine(r);
 
-//  QRgb* line_up [3] = {(QRgb*) image.scanLine(rc.r - 1), (QRgb*) image.scanLine(rc.r - 2),
-//                       (QRgb*) image.scanLine(rc.r - 3)};
+//?  QRgb* line = (QRgb*) image.scanLine(rc.r);
+  QRgb* line = (QRgb*) image.scanLine(r);
 
-//  QRgb* line_down [3] = {(QRgb*) image.scanLine(rc.r + 1), (QRgb*) image.scanLine(rc.r + 2),
-//                         (QRgb*) image.scanLine(rc.r + 3)};
+//  u1* gray_3_line =  (u1*) gray_3_image.scanLine(rc.r);
+//  u1* gray_5_line =  (u1*) gray_5_image.scanLine(rc.r);
+//  u1* gray_7_line =  (u1*) gray_7_image.scanLine(rc.r);
+
+//  QRgb* gray_3_line =  (QRgb*) gray_3_image.scanLine(rc.r);
+//  QRgb* gray_5_line =  (QRgb*) gray_5_image.scanLine(rc.r);
+//  QRgb* gray_7_line =  (QRgb*) gray_7_image.scanLine(rc.r);
+
+  u1* gray_3_line = (u1*) gray_3_image.scanLine(r);
+  u1* gray_5_line = (u1*) gray_5_image.scanLine(r);
+  u1* gray_7_line = (u1*) gray_7_image.scanLine(r);
+  QRgb* gray_7rgb_line = (QRgb*) gray_7rgb_image.scanLine(r);
+
+  QRgb* cyan_8b_225_line = (QRgb*) cyan_8b_225_image.scanLine(r);
+  QRgb* cyan_8b_175_line = (QRgb*) cyan_8b_175_image.scanLine(r);
+  QRgb* cyan_8b_125_line = (QRgb*) cyan_8b_125_image.scanLine(r);
+
 
   for(u2 c = 0; c < wh.width; ++c)
   {
-   QRgb& center_pixel = line[rc.c];
+   if(c < 3)
+     c_offset_min = -c;
+   else
+     c_offset_min = -3;
 
-   u2 total3 = 9, total5 = 9, total7 = 0;
+   if(c > wh_3.width)
+     c_offset_max = c - wh_3.width;
+   else
+    c_offset_max = 3;
 
-   //QRgb** line_up_down = (QRgb***) &line_up;
 
-   for(s1 r_offset = -3; r_offset <= 3; ++r_offset)
+//?   QRgb& center_pixel = line[rc.c];
+   QRgb& center_pixel = line[c];
+
+   u2 total3 = 0, total5 = 0, total7 = 0;
+
+   for(s1 r_offset = r_offset_min; r_offset <= r_offset_max; ++r_offset)
    {
-    QRgb* rline = (QRgb*) image.scanLine(rc.r + r_offset);
+//    QRgb* rline = (QRgb*) image.scanLine(rc.r + r_offset);
+    QRgb* rline = (QRgb*) image.scanLine(r + r_offset);
 
-    for(s1 c_offset = -3; c_offset <= 3; ++c_offset)
+    for(s1 c_offset = c_offset_min; c_offset <= c_offset_max; ++c_offset)
     {
      if(r_offset == 0 && c_offset == 0)
        continue;
@@ -497,7 +525,8 @@ QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(QStrin
      u1 r_offset_abs = qAbs(r_offset);
      u1 c_offset_abs = qAbs(c_offset);
 
-     QRgb& pixel = rline[rc.c + c_offset];
+//?     QRgb& pixel = rline[rc.c + c_offset];
+     QRgb& pixel = rline[c + c_offset];
 
      u1 dist = hsv_color_distance(center_pixel, pixel);
 
@@ -507,14 +536,12 @@ QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(QStrin
        total5 += (u2) dist;
 
      if( (r_offset_abs < 2) && (c_offset_abs < 2) )
-        total3 += (u2) dist;
+       total3 += (u2) dist;
 
     }
    }
 
    u1 gray7 = total7 / 48, gray5 = total5 / 24, gray3 = total3 / 8;
-   u1 gray73 = qAbs(gray7 - gray3);
-
 
 
 
@@ -527,7 +554,6 @@ QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(QStrin
    gray7 = 255 - gray7;
    gray5 = 255 - gray5;
    gray3 = 255 - gray3;
-   gray73 = 255 - gray73;
 
    QColor center_color = QColor::fromRgb(center_pixel);
    QColor gray7rgb = QColor::fromHsv(center_color.hsvHue(), 255 - gray7, gray7);
@@ -580,7 +606,6 @@ QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(QStrin
    gray_7_line[c] = gray7;
    gray_5_line[c] = gray5;
    gray_3_line[c] = gray3;
-   gray_73_line[c] = gray73;
 
    gray_7rgb_line[c] = gray7rgb.rgb();
 
@@ -604,10 +629,10 @@ QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(QStrin
 //   gray_3_line[rc.c - 3] = gray3;
 
    //++gray_pixel;
-   ++rc.c;
+//??   ++rc.c;
   }
-  ++rc.r;
-  rc.c = 3;
+//??  ++rc.r;
+//??  rc.c = 3;
  }
 
  QMap<pr1, QColor> most_common;
@@ -661,7 +686,6 @@ QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(QStrin
  gray_7_image.save(result);
  gray_5_image.save(result_5);
  gray_3_image.save(result_3);
- gray_73_image.save(result_73);
  gray_7rgb_image.save(result_7rgb);
 
  i8b.save(result_8b);
@@ -673,4 +697,258 @@ QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(QStrin
 
  return result;
 }
+
+
+
+#ifdef HIDE
+
+QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(QString file_path)
+{
+ Stat_Test_Image stat_image(file_path);
+
+ static u1 corner_weights[3][3]
+ {
+  {3, 1, 1},
+  {1, 3, 2},
+  {1, 2, 3},
+ };
+
+ static u1 center_weights[3][3]
+ {
+  {1, 2, 1},
+  {1, 3, 1},
+  {1, 3, 1},
+ };
+
+ static u2 corner_weights_total = 0;
+ if(corner_weights_total == 0)
+ {
+  for(u1 a = 0; a < 3; ++a)
+   for(u1 b = 0; b < 3; ++b)
+     corner_weights_total += corner_weights[a][b];
+ }
+
+ static u2 center_weights_total = 0;
+ if(center_weights_total == 0)
+ {
+  for(u1 a = 0; a < 3; ++a)
+   for(u1 b = 0; b < 3; ++b)
+     center_weights_total += center_weights[a][b];
+ }
+
+ QImage image(file_path);
+
+ if(image.isNull())
+   return {};
+
+ QString result = stat_image.file_path_with_presuffix("gray-7-dist");
+ QString result_7rgb = stat_image.file_path_with_presuffix("gray-7rgb-dist");
+
+ wh2 wh = { (u2) image.width(), (u2) image.height()};
+ wh -= 6;
+
+ QImage gray_7_image(wh.width, wh.height, QImage::Format_Grayscale8);
+
+ QImage gray_7rgb_image(wh.width, wh.height, QImage::Format_RGB32);
+
+ gray_7_image.fill(0);
+ gray_7rgb_image.fill(0);
+
+ rc2 rc {3, 3};
+
+ std::map<pr1, pr4> bin_counts_5_10_20;
+
+ static QRgb cyan = QColor(Qt::cyan).rgb();
+
+ for(u2 r = 0; r < wh.height; ++r)
+ {
+  QRgb* line = (QRgb*) image.scanLine(rc.r);
+
+  u1* gray_7_line = (u1*) gray_7_image.scanLine(r);
+  QRgb* gray_7rgb_line = (QRgb*) gray_7rgb_image.scanLine(r);
+
+  for(u2 c = 0; c < wh.width; ++c)
+  {
+   QRgb& center_pixel = line[rc.c];
+
+   u2//? total3 = 9, total5 = 9,
+     total7 = 0;
+
+   for(s1 r_offset = -3; r_offset <= 3; ++r_offset)
+   {
+    QRgb* rline = (QRgb*) image.scanLine(rc.r + r_offset);
+
+    for(s1 c_offset = -3; c_offset <= 3; ++c_offset)
+    {
+     if(r_offset == 0 && c_offset == 0)
+       continue;
+
+     u1 r_offset_abs = qAbs(r_offset);
+     u1 c_offset_abs = qAbs(c_offset);
+
+     QRgb& pixel = rline[rc.c + c_offset];
+
+     u1 dist = hsv_color_distance(center_pixel, pixel);
+
+     total7 += (u2) dist;
+
+//     if( (r_offset_abs < 3) && (c_offset_abs < 3) )
+//       total5 += (u2) dist;
+
+//     if( (r_offset_abs < 2) && (c_offset_abs < 2) )
+//        total3 += (u2) dist;
+
+    }
+   }
+
+   u1 gray7 = total7 / 48; //, gray5 = total5 / 24, gray3 = total3 / 8;
+   //u1 gray73 = qAbs(gray7 - gray3);
+
+
+
+
+//   *gray_pixel = gray;
+
+//   n8 gp = (n8) gray_pixel;
+
+  //? QRgb rr7 = QColor(gray7, gray7, gray7).rgb();
+
+   gray7 = 255 - gray7;
+//   gray5 = 255 - gray5;
+//   gray3 = 255 - gray3;
+//   gray73 = 255 - gray73;
+
+   QColor center_color = QColor::fromRgb(center_pixel);
+   QColor gray7rgb = QColor::fromHsv(center_color.hsvHue(), 255 - gray7, gray7);
+
+   if(gray7 > 125)
+   {
+    SV_Centered_Vector scv = get_sv_centered_vector(center_color).disk_protrude();
+    u1 bin = scv.get_5_10_20_bin();
+    u1 h = center_color.hsvHue() / 12;
+
+    auto it = bin_counts_5_10_20.find({h, bin});
+    if(it == bin_counts_5_10_20.end())
+      bin_counts_5_10_20[{h, bin}] = {1, center_color.rgb()};
+    else
+      ++bin_counts_5_10_20[{h, bin}].first;
+
+//    cyan_8b_125_line[c] = center_pixel;
+//    if(gray7 > 175)
+//    {
+//     cyan_8b_175_line[c] = center_pixel;
+//     if(gray7 > 225)
+//       cyan_8b_225_line[c] = center_pixel;
+//     else
+//       cyan_8b_225_line[c] = cyan;
+//    }
+//    else
+//    {
+//     cyan_8b_175_line[c] = cyan;
+//     cyan_8b_225_line[c] = cyan;
+//    }
+   }
+
+//   else
+//   {
+//    cyan_8b_225_line[c] = cyan;
+//    cyan_8b_175_line[c] = cyan;
+//    cyan_8b_125_line[c] = cyan;
+//   }
+
+
+//
+   gray_7_line[c] = gray7;
+
+   gray_7rgb_line[c] = gray7rgb.rgb();
+
+//   gray_7_image.setPixel(rc.c - 3, rc.r - 3, rr7);
+//   gray_5_image.setPixel(rc.c - 3, rc.r - 3, rr5);
+//   gray_3_image.setPixel(rc.c - 3, rc.r - 3, rr3);
+
+
+//   gray_73_image.setPixel(rc.c - 3, rc.r - 3, rr73);
+
+//   gray_test_image.setPixel(rc.c - 3, rc.r - 3, rr);
+
+//   //gray_image.setPixel(rc.c - 3, rc.r - 3, rr);
+
+//   uchar& gg = gline[rc.c - 3];
+//   gg = gray;
+
+//?
+//   gray_7_line[rc.c - 3] = gray7;
+//   gray_5_line[rc.c - 3] = gray5;
+//   gray_3_line[rc.c - 3] = gray3;
+
+   //++gray_pixel;
+   ++rc.c;
+  }
+  ++rc.r;
+  rc.c = 3;
+ }
+
+#ifdef HIDE
+ QMap<pr1, QColor> most_common;
+
+ QVector<QRgb> i8b_color_table;
+
+ i8b_color_table.push_back(cyan);
+
+ u2 most_common_count = 0;
+
+ while(most_common_count < 255)
+ {
+  if(bin_counts_5_10_20.empty())
+    break;
+  auto pr = std::max_element
+  (
+      std::begin(bin_counts_5_10_20), std::end(bin_counts_5_10_20),
+      [] (const auto& p1, const auto& p2)
+      {
+          return p1.second < p2.second;
+      }
+  );
+  most_common[pr->first] = QColor::fromRgb(pr->second.second);
+  i8b_color_table.push_back(pr->second.second);
+  ++most_common_count;
+  bin_counts_5_10_20.erase(pr);
+ }
+
+// QImage i8b = image.convertToFormat(QImage::Format_Indexed8,
+//   i8b_color_table, Qt::ThresholdDither|Qt::AutoColor);
+
+// QImage p8b_125 = cyan_8b_125_image.convertToFormat(QImage::Format_Indexed8,
+//   i8b_color_table, Qt::ThresholdDither|Qt::AutoColor);
+// QImage p8b_175 = cyan_8b_175_image.convertToFormat(QImage::Format_Indexed8,
+//   i8b_color_table, Qt::ThresholdDither|Qt::AutoColor);
+// QImage p8b_225 = cyan_8b_225_image.convertToFormat(QImage::Format_Indexed8,
+//   i8b_color_table, Qt::ThresholdDither|Qt::AutoColor);
+
+
+// (wh.width, wh.height, QImage::Format_Indexed8);
+// i8b.setColorTable(i8b_color_table);
+
+// i8b.convertToFormat()
+
+#endif
+
+ qDebug() << "saving " << result << " ...";
+
+ gray_7_image.save(result);
+ gray_7rgb_image.save(result_7rgb);
+
+// i8b.save(result_8b);
+// p8b_125.save(result_8b_125_cyan);
+// p8b_175.save(result_8b_175_cyan);
+// p8b_225.save(result_8b_225_cyan);
+
+ qDebug() << "ok";
+
+ return result;
+}
+
+#endif
+
+
 

@@ -44,6 +44,9 @@ class Local_Histogram_Data
  u2 largest_group_total_;
  u2 largest_bin_;
 
+ s2 largest_group_hue_;
+ u2 largest_group_hue_ref_color_;
+
 public:
 
  Local_Histogram_Data();
@@ -57,6 +60,12 @@ public:
 
  ACCESSORS(u2 ,largest_group_total)
  ACCESSORS(u2 ,largest_bin)
+
+ ACCESSORS(s2 ,largest_group_hue)
+ ACCESSORS(u2 ,largest_group_hue_ref_color)
+
+
+ QColor get_ref_color() const;
 
 
 };

@@ -23,6 +23,9 @@
 
 #include "mat2d.templates.h"
 
+#include "enum-macros.h"
+
+
 XCNS_(XCSD)
 
 class Local_Histogram_Data;
@@ -40,6 +43,20 @@ struct XCSD_Outer_Ring_Info
 
 class XCSD_Image
 {
+ enum class Set_Channels_Info : u2 {
+
+  Nothing_Set = 0,  RGB24_Set = 1,
+  RGBA32_Set = 2, Non_Alpha_4th_Set = 4,
+  RGB555_Set = 8, Channel_7_Set = 16,
+  Channel_8_Set = 32,
+  Channels_78_Set = Channel_7_Set | Channel_8_Set
+
+ };
+
+ ENUM_FLAGS_OP_MACROS(Set_Channels_Info)
+
+ Set_Channels_Info set_channels_info_;
+
  QImage image_;
 
  XCSD_Image_Data data_;
@@ -48,6 +65,9 @@ class XCSD_Image
  rc2s initial_setup_tierbox_;
 
  QVector<XCSD_Outer_Ring_Info>* outer_ring_info_;
+
+ QColor background_pole_;
+ QColor foreground_pole_;
 
  void _init_outer_ring_pixel_data_landscaoe();
  void _init_outer_ring_pixel_data_landscaoe_sym();
@@ -105,6 +125,22 @@ public:
 
  ACCESSORS(QVector<XCSD_Outer_Ring_Info>* ,outer_ring_info)
 
+ ACCESSORS(QColor ,background_pole)
+ ACCESSORS(QColor ,foreground_pole)
+
+
+// void autoset_fb_poles(u1 center = 30, QPair<u1, u1> top = {4, 4},
+//   QPair<u1, u1> bottom = {4, 4}, QPair<u1, u1> left = {0, 0}, QPair<u1, u1> right = {0, 0});
+
+ void autoset_fb_poles(u1 center, QPair<u1, u1> tblr [4]); //{4, 4}, {0,0}, {0,0}, {0,0}});
+
+ void autoset_fb_poles(u1 center = 30)
+ {
+  static QPair<u1, u1> defaults [4] {{8, (u1)-1}, {0,0}, {0,0}, {0,0}};
+  autoset_fb_poles(center, defaults);
+ }
+ //{4, 4}, {0,0}, {0,0}, {0,0}});
+
  enum Save_Mode : u1 {
    Save_QRgb, Save_Palette, Save_FB, Save_FG, Save_BG,
 
@@ -112,6 +148,11 @@ public:
  };
 
  ENUM_FLAGS_OP_MACROS(Save_Mode)
+
+ QPair<QColor, QColor> get_fb_poles()
+ {
+  return { background_pole_, foreground_pole_ };
+ }
 
  static QColor pixel_number_to_qcolor(n8 pixel);
  static QColor pixel_number_fb_to_qcolor(n8 pixel, Save_Mode save_mode);
@@ -188,9 +229,17 @@ public:
  QVector<Local_Histogram_Data>* calculate_local_histograms(); //QString path_template);
  void set_individual_pixel_local_histogram_channels(n8& pixel);
  void set_local_histograms_channels();
+ void check_set_local_histograms_channels()
+ {
+  if( (set_channels_info_ & Set_Channels_Info::RGB555_Set) == 0 )
+    set_local_histograms_channels();
+ }
 
  void init_local_histogram_vector(QVector<Local_Histogram_Data>& result);
  void save_local_histogram_vector_to_folder(const QVector<Local_Histogram_Data>& data, QString path_template);
+
+ void calculate_tierbox_histogram(XCSD_TierBox* tbox, Local_Histogram_Data& result);
+ void calculate_tierbox_histogram(u4 start_offset, Local_Histogram_Data& result);
 
  static QVector<s2> rgb555_to_hsv(u2 rgb555);
  static QColor rgb555_to_qcolor(u2 rgb555);

@@ -236,7 +236,11 @@ private:
  void reconcile_actual_tiergrid_setting();
  void init_directed_centers();
 
+//? s1 _for_each_central_tierbox(std::function<s1(XCSD_TierBox*)> fn);
+
+ s1 _for_each_full_tierbox(rc2 top_left, rc2 bottom_right, std::function<s1(Grid_TierBox&)> fn);
  s1 _for_each_full_tierbox(std::function<s1(Grid_TierBox&)> fn);
+
  s1 _for_each_outer_ring_area(std::function<s1(u1, Outer_Ring_Area_Flags)> fn);
 
 public:
@@ -309,6 +313,17 @@ public:
   return _for_each_full_tierbox(fn);
  }
  void for_each_full_tierbox(std::function<void(Grid_TierBox&)> fn);
+
+ inline s1 for_each_full_tierbox_(rc2 top_left, rc2 bottom_right,
+   std::function<s1(Grid_TierBox&)> fn)
+ {
+  return _for_each_full_tierbox(top_left, bottom_right, fn);
+ }
+ void for_each_full_tierbox(rc2 top_left, rc2 bottom_right,
+   std::function<void(Grid_TierBox&)> fn);
+
+
+// for_each_full_tierbox(rc2 top_left, rc2 bottom_right,
 
  inline s1 for_each_outer_ring_area_(std::function<s1(u1, Outer_Ring_Area_Flags)> fn)
  {

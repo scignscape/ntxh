@@ -918,6 +918,16 @@ void XCSD_Image_Geometry::for_each_vertical_gridline(std::function<void(Gridline
  }
 }
 
+void XCSD_Image_Geometry::for_each_full_tierbox(rc2 top_left, rc2 bottom_right,
+  std::function<void(Grid_TierBox&)> fn)
+{
+ _for_each_full_tierbox(top_left, bottom_right, [fn](Grid_TierBox& gtb) -> s1
+ {
+  fn(gtb);
+  return 0;
+ });
+}
+
 void XCSD_Image_Geometry::for_each_full_tierbox(std::function<void(Grid_TierBox&)> fn)
 {
  _for_each_full_tierbox([fn](Grid_TierBox& gtb) -> s1
@@ -1187,17 +1197,36 @@ wh2 XCSD_Image_Geometry::get_outer_ring_rect_wh_for(Outer_Ring_Area_Flags area_f
  return {0, 0};
 }
 
+//?
+//s1 XCSD_Image_Geometry::_for_each_central_tierbox(std::function<s1(XCSD_TierBox*)> fn)
+//{
+
+//}
+
+
 s1 XCSD_Image_Geometry::_for_each_full_tierbox(std::function<s1(Grid_TierBox&)> fn)
+{
+ return _for_each_full_tierbox({0, 0}, full_tier_counts_._transposed_to<rc2>(), fn);
+}
+
+s1 XCSD_Image_Geometry::_for_each_full_tierbox(rc2 top_left, rc2 bottom_right,
+  std::function<s1(Grid_TierBox&)> fn)
 {
 // u1 offset = vertical_outer_sizes_.top;
  tl2 tl{vertical_outer_sizes_.top, horizontal_outer_sizes_.left};
 // u4 area = full_tier_counts_.area();
 
  tl2 offsets = tl || 1;
- for(u2 r = 0; r < full_tier_counts_.height; ++r)
+ for(u2 r = top_left.r; r < bottom_right.r; ++r)
  {
-  for(u2 c = 0; c < full_tier_counts_.width; ++c)
+  for(u2 c = top_left.c; c < bottom_right.c; ++c)
   {
+
+//   for(u2 r = 0; r < full_tier_counts_.height; ++r)
+//   {
+//    for(u2 c = 0; c < full_tier_counts_.width; ++c)
+//    {
+
    rc2 rc{r, c};
    //rc.add(offsets);
    TierBox_Location tbl(rc._to<rc2s>());

@@ -15,6 +15,8 @@
 
 #include "dhax-video/dhax-video-player-dialog.h"
 
+#include "xcsd-2d/xcsd-image.h"
+
 #include <QString>
 #include <QMap>
 #include <QDir>
@@ -41,6 +43,7 @@ class DHAX_Forge_Controller;
 class DHAX_Application_State;
 
 class DHAX_Video_Player_Dialog;
+
 
 class Main_Window_Dialog;
 typedef Main_Window_Dialog Image_Editor_Dialog_Window;
@@ -132,7 +135,7 @@ public:
 
  DHAX_Forge_Controller* check_init_forge_controller();
 
- QString pixel_local_aggregate_color_distance(QString file_path);
+ QString pixel_local_aggregate_color_distance(QString file_path, XCSD_Image* xcsd = nullptr);
  QString test_pixel_local_aggregate_color_distance();
  QString show_pixel_local_aggregate_color_distance();
  void toroid_run_stats();

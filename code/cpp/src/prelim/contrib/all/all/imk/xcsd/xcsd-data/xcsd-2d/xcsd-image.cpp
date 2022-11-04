@@ -27,7 +27,11 @@ USING_KANS(TextIO)
 USING_XCNS(XCSD)
 
 XCSD_Image::XCSD_Image()
-  :  outer_ring_info_(nullptr)
+  :  set_channels_info_(Set_Channels_Info::Nothing_Set),
+     outer_ring_info_(nullptr),
+     background_pole_(Qt::white),
+     foreground_pole_(Qt::black)
+
 //  :  tier_counts_({0,0}),
 //     horizontal_outer_sizes_({0,0}),
 //     vertical_outer_sizes_({0,0}),
@@ -45,6 +49,10 @@ XCSD_TierBox* XCSD_Image::get_tierbox_at_ground_position(u2 x, u2 y)
 {
 
 }
+
+// void autoset_fb_poles(u1 center = 30, QPair<u1, u1> top = {4, 4},
+//   QPair<u1, u1> bottom = {4, 4}, QPair<u1, u1> left = {0, 0}, QPair<u1, u1> right = {0, 0});
+
 
 void XCSD_Image::init_geometry()
 {
@@ -1024,11 +1032,94 @@ void XCSD_Image::set_local_histograms_channels()
 
  //?calculate_pixel_averages_1byte(7, 8);
 
+ set_channels_info_ |= Set_Channels_Info::RGB555_Set;
 }
+
+void XCSD_Image::autoset_fb_poles(u1 center, QPair<u1, u1> tblr [4]) //{4, 4}, {0,0}, {0,0}, {0,0}})
+{
+ check_set_local_histograms_channels();
+
+ QPair<u1, u1> top = tblr[0];
+ QPair<u1, u1> bottom = tblr[1];
+ QPair<u1, u1> left = tblr[2];
+ QPair<u1, u1> right = tblr[3];
+
+ QVector<Local_Histogram_Data> center_histograms (center);
+
+ if(top.second == (u1) -1)
+   top.second = top.first;
+
+ u1 top_count = top.first + top.second;
+
+ QVector<Local_Histogram_Data> top_histograms (top_count);
+
+ for(u4 count = 0, start_offset = 0; count < center;
+   start_offset += tierbox_width * tierbox_width, ++count)
+ {
+  calculate_tierbox_histogram(start_offset, center_histograms[count]);
+ }
+
+ s2 c_left = (geometry_.full_tier_counts().width / 2) - top.first;
+ if(c_left < 0)
+   c_left = 0;
+ u2 c_right = c_left + top.first + top.second;
+ if(c_right > geometry_.full_tier_counts().width)
+   c_right = geometry_.full_tier_counts().width;
+
+ rc2 rc_left = {0, (u2) c_left};
+ rc2 rc_right = {0, c_right};
+
+ geometry_.for_each_full_tierbox(rc_left, rc_right, [this, &top_histograms](XCSD_Image_Geometry::Grid_TierBox& gtb)
+ {
+  rc2 rc  = gtb.loc.rc()._to_unsigned();
+  XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
+  u2 fti = tbox->full_tier_index();
+  calculate_tierbox_histogram(tbox, top_histograms[fti]);
+ });
+
+ r8 center_avg_red = 0, center_avg_green = 0, center_avg_blue = 0,
+   top_avg_red = 0, top_avg_green = 0, top_avg_blue = 0;
+
+ QColor center_avg, top_avg;
+
+ for(const Local_Histogram_Data& lhd : center_histograms)
+ {
+  QColor color = lhd.get_ref_color();
+  center_avg_red += (u1) color.red();
+  center_avg_green += (u1) color.green();
+  center_avg_blue += (u1) color.blue();
+ }
+
+ center_avg = QColor(center_avg_red / center, center_avg_green / center,
+   center_avg_blue / center);
+
+
+ for(const Local_Histogram_Data& lhd : top_histograms)
+ {
+  QColor color = lhd.get_ref_color();
+  top_avg_red += (u1) color.red();
+  top_avg_green += (u1) color.green();
+  top_avg_blue += (u1) color.blue();
+ }
+
+ top_avg = QColor(top_avg_red / top_count, top_avg_green / top_count,
+   top_avg_blue / top_count);
+
+ set_foreground_pole(top_avg);
+
+ set_background_pole(center_avg);
+
+//   top_count
+
+//   QPair<u1, u1> bottom = {4, 4}, QPair<u1, u1> left = {0, 0}, QPair<u1, u1> right =
+
+}
+
+
 
 QVector<Local_Histogram_Data>* XCSD_Image::calculate_local_histograms() //QString path_template)
 {
- set_local_histograms_channels();
+ check_set_local_histograms_channels();
  u2 count = geometry_.full_tier_counts().inner_product();
 
  QVector<Local_Histogram_Data>* result = new QVector<Local_Histogram_Data> (count);
@@ -1326,18 +1417,92 @@ void XCSD_Image::save_fb_gradient_trimap(fb2 poles, QString file_path, QString f
 }
 
 
+void XCSD_Image::calculate_tierbox_histogram(XCSD_TierBox* tbox, Local_Histogram_Data& result)
+{
+ u4 start_offset = tbox->pixel_data_ground_offset();
+ calculate_tierbox_histogram(start_offset, result);
+}
+
+void XCSD_Image::calculate_tierbox_histogram(u4 start_offset, Local_Histogram_Data& result)
+{
+// xy4 xy = tbox->get_image_ground_location_for_tierbox_center();
+// u2 fti = tbox->full_tier_index();
+ n8* start = data_.get_pixel_data_start(start_offset);
+
+ QMap<u2, u2>& rgb555_counts = result.rgb555_map();
+ QMap<s2, u2>& hue_counts = result.hue_map();
+ QMap<s2, Histogram_Group_Summary>& combined = result.combined_map();
+
+ for(u4 i = 0; i < tierbox_width * tierbox_width; ++i)
+ {
+  u2 code = (u2) ( (*start) >> 32 );
+  u2 c = ++rgb555_counts[code];
+  ++start;
+ }
+
+ u2 rgb_counts_max = std::max_element(rgb555_counts.begin(), rgb555_counts.end()).value();
+
+ result.set_largest_bin(rgb_counts_max);
+
+// u2 sz = rgb555_counts.size();
+
+ QMapIterator<u2, u2> r_it(rgb555_counts);
+
+ while(r_it.hasNext())
+ {
+  r_it.next();
+
+  s2 hue = rgb555_to_hsv(r_it.key())[0];
+  hue_counts[hue] += r_it.value();
+
+//   combined[hue].push_back({r_it.key(), r_it.value()});
+  combined[hue].counts.push_back(pr2().from_key_value_iterator(r_it));
+
+ }
+
+ auto max_it = std::max_element(hue_counts.begin(), hue_counts.end());
+
+ //u2 hue_counts_max = it.value();
+ result.set_largest_group_total(max_it.value());
+ result.set_largest_group_hue(max_it.key());
+
+ for(s2 hue = 0, go_on = 1; go_on; ++hue)
+ {
+  if(hue == 360)
+  {
+   hue = -1;
+   go_on = 0;
+  }
+
+  auto it = combined.find(hue);
+  if(it == combined.end())
+    continue;
+
+  it.value().max = std::max_element(it.value().counts.begin(), it.value().counts.end(),
+    UNARY_COMPARE_2(pr2))->first;
+  it.value().total = hue_counts[hue];
+
+  if(hue == max_it.key())
+    result.set_largest_group_hue_ref_color(it.value().max);
+ }
+
+}
+
+
 void XCSD_Image::init_local_histogram_vector(QVector<Local_Histogram_Data>& result)
 {
  u1 threshold = 255;
 
  geometry_.for_each_full_tierbox([this, &result](XCSD_Image_Geometry::Grid_TierBox& gtb)
- {
+ {  
   rc2 rc  = gtb.loc.rc()._to_unsigned();
-
-// rc2 rc  = {0, 21};
-
   XCSD_TierBox* tbox = data_.get_full_tierbox_at_position(rc);
+  u2 fti = tbox->full_tier_index();
+  calculate_tierbox_histogram(tbox, result[fti]);
+ });
+}
 
+#ifdef HIDE
 //  qDebug() << tbox->get_grid_position();
 
   xy4 xy = tbox->get_image_ground_location_for_tierbox_center();
@@ -1581,7 +1746,7 @@ void XCSD_Image::init_local_histogram_vector(QVector<Local_Histogram_Data>& resu
 
 //  tierbox_to_qimage(gtb, ti, ienv, &data_index, &data_start, &mchi, info_folder);
 }
-
+#endif // HIDE
 
 u4 XCSD_Image::data_tierbox_to_sdi_pixel_map(u4 tierbox_index,
   std::map<s1, std::pair<u2, std::vector<n8>>>& result)
