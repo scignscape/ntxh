@@ -380,6 +380,16 @@ QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(
 {
  Stat_Test_Image stat_image(file_path);
 
+ if(xcsd)
+ {
+  xcsd->save_foreground_distance_channel_to_red_black_image(stat_image.file_path_with_presuffix("fg"));
+  xcsd->save_foreground_distance_channel_to_red_white_image(stat_image.file_path_with_presuffix("fgw"));
+
+  xcsd->save_background_distance_channel_to_blue_black_image(stat_image.file_path_with_presuffix("bg"));
+  xcsd->save_background_distance_channel_to_blue_white_image(stat_image.file_path_with_presuffix("bgw"));
+ }
+
+
  static u1 corner_weights[3][3]
  {
   {3, 1, 1},

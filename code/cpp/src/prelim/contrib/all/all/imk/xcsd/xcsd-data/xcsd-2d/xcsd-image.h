@@ -47,10 +47,17 @@ class XCSD_Image
 
   Nothing_Set = 0,  RGB24_Set = 1,
   RGBA32_Set = 2, Non_Alpha_4th_Set = 4,
-  RGB555_Set = 8, Channel_7_Set = 16,
-  Channel_8_Set = 32,
-  Channels_78_Set = Channel_7_Set | Channel_8_Set
+  RGB555_Set = 8,
+  Channel_5_Set = 16,
+  Channel_6_Set = 32,
+  Channels_56_Set = Channel_5_Set | Channel_6_Set,
+  Channels_56_Set_Jointly = 64,
 
+  Channels_78_Set_FB = 128,
+  Channel_7_Set = 256,
+  Channel_8_Set = 1024,
+  Channels_78_Set = Channel_7_Set | Channel_8_Set,
+  Channels_78_Set_Jointly = 2048,
  };
 
  ENUM_FLAGS_OP_MACROS(Set_Channels_Info)
@@ -144,6 +151,7 @@ public:
  enum Save_Mode : u1 {
    Save_QRgb, Save_Palette, Save_FB, Save_FG, Save_BG,
 
+   Fade_To_White = 32,
    Tier_Blur_3 = 64, Tier_Blur_9 = 128, Tier_Blur_27 = 192
  };
 
@@ -249,6 +257,8 @@ public:
  static prr1 rgb555_to_prr(u2 rgb555);
  static prr1 rgb_to_prr(u4 rgb);
  static prr1 qcolor_to_prr(const QColor& clr);
+ static u2 qcolor_to_rgb555(const QColor& clr);
+ static u2 rgb_to_rgb555(u4 rgb);
 
  static prr1 rgb555_888_color_distance(u2 rgb555, u4 rgb);
 
@@ -261,6 +271,25 @@ public:
 
  void save_fb_gradient_trimap(fb2 poles, QString file_path,
    QString folder);
+
+ void set_fb_gradient_trimap_to_channels(fb2 poles);
+ void check_set_fb_gradient_trimap_to_channels();
+
+ void save_channel_to_red_black_image(u1 channel_number, QString file_path);
+ void save_channel_to_red_white_image(u1 channel_number, QString file_path);
+
+ void save_channel_to_blue_black_image(u1 channel_number, QString file_path);
+ void save_channel_to_blue_white_image(u1 channel_number, QString file_path);
+
+ void save_foreground_distance_channel_to_red_black_image(QString file_path);
+
+ void save_foreground_distance_channel_to_red_white_image(QString file_path);
+
+ void save_background_distance_channel_to_blue_black_image(QString file_path);
+
+ void save_background_distance_channel_to_blue_white_image(QString file_path);
+
+
 
  XCSD_TierBox* get_tierbox_from_grid_tierbox(const XCSD_Image_Geometry::Grid_TierBox& gtb);
 };

@@ -980,14 +980,26 @@ void XCSD_Image::save_full_tier_image(QString path,
  }
 }
 
-void XCSD_Image::set_individual_pixel_local_histogram_channels(n8& pixel)
+u2 XCSD_Image::qcolor_to_rgb555(const QColor& clr)
 {
- u1 red = (u1)(pixel & 255), green = (u1)((pixel >> 8) & 255),
-   blue = (u1)((pixel >> 16) & 255);
+ u4 rgb = clr.red() + (clr.green() << 8) + (clr.blue() << 16);
+ return rgb_to_rgb555(rgb);
+}
+
+u2 XCSD_Image::rgb_to_rgb555(u4 rgb)
+{
+ u1 red = (u1)(rgb & 255), green = (u1)((rgb >> 8) & 255),
+   blue = (u1)((rgb >> 16) & 255);
  red >>= 3;
  green >>= 3;
  blue >>= 3;
- u2 rgb555 = ((u2) red) | (((u2) green) << 5) | (((u2) blue) << 10);
+ return ((u2) red) | (((u2) green) << 5) | (((u2) blue) << 10);
+}
+
+
+void XCSD_Image::set_individual_pixel_local_histogram_channels(n8& pixel)
+{
+ u2 rgb555 = rgb_to_rgb555(pixel);
 
  static u1 temp = 0;
 // if(temp < 55)
@@ -1339,18 +1351,10 @@ fb1 XCSD_Image::collapse_fb_distances(const prr1& dist1, const prr1& dist2)
 }
 
 
-void XCSD_Image::save_fb_gradient_trimap(fb2 poles, QString file_path, QString folder)
+void XCSD_Image::set_fb_gradient_trimap_to_channels(fb2 poles)
 {
- //? calculate_pixel_averages();
-
-// n8 sq = rgb555_color_distance_expanded(poles._to<clrs2>()).inner_sum_of_squares();
-// r8 distance = sqrt(sq);
-
  n8* pixel = data_.get_pixel_data_start();
  u4 count = 0, sz = data_.get_pixel_data_length();
-
-// u2 tierc = 0;
-// u2 tier = 0;
 
  while(count++ < sz)
  {
@@ -1360,35 +1364,38 @@ void XCSD_Image::save_fb_gradient_trimap(fb2 poles, QString file_path, QString f
 
   fb1 fb = collapse_fb_distances(dist1, dist2);
 
-//  u1 fg = (tier % 4) * 50 + 62;
-
-
-//  u1 bg = 0;
-
   n8 p = (*pixel);
-
-//  *pixel = 0;
-
-//  *pixel = fg;
 
   (*pixel) |= (((n8) fb.fg) << 48);
   (*pixel) |= (((n8) fb.bg) << 56);
 
-    //pixel & 255, (pixel >> 8) & 255, (pixel >> 16) & 255
-
   ++pixel;
-
-//  if(tierc == 728)
-//  {
-//   ++tier;
-//   tierc = 0;
-//  }
-//  else
-//   ++tierc;
-
  }
-
  calculate_pixel_averages_1byte(7, 8);
+}
+
+
+void XCSD_Image::check_set_fb_gradient_trimap_to_channels()
+{
+ if( (set_channels_info_ & Set_Channels_Info::Channels_78_Set_FB) )
+   return;
+
+ fb2 poles = {qcolor_to_rgb555(foreground_pole_), qcolor_to_rgb555(background_pole_)};
+
+ set_fb_gradient_trimap_to_channels(poles);
+  // set_fb_gradient_trimap_to_channels(poles);
+}
+
+
+void XCSD_Image::save_fb_gradient_trimap(fb2 poles, QString file_path, QString folder)
+{
+ //? calculate_pixel_averages();
+
+// n8 sq = rgb555_color_distance_expanded(poles._to<clrs2>()).inner_sum_of_squares();
+// r8 distance = sqrt(sq);
+
+ if( (set_channels_info_ & Set_Channels_Info::Channels_78_Set_FB) == 0 )
+   set_fb_gradient_trimap_to_channels(poles);
 
 
  //QImage image;
@@ -1414,6 +1421,52 @@ void XCSD_Image::save_fb_gradient_trimap(fb2 poles, QString file_path, QString f
 
  //data_.start();
 
+}
+
+
+void XCSD_Image::save_channel_to_red_black_image(u1 channel_number, QString file_path)
+{
+}
+
+void XCSD_Image::save_channel_to_red_white_image(u1 channel_number, QString file_path)
+{
+
+}
+
+void XCSD_Image::save_channel_to_blue_black_image(u1 channel_number, QString file_path)
+{
+
+}
+
+void XCSD_Image::save_channel_to_blue_white_image(u1 channel_number, QString file_path)
+{
+
+}
+
+void XCSD_Image::save_foreground_distance_channel_to_red_black_image(QString file_path)
+{
+ save_full_tier_image(file_path, Save_FG);
+
+//? save_channel_to_red_black_image(7, file_path);
+}
+
+void XCSD_Image::save_foreground_distance_channel_to_red_white_image(QString file_path)
+{
+ save_full_tier_image(file_path, Save_FG | Fade_To_White);
+//? save_channel_to_red_white_image(7, file_path);
+}
+
+void XCSD_Image::save_background_distance_channel_to_blue_black_image(QString file_path)
+{
+ save_full_tier_image(file_path, Save_BG);
+
+//? save_channel_to_blue_black_image(8, file_path);
+}
+
+void XCSD_Image::save_background_distance_channel_to_blue_white_image(QString file_path)
+{
+ save_full_tier_image(file_path, Save_BG | Fade_To_White);
+//? save_channel_to_blue_white_image(8, file_path);
 }
 
 
@@ -1992,18 +2045,25 @@ QColor XCSD_Image::pixel_number_to_qcolor(n8 pixel)
    255 - ((pixel >> 24) & 255));
 }
 
+//Fade_To_White
 QColor XCSD_Image::pixel_number_fb_to_qcolor(n8 pixel, Save_Mode save_mode)
 {
+ u1 b_distance = ((pixel >> 56) & 255);
+ u1 f_distance = ((pixel >> 48) & 255);
+
  switch (save_mode)
  {
  case Save_FB:
-  return QColor((pixel >> 48) & 255, 0,
-    ((pixel >> 56) & 255));
+  return QColor(f_distance, 0, b_distance);
  case Save_BG:
-  return QColor(0, 0,
-    ((pixel >> 56) & 255));
+  return QColor(0, 0, b_distance);
  case Save_FG:
-  return QColor((pixel >> 48) & 255, 0, 0);
+  return QColor(f_distance, 0, 0);
+
+ case Save_BG | Fade_To_White:
+  return QColor(255 - b_distance, 255 - b_distance, 255);
+ case Save_FG | Fade_To_White:
+  return QColor(255, 255 - f_distance, 255 - f_distance);
 
  default: return QColor();
  }
@@ -2035,10 +2095,11 @@ QRgb XCSD_Image::pixel_number_fb_to_qrgb(n8 pixel, Save_Mode save_mode)
  return pixel_number_fb_to_qcolor(pixel, save_mode).rgb();
 }
 
- QRgb XCSD_Image::pixel_number_palette_to_qrgb(n8 pixel)
- {
-  return pixel_number_palette_to_qcolor(pixel).rgb();
- }
+
+QRgb XCSD_Image::pixel_number_palette_to_qrgb(n8 pixel)
+{
+ return pixel_number_palette_to_qcolor(pixel).rgb();
+}
 
 
 SDI_Position XCSD_Image::get_sdi_at_ground_position(u2 x, u2 y)
