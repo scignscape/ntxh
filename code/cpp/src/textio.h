@@ -263,6 +263,17 @@ inline QString copy_binary_file_to_folder(QString path, QString folder)
  return {};
 }
 
+inline QString copy_binary_file(QString old_path, QString new_path)
+{
+ if( QFile::exists(new_path) )
+   QFile::remove(new_path);
+
+ if( QFile::copy(old_path, new_path) )
+   return new_path;
+
+ return {};
+}
+
 inline QString copy_file_to_folder_with_rename(QString path, QString folder, QString name)
 {
  QFileInfo qfi(path);

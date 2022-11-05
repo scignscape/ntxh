@@ -299,6 +299,7 @@ void DHAX_GUI_Environment::init_main_window_signal_generator()
  minimal_self_connect (_with_callstamp_) (test_pixel_local_aggregate_color_distance);
  minimal_self_connect (_with_callstamp_) (show_pixel_local_aggregate_color_distance);
  minimal_self_connect (_with_callstamp_) (toroid_run_stats);
+ minimal_self_connect (_with_callstamp_) (combined_test_stats);
 
  _self_connect_(main_window_->signal_generator() ,quit_requested)
    to_lambda[this]()

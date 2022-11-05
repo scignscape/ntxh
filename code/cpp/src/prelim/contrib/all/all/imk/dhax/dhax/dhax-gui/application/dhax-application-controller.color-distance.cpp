@@ -18,6 +18,7 @@
 
 #include "stats/stat-test-image.h"
 
+#include "textio.h"
 
 #include <QVector2D>
 
@@ -331,27 +332,77 @@ u1 hsv_color_distance(QRgb center_pixel, QRgb pixel)
 //QColor normalize_rgb
 
 
-void DHAX_Application_Controller::toroid_run_stats()
+void DHAX_Application_Controller::combined_test_stats()
 {
- DHAX_Stat_Assessment::run_demo_test(DHAX_STAT_FOLDER "/test", "i1", "png");
+ QString folder = DHAX_STAT_FOLDER "/test-combined";
+ QString path = get_test_file_from_folder(folder);
+
+ test_pixel_local_aggregate_color_distance(path, folder);
+
+ QFileInfo qfi(path);
+ toroid_run_stats(folder, qfi.baseName(), qfi.suffix());
 }
 
 
-QString DHAX_Application_Controller::show_pixel_local_aggregate_color_distance()
+void DHAX_Application_Controller::toroid_run_stats()
+{
+ toroid_run_stats(DHAX_STAT_FOLDER "/test", "i1", "png");
+}
+
+
+void DHAX_Application_Controller::toroid_run_stats(QString folder,
+  QString file_name, QString extension)
+{
+ qDebug() << "folder = " << folder << "file_path = " << file_name <<
+             "extension = " << extension;
+ DHAX_Stat_Assessment::run_demo_test(folder, file_name, extension);
+}
+
+
+void DHAX_Application_Controller::show_pixel_local_aggregate_color_distance()
 {
  Image_Document_Controller* idc = main_window_controller_->image_document_controller();
  if(!idc)
-   return {};
+   return;
 
  // QString fp = idc->current_file_path();
 
- return pixel_local_aggregate_color_distance(idc->current_file_path());
+ pixel_local_aggregate_color_distance(idc->current_file_path());
 }
 
 
-QString DHAX_Application_Controller::test_pixel_local_aggregate_color_distance()
+void DHAX_Application_Controller::test_pixel_local_aggregate_color_distance()
 {
- QDir qd(DHAX_STAT_FOLDER "/test-dist");
+ test_pixel_local_aggregate_color_distance(DHAX_STAT_FOLDER "/test-dist");
+}
+
+void DHAX_Application_Controller::test_pixel_local_aggregate_color_distance(QString folder)
+{
+ QString file_path = get_test_file_from_folder(folder);
+ test_pixel_local_aggregate_color_distance(file_path, folder);
+}
+
+void DHAX_Application_Controller::test_pixel_local_aggregate_color_distance(QString file_path, QString folder)
+{
+ qDebug() << "Calculating color distance for " << file_path;
+
+ XCSD_Image* xcsd = new XCSD_Image;
+ xcsd->load_image_all(file_path);
+
+ xcsd->autoset_fb_poles();
+
+ xcsd->check_set_fb_gradient_trimap_to_channels();
+
+ qDebug() << "Autoset background pole: " << xcsd->background_pole() <<
+             " and foreground pole: " << xcsd->foreground_pole();
+
+
+ pixel_local_aggregate_color_distance(file_path, xcsd);
+}
+
+QString DHAX_Application_Controller::get_test_file_from_folder(QString folder)
+{
+ QDir qd(folder);
  QStringList images = qd.entryList(QDir::Files | QDir::Readable);
 
  qDebug() << images;
@@ -362,26 +413,11 @@ QString DHAX_Application_Controller::test_pixel_local_aggregate_color_distance()
   return s1.length() < s2.length();
  });
 
- likely_file = qd.absoluteFilePath(likely_file);
-
- qDebug() << "Calculating color distance for " << likely_file;
-
- XCSD_Image* xcsd = new XCSD_Image;
- xcsd->load_image_all(likely_file);
-
- xcsd->autoset_fb_poles();
-
- xcsd->check_set_fb_gradient_trimap_to_channels();
-
- qDebug() << "Autoset background pole: " << xcsd->background_pole() <<
-             " and foreground pole: " << xcsd->foreground_pole();
-
-
- return pixel_local_aggregate_color_distance(likely_file, xcsd);
+ return qd.absoluteFilePath(likely_file);
 }
 
 
-QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(
+void DHAX_Application_Controller::pixel_local_aggregate_color_distance(
   QString file_path, XCSD_Image* xcsd)
 {
  Stat_Test_Image stat_image(file_path);
@@ -393,6 +429,8 @@ QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(
 
   xcsd->save_background_distance_channel_to_blue_black_image(stat_image.file_path_with_presuffix("bg"));
   xcsd->save_background_distance_channel_to_blue_white_image(stat_image.file_path_with_presuffix("bgw"));
+
+  xcsd->save_fb_one_channel_image(stat_image.file_path_with_presuffix("fb-1c"));
  }
 
 
@@ -430,11 +468,11 @@ QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(
 
  QImage image(file_path);
 
- QString result_3 = stat_image.file_path_with_presuffix("gray-3-dist");
- QString result_5 = stat_image.file_path_with_presuffix("gray-5-dist");
- QString result = stat_image.file_path_with_presuffix("gray-7-dist");
+ QString result_3 = stat_image.file_path_with_presuffix("1c-3-dist");
+ QString result_5 = stat_image.file_path_with_presuffix("1c-5-dist");
+ QString result_7 = stat_image.file_path_with_presuffix("1c-7-dist");
 
- QString result_7rgb = stat_image.file_path_with_presuffix("gray-7rgb-dist");
+ QString result_7rgb = stat_image.file_path_with_presuffix("1c-7rgb-dist");
 
  QString result_8b = stat_image.file_path_with_presuffix("8b");
  QString result_8b_125_cyan = stat_image.file_path_with_presuffix("8b-125-cyan");
@@ -697,9 +735,9 @@ QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(
 // i8b.convertToFormat()
 
 
- qDebug() << "saving " << result << " ...";
+ qDebug() << "saving " << result_7 << " ...";
 
- gray_7_image.save(result);
+ gray_7_image.save(result_7);
  gray_5_image.save(result_5);
  gray_3_image.save(result_3);
  gray_7rgb_image.save(result_7rgb);
@@ -711,7 +749,12 @@ QString DHAX_Application_Controller::pixel_local_aggregate_color_distance(
 
  qDebug() << "ok";
 
- return result;
+
+  //result_7rgb
+
+ QString result_1c = stat_image.file_path_with_presuffix("1c");
+ KA::TextIO::copy_binary_file(result_7rgb, result_1c);
+ KA::TextIO::copy_binary_file(file_path, stat_image.file_path_with_name_addon("-full"));
 }
 
 

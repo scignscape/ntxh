@@ -24,6 +24,7 @@ public:
  ACCESSORS(QString ,file_path)
 
  QString file_path_with_presuffix(QString pres);
+ QString file_path_with_name_addon(QString addon);
 
 
 };

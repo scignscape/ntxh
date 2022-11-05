@@ -131,8 +131,6 @@ XCSD_Local_Histogram_Dialog::XCSD_Local_Histogram_Dialog(QWidget* parent,
 
    QColor color = XCSD_Image::rgb555_to_qcolor(pr.first);
 
-
-
    u2 height = (((r8) pr.second) / largest_bin) * (max_bin_height_ - min_bin_height_);
 
 //    qDebug() << "v = " << v << ", height = " << height;
@@ -148,20 +146,11 @@ XCSD_Local_Histogram_Dialog::XCSD_Local_Histogram_Dialog(QWidget* parent,
 
    ri->setZValue(1);
 
-   if(color == ref_color)
-   {
-    QPen pen;
-    pen.setWidth(3);
-    graphics_scene_->addEllipse(rect.left() - 2, rect.top() + 6,
-                                bin_width_ + 4, 5,
-                                pen);
-   }
-
-
-//?   graphics_scene_->addItem(ri); //Rect(rect)->setBrush(qbr);
-
    QFont font;
    font.setPointSize(7);
+
+   u1 text_vertical_offset = 16;
+
    if(hue < 10)
      graphics_scene_->addText(QString::number(hue), font)->setPos(rect.topLeft() - QPoint{1, 18});
      //painter.drawText(rect.bottomLeft() - QPoint{-2, 2}, QString::number(hue));
@@ -170,6 +159,9 @@ XCSD_Local_Histogram_Dialog::XCSD_Local_Histogram_Dialog(QWidget* parent,
     graphics_scene_->addText(QString::number(hue % 10), font)->setPos(rect.topLeft() - QPoint{1, 18});
     graphics_scene_->addText(QString::number((hue / 10) % 10),
       font)->setPos(rect.topLeft() - QPoint{1, 26});
+
+
+    text_vertical_offset += 8;
 
 //    painter.drawText(rect.bottomLeft() - QPoint{-2, 2}, QString::number(hue % 10));
 //    painter.drawText(rect.bottomLeft() - QPoint{-2, 10},
@@ -182,7 +174,33 @@ XCSD_Local_Histogram_Dialog::XCSD_Local_Histogram_Dialog(QWidget* parent,
       font)->setPos(rect.topLeft() - QPoint{1, 26});
     graphics_scene_->addText(QString::number((hue / 100) % 10),
       font)->setPos(rect.topLeft() - QPoint{1, 34});
+
+    text_vertical_offset += 16;
    }
+
+   if(color == ref_color)
+   {
+    QPen pen;
+    pen.setColor(Qt::darkRed);
+    pen.setWidth(1);
+    pen.setStyle(Qt::PenStyle::DashLine);
+    QPoint l1 (rect.left() - 1, rect.top() - text_vertical_offset);
+    QPoint l2 = l1 + QPoint(bin_width_ + 4, 0);
+    QPoint l3 = l1 + QPoint(0, 22);
+    QPoint l4 = l2 + QPoint(0, 22);
+    graphics_scene_->addLine(l1.x() - 4, l1.y(), l2.x() + 4, l2.y(), pen);
+
+    pen.setColor(color);
+    pen.setWidth(2);
+    pen.setStyle(Qt::PenStyle::DotLine);
+
+    graphics_scene_->addLine(l1.x(), l1.y() + 4, l3.x(), l3.y(), pen);
+    graphics_scene_->addLine(l2.x(), l2.y() + 4, l4.x(), l4.y(), pen);
+
+    graphics_scene_->addText("ref", font)->setPos(l1 - QPoint{3, 17});
+   }
+
+
    h += 10;
   }
  }

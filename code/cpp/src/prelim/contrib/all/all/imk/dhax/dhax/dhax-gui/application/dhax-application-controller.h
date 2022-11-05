@@ -135,10 +135,18 @@ public:
 
  DHAX_Forge_Controller* check_init_forge_controller();
 
- QString pixel_local_aggregate_color_distance(QString file_path, XCSD_Image* xcsd = nullptr);
- QString test_pixel_local_aggregate_color_distance();
- QString show_pixel_local_aggregate_color_distance();
+ void pixel_local_aggregate_color_distance(QString file_path, XCSD_Image* xcsd = nullptr);
+ void test_pixel_local_aggregate_color_distance();
+ void show_pixel_local_aggregate_color_distance();
  void toroid_run_stats();
+
+ QString get_test_file_from_folder(QString folder);
+
+ void test_pixel_local_aggregate_color_distance(QString folder);
+ void test_pixel_local_aggregate_color_distance(QString file_path, QString folder);
+
+ void toroid_run_stats(QString folder, QString file_name, QString extension);
+
 
  void change_image_margins(QVector<u1> margins, u1 cim);
 
@@ -169,6 +177,8 @@ public:
  void play_video(DHAX_Video_Player_Dialog::Annotation_Settings s, QString file_path, QString annotations_file_path = {});
 
  void calculate_fb_gaussian();
+
+ void combined_test_stats();
 
  void launch_edge_detection_dialog();
 

@@ -25,3 +25,10 @@ QString Stat_Test_Image::file_path_with_presuffix(QString pres)
    qfi.completeBaseName() + "." + pres + "." + qfi.suffix();
 }
 
+QString Stat_Test_Image::file_path_with_name_addon(QString addon)
+{
+ QFileInfo qfi(file_path_);
+
+ return qfi.absolutePath() + "/" +
+   qfi.completeBaseName() + addon + "." + qfi.suffix();
+}

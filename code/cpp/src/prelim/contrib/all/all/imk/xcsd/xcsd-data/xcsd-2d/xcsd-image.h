@@ -150,6 +150,7 @@ public:
 
  enum Save_Mode : u1 {
    Save_QRgb, Save_Palette, Save_FB, Save_FG, Save_BG,
+   Save_FB_One_Channel,
 
    Fade_To_White = 32,
    Tier_Blur_3 = 64, Tier_Blur_9 = 128, Tier_Blur_27 = 192
@@ -292,6 +293,7 @@ public:
 
  void save_background_distance_channel_to_blue_white_image(QString file_path);
 
+ void save_fb_one_channel_image(QString file_path);
 
 
  XCSD_TierBox* get_tierbox_from_grid_tierbox(const XCSD_Image_Geometry::Grid_TierBox& gtb);

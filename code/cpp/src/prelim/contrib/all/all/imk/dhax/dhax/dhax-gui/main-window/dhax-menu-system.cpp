@@ -208,6 +208,11 @@ void DHAX_Menu_System::init_menus()
   sg->emit_test_pixel_local_aggregate_color_distance_requested();
  };
 
+ toroid_menu.add_action("Combined test stats (fb/boundary)")
+   << [sg]
+ {
+  sg->emit_combined_test_stats_requested();
+ };
 
 
  DHAX_Menu& tools = *menus_->menu("Tools");

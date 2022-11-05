@@ -89,6 +89,10 @@ void DHAX_Application_Receiver::handle_toroid_run_stats(call_Stamp_u2)
  application_controller_->toroid_run_stats(/*callstamp*/);
 }
 
+void DHAX_Application_Receiver::handle_combined_test_stats(call_Stamp_u2)
+{
+ application_controller_->combined_test_stats(/*callstamp*/);
+}
 
 
 void DHAX_Application_Receiver::handle_save_notation(bool with_comment)

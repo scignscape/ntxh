@@ -1503,6 +1503,11 @@ void XCSD_Image::save_background_distance_channel_to_blue_white_image(QString fi
 //? save_channel_to_blue_white_image(8, file_path);
 }
 
+void XCSD_Image::save_fb_one_channel_image(QString file_path)
+{
+ save_full_tier_image(file_path, Save_FB_One_Channel);
+}
+
 
 void XCSD_Image::calculate_tierbox_histogram(XCSD_TierBox* tbox, Local_Histogram_Data& result)
 {
@@ -2093,6 +2098,12 @@ QColor XCSD_Image::pixel_number_fb_to_qcolor(n8 pixel, Save_Mode save_mode)
   return QColor(0, 0, b_distance);
  case Save_FG:
   return QColor(f_distance, 0, 0);
+
+ case Save_FB_One_Channel:
+  {
+   u1 avg = (u1) (((u2)f_distance + 255 - b_distance) / 2);
+   return QColor(avg, avg, avg);
+  }
 
  case Save_BG | Fade_To_White:
   return QColor(255 - b_distance, 255 - b_distance, 255);
