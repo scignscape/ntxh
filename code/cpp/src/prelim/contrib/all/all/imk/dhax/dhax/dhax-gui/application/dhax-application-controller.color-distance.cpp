@@ -752,7 +752,7 @@ void DHAX_Application_Controller::pixel_local_aggregate_color_distance(
 
   //result_7rgb
 
- QString result_1c = stat_image.file_path_with_presuffix("1c");
+ QString result_1c = stat_image.file_path_with_name_addon("-1c");
  KA::TextIO::copy_binary_file(result_7rgb, result_1c);
  KA::TextIO::copy_binary_file(file_path, stat_image.file_path_with_name_addon("-full"));
 }
