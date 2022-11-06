@@ -34,7 +34,8 @@ class DHAX_Stat_Assessment
  QString full_image_path_;
  QString gray_image_path_;
  QString one_channel_image_path_;
- QString one_channel_display_image_path_;
+ QString one_channel_dist_image_path_;
+ QString one_channel_dist_display_image_path_;
 
  QString algorithm_name_;
 
@@ -54,6 +55,8 @@ class DHAX_Stat_Assessment
  cv::Mat gray_image_;
  cv::Mat one_channel_image_;
  cv::Mat one_channel_display_image_;
+ cv::Mat one_channel_dist_image_;
+ cv::Mat one_channel_dist_display_image_;
 
 #endif
 
@@ -66,7 +69,8 @@ public:
  ACCESSORS(QString ,full_image_path)
  ACCESSORS(QString ,gray_image_path)
  ACCESSORS(QString ,one_channel_image_path)
- ACCESSORS(QString ,one_channel_display_image_path)
+ ACCESSORS(QString ,one_channel_dist_display_image_path)
+ ACCESSORS(QString ,one_channel_dist_image_path)
 
  ACCESSORS(QString ,algorithm_name)
 
@@ -77,15 +81,35 @@ public:
  ACCESSORS(cv::Mat ,gray_image)
  ACCESSORS(cv::Mat ,one_channel_image)
  ACCESSORS(cv::Mat ,one_channel_display_image)
+ ACCESSORS(cv::Mat ,one_channel_dist_image)
+ ACCESSORS(cv::Mat ,one_channel_dist_display_image)
 
 
  QString get_full_1c_out_path(QString name_extra);
- QString get_full_out_path(QString name_extra);
  QString get_1c_out_path(QString name_extra);
+ QString get_full_out_path(QString name_extra);
+ QString get_dist_1c_out_path(QString name_extra);
+ QString get_full_dist_1c_out_path(QString name_extra);
+
+
+ QString get_full_1c_oa_out_path(QString name_extra);
+ QString get_full_oa_out_path(QString name_extra);
+ QString get_dist_1c_oa_out_path(QString name_extra);
+
 
  QString get_full_out_path()
  {
   return get_full_out_path(algorithm_name_);
+ }
+
+ QString get_dist_1c_out_path()
+ {
+  return get_dist_1c_out_path(algorithm_name_);
+ }
+
+ QString get_full_1c_out_path()
+ {
+  return get_full_1c_out_path(algorithm_name_);
  }
 
  QString get_1c_out_path()
@@ -93,9 +117,25 @@ public:
   return get_1c_out_path(algorithm_name_);
  }
 
- QString get_full_1c_out_path()
+ QString get_full_dist_1c_out_path()
  {
-  return get_full_1c_out_path(algorithm_name_);
+  return get_full_dist_1c_out_path(algorithm_name_);
+ }
+
+
+ QString get_full_oa_out_path()
+ {
+  return get_full_oa_out_path(algorithm_name_);
+ }
+
+ QString get_dist_1c_oa_out_path()
+ {
+  return get_dist_1c_oa_out_path(algorithm_name_);
+ }
+
+ QString get_full_1c_oa_out_path()
+ {
+  return get_full_1c_oa_out_path(algorithm_name_);
  }
 
 

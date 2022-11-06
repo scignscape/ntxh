@@ -28,7 +28,12 @@ void DHAX_Stat_Assessment::load_images()
  one_channel_image_ = cv::imread(one_channel_image_path_.toStdString(),
    cv::IMREAD_GRAYSCALE);
 
- one_channel_display_image_ = cv::imread(one_channel_display_image_path_.toStdString());
+ one_channel_display_image_ = cv::imread(one_channel_image_path_.toStdString());
+
+ one_channel_dist_image_ = cv::imread(one_channel_dist_image_path_.toStdString(),
+   cv::IMREAD_GRAYSCALE);
+
+ one_channel_dist_display_image_ = cv::imread(one_channel_dist_display_image_path_.toStdString());
 
 
 #else
@@ -57,15 +62,46 @@ QString DHAX_Stat_Assessment::get_full_1c_out_path(QString name_extra)
  return result.replace("-full", "-full-1c-" + name_extra);
 }
 
+QString DHAX_Stat_Assessment::get_1c_out_path(QString name_extra)
+{
+ QString result = one_channel_image_path_;
+ return result.replace("-1c", "-1c-" + name_extra);
+}
+
 QString DHAX_Stat_Assessment::get_full_out_path(QString name_extra)
 {
  QString result = full_image_path_;
  return result.replace("-full", "-full-" + name_extra);
 }
 
-QString DHAX_Stat_Assessment::get_1c_out_path(QString name_extra)
+QString DHAX_Stat_Assessment::get_dist_1c_out_path(QString name_extra)
 {
- QString result = one_channel_image_path_;
+ QString result = one_channel_dist_image_path_;
  return result.replace("-1c", "-1c-" + name_extra);
+}
+
+QString DHAX_Stat_Assessment::get_full_dist_1c_out_path(QString name_extra)
+{
+ QString result = full_image_path_;
+ return result.replace("-full", "-full-1cd-" + name_extra);
+}
+
+
+QString DHAX_Stat_Assessment::get_full_1c_oa_out_path(QString name_extra)
+{
+ QString result = full_image_path_;
+ return result.replace("-full", "-full-1c-oa-" + name_extra);
+}
+
+QString DHAX_Stat_Assessment::get_full_oa_out_path(QString name_extra)
+{
+ QString result = full_image_path_;
+ return result.replace("-full", "-full-oa-" + name_extra);
+}
+
+QString DHAX_Stat_Assessment::get_dist_1c_oa_out_path(QString name_extra)
+{
+ QString result = one_channel_dist_image_path_;
+ return result.replace("-1c", "-1c-oa-" + name_extra);
 }
 

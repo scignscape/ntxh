@@ -51,6 +51,8 @@ public:
  void emit_show_pixel_local_aggregate_color_distance_requested();
  void emit_toroid_run_stats_requested();
  void emit_combined_test_stats_requested();
+ void emit_register_test_image_requested(bool then_run);
+
 
  void emit_view_contours_requested();
  void emit_view_3d_requested();
@@ -97,6 +99,9 @@ Q_SIGNALS:
  void show_pixel_local_aggregate_color_distance_requested(call_Stamp_u2);
  void toroid_run_stats_requested(call_Stamp_u2);
  void combined_test_stats_requested(call_Stamp_u2);
+
+ void register_test_image_requested(call_Stamp_u2, bool then_run);
+
 
 
 #ifdef USE_IFC

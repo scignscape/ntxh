@@ -24,6 +24,8 @@
 
 #include <QtMath>
 
+#include <QFileDialog>
+#include <QDirIterator>
 
 u1 angle_distance(pr2 angles)
 {
@@ -332,14 +334,73 @@ u1 hsv_color_distance(QRgb center_pixel, QRgb pixel)
 //QColor normalize_rgb
 
 
+void DHAX_Application_Controller::register_test_image(bool then_run)
+{
+ QString file;
+
+ {
+  file = QFileDialog::getOpenFileName(nullptr,
+   "Select File", DHAX_STAT_FOLDER "/test-combined");
+
+  if(file.isEmpty())
+    return;
+ }
+
+ QString folder = DHAX_STAT_FOLDER "/test-combined";
+ QDir qd(folder);
+
+ QDirIterator it(folder, QDir::Filter::Dirs | QDir::Filter::NoDotAndDotDot);
+
+ u2 count = 0;
+ while(it.hasNext())
+ {
+  it.next();
+  u2 name = it.fileName().toInt();
+  if(count < name)
+    count = name;
+ }
+
+ qd.mkdir(QString::number(count + 1));
+
+ QString new_folder = qd.absoluteFilePath(QString::number(count + 1));
+
+ QString new_file = KA::TextIO::copy_binary_file_to_folder(file, new_folder);
+
+ if(then_run)
+   run_combined_test_stats(new_folder, new_file);
+}
+
 void DHAX_Application_Controller::combined_test_stats()
 {
- QString folder = DHAX_STAT_FOLDER "/test-combined";
+ QString folder = QFileDialog::getExistingDirectory(nullptr,
+   "Select Folder (should have one test image)", DHAX_STAT_FOLDER "/test-combined");
+
+ if(!folder.isEmpty())
+   run_combined_test_stats(folder);
+}
+
+void DHAX_Application_Controller::run_combined_test_stats(QString folder)
+{
  QString path = get_test_file_from_folder(folder);
+ run_combined_test_stats(folder, path);
+}
 
- test_pixel_local_aggregate_color_distance(path, folder);
+void DHAX_Application_Controller::run_combined_test_stats(QString folder, QString file_path)
+{
+//? QString folder = DHAX_STAT_FOLDER "/test-combined";
 
- QFileInfo qfi(path);
+ QDir qd(folder);
+ if(!qd.exists("out"))
+   qd.mkdir("out");
+
+ qd.cd("out");
+
+ folder = qd.absolutePath();
+ file_path = KA::TextIO::copy_binary_file_to_folder(file_path, folder);
+
+ test_pixel_local_aggregate_color_distance(file_path, folder);
+
+ QFileInfo qfi(file_path);
  toroid_run_stats(folder, qfi.baseName(), qfi.suffix());
 }
 
@@ -353,7 +414,7 @@ void DHAX_Application_Controller::toroid_run_stats()
 void DHAX_Application_Controller::toroid_run_stats(QString folder,
   QString file_name, QString extension)
 {
- qDebug() << "folder = " << folder << "file_path = " << file_name <<
+ qDebug() << "folder = " << folder << "file_name = " << file_name <<
              "extension = " << extension;
  DHAX_Stat_Assessment::run_demo_test(folder, file_name, extension);
 }
@@ -399,6 +460,7 @@ void DHAX_Application_Controller::test_pixel_local_aggregate_color_distance(QStr
 
  pixel_local_aggregate_color_distance(file_path, xcsd);
 }
+
 
 QString DHAX_Application_Controller::get_test_file_from_folder(QString folder)
 {
@@ -752,8 +814,12 @@ void DHAX_Application_Controller::pixel_local_aggregate_color_distance(
 
   //result_7rgb
 
- QString result_1c = stat_image.file_path_with_name_addon("-1c");
- KA::TextIO::copy_binary_file(result_7rgb, result_1c);
+ QString result_1cd = stat_image.file_path_with_name_addon("-1cd");
+ KA::TextIO::copy_binary_file(result_7rgb, result_1cd);
+
+ QString result_d1c = stat_image.file_path_with_name_addon("-dist-1c");
+ KA::TextIO::copy_binary_file(result_7, result_d1c);
+
  KA::TextIO::copy_binary_file(file_path, stat_image.file_path_with_name_addon("-full"));
 }
 

@@ -208,10 +208,24 @@ void DHAX_Menu_System::init_menus()
   sg->emit_test_pixel_local_aggregate_color_distance_requested();
  };
 
- toroid_menu.add_action("Combined test stats (fb/boundary)")
+ DHAX_Menu* combined_menu = toroid_menu.add_nested_menu("Combined tests (fb/boundary)");
+
+ combined_menu->add_action("Default location ")
    << [sg]
  {
   sg->emit_combined_test_stats_requested();
+ };
+
+ combined_menu->add_action("Register test image")
+   << [sg]
+ {
+  sg->emit_register_test_image_requested(false);
+ };
+
+ combined_menu->add_action("Register, then run")
+   << [sg]
+ {
+  sg->emit_register_test_image_requested(true);
  };
 
 

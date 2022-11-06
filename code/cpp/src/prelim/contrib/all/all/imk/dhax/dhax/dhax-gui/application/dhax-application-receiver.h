@@ -59,6 +59,8 @@ public Q_SLOTS:
  void handle_test_pixel_local_aggregate_color_distance(call_Stamp_u2);
  void handle_toroid_run_stats(call_Stamp_u2);
  void handle_combined_test_stats(call_Stamp_u2);
+ void handle_register_test_image(call_Stamp_u2, bool then_run);
+
 
  void handle_play_video(call_Stamp_u2, DHAX_Video_Player_Dialog::Annotation_Settings);
 

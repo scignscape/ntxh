@@ -91,6 +91,12 @@ void DHAX_Signal_Generator::emit_combined_test_stats_requested()
  Q_EMIT combined_test_stats_requested(++static_count);
 }
 
+void DHAX_Signal_Generator::emit_register_test_image_requested(bool then_run)
+{
+ STATIC_COUNT
+ Q_EMIT register_test_image_requested(++static_count, then_run);
+}
+
 void DHAX_Signal_Generator::emit_toroid_run_stats_requested()
 {
  STATIC_COUNT
