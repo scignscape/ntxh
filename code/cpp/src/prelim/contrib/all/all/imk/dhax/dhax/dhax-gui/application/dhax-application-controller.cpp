@@ -125,10 +125,13 @@ class Special_Input_Dialog : public QInputDialog
  QLineEdit* short_text_input_field_;
  QWidget* input_widget_;
 
+
 public:
+
 
  Special_Input_Dialog(u4* autogen_index,
    QWidget* parent = nullptr, QString* short_text = nullptr);
+
 
  void customMenuRequested(QPoint pos);
 

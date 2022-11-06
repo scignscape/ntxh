@@ -213,7 +213,13 @@ void DHAX_Menu_System::init_menus()
  combined_menu->add_action("Default location ")
    << [sg]
  {
-  sg->emit_combined_test_stats_requested();
+  sg->emit_combined_test_stats_requested(true);
+ };
+
+ combined_menu->add_action("Choose location ")
+   << [sg]
+ {
+  sg->emit_combined_test_stats_requested(false);
  };
 
  combined_menu->add_action("Register test image")

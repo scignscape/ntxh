@@ -371,6 +371,7 @@ void DHAX_Application_Controller::register_test_image(bool then_run)
    run_combined_test_stats(new_folder, new_file);
 }
 
+
 void DHAX_Application_Controller::combined_test_stats()
 {
  QString folder = QFileDialog::getExistingDirectory(nullptr,
@@ -379,6 +380,13 @@ void DHAX_Application_Controller::combined_test_stats()
  if(!folder.isEmpty())
    run_combined_test_stats(folder);
 }
+
+
+void DHAX_Application_Controller::run_combined_test_stats()
+{
+ run_combined_test_stats(DHAX_STAT_FOLDER "/test-combined");
+}
+
 
 void DHAX_Application_Controller::run_combined_test_stats(QString folder)
 {
@@ -453,15 +461,8 @@ void DHAX_Application_Controller::test_pixel_local_aggregate_color_distance(QStr
 
  XCSD_Image* xcsd = new XCSD_Image;
 
- //xcsd->load_image_all(file_path, &ntxh_file);
- xcsd->load_image(file_path, &ntxh_file);
-
- qDebug() << "Found NTXH: " << ntxh_file;
-
- Feature_Classifier_Transform fct;
- fct.init_from_ntxh(ntxh_file);
-
- return;
+ xcsd->load_image_all(file_path, &ntxh_file);
+// xcsd->load_image(file_path, &ntxh_file);
 
  xcsd->autoset_fb_poles();
 
@@ -497,6 +498,8 @@ void DHAX_Application_Controller::pixel_local_aggregate_color_distance(
 {
  Stat_Test_Image stat_image(file_path);
 
+ Feature_Classifier_Transform* fct = nullptr;
+
  if(xcsd)
  {
   xcsd->save_foreground_distance_channel_to_red_black_image(stat_image.file_path_with_presuffix("fg"));
@@ -506,6 +509,11 @@ void DHAX_Application_Controller::pixel_local_aggregate_color_distance(
   xcsd->save_background_distance_channel_to_blue_white_image(stat_image.file_path_with_presuffix("bgw"));
 
   xcsd->save_fb_one_channel_image(stat_image.file_path_with_presuffix("fb-1c"));
+
+  fct = new Feature_Classifier_Transform;
+  fct->init_from_ntxh(xcsd->ntxh_file());
+
+  qDebug() << "fct n: " << xcsd->ntxh_file();
  }
 
 

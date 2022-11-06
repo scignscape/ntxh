@@ -85,10 +85,10 @@ void DHAX_Signal_Generator::emit_test_pixel_local_aggregate_color_distance_reque
  Q_EMIT test_pixel_local_aggregate_color_distance_requested(++static_count);
 }
 
-void DHAX_Signal_Generator::emit_combined_test_stats_requested()
+void DHAX_Signal_Generator::emit_combined_test_stats_requested(bool use_default_location)
 {
  STATIC_COUNT
- Q_EMIT combined_test_stats_requested(++static_count);
+ Q_EMIT combined_test_stats_requested(++static_count, use_default_location);
 }
 
 void DHAX_Signal_Generator::emit_register_test_image_requested(bool then_run)

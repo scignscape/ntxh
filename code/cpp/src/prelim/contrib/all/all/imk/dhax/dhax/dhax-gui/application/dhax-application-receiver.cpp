@@ -89,9 +89,13 @@ void DHAX_Application_Receiver::handle_toroid_run_stats(call_Stamp_u2)
  application_controller_->toroid_run_stats(/*callstamp*/);
 }
 
-void DHAX_Application_Receiver::handle_combined_test_stats(call_Stamp_u2)
+void DHAX_Application_Receiver::handle_combined_test_stats(call_Stamp_u2, bool use_default_location)
 {
- application_controller_->combined_test_stats(/*callstamp*/);
+ if(use_default_location)
+   application_controller_->run_combined_test_stats(/*callstamp*/);
+
+ else
+   application_controller_->combined_test_stats(/*callstamp*/);
 }
 
 void DHAX_Application_Receiver::handle_register_test_image(call_Stamp_u2, bool then_run)

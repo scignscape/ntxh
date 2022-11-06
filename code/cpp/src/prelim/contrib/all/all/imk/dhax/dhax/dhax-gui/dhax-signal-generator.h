@@ -50,7 +50,7 @@ public:
  void emit_test_pixel_local_aggregate_color_distance_requested();
  void emit_show_pixel_local_aggregate_color_distance_requested();
  void emit_toroid_run_stats_requested();
- void emit_combined_test_stats_requested();
+ void emit_combined_test_stats_requested(bool use_default_location);
  void emit_register_test_image_requested(bool then_run);
 
 
@@ -98,7 +98,7 @@ Q_SIGNALS:
  void test_pixel_local_aggregate_color_distance_requested(call_Stamp_u2);
  void show_pixel_local_aggregate_color_distance_requested(call_Stamp_u2);
  void toroid_run_stats_requested(call_Stamp_u2);
- void combined_test_stats_requested(call_Stamp_u2);
+ void combined_test_stats_requested(call_Stamp_u2, bool use_default_location);
 
  void register_test_image_requested(call_Stamp_u2, bool then_run);
 

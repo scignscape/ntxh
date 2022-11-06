@@ -181,6 +181,7 @@ public:
  void combined_test_stats();
  void register_test_image(bool then_run);
 
+ void run_combined_test_stats();
  void run_combined_test_stats(QString folder);
  void run_combined_test_stats(QString folder, QString file_path);
 
