@@ -299,7 +299,7 @@ public:
 
  void save_fb_one_channel_image(QString file_path);
 
- void find_ntxh_file(QString file_path);
+ void find_ntxh_file(QString file_path, bool maybe_up = true);
 
 
  XCSD_TierBox* get_tierbox_from_grid_tierbox(const XCSD_Image_Geometry::Grid_TierBox& gtb);

@@ -41,14 +41,25 @@ XCSD_Image::XCSD_Image()
 }
 
 
-void XCSD_Image::find_ntxh_file(QString file_path)
+void XCSD_Image::find_ntxh_file(QString file_path, bool maybe_up)
 {
  QFileInfo qfi(file_path + ".ntxh");
+
  if(qfi.exists())
    ntxh_file_ = qfi.absoluteFilePath();
 
- else if(qfi.baseName() != qfi.completeBaseName())
-   find_ntxh_file(qfi.absolutePath() + "/" + qfi.baseName());
+
+ else if(maybe_up)
+ {
+  QDir qd = qfi.absoluteDir();
+  if(qd.cdUp())
+    find_ntxh_file(qd.absoluteFilePath(qfi.completeBaseName()), false);
+ }
+
+ if(ntxh_file_.isEmpty())
+   if(qfi.baseName() != qfi.completeBaseName())
+     find_ntxh_file(qfi.absolutePath() + "/" + qfi.baseName());
+
 }
 
 
