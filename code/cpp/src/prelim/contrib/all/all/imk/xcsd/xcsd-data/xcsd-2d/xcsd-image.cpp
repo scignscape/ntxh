@@ -40,14 +40,32 @@ XCSD_Image::XCSD_Image()
 
 }
 
-void XCSD_Image::load_image(QString path)
+
+void XCSD_Image::find_ntxh_file(QString file_path)
 {
- image_.load(path);
+ QFileInfo qfi(file_path + ".ntxh");
+ if(qfi.exists())
+   ntxh_file_ = qfi.absoluteFilePath();
+
+ else if(qfi.baseName() != qfi.completeBaseName())
+   find_ntxh_file(qfi.absolutePath() + "/" + qfi.baseName());
 }
 
-void XCSD_Image::load_image_all(QString path)
+
+void XCSD_Image::load_image(QString path, QString* ntxh_file)
 {
- load_image(path);
+ image_.load(path);
+
+ if(ntxh_file)
+ {
+  find_ntxh_file(path);
+  *ntxh_file = ntxh_file_;
+ }
+}
+
+void XCSD_Image::load_image_all(QString path, QString* ntxh_file)
+{
+ load_image(path, ntxh_file);
  init_geometry();
  geometry_.init_tier_counts(XCSD_Image_Geometry::TierGrid_Preferances::Minimize_Outer_Tiers);
  geometry_.init_outer_ring_positions();

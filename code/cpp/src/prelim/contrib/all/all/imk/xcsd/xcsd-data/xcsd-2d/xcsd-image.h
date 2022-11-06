@@ -76,6 +76,8 @@ class XCSD_Image
  QColor background_pole_;
  QColor foreground_pole_;
 
+ QString ntxh_file_;
+
  void _init_outer_ring_pixel_data_landscaoe();
  void _init_outer_ring_pixel_data_landscaoe_sym();
 
@@ -135,6 +137,8 @@ public:
  ACCESSORS(QColor ,background_pole)
  ACCESSORS(QColor ,foreground_pole)
 
+ ACCESSORS(QString ,ntxh_file)
+
 
 // void autoset_fb_poles(u1 center = 30, QPair<u1, u1> top = {4, 4},
 //   QPair<u1, u1> bottom = {4, 4}, QPair<u1, u1> left = {0, 0}, QPair<u1, u1> right = {0, 0});
@@ -180,8 +184,8 @@ public:
 
  SDI_Position get_sdi_at_ground_position(u2 x, u2 y);
 
- void load_image(QString path);
- void load_image_all(QString path);
+ void load_image(QString path, QString* ntxh_file = nullptr);
+ void load_image_all(QString path, QString* ntxh_file = nullptr);
 
  static constexpr u1 tierbox_width = 27;
 
@@ -294,6 +298,8 @@ public:
  void save_background_distance_channel_to_blue_white_image(QString file_path);
 
  void save_fb_one_channel_image(QString file_path);
+
+ void find_ntxh_file(QString file_path);
 
 
  XCSD_TierBox* get_tierbox_from_grid_tierbox(const XCSD_Image_Geometry::Grid_TierBox& gtb);

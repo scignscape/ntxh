@@ -17,6 +17,7 @@
 #include "main-window/dhax-main-window-controller.h"
 
 #include "stats/stat-test-image.h"
+#include "stats/feature-classifier-transform.h"
 
 #include "textio.h"
 
@@ -385,6 +386,7 @@ void DHAX_Application_Controller::run_combined_test_stats(QString folder)
  run_combined_test_stats(folder, path);
 }
 
+
 void DHAX_Application_Controller::run_combined_test_stats(QString folder, QString file_path)
 {
 //? QString folder = DHAX_STAT_FOLDER "/test-combined";
@@ -447,8 +449,19 @@ void DHAX_Application_Controller::test_pixel_local_aggregate_color_distance(QStr
 {
  qDebug() << "Calculating color distance for " << file_path;
 
+ QString ntxh_file;
+
  XCSD_Image* xcsd = new XCSD_Image;
- xcsd->load_image_all(file_path);
+
+ //xcsd->load_image_all(file_path, &ntxh_file);
+ xcsd->load_image(file_path, &ntxh_file);
+
+ qDebug() << "Found NTXH: " << ntxh_file;
+
+ Feature_Classifier_Transform fct;
+ fct.init_from_ntxh(ntxh_file);
+
+ return;
 
  xcsd->autoset_fb_poles();
 

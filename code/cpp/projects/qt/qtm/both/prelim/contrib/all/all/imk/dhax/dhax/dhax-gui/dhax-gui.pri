@@ -258,6 +258,7 @@ HEADERS += \
   $$SRC_DIR/dhax-video/dhax-video-annotation-set.h \
   $$SRC_DIR/stats/dhax-stat-assessment.h \
   $$SRC_DIR/stats/stat-test-image.h \
+  $$SRC_DIR/stats/feature-classifier-transform.h \
 
 
 SOURCES += \
@@ -340,6 +341,7 @@ SOURCES += \
   $$SRC_DIR/stats/dhax-stat-assessment.cpp \
   $$SRC_DIR/stats/dhax-stat-assessment.demo-test.cpp \
   $$SRC_DIR/stats/stat-test-image.cpp \
+  $$SRC_DIR/stats/feature-classifier-transform.cpp \
 
 
 
