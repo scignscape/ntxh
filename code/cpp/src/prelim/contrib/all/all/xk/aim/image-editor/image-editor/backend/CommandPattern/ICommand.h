@@ -3,6 +3,7 @@
 
 class QAction;
 
+
 class ICommand {
 
 protected:

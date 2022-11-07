@@ -13,6 +13,8 @@
 #include "accessors.h"
 #include "global-types.h"
 
+#include "main-window-dialog.h"
+
 #include <QDialog>
 
 //namespace Ui {
@@ -91,6 +93,7 @@ protected:
 
  void resizeEvent(QResizeEvent* rev) Q_DECL_OVERRIDE;
 
+ QVector<Command_or_String> predefined_transforms_;
 
 
 public:
@@ -99,12 +102,27 @@ public:
 
  ACCESSORS(QString ,default_image_folder)
 
+ Image& get_active_image()
+ {
+  return *active_image_;
+ }
+
  void open_image_file(QString path);
 
  void fit_image_in_view();
  void reset_scene_rectangle();
 
  void adjust_window_size(QSize& sz);
+
+ void load_predefined_transforms(QVector<Command_or_String> cmds)
+ {
+  predefined_transforms_ = cmds;
+ }
+
+ void run_predefined_transforms();
+
+ void run_quantize_27x27();
+ void run_internal_command(QString fn);
 
 private slots:
 

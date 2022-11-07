@@ -11,6 +11,8 @@
 
 #include <QDir>
 
+#include "feature-classifier-transform.h"
+
 
 //void ((*_make_run_0d))(DHAX_Stat_Assessment&)
 
@@ -206,6 +208,8 @@ void (*_make_run_0d())(DHAX_Stat_Assessment&)
      keypoints_dist_1c, out_full_dist_1c, cv::Scalar(0, 255, 0));
   cv::imwrite(stat.get_full_dist_1c_out_path().toStdString(), out_full_dist_1c);
 
+
+
 //  cv::imwrite("/home/nlevisrael/gits/im-cv/i4/images/AKAZE-result.jpg", _out);
 
  };
@@ -214,8 +218,22 @@ void (*_make_run_0d())(DHAX_Stat_Assessment&)
 
 
 void DHAX_Stat_Assessment::run_demo_test(QString folder,
-  QString base_file_name, QString extension)
+  QString base_file_name, QString extension, XCSD_Image* xcsd)
 {
+ Feature_Classifier_Transform* fct = nullptr;
+
+ QString ntxh;
+
+ if(xcsd)
+   ntxh = xcsd->ntxh_file();
+
+ if(!ntxh.isEmpty())
+ {
+  fct = new Feature_Classifier_Transform;
+  fct->init_from_ntxh(xcsd->ntxh_file());
+ }
+
+
 #ifdef USE_OpenCV
 
  QDir qd(folder);
@@ -265,6 +283,7 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder,
  ALGORITHM_NAME##_stat->set_one_channel_dist_image_path(one_channel_dist); \
  ALGORITHM_NAME##_stat->set_one_channel_dist_display_image_path(one_channel_dist_display); \
  ALGORITHM_NAME##_stat->set_algorithm_name(#ALGORITHM_NAME); \
+ ALGORITHM_NAME##_stat->set_feature_classifier_transform(fct); \
 
 
 #define make_0d_proc(ALGORITHM) \
@@ -295,6 +314,8 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder,
 
  make_0d_proc(BRISK)
  BRISK_stat->run();
+
+ BRISK_stat->run_classifier_transform();
 
  make_0d_proc(ORB)
  ORB_stat->run();

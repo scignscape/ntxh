@@ -43,11 +43,9 @@ Main_Window_Dialog::Main_Window_Dialog(QWidget* parent)
 
 
  //scroll_area_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
-// main_layout_->addWidget(main_window_);
-
-// button_box_ = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
-//                               Qt::Horizontal, this);
+ // main_layout_->addWidget(main_window_);
+ // button_box_ = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
+ //                               Qt::Horizontal, this);
 
  button_box_ = new QDialogButtonBox(this);
 
@@ -84,6 +82,20 @@ Main_Window_Dialog::Main_Window_Dialog(QWidget* parent)
     setLayout(main_layout_);
 }
 
+void Main_Window_Dialog::load_predefined_transforms(QVector<Command_or_String> cmds)
+{
+ main_window_->load_predefined_transforms(cmds);
+}
+
+void Main_Window_Dialog::run_predefined_transforms()
+{
+ main_window_->run_predefined_transforms();
+}
+
+void Main_Window_Dialog::run_quantize_27x27()
+{
+ main_window_->run_quantize_27x27();
+}
 
 void Main_Window_Dialog::set_default_image_file(QString f)
 {
@@ -105,6 +117,12 @@ void Main_Window_Dialog::set_window_dimensions(const QSize& size)
 void Main_Window_Dialog::set_default_image_folder(QString f)
 {
  main_window_->set_default_image_folder(f);
+}
+
+
+Image& Main_Window_Dialog::get_active_image()
+{
+ return main_window_->get_active_image();
 }
 
 

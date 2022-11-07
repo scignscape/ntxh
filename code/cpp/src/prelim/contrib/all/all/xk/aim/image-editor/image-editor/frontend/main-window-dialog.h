@@ -9,6 +9,20 @@
 
 
 class MainWindow;
+class Image;
+class ICommand;
+
+struct Command_or_String {
+ std::shared_ptr<ICommand> cmd;
+ QString fn;
+
+ Command_or_String(std::shared_ptr<ICommand> _cmd)
+  :  cmd(_cmd) {}
+
+ Command_or_String(QString str)
+  :  cmd(nullptr), fn(str) {}
+
+};
 
 class Main_Window_Dialog : public QDialog
 {
@@ -41,6 +55,12 @@ public:
  void set_default_image_file(QString f);
 
  void set_window_dimensions(const QSize& size);
+
+ Image& get_active_image();
+
+ void load_predefined_transforms(QVector<Command_or_String> cmds);
+ void run_predefined_transforms();
+ void run_quantize_27x27();
 
 
 };

@@ -48,6 +48,7 @@ public:
 
 
  ACCESSORS(QColor ,foreground_color)
+ ACCESSORS(wh1 ,box_sizes)
 
  void init_from_ntxh(QString ntxh_file);
  void init_from_kv_text(QString kv_text);

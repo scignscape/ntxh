@@ -44,6 +44,8 @@ class DHAX_Application_State;
 
 class DHAX_Video_Player_Dialog;
 
+class  Feature_Classifier_Transform;
+
 
 class Main_Window_Dialog;
 typedef Main_Window_Dialog Image_Editor_Dialog_Window;
@@ -88,7 +90,6 @@ class DHAX_Application_Controller
  QString proc_class_temp_folder_;
 
  DHAX_Video_Player_Dialog* current_video_player_dialog_;
-
 
  void check_reset_proc_class_temp_folder();
 
@@ -143,9 +144,11 @@ public:
  QString get_test_file_from_folder(QString folder);
 
  void test_pixel_local_aggregate_color_distance(QString folder);
- void test_pixel_local_aggregate_color_distance(QString file_path, QString folder);
+ void test_pixel_local_aggregate_color_distance(QString file_path, QString folder,
+   XCSD_Image** xcsd = nullptr);
 
- void toroid_run_stats(QString folder, QString file_name, QString extension);
+ void toroid_run_stats(QString folder, QString file_name,
+   QString extension, XCSD_Image* xcsd = nullptr);
 
 
  void change_image_margins(QVector<u1> margins, u1 cim);

@@ -580,6 +580,32 @@ void MainWindow::handle_shear_transform(Skew_Shear_Rotate ssr)
  }
 }
 
+void MainWindow::run_internal_command(QString fn)
+{
+ if(fn == "quantize_27x27")
+   run_quantize_27x27();
+}
+
+
+void MainWindow::run_predefined_transforms()
+{
+ for(Command_or_String cmd_or_s : predefined_transforms_)
+ {
+  if(cmd_or_s.fn.isEmpty())
+  {
+   command_manager_.execute(cmd_or_s.cmd);
+  }
+  else
+  {
+   run_internal_command(cmd_or_s.fn);
+  }
+
+  active_image_->updateBuffer();
+ }
+
+ pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
+}
+
 
 void MainWindow::handle_extend_mod_3()
 {
@@ -661,74 +687,79 @@ void MainWindow::handle_calculate_action()
  }
 }
 
-void MainWindow::handle_quantize_27x27()
+
+void MainWindow::run_quantize_27x27()
 {
- if(active_image_)
- {
-  Quantize_3x3_Command* cmd = new Quantize_3x3_Command(*active_image_);
+ Quantize_3x3_Command* cmd = new Quantize_3x3_Command(*active_image_);
 
-  cmd->ICommand::force_redo(quantize_27x27_action_);
+ cmd->ICommand::force_redo(quantize_27x27_action_);
 
-  std::shared_ptr<ICommand> c1(cmd);
-  command_manager_.execute(c1);
-  qDebug() << "quantize 27x27";
+ std::shared_ptr<ICommand> c1(cmd);
+ command_manager_.execute(c1);
+ qDebug() << "quantize 27x27";
 
-  //secondary_pixel_buffer_ = cmd->sample_compress_pixel_buffer();
+ //secondary_pixel_buffer_ = cmd->sample_compress_pixel_buffer();
 
-  std::vector<Pixel> compressed_1 = cmd->sample_compress_pixel_buffer();
-  u2 compressed_w_1 = cmd->sample_compress_width();
-  u2 compressed_h_1 = cmd->sample_compress_height();
-  std::vector<Pixel> compressed_2;
+ std::vector<Pixel> compressed_1 = cmd->sample_compress_pixel_buffer();
+ u2 compressed_w_1 = cmd->sample_compress_width();
+ u2 compressed_h_1 = cmd->sample_compress_height();
+ std::vector<Pixel> compressed_2;
 
-  Extend_Mod_3_Command::proceed(compressed_w_1, compressed_h_1, compressed_1, compressed_w_1, compressed_h_1);
+ Extend_Mod_3_Command::proceed(compressed_w_1, compressed_h_1, compressed_1, compressed_w_1, compressed_h_1);
 
-  u2 compressed_w_2;
-  u2 compressed_h_2;
-  Quantize_3x3_Command::reset_sample_compress_pixel_buffer(compressed_2, compressed_w_1, compressed_h_1,
-    compressed_w_2, compressed_h_2);
+ u2 compressed_w_2;
+ u2 compressed_h_2;
+ Quantize_3x3_Command::reset_sample_compress_pixel_buffer(compressed_2, compressed_w_1, compressed_h_1,
+   compressed_w_2, compressed_h_2);
 
-  Quantize_3x3_Command::proceed(compressed_w_1, compressed_h_1, compressed_1, compressed_2);
+ Quantize_3x3_Command::proceed(compressed_w_1, compressed_h_1, compressed_1, compressed_2);
 
 
-  Extend_Mod_3_Command::proceed(compressed_w_2, compressed_h_2, compressed_2, compressed_w_2, compressed_h_2);
+ Extend_Mod_3_Command::proceed(compressed_w_2, compressed_h_2, compressed_2, compressed_w_2, compressed_h_2);
 
-  std::vector<Pixel> compressed_3;
+ std::vector<Pixel> compressed_3;
 
-  u2 compressed_w_3;
-  u2 compressed_h_3;
-  Quantize_3x3_Command::reset_sample_compress_pixel_buffer(compressed_3, compressed_w_2, compressed_h_2,
-    compressed_w_3, compressed_h_3);
+ u2 compressed_w_3;
+ u2 compressed_h_3;
+ Quantize_3x3_Command::reset_sample_compress_pixel_buffer(compressed_3, compressed_w_2, compressed_h_2,
+   compressed_w_3, compressed_h_3);
 
-  Quantize_3x3_Command::proceed(compressed_w_2, compressed_h_2, compressed_2, compressed_3);
+ Quantize_3x3_Command::proceed(compressed_w_2, compressed_h_2, compressed_2, compressed_3);
 
 //  std::vector<Pixel> undo_3;
-  std::vector<Pixel> undo_2;
-  std::vector<Pixel> undo_1;
+ std::vector<Pixel> undo_2;
+ std::vector<Pixel> undo_1;
 
 //  Quantize_3x3_Command::re_extend(compressed_3, undo_3,
 //    compressed_w_3, compressed_h_3);
 
-  active_image_->init_reduction(compressed_3, compressed_w_3, compressed_h_3);
+ active_image_->init_reduction(compressed_3, compressed_w_3, compressed_h_3);
 
-  Quantize_3x3_Command::re_extend(compressed_2, undo_2,
-    compressed_w_2, compressed_h_2);
+ Quantize_3x3_Command::re_extend(compressed_2, undo_2,
+   compressed_w_2, compressed_h_2);
 
-  Quantize_3x3_Command::re_extend(undo_2, undo_1,
-    compressed_w_2 * 3, compressed_h_2 * 3);
+ Quantize_3x3_Command::re_extend(undo_2, undo_1,
+   compressed_w_2 * 3, compressed_h_2 * 3);
 
-  active_image_->getPixelBuffer() = undo_1;
-  active_image_->setW(compressed_w_2 * 9);
-  active_image_->setH(compressed_h_2 * 9);
+ active_image_->getPixelBuffer() = undo_1;
+ active_image_->setW(compressed_w_2 * 9);
+ active_image_->setH(compressed_h_2 * 9);
 
 
 
-  active_image_->updateBuffer();
-  pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
+ active_image_->updateBuffer();
+ pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
 
-  pending_save_modifications_ = true;
+ pending_save_modifications_ = true;
+}
+
+
+void MainWindow::handle_quantize_27x27()
+{
+ if(active_image_)
+ {
+  run_quantize_27x27();
  }
-
-
 }
 
 void MainWindow::handle_quantize_3x3()
