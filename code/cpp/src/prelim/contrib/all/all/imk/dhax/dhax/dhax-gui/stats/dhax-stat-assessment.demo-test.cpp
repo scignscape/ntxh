@@ -182,7 +182,10 @@ void (*_make_run_0d())(DHAX_Stat_Assessment&)
 //#endif
 
   cv::Mat image_full, out_full, image_1c, out_1c, image_dist_1c, out_dist_1c, out_full_dist_1c;
-  std::vector<cv::KeyPoint> keypoints_full, keypoints_1c, keypoints_dist_1c;
+
+  std::vector<cv::KeyPoint>& keypoints_full = stat.keypoints_full(),
+    &keypoints_1c = stat.keypoints_1c(), &keypoints_dist_1c = stat.keypoints_dist_1c();
+
 
   detector->detectAndCompute(stat.gray_image(), cv::noArray(), keypoints_full, image_full);
   cv::drawKeypoints(stat.full_image(),
@@ -190,11 +193,13 @@ void (*_make_run_0d())(DHAX_Stat_Assessment&)
   cv::imwrite(stat.get_full_out_path().toStdString(), out_full);
 //?  cv::imwrite(stat.get_full_oa_out_path().toStdString(), image_full);
 
+
   detector->detectAndCompute(stat.one_channel_image(), cv::noArray(), keypoints_1c, image_1c);
   cv::drawKeypoints(stat.full_image(),
      keypoints_1c, out_1c, cv::Scalar(0, 255, 0));
   cv::imwrite(stat.get_full_1c_out_path().toStdString(), out_1c);
 //?  cv::imwrite(stat.get_full_1c_oa_out_path().toStdString(), image_1c);
+
 
   detector->detectAndCompute(stat.one_channel_dist_image(), cv::noArray(), keypoints_dist_1c,
     image_dist_1c);

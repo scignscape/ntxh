@@ -66,6 +66,9 @@ class DHAX_Stat_Assessment
  cv::Mat one_channel_dist_image_;
  cv::Mat one_channel_dist_display_image_;
 
+ std::vector<cv::KeyPoint> keypoints_full_, keypoints_1c_, keypoints_dist_1c_;
+
+
 #endif
 
  void run_classifier_transform();
@@ -80,6 +83,10 @@ public:
  ACCESSORS(QString ,one_channel_image_path)
  ACCESSORS(QString ,one_channel_dist_display_image_path)
  ACCESSORS(QString ,one_channel_dist_image_path)
+
+ ACCESSORS__RGET(std::vector<cv::KeyPoint> ,keypoints_full)
+ ACCESSORS__RGET(std::vector<cv::KeyPoint> ,keypoints_1c)
+ ACCESSORS__RGET(std::vector<cv::KeyPoint> ,keypoints_dist_1c)
 
  ACCESSORS(QString ,algorithm_name)
 

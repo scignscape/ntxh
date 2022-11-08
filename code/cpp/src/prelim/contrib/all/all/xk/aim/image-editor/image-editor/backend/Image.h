@@ -55,6 +55,12 @@ public:
  bool save(const QString &outPath, int quality = -1); //-1 auto compression //0-100 quality range
  Image(Image &image) = delete;
 
+
+ static void show_alpha_codes(QVector<QColor> colors,
+   QImage& qim, QImage* source = nullptr);
+
+ static void remove_alpha_codes(QImage& qim);
+
  QString getPath() const;
 
  QString getFilename() const;
@@ -95,6 +101,9 @@ public:
  QImage& getQImage();
 
  bool isValid() const;
+
+ void remove_alpha_codes();
+
 };
 
 

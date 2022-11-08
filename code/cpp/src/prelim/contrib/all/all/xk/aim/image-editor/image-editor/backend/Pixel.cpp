@@ -1,6 +1,8 @@
 #include "Pixel.h"
 #include "utils.h"
 
+#include <QDebug>
+
 Pixel::Pixel(uint8_t r, uint8_t g, uint8_t b, uint8_t a) :
         r(r), g(g), b(b), a(a) {}
 
@@ -53,6 +55,12 @@ bool Pixel::operator==(const Pixel &pixel) const {
 
 bool Pixel::operator!=(const Pixel &pixel) const {
     return !operator==(pixel);
+}
+
+
+void Pixel::set_alpha(int a)
+{
+ this->a = truncate0_255(a);
 }
 
 void Pixel::setPixel(int r, int g, int b, int a) {

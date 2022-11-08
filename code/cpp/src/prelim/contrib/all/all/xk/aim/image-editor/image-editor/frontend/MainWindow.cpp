@@ -242,6 +242,18 @@ MainWindow::~MainWindow()
 }
 
 
+void MainWindow::show_alpha_codes(QVector<QColor> colors, QString save_path)
+{
+ QImage& qim = active_image_->getQImage();
+
+ Image::show_alpha_codes(colors, qim);
+ pixmap_item_->setPixmap(QPixmap::fromImage(qim));
+
+ if(!save_path.isEmpty())
+   qim.save(save_path);
+}
+
+
 void MainWindow::handle_set_scene_background_color()
 {
 // QBrush br(QColor("gray"));
@@ -587,10 +599,29 @@ void MainWindow::run_internal_command(QString fn)
 }
 
 
-void MainWindow::run_predefined_transforms()
+void MainWindow::run_predefined_transforms(QString file_path_pattern,
+  QVector<QColor> colors, u1 overlay_cut)
 {
+ u1 count = 0;
+
+ if(!file_path_pattern.isEmpty())
+ {
+  if(colors.isEmpty())
+    active_image_->getQImage().save(file_path_pattern.arg(count));
+  else
+  {
+   QImage qim = active_image_->getQImage().copy();
+   Image::show_alpha_codes(colors, qim); // file_path_pattern.arg(count));
+   qim.save(file_path_pattern.arg(count));
+  }
+ }
+
+ QImage overlay_cut_image;
+
  for(Command_or_String cmd_or_s : predefined_transforms_)
  {
+  ++count;
+
   if(cmd_or_s.fn.isEmpty())
   {
    command_manager_.execute(cmd_or_s.cmd);
@@ -601,6 +632,36 @@ void MainWindow::run_predefined_transforms()
   }
 
   active_image_->updateBuffer();
+
+  if(!file_path_pattern.isEmpty())
+  {
+   if(colors.isEmpty())
+     active_image_->getQImage().save(file_path_pattern.arg(count));
+
+   else
+   {
+    // //   note -- last one (qim) is not a pointer ...
+    QImage* overlay_source_image = nullptr, overlay_image; //, qim;
+
+    if(count == overlay_cut)
+    {
+     overlay_cut_image = active_image_->getQImage().copy();
+     overlay_image = overlay_cut_image.copy();
+//?     overlay_image = &qim;
+    }
+    else
+    {
+     //qim = active_image_->getQImage().copy();
+     overlay_image = active_image_->getQImage().copy();
+     if(count > overlay_cut)
+       overlay_source_image = &overlay_cut_image;
+    }
+    qDebug() << "Showing alpha codes: " << count;
+    Image::show_alpha_codes(colors, overlay_image, overlay_source_image);
+    overlay_image.save(file_path_pattern.arg(count));
+   }
+  }
+
  }
 
  pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));

@@ -24,8 +24,11 @@ private:
 
 public:
 
- explicit Heuristic_Color_Mask_Command(Image& image,
+ Heuristic_Color_Mask_Command(Image& image,
    QColor foreground, QColor background, u1 offset, u1 metric_code);
+
+ Heuristic_Color_Mask_Command(Image& image,
+   QColor foreground, QColor background, u1 offset, QString metric_code);
 
  enum class Metric_Codes {
   N_A = 0, Max_Difference = 1, Sum_Difference = 2, Vector_Difference = 3,

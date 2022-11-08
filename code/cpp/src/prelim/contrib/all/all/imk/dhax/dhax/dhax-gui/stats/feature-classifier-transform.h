@@ -33,6 +33,9 @@ class Feature_Classifier_Transform
  QColor foreground_color_;
  wh1 box_sizes_;
 
+ QString color_distance_model_;
+ u1 color_distance_threshold_;
+
 
 public:
 
@@ -46,9 +49,13 @@ public:
  ACCESSORS(r8 ,vertical_shear)
  ACCESSORS(r8 ,vertical_shear_centered)
 
-
  ACCESSORS(QColor ,foreground_color)
  ACCESSORS(wh1 ,box_sizes)
+
+ ACCESSORS(QString ,color_distance_model)
+ ACCESSORS(u1 ,color_distance_threshold)
+
+
 
  void init_from_ntxh(QString ntxh_file);
  void init_from_kv_text(QString kv_text);

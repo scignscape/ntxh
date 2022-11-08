@@ -7,6 +7,8 @@
 #include <QDialogButtonBox>
 #include <QVBoxLayout>
 
+#include "global-types.h"
+
 
 class MainWindow;
 class Image;
@@ -59,9 +61,11 @@ public:
  Image& get_active_image();
 
  void load_predefined_transforms(QVector<Command_or_String> cmds);
- void run_predefined_transforms();
+ void run_predefined_transforms(QString file_path_pattern = {},
+   QVector<QColor> colors = {}, u1 overlay_cut = 1);
  void run_quantize_27x27();
 
+ void show_alpha_codes(QVector<QColor> colors, QString save_path = {});
 
 };
 

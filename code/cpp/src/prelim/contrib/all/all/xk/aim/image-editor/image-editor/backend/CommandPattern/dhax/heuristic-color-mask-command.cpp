@@ -18,6 +18,21 @@ Heuristic_Color_Mask_Command::Heuristic_Color_Mask_Command(Image& image,
  backup_pixel_buffer_ = pixel_buffer_;
 }
 
+Heuristic_Color_Mask_Command::Heuristic_Color_Mask_Command(Image& image,
+  QColor foreground, QColor background, u1 offset, QString metric_code)
+ : image_(image), pixel_buffer_(image.getPixelBuffer()),
+    foreground_(foreground), background_(background), offset_(offset),
+    metric_code_(1)
+{
+ if(metric_code != "max")
+ {
+  // // TODO ...
+   //   parse a different one ...
+ }
+
+}
+
+
 void Heuristic_Color_Mask_Command::execute()
 {
  proceed();

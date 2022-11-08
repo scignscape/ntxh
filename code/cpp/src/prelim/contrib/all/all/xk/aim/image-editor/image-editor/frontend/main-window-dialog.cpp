@@ -82,14 +82,21 @@ Main_Window_Dialog::Main_Window_Dialog(QWidget* parent)
     setLayout(main_layout_);
 }
 
+
+void Main_Window_Dialog::show_alpha_codes(QVector<QColor> colors, QString save_path)
+{
+ main_window_->show_alpha_codes(colors, save_path);
+}
+
 void Main_Window_Dialog::load_predefined_transforms(QVector<Command_or_String> cmds)
 {
  main_window_->load_predefined_transforms(cmds);
 }
 
-void Main_Window_Dialog::run_predefined_transforms()
+void Main_Window_Dialog::run_predefined_transforms(QString file_path_pattern,
+  QVector<QColor> colors, u1 overlay_cut)
 {
- main_window_->run_predefined_transforms();
+ main_window_->run_predefined_transforms(file_path_pattern, colors, overlay_cut);
 }
 
 void Main_Window_Dialog::run_quantize_27x27()

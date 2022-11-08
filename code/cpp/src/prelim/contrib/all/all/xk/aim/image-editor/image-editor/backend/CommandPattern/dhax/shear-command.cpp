@@ -34,9 +34,14 @@ void Shear_Command::redo()
 
 void Shear_Command::proceed()
 {
- QImage nim(image_.getW(), image_.getH(), QImage::Format_ARGB32);
+//? QImage nim(image_.getW(), image_.getH(), QImage::Format_ARGB32);
+ QImage nim(image_.getQImage().width(), image_.getQImage().height(), QImage::Format_ARGB32);
+
+ nim.fill(Qt::white);
 
  QPainter qp(&nim);
+
+ qp.setCompositionMode(QPainter::CompositionMode_Source);
 
  // QPolygonF quad;
  // quad.append({0, 0});
@@ -81,6 +86,7 @@ void Shear_Command::proceed()
 
 // qp.setTransform(QTransform().translate(translate, 0).shear(x_factor_, y_factor_).translate(-translate, 0));
 // qp.setTransform(QTransform().shear(x_factor_, y_factor_));
+
 
  qp.drawImage(nim.rect(), image_.getQImage(), image_.getQImage().rect());
 

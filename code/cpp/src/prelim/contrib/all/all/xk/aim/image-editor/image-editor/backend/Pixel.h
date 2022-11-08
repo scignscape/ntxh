@@ -34,6 +34,15 @@ public:
 
     uint16_t get_color_sum() const;
 
+    void set_alpha(int a);
+    void make_fully_opaque()
+    {
+     set_alpha(255);
+    }
+    void make_fully_transparent()
+    {
+     set_alpha(0);
+    }
 
     void setPixel(int r, int g, int b, int a);
 

@@ -119,10 +119,14 @@ public:
   predefined_transforms_ = cmds;
  }
 
- void run_predefined_transforms();
+ void run_predefined_transforms(QString file_path_pattern = {},
+   QVector<QColor> colors = {}, u1 overlay_cut = 1);
 
  void run_quantize_27x27();
  void run_internal_command(QString fn);
+
+ void show_alpha_codes(QVector<QColor> colors, QString save_path);
+
 
 private slots:
 

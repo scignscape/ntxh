@@ -24,6 +24,7 @@ Feature_Classifier_Transform::Feature_Classifier_Transform()
      vertical_skew_(0),
      vertical_shear_(0),
      vertical_shear_centered_(0),
+     color_distance_threshold_(0),
      box_sizes_({0,0})
 {
 
@@ -63,18 +64,23 @@ void Feature_Classifier_Transform::init_from_ntxh(QString ntxh_file)
   QString ty = h->type_descriptor().first;
   if(ty == "Feature_Classifier_Transforms")
   {
-   g.get_sfsr(h, {{1, 7}}, [this](QVector<QPair<QString, void*>>& prs)
+   g.get_sfsr(h, {{1, 9}}, [this](QVector<QPair<QString, void*>>& prs)
    {
     rotation_ = prs[0].first.toDouble();
     QString skew_shear = prs[1].first;
     if(!skew_shear.isEmpty())
       init_from_kv_text(skew_shear);
     foreground_color_ = QColor(prs[2].first.toInt(), prs[3].first.toInt(), prs[4].first.toInt());
-    box_sizes_.width = prs[5].first.toInt();
-    if(prs[6].first.isEmpty())
+
+    color_distance_model_ = prs[5].first;
+
+    color_distance_threshold_ = prs[6].first.toInt();
+
+    box_sizes_.width = prs[7].first.toInt();
+    if(prs[8].first.isEmpty())
       box_sizes_.height = box_sizes_.width;
     else
-      box_sizes_.height = prs[5].first.toInt();
+      box_sizes_.height = prs[8].first.toInt();
    });
   }
  }

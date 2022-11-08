@@ -6,6 +6,8 @@
 #include "QFileInfo"
 #include <QErrorMessage>
 
+#include <QDebug>
+
 using namespace std;
 
 Image::Image(const QString &path)
@@ -27,6 +29,94 @@ void Image::pureFilename() {
     QFileInfo qFilename(path);
     filename = qFilename.fileName();
 }
+
+
+
+void Image::remove_alpha_codes(QImage& qim)
+{
+ int a_count = 0;
+
+ for(int y = 0; y < qim.height(); ++y)
+  for(int x = 0; x < qim.width(); ++x)
+  {
+   QColor color = qim.pixelColor(x, y);
+   if(color.alpha() < 255)
+   {
+    color.setAlpha(255);
+    qim.setPixelColor(x, y, color);
+    ++a_count;
+   }
+  }
+
+ qDebug() << "alpha count (removed) = " << a_count;
+}
+
+
+void Image::show_alpha_codes(QVector<QColor> colors,
+  QImage& qim, QImage* source)
+{
+ int a_count = 0;
+
+
+ s2 x_offset = 0, y_offset = 0;
+
+ if(source)
+ {
+  if(source->width() != qim.width())
+    x_offset = ( source->width() - qim.width() ) / 2;
+
+  if(source->height() != qim.height())
+    y_offset = ( source->height() - qim.height() ) / 2;
+ }
+ else
+   source = &qim;
+
+
+
+ for(s4 y = 0; y < qim.height(); ++y)
+ {
+  s4 y_o = y + y_offset;
+
+  if(y_offset != 0)
+  {
+   if(y_o < 0)
+   {
+    y = -y_offset;
+    y_o = 0;
+   }
+   else if(y_o >= source->height())
+     break;
+  }
+
+  for(s4 x = 0; x < qim.width(); ++x)
+  {
+   s4 x_o = x + x_offset;
+   if(x_offset != 0)
+   {
+    if(x_o < 0)
+    {
+     x = -x_offset;
+     x_o = 0;
+    }
+    else if(x_o >= source->width())
+      break;
+   }
+   QColor color = source->pixelColor(x_o, y_o);
+   int a = 255 - color.alpha();
+
+   if(a)
+   {
+    --a;
+    qim.setPixelColor(x, y, colors.value(a));
+    ++a_count;
+   }
+  }
+
+ }
+
+ qDebug() << "alpha count = " << a_count;
+}
+
 
 void Image::init_reduction(std::vector<Pixel>& buffer, s2 width, s2 height)
 {
@@ -124,13 +214,28 @@ void Image::swapDimension() {
     swap(h, w);
 }
 
-void Image::updateBuffer(){
-    rawImage = QImage(w, h, QImage::Format_ARGB32);
+void Image::updateBuffer()
+{
+ rawImage = QImage(w, h, QImage::Format_ARGB32);
 
-    for (int y = 0; y < h; y++) //rows
-        for (int x = 0; x < w; x++) { //columns
-            rawImage.setPixelColor(x, y, Pixel::toQColor(pixelBuffer[y * w + x]));
-        }
+ for (int y = 0; y < h; y++) //rows
+  for (int x = 0; x < w; x++)
+  { //columns
+   rawImage.setPixelColor(x, y, Pixel::toQColor(pixelBuffer[y * w + x]));
+  }
+}
+
+void Image::remove_alpha_codes()
+{
+ remove_alpha_codes(rawImage);
+
+ for (int y = 0; y < h; y++)
+  for (int x = 0; x < w; x++)
+  {
+   Pixel& px = pixelBuffer[y * w + x];
+   px.make_fully_opaque();
+  }
+
 }
 
 QImage& Image::getQImage(){
