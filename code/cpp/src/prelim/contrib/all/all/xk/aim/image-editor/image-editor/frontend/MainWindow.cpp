@@ -15,6 +15,8 @@
 
 #include "frontend/color-range-dialog.h"
 
+#include "frontend/run-transforms-dialog.h"
+
 
 #include "QtColorWidgets/color_dialog.hpp"
 
@@ -602,26 +604,31 @@ void MainWindow::run_internal_command(QString fn)
 void MainWindow::run_predefined_transforms(QString file_path_pattern,
   QVector<QColor> colors, u1 overlay_cut)
 {
- u1 count = 0;
+ Run_Transforms_Dialog* rtd = new Run_Transforms_Dialog(active_image_->getQImage(),
+   file_path_pattern, predefined_transforms_.size(), overlay_cut, this);
+
+ current_pixmap_ = QPixmap::fromImage(active_image_->getQImage());
+
+ rtd->set_feature_points_colors(colors);
 
  if(!file_path_pattern.isEmpty())
+   rtd->save_step_image_prelim();
+
+ rtd->show();
+
+ connect(rtd, &Run_Transforms_Dialog::unshow_features_requested, [this]
  {
-  if(colors.isEmpty())
-    active_image_->getQImage().save(file_path_pattern.arg(count));
-  else
-  {
-   QImage qim = active_image_->getQImage().copy();
-   Image::show_alpha_codes(colors, qim); // file_path_pattern.arg(count));
-   qim.save(file_path_pattern.arg(count));
-  }
- }
+  pixmap_item_->setPixmap(current_pixmap_);
+ });
 
- QImage overlay_cut_image;
-
- for(Command_or_String cmd_or_s : predefined_transforms_)
+ connect(rtd, &Run_Transforms_Dialog::show_features_requested, [this, rtd]
  {
-  ++count;
+  pixmap_item_->setPixmap(rtd->get_pixmap_with_overlays());
+ });
 
+ connect(rtd, &Run_Transforms_Dialog::next_step_requested, [this, rtd, file_path_pattern](u1 count)
+ {
+  Command_or_String cmd_or_s = predefined_transforms_[count - 1];
   if(cmd_or_s.fn.isEmpty())
   {
    command_manager_.execute(cmd_or_s.cmd);
@@ -632,39 +639,19 @@ void MainWindow::run_predefined_transforms(QString file_path_pattern,
   }
 
   active_image_->updateBuffer();
-
   if(!file_path_pattern.isEmpty())
-  {
-   if(colors.isEmpty())
-     active_image_->getQImage().save(file_path_pattern.arg(count));
+    rtd->save_step_image();
 
-   else
-   {
-    // //   note -- last one (qim) is not a pointer ...
-    QImage* overlay_source_image = nullptr, overlay_image; //, qim;
+  current_pixmap_ = QPixmap::fromImage(active_image_->getQImage());
+  pixmap_item_->setPixmap(current_pixmap_);
+ });
 
-    if(count == overlay_cut)
-    {
-     overlay_cut_image = active_image_->getQImage().copy();
-     overlay_image = overlay_cut_image.copy();
-//?     overlay_image = &qim;
-    }
-    else
-    {
-     //qim = active_image_->getQImage().copy();
-     overlay_image = active_image_->getQImage().copy();
-     if(count > overlay_cut)
-       overlay_source_image = &overlay_cut_image;
-    }
-    qDebug() << "Showing alpha codes: " << count;
-    Image::show_alpha_codes(colors, overlay_image, overlay_source_image);
-    overlay_image.save(file_path_pattern.arg(count));
-   }
-  }
+// QImage overlay_cut_image;
+// for(Command_or_String cmd_or_s : predefined_transforms_)
+// {
+//  ++count;
+// }
 
- }
-
- pixmap_item_->setPixmap(QPixmap::fromImage(active_image_->getQImage()));
 }
 
 

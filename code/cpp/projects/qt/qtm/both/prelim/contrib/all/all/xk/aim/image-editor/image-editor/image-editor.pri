@@ -85,6 +85,8 @@ HEADERS += \
   $$SRC_DIR/frontend/color-range-dialog.h \
   $$SRC_DIR/frontend/MainWindow.h \
   $$SRC_DIR/frontend/main-window-dialog.h \
+  $$SRC_DIR/frontend/run-transforms-dialog.h \
+
 
 
 RESOURCES += \
@@ -119,6 +121,7 @@ SOURCES += \
   $$SRC_DIR/frontend/color-range-dialog.cpp \
   $$SRC_DIR/frontend/MainWindow.cpp \
   $$SRC_DIR/frontend/main-window-dialog.cpp \
+  $$SRC_DIR/frontend/run-transforms-dialog.cpp \
 
 
 DEFINES += APP_NAME=\\\"image-editor\\\"

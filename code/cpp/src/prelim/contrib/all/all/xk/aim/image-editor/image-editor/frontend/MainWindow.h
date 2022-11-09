@@ -82,6 +82,8 @@ class MainWindow : public QMainWindow
  std::vector<Pixel> secondary_pixel_buffer_;
  std::vector<Pixel> tertiary_pixel_buffer_;
 
+ QPixmap current_pixmap_;
+
  enum class Skew_Shear_Rotate {
    N_A, XSkew, YSkew, XShear, YShear, Rotate, Generic
  };
