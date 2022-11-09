@@ -66,7 +66,8 @@ class DHAX_Stat_Assessment
  cv::Mat one_channel_dist_image_;
  cv::Mat one_channel_dist_display_image_;
 
- std::vector<cv::KeyPoint> keypoints_full_, keypoints_1c_, keypoints_dist_1c_;
+ std::vector<cv::KeyPoint> keypoints_full_, keypoints_1c_,
+   keypoints_dist_1c_, keypoints_1c_screened_;
 
 
 #endif
@@ -87,6 +88,7 @@ public:
  ACCESSORS__RGET(std::vector<cv::KeyPoint> ,keypoints_full)
  ACCESSORS__RGET(std::vector<cv::KeyPoint> ,keypoints_1c)
  ACCESSORS__RGET(std::vector<cv::KeyPoint> ,keypoints_dist_1c)
+ ACCESSORS__RGET(std::vector<cv::KeyPoint> ,keypoints_1c_screened)
 
  ACCESSORS(QString ,algorithm_name)
 
@@ -105,6 +107,7 @@ public:
 
 
  QString get_full_1c_out_path(QString name_extra);
+ QString get_full_1c_screened_out_path(QString name_extra);
  QString get_1c_out_path(QString name_extra);
  QString get_full_out_path(QString name_extra);
  QString get_dist_1c_out_path(QString name_extra);
@@ -129,6 +132,11 @@ public:
  QString get_full_1c_out_path()
  {
   return get_full_1c_out_path(algorithm_name_);
+ }
+
+ QString get_full_1c_screened_out_path()
+ {
+  return get_full_1c_screened_out_path(algorithm_name_);
  }
 
  QString get_1c_out_path()

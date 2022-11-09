@@ -67,7 +67,7 @@ Run_Transforms_Dialog::Run_Transforms_Dialog(QImage& base_image, QString file_pa
  connect(forward_button_, &QPushButton::clicked, [this]
  {
   ++step_count_;
-  Q_EMIT next_step_requested(step_count_);
+  Q_EMIT next_step_requested(step_count_, show_feature_points_check_box_->isChecked());
   if(step_count_ == step_total_)
   {
    forward_button_->setEnabled(false);

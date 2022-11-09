@@ -71,6 +71,11 @@ void DHAX_Stat_Assessment::check_follow_up()
 }
 
 
+QString DHAX_Stat_Assessment::get_full_1c_screened_out_path(QString name_extra)
+{
+ QString result = full_image_path_;
+ return result.replace("-full", "-full-1c-screened-" + name_extra);
+}
 
 QString DHAX_Stat_Assessment::get_full_1c_out_path(QString name_extra)
 {
@@ -137,11 +142,24 @@ void DHAX_Stat_Assessment::run_classifier_transform()
 
  QImage& qim = dlg->get_active_image().getQImage();
 
+ for(cv::KeyPoint kp : keypoints_1c_screened_)
+ {
+  u2 x = kp.pt.x, y = kp.pt.y;
+  QColor c = qim.pixelColor(x, y);
+  c.setAlpha(1);
+  qim.setPixelColor(x, y, c);
+ }
+
  for(cv::KeyPoint kp : keypoints_1c_)
  {
   u2 x = kp.pt.x, y = kp.pt.y;
   QColor c = qim.pixelColor(x, y);
-  c.setAlpha(254);
+
+  if(c.alpha() == 1)
+    c.setAlpha(254);
+  else // //  screened out
+    c.setAlpha(251);
+
   qim.setPixelColor(x, y, c);
  }
 
@@ -213,7 +231,7 @@ void DHAX_Stat_Assessment::run_classifier_transform()
  dlg->set_window_dimensions( QSize(full_image_.size[0], full_image_.size[1]) );
 
  QVector<QColor> colors;
- colors << Qt::cyan << Qt::yellow << Qt::green;
+ colors << Qt::cyan << Qt::yellow << Qt::green << Qt::red;
 
  dlg->run_predefined_transforms("/home/nlevisrael/gits/ctg-temp/dev/dhax-stats/temp-%1.png", colors);
 

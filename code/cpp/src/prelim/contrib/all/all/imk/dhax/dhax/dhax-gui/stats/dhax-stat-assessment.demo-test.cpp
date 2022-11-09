@@ -154,6 +154,19 @@ void (*_make_run_contours())(DHAX_Stat_Assessment&)
  };
 }
 
+
+// //  these are the same as
+ //    Heuristic Color Maxk in the editor ...
+u1 diff(u1 a1, u1 a2)
+{
+ return a1 > a2? a1 - a2 : a2 - a1;
+}
+bool test(u1 offset, u1 rdiff, u1 gdiff, u1 bdiff)
+{
+ return rdiff <= offset && gdiff <= offset && bdiff <= offset;
+}
+
+
 template<typename ALGORITHM_Type>
 void (*_make_run_0d())(DHAX_Stat_Assessment&)
 {
@@ -181,9 +194,11 @@ void (*_make_run_0d())(DHAX_Stat_Assessment&)
 //  detector.staticCast<cv::xfeatures2d::SURF>()->setUpright(true);
 //#endif
 
-  cv::Mat image_full, out_full, image_1c, out_1c, image_dist_1c, out_dist_1c, out_full_dist_1c;
+  cv::Mat image_full, out_full, image_1c, out_1c, out_1c_screened,
+    image_dist_1c, out_dist_1c, out_full_dist_1c;
 
   std::vector<cv::KeyPoint>& keypoints_full = stat.keypoints_full(),
+    &keypoints_1c_screened = stat.keypoints_1c_screened(),
     &keypoints_1c = stat.keypoints_1c(), &keypoints_dist_1c = stat.keypoints_dist_1c();
 
 
@@ -198,6 +213,42 @@ void (*_make_run_0d())(DHAX_Stat_Assessment&)
   cv::drawKeypoints(stat.full_image(),
      keypoints_1c, out_1c, cv::Scalar(0, 255, 0));
   cv::imwrite(stat.get_full_1c_out_path().toStdString(), out_1c);
+
+  static u1 diff_offset = 120;
+
+  for(cv::KeyPoint kp : keypoints_1c)
+  {
+   u2 x = kp.pt.x, y = kp.pt.y;
+   //QColor c = qim.pixelColor(x, y);
+
+   //? BGR& bgr = image.ptr<BGR>(y)[x];
+   cv::Vec3b vec = stat.full_image().at<cv::Vec3b>(y, x);
+
+
+   QColor foreground_color = stat.feature_classifier_transform()->foreground_color();
+   QColor vec_color(vec[2], vec[1], vec[0]);
+
+   s2 vec_hue = vec_color.hue();
+   s2 foreground_hue = foreground_color.hue();
+
+   s2 diff = vec_hue - foreground_hue;
+   if(qAbs(diff) < diff_offset)
+   {
+    keypoints_1c_screened.push_back(kp);
+   }
+//   if(test(diff_offset, diff(vec[2], foreground_color.red()),
+//     diff(vec[1], foreground_color.green()),
+//     diff(vec[2], foreground_color.blue())))
+//   {
+//    keypoints_1c_screened.push_back(kp);
+//   }
+
+  }
+  cv::drawKeypoints(stat.full_image(),
+     keypoints_1c_screened, out_1c_screened, cv::Scalar(0, 255, 0));
+  cv::imwrite(stat.get_full_1c_screened_out_path().toStdString(), out_1c_screened);
+
+
 //?  cv::imwrite(stat.get_full_1c_oa_out_path().toStdString(), image_1c);
 
 

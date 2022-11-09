@@ -60,7 +60,7 @@ public:
 Q_SIGNALS:
 
  void sequence_finished();
- void next_step_requested(u1 count);
+ void next_step_requested(u1 count, bool show_features);
 
  void unshow_features_requested();
  void show_features_requested();

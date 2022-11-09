@@ -616,17 +616,20 @@ void MainWindow::run_predefined_transforms(QString file_path_pattern,
 
  rtd->show();
 
- connect(rtd, &Run_Transforms_Dialog::unshow_features_requested, [this]
+ auto unshow_features = [this]
  {
   pixmap_item_->setPixmap(current_pixmap_);
- });
+ };
+ connect(rtd, &Run_Transforms_Dialog::unshow_features_requested, unshow_features);
 
- connect(rtd, &Run_Transforms_Dialog::show_features_requested, [this, rtd]
+ auto show_features = [this, rtd]
  {
   pixmap_item_->setPixmap(rtd->get_pixmap_with_overlays());
- });
+ };
+ connect(rtd, &Run_Transforms_Dialog::show_features_requested, show_features);
 
- connect(rtd, &Run_Transforms_Dialog::next_step_requested, [this, rtd, file_path_pattern](u1 count)
+ connect(rtd, &Run_Transforms_Dialog::next_step_requested, [this, rtd, file_path_pattern,
+   unshow_features, show_features](u1 count, bool _show_features)
  {
   Command_or_String cmd_or_s = predefined_transforms_[count - 1];
   if(cmd_or_s.fn.isEmpty())
@@ -643,7 +646,11 @@ void MainWindow::run_predefined_transforms(QString file_path_pattern,
     rtd->save_step_image();
 
   current_pixmap_ = QPixmap::fromImage(active_image_->getQImage());
-  pixmap_item_->setPixmap(current_pixmap_);
+  if(_show_features)
+    show_features();
+  else
+    unshow_features();
+  //pixmap_item_->setPixmap(current_pixmap_);
  });
 
 // QImage overlay_cut_image;
