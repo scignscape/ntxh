@@ -35,6 +35,8 @@ class MultiStep_Annotation_Base;
 
 class DHAX_Mouse_Interaction_Data;
 
+class DHAX_Stat_Assessment;
+
 class DHAX_Drawn_Shape;
 
 class _Proxy_Widget;
@@ -94,6 +96,11 @@ private:
  Context_Menu_Prep_State context_menu_prep_state_;
 
  QString image_file_path_;
+
+ std::shared_ptr<QMap<QString, std::shared_ptr<DHAX_Stat_Assessment>>>
+   current_transforms_map_;
+
+
 
 // QGraphics
 
@@ -155,6 +162,9 @@ public:
  ACCESSORS(u4* ,freecad_import_count)
 
  ACCESSORS(QString ,image_file_path)
+
+ ACCESSORS(MACRO_PASTE(std::shared_ptr<QMap<QString, std::shared_ptr<DHAX_Stat_Assessment>>>)
+            ,current_transforms_map)
 
  QWidget* temp;
 

@@ -41,7 +41,7 @@ XCSD_Image::XCSD_Image()
 }
 
 
-void XCSD_Image::find_ntxh_file(QString file_path, bool maybe_up)
+void XCSD_Image::find_ntxh_file(QString file_path, u1 maybe_up)
 {
  QFileInfo qfi(file_path + ".ntxh");
 
@@ -51,9 +51,10 @@ void XCSD_Image::find_ntxh_file(QString file_path, bool maybe_up)
 
  else if(maybe_up)
  {
+  --maybe_up;
   QDir qd = qfi.absoluteDir();
   if(qd.cdUp())
-    find_ntxh_file(qd.absoluteFilePath(qfi.completeBaseName()), false);
+    find_ntxh_file(qd.absoluteFilePath(qfi.completeBaseName()), maybe_up);
  }
 
  if(ntxh_file_.isEmpty())

@@ -1221,12 +1221,6 @@ void DHAX_Application_Controller::launch_edge_detection_dialog()
 
 }
 
-
-
-
-
-
-
 void DHAX_Application_Controller::handle_complate_and_save_requested(bool with_comment)
 {
  main_window_controller_->complete_polygon();

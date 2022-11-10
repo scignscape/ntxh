@@ -43,7 +43,9 @@ void DHAX_Image_Scene_Item::reset_background_to_original_position()
 }
 
 DHAX_Image_Scene_Item::DHAX_Image_Scene_Item(QWidget *parent)
-  : QWidget(parent), data_(nullptr),  current_mouse_interaction_data_(nullptr)
+  : QWidget(parent), data_(nullptr),
+    current_mouse_interaction_data_(nullptr),
+    current_transforms_map_(nullptr)
 {
  containing_image_view_ = nullptr;
  current_multistep_annotation_ = nullptr;

@@ -13,6 +13,7 @@
 
 #include "feature-classifier-transform.h"
 
+#include "application/dhax-application-controller.h"
 
 //void ((*_make_run_0d))(DHAX_Stat_Assessment&)
 
@@ -273,8 +274,8 @@ void (*_make_run_0d())(DHAX_Stat_Assessment&)
 
 
 
-void DHAX_Stat_Assessment::run_demo_test(QString folder,
-  QString base_file_name, QString extension, XCSD_Image* xcsd)
+void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
+  QString extension, DHAX_Application_Controller* application_controller, XCSD_Image* xcsd)
 {
  Feature_Classifier_Transform* fct = nullptr;
 
@@ -308,6 +309,9 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder,
  std::shared_ptr<DHAX_Stat_Assessment> USURF_stat( new DHAX_Stat_Assessment );
 
  std::shared_ptr<DHAX_Stat_Assessment> RETR_TREE_CHAIN_APPROX_NONE_stat( new DHAX_Stat_Assessment );
+
+ std::shared_ptr<QMap<QString, std::shared_ptr<DHAX_Stat_Assessment>>> transforms_map
+   ( new QMap<QString, std::shared_ptr<DHAX_Stat_Assessment>> );
 
 // AKAZE_stat->set_full_image_path(full);
 // AKAZE_stat->set_one_channel_image_path(one_channel);
@@ -344,14 +348,17 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder,
 
 #define make_0d_proc(ALGORITHM) \
  setup(ALGORITHM) \
+ (*transforms_map)[#ALGORITHM] = ALGORITHM##_stat; \
  ALGORITHM##_stat->set_proc(_make_run_0d<cv::ALGORITHM>()); \
 
 #define make_0d_xproc(ALGORITHM) \
  setup(ALGORITHM) \
+ (*transforms_map)[#ALGORITHM] = ALGORITHM##_stat; \
  ALGORITHM##_stat->set_proc(_make_run_0d<cv::xfeatures2d::ALGORITHM>()); \
 
 #define make_0d_uxproc(ALGORITHM) \
  setup(U##ALGORITHM) \
+ (*transforms_map)["U" #ALGORITHM] = U##ALGORITHM##_stat; \
  U##ALGORITHM##_stat->set_proc(_make_run_0d<cv::xfeatures2d::ALGORITHM>()); \
 
 
@@ -365,13 +372,17 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder,
  make_0d_proc(AKAZE)
  AKAZE_stat->run();
 
+ application_controller->show_keypoints(transforms_map, full, AKAZE_stat->keypoints_1c_screened());
+
+
  make_0d_proc(SIFT)
  SIFT_stat->run();
 
  make_0d_proc(BRISK)
  BRISK_stat->run();
 
- BRISK_stat->run_classifier_transform();
+//? BRISK_stat->run_classifier_transform();
+
 
  make_0d_proc(ORB)
  ORB_stat->run();

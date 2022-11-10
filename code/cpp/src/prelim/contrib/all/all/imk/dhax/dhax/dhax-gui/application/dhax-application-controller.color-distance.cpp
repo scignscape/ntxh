@@ -408,9 +408,19 @@ void DHAX_Application_Controller::run_combined_test_stats(QString folder, QStrin
 
  qd.cd("out");
 
+ QFileInfo qfi(file_path);
+ QString base_name = qfi.baseName();
+
+ if(!qd.exists(base_name))
+   qd.mkdir(base_name);
+
+ qd.cd(base_name);
+
+
  folder = qd.absolutePath();
  file_path = KA::TextIO::copy_binary_file_to_folder(file_path, folder);
 
+//??
 // XCSD_Image* xcsd;
 // test_pixel_local_aggregate_color_distance(file_path, folder, &xcsd);
 
@@ -418,9 +428,7 @@ void DHAX_Application_Controller::run_combined_test_stats(QString folder, QStrin
  XCSD_Image* xcsd = new XCSD_Image;
  xcsd->find_ntxh_file(qd.absoluteFilePath(file_path));
 
-
- QFileInfo qfi(file_path);
- toroid_run_stats(folder, qfi.baseName(), qfi.suffix(), xcsd);
+ toroid_run_stats(folder, base_name, qfi.suffix(), xcsd);
 }
 
 
@@ -436,7 +444,7 @@ void DHAX_Application_Controller::toroid_run_stats(QString folder,
  qDebug() << "folder = " << folder << "file_name = " << file_name <<
              "extension = " << extension;
  DHAX_Stat_Assessment::run_demo_test(folder,
-   file_name, extension, xcsd);
+   file_name, extension, this, xcsd);
 }
 
 

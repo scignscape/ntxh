@@ -274,6 +274,7 @@ SOURCES += \
   $$SRC_DIR/pdf-viewer/pdf-document-state.cpp \
   $$SRC_DIR/application/dhax-application-controller.cpp \
   $$SRC_DIR/application/dhax-application-controller.color-distance.cpp \
+  $$SRC_DIR/application/dhax-application-controller.show-keypoints.cpp \
   $$SRC_DIR/application/dhax-application-state.cpp \
   $$SRC_DIR/application/dhax-forge-controller.cpp \
   $$SRC_DIR/application/dhax-application-receiver.cpp \

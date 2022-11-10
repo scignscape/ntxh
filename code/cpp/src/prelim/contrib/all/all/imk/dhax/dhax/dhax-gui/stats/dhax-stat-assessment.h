@@ -34,6 +34,8 @@
 
 class Feature_Classifier_Transform;
 
+class DHAX_Application_Controller;
+
 class DHAX_Stat_Assessment
 {
  QString full_image_path_;
@@ -72,8 +74,6 @@ class DHAX_Stat_Assessment
 
 #endif
 
- void run_classifier_transform();
-
 public:
 
  DHAX_Stat_Assessment();
@@ -104,6 +104,8 @@ public:
  ACCESSORS(cv::Mat ,one_channel_dist_image)
  ACCESSORS(cv::Mat ,one_channel_dist_display_image)
 
+
+ void run_classifier_transform();
 
 
  QString get_full_1c_out_path(QString name_extra);
@@ -194,7 +196,8 @@ public:
  void load_images();
 
  static void run_demo_test(QString folder, QString base_file_name,
-   QString extension, XCSD_Image* xcsd = nullptr);
+   QString extension, DHAX_Application_Controller* application_controller,
+   XCSD_Image* xcsd = nullptr);
 
 
 };

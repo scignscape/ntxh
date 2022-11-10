@@ -17,6 +17,11 @@
 
 #include "xcsd-2d/xcsd-image.h"
 
+
+#ifdef USE_OpenCV
+#include <opencv2/core/types.hpp>
+#endif
+
 #include <QString>
 #include <QMap>
 #include <QDir>
@@ -41,6 +46,8 @@ class DHAX_Graphics_Frame;
 class DHAX_Forge_Controller;
 
 class DHAX_Application_State;
+
+class DHAX_Stat_Assessment;
 
 class DHAX_Video_Player_Dialog;
 
@@ -124,6 +131,10 @@ public:
 
  CLASS_NAME_FN (classname ,DHAX_Application_Controller)
 
+#ifdef USE_OpenCV
+ void show_keypoints(std::shared_ptr<QMap<QString, std::shared_ptr<DHAX_Stat_Assessment>>> transforms_map,
+   QString file_path, std::vector<cv::KeyPoint>& keypoints);
+#endif
 
 // QString class_name_folder(QString pre)
 // {
