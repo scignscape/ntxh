@@ -17,6 +17,8 @@
 
 #include "application/dhax-application-controller.h"
 
+#include <QMessageBox>
+
 //void ((*_make_run_0d))(DHAX_Stat_Assessment&)
 
 //typedef void(*_make_run_0d_type)(DHAX_Stat_Assessment&);
@@ -143,41 +145,111 @@ void (*_make_run_lines())(DHAX_Stat_Assessment&)
 
   // Draw the lines
 
-  auto draw_lines = [](std::vector<cv::Vec2f>& lines, cv::Mat out, r8& theta_avg)
+  auto draw_lines = [](std::vector<cv::Vec2f>& lines, u2 extent, cv::Mat out, r8& theta_avg,
+    r8 fct_rotation, bool debug_theta = false)
   {
-   theta_avg = 0;
+   std::vector<r8> diffs_avg, diffs_rotation;
+   diffs_avg.resize(lines.size());
+   diffs_rotation.resize(lines.size());
+
+   r8 avg = 0;
+
+   for( size_t i = 0; i < lines.size(); i++ )
+   {
+    avg += lines[i][1];
+   }
+
+   if(lines.size())
+     avg /= lines.size();
+
+   for( size_t i = 0; i < lines.size(); i++ )
+   {
+    diffs_avg[i] = qAbs(lines[i][1] - avg);
+    diffs_rotation[i] = qAbs(lines[i][1] - fct_rotation);
+   }
+
+   auto it_avg = std::min_element(diffs_avg.begin(), diffs_avg.end());
+   size_t best_fit_avg = std::distance(diffs_avg.begin(), it_avg);
+
+   auto it_rotation = std::min_element(diffs_rotation.begin(), diffs_rotation.end());
+   size_t best_fit_rotation = std::distance(diffs_rotation.begin(), it_rotation);
+
    for( size_t i = 0; i < lines.size(); i++ )
    {
     float rho = lines[i][0], theta = lines[i][1];
 
-    theta_avg += theta;
+    if(debug_theta)
+      qDebug() << "theta = " << qRadiansToDegrees(theta);
 
-    cv::Point pt1, pt2;
-    double a = cos(theta), b = sin(theta);
-    double x0 = a*rho, y0 = b*rho;
-    pt1.x = cvRound(x0 + 1200*(-b));
-    pt1.y = cvRound(y0 + 1200*(a));
-    pt2.x = cvRound(x0 - 1200*(-b));
-    pt2.y = cvRound(y0 - 1200*(a));
-    cv::line(out, pt1, pt2, cv::Scalar(0,0,255), 3, cv::LINE_AA);
+    auto draw_line = [out, rho](float angle, QColor color, u1 width, u2 extent) //cv::Scalar cv_color)
+    {
+     cv::Scalar cv_color(color.blue(), color.green(), color.red());
+     cv::Point pt1, pt2;
+     double a = cos(angle), b = sin(angle);
+     double x0 = a*rho, y0 = b*rho;
+
+     pt1.x = cvRound(x0 + extent * (-b));
+     pt1.y = cvRound(y0 + extent * (a));
+     pt2.x = cvRound(x0 - extent * (-b));
+     pt2.y = cvRound(y0 - extent * (a));
+     cv::line(out, pt1, pt2, cv_color, width, cv::LINE_AA);
+    };
+
+    if(i == best_fit_avg)
+      draw_line(theta, Qt::yellow, 8, extent);
+
+    if(i == best_fit_rotation)
+      draw_line(theta, Qt::magenta, 10, extent);
+
+    draw_line(theta, Qt::cyan, 2, extent);
+
+//    draw_line(qDegreesToRadians(90.), Qt::yellow);
+//    draw_line(qDegreesToRadians(45.), Qt::magenta);
    }
 
-   if(lines.size())
-     theta_avg /= lines.size();
-
-   theta_avg = qRadiansToDegrees(theta_avg);
+   theta_avg = qRadiansToDegrees(avg);
   };
 
   r8 avg_full, avg_1c, avg_dist_1c;
 
   //qRad()
 
+  r8 fct_rotation = 0;
+  if(stat.feature_classifier_transform())
+  {
+   fct_rotation = qDegreesToRadians(stat.feature_classifier_transform()->rotation() + 90);
+  }
 
-  draw_lines(lines_full, out_color_full, avg_full);
-  draw_lines(lines_1c, out_color_1c, avg_1c);
-  draw_lines(lines_dist_1c, out_color_dist_1c, avg_dist_1c);
+  u2 extent = canny_full.cols * 2;
 
-  qDebug() << "theta average (dist 1c) = " << avg_dist_1c;
+  qDebug() << "extent = " << extent;
+
+  draw_lines(lines_full, extent, out_color_full, avg_full, fct_rotation);
+  draw_lines(lines_1c, extent, out_color_1c, avg_1c, fct_rotation);
+  draw_lines(lines_dist_1c, extent, out_color_dist_1c, avg_dist_1c, fct_rotation, true);
+
+  //qDebug() << "theta average (dist 1c) = " << avg_dist_1c;
+
+  {
+   r8 fct90 = stat.feature_classifier_transform()->rotation() + 90;
+   r8 accuracy = qMin(avg_dist_1c, fct90) / qMax(avg_dist_1c, fct90);
+
+   QString msg = R"(Predefined Rotation (against vertical): %1
+Grayscale Line Average: %2
+Toroidal Color Model Line Average: %3
+Toroidal Accuracy (against predefined): %4
+                 )"_qt.arg(fct90)
+     .arg(avg_full).arg(avg_dist_1c).arg(accuracy);
+
+
+   QMessageBox* message_box = new QMessageBox();
+   message_box->setMinimumWidth(350);
+   message_box->setText("Line Detection Angles (compared to predefined transform)");
+   message_box->setInformativeText(R"(Hit "Show Details" for a breakdown)");
+   message_box->setDetailedText(msg);
+   message_box->show();
+  }
+
 
   std::vector<cv::Vec4i> linesP_full, linesP_1c, linesP_dist_1c;
   cv::HoughLinesP(canny_full, linesP_full, 1, CV_PI/180, 50, 50, 10 ); // runs the actual detection
