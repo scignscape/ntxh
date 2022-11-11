@@ -9,6 +9,8 @@
 
 #include <QDebug>
 
+#include <QtMath>
+
 #include <QDir>
 
 #include "feature-classifier-transform.h"
@@ -24,6 +26,188 @@
 
 //
 
+
+//{
+// cv::Mat dst, cdst, cdstP;
+
+////   const char* default_file = "sudoku.png";
+////   // Loads an image
+////   cv::Mat src = imread( cv::samples::findFile( default_file ), cv::IMREAD_GRAYSCALE );
+
+// cv::Mat src = cv::imread("/home/nlevisrael/gits/ctg-temp/dev/dhax-stats/test-combined/default/out/angle/angle.fb-1c.jpg",
+//    cv::IMREAD_GRAYSCALE );
+
+////?  cv::Mat src = stat.gray_image();
+
+// // Edge detection
+// cv::Canny(src, dst, 50, 200, 3);
+// // Copy edges to the images that will display the results in BGR
+// cv::cvtColor(dst, cdst, cv::COLOR_GRAY2BGR);
+// cdstP = cdst.clone();
+// // Standard Hough Line Transform
+// std::vector<cv::Vec2f> lines; // will hold the results of the detection
+// cv::HoughLines(dst, lines, 1, CV_PI/180, 50, 0, 0 ); // runs the actual detection
+// // Draw the lines
+// for( size_t i = 0; i < lines.size(); i++ )
+// {
+//     float rho = lines[i][0], theta = lines[i][1];
+//     cv::Point pt1, pt2;
+//     double a = cos(theta), b = sin(theta);
+//     double x0 = a*rho, y0 = b*rho;
+//     pt1.x = cvRound(x0 + 1000*(-b));
+//     pt1.y = cvRound(y0 + 1000*(a));
+//     pt2.x = cvRound(x0 - 1000*(-b));
+//     pt2.y = cvRound(y0 - 1000*(a));
+//     line( cdst, pt1, pt2, cv::Scalar(0,0,255), 3, cv::LINE_AA);
+// }
+// // Probabilistic Line Transform
+// std::vector<cv::Vec4i> linesP; // will hold the results of the detection
+// cv::HoughLinesP(dst, linesP, 1, CV_PI/180, 15, 50, 20 ); // runs the actual detection
+// // Draw the lines
+// for( size_t i = 0; i < linesP.size(); i++ )
+// {
+//     cv::Vec4i l = linesP[i];
+//     cv::line( cdstP, cv::Point(l[0], l[1]), cv::Point(l[2], l[3]), cv::Scalar(0,0,255), 3, cv::LINE_AA);
+// }
+
+// cv::imwrite("/home/nlevisrael/gits/ctg-temp/dev/dhax-stats/cdist.png", cdst);
+// cv::imwrite("/home/nlevisrael/gits/ctg-temp/dev/dhax-stats/cdistp.png", cdstP);
+
+////   // Show results
+////   cv::imshow("Source", src);
+////   cv::imshow("Detected Lines (in red) - Standard Hough Line Transform", cdst);
+////   cv::imshow("Detected Lines (in red) - Probabilistic Line Transform", cdstP);
+////   // Wait and Exit
+
+//}
+
+
+
+
+void (*_make_run_lines())(DHAX_Stat_Assessment&)
+{
+ return [](DHAX_Stat_Assessment& stat)
+ {
+  stat.load_images();
+
+  cv::Mat canny_full, out_color_full, out_color_p_full;
+  cv::Mat canny_1c, out_color_1c, out_color_p_1c;
+  cv::Mat canny_dist_1c, out_color_dist_1c, out_color_p_dist_1c;
+
+  cv::Canny(stat.gray_image(), canny_full, 50, 200, 3);
+//  cv::cvtColor(canny_full, out_color_full, cv::COLOR_GRAY2BGR);
+
+  cv::Canny(stat.one_channel_image(), canny_1c, 50, 200, 3);
+//  cv::cvtColor(canny_full, out_color_1c, cv::COLOR_GRAY2BGR);
+
+  cv::Canny(stat.one_channel_dist_image(), canny_dist_1c, 50, 200, 3);
+//  cv::cvtColor(canny_full, out_color_dist_1c, cv::COLOR_GRAY2BGR);
+
+
+  out_color_full = stat.full_image().clone();
+//  out_color_1c = stat.one_channel_display_image().clone();
+//  out_color_dist_1c = stat.one_channel_dist_display_image().clone();
+  out_color_1c = stat.full_image().clone();
+  out_color_dist_1c = stat.full_image().clone();
+
+  out_color_p_full = out_color_full.clone();
+  out_color_p_1c = out_color_1c.clone();
+  out_color_p_dist_1c = out_color_dist_1c.clone();
+
+
+//  cv::Mat threshold_full, threshold_1c, threshold_dist_1c;
+//  cv::threshold(stat.gray_image(), threshold_full, 200, 255, cv::THRESH_BINARY);
+//  cv::threshold(stat.one_channel_image(), threshold_1c, 200, 255, cv::THRESH_BINARY);
+//  cv::threshold(stat.one_channel_dist_image(), threshold_dist_1c, 200, 255, cv::THRESH_BINARY);
+
+  r8 rho = 1;  // distance resolution in pixels of the Hough grid
+  r8 theta = CV_PI / 180;  // angular resolution in radians of the Hough grid
+  u4 threshold = 15;  // minimum number of votes (intersections in Hough grid cell)
+  u4 min_line_length = 50; // minimum number of pixels making up a line
+  u4 max_line_gap = 20; // # maximum gap in pixels between connectable line segments
+
+  threshold = 150;  // minimum number of votes (intersections in Hough grid cell)
+  min_line_length = 0; // minimum number of pixels making up a line
+  max_line_gap = 0; // # maximum gap in pixels between connectable line segments
+
+//  cv::Mat copy_full = stat.full_image().clone();
+//  cv::Mat line_results;
+//  cv::HoughLinesP(stat.gray_image(), copy_full, rho, theta, threshold,
+//    min_line_length, max_line_gap);
+
+  std::vector<cv::Vec2f> lines_full, lines_1c, lines_dist_1c;
+
+  cv::HoughLines(canny_full, lines_full, rho, theta, threshold, min_line_length, max_line_gap); // runs the actual detection
+  cv::HoughLines(canny_1c, lines_1c, rho, theta, threshold, min_line_length, max_line_gap); // runs the actual detection
+  cv::HoughLines(canny_dist_1c, lines_dist_1c, rho, theta, threshold, min_line_length, max_line_gap); // runs the actual detection
+
+  // Draw the lines
+
+  auto draw_lines = [](std::vector<cv::Vec2f>& lines, cv::Mat out, r8& theta_avg)
+  {
+   theta_avg = 0;
+   for( size_t i = 0; i < lines.size(); i++ )
+   {
+    float rho = lines[i][0], theta = lines[i][1];
+
+    theta_avg += theta;
+
+    cv::Point pt1, pt2;
+    double a = cos(theta), b = sin(theta);
+    double x0 = a*rho, y0 = b*rho;
+    pt1.x = cvRound(x0 + 1200*(-b));
+    pt1.y = cvRound(y0 + 1200*(a));
+    pt2.x = cvRound(x0 - 1200*(-b));
+    pt2.y = cvRound(y0 - 1200*(a));
+    cv::line(out, pt1, pt2, cv::Scalar(0,0,255), 3, cv::LINE_AA);
+   }
+
+   if(lines.size())
+     theta_avg /= lines.size();
+
+   theta_avg = qRadiansToDegrees(theta_avg);
+  };
+
+  r8 avg_full, avg_1c, avg_dist_1c;
+
+  //qRad()
+
+
+  draw_lines(lines_full, out_color_full, avg_full);
+  draw_lines(lines_1c, out_color_1c, avg_1c);
+  draw_lines(lines_dist_1c, out_color_dist_1c, avg_dist_1c);
+
+  qDebug() << "theta average (dist 1c) = " << avg_dist_1c;
+
+  std::vector<cv::Vec4i> linesP_full, linesP_1c, linesP_dist_1c;
+  cv::HoughLinesP(canny_full, linesP_full, 1, CV_PI/180, 50, 50, 10 ); // runs the actual detection
+
+  auto draw_linesP = [](std::vector<cv::Vec4i>& lines, cv::Mat out)
+  {
+   for( size_t i = 0; i < lines.size(); i++ )
+   {
+    cv::Vec4i l = lines[i];
+    cv::line(out, cv::Point(l[0], l[1]), cv::Point(l[2], l[3]), cv::Scalar(0,0,255), 3, cv::LINE_AA);
+   }
+  };
+
+  draw_linesP(linesP_full, out_color_p_full);
+  draw_linesP(linesP_1c, out_color_p_1c);
+  draw_linesP(linesP_dist_1c, out_color_p_dist_1c);
+
+//  cv::imwrite("/home/nlevisrael/gits/ctg-temp/dev/dhax-stats/HOUGH.png", line_results);
+
+  cv::imwrite(stat.get_full_out_path("HOUGH").toStdString(), out_color_full);
+  cv::imwrite(stat.get_full_out_path("HOUGHP").toStdString(), out_color_p_full);
+
+  cv::imwrite(stat.get_full_1c_out_path("HOUGH").toStdString(), out_color_1c);
+  cv::imwrite(stat.get_full_1c_out_path("HOUGHP").toStdString(), out_color_p_1c);
+
+  cv::imwrite(stat.get_dist_1c_out_path("HOUGH").toStdString(), out_color_dist_1c);
+  cv::imwrite(stat.get_dist_1c_out_path("HOUGHP").toStdString(), out_color_p_dist_1c);
+
+ };
+}
 
 template<cv::RetrievalModes rm, cv::ContourApproximationModes cam>
 void (*_make_run_contours())(DHAX_Stat_Assessment&)
@@ -225,17 +409,25 @@ void (*_make_run_0d())(DHAX_Stat_Assessment&)
    //? BGR& bgr = image.ptr<BGR>(y)[x];
    cv::Vec3b vec = stat.full_image().at<cv::Vec3b>(y, x);
 
+   QColor foreground_color;
 
-   QColor foreground_color = stat.feature_classifier_transform()->foreground_color();
-   QColor vec_color(vec[2], vec[1], vec[0]);
+   if(stat.feature_classifier_transform())
+     foreground_color = stat.feature_classifier_transform()->foreground_color();
+   else if(stat.xcsd_image())
+     foreground_color = stat.xcsd_image()->foreground_pole();
 
-   s2 vec_hue = vec_color.hue();
-   s2 foreground_hue = foreground_color.hue();
-
-   s2 diff = vec_hue - foreground_hue;
-   if(qAbs(diff) < diff_offset)
+   if(foreground_color.isValid())
    {
-    keypoints_1c_screened.push_back(kp);
+    QColor vec_color(vec[2], vec[1], vec[0]);
+
+    s2 vec_hue = vec_color.hue();
+    s2 foreground_hue = foreground_color.hue();
+
+    s2 diff = vec_hue - foreground_hue;
+    if(qAbs(diff) < diff_offset)
+    {
+     keypoints_1c_screened.push_back(kp);
+    }
    }
 //   if(test(diff_offset, diff(vec[2], foreground_color.red()),
 //     diff(vec[1], foreground_color.green()),
@@ -301,6 +493,8 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
 
  QString one_channel_fb = qd.absoluteFilePath(base_file_name + ".fb-1c." + extension);
 
+ std::shared_ptr<DHAX_Stat_Assessment> HOUGH_stat( new DHAX_Stat_Assessment );
+
  std::shared_ptr<DHAX_Stat_Assessment> AKAZE_stat( new DHAX_Stat_Assessment );
  std::shared_ptr<DHAX_Stat_Assessment> SIFT_stat( new DHAX_Stat_Assessment );
  std::shared_ptr<DHAX_Stat_Assessment> BRISK_stat( new DHAX_Stat_Assessment );
@@ -344,6 +538,7 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
  ALGORITHM_NAME##_stat->set_one_channel_dist_display_image_path(one_channel_dist_display); \
  ALGORITHM_NAME##_stat->set_algorithm_name(#ALGORITHM_NAME); \
  ALGORITHM_NAME##_stat->set_feature_classifier_transform(fct); \
+ ALGORITHM_NAME##_stat->set_xcsd_image(xcsd); \
 
 
 #define make_0d_proc(ALGORITHM) \
@@ -362,6 +557,12 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
  U##ALGORITHM##_stat->set_proc(_make_run_0d<cv::xfeatures2d::ALGORITHM>()); \
 
 
+#define make_lines_proc(ALGORITHM) \
+ setup(ALGORITHM) \
+ (*transforms_map)[#ALGORITHM] = ALGORITHM##_stat; \
+ ALGORITHM##_stat->set_proc(_make_run_lines()); \
+
+
 #define make_contours_proc(retrievalModes, contourApproximationModes)  \
  setup(retrievalModes ##_## contourApproximationModes) \
  retrievalModes ##_## contourApproximationModes ##_stat  \
@@ -369,6 +570,11 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
      cv::contourApproximationModes>()); \
 
 
+ make_lines_proc(HOUGH)
+ HOUGH_stat->run();
+
+
+#ifdef HIDE
  make_0d_proc(AKAZE)
  AKAZE_stat->run();
 
@@ -418,6 +624,7 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
 //   SURF_detector = cv::xfeatures2d::SURF::create();
 //   USURF_detector = cv::xfeatures2d::SURF::create();
 
+#endif //def HIDE
 
 #endif
 }

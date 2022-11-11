@@ -481,7 +481,7 @@ void DHAX_Application_Controller::test_pixel_local_aggregate_color_distance(QStr
  XCSD_Image* xcsd = new XCSD_Image;
 
  xcsd->load_image_all(file_path, &ntxh_file);
-// xcsd->load_image(file_path, &ntxh_file);
+   // xcsd->load_image(file_path, &ntxh_file);
 
  xcsd->autoset_fb_poles();
 
@@ -612,19 +612,42 @@ void DHAX_Application_Controller::pixel_local_aggregate_color_distance(
 
  static QRgb cyan = QColor(Qt::cyan).rgb();
 
+ s1 len_r_7_max, len_r_7_min, len_r_5_max, len_r_5_min, len_r_3_max, len_r_3_min,
+   len_c_7_max, len_c_7_min, len_c_5_max, len_c_5_min, len_c_3_max, len_c_3_min;
+
  for(u2 r = 0; r < wh.height; ++r)
  {
   s1 r_offset_min, r_offset_max, c_offset_min, c_offset_max;
 
   if(r < 3)
-    r_offset_min = -r;
+  {
+   r_offset_min = -r;
+   len_r_7_min = -qMin((s4) r, 3);
+   len_r_5_min = -qMin((s4) r, 2);
+   len_r_3_min = -qMin((s4) r, 1);
+  }
   else
-    r_offset_min = -3;
+  {
+   r_offset_min = -3;
+   len_r_7_min = -3;
+   len_r_5_min = -2;
+   len_r_3_min = -1;
+  }
 
-  if(r > wh_3.height)
-    r_offset_max = r - wh_3.height;
+  if(r >= wh_3.height)
+  {
+   r_offset_max = wh_3.height + 2 - r;
+   len_r_7_max = qMin((s4) r_offset_max, 3);
+   len_r_5_max = qMin((s4) r_offset_max, 2);
+   len_r_3_max = qMin((s4) r_offset_max, 1);
+  }
   else
+  {
    r_offset_max = 3;
+   len_r_7_max = 3;
+   len_r_5_max = 2;
+   len_r_3_max = 1;
+  }
 
 
 //?  QRgb* line = (QRgb*) image.scanLine(rc.r);
@@ -651,14 +674,50 @@ void DHAX_Application_Controller::pixel_local_aggregate_color_distance(
   for(u2 c = 0; c < wh.width; ++c)
   {
    if(c < 3)
-     c_offset_min = -c;
+   {
+    c_offset_min = -c;
+    len_c_7_min = -qMin((s4) c, 3);
+    len_c_5_min = -qMin((s4) c, 2);
+    len_c_3_min = -qMin((s4) c, 1);
+   }
    else
-     c_offset_min = -3;
+   {
+    c_offset_min = -3;
+    len_c_7_min = -3;
+    len_c_5_min = -2;
+    len_c_3_min = -1;
+   }
 
-   if(c > wh_3.width)
-     c_offset_max = c - wh_3.width;
+   if(c >= wh_3.width)
+   {
+    c_offset_max = wh_3.width + 2 - c;
+    len_c_7_max = qMin((s4) c_offset_max, 3);
+    len_c_5_max = qMin((s4) c_offset_max, 2);
+    len_c_3_max = qMin((s4) c_offset_max, 1);
+   }
    else
+   {
     c_offset_max = 3;
+    len_c_7_max = 3;
+    len_c_5_max = 2;
+    len_c_3_max = 1;
+   }
+
+   u1 area_7 = (len_c_7_max - len_c_7_min + 1) *
+     (len_r_7_max - len_r_7_min + 1) - 1;
+
+   u1 area_5 = (len_c_5_max - len_c_5_min + 1) *
+     (len_r_5_max - len_r_5_min + 1) - 1;
+
+   u1 area_3 = (len_c_3_max - len_c_3_min + 1) *
+     (len_r_3_max - len_r_3_min + 1) - 1;
+
+//   qDebug() << "area 7 = " << area_7;
+//   qDebug() << "area 5 = " << area_5;
+//   qDebug() << "area 3 = " << area_3;
+
+//   u1 area_5 = (c_offset_max - c_offset_min + 1) *
+//     (r_offset_max - r_offset_min + 1) - 1;
 
 
 //?   QRgb& center_pixel = line[rc.c];
@@ -695,7 +754,8 @@ void DHAX_Application_Controller::pixel_local_aggregate_color_distance(
     }
    }
 
-   u1 gray7 = total7 / 48, gray5 = total5 / 24, gray3 = total3 / 8;
+//?   u1 gray7 = total7 / 48, gray5 = total5 / 24, gray3 = total3 / 8;
+   u1 gray7 = total7 / area_7, gray5 = total5 / area_5, gray3 = total3 / area_3;
 
 
 
