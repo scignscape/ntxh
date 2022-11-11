@@ -21,6 +21,8 @@
 #include <QMenu>
 #include <QAction>
 
+#include <QMessageBox>
+
 
 struct KeyPoint_Graphics_Item : QGraphicsRectItem
 {
@@ -47,11 +49,29 @@ struct KeyPoint_Graphics_Item : QGraphicsRectItem
 
 void KeyPoint_Graphics_Item::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    QMenu* menu = new QMenu;
-    menu->addAction("Action 1");
-    menu->addAction("Action 2");
-    QAction* a = menu->exec(event->screenPos());
-    qDebug("User clicked %s", qPrintable(a->text()));
+ QMenu* menu = new QMenu;
+//    menu->addAction("Action 1");
+//    menu->addAction("Action 2");
+
+ menu->addAction("Keypoint Info", [this]()
+ {
+  QString msg = R"(Angle: %1
+Size: %2
+Response: %3
+Octave: %4
+ )"_qt.arg(keypoint.angle).arg(keypoint.size)
+      .arg(keypoint.response).arg(keypoint.octave);
+
+  QMessageBox* message_box = new QMessageBox();
+  message_box->setMinimumWidth(350);
+  message_box->setText("KeyPoint Info");
+  message_box->setInformativeText(R"(Hit "Show Details" for information about this KeyPoint)");
+  message_box->setDetailedText(msg);
+  message_box->show();
+ });
+
+
+ QAction* a = menu->exec(event->screenPos());
 }
 
 

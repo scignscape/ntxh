@@ -57,6 +57,11 @@ public:
 
  QPixmap get_pixmap_with_overlays();
 
+ QImage* get_overlay_source_image()
+ {
+  return &overlay_cut_image_;
+ }
+
 Q_SIGNALS:
 
  void sequence_finished();

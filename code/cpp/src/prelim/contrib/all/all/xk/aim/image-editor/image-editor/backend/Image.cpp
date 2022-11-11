@@ -53,8 +53,12 @@ void Image::remove_alpha_codes(QImage& qim)
 
 
 void Image::show_alpha_codes(QVector<QColor> colors,
-  QImage& qim, QImage* source)
+  QImage& qim, QImage* source, QMap<s2, QPair<u4, u4>>* measurements)
 {
+ qDebug() << "colors = " << colors;
+
+ QMap<QRgb, u4> cmap;
+
  int a_count = 0;
 
 
@@ -106,15 +110,64 @@ void Image::show_alpha_codes(QVector<QColor> colors,
 
    if(a)
    {
-    --a;
-    qim.setPixelColor(x, y, colors.value(a));
     ++a_count;
+
+    if(measurements)
+    {
+     QColor qclr = qim.pixelColor(x, y);
+
+     if(++cmap[qclr.rgba()] == 1)
+     {
+      qDebug() << "New color: " << qclr;
+      qDebug() << "B color: " << colors.first();
+     }
+
+     u1 bkg = 0, match = 0;
+     for(QColor clr : colors)
+     {
+      ++bkg;
+      if(qclr == clr)
+      {
+       match = bkg;
+       break;
+      }
+     }
+     if(match)
+     {
+      ++(*measurements)[-2].second;
+      ++(*measurements)[a].second;
+     }
+     else
+     {
+      ++(*measurements)[-2].first;
+      ++(*measurements)[a].first;
+     }
+    }
+
+    else
+    {
+     --a;
+     qim.setPixelColor(x, y, colors.value(a));
+
+     qim.setPixelColor(x - 1, y, colors.value(a));
+     qim.setPixelColor(x, y - 1, colors.value(a));
+
+     qim.setPixelColor(x + 1, y, colors.value(a));
+     qim.setPixelColor(x, y + 1, colors.value(a));
+    }
    }
   }
 
  }
 
- qDebug() << "alpha count = " << a_count;
+ if(measurements)
+ {
+  (*measurements)[-1].first = a_count;
+
+  qDebug() << "cmap = " << cmap;
+ }
+ else
+   qDebug() << "alpha count = " << a_count;
 }
 
 

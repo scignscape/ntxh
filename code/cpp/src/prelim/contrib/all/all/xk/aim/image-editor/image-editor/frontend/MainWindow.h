@@ -125,7 +125,8 @@ public:
    QVector<QColor> colors = {}, u1 overlay_cut = 1);
 
  void run_quantize_27x27();
- void run_internal_command(QString fn);
+ void run_internal_command(QString fn, QImage* ref);
+ void run_feature_measurements(QImage* ref);
 
  void show_alpha_codes(QVector<QColor> colors, QString save_path);
 

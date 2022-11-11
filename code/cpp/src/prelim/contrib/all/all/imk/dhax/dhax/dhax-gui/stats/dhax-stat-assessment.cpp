@@ -210,6 +210,10 @@ void DHAX_Stat_Assessment::run_classifier_transform()
    feature_classifier_transform_->vertical_skew(),
    feature_classifier_transform_->rotation()) );
 
+ cmds.push_back(c1);
+
+ if(feature_classifier_transform_->box_sizes().width == 27)
+   cmds.push_back("quantize_27x27"_qt);
 
  std::shared_ptr<ICommand> c2(
    new Heuristic_Color_Mask_Command(dlg->get_active_image(),
@@ -217,12 +221,9 @@ void DHAX_Stat_Assessment::run_classifier_transform()
    feature_classifier_transform_->color_distance_threshold(),
    feature_classifier_transform_->color_distance_model()) );
 
- cmds.push_back(c1);
-
- if(feature_classifier_transform_->box_sizes().width == 27)
-   cmds.push_back("quantize_27x27"_qt);
-
  cmds.push_back(c2);
+
+ cmds.push_back("--run_feature_measurements"_qt);
 
 
  dlg->load_predefined_transforms(cmds);
@@ -233,7 +234,9 @@ void DHAX_Stat_Assessment::run_classifier_transform()
  QVector<QColor> colors;
  colors << Qt::cyan << Qt::yellow << Qt::green << Qt::red;
 
- dlg->run_predefined_transforms("/home/nlevisrael/gits/ctg-temp/dev/dhax-stats/temp-%1.png", colors);
+ dlg->run_predefined_transforms("%1/../%2-@.png"_qt
+   .arg(qfi.absolutePath()).arg(qfi.baseName().replace("full", algorithm_name_))
+   .replace('@', "%1"), colors);
 
 //? dlg->show_alpha_codes(colors, "/home/nlevisrael/gits/ctg-temp/dev/dhax-stats/temp.png");
 

@@ -594,10 +594,74 @@ void MainWindow::handle_shear_transform(Skew_Shear_Rotate ssr)
  }
 }
 
-void MainWindow::run_internal_command(QString fn)
+void MainWindow::run_internal_command(QString fn, QImage* ref)
 {
  if(fn == "quantize_27x27")
    run_quantize_27x27();
+
+ else if(fn == "run_feature_measurements")
+   run_feature_measurements(ref);
+}
+
+
+
+void MainWindow::run_feature_measurements(QImage* ref)
+{
+
+// active_image_->getQImage().save("/home/nlevisrael/gits/ctg-temp/dev/dhax-stats/temp-base.png");
+// ref->save("/home/nlevisrael/gits/ctg-temp/dev/dhax-stats/ref.png");
+
+ QMap<s2, QPair<u4, u4>> measurements;
+
+
+ //QImage* get_overlay_source_image()
+ Image::show_alpha_codes({Qt::white}, active_image_->getQImage(), ref, &measurements);
+
+ QString msg = R"(F/B channel reduction, foreground: %1
+F/B channel reduction, background: %2
+F/B (cut), foreground: %3
+F/B (cut), background: %4
+Saturation, foreground: %5
+Saturation, background: %6
+Both, foreground: %7
+Both, background: %8
+
+)"_qt.arg(measurements[1].first).arg(measurements[1].second)
+  .arg(measurements[4].first).arg(measurements[4].second)
+  .arg(measurements[2].first).arg(measurements[2].second)
+  .arg(measurements[3].first).arg(measurements[3].second);
+
+
+ msg += R"(Totals:
+Foreground: %1
+Background: %2
+Overall: %3
+
+)"_qt.arg(measurements[-2].first).arg(measurements[-2].second).arg(measurements[-1].first);
+
+ u4 ft = measurements[1].first + measurements[3].first;
+ u4 bt = measurements[1].second + measurements[3].second;
+
+ r8 fb_ratio = (r8) ft / bt;
+ r8 fb_percent = ((r8) ft / (ft + bt)) * 100;
+
+ msg += R"(F/B, total:
+Foreground: %1
+Background: %2
+Ratio: %3 (%4%))"_qt.arg(ft).arg(bt).arg(fb_ratio).arg(fb_percent);
+
+// qDebug() << "m = " << measurements;
+
+ QMessageBox* mbox = new QMessageBox(this);
+
+ mbox->setWindowTitle("KeyPoint Classifier Measurements");
+ mbox->setText(R"(Hit "Show Details" for a breakdown)");
+ mbox->setDetailedText(msg);
+
+ mbox->show();
+
+
+
 }
 
 
@@ -631,6 +695,8 @@ void MainWindow::run_predefined_transforms(QString file_path_pattern,
  connect(rtd, &Run_Transforms_Dialog::next_step_requested, [this, rtd, file_path_pattern,
    unshow_features, show_features](u1 count, bool _show_features)
  {
+  bool save_needed = true;
+
   Command_or_String cmd_or_s = predefined_transforms_[count - 1];
   if(cmd_or_s.fn.isEmpty())
   {
@@ -638,18 +704,27 @@ void MainWindow::run_predefined_transforms(QString file_path_pattern,
   }
   else
   {
-   run_internal_command(cmd_or_s.fn);
+   if(cmd_or_s.fn.startsWith("--"))
+   {
+    cmd_or_s.fn = cmd_or_s.fn.mid(2);
+    save_needed = false;
+   }
+   run_internal_command(cmd_or_s.fn, rtd->get_overlay_source_image());
   }
 
-  active_image_->updateBuffer();
-  if(!file_path_pattern.isEmpty())
-    rtd->save_step_image();
+  if(save_needed)
+  {
+   active_image_->updateBuffer();
+   if(!file_path_pattern.isEmpty())
+     rtd->save_step_image();
 
-  current_pixmap_ = QPixmap::fromImage(active_image_->getQImage());
-  if(_show_features)
-    show_features();
-  else
-    unshow_features();
+   current_pixmap_ = QPixmap::fromImage(active_image_->getQImage());
+   if(_show_features)
+     show_features();
+   else
+     unshow_features();
+  }
+
   //pixmap_item_->setPixmap(current_pixmap_);
  });
 
