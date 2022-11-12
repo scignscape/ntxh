@@ -44,6 +44,8 @@ class DHAX_Stat_Assessment
  QString one_channel_dist_image_path_;
  QString one_channel_dist_display_image_path_;
 
+ QString current_out_subfolder_;
+
  QString algorithm_name_;
 
  XCSD_Image* xcsd_image_;
@@ -74,6 +76,8 @@ class DHAX_Stat_Assessment
 
 #endif
 
+ void check_subfolder(QString& result);
+
 public:
 
  DHAX_Stat_Assessment();
@@ -89,6 +93,10 @@ public:
  ACCESSORS__RGET(std::vector<cv::KeyPoint> ,keypoints_1c)
  ACCESSORS__RGET(std::vector<cv::KeyPoint> ,keypoints_dist_1c)
  ACCESSORS__RGET(std::vector<cv::KeyPoint> ,keypoints_1c_screened)
+
+ ACCESSORS(QString ,current_out_subfolder)
+
+ void set_current_out_subfolder(u1 dim);
 
  ACCESSORS(QString ,algorithm_name)
 

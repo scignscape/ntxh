@@ -17,18 +17,24 @@ Stat_Test_Image::Stat_Test_Image(QString file_path)
 }
 
 
-QString Stat_Test_Image::file_path_with_presuffix(QString pres)
+QString Stat_Test_Image::file_path_with_presuffix(QString pres, QString subdir)
 {
  QFileInfo qfi(file_path_);
 
- return qfi.absolutePath() + "/" +
+ if(!subdir.isEmpty())
+   subdir += "/";
+
+ return qfi.absolutePath() + "/" + subdir +
    qfi.completeBaseName() + "." + pres + "." + qfi.suffix();
 }
 
-QString Stat_Test_Image::file_path_with_name_addon(QString addon)
+QString Stat_Test_Image::file_path_with_name_addon(QString addon, QString subdir)
 {
+ if(!subdir.isEmpty())
+   subdir += "/";
+
  QFileInfo qfi(file_path_);
 
- return qfi.absolutePath() + "/" +
+ return qfi.absolutePath() + "/" + subdir +
    qfi.completeBaseName() + addon + "." + qfi.suffix();
 }

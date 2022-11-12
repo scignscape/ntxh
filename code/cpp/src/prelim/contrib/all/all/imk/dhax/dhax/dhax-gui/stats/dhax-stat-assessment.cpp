@@ -71,39 +71,70 @@ void DHAX_Stat_Assessment::check_follow_up()
 }
 
 
+void DHAX_Stat_Assessment::set_current_out_subfolder(u1 dim)
+{
+ current_out_subfolder_ = "out-%1d"_qt.arg(dim);
+}
+
+
+void DHAX_Stat_Assessment::check_subfolder(QString& result)
+{
+ if(current_out_subfolder_.isEmpty())
+   return;
+
+ QFileInfo qfi(result);
+
+ result =
+   qfi.absolutePath() + "/" + current_out_subfolder_ + "/"
+   + qfi.completeBaseName() + "." + qfi.suffix();
+}
+
+
 QString DHAX_Stat_Assessment::get_full_1c_screened_out_path(QString name_extra)
 {
  QString result = full_image_path_;
+ check_subfolder(result);
+
  return result.replace("-full", "-full-1c-screened-" + name_extra);
 }
 
 QString DHAX_Stat_Assessment::get_full_1c_out_path(QString name_extra)
 {
  QString result = full_image_path_;
+ check_subfolder(result);
+
  return result.replace("-full", "-full-1c-" + name_extra);
 }
 
 QString DHAX_Stat_Assessment::get_1c_out_path(QString name_extra)
 {
  QString result = one_channel_image_path_;
+ check_subfolder(result);
+
  return result.replace("-1c", "-1c-" + name_extra);
 }
 
 QString DHAX_Stat_Assessment::get_full_out_path(QString name_extra)
 {
  QString result = full_image_path_;
+ check_subfolder(result);
+
  return result.replace("-full", "-full-" + name_extra);
 }
 
 QString DHAX_Stat_Assessment::get_dist_1c_out_path(QString name_extra)
 {
  QString result = one_channel_dist_image_path_;
+ check_subfolder(result);
+
  return result.replace("-1c", "-1c-" + name_extra);
 }
 
 QString DHAX_Stat_Assessment::get_full_dist_1c_out_path(QString name_extra)
 {
  QString result = full_image_path_;
+ check_subfolder(result);
+
  return result.replace("-full", "-full-1cd-" + name_extra);
 }
 
@@ -111,18 +142,24 @@ QString DHAX_Stat_Assessment::get_full_dist_1c_out_path(QString name_extra)
 QString DHAX_Stat_Assessment::get_full_1c_oa_out_path(QString name_extra)
 {
  QString result = full_image_path_;
+ check_subfolder(result);
+
  return result.replace("-full", "-full-1c-oa-" + name_extra);
 }
 
 QString DHAX_Stat_Assessment::get_full_oa_out_path(QString name_extra)
 {
  QString result = full_image_path_;
+ check_subfolder(result);
+
  return result.replace("-full", "-full-oa-" + name_extra);
 }
 
 QString DHAX_Stat_Assessment::get_dist_1c_oa_out_path(QString name_extra)
 {
  QString result = one_channel_dist_image_path_;
+ check_subfolder(result);
+
  return result.replace("-1c", "-1c-oa-" + name_extra);
 }
 

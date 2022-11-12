@@ -147,7 +147,7 @@ public:
 
  DHAX_Forge_Controller* check_init_forge_controller();
 
- void pixel_local_aggregate_color_distance(QString file_path, XCSD_Image* xcsd = nullptr);
+ void pixel_local_aggregate_color_distance(QString file_path, QString subfolder, XCSD_Image* xcsd = nullptr);
  void test_pixel_local_aggregate_color_distance();
  void show_pixel_local_aggregate_color_distance();
  void toroid_run_stats();
@@ -155,7 +155,7 @@ public:
  QString get_test_file_from_folder(QString folder);
 
  void test_pixel_local_aggregate_color_distance(QString folder);
- void test_pixel_local_aggregate_color_distance(QString file_path, QString folder,
+ void test_pixel_local_aggregate_color_distance(QString file_path, QString subfolder,
    XCSD_Image** xcsd = nullptr);
 
  void toroid_run_stats(QString folder, QString file_name,

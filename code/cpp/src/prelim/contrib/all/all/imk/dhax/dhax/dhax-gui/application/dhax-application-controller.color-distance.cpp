@@ -416,16 +416,26 @@ void DHAX_Application_Controller::run_combined_test_stats(QString folder, QStrin
 
  qd.cd(base_name);
 
+ if(!qd.exists("out-dist"))
+   qd.mkdir("out-dist");
+ if(!qd.exists("out-0d"))
+   qd.mkdir("out-0d");
+ if(!qd.exists("out-1d"))
+   qd.mkdir("out-1d");
+ if(!qd.exists("out-2d"))
+   qd.mkdir("out-2d");
+
 
  folder = qd.absolutePath();
  file_path = KA::TextIO::copy_binary_file_to_folder(file_path, folder);
 
-//??
-// XCSD_Image* xcsd;
-// test_pixel_local_aggregate_color_distance(file_path, folder, &xcsd);
 
- QString ntxh_file;
- XCSD_Image* xcsd = new XCSD_Image;
+//??
+ XCSD_Image* xcsd;
+ test_pixel_local_aggregate_color_distance(file_path, "out-dist", &xcsd);
+
+// QString ntxh_file;
+// XCSD_Image* xcsd = new XCSD_Image;
  xcsd->find_ntxh_file(qd.absoluteFilePath(file_path));
 
  toroid_run_stats(folder, base_name, qfi.suffix(), xcsd);
@@ -456,7 +466,7 @@ void DHAX_Application_Controller::show_pixel_local_aggregate_color_distance()
 
  // QString fp = idc->current_file_path();
 
- pixel_local_aggregate_color_distance(idc->current_file_path());
+ pixel_local_aggregate_color_distance(idc->current_file_path(), {});
 }
 
 
@@ -472,7 +482,7 @@ void DHAX_Application_Controller::test_pixel_local_aggregate_color_distance(QStr
 }
 
 void DHAX_Application_Controller::test_pixel_local_aggregate_color_distance(QString file_path,
-   QString folder, XCSD_Image** _xcsd)
+   QString subfolder, XCSD_Image** _xcsd)
 {
  qDebug() << "Calculating color distance for " << file_path;
 
@@ -490,7 +500,7 @@ void DHAX_Application_Controller::test_pixel_local_aggregate_color_distance(QStr
  qDebug() << "Autoset background pole: " << xcsd->background_pole() <<
              " and foreground pole: " << xcsd->foreground_pole();
 
- pixel_local_aggregate_color_distance(file_path, xcsd);
+ pixel_local_aggregate_color_distance(file_path, subfolder, xcsd);
 
  if(_xcsd)
    *_xcsd = xcsd;
@@ -518,19 +528,20 @@ QString DHAX_Application_Controller::get_test_file_from_folder(QString folder)
 
 
 void DHAX_Application_Controller::pixel_local_aggregate_color_distance(
-  QString file_path, XCSD_Image* xcsd)
+  QString file_path, QString subfolder, XCSD_Image* xcsd)
 {
  Stat_Test_Image stat_image(file_path);
 
  if(xcsd)
  {
-  xcsd->save_foreground_distance_channel_to_red_black_image(stat_image.file_path_with_presuffix("fg"));
-  xcsd->save_foreground_distance_channel_to_red_white_image(stat_image.file_path_with_presuffix("fgw"));
+  xcsd->save_foreground_distance_channel_to_red_black_image(stat_image.file_path_with_presuffix("fg", subfolder));
+  xcsd->save_foreground_distance_channel_to_red_white_image(stat_image.file_path_with_presuffix("fgw", subfolder));
 
-  xcsd->save_background_distance_channel_to_blue_black_image(stat_image.file_path_with_presuffix("bg"));
-  xcsd->save_background_distance_channel_to_blue_white_image(stat_image.file_path_with_presuffix("bgw"));
+  xcsd->save_background_distance_channel_to_blue_black_image(stat_image.file_path_with_presuffix("bg", subfolder));
+  xcsd->save_background_distance_channel_to_blue_white_image(stat_image.file_path_with_presuffix("bgw", subfolder));
 
-  xcsd->save_fb_one_channel_image(stat_image.file_path_with_presuffix("fb-1c"));
+  xcsd->save_fb_one_channel_image(stat_image.file_path_with_presuffix("fb-1c", subfolder));
+  xcsd->save_fb_one_channel_image(stat_image.file_path_with_presuffix("fb-1c", "."));
  }
 
 
@@ -568,16 +579,16 @@ void DHAX_Application_Controller::pixel_local_aggregate_color_distance(
 
  QImage image(file_path);
 
- QString result_3 = stat_image.file_path_with_presuffix("1c-3-dist");
- QString result_5 = stat_image.file_path_with_presuffix("1c-5-dist");
- QString result_7 = stat_image.file_path_with_presuffix("1c-7-dist");
+ QString result_3 = stat_image.file_path_with_presuffix("1c-3-dist", subfolder);
+ QString result_5 = stat_image.file_path_with_presuffix("1c-5-dist", subfolder);
+ QString result_7 = stat_image.file_path_with_presuffix("1c-7-dist", subfolder);
 
- QString result_7rgb = stat_image.file_path_with_presuffix("1c-7rgb-dist");
+ QString result_7rgb = stat_image.file_path_with_presuffix("1c-7rgb-dist", subfolder);
 
- QString result_8b = stat_image.file_path_with_presuffix("8b");
- QString result_8b_125_cyan = stat_image.file_path_with_presuffix("8b-125-cyan");
- QString result_8b_175_cyan = stat_image.file_path_with_presuffix("8b-175-cyan");
- QString result_8b_225_cyan = stat_image.file_path_with_presuffix("8b-225-cyan");
+ QString result_8b = stat_image.file_path_with_presuffix("8b", subfolder);
+ QString result_8b_125_cyan = stat_image.file_path_with_presuffix("8b-125-cyan", subfolder);
+ QString result_8b_175_cyan = stat_image.file_path_with_presuffix("8b-175-cyan", subfolder);
+ QString result_8b_225_cyan = stat_image.file_path_with_presuffix("8b-225-cyan", subfolder);
 
  wh2 wh = { (u2) image.width(), (u2) image.height()};
  wh2 wh_3 = wh - 3;

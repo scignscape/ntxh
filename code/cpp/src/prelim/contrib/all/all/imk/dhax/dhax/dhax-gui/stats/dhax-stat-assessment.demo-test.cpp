@@ -226,7 +226,7 @@ void (*_make_run_lines())(DHAX_Stat_Assessment&)
 
   draw_lines(lines_full, extent, out_color_full, avg_full, fct_rotation);
   draw_lines(lines_1c, extent, out_color_1c, avg_1c, fct_rotation);
-  draw_lines(lines_dist_1c, extent, out_color_dist_1c, avg_dist_1c, fct_rotation, true);
+  draw_lines(lines_dist_1c, extent, out_color_dist_1c, avg_dist_1c, fct_rotation);
 
   //qDebug() << "theta average (dist 1c) = " << avg_dist_1c;
 
@@ -616,28 +616,34 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
 #define make_0d_proc(ALGORITHM) \
  setup(ALGORITHM) \
  (*transforms_map)[#ALGORITHM] = ALGORITHM##_stat; \
+ ALGORITHM##_stat->set_current_out_subfolder(0); \
  ALGORITHM##_stat->set_proc(_make_run_0d<cv::ALGORITHM>()); \
 
 #define make_0d_xproc(ALGORITHM) \
  setup(ALGORITHM) \
  (*transforms_map)[#ALGORITHM] = ALGORITHM##_stat; \
+ ALGORITHM##_stat->set_current_out_subfolder(0); \
  ALGORITHM##_stat->set_proc(_make_run_0d<cv::xfeatures2d::ALGORITHM>()); \
 
 #define make_0d_uxproc(ALGORITHM) \
  setup(U##ALGORITHM) \
  (*transforms_map)["U" #ALGORITHM] = U##ALGORITHM##_stat; \
+ U##ALGORITHM##_stat->set_current_out_subfolder(0); \
  U##ALGORITHM##_stat->set_proc(_make_run_0d<cv::xfeatures2d::ALGORITHM>()); \
 
 
 #define make_lines_proc(ALGORITHM) \
  setup(ALGORITHM) \
  (*transforms_map)[#ALGORITHM] = ALGORITHM##_stat; \
+ ALGORITHM##_stat->set_current_out_subfolder(1); \
  ALGORITHM##_stat->set_proc(_make_run_lines()); \
 
 
 #define make_contours_proc(retrievalModes, contourApproximationModes)  \
  setup(retrievalModes ##_## contourApproximationModes) \
- retrievalModes ##_## contourApproximationModes ##_stat  \
+ retrievalModes ##_## contourApproximationModes ##_stat \
+   ->set_current_out_subfolder(2); \
+ retrievalModes ##_## contourApproximationModes ##_stat \
    ->set_proc(_make_run_contours<cv::retrievalModes, \
      cv::contourApproximationModes>()); \
 
@@ -646,7 +652,7 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
  HOUGH_stat->run();
 
 
-#ifdef HIDE
+//?#ifdef HIDE
  make_0d_proc(AKAZE)
  AKAZE_stat->run();
 
@@ -696,7 +702,7 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
 //   SURF_detector = cv::xfeatures2d::SURF::create();
 //   USURF_detector = cv::xfeatures2d::SURF::create();
 
-#endif //def HIDE
+//?#endif //def HIDE
 
 #endif
 }
