@@ -431,12 +431,12 @@ void DHAX_Application_Controller::run_combined_test_stats(QString folder, QStrin
 
 
 //??
- XCSD_Image* xcsd;
- test_pixel_local_aggregate_color_distance(file_path, "out-dist", &xcsd);
+// XCSD_Image* xcsd;
+// test_pixel_local_aggregate_color_distance(file_path, "out-dist", &xcsd);
 
  QString ntxh_file;
-// XCSD_Image* xcsd = new XCSD_Image;
-// xcsd->find_ntxh_file(qd.absoluteFilePath(file_path));
+ XCSD_Image* xcsd = new XCSD_Image;
+ xcsd->find_ntxh_file(qd.absoluteFilePath(file_path));
 
  toroid_run_stats(folder, base_name, qfi.suffix(), xcsd);
 }
@@ -588,6 +588,11 @@ void DHAX_Application_Controller::pixel_local_aggregate_color_distance(
  QString result_8b = stat_image.file_path_with_presuffix("8b", subfolder);
  QString result_8b_up = stat_image.file_path_with_presuffix("8b");
 
+ QString result_8b_all = stat_image.file_path_with_presuffix("8ba", subfolder);
+ QString result_8b_all_up = stat_image.file_path_with_presuffix("8ba");
+
+ QString result_8b_all_sorted = stat_image.file_path_with_presuffix("8bas", subfolder);
+
  QString result_8b_125_cyan = stat_image.file_path_with_presuffix("8b-125-cyan", subfolder);
  QString result_8b_175_cyan = stat_image.file_path_with_presuffix("8b-175-cyan", subfolder);
  QString result_8b_225_cyan = stat_image.file_path_with_presuffix("8b-225-cyan", subfolder);
@@ -622,6 +627,7 @@ void DHAX_Application_Controller::pixel_local_aggregate_color_distance(
 
  //?QMap<pr1, u4> bin_counts_5_10_20;
  std::map<pr1, pr4> bin_counts_5_10_20;
+ std::map<pr1, pr4> bin_counts_5_10_20_all;
 
  static QRgb cyan = QColor(Qt::cyan).rgb();
 
@@ -787,12 +793,20 @@ void DHAX_Application_Controller::pixel_local_aggregate_color_distance(
 
    //QColor normed = normalize_rgb(center_color);
 
+
+   SV_Centered_Vector scv = get_sv_centered_vector(center_color).disk_protrude();
+   u1 bin = scv.get_5_10_20_bin();
+   u1 h = center_color.hsvHue() / 12;
+   {
+    auto it = bin_counts_5_10_20_all.find({h, bin});
+    if(it == bin_counts_5_10_20_all.end())
+      bin_counts_5_10_20_all[{h, bin}] = {1, center_color.rgb()};
+    else
+      ++bin_counts_5_10_20_all[{h, bin}].first;
+   }
+
    if(gray7 > 125)
    {
-    SV_Centered_Vector scv = get_sv_centered_vector(center_color).disk_protrude();
-    u1 bin = scv.get_5_10_20_bin();
-    u1 h = center_color.hsvHue() / 12;
-
     auto it = bin_counts_5_10_20.find({h, bin});
     if(it == bin_counts_5_10_20.end())
       bin_counts_5_10_20[{h, bin}] = {1, center_color.rgb()};
@@ -862,9 +876,17 @@ void DHAX_Application_Controller::pixel_local_aggregate_color_distance(
 //??  rc.c = 3;
  }
 
- QMap<pr1, QColor> most_common;
 
- QVector<QRgb> i8b_color_table;
+ qDebug() << "\nbin counts all size = " << bin_counts_5_10_20_all.size();
+ qDebug() << "bin counts size = " << bin_counts_5_10_20.size();
+
+ qDebug() << "\nbin counts all = " << bin_counts_5_10_20_all;
+ qDebug() << "bin counts = " << bin_counts_5_10_20;
+
+ QMap<pr1, QColor> most_common, most_common_all;
+
+ QVector<QRgb> i8b_color_table, i8b_color_table_all,
+   i8b_color_table_all_adj, i8b_color_table_all_sorted;
 
  i8b_color_table.push_back(cyan);
 
@@ -888,9 +910,58 @@ void DHAX_Application_Controller::pixel_local_aggregate_color_distance(
   bin_counts_5_10_20.erase(pr);
  }
 
+ u2 most_common_count_all = 0;
+ while(most_common_count_all < 255)
+ {
+  if(bin_counts_5_10_20_all.empty())
+    break;
+  auto pr = std::max_element
+  (
+      std::begin(bin_counts_5_10_20_all), std::end(bin_counts_5_10_20_all),
+      [] (const auto& p1, const auto& p2)
+      {
+          return p1.second < p2.second;
+      }
+  );
+  most_common_all[pr->first] = QColor::fromRgb(pr->second.second);
+  i8b_color_table_all.push_back(pr->second.second);
+  ++most_common_count_all;
+  bin_counts_5_10_20_all.erase(pr);
+ }
+
+ QVector<QPair<u1, QColor>> sort;
+
+ for(QRgb rgb : i8b_color_table_all)
+ {
+  QColor c = QColor::fromRgb(rgb);
+  sort.push_back({c.lightness(), c});
+  c.setGreen(c.green() / 2);
+  QRgb rgb1 = c.rgb();
+  i8b_color_table_all_adj.push_back(rgb1);
+ }
+
+ std::sort(sort.begin(), sort.end(), [](auto lhs, auto rhs)
+ {
+  return lhs.first < rhs.first;
+ });
+
+ qDebug() << "sort = " << sort;
+
+ for(auto pr : sort)
+ {
+  i8b_color_table_all_sorted.push_back(pr.second.rgb());
+ }
+
+
+
  QImage i8b = image.convertToFormat(QImage::Format_Indexed8,
    i8b_color_table, Qt::ThresholdDither|Qt::AutoColor);
 
+ QImage i8b_all = image.convertToFormat(QImage::Format_Indexed8,
+   i8b_color_table_all_adj, Qt::ThresholdDither|Qt::AutoColor);
+
+ QImage i8b_all_sorted = image.convertToFormat(QImage::Format_Indexed8,
+   i8b_color_table_all_sorted, Qt::ThresholdDither|Qt::AutoColor);
 
  QImage p8b_125 = cyan_8b_125_image.convertToFormat(QImage::Format_Indexed8,
    i8b_color_table, Qt::ThresholdDither|Qt::AutoColor);
@@ -917,6 +988,12 @@ void DHAX_Application_Controller::pixel_local_aggregate_color_distance(
 
  i8b.save(result_8b);
  i8b.save(result_8b_up);
+
+ i8b_all.save(result_8b_all);
+ i8b_all.save(result_8b_all_up);
+
+ i8b_all_sorted.save(result_8b_all_sorted);
+
  p8b_125.save(result_8b_125_cyan);
  p8b_175.save(result_8b_175_cyan);
  p8b_225.save(result_8b_225_cyan);

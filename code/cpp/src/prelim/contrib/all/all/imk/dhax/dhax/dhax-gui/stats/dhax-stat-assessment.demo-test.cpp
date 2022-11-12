@@ -106,8 +106,8 @@ void (*_make_run_superpixels())(DHAX_Stat_Assessment&)
 //  QString output_file = stat.get_full_1c_out_path();
 //  cv::Mat inputMatrix = stat.full_image();
 
-  const int numberOfSuperpixels = 400;
-  const int compactness = 20;
+  const int numberOfSuperpixels = 800;
+  const int compactness = 50;
   const double treshold = 30.0;
 
 //  cv::Mat onec = stat.one_channel_image();
@@ -116,9 +116,11 @@ void (*_make_run_superpixels())(DHAX_Stat_Assessment&)
   superpixel::SLIC sslic;
   SLIC slic, slic_8b;
 
-  cv::Mat img, img_8b, result, result_8b;
+  cv::Mat img, img_8b, img_ref1, img_ref2, img_on_full, result, result_ref1,
+    result_ref2, result_8b, result_8b_on_full, result_8b_ref1, result_8b_ref2; //, result_8b_ref21;
 
-  img = stat.full_image();
+  img = stat.full_image().clone();
+  img_on_full = img.clone();
 
   img_8b = cv::imread(stat.eight_bit_image_path().toStdString());
   //imgc = stat.one_channel_dist_image();
@@ -129,16 +131,42 @@ void (*_make_run_superpixels())(DHAX_Stat_Assessment&)
   slic_8b.GenerateSuperpixels(img_8b, numberOfSuperpixels);
 
   result = slic.GetImgWithContours(cv::Scalar(0, 0, 255));
-  result_8b = slic_8b.GetImgWithContours(cv::Scalar(0, 0, 255));
+  result_8b = slic_8b.GetImgWithContours(cv::Scalar(0, 255, 255));
+
+//  BRISK
+
+  img_ref1 = cv::imread(stat.prior_ref_image_paths()[0].toStdString());
+  img_ref2 = cv::imread(stat.prior_ref_image_paths()[1].toStdString());
+
+  result_8b_ref1 = slic_8b.GetImgWithContours(cv::Scalar(0, 255, 255), img_ref1);
+  result_ref1 = slic.GetImgWithContours(cv::Scalar(0, 0, 255), img_ref1);
+
+  result_8b_ref2 = slic_8b.GetImgWithContours(cv::Scalar(0, 255, 255), img_ref2);
+  result_ref2 = slic.GetImgWithContours(cv::Scalar(255, 0, 0), img_ref2);
+//  result_8b_ref21 = slic_8b.GetImgWithContours(cv::Scalar(0, 255, 255), img_ref2);
+
+  result_8b_on_full = slic_8b.GetImgWithContours(cv::Scalar(0, 255, 255), img_on_full);
 
   QString out = stat.get_full_out_path();
-  QString out_f = out, out_8b = out, out_o8b = out;
+  QString out_f = out, out_8b = out, out_o8b = out,
+    out_o8b_on_full = out, out_o8b_ref1 = out, out_o8b_ref2 = out, out_ref1 = out, out_ref2 = out;
+
   out_f.replace("full", "full-o");
   out_o8b.replace("full", "full-o8b");
   out_8b.replace("full", "full-8b");
+  out_o8b_ref1.replace("full", "full-o8b-ref1");
+  out_o8b_ref2.replace("full", "full-o8b-ref2");
+  out_o8b_on_full.replace("full", "on-full-o8b");
+  out_ref1.replace("full", "full-o-ref1");
+  out_ref2.replace("full", "full-o-ref2");
 
   cv::imwrite(out_f.toStdString(), result);
   cv::imwrite(out_o8b.toStdString(), result_8b);
+  cv::imwrite(out_o8b_ref1.toStdString(), result_8b_ref1);
+  cv::imwrite(out_ref1.toStdString(), result_ref1);
+  cv::imwrite(out_o8b_ref2.toStdString(), result_8b_ref2);
+  cv::imwrite(out_ref2.toStdString(), result_ref2);
+  cv::imwrite(out_o8b_on_full.toStdString(), result_8b_on_full);
 
   sslic.getSupperpixels(stat.full_image(), out, numberOfSuperpixels, compactness, treshold);
   sslic.getSupperpixels(img_8b, out_8b, numberOfSuperpixels, compactness, treshold);
@@ -349,12 +377,20 @@ void (*_make_run_contours())(DHAX_Stat_Assessment&)
  {
   stat.load_images();
 
-  cv::Mat threshold_full, threshold_1c, threshold_dist_1c;
+  cv::Mat eight_bit_image = cv::imread(stat.eight_bit_image_path().toStdString());
+
+  cv::Mat eight_bit_image_gray;
+  cv::cvtColor(eight_bit_image, eight_bit_image_gray, cv::COLOR_BGR2GRAY);
+
+  cv::Mat threshold_full, threshold_8b, threshold_1c, threshold_dist_1c;
   cv::threshold(stat.gray_image(), threshold_full, 200, 255, cv::THRESH_BINARY);
   cv::threshold(stat.one_channel_image(), threshold_1c, 200, 255, cv::THRESH_BINARY);
   cv::threshold(stat.one_channel_dist_image(), threshold_dist_1c, 200, 255, cv::THRESH_BINARY);
+  cv::threshold(eight_bit_image_gray, threshold_8b, 200, 255, cv::THRESH_BINARY);
 
   cv::Mat copy_full = stat.full_image().clone();
+
+  cv::Mat copy_8b = eight_bit_image.clone();
 
   cv::Mat copy_1c = stat.one_channel_display_image().clone();
 
@@ -364,14 +400,19 @@ void (*_make_run_contours())(DHAX_Stat_Assessment&)
 //  cv::Mat copy_dist_1c = stat.one_channel_dist_image().clone();
   cv::Mat copy_dist_1cd = stat.one_channel_dist_display_image().clone();
 
-  std::vector<std::vector<cv::Point>> contours_full, contours_1c, contours_dist_1c;
-  std::vector<cv::Vec4i> hierarchy_full, hierarchy_1c, hierarchy_dist_1c;
+  std::vector<std::vector<cv::Point>> contours_full, contours_8b, contours_1c, contours_dist_1c;
+  std::vector<cv::Vec4i> hierarchy_full, hierarchy_8b, hierarchy_1c, hierarchy_dist_1c;
 
-  findContours(threshold_full, contours_full, hierarchy_full,
+  cv::findContours(threshold_full, contours_full, hierarchy_full,
     rm, cam); //cv::CHAIN_APPROX_NONE);
-  findContours(threshold_1c, contours_1c, hierarchy_1c,
+
+  cv::findContours(threshold_8b, contours_8b, hierarchy_8b,
+    rm, cam); //cv::CHAIN_APPROX_NONE);
+
+  cv::findContours(threshold_1c, contours_1c, hierarchy_1c,
     rm, cam); //, cv::CHAIN_APPROX_NONE);
-  findContours(threshold_dist_1c, contours_dist_1c, hierarchy_dist_1c,
+
+  cv::findContours(threshold_dist_1c, contours_dist_1c, hierarchy_dist_1c,
     rm, cam); //, cv::CHAIN_APPROX_NONE);
 
   static auto less_than = [](std::vector<cv::Point>& lhs,
@@ -382,29 +423,36 @@ void (*_make_run_contours())(DHAX_Stat_Assessment&)
 
   auto it_full = std::max_element(contours_full.begin(), contours_full.end(), less_than);
 
+  auto it_8b = std::max_element(contours_8b.begin(), contours_8b.end(), less_than);
+
   auto it_1c = std::max_element(contours_1c.begin(), contours_1c.end(), less_than);
 
   auto it_dist_1c = std::max_element(contours_dist_1c.begin(), contours_dist_1c.end(), less_than);
 
 
   std::vector<cv::Point>& max_full = *it_full;
+//  std::vector<cv::Point>& max_8b = *it_8b;
   std::vector<cv::Point>& max_1c = *it_1c;
   std::vector<cv::Point>& max_dist_1c = *it_dist_1c;
 
+
   qDebug() << "max = " << max_full.size();
+  //?qDebug() << "max 8b = " << max_8b.size();
   qDebug() << "max 1c = " << max_1c.size();
   qDebug() << "max dist 1c = " << max_dist_1c.size();
 
+
   std::vector<std::vector<cv::Point>> larger_contours_full,
-    larger_contours_1c, larger_contours_dist_1c;
+    larger_contours_8b, larger_contours_1c, larger_contours_dist_1c;
 
   std::vector<std::vector<cv::Point>> largest_contours_full,
-    largest_contours_1c, largest_contours_dist_1c;
+    largest_contours_8b, largest_contours_1c, largest_contours_dist_1c;
 
   std::vector<std::vector<cv::Point>> smaller_contours_full,
-    smaller_contours_1c, smaller_contours_dist_1c;
+    smaller_contours_8b, smaller_contours_1c, smaller_contours_dist_1c;
 
   largest_contours_full.push_back(max_full);
+ //? largest_contours_8b.push_back(max_8b);
   largest_contours_1c.push_back(max_1c);
   largest_contours_dist_1c.push_back(max_dist_1c);
 
@@ -415,7 +463,15 @@ void (*_make_run_contours())(DHAX_Stat_Assessment&)
 
    else
      smaller_contours_full.push_back(contours_full[i]);
+  }
 
+  for(size_t i = 0;  i < contours_8b.size(); ++i)
+  {
+//   if(contours_8b[i].size() > (max_8b.size() / 2))
+//     larger_contours_8b.push_back(contours_8b[i]);
+
+//   else
+     smaller_contours_8b.push_back(contours_8b[i]);
   }
 
   for(size_t i = 0;  i < contours_1c.size(); ++i)
@@ -438,6 +494,7 @@ void (*_make_run_contours())(DHAX_Stat_Assessment&)
 
 
   drawContours(copy_full, smaller_contours_full, -1, cv::Scalar(255, 0, 0), 1);
+  drawContours(copy_8b, smaller_contours_8b, -1, cv::Scalar(255, 0, 0), 1);
   drawContours(copy_full_1c, smaller_contours_1c, -1, cv::Scalar(255, 0, 0), 1);
   drawContours(copy_1c, smaller_contours_1c, -1, cv::Scalar(255, 0, 0), 1);
   drawContours(copy_dist_1cd, smaller_contours_dist_1c, -1, cv::Scalar(255, 0, 0), 1);
@@ -445,6 +502,7 @@ void (*_make_run_contours())(DHAX_Stat_Assessment&)
 
 
   drawContours(copy_full, larger_contours_full, -1, cv::Scalar(0, 255, 0), 2);
+  drawContours(copy_8b, larger_contours_8b, -1, cv::Scalar(0, 255, 0), 2);
   drawContours(copy_full_1c, larger_contours_1c, -1, cv::Scalar(0, 255, 0), 2);
   drawContours(copy_1c, larger_contours_1c, -1, cv::Scalar(0, 255, 0), 2);
   drawContours(copy_dist_1cd, larger_contours_dist_1c, -1, cv::Scalar(0, 255, 0), 2);
@@ -452,12 +510,20 @@ void (*_make_run_contours())(DHAX_Stat_Assessment&)
 
 
   drawContours(copy_full, largest_contours_full, -1, cv::Scalar(0, 0, 255), 3);
+  drawContours(copy_8b, largest_contours_8b, -1, cv::Scalar(0, 0, 255), 3);
   drawContours(copy_full_1c, largest_contours_1c, -1, cv::Scalar(0, 0, 255), 3);
   drawContours(copy_1c, largest_contours_1c, -1, cv::Scalar(0, 0, 255), 3);
   drawContours(copy_dist_1cd, largest_contours_dist_1c, -1, cv::Scalar(0, 0, 255), 3);
   drawContours(copy_full_dist_1c, largest_contours_dist_1c, -1, cv::Scalar(0, 0, 255), 3);
 
   cv::imwrite(stat.get_full_out_path().toStdString(), copy_full);
+
+  QString out_8b = stat.get_full_out_path();
+  out_8b.replace("full", "8b");
+
+  qDebug() << "out 8b = " << out_8b;
+  cv::imwrite(out_8b.toStdString(), copy_8b);
+
   cv::imwrite(stat.get_full_1c_out_path().toStdString(), copy_full_1c);
   cv::imwrite(stat.get_1c_out_path().toStdString(), copy_1c);
 
@@ -574,6 +640,8 @@ void (*_make_run_0d())(DHAX_Stat_Assessment&)
      keypoints_1c_screened, out_1c_screened, cv::Scalar(0, 255, 0));
   cv::imwrite(stat.get_full_1c_screened_out_path().toStdString(), out_1c_screened);
 
+  stat.add_ref_image_path(stat.get_full_1c_screened_out_path());
+//  stat.add_ref_image_path(stat.get_full_1c_out_path());
 
 //?  cv::imwrite(stat.get_full_1c_oa_out_path().toStdString(), image_1c);
 
@@ -625,7 +693,7 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
  QString one_channel_dist_display = qd.absoluteFilePath(base_file_name + "-1cd." + extension);
 
  QString one_channel_fb = qd.absoluteFilePath(base_file_name + ".fb-1c." + extension);
- QString eight_b = qd.absoluteFilePath(base_file_name + ".8b." + extension);
+ QString eight_b = qd.absoluteFilePath(base_file_name + ".8ba." + extension);
 
  std::shared_ptr<DHAX_Stat_Assessment> HOUGH_stat( new DHAX_Stat_Assessment );
  std::shared_ptr<DHAX_Stat_Assessment> SLIC_stat( new DHAX_Stat_Assessment );
@@ -719,10 +787,7 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
      cv::contourApproximationModes>()); \
 
 
- make_superpixels_proc(SLIC)
- SLIC_stat->run();
-
-//#ifdef HIDE
+#ifdef HIDE
 
  make_lines_proc(HOUGH)
  HOUGH_stat->run();
@@ -736,12 +801,6 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
 
  make_0d_proc(SIFT)
  SIFT_stat->run();
-
- make_0d_proc(BRISK)
- BRISK_stat->run();
-
-//? BRISK_stat->run_classifier_transform();
-
 
  make_0d_proc(ORB)
  ORB_stat->run();
@@ -757,10 +816,24 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
  });
  USURF_stat->run();
 
+#endif //def HIDE
+
  make_contours_proc(RETR_TREE, CHAIN_APPROX_NONE);
  RETR_TREE_CHAIN_APPROX_NONE_stat->run();
 
 // CHAIN_APPROX_NONE_stat->set_proc(_make_run_contours<cv::CHAIN_APPROX_NONE>());
+
+
+
+ make_0d_proc(BRISK)
+ BRISK_stat->run();
+
+//? BRISK_stat->run_classifier_transform();
+
+ make_superpixels_proc(SLIC)
+ SLIC_stat->set_prior_ref_image_paths(BRISK_stat->ref_image_paths());
+ SLIC_stat->add_prior_ref_image_path(eight_b);
+ SLIC_stat->run();
 
 
 #undef make_0d_proc
@@ -778,7 +851,6 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
 //   USURF_detector = cv::xfeatures2d::SURF::create();
 
 //?
-//#endif //def HIDE
 
 #endif
 }

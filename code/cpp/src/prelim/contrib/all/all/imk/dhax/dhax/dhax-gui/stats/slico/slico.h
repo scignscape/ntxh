@@ -68,6 +68,7 @@ public:
 	///	Get the result image with contours on the given color
 	//===========================================================================
 	cv::Mat GetImgWithContours(cv::Scalar color);
+ cv::Mat GetImgWithContours(cv::Scalar color, cv::Mat& target);
 
  cv::Mat GetImg();
 
@@ -249,9 +250,10 @@ private:
 		const int&					K); //the number of superpixels desired by the user
 
 	void Mat2Buffer(const cv::Mat& img, UINT*& buffer);
-
 	void Mat2Buffer(const cv::Mat& img, uchar*& buffer);
 
+ void Mat2TargetBuffer(const cv::Mat& img, UINT*& buffer);
+ void Mat2TargetBuffer(const cv::Mat& img, uchar*& buffer);
 
 private:
 	int										m_width;

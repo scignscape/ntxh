@@ -254,13 +254,13 @@ void SLIC::DrawContoursAroundSegments(
 				{
 					int index = y*width + x;
 
-					if( false == istaken[index] )//comment this to obtain internal contours
-					{
+     if( false == istaken[index] )//comment this to obtain internal contours
+     {
 						if( labels[mainindex] != labels[index] ) np++;
-					}
+     }
 				}
 			}
-			if( np > 1 )//change to 2 or 3 for thinner lines
+   if( np > 2 )//change to 2 or 3 for thinner lines
 			{
 				ubuff[mainindex] = 0;
 				ubuff[mainindex] |= (int)color.val[2] << 16; // r
@@ -311,7 +311,7 @@ void SLIC::DrawContoursAroundSegments(
 					}
 				}
 			}
-			if( np > 1 )//change to 2 or 3 for thinner lines
+   if( np > 2 )//change to 2 or 3 for thinner lines
 			{
 				ubuff[mainindex] = (uchar)color.val[0];
 				istaken[mainindex] = true;
@@ -1093,6 +1093,32 @@ cv::Mat SLIC::GetImg()
 }
 
 
+// //  dhax ...
+cv::Mat SLIC::GetImgWithContours(cv::Scalar color, cv::Mat& target)
+{
+ if (type == GRAY)
+ {
+  uchar* target_buffer;
+  Mat2TargetBuffer(target, target_buffer);
+  DrawContoursAroundSegments(target_buffer, label, m_width, m_height, color);
+  cv::Mat result(m_height, m_width, CV_8UC1);
+  memcpy(result.data, target_buffer, m_width*m_height*sizeof(uchar));
+  return result;
+ }
+ else if (type == RGB)
+ {
+  UINT* target_buffer;
+  Mat2TargetBuffer(target, target_buffer);
+  DrawContoursAroundSegments(target_buffer, label, m_width, m_height, color);
+  cv::Mat result(m_height, m_width, CV_8UC4);
+  memcpy(result.data, target_buffer, m_width*m_height*sizeof(UINT));
+  cv::cvtColor(result, result, cv::COLOR_BGRA2BGR);
+  return result;
+ }
+
+}
+
+
 cv::Mat SLIC::GetImgWithContours(cv::Scalar color)
 {
 	if (type == GRAY) {
@@ -1110,6 +1136,7 @@ cv::Mat SLIC::GetImgWithContours(cv::Scalar color)
 	}
 
 }
+
 
 void SLIC::Mat2Buffer(const cv::Mat& img, UINT*& buffer)
 {
@@ -1134,5 +1161,26 @@ void SLIC::Mat2Buffer(const cv::Mat& img, uchar*& buffer)
 	bufferGray    = new uchar[sz];
 
 	memcpy( bufferGray, (UINT*)img.data, sz*sizeof(uchar) );
+
+}
+
+
+void SLIC::Mat2TargetBuffer(const cv::Mat& img, UINT*& buffer)
+{
+ int sz = img.cols * img.rows;
+ buffer  = new UINT[sz];
+
+ cv::Mat newImage;
+ cv::cvtColor(img, newImage, cv::COLOR_BGR2BGRA);
+ memcpy( buffer, (UINT*)newImage.data, sz*sizeof(UINT) );
+
+}
+
+void SLIC::Mat2TargetBuffer(const cv::Mat& img, uchar*& buffer)
+{
+ int sz = img.cols * img.rows;
+ buffer    = new uchar[sz];
+
+ memcpy( buffer, (UINT*)img.data, sz*sizeof(uchar) );
 
 }

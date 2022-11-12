@@ -63,6 +63,10 @@ class DHAX_Stat_Assessment
 
  void* user_data_;
 
+ QVector<QString> ref_image_paths_;
+ QVector<QString> prior_ref_image_paths_;
+
+
 #ifdef USE_OpenCV
 
  cv::Mat full_image_;
@@ -91,6 +95,19 @@ public:
  ACCESSORS(QString ,one_channel_dist_display_image_path)
  ACCESSORS(QString ,one_channel_dist_image_path)
  ACCESSORS(QString ,eight_bit_image_path)
+
+ ACCESSORS(QVector<QString> ,ref_image_paths)
+ ACCESSORS(QVector<QString> ,prior_ref_image_paths)
+
+ void add_ref_image_path(QString path)
+ {
+  ref_image_paths_.push_back(path);
+ }
+
+ void add_prior_ref_image_path(QString path)
+ {
+  prior_ref_image_paths_.push_back(path);
+ }
 
 
  ACCESSORS__RGET(std::vector<cv::KeyPoint> ,keypoints_full)
