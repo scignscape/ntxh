@@ -434,9 +434,9 @@ void DHAX_Application_Controller::run_combined_test_stats(QString folder, QStrin
  XCSD_Image* xcsd;
  test_pixel_local_aggregate_color_distance(file_path, "out-dist", &xcsd);
 
-// QString ntxh_file;
+ QString ntxh_file;
 // XCSD_Image* xcsd = new XCSD_Image;
- xcsd->find_ntxh_file(qd.absoluteFilePath(file_path));
+// xcsd->find_ntxh_file(qd.absoluteFilePath(file_path));
 
  toroid_run_stats(folder, base_name, qfi.suffix(), xcsd);
 }
@@ -586,6 +586,8 @@ void DHAX_Application_Controller::pixel_local_aggregate_color_distance(
  QString result_7rgb = stat_image.file_path_with_presuffix("1c-7rgb-dist", subfolder);
 
  QString result_8b = stat_image.file_path_with_presuffix("8b", subfolder);
+ QString result_8b_up = stat_image.file_path_with_presuffix("8b");
+
  QString result_8b_125_cyan = stat_image.file_path_with_presuffix("8b-125-cyan", subfolder);
  QString result_8b_175_cyan = stat_image.file_path_with_presuffix("8b-175-cyan", subfolder);
  QString result_8b_225_cyan = stat_image.file_path_with_presuffix("8b-225-cyan", subfolder);
@@ -914,6 +916,7 @@ void DHAX_Application_Controller::pixel_local_aggregate_color_distance(
  gray_7rgb_image.save(result_7rgb);
 
  i8b.save(result_8b);
+ i8b.save(result_8b_up);
  p8b_125.save(result_8b_125_cyan);
  p8b_175.save(result_8b_175_cyan);
  p8b_225.save(result_8b_225_cyan);

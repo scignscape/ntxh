@@ -44,6 +44,8 @@ class DHAX_Stat_Assessment
  QString one_channel_dist_image_path_;
  QString one_channel_dist_display_image_path_;
 
+ QString eight_bit_image_path_;
+
  QString current_out_subfolder_;
 
  QString algorithm_name_;
@@ -88,6 +90,8 @@ public:
  ACCESSORS(QString ,one_channel_image_path)
  ACCESSORS(QString ,one_channel_dist_display_image_path)
  ACCESSORS(QString ,one_channel_dist_image_path)
+ ACCESSORS(QString ,eight_bit_image_path)
+
 
  ACCESSORS__RGET(std::vector<cv::KeyPoint> ,keypoints_full)
  ACCESSORS__RGET(std::vector<cv::KeyPoint> ,keypoints_1c)

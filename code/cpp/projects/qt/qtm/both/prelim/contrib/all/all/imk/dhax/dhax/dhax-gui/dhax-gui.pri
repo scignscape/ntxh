@@ -259,6 +259,8 @@ HEADERS += \
   $$SRC_DIR/stats/dhax-stat-assessment.h \
   $$SRC_DIR/stats/stat-test-image.h \
   $$SRC_DIR/stats/feature-classifier-transform.h \
+  $$SRC_DIR/stats/slic/slic.h \
+  $$SRC_DIR/stats/slico/slico.h \
 
 
 SOURCES += \
@@ -343,7 +345,8 @@ SOURCES += \
   $$SRC_DIR/stats/dhax-stat-assessment.demo-test.cpp \
   $$SRC_DIR/stats/stat-test-image.cpp \
   $$SRC_DIR/stats/feature-classifier-transform.cpp \
-
+  $$SRC_DIR/stats/slic/slic.cpp \
+  $$SRC_DIR/stats/slico/slico.cpp \
 
 
 # # todo should these be subwindows?

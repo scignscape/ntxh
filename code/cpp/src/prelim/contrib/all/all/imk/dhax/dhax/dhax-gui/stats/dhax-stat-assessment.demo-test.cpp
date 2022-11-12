@@ -84,7 +84,68 @@
 //}
 
 
+//make_lines_proc(HOUGH)
+//HOUGH_stat->run();
 
+#include "slic/slic.h"
+#include "slico/slico.h"
+
+void (*_make_run_superpixels())(DHAX_Stat_Assessment&)
+{
+ return [](DHAX_Stat_Assessment& stat)
+ {
+  stat.load_images();
+
+  extern char *optarg;
+  extern int optopt;
+
+ // QString input_file = stat.full_image_path();
+
+  stat.set_current_out_subfolder(2);
+
+//  QString output_file = stat.get_full_1c_out_path();
+//  cv::Mat inputMatrix = stat.full_image();
+
+  const int numberOfSuperpixels = 400;
+  const int compactness = 20;
+  const double treshold = 30.0;
+
+//  cv::Mat onec = stat.one_channel_image();
+//  qDebug() << "on " << stat.one_channel_display_image_path();
+
+  superpixel::SLIC sslic;
+  SLIC slic, slic_8b;
+
+  cv::Mat img, img_8b, result, result_8b;
+
+  img = stat.full_image();
+
+  img_8b = cv::imread(stat.eight_bit_image_path().toStdString());
+  //imgc = stat.one_channel_dist_image();
+
+  //slic.GetImgWithContours(stat.full_image(), stat.get_full_out_path(), numberOfSuperpixels, compactness, treshold);
+
+  slic.GenerateSuperpixels(img, numberOfSuperpixels);
+  slic_8b.GenerateSuperpixels(img_8b, numberOfSuperpixels);
+
+  result = slic.GetImgWithContours(cv::Scalar(0, 0, 255));
+  result_8b = slic_8b.GetImgWithContours(cv::Scalar(0, 0, 255));
+
+  QString out = stat.get_full_out_path();
+  QString out_f = out, out_8b = out, out_o8b = out;
+  out_f.replace("full", "full-o");
+  out_o8b.replace("full", "full-o8b");
+  out_8b.replace("full", "full-8b");
+
+  cv::imwrite(out_f.toStdString(), result);
+  cv::imwrite(out_o8b.toStdString(), result_8b);
+
+  sslic.getSupperpixels(stat.full_image(), out, numberOfSuperpixels, compactness, treshold);
+  sslic.getSupperpixels(img_8b, out_8b, numberOfSuperpixels, compactness, treshold);
+
+
+ };
+}
 
 void (*_make_run_lines())(DHAX_Stat_Assessment&)
 {
@@ -564,8 +625,10 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
  QString one_channel_dist_display = qd.absoluteFilePath(base_file_name + "-1cd." + extension);
 
  QString one_channel_fb = qd.absoluteFilePath(base_file_name + ".fb-1c." + extension);
+ QString eight_b = qd.absoluteFilePath(base_file_name + ".8b." + extension);
 
  std::shared_ptr<DHAX_Stat_Assessment> HOUGH_stat( new DHAX_Stat_Assessment );
+ std::shared_ptr<DHAX_Stat_Assessment> SLIC_stat( new DHAX_Stat_Assessment );
 
  std::shared_ptr<DHAX_Stat_Assessment> AKAZE_stat( new DHAX_Stat_Assessment );
  std::shared_ptr<DHAX_Stat_Assessment> SIFT_stat( new DHAX_Stat_Assessment );
@@ -606,6 +669,7 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
 #define setup(ALGORITHM_NAME) \
  ALGORITHM_NAME##_stat->set_full_image_path(full); \
  ALGORITHM_NAME##_stat->set_one_channel_image_path(one_channel_fb); \
+ ALGORITHM_NAME##_stat->set_eight_bit_image_path(eight_b); \
  ALGORITHM_NAME##_stat->set_one_channel_dist_image_path(one_channel_dist); \
  ALGORITHM_NAME##_stat->set_one_channel_dist_display_image_path(one_channel_dist_display); \
  ALGORITHM_NAME##_stat->set_algorithm_name(#ALGORITHM_NAME); \
@@ -639,6 +703,13 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
  ALGORITHM##_stat->set_proc(_make_run_lines()); \
 
 
+#define make_superpixels_proc(ALGORITHM) \
+ setup(ALGORITHM) \
+ (*transforms_map)[#ALGORITHM] = ALGORITHM##_stat; \
+ ALGORITHM##_stat->set_current_out_subfolder(1); \
+ ALGORITHM##_stat->set_proc(_make_run_superpixels()); \
+
+
 #define make_contours_proc(retrievalModes, contourApproximationModes)  \
  setup(retrievalModes ##_## contourApproximationModes) \
  retrievalModes ##_## contourApproximationModes ##_stat \
@@ -648,11 +719,15 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
      cv::contourApproximationModes>()); \
 
 
+ make_superpixels_proc(SLIC)
+ SLIC_stat->run();
+
+//#ifdef HIDE
+
  make_lines_proc(HOUGH)
  HOUGH_stat->run();
 
 
-//?#ifdef HIDE
  make_0d_proc(AKAZE)
  AKAZE_stat->run();
 
@@ -702,7 +777,8 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
 //   SURF_detector = cv::xfeatures2d::SURF::create();
 //   USURF_detector = cv::xfeatures2d::SURF::create();
 
-//?#endif //def HIDE
+//?
+//#endif //def HIDE
 
 #endif
 }
