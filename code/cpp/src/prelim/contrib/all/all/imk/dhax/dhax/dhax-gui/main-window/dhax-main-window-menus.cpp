@@ -16,6 +16,12 @@ DHAX_Main_Window_Menus::DHAX_Main_Window_Menus()
 }
 
 
+DHAX_Menu::DHAX_Menu()
+{
+
+}
+
+
 void DHAX_Main_Window_Menus::init_menu(QString label)
 {
  menus_[label] = static_cast<DHAX_Menu*>(parent_->menuBar()->addMenu(label)); //, parent_);

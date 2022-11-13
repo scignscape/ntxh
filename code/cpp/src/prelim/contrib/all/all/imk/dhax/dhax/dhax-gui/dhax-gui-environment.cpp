@@ -161,6 +161,7 @@ void DHAX_GUI_Environment::init_application_controller()
 {
  application_controller_ = new DHAX_Application_Controller;
  application_controller_->set_application_state(application_state_);
+ application_controller_->set_menu_system(menu_system_);
  application_controller_->set_graphics_frame(graphics_frame_);
  application_controller_->set_udp_controller(udp_controller_);
  application_controller_->init_udp_controller();
@@ -270,6 +271,7 @@ void DHAX_GUI_Environment::init_main_window_signal_generator()
 
  minimal_self_connect (1, with_callstamp) (take_screenshot);
  minimal_self_connect (_with_callstamp_) (load_image);
+ minimal_self_connect (_with_callstamp_) (load_bookmarked_image);
  minimal_self_connect (_with_callstamp_) (show_xcsd_scene);
  minimal_self_connect (_with_callstamp_) (calculate_local_color_histograms);
  minimal_self_connect (_with_callstamp_) (save_local_color_histograms);

@@ -24,17 +24,25 @@ class DHAX_Menu : public QMenu
   template<typename FN_Type>
   void operator <<(FN_Type fn)
   {
-   _this->addAction(label, fn);
+    _this->add_action(label, fn);
   }
  };
 
+
 public:
 
- DHAX_Menu() {};
+ DHAX_Menu();
+
 
  _add_action_package add_action(QString label)
  {
   return {this, label};
+ }
+
+ template<typename FN_Type>
+ void add_action(QString label, FN_Type fn)
+ {
+  addAction(label, fn);
  }
 
  DHAX_Menu* add_nested_menu(QString label)

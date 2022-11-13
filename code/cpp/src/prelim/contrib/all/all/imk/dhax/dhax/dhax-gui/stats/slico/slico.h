@@ -34,6 +34,8 @@
 
 #include <opencv2/opencv.hpp>
 
+#include <QColor>
+
 #if (defined WIN32 || defined _WIN32)
 #  define SLIC_EXPORTS __declspec(dllexport)
 #else
@@ -68,11 +70,13 @@ public:
 	///	Get the result image with contours on the given color
 	//===========================================================================
 	cv::Mat GetImgWithContours(cv::Scalar color);
- cv::Mat GetImgWithContours(cv::Scalar color, cv::Mat& target);
+ cv::Mat GetImgWithContours(cv::Scalar color, cv::Mat& target,
+   std::vector<cv::KeyPoint>* kps = nullptr, QColor alt_color = QColor("orange"));
 
  cv::Mat GetImg();
 
 private:
+
 
 	//============================================================================
 	// Superpixel segmentation for a given step size (superpixel size ~= step*step)
@@ -85,6 +89,8 @@ private:
 		int&						numlabels,
 		const int&					STEP,
 		const double&				m);
+
+
 	//============================================================================
 	// Superpixel segmentation for a given number of superpixels
 	//============================================================================
@@ -97,6 +103,7 @@ private:
 		const int&					K,
 		const double&				m);
 
+
 	void PerformSLICO_ForGivenK(
 		const unsigned char*		ubuff,
 		const int					width,
@@ -105,6 +112,7 @@ private:
 		int&						numlabels,
 		const int&					K,//required number of superpixels
 		const double&				m);//weight given to spatial distance
+
 
 	//============================================================================
 	// Save superpixel labels in a text file in raster scan order
@@ -115,6 +123,8 @@ private:
 		const int&					height,
 		const std::string&				filename,
 		const std::string&				path);
+
+
 	//============================================================================
 	// Function to draw boundaries around superpixels of a given 'color'.
 	// Can also be used to draw boundaries around supervoxels, i.e layer by layer.
@@ -124,14 +134,17 @@ private:
 		const int*					labels,
 		const int&					width,
 		const int&					height,
-		const cv::Scalar&			color );
+  const cv::Scalar&			color,
+   std::vector<cv::KeyPoint>* kps = nullptr, QColor alt_color = QColor("orange"));
+
 
 	void DrawContoursAroundSegments(
 		unsigned char*			ubuff,
 		const int*				labels,
 		const int&				width,
 		const int&				height,
-		const cv::Scalar&		color );
+  const cv::Scalar&		color,
+   std::vector<cv::KeyPoint>* kps = nullptr, QColor alt_color = QColor("orange"));
 
 	void DrawContoursAroundSegmentsTwoColors(
 		unsigned int*				ubuff,

@@ -34,6 +34,52 @@ DHAX_Menu_System::DHAX_Menu_System()
 // help menu
 }
 
+
+DHAX_Menu* DHAX_Menu_System::menu(QString label)
+{
+ return menus_->menu(label);
+}
+
+QAction* DHAX_Menu_System::add_deferred_action_ref(QString ref, DHAX_Menu& menu, QString key)
+{
+ QAction* result = add_action_ref(ref, menu, key);
+ if(result)
+ {
+  result->setEnabled(false);
+  deferred_actions_[{&menu, ref}] = result;
+ }
+ return result;
+}
+
+QAction* DHAX_Menu_System::add_action_ref(QString ref, DHAX_Menu& menu, QString key)
+{
+ for(QAction* a : menu.actions())
+ {
+  if(a->text() == key)
+  {
+   action_ref_map_[{&menu, ref}] = a;
+   return a;
+  }
+ }
+ return nullptr;
+}
+
+//void DHAX_Menu::add_deferred_action(QString key, QAction* a)
+//{
+// deferred_actions_.insert(key, a);
+//}
+
+//void DHAX_Menu::add_deferred_action_ref(QString ref, QString key)
+//{
+// action_ref_map_[ref] = deferred_actions_[key];
+//}
+
+QAction* DHAX_Menu_System::get_action_by_ref_name(QString ref, DHAX_Menu& menu)
+{
+ return action_ref_map_.value({&menu, ref});
+}
+
+
 void DHAX_Menu_System::init_menus()
 {
  menus_ = new DHAX_Main_Window_Menus;
@@ -59,6 +105,16 @@ void DHAX_Menu_System::init_menus()
  {
   sg->emit_load_image_requested();
  };
+
+ file_menu.add_action("Load Bookmarked Image") << [sg]
+ {
+  sg->emit_load_bookmarked_image_requested();
+ };
+
+ //file_menu.
+ add_deferred_action_ref("bookmark", file_menu, "Load Bookmarked Image");
+
+ //file_menu.act
 
  file_menu.add_action("Load or Show Image as XCSD Scene") << [sg]
  {

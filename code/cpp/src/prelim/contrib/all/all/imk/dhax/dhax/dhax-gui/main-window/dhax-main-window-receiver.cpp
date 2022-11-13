@@ -78,6 +78,11 @@ void DHAX_Main_Window_Receiver::handle_load_image(call_Stamp_u2 callstamp)
  main_window_controller_->load_image(/*callstamp*/);
 }
 
+void DHAX_Main_Window_Receiver::handle_load_bookmarked_image(call_Stamp_u2 callstamp)
+{
+ main_window_controller_->load_bookmarked_image(/*callstamp*/);
+}
+
 void DHAX_Main_Window_Receiver::handle_show_xcsd_scene(call_Stamp_u2 callstamp)
 {
  main_window_controller_->show_xcsd_scene(/*callstamp*/);

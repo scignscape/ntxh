@@ -31,6 +31,8 @@
 #include <fstream>
 #include "slico.h"
 
+#include <QMap>
+
 using namespace cv;
 using namespace std;
 
@@ -230,7 +232,7 @@ void SLIC::DrawContoursAroundSegments(
 	const int*				labels,
 	const int&				width,
 	const int&				height,
-	const cv::Scalar&		color )
+ const cv::Scalar&		color, std::vector<cv::KeyPoint>* kps, QColor alt_color)
 {
 	const int dx8[8] = {-1, -1,  0,  1, 1, 1, 0, -1};
 	const int dy8[8] = { 0, -1, -1, -1, 0, 1, 1,  1};
@@ -239,12 +241,35 @@ void SLIC::DrawContoursAroundSegments(
 
 	vector<bool> istaken(sz, false);
 
+ QMap<int, QVector<int>> labels_to_keypoints;
+
+ if(kps)
+ {
+  for(cv::KeyPoint kp : *kps)
+  {
+   int x = kp.pt.x, y = kp.pt.y;
+
+   int index = width * y + x;
+   int label = labels[index];
+   labels_to_keypoints[label].push_back(index);
+
+  }
+ }
+
+ int kp_threshold = 4;
+
 	int mainindex(0);
 	for( int j = 0; j < height; j++ )
 	{
 		for( int k = 0; k < width; k++ )
 		{
+   int kp_count = 0;
+
 			int np(0);
+
+
+   QColor new_color;
+
 			for( int i = 0; i < 8; i++ )
 			{
 				int x = k + dx8[i];
@@ -252,25 +277,73 @@ void SLIC::DrawContoursAroundSegments(
 
 				if( (x >= 0 && x < width) && (y >= 0 && y < height) )
 				{
-					int index = y*width + x;
+					int index = y*width + x;     
+
+     if(kps)
+     {
+      int label = labels[index];
+      auto it = labels_to_keypoints.find(label);
+      if(it != labels_to_keypoints.end())
+        kp_count = it.value().size();
+
+     }
+
 
      if( false == istaken[index] )//comment this to obtain internal contours
      {
 						if( labels[mainindex] != labels[index] ) np++;
      }
 				}
-			}
-   if( np > 2 )//change to 2 or 3 for thinner lines
+   }
+
+   if(kps && (kp_count <= kp_threshold))
+   {
+    QColor _new_color;
+
+    int red = ubuff[mainindex] >> 16 & 0xff;
+    int green = ubuff[mainindex] >> 8 & 0xff;
+    int blue = ubuff[mainindex] & 0xff;
+
+          _new_color.setRed(ubuff[mainindex] >> 16 & 0xff);
+          _new_color.setGreen(0); //ubuff[mainindex] >> 8 & 0xff);
+          _new_color.setBlue(ubuff[mainindex] & 0xff);
+
+//             int gray = _new_color.value();
+
+
+          new_color = _new_color.lighter(140); //QColor(gray, gray, gray); // _new_color.lighter(200);
+
+   }
+
+   int np_target = (kp_count > kp_threshold)? 1 : 2;
+   if( np > np_target )//change to 2 or 3 for thinner lines
 			{
-				ubuff[mainindex] = 0;
-				ubuff[mainindex] |= (int)color.val[2] << 16; // r
-				ubuff[mainindex] |= (int)color.val[1] << 8; // g
-				ubuff[mainindex] |= (int)color.val[0];
+    ubuff[mainindex] = 0;
+    if(kp_count > kp_threshold)
+    {
+     ubuff[mainindex] |= alt_color.red() << 16; // r
+     ubuff[mainindex] |= alt_color.green() << 8; // g
+     ubuff[mainindex] |= alt_color.blue();
+    }
+    else
+    {
+     ubuff[mainindex] |= (int)color.val[2] << 16; // r
+     ubuff[mainindex] |= (int)color.val[1] << 8; // g
+     ubuff[mainindex] |= (int)color.val[0];
+    }
 				//ubuff[mainindex] |= 255 << 16; // r
 				//ubuff[mainindex] |= 0 << 8; // g
 				//ubuff[mainindex] |= 0;
 				istaken[mainindex] = true;
 			}
+   else if(new_color.isValid())
+   {
+    ubuff[mainindex] = 0;
+
+    ubuff[mainindex] |= (int)new_color.red() << 16; // r
+    ubuff[mainindex] |= (int)new_color.green() << 8; // g
+    ubuff[mainindex] |= (int)new_color.blue();
+   }
 			mainindex++;
 		}
 	}
@@ -281,7 +354,7 @@ void SLIC::DrawContoursAroundSegments(
 	const int*				labels,
 	const int&				width,
 	const int&				height,
-	const cv::Scalar&		color )
+ const cv::Scalar&		color, std::vector<cv::KeyPoint>* kps, QColor alt_color)
 {
 	const int dx8[8] = {-1, -1,  0,  1, 1, 1, 0, -1};
 	const int dy8[8] = { 0, -1, -1, -1, 0, 1, 1,  1};
@@ -1094,13 +1167,14 @@ cv::Mat SLIC::GetImg()
 
 
 // //  dhax ...
-cv::Mat SLIC::GetImgWithContours(cv::Scalar color, cv::Mat& target)
+cv::Mat SLIC::GetImgWithContours(cv::Scalar color, cv::Mat& target,
+  std::vector<cv::KeyPoint>* kps, QColor alt_color)
 {
  if (type == GRAY)
  {
   uchar* target_buffer;
   Mat2TargetBuffer(target, target_buffer);
-  DrawContoursAroundSegments(target_buffer, label, m_width, m_height, color);
+  DrawContoursAroundSegments(target_buffer, label, m_width, m_height, color, kps, alt_color);
   cv::Mat result(m_height, m_width, CV_8UC1);
   memcpy(result.data, target_buffer, m_width*m_height*sizeof(uchar));
   return result;
@@ -1109,7 +1183,7 @@ cv::Mat SLIC::GetImgWithContours(cv::Scalar color, cv::Mat& target)
  {
   UINT* target_buffer;
   Mat2TargetBuffer(target, target_buffer);
-  DrawContoursAroundSegments(target_buffer, label, m_width, m_height, color);
+  DrawContoursAroundSegments(target_buffer, label, m_width, m_height, color, kps, alt_color);
   cv::Mat result(m_height, m_width, CV_8UC4);
   memcpy(result.data, target_buffer, m_width*m_height*sizeof(UINT));
   cv::cvtColor(result, result, cv::COLOR_BGRA2BGR);

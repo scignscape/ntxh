@@ -28,7 +28,9 @@
 
 #include <QColorDialog>
 
-//#include "dhax-main-window.h"
+//
+#include "main-window/dhax-menu-system.h"
+#include "main-window/dhax-main-window-menus.h"
 
 //#include "image-viewer/dhax-display-image-data.h"
 //#include "subwindows/zoom-and-navigate-frame.h"
@@ -86,6 +88,7 @@ USING_KANS(TextIO)
 #include "dhax-data/ann/dhax-annotation-instance.h"
 #include "image-viewer/dhax-image-scene-item.h"
 
+#include "main-window/dhax-menu-system.h"
 
 #include "dhax-forge-controller.h"
 
@@ -311,6 +314,7 @@ DHAX_Application_Controller::DHAX_Application_Controller()
      application_state_(nullptr),
      forge_controller_(nullptr),
      current_image_editor_dialog_window_(nullptr),
+     menu_system_(nullptr),
     // display_image_data_(nullptr),
 //     zoom_frame_(nullptr),
 //     image_scene_item_(nullptr),
@@ -339,6 +343,19 @@ QDir DHAX_Application_Controller::get_proc_class_temp_dir()
  return QDir(proc_class_temp_folder_);
 }
 
+
+void DHAX_Application_Controller::set_bookmarked_image_path(QString path)
+{
+ bookmarked_image_path_ = path;
+
+ DHAX_Menu& file_menu = *menu_system_->menu("File");
+
+ menu_system_->get_action_by_ref_name("bookmark" ,file_menu)->setEnabled(true);
+
+
+ //*menus_->menu("File");
+ //"file"
+}
 
 void DHAX_Application_Controller::check_reset_proc_class_temp_folder()
 {

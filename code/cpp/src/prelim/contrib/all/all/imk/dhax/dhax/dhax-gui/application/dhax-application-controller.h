@@ -57,9 +57,13 @@ class  Feature_Classifier_Transform;
 class Main_Window_Dialog;
 typedef Main_Window_Dialog Image_Editor_Dialog_Window;
 
+class DHAX_Menu_System;
+
 class DHAX_Application_Controller
 {
  DHAX_Application_State* application_state_;
+
+ DHAX_Menu_System* menu_system_;
 
  DHAX_Main_Window* application_main_window_;
 
@@ -86,6 +90,8 @@ class DHAX_Application_Controller
  u4 autogen_index_;
 
  QSize old_main_window_size_;
+
+ QString bookmarked_image_path_;
 
  //?
 // QString mesh_position_;
@@ -116,11 +122,16 @@ public:
  ACCESSORS(DHAX_Application_Receiver* ,application_receiver)
  ACCESSORS(DHAX_Application_State* ,application_state)
 
+ ACCESSORS(DHAX_Menu_System* ,menu_system)
+
  ACCESSORS(DHAX_Forge_Controller* ,forge_controller)
 
  ACCESSORS(DHAX_Graphics_Frame* ,graphics_frame)
 
  ACCESSORS(DHAX_Video_Player_Dialog* ,current_video_player_dialog)
+
+ ACCESSORS__GET(QString ,bookmarked_image_path)
+ ACCESSORS__SDECLARE(QString ,bookmarked_image_path)
 
 // void take_screenshot();
 // void load_image();

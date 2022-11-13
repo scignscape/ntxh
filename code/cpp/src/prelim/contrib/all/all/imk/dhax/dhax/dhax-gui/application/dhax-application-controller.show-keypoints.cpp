@@ -31,8 +31,12 @@ struct KeyPoint_Graphics_Item : QGraphicsRectItem
  QBrush hover_brush_;
  QBrush normal_brush_;
 
- KeyPoint_Graphics_Item(QRect rect, QBrush qbr, QBrush hqbr, cv::KeyPoint& kp, QPen pen = Qt::NoPen)
-   :  QGraphicsRectItem(rect), keypoint(kp), normal_brush_(qbr), hover_brush_(hqbr)
+ u4 total_keypoint_count_;
+
+ KeyPoint_Graphics_Item(QRect rect, QBrush qbr, QBrush hqbr, cv::KeyPoint& kp,
+   u4 total_keypoint_count, QPen pen = Qt::NoPen)
+   :  QGraphicsRectItem(rect), keypoint(kp),
+      total_keypoint_count_(total_keypoint_count), normal_brush_(qbr), hover_brush_(hqbr)
  {
   setBrush(qbr);
   setPen(pen);
@@ -64,8 +68,16 @@ Octave: %4
 
   QMessageBox* message_box = new QMessageBox();
   message_box->setMinimumWidth(350);
-  message_box->setText("KeyPoint Info");
+
+//  message_box->setText("Line Detection Angles (compared to predefined transform)"_qt);
+  message_box->setText("KeyPoint Info (one of %1 KeyPoints total)%2"_qt
+    .arg(total_keypoint_count_).arg(" "_qt.repeated(30)));
+
   message_box->setInformativeText(R"(Hit "Show Details" for information about this KeyPoint)");
+
+//  message_box->setText("KeyPoint Info"_qt + " "_qt.repeated(20));
+//  message_box->setInformativeText(R"(Hit "Show Details" for information about this KeyPoint)");
+
   message_box->setDetailedText(msg);
   message_box->show();
  });
@@ -118,7 +130,7 @@ void DHAX_Application_Controller::show_keypoints(std::shared_ptr<QMap<QString, s
   scene.addRect(x - radius, y - radius, rx2, rx2, Qt::NoPen, qbr);
 
   KeyPoint_Graphics_Item* kpgi = new KeyPoint_Graphics_Item(QRect(x - radius, y - radius,
-    rx2, rx2), qbr, hqbr, kp);
+    rx2, rx2), qbr, hqbr, kp, keypoints.size());
 
   scene.addItem(kpgi);
 

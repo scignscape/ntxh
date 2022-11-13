@@ -113,11 +113,11 @@ void (*_make_run_superpixels())(DHAX_Stat_Assessment&)
 //  cv::Mat onec = stat.one_channel_image();
 //  qDebug() << "on " << stat.one_channel_display_image_path();
 
-  superpixel::SLIC sslic;
+  superpixel::SLIC sslic1, sslic2;
   SLIC slic, slic_8b;
 
   cv::Mat img, img_8b, img_ref1, img_ref2, img_on_full, result, result_ref1,
-    result_ref2, result_8b, result_8b_on_full, result_8b_ref1, result_8b_ref2; //, result_8b_ref21;
+    result_ref2, result_8b, result_8bf, result_ref1f, result_8b_on_full, result_8b_ref1, result_8b_ref2; //, result_8b_ref21;
 
   img = stat.full_image().clone();
   img_on_full = img.clone();
@@ -131,25 +131,34 @@ void (*_make_run_superpixels())(DHAX_Stat_Assessment&)
   slic_8b.GenerateSuperpixels(img_8b, numberOfSuperpixels);
 
   result = slic.GetImgWithContours(cv::Scalar(0, 0, 255));
-  result_8b = slic_8b.GetImgWithContours(cv::Scalar(0, 255, 255));
+  result_8b = slic_8b.GetImgWithContours(cv::Scalar(255, 255, 100));
+
+
 
 //  BRISK
 
   img_ref1 = cv::imread(stat.prior_ref_image_paths()[0].toStdString());
   img_ref2 = cv::imread(stat.prior_ref_image_paths()[1].toStdString());
 
-  result_8b_ref1 = slic_8b.GetImgWithContours(cv::Scalar(0, 255, 255), img_ref1);
+
+  std::vector<cv::KeyPoint>& kps = stat.keypoints_1c_screened();
+  result_8bf = slic_8b.GetImgWithContours(cv::Scalar(255, 255, 100), img_ref1, &kps);
+  result_ref1f = slic.GetImgWithContours(cv::Scalar(255, 255, 100), img_ref1, &kps, Qt::red);
+
+
+  result_8b_ref1 = slic_8b.GetImgWithContours(cv::Scalar(255, 255, 100), img_ref1);
   result_ref1 = slic.GetImgWithContours(cv::Scalar(0, 0, 255), img_ref1);
 
-  result_8b_ref2 = slic_8b.GetImgWithContours(cv::Scalar(0, 255, 255), img_ref2);
+  result_8b_ref2 = slic_8b.GetImgWithContours(cv::Scalar(255, 255, 100), img_ref2);
   result_ref2 = slic.GetImgWithContours(cv::Scalar(255, 0, 0), img_ref2);
-//  result_8b_ref21 = slic_8b.GetImgWithContours(cv::Scalar(0, 255, 255), img_ref2);
+//  result_8b_ref21 = slic_8b.GetImgWithContours(cv::Scalar(255, 255, 100), img_ref2);
 
-  result_8b_on_full = slic_8b.GetImgWithContours(cv::Scalar(0, 255, 255), img_on_full);
+  result_8b_on_full = slic_8b.GetImgWithContours(cv::Scalar(255, 255, 100), img_on_full);
 
   QString out = stat.get_full_out_path();
   QString out_f = out, out_8b = out, out_o8b = out,
-    out_o8b_on_full = out, out_o8b_ref1 = out, out_o8b_ref2 = out, out_ref1 = out, out_ref2 = out;
+    out_o8b_on_full = out, out_o8b_ref1 = out, out_o8b_ref2 = out,
+    out_ref1 = out, out_ref1f = out, out_ref2 = out, out_o8bf = out;
 
   out_f.replace("full", "full-o");
   out_o8b.replace("full", "full-o8b");
@@ -159,6 +168,8 @@ void (*_make_run_superpixels())(DHAX_Stat_Assessment&)
   out_o8b_on_full.replace("full", "on-full-o8b");
   out_ref1.replace("full", "full-o-ref1");
   out_ref2.replace("full", "full-o-ref2");
+  out_o8bf.replace("full", "full-o-8bf");
+  out_ref1f.replace("full", "full-o-ref1f");
 
   cv::imwrite(out_f.toStdString(), result);
   cv::imwrite(out_o8b.toStdString(), result_8b);
@@ -167,9 +178,11 @@ void (*_make_run_superpixels())(DHAX_Stat_Assessment&)
   cv::imwrite(out_o8b_ref2.toStdString(), result_8b_ref2);
   cv::imwrite(out_ref2.toStdString(), result_ref2);
   cv::imwrite(out_o8b_on_full.toStdString(), result_8b_on_full);
+  cv::imwrite(out_o8bf.toStdString(), result_8bf);
+  cv::imwrite(out_ref1f.toStdString(), result_ref1f);
 
-  sslic.getSupperpixels(stat.full_image(), out, numberOfSuperpixels, compactness, treshold);
-  sslic.getSupperpixels(img_8b, out_8b, numberOfSuperpixels, compactness, treshold);
+  sslic1.getSupperpixels(stat.full_image(), out, numberOfSuperpixels, compactness, treshold);
+//?  sslic2.getSupperpixels(img_8b, out_8b, numberOfSuperpixels, compactness, treshold);
 
 
  };
@@ -333,9 +346,10 @@ Toroidal Accuracy (against predefined): %4
 
    QMessageBox* message_box = new QMessageBox();
    message_box->setMinimumWidth(350);
-   message_box->setText("Line Detection Angles (compared to predefined transform)");
+   message_box->setText("Line Detection Angles (compared to predefined transform)"_qt);
    message_box->setInformativeText(R"(Hit "Show Details" for a breakdown)");
    message_box->setDetailedText(msg);
+   message_box->setModal(false);
    message_box->show();
   }
 
@@ -365,8 +379,7 @@ Toroidal Accuracy (against predefined): %4
   cv::imwrite(stat.get_full_1c_out_path("HOUGHP").toStdString(), out_color_p_1c);
 
   cv::imwrite(stat.get_dist_1c_out_path("HOUGH").toStdString(), out_color_dist_1c);
-  cv::imwrite(stat.get_dist_1c_out_path("HOUGHP").toStdString(), out_color_p_dist_1c);
-
+  cv::imwrite(stat.get_dist_1c_out_path("HOUGHP").toStdString(), out_color_p_dist_1c);  
  };
 }
 
@@ -787,12 +800,6 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
      cv::contourApproximationModes>()); \
 
 
-#ifdef HIDE
-
- make_lines_proc(HOUGH)
- HOUGH_stat->run();
-
-
  make_0d_proc(AKAZE)
  AKAZE_stat->run();
 
@@ -816,12 +823,16 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
  });
  USURF_stat->run();
 
-#endif //def HIDE
-
  make_contours_proc(RETR_TREE, CHAIN_APPROX_NONE);
  RETR_TREE_CHAIN_APPROX_NONE_stat->run();
 
 // CHAIN_APPROX_NONE_stat->set_proc(_make_run_contours<cv::CHAIN_APPROX_NONE>());
+
+
+ make_lines_proc(HOUGH)
+ HOUGH_stat->run();
+
+ application_controller->set_bookmarked_image_path(HOUGH_stat->get_dist_1c_out_path("HOUGH"));
 
 
 
@@ -833,6 +844,9 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
  make_superpixels_proc(SLIC)
  SLIC_stat->set_prior_ref_image_paths(BRISK_stat->ref_image_paths());
  SLIC_stat->add_prior_ref_image_path(eight_b);
+
+ SLIC_stat->keypoints_1c_screened() = BRISK_stat->keypoints_1c_screened();
+
  SLIC_stat->run();
 
 

@@ -16,7 +16,7 @@
 
 class DHAX_Main_Window;
 class DHAX_Main_Window_Menus;
-
+class DHAX_Menu;
 
 class DHAX_Menu_System
 {
@@ -26,6 +26,11 @@ class DHAX_Menu_System
 // QMenu* help_menu_;
 // QMenu* tools_menu_;
 
+ QMap<QPair<DHAX_Menu*, QString>, QAction*> deferred_actions_;
+ QMap<QPair<DHAX_Menu*, QString>, QAction*> action_ref_map_;
+
+
+
 public:
 
  DHAX_Menu_System();
@@ -33,6 +38,13 @@ public:
  ACCESSORS(DHAX_Main_Window* ,main_window)
 
  void init_menus();
+
+ DHAX_Menu* menu(QString label);
+
+//? void add_deferred_action(QString key, QAction* a);
+ QAction* add_deferred_action_ref(QString ref, DHAX_Menu& menu, QString key);
+ QAction* add_action_ref(QString ref, DHAX_Menu& menu, QString key);
+ QAction* get_action_by_ref_name(QString ref, DHAX_Menu& menu);
 
 };
 

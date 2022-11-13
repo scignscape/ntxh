@@ -35,7 +35,11 @@ public:
 public Q_SLOTS:
 
  void handle_take_screenshot(call_Stamp_u2, QString);
+
  void handle_load_image(call_Stamp_u2);
+ void handle_load_bookmarked_image(call_Stamp_u2);
+
+
  void handle_show_xcsd_scene(call_Stamp_u2);
 
  void handle_calculate_local_color_histograms(call_Stamp_u2);

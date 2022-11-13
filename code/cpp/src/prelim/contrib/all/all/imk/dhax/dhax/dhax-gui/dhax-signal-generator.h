@@ -30,7 +30,10 @@ public:
 
  //void hold(QObject* obj);
  void emit_take_screenshot_requested();
+
  void emit_load_image_requested();
+ void emit_load_bookmarked_image_requested();
+
  void emit_load_pdf_requested();
  void emit_load_notes_requested();
  void emit_received_datagram(QByteArray qba);
@@ -69,7 +72,11 @@ Q_SIGNALS:
 
  void take_screenshot_requested(call_Stamp_u2, QString);
  void load_pdf_requested(call_Stamp_u2);
+
  void load_image_requested(call_Stamp_u2);
+ void load_bookmarked_image_requested(call_Stamp_u2);
+
+
  void load_notes_requested(call_Stamp_u2);
  void received_datagram(QByteArray qba);
 

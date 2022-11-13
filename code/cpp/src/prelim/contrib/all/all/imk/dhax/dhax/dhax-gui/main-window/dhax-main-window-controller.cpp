@@ -928,12 +928,22 @@ void DHAX_Main_Window_Controller::show_xcsd_scene()
 }
 
 
+
+void DHAX_Main_Window_Controller::load_bookmarked_image()
+{
+ QString path = application_controller_->bookmarked_image_path();
+ if(!path.isEmpty())
+   load_image(path);
+}
+
 void DHAX_Main_Window_Controller::load_image()
 {
  //
- QString ws =  ROOT_FOLDER "/../pics";
+ //QString ws =  ROOT_FOLDER "/../pics";
  // //  temporary ...
  //QString ws =  ROOT_FOLDER "/../pics/ukraine";
+
+  QString ws =  ROOT_FOLDER "/../dev/dhax-stats/test-combined";
 
  QString filters = "Images (*.jpg *.jpeg *.png *.bmp *.webp)";
 

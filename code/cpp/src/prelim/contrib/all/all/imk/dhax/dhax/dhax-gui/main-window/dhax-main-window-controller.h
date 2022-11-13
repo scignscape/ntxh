@@ -101,7 +101,10 @@ public:
  void delayed_image_viewer_recenter_scroll_top_left();
 
  void take_screenshot();
+
  void load_image();
+ void load_bookmarked_image();
+
  void load_pdf();
  void load_image(QString file_path);
  void init_image_scene_item(DHAX_Image_Scene_Item* si);

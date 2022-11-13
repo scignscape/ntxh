@@ -36,6 +36,12 @@ void DHAX_Signal_Generator::emit_load_image_requested()
  Q_EMIT load_image_requested(++static_count);
 }
 
+void DHAX_Signal_Generator::emit_load_bookmarked_image_requested()
+{
+ STATIC_COUNT
+ Q_EMIT load_bookmarked_image_requested(++static_count);
+}
+
 void DHAX_Signal_Generator::emit_show_xcsd_scene_requested()
 {
  STATIC_COUNT
