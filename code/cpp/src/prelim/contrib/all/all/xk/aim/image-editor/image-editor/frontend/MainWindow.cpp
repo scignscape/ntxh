@@ -42,8 +42,14 @@
 #include "InputDialog.h"
 
 
+//
+#define GreenMid QColor(214, 255, 245)
+#define GreenLight QColor(Qt::green).lighter(170)
+//#define GreenLight Qt::green
+
+
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
+    QMainWindow(parent), alt_data_image_(nullptr),
 //    ui(new Ui::MainWindow),
     pending_save_modifications_(false)
 {
@@ -609,9 +615,13 @@ void MainWindow::run_internal_command(QString fn, QImage* ref)
 
 void MainWindow::merge_heuristic_bins()
 {
- QImage& qim = active_image_->getQImage();
+ const QImage& qim = active_image_->getQImage();
 
  qim.save("/home/nlevisrael/gits/ctg-temp/dev/dhax-stats/test-combined/temp.png");
+
+ alt_data_image_ = new QImage(qim.copy());
+
+ QImage& aqim = *alt_data_image_;
 
  static u1 bin_width = 27;
 
@@ -714,17 +724,73 @@ void MainWindow::merge_heuristic_bins()
   for(s4 _x = x; _x < xe; ++_x)
     for(s4 _y = y; _y < ye; ++_y)
     {
-     QColor color = qim.pixelColor(x, y);
+     QColor color = qim.pixelColor(_x, _y);
      if(color.alpha() == 255)
      {
       Pixel& px = buffer[_y * w + _x];
       px = Pixel::fromQColor(foreground_color.lighter(125));
-      //?qim.setPixelColor(_x, _y, foreground_color.lighter(225));
+
+      aqim.setPixelColor(_x, _y, foreground_color.lighter(125));
 //?
 //?      qim.setPixelColor(_x, _y, foreground_color.lighter(125));
 //?      qim.setPixelColor(_x, _y, QColor(Qt::red).lighter(200));
      }
     }
+ }
+
+ for(QPair<s2, s2> pr : foreground_bins)
+ {
+  s4 x = pr.first * bin_width, xe = x + bin_width,
+     y = pr.second * bin_width, ye = y + bin_width;
+
+  for(s4 _x = x; _x < xe; _x += 3)
+  {
+   QColor color = qim.pixelColor(_x, y);
+   if(color.alpha() == 255)
+   {
+    Pixel& px = buffer[y * w + _x];
+    px = Pixel::fromQColor(foreground_color.darker(115));
+    buffer[y * w + _x + 1] = Pixel::fromQColor(foreground_color.darker(115));
+   }
+  }
+  for(s4 _y = y; _y < ye; _y += 3)
+  {
+   QColor color = qim.pixelColor(x, _y);
+   if(color.alpha() == 255)
+   {
+    Pixel& px = buffer[_y * w + x];
+    px = Pixel::fromQColor(foreground_color.lighter(120));
+    buffer[(_y + 1) * w + x] = Pixel::fromQColor(foreground_color.lighter(120));
+   }
+  }
+ }
+
+
+ for(QPair<s2, s2> pr : background_bins)
+ {
+  s4 x = pr.first * bin_width, xe = x + bin_width,
+     y = pr.second * bin_width, ye = y + bin_width;
+
+  for(s4 _x = x; _x < xe; _x += 3)
+  {
+   QColor color = qim.pixelColor(_x, y);
+   if(color.alpha() == 255)
+   {
+    Pixel& px = buffer[y * w + _x];
+    px = Pixel::fromQColor(GreenMid);
+    buffer[y * w + _x + 1] = Pixel::fromQColor(GreenMid);
+   }
+  }
+  for(s4 _y = y + 1; _y < ye;  _y += 3)
+  {
+   QColor color = qim.pixelColor(x, _y);
+   if(color.alpha() == 255)
+   {
+    Pixel& px = buffer[_y * w + x];
+    px = Pixel::fromQColor(GreenLight);
+    buffer[(_y + 1) * w + x] = Pixel::fromQColor(GreenLight);
+   }
+  }
  }
 
  qim.save("/home/nlevisrael/gits/ctg-temp/dev/dhax-stats/test-combined/temp1.png");
@@ -747,12 +813,19 @@ void MainWindow::run_feature_measurements(QImage* ref)
 
 
  //QImage* get_overlay_source_image()
- Image::show_alpha_codes({Qt::white}, active_image_->getQImage(), ref, &measurements);
+
+ // //  this is a hack for now, need to figure out how to incorporate gridlines
+ if(alt_data_image_)
+   Image::show_alpha_codes({Qt::white, GreenLight, GreenMid}, *alt_data_image_, ref, &measurements);
+ else
+   Image::show_alpha_codes({Qt::white, GreenLight, GreenMid}, active_image_->getQImage(), ref, &measurements);
 
  QPair<s2, s2> global_bin {-1, -1};
 
  u4 foreground_fb_misses = 0, foreground_fb_hits = 0,
     foreground_grayscale_misses = 0, foreground_grayscale_hits = 0;
+
+ r8 foreground_fb_average = 0;
 
  QMapIterator it(measurements);
  while(it.hasNext())
@@ -773,11 +846,18 @@ void MainWindow::run_feature_measurements(QImage* ref)
    u4 ffb = it.value()[1].first + it.value()[3].first;
 //   u4 ft = it.value()[4].first + it.value()[3].first;
    u4 fgr = it.value()[2].first + it.value()[3].first;
-   if(ffb) ++foreground_fb_hits; else ++foreground_fb_misses;
+   if(ffb)
+   {
+    foreground_fb_average += ffb;
+    ++foreground_fb_hits;
+   }
+   else ++foreground_fb_misses;
    if(fgr) ++foreground_grayscale_hits; else ++foreground_grayscale_misses;
   }
 
  }
+
+ foreground_fb_average /= foreground_fb_hits;
 
  QString msg = R"(F/B channel reduction, foreground: %1
 F/B channel reduction, background: %2
@@ -797,11 +877,13 @@ Both, background: %8
  msg += R"(Coverage:
 Foreground Hits, F/B (number of bins): %1
 Foreground Misses, F/B: %2
-Foreground Hits, Grayscale: %3
-Foreground Misses, Grayscale: %4
-Percentage: F/B %5, Grayscale: %6
+F/B Foreground Bin Average: %3
+Foreground Hits, Grayscale: %4
+Foreground Misses, Grayscale: %5
+Percentage: F/B %6, Grayscale: %7
 
-)"_qt.arg(foreground_fb_hits).arg(foreground_fb_misses).arg(foreground_grayscale_hits).arg(foreground_grayscale_misses)
+)"_qt.arg(foreground_fb_hits).arg(foreground_fb_misses).arg(foreground_fb_average)
+  .arg(foreground_grayscale_hits).arg(foreground_grayscale_misses)
   .arg(((r8)foreground_fb_hits / (foreground_fb_hits + foreground_fb_misses)) * 100)
   .arg(((r8)foreground_grayscale_hits / (foreground_grayscale_hits + foreground_grayscale_misses)) * 100)
    ;

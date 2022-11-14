@@ -123,7 +123,7 @@ void Image::show_alpha_codes(QVector<QColor> colors,
    QColor color = source->pixelColor(x_o, y_o);
    int a = 255 - color.alpha();
 
-   auto match_color = [&colors, &cmap](u1& match, QColor qclr)
+   auto match_color_to_background = [&colors, &cmap](u1& match, QColor qclr)
    {
     if(++cmap[qclr.rgba()] == 1)
     {
@@ -154,7 +154,7 @@ void Image::show_alpha_codes(QVector<QColor> colors,
      QColor qclr = qim.pixelColor(x, y);
 
      u1 match = 0;
-     match_color(match, qclr);
+     match_color_to_background(match, qclr);
 //     for(QColor clr : colors)
 //     {
 //      ++bkg;
@@ -201,7 +201,7 @@ void Image::show_alpha_codes(QVector<QColor> colors,
     QColor qclr = qim.pixelColor(x, y);
 
     u1 match = 0;
-    match_color(match, qclr);
+    match_color_to_background(match, qclr);
 
     (*measurements)[local_bin][-1].second = match;
    }

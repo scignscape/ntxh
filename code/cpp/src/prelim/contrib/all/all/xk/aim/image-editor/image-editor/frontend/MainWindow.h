@@ -84,6 +84,8 @@ class MainWindow : public QMainWindow
 
  QPixmap current_pixmap_;
 
+ QImage* alt_data_image_;
+
  enum class Skew_Shear_Rotate {
    N_A, XSkew, YSkew, XShear, YShear, Rotate, Generic
  };
@@ -99,6 +101,7 @@ protected:
 
 
 public:
+
  explicit MainWindow(QWidget *parent = nullptr);
  ~MainWindow();
 
