@@ -945,7 +945,7 @@ void DHAX_Video_Player_Frame::confirm_video_size()
  annotation_set_->set_larger_video_size(video_size_);
  annotation_set_->check_ratios();
 
- //?annotation_set_->compile_latex(QSizeF(new_width, new_height));
+ annotation_set_->compile_latex(QSizeF(new_width, new_height));
 
  qDebug() << "larger video size: " << video_size_;
 

@@ -142,6 +142,7 @@ private slots:
  void handle_heuristic_color_mask();
  void handle_calculate_action();
 
+ void merge_heuristic_bins();
 
  void handle_set_scene_background_color();
 

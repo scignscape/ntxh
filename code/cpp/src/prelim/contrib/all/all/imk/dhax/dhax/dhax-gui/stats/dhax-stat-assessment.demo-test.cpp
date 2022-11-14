@@ -298,12 +298,12 @@ void (*_make_run_lines())(DHAX_Stat_Assessment&)
     };
 
     if(i == best_fit_avg)
-      draw_line(theta, Qt::yellow, 8, extent);
+      draw_line(theta, QColor(Qt::yellow).lighter(150), 20, extent);
 
     if(i == best_fit_rotation)
-      draw_line(theta, Qt::magenta, 10, extent);
+      draw_line(theta, Qt::magenta, 17, extent);
 
-    draw_line(theta, Qt::cyan, 2, extent);
+    draw_line(theta, QColor(Qt::cyan).lighter(175), 2, extent);
 
 //    draw_line(qDegreesToRadians(90.), Qt::yellow);
 //    draw_line(qDegreesToRadians(45.), Qt::magenta);
@@ -333,15 +333,36 @@ void (*_make_run_lines())(DHAX_Stat_Assessment&)
   //qDebug() << "theta average (dist 1c) = " << avg_dist_1c;
 
   {
-   r8 fct90 = stat.feature_classifier_transform()->rotation() + 90;
-   r8 accuracy = qMin(avg_dist_1c, fct90) / qMax(avg_dist_1c, fct90);
+   r8 fctr = stat.feature_classifier_transform()->rotation();
+   r8 fct90 = fctr + 90;
+
+   r8 accuracy = avg_dist_1c - fctr;
+   if(accuracy < 0)
+     accuracy += 90;
+   else if(accuracy > 90)
+     accuracy = 180 - accuracy;
+
+   r8 gaccuracy = avg_full - fctr;
+   if(gaccuracy < 0)
+     gaccuracy += 90;
+   else if(gaccuracy > 90)
+     gaccuracy = 180 - gaccuracy;
+
+   accuracy /= 90;
+   gaccuracy /= 90;
+//?
+//   r8 accuracy = qMin(avg_dist_1c, fct90) / qMax(avg_dist_1c, fct90);
+//   r8 gaccuracy = qMin(avg_full, fct90) / qMax(avg_full, fct90);
 
    QString msg = R"(Predefined Rotation (against vertical): %1
 Grayscale Line Average: %2
 Toroidal Color Model Line Average: %3
-Toroidal Accuracy (against predefined): %4
+Grayscale Accuracy (against predefined): %4 (%5%)
+Toroidal Accuracy: %6 (%7%)
                  )"_qt.arg(fct90)
-     .arg(avg_full).arg(avg_dist_1c).arg(accuracy);
+     .arg(avg_full).arg(avg_dist_1c).arg(gaccuracy).arg((int)(gaccuracy * 100))
+     .arg(accuracy).arg((int)(accuracy * 100))
+     ;
 
 
    QMessageBox* message_box = new QMessageBox();
@@ -779,14 +800,12 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
 
 #define make_lines_proc(ALGORITHM) \
  setup(ALGORITHM) \
- (*transforms_map)[#ALGORITHM] = ALGORITHM##_stat; \
  ALGORITHM##_stat->set_current_out_subfolder(1); \
  ALGORITHM##_stat->set_proc(_make_run_lines()); \
 
 
 #define make_superpixels_proc(ALGORITHM) \
  setup(ALGORITHM) \
- (*transforms_map)[#ALGORITHM] = ALGORITHM##_stat; \
  ALGORITHM##_stat->set_current_out_subfolder(1); \
  ALGORITHM##_stat->set_proc(_make_run_superpixels()); \
 
@@ -800,28 +819,25 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
      cv::contourApproximationModes>()); \
 
 
- make_0d_proc(AKAZE)
- AKAZE_stat->run();
+// make_0d_proc(AKAZE)
+// AKAZE_stat->run();
 
- application_controller->show_keypoints(transforms_map, full, AKAZE_stat->keypoints_1c_screened());
+// make_0d_proc(SIFT)
+// SIFT_stat->run();
 
+// make_0d_proc(ORB)
+// ORB_stat->run();
 
- make_0d_proc(SIFT)
- SIFT_stat->run();
+// make_0d_xproc(SURF)
+// SURF_stat->run();
 
- make_0d_proc(ORB)
- ORB_stat->run();
-
- make_0d_xproc(SURF)
- SURF_stat->run();
-
- make_0d_uxproc(SURF)
- USURF_stat->set_follow_up([](DHAX_Stat_Assessment& stat)
- {
-  qDebug() << "setting upright ";
-  (static_cast<cv::xfeatures2d::SURF*>(stat.user_data()))->setUpright(true);
- });
- USURF_stat->run();
+// make_0d_uxproc(SURF)
+// USURF_stat->set_follow_up([](DHAX_Stat_Assessment& stat)
+// {
+//  qDebug() << "setting upright ";
+//  (static_cast<cv::xfeatures2d::SURF*>(stat.user_data()))->setUpright(true);
+// });
+// USURF_stat->run();
 
  make_contours_proc(RETR_TREE, CHAIN_APPROX_NONE);
  RETR_TREE_CHAIN_APPROX_NONE_stat->run();
@@ -838,6 +854,8 @@ void DHAX_Stat_Assessment::run_demo_test(QString folder, QString base_file_name,
 
  make_0d_proc(BRISK)
  BRISK_stat->run();
+
+ application_controller->show_keypoints(transforms_map, full, BRISK_stat->keypoints_1c_screened());
 
 //? BRISK_stat->run_classifier_transform();
 

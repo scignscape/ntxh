@@ -252,13 +252,16 @@ void DHAX_Stat_Assessment::run_classifier_transform()
  if(feature_classifier_transform_->box_sizes().width == 27)
    cmds.push_back("quantize_27x27"_qt);
 
+
  std::shared_ptr<ICommand> c2(
    new Heuristic_Color_Mask_Command(dlg->get_active_image(),
-   feature_classifier_transform_->foreground_color(), Qt::white,
+   feature_classifier_transform_->adjusted_foreground_color(), Qt::white,
    feature_classifier_transform_->color_distance_threshold(),
    feature_classifier_transform_->color_distance_model()) );
 
  cmds.push_back(c2);
+
+ cmds.push_back("merge_heuristic_bins"_qt);
 
  cmds.push_back("--run_feature_measurements"_qt);
 

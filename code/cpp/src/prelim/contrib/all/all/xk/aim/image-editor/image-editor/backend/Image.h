@@ -57,9 +57,13 @@ public:
 
 
  static void show_alpha_codes(QVector<QColor> colors,
-   QImage& qim, QImage* source = nullptr, QMap<s2, QPair<u4, u4>>* measurements = nullptr);
+   QImage& qim, QImage* source = nullptr,
+   QMap<QPair<s2, s2>, QMap<s2, QPair<u4, u4>>>* measurements = nullptr
+   //QMap<QPair<u2, u2>, u4>* bin_counts = nullptr
+   );
 
  static void remove_alpha_codes(QImage& qim);
+
 
  QString getPath() const;
 

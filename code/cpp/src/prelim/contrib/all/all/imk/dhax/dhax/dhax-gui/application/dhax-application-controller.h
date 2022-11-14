@@ -200,6 +200,8 @@ public:
 
  void play_video(DHAX_Video_Player_Dialog::Annotation_Settings s);
  void play_video(DHAX_Video_Player_Dialog::Annotation_Settings s, QString file_path, QString annotations_file_path = {});
+// void play_video();
+// void play_video(QString file_path, QString annotations_file_path = {});
 
  void calculate_fb_gaussian();
 

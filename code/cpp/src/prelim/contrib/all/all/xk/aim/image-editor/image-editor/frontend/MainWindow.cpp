@@ -599,10 +599,142 @@ void MainWindow::run_internal_command(QString fn, QImage* ref)
  if(fn == "quantize_27x27")
    run_quantize_27x27();
 
+ else if(fn == "merge_heuristic_bins")
+   merge_heuristic_bins();
+
  else if(fn == "run_feature_measurements")
    run_feature_measurements(ref);
 }
 
+
+void MainWindow::merge_heuristic_bins()
+{
+ QImage& qim = active_image_->getQImage();
+
+ qim.save("/home/nlevisrael/gits/ctg-temp/dev/dhax-stats/test-combined/temp.png");
+
+ static u1 bin_width = 27;
+
+ QSet<QPair<s2, s2>> background_bins;
+ QSet<QPair<s2, s2>> foreground_bins;
+ QSet<QPair<s2, s2>> flipped_bins;
+
+ QColor foreground_color;
+
+ s2 x_bin = -1, y_bin = -1;
+
+ for(s4 y = 0; y < qim.height(); ++y)
+ {
+  y_bin = (s2) (y / bin_width);
+
+  for(s4 x = 0; x < qim.width(); ++x)
+  {
+   x_bin = (s2) (x / bin_width);
+
+   QPair<s2, s2> local_bin {x_bin, y_bin};
+
+   if(foreground_bins.contains(local_bin))
+     continue;
+
+   if(!background_bins.contains(local_bin))
+     background_bins.insert(local_bin);
+
+   QColor color = qim.pixelColor(x, y);
+   if(color.alpha() == 255)
+   {
+    if(color != Qt::white)
+    {
+     if(!foreground_color.isValid())
+       foreground_color = color;
+     foreground_bins.insert(local_bin);
+     background_bins.remove(local_bin);
+
+     if(color != foreground_color)
+     {
+      qDebug() << "mys: " << color << " ? " << foreground_color;
+     }
+
+     continue;
+    }
+   }
+  }
+ }
+
+ for(QPair<s2, s2> pr : background_bins)
+ {
+  s2 x = pr.first;
+  s2 y = pr.second;
+
+  if(x == 0)
+   continue;
+  if(y == 0)
+   continue;
+
+  u1 surround = 0;
+  for(s1 _x = x - 1; _x <= x + 1; ++_x)
+   for(s1 _y = y - 1; _y <= y + 1; ++_y)
+   {
+    if( (_x == x) && (_y == y) )
+      continue;
+    QPair<s2, s2> _xy {_x, _y};
+    if(foreground_bins.contains(_xy))
+      ++surround;
+    else
+      break;
+   }
+
+  if(surround == 8)
+    flipped_bins.insert(pr);
+ }
+
+ background_bins -= flipped_bins;
+
+ qDebug() << "Foreground bins: %1, Background bins: %2, Flipped bins: %3 "_qt
+   .arg(foreground_bins.size()).arg(background_bins.size()).arg(flipped_bins.size());
+
+
+ std::vector<Pixel>& buffer = active_image_->getPixelBuffer();
+ u4 w = qim.width();
+
+ // //  this is not very efficient, because we're writing to the
+  //    pixel buffer only in a few places but updateBuffer()
+  //    will overwrite the whole image.  We could also update
+  //    both the buffer and the qimage here and set a flag
+  //    such that the "save needed" action will exclude
+  //    updateBuffer() -- the problem is how to pass that flag around
+
+
+ for(QPair<s2, s2> pr : flipped_bins)
+ {
+//  background_bins.remove(pr);
+
+  s4 x = pr.first * bin_width, xe = x + bin_width,
+     y = pr.second * bin_width, ye = y + bin_width;
+
+  for(s4 _x = x; _x < xe; ++_x)
+    for(s4 _y = y; _y < ye; ++_y)
+    {
+     QColor color = qim.pixelColor(x, y);
+     if(color.alpha() == 255)
+     {
+      Pixel& px = buffer[_y * w + _x];
+      px = Pixel::fromQColor(foreground_color.lighter(125));
+      //?qim.setPixelColor(_x, _y, foreground_color.lighter(225));
+//?
+//?      qim.setPixelColor(_x, _y, foreground_color.lighter(125));
+//?      qim.setPixelColor(_x, _y, QColor(Qt::red).lighter(200));
+     }
+    }
+ }
+
+ qim.save("/home/nlevisrael/gits/ctg-temp/dev/dhax-stats/test-combined/temp1.png");
+
+ // //   actually here we need to update the buffer from the qimage ...
+  //? active_image_->updateBuffer();
+//? pixmap_item_->setPixmap(QPixmap::fromImage(qim)); //active_image_->getQImage()));
+
+
+}
 
 
 void MainWindow::run_feature_measurements(QImage* ref)
@@ -611,50 +743,114 @@ void MainWindow::run_feature_measurements(QImage* ref)
 // active_image_->getQImage().save("/home/nlevisrael/gits/ctg-temp/dev/dhax-stats/temp-base.png");
 // ref->save("/home/nlevisrael/gits/ctg-temp/dev/dhax-stats/ref.png");
 
- QMap<s2, QPair<u4, u4>> measurements;
+ QMap<QPair<s2, s2>, QMap<s2, QPair<u4, u4>>> measurements;
 
 
  //QImage* get_overlay_source_image()
  Image::show_alpha_codes({Qt::white}, active_image_->getQImage(), ref, &measurements);
 
+ QPair<s2, s2> global_bin {-1, -1};
+
+ u4 foreground_fb_misses = 0, foreground_fb_hits = 0,
+    foreground_grayscale_misses = 0, foreground_grayscale_hits = 0;
+
+ QMapIterator it(measurements);
+ while(it.hasNext())
+ {
+  it.next();
+
+  if(it.key() == global_bin)
+    continue;
+
+  if(it.value()[-1].first == 0)
+  {
+   qDebug() << "Unexpected unclassified bin: " << it.key();
+   continue;
+  }
+
+  if(it.value()[-1].second == 0) // //  a foreground bin
+  {
+   u4 ffb = it.value()[1].first + it.value()[3].first;
+//   u4 ft = it.value()[4].first + it.value()[3].first;
+   u4 fgr = it.value()[2].first + it.value()[3].first;
+   if(ffb) ++foreground_fb_hits; else ++foreground_fb_misses;
+   if(fgr) ++foreground_grayscale_hits; else ++foreground_grayscale_misses;
+  }
+
+ }
+
  QString msg = R"(F/B channel reduction, foreground: %1
 F/B channel reduction, background: %2
 F/B (cut), foreground: %3
 F/B (cut), background: %4
-Saturation, foreground: %5
-Saturation, background: %6
+Grayscale, foreground: %5
+Grayscale, background: %6
 Both, foreground: %7
 Both, background: %8
 
-)"_qt.arg(measurements[1].first).arg(measurements[1].second)
-  .arg(measurements[4].first).arg(measurements[4].second)
-  .arg(measurements[2].first).arg(measurements[2].second)
-  .arg(measurements[3].first).arg(measurements[3].second);
+)"_qt.arg(measurements[global_bin][1].first).arg(measurements[global_bin][1].second)
+  .arg(measurements[global_bin][4].first).arg(measurements[global_bin][4].second)
+  .arg(measurements[global_bin][2].first).arg(measurements[global_bin][2].second)
+  .arg(measurements[global_bin][3].first).arg(measurements[global_bin][3].second);
 
+
+ msg += R"(Coverage:
+Foreground Hits, F/B (number of bins): %1
+Foreground Misses, F/B: %2
+Foreground Hits, Grayscale: %3
+Foreground Misses, Grayscale: %4
+Percentage: F/B %5, Grayscale: %6
+
+)"_qt.arg(foreground_fb_hits).arg(foreground_fb_misses).arg(foreground_grayscale_hits).arg(foreground_grayscale_misses)
+  .arg(((r8)foreground_fb_hits / (foreground_fb_hits + foreground_fb_misses)) * 100)
+  .arg(((r8)foreground_grayscale_hits / (foreground_grayscale_hits + foreground_grayscale_misses)) * 100)
+   ;
 
  msg += R"(Totals:
 Foreground: %1
 Background: %2
 Overall: %3
 
-)"_qt.arg(measurements[-2].first).arg(measurements[-2].second).arg(measurements[-1].first);
+)"_qt.arg(measurements[global_bin][-2].first).arg(measurements[global_bin][-2].second).arg(measurements[global_bin][-1].first);
 
- u4 ft = measurements[1].first + measurements[3].first;
- u4 bt = measurements[1].second + measurements[3].second;
+ // //  F/B foreground, background totals
+ u4 fb_ft = measurements[global_bin][1].first + measurements[global_bin][3].first;
+ u4 fb_bt = measurements[global_bin][1].second + measurements[global_bin][3].second;
 
- r8 fb_ratio = (r8) ft / bt;
- r8 fb_percent = ((r8) ft / (ft + bt)) * 100;
+ // //  Grayscale foreground, background totals
+ u4 gr_ft = measurements[global_bin][2].first + measurements[global_bin][3].first;
+ u4 gr_bt = measurements[global_bin][2].second + measurements[global_bin][3].second;
+
+ // u4 ft = measurements[global_bin][4].first + measurements[global_bin][3].first;
+// u4 bt = measurements[global_bin][4].second + measurements[global_bin][3].second;
+
+ r8 fb_ratio = (r8) fb_ft / fb_bt;
+ r8 fb_percent = ((r8) fb_ft / (fb_ft + fb_bt)) * 100;
+
+ r8 gr_ratio = (r8) gr_ft / gr_bt;
+ r8 gr_percent = ((r8) gr_ft / (gr_ft + gr_bt)) * 100;
+
+ msg += R"(Grayscale, total:
+Foreground: %1
+Background: %2
+Ratio: %3 (%4%)
+Comparison: %5 (%6%)
+ (number of correct Grayscale keypoints,
+  compared against F/B)
+
+)"_qt.arg(gr_ft).arg(gr_bt).arg(gr_ratio).arg(gr_percent)
+  .arg( (r8) gr_ft / fb_ft).arg( (u4) (((r8) gr_ft / fb_ft) * 100) ) ;
 
  msg += R"(F/B, total:
 Foreground: %1
 Background: %2
-Ratio: %3 (%4%))"_qt.arg(ft).arg(bt).arg(fb_ratio).arg(fb_percent);
+Ratio: %3 (%4%))"_qt.arg(fb_ft).arg(fb_bt).arg(fb_ratio).arg(fb_percent);
 
 // qDebug() << "m = " << measurements;
 
  QMessageBox* mbox = new QMessageBox(this);
 
- mbox->setWindowTitle("KeyPoint Classifier Measurements");
+ mbox->setWindowTitle("KeyPoint Classifier Measurements                                             ");
  mbox->setText(R"(Hit "Show Details" for a breakdown)");
  mbox->setDetailedText(msg);
 

@@ -950,6 +950,7 @@ void DHAX_Application_Controller::offer_to_play_video(QString text, QString file
  }
 }
 
+//?void DHAX_Application_Controller::play_video(//? DHAX_Video_Player_Dialog::Annotation_Settings s,
 void DHAX_Application_Controller::play_video(DHAX_Video_Player_Dialog::Annotation_Settings s,
   QString file_path,
   QString annotations_file_path)
@@ -958,7 +959,9 @@ void DHAX_Application_Controller::play_video(DHAX_Video_Player_Dialog::Annotatio
    current_video_player_dialog_->deleteLater();
 
  // //  do we need to allocate a new dialog or can we reuse?
+//?
  current_video_player_dialog_ = new DHAX_Video_Player_Dialog(s);
+// current_video_player_dialog_ = new DHAX_Video_Player_Dialog();
 
  application_main_window_->connect(current_video_player_dialog_,
    &DHAX_Video_Player_Dialog::show_video_frame_requested, [this](QString image_file_path)
@@ -994,31 +997,32 @@ void DHAX_Application_Controller::play_video(DHAX_Video_Player_Dialog::Annotatio
  QString a = annotations_file_path;
  a.chop(5);
 
+
  current_video_player_dialog_->play_local_videos(
 
-// {
-//    {v + "-000.mkv", a + "-000.ntxh"},
-//    {v + "-00.mkv", a + "-00.ntxh"},
-//    {v + "-1.mkv", a + "-1.ntxh"},
-//    {v + "-0.mkv", a + "-0.ntxh"},
-//    {v + "-2.mkv", a + "-2.ntxh"},
-//    {v + ".mkv", a + ".ntxh"},
-// }
+//// {
+////    {v + "-000.mkv", a + "-000.ntxh"},
+////    {v + "-00.mkv", a + "-00.ntxh"},
+////    {v + "-1.mkv", a + "-1.ntxh"},
+////    {v + "-0.mkv", a + "-0.ntxh"},
+////    {v + "-2.mkv", a + "-2.ntxh"},
+////    {v + ".mkv", a + ".ntxh"},
+//// }
 
        {
 //         {v + ".mkv", a + ".ntxh"},
-         {v + "-1.mkv", a + "-1.ntxh"},
+         {v + "-x1.mkv", a + "-x1.ntxh"},
          {v + "-2.mkv", a + "-2.ntxh"},
        }
 
-//        v + ".mkv", a + ".ntxh"
-//    v + "-2.mkv", a + "-2.ntxh"
+////        v + ".mkv", a + ".ntxh"
+////    v + "-2.mkv", a + "-2.ntxh"
 
-//    v + "-0.mkv", a + "-0.ntxh"
-//   {
-//     {v + "-1.mkv", a + "-1.ntxh"},
-//     {v + "-2.mkv", a + "-2.ntxh"},
-//   }
+////    v + "-0.mkv", a + "-0.ntxh"
+////   {
+////     {v + "-1.mkv", a + "-1.ntxh"},
+////     {v + "-2.mkv", a + "-2.ntxh"},
+////   }
     );
 
 
@@ -1026,6 +1030,7 @@ void DHAX_Application_Controller::play_video(DHAX_Video_Player_Dialog::Annotatio
 //? current_video_player_dialog_->play_local_video(file_path, annotations_file_path);
 }
 
+//?void DHAX_Application_Controller::play_video() //DHAX_Video_Player_Dialog::Annotation_Settings s)
 void DHAX_Application_Controller::play_video(DHAX_Video_Player_Dialog::Annotation_Settings s)
 {
 // play_video(QString());
@@ -1044,12 +1049,21 @@ void DHAX_Application_Controller::play_video(DHAX_Video_Player_Dialog::Annotatio
 //   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/dhax.ntxh");
 
 
-// play_video("/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd.mkv",
-//   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd.ntxh");
 
+  play_video(s, "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd.mkv",
+    "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd.ntxh");
 
- play_video(s, "/home/nlevisrael/gits/ctg-temp/video-annotations/ltr/dhax.mkv",
-   "/home/nlevisrael/gits/ctg-temp/video-annotations/ltr/dhax.ntxh");
+// play_video("/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd-x1.mkv",
+//   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd-x1.ntxh");
+
+// play_video(s, "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd-x1.mkv",
+//   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd-x1.ntxh");
+
+// play_video(s, "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd-1.mkv",
+//   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd-1.ntxh");
+
+// play_video(s, "/home/nlevisrael/gits/ctg-temp/video-annotations/ltr/dhax.mkv",
+//   "/home/nlevisrael/gits/ctg-temp/video-annotations/ltr/dhax.ntxh");
 
 }
 

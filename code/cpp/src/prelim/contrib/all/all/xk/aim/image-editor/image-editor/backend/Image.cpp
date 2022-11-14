@@ -53,8 +53,14 @@ void Image::remove_alpha_codes(QImage& qim)
 
 
 void Image::show_alpha_codes(QVector<QColor> colors,
-  QImage& qim, QImage* source, QMap<s2, QPair<u4, u4>>* measurements)
+  QImage& qim, QImage* source,
+  QMap<QPair<s2, s2>, QMap<s2, QPair<u4, u4>>>* measurements
+                             //QMap<s2, QPair<u4, u4>>* measurements,
+  //QMap<QPair<u2, u2>, u4>* bin_counts
+                             )
 {
+ qim.save("/home/nlevisrael/gits/ctg-temp/dev/dhax-stats/test-combined/temp2.png");
+
  qDebug() << "colors = " << colors;
 
  QMap<QRgb, u4> cmap;
@@ -75,10 +81,16 @@ void Image::show_alpha_codes(QVector<QColor> colors,
  else
    source = &qim;
 
+ s2 x_bin = -1, y_bin = -1;
+ static u1 bin_width = 27;
 
+ QPair<s2, s2> global_bin {x_bin, y_bin};
 
  for(s4 y = 0; y < qim.height(); ++y)
  {
+  if(measurements)
+    y_bin = (s2) (y / bin_width);
+
   s4 y_o = y + y_offset;
 
   if(y_offset != 0)
@@ -94,6 +106,9 @@ void Image::show_alpha_codes(QVector<QColor> colors,
 
   for(s4 x = 0; x < qim.width(); ++x)
   {
+   if(measurements)
+     x_bin = (s2) (x / bin_width);
+
    s4 x_o = x + x_offset;
    if(x_offset != 0)
    {
@@ -108,6 +123,28 @@ void Image::show_alpha_codes(QVector<QColor> colors,
    QColor color = source->pixelColor(x_o, y_o);
    int a = 255 - color.alpha();
 
+   auto match_color = [&colors, &cmap](u1& match, QColor qclr)
+   {
+    if(++cmap[qclr.rgba()] == 1)
+    {
+     qDebug() << "New color: " << qclr;
+     qDebug() << "B color: " << colors.first();
+    }
+
+    u1 bkg = 0;
+    for(QColor clr : colors)
+    {
+     ++bkg;
+     if(qclr == clr)
+     {
+      match = bkg;
+      break;
+     }
+    }
+   };
+
+   QPair<s2, s2> local_bin {x_bin, y_bin};
+
    if(a)
    {
     ++a_count;
@@ -116,31 +153,30 @@ void Image::show_alpha_codes(QVector<QColor> colors,
     {
      QColor qclr = qim.pixelColor(x, y);
 
-     if(++cmap[qclr.rgba()] == 1)
-     {
-      qDebug() << "New color: " << qclr;
-      qDebug() << "B color: " << colors.first();
-     }
-
-     u1 bkg = 0, match = 0;
-     for(QColor clr : colors)
-     {
-      ++bkg;
-      if(qclr == clr)
-      {
-       match = bkg;
-       break;
-      }
-     }
+     u1 match = 0;
+     match_color(match, qclr);
+//     for(QColor clr : colors)
+//     {
+//      ++bkg;
+//      if(qclr == clr)
+//      {
+//       match = bkg;
+//       break;
+//      }
+//     }
      if(match)
      {
-      ++(*measurements)[-2].second;
-      ++(*measurements)[a].second;
+      ++(*measurements)[global_bin][-2].second;
+      ++(*measurements)[global_bin][a].second;
+      ++(*measurements)[local_bin][a].second;
      }
      else
      {
-      ++(*measurements)[-2].first;
-      ++(*measurements)[a].first;
+      ++(*measurements)[global_bin][-2].first;
+      ++(*measurements)[global_bin][a].first;
+      ++(*measurements)[local_bin][a].first;
+//      ++(*measurements)[-2].first;
+//      ++(*measurements)[a].first;
      }
     }
 
@@ -156,18 +192,32 @@ void Image::show_alpha_codes(QVector<QColor> colors,
      qim.setPixelColor(x, y + 1, colors.value(a));
     }
    }
+   // //  use first a = 0 pixel of a bin to check the bin's f/b status
+    //    [local_bin][-1].first is set to 1 once the color is known
+    //    [local_bin][-1].second is the color value
+   else if(measurements && (*measurements)[local_bin][-1].first == 0)
+   {
+    (*measurements)[local_bin][-1].first = 1;
+    QColor qclr = qim.pixelColor(x, y);
+
+    u1 match = 0;
+    match_color(match, qclr);
+
+    (*measurements)[local_bin][-1].second = match;
+   }
   }
 
  }
 
  if(measurements)
  {
-  (*measurements)[-1].first = a_count;
+  (*measurements)[global_bin][-1].first = a_count;
 
   qDebug() << "cmap = " << cmap;
  }
  else
    qDebug() << "alpha count = " << a_count;
+
 }
 
 

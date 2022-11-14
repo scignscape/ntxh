@@ -25,6 +25,7 @@ Feature_Classifier_Transform::Feature_Classifier_Transform()
      vertical_shear_(0),
      vertical_shear_centered_(0),
      color_distance_threshold_(0),
+     lightness_adjustment_(0),
      box_sizes_({0,0})
 {
 
@@ -47,6 +48,14 @@ void Feature_Classifier_Transform::init_from_kv_text(QString kv_text)
  //box_size_
 }
 
+QColor Feature_Classifier_Transform::adjusted_foreground_color()
+{
+ if( (lightness_adjustment_ == 0) || (lightness_adjustment_ == 0) )
+   return foreground_color_;
+
+ return foreground_color_.lighter(lightness_adjustment_);
+}
+
 
 void Feature_Classifier_Transform::init_from_ntxh(QString ntxh_file)
 {
@@ -64,7 +73,7 @@ void Feature_Classifier_Transform::init_from_ntxh(QString ntxh_file)
   QString ty = h->type_descriptor().first;
   if(ty == "Feature_Classifier_Transforms")
   {
-   g.get_sfsr(h, {{1, 9}}, [this](QVector<QPair<QString, void*>>& prs)
+   g.get_sfsr(h, {{1, 10}}, [this](QVector<QPair<QString, void*>>& prs)
    {
     rotation_ = prs[0].first.toDouble();
     QString skew_shear = prs[1].first;
@@ -76,11 +85,13 @@ void Feature_Classifier_Transform::init_from_ntxh(QString ntxh_file)
 
     color_distance_threshold_ = prs[6].first.toInt();
 
-    box_sizes_.width = prs[7].first.toInt();
-    if(prs[8].first.isEmpty())
+    lightness_adjustment_ = prs[7].first.toInt();
+
+    box_sizes_.width = prs[8].first.toInt();
+    if(prs[9].first.isEmpty())
       box_sizes_.height = box_sizes_.width;
     else
-      box_sizes_.height = prs[8].first.toInt();
+      box_sizes_.height = prs[9].first.toInt();
    });
   }
  }

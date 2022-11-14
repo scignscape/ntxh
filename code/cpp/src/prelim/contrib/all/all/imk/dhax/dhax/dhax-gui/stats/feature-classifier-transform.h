@@ -35,6 +35,7 @@ class Feature_Classifier_Transform
 
  QString color_distance_model_;
  u1 color_distance_threshold_;
+ u2 lightness_adjustment_;
 
 
 public:
@@ -54,7 +55,9 @@ public:
 
  ACCESSORS(QString ,color_distance_model)
  ACCESSORS(u1 ,color_distance_threshold)
+ ACCESSORS(u2 ,lightness_adjustment)
 
+ QColor adjusted_foreground_color();
 
 
  void init_from_ntxh(QString ntxh_file);

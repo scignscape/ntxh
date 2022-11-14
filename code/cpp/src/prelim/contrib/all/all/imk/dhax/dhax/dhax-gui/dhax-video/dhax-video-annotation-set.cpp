@@ -223,11 +223,87 @@ void DHAX_Video_Annotation_Set::compile_latex(QSizeF sz) //QPair<u4, u4> dpis)
 
 
 
+//void DHAX_Video_Annotation_Set::parse_text_annotation_hypernode(NTXH_Graph& g, hypernode_type* h)
+//{
+// g.get_sfsr(h, {{1, 7}}, [this](QVector<QPair<QString, void*>>& prs)
+// {
+
+//  DHAX_Video_Annotation dva;
+//  dva.set_kind("text");
+
+//  QString en = prs[2].first;
+//  check_text_macro(en);
+
+//  int index = en.indexOf('+');
+//  {
+//   if(index != -1)
+//   {
+//    QString ien = en.mid(index + 1).trimmed();
+//    en = en.mid(0, index).trimmed();
+//    index = ien.indexOf('|');
+//    if(index != -1)
+//    {
+//     QString inner_bkg = ien.mid(index + 1).trimmed();
+//     ien = ien.mid(0, index).simplified();
+//     inner_bkg.replace(' ', "");
+//     check_text_macro(inner_bkg, 0, 1);
+//     dva.set_inner_element_background_color(inner_bkg);
+//    }
+//    dva.set_inner_element_name(ien);
+//   }
+//  }
+
+//  index = en.indexOf('@');
+//  if(index != -1)
+//  {
+//   dva.set_font_size(en.mid(index + 1).trimmed());
+//   en = en.mid(0, index).trimmed();
+//  }
+//  dva.set_element_name(en);
+
+//  dva.set_text(prs[3].first);
+
+//  QString iss = prs[4].first;
+//  check_text_macro(iss);
+
+//  dva.set_inner_style_sheet(iss);
+
+//  dva.set_corner_position(QPointF{prs[5].first.toFloat(), prs[6].first.toFloat()});
+//  dva.finalize_html_text();
+
+//  QString s = prs[0].first;
+//  QString e = prs[1].first;
+//  if(s.startsWith('!'))
+//  {
+//   dva.set_ref_id(s.mid(1));
+
+//   // //  convert 10ths of a second to milliseconds
+//   dva.set_ref_time_offset(prs[1].first.toUInt() * 100);
+//  }
+//  else
+//  {
+//   u4 start = s.toInt();
+//   u4 end = e == "*"? INT_MAX : e.toInt();
+//   if(e.startsWith('+'))
+//     end += start;
+
+//   dva.set_starting_frame_number(start);
+//   dva.set_ending_frame_number(end);
+//  }
+
+//  load_annotation(dva);
+
+////  QString name_description = prs[0].first;
+// });
+
+//}
+
+
+
 void DHAX_Video_Annotation_Set::parse_text_annotation_hypernode(NTXH_Graph& g, hypernode_type* h)
 {
  g.get_sfsr(h, {{1, 7}}, [this](QVector<QPair<QString, void*>>& prs)
  {
-
   DHAX_Video_Annotation dva;
   dva.set_kind("text");
 
@@ -261,6 +337,18 @@ void DHAX_Video_Annotation_Set::parse_text_annotation_hypernode(NTXH_Graph& g, h
   }
   dva.set_element_name(en);
 
+  QString text = prs[3].first;
+
+  QVector<DHAX_Video_Annotation*>* group = nullptr;
+
+  if(text.startsWith("@@"))
+  {
+   parse_latex_annotation(dva, text);
+   group = &latex_annotation_group_;
+  }
+  else
+    dva.set_text(text);
+
   QString iss = prs[4].first;
   check_text_macro(iss);
 
@@ -289,19 +377,12 @@ void DHAX_Video_Annotation_Set::parse_text_annotation_hypernode(NTXH_Graph& g, h
    dva.set_ending_frame_number(end);
   }
 
-  QString text = prs[3].first;
 
-  QVector<DHAX_Video_Annotation*>* group = nullptr;
+//  if(group)
+    load_annotation(dva, group);
 
-  if(text.startsWith("@@"))
-  {
-   parse_latex_annotation(dva, text);
-   group = &latex_annotation_group_;
-  }
-  else
-    dva.set_text(text);
-
-  load_annotation(dva, group);
+//  else
+//    load_annotation(dva);
 
 //  QString name_description = prs[0].first;
  });

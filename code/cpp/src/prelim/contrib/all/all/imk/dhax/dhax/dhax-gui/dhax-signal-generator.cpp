@@ -155,9 +155,13 @@ void DHAX_Signal_Generator::emit_test_ssr_datagram_requested()
 }
 
 
+//?
 void DHAX_Signal_Generator::emit_play_video_requested(DHAX_Video_Player_Dialog::Annotation_Settings s)
+//?void DHAX_Signal_Generator::emit_play_video_requested()
 {
  STATIC_COUNT
+// Q_EMIT play_video_requested(++static_count);
+//?
  Q_EMIT play_video_requested(++static_count, s);
 }
 

@@ -157,26 +157,28 @@ void DHAX_Menu_System::init_menus()
  };
 
  DHAX_Menu* video_menu = file_menu.add_nested_menu("Play Video");
-
  video_menu->add_action("No Annotations") << [sg]
  {
   sg->emit_play_video_requested(DHAX_Video_Player_Dialog::No_Annotations);
  };
-
  video_menu->add_action("Load Annotatios") << [sg]
  {
   sg->emit_play_video_requested(DHAX_Video_Player_Dialog::Load_Annotations);
  };
-
  video_menu->add_action("Load Annotatios With Pause") << [sg]
  {
   sg->emit_play_video_requested(DHAX_Video_Player_Dialog::Load_Annotations_With_Pause);
  };
-
  video_menu->add_action("Load Annotatios Manually") << [sg]
  {
   sg->emit_play_video_requested(DHAX_Video_Player_Dialog::Load_Annotations_Manually);
  };
+
+//?
+// file_menu.add_action("Play Video") << [sg]
+// {
+//  sg->emit_play_video_requested();
+// };
 
  file_menu.addSeparator();
 
