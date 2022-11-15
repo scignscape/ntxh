@@ -486,18 +486,26 @@ void* DHAX_Video_Player_Frame::make_scene_text_annotation(DHAX_Video_Annotation*
 
 void* DHAX_Video_Player_Frame::make_scene_circled_text_annotation(DHAX_Video_Annotation* dva)
 {
+
+ u1 w = annotation_set_->circled_text_default_width();
+
+ QRectF qrf(0, 0, w, w);
+
+ QPointF dvac = dva->corner_position();
+
+ qrf.moveCenter(dvac);
+
  QGraphicsSimpleTextItem* ti = graphics_scene_->addSimpleText(dva->text());
- ti->setPos(dva->corner_position());
- ti->setText(dva->text());
-
- QRectF qrf(0, 0, annotation_set_->circled_text_default_width(),
-   annotation_set_->circled_text_default_width());
-
- qrf.moveCenter(dva->corner_position());
+ QFont f = ti->font();
+ f.setPixelSize(annotation_set_->circled_text_default_font_size());
+ ti->setFont(f);
+ ti->setPen(annotation_set_->circled_text_default_foreground_color());
+//? ti->setPos(qrf.center() + QPoint(w, -w));
+ ti->setPos(dvac + QPoint(-2, -7));
 
  QBrush qbr(annotation_set_->circled_text_default_background_color());
  QPen qpen(QBrush(annotation_set_->circled_text_default_outline_color()),
-   annotation_set_->circled_text_default_width());
+           annotation_set_->circled_text_default_border());
 
  QGraphicsEllipseItem* result = graphics_scene_->addEllipse(qrf, qpen, qbr);
 

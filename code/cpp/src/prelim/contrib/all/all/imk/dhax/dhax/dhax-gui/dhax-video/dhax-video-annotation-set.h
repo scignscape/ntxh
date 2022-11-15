@@ -100,6 +100,7 @@ public:
 
  ACCESSORS(r4 ,circled_text_default_font_size)
  ACCESSORS(u1 ,circled_text_default_width)
+ ACCESSORS(u1 ,circled_text_default_border)
 
  ACCESSORS(QSizeF ,smaller_video_size)
  ACCESSORS(QSizeF ,larger_video_size)
