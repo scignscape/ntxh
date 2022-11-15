@@ -188,6 +188,43 @@ void (*_make_run_superpixels())(DHAX_Stat_Assessment&)
  };
 }
 
+
+// //   downloaded from: https://gist.github.com/insaneyilin/164267440dd19511f20f8546c3c98296
+void DrawDashedLine(cv::Mat& img, cv::Point pt1, cv::Point pt2,
+                    cv::Scalar color, int thickness, std::string style,
+                    int gap) {
+  float dx = pt1.x - pt2.x;
+  float dy = pt1.y - pt2.y;
+  float dist = std::hypot(dx, dy);
+
+  std::vector<cv::Point> pts;
+  for (int i = 0; i < dist; i += gap) {
+    float r = static_cast<float>(i / dist);
+    int x = static_cast<int>((pt1.x * (1.0 - r) + pt2.x * r) + .5);
+    int y = static_cast<int>((pt1.y * (1.0 - r) + pt2.y * r) + .5);
+    pts.emplace_back(x, y);
+  }
+
+  int pts_size = pts.size();
+
+  if (style == "dotted") {
+    for (int i = 0; i < pts_size; ++i) {
+      cv::circle(img, pts[i], thickness, color, -1);
+    }
+  } else {
+    cv::Point s = pts[0];
+    cv::Point e = pts[0];
+
+    for (int i = 0; i < pts_size; ++i) {
+      s = e;
+      e = pts[i];
+      if (i % 2 == 1) {
+        cv::line(img, s, e, color, thickness);
+      }
+    }
+  }
+}
+
 void (*_make_run_lines())(DHAX_Stat_Assessment&)
 {
  return [](DHAX_Stat_Assessment& stat)
@@ -276,6 +313,25 @@ void (*_make_run_lines())(DHAX_Stat_Assessment&)
    auto it_rotation = std::min_element(diffs_rotation.begin(), diffs_rotation.end());
    size_t best_fit_rotation = std::distance(diffs_rotation.begin(), it_rotation);
 
+   auto draw_line = [&out](float angle, float rho, QColor color, u1 width, u2 extent, u1 gap = 0) //cv::Scalar cv_color)
+   {
+    cv::Scalar cv_color(color.blue(), color.green(), color.red());
+    cv::Point pt1, pt2;
+    double a = cos(angle), b = sin(angle);
+    double x0 = a*rho, y0 = b*rho;
+
+    pt1.x = cvRound(x0 + extent * (-b));
+    pt1.y = cvRound(y0 + extent * (a));
+    pt2.x = cvRound(x0 - extent * (-b));
+    pt2.y = cvRound(y0 - extent * (a));
+
+    if(gap)
+      DrawDashedLine(out, pt1, pt2, cv_color, width, "dotted", gap);
+
+    else
+      cv::line(out, pt1, pt2, cv_color, width, cv::LINE_AA);
+   };
+
    for( size_t i = 0; i < lines.size(); i++ )
    {
     float rho = lines[i][0], theta = lines[i][1];
@@ -283,31 +339,22 @@ void (*_make_run_lines())(DHAX_Stat_Assessment&)
     if(debug_theta)
       qDebug() << "theta = " << qRadiansToDegrees(theta);
 
-    auto draw_line = [out, rho](float angle, QColor color, u1 width, u2 extent) //cv::Scalar cv_color)
-    {
-     cv::Scalar cv_color(color.blue(), color.green(), color.red());
-     cv::Point pt1, pt2;
-     double a = cos(angle), b = sin(angle);
-     double x0 = a*rho, y0 = b*rho;
-
-     pt1.x = cvRound(x0 + extent * (-b));
-     pt1.y = cvRound(y0 + extent * (a));
-     pt2.x = cvRound(x0 - extent * (-b));
-     pt2.y = cvRound(y0 - extent * (a));
-     cv::line(out, pt1, pt2, cv_color, width, cv::LINE_AA);
-    };
-
-    if(i == best_fit_avg)
-      draw_line(theta, QColor(Qt::yellow).lighter(150), 20, extent);
-
-    if(i == best_fit_rotation)
-      draw_line(theta, Qt::magenta, 17, extent);
-
-    draw_line(theta, QColor(Qt::cyan).lighter(175), 2, extent);
+    draw_line(theta, rho, QColor(Qt::cyan).lighter(175), 2, extent);
 
 //    draw_line(qDegreesToRadians(90.), Qt::yellow);
 //    draw_line(qDegreesToRadians(45.), Qt::magenta);
    }
+
+   QColor semi = QColor("orange").lighter(180);
+   draw_line(lines[best_fit_rotation][1], lines[best_fit_rotation][0], semi, 15, extent, 38);
+
+   semi = QColor(Qt::magenta).lighter(120);
+   semi.setRed(semi.red() + 30);
+   draw_line(lines[best_fit_avg][1], lines[best_fit_avg][0], semi, 13, extent, 36);
+
+//   if(i == best_fit_rotation)
+
+
 
    theta_avg = qRadiansToDegrees(avg);
   };

@@ -243,7 +243,18 @@ DHAX_Image_Scene_Item::Mouse_Event_Modes::Right_Click_Iso>(QMouseEvent* mev,
  {
   QMenu* submenu = menu->addMenu("Sort Keypoints");
 
-  for(QString algorithm : current_transforms_map_->keys())
+  QStringList keys = current_transforms_map_->keys();
+
+  // //  temp for demo ..
+  keys.prepend("AKAZE");
+  keys.prepend("SIFT");
+  keys.append("ORB");
+  keys.append("SURF");
+  keys.append("USURF");
+
+    // make_0d_uxproc(SURF)"
+
+  for(QString algorithm : keys) // current_transforms_map_->keys())
   {
    submenu->addAction(algorithm, [algorithm, this]()
    {
