@@ -1012,8 +1012,8 @@ void DHAX_Application_Controller::play_video(DHAX_Video_Player_Dialog::Annotatio
        {
 //         {v + ".mkv", a + ".ntxh"},
 //         {v + "-x1.mkv", a + "-x1.ntxh"},
+         {v + "-x1.mkv", a + "-x1.ntxh"},
          {v + "-x2.mkv", a + "-x2.ntxh"},
-     {v + "-x1.mkv", a + "-x1.ntxh"},
        }
 
 ////        v + ".mkv", a + ".ntxh"
