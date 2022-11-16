@@ -1,0 +1,269 @@
+
+- s=start frame  e=end frame  t=text  y=style 
+  p=position 
+.
+
+
+
+&type Text_Annotation {7}
+  :s:1  :e:3  :t:4  :y:5  :p:6 ;
+
+
+&type Shape_Annotation {5}
+  :k:1  :s:2  :t:4  :d:5 ;
+ 
+&type Circled_Text_Default {15}
+  :w:1
+  :background-color:2  :foreground-color:6
+  :outline-color:10  :font-size:14  :border:15 ;
+
+&type Circled_Text_Annotation {5}
+  :s:1  :t:3  :p:4 ;
+
+- s=start frame  i=id
+
+
+
+&type Pause_Annotation {3}
+  :s:1  :i:2  :t:3 ;
+
+
+
+&type Annotation_Settings {6}
+  :sa:1  :tr-smaller:3 :tr-larger:5  ;
+
+
+&/
+
+
+!/ Annotation_Settings
+$sa#  1  1
+$tr-smaller#  0  0
+$tr-larger#  0  0  
+/!
+<+>
+
+
+!/ Circled_Text_Default
+$w: 12
+$background-color# 50 50 210 255
+$foreground-color# 150 50 10 255
+$outline-color# 150 50 10 255
+$font-size: 14
+$border: 2
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 22 
+$i: +auto
+$t: 10
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 1 47
+$e: div +span |> ($over-blue) rgba(200, 200, 240, 153)
+$t. 
+<| Two-Dimensional Features <|
+.
+$y.
+($back2-yellow)
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 45 170
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 52 
+$i: +auto
+$t: 40
+/!
+<+>
+
+!/ Text_Annotation
+$s# 51  90  
+$e: div @7
+$t. 
+||>
+<|| Next, we examine superpixel segmentation as an illustration ||>
+<|| of two-dimensional feature analysis.  In particular, these ||>
+<|| visuals will show a superpixel subdivision of our original ||>
+<|| image superimposed on the map of BRISK keypoints ||>
+<|| obtained via the pipeline shown earlier. ||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| Superpixels represent one tactic for extrapolating interior- ||>
+<|| keypoint features to foreground object-proposals. <| Specifically, ||> 
+<|| we can estimate the foreground to be the sum of superpixels ||>
+<|| containing keypoints, thereby converting zero-dimensional ||>
+<|| point clouds to a two-dimensional area.  The shape and/or size ||>
+<|| of this approximate foreground may then be utilized to ||>
+<|| compute the extent of the foreground relative to the whole ||> 
+<|| image, and/or to compare the foreground's mereogeometric ||>
+<|| profile against predefined keys for object-tracking, ||>
+<|| object-recognition, and related &ldquo;semantic&rdquo; analyses.||>
+.
+$y.
+($white-purple)
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 0 13
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 98 
+$i: +auto
+$t: 20
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 102 
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 101  103  
+$e: div @7
+$t. 
+||>
+<|| This graphic shows the segmentation and BRISK keypoints ||>
+<|| together. <| For purposes of demonstration, superpixels ||>
+<|| intersecting the keypoint result-set are highlighted with ||> 
+<|| yellow outlines and lightened interior colors. ||>
+.
+$y.
+ color:rgba(0,10,37);
+ background-color:rgba(200,190,107,250);
+.
+$p# 20 52
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 169 
+$i: +auto
+$t: 20
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 168  170  
+$e: div @7
+$t. 
+||>
+<|| We&rsquo;ll then show the same analysis run on a variation ||>
+<|| of the image which was more agressively pre-processed. ||>
+<|| Note that the superpixel segmentation is almost identical ||>
+<|| when computed against the full-color image and via an ||>
+<|| XCSD channel-reduction with toroidal color bins. ||>
+<br>
+<|| In this case a coarse filter collapses the colors ||>
+<|| to a small group of primary colors (fewer than eight) ||>
+<|| without affecting the quality of the segmentation. ||>
+
+.
+$y.
+ color:rgba(0,10,37);
+ background-color:rgba(200,190,107,250);
+.
+$p# 20 52
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 465 
+$i: +auto
+$t: 20
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 464  467  
+$e: div @7
+$t. 
+||>
+<|| All in all, XCSD can employ a variety of channel-reduction ||>
+<|| strategies, each of which depend on novel algorithms. ||>
+<|| These strategies and their underlying color-models ||>
+<|| can be merged in different configurations to improve ||>
+<|| the accuracy of numerous feature-detection pipelines, ||>
+<|| spanning zero-dimensional, one-dimensional, and ||>
+<|| two-dimensional feature profiles. ||>
+<br>
+<|| These capabilities augment the features provided by the ||>
+<|| XCSD framework for manipulating image-series, ||>
+<|| multi-media database systems, video/PDF features, ||> 
+<|| and desktop/native application-development requirements. ||>
+.
+$y.
+($back-blue)
+ color: 0 10 37;
+ background-color: 107 190 200 250 ~> 180;
+.
+$p# 16 53
+/!
+<+>
+
+
+
+
+
+!/ Pause_Annotation
+$s: 512 
+$i: +auto
+$t: 20
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 511  514
+$e: div +i
+$t. 
+<| Thanks For Watching! <|
+.
+$y.
+ color:rgba(0,26,17);;font-weight:bold;
+ background-color:rgba(240,40,187,110);
+.
+$p# 40 181
+/!
+<+>
+
+
+
+
+
+/&
+
+
+
+
+
