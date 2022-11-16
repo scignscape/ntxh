@@ -486,6 +486,28 @@ void* DHAX_Video_Player_Frame::make_scene_text_annotation(DHAX_Video_Annotation*
 
 void* DHAX_Video_Player_Frame::make_scene_circled_text_annotation(DHAX_Video_Annotation* dva)
 {
+ if(dva->pause_time())
+ {
+  media_player_->pause();
+  QTimer* temp_pause_timer = new QTimer(this);
+  temp_pause_timer->setInterval(dva->pause_time() * 100);
+  temp_pause_timer->setSingleShot(true);
+
+
+  QEventLoop qel;
+  connect(temp_pause_timer, &QTimer::timeout, [&qel, temp_pause_timer]()
+  {
+   qel.exit();
+   temp_pause_timer->deleteLater();
+  });
+
+  temp_pause_timer->start();
+  qel.exec();
+  media_player_->play();
+
+//  this_reset_current_pause_timer(dva->pause_time(),
+//   &DHAX_Video_Player_Frame::resume_from_pause_timer);
+ }
 
  u1 w = annotation_set_->circled_text_default_width();
 
@@ -501,7 +523,7 @@ void* DHAX_Video_Player_Frame::make_scene_circled_text_annotation(DHAX_Video_Ann
  ti->setFont(f);
  ti->setPen(annotation_set_->circled_text_default_foreground_color());
 //? ti->setPos(qrf.center() + QPoint(w, -w));
- ti->setPos(dvac + QPoint(-2, -7));
+ ti->setPos(dvac + QPointF(-2.3, -6));
 
  QBrush qbr(annotation_set_->circled_text_default_background_color());
  QPen qpen(QBrush(annotation_set_->circled_text_default_outline_color()),

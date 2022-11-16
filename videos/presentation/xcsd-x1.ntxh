@@ -1,0 +1,848 @@
+
+- s=start frame  e=end frame  t=text  y=style 
+  p=position 
+.
+
+- 
+
+ color:rgba(0,10,37);
+ background-color:rgba(200,190,107,250);
+
+.
+
+
+&type Text_Annotation {7}
+  :s:1  :e:3  :t:4  :y:5  :p:6 ;
+
+
+&type Shape_Annotation {5}
+  :k:1  :s:2  :t:4  :d:5 ;
+ 
+&type Circled_Text_Default {15}
+  :w:1
+  :background-color:2  :foreground-color:6
+  :outline-color:10  :font-size:14  :border:15 ;
+
+&type Circled_Text_Annotation {6}
+  :s:1  :t:3  :p:4 :pause:6 ;
+
+- s=start frame  i=id
+
+
+
+&type Pause_Annotation {3}
+  :s:1  :i:2  :t:3 ;
+
+
+
+&type Annotation_Settings {6}
+  :sa:1  :tr-smaller:3 :tr-larger:5  ;
+
+
+&/
+
+
+!/ Annotation_Settings
+$sa#  1  1
+$tr-smaller#  0  0
+$tr-larger#  0  0  
+/!
+<+>
+
+
+!/ Circled_Text_Default
+$w: 15
+$background-color# 250 250 210 255
+$foreground-color# 50 50 110   255
+$outline-color# 150  150  105  255
+$font-size: 8
+$border: 2
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 12 
+$i: +auto
+$t: 5
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 10 14
+$e: div +span |> ($over-blue) rgba(200, 200, 240, 153)
+$t. 
+<| XCSD Channel Reductions ... <|
+.
+$y.
+($back2-yellow)
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 25 170
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 22 
+$i: +auto
+$t: 5
+/!
+<+>
+
+
+
+
+!/ Text_Annotation
+$s# 21 24
+$e: div +span |> ($over-blue) rgba(200, 200, 240, 153)
+$t. 
+<| Zero-Dimensional Features <|
+.
+$y.
+($back2-yellow)
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 25 170
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 32 
+$i: +auto
+$t: 7
+/!
+<+>
+
+!/ Text_Annotation
+$s# 31  35  
+$e: div @7
+$t. 
+||>
+<|| Most image-segmentation and feature-detection algorithms ||>
+<|| require that image-data be reduced from three channels to one ||>
+<|| channel. <| The most common equations for this preliminary step ||>
+<|| consider the relative lightness or darkness of each color, ||>
+<|| ignoring chromatic hues entirely. <| By contrast, XCSD provides ||>
+<|| alternative channel-reduction strategies that preserve chromatic ||> 
+<|| signals, thereby retaining useful data from the original image. ||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| For many image-processing tasks, channel-reduction algorithms ||>
+<|| that use chromatic data are more accurate than those which only ||> 
+<|| recognize grayscale quantities. <| The following sections of this ||>
+<|| video will show features of the XCSD demo application focused on ||>
+<|| comparing and evaluating image-analysis algorithms. <| We will ||>
+<|| employ these features to contrast pipeline-results whose ||>
+<|| channel-reduction formulae are derived from XCSD metrics ||>
+<|| to those based on conventional grayscale mappings. ||>
+.
+$y.
+($white-purple)
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 0 15
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 122
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 121  125  
+$e: div @7
+$t. 
+||>
+<|| The application now runs through multiple ||>
+<|| analyses, generating a series of saved files ||>
+<|| representing intermediate processing stages ||>
+<|| or visual summaries of intermediate data. ||>
+.
+$y.
+($back-plus-red)
+ color:rgb(90,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(250,255,250,240);
+.
+$p# 20 62
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 124
+$i: +auto
+$t: 20
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 126
+$i: +auto
+$t: 80
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 123  127 
+$e: div @7
+$t. 
+||>
+<|| This video will skip over these behind-the-scenes||>
+<|| processing stages and will resume when the entire ||>
+<|| workflow is completed (which is indicated by passing ||>
+<|| a preselected summary file to the main window). ||>
+.
+$y.
+($back-plus-red)
+ color:rgb(90,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(250,255,250,240);
+.
+$p# 22 132
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 133
+$i: +auto
+$t: 10
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 135
+$i: +auto
+$t: 20
+/!
+<+>
+
+!/ Text_Annotation
+$s# 134  160  
+$e: div @7
+$t. 
+||>
+<|| Running analyses ... ||>
+.
+$y.
+[$back-plus-red]
+.
+$p# 20 82
+/!
+<+>
+
+
+
+!/ Circled_Text_Annotation
+$s# 136 138
+$t: 1
+$p# 40 150
+/!
+<+>
+
+!/ Pause_Annotation
+$s: 137
+$i: +auto
+$t: 14
+/!
+<+>
+
+
+!/ Circled_Text_Annotation
+$s# 138 140
+$t: 2
+$p# 60 150
+$pause: 13
+/!
+<+>
+
+!/ Pause_Annotation
+$s: 139
+$i: +auto
+$t: 14
+/!
+<+>
+
+
+!/ Circled_Text_Annotation
+$s# 140 142
+$t: 3
+$p# 80 150
+$pause: 13
+/!
+<+>
+
+!/ Pause_Annotation
+$s: 141
+$i: +auto
+$t: 14
+/!
+<+>
+
+
+!/ Circled_Text_Annotation
+$s# 142 144
+$t: 4
+$p# 100 150
+$pause: 13
+/!
+<+>
+
+!/ Pause_Annotation
+$s: 143
+$i: +auto
+$t: 14
+/!
+<+>
+
+
+!/ Circled_Text_Annotation
+$s# 144 146
+$t: 5
+$p# 120 150
+$pause: 13
+/!
+<+>
+
+!/ Pause_Annotation
+$s: 145
+$i: +auto
+$t: 14
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 567 
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 564  570  
+$e: div @7
+$t. 
+||>
+<|| The summary image is marked with keypoints detected ||>
+<|| through XCSD&rsquo;s channel-reduction technique. <| Prior ||>
+<|| to analyzing the keypoint-distribution mathematically, ||>
+<|| it is possible to overview the result-set by checking the ||>
+<|| metrics associated with individual keypoints, as seen here. ||>
+<br>
+<|| In some contexts the keypoint collection could be further ||> 
+<|| filtered via these metrics, although the analyses discussed ||>
+<|| in this case-study are designed to maximize the extent ||>
+<|| of keypoints across a foreground, rather than to reduce ||>
+<|| the set based on geometric properties. ||>
+.
+$y.
+($back-blue)
+ color: 0 10 37;
+ background-color: 107 190 200 250 ~> 180;
+.
+$p# 16 53
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 687 
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 680  690  
+$e: div @7
+$t. 
+||>
+<|| Next we examine the distribution of the keypoints ||>
+.
+$y.
+[$back-plus-red]
+.
+$p# 20 82
+/!
+<+>
+
+
+
+
+
+!/ Pause_Annotation
+$s: 806
+$i: +auto
+$t: 90
+/!
+<+>
+
+!/ Text_Annotation
+$s# 805  807  
+$e: div @7
+$t. 
+||>
+<||| Many image-processing pipelines are built around zero- |||>
+<||| dimenstional features, that is, individual locations in an image |||>
+<||| where surrounding color and/or color-intensity variation |||>
+<||| has a distinct statistical signature. <br><br> 
+<||| Preferred algorithms for finding such locations (also known |||>
+<||| as &ldquo;keypoints&rdquo;) are usually scale- and rotation-invariant, so |||>
+<||| that the same parameters can be used across an image series. |||>
+.
+$y.
+($red-red)
+ color: rgb(30,35,30); font-size:10;font-weight:normal;
+ background-color:200 105 137 250 ~> 182;
+.
+$p# 7 61
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 809 
+$i: +auto
+$t: 90
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 808  810  
+$e: div @7
+$t. 
+||>
+<||| Here we compare the accuracy of keypoints identified via grayscale |||>
+<||| channel reductions to those based on XCSD formulas for ranking |||> 
+<||| pixels in terms of background versus foreground probabilities. |||>
+<br> 
+<||| The demo application can run such a comparsion against many |||>
+<||| feature-detection methods, e.g., SIFT, SURF, USURF, AKAZE, |||>
+<||| ORB, BRISK, or Sobel/Prewitt and related edge-detection kernels. |||>
+<br> 
+<||| For this example, BRISK (Binary Robust Invariant Scale Keypoints) |||>
+
+<||| yields the best results, alongside the XCSD channel-reduction. |||>
+.
+$y.
+[$red-red]
+.
+$p# 7 67
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 812 
+$i: +auto
+$t: 90
+/!
+<+>
+
+
+!/ Text_Annotation
+$s#  811   813 
+$e: div @7
+$t. 
+||>
+<||| We demonstrate the comparison by marking pixels at BRISK |||>
+<||| keypoint-locations via a color-scheme that separates XCSD |||>
+<||| from grayscale matches. |||>
+<br>
+<||| Specifically, cyan shows XCSD matches; red covers XCSD |||>
+<||| matches that are filtered out because they are judged to lie |||>
+<||| outside the foreground focus area (due to high background/ |||>
+<||| low foreground probability); yellow depicts grayscale matches; |||>
+<||| and green represents keypoints common to both result-sets. |||>
+.
+$y.
+[$red-red]
+.
+$p# 7 89
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 1261 
+$i: +auto
+$t: 30
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 1260  1262  
+$e: div @7
+$t. 
+||>
+<||| To mathematically test the XCSD/BRISK keypoints, |||>
+<||| we load an image-transform series defined by an |||>
+<||| NTXH data file &mdash; NTXH being the same custom |||> 
+<||| format described in our prior video (about |||>
+<||| Virtual Reality and 3D/360&deg;-photography tours) |||>
+<||| in the context of video annotations. |||>
+<br> 
+<||| This NTXH data encodes a workflow similar to our |||>
+<||| image-analysis demonstration from earlier in this |||> 
+<||| video (via rotations and color-masks), except that |||>
+<||| now we apply the transforms to test an automated |||>
+<||| analysis rather than to run a new analysis. |||>
+.
+$y.
+[$red-red]
+.
+$p# 15 55
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 2215 
+$i: +auto
+$t: 20
+/!
+<+>
+
+!/ Text_Annotation
+$s#  2214   2216 
+$e: div @7
+$t. 
+||>
+<||| Informally, we can visually confirm that the XCSD matches |||>
+<||| are spread throughout the foreground and outside the |||> 
+<||| background, serving to demarcate the foreground. |||>
+<br>
+<||| By contrast, the grayscale matches are distributed almost |||> 
+<||| randomly across the foreground/background division. |||>
+<br>
+<||| These results suggest tha XCSD/BRISK keypoints can act as |||>
+<||| textural feature-markers that correctly isolate the foreground, |||>
+<||| allowing its size to be calculated as a percentage of the total |||>
+<||| image. <| The next step is to assess keypoint-accuracy more |||>
+<||| rigorously, by comparing statistical evaluations. |||>
+.
+$y.
+[$red-red]
+.
+$p# 9  51 
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 2588 
+$i: +auto
+$t: 90
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 2587  2589  
+$e: div @7
+$t. 
+||>
+<|| We map all keypoints (XCSD and grayscale) alongside the image ||>
+<|| transform, using the XCSD demo-application to pause and watch ||> 
+<|| each step. ||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| As can be seen, the transforms map the image into 27&times;27 boxes, ||>
+<|| which serve to bin and classify all keypoints into foreground ||>
+<|| and background cells. <| From this mapping we can calculate ||>
+<|| the accuracy of the XCSD keypoint algorithm, showing in ||>
+<|| particular that 93% of the XCSD keypoints are correctly binned ||>
+<|| as foreground, and 88% of foreground bins cover keypoints.  ||>
+<|| In comparison, only 39% of foreground bins have grayscale ||>
+<|| keypoints (an accuracy less than half of XCSD), and the ||> 
+<|| grayscale metric found only 15% of the keypoints identified ||>
+<|| via XCSD (a ratio of more than 6-to-1). ||>
+.
+$y.
+[$white-purple]
+.
+$p# 4 31
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 2600 
+$i: +auto
+$t: 70
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 2599  2601 
+$e: div @7
+$t. 
+||>
+<|| So as to compensate for inaccurate results using grayscale, ||>
+<|| a common practice in Computer Vision would be to pre- ||>
+<|| transform the target image with a morphological operator, ||>
+<|| such as a dilation kernel, or to run a &ldquo;blurring&rdquo; algorithm, ||>
+<|| both of which could reduce statistical noise. <| For that kind ||>
+<|| of pipeline, the goal would be to push keypoints out ||>
+<|| toward the perimeter of foreground segments and then ||> 
+<|| consult the keypoints as a de facto contour sampling (e.g., ||>
+<|| via a polygon hull) to demarcate the segments&rsquo; boundaries. ||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| The problem with this approach is that morphological ||>
+<|| simplification will still yield distorted results for images that ||>
+<|| do not have clearly separated foreground and background, ||>
+<|| which is true for most real-world images where glare/ ||>
+<|| shadow, textures, occlusions, and other optical and/or ||>
+<|| geometric anomalies complicate the segmentation process. ||>
+.
+$y.
+[$white-purple]
+.
+$p# 7 11
+/!
+<+>
+
+
+
+
+
+!/ Pause_Annotation
+$s: 2932
+$i: +auto
+$t: 20
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 2930  2953  
+$e: div @7
+$t. 
+||>
+<|| For complex images, a reasonable strategy, instead, is to aim ||>
+<|| for segment-interior keypoints rather than segment- ||> 
+<|| boundaries. <| If keypoints are mostly localized to foreground ||>
+<|| interiors and are reasonably spread out through the ||>
+<|| foreground, then the area panned by keypoints provides a ||>
+<|| good approximation to the size and shape of the foreground. ||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| As seen here, the XCSD algorithm is 93% accurate with respect ||>
+<|| to foreground true-positives and 88% accurate with respect to ||> 
+<|| foreground false-negatives. <| Also, every background-bin with ||>
+<|| keypoints is adjacent to at least one (usuallyally 3 or more) ||>
+<|| foreground bins, so protruding the foreground by one step ||>
+<|| for these bins would barely distort the foreground shape/size. ||>   
+<|| In this sense the entire keypoint set serves as a good ||>
+<|| approximation for the foreground. <| Collectively, these numbers ||>
+<|| suggest that segment-interior feature detection can work well as ||>
+<|| an alternative to segment-boundary keypoints for images where, ||>
+<|| due to ground-truth and/or optical complications, ||>
+<|| boundary-segmentation yields imprecise results. ||> 
+.
+$y.
+[$white-purple]
+.
+$p# 3 0
+/!
+<+>
+
+
+
+
+
+
+!/ Pause_Annotation
+$s: 3052 
+$i: +auto
+$t: 30
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 3050 3154
+$e: div +span |> [$over-blue]
+$t. 
+<| One Dimensional Features <|
+.
+$y.
+[$back2-yellow]
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 45 170
+/!
+<+>
+
+
+
+
+
+
+!/ Pause_Annotation
+$s: 3584 
+$i: +auto
+$t: 20
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 3581  3588  
+$e: div @7
+$t. 
+||>
+<|| In order to demonstrate one-dimensional feature detection, ||>
+<|| we next compare a line-detection (Hough) algorithm ||>
+<|| utilizing grayscale reductions against a different XCSD ||>
+<|| channel-reduction scheme based on the XCSD toroidal ||>
+<|| color model. <| This color model is designed to minimize ||>
+<|| the error factor in color-distance comparisons which ||> 
+<|| might be caused by optical artifacts (such as glare/shadow ||>
+<|| effects or textural variation). <| The toroidal metric generates ||>
+<|| a localized channel-reduction which estimates the degree ||>
+<|| of ground-truth color fluctuations around each point. ||>
+.
+$y.
+($back-gold)
+ color:rgba(0,10,37);
+ background-color:rgba(200,190,107,250);
+.
+$p# 3 43
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 3682 
+$i: +auto
+$t: 50
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 3680  3683  
+$e: div @7
+$t. 
+||>
+<|| The statistical comparison reveals that XCSD&rsquo;s toroidal ||>
+<|| metric generates a Hough spectrum which almost perfectly ||> 
+<|| aligns with the predominant angular orientation of our ||>
+<|| foreground Region of Interest (this graphic highlights the ||>
+<|| median Hough line in purple, and the desired angle that ||>
+<|| we previously marked via a rhombus annotation in yellow). ||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| Conversely, the generic grayscale spectrum is randomly ||>
+<|| distributed among theta-angles. <| Specifically, the ||>
+<|| toroidal angle matches the predefined target by ||>
+<|| 98% (more than double the grayscale, whose calculation ||> 
+<|| has an accuracy of just 48%). <| The video will show a ||>
+<|| representation of these two calculations side-by-side. ||>
+.
+$y.
+[$white-purple]
+.
+$p# 6 36
+/!
+<+>
+
+
+
+
+
+
+!/ Pause_Annotation
+$s: 4028 
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 4027  4029  
+$e: div @7
+$t. 
+||>
+<|| The precise fit obtained via the toroidal calculation ||>
+<|| confirms that we can use this automated line-detector ||>
+<|| to construct a rotation angle for the workflows or ||>
+<|| feature-evaluations wherein a series-image is ||>
+<|| rotated to yield orthogal bins aligned with the ||>
+<|| foreground's angular orientation. ||>
+
+.
+$y.
+[$back-gold]
+.
+$p# 20 92
+/!
+<+>
+
+
+
+/&
+
+
+
+
+

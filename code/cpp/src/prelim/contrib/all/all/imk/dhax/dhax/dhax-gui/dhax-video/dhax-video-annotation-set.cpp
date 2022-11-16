@@ -48,6 +48,85 @@ void DHAX_Video_Annotation_Set::parse_annotation_settings_hypernode(NTXH_Graph& 
  });
 }
 
+
+void DHAX_Video_Annotation_Set::check_lighter_darker(QString& text)
+{
+ static QMap<QString, QString> options {{"~>", "lighter"}, {"=>", "darker"}};
+
+ QMapIterator<QString, QString> it(options);
+
+ QString replacement;
+ while(it.hasNext())
+ {
+  it.next();
+
+  int index = text.indexOf(it.key());
+  if(index == -1)
+    continue;
+
+  int pre = text.lastIndexOf(':', index);
+  int start, end = index + 5;
+
+  if(pre == -1)
+    start = index;
+  else
+  {
+   start = pre + 1;
+   QColor color;
+
+   QString color_text = text.mid(start, index - 1 - pre);
+   QStringList tokens = color_text.split(' ', Qt::SkipEmptyParts);
+
+   if(tokens.size() == 1)
+     color = QColor(tokens.first());
+   else
+   {
+    // //  todo: use these for reading the color ...
+    if(tokens.value(0) == "float")
+      tokens.takeFirst();
+    if(tokens.value(0) == "percent")
+      tokens.takeFirst();
+
+    if(tokens.size() == 1)
+      tokens.push_back(tokens.first());
+    if(tokens.size() == 2)
+     tokens.push_back(tokens.last());
+
+    color.setRed(tokens.value(0).toUInt());
+    color.setGreen(tokens.value(1).toUInt());
+    color.setBlue(tokens.value(2).toUInt());
+    if(tokens.size() > 3)
+      color.setAlpha(tokens.value(3).toUInt());
+   }
+
+   index += 2;
+   while(text.at(index).isSpace())
+   {
+    ++index;
+    ++end;
+   }
+   QString post = text.mid(index, 3);
+
+   qDebug() << "color = " << color.name(QColor::HexArgb);
+
+   if(it.value() == "lighter")
+     color = color.lighter(post.toUInt());
+   else if(it.value() == "darker")
+     color = color.darker(post.toUInt());
+
+   replacement = color.name(QColor::HexArgb);
+   qDebug() << "replacement = " << replacement;
+  }
+
+  text.replace(start, end - start, replacement);
+  break;
+ }
+
+ if(!replacement.isEmpty())
+   check_lighter_darker(text);
+}
+
+
 void DHAX_Video_Annotation_Set::check_text_macro(QString& text, int start)
 {
  if(text.midRef(start).startsWith("($"))
@@ -350,6 +429,7 @@ void DHAX_Video_Annotation_Set::parse_text_annotation_hypernode(NTXH_Graph& g, h
     dva.set_text(text);
 
   QString iss = prs[4].first;
+  check_lighter_darker(iss);
   check_text_macro(iss);
 
   dva.set_inner_style_sheet(iss);
@@ -436,7 +516,7 @@ void DHAX_Video_Annotation_Set::parse_circled_text_default_hypernode(NTXH_Graph&
 
 void DHAX_Video_Annotation_Set::parse_circled_text_annotation_hypernode(NTXH_Graph& g, hypernode_type* h)
 {
- g.get_sfsr(h, {{1, 5}}, [this](QVector<QPair<QString, void*>>& prs)
+ g.get_sfsr(h, {{1, 6}}, [this](QVector<QPair<QString, void*>>& prs)
  {
   u4 start = prs[0].first.toUInt();
   u4 end = prs[1].first.toUInt();
@@ -450,6 +530,10 @@ void DHAX_Video_Annotation_Set::parse_circled_text_annotation_hypernode(NTXH_Gra
   dva.set_starting_frame_number(start);
   dva.set_ending_frame_number(end);
   dva.set_corner_position(QPointF{prs[3].first.toFloat(), prs[4].first.toFloat()});
+
+  if(!prs[5].first.isEmpty())
+    dva.set_pause_time(prs[5].first.toUInt());
+
   load_annotation(dva);
  });
 }

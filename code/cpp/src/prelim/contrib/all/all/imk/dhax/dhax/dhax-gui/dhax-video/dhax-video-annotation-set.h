@@ -72,6 +72,9 @@ class DHAX_Video_Annotation_Set : public QMap<s4, DHAX_Video_Annotation>
  void parse_text_macro(QString& text, int start = 0);
  void fetch_text_macro(QString& text, int start = 0);
 
+
+ void check_lighter_darker(QString& text);
+
  void check_text_macro(QString& text, int start = 0);
 
  void check_text_macro(QString& text, int start_start, int start_end)
