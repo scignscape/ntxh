@@ -677,7 +677,7 @@ consider the possibility that a data-sharing
 protocol might need two `i.different` 
 property/attribute mechanisms.  The semantics 
 of a property/attribute distinction (in contexts 
-such `IFC;, or `DICOM; public/private) derives 
+such as `IFC;, or `DICOM; public/private) derives 
 not from logical models but from 
 real-world implementational concerns.    
 A metamodel which supports this larger semantic 
@@ -762,7 +762,7 @@ these are reasonable approximations).
 
 `p.
 Any representational system, as these examples point out, 
-provides a certain `q.tableau` of parameters that 
+provides a range of parameters that 
 can be pressed into service when formalizing a protocol 
 for encoding specific kinds of data via structures 
 conformant to the specific system.  More expressive 
@@ -787,7 +787,7 @@ the system, at least intuitively.
 
 
 `p.
-This intuitive point can be made more precise, insofar as 
+This intuition can be made more precise, insofar as 
 I have deferred any rigorous definition for 
 `q.representational parameters`/.  That is to say, for a 
 reasonably systematic analysis of metamodels we should 
@@ -841,7 +841,7 @@ various `q.calling conventions`/, in the sense of
 protocols through which computational procedures 
 delegate to other procedures (supplying inputs, 
 reading outputs, spawning concurrent 
-execution paths, and so forth).  This chapter 
+execution paths, and so forth).  This section's chapters
 will focus on `VM;s based on hypergraph 
 data models, employing such structures 
 both from the perspective of data-representations 
@@ -872,7 +872,19 @@ should be encoded.  Applications can use
 `VM;s as a kind of neutral environment where 
 third-party code can build up a representation 
 of exposed-functionality invocations 
-incrementally. 
+incrementally.  Indeed, many programs support 
+scripting via languages such as Python; it 
+is plausible to generalize this idea to 
+`VM; platforms amenable to multiple scripting 
+languages, so long as they can be compiled 
+to the relevant `q.byte` code.  Alternatively, 
+even if applications do not expose `VM;s 
+to third parties directly, they could 
+use `VM;-backed processes to process 
+`API; requests: since `VM;-targeted code could be 
+updated without recompiling the application, 
+the `API; could then adapt to new networking 
+situations.        
 `p`
 
 
@@ -924,7 +936,7 @@ the software) supports viewing, tagging, and annotation
 image database allocated for documenting 
 ecological and/or infrastructure damage 
 from natural or man-made events, such as 
-the 2022 Russia/Ukraine war, and perhaps 
+the 2022 Russian invasion of Ukraine, and perhaps 
 setting the stage for reconstruction plans.  
 A typical image for such an application might be a 
 photograph of damaged building or facilities, 
@@ -975,7 +987,8 @@ Suppose an image depicts a city block where
 damaged buildings have to be replaced; data 
 associated with the image could include 
 estimates of the number of people who lived in 
-that location prior to 2022 war; the number of 
+that location prior to (for example) 
+the Russia/Ukraine war; the number of 
 residential units slated for redevelopment; 
 cost estimates; links to public transit info, 
 street views, data concerning utilities grid, 
@@ -1019,13 +1032,198 @@ must be accounted for at the `GUI; level
 (insofar as users request `i.that specific` 
 data from application-states where they are 
 viewing an image carrying the appropriate 
-information) and the database integration 
+information) and the database-integration level 
 (`q.that specific` data has to be 
 queried from the larger database context when needed).  
 In other words, the interaction between `GUI;, database, and 
 application logic is more complex than if each image were 
 given a fixed set of data fields isolated from user pragmatics.
 `p`
+
+`subsection.GIS Databases and Digital Cartography`
+
+`p.
+This discussion has now touched on themes related 
+to flexibly-typed database systems: the idea 
+being that expressive database engines support 
+`i.strongly typed` data (in the sense that 
+all records have type attributions that 
+offer guarantees about their internal 
+structure, such as a specific set of 
+defined fields) but also allow new types 
+to be introduced into an active database.  
+A good case-study of where such design 
+is apropos is that of maintaining 
+geospatial databases that track information 
+associated with geographical coordinates 
+%-- for example, roads, bridges, buildings, 
+waterways, transportation infrastructure, 
+or land-plots, but also any kind of scientific 
+data (environmental, sociodemographic, etc.) 
+that can be overlaid on a digital map.  
+`lGIS; systems are typically divided into 
+two distinct data categories: there are 
+`q.basemaps` which represent the most 
+common or generic types of `GIS; data 
+(roads, buildings, and the like) that are 
+then augmented with supplemental `q.data layers` 
+that are narrower and more domain-specific 
+(such as ecological data).  Digital cartography 
+renders `i.basemap` visuals by 
+subdividing geographic areas into relatively 
+small segments (within a 256`times;256 area, for example)  
+translating geospatial (typically latitude/longitude) 
+coordinates to pixel-coordinates.  Digital maps 
+are composed at multiple scales of resolution; 
+in a common format, so-called `q.XYZ` tiles, 
+the lowest zoom level produces a `q.map` of the whole 
+world (basically an outline of the continents) 
+whereas the highest level (around 20, or slightly less 
+depending on the environment) is sufficiently 
+detailed that maps can show the contours of 
+individual buildings and street-intersections.  
+In XYZ, each successive zoom level doubles 
+the underlying magnification, so that 
+each tile at one level splits into four 
+tiles at the enxt level.
+`p`
+
+
+`p.
+Software known as `q.tile renderers` and `q.tile servers` 
+map latitude and longitude coordinates (or 
+other `GIS; units, such as those of Marcatur projections) 
+to tile-coordinates that include zoom level as 
+one axis (e.g., the `q.z` in XYZ).  An XYZ triple 
+designates a specific gegraphic area at a specific 
+zoom level; individual latitude/longitude and Mercatur 
+points can then be identified via fractions of the 
+tile width and height.  Via such a mapping, locations 
+of objects in a `GIS; database are converted 
+to pixel-coordinates, so that features such as 
+roads and building can be marked visually.  Tiles 
+are rendered according to graphical rules called 
+`q.styles`/, which stipulate details such as 
+the colors that should be used to outline buildings 
+or roadways, or the icons for points of 
+interest (transit stops, historical sites, special-purpose buildings 
+or areas such as schools, hospitals, parks, 
+government offices, and so forth).  Tile-rendering 
+requires some computational algorithms because 
+streets/highways and other noteworthy spots need 
+to be named or labeled, and the positioning 
+of these identifiers (unlike the fixed latitude-longitude 
+of the labeled locations) is indeterminate, so cartographic 
+engines try to calculate how to position street-names 
+(for example) so that this text does not intersect with 
+other map data (such as roadway lines).  
+`p`
+
+
+`p.
+The end result of a tile-rendering pipeline 
+is a miniature map in the form of an `i.image`/, 
+often in a format such as `PNG; equivalent to 
+many photographs; a `GIS; application will 
+form maps that users see by composing together 
+multiple tiles.  This provides the `q.basemap` 
+layer, representing a general-purpose 
+view of a given geographic region.  On top of 
+these base maps, applications will usually 
+superimpose domain-specific data points 
+(sometimes called `q.attribute` data) relevant 
+in specific contexts: data layers might 
+show locations where Ukrainian buildings or infrastructure 
+was damaged in the 2022 war; or distributions 
+of COVID-19 cases; or environmental hazard sites; 
+or tax lots and zoning codes for architecture, 
+real estate, urban planning, and 
+property management; or sightings of specific plant or animal 
+species, and so on.  In effect, whenever 
+scientists or researchers have data sets indexed 
+by geographic coordinates %-- epidemiological, 
+ecological, sociodemographic %-- such information 
+can potentially become a Data Layer which 
+is visualized by superimposing special-purpose 
+icons or colorations on a generic basemap.  
+These extra layers can be added at different processing 
+stages: for instance, they might be consumed by 
+the tile servers themselves, as a post-processing 
+step immediately after rendering basemap tiles; 
+or they could by superimposed on basemaps 
+by `GIS; front-ends,  
+immediately prior to showing maps to users 
+(in this case applications would typically 
+download tiles and data layers separately, 
+and merge them together at the last moment).   
+`p`
+
+
+`p.
+I provide this digital-cartography overview mostly 
+to mention certain details concerning 
+`GIS; data systems: although there is a core 
+dimension of familiar mappable elements 
+(roadways, buildings, and so forth) with common 
+presentation guidelines (formalized via tile-rendering 
+styles), the space of information that 
+could be added on base maps is open-ended.  
+Any data set with latitude/longitude coordinates 
+(or fields convertible to such coordinaets, such as 
+street addresses) can be visualized against 
+the backdrop of a `GIS; basemap.  If we consider 
+`GIS; data to encompass common basemap info 
+`i.together with` special-purpose supplemental 
+layers, then `GIS; databases are a good 
+example of `q.strong but flexible` typing: it is 
+impossible for a `GIS; system to anticipate 
+`i.a priori` the full range of data profiles 
+evinced by objects visualized in a map 
+context, within supplemental data layers.  
+Every mappable object will have latitude/longitude 
+coordinates (or a collection thereof, giving a 
+geometric outline), but in addition objects will 
+have other data-points as well, relevant to 
+their specific domain (civil engineering, etc.) 
+but opaque to mapping applictions themselves.  
+In this sense `GIS; systems manage non-`GIS; 
+data by tracking opaque objects without 
+consuming them directly: it is 
+up to individual applications to 
+download data within supplemental 
+layers and reconstruct the relevant 
+domain-specific info, so that 
+users can employ street maps as 
+entry points for accessing 
+information which is then visualized 
+through other features in the 
+application.  For example, urban planners 
+taking on the responsibility of rebuilding 
+Ukrainian cities might start with street 
+maps showing sites of destroyed 
+buildings and infrastructure, and 
+then (typically by clicking on a map) 
+transition to windows showing structured 
+data about individual locations, such as 
+the number of families formerly living in a 
+damages residential complex, or details 
+about utilities and water/gas/electricity 
+grids, or estimates of environmental 
+hazards (chemical leakages, say, or 
+unexploded munitions) resulting from the 
+conflict.  The point here is that 
+objects containing such domain-specific 
+data need to be packaged and stored 
+in a `GIS; database even if they are 
+not `GIS; data proper, and then 
+correctly reconstructed and presented 
+to users in conjunction with digital-cartography 
+front-ends.  This data-management workflow 
+is analogous to the case of routing data 
+packages across third-party networks 
+discussed above.
+`p`
+
 
 
 `p.
@@ -1159,7 +1357,7 @@ have comparatively greater parameters available
 for representing information; in particular, 
 this implies that we have greater 
 flexibility in formulating queries 
-to modify database instances.  It's worth mentioning 
+to modify database instances.  It is worth mentioning 
 at this point that `q.queries` need not involve 
 instructions passed to a database engine 
 in the form of character strings (e.g., 
@@ -1540,5 +1738,1213 @@ in the remainder of this chapter.
 `p.
 
 `p`
+
+
+
+
+
+
+
+
+- s=start frame  e=end frame  t=text  y=style 
+  p=position 
+.
+
+- 
+
+ color:rgba(0,10,37);
+ background-color:rgba(200,190,107,250);
+
+.
+
+
+&type Text_Annotation {7}
+  :s:1  :e:3  :t:4  :y:5  :p:6 ;
+
+
+&type Shape_Annotation {5}
+  :k:1  :s:2  :t:4  :d:5 ;
+ 
+&type Circled_Text_Default {15}
+  :w:1
+  :background-color:2  :foreground-color:6
+  :outline-color:10  :font-size:14  :border:15 ;
+
+&type Circled_Text_Annotation {6}
+  :s:1  :t:3  :p:4 :pause:6 ;
+
+- s=start frame  i=id
+
+
+
+&type Pause_Annotation {3}
+  :s:1  :i:2  :t:3 ;
+
+
+
+&type Annotation_Settings {6}
+  :sa:1  :tr-smaller:3 :tr-larger:5  ;
+
+
+&/
+
+
+!/ Annotation_Settings
+$sa#  1  1
+$tr-smaller#  0  0
+$tr-larger#  0  0  
+/!
+<+>
+
+
+!/ Circled_Text_Default
+$w: 15
+$background-color# 250 250 210 255
+$foreground-color# 50 50 110   255
+$outline-color# 150  150  105  255
+$font-size: 8
+$border: 2
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 12 
+$i: +auto
+$t: 55
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 10 14
+$e: div +span |> ($over-blue) rgba(200, 200, 240, 153)
+$t. 
+<| XCSD Channel Reductions ... <|
+.
+$y.
+($back2-yellow)
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(7,190,200,50);
+.
+$p# 22 178
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 17 
+$i: +auto
+$t: 20
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 22 
+$i: +auto
+$t: 65
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 21 24
+$e: div +span |> ($over-yellow) rgba(250,250,207,250)
+$t. 
+<| Zero-Dimensional Features <|
+.
+$y.
+[$back2-yellow]
+.
+$p# 22 132
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 29 
+$i: +auto
+$t: 160
+/!
+<+>
+
+!/ Text_Annotation
+$s# 27  30  
+$e: div @7
+$t. 
+||>
+<|| Most image-segmentation and feature-detection algorithms ||>
+<|| require that image-data first be reduced from three channels to one ||>
+<|| channel. <| The most common equations for this preliminary step ||>
+<|| consider the relative lightness or darkness of each color, ||>
+<|| ignoring chromatic hues entirely. <| By contrast, XCSD provides ||>
+<|| alternative channel-reduction strategies that preserve chromatic ||> 
+<|| signals, thereby retaining useful data from the original image. ||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| For many image-processing tasks, channel-reduction algorithms ||>
+<|| that use chromatic data are more accurate than those which only ||> 
+<|| recognize grayscale quantities. <| The following sections of this ||>
+<|| video will show features of the XCSD demo application focused on ||>
+<|| comparing and evaluating image-analysis algorithms. <| We will ||>
+<|| employ these features to contrast pipeline-results whose ||>
+<|| channel-reduction formulae are derived from XCSD metrics ||>
+<|| against those based on conventional grayscale mappings. ||>
+.
+$y.
+($white-purple)
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 0 15
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 122
+$i: +auto
+$t: 50
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 121  125  
+$e: div @7
+$t. 
+||>
+<|| The application now runs through multiple ||>
+<|| analyses, generating a series of saved files ||>
+<|| representing intermediate processing stages ||>
+<|| or visual summaries of intermediate data. ||>
+.
+$y.
+($back-plus-red)
+ color:rgb(90,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(250,255,250,240);
+.
+$p# 20 62
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 124
+$i: +auto
+$t: 20
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 126
+$i: +auto
+$t: 80
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 123  127 
+$e: div @7
+$t. 
+||>
+<|| This video will skip over these behind-the-scenes||>
+<|| processing stages and will resume when the entire ||>
+<|| workflow is complete (which is indicated by passing ||>
+<|| a preselected summary file to the main window). ||>
+.
+$y.
+($back-plus-red)
+ color:rgb(90,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(250,255,250,240);
+.
+$p# 22 132
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 133
+$i: +auto
+$t: 30
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 135
+$i: +auto
+$t: 20
+/!
+<+>
+
+!/ Text_Annotation
+$s# 134  160  
+$e: div @7
+$t. 
+||>
+<|| Running analyses ... ||>
+.
+$y.
+ color: rgb(80,35,30); font-size:10;font-weight:normal;
+ background-color:200 105 137 250 ~> 130;
+.
+$p# 20 82
+/!
+<+>
+
+
+
+!/ Circled_Text_Annotation
+$s# 136 138
+$t: 1
+$p# 40 150
+/!
+<+>
+
+!/ Pause_Annotation
+$s: 137
+$i: +auto
+$t: 14
+/!
+<+>
+
+
+!/ Circled_Text_Annotation
+$s# 138 140
+$t: 2
+$p# 60 150
+$pause: 13
+/!
+<+>
+
+!/ Pause_Annotation
+$s: 139
+$i: +auto
+$t: 14
+/!
+<+>
+
+
+!/ Circled_Text_Annotation
+$s# 140 142
+$t: 3
+$p# 80 150
+$pause: 13
+/!
+<+>
+
+!/ Pause_Annotation
+$s: 141
+$i: +auto
+$t: 14
+/!
+<+>
+
+
+!/ Circled_Text_Annotation
+$s# 142 144
+$t: 4
+$p# 100 150
+$pause: 13
+/!
+<+>
+
+!/ Pause_Annotation
+$s: 143
+$i: +auto
+$t: 14
+/!
+<+>
+
+
+!/ Circled_Text_Annotation
+$s# 144 146
+$t: 5
+$p# 120 150
+$pause: 13
+/!
+<+>
+
+!/ Pause_Annotation
+$s: 145
+$i: +auto
+$t: 14
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 567 
+$i: +auto
+$t: 150
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 564  570  
+$e: div @7
+$t. 
+||>
+<|| The summary image is marked with zero-dimensional ||>
+<|| features (also known as &ldquo;keypoints&rdquo;) detected through ||>
+<|| XCSD&rsquo;s channel-reduction technique. ||>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br><br>
+<|| Prior to analyzing the keypoint-distribution mathematically, ||>
+<|| it is possible to overview the result-set by checking the ||>
+<|| metrics associated with individual keypoints, as seen here. ||>
+<br>
+<|| In some contexts the keypoint collection could be further ||> 
+<|| filtered via these metrics, although the analyses discussed ||>
+<|| in this case-study are designed to maximize the extent ||>
+<|| of keypoints across a foreground, rather than to filter ||>
+<|| and reduce the collection based on geometric properties. ||>
+.
+$y.
+($back-blue)
+ color: 0 10 37;
+ background-color: 107 190 200 250 ~> 180;
+.
+$p# 13 11
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 687 
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 680  690  
+$e: div @7
+$t. 
+||>
+<|| Next, we examine the distribution of the keypoints ||>
+.
+$y.
+[$back-plus-red]
+.
+$p# 20 82
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 780 
+$i: +auto
+$t: 10
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 783
+$i: +auto
+$t: 120
+/!
+<+>
+
+!/ Text_Annotation
+$s# 782  784  
+$e: div @7
+$t. 
+||>
+<||| Many image-processing pipelines are built around zero- |||>
+<||| dimensional features; that is, individual locations in an |||>
+<||| image where surrounding color and/or color-intensity |||>
+<||| variation has a distinct statistical signature. <br><br> 
+<||| Preferred algorithms for finding such locations are |||>
+<||| usually scale- and rotation-invariant, so that the |||>
+<||| same parameters can be reused across a complete |||>
+<||| image series (enabling automated analysis). |||>
+.
+$y.
+($red-red)
+ color: rgb(30,35,30); font-size:10;font-weight:normal;
+ background-color:200 105 137 250 ~> 182;
+.
+$p# 17 63
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 785 
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 787 
+$i: +auto
+$t: 120
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 786  788  
+$e: div @7
+$t. 
+||>
+<||| Here we compare the accuracy of keypoints identified via grayscale |||>
+<||| channel reductions to those based on XCSD formulas for ranking |||> 
+<||| pixels in terms of background versus foreground probabilities. |||>
+<br> 
+<||| The demo application can run such a comparison against many |||>
+<||| feature-detection methods, e.g., SIFT, SURF, USURF, AKAZE, |||>
+<||| ORB, BRISK, or Sobel/Prewitt and related edge-detection kernels. |||>
+<br> 
+<||| For this example, BRISK (Binary Robust Invariant Scale Keypoints) |||>
+
+<||| yields the best results, alongside the XCSD channel-reduction. |||>
+.
+$y.
+[$red-red]
+.
+$p# 7 67
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 789 
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 791 
+$i: +auto
+$t: 130
+/!
+<+>
+
+
+!/ Text_Annotation
+$s#  790   792 
+$e: div @7
+$t. 
+||>
+<||| We demonstrate the comparison by marking pixels at BRISK |||>
+<||| keypoint-locations via a color-scheme that separates XCSD |||>
+<||| from grayscale matches. |||>
+<br>
+<||| Specifically, cyan shows XCSD matches; red covers XCSD |||>
+<||| matches that are filtered out because they are judged to lie |||>
+<||| outside the foreground focus area (due to high background/ |||>
+<||| low foreground probability); yellow depicts grayscale matches; |||>
+<||| and green represents keypoints common to both result-sets. |||>
+.
+$y.
+[$red-red]
+.
+$p# 7 77
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 1261 
+$i: +auto
+$t: 100
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 1260  1262  
+$e: div @7
+$t. 
+||>
+<||| To mathematically test the XCSD/BRISK keypoints, |||>
+<||| we load an image-transform series defined by an |||>
+<||| NTXH data file &mdash; NTXH being the same custom |||> 
+<||| format described in our prior video (re: |||>
+<||| Virtual Reality and 3D/360&deg;-photography tours) |||>
+<||| in the context of video annotations. |||>
+<br> 
+<||| This NTXH data encodes a workflow similar to our |||>
+<||| image-analysis demonstration from earlier in <i>this</i> |||> 
+<||| video (via rotations and color-masks), except that |||>
+<||| now we apply the transforms to test an automated |||>
+<||| analysis rather than to run a new analysis. |||>
+.
+$y.
+[$red-red]
+.
+$p# 15 50
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 2215 
+$i: +auto
+$t: 145
+/!
+<+>
+
+!/ Text_Annotation
+$s#  2214   2216 
+$e: div @7
+$t. 
+||>
+<||| Informally, we can visually confirm that the XCSD matches |||>
+<||| are spread throughout the foreground and outside the |||> 
+<||| background, serving to demarcate the foreground. |||>
+<br>
+<||| By contrast, traditional grayscale matches are distributed almost |||> 
+<||| randomly across the foreground/background division. |||>
+<br>
+<||| These results suggest that XCSD keypoints can act as textural |||>
+<||| feature-markers which correctly isolate the foreground, allowing |||>
+<||| its size to be calculated as a percentage of the total image. |||>
+<||| The next step is to assess keypoint-accuracy more rigorously, |||>
+<||| by comparing statistical evaluations of both result-sets. |||>
+.
+$y.
+[$red-red]
+.
+$p# 9  51 
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 2588 
+$i: +auto
+$t: 170
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 2587  2589  
+$e: div @7
+$t. 
+||>
+<|| We map all keypoints (XCSD and grayscale) alongside the image ||>
+<|| transform, working within the XCSD demo-application ||> 
+<|| in order to pause and watch each step. ||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| As can be seen, these transforms map the image into 27&times;27 ||>
+<|| boxes, which serve to bin and classify all keypoints into||>
+<|| foreground and background cells. <| From this mapping we can ||>
+<|| calculate the accuracy of the XCSD keypoint algorithm, showing ||>
+<|| in particular that 93% of the XCSD keypoints are correctly ||>
+<|| binned as foreground, and 88% of foreground bins cover ||>
+<|| keypoints. <| In comparison, only 39% of foreground bins have ||>
+<|| grayscale keypoints (providing an accuracy less than half of XCSD); ||> 
+<|| and moreover, the grayscale metric found only 15% of the ||>
+<|| keypoints identified via XCSD (a ratio of more than 6-to-1). ||>
+.
+$y.
+[$white-purple]
+.
+$p# 4 39
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 2591
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 2599 
+$i: +auto
+$t: 180
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 2592  2601 
+$e: div @7
+$t. 
+||>
+<|| So as to compensate for inaccurate results using grayscale, ||>
+<|| a common practice in Computer Vision would be to pre- ||>
+<|| transform the target image with a morphological operator, ||>
+<|| such as a dilation kernel, or to run a &ldquo;blurring&rdquo; algorithm, ||>
+<|| both of which could reduce statistical noise. <| For that kind ||>
+<|| of pipeline, the goal would be to push keypoints out ||>
+<|| toward the perimeter of foreground segments and then ||> 
+<|| consult the keypoints as a <i>de facto</i> contour sampling (e.g., ||>
+<|| via a polygon hull) to demarcate the segments&rsquo; boundaries. ||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| The problem with this approach is that morphological ||>
+<|| simplification may still yield distorted results for images that ||>
+<|| do not have a clearly separated foreground and background, ||>
+<|| which is true for most real-world images where glare/ ||>
+<|| shadow, textures, occlusions, and other optical and/or ||>
+<|| geometric anomalies complicate the segmentation process. ||>
+.
+$y.
+[$white-purple]
+.
+$p# 7 11
+/!
+<+>
+
+
+
+
+
+!/ Pause_Annotation
+$s: 2932
+$i: +auto
+$t: 240
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 2931  2953  
+$e: div @7
+$t. 
+||>
+<|| For complex images, a reasonable strategy, instead, is to aim ||>
+<|| for segment-interior keypoints rather than segment-boundaries. ||> 
+<|| If keypoints are mostly localized to foreground interiors and ||>
+<|| spread out through the foreground, then the area spanned by ||>
+<|| keypoints usefully approximates the foreground&rsquo;s size and shape. ||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| As seen here, the XCSD algorithm is 93% accurate with respect ||>
+<|| to foreground true-positives and 88% accurate with respect to ||> 
+<|| foreground false-negatives. <| Also, all false-positive keypoints ||>
+<|| are adjacent to at least one (usually 3 or more) foreground bins, ||>
+<|| so protruding the foreground by one step to these locations ||>
+<|| would barely distort the foreground size and shape. <| In this ||>   
+<|| sense the entire keypoint set serves as a good approximation ||>
+<|| for the foreground. <| Collectively, these numbers suggest that ||>
+<|| segment-interior feature detection can work well as an ||>
+<|| alternative to segment-boundary keypoints for images where, ||>
+<|| due to ground-truth and/or optical complications, ||>
+<|| boundary-segmentation yields imprecise results. ||> 
+.
+$y.
+ color: 60 90 0 => 144;;font-weight:normal;
+ background-color: 100 240 207 249 ~> 165;
+.
+$p# 3 -1
+/!
+<+>
+
+
+
+
+
+
+!/ Pause_Annotation
+$s: 3052 
+$i: +auto
+$t: 30
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 3050 3154
+$e: div +span |> [$over-yellow]
+$t. 
+<| One Dimensional Features <|
+.
+$y.
+($back2-blue)
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(7,190,200,50);
+.
+$p# 19 170
+/!
+<+>
+
+
+
+
+
+
+!/ Pause_Annotation
+$s: 3584 
+$i: +auto
+$t: 120
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 3581  3588  
+$e: div @7
+$t. 
+||>
+<|| In order to demonstrate one-dimensional feature detection, ||>
+<|| we next compare a line-detection (Hough) algorithm ||>
+<|| utilizing grayscale reductions against a different XCSD ||>
+<|| channel-reduction scheme, based on the XCSD toroidal ||>
+<|| color model. <| This color model is designed to minimize ||>
+<|| the error factor in color-distance comparisons which ||> 
+<|| might be caused by optical artifacts (such as glare/shadow ||>
+<|| effects or textural variation). <| The toroidal metric generates ||>
+<|| a localized channel-reduction which estimates the degree ||>
+<|| of ground-truth color fluctuations around each point. ||>
+.
+$y.
+[$white-purple]
+.
+$p# 3 43
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 3682 
+$i: +auto
+$t: 160
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 3680  3683  
+$e: div @7
+$t. 
+||>
+<|| The statistical comparison reveals that XCSD&rsquo;s toroidal ||>
+<|| metric generates a Hough spectrum which almost perfectly ||> 
+<|| aligns with the predominant angular orientation of our ||>
+<|| foreground Region of Interest (this graphic highlights the ||>
+<|| median Hough line in purple, and the desired angle that ||>
+<|| we previously marked via a rhombus annotation in orange). ||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| Conversely, the generic grayscale spectrum is randomly ||>
+<|| distributed among theta-angles. <| Specifically, the toroidal ||>
+<|| angle matches the predefined target by 98% (more than ||>
+<|| double the grayscale, at just 48%). <| In the prior image, the ||> 
+<|| purple and orange lines (representing target and average ||>
+<|| angles, respectively) are almost exactly parallel; in the ||>
+<|| latter image, they are at unrelated angles to one another. ||>
+.
+$y.
+[$white-purple]
+.
+$p# 6 36
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 4026 
+$i: +auto
+$t: 35
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 4028 
+$i: +auto
+$t: 110
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 4027  4029  
+$e: div @7
+$t. 
+||>
+<|| The precise fit obtained via the toroidal calculation ||>
+<|| confirms that we can use this automated line-detector ||>
+<|| to construct a rotation angle for the workflows or ||>
+<|| feature-evaluations wherein a series-image is ||>
+<|| rotated to yield orthogonal bins aligned with the ||>
+<|| foreground's angular orientation ||>
+
+.
+$y.
+($back-gold)
+ color:rgba(0,10,37);
+ background-color:rgba(200,190,107,250);
+.
+$p# 20 92
+/!
+<+>
+
+
+/&
+
+
+
+
+
+
+
+
+
+
+- s=start frame  e=end frame  t=text  y=style 
+  p=position 
+.
+
+
+
+&type Text_Annotation {7}
+  :s:1  :e:3  :t:4  :y:5  :p:6 ;
+
+
+&type Shape_Annotation {5}
+  :k:1  :s:2  :t:4  :d:5 ;
+ 
+&type Circled_Text_Default {15}
+  :w:1
+  :background-color:2  :foreground-color:6
+  :outline-color:10  :font-size:14  :border:15 ;
+
+&type Circled_Text_Annotation {5}
+  :s:1  :t:3  :p:4 ;
+
+- s=start frame  i=id
+
+
+
+&type Pause_Annotation {3}
+  :s:1  :i:2  :t:3 ;
+
+
+
+&type Annotation_Settings {6}
+  :sa:1  :tr-smaller:3 :tr-larger:5  ;
+
+
+&/
+
+
+!/ Annotation_Settings
+$sa#  1  1
+$tr-smaller#  0  0
+$tr-larger#  0  0  
+/!
+<+>
+
+
+!/ Circled_Text_Default
+$w: 12
+$background-color# 50 50 210 255
+$foreground-color# 150 50 10 255
+$outline-color# 150 50 10 255
+$font-size: 14
+$border: 2
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 2 
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 22 
+$i: +auto
+$t: 50
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 4 47
+$e: div +span |> ($over-yellow) rgba(250,250,207,250)
+$t. 
+<| Two-Dimensional Features <|
+.
+$y.
+($back2-yellow)
+ color:rgba(0,10,37);;font-weight:bold;
+ background-color:rgba(200,190,7,50);
+.
+$p# 22 132
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 49 
+$i: +auto
+$t: 40
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 52 
+$i: +auto
+$t: 180
+/!
+<+>
+
+!/ Text_Annotation
+$s# 51  90  
+$e: div @7
+$t. 
+||>
+<|| Next, we examine superpixel segmentation as an illustration ||>
+<|| of two-dimensional feature analysis. <| In particular, these ||>
+<|| visuals will show a superpixel subdivision of our original ||>
+<|| image superimposed on the map of BRISK keypoints ||>
+<|| obtained via the pipeline shown earlier. ||>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;&#9135;
+<br>
+<|| Superpixels represent one tactic for extrapolating interior- ||>
+<|| keypoint features to foreground object-proposals. <| Specifically, ||> 
+<|| we can estimate the foreground to be the sum of superpixels ||>
+<|| containing keypoints, thereby converting zero-dimensional ||>
+<|| point clouds to a two-dimensional area. <| The shape and/or size ||>
+<|| of this approximate foreground may then be utilized to ||>
+<|| compute the extent of the foreground relative to the whole ||> 
+<|| image, and/or to compare the foreground's mereogeometric ||>
+<|| profile against predefined keys for object-tracking, ||>
+<|| object-recognition, and related &ldquo;semantic&rdquo; analyses.||>
+.
+$y.
+($white-purple)
+ color:rgba(40,10,137);font-size:10;font-weight:normal;
+ background-color:rgba(250,250,250,243);
+.
+$p# 2 13
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 98 
+$i: +auto
+$t: 20
+/!
+<+>
+
+
+!/ Pause_Annotation
+$s: 102 
+$i: +auto
+$t: 110
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 101  103  
+$e: div @7
+$t. 
+||>
+<|| This graphic shows the segmentation and BRISK keypoints ||>
+<|| together. <| For purposes of demonstration, superpixels ||>
+<|| intersecting the keypoint result-set are highlighted with ||> 
+<|| yellow or red outlines, while others (those outlined in light ||> 
+<|| blue/pink, which approximate the background) are shaded in red. ||>
+.
+$y.
+ color:rgba(0,10,37);
+ background-color:rgba(200,190,107,250);
+.
+$p# 20 52
+/!
+<+>
+
+
+
+
+!/ Pause_Annotation
+$s: 180 
+$i: +auto
+$t: 110
+/!
+<+>
+
+
+
+!/ Text_Annotation
+$s# 158  182  
+$e: div @7
+$t. 
+||>
+<|| We&rsquo;ll then show the same analysis run on a variation ||>
+<|| of the image which was more aggressively pre-processed. ||>
+<|| Note that the superpixel segmentation is almost identical ||>
+<|| when computed against the full-color image and via an ||>
+<|| XCSD channel-reduction with toroidal color bins. ||>
+<br>
+<|| In this case a coarse filter collapses the image&rsquo;s color ||>
+<|| space to a small group of predominant colors (fewer than ||>
+<|| eight) without affecting the quality of the segmentation. ||>
+
+.
+$y.
+($back-plus-red)
+ color:rgb(90,10,37);font-size:10;font-weight:bold;
+ background-color:rgba(250,255,250,240);
+.
+$p# 7 52
+/!
+<+>
+
+
+
+!/ Pause_Annotation
+$s: 465 
+$i: +auto
+$t: 140
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 464  467  
+$e: div @7
+$t. 
+||>
+<|| All in all, XCSD can employ a variety of channel-reduction ||>
+<|| strategies, each of which depend on novel algorithms. ||>
+<|| These strategies, and their underlying color-models, ||>
+<|| can be merged in different configurations to improve ||>
+<|| the accuracy of numerous feature-detection pipelines, ||>
+<|| spanning zero-dimensional, one-dimensional, and ||>
+<|| two-dimensional feature profiles. ||>
+<br>
+<|| These capabilities augment the features provided by the ||>
+<|| XCSD framework for manipulating image-series, ||>
+<|| multi-media database systems, video/PDF features, ||> 
+<|| and desktop/native application-development requirements. ||>
+.
+$y.
+($back-blue)
+ color: 0 10 37;
+ background-color: 107 190 200 250 ~> 180;
+.
+$p# 16 53
+/!
+<+>
+
+
+
+
+
+!/ Pause_Annotation
+$s: 512 
+$i: +auto
+$t: 60
+/!
+<+>
+
+
+!/ Text_Annotation
+$s# 511  514
+$e: div +i
+$t. 
+<| Thanks For Watching! <|
+.
+$y.
+ color:rgba(0,26,17);;font-weight:bold;
+ background-color:rgba(240,40,187,180);
+.
+$p# 90 77
+/!
+<+>
+
+
+
+
+
+/&
+
+
+
+
+
+
 
 
