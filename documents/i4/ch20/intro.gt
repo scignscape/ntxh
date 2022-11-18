@@ -1,0 +1,472 @@
+
+`section.Introduction`
+
+`p.
+It is not quite accurate to describe computer programming 
+languages as `q.languages`/.  People do not use source 
+code to `q.talk to` or even generically `q.communicate with` 
+computers; rather, computer code acts as the material 
+through which programmers implement applications, which 
+are tools pressed into service to manipulate 
+computational states.  More specifically, applications 
+in general do not have default behaviors; instead, they 
+are essentially computational environments, which 
+do not initiate actions until guided by a human user.`footnote.
+Granted, there is a class of programs which run behind-the-scenes 
+following a preprogrammed sequence, constructed with the expectation 
+that human users will not interact with the program during 
+its execution.  Even here, though, we can argue that 
+the choice to initiate the program in the first place constitues 
+a human action, so such programs do have at least `i.one` 
+point where they are dependent on users' input.  The choice 
+of `i.when` to run a program will (potentially) influence its 
+behavior, so this choice (which depends on a user's discretion) 
+acts as a kind of parameter which users put in place to 
+guide the program's actions.  This holds even (or, indeed, 
+especially) when users arrange for a program to run 
+automatically (typically when the computer first starts up), 
+such that they do not manually interact with that program 
+`i.each time` it executes.  Instructing 
+the operating system to launch a programming automatically 
+is merely a convenient way for users to ensure that the 
+program runs at their desired moments.  Given these points 
+it is reasonable to say that `i.all` programs depend 
+on `i.some` input from users, even if such input is 
+restricted to a decision about when the program should 
+(or should not) execute.  
+`footnote`  
+Once the user `i.interacts` with an application, however, 
+by definition the application will encompass functionality 
+to respond to that user's input.  Typically this response 
+will be processed and then the application will return to 
+a passive state, awaiting further user actions; this 
+passive-active-passive cycle is often called an `q.event loop`/.
+`p`
+
+
+`p.
+Users typically interact with applications because they 
+want to change something: often change what they 
+`i.see` while the program is running, and/or to modify 
+some data somewhere; for instance, to save, upload, or 
+download a file.  For conventional computer systems 
+(personal desktop/laptops, tablets, smart phones, 
+and even `i.en situ` touchscreens built into 
+industrial hardware and appliances) almost all information 
+which a user acquires from applications is `i.visual` 
+and `i.two-dimensional` (although a `TwoD; screen 
+might show a simulation of `ThreeD; graphics); to this 
+we can occasionally add audio feedback, though %-- setting 
+aside interfaces explicitly designed for the hearing-impaired
+ %-- audio is rarely an important data-source except when 
+playing an audio or audio/video file.  In this sense 
+the behavior which a user expects from their application is 
+intimately connected with what they `q.see`/.  Fundamentally, 
+the goal of an application's code base when responding 
+to user input is to modify the on-screen display 
+that users consume visually %-- even if the main response 
+is some side-effect, such as saving a file, the display 
+should have some change indicating that the operation 
+was successful (or, if not, alterting the user that 
+there was a problem).     
+`p`
+
+
+`p.
+These points may seem relatively obvious, but 
+they are worth emphasizing for any discussion 
+where we examine the `q.semantics` of computer 
+code and application data.  Since the emergence 
+of the modern internet and World Wide Web, a lot 
+of emphasis in computer science has concentrated 
+on data `i.semantics`/, or on how digital 
+artifacts can model/represent empirical things in 
+the world.  The goal of viewing and/or analyzing 
+data structures as a proxy for manipulating 
+actual `q.things` underlies diverse branches of 
+Information Technology, from Object-Oriented programming 
+to database engineering to the Semantic Web.  
+But digital resources only model real-world 
+phenomena at one step removed: when we talk about 
+computational representations of external 
+things (either concrete or abstract) we are 
+actually referring to capabilities for creating 
+`i.visual` displays which convey information 
+about those objects to human users, according 
+to signifying conventions that users understand.
+For a simple example, if the users intention 
+when initiating some interaction with a 
+program is to learn the current score of a 
+Habs/Leafs game, the application will 
+perform correctly if it changes its visible 
+state to show this data in a standardized 
+pattern, such as a number (indicating 
+goals scored) next to a Habs logo 
+and an analogous number next to a Leafs logo.  
+`p`
+
+
+`p.
+There is nothing in the application's state in this 
+example which actually `q.means` anything 
+about Montreal, Toronto, hockey, goals, or anything 
+else as the users understand it.  Any seeming `q.semantics` 
+here is merely the result of adequate engineering: if 
+the application behaves properly, the number next 
+to the Habs logo will be `q.one`/, say, if 
+Montreal has scored exactly one goal.  We cannot say that 
+the number `q.one` visible on-screen is actually a 
+`q.signifier` for the Habs goal-total, because even a 
+well-designed application could be incorrect 
+(consider internet latency, making it impossible for 
+the software to update the displayed goal total 
+in exactly `q.real-time`/).  We can only say that a 
+properly implemented application for this example 
+will be a useful source of information about the 
+hockey game because it is engineered to satisfy the 
+requirement that, on most occasions, it visual 
+interface will match the state we associate 
+with correct information about the game (we 
+assume the application is a front-end to 
+some database or web service which tracks 
+many different games).  The `q.meaning` of 
+data displayed by an application depends on an 
+engineered correlation between a data 
+source and `q.ground truth` facts; but such a 
+correlation is something that has to be 
+artifactually constructed by programmers 
+and database administrators.  This kind of 
+semantics is very different fron the word-object 
+associations in natural language, that 
+tend to evolve organically via entrenchment 
+among a given dialect community.  
+`p`
+
+
+`p.
+As a result, when considering how to formalize and 
+evaluate programing language `q.semantics` 
+we should work in a paradigm where data structures 
+are innate proxies for real-world concepts, the 
+way that linguistic signifiers are communally-recognized  
+expressions of their correlated signifieds.  Instead, 
+data structures offer `i.tools` which engineers 
+can use to assemble pieces of information that 
+in aggregate simulate or describe external objects 
+with varying degrees of detail.  Different contexts 
+allow for different data structures which are 
+molded to empirical phenomena, more or less selectively.  
+To provide the score for a cricket match, for example, 
+unlike a hockey score, one would need to represent 
+the wickets taken for each side as well as their runs scored; 
+thus a two-valued structure (for hockey) would be 
+replaced by a four-valued one (or, equivalently, two number-pairs).  
+Of cours, much more info could be modeled for any 
+sporting event (time ellapsed, for many sports, or 
+the number of remaining balls in a T20 innings; where 
+the game takes place; the stats on each player; and so on).  
+How much of this data is actually curated by any 
+given piece of software depends on decisions 
+made while the software is designed.  Data structures 
+can indirectly represent empirical concepts because 
+they provide programmers with a tableau of representational 
+tactics %-- data types and models, numerical 
+encodings, units of measurement, valid ranges 
+and other quantitative constraints, etc. %-- which 
+allow data structures to track real-world objects 
+by selectively sampling some of their properties.  
+Even then, these structures are not intrinsically 
+representations `i.of` their intended targets; rather, 
+applications can convert data structures to visual 
+displays which stand in for objects by 
+representing their properties textually or graphically 
+(the former being, for instance, a printed number 
+asserting goals/runs scored; the latter being a 
+way of visually conveying magnitudes, such as the 
+a bar's height or a color's hue to 
+present weather temperatures).   
+`p`
+
+`p.
+Applications, in short, `i.simulate` semantics by 
+curating data structures which engineered to 
+track real-world concepts `i.and` then translating 
+these structures into user-visible displays.  
+A competent programmer needs to ensure that 
+software performs these tasks correctly.  
+Computer code is used to manipulate applications' 
+internal data structures and external displays.  
+In this sense computers do not `q.understand` 
+code the way that people understand language; 
+an application does not reach a desired state 
+given user input by treating code as a kind 
+of message or communique that is has to interpret.  
+Instead, computers are engineered (via compilers 
+and runtimes) so that source code can be 
+used as an indirect tool to predictably reconfigure 
+applications' internal and external state so 
+that the latter correctly conveys certain 
+kinds of information.  
+`p`
+
+
+`p.
+Needless to say, the machinery for engineering 
+the proper synergy between external facts, internal 
+data structures, and visible displays is vastly 
+different than the cognitive architectonics 
+of people hearing (or reading) language.  This 
+is one reason why I said that the expression `q.programming 
+`i.languages`/` is a misnomer %-- not that I am 
+calling for some different jargon to take it's place.  
+In fact, I believe that (natural) linguistics can benefit 
+from analyzing programming languages, precisely 
+because of their mechanical and artificial nature.  
+Much of the subtlety of natural languages come 
+from the need for interpretation, and disambiguation: 
+almost all words have multiple meanings and almost 
+all sentences can be parsed in different ways; 
+addressees must infer which construal of parse and 
+word-use is most likely to match the speaker's 
+intent.  There is nothing analogous to 
+such hermeneutic in programming: software-language 
+implementations do not `q.guess` at meanings; they 
+can only rely on precisely formulated rules 
+to deduce which operations are designated by specific 
+segments of source-code.  Programming languages 
+are therefore much blunter and less expressive 
+than human languages.  But by discarding 
+issues of interpretation and `q.most likely` meanings, 
+computer code enables us to study how structural 
+manipulations can be encoded in symbol-systems 
+which at least superficially `i.resemble` human 
+language, in the sense that source code is 
+composed with the same letters and punctuation 
+marks that are the basis of natural writing systems.  
+The chain of computations which extend from 
+source code as written to visible and information-carrying 
+display-changes in an applications' user interface 
+are guided by formally describable systems that 
+potentially have some correlates to how 
+human `q.process` language %-- not in the 
+sense of how we interpret the meaning of sentences 
+initially, but rather in terms of how we 
+construct the `i.pragmatics` of speech-acts; 
+how we figure out what actions we should take 
+to play the role of cooperating addressees 
+responding to the intentions expressed by 
+whomever formulated the sentence at hand.  
+`p`
+
+
+`p.
+I have said that an application's external state 
+is primarily manifest in its visual displays.  
+This is true for conventional software, although 
+we can envision technology evolving so that 
+the `TwoD; digital screen is not the only 
+medium through which programs can show 
+information.  Perhaps `ThreeD; printing 
+or even holograms will break through the 
+limits of two dimensions; Virtual Reality 
+environments might increasingly incorporate 
+kinaesthetic, haptic/tactile, audio, and 
+even olfactory qualia to complement visible 
+scenes.  And, of course, robotics introduces an 
+entirely different set of dimensions for 
+external configurations: a robot's external state 
+is not only defined by what is visible on 
+a display screen (if it has one), but on the 
+position of the robot relative to its surrounding 
+environment and all the degrees-of-freedom 
+for its gears, joints, wheels, and other moving 
+parts.  In this way robots can be programmed 
+to adopt postures that physically alter their 
+surroundings, by lifting and carrying objects 
+for example.  Such mechanical configurations 
+are analogous to the purely visual configurations 
+evinced by software whose effects are mostly 
+localized to a two-dimensional touch-screen 
+or monitor.  Nonetheless, the same internal 
+architecture is in effect: robots are 
+`i.caused` to take on their useful positions 
+because internal data structures are 
+engineered to guide external 
+configurations according to desired outcomes, 
+which is the same principle as old-school 
+software wherein the `q.desired` outcome 
+can be fully expressed through the visual 
+content present at any moment on a computer screen.
+`p`
+
+
+`p.
+The engineered causation between internal 
+data and external configuration, then 
+%-- be this visual (for most computational 
+environments) or mechanical (for robots) 
+or something more multi-sensory (for 
+Virtual Reality, say) %-- is in any 
+case the essential detail for analyzing 
+computer technology: that is, for 
+improving the science of Information Technology 
+in ways that would make software 
+more reliable, cost-effective, accessible, 
+and so forth.  Although a lot of computer 
+programming is done in an experimental, 
+trial-and-error fashion %-- consider 
+the ecosystem of bug reports, bug fixes, 
+security patches, and other incremental 
+improvements which are part of 
+any application's life-cycle %-- there is 
+still room for examining software 
+development (and programming languages) 
+from a `q.theoretical` perspective.  Note 
+that ideas about effective computer 
+code and application development have 
+evolved noticeably during the `q.personal computing` 
+era: conventions for conveying infomation 
+through interactive visible displays have 
+evolved over time, yielding software that 
+is progressively more intuitive and informative; 
+and technologies for implementing computer 
+languages themselves %-- compilers to 
+translate source code into machine language 
+and runtime environments to serve as 
+containers where programs exectute %-- have 
+become more sophisticated, allow programming 
+languages themselves to change over time, 
+which in turn (in principle) makes 
+software both less costly to implement and 
+more trustworthy and secure.  
+Although physical improvements in the 
+underlying computing hardware %-- ever-more-powerful 
+silicon chips, say %-- have obviously 
+fueled the power of modern computers 
+(even quotidean ones owned by the general public) 
+the evolution of programming-language and 
+software-development methodology has not 
+been driven by hard science `i.per se`/, 
+but rather by relatively abstract considerations 
+around the nature of parsers, compilers, data structures, 
+Virtual Machines, and other accoutrements in the 
+ecosystem of language implementation.  
+In effect, Software Language Engineering is almost 
+philosophical, in that progress can be made 
+through relatively abstract investigations 
+(without empirical or physical substrata), 
+but not in the sense of thoughts without 
+concrete payoffs: better computer languages 
+means better software.
+`p`
+
+
+`p.
+This is therefore the practical backstop surrounding 
+the chapters in this section, which will focus 
+on issues of data modeling and Virtual Machines.  
+For reasons I will enumerate, Virtual Machines provide a 
+useful window onto language-implementation.  
+In practice, computer code is eventually translated 
+to `q.machine language`/; i.e., to instructions 
+that can be `i.physically` realized within a 
+computer's Central Processing Unit (`CPU;).  
+A `q.virtual` machine is not a physical 
+device which performs calculations, but rather 
+a software system that emulates the behavior 
+of such devices, to some approximation 
+(virtual machines typically model a wider range 
+of operations than can be computed 
+`i.in silico` directly; but such higher-level 
+operations can typically be destructed into 
+sequences of lower-level steps that themselves 
+`i.can` be performed by a `CPU;).  Almost all 
+modern programming languages invoke Virtual Machines 
+at some stage in the interpretation of 
+computer code, even if this is done prior 
+to an application being executed 
+(one way to gather the data about an application 
+for compiling it to machine language is 
+to `q.virtually` simulate running code, so 
+virtual machines can come into play during 
+compilation even if the compilation 
+target is low-level machine code).`footnote.
+I'm thinking of something like LLVM (Low Level 
+Virtual Machine) as a foundation for the 
+`Cpp; Clang compiler.  Even if it is not 
+entirely accurate to speak of LLVM 
+`q.virtually executing` `Cpp; 
+code during compilation, this is not a bad 
+way to visualize compiler details in a 
+relatively informal context.  For example, 
+type-checking the outputs of a procedure 
+once specific types are assigned to 
+its input parameters can be construed as 
+an approximate `q.running` of the procedure 
+where we abstract from the `i.specific` 
+input values and consider only their types.
+`footnote`
+Moreover, Virtual Machines (hereafter 
+often abbreviated to `q.`VM;s` are not limited 
+to the data structures and instruction 
+sets that can be physically realized in a 
+`CPU; (or analogous settings, such as a 
+Graphics Processing Unit or a Quantum Processor):  
+because `VM;s are software, not hardware, 
+they can take on almost any set of kernal 
+operations and built-in data types that 
+can be programmed within the software 
+through which the `VM;s are themselves 
+implemented.  In this sense, `VM;s are a 
+valuable environment for analyzing 
+programming language design and implementation, 
+because they are a flexible and adaptable 
+environment for parsing, compiling, and 
+executing high-level computer code.  
+`p`
+
+
+`p.
+For reasons sketched in this introduction, 
+here I consider `VM;s especially 
+in the context of how applications 
+link internal data structures to 
+external (mostly visual-display) 
+configurations %-- which I have argued 
+is `i.the` central concern of 
+software engineering in general.  
+That is, we can use `VM;s to 
+analyze systematically the processes 
+through which `i.source code` 
+formalizes digital machinery such that 
+`i.user actions` are responded to 
+by manipulating `i.internal data` 
+resulting in changes to `i.visible displays`/.  
+Each of the scaffoldings connecting 
+these four main elements (source code, 
+user actions, internal data structures, 
+and visible displays) is governed 
+by overlapping sets of conventions, 
+specifically, and computational requirements; 
+modeling the full space of their 
+interoperation via Virtual Machines 
+is a good way to make theoretical 
+sense of the complex interworkings 
+that come into play once an application 
+is up and running.
+`p`
+
+
+
+
+
+
+
+`p.
+
+`p`
+
+
+
+
+

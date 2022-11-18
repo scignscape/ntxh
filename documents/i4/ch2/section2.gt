@@ -382,7 +382,7 @@ treating paths with fewer `i.diagonal` steps
 as shorter (given that diagonal steps 
 are longer from a Euclidean perspective).  
 Given any collection of points around a center, 
-then we ccan partition the set into 
+then we can partition the set into 
 `XCSD; cycles which have a natural 
 ordering between one another; moreover, `i.inside` 
 each cycle the points are distributed clockwise 
@@ -440,7 +440,7 @@ to be significant for labeling, classifying, or
 matching images when they emerge from an 
 image's central region more than its periphery.  
 The color spectrum or histogram weighted toward 
-the center typically bears more signifanec 
+the center typically bears more signifance 
 than further from the center, for example, 
 and similarly for prominent contour-shapes, 
 textures, diffusion processes, and so forth. 
