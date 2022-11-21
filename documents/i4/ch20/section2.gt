@@ -1,0 +1,520 @@
+
+`section.Representing Functional Organization`
+
+`p.
+Supplemental `GIS; data layers are good 
+examples of a computational theme which 
+recurs in multiple contexts: the co-existence 
+of spatial and function design or organization, 
+which software seeks to model, simulate, 
+or visualize.  The domain of `q.space` 
+can vary; in the `GIS; context 
+`i.spatial` is actually `i.geospatial`/, 
+where `q.space` is construed as features 
+and locations on the Earth's surface 
+(plus, sometimes, height above and depth 
+beneath the ground).  When mapping utilities, 
+transit systems, traffic flows, and so forth, 
+we are dealing with multi-part networks 
+that are spread out over a geographic area, and 
+geospatial relations are a fundamental 
+dimension to the functional interrelation between 
+disparate parts.  At the same time, such 
+systems have functional patterns which 
+involve relationships that are not 
+wholly subsumed by geospatial concepts: 
+transfer points, in the case of 
+transportation; highway exists and roadway capacity, 
+in the case of traffic simulations; aquifers, 
+water mains, and treatment centers, in the 
+case of utilities (specifically water systems), 
+etc.  Other domains have other concepts of 
+space (not necessarily `i.geo`/-spatial). 
+Architectural and building systems assemble 
+into the `ThreeD; form of a house or 
+factory, but they also capture the 
+machinery of modern-day construction, with 
+electricity, heating/cooling, ventillation, 
+fire safety, and so forth %-- a wall 
+is not just a spatial border between rooms 
+but a stopgap against a spreading fire, 
+a barrier to sound, a perimeter enclosing 
+rooms which have specific entry-ways and 
+dimensions.  Or, in robotics, Image Processing 
+techniques parse visual input to create a 
+spatial map of a robot's environment 
+(here `q.space` is both the internal pixel 
+expanse of an image and the projected 
+ambient space where a robot moves), but 
+robots also need to understand their 
+surroundings in functional terms %-- construing 
+external objects as artifacts to be 
+moved, obstacles to be avoided, affordance 
+enabling the robot's own movements 
+(walking steps, say), or etc.  In 
+all of these contexts spatial and 
+functional systems are overlaid 
+one on another, where spatial relations 
+constrain and substantiate 
+functional relations but additional 
+parameters and axioms are needed 
+to describe the functional 
+systems in detail: simply 
+mapping out their component's 
+spatial networks is not sufficient 
+to define functional-organizational 
+properties (for instance, the presence 
+of spatial intersections between two highways 
+or two train lines may or may 
+not be a traffic link or transfer-point.) 
+`p`
+
+
+`p.
+Formats such as Industry Foundation Classes have 
+evolved alongside `q.green tech` and `q.smart grid` 
+technology, or in general an increasing emphasis 
+on employing computer models to promote 
+sustainable, eco-friendly engineering; 
+and these use-cases exemplify the 
+co-engineering of spatially and functionally 
+articulated data structures. 
+For example, architects have learned that 
+carefully selecting building plans and 
+materials can lead to more efficient 
+designs %-- ideally, `q.net zero` carbon 
+footprint %-- by limiting a 
+building's reliance on electricity 
+(and environmentally harmful chemicals, 
+such as freon) for, e.g., heating and 
+cooling.  As a case in point, warm-weather 
+properties can minimize the use of 
+air conditioners by orienting exteriors to 
+create shaded areas and position windows 
+away from sunlight, arranging ventilation 
+systems to produce cooling air flows (which 
+also has a drying effect, reducing 
+interior moisture that can 
+yield health hazards), selecting 
+materials that naturally absorb heat %-- and 
+potentially harness solar and/or wind  
+to offset energy use.  Computer models 
+come into play here because concepts such as 
+`q.net zero` emissions are not abstract 
+goals; they are concrete targets that 
+may be measured and predicted.  Software 
+can estimate a property's energy efficiency 
+while its architectural plans are still being 
+finalized, and CyberPhysical sensors might  
+track actual energy use post-occupancy (which 
+in turn evaluates the accuracy of the initial 
+simulations). 
+`p`
+
+
+`p.
+In this sense green technology has become an 
+important component of Computer Aided Design in 
+domains such as architecture and civil engineering.  
+In addition to their roles as construction 
+blueprints and visual tools to assess 
+the aesthetics and livability of property designs, 
+building plans thereby gain an additional 
+dimension as data structures defining the 
+functional organization of physical 
+constructions, which in turn is subject to analysis 
+by special-purpose software components that 
+simulate air-flow, air quality, energy use, and 
+related metrics that collectively quantify 
+building efficiency.  Although spatial 
+relations among architectural elements 
+are obviously significant factors in these 
+simulations, such analyses require additional 
+data based on mathematical models of 
+(e.g.) air currents or solar-thermal heat gain.  
+Because `CAD; applications (for conventional 
+`AEC;) are not `q.scientific computing` platforms 
+in most contexts (apart from measuring 
+buildings' structural integrity, perhaps) 
+such `q.green tech` analyses require 
+external software or plugins which 
+take `CAD; data as a starting point 
+but then overlay additional, domain-specific 
+parameters.
+`p`
+
+
+`p.
+Similar principles apply to non-geospatial 
+attributes within `GIS; data layers.  
+Functional networks overlaid on `GIS; 
+terrain can be analyzed much like 
+structured systems within arhictectural 
+space.  As a concrete example, consider 
+hydrology: indeed, I'll continue the 
+earlier case-study of Ukrainian 
+reconstruction.  It has been well-documented 
+that the 2022 war has crippled the country's 
+urban infrastructure in many places, so 
+that utilities like water-distribution systems 
+have to be rebuilt alongside residential 
+and industrial units.  The multi-faceted 
+scale of reconstruction priorities actually 
+gives preliminary designs greater flexibility, 
+because engineers are not limited to 
+repairing utilities to meet the needs of a 
+fixed residential population, or conversely 
+accepting constraints on new construction due 
+to limitations of existing urban infrastructure.  
+Under the assumption that refugees might want to 
+return to their prior cities or neighborhoods 
+but not necessarily their exact previous 
+address, planners have leeway to explore 
+how to reconstruct both residential housing 
+and utility systems to optimize factors 
+such as clean water and inexpensive 
+electricity: density of habitation 
+can be structured to minimize the 
+costs associated with providing 
+energy, water, gas, waste disposal, etc.         
+`p`
+
+
+`p.
+In the case of water systems, rebuilding 
+plans would reasonably start from  
+existing acquifers and water sources 
+(such as lakes and reservoirs) which 
+are geological artifacts, not man-made 
+ones.  Once these sources are tapped, 
+however, water-distribution networks 
+can be designed with some level of 
+flexibility, allowing for engineering 
+choices: what kind of pipes to use, 
+where to place occupied buildings and 
+hydrological infrastructure (such 
+as holding tanks), how to recycle wastewater 
+(which points to the functional 
+interrelationship between water and sewage 
+systems), how to provide irrigation 
+(which likewise connects water 
+distribution to agricultural optimization), 
+how to protect water-sources from contamination 
+due to floods, existing hazard-sites, and 
+so forth.  Such assessments depend on structural 
+models of water utilities as networked 
+systems, where mathematical models can 
+compute the quantity of water that may 
+run through specific network-paths (to minimize the risk 
+of building's losing access to water 
+when one part of the system is damaged, 
+for example), or to estimate water demand 
+(based on the types of properties, 
+considering the different needs of 
+industrial, commercial, or residential locations) 
+which are water systems' end-points, or 
+to simulate how floods or environmental 
+hazards might damage and/or contaminate the 
+system.  Computationally, such network models 
+would normally represent water distribution 
+via graphs, where (for instance) 
+nodes represent physical sites 
+(acquifers, buildings, treatment sites) 
+and edges represent infrastructure 
+such as sewage drains or pipes, which 
+might then be annotated with numeric 
+data (for instance, a water main or 
+secondary pipe's maximum capacity).         
+`p`
+
+
+`p.
+Graphs representing water systems in this 
+sense can be geospatially visualized, because 
+most of these structural elements 
+have fixed geographic locations %-- i.e., 
+the nodes in hydrological graphs 
+can be assigned latitude/longitude 
+coordinates and therefore the entire 
+network can be laid out alongside 
+street grids or geological feature-maps.  
+At the same time, functional analysis 
+of water networks would need to 
+consider many engineering 
+specifications apart from `GIS; 
+position alone (e.g., the capacity 
+and manufacturing details of 
+pipes and storage tanks).  
+This would be an example of non-`GIS; 
+data that might be curated within the 
+scope of a geospatial database but 
+consumed by domain-specific client applications, 
+rather than digital cartography renderers 
+themselves.   
+`p`
+
+
+`p.
+Consider the following scenario: a company 
+(or non-profit) that specializes in 
+hydrology is tapped to produce proposals 
+or assessments of reconstructed water systems 
+proposed for damaged Ukrainian cities.  
+That work is encapsulated in structural 
+models that simulate the design of new 
+water networks, with system details mapped 
+out via overlays on Ukrainian street 
+maps.  Simultaneously, architectural 
+firms are at work formulating plans for 
+new residential (and commercial/manufacturing) 
+sites to replace infrastructure irrepably 
+damaged during the war.  When designing an 
+apartment complex to house a specific number of 
+families, for example, architects could then 
+estimate the tenants' anticipated water-use 
+and refer to the hydrological company's 
+simulations to check that their proposed 
+networks could provide adequate 
+water for the new building, modeled as an 
+end-node within the overall structure.  
+From a computational perspective, 
+we can see this situation as a kind of 
+multi-part analytic framework where 
+the software employed by the 
+hydrologists and by the architects 
+can interoperate with sufficient 
+rigor to allow the water network models 
+to answer questions arising in the 
+architectural context.  For example, 
+the architect's software might need to 
+obtain quantitative parameters 
+specific to the water-distribution proposals 
+and use such data as inputs to 
+simulations of future residents' water consumption.    
+`p`
+
+
+`p.
+We can envision variations of this scenario, 
+too: environmental engineers, for instance, 
+might similarity consult water-system  
+prooposals but run simulations 
+of the network's performance, not in the 
+context of residential demand, but 
+rather for the effects of drought of 
+floods, or the risk that water in the 
+system could be tainted by environmental 
+contaminants or flood runoff.  Or, 
+agricultural engineers could simulate 
+the performance of water-supply 
+when these systems are tapped 
+to provide irrigation, which in turn 
+would vary by season and in conjunction 
+with choices related to crop-variety 
+and cultivation methods (whose computational 
+models would be derived from agricultural 
+science).
+`p`
+
+
+`p.
+Because this chapter is focused on computational 
+methods rather than botany or hydrology 
+`i.per se`/, I will not examine the 
+specific of the different scientific 
+domains in play for these various 
+examples; instead, I want to focus on the 
+application-design concerns which 
+these case-studies illustrate.  We 
+have here a hypothetical water-distribution 
+network model serving as a core 
+data source which multiple applications, 
+each with their own specific 
+domains (archicture, ecology, agriculture) 
+will tap for parameters and calculations 
+specific to their area of focus.  All of this software 
+has to interoperate according to 
+data-sharing protocols that ensure each 
+application's access to its requisite 
+information despite their differences 
+in scientific domain.  Accommodating 
+multi-faceting information networks 
+along these lines is a more complicated 
+task than engineering multi-part 
+services spanning applications 
+with largely overlapping functionality 
+(e.g., passing Electronic Health 
+Records between biomedical facilities, 
+or supporting electronic payments/transforms 
+among e-commerce and/or financial services 
+applications).  
+`p`
+
+
+`p.
+Furthermore, in addition to the data-sharing 
+issues just identified, the water-network 
+example also points to the role of 
+`GIS; data: although the most important 
+network data is not intrinsically geospatial, 
+it is nonetheless true that many details 
+of a water system can be visualized in a 
+geospatial environment, and geospatial 
+relations are among the parameters that 
+would be considered during simulations 
+(for example, the geographic 
+distance between a water source and 
+building location would presumably be a 
+factor in predicting uninterrupted 
+water supply based on, e.g., 
+network redundancy).  Visualizing 
+water systems against a street-map 
+background is a good framework 
+for human users to picture the 
+network in overview (as opposed to 
+schematic diagrams, for example): 
+we can imagine that front-ends 
+for the various applications 
+accessing the water-network data 
+might use digital maps as an 
+entry-point.  Civil engineering 
+software, for example, could 
+give users the option of slecting 
+a specific buildings by starting 
+with a street map, zooming in to a 
+desired location as necessary.  
+In the context of hydrology-related 
+simulations, this front-end 
+functionality might be augmented 
+by rendering water-distribution 
+data within the maps which 
+are presented to user, for example, 
+showing water routes drawn as 
+`GIS; `q.ways` analogous to 
+higways or transit lines, and 
+providing icons marking individual 
+building's connections to 
+water systems as entry-points 
+for requesting data about 
+an individual property's 
+water use/access.
+`p`
+
+
+
+`p.
+In this environment, then, software 
+simulating water networks would be 
+depositing data in an overall 
+`GIS; environment wherein 
+specific data packages can be 
+associated with geospatial 
+locations, even if the encapsulated 
+data is not intended for use 
+by `GIS; software directly.  
+Geospatial location then serve as a 
+kind of index through which 
+disparate applications could obtain 
+non-`GIS; information that they could 
+then unpack and plug in to their 
+own analytic capabilities.  Here 
+`GIS; databases act as way-stations 
+for data packages routed between 
+disparate applications.  Pehaps an analogy 
+to old-fashioned (non-electronic) 
+mail is appopriate: the post office 
+does not examine the contents of 
+someone's letter, but it implements a 
+deposition, storage, and delivery service allowing 
+packages to be sent from one point in 
+the country to another.  
+`p`
+
+
+`p.
+At this point, then, we can see how `GIS; 
+systems can serve a purpose which is a 
+variation on the cross-application 
+data sharing as considered earlier 
+in the chapter.  Before, I mentioned 
+the use of `API;'s allowing an 
+application to receive third-party 
+data from an external source, 
+`q.exposing` specific function 
+capabilities which permit the 
+host application to correctly 
+interpret and process such 
+external information.  The prior 
+discussion made the implicit 
+assumption that applications in 
+such an arrangement would 
+be communicating directly: 
+an originating component explicitly 
+connects to a target application via 
+the latter's `API;.  However, 
+the case of non-geospatial data 
+in a `GIS; database points to 
+how cross-application interop 
+can be more delayed and 
+circuitous.  Hydrological 
+software could deposit data 
+about water-networks through 
+`GIS; systems which are 
+subsequently consumed by 
+third-party applications 
+(for architecture, agriculture, 
+and so forth) without either 
+application having direct contact; 
+all data would be routed 
+and stored through `GIS; 
+components (which, in the general, 
+would not consider non-geospatial 
+data directly, but at least would 
+keep track its association with 
+geographical coordinate and 
+`GIS; objects proper, such as 
+buildings or geological features).   
+`p`
+
+
+`p.
+Having outlined the structure of this kind of mediated 
+data-sharing %-- relying on 
+intermediate components such as 
+a `GIS; database to allow 
+cross-application networking 
+without direct inter-application 
+connections %-- the next question would 
+be to address the computational requirements 
+of data intended to be shared through an 
+indirect, multi-party environment 
+and of the components wherein 
+data packages are constructed, then 
+stored, and then acquired and reused.  
+The follwing chapter will present 
+arguments that hypergraph data 
+models are particularly well-suited 
+to this kind of multi-part 
+protocol, both with respect to 
+formalizing data models and with 
+respect to analyzing computer 
+through which the functionality 
+to (respectively) construct, store, 
+and acquire the respective 
+data packages is implemented.  
+`p`
+
+
+
+
+`p.
+
+`p`
+
+
+
+
+
+
+
+                    

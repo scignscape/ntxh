@@ -1,0 +1,45 @@
+
+%\AddToShipoutPicture{%
+%  \AtPageLowerLeft{%
+%    \hspace*{3pt}
+% \rotatebox{90}{%
+%        \begin{minipage}{\paperheight}
+%   \centering
+%   {\color{codegr!65}\textcopyright ~\today{} Nathaniel Christen}
+%        \end{minipage} %
+%      }
+%    } %
+%  }%
+
+%\raggedbottom{}
+% \phantom{x}
+
+\begin{document}
+
+
+{\setstretch{1.2}
+
+\twocolumn[\begin{@twocolumnfalse}
+{\begin{minipage}{7.75in}\begin{center}\begin{minipage}{5in}
+\sdiinput{abstract.gt}
+\end{minipage}\end{center}\end{minipage}}
+\end{@twocolumnfalse}]
+\thispagestyle{empty}
+\cleardoublepage{}
+
+
+\addcontentsline{toc}{section}{Chapter 20: Decentralized Data Analysis and Digital Cartography}
+
+\addtocounter{page}{-1}
+
+
+\sdiinput{intro.gt}
+
+\sdiinput{section1.gt}
+\sdiinput{section2.gt}
+\sdiinput{conclusion.gt}
+}
+
+\input{biblio}
+
+\end{document}

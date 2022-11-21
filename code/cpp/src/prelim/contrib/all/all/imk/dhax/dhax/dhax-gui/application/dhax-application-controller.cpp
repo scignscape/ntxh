@@ -1000,21 +1000,25 @@ void DHAX_Application_Controller::play_video(DHAX_Video_Player_Dialog::Annotatio
 
  current_video_player_dialog_->play_local_videos(
 
-//// {
-////    {v + "-000.mkv", a + "-000.ntxh"},
-////    {v + "-00.mkv", a + "-00.ntxh"},
-////    {v + "-1.mkv", a + "-1.ntxh"},
-////    {v + "-0.mkv", a + "-0.ntxh"},
-////    {v + "-2.mkv", a + "-2.ntxh"},
-////    {v + ".mkv", a + ".ntxh"},
-//// }
+ {
+    {v + "-000.mkv", a + "-000.ntxh"},
+    {v + "-00.mkv", a + "-00.ntxh"},
+    {v + "-1.mkv", a + "-1.ntxh"},
+    {v + "-0.mkv", a + "-0.ntxh"},
+    {v + "-2.mkv", a + "-2.ntxh"},
+    {v + ".mkv", a + ".ntxh"},
+     {v + "-x1.mkv", a + "-x1.ntxh"},
+     {v + "-xx.mkv", a + "-xx.ntxh"},
+     {v + "-x2.mkv", a + "-x2.ntxh"},
 
-       {
-//         {v + ".mkv", a + ".ntxh"},
+ }
+
+//       {
+////         {v + ".mkv", a + ".ntxh"},
+////         {v + "-x1.mkv", a + "-x1.ntxh"},
 //         {v + "-x1.mkv", a + "-x1.ntxh"},
-         {v + "-x1.mkv", a + "-x1.ntxh"},
-         {v + "-x2.mkv", a + "-x2.ntxh"},
-       }
+//         {v + "-x2.mkv", a + "-x2.ntxh"},
+//       }
 
 ////        v + ".mkv", a + ".ntxh"
 ////    v + "-2.mkv", a + "-2.ntxh"
