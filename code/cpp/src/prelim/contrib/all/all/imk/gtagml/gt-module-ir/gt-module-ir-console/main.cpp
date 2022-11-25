@@ -20,6 +20,20 @@ USING_KANS(Util)
 USING_KANS(DGH)
 
 
+int main1(int argc, char *argv[])
+{
+ for(quint8 i = 0, ok = true; ok; ok = ((quint16) i) + 1 < 256, ++i)
+ {
+  //ok = (((quint16) i) + 1) < 256;
+  // //  loop body ...
+  //ok = ;
+  qDebug() << "i = " << i;
+
+
+ }
+}
+
+
 int main(int argc, char *argv[])
 {
  GT_Module_IR mir;
@@ -57,9 +71,12 @@ int main(int argc, char *argv[])
  QString folder = DEMO_DOCUMENT_FOLDER "/i4";
  //?
 
- paper_name = "ch20";
- //?paper_name = "ch2";
- //paper_name = "ch23";
+ //?paper_name = "ch20";
+ //? paper_name = "ch21";
+ //?paper_name = "ch22";
+ //
+ paper_name = "ch23";
+ //paper_name = "ch2";
 
 
  mir.read_lines(QString(R"(

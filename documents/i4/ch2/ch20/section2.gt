@@ -94,7 +94,7 @@ create shaded areas and position windows
 away from sunlight, arranging ventilation 
 systems to produce cooling air flows (which 
 also has a drying effect, reducing 
-interior moisture that could 
+interior moisture that can 
 yield health hazards), selecting 
 materials that naturally absorb heat %-- and 
 potentially harness solar and/or wind  
@@ -259,7 +259,7 @@ Consider the following scenario: a company
 (or non-profit) that specializes in 
 hydrology is tapped to produce proposals 
 or assessments of reconstructed water systems 
-considered for damaged Ukrainian cities.  
+proposed for damaged Ukrainian cities.  
 That work is encapsulated in structural 
 models that simulate the design of new 
 water networks, with system details mapped 
@@ -274,9 +274,9 @@ families, for example, architects could then
 estimate the tenants' anticipated water-use 
 and refer to the hydrological company's 
 simulations to check that their proposed 
-networks will provide adequate 
+networks could provide adequate 
 water for the new building, modeled as an 
-end-node within the overall graph.  
+end-node within the overall structure.  
 From a computational perspective, 
 we can see this situation as a kind of 
 multi-part analytic framework where 
@@ -295,13 +295,13 @@ simulations of future residents' water consumption.
 
 
 `p.
-We may envision variations of this scenario, 
-too: environmental engineers 
+We can envision variations of this scenario, 
+too: environmental engineers, for instance, 
 might similarity consult water-system  
-proposals but run simulations 
+prooposals but run simulations 
 of the network's performance, not in the 
 context of residential demand, but 
-rather for the effects of drought and 
+rather for the effects of drought of 
 floods, or the risk that water in the 
 system could be tainted by environmental 
 contaminants or flood runoff.  Or, 
@@ -321,7 +321,7 @@ science).
 Because this chapter is focused on computational 
 methods rather than botany or hydrology 
 `i.per se`/, I will not examine the 
-specifics of the different scientific 
+specific of the different scientific 
 domains in play for these various 
 examples; instead, I want to focus on the 
 application-design concerns which 
@@ -330,7 +330,7 @@ have here a hypothetical water-distribution
 network model serving as a core 
 data source which multiple applications, 
 each with their own specific 
-domains (architecture, ecology, farming) 
+domains (archicture, ecology, agriculture) 
 will tap for parameters and calculations 
 specific to their area of focus.  All of this software 
 has to interoperate according to 
@@ -338,7 +338,7 @@ data-sharing protocols that ensure each
 application's access to its requisite 
 information despite their differences 
 in scientific domain.  Accommodating 
-multi-faceted information networks 
+multi-faceting information networks 
 along these lines is a more complicated 
 task than engineering multi-part 
 services spanning applications 
@@ -359,7 +359,7 @@ example also points to the role of
 network data is not intrinsically geospatial, 
 it is nonetheless true that many details 
 of a water system can be visualized in a 
-`GIS; environment, and geospatial 
+geospatial environment, and geospatial 
 relations are among the parameters that 
 would be considered during simulations 
 (for example, the geographic 
@@ -380,7 +380,7 @@ might use digital maps as an
 entry-point.  Civil engineering 
 software, for example, could 
 give users the option of slecting 
-a specific building by starting 
+a specific buildings by starting 
 with a street map, zooming in to a 
 desired location as necessary.  
 In the context of hydrology-related 
@@ -388,7 +388,7 @@ simulations, this front-end
 functionality might be augmented 
 by rendering water-distribution 
 data within the maps which 
-are presented to user; e.g., 
+are presented to user, for example, 
 showing water routes drawn as 
 `GIS; `q.ways` analogous to 
 higways or transit lines, and 
@@ -412,10 +412,10 @@ associated with geospatial
 locations, even if the encapsulated 
 data is not intended for use 
 by `GIS; software directly.  
-Geospatial location then serves as a 
+Geospatial location then serve as a 
 kind of index through which 
 disparate applications could obtain 
-non-`GIS; information so that they could 
+non-`GIS; information that they could 
 then unpack and plug in to their 
 own analytic capabilities.  Here 
 `GIS; databases act as way-stations 
@@ -433,22 +433,22 @@ the country to another.
 
 `p.
 At this point, then, we can see how `GIS; 
-systems potentially serve a purpose which is a 
-variation on cross-application 
-data sharing considered earlier 
+systems can serve a purpose which is a 
+variation on the cross-application 
+data sharing as considered earlier 
 in the chapter.  Before, I mentioned 
-the use of `API;s allowing an 
+the use of `API;'s allowing an 
 application to receive third-party 
 data from an external source, 
-`q.exposing` specific  
+`q.exposing` specific function 
 capabilities which permit the 
 host application to correctly 
 interpret and process such 
-external information.  This prior 
+external information.  The prior 
 discussion made the implicit 
 assumption that applications in 
 such an arrangement would 
-be inter-communicating directly: 
+be communicating directly: 
 an originating component explicitly 
 connects to a target application via 
 the latter's `API;.  However, 
@@ -464,13 +464,13 @@ subsequently consumed by
 third-party applications 
 (for architecture, agriculture, 
 and so forth) without either 
-application having direct contact: 
+application having direct contact; 
 all data would be routed 
 and stored through `GIS; 
 components (which, in the general, 
 would not consider non-geospatial 
 data directly, but at least would 
-keep track of its association with 
+keep track its association with 
 geographical coordinate and 
 `GIS; objects proper, such as 
 buildings or geological features).   
@@ -497,7 +497,7 @@ models are particularly well-suited
 to this kind of multi-part 
 protocol, both with respect to 
 formalizing data models and with 
-respect to analyzing computer code 
+respect to analyzing computer 
 through which the functionality 
 to (respectively) construct, store, 
 and acquire the respective 

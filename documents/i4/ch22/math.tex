@@ -1,0 +1,100 @@
+
+\newcommand{\qquadrantcodeagainst}{\q{quadrant\_code\_against}}
+
+
+\usepackage{listings}
+
+
+%\newsavebox{\mylisting}
+%\begin{lrbox}{\mylisting}
+%  \begin{lstlisting}
+%    foobar
+%  \end{lstlisting}%
+%\end{lrbox}
+
+
+
+\newcommand{\quadrantcodeagainstimpl}{
+\input{quad}
+}
+
+\newcommand{\loopPlusCast}{
+\input{loop}
+}
+
+
+%u1 quadrant_code_against(const tysizes& rhs) const 
+%{
+% return (*this - rhs).spaceship_mask()
+%  .plus((*this - rhs).zeros_mask())
+%  .floor(0).times({2, 1}).inner_sum(); 
+
+
+\newcommand{\xypair}{\ensuremath{\{x, y\}}}
+\newcommand{\xypluss}{\ensuremath{\{x + s, y + s\}}}
+\newcommand{\abpair}{\ensuremath{\{a, b\}}}
+
+
+\newcommand{\diagorthopair}{\ensuremath{\{diagonal, orthogonal\}}}
+
+
+\newcommand{\sval}{\ensuremath{s}}
+
+\newcommand{\xyplusab}{\ensuremath{\{x + a, y + b\}}}
+\newcommand{\xplusy}{\ensuremath{x + y}}
+
+\newcommand{\inum}{\ensuremath{i}}
+
+\newcommand{\topbarleft}{\b{top} $|$ \b{left}}
+
+\newcommand{\bardash}{\ensuremath{|-}}
+\newcommand{\dashbar}{\ensuremath{-|}}
+
+\newcommand{\ENUMOPS}{{\small{}\texttt{ENUM\_FLAGS\_OP}}}
+
+
+\newcommand{\abs}{\qb{abs}}
+
+\newcommand{\Cppspaceship}{$<=>$}
+
+\newcommand{\lteq}[1]{$<=$#1}
+\newcommand{\gt}[1]{$>$#1}
+
+\newcommand{\xyabM}{\ensuremath{|x-a|+|y-b|}}
+\newcommand{\xyabC}{\texttt{max(}\ensuremath{|x-a|,|y-b|\texttt{)}}}
+
+\newcommand{\MCH}{\textbf{\texttt{\small{MCH}}}}
+
+\newcommand{\smMCH}{\textbf{\texttt{\footnotesize{MCH}}}}
+
+\newcommand{\MCHprime}{\textbf{\texttt{\footnotesize{MCH$'$}}}}
+
+\newcommand{\MCHprimepair}{\ensuremath{\{C, M-C\}}}
+
+\newcommand{\xyabMCH}{\ensuremath{\{M-C, 2C - M\}}}
+
+\newcommand{\MCHprimecovert}{\MCHprime{} = \{\ensuremath{innersum}(\smMCH),  %
+\ensuremath{first}(\smMCH)\} and \smMCH{} = \{\ensuremath{second}(\MCHprime),%
+\ensuremath{\mathit{innerdifference}}(\MCHprime)\}} 
+
+
+\newcommand{\threebythree}{\ensuremath{3\times{}3}}
+\newcommand{\ninebynine}{\ensuremath{9\times{}9}}
+\newcommand{\twentysevenbytwentyseven}{\ensuremath{27\times{}27}}
+\newcommand{\sevenbyseven}{\ensuremath{7\times{}7}}
+
+
+
+\newcommand{\mathC}{\ensuremath{C}}
+\newcommand{\mathM}{\ensuremath{M}}
+
+\usepackage{amsmath}
+
+\newcommand{\kgtzero}{\ensuremath{k > 0}}
+
+
+
+
+
+
+

@@ -1,0 +1,509 @@
+
+`p.
+By way of illustration, suppose one information-bundle that 
+could be associated with (some) photographs outlines 
+redevelopment plans: data points such as the number 
+of residential units targeted, renderings of building 
+designs, contractors, contact information, and so forth.  
+Presumably, such data would only be applicable 
+to images showing blocks or plots where such plans 
+are in the works; and moreover such images would link 
+to other forms of data as well (about, say, utilities 
+grids).  As part of the empirical background, in 
+effect, one might conclude that various facts 
+pertaining to individual reconstruction projects/contracts 
+can both be aggregated (as interconnected data-points) 
+and isolated from other information potentially 
+relevant to an viewed image.  In general, software 
+design depends on sensitivity to how information spaces, 
+practically speaking, can be carved and organized.  
+The decision to isolate (say) construction-project 
+data as integral units would be made against 
+that kind of design/decision context.  Having 
+this topic reified as a specific `q.category` of data, 
+say, affects `GUI; programming and event-handling 
+(because user-visible components must be implemented 
+enabling users to access information in that 
+category, which in turn yields signals like 
+context-menu activations and the need for appropriate  
+event-handlers) as well as database interop (insofar 
+as such data has to be packaged in persistable forms). 
+Subsequently, representations of such integral construction-project 
+data (in the form of, e.g., a cluster of interrelated 
+datatypes) would be manifest as software artifacts 
+threaded through a code base.
+`p`
+
+
+`p.
+The specific patterns of data organization and programming-language 
+types engineered for an application reflect practical 
+concerns and aspirations to optimize User Experience; these patterns 
+do not necessarily map neatly to native database 
+architectures.  Neither relational databases (built up from 
+tables with fixed tuples of single-value columns) nor 
+conventional graph databases (whose representations are confined to 
+one layer of labeled edges) generically match the 
+multivariate and multi-level structure of real-world information 
+typically managed at the application level.  This is why 
+application-level data types generally need 
+to be restructured and transformed when routed between applications 
+and database back-ends.  
+`p`
+
+
+`p.
+Software engineers are responsible for ensuring a proper 
+synchronicity between application and database state, although 
+(as intimated above) this does not (by and large) entail 
+application-state being directly persisted in a back-end.  
+Instead, back-end updates are a property of application-state at certain 
+moments; insofar as users have performed edits or in general 
+made changes resulting a mismatch between the data as 
+currently seen by the user and what is stored in the database, 
+the latter has to commit such changes for perpetuity. 
+Update-worthy application-state then needs to be 
+distributed over (potentially) multiple database 
+`q.sites` which are collectively implicated in an update.     
+`p`
+
+
+`p.
+For sake of argument, consider an update (or part thereof) consolidated 
+into a single (application-level) datatype instance; e.g., 
+one object of a given `Cpp; class.  Quite possibly, there is 
+no one-to-one correspondence between application objects and 
+database values or records, particularly if the classes 
+in questions contain many data fields and/or multiple 
+one-to-many relationships and values which are more 
+involved than simple strings or numbers (e.g., pointers 
+to other objects).  The structural mismatch between 
+application data and database records is evident in 
+technologies such as Object-Relation Mapping (`ORM;) 
+%-- or `q.Object Triple Mapping` for the Semantic Web %-- 
+marshaling data for relational databases or triplestores, 
+respectively.  Engines with more flexible 
+representation paradigms, needing less reconstruction 
+of application data exported to a back-end, can be 
+advantageous precisely because data-persistence 
+capabilities end up consuming less `q.boilerplate` code.  
+Hypergraph databases are a case-in-point: the kind of 
+complexity in datatypes' internal orgnanization 
+(multiple multivariate fields for a single object, 
+for instance) which give rise to `ORM;/`OTM;-style 
+transforms map organically to hypernode or hyperedge 
+constructions. 
+`p`
+
+
+`p.
+Modifying a database entails conveying a package 
+of database between applications and the database 
+engine; the structure of this `communique; 
+in turn reflecting database architecture.  
+The `SQL; `INSERT; 
+statement, for example, derives its form 
+from the layout of table-base data models:  
+adding a record entails naming the table to which it 
+will belong, which brings on board the specific 
+list of fields (columns) whose values have 
+to be accounted for in the query.  Our impression that 
+relational algebra is a relatively crude or inflexible 
+meta-model derives, it would seem, in large part 
+from the quantity of bridge code needed to implement 
+database updates through query commands such as 
+`INSERT; that are restricted to the relational 
+architecture.  To the extent that hypergraph 
+engines (for example) are more flexible in principle, 
+this advantage only becomes concretely 
+evident to the degree that hypergraph databases 
+support a query system such that updates (and 
+analogous modifications to a database instance) 
+are initiated with relatively less 
+boilerplate code.    
+`p`
+
+
+`p.
+As I alluded to earlier, hypergraph data models 
+have comparatively greater parameters available 
+for representing information; in particular, 
+this implies that we have greater 
+flexibility in formulating queries 
+to modify database instances.  It is worth mentioning 
+at this point that `q.queries` need not involve 
+instructions passed to a database engine 
+in the form of character strings (e.g., 
+`SQL; code); indeed, forcing applications 
+to build query code on the fly is a often 
+an antipattern (spurring boilerplate code-bloat); 
+better solutions involve query `q.factories` that 
+assemble queries via procedure/method calls 
+in a host programming language (perhaps 
+through an embedded domain-specific language, 
+as one finds with `LINQ; `visavis; `CSharp; and 
+its emulations in other languages).  On the 
+other hand, in the best case scenario a database 
+would `i.also` support a query language that 
+could be executed as text strings outside of an 
+application context (and without relying on a 
+host programming language), for examining 
+the contents of a database in situations removed 
+from application-based access (debugging, analytics, 
+general admin functionality, and so forth).   
+In other words, ideally engines will encompass 
+a query engine that works with query-structured 
+compiled `i.either` from application-code factories 
+`i.or` standalone query code, which is one rationale 
+for embracing a query-evaluation Virtual Machine.    
+`p`
+
+
+`p.
+The specifics of database updates %-- sticking again for 
+sake of exposition to single type-instances %-- depends 
+of course on types' internal organization.  
+For typically atomic types 
+(like 1, 2, 4, or 8-byte integers) updates might 
+only entail replacing one value with another, but 
+more complex values (`q.objects`/, in effect`footnote.Taking 
+the perspective that in some systems objects are formally 
+defined as aggregate structures (rather than atomic data-points) 
+and, even if not precisely stipulated, object/atomic value 
+distinctions tend to align `i.de facto` with object-classes 
+against, say, built-in types (cf. `Cpp;)`/) with multiple 
+and/or multi-value data-fields updates can include 
+adding or removing a value from a collections type-instance 
+as well as altering such a value, and so on.   
+For many compound types the collection of fields 
+includes more than one which are in turn `q.collections` 
+(e.g., vectors, stacks, queues, deques, and unordered sets/multi-sets, 
+plus map-arrays that are pair-lists with possible nonduplication 
+restrictions on the first element) subject to add/remove 
+operations, in contrast to full-on value-to-value 
+replacement.  Some collections have modification-restrictions 
+(e.g., values can only be added or removed from one or 
+both ends of a list, or, as in typical `q.sets`/, all added 
+values must be unique) or enforce constraints such as 
+monotone increase and decrease.`footnote.Consider a collections type 
+%-- a construction supported by the Virtual Machine I use for 
+demo purposes (discussed below) %-- which has only one insertion operation, 
+but will automatically place new values either at the beginning or 
+end of the list to preserve increase-direction; here, 
+new values have to be either greater or less than all 
+prior values.  Or, automatically sorted lists need only 
+one insertion operation because the insert procedure would 
+deduce the proper insertion-point.
+`footnote`  All of these are potential paths toward 
+legal mappings of type-instances between states 
+which initialized typed value can take on, given their 
+internal organization.  Nor is this discussion complete; 
+we could also mention reclassifying `q.union`/-type values 
+(whose instances can be one of several types) or 
+various types depending on binary arithmetic 
+(cf. tagged/`q.decorated` pointers, or 
+enumerations whose value can be members of 
+nominal-value lists `i.or` bitwise combinations 
+thereof, or unions where multiple type-tags 
+are valid by virtue of shared binary encoding, 
+in effect using one tagged value to update another 
+member of the union %-- a simple case being 
+integer/bitset unions where setting the 
+integer automatically sets or clears corresponding 
+fields in the bitset).  
+`p`
+
+
+`p.
+The mechanisms for aggregating multiple values 
+into individual type-instances tend to be 
+much more complex for general-purpose programming 
+languages such as `Cpp; (see unions, pointers, arrays, 
+multiple inheritance, enumerations and their 
+base types, etc.) compared to databases 
+(see `SQL; or `RDF; types); this is a proximate 
+cause of complications in persisting application-level 
+data.  Conversely, databases with more refined 
+type systems can (at least potentially) absorb 
+application data more conveniently.  For this 
+to work in practice, however, the 
+engine needs a query system which can 
+duly leverage type-system expressivity; the issues 
+involved here are well-demonstrated by 
+update-queries as I've mentioned.  Properly recognizing 
+application-level intra-type organization 
+depends on representing (and then 
+exposing to a query interface) the full spectrum 
+of morphisms through which a single type-instance 
+might be updated.  
+`p`
+
+
+`p.
+For complex types, an effective query-system would have 
+update operations that are more targeted than 
+just replacing one value with another 
+`i.tout court`/; instead, updates may only 
+involve one or some subset of all data-fields, 
+and (for multi-value fields) could involve 
+insertions/deletes in a collections context 
+rather than a direct value-change.  The degree to 
+which a database engine seamlessly interoperates 
+with applications depends on the latter 
+constructing data-packages (without undo effort) 
+that signal the `i.kinds` of updates 
+requested alongside the relevant new values 
+(notating, e.g., collections-context changes as 
+distinct from single-value morphisms).  
+Intuitively, flexible architectures 
+(e.g., hypergraphs) accelerate the requisite 
+implementations, although actually 
+supporting a query-interface satisfying 
+such ambitions depends on a confluence 
+of factors (e.g., underlying database 
+architecture but also query-representation 
+and query-evaluation protocols and the 
+tools to compile code/text or procedurally-generated 
+queries to internally-represented structures 
+suitable for evaluation).
+`p`
+
+
+`p.
+This section's discussion has focused on 
+updating a single type-instance centering on 
+the point that complex intra-type layout implies 
+a diverse set of query-based update options.  
+An `UPDATE; statement in `SQL;, say, 
+only (directly) supports one 
+particular `q.genre` of updates (value-to-value 
+edits in one or more discrete columns).  Given application 
+state which can be expressed in terms of modifications 
+to existing persisted values, keeping the 
+back-end in sync entails accounting for the changes 
+embodies in the new application-state by 
+presenting the back-end engine with (in general) a 
+series of updates; the more flexibly updates 
+can be encoded, the less development time 
+need be expended figuring out how to 
+translate application-state changes to updates 
+the engine can process.  This is one reason why a 
+diversity of data-modeling parameters can 
+streamline application integration: a flexibly 
+tableau of recognized constructions implies that 
+applications can describe updates with 
+relatively less boilerplate destructuring.  
+Consider the multitude of `q.sites` where 
+data associated with a hypernode can 
+be asserted, in the context of property-hypergraphs; at least 
+(and some systems may have more elaborate 
+constructions as well) properties `i.on` a hypernode, 
+nodes `i.in` the hypernode, and edges `i.from` a 
+hypernode to its peers.  This articulation 
+of site-varieties is, self-evidently, also a 
+list of update-forms.  Having multiple protocols 
+for describing updates allows different forms of 
+updates to be recognized with distinct semantics.  
+For example %-- consider again the attribute/property 
+distinction in `IFC; %-- updates to `i.properties` 
+(which would in general be ad-hoc annotations 
+on a hypernode less strictly regulated than 
+nodes encompassed `i.in` hypernodes) could be 
+subject to different validators than updates 
+performed via node-insertion or (potentially 
+Ontology-constrained) edge-insertion.      
+`p`
+
+
+`p.
+In effect, multi-parametric modeling 
+tableaus in the database `i.architecture` 
+propagate to multi-dimensional 
+options for encoding updates, which in 
+turn allows for coexisting update 
+protocols each with their own semantics.  
+Applications can then choose which 
+protocol most efficiently describes 
+any particular change in application-state.  
+`p`
+
+
+`p.
+Of course, these points `visavis; changing 
+`i.existing` database value have analogs 
+in the context of inserting `i.new` values.  
+Ideally, applications will have flexibility 
+in how encode data structure for insertion 
+into a back-end via database queries.  
+This is not only a matter of notating 
+all information which should be persisted, 
+but also providing cues to the engine 
+about how the new data should interact 
+with other records (e.g., using 
+primary keys or globally-unique 
+identifiers to secure inter-record 
+links analogous to %-- perhaps 
+translating %-- live-memory pointers) 
+and subsequent find/select queries.  
+What are the criteria through which 
+a database record, once deposited, should 
+be retrieved again in the future?  Most 
+database systems will give nodes/records 
+unique id's, but the whole point of 
+search queries may be that records 
+should be located based on known data 
+in contexts where an application does 
+`i.not` have the requisite `gid;. 
+`p`
+
+
+`p.
+Consider again the case-study of image-curation 
+software that could be used in a redevelopment/urban 
+planning context, such that photograph resources 
+include depictions of future building sites.  
+As suggested earlier, data associated with 
+each picture could reference construction-project 
+data (e.g., the number of units slated for 
+construction, or the identity of the firm contracted 
+to oversee the project), as well as, perhaps, 
+`q.generic` information (image format, dimensions, 
+color-depth, plus, say, `GIS; coordinates).  
+One consideration when designing such an application 
+would be how users would find images 
+that they hadn't seen before, or had not 
+revisited for an extended period of time 
+(so that the presumptive image `gid; is not 
+cached in recent history).  In would make sense 
+to track images by longitude and latitude, 
+for example, assuming that users would know such 
+data.  Perhaps street address (accounting for 
+the possibility that large-scale redevelopment 
+might alter the street grid so that pre-war 
+addresses, say, become obsolete; one might 
+still maintain a mapping from such addresses 
+to `GIS; coordinates so they remain useful 
+for queries); or (less granularly) by district 
+or city.  We can similarly envisage scenarios 
+where architectural details are mentioned 
+(`q.find images of sites within a 
+10-kilometer radius featuring planned 
+buildings over 4 stories tall`/).   
+`p`
+
+
+`p.
+For queries along these lines to work, 
+back-ends need to structure type-instances 
+such that (potentially large collections of) 
+values can be filtered into subsets 
+meeting specific criteria: `GIS; coordinates 
+restricted to a given locale, housing 
+matching a given contractor-name, and so forth.  
+When exporting info to a back-end, the 
+relevant details are not only the specific values 
+comprised by the new data but also 
+which fields may serve as eventual query-parameters, 
+and how they should be indexed.  
+Such `q.selectability` criteria have to be 
+encoded alongside persisted data structures 
+themselves, and convenient application-integration 
+entails supporting protocols for 
+noting pathways for query-retrieval 
+and doing so with minimal boilerplate code 
+(for analogous reasons as with update queries).  
+`p`
+
+
+`p.
+Of course, selection/retrieval and update protocols 
+tend to be defined on types rather than the type-instance 
+level.  To the degree that certain data-fields are 
+indexed and queryable (for retrieving instances 
+when their global id's are not at hand `i.a priori`/) 
+decisions as to which fields to thereby expose 
+tend to be made for each type %-- as part of the 
+type's design and contract %-- rather than 
+negotiated on a case-by-case basis per 
+instance (though note that properties in property-graphs 
+are possible exceptions; indeed this is one 
+rationale for property-graphs in the first place).  
+Similarly, type-level modeling tends to 
+define which update protocols to invoke for 
+different state-changes.  Accordingly, an expressive 
+query interface should allow stipulations regarding 
+updates and searches to be described as attributes 
+of `i.types` as well as single instances (e.g., 
+records and/or hypernodes) and to be deferred 
+from instances to type-contracts (analogously, 
+inferred in instance-contexts by virtue of type 
+attributions).  An obvious corollary here 
+is that query systems have to recognize type 
+descriptions as well as encodings of type-instances.  
+In effect, query languages need to include 
+`q.type-expression` languages where types' 
+attributes, internal organization, and 
+back-end protocols are duly notated (so that 
+type-information can be `q.loaded into` the 
+system and consulted as the engine resolves 
+how to accommodate insertions, updates, and 
+filtering for specific instances).  
+`p`
+
+
+`p.
+I will delay further discussion about type-descriptions 
+until after examining relevant Virtual Machine 
+concepts in greater detail.  Thus far I have 
+been alluding to `VM; in the context of query evaluation: 
+one way to implement query engines is to decompose 
+(the steps needed to execute) queries into 
+sequences of primitive or `q.kernel` operations 
+supplied through a `VM;.  While this is a productive 
+facet of `VM; applications, it overlaps with equally 
+consequential issues concerning how `VM; model 
+procedures in general (not just those befitting the 
+profile of database queries).  Indeed, in general 
+a `VM; targeted at query-evaluation should either 
+natively extend to or solicit 
+(via some kind of native-function interface) 
+general-purpose procedures available within 
+computing environments where databases and 
+applications are situated, because (in principle) 
+the results from arbitrary procedures could 
+potentially be desired as query parameters.  
+If (assuming an object-oriented context) 
+back-ends warehouse records encapsulating 
+objects with their specific classes, any 
+methods called on candidate objects 
+(e.g., those not otherwise 
+filtered out via the suite of selection-criteria 
+in a retrieval query) might plausibly be 
+useful as means to narrow result-sets.  
+Object-databases proper point to how 
+full-fledged method calls may be 
+hard to optimize (database contents are 
+not typically `q.live` objects that can be 
+passed to methods directly), but 
+there is no reason `i.a prior` why queries 
+should be limited to optimizable  
+criteria (for instance, if selective 
+stipulations allow results to 
+be narrowed to a reasonably small 
+set of candidates, fully instantiating 
+such potential matches as live-memory 
+objects and calling methods accordingly 
+would be a reasonable execution strategy).  
+In short, even when we are primarily 
+interested in Virtual Machines pressed 
+into serve as query engines, it would 
+be incomplete to exclude consideration 
+of general-purpose procedure calls and 
+how these are described, validated, and 
+executed by concrete `VM;.  I therefore 
+turn to procedure-encoding considerations 
+in the remainder of this chapter. 
+`p`
+
+
+

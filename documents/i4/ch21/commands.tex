@@ -45,19 +45,17 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 
 \include{acronyms}
 \include{math}
-%fRed
-
 
 \renewcommand{\b}[1]{\textbf{#1}}
 
-\let{\OldI}{\i}
+\let\OldI\i
 \renewcommand{\i}[1]{\textit{#1}}
 
-\newcommand{\communique}{communiqu\'e}
+
+
+\newcommand{\Schutzenberger}{Sch\"utzenberger}
 
 \newcommand{\codetext}[1]{{\small{}\textcolor{codegr}#1}}
-
-
 
 \newcommand{\INSERT}{\codetext{INSERT}}
 \newcommand{\UPDATE}{\codetext{UPDATE}}
@@ -66,6 +64,11 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 
 \newcommand{\thisSlashSelf}{\b{this}/\b{self}}
 
+
+\newcommand{\internewline}{
+
+\vspace{1em}
+}
 
 
 %\newcommand{\anondefin}[1]{\begin{definition}#1\end{definition}}
@@ -127,9 +130,17 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 %\vspace{-30pt}
 }
 
+\newcommand{\redbluegreen}{\{\textbf{red}, \textbf{blue}, \textbf{green}\}}
+
+\newcommand{\Csharp}{C\#}
+
+\newcommand{\INTMAX}{INT\_MAX}
+\newcommand{\SHRTMAX}{SHRT\_MAX}
+\newcommand{\INTMIN}{INT\_MIN}
+
+
 
 %\newcommand{\defin}[2]{\begin{definition}\textit{#1}: #2\end{definition}}
-
 
 
 

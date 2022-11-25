@@ -2,8 +2,7 @@
 `section.Conclusion`
 `p.
 This chapter has briefly touched on several 
-disparate themes in the realm 
-of software engineering, themes which 
+software-engineering themes, themes which 
 will be further examined, to varying 
 degrees, over the next three chapters.  
 In particular, domains such as 
@@ -18,8 +17,9 @@ thereof) and functional structures, with spatial
 and functional facets analyzed and visualized 
 side-by-side; and for application-front-end 
 event-handling pipelines, discussed here 
+(at the end of Section 1)  
 in the context of users interacting 
-with digital `GIS; maps.  Each of these 
+with `GIS; maps.  Each of these 
 contexts present engineering complications 
 that software components need to manage 
 %-- these are the sort of implementational 
@@ -31,7 +31,7 @@ cost-effective manner.  Situations such as
 Ukraine reconstruction point to how 
 software-development inertia can have 
 real-world consequences: ideally, 
-a variety of special-purpose applications 
+a plethera of special-purpose applications 
 will come on board soon after an 
 envisaged Russian cease-fire, helping 
 the international community to 
@@ -53,15 +53,15 @@ identify specific concerns that add layers
 of complexity and engineering requirements 
 to the respective classes of applications.  
 In terms of data sharing, programmers 
-should identify how to package domain-specific 
+need to identify how to package domain-specific 
 data in formats that can be stored in a 
 domain-neutral setting (like a `GIS; database) 
 and then reconstituted by other applications 
 with sufficiently overlapping capabilities, 
 a problem which involves both how 
 future applications will query for the 
-specific information they need and how 
-they will build in-memory 
+specific information they need in a given 
+context and how they will build in-memory 
 structures (in their own coding environment) 
 which are properly aligned with and 
 behaviorally replicate the objects 
@@ -75,7 +75,7 @@ are sufficiently semantically explicit
 to orchestrate cross-application 
 interoperability.  In the context 
 of event-handling, applications 
-should engineer a centralized protocol 
+need to engineer a centralized protocol 
 for defining documenting event signals 
 and response-routines.  It is one 
 thing to code event-handling procedures 
@@ -104,8 +104,8 @@ spatial/functional organization,
 applications need to construct data-packages 
 encapsulating system-functional 
 details which can be keyed to 
-locations such that 
-spatial coordinates serve as 
+spatial locations such that 
+spatial coordinates serves as 
 indices and handles to extra 
 data layers (again, `q.space` here 
 can have different or multiple 
@@ -150,12 +150,12 @@ spatial context (for some
 notion of `q.space`/).  In 
 `GIS;, for instance, imagine 
 the perspective of a developer 
-building an application tracking 
+building an applications tracking 
 data structures (consider water 
 systems, as in the above examples) 
 where functional units have 
 geospatial coordinates but also 
-many parameters 
+many functional parameters 
 which do not measure 
 `GIS; magnitudes or attributes.  
 Ultimately, this data needs to be 
@@ -229,8 +229,8 @@ functionally organized systems
 (with respect to energy consumption, 
 fire safety, internal temperature 
 dynamics, and so forth).  Structured 
-chains of `IFC; objects thereby serve as 
-a multi-faceted foundation from which, 
+chains of `IFC; objects therefore serve as 
+multi-faceted foundation from which, 
 on the one hand,  
 spatially and visually oriented 
 resources can be constructed 

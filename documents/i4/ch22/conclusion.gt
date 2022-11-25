@@ -1,0 +1,122 @@
+
+`section.Conclusion`
+`p.
+The final part of Section 2 has just 
+outlined a specific image-processing 
+workflow, enacted through the 
+`XCSD; image format.  That outline 
+points to several details within an 
+`XCSD; pipeline (arguably indicative 
+of common concenrs within many 
+different Computer Vision workflows) 
+which could involve cross-component 
+interop, insofar as image-analysis 
+is provided via dedicated plugins, 
+extensions, or third-party libraries 
+adopted by a host application.  As 
+mentioned above, a pipeline would 
+often defer to the host at least 
+for graphics-displays and initial 
+image acquisition, but the 
+`XCSD; workflow points to 
+other moments at which interop 
+may be necessary. 
+`p`
+
+
+`p.
+First, I mentioned the idea of consulting 
+local histograms interactively 
+so that human users might define 
+foreground and background poles 
+for sample/reference images in a series.  
+In this case the host application would 
+need to take responsibility for loading 
+histogram displays and processing 
+user actions.  For `q.local` histograms 
+the color counts are drawn from a small 
+area %-- via `XCSD; the image is predivided 
+into tierboxes anyhow, but in an interactive 
+case users need to select one tierbox 
+for which to view histogram data, which 
+would be an action handled by a front-end 
+component.  Assuming `XCSD; code calculates 
+the actual histogram and then sends this 
+data back to the front-end, which in turn 
+presents it visually, we see a multi-step 
+exchange of data between the two components.  
+Likewise, histogram displays may themselves 
+be interactive %-- given that these 
+visuals typically rank colors by showing 
+bars filled with a particular color with a 
+height documenting its occurance in the 
+histogram-area, the bars themselves 
+can serve as color-selectors, so for 
+example users could use histograms to select 
+colors assigned specific thematic 
+roles (such as foreground/background).  Such 
+actions would then generate further data 
+routed back to the processing component 
+(e.g., selected foreground/background 
+poles applied to form a new one-channel 
+reduction).  
+`p`
+
+
+`p.
+In the exchange just described, we assume that a 
+front-end exposes capabilities to 
+display histograms when provided the requisite 
+data, while image-analysis components 
+leverage this functionalities by 
+assembling histogram data.  Generalizing from this 
+example, image-processing front-ends 
+could support a variety of features 
+relevant to initiating and examining 
+Computer Vision pipelines, such as 
+displaying images with annotations 
+and overlays %-- this would include 
+showing intermediate graphics wherein an 
+image being analyzed is marked with 
+icons, lines, or contours representing 
+features extracted by detectors for Hough lines, 
+scale/rotation invariant keypoints, boundary-contours, 
+and similar algorithms.  Host applications would 
+thereby anticipate the general kinds of 
+interactive/presentational features which are 
+important to provide for an image-processing 
+context, but they would remain open-ended 
+with respect to the specific analytic 
+modules that may target their front-end 
+capabilities.  In particular, host applications 
+could then support a flexible spectrum of 
+analytic methods, insofar as new sorts 
+of algorithms could be introduced with their 
+own mathematical constructions; each component 
+can provide distinct analytic code so long as 
+it accepts a common protocol for 
+basic functionality involving acquiring, 
+displaying, and invoking front-end 
+features for analyzed images and image-series. 
+`p`
+
+
+
+`p.
+In short, the interop between image-processing 
+host applicarions and analytic modules  
+are a good example of bi-directional 
+data sharing between semi-autonomous components, 
+and fall under the rubrick of interop 
+situations where protocols may benefit 
+from formalization or (at least partial) 
+implementation via Virtual Machines.
+`p`
+
+
+`p.
+
+`p`
+
+
+

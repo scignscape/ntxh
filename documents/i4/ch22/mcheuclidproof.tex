@@ -1,0 +1,56 @@
+One formula for expressing Euclidean distances 
+in terms of \MCH{} would be (1) $d = \sqrt{x^2 + 2xy + 2y^2}$, 
+where $x$ and $y$ are the \MCH{} \textit{orthogonal} 
+and \textit{diagonal} components.   
+Assume the pair $\{x, y\}$ is modified by the 
+scalars $j$, $k$, respectively, for $|j| < x$ and $|k| < y$, 
+with $d^2$ correspondingly 
+modified by $h$.  The equation for $d^2 + h$ would be 
+$(x + j)^2 + 2(y + k)^2 + 2(x + j)(y + k)$; substracting the 
+square of $d$ as in (1) from this 
+yields (2) $h = j^2 + 2k^2 + 2xj + 2yj + 4yk +2xk + 2jk$.  
+It is obvious that h is nonnegative when $j$ and $k$ 
+both are.  If both are nonpositive, note that 
+$|2xj|$ would be $\geq{}j^2$, and likewise 
+for $|4yk|$ and $2k^2$, given $|j| < x$, $|k| < y$, 
+so the nonnegative terms (the squares) in (2) are more than 
+matched by terms with negative or zero values (all the others), 
+concluding that $h$ in this case has to be negative or zero.  
+These two cases (where $j$ and $k$ are not contravariant) 
+confirm (iii) ---  whenever $x$ and $y$ are both made larger, or 
+respectively both smaller, their corresponding Euclidean 
+length will be larger or smaller, as expected.  
+The question concerns mixing positive $j$ with negative $k$, 
+or vice-versa.  Suppose $\{x, y\}$ and $\{x + j, y + k\}$ represent 
+the same total number of steps, i.e., they sum 
+to the same amount, so $j + k = 0$.  Then, plugging 
+$k = -j$ into (2) yields (3) $h = j^2 - 2yj$.  
+In this case $|j| = |k| < y$, so the second 
+term is greater in magnitude than the first, which 
+forces $h$ to be negative when $j$ is positive; 
+when $j$ is positive, $h$ of course will be as well 
+because both terms in (3) then end up positive.  
+This proves that $k$ and $h$ are covariant, which 
+conforms to \MCH{} ordering: a greater diagonal term, 
+for the same total steps, is defined as a larger 
+\MCH{} value; since $h$ have the same sign as $k$, 
+the Euclidean distance will increase or decrease alongwith 
+the \MCH{}, demonstrating (i).  
+For $j + k$ not zero, we can rewrite (2) to include 
+$(j + k)$ terms, as in (4) $(j + k)^2 + 2(x + y)(j + k) + 2k(y + j)$.
+Setting $s = j + k$, (4) becomes $h = s^2 + 2s(x+y+k) + 2k(y - k)$.
+Let $a = x+y+k$ and apply the quadratic formula to solve for 
+$-s$: (5) $a \pm{} \sqrt{a^2-2k(y-k)+h}$.  If $h = 0$, we can move the bare $a$ 
+in (5) across the equals sign, and let $b = -a$ (note $b^2=a^2$) 
+to derive (6) $(b-s)^2=b^2-2k(y-k)$.  Expanding (6)'s left side 
+and rearranging yields (7) $s^2=2bs-2k(y-k)$.  This is only possible 
+if $s$ and $k$ are both zero, because by stipulation $s$, $b$, $k$, and 
+$y$ are integers, and a \resizebox{!}{7pt}{$\sqrt{2}$} would fall out of the right-hand-side 
+upon taking the root when converting $s^2$ to (integer) $s$ alone.  
+Since $s = j + k$, $s = k = 0$ forces $j = 0$, meaning that 
+$h = 0$ implies $j = k = 0$ --- and, also, 
+the converse is obvious from (2) --- proving that 
+two \MCH{} values can yield the same Euclidean 
+distance only if they are identical, which confirms (i).   
+
+

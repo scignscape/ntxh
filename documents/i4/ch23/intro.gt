@@ -1,0 +1,372 @@
+
+`section.Introduction`
+`p.
+For reasons such as I discussed earlier in Chapter 20, 
+computer programming languages offer only a flawed 
+and limited simulacrum of `q.Natural` Language 
+(i.e., human, spoken language).  This does not 
+rule out how structural features of programming 
+languages could potentially shed light on 
+human linguistics (shortly I will present 
+in greater detail where I think the most promising 
+or prominent structural correlations exist), 
+but the tenuous connections between human 
+and computer languages writ large invite 
+questions related to the nature of languages 
+that might be intermediate between them 
+%-- more complex and/or context-dependent 
+than computer code, but also more 
+computationally tractable than human 
+language itself. 
+`p`
+
+
+`p.
+This chapter is motivated in part by how these 
+sorts of questions could be applied to robotics, 
+which is an area of concern for several of 
+this book's chapters.  One foundational 
+question when engineering robots is how 
+humans should communicate with them.  
+If scientists' goals are to fabricate 
+`q.life-like` robots, perhaps taking a 
+vagule human-like physical form, then 
+it would be natural to envision robots 
+equiped with sophisticated Natural Language 
+Processing capabilities.  Such an aspiration, 
+however, could eventually run up against the 
+outer limits of computational NLP, 
+in the sense that any inanimate machine %-- even 
+ones with sophisticated AI capabilities %-- 
+may simply be incapable of parsing 
+and responsing appropriate to human speech 
+on a truly realistic level.  Of course, even 
+today NLP is sufficiently advanced to be a 
+very useful tool, but not to the point 
+where people in most cases would experience 
+actual communication with AI agents as 
+believably life-like, or a credible 
+substitute for the emotional, gestural, 
+and contextual nuances of linguistic interactions 
+between people (which are almost never 
+`q.purely` linguistic).
+`p`
+
+
+
+`p.
+I think these issues are still open-ended.  
+Philosophically, it is a reasonable 
+hypothesis to assume that most of the 
+`q.human` qualities of conversation 
+are driven by cognitive activity that 
+could be simulated at least in theory, 
+so a truly advanced robotic or AI 
+agent could %-- again, at least in 
+theory %-- asymptotically approach 
+a state of being considered 
+almost human-like in how it comunicates.  
+A counter-argument to this kind of analysis 
+might be that language-processing sophistication 
+is necessary but not sufficient for 
+being an effective discursive partner 
+%-- witness how people from different 
+cultures can have trouble understanding 
+one another, even if baseline 
+semantic and syntactic impediments 
+are removed.  Sports fans from London 
+and New York, say, somehow eavesdropping 
+on each others' conversations, could 
+very well fail to comprehend the respective 
+dialogs despite the two groups 
+speaking essentially the same language.  
+Likewise for comparing discussions about 
+US versus UK politics, or navigating 
+Brooklyn or Camden Town like a local 
+%-- inevitably, in short, there must 
+be some shared cultural and lifestyle 
+familiarty between conversants in order 
+for reasonable human dialog to take 
+place, because so much of the semantic 
+and referential details of our speech 
+remain unstated, an implicit part 
+of the discursive background rather 
+than exlicitly invoked lexically 
+or descriptively.  No-one in a 
+typical conversational context would 
+need clarification on how `q.Spurs` in the 
+US probably refers to a basketball 
+team but a Football club in the UK, or 
+`q.Soho` to a part of Westminster in 
+London but a part of Lower Manhattan in 
+New York.  These are matters 
+of shared life-experience, not of 
+linguistic competence.   
+`p`
+
+
+
+`p.
+How, in this sense, could a robot 
+`q.share` life-experiences with people?  
+On the face of it, such questions should 
+lead us to question whether realistic 
+NLP is ever truly feasible, because 
+even in a hypothetical world 
+where a machine with human-level 
+abilities of raw linguistic processing 
+could be built, that machine would 
+still not be `q.living` in a human 
+world and absorbing local culture 
+and dialect.  Could all of our 
+enculturated background knowledge 
+be adequately simulated on a 
+computer?  What about the emotive 
+and empathic dimensions of language, 
+wihout which it can be difficult to 
+distiguish, for instance, sarcasm from 
+sincerity?  Short of some empirical 
+disproof of mind-body reductionism 
+%-- i.e., the belief that all of 
+our feelings and experiences ultimately 
+derive from neurological phenomena, 
+which are not known to have any 
+physical properties that are truly 
+beyond the scope of computational 
+approximation %-- we certainly 
+cannot rule out the possibility 
+that truly human-like AI is theoretically 
+possible.  But absence of impossibility 
+is a weak argument for something 
+being realistic and feasible in practice, 
+and cultural/interpersonal issues 
+demonstrate that the hurdles 
+for NLP are not only linguistic in nature.  
+`p`
+
+
+`p.
+In short, even if we cannot be certain 
+that truly human-like AI (at least in 
+terms of linguistic competence) is 
+`i.not` possible, there seems to be 
+no reasonable argument to guarantee 
+that it `i.is` possible, so any 
+technological project which 
+depends on (something approximating) 
+human-like NLP is necessarily on 
+shaky grounds.  At the same time, 
+we should aspire to robot/human communications 
+which are more user-friendly than 
+artificial constructs like programming 
+languages.  Note that this is an 
+issue pertaining to robots' `q.users` %-- people who 
+should at some level guide a robot's 
+behavior in the course of its assigned 
+task, as compared to developers who engineer 
+their capabilities in the first place.  
+Robots' on-board operating systems can be 
+programmed in a variety of languages, 
+as is true for other embedded systems.  Low-level 
+computer code can provide the minimal 
+functionality allowing robots to 
+operate, such as any physical movements 
+or audio/visual processing of their 
+surrounding environment.  
+When a robot is performing a task on 
+behalf of a person, however, we can 
+assume that in most contexts that 
+users would not be communicating 
+with the robot through such 
+low-level code, but would instead 
+give instructions more conceptually.
+For a robot to move a box, say, 
+the person should be able to designate 
+the box in question and its destination, 
+allowing the robot's low-level machinery 
+to calculate the physical configuration 
+and movements appropriate for that goal.       
+`p`
+
+`p.
+Here, then, is a good example of the 
+`q.intermediate` language question I 
+alluded to before: what forms of 
+communication exist that are higher-level 
+than artificial languages such as computer 
+code, but simpler and more 
+computationally deterministic than 
+Natural language?  This actually 
+encompasses two topics; how 
+such `q.mid-level` languages should 
+be `i.designed` (their semantic and 
+syntactic properties %-- whether 
+their vocabulary and/or grammar is based on actual 
+human languages, albeit at a rudimentary 
+level, or something more endemic to a robot's
+assigned tasks), first, and, second, how 
+to translate expressions in such mid-languages 
+to low-level operations which can be 
+programmed as robots' baseline capabilities.  
+`p`
+
+
+`p.
+I will touch on these issues later in the chapter, 
+but here I will also be focusing on the 
+theme of language in that gap between humans 
+and computers %-- what resources can help 
+us think through the nature of language 
+outside the prototypes of mechanical computer 
+languages and holistic human language?  
+I argued at the start of Chapter 20 that calling 
+coding systems such as `Cpp; or JavaScript `q.languages` 
+is misleading, and in some ways the science of 
+building and using programming languages 
+(sometimes called Software Language Engineering) 
+has very little connection to linguistics 
+proper.  Note, however, that some 
+sophisticated lines of linguistic 
+research are driven or inspired at 
+least part by concepts that emerge, or 
+are formalized, in the programming-language 
+context.  So there are at least some 
+technical formations in software-language 
+implementation which may arguably shed light 
+on how people understand our own 
+human languages (some of these I reviewed 
+in Chapter 20, and will revisit 
+later in this chapter as well). 
+With that said, though, the kind 
+of artificial languages used to program 
+computers and machines have at best 
+only specific and limited structures 
+that shed light on natural language, 
+and as such are only an imperfect model 
+for the kind of intermediate 
+communication system which 
+we might envision possessed by 
+robots and other `q.Industry 4.0` machines.
+`p`
+
+
+`p.
+For this reason, it is a worthwhile line of research 
+to consider other examples of language/communication 
+%-- outside our existing prototypes in the form of 
+comptuer code, on the one hand, and natural human 
+language, on the other.  My idea in this 
+chapter is to approach the topic from the 
+perspective of `q.animal cognition`/: 
+that is, to consider whether communication 
+between non-human animals, or between people 
+and animals, can offer insights onto 
+forms of discourse which are simpler than 
+human speech but also, unlike computer code, 
+organically evolving (not artificially manufactured) 
+and inter-personal, emerging in the context of 
+animals' social lives and interactions.  
+`p`
+
+
+`p.
+More specifically, I think we can find useful 
+information in data about 
+human/animal communication, and I will 
+cite research on `q.talking` dogs as a case study 
+in human/animal dialog that can be 
+recorded empirically.  Most animal-communication 
+research has focused on how animals express 
+or coordinate thoughts with one another 
+(in the same species), and scientists have 
+developed ingenious methods to measure 
+the sophistication and infer the meaning 
+of animals' vocalizations.  While this 
+is important, equally valid insights can be 
+gleaned from watching animals such as 
+dogs and gorillas learn to speak 
+`i.our` language, whether through 
+signs/gesture or through programming 
+devices that produce words as if one 
+were `q.talking`/.  It seems clear 
+that dogs, at least, when they learn 
+to use devices such as `q.talk buttons`/, 
+are capable of linguistically interacting 
+with people on a non-trivial 
+level, forming compound sentences 
+and grasping the epistemic 
+and interpersonal dimensions of 
+human speech (e.g., using 
+language to convey new information 
+to someone, or comment on present
+situations).  
+`p`
+
+`p.
+In short, after 
+reviewing observations that paint a 
+preliminary but compelling picture of the 
+level of linguistic understanding 
+that dogs can attain, I will argue that 
+language at this level offers a plausible 
+model of `q.mid-level` language systems 
+that are richer than computer code but 
+still more rudimentary and tractable 
+than human language itself (as 
+practiced between fully-competent 
+speakers, in the context of 
+collective human activities or situations).  
+The primary source I will mention is 
+reports published by Christina Hunger, 
+a speech therapist who works professionally 
+with young children, about her experiences 
+when she encouraged her dog Stella to 
+communicate using buttons, that could 
+be programmed to pronounce a word or 
+phrase when pressed (allowing dogs 
+to produce that sound by stepping 
+on the buttons with their paws).  
+Inspired by Stella's progress in part, 
+it seems, `q.talking dogs` has become 
+something of an internet meme over 
+the last few years, and there is 
+growing data supporting the notion 
+that dogs have advanced, innate 
+language skills that with some 
+learning can be manifest in the 
+form of actual `q.talking`/, albeit 
+through the use of mechanical 
+speech-aids as intermediaries.
+`p`
+
+`p.
+The point is not that dogs conduct conversations 
+on even a child's level, but the 
+level of understanding they do possess is 
+noteworthy, especially when we consider 
+that they are not evolved to communicate 
+using `q.speech` and have to adjust to 
+mechanical artifacts to communicate with 
+humans on our own terms, which adds a 
+layer of complexity to the whole 
+process that would not be evident in, 
+let's say, bird songs or Chimpanzee calls.  
+How dogs nonetheless adapt to human 
+language, I will argue, presents 
+some interesting insights on 
+the nature of human language 
+itself %-- and, by extension, on 
+how some properties of human 
+languages can be simulated in 
+more primitive contexts, such as 
+robots' communication.
+`p`
+
+
+
+`p.
+
+`p`
+
+
+

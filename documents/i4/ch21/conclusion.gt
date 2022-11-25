@@ -1,0 +1,99 @@
+
+`section.Conclusion`
+
+`p.
+User Experience (`UX;) sometimes appears to be treated 
+as if it were a stylistic and subjective 
+dimension to software engineering more 
+than a technical or mathematical problem, but 
+effective User Interface design %-- and its 
+interconnections with such themes as database 
+engineering and `CPS; networks %-- hopefully 
+show that rigorous `UX; engineering requires 
+highly structured models of software and `GUI; 
+components, as well as application-level data types, 
+with their interconnections and value-synchronizations.  
+There are various ways to enforce disciplined 
+engineering standards to sustain quality `UX;, 
+but at least one set of tools for this 
+purpose can derive from `VM; resources 
+%-- whether in the form of script-like layers 
+interposed between `GUI; elements and application 
+procedures, or runtimes for unit-testing and 
+prototyping, or representations of application 
+code for static analysis (or some combination).   
+`p`
+
+
+`p.
+I contend that trends such as Industry 4.0 
+foretell an increasing convergence between 
+technologies related to User Experience and 
+User Interface, Cyber-Physical Systems, `ThreeD; 
+graphics, and Requirements Engineering.  
+The forces behind such dynamics reflect 
+how digitization and computer analytics 
+has the power to increasingly shapes 
+industries such as manufacturing, architecture, 
+green tech, and scientific research.  Modern graphics 
+cards can fluidly display interactive `ThreeD; 
+models of industrial parts (on a small scale) 
+to building renderings and urban designs 
+(on a large scale) and everything in between, allowing 
+users to visualize planned or manufactured objects/spaces 
+for design, training, or simulations.  Digital `q.twins,` 
+moreover, serve as presentations or anchoring-points for 
+data-aggregates specifying objects' or designs' 
+requirements and specifications.  The digital twin 
+concept implicitly posits relationships 
+between an object's or design's `ThreeD; spatial 
+form and its functional purpose, material/mechanical 
+properties, fault tolerance, energy consumptions, and 
+similar usability and quality-assurance metrics.  
+Stakeholders can use software both to form 
+visual images of materials and spaces as 
+physical environments and as functionally 
+organized systems, with software being able 
+to migrate between more geometric (e.g., `ThreeD; 
+rendering) and more data-oriented (e.g., specs-table) 
+modes.  Given these application capabilities, digital 
+platforms can simulate and analyze physical 
+and/or functional systems with an unprecedented 
+degree of computational accuracy and, simultaneously, 
+user interaction, allowing software ecosystems to be 
+a larger presence in industrial/architectural 
+(and etc.) planning, construction, and maintenance. 
+`p`
+
+
+`p.
+I do not sketch this account from the 
+point of view of advocacy, but instead 
+to point out that maximizing the benefits 
+of existing digitization capabilities 
+depends on software which systematically 
+and interactive unifies visualization 
+and data curation/analytic aspects 
+(e.g., `ThreeD; graphics alongside 
+specs presentations), which in turn 
+calls for advanced database and 
+application-development capabilities, 
+at least if software fitting these 
+characterizations is to be developed 
+in a cost-effective, extensible/adaptable, 
+and widely available manner.  I have emphasized 
+how Virtual Machine engineering can fit into 
+this overall sea-change in application-development 
+requirements and standards, with a more 
+holistic attention to such details 
+as database query-processing and `GUI; 
+design than were, arguably, emphasized 
+by earlier `VM; paradigms.  
+`p`
+
+`p.
+
+`p`
+
+
+

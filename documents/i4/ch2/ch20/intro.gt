@@ -124,7 +124,7 @@ in exactly `q.real-time`/).  We can only say that a
 properly implemented application for this example 
 will be a useful source of information about the 
 hockey game because it is engineered to satisfy the 
-requirement that, on most occasions, its visual 
+requirement that, on most occasions, it visual 
 interface will match the state we associate 
 with correct information about the game (we 
 assume the application is a front-end to 
@@ -146,7 +146,7 @@ among a given dialect community.
 `p.
 As a result, when considering how to formalize and 
 evaluate programing language `q.semantics` 
-we should not work in a paradigm where data structures 
+we should work in a paradigm where data structures 
 are innate proxies for real-world concepts, the 
 way that linguistic signifiers are communally-recognized  
 expressions of their correlated signifieds.  Instead, 
@@ -161,13 +161,10 @@ unlike a hockey score, one would need to represent
 the wickets taken for each side as well as their runs scored; 
 thus a two-valued structure (for hockey) would be 
 replaced by a four-valued one (or, equivalently, two number-pairs).  
-Of course, much more info could be modeled for any 
+Of cours, much more info could be modeled for any 
 sporting event (time ellapsed, for many sports, or 
 the number of remaining balls in a T20 innings; where 
-the game takes place; the stats on each player; and so on).
-`p`
-
-`p.  
+the game takes place; the stats on each player; and so on).  
 How much of this data is actually curated by any 
 given piece of software depends on decisions 
 made while the software is designed.  Data structures 
@@ -185,7 +182,7 @@ displays which stand in for objects by
 representing their properties textually or graphically 
 (the former being, for instance, a printed number 
 asserting goals/runs scored; the latter being a 
-way of visually conveying magnitudes, such as  
+way of visually conveying magnitudes, such as the 
 a bar's height or a color's hue to 
 present weather temperatures).   
 `p`
@@ -203,7 +200,7 @@ In this sense computers do not `q.understand`
 code the way that people understand language; 
 an application does not reach a desired state 
 given user input by treating code as a kind 
-of message or communique that it has to interpret.  
+of message or communique that is has to interpret.  
 Instead, computers are engineered (via compilers 
 and runtimes) so that source code can be 
 used as an indirect tool to predictably reconfigure 

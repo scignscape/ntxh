@@ -48,15 +48,25 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 %fRed
 
 
-\renewcommand{\b}[1]{\textbf{#1}}
+\renewcommand{\b}[1]{\textbf{{\small{}#1}}}
 
-\let{\OldI}{\i}
+
+\newcommand{\qb}[1]{\q{\b{#1}}}
+
+\newcommand{\qtt}[1]{\q{\texttt{#1}}}
+
+\let\OldI\i
 \renewcommand{\i}[1]{\textit{#1}}
+
+
+\newcommand{\Schutzenberger}{Sch\"utzenberger}
+
 
 \newcommand{\communique}{communiqu\'e}
 
 \newcommand{\codetext}[1]{{\small{}\textcolor{codegr}#1}}
 
+\newcommand{\lPACS}{\AcronymText{{\large{P}}ACS}}
 
 
 \newcommand{\INSERT}{\codetext{INSERT}}
@@ -88,6 +98,22 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 \usepackage{changepage}
 
 
+\newtheorem*{observation*}{Observation}
+
+
+\newcommand{\anonobservation}[1]{\vspace{12pt}%
+\begin{observation*}
+\lmargspac{5pt}{1.1}{}{}{%
+\small{#1}}
+\end{observation*}
+%\vspace{-30pt}
+}
+
+\newcommand{\observationproof}[1]{\vspace{-10pt}%
+\lmargspac{5pt}{1}{}{}{\noindent{\small{}\textit{\textbf{Proof}} #1}}}
+
+
+
 \newcommand{\spac}[2]{{\begin{spacing}{#1}#2\end{spacing}}}
 
 \newcommand{\lmargspac}[5]{\begin{adjustwidth}{#1}{0pt}\spac{#2}{%
@@ -111,7 +137,7 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 
 %\newcommand{\anondefin}[1]{\begin{definition*}#1\end{definition*}}
 
-\newcommand{\anondefin}[1]{%\vspace{2pt}%
+\newcommand{\anondefin}[1]{\vspace{8pt}%
 \begin{definition*}
 \lmargspac{5pt}{1.1}{}{}{%
 \small{#1}}
@@ -127,12 +153,43 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 %\vspace{-30pt}
 }
 
+\newcommand{\redbluegreen}{\{\textbf{red}, \textbf{blue}, \textbf{green}\}}
+
+\newcommand{\huesaturationvalue}{\{\textbf{hue}, \textbf{saturation}, \textbf{value}\}}
+
+
+\newcommand{\Csharp}{C\#}
+
+\newcommand{\ThreeSixty}{360\textdegree{}}
+
+\newcommand{\INTMAX}{{\small{}\texttt{INT\_MAX}}}
+\newcommand{\SHRTMAX}{{\small{}\texttt{SHRT\_MAX}}}
+\newcommand{\INTMIN}{{\small{}\texttt{INT\_MIN}}}
+
+\usepackage{enumitem}
+
+\let\OldDescription\description
+
+\renewenvironment{description}
+  {\begin{OldDescription}[style=unboxed]}
+  {\end{OldDescription}}
+
+
+\newcommand{\makeboxq}[1]{\makebox{\q{#1}}}
+
+
+\newcommand{\LatinOne}{\makebox{\texttt{Latin1}}}
+
+\usepackage{array}
+\usepackage[originalparameters]{ragged2e}
+\newcolumntype{M}{>{\RaggedRight\setstretch{.5}}p{.2\textwidth}}
+
+\usepackage{longtable}
+
+
+%\usepackage{listings}
+
 
 %\newcommand{\defin}[2]{\begin{definition}\textit{#1}: #2\end{definition}}
-
-
-
-
-
 
 
