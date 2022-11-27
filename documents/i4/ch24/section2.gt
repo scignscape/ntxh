@@ -1,0 +1,150 @@
+`section.GUIs, Robots, and Environments`
+`p.
+If it is true that the proper semantics 
+for computers and analogous computationally-engineered 
+artifacts (such as robots) is `i.procedural`/, 
+so that the `q.meaning` of an expression in 
+`q.language` (however rigid or artificial) is 
+the procedures which it designates or which 
+supply its implementation, then analyzing this 
+semantic requires explaining the 
+environment within which procedures 
+operate.  This does not mean only 
+one single procedure %-- the context 
+that obtains prior to its starting and 
+subsequent to its ending %-- but from a broader 
+vantage point the settings in which 
+we can speak of groups of procedures 
+executed in sequence, forming an 
+aggregate unit of computational activity.  
+As I pointed out at the start of Chapter 20, 
+most software applications are designed 
+to enter passive states awaiting user 
+input.  It is only after a user-driven 
+`i.event` %-- due `i.gestures` such as 
+clicking a mouse button or tapping a keyboard 
+letter/symbol %-- that applications launch a 
+series of procedures responding to 
+the user's (presumed) intent.  Typically 
+the series concludes with some visible 
+change to application state (typically something 
+the user sees on-screen) and then the 
+initial passive state is re-entered.  
+As such, the canonical context for software procedures on 
+aggregate is the bounded by the 
+`i.initial` user action (which sets parameters 
+on how the application reacts) and the 
+eventual (usually on-screen) content 
+presented to the user.  To the degree 
+that computers have `q.semantics`/, 
+we should analyze such semantics in 
+terms of whatever intermediate 
+processing connects the start of 
+these sequences (user gestures) to 
+the end (user-visible content).   
+`p`
+
+
+`p.
+In the case of robotics, the details are 
+similar, except that most robots do 
+not primarily function merely by 
+presenting information on-screen (unlike 
+personal computers or even `i.en situ` 
+computer-like devices with touch screens, 
+e.g., interactive transit displays).  
+A `GUI; console can be one part of a 
+robot's equipment, but more broadly 
+users expect robots to fulfill user 
+intentions by moving themselves or 
+external objects.  Although robot 
+actions might be preprogrammed 
+(and they can be semi-autonomous, 
+deciding some actions on their own), 
+to sustain the analogy with other 
+computing systems let's consider 
+the case where a robot launches a 
+series of actions in response to an 
+explicit request by a human user 
+(`q.lift the yellow box` or something similar).  
+In that case, the robot should respond to the 
+request by moving and/or entering a configuration 
+where it may physically comply.  (In some 
+cases the user input might be provided 
+in advance, with the expectation that 
+the robot only responds to such information 
+actively under certain circumstances; for 
+example, robots might be instructed to 
+perform some task only after they sense 
+a particular kind of change in their environment).
+Like `GUI;s front-ends to traditional 
+applications, the robot's procedures 
+propagate in response to user input, 
+and have a well-defined end-point, but 
+here the terminus of a procedure-sequence 
+would (primarily) not be something 
+visible on-screen, but rather a the 
+robot changing its location and/or configuration 
+in physical space (possibly affecting 
+some external object in the process).   
+`p`
+
+
+`p.
+The units of `GUI; presentations are 
+`q.application windows` (visible screen areas), 
+inside of which as `q.controls` such as 
+buttons, labels, scroll bars, magnitude-indicators 
+(consider how we drag an icon to partially fill 
+or empty a bar, to zoom in or out on a text or graphic 
+display) and dividing lines; within those 
+controls, in turn, can be text (including numbers) or 
+other displays of textual and/or quantitative 
+information.  Therefore, the `q.end state` of a 
+series of procedures, at the application level, 
+would be a change in visible `GUI; display 
+through some of these constitent elements.  
+Likewise, in the case of robots, 
+the components of a robot's `q.configuration` 
+would be angles of gears, extenders, wheels, 
+and whatever mechanical devices robot's use 
+to move and reposition themselves.  At 
+the culmination of a procedure-set enacted 
+in response to user input, then the robot 
+will in general be a different state with 
+respect to their location and to orientation of their 
+arms, graspers, mounted cameras, or whatever 
+other mechanical equipment they have on-board.  
+We can see these physical gadgets as analogous 
+to windows, controls, and text/number displays 
+in the `GUI; context. 
+`p`
+
+
+`p.
+Based on that analogy, decipering the semantics 
+of reactive `GUI; programming can be an 
+indirect pathway to formulating semantic 
+models apropriate for robots, because 
+the constituent parts of `GUI;s provide 
+structural analogs (with respect to 
+the origination and telos of procedure-sequences 
+reacting to user input) to robots' 
+movements and configuration.  In both 
+contexts, the `q.semantics` of the 
+computational system is determined by 
+how procedures react to user actions so as 
+to yield state-changes (to `GUI;s' visible 
+contents and robots' orients, respectively) 
+that are `q.correct`/, or consistent with 
+their initial intent, from the user's point of 
+view (`q.correctness` in this sense taking 
+the place of being `q.meaningful`/, for the 
+purpose of semantic formalization). 
+`p`
+
+
+`p.
+
+`p`
+
