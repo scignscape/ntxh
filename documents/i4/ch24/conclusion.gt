@@ -1,0 +1,56 @@
+
+`section.Conclusion`
+`p.
+This chapter has considered the semantics 
+of programming languages and `GUI; displays 
+alongside semantic and syntactic theses 
+related to Natural Language.  Combining 
+investigations into human language 
+with computational environments 
+produces an admittedly idiosyncratic 
+style of exposition, cycling from a 
+philosophical dialect (as much philosophy 
+of language as linguistics proper) 
+to the tone of a Stack Overflow 
+discussion board (as much programmer's 
+workshop as mathematically-inspired 
+computer science).   Despite the 
+fact that these two subject-areas lend 
+themselves to different discursive 
+conventions, I contend that 
+there are some structural parallels 
+between human and computer languages, 
+which such a juxtaposition may 
+highlight.  In particular, something 
+like a `q.procedural semantics` 
+can be theorized in both domains.  
+Also, type-theory offers a strategy 
+to work through notions of 
+preliminary comprehension: in both 
+human and computer languages, 
+a `q.procedural semantics` paradigm 
+needs to explain how parse-graphs 
+(for sentences and computer-code 
+statements, respectively) can be 
+isolated without the full feedback 
+loop of grammar cross-referenced 
+against semantic interpretation 
+(which, for reasons sketched 
+in Section 1, I believe is 
+deferred from the language-processing 
+stage to some extra-linguistic 
+cognitive or computational faculty).  
+One way to approach `q.partial` 
+interpretation (grasping enough 
+semantic detail to disambiguate 
+parse-structures) is via type-systems, 
+modeling provisional but only 
+approximate semantic data 
+(e.g., detailed enough to 
+recognize parts of speech 
+but not specific word-meanings).  
+`p`
+
+`p.
+
+`p`

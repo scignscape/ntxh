@@ -1,149 +1,455 @@
 `section.GUIs, Robots, and Environments`
 `p.
-If it is true that the proper semantics 
-for computers and analogous computationally-engineered 
-artifacts (such as robots) is `i.procedural`/, 
-so that the `q.meaning` of an expression in 
-`q.language` (however rigid or artificial) is 
-the procedures which it designates or which 
-supply its implementation, then analyzing this 
-semantic requires explaining the 
-environment within which procedures 
-operate.  This does not mean only 
-one single procedure %-- the context 
-that obtains prior to its starting and 
-subsequent to its ending %-- but from a broader 
-vantage point the settings in which 
-we can speak of groups of procedures 
-executed in sequence, forming an 
-aggregate unit of computational activity.  
-As I pointed out at the start of Chapter 20, 
-most software applications are designed 
-to enter passive states awaiting user 
-input.  It is only after a user-driven 
-`i.event` %-- due `i.gestures` such as 
-clicking a mouse button or tapping a keyboard 
-letter/symbol %-- that applications launch a 
-series of procedures responding to 
-the user's (presumed) intent.  Typically 
-the series concludes with some visible 
-change to application state (typically something 
-the user sees on-screen) and then the 
-initial passive state is re-entered.  
-As such, the canonical context for software procedures on 
-aggregate is the bounded by the 
-`i.initial` user action (which sets parameters 
-on how the application reacts) and the 
-eventual (usually on-screen) content 
-presented to the user.  To the degree 
-that computers have `q.semantics`/, 
-we should analyze such semantics in 
-terms of whatever intermediate 
-processing connects the start of 
-these sequences (user gestures) to 
-the end (user-visible content).   
+Current paradigms in desktop-style `GUI; engineering 
+have stayed relatively consistent since 
+roughly the start of the century.  The heyday of 
+`GUI; applications (often called `q.rich client` 
+or `q.thick client` interfaces, to distinguish 
+them from web applications which need to 
+run in an internet browser) largely coincided 
+with a period in programming methods where 
+Object Oriented techniques were predominant.  
+Neither Object-Orientation (`OO;) nor desktop-style 
+software is canonical to the same degree 
+at present as they may have been, say, 
+two decades ago, given the emergence of 
+popular programming language which 
+de-emphasize `OO; structures on the one 
+hand, and web or smart-phone apps as an alternative 
+to desktop environments on the other.  
+However, for many categories of 
+software %-- for instance, Scientific Computing, 
+or for that matter the `IDE;s (Integrated 
+Development Environments) that programmers 
+use to write other programs (of all 
+varieties) %-- desktop technology 
+remains the only feasible option.  It is impractical 
+to engineer applications that work in web 
+browsers or within the limited screen-size of a 
+smart phone, once applications get past a 
+certain threshold of functional and 
+presentational complexity.  For this discussion, then, 
+I will refer to `GUI; applications as canonically 
+native-compiled software components that run on a 
+desktop computer or a similar environment 
+(as opposed, for example, to web applications 
+which are viewed in a browser and run by 
+code interpreted through the browser rather 
+than compiled to native machine instructions).        
 `p`
 
 
 `p.
-In the case of robotics, the details are 
-similar, except that most robots do 
-not primarily function merely by 
-presenting information on-screen (unlike 
-personal computers or even `i.en situ` 
-computer-like devices with touch screens, 
-e.g., interactive transit displays).  
-A `GUI; console can be one part of a 
-robot's equipment, but more broadly 
-users expect robots to fulfill user 
-intentions by moving themselves or 
-external objects.  Although robot 
-actions might be preprogrammed 
-(and they can be semi-autonomous, 
-deciding some actions on their own), 
-to sustain the analogy with other 
-computing systems let's consider 
-the case where a robot launches a 
-series of actions in response to an 
-explicit request by a human user 
-(`q.lift the yellow box` or something similar).  
-In that case, the robot should respond to the 
-request by moving and/or entering a configuration 
-where it may physically comply.  (In some 
-cases the user input might be provided 
-in advance, with the expectation that 
-the robot only responds to such information 
-actively under certain circumstances; for 
-example, robots might be instructed to 
-perform some task only after they sense 
-a particular kind of change in their environment).
-Like `GUI;s front-ends to traditional 
-applications, the robot's procedures 
-propagate in response to user input, 
-and have a well-defined end-point, but 
-here the terminus of a procedure-sequence 
-would (primarily) not be something 
-visible on-screen, but rather a the 
-robot changing its location and/or configuration 
-in physical space (possibly affecting 
-some external object in the process).   
+Object-Oriented techniques remain the predominant 
+method for `GUI; development in this sense, 
+largely withstanding the criticisms often 
+leveled against the `OO; paradigm (even if they  
+are warranted in other contexts, such as 
+server-side programming).  It is reasonable 
+to conclude that `OO; is an effective 
+modeling tool for `GUI; functionality, one 
+which cannot readily be replicated by functional 
+programming (`FP;) langauges, for example 
+(to prove the point, consider that `FP; bindings to 
+`GUI; software libraries, particularly cross-platform 
+ones %-- i.e., intermediate libraries that 
+allow `FP; code to construct and manipulate 
+`GUI;s %-- are notoriously buggy, poorly maintained, 
+and/or difficult to use; for example, compiling and 
+merging these libraries with an application's 
+overall code base tends to be more difficult 
+with `FP; bindings than using `OO; libaries 
+written in native languages, such as `Cpp;, directly). 
+So, again narrowing the focus of the current 
+discussion, we may consider general-purpose models 
+of `GUI; elements and structures to be 
+preeminently Object-Oriented.   
 `p`
 
 
 `p.
-The units of `GUI; presentations are 
-`q.application windows` (visible screen areas), 
-inside of which as `q.controls` such as 
-buttons, labels, scroll bars, magnitude-indicators 
-(consider how we drag an icon to partially fill 
-or empty a bar, to zoom in or out on a text or graphic 
-display) and dividing lines; within those 
-controls, in turn, can be text (including numbers) or 
-other displays of textual and/or quantitative 
-information.  Therefore, the `q.end state` of a 
-series of procedures, at the application level, 
-would be a change in visible `GUI; display 
-through some of these constitent elements.  
-Likewise, in the case of robots, 
-the components of a robot's `q.configuration` 
-would be angles of gears, extenders, wheels, 
-and whatever mechanical devices robot's use 
-to move and reposition themselves.  At 
-the culmination of a procedure-set enacted 
-in response to user input, then the robot 
-will in general be a different state with 
-respect to their location and to orientation of their 
-arms, graspers, mounted cameras, or whatever 
-other mechanical equipment they have on-board.  
-We can see these physical gadgets as analogous 
-to windows, controls, and text/number displays 
-in the `GUI; context. 
+Accordingly, `GUI; elements are canonically 
+objects with state (`FP; langauges often 
+are designed around `q.stateless` values, but 
+in the `GUI; context recognizing 
+mutable state appears to be the 
+most natural digital encoding of the 
+phenomenon being programmed, namely 
+visible windows and parts thereof 
+wherein applications present information 
+to users).  There are several different 
+facets of `GUI; object-state, which may 
+be grouped into three overall categories:
+
+`description,
+
+`item ->> Visual Style ;;  Effective 
+`GUI; design often depends on conscientious 
+choices for colors and other visual details.  
+This is particularly true because the 
+visual appearance of `GUI; elements includes 
+not only how they appear in their `q.normal` 
+state, but also how their appearance is 
+subtely modified as a cue to users trying 
+to orient themselves `visvis; applications' 
+interactive features.  For example, 
+`GUI; buttons and clickable spans of text 
+almost always provide some visual 
+indication that these are not only 
+static elements, but can respond to 
+user events, such as clicking the 
+mouse while the cursor hovers over a button.  
+To help guide users, buttons (and text, when 
+appropriate, plus other clickable `GUI; controls) 
+take on a different style, usually with 
+a variant color scheme, when the cursor 
+`q.hovers` over the element (sometimes called a 
+`q.mouseover` or `q.rollover` state) %-- this visual cue 
+shows that the control is indeed clickable 
+and that the mouse is currently positioned 
+on the item, so that clicking the mouse 
+(via a physical mouse-button) is understood 
+to be an action for `q.clicking` the 
+(virtual) `GUI; button/control.  Once a button 
+`i.is` clicked and while the reponse is 
+progressing, a button may appear in a 
+`q.down` state, which has a style distinct 
+from both normal and rollover.  Alternatively, 
+some buttons (or other controls, such as 
+checkboxes) are not primarily designed 
+for requesting a specific action, but 
+rather to set some flag or indicator 
+(e.g., a checkbox in a `GUI; area related 
+to text-searching would be set when users 
+want to do a case-sensitive match %-- in 
+which a capitalized word for instance 
+would not be considered a match of a 
+lower-case search phrase %-- whereas the 
+default setting, indicated by an 
+unchecked box, would be case-insensitive). 
+
+`pseudoIndent; Moreover, buttons and other `GUI; elements 
+can sometimes be `q.disabled`/, meaning 
+that one cannot interact with them 
+according to normal patterns because 
+(given present application-state) 
+their associated actions would 
+be impossible or illogical.  For instance, 
+a button which saves a file (i.e., 
+signals the application to enact that 
+functionality upon being clicked) 
+would not make sense if there is no 
+open file visible through the front end.  
+In that case, a disabled state and its 
+style would indicate to the user 
+that the button is not presently 
+able to accept interactions 
+(it is common to use gray 
+colors to cue such states), but 
+the styling of these states 
+should not obscure the control's 
+primary purpose when it `i.is` 
+enabled.  For example, a disabled 
+`q.save` button should not be 
+given a style where it is 
+difficult to read the `q.save` 
+label (or whatever icon 
+replaces it). 
+
+`pseudoIndent; As illustrated by button-states, 
+most `GUI; controls have multiple different 
+visual states and their changes are intended 
+to cue users on how the controls may 
+be utilized interactively.  For this reason 
+graphic styles have to be designed attentively, 
+because each control-state should be visually 
+distinguished from others, but also the 
+styles should not intefere with the 
+control's primary functions.  For example, a 
+button's descriptive label/text (and/or 
+its icon) must remain visible even while its 
+background and/or outline color (or other 
+style-state effects, such as a color-gradient) 
+changes.  Style rules for `GUI; elements in 
+general need to adopt color schemes in which 
+coloring is relatively nonobtrusive 
+(colors should not be overly dark or high-contrast) 
+but still allows components to have a variety of 
+different states.
+
+`pseudoIndent; Many applications do not use a single 
+style-scheme, but rather allow their styles to 
+be adapted for different users and/or different 
+platforms.  Most Operating Systems have 
+preferred stylistic concepts, so that 
+applications on a Mac tend to follow different 
+conventions than those on Windows, or Linux 
+(although Linux styles are influenced by 
+users' choice of desktop environments, which can 
+be fine-tuned independently of the underlying 
+operating system, in contrast to Mac or Windows).  
+Consistent visual patterns from one application 
+to another help users familiar with one program 
+to learn how to use new software more 
+quickly, so applications generally try to 
+conform to Operating System standards; as such, 
+cross-platform applications may employ 
+multiple style schemas, depending on the 
+kind of computer where the application happens 
+to be running.  In addition to these 
+operating-system variations, applications 
+may also employ flexible styles that can 
+be adapted for different users, in case 
+someone wants to view larger text, say, 
+or wants to switch between different 
+(human) languages for `GUI; labels. 
+ 
+`item ->> Information Content ;;  Most 
+`GUI; elements exist to show data, so 
+their state is obviously influenced by the 
+nature of information they seek to present 
+at any given time.  In the simplest 
+case, this data is in textual for, or 
+is numeric data presented textually.  
+For example, consider a label that 
+shows the name and folder path of a file 
+currently being viewed; when a new file 
+is opened, the text shown on that 
+label will be updated.  Here the relevant 
+data is presented just through a text 
+sequence.  Or, a digital map might 
+have labels to represent the current 
+Latitude and Longitude coordinates 
+under the cursor.  These are numeric 
+values, but can be represented for 
+users merely by showing the numbers 
+in character form.    
+ 
+`pseudoIndent; Other numeric displays, however, 
+may represent magnitudes more pictorially.  
+Temperature, for example, may be expressed 
+by coloring a bar at a height proportionate 
+to degrees Farenheit or Celcius; the bar 
+filled higher to the top would indicate 
+higher temperatures, and lower bars 
+show colder temperature.  The color also 
+could reinforce these visuals, with warmer 
+temperatures represented via reds and yellows 
+and near-freezing conditions cued by 
+blue or purple.  For some `GUI; controls, 
+numeric values might be conveyed by 
+visuals mimicking real-life physical 
+gadgets, so the volume on an audio player 
+could be shown via circular indicators 
+mimicking the knobs on a stereo.
+
+`pseudoIndent; One relevant contrast 
+between numeric and textual data is that 
+the latter can be long and open-ended; 
+`GUI; controls designed to show paragraph-like 
+text can represent content spanning many lines.  
+On the other hand, numerical indicators 
+typically show only one or two quantities, 
+particularly if they are gadget-like displays 
+(relying on bar/line-heights or angles to 
+connote magnitude, rather than printed numerals).  
+Multi-part numeric data would then normally 
+be represented via collections of different 
+controls.  Where appropriate, numeric 
+data sets could also be shown via charts or 
+diagrams, which could be static images or 
+aggregate components with multiple indepentent controls.
+
+`pseudoIndent; Aside from textual and numeric 
+data, some `GUI; controls are engineered to 
+show `TwoD; images, or even interactive 
+`ThreeD; graphics (in the latter case, 
+users can modify `ThreeD; scenes %-- moving 
+or rotating the display to show different 
+angles onto the scene, which creates the 
+illusion of three dimensions even though the 
+graphic at any moment in time is confined 
+to a `TwoD; computer screen).  Although we can speak 
+of graphics displays as presenting `q.information`/, 
+this is a more informal usage if a control shows, 
+for example, a photograph.  However, images 
+can also be generated on-the-fly to visualize 
+data structures, in which case we could 
+say that image-graphics (at least when showing 
+tools such as charts, graphs, or diagrams) 
+represent one strategy (separate from text and 
+indicators) for data-visualization.  Image 
+data, then, occupies a gray area where 
+we can sometimes speak of controls simply 
+showing users the contents of an image-file 
+and sometimes instead treat image-displays 
+as vehicles for presenting structured 
+data analogous to other kinds of `GUI; controls.     
+
+`pseudoIndent; To some degree this can also be 
+true of text displays, when for example a 
+control is intended to show contents of an 
+`HTML; or `PDF; file.  The `PDF; format, in particular, 
+is engineered so that each individual document-page 
+becomes treated by applications as if it 
+were and image or photograph (`PDF; text is 
+not a data structure; pages instead are 
+rendered and provided to `GUI; front-ends 
+via mechanisms similar to photo-displays).  
+On the other hand, `PDF; files also 
+often include word-data so that 
+applications can perform searches inside 
+`PDF; text (although such data tends to be 
+imperfect, with situations such as 
+hyphenated words, ligatures, and foreign 
+accents causes transcription errors; in short, 
+`PDD; does not directly provide an 
+accurate machine-readable transcript).  Text in 
+`HTML; is similarly largely static, but users 
+can select character-ranges and activate 
+hyperlinks in both formats (this is true 
+for any `HTML; document and most `PDF;s).  
+Controls showing full text files, then, 
+analogous to image-displays, are in some 
+sense intermediate between organized 
+information-displays which directly map 
+data structures to `GUI; aggregates and 
+raw file-viewers which are only 
+in an indirect sense representing 
+`q.information`/, but are primarily 
+rendering file-contents into a static visual form. 
+ 
+`pseudoIndent; The more canonical case 
+of `GUI; controls showing structured 
+data is one where `GUI; screen-areas are 
+subdivided into units that represent 
+individual data fields on a fine-grained 
+scale.  For example, tabular data  
+or `CSV; (Comma-Separated Value) files 
+can be presented via spreadsheet-like 
+controls, which are subdivided (by 
+rows and columns) into cells that 
+typically have one single numeric 
+(or short textural) data.  Data shown 
+in these sorts of displays may originate 
+from files, insofar as such `GUI; controls 
+are used to access files they need to 
+load data into computational structures 
+first, and then map individual parts 
+of these structures onto parts of the 
+`GUI; display.  The correlation between 
+files and front-end controls is therefore 
+granular and systematic, whereas 
+image-viewers simply calculate how to render 
+pictural data via on-screen pixel-areas and 
+display the resulting graphs visually, 
+without constructing distinct areas or 
+sub-windows to show specific parts of a 
+loaded file.  Text displays can be between these two 
+alternatives; they are largely unstructured 
+(like pictures) but portions of text may 
+be isolated as if they were interactive windows 
+(such as hypertext links) and users may 
+select character-ranges (e.g., for copy-and-paste) 
+in which case the screen-area spanning 
+selected text needs to be treated as an 
+interactive window in some sense.   
+ 
+`item ->> `GUI; controls as containers for other controls ;;  
+Because controls whose explicit purpose is 
+to render individual data-units tend to handle 
+relatively small units of information 
+(e.g., single numeric values), multi-part 
+data structures need to be displayed through 
+higher-scale controls that group together 
+such more narrowly-focused controls.  Partly, 
+containers along these lines serve to aggregate 
+smaller controls in an orderly manner; for example, a 
+display of several numeric fields could be 
+arranged with a single key-value pair on each 
+line of a multi-line list (tables and 
+spreadsheets, grouped by both rows 
+`i.and` columns, are a more complex 
+organizing motif).  `lGUI; containers 
+do not need a fully symmetrical 
+layout; often smaller controls are 
+arranged in table-like patterns but 
+with varying numers of elements on 
+each line/row, depending on the 
+amount of space each element needs.  
+The important detail is that users 
+can visually isolate and comprehend 
+specific points of information, which is 
+easier if `GUI;s are visually balanced and 
+logically arranged.  Grouping 
+related controls %-- and leaving 
+spaces (or drawing lines) between 
+different such groups %-- is 
+also a useful layout convention.
+
+`pseudoIndent; Apart from just organizing 
+controls, `GUI; containers can also 
+compensate for limited screen real-estate: 
+`GUI; windows often have more data 
+available than can be shown on-screen 
+all at once.  As such, containers 
+can use various tactics to 
+show some contents and hide others, 
+such as scroll-areas (where users 
+manipulate scroll bars to alter 
+which controls are visible and 
+which are hidden); tab/notebook 
+windows where entire (sub)windows 
+are `q.stacked` or lined up so 
+that only one window is visible at a 
+time; dialog boxes (which are 
+typically temporary displays that become 
+visible to show the user specific 
+information and then are closed); 
+`q.wizards` (in effect, multi-page 
+dialog boxes); and `q.collapsible` 
+displays, whose parts can be 
+toggled between visible or hidden 
+states.  An canonical example 
+of the latter is lists of files in 
+folders, where individual folders 
+can be seen in an `q.open` state 
+(such that folder-contents, including 
+other folders) or `q.closed`/, 
+and likewise for subfolders inside 
+(open) folders, and so on.  These 
+kinds of controls are sometimes 
+compared to an accordion, because 
+folders and subfolders can be 
+opened or closed, their screen-area 
+expanding or contracting, creating a 
+visual effect vaguely reminiscent 
+of accordion leaves' folding patterns.   
+`description`
 `p`
 
 
 `p.
-Based on that analogy, decipering the semantics 
-of reactive `GUI; programming can be an 
-indirect pathway to formulating semantic 
-models apropriate for robots, because 
-the constituent parts of `GUI;s provide 
-structural analogs (with respect to 
-the origination and telos of procedure-sequences 
-reacting to user input) to robots' 
-movements and configuration.  In both 
-contexts, the `q.semantics` of the 
-computational system is determined by 
-how procedures react to user actions so as 
-to yield state-changes (to `GUI;s' visible 
-contents and robots' orients, respectively) 
-that are `q.correct`/, or consistent with 
-their initial intent, from the user's point of 
-view (`q.correctness` in this sense taking 
-the place of being `q.meaningful`/, for the 
-purpose of semantic formalization). 
+There are several notions of `GUI; controls' 
+`i.state` covered by the above 
+breakdown.  Controls 
+can have `i.functional` states, reflected 
+in style changes, such as a button 
+in `q.normal` or `q.hover` 
+modes (or also, say, `q.down`/, `q.checked`/, 
+and `q.disabled).  Most controls' 
+state is also determined by the 
+data they present (e.g., for 
+single-value numeric indicators, 
+the specific quantity 
+expressed by the control at a given 
+point in time).   
+
 `p`
 
 
+
+`subsection.The semantics of GUI-control state`
 `p.
 
 `p`
