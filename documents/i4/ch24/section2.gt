@@ -91,7 +91,7 @@ visual appearance of `GUI; elements includes
 not only how they appear in their `q.normal` 
 state, but also how their appearance is 
 subtely modified as a cue to users trying 
-to orient themselves `visvis; applications' 
+to orient themselves `visavis; applications' 
 interactive features.  For example, 
 `GUI; buttons and clickable spans of text 
 almost always provide some visual 
@@ -303,7 +303,7 @@ applications can perform searches inside
 imperfect, with situations such as 
 hyphenated words, ligatures, and foreign 
 accents causes transcription errors; in short, 
-`PDD; does not directly provide an 
+`PDF; does not directly provide an 
 accurate machine-readable transcript).  Text in 
 `HTML; is similarly largely static, but users 
 can select character-ranges and activate 
@@ -437,20 +437,910 @@ can have `i.functional` states, reflected
 in style changes, such as a button 
 in `q.normal` or `q.hover` 
 modes (or also, say, `q.down`/, `q.checked`/, 
-and `q.disabled).  Most controls' 
+and `q.disabled`/).  Most controls' 
 state is also determined by the 
 data they present (e.g., for 
 single-value numeric indicators, 
 the specific quantity 
 expressed by the control at a given 
-point in time).   
-
+point in time).  And, for 
+containers (`GUI; controls which 
+group together multiple smaller controls), 
+state is also characterized in 
+many cases by the interplay 
+of which elements are currently 
+visible, and which hidden.
 `p`
 
+
+`p.
+The forms of `GUI; state just 
+enumerated refer specifically to 
+controls' features that are 
+visible to users, so that state-changes 
+convey information.  This includes 
+specific data-points which a 
+control is designed to display, such as a 
+numeric value; it also includes 
+hints guiding the user to interoperate 
+with a `GUI; most effectively.  Mouseover 
+effects, for instance, communicate 
+which controls can be `q.clicked` 
+and which not.  There are other, more subtle 
+forms of cues as well.  For example, 
+when the mouse hovers over the corner of a 
+resizable control (so that `q.dragging` %-- 
+moving the mouse with the left button held down 
+%-- adjusts the control's size by pulling the 
+corner inward or outward) typically the 
+cursor, that marks the current mouse position, 
+will switch to a different icon (one 
+drawn to imply something getting larger or smaller); 
+there might be extra coloration or thickened 
+lines at that corner too.  Similar patterns 
+apply to other `q.drag` scenarios, such as 
+moving a divider line between two parts of a 
+`q.split` container, where different controls lie 
+on either side of the line; moving the 
+line resizes both parts of the container 
+(one gets larger, the other smaller) potentially 
+hiding or unhiding contained content and controls (depending 
+on which side their on).  Another pattern is 
+`q.drag and drop`/, typically an icon is moved 
+from one container to another; in some contexts 
+the receiving container takes on a colored background 
+to convey that it is not possible to drop an 
+item on its interior.  
+`p`
+
+
+`p.
+Some visual hints are explicitly designed to inform 
+users about applications' features, or the 
+status of current operations.  For example, a 
+mature front-end will often have `q.tool tips` for 
+many controls, where hovering a mouse over the 
+control causes a box of explanatory text to 
+temporarily appear, explaining the purpose 
+of that `GUI; element.  Tooltips serve both 
+as didactic guides and as further visual 
+markers that the relevant control accepts 
+interactions.  Other examples of informative 
+`GUI; features include progress bars (which 
+are usually visible only while an operation is 
+ongoing, such as downloading a file); message 
+boxes (presenting users with brief informatic 
+text, such as declaring that a download has 
+completed); and status bars (typically single-line 
+controls with text related to recent activity, 
+e.g., `q.download complete`/: unlike 
+a message box, which might also inform the 
+users of something like a download completing, 
+status bars are usually permanently visible in the 
+front end).  For container-controls 
+that alternately show and hide inner contents, 
+visual cues sometimes clarify what material 
+is currently visible: e.g., a `q.notebook` 
+container, which has multiple tabs each 
+showing a different window, will color and 
+outline the tab corresponding to the 
+currently open window with a different 
+(more emphasized) style than the other tabs 
+(whose windows are invisible at present).
+Details can also be conveyed by 
+discreet changes to textual data: for example, if a 
+file has been modified and not yet saved, 
+a label or status bar showing the file name 
+will often append a small marker, such as an 
+asterisk, to the file name, reminding users 
+that they may need to save the file.     
+`p`
+
+
+`p.
+Style conventions also inform how `GUI;s help 
+users track the current mouse position.  
+In general, the mouse is tracked with a cursor, 
+which moves across the screen when users 
+move the mouse (or run their fingers against a 
+touchpad); a mouse click (or tap against a 
+touchpad) is understood by the application 
+to signal the user's intent to execute a 
+`q.click` gesture at the screen position 
+where the cursor currently hovers.  The cursor 
+will then take on different icons depending 
+on how the click would be processed, given 
+the control under the mouse position (an 
+example mentioned above would be 
+a `q.resize` icon when the mouse hovers 
+over a corner; this works also for 
+some control's edges).  In some cases the 
+on-screen mouse position can be correlated with 
+some physical or empirical coordinate 
+system %-- a good example is digital 
+maps, where positions inside the map correpond 
+to latitude and longitude numbers.  
+Here it is common to print the geographic 
+coordinates next to a corner of the map, 
+so that the numbers change as users 
+move the mouse around the map-view, which 
+both aids users if they are trying to find a 
+specific latitude/longitude pair and 
+helps visually reinforce the idea that 
+mouse-position maps directly to geospatial 
+points.  A similar pattern in one dimension 
+would be using a mouse to advance or rewind 
+an audio or video player, wherein a numeric 
+control shows the time ellapsed at different 
+points relative to the file's start (the 
+convention being to pair audio/video 
+controls with a line-bar and position 
+indicator such that moving the indicator 
+right/left implies forward/backward in time, 
+respectively).  Finally, some controls 
+display graphics or data charts/diagrams 
+against a background of orthogonal gridlines 
+(similar to `q.graph paper` used for 
+drawings), or sometimes just the 
+lattice-points at gridline intersections.  
+In these contexts mouse position may be 
+indicated by highlighting the gridlines 
+which a mouse passes over as it moves. 
+`p`
+
+
+`p.
+One takeaway from this overview is that 
+well-engineered `GUI;s are highly 
+interactive; there are many conventions 
+which govern how front-ends should 
+present subtle visual cues and state-changes 
+to assist users when interactive 
+with the application.  Users may not 
+appreciate the full scope of these effects, 
+becoming habituated to `q.responsive` 
+features and perhaps absorbing them at 
+only a subconscious level; however, 
+front-ends which fail to implement 
+expected interactive patterns, where 
+`GUI;s are not sufficiently responsive 
+in terms of giving users frequent feedback 
+on current state (such as mouse position)
+and interactive possibilies, would 
+almost certianly be experienced by 
+users as erratic and confusing.  
+Most of the front-end patterns 
+mentioned here are probably familiar 
+to most people who sometimes work on 
+desktop-style computers, but it is 
+nonetheless useful to outline 
+them explicitly, precisely because 
+well-engineered responsiveness 
+effects will be subtle and non-distacting.  
+When we appreciate the full scope 
+of interactive patterns, we can 
+perceive the complexity of standard 
+`GUI; programming: a well-featured 
+front-end application will typically 
+have a large collection of 
+associations and interconnections 
+between `GUI; controls, and mappings 
+between control-state and 
+visual styles/interactive cues.  
+Systematically engineered application 
+will carefully document these 
+interconnections and implement 
+the associated front-end functionality 
+via a consistent set of coding patterns.  
+`p`
+
+
+`p.
+As dicussed in this chapter (and also 
+touched on at the start of Chapter 20), 
+application functionality can be 
+analyzed in terms of operations 
+and procedure-sequences that are, 
+in effect, bookended by user 
+actions (which invite responses from 
+the appliction) and by visible 
+`GUI; changes (changes in the 
+state of one or more controls, 
+communicating the users the 
+results of the actions they 
+requested).  Reviewing forms of 
+`GUI; state serves to explicate 
+the second half of this equation.
+We can also examine user gestures, 
+constituting the first half 
+of the `q.equation`/, insofar as 
+gestures signal user intent, which 
+leads to application responses, 
+and finally to `GUI; changes.  
+Gestures are, indeed, closely connected 
+to `GUI; state, because a user's 
+actual (literal and physical) action,
+such as pressing a mouse button, 
+needs to be interpreted in light 
+of current `GUI; state to be 
+seen as an `q.action` in the `q.virtual` 
+context of a front-end display.  
+We speak, for example, of `q.clicking` 
+in a `GUI; control; in reality, the 
+`q.click` happens on the physical 
+mouse, but the user of cursors and 
+mouse-tracking permits this 
+physical movement to be read as an 
+interactive gesture within the 
+scope of software component.  In this 
+sense the `q.semantics` of user 
+actions builds off of `GUI; state 
+analogously to the semantics of 
+`GUI; visuals conveying information, 
+so that the two may be analyzed together. 
+`p`
 
 
 `subsection.The semantics of GUI-control state`
 `p.
+To briefly clarify terminology: a user `i.gesture` 
+refers to some physical action which 
+is `i.interpreted` as a specific kind 
+of request, input, or instruction.  The 
+gesture is interpreted as an `i.action`/, 
+in the sense that gestures signal actions 
+according to patterns which reappear 
+in the logistics of how people interact 
+with software (patterns that users 
+recognize).  As a canonical example, 
+the physical gesture of tapping a mouse 
+button is interpreted as the contextual 
+action of `q.clicking` a `GUI; button 
+or other `GUI; control.  The relation of 
+gestures to actions can perhaps be 
+compared to that of audible words 
+and their intended lexemes. 
+`p`
+
+
+`p.
+Mapping gestures to actions depends on 
+`GUI; state, such as the current mouse-position.  
+Accordingly, `GUI; state overall provides the 
+structures against which individual 
+actions are defined: an action of 
+`i.clicking a` (`GUI;) `i.button`/, for example, 
+is meaningful in the context of a front-end 
+environment where the specific button is among 
+many controls that could be `q.clicked`/, where 
+it is enabled and visible, and so forth.
+`p`
+
+
+`p.
+Some `GUI; coding contexts will refer to `q.actions` as 
+akin to `q.requests` that may be cued by 
+more than one user gesture.  For example, instructions 
+to save a file can derive from clicking a `q.save` 
+button, but also selecting a save option from 
+a context menu, or hitting a combination on the 
+keyboard, such as `q.control`/-plus-`q.s`/.  For more rigorous 
+discussion, I suggest referring to actions in this 
+multi-indication context as `q.requests`/, so that 
+the various gestures signaling one common 
+request (like `q.save file`/) each have distinct 
+actions.  In any case, all actions then 
+get routed to interpretations of 
+users' intentions; we can use the term 
+`q.requests` to designate these interpretations in general, 
+so that some requests are cued by one single 
+action and some are targets of more than 
+one possible action.  Current `GUI; state 
+determines both how `i.gestures` are 
+interpreted as `i.actions`/, and how `i.actions` 
+are interpreted as `i.requests`/.     
+`p`
+
+
+`p.
+By design, applications are engineered to 
+`i.respond` to `i.requests`/, and `GUI; state 
+(alongside application state overall) contributes 
+to how application model the request to be 
+handled.  Consider a notebook control 
+that contains multiple windows, each displaying an 
+editable text-doment: when the user requests a 
+save, the application would infer `i.which` 
+file should be saved based on which 
+document's window is currently visible.  
+This is an example of `GUI;-specific state.  
+Whether or not the document has been 
+modified (affecting whether a save is necessary), 
+and the file path that would be overwritten, 
+would be an example of application-state 
+proper (these details are not determined 
+by the visible appearance of `GUI; elements, 
+although the `GUI; can convey to 
+users such information as whether the 
+currently viewed document is modified). 
+`p`
+
+
+`p.
+Some user requests can be handled in different 
+ways depending on specific properties of 
+application state or the surrounding computer 
+environment.  Consider a request to save a 
+file: if the file already exists, saving the 
+updated version involves replacing the 
+contents on disk; in some cases, the current 
+user is not authorized to make such a change, 
+so the save action (with the current file 
+name) cannot be completed.  On the other hand, 
+if this is a `i.new` file, the user needs 
+to assign it a name.  There are, then, at 
+east three possibilities: the file can 
+be overwritten with its current name; the 
+file cannot be saved with its current 
+name but may be saved with a new name, 
+so that there will be two different versions 
+on disk; and the file cannot be saved 
+until a name is provided, which will then
+be one single version of the file.  How the 
+application fulfills the user's request 
+will different in each of these scenarios.  
+Some of these differences might be noticed 
+by users: if the file needs a new 
+name, users will generally be shown a 
+`q.save as` dialog configured for 
+choosing file/folder names, whereas if a 
+file is overwriting a prior version users 
+might see a message box confirming that they 
+intend to do so (sometimes with an option 
+of creating a backup of the older 
+file).   
+`p`
+
+
+`p.
+The point of this example is that responding 
+to user requests demands a rigorous calibration of 
+`GUI; and application state.  This is one 
+reason why Object-Oriented methods 
+predominate in front-end programming; the 
+logic of these state-correlations is 
+typically simpler to reason through via 
+`OO; paradigms than alternatives (such as 
+Functional Programming).  Indeed, `GUI; 
+controls are best encapsulated as objects-with-state, 
+and because `GUI; controls are functionally 
+interconnected with many other application 
+elements, similar `OO; concepts tend to be 
+most effect on the application side as 
+well.  For example, if a notebook window 
+shows one document, the window itself 
+corresponds to one `GUI; object, 
+from the front-end point of view; on the 
+application side, the actual document 
+visible `i.in` the window might be a 
+different object, encompassing data fields 
+such as file path, file type, length, 
+edit history, and permissions (e.g., the identity of the 
+user who created the file).`footnote.
+Sometimes deciding whether to qualify 
+state as `GUI; or application-level can be a 
+gray area: consider undo/redo history.  
+Should user actions that can be 
+reversed be tracked at the `GUI; level, 
+becauese these actions are signaled 
+by `GUI; actions, or within the application 
+logic, because requests are managed by 
+application code?  This question determined 
+whether undo/redo history should be 
+categorized as part of `GUI; or application state. 
+`footnote`  User requests relative to the 
+`i.`GUI;` object object would be carried 
+out, by the application, in the context 
+of the corresponding application object.  
+These functional interconnections are 
+best managed by mainting association 
+between application and front-end 
+objects (which implies an overall `OO; 
+system unifying these two contexts).
+`p`
+
+`subsubsection.Extending Object Orientation`
+`p.
+One might argue, however, that there 
+are details in application/`GUI; object 
+systems that are inadequately addressed 
+even by conventional `OO; models, 
+and call for extensions to the 
+`OO; framework (which is a different 
+matter than replacing such a framework 
+with something like `FP; methods 
+oriented to stateless values). 
+`p`
+
+
+`p.
+Here's one example: in some contexts a front-end 
+display will include two (or more) `GUI; controls 
+that are styled and positioned that the user 
+views them as an integral unit.  A simple example 
+is a button which has both an icon and 
+a descriptive text label; this arrangement 
+can be implemented with a label control 
+placed next to a button control, but configured 
+so that the label appears to be a logical 
+continuation of the button itself.  In this setup, 
+some facets of `GUI; state should be 
+shared between the two controls as if they 
+were one single element.  For example, if 
+the button is disabled (causing it to adopt a new style), 
+the label should be restyled as well.  Or, consider 
+tooltips, as mentioned earlier %-- explanatory 
+text that temporarily appears near controls 
+when the mouse hovers over them.  If users are 
+to experience a button and a label as functionally 
+integrated, this pattern is reinforced by them 
+sharing a tooltip, which means that the same 
+tooltip contents has to be applied to both 
+controls. 
+`p`
+
+
+`p.
+Consider a procedure to define this tooltip text.  
+Ideally the same procedure should be applied to 
+both objects, because we want to reinforce in 
+code the idea that two controls share some 
+state-details, including their tooltips 
+(we do not want this correlation to be 
+dependent on two different procedure-calls, 
+partly because programmers may forget one 
+of them and partly to remind those 
+maintaining the code that the two objects 
+are interdependent).  In `OO; systems, 
+the basic pattern is that procedures 
+which affect the state of a specific 
+object are implemented via `q.methods`/, 
+in which a specific object is singled 
+out as a distinct form of input 
+value, sometimes called the method `q.receiver` 
+(in languages such as `Cpp;, `Csharp;, and 
+`Java;, the `q.receiver` value is 
+designated with the special keyword `b.this`/; 
+elsewhere the most popular name is `b.self`/).  
+The problem with this convention 
+in a context where procedures are intended 
+to synchronize state between `i.two` objects 
+is that it seems artifical to choose one or another 
+as `q.the` receiver %-- a more fluent 
+paradigm would be to allow `i.two` 
+receivers (or more), in the same way that 
+procedures can have two or more normal 
+input arguments.
+`p`
+
+`p.
+In Chapter 21 I mentioned 
+the idea of grouping procedural parameters 
+into `q.channels`/, including a `q.sigma` 
+channel that can generalize receiver-objects 
+to object-lists (derived from the `q.sigma calculus`/, 
+which attempts to model `OO; methods by 
+extending lambda calculii).  This would be 
+one way to tweak `OO; systems by permitting 
+multiple receivers.  There is no technical 
+reason why programming languages could not 
+support more than one `b.this` value; by 
+analogy, most languages only recognize a 
+single procedure `i.return` value, but 
+there are outliers (e.g., Common Lisp), 
+and generalizing returns to 
+multi-value lists does not present 
+special syntactic or implementational 
+difficulties in those contexts.`footnote.
+Disambiguating methods called on `q.multiple 
+receivers` may prove more complicated 
+when two `b.this` objects are of different types 
+%-- which class should be searched for 
+corresponding methods? %-- but compilers 
+could adopt similar rules to those used 
+when matching procedure-names to functions 
+wherein argument lists have multiple types.    
+`footnote`  By way of reference, 
+the code accompanying this 
+chapter includes some functionality 
+which emulates `q.sigma channels` in 
+ordinary (albeit unconventional) `Cpp;.
+`p`
+
+
+`p.
+Apart from multiple method-receivers, a 
+more substantial potential departure 
+from conventional `OO; suggested by 
+`GUI; state involves user actions and 
+corresponding `q.signals`/.  A common 
+pattern in `GUI; programming is to 
+generalize the idea of procedures 
+calling one another to a model 
+wherein procedures can post and/or 
+respond to signals; such as system 
+is usually referred to as a `i.signal/slot` 
+mechanisms, where signals can be `q.connected` 
+to slots.  Rather than one procedure 
+calling another directly, in this architecture 
+the first procedure `q.emits` a signal, 
+which the second then `q.receives`/, having the 
+effect that the second procedure gets called, 
+with parameters (if any) provided by the 
+`q.sender`/.  Unlike direct inter-procedure 
+calls, these connections are 
+routed through an intemediary component 
+and they might be dynamically reconfigured; 
+signal/slot connections can be newly created 
+or dropped while an application is running.  
+When a procedure emits a signal, there is 
+no guarantee that any other procedure 
+will implement a `q.slot` that receives 
+it (it is also that `i.multiple` procedures 
+will connect to the original slot).  
+Compared to direct inter-procedure 
+calls, the two (or more) procedures 
+involved are thereby less tightly connected.  
+`p`
+
+
+`p.
+Programming environments that employ 
+signal/slot connections often use this 
+technique to handle responses to user 
+gestures.  After a user clicks a (`GUI;) button, 
+for example, an object representing that 
+button broadcasts a `q.click` signal, which in turn 
+is handled by procedures to initiate 
+the application response.  For example, if 
+the button in question represents requests 
+to save a file, there will be some 
+procedure whose purpose is to 
+wait for `q.save` signals and then initiate 
+the application-level process of actually 
+saving the relevant file.  The slot thereby 
+connected to the `q.save` signal only 
+is responsible for initiating save operations; 
+it does not consider where the save button 
+is located on screen, or its `GUI; state 
+and state changes (mouseovers, tooltips, etc.).  
+On the other hand, the button-object 
+would track these `GUI;-specific details 
+but not get involved with actual save 
+operations.  Signal/slot mechanisms 
+are as such (as this case-study suggests) valuable 
+tools for enforcing `q.separation of concerns`/, 
+where each procedure and each object have 
+a relatively narrow set of responsibilities.  
+Signals and slots prevent objects from becoming 
+tightly coupled, because signalling objects 
+can be designed in isolation from procedures 
+that receive (and act on) the signals. 
+`p`
+
+
+`p.
+Although a power pattern that fits organically 
+within `OO; paradigms, signals and slots are 
+not directly supported by the `OO; model, 
+and few programming languages have intrinsic 
+signal/slot features.  In `Cpp;, several 
+libraries emulate the signal/slot patten. 
+The `Qt; framework, which is both a `GUI; 
+library and a general-purpose technology 
+for application development, supports a 
+coding style wherein signals and slot 
+function essentially as native language 
+features %-- however, this is only possible 
+because `Qt; implements an extended 
+compiler workflow involving pre-compilation 
+parsers and code-generators, in effect 
+implementing an extension to the 
+`Cpp; language itself.
+`p`
+
+
+`p.
+Because most `OO; languages do not 
+intrinsically support signal/slot 
+connections %-- that is, they 
+cannot be expressed directly 
+through the language's syntax and 
+semantics, but rather have to be 
+approximated by code libaries 
+(potentially including langauge 
+extensions through code generators) 
+%-- this patterns is for all intents 
+and purposes an extension to 
+`OO; which is not part of the 
+basic `OO; model.
+`p`
+
+
+`p.
+One further detail concerning signal/slot 
+systems involves properly aligning multiple 
+parameters of `GUI; state which should 
+adhere to certain design regularities; for 
+example, different lengths or magnitude 
+in the front-display preserved in a 
+constant ratio.  Consider a scroll area 
+showing an image; if the image's size 
+(at its current zoom level) exceeds the dimensions 
+of the scroll area, then the visible part of the 
+image is `q.slipped` and users can scroll left/right 
+and top/down to alter this visible area.  On the 
+other hand, if the image-size is `i.less` than the 
+scroll area, it is conventional to center 
+the image so that left and right margins, 
+and likewise the top and bottom, are balanced.  
+If the image is resized (by zooming in or out) 
+its top-right coordinate therefore should be 
+recalculated to sustain balanced margins.  
+Similarly, if scroll area's viewport of the  
+is resized because the user 
+expands or contracts its surrounding window, 
+the image itself would either have to be 
+resized proportionately, or else moved to  
+a different top-left position, to preserve 
+the margin's desired left/right and top/bottom 
+symmetry.  In this example, there are 
+several different numbers that need to be 
+tracked in coordination: the overall window's 
+size; the width and height of the scroll area's 
+viewport (its visible screen-area); and 
+the image's dimensions and zoom factor.  
+Changes to any one of these measures may 
+need to trigger changes to some or all of 
+the others, to ensure that the `GUI; 
+continues to feel visually balanced.  
+`p`
+
+
+`p.
+Because multiple quantities are involved, 
+orchestrating the proper symmetry in 
+this example can require coordinating 
+multiple signal/slot connections.  For 
+example, an object representing 
+the main window might emit a signal when 
+it expands or contracts.  Most 
+`GUI; systems employ `q.layout managers` 
+which calculate how controls should be 
+oriented relative to application windows, 
+so that front-ends can have a roughly 
+tabular, gridlike, or top-down organized 
+layout, with controls that need a 
+fixed amount of space (such as labels 
+whose text does not change) remaining 
+constant while others gain or lose space 
+in sync with available screen-area 
+(scrollable containers, for example, can 
+be downsized because users expect to 
+scroll around their interior anyhow).  
+Layout managers will therefore 
+tend to automatically resize certain 
+controls, which can potentially trigger 
+new signals: a screen area resizes 
+because its surrounding window does, 
+and both end up producing signals 
+broadcasting their new state.  
+Code responsible for the image display 
+accrodingly needs to keep track of 
+either or both signals and modify 
+the image's own size and/or on-screen 
+placement accordingly.   
+`p`
+
+
+`p.
+Quantitative changes such as window-size 
+may also trigger other kinds of 
+`GUI; state-changes.  For example, 
+if an image is `i.smaller` than its 
+scrollable viewport then scrolling 
+per se is not possible; this situation 
+is typically cues with the scroll 
+bars being visible but grayed 
+out (users seeing the scrollbars, 
+even if they are disabled, reinforces 
+that they `i.can` be used if necessary).  
+Then, given either the image zooming in 
+or the viewport shrinking, once internal 
+scrolling becomes necessary the 
+scrollbars should be enabled, 
+taking on a new visible appearance.  
+Resizing and zooming may therefore both 
+affect the scrollbars' styling.
+`p`
+
+`p.  
+For a related example, when an image 
+is `i.first` opened many picture-viewers 
+resize the main window so that the image 
+can be seen, in its entirety, in its 
+native size.  At this point, then, 
+the scroll area and main window 
+dimensions would be calculated on the 
+basis of the image; the user 
+can then resize the window if desired.  
+However, `i.after` the image is loaded, 
+ordinarily the user is free to expand or 
+contract the window irrespective of the 
+image size (using scrollbars if necessary 
+when the window is too small to show 
+the whole image).  There are, then, 
+two different scenarios for how the 
+relation between window-size (and by 
+extension a scroll area's viewport-size) 
+and image dimensions should be calculated.  
+Application code needs to keep track 
+of `GUI; `q.history` to properly separate 
+the different contexts.  For example, 
+if the main window is resized 
+immediately after (and because of) a new 
+image-file being opened, the window's 
+resize-signal should be processed 
+differently than a similar signal 
+emitted due to users manually 
+adjusting the window (typically 
+by pulling at one corner or by 
+clicking maximize/unmaximize buttons). 
+`p`
+
+
+`p.
+The point of these examples is that 
+signal/slot connections often do not 
+occur in isolation, but must 
+coordinated to maintain desired 
+style and layout conventions in the 
+front-end.  Often these involve 
+groups of interrelated parameters 
+reflecting states from multiple 
+different `GUI; controls.  `lGUI; 
+state can be guided by sets of 
+`q.rules`/, for example than an 
+image top-left corner must be 
+positioned and repositioned to ensure 
+balanced margins, or that scrollbars 
+should be visible but disabled when 
+image-size is `i.less` than the 
+available viewport area, but enabled 
+when the former expands to beyond 
+the viewport dimensions.   
+`p`
+
+
+`p.
+Most programming languages do not have an intrinsic 
+feature for sustaining predefined mathematical 
+relations amongst two or more independent 
+variables.  For example, in the image-view 
+case there are at least four quantities 
+or coordinate-pairs which are 
+numerically interdependent: the image 
+width/height; its top-left corner 
+position; the viewport dimensions; and 
+the image zoom.  Most programming 
+languages will not allow you to declare 
+variables for these interrelated 
+value such that changes to any 
+one (or more) value will automatically 
+propagate to the others %-- the closest 
+approximation might be to group 
+all these values into one 
+data structure, and then make any 
+changes to specific parameters via 
+procedures specific to that structure, 
+which can be engineered to update the 
+all the structure's fields as necessary.  
+In that case, attributes such as an 
+image's size would not be magnitudes 
+(or pairs thereof) directly, but would 
+instead be handles onto specific parameters 
+held within the coordinated data structure 
+(one added complication is that while that 
+structure's fields are interrelated 
+in the sense of demanding specific mathematical 
+invariants, they are also properties 
+of different contols' states, so they 
+need to be properly classified `visavis; 
+the control they are associated with).
+`p`
+
+`p.  
+Orchestrating these sorts of interrelationships 
+among multiple objects and 
+data-fields is a common problem but without a 
+canonical design pattern, in particular 
+in the `OO; context (this is one 
+areas where Functional Programming has
+produced somewhat more concise 
+formulations, that `OO; could perhaps 
+borrow).  Therefore, another kind of 
+potential `OO; extension relevant 
+to `GUI; state would be supporting 
+groups of interrelated parameters, 
+distributed across multiple objects 
+but bound by stipulated invariance requirements.  
+Such features would overlap with signal/slot 
+systems because signal/slot connections 
+are sometimes defined specifically 
+to ensure proper inter-parameter 
+relationships (by receiving signals 
+notifying change in one interlinked 
+value and then updating the others 
+proportionately).
+`p`
+
+
+`p. 
+From a practical point of view, 
+these examples point to `OO; 
+extensions that could potentially 
+be incorporated into new language 
+standards.  More theoretically, 
+we can also study how such extensions 
+add representational features 
+to `OO; models, enhancing the `OO; 
+repertoire for capturing the 
+state and interrelationships 
+of complex systems.  The `q.theory` 
+in this case could provide a further 
+perspective on `OO; `q.semantics` 
+in the sense that Object-Oriented 
+principles can inform data models, 
+`q.knowledge system`/, and other 
+technologies that are designed 
+to have some explicit connection 
+with real-world objects and 
+phenomena.  More direct applications 
+of an expanded `OO; `q.theory` 
+might also lie with tools such as 
+code-analyzers, software-development 
+tools, and compiler extensions, collectively 
+serving to accelrate the 
+implementation and quality of `GUI; front-ends. 
+`p`
+
+
+`p.
+Front-ends discussed here thus far 
+have implicitly been focused on 
+two-dimensional text and graphics, 
+either viewers of `TwoD; images 
+or layouts presenting structured 
+information, via text, printed numers, 
+or magnitude-indicators.  In 
+contexts such as robotics, 
+`GUI;s also often work with `ThreeD; 
+graphics, videos, and other 
+multimedia assets which have 
+properties and present complications 
+different in kind from the 
+more `TwoD; contexts and issue 
+raised to this point.  Partly 
+so as to circle back to the 
+theme of robot environments, 
+these multimedia concerns will 
+be the topic of the rest of this section.  
+`p`
+
+
+`subsection.Multimedia Front-Ends`
+`p.
 
 `p`
+
 
