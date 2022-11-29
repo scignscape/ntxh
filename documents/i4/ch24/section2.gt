@@ -5,14 +5,13 @@ have stayed relatively consistent since
 roughly the start of the century.  The heyday of 
 `GUI; applications (often called `q.rich client` 
 or `q.thick client` interfaces, to distinguish 
-them from web applications which need to 
+them from web applications %-- `q.thin` clients %-- which need to 
 run in an internet browser) largely coincided 
 with a period in programming methods where 
 Object Oriented techniques were predominant.  
 Neither Object-Orientation (`OO;) nor desktop-style 
 software is canonical to the same degree 
-at present as they may have been, say, 
-two decades ago, given the emergence of 
+as two decades ago, given the emergence of 
 popular programming language which 
 de-emphasize `OO; structures on the one 
 hand, and web or smart-phone apps as an alternative 
@@ -42,10 +41,9 @@ than compiled to native machine instructions).
 `p.
 Object-Oriented techniques remain the predominant 
 method for `GUI; development in this sense, 
-largely withstanding the criticisms often 
-leveled against the `OO; paradigm (even if they  
-are warranted in other contexts, such as 
-server-side programming).  It is reasonable 
+largely withstanding the familiar criticisms  
+leveled against the `OO; paradigm in other contexts 
+(such as database or server-side programming).  It is reasonable 
 to conclude that `OO; is an effective 
 modeling tool for `GUI; functionality, one 
 which cannot readily be replicated by functional 
@@ -114,7 +112,9 @@ to be an action for `q.clicking` the
 `i.is` clicked and while the reponse is 
 progressing, a button may appear in a 
 `q.down` state, which has a style distinct 
-from both normal and rollover.  Alternatively, 
+from both normal and rollover.
+
+`pseudoIndent;  Alternatively, 
 some buttons (or other controls, such as 
 checkboxes) are not primarily designed 
 for requesting a specific action, but 
@@ -126,7 +126,11 @@ which a capitalized word for instance
 would not be considered a match of a 
 lower-case search phrase %-- whereas the 
 default setting, indicated by an 
-unchecked box, would be case-insensitive). 
+unchecked box, would be case-insensitive).  
+In these contexts there would be a 
+visible contrast between 
+`q.up` (or `q.unchecked`/) and 
+`q.down`/`q.checked` states.
 
 `pseudoIndent; Moreover, buttons and other `GUI; elements 
 can sometimes be `q.disabled`/, meaning 
@@ -136,10 +140,10 @@ according to normal patterns because
 their associated actions would 
 be impossible or illogical.  For instance, 
 a button which saves a file (i.e., 
-signals the application to enact that 
+signals the application to enact that  
 functionality upon being clicked) 
-would not make sense if there is no 
-open file visible through the front end.  
+would not make sense if there were no 
+file open.  
 In that case, a disabled state and its 
 style would indicate to the user 
 that the button is not presently 
@@ -149,8 +153,8 @@ colors to cue such states), but
 the styling of these states 
 should not obscure the control's 
 primary purpose when it `i.is` 
-enabled.  For example, a disabled 
-`q.save` button should not be 
+enabled.  A disabled 
+`q.save` button, say, should not be 
 given a style where it is 
 difficult to read the `q.save` 
 label (or whatever icon 
@@ -174,7 +178,7 @@ changes.  Style rules for `GUI; elements in
 general need to adopt color schemes in which 
 coloring is relatively nonobtrusive 
 (colors should not be overly dark or high-contrast) 
-but still allows components to have a variety of 
+but still allows components to show a variety of 
 different states.
 
 `pseudoIndent; Many applications do not use a single 
@@ -183,22 +187,18 @@ be adapted for different users and/or different
 platforms.  Most Operating Systems have 
 preferred stylistic concepts, so that 
 applications on a Mac tend to follow different 
-conventions than those on Windows, or Linux 
-(although Linux styles are influenced by 
-users' choice of desktop environments, which can 
-be fine-tuned independently of the underlying 
-operating system, in contrast to Mac or Windows).  
+conventions than those on Windows, or Linux.  
 Consistent visual patterns from one application 
 to another help users familiar with one program 
 to learn how to use new software more 
 quickly, so applications generally try to 
 conform to Operating System standards; as such, 
-cross-platform applications may employ 
+cross-platform applications often employ 
 multiple style schemas, depending on the 
 kind of computer where the application happens 
 to be running.  In addition to these 
 operating-system variations, applications 
-may also employ flexible styles that can 
+may also recognize flexible styles that can 
 be adapted for different users, in case 
 someone wants to view larger text, say, 
 or wants to switch between different 
@@ -209,7 +209,7 @@ or wants to switch between different
 their state is obviously influenced by the 
 nature of information they seek to present 
 at any given time.  In the simplest 
-case, this data is in textual for, or 
+case, this data is in textual form, or 
 is numeric data presented textually.  
 For example, consider a label that 
 shows the name and folder path of a file 
@@ -219,21 +219,21 @@ label will be updated.  Here the relevant
 data is presented just through a text 
 sequence.  Or, a digital map might 
 have labels to represent the current 
-Latitude and Longitude coordinates 
+latitude and longitude coordinates 
 under the cursor.  These are numeric 
 values, but can be represented for 
 users merely by showing the numbers 
 in character form.    
  
 `pseudoIndent; Other numeric displays, however, 
-may represent magnitudes more pictorially.  
+might represent magnitudes more pictorially.  
 Temperature, for example, may be expressed 
 by coloring a bar at a height proportionate 
 to degrees Farenheit or Celcius; the bar 
 filled higher to the top would indicate 
 higher temperatures, and lower bars 
-show colder temperature.  The color also 
-could reinforce these visuals, with warmer 
+show colder temperature.  Color could also 
+reinforce these visuals, with warmer 
 temperatures represented via reds and yellows 
 and near-freezing conditions cued by 
 blue or purple.  For some `GUI; controls, 
@@ -255,9 +255,9 @@ particularly if they are gadget-like displays
 connote magnitude, rather than printed numerals).  
 Multi-part numeric data would then normally 
 be represented via collections of different 
-controls.  Where appropriate, numeric 
+controls.  Where appropriate, quantitative 
 data sets could also be shown via charts or 
-diagrams, which could be static images or 
+diagrams, either static images or 
 aggregate components with multiple indepentent controls.
 
 `pseudoIndent; Aside from textual and numeric 
@@ -292,7 +292,7 @@ control is intended to show contents of an
 `HTML; or `PDF; file.  The `PDF; format, in particular, 
 is engineered so that each individual document-page 
 becomes treated by applications as if it 
-were and image or photograph (`PDF; text is 
+were an image or photograph (`PDF; text is 
 not a data structure; pages instead are 
 rendered and provided to `GUI; front-ends 
 via mechanisms similar to photo-displays).  
@@ -302,7 +302,7 @@ applications can perform searches inside
 `PDF; text (although such data tends to be 
 imperfect, with situations such as 
 hyphenated words, ligatures, and foreign 
-accents causes transcription errors; in short, 
+accents causing transcription errors; in short, 
 `PDF; does not directly provide an 
 accurate machine-readable transcript).  Text in 
 `HTML; is similarly largely static, but users 
@@ -330,7 +330,7 @@ can be presented via spreadsheet-like
 controls, which are subdivided (by 
 rows and columns) into cells that 
 typically have one single numeric 
-(or short textural) data.  Data shown 
+(or short textual) data.  Information shown 
 in these sorts of displays may originate 
 from files, insofar as such `GUI; controls 
 are used to access files they need to 
@@ -358,9 +358,9 @@ interactive window in some sense.
 `item ->> `GUI; controls as containers for other controls ;;  
 Because controls whose explicit purpose is 
 to render individual data-units tend to handle 
-relatively small units of information 
+relatively small pieces of information 
 (e.g., single numeric values), multi-part 
-data structures need to be displayed through 
+data structures have to be displayed through 
 higher-scale controls that group together 
 such more narrowly-focused controls.  Partly, 
 containers along these lines serve to aggregate 
@@ -413,16 +413,16 @@ toggled between visible or hidden
 states.  An canonical example 
 of the latter is lists of files in 
 folders, where individual folders 
-can be seen in an `q.open` state 
+may be seen in an `q.open` state 
 (such that folder-contents, including 
-other folders) or `q.closed`/, 
+other folders, are listed) or `q.closed`/, 
 and likewise for subfolders inside 
 (open) folders, and so on.  These 
 kinds of controls are sometimes 
 compared to an accordion, because 
-folders and subfolders can be 
-opened or closed, their screen-area 
-expanding or contracting, creating a 
+as folders and subfolders  
+open or close their screen-areas 
+expands and contract respectively, creating a 
 visual effect vaguely reminiscent 
 of accordion leaves' folding patterns.   
 `description`
@@ -485,11 +485,12 @@ on either side of the line; moving the
 line resizes both parts of the container 
 (one gets larger, the other smaller) potentially 
 hiding or unhiding contained content and controls (depending 
-on which side their on).  Another pattern is 
-`q.drag and drop`/, typically an icon is moved 
-from one container to another; in some contexts 
+on which side they lie on).  Another pattern is 
+`q.drag and drop`/, typically involving icons being moved 
+(figuratively `q.dragged` by the mouse) 
+from one container to another: in some contexts 
 the receiving container takes on a colored background 
-to convey that it is not possible to drop an 
+to convey that it is possible to drop an 
 item on its interior.  
 `p`
 
@@ -505,11 +506,11 @@ temporarily appear, explaining the purpose
 of that `GUI; element.  Tooltips serve both 
 as didactic guides and as further visual 
 markers that the relevant control accepts 
-interactions.  Other examples of informative 
+interactions.  Other examples of indicative 
 `GUI; features include progress bars (which 
 are usually visible only while an operation is 
 ongoing, such as downloading a file); message 
-boxes (presenting users with brief informatic 
+boxes (presenting users with brief informative 
 text, such as declaring that a download has 
 completed); and status bars (typically single-line 
 controls with text related to recent activity, 
@@ -554,7 +555,13 @@ the control under the mouse position (an
 example mentioned above would be 
 a `q.resize` icon when the mouse hovers 
 over a corner; this works also for 
-some control's edges).  In some cases the 
+some controls' edges); cursors tend to be 
+given an arrow-like icon in these settings.  
+When hovering overm on the 
+other hand, cursors usually take on a shape 
+remininiscent of a capital letter `q.I`/.  
+
+`pseudoIndent; In some cases the 
 on-screen mouse position can be correlated with 
 some physical or empirical coordinate 
 system %-- a good example is digital 
@@ -567,7 +574,7 @@ move the mouse around the map-view, which
 both aids users if they are trying to find a 
 specific latitude/longitude pair and 
 helps visually reinforce the idea that 
-mouse-position maps directly to geospatial 
+mouse-positions map directly to geospatial 
 points.  A similar pattern in one dimension 
 would be using a mouse to advance or rewind 
 an audio or video player, wherein a numeric 
@@ -595,7 +602,7 @@ well-engineered `GUI;s are highly
 interactive; there are many conventions 
 which govern how front-ends should 
 present subtle visual cues and state-changes 
-to assist users when interactive 
+to assist users when interacting 
 with the application.  Users may not 
 appreciate the full scope of these effects, 
 becoming habituated to `q.responsive` 
@@ -611,7 +618,7 @@ almost certianly be experienced by
 users as erratic and confusing.  
 Most of the front-end patterns 
 mentioned here are probably familiar 
-to most people who sometimes work on 
+to people who work on 
 desktop-style computers, but it is 
 nonetheless useful to outline 
 them explicitly, precisely because 
@@ -646,7 +653,7 @@ actions (which invite responses from
 the appliction) and by visible 
 `GUI; changes (changes in the 
 state of one or more controls, 
-communicating the users the 
+communicating to users the 
 results of the actions they 
 requested).  Reviewing forms of 
 `GUI; state serves to explicate 
@@ -666,13 +673,13 @@ of current `GUI; state to be
 seen as an `q.action` in the `q.virtual` 
 context of a front-end display.  
 We speak, for example, of `q.clicking` 
-in a `GUI; control; in reality, the 
+a `GUI; control; in reality, the 
 `q.click` happens on the physical 
-mouse, but the user of cursors and 
+mouse, but the presence of cursors and 
 mouse-tracking permits this 
 physical movement to be read as an 
 interactive gesture within the 
-scope of software component.  In this 
+scope of a software component.  In this 
 sense the `q.semantics` of user 
 actions builds off of `GUI; state 
 analogously to the semantics of 
@@ -698,7 +705,7 @@ button is interpreted as the contextual
 action of `q.clicking` a `GUI; button 
 or other `GUI; control.  The relation of 
 gestures to actions can perhaps be 
-compared to that of audible words 
+compared to that between audible words 
 and their intended lexemes. 
 `p`
 
@@ -712,8 +719,8 @@ actions are defined: an action of
 `i.clicking a` (`GUI;) `i.button`/, for example, 
 is meaningful in the context of a front-end 
 environment where the specific button is among 
-many controls that could be `q.clicked`/, where 
-it is enabled and visible, and so forth.
+many controls that could be `q.clicked`/, and 
+given that it is enabled and visible, etc.
 `p`
 
 
@@ -721,7 +728,7 @@ it is enabled and visible, and so forth.
 Some `GUI; coding contexts will refer to `q.actions` as 
 akin to `q.requests` that may be cued by 
 more than one user gesture.  For example, instructions 
-to save a file can derive from clicking a `q.save` 
+to save a file could derive from clicking a `q.save` 
 button, but also selecting a save option from 
 a context menu, or hitting a combination on the 
 keyboard, such as `q.control`/-plus-`q.s`/.  For more rigorous 
@@ -744,9 +751,9 @@ are interpreted as `i.requests`/.
 
 `p.
 By design, applications are engineered to 
-`i.respond` to `i.requests`/, and `GUI; state 
+`i.respond` to such requests, and `GUI; state 
 (alongside application state overall) contributes 
-to how application model the request to be 
+to how software models the request to be 
 handled.  Consider a notebook control 
 that contains multiple windows, each displaying an 
 editable text-doment: when the user requests a 
@@ -758,8 +765,8 @@ Whether or not the document has been
 modified (affecting whether a save is necessary), 
 and the file path that would be overwritten, 
 would be an example of application-state 
-proper (these details are not determined 
-by the visible appearance of `GUI; elements, 
+proper (because these details are not determined 
+by the visible appearance of `GUI; elements; 
 although the `GUI; can convey to 
 users such information as whether the 
 currently viewed document is modified). 
@@ -767,7 +774,7 @@ currently viewed document is modified).
 
 
 `p.
-Some user requests can be handled in different 
+Some user requests may be handled in different 
 ways depending on specific properties of 
 application state or the surrounding computer 
 environment.  Consider a request to save a 
@@ -779,7 +786,7 @@ so the save action (with the current file
 name) cannot be completed.  On the other hand, 
 if this is a `i.new` file, the user needs 
 to assign it a name.  There are, then, at 
-east three possibilities: the file can 
+least three possibilities: the file can 
 be overwritten with its current name; the 
 file cannot be saved with its current 
 name but may be saved with a new name, 
@@ -796,8 +803,8 @@ name, users will generally be shown a
 choosing file/folder names, whereas if a 
 file is overwriting a prior version users 
 might see a message box confirming that they 
-intend to do so (sometimes with an option 
-of creating a backup of the older 
+intend to do so (maybe with an option 
+to make a backup of the older 
 file).   
 `p`
 
@@ -808,15 +815,14 @@ to user requests demands a rigorous calibration of
 `GUI; and application state.  This is one 
 reason why Object-Oriented methods 
 predominate in front-end programming; the 
-logic of these state-correlations is 
+logic of such state-correlations is 
 typically simpler to reason through via 
-`OO; paradigms than alternatives (such as 
-Functional Programming).  Indeed, `GUI; 
+`OO; paradigms than alternatives.  Indeed, `GUI; 
 controls are best encapsulated as objects-with-state, 
 and because `GUI; controls are functionally 
 interconnected with many other application 
 elements, similar `OO; concepts tend to be 
-most effect on the application side as 
+most effective on the application side as 
 well.  For example, if a notebook window 
 shows one document, the window itself 
 corresponds to one `GUI; object, 
@@ -839,7 +845,7 @@ application code?  This question determined
 whether undo/redo history should be 
 categorized as part of `GUI; or application state. 
 `footnote`  User requests relative to the 
-`i.`GUI;` object object would be carried 
+`iGUI; object would be carried 
 out, by the application, in the context 
 of the corresponding application object.  
 These functional interconnections are 
@@ -864,10 +870,10 @@ oriented to stateless values).
 
 
 `p.
-Here's one example: in some contexts a front-end 
+Here is one example: in some contexts a front-end 
 display will include two (or more) `GUI; controls 
-that are styled and positioned that the user 
-views them as an integral unit.  A simple example 
+that are styled and positioned so that the user 
+views them as an integral unit.  A simple case 
 is a button which has both an icon and 
 a descriptive text label; this arrangement 
 can be implemented with a label control 
@@ -885,14 +891,14 @@ when the mouse hovers over them.  If users are
 to experience a button and a label as functionally 
 integrated, this pattern is reinforced by them 
 sharing a tooltip, which means that the same 
-tooltip contents has to be applied to both 
+tooltip content should be applied to both 
 controls. 
 `p`
 
 
 `p.
 Consider a procedure to define this tooltip text.  
-Ideally the same procedure should be applied to 
+Ideally the same procedure would act to 
 both objects, because we want to reinforce in 
 code the idea that two controls share some 
 state-details, including their tooltips 
@@ -909,7 +915,7 @@ in which a specific object is singled
 out as a distinct form of input 
 value, sometimes called the method `q.receiver` 
 (in languages such as `Cpp;, `Csharp;, and 
-`Java;, the `q.receiver` value is 
+`Java;, `q.receiver` values are 
 designated with the special keyword `b.this`/; 
 elsewhere the most popular name is `b.self`/).  
 The problem with this convention 
@@ -931,7 +937,7 @@ channel that can generalize receiver-objects
 to object-lists (derived from the `q.sigma calculus`/, 
 which attempts to model `OO; methods by 
 extending lambda calculii).  This would be 
-one way to tweak `OO; systems by permitting 
+one way to tweak `OO; systems %-- permitting 
 multiple receivers.  There is no technical 
 reason why programming languages could not 
 support more than one `b.this` value; by 
@@ -944,7 +950,7 @@ special syntactic or implementational
 difficulties in those contexts.`footnote.
 Disambiguating methods called on `q.multiple 
 receivers` may prove more complicated 
-when two `b.this` objects are of different types 
+when two `textbf.this` objects are of different types 
 %-- which class should be searched for 
 corresponding methods? %-- but compilers 
 could adopt similar rules to those used 
@@ -968,7 +974,7 @@ pattern in `GUI; programming is to
 generalize the idea of procedures 
 calling one another to a model 
 wherein procedures can post and/or 
-respond to signals; such as system 
+respond to signals; such a system 
 is usually referred to as a `i.signal/slot` 
 mechanisms, where signals can be `q.connected` 
 to slots.  Rather than one procedure 
@@ -980,14 +986,14 @@ with parameters (if any) provided by the
 `q.sender`/.  Unlike direct inter-procedure 
 calls, these connections are 
 routed through an intemediary component 
-and they might be dynamically reconfigured; 
+and they might be dynamically reconfigured: 
 signal/slot connections can be newly created 
 or dropped while an application is running.  
 When a procedure emits a signal, there is 
 no guarantee that any other procedure 
 will implement a `q.slot` that receives 
-it (it is also that `i.multiple` procedures 
-will connect to the original slot).  
+it; but also `i.multiple` procedures 
+might connect to the original slot).  
 Compared to direct inter-procedure 
 calls, the two (or more) procedures 
 involved are thereby less tightly connected.  
@@ -1025,12 +1031,12 @@ a relatively narrow set of responsibilities.
 Signals and slots prevent objects from becoming 
 tightly coupled, because signalling objects 
 can be designed in isolation from procedures 
-that receive (and act on) the signals. 
+that receive (and act on) their signals. 
 `p`
 
 
 `p.
-Although a power pattern that fits organically 
+Although a powerful pattern that fits organically 
 within `OO; paradigms, signals and slots are 
 not directly supported by the `OO; model, 
 and few programming languages have intrinsic 
@@ -1058,7 +1064,7 @@ cannot be expressed directly
 through the language's syntax and 
 semantics, but rather have to be 
 approximated by code libaries 
-(potentially including langauge 
+(potentially including language 
 extensions through code generators) 
 %-- this patterns is for all intents 
 and purposes an extension to 
@@ -1075,10 +1081,10 @@ adhere to certain design regularities; for
 example, different lengths or magnitude 
 in the front-display preserved in a 
 constant ratio.  Consider a scroll area 
-showing an image; if the image's size 
+showing an image: if the image's size 
 (at its current zoom level) exceeds the dimensions 
 of the scroll area, then the visible part of the 
-image is `q.slipped` and users can scroll left/right 
+image is `q.clipped` and users can scroll left/right 
 and top/down to alter this visible area.  On the 
 other hand, if the image-size is `i.less` than the 
 scroll area, it is conventional to center 
@@ -1086,8 +1092,7 @@ the image so that left and right margins,
 and likewise the top and bottom, are balanced.  
 If the image is resized (by zooming in or out) 
 its top-right coordinate therefore should be 
-recalculated to sustain balanced margins.  
-Similarly, if scroll area's viewport of the  
+recalculated.  Similarly, if the scroll area's viewport  
 is resized because the user 
 expands or contracts its surrounding window, 
 the image itself would either have to be 
@@ -1099,9 +1104,9 @@ several different numbers that need to be
 tracked in coordination: the overall window's 
 size; the width and height of the scroll area's 
 viewport (its visible screen-area); and 
-the image's dimensions and zoom factor.  
+the image's position, dimensions, and zoom factor.  
 Changes to any one of these measures may 
-need to trigger changes to some or all of 
+need to trigger changes in some or all of 
 the others, to ensure that the `GUI; 
 continues to feel visually balanced.  
 `p`
@@ -1136,7 +1141,7 @@ because its surrounding window does,
 and both end up producing signals 
 broadcasting their new state.  
 Code responsible for the image display 
-accrodingly needs to keep track of 
+accrodingly should keep track of 
 either or both signals and modify 
 the image's own size and/or on-screen 
 placement accordingly.   
@@ -1150,11 +1155,11 @@ may also trigger other kinds of
 if an image is `i.smaller` than its 
 scrollable viewport then scrolling 
 per se is not possible; this situation 
-is typically cues with the scroll 
-bars being visible but grayed 
-out (users seeing the scrollbars, 
+is typically cued via scrollbars 
+being visible but grayed 
+out (users perceiving the scrollbars, 
 even if they are disabled, reinforces 
-that they `i.can` be used if necessary).  
+that they `i.will` become active when necessary).  
 Then, given either the image zooming in 
 or the viewport shrinking, once internal 
 scrolling becomes necessary the 
@@ -1169,7 +1174,7 @@ For a related example, when an image
 is `i.first` opened many picture-viewers 
 resize the main window so that the image 
 can be seen, in its entirety, in its 
-native size.  At this point, then, 
+native size.  At this point,  
 the scroll area and main window 
 dimensions would be calculated on the 
 basis of the image; the user 
@@ -1177,16 +1182,17 @@ can then resize the window if desired.
 However, `i.after` the image is loaded, 
 ordinarily the user is free to expand or 
 contract the window irrespective of the 
-image size (using scrollbars if necessary 
-when the window is too small to show 
-the whole image).  There are, then, 
+image size (scrolling being avaible 
+to compensate for when the window get 
+too small to show 
+the whole image).  There are, accordingly, 
 two different scenarios for how the 
 relation between window-size (and by 
 extension a scroll area's viewport-size) 
 and image dimensions should be calculated.  
 Application code needs to keep track 
 of `GUI; `q.history` to properly separate 
-the different contexts.  For example, 
+these different contexts.  For example, 
 if the main window is resized 
 immediately after (and because of) a new 
 image-file being opened, the window's 
@@ -1202,7 +1208,7 @@ clicking maximize/unmaximize buttons).
 `p.
 The point of these examples is that 
 signal/slot connections often do not 
-occur in isolation, but must 
+occur in isolation, but must be 
 coordinated to maintain desired 
 style and layout conventions in the 
 front-end.  Often these involve 
@@ -1210,41 +1216,40 @@ groups of interrelated parameters
 reflecting states from multiple 
 different `GUI; controls.  `lGUI; 
 state can be guided by sets of 
-`q.rules`/, for example than an 
+`q.rules`/, such as that an 
 image top-left corner must be 
 positioned and repositioned to ensure 
 balanced margins, or that scrollbars 
 should be visible but disabled when 
 image-size is `i.less` than the 
-available viewport area, but enabled 
-when the former expands to beyond 
+available viewport area, but automatically 
+enabled when the former expands to beyond 
 the viewport dimensions.   
 `p`
 
 
 `p.
-Most programming languages do not have an intrinsic 
-feature for sustaining predefined mathematical 
-relations amongst two or more independent 
-variables.  For example, in the image-view 
+In the image-view 
 case there are at least four quantities 
 or coordinate-pairs which are 
 numerically interdependent: the image 
 width/height; its top-left corner 
 position; the viewport dimensions; and 
-the image zoom.  Most programming 
-languages will not allow you to declare 
-variables for these interrelated 
-value such that changes to any 
+the image zoom.  Most programming languages do not have an intrinsic 
+feature for sustaining predefined mathematical 
+relations amongst two or more independent 
+variables along these lines %-- there 
+is no way in code to declare 
+interrelated variables such that changes to any 
 one (or more) value will automatically 
-propagate to the others %-- the closest 
+propagate to the others.  The closest 
 approximation might be to group 
 all these values into one 
 data structure, and then make any 
 changes to specific parameters via 
 procedures specific to that structure, 
 which can be engineered to update the 
-all the structure's fields as necessary.  
+other fields as needed.  
 In that case, attributes such as an 
 image's size would not be magnitudes 
 (or pairs thereof) directly, but would 
@@ -1267,7 +1272,7 @@ canonical design pattern, in particular
 in the `OO; context (this is one 
 areas where Functional Programming has
 produced somewhat more concise 
-formulations, that `OO; could perhaps 
+formulation, that `OO; could perhaps 
 borrow).  Therefore, another kind of 
 potential `OO; extension relevant 
 to `GUI; state would be supporting 
@@ -1310,7 +1315,7 @@ of an expanded `OO; `q.theory`
 might also lie with tools such as 
 code-analyzers, software-development 
 tools, and compiler extensions, collectively 
-serving to accelrate the 
+serving to accelerate the 
 implementation and quality of `GUI; front-ends. 
 `p`
 
@@ -1321,7 +1326,7 @@ have implicitly been focused on
 two-dimensional text and graphics, 
 either viewers of `TwoD; images 
 or layouts presenting structured 
-information, via text, printed numers, 
+information, via text, printed numbers, 
 or magnitude-indicators.  In 
 contexts such as robotics, 
 `GUI;s also often work with `ThreeD; 
