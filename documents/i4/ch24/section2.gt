@@ -1343,9 +1343,433 @@ be the topic of the rest of this section.
 `p`
 
 
-`subsection.Multimedia Front-Ends`
+`subsection.3D Graphics and Robotics Front-Ends`
 `p.
-
+When displaying `TreeD; graphics, applications 
+need to support a further group of user actions 
+because there are a larger set of possible 
+view transformations, compared with `TwoD; 
+resources.  Such graphics can be `q.panned` in three 
+different directions (moving the virtual camera 
+along `b.x`/, `b.y`/, and `b.z` axes), and could 
+also be rotated (which is implemented as an effect 
+akin to the virtual camera being spun along the 
+outside of a sphere centered at a point along 
+the camera's line of sight).  Also, the scene 
+may be zoomed in and out (preserving the camera's 
+line of sight but moving its point of focus closer to 
+or further from the camera).  With a three-button 
+mouse, pan and zoom in `i.two` dimensions is 
+typically signalled by activating the central 
+mouse wheel (for zoom) and pulling scroll bars 
+(to pan, moving left/right or up/down) around 
+the screed display).  Sometimes panning can also 
+be achieved by `q.dragging` inside the scene; 
+moving the mouse while keeping its left-button 
+down, with the cursor positioned inside the 
+relevant view window (similar to drag gestures 
+for dropping and resizing controls).  When working in 
+`i.three` dimensions, these kinds of drag 
+actions are most commonly interpreted 
+as rotations.  Most `ThreeD; viewers 
+support panning and zooming by recognizing 
+`q.keyboard modifiers`/, wherein users 
+hold down a key (often `b.shift`/, `b.control`/, 
+or `b.alt`/) while also moving the mouse.        
 `p`
+
+
+`p.
+In general, `ThreeD; displays are `q.responsive` in the 
+context of users modifying the visible scene, but many 
+of the interactive protocols which are commonplace 
+in `TwoD; structured front-ends do not apply 
+to `ThreeD; graphics (nor, for that matter, to 
+`TwoD; images such as photographs, rather than 
+organized data-visualizatio).  Some `ThreeD; environments, 
+tentatively, have tried to get beyond these limitations.  
+The premise here is that users may have an interest 
+in getting information about a location or object 
+which is one `i.part` of a `ThreeD; scene.  With 
+`TwoD; structured displays, it is easy to allocation a 
+small screen area specifically to represent its 
+own data structure, where the application may respond by 
+presenting users with a more complete review of the 
+relevant information (perhaps in a separate window).  
+For example, users clicking a `q.print` button will 
+in most programs see a `q.print dialog` which contains 
+multiple points of information about the current 
+page and printer setup.  In general, when a front-end 
+does not have enough space to show a complete data structure, 
+a `GUI; control can show an icon or a short description, 
+giving users a chance to click at that point for a more 
+complete view of the associated information.   
+`p`
+
+
+`p.
+Similar effects are sometimes warranted in `ThreeD;.  In 
+a virtual `q.street` tour, for example, a user will virtually 
+digitally `q.walk` past different streets and buildings, 
+and platforms such as Google StreetView insert 
+icons onto the view for users to click for location-specific 
+information %-- with a restaurant, for example, 
+a page showing menus and reviews; or, with a transportation 
+center, a link to transit routes and maps.  Via similar 
+methods, virtual tours `i.inside` buildings are sometimes 
+annotated with icons that lead to information about 
+individual rooms or objects, or else with short 
+textual descriptions (potentially including hypertext 
+links that can lead to more detailed views).  Interactive 
+icons in these contexts are sometimes called 
+`q.tag` or `q.place-marks` and allow `ThreeD; scenes 
+to have a select group of interactive features.    
+`p`
+
+
+`p.
+The above comments apply mostly to graphics 
+rendered via 360`textdegree;  
+photography, which creates the illusion of 
+three dimensions by pieces together 
+many individual `q.panoramic` pixtures 
+(often taken from special-purpose 
+cameras that capture images from all 
+directions, rather than having a single 
+view angle).  In the context of engineered 
+`ThreeD; views, such as those rendered 
+via mesh geometry, Computer Aided Design 
+(`CAD;) programs will sometimes isolate 
+specific object parts and surfaces and 
+make these interactive.  For example, a 
+`CAD; file modeling an industrial part may 
+permit users to select one piece of the 
+object and examine information such as 
+its dimensions or thickness %-- in the 
+`CAD; setting, someone can use the application 
+to actually create and modify industrial 
+designs, so selecting specific segments 
+of objects can lead to operations that 
+actually edit their properties within the 
+overall design (e.g., making industrial 
+subparts larger or smaller relative to 
+their contaning physical object).    
+`p`
+
+
+`p.
+Despite these familiar use-cases for 
+interactive `ThreeD;, there are multiple 
+technical limitations which prevent `ThreeD; 
+graphics from being responsive to the 
+same degree and with the same 
+granularity as structred `TwoD; 
+front end.  Computationally, the 
+geometry of `ThreeD; scenes %-- most often 
+derived from triangular mesh complexes 
+(point clouds where triangles are formed 
+by connecting nearby vertices) or 
+360`textdegree; images %-- is fundamentally 
+different than the layout managers 
+powering `TwoD; front-ends.  Layout manager 
+ensure that `GUI; containers remain well-organized 
+and usable even when a window is resized or scrolled.  
+In general, `GUI; `i.controls` are not 
+placed `i.within` `ThreeD; scenes the 
+way that they are situated in `GUI; layouts.  
+As one progresses through a `ThreeD; view, 
+different parts and objects come into view 
+or disappear %-- it is not clear how one would 
+implement `ThreeD; analogs to layout managers, 
+which would need to continuously update 
+layouts while scenes are rotated, panned, and 
+zoomed.
+`p`
+
+`p.
+Apart from the mathematical 
+computations involved in translating 
+scene-transform to visible geometry (each 
+rotation or camera-movement alters all 
+angles and causes different parts of the 
+scene to be hidden, or unhidden) %-- which 
+would apply to `GUI; controls immersed 
+in `ThreeD; scenes no less than mesh-triangles 
+or other units of `ThreeD; geometry, and 
+which are exponentially more complex than 
+calculations related to `TwoD; front-end  
+%-- interacting with controls visible 
+`i.inside` scenes could easily become  
+cumbersome for users.  For example, 
+in order to click on controls users 
+would have to rotate or move around 
+within the scene, and the graphics engine 
+would have to determine how to represent 
+icons, text, or areas for controls 
+at different icons or zoom levels.  
+Taking commercial tools such as Matterport 
+Tours or Google StreetView as examples, 
+immersing even simple `q.tag` icons 
+in Virtual Tours yields inconsistent 
+and uncomfortable `GUI;s %-- it is common 
+in these environments for tags to 
+appear and disappear for no apparent 
+reason, and having seen a tag (or a clickable 
+hyperlink) it can be frustrating to maneuver 
+the onscreen view so that the tag/link 
+can be activated.    
+`p`
+
+
+`p.
+Such issues with `ThreeD; `GUI;s are directly 
+applicable to robot's environments, because 
+in most cases robots will be receiving visual 
+imputs via mechanisms similar to 
+panoramic photography.  Humans users 
+wishing to remotely monitor and/or 
+guide robots by watching video feeds 
+based on robots' own inputs will therefore 
+be preseneted with displays similar to 
+360`textdegree; tours.  Unlike virtual tours, 
+however, robots are not primarily designed 
+simply to create visual feeds for human 
+viewers (although that can indeed be one 
+of their uses: consider robots deployed to 
+gather real-time images from locations that 
+would be dangerous to inspect in person).  
+Because robots typically process and 
+structurally analyze their environments, 
+inferences they make concerning object-boundaries 
+and affordances could be incorporated into 
+graphics accompanying their visual feed.  
+For example, robots may be programmed to 
+categories objects in their visual field 
+and/or identify ones which they can move 
+or manipulate.  Within their video feed, 
+then, certain objects will be singled 
+out through Computer Vision, making 
+it possible either for views of such objects 
+to be visually altered/highligted 
+or for a separate front-end display, presented 
+alongside the video feed proper, which 
+schematically diagrams the robot's 
+environment as it is modeled through image analysis.  
+`p`
+
+
+`p.
+Perhaps the most effect paradigm for robotics `GUI;s, 
+along these lines, would be a pair 
+between `ThreeD; capture of their raw video 
+feeds and `TwoD; structured windows presenting 
+their enviroments schematically, with an 
+emphasis on diagrammaing inferred relationships 
+between objects rather than spatial accuracy.  
+If a robot travels through a room with multiple 
+object that it could move, for example, a scemantic 
+`GUI; container might represent each of 
+these physical objects with icons or screen-areas 
+arranged so that users could interact with the 
+`TwoD; diagram as a proxy for controlling 
+the robot through its `ThreeD; video feed.  
+For example, `GUI; controls for each 
+movable object could be programmed with 
+interactive functionality analogous 
+to controls tied to application features 
+%-- users might, for instance, click on or 
+select context-menu items for specific 
+objects as a way of guiding robots 
+to move, inspect, or otherwise 
+manipulate them.  Here the combined 
+system merging the robot with the 
+user-facing front-end would react 
+to user actions similar to a desktop 
+application, but instead of the reactions 
+between restricted to digital operations localized 
+in the computer itself (like moving a file 
+from one folder to another), users could 
+employ such a setup to mold 
+robot's actions on external, physical 
+things (e.g., moving a box from one room to another). 
+`p`
+
+
+`p.
+In such a scenario humans would be relying on robots' 
+visual processing to convert a raw video feed 
+to a structured diagram (one that could be 
+rendered in two dimensions, making interactive 
+gestures easier).  For this reason, there is a 
+sense that humans would be interacting with 
+robots by virtue of shared environment-models: 
+people would find it difficult to 
+guide robots in this kind of system unless they 
+analyzed their visual inputs similarly to 
+how humans would if they were seeing the 
+same objects around them.  In short, robots' 
+mapping of immersive visual inputs to 
+schematic environment-summaries would have to 
+feel natural and intuitive for humans.  
+This kind of phenomenological correlation 
+may be much less vivid and intersubjective 
+that joint-attention between people themselves 
+(or between a person and an animal, in the 
+right circumstances), but it at least 
+lays the foudation for something resembling 
+human/robot communication %-- if one accept 
+the premise, that I emphasized in Chapter 23, 
+that shared situational understanding is the 
+origin-point for language.
+`p`
+
+
+`p.
+Note that in this kind of setup humans 
+would be talking to robots 
+indirectly, mediated by diagram 
+of robots' environments.  For example, 
+if a display shows (as a summarial view 
+onto the robot's visual input) outlines
+representing boxes that could be 
+moved, the human user would request 
+such an action by virtually moving 
+the object within the diagram, or 
+by some analogous gesture (like 
+selecting a `q.move` option from a 
+context menu).  The front-end, in short, 
+would be managed by a software 
+component that would translate user 
+intentions as expressed through a `GUI; 
+into commands that the robot understands.  
+There would, in effect, be two different 
+languages or sign-systems linked together: 
+the idioms of a `GUI; front-end with 
+which humans would interact, and then a 
+distinct robot-language engineered to 
+convey instructions to robots at a 
+tractable level, i.e., where there are 
+deterministic algorithms to translate 
+expressions in this language to 
+low-level commands affecting robots' 
+physical movements and orientation. 
+`p`
+
+
+`p.
+The idea of people `q.communicating with` 
+robots probably calls to mind a 
+more direct exchage where humans perhaps 
+`q.talk directly` to them, their 
+words parsed via Natural Langauge Processing 
+(this is the kind of scenario discussed 
+elsewhere in this book; see Chapter 11111).  
+However, within the relevent `NLP; pipeline 
+there would presumably be a distinction 
+between components that consume the spoken 
+language directly and those that 
+model specific robot-instruction suitable 
+for low-level responses.  In short, even a 
+medium of exchange which users perceive as 
+communicating `q.directly` to a robot 
+would most likely involve multiple stages, 
+organized analogously to the `GUI;-based 
+scenario where people interact with a 
+`GUI; display in lieu of `q.talking` to 
+the robot explicity.  Because of these 
+functional parallels, desiging systems 
+based on `GUI;s is a strategy for 
+fine-tuning robotics communication 
+to develop intermediate algorithms which 
+might then also be applicable to 
+interfaces based on natural language.  
+With a working pipeline to map 
+`GUI; operations onto robot-action 
+code, engineers could swap out 
+the `GUI; front-end for an 
+`NLP; interface, perhaps preserving 
+much of the lower-level protocols 
+on the robot's side specifically.  
+Working with `GUI; front-ends 
+first permits the two different 
+dimensions to the latter system to be 
+engineered independently %-- the 
+`NLP; parsers would have their 
+own set of requirements and complications 
+(effect speech-to-text translation, for 
+example) that could be worked through 
+independently of how the robot's 
+target languages (to which either `NLP; 
+input or `GUI; actions would both have 
+to be translated eventually).   
+`p`
+
+
+`p.
+None of this dicussion in the robotics 
+context represents new theories or 
+proposals; the techniques I have summarized 
+here appear to be relative mainstream 
+approaches to robotic engineering.  
+However, it is worth emphasizing that 
+building `GUI;s to serve as intermediate 
+communiction devices may provide both 
+practical benefits (in well-engineered 
+robotics systems) and serve as 
+one stage toward direct human/robot 
+communication (for reasons just 
+sketched out).  While `GUI; front-ends 
+similar to those I have summarized 
+are sometimes used for robot interactions, 
+there is relatively little literature 
+on implementing robots `GUI;s as a distinct 
+subject-area within both software engineering 
+and robotic (in the intersection of these 
+two disciplines).  This is a topic that 
+deserve further research, partly because 
+effective `GUI; programming is itself 
+not given due attention as far as a 
+systemic approach to `GUI; engineering, 
+to make front-end more user-friendly and 
+improve development tools.  Many details 
+of robotics-specific front ends, such as 
+how to pair `ThreeD; graphics with `TwoD; 
+schematic diagrams, and in general how 
+to make `ThreeD; displays more interactive, 
+are themes applicable to other 
+software domains apart from robotics 
+proper.   
+`p`
+
+
+`p.
+In particular, it is an open question how 
+best to associcate parts of `ThreeD; views 
+with indepenent `GUI; controls: should 
+controls be `i.immerced` in `ThreeD; scenes, 
+so that they are subject to the same 
+variation in view-angle, rotation, zoom, 
+and other `ThreeD; effects along with 
+all other facets of `ThreeD; geometry; 
+or should they `q.float` above `ThreeD; views 
+when their associate object/scene-locations 
+are visible; or should they be arranged 
+diagrammatically in a separate window?  
+Of course, these options could also be 
+combined.  To my knowledge, rigorous answers to these 
+questions have yet to be determined, 
+let alone implemented %-- nothing in 
+current WebGL, OpenGL, or panoramic-photography 
+software appears to provide the level of 
+interactive granularity that would 
+be implied by direct associations between 
+`ThreeD; scene-locations and `TwoD;-style 
+`GUI; controls, whether these are 
+visible within the scene (immersed or floating) 
+or separated out to a separate display. 
+`p`
+
+
+
 
 

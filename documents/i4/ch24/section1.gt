@@ -903,7 +903,7 @@ e.g., interactive transit displays).
 A `GUI; console can be one part of a 
 robot's equipment, but more broadly 
 users expect robots to fulfill user 
-intentions by moving themselves or 
+intentions by moving themselves and/or 
 external objects.  Although robot 
 actions might be preprogrammed 
 (and they can be semi-autonomous, 
@@ -924,13 +924,13 @@ actively under certain circumstances; for
 example, robots might be instructed to 
 perform some task only after they sense 
 a particular kind of change in their environment).
-Like `GUI;s front-ends to traditional 
+As with `GUI; front-ends to traditional 
 applications, the robot's procedures 
 propagate in response to user input, 
 and have a well-defined end-point, but 
 here the terminus of a procedure-sequence 
 would (primarily) not be something 
-visible on-screen, but rather a the 
+visible on-screen, but rather a  
 robot changing its location and/or configuration 
 in physical space (possibly affecting 
 some external object in the process).   
@@ -940,7 +940,7 @@ some external object in the process).
 `p.
 The units of `GUI; presentations are 
 `q.application windows` (visible screen areas), 
-inside of which as `q.controls` such as 
+inside of which are `q.controls` such as 
 buttons, labels, scroll bars, magnitude-indicators 
 (consider how we drag an icon to partially fill 
 or empty a bar, to zoom in or out on a text or graphic 
@@ -957,9 +957,9 @@ would be angles of gears, extenders, wheels,
 and whatever mechanical devices robot's use 
 to move and reposition themselves.  At 
 the culmination of a procedure-set enacted 
-in response to user input, then the robot 
+in response to user input, then, the robot 
 will in general be a different state with 
-respect to their location and to orientation of their 
+respect to their location and the orientation of their 
 arms, graspers, mounted cameras, or whatever 
 other mechanical equipment they have on-board.  
 We can see these physical gadgets as analogous 
@@ -996,7 +996,7 @@ Given the analogy of `GUI; state to robots'
 orientation, an analysis of `GUI; structures (intended to 
 be included in an overall procedural semantics 
 for computer code), which will be the focus of 
-the remaining sections, can perhaps serve as a 
+the following section, can perhaps serve as a 
 starting point for further work in robotics and 
 other areas that generalize and extend the 
 familiar desktop-computing environments. 
