@@ -1089,7 +1089,7 @@ void DHAX_Application_Controller::handle_newly_downloaded_video(QString file_pat
 
  QDir qd = qfi.dir();
  //QFileInfoList hitList; // Container for matches
- QDirIterator it(qd);
+ // QDirIterator it(qd);
 
  QFileInfoList qfis = qd.entryInfoList(QDir::Files, QDir::Reversed | QDir::Time);
 

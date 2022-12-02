@@ -14,6 +14,7 @@
 
 #include <QMenuBar>
 
+extern void instagram_temp();
 
 DHAX_Menu_System::DHAX_Menu_System()
 {
@@ -155,6 +156,12 @@ void DHAX_Menu_System::init_menus()
  {
   sg->emit_view_cad_requested();
  };
+
+ file_menu.add_action("Instagram Download") << []
+ {
+  instagram_temp();
+ };
+
 
  DHAX_Menu* video_menu = file_menu.add_nested_menu("Play Video");
  video_menu->add_action("No Annotations") << [sg]

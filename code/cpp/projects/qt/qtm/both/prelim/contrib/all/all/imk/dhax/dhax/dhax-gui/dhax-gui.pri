@@ -341,6 +341,7 @@ SOURCES += \
   $$SRC_DIR/dhax-video/dhax-video-player-dialog.cpp \
   $$SRC_DIR/dhax-video/dhax-video-annotation.cpp \
   $$SRC_DIR/dhax-video/dhax-video-annotation-set.cpp \
+  $$SRC_DIR/dhax-video/instagram-temp.cpp \
   $$SRC_DIR/stats/dhax-stat-assessment.cpp \
   $$SRC_DIR/stats/dhax-stat-assessment.demo-test.cpp \
   $$SRC_DIR/stats/stat-test-image.cpp \
