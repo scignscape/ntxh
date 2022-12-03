@@ -777,7 +777,7 @@ to their value the smallest offset possible
 without conflicting with blue numbers in earlier rows.  Call 
 red-blue-gray-black matrices subject to 
 these restrictions (on the black numbers 
-as well as lamdba-feasible restrictions for each row) 
+as well as lambda-feasible restrictions for each row) 
 `q.lambda-feasible` matrices.  Based on their 
 construction, I claim the set of such 
 feasible matrices is isomorphic to the 

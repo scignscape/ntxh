@@ -7,7 +7,7 @@ workflow, enacted through the
 `XCSD; image format.  That outline 
 points to several details within an 
 `XCSD; pipeline (arguably indicative 
-of common concenrs within many 
+of common concerns within many 
 different Computer Vision workflows) 
 which could involve cross-component 
 interop, insofar as image-analysis 
@@ -49,7 +49,7 @@ Likewise, histogram displays may themselves
 be interactive %-- given that these 
 visuals typically rank colors by showing 
 bars filled with a particular color with a 
-height documenting its occurance in the 
+height documenting its occurrence in the 
 histogram-area, the bars themselves 
 can serve as color-selectors, so for 
 example users could use histograms to select 
@@ -104,7 +104,7 @@ features for analyzed images and image-series.
 
 `p.
 In short, the interop between image-processing 
-host applicarions and analytic modules  
+host applications and analytic modules  
 are a good example of bi-directional 
 data sharing between semi-autonomous components, 
 and fall under the rubrick of interop 

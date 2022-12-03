@@ -47,7 +47,7 @@ leveled against the `OO; paradigm in other contexts
 to conclude that `OO; is an effective 
 modeling tool for `GUI; functionality, one 
 which cannot readily be replicated by functional 
-programming (`FP;) langauges, for example 
+programming (`FP;) languages, for example 
 (to prove the point, consider that `FP; bindings to 
 `GUI; software libraries, particularly cross-platform 
 ones %-- i.e., intermediate libraries that 
@@ -67,7 +67,7 @@ preeminently Object-Oriented.
 
 `p.
 Accordingly, `GUI; elements are canonically 
-objects with state (`FP; langauges often 
+objects with state (`FP; languages often 
 are designed around `q.stateless` values, but 
 in the `GUI; context recognizing 
 mutable state appears to be the 
@@ -88,7 +88,7 @@ This is particularly true because the
 visual appearance of `GUI; elements includes 
 not only how they appear in their `q.normal` 
 state, but also how their appearance is 
-subtely modified as a cue to users trying 
+subtlely modified as a cue to users trying 
 to orient themselves `visavis; applications' 
 interactive features.  For example, 
 `GUI; buttons and clickable spans of text 
@@ -109,7 +109,7 @@ on the item, so that clicking the mouse
 (via a physical mouse-button) is understood 
 to be an action for `q.clicking` the 
 (virtual) `GUI; button/control.  Once a button 
-`i.is` clicked and while the reponse is 
+`i.is` clicked and while the response is 
 progressing, a button may appear in a 
 `q.down` state, which has a style distinct 
 from both normal and rollover.
@@ -168,7 +168,7 @@ be utilized interactively.  For this reason
 graphic styles have to be designed attentively, 
 because each control-state should be visually 
 distinguished from others, but also the 
-styles should not intefere with the 
+styles should not interfere with the 
 control's primary functions.  For example, a 
 button's descriptive label/text (and/or 
 its icon) must remain visible even while its 
@@ -229,7 +229,7 @@ in character form.
 might represent magnitudes more pictorially.  
 Temperature, for example, may be expressed 
 by coloring a bar at a height proportionate 
-to degrees Farenheit or Celcius; the bar 
+to degrees fahrenheit or celsius; the bar 
 filled higher to the top would indicate 
 higher temperatures, and lower bars 
 show colder temperature.  Color could also 
@@ -258,7 +258,7 @@ be represented via collections of different
 controls.  Where appropriate, quantitative 
 data sets could also be shown via charts or 
 diagrams, either static images or 
-aggregate components with multiple indepentent controls.
+aggregate components with multiple independent controls.
 
 `pseudoIndent; Aside from textual and numeric 
 data, some `GUI; controls are engineered to 
@@ -374,7 +374,7 @@ organizing motif).  `lGUI; containers
 do not need a fully symmetrical 
 layout; often smaller controls are 
 arranged in table-like patterns but 
-with varying numers of elements on 
+with varying numbers of elements on 
 each line/row, depending on the 
 amount of space each element needs.  
 The important detail is that users 
@@ -559,13 +559,13 @@ some controls' edges); cursors tend to be
 given an arrow-like icon in these settings.  
 When hovering overm on the 
 other hand, cursors usually take on a shape 
-remininiscent of a capital letter `q.I`/.  
+reminiscent of a capital letter `q.I`/.  
 
 `pseudoIndent; In some cases the 
 on-screen mouse position can be correlated with 
 some physical or empirical coordinate 
 system %-- a good example is digital 
-maps, where positions inside the map correpond 
+maps, where positions inside the map correspond 
 to latitude and longitude numbers.  
 Here it is common to print the geographic 
 coordinates next to a corner of the map, 
@@ -578,7 +578,7 @@ mouse-positions map directly to geospatial
 points.  A similar pattern in one dimension 
 would be using a mouse to advance or rewind 
 an audio or video player, wherein a numeric 
-control shows the time ellapsed at different 
+control shows the time elapsed at different 
 points relative to the file's start (the 
 convention being to pair audio/video 
 controls with a line-bar and position 
@@ -613,8 +613,8 @@ expected interactive patterns, where
 `GUI;s are not sufficiently responsive 
 in terms of giving users frequent feedback 
 on current state (such as mouse position)
-and interactive possibilies, would 
-almost certianly be experienced by 
+and interactive possibilities, would 
+almost certainly be experienced by 
 users as erratic and confusing.  
 Most of the front-end patterns 
 mentioned here are probably familiar 
@@ -623,7 +623,7 @@ desktop-style computers, but it is
 nonetheless useful to outline 
 them explicitly, precisely because 
 well-engineered responsiveness 
-effects will be subtle and non-distacting.  
+effects will be subtle and non-distracting.  
 When we appreciate the full scope 
 of interactive patterns, we can 
 perceive the complexity of standard 
@@ -643,14 +643,14 @@ via a consistent set of coding patterns.
 
 
 `p.
-As dicussed in this chapter (and also 
+As discussed in this chapter (and also 
 touched on at the start of Chapter 20), 
 application functionality can be 
 analyzed in terms of operations 
 and procedure-sequences that are, 
 in effect, bookended by user 
 actions (which invite responses from 
-the appliction) and by visible 
+the application) and by visible 
 `GUI; changes (changes in the 
 state of one or more controls, 
 communicating to users the 
@@ -756,7 +756,7 @@ By design, applications are engineered to
 to how software models the request to be 
 handled.  Consider a notebook control 
 that contains multiple windows, each displaying an 
-editable text-doment: when the user requests a 
+editable text document: when the user requests a 
 save, the application would infer `i.which` 
 file should be saved based on which 
 document's window is currently visible.  
@@ -849,7 +849,7 @@ categorized as part of `GUI; or application state.
 out, by the application, in the context 
 of the corresponding application object.  
 These functional interconnections are 
-best managed by mainting association 
+best managed by maintaining association 
 between application and front-end 
 objects (which implies an overall `OO; 
 system unifying these two contexts).
@@ -921,7 +921,7 @@ elsewhere the most popular name is `b.self`/).
 The problem with this convention 
 in a context where procedures are intended 
 to synchronize state between `i.two` objects 
-is that it seems artifical to choose one or another 
+is that it seems artificial to choose one or another 
 as `q.the` receiver %-- a more fluent 
 paradigm would be to allow `i.two` 
 receivers (or more), in the same way that 
@@ -936,7 +936,7 @@ into `q.channels`/, including a `q.sigma`
 channel that can generalize receiver-objects 
 to object-lists (derived from the `q.sigma calculus`/, 
 which attempts to model `OO; methods by 
-extending lambda calculii).  This would be 
+extending lambda calculi).  This would be 
 one way to tweak `OO; systems %-- permitting 
 multiple receivers.  There is no technical 
 reason why programming languages could not 
@@ -985,7 +985,7 @@ effect that the second procedure gets called,
 with parameters (if any) provided by the 
 `q.sender`/.  Unlike direct inter-procedure 
 calls, these connections are 
-routed through an intemediary component 
+routed through an intermediary component 
 and they might be dynamically reconfigured: 
 signal/slot connections can be newly created 
 or dropped while an application is running.  
@@ -1029,7 +1029,7 @@ tools for enforcing `q.separation of concerns`/,
 where each procedure and each object have 
 a relatively narrow set of responsibilities.  
 Signals and slots prevent objects from becoming 
-tightly coupled, because signalling objects 
+tightly coupled, because signaling objects 
 can be designed in isolation from procedures 
 that receive (and act on) their signals. 
 `p`
@@ -1063,7 +1063,7 @@ connections %-- that is, they
 cannot be expressed directly 
 through the language's syntax and 
 semantics, but rather have to be 
-approximated by code libaries 
+approximated by code libraries 
 (potentially including language 
 extensions through code generators) 
 %-- this patterns is for all intents 
@@ -1141,7 +1141,7 @@ because its surrounding window does,
 and both end up producing signals 
 broadcasting their new state.  
 Code responsible for the image display 
-accrodingly should keep track of 
+accordingly should keep track of 
 either or both signals and modify 
 the image's own size and/or on-screen 
 placement accordingly.   
@@ -1182,7 +1182,7 @@ can then resize the window if desired.
 However, `i.after` the image is loaded, 
 ordinarily the user is free to expand or 
 contract the window irrespective of the 
-image size (scrolling being avaible 
+image size (scrolling being available 
 to compensate for when the window get 
 too small to show 
 the whole image).  There are, accordingly, 
@@ -1259,7 +1259,7 @@ held within the coordinated data structure
 structure's fields are interrelated 
 in the sense of demanding specific mathematical 
 invariants, they are also properties 
-of different contols' states, so they 
+of different controls' states, so they 
 need to be properly classified `visavis; 
 the control they are associated with).
 `p`
@@ -1360,7 +1360,7 @@ may be zoomed in and out (preserving the camera's
 line of sight but moving its point of focus closer to 
 or further from the camera).  With a three-button 
 mouse, pan and zoom in `i.two` dimensions is 
-typically signalled by activating the central 
+typically signaled by activating the central 
 mouse wheel (for zoom) and pulling scroll bars 
 (to pan, moving left/right or up/down) around 
 the screed display).  Sometimes panning can also 
@@ -1386,7 +1386,7 @@ of the interactive protocols which are commonplace
 in `TwoD; structured front-ends do not apply 
 to `ThreeD; graphics (nor, for that matter, to 
 `TwoD; images such as photographs, rather than 
-organized data-visualizatio).  Some `ThreeD; environments, 
+organized data-visualization).  Some `ThreeD; environments, 
 tentatively, have tried to get beyond these limitations.  
 The premise here is that users may have an interest 
 in getting information about a location or object 
@@ -1432,7 +1432,7 @@ The above comments apply mostly to graphics
 rendered via 360`textdegree;  
 photography, which creates the illusion of 
 three dimensions by pieces together 
-many individual `q.panoramic` pixtures 
+many individual `q.panoramic` pictures 
 (often taken from special-purpose 
 cameras that capture images from all 
 directions, rather than having a single 
@@ -1463,8 +1463,8 @@ interactive `ThreeD;, there are multiple
 technical limitations which prevent `ThreeD; 
 graphics from being responsive to the 
 same degree and with the same 
-granularity as structred `TwoD; 
-front end.  Computationally, the 
+granularity as structured `TwoD; 
+front ends.  Computationally, the 
 geometry of `ThreeD; scenes %-- most often 
 derived from triangular mesh complexes 
 (point clouds where triangles are formed 
@@ -1530,7 +1530,7 @@ panoramic photography.  Humans users
 wishing to remotely monitor and/or 
 guide robots by watching video feeds 
 based on robots' own inputs will therefore 
-be preseneted with displays similar to 
+be presented with displays similar to 
 360`textdegree; tours.  Unlike virtual tours, 
 however, robots are not primarily designed 
 simply to create visual feeds for human 
@@ -1563,11 +1563,11 @@ Perhaps the most effect paradigm for robotics `GUI;s,
 along these lines, would be a pair 
 between `ThreeD; capture of their raw video 
 feeds and `TwoD; structured windows presenting 
-their enviroments schematically, with an 
-emphasis on diagrammaing inferred relationships 
+their environments schematically, with an 
+emphasis on diagramming inferred relationships 
 between objects rather than spatial accuracy.  
 If a robot travels through a room with multiple 
-object that it could move, for example, a scemantic 
+object that it could move, for example, a schematic 
 `GUI; container might represent each of 
 these physical objects with icons or screen-areas 
 arranged so that users could interact with the 
@@ -1616,7 +1616,7 @@ may be much less vivid and intersubjective
 that joint-attention between people themselves 
 (or between a person and an animal, in the 
 right circumstances), but it at least 
-lays the foudation for something resembling 
+lays the foundation for something resembling 
 human/robot communication %-- if one accept 
 the premise, that I emphasized in Chapter 23, 
 that shared situational understanding is the 
@@ -1659,12 +1659,12 @@ physical movements and orientation.
 `p.
 The idea of people `q.communicating with` 
 robots probably calls to mind a 
-more direct exchage where humans perhaps 
+more direct exchange where humans perhaps 
 `q.talk directly` to them, their 
-words parsed via Natural Langauge Processing 
+words parsed via Natural Language Processing 
 (this is the kind of scenario discussed 
 elsewhere in this book; see Chapter 11111).  
-However, within the relevent `NLP; pipeline 
+However, within the relevant `NLP; pipeline 
 there would presumably be a distinction 
 between components that consume the spoken 
 language directly and those that 
@@ -1676,8 +1676,8 @@ would most likely involve multiple stages,
 organized analogously to the `GUI;-based 
 scenario where people interact with a 
 `GUI; display in lieu of `q.talking` to 
-the robot explicity.  Because of these 
-functional parallels, desiging systems 
+the robot explicitly.  Because of these 
+functional parallels, designing systems 
 based on `GUI;s is a strategy for 
 fine-tuning robotics communication 
 to develop intermediate algorithms which 
@@ -1706,14 +1706,14 @@ to be translated eventually).
 
 
 `p.
-None of this dicussion in the robotics 
+None of this discussion in the robotics 
 context represents new theories or 
 proposals; the techniques I have summarized 
 here appear to be relative mainstream 
 approaches to robotic engineering.  
 However, it is worth emphasizing that 
 building `GUI;s to serve as intermediate 
-communiction devices may provide both 
+communication devices may provide both 
 practical benefits (in well-engineered 
 robotics systems) and serve as 
 one stage toward direct human/robot 
@@ -1744,8 +1744,8 @@ proper.
 
 `p.
 In particular, it is an open question how 
-best to associcate parts of `ThreeD; views 
-with indepenent `GUI; controls: should 
+best to associated parts of `ThreeD; views 
+with independent `GUI; controls: should 
 controls be `i.immerced` in `ThreeD; scenes, 
 so that they are subject to the same 
 variation in view-angle, rotation, zoom, 

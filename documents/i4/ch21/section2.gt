@@ -101,7 +101,7 @@ predicates on intertype relations
 (such as subtype-of) can be non-paradoxically defined on the 
 full collection of types, including uninhabited 
 ones.  A bottom type does then have a 
-reasonable correspondance with uninsinitalized 
+reasonable correspondence with uninitialized 
 code-symbols because this is the only type 
 that correctly characterizes the state 
 of such symbols prior to their being assigned a 
@@ -197,11 +197,11 @@ typed values but include non-type states as well.
 by associating with carriers such that 
 carrier-state propagates to the nodes.  
 Nodes are in `q.shared supplication` if 
-their carriers are syncronized to be 
+their carriers are synchronized to be 
 perpetually in the same state (this can be 
 considered a refinement of the earlier definition).
 Symbols in `SG;-scopes can derive from multiple 
-sources: assume that scopes' smybol-list can be 
+sources: assume that scopes' symbol-list can be 
 grouped into `i.declared` symbols internal to the 
 scope, `i.argument` symbols bound to 
 procedures' signatures, and (potentially) `i.global`/,
@@ -215,7 +215,7 @@ typical programming language).
 
 `defin -> Tripartite Scope ->  I'll call `SG; scopes 
 `i.tripartite` in that they are mappings from symbol-names 
-to carriers (or groups of state-syncronized carriers) 
+to carriers (or groups of state-synchronized carriers) 
 with type-based states, and symbols can be 
 classified as `i.declared`/, `i.argument`/, 
 or `i.ambient`/.  The semantics of these groupings 
@@ -242,7 +242,7 @@ the carriers bound to argument symbols in the
 latter's tripartite scope.  The switch 
 in execution context from the calling to the 
 called graph is analogous to binding symbols 
-to values in process calculii, or beta-substitution 
+to values in process calculi, or beta-substitution 
 in lambda calculus, except that carriers' 
 connections (via their argument nodes) to 
 procedure-nodes is organized via channels, 
@@ -625,7 +625,7 @@ that they are in effect) and must be
 presumed to have been enforced whenever 
 there is an originating digamma reduction 
 in the first place, and that subsequently 
-any use of a type as a polymorhpism-disambiguating 
+any use of a type as a polymorphism-disambiguating 
 device should proceed under the assumption that 
 any carrier-state inherited as synchronized 
 with the state of an originating carrier 
@@ -676,7 +676,7 @@ essentially proceed by grounding the semantics
 of any specific type in the set of its 
 possible inhabitants.  To attribute a type to 
 a value is thereby to assert that the value 
-belongs to the type's extenion-set.  
+belongs to the type's extension-set.  
 This paradigm has certain benefits, to be 
 sure, such as providing an elegant 
 approach to functions defined on a type 
@@ -694,7 +694,7 @@ in `C;/`Cpp;) is a widespread practice
 in functional programming.  Extensional 
 semantics gives a concise reading to this 
 coding style: insofar as types semantically 
-are effectivly equivalent to their 
+are effectively equivalent to their 
 extensions, any function defined over a 
 covering collection of extension-parts 
 is equivalent to a function defined over 
@@ -705,7 +705,7 @@ the type as a whole.
 `p.
 On the other hand, we can model extension-partitions 
 and the prospect of quantifying over them as a 
-feature for proceduration implementation 
+feature for procedural implementation 
 without actually equating types with extensions; 
 we merely need to posit that types 
 can be `i.associated` with extensions in such a 
@@ -789,7 +789,7 @@ in that constructive type theory
 essentially works by using construction patterns 
 as a model for type-extensions, so that 
 the extension embodied by that model 
-fixes the type's semantics.  Every non-empyt list, 
+fixes the type's semantics.  Every non-empty list, 
 say, may be derived from a smaller-by-one list 
 by appending a specific value to its end; 
 so for any list there is a specific construction-sequence 
@@ -860,7 +860,7 @@ mostly heuristic; technically, I consider
 hypergraphs to be essentially a visual shorthand 
 for `i.virtual machine` constructions.  Here I appeal 
 to comments I made in Section 1: a hypergraph 
-(or, in essence, any strututred representation) 
+(or, in essence, any structured representation) 
 essentially iconifies the series of steps 
 needed to construct the graph in its precise state.  
 For example, focusing on channelized neighborhoods, 
@@ -1360,7 +1360,7 @@ plus or minus (holding the `q.control` key and
 tapping the `q.plus` or `q.minus` keys to increase 
 or decrease zoom).  Presumably, altering zoom levels 
 via these other gestures should cause the 
-zoom-slider to be adjusted propertionately.  
+zoom-slider to be adjusted proportionately.  
 There are, then, potentially five different 
 gestures which might affect zoom levels, each associated 
 with `GUI; controls in different ways: directly 

@@ -291,7 +291,7 @@ to a rectangular pixel-grid).  Given
 two end-points and a single intermediate coordinate, 
 one might want to calculate the intersection 
 of the formers' Bresenham's line with the 
-horiztontal or vertical axis-translation through 
+horizontal or vertical axis-translation through 
 the latter, or then go on to select some set 
 of points adjacent to that intersection on either 
 side (this last step would need information 
@@ -822,7 +822,7 @@ labels should map to 0, 1, or 2 so as to form array indices.
 Also, some use-cases for enums are to introduce a 
 collection of related labels into a programming environment, 
 without necessarily implying that there is a single 
-semantic or conceptual iterpretation that covers each of 
+semantic or conceptual interpretation that covers each of 
 them.  For instance, it is plausible that an enum 
 employed in the context of managing calendars (not just 
 raw dates but schedules, appointments, and so on) 
@@ -863,7 +863,7 @@ In response, some code might prefer to use sequential
 numbers and assign, say, 8 and 9 to `q.weekday` and `q.weekend`/.  
 Any procedures inputting a days-enum would therefore 
 need to check for these two idiosyncratic values 
-and branch accoringly.  This may be imperfect style 
+and branch accordingly.  This may be imperfect style 
 from a viewpoint that code which has numerous conditional 
 branches is harder to maintain and understand (compared to 
 mostly `q.branchless` programming).  On the other hand, 
@@ -882,7 +882,7 @@ might feel dubious from a type-theoretic perspective
 according to which enums should be proper `q.sum-over-unit` 
 types.  In effect, two different intuitions about 
 `q.elegant` (and maintainable/understandable) 
-programmng style are in tension, as far as restricting branching 
+programming style are in tension, as far as restricting branching 
 `i.or` preferring enum types not bound to precise underlying 
 values.  My general point is that 
 these kinds of tensions tend to occur in contexts 
@@ -1160,7 +1160,7 @@ that (as a runtime feature) anomalous
 values get mapped to one specific label.  
 Moreover, enum `i.types` could be equipped with 
 different varieties of integer-casts, distinguished 
-between contexts in which coversions would be 
+between contexts in which conversions would be 
 applied.  In the most restrictive case, enums 
 would never be cast to their underlying 
 values except for a narrow set of low-level 

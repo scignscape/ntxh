@@ -16,7 +16,7 @@ domain, where highly optimized code in languages such as
 `C; or `Cpp; is preferable for performance reasons).  
 In the current context I intend to focus however 
 in `VM; which are explicitly oriented toward 
-image-procesing, where this specific problem-area 
+image-processing, where this specific problem-area 
 is a central design emphasis instead of one group 
 of foreign-function capabilities amongst others.  
 This means that the `VM; model will incorporate features 
@@ -76,14 +76,14 @@ may be used for image registration
 %-- aligning multiple images 
 (`MRI; scans, say, or photos taken 
 with a head-mounted camera that 
-are stiched together to form `ThreeSixty; 
+are stitched together to form `ThreeSixty; 
 `q.panoramic` tours) by locating 
 pre-identified keypoints common to 
 all images in a series.  Landmark 
 keypoints may also be used for 
 segmentation (by connecting certain 
 keypoints to form polygons outlining 
-or containing a Region of Interst). 
+or containing a Region of Interest). 
 Whether via this technique or 
 others (e.g., superpixels or closed contours) 
 segmentation can isolate a desired 
@@ -116,7 +116,7 @@ intermediate processing stages, so
 algorithms typically feature-detectors 
 can be paired with operations 
 to produce secondary images visually 
-sumarizing the algorithm's performance.  
+summarizing the algorithm's performance.  
 Keypoints, feature-lines, contours, and 
 superpixels may be visualized by 
 drawing markers at key-point locations 
@@ -164,7 +164,7 @@ a workflow.  Insofar as image-processing
 capabilities are part of a full-fledged 
 desktop-style application, Computer Vision 
 routines can leverage `GUI; features 
-to show intemediate images, potentially 
+to show intermediate images, potentially 
 with interactive capabilities allowing
 users to examine results in greater
 detail.  For example, keypoints might 
@@ -197,7 +197,7 @@ attributes are an example of how
 visualizing Computer Vision 
 workflows may involve interactive 
 displays with more functionality  
-than merely graphings images 
+than merely graphing images 
 decorated with feature-depicting 
 annotations (like highlights 
 for feature-points and 
@@ -223,7 +223,7 @@ temp file in a picture-view window.
 Data for that operation may involve 
 nothing more than a file path 
 for the desired image.  Once the 
-presentation inolves context menus 
+presentation involves context menus 
 and intra-image interactions, however, 
 the interop between a `GUI; host 
 and an image-analysis (semi-autonomous) 
@@ -309,7 +309,7 @@ the host application's point of view, but I will
 now transition to image-processing components 
 themselves.  As a case-study I will consider 
 the `qXCSD; format which was formulated 
-partly in conjuction with developing material 
+partly in conjunction with developing material 
 for these chapters.  This discussion will 
 indicate the rationale for `XCSD;'s approach to 
 color-processing, memory-layout, and other 
@@ -434,8 +434,8 @@ within (or on the border of) one or more regions-of-interest.
 `p`
 
 `p.
-The last two paragraphs have explained some featuers 
-and rationaled for `XCSD;, and mentioned the 
+The last two paragraphs have explained some features 
+and rationales for `XCSD;, and mentioned the 
 origin of concepts like `q.extensible` channel-systems 
 and subdivision indexing, reflected in the format's 
 name.  The purpose of this chapter is not to 
@@ -465,17 +465,17 @@ They are readily interconvertible: `MCHprimecovert;.
 `footnote`  Visually, the `MCH; merges how the 
 two component metrics `q.count steps`/: whereas the Manhattan 
 counts only orthogonal steps, and the Chebychev freely counts 
-`i.either` orthoginal and diagonal steps, the `MCH; 
-represents a path `i.first` along a diagnoal and then, 
+`i.either` orthogonal and diagonal steps, the `MCH; 
+represents a path `i.first` along a diagonal and then, 
 `q.turning` by 135 degrees, orthogonal steps outward.  
 The raw-number pairs can be supplemented with 
 one of eight directional indications as needed 
 (between two points the diagonal-then-orthogonal 
-path can have four initial direcitons and two 
+path can have four initial directions and two 
 possible further directions for the orthogonal 
 component).  Picture `MCH; pairs as the 
 sum of a diagonal vector (sloping 
-at 45 degress from the relevant line) and 
+at 45 degrees from the relevant line) and 
 end-to-end with an orthogonal vector.      
 `p`
 
@@ -485,7 +485,7 @@ In order to document the relevant mathematical
 properties of `MCH; I will introduce a couple 
 of auxiliary constructions related to discrete 
 geometry.  The main results I am leading uo 
-to are smmarized in Table 1 with respect to 
+to are summarized in Table 1 with respect to 
 finding locations equidistant from some point.  
 The math involved here is barely above grade-school 
 level, but there is some combinatorial trickiness 
@@ -503,13 +503,13 @@ both horizontally and vertically, the exact center
 is one pixel; otherwise, it is the gap `i.between` 
 two pixels (for an even/odd mixture) or 
 four (in the both-even case).  This motivates 
-the following nodification to the notion 
+the following modification to the notion 
 of discrete geometry on an integer grid or lattice:
 
 `anondefin.
-Call a `q.black-gray` grid a lattace with lines 
+Call a `q.black-gray` grid a littace with lines 
 grouped into two classes, `i.black` and `i.gray`/, 
-where each horiztonal (respectively, vertical) 
+where each horizontal (respectively, vertical) 
 black line is surrounded by two gray lines, and 
 vice versa (i.e., the two colors are interspersed).  
 The `q.points` on such a grid would lie at 
@@ -577,7 +577,7 @@ which internally sum to the same number of steps, the
 `MCH; and Euclidean orderings coincide.  Also, (ii) strict 
 equality between distances matches between both representations, 
 and (iii) if one `MCH; coordinate is held constant, or if both 
-either simultaneously increase or descrease, the 
+either simultaneously increase or decrease, the 
 changing coordinates will increase or decrease with Euclidean distance.
 `anonobservation`
 
@@ -693,7 +693,7 @@ should be placed before those further away.
 For `XCSD;, the `q.points` are actually 
 tierboxes (or gaps between them), but 
 this is consistent with black-gray grids 
-empbodying mereogemetric relations 
+embodying mereogemetric relations 
 through discrete/integer mathematics, 
 without the grid being a faithful 
 `i.representation` of the modeled 
@@ -733,7 +733,7 @@ to be significant for labeling, classifying, or
 matching images when they emerge from an 
 image's central region more than its periphery.  
 The color spectrum or histogram weighted toward 
-the center typically bears more signifance 
+the center typically bears more significance 
 than further from the center, for example, 
 and similarly for prominent contour-shapes, 
 textures, diffusion processes, and so forth. 
@@ -746,7 +746,7 @@ preview image-summaries might need
 to strip away peripheral content, 
 even if the image is also scaled 
 down.  This points to potential 
-benefits of center-orienetd memory layout.  
+benefits of center-oriented memory layout.  
 Copying pixels (even multiple pixel-runs, 
 e.g., one per scanline) is not a very 
 time-consuming operation, especially in the 
@@ -765,7 +765,7 @@ even the relatively minor step of
 pixel-copying can improve performance, 
 in situations where one wants to 
 construct thumbnails for hundreds 
-of pictures (matchng a query, say), 
+of pictures (matching a query, say), 
 or perform basic analysis on a 
 large image-series.     
 `p`
@@ -855,14 +855,14 @@ distance, forming equivalence classes of Chebychev-equidistant
 tierboxes.  Within each such class, `MCH; distances expand 
 outward from rows and columns passing through the image 
 center (or centers; again, tracking even-odd effects as 
-with black-gray grids) toward diagnols.  This algorithm 
+with black-gray grids) toward diagonals.  This algorithm 
 has to be adjusted for the case where the Chebychev distance 
 is greater than half the shorter image dimension 
 (in terms of tierbox-counts) so that the `MCH; cycle 
 is restricted to the image's longer axis.
 
 `item ->> Calculating tierbox positioning within each `MCH; cycle ;;  
-The choice of how to order tierboxes `i.within` one cylce 
+The choice of how to order tierboxes `i.within` one cycle 
 seems mostly arbitrary.  In `XCSD;, I chose to 
 order counter-clockwise from the left (for images with 
 landscape orientation) or top (for those with portrait 
@@ -904,7 +904,7 @@ operations when `q.collapsing` the 24 directions to
 accommodate different `MCH; cycle-lengths).   
 
 `item ->>  Map `q.subdivision indexing` to orthogonal coordinates ;;  
-Inside tierboxes, `XCSD; recognizes indexes accross 
+Inside tierboxes, `XCSD; recognizes indexes across 
 `threebythree; and `ninebynine; tiers, mirroring the 
 actual memory layout.  For example, the center of each 
 tierbox is located via code `q.555`/.  Obviously, sometimes 
@@ -915,7 +915,7 @@ to orthogonal distances against tierbox corners and
 those of the image overall.
 
 `item ->>  Compute color averages within box-regions of different 
-tiers ;;  One rationaly for the subdivision system is to 
+tiers ;;  One rationale for the subdivision system is to 
 establish data structures for `threebythree; and `ninebynine; 
 boxes (as well as tierboxes) which proxy the collection of 
 pixels within them.  If an image is compressed by a factor 
@@ -976,7 +976,7 @@ originals %-- is that most statistical analyses
 rely on color-discontinuities.  Analyses look 
 for points in an image where there is an above-average 
 gap between two adjacent pixels.  Discontinuity, however, 
-in an intrisically `q.scalar` or one-valued concept: 
+in an intrinsically `q.scalar` or one-valued concept: 
 for example, given a sequence of numbers, a `q.spike` in 
 value would correspond to a point where two sequential 
 numbers have an unusually large difference, compared 
@@ -984,7 +984,7 @@ to typical adjacent number-pairs.  Generalized to two
 dimensions, the same notion of discontinuity 
 works across different directions (up, right, down-left, etc.), 
 giving rise to a matrix of difference-measures, because 
-any pixel if `q.adjecent` to several others (eight 
+any pixel if `q.adjacent` to several others (eight 
 others, if we include both orthogonal and diagonal 
 directions).  However, quantifying discontinuity 
 by value-different only makes sense, intrinsically, 
@@ -1020,7 +1020,7 @@ because very different colors can have
 similar grayscale values; for instance, medium-red 
 and medium-blue would, if juxtaposed, strongly 
 suggest some ground-truth discontinuity, 
-but they would both map to almost indistiguishable 
+but they would both map to almost indistinguishable 
 grayscale values if they are similarly mid-range 
 in intensity (neither dark nor light).   
 For these reasons, some image-processing 
@@ -1035,7 +1035,7 @@ alternative reductions to one-channel.
 One tactic employed by `XCSD; code involves 
 `q.toroidal` color space, which is related 
 to `HSV;.  A toroid is a solid torus; topologically, a 
-torus is the result of one circle rotating aroung a 
+torus is the result of one circle rotating around a 
 central point, tracing its own circular path in the 
 process.  A point on a torus surface can therefore be 
 identified by two angles, one measuring how 
@@ -1100,7 +1100,7 @@ metric in terms of two rotation angles and one
 radius length (the `q.rho` measuring distance 
 from a neutral grayish manifestation of the pure color, 
 with larger rho values being pure-color, pure-black, 
-or pure-whiet).  By weighting these parameters 
+or pure-white).  By weighting these parameters 
 the `HSV; triangle could be distorted (into something 
 like a disk, more in keeping with the toroid 
 shape), with the goal being to derive a color-distance 
@@ -1153,7 +1153,7 @@ the most likely actually to be in the foreground
 at a maximum inter-hue distance, which is 
 unlikely for real-world pictures, the two 
 distance-from-pole parameters can varying
-indepednently, which is why they must be 
+independently, which is why they must be 
 averaged together (arithmetically inverting one of the pair) 
 to yield a one-channel reduction.
 `footnote` 
@@ -1265,7 +1265,7 @@ keypoint).  In combination, these
 two statistics confirm that the 
 aggregate of keypoints %-- particularly 
 when extended to the containing superpixels 
-%-- approximates the foregound, both 
+%-- approximates the foreground, both 
 by `i.including` most of the foreground 
 and by `i.excluding` most of the background.  
 `p`
@@ -1279,7 +1279,7 @@ to rotate the initial image.  Here `XCSD;
 dispenses with one-channel reduction and 
 instead considers `q.local` color distance, 
 considering color variation within a relatively 
-small (e.g., `sevenbyseven;) aera.  
+small (e.g., `sevenbyseven;) area.  
 Unlike converting a full image 
 to grayscale (or any other one-channel reduction), 
 in which a useful color-distance metric should 

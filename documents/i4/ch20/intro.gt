@@ -1,4 +1,3 @@
-
 `section.Introduction`
 
 `p.
@@ -16,7 +15,7 @@ Granted, there is a class of programs which run behind-the-scenes
 following a preprogrammed sequence, constructed with the expectation 
 that human users will not interact with the program during 
 its execution.  Even here, though, we can argue that 
-the choice to initiate the program in the first place constitues 
+the choice to initiate the program in the first place constitutes 
 a human action, so such programs do have at least `i.one` 
 point where they are dependent on users' input.  The choice 
 of `i.when` to run a program will (potentially) influence its 
@@ -67,7 +66,7 @@ to user input is to modify the on-screen display
 that users consume visually %-- even if the main response 
 is some side-effect, such as saving a file, the display 
 should have some change indicating that the operation 
-was successful (or, if not, alterting the user that 
+was successful (or, if not, alerting the user that 
 there was a problem).     
 `p`
 
@@ -136,7 +135,7 @@ source and `q.ground truth` facts; but such a
 correlation is something that has to be 
 artifactually constructed by programmers 
 and database administrators.  This kind of 
-semantics is very different fron the word-object 
+semantics is very different from the word-object 
 associations in natural language, that 
 tend to evolve organically via entrenchment 
 among a given dialect community.  
@@ -162,7 +161,7 @@ the wickets taken for each side as well as their runs scored;
 thus a two-valued structure (for hockey) would be 
 replaced by a four-valued one (or, equivalently, two number-pairs).  
 Of course, much more info could be modeled for any 
-sporting event (time ellapsed, for many sports, or 
+sporting event (time elapsed, for many sports, or 
 the number of remaining balls in a T20 innings; where 
 the game takes place; the stats on each player; and so on).
 `p`
@@ -328,7 +327,7 @@ from a `q.theoretical` perspective.  Note
 that ideas about effective computer 
 code and application development have 
 evolved noticeably during the `q.personal computing` 
-era: conventions for conveying infomation 
+era: conventions for conveying information 
 through interactive visible displays have 
 evolved over time, yielding software that 
 is progressively more intuitive and informative; 
@@ -336,7 +335,7 @@ and technologies for implementing computer
 languages themselves %-- compilers to 
 translate source code into machine language 
 and runtime environments to serve as 
-containers where programs exectute %-- have 
+containers where programs execute %-- have 
 become more sophisticated, allow programming 
 languages themselves to change over time, 
 which in turn (in principle) makes 
@@ -460,16 +459,8 @@ is up and running.
 `p`
 
 
-
-
-
-
-
 `p.
 
 `p`
-
-
-
 
 
