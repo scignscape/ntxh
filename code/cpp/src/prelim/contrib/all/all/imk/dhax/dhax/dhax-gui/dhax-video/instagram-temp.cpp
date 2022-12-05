@@ -41,8 +41,360 @@ USING_KANS(TextIO)
 #include <QPushButton>
 #include <QDirIterator>
 
+#include <QRegularExpression>
+
+#include <QProcess>
+
+
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+
+
+void _get_url_from_title(QString& title, QVector<QPair<QString, QString>>& urls, QStringList& titles)
+{
+ u2 count = urls.size();
+ title = titles.value(count);
+ if(title.isEmpty())
+   return;
+
+ QString search = title.replace(' ', '+');
+ QString query = "https://www.youtube.com/results?search_query=" + search;//Bunny+interrupts+her+lesson+to+address+more+important+issues
+
+ QNetworkAccessManager* qnam = new QNetworkAccessManager;
+ qnam->connect(qnam, &QNetworkAccessManager::finished, [&title, &urls, &titles, qnam](QNetworkReply* reply)
+ {
+  QString all = QString::fromLatin1(reply->readAll());
+
+  qnam->deleteLater();
+  reply->deleteLater();
+
+  QRegularExpression url_regex("watch\\?v=([\\w-]+)");
+    //?"url":"/watch?v="
+
+  QRegularExpressionMatch match = url_regex.match(all);
+  if(match.hasMatch())
+    urls.push_back({match.captured(1), title});
+  else
+    urls.push_back({"?", title});
+
+
+  if(urls.size() == titles.size())
+  {
+   QString out;
+   QString out_file = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella/bvo";
+   for(QPair<QString, QString>& pr : urls)
+   {
+    out.push_back("%1 == %2\n"_qt.arg(pr.first).arg(pr.second));
+   }
+   save_file(out_file, out);
+
+   // //  delete title, urls, titles?
+  }
+  else
+    _get_url_from_title(title, urls, titles);
+
+ });
+
+ qnam->get(QNetworkRequest(QUrl(query)));
+}
+
+void instagram_temp00()
+{
+ QString list_file = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella/bv";
+ QString text;
+ load_file(list_file, text);
+ QStringList lines = text.split("\n", QString::SplitBehavior::SkipEmptyParts);
+
+ QStringList& titles = *new QStringList;
+ QVector<QPair<QString, QString>>& urls = *new QVector<QPair<QString, QString>>;
+
+ bool ready = false;
+
+ for(QString line : lines)
+ {
+  if(ready)
+  {
+   ready = false;
+   titles.push_back(line.simplified());
+  }
+  else
+    ready = (line == "NOW PLAYING");
+ }
+
+ QString& title = *new QString;
+ _get_url_from_title(title, urls, titles);
+
+ //manager->get(QNetworkRequest(QUrl("http://qt-project.org")));
+
+
+
+}
+
 
 void instagram_temp()
+{
+ //QString new_list_file = "/home/nlevisrael/gits/ctg-temp/stella/yt/t1.txt";
+ QString new_list_file = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella/bunny-videos.txt";
+
+ QString text;
+ load_file(new_list_file, text);
+
+
+
+
+ QStringList videos = text.split("\n", QString::SplitBehavior::SkipEmptyParts);
+
+ QVector<QString>& vvideos = *new QVector<QString>(videos.toVector());
+
+ // //  start at?
+ u1& count = *new u1(7);
+
+ QString gap(90, ' ');
+
+ QString& next_download = *new QString(vvideos.value(count));
+
+ QMessageBox* mbox = new QMessageBox(QMessageBox::Question,
+   "Ready to Download: %1"_qt.arg(next_download),
+   "Hit Download to begin" + gap);
+
+// QString& need_copy_path = *new QString;
+
+ QPushButton* download = mbox->addButton("Download", QMessageBox::ActionRole);
+ download->disconnect();
+
+ QPushButton* next = mbox->addButton("Next", QMessageBox::ActionRole);
+ next->disconnect();
+ next->setEnabled(false);
+
+ mbox->connect(download, &QAbstractButton::clicked, [mbox, &count, next, download, &vvideos, &next_download]()
+ {
+  qDebug() << "download = " << next_download;
+
+  QString path = YOU_TUBE_DOWNLOAD_CMD_FOLDER;
+  qDebug() << "path = " << path;
+
+  QDir qd(path);
+  QString ap = qd.absoluteFilePath(YOU_TUBE_DOWNLOAD_EXE);
+
+//  qDebug() << "ap = " << ap;
+
+  u4 ix = next_download.indexOf(" == ");
+  QStringRef vid = next_download.midRef(0, ix);
+
+  QString outfile = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella/videos/%1-%2"_qt
+    .arg(count + 1, 3, 10, QChar{'0'}).arg(vid);
+
+  QStringList options;
+  options << "-o" << outfile << "--skip-unavailable-fragments"
+      << "--no-continue" << "--no-part" << "--no-call-home";
+
+//?  QString url = "https://www.youtube.com/watch?v=" + next_download.mid(4);
+  QString url = "https://www.youtube.com/watch?v=" + vid;
+
+  options << url;
+
+  qDebug() << "url = " << url;
+
+  QProcess* cmd = new QProcess;
+
+  mbox->connect(cmd,
+    QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+    [cmd, &download, &next_download, &next, &count, &vvideos](int exit_code, QProcess::ExitStatus exit_status)
+  {
+   qDebug() << "downloaded: " << next_download;
+
+   qDebug() << "std: " << cmd->readAllStandardOutput();
+   qDebug() << "err: " << cmd->readAllStandardError();
+
+   download->setEnabled(false);
+   next->setEnabled(true);
+
+   cmd->deleteLater();
+
+   bool skip = false;
+   do
+   {
+    ++count;
+    if(count == vvideos.size())
+    {
+     next->setEnabled(false);
+     return;
+    }
+    next_download = vvideos[count];
+    if(next_download.endsWith('!'))
+      skip = true;
+   } while(skip);
+
+
+  });
+
+  cmd->setProcessChannelMode(QProcess::ForwardedChannels);
+  cmd->start(ap, options);
+
+
+//  if(last_key.isEmpty())
+
+ });
+
+
+ mbox->connect(next, &QAbstractButton::clicked, [mbox,
+   &count, next, download, &vvideos, &next_download]()
+ {
+  qDebug() << "download = " << next_download;
+  download->setEnabled(true);
+  next->setEnabled(false);
+//  if(last_key.isEmpty())
+
+  mbox->setWindowTitle( "Ready to Download: %1"_qt.arg(next_download) );
+
+
+ });
+
+ mbox->addButton("Close", QMessageBox::RejectRole);
+
+
+ mbox->setModal(false);
+ mbox->show();
+
+
+// for(QString v : videos)
+// {
+//  new_videos.push_back(v.trimmed());
+// }
+
+// qDebug() << new_videos;
+
+}
+
+
+void instagram_temp3()
+{
+ QString html_file = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella/bunny.txt";
+ QString out_file = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella/bunny-videos.txt";
+
+ QString text;
+ load_file(html_file, text);
+
+// s4 index = 0, old_index = 0;
+
+ //"text":"Confrontation of Dad Went Poop | What About Bunny"
+
+ QRegularExpression qre("\"title\":\\{\"runs\":\\[\\{\"text\":\"([^\"]+)\"");
+
+ QRegularExpression url_regex("watch\\?v=([\\w-]+)");
+
+ QRegularExpressionMatchIterator it = qre.globalMatch(text);
+
+ QVector<QPair<QString, QString>> videos;
+
+ // //  ranges holds title and start of *next* match;
+  //    we look for the video url between the end
+  //    of this match and start of the next
+ QMap<u4, QPair<QString, u4>> ranges;
+
+ u4 last_end = 0;
+
+ while(it.hasNext())
+ {
+  QRegularExpressionMatch match = it.next();
+  //videos.push_back({match.captured(1), {}});
+
+  QString title = match.captured(1);
+
+//  static QString what_about (" | What About Bunny");
+//  if(title.endsWith(what_about))
+//    title.chop(what_about.length());
+//  else
+//    continue;
+
+  ranges[match.capturedEnd()] = {title, 0};
+
+  if(last_end)
+    ranges[last_end].second = match.capturedStart();
+
+  last_end = match.capturedEnd();
+
+//  if(videos.contains(match.captured(1)))
+//    continue;
+//  videos[match.captured(1)] = ++count;
+
+  //index = text.indexOf("| what about ")
+
+ }
+
+ QMapIterator<u4, QPair<QString, u4>> rit(ranges);
+ while(rit.hasNext())
+ {
+  rit.next();
+
+  QRegularExpressionMatch match = url_regex.match(text, rit.key());
+  if(match.capturedStart() < rit.value().second)
+    videos.push_back({match.captured(1), rit.value().first});
+  else
+    videos.push_back({"?", rit.value().first});
+ }
+
+ QString out_text;
+
+ for(QPair<QString, QString>& pr : videos)
+ {
+  out_text += "%1 == %2\n"_qt.arg(pr.first).arg(pr.second);
+ }
+
+ save_file(out_file, out_text);
+
+// qDebug() << videos;
+}
+
+void instagram_temp0()
+{
+ QString list_file = "/home/nlevisrael/gits/ctg-temp/stella/yt/t1";
+
+ QString new_list_file = "/home/nlevisrael/gits/ctg-temp/stella/yt/t1.txt";
+
+ QString text;
+ load_file(list_file, text);
+
+ QRegularExpression qre("watch\\?v=([\\w-]+)");
+
+ QRegularExpressionMatchIterator it = qre.globalMatch(text);
+
+ QMap<QString, u1> videos;
+ QVector<QString> vvideos;
+
+
+ QString out;
+ u1 count = 0;
+
+ while(it.hasNext())
+ {
+  QRegularExpressionMatch match = it.next();
+  if(videos.contains(match.captured(1)))
+    continue;
+  videos[match.captured(1)] = ++count;
+ }
+
+ vvideos.resize(videos.size());
+
+ QMapIterator<QString, u1> it1(videos);
+ while(it1.hasNext())
+ {
+  it1.next();
+  vvideos[it1.value() - 1] = "%1-%2\n"_qt.arg(it1.value(), 3, 10, QChar{'0'}).arg(it1.key());
+ }
+
+ for(QString vvideo : vvideos)
+   out += vvideo;
+
+
+
+ save_file(new_list_file, out);
+
+ qDebug() << videos.size();
+
+}
+
+void instagram_temp2()
 {
  QString list_folder = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella/";
 

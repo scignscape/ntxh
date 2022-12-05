@@ -1,6 +1,552 @@
 
-`section.Representing Functional Organization`
+`section.GIS Databases and Digital Cartography`
+`p.
+This discussion has now touched on themes related 
+to flexibly-typed database systems: the idea 
+being that expressive database engines support 
+`i.strongly typed` data (in the sense that 
+all records have type attributions that 
+offer guarantees about their internal 
+structure, such as a specific set of 
+defined fields) but also allow new types 
+to be introduced into an active database.  
+A good case-study of where such design 
+is apropos is that of maintaining 
+geospatial databases that track information 
+associated with geographical coordinates 
+%-- for example, roads, bridges, buildings, 
+waterways, transportation infrastructure, 
+or land-plots, but also any kind of scientific 
+data (environmental, sociodemographic, etc.) 
+that can be overlaid on a digital map.  
+`lGIS; systems are typically divided into 
+two distinct data categories: there are 
+`q.basemaps` which represent the most 
+common or generic types of `GIS; data 
+(roads, buildings, and the like) that are 
+then augmented with supplemental `q.data layers` 
+that are narrower and more domain-specific 
+(such as ecological data).  Digital cartography 
+renders `i.basemap` visuals by 
+subdividing geographic areas into relatively 
+small segments (within a 256 `xtimes; 256 area, for example)  
+translating geospatial (typically latitude/longitude) 
+coordinates to pixel-coordinates.  Digital maps 
+are composed at multiple scales of resolution; 
+in a common format, so-called `q.XYZ` tiles, 
+the lowest zoom level produces a `q.map` of the whole 
+world (basically an outline of the continents) 
+whereas the highest level (around 20, or slightly less 
+depending on the environment) is sufficiently 
+detailed that maps can show the contours of 
+individual buildings and street-intersections.  
+In XYZ, each successive zoom level doubles 
+the underlying magnification, so that 
+each tile at one level splits into four 
+tiles at the enxt level.
+`p`
 
+
+`p.
+Software known as `q.tile renderers` and `q.tile servers` 
+map latitude and longitude coordinates (or 
+other `GIS; units, such as those of Marcatur projections) 
+to tile-coordinates that include zoom level as 
+one axis (e.g., the `q.z` in XYZ).  An XYZ triple 
+designates a specific geographic area at a specific 
+zoom level; individual latitude/longitude and Mercatur 
+points can then be identified via fractions of the 
+tile width and height.  Via such a mapping, locations 
+of objects in a `GIS; database are converted 
+to pixel-coordinates, so that features such as 
+roads and building can be marked visually.  Tiles 
+are rendered according to graphical rules called 
+`q.styles`/, which stipulate details such as 
+the colors that should be used to outline buildings 
+or roadways, or the icons for points of 
+interest (transit stops, historical sites, special-purpose buildings 
+or areas such as schools, hospitals, parks, 
+government offices, and so forth).  Tile-rendering 
+requires some computational algorithms because 
+streets/highways and other noteworthy spots need 
+to be named or labeled, and the positioning 
+of these identifiers (unlike the fixed latitude-longitude 
+of the labeled locations) is indeterminate, so cartographic 
+engines try to calculate how to position street-names 
+(for example) so that this text does not intersect with 
+other map data (such as roadway lines).  
+`p`
+
+
+`p.
+The end result of a tile-rendering pipeline 
+is a miniature map in the form of an `i.image`/, 
+often in a format such as `PNG; equivalent to 
+many photographs; a `GIS; application will 
+form maps that users see by composing together 
+multiple tiles.  This provides the `q.basemap` 
+layer, representing a general-purpose 
+view of a given geographic region.  On top of 
+these base maps, applications will usually 
+superimpose domain-specific data points 
+(sometimes called `q.attribute` data) relevant 
+in specific contexts: data layers might 
+show locations where Ukrainian buildings or infrastructure 
+was damaged in the 2022 war; or distributions 
+of COVID-19 cases; or environmental hazard sites; 
+or tax lots and zoning codes for architecture, 
+real estate, urban planning, and 
+property management; or sightings of specific plant or animal 
+species, and so on.  In effect, whenever 
+scientists or researchers have data sets indexed 
+by geographic coordinates %-- epidemiological, 
+ecological, sociodemographic %-- such information 
+can potentially become a Data Layer which 
+is visualized by superimposing special-purpose 
+icons or colorations on a generic basemap.  
+These extra layers can be added at different processing 
+stages: for instance, they might be consumed by 
+the tile servers themselves, as a post-processing 
+step immediately after rendering basemap tiles; 
+or they could by superimposed on basemaps 
+by `GIS; front-ends,  
+immediately prior to showing maps to users 
+(in this case applications would typically 
+download tiles and data layers separately, 
+and merge them together at the last moment).   
+`p`
+
+
+`p.
+I provide this digital-cartography overview mostly 
+to mention certain details concerning 
+`GIS; data systems: although there is a core 
+dimension of familiar mappable elements 
+(roadways, buildings, and so forth) with common 
+presentation guidelines (formalized via tile-rendering 
+styles), the space of information that 
+could be added on base maps is open-ended.  
+Any data set with latitude/longitude coordinates 
+(or fields convertible to such coordinaets, such as 
+street addresses) can be visualized against 
+the backdrop of a `GIS; basemap.  If we consider 
+`GIS; data to encompass common basemap info 
+`i.together with` special-purpose supplemental 
+layers, then `GIS; databases are a good 
+example of `q.strong but flexible` typing: it is 
+impossible for a `GIS; system to anticipate 
+`i.a priori` the full range of data profiles 
+evinced by objects visualized in a map 
+context, within supplemental data layers.  
+Every mappable object will have latitude/longitude 
+coordinates (or a collection thereof, giving a 
+geometric outline), but in addition objects will 
+have other data-points as well, relevant to 
+their specific domain (civil engineering, etc.) 
+but opaque to mapping applications themselves.  
+In this sense `GIS; systems manage non-`GIS; 
+data by tracking opaque objects without 
+consuming them directly: it is 
+up to individual applications to 
+download data within supplemental 
+layers and reconstruct the relevant 
+domain-specific info, so that 
+users can employ street maps as 
+entry points for accessing 
+information which is then visualized 
+through other features in the 
+application.  For example, urban planners 
+taking on the responsibility of rebuilding 
+Ukrainian cities might start with street 
+maps showing sites of destroyed 
+buildings and infrastructure, and 
+then (typically by clicking on a map) 
+transition to windows showing structured 
+data about individual locations, such as 
+the number of families formerly living in a 
+damages residential complex, or details 
+about utilities and water/gas/electricity 
+grids, or estimates of environmental 
+hazards (chemical leakages, say, or 
+unexploded munitions) resulting from the 
+conflict.  The point here is that 
+objects containing such domain-specific 
+data need to be packaged and stored 
+in a `GIS; database even if they are 
+not `GIS; data proper, and then 
+correctly reconstructed and presented 
+to users in conjunction with digital-cartography 
+front-ends.  This data-management workflow 
+is roughly analogous to the case of routing data 
+packages across third-party networks 
+discussed above (in ways I will summarize 
+more completely at the end of the Section 3).
+`p`
+
+`subsection.Geospatial Data and GUI Events`
+`p.
+A final topic relevant to the current section, 
+however, relates to front-end implementations 
+for `GIS; software.
+`p`
+
+
+`p.
+Most of the time, users consult `GIS; maps 
+with the intent to find and get information 
+about specific addresses or locations, i.e., 
+to switch from a cartographic 
+overview to a more detailed display of 
+information specific to a given spot 
+the map (perhaps a restaurant's menu, 
+or departure times at a bus stop, or a 
+business's hours of operation, and so 
+forth).  Presumably their `GIS; software 
+(which can include domain-specific 
+applications that have digital-map 
+windows as one front-end format among 
+others) has the capacity to render 
+such location-specific data in a format 
+useful to the user.  When accessing 
+street maps via a web browser, for 
+example, the simplest way to access 
+non-`GIS; data is to open third-party 
+websites in a separate browser tab.  
+For example, users intending to 
+search a library's card catalog 
+could find the library on a map, 
+and then rely on the map 
+providing popups with location 
+info, hopefully including a link 
+to the library's website %-- following 
+that link would allow the user 
+to query the desired catalog. 
+`p`
+
+
+`p.
+Outside of a browser, on the other hand, 
+we can imaging a city's overarching 
+library system providing an app which 
+includes a cartographic display as 
+one window where users can location 
+individual library locations, giving 
+then the option of clicking on a 
+locations associated with a map 
+icon, but then presenting a 
+catalog-search window as a 
+`GUI; component of the same 
+application, rather than a separate 
+web site.  This would be an example 
+of an application which implements 
+both digital-map windows and 
+other forms of displays side-by-side, 
+routing the user interface between 
+then based on user actions.
+`p`
+
+
+`p.
+Whether via multiple intra-software 
+`GUI;s or through external web sites, 
+however, the common denominator 
+in both scenarios is that users 
+interact with `GIS; maps as a 
+way of requesting information about 
+specific places.  Supporting 
+`GIS; front-ends for these purposes 
+requires, at a minimum, the 
+ability to map geographic locations 
+to site-specific information.  For 
+example, a library-system app would 
+need to know which latitude/longitude 
+coordinates refer to which library 
+branches, so that users clicking 
+on an icon at a given geographic 
+coordinate would be routed 
+to the appropriate card catalog.  
+In terms of front-end development, 
+it is equally important 
+that the software know how to 
+map on-screen coordinates to 
+latitude/longitude pairs.
+`p`
+
+
+
+`p.
+This last step may seen obvious, but 
+most users probably do not notice 
+the computational details involved in 
+deciphering their actual `GIS; locations.  
+When a user sees a map, they 
+intuitively understand that each point 
+in the display corresponds to a 
+specific `GIS; position (with specific latitude 
+and longitude coordinates).  Clicking 
+a mouse when the cursor hovers over a given 
+site %-- or tapping on a touch-screen %-- 
+is thereby understood to be a gesture 
+which signals the user's interest 
+in selecting the location thereby 
+singled out as a focus point.  From 
+the application's point of view, however, 
+the user-action is not intrinsically 
+endowed with geospatial axes, but instead is 
+localized on the screen (they have touched 
+or clicked on a given pixel-location 
+relative the overall dimensions of 
+their screen/monitor).  There are a variety 
+of mathematical quantities which need 
+to be tracked when converting 
+screen-coordinates to latitude/longitude, 
+including the current zoom level, and the 
+specific geographic rectangle which is 
+visible in the map's view-port (tracking how 
+the user has `q.panned`/, viz., 
+orthogonally scrolled the display, so that 
+the click-location is quantified as a 
+certain distance right and down from 
+the window's top-left corner, which 
+corresponds to moving a certain distance 
+West and South).  Moreover, because 
+map-tiles are acquired through coordinate-systems 
+such as `XYZ; rather than through latitude/longitude 
+rectangles directly, applications will 
+typically need to map on-screen coordinates 
+to (e.g.) `XYZ; triples as an intermediate 
+step, and then on to latitude/longitude 
+as desired (in the case of `XYZ;, there 
+might actually be still a further 
+coordinate-transform involving 
+Mercatur projections).     
+`p`
+
+
+`p.
+Although the equations to effectuate the 
+various inter-coordinate calculations just 
+outlined are not prohibitively difficult 
+to implement, an application's ability to 
+properly respond to front-end user gestures 
+depends on having complete information about 
+the digital map which the user sees at any 
+point in time, prior to his or her 
+interactions (e.g., current pan and zoom 
+state).  Depending on the map-source 
+used, such information may or may not 
+be available.  For example, one way to 
+build a `GIS; font-end would be to 
+allocate and web-view window and 
+point it at a street-map `URL;, such as 
+GoogleMaps.  Via this arrangement, however, 
+there is no way for the host application 
+to get detailed pan/zoom info from the 
+embedded map display, so the host software 
+has no way to translate user actions such as 
+mouse-clicks.  The application could certainly 
+register the fact that users have clicked 
+on a given screen coordinate, but they 
+will not be able to convert screen 
+coordinates to latitude/longitude 
+without knowing the current map-state, and 
+this is not data that systems such as 
+GoogleMaps make computationally available.  
+`p`
+
+
+`p.
+For these reasons, relatively full-featured 
+`GIS; applications need to manage 
+map-rendering displays on their 
+own (rather than deferring these 
+operations to an embedded service), which 
+involves connecting to a raw map-tile 
+service (a tile server) rather than to a 
+higher-level component such as Google Maps, 
+and internally managing issues such as 
+local tile-storage and scheduling updates.  
+This is why open-source tile servers 
+such as Open Street Maps are an important 
+contribution to the software-development 
+ecosystem, because they remove many 
+barriers that would otherwise exist to 
+applications implementing fully functional 
+`GIS; front-ends as one facet of 
+their user interface.
+`p`
+
+
+`p.
+On the other hand, even well-intentioned projects 
+such as Open Street Maps have certain limitations 
+(such as data usage restrictions), so large-scale 
+projects have an incentive to implement 
+their own tile-server back-ends rather than 
+rely on third parties.  Consider the case-study 
+of Ukraine reconstruction: assuming multiple 
+organizations and international funders commit 
+to significant reconstruction projects 
+for Ukraine %-- and that groups agree to 
+collaboratively engineer and utilize 
+digital resources for sharing information 
+and ideas that could be useful for reconstruction 
+projects %-- it would make sense for the 
+shared resources thereby deployed to include a 
+dedicated tile-server specific to digital 
+maps of Ukrainian territory, including both maps 
+designed to show both street/urban details 
+and to diagram natural/geological features.  
+Apart from giving software open-ended access 
+to raw cartographic images and `GIS; data, 
+a special-purposes tile server could 
+choose rendering styles and conventions 
+(such as duplicating tiles with street-names, 
+place-descriptions, and other textual info 
+in multiple languages and alphabets: 
+Ukrainian, English, German, etc.) collectively 
+designed to maximize maps' usefulness 
+for the specific purpose of a multi-national 
+rebuilding effort.  This could ensure that 
+users unfamiliar with the Cyrillic alphabet, 
+for example, would be able to see versions 
+of the street-map with transliterated place-names; 
+and that base-coloring for features such as 
+roadways and building-outlines would not 
+conflict with the display of non-`GIS; 
+data (e.g., tracking patterns of refugee 
+displacement and return).
+`p`
+
+
+`p.
+When analyzing front-end event-processing, a further
+detail involves distinguishing 
+between user gestures targeted at visible 
+base-map features and those focused on 
+supplemental data layers.  With respect to base 
+maps, although structured information such as 
+details about individuals roads and buildings 
+is implicit in tile-images %-- because `GIS; 
+databases are consulted in order to render 
+tiles in the first place %-- the actual 
+tiles which `GIS; front-end components 
+receive from tile servers are just images, 
+which function from a software-development 
+point of view more or less like photographs.  
+Although a front-end event handler can 
+(with suitable state-info) translate 
+event coordinates (screen locations) 
+to latitude/longitude, the application 
+would not (at least from map-tiles themselves) 
+be able to ascertain whether the 
+user's selected latitude/longitude point 
+corresponds to a particular building, a roadway, 
+a street intersection, transit point, 
+or any other kind of `GIS; feature.  
+This further information would need 
+to be obtained from a remote source 
+(such as an address-lookup service) 
+and/or a local database which applications 
+maintain internally.  In the case of 
+Ukraine reconstruction, for example, 
+a dedicated tile-server could 
+include information packets co-extensive 
+with tiles identifying street-map landmarks 
+keyed to geospatial locations, so that 
+client software would be able to 
+translate screen coordinates to 
+points-of-interest.
+`p`
+
+
+`p.
+These comments apply to details visualized through 
+base maps.  The situation is different, however, 
+with respect to supplemental data layers: 
+in this case, typically, front-end applications 
+acquire base tiles and non-`GIS; data 
+separately, and then overlay the latter 
+on the former prior to rendering map 
+windows for users to see on-screen.  Because 
+the client application thereby needs to correlate 
+non-`GIS; data objects with map locations, 
+the correspondence between these objects 
+and latitude/longitude coordinates is already 
+present in the system (it does not need to be 
+externally queried from an address-locator, 
+for instance).  At the same time, there 
+are still computational details which applications need 
+to reckon with in order to properly route 
+user events.  For example, implementations 
+can produce the visual effect of non-`GIS; overlays 
+visibly superimposed on base map background 
+in different ways.  As a case in point, consider 
+the options for a `GIS; front-end coded via 
+`Qt; (the most popular cross-platform 
+`GUI; framework for `Cpp; and, via bindings, 
+for most scripting languages).  There are 
+at least two possibilities: in one case, data layers 
+could be superimposed on base maps by 
+overriding the functionality for 
+`q.painting` base maps as images, such that 
+icons, diagrammatic elements (arrows, lines, and so forth) 
+or color-effects (e.g., semi-transparent 
+colors to represent something like population 
+density) are `q.painted` on top of base-map 
+images.  The result of that operation would 
+be a composite image which, perhaps via a 
+`b.QImage` subclass, would be treated by the 
+`Qt; displays as equivalent to an ordinary 
+image (with no internal structure); in this 
+case all user events would share the 
+same profile, as signals relative to 
+image-coordinates, and the application would need to 
+determine whether a mouse-click (or similar 
+gesture) is targeting a point in the 
+base-map image or an overlay painted over it).       
+`p`
+
+
+`p.
+On the other hand, an alternative technique would 
+be to render the composite of base-maps and 
+overlays through `b.QGraphicsScene`/, where 
+the base-map is treated as a raw image but 
+overlay data is introduced as scene-objects 
+(for example, icons representing specific 
+points where non-`GIS; data is accessible), 
+that the application tracks and holds 
+in memory as data structures fully separate from 
+base-map images.  In this case, clicks 
+on scene-object icons would be registered 
+via different event-signals and a different 
+application-response pipeline than 
+clicks on base-map locations, so programmers 
+need to engineer two different event-handing 
+systems, one for base maps and one 
+for supplemental layers.  
+`p`
+
+
+`p.
+This specific example %-- implementing 
+`GIS; displays with supplemental data via 
+`Qt; windows %-- is a good case-study in how 
+applications need to systematically 
+prepare and document their event-handling 
+logic.  Failure to clarify how a `Qt; 
+application is approaching the task 
+of rendering layers on `GIS; base maps, 
+and on how these design choices 
+propagate to event-handling requirements, 
+could make such applications difficult 
+to maintain once the original developers 
+move on to other projects. 
+`p`
+
+
+`subsection.Representing Functional Organization`
 `p.
 Supplemental `GIS; data layers are good 
 examples of a computational theme which 

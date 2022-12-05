@@ -1,10 +1,47 @@
 `section.Introduction`
+`p.
+A central theme of the following sections will be 
+computer programming languages, seen as 
+practical technologies which have their own theoretical 
+orientations and engineering requirements.  
+One topic will be the relation between these 
+artificial languages and natural (human) 
+languages.  Another will be the relation between 
+computer languages and various facets of 
+`q.information representation` %-- for data modeling, 
+designing data-sharing protocols, or database 
+engineering.  There is a connection between these 
+themes insofar as data models constrain data structures, 
+which supply the values on which programming languages 
+operate.
+`p`
+
 
 `p.
-It is not quite accurate to describe computer programming 
-languages as `q.languages`/.  People do not use source 
+Preliminary to further discussion of these 
+subjects, I will start with a review of 
+computer languages as technical artifacts. 
+Perhaps it is not quite accurate, in fact, to describe computer programming 
+languages as `q.languages`/.  This is partly because 
+natural language evolves organically, whereas 
+programming languages are created (usually `q.by committee`/); 
+they evolve in response to engineering challenges 
+involved with getting computers to `q.understand` high-level 
+source code in lieu of physically realizable 
+`q.machine language`/.  There are still some 
+processing stages or aspects where one 
+can make comparisons or even borrow formal 
+models from one domain to the other, but in 
+general, we should be careful about applying 
+intuitions about natural language 
+to programming languages too broadly.
+`p`
+
+
+`p.
+For example, people do not use source 
 code to `q.talk to` or even generically `q.communicate with` 
-computers; rather, computer code acts as the material 
+computers.  Rather, computer code acts as the material 
 through which programmers implement applications, which 
 are tools pressed into service to manipulate 
 computational states.  More specifically, applications 
@@ -93,7 +130,7 @@ actually referring to capabilities for creating
 `i.visual` displays which convey information 
 about those objects to human users, according 
 to signifying conventions that users understand.
-For a simple example, if the users intention 
+For a simple example, if the user's intention 
 when initiating some interaction with a 
 program is to learn the current score of a 
 Habs/Leafs game, the application will 
@@ -109,7 +146,7 @@ and an analogous number next to a Leafs logo.
 There is nothing in the application's state in this 
 example which actually `q.means` anything 
 about Montreal, Toronto, hockey, goals, or anything 
-else as the users understand it.  Any seeming `q.semantics` 
+else as users understand it.  Any seeming `q.semantics` 
 here is merely the result of adequate engineering: if 
 the application behaves properly, the number next 
 to the Habs logo will be `q.one`/, say, if 
@@ -179,7 +216,7 @@ allow data structures to track real-world objects
 by selectively sampling some of their properties.  
 Even then, these structures are not intrinsically 
 representations `i.of` their intended targets; rather, 
-applications can convert data structures to visual 
+applications may convert data structures to visual 
 displays which stand in for objects by 
 representing their properties textually or graphically 
 (the former being, for instance, a printed number 
@@ -199,13 +236,13 @@ software performs these tasks correctly.
 Computer code is used to manipulate applications' 
 internal data structures and external displays.  
 In this sense computers do not `q.understand` 
-code the way that people understand language; 
+code the way that people understand language %-- 
 an application does not reach a desired state 
 given user input by treating code as a kind 
 of message or communique that it has to interpret.  
 Instead, computers are engineered (via compilers 
-and runtimes) so that source code can be 
-used as an indirect tool to predictably reconfigure 
+and runtimes) so that source code can be employed 
+as an indirect tool to predictably reconfigure 
 applications' internal and external state so 
 that the latter correctly conveys certain 
 kinds of information.  
@@ -218,20 +255,23 @@ the proper synergy between external facts, internal
 data structures, and visible displays is vastly 
 different than the cognitive architectonics 
 of people hearing (or reading) language.  This 
-is one reason why I said that the expression `q.programming 
-`i.languages`/` is a misnomer %-- not that I am 
+is one reason why I implied that the expression `q.programming 
+`i.language`/` is a misnomer.  Not that I am 
 calling for some different jargon to take it's place.  
-In fact, I believe that (natural) linguistics can benefit 
+In fact, I believe (natural) linguistics can benefit 
 from analyzing programming languages, precisely 
-because of their mechanical and artificial nature.  
-Much of the subtlety of natural languages come 
+because of their mechanical and artificial nature.
+`p`
+
+`p.
+Much of the subtlety of natural language derives 
 from the need for interpretation, and disambiguation: 
 almost all words have multiple meanings and almost 
 all sentences can be parsed in different ways; 
 addressees must infer which construal of parse and 
 word-use is most likely to match the speaker's 
 intent.  There is nothing analogous to 
-such hermeneutic in programming: software-language 
+such hermeneutics in programming: software-language 
 implementations do not `q.guess` at meanings; they 
 can only rely on precisely formulated rules 
 to deduce which operations are designated by specific 
@@ -242,9 +282,14 @@ issues of interpretation and `q.most likely` meanings,
 computer code enables us to study how structural 
 manipulations can be encoded in symbol-systems 
 which at least superficially `i.resemble` human 
-language, in the sense that source code is 
+language.`footnote.
+In the sense that source code is 
 composed with the same letters and punctuation 
-marks that are the basis of natural writing systems.  
+marks that are the basis of natural writing systems; 
+moreover, many symbol-names and keywords in 
+computer code are chosen to suggest words in 
+natural languages (especially English).
+`footnote` 
 The chain of computations which extend from 
 source code as written to visible and information-carrying 
 display-changes in an applications' user interface 
@@ -253,11 +298,18 @@ potentially have some correlates to how
 human `q.process` language %-- not in the 
 sense of how we interpret the meaning of sentences 
 initially, but rather in terms of how we 
-construct the `i.pragmatics` of speech-acts; 
-how we figure out what actions we should take 
-to play the role of cooperating addressees 
-responding to the intentions expressed by 
-whomever formulated the sentence at hand.  
+follow up.  According to the  
+`i.pragmatics` of speech-acts, 
+the `q.meaning` of a sentence lies in 
+how cooperative listeners should respond (not 
+just linguistically, but also potentially 
+via concrete actions).  This is analogous, 
+at some level, to how software applications' 
+semantics are determined by how they 
+respond to user actions, making 
+`q.correct` changes (i.e., those 
+users anticipated and intended) to 
+application-state.
 `p`
 
 
@@ -365,25 +417,9 @@ means better software.
 
 `p.
 This is therefore the practical backstop surrounding 
-the chapters in this section, which will focus 
-on issues of data modeling and Virtual Machines.  
-For reasons I will enumerate, Virtual Machines provide a 
-useful window onto language-implementation.  
-In practice, computer code is eventually translated 
-to `q.machine language`/; i.e., to instructions 
-that can be `i.physically` realized within a 
-computer's Central Processing Unit (`CPU;).  
-A `q.virtual` machine is not a physical 
-device which performs calculations, but rather 
-a software system that emulates the behavior 
-of such devices, to some approximation 
-(virtual machines typically model a wider range 
-of operations than can be computed 
-`i.in silico` directly; but such higher-level 
-operations can typically be destructed into 
-sequences of lower-level steps that themselves 
-`i.can` be performed by a `CPU;).  Almost all 
-modern programming languages invoke Virtual Machines 
+chapters in this section of the book, which will focus 
+on issues of language implementation and Virtual Machines.  
+Almost all modern programming languages invoke Virtual Machines 
 at some stage in the interpretation of 
 computer code, even if this is done prior 
 to an application being executed 
@@ -408,8 +444,22 @@ an approximate `q.running` of the procedure
 where we abstract from the `i.specific` 
 input values and consider only their types.
 `footnote`
-Moreover, Virtual Machines (hereafter 
-often abbreviated to `q.`VM;s` are not limited 
+All computer code is eventually translated 
+to `q.machine language`/; i.e., to instructions 
+that can be `i.physically` realized within a 
+computer's Central Processing Unit (`CPU;).  
+A `q.virtual` machine, by contrast, is not a physical 
+device which performs calculations, but rather 
+a software system that emulates the behavior 
+of such devices, to some approximation.`footnote.
+Virtual machines typically model a wider range 
+of operations than can be computed 
+`i.in silico` directly; but such higher-level 
+operations themselves are then destructured into 
+sequences of lower-level machine-language steps.  
+`footnote` 
+As a result, Virtual Machines (hereafter 
+often abbreviated to `qVMs;) are not limited 
 to the data structures and instruction 
 sets that can be physically realized in a 
 `CPU; (or analogous settings, such as a 

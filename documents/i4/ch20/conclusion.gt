@@ -10,7 +10,7 @@ In particular, domains such as
 Geographic Information Systems and 
 Building Information Management 
 present use-cases for multi-application  
-data sharing through intermedaries such as a 
+data sharing through intermediaries such as a 
 `GIS; database; for the juxtaposition of 
 spatial (e.g. geospatial, image-space, 
 or `ThreeD;/`CAD; designs, or some combination 
@@ -283,7 +283,7 @@ ideas in Software Language Engineering,
 to circle back to the discussion 
 at the start of this chapter.  
 In the next chapter I will focus in specifically 
-on one such paradigm, name hypergraph 
+on one such paradigm, namely hypergraph 
 models of computing processes, query 
 evaluation, and data interoperability.
 `p`

@@ -12,22 +12,25 @@ side effects (like saving a file).
 On this account, studies of applications' 
 behavior would reasonably focus on 
 the starting and ending points of these 
-action/reaction cylces: how do we articulate 
+action/reaction cycles: how do we articulate 
 the full space of possibilities for users 
-to iniatiate actions within the application?  
+to initiate actions within the application?  
 For mouse-and-keyboard desktop setups, for instance, 
 an action like `q.left click` on the mouse 
 can be performed at any point in an application's 
 window (or windows), and mouse-events could 
 click one of several buttons, or turn the 
-scrool wheel, and they can be modified by 
+scroll wheel, and they can be modified by 
 pressing certain keys.  In some contexts, likewise, 
-users enter data by typing on a keyboard.  
-Applications need to systematically model 
-all of these possibilities so that they 
-can create a data structure which carries 
-all relevant details user actions, which 
-in turn is requisite for responding correctly 
+users enter data by typing on a keyboard.
+`p`
+
+`p.  
+Applications have to systematically model 
+each of these possibilities so that they 
+can create data structures carrying 
+all relevant details about user actions, which 
+in turn is needed for responding correctly 
 (left-click and right-click usually have 
 different `i.meanings`/, for example).  
 At the other end, applications need to subdivide 
@@ -48,7 +51,7 @@ are not just `TwoD; screens but possess
 
 
 `p.
-Well-designed applictions have multiple features and 
+Well-designed applications have multiple features and 
 are easy or intuitive to use: this means that 
 users have a variety of options for 
 leveraging applications' capabilities, and 
@@ -58,7 +61,7 @@ their application toward their desired course
 of action.  Applications can generally become 
 `q.better` %-- more featureful and intuitive 
 %-- by being flexible and subject to continuous 
-improvement; that is, applications should be 
+improvement: applications should be 
 designed to acquire more functionality 
 over time, and to update their interactive 
 interface based on the concrete experience of 
@@ -69,7 +72,7 @@ in that the user has multiple options for
 initiating certain responses (for example, the 
 effects of clicking on a certain button might 
 be duplicated by pressing a specific key on 
-the keyboard, or by activing the mouse's scroll wheel 
+the keyboard, or by activating the mouse's scroll wheel 
 %-- e.g., scrolling down, hitting an on-screen `q.down` 
 button, or pressing the down-arrow key).  Many 
 applications also allow plugins or extensions to 
@@ -86,7 +89,7 @@ the word `q.program` in a different sense, as a
 self-contained sequence of `VM; operations).
 `footnote`  
 This flexibility helps ensure that applications 
-can improve and be useful, but more specifically 
+can improve and become more user-friendly, but more specifically 
 they are engineering goals: there are steps 
 which developers can take to maximize 
 applications' ability to adapt and evolve.     
@@ -96,7 +99,7 @@ applications' ability to adapt and evolve.
 `p.
 Aside from a generic desire to build `q.quality` 
 software, engineering applications for 
-future adaptation also prompts develoeprs to 
+future adaptation also prompts developpers to 
 design software in rigorous, well-documented 
 ways.  Applications can be thought of, 
 rather metaphorically, as virtual/digital `q.piping` 
@@ -139,7 +142,7 @@ course of providing new functionality.
 `p.
 Planning for continuous-adaptation therefore 
 implies that application should 
-deliberateively model the functionality 
+deliberatively model the functionality 
 they `i.expose` as features available 
 to users: improvements can either 
 provide alternative (perhaps more 
@@ -163,11 +166,9 @@ Consider an example from the domain of
 image-processing (which will be the focus of 
 Chapter 21): Computer Vision software 
 will typically have many built-in 
-functions that can be used to transform 
-and/or extract data from graphics 
-images (i.e., pictures, such as 
-photographs or satellite images, or individual 
-frames lifted from videos).  Exposing 
+functions for transforming 
+and/or extractng data from graphics 
+images (and also videos).  Exposing 
 these capabilities means offering ways 
 for users to initiate an image-processing 
 workflow.  The result of the workflow 
@@ -181,7 +182,7 @@ allowing operations to be dynamically
 invoked by software, so that although a user 
 will manually initiate an overarching 
 functionality there may be many 
-behind-the-scenes intermediay stages where the 
+behind-the-scenes intermediary stages where the 
 most users would not directly perceive.  
 In this kind of environment applications 
 will typically offer an `API; (Application 
@@ -199,16 +200,15 @@ in contrast to what I will later call
 `q.meta-procedures` whose inputs and outputs 
 are padded with extra layers of indirection.
 `footnote`
-Moreover, the results of Computer Vision 
-workflows will typically be represented 
-to users in the same application as 
-where they initiate workflows, so 
-applications need to expose functionality 
+Moreover, users need some way to view or study 
+the results of Computer Vision 
+workflows, so 
+applications should expose functionality 
 for altering their visual display in 
 accord with the details of specific 
 pipelines (e.g., presenting a new image 
 in a new window).  In short, applications
-need to expose both analytic/processing 
+should expose both analytic/processing 
 functionality and display/visualization 
 functionality.   
 `p`
@@ -224,8 +224,8 @@ by application `q.macros`/, which
 are (for some programs) programmable 
 sequences of user-actions that typically 
 are performed together (the macro 
-can applow multiple actions to be 
-initiated with one single actio); 
+can apply multiple actions to be 
+initiated with one single action); 
 by `q.updates` which can add new 
 features without software needing 
 to be re-installed; by `q.personalization` 
@@ -235,7 +235,7 @@ identity of their current user; by
 configuration files; and 
 by `q.scripting` environments 
 where code written in a programming 
-langauge (typically one with 
+language (typically one with 
 an interpreter that can be embedded 
 in standalone software, such as Lisp or 
 Python) can modify or fine-tune application state 
@@ -280,9 +280,9 @@ application's core code base) to call
 procedures which `i.are` in the code base.  
 The vast majority of such procedures, however, 
 are `q.internal,` intermediate computations 
-that would not be meaninful for appropriate for 
+that would not be meaningful or appropriate for 
 external access.  Accordingly, applications 
-need a more over-arching model of exposed-features 
+need a more overarching model of exposed features 
 to ensure that external code utilizes 
 internal capabilities in an orderly fashion.  
 `p`
@@ -303,7 +303,7 @@ function.  For example, if an exposed
 capability (in a Computer Vision program) 
 is running a superpixel segmentation on a 
 `TwoD; image via color-watershed, there will 
-be many intermediate procedured needed to 
+be many intermediate procedures needed to 
 complete that computation, but we can reason 
 about the segmentation as one identifiable 
 step in an image-processing pipeline.  
@@ -322,8 +322,8 @@ Application-level capabilities often require
 certain details to be specified %-- continuing 
 the superpixel example, such an operation 
 would need to know which image to target, and 
-potentially would need certain threshold 
-parameters to be specified (superpixels 
+potentially would require certain threshold 
+parameters (superpixels 
 are relatively small image-regions of 
 similar color, but `q.how` small and similar 
 depends on input values that might vary 
@@ -333,7 +333,7 @@ data structure (typically a `q.labeling`
 image, which adds an extra number to each 
 pixel %-- alongside its existing 
 color channels, such as red, green, and blue %-- 
-naming the superpixel to which it belongs); 
+identifying the superpixel to which it belongs); 
 for visualization, sometimes superpixel 
 segmentations will also be displayed by outlining 
 the superpixels with a colored boundary 
@@ -348,14 +348,17 @@ data values (memory addresses or `CPU; registers)
 but rather need to be marshaled and 
 encoded between the software component 
 which invokes the metaprocedure and 
-the application which exposes it.  
+the application which exposes it.
+`p`
+
+`p.  
 Unlike the execution-sequence `i.within` 
 one component, where one procedure 
 can call other procedures directly, 
 for such `q.meta` procedures there 
-needs to be a series of steps 
+is a series of steps 
 wherein input parameters are 
-built up using a common protocol
+built up via a common protocol
 which both components can understand, 
 and output results likewise 
 encoded in reverse.  The procedure/metaprocedure 
@@ -393,7 +396,7 @@ decoded (without distortion) on the
 other environment, and vice-versa.  
 External-programming interfaces therefore 
 depend on data representation systems 
-which alow for information to be restructed 
+which allow for information to be restructured 
 according to the needs of different 
 computing environments, while maintaining 
 structural integrity (i.e., decoding the 
@@ -406,7 +409,7 @@ to its originally being encoded).
 `p.
 Ensuring data integrity across divergent 
 programming environments is a complex 
-task: when being passed between 
+task.  When being passed between 
 components data is necessarily `i.serialized`/, 
 or convert from its innate binary/in-memory 
 form to a textual or numeric encoding, and 
@@ -419,10 +422,13 @@ re-decoding, should yield a copy of the original; or,
 more rigorously, modifying a smaller part 
 of the received data and then back-sending 
 should yield a duplicate of the original 
-`i.except for` the specific change).  Data-serialization 
-formats need to be designed to ensure that 
-information is not lost in the encoding/decoding 
-process: for example, a quantity which 
+`i.except for` the specific change).
+`p`
+
+`p.
+Data-serialization formats should be designed to ensure 
+that information is not lost in the encoding/decoding 
+process.  For example, a quantity which 
 originally has floating-point type (so it `i.could` 
 have non-integer values) might get encoded as an integer 
 if, in fact, on a specific occasion it has no 
@@ -444,14 +450,14 @@ between expected units of measurement
 or value-ranges (it is not obvious from a
 single number what are the sensible range 
 of values which the number could take on, if 
-modified: magnitudes for inividual pixel-colors, 
+modified: magnitudes for individual pixel-colors, 
 for instance, in most image-formats are 
 restricted to the range 0-255; percentages 
 are often limited to 0-100; angles 
 in degree to 0-359, and so forth).  
 Failure to anticipate the full set 
 of metadata conventions and standards 
-which are prerequiste for multiple 
+which are prerequisite for multiple 
 software components to act on shared 
 data is a common source of data-corruption.  
 `p`
@@ -459,7 +465,7 @@ data is a common source of data-corruption.
 
 `p.
 For these reasons, data-sharing protocols 
-need to be designed around detailed and 
+have to be designed around detailed and 
 `q.expressive` representations, meaning 
 that it is possible to systematically 
 describe all facets of data profiles 
@@ -481,7 +487,7 @@ protocols.  In more `q.critical` contexts
 which should be less susceptible to programming errors 
 %-- or for more open-ended protocols 
 where networking between disparate end-points 
-should not depend on programmers diligently 
+should not depend on programmers  
 honoring informal specifications %-- developers 
 would tend to prefer more rigorous 
 representations, such as `XML; (with 
@@ -495,7 +501,7 @@ with explicit Ontologies).
 `p.
 In this chapter I will discuss options for `i.hypergraph` 
 representations (which in some sense generalize 
-`RDF;, considered to be `q.graph-oriented`/, but, 
+`RDF;, itself considered to be `q.graph-oriented`/, but, 
 unlike hypergraphs, not internally multi-scale).  
 I claim that hypergraphs are more effective 
 at permitting rigorous data profiles to 
@@ -508,7 +514,7 @@ transparency.  Indeed, hypegraph models
 in various forms have been proposed as 
 extensions to both `RDF; (for example, in 
 the transition from graph database engines 
-to Hypergraph engines such as HyperGraphDB, 
+to hypergraph engines such as HyperGraphDB, 
 Grakn, or AtomSpace) and `XML; 
 (in the context of `q.concurrent` markup 
 and related supersets of `XML; trees, 
@@ -519,7 +525,7 @@ in `XML; and its variants, notably `HTML;).
 `p`
 
 `p.
-Although data (meta) models are an important 
+Although data (meta-) models are an important 
 theoretical topic (particularly when 
 the discussion turns to optimization, so that 
 we are considering not only `i.whether` 
@@ -539,14 +545,14 @@ valuable when they permit inter-operative
 capabilities in an additive manner: applications 
 should be able to expand the scope of 
 other applications with which they might network.  
-Representational systems which engender 
+Representational systems that engender 
 computational artifacts (parsers, for syntax, and 
-validators, for semantics, let's say) that can be 
+validators, for semantics, let's say) which can be 
 implemented, embedded, and leveraged by applications 
-as their capabilities are refined to support new 
-protocols are most effective when the amount of 
+%-- as their capabilities are refined to support new 
+protocols %-- are most effective when the amount of 
 effort consumed by the requisite programming 
-is minimized.  Data-sharing protocols should be 
+is minimized.  Data-sharing protocols should thus be 
 engineered to pass through application-integration 
 phases as quickly as possible, but likewise 
 applications should be architected to accommodate 
@@ -560,7 +566,7 @@ Generically, we can describe a metamodel as
 relatively `q.expressive` to the degree that 
 data structures and their concomitant semantic 
 paradigms can be transparently encoded 
-according to modeling system's rules.  
+according to the modeling system's rules.  
 Expressivity might imply a level of 
 redundancy, or at least superficial 
 redundancy when viewed from the 
@@ -574,7 +580,7 @@ Management) %-- employ two different
 sorts of data annotations (called 
 `q.attributes` and `q.properties`/) which 
 both are roughly analogous to `XML; 
-`q.attibutes`/.  The `IFC; attribute/property 
+`q.attributes`/.  The `IFC; attribute/property 
 distinction might seem locally superfluous 
 in that asserting a given data-point via a 
 property rather than an attribute 
@@ -596,21 +602,21 @@ can be introduced in objects' context more flexibly.
 In type-theoretic terms, attributes are immutable parameters 
 in types' schema, such that objects of the same type have 
 the same attributes, whereas properties are not bound to 
-types with equal force (usage patterns might dictate 
-that, for example, common type-instances share property-sets 
+types with equal force (usage patterns might dictate, 
+for example, that common type-instances share property-sets 
 `i.in some context`/, but these are not essential maxims 
 of the type itself).
 `p`
 
 `p.
 In the realm of bioinformatics, 
-A similar distinction is made in the 
+a similar distinction is made in the 
 context of `DICOM; (Digital Imaging and Commmunications 
 in Medicine) wherein `q.tags` (which have descriptive labels 
 but also two-part numeric codes) are encoded using a system 
 that distinguishes `q.Standard Data Elements` from 
-`q.Private Data Elements`/: 
-tags encoded with a numeric pair whose `q.Group` 
+`q.Private Data Elements`/: the latter are 
+assigned a numeric pair whose `q.Group` 
 (first) Number is odd.  `lPACS; (Picture Archiving System) viewers 
 (software that recognizes the `DICOM; format) will ignore 
 Private Data Elements by default, so the Standad/Private 
@@ -620,7 +626,7 @@ functionally identical to `IFC; attributes/properties,
 but reveals similar motivations insofar as data specifications 
 are also guidelines for implementing software which 
 manages data structures conformant to a given standard.  
-Standardization projects' tasks include definine requirements 
+Standardization projects' tasks include defining requirements 
 on software as well as data representation, and it is 
 logistically significant to distinguish standardized 
 parameters that software `i.should` recognize as a 
@@ -645,12 +651,12 @@ one is thereby leveraging the affordances of a
 given representation scheme to accommodate semantic 
 distinctions not specifically anticipated by that 
 scheme, rather than organically encoding the 
-semantics to begin with).  Also, note that for 
-fields indexed by character-strings descriptive labels 
+semantics to begin with).  Also, note that %-- for 
+fields indexed by character-strings %-- descriptive labels 
 are designed to be meaningful for human users/readers, but 
 in most modeling approaches labels do not have an 
 `q.internal structure` recognized by the framework 
-(at least if consider, say, `XML; namespaces as separate 
+(at least if we consider, say, `XML; namespaces as separate 
 labels from element names).  The `DICOM; pattern wherein 
 two-part numeric codes are employed for something 
 akin to namespace/element separation, and then the 
@@ -664,7 +670,7 @@ not have a natural correlate in multi-domain modeling protocols.
 Data-representation theories which are grounded 
 solely in `q.logical` reasoning, or mathematical 
 representation, can miss such real-world 
-complications: if we start from symbolic 
+complications.  If we start from symbolic 
 logic (or from a mathematical picture of 
 graphs or trees as formal systems) we might 
 be inclined to recognize `i.properties` 
@@ -706,13 +712,14 @@ with which structural and semantic conventions
 might be communicated.  For example, `JSON; 
 can be deemed more expressive than primitive `CSV;-style records because 
 `JSON; distinguishes arrays (which are structurally akin 
-lists) from `q.objects` (i.e., associative arrays, 
+to lists) from `q.objects` (i.e., associative arrays, 
 lists indexed by field-names rather than numbers).  
 Likewise, `XML; is more expressive than 
 `JSON; insofar as elements' data can be asserted 
-via attributes or via nested 
+either via attributes or via nested 
 elements (for sake of argument, treating `XML; 
-as a de-facto superset of `JSON; wherein arrays 
+as a `i.de facto` superset of `JSON;, albeit with 
+different syntax, wherein arrays 
 correspond to sequences of similarly-tagged child 
 nodes).  Associative arrays in `XML; might 
 be coded `i.either` as attribute key-value 
@@ -720,8 +727,8 @@ pairs on `i.one` node `i.or` as sibling nodes
 with unique tag-names.  This `q.redundancy` 
 allows for conventions to cohere 
 (in a given data-sharing protocol) stipulating 
-when either of these alternatives should be 
-used, thereby supplying an extra layer of 
+when one or another of these alternatives should be 
+adopted, thereby supplying an extra layer of 
 semantic detail which is not present in `JSON;.  
 `p`
 
@@ -763,7 +770,7 @@ these are reasonable approximations).
 `p.
 Any representational system, as these examples point out, 
 provides a range of parameters that 
-can be pressed into service when formalizing a protocol 
+could be pressed into service when formalizing a protocol 
 for encoding specific kinds of data via structures 
 conformant to the specific system.  More expressive 
 systems have a wider arsenal of parameters; for 
@@ -787,7 +794,7 @@ the system, at least intuitively.
 
 
 `p.
-This intuition can be made more precise, insofar as 
+This intuition might be made more precise, insofar as 
 I have deferred any rigorous definition for 
 `q.representational parameters`/.  That is to say, for a 
 reasonably systematic analysis of metamodels we should 
@@ -795,7 +802,7 @@ specify building-blocks of constructions
 recognized through any metamodel.  The overall 
 concept may be clear enough %-- in general, 
 the parameters of a modeling system are the full set 
-of structural elements that might potentially 
+of structural elements that may potentially 
 be employed in fully describing any given 
 structure covered by the system %-- but one would 
 like a still tighter definition.  For this chapter, 
@@ -814,7 +821,7 @@ metamodel.  Presumably, such a structure
 can be assembled over multiple stages.  Insofar 
 as node-hypernode inclusion is a constructional parameter, 
 for instance, then a structure can be modified 
-by a including a node within the scope of a hypernode.  
+by including a node within the scope of a hypernode.  
 Similarly, insofar as inter-node relations (via directed 
 edges or hyperedges) are significant constructions, 
 then a structure may be modified by adding an edge 
@@ -822,7 +829,7 @@ between existing nodes.  In short, any structure
 can be derived from the modification of precursor 
 structures.  The full set of structure-modifying 
 operations available for a given representational 
-paradigm can be enumerated as (at least on part of) 
+paradigm could then be enumerated as (at least on part of) 
 the opset of a hypothetical (or realized) 
 Virtual Machine.  As such, Virtual Machines 
 provide a potential formalizing environment 
@@ -851,9 +858,9 @@ calls to other procedures).
 `p`
 
 `p.
-Virtual Machines can be useful tools for studying software-interoperability 
+Virtual Machines are useful tools for studying software-interoperability 
 insofar as both data-representations and communications protocols 
-can be modeled in terms of `VM;s (at least as abstract summaries 
+could be modeled in terms of `VM;s (at least as abstract summaries 
 of working code; or, more ambitiously, application-networking 
 frameworks can be provide actual `VM;s through which applications 
 can route their networking logic, analogous to query languages 
@@ -870,7 +877,7 @@ specify which implementation is being requested %--
 and how input parameters (and then output results) 
 should be encoded.  Applications can use 
 `VM;s as a kind of neutral environment where 
-third-party code can build up a representation 
+third-party code build up representations 
 of exposed-functionality invocations 
 incrementally.  Indeed, many programs support 
 scripting via languages such as Python; it 
@@ -881,7 +888,7 @@ to the relevant `q.byte` code.  Alternatively,
 even if applications do not expose `VM;s 
 to third parties directly, they could 
 use `VM;-backed processes to process 
-`API; requests: since `VM;-targeted code could be 
+`API; requests: since `VM;-targeted code may be 
 updated without recompiling the application, 
 the `API; could then adapt to new networking 
 situations.        
@@ -910,7 +917,7 @@ are directly implicated in the state of the application at
 that moment.  The current user (or a different user) might, 
 accordingly, be interested in reconstructing that 
 application-state (or some relevant subset thereof) at a 
-future point in time; at which point database queries are 
+future point in time %-- at which point database queries are 
 typically necessary, because the relevant information is 
 no longer in live memory.  To be sure, a database does 
 not necessarily store `q.application state` as such 
@@ -920,10 +927,7 @@ those so that users can resume prior sessions %-- but
 a typical rationale for persistent data storage 
 in the first place is functionality supporting 
 users' desire to resume prior work, return to 
-previously-viewed files, and so forth.  The 
-individual values stored in a database derive their 
-significance from how they interconnect 
-in users' experience in the context of any application.   
+previously-viewed files, and so forth.   
 `p`
 
 
@@ -931,9 +935,8 @@ in users' experience in the context of any application.
 As a concrete example, suppose we are considering an application 
 which (at least as one of its features, and in the context 
 of particular `GUI; windows or components accessed through 
-the software) supports viewing, tagging, and annotation 
-`TwoD; images (e.g., photographs).  Imagine an 
-image database allocated for documenting 
+the software) supports photo tagging and annotation.  
+Imagine an image database allocated for documenting 
 ecological and/or infrastructure damage 
 from natural or man-made events, such as 
 the 2022 Russian invasion of Ukraine, and perhaps 
@@ -954,7 +957,7 @@ models measuring the ideal urban density for
 that specific neighborhood based on environmental 
 criteria, utility grids, public transit, and so forth).  
 A typical session for such an software component 
-might involve users viewing individual images, 
+could involve users viewing individual images, 
 previewing image-series depicted via thumbnails, 
 searching for images (based on criteria such as 
 street address, city/district name, or perhaps 
@@ -975,17 +978,23 @@ for users simply to browse images in a filesystem
 folder, say), functionality for finding and tracking 
 images would need to be based on some 
 systematical query capabilities, i.e., some 
-form of image database (which need not imply 
-that images themselves are stored as database 
-`q.blobs` %-- binary large objects %-- but 
-at least that image file paths, feature sets 
+form of image database: image file paths, feature sets 
 for retrieval/similarity searches, metadata 
 and formatting details, etc., can be hosted 
 in a database so that images can be selected 
-inside large series by variegated query strategies).
+inside large series by variegated query strategies.`footnote.
+Images themselves (i.e., their pixel-data) might also 
+stored as `q.blobs` %-- binary large objects %-- but 
+the term `q.image database` generically covers cases 
+as well where images files are hosted on a filesystem 
+with only their metadata stored in the database directly.
+`footnote`
+`p`
+
+`p.
 Suppose an image depicts a city block where 
-damaged buildings have to be replaced; data 
-associated with the image could include 
+damaged buildings have to be replaced.  
+Data associated with that image could include 
 estimates of the number of people who lived in 
 that location prior to (for example) 
 the Russia/Ukraine war; the number of 
@@ -1010,7 +1019,7 @@ data.
 `p.
 Continuing this specific (hypothetical) example, the 
 envisaged scenario has image-viewport components 
-serve as an entry-point for a diversity of 
+serving as entry-points for a diversity of 
 civil/architectural information; presumably 
 the specific kinds of data available will vary 
 from one image to another, and users will 
@@ -1040,552 +1049,461 @@ application logic is more complex than if each image were
 given a fixed set of data fields isolated from user pragmatics.
 `p`
 
-`subsection.GIS Databases and Digital Cartography`
-
+`subsection.Database Engineering and Type Theory`
 `p.
-This discussion has now touched on themes related 
-to flexibly-typed database systems: the idea 
-being that expressive database engines support 
-`i.strongly typed` data (in the sense that 
-all records have type attributions that 
-offer guarantees about their internal 
-structure, such as a specific set of 
-defined fields) but also allow new types 
-to be introduced into an active database.  
-A good case-study of where such design 
-is apropos is that of maintaining 
-geospatial databases that track information 
-associated with geographical coordinates 
-%-- for example, roads, bridges, buildings, 
-waterways, transportation infrastructure, 
-or land-plots, but also any kind of scientific 
-data (environmental, sociodemographic, etc.) 
-that can be overlaid on a digital map.  
-`lGIS; systems are typically divided into 
-two distinct data categories: there are 
-`q.basemaps` which represent the most 
-common or generic types of `GIS; data 
-(roads, buildings, and the like) that are 
-then augmented with supplemental `q.data layers` 
-that are narrower and more domain-specific 
-(such as ecological data).  Digital cartography 
-renders `i.basemap` visuals by 
-subdividing geographic areas into relatively 
-small segments (within a 256 `xtimes; 256 area, for example)  
-translating geospatial (typically latitude/longitude) 
-coordinates to pixel-coordinates.  Digital maps 
-are composed at multiple scales of resolution; 
-in a common format, so-called `q.XYZ` tiles, 
-the lowest zoom level produces a `q.map` of the whole 
-world (basically an outline of the continents) 
-whereas the highest level (around 20, or slightly less 
-depending on the environment) is sufficiently 
-detailed that maps can show the contours of 
-individual buildings and street-intersections.  
-In XYZ, each successive zoom level doubles 
-the underlying magnification, so that 
-each tile at one level splits into four 
-tiles at the enxt level.
+Suppose again that one information-bundle that 
+could be associated with (some) photographs outlines 
+redevelopment plans: data points such as the number 
+of residential units targeted, renderings of building 
+designs, contractors, contact information, and so forth.  
+Presumably, such data would only be applicable 
+to images showing blocks or plots where such plans 
+are in the works; and moreover such images would link 
+to other forms of data as well (about, say, utilities 
+grids).  As part of the empirical background, in 
+effect, one might conclude that various facts 
+pertaining to individual reconstruction projects/contracts 
+can both be aggregated (as interconnected data-points) 
+and isolated from other information potentially 
+relevant to an viewed image.  In general, software 
+design depends on sensitivity to how information spaces, 
+practically speaking, can be carved and organized.  
+The decision to isolate (say) construction-project 
+data as integral units would be made against 
+that kind of design/decision context.  Having 
+this topic reified as a specific `q.category` of data, 
+say, affects `GUI; programming and event-handling 
+(because user-visible components must be implemented 
+enabling users to access information in that 
+category, which in turn yields signals like 
+context-menu activations and the need for appropriate  
+event-handlers) as well as database interop (insofar 
+as such data has to be packaged in persistable forms). 
+Subsequently, representations of such integral construction-project 
+data (in the form of, e.g., a cluster of interrelated 
+datatypes) would be manifest as software artifacts 
+threaded through a code base.
 `p`
 
 
 `p.
-Software known as `q.tile renderers` and `q.tile servers` 
-map latitude and longitude coordinates (or 
-other `GIS; units, such as those of Marcatur projections) 
-to tile-coordinates that include zoom level as 
-one axis (e.g., the `q.z` in XYZ).  An XYZ triple 
-designates a specific gegraphic area at a specific 
-zoom level; individual latitude/longitude and Mercatur 
-points can then be identified via fractions of the 
-tile width and height.  Via such a mapping, locations 
-of objects in a `GIS; database are converted 
-to pixel-coordinates, so that features such as 
-roads and building can be marked visually.  Tiles 
-are rendered according to graphical rules called 
-`q.styles`/, which stipulate details such as 
-the colors that should be used to outline buildings 
-or roadways, or the icons for points of 
-interest (transit stops, historical sites, special-purpose buildings 
-or areas such as schools, hospitals, parks, 
-government offices, and so forth).  Tile-rendering 
-requires some computational algorithms because 
-streets/highways and other noteworthy spots need 
-to be named or labeled, and the positioning 
-of these identifiers (unlike the fixed latitude-longitude 
-of the labeled locations) is indeterminate, so cartographic 
-engines try to calculate how to position street-names 
-(for example) so that this text does not intersect with 
-other map data (such as roadway lines).  
+The specific patterns of data organization and programming-language 
+types engineered for an application reflect practical 
+concerns and aspirations to optimize User Experience; these patterns 
+do not necessarily map neatly to native database 
+architectures.  Neither relational databases (built up from 
+tables with fixed tuples of single-value columns) nor 
+conventional graph databases (whose representations are confined to 
+one layer of labeled edges) generically match the 
+multivariate and multi-level structure of real-world information 
+typically managed at the application level.  This is why 
+application-level data types generally need 
+to be restructured and transformed when routed between applications 
+and database back-ends.  
 `p`
 
 
 `p.
-The end result of a tile-rendering pipeline 
-is a miniature map in the form of an `i.image`/, 
-often in a format such as `PNG; equivalent to 
-many photographs; a `GIS; application will 
-form maps that users see by composing together 
-multiple tiles.  This provides the `q.basemap` 
-layer, representing a general-purpose 
-view of a given geographic region.  On top of 
-these base maps, applications will usually 
-superimpose domain-specific data points 
-(sometimes called `q.attribute` data) relevant 
-in specific contexts: data layers might 
-show locations where Ukrainian buildings or infrastructure 
-was damaged in the 2022 war; or distributions 
-of COVID-19 cases; or environmental hazard sites; 
-or tax lots and zoning codes for architecture, 
-real estate, urban planning, and 
-property management; or sightings of specific plant or animal 
-species, and so on.  In effect, whenever 
-scientists or researchers have data sets indexed 
-by geographic coordinates %-- epidemiological, 
-ecological, sociodemographic %-- such information 
-can potentially become a Data Layer which 
-is visualized by superimposing special-purpose 
-icons or colorations on a generic basemap.  
-These extra layers can be added at different processing 
-stages: for instance, they might be consumed by 
-the tile servers themselves, as a post-processing 
-step immediately after rendering basemap tiles; 
-or they could by superimposed on basemaps 
-by `GIS; front-ends,  
-immediately prior to showing maps to users 
-(in this case applications would typically 
-download tiles and data layers separately, 
-and merge them together at the last moment).   
+Software engineers are responsible for ensuring a proper 
+synchronicity between application and database state, although 
+(as intimated above) this does not (by and large) entail 
+application-state being directly persisted in a back-end.  
+Instead, back-end updates are a property of application-state at certain 
+moments; insofar as users have performed edits or in general 
+made changes resulting a mismatch between the data as 
+currently seen by the user and what is stored in the database, 
+the latter has to commit such changes for perpetuity. 
+Update-worthy application-state then needs to be 
+distributed over (potentially) multiple database 
+`q.sites` which are collectively implicated in an update.     
 `p`
 
 
 `p.
-I provide this digital-cartography overview mostly 
-to mention certain details concerning 
-`GIS; data systems: although there is a core 
-dimension of familiar mappable elements 
-(roadways, buildings, and so forth) with common 
-presentation guidelines (formalized via tile-rendering 
-styles), the space of information that 
-could be added on base maps is open-ended.  
-Any data set with latitude/longitude coordinates 
-(or fields convertible to such coordinaets, such as 
-street addresses) can be visualized against 
-the backdrop of a `GIS; basemap.  If we consider 
-`GIS; data to encompass common basemap info 
-`i.together with` special-purpose supplemental 
-layers, then `GIS; databases are a good 
-example of `q.strong but flexible` typing: it is 
-impossible for a `GIS; system to anticipate 
-`i.a priori` the full range of data profiles 
-evinced by objects visualized in a map 
-context, within supplemental data layers.  
-Every mappable object will have latitude/longitude 
-coordinates (or a collection thereof, giving a 
-geometric outline), but in addition objects will 
-have other data-points as well, relevant to 
-their specific domain (civil engineering, etc.) 
-but opaque to mapping applictions themselves.  
-In this sense `GIS; systems manage non-`GIS; 
-data by tracking opaque objects without 
-consuming them directly: it is 
-up to individual applications to 
-download data within supplemental 
-layers and reconstruct the relevant 
-domain-specific info, so that 
-users can employ street maps as 
-entry points for accessing 
-information which is then visualized 
-through other features in the 
-application.  For example, urban planners 
-taking on the responsibility of rebuilding 
-Ukrainian cities might start with street 
-maps showing sites of destroyed 
-buildings and infrastructure, and 
-then (typically by clicking on a map) 
-transition to windows showing structured 
-data about individual locations, such as 
-the number of families formerly living in a 
-damages residential complex, or details 
-about utilities and water/gas/electricity 
-grids, or estimates of environmental 
-hazards (chemical leakages, say, or 
-unexploded munitions) resulting from the 
-conflict.  The point here is that 
-objects containing such domain-specific 
-data need to be packaged and stored 
-in a `GIS; database even if they are 
-not `GIS; data proper, and then 
-correctly reconstructed and presented 
-to users in conjunction with digital-cartography 
-front-ends.  This data-management workflow 
-is roughly analogous to the case of routing data 
-packages across third-party networks 
-discussed above (in ways I will summarize 
-more completely at the end of the Section 3).
-`p`
-
-`subsection.Geospatial Data and GUI Events`
-`p.
-A final topic relevant to the current section, 
-however, relates to front-end implementations 
-for `GIS; software.
+For sake of argument, consider an update (or part thereof) consolidated 
+into a single (application-level) datatype instance; e.g., 
+one object of a given `Cpp; class.  Quite possibly, there is 
+no one-to-one correspondence between application objects and 
+database values or records, particularly if the classes 
+in questions contain many data fields and/or multiple 
+one-to-many relationships and values which are more 
+involved than simple strings or numbers (e.g., pointers 
+to other objects).  The structural mismatch between 
+application data and database records is evident in 
+technologies such as Object-Relation Mapping (`ORM;) 
+%-- or `q.Object Triple Mapping` for the Semantic Web %-- 
+marshaling data for relational databases or triplestores, 
+respectively.  Engines with more flexible 
+representation paradigms, needing less reconstruction 
+of application data exported to a back-end, can be 
+advantageous precisely because data-persistence 
+capabilities end up consuming less `q.boilerplate` code.  
+Hypergraph databases are a case-in-point: the kind of 
+complexity in datatypes' internal orgnanization 
+(multiple multivariate fields for a single object, 
+for instance) which give rise to `ORM;/`OTM;-style 
+transforms map organically to hypernode or hyperedge 
+constructions. 
 `p`
 
 
 `p.
-Most of the time, users consult `GIS; maps 
-with the intent to find and get information 
-about specific addresses or locations, i.e., 
-to switch from a cartographic 
-overview to a more detailed display of 
-information specific to a given spot 
-the map (perhaps a restaurant's menu, 
-or departure times at a bus stop, or a 
-business's hours of operation, and so 
-forth).  Presumably their `GIS; software 
-(which can include domain-specific 
-applications that have digital-map 
-windows as one front-end format among 
-others) has the capacity to render 
-such location-specific data in a format 
-useful to the user.  When accessing 
-street maps via a web browser, for 
-example, the simplest way to access 
-non-`GIS; data is to open third-party 
-websites in a separate browser tab.  
-For example, users intending to 
-search a library's card catalog 
-could find the library on a map, 
-and then rely on the map 
-providing popups with location 
-info, hopefully including a link 
-to the library's website %-- following 
-that link would allow the user 
-to query the desired catalog. 
+Modifying a database entails conveying a package 
+of database between applications and the database 
+engine; the structure of this `communique; 
+in turn reflecting database architecture.  
+The `SQL; `INSERT; 
+statement, for example, derives its form 
+from the layout of table-base data models:  
+adding a record entails naming the table to which it 
+will belong, which brings on board the specific 
+list of fields (columns) whose values have 
+to be accounted for in the query.  Our impression that 
+relational algebra is a relatively crude or inflexible 
+meta-model derives, it would seem, in large part 
+from the quantity of bridge code needed to implement 
+database updates through query commands such as 
+`INSERT; that are restricted to the relational 
+architecture.  To the extent that hypergraph 
+engines (for example) are more flexible in principle, 
+this advantage only becomes concretely 
+evident to the degree that hypergraph databases 
+support a query system such that updates (and 
+analogous modifications to a database instance) 
+are initiated with relatively less 
+boilerplate code.    
 `p`
 
 
 `p.
-Outside of a browser, on the other hand, 
-we can imaging a city's overarching 
-library system providing an app which 
-includes a cartographic display as 
-one window where users can location 
-individual library locations, giving 
-then the option of clicking on a 
-locations associated with a map 
-icon, but then presenting a 
-catalog-search window as a 
-`GUI; component of the same 
-application, rather than a separate 
-web site.  This would be an example 
-of an application which implements 
-both digital-map windows and 
-other forms of displays side-by-side, 
-routing the user interface between 
-then based on user actions.
+As I alluded to earlier, hypergraph data models 
+have comparatively greater parameters available 
+for representing information; in particular, 
+this implies that we have greater 
+flexibility in formulating queries 
+to modify database instances.  It is worth mentioning 
+at this point that `q.queries` need not involve 
+instructions passed to a database engine 
+in the form of character strings (e.g., 
+`SQL; code); indeed, forcing applications 
+to build query code on the fly is a often 
+an antipattern (spurring boilerplate code-bloat); 
+better solutions involve query `q.factories` that 
+assemble queries via procedure/method calls 
+in a host programming language (perhaps 
+through an embedded domain-specific language, 
+as one finds with `LINQ; `visavis; `CSharp; and 
+its emulations in other languages).  On the 
+other hand, in the best case scenario a database 
+would `i.also` support a query language that 
+could be executed as text strings outside of an 
+application context (and without relying on a 
+host programming language), for examining 
+the contents of a database in situations removed 
+from application-based access (debugging, analytics, 
+general admin functionality, and so forth).   
+In other words, ideally engines will encompass 
+a query engine that works with query-structured 
+compiled `i.either` from application-code factories 
+`i.or` standalone query code, which is one rationale 
+for embracing a query-evaluation Virtual Machine.    
 `p`
 
 
 `p.
-Whether via multiple intra-software 
-`GUI;s or through external web sites, 
-however, the common denominator 
-in both scenarios is that users 
-interact with `GIS; maps as a 
-way of requesting information about 
-specific places.  Supporting 
-`GIS; front-ends for these purposes 
-requires, at a minimum, the 
-ability to map geographic locations 
-to site-specific information.  For 
-example, a library-system app would 
-need to know which latitude/longitude 
-coordinates refer to which library 
-branches, so that users clicking 
-on an icon at a given geographic 
-coordinate would be routed 
-to the appropriate card catalog.  
-In terms of front-end development, 
-it is equally important 
-that the software know how to 
-map on-screen coordinates to 
-latitude/longitude pairs.
-`p`
-
-
-
-`p.
-This last step may seen obvious, but 
-most users probably do not notice 
-the computational details involved in 
-deciphering their actual `GIS; locations.  
-When a user sees a map, they 
-intuitively understand that each point 
-in the display corresponds to a 
-specific `GIS; position (with specific latitude 
-and longitude coordinates).  Clicking 
-a mouse when the cursor hovers over a given 
-site %-- or tapping on a touch-screen %-- 
-is thereby understood to be a gesture 
-which signals the user's interest 
-in selecting the location thereby 
-singled out as a focus point.  From 
-the application's point of view, howver, 
-the user-action is not intrinsically 
-endowed with geospatial axes, but instead is 
-localized on the screen (they have touched 
-or clicked on a given pixel-location 
-relative the overall dimensions of 
-their screen/monitor).  There are a variety 
-of mathematical quantities which need 
-to be tracked when converting 
-screen-coordinates to latitude/longitude, 
-including the current zoom level, and the 
-specific geographic rectangle which is 
-visible in the map's view-port (tracking how 
-the user has `q.panned`/, viz., 
-orthogonally scrolled the display, so that 
-the click-location is quantified as a 
-certain distance right and down from 
-the window's top-left corner, which 
-corresponds to moving a certain distance 
-West and South).  Moreover, because 
-map-tiles are acquired through coordinate-systems 
-such as `XYZ; rather than through latitude/longitude 
-rectangles directly, applications will 
-typically need to map on-screen coordinates 
-to (e.g.) `XYZ; triples as an intermediate 
-step, and then on to latitude/longitude 
-as desired (in the case of `XYZ;, there 
-might actually be still a further 
-coordinate-transform involving 
-Mercatur projections).     
+The specifics of database updates %-- sticking again for 
+sake of exposition to single type-instances %-- depends 
+of course on types' internal organization.  
+For typically atomic types 
+(like 1, 2, 4, or 8-byte integers) updates might 
+only entail replacing one value with another, but 
+more complex values (`q.objects`/, in effect`footnote.Taking 
+the perspective that in some systems objects are formally 
+defined as aggregate structures (rather than atomic data-points) 
+and, even if not precisely stipulated, object/atomic value 
+distinctions tend to align `i.de facto` with object-classes 
+against, say, built-in types (cf. `Cpp;)`/) with multiple 
+and/or multi-value data-fields updates can include 
+adding or removing a value from a collections type-instance 
+as well as altering such a value, and so on.   
+For many compound types the collection of fields 
+includes more than one which are in turn `q.collections` 
+(e.g., vectors, stacks, queues, deques, and unordered sets/multi-sets, 
+plus map-arrays that are pair-lists with possible nonduplication 
+restrictions on the first element) subject to add/remove 
+operations, in contrast to full-on value-to-value 
+replacement.  Some collections have modification-restrictions 
+(e.g., values can only be added or removed from one or 
+both ends of a list, or, as in typical `q.sets`/, all added 
+values must be unique) or enforce constraints such as 
+monotone increase and decrease.`footnote.
+Consider a collections type 
+which has only one insertion operation, 
+but will automatically place new values either at the beginning or 
+end of the list to preserve increase-direction; here, 
+new values have to be either greater or less than all 
+prior values.  Or, automatically sorted lists need only 
+one insertion operation because the insert procedure would 
+deduce the proper insertion-point.
+`footnote`  All of these are potential paths toward 
+legal mappings of type-instances between states 
+which initialized typed value can take on, given their 
+internal organization.  Nor is this discussion complete; 
+we could also mention reclassifying `q.union`/-type values 
+(whose instances can be one of several types) or 
+various types depending on binary arithmetic 
+(cf. tagged/`q.decorated` pointers, or 
+enumerations whose value can be members of 
+nominal-value lists `i.or` bitwise combinations 
+thereof, or unions where multiple type-tags 
+are valid by virtue of shared binary encoding, 
+in effect using one tagged value to update another 
+member of the union %-- a simple case being 
+integer/bitset unions where setting the 
+integer automatically sets or clears corresponding 
+fields in the bitset).  
 `p`
 
 
 `p.
-Although the equations to effectuate the 
-various inter-coordinate calculations just 
-outlined are not prohibitively difficult 
-to implement, an application's ability to 
-properly respond to front-end user gestures 
-depends on having complete information about 
-the digital map which the user sees at any 
-point in time, prior to his or her 
-interactions (e.g., current pan and zoom 
-state).  Depending on the map-source 
-used, such information may or may not 
-be available.  For example, one way to 
-build a `GIS; font-end would be to 
-allocate and web-view window and 
-point it at a street-map `URL;, such as 
-GoogleMaps.  Via this arrangement, however, 
-there is no way for the host application 
-to get detailed pan/zoom info from the 
-embedded map display, so the host software 
-has no way to translate user actions such as 
-mouse-clicks.  The application could certainly 
-register the fact that users have clicked 
-on a given screen coordinate, but they 
-will not be able to convert screen 
-coordinates to latitude/longitude 
-without knowing the current map-state, and 
-this is not data that systems such as 
-GoogleMaps make computationally availabile.  
+The mechanisms for aggregating multiple values 
+into individual type-instances tend to be 
+much more complex for general-purpose programming 
+languages such as `Cpp; (see unions, pointers, arrays, 
+multiple inheritance, enumerations and their 
+base types, etc.) compared to databases 
+(see `SQL; or `RDF; types); this is a proximate 
+cause of complications in persisting application-level 
+data.  Conversely, databases with more refined 
+type systems can (at least potentially) absorb 
+application data more conveniently.  For this 
+to work in practice, however, the 
+engine needs a query system which can 
+duly leverage type-system expressivity; the issues 
+involved here are well-demonstrated by 
+update-queries as I've mentioned.  Properly recognizing 
+application-level intra-type organization 
+depends on representing (and then 
+exposing to a query interface) the full spectrum 
+of morphisms through which a single type-instance 
+might be updated.  
 `p`
 
 
 `p.
-For these reasons, relatively full-featured 
-`GIS; applications need to manage 
-map-rendering displays on their 
-own (rather than deferring these 
-operations to an embedded service), which 
-involves connecting to a raw map-tile 
-service (a tile server) rather than to a 
-higher-level component such as Google Maps, 
-and internally managing issues such as 
-local tile-storage and scheduling updates.  
-This is why open-source tile servers 
-such as Open Street Maps are an important 
-contribution to the software-development 
-ecosystem, because they remove many 
-barriers that would otherwise exist to 
-applications implementing fully functonal 
-`GIS; front-ends as one facet of 
-their user interface.
+For complex types, an effective query-system would have 
+update operations that are more targeted than 
+just replacing one value with another 
+`i.tout court`/; instead, updates may only 
+involve one or some subset of all data-fields, 
+and (for multi-value fields) could involve 
+insertions/deletes in a collections context 
+rather than a direct value-change.  The degree to 
+which a database engine seamlessly interoperates 
+with applications depends on the latter 
+constructing data-packages (without undo effort) 
+that signal the `i.kinds` of updates 
+requested alongside the relevant new values 
+(notating, e.g., collections-context changes as 
+distinct from single-value morphisms).  
+Intuitively, flexible architectures 
+(e.g., hypergraphs) accelerate the requisite 
+implementations, although actually 
+supporting a query-interface satisfying 
+such ambitions depends on a confluence 
+of factors (e.g., underlying database 
+architecture but also query-representation 
+and query-evaluation protocols and the 
+tools to compile code/text or procedurally-generated 
+queries to internally-represented structures 
+suitable for evaluation).
 `p`
 
 
 `p.
-On the other hand, even well-intentioned projects 
-such as Open Street Maps have certain limitations 
-(such as data usage restrictions), so large-scale 
-projects have an incentive to implement 
-their own tile-server back-ends rather than 
-rely on third parties.  Consider the case-study 
-of Ukraine reconstruction: assuming multiple 
-organizations and international funders commit 
-to significant reconstruction projects 
-for Ukraine %-- and that groups agree to 
-collaboratively engineer and utilize 
-digital resources for sharing information 
-and ideas that could be useful for reconstruction 
-projects %-- it would make sense for the 
-shared resources thereby deployed to include a 
-dedicated tile-server specific to digital 
-maps of Ukrainian territory, including both maps 
-designed to show both street/urban details 
-and to diagram natural/geological features.  
-Apart from giving software open-ended access 
-to raw cartographic images and `GIS; data, 
-a special-purposes tile server could 
-choose rendering styles and conventions 
-(such as duplicating tiles with street-names, 
-place-descriptions, and other textual info 
-in multiple langauges and alphabets: 
-Ukrainian, English, German, etc.) collectively 
-designed to maximize maps' usefulness 
-for the specific purpose of a multi-national 
-rebuilding effort.  This could ensure that 
-users unfamiliar with the Cyrillic alphabet, 
-for example, would be able to see versions 
-of the street-map with transliterated place-names; 
-and that base-coloring for features such as 
-roadways and building-outlines would not 
-conflict with the display of non-`GIS; 
-data (e.g., tracking patterns of refugee 
-displacement and return).
+This section's discussion has focused on 
+updating a single type-instance centering on 
+the point that complex intra-type layout implies 
+a diverse set of query-based update options.  
+An `UPDATE; statement in `SQL;, say, 
+only (directly) supports one 
+particular `q.genre` of updates (value-to-value 
+edits in one or more discrete columns).  Given application 
+state which can be expressed in terms of modifications 
+to existing persisted values, keeping the 
+back-end in sync entails accounting for the changes 
+embodies in the new application-state by 
+presenting the back-end engine with (in general) a 
+series of updates; the more flexibly updates 
+can be encoded, the less development time 
+need be expended figuring out how to 
+translate application-state changes to updates 
+the engine can process.  This is one reason why a 
+diversity of data-modeling parameters can 
+streamline application integration: a flexibly 
+tableau of recognized constructions implies that 
+applications can describe updates with 
+relatively less boilerplate destructuring.  
+Consider the multitude of `q.sites` where 
+data associated with a hypernode can 
+be asserted, in the context of property-hypergraphs; at least 
+(and some systems may have more elaborate 
+constructions as well) properties `i.on` a hypernode, 
+nodes `i.in` the hypernode, and edges `i.from` a 
+hypernode to its peers.  This articulation 
+of site-varieties is, self-evidently, also a 
+list of update-forms.  Having multiple protocols 
+for describing updates allows different forms of 
+updates to be recognized with distinct semantics.  
+For example %-- consider again the attribute/property 
+distinction in `IFC; %-- updates to `i.properties` 
+(which would in general be ad-hoc annotations 
+on a hypernode less strictly regulated than 
+nodes encompassed `i.in` hypernodes) could be 
+subject to different validators than updates 
+performed via node-insertion or (potentially 
+Ontology-constrained) edge-insertion.      
 `p`
 
 
 `p.
-When analyzing front-end event-processing, a further
-detail involves distinguishing 
-between user gestures targeted at visible 
-base-map features and those focused on 
-supplemental data layers.  With respect to base 
-maps, although structured information such as 
-details about individuals roads and buildings 
-is implicit in tile-images %-- because `GIS; 
-databases are consulted in order to render 
-tiles in the first place %-- the actual 
-tiles which `GIS; front-end components 
-receive from tile servers are just images, 
-which function from a software-development 
-point of view more or less like photographs.  
-Although a front-end event handler can 
-(with suitable state-info) translate 
-event coordinates (screen locations) 
-to latitude/longitude, the application 
-would not (at least from map-tiles themselves) 
-be able to ascertain whether the 
-user's selected latitude/longitude point 
-corresponds to a particular building, a roadway, 
-a street intersection, transit point, 
-or any other kind of `GIS; feature.  
-This further information would need 
-to be obtained from a remote source 
-(such as an address-lookup service) 
-and/or a local database which applications 
-maintain internally.  In the case of 
-Ukraine reconstruction, for example, 
-a dedicated tile-server could 
-include information packets co-extensive 
-with tiles identifying street-map landmarks 
-keyed to geospatial locations, so that 
-client software would be able to 
-translate screen coordinates to 
-points-of-interest.
+In effect, multi-parametric modeling 
+tableaus in the database `i.architecture` 
+propagate to multi-dimensional 
+options for encoding updates, which in 
+turn allows for coexisting update 
+protocols each with their own semantics.  
+Applications can then choose which 
+protocol most efficiently describes 
+any particular change in application-state.  
 `p`
 
 
 `p.
-These comments apply to details visualized through 
-base maps.  The situation is different, however, 
-with respect to supplemental data layers: 
-in this case, typically, front-end applications 
-acquire base tiles and non-`GIS; data 
-separately, and then overlay the latter 
-on the former prior to rendering map 
-windows for users to see on-screen.  Because 
-the client application thereby needs to correlate 
-non-`GIS; data objects with map locations, 
-the correspondance between these objects 
-and latitude/longitude coordinates is already 
-present in the system (it does not need to be 
-externally queried from an address-locator, 
-for instance).  At the same time, there 
-are still computational details which applications need 
-to reckon with in order to properly route 
-user events.  For example, implementations 
-can produce the visual effect of non-`GIS; overlays 
-visibly superimposed on base map background 
-in different ways.  As a case in point, consider 
-the options for a `GIS; front-end coded via 
-`Qt; (the most popular cross-platform 
-`GUI; framework for `Cpp; and, via bindings, 
-for most sripting languages).  There are 
-at least two possibilities: in one case, data layers 
-could be superimposed on base maps by 
-overriding the functionality for 
-`q.painting` base maps as images, such that 
-icons, diagrammatic elements (arrows, lines, and so forth) 
-or color-effects (e.g., semi-transparent 
-colors to represent something like population 
-density) are `q.painted` on top of base-map 
-images.  The result of that operation would 
-be a composite image which, perhaps via a 
-`b.QImage` subclass, would be treated by the 
-`Qt; displays as equivalent to an ordinary 
-image (with no internal structure); in this 
-case all user events would share the 
-same profile, as signals relative to 
-image-coordinates, and the applicaton would need to 
-determine whether a mouse-click (or similar 
-gesture) is targeting a point in the 
-base-map image or an overlay painted over it).       
+Of course, these points `visavis; changing 
+`i.existing` database value have analogs 
+in the context of inserting `i.new` values.  
+Ideally, applications will have flexibility 
+in how encode data structure for insertion 
+into a back-end via database queries.  
+This is not only a matter of notating 
+all information which should be persisted, 
+but also providing cues to the engine 
+about how the new data should interact 
+with other records (e.g., using 
+primary keys or globally-unique 
+identifiers to secure inter-record 
+links analogous to %-- perhaps 
+translating %-- live-memory pointers) 
+and subsequent find/select queries.  
+What are the criteria through which 
+a database record, once deposited, should 
+be retrieved again in the future?  Most 
+database systems will give nodes/records 
+unique id's, but the whole point of 
+search queries may be that records 
+should be located based on known data 
+in contexts where an application does 
+`i.not` have the requisite `gid;. 
 `p`
 
 
 `p.
-On the other hand, an alternative technique would 
-be to render the composite of base-maps and 
-overlays through `b.QGraphicsScene`/, where 
-the base-map is treated as a raw image but 
-overlay data is introduced as scene-objects 
-(for example, icons representing specific 
-points where non-`GIS; data is accessible), 
-that the application tracks and holds 
-in memory as data structures fully separate from 
-base-map images.  In this case, clicks 
-on scene-object icons would be registered 
-via different event-signals and a different 
-application-response pipeline than 
-clicks on base-map locations, so programmers 
-need to engineer two different event-handing 
-systems, one for base maps and one 
-for supplemental layers.  
+Consider again the case-study of image-curation 
+software that could be used in a redevelopment/urban 
+planning context, such that photograph resources 
+include depictions of future building sites.  
+As suggested earlier, data associated with 
+each picture could reference construction-project 
+data (e.g., the number of units slated for 
+construction, or the identity of the firm contracted 
+to oversee the project), as well as, perhaps, 
+`q.generic` information (image format, dimensions, 
+color-depth, plus, say, `GIS; coordinates).  
+One consideration when designing such an application 
+would be how users would find images 
+that they hadn't seen before, or had not 
+revisited for an extended period of time 
+(so that the presumptive image `gid; is not 
+cached in recent history).  In would make sense 
+to track images by longitude and latitude, 
+for example, assuming that users would know such 
+data.  Perhaps street address (accounting for 
+the possibility that large-scale redevelopment 
+might alter the street grid so that pre-war 
+addresses, say, become obsolete; one might 
+still maintain a mapping from such addresses 
+to `GIS; coordinates so they remain useful 
+for queries); or (less granularly) by district 
+or city.  We can similarly envisage scenarios 
+where architectural details are mentioned 
+(`q.find images of sites within a 
+10-kilometer radius featuring planned 
+buildings over 4 stories tall`/).   
 `p`
 
 
 `p.
-This specific example %-- implementing 
-`GIS; displays with supplemental data via 
-`Qt; windows %-- is a good case-study in how 
-applications need to systematically 
-prepare and document their event-handling 
-logic.  Failure to clarify how a `Qt; 
-application is approaching the task 
-of rendering layers on `GIS; base maps, 
-and on how these design choices 
-propagate to event-handling requirements, 
-could make such applications difficult 
-to maintain once the original developers 
-move on to other projects. 
+For queries along these lines to work, 
+back-ends need to structure type-instances 
+such that (potentially large collections of) 
+values can be filtered into subsets 
+meeting specific criteria: `GIS; coordinates 
+restricted to a given locale, housing 
+matching a given contractor-name, and so forth.  
+When exporting info to a back-end, the 
+relevant details are not only the specific values 
+comprised by the new data but also 
+which fields may serve as eventual query-parameters, 
+and how they should be indexed.  
+Such `q.selectability` criteria have to be 
+encoded alongside persisted data structures 
+themselves, and convenient application-integration 
+entails supporting protocols for 
+noting pathways for query-retrieval 
+and doing so with minimal boilerplate code 
+(for analogous reasons as with update queries).  
 `p`
+
+
+`p.
+Of course, selection/retrieval and update protocols 
+tend to be defined on types rather than the type-instance 
+level.  To the degree that certain data-fields are 
+indexed and queryable (for retrieving instances 
+when their global id's are not at hand `i.a priori`/) 
+decisions as to which fields to thereby expose 
+tend to be made for each type %-- as part of the 
+type's design and contract %-- rather than 
+negotiated on a case-by-case basis per 
+instance (though note that properties in property-graphs 
+are possible exceptions; indeed this is one 
+rationale for property-graphs in the first place).  
+Similarly, type-level modeling tends to 
+define which update protocols to invoke for 
+different state-changes.  Accordingly, an expressive 
+query interface should allow stipulations regarding 
+updates and searches to be described as attributes 
+of `i.types` as well as single instances (e.g., 
+records and/or hypernodes) and to be deferred 
+from instances to type-contracts (analogously, 
+inferred in instance-contexts by virtue of type 
+attributions).  An obvious corollary here 
+is that query systems have to recognize type 
+descriptions as well as encodings of 
+type-instances.`footnote.
+By implication, query languages would then 
+require, as a subset,  
+`q.type-expression` languages where types' 
+attributes, internal organization, and 
+back-end protocols are duly notated (so that 
+type-information can be `q.loaded into` the 
+system and consulted as the engine resolves 
+how to accommodate insertions, updates, and 
+filtering for specific instances).  
+`footnote`  
+`p`
+
 
 
 `p.
