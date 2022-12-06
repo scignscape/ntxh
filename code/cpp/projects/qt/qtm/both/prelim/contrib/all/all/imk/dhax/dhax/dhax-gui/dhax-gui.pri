@@ -14,7 +14,6 @@ QT += multimedia
 QT += multimediawidgets
 
 
-
 INCLUDEPATH += $$SRC_DIR
 
 INCLUDEPATH += $$SRC_PROSET_DIR/aimlib/aimlib/AIMLib/
@@ -22,8 +21,8 @@ INCLUDEPATH += $$SRC_KERNEL_DIR/iat/iat/
 
 
 include($$ROOT_DIR/../preferred/compiler.pri)
-
 include($$ROOT_DIR/../preferred/pdflatex.pri)
+#? include($$ROOT_DIR/../preferred/openssl.pri)
 
 
 DEFINES += PDFLATEX_EXE=\\\"$$PDFLATEX_EXE_FILE\\\"
@@ -117,6 +116,8 @@ INCLUDEPATH += $$CHASM_SRC_GROUP_DIR
 
 DEFINES += LIBCRYPTO_FILE_NAME=\\\"$$ROOT_DIR/../ssl/install/ldir/libcrypto.so.1.1\\\"
 DEFINES += LIBSSL_FILE_NAME=\\\"$$ROOT_DIR/../ssl/install/ldir/libssl.so.1.1\\\"
+
+
 
 DEFINES += DEFAULT_FORGE_UPLOAD_FOLDER=\\\"$$ROOT_DIR/../forge\\\"
 

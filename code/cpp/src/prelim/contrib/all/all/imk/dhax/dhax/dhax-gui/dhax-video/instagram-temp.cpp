@@ -49,6 +49,23 @@ USING_KANS(TextIO)
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 
+#include <QLibrary>
+
+// // borrowed from Forge_Runtime
+void _load_ssl_libraries()
+{
+ QLibrary libcrypto, libssl;
+ libcrypto.setFileName(LIBCRYPTO_FILE_NAME); //"/home/nlevisrael/gits/ctg-temp/ssl/install/ldir/libcrypto.so.1.1");
+ libssl.setFileName(LIBSSL_FILE_NAME); //"/home/nlevisrael/gits/ctg-temp/ssl/install/ldir/libssl.so.1.1");
+
+ libcrypto.load();
+ libssl.load();
+
+ QString qssl = QSslSocket::sslLibraryBuildVersionString();
+ qDebug() << "qssl: " << qssl;
+}
+
+
 
 void _get_url_from_title(QString& title, QVector<QPair<QString, QString>>& urls, QStringList& titles)
 {
@@ -61,8 +78,18 @@ void _get_url_from_title(QString& title, QVector<QPair<QString, QString>>& urls,
  QString query = "https://www.youtube.com/results?search_query=" + search;//Bunny+interrupts+her+lesson+to+address+more+important+issues
 
  QNetworkAccessManager* qnam = new QNetworkAccessManager;
- qnam->connect(qnam, &QNetworkAccessManager::finished, [&title, &urls, &titles, qnam](QNetworkReply* reply)
+
+
+ qnam->connect(qnam, &QNetworkAccessManager::finished, [&title, &urls, &titles, qnam, query](QNetworkReply* reply)
  {
+  if(reply->error() != QNetworkReply::NoError)
+  {
+   qDebug() << "error: " << reply->errorString();
+   qDebug() << "query: " << query;
+
+   return;
+  }
+
   QString all = QString::fromLatin1(reply->readAll());
 
   qnam->deleteLater();
@@ -73,7 +100,11 @@ void _get_url_from_title(QString& title, QVector<QPair<QString, QString>>& urls,
 
   QRegularExpressionMatch match = url_regex.match(all);
   if(match.hasMatch())
-    urls.push_back({match.captured(1), title});
+  {
+   QString capture = match.captured(1);
+   qDebug() << "Url for title %1: %2"_qt.arg(title).arg(capture);
+    urls.push_back({capture, title});
+  }
   else
     urls.push_back({"?", title});
 
@@ -95,11 +126,23 @@ void _get_url_from_title(QString& title, QVector<QPair<QString, QString>>& urls,
 
  });
 
- qnam->get(QNetworkRequest(QUrl(query)));
+ QNetworkReply* reply = qnam->get(QNetworkRequest(QUrl(query)));
+
+ reply->connect(reply, &QNetworkReply::errorOccurred, [reply, query]()
+ {
+  QString error = reply->errorString();
+
+  qDebug() << "Caught error: " << error << " = " << reply->error();
+ });
+
+
 }
 
 void instagram_temp00()
 {
+ _load_ssl_libraries();
+
+
  QString list_file = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella/bv";
  QString text;
  load_file(list_file, text);
@@ -115,7 +158,12 @@ void instagram_temp00()
   if(ready)
   {
    ready = false;
-   titles.push_back(line.simplified());
+
+   // // actually we should restrict to just "What About Bunny" (maybe without the space),
+    //   or "Bunny the talking dog" ...
+    //   But for now I just take out the other videos by hand ...
+   QStringList parts = line.split('|');
+   titles.push_back(parts.value(0).simplified());
   }
   else
     ready = (line == "NOW PLAYING");
@@ -147,7 +195,7 @@ void instagram_temp()
  QVector<QString>& vvideos = *new QVector<QString>(videos.toVector());
 
  // //  start at?
- u1& count = *new u1(7);
+ u1& count = *new u1(66);
 
  QString gap(90, ' ');
 
