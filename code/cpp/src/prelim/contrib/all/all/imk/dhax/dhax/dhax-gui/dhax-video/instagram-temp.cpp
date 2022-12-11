@@ -179,10 +179,11 @@ void instagram_temp00()
 }
 
 
-void instagram_temp()
+void instagram_temp1()
 {
  //QString new_list_file = "/home/nlevisrael/gits/ctg-temp/stella/yt/t1.txt";
- QString new_list_file = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella/bunny-videos.txt";
+// QString new_list_file = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella/bunny-videos.txt";
+ QString new_list_file = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella/bunny-more-videos.txt";
 
  QString text;
  load_file(new_list_file, text);
@@ -195,9 +196,9 @@ void instagram_temp()
  QVector<QString>& vvideos = *new QVector<QString>(videos.toVector());
 
  // //  start at?
- u1& count = *new u1(66);
+ u1& count = *new u1(0);
 
- QString gap(90, ' ');
+ QString gap(92, ' ');
 
  QString& next_download = *new QString(vvideos.value(count));
 
@@ -229,7 +230,7 @@ void instagram_temp()
   u4 ix = next_download.indexOf(" == ");
   QStringRef vid = next_download.midRef(0, ix);
 
-  QString outfile = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella/videos/%1-%2"_qt
+  QString outfile = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella/more-videos/%1-%2"_qt
     .arg(count + 1, 3, 10, QChar{'0'}).arg(vid);
 
   QStringList options;
@@ -442,15 +443,19 @@ void instagram_temp0()
 
 }
 
-void instagram_temp2()
+void instagram_temp()
 {
- QString list_folder = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella/";
+//? QString list_folder = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella";
+ QString list_folder = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella/bunny";
 
- QString ar_folder = "/home/nlevisrael/gits/ctg-temp/ar/dev/dataset/videos/ig";
+//? QString ar_folder = "/home/nlevisrael/gits/ctg-temp/ar/dev/dataset/videos/ig";
+ QString ar_folder = "/media/nlevisrael/OS/nc/ar/bunny";
+
 
  QDir qd(list_folder);
 
- for(u1 i = 1; i <= 49; ++i)
+//? for(u1 i = 1; i <= 49; ++i)
+ for(u1 i = 1; i <= 230; ++i)
  {
   qd.cd(QString::number(i));
 
@@ -466,7 +471,8 @@ void instagram_temp2()
    i4 index = fn.indexOf('-');
    u2 count = fn.mid(0, index).toUInt();
    fn = fn.mid(index);
-   fn.prepend(QString::number(count - 4));
+//?   fn.prepend(QString::number(count - 4));
+   fn.prepend(QString::number(count));
 
    qDebug() << "fn = " << fn;
 
@@ -480,9 +486,9 @@ void instagram_temp2()
 }
 
 
-void instagram_temp_1()
+void instagram_temp2()
 {
- QString list_file = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella/links";
+ QString list_file = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella/bunny/bunny-links";
 
  QMap<u1, QList<QPair<QString,QString>>>& files = *new QMap<u1, QList<QPair<QString,QString>>>;
  u1 current_key;
@@ -530,7 +536,7 @@ void instagram_temp_1()
  mbox->addButton("Close", QMessageBox::RejectRole);
 
 
- u1 start = 1;
+ u1 start = 216;
  QPair<u1, u1>& counts = *new QPair<u1, u1>{start, 0};
 
  // //  in the list file the links are grouped in fours
