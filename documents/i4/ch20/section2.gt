@@ -1,7 +1,7 @@
 
 `section.GIS Databases and Digital Cartography`
 `p.
-This discussion has now touched on themes related 
+This discussion has just touched on themes related 
 to flexibly-typed database systems: the idea 
 being that expressive database engines support 
 `i.strongly typed` data (in the sense that 
@@ -29,34 +29,35 @@ that are narrower and more domain-specific
 (such as ecological data).  Digital cartography 
 renders `i.basemap` visuals by 
 subdividing geographic areas into relatively 
-small segments (within a 256 `xtimes; 256 area, for example)  
+small segments (within a 256`xtimes;256-pixel area, for example)  
 translating geospatial (typically latitude/longitude) 
-coordinates to pixel-coordinates.  Digital maps 
+coordinates to image-coordinates.  Digital maps 
 are composed at multiple scales of resolution; 
-in a common format, so-called `q.XYZ` tiles, 
+in a common format, so-called `qXYZ; tiles, 
 the lowest zoom level produces a `q.map` of the whole 
 world (basically an outline of the continents) 
 whereas the highest level (around 20, or slightly less 
 depending on the environment) is sufficiently 
-detailed that maps can show the contours of 
+detailed that maps show the contours of 
 individual buildings and street-intersections.  
-In XYZ, each successive zoom level doubles 
+In `XYZ;, each successive zoom level doubles 
 the underlying magnification, so that 
 each tile at one level splits into four 
-tiles at the enxt level.
+tiles at the next level.
 `p`
 
 
 `p.
 Software known as `q.tile renderers` and `q.tile servers` 
+`cite<AndersOlofsson>;, `cite<XiaodongZhou>;
 map latitude and longitude coordinates (or 
 other `GIS; units, such as those of Marcatur projections) 
 to tile-coordinates that include zoom level as 
-one axis (e.g., the `q.z` in XYZ).  An XYZ triple 
-designates a specific geographic area at a specific 
+one axis (the `q.z` in `XYZ;).  An `XYZ; triple 
+designates one geographic area at a specific 
 zoom level; individual latitude/longitude and Mercatur 
-points can then be identified via fractions of the 
-tile width and height.  Via such a mapping, locations 
+points may then be identified via fractions of the 
+tile width and height.  Via such mapping, locations 
 of objects in a `GIS; database are converted 
 to pixel-coordinates, so that features such as 
 roads and building can be marked visually.  Tiles 
@@ -81,8 +82,8 @@ other map data (such as roadway lines).
 `p.
 The end result of a tile-rendering pipeline 
 is a miniature map in the form of an `i.image`/, 
-often in a format such as `PNG; equivalent to 
-many photographs; a `GIS; application will 
+often via photo formats such as `PNG; or `JPEG;.  
+A `GIS; application will 
 form maps that users see by composing together 
 multiple tiles.  This provides the `q.basemap` 
 layer, representing a general-purpose 
@@ -120,33 +121,36 @@ and merge them together at the last moment).
 `p.
 I provide this digital-cartography overview mostly 
 to mention certain details concerning 
-`GIS; data systems: although there is a core 
+`GIS; data systems.  Although there is a core 
 dimension of familiar mappable elements 
 (roadways, buildings, and so forth) with common 
 presentation guidelines (formalized via tile-rendering 
 styles), the space of information that 
-could be added on base maps is open-ended.  
+could be added onto base maps is open-ended.  
 Any data set with latitude/longitude coordinates 
-(or fields convertible to such coordinaets, such as 
-street addresses) can be visualized against 
-the backdrop of a `GIS; basemap.  If we consider 
-`GIS; data to encompass common basemap info 
+(or fields convertible to such coordinates, such as 
+a street address) can be visualized against 
+the backdrop of a `GIS; basemap.
+`p`
+
+`p.
+If we consider `GIS; data to encompass common basemap info 
 `i.together with` special-purpose supplemental 
 layers, then `GIS; databases are a good 
-example of `q.strong but flexible` typing: it is 
+example of `q.strong but flexible` typing %-- it is 
 impossible for a `GIS; system to anticipate 
 `i.a priori` the full range of data profiles 
 evinced by objects visualized in a map 
 context, within supplemental data layers.  
-Every mappable object will have latitude/longitude 
+Every mappable object has latitude/longitude 
 coordinates (or a collection thereof, giving a 
 geometric outline), but in addition objects will 
-have other data-points as well, relevant to 
+encompass other data-points as well, relevant to 
 their specific domain (civil engineering, etc.) 
 but opaque to mapping applications themselves.  
 In this sense `GIS; systems manage non-`GIS; 
 data by tracking opaque objects without 
-consuming them directly: it is 
+consuming them directly %-- it is 
 up to individual applications to 
 download data within supplemental 
 layers and reconstruct the relevant 
@@ -169,7 +173,11 @@ about utilities and water/gas/electricity
 grids, or estimates of environmental 
 hazards (chemical leakages, say, or 
 unexploded munitions) resulting from the 
-conflict.  The point here is that 
+conflict.
+`p`
+
+`p.
+The point here is that 
 objects containing such domain-specific 
 data need to be packaged and stored 
 in a `GIS; database even if they are 
@@ -180,13 +188,13 @@ front-ends.  This data-management workflow
 is roughly analogous to the case of routing data 
 packages across third-party networks 
 discussed above (in ways I will summarize 
-more completely at the end of the Section 3).
+more completely at the end of this section).
 `p`
 
 `subsection.Geospatial Data and GUI Events`
 `p.
-A final topic relevant to the current section, 
-however, relates to front-end implementations 
+Before that, though, a final topic relevant to the current discussion 
+relates to front-end implementations 
 for `GIS; software.
 `p`
 
@@ -200,8 +208,8 @@ overview to a more detailed display of
 information specific to a given spot 
 the map (perhaps a restaurant's menu, 
 or departure times at a bus stop, or a 
-business's hours of operation, and so 
-forth).  Presumably their `GIS; software 
+business's hours of operation ...).  
+Presumably their `GIS; software 
 (which can include domain-specific 
 applications that have digital-map 
 windows as one front-end format among 
@@ -212,11 +220,11 @@ street maps via a web browser, for
 example, the simplest way to access 
 non-`GIS; data is to open third-party 
 websites in a separate browser tab.  
-For example, users intending to 
-search a library's card catalog 
-could find the library on a map, 
-and then rely on the map 
-providing popups with location 
+Consider users intending to 
+search a library's card catalog: 
+finding the library on a map, 
+they might then rely on the map 
+generating popups with location 
 info, hopefully including a link 
 to the library's website %-- following 
 that link would allow the user 
@@ -228,8 +236,8 @@ to query the desired catalog.
 Outside of a browser, on the other hand, 
 we can imaging a city's overarching 
 library system providing an app which 
-includes a cartographic display as 
-one window where users can location 
+includes cartographic displays as 
+one window where users can seek 
 individual library locations, giving 
 then the option of clicking on a 
 locations associated with a map 
@@ -249,7 +257,7 @@ then based on user actions.
 `p.
 Whether via multiple intra-software 
 `GUI;s or through external web sites, 
-however, the common denominator 
+the common denominator 
 in both scenarios is that users 
 interact with `GIS; maps as a 
 way of requesting information about 
@@ -266,9 +274,9 @@ on an icon at a given geographic
 coordinate would be routed 
 to the appropriate card catalog.  
 In terms of front-end development, 
-it is equally important 
-that the software know how to 
-map on-screen coordinates to 
+it is likewise essential for 
+the software to know how 
+on-screen coordinates map to  
 latitude/longitude pairs.
 `p`
 
@@ -282,34 +290,37 @@ deciphering their actual `GIS; locations.
 When a user sees a map, they 
 intuitively understand that each point 
 in the display corresponds to a 
-specific `GIS; position (with specific latitude 
+specific `GIS; position (with identifiable latitude 
 and longitude coordinates).  Clicking 
 a mouse when the cursor hovers over a given 
 site %-- or tapping on a touch-screen %-- 
 is thereby understood to be a gesture 
 which signals the user's interest 
 in selecting the location thereby 
-singled out as a focus point.  From 
-the application's point of view, however, 
+singled out as a focus point.
+`p`
+
+`p.
+From the application's point of view, however, 
 the user-action is not intrinsically 
 endowed with geospatial axes, but instead is 
-localized on the screen (they have touched 
-or clicked on a given pixel-location 
+localized on the screen (they have 
+clicked on a given pixel-location 
 relative the overall dimensions of 
 their screen/monitor).  There are a variety 
-of mathematical quantities which need 
+of mathematical quantities  
 to be tracked when converting 
 screen-coordinates to latitude/longitude, 
 including the current zoom level, and the 
 specific geographic rectangle which is 
-visible in the map's view-port (tracking how 
+visible in the map's view-port (following how 
 the user has `q.panned`/, viz., 
 orthogonally scrolled the display, so that 
 the click-location is quantified as a 
 certain distance right and down from 
 the window's top-left corner, which 
 corresponds to moving a certain distance 
-West and South).  Moreover, because 
+west and south).  Moreover, because 
 map-tiles are acquired through coordinate-systems 
 such as `XYZ; rather than through latitude/longitude 
 rectangles directly, applications will 
@@ -335,16 +346,15 @@ point in time, prior to his or her
 interactions (e.g., current pan and zoom 
 state).  Depending on the map-source 
 used, such information may or may not 
-be available.  For example, one way to 
-build a `GIS; font-end would be to 
-allocate and web-view window and 
-point it at a street-map `URL;, such as 
-GoogleMaps.  Via this arrangement, however, 
+be available.  For example, a `GIS; 
+font-end could be constructed through a 
+web-view window, pointed at a street-map `URL; 
+(e.g., GoogleMaps).  Via this arrangement, however, 
 there is no way for the host application 
 to get detailed pan/zoom info from the 
 embedded map display, so the host software 
-has no way to translate user actions such as 
-mouse-clicks.  The application could certainly 
+has no way to translate user actions (such as 
+mouse-clicks).  The application could certainly 
 register the fact that users have clicked 
 on a given screen coordinate, but they 
 will not be able to convert screen 
@@ -357,7 +367,7 @@ GoogleMaps make computationally available.
 
 `p.
 For these reasons, relatively full-featured 
-`GIS; applications need to manage 
+`GIS; applications have to manage 
 map-rendering displays on their 
 own (rather than deferring these 
 operations to an embedded service), which 
@@ -380,7 +390,7 @@ their user interface.
 `p.
 On the other hand, even well-intentioned projects 
 such as Open Street Maps have certain limitations 
-(such as data usage restrictions), so large-scale 
+(including data usage restrictions), so large-scale 
 projects have an incentive to implement 
 their own tile-server back-ends rather than 
 rely on third parties.  Consider the case-study 
@@ -395,22 +405,22 @@ projects %-- it would make sense for the
 shared resources thereby deployed to include a 
 dedicated tile-server specific to digital 
 maps of Ukrainian territory, including both maps 
-designed to show both street/urban details 
+designed to show street/urban details 
 and to diagram natural/geological features.  
 Apart from giving software open-ended access 
 to raw cartographic images and `GIS; data, 
 a special-purposes tile server could 
 choose rendering styles and conventions 
-(such as duplicating tiles with street-names, 
+(for instance, duplicating tiles with street-names, 
 place-descriptions, and other textual info 
 in multiple languages and alphabets: 
 Ukrainian, English, German, etc.) collectively 
 designed to maximize maps' usefulness 
 for the specific purpose of a multi-national 
-rebuilding effort.  This could ensure that 
-users unfamiliar with the Cyrillic alphabet, 
-for example, would be able to see versions 
-of the street-map with transliterated place-names; 
+rebuilding effort.  This could ensure that (e.g.) 
+users unfamiliar with the Cyrillic alphabet 
+would be able to see versions 
+with transliterated place-names; 
 and that base-coloring for features such as 
 roadways and building-outlines would not 
 conflict with the display of non-`GIS; 
@@ -444,8 +454,8 @@ user's selected latitude/longitude point
 corresponds to a particular building, a roadway, 
 a street intersection, transit point, 
 or any other kind of `GIS; feature.  
-This further information would need 
-to be obtained from a remote source 
+This further information must 
+obtained from a remote source 
 (such as an address-lookup service) 
 and/or a local database which applications 
 maintain internally.  In the case of 
@@ -463,25 +473,29 @@ points-of-interest.
 `p.
 These comments apply to details visualized through 
 base maps.  The situation is different, however, 
-with respect to supplemental data layers: 
-in this case, typically, front-end applications 
+with respect to supplemental data layers. 
+In this case, typically, front-end applications 
 acquire base tiles and non-`GIS; data 
 separately, and then overlay the latter 
 on the former prior to rendering map 
 windows for users to see on-screen.  Because 
-the client application thereby needs to correlate 
+the client application thereby `i.itself` correlates 
 non-`GIS; data objects with map locations, 
 the correspondence between these objects 
 and latitude/longitude coordinates is already 
 present in the system (it does not need to be 
 externally queried from an address-locator, 
 for instance).  At the same time, there 
-are still computational details which applications need 
-to reckon with in order to properly route 
+are still computational details which applications 
+must reckon with in order to properly route 
 user events.  For example, implementations 
 can produce the visual effect of non-`GIS; overlays 
 visibly superimposed on base map background 
-in different ways.  As a case in point, consider 
+in different ways.
+`p`
+
+`p.
+By was of illustration, consider 
 the options for a `GIS; front-end coded via 
 `Qt; (the most popular cross-platform 
 `GUI; framework for `Cpp; and, via bindings, 
@@ -494,23 +508,28 @@ icons, diagrammatic elements (arrows, lines, and so forth)
 or color-effects (e.g., semi-transparent 
 colors to represent something like population 
 density) are `q.painted` on top of base-map 
-images.  The result of that operation would 
+images.  In other words, non-`GIS; layers are 
+painted onto `GIS; tiles via techniques 
+similar to how those tiles are rendered 
+with `GIS; info proper (roadway/building outlines, 
+etc.) in the first 
+place.  The result of that operation would 
 be a composite image which, perhaps via a 
-`b.QImage` subclass, would be treated by the 
-`Qt; displays as equivalent to an ordinary 
-image (with no internal structure); in this 
+`b.QImage` subclass, gets treated by the 
+`Qt; displays as equivalent to ordinary 
+images (with no internal structure).  In this 
 case all user events would share the 
 same profile, as signals relative to 
-image-coordinates, and the application would need to 
+image-coordinates, and the application must 
 determine whether a mouse-click (or similar 
 gesture) is targeting a point in the 
-base-map image or an overlay painted over it).       
+base-map image or an overlay painted over it.       
 `p`
 
 
 `p.
 On the other hand, an alternative technique would 
-be to render the composite of base-maps and 
+render the composite of base-maps and 
 overlays through `b.QGraphicsScene`/, where 
 the base-map is treated as a raw image but 
 overlay data is introduced as scene-objects 
@@ -523,9 +542,15 @@ on scene-object icons would be registered
 via different event-signals and a different 
 application-response pipeline than 
 clicks on base-map locations, so programmers 
-need to engineer two different event-handing 
+have to engineer two different event-handing 
 systems, one for base maps and one 
 for supplemental layers.  
+These two options (`q.painting` non-`GIS; 
+layers versus introducing them as 
+graphics-scene objects) have respective 
+trade-offs: different functionality is 
+more or less complex in one scenario 
+versus the other, and vice-versa.
 `p`
 
 
@@ -533,7 +558,7 @@ for supplemental layers.
 This specific example %-- implementing 
 `GIS; displays with supplemental data via 
 `Qt; windows %-- is a good case-study in how 
-applications need to systematically 
+applications should systematically 
 prepare and document their event-handling 
 logic.  Failure to clarify how a `Qt; 
 application is approaching the task 
@@ -558,23 +583,34 @@ can vary; in the `GIS; context
 `i.spatial` is actually `i.geospatial`/, 
 where `q.space` is construed as features 
 and locations on the Earth's surface 
-(plus, sometimes, height above and depth 
+(plus, sometimes, height above or depth 
 beneath the ground).  When mapping utilities, 
 transit systems, traffic flows, and so forth, 
 we are dealing with multi-part networks 
 that are spread out over a geographic area, and 
 geospatial relations are a fundamental 
 dimension to the functional interrelation between 
-disparate parts.  At the same time, such 
-systems have functional patterns which 
-involve relationships that are not 
-wholly subsumed by geospatial concepts: 
+disparate parts.  But such 
+systems are also comprised of non-geospatial 
+(or not-entirely-geospatial) relationships:  
 transfer points, in the case of 
 transportation; highway exists and roadway capacity, 
 in the case of traffic simulations; aquifers, 
 water mains, and treatment centers, in the 
-case of utilities (specifically water systems), 
-etc.  Other domains have other concepts of 
+case of utilities (specifically water systems), etc.  
+It is a spatial fact, for instance, that two 
+roadways or train lines cross at a given 
+point, but whether these points permit 
+exits/transfers is a functional relationship 
+%-- geospatial line-data alone 
+does not report whether or not drivers 
+can turn off one road onto another, or 
+riders switch from one line to another, 
+at their contact-points. 
+`p`
+
+`p.
+Other domains have other concepts of 
 space (not necessarily `i.geo`/-spatial). 
 Architectural and building systems assemble 
 into the `ThreeD; form of a house or 
@@ -593,11 +629,11 @@ spatial map of a robot's environment
 expanse of an image and the projected 
 ambient space where a robot moves), but 
 robots also need to understand their 
-surroundings in functional terms %-- construing 
+surroundings in functional terms %-- understanding 
 external objects as artifacts to be 
 moved, obstacles to be avoided, affordance 
 enabling the robot's own movements 
-(walking steps, say), or etc.  In 
+(walking steps, say).  In 
 all of these contexts spatial and 
 functional systems are overlaid 
 one on another, where spatial relations 
@@ -605,14 +641,13 @@ constrain and substantiate
 functional relations but additional 
 parameters and axioms are needed 
 to describe the functional 
-systems in detail: simply 
+systems in detail %-- simply 
 mapping out their component's 
 spatial networks is not sufficient 
 to define functional-organizational 
-properties (for instance, the presence 
-of spatial intersections between two highways 
-or two train lines may or may 
-not be a traffic link or transfer-point.) 
+properties (again, say, intersections between 
+highways or train lines may or may 
+not be a traffic link or transfer-point). 
 `p`
 
 
@@ -633,7 +668,35 @@ footprint %-- by limiting a
 building's reliance on electricity 
 (and environmentally harmful chemicals, 
 such as freon) for, e.g., heating and 
-cooling.  As a case in point, warm-weather 
+cooling `cite<NatalieCWheating>;, 
+`cite<DanielleRichardson>;.
+Organizations such as the 
+World Resources Institute have 
+promoted icons and visual markers that 
+may be introduced in graphic media 
+to indicate buildings' energy-efficient measures: 
+double or triple window panes, evaporative or 
+radiative cooling, natural lighting and ventilation, 
+and so on `cite<[page 22]RenildeBecque>;.  
+Such icons might be positioned on 
+`TwoD; images %-- photographs, artist's 
+renderings, floor plans %-- or 
+also on digital maps; consider  
+street maps annotated with information 
+showing how a particular community 
+is planning to reach carbon-emissions goals.  
+As a visual cue summarizing green-tech 
+designs, such icons may also become 
+interactive `GUI; features, where users 
+could click on the icon to learn 
+about the building materials 
+chosen (specific kinds of windows 
+or `HVAC; installations, say) and 
+how they reduce carbon footprint.
+`p`
+
+`p.
+As a case in point, warm-weather 
 properties can minimize the use of 
 air conditioners by orienting exteriors to 
 create shaded areas and position windows 
@@ -645,7 +708,7 @@ yield health hazards), selecting
 materials that naturally absorb heat %-- and 
 potentially harness solar and/or wind  
 to offset energy use.  Computer models 
-come into play here because concepts such as 
+come into play because concepts such as 
 `q.net zero` emissions are not abstract 
 goals; they are concrete targets that 
 may be measured and predicted.  Software 
@@ -669,7 +732,7 @@ building plans thereby gain an additional
 dimension as data structures defining the 
 functional organization of physical 
 constructions, which in turn is subject to analysis 
-by special-purpose software components that 
+by special-purpose software components which 
 simulate air-flow, air quality, energy use, and 
 related metrics that collectively quantify 
 building efficiency.  Although spatial 
@@ -677,15 +740,16 @@ relations among architectural elements
 are obviously significant factors in these 
 simulations, such analyses require additional 
 data based on mathematical models of 
-(e.g.) air currents or solar-thermal heat gain.  
+(e.g.) air currents or solar-thermal heat gain 
+`cite<MBLuther>;.  
 Because `CAD; applications (for conventional 
 `AEC;) are not `q.scientific computing` platforms 
 in most contexts (apart from measuring 
 buildings' structural integrity, perhaps) 
 such `q.green tech` analyses require 
-external software or plugins which 
-take `CAD; data as a starting point 
-but then overlay additional, domain-specific 
+external software or plugins  
+taking `CAD; data as a starting point 
+but then incorporating additional, domain-specific 
 parameters.
 `p`
 
@@ -700,7 +764,7 @@ space.  As a concrete example, consider
 hydrology: indeed, I'll continue the 
 earlier case-study of Ukrainian 
 reconstruction.  It has been well-documented 
-that the 2022 war has crippled the country's 
+that the 2022 war crippled the country's 
 urban infrastructure in many places, so 
 that utilities like water-distribution systems 
 have to be rebuilt alongside residential 
@@ -734,7 +798,7 @@ existing aquifers and water sources
 are geological artifacts, not man-made 
 ones.  Once these sources are tapped, 
 however, water-distribution networks 
-can be designed with some level of 
+have some level of 
 flexibility, allowing for engineering 
 choices: what kind of pipes to use, 
 where to place occupied buildings and 
@@ -767,7 +831,7 @@ via graphs, where (for instance)
 nodes represent physical sites 
 (aquifers, buildings, treatment sites) 
 and edges represent infrastructure 
-such as sewage drains or pipes, which 
+like sewage drains or pipes, which 
 might then be annotated with numeric 
 data (for instance, a water main or 
 secondary pipe's maximum capacity).         
@@ -776,11 +840,11 @@ secondary pipe's maximum capacity).
 
 `p.
 Graphs representing water systems in this 
-sense can be geospatially visualized, because 
+sense could be geospatially visualized, because 
 most of these structural elements 
 have fixed geographic locations %-- i.e., 
 the nodes in hydrological graphs 
-can be assigned latitude/longitude 
+may be assigned latitude/longitude 
 coordinates and therefore the entire 
 network can be laid out alongside 
 street grids or geological feature-maps.  
@@ -801,13 +865,13 @@ themselves.
 
 
 `p.
-Consider the following scenario: a company 
-(or non-profit) that specializes in 
+Consider the following scenario: a company, 
+or non-profit, that specializes in 
 hydrology is tapped to produce proposals 
 or assessments of reconstructed water systems 
 considered for damaged Ukrainian cities.  
 That work is encapsulated in structural 
-models that simulate the design of new 
+models which simulate the design of new 
 water networks, with system details mapped 
 out via overlays on Ukrainian street 
 maps.  Simultaneously, architectural 
@@ -828,7 +892,7 @@ we can see this situation as a kind of
 multi-part analytic framework where 
 the software employed by the 
 hydrologists and by the architects 
-can interoperate with sufficient 
+should interoperate with sufficient 
 rigor to allow the water network models 
 to answer questions arising in the 
 architectural context.  For example, 
@@ -843,7 +907,7 @@ simulations of future residents' water consumption.
 `p.
 We may envision variations of this scenario, 
 too: environmental engineers 
-might similarity consult water-system  
+could similarity consult water-system  
 proposals but run simulations 
 of the network's performance, not in the 
 context of residential demand, but 
@@ -851,7 +915,7 @@ rather for the effects of drought and
 floods, or the risk that water in the 
 system could be tainted by environmental 
 contaminants or flood runoff.  Or, 
-agricultural engineers could simulate 
+agricultural engineers may simulate 
 the performance of water-supply 
 when these systems are tapped 
 to provide irrigation, which in turn 
@@ -869,7 +933,7 @@ methods rather than botany or hydrology
 `i.per se`/, I will not examine the 
 specifics of the different scientific 
 domains in play for these various 
-examples; instead, I want to focus on the 
+examples.  Instead, I want to focus on the 
 application-design concerns which 
 these case-studies illustrate.  We 
 have here a hypothetical water-distribution 
@@ -918,8 +982,8 @@ water systems against a street-map
 background is a good framework 
 for human users to picture the 
 network in overview (as opposed to 
-schematic diagrams, for example): 
-we can imagine that front-ends 
+schematic diagrams, for example). 
+We can thus imagine that front-ends 
 for the various applications 
 accessing the water-network data 
 might use digital maps as an 
@@ -961,7 +1025,7 @@ by `GIS; software directly.
 Geospatial location then serves as a 
 kind of index through which 
 disparate applications could obtain 
-non-`GIS; information so that they could 
+non-`GIS; information so that they may 
 then unpack and plug in to their 
 own analytic capabilities.  Here 
 `GIS; databases act as way-stations 
@@ -978,8 +1042,8 @@ the country to another.
 
 
 `p.
-At this point, then, we can see how `GIS; 
-systems potentially serve a purpose which is a 
+Notice `GIS; 
+systems thereby potentially serve a purpose which is a 
 variation on cross-application 
 data sharing considered earlier 
 in the chapter.  Before, I mentioned 
@@ -990,7 +1054,7 @@ data from an external source,
 capabilities which permit the 
 host application to correctly 
 interpret and process such 
-external information.  This prior 
+external information.  That prior 
 discussion made the implicit 
 assumption that applications in 
 such an arrangement would 
@@ -1017,7 +1081,7 @@ components (which, in the general,
 would not consider non-geospatial 
 data directly, but at least would 
 keep track of its association with 
-geographical coordinate and 
+geographical coordinates and 
 `GIS; objects proper, such as 
 buildings or geological features).   
 `p`
@@ -1040,7 +1104,7 @@ stored, and then acquired and reused.
 The following chapter will present 
 arguments that hypergraph data 
 models are particularly well-suited 
-to this kind of multi-part 
+for this kind of multi-part 
 protocol, both with respect to 
 formalizing data models and with 
 respect to analyzing computer code 
@@ -1050,12 +1114,6 @@ and acquire the respective
 data packages is implemented.  
 `p`
 
-
-
-
-`p.
-
-`p`
 
 
 

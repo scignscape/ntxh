@@ -48,10 +48,6 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 %fRed
 
 
-\renewcommand{\b}[1]{\textbf{#1}}
-
-\let{\OldI}{\i}
-\renewcommand{\i}[1]{\textit{#1}}
 
 \newcommand{\communique}{communiqu\'e}
 
@@ -65,6 +61,9 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 \newcommand{\gid}{\b{gid}}
 
 \newcommand{\thisSlashSelf}{\b{this}/\b{self}}
+
+\newcommand{\communique}{communiqu\'e}
+
 
 
 
@@ -128,10 +127,33 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 }
 
 
+\usepackage{microtype}
+
+\newcommand{\biburl}[1]{ {\fontfamily{gar}\selectfont{{\scriptsize \textls*[-70]{\url{#1}}}}}}
+
+\usepackage[colorlinks=true]{hyperref}
+
+\colorlet{urlclr}{red!10!magenta!70!orange}
+
+\hypersetup{
+ urlcolor = urlclr!50!black,
+ urlbordercolor = cyan!60!black,
+ linkcolor = red!30!black,
+ citecolor = orange!30!black,
+ citebordercolor = yellow!30!black,
+} 
+
+
 %\newcommand{\defin}[2]{\begin{definition}\textit{#1}: #2\end{definition}}
 
+\newcommand{\bibtitle}[1]{{\footnotesize{}\textit{#1}}}
+\newcommand{\intitle}[1]{{\hspace{3pt}\textls*[-80]{\texttt{\textit{#1}}}}\hspace{-1pt}}
 
 
+\renewcommand{\b}[1]{\textbf{#1}}
+
+\let{\OldI}{\i}
+\renewcommand{\i}[1]{\textit{#1}}
 
 
 

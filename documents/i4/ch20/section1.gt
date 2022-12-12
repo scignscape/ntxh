@@ -15,7 +15,7 @@ the starting and ending points of these
 action/reaction cycles: how do we articulate 
 the full space of possibilities for users 
 to initiate actions within the application?  
-For mouse-and-keyboard desktop setups, for instance, 
+For mouse-and-keyboard desktop setups, 
 an action like `q.left click` on the mouse 
 can be performed at any point in an application's 
 window (or windows), and mouse-events could 
@@ -27,22 +27,23 @@ users enter data by typing on a keyboard.
 
 `p.  
 Applications have to systematically model 
-each of these possibilities so that they 
-can create data structures carrying 
+each of these possibilities to 
+create data structures noting 
 all relevant details about user actions, which 
 in turn is needed for responding correctly 
 (left-click and right-click usually have 
-different `i.meanings`/, for example).  
-At the other end, applications need to subdivide 
+different `q.meanings`/, for example).  
+At the other end of the user-action/application-response 
+cycle, applications need to subdivide 
 their display window into parcels of screen-space 
 so that data updates are located in useful 
 visual contexts (continuing the above 
-example, the Montreal score should be placed 
-near the Habs logo, and likewise for Toronto).  This, 
+example, the France score should be placed 
+near the French flag/logo, and likewise for Argentina).  This, 
 of course, means that the computer screen is 
-not just a `q.picture`/; it is an organized system 
-which can be analyzed through data models and 
-types.  And such analyses can potentially be 
+not just a `q.picture`/.  It is an organized system 
+analyzed through data models and 
+types.  And such analyses may potentially be 
 extended to robots and/or Virtual Reality, which 
 are not just `TwoD; screens but possess 
 `ThreeD; physical or visual-immersive 
@@ -61,21 +62,23 @@ their application toward their desired course
 of action.  Applications can generally become 
 `q.better` %-- more featureful and intuitive 
 %-- by being flexible and subject to continuous 
-improvement: applications should be 
-designed to acquire more functionality 
-over time, and to update their interactive 
-interface based on the concrete experience of 
-users who may find different features easier 
-or harder to access.  For example, specific 
+improvement: acquiring more functionality 
+over time, and updating their  
+interface based users' experience  
+(they may find different features easier 
+or harder to access).  For example, specific 
 operations might be exposed in different ways, 
 in that the user has multiple options for 
-initiating certain responses (for example, the 
+initiating certain responses (e.g., the 
 effects of clicking on a certain button might 
 be duplicated by pressing a specific key on 
 the keyboard, or by activating the mouse's scroll wheel 
-%-- e.g., scrolling down, hitting an on-screen `q.down` 
-button, or pressing the down-arrow key).  Many 
-applications also allow plugins or extensions to 
+%-- consider scrolling down, hitting an on-screen `q.down` 
+button, or pressing the down-arrow key).
+`p`
+
+`p.
+Many applications also allow plugins or extensions to 
 adjust the visual displays in ways not envisioned 
 by the program's original designers.`footnote.
 I adopt the convention that a `q.program` is a 
@@ -88,9 +91,9 @@ on these definitions (when discussing technical
 the word `q.program` in a different sense, as a 
 self-contained sequence of `VM; operations).
 `footnote`  
-This flexibility helps ensure that applications 
+This flexibility helps ensure they 
 can improve and become more user-friendly, but more specifically 
-they are engineering goals: there are steps 
+these are engineering goals: there are steps 
 which developers can take to maximize 
 applications' ability to adapt and evolve.     
 `p`
@@ -103,8 +106,8 @@ future adaptation also prompts developpers to
 design software in rigorous, well-documented 
 ways.  Applications can be thought of, 
 rather metaphorically, as virtual/digital `q.piping` 
-linking a tableau of potential user actions (via the 
-mouse, keyboard, and etc.) to a space of 
+linking a tableau of potential user actions 
+(mouse, keyboard, etc.) to a space of 
 possible screen-configurations.  A software 
 engineer's goal is to build up this intermediate 
 `q.plumbing` in an orderly rather than haphazard 
@@ -114,14 +117,14 @@ can be augmented (without affecting its
 current behavior, unless a conscious decision is 
 made to alter the application's pragmatics 
 based on user feedback).  Users initiate 
-actions so as to invoke application features, 
-for example: to organize responses systematically, 
+actions so as to invoke application features: 
+to organize responses systematically, 
 it is important to have an efficient structural 
 breakdown of all the functionality which 
 the application makes available, by analogy 
 to how books might be organized on the 
 shelves of a library.  But this structuring 
-principle also promotes extensibilty: 
+principle also promotes extensibilty %-- 
 once a system is in place to enumerate 
 functionality, it is easier to add 
 new features because there is greater 
@@ -141,7 +144,7 @@ course of providing new functionality.
 
 `p.
 Planning for continuous-adaptation therefore 
-implies that application should 
+implies that applications should 
 deliberatively model the functionality 
 they `i.expose` as features available 
 to users: improvements can either 
@@ -152,8 +155,8 @@ new features that fit comfortably
 with the existing application 
 by honoring its protocols and 
 user-pragmatic conventions.  
-An important dimension of software design, 
-then, is formulating the protocols 
+As such, an important dimension of software design 
+is formulating the protocols 
 and concrete implementations 
 through which applications 
 `q.expose` functionality. 
@@ -162,34 +165,33 @@ through which applications
 
 
 `p.
-Consider an example from the domain of 
+Consider the case of 
 image-processing (which will be the focus of 
-Chapter 21): Computer Vision software 
+Chapter 22).  Computer Vision software 
 will typically have many built-in 
 functions for transforming 
-and/or extractng data from graphics 
-images (and also videos).  Exposing 
-these capabilities means offering ways 
-for users to initiate an image-processing 
-workflow.  The result of the workflow 
+and/or extracting data from  
+images (or videos).  Exposing 
+these capabilities means allowing 
+users to initiate image-processing 
+workflows.  The result of any workflow 
 might be a modified version of the original 
 image, or some extracted data structure 
 that can be outlined or visualized.  Because 
-workflows are often chained together or, 
-in general, aggregated to form more complex 
-workflows, `q.exposing` functions also means 
-allowing operations to be dynamically 
-invoked by software, so that although a user 
+workflows are often chained together, 
+`q.exposing` functions also involves 
+software invoking procedures dynamically, 
+so that although a user 
 will manually initiate an overarching 
 functionality there may be many 
-behind-the-scenes intermediary stages where the 
-most users would not directly perceive.  
+behind-the-scenes intermediary stages which 
+users would not directly perceive.  
 In this kind of environment applications 
 will typically offer an `API; (Application 
 Programmable Interface) and/or an 
 `ABI; (Application Binary Interface, which 
 is more low-level) such that important 
-features can be accessed directly through 
+features can be accessed both directly through 
 user actions `i.and` indirectly 
 as intermediate processes launched in response 
 to some higher-level user action.`footnote.
@@ -217,14 +219,14 @@ functionality.
 
 `p.
 To `q.expose` functionality is to 
-offer multiple ways that functionality 
+offer multiple ways that operations 
 may be accessed: by users directly; by 
 engines which step through workflows; 
 by application `q.macros`/, which 
 are (for some programs) programmable 
 sequences of user-actions that typically 
-are performed together (the macro 
-can apply multiple actions to be 
+are performed together (linking 
+multiple actions into one group, 
 initiated with one single action); 
 by `q.updates` which can add new 
 features without software needing 
@@ -237,8 +239,8 @@ by `q.scripting` environments
 where code written in a programming 
 language (typically one with 
 an interpreter that can be embedded 
-in standalone software, such as Lisp or 
-Python) can modify or fine-tune application state 
+in standalone software, such as `Lisp; or 
+`Python;) can modify or fine-tune application state 
 and performance.  Supporting such 
 personalization and fine-tuning is itself a 
 feature that makes software more user-friendly, 
@@ -272,7 +274,7 @@ is achieved via procedures, which are provided
 by the software code base (perhaps along 
 with third-party libraries that get re-used, 
 sometimes as high-level source code and sometimes 
-as compiled resources).  As such, one way to  
+as compiled assets).  As such, one way to  
 `q.expose` functionality is simply to allow 
 external code (that is, code which is not 
 explicitly developed as part of an 
@@ -290,7 +292,7 @@ internal capabilities in an orderly fashion.
 
 `p.
 In general, functionality is exposed to 
-external components by constructing a specific 
+outside components by constructing a specific 
 procedure whose role is to be an `q.entry point` 
 for externally-invoked features.  That 
 is, we assume that any exposed `q.functionality` 
@@ -303,17 +305,17 @@ function.  For example, if an exposed
 capability (in a Computer Vision program) 
 is running a superpixel segmentation on a 
 `TwoD; image via color-watershed, there will 
-be many intermediate procedures needed to 
+be many intermediate procedures necessary to 
 complete that computation, but we can reason 
 about the segmentation as one identifiable 
 step in an image-processing pipeline.  
-It is a `i.conceptual` function unit even if 
+It is a `i.conceptual` functional unit even if 
 it is not `q.one` function, in the sense of 
-one single source-code procedure.  I propose 
+one source-code procedure.  I propose 
 to use the term `q.meta-procedure` to 
-describe functions that are conceptually 
-singular but implementationally multiple, in 
-this sense.   
+describe functions that are, in 
+this sense, conceptually 
+singular but implementationally multiple.   
 `p`
 
 
@@ -345,7 +347,7 @@ one procedure but rather (in my terminology)
 a `q.meta` procedure, these inputs and outputs 
 are not delivered simply as binary 
 data values (memory addresses or `CPU; registers) 
-but rather need to be marshaled and 
+but rather must be marshaled and 
 encoded between the software component 
 which invokes the metaprocedure and 
 the application which exposes it.
@@ -411,7 +413,7 @@ Ensuring data integrity across divergent
 programming environments is a complex 
 task.  When being passed between 
 components data is necessarily `i.serialized`/, 
-or convert from its innate binary/in-memory 
+or converted from its innate binary/in-memory 
 form to a textual or numeric encoding, and 
 then reconstituted into a new binary 
 package which should be `q.equivalent to` 
@@ -426,24 +428,24 @@ should yield a duplicate of the original
 `p`
 
 `p.
-Data-serialization formats should be designed to ensure 
+Data-serialization formats must be designed to ensure 
 that information is not lost in the encoding/decoding 
 process.  For example, a quantity which 
 originally has floating-point type (so it `i.could` 
 have non-integer values) might get encoded as an integer 
 if, in fact, on a specific occasion it has no 
-fractional part; then, on decoding, the 
-value might be interpreted `i.as` an integer 
+fractional part.  Then, on decoding, imagine a
+value interpreted `i.as` an integer 
 (rather than a `b.float` which happens to 
-have an integer value), which in turn could 
-corrupt future calculations (in some contexts 
+be equal to an integer).   
+Future calculations could then become corrupted 
+(in some contexts 
 arithmetic operations performed on an integer 
 paired with a `b.float` will cause the 
 floating-point value to be truncated to an 
-integer, yielding incorrect results in 
-an algorithm which expects both 
-values to be `b.float`/s) and/or 
-corrupt data sent back to its source.  
+integer, yielding incorrect results for 
+algorithms expecting two `b.float`/s), and/or 
+erroneous data sent back to its source.  
 Similar incompatibilities may exist 
 between expected units of measurement 
 (metric versus Imperial, for instance) 
@@ -459,7 +461,9 @@ Failure to anticipate the full set
 of metadata conventions and standards 
 which are prerequisite for multiple 
 software components to act on shared 
-data is a common source of data-corruption.  
+data is a common source of data-corruption 
+(in the terms proposed by `cite<[page 4]SrinathSrinivasa>;, 
+`q.globally inconsistent state`/).  
 `p`
 
 
@@ -475,7 +479,7 @@ ambiguity and encoding/decoding errors.
 To be sure, a lot of data-sharing happens 
 through relatively simple formats 
 (such as `JSON; %-- JavaScript Object Notation 
-%-- or `CSV;, comma-separated values) 
+%-- or `CSV;, Comma-Separated Values) 
 which lack these higher-level guidelines, 
 but such formats typically work in 
 contexts where networking conventions 
@@ -491,7 +495,7 @@ should not depend on programmers
 honoring informal specifications %-- developers 
 would tend to prefer more rigorous 
 representations, such as `XML; (with 
-validators and predefined tag and attribute sets) 
+validators and predefined tag and attribute sets), 
 or `RDF; (Resource Description Framework), 
 associated with the Semantic Web (in conjunction 
 with explicit Ontologies).    
@@ -510,7 +514,7 @@ formulate hypergraph data paradigms that are
 more expressive still than, for instance, 
 `XML; and `RDF;) while retaining the necessary 
 attributes of formal verifiability and 
-transparency.  Indeed, hypegraph models 
+transparency.  Indeed, hypergraph models 
 in various forms have been proposed as 
 extensions to both `RDF; (for example, in 
 the transition from graph database engines 
@@ -527,8 +531,9 @@ in `XML; and its variants, notably `HTML;).
 `p.
 Although data (meta-) models are an important 
 theoretical topic (particularly when 
-the discussion turns to optimization, so that 
-we are considering not only `i.whether` 
+the discussion turns to optimization `cite<RenzoAngles>;, 
+`cite<WimMartens>;, `cite<DivyaMahajan>; 
+so that we are considering not only `i.whether` 
 queries or validations can be completed, but 
 how to do so efficiently), here I am 
 equally concerned with practical software concerns: 
@@ -542,7 +547,7 @@ except for joint participation in data-sharing
 capabilities which have to be implemented 
 `i.ex post facto`/).  Metamodels are most 
 valuable when they permit inter-operative 
-capabilities in an additive manner: applications 
+capabilities in an additive manner %-- i.e., applications 
 should be able to expand the scope of 
 other applications with which they might network.  
 Representational systems that engender 
@@ -560,7 +565,8 @@ new data-sharing initiatives without
 substantial re-coding.  
 `p`
 
-
+`subsection.Examples: Building Information Management 
+and Medical Imaging`
 `p.
 Generically, we can describe a metamodel as 
 relatively `q.expressive` to the degree that 
@@ -611,15 +617,15 @@ of the type itself).
 `p.
 In the realm of bioinformatics, 
 a similar distinction is made in the 
-context of `DICOM; (Digital Imaging and Commmunications 
+context of `DICOM; (Digital Imaging and Communications 
 in Medicine) wherein `q.tags` (which have descriptive labels 
 but also two-part numeric codes) are encoded using a system 
 that distinguishes `q.Standard Data Elements` from 
-`q.Private Data Elements`/: the latter are 
+`q.Private Data Elements`/.  The latter are 
 assigned a numeric pair whose `q.Group` 
 (first) Number is odd.  `lPACS; (Picture Archiving System) viewers 
 (software that recognizes the `DICOM; format) will ignore 
-Private Data Elements by default, so the Standad/Private 
+Private Data Elements by default, so the Standard/Private 
 distinction is intrinsic to protocols through which 
 `DICOM; data is processed.  This distinction is not 
 functionally identical to `IFC; attributes/properties, 
@@ -632,7 +638,8 @@ logistically significant to distinguish standardized
 parameters that software `i.should` recognize as a 
 compliance-criterion from non-standard kinds of values 
 that particular users or groups of users working 
-within a given protocol may want to introduce internally.   
+within a given protocol may want to introduce internally 
+(but software may legitimately ignore).
 `p`
 
 
@@ -676,7 +683,7 @@ graphs or trees as formal systems) we might
 be inclined to recognize `i.properties` 
 (essentially metadata on graph sites, which 
 is how properties work in conventional 
-Property Graph database engines), or `i.attributes` 
+property-graph database engines), or `i.attributes` 
 in the `XML; sense (metadata on tree-nodes), 
 but our theoretical framework could neglect to 
 consider the possibility that a data-sharing 
@@ -694,7 +701,7 @@ into a generic notion of `q.fields`/, say), would
 fall short, at least without compensating 
 by leveraging its own formal resources 
 (e.g., classifying fields as attributes or 
-properties via `q.meta-data` fields).  
+properties via meta-data).  
 Here we can appeal again to application-level 
 concerns: the paucity of less-expressive 
 systems would become evident insofar 
@@ -754,10 +761,9 @@ itself be another object/array (rather than atomic
 value) and likewise `XML; elements may have other 
 elements as children.  By contrast, formats 
 such as `RDF; and property graphs which are 
-more `q.semantically` focused tend to be 
-graph-like and encode semantic relations via 
+more `q.semantically` focused encode relations via 
 edges across nodes (rather than hierarchical nesting).  
-Hypergraphs potentially combine both styles of 
+Hypergraphs combine both styles of 
 representation, with hypernodes containing 
 nodes hierarchically `i.and also` edges 
 between two (or two-or-more) nodes and/or hypernodes 
@@ -794,7 +800,7 @@ the system, at least intuitively.
 
 
 `p.
-This intuition might be made more precise, insofar as 
+This intuition could be made more precise %-- insofar as 
 I have deferred any rigorous definition for 
 `q.representational parameters`/.  That is to say, for a 
 reasonably systematic analysis of metamodels we should 
@@ -802,7 +808,7 @@ specify building-blocks of constructions
 recognized through any metamodel.  The overall 
 concept may be clear enough %-- in general, 
 the parameters of a modeling system are the full set 
-of structural elements that may potentially 
+of structural elements that might potentially 
 be employed in fully describing any given 
 structure covered by the system %-- but one would 
 like a still tighter definition.  For this chapter, 
@@ -818,20 +824,20 @@ The correlation between Virtual Machines and
 representational paradigms should be clear: suppose 
 we take any structure instantiating a particular 
 metamodel.  Presumably, such a structure 
-can be assembled over multiple stages.  Insofar 
+may be assembled over multiple stages.  Insofar 
 as node-hypernode inclusion is a constructional parameter, 
 for instance, then a structure can be modified 
 by including a node within the scope of a hypernode.  
 Similarly, insofar as inter-node relations (via directed 
 edges or hyperedges) are significant constructions, 
-then a structure may be modified by adding an edge 
+then a structure could be modified by adding an edge 
 between existing nodes.  In short, any structure 
-can be derived from the modification of precursor 
+can be derived from modifications on precursor 
 structures.  The full set of structure-modifying 
 operations available for a given representational 
-paradigm could then be enumerated as (at least on part of) 
+paradigm might then be enumerated as (at least one part of) 
 the opset of a hypothetical (or realized) 
-Virtual Machine.  As such, Virtual Machines 
+Virtual Machine.  As such, `VM;s 
 provide a potential formalizing environment 
 for analyzing data metamodels.  
 `p`
@@ -843,7 +849,7 @@ That is, `VM;s
 may be designed subject to requirements that 
 they permit the accumulation of any data structure 
 conformant to a given metamodel.  Similarly, `VM;s 
-might be characterized in terms of how they support 
+could be characterized in terms of how they support 
 various `q.calling conventions`/, in the sense of 
 protocols through which computational procedures 
 delegate to other procedures (supplying inputs, 
@@ -862,7 +868,7 @@ Virtual Machines are useful tools for studying software-interoperability
 insofar as both data-representations and communications protocols 
 could be modeled in terms of `VM;s (at least as abstract summaries 
 of working code; or, more ambitiously, application-networking 
-frameworks can be provide actual `VM;s through which applications 
+frameworks might provide actual `VM;s through which applications 
 can route their networking logic, analogous to query languages 
 as host-language-agnostic conduits for database access).  
 As emphasized earlier, applications typically 
@@ -880,10 +886,10 @@ should be encoded.  Applications can use
 third-party code build up representations 
 of exposed-functionality invocations 
 incrementally.  Indeed, many programs support 
-scripting via languages such as Python; it 
+scripting via languages such as `Python;; it 
 is plausible to generalize this idea to 
 `VM; platforms amenable to multiple scripting 
-languages, so long as they can be compiled 
+languages, so long as they are compiled 
 to the relevant `q.byte` code.  Alternatively, 
 even if applications do not expose `VM;s 
 to third parties directly, they could 
@@ -896,8 +902,11 @@ situations.
 
 
 `p.
-In this context `VM; models overlap with constructions pertaining to 
-interoperability between applications and database engines.  
+The prior discussion centered on data-sharing between 
+disparate `i.software` components in general, but 
+in this context `VM; models overlap with constructions pertaining to 
+interoperability between applications and `i.database engines` 
+in particular.  
 Consider the general setup of database systems: applications 
 store data structures for future reuse by passing some 
 (suitably encoded) serialization of the relevant information 
@@ -923,9 +932,9 @@ no longer in live memory.  To be sure, a database does
 not necessarily store `q.application state` as such 
 %-- although developers can potentially 
 create `q.application state objects` and persist 
-those so that users can resume prior sessions %-- but 
-a typical rationale for persistent data storage 
-in the first place is functionality supporting 
+those so that users may resume prior sessions %-- but 
+the typical rationale for persistent data storage 
+is supporting 
 users' desire to resume prior work, return to 
 previously-viewed files, and so forth.   
 `p`
@@ -955,14 +964,18 @@ be targeted for each parcel of land or each block
 subject to redevelopment, perhaps optimized by 
 models measuring the ideal urban density for 
 that specific neighborhood based on environmental 
-criteria, utility grids, public transit, and so forth).  
-A typical session for such an software component 
-could involve users viewing individual images, 
+criteria, utility grids, public transit, and so forth).
+`p`
+
+`p.  
+Let's explore this case-study.  
+A characteristic session for such a software component 
+would involve users viewing individual images, 
 previewing image-series depicted via thumbnails, 
 searching for images (based on criteria such as 
 street address, city/district name, or perhaps 
-`GIS; coordinates), switching between `TwoD; image 
-and 3D street views, and %-- once in the context 
+`GIS; coordinates), switching between `TwoD; images 
+and `ThreeD; street views, and %-- once in the context 
 of a specific picture %-- viewing annotations 
 and other associated data in tabular or 
 otherwise structured forms (e.g., tables or key-value 
@@ -976,11 +989,11 @@ Assuming such an application works with relatively
 large image-collections (enough to be impractical 
 for users simply to browse images in a filesystem 
 folder, say), functionality for finding and tracking 
-images would need to be based on some 
-systematical query capabilities, i.e., some 
+images would need to be based on  
+systematic query capabilities, i.e., some 
 form of image database: image file paths, feature sets 
 for retrieval/similarity searches, metadata 
-and formatting details, etc., can be hosted 
+and formatting details, etc., hosted 
 in a database so that images can be selected 
 inside large series by variegated query strategies.`footnote.
 Images themselves (i.e., their pixel-data) might also 
@@ -996,7 +1009,7 @@ Suppose an image depicts a city block where
 damaged buildings have to be replaced.  
 Data associated with that image could include 
 estimates of the number of people who lived in 
-that location prior to (for example) 
+this location prior to 
 the Russia/Ukraine war; the number of 
 residential units slated for redevelopment; 
 cost estimates; links to public transit info, 
@@ -1005,10 +1018,10 @@ etc.  Plausibly, such data would be held
 in a database and loaded alongside the image, 
 or in response to user actions signaling an 
 interest in the relevant data-points.  The 
-database, in effect, is a means to an ends, 
+database, in effect, is a means to an end, 
 whereas from a user's perspective the 
 important detail is that the application 
-can enter a state where multiple important 
+can enter a state where multiple 
 data-points are visible side-by-side: users 
 might view a photograph in one window juxtaposed 
 with a window or windows showing civic/residential 
@@ -1020,9 +1033,9 @@ data.
 Continuing this specific (hypothetical) example, the 
 envisaged scenario has image-viewport components 
 serving as entry-points for a diversity of 
-civil/architectural information; presumably 
+civic/architectural information.  Presumably 
 the specific kinds of data available will vary 
-from one image to another, and users will 
+from one image to another, and users would 
 signal through interactive `GUI; features 
 their interest in accessing certain branches of 
 the available data over others.  That is, assume 
@@ -1030,7 +1043,7 @@ there is not a fixed metadata/associated information
 package that automatically accompanies each image, 
 but instead that data and images are linked on a 
 dynamically changing case-by-case basis.  That setup 
-would call for a coding strategy which works to 
+would call for coding strategies which work to 
 organize the available information and 
 user-interaction pragmatics coherently.  
 The resulting software-design choices would, 
@@ -1046,7 +1059,11 @@ information) and the database-integration level
 queried from the larger database context when needed).  
 In other words, the interaction between `GUI;, database, and 
 application logic is more complex than if each image were 
-given a fixed set of data fields isolated from user pragmatics.
+given a fixed set of data fields isolated from user pragmatics.  
+This shows how database theory intersects with 
+disciplines (e.g., Software Language Engineering) 
+with practical benefits `visavis; 
+efficient application design/deployment.   
 `p`
 
 `subsection.Database Engineering and Type Theory`
@@ -1056,8 +1073,8 @@ could be associated with (some) photographs outlines
 redevelopment plans: data points such as the number 
 of residential units targeted, renderings of building 
 designs, contractors, contact information, and so forth.  
-Presumably, such data would only be applicable 
-to images showing blocks or plots where such plans 
+Presumably, analogous data would only be applicable 
+to images showing blocks or plots where relevant plans 
 are in the works; and moreover such images would link 
 to other forms of data as well (about, say, utilities 
 grids).  As part of the empirical background, in 
@@ -1067,19 +1084,19 @@ can both be aggregated (as interconnected data-points)
 and isolated from other information potentially 
 relevant to an viewed image.  In general, software 
 design depends on sensitivity to how information spaces, 
-practically speaking, can be carved and organized.  
+practically speaking, might be carved and organized.  
 The decision to isolate (say) construction-project 
 data as integral units would be made against 
 that kind of design/decision context.  Having 
-this topic reified as a specific `q.category` of data, 
-say, affects `GUI; programming and event-handling 
+this topic reified as a specific `q.category` of data 
+affects `GUI; programming and event-handling 
 (because user-visible components must be implemented 
 enabling users to access information in that 
-category, which in turn yields signals like 
+category, which in turn yields such signals as 
 context-menu activations and the need for appropriate  
 event-handlers) as well as database interop (insofar 
-as such data has to be packaged in persistable forms). 
-Subsequently, representations of such integral construction-project 
+as data must be packaged in persistable forms). 
+Subsequently, representations of integral construction-project 
 data (in the form of, e.g., a cluster of interrelated 
 datatypes) would be manifest as software artifacts 
 threaded through a code base.
@@ -1120,7 +1137,7 @@ distributed over (potentially) multiple database
 
 
 `p.
-For sake of argument, consider an update (or part thereof) consolidated 
+For the sake of argument, consider an update (or part thereof) consolidated 
 into a single (application-level) datatype instance; e.g., 
 one object of a given `Cpp; class.  Quite possibly, there is 
 no one-to-one correspondence between application objects and 
@@ -1130,16 +1147,22 @@ one-to-many relationships and values which are more
 involved than simple strings or numbers (e.g., pointers 
 to other objects).  The structural mismatch between 
 application data and database records is evident in 
-technologies such as Object-Relation Mapping (`ORM;) 
+technologies like Object-Relation Mapping (`ORM;) 
 %-- or `q.Object Triple Mapping` for the Semantic Web %-- 
 marshaling data for relational databases or triplestores, 
-respectively.  Engines with more flexible 
+respectively `cite<MartinFowler>;, 
+`cite<JeroenBach>;, `cite<RadoslavRadev>;, 
+`cite<LedvinkaKremen>;, 
+`cite<LedvinkaKremenComparison>;. 
+Engines with more flexible 
 representation paradigms, needing less reconstruction 
 of application data exported to a back-end, can be 
 advantageous precisely because data-persistence 
-capabilities end up consuming less `q.boilerplate` code.  
-Hypergraph databases are a case-in-point: the kind of 
-complexity in datatypes' internal orgnanization 
+capabilities end up consuming less `q.boilerplate` code 
+`cite<ValterUotila>;, `cite<SamiyaKhan>;, `cite<ChenLee>;,
+`cite<JeffreyMBarnes>;.  
+Hypergraph databases are a case in point: the kind of 
+complexity in datatypes' internal organization 
 (multiple multivariate fields for a single object, 
 for instance) which give rise to `ORM;/`OTM;-style 
 transforms map organically to hypernode or hyperedge 
@@ -1149,10 +1172,10 @@ constructions.
 
 `p.
 Modifying a database entails conveying a package 
-of database between applications and the database 
-engine; the structure of this `communique; 
-in turn reflecting database architecture.  
-The `SQL; `INSERT; 
+of updates between applications and the database 
+engine.  The structure of this `communique; 
+in turn reflects database architecture.  
+An `SQL; `INSERT; 
 statement, for example, derives its form 
 from the layout of table-base data models:  
 adding a record entails naming the table to which it 
@@ -1178,23 +1201,22 @@ boilerplate code.
 `p.
 As I alluded to earlier, hypergraph data models 
 have comparatively greater parameters available 
-for representing information; in particular, 
+for representing information.  In particular, 
 this implies that we have greater 
 flexibility in formulating queries 
 to modify database instances.  It is worth mentioning 
 at this point that `q.queries` need not involve 
 instructions passed to a database engine 
 in the form of character strings (e.g., 
-`SQL; code); indeed, forcing applications 
+`SQL; code).  Indeed, forcing applications 
 to build query code on the fly is a often 
-an antipattern (spurring boilerplate code-bloat); 
+an antipattern (spurring boilerplate code-bloat) %-- 
 better solutions involve query `q.factories` that 
 assemble queries via procedure/method calls 
 in a host programming language (perhaps 
 through an embedded domain-specific language, 
-as one finds with `LINQ; `visavis; `CSharp; and 
-its emulations in other languages).  On the 
-other hand, in the best case scenario a database 
+as one finds with `LINQ; `visavis; `CSharp;).  
+On the other hand, in the best case scenario a database 
 would `i.also` support a query language that 
 could be executed as text strings outside of an 
 application context (and without relying on a 
@@ -1203,7 +1225,7 @@ the contents of a database in situations removed
 from application-based access (debugging, analytics, 
 general admin functionality, and so forth).   
 In other words, ideally engines will encompass 
-a query engine that works with query-structured 
+a query engine that works with query-structures 
 compiled `i.either` from application-code factories 
 `i.or` standalone query code, which is one rationale 
 for embracing a query-evaluation Virtual Machine.    
@@ -1223,11 +1245,11 @@ defined as aggregate structures (rather than atomic data-points)
 and, even if not precisely stipulated, object/atomic value 
 distinctions tend to align `i.de facto` with object-classes 
 against, say, built-in types (cf. `Cpp;)`/) with multiple 
-and/or multi-value data-fields updates can include 
+and/or multi-value data-fields updates may include 
 adding or removing a value from a collections type-instance 
 as well as altering such a value, and so on.   
 For many compound types the collection of fields 
-includes more than one which are in turn `q.collections` 
+will span more than one `q.collections` value  
 (e.g., vectors, stacks, queues, deques, and unordered sets/multi-sets, 
 plus map-arrays that are pair-lists with possible nonduplication 
 restrictions on the first element) subject to add/remove 
@@ -1247,8 +1269,9 @@ one insertion operation because the insert procedure would
 deduce the proper insertion-point.
 `footnote`  All of these are potential paths toward 
 legal mappings of type-instances between states 
-which initialized typed value can take on, given their 
-internal organization.  Nor is this discussion complete; 
+which initialized typed values can take on, given their 
+internal organization.`footnote.
+Nor is this discussion complete; 
 we could also mention reclassifying `q.union`/-type values 
 (whose instances can be one of several types) or 
 various types depending on binary arithmetic 
@@ -1261,14 +1284,15 @@ in effect using one tagged value to update another
 member of the union %-- a simple case being 
 integer/bitset unions where setting the 
 integer automatically sets or clears corresponding 
-fields in the bitset).  
+fields in the bitset).
+`footnote`
 `p`
 
 
 `p.
 The mechanisms for aggregating multiple values 
-into individual type-instances tend to be 
-much more complex for general-purpose programming 
+into individual type-instances tend, accordingly, to be 
+more complex for general-purpose programming 
 languages such as `Cpp; (see unions, pointers, arrays, 
 multiple inheritance, enumerations and their 
 base types, etc.) compared to databases 
@@ -1278,10 +1302,9 @@ data.  Conversely, databases with more refined
 type systems can (at least potentially) absorb 
 application data more conveniently.  For this 
 to work in practice, however, the 
-engine needs a query system which can 
-duly leverage type-system expressivity; the issues 
-involved here are well-demonstrated by 
-update-queries as I've mentioned.  Properly recognizing 
+engine needs a query system which  
+duly leverages type-system expressivity. 
+Properly recognizing 
 application-level intra-type organization 
 depends on representing (and then 
 exposing to a query interface) the full spectrum 
@@ -1321,9 +1344,9 @@ suitable for evaluation).
 
 
 `p.
-This section's discussion has focused on 
-updating a single type-instance centering on 
-the point that complex intra-type layout implies 
+Although this section's discussion has focused on 
+updating a single type-instance, 
+complex intra-type layout implies 
 a diverse set of query-based update options.  
 An `UPDATE; statement in `SQL;, say, 
 only (directly) supports one 
@@ -1334,21 +1357,21 @@ to existing persisted values, keeping the
 back-end in sync entails accounting for the changes 
 embodies in the new application-state by 
 presenting the back-end engine with (in general) a 
-series of updates; the more flexibly updates 
+series of multiple updates.  The more flexibly updates 
 can be encoded, the less development time 
 need be expended figuring out how to 
 translate application-state changes to updates 
 the engine can process.  This is one reason why a 
 diversity of data-modeling parameters can 
-streamline application integration: a flexibly 
+streamline application integration: a flexible 
 tableau of recognized constructions implies that 
-applications can describe updates with 
+applications may describe updates with 
 relatively less boilerplate destructuring.  
 Consider the multitude of `q.sites` where 
-data associated with a hypernode can 
-be asserted, in the context of property-hypergraphs; at least 
+data associated with a hypernode could 
+be asserted.  In the context of property-hypergraphs, at least 
 (and some systems may have more elaborate 
-constructions as well) properties `i.on` a hypernode, 
+constructions as well), properties `i.on` a hypernode, 
 nodes `i.in` the hypernode, and edges `i.from` a 
 hypernode to its peers.  This articulation 
 of site-varieties is, self-evidently, also a 
@@ -1359,7 +1382,7 @@ For example %-- consider again the attribute/property
 distinction in `IFC; %-- updates to `i.properties` 
 (which would in general be ad-hoc annotations 
 on a hypernode less strictly regulated than 
-nodes encompassed `i.in` hypernodes) could be 
+nodes encompassed `i.in` hypernodes) might be 
 subject to different validators than updates 
 performed via node-insertion or (potentially 
 Ontology-constrained) edge-insertion.      
@@ -1371,7 +1394,7 @@ In effect, multi-parametric modeling
 tableaus in the database `i.architecture` 
 propagate to multi-dimensional 
 options for encoding updates, which in 
-turn allows for coexisting update 
+turn allows for multiple co-existing update 
 protocols each with their own semantics.  
 Applications can then choose which 
 protocol most efficiently describes 
@@ -1381,10 +1404,10 @@ any particular change in application-state.
 
 `p.
 Of course, these points `visavis; changing 
-`i.existing` database value have analogs 
+`i.existing` database values have analogs 
 in the context of inserting `i.new` values.  
 Ideally, applications will have flexibility 
-in how encode data structure for insertion 
+in how to encode data structure for insertion 
 into a back-end via database queries.  
 This is not only a matter of notating 
 all information which should be persisted, 
@@ -1400,26 +1423,27 @@ What are the criteria through which
 a database record, once deposited, should 
 be retrieved again in the future?  Most 
 database systems will give nodes/records 
-unique id's, but the whole point of 
-search queries may be that records 
+unique global identifiers, but the whole point of 
+typical search queries is that records 
 should be located based on known data 
 in contexts where an application does 
-`i.not` have the requisite `gid;. 
+`i.not` know the requisite `gid;. 
 `p`
 
 
 `p.
 Consider again the case-study of image-curation 
 software that could be used in a redevelopment/urban 
-planning context, such that photograph resources 
+planning context, such that photos 
 include depictions of future building sites.  
 As suggested earlier, data associated with 
-each picture could reference construction-project 
-data (e.g., the number of units slated for 
-construction, or the identity of the firm contracted 
-to oversee the project), as well as, perhaps, 
-`q.generic` information (image format, dimensions, 
-color-depth, plus, say, `GIS; coordinates).  
+each picture might reference construction-project 
+data (e.g., the number of units slated to be  
+built, or the identity of the firm contracted 
+to oversee the project), alongside 
+generic information (image format, dimensions, 
+color-depth, `GIS; coordinates) not specifically 
+endemic to `AEC;.    
 One consideration when designing such an application 
 would be how users would find images 
 that they hadn't seen before, or had not 
@@ -1452,11 +1476,11 @@ meeting specific criteria: `GIS; coordinates
 restricted to a given locale, housing 
 matching a given contractor-name, and so forth.  
 When exporting info to a back-end, the 
-relevant details are not only the specific values 
-comprised by the new data but also 
+relevant details are not only specific values 
+comprised by new data but also 
 which fields may serve as eventual query-parameters, 
 and how they should be indexed.  
-Such `q.selectability` criteria have to be 
+Such `q.selectability` criteria should be 
 encoded alongside persisted data structures 
 themselves, and convenient application-integration 
 entails supporting protocols for 
@@ -1482,14 +1506,14 @@ rationale for property-graphs in the first place).
 Similarly, type-level modeling tends to 
 define which update protocols to invoke for 
 different state-changes.  Accordingly, an expressive 
-query interface should allow stipulations regarding 
+query interface may allow stipulations regarding 
 updates and searches to be described as attributes 
 of `i.types` as well as single instances (e.g., 
 records and/or hypernodes) and to be deferred 
 from instances to type-contracts (analogously, 
 inferred in instance-contexts by virtue of type 
 attributions).  An obvious corollary here 
-is that query systems have to recognize type 
+is that query systems should recognize type 
 descriptions as well as encodings of 
 type-instances.`footnote.
 By implication, query languages would then 
@@ -1501,7 +1525,14 @@ type-information can be `q.loaded into` the
 system and consulted as the engine resolves 
 how to accommodate insertions, updates, and 
 filtering for specific instances).  
-`footnote`  
+`footnote`  Formally, this results in a 
+technical merger between database engineering 
+and mathematical type theory 
+`cite<[page 21]MolnarBenczur>;, 
+`cite<PierreEvaristeDagand>;,
+`cite<PatrickSchultz>;, `cite<MikeMarti>;, 
+`cite<BartJacobs>;, `cite<JanHidders>;,
+`cite<JoshuaShinavier>;.
 `p`
 
 

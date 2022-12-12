@@ -27,9 +27,13 @@ tangles that can, in the absence of
 well-constructed code libraries and design 
 patterns, inhibit our ability to 
 engineer applications in a timely and 
-cost-effective manner.  Situations such as 
+cost-effective manner.
+`p`
+
+`p.
+Situations such as 
 Ukraine reconstruction point to how 
-software-development inertia can have 
+software-development inertia has 
 real-world consequences: ideally, 
 a variety of special-purpose applications 
 will come on board soon after an 
@@ -48,7 +52,7 @@ to implement `q.smart city` technologies.
 `p.
 For each of these three themes (decentralized/mediated 
 data-sharing, spatial/functional 
-data juxtaposition, and event-processing) we can 
+data juxtaposition, and event-processing) we may 
 identify specific concerns that add layers 
 of complexity and engineering requirements 
 to the respective classes of applications.  
@@ -76,22 +80,22 @@ to orchestrate cross-application
 interoperability.  In the context 
 of event-handling, applications 
 should engineer a centralized protocol 
-for defining documenting event signals 
+for documenting event signals 
 and response-routines.  It is one 
 thing to code event-handling procedures 
 (e.g., via `Qt; signals and slots); 
 situations such as `GIS; front-ends 
 demonstrate however that applications 
-needs a further dimension of structural 
+require a further dimension of structural 
 coherence, insofar as a code base needs 
 not only to provide procedures responding 
 to user-events, but to allow the 
 total system of event signals and responders 
 to be documented, queried, and augmented 
 in an orderly manner.  Frameworks 
-like `Qt; provide the support for the 
+like `Qt; provision support for the 
 base-level implementations, but 
-other paradigms are needed to 
+other paradigms are necessary to 
 architect the overall system in this 
 kind of logical manner.   
 `p`
@@ -138,10 +142,10 @@ integrated with `GIS; databases)?
 `p`
 
 `p.  
-Once again, to appreciate the 
+To appreciate the 
 full scope of these issues we should 
 consider the problem-domain from the 
-perspective of a programmer needing 
+perspective of a programmer intending 
 to support analytics concerning 
 functional organization in an 
 environment where data is 
@@ -158,18 +162,22 @@ geospatial coordinates but also
 many parameters 
 which do not measure 
 `GIS; magnitudes or attributes.  
-Ultimately, this data needs to be 
+Ultimately, such data must be 
 encapsulated into persistable 
 units and linked to `GIS; locations, 
 so that peer applications can pull 
 the relevant objects from a 
 database via (say) latitude/longitude.  
-How can engineers be sure that the 
+How would engineers know that the 
 full range of parameters is properly 
 reconstructed by external applications 
 so that their computations or simulations 
 are consistent with the originating 
-applications' models?  It would be 
+applications' models?
+`p`
+
+`p.
+It would be 
 one thing if external software 
 was simply cloning the 
 original program's full data sets, with 
@@ -188,8 +196,8 @@ an original information space
 (in the context of large-scale data sets, 
 such as a hydrological survey of an 
 entire country, cloning the data 
-`i.tout court` might be impractical; 
-even with smaller-scale data sets, 
+`i.tout court` could well be impossible; 
+even for smaller-scale data sets, 
 however, working with partial samples 
 rather than full copies of original 
 data might be more consistent with the 
@@ -204,7 +212,7 @@ How can these applications identify
 the `q.operational closure` of 
 any given sample within their 
 data sets such that these 
-integrity validations can be guaranteed?      
+integrity validations are guaranteed?      
 `p`
 
 
@@ -216,7 +224,7 @@ design-model, `CAD; systems compose
 `IFC; elements as building-blocks 
 which piece together to define an 
 integrated data space through which 
-architectural plans can be 
+architectural plans may be 
 visualized, in various formats 
 (blueprints, `ThreeD; models, 
 `q.artist rendering` style `TwoD; 
@@ -233,7 +241,7 @@ chains of `IFC; objects thereby serve as
 a multi-faceted foundation from which, 
 on the one hand,  
 spatially and visually oriented 
-resources can be constructed 
+resources might be constructed 
 (such as floor plans) and, on the 
 other hand, data needed for 
 functional simulations can be 
@@ -266,7 +274,7 @@ and mediated multi-application data sharing
 point to software-engineering challenges 
 that %-- one could reasonably claim 
 %-- point toward next-generation 
-software-development tools.  Existing 
+software-development environments.  Existing 
 programming tools and design patterns 
 arguably do a relatively poor 
 job of addressing such concerns 
