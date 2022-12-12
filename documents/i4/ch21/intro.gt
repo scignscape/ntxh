@@ -1,0 +1,311 @@
+`section.Introduction`
+`p.
+This chapter will examine interconnections 
+between three of the focal subjects for 
+Section 5: Virtual Machines, 
+hypergraph data models and meta-models,
+and the common structures 
+(amongst many dissimilarities, reviewed in 
+Chapter 20) between human and computer languages.  
+I will continue last chapter's discussion 
+of data-model and programming language 
+`q.semantics`/.  I argued in the previous 
+introduction that digital artifacts 
+represent real-world objects only indirectly 
+(we can contrast this with word-object 
+associations in natural language).  
+Applications `q.signify` empirical facts 
+because they can be engineered to 
+maintain a consistent (even if occasionally 
+fallible) correlation between 
+application-state and particular 
+real-world propositional situations 
+of interest (recall the case of an 
+app showing a requently-updated 
+World Cup score).    
+`p`
+
+
+`p.
+To adopt terms familiar in the 
+Philosophy of Science, signification in 
+this environment is (at most) 
+an `i.emergent property` of an 
+overall computational system.  
+Whereas a photograph of a key 
+moment in the World Cup final 
+%-- assuming it is authentic 
+%-- represents an event 
+with some immediacy, a computer 
+program that someone might 
+consult to track the game's score 
+can only be deemed an indicator 
+for the relevant propositional 
+content (something like, France 
+and Argentina are now tied nill-nill) 
+insofar as the program fulfills 
+its design requirements.  Semantics,
+in this realm, is `i.implemented`/.  
+We have to assess the inner workings 
+of a digital artifact to confirm 
+that the phenomena we as users 
+experience as `q.signifiers` (e.g., two 
+numbers next to France and Argentina 
+flags/logos, respectively) 
+actually play that role. 
+`p`
+
+
+`p.
+Because signification is emergent in 
+this sense, the semantics of application-state 
+can only be rigorously defined on a 
+holistic scale: it is a produce of many 
+parts within the application acting 
+and interacting correctly.  Consider 
+the symbolizing device of printing a number 
+next to the two country's flags, to 
+indicate a football score: as users, we 
+perceive that each displayed number 
+correlates with the respective 
+country's goal total, and therefore 
+stands toward that total in 
+something like a signifier-signified 
+relationship.  But such correlation only `i.happens` 
+because many operations are completed 
+behind the scenes, culminating in 
+the number printed on-screen: cyclically 
+(we may assume) connecting to an internet 
+service (itself presumably monitored and 
+updated by someone who witnesses the game 
+directly) to receive a data-package 
+including the current score, decoding/deserializing 
+that data into live memory, mapping the 
+fields in the resulting live objects/values 
+to specific screen areas, and mapping the 
+numeric scores into printable numerals 
+whose glyphs are arranged to be viewed 
+in those boxes on the screen.  All of these 
+operations involve data structures 
+modeled, shared, and manipulated, and 
+chains of procedures responsible 
+for one step or another in the 
+overall data-management process.    
+`p`
+
+
+`p.
+To understand the holistic semantics 
+of computer programs as emergent 
+systems, then, we need to model 
+the `q.local` or behind-the-scenes 
+semantics of individual data structures 
+and the procedures which manipulate 
+them.  This is a semantics which 
+emerges as data-type instances are 
+initialized and then passed 
+from one procedure to another 
+(potentially modified along the 
+way), and, in some cases, mapped 
+to a visual/iconic form.  It is a 
+semantics of holistic systems which 
+convert inputs in the form of user 
+actions and/or received data 
+(e.g., from an internet connection) 
+and outputs (mostly) visual 
+artifacts on-screen.  It is a 
+`i.procedural` semantics because 
+chains of operations are typically 
+needed to progress from the inputs 
+to the outputs.
+`p`
+
+
+`p.
+To model this semantics, then, if 
+we seek to analyze computer software 
+by analogy to studying human 
+langauge, we need to represent 
+procedure calls: how tokens in 
+source code map to specific 
+functions that can be executed 
+as subroutines, interrupting 
+the program-flow at the call site 
+and then returning, and how 
+procedures modify and manipulate 
+data-structures according to 
+constraints of data types and 
+design patterns (for example, a 
+type can never hold a value 
+incompatible with its potential 
+instance-set: an unsigned integer, 
+say, can never be negative).  
+Programming-language semantics, 
+in short, is built up in layers, 
+with inter-procedure conventions 
+establishing the working substructure 
+through which (via `GUI; design 
+and responsiveness to user actions) 
+applications take on states, and 
+present information to users, 
+which have emergent-significatory effects.
+`p`
+
+
+`p.
+Formal models of data structures and 
+procedure-calls are therefore 
+intrinsic to the semantics of 
+artificial computer languages, with 
+no obvious analogues in `q.natural` 
+language.  In later chapters I 
+will consider to what 
+degree extralinguistic 
+`q.cognitive processing` plays a 
+somewhat analogous role in human 
+language-understanding, but for the 
+moment we can register this as a 
+foundational contrast between 
+these two genre of langauges.  
+Whereas the building blocks 
+of human dialects are parts of speech, 
+morphosyntactic markings, anaphoric/designative 
+resolution, and word-senses within a 
+lexical continuum, the analogous 
+building blocks in source- and compiled 
+computer code are procedures, their 
+parameters, symbol-tokens iconifying 
+specific values (tracked and potentially 
+modified) over time, numeric 
+encodings of data structures (not 
+only quantitative ones, but also text, 
+enumerations, visual graphics, and multi-media), 
+and text or character-string 
+representations of values likewise 
+(such as numerals written into source code 
+to represent numbers).   
+`p`
+
+
+`p.
+Virtual Machines (`VM;s) are a useful theoretical 
+tool for studying these `q.semantic` building-blocks.  
+To be sure, `VM;s have many applications, and 
+analyses of computer languages inspired by 
+natural linguistics are probably not the 
+most important of these.  Still, a `q.linguistic` 
+perspective is a useful intuitive guideline 
+for considering how `VM;s relate 
+to computer code and programming-language runtimes.   
+`p`
+
+
+`p.
+There are several different use-cases for 
+`VM;s.  We might recognize the following: 
+
+`description,
+
+`item ->> Implementing procedures ;;  Virtual 
+machines in this sense play the role of 
+execution-engines mimicking the behavior 
+of physical processors (see Chapter 20, footnote ?LLVM).  
+Here `VM; actually run procedures and produce 
+values and/or side-effects as an alternative 
+to compiling code to machine language.
+
+`item ->> Simulating procedures ;;  Instead 
+of actually executing procedures, `VM;s 
+may simulate how procedures `i.would` behave 
+if they were called with specific values, 
+so as to obtain information for 
+compilation, diagnostics, testing, Quality 
+Assurance, and so forth.    
+
+`item ->> Encapsulating calls to specific 
+kinds of procedures ;;  As discussed in Chapter 20, 
+applications and code-bases often `q.expose` 
+certain functionality to be called by external/third-party 
+components.  A typical case is where relatively 
+complex steps must be taken to instantiate 
+an environment where certain kinds 
+of functionality is available.  This chapter and 
+the next will consider examples in the context 
+of Cyber-Physical Systems and Computer Vision.  
+In the context of code-libraries for interfacing 
+with Cyber-Physical devices, or image-processing 
+algorithms, respectively, such libraries 
+are often designed with the goal of 
+`q.hiding` complications related to 
+image/data format and mathematical models.  
+These libraries would be engineered to 
+encapsulate specific kinds of functions 
+so that they may be invoked by external 
+code, without complex domain-specific 
+details being directly addressed by 
+the calling code.  Programmers could 
+therefore invoke operations in domains 
+such as Computer Vision or Cyber-Physical networks 
+without needing detailed understanding 
+of these respective domains.  Virtual 
+Machines may add an extra layer of indirection 
+by including encapsulated domain-specific procecures 
+alongside lower-level instructions as 
+part of their `q.operation set`/.  In this 
+way `VM; can play a role analogous 
+to (or permitting the implementation) of 
+scripting interfaces to domain-specific 
+modules (consider, say, a `Python; interface to 
+the predominant Comptuer Vision libary, `OpenCV;: 
+many programmers find it easier to 
+invoke `OpenCV; routines in `Python; than 
+to call these functions directly via `Cpp;).     
+
+`item ->> Synthesizing or interoperating 
+between divergent programming languages 
+and computing environments ;;  Because 
+%-- as touched on in Chapter 20 %-- `VM;s 
+are more flexible than machine language 
+and physical `CPU;s, they can provide a 
+neutral platform that is agnostic to 
+language-implementation details.  For example, 
+the philosophical differences between divergent 
+programming styles (functional vs. Object-Oriented, 
+say) are typically due to compilers and runtimes 
+being optimized for speed and/or memory-efficiency.  
+Langauges encourage code-writers to adopt 
+certain design patterns, and in turn they 
+are optimized so that code which adheres 
+to such patterns runs more quickly, or 
+consumes less memory (and other computing 
+resources, such as `CPU; time), or is subject to more 
+stringent evaluation (compile-time 
+error detection, for example), or all of 
+the above.  Because different languages optimize 
+in different ways, it is hard to find a neutral 
+medium where code written in two different 
+source-dialects might be compiled to a single 
+byte-code, say, or where data structures 
+created in one language can be utilized 
+by procedures in a different language.  
+Virtual Machines, compared with `CPU;s, 
+are typically slower but more flexible: because 
+they do not seek the most optimized implementation, 
+they may serve as a hybrid environment 
+through which multiple langauges may interoperate.  
+`description`
+`p`
+
+
+`p.
+This chapter and the next will discuss some 
+of these potential features/applications of 
+`VM;s in a little more detail.  The plan 
+is first to summarize a specific model for 
+`VM; based on procedure-call semantics; 
+subsequent discussion will consider 
+the role of `VM;s in larger ecosystems, 
+such as those related to image-processing.
+`p`
+
+

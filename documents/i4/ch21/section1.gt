@@ -1,4 +1,4 @@
-`section.ChasmVM and the Digamma Calculus`
+`section.Virtual Machines and Hypergraph Code-Models`
 `p.
 As a preliminary to analyses later in this 
 section, I will make a few comments which might 
@@ -9,7 +9,6 @@ to technologies related to industrial computing
 and cyber-physical systems (`CPS;).
 `p`
 
-
 `p.
 One potential use-case for Virtual Machines is encapsulating 
 cyber-physical networks: we assume that `CPS; devices are 
@@ -19,7 +18,7 @@ physical quantities (air quality in a room, say) whereas
 actuators have tangible physical effects (optimizing air 
 quality by adjusting vents, say).  Neither kind of 
 device typically has extensive computational capabilities; 
-instead, data is routed from the devices to central 
+instead, data is routed from the devices to a central 
 location which use software to process sensor data 
 and convey instructions to actuators.  These networks 
 can, in turn, cover multiple intermediate points 
@@ -74,7 +73,7 @@ special extra-application code).
 
 `p.
 If a `VM; is indeed devoted to specific Cyber-Physical 
-network (or group thereof) then a logical first step 
+networks (or groups thereof) then a logical first step 
 when implementing the `VM; would be to articulate the 
 collection of procedures (through driver libraries, say) 
 to be encapsulated.  More likely, a more-generic 
@@ -314,11 +313,12 @@ so should be supported as such).  A rigorous
 dimensions (addressing types and data-encoding, 
 for example), but of course an essential 
 concern is modeling procedure-calls and 
-calling-conventions, so I will sue 
+calling-conventions, so I will pursue 
 this topic as a starting-point for a 
 (relatively informal) system to 
 encapsulate `VM; details in a schematic fashion.     
 `p`
+
 
 `subsection.Applicative Structures and Mathematical Foundations`
 `p.
@@ -754,7 +754,7 @@ symbol-numbers are allocated incrementally.
 Symbol-numbers in this context function similarly 
 to `q.De Bruijn indices` in the lambda calculus 
 (when formalized through de Bruijn's nonstandard notation).`footnote.
-See, e.g., `cite<x>;
+See, e.g., `cite<BerghoferUrban>;
 `footnote`  Lemma 1 argued that we can describe all 
 variations on an `f; `i.without` composition as the 
 set of `q.lambda-feasible` red-blue-gray strings with 
@@ -1132,7 +1132,7 @@ insofar as they model procedures call with
 into multiple `q.channels` (an explanation for the 
 choice of the terminology `i.syntagm` and `i.syntagmatic`/, 
 usually encountered in linguistics, is 
-offered in Chapter 6 of `cite<CovidCancerCardiac>;).   
+offered in Chapter 6 of `cite<NeusteinChristen>;).   
 
 `anondefin.
 A `i.channelized in-neighborhood` (we can 
@@ -1329,9 +1329,9 @@ set of function-symbols/procedure-labels.
 `theorem-statement`
 
 `theorem-proof.
-Lemmas () and () detail the construction of 
+Lemmas (1) and (4) detail the construction of 
 red-blue-gray-black matrices from applicative structures 
-and syntagmatic neighborhood-sets restrictively.  
+and syntagmatic neighborhood-sets respectively.  
 I claim that comparing the two constructions 
 documents that each step in the construction 
 would modify the resulting matrices in 
@@ -1345,9 +1345,8 @@ lambda-feasibility which precludes infinite
 recursion.  
 `theorem-proof`
 
-`noindent;
-In other words, lambda-restricted syntagmatic 
-neighborhood-sets are a graph-theoretic encoding 
+`vspacenoindent;In other words, lambda-restricted syntagmatic 
+neighbor\-hood-sets are a graph-theoretic encoding 
 of applicative structures in the classical 
 lambda-calculus sense.
 `p`
@@ -1430,12 +1429,13 @@ new value by a procedure and then passed to another
 procedure is a form of inter-procedure precedence %-- the 
 effects of the first are consequential to the second %-- 
 even if the two are not linked by an explicit 
-output-to-input handoff.  There are the kinds 
+output-to-input handoff.  These are the kinds 
 of scenarios that a procedure-call semantics 
-reflection actual programming languages (as opposed 
+reflecting actual programming languages (as opposed 
 more strictly mathematical function theories) should 
 address; they will be the focus 
-of Section 2.
+of Section 3.
 `p`
+
 
 
