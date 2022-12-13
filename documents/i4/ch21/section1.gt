@@ -5,8 +5,27 @@ section, I will make a few comments which might
 situate this discussion in the context of 
 topics covered elsewhere in this book.  Specifically, 
 I intend to motivate the discussion by appeal 
-to technologies related to industrial computing 
-and cyber-physical systems (`CPS;).
+to technologies related to industrial computing, 
+Cyber-Physical Systems (`CPS;), and Computer Vision.`footnote.
+Throughout this book-section I speak of `q.Virtual Machines` 
+specifically in the sense of digital artifacts that 
+emulate Central Processing Units or 
+other physically-realized computing engines.  
+Many discussions particular in the context 
+of industrial technology refer more broadly 
+to Virtual Machines that simulate engineered 
+physical artifacts %-- as `q.digital twins` 
+`cite<YiCai>;, `cite<KyounghoAn>;, `cite<YuZhang>;, 
+`cite<AneesAra>;, `cite<TiagoMuck>;, 
+`cite<BorjaBordelSanchez>;, `cite<VivekKumarSehga>;,
+`cite<PetrJanda>; 
+%-- or to virtual operating systems.  Discussions 
+about `VM;s in the former sense, however, 
+can carry over to this broader usage because 
+`VM; execution environments are often 
+intrinsic parts of digital twins and/or virtual 
+operating systems.  
+`footnote`
 `p`
 
 `p.
@@ -21,15 +40,16 @@ device typically has extensive computational capabilities;
 instead, data is routed from the devices to a central 
 location which use software to process sensor data 
 and convey instructions to actuators.  These networks 
-can, in turn, cover multiple intermediate points 
+might, in turn, cover multiple intermediate points 
 (consider `CPS; data warehoused in the cloud) but, 
-for exposition, we can focus on the essential end-points, 
-on one hand the devices themselves and on the other 
+for exposition, we can focus on the essential end-points
+%-- on one hand the devices themselves and on the other 
 software applications through which humans 
-monitor and, if desired, manipulate cyber-physical systems.  
-Focusing for discussion on sensors, the actual devices typically 
-do not perform calculations (they do not have the means 
-to execute computer code) but they `i.are` capable of 
+monitor and, if desired, manipulate `CPS; technology.  
+Even if the actual devices  
+do not perform calculations (they may not have the means 
+to execute computer code), sensors and actuators 
+`i.are` capable of 
 converting some physical quantity to digital 
 signals which computers proper can interpret.  
 Programmers developing `CPS; applications will rarely 
@@ -51,19 +71,45 @@ interfaces with `C; drivers directly,
 the low-level function calls can be managed 
 via virtual machines that interoperate 
 with higher-level applications in a language-agnostic 
-manner.  In this sense `CPS; `VM;s can be analogous 
+manner.  Recent research in data semantics 
+and virtual simulations of `CPS; networks and devices 
+can benefit the engineering of relatively general-purpose 
+middleware tools that route data and instructions 
+back and forth between application-style 
+environments and `CPS; hardware 
+`cite<WestPalmer>;, `cite<ParastooDelgoshaei>;, 
+`cite<SzymonSzominski>;, `cite<MurraySinclair>;, 
+`cite<AlexanderVodyaho>;.
+An analogy might be made to database systems: although 
+there are many different data persistence engines, 
+a handful of specific architectures (relational/`SQL; 
+plus the predominant `NoSQL; frameworks) have emerged as 
+templates that cover the interactions of applications 
+with almost all databases they are likely to encounter.  
+Interop protocols can therefore target a core 
+group of database models, yelding results 
+applicable to a large range of actual technologies.  
+Analogously, consolidating the extensive variety 
+of `CPS; sensors/actuators into a core set of 
+data profiles would support generic middleware 
+components that work against many 
+specific `CPS; networks.
+`p`
+
+`p.
+In this sense `CPS; `VM;s can be analogous 
 to database query languages, in their design and 
 rationales: just as query formats give 
 engineers the option of communicating with a database 
 from a diversity of application-environments, the 
 protocols for accessing `CPS; data could similarly 
 be encapsulated in `VM; operations.  Moreover, 
-as touched on above query engines can ideally 
+query engines (as noted in Chapter 20) can ideally 
 function either as standalone languages of their 
 own (processing query-code outside an application 
 context, e.g. on a command-line for debugging and 
 maintenance) or via query-factories programmable 
-from general-purpose languages; the situation is 
+from general-purpose languages.  The situation is 
 comparable for `CPS;, and one could pursue the 
 same duality in how `CPS; network capabilities 
 are exposed (either through host languages or 
@@ -86,17 +132,62 @@ collection of kernel functions exposed by driver libraries,
 with the actual integration to those procedures 
 finalized during deployment.  In any case, though, 
 the general pattern is that any particular deployment of a 
-(`CPS;-context) `VM; would be `q.seeded` with some 
+`VM; would be `q.seeded` with some 
 preliminary set of functions (i.e., built-in `VM; operations, 
 some perhaps added on in deployment).         
 `p`
 
 
 `p.
-At a minimum, in short, `VM;s should furnish functionality 
+Someone might reasonably point out that interoperability 
+between heterogeneous components %-- whether the 
+differences are just in programming environments 
+(for disparate pieces of software) or more substantial, as 
+with connections between applications and 
+Internet of Things endpoints %-- typically falls under 
+the rubric of data-sharing protocols and 
+`API;s, rather than `VM;s proper.  That is, `CPS; driver 
+libraries could certainly expose access to devices 
+through an `API;, but this would only indirectly 
+be an issue for `VM; (via, say, programmers 
+using a scripting language to facilitate 
+`API; calls).  While this is true in principle, 
+I briefly argued in the previous 
+chapter that `VM;s can serve as a logical 
+extension to `API;s: there are rationales for 
+exposing functionality via connection-points
+handled through `VM;s, either to 
+ensure interop protocols' adaptibility or to 
+present an interface that can be hooked 
+in multiple ways %-- via scripts, query-like 
+languages, application code building up 
+requests incrementally, etc.  This 
+potential `VM; use-case fits well with the 
+theoretical perspective on `VM;s developed 
+in the current chapter.  Here, we will 
+consider `VM;s as systems organized around a 
+collection of kernel functions, which in 
+turn form the basis of procedures implemented 
+through the `VM; that call such functions 
+in sequence.  While some kernel operations 
+may be generic in the sense that they simply 
+provide expected features of coding 
+environments %-- declaring variables' 
+symbolic names, types, and scopes, registering 
+procedure inputs, binding outputs to symbols 
+or input-positions on enclosing procedure calls, 
+and so forth %-- there is no reason why 
+kernel operations could not encapsulate 
+access to domain-specific capabilities, 
+such that `VM;s mimic features of `API;s. 
+`p`
+
+
+`p.
+In this scenario, `VM;s furnish functionality 
 imitating `q.kernel` driver or operating-system calls, 
-initializing input arguments with value passed from applications 
-and/or sending back to calling application procedures' results.  
+initializing input arguments with values passed from applications 
+and sending results back.  
 The `VM; accordingly bridges application-level and low-level 
 kernel functions, which involves not only encapsulating access 
 to low-level functionality but also negotiating the 
@@ -130,9 +221,9 @@ low-level functions (at least low-level relative to
 applications that would benefit from the requisite 
 functionality).  Consider image-analysis: procedures 
 exposed via Computer Vision libraries are not directly 
-comparable to low-level driver code; they may themselves 
-be implemented in high-level languages like `Cpp;); nevertheless, 
-libraries such as `OpenCV; or `ITK; tend to demand a 
+comparable to low-level driver code %-- they may themselves 
+be implemented in high-level languages like `Cpp;) %-- 
+nevertheless, libraries such as `OpenCV; or `ITK; tend to demand a 
 rather complex scaffolding set up to enable analytic 
 procedures being called.  We could imagine circumstances 
 where wrapping complex image-processing pipelines in 
@@ -154,12 +245,16 @@ use-cases wherein `VM;s can serve as adapters
 between application-style coding environments and 
 procedure-collections that are too specialized or low-level 
 to fit comfortably in application-development 
-norms.  These cases can overlap, of course; database 
-can track or warehouse `CPS; data such that queries monitoring 
+norms.  These cases might overlap, of course; databases 
+can warehouse `CPS; data such that queries monitoring 
 real-time device state would logically coexist with 
-queries against database content (presumably representing 
-temporally prior device info), or image databases can 
-support Computer Vision based queries.  The database-query 
+queries against database content (tracking 
+device info), or image databases can 
+support queries dependent on Computer Vision.
+`p`
+
+`p.
+The database-query 
 perspective points to an interesting heuristic 
 analogy, insofar as packaging procedure-calls from an 
 application environment to a lower-level context 
@@ -215,7 +310,7 @@ procedural contracts.
 
 `p.
 One maxim for `VM; design, then, at least in 
-this sort of use-case context, is to 
+this sort of context, is to 
 prioritize capabilities to model 
 and carry out procedure-calls described 
 through diverse calling-conventions, rather 
@@ -256,34 +351,6 @@ we might add dependent types and functional-reactive
 idioms (e.g., so-called `q.signal/slot` conventions).  
 `p`
 
-
-`p.
-As might be obvious by this point, the kinds of `VM;s 
-I am envisioning bound to such requirements would 
-be relatively `q.high level`/, closer in spirit 
-to Interface (or Service) Description Languages than 
-low-level emulators of actual machine code.  This is consistent 
-with the spectrum of `VM; technology; while certainly 
-some `VM;s embrace the use-case of enabling 
-virtual `q.operating systems` or similar low-level 
-environments for portable code %-- where the 
-execution and runtime of `VM; instructions should 
-mimic machine-language steps %-- other flavors of 
-`VM;s are more concerned with engineering 
-language-neutral environments that interoperate 
-fluently with different kinds of programming front-ends.  
-The priority in such a case may still be cross-platform 
-flexibility, but the design goals emphasize 
-a desire for multiple origination-languages to 
-emit `VM; code (through factories if not text streams) 
-according to protocols which are in sync with 
-host-language conventions (`q.host` language in the 
-sense that `VM; capabilities can be embedded 
-via static or dynamic libraries linked against 
-software components, which in turn may 
-utilize such capabilities in different ways %-- via 
-scripts, queries, workflow descriptions, etc.). 
-`p`
 
 
 `p.
@@ -336,7 +403,13 @@ strategies for clarifying what are
 sometimes called `q.applicative structures`/, 
 or generic patterns involving the `i.application` 
 of a function/procedure to one or more 
-arguments/parameters.  Since this is such a 
+arguments/parameters `cite<[e.g., chapter 14]HindleySeldin>;, 
+`cite<GianantonioHonsell>;, `cite<CardoneHindley>;,
+`cite<MasahitoHasegawa>;,
+`cite<MitchellMoggi>;,
+`cite<JeanHGallier>;, 
+`cite<HonsellSannella>;, `cite<LironCohen>;,
+`cite<SamueleMaschio>;.  Since this is such a 
 basic phenomenon in the mathematical 
 realm, it is understandable that some 
 researchers in `q.philosophy` of mathematics 
@@ -349,7 +422,7 @@ for integration, for ratios, for polynomials, and so forth)
 we can imaging a system which translates 
 mathematical terms to a more systematic logical 
 representation (which would presumably 
-resemble something like `lisp; code). 
+resemble something like `Lisp; code). 
 `p`
 
 
@@ -901,7 +974,11 @@ Logic essentially uses a set of combinator
 symbols (external to both function and variable 
 symbols) and string-reduction rules 
 to enumerate all applicative structures 
-generated by a system's intrinsic symbol-lists: 
+generated by a system's intrinsic symbol-lists 
+`cite<[page 5]AlessandraDiPierro>;, 
+`cite<JRogerHindley>;, 
+`cite<ReneDavid>;,
+`cite<JonathanPSeldin>;: 
 for any structure formed from symbols 
 `fetcxetc; (`f;s and `x;s being functions 
 and variables respectively) there is a 
