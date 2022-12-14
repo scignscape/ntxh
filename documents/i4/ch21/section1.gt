@@ -57,14 +57,14 @@ interact with devices independently; instead,
 the `q.physical` links with `CPS; networks`footnote.Which 
 of course can be physical only in an ethereal 
 sense, e.g., passing data via wireless services` will typically 
-be handled by low-level driver programs, which might 
+be handled by low-level driver programs, which could 
 expose capabilities to access sensor readings through, 
 for instance, `C;-language functions.     
 `p`
 
 
 `p.
-Developers may employ Virtual Machines in the 
+Developers might employ Virtual Machines in the 
 `CPS; arena to streamline this process %-- instead 
 of programmers needing to write code which 
 interfaces with `C; drivers directly, 
@@ -77,7 +77,7 @@ can benefit the engineering of relatively general-purpose
 middleware tools that route data and instructions 
 back and forth between application-style 
 environments and `CPS; hardware 
-`cite<WestPalmer>;, `cite<ParastooDelgoshaei>;, 
+`cite<WestParmer>;, `cite<ParastooDelgoshaei>;, 
 `cite<SzymonSzominski>;, `cite<MurraySinclair>;, 
 `cite<AlexanderVodyaho>;.
 An analogy might be made to database systems: although 
@@ -107,7 +107,7 @@ be encapsulated in `VM; operations.  Moreover,
 query engines (as noted in Chapter 20) can ideally 
 function either as standalone languages of their 
 own (processing query-code outside an application 
-context, e.g. on a command-line for debugging and 
+context, e.g., on a command-line for debugging and 
 maintenance) or via query-factories programmable 
 from general-purpose languages.  The situation is 
 comparable for `CPS;, and one could pursue the 
@@ -348,13 +348,14 @@ diverse programming styles, e.g. object-methods,
 exceptions, lazy evaluation, typestates, and 
 parameter-destructuring.  To this list 
 we might add dependent types and functional-reactive 
-idioms (e.g., so-called `q.signal/slot` conventions).  
+idioms (e.g., so-called `q.signal/slot` conventions, 
+reviewed in greater detail in Chapter 24).  
 `p`
 
 
 
 `p.
-Since not all `VM; actually aspire to multi-language 
+Since not all `VM;s actually aspire to multi-language 
 support to the open-ended degree implied here, 
 theories informing `VM; implementation do 
 not necessarily analyze data models or design 
@@ -404,12 +405,14 @@ sometimes called `q.applicative structures`/,
 or generic patterns involving the `i.application` 
 of a function/procedure to one or more 
 arguments/parameters `cite<[e.g., chapter 14]HindleySeldin>;, 
+`cite<[chapter 18]SebastianShaumyan>;
 `cite<GianantonioHonsell>;, `cite<CardoneHindley>;,
 `cite<MasahitoHasegawa>;,
 `cite<MitchellMoggi>;,
 `cite<JeanHGallier>;, 
 `cite<HonsellSannella>;, `cite<LironCohen>;,
-`cite<SamueleMaschio>;.  Since this is such a 
+`cite<SamueleMaschio>;, 
+`cite<GhilezanKasterovic>;.  Since this is such a 
 basic phenomenon in the mathematical 
 realm, it is understandable that some 
 researchers in `q.philosophy` of mathematics 
@@ -439,7 +442,7 @@ matter, but whatever our foundational semantic
 theory in this sense it is natural to extend 
 it via functional composition (analogous to 
 how linguistic semantics involves the semantics 
-of nouns, and verbs, but more thoroughly also 
+of nouns and verbs, but more thoroughly also 
 the compositional principles of verbs together 
 with nouns yielding sentences/propositions).  
 The set of possible applicative structures 
@@ -450,7 +453,11 @@ defined by the combination of multiple functions
 wherein the results of one function applied to 
 its arguments becomes in turn (one of the) 
 parameters of a different (or, recursively, the same) 
-function.  Systematically, an `q.applicative system` 
+function.
+`p`
+
+`p.
+Systematically, an `q.applicative system` 
 would be a set of function-symbols alongside 
 `q.variable` symbols with a rule that applicative 
 `i.structures` include expressions of the form 
@@ -458,7 +465,7 @@ would be a set of function-symbols alongside
 and that for any applicative structure the modification 
 formed by replacing a variable-symbol with another 
 applicative structure is also an applicative structure.  
-Defined in terms of the close of such substitution operations. 
+Defined in terms of the closure of such substitution operations, 
 applicative systems can be seen to follow a generative  
 pattern very similar to labeled trees %-- each 
 node is either a symbol-node or a branch with 
@@ -481,17 +488,24 @@ term algebras if we consider only function-terms in
 the context of first-order logic, ignoring predicates, constants, 
 or relations (constants can be treated as nullary functions, and 
 predicates/relations modeled via functions whose codomain 
-is the set of two boolean constants `i.true` and `i.false`/).  
+is the set of two boolean constants `i.true` and `i.false`/). 
 Applicative structures may also be defined in terms 
 of freely generated strings in a language with 
 balanced parentheses %-- essentially a 
 `q.Dyck` language (after Walther von Dyck) intersected 
-with a suitably restricted function/variable language.  
+with a suitably restricted function/variable language 
+`cite<MichaelMoortgat>;, `cite<KogkalidisMelkonian>;, 
+`cite<YuanboLi>;, `cite<KjelstromPavolgiannis>;.
+`p`
+
+`p.
 In effect, applicative structures can be defined by restricting 
 the forms generated by first-order logic, or by regular 
 languages according to the Chomsky-`Schutzenberger; representation 
-theorem (in formal linguistics).  Different such formulations 
-could be preferred depending on which seems like an intuitive 
+theorem (in formal linguistics) `cite<RyoYoshinaka>;, 
+`cite<MansHulden>;, `cite<MelliesZeilberger>;.  
+Different such formulations could be preferred 
+depending on which seems like an intuitive 
 basis in the specific context being analyzed.  However, 
 although any language roughly equivalent to 
 `nary; trees may be intuitively simple, it is 
@@ -559,7 +573,7 @@ reduce to actual functions whose parameters are
 the missing symbols implied by insufficient arity 
 thresholds.  Of course, this discussion assumes 
 we also have a notion of `q.fixed values` being 
-assigned to functions as parameters).
+assigned to functions as parameters.
 `footnote`  Note that the generative 
 rules allow for zero-arity functions, whose 
 semantics would be procedures that yield results 
@@ -594,7 +608,7 @@ determined by (viz., one greater than) the token's
 nesting-level, notating the tokens own positional-index 
 and also those that would be assigned to its 
 parent nodes (treating the structure as a tree) were 
-they tokens rather than nested structures).  Positional-index 
+they tokens rather than nested structures.  Positional-index 
 lists induce an ordering on all tokens in an applicative 
 structure (comparing the first number in two respective 
 lists, then the second as a tie-breaker, and so forth; 
@@ -656,8 +670,11 @@ in a language codifying notions of function-application.
 However, it is possible to develop alternative representations 
 of the same structures, such as De Bruijn indices 
 (due to Nicolas de Bruijn) which in effect model argument-places 
-by numeric indices rather than symbols.  I propose 
-to use a similar convention based on the idea of 
+by numeric indices rather than symbols `cite<BerghoferUrban>;.
+`p`
+
+`p.  
+I propose to use a similar convention based on the idea of 
 forming symbols which have numeric values but also 
 `q.colors`/.  Specifically, consider, first, characterizations 
 of the set of functions which may be identified 
@@ -678,10 +695,10 @@ repeating numbers for the arguments; e.g.,
 `fOneTwoOne; or `fOneTwoTwo; where note that 
 numbers occurring multiple times are shaded in 
 light blue.  I'll refer to this as 
-`q.red-blue-gray` notation.  Schematically, 
-one can treat this as equivalent to 
-notation with symbols, each colored number 
-being just a symbol, except that the 
+`q.red-blue-gray` notation %-- schematically, 
+equivalent to notation with symbols (each colored number, 
+i.e., color/number pair,  
+being a distinct symbol) except that the 
 colors allow grouping into ordered sets which 
 may be subject to further constraints.  
 Likewise, the function-symbols themselves 
@@ -693,7 +710,7 @@ our applicative system.
 
 
 `p.
-Suppose we start with any function-symbol list 
+Suppose we start with some function-symbol list 
 %-- for instance, as earlier in this chapter 
 I alluded to collections of kernel 
 functions which `q.seed` a Virtual Machine 
@@ -713,9 +730,10 @@ if we take some semantic predicate %-- say,
 `i.describes a computation` %-- then we may 
 want to consider the full set of functions 
 which meet this criterion that can be 
-generated from some initial `q.seed` collection; 
-given `f; as a seed, notate the set of 
-functions (describable solely via `f;) 
+generated from some initial `q.seed` collection. 
+Given `f; as a seed, that is, one wants 
+to elucidate the set of 
+functions (expressible solely via `f;) 
 which describe a computation, for instance 
 (or replace `q.describe a computation` with 
 some other predicate).  We seem to have:
@@ -800,10 +818,10 @@ nested structures.  Call a `q.red-blue-gray-black matrix`
 a set of rows formed from red, blue, gray, or black-colored 
 numbers (unlike normal mathematical matrices the rows 
 need not have equal size, though if desired we 
-can always introduce a `q.dummy` symbol, e.g. a black 
+can always introduce a `q.dummy` symbol, e.g., a black 
 zero, to pad shorter rows on the left, yielding 
 something that looks like a normal matrix; likewise, 
-colored numbers can always be mapped on to disjoint 
+colored numbers can always be mapped onto disjoint 
 integer sub-sets, so we can if desired 
 treat red-blue-gray-black matrices as isomorphic 
 to normal integer-matrices). 
@@ -825,10 +843,10 @@ we can permute the latter list so that
 lower-numbered symbols appear to the left, and distinct 
 symbol-numbers are allocated incrementally.  
 Symbol-numbers in this context function similarly 
-to `q.De Bruijn indices` in the lambda calculus 
-(when formalized through de Bruijn's nonstandard notation).`footnote.
-See, e.g., `cite<BerghoferUrban>;
-`footnote`  Lemma 1 argued that we can describe all 
+to `q.De Bruijn indices` (in a presentation of 
+lambda calculus formalized through de Bruijn's nonstandard notation)
+mentioned earlier.  
+Lemma 1 argued that we can describe all 
 variations on an `f; `i.without` composition as the 
 set of `q.lambda-feasible` red-blue-gray strings with 
 `f; (which can be denoted by a red number as well as a 
@@ -879,7 +897,7 @@ negative matrix entries could be allowed
 to `q.refer back` to prior rows, notating the 
 idea of instruction-sequences in a computing machine 
 looping back to prior instructions.  Other 
-classical developments (often phrased via 
+classical developments (often phrased within 
 lambda calculus rather than applicative structures 
 `i.per se`/) involves encoding natural numbers 
 via repeated iterations of a single `q.successor` 
@@ -900,7 +918,7 @@ applicative structures model function-composition
 semantics.  To the degree that we can 
 (with suitable semantics) treat functions 
 as `i.values` %-- as points in an ambient 
-function `q.space` %-- then functions can be 
+function `q.space` %-- then functions may be 
 composed in various ways to generate new 
 such values.  In the simplest case (functions 
 of arity one), at least without recursion, 
@@ -1055,12 +1073,20 @@ phrases, say, which rely on grammar rather
 than idiomatics to signal the intended 
 composition %-- represent forms that 
 are `i.not` sufficiently entrenched as to 
-have `q.automatic` meanings (like those 
-of single words, say) but instead need to be 
-parsed.  In this context Combinators 
+have `q.automatic` meanings, e.g., those 
+of single words, but instead need to be 
+parsed) `cite<IvanASag>;, 
+`cite<MartinHilpert>;, `cite<LauraAMichaelis>;,
+`cite<DavidAdger>;, `cite<EvieCousse>;,
+`cite<PeterFordDominey>;, 
+`cite<GiuliaRambelli>;.  In this context Combinators 
 are at least intuitive emblems suggesting 
 how syntactic entrenchment yields semantic 
-conventions.  More generally, we can 
+conventions `cite<[page 6]CemBozsahin>;, 
+`cite<[chapter 9]CemBozsahinC>;, 
+`cite<JeanPierreDescles>;, 
+`cite<StevenTPiantadosi>;, `cite<MarkSteedman>;.  
+More generally, we can 
 also observe in the linguistic context 
 that the overall space of applicative structures 
 (over all words in a sentence, say) 
@@ -1076,12 +1102,12 @@ verb-to-noun relations).
 
 `p.
 Apart from `i.syntactic` interpretations, 
-Applicative Structure can also be seen from 
+applicative structure can also be seen from 
 semantic angles in more narrowly 
-mathematical contexts, for example when 
+mathematical contexts, for instance when 
 we consider properties `i.of` functions, 
 such as those derived from algorithm-theory.  
-For example, if `f; denotes a function which 
+As an example, if `f; denotes a function which 
 can be evaluated through a calculation implemented 
 with guaranteed termination, then composing 
 `f; with another function with the same 
@@ -1094,8 +1120,7 @@ over a set of functions sharing properties
 such as guaranteed-termination to be a 
 larger set with the same property.  In this 
 sense we can regard applicative structures 
-(perhaps via lambda calculus) as part of 
-the backbone for analyzing different kinds 
+as part of the backbone for analyzing different kinds 
 of function-spaces according to algorithm-theoretic 
 properties or profiles (e.g., computability, 
 termination, different complexity classes, and the like).  
@@ -1145,10 +1170,10 @@ the set of lambda-feasible red-blue-gray-black matrices as a
 complete listing of all valid strings in a language 
 that describes functions (for some meaning of `q.function`/) 
 derived from kernel `q.seed` functions by arity-expansion (via 
-unused arguments), projection (arity-reduction via 
-reusing parameters), and composition.  Later in the 
+unused arguments), projection (arity-reduction through 
+repeated parameters), and composition.  Later in the 
 section I will discuss more specific semantics, 
-but the enumeration through red-blue-gray-black matrices 
+but the enumeration with red-blue-gray-black matrices 
 yields an initial picture of the space 
 over which such a semantics should quantify.  
 `p`
@@ -1204,9 +1229,9 @@ Virtual Machine model which `q.drops out` of
 the theory I'm sketching here, as a practical 
 use-case.  The central underlying notion 
 is to designate certain graphs as `q.syntagmatic` 
-insofar as they model procedures call with 
+insofar as they model procedure calls with 
 (in general) multiple parameters grouped 
-into multiple `q.channels` (an explanation for the 
+into variegated `q.channels` (an explanation for the 
 choice of the terminology `i.syntagm` and `i.syntagmatic`/, 
 usually encountered in linguistics, is 
 offered in Chapter 6 of `cite<NeusteinChristen>;).   
@@ -1218,7 +1243,7 @@ are not relevant) of a directed
 graph is the in-neighborhood of one vertex `vx; where 
 the edges incident to `vx; are ordered and grouped into (typically) 
 one or more `i.channels`/.  A `q.channel` in this context 
-can be considered most generally any collection of edges 
+can be considered, most generally, as any collection of edges 
 (focusing on the edges themselves, not their incident 
 nodes; in the case of labeled graphs channels 
 would then be, in effect, sets of label-tokens) but 
@@ -1226,7 +1251,7 @@ define a `i.syntagmatic channel` as a channel all of
 whose directed edges share the same target node; 
 by default `i.channel` and `i.syntagmatic channel` 
 can be used interchangeably.  The central 
-vertex `vx; can be labeled with a string taken 
+vertex `vx; might be labeled with a string taken 
 from a prior collection of names (intuitively, 
 name of procedures insofar as graphs 
 diagram procedure-calls).  Channels 
@@ -1237,8 +1262,8 @@ to associate channels with channel `q.kinds`/).
 `anondefin.
 A `i.channel system` 
 on a directed graph is a set of criteria constraining 
-the legal channelized neighborhoods around any vertex; 
-example restrictions would be stipulations 
+the legal channelized neighborhoods around any vertex. 
+Example restrictions would be stipulations 
 that vertices cannot have multiple channels 
 with the same kind, or (in some context) 
 restricted to specific possible channel-kinds, 
@@ -1247,7 +1272,7 @@ or range of edges (e.g., a channel embodying
 procedural `i.outputs` may be restricted to 
 have at most one edge).  More detailed 
 restrictions can apply to multiple 
-channels in interaction: consider modeling 
+channels in interaction.  Consider modeling 
 the alternative between normal procedure `i.outputs` 
 and `i.exceptions`/: throwing an exception 
 precludes returning from a procedure normally, 
@@ -1319,9 +1344,13 @@ That is, the out-adjacent vertex in `Ntwo;
 will now have two out-edges, one targeting 
 the function node in `Ntwo; and one 
 targeting an argument node in `None;.  
-Introducing these connecting edges 
+We can see by induction an equivalence 
+between this graph-theoretic model 
+and the original closure-definition 
+for applicative structures.  Indeed, 
+introducing these connecting edges 
 is structurally analogous to `q.substituting` 
-nested structures for variables.  
+nested structures for variables.
 I'll clarify that claim with a further definition.   
 `lemma-proof`
 
