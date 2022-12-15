@@ -34,7 +34,8 @@ multiple precursor function-applications.
 `p.
 The semantic interpretation I adopt here for `q.syntagmatic` 
 graphs is noticeably different than this model 
-(I have analyzed the specific differences in `cite<Chapter6>;).  
+(I have analyzed the specific differences in 
+`cite<[page 150]NeusteinChristen>;).  
 Rather than taking input/output as a fundamental 
 divide within function-parameters, I consider 
 more general channel systems here.  Note that in 
@@ -43,13 +44,19 @@ of computation where outputs are marked by
 directed edges `i.away from` procedure nodes, 
 in Syntagmatic Graphs (hereafter `SG;s) all edges point `i.into` 
 procedure-nodes, including those embodying 
-`q.outputs` (`cite<Chapter6>; has some comments 
+`q.outputs` (`cite<[section 9.2]NeusteinChristen>; has some comments 
 about why this can make sense).  More elaborate 
 rationales for the notational and interpretive 
 differences between `SG;s and 
 other procedure-models is tangential to the 
 current chapter, so I'll focus instead 
-on outlining the semantic interpretation itself. 
+on outlining the semantic interpretation itself.`footnote.
+Some of this terminology is derived from Petri nets 
+`cite<RobertGold>;, `cite<PettitGomaa>;,
+`cite<SergeyPOrlov>;, `cite<AnilSawhney>;, 
+`cite<NadeemAkhtar>;, `cite<FeiLiu>;, 
+`cite<RadekKoci>;, `cite<KohlerRolke>;.
+`footnote` 
 
 `anondefin.
 Call a `i.marking` of a Syntagmatic 
@@ -190,17 +197,17 @@ spectrum of states equivalent to each type-instance,
 but there are also states involving 
 `i.lack` of typed values (the generic example 
 of such a state I'll call `i.pre-initialized`/).  
-The states available for carriers can be called 
+The states available for carriers could be called 
 `q.type-based` in that they are organized around 
 typed values but include non-type states as well.
-`SG; nodes can then take on states 
+`SG; nodes may then take on states 
 by associating with carriers such that 
 carrier-state propagates to the nodes.  
 Nodes are in `q.shared supplication` if 
 their carriers are synchronized to be 
 perpetually in the same state (this can be 
 considered a refinement of the earlier definition).
-Symbols in `SG;-scopes can derive from multiple 
+Symbols in `SG;-scopes might derive from multiple 
 sources: assume that scopes' symbol-list can be 
 grouped into `i.declared` symbols internal to the 
 scope, `i.argument` symbols bound to 
@@ -269,7 +276,7 @@ neighborhoods: each such neighborhood embodies a
 procedure-call, which entails binding call-site 
 carriers to procedures' argument symbols and 
 then carrying through other procedure 
-calls notated through `SG;s associated with 
+calls notated via `SG;s associated with 
 the `i.called` procedures.  When they are 
 finished, the original carriers will (potentially) 
 be in a modified state, so the called 
@@ -337,9 +344,9 @@ This last point has implications for how we
 theorize `i.typed values` as well.  Implicitly 
 here I have assumed that we are operating in a 
 strongly-typed system where types and 
-values are interconnected: any value is a 
-`i.typed` value (the instantiation of a type) and 
-any type exists by virtue of its possible values.  
+values are interconnected: any value is 
+`i.typed` (an instantiation of a type) and 
+types exists by virtue of their possible values.  
 I assume that in the general case types are 
 not equivalent to their `i.extensions`/, 
 that is, to any fixed set of values.  
@@ -470,7 +477,8 @@ channel, which functions like a normal
 output except that procedures whose signature 
 includes such a channel are considered 
 to be constructors, or analogous to constructors 
-(in `cite<x>; I used the term `q.co-constructor` 
+(in `cite<NathanielChristenCyberphysical>; 
+I used the term `q.co-constructor` 
 to suggest allowing procedures being analyzed as if 
 they were constructors even in programming 
 contexts where, for technical reasons, they 
@@ -621,7 +629,7 @@ The essential point about
 propagation semantics is that 
 type contracts would be checked 
 at origination points (to the degree 
-that they are in effect) and must be 
+that they are in effect) and  
 presumed to have been enforced whenever 
 there is an originating digamma reduction 
 in the first place, and that subsequently 
@@ -646,15 +654,14 @@ briefly address in the next subsection.
 Type Semantics`
 `p.
 A plausible objection to the above presentation is 
-that it is arguably burdened with a nontrivial list 
-of special terminology and representational 
+that it is burdened with special terminology and representational 
 conventions to define constructions which are 
 not radically different from traditional 
 notions of, say, stack frames and lambda-abstraction.  
-Beyond just expanding from alternating inputs and outputs 
+Beyond just expanding from inputs and outputs 
 to more flexible `q.channel` systems, I have 
 constructed a semantic interpretation for 
-these system based on formulations such as 
+these systems based on formulations such as 
 type-based states and channelized neighborhoods, 
 without clarifying the theoretical merits of 
 this overall semantic presentation.  My contention 
@@ -663,15 +670,26 @@ extending applicative structures to richer
 channel systems) become valuable in the 
 context of Virtual Machines.  I will 
 attempt to warrant this claim by addressing 
-`VM; implementation, in particular, 
-to conclude this chapter.
+`VM; implementation, in particular.
 `p`
 
 `p.
 I suggest the idea of digamma reduction and 
 propagation-from-constructors to 
 replace extensional and/or constructive semantics 
-for type theory.  An extensional semantics would 
+for type theory.  Implicitly, then, I 
+propose that (what I here call) `q.propagation` 
+semantics can displace two other 
+paradigms for type theory, `i.extensional` and 
+`i.constructive`/.  I will try to defend the idea 
+first that this is a reasonable three-fold 
+division in options for type `q.semantics` 
+and second that there are formal or theoretical 
+merits to the `q.propagation` approach.
+`p`
+
+`p.
+An extensional semantics would 
 essentially proceed by grounding the semantics 
 of any specific type in the set of its 
 possible inhabitants.  To attribute a type to 
@@ -689,7 +707,7 @@ when they are non-empty.  Writing functions
 with distinct code-bodies for different 
 extensional alternatives (another example 
 would be types with possible `q.null` values, 
-such as `q.Maybe` in Haskell or pointers 
+such as `b.Maybe` in Haskell or pointers 
 in `C;/`Cpp;) is a widespread practice 
 in functional programming.  Extensional 
 semantics gives a concise reading to this 
@@ -809,12 +827,81 @@ functional programming languages branching
 over construction patterns. 
 `p`
 
+
+`p.
+Constructing lists from their smaller-by-one 
+kin actually leverages two facets of 
+`q.constructive` types: first, that for any 
+given value of a given type we can identify 
+a constructor which produces that value; 
+and, second, that construction-sequences 
+are isomorphic to the type's extension and 
+therefore `q.model` the type, in the manner 
+that sets endowed with specific operations 
+model `q.theories` (i.e., axiom-combinations) 
+in symbolic logic.  Unless we consider these 
+notions only as logical abstractions, however, in 
+concrete programming they are often wrong, 
+or at least misleading.  If a procedure is supplied 
+a pointer to a list (any list-like type) there is no 
+way to determine a construction-sequence for that 
+value short of examining each item in the list one 
+at a time %-- especially if the pointer 
+is derived from a binary stream supplied by 
+some external component, along the lines 
+of cross-application interop discussed in Chapter 
+20. There isn't even a guarantee that 
+we can learn the `i.length` of the list without 
+similarly scanning the whole value.  The presence 
+of a `b.size()` like procedure depends on the 
+public interface, and there are scenarios (such as `b.stacks` 
+and `b.queues`/) where the type may only provide 
+`b.push`//`b.pop` (or `b.enqueue`//`b.dequeue`/) 
+access to the collection's state, and no size-related 
+(public) functions apart from a test for `b.empty()`/.  
+In these cases functional-programming idioms 
+related to treating each value as a destructured 
+head/tail pairing have no optimization value 
+compared to procedural if...then branching 
+(although a language could still support these 
+idioms as `q.syntactic sugar`/).
+`p`
+
+`p. 
+Of course, collections types `i.could` be engineered 
+so that destructuring becomes convenient.  If resizable 
+lists are stored via multiple inverted arrays 
+(so that the list-head always has smaller memory 
+addresses than its preceding elements) then obtaining a 
+reference to the smaller-by-one `q.tail` becomes  
+just pointer arithmetic (we use multiple 
+array-allocations rather than one single array 
+to ensure that elements never have to be moved 
+in memory, which would invalidate pointers/iterators, 
+if the list's size grows beyond the memory 
+initially requested for it).  In general, then, 
+the idea of `q.constructive` types %-- seen not as a 
+theoretical issue of type semantics but as a tool 
+modeled in source code %-- depends on how types 
+themselves are engineered, their memory-management 
+protocols and public interface.  Similar comments 
+could be made about extension-partitions.  
+Rather than a logical paradigm, we can 
+treat `i.extensional` and (or and/or) `i.constructive` 
+semantics as `i.design patterns` which may 
+guide `i.some` types' implementations (in the 
+sense of code libraries that realize types via 
+providing implementations of their needed procedures).             
+`p`
+
+
 `p.
 Again, though, the fact that some types 
 can be associated with extension-partitions 
 defined via construction-patterns need 
 not signal the semantic equivalence of 
-types and type extensions.  While 
+types and type extensions (or type-extensions 
+and construction-sequences).  While 
 recognizing extensional reasoning as 
 a useful tool for language implementation, 
 I believe that it is more conceptually 
@@ -825,7 +912,10 @@ channels, and carrier-state propagation.
 In other words, I believe that this 
 latter group of formulations better 
 capture how people reason about 
-computer code and design patterns.
+computer code and design patterns 
+`i.in the general case`/, only switching 
+to the alternative semantics when 
+types' explicit designs warrant as much.
 `p`
 
 `p.
@@ -848,21 +938,22 @@ vehicles.
 `subsection.Syntagmatic Graph Sequences as a Virtual Machine Protocol`
 `p.
 I am representing Syntagmatic Graphs as hypergraphs, 
-partly because `i.channels` embody a grouping 
+in two senses: partly, for one, 
+because `i.channels` embody a grouping 
 operation (gathering multiple edges, by analogous 
 to hypernodes being sets of nodes %-- although 
 channels are not identical to hyper`i.edges`/, 
-wherein `i.one` edge spans multiple nodes), although 
-I leave open the possibility of `SG; nodes 
+wherein `i.one` edge spans multiple nodes).  
+Second, I also leave open the possibility of `SG; nodes 
 having internal structure (i.e., becoming hypernodes).  
 However, such hypergraph representation is 
 mostly heuristic; technically, I consider 
 hypergraphs to be essentially a visual shorthand 
 for `i.virtual machine` constructions.  Here I appeal 
-to comments I made in Section 1: a hypergraph 
+to comments I made in Chapter 20: a hypergraph 
 (or, in essence, any structured representation) 
-essentially iconifies the series of steps 
-needed to construct the graph in its precise state.  
+iconifies the series of steps 
+needed to construct it in its precise state.  
 For example, focusing on channelized neighborhoods, 
 the elements of such structures %-- procedure nodes, 
 peripheral nodes, and channels %-- correlate with 
@@ -974,18 +1065,18 @@ so that whenever an argument is `q.pushed` as a
 parameter for some near-future call this 
 action occurs in the context of a specific 
 channel-kind.  As a result, argument-push 
-operations can be analyzed in terms of semantic 
-protocols specific to currently active 
+operations may be analyzed in terms of semantic 
+protocols specific to the currently active 
 channel.  For example, `VM;s might want to 
 add extra information in the 
 context of channels representing `q.message receivers` 
 in Object-Oriented contexts (which 
-I have elsewhere called `q.sigma` channels, essentially 
-the `b.this` or `b.self` of languages like `Cpp;, Java, 
-Rust, etc.), particularly when such channels 
+I have earlier alluded to as `q.sigma` channels, essentially 
+the `b.this` or `b.self` of languages like `Cpp;, `Java;, 
+`Rust;, etc.), particularly when such channels 
 contain more than one node (insofar as most languages 
 providing kernel functions accessed from a `VM; 
-do not allow multiple `b.this` objects; the 
+do not allow multiple `b.this` objects: the 
 demo code for this part's chapters has examples of 
 how to emulate multi-sigma calls in `Cpp;, but 
 in general it would presumably take extra 
@@ -1118,7 +1209,13 @@ by composing applications as collections
 of procedures poised to handle signals 
 %-- rather than fixed operation-sequences 
 designed in advanced %-- is generically 
-called `i.reactive` programming.  Such a 
+called `i.reactive` or (with some 
+additional technical specifications) 
+`i.functional-reactive` 
+programming `cite<SchusterFlanagan>;, 
+`cite<PaulHudak>;, `cite<BerndFinkbeiner>;, 
+`cite<KoheiSuzuki>;, `cite<SamVandenVonder>;,
+`cite<PerezNilsson>;.  Such a 
 programming model introduces a variety of 
 issues for `VM; implementation, at least for 
 `VM;s which model/analyze 
@@ -1136,14 +1233,24 @@ signals may be prompted by non-user
 changes to the current environment 
 which might be relevant for applications, 
 such as a sudden loss or gain of 
-internet connectivity).  Procedures 
+internet connectivity).`footnote.
+More precisely %-- because there are not 
+necessarily signals which actually 
+notify applications about, say, 
+network-connection changes %-- a dropped 
+connection would implicitly `i.cause` 
+signals to be emitted.  For example, 
+an object representing a web request 
+could emit a network-error signal 
+rather than a usual `q.finished` signal. 
+`footnote`  Procedures 
 in this sense are not called `i.from other 
 procedures`/, so the normal analysis of 
 procedure-calls in terms of stack frames 
 being transferred from one site to another 
 has to be modified.  A canonical approach to 
-reactive programming involves `q.signals` 
-and `q.slots`/, with the idea that 
+reactive programming involves `i.signals` 
+and `i.slots`/, with the idea that 
 instead of one procedure directly calling 
 calling another, procedures instead emit 
 `q.signals` that are `i.connected` to 
@@ -1198,7 +1305,7 @@ correctly (in accord with user intentions
 and/or design requirements).  A left mouse click 
 with the cursor hovering over one `GUI; 
 element typically signifies a different user 
-intent than right-mouse clicks over a 
+intent than a right-mouse click over a 
 different element, for example.
 `p`
 
@@ -1298,6 +1405,33 @@ channelized neighborhood.
 
 
 `p.
+Functional-Reactive Programming (`FRP;) has engendered 
+various strategies and analyses for extending 
+type systems to incorporate signal/slot 
+signature (how should signals a slots 
+be assigned functional types, because 
+they are different from ordinary 
+procedures)?  Channel systems offer 
+one solution to this problem, because 
+channel-semantics and carrier-state 
+are available as modeling parameters 
+orthogonal to types themseves.  
+For instance, slot-procedures 
+and the signals they specifically 
+respond to would not need to be notated 
+with special type variants 
+(like `q.World` environments or 
+`q.discrete time` or other constructions 
+endemic to `FRP;); instead, we could 
+stipulate that idiosyncratic 
+`i.channel kinds` designate specific 
+procedures as signals or slots; carriers 
+`i.in` those channels would hold 
+normal typed values.
+`p`
+
+
+`p.
 External signals (as initiators of procedure-chains 
 that disrupt applications' passive `q.event-loop` 
 states) offer one example of how reactive programming 
@@ -1329,7 +1463,9 @@ indicates one simple quantity (consider a slider
 that adjusts the zoom-level for viewing an image), 
 but even more complex `GUI; areas whose display 
 is spread over multiple subcontrols can be associated 
-with a multi-field datatype.  Two datatypes 
+with a multi-field datatype (these sorts 
+of correlations are analyzed further 
+in Chapter 24).  Two datatypes 
 are then closely interconnected: one represents 
 some data-aggregate from a computational 
 perspective (ensuring that all fields are properly 
@@ -1368,8 +1504,11 @@ interacting with either a slider or arrow buttons,
 or via a context menu (within an image-display), plus 
 via keyboard actions.  Such interrelationships 
 should be tracked with some degree of rigor to 
-maintain a consistent `q.User Experience`/.  
-For example, a common pattern in `GUI; programming 
+maintain a consistent `q.User Experience`/.
+`p`
+
+`p.
+Continuing this example, a common pattern in `GUI; programming 
 is top implement `q.tool tips`/, or floating text 
 blurbs that appear when users hover over `GUI; controls, 
 explaining the purpose and pragmatics associated 
@@ -1468,5 +1607,6 @@ and should identify and clarify for
 the user, perhaps supporting alternation between, 
 Fahrenheit/Celsius, or metric/imperial, and so forth).
 `p`
+
 
 
