@@ -75,7 +75,7 @@ or x/y (horizontal then vertical).
 `p.
 To add further confusion, some procedures accept inputs in terms 
 of `i.lengths`/, e.g., width and height, where similar procedures 
-would accept location-coordinates.  So, without full context 
+would accept location-coordinates.  So, without full contextual 
 information, it is ambiguous whether a pair designates a coordinate 
 or two length measures.  Consider a procedure to calculate 
 the average color or dominant color within some region-bound, 
@@ -105,7 +105,7 @@ with coordinates labeled as first/second, say.
 Indeed, code for the `XCSD; format (for example) 
 supports numerous variations on pair-types, 
 including options based on start/end, top/bottom, 
-left/right, horizontal/vertical, and above/below 
+left/right, horizontal/vertical, and above\?below 
 (e.g., if a pair's `Cpp; type is, say, 
 `b.tl2` %-- meaning top/left, two-byte values %-- 
 the first coordinate would be accessed by a `b..top` 
@@ -120,7 +120,8 @@ might think to provide one such pair-type (or perhaps
 several distinguished only by byte-length), anticipating 
 that higher-level distinctions between conceptually 
 distinct but structurally isomorphic types 
-(like `makebox.row/column`/, x/y, width/height, and first/second).  
+(like `makebox.row/column`/, x/y, width/height, and first/second) 
+would be made by source code, not `VM; byte-code.  
 Ensuring that strong pair-types are never mismatched 
 would then be the responsibility of the compiler emitting 
 `VM; code, not the `VM; runtime.  Consider, however, that 
@@ -130,10 +131,10 @@ might, for example, allow for queries which
 invoke the rectangle-focused procedure mentioned 
 above (along the lines of `q.find images whose central third 
 rectangle color-averages` to nearly some given shade).  
-Assuming type-level distinctions such as x/y vs. width/height 
+Assuming type-level distinctions such as x/y versus width/height 
 are recognized by the query `i.language`/, then query 
 `i.evaluators` would of course at some stage ensure that 
-an x/y coordinate is not passed to a rectangle `q.constructor` 
+an x/y coordinate is not passed to a rectangle constructor 
 which expects width/height dimensions, say.
 `p`
 
@@ -157,7 +158,7 @@ for instance).
 `p.
 From this perspective, then, assume that a `VM; is 
 indeed designed to model `i.several` number-pair types.  
-This decision then immediately has implications 
+This decision immediately has implications 
 for the `i.operations` supported through 
 the `VM;, because some operations seem 
 intrinsic to managing paired quantities; for 
@@ -203,7 +204,7 @@ one of the two inputs is bit-shifted by different amounts).
 difference, gap ;;  Greater or lesser of the 
 two numbers; or, return the second subtracted from the first 
 (the `q.positive integer` variant would result always in a non-negative 
-output, mapping negative differences to zero) , 
+output, mapping negative differences to zero), 
 or `q.gap` between the two numbers as an absolute value (i.e., 
 maximum minus minimum).   
 
@@ -287,7 +288,7 @@ pertaining to the Bresenham's line
 between to points (i.e., the points drawn 
 for graphics displays approximating a smooth 
 Euclidean line, accommodating the restriction 
-to a rectangular pixel-grid).  Given 
+to a rectangular pixel-grid) `cite<HadiSutopo>;.  Given 
 two end-points and a single intermediate coordinate, 
 one might want to calculate the intersection 
 of the formers' Bresenham's line with the 
@@ -450,9 +451,9 @@ sense of Hadamard product; cf. Julia's
 again) `i.internally` within one pair.  
 For instance, there are three important 
 versions of, say, addition in a number-pair context: 
-given `xypair; there is `xypluss; for some scalar 
-`sval;, or `xyplusab; for pair `abpair;, 
-or (scalar) `xplusy; (the `q.inner` sum).
+given `xypair; there is `xypluss; (for some scalar 
+`sval;), or `xyplusab; for pair `abpair;, 
+or `xplusy; (the `q.inner` sum, a scalar result).
 `p`
 
 `p.
@@ -560,12 +561,12 @@ roles played by numeric types.  In the case of one-byte
 integers, for example, in some contexts the 
 full 0-255 range represents meaningful values (e.g., 
 color), whereas elsewhere only a subset of this 
-range is actually used.  A ready example is enumerations, 
+range is actually in effect.  A ready example is enumerations, 
 which might use `b.unsigned char`/s as the 
 base or `q.carrier` type but only define, say, 
 ten values.  Most instances of the underlying 
 type therefore do not match any enumerated value; 
-the `b.char` (i.e., 8-bit) type is used simply 
+the `b.char` (i.e., 8-bit) type is employed simply 
 because most systems do not have types smaller 
 than one byte (one cannot take the memory address 
 of `q.half a byte`/, for instance).  At the 
@@ -585,7 +586,7 @@ forget that the left-shift applied to
 `b.char` could result in `i.another` `b.char` and 
 therefore truncate bits on the left; the 
 `b.enum` instead must be cast to `i.int` (or whatever 
-type will encoded to shifted bits) even if the original 
+type will encode the shifted bits) even if the original 
 base type is, say `b.unsigned char`/.       
 `p`
 
@@ -621,9 +622,10 @@ the `XCSD; code (mentioned earlier) in some
 contexts recognizes 24 different directions (to accommodate 
 variations in even/odd pixel or region counts, where the center 
 in an image-partition might correspond to a line of 
-regions or to the gap between two regions).  Such direction-codes 
-are used in several calculations (mostly related to the 
-proximity of regions to an image center) where arithmetic 
+regions or to the gap between two regions).  The `XCSD; 
+format utilizes such direction-codes in 
+several calculations (mostly related to the 
+proximity of regions `visavis; an image center) where arithmetic 
 operations are performed on the underling numeric 
 value (e.g., mapping a direction to its nearest strict diagonal 
 counter-clockwise).  Insofar as numeric codes represent 
@@ -637,7 +639,7 @@ Modular integer-ranges can potentially be supported directly
 via a strong type system allowing programmers to explicitly 
 define a (distinct) type for integers modulo 24, say.  
 Alternatively, one might adopt something like `q.modular guarded` 
-arithmetic (and binary, e.g. shift) operations, where each 
+arithmetic (and binary, e.g., shift) operations, where each 
 operation could be given an extra parameter to serve as a 
 modular-arithmetic context (note that equally relevant 
 for image-analysis and other geometric contexts might be 
@@ -679,7 +681,7 @@ programmer is looping `i.up to` an integer maximum
 looping variable to `i.avoid` overflows; so 
 if a number `inum;, say, is to represent 
 one color-component and be used for a loop, 
-the algorithm might declare `inum; as a 
+the algorithm could declare `inum; as a 
 `i.short` (or a `i.signed short` to avoid 
 negative wraparound) since 256 (and -1) 
 then become expressible values, 
@@ -716,7 +718,7 @@ and more widely adopted.
 `p.
 In general, `VM; engineers have opportunities to identify 
 computationally similar but conceptually distinct 
-operations.  Consider a basic increment (`b.++`/) 
+operations.  Consider a basic increment (`sb.++`/) 
 operation: this may occur in a context where the range of 
 possible loop end-values (e.g., the size of a list) is 
 well below the maximum expressible integer of a relevant 
@@ -870,7 +872,7 @@ mostly `q.branchless` programming).  On the other hand,
 using a `q.bitmask` encoding would entail extra procedures 
 being implemented (for converting the 1-64 values to their 
 1-7 equivalents, perhaps via a `qtt.ffs`/, or `q.find first bit set` 
-operatio, almost equivalent to taking a base-2 logarithm). 
+operation, almost equivalent to taking a base-2 logarithm). 
 Moreover, relying on numeric values to ascertain 
 details through the enum %-- `q.on Wednesday` 
 is not a matter of testing one enum value against `i.Wednesday`/'s 

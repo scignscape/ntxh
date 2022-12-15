@@ -15,7 +15,7 @@ procedures (along with any other high-throughput
 domain, where highly optimized code in languages such as 
 `C; or `Cpp; is preferable for performance reasons).  
 In the current context I intend to focus however 
-in `VM; which are explicitly oriented toward 
+on `VM;s which are explicitly oriented toward 
 image-processing, where this specific problem-area 
 is a central design emphasis instead of one group 
 of foreign-function capabilities amongst others.  
@@ -955,12 +955,12 @@ provided as the centers of tierboxes, or `threebythree;s/`ninebynine;s.
 `subsection.An example image-processing pipeline`
 `p.
 Having defined several operations that could be exposed 
-by an XCSD-based image-processing component, 
+by an `XCSD;-based image-processing component, 
 the following discussion will outline how various 
 functions could be pieced together into a 
 larger workflow.  This summary will point to 
 steps in the pipeline wherein data-sharing 
-between the XCSD component and a host application 
+between the `XCSD; component and a host application 
 might be warranted, thereby serving as 
 concrete examples of how each side could 
 expose feature for interoperation.
@@ -984,16 +984,16 @@ to typical adjacent number-pairs.  Generalized to two
 dimensions, the same notion of discontinuity 
 works across different directions (up, right, down-left, etc.), 
 giving rise to a matrix of difference-measures, because 
-any pixel if `q.adjacent` to several others (eight 
+any pixel is `q.adjacent` to several others (eight 
 others, if we include both orthogonal and diagonal 
 directions).  However, quantifying discontinuity 
-by value-different only makes sense, intrinsically, 
+by value-difference only makes sense, intrinsically, 
 when there are just two values to compare.  Full-color 
-spectrums distort such measures; in the typical 
-`RGB; format colors can be compared among three 
+spectrums distort such measures.  In the typical 
+`RGB; format, colors can be compared along three 
 axes (red, green, and blue).  If adjacent pixels have 
 fairly large red differentials but small 
-differences in green and blue, should the measure of 
+differences in green and blue, say, should the measure of 
 their mutual difference be weighted more toward 
 the larger gap (the red) or the smaller gaps 
 (blue/green)?    
@@ -1011,13 +1011,13 @@ red or blue, fading to white and darkening to black
 at points of greater or lesser magnitude).  
 A simple way to reduce channels is, indeed, just 
 to take a grayscale version of the original image, 
-as if it were being viewed in an old black-and-white 
+as if it were an old black-and-white 
 movie.  The single channel thereby measures 
 color-intensity %-- how dark or light it is 
 %-- ignoring color-hue entirely.  This tactic 
-can discard potentially useful color information, 
+might discard potentially useful color information, 
 because very different colors can have 
-similar grayscale values; for instance, medium-red 
+similar grayscale values.  For instance, medium-red 
 and medium-blue would, if juxtaposed, strongly 
 suggest some ground-truth discontinuity, 
 but they would both map to almost indistinguishable 
@@ -1025,12 +1025,48 @@ grayscale values if they are similarly mid-range
 in intensity (neither dark nor light).   
 For these reasons, some image-processing 
 frameworks prefer alternative 
-channel-reduction techniques.
+channel-reduction techniques.`footnote.
+I admit that this outline is a little 
+oversimplistic.  Some grayscaling algorithms 
+are more sophisticated than simply averaging 
+out red/green/blue measures; there are 
+ways to incorporate information about 
+how our eyes see color, so that some 
+hues `q.feel` brighter or darker 
+`cite<MartinCadik>;, `cite<LaszloNeumann>;, 
+`cite<GiovaneRKuhn>;, `cite<LimIsa>;,
+`cite<NguyenHavlicek>;.  Equal 
+saturation amongst the three red/green/blue channels 
+does not yield equal psychological experience 
+of dark or light, and these differences can 
+be incorporated into `q.realistic` techniques 
+for color-to-gray conversions.  Also, even a 
+relatively small gap in gray-measure will be 
+detected by most Computer Vision algorithms, 
+e.g., to identify boundaries between different 
+image-segments.  So in some sense even 
+grayscale formats incorporate `i.some` 
+hue-data, indirectly.  Nonetheless, 
+differently-hued segments which have 
+similar psychological brightness-valience 
+will still be experienced as distinct 
+color-patches.  Likewise, small 
+grayscale difference may complicate 
+algorithms because it may be ambiguous 
+whether such differences result from 
+textural or light/shadow variation 
+within one relatively homogenous 
+color-patch or actual segment-partitioning.  
+In other words, even a more-refined 
+grayscaling algorithm is subject to 
+processing errors for similar reasons 
+to simpler gray-conversion formats. 
+`footnote`
 `p`
 
 
 `p.
-`lXCSD; is designed to support several 
+The `XCSD; format is designed to support several 
 alternative reductions to one-channel.  
 One tactic employed by `XCSD; code involves 
 `q.toroidal` color space, which is related 
@@ -1106,7 +1142,12 @@ like a disk, more in keeping with the toroid
 shape), with the goal being to derive a color-distance 
 metric which accommodates how empirical 
 texture and glare/shadow effects can alter 
-`i.apparent` color-distance.  
+`i.apparent` color-distance.  Whereas a 
+visual illustration of the global 
+`HSV; space would appear like a cylinder, 
+the resulting variation on `HSV; 
+results in something like a toroid 
+(hence a `q.toroidal` color model).
 `p`
 
 
@@ -1128,14 +1169,14 @@ tones.
 `p`
 
 `p.
-`lXCSD; then applies this color model to derive 
+Code for `XCSD; applies a toroidal model to derive 
 several channel-reduction strategies.  One 
 computation involves estimating a good 
-reference color typical of an images 
+reference color typical of an image's 
 `i.background`/, and another canonical 
 color (also called a `q.pole` in `XCSD;'s 
 code) for `i.foreground`/.  Via distance 
-from these colors, `XCSD; can compute a 
+from these colors, `XCSD; computes a  
 probability that any given color 
 belongs to a foreground-object or background-area.  
 This probability is a scalar quantity, so it 
@@ -1159,6 +1200,7 @@ to yield a one-channel reduction.
 `footnote` 
 `p`
 
+`input<probabilities>;
 
 `p.
 For the case-study workflow discussed in this 
@@ -1248,11 +1290,11 @@ blocks and cancel (white-out) all blocks
 that are not sufficiently close to the 
 foreground color.  These operations 
 manipulate the image so that the solid 
-blocks can acts as classifying bins, 
+blocks may act as classifying bins, 
 where the same transforms are then 
 applied to the key-point set, such that 
 each keypoint gets mapped to a specific 
-box, which may be labeled as either 
+box, which could be labeled as either 
 foreground or background.  The goal is 
 to test, first, that the keypoints are 
 indeed mostly found in the foreground 
@@ -1288,7 +1330,11 @@ color-distance locally we can focus on how
 far apart two nearby pixel's coloration 
 appears in the local context, without 
 considering the presence of other pixels elsewhere 
-in the image.  Multi-channel color distance 
+in the image.
+`p`
+
+`p.
+Multi-channel color distance 
 is complicated by the fact that distance-magnitudes 
 may take on different meanings in different 
 contexts; we might measure two colors as relatively 
