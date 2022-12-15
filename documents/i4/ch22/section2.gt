@@ -379,8 +379,14 @@ such that `threebythree; boxes represent one contiguous
 chunk, and can be accessed via raw pointers (rather than 
 copying from scanline-based data to temporary buffers); 
 then, on higher tiers, the same applies to 
-`ninebynine; and `twentysevenbytwentyseven; groupings.      
+`ninebynine; and `twentysevenbytwentyseven; groupings.   
+Figure~\ref{fig:xcsd-all} shows several 
+graphics which can be produced from `XCSD; images 
+summarizing some aspects of the `XCSD; format 
+and memory-layout.   
 `p`
+
+`input<xcsd>;
 
 `p.
 At the uppermost scale on this `q.tiered` system, the 
@@ -1274,6 +1280,7 @@ point `q.cloud` roughly distributed through
 the foreground. 
 `p`
 
+`input<features>;
 
 `p.
 Visual inspection suggests that the `BRISK; 
@@ -1332,6 +1339,8 @@ appears in the local context, without
 considering the presence of other pixels elsewhere 
 in the image.
 `p`
+
+`input<HOUGH>;
 
 `p.
 Multi-channel color distance 
@@ -1392,5 +1401,9 @@ within a pipeline overall (e.g.,
 helping to produce a measure of confidence 
 in the pipeline results).
 `p`
+
+`input<manual>;
+
+`subsection.Interactive workflows and assessments`
 
 
