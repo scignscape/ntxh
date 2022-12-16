@@ -1,0 +1,774 @@
+
+
+`section.An example image-processing\\pipeline`
+`p.
+Having defined several operations that could be exposed 
+by an `XCSD;-based image-processing component, 
+the following discussion will outline how various 
+functions could be pieced together into a 
+larger workflow.  This summary will point to 
+steps in the pipeline wherein data-sharing 
+between the `XCSD; component and a host application 
+might be warranted, thereby serving as 
+concrete examples of how each side could 
+expose feature for interoperation.
+`p`
+
+
+`p.
+One premise of `XCSD; is that conventional formulae 
+for converting images to grayscale are often 
+flawed.  The rationale for analyzing `q.grayed` 
+versions of images %-- rather than the full-color 
+originals %-- is that most statistical analyses 
+rely on color-discontinuities.  Analyses look 
+for points in an image where there is an above-average 
+gap between two adjacent pixels.  Discontinuity, however, 
+is an intrinsically `q.scalar` or one-valued concept.  
+For example, given a sequence of numbers, a `q.spike` in 
+value would correspond to a point where two sequential 
+numbers have an unusually large difference, compared 
+to typical adjacent number-pairs.  Generalized to two 
+dimensions, the same notion of discontinuity 
+works across different directions (up, right, down-left, etc.), 
+giving rise to a matrix of difference-measures, because 
+any pixel is `q.adjacent` to several others (eight 
+others, if we include both orthogonal and diagonal 
+directions).  However, quantifying discontinuity 
+by value-difference only makes sense, intrinsically, 
+when there are just two values to compare.  Full-color 
+spectrums distort such measures.  In the typical 
+`RGB; format, colors can be compared along three 
+axes (red, green, and blue).  If adjacent pixels have 
+fairly large red differentials but small 
+differences in green and blue, say, should the measure of 
+their mutual difference be weighted more toward 
+the larger gap (the red) or the smaller gaps 
+(blue/green)?    
+`p`
+
+`p.
+To head off these sorts of questions, Computer Vision 
+algorithms usually perform a `q.channel reduction,` 
+wherein the three channels of a full-color image 
+are reduced to one single channel (which can be 
+visualized as an image `q.in gray,` although 
+in principle one-channel graphics can be 
+rendered with any one single color, such as 
+red or blue, fading to white and darkening to black 
+at points of greater or lesser magnitude).  
+A simple way to reduce channels is, indeed, merely 
+to take a grayscale version of the original image, 
+as if it were an old black-and-white 
+Polaroid.  The single channel thereby measures 
+color-intensity %-- how dark or light it is 
+%-- ignoring color-hue entirely.  This tactic 
+might discard potentially useful color information, 
+because very different colors can have 
+similar grayscale values.  For instance, medium-red 
+and medium-blue would, if juxtaposed, strongly 
+suggest some ground-truth discontinuity, 
+but they could both map to almost indistinguishable 
+grayscale values if they are similarly mid-range 
+in intensity (neither dark nor light).   
+For these reasons, some image-processing 
+frameworks prefer alternative 
+channel-reduction techniques.`footnote.
+I admit that this outline is a little 
+oversimplistic.  Some grayscaling algorithms 
+are more sophisticated than simply averaging 
+out red/green/blue measures; there are 
+ways to incorporate information about 
+how our eyes see color, so that some 
+hues `q.feel` brighter or darker 
+`cite<MartinCadik>;, `cite<LaszloNeumann>;, 
+`cite<GiovaneRKuhn>;, `cite<LimIsa>;,
+`cite<NguyenHavlicek>;.  Equal 
+saturation amongst the three red/green/blue channels 
+does not yield equal psychological experience 
+of dark or light, and these differences can 
+be incorporated into `q.realistic` techniques 
+for color-to-gray conversions.  Also, even a 
+relatively small gap in gray-measure will be 
+detected by most Computer Vision algorithms, 
+e.g., to identify boundaries between different 
+image-segments.  So in some sense even 
+grayscale formats incorporate `i.some` 
+hue-data, indirectly.  Nonetheless, 
+differently-hued segments which have 
+similar psychological brightness-valence 
+will still be experienced as distinct 
+color-patches.  Likewise, small 
+grayscale difference may complicate 
+algorithms because it may be ambiguous 
+whether such differences result from 
+textural or light/shadow variation 
+within one relatively homogeneous 
+color-patch or actual segment-partitioning.  
+In other words, even a more-refined 
+grayscaling algorithm is subject to 
+processing errors for similar reasons 
+to simpler gray-conversion formats. 
+`footnote`
+`p`
+
+
+`p.
+The `XCSD; format is designed to support several 
+alternative reductions to one-channel.  
+One tactic employed by `XCSD; code involves 
+`q.toroidal` color space, which is related 
+to `HSV;.  A toroid is a solid torus; topologically, a 
+torus is the result of one circle rotating around a 
+central point, tracing its own circular path in the 
+process.  A point on a torus surface can therefore be 
+identified by two angles, one measuring how 
+far the `q.rotating` circle has gone around 
+its anchor point, and one fixing a spot 
+on the rotating circle itself (of course, 
+we initially have to choose an angle to 
+represent `q.zero` both on the surface 
+and at the center %-- the latter axis would 
+point out in space away from the center of the 
+torus `q.hole,` like a rod threaded through 
+some bagels on which they hang by their centers).  
+In `HSV;, the `i.hue` dimension is typically 
+understood as circle-like (embodying the 
+`q.color wheel` whose opposing colors are 
+green/magenta and blue/yellow).  For any 
+given hue, the colors generated by 
+varying `q.value` and `q.saturation` in the 
+`HSV; model naturally form a triangle, 
+with the pure color fading to white along 
+one side, and decaying to black on another, 
+while the white-to-black side spans 
+progressively darker shaded of gray.  Near the 
+midpoint of the triangle would be a `q.muddied` 
+version of the pure color, appearing as the 
+blend of that color with grayish tones.   
+`p`
+
+
+`p.
+More broadly %-- setting aside computational 
+image-processing for a moment and considering 
+human vision %-- people appear to experience 
+color `q.thematically,` rather than purely 
+chromatically, in that we are receptive 
+to the optical effects through which 
+color-shades become visible as well as to 
+actual color tones.  In nature, it is rare 
+to encounter either solid-hue patches or 
+quality pigmentation; more common are surfaces 
+that reflect light with some scatter 
+and inconsistency, altering 
+the primary color-value and modulating apparent 
+shades as the eye scans laterally.  
+At the same time, this is an intrinsic 
+feature of visible appearance %-- it is 
+actually oversimplistic to describe surface 
+appearance `i.only` as a matter of color 
+in terms of chromatic channels (red/green/blue, etc.).  
+Vision is about obtaining information optically, 
+and all facets of light waves' interaction 
+with objects are candidate data-sources.  
+`p`
+
+
+`p.
+If a surface's primary color is red, say, 
+we would not expect that object to 
+appear uniformly and smoothly red, like 
+a half-Polish/half-Indonesian flag.  
+Instead, `q.redness` would be phenomenologically 
+experienced as a distribution of 
+relatively reddish tones, shading to black/white 
+or variants (browns, grays) suggesting 
+shadow, illumination, and the muddying 
+effects of rough (material) texture.  
+Collectively these are sometimes 
+called `q.textural effects` and 
+analyzed through Computer Vision through 
+texture analysis `cite<MihranTuceryan>;, 
+`cite<ChadwickKentridge>;, `cite<XiaoyingGuo>;, 
+`cite<MinglongXue>;, `cite<RushiLan>;, 
+`cite<MirjaliliHardeberg>;, 
+`cite<ShinyaNishida>;, `cite<DavitGigilashvili>;,
+`cite<WangYong>;, `cite<WendtFaul>;, `cite<MaikoMILie>;, 
+`cite<CsabaIstvanKiss>;, `cite<TakeshiUejima>;, 
+`cite<LiuAldrich>;, `cite<JanaZujovic>;.  Because the 
+material coarseness (or, inversely, shininess) 
+is an intrinsic physical property of 
+objects %-- akin to red/green/blue color 
+%-- effects such as texture and glare/shadow 
+may even be modeled via distinct 
+channels, alongside chromatic tones 
+themselves (other potential 
+supplemental channels may be 
+glossiness, also called `q.specularity`/, and transparency).  
+Image-analysis cannot examine physical 
+materials directly, of course, 
+so texture-related qualities need 
+to be inferred computationally, 
+and color-models might be evaluated 
+in terms of how efficiently 
+they feed algorithms which address 
+these optical dimension of color-appearance.
+`p`
+
+
+`p.
+In practice %-- returning to 
+variations on the `HSV; model %-- most real-life colors do not appear with 
+pure hues; instead, because of glare/shadow effects 
+and/or material texture (which causes light 
+to scatter off images, so that the visible 
+color at given points has a grayer appearance 
+than the underlying pigmentation would suggest) 
+a patch of color (representing one evenly-colored 
+surface) would typically span several 
+`HSV; triples (with varying amounts of white, black, 
+or gray mixing with the primary color).  
+From this observation we can envision an 
+`HSV; triangle being centered at a midpoint 
+between pure gray and the pure primary hue, 
+a point from which all other parts of the 
+triangle can be defined in polar coordinates 
+(i.e., as a rotation away from a line 
+between the pure hue and pure gray).  This 
+rotation is `i.additional` to the hue's own 
+rotation in the color-wheel, so the overall 
+color space is defined by two angular coordinates, 
+which is why the space could be described as a 
+toroid.`footnote.
+Unlike a toroid proper, such a space has a 
+`q.pure` white-to-black line which yields identical 
+colors for every hue, which distorts color-distances 
+in ways that do not match a toroid shape; however, 
+actual color-distance formulae within the toroid 
+should be weighted anyhow, so the internal geometry 
+does not match a toroid in Euclidean space to begin with.
+`footnote`
+`p`
+
+`p.
+Given this construction, we can define a color-comparison 
+metric in terms of two rotation angles and one 
+radius length (the `q.rho` measuring distance 
+from a neutral grayish manifestation of the pure color, 
+with larger rho values being pure-color, pure-black, 
+or pure-white).  By weighting these parameters 
+the `HSV; triangle could be distorted (into something 
+like a disk, more in keeping with the toroid 
+shape), with the goal being to derive a color-distance 
+metric which accommodates how empirical 
+texture and glare/shadow effects can alter 
+`i.apparent` color-distance (see also 
+`cite<HanliZhao>;).  Whereas a 
+visual illustration of the global 
+`HSV; space would appear like a cylinder, 
+the resulting variation on `HSV; 
+results in something like a toroid 
+(hence a `q.toroidal` color model).
+`p`
+
+
+`p.
+An assumption behind this model is that 
+because even `q.solid` colors (`visavis; an 
+object's surface pigmentation) will appear 
+sometimes lighter, darker, or grayer,  
+these textural/lighting effects should be 
+compensated for when computing color-distance.  
+Exactly how to weight toroidal parameters 
+is a matter for future research;  
+the existing `XCSD; implementation 
+employs a straightforward balancing 
+mechanism which tries to compress distances 
+for near-black and near-white shades and 
+expand distances for purer (high-value, high-saturation) 
+tones.    
+`p`
+
+`p.
+Code for `XCSD; applies a toroidal model to derive 
+several channel-reduction strategies.  One 
+computation involves estimating a good 
+reference color typical of an image's 
+`i.background`/, and another canonical 
+color (also called a `q.pole` in `XCSD;'s 
+code) for `i.foreground`/.  Via distance 
+from these colors, `XCSD; computes a  
+probability that any given color 
+belongs to a foreground-object or background-area.  
+This probability is a scalar quantity, so it 
+serves as a reduction to one-channel, one 
+which is typically noticeably different 
+from conventional grayscale.`footnote.
+The probability 
+metric is actually a combination of two 
+other values, difference `i.from` foreground 
+and from background, with the assumption 
+that pixels `i.closer` to the foreground color 
+and `i.further` from the background pole are 
+the most likely actually to be in the foreground 
+%-- but unless the two poles are actually 
+at a maximum inter-hue distance, which is 
+unlikely for real-world pictures, the two 
+distance-from-pole parameters can varying
+independently, which is why they must be 
+averaged together (arithmetically inverting one of the pair) 
+to yield a one-channel reduction.
+`footnote` 
+`p`
+
+`input<probabilities>;
+
+`p.
+For the case-study workflow discussed here, 
+`XCSD; estimates foreground/background 
+poles by assuming that foreground colors are 
+likely to be featured near the center of an 
+image, and background colors closer to the 
+margins (particularly on top).  Such heuristic 
+may not comport with all images, but it is 
+a good place to start.  The workflow then 
+leverages `XCSD;'s `q.subdivision` layout to 
+grab dominant colors from histograms local 
+to tierboxes both near the image-center 
+and top-periphery, averaging out these 
+two cases to obtain working foreground/background 
+poles.`footnote.
+A variation of this pipeline would 
+allow human users to fine-tune this selection 
+manually, by selecting specific tier-boxes and 
+examining their histograms.  It is helpful 
+to support interactive 
+image-processing along these lines, even 
+if only to fine-tune workflows 
+eventually designed to run without 
+human input (e.g., users might 
+engage interactive methods to 
+finalize parameters for an image 
+series in the context of one 
+or several sample images, then 
+fix those parameters for non-guided 
+analyses extended to the series as a whole). 
+Here, though, the discussion will 
+stay focused on fully-automated 
+workflows; interactive options will 
+be touched on at the end of the section.
+`footnote`
+`p`
+
+
+`p.
+Having assigned foreground/background probability 
+to all pixels, this workflow then reifies the 
+probability scalar as a channel and 
+can invoke different feature detectors.  
+The illustrations here are based on a 
+`BRISK; (Binary Robust Invariant Scalable Keypoints) 
+detector `cite<StefanLeutenegger>;, which yields a fairly extensive 
+set of keypoints almost all of which are 
+positioned within regions of the image 
+which, on visual inspection, clearly belong to the 
+foreground.
+`p`
+
+`subsection.From Keypoints to Superpixels`
+`p.
+Once useful keypoints have been identified, 
+most pipelines will then generalize keypoints 
+to image areas, either enclosing or bounded 
+by relevant keypoints.  In the current 
+workflow, a superpixel segmentation (see, e.g., 
+`cite<YiXuanZhan>;, `cite<VRJyothish>;, `cite<SifanJi>;, 
+`cite<RadhakrishnaAchanta>;, `cite<AntonioRubio>;, 
+`cite<NannanLiao>;)
+of the image is performed and superpixels which 
+encompass some of the `BRISK; keypoints are 
+identified; because the keypoints are localized 
+near the foreground, the sum of keypoint-containing 
+superpixels then serves as a reasonable 
+approximation of the foreground as a whole.  
+This is not the only way to use zero-dimensional 
+keypoints; a more sophisticated analysis 
+might consider keypoint attributes so as 
+to more rigorously screen for those in the 
+foreground proper.`footnote.
+I.e., attempt to 
+find statistical signatures strongly 
+suggesting that a given keypoint is indeed 
+part of the region's foreground 
+(or near the foreground/background boundary, 
+in which case such boundary-keypoints 
+could serve as a scaffolding with which 
+to isolate the foreground).
+`footnote`  For the sake of discussion, however, consider the 
+more immediate calculation where the 
+overall set of keypoints is treated as a 
+point `q.cloud` roughly distributed through 
+the foreground. 
+`p`
+
+`input<features>;
+
+`p.
+Visual inspection suggests that the `BRISK; 
+results do indeed match the foreground 
+well, but the workflow will attempt to 
+calculate this result systematically.  
+To do so, the code loads a 
+data structure (defined in an `XCSD;-specific 
+language) which describes a series 
+of image-transforms that rotate and slightly 
+skew the image, then blur the 
+image to solid-color `twentysevenbytwentyseven; 
+blocks or boxes, and cancel (white-out) all boxes 
+that are not sufficiently close to the 
+foreground color.  These operations 
+manipulate the image so that the solid 
+blocks may act as classifying bins, 
+where the same transforms are then 
+applied to the key-point set, such that 
+each keypoint gets mapped to a specific 
+box, which could be labeled as either 
+foreground or background.  The goal is 
+to test, first, that the keypoints are 
+indeed mostly found in the foreground 
+(i.e., most keypoints map to a foreground 
+bin) and also that the keypoints are 
+distributed relatively thoroughly 
+across the foreground (i.e., most 
+foreground bins include at least one 
+keypoint).
+`p`
+
+`p.
+In combination, the 
+two statistics just outlined confirm that the 
+aggregate of keypoints %-- particularly 
+when extended to the containing superpixels 
+%-- approximates the foreground, both 
+by `i.including` most of the foreground 
+and by `i.excluding` most of the background.  
+Such assessments can be explicity 
+quantified by measuring the 
+percentage of keypoints which get 
+mapped to a foreground (not background) 
+box, and also the percentage of 
+foreground boxes with one (or more, 
+above some desired threshold) keypoint 
+%-- the higher both percentages, the 
+more effective the workflow.
+`p`
+
+`p.
+As a final detail, a different `XCSD; distance 
+metric is employed to calculate 
+`q.Hough` lines %-- one form of line-detector 
+`cite<GideonKanjiDamaryam>;,   
+`cite<PapushaHo>;, `cite<MajiMalik>;, 
+`cite<XinmingWang>;, 
+`cite<JianpingWu>;, `cite<MingMingCheng>; 
+%-- so as to derive a good angle with which 
+to rotate the initial image.  Here `XCSD; 
+dispenses with one-channel reduction and 
+instead considers `q.local` color distance, 
+considering color variation within a relatively 
+small (e.g., `sevenbyseven;) area.  
+Unlike converting a full image 
+to grayscale (or any other one-channel reduction), 
+in which a useful color-distance metric should 
+apply across the image, when measuring 
+color-distance locally we can focus on how 
+far apart two nearby pixel's coloration 
+appears in the local context, without 
+considering the presence of other pixels elsewhere 
+in the image.
+`p`
+
+`input<HOUGH>;
+
+`p.
+Multi-channel color distance 
+is complicated by the fact that distance-magnitudes 
+may take on different meanings in different 
+contexts; we might measure two colors as relatively 
+far apart and then find a third color which is 
+equally distance from the original two, 
+leading to questions of how the respective 
+distances should be ordered.  However, consider 
+the border between two different image-segments: 
+there will in general be relatively 
+little color-variation `i.inside` each segment, 
+but a notable differences between sample 
+colors in one segment and in the other. 
+Near the border, then, color-variation on 
+either side should be reduced, but cross-border 
+comparisons will be much larger.  So long as 
+we only consider local neighborhoods 
+where the latter cross-border distance 
+clearly outpaces intra-segment color distances, 
+we can set aside the question of how 
+local distances compare to `q.global` color 
+distance `visavis; the image as a whole.  
+Applying this metric, consequently, we can 
+isolate pixels that appear to lie near 
+segment-boundaries.
+`p`
+
+`p.
+In the context of line-detection, this latter 
+strategy for producing a single image-channel 
+%-- measuring local-neighborhood inter-pixel 
+color difference %-- can potentially 
+enable inter-segment lines to stand out 
+clearly.  For the case-study described here, 
+all Hough-detected lines have almost identical 
+angles of inclination (they appear parallel 
+when overlaid on a base image), which is a 
+good indicator that the average of the Hough-lines 
+gives an angular orientation for the image as a 
+whole.  If so, noteworthy boundaries 
+or other one-dimensional features tend to be 
+aligned along a specific angle (or at right 
+angles to that) so that rotating the image by 
+that angle allows those prominent features 
+to be oriented parallel to the image sides 
+%-- which, in turn, allows the image to be 
+partitioned into orthogonal boxes for 
+purposes such as keypoint-classification.  
+In this example, such classification serves 
+to assess the quality of the prior pipeline 
+steps (`BRISK; keypoints plus superpixels), 
+rather than being a further analytic 
+step proper, but such summary evaluation 
+can play a legitimate functional role 
+within a pipeline overall (e.g., 
+helping to produce a measure of confidence 
+in the pipeline results).
+`p`
+
+`input<manual>;
+`input<tools>;
+
+`p.
+The workflow just described is fully automated, 
+but it still belongs in the context 
+of an overall interactive software environment.  
+For instance, the analyses calculate numerous 
+intermediate parameters (canonical foreground 
+color, global angular orientation) whose correctness 
+affects the accuracy of the whole process, so they 
+should be monitored.  Any workflow can likewise 
+be compared against other workflows, either using 
+similar methods but different specific conventions 
+(e.g., different channel-reduction formulae) or 
+very different methods.  Initiating and then 
+contrasting `i.multiple` pipelines is an interactive 
+phenomenon which must be supported at the application level.  
+`p`
+
+`subsection.Interactive workflows and assessments`
+`p.
+Most image-processing algorithms are designed to 
+be fully automated, proceeding without user input.  
+However, techniques such `q.interactive segmentation` 
+(plus comparing `i.different` techniques, as just cited) 
+are an exception, relying on human 
+guidance to fine-tune a workflow's behavior.  
+There are several scenarios where an interactive 
+approach is useful, including training data 
+for subsequent automated processes which involve 
+machine learning, establishing parameters 
+for workflows are mostly automated, achieving 
+greater performance for image-series that are 
+elude most Computer Vision methods, and 
+developing protocols for testing the 
+accuracy of automated methods.  Whatever 
+the specific rationale, interactive workflows 
+require more complex application-level support 
+than automated ones, because users need to 
+act on image-graphics and workflow data through 
+`GUI;s.  This user-interface dimension 
+implies that interactive image-analysis 
+presents a representative use-case for general themes 
+in software engineering (including `VM;s). 
+`p`
+
+
+`p.
+To illustrate, consider a fairly simple 
+interactive workflow which could be juxtaposed 
+with the automated workflow outlined above.  
+Our goal is to isolate the copper-colored 
+foreground from a gray background and 
+measure the relative size of the foreground.  
+Unlike the automated process, we can proceed 
+without special mathematics (matrices 
+or Gaussian kernels) or attempting to isolate 
+the foreground with some level of detail %-- 
+we only want to get an approximate cover 
+for the foreground (what is sometimes 
+called an `q.object proposal` 
+`cite<JordiPontTuset>;, `cite<ZitnickDollar>;,
+`cite<ChanRiek>;, `cite<ZhangTorr>;, 
+`cite<KrahenbuhlKoltun>;, `cite<MingliangChen>;, 
+`cite<ZequnJie>;, `cite<BumsubHam>;, 
+`cite<LuShapiro>;, `cite<YuZhou>;).  If there is 
+sufficient and consistent background/foreground 
+color-difference we can take color alone 
+as a good indicator of foreground-probability.  
+The automated workflow tried to estimate 
+this probability without human intervention, 
+but in an interactive session users could 
+manually identify representative foreground and 
+background color, perhaps via a `GUI; color-picker 
+(which reads the color under the cursor 
+when clicking via a mouse, after the user 
+signals an intent to temporarily apply the 
+mouse-press in this manner).  This step represents 
+one parameter influencing the workflow's 
+behavior (or two, if users select both 
+foreground and background shades) and also 
+one interactive modality that must be 
+programmed into a `GUI;.    
+`p`
+
+
+`p.
+Given a selected foreground color, all pixels 
+within some specific color-difference (this is another 
+detail that may be set interactively %-- how 
+close must that difference be and via what 
+formula to calculate it) are mapped to the 
+foreground color and all others to the 
+background, resulting in a two-color image.  
+This may not actually yield an isolated foreground, 
+however, because the foreground-classified pixels 
+could be scattered without a well-defined shape.  
+To counter this, we can segment the image into 
+boxes, treating each entire box as foreground 
+or background depending on whether the average 
+color within that box fits within the 
+specific foreground-difference.
+`p`
+
+`p.
+In order for boxes to align with the foreground shape %-- rather 
+than straddle both foreground and background, 
+cut through by the boundary between them 
+%-- we might start the workflow 
+by rotating the image, so that most lines of 
+the foreground, to the degree possible, run parallel 
+to the sides of the image.  This is another 
+varying parameter %-- how much to rotate 
+any specific image %-- and also another 
+feature for the interactive `GUI;.  As shown 
+in Figure~`ref<fig:HOUGH-a>;, the `XCSD; code 
+implements such a requirement through a 
+rhombus-shaped annotation that users can 
+register as a rotation-instruction (there 
+is also an option to pair the rotation with 
+skew or shear actions, further 
+aligning foreground-boundaries to 
+horizontal/vertical axes).  The `GUI; walks 
+users through steps of enacting a rotation, 
+converting the granular pixel-data to 
+coarse `twentysevenbytwentyseven; boxes, testing each 
+box for color-distance from the selected 
+foreground, and then mapping each box 
+to either the foreground or background color.         
+`p`
+
+`p.
+The last steps in this demo workflow are to 
+isolate the foreground proper from imprecise 
+pieces, perhaps image anomalies or perhaps 
+indeterminate boxes which actually straddle 
+the foreground/background line.  Again, the 
+goal is not to neatly delineate the foreground 
+but simply to gather a collection of medium-scale 
+boxes that approximate its size and shape.  
+We therefore want to include only boxes that 
+piece together coherently %-- forming lines 
+and areas, rather than individual foreground-boxes 
+dispersed within the background.  This implies a 
+requirement that boxes be filtered out unless 
+they form one-dimensional chains or two-dimensional 
+rectangle where, for example, there should 
+be at least three consecutive boxes in a straight 
+line for them to be finally classified 
+as foreground.  The specific thresholds 
+for this filter are a further workflow-parameter 
+and a further detail that users might set 
+interactively.  With this final piece of 
+information, the program can filter extraneous 
+pseudo-foreground boxes and sum up the 
+areas of the boxes that remain, yielding 
+an approximate measure of the foreground's 
+extent relative to the overall image.
+`p`
+
+
+`p.
+This is a fairly coarse set of algorithms, 
+which may or may not yield usable results 
+when deployed against real-world images.  
+However, even if more sophisticated 
+methods (such as line- or keypoint-detectors) 
+are ultimately employed instead, the 
+interactive workflow just outlined could still 
+be useful for preliminary experimentation 
+with an image series.  Similarly, the 
+`i.evaluation` of the automated workflow 
+described earlier can proceed via a 
+series of image-transformations constructed 
+via the interactive workflow.  Whereas the 
+latter workflow is designed to `i.calculate` 
+the foreground-area by rotating and reducing 
+the image to a two-color, coarse-boxed 
+simplification, the evaluation performs 
+similar steps so as to yield a binning  
+classification (the foreground/background 
+boxes becomes bins into which keypoints 
+are sorted).  As this example suggests, an 
+interactive workflow can provide `i.assessment` 
+of automated workflows even if the goal 
+is for Computer Vision operations to run 
+without human input.  Such evaluations 
+could help ensure the accuracy 
+of automated pipelines and enable engineers 
+to identify which image-processing 
+tactics and which workflow-parameters 
+yield the best results for a given image-series.
+`p`
+
+
+`p.
+For an image-processing environment 
+to support interactive workflows, 
+it must implement multiple 
+`GUI; and event-handling requirements, 
+typically ones that are not addressed 
+by Computer Vision libraries themselves 
+(such as `OpenCV;).  Even the 
+mathematically simplistic workflow reviewed 
+here necessitates a number of special-purpose 
+`GUI; controls, such as a color-picker, a 
+tool for image-annotations (rhombus-shaped 
+in particular, to get images' angular orientation), 
+dialogs for setting thresholds and parameters 
+on image-difference and criteria for filtering 
+morphologically non-cohering foreground 
+boxes, and controls for reporting pipeline/calculation 
+results, graphically and/or numerically.  
+Other `GUI; controls come into play when interactive 
+workflows are adopted for evaluating 
+automated pipelines (see Figure~`ref<fig:HOUGH-all>;, 
+especially `ref<fig:HOUGH-a>; and `ref<fig:HOUGH-b>;).  
+`p`
+
+
