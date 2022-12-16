@@ -717,7 +717,7 @@ while its architectural plans are still being
 finalized, and CyberPhysical sensors might  
 track actual energy use post-occupancy (which 
 in turn evaluates the accuracy of the initial 
-simulations). 
+simulations) `cite<JRio>;, `cite<TheilerSmarsly>;. 
 `p`
 
 
@@ -735,7 +735,9 @@ constructions, which in turn is subject to analysis
 by special-purpose software components which 
 simulate air-flow, air quality, energy use, and 
 related metrics that collectively quantify 
-building efficiency.  Although spatial 
+building efficiency `cite<RafaelHorn>;, 
+`cite<JamesODonnell>;,
+`cite<RVerstraeten>;.  Although spatial 
 relations among architectural elements 
 are obviously significant factors in these 
 simulations, such analyses require additional 
@@ -760,8 +762,13 @@ attributes within `GIS; data layers.
 Functional networks overlaid on `GIS; 
 terrain can be analyzed much like 
 structured systems within architectural 
-space.  As a concrete example, consider 
-hydrology: indeed, I'll continue the 
+space `cite<ParkYang>;, 
+`cite<AhlawatSah>;, `cite<LinlinZhao>;.  As a concrete example, consider 
+hydrology and 
+`q.hydroinformatics` 
+`cite<MarkRandall>;, `cite<EhsanShafiee>;, `cite<JundeChen>;,
+`cite<ShaunHowell>;, `cite<PraveenKumar>;,
+`cite<ThomasHies>; .  Indeed, I'll continue the 
 earlier case-study of Ukrainian 
 reconstruction.  It has been well-documented 
 that the 2022 war crippled the country's 
