@@ -1106,8 +1106,79 @@ version of the pure color, appearing as the
 blend of that color with grayish tones.   
 `p`
 
+
 `p.
-In real life, most colors do not appear with 
+More broadly %-- setting aside computational 
+image-processing for a moment and considering 
+human vision %-- people appear to experience 
+color `q.thematically`/, rather than purely 
+chromatically, in that we are receptive 
+to the optical effects through which 
+color-shades become visible as well as to 
+actual color tones.  In nature, it rare 
+to encounter either solid-hues patches or 
+quality pigmentation; more common are surfaces 
+that reflect light with some scatter 
+and inconsistency, altering 
+the primary color-value and modulating apparent 
+shades as the eye scans laterally.  
+At the same time, this is an intrinsic 
+feature of visible appearance %-- it is 
+actually oversimplistic to describe surface 
+appearance `i.only` as a matter of color 
+in terms of red/green/blue or other 
+chromatic channels.  The point of 
+vision is to obtain information optically, 
+and all facets of light waves' interaction 
+with objects are candidate data-sources.  
+`p`
+
+
+`p.
+If a surface's primary color is red, say, 
+we would not expect that object to 
+appear uniformly and smoothly red, like 
+a half-Polish/half-Indonesian flag.  
+Instead, `q.redness` would be phenomenologically 
+experienced as a distribution of 
+relatively reddish tones, shading in black/white 
+or variants (browns, grays) suggesting 
+shade, illumination, and the muddying 
+effects of rough (material) texture.  
+Collectively these are sometimes 
+called `q.textural effects` and 
+analyzed through Computer Vision through 
+texture analysis `cite<MihranTuceryan>;, 
+`cite<ChadwickKentridge>;, `cite<XiaoyingGuo>;, 
+`cite<MinglongXue>;, `cite<RushiLan>;, 
+`cite<MirjaliliHardeberg>;, 
+`cite<ShinyaNishida>;, `cite<DavitGigilashvili>;,
+`cite<WangYong>;, `cite<WendtFaul>;, `cite<MaikoMILie>;, 
+`cite<CsabaIstvanKiss>;, `cite<TakeshiUejima>;, 
+`cite<LiuAldrich>;, `cite<JanaZujovic>;.  Because the 
+material coarseness (or, inversely, shininess) 
+is an intrinsic physical property of 
+objects %-- akin to red/green/blue color 
+%-- effects such as texture and glare/shadow 
+can even be modeled via distinct 
+channels, alongside chromatic tones 
+themselves (other potential 
+supplemental channels may be 
+glossiness, also called `q.specularity`/, and transparency).  
+Image-analysis cannot examine physical 
+materials directly, of course, 
+so texture-related qualities need 
+to be inferred computationally, 
+and color-models can be evaluated 
+in terms of how efficiently 
+they feed algorithms which address 
+these optical dimension of color-appearance.
+`p`
+
+
+`p.
+In practice %-- returning to 
+variations on the `HSV; model %-- most real-life colors do not appear with 
 pure hues; instead, because of glare/shadow effects 
 and/or material texture (which causes light 
 to scatter off images, so that the visible 
@@ -1148,7 +1219,8 @@ like a disk, more in keeping with the toroid
 shape), with the goal being to derive a color-distance 
 metric which accommodates how empirical 
 texture and glare/shadow effects can alter 
-`i.apparent` color-distance.  Whereas a 
+`i.apparent` color-distance (see also 
+`cite<HanliZhao>;).  Whereas a 
 visual illustration of the global 
 `HSV; space would appear like a cylinder, 
 the resulting variation on `HSV; 
@@ -1323,6 +1395,10 @@ and by `i.excluding` most of the background.
 As a final detail, a different `XCSD; distance 
 metric is employed to calculate 
 `q.Hough` lines %-- one form of line-detector 
+`cite<GideonKanjiDamaryam>;,   
+`cite<PapushaHo>;, `cite<MajiMalik>;, 
+`cite<XinmingWang>;, 
+`cite<JianpingWu>;, `cite<MingMingCheng>; 
 %-- so as to derive a good angle with which 
 to rotate the initial image.  Here `XCSD; 
 dispenses with one-channel reduction and 
