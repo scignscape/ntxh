@@ -1,4 +1,425 @@
 `section.Conclusion`
+
+`p.
+Confirmation bias manifests 
+itself in different ways.  While 
+scientific consensus should not 
+be casually flounted, this maxim does 
+not legitimate bias `i.in favor` of a 
+status-quo.  Skepticism should be 
+balanced, prepared to question 
+counter-paradigmatic arguments but also 
+to flag when hypotheses may be 
+perpetuated more by force of habit 
+than substantial supporting evidence.  
+Even dog-loving experts such as Berns, 
+for example, have proposed (in the 
+recent past) that dogs do not associate 
+their names with themselves.  Stella 
+and Bunny videos dramatically suggest 
+the opposite: they both on occasion 
+sound out their name in consort 
+with follow-up behaviors that would 
+be hard to explain `i.without` 
+assuming that they know what `q.Stella` 
+and `q.Bunny` means.  At some level 
+we reach a threshold where 
+perpetuating older assessments 
+of dogs' limitations carries 
+`i.less` evidential warrant than revising 
+them.  This applies to self-awareness, 
+and also, quite probably, to issues 
+such as whether dogs understand 
+noun/verb distinctions or multi-word 
+phrases.`footnote.
+Granted, we might speculate that 
+some dogs are more inclined to 
+`q.learn` human language.  It is 
+often said that `i.canis familiaris` 
+shows a wider morphological range 
+%-- not least size-variation %-- than 
+any other species on the planet 
+(amongst adult individuals), and 
+some dogs are faster than others, 
+stronger, more or less interested in 
+different activities (fetching, chasing, 
+herding, guarding), so it seems 
+to reason that there could be 
+similar variation in dogs' ability 
+or motivation to mimick human 
+speech.  It is still an important 
+scientific insight, however, if 
+we accept that only a small 
+percentage of dogs can achieve 
+a level of linguistic understanding 
+comparable to Bunny or Stella.  Dogs 
+who may not evince linguistic 
+intelligence presumably focus 
+their attention elsewhere (as with people, 
+less proficiency in one area may 
+be balanced by more proficiency 
+somewhere else).  A therapy or 
+seeing-eye dog probably reveals 
+equal intelligence to Stella and 
+Bunny, but in their own line of 
+work, no less than a Hadza hunter 
+with spears and arrows is equally 
+expert in his metier 
+than urban professionals in theirs.  
+`footnote`  
+Ranking video observations 
+via measures such as 
+deliberateness, interpretive 
+confidence, situational 
+appropriateness, and follow-up 
+behaviors is an example 
+of methodological protocols 
+that would guard against 
+biases both `i.pro` and 
+`i.contra` the status quo. 
+`p`
+
+
+`p.
+A final methodological point is 
+that `q.dog communication` research 
+does not need to show dogs' 
+formulating phrases according 
+to the rules of `i.proper` 
+language as such (with multiple 
+parts of speech %-- not just 
+verbs and nouns %-- and 
+morphosyntactic patterns).  Probably 
+no-one expects dogs to reproduce the 
+complex system of syntactic 
+interconnectors in natural language, 
+and this would be infeasible via 
+`AAC; buttons anyhow.  For example, 
+Stella's `q.beach inside` %-- referring 
+to an inflatable boat and toys 
+they take by the ocean being in the 
+living room %-- implies a 
+perceptive and situation-appropriate 
+blend of concept in her mind.  
+It is not especially important that 
+she uses `q.beach` metonymically 
+for things encountered `i.on` the 
+beach, rather than devising a 
+more intricate phrasal complex to 
+orient her discourse toward 
+beach-related objects rather than 
+the beach itself.
+`p`
+
+`p.
+Those questioning whether dogs are 
+literally `q.talking` perhaps 
+infer that some people are 
+attributing to dogs linguistic 
+competence at that quasi-human 
+(adult) level.  The reality is 
+perhaps more interesting: 
+such research gives us a 
+window into how situational 
+understanding and  
+conceptual aggregation 
+(`i.beach inside`/, say, or 
+`i.stranger paw`/) yields 
+proto-linguistic potentialities 
+that can be analytically 
+separated from the complexity 
+of language's surface-level 
+structures %-- wherein discursive 
+articulation explicitly 
+presents concept-connections 
+that may be merely implicit 
+in shared mental models.  
+Thus `q.toy inside` depends on 
+mutual understanding to 
+convey `i.which` toy 
+and `i.where` inside, and why, 
+compared with how a 
+person might express it 
+(`q.I want to take the toy 
+I just found inside the house`/).  
+`p`
+
+
+`p.
+Apart from the animal-cognition dimension, 
+then, research into talking dogs 
+deserves attent from linguists 
+proper because it helps separate 
+prelinguistic cognition from 
+lexico-syntactic processing.  This applies 
+to parts of AI as well, such as 
+Natural Language Processing.  
+To the degree that dogs 
+communicate via `AAC; buttons, their 
+abilities lie in joint attention 
+and habitual, situational collaboration 
+with people, rather than by 
+commanding large-scale vocabularies 
+or inferring complex parse-graphs.  
+Compared to computational `NLP; systems, 
+dogs' linguistic processing 
+appears to emerge from their 
+shared `i.umwelt` with people 
+rather than from innate 
+abilities to master 
+discursive, lexical, and morphosyntactic 
+conventions.  
+`p`
+
+
+`p.
+If this analysis has merit, it should 
+reinforce our skepticism that robots 
+or AI could be engineered to understand 
+human language, at anything less than a 
+partial and superficial (albeit 
+perhaps still quite useful) level.  
+Robots, for example, cannot have 
+(we may reasonably claim) interpersonal 
+experience analogous to the 
+shared affection between people and 
+dogs, and therefore cannot have 
+that underlying communal awareness 
+which becomes leveraged in 
+understanding `q.other minds`/.  
+In this sense robots appear to 
+lack an essential ingredient 
+%-- perhaps `i.the` essential 
+ingredient %-- in the emergence 
+of human language.  This does 
+not foreclose some level of 
+human/robot communication, 
+because I already intimated 
+through talk of `q.mid-level` 
+language that a robot's discourse 
+probably would not be 
+human language in any case.  
+But it does mean that the 
+architecture of meaning and 
+practical action which 
+serves as structuring principles 
+for robots' `q.language` need 
+to be conceived against
+a foundation notably 
+divergent from the foundations 
+of human language.
+`p`
+
+
+`subsection.Robotics and Environment-Models`
+`p.
+If human language is not a reliable 
+basis for human/robot communication, 
+what should be the source for 
+potential theories of `q.languages` 
+appropriate for robotics?  Here, 
+research into dogs' communication 
+with people can perhaps provide 
+one crucial insight: our ability to 
+interact at some linguistic/gestural 
+level with dogs depends on a 
+significant overlap between 
+dogs' and humans' models of their 
+shared environment, which in turn 
+get leveraged for communicative 
+intent.  If this analogy may carry 
+over, any human/robot language 
+would have to be grounded 
+in robots' `q.perceptual` 
+models of their environment, 
+which in turn humans have to 
+implicitly understand so 
+as to orient robots' actions 
+in context. 
+`p`
+
+
+`p.
+A significant part of most robots' understand 
+of their environment, of course, comes from 
+visual processing, which would involve 
+algorithms such as those touched on in 
+Chapter 22 (e.g., for feature-detection 
+and image-segmentation).  Robots' 
+models of their surroundings would need 
+to start with preliminary object-detection 
+%-- recognizing where there are discrete 
+physical objects that can be studied and 
+potentially moved or manipulated, 
+perceptually distinguishing such 
+potential foci of attention from the 
+background environment %-- but apart 
+from just `i.spatially` individuating 
+objects robots have to estimate 
+their physical properties (which 
+objects, or parts of objects, can 
+be moved, for example, and in what 
+directions).    
+`p`
+
+
+`p.
+Robots' environment-models need not be 
+completely open-ended; typically 
+robots are built for specific tasks 
+in specific kinds of environments, 
+so it is possible to anticipate 
+what `i.sorts` of objects robots 
+are likely to encounter.  In this sense 
+they are not making inferences 
+about external objects' behavior based `i.only` 
+on visual input, but can be presupplied 
+with data structures summarizing environing 
+objects' properties and affordances.  
+The interplay of robots' visual 
+perception and their leveraging such 
+`i.a priori` data then yields a 
+correlation between spatial and 
+function-organizational analysis 
+similar to the cases examined in 
+Chapter 20.  That is, by combining 
+spatial perception with preliminary 
+data structures modeling categories 
+of external objects, robots can develop 
+hybrid environmental-models 
+that combine spatial perception %-- which 
+situates objects and movement-affordances 
+in surrounding space %-- with 
+profiles of objects' functional 
+connections, which in turn would 
+guide a robot's behavior and tasks to complete.
+`p`
+
+
+`p.
+The examples in Chapter 20 considered analogous 
+spatial/functional hybrid models such as 
+Industry Foundation Classes (`IFC;) in the 
+Architecture, Engineering, and Construction 
+(`AEC;) context.  `lIFC; data (at least for 
+many kinds of objects) combines `CAD;-oriented 
+assets which model `AEC; artifacts visually 
+and spatially, so that `IFC; object-collections 
+underlie blueprints and/or 
+`ThreeD; models of buildings, building-interiors, 
+and other archictected sites.  At the same 
+time, `IFC; objects can be aggregated 
+to provide functional models of buildings 
+as organized systems, so as to assess 
+their usability (from the point of 
+view of their residents/occupants), 
+risk-mitigation (in terms of, say, 
+fires, floods, contamination, and 
+other environmental hazards), or energy 
+efficiency/carbon footprint.  Such analyses 
+are outlined more completely in Chapter 20; 
+in the present context I simply want to 
+point out that system-functional models 
+are in this context tied together 
+with spatial representations, such as 
+`CAD;-based `ThreeD; scenes or `TwoD; floor 
+plans.  A similar integration can 
+inform systems where spatial representation 
+is not a matter of `i.designed` space, 
+intended to visualize architectural/engineering 
+plans, but actual space where robots are situated.  
+`p`
+
+
+`p.
+Consider a robot equipped with data structures 
+conformant to `IFC; or similar (modeling) protocols.  
+Upon perceiving an object (which it sees and/or 
+physically contacts) we can imagine the 
+robot matching its shape, color, and related 
+apparent qualities to a database of 
+object-profiles, presumably matching the 
+perceptual inputs to a class or category 
+with an `IFC;-like description.  Such a 
+description, in turn, would offer both a 
+`ThreeD; model of the object's geometry/kinetic 
+properties (how the object 
+moves holistically and its parts move 
+relative to each other) and schematic 
+data aggregation specifications 
+related to the objects' materials, manufacturing, 
+physical attributes (such as weight, density, 
+fragility), and other information that 
+would be relevant to robots' instructions.  
+If an object is a piece of industrial equipment, 
+for example, the `IFC;-like data could 
+include part/model numbers and industrial 
+specs; a robot might be programmed to 
+test (and notify human monitors) if a 
+part appears to be damaged.     
+`p`
+
+
+`p.
+The functional/spatial convergence evinced by 
+formats such as `IFC; can be taken as an 
+intuitive example of the environment-models 
+through which robots could operate.  Insofar 
+as functional/spatial hybrids may likewise 
+be represented through computer applications 
+and `GUI;s, we might assume that users 
+guiding robots could similarly access 
+views of robots' environments with analogous 
+functional/spatial duality %-- e.g., a user 
+through a robot's visual feed would see 
+a `ThreeD; scene (embodying spatial data) 
+and then select visible objects to 
+examine through data-presentation windows 
+(transitioning to functional-organization 
+style data).  In this sense users and 
+robots can synchronize their respective 
+views on robots' environment, which, 
+inspired by animal (or at least dog) 
+cognition research, we should take to 
+be the crucial first step toward 
+communication.    
+`p`
+
+
+
+`p.
+On these considerations, I believe that 
+a prerequisite for effective human/robot 
+communication would be well-organized 
+`GUI; systems representing robots' 
+environments `i.for` human users, 
+where `GUI;s encompass components 
+for viewing both spatially-articulated 
+data (video/camera feeds, `ThreeD; scene 
+models, etc.) and functionally-oriented 
+summaries of objects' industrial, physical/kinetic, 
+environmental, or project-specific 
+attributes (`q.project-specific` in the sense 
+that robots typically interact with 
+objects manufactured to collectively 
+form a physical system engineered to 
+specific ends; analogous to 
+machines, but on the scale of a 
+complex whole, such as a factory, building site, 
+environmental cleanup operation, etc.).  
+`p`
+
+
+`p.
+Such observations are just a starting point, 
+of course; further analysis of these 
+proposals would need to address how human 
+users should view and interact with 
+robots' environments.  I will return to 
+this issue in Chapter 24.
+`p`
+
+
 `p.
 From this chapter's perspective, the 
 key foundation of linguistic communication 
