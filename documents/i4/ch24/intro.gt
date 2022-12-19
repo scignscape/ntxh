@@ -284,6 +284,60 @@ of our communication.
 
 
 `p.
+Controversies over how to interpret 
+results in Artificial Intelligence 
+perhaps lend support to this point: 
+enacting Computer Vision 
+or processing natural language via 
+statistical inferences (even if 
+augmented by Convolutional Neural Networks 
+or Machine Learning) may or may not 
+qualify legitimate `q.understanding`/.  
+Computers' sometimes human-like performance 
+in translation, or (for instance) 
+image-tagging, may give the impression 
+that `AI; modules are progressively 
+approximating human reasoning.  
+However, so-called `q.adversarial` 
+examination of `AI; programs 
+has led some researchers to question 
+these assumptions.  These analyses 
+are able to produce images, for instance, 
+that `q.trick` Computer Vision technology 
+into radically incorrect or 
+nonsensical results %-- tagging two 
+almost identical images into completely 
+different categories, one accurate 
+and one not (e.g., a school bus 
+and an ostrich), or applying the 
+same tag to a realistic photograph 
+and nonsensival picture looking like 
+random noise `cite<[pages 110-113]MelanieMitchell>;.
+Similar effects have been produced 
+against `NLP; engines 
+`cite<[pages 211, 227-231]MelanieMitchell>;.
+The issue here is not merely occasional 
+inaccuracies, but that `AI; tools can be 
+`i.so` wrong on select kinds of input that 
+we have to question whether the `q.intelligent 
+behavior` they usually exhibit truly 
+approximates what we would think of as 
+(human-like) intelligence.  After all, 
+people too can mislabel images and misread 
+sentences, but we would never confidently 
+assert that incoherent mumblings or 
+`q.nonrepresentational` graphics 
+(with appearance akin to TV-screen `q.snow`/) 
+were normal sentences or pictures of 
+Milla Jovovich.  One way to 
+express these concerns is a doubt that 
+`AI; agents %-- even if statistically 
+accurate most of the time %-- truly 
+share `i.situational understanding` with us.  
+`p`
+
+
+`p.
 Removing intersubjectivity 
 (and subjective awareness) 
 from this picture does not 

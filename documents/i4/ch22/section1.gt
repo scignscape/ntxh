@@ -574,18 +574,18 @@ same time, the numeric details of how enumerations
 are encoded can sometimes become consequential 
 even for application-level code.  Consider 
 the relatively common situation where an 
-`b.enum` (together with some other data) are 
+`b.enum` %-- together with some other data %-- is 
 encoded into a single (4-byte, say) integer where 
 the enum is assigned a specific bit-range (if there 
 are ten enumerated labels, say, the bitmask must 
 allow four bits for the enum).  A programmer would 
-immediately know to left-shift the `b.enum`/s 
+immediately know to left-shift the `b.enum`/'s 
 value (cast to an integer as needed) by the 
 requisite number of bits, but could easily 
 forget that the left-shift applied to 
 `b.char` could result in `i.another` `b.char` and 
 therefore truncate bits on the left; the 
-`b.enum` instead must be cast to `i.int` (or whatever 
+`b.enum` instead must be cast to `i.int` first (or whatever 
 type will encode the shifted bits) even if the original 
 base type is, say `b.unsigned char`/.       
 `p`
@@ -718,12 +718,12 @@ and more widely adopted.
 `p.
 In general, `VM; engineers have opportunities to identify 
 computationally similar but conceptually distinct 
-operations.  Consider a basic increment (`sb.++`/) 
+operations.  Consider a basic increment (`rsb.++`/) 
 operation: this may occur in a context where the range of 
 possible loop end-values (e.g., the size of a list) is 
 well below the maximum expressible integer of a relevant 
-type; but it may also occur (as in color-components) 
-where we may be looping up to that maximum 
+type; but it might also occur (as in color-components) 
+where we are looping up to that maximum 
 value, which itself serves as the loop-terminator 
 (this in turn is the kind of situation where 
 overflow errors due to `q.perpetual-truth` can occur %-- 
@@ -783,7 +783,7 @@ which I address next.
 `subsection.Different variations on enumeration types`
 `p.
 In the simplest sense, enumeration types 
-represent sets of named values, which may have 
+represent sets of named values, which have 
 numeric codes (for the sake of storing instances 
 in memory) but whose numeric representation has 
 no particular significance.  This setup, however 
@@ -799,12 +799,27 @@ labels and a limited-range, modular-arithmetic
 representation have conceptual merit 
 (consider the problem of `q.adding` some number 
 of days or months, or iterating around a week, or year, 
-cycle).  Or, consider a collection of named color-values: 
+cycle).
+`p`
+
+`p.
+Or, consider a collection of named color-values: 
 each of these would be identified by a label, but may 
 also be mapped to a numerically-encoded color space, 
 so that quantitative inter-color operations could be 
 implemented (measuring the distance between two 
-named colors, for example, or mapping them to grayscale).
+named colors, for example, or mapping them to grayscale).  
+Some operations on this enum type would therefore 
+yield numeric results (such as color-distance); 
+other operations could map one enum to another 
+by applying quantitative formulae (such as 
+mapping chromatic hues to gray tones, or 
+to brighter/darker shades).  So the enum type would 
+implement intra-type and out-of-type operations 
+consistent with a mathematical foundation, 
+at variance with the convention that 
+enumerated values are string-labels without 
+quantitative interpretations.
 `p`
 
 `p.
@@ -927,7 +942,7 @@ rationales for the vocabulary chosen):
 
 `description,
 `item ->> Raw nominals ;;  Collections of named labels (`q.nominals` in the 
-statistics sense) which may be 
+statistics sense) which are be 
 assigned numeric codes simply for purpose of computational representation, 
 but where the actual numbers have no special meaning 
 (an exception could be allowed for a label used as a `q.default` 
@@ -942,10 +957,10 @@ one from any other).
 
 
 `item ->> Cyclical or sequential enumerators ;;  This would cover cases 
-where labels correspond to entities which have an implicit 
+where labels correspond to entities that have an implicit 
 order (`q.ordinals` in statistics) so we can speak of one label 
 coming `q.before` or `q.after` another in the sequence as 
-conventionally understood.  In some contexts we can also 
+conventionally understood.  In some contexts we could also 
 recognize `q.differences` (as in, Friday is four days past Monday) 
 and wraparound (after Sunday we return to Monday, for instance), 
 which in turn implies modular arithmetic.
@@ -976,14 +991,16 @@ value (we want the enumerator to translate directly to
 a corresponding `ASCII; and Unicode number), which in 
 a sense combines the sorts of contexts where global 
 constants would be preferred and those more 
-amenable to proper enums; if indeed an enum is chosen 
+amenable to proper enums.  If indeed an enum is chosen 
 to represent the constants as a `i.type`/, 
 the numeric values would of course have semantic 
-significance (on the other hand, combinations
-of such values, e.g. via bitmasks, would `i.not` 
-in general have meaningful semantics, so 
-arithmetic operations between two labels 
-might be suppressed in these cases.  
+significance (on the other hand, most 
+quantitative operations between two labels 
+would not make sense %-- there is no meaning 
+to adding one `ASCII; code to another, 
+say %-- so enums in this case should not 
+necessarily be provisioned with a full 
+suite of arithmetic operators).  
 
 `item ->> Isolated bitmask enumerators ;;  Names which do not 
 have intrinsic mathematical interpretations but which are 
@@ -1015,8 +1032,9 @@ but instead labels which are part of the enumerative collection
 itself can be assigned mathematical values which translate 
 to sets of other labels.  The weekday/weekend case would 
 be one example, given a bitmask encoding such as proposed 
-in item (2); or, suppose for item (3) we extend the `q.alignment` 
-example such that `b.TopLeft` and other combinations are 
+for the weekday example; or, suppose 
+we extend the `q.alignment` 
+example just cited such that `b.TopLeft` and other combinations are 
 actual parts of the `b.enum`/.  Types in these scenarios 
 have the ability to form labels for commonly-used collections 
 of other nominals; consider, say, the type `b.Qt::TextInteractionFlag` 
@@ -1065,16 +1083,16 @@ examples would come from situations where codes
 may be assigned with an eye to bitwise fusions, 
 but not all labels fit that binary pattern.  
 The above `q.alignment` examples can have variations 
-which fit this last case; in `Qt;, for example, 
-the `b.Qt::AlignmentFlag` enum gathers into one 
-type labels for vertical (`b.AlignTop`/, `b.AlignBottom`/, 
+which fit this last case.  In `Qt;,  
+the `b.Qt::AlignmentFlag` enum gathers %-- into one 
+type %-- the labels for vertical (`b.AlignTop`/, `b.AlignBottom`/, 
 `b.AlignVCenter`/, and `b.AlignBaseline`/) and 
 horizontal (`b.AlignLeft`/, `b.AlignRight`/, 
 `b.AlignHCenter`/, `b.AlignJustify`/); and also 
 for `i.one` named combination (`b.AlignCenter`/, 
 which fuses `b.AlignVCenter` and `b.AlignHCenter`/).  
 In addition to these labels, the list includes 
-a special flag which is only used for text in 
+a special flag which is only applicable for text in 
 natural languages with a right-to-left writing system, 
 and `q.mask` labels for convenience %-- specifically, 
 a mask which extracts the `i.horizontal` and another 
@@ -1106,7 +1124,7 @@ that numeric values will be significant.
 `p.
 The various alternatives outlined here reflect a duality 
 in the `q.conceptual` role of enums: in effect, 
-enum types fulfill two distinct purposes, namely 
+enum types fulfill two distinct purposes %-- namely, 
 the use of mnemonic or descriptive `i.labels` 
 (instead of raw numbers), on the one hand, and 
 (on the other) isolating a specific range or group 
@@ -1150,8 +1168,8 @@ take inputs of enum types (rather than
 their underlying numeric types).  
 In the `VM; context, procedures could 
 therefore indicate what `q.flavor` or 
-enum type they expect through some sort 
-of flag or annotation; instead of a single 
+enum type they expect, through some sort 
+of flag or annotation.  Instead of a single 
 enum protocol, compilers (or a `VM; runtime) 
 could then fine-tune enum handling based 
 on procedures' specifications.  For example, 
@@ -1181,9 +1199,24 @@ or to support a proper subset of mathematical functions.
 This discussion has set forth some of the 
 conceptual issues associated with enumerations, 
 and before that with number-pair types.  
-These examples serve primarily as case-studies; 
+The examples cited here serve primarily as case-studies; 
 ultimately, I intend to ground the analysis 
 in `VM; engineering in particular.  
+The overarching theme of this chapter's 
+discussions thus far has been that `VM;s 
+might work with type systems which 
+have programming and design-pattern nuances 
+that aren't obvious in `q.formal` type 
+theory.  High-level coding patterns 
+are not necessarily reflected, or reciprocated, 
+at the `VM; tier; compilers might `q.compile down` 
+source constructions to quasi-assembly 
+languages.  But this is a design choice; it is 
+certainly possible to plan `VM;s that directly 
+represent many high-level design patterns and 
+provide supportive compilation-targets enabling 
+compilers to support such patterns in the 
+languages they target.    
 As such, I will transition to a more 
 `VM;-oriented (and, indeed, image-processing oriented) 
 focus in the following section. 

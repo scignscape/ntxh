@@ -157,8 +157,20 @@ color `q.thematically,` rather than purely
 chromatically, in that we are receptive 
 to the optical effects through which 
 color-shades become visible as well as to 
-actual color tones.  In nature, it is rare 
-to encounter either solid-hue patches or 
+actual color tones.  The experience of color 
+is not primarily oriented to monochrome 
+color-spreads, but rather (we might say) 
+colors as `q.themes`/, wherein one thematic 
+color carries expectation of some textural and 
+lighting-effect variation.  A straightfoward 
+example of such a theme might be a canonical 
+foreground color; or, we may have an image-foreground 
+composed of mulutiple objects with their own 
+predominant color, each thereby becoming  
+distinct themes for the overall image (but still 
+encompassing textural patters across  
+objects' surfaces).  In nature, it 
+is rare to encounter either solid-hue patches or 
 quality pigmentation; more common are surfaces 
 that reflect light with some scatter 
 and inconsistency, altering 
@@ -409,13 +421,36 @@ to isolate the foreground).
 more immediate calculation where the 
 overall set of keypoints is treated as a 
 point `q.cloud` roughly distributed through 
-the foreground. 
+the foreground.  Intuitively, keypoints at 
+Region-of-Interest boundaries would seem 
+to be the most valuable, because they would 
+directly yield useful segmentations; however, 
+complex/occluded images may require 
+more circuitous techniques, because
+feature-detectors will generate 
+`i.too many` keypoints.  To compensate, 
+one option is to actively seek out 
+algorithms that identify large 
+numbers of features and then apply heuristics 
+to separate those belonging to the 
+background and foreground (this 
+also applies to two-dimensional features, 
+e.g., edge-detectors: the 
+graphics in Figure~`ref<fig:tools-c>; 
+intimate how detected edges can be 
+more concentrated in the foreground 
+than the background, which provides 
+options for leveraging kernels  
+that detect seemingly superfluous 
+edges, rather than trying to retrict 
+algorithms to contour-boundaries).
 `p`
 
 `input<features>;
 
 `p.
-Visual inspection suggests that the `BRISK; 
+Returning to the example, 
+visual inspection suggests that the `BRISK; 
 results do indeed match the foreground 
 well, but the workflow will attempt to 
 calculate this result systematically.  
