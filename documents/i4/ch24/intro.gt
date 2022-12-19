@@ -1,5 +1,258 @@
 `section.Introduction`
 `p.
+For reasons such as discussed in Chapter 20, 
+computer programming languages offer only a flawed 
+and limited simulacrum of `q.Natural` Language 
+(i.e., human, spoken language).  This does not 
+rule out how structural features of programming 
+languages could potentially shed light on 
+human linguistics (shortly I will present 
+in greater detail where I think the most promising 
+or prominent structural correlations exist), 
+but the tenuous connections between human 
+and computer languages writ large invite 
+questions related to the nature of languages 
+that might be intermediate between them 
+%-- more complex and/or context-dependent 
+than computer code, but also more 
+computationally tractable than human 
+language itself. 
+`p`
+
+
+`p.
+This chapter is motivated in part by how these 
+sorts of questions could be applied to robotics, 
+which is an area of concern for several of 
+this book's chapters.  One foundational 
+question when engineering robots is how 
+humans should communicate with them.  
+If scientists' goals are to fabricate 
+`q.life-like` robots, perhaps taking a 
+vaguely human-like physical form, then 
+it would be natural to envision robots 
+equipped with sophisticated Natural Language 
+Processing capabilities.  Such an aspiration, 
+however, could eventually run up against the 
+outer limits of computational `NLP;, 
+in the sense that any inanimate machine %-- even 
+ones with sophisticated `AI; capabilities %-- 
+may simply be incapable of parsing 
+and responding appropriate to human speech 
+on a truly realistic level.  Of course, even 
+today `NLP; is sufficiently advanced to be a 
+very useful tool, but not to the point 
+where people in most cases would experience 
+actual communication with `AI; agents as 
+believably life-like, or a credible 
+substitute for the emotional, gestural, 
+and contextual nuances of linguistic interactions 
+between people (which are almost never 
+`q.purely` linguistic).
+`p`
+
+
+
+`p.
+I think these issues are still open-ended.  
+Philosophically, it is a reasonable 
+hypothesis to assume that most of the 
+`q.human` qualities of conversation 
+are driven by cognitive activity that 
+could be simulated at least in theory, 
+so a truly advanced robotic or `AI; 
+agent could %-- again, at least in 
+theory %-- asymptotically approach 
+a state of being considered 
+almost human-like in how it communicates.  
+A counter-argument to this kind of analysis 
+might be that language-processing sophistication 
+is necessary but not sufficient for 
+being an effective discursive partner 
+%-- witness how people from different 
+cultures can have trouble understanding 
+one another, even if baseline 
+semantic and syntactic impediments 
+are removed.  Sports fans from London 
+and New York, say, somehow eavesdropping 
+on each others' conversations, could 
+very well fail to comprehend the respective 
+dialogs despite the two groups 
+speaking essentially the same language.  
+Likewise for comparing discussions about 
+US versus UK politics, or navigating 
+Brooklyn or Camden Town like a local 
+%-- inevitably, in short, there must 
+be some shared cultural and lifestyle 
+familiarity between conversants in order 
+for reasonable human dialog to take 
+place, because so much of the semantic 
+and referential details of our speech 
+remain unstated, an implicit part 
+of the discursive background rather 
+than explicitly invoked lexically 
+or descriptively.  No-one in a 
+typical conversational context would 
+need clarification on how `q.Spurs` in the 
+US probably refers to a basketball 
+team but a Football club in the UK, or 
+`q.Soho` to a part of Westminster in 
+London but a part of Lower Manhattan in 
+New York.  These are matters 
+of shared life-experience, not of 
+linguistic competence.   
+`p`
+
+
+
+`p.
+How, in this sense, could a robot 
+`q.share` life-experiences with people?  
+On the face of it, such questions should 
+lead us to question whether realistic 
+`NLP; is ever truly feasible, because 
+even in a hypothetical world 
+where a machine with human-level 
+abilities of raw linguistic processing 
+could be built, that machine would 
+still not be `q.living` in a human 
+world and absorbing local culture 
+and dialect.  Could all of our 
+enculturated background knowledge 
+be adequately simulated on a 
+computer?  What about the emotive 
+and empathic dimensions of language, 
+without which it can be difficult to 
+distinguish, for instance, sarcasm from 
+sincerity?  Short of some empirical 
+disproof of mind-body reductionism 
+%-- i.e., the belief that all of 
+our feelings and experiences ultimately 
+derive from neurological phenomena, 
+which are not known to have any 
+physical properties that are truly 
+beyond the scope of computational 
+approximation %-- we certainly 
+cannot rule out the possibility 
+that truly human-like `AI; is theoretically 
+possible.  But absence of impossibility 
+is a weak argument for something 
+being realistic and feasible in practice, 
+and cultural/interpersonal issues 
+demonstrate that the hurdles 
+for `NLP; are not only linguistic in nature.  
+`p`
+
+
+`p.
+In short, even if we cannot be certain 
+that realistically human-like `AI; (at least in 
+terms of linguistic competence) is 
+`i.not` possible, there seems to be 
+no reasonable argument to guarantee 
+that it `i.is` possible, so any 
+technological project which 
+depends on (something approximating) 
+human-like `NLP; is necessarily on 
+shaky grounds.  At the same time, 
+we should aspire to robot/human communications 
+which are more user-friendly than 
+artificial constructs like programming 
+languages.  Note that this is an 
+issue pertaining to robots' `q.users` %-- people who 
+should at some level guide a robot's 
+behavior in the course of its assigned 
+task, as compared to developers who engineer 
+their capabilities in the first place.  
+Robots' on-board operating systems can be 
+programmed in a variety of languages, 
+as is true for other embedded systems, and low-level 
+computer code provides the minimal 
+functionality allowing robots to 
+operate, such as any physical movements 
+or audio/visual processing of their 
+surrounding environment.  
+When a robot is performing a task on 
+behalf of a person, however, we can 
+assume that in most contexts the 
+user would not be communicating 
+with the robot through such 
+low-level code, but would instead 
+give instructions more conceptually.
+For a robot to move a box, say, 
+the person should be able to designate 
+the box in question and its destination, 
+allowing the robot's low-level machinery 
+to calculate the physical configuration 
+and movements appropriate for that goal.       
+`p`
+
+`p.
+Here, then, is a good example of the 
+`q.intermediate` language question I 
+alluded to before: what forms of 
+communication exist that are higher-level 
+than artificial languages such as computer 
+code, but simpler and more 
+computationally deterministic than 
+Natural language?  This actually 
+encompasses two topics; how 
+such `q.mid-level` languages should 
+be `i.designed` (their semantic and 
+syntactic properties %-- whether 
+their vocabulary and/or grammar is based on actual 
+human languages, albeit at a rudimentary 
+level, or something more endemic to a robot's
+assigned tasks), first, and, second, how 
+to translate expressions in such mid-languages 
+to low-level operations which can be 
+programmed as robots' baseline capabilities.  
+`p`
+
+
+`p.
+I will touch on these issues later in the chapter, 
+but here I will also be focusing on the 
+theme of language in that gap between humans 
+and computers %-- what resources can help 
+us think through the nature of language 
+outside the prototypes of mechanical computer 
+languages and holistic human language?  
+I argued at the start of Chapter 20 that calling 
+coding systems such as `Cpp; or JavaScript `q.languages` 
+is misleading, and in some ways the science of 
+building and using programming languages 
+(sometimes called Software Language Engineering) 
+has very little connection to linguistics 
+proper.  Note, however, that some 
+sophisticated lines of linguistic 
+research are driven or inspired at 
+least part by concepts that emerge, or 
+are formalized, in the programming-language 
+context (`cite<AsherLuo>;, `cite<BarkerShan>;, 
+or `cite<AsudehGiorgolo>;, 
+for instance).  So there are at least some 
+technical formations in software-language 
+implementation which may arguably shed light 
+on how people understand our own 
+human languages (some of these I reviewed 
+in Chapter 20, and will revisit 
+later in this chapter as well). 
+With that said, though, the kind 
+of artificial languages used to program 
+computers and machines have at best 
+only sporadic and limited structures 
+that shed light on natural language, 
+and as such are only an imperfect model 
+for the kind of intermediate 
+communication system which 
+we might envision possessed by 
+robots and other `q.Industry 4.0` machines.
+`p`
+
+
+
+`p.
 I argued in Chapter 23 that intersubjective 
 awareness serves as a central motivation 
 that underlies other foundational 
@@ -42,8 +295,9 @@ open-ended the process
 of how linguistic competence 
 can emerge `i.without` 
 that collaborative foundation.  
-At the same time, I am not 
-arguing that the triad 
+At the same time, my intent 
+last chapter was not to 
+argue that the triad 
 of intersubjectivity, situations, 
 and conceptualizations are 
 constitutive of language per 
@@ -55,7 +309,7 @@ constructions encode situational
 details, but how they 
 relate to contextual 
 schemata remains a further 
-question I have not addressed 
+question I did not address 
 in any detail.
 `p`
 
@@ -86,7 +340,12 @@ and by case/declension (where nominals in the
 locative, instrumentive, benefactive, and so forth 
 add specificity %-- how, where or to where, 
 by whom or for whom %-- to their verb's profiled 
-event, process, or action).  It is true that 
+event, process, or action)  
+`cite<[e.g., page 39]SanderLestrade>;,
+`cite<LebaniLenci>;, `cite<ShimEpstein>;, 
+`cite<KyleJohnson>;, `cite<GregCarlson>;, 
+`cite<LucasChampollionC>;, 
+`cite<ChampollionDissertation>;.  It is true that 
 almost any theory of language will focus on verbs 
 because verb-plus-noun combinations (VP+NP) 
 are considered to be the minimal requirements 
@@ -102,14 +361,7 @@ conjunctions, plus morphosyntactic marking
 rules/conventions) play roles ultimately 
 determined by how they modify and add 
 information to phrase- or sentence-level 
-verbs.`footnote.
-For good examples of such perspectives, as I see 
-them, I would cite Ronald Langacker and Lucas Champollion.  
-I provide more detailed analysis of syntactic 
-and semantic approaches that should (I believe) 
-be called `q.verb-centric` in Conceptual Space 
-(cite the Covid/Cardiac, mostly chs. 6, 9).
-`footnote`  
+verbs.
 `p`
 
 
@@ -122,14 +374,14 @@ particular, we can assume that language
 itself is not usually `i.about` this shared 
 awareness, although we can sometimes 
 use languages to correlate our mutual 
-understanding (along the line of 
+understanding (along the lines of 
 `q.do you see ...?` or `q.did you know that ...?`/).  
 Normally the role of language is to address 
 what `i.deviates` from common understanding 
-(or what could `i.cause` respective 
+(or could cause respective 
 models to become misaligned).  Someone might 
-propose an action that would cause the 
-current situation to change (like, 
+propose an action that would alter the 
+current situation (e.g., 
 `q.Let's go to the park`/), or inform 
 others of a change they may not know 
 about.  As a rule of thumb, then, 
@@ -149,7 +401,27 @@ verbs profile the difference between
 one environment-state and another, 
 it makes sense that verbs would then 
 be the central organizing anchors 
-for syntax and semantics.
+for syntax and semantics.`footnote.
+Although `q.verb-centric` paradigms 
+are tangentially related 
+to Davidsonian `q.event semantics`/, 
+I am thinking of verbs in the 
+most general sense of `i.profiling` 
+states, relations, or processes as well as 
+events, following Langacker in particular 
+`cite<[chapter 4]LangackerIntro>;, `cite<[page 24]LangackerClause>;,
+`cite<[e.g., pages 21-25]LangackerConceptualization>;,
+`cite<LangackerConstructions>;.  Also, 
+for reasons sketched below I am wary 
+of semantic structures presented as 
+`i.logical models` of sentences 
+themselves, rather than as patterns 
+organizing cognitive `i.responses` 
+that may be `i.triggered` by 
+linguistic constructions but 
+are not prefigured or reciprocated 
+within them. 
+`footnote`
 `p`    
 
 
@@ -198,7 +470,7 @@ out phrases via her talk buttons).
 
 
 `p.
-Even is common understanding is 
+Even if common understanding is 
 a prerequisite, because 
 language proper needs to express  
 `i.deviations` from shared models 

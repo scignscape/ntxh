@@ -26,7 +26,8 @@ The affordances of constructed objects
 are also djinns producing states 
 of affairs that we must adapt to.
 In this sense our situational 
-awareness is also always projecting 
+awareness, while partly present-tense, 
+is always too projecting 
 forward, protaining the immediate 
 future, subtly modulating 
 plans in response to the 
@@ -42,7 +43,7 @@ forms the predominant mode
 of linguistic semantics.  What we 
 `i.mean` is usually reflective of 
 how we anticipate our actions in 
-the immediate context of our 
+the environing context of our 
 situations to proceed, moving 
 forward, in the immediate future.  
 Linguistic utterances are, in short, 
@@ -213,8 +214,11 @@ relation and names this relation directly,
 all through straightforward lexical and referential 
 means.  But most linguistic constructions 
 do not work by reciprocating 
-logical constructions.  A more typical 
-speech-act is something like 
+logical constructions.
+`p`
+
+`p.
+A more typical speech-act is something like 
 `q.let's take the bus to the park`/, 
 whose apparent meaning doesn't have a 
 direct propositional content in the 
@@ -257,14 +261,25 @@ models in the tradition of Grice or
 Searle, or ethnolinguistic (and `q.eco-`/linguistic) 
 approaches to language as an anthropological 
 phenomenon more than a `q.system` to be 
-structurally analyzed.  To this list I would 
-add Vakareloff's `q.Interface Theory of Meaning,` 
-which I have claimed 
-applies to artificial (programming) languages 
+structurally analyzed `cite<LangackerCCxG>;, 
+`cite<LangackerCCxG>;, `cite<HansCBoas>;,
+`cite<KennethHolmqvist>;, `cite<KennethHolmqvistDissertation>;,
+`cite<LakoffJohnson>;, `cite<MarkJohnson>;, 
+`cite<JordanZlatev>;, 
+`cite<JordanZlatevPhenomenology>;,
+`cite<JeanPetitot>;, `cite<PetitotDoursat>;, 
+`cite<HornPeirce>;, 
+`cite<ChrisGenovesi>;, `cite<DanielWHarris>;,
+`cite<ChukwualukaMichaelUyanne>;, `cite<SteffensenFill>;.  
+To this list I would 
+add Vakarelov's `q.Interface Theory of Meaning,` 
+`cite<OrlinVakarelov>;, `cite<VakarelovAgent>; 
+which I contend may be  
+applied to artificial (programming) languages 
 as well as Natural Language.  In the 
 formal-language context, the value of 
-such as `q.interface theory`/, as I intimated 
-then, involves the formal-semantic 
+such `q.interface theories`/, as I intimate 
+them, involves the formal-semantic 
 paradigm (manifest to some degree in 
 computer science, for example in the 
 design of the `q.Semantic Web`/) according to 
@@ -295,7 +310,14 @@ the semantics of computational languages
 should be seen as constituted by the 
 collection of procedures that can be 
 invoked through (any given) language 
-(in any given context).  Such 
+(in any given context).  This 
+yields what has been called a `q.procedural 
+semantics` and applied both to linguistics 
+and robotics 
+`cite<RobertFHadley>;, `cite<DuziFait>;, 
+`cite<MichaelSpranger>; `cite<MichaelSprangerRobots>;.
+Computational (or, respectively, by 
+analogy, cognitive) 
 `i.procedures` semantically 
 implicate empirical objects (by 
 presenting information about them, 
@@ -344,7 +366,7 @@ motivates a model wherein any
 `q.natural` semantics for computational 
 systems is an emergent property, not a 
 logical construction.  I defer 
-to Vakarelov's `q.interface 
+to Orlin Vakarelov's `q.interface 
 theory` in both contexts:  
 the overt meaning of a linguistic 
 expression (a speech-act in natural 
@@ -360,8 +382,8 @@ space of compiled routines known
 to a programming-language runtime and 
 available to be called from application code).  
 Natural language invokes `q.cognitive procedures` 
-(like `q.imagining riding the bus`/) much 
-like high-level code notates 
+(e.g., `q.imagining riding the bus`/) much 
+as high-level code notates 
 instructions to call low-level functions.  
 `p`
 
@@ -384,7 +406,7 @@ and/or runtimes).  It may not be obvious
 how argumentation that the semantics 
 of computers is basically one of `q.procedures` 
 and not `q.logic` practically affects any 
-of these latter topics.  Elsewhere I have 
+of these latter topics.  In earlier chapters I  
 presented analyses hoping to show that 
 there is at least some practical consequence 
 that might compel new language-engineering ideas, 
@@ -402,7 +424,9 @@ I have not clarified how detecting a
 concordance between `q.interface theories` 
 in natural and computer languages 
 yields any substantive insights 
-in either context.
+in either context.  The following, 
+as such, are brief comments 
+addressing these questions.
 `p`
 
 `subsection.The (provisional) semantics of syntactic 
@@ -410,15 +434,156 @@ dis-ambiguation`
 
 `p.
 The central idea of `q.interface` theories of meaning, 
-as I see it, is that linguistic structures do not 
+as I see them, is that linguistic structures do not 
 (at least fully) encode meanings in full 
 detail, but rather defer to extra-linguistic 
-cognitive processes; language proper 
+cognitive processes %-- language proper 
 defines parameters and specifications on 
 such extra-linguistic faculties, but does 
 not logically reciprocate whatever mental 
 operations substantiate cognitive processes 
-themselves.   Having argued that shared 
+themselves.  To be rigorous %-- given that 
+`i.reciprocate` usually connotes something 
+coming `i.after the fact` %-- we can 
+imagine a variation on the reciprocation 
+theme wherein the idea of a structural 
+alignment, a systematized lining-up of 
+structural elements, is lifted from 
+the `q.reciprocate` notion but switched 
+to that which is temporally prior, 
+like an anticipation or foreshadowing.  
+According to an implicit linguistic 
+paradigm %-- probably shared by many branches 
+of `q.Analytic` philosophy as well 
+%-- language produces logically organized 
+meanings because elements in langauge 
+are patterned, during the course 
+of enunciation, to anticipate the logical 
+form of ideas which then get decoded 
+by addressees.  The prior logical 
+structure then guides addressees to 
+assemble a notional understanding 
+of expressions by reconstructing 
+their structuring principles.  
+Despite this temporal ordering, though, 
+it seems best to say that 
+the expression-structure `q.reciprocates` 
+the later reconstruction %-- on this 
+account %-- because addressees are 
+grasping the idea that is anterior to 
+and contextualizes the expression
+as a communicative artifact.  The goal is 
+to achieve a cognitive synergy 
+between multiple parties' thought-processes; 
+the linguistic form is merely 
+a device to achieve that telos. 
+`p`
+
+`p.
+This is, at least, one way to 
+gloss the `q.logistic` paradigm 
+which some writers have critiqued 
+(`cite<[Chapter 25]LakoffJohnsonMetaphors>;, 
+say).  Cognitive Grammar and (at least 
+as presented by Orlin Vakarelov) Interface Theories 
+present an alternative paradigm; my 
+gloss on this latter perspective 
+is that whatever actually reciprocates 
+logical form emerges from cognitive 
+processing, not from linguistic structure 
+(whether shallow or `q.deep`/) itself.  
+The form of communicative expressions 
+has `i.some` correlation with logical 
+structures, but this is not a 
+mimicry in the sense of reciprocation 
+or organization aligmnet; instead, 
+linguistic elements are patterned 
+so that their structural relations, 
+along with semantic and lexical cues 
+themselves, serve as `q.prompts` or 
+instigators molding processes of 
+cognitive reception in different directions, 
+so that the telic logical form emerges 
+at the end of a cognitive arc.  The resemblance 
+of linguistic form to propositional 
+structure is more like an embryo to a newborn 
+than a closed term in symbolic logic to 
+the proposition it encapsulates. 
+`p`
+
+`p.
+For lack of a better word, we might 
+fall back on something like `q.temporally 
+inverted reciprocation` to capture the 
+notion that sentence signify propositional 
+content by modeling its logical form 
+(more or less direction %-- rather 
+than prompting addressees to 
+infer that logic via extra-linguistic 
+cognition).  There is no room here 
+to go into detail as to what sorts of 
+cognitive processes I have in mind, or 
+linguistic evidence that I think 
+argues for this perspective.  A more expansive 
+empirical and speculative defense of such 
+arguments forms the thesis of a series of 
+articles deposited as part of, and an analysis of, 
+data sets published alongside `cite<JosephLehmann>; 
+(I'll reference the former papers in a footnote rather 
+than citing them, because the supplemental material 
+was developed as part of the data set, not submitted 
+as journal articles)`footnote.
+`input<ctgrefs>;
+`footnote` %-- with a mashup of 
+computer code, empirical data, and Cognitive-Grammar-style 
+analyses, trying to achieve methodological plurity 
+like I sketched in Chapter 23.  
+The overarching theme here is a critique of 
+`q.logicism` or symbolic-logic encoding 
+of linguistic expression/signification, which of 
+course rests in the shadow of similar 
+counter-paradigm projects within the 
+Cognitive Linguistic canon, represented 
+on the philosophical side by Lakoff and 
+Johnson in particular, and from the 
+linguistic side by, e.g., Cognitive Construction 
+Grammar (Langacker's Cognitive Grammar arguably 
+being intermediary, part formal-linguistic and 
+part-philosophical).
+`p`
+
+`p.
+I claim however 
+that these extant analyses intending to 
+supplant `q.logistic` philosophy of 
+language are still incomplete, and there 
+is room to solicit more empirical data, 
+more correspondances with formal 
+and computational linguistic models, 
+and more extensive investigation of 
+cognitive processes `i.outside of` 
+logicomathematic propositional models. 
+That is to say, the Cognitive-Grammatic 
+counter-arguments should be more thoroughly 
+integrated with formalizable counter-theories of 
+linguistic structure, perhaps from the 
+perspective of `q.interface theories` and/or 
+generalized Neo-Davidsonian event-semantics 
+(e.g., `cite<ClaudiaMaienborn>;, 
+`cite<DarrinLouisHindsill>;, `cite<JeanMarkGawron>;, 
+`cite<JeanMarkGawronPaths>; `cite<CopleyHarley>;, 
+`cite<RobinCooper>;, `cite<JamesPustejovsky>;).
+Again, though, the analyses and supporting 
+data I have in mind are outside the 
+scope of the current discussion.  Here, 
+I will focus on the narrow band within this 
+territory that fits the points of 
+contact between natural human discourse
+and artificial (e.g., programming) languages.
+`p`
+
+`p.
+Having argued above that shared 
 understanding is `i.pre`/-linguistic, 
 I would add that cognitive processing is 
 `i.also` outside language, so that 
@@ -477,7 +642,7 @@ satisfy certain criteria
 (such as pairing up words based 
 on part of speech)?  How can 
 we rule out grammatically plausible 
-but logically nonsensical,  
+but logically nonsensical  
 parses, or filter interpretations 
 that are syntactically reasonable 
 but depend on mapping words 
@@ -579,7 +744,7 @@ candidate graphs by considerations
 `i.other than` explicit semantic 
 meaning, because with such 
 restrictions in effect one can 
-`q.quickly` narrow size of 
+`q.quickly` narrow the scope of 
 parse-structures that are legitimate 
 contenders to be `q.correct` readings 
 of each sentence.  Part-of-speech 
@@ -631,15 +796,18 @@ type-checking can be progressively
 refined as our type-models become 
 more granular.  So the essential 
 detail, represented in Lambda Calculus 
-via beta-reduction, would be how 
+via `q.beta`/-reduction, would be how 
 type-tuples under the influence of 
 functional types collapse to single 
 types, and iteratively such reduction can 
 occur over multiple stages (for sub-expressions), 
 yielding, in the linguistic context,
 the stipulation that (complete) sentences 
-have `q.propositional` types.  In chapter 20 
-I argued that lambda calculi and their 
+have `q.propositional` types.
+`p`
+
+`p.
+In chapter 21 I argued that lambda calculi and their 
 variations (Sigma Calculus, calculi with 
 exceptions, and so forth) can be represented 
 via `q.channels` and encoded via hypergraphs; 
@@ -666,13 +834,13 @@ Elaboration of my attempted extensions
 along these lines %-- via channels and meso-types 
 %-- is outside the scope of the current discussion; 
 I merely want to point out that type-theoretic 
-approach can offer rigorous models of 
+approach may offer rigorous models of 
 parse-pruning and that the effectiveness
 of pruning `q.algorithms` increases to 
 the degree that type systems become 
 finer-grained.  This is true both for 
 natural and programming languages, as 
-evidenced by how strongly-typed language 
+evidenced by how strongly-typed languages 
 support more rigorous modes of 
 static analysis.  Type systems which 
 encompass `q.dependent types`/, typestates, 
@@ -685,8 +853,8 @@ create provisional semantic models of
 sentences without fully completing 
 all lexical/semantic/referential/anaphoric 
 details.  However fine- or coarse-grained 
-the recognized type system, the key 
-structural claim in any case is that 
+our recognized type system, the key 
+structural claim is that 
 type-reductions cascade from terminal 
 nodes to root nodes in tree-like 
 (or directed-acyclic) subgraphs, and that 
@@ -703,10 +871,13 @@ investigated by Link Grammar supply a different
 and orthogonal class of constraints, because 
 sentences appear to have predictable regularities 
 in terms of contexts where specific forms 
-of interword-links are permissible.  In [], 
+of interword-links are permissible.  In 
+`cite<[chapters 6 and 9]NeusteinChristen>;, 
 I argued (inspired by work such as that 
-of Lucas Champolion, as well as more 
+of Lucas Champollion, as well as more 
 generically from Cognitive Grammar and Link Grammar 
+`cite<GeroldSchneider>;, `cite<SleatorTamperley>;, 
+`cite<ErwanMoreau>;, `cite<VepstasGoertzel>; 
 overall) that the most important framework 
 for modeling pair-relations as parse-criteria 
 is that of `q.thematic relations`/, focusing 
@@ -725,15 +896,52 @@ verb's state/event within an epistemic
 packages, mediated by the speaker's 
 propositional and perspectival attitudes.  
 Parse-graphs only make sense if thematic 
-relations together sum together in ways 
+relations sum together in ways 
 that are epistemically coherent.  
 This, then, presents an additional 
 layer of criteria that can be imposed 
 on parse-spaces to distinguish credible 
 from dubious parse-candidates.  I defer 
-to work such as Langacker [] for 
-actual descriptions of `q.epistemic coherence`/; 
-here I will simply say that certain lineups 
+to work such as Langacker 
+`cite<LangackerPresent>;, `cite<LangackerEvidentiality>;, 
+`cite<[chapter 9]LangackerIntro>; for 
+actual descriptions of `q.epistemic coherence` 
+(or see `cite<JerryTBall>;, `cite<MustafaFatah>;, `cite<DeWitBrisard>;, 
+`cite<PeterPelyvas>;, `cite<PeterPelyvasDeontic>;, 
+`cite<PeterPelyvasDevelopment>;, `cite<WernerKallmeyer>;,
+`cite<LawrenceWBarsalou>;, 
+`cite<MichaelSprangerIncremental>;, `cite<MichaelSprangerEvolution>;, 
+with respect to speaker-relative grounding 
+and epistemic contingencies)`footnote.With the caveat that I believe notions such as 
+grounding and epistemics should be read more 
+broadly than `i.merely`/, say, semantics 
+of modal verbs, or figure/ground relations 
+%-- that indeed the entirety of a linguistic 
+expression is patterned around speakers 
+signaling through semantic and syntactic 
+means their particular epistemic 
+comportment `visavis; shared situations.   
+Even if the purpose of a discourse-fragment 
+is not to thematize speaker-relative 
+epistemics directly (`i.I think that...`/. 
+`i.Surely/Probably...`/, `i.It looks to 
+me like...`/) we cannot help but reconstruct 
+the particularities of our perspectives 
+through linguistic form and communicative 
+pragmatics, because the overlap and 
+possible contrasts between our situational 
+beliefs and other people's are intrinsic 
+to their cognitive reception of 
+our speech-acts.  Such cross-epistemic 
+processing, I claim, factors directly 
+into syntactic/semantic and serves as 
+the overarching architecture of 
+linguistic form to the degree that 
+it does not just logistically simulate 
+propositional structure; again the 
+data-set article-trio linked in the 
+prior footnote develops these claim 
+in more detail.`/; here I will simply say that certain lineups 
 of thematic relations are more coherent 
 than others, and this can be grounds 
 for accepting or rejecting candidate 
@@ -775,7 +983,7 @@ a type-theoretic infrastructure plays a
 pruning role analogous to  
 parse-graph multiplicities in natural 
 language.  Also, procedures' 
-pre- and post-conditions can serve as 
+pre- and post-conditions serve as potential 
 criteria on graph-edges structurally 
 equivalent to thematic relations 
 in natural language: consider the idea 
@@ -797,12 +1005,6 @@ parsing is understood to be functionally
 prior to cognitive `q.scripts` that yield 
 the full-scale semantics for linguistic 
 expressions.   
-`p`
-
-
-
-`subsection.From Natural to Computer Languages`
-`p.
 Although it would take more work to make 
 this proposal rigorous, I believe that the 
 co-existing structures of type-reduction 
@@ -815,7 +1017,14 @@ which allow some decisions to be made
 case, function-symbol resolution in the 
 latter %-- that foreshadow but 
 do not depend on complete semantic 
-information.  While similarities between 
+information.  
+`p`
+
+
+
+`subsection.From Natural to Computer Languages`
+`p.
+While similarities between 
 programming and natural languages 
 are in general pretty superficial 
 %-- to reason otherwise would 
@@ -823,7 +1032,8 @@ minimize the subtlety and indeterminacy
 of human speech, which is complete 
 different than the mechanistic 
 engineering of software code %-- 
-I think these systems in particular 
+I think these systems  in particular 
+(type-reduction and thematic-relations)
 are structurally complex, relatively 
 speaking, and operationally 
 non-trivial, revealing interesting 
@@ -954,7 +1164,7 @@ through some of these constituent elements.
 Likewise, in the case of robots, 
 the components of a robot's `q.configuration` 
 would be angles of gears, extenders, wheels, 
-and whatever mechanical devices robot's use 
+and whatever mechanical devices robots utilize 
 to move and reposition themselves.  At 
 the culmination of a procedure-set enacted 
 in response to user input, then, the robot 
