@@ -133,7 +133,7 @@ visible contrast between
 `q.down`/`q.checked` states.
 
 `pseudoIndent; Moreover, buttons and other `GUI; elements 
-can sometimes be `q.disabled`/, meaning 
+can sometimes be `q.disabled,` meaning 
 that one cannot interact with them 
 according to normal patterns because 
 (given present application-state) 
@@ -270,7 +270,7 @@ angles onto the scene, which creates the
 illusion of three dimensions even though the 
 graphic at any moment in time is confined 
 to a `TwoD; computer screen).  Although we can speak 
-of graphics displays as presenting `q.information`/, 
+of graphics displays as presenting `q.information,` 
 this is a more informal usage if a control shows, 
 for example, a photograph.  However, images 
 can also be generated on-the-fly to visualize 
@@ -316,7 +316,7 @@ information-displays which directly map
 data structures to `GUI; aggregates and 
 raw file-viewers which are only 
 in an indirect sense representing 
-`q.information`/, but are primarily 
+`q.information,` but are primarily 
 rendering file-contents into a static visual form. 
  
 `pseudoIndent; The more canonical case 
@@ -415,7 +415,7 @@ of the latter is lists of files in
 folders, where individual folders 
 may be seen in an `q.open` state 
 (such that folder-contents, including 
-other folders, are listed) or `q.closed`/, 
+other folders, are listed) or `q.closed,` 
 and likewise for subfolders inside 
 (open) folders, and so on.  These 
 kinds of controls are sometimes 
@@ -436,7 +436,7 @@ breakdown.  Controls
 can have `i.functional` states, reflected 
 in style changes, such as a button 
 in `q.normal` or `q.hover` 
-modes (or also, say, `q.down`/, `q.checked`/, 
+modes (or also, say, `q.down`/, `q.checked,` 
 and `q.disabled`/).  Most controls' 
 state is also determined by the 
 data they present (e.g., for 
@@ -486,7 +486,7 @@ line resizes both parts of the container
 (one gets larger, the other smaller) potentially 
 hiding or unhiding contained content and controls (depending 
 on which side they lie on).  Another pattern is 
-`q.drag and drop`/, typically involving icons being moved 
+`q.drag and drop,` typically involving icons being moved 
 (figuratively `q.dragged` by the mouse) 
 from one container to another: in some contexts 
 the receiving container takes on a colored background 
@@ -559,7 +559,7 @@ some controls' edges); cursors tend to be
 given an arrow-like icon in these settings.  
 When hovering over text, on the 
 other hand, cursors usually take on a shape 
-reminiscent of a capital letter `q.I`/.  
+reminiscent of a capital letter `q.I.`  
 
 `pseudoIndent; In some cases the 
 on-screen mouse position can be correlated with 
@@ -660,7 +660,7 @@ requested).  Reviewing forms of
 the second half of this equation.
 We can also examine user gestures, 
 constituting the first half 
-of the `q.equation`/, insofar as 
+of the `q.equation,` insofar as 
 gestures signal user intent, which 
 leads to application responses, 
 and finally to `GUI; changes.  
@@ -719,7 +719,7 @@ actions are defined: an action of
 `i.clicking a` (`GUI;) `i.button`/, for example, 
 is meaningful in the context of a front-end 
 environment where the specific button is among 
-many controls that could be `q.clicked`/, and 
+many controls that could be `q.clicked,` and 
 given that it is enabled and visible, etc.
 `p`
 
@@ -731,9 +731,9 @@ more than one user gesture.  For example, instructions
 to save a file could derive from clicking a `q.save` 
 button, but also selecting a save option from 
 a context menu, or hitting a combination on the 
-keyboard, such as `q.control`/-plus-`q.s`/.  For more rigorous 
+keyboard, such as `q.control`/-plus-`q.s.`  For more rigorous 
 discussion, I suggest referring to actions in this 
-multi-indication context as `q.requests`/, so that 
+multi-indication context as `q.requests,` so that 
 the various gestures signaling one common 
 request (like `q.save file`/) each have distinct 
 actions.  In any case, all actions then 
@@ -910,7 +910,7 @@ maintaining the code that the two objects
 are interdependent).  In `OO; systems, 
 the basic pattern is that procedures 
 which affect the state of a specific 
-object are implemented via `q.methods`/, 
+object are implemented via `q.methods,` 
 in which a specific object is singled 
 out as a distinct form of input 
 value, sometimes called the method `q.receiver` 
@@ -932,9 +932,9 @@ input arguments.
 `p.
 In Chapter 21 I mentioned 
 the idea of grouping procedural parameters 
-into `q.channels`/, including a `q.sigma` 
+into `q.channels,` including a `q.sigma` 
 channel that can generalize receiver-objects 
-to object-lists (derived from the `q.sigma calculus`/, 
+to object-lists (derived from the `q.sigma calculus,` 
 which attempts to model `OO; methods by 
 extending lambda calculi).  This would be 
 one way to tweak `OO; systems %-- permitting 
@@ -969,7 +969,7 @@ Apart from multiple method-receivers, a
 more substantial potential departure 
 from conventional `OO; suggested by 
 `GUI; state involves user actions and 
-corresponding `q.signals`/.  A common 
+corresponding `q.signals.`  A common 
 pattern in `GUI; programming is to 
 generalize the idea of procedures 
 calling one another to a model 
@@ -980,10 +980,10 @@ mechanisms, where signals can be `q.connected`
 to slots.  Rather than one procedure 
 calling another directly, in this architecture 
 the first procedure `q.emits` a signal, 
-which the second then `q.receives`/, having the 
+which the second then `q.receives,` having the 
 effect that the second procedure gets called, 
 with parameters (if any) provided by the 
-`q.sender`/.  Unlike direct inter-procedure 
+`q.sender.`  Unlike direct inter-procedure 
 calls, these connections are 
 routed through an intermediary component 
 and they might be dynamically reconfigured: 
@@ -1025,7 +1025,7 @@ would track these `GUI;-specific details
 but not get involved with actual save 
 operations.  Signal/slot mechanisms 
 are as such (as this case-study suggests) valuable 
-tools for enforcing `q.separation of concerns`/, 
+tools for enforcing `q.separation of concerns,` 
 where each procedure and each object have 
 a relatively narrow set of responsibilities.  
 Signals and slots prevent objects from becoming 
@@ -1216,7 +1216,7 @@ groups of interrelated parameters
 reflecting states from multiple 
 different `GUI; controls.  `lGUI; 
 state can be guided by sets of 
-`q.rules`/, such as that an 
+`q.rules,` such as that an 
 image top-left corner must be 
 positioned and repositioned to ensure 
 balanced margins, or that scrollbars 
@@ -1306,7 +1306,7 @@ in this case could provide a further
 perspective on `OO; `q.semantics` 
 in the sense that Object-Oriented 
 principles can inform data models, 
-`q.knowledge system`/, and other 
+`q.knowledge system,` and other 
 technologies that are designed 
 to have some explicit connection 
 with real-world objects and 
@@ -1373,7 +1373,7 @@ for dropping and resizing controls).  When working in
 actions are most commonly interpreted 
 as rotations.  Most `ThreeD; viewers 
 support panning and zooming by recognizing 
-`q.keyboard modifiers`/, wherein users 
+`q.keyboard modifiers,` wherein users 
 hold down a key (often `b.shift`/, `b.control`/, 
 or `b.alt`/) while also moving the mouse.        
 `p`
