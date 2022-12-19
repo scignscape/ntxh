@@ -557,7 +557,7 @@ a `q.resize` icon when the mouse hovers
 over a corner; this works also for 
 some controls' edges); cursors tend to be 
 given an arrow-like icon in these settings.  
-When hovering overm on the 
+When hovering over text, on the 
 other hand, cursors usually take on a shape 
 reminiscent of a capital letter `q.I`/.  
 
@@ -1345,7 +1345,7 @@ be the topic of the rest of this section.
 
 `subsection.3D Graphics and Robotics Front-Ends`
 `p.
-When displaying `TreeD; graphics, applications 
+When displaying `ThreeD; graphics, applications 
 need to support a further group of user actions 
 because there are a larger set of possible 
 view transformations, compared with `TwoD; 
@@ -1550,7 +1550,7 @@ or manipulate.  Within their video feed,
 then, certain objects will be singled 
 out through Computer Vision, making 
 it possible either for views of such objects 
-to be visually altered/highligted 
+to be visually altered/highlighted 
 or for a separate front-end display, presented 
 alongside the video feed proper, which 
 schematically diagrams the robot's 
@@ -1663,7 +1663,7 @@ more direct exchange where humans perhaps
 `q.talk directly` to them, their 
 words parsed via Natural Language Processing 
 (this is the kind of scenario discussed 
-elsewhere in this book; see Chapter 11111).  
+elsewhere in this book; see Chapter `i.ref`/).  
 However, within the relevant `NLP; pipeline 
 there would presumably be a distinction 
 between components that consume the spoken 

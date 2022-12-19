@@ -548,7 +548,7 @@ i.e., intersections between grid lines.
 `anondefin`
 
 The purpose of this kind of grid is to address 
-certain mereogeometric or meretopological situations 
+certain mereogeometric or mereotopological situations 
 where distances can combine entities of differing 
 dimensions.  Consider a checkerboard pattern; imagine 
 placing chess pieces either `i.inside` board squares 
@@ -669,7 +669,7 @@ of zeros in the desired `MCH; distance.  An
 orthogonal zero, for example, results 
 in four points along two diagonals without an 
 additional orthogonal projections which could 
-extend either horizontally or verticlly; 
+extend either horizontally or vertically; 
 as a result, the cycle can have only four 
 (not eight) points, but also it cannot be 
 contracted due to width/height discrepancies 
@@ -714,7 +714,7 @@ should be placed before those further away.
 For `XCSD;, the `q.points` are actually 
 tierboxes (or gaps between them), but 
 this is consistent with black-gray grids 
-embodying mereogemetric relations 
+embodying mereogeometric relations 
 through discrete/integer mathematics, 
 without the grid being a faithful 
 `i.representation` of the modeled 
@@ -1003,7 +1003,7 @@ incorporating format-specific `GUI; capabilities.
 For example, `XCSD; includes code to model 
 individual tierboxes via distinct graphics-scene 
 objects, so each tierbox receives user 
-events indepdently, with its own mouseover 
+events independently, with its own mouseover 
 and context-menu effects.  The earlier 
 discussion about `GUI; integration mentioned 
 basic-level interactions such as viewing 

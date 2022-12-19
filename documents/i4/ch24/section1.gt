@@ -413,7 +413,7 @@ there is at least some practical consequence
 that might compel new language-engineering ideas, 
 for example in more rigorously formalizing 
 non-set-theoretic type theories and potentially 
-new stategies for code analysis 
+new strategies for code analysis 
 (alluded to via `q.constructor channels` 
 and my overall suggestions to the 
 effect that we should formulate compiler design and 
@@ -497,7 +497,7 @@ The form of communicative expressions
 has `i.some` correlation with logical 
 structures, but this is not a 
 mimicry in the sense of reciprocation 
-or organization aligmnet; instead, 
+or organization alignment; instead, 
 linguistic elements are patterned 
 so that their structural relations, 
 along with semantic and lexical cues 
@@ -537,7 +537,7 @@ as journal articles)`footnote.
 `input<ctgrefs>;
 `footnote` %-- with a mashup of 
 computer code, empirical data, and Cognitive-Grammar-style 
-analyses, trying to achieve methodological plurity 
+analyses, trying to achieve methodological plurality 
 like I sketched in Chapter 23.  
 The overarching theme here is a critique of 
 `q.logicism` or symbolic-logic encoding 
@@ -559,7 +559,7 @@ that these extant analyses intending to
 supplant `q.logistic` philosophy of 
 language are still incomplete, and there 
 is room to solicit more empirical data, 
-more correspondances with formal 
+more correspondences with formal 
 and computational linguistic models, 
 and more extensive investigation of 
 cognitive processes `i.outside of` 
@@ -811,13 +811,14 @@ have `q.propositional` types.
 In chapter 21 I argued that lambda calculi and their 
 variations (Sigma Calculus, calculi with 
 exceptions, and so forth) can be represented 
-via `q.channels` and encoded via hypergraphs; 
+via `q.channels` and encoded through hypergraphs; 
 this represents a small extension to the 
 concept of type-reduction, because reductions 
 are type-checked across multiple channels.  
 Aside from that, we can further analyze to 
 what extent semantic information can be 
-encoded in type-systems; in [] for 
+encoded in type-systems; in the aforementioned 
+`cite<JosephLehmann>; data-set analysis for 
 example I distinguished between different 
 levels of type-granularity (`q.macro-types`/, 
 `q.meso-types`/, and `q.micro-types`/), 

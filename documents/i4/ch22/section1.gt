@@ -608,7 +608,7 @@ possibility is to label directions such as
 `q.northwest` or `q.top-left` and so forth via a 
 distinct enumeration class, where the enumeration 
 labels would be mapped to corresponding numbers 
-in the 0-8 ramge, but descriptive terms such as `q.left` 
+in the 0-8 range, but descriptive terms such as `q.left` 
 might be more readable than numeric codes.
 `p`
 

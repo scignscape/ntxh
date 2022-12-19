@@ -162,10 +162,10 @@ is not primarily oriented to monochrome
 color-spreads, but rather (we might say) 
 colors as `q.themes`/, wherein one thematic 
 color carries expectation of some textural and 
-lighting-effect variation.  A straightfoward 
+lighting-effect variation.  A straightforward 
 example of such a theme might be a canonical 
 foreground color; or, we may have an image-foreground 
-composed of mulutiple objects with their own 
+composed of multiple objects with their own 
 predominant color, each thereby becoming  
 distinct themes for the overall image (but still 
 encompassing textural patters across  

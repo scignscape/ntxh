@@ -102,7 +102,7 @@ applications' ability to adapt and evolve.
 `p.
 Aside from a generic desire to build `q.quality` 
 software, engineering applications for 
-future adaptation also prompts developpers to 
+future adaptation also prompts developers to 
 design software in rigorous, well-documented 
 ways.  Applications can be thought of, 
 rather metaphorically, as virtual/digital `q.piping` 
@@ -124,7 +124,7 @@ breakdown of all the functionality which
 the application makes available, by analogy 
 to how books might be organized on the 
 shelves of a library.  But this structuring 
-principle also promotes extensibilty %-- 
+principle also promotes extensibility %-- 
 once a system is in place to enumerate 
 functionality, it is easier to add 
 new features because there is greater 
@@ -624,6 +624,7 @@ that distinguishes `q.Standard Data Elements` from
 `q.Private Data Elements`/.  The latter are 
 assigned a numeric pair whose `q.Group` 
 (first) Number is odd.  `lPACS; (Picture Archiving System) viewers 
+`cite<JohanVanSoest>;, `cite<DavidAClunie>;
 (software that recognizes the `DICOM; format) will ignore 
 Private Data Elements by default, so the Standard/Private 
 distinction is intrinsic to protocols through which 

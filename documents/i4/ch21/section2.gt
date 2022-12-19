@@ -393,7 +393,7 @@ functional-programming theory, for example,
 I do not take such `q.constructive` formalizations 
 as an essential aspect to the relevant 
 type systems).`footnote.
-See `cite<CCC>;, chapter 4, for a more 
+See `cite<NeusteinChristen>;, chapter 4, for a more 
 extensive analysis of non-constructive 
 type systems and why assuming 
 that types are non-constructive in general 
@@ -793,7 +793,7 @@ about values, and quality of a language's
 support for managing value-partition 
 mapping is an orthogonal matter to 
 the semantic interpretation of partitions.  
-In general, langauges can take advantage 
+In general, languages can take advantage
 of extension-based reasoning without 
 embracing the theory that types are 
 semantically derived from their extensions. 
@@ -1415,7 +1415,7 @@ procedures)?  Channel systems offer
 one solution to this problem, because 
 channel-semantics and carrier-state 
 are available as modeling parameters 
-orthogonal to types themseves.  
+orthogonal to types themselves.  
 For instance, slot-procedures 
 and the signals they specifically 
 respond to would not need to be notated 

@@ -21,7 +21,7 @@ fallible) correlation between
 application-state and particular 
 real-world propositional situations 
 of interest (recall the case of  
-apps showing a requently-updated 
+apps showing a frequently-updated 
 World Cup score).    
 `p`
 
@@ -43,7 +43,7 @@ consult to track the game's score
 can only be deemed an indicator 
 for the relevant propositional 
 content (something like, France 
-and Argentina are now tied nill-nill) 
+and Argentina are now tied 3-3) 
 insofar as the program fulfills 
 its design requirements.  Semantics,
 in this realm, is `i.implemented`/.  
@@ -124,7 +124,7 @@ to the outputs.
 To model this semantics, then, if 
 we seek to analyze computer software 
 by analogy to studying human 
-langauge, we need to represent 
+language, we need to represent
 procedure calls: how tokens in 
 source code map to specific 
 functions that can be executed 
@@ -250,14 +250,14 @@ Computer Vision or Cyber-Physical networks
 without needing detailed understanding 
 of these respective domains.  Virtual 
 Machines may add an extra layer of indirection 
-by including encapsulated domain-specific procecures 
+by including encapsulated domain-specific procedures 
 alongside lower-level instructions as 
 part of their `q.operation set`/.  In this 
 way `VM; can play a role analogous 
 to (or permitting the implementation) of 
 scripting interfaces to domain-specific 
 modules (consider, say, a `Python; interface to 
-the predominant Comptuer Vision libary, `OpenCV;: 
+the predominant Computer Vision libary, `OpenCV;: 
 many programmers find it easier to 
 invoke `OpenCV; routines in `Python; than 
 to call these functions directly via `Cpp;).     
@@ -274,7 +274,7 @@ the philosophical differences between divergent
 programming styles (functional vs. Object-Oriented, 
 say) are reinforced by what is optimized by 
 compilers and runtimes.  
-Langauges encourage code-writers to adopt 
+Languages encourage code-writers to adopt
 certain design patterns, and in turn they 
 are optimized so that code which adheres 
 to such patterns runs more quickly, or 
@@ -293,7 +293,7 @@ Virtual Machines, compared with `CPU;s,
 are typically slower but more flexible: because 
 they do not seek the most optimized implementation, 
 they may serve as a hybrid environment 
-through which multiple langauges may interoperate.  
+through which multiple languages may interoperate.
 `description`
 `p`
 

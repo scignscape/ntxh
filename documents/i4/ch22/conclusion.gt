@@ -164,7 +164,7 @@ In short, the interop between image-processing
 host applications and analytic modules  
 are a good example of bi-directional 
 data sharing between semi-autonomous components, 
-and fall under the rubrick of interop 
+and fall under the rubric of interop
 situations where protocols may benefit 
 from formalization or (at least partial) 
 implementation via Virtual Machines.

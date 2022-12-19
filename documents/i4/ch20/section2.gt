@@ -631,7 +631,7 @@ ambient space where a robot moves), but
 robots also need to understand their 
 surroundings in functional terms %-- understanding 
 external objects as artifacts to be 
-moved, obstacles to be avoided, affordance 
+moved, obstacles to be avoided, affordances 
 enabling the robot's own movements 
 (walking steps, say).  In 
 all of these contexts spatial and 
@@ -768,7 +768,7 @@ hydrology and
 `q.hydroinformatics` 
 `cite<MarkRandall>;, `cite<EhsanShafiee>;, `cite<JundeChen>;,
 `cite<ShaunHowell>;, `cite<PraveenKumar>;,
-`cite<ThomasHies>; .  Indeed, I'll continue the 
+`cite<ThomasHies>;.  Indeed, I'll continue the 
 earlier case-study of Ukrainian 
 reconstruction.  It has been well-documented 
 that the 2022 war crippled the country's 
