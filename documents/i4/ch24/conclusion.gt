@@ -53,11 +53,568 @@ but not specific word-meanings).
 
 
 `p.
-I'll conclude Section 5 by making a few brief 
-comments looking at the `q.broad` picture 
-%-- in effect, at philosophy.  
+As a final comment: referring back to 
+the discussion about disciplines straddling 
+science and the humanities, such as 
+cognitive science and linguistics, 
+methodological integration may proceed 
+from multiple directions.  In linguistics, 
+for instance, we can start with a mostly 
+humanistic paradigm for studying communication 
+and signification and then gradually 
+incorporate formal or computational 
+models.  Alternatively, we can 
+develop systems in computational 
+or mathematical linguistics and then 
+consider how well they perform or apply 
+to actual human discourse.  The `q.flow of ideas` 
+could travel in multiple directions.  Concepts 
+emerging in a more speculative, philosophical 
+vein %-- Davidsonian event-semantics or 
+Kripke frames for modal logic come to mind 
+%-- propagate into computer science, 
+Artificial Intelligence, or even 
+pure mathematics.  Crossing back the 
+other way, Hindley-Milner type systems, 
+Montague grammar, Complexity/self-organization 
+theory, or convolutional neural networks have 
+appealed to researchers as plausible models 
+or explanations for different aspects 
+of human language, thought, and society.  
 `p`
 
+
+`p.
+In the philosophy of science, it is commonplace 
+to invoke an `q.explanatory gap` between 
+what we might physically or biologically 
+learn about human (and animal) minds 
+and what we can actually experience, or 
+how we talk about and represent 
+experience through dialog and culture.  
+Such a gap, perhaps, points to a metaphysical 
+incompleteness on both sides of the 
+science/humanities divide (to the degree that 
+we can even talk as if knowledge has that 
+neat cleavage).  We know that human 
+life and civilization belongs to the physical 
+world and therefore is explained by physical 
+laws, but enigmas of (say) the neuro-anatomical 
+origins of consciousness perpetuate 
+a sense that our theories about society and 
+culture, however compelling their structure 
+and presentation, lack the kind of causative 
+closure we expect of biology and other 
+natural sciences.  Conversely, theories 
+in the physical sciences are models 
+in search of explananda.  Mathematical 
+abstractions are necessarily idealizations, 
+and we need human insight to connect the 
+formality saturating the model with the 
+empirical realities %-- be they at 
+the scale of molecules, cells, bodies, continents, 
+or galaxies %-- it seeks to explain.  
+`p`
+
+
+`p.
+When models are formulated as explanantia 
+for `i.conscious` or `i.experiential` 
+empiricity %-- when they are addressing 
+thought, or language, that we actually 
+witness ourselves enacting %-- the externality 
+of model to ground is highlighted, because 
+we recognize that such theories are not 
+approximating something inert like a 
+rock or sheet of metal, or something 
+distance like seen in a microscope or 
+telescope, but ourselves: our awareness, 
+feelings, sense of community, lifeworld.  
+It is reasonable that we should hold 
+high standards for the accuracy of formal 
+models entertaining ambitions to 
+unmask the science of `i.this` reality.  
+A natural-language processor which is 
+`ninetypercent; accurate is interesting and 
+useful, but that one-in-ten error still 
+leaves a certain `i.frisson`/, like 
+seeing a very believable wax figure that 
+is still not a person.  Just like the 
+wax figure is so far from being human, 
+we get the uncanny sense that however 
+close to just-right an `NLP; engine 
+might be, there is something 
+fundamental missing there.  What is 
+perhaps most thought-provoking or 
+disquieting is that the gap seems 
+wider than a number such as `ninetypercent; 
+suggests: humanness cannot be quantified; 
+an error rate of just one-in-ten, even 
+if it got progressively better, 
+would still not actually be 
+advancing toward human quintessence.  
+We are left wondering if this 
+humanness which seems so real in 
+our experience cannot be measured 
+at all, and as such stands 
+in the context of science 
+as essentially a metaphysical fiction. 
+`p`
+
+
+`p.
+And yet, perhaps the explanatory gap 
+is actually just the unavoidable 
+separation between theories and 
+phenomena: models do not contain 
+the reality they simulate.  
+It would seem reasonable 
+but also unremarkable  
+to say that models 
+of galaxy-formation do not 
+fully capture galaxy-ness, or 
+theories of biological systems 
+have some ontological separation 
+from the notion of life itself.  
+Perhaps quintessential 
+humanness is no more a speculative 
+phantom than galaxyness or 
+planetness or metalness or 
+organic-compound-ness.
+`p`
+
+
+`p.
+Ultimately, formal systems purporting to 
+describe thought and language 
+%-- be their origins in mathematics, 
+computers, Artificial Intelligence, 
+or physical science %-- should 
+be taken as approximating 
+idealizations, like the Newtonian 
+construction of our solar system.  
+Natural science tests theories 
+against empirical data, often 
+collected in laboratories or 
+specially-constructed observational equipment, 
+like the Grand Canaries Telescope or 
+CERN's Large Hadron Collider.  But when 
+the relevant explananda belong 
+to human reality %-- thought, language, 
+problem-solving, motivitions %-- at 
+some level the empirical data which would 
+advance or disconfirm theories belong 
+to our own experience, and so `i.we` are 
+the lab tests, the sites where 
+theory is compared to reality.  Our 
+`i.sense` that models of language 
+(for example) comport with the 
+dialects we speak serves as one 
+vein of evidence.  So much of 
+linguistic reasoning is driven by the 
+`q.sense` of sentences or expressions being 
+acceptable or not.  This is not an 
+empirical or analytic result; in philosophical 
+terms it would be considered speculative, 
+rooted in internal judgment.  We might 
+generalize this to assessments about 
+theories of reasoning originating in 
+Artificial Intelligence, for example.  
+Speculative thought thereby has an 
+evidentiary purpose in the ecosystem 
+of formal models of thought and 
+language, by analogy to empirical 
+phenomenology in the natural sciences.  
+`p`
+
+
+`p.
+So, epigrammatically, formalizations 
+targeted at language and reasoning 
+seek completion in several directions, 
+among them `q.empirical` grounding 
+which in this case actually takes the 
+form of human intuition and introspection, 
+which to the degree that it might  
+be systematized would be a matter 
+of philosophy rather than science 
+`i.per se`/.  And at the same time 
+%-- again, the bi-directional flow 
+of ideas %-- philosophy produces 
+speculative frameworks that we can 
+collectively dispute (disputation 
+not in the sense of disagreement, 
+necessarily, but a thought-community 
+testing theories' coherence) but for
+which, for a further dimension of 
+evidentiary status, we might seek 
+scientific backing, to the effect that a 
+theory of language, say, appears 
+formally well-motivated, or a theory 
+of human behavior is supported 
+by neuroscience.  Even if we 
+argue that `NLP; or `AI; engines 
+are not physically relevant simulations 
+of human (or animal) minds, couching 
+linguistic models in formal 
+presentations that can be 
+investigated in light of how `NLP; systems 
+process language can be one way 
+to give them a scientific substratum: 
+theories that jive with generalized 
+models of `q.language processing` 
+that can be realized in multiple 
+`i.physical` systems %-- computers, brains, 
+robots %-- gain traction within the 
+reasonable paradigm that language 
+is a system with its own rules, 
+capable of being isolated to some 
+level of abstraction, independent 
+from the electrical or biological 
+machinery through which it is implemented.   
+`p`
+
+
+`p.
+However they may spell it out, 
+philosophers have probably  
+sensed the mutual co-extensibility 
+of humanities and natural science that 
+I have attempted to capture 
+via `q.bi-directionality`/: our experience 
+tests science when its investigations 
+turn to realms that overlap with 
+human reality, and science tests 
+humanistic theories when we seek 
+causative (and not just speculative) 
+assent.  In some cases we may appeal 
+to biology or neuroscience to explain 
+human behavior %-- evolutionary 
+forces shaping the emergence of language, 
+say, or the neurochemistry of our 
+unconscious judgments and responses 
+%-- but more prevalent in 
+philosophy and related disciplines 
+is to turn, not so much to physical 
+sciences, but to formal logicomathematical 
+systems (which bring the same kind of 
+explanatory rigor as mathematical 
+models inject into natural phenomena, 
+reconstructed quantitatively).  
+The history of `q.analytic` philosophy is 
+in part a sequence of borrowings stepping 
+through generations alongside the 
+evolution of 20th century logic 
+and mathematics: first-order symbolic 
+logic, intuitionist logic, models of computation at the 
+dawn of the digital age, modal logic, 
+Category Theory, Type Theory (and 
+Homotopy Type Theory and the Curry-Howard 
+Isomorphism), formal proof-assistants, 
+symbolic `AI;, connectionist `AI;, 
+neural networks, machine learning, 
+Artificial General Intelligence. 
+`p`
+
+
+`p.
+The linguists and philosophers working 
+within the humanities-oriented bases of 
+their disciplines have largely looked 
+toward logic and mathematics to 
+find that scientific scaffolding, that 
+supplement to the closed loop of 
+speculation, which scholars 
+in other social sciences might find 
+in psychological studies or 
+socioeconomic data.  These humanistic 
+fields at some level thereby coexist 
+with computational models of (e.g.) 
+`NLP;, Software Language Engineering, 
+and Computer Vision, insofar as both 
+appeal to logicomathematical frameworks 
+as supporting structures, but with 
+some indirection.  In the humanities, 
+logical systems are only approximate 
+guides because thought and language 
+have nuances and embodiment that 
+seem outside the scope of formal 
+abstraction.  On the other hand, 
+computer systems stand apart from 
+logicomathematical foundations 
+because they are not abstract 
+theories; software has to be 
+`i.implemented`/, with trial and 
+error and refinement via 
+continuous feedback, leveraging 
+design patterns which get 
+formulated often with the 
+wisdom of concrete programming 
+experience rather than formal 
+theories.  In short, logical 
+models can reveal substrata 
+or optimizations which get 
+incorporated into a computational 
+system, but the final form 
+such systems take on often 
+emerges through the 
+processing of building them 
+through computer code itself, its 
+important structures emerging 
+from that pragmatic context rather than 
+the original mathematical abstractions.   
+`p`
+
+
+`p.
+It is interesting that, despite 
+their being co-tethered to a shared  
+set of logicomathematical canons, 
+philosophers have not often 
+appealed to computer science 
+or programming directly as a 
+source for formalization conventionally 
+sought, in the analytic tradition, 
+within logic and mathematics.  
+In other words, analytic philosophers 
+turn to branches of mathematics or 
+symbolic logic to model 
+phenomena such as syntax and semantics, 
+or classification, deductive reasoning, 
+and so forth %-- but they have not 
+similarly attended to the experience 
+of working software programs; or sought 
+to integrate philosophy with software 
+platforms, to anywhere near the same 
+level.  Arguably, approaching 
+logicomathematical formalisms via their 
+manifestation in the real-world pragmatic 
+contexts of software implementation 
+%-- rather than the abstract presentation 
+of such formalisms as, in effect, a 
+kind of mathematics %-- would be more 
+consistent with their proper status 
+`visavis; philosophy and linguistics, 
+as idealizations that have to be 
+reconnected with the nuances 
+and practicalities of human experience.    
+`p`
+
+
+`p.
+Along similar lines, it is interesting 
+that we evaluate computational 
+models of (e.g.) language- and 
+image-processing mostly in terms 
+of their payoffs in building accurate 
+technology %-- even if part of 
+our interest in such systems lies with 
+how they reveal some of the 
+substrata underlying human reasoning.  
+We are interested in how `NLP; or Computer 
+Vision engines work because they 
+may explain some of what goes on 
+in the brain when we understand 
+language or experience visual perception.  
+A derivation of sentence parse-graphs 
+via Link Grammar connector-mating/expectation 
+edge-annotations, or a superpixel segmentation 
+via morphological operators and 
+watershed-thresholds, is of interest 
+partly because we can extract data 
+from the parsed sentence or the 
+segmented image, but partly also because 
+the workings of such technology may 
+help reveal how our own minds 
+process syntax and semantics (for language) 
+or color and geometry (for vision).  
+But `i.if` we are interested in 
+computational models that `i.could potentially` 
+replicate some of what goes on mentally, 
+there may be explanatory merit to such 
+computational simulations that transcends 
+their practical accuracy.
+`p`
+
+
+`p.
+In this chapter and also Chapter 22 I have 
+outlined potential computational approaches 
+to language and vision that are motivated 
+by appeal to, potentially, our own experience: 
+the idea of `q.thematic` colors and 
+how color-experience is invested not 
+with one single hue but rather an expectation 
+of how coloration varies across textured 
+and variably-illuminated (and occluded) surfaces; 
+and, in language, by the idea of 
+provisional type-theoretic semantic coherence 
+and parse-graph evaluation in the context 
+of merely provisional anticipations of sentence-meaning, 
+consistent with a `q.procedural` semantics 
+or `q.Interface Theory` according to which 
+meaning itself tends to emerge 
+from `i.extralinguistic` cognitions.  
+In the reigning paradigm, we take 
+these kinds of experiential intuitions 
+and, to the degree that we are 
+working in a computational environment, 
+try to encode them in working 
+software, which may then yield 
+slightly better `NLP; or Computer Vision 
+engines.  So, for example, a philosophical 
+understanding of neural connectivity 
+helped inspire connectionist 
+models that revolutionized `AI; (and 
+displaced `q.good-old-fashioned` symbol-processing 
+paradigms) at the start of the 21st century.  
+But the inspiration from philosophy was 
+important because the `i.new` `AI; was 
+(in this case `i.much`/) better, more accurate by orders of 
+magnitude, with potentially society-changing consequences. 
+`p`
+
+
+`p.
+However, I would argue that whether computational models 
+`q.work` when emulating human `i.reasoning` is a 
+different question than how well they 
+shed light on `i.how` we reason.  We might 
+say that a technologically successful 
+approach invites comparisons to the human 
+mind: if convolutional neural networks 
+achieve excellent results in human-like 
+reasoning tasks, does this not 
+count as some evidence that our own minds 
+work in similar ways?  But, on the other 
+hand, the cellular realization of 
+consciousness and cultural embodiment 
+of the human person make us very 
+different from `i.in silico` software.  
+There is no guarantee that computational 
+systems optimized for `AI; would be 
+equally successful in the brain, and 
+vice-versa.  Suppose we have formal 
+approaches to sentence-parsing or 
+image-segmentation which are compelling 
+because they appeal to our intuitions 
+about how we `i.experience` vision 
+and language, but are not necessarily 
+better as technological artifacts 
+that other paradigms (maybe ones that 
+seem artificial, such as 
+`q.big data` statistics).  Should 
+we conclude that the more life-like 
+models are inaccurate?  Or does 
+this reveal perhaps that humans 
+process language and visual perception 
+in ways that would be difficult 
+for computers to emulate? 
+`p`
+
+
+`p.
+I believe these are interesting questions, and 
+in an ideal world if reflections such as 
+these (wherever they originate) provide 
+food for thought, they could help reorient 
+our perception of the proper relationship 
+between technology and the humanities.  
+Perhaps disciplines such as philosophy 
+and linguistics should seek integration 
+with technological platforms, such as 
+those for language-processing and Computer 
+Vision, partly so as to explore how 
+computer systems can emulate facets 
+of human reason and perception %-- perhaps 
+reciprocally explaining some of 
+their causal origins %-- but keeping 
+an open mind with respect to the 
+explanatory value of computational 
+simulations.  The `AI; modules giving 
+the best results are not necessarily the 
+most life-like, or the most valuable 
+for revealing how the mind actually 
+works, because perhaps our brains are 
+optimized differently than computers.  
+Once we decouple our appreciation 
+for successful `AI; as a useful tool 
+from computational models of actual 
+human reasoning, we lose an orientation 
+that could oversimplify our 
+construal of the role of technology 
+in human sciences.  We cannot just let 
+`AI; paradigms compete from a distance, 
+waiting for the preeminent solutions to 
+appear and regard them as prototypes 
+for simulated intelligence.  We need 
+to be more actively engaged.  Different 
+computational platforms will 
+bring different sorts of merit 
+to hybrid methodologies: some may be 
+valuable because they embrace 
+hypotheses that have technological pay-offs, 
+which is a data point that such 
+models are `i.successful` emulators 
+of human reason.  Other models 
+may be valuable because they appear 
+to formalize processes that we might 
+believe on speculative grounds to be 
+consistent with how the mind actually 
+works.
+`p`
+
+`p.
+Different approaches 
+to (say) `NLP; and Computer Vision could 
+offer benefits in either direction, and 
+it may not be obvious which is which.  
+These issues have to be worked 
+out on a case-by-case basis.  Projects 
+in these computational disciplines 
+may overlap with humanistic 
+concerns either because of behavioral 
+correctness or because of intuitive 
+lifelikeness, but the proportion 
+of each virtue may be uncertain 
+as the project is ongoing.  Given 
+that uncertainty, the methodological 
+cross-polination between humanities 
+and computational science should be 
+actively pursued in the context 
+of individual projects.  This 
+can take multiple dimensions:  
+being more proactive in incorporating 
+technological resources (such as 
+data sets and/or code libraries) into 
+human-science publications; 
+scientists on the computational end 
+being more willing to embrace the 
+priorities and intellectual commitments 
+of the humanities as one dialect 
+within their writing and their bird's-eye 
+view assessments of what technology 
+has (or has not) accomplished, and vice-versa; 
+a denser, more widely dispersed paradigm  
+of interdisciplinary collaboration 
+at the borderlands of natural 
+(or `q.formal`/) and human sciences.  
+We can 
+hope that the project-oriented, 
+trial-and-error pragmatism 
+of computational engineering 
+%-- the ecosystem of code libraries 
+to be maintained, software to be 
+implemented, online communities 
+where developers work their way 
+through work-in-process complications 
+%-- becomes (more a) part of the 
+arsenal of humanities theory; but 
+also that the humanities continue to 
+press the importance of justice and 
+values as a reminder to technologists.  
+As a reminder of why technology matters.   
+`p`
 
 
 `p.
