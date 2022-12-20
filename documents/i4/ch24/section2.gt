@@ -4,7 +4,9 @@ Current paradigms in desktop-style `GUI; engineering
 have stayed relatively consistent since 
 roughly the start of the century.  The heyday of 
 `GUI; applications (often called `q.rich client` 
-or `q.thick client` interfaces, to distinguish 
+or `q.thick client` interfaces, 
+see for instance `cite<YadavDarlington>; or 
+`cite<AnaCristinaRamadaPaiva>;, to distinguish 
 them from web applications %-- `q.thin` clients %-- which need to 
 run in an internet browser) largely coincided 
 with a period in programming methods where 
@@ -57,7 +59,7 @@ and/or difficult to use; for example, compiling and
 merging these libraries with an application's 
 overall code base tends to be more difficult 
 with `FP; bindings than using `OO; libaries 
-written in native languages, such as `Cpp;, directly). 
+written directly in languages such as `Cpp;). 
 So, again narrowing the focus of the current 
 discussion, we may consider general-purpose models 
 of `GUI; elements and structures to be 
@@ -130,7 +132,7 @@ unchecked box, would be case-insensitive).
 In these contexts there would be a 
 visible contrast between 
 `q.up` (or `q.unchecked`/) and 
-`q.down`/`q.checked` states.
+`q.down`//`q.checked` states.
 
 `pseudoIndent; Moreover, buttons and other `GUI; elements 
 can sometimes be `q.disabled,` meaning 
@@ -154,18 +156,22 @@ the styling of these states
 should not obscure the control's 
 primary purpose when it `i.is` 
 enabled.  A disabled 
-`q.save` button, say, should not be 
-given a style where it is 
-difficult to read the `q.save` 
-label (or whatever icon 
-replaces it). 
-
+`q.save` button, say, should be 
+given a style where users can 
+still clearly discern the word `q.save` 
+(or whatever icon replaces it 
+%-- it's a widely-recoginized convention 
+to employ graphics of a floppy 
+disk in this case) even while 
+indicating that there is no possible 
+save action available at the moment. 
+ 
 `pseudoIndent; As illustrated by button-states, 
 most `GUI; controls have multiple different 
-visual states and their changes are intended 
+visual states, and their changes are intended 
 to cue users on how the controls may 
 be utilized interactively.  For this reason 
-graphic styles have to be designed attentively, 
+`GUI; styles have to be designed attentively, 
 because each control-state should be visually 
 distinguished from others, but also the 
 styles should not interfere with the 
@@ -189,10 +195,11 @@ preferred stylistic concepts, so that
 applications on a Mac tend to follow different 
 conventions than those on Windows, or Linux.  
 Consistent visual patterns from one application 
-to another help users familiar with one program 
-to learn how to use new software more 
+to another help users apply their 
+familiarility with existing programs 
+to learn new software more 
 quickly, so applications generally try to 
-conform to Operating System standards; as such, 
+conform to Operating System standards.  As such, 
 cross-platform applications often employ 
 multiple style schemas, depending on the 
 kind of computer where the application happens 
@@ -216,8 +223,8 @@ shows the name and folder path of a file
 currently being viewed; when a new file 
 is opened, the text shown on that 
 label will be updated.  Here the relevant 
-data is presented just through a text 
-sequence.  Or, a digital map might 
+data is presented just through a line 
+of text.  Or, a digital map might 
 have labels to represent the current 
 latitude and longitude coordinates 
 under the cursor.  These are numeric 
@@ -304,8 +311,9 @@ imperfect, with situations such as
 hyphenated words, ligatures, and foreign 
 accents causing transcription errors; in short, 
 `PDF; does not directly provide an 
-accurate machine-readable transcript).  Text in 
-`HTML; is similarly largely static, but users 
+accurate machine-readable transcript 
+`cite<BastKorzen>;, `cite<[page 8]LucyLuWang>;).  
+Text in `HTML; is similarly largely static, but users 
 can select character-ranges and activate 
 hyperlinks in both formats (this is true 
 for any `HTML; document and most `PDF;s).  
@@ -314,9 +322,9 @@ analogous to image-displays, are in some
 sense intermediate between organized 
 information-displays which directly map 
 data structures to `GUI; aggregates and 
-raw file-viewers which are only 
-in an indirect sense representing 
-`q.information,` but are primarily 
+raw file-viewers which only 
+in an indirect sense represent 
+`q.information,` instead primarily 
 rendering file-contents into a static visual form. 
  
 `pseudoIndent; The more canonical case 
@@ -329,27 +337,27 @@ or `CSV; (Comma-Separated Value) files
 can be presented via spreadsheet-like 
 controls, which are subdivided (by 
 rows and columns) into cells that 
-typically have one single numeric 
-(or short textual) data.  Information shown 
+typically include one single numeric 
+(or short textual) data-point.  Information shown 
 in these sorts of displays may originate 
-from files, insofar as such `GUI; controls 
-are used to access files they need to 
-load data into computational structures 
+from files %-- insofar as such `GUI; controls 
+access files they need for  
+loading data into computational structures 
 first, and then map individual parts 
 of these structures onto parts of the 
-`GUI; display.  The correlation between 
+`GUI; display  %-- but the correlation between 
 files and front-end controls is therefore 
-granular and systematic, whereas 
+granular and systematic; whereas 
 image-viewers simply calculate how to render 
 pictural data via on-screen pixel-areas and 
 display the resulting graphs visually, 
 without constructing distinct areas or 
 sub-windows to show specific parts of a 
 loaded file.  Text displays can be between these two 
-alternatives; they are largely unstructured 
+alternatives.  They are largely unstructured 
 (like pictures) but portions of text may 
 be isolated as if they were interactive windows 
-(such as hypertext links) and users may 
+(such as hypertext links) and users are able to 
 select character-ranges (e.g., for copy-and-paste) 
 in which case the screen-area spanning 
 selected text needs to be treated as an 
@@ -389,10 +397,10 @@ also a useful layout convention.
 
 `pseudoIndent; Apart from just organizing 
 controls, `GUI; containers can also 
-compensate for limited screen real-estate: 
-`GUI; windows often have more data 
+compensate for limited screen real-estate. 
+`lGUI; windows often have more data 
 available than can be shown on-screen 
-all at once.  As such, containers 
+all at once.  To compensate, containers 
 can use various tactics to 
 show some contents and hide others, 
 such as scroll-areas (where users 
@@ -421,7 +429,7 @@ and likewise for subfolders inside
 kinds of controls are sometimes 
 compared to an accordion, because 
 as folders and subfolders  
-open or close their screen-areas 
+open or close their screen-area 
 expands and contract respectively, creating a 
 visual effect vaguely reminiscent 
 of accordion leaves' folding patterns.   
@@ -484,8 +492,8 @@ moving a divider line between two parts of a
 on either side of the line; moving the 
 line resizes both parts of the container 
 (one gets larger, the other smaller) potentially 
-hiding or unhiding contained content and controls (depending 
-on which side they lie on).  Another pattern is 
+hiding or unhiding different content.  
+Another pattern is 
 `q.drag and drop,` typically involving icons being moved 
 (figuratively `q.dragged` by the mouse) 
 from one container to another: in some contexts 
@@ -498,9 +506,9 @@ item on its interior.
 `p.
 Some visual hints are explicitly designed to inform 
 users about applications' features, or the 
-status of current operations.  For example, a 
-mature front-end will often have `q.tool tips` for 
-many controls, where hovering a mouse over the 
+status of current operations.  For example, 
+many front-ends feature `q.tool tips` 
+where hovering the mouse over a 
 control causes a box of explanatory text to 
 temporarily appear, explaining the purpose 
 of that `GUI; element.  Tooltips serve both 
@@ -540,9 +548,9 @@ that they may need to save the file.
 
 `p.
 Style conventions also inform how `GUI;s help 
-users track the current mouse position.  
+users follow the current mouse position.  
 In general, the mouse is tracked with a cursor, 
-which moves across the screen when users 
+which travels across the screen when users 
 move the mouse (or run their fingers against a 
 touchpad); a mouse click (or tap against a 
 touchpad) is understood by the application 
@@ -551,17 +559,19 @@ to signal the user's intent to execute a
 where the cursor currently hovers.  The cursor 
 will then take on different icons depending 
 on how the click would be processed, given 
-the control under the mouse position (an 
+the control under the mouse position.  An 
 example mentioned above would be 
 a `q.resize` icon when the mouse hovers 
-over a corner; this works also for 
+over a corner (this works also for 
 some controls' edges); cursors tend to be 
 given an arrow-like icon in these settings.  
 When hovering over text, on the 
-other hand, cursors usually take on a shape 
-reminiscent of a capital letter `q.I.`  
+other hand, cursors usually take on shapes 
+reminiscent of a capital letter `sq.I`/.  
+`p`
 
-`pseudoIndent; In some cases the 
+`p.
+In some cases the 
 on-screen mouse position can be correlated with 
 some physical or empirical coordinate 
 system %-- a good example is digital 
@@ -570,7 +580,7 @@ to latitude and longitude numbers.
 Here it is common to print the geographic 
 coordinates next to a corner of the map, 
 so that the numbers change as users 
-move the mouse around the map-view, which 
+migrate the mouse around the map-view, which 
 both aids users if they are trying to find a 
 specific latitude/longitude pair and 
 helps visually reinforce the idea that 
@@ -582,12 +592,12 @@ control shows the time elapsed at different
 points relative to the file's start (the 
 convention being to pair audio/video 
 controls with a line-bar and position 
-indicator such that moving the indicator 
+indicator such that pulling the indicator 
 right/left implies forward/backward in time, 
 respectively).  Finally, some controls 
 display graphics or data charts/diagrams 
 against a background of orthogonal gridlines 
-(similar to `q.graph paper` used for 
+(similar to `q.graph paper` for 
 drawings), or sometimes just the 
 lattice-points at gridline intersections.  
 In these contexts mouse position may be 
@@ -599,7 +609,7 @@ which a mouse passes over as it moves.
 `p.
 One takeaway from this overview is that 
 well-engineered `GUI;s are highly 
-interactive; there are many conventions 
+interactive.  There are many conventions 
 which govern how front-ends should 
 present subtle visual cues and state-changes 
 to assist users when interacting 
@@ -607,13 +617,13 @@ with the application.  Users may not
 appreciate the full scope of these effects, 
 becoming habituated to `q.responsive` 
 features and perhaps absorbing them at 
-only a subconscious level; however, 
+only a subconscious level.  However, 
 front-ends which fail to implement 
-expected interactive patterns, where 
+expected interactive patterns %-- where 
 `GUI;s are not sufficiently responsive 
 in terms of giving users frequent feedback 
 on current state (such as mouse position)
-and interactive possibilities, would 
+and interactive possibilities %-- would 
 almost certainly be experienced by 
 users as erratic and confusing.  
 Most of the front-end patterns 
@@ -637,7 +647,7 @@ visual styles/interactive cues.
 Systematically engineered application 
 will carefully document these 
 interconnections and implement 
-the associated front-end functionality 
+the correlated front-end functionality 
 via a consistent set of coding patterns.  
 `p`
 
@@ -666,14 +676,14 @@ leads to application responses,
 and finally to `GUI; changes.  
 Gestures are, indeed, closely connected 
 to `GUI; state, because a user's 
-actual (literal and physical) action,
-such as pressing a mouse button, 
+actual (literal and physical) action %-- 
+such as pressing a mouse button %--  
 needs to be interpreted in light 
 of current `GUI; state to be 
 seen as an `q.action` in the `q.virtual` 
 context of a front-end display.  
-We speak, for example, of `q.clicking` 
-a `GUI; control; in reality, the 
+We talk, for example, about `q.clicking` 
+a `GUI; control: in reality, the 
 `q.click` happens on the physical 
 mouse, but the presence of cursors and 
 mouse-tracking permits this 
@@ -716,11 +726,11 @@ Mapping gestures to actions depends on
 Accordingly, `GUI; state overall provides the 
 structures against which individual 
 actions are defined: an action of 
-`i.clicking a` (`GUI;) `i.button`/, for example, 
-is meaningful in the context of a front-end 
-environment where the specific button is among 
+`i.clicking a (`iGUI;) button`/, for example, 
+is meaningful in the context of front-end 
+environments where that specific button is among 
 many controls that could be `q.clicked,` and 
-given that it is enabled and visible, etc.
+given that it is enabled and visible.
 `p`
 
 
@@ -731,15 +741,15 @@ more than one user gesture.  For example, instructions
 to save a file could derive from clicking a `q.save` 
 button, but also selecting a save option from 
 a context menu, or hitting a combination on the 
-keyboard, such as `q.control`/-plus-`q.s.`  For more rigorous 
+keyboard (usually `sq.control`/-plus-`sq.s`/).  For more rigorous 
 discussion, I suggest referring to actions in this 
 multi-indication context as `q.requests,` so that 
 the various gestures signaling one common 
 request (like `q.save file`/) each have distinct 
 actions.  In any case, all actions then 
 get routed to interpretations of 
-users' intentions; we can use the term 
-`q.requests` to designate these interpretations in general, 
+users' intentions.  We can adopt the term 
+requests for these interpretations in general, 
 so that some requests are cued by one single 
 action and some are targets of more than 
 one possible action.  Current `GUI; state 
@@ -762,14 +772,14 @@ file should be saved based on which
 document's window is currently visible.  
 This is an example of `GUI;-specific state.  
 Whether or not the document has been 
-modified (affecting whether a save is necessary), 
-and the file path that would be overwritten, 
-would be an example of application-state 
+modified (affecting whether a save is necessary) 
+%-- and the file path that would be overwritten 
+%-- would be an example of application-state 
 proper (because these details are not determined 
 by the visible appearance of `GUI; elements; 
 although the `GUI; can convey to 
 users such information as whether the 
-currently viewed document is modified). 
+currently viewed document is modified and unsaved). 
 `p`
 
 
@@ -789,7 +799,8 @@ to assign it a name.  There are, then, at
 least three possibilities: the file can 
 be overwritten with its current name; the 
 file cannot be saved with its current 
-name but may be saved with a new name, 
+name but may be saved with a new name 
+(maybe in a different folder), 
 so that there will be two different versions 
 on disk; and the file cannot be saved 
 until a name is provided, which will then
@@ -876,7 +887,7 @@ that are styled and positioned so that the user
 views them as an integral unit.  A simple case 
 is a button which has both an icon and 
 a descriptive text label; this arrangement 
-can be implemented with a label control 
+could be implemented with a label control 
 placed next to a button control, but configured 
 so that the label appears to be a logical 
 continuation of the button itself.  In this setup, 
@@ -891,14 +902,14 @@ when the mouse hovers over them.  If users are
 to experience a button and a label as functionally 
 integrated, this pattern is reinforced by them 
 sharing a tooltip, which means that the same 
-tooltip content should be applied to both 
+tooltip content is applied to both 
 controls. 
 `p`
 
 
 `p.
 Consider a procedure to define this tooltip text.  
-Ideally the same procedure would act to 
+Ideally the same procedure would act upon 
 both objects, because we want to reinforce in 
 code the idea that two controls share some 
 state-details, including their tooltips 
@@ -924,7 +935,7 @@ to synchronize state between `i.two` objects
 is that it seems artificial to choose one or another 
 as `q.the` receiver %-- a more fluent 
 paradigm would be to allow `i.two` 
-receivers (or more), in the same way that 
+receivers, in the same way that 
 procedures can have two or more normal 
 input arguments.
 `p`
@@ -936,7 +947,10 @@ into `q.channels,` including a `q.sigma`
 channel that can generalize receiver-objects 
 to object-lists (derived from the `q.sigma calculus,` 
 which attempts to model `OO; methods by 
-extending lambda calculi).  This would be 
+extending lambda calculi 
+`cite<AbadiCardelli>;, `cite<AbadiCardelliUntyped>;, 
+`cite<AndrewDGordon>;, `cite<RadhaJagadeesan>;, 
+`cite<MattDuckham>;).  This would be 
 one way to tweak `OO; systems %-- permitting 
 multiple receivers.  There is no technical 
 reason why programming languages could not 
@@ -987,13 +1001,13 @@ with parameters (if any) provided by the
 calls, these connections are 
 routed through an intermediary component 
 and they might be dynamically reconfigured: 
-signal/slot connections can be newly created 
+signal/slot connections may be newly created 
 or dropped while an application is running.  
 When a procedure emits a signal, there is 
 no guarantee that any other procedure 
 will implement a `q.slot` that receives 
 it; but also `i.multiple` procedures 
-might connect to the original slot).  
+can potentially connect to the original slot).  
 Compared to direct inter-procedure 
 calls, the two (or more) procedures 
 involved are thereby less tightly connected.  
@@ -1008,7 +1022,7 @@ gestures.  After a user clicks a (`GUI;) button,
 for example, an object representing that 
 button broadcasts a `q.click` signal, which in turn 
 is handled by procedures to initiate 
-the application response.  For example, if 
+the application response.  If, say, 
 the button in question represents requests 
 to save a file, there will be some 
 procedure whose purpose is to 
@@ -1045,19 +1059,39 @@ libraries emulate the signal/slot patten.
 The `Qt; framework, which is both a `GUI; 
 library and a general-purpose technology 
 for application development, supports a 
-coding style wherein signals and slot 
+coding style wherein signals and slots 
 function essentially as native language 
 features %-- however, this is only possible 
 because `Qt; implements an extended 
 compiler workflow involving pre-compilation 
 parsers and code-generators, in effect 
 implementing an extension to the 
-`Cpp; language itself.
-`p`
-
-
-`p.
-Because most `OO; languages do not 
+`Cpp; language itself.`footnote.
+More recently, parts of `Qt;'s `q.meta-object` 
+system have been re-implemented to work with 
+inline code annotations (attributes), which are more of a 
+`Cpp; standard than the code generators 
+which `Qt; has traditionally used.  However, 
+attributes themselves are not consistently 
+handled by `Cpp; compilers.  The `Qt; example 
+actually shows how features initially 
+implemented orthogonally to a language's 
+own formulations can help inspire evolution 
+in the language itself.  That does not, however, 
+change the fact that even a hypothetical 
+cross-compiler and standards-compliant  
+signal/slot framework would then just be utilizing 
+attribute techniques to implement reactive-programming 
+idioms within (in effect) a code library, not as a 
+fundamental extension to `Cpp; `i.per se`/.  
+How `Qt; allows programmers to employ 
+signal/slots and other meta-object capabilities 
+via de-facto special keywords and syntax 
+suggests that signal/slot concepts 
+actually belong to the realm of full-fledged 
+enhancements to the underlying language, 
+which is the point of the current example.
+`footnote`  Because most `OO; languages do not 
 intrinsically support signal/slot 
 connections %-- that is, they 
 cannot be expressed directly 
@@ -1066,7 +1100,7 @@ semantics, but rather have to be
 approximated by code libraries 
 (potentially including language 
 extensions through code generators) 
-%-- this patterns is for all intents 
+%-- this pattern is for all intents 
 and purposes an extension to 
 `OO; which is not part of the 
 basic `OO; model.
@@ -1077,8 +1111,8 @@ basic `OO; model.
 One further detail concerning signal/slot 
 systems involves properly aligning multiple 
 parameters of `GUI; state which should 
-adhere to certain design regularities; for 
-example, different lengths or magnitude 
+adhere to certain design regularities %-- for 
+example, different lengths or magnitudes 
 in the front-display preserved in a 
 constant ratio.  Consider a scroll area 
 showing an image: if the image's size 
@@ -1100,8 +1134,8 @@ resized proportionately, or else moved to
 a different top-left position, to preserve 
 the margin's desired left/right and top/bottom 
 symmetry.  In this example, there are 
-several different numbers that need to be 
-tracked in coordination: the overall window's 
+several different numbers that must be 
+tracked in consort: the overall window's 
 size; the width and height of the scroll area's 
 viewport (its visible screen-area); and 
 the image's position, dimensions, and zoom factor.  
@@ -1363,9 +1397,9 @@ mouse, pan and zoom in `i.two` dimensions is
 typically signaled by activating the central 
 mouse wheel (for zoom) and pulling scroll bars 
 (to pan, moving left/right or up/down) around 
-the screed display).  Sometimes panning can also 
+the screen display.  Sometimes panning can also 
 be achieved by `q.dragging` inside the scene; 
-moving the mouse while keeping its left-button 
+repositioning the mouse while keeping its left-button 
 down, with the cursor positioned inside the 
 relevant view window (similar to drag gestures 
 for dropping and resizing controls).  When working in 
@@ -1409,10 +1443,10 @@ complete view of the associated information.
 
 `p.
 Similar effects are sometimes warranted in `ThreeD;.  In 
-a virtual `q.street` tour, for example, a user will virtually 
+a virtual `q.street` tour, for example, users will  
 digitally `q.walk` past different streets and buildings, 
 and platforms such as Google StreetView insert 
-icons onto the view for users to click for location-specific 
+icons onto the scene allowing users to click for location-specific 
 information %-- with a restaurant, for example, 
 a page showing menus and reviews; or, with a transportation 
 center, a link to transit routes and maps.  Via similar 
@@ -1429,14 +1463,14 @@ to have a select group of interactive features.
 
 `p.
 The above comments apply mostly to graphics 
-rendered via 360`textdegree;  
+rendered via `ThreeSixty;  
 photography, which creates the illusion of 
-three dimensions by pieces together 
+three dimensions by piecing together 
 many individual `q.panoramic` pictures 
 (often taken from special-purpose 
 cameras that capture images from all 
 directions, rather than having a single 
-view angle).  In the context of engineered 
+view angle).  Also, in the context of engineered 
 `ThreeD; views, such as those rendered 
 via mesh geometry, Computer Aided Design 
 (`CAD;) programs will sometimes isolate 
@@ -1446,10 +1480,10 @@ make these interactive.  For example, a
 permit users to select one piece of the 
 object and examine information such as 
 its dimensions or thickness %-- in the 
-`CAD; setting, someone can use the application 
+`CAD; setting, someone can work within the application 
 to actually create and modify industrial 
 designs, so selecting specific segments 
-of objects can lead to operations that 
+of objects may lead to operations that 
 actually edit their properties within the 
 overall design (e.g., making industrial 
 subparts larger or smaller relative to 
@@ -1471,7 +1505,7 @@ derived from triangular mesh complexes
 by connecting nearby vertices) or 
 360`textdegree; images %-- is fundamentally 
 different than the layout managers 
-powering `TwoD; front-ends.  Layout manager 
+powering `TwoD; front-ends.  Layout managers 
 ensure that `GUI; containers remain well-organized 
 and usable even when a window is resized or scrolled.  
 In general, `GUI; `i.controls` are not 
@@ -1497,12 +1531,12 @@ would apply to `GUI; controls immersed
 in `ThreeD; scenes no less than mesh-triangles 
 or other units of `ThreeD; geometry, and 
 which are exponentially more complex than 
-calculations related to `TwoD; front-end  
+calculations related to `TwoD; front-ends  
 %-- interacting with controls visible 
 `i.inside` scenes could easily become  
 cumbersome for users.  For example, 
-in order to click on controls users 
-would have to rotate or move around 
+in order to click on controls they  
+would have to rotate or migrate around 
 within the scene, and the graphics engine 
 would have to determine how to represent 
 icons, text, or areas for controls 
@@ -1514,7 +1548,7 @@ in Virtual Tours yields inconsistent
 and uncomfortable `GUI;s %-- it is common 
 in these environments for tags to 
 appear and disappear for no apparent 
-reason, and having seen a tag (or a clickable 
+reason, and after having seen a tag (or a clickable 
 hyperlink) it can be frustrating to maneuver 
 the onscreen view so that the tag/link 
 can be activated.    
@@ -1526,25 +1560,33 @@ Such issues with `ThreeD; `GUI;s are directly
 applicable to robot's environments, because 
 in most cases robots will be receiving visual 
 imputs via mechanisms similar to 
-panoramic photography.  Humans users 
+panoramic photography.  Human users 
 wishing to remotely monitor and/or 
 guide robots by watching video feeds 
-based on robots' own inputs will therefore 
+based on robots' own inputs 
+%-- adapting this paradigm in 
+`q.Human-Robot Interaction` (`HRI;)
+`cite<AlexanderWilkinson>;, `cite<AndreyKurenkov>;,
+`cite<YueHu>;, `cite<YancoDrury>;, 
+`cite<SzafirSzafir>;
+ %-- will therefore 
 be presented with displays similar to 
-360`textdegree; tours.  Unlike virtual tours, 
+`ThreeSixty; tours.  Unlike virtual tours, 
 however, robots are not primarily designed 
 simply to create visual feeds for human 
 viewers (although that can indeed be one 
 of their uses: consider robots deployed to 
 gather real-time images from locations that 
-would be dangerous to inspect in person).  
+would be dangerous to inspect in person
+`cite<GiacomoLunghi>;, `cite<GiacomoLunghiMultimodal>;, 
+`cite<ManjulaUdayangaHemapala>;).  
 Because robots typically process and 
 structurally analyze their environments, 
 inferences they make concerning object-boundaries 
 and affordances could be incorporated into 
 graphics accompanying their visual feed.  
 For example, robots may be programmed to 
-categories objects in their visual field 
+categorize objects in their visual field 
 and/or identify ones which they can move 
 or manipulate.  Within their video feed, 
 then, certain objects will be singled 
@@ -1560,21 +1602,21 @@ environment as it is modeled through image analysis.
 
 `p.
 Perhaps the most effect paradigm for robotics `GUI;s, 
-along these lines, would be a pair 
+along these lines, would be a pairing 
 between `ThreeD; capture of their raw video 
 feeds and `TwoD; structured windows presenting 
 their environments schematically, with an 
 emphasis on diagramming inferred relationships 
 between objects rather than spatial accuracy.  
 If a robot travels through a room with multiple 
-object that it could move, for example, a schematic 
+objects that it could move, for example, a schematic 
 `GUI; container might represent each of 
 these physical objects with icons or screen-areas 
 arranged so that users could interact with the 
 `TwoD; diagram as a proxy for controlling 
 the robot through its `ThreeD; video feed.  
 For example, `GUI; controls for each 
-movable object could be programmed with 
+movable object might be programmed with 
 interactive functionality analogous 
 to controls tied to application features 
 %-- users might, for instance, click on or 
@@ -1639,7 +1681,7 @@ by some analogous gesture (like
 selecting a `q.move` option from a 
 context menu).  The front-end, in short, 
 would be managed by a software 
-component that would translate user 
+component that translates user 
 intentions as expressed through a `GUI; 
 into commands that the robot understands.  
 There would, in effect, be two different 
@@ -1649,7 +1691,7 @@ which humans would interact, and then a
 distinct robot-language engineered to 
 convey instructions to robots at a 
 tractable level, i.e., where there are 
-deterministic algorithms to translate 
+deterministic algorithms to `q.compile` 
 expressions in this language to 
 low-level commands affecting robots' 
 physical movements and orientation. 
@@ -1663,7 +1705,11 @@ more direct exchange where humans perhaps
 `q.talk directly` to them, their 
 words parsed via Natural Language Processing 
 (this is the kind of scenario discussed 
-elsewhere in this book; see Chapter `i.ref`/).  
+elsewhere in this book, see Chapter `i.ref`/; 
+or `cite<PadraigHiggins>;, `cite<StefanieTellex>;, 
+`cite<LiuZhang>;, `cite<HoWang>;, 
+`cite<SergioGuadarrama>;, `cite<PerathamWiriyathammabhum>;, 
+`cite<CynthiaMatuszek>;, etc.).  
 However, within the relevant `NLP; pipeline 
 there would presumably be a distinction 
 between components that consume the spoken 
@@ -1708,8 +1754,8 @@ to be translated eventually).
 `p.
 None of this discussion in the robotics 
 context represents new theories or 
-proposals; the techniques I have summarized 
-here appear to be relative mainstream 
+proposals %-- the techniques I have summarized 
+here appear to be relatively mainstream 
 approaches to robotic engineering.  
 However, it is worth emphasizing that 
 building `GUI;s to serve as intermediate 
@@ -1730,7 +1776,8 @@ deserve further research, partly because
 effective `GUI; programming is itself 
 not given due attention as far as a 
 systemic approach to `GUI; engineering, 
-to make front-end more user-friendly and 
+to make front-ends more user-friendly and 
+simultaneously to 
 improve development tools.  Many details 
 of robotics-specific front ends, such as 
 how to pair `ThreeD; graphics with `TwoD; 
@@ -1744,7 +1791,7 @@ proper.
 
 `p.
 In particular, it is an open question how 
-best to associated parts of `ThreeD; views 
+best to associate parts of `ThreeD; views 
 with independent `GUI; controls: should 
 controls be `i.immerced` in `ThreeD; scenes, 
 so that they are subject to the same 
@@ -1759,7 +1806,7 @@ Of course, these options could also be
 combined.  To my knowledge, rigorous answers to these 
 questions have yet to be determined, 
 let alone implemented %-- nothing in 
-current WebGL, OpenGL, or panoramic-photography 
+current `WebGL;, `OpenGL;, or panoramic-photography 
 software appears to provide the level of 
 interactive granularity that would 
 be implied by direct associations between 
