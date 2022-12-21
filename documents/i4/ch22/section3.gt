@@ -74,7 +74,7 @@ in intensity (neither dark nor light).
 For these reasons, some image-processing 
 frameworks prefer alternative 
 channel-reduction techniques.`footnote.
-I admit that this outline is a little 
+`IauNCpl; admit that this outline is a little
 oversimplistic.  Some grayscaling algorithms 
 are more sophisticated than simply averaging 
 out red/green/blue measures; there are 
@@ -160,7 +160,7 @@ color-shades become visible as well as to
 actual color tones.  The experience of color 
 is not primarily oriented to monochrome 
 color-spreads, but rather (we might say) 
-colors as `q.themes`/, wherein one thematic 
+colors as `q.themes,` wherein one thematic 
 color carries expectation of some textural and 
 lighting-effect variation.  A straightforward 
 example of such a theme might be a canonical 
@@ -217,7 +217,7 @@ may even be modeled via distinct
 channels, alongside chromatic tones 
 themselves (other potential 
 supplemental channels may be 
-glossiness, also called `q.specularity`/, and transparency).  
+glossiness, also called `q.specularity,` and transparency).  
 Image-analysis cannot examine physical 
 materials directly, of course, 
 so texture-related qualities need 

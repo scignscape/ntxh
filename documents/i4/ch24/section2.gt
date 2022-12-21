@@ -30,7 +30,7 @@ browsers or within the limited screen-size of a
 smart phone, once applications get past a 
 certain threshold of functional and 
 presentational complexity.  For this discussion, then, 
-I will refer to `GUI; applications as canonically 
+`IauNC; will refer to `GUI; applications as canonically 
 native-compiled software components that run on a 
 desktop computer or a similar environment 
 (as opposed, for example, to web applications 
@@ -742,7 +742,7 @@ to save a file could derive from clicking a `q.save`
 button, but also selecting a save option from 
 a context menu, or hitting a combination on the 
 keyboard (usually `sq.control`/-plus-`sq.s`/).  For more rigorous 
-discussion, I suggest referring to actions in this 
+discussion, `IauNC; suggest referring to actions in this 
 multi-indication context as `q.requests,` so that 
 the various gestures signaling one common 
 request (like `q.save file`/) each have distinct 
@@ -941,7 +941,7 @@ input arguments.
 `p`
 
 `p.
-In Chapter 21 I mentioned 
+In Chapter 21 `IauNC; mentioned 
 the idea of grouping procedural parameters 
 into `q.channels,` including a `q.sigma` 
 channel that can generalize receiver-objects 
@@ -1660,7 +1660,7 @@ that joint-attention between people themselves
 right circumstances), but it at least 
 lays the foundation for something resembling 
 human/robot communication %-- if one accept 
-the premise, that I emphasized in Chapter 23, 
+the premise, that `IauNC; emphasized in Chapter 23, 
 that shared situational understanding is the 
 origin-point for language.
 `p`
@@ -1754,7 +1754,7 @@ to be translated eventually).
 `p.
 None of this discussion in the robotics 
 context represents new theories or 
-proposals %-- the techniques I have summarized 
+proposals %-- the techniques `IauNC; have summarized 
 here appear to be relatively mainstream 
 approaches to robotic engineering.  
 However, it is worth emphasizing that 
@@ -1765,7 +1765,7 @@ robotics systems) and serve as
 one stage toward direct human/robot 
 communication (for reasons just 
 sketched out).  While `GUI; front-ends 
-similar to those I have summarized 
+similar to those `IauNC; have summarized 
 are sometimes used for robot interactions, 
 there is relatively little literature 
 on implementing robots `GUI;s as a distinct 
@@ -1803,7 +1803,7 @@ when their associate object/scene-locations
 are visible; or should they be arranged 
 diagrammatically in a separate window?  
 Of course, these options could also be 
-combined.  To my knowledge, rigorous answers to these 
+combined.  To `myNC; knowledge, rigorous answers to these 
 questions have yet to be determined, 
 let alone implemented %-- nothing in 
 current `WebGL;, `OpenGL;, or panoramic-photography 

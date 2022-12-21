@@ -1,12 +1,15 @@
 
+\renewcommand{\p}[1]{
+
+\vspace{.7em}#1}
 
 \usepackage{graphicx}
 \usepackage{xcolor}
 
-\setlength{\columnsep}{8.5mm}
+\setlength{\columnsep}{8.55mm}
 
 \usepackage[letterpaper, left=.85in,right=.85in,top=.5in,bottom=.5in, 
-paperheight=12.6in,paperwidth=9.5in]{geometry}
+paperheight=13.6in,paperwidth=10.8in]{geometry}
 
 %\usepackage[letterpaper, left=.925in,right=.925in,top=.56in,bottom=.56in, 
 %paperheight=12.5in,paperwidth=9.5in]{geometry}
@@ -18,8 +21,6 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 
 \setlength{\footskip}{20pt}
 
-\let\OldI\i
-\renewcommand{\i}[1]{\textit{#1}}
 
 
 \newcommand{\mdash}{---}
@@ -50,10 +51,62 @@ paperheight=12.6in,paperwidth=9.5in]{geometry}
 
 \newcommand{\acronymResizeBox}[1]{#1}
 
+\newcommand{\ala}{\`a la} 
+
+\newcommand{\ninetypercent}{90\%}
+
+\newcommand{\Schutzenberger}{Sch\"utzenberger} 
+
+
+
+
 \include{acronyms}
 \include{math}
 %fRed
 
+%\newenvironment{\longquote}{\q{}{}}
+
+\usepackage{csquotes}
 
 \renewcommand{\b}[1]{\textbf{{\small{}#1}}}
+
+\PassOptionsToPackage{hyphens}{url}\usepackage[dvipdfm,colorlinks,pdfstartview=FitH,citecolor=blue,linkcolor=blue,urlcolor=blue]{hyperref}
+
+
+\usepackage{microtype}
+
+\newcommand{\biburl}[1]{ {\fontfamily{gar}\selectfont{{\scriptsize \textls*[-70]{\url{#1}}}}}}
+
+\usepackage[colorlinks=true]{hyperref}
+
+\colorlet{urlclr}{red!10!magenta!70!orange}
+
+\hypersetup{
+ urlcolor = urlclr!50!black,
+ urlbordercolor = cyan!60!black,
+ linkcolor = red!30!black,
+ citecolor = orange!30!black,
+ citebordercolor = yellow!30!black,
+} 
+
+
+
+\let\OldI\i
+\renewcommand{\i}[1]{\textit{#1}}
+
+
+\newcommand{\bibtitle}[1]{{\footnotesize{}\textit{#1}}}
+\newcommand{\intitle}[1]{{\hspace{3pt}\textls*[-80]{\texttt{\textit{#1}}}}\hspace{-1pt}}
+
+
+\newcommand{\IauNCpl}{We\hspace{-1em}}
+\newcommand{\IauNC}{we}
+\newcommand{\IauNCam}{we're}
+\newcommand{\IauNCplam}{We're}
+\newcommand{\myNC}{our}
+\newcommand{\amNC}{are}
+
+
+
+
 

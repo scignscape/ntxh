@@ -1,13 +1,13 @@
 `section.Virtual Machines and Hypergraph Code-Models`
 `p.
 As a preliminary to analyses later in this 
-section, I will make a few comments which might 
+section, `IauNC; will make a few comments which might
 situate this discussion in the context of 
 topics covered elsewhere in this book.  Specifically, 
-I intend to motivate the discussion by appeal 
+`IauNC; intend to motivate the discussion by appeal
 to technologies related to industrial computing, 
 Cyber-Physical Systems (`CPS;), and Computer Vision.`footnote.
-Throughout this book-section I speak of `q.Virtual Machines` 
+Throughout this book-section `IauNC; speak of `q.Virtual Machines`
 specifically in the sense of digital artifacts that 
 emulate Central Processing Units or 
 other physically-realized computing engines.  
@@ -152,7 +152,7 @@ through an `API;, but this would only indirectly
 be an issue for `VM; (via, say, programmers 
 using a scripting language to facilitate 
 `API; calls).  While this is true in principle, 
-I briefly argued in the previous 
+`IauNC; briefly argued in the previous
 chapter that `VM;s can serve as a logical 
 extension to `API;s: there are rationales for 
 exposing functionality via connection-points
@@ -214,7 +214,7 @@ simpler binary packages which drivers can handle.
 In this sense, a `VM; fitting these requirements would 
 simultaneously model `q.high level` calling conventions 
 and translate procedure-call requests between higher and 
-lower levels.  I make this point in the context of 
+lower levels.  `IauNCpl; make this point in the context of
 `CPS;, but the idea would hold for many cases wherein 
 `VM;s encapsulate access to some integral set of 
 low-level functions (at least low-level relative to 
@@ -294,7 +294,7 @@ kernel operations and striving to be usable
 from multiple host languages: that is, from one 
 `VM; we can envision encapsulating access 
 to a variety of procedure-collections 
-(examples I've cited here include functions 
+(examples `IauNC;'ve cited here include functions
 exposed `visavis; database queries, 
 image-processing, and `CPS; networks) and 
 routing descriptions of procedure-calls 
@@ -370,8 +370,8 @@ broad generality (in the sense that `VM;s
 `i.for functional languages`/, say, reflect a 
 general assumption that functional methodology 
 is in the general case a better coding style 
-than alternatives).  By contrast, I 
-am interested here in describing theoretical 
+than alternatives).  By contrast, `IauNC;
+`amNC; interested here in describing theoretical
 `VM; models that remain nonjudgmental 
 as to which conventions are better in which 
 context (or to take the view that multiple 
@@ -381,7 +381,7 @@ so should be supported as such).  A rigorous
 dimensions (addressing types and data-encoding, 
 for example), but of course an essential 
 concern is modeling procedure-calls and 
-calling-conventions, so I will pursue 
+calling-conventions, so `IauNC; will pursue
 this topic as a starting-point for a 
 (relatively informal) system to 
 encapsulate `VM; details in a schematic fashion.     
@@ -397,11 +397,11 @@ inputs to outputs.  Codifying the principles of
 `q.functionhood` in general forms the central project 
 of analyses that bridge math and computers 
 (e.g., lambda calculus).  In terms of mathematical 
-`q.foundations`/, these various formulations 
+`q.foundations,` these various formulations 
 (including lambda calculus and its derivatives 
 and, for instance, Combinatory Logic) entail 
 strategies for clarifying what are 
-sometimes called `q.applicative structures`/, 
+sometimes called `q.applicative structures,` 
 or generic patterns involving the `i.application` 
 of a function/procedure to one or more 
 arguments/parameters `cite<[e.g., chapter 14]HindleySeldin>;, 
@@ -479,7 +479,7 @@ and other non-branch nodes always have variable labels.
 `p.
 The analytic purpose of applicative structures can potentially 
 be served by systems employed in other branches of 
-mathematics %-- e.g., `q.term algebras`/, 
+mathematics %-- e.g., `q.term algebras,` 
 in formal logic, or `nary; trees in computer science, 
 or an extension of the `q.free magma` groupoid concept to 
 (sets of) `nary; (not just binary) operations.  
@@ -517,26 +517,26 @@ spaces which overlap but do not exactly align
 nullary function applications which are not necessarily 
 substitutable with constant values; it is unclear 
 how to map that specific possibility to `nary; trees).  
-In any case, my strategy here is to define applicative 
+In any case, `myNC; strategy here is to define applicative
 structures recursively in a manner that works whether 
 we approach them syntactically or semantically, 
 and to analyze their properties mostly through a 
 representation based on matrices, which in turn 
 could potentially be used to verify isomorphisms 
 between these structures and alternative encodings 
-(here I carry out such an analysis in a graph-theoretic 
-context, though I propose similar methods might apply 
+(here `IauNC; carry out such an analysis in a graph-theoretic
+context, though `IauNC; propose similar methods might apply
 to, e.g., term algebras). 
 `p`
 
 
 `p.
-I'll make a couple of technical points about applicative 
+`IauNCpl;'ll make a couple of technical points about applicative
 structures here, not so much because the mathematics 
 is particularly sophisticated or consequential but 
 so as to establish a baseline of comparison for 
 the graph-theoretic encoding of (generalizations of) 
-applicative structures I will discuss subsequently.
+applicative structures `IauNC; will discuss subsequently.
 
 `defin -> Applicative Systems -> for any fixed 
 set of `i.function symbols` and `i.variable symbols` 
@@ -674,9 +674,9 @@ by numeric indices rather than symbols `cite<BerghoferUrban>;.
 `p`
 
 `p.  
-I propose to use a similar convention based on the idea of 
+`IauNCpl; propose to use a similar convention based on the idea of
 forming symbols which have numeric values but also 
-`q.colors`/.  Specifically, consider, first, characterizations 
+`q.colors.`  Specifically, consider, first, characterizations 
 of the set of functions which may be identified 
 on the basis of one function-symbol %-- say, `fRed;, 
 which assume has a fixed arity `arity;, say, three.  
@@ -686,7 +686,7 @@ and blue numbers for variable-symbols).  Given
 `f; we implicitly also have a family of related functions 
 which are identical to `f; but operate on different domains, 
 taking argument-lists longer than `f;'s arity but 
-ignoring the extra values: I propose denoting these 
+ignoring the extra values: `IauNC; propose denoting these
 via `fOneTwoThreeGFour;, `fOneTwoThreeGFourFive;, etc. 
 using `i.gray`/-color numbers for discarded 
 extra elements.  Conversely, we can also form 
@@ -694,7 +694,7 @@ functions with arity `i.less` than `f;'s by
 repeating numbers for the arguments; e.g., 
 `fOneTwoOne; or `fOneTwoTwo; where note that 
 numbers occurring multiple times are shaded in 
-light blue.  I'll refer to this as 
+light blue.  `IauNCpl;'ll refer to this as
 `q.red-blue-gray` notation %-- schematically, 
 equivalent to notation with symbols (each colored number, 
 i.e., color/number pair,  
@@ -712,7 +712,7 @@ our applicative system.
 `p.
 Suppose we start with some function-symbol list 
 %-- for instance, as earlier in this chapter 
-I alluded to collections of kernel 
+`IauNC; alluded to collections of kernel
 functions which `q.seed` a Virtual Machine 
 wrapping access to `CPS; networks.  
 Intuitively, it would seem to be natural 
@@ -799,7 +799,7 @@ through symbols representing input parameters.
 `lemma-proof`
 
 `anondefin.
-I will call a red-blue-gray string 
+`IauNCpl; will call a red-blue-gray string
 `q.lambda feasible` if it satisfies the 
 restrictions employed above `visavis; 
 darker-blue and gray numbers.   
@@ -812,7 +812,7 @@ Generalizing this analysis to something like lambda
 calculus requires notating function-composition, 
 by substituting nested applicative 
 structures for variable-symbols.  For this 
-context I propose extending `q.red-blue-gray` 
+context `IauNCpl; propose extending `q.red-blue-gray`
 notation to include `q.black` numbers that stand in for 
 nested structures.  Call a `q.red-blue-gray-black matrix` 
 a set of rows formed from red, blue, gray, or black-colored 
@@ -834,7 +834,7 @@ that can be generated from those symbols.
 `lemma-statement`
 
 `lemma-proof.
-I'll proceed by representing each applicative structure 
+`IauNCpl;'ll proceed by representing each applicative structure
 via a red-blue-gray-black matrix.  The simplest applicative 
 structures have no nesting, just a function-symbol 
 followed by a list of variable-symbols.  
@@ -870,7 +870,7 @@ red-blue-gray-black matrices subject to
 these restrictions (on the black numbers 
 as well as lambda-feasible restrictions for each row) 
 `q.lambda-feasible` matrices.  Based on their 
-construction, I claim the set of such 
+construction, `IauNC; claim the set of such
 feasible matrices is isomorphic to the 
 set of applicative structures, so that 
 the lambda-feasible red-blue-gray-black matrices 
@@ -1006,12 +1006,12 @@ structure (where `Ccomb; can itself be a string
 of other, more primitive combinators).  
 In this context combinators play an 
 enumerative role analogous 
-to (what I am calling) red-blue-gray-black 
-matrices (although I personally find   
+to (what `IauNC; `amNC; calling) red-blue-gray-black
+matrices (although `IauNC; personally find
 combinators' reduction rules feel  
 more ad-hoc than the state-machine-like 
 interpretation one can give to a  
-red-blue-gray-black matrix; I'll leave the details 
+red-blue-gray-black matrix; `IauNC;'ll leave the details
 to a footnote).`footnote.
 An intuitive way to picture Combinatory 
 Logic is as follows: disregard the interpretation 
@@ -1042,7 +1042,7 @@ free-form admixtures of combinators, functions, and
 variables, which have no apparent semantic 
 interpretation (the general premise being 
 that only `q.maximally` reduced strings should 
-be approached semantically).  I find these 
+be approached semantically).  `IauNCpl; find these
 details to render Combinatory Logic proper 
 somewhat counter-intuitive, at least on 
 its own terms (to be fair, though, 
@@ -1055,7 +1055,7 @@ for certain constructions in lambda calculus).
 
 `p.
 The linguistics-based interest 
-in Combinators evidently reflects the 
+in combinators evidently reflects the
 idea that certain applicative structures 
 (and intra-structure morphisms) codify 
 compositions or modifications which express 
@@ -1079,7 +1079,7 @@ parsed) `cite<IvanASag>;,
 `cite<MartinHilpert>;, `cite<LauraAMichaelis>;,
 `cite<DavidAdger>;, `cite<EvieCousse>;,
 `cite<PeterFordDominey>;, 
-`cite<GiuliaRambelli>;.  In this context Combinators 
+`cite<GiuliaRambelli>;.  In this context combinators
 are at least intuitive emblems suggesting 
 how syntactic entrenchment yields semantic 
 conventions `cite<[page 6]CemBozsahin>;, 
@@ -1135,9 +1135,9 @@ have some mathematical significance.
 
 `p.
 My concerns here are less mathematical, 
-so I will extend applicative 
+so `IauNC; will extend applicative
 constructions in a different direction, 
-grounded in graph theory.  I will 
+grounded in graph theory.  `IauNCpl; will
 suggest that applicative structures 
 have natural correlates among 
 (directed) graphs, and that this 
@@ -1145,7 +1145,7 @@ setting is in some ways more intuitive
 and less cumbersome than the 
 above presentation appealing to 
 notions like `q.substitution` and 
-function/variable `q.symbols`/.
+function/variable `q.symbols.`
 `p`
 
 `p.
@@ -1161,7 +1161,7 @@ The mechanisms for enumerating distinct
 structures may be less important than the 
 mere fact of having a well-defined algorithm for 
 producing and screening for all valid constructions.  
-I use (what I call) red-blue-gray-black matrices 
+`IauNCpl; use (what `IauNC; call) red-blue-gray-black matrices
 to provide these criteria: intuitively, a reasonable 
 semantics for applicative structures would 
 recognize every formation described by a distinct 
@@ -1172,7 +1172,7 @@ that describes functions (for some meaning of `q.function`/)
 derived from kernel `q.seed` functions by arity-expansion (via 
 unused arguments), projection (arity-reduction through 
 repeated parameters), and composition.  Later in the 
-section I will discuss more specific semantics, 
+section `IauNC; will discuss more specific semantics,
 but the enumeration with red-blue-gray-black matrices 
 yields an initial picture of the space 
 over which such a semantics should quantify.  
@@ -1185,7 +1185,7 @@ applicative structures (and similarly the lambda
 calculus) should be deemed insufficiently 
 expressive for analyses related to modern programming 
 languages.  To be sure, in the above discussion 
-I was evasive about function's `q.semantics`/, 
+`IauNC; `wasNC; evasive about functions' `q.semantics,`
 such that an incomplete account of function 
 `q.application` `i.per se` is arguably warranted 
 by generality.  When turning to programming 
@@ -1219,14 +1219,14 @@ are implemented) recognize multiple
 ordinary parameters, say, or thrown exceptions 
 as opposed to ordinary return values).  To designate 
 these variations in forms of inputs/outputs, 
-I will describe procedure parameters as being 
-grouped into `q.channels`/, which can be interpreted 
+`IauNC; will describe procedure parameters as being
+grouped into `q.channels,` which can be interpreted 
 as gathering a node's adjacency set into 
-(potentially) two or more partitions.  I will 
+(potentially) two or more partitions.  `IauNCpl; will
 introduce some nonstandard terminology, 
 hopefully justified by the 
 Virtual Machine model which `q.drops out` of 
-the theory I'm sketching here, as a practical 
+the theory `IauNCam; sketching here, as a practical
 use-case.  The central underlying notion 
 is to designate certain graphs as `q.syntagmatic` 
 insofar as they model procedure calls with 
@@ -1351,7 +1351,7 @@ for applicative structures.  Indeed,
 introducing these connecting edges 
 is structurally analogous to `q.substituting` 
 nested structures for variables.
-I'll clarify that claim with a further definition.   
+`IauNCpl;'ll clarify that claim with a further definition.
 `lemma-proof`
 
 `anondefin.
@@ -1385,7 +1385,7 @@ nodes via a `q.supplication` edge (intuitively, to
 represent the idea that the node is associated with a 
 value based on its supplier-node's label); two nodes 
 adjacent to the same ring node via such edges 
-have `q.shared supplication`/.
+have `q.shared supplication.`
 `anondefin`
 
 `lemma-statement.
@@ -1438,7 +1438,7 @@ set of function-symbols/procedure-labels.
 Lemmas (1) and (4) detail the construction of 
 red-blue-gray-black matrices from applicative structures 
 and syntagmatic neighborhood-sets respectively.  
-I claim that comparing the two constructions 
+`IauNCpl; claim that comparing the two constructions
 documents that each step in the construction 
 would modify the resulting matrices in 
 equivalent ways, and so the set of 
@@ -1459,7 +1459,7 @@ lambda-calculus sense.
 
 
 `p.
-I have formally reviewed `q.classical` applicative structures, 
+`IauNCpl; have formally reviewed `q.classical` applicative structures,
 however, primarily to demonstrate that 
 within the context of channel systems these 
 structures represent only one (relatively restricted) 
@@ -1468,7 +1468,7 @@ by a simplified (input/output) channel semantics
 (plus at most one output per function).  The constructions 
 for channelized neighborhoods and syntagmatic neighborhood-sets 
 can be naturally extended to more expressive channel systems, 
-yielding (so I claim) graph representations which are 
+yielding (so `IauNC; claim) graph representations which are
 more consistent with actual programming languages 
 (whereas lambda calculus models a kind of abstract 
 programming language for purposes of mathematical 
@@ -1524,7 +1524,7 @@ notated via the syntagmatic graph). ;;
 Intuitively, each Syntagmatic Graph describes a structure connecting 
 one or more procedure-calls, interconnected by parameter 
 passing %-- outputs from one procedure become inputs to another.  
-Working in a more flexible `q.channel system`/, however, 
+Working in a more flexible `q.channel system,` however, 
 the connections between such calls may have more 
 subtle relationships than output-to-input chaining.  
 For example, multiple nodes in a syntagmatic 

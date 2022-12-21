@@ -7,7 +7,7 @@ proper, the point of these formations is to represent
 the idea of functions (in some sense) which take input 
 values.  Notating this process via variable-symbols 
 allows function composition (and arity-reducing projections) 
-to be described; thus we have `q.substitution`/, 
+to be described; thus we have `q.substitution,` 
 replacing variable-symbols with concrete values.  When 
 all free variables in an expression describing 
 (potentially nested) function-applications are 
@@ -32,12 +32,12 @@ multiple precursor function-applications.
 
 
 `p.
-The semantic interpretation I adopt here for `q.syntagmatic` 
+The semantic interpretation `IauNC; adopt here for `q.syntagmatic` 
 graphs is noticeably different than this model 
-(I have analyzed the specific differences in 
+(`IauNC; have analyzed the specific differences in 
 `cite<[page 150]NeusteinChristen>;).  
 Rather than taking input/output as a fundamental 
-divide within function-parameters, I consider 
+divide within function-parameters, `IauNC; consider 
 more general channel systems here.  Note that in 
 contrast to (more typical) graph-representations 
 of computation where outputs are marked by 
@@ -49,7 +49,7 @@ about why this can make sense).  More elaborate
 rationales for the notational and interpretive 
 differences between `SG;s and 
 other procedure-models is tangential to the 
-current chapter, so I'll focus instead 
+current chapter, so `IauNC;'ll focus instead 
 on outlining the semantic interpretation itself.`footnote.
 Some of this terminology is derived from Petri nets 
 `cite<RobertGold>;, `cite<PettitGomaa>;,
@@ -66,7 +66,7 @@ values, against some type system.  Markings
 might be context-dependent; that is, a 
 graph could be subject to multiple 
 markings concurrently, each restricted 
-to one context.  I'll say that values 
+to one context.  `IauNCpl;'ll say that values
 are `i.bound to` nodes, but indirectly, 
 as explained in the following.
 `anondefin`
@@ -74,8 +74,8 @@ as explained in the following.
 `anondefin.
 Syntagmatic Graph nodes can be associated with 
 `i.types` and `i.states`/.  For the present, 
-I will not rigorously define `q.types,` but 
-I'll comment that types are introduced 
+`IauNC; will not rigorously define `q.types,` but 
+`IauNC;'ll comment that types are introduced 
 `visavis; nodes `i.through` states.  
 For any type, each possible instance of that type 
 is a potential `i.state` for Syntagmatic Graph nodes, 
@@ -85,13 +85,13 @@ to a type.  In particular, nodes can have a state
 corresponding to a `q.void` or lack-of-value.
 `anondefin`
 
-That is, I approach the notion of `q.void` as a `i.state` 
+That is, `IauNC; approach the notion of `q.void` as a `i.state` 
 possibly evinced by nodes, rather than through type 
 systems themselves.  That is, we do not need 
 a `q.bottom` or `q.nothing` type with some 
 special value selected (essentially by fiat) 
 to represent non-initialization or pre-initialization.  
-I find it more semantically coherent to 
+`IauNCpl; find it more semantically coherent to
 express such `q.nothing` states as the 
 state of `i.having no value`/, rather than 
 as the presence of a construed `q.nothing` value 
@@ -153,7 +153,7 @@ different directions to inputs versus outputs.
 
 
 `p.
-Roughly as an analog to `q.beta` reduction, I propose 
+Roughly as an analog to `q.beta` reduction, `IauNC; propose 
 the term `i.digamma` reduction to express 
 marking-state changes due to a procedure-call.  
 A digamma reduction is the cumulative state-change 
@@ -162,7 +162,7 @@ syntactically, all nodes adjacent to the procedure-node).
 For multi- (channelized) neighborhood `SG;s, 
 digamma reduction happens in multiple stages, each 
 contextualized to a single neighborhood.  Note 
-that I like the term `q.digamma reduction` partly 
+that `IauNC; like the term `q.digamma reduction` partly 
 as an oblique reference to `q.sigma` calculus 
 (an object-oriented extension to lambda calculus, 
 and the Greek digamma numeric symbol looks like a enlarged 
@@ -186,7 +186,7 @@ are represented `i.in sequence` and moreover
 that such sequences occur in the context 
 of a `i.symbol scope`/, or an environment 
 where string labels can serve as `q.carriers` 
-for typed values; I'll sometimes refer to `q.`SG;-scopes`/, 
+for typed values; `IauNC;'ll sometimes refer to `q.`SG;-scopes,` 
 scopes contextualizing `SG; sequences wherein symbols 
 designate carriers which (when in an initialized 
 state) hold concrete values.  In particular, assume that 
@@ -196,7 +196,7 @@ on nodes earlier: for any type there is a
 spectrum of states equivalent to each type-instance, 
 but there are also states involving 
 `i.lack` of typed values (the generic example 
-of such a state I'll call `i.pre-initialized`/).  
+of such a state `IauNC;'ll call `i.pre-initialized`/).  
 The states available for carriers could be called 
 `q.type-based` in that they are organized around 
 typed values but include non-type states as well.
@@ -213,14 +213,14 @@ grouped into `i.declared` symbols internal to the
 scope, `i.argument` symbols bound to 
 procedures' signatures, and (potentially) `i.global`/,
 or perhaps `q.ambient` symbols 
-shared among multiple scopes (I'll use 
+shared among multiple scopes (`IauNC;'ll use 
 `q.ambient` for the general case and `q.global` 
 for analogs to `q.global variables` in 
 typical programming language).  
 
 `internewline;
 
-`defin -> Tripartite Scope ->  I'll call `SG; scopes 
+`defin -> Tripartite Scope ->  `IauNCpl;'ll call `SG; scopes
 `i.tripartite` in that they are mappings from symbol-names 
 to carriers (or groups of state-synchronized carriers) 
 with type-based states, and symbols can be 
@@ -229,7 +229,7 @@ or `i.ambient`/.  The semantics of these groupings
 will be clarified below. ;;
 
 `anondefin.
-I will say an `q.SG-described procedure` 
+`IauNCpl; will say an `q.SG-described procedure`
 (or just `q.procedure` when the `SG; topic is obvious) 
 is an `SG;-sequence unfolding in a tripartite scope 
 where argument-symbols are bound to values 
@@ -305,7 +305,7 @@ useful solely for their side-effects
 or the carriers in their output-like 
 channels are bound to symbols in the 
 current scope.  In the general case, 
-I'll say that an `SG; is `i.anchored` 
+`IauNC;'ll say that an `SG; is `i.anchored` 
 by one or more symbols if those 
 symbols (strictly, the carriers 
 associated with them) acquire values 
@@ -342,12 +342,12 @@ new values are `q.introduced` into the system.
 `p.
 This last point has implications for how we 
 theorize `i.typed values` as well.  Implicitly 
-here I have assumed that we are operating in a 
+here `IauNC; have assumed that we are operating in a 
 strongly-typed system where types and 
 values are interconnected: any value is 
 `i.typed` (an instantiation of a type) and 
 types exists by virtue of their possible values.  
-I assume that in the general case types are 
+`IauNCpl; assume that in the general case types are
 not equivalent to their `i.extensions`/, 
 that is, to any fixed set of values.  
 There are indeed some types whose extensions 
@@ -375,14 +375,14 @@ all potential such lists into a finite set
 (if there were, take the longest list, an 
 an integer to the end, yielding a new 
 list which has no reason not to be included in the 
-first place).  I assume moreover that 
+first place).  `IauNCpl; assume moreover that
 we are working in a `i.non-constructive` type 
 environment where we cannot consider types' 
 extensions as a logical construction abstracted 
 from computational feasibility in concrete 
 computing environments.  We can discuss 
 types' `i.hypothetical` extension, which may indeed 
-be infinite, but I assume we need some 
+be infinite, but `IauNC; assume we need some 
 other mechanism to manage uncertainties 
 regarding types `i.actual` extension (in 
 some contexts, such as lazy-evaluated lists 
@@ -390,7 +390,7 @@ or ranges, working directly with a logical
 model abstracted from actual realizability 
 is appropriate, but in contrast to 
 functional-programming theory, for example, 
-I do not take such `q.constructive` formalizations 
+`IauNC; do not take such `q.constructive` formalizations 
 as an essential aspect to the relevant 
 type systems).`footnote.
 See `cite<NeusteinChristen>;, chapter 4, for a more 
@@ -404,7 +404,7 @@ that types are non-constructive in general
 
 `p.
 So as to give a rigorous semantics to `i.non-constructive` 
-types, instead, I leverage the interconnections 
+types, instead, `IauNC; leverage the interconnections 
 between types, symbols, and `SG;-nodes insofar as 
 we are working in an `SG; context.  Recall the 
 heuristic that all symbols acquire values  
@@ -433,7 +433,7 @@ point %-- the symbol was associated with a node
 which transitioned from a pre-initialized to a 
 type-bound state as a result of binding to nodes 
 in an output-like channel.  Symbols may be 
-`q.re-anchored`/, initialized to new values 
+`q.re-anchored,` initialized to new values 
 due to anchoring points, but (assume we 
 work in a fixed-type environment) symbols 
 and carriers retain the same types 
@@ -478,13 +478,13 @@ output except that procedures whose signature
 includes such a channel are considered 
 to be constructors, or analogous to constructors 
 (in `cite<NathanielChristenCyberphysical>; 
-I used the term `q.co-constructor` 
+`IauNC; used the term `q.co-constructor` 
 to suggest allowing procedures being analyzed as if 
 they were constructors even in programming 
 contexts where, for technical reasons, they 
 would not be classified as such according to 
 a programming language whose code is being analyzed).  
-For generality I'll call procedures with 
+For generality `IauNC;'ll call procedures with 
 constructor channels `q.co-constructors` with the 
 assumption that different environments may be more 
 or less lenient in conditions where co-constructors 
@@ -613,7 +613,7 @@ accordance with such propagation would
 be in a valid state according to the 
 expectations of the procedure 
 which uses the corresponding value.  
-For the sake of discussion, I'll 
+For the sake of discussion, `IauNC;'ll 
 refer to this approach to the 
 issue of type-semantics as a 
 `i.propagation semantics`/, in contrast 
@@ -645,7 +645,7 @@ state for the called procedure's purposes.
 `p.
 This discussion regarding type semantics has passed 
 over some non-trivial details, such as issues 
-of type casting and inheritance, which I will 
+of type casting and inheritance, which `IauNC; will 
 briefly address in the next subsection.
 `p`
 
@@ -659,7 +659,7 @@ conventions to define constructions which are
 not radically different from traditional 
 notions of, say, stack frames and lambda-abstraction.  
 Beyond just expanding from inputs and outputs 
-to more flexible `q.channel` systems, I have 
+to more flexible `q.channel` systems, `IauNC; have 
 constructed a semantic interpretation for 
 these systems based on formulations such as 
 type-based states and channelized neighborhoods, 
@@ -668,20 +668,20 @@ this overall semantic presentation.  My contention
 is that the full semantic details (not just, say, 
 extending applicative structures to richer 
 channel systems) become valuable in the 
-context of Virtual Machines.  I will 
+context of Virtual Machines.  `IauNCpl; will
 attempt to warrant this claim by addressing 
 `VM; implementation, in particular.
 `p`
 
 `p.
-I suggest the idea of digamma reduction and 
+`IauNCpl; suggest the idea of digamma reduction and
 propagation-from-constructors to 
 replace extensional and/or constructive semantics 
-for type theory.  Implicitly, then, I 
-propose that (what I here call) `q.propagation` 
+for type theory.  Implicitly, then, `IauNC; 
+propose that (what `IauNC; here call) `q.propagation` 
 semantics can displace two other 
 paradigms for type theory, `i.extensional` and 
-`i.constructive`/.  I will try to defend the idea 
+`i.constructive`/.  `IauNCpl; will try to defend the idea
 first that this is a reasonable three-fold 
 division in options for type `q.semantics` 
 and second that there are formal or theoretical 
@@ -904,12 +904,12 @@ types and type extensions (or type-extensions
 and construction-sequences).  While 
 recognizing extensional reasoning as 
 a useful tool for language implementation, 
-I believe that it is more conceptually 
+`IauNC; believe that it is more conceptually 
 accurate to model types' semantics 
-instead via `q.non-constructive` notions I discuss 
+instead via `q.non-constructive` notions `IauNC; discuss 
 here, such as digamma reduction, co-constructor 
 channels, and carrier-state propagation.  
-In other words, I believe that this 
+In other words, `IauNC; believe that this 
 latter group of formulations better 
 capture how people reason about 
 computer code and design patterns 
@@ -923,11 +923,11 @@ This argument, however, is localized to the
 question of defining semantics for 
 type systems, which is arguably a philosophical 
 issue more than a directly 
-practical one.  I intend to refine the 
+practical one.  `IauNCpl; intend to refine the
 discussion by considering how the 
 semantic notions hereby sketched out 
 could yield practical benefits.  
-In this context I will focus 
+In this context `IauNC; will focus 
 on the hypergraph structure of 
 computer code (within the framework 
 of `q.syntagmatic` graphs) and 
@@ -937,20 +937,20 @@ vehicles.
 
 `subsection.Syntagmatic Graph Sequences as a Virtual Machine Protocol`
 `p.
-I am representing Syntagmatic Graphs as hypergraphs, 
+`IauNCpl; `amNC; representing Syntagmatic Graphs as hypergraphs,
 in two senses: partly, for one, 
 because `i.channels` embody a grouping 
 operation (gathering multiple edges, by analogous 
 to hypernodes being sets of nodes %-- although 
 channels are not identical to hyper`i.edges`/, 
 wherein `i.one` edge spans multiple nodes).  
-Second, I also leave open the possibility of `SG; nodes 
+Second, `IauNC; also leave open the possibility of `SG; nodes 
 having internal structure (i.e., becoming hypernodes).  
 However, such hypergraph representation is 
-mostly heuristic; technically, I consider 
+mostly heuristic; technically, `IauNC; consider 
 hypergraphs to be essentially a visual shorthand 
-for `i.virtual machine` constructions.  Here I appeal 
-to comments I made in Chapter 20: a hypergraph 
+for `i.virtual machine` constructions.  Here `IauNC; appeal 
+to comments `IauNC; made in Chapter 20: a hypergraph 
 (or, in essence, any structured representation) 
 iconifies the series of steps 
 needed to construct it in its precise state.  
@@ -989,7 +989,7 @@ which uses them, at least insofar as the `VM; in
 question emulates assembly code to provide a 
 runtime for higher-level programming languages.  
 Modeling procedure-calls via hypergraphs, and 
-in particular `i.channels` (in the sense I propose here) 
+in particular `i.channels` (in the sense `IauNC; propose here) 
 adds representational parameters to this model, 
 by analogy to how hypergraphs present a richer 
 expressive tableau than other metamodels for 
@@ -1027,7 +1027,7 @@ Engineering style features, even if only via
 add-ons %-- to the degree that they present 
 op-sets and data models configured for static 
 and dynamic/runtime analysis.  These 
-observations motivate my proposals to augment 
+observations motivate `myNC; proposals to augment
 the modeling parameters for `VM;s (in procedure-call 
 contexts) via formulations such as 
 channels and carrier-state.  
@@ -1038,13 +1038,13 @@ channels and carrier-state.
 To be sure, a suite of static-analysis capabilities 
 is endemic to traditional (e.g., stack-based) 
 `VM;s as well (reachability, control paths, initialization 
-guarantees, etc.).  I would suggest, however, that 
+guarantees, etc.).  `IauNCpl; would suggest, however, that
 future generations of `VM; technology will seek 
 a broader scope `visavis; contexts where code analysis 
 is applied, considering `GUI; programming, 
 Cyber-Physical Systems, multi-modal front-ends, 
 `AI; integration, and other capabilities that 
-may be unified under the rubric of `q.Industry 4.0`/.  
+may be unified under the rubric of `q.Industry 4.0.`  
 Future `VM; architecture may be optimized 
 for the `i.intersection` of such User-Experience and 
 multi-modality concerns with traditional 
@@ -1054,7 +1054,7 @@ static analysis and Requirements Engineering.
 
 `p.
 Consider the case of Channel Systems.  According 
-to the `SG; model I have outlined here, 
+to the `SG; model `IauNC; have outlined here, 
 procedure-calls are represented via channelized 
 neighborhoods, and in such neighborhoods 
 all edges incident to a central (`q.procedure`/) 
@@ -1071,7 +1071,7 @@ channel.  For example, `VM;s might want to
 add extra information in the 
 context of channels representing `q.message receivers` 
 in Object-Oriented contexts (which 
-I have earlier alluded to as `q.sigma` channels, essentially 
+`IauNC; have earlier alluded to as `q.sigma` channels, essentially 
 the `b.this` or `b.self` of languages like `Cpp;, `Java;, 
 `Rust;, etc.), particularly when such channels 
 contain more than one node (insofar as most languages 
@@ -1179,15 +1179,15 @@ discussion regarding (for instance) special-purpose
 channel semantics perhaps does not obviously 
 connect the idiosyncratic constructions endemic 
 to `SG; representation with concerns in the 
-latter sense, so I'll try to present a case 
+latter sense, so `IauNC;'ll try to present a case 
 more concretely.  Consider first the 
 issue of `q.reactive programming` in `GUI; 
 contexts.  Analysis of procedures as a series 
-of calls to other procedures %-- what I am 
+of calls to other procedures %-- what `IauNC; `amNC;
 calling `SG;-sequence descriptions %-- fails 
 to directly address how call-sequences 
 in this sense fit into over application execution 
-(I touched on this theme at the 
+(`IauNC; touched on this theme at the 
 start of Chapter 20, as well).  
 In general, an application is not a one-dimensional 
 `i.program` which simply executes some sequence of 
@@ -1255,7 +1255,7 @@ instead of one procedure directly calling
 calling another, procedures instead emit 
 `q.signals` that are `i.connected` to 
 other procedures, which in such contexts 
-become `q.slots`/.  Unlike hard-coded 
+become `q.slots.`  Unlike hard-coded 
 procedure-calls, signal-to-slot connections 
 can be dynamically altered, created, or 
 suspended.  Such a mechanism depends on a 
@@ -1504,12 +1504,12 @@ interacting with either a slider or arrow buttons,
 or via a context menu (within an image-display), plus 
 via keyboard actions.  Such interrelationships 
 should be tracked with some degree of rigor to 
-maintain a consistent `q.User Experience`/.
+maintain a consistent `q.User Experience.`
 `p`
 
 `p.
 Continuing this example, a common pattern in `GUI; programming 
-is top implement `q.tool tips`/, or floating text 
+is top implement `q.tool tips,` or floating text 
 blurbs that appear when users hover over `GUI; controls, 
 explaining the purpose and pragmatics associated 
 with the control itself.  Insofar as multiple controls 
@@ -1533,7 +1533,7 @@ percentage) and unit or integration testing.
 
 `p.
 Or, consider again issues with application upgrades.  
-In the example I suggested `visavis; cloud versus 
+In the example `IauNC; suggested `visavis; cloud versus 
 filesystem saves, there may be multiple controls 
 and data types associated with the cloud 
 functionality, including windows where 

@@ -7,9 +7,9 @@ hypergraph data models and meta-models,
 and the common structures 
 (amongst many dissimilarities, reviewed in 
 Chapter 20) between human and computer languages.  
-I will continue last chapter's discussion 
+`IauNCpl; will continue last chapter's discussion
 of data-model and programming language 
-`q.semantics`/.  I argued in the previous 
+`q.semantics.`  `IauNCpl; argued in the previous
 introduction that digital artifacts 
 represent real-world objects only indirectly 
 (we can contrast this with word-object 
@@ -28,7 +28,7 @@ World Cup score).
 
 `p.
 To adopt terms familiar in the 
-Philosophy of Science, I would 
+Philosophy of Science, `IauNC; would 
 argue that signification in 
 this environment is (at most) 
 an `i.emergent property` of an 
@@ -157,7 +157,7 @@ procedure-calls are therefore
 intrinsic to the semantics of 
 artificial computer languages, with 
 no obvious analogues in `q.natural` 
-language.  In later chapters I 
+language.  In later chapters `IauNC; 
 will consider to what 
 degree extralinguistic 
 `q.cognitive processing` plays a 
@@ -252,7 +252,7 @@ of these respective domains.  Virtual
 Machines may add an extra layer of indirection 
 by including encapsulated domain-specific procedures 
 alongside lower-level instructions as 
-part of their `q.operation set`/.  In this 
+part of their `q.operation set.`  In this 
 way `VM; can play a role analogous 
 to (or permitting the implementation) of 
 scripting interfaces to domain-specific 

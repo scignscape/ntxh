@@ -1,0 +1,34 @@
+`abstract,
+This chapter will consider 
+Virtual Machines in the sense 
+of computer programs 
+that act on intermediate representations 
+of computer code, serving as 
+targets for code-compilers 
+that are an alternative to physically-realizable 
+`q.machine language`/.  Virtual Machines 
+in this context are useful tools in the 
+realm of implementing computer languages,
+that is, ensuring that correct programs 
+for a given language can be executed 
+on computers, in accord with the 
+programmer's intentions.  We will 
+focus in particular on hypergraph representations 
+of source code, and on how hypergraph 
+constructions can serve as a point of 
+orientation for designing a 
+Virtual Machine's instruction set.  
+We will sketching, semi-formally, a 
+mathematical overview suggesting how 
+systems similar to the lambda calculus 
+can be represented in the context 
+of hypergraphs, yielding graph-theoretic 
+models of such calculi that 
+might be adopted as alternatives to their 
+original formulations in symbolic logic.  
+We outline how this approach to 
+Virtual Machine design and code-modeling 
+may benefit software engineering 
+in contexts such as data sharing protocols 
+and `GUI; front-end programming.   
+`abstract`

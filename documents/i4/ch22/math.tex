@@ -47,15 +47,17 @@
 
 \newcommand{\topbarleft}{\b{top} $|$ \b{left}}
 
-\newcommand{\bardash}{\ensuremath{|-}}
-\newcommand{\dashbar}{\ensuremath{-|}}
+\newcommand{\smallmathraised}[1]{\raisebox{1pt}{\footnotesize\ensuremath{#1}}}
+
+\newcommand{\bardash}{\smallmathraised{|-}}
+\newcommand{\dashbar}{\smallmathraised{-|}}
 
 \newcommand{\ENUMOPS}{{\small{}\texttt{ENUM\_FLAGS\_OP}}}
 
 
 \newcommand{\abs}{\qb{abs}}
 
-\newcommand{\Cppspaceship}{$<=>$}
+\newcommand{\Cppspaceship}{\smallmathraised{<=>}}
 
 \newcommand{\lteq}[1]{$<=$#1}
 \newcommand{\gt}[1]{$>$#1}

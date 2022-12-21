@@ -17,7 +17,7 @@ workshop as mathematically-inspired
 computer science).   Despite the 
 fact that these two subject-areas lend 
 themselves to different discursive 
-conventions, I contend that 
+conventions, `IauNC; contend that 
 there are some structural parallels 
 between human and computer languages, 
 which such a juxtaposition may 
@@ -36,7 +36,7 @@ isolated without the full feedback
 loop of grammar cross-referenced 
 against semantic interpretation 
 (which, for reasons sketched 
-in Section 1, I believe is 
+in Section 1, `IauNC; believe is 
 deferred from the language-processing 
 stage to some extra-linguistic 
 cognitive or computational faculty).  
@@ -70,8 +70,10 @@ consider how well they perform or apply
 to actual human discourse.  The `q.flow of ideas` 
 could travel in multiple directions.  Concepts 
 emerging in a more speculative, philosophical 
-vein %-- Davidsonian event-semantics or 
-Kripke frames for modal logic come to mind 
+vein %-- Davidsonian event-semantics, 
+Chomskyan tiers of grammar classification, 
+Barwise/Perry situation theory, 
+or Kripke frames for modal logic come to mind 
 %-- propagate into computer science, 
 Artificial Intelligence, or even 
 pure mathematics.  Crossing back the 
@@ -198,10 +200,10 @@ against empirical data, often
 collected in laboratories or 
 specially-constructed observational equipment, 
 like the Grand Canaries Telescope or 
-CERN's Large Hadron Collider.  But when 
+`CERN;'s Large Hadron Collider.  But when 
 the relevant explananda belong 
 to human reality %-- thought, language, 
-problem-solving, motivitions %-- at 
+problem-solving, motivations %-- at 
 some level the empirical data which would 
 advance or disconfirm theories belong 
 to our own experience, and so `i.we` are 
@@ -280,7 +282,7 @@ However they may spell it out,
 philosophers have probably  
 sensed the mutual co-extensibility 
 of humanities and natural science that 
-I have attempted to capture 
+`IauNC; have attempted to capture 
 via `q.bi-directionality`/: our experience 
 tests science when its investigations 
 turn to realms that overlap with 
@@ -438,7 +440,7 @@ their practical accuracy.
 
 
 `p.
-In this chapter and also Chapter 22 I have 
+In this chapter and also Chapter 22 `IauNC; have 
 outlined potential computational approaches 
 to language and vision that are motivated 
 by appeal to, potentially, our own experience: 
@@ -476,7 +478,7 @@ magnitude, with potentially society-changing consequences.
 
 
 `p.
-However, I would argue that whether computational models 
+However, `IauNC; would argue that whether computational models 
 `q.work` when emulating human `i.reasoning` is a 
 different question than how well they 
 shed light on `i.how` we reason.  We might 
@@ -514,7 +516,7 @@ for computers to emulate?
 
 
 `p.
-I believe these are interesting questions, and 
+`IauNCpl; believe these are interesting questions, and
 in an ideal world if reflections such as 
 these (wherever they originate) provide 
 food for thought, they could help reorient 

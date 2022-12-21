@@ -1,7 +1,7 @@
 `section.Hypergraph Data Modeling`
 
 `p.
-I claimed in the introduction that a software 
+`IauNCpl; claimed in the introduction that a software
 application's primary role is to await 
 user actions and then, in response, 
 produce some visual change (in the on-screen display) 
@@ -32,7 +32,7 @@ create data structures noting
 all relevant details about user actions, which 
 in turn is needed for responding correctly 
 (left-click and right-click usually have 
-different `q.meanings`/, for example).  
+different `q.meanings,` for example).  
 At the other end of the user-action/application-response 
 cycle, applications need to subdivide 
 their display window into parcels of screen-space 
@@ -41,7 +41,7 @@ visual contexts (continuing the above
 example, the France score should be placed 
 near the French flag/logo, and likewise for Argentina).  This, 
 of course, means that the computer screen is 
-not just a `q.picture`/.  It is an organized system 
+not just a `q.picture.`  It is an organized system 
 analyzed through data models and 
 types.  And such analyses may potentially be 
 extended to robots and/or Virtual Reality, which 
@@ -81,7 +81,7 @@ button, or pressing the down-arrow key).
 Many applications also allow plugins or extensions to 
 adjust the visual displays in ways not envisioned 
 by the program's original designers.`footnote.
-I adopt the convention that a `q.program` is a 
+`IauNCpl; adopt the convention that a `q.program` is a
 self-contained software component, something 
 that can be executed, and an `q.application` 
 is one kind of program: one with a visible 
@@ -195,10 +195,10 @@ features can be accessed both directly through
 user actions `i.and` indirectly 
 as intermediate processes launched in response 
 to some higher-level user action.`footnote.
-I mention `ABI;s here in the sense that 
+`IauNCpl; mention `ABI;s here in the sense that
 application-procedures might be exposed 
 to be called directly with raw data values, 
-in contrast to what I will later call 
+in contrast to what `IauNC; will later call 
 `q.meta-procedures` whose inputs and outputs 
 are padded with extra layers of indirection.
 `footnote`
@@ -222,7 +222,7 @@ To `q.expose` functionality is to
 offer multiple ways that operations 
 may be accessed: by users directly; by 
 engines which step through workflows; 
-by application `q.macros`/, which 
+by application `q.macros,` which 
 are (for some programs) programmable 
 sequences of user-actions that typically 
 are performed together (linking 
@@ -244,7 +244,7 @@ in standalone software, such as `Lisp; or
 and performance.  Supporting such 
 personalization and fine-tuning is itself a 
 feature that makes software more user-friendly, 
-but (for reasons I mentioned `visavis; 
+but (for reasons `IauNC; mentioned `visavis; 
 rigorous design) also prompts developers 
 to architect software in well-organized ways, 
 with a logical model of user actions, visual 
@@ -262,7 +262,7 @@ in turn, are a useful tool for
 analyzing the features exposed by applications 
 (and how they are implementationally tied to 
 the application as a whole).  This is the 
-primary scenario where I will consider 
+primary scenario where `IauNC; will consider 
 `VM; designs as theoretical artifacts in their own right.
 `p`
 
@@ -311,7 +311,7 @@ about the segmentation as one identifiable
 step in an image-processing pipeline.  
 It is a `i.conceptual` functional unit even if 
 it is not `q.one` function, in the sense of 
-one source-code procedure.  I propose 
+one source-code procedure.  `IauNCpl; propose
 to use the term `q.meta-procedure` to 
 describe functions that are, in 
 this sense, conceptually 
@@ -343,7 +343,7 @@ the superpixels with a colored boundary
 Thus a superpixel algorithm has inputs and 
 outputs analogous to a single procedure.  
 However, insofar as such an algorithm is not 
-one procedure but rather (in my terminology) 
+one procedure but rather (in `myNC; terminology) 
 a `q.meta` procedure, these inputs and outputs 
 are not delivered simply as binary 
 data values (memory addresses or `CPU; registers) 
@@ -503,11 +503,11 @@ with explicit Ontologies).
 
 
 `p.
-In this chapter I will discuss options for `i.hypergraph` 
+In this chapter `IauNC; will discuss options for `i.hypergraph` 
 representations (which in some sense generalize 
-`RDF;, itself considered to be `q.graph-oriented`/, but, 
+`RDF;, itself considered to be `q.graph-oriented,` but, 
 unlike hypergraphs, not internally multi-scale).  
-I claim that hypergraphs are more effective 
+`IauNCpl; claim that hypergraphs are more effective
 at permitting rigorous data profiles to 
 be described and confirmed (i.e., we can 
 formulate hypergraph data paradigms that are 
@@ -535,7 +535,7 @@ the discussion turns to optimization `cite<RenzoAngles>;,
 `cite<WimMartens>;, `cite<DivyaMahajan>; 
 so that we are considering not only `i.whether` 
 queries or validations can be completed, but 
-how to do so efficiently), here I am 
+how to do so efficiently), here `IauNC; `amNC;
 equally concerned with practical software concerns: 
 in particular, the coupling between `i.representing` 
 information and `i.exposing` application 
@@ -586,7 +586,7 @@ Management) %-- employ two different
 sorts of data annotations (called 
 `q.attributes` and `q.properties`/) which 
 both are roughly analogous to `XML; 
-`q.attributes`/.  The `IFC; attribute/property 
+`q.attributes.`  The `IFC; attribute/property 
 distinction might seem locally superfluous 
 in that asserting a given data-point via a 
 property rather than an attribute 
@@ -621,7 +621,7 @@ context of `DICOM; (Digital Imaging and Communications
 in Medicine) wherein `q.tags` (which have descriptive labels 
 but also two-part numeric codes) are encoded using a system 
 that distinguishes `q.Standard Data Elements` from 
-`q.Private Data Elements`/.  The latter are 
+`q.Private Data Elements.`  The latter are 
 assigned a numeric pair whose `q.Group` 
 (first) Number is odd.  `lPACS; (Picture Archiving System) viewers 
 `cite<JohanVanSoest>;, `cite<DavidAClunie>;
@@ -698,7 +698,7 @@ A metamodel which supports this larger semantic
 context is therefore sufficiently expressive 
 to properly encode `IFC; or `DICOM; data; a less expressive model 
 (one which collapses attributes and properties 
-into a generic notion of `q.fields`/, say), would 
+into a generic notion of `q.fields,` say), would 
 fall short, at least without compensating 
 by leveraging its own formal resources 
 (e.g., classifying fields as attributes or 
@@ -802,8 +802,8 @@ the system, at least intuitively.
 
 `p.
 This intuition could be made more precise %-- insofar as 
-I have deferred any rigorous definition for 
-`q.representational parameters`/.  That is to say, for a 
+`IauNC; have deferred any rigorous definition for 
+`q.representational parameters.`  That is to say, for a 
 reasonably systematic analysis of metamodels we should 
 specify building-blocks of constructions 
 recognized through any metamodel.  The overall 
@@ -813,7 +813,7 @@ of structural elements that might potentially
 be employed in fully describing any given 
 structure covered by the system %-- but one would 
 like a still tighter definition.  For this chapter, 
-I approach this problem from the 
+`IauNC; approach this problem from the 
 perspective of Virtual Machines.
 `p`
 
@@ -851,7 +851,7 @@ may be designed subject to requirements that
 they permit the accumulation of any data structure 
 conformant to a given metamodel.  Similarly, `VM;s 
 could be characterized in terms of how they support 
-various `q.calling conventions`/, in the sense of 
+various `q.calling conventions,` in the sense of 
 protocols through which computational procedures 
 delegate to other procedures (supplying inputs, 
 reading outputs, spawning concurrent 
@@ -1200,7 +1200,7 @@ boilerplate code.
 
 
 `p.
-As I alluded to earlier, hypergraph data models 
+As `IauNC; alluded to earlier, hypergraph data models 
 have comparatively greater parameters available 
 for representing information.  In particular, 
 this implies that we have greater 
@@ -1240,7 +1240,7 @@ of course on types' internal organization.
 For typically atomic types 
 (like 1, 2, 4, or 8-byte integers) updates might 
 only entail replacing one value with another, but 
-more complex values (`q.objects`/, in effect`footnote.Taking 
+more complex values (`q.objects,` in effect`footnote.Taking 
 the perspective that in some systems objects are formally 
 defined as aggregate structures (rather than atomic data-points) 
 and, even if not precisely stipulated, object/atomic value 
@@ -1257,7 +1257,7 @@ restrictions on the first element) subject to add/remove
 operations, in contrast to full-on value-to-value 
 replacement.  Some collections have modification-restrictions 
 (e.g., values can only be added or removed from one or 
-both ends of a list, or, as in typical `q.sets`/, all added 
+both ends of a list, or, as in typical `q.sets,` all added 
 values must be unique) or enforce constraints such as 
 monotone increase and decrease.`footnote.
 Consider a collections type 

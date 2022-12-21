@@ -1,0 +1,28 @@
+`abstract,
+This chapter will examine data-interoperation 
+protocols for independently engineered 
+software components, making an argument 
+for hypergraph-based metamodels as a 
+useful abstraction for designing 
+data-representation formats that mutually 
+autonomous components can collaboratively 
+adopt as a neutral encoding strategy. 
+We consider ways to rank data-formats 
+`q.expressiveness` and compare hypergraphs 
+to comparatively `q.less` expressive 
+metamodels, such as those 
+implicit in `XML; and `JSON;, suggesting 
+in concrete terms why expressiveness 
+is beneficial to efficient software development.  
+Concrete examples are drawn from Architecture, 
+Engineering, and Construction (`AEC;), 
+bioimaging, and, in particular, Geographic 
+Information Systems (`GIS;) and digital cartography.
+More broadly we consider how to properly 
+frame the `q.linguistic` nature of 
+computer programming languages and 
+the sense in which software applications 
+have a `q.semantics`/, in the sense of 
+representational connections to empirical objects. 
+`abstract`  
+

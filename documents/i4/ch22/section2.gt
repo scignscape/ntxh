@@ -6,7 +6,7 @@ such as two-coordinate data types and enumerations, which
 are only tangentially related to image-processing.  
 The current section will focus on images more specifically.  
 When considering `VM; `q.integration` with image-processing, 
-I refer primarily to setting up Virtual Machines with 
+`IauNC; refer primarily to setting up Virtual Machines with 
 inherent functionality related to invoking Computer Vision 
 algorithms.  Presumably many `VM;s will implement 
 a general-purpose Foreign Function Interface would would 
@@ -14,7 +14,7 @@ support calls to native-implemented graphics-related
 procedures (along with any other high-throughput 
 domain, where highly optimized code in languages such as 
 `C; or `Cpp; is preferable for performance reasons).  
-In the current context I intend to focus however 
+In the current context `IauNC; intend to focus however 
 on `VM;s which are explicitly oriented toward 
 image-processing, where this specific problem-area 
 is a central design emphasis instead of one group 
@@ -30,7 +30,7 @@ the form of distinct numeric-pair types, could
 be incorporated as `q.kernel` data types for 
 the relevant `VM;.  This is a straightforward example 
 of how basic choices for `VM; design could be 
-influenced by image-related use cases.  I will present 
+influenced by image-related use cases.  `IauNCpl; will present
 other examples below.
 `p`
 
@@ -271,7 +271,7 @@ In short, both components would need
 to expose respective 
 functionality according to a 
 mutually-implementable protocol.  
-For reasons I have discussed, situations 
+For reasons `IauNC; have discussed, situations 
 where components 
 `q.expose capabilities` along these 
 lines are a good example of 
@@ -320,9 +320,9 @@ filesystem routines, and so forth.
 
 `p.
 The prior discussion has considered interop from 
-the host application's point of view, but I will 
+the host application's point of view, but `IauNC; will 
 now transition to image-processing components 
-themselves.  As a case-study I will consider 
+themselves.  As a case-study `IauNC; will consider 
 the `qXCSD; format which was formulated 
 partly in conjunction with developing material 
 for these chapters.  This discussion will 
@@ -340,7 +340,7 @@ environment.
 `subsection.Extending Host Applications with Image-Processing Workflows`
 `p.
 As is implicit in this discussion, the form of connections
-between applications and image-processing components which I will 
+between applications and image-processing components which `IauNC; will 
 emphasize here involve hosts `i.calling` Computer Vision 
 algorithms provided by external libraries, perhaps 
 mediated through Virtual Machines.   
@@ -373,7 +373,7 @@ For purposes of exposition, this section will discuss
 algorithms related to the `XCSD; format mentioned 
 earlier.  The basic focus of `XCSD; concerns how 
 pixel-data is stored in computer memory; in particular, 
-pixels are lined up into groups at different `q.tiers`/, 
+pixels are lined up into groups at different `q.tiers,` 
 or nested levels of detail.  The `XCSD; code 
 accompanying this chapter supports three tiers, based on 
 powers of three; so `threebythree; pixel-boxes are 
@@ -405,7 +405,7 @@ and memory-layout.
 
 `p.
 At the uppermost scale on this `q.tiered` system, the 
-`twentysevenbytwentyseven; boxes are called `q.tierboxes`/, 
+`twentysevenbytwentyseven; boxes are called `q.tierboxes,` 
 which are aligned in memory from the center of the 
 image outward.  The `XCSD; code uses calculations based 
 on the Manhattan-Chebychev hybrid distance representation 
@@ -427,7 +427,7 @@ boxes on each level, from `threebythree; to
 `twentysevenbytwentyseven;.  This allows 
 algorithms to consider the image on coarser-scales, 
 avoiding features on the individual-pixel level 
-that could be statistical `q.noise`/, as desired.  
+that could be statistical `q.noise,` as desired.  
 Pre-computed values such as color-averages 
 can be recorded in the image data along side 
 pixel-level information itself.       
@@ -462,7 +462,7 @@ and subdivision indexing, reflected in the format's
 name.  The purpose of this chapter is not to 
 analyze `XCSD; itself in detail, but rather to 
 adopt it for case-studies in `VM; integration 
-with image-processing.  I will do this through 
+with image-processing.  `IauNCpl; will do this through
 the lens of algorithms associated with `XCSD;, 
 which hopefully serve as representative examples 
 of how `VM;s can interface with algorithms 
@@ -471,15 +471,15 @@ related to image-formats in general.
 
 `subsection.Manhattan/Chebychev distances and `q.Black-Grey` grids`
 `p.
-Earlier I mentioned that `XCSD; uses a `q.hybrid` combining Manhattan 
-and Chebychev distance metrics.  For the sake of discussion, I'll 
+Earlier `IauNC; mentioned that `XCSD; uses a `q.hybrid` combining Manhattan 
+and Chebychev distance metrics.  For the sake of discussion, `IauNC;'ll 
 call this combination an `MCH; distance-representation 
 (not a metric, `i.per se`/, because the result is a two-valued 
 pair rather than a scalar).  Formally, the `MCH; pair between 
 `xypair; and `abpair; is `xyabMCH;, where `mathM; and `mathC;  
 are the Manhattan and Chebychev distances (see the formulas 
 from last section).`footnote.
-Actually, `XCSD; uses a slightly different pair I'll 
+Actually, `XCSD; uses a slightly different pair `IauNC;'ll 
 call `MCHprime; equaling `MCHprimepair;, but this 
 text's version of `smMCH; is more intuitive for exposition.  
 They are readily interconvertible: `MCHprimecovert;.
@@ -503,9 +503,9 @@ end-to-end with an orthogonal vector.
 
 `p.
 In order to document the relevant mathematical 
-properties of `MCH; I will introduce a couple 
+properties of `MCH; `IauNC; will introduce a couple 
 of auxiliary constructions related to discrete 
-geometry.  The main results I am leading uo 
+geometry.  The main results `IauNC; `amNC; leading uo
 to are summarized in Table 1 with respect to 
 finding locations equidistant from some point.  
 The math involved here is barely above grade-school 
@@ -540,10 +540,10 @@ points: double-black (intersections of two
 black lines), gray-black, black-gray, and 
 double-gray (reading the horizontal color 
 first, then vertical).  Unless 
-stated otherwise, I will refer to `MCH; distances 
+stated otherwise, `IauNC; will refer to `MCH; distances 
 as comparisons between two intersection-points on a 
 black-gray grid.  In this context `q.points` discussed 
-without further qualification mean `q.grid points`/, 
+without further qualification mean `q.grid points,` 
 i.e., intersections between grid lines.
 `anondefin`
 
@@ -562,7 +562,7 @@ lines involved, so the mereogeometric interpretation
 is not visually implicit, but the point 
 of black-gray grids is for discrete geometric properties, 
 such as distance, which do not correspond to Euclidian 
-space anyhow).  I am particularly focused on the following:
+space anyhow).  `IauNCpl; `amNC; particularly focused on the following:
 
 `anondefin.
 Call an `MCH; `i.cycle` on a black-gray grid to be a collection 
@@ -719,7 +719,7 @@ through discrete/integer mathematics,
 without the grid being a faithful 
 `i.representation` of the modeled 
 space's actual (Euclidean) geometry.  
-In short, the algorithms I have described 
+In short, the algorithms `IauNC; have described 
 in the black-gray context work also 
 for the practical task in `XCSD; of 
 deriving the proper memory-layout 
@@ -802,7 +802,7 @@ where basic operations such as image-compression,
 calculating dominant colors, and building 
 image-thumbnails can be highly optimized.  
 It's also true that the `MCH; representation, 
-which I have described here in the context of 
+which `IauNC; have described here in the context of 
 memory-layout, can have other benefits.  For 
 some analytic algorithms, for example, 
 having a near-Euclidean distance formula 
@@ -833,16 +833,16 @@ Euclidean floating-point approximations.
 
 `p.
 These points are suggestive of potential 
-`MCH; use-cases; my goal here is not 
+`MCH; use-cases; `myNC; goal here is not 
 to advocate for `MCH; `i.per se`/, 
 but simply to justify the claim that 
 this is the `i.sort` of construction 
 that we might want to engineer 
 in an image-processing context.  
-I therefore claim it is a reasonable 
+`IauNCpl; therefore claim it is a reasonable
 example for discussions within 
 image-analysis contexts.  That is, 
-I propose to use `MCH;-cycle ordering 
+`IauNC; propose to use `MCH;-cycle ordering 
 and related algorithms as case-studies 
 for `VM; engineering which 
 encapsulates Computer Vision capabilities 
@@ -886,7 +886,7 @@ is restricted to the image's longer axis.
 
 `item ->> Calculating tierbox positioning within each `MCH; cycle ;;  
 The choice of how to order tierboxes `i.within` one cycle 
-seems mostly arbitrary.  In `XCSD;, I chose to 
+seems mostly arbitrary.  In `XCSD;, `IauNC; chose to 
 order counter-clockwise from the left (for images with 
 landscape orientation) or top (for those with portrait 
 orientation, i.e., height greater than width).  My 
@@ -913,7 +913,7 @@ image can be divided into eight wedge-shape slices
 will lie in one such octant (those `i.with` zeros may 
 lie on the lines between octants, e.g., diagonals).  This is one 
 example of an algorithm utilizing the `q.direction` enumeration 
-I mentioned in the last section.  As explained there, `XCSD;'s 
+`IauNC; mentioned in the last section.  As explained there, `XCSD;'s 
 notion of direction has 24 options, corresponding to 
 length-8 and length-4 cycles (the latter representing 
 pure diagonals) and then distinct codes for pure orthogonals 
@@ -932,7 +932,7 @@ accommodate different `MCH; cycle-lengths).
 Inside tierboxes, `XCSD; recognizes indexes across 
 `threebythree; and `ninebynine; tiers, mirroring the 
 actual memory layout.  For example, the center of each 
-tierbox is located via code `q.555`/.  Obviously, sometimes 
+tierbox is located via code `q.555.`  Obviously, sometimes 
 it is convenient to access points or box-regions in a more 
 conventional x/y or row-column format, so one requisite 
 calculation is converting subdivision location codes 

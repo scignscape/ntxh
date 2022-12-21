@@ -1,0 +1,42 @@
+`abstract.
+`noindent;This chapter will be focused 
+on image-processing and Computer 
+Vision.  We will 
+consider requirements for a hypothetical 
+Virtual Machine whose intent 
+is consolidate access to image-analysis 
+functionality by exposing 
+sets of Computer Vision algorithms 
+through a common interface.  We anticipate 
+the image-related discussion by 
+reviewing potential Virtual Machine features 
+that are not unique to image-processing 
+but may be especially relevant to 
+that domain, such as recognizing 
+different varieties of number-pairs 
+(to represent, for instance, image 
+locations/coordinates and/or geometric 
+lengths, or pairs thereof) as distinct 
+built-in types.  We also consider 
+functionality that becomes relevant 
+insofar as `GUI; front-ends are 
+paired with image-processing technology, 
+either through user-guided algorithms 
+(such as interactive segmentation) or 
+through interactive visualization wherein 
+users review workflow architectures, 
+intermediate results, color histograms 
+and other special-purpose `GUI; components, 
+comparisons between distinct processing 
+algorithms, and similar tools helping 
+users select and fine-tune image-analysis 
+techniques for specific image series.    
+By way of providing an example or case-study 
+for algorithms that may be integrated with  
+Virtual Machines or application `GUI;s, we 
+summarize some facets of a novel 
+database-related image format and explain the 
+mathematical background of its 
+color models and in-memory layout for image data.
+`abstract`
+

@@ -1,4 +1,6 @@
 
+`newpage;
+
 `section.Conclusion`
 
 `p.
@@ -26,7 +28,7 @@ code for static analysis (or some combination).
 
 
 `p.
-I contend that trends such as Industry 4.0 
+`IauNCpl; contend that trends such as Industry 4.0
 foretell an increasing convergence between 
 technologies related to User Experience and 
 User Interface, Cyber-Physical Systems, `ThreeD; 
@@ -67,7 +69,7 @@ a larger presence in industrial/architectural
 
 
 `p.
-I do not sketch this account from the 
+`IauNCpl; do not sketch this account from the
 point of view of advocacy, but instead 
 to point out that maximizing the benefits 
 of existing digitization capabilities 
@@ -81,7 +83,7 @@ application-development capabilities,
 at least if software fitting these 
 characterizations is to be developed 
 in a cost-effective, extensible/adaptable, 
-and widely available manner.  I have emphasized 
+and widely available manner.  `IauNCpl; have emphasized
 how Virtual Machine engineering can fit into 
 this overall sea-change in application-development 
 requirements and standards, with a more 

@@ -6,8 +6,8 @@ and limited simulacrum of `q.natural` Language
 (i.e., human, spoken language).  This does not 
 rule out how structural features of programming 
 languages could potentially shed light on 
-human linguistics (shortly I will present 
-in greater detail where I think the most promising 
+human linguistics (shortly `IauNC; will present 
+in greater detail where `IauNC; think the most promising 
 or prominent structural correlations exist), 
 but the tenuous connections between human 
 and computer languages writ large invite 
@@ -54,7 +54,7 @@ between people (which are almost never
 
 
 `p.
-I think these issues are still open-ended.  
+`IauNCpl; think these issues are still open-ended.
 Philosophically, it is a reasonable 
 hypothesis to assume that most of the 
 `q.human` qualities of conversation 
@@ -88,7 +88,7 @@ familiarity between conversants in order
 for reasonable human dialog to take 
 place, because so much of the semantic 
 and referential details of our speech 
-remain unstated, an implicit part 
+remain unstated %-- an implicit part 
 of the discursive background rather 
 than explicitly invoked lexically 
 or descriptively.  No one in a 
@@ -194,7 +194,7 @@ and movements appropriate for that goal.
 
 `p.
 Here, then, is a good example of the 
-`q.intermediate` language question I 
+`q.intermediate` language question `IauNC; 
 alluded to before: what forms of 
 communication exist that are higher-level 
 than artificial languages such as computer 
@@ -216,14 +216,14 @@ programmed as robots' baseline capabilities.
 
 
 `p.
-I will touch on these issues later in the chapter, 
-but here I will also be focusing on the 
+`IauNCpl; will touch on these issues later in the chapter,
+but here `IauNC; will also be focusing on the 
 theme of language in that gap between humans 
 and computers %-- what resources can help 
 us think through the nature of language 
 outside the prototypes of mechanical computer 
 languages and holistic human language?  
-I argued at the start of Chapter 20 that calling 
+`IauNCpl; argued at the start of Chapter 20 that calling
 implemented coding systems such as `Cpp; or JavaScript `q.languages` 
 is misleading, and in some ways the science of 
 building and using programming languages 
@@ -240,7 +240,7 @@ for instance).  So there are at least some
 technical formations in software-language 
 implementation which may arguably shed light 
 on how people understand our own 
-human languages (some of these I reviewed 
+human languages (some of these `IauNC; reviewed 
 in Chapter 20, and will revisit 
 later in this chapter as well). 
 With that said, though, the kind 
@@ -258,7 +258,7 @@ robots and other `q.Industry 4.0` machines.
 
 
 `p.
-I argued in Chapter 23 that intersubjective 
+`IauNCpl; argued in Chapter 23 that intersubjective
 awareness serves as a central motivation 
 that underlies other foundational 
 dimensions of language %-- specifically, 
@@ -371,7 +371,7 @@ constructions encode situational
 details, but how they 
 relate to contextual 
 schemata remains a further 
-question I did not address 
+question `IauNC; did not address 
 in any detail.
 `p`
 
@@ -382,7 +382,7 @@ So, what exactly do we accomplish via
 speech-acts insofar as linguistic 
 activity adds a further layer to 
 our preliminary cognitions 
-and co-operation?  I propose a 
+and co-operation?  `IauNCpl; propose a
 `q.foundations of language` story 
 which says in effect that 
 our common situations and 
@@ -406,6 +406,7 @@ event, process, or action)
 `cite<[e.g., page 39]SanderLestrade>;,
 `cite<LebaniLenci>;, `cite<ShimEpstein>;, 
 `cite<KyleJohnson>;, `cite<GregCarlson>;, 
+`cite<MarcusBerger>;,
 `cite<LucasChampollionC>;, 
 `cite<ChampollionDissertation>;.  It is true that 
 almost any theory of language will focus on verbs 
@@ -471,14 +472,14 @@ for syntax and semantics.`footnote.
 Although `q.verb-centric` paradigms 
 are tangentially related 
 to Davidsonian `q.event semantics,` 
-I am thinking of verbs in the 
+`IauNC; `amNC; thinking of verbs in the
 most general sense of `i.profiling` 
 states, relations, or processes as well as 
 events, following Langacker in particular 
 `cite<[chapter 4]LangackerIntro>;, `cite<[page 24]LangackerClause>;,
 `cite<[e.g., pages 21-25]LangackerConceptualization>;,
 `cite<LangackerConstructions>;.  Also, 
-for reasons sketched below I am wary 
+for reasons sketched below `IauNCam; wary
 of semantic structures presented as 
 `i.logical models` of sentences 
 themselves, rather than as patterns 
@@ -512,14 +513,14 @@ or effectuate changes to shared
 situation/environment models 
 (including by changing the situation 
 itself).  In accord with my 
-discussion in Chapter 23, I contend 
+discussion in Chapter 23, `IauNC; contend 
 that we should credit dogs such as 
 Stella with credible human-like 
 language so long as we 
 feel confident that they 
 have cognitive resources to 
 participate in our language at 
-both of these levels.  Data I 
+both of these levels.  Data `IauNC; 
 summarized there certainly 
 suggests both that Stella shares 
 mental models with her caregivers, 
@@ -543,13 +544,13 @@ a prerequisite %--
 there must be other significatory 
 facets to language that we can 
 study via syntax and semantics.  This, 
-I would argue, qualifies as the 
+`IauNC; would argue, qualifies as the 
 origin of structures that 
 can be applied to phenomena 
 such as computer languages, which 
 have some overlap with syntax or semantics 
 in natural language proper but (for reasons
-I have outlined) do not, I believe, 
+`IauNC; have outlined) do not, `IauNC; believe, 
 reflect the preliminary phenomena 
 of joint attention and intersubjectivity.  
 This chapter will consider some of these 

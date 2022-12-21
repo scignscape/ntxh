@@ -14,16 +14,16 @@ engineering.  There is a connection between these
 themes insofar as data models constrain data structures, 
 which supply the values on which programming languages 
 operate.  In other words, data models are an essential 
-aspect of programming-language `q.semantics`/.
+aspect of programming-language `q.semantics.`
 `p`
 
 
 `p.
-Preliminary to further discussion of these 
-subjects, I will start with a review of 
+As a preliminary to further discussion of these 
+subjects, `IauNC; will start with a review of 
 computer languages as technical artifacts. 
 Perhaps it is not quite accurate, in fact, to describe computer programming 
-languages as `q.languages`/.  This is partly because 
+languages as `q.languages.`  This is partly because 
 natural language evolves organically, whereas 
 programming languages are `i.created` (usually `q.by committee`/). 
 They evolve in response to engineering challenges %--   
@@ -78,7 +78,7 @@ the application should have functionality
 to respond to that user's input.  Typically this response 
 will be processed and then the application will return to 
 a passive state, awaiting further user actions.  The  
-passive-active-passive cycle is often called an `q.event loop`/.
+passive-active-passive cycle is often called an `q.event loop.`
 `p`
 
 
@@ -101,7 +101,7 @@ aside interfaces explicitly designed for the hearing-impaired
 playing an audio or audio/video file.  
 `footnote` In this sense 
 the behavior which a user expects from their application is 
-intimately connected with what they `q.see`/.
+intimately connected with what they `q.see.`
 `p`
 
 `p.
@@ -259,8 +259,8 @@ the proper synergy between external facts, internal
 data structures, and visible displays is vastly 
 different than the cognitive architectonics 
 of people hearing (or reading) language.  This 
-is one reason why I implied that the expression `q.programming 
-`i.language`/` is a misnomer.  Nonetheless, I believe 
+is one reason why `IauNC; implied that the expression `q.programming 
+`i.language`/` is a misnomer.  Nonetheless, `IauNC; believe 
 that in some sense (natural) linguistics can benefit 
 from analyzing programming languages, precisely 
 because of their mechanical and artificial nature.
@@ -321,7 +321,7 @@ application state.
 
 
 `p.
-I have said that an application's external state 
+`IauNCpl; have said that an application's external state
 is primarily manifest in its visual displays.  
 This is true for conventional software, although 
 we can envision technology evolving so that 
@@ -443,7 +443,7 @@ is to `q.virtually` simulate running code, so
 virtual machines can come into play during 
 compilation even if the compiler's  
 target is low-level machine code).`footnote.
-I'm thinking of something like `LLVM; (Low Level 
+`IauNCplam; thinking of something like `LLVM; (Low Level
 Virtual Machine) as a foundation for the 
 `Cpp; Clang compiler `cite<LattnerAdve>;.  
 Even if it is not 
@@ -494,11 +494,11 @@ executing high-level computer code.
 
 `p.
 For reasons sketched in this introduction, 
-here I consider `VM;s especially 
+here `IauNC; consider `VM;s especially 
 in the context of how applications 
 link internal data structures to 
 external (mostly visual-display) 
-configurations %-- which I have argued 
+configurations %-- which `IauNC; have argued 
 is `i.the` central concern of 
 software engineering in general.  
 That is, we can use `VM;s to 

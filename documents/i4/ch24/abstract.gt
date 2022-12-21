@@ -1,0 +1,54 @@
+`abstract,
+This chapter will continue to explore 
+the interconnections between 
+human language, computer 
+languages, and intermediate forms 
+of communication that may be 
+appropriate for (e.g.) Human-Robot 
+Interaction (`HRI;).  We 
+argue that much of the cognitive processing 
+that is intrinsic to understanding 
+language is actually `i.extra`/-linguistic, 
+and in particular that the detailed 
+propositional content conveyed by 
+linguistic expressions is, in many 
+contexts, not structurally present 
+in expressions themselves (at least, 
+not in its entirety).  We consider 
+semantic models which accordingly 
+see language as providing an 
+`q.interface` to cognitive 
+`q.procedures` rather than to a 
+logical encoding of predicate 
+meaning.  To the degree that these 
+approaches have merit in the domain 
+of human language, they offer potential 
+insights in the realm of programming 
+languages as well, because here again 
+the surface form of expressions 
+(in computer code) should be analyzed as 
+an entry-point to procedural 
+capabilities which are the media 
+through which applications are 
+able to represent or simulate 
+external objects.  From that 
+theoretical perspective, we consider 
+how linguistic models may be 
+adapted to human-robot communications, and 
+outline plausible conventions governing 
+the interface through which humans 
+will examine, guide, or visualize 
+robots' movements and surroundings.  
+We consider `GUI; programming 
+elements and Human-Computer Interaction (`HCI;) conventions 
+in conventional computing environments 
+as analogs to `HRI;, suggesting that configurations 
+of `GUI; elements onscreen in application windows 
+serves as a proxy structure for developing 
+technologies to model robots' orientation 
+insofar as it is guided and monitored 
+by people, by analogy to how 
+users examine `GUI; windows to obtain 
+facts about application state and the 
+data on which applications operate.  
+`abstract`

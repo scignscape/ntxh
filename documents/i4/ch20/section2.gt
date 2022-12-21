@@ -62,7 +62,7 @@ of objects in a `GIS; database are converted
 to pixel-coordinates, so that features such as 
 roads and building can be marked visually.  Tiles 
 are rendered according to graphical rules called 
-`q.styles`/, which stipulate details such as 
+`q.styles,` which stipulate details such as 
 the colors that should be used to outline buildings 
 or roadways, or the icons for points of 
 interest (transit stops, historical sites, special-purpose buildings 
@@ -119,7 +119,7 @@ and merge them together at the last moment).
 
 
 `p.
-I provide this digital-cartography overview mostly 
+`IauNCpl; provide this digital-cartography overview mostly
 to mention certain details concerning 
 `GIS; data systems.  Although there is a core 
 dimension of familiar mappable elements 
@@ -187,7 +187,7 @@ to users in conjunction with digital-cartography
 front-ends.  This data-management workflow 
 is roughly analogous to the case of routing data 
 packages across third-party networks 
-discussed above (in ways I will summarize 
+discussed above (in ways `IauNC; will summarize 
 more completely at the end of this section).
 `p`
 
@@ -314,7 +314,7 @@ screen-coordinates to latitude/longitude,
 including the current zoom level, and the 
 specific geographic rectangle which is 
 visible in the map's view-port (following how 
-the user has `q.panned`/, viz., 
+the user has `q.panned,` viz., 
 orthogonally scrolled the display, so that 
 the click-location is quantified as a 
 certain distance right and down from 
@@ -768,7 +768,7 @@ hydrology and
 `q.hydroinformatics` 
 `cite<MarkRandall>;, `cite<EhsanShafiee>;, `cite<JundeChen>;,
 `cite<ShaunHowell>;, `cite<PraveenKumar>;,
-`cite<ThomasHies>;.  Indeed, I'll continue the 
+`cite<ThomasHies>;.  Indeed, `IauNC;'ll continue the 
 earlier case-study of Ukrainian 
 reconstruction.  It has been well-documented 
 that the 2022 war crippled the country's 
@@ -937,10 +937,10 @@ science).
 `p.
 Because this chapter is focused on computational 
 methods rather than botany or hydrology 
-`i.per se`/, I will not examine the 
+`i.per se`/, `IauNC; will not examine the 
 specifics of the different scientific 
 domains in play for these various 
-examples.  Instead, I want to focus on the 
+examples.  Instead, `IauNC; want to focus on the 
 application-design concerns which 
 these case-studies illustrate.  We 
 have here a hypothetical water-distribution 
@@ -1053,7 +1053,7 @@ Notice `GIS;
 systems thereby potentially serve a purpose which is a 
 variation on cross-application 
 data sharing considered earlier 
-in the chapter.  Before, I mentioned 
+in the chapter.  Before, `IauNC; mentioned 
 the use of `API;s allowing an 
 application to receive third-party 
 data from an external source, 
