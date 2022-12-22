@@ -1,706 +1,707 @@
 
 `section.Introduction`
 `p.
-Chapter 20 began with a review of the 
-differences between natural and programming 
-languages, and Chapter 24 will explore 
-these differences (and a few similarities) 
-in greater depth.  Chapter 24 will also 
-consider human/robot communication as a case-study 
-in forms of language that may be 
-intermediary between human language 
-(in all its complexity and nuance) 
-and the mechanistic, artificial  
-limits of computer code.  Once we step 
-beyond communication between `i.people`/, 
-what should we understand by `q.language` 
-specifically; what significance 
-should be attached to calling a 
-sign-system `i.language` and not 
-something more general (some less-specific form 
+Chapter 20 began with a review of the
+differences between natural and programming
+languages, and Chapter 24 will explore
+these differences (and a few similarities)
+in greater depth.  Chapter 24 will also
+consider human/robot communication as a case-study
+in forms of language that may be
+intermediary between human language
+(in all its complexity and nuance)
+and the mechanistic, artificial
+limits of computer code.  Once we step
+beyond communication between `i.people`/,
+what should we understand by `q.language`
+specifically; what significance
+should be attached to calling a
+sign-system `i.language` and not
+something more general (some less-specific form
 of iconification or symbolic representation)?
 `p`
 
 `p.
-To explore such questions, it is interesting 
-to consider other examples of language/communication 
-%-- apart from both programming and natural/human 
-languages.  Hence robotics, looking ahead to 
-Chapter 24.  My idea in `i.this` 
-chapter is to approach these topics from the 
-perspective of `q.animal cognition`/: 
-that is, to consider whether communication 
-between non-human animals, or (especially) between people 
-and animals, can offer insights onto 
-forms of discourse which are simpler than 
-human speech but also, unlike computer code, 
-organically evolving (not artificially manufactured) 
-and inter-personal, emerging in the context of 
-animals' social lives and interactions.    
+To explore such questions, it is interesting
+to consider other examples of language/communication
+%-- apart from both programming and natural/human
+languages.  Hence robotics, looking ahead to
+Chapter 24.  `MyNC; idea in `i.this`
+chapter is to approach these topics from the
+perspective of `q.animal cognition`/:
+that is, to consider whether communication
+between non-human animals, or (especially) between people
+and animals, can offer insights onto
+forms of discourse which are simpler than
+human speech but also, unlike computer code,
+organically evolving (not artificially manufactured)
+and inter-personal, emerging in the context of
+animals' social lives and interactions.
 `p`
 
 `p.
-Examining `q.non-human` languages %-- from computers 
-to animals %-- has several different 
-practical and theoretical payoffs.  On the one hand, 
-analyzing simpler modes of communication can shed light 
-on human language, which is arguably the most 
-complex discursive framework we know of; its origins, 
-formal mechanisms, and cognitive foundations.  
-On the other hand, simpler sign-systems 
-might serve as models for constructed computer/robot 
-languages more so than natural human speech 
-proper %-- unless we intend to equip robots with 
-full-fledged `NLP; engines (which could run up against 
-limits in how thoroughly Natural Language Processing 
-may ever fully 
-comprehend human dialog) `cite<AnnaFrohnwiese>;, 
-`cite<EdoardoDatteri>;, `cite<HoffmannPfeife>;, 
-`cite<KatieARiddoch>;. If we envision people 
-`q.talking to` robots, for instance, accuracy depends 
-both on correct speech recognition (e.g., speech-to-text 
-conversion) and then correct parsing of generated 
-text.  Even theoretically strong results, such as an 
-engine achieving accuracy over `ninetypercent;, could yield an 
-interface that people still experience as hard to 
-use %-- it would be frustrating to conduct a 
-conversation with a partner who misunderstands 
+Examining `q.non-human` languages %-- from computers
+to animals %-- has several different
+practical and theoretical payoffs.  On the one hand,
+analyzing simpler modes of communication can shed light
+on human language, which is arguably the most
+complex discursive framework we know of; its origins,
+formal mechanisms, and cognitive foundations.
+On the other hand, simpler sign-systems
+might serve as models for constructed computer/robot
+languages more so than natural human speech
+proper %-- unless we intend to equip robots with
+full-fledged `NLP; engines (which could run up against
+limits in how thoroughly Natural Language Processing
+may ever fully
+comprehend human dialog) `cite<AnnaFrohnwiese>;,
+`cite<EdoardoDatteri>;, `cite<HoffmannPfeife>;,
+`cite<KatieARiddoch>;. If we envision people
+`q.talking to` robots, for instance, accuracy depends
+both on correct speech recognition (e.g., speech-to-text
+conversion) and then correct parsing of generated
+text.  Even theoretically strong results, such as an
+engine achieving accuracy over `ninetypercent;, could yield an
+interface that people still experience as hard to
+use %-- it would be frustrating to conduct a
+conversation with a partner who misunderstands
 one out of every 10 words.
 `p`
 
 `p.
-Moreover, even if engineers overcome or just accept 
-such barriers, it is hard to envision a scenario 
-where an `NLP; interface should be the `i.primary` 
-means of communicating with robots or computers.  
-Presumably natural-language inputs would be 
-parsed into intermediate structures reflecting a 
-more computationally tractable language, and 
-for testing or development %-- plus as an 
-alternative interface that users might find 
-more convenient %-- presumably robots and software 
-should be equipped to accept inputs in 
-`q.languages` structured around computers' 
-innate instructions and capabilities.    
+Moreover, even if engineers overcome or just accept
+such barriers, it is hard to envision a scenario
+where an `NLP; interface should be the `i.primary`
+means of communicating with robots or computers.
+Presumably natural-language inputs would be
+parsed into intermediate structures reflecting a
+more computationally tractable language, and
+for testing or development %-- plus as an
+alternative interface that users might find
+more convenient %-- presumably robots and software
+should be equipped to accept inputs in
+`q.languages` structured around computers'
+innate instructions and capabilities.
 `p`
 
 
 `p.
-The prior chapters in this section have focused on 
-Virtual Machines, in contexts such as cross-component 
-interop protocols and image-processing.  Virtual Machines 
-are intrinsic to the implementation of `q.computer` 
-languages because they may serve as an execution 
-engine for bytecode derived from parsing 
-programming-language expressions into machine-readable 
-intermediate representations.  Looking ahead, 
-Chapter 24 will address more practical issues 
-in deploying languages within robotics, for 
-example.  This chapter therefore serves as a 
-kind of bridge or interregnum.  If we intend to 
-design languages for robots, and other 
-`i.en situ` installed computing environments 
-%-- and moreover we feel a need to find  
-communication models other than human language 
-as guides or prototypes %-- it is worth examining 
-whether language-use by non-human animals 
-carries potential lessons for discourse 
-engineered as a computational capability.   
+The prior chapters in this section have focused on
+Virtual Machines, in contexts such as cross-component
+interop protocols and image-processing.  Virtual Machines
+are intrinsic to the implementation of `q.computer`
+languages because they may serve as an execution
+engine for bytecode derived from parsing
+programming-language expressions into machine-readable
+intermediate representations.  Looking ahead,
+Chapter 24 will address more practical issues
+in deploying languages within robotics, for
+example.  This chapter therefore serves as a
+kind of bridge or interregnum.  If we intend to
+design languages for robots, and other
+`i.en situ` installed computing environments
+%-- and moreover we feel a need to find
+communication models other than human language
+as guides or prototypes %-- it is worth examining
+whether language-use by non-human animals
+carries potential lessons for discourse
+engineered as a computational capability.
 `p`
 
 `p.
-Most animal-communication 
-research has focused on how animals express 
-or coordinate thoughts with one another 
-(in the same species), and scientists have 
-developed ingenious methods to measure 
-the sophistication and infer the meaning 
-of animals' vocalizations 
-(see for instance `cite<[e.g., pages 24 and 30]ConSlobodchikoff>;).  
-While this 
-is important, equally valid insights can be 
-gleaned from watching animals such as 
-dogs and gorillas learn to speak 
-`i.our` language, whether through 
-signs/gesture or through programming 
-devices that produce words as if one 
-were `q.talking.`  Because they are 
-already pets, studying dog cognition 
-is logistically simpler than 
-with most other animals.  This century has 
-seen a noteworthy uptick in studies focusing 
-on dogs' reasoning and neural architecture, such as 
-Gregory Berns's `q.Dog Project` %-- obtaining 
-the first Functional `MRI; imaging 
-of dogs in a fully alert and engaged 
-state, allowing their patterns of 
-brain-activation while playing certain 
-games and interacting with their 
-caregivers to be imaged and analyzed 
-`cite<GregoryBerns>;.  More recently, 
-several dog owners have conducted 
-what are in effect `q.citizen science` 
-projects where they train their 
-pets to `q.talk` via 
-Augmentative and Alternative Communication 
-(`AAC;) buttons.  Their published 
-videos suggest that dogs, after adapting to 
-`AAC; devices, are capable of linguistically interacting 
-with people on a non-trivial 
-level, forming compound sentences 
-and grasping the epistemic 
-and interpersonal dimensions of 
-human speech (e.g., using 
-language to convey new information 
+Most animal-communication
+research has focused on how animals express
+or coordinate thoughts with one another
+(in the same species), and scientists have
+developed ingenious methods to measure
+the sophistication and infer the meaning
+of animals' vocalizations
+(see for instance `cite<[e.g., pages 24 and 30]ConSlobodchikoff>;).
+While this
+is important, equally valid insights can be
+gleaned from watching animals such as
+dogs and gorillas learn to speak
+`i.our` language, whether through
+signs/gesture or through programming
+devices that produce words as if one
+were `q.talking.`  Because they are
+already pets, studying dog cognition
+is logistically simpler than
+with most other animals.  This century has
+seen a noteworthy uptick in studies focusing
+on dogs' reasoning and neural architecture, such as
+Gregory Berns's `q.Dog Project` %-- obtaining
+the first Functional `MRI; imaging
+of dogs in a fully alert and engaged
+state, allowing their patterns of
+brain-activation while playing certain
+games and interacting with their
+caregivers to be imaged and analyzed
+`cite<GregoryBerns>;.  More recently,
+several dog owners have conducted
+what are in effect `q.citizen science`
+projects where they train their
+pets to `q.talk` via
+Augmentative and Alternative Communication
+(`AAC;) buttons.  Their published
+videos suggest that dogs, after adapting to
+`AAC; devices, are capable of linguistically interacting
+with people on a non-trivial
+level, forming compound sentences
+and grasping the epistemic
+and interpersonal dimensions of
+human speech (e.g., using
+language to convey new information
 to someone, or comment on present
-situations).  
+situations).
 `p`
 
 `p.
-Such observations paint a 
-preliminary but compelling picture of the 
-level of linguistic understanding 
-that dogs can attain.  I will argue that 
-language at this level offers a plausible 
-model of `q.mid-level` language systems 
-that are richer than computer code but 
-still more rudimentary and tractable 
-than human language itself (as 
-practiced between fully-competent 
-speakers, in the context of 
+Such observations paint a
+preliminary but compelling picture of the
+level of linguistic understanding
+that dogs can attain.  `IauNCpl; will argue that
+language at this level offers a plausible
+model of `q.mid-level` language systems
+that are richer than computer code but
+still more rudimentary and tractable
+than human language itself (as
+practiced between fully-competent
+speakers, in the context of
 collective human activities or situations).
 `p`
 
 `p.
-The primary sources I will analyze here are 
-reports published by Christina Hunger, 
-a speech therapist who works professionally 
-with young children, about her experiences 
-when she encouraged her dog Stella to 
-communicate using `AAC; buttons (allowing dogs 
-to produce word-sounds by stepping 
-on the buttons with their paws).  
-Inspired by Stella's progress, 
-`q.talking dogs` has become 
-something of an internet meme over 
+The primary sources `IauNC; will analyze here are
+reports published by Christina Hunger,
+a speech therapist who works professionally
+with young children, about her experiences
+when she encouraged her dog Stella to
+communicate using `AAC; buttons (allowing dogs
+to produce word-sounds by stepping
+on the buttons with their paws).
+Inspired by Stella's progress,
+`q.talking dogs` has become
+something of an internet meme over
 the last few years.`footnote.
-Needless to say, this has nothing to 
-do with cute videos of dogs (especially 
-Huskies) barking or howling in ways 
-that with some imagination we might 
-perceive as trying to produce human 
-words.  Analysis of innate canine 
-calls is a legitimate scientific topic, 
-but at best only tangential to 
-the new `AAC;-inspired research. 
-`footnote`  Following  
-Stella, a Sheepadoodle named 
-Bunny, and her caregiver, Alexis Devine, 
-has developed a wide social media 
-following.  A data set accompanying 
-this chapter includes links to 
-hundreds of videos featuring 
-these two dogs, along with summarial annotations 
-and computer code (such as procedures 
-implemented to locate their video links).  There is 
-growing data supporting the notion 
-that dogs have cognitive faculties 
-that with some learning can be manifest in a 
-surprisingly sophisticated level of 
-language-like communication, albeit 
-through the use of mechanical 
+Needless to say, this has nothing to
+do with cute videos of dogs (especially
+Huskies) barking or howling in ways
+that with some imagination we might
+perceive as trying to produce human
+words.  Analysis of innate canine
+calls is a legitimate scientific topic,
+but at best only tangential to
+the new `AAC;-inspired research.
+`footnote`  Following
+Stella, a Sheepadoodle named
+Bunny, and her caregiver, Alexis Devine,
+has developed a wide social media
+following.  A data set accompanying
+this chapter includes links to
+hundreds of videos featuring
+these two dogs, along with summarial annotations
+and computer code (such as procedures
+implemented to locate their video links).  There is
+growing data supporting the notion
+that dogs have cognitive faculties
+that with some learning can be manifest in a
+surprisingly sophisticated level of
+language-like communication, albeit
+through the use of mechanical
 speech-aids as intermediaries.
 `p`
 
 `p.
-The point is not that dogs conduct conversations 
-on even a child's level, but the 
-level of understanding they do possess is 
-noteworthy %-- 
-especially when we consider 
-that they are not evolved to vocalize words, 
-and have to adjust to 
-mechanical artifacts to communicate with 
-humans on our own terms (adding a 
-layer of complexity to the whole 
-process that would not be evident in, 
+The point is not that dogs conduct conversations
+on even a child's level, but the
+level of understanding they do possess is
+noteworthy %--
+especially when we consider
+that they are not evolved to vocalize words,
+and have to adjust to
+mechanical artifacts to communicate with
+humans on our own terms (adding a
+layer of complexity to the whole
+process that would not be evident in,
 let's say, bird songs or Chimpanzee calls).
-How dogs nonetheless adapt to human 
-language, I will argue, presents 
-some interesting insights on 
-the nature of human language 
-itself %-- and, by extension, on 
-how some properties of human 
-languages can be simulated in 
-more primitive contexts, such as 
+How dogs nonetheless adapt to human
+language, `IauNC; will argue, presents
+some interesting insights on
+the nature of human language
+itself %-- and, by extension, on
+how some properties of human
+languages can be simulated in
+more primitive contexts, such as
 robots' communication.
 `p`
 
 `subsection.Comments on Methodology`
 `p.
-Animal cognition, robotics, and even 
-computer science lie at an interesting intermediary position 
-within the spectrum of scientific or 
-academic disciplines.  
-The emergence of computers, `q.digital humanities,` 
-Artificial Intelligence (and related research 
-areas), computational linguistics, and so forth, 
-have all added to the scope of hybrid disciplines 
-that in various ways straddle humanistic and 
+Animal cognition, robotics, and even
+computer science lie at an interesting intermediary position
+within the spectrum of scientific or
+academic disciplines.
+The emergence of computers, `q.digital humanities,`
+Artificial Intelligence (and related research
+areas), computational linguistics, and so forth,
+have all added to the scope of hybrid disciplines
+that in various ways straddle humanistic and
 physical sciences.`footnote.
-In `q.academia` %-- e.g., university departments, 
-journal foci, book classification %-- one 
-implicitly recognizes a baseline 
-distinction between humanities and 
-physical sciences.  A lot of research, 
-however, does not fit neatly into 
-either category.  Traditionally of course 
-we have a notion of `q.social` sciences, which 
-tend to overlap with humanities disciplines 
-in terms of subject matter but with `q.natural` 
-sciences in terms of methodology.  This has 
-been, perhaps, a tenuous admixture for generations.  
-This is all the more true 
-the more that humanistic and social sciences 
-become influenced by computers and technology. 
-`footnote`  Methodologies here 
-can run the gamut from quantitative models 
-similar to those of chemistry or physics %-- 
-consider brain scans or Artificial Neural Networks 
-%-- to interpretive projects descended 
-from philosophical schools such as Phenomenology, 
-or the kind of multidisciplinary `q.humanities 
-theory` associated with (for example) Gender 
-Studies or Criticial Race Theory. 
+In `q.academia` %-- e.g., university departments,
+journal foci, book classification %-- one
+implicitly recognizes a baseline
+distinction between humanities and
+physical sciences.  A lot of research,
+however, does not fit neatly into
+either category.  Traditionally of course
+we have a notion of `q.social` sciences, which
+tend to overlap with humanities disciplines
+in terms of subject matter but with `q.natural`
+sciences in terms of methodology.  This has
+been, perhaps, a tenuous admixture for generations.
+This is all the more true
+the more that humanistic and social sciences
+become influenced by computers and technology.
+`footnote`  Methodologies here
+can run the gamut from quantitative models
+similar to those of chemistry or physics %--
+consider brain scans or Artificial Neural Networks
+%-- to interpretive projects descended
+from philosophical schools such as Phenomenology,
+or the kind of multidisciplinary `q.humanities
+theory` associated with (for example) Gender
+Studies or Criticial Race Theory.
 `p`
 
 `p.
-Instead of ranking methodological paradigms 
-as `q.more` or `q.less` scientific (or rigorous, 
-unbiased, etc.) hybrid disciplines suggest how 
-different research protocols address similar 
-topics from different directions.  For example, 
-macroeconomic analyses (often based on 
-quantitative models) work with empirical data, 
-but they average over large aggregates of 
-individual economic choices.  On the other 
-hand, phychological and/or neurological research into 
-economic decision-making (e.g., Gregory 
-Berns's work prior to his branching into 
-dog cognition) centers on each individuals' 
-thought processes.  The two perspectives 
-are complementary.  From a different angle, 
-`i.socio`/economic research can address 
-how economic systems overlap with other 
-social structures.  Each approach has its 
-own sense of `q.empirical` data, which might 
-be economic data sets, brain scans, or 
-sociological case studies.  In contrast to 
-natural sciences, where there are certain 
-core paradigms %-- typically, mathematical models 
-justified by experiments and/or observations 
-%-- to the extent that research projects 
-are neither purely `q.scientific` nor `q.humanistic` 
-it becomes harder to privilege one evidentiary 
-protocol or theory of argumentation over others.  
-Warrants for researchers' claims have to be 
-evaluated on a case-by-case basis. 
+Instead of ranking methodological paradigms
+as `q.more` or `q.less` scientific (or rigorous,
+unbiased, etc.) hybrid disciplines suggest how
+different research protocols address similar
+topics from different directions.  For example,
+macroeconomic analyses (often based on
+quantitative models) work with empirical data,
+but they average over large aggregates of
+individual economic choices.  On the other
+hand, phychological and/or neurological research into
+economic decision-making (e.g., Gregory
+Berns's work prior to his branching into
+dog cognition) centers on each individuals'
+thought processes.  The two perspectives
+are complementary.  From a different angle,
+`i.socio`/economic research can address
+how economic systems overlap with other
+social structures.  Each approach has its
+own sense of `q.empirical` data, which might
+be economic data sets, brain scans, or
+sociological case studies.  In contrast to
+natural sciences, where there are certain
+core paradigms %-- typically, mathematical models
+justified by experiments and/or observations
+%-- to the extent that research projects
+are neither purely `q.scientific` nor `q.humanistic`
+it becomes harder to privilege one evidentiary
+protocol or theory of argumentation over others.
+Warrants for researchers' claims have to be
+evaluated on a case-by-case basis.
 `p`
 
 `p.
-Linguistics, in particular, illustrates the 
-expanse of science/humanities hybrids in 
-microcosm.  Human languages have both 
-fairly rigorous rule-structures and 
-nondeterministic interpretive nuance.  
-Analyzing the former structural realm 
-permits quasimathematical formal models, 
-while delving into the latter calls 
-on forms of theory grounded in 
-conceptual precision rather than 
-empirical or computational observations 
-(consider how Cognitive Linguistics 
-implicitly justifies treatment of 
-sentences' epistemic status or parse-structures 
-based on collective/introspective assent %-- 
-authors and their readers mutually agreeing 
-that certain reconstructions of cognitive 
-processing appear to be plausible 
-given our innate sense of how `i.we` 
-understand language).  Meanwhile, 
-although programming languages 
-are not `q.interpretive` %-- compiler 
-theory and runtime engineering are 
-governed by the mechanistic limitations 
-of `CPU; (or other processing) architectures 
-%-- some facets of software engineering, such as 
-optimal design patterns and Human-Comptuer 
-Interaction, are more subjective.   
+Linguistics, in particular, illustrates the
+expanse of science/humanities hybrids in
+microcosm.  Human languages have both
+fairly rigorous rule-structures and
+nondeterministic interpretive nuance.
+Analyzing the former structural realm
+permits quasimathematical formal models,
+while delving into the latter calls
+on forms of theory grounded in
+conceptual precision rather than
+empirical or computational observations
+(consider how Cognitive Linguistics
+implicitly justifies treatment of
+sentences' epistemic status or parse-structures
+based on collective/introspective assent %--
+authors and their readers mutually agreeing
+that certain reconstructions of cognitive
+processing appear to be plausible
+given our innate sense of how `i.we`
+understand language).  Meanwhile,
+although programming languages
+are not `q.interpretive` %-- compiler
+theory and runtime engineering are
+governed by the mechanistic limitations
+of `CPU; (or other processing) architectures
+%-- some facets of software engineering, such as
+optimal design patterns and Human-Comptuer
+Interaction, are more subjective.
 `p`
 
 
 `p.
-Animal-cognition and 
-ethology spans multiple forms of empirical 
-data, including reasoning experiments 
-(involving manufactured problem-solving 
-scenarios) and fMRI scans, as well 
-as (less carefully-staged) observations 
-of animal behavior.  With respect 
-to animal `i.language`/, even 
-in the nascent `q.talking dog` community 
-there is already a nontrivial amount 
-of empirical data, and projects such as 
-TheyCanTalk at the University of California 
-at San Diego promise much more.  This 
-data immediately raises questions of 
-where to fit analytic methodology 
-on the science/humanities continuum, 
-and how `q.dog language` should 
+Animal-cognition and
+ethology spans multiple forms of empirical
+data, including reasoning experiments
+(involving manufactured problem-solving
+scenarios) and fMRI scans, as well
+as (less carefully-staged) observations
+of animal behavior.  With respect
+to animal `i.language`/, even
+in the nascent `q.talking dog` community
+there is already a nontrivial amount
+of empirical data, and projects such as
+TheyCanTalk at the University of California
+at San Diego promise much more.  This
+data immediately raises questions of
+where to fit analytic methodology
+on the science/humanities continuum,
+and how `q.dog language` should
 be situated in its hybrid intellectual space.
 `p`
 
 
 `p.
-Dog-cognition research and interpretations 
-thereof may lead in multiple 
-directions: there is a psychological/experimental 
-stratum of controlled studies exploring 
-canine reasoning; a linguistic interest 
-in dogs' behaviors in contexts related 
-to human language; the ethology of 
-canine adaptation to human 
-environments through domestication; 
-and even an anthropological perspective 
-drawing insights from dogs' `q.pro-social` 
-comportments to speculate 
-about human history and society 
-(encapsulated by the title 
-and phrase coined by Brian Hare and Vanessa 
-Woods, `q.Survival of the Friendliest` 
-`cite<HareWoods>;).  Given this 
-thematic range, we can expect that a 
-comprehensive picture of dog cognition 
-%-- and what it means for humans 
-%-- can only be pieced together with 
-bricks that reveal a spectrum 
-of topical foci and academic styles.  
-This is not a discipline that should 
-rely on facile argumentational templates 
-as landmarks for methodological gravitas.  
-Or, in other words, dog-cognition reveals 
-multiple metatheoretic personalities no 
-less than any other human/social science, 
-from paper to paper (or even paragraph to 
-paragraph).  
-By analogy, queer theorists' subaltern 
-dialectology, phenomenological 
-introspections into cognitive-schematic acceptability, 
-and Category-Theoretic proofs of the 
-Chomsky-`Schutzenberger; Representation 
-Theorem are all sibling projects in the 
+Dog-cognition research and interpretations
+thereof may lead in multiple
+directions: there is a psychological/experimental
+stratum of controlled studies exploring
+canine reasoning; a linguistic interest
+in dogs' behaviors in contexts related
+to human language; the ethology of
+canine adaptation to human
+environments through domestication;
+and even an anthropological perspective
+drawing insights from dogs' `q.pro-social`
+comportments to speculate
+about human history and society
+(encapsulated by the title
+and phrase coined by Brian Hare and Vanessa
+Woods, `q.Survival of the Friendliest`
+`cite<HareWoods>;).  Given this
+thematic range, we can expect that a
+comprehensive picture of dog cognition
+%-- and what it means for humans
+%-- can only be pieced together with
+bricks that reveal a spectrum
+of topical foci and academic styles.
+This is not a discipline that should
+rely on facile argumentational templates
+as landmarks for methodological gravitas.
+Or, in other words, dog-cognition reveals
+multiple metatheoretic personalities no
+less than any other human/social science,
+from paper to paper (or even paragraph to
+paragraph).
+By analogy, queer theorists' subaltern
+dialectology, phenomenological
+introspections into cognitive-schematic acceptability,
+and Category-Theoretic proofs of the
+Chomsky-`Schutzenberger; Representation
+Theorem are all sibling projects in the
 linguist's ecosystem.`footnote.
-I'll cite `cite<MelliesZeilberger>;, 
+`IauNCpl;'ll cite `cite<MelliesZeilberger>;,
 repeated from Chapter 21.
-`footnote`      
+`footnote`
 `p`
 
 
 `p.
-As a subset of dog-cognition investigations, 
-if we consider communication via 
-`AAC; devices %-- as opposed to 
-dogs such as Chaser or Rico 
-(border collies famous for large 
-vocabularies) 
-`i.responding to` rather than 
-`i.generating` speech-acts, as per 
-John Pilley's or Juliane Kaminski's 
-(their respective owners) methods 
-`cite<PilleyHinzmann>;, `cite<JulianeKaminski>;,  
-`cite<KaminskiRico>; 
-%-- this is a very recent trend, 
-and little academic 
-work addresses this subject 
-directly (we have yet to see the 
-peer-review dialectics and 
-methodological back-and-forth 
-that might guide research 
-in how best to formulate 
-theories and hypotheses).  
-Nonetheless, internet discussions 
-reveal a lively exchange of 
-claims and counterclaims about 
-`q.talking` dogs, such that 
-the parameters of future 
-academic protocols are perhaps 
+As a subset of dog-cognition investigations,
+if we consider communication via
+`AAC; devices %-- as opposed to
+dogs such as Chaser or Rico
+(border collies famous for large
+vocabularies)
+`i.responding to` rather than
+`i.generating` speech-acts, as per
+John Pilley's or Juliane Kaminski's
+(their respective owners) methods
+`cite<PilleyHinzmann>;, `cite<JulianeKaminski>;,
+`cite<KaminskiRico>; (and likewise,
+influentially, Stanley Coren `cite<[chapter 6]StanleyCoren>;)
+%-- this is a very recent trend,
+and little academic
+work addresses this subject
+directly (we have yet to see the
+peer-review dialectics and
+methodological back-and-forth
+that might guide research
+in how best to formulate
+theories and hypotheses).
+Nonetheless, internet discussions
+reveal a lively exchange of
+claims and counterclaims about
+`q.talking` dogs, such that
+the parameters of future
+academic protocols are perhaps
 already visible.
 `p`
 
 `p.
-Perhaps the most substantial debates have 
-centered on the question 
-of `q.over-interpretation,` 
-an implication that observers 
-`q.read too much` into 
-dogs' use of talking buttons.  
-This is not, indeed, a 
-subject-area that is conducive 
-to neutral observation %-- ethology 
-(the study of animal behavior) 
-probably tends to attract 
-animal lovers, and documenting 
-animal intelligence and emotions 
-is doubtless an important 
-step toward promoting animal 
-welfare and humane treatment.  
-Such a scenario risks 
-confirmation bias for people 
-who `i.want` to find evidence 
-of (for example) canine 
-intelligence and the dog/human 
-emotional bond.    
+Perhaps the most substantial debates have
+centered on the question
+of `q.over-interpretation,`
+an implication that observers
+`q.read too much` into
+dogs' use of talking buttons.
+This is not, indeed, a
+subject-area that is conducive
+to neutral observation %-- ethology
+(the study of animal behavior)
+probably tends to attract
+animal lovers, and documenting
+animal intelligence and emotions
+is doubtless an important
+step toward promoting animal
+welfare and humane treatment.
+Such a scenario risks
+confirmation bias for people
+who `i.want` to find evidence
+of (for example) canine
+intelligence and the dog/human
+emotional bond.
 `p`
 
 `p.
-The proper response to issues 
-of over-interpretation is to 
-adopt protocols which can 
-mitigate its deleterious 
-effects, without eliding 
-how `i.some level` of interpretation 
-is patently appropriate.  
-Dogs, obviously, are 
-not `q.fluent` in human language, 
-and their attempts to communicate 
-with us via our own mechanisms 
-%-- (arguably) innate for us, not them  
-%-- are inevitably provisional 
-and trial-and-error based, 
-comparable to human toddlers 
-(not to imply that dogs have a 
-similar level of linguistic 
-proficiency, but just that 
-their use of language can 
-be more confident in  
-one situation and less in another, 
-similar to that of young children).  
-Also, dogs' communication via 
-`AAC; boards is restricted to 
-the set of buttons (typically 
-less than one hundred) that boards 
-provide.  Sometimes 
-dogs have to guess at the 
-meaning of words %-- i.e., 
-at what `i.humans` will think 
-upon hearing them.  This is a 
-natural part of `i.learning` 
-language.   
+The proper response to issues
+of over-interpretation is to
+adopt protocols which can
+mitigate its deleterious
+effects, without eliding
+how `i.some level` of interpretation
+is patently appropriate.
+Dogs, obviously, are
+not `q.fluent` in human language,
+and their attempts to communicate
+with us via our own mechanisms
+%-- (arguably) innate for us, not them
+%-- are inevitably provisional
+and trial-and-error based,
+comparable to human toddlers
+(not to imply that dogs have a
+similar level of linguistic
+proficiency, but just that
+their use of language can
+be more confident in
+one situation and less in another,
+similar to that of young children).
+Also, dogs' communication via
+`AAC; boards is restricted to
+the set of buttons (typically
+less than one hundred) that boards
+provide.  Sometimes
+dogs have to guess at the
+meaning of words %-- i.e.,
+at what `i.humans` will think
+upon hearing them.  This is a
+natural part of `i.learning`
+language.
 `p`
 
 
 `p.
-In and of itself, then, `i.interpreting` 
-dogs' communications is not unwarranted.  
-When Bunny, for example, sounds 
-out `q.ouch stranger paw` because 
-she has a thorn embedded between 
-her toes, we must indeed `q.interpret` 
-this phrase, but it is situation-specific 
-and reasonable to the point where 
-we can assert with some confidence 
-that she chose those specific words 
-intentionally (i.e., `i.linguistically`/).  
-Other interpretations might be more 
-tenuous.  Bunny appears curious 
-about time: `q.soon afternoon,` 
+In and of itself, then, `i.interpreting`
+dogs' communications is not unwarranted.
+When Bunny, for example, sounds
+out `q.ouch stranger paw` because
+she has a thorn embedded between
+her toes, we must indeed `q.interpret`
+this phrase, but it is situation-specific
+and reasonable to the point where
+we can assert with some confidence
+that she chose those specific words
+intentionally (i.e., `i.linguistically`/).
+Other interpretations might be more
+tenuous.  Bunny appears curious
+about time: `q.soon afternoon,`
 `q.night yesterday,` `q.yesterday went`/`footnote.
-See `url.https://www.google.com/search?q=Bunny\%E2\%80\%99s+newest+video\%2C+\%E2\%80\%9CContemplating+Time\#fpstate=ive&vld=cid:1b0acd07,vid:echpdOTH78w` 
-%-- this video certainly seems to show  
-Bunny's person `q.teaching` her time-words and concepts, 
-and Bunny `q.learning` interrelationships between 
+See `url.https://www.google.com/search?q=Bunny\%E2\%80\%99s+newest+video\%2C+\%E2\%80\%9CContemplating+Time\#fpstate=ive&vld=cid:1b0acd07,vid:echpdOTH78w`
+%-- this video certainly seems to show
+Bunny's person `q.teaching` her time-words and concepts,
+and Bunny `q.learning` interrelationships between
 these concepts.
-`footnote` %-- and about, say, the concepts 
-of `q.human` and `q.animals.`  Her asking 
-broad (even `q.philosophical` questions) 
-via `AAC; buttons is an intriguing behavior, 
-but also one we should hesitate to extrapolate 
-equally to more situationally grounded episodes. 
+`footnote` %-- and about, say, the concepts
+of `q.human` and `q.animals.`  Her asking
+broad (even `q.philosophical` questions)
+via `AAC; buttons is an intriguing behavior,
+but also one we should hesitate to extrapolate
+equally to more situationally grounded episodes.
 `p`
 
 `p.
-I would argue that 
-an optimal methodology would accept 
-interpretations but also introduce a 
-series of metrics framing the degree 
-of guesswork or confidence such 
-interpretations reveal.  For example, 
-any given video-segment showing 
-dogs' button-use might be annotated 
-with parameters such as their 
-`q.deliberateness` %-- whether 
-the dogs seem to press buttons 
-in a premeditated fashion, 
-anticipating a specific set of 
-buttons, and reacting only 
-`i.after` a total phrase 
-is enunciated before seeking a 
-response.  We could also 
-measure the degree of confidence 
-we as human observers have 
-in our interpretations %-- are 
-we guessing at what the dog might 
-be saying %-- and at the 
-`communique;'s situation appropriateness.  
-Also  %-- consider Hunger's distinction between `q.core` and 
-`q.frings` vocabulary programmed 
-into `AAC; boards `cite<[page 97]ChristinaHunger>; %--  
-seemingly well-motivated phrases 
-involving less-common words would serve as 
-stronger data for something like 
-bonafide linguistic understanding 
-than capably employing baseline 
+`IauNCplpar; would argue that
+an optimal methodology would accept
+interpretations but also introduce a
+series of metrics framing the degree
+of guesswork or confidence such
+interpretations reveal.  For example,
+any given video-segment showing
+dogs' button-use might be annotated
+with parameters such as their
+`q.deliberateness` %-- whether
+the dogs seem to press buttons
+in a premeditated fashion,
+anticipating a specific set of
+buttons, and reacting only
+`i.after` a total phrase
+is enunciated before seeking a
+response.  We could also
+measure the degree of confidence
+we as human observers have
+in our interpretations %-- are
+we guessing at what the dog might
+be saying %-- and at the
+`communique;'s situation appropriateness.
+Also  %-- consider Hunger's distinction between `q.core` and
+`q.frings` vocabulary programmed
+into `AAC; boards `cite<[page 97]ChristinaHunger>; %--
+seemingly well-motivated phrases
+involving less-common words would serve as
+stronger data for something like
+bonafide linguistic understanding
+than capably employing baseline
 words such as `q.outside` or `q.play.`
 `p`
 
-`p. 
-Moreover, we can check how 
-the dogs' `i.other` (non-`AAC;) 
-behaviors coincide resonate 
-with interpretations of their `q.talking.`  
-Saying something about going outside 
-and then walking to the door is a 
-strong confirmation that 
-sounding `q.outside` is proficient 
-and deliberate (the dog is not just 
-guessing about what `i.that` word means).  
-Likewise, Bunny jumping on a sofa and showing 
-her paw after the `q.ouch stranger` 
-phrase %-- or, in another video, 
-her expressing `q.want cat` and then 
-looking in the direction of 
-her feline housemate; or Stella 
-saying `q.friend` before kissing her 
-(human) baby brother %-- are behaviors that 
-would be puzzling if the dogs were `i.not` 
+`p.
+Moreover, we can check how
+the dogs' `i.other` (non-`AAC;)
+behaviors coincide resonate
+with interpretations of their `q.talking.`
+Saying something about going outside
+and then walking to the door is a
+strong confirmation that
+sounding `q.outside` is proficient
+and deliberate (the dog is not just
+guessing about what `i.that` word means).
+Likewise, Bunny jumping on a sofa and showing
+her paw after the `q.ouch stranger`
+phrase %-- or, in another video,
+her expressing `q.want cat` and then
+looking in the direction of
+her feline housemate; or Stella
+saying `q.friend` before kissing her
+(human) baby brother %-- are behaviors that
+would be puzzling if the dogs were `i.not`
 using buttons situationally.
 `p`
 
 
 `p.
-Actually watching Stella and Bunny videos, 
-it does appear that many times their choice 
-of buttons is deliberate and premeditated.  
-Sometimes the results are enigmatic, 
-and it is reasonable on such occasions for 
-the scientifically-minded to question how 
-well they actually understand words they 
-produce.  But even if dogs fail to grok the 
-nuances of humans' construals 
-and semantic encodings of 
-abstract concepts, the fact that they 
-show interest in words for these concepts %-- and 
-`i.attempt` to incorporate them %-- reveals a basic 
-understanding of the underlying linguistic 
-principle that words (sound-gestures) 
-designate `q.objects,` sometimes including 
+Actually watching Stella and Bunny videos,
+it does appear that many times their choice
+of buttons is deliberate and premeditated.
+Sometimes the results are enigmatic,
+and it is reasonable on such occasions for
+the scientifically-minded to question how
+well they actually understand words they
+produce.  But even if dogs fail to grok the
+nuances of humans' construals
+and semantic encodings of
+abstract concepts, the fact that they
+show interest in words for these concepts %-- and
+`i.attempt` to incorporate them %-- reveals a basic
+understanding of the underlying linguistic
+principle that words (sound-gestures)
+designate `q.objects,` sometimes including
 abstract concepts.
 `p`
 
 `p.
-Moreover, often it 
-seems their discourse is haphazard and uncertain %--  
-probably dogs do not rise to a level of 
-linguistic competence we associate with young 
-humans, at the time when children begin to 
-internalize principles of grammar and produce 
-complete sentences (`cite<[page 269]StevenPinker>;, for instance).  
-But so what?  These points, 
-even if eventually borne out by empirical data, 
-would only refute claims that dogs progress 
-through language-learning as rapidly and extensively 
-as human beings.  There is still a large terrain 
-of linguistic understanding and pre-linguistic 
-awareness that lies anterior to formal 
-grammar, but building off of generic 
-`q.gestural` communication toward bonafide 
-language-use, via words as convention-driven 
-icons for generalized concepts and via linguistic 
+Moreover, often it
+seems their discourse is haphazard and uncertain %--
+probably dogs do not rise to a level of
+linguistic competence we associate with young
+humans, at the time when children begin to
+internalize principles of grammar and produce
+complete sentences (`cite<[page 269]StevenPinker>;, for instance).
+But so what?  These points,
+even if eventually borne out by empirical data,
+would only refute claims that dogs progress
+through language-learning as rapidly and extensively
+as human beings.  There is still a large terrain
+of linguistic understanding and pre-linguistic
+awareness that lies anterior to formal
+grammar, but building off of generic
+`q.gestural` communication toward bonafide
+language-use, via words as convention-driven
+icons for generalized concepts and via linguistic
 expressions as media for exchange of ideas.
 `p`
 
-`p. 
-If we find `i.Cognitive` linguistics, in particular, 
-an especially compelling approach to structure 
-and processing, it is actually very interesting 
-to witness a stratum of cognition which 
-lies within the threshold of language proper 
-but is also organized by intuitive cross-conceptual 
-patterns rather than under the influence of 
-syntactic regularities, gradually internalized.  
-Treating grammar as a formal chisel that 
-molds provisional linguistic awareness into 
-structured human language, to glimpse that 
-awareness in its `q.raw` or primordial 
-mentality, prior to the dictates of syntactic 
-form, is a valuable opportunity.  This 
-is especially true for projects oriented 
-around `q.languages` outside human contexts 
-proper, such as robots.  
-Equally, we should acknowledge that 
-linguistic understanding `i.without` 
-syntactic entrenchment still reveals high-level 
-cognitive acuity, perhaps reflecting 
-dogs' highly evolved ability to `q.read` humans.    
+`p.
+If we find `i.Cognitive` linguistics, in particular,
+an especially compelling approach to structure
+and processing, it is actually very interesting
+to witness a stratum of cognition which
+lies within the threshold of language proper
+but is also organized by intuitive cross-conceptual
+patterns rather than under the influence of
+syntactic regularities, gradually internalized.
+Treating grammar as a formal chisel that
+molds provisional linguistic awareness into
+structured human language, to glimpse that
+awareness in its `q.raw` or primordial
+mentality, prior to the dictates of syntactic
+form, is a valuable opportunity.  This
+is especially true for projects oriented
+around `q.languages` outside human contexts
+proper, such as robots.
+Equally, we should acknowledge that
+linguistic understanding `i.without`
+syntactic entrenchment still reveals high-level
+cognitive acuity, perhaps reflecting
+dogs' highly evolved ability to `q.read` humans.
 `p`
 
 
 `p.
-Methodologically, even within the recent 
-`q.dognition` research trend, studies 
-of dogs' reasoning has been oriented to 
-artificially-manufactured experiments 
-are not necessarily proper assessments 
-of canine cognition in their everyday 
-lives.  Most of this research apparently 
-follows protocols of experimental psychology 
-typically applied to humans (including 
-other children) or to animals in 
-controlled habitats, not household pets.  
-Obviously this situation reflects logistical 
-problems in obtaining empirical data 
-in non-controlled settings.  Against this 
-backdrop, however, dogs' use of 
-`AAC; buttons is an intriguing 
-alternative.  Such buttons may be deployed 
-in their familiar domestic environments, 
-and with some training (which some dogs 
-appear to enjoy) can become part 
-of their daily lives.  At the same 
-time, what dogs choose to enunciate 
-through `AAC; boards, and their behaviors 
-while doing so, indirectly suggests properties 
+Methodologically, even within the recent
+`q.dognition` research trend, studies
+of dogs' reasoning has been oriented to
+artificially-manufactured experiments
+are not necessarily proper assessments
+of canine cognition in their everyday
+lives.  Most of this research apparently
+follows protocols of experimental psychology
+typically applied to humans (including
+other children) or to animals in
+controlled habitats, not household pets.
+Obviously this situation reflects logistical
+problems in obtaining empirical data
+in non-controlled settings.  Against this
+backdrop, however, dogs' use of
+`AAC; buttons is an intriguing
+alternative.  Such buttons may be deployed
+in their familiar domestic environments,
+and with some training (which some dogs
+appear to enjoy) can become part
+of their daily lives.  At the same
+time, what dogs choose to enunciate
+through `AAC; boards, and their behaviors
+while doing so, indirectly suggests properties
 of their cognitive states.
 `p`
 
 `p.
-This may be indirect evidence, 
-requiring inferential reasoning to fill out, 
-but no less so, I would argue, than 
-extrapolating from psychological 
-metrics in artificial setups.  The evidentiary 
-frameworks for dog-language  
-assessments belong 
-more to Cognitive Linguistics than 
-Cognitive Psychology, and therefore 
-bring on board a suite of theories 
-from an alternative and complementary 
-perspective.  For these sorts of 
-reasons, extant `q.talking dog` data should be 
-approached as an important scientific 
-resource.  I believe this is how we 
-should read testimonies such as 
-`i.How Stella Learned to Talk`/.     
+This may be indirect evidence,
+requiring inferential reasoning to fill out,
+but no less so, `IauNC; would argue, than
+extrapolating from psychological
+metrics in artificial setups.  The evidentiary
+frameworks for dog-language
+assessments belong
+more to Cognitive Linguistics than
+Cognitive Psychology, and therefore
+bring on board a suite of theories
+from an alternative and complementary
+perspective.  For these sorts of
+reasons, extant `q.talking dog` data should be
+approached as an important scientific
+resource.  `IauNCpl; believe this is how we
+should read testimonies such as
+`i.How Stella Learned to Talk`/.
 `p`
 
 
