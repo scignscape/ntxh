@@ -212,7 +212,7 @@ void DHAX_Video_Player_Dialog::recenter()
 }
 
 
-void DHAX_Video_Player_Dialog::play_local_videos(QStringList paths)
+void DHAX_Video_Player_Dialog::play_local_videos(QStringList paths, QString annotations_template_file)
 {
  QList<QPair<QString, QString>> new_paths;
 
@@ -222,11 +222,13 @@ void DHAX_Video_Player_Dialog::play_local_videos(QStringList paths)
   return {p, {}};
  });
 
- play_local_videos(new_paths);
+ play_local_videos(new_paths, annotations_template_file);
 }
 
-void DHAX_Video_Player_Dialog::play_local_videos(QList<QPair<QString, QString>> paths)
+void DHAX_Video_Player_Dialog::play_local_videos(QList<QPair<QString, QString>> paths, QString annotations_template_file)
 {
+ if(!annotations_template_file.isEmpty())
+   player_->set_annotations_template_file(annotations_template_file);
  player_->play_local_videos(paths);
 }
 

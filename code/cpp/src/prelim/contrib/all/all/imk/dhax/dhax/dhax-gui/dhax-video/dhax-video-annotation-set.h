@@ -69,6 +69,8 @@ class DHAX_Video_Annotation_Set : public QMap<s4, DHAX_Video_Annotation>
 
  QMap<QString, s4> auto_ids_;
 
+ QString* template_file_;
+
  void parse_text_macro(QString& text, int start = 0);
  void fetch_text_macro(QString& text, int start = 0);
 
@@ -91,6 +93,9 @@ class DHAX_Video_Annotation_Set : public QMap<s4, DHAX_Video_Annotation>
  QVector<DHAX_Video_Annotation*> latex_annotation_group_;
 
  void parse_latex_annotation(DHAX_Video_Annotation& dva, QString text);
+
+ void update_template_text(const QVector<QPair<QString, QString>>& substitutions);
+ void prepare_template_text();
 
 public:
 
@@ -122,6 +127,7 @@ public:
  ACCESSORS(r8 ,sizes_ratio_y_adjustment)
 
  ACCESSORS(DHAX_Video_Annotation* ,current_pause_annotation)
+ ACCESSORS(QString* ,template_file)
 
  void compile_latex(QSizeF sz); //QPair<u4, u4> dpis);
 
@@ -161,6 +167,12 @@ public:
    QVector<DHAX_Video_Annotation*>* group = nullptr);
 
  void load_annotation_file(QString file_path);
+ void load_annotation_template_file();
+ void update_template_text(QString file_path);
+ void clear_scene_data();
+ void clear_end_frame_data();
+ void clear_scene_and_end_frame_data();
+
 
  void read_ntxh_hypernode(NTXH_Graph& g, hypernode_type* h);
 

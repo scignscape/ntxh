@@ -118,6 +118,8 @@ class DHAX_Video_Player_Frame : public QFrame
 
  u2 current_playlist_index_;
 
+ QString annotations_template_file_;
+
 //?protected:
 
  void run_pause_reffed_annotations(DHAX_Video_Annotation* prior,
@@ -188,6 +190,7 @@ public:
  DHAX_Video_Player_Frame(QWidget* parent = nullptr);
 
  ACCESSORS(QRect ,scene_camera_view_geometry)
+ ACCESSORS(QString ,annotations_template_file)
 
  QRect get_scene_camera_view_geometry();
 

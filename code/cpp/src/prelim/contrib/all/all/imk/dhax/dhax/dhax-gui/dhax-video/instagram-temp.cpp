@@ -51,6 +51,361 @@ USING_KANS(TextIO)
 
 #include <QLibrary>
 
+#include <QApplication>
+
+
+void _get_tiktok(QStringList* qsl, u2 index, u2 end)
+{
+ QString working = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/temp";
+ QString names_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/names.txt";
+//? QString links_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella/tiktok-links.txt";
+
+
+
+ QProcess* cmd = new QProcess;
+
+ QString url = qsl->value(index); //"https://www.tiktok.com/@whataboutbunny/video/6832653004005526789";
+
+ if(url.isEmpty())
+   return;
+
+ QStringList options;
+ options << "-v";
+ options << url;
+
+ cmd->setWorkingDirectory(working);
+
+ QObject::connect(cmd,
+   QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+   [working, cmd, qsl, index, end, names_file, url](int exit_code, QProcess::ExitStatus exit_status)
+ {
+  QDir qd(working);
+  QFileInfoList qfil = qd.entryInfoList(QDir::Files);
+
+  qDebug() << qfil.size();
+
+  qDebug() << "\nerr: " << cmd->readAllStandardError();
+  qDebug() << "\nout: " << cmd->readAllStandardOutput();
+
+  if(qfil.isEmpty())
+  {
+   qDebug() << "unexpected empty folder";
+   return;
+  }
+
+  u2 new_index = index + 1;
+
+  QFileInfo qfi = qfil.first();
+
+  qDebug() << "name: " << qfi.fileName();
+
+  QFile qf(names_file);
+
+  qf.open(QIODevice::WriteOnly | QFile::Append);
+  QTextStream out(&qf); // = new QTextStream(qf);
+  out << "\n" << new_index << ": " << url << " = " << qfi.fileName() << "\n";
+
+  QString pattern = "https://www.tiktok.com/@whataboutbunny/video/";
+  QString cut_url = url;
+  if(url.startsWith(pattern))
+  {
+   cut_url = url.mid(pattern.length());
+  }
+
+  QString target_file_name = "%1-%2"_qt.arg(new_index).arg(cut_url);
+
+  QString target_folder = "/media/nlevisrael/OS/nc/ar/tiktok/target";
+
+  copy_binary_file_to_folder_with_rename(qfi.absoluteFilePath(), target_folder, target_file_name,
+    qfi.suffix());
+
+  QFile::remove(qfi.absoluteFilePath());
+
+  cmd->deleteLater();
+
+  if(index <= end)
+  {
+   _get_tiktok(qsl, new_index, end);
+   // dr amy neustein is the subject of this story; please see tagline at the bottom
+  }
+
+ });
+
+ cmd->setProgram("yt-dlp");
+ cmd->setArguments(options);
+ cmd->start();
+
+
+
+}
+
+
+void instagram_temp13()
+{
+ QString names_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/names.txt";
+
+ QString report_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/report.txt";
+
+ QString links_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/tiktok-links";
+
+ QString text = load_file(links_file);
+
+ QStringList links = text.split("\n", QString::SkipEmptyParts);
+
+
+ QMap<u2, QStringList> names;
+
+ load_file(names_file, [&names](QString name)
+ {
+  if(name.isEmpty())
+   return 0;
+
+  u2 index1 = name.indexOf(':');
+  u2 index2 = name.indexOf('=');
+
+  u2 number = name.left(index1).toUInt();
+//  qDebug() << "number = " << number;
+
+  QString url = name.mid(index1 + 2, index2 - index1 - 3);
+//  qDebug() << "url = " << url;
+
+  name = name.mid(index2 + 2).replace('?', '/').toLatin1().replace('?', "").replace('/', '?');
+
+//  qDebug() << "name = " << name;
+
+  names[number].push_back(url);
+  names[number].push_back(name);
+
+  return 0;
+ });
+
+ QStringList lines;
+
+ for(u2 index = 1; index <= 808; ++index)
+ {
+  QString line;
+  if(names.contains(index))
+  {
+   line = "%1\n%2\n%3\n\n"_qt.arg(index).arg(names[index].value(0)).arg(names[index].value(1));
+  }
+  else
+  {
+   QString link = links.value(index - 1);
+   QString line = "?%1: %2"_qt.arg(index).arg(link);
+  }
+  lines.push_back(line);
+ }
+
+ save_file(report_file, lines.join("\n"));
+}
+
+
+
+void instagram_temp()
+{
+ //QString links_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/tiktok-links";
+ QString links_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella/tiktok-links.txt";
+
+ QString text = load_file(links_file);
+
+ QStringList* links = new QStringList(text.split("\n", QString::SkipEmptyParts));
+
+// qDebug() << "links " << *links;
+
+ // // don't necessarily start at the beginning ...
+
+ _get_tiktok(links, 0, 29);
+
+
+}
+
+
+
+void instagram_temp11()
+{
+ //QString file = "/media/nlevisrael/OS/nc/ar/links";
+ QString file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella/links.txt";
+
+ load_file(file, [](QString line)
+ {
+  int index = line.indexOf("?");
+  line = line.left(index);
+  qDebug() << "line = " << line;
+  return 0;
+ });
+
+
+}
+
+void instagram_temp10()
+{
+
+// QString file = "/media/nlevisrael/OS/nc/ar/links";
+ QString file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella/links.txt";
+
+ QFile* qf = new QFile(file);
+
+ qf->open(QIODevice::WriteOnly | QFile::Append);
+
+// QTextStream* out = new QTextStream(qf);
+
+ QClipboard* c = QApplication::clipboard();
+ QObject::connect(c, &QClipboard::dataChanged,
+  [c, qf]()
+ {
+  QTextStream out(qf); // = new QTextStream(qf);
+  out << c->text() << "\n";
+  qDebug() << c->text();
+ });
+}
+
+
+void instagram_temp9()
+{
+ QString file = "/media/nlevisrael/OS/nc/ar/il";
+
+// /media/nlevisrael/OS/nc/ar/il
+
+ QString nfile = "/media/nlevisrael/OS/nc/ar/refs";
+ QString text = load_file(file);
+
+// QRegularExpression qre("https://www.tiktok.com/@whataboutbunny/video/\\d+");
+// QRegularExpression qre("\\d+");
+ QRegularExpression qre("\"(\\d+)\"");
+
+ QRegularExpressionMatchIterator it =  qre.globalMatch(text);
+
+ QStringList refs;
+
+ while(it.hasNext())
+ {
+  QRegularExpressionMatch qrm = it.next();
+
+  refs.push_back(qrm.captured(1));
+ }
+
+ QString ntext = refs.join("\n");
+ save_file(nfile, ntext);
+
+
+}
+
+
+void instagram_temp8()
+{
+//? QString dir = "/media/nlevisrael/OS/nc/ar/bunny/youtube";
+ QString dir = "/media/nlevisrael/OS/nc/ar/bunny/instagram";
+
+ QDir qd(dir);
+
+ QFileInfoList qfis = qd.entryInfoList(QDir::Files);
+
+ for(QFileInfo qfi : qfis)
+ {
+  QString name = qfi.fileName();
+  name.replace(".mp4.mp4.mp4", ".mp4");
+  name.replace(".mkv.mkv.mkv", ".mkv");
+  qd.rename(qfi.fileName(), name);
+  //renam
+//  copy_binary_file_to_folder_with_rename(qfi.absoluteFilePath(), ndir, name);
+
+ }
+// for(u1 i = 1; i <= 146; ++i)
+// {
+
+// }
+
+}
+
+
+
+void instagram_temp7()
+{
+ QString dir = "/media/nlevisrael/OS/nc/videos";
+ QString ndir = "/media/nlevisrael/OS/nc/ar/bunny/youtube";
+
+ QDir qd(dir);
+
+ QFileInfoList qfis = qd.entryInfoList(QDir::Files);
+
+ u1 offset = 0;
+
+ for(QFileInfo qfi : qfis)
+ {
+  QString name = qfi.fileName();
+  u1 count = name.left(3).toUInt();
+  if(count == 40 || count == 58 || count == 82 || count == 93
+     || count == 132 || count == 139)
+  {
+   ++offset;
+   continue;
+  }
+
+  name = name.mid(3);
+  count -= offset;
+  name.prepend(QString::number(count));
+  copy_binary_file_to_folder_with_rename(qfi.absoluteFilePath(), ndir, name);
+
+ }
+// for(u1 i = 1; i <= 146; ++i)
+// {
+
+// }
+
+}
+
+void instagram_temp6()
+{
+ QString dir = "/media/nlevisrael/OS/nc/ar/bunny-dbl";
+ QString ndir = "/media/nlevisrael/OS/nc/ar/bunny";
+
+ QDir qd(dir);
+
+ QFileInfoList qfis = qd.entryInfoList(QDir::Files);
+
+ u2 size = qfis.size() + 1;
+
+ qDebug() << "size = " << size;
+
+ u2 it = 0;
+ for(QFileInfo qfi : qfis)
+ {
+  ++it;
+  //QString src = qfi.absoluteFilePath();
+  QString name = qfi.fileName();
+  name.replace(".mp4.mp4", ".mp4");
+  u1 index = name.indexOf('-');
+  u2 count = name.left(index).toUInt();
+  count = size - count;
+
+//  qDebug() << "it: " << it << "name: " << name << " " << count;
+
+  name.replace(0, index, QString::number(count));
+//  qDebug() << " name: " << name;
+
+  copy_binary_file_to_folder_with_rename(qfi.absoluteFilePath(), ndir, name);
+
+//  videos[count].push_back(name);
+
+ }
+
+// qDebug() << "vsize = " << videos.size();
+
+// for(u2 i = 1; i <= 917; ++i)
+// {
+//  qDebug() << "i: " << i << " name: " << videos[i];
+// }
+
+
+}
+
+
+
+
+
+
+
+
 // // borrowed from Forge_Runtime
 void _load_ssl_libraries()
 {
@@ -443,7 +798,7 @@ void instagram_temp0()
 
 }
 
-void instagram_temp()
+void instagram_temp4()
 {
 //? QString list_folder = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella";
  QString list_folder = "/home/nlevisrael/gits/ctg-temp/dev/documents/i4/stella/bunny";

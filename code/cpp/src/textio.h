@@ -289,11 +289,13 @@ inline QString copy_file_to_folder_with_rename(QString path, QString folder, QSt
  return newpath;
 }
 
-inline QString copy_binary_file_to_folder_with_rename(QString path, QString folder, QString name)
+inline QString copy_binary_file_to_folder_with_rename(QString path, QString folder,
+   QString name, QString suffix = {})
 {
  QFileInfo qfi(path);
 
- QString suffix = qfi.completeSuffix();
+ if(suffix.isEmpty())
+   suffix = qfi.completeSuffix();
 
  QDir qd(folder);
  QString newpath = qd.filePath(name + "." + suffix);

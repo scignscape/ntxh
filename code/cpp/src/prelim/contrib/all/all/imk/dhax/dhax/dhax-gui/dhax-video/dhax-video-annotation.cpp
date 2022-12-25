@@ -22,6 +22,21 @@ DHAX_Video_Annotation::DHAX_Video_Annotation()
 
 }
 
+void DHAX_Video_Annotation::check_substitution(QString key, QString value)
+{
+ text_ = template_text_;
+ html_text_ = template_html_text_;
+ text_.replace(key, value);
+ html_text_.replace(key, value);
+}
+
+void DHAX_Video_Annotation::prepare_template_text()
+{
+ template_text_ = text_;
+ template_html_text_ = html_text_;
+}
+
+
 void DHAX_Video_Annotation::finalize_html_text()
 {
  static QString html = "<%1 style=\"%2\">%3%4%5</%1>";

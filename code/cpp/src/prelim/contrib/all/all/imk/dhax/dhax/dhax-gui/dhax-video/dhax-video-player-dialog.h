@@ -89,7 +89,8 @@ class DHAX_Video_Player_Dialog : public QDialog
 public:
 
  enum Annotation_Settings { No_Annotations, Load_Annotations,
-   Load_Annotations_With_Pause, Load_Annotations_Manually
+   Load_Annotations_With_Pause, Load_Annotations_Manually,
+   Video_Series
  };
 
  DHAX_Video_Player_Dialog(Annotation_Settings s, QWidget* parent = nullptr);
@@ -106,8 +107,8 @@ public:
 
  void play_local_video(QString file_path, QString annotations_file = {});
 
- void play_local_videos(QStringList paths);
- void play_local_videos(QList<QPair<QString, QString>> paths);
+ void play_local_videos(QStringList paths, QString annotations_template_file = {});
+ void play_local_videos(QList<QPair<QString, QString>> paths, QString annotations_template_file = {});
 
  void halt();
  void halt_and_close()

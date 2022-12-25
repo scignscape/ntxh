@@ -180,6 +180,10 @@ void DHAX_Menu_System::init_menus()
  {
   sg->emit_play_video_requested(DHAX_Video_Player_Dialog::Load_Annotations_Manually);
  };
+ video_menu->add_action("Play Video Series") << [sg]
+ {
+  sg->emit_play_video_requested(DHAX_Video_Player_Dialog::Video_Series);
+ };
 
 //?
 // file_menu.add_action("Play Video") << [sg]

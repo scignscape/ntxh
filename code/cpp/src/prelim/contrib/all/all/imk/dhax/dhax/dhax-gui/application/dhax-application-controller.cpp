@@ -986,32 +986,60 @@ void DHAX_Application_Controller::play_video(DHAX_Video_Player_Dialog::Annotatio
   current_video_player_dialog_->halt_and_close();
  });
 
-
  qDebug() << "video = " << file_path;
 
  current_video_player_dialog_->show();
 
- QString v = file_path;
- v.chop(4);
-
- QString a = annotations_file_path;
- a.chop(5);
-
-
- current_video_player_dialog_->play_local_videos(
-
+ if(s == DHAX_Video_Player_Dialog::Annotation_Settings::Video_Series)
  {
-    {v + "-000.mkv", a + "-000.ntxh"},
-    {v + "-00.mkv", a + "-00.ntxh"},
-    {v + "-1.mkv", a + "-1.ntxh"},
-    {v + "-0.mkv", a + "-0.ntxh"},
-    {v + "-2.mkv", a + "-2.ntxh"},
-    {v + ".mkv", a + ".ntxh"},
-     {v + "-x1.mkv", a + "-x1.ntxh"},
-     {v + "-xx.mkv", a + "-xx.ntxh"},
-     {v + "-x2.mkv", a + "-x2.ntxh"},
+  QString template_file;
+  QDir qdir(file_path);
+  QFileInfoList tfiles = qdir.entryInfoList({"*.ntxh"});
+  for(QFileInfo qfi : tfiles)
+  {
+   if(qfi.completeSuffix().startsWith("t."))
+   {
+    template_file = qfi.absoluteFilePath();
+    break;
+   }
+  }
 
+  QFileInfoList files = qdir.entryInfoList({"*.mkv", "*.mp4", "*.webm"});
+  QVector<QPair<QString, QString>> videos(files.size());
+  std::transform(files.begin(), files.end(), videos.begin(), [template_file](QFileInfo qfi)
+  {
+//?
+   return QPair<QString, QString>{qfi.absoluteFilePath(), qfi.fileName().prepend("*")};
+//   return QPair<QString, QString>{qfi.absoluteFilePath(), template_file};
+  });
+  current_video_player_dialog_->play_local_videos(videos.toList(), template_file);
  }
+ else
+   current_video_player_dialog_->play_local_video(file_path, annotations_file_path);
+
+}
+
+// QString v = file_path;
+// v.chop(4);
+
+// QString a = annotations_file_path;
+// a.chop(5);
+
+
+// current_video_player_dialog_->play_local_videos(
+
+// {
+//    {v + "-000.mkv", a + "-000.ntxh"},
+//    {v + "-00.mkv", a + "-00.ntxh"},
+//    {v + "-1.mkv", a + "-1.ntxh"},
+//    {v + "-0.mkv", a + "-0.ntxh"},
+//    {v + "-2.mkv", a + "-2.ntxh"},
+//    {v + ".mkv", a + ".ntxh"},
+//     {v + "-x1.mkv", a + "-x1.ntxh"},
+//     {v + "-xx.mkv", a + "-xx.ntxh"},
+//     {v + "-x2.mkv", a + "-x2.ntxh"},
+
+// }
 
 //       {
 ////         {v + ".mkv", a + ".ntxh"},
@@ -1028,17 +1056,43 @@ void DHAX_Application_Controller::play_video(DHAX_Video_Player_Dialog::Annotatio
 ////     {v + "-1.mkv", a + "-1.ntxh"},
 ////     {v + "-2.mkv", a + "-2.ntxh"},
 ////   }
-    );
+//    );
 
 
 
 //? current_video_player_dialog_->play_local_video(file_path, annotations_file_path);
-}
+//}
+
 
 //?void DHAX_Application_Controller::play_video() //DHAX_Video_Player_Dialog::Annotation_Settings s)
 void DHAX_Application_Controller::play_video(DHAX_Video_Player_Dialog::Annotation_Settings s)
 {
 // play_video(QString());
+
+ QString file_or_folder;
+
+ if(s == DHAX_Video_Player_Dialog::Annotation_Settings::Video_Series)
+ {
+//  file_or_folder = QFileDialog::getExistingDirectory(application_main_window_, "Select Folder",
+//     ROOT_FOLDER "/..");
+
+//
+//
+  file_or_folder = "/home/nlevisrael/gits/ctg-temp/stella/videos";
+
+//file_or_folder = "/media/nlevisrael/OS/nc/videos";
+//  file_or_folder = "/media/nlevisrael/OS/nc/bunny/x1-78/1";
+
+
+ }
+ else
+ {
+  file_or_folder = QFileDialog::getOpenFileName(application_main_window_, "Select Video",
+     ROOT_FOLDER "/..");
+ }
+ if(!file_or_folder.isEmpty())
+    play_video(s, file_or_folder);
+
 
 //?
 // QString fn = QFileDialog::getOpenFileName(application_main_window_, "Select Video",
@@ -1055,8 +1109,8 @@ void DHAX_Application_Controller::play_video(DHAX_Video_Player_Dialog::Annotatio
 
 
 
-  play_video(s, "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd.mkv",
-    "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd.ntxh");
+//  play_video(s, "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd.mkv",
+//    "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd.ntxh");
 
 // play_video("/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd-x1.mkv",
 //   "/home/nlevisrael/gits/ctg-temp/video-annotations/presentation/xcsd-x1.ntxh");

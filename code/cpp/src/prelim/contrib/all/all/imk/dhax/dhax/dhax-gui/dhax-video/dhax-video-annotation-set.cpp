@@ -28,7 +28,8 @@ DHAX_Video_Annotation_Set::DHAX_Video_Annotation_Set()
      circled_text_default_width_(0), circled_text_default_border_(2),
      sizes_ratio_x_(0), sizes_ratio_y_(0),
      sizes_ratio_x_adjustment_(0), sizes_ratio_y_adjustment_(0),
-     current_pause_annotation_(nullptr)
+     current_pause_annotation_(nullptr),
+     template_file_(nullptr)
 {
 }
 
@@ -570,6 +571,7 @@ void DHAX_Video_Annotation_Set::parse_shape_annotation_hypernode(NTXH_Graph& g, 
 DHAX_Video_Annotation_Set* DHAX_Video_Annotation_Set::reinit_and_delete()
 {
  DHAX_Video_Annotation_Set* result = new DHAX_Video_Annotation_Set();
+ result->template_file_ = template_file_;
  result->sizes_ratio_x_ = sizes_ratio_x_;
  result->sizes_ratio_y_ = sizes_ratio_y_;
  // //  note we're copying the forward to the backward ...
@@ -622,6 +624,72 @@ void DHAX_Video_Annotation_Set::read_ntxh_hypernode(NTXH_Graph& g, hypernode_typ
 
 }
 
+void DHAX_Video_Annotation_Set::clear_end_frame_data()
+{
+ end_frame_data_.clear();
+}
+
+void DHAX_Video_Annotation_Set::clear_scene_and_end_frame_data()
+{
+ clear_scene_data();
+ clear_end_frame_data();
+}
+
+void DHAX_Video_Annotation_Set::clear_scene_data()
+{
+ QMutableMapIterator<s4, DHAX_Video_Annotation> it(*this);
+
+ while(it.hasNext())
+ {
+  it.next();
+  DHAX_Video_Annotation& dva = it.value();
+  dva.set_scene_data(nullptr);
+ }
+}
+
+
+void DHAX_Video_Annotation_Set::prepare_template_text()
+{
+ QMutableMapIterator<s4, DHAX_Video_Annotation> it(*this);
+
+ while(it.hasNext())
+ {
+  it.next();
+  DHAX_Video_Annotation& dva = it.value();
+  dva.prepare_template_text();
+ }
+}
+
+void DHAX_Video_Annotation_Set::update_template_text(const QVector<QPair<QString, QString>>& substitutions)
+{
+ QMutableMapIterator<s4, DHAX_Video_Annotation> it(*this);
+
+ while(it.hasNext())
+ {
+  it.next();
+  DHAX_Video_Annotation& dva = it.value();
+  for(auto pr : substitutions)
+  {
+   dva.check_substitution("%%1%"_qt.arg(pr.first), pr.second);
+  }
+
+ }
+}
+
+void DHAX_Video_Annotation_Set::load_annotation_template_file()
+{
+ load_annotation_file(*template_file_);
+ prepare_template_text();
+}
+
+void DHAX_Video_Annotation_Set::update_template_text(QString file_path)
+{
+ if(file_path.startsWith("*"))
+ {
+  update_template_text({{"file", file_path.mid(1)}});
+  return;
+ }
+}
 
 void DHAX_Video_Annotation_Set::load_annotation_file(QString file_path)
 {

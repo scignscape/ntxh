@@ -32,11 +32,14 @@ class DHAX_Video_Annotation
  s4 ending_frame_number_;
 
  QString text_;
+ QString template_text_;
+
  QString inner_style_sheet_;
 
  QPointF corner_position_;
 
  QString html_text_;
+ QString template_html_text_;
 
  void* scene_data_;
  void* scene_type_data_;
@@ -88,6 +91,17 @@ public:
  ACCESSORS(s4 ,pause_time)
 
 
+ ACCESSORS(DHAX_Video_Annotation* ,ref_annotation)
+
+ ACCESSORS(void* ,scene_data)
+ ACCESSORS(void* ,scene_type_data)
+
+ ACCESSORS(QString ,data64)
+
+
+ void check_substitution(QString key, QString value);
+ void prepare_template_text();
+
  void set_pdflatex_shell(QString code)
  {
   pdflatex_.resize(3);
@@ -119,13 +133,6 @@ public:
   return pdflatex_.value(2);
  }
 
-
- ACCESSORS(DHAX_Video_Annotation* ,ref_annotation)
-
- ACCESSORS(void* ,scene_data)
- ACCESSORS(void* ,scene_type_data)
-
- ACCESSORS(QString ,data64)
 
  void finalize_html_text();
 

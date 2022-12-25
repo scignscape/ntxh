@@ -646,8 +646,12 @@ void DHAX_Video_Player_Frame::connect_video_probe()
 void DHAX_Video_Player_Frame::init_annotations()
 {
  annotation_set_ = new DHAX_Video_Annotation_Set;
+
+ if(!annotations_template_file_.isEmpty())
+   annotation_set_->set_template_file(&annotations_template_file_);
+
 //? annotation_set_->load_sample_annotations();
- qDebug() << "annotation_st" << *annotation_set_;
+// qDebug() << "annotation_st" << *annotation_set_;
 
  annotations_rect_item_ = graphics_scene_->addRect(0,0,0,0,Qt::NoPen, Qt::NoBrush);
  annotations_rect_item_->setZValue(1);
@@ -688,13 +692,30 @@ void DHAX_Video_Player_Frame::load_annotations()
 
 void DHAX_Video_Player_Frame::load_annotations_file(QString annotations_file)
 {
- if(annotation_set_)
+ if(current_frame_count_ == 0)
  {
-  //delete annotation_set_;
-  annotation_set_ = annotation_set_->reinit_and_delete(); //new DHAX_Video_Annotation_Set;
+  if(annotation_set_->template_file())
+    annotation_set_->load_annotation_template_file();
+ }
+ else
+ {
+//  annotation_set_ = annotation_set_->reinit_and_delete(); //new DHAX_Video_Annotation_Set;
+
+//  if(annotation_set_->template_file())
+//    annotation_set_->load_annotation_template_file();
+
+  if(annotation_set_->template_file())
+    annotation_set_->clear_scene_and_end_frame_data();
+
+  //if(!annotation_set_->template_file())
+  else
+    annotation_set_ = annotation_set_->reinit_and_delete(); //new DHAX_Video_Annotation_Set;
  }
 
- annotation_set_->load_annotation_file(annotations_file);
+ if(annotations_file.startsWith("*"))
+   annotation_set_->update_template_text(annotations_file);
+ else
+   annotation_set_->load_annotation_file(annotations_file);
 
  if( navigation_->is_full_size_mode() )
    reposition_larger_annotations_rect_item();
