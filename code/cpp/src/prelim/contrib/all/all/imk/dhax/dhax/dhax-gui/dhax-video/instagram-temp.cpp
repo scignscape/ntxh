@@ -54,12 +54,453 @@ USING_KANS(TextIO)
 #include <QApplication>
 
 
-void _get_tiktok(QStringList* qsl, u2 index, u2 end)
+//  /media/nlevisrael/OS/nc/ar/bunny/youtube
+
+
+
+
+void _get_yts(QStringList* qsl, u2 index, u2 end)
 {
- QString working = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/temp";
- QString names_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/names.txt";
+// QString working = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/temp";
+// QString names_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/names.txt";
 //? QString links_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella/tiktok-links.txt";
 
+
+// QString working = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/temp";
+// QString names_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/names.txt";
+
+ QString working = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella-yts/temp";
+ QString names_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella-yts/names.txt";
+
+
+ QProcess* cmd = new QProcess;
+
+ QString url = qsl->value(index); //"https://www.tiktok.com/@whataboutbunny/video/6832653004005526789";
+
+ if(url.isEmpty())
+   return;
+
+ url.prepend("https://www.youtube.com/@hungerforwords/shorts/");
+
+ QStringList options;
+ options << "-v";
+ options << url;
+
+ cmd->setWorkingDirectory(working);
+
+ QObject::connect(cmd,
+   QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+   [working, cmd, qsl, index, end, names_file, url](int exit_code, QProcess::ExitStatus exit_status)
+ {
+  QDir qd(working);
+  QFileInfoList qfil = qd.entryInfoList(QDir::Files);
+
+  qDebug() << qfil.size();
+
+  qDebug() << "\nerr: " << cmd->readAllStandardError();
+  qDebug() << "\nout: " << cmd->readAllStandardOutput();
+
+  if(qfil.isEmpty())
+  {
+   qDebug() << "unexpected empty folder";
+   return;
+  }
+
+  u2 new_index = index + 1;
+
+  QFileInfo qfi = qfil.first();
+
+  qDebug() << "name: " << qfi.fileName();
+
+  QFile qf(names_file);
+
+  qf.open(QIODevice::WriteOnly | QFile::Append);
+  QTextStream out(&qf); // = new QTextStream(qf);
+  out << "\n" << new_index << ": " << url << " = " << qfi.fileName() << "\n";
+
+//?  QString pattern = "https://www.tiktok.com/@whataboutbunny/video/";
+  QString pattern = "https://www.tiktok.com/@hunger4words/video/";
+  QString cut_url = url;
+  if(url.startsWith(pattern))
+  {
+   cut_url = url.mid(pattern.length());
+  }
+
+  QString target_file_name = "%1-%2"_qt.arg(new_index).arg(cut_url);
+
+  QString target_folder = "/media/nlevisrael/OS/nc/ar/stella/youtube/shorts";
+//  QString target_folder = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella/tempd";
+
+
+  copy_binary_file_to_folder_with_rename(qfi.absoluteFilePath(), target_folder, target_file_name,
+    qfi.suffix());
+
+//?  QFile::rename(qfi.absoluteFilePath(), qfi.absolutePath() + "/" + target_file_name);
+  QFile::remove(qfi.absoluteFilePath());
+
+  cmd->deleteLater();
+
+//  if(index <= end)
+//  {
+//   _get_yts(qsl, new_index, end);
+//  }
+
+ });
+
+ cmd->setProgram("yt-dlp");
+ cmd->setArguments(options);
+ cmd->start();
+
+}
+
+
+// /home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella-yts/playlist
+
+#include <QCollator>
+
+void instagram_temp()
+{
+ QString folder = "/media/nlevisrael/OS/nc/ar/bunny/youtube";
+
+ QDir qd(folder);
+
+// QFileInfoList qfil = qd.entryInfoList();
+ QStringList qfil = qd.entryList(QDir::Files);
+
+ QStringList copy = qfil;
+
+ QCollator collator;
+ collator.setNumericMode(true);
+
+ std::sort(qfil.begin(), qfil.end(), collator);
+
+ QMap<QString, QPair<QString, int>> order;
+
+ int c = 0;
+
+ for(QString fn : qfil)
+ {
+  QRegularExpression qre("-([\\w-]+)\\.(\\w+)");
+
+  QRegularExpressionMatch m = qre.match(fn);
+
+  QString code = m.captured(1);
+  QString c2 = m.captured(2);
+  order[code] = {c2, c};
+  ++c;
+ }
+
+ for(QString fn : copy)
+ {
+  QRegularExpression qre("-([\\w-]+)\\.");
+
+  QString code = qre.match(fn).captured(1);
+
+  QString nfn = "%1-%2.%3"_qt.arg(order[code].second + 1).arg(code).arg(order[code].first);
+  qDebug() << fn << " -> " << nfn;
+
+  if(fn == nfn)
+    continue;
+
+  QFile::rename(qd.absoluteFilePath(fn), qd.absoluteFilePath(nfn));
+ }
+
+
+// qDebug() << qfil;
+
+}
+
+void instagram_temp22()
+{
+ QString summary = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella-yts/summary.txt";
+ QString nsummary = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella-yts/nsummary.txt";
+
+ QString text = load_file(summary);
+ QStringList ltext = text.split("\n", QString::SkipEmptyParts);
+
+// QStringList
+
+ QMap<u1, QString> new_lines;
+
+ for(QString line : ltext)
+ {
+  QStringList parts = line.split(" = ");
+
+  QString fname = parts.value(0);
+  QString desc = parts.value(1);
+
+  int index = fname.indexOf('-');
+
+  int count = fname.left(index).toUInt();
+
+  count = 47 - count;
+
+  fname.replace(0, index, QString::number(count));
+
+  new_lines[count] = fname + " = " + desc;
+ }
+
+ QString new_text;
+ for(int  i = 1; i <= 46; ++i)
+ {
+  new_text.push_back(new_lines[i] + "\n");
+ }
+
+ save_file(nsummary, new_text);
+
+}
+
+void instagram_temp21()
+{
+ QString rtarget = "/media/nlevisrael/OS/nc/ar/stella/youtube/shorts";
+ QDir qd(rtarget);
+
+ QFileInfoList qfil = qd.entryInfoList(QDir::Files);
+
+ for(QFileInfo qfi : qfil)
+ {
+  QString fn = qfi.absoluteFilePath();
+  fn.replace("webm.webm", "webm");
+
+  QFile::rename(qfi.absoluteFilePath(), fn);
+ }
+
+}
+
+void instagram_temp20()
+{
+ QString target = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella-yts/target";
+// QString rtarget = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella-yts/rtarget";
+
+ QString rtarget = "/media/nlevisrael/OS/nc/ar/stella/youtube/shorts";
+
+
+ QDir qd(target);
+
+ QFileInfoList qfil = qd.entryInfoList(QDir::Files);
+
+ for(QFileInfo qfi : qfil)
+ {
+  QString fn = qfi.fileName();
+
+  int index = fn.indexOf('-');
+
+  if(index == -1)
+    continue;
+
+  int count = fn.left(index).toUInt();
+
+  count = 47 - count;
+
+  fn.replace(0, index, QString::number(count));
+
+  copy_binary_file_to_folder_with_rename(qfi.absoluteFilePath(), rtarget, fn, qfi.suffix());
+ }
+
+
+
+
+}
+
+void instagram_temp19()
+{
+ QString nfile = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella-yts/notes.txt";
+ QString folder = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella-yts/playlist";
+ QString nfolder = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella-yts/target";
+ QString sfile = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella-yts/summary.txt";
+
+ QString ntext = load_file(nfile);
+
+ QStringList ns = ntext.split("\n", QString::SkipEmptyParts);
+
+ QMap<QString, QPair<u1, QString>> codes;
+ u1 count = 0;
+ for(QString line : ns)
+ {
+  ++count;
+
+  QStringList inner = line.split(" = ");
+
+  codes[inner.value(0)] = {count, inner.value(1)};
+
+ }
+
+ QDir qd(folder);
+
+ QFileInfoList qfil = qd.entryInfoList(QDir::Files);
+
+ QStringList summary;
+
+ for(QFileInfo qfi : qfil)
+ {
+  QString fn = qfi.fileName();
+
+  QRegularExpression qre("\\[([\\w-]+)\\]");
+
+  QRegularExpressionMatch match =  qre.match(fn);
+  if(match.hasMatch())
+  {
+   QString url_code = match.captured(1);
+
+   QPair<u1, QString> code = codes[url_code];
+
+   qDebug() << code.first << " - " << url_code << " = " << code.second;
+
+   QString file_name = "%1-%2"_qt.arg(code.first).arg(url_code);
+
+   summary.push_back(file_name + " = " + code.second);
+
+   copy_binary_file_to_folder_with_rename(qfi.absoluteFilePath(), nfolder, file_name);
+  }
+
+
+
+ }
+
+ save_file(sfile, summary.join("\n"));
+}
+
+
+
+void instagram_temp18()
+{
+ QString path = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/yt.txt";
+ QString nfile = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella-yts/notes.txt";
+
+ QString text = load_file(path);
+
+//?
+ QRegularExpression qre("\"videoId\":\"([\\w-]+)\",\"headline\":\\{\"simpleText\":\"([^\"]+)\"");
+// QRegularExpression qre("\"videoId\":\"([\\w-]+)\",\"headline\":");
+
+ QRegularExpressionMatchIterator it =  qre.globalMatch(text);
+
+ QStringList refs;
+
+ while(it.hasNext())
+ {
+  QRegularExpressionMatch qrm = it.next();
+
+  refs.push_back(qrm.captured(1) + " = " + qrm.captured(2));
+ }
+
+ QString ntext = refs.join("\n");
+ save_file(nfile, ntext);
+
+
+
+  // "/shorts/";
+
+}
+
+
+
+void instagram_temp17()
+{
+ //QString links_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/tiktok-links";
+// QString links_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella/tiktok-links.txt";
+ QString names_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella-yts/n.txt";
+
+ QString text = load_file(names_file);
+
+ QStringList* links = new QStringList(text.split("\n", QString::SkipEmptyParts));
+
+// qDebug() << "links " << *links;
+
+ // // don't necessarily start at the beginning ...
+
+// _get_yts(links, 0, 6);
+
+
+}
+
+
+
+void instagram_temp16()
+{
+ QString path = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/yt.txt";
+ QString nfile = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/n.txt";
+
+ QString text = load_file(path);
+
+ QRegularExpression qre("/shorts/([\\w-]+)");
+
+ QRegularExpressionMatchIterator it =  qre.globalMatch(text);
+
+ QStringList refs;
+
+ while(it.hasNext())
+ {
+  QRegularExpressionMatch qrm = it.next();
+
+  refs.push_back(qrm.captured(1));
+ }
+
+ QString ntext = refs.join("\n");
+ save_file(nfile, ntext);
+
+
+
+  // "/shorts/";
+
+}
+
+
+void instagram_temp15()
+{
+ QString folder = "/media/nlevisrael/OS/nc/ar/bunny/youtube";
+ QString cfolder = "/media/nlevisrael/OS/nc/ar/bunny/cyoutube";
+
+ QDir qdir(cfolder);
+
+ QDirIterator qd(folder, QDir::Files);
+
+ while(qd.hasNext())
+ {
+  QString path = qd.next();
+  QFileInfo qfi(path);
+
+  QString fn = qfi.fileName();
+
+  int index = fn.indexOf('-');
+
+  if(index == -1)
+    continue;
+
+  u2 count = fn.left(index).toUInt();
+  count = 135 - count;
+
+  fn = fn.mid(index);
+  fn.prepend(QString::number(count));
+
+  qDebug() << qfi.absoluteDir().filePath(fn);
+
+  QString source = qfi.absoluteFilePath();
+  QString target = qdir.filePath(fn);
+
+  qDebug() << source << " -> " << target;
+
+
+  QFile::copy(source, target);
+
+ }
+
+
+}
+
+
+void _get_tiktok(QStringList* qsl, u2 index, u2 end)
+{
+// QString working = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/temp";
+// QString names_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/names.txt";
+//? QString links_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella/tiktok-links.txt";
+
+
+// QString working = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/temp";
+// QString names_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/names.txt";
+
+ QString working = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella/temp";
+ QString names_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella/names.txt";
 
 
  QProcess* cmd = new QProcess;
@@ -105,7 +546,8 @@ void _get_tiktok(QStringList* qsl, u2 index, u2 end)
   QTextStream out(&qf); // = new QTextStream(qf);
   out << "\n" << new_index << ": " << url << " = " << qfi.fileName() << "\n";
 
-  QString pattern = "https://www.tiktok.com/@whataboutbunny/video/";
+//?  QString pattern = "https://www.tiktok.com/@whataboutbunny/video/";
+  QString pattern = "https://www.tiktok.com/@hunger4words/video/";
   QString cut_url = url;
   if(url.startsWith(pattern))
   {
@@ -114,11 +556,14 @@ void _get_tiktok(QStringList* qsl, u2 index, u2 end)
 
   QString target_file_name = "%1-%2"_qt.arg(new_index).arg(cut_url);
 
-  QString target_folder = "/media/nlevisrael/OS/nc/ar/tiktok/target";
+  QString target_folder = "/media/nlevisrael/OS/nc/ar/tiktok/stella/target";
+//  QString target_folder = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella/tempd";
+
 
   copy_binary_file_to_folder_with_rename(qfi.absoluteFilePath(), target_folder, target_file_name,
     qfi.suffix());
 
+//?  QFile::rename(qfi.absoluteFilePath(), qfi.absolutePath() + "/" + target_file_name);
   QFile::remove(qfi.absoluteFilePath());
 
   cmd->deleteLater();
@@ -126,7 +571,6 @@ void _get_tiktok(QStringList* qsl, u2 index, u2 end)
   if(index <= end)
   {
    _get_tiktok(qsl, new_index, end);
-   // dr amy neustein is the subject of this story; please see tagline at the bottom
   }
 
  });
@@ -135,12 +579,28 @@ void _get_tiktok(QStringList* qsl, u2 index, u2 end)
  cmd->setArguments(options);
  cmd->start();
 
-
-
 }
 
 
 void instagram_temp13()
+{
+ //QString links_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/tiktok-links";
+ QString links_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella/tiktok-links.txt";
+
+ QString text = load_file(links_file);
+
+ QStringList* links = new QStringList(text.split("\n", QString::SkipEmptyParts));
+
+// qDebug() << "links " << *links;
+
+ // // don't necessarily start at the beginning ...
+
+ _get_tiktok(links, 28, 28);
+
+
+}
+
+void instagram_temp14()
 {
  QString names_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/names.txt";
 
@@ -201,23 +661,6 @@ void instagram_temp13()
 
 
 
-void instagram_temp()
-{
- //QString links_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/tiktok-links";
- QString links_file = "/home/nlevisrael/gits/ctg-temp/stella/yt-dlp/stella/tiktok-links.txt";
-
- QString text = load_file(links_file);
-
- QStringList* links = new QStringList(text.split("\n", QString::SkipEmptyParts));
-
-// qDebug() << "links " << *links;
-
- // // don't necessarily start at the beginning ...
-
- _get_tiktok(links, 0, 29);
-
-
-}
 
 
 

@@ -79,6 +79,7 @@
 
 #include <QMessageBox>
 #include <QDesktopServices>
+#include <QCollator>
 
 
 #include "textio.h"
@@ -1004,7 +1005,17 @@ void DHAX_Application_Controller::play_video(DHAX_Video_Player_Dialog::Annotatio
    }
   }
 
+
   QFileInfoList files = qdir.entryInfoList({"*.mkv", "*.mp4", "*.webm"});
+
+  QCollator collator;
+  collator.setNumericMode(true);
+
+  std::sort(files.begin(), files.end(), [collator](const QFileInfo& lhs, const QFileInfo& rhs)
+  {
+   return collator.compare(lhs.baseName(), rhs.baseName()) < 0;
+  });
+
   QVector<QPair<QString, QString>> videos(files.size());
   std::transform(files.begin(), files.end(), videos.begin(), [template_file](QFileInfo qfi)
   {
@@ -1078,7 +1089,8 @@ void DHAX_Application_Controller::play_video(DHAX_Video_Player_Dialog::Annotatio
 
 //
 //
-  file_or_folder = "/home/nlevisrael/gits/ctg-temp/stella/videos";
+  //file_or_folder = "/home/nlevisrael/gits/ctg-temp/stella/videos";
+  file_or_folder = "/media/nlevisrael/OS/nc/ar/bunny/tiktok";
 
 //file_or_folder = "/media/nlevisrael/OS/nc/videos";
 //  file_or_folder = "/media/nlevisrael/OS/nc/bunny/x1-78/1";
